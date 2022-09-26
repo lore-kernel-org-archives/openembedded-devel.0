@@ -1,99 +1,250 @@
-Return-Path: <debrabander@gmail.com>
+Return-Path: <hprajapati@mvista.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D5B6FC6FA82
-	for <webhook@archiver.kernel.org>; Mon, 26 Sep 2022 08:08:35 +0000 (UTC)
-Received: from mail-ej1-f45.google.com (mail-ej1-f45.google.com
- [209.85.218.45])
- by mx.groups.io with SMTP id smtpd.web10.25842.1664179706801506692
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E24E0C07E9D
+	for <webhook@archiver.kernel.org>; Mon, 26 Sep 2022 11:41:06 +0000 (UTC)
+Received: from mail-pf1-f177.google.com (mail-pf1-f177.google.com
+ [209.85.210.177])
+ by mx.groups.io with SMTP id smtpd.web12.27619.1664192463995146947
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 26 Sep 2022 01:08:27 -0700
+ Mon, 26 Sep 2022 04:41:04 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=kWYLgqPA;
- spf=pass (domain: gmail.com, ip: 209.85.218.45,
- mailfrom: debrabander@gmail.com)
-Received: by mail-ej1-f45.google.com with SMTP id y3so12372740ejc.1
+ dkim=pass header.i=@mvista.com header.s=google header.b=LLLYj9/a;
+ spf=pass (domain: mvista.com, ip: 209.85.210.177,
+ mailfrom: hprajapati@mvista.com)
+Received: by mail-pf1-f177.google.com with SMTP id i6so2231065pfb.2
         for <openembedded-devel@lists.openembedded.org>;
- Mon, 26 Sep 2022 01:08:26 -0700 (PDT)
+ Mon, 26 Sep 2022 04:41:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
+        d=mvista.com; s=google;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date;
-        bh=qPSWjkEuFau5NbERq3bquf10GL1dDPoB60HXt7xP/0k=;
-        b=kWYLgqPALtV1b7ZYP3lXp1nO11Ze3D5gREvxMe6InJ7LgkeP7MgNLpmmZTyfz0VR/V
-         fgZV4x+6l/L2tg7xuNq6IzC1s0c8ayatRi6uq2EYC4CV32owHDNEw23YjhgT5RYXY4KH
-         Pkjwwiw4t5SU0DMtg3i+29ZlRtDc1cE5EypIjvUQVtvsS7e/G/WSXWOuLuIPeMgy6Uxu
-         LkyfFC8h3p19EGLaP3kfv5u5wTw7uErDhoDWJFwOJnHCfjc+6V8bhdiliBC7ynjrlZyw
-         S45MVcbKlpKC+WkN4Ko4jgTiaV/Gg2MVknGcS7NVsfyay9egnA6CQwJxX2lFVMmG+6Zw
-         tfsg==
+        bh=y87+YeR9pxjF1DfUIXyvr6MBAbENzBjzuFjOMEH0KwA=;
+        b=LLLYj9/a6B39gtMQcMadOQ6TN7yDTScNZ1M+Agc/ObecDBEP4/IXZ/k/SUHNlxlpfL
+         TNRSb6xQl3QYpRZ7zyXIysIsCZebpBDGDyx+TzYiPZ/9u7OCDl+55+2Ptg6lboBCuCbP
+         nLQm1u/ncInBnbrtHSE6RMNETqoDYi/IdPrrk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date;
-        bh=qPSWjkEuFau5NbERq3bquf10GL1dDPoB60HXt7xP/0k=;
-        b=YryoWP8IDSr6H5or18fEieBOHRlT9MpcVBnx/d9OPhBlx8QpW1M6WL7S9TohF684Mc
-         XXLCB0ZuUKjNUvuqjgDEglKjBueLZVwFHYEFcDRm3P6A9tHBet4/gngRAgE0EV3oykO3
-         y1Pjlh7qszR/7W0os/gqj7HfV4Dm/IaMn4pPvCbOHvoqGZQpW9gKDUWBrN6C5MOybv6v
-         RT2RsehSf7mk9sHEeAbCdk2FPHci+FydsWSGo2r/7ubpK/ogtD+ugY+GwfG7sibpOUsj
-         04md9abanCNTrAIgCwfWNm75X5DloF3XM5R4ZrR4qcJcazAdic46pwXbpojVL/uTXzEd
-         pn0w==
-X-Gm-Message-State: ACrzQf2xcYfGAbyByklzKNLUrHf/9tyJqf8HWGOLbbFLDbXpjDgVNd+5
-	mm6dEMsmHfgnJ2KOAE/52e2vJ94ED/4G2KMj
+        bh=y87+YeR9pxjF1DfUIXyvr6MBAbENzBjzuFjOMEH0KwA=;
+        b=Kajxm4UWZSnPIFqaOL4/9jp3yhylc433+ijVOP+U9NME/m/GbPIv4Dx1N+D/mLuACY
+         VuA2aymTmZRf6EJZIYyeawggUj5lscYgOqm1iOkmlrEbH6hyG/ZHFMuYNTuwEimJjtPt
+         OuUJmlUFie/sgapcQkuSFyKMpzxfg6ge1DwcR3QnPNvedb1oDEU3v4ueYwUpzM8FWYAr
+         k5x569NCGYH1kj5YCeOaJ9MTY2xTVca1IE64pafj38FPbic+cD8mRURVzKiBInC6bkLq
+         yFK0VUv0KYiiatCq2ncWAnVHN5nOtymMKqa9CYI0SKYBJNMJroV5ZxDiOxVPeGDPKrCc
+         DsDA==
+X-Gm-Message-State: ACrzQf0/TU5Mq67cK0Q9qvjavOAQye68DiOObThx0xYuzy5YF4vFo1Ns
+	yNiGh1PDChyXknYWO3eQdtJ1EShFu1ri3g==
 X-Google-Smtp-Source: 
- AMsMyM43Dv9yfTvs+uC2Dt67XIV4XixVkfT8dAJtRM+Kz7P4K6EU6pzgkJjkuQel524NTUus9oXJ2A==
-X-Received: by 2002:a17:907:3f8b:b0:783:2008:e562 with SMTP id
- hr11-20020a1709073f8b00b007832008e562mr6771720ejc.261.1664179705090;
-        Mon, 26 Sep 2022 01:08:25 -0700 (PDT)
-Received: from buster.foobar.local (186-153-172-081.dynamic.caiway.nl.
- [81.172.153.186])
+ AMsMyM6LA1+PEBW9t5b3O4PXiqfGyIcDbcBmGd4M/LO+ieCNPZCGP2+wWXjPXOXIcxjtxJhrduarPA==
+X-Received: by 2002:a63:5246:0:b0:42b:e4a5:7252 with SMTP id
+ s6-20020a635246000000b0042be4a57252mr19155199pgl.566.1664192462770;
+        Mon, 26 Sep 2022 04:41:02 -0700 (PDT)
+Received: from MVIN00024 ([150.129.170.219])
         by smtp.gmail.com with ESMTPSA id
- gs13-20020a170906f18d00b007724b8e6576sm8015572ejb.32.2022.09.26.01.08.24
+ 12-20020a630a0c000000b0041a6638b357sm10458043pgk.72.2022.09.26.04.40.59
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 26 Sep 2022 01:08:24 -0700 (PDT)
-From: Frank de Brabander <debrabander@gmail.com>
+        Mon, 26 Sep 2022 04:41:02 -0700 (PDT)
+Received: by MVIN00024 (sSMTP sendmail emulation);
+ Mon, 26 Sep 2022 17:10:57 +0530
+From: Hitendra Prajapati <hprajapati@mvista.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Frank de Brabander <debrabander@gmail.com>
-Subject: [meta-networking][PATCH] ntp: add missing runtime dependency on
- libgcc for sntp
-Date: Mon, 26 Sep 2022 10:08:26 +0200
-Message-Id: <20220926080826.2200-1-debrabander@gmail.com>
-X-Mailer: git-send-email 2.30.2
+Cc: Hitendra Prajapati <hprajapati@mvista.com>
+Subject: [meta-networking][kirkstone][PATCH] wireshark: CVE-2022-3190 Infinite
+ loop in legacy style dissector
+Date: Mon, 26 Sep 2022 17:10:55 +0530
+Message-Id: <20220926114055.4607-1-hprajapati@mvista.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 26 Sep 2022 08:08:35 -0000
+ <openembedded-devel@lists.openembedded.org>; Mon, 26 Sep 2022 11:41:06 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98951
+ https://lists.openembedded.org/g/openembedded-devel/message/98953
 
-This runtime dependency was already added for ntpd but not yet for the
-sntp binary. This will result in an error when pthread_exit() is called:
+Source: https://gitlab.com/wireshark/wireshark/-/commit/67326401a595fffbc67eeed48eb6c55d66a55f67
+MR: 122044
+Type: Security Fix
+Disposition: Backport from https://gitlab.com/wireshark/wireshark/-/commit/67326401a595fffbc67eeed48eb6c55d66a55f67
+ChangeID: 13f833dfbd8f76db1ea01984441b212f08e6e4f5
+Description:
+          CVE-2022-3190 wireshark: Infinite loop in legacy style dissector.
 
-"libgcc_s.so.1 must be installed for pthread_cancel to work"
-
-Signed-off-by: Frank de Brabander <debrabander@gmail.com>
+Signed-off-by: Hitendra Prajapati <hprajapati@mvista.com>
 ---
- meta-networking/recipes-support/ntp/ntp_4.2.8p15.bb | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ .../wireshark/files/CVE-2022-3190.patch       | 145 ++++++++++++++++++
+ .../wireshark/wireshark_3.4.12.bb             |   1 +
+ 2 files changed, 146 insertions(+)
+ create mode 100644 meta-networking/recipes-support/wireshark/files/CVE-2022-3190.patch
 
-diff --git a/meta-networking/recipes-support/ntp/ntp_4.2.8p15.bb b/meta-networking/recipes-support/ntp/ntp_4.2.8p15.bb
-index 50f5477f27..2ae53dc640 100644
---- a/meta-networking/recipes-support/ntp/ntp_4.2.8p15.bb
-+++ b/meta-networking/recipes-support/ntp/ntp_4.2.8p15.bb
-@@ -139,8 +139,9 @@ PACKAGES += "ntpdate sntp ntpdc ntpq ${PN}-tickadj ${PN}-utils"
- # ntp originally includes tickadj. It's split off for inclusion in small firmware images on platforms
- # with wonky clocks (e.g. OpenSlug)
- RDEPENDS:${PN} = "${PN}-tickadj"
--# ntpd require libgcc for execution
-+# ntpd & sntp require libgcc for execution due to phtread_cancel/pthread_exit calls
- RDEPENDS:${PN} += "libgcc"
-+RDEPENDS:sntp += "libgcc"
- # Handle move from bin to utils package
- RPROVIDES:${PN}-utils = "${PN}-bin"
- RREPLACES:${PN}-utils = "${PN}-bin"
+diff --git a/meta-networking/recipes-support/wireshark/files/CVE-2022-3190.patch b/meta-networking/recipes-support/wireshark/files/CVE-2022-3190.patch
+new file mode 100644
+index 0000000000..0b987700f5
+--- /dev/null
++++ b/meta-networking/recipes-support/wireshark/files/CVE-2022-3190.patch
+@@ -0,0 +1,145 @@
++From 4585d515b962f3b3a5e81caa64e13e8d9ed2e431 Mon Sep 17 00:00:00 2001
++From: Hitendra Prajapati <hprajapati@mvista.com>
++Date: Mon, 26 Sep 2022 12:47:00 +0530
++Subject: [PATCH] CVE-2022-3190
++
++Upstream-Status: Backport [https://gitlab.com/wireshark/wireshark/-/commit/67326401a595fffbc67eeed48eb6c55d66a55f67]
++CVE : CVE-2022-3190
++Signed-off-by: Hitendra Prajapati <hprajapati@mvista.com>
++---
++ epan/dissectors/packet-f5ethtrailer.c | 108 +++++++++++++-------------
++ 1 file changed, 56 insertions(+), 52 deletions(-)
++
++diff --git a/epan/dissectors/packet-f5ethtrailer.c b/epan/dissectors/packet-f5ethtrailer.c
++index ed77dfd..b15b0d4 100644
++--- a/epan/dissectors/packet-f5ethtrailer.c
+++++ b/epan/dissectors/packet-f5ethtrailer.c
++@@ -2741,69 +2741,73 @@ dissect_dpt_trailer(tvbuff_t *tvb, packet_info *pinfo, proto_tree *tree, void *d
++ static gint
++ dissect_old_trailer(tvbuff_t *tvb, packet_info *pinfo, proto_tree *tree, void *data)
++ {
++-    proto_tree *type_tree   = NULL;
++-    proto_item *ti          = NULL;
++     guint offset            = 0;
++-    guint processed         = 0;
++-    f5eth_tap_data_t *tdata = (f5eth_tap_data_t *)data;
++-    guint8 type;
++-    guint8 len;
++-    guint8 ver;
++ 
++     /* While we still have data in the trailer.  For old format trailers, this needs
++      * type, length, version (3 bytes) and for new format trailers, the magic header (4 bytes).
++      * All old format trailers are at least 4 bytes long, so just check for length of magic.
++      */
++-    while (tvb_reported_length_remaining(tvb, offset)) {
++-        type = tvb_get_guint8(tvb, offset);
++-        len = tvb_get_guint8(tvb, offset + F5_OFF_LENGTH) + F5_OFF_VERSION;
++-        ver = tvb_get_guint8(tvb, offset + F5_OFF_VERSION);
++-
++-        if (len <= tvb_reported_length_remaining(tvb, offset) && type >= F5TYPE_LOW
++-            && type <= F5TYPE_HIGH && len >= F5_MIN_SANE && len <= F5_MAX_SANE
++-            && ver <= F5TRAILER_VER_MAX) {
++-            /* Parse out the specified trailer. */
++-            switch (type) {
++-            case F5TYPE_LOW:
++-                ti        = proto_tree_add_item(tree, hf_low_id, tvb, offset, len, ENC_NA);
++-                type_tree = proto_item_add_subtree(ti, ett_f5ethtrailer_low);
++-
++-                processed = dissect_low_trailer(tvb, pinfo, type_tree, offset, len, ver, tdata);
++-                if (processed > 0) {
++-                    tdata->trailer_len += processed;
++-                    tdata->noise_low = 1;
++-                }
++-                break;
++-            case F5TYPE_MED:
++-                ti        = proto_tree_add_item(tree, hf_med_id, tvb, offset, len, ENC_NA);
++-                type_tree = proto_item_add_subtree(ti, ett_f5ethtrailer_med);
++-
++-                processed = dissect_med_trailer(tvb, pinfo, type_tree, offset, len, ver, tdata);
++-                if (processed > 0) {
++-                    tdata->trailer_len += processed;
++-                    tdata->noise_med = 1;
++-                }
++-                break;
++-            case F5TYPE_HIGH:
++-                ti        = proto_tree_add_item(tree, hf_high_id, tvb, offset, len, ENC_NA);
++-                type_tree = proto_item_add_subtree(ti, ett_f5ethtrailer_high);
++-
++-                processed =
++-                    dissect_high_trailer(tvb, pinfo, type_tree, offset, len, ver, tdata);
++-                if (processed > 0) {
++-                    tdata->trailer_len += processed;
++-                    tdata->noise_high = 1;
++-                }
++-                break;
+++    while (tvb_reported_length_remaining(tvb, offset) >= F5_MIN_SANE) {
+++        /* length field does not include the type and length bytes.  Add them back in */
+++        guint8 len = tvb_get_guint8(tvb, offset + F5_OFF_LENGTH) + F5_OFF_VERSION;
+++        if (len > tvb_reported_length_remaining(tvb, offset)
+++            || len < F5_MIN_SANE || len > F5_MAX_SANE) {
+++            /* Invalid length - either a malformed trailer, corrupt packet, or not f5ethtrailer */
+++            return offset;
+++        }
+++        guint8 type = tvb_get_guint8(tvb, offset);
+++        guint8 ver = tvb_get_guint8(tvb, offset + F5_OFF_VERSION);
+++
+++        /* Parse out the specified trailer. */
+++        proto_tree *type_tree   = NULL;
+++        proto_item *ti          = NULL;
+++        f5eth_tap_data_t *tdata = (f5eth_tap_data_t *)data;
+++        guint processed = 0;
+++
+++        switch (type) {
+++        case F5TYPE_LOW:
+++            ti        = proto_tree_add_item(tree, hf_low_id, tvb, offset, len, ENC_NA);
+++            type_tree = proto_item_add_subtree(ti, ett_f5ethtrailer_low);
+++
+++            processed = dissect_low_trailer(tvb, pinfo, type_tree, offset, len, ver, tdata);
+++            if (processed > 0) {
+++                tdata->trailer_len += processed;
+++                tdata->noise_low = 1;
++             }
++-            if (processed == 0) {
++-                proto_item_set_len(ti, 1);
++-                return offset;
+++            break;
+++        case F5TYPE_MED:
+++            ti        = proto_tree_add_item(tree, hf_med_id, tvb, offset, len, ENC_NA);
+++            type_tree = proto_item_add_subtree(ti, ett_f5ethtrailer_med);
+++
+++            processed = dissect_med_trailer(tvb, pinfo, type_tree, offset, len, ver, tdata);
+++            if (processed > 0) {
+++                tdata->trailer_len += processed;
+++                tdata->noise_med = 1;
+++            }
+++            break;
+++        case F5TYPE_HIGH:
+++            ti        = proto_tree_add_item(tree, hf_high_id, tvb, offset, len, ENC_NA);
+++            type_tree = proto_item_add_subtree(ti, ett_f5ethtrailer_high);
+++
+++            processed =
+++                dissect_high_trailer(tvb, pinfo, type_tree, offset, len, ver, tdata);
+++            if (processed > 0) {
+++                tdata->trailer_len += processed;
+++                tdata->noise_high = 1;
++             }
+++            break;
+++        default:
+++            /* Unknown type - malformed trailer, corrupt packet, or not f5ethtrailer - bali out*/
+++            return offset;
+++        }
+++        if (processed == 0) {
+++            /* couldn't process trailer - bali out */
+++            proto_item_set_len(ti, 1);
+++            return offset;
++         }
++         offset += processed;
++     }
++-return offset;
+++    return offset;
++ } /* dissect_old_trailer() */
++ 
++ /*---------------------------------------------------------------------------*/
++-- 
++2.25.1
++
+diff --git a/meta-networking/recipes-support/wireshark/wireshark_3.4.12.bb b/meta-networking/recipes-support/wireshark/wireshark_3.4.12.bb
+index 38fdbce892..1a4aedc139 100644
+--- a/meta-networking/recipes-support/wireshark/wireshark_3.4.12.bb
++++ b/meta-networking/recipes-support/wireshark/wireshark_3.4.12.bb
+@@ -15,6 +15,7 @@ SRC_URI += " \
+     file://0002-flex-Remove-line-directives.patch \
+     file://0003-bison-Remove-line-directives.patch \
+     file://0004-lemon-Remove-line-directives.patch \
++    file://CVE-2022-3190.patch \
+ "
+ 
+ UPSTREAM_CHECK_URI = "https://1.as.dl.wireshark.org/src"
 -- 
-2.30.2
+2.25.1
 
 
