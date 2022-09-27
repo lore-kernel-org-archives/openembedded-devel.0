@@ -1,87 +1,123 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1D278C54EE9
-	for <webhook@archiver.kernel.org>; Tue, 27 Sep 2022 15:45:35 +0000 (UTC)
-Received: from mail-pl1-f180.google.com (mail-pl1-f180.google.com
- [209.85.214.180])
- by mx.groups.io with SMTP id smtpd.web12.12879.1664293526258344532
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4AC38C07E9D
+	for <webhook@archiver.kernel.org>; Tue, 27 Sep 2022 16:52:35 +0000 (UTC)
+Received: from mail-oa1-f51.google.com (mail-oa1-f51.google.com
+ [209.85.160.51])
+ by mx.groups.io with SMTP id smtpd.web10.13588.1664297552694700838
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 27 Sep 2022 08:45:26 -0700
+ Tue, 27 Sep 2022 09:52:33 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=hpIABGBq;
- spf=pass (domain: gmail.com, ip: 209.85.214.180,
- mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f180.google.com with SMTP id z20so2563563plb.10
-        for <openembedded-devel@lists.openembedded.org>;
- Tue, 27 Sep 2022 08:45:26 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=l6biFtl1;
+ spf=pass (domain: gmail.com, ip: 209.85.160.51,
+ mailfrom: akuster808@gmail.com)
+Received: by mail-oa1-f51.google.com with SMTP id
+ 586e51a60fabf-1318443dbdfso2689241fac.3;
+        Tue, 27 Sep 2022 09:52:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date;
-        bh=7HiQLQe+pDEA3RVqGiShRN2c7rfpPxoO3qL93ACSKwg=;
-        b=hpIABGBqPJrPLUjD309Qvqx9dgfE/BYSpVmWPPIMbiCL9d33KBHJRz6DML5nD4gAdO
-         tgJBL137POZtDJx3GotjL9XEtYGQlDULnViL4cvwkv/xRpKbjn9YHYGVIeINHtPgpFEU
-         S5d0h0F8A6EEnsw2E64ncD5GzTObVXFRNZVpo2LHKWK9Z/UmSjQ2HTnl11Pc6FiVwAZf
-         chshR0N3LrQgVvnDibft8/RbfoFBBWGUNamvkTgVkYCN48kmoDM996Pv9VZJWgY/Y2Dn
-         mj6GQGCXzIizO5br7sinZOry2LXolxl70XcQl+4NV6LXXR7BSihO/Fms3FbWr75LTDYM
-         gSlA==
+        h=content-transfer-encoding:to:subject:from:content-language
+         :user-agent:mime-version:date:message-id:from:to:cc:subject:date;
+        bh=V1bDywo8GAasLbmUW/lcdsWoDNLwkzv/xSCeV/YB7I4=;
+        b=l6biFtl1F/Xjhk844KGCAJPIR/2Car5CLQHU5reHApKAY3fbkmUYox/v3UMSyzUjM2
+         0fTcxOQDejVvx5Of5LAESyqLgCCxSeU4ZazA41MAxILPvCOHsOivTeuHqzfHNNlMDQ0I
+         4HMuj5MfyP7uVZTltSiKI1bG9R7aAaf/5w7hQAFHZqvKeu3xkbp+y3lIG0o6mj70aSKS
+         xXqSvPTvouKyLmWSkmmZ2NjTxARnVeZ6CgqU9BfPhFv+fGsfSTUexiA9A4CZ5pWDJ4hB
+         7AdYx5UOgdpWU76XeyFpja313ku/D7dCTvLAU7lkqPqro1D8E6OMKBfPnurtGfKpzOfz
+         hV5g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date;
-        bh=7HiQLQe+pDEA3RVqGiShRN2c7rfpPxoO3qL93ACSKwg=;
-        b=PNxlwVjLayEL7XxEiaV3neBSCfe1U7KmYchv7ae15zvbztTVDXqpHTXk+m4ocpL6Qh
-         +cYwvUHvYcVNKk1GDerEogQvyhf+k9N5U/o7Lu0vyxyjdssZY6ftHBEluKJvNgG55WqN
-         VYBE7QtKfN9IOvhc4YZKgsJe8chD/EC1mRb+I/5+dMuteGb233aSEL78nIp4RVjAqA8N
-         VOsPge4VAwxpT1OiQTFBCo7JJT5DZGpw1V07CcCay6YvEFHiuuz0JZ5Zj71ynMSbWPIJ
-         J2D0ASiH+x/dVekPiESxRajEjb6PiLm2Yi4ANYBd/O0HE9mFiTCZ7Sn4f0QvoyvqXRxc
-         mEdg==
-X-Gm-Message-State: ACrzQf2U6HorR/BnFAypgHR6o6l6HKMqR7HZuorVc0OgfbiM4hZ/li+9
-	QjRhJX3PtQDvZd+rYjikVmVakHc9kPNdjA==
+        h=content-transfer-encoding:to:subject:from:content-language
+         :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
+         :cc:subject:date;
+        bh=V1bDywo8GAasLbmUW/lcdsWoDNLwkzv/xSCeV/YB7I4=;
+        b=CIsI5d6QSoHEaNsQeG6Ix8URb68uaGLaJFlAwztLutUwqlBFw5hLPQjnke88NHyphC
+         7bG7tsVArh7JNJE689WAE6UbzsBqTaSqDtLy5WdIS4Ekryk3ksai5Rt4R/qwwIhFRnHS
+         EBAQZS1iiI7Jtfq/QthyTt/OpopKtQdItdlRlnST7mx7qp86AGQlk6PDzve7utPgiGTP
+         JOxp6fxP0Jcwpif5qNQxgEX0eLt/zvQYC9X1bJleezHGof6FHBM+QwRr/4qUf6Xm9iOC
+         6yKI/AyOueorRNgx3vZH3Me7Q77wXkmOtNGOrYkfjN+CXGFF4tCAMcF+CRF2lRFJorce
+         Jn/w==
+X-Gm-Message-State: ACrzQf1o22a5mtPI+ORtLtl95tf1aYc42RZKUdLRD4zPQcaZc7UBgwo0
+	ezlfvSisRd3rP78FCc5E1RxBPv0FmK8=
 X-Google-Smtp-Source: 
- AMsMyM4x/+ZjjxC4S3kp/bfsLj8fft3t0gcEndjoGyaC4EBHAI4GR+1Eme8ZwnCA+eBlHGmlgfJK8w==
-X-Received: by 2002:a17:902:e2d3:b0:179:fe90:55bf with SMTP id
- l19-20020a170902e2d300b00179fe9055bfmr317844plc.161.1664293525441;
-        Tue, 27 Sep 2022 08:45:25 -0700 (PDT)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9181:1cf0::dee7])
+ AMsMyM5fAZyvZZBio2WDtoS+8Cpr4nWw1RjTTOqNW5ptVdaYXabKs1SPoPr3Go5l5SIis2eWGgxU9w==
+X-Received: by 2002:a05:6870:1496:b0:127:c9f4:4de with SMTP id
+ k22-20020a056870149600b00127c9f404demr2811467oab.187.1664297548597;
+        Tue, 27 Sep 2022 09:52:28 -0700 (PDT)
+Received: from ?IPV6:2600:1700:9190:ba10:a140:ee5a:1873:5286?
+ ([2600:1700:9190:ba10:a140:ee5a:1873:5286])
         by smtp.gmail.com with ESMTPSA id
- s3-20020a170902ea0300b001782977fbcdsm1723379plg.206.2022.09.27.08.45.24
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 27 Sep 2022 08:45:24 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-python][PATCH] python3-requests-unixsocket: Fix override syntax
-Date: Tue, 27 Sep 2022 08:45:23 -0700
-Message-Id: <20220927154523.3897668-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.37.3
+ y123-20020a4a4581000000b00472874bc2ffsm835876ooa.28.2022.09.27.09.52.26
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Tue, 27 Sep 2022 09:52:28 -0700 (PDT)
+Message-ID: <fff57bfa-949e-fdbc-f7fc-0070aedc4dbd@gmail.com>
+Date: Tue, 27 Sep 2022 12:52:13 -0400
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.11.0
+Content-Language: en-US
+From: akuster808 <akuster808@gmail.com>
+Subject: CFP for Yocto Project Summit 2022.11 is now open
+To: Patches and discussions about the oe-core layer
+ <openembedded-core@lists.openembedded.org>,
+ OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
+ "yocto@yoctoproject.org" <yocto@yoctoproject.org>,
+ "yocto-announce@lists.yoctoproject.org"
+ <yocto-announce@lists.yoctoproject.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 27 Sep 2022 15:45:35 -0000
+ <openembedded-devel@lists.openembedded.org>; Tue, 27 Sep 2022 16:52:35 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98993
+ https://lists.openembedded.org/g/openembedded-devel/message/98994
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- .../python/python3-requests-unixsocket_0.3.0.bb                 | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Apologies for Cross posting.
 
-diff --git a/meta-python/recipes-devtools/python/python3-requests-unixsocket_0.3.0.bb b/meta-python/recipes-devtools/python/python3-requests-unixsocket_0.3.0.bb
-index 330ab7c066..94497b609b 100644
---- a/meta-python/recipes-devtools/python/python3-requests-unixsocket_0.3.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-requests-unixsocket_0.3.0.bb
-@@ -11,4 +11,4 @@ inherit pypi
- inherit setuptools3
- 
- DEPENDS += "python3-pbr-native"
--RDEPENDS_${PN} = "python3-requests python3-urllib3"
-+RDEPENDS:${PN} = "python3-requests python3-urllib3"
--- 
-2.37.3
+Hello,
+
+The Yocto Project Summit Committee is thrilled to announce another 
+Virtual Yocto Project Summit for this Fall.
+
+CFP Schedule
+
+  * CFP Closes: Friday, Oct 28, 2022
+  * CFP Notifications: Wednesday, Nov 2, 2022
+  * Slides Due Date: Friday, Nov 25, 2022
+
+
+List of suggested topics:
+
+  * Layer quality: e.g. creating robust layers, safely using existing layers
+  * Productivity tricks, Best Practices
+  * Developer toolbox
+  * Security
+  * Reproducibility
+  * Supporting the Application Developer Workflow
+  * DevOps, CI/CD
+  * Containers, VMs
+  * Working with/creating BSPs
+  * Practical use of the Yocto Project
+  * Product showcase
+
+
+Presentation formats
+
+Slots for talks vary from 15-45 minutes, with training sessions starting 
+at 60 minutes or longer.
+
+
+Submit a propels:
+https://summit.yoctoproject.org/yocto-project-summit-2022-11/cfp
+
+If you have any questions, please contact 
+conferences@lists.yoctoproject.org or myself.
+
+Thank you,
+Armin
+(On behalf of the Yocto Project Summit Committee)
 
 
