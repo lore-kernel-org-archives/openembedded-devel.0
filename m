@@ -2,75 +2,74 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B30EFC54EE9
-	for <webhook@archiver.kernel.org>; Tue, 27 Sep 2022 08:22:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AF511C54EE9
+	for <webhook@archiver.kernel.org>; Tue, 27 Sep 2022 08:22:12 +0000 (UTC)
 Received: from mail1.bemta37.messagelabs.com (mail1.bemta37.messagelabs.com
- [85.158.142.113])
- by mx.groups.io with SMTP id smtpd.web08.8241.1664266915793459232
+ [85.158.142.112])
+ by mx.groups.io with SMTP id smtpd.web10.8553.1664266919935520317
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 27 Sep 2022 01:21:56 -0700
+ Tue, 27 Sep 2022 01:22:00 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=tNv8yjM1;
- spf=pass (domain: fujitsu.com, ip: 85.158.142.113,
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=qRgE+/ns;
+ spf=pass (domain: fujitsu.com, ip: 85.158.142.112,
  mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1664266913; i=@fujitsu.com;
-	bh=FgKN9UD73phEhj9PU1NBnjRy+DKA6QH9y6u0ibQo2dw=;
+	s=170520fj; t=1664266918; i=@fujitsu.com;
+	bh=YZEGoLbIjA/SNjK10ccmB/XssNT6tnz0GHKcKDi0/bw=;
 	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
 	 MIME-Version:Content-Type;
-	b=tNv8yjM1Wm76aiVqP5rbkmoelb1VHnkDoJZTHnqrD+1yhPKbr6xySRuHiCqtCSjmq
-	 FBPNCKYGoawtIn8e4scu+nT8oDiD19u1vLBUgfyFUGHTKfbjRJkZFd7SLG+ZkYa6/i
-	 F03ivh42UQhCtca44HT7pF9X/WVYI8eIg/5lCaqsxCR0PotEfTD1gIgM6nn200r3LF
-	 FtY7UsuOczA97niyW2Of0fxEUPOJLGTa8afDhQJluf0jl5TgULv5KDChzmagghaEJc
-	 wTHnCvz2645hK3XOPh3SFSA97WQPokotYN18ykoM2ynLE7ga+a4lkdvwPy6XE8nwux
-	 Q+4wrZDeX6nmA==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrDIsWRWlGSWpSXmKPExsViZ8ORqLtgk1G
-  ywbGZVhYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8bkn0/ZCvazVfS8XMzYwPiNtYuRk0NI4Amj
-  xN3egC5GLiD7OpPE54fX2SCcPYwSnY3/mUCq2ATUJKbfugHWISKgL7F09h5mEJtZQEXixe8ed
-  hBbWCBAYs/p7SwgNouAqsSri21gNbwCjhJn9/xmBLElBBQkpjx8DxbnFHCSmHT7FjvEFY4Se1
-  dNg6oXlDg58wkLxHwJiYMvXjBD9CpKzL7czAJhV0g0Tj/EBGGrSVw9t4l5AqPgLCTts5C0L2B
-  kWsVok1SUmZ5RkpuYmaNraGCga2hoqmtppmtoYqGXWKWbqJdaqpuXX1SSoWuol1herJdaXKxX
-  XJmbnJOil5dasokRGMgpxQlTdjAe3vdL7xCjJAeTkiiv/SKjZCG+pPyUyozE4oz4otKc1OJDj
-  DIcHEoSvEzrgXKCRanpqRVpmTnAqIJJS3DwKInwrlsClOYtLkjMLc5Mh0idYlSUEueduREoIQ
-  CSyCjNg2uDRfIlRlkpYV5GBgYGIZ6C1KLczBJU+VeM4hyMSsK8S9cCTeHJzCuBm/4KaDET0GI
-  7Pn2QxSWJCCmpBqak1/b72HJ2hbNINOhZ6M1oUfXaZWH5VF9z2r3YbXa8DS+47TvWvNszadpP
-  R3/RXwUfQ6cqTXh9Y/b0ZJEpoSVTDh85rn3GhOv+NSHpf8nVC5nPy5ca7+dbmBibmPXulvsm2
-  bqLX/rXfbz49ZeQzsbIqTFWQY78nywqy/dpa8kuUrPN+l549t1+oZjdtwOTNgjNyNqs3uQ+6/
-  /SF80pt2LbXQ669TdLHAuZHmy5+9icP0bHZN8+sFSZred/KfR2RcX/5xvPTU2f7rf3nD1vS9F
-  17pDvHBb9E4IzD7DuaVj3zcH81rI3y/N+xO6q5eI8yH3lpuf7FWf6jlkvYWSZskJF5eHEF+WT
-  DVcK9pZvD1RSYinOSDTUYi4qTgQAbo3Phl8DAAA=
+	b=qRgE+/ns6JpMzYfx/UXu20eHo5JziGtcwyEn6mpk6uaYMxzm10Y8UB5KBnOhqlche
+	 eaRV0FRpWj9vl4nI9lJ1mT15KjXUoW9CqDtdwrQh30KhX6p+0OoaPLo8+7mlVCnIop
+	 +OM5aO3gXmWS8q0IPDM6jl4uCyBletPG6vXYkRs4zqYL2hUlkiTcIIFi3mJFhyltqk
+	 F2OCZk3Q2vDbkMkpHk4S3so8SvXHbs6Xt6IOm06x9jIir91A5AOTafB8VgaacDgQNU
+	 8ihA1xvG1z2EG+ZTS2bTah8yRFH7eygGtFAqNTHtJhFaXPRllmJA0l9pOwrcYXrZWB
+	 4CQGNJ8icHo7Q==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFnrEIsWRWlGSWpSXmKPExsViZ8OxWXfJJqN
+  kg6aZbBYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8aGOY/YC3ZwVGx/vZmtgfEhexcjF4eQwENG
+  ie/TdzJCOJeZJC4c+8XUxcgJ5OxhlHhyOAnEZhNQk5h+6wYriC0ioC+xdPYeZhCbWUBF4sXvH
+  qBJHBzCAm4Sl594g5gsAqoSbSt1QSp4BRwldk49ww5iSwgoSEx5+B6sk1PASWLS7VvsEJscJf
+  aumsYMUS8ocXLmExaI6RISB1+8YIboVZSYfbmZBcKukGicfogJwlaTuHpuE/MERsFZSNpnIWl
+  fwMi0itEmqSgzPaMkNzEzR9fQwEDX0NAUSBvrWpjoJVbpJuqllurm5ReVZOga6iWWF+ulFhfr
+  FVfmJuek6OWllmxiBAZxSnF6yA7GM/t+6R1ilORgUhLltV9klCzEl5SfUpmRWJwRX1Sak1p8i
+  FGGg0NJgpdpPVBOsCg1PbUiLTMHGFEwaQkOHiUR3nVLgNK8xQWJucWZ6RCpU4yWHFNn/9vPzL
+  EcTM782naAWYglLz8vVUqcd+ZGoAYBkIaM0jy4cbCov8QoKyXMy8jAwCDEU5BalJtZgir/ilG
+  cg1FJmHfpWqApPJl5JXBbXwEdxAR0kB2fPshBJYkIKakGJvn0gutP78/eb98vY3DELHii2vZO
+  x6f/5Oadsm7h+v6GTeJuW0W6V5Hd64PxOQ/YujpOn7/rvEaa/V3KbabkLZHaegLrGR5HV558W
+  SIt8fJM9jH+Zq4IltR7LzecF5SPmbOsev3EY+FPlMzzWQQT1x1cl1Ao4msS/ML2uZ2phHd9SI
+  N5zQnd3VNvCsqqly3o8z+2ZPLCr0cfpWz08rujpOo4l3f5isUmjmsXRTEtsVun8kLurURD/wx
+  nO41nM/ZoPPorsOzIWkUT7pny88RVOydwFKQxnatxufs7Yp5PbUxsWfUZ5traeVEqmTMe67zT
+  vv9wA4eDyPW+LCYdmdr3z0WuW6cIKl2SECqYBqRZijMSDbWYi4oTASlt20F1AwAA
 X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-8.tower-745.messagelabs.com!1664266912!973!1
-X-Originating-IP: [62.60.8.97]
+X-Msg-Ref: server-9.tower-728.messagelabs.com!1664266915!246303!1
+X-Originating-IP: [62.60.8.179]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.87.3; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 29223 invoked from network); 27 Sep 2022 08:21:52 -0000
-Received: from unknown (HELO n03ukasimr01.n03.fujitsu.local) (62.60.8.97)
-  by server-8.tower-745.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
- encrypted SMTP; 27 Sep 2022 08:21:52 -0000
-Received: from n03ukasimr01.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTP id 61706100195
+Received: (qmail 10346 invoked from network); 27 Sep 2022 08:21:56 -0000
+Received: from unknown (HELO n03ukasimr04.n03.fujitsu.local) (62.60.8.179)
+  by server-9.tower-728.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
+ encrypted SMTP; 27 Sep 2022 08:21:56 -0000
+Received: from n03ukasimr04.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTP id 852A5142
 	for <openembedded-devel@lists.openembedded.org>;
- Tue, 27 Sep 2022 09:21:52 +0100 (BST)
+ Tue, 27 Sep 2022 09:21:55 +0100 (BST)
 Received: from R01UKEXCASM121.r01.fujitsu.local (R01UKEXCASM121
  [10.183.43.173])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTPS id 556B0100191
+	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTPS id 7848873
 	for <openembedded-devel@lists.openembedded.org>;
- Tue, 27 Sep 2022 09:21:52 +0100 (BST)
+ Tue, 27 Sep 2022 09:21:55 +0100 (BST)
 Received: from localhost.localdomain (10.167.225.33) by
  R01UKEXCASM121.r01.fujitsu.local (10.183.43.173) with Microsoft SMTP Server
- (TLS) id 15.0.1497.32; Tue, 27 Sep 2022 09:21:50 +0100
+ (TLS) id 15.0.1497.32; Tue, 27 Sep 2022 09:21:54 +0100
 From: Wang Mingyu <wangmy@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-oe] [PATCH] opencl-headers: upgrade 2022.05.18 ->
- 2022.09.23
-Date: Tue, 27 Sep 2022 16:21:21 +0800
-Message-ID: <1664266883-2234-3-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH] pangomm-2.48: upgrade 2.50.0 -> 2.50.1
+Date: Tue, 27 Sep 2022 16:21:22 +0800
+Message-ID: <1664266883-2234-4-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 In-Reply-To: <1664266883-2234-1-git-send-email-wangmy@fujitsu.com>
 References: <1664266883-2234-1-git-send-email-wangmy@fujitsu.com>
@@ -83,30 +82,32 @@ X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 27 Sep 2022 08:22:02 -0000
+ <openembedded-devel@lists.openembedded.org>; Tue, 27 Sep 2022 08:22:12 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98966
+ https://lists.openembedded.org/g/openembedded-devel/message/98967
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- meta-oe/recipes-core/opencl/opencl-headers_git.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ .../pango/{pangomm-2.48_2.50.0.bb => pangomm-2.48_2.50.1.bb}    | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-graphics/pango/{pangomm-2.48_2.50.0.bb => pangomm-2.48_2.50.1.bb} (85%)
 
-diff --git a/meta-oe/recipes-core/opencl/opencl-headers_git.bb b/meta-oe/recipes-core/opencl/opencl-headers_git.bb
-index 4ecb8fc7d5..8ad7d9d10b 100644
---- a/meta-oe/recipes-core/opencl/opencl-headers_git.bb
-+++ b/meta-oe/recipes-core/opencl/opencl-headers_git.bb
-@@ -5,8 +5,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
- SECTION = "base"
+diff --git a/meta-oe/recipes-graphics/pango/pangomm-2.48_2.50.0.bb b/meta-oe/recipes-graphics/pango/pangomm-2.48_2.50.1.bb
+similarity index 85%
+rename from meta-oe/recipes-graphics/pango/pangomm-2.48_2.50.0.bb
+rename to meta-oe/recipes-graphics/pango/pangomm-2.48_2.50.1.bb
+index 84aedba21b..b4079f7839 100644
+--- a/meta-oe/recipes-graphics/pango/pangomm-2.48_2.50.0.bb
++++ b/meta-oe/recipes-graphics/pango/pangomm-2.48_2.50.1.bb
+@@ -10,7 +10,7 @@ GNOMEBASEBUILDCLASS = "meson"
+ GNOMEBN = "pangomm"
+ inherit gnomebase features_check
  
- S = "${WORKDIR}/git"
--PV = "2022.05.18"
--SRCREV = "def8be9d35fda35492b72f54a94515f7df8d1e9f"
-+PV = "2022.09.23"
-+SRCREV = "5e2f8c66476bcf60eb8c2921807e34efb30294ee"
- SRC_URI = "git://github.com/KhronosGroup/OpenCL-Headers.git;branch=main;protocol=https"
+-SRC_URI[archive.sha256sum] = "a27aa77e017b9afce9e751d85bd1cf890abbb3a58bf59d0fac917eef82db3b5b"
++SRC_URI[archive.sha256sum] = "ccc9923413e408c2bff637df663248327d72822f11e394b423e1c5652b7d9214"
+ REQUIRED_DISTRO_FEATURES = "x11"
  
- do_configure[noexec] = "1"
+ S = "${WORKDIR}/${GNOMEBN}-${PV}"
 -- 
 2.25.1
 
