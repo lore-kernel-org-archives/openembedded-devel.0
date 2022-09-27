@@ -2,74 +2,74 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AD6B8C6FA86
-	for <webhook@archiver.kernel.org>; Tue, 27 Sep 2022 08:20:22 +0000 (UTC)
-Received: from mail1.bemta37.messagelabs.com (mail1.bemta37.messagelabs.com
- [85.158.142.112])
- by mx.groups.io with SMTP id smtpd.web12.8577.1664266813102137286
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AD74EC54EE9
+	for <webhook@archiver.kernel.org>; Tue, 27 Sep 2022 08:20:32 +0000 (UTC)
+Received: from mail1.bemta34.messagelabs.com (mail1.bemta34.messagelabs.com
+ [195.245.231.1])
+ by mx.groups.io with SMTP id smtpd.web11.8545.1664266827390911248
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 27 Sep 2022 01:20:13 -0700
+ Tue, 27 Sep 2022 01:20:28 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=LR1GO4eL;
- spf=pass (domain: fujitsu.com, ip: 85.158.142.112,
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=H7U11d/m;
+ spf=pass (domain: fujitsu.com, ip: 195.245.231.1,
  mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1664266811; i=@fujitsu.com;
-	bh=goSjT9IEXGUXu/q/UKuIM+0zW7AjvvTkzvwRfK4iudY=;
+	s=170520fj; t=1664266825; i=@fujitsu.com;
+	bh=TRcM5Eu6uWgMO/emHp6Il3lGwM/rpw+XMeETNCuCH50=;
 	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
 	 MIME-Version:Content-Type;
-	b=LR1GO4eLZJoKfenPAvvcfvnCVTeMxoWzzIZd9sjnyUFtFoZzA5L7Ba5s6QvHkdUat
-	 eGfU1PFmXqfQHtJA/mWzsNzTInXlYf9huPDC9ipoWEWE2QKGloxyWKLDdhFUfah5DU
-	 9kKHemBvMeVxUGoHWY2p5xatY5eTV11Lu6wGcwG84bEvoT2cKifVR4J5AukaVgTld9
-	 Y9i6YS90bK4duBNZRSW/fqvr2EcieRvLKTJtuH+4xgL3/48IxIrDd6fnK4nIZK6pMW
-	 15ZW/lUeGgJLmmG9uos6fXMahChL1S1+/yT4Igfjr1TPSzzlXn505DxYQWjtNoyMuq
-	 xHVdoAgpgvr6g==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrKIsWRWlGSWpSXmKPExsViZ8ORqGu1ySj
-  ZYPIhI4uLh5cyOzB6nNu4gjGAMYo1My8pvyKBNePGn2/MBYu5K45cecXewDiBq4uRi0NI4Amj
-  xJ0NP1kgnOtMEldmbGaCcPYwSkw7dwMow8nBJqAmMf3WDVYQW0RAX2Lp7D3MIDazgIrEi9897
-  CC2sICXxPXuHWA2i4CqRMvLf2xdjBwcvAKOEpu78kDCEgIKElMevmcGCXMKOEmcXB4GYgoBVf
-  Qu0Qep4BUQlDg58wkLxHAJiYMvXjBDdCpKzL7czAJhV0g0Tj/EBGGrSVw9t4l5AqPgLCTts5C
-  0L2BkWsVonVSUmZ5RkpuYmaNraGCga2hoqmtppmtoppdYpZuol1qqm5dfVJKha6iXWF6sl1pc
-  rFdcmZuck6KXl1qyiREYwinFCQI7GPfu+6V3iFGSg0lJlNd+kVGyEF9SfkplRmJxRnxRaU5q8
-  SFGGQ4OJQlepvVAOcGi1PTUirTMHGA8waQlOHiURHjXLQFK8xYXJOYWZ6ZDpE4x6nJ8OHRlL7
-  MQS15+XqqUOO/MjUBFAiBFGaV5cCNgsX2JUVZKmJeRgYFBiKcgtSg3swRV/hWjOAejkjDv0rV
-  AU3gy80rgNr0COoIJ6Ag7Pn2QI0oSEVJSDUzS9WvzVJ7MvzVjQXRKp+z7OcJrxI6f8f/sXFKY
-  Kl03ea3aEb3Gvj6zVx9Dpt9SvqDOLpxjrG23mz9297T6hQyl/04cP9rmWJR2/h1v9e2/JlLlq
-  72qFxiKnNixZfdOC/OD6dNX1fdMjNefcYVpdk9U5e2ZM3awqZw7uGSTt92zcuGu2q2l1vNCzU
-  4dyY/XLErXNRE3ZOw4YFt2QrjkRdb0v1Uf/AOzl4VWRrdFfA3P3CKkP/1xjknayXrJMM5ZP7n
-  lb96Y/LF0q0TH37eBHkyvmtYEpdgoMcp8vHr9on1A5e3gS6X5vysa885rPO6ufCrdmji5dJq+
-  9JkXW7QEPs1+8VJMP+ZucQJX3UWhFiWW4oxEQy3mouJEAOujiWJoAwAA
+	b=H7U11d/mpUYlIQDrfA4YXPMf0ffkwAgvNNI+KQ/W8LyJuqNg8JsoC+bMk2h/Ue9NK
+	 9tIPN2XGkdF74g9ScQzh4//Y5CbwA8Zub9cB7Ym7PMEEu9puoaaVX6Q0qLqaH6h35E
+	 IcQdcw5h/zjLXAXuVy4PJbQX8QuHQ5qyW7reDXZHNO4035YE8eyIyTxmNxCiq2XjHo
+	 Dao5FzkFM+EAFIHJ8TBIMSQV3nC65YKEcotpbBEIDlHFtb5G4puzAAs6csmN24/8Sl
+	 GAVsdZ8TBATbpE/wm2YyOWvAQvQCQOyOEGDt9d4EASW0w92KU42usCHELCzInZfByZ
+	 xsfC68SailaDA==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrMIsWRWlGSWpSXmKPExsViZ8ORqOu5ySj
+  Z4Ph2aYuLh5cyOzB6nNu4gjGAMYo1My8pvyKBNeP3rUMsBe+5Kmacl2hgvMPZxcjJISTwhFHi
+  9rn6LkYuIPs6k8S7NRuYIJw9jBLvVy9lB6liE1CTmH7rBiuILSKgL7F09h5mEJtZQEXixe8es
+  BphAUeJpg37mEBsFgFViWd/z4LV8ALFL186CRaXEFCQmPLwPVCcg4NTwEni5PIwEFMIqKR3iT
+  5EtaDEyZlPWCCmS0gcfPGCGaJTUWL25WYWCLtConH6IaiJahJXz21insAoOAtJ+ywk7QsYmVY
+  xWiUVZaZnlOQmZuboGhoY6BoamuoaG+kamuglVukm6qWW6panFpfoGukllhfrpRYX6xVX5ibn
+  pOjlpZZsYgSGb0qxAt8OxuZVP/UOMUpyMCmJ8tovMkoW4kvKT6nMSCzOiC8qzUktPsQow8GhJ
+  MHLtB4oJ1iUmp5akZaZA4wlmLQEB4+SCO+6JUBp3uKCxNzizHSI1ClGXY6ZX9sOMAux5OXnpU
+  qJ887cCFQkAFKUUZoHNwIW15cYZaWEeRkZGBiEeApSi3IzS1DlXzGKczAqCfMuXQs0hSczrwR
+  u0yugI5iAjrDj0wc5oiQRISXVwLTeIyfD/vqRoMbkE2Gc0yXrpdJd6iLfZvU1LFsZELl5kwzj
+  3y3c+qIXJ14vu7fj/KeEtTZG7xm2KhfP47Bc0Fajf73Rfuvu7cfzf/Bf/dR87N5l+w3CF/fYX
+  iqd2MKVnXryC1fe32th/LosXUw3vzt93H0vqnxP9Z8KA97vW0wPxBV4LmuTPT9BQED6133Www
+  liGUEbjx1bGWI42e2Ikbo595IPYd0HTSwK0zt12nV2qSxSktR46BLQzG/eteZoHoep0ptritk
+  Z0ceE2VuCteodNhm4Xftwpp1tp2ap6ZznCnOktl9cw/R8kktwR9oczTMcBpqzWx+/vvqySGb6
+  rxb3Fzqz52z25n7/JYnfTImlOCPRUIu5qDgRALoQwIBmAwAA
 X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-6.tower-728.messagelabs.com!1664266810!245950!1
+X-Msg-Ref: server-4.tower-571.messagelabs.com!1664266825!489226!1
 X-Originating-IP: [62.60.8.97]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.87.3; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 12748 invoked from network); 27 Sep 2022 08:20:10 -0000
+Received: (qmail 23989 invoked from network); 27 Sep 2022 08:20:25 -0000
 Received: from unknown (HELO n03ukasimr01.n03.fujitsu.local) (62.60.8.97)
-  by server-6.tower-728.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
- encrypted SMTP; 27 Sep 2022 08:20:10 -0000
+  by server-4.tower-571.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
+ encrypted SMTP; 27 Sep 2022 08:20:25 -0000
 Received: from n03ukasimr01.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTP id 3E75C100191
+	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTP id 286FC100197
 	for <openembedded-devel@lists.openembedded.org>;
- Tue, 27 Sep 2022 09:20:10 +0100 (BST)
+ Tue, 27 Sep 2022 09:20:25 +0100 (BST)
 Received: from R01UKEXCASM121.r01.fujitsu.local (R01UKEXCASM121
  [10.183.43.173])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTPS id 32628100199
+	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTPS id 1C428100043
 	for <openembedded-devel@lists.openembedded.org>;
- Tue, 27 Sep 2022 09:20:10 +0100 (BST)
+ Tue, 27 Sep 2022 09:20:25 +0100 (BST)
 Received: from localhost.localdomain (10.167.225.33) by
  R01UKEXCASM121.r01.fujitsu.local (10.183.43.173) with Microsoft SMTP Server
- (TLS) id 15.0.1497.32; Tue, 27 Sep 2022 09:20:08 +0100
+ (TLS) id 15.0.1497.32; Tue, 27 Sep 2022 09:20:23 +0100
 From: Wang Mingyu <wangmy@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-gnome] [PATCH] gnome-font-viewer: upgrade 42.0 -> 43.0
-Date: Tue, 27 Sep 2022 16:19:49 +0800
-Message-ID: <1664266791-2194-3-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH] libpeas: upgrade 1.32.0 -> 1.34.0
+Date: Tue, 27 Sep 2022 16:19:51 +0800
+Message-ID: <1664266791-2194-5-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 In-Reply-To: <1664266791-2194-1-git-send-email-wangmy@fujitsu.com>
 References: <1664266791-2194-1-git-send-email-wangmy@fujitsu.com>
@@ -82,48 +82,43 @@ X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 27 Sep 2022 08:20:22 -0000
+ <openembedded-devel@lists.openembedded.org>; Tue, 27 Sep 2022 08:20:32 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98961
+ https://lists.openembedded.org/g/openembedded-devel/message/98963
 
 Changelog:
-===========
-Fonts 43.beta comes with a new "About" button in the main window and the
-following translation updates:
- - Abkhazian
- - Dutch
- - Friulian
- - Georgian
- - Hebrew
- - Icelandic
- - Italian
- - Latvian
- - Nepali
- - Occitan (post 1500)
- - Turkish
+==========
+* Resource-based plugins are sorted by module-name before loading
+  to aid in reproducibility.
+* Sorting of plugins with dependencies has been altered to improve
+  sort-order with more complex plugin dependency graphs.
+* Translation updates:
+  - Hebrew
+  - Georgian
+  - Bulgarian
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../{gnome-font-viewer_42.0.bb => gnome-font-viewer_43.0.bb}    | 2 +-
+ .../libpeas/{libpeas_1.32.0.bb => libpeas_1.34.0.bb}            | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-gnome/recipes-gnome/gnome-font-viewer/{gnome-font-viewer_42.0.bb => gnome-font-viewer_43.0.bb} (82%)
+ rename meta-oe/recipes-gnome/libpeas/{libpeas_1.32.0.bb => libpeas_1.34.0.bb} (88%)
 
-diff --git a/meta-gnome/recipes-gnome/gnome-font-viewer/gnome-font-viewer_42.0.bb b/meta-gnome/recipes-gnome/gnome-font-viewer/gnome-font-viewer_43.0.bb
-similarity index 82%
-rename from meta-gnome/recipes-gnome/gnome-font-viewer/gnome-font-viewer_42.0.bb
-rename to meta-gnome/recipes-gnome/gnome-font-viewer/gnome-font-viewer_43.0.bb
-index c14e57c7c0..50fd034af5 100644
---- a/meta-gnome/recipes-gnome/gnome-font-viewer/gnome-font-viewer_42.0.bb
-+++ b/meta-gnome/recipes-gnome/gnome-font-viewer/gnome-font-viewer_43.0.bb
-@@ -16,7 +16,7 @@ inherit gnomebase gtk-icon-cache gettext features_check mime-xdg
+diff --git a/meta-oe/recipes-gnome/libpeas/libpeas_1.32.0.bb b/meta-oe/recipes-gnome/libpeas/libpeas_1.34.0.bb
+similarity index 88%
+rename from meta-oe/recipes-gnome/libpeas/libpeas_1.32.0.bb
+rename to meta-oe/recipes-gnome/libpeas/libpeas_1.34.0.bb
+index 944b21d1a9..1bf6752e87 100644
+--- a/meta-oe/recipes-gnome/libpeas/libpeas_1.32.0.bb
++++ b/meta-oe/recipes-gnome/libpeas/libpeas_1.34.0.bb
+@@ -12,7 +12,7 @@ inherit gnomebase gobject-introspection gtk-doc gtk-icon-cache features_check
  
- REQUIRED_DISTRO_FEATURES = "x11"
+ ANY_OF_DISTRO_FEATURES = "${GTK3DISTROFEATURES}"
  
--SRC_URI[archive.sha256sum] = "cfa2b8dfff21a105a1a021dadfa213f13627e6a179a77c7b59fdcedaca848dcc"
-+SRC_URI[archive.sha256sum] = "81c6bffb06d5332346e00eaecaec1bdcfd617c51dfd95bcd058d6c76c76dd2b9"
+-SRC_URI[archive.sha256sum] = "d625520fa02e8977029b246ae439bc218968965f1e82d612208b713f1dcc3d0e"
++SRC_URI[archive.sha256sum] = "4305f715dab4b5ad3e8007daec316625e7065a94e63e25ef55eb1efb964a7bf0"
  
- FILES:${PN} += " \
-     ${datadir}/dbus-1 \
+ PACKAGECONFIG[python3] = "-Dpython3=true,-Dpython3=false,python3-pygobject"
+ 
 -- 
 2.25.1
 
