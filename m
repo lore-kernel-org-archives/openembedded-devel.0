@@ -1,197 +1,253 @@
-Return-Path: <wak@google.com>
+Return-Path: <daniel@qtec.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3193EC433F5
-	for <webhook@archiver.kernel.org>; Thu, 29 Sep 2022 19:01:18 +0000 (UTC)
-Received: from mail-yw1-f202.google.com (mail-yw1-f202.google.com
- [209.85.128.202])
- by mx.groups.io with SMTP id smtpd.web09.14633.1664478073179091475
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CF197C433F5
+	for <webhook@archiver.kernel.org>; Thu, 29 Sep 2022 21:25:18 +0000 (UTC)
+Received: from mail-vs1-f52.google.com (mail-vs1-f52.google.com
+ [209.85.217.52])
+ by mx.groups.io with SMTP id smtpd.web09.16261.1664486711710336454
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 29 Sep 2022 12:01:13 -0700
+ Thu, 29 Sep 2022 14:25:12 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@google.com header.s=20210112 header.b=MIc4hVKF;
- spf=pass (domain: flex--wak.bounces.google.com, ip: 209.85.128.202,
- mailfrom: 3eos1ywmkaec5jtpxxpun.lxv@flex--wak.bounces.google.com)
-Received: by mail-yw1-f202.google.com with SMTP id
- 00721157ae682-3508d8c60ceso22077347b3.18
+ dkim=pass header.i=@qtec.com header.s=google header.b=H8RRnjhh;
+ spf=pass (domain: qtec.com, ip: 209.85.217.52, mailfrom: daniel@qtec.com)
+Received: by mail-vs1-f52.google.com with SMTP id 126so2925946vsi.10
         for <openembedded-devel@lists.openembedded.org>;
- Thu, 29 Sep 2022 12:01:13 -0700 (PDT)
+ Thu, 29 Sep 2022 14:25:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20210112;
-        h=cc:to:from:subject:mime-version:message-id:date:from:to:cc:subject
-         :date;
-        bh=8l0ZCcCr9ysU4bkiYmXp8SkVXFfS3wLPxNZLVzCyEIs=;
-        b=MIc4hVKF/P3m/koYYfczk+c0+UZmcC3kjUP4FTrGSPEFLVH4k0DIQsSDREdYmhPIV/
-         wEYJUbsMNcz/JL5eYzB30CynS2djswtMJPoo32kfkyqDAOI+ZLJqeQbHBaqVkNHKKMmp
-         ZLftlTf/Mie1uRvVKzKYpjvcr/EdfaDce+Rn3aJAMCCLPn70DuXwtmM9MsoXJTxetrlD
-         QyaHpYAign8VFADwqm2N2Z1tsAgnuFZHWJ5kHd7M+OcpjPmzE899aNozJwNqiv8aFl7J
-         FTS9Dcf9yGdwBT1/hbQkjcXGTlpeccviPPnoM754TTNphFQovcDrLgGz7v7GfaLdQ/ya
-         NsAQ==
+        d=qtec.com; s=google;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date;
+        bh=M0dPBE7QtW7489SAfVr14btLqQj3rY90NK03u5aJdbE=;
+        b=H8RRnjhhe9bWEF6wj4A5VDi+IqailiZO5BpvV0dFl3lznDLRed6K//4MRbEzYCYyeY
+         gpNWLUeQCXu+fGBYFOBHL/IMo8t3Mv9HaeGe/rp+QNJThvfyYpIMkF4HmBJkLEU/+4h0
+         Yp25tViSF8NSQELBTAPhQQIpJXnpRn2gXaa6LQLGRmLtK0nGNYfL2x7lDUPc0LqYgMp7
+         W7D4M+8FJiMObxC59DIZkziz8Z5uCT5KANJm0pPjIcZC2+JTUvbgVZv+12Alw2p1W/e/
+         Ilitpis9Pn/nY0mZt6GqoFJr9OfnHNQ34wvANOheOY/9aDWlvLcx7S3pvDxFm22jjzzm
+         zOJg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=cc:to:from:subject:mime-version:message-id:date:x-gm-message-state
-         :from:to:cc:subject:date;
-        bh=8l0ZCcCr9ysU4bkiYmXp8SkVXFfS3wLPxNZLVzCyEIs=;
-        b=qrM4b363ibw/2/ejP6bub66B5mZnCm8l4tWnkyFnO6m5FvuD678ogo4znI9vM91x8L
-         jb9zbCgyyAk5vmV4VWXbzYpU9gdO2PdS7zSmSCIWHLj7hxWMY5ngr4NWhJ+nzDovuTm6
-         qnuYVSvrxH/SZ/cdq5fWHm0XaTQCKpwdYZ4+xGQ1nOm9lLOz/XAUem07YtfXeWAA8KVX
-         heOxrR6AZp11NTHouK27mVGyy6eGHxf+E27olIXnGWC7hqaAMRhNzbqaJCPZRXG8YGnU
-         NpXoP4OZHgeyhg5oIaO7KylFvU0EVL9PLLP2V40d6OV2IXraxz0oDivt784A7NXAxolo
-         VXBw==
-X-Gm-Message-State: ACrzQf2HgaskEZaNFg1jboLfsXOojcpfuiysgjQVDTFJWnlxNtIA2yCP
-	9R6W6IptLbVqyF+iyy2opNS23Vk1nDR1ZzNGM8/xiSbNV30lc1Av8kndx6yYxPdyFvQcf0lGkxv
-	MeDTd5+jbys3GR7m4k6Rj8wufII/7hpmFtHWG9cd+tL/swvFvu656vEz0pgOXjy3hQ6t5cdD90Z
-	bX9pc=
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc:subject:date;
+        bh=M0dPBE7QtW7489SAfVr14btLqQj3rY90NK03u5aJdbE=;
+        b=drpjJ9O1oPWzbs3ZOYEGnWIl69xgq0F/NMo3UI5a4bQLt2s/JYDm4h1SD6tN+oVYco
+         WiQK4LjaDLQTcmNsWOyjra+2fRjUXT6Yu8yOuEiocnvwC7r/qRAn9nqq9lHIq4qSMewl
+         gvsEhXKhz8SQYNpFY0fGeEnMax20v3YVp5zemEo0I+h1/HuVqM3mEsn6We8tUU3IMZCr
+         nvPSzC4l5yanHw/fjABld9AXJWe0IqmWCJBWI49BuQ4Sgps7wqIjbisf/J33IzjxEDq5
+         CMPjLGWTXxIY0FH8I89U3r/APpNogOx9S40oUPyXQhdgRPuHzHFcvUY7edDIl1T6YajU
+         O0xg==
+X-Gm-Message-State: ACrzQf2EESEJQ+QagDRGJ132xC9zavke23lLddI699L2l10LRa225I54
+	QbOeDPIn6z7B6n/b62J0EaWqdRVKJ9Kb9hU/wDzCCsxbBzk=
 X-Google-Smtp-Source: 
- AMsMyM4xVrKSpJSZsjwj46iAR/k3M77MAklagdRLplJrm7+iCuvLBALDM2VyK0tc43WwXgNxEQOTU7E=
-X-Received: from wak-linux.svl.corp.google.com
- ([2620:15c:2c5:13:91bf:f672:2dae:41ab])
- (user=wak job=sendgmr) by 2002:a5b:443:0:b0:6bc:e3d1:8990 with SMTP id
- s3-20020a5b0443000000b006bce3d18990mr414700ybp.191.1664478072376; Thu, 29 Sep
- 2022 12:01:12 -0700 (PDT)
-Date: Thu, 29 Sep 2022 12:01:09 -0700
-Message-Id: <20220929190109.2227884-1-wak@google.com>
-Mime-Version: 1.0
-X-Mailer: git-send-email 2.38.0.rc1.362.ged0d419d3c-goog
-Subject: [meta-oe][PATCH] gerbera: upgrade 1.9.2 -> 1.11.0
-From: "William A. Kennington III" <wak@google.com>
+ AMsMyM66zmYjvjfQuLTvAT3kHLzM/Tzo3wvpePrynqr0PB8GPqSrUB9xUP5rgcD+2ySqQO5izzr/BnDBPXhuk0S9Mt0=
+X-Received: by 2002:a05:6102:3ec7:b0:356:cbdf:122d with SMTP id
+ n7-20020a0561023ec700b00356cbdf122dmr2445235vsv.9.1664486710236; Thu, 29 Sep
+ 2022 14:25:10 -0700 (PDT)
+MIME-Version: 1.0
+References: <20220929161436.64661-1-daniel@qtec.com>
+ <20220929161436.64661-2-daniel@qtec.com>
+In-Reply-To: <20220929161436.64661-2-daniel@qtec.com>
+From: Daniel Gomez <daniel@qtec.com>
+Date: Thu, 29 Sep 2022 23:24:59 +0200
+Message-ID: 
+ <CAH1Ww+R9oo1moBbyVhAa4ZrKgpkCDvkDUvLjWCaCsUvUeV67Mw@mail.gmail.com>
+Subject: Re: [meta-oe][PATCH 2/3] v4l-utils: Update 1.22.1 -> 1.23.0+fd544473
 To: openembedded-devel@lists.openembedded.org
-Cc: "William A. Kennington III" <wak@google.com>
+Cc: dagmcr@gmail.com
 Content-Type: text/plain; charset="UTF-8"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 29 Sep 2022 19:01:18 -0000
+ <openembedded-devel@lists.openembedded.org>; Thu, 29 Sep 2022 21:25:18 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/99013
+ https://lists.openembedded.org/g/openembedded-devel/message/99014
 
-Signed-off-by: William A. Kennington III <wak@google.com>
----
- .../gerbera/0001-Fix-build-with-fmt-9.0.patch | 35 ++++++++++++++
- .../gerbera/0001-Fix-for-fmt-8.0.patch        | 46 -------------------
- .../{gerbera_1.9.2.bb => gerbera_1.11.0.bb}   |  6 +--
- 3 files changed, 38 insertions(+), 49 deletions(-)
- create mode 100644 meta-multimedia/recipes-multimedia/gerbera/gerbera/0001-Fix-build-with-fmt-9.0.patch
- delete mode 100644 meta-multimedia/recipes-multimedia/gerbera/gerbera/0001-Fix-for-fmt-8.0.patch
- rename meta-multimedia/recipes-multimedia/gerbera/{gerbera_1.9.2.bb => gerbera_1.11.0.bb} (82%)
+Hi,
 
-diff --git a/meta-multimedia/recipes-multimedia/gerbera/gerbera/0001-Fix-build-with-fmt-9.0.patch b/meta-multimedia/recipes-multimedia/gerbera/gerbera/0001-Fix-build-with-fmt-9.0.patch
-new file mode 100644
-index 000000000..9de0e4f28
---- /dev/null
-+++ b/meta-multimedia/recipes-multimedia/gerbera/gerbera/0001-Fix-build-with-fmt-9.0.patch
-@@ -0,0 +1,35 @@
-+From d7b8fafbc94405c20753fed569abd8878cccde89 Mon Sep 17 00:00:00 2001
-+From: Felix Yan <felixonmars@archlinux.org>
-+Date: Fri, 19 Aug 2022 15:22:10 +0300
-+Subject: [PATCH] Fix build with fmt 9.0
-+
-+Fixes #2681
-+---
-+ src/database/sql_format.h | 4 ++--
-+ 1 file changed, 2 insertions(+), 2 deletions(-)
-+
-+diff --git a/src/database/sql_format.h b/src/database/sql_format.h
-+index 32dc00ef..e4e1909a 100644
-+--- a/src/database/sql_format.h
-++++ b/src/database/sql_format.h
-+@@ -42,7 +42,7 @@ struct SQLIdentifier {
-+ template <>
-+ struct fmt::formatter<SQLIdentifier> : formatter<std::string_view> {
-+     template <typename FormatContext>
-+-    auto format(const SQLIdentifier& tn, FormatContext& ctx) -> decltype(ctx.out())
-++    auto format(const SQLIdentifier& tn, FormatContext& ctx) const -> decltype(ctx.out())
-+     {
-+         return format_to(ctx.out(), "{}{}{}", tn.quote_begin, tn.name, tn.quote_end);
-+     }
-+@@ -61,7 +61,7 @@ struct ColumnUpdate {
-+ template <>
-+ struct fmt::formatter<ColumnUpdate> : formatter<std::string_view> {
-+     template <typename FormatContext>
-+-    auto format(const ColumnUpdate& a, FormatContext& ctx) -> decltype(ctx.out())
-++    auto format(const ColumnUpdate& a, FormatContext& ctx) const -> decltype(ctx.out())
-+     {
-+         return format_to(ctx.out(), "{} = {}", a.column, a.value);
-+     }
-+-- 
-+2.38.0.rc1.362.ged0d419d3c-goog
-+
-diff --git a/meta-multimedia/recipes-multimedia/gerbera/gerbera/0001-Fix-for-fmt-8.0.patch b/meta-multimedia/recipes-multimedia/gerbera/gerbera/0001-Fix-for-fmt-8.0.patch
-deleted file mode 100644
-index efd8dc066..000000000
---- a/meta-multimedia/recipes-multimedia/gerbera/gerbera/0001-Fix-for-fmt-8.0.patch
-+++ /dev/null
-@@ -1,46 +0,0 @@
--From 22b3a91473d548456a0823f9f170db0d7db5a444 Mon Sep 17 00:00:00 2001
--From: kyak <bas@bmail.ru>
--Date: Wed, 12 Jan 2022 19:41:37 +0300
--Subject: [PATCH] Fix for fmt > 8.0
--
--Upstream-Status: Backport [https://github.com/gerbera/gerbera/commit/82d84ac5e62c23e717198fc7b2ef190ff95e70d1]
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
-- src/util/logger.h | 15 +++++++++++++++
-- 1 file changed, 15 insertions(+)
--
--diff --git a/src/util/logger.h b/src/util/logger.h
--index 8a8f0b1f..0a512bff 100644
----- a/src/util/logger.h
--+++ b/src/util/logger.h
--@@ -32,7 +32,9 @@
-- #ifndef __LOGGER_H__
-- #define __LOGGER_H__
-- 
--+#include <fmt/format.h>
-- #include <spdlog/spdlog.h>
--+#include <type_traits>
-- 
-- #define log_debug SPDLOG_DEBUG
-- #define log_info SPDLOG_INFO
--@@ -40,4 +42,17 @@
-- #define log_error SPDLOG_ERROR
-- #define log_js SPDLOG_INFO
-- 
--+#if FMT_VERSION >= 80100
--+template <typename T>
--+struct fmt::formatter<T, std::enable_if_t<std::is_enum_v<T>, char>>
--+    : formatter<std::underlying_type_t<T>> {
--+    template <typename FormatContext>
--+    auto format(const T& value, FormatContext& ctx) -> decltype(ctx.out())
--+    {
--+        return fmt::formatter<std::underlying_type_t<T>>::format(
--+            static_cast<std::underlying_type_t<T>>(value), ctx);
--+    }
--+};
--+#endif
--+
-- #endif // __LOGGER_H__
---- 
--2.35.0
--
-diff --git a/meta-multimedia/recipes-multimedia/gerbera/gerbera_1.9.2.bb b/meta-multimedia/recipes-multimedia/gerbera/gerbera_1.11.0.bb
-similarity index 82%
-rename from meta-multimedia/recipes-multimedia/gerbera/gerbera_1.9.2.bb
-rename to meta-multimedia/recipes-multimedia/gerbera/gerbera_1.11.0.bb
-index cbb127d3d..9f2f1b093 100644
---- a/meta-multimedia/recipes-multimedia/gerbera/gerbera_1.9.2.bb
-+++ b/meta-multimedia/recipes-multimedia/gerbera/gerbera_1.11.0.bb
-@@ -3,11 +3,11 @@ Description = "Gerbera - An UPnP media server"
- LICENSE = "GPL-2.0-only"
- LIC_FILES_CHKSUM = "file://LICENSE.md;md5=25cdec9afe3f1f26212ead6bd2f7fac8"
- 
--SRC_URI = "git://github.com/v00d00/gerbera.git;protocol=https;branch=master \
--           file://0001-Fix-for-fmt-8.0.patch \
-+SRC_URI = "git://github.com/gerbera/gerbera.git;protocol=https;branch=master \
-+           file://0001-Fix-build-with-fmt-9.0.patch \
-           "
- 
--SRCREV = "3b93d362ec33f738868a4e896a2c9ee8e9d7a92a"
-+SRCREV = "d73d8c1346213d784753c02ea771970500e0df2a"
- 
- S = "${WORKDIR}/git"
- 
--- 
-2.38.0.rc1.362.ged0d419d3c-goog
+On Thu, 29 Sept 2022 at 18:14, Daniel Gomez <daniel@qtec.com> wrote:
+>
+> Use git instead of release tarball to close the gap between the latest
+> 1.22.1 and master.
+>
+> Add 'bootstrap.sh' call to fix configuration issues:
+>
+> Error:
+> config.status: error: cannot find input file:
+> `v4l-utils-po/Makefile.in.in
+>
+> Adapt patch '0007-Do-not-use-getsubopt.patch': Upstream has replaced
+> the use of getsubopt with v4l_subopt which detects if getsubopt is
+> provided via glibc or not. Otherwise it uses a static
+> v4l_getsubopt copied from glibc.
+>
+> (From v4l-utils: 6e19bb895a16a9a247524ac526ab47f576cc36f6)
+>
+> Also rename patch number to '0004-Do-not-use-getsubopt.patch'.
+>
+> Add qv4l2 and qvidcap packages support but keep them disabled as
+> they require meta-qt5.
+>
+> Enable alsa support if alsa is part of the DISTRO_FEATURES.
+>
+> Signed-off-by: Daniel Gomez <daniel@qtec.com>
+> ---
+>  ....patch => 0004-Do-not-use-getsubopt.patch} | 19 +++++--
+>  ...4l-utils_1.22.1.bb => v4l-utils_1.23.0.bb} | 50 +++++++++++++++----
+>  2 files changed, 56 insertions(+), 13 deletions(-)
+>  rename meta-oe/recipes-multimedia/v4l2apps/v4l-utils/{0007-Do-not-use-getsubopt.patch => 0004-Do-not-use-getsubopt.patch} (73%)
+>  rename meta-oe/recipes-multimedia/v4l2apps/{v4l-utils_1.22.1.bb => v4l-utils_1.23.0.bb} (57%)
+>
+> diff --git a/meta-oe/recipes-multimedia/v4l2apps/v4l-utils/0007-Do-not-use-getsubopt.patch b/meta-oe/recipes-multimedia/v4l2apps/v4l-utils/0004-Do-not-use-getsubopt.patch
+> similarity index 73%
+> rename from meta-oe/recipes-multimedia/v4l2apps/v4l-utils/0007-Do-not-use-getsubopt.patch
+> rename to meta-oe/recipes-multimedia/v4l2apps/v4l-utils/0004-Do-not-use-getsubopt.patch
+> index d8d1b8d18..fb844acbe 100644
+> --- a/meta-oe/recipes-multimedia/v4l2apps/v4l-utils/0007-Do-not-use-getsubopt.patch
+> +++ b/meta-oe/recipes-multimedia/v4l2apps/v4l-utils/0004-Do-not-use-getsubopt.patch
+> @@ -1,4 +1,4 @@
+> -From e4582c11f76b9390a3e172dcf0741dca90a9dc8d Mon Sep 17 00:00:00 2001
+> +From 6e7e52de7afe29597016952a7317faf9c3ea3268 Mon Sep 17 00:00:00 2001
+>  From: Khem Raj <raj.khem@gmail.com>
+>  Date: Sat, 30 Nov 2019 18:50:34 -0800
+>  Subject: [PATCH] Do not use getsubopt
+> @@ -11,24 +11,32 @@ Simply avoid getsubopt, since we cannot rely on it.
+>  Imported from Alpine Linux
+>
+>  Upstream-Status: Pending
+> +
+>  Signed-off-by: Khem Raj <raj.khem@gmail.com>
+>
+> +Adapt patch to 1.23.0.
+> +
+> +(v4l-utils rev fd544473800d02e90bc289434cc44e5aa8fadd0f).
+> +
+> +%% original patch: 0007-Do-not-use-getsubopt.patch
+> +
+> +Signed-off-by: Daniel Gomez <daniel@qtec.com>
+>  ---
+>   utils/v4l2-ctl/v4l2-ctl-common.cpp | 18 ++++++++++--------
+>   1 file changed, 10 insertions(+), 8 deletions(-)
+>
+>  diff --git a/utils/v4l2-ctl/v4l2-ctl-common.cpp b/utils/v4l2-ctl/v4l2-ctl-common.cpp
+> -index c940171..49c0f39 100644
+> +index d77f7104..838c297d 100644
+>  --- a/utils/v4l2-ctl/v4l2-ctl-common.cpp
+>  +++ b/utils/v4l2-ctl/v4l2-ctl-common.cpp
+> -@@ -956,15 +956,17 @@ static bool parse_subset(char *optarg)
+> +@@ -994,15 +994,17 @@ static bool parse_subset(char *optarg)
+>
+>   static bool parse_next_subopt(char **subs, char **value)
+>   {
+>  -      static char *const subopts[] = {
+>  -          nullptr
+>  -      };
+> --      int opt = getsubopt(subs, subopts, value);
+> +-      int opt = v4l_getsubopt(subs, subopts, value);
+>  +      char *p = *subs;
+>  +      *value = *subs;
+>
+> @@ -47,3 +55,6 @@ index c940171..49c0f39 100644
+>   }
+>
+>   void common_cmd(const std::string &media_bus_info, int ch, char *optarg)
+> +--
+> +2.35.1
+> +
+> diff --git a/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.22.1.bb b/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.23.0.bb
+> similarity index 57%
+> rename from meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.22.1.bb
+> rename to meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.23.0.bb
+> index 741e1030c..fcc491b78 100644
+> --- a/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.22.1.bb
+> +++ b/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.23.0.bb
+> @@ -6,39 +6,71 @@ PROVIDES = "libv4l media-ctl"
+>
+>  DEPENDS = "jpeg \
+>             ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'virtual/libx11', '', d)} \
+> -           ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)}"
+> +           ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)} \
+> +           ${@bb.utils.contains('DISTRO_FEATURES', 'alsa', 'alsa-lib', '', d)}"
+> +
+>  DEPENDS:append:libc-musl = " argp-standalone"
+>  DEPENDS:append:class-target = " udev"
+> +DEPENDS:append:qv4l2 = " qtbase qtbase-native"
+> +DEPENDS:append:qvidcap = " qtbase qtbase-native"
+DEPENDS is wrong. Should use conditional and not the package name as
+the RDEPENDS.
+>  LDFLAGS:append = " -pthread"
+>
+>  inherit autotools gettext pkgconfig
+>
+>  PACKAGECONFIG ??= "media-ctl"
+>  PACKAGECONFIG[media-ctl] = "--enable-v4l-utils,--disable-v4l-utils,,"
+> +PACKAGECONFIG[qv4l2] = ",--disable-qv4l2"
+> +PACKAGECONFIG[qvidcap] = ",--disable-qvidcap"
+> +
+> +PACKAGECONFIG += " qv4l2"
+> +PACKAGECONFIG += " qvidcap"
+> +PACKAGECONFIG += " media-ctl"
+I forgot to remove this.
 
+> +
+> +SRC_URI = "\
+> +    git://git.linuxtv.org/v4l-utils.git;protocol=https;branch=master \
+> +    file://0001-Revert-media-ctl-Don-t-install-libmediactl-and-libv4.patch \
+> +    file://0002-original-patch-mediactl-pkgconfig.patch \
+> +    file://0003-original-patch-export-mediactl-headers.patch \
+> +    file://0004-Do-not-use-getsubopt.patch \
+> +"
+> +
+> +SRCREV = "fd544473800d02e90bc289434cc44e5aa8fadd0f"
+> +
+> +S = "${WORKDIR}/git"
+> +B = "${S}"
+>
+> -SRC_URI = "http://linuxtv.org/downloads/v4l-utils/v4l-utils-${PV}.tar.bz2 \
+> -           file://0001-Revert-media-ctl-Don-t-install-libmediactl-and-libv4.patch \
+> -           file://0002-original-patch-mediactl-pkgconfig.patch \
+> -           file://0003-original-patch-export-mediactl-headers.patch \
+> -           file://0007-Do-not-use-getsubopt.patch \
+> -           "
+> +do_configure:prepend() {
+> +    ${S}/bootstrap.sh
+> +}
+>
+>  SRC_URI[md5sum] = "8aa73287320a49e9170a8255d7b2c7e6"
+>  SRC_URI[sha256sum] = "65c6fbe830a44ca105c443b027182c1b2c9053a91d1e72ad849dfab388b94e31"
+>
+> -EXTRA_OECONF = "--disable-qv4l2 --enable-shared --with-udevdir=${base_libdir}/udev \
+> +EXTRA_OECONF = "--enable-shared --with-udevdir=${base_libdir}/udev \
+>                  --disable-v4l2-compliance-32 --disable-v4l2-ctl-32"
+>
+>  VIRTUAL-RUNTIME_ir-keytable-keymaps ?= "rc-keymaps"
+>
+> -PACKAGES =+ "media-ctl ir-keytable rc-keymaps libv4l libv4l-dev"
+> +PACKAGES =+ "media-ctl ir-keytable rc-keymaps libv4l libv4l-dev qv4l2 qvidcap"
+>
+>  RPROVIDES:${PN}-dbg += "libv4l-dbg"
+>
+>  FILES:media-ctl = "${bindir}/media-ctl ${libdir}/libmediactl.so.*"
+> +FILES:qv4l2 = "\
+> +    ${bindir}/qv4l2 \
+> +    ${datadir}/applications/qv4l2.desktop \
+> +    ${datadir}/icons/hicolor/*/apps/qv4l2.* \
+> +"
+> +FILES:qvidcap = "\
+> +    ${bindir}/qvidcap \
+> +    ${datadir}/applications/qvidcap.desktop \
+> +    ${datadir}/icons/hicolor/*/apps/qvidcap.* \
+> +"
+>
+>  FILES:ir-keytable = "${bindir}/ir-keytable ${base_libdir}/udev/rules.d/*-infrared.rules"
+>  RDEPENDS:ir-keytable += "${VIRTUAL-RUNTIME_ir-keytable-keymaps}"
+> +RDEPENDS:qv4l2 += "qtbase"
+> +RDEPENDS:qvidcap += "qtbase"
+>
+>  FILES:rc-keymaps = "${sysconfdir}/rc* ${base_libdir}/udev/rc*"
+>
+> --
+> 2.35.1
+>
+Do I still have time to send a v2 or should I send a fix instead?
 
