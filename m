@@ -2,248 +2,244 @@ Return-Path: <daniel@qtec.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 41A5DC433FE
-	for <webhook@archiver.kernel.org>; Fri, 30 Sep 2022 06:51:47 +0000 (UTC)
-Received: from mail-ed1-f51.google.com (mail-ed1-f51.google.com
- [209.85.208.51])
- by mx.groups.io with SMTP id smtpd.web12.2781.1664520697165887102
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4694DC433FE
+	for <webhook@archiver.kernel.org>; Fri, 30 Sep 2022 06:56:07 +0000 (UTC)
+Received: from mail-vk1-f175.google.com (mail-vk1-f175.google.com
+ [209.85.221.175])
+ by mx.groups.io with SMTP id smtpd.web09.2892.1664520962002276039
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 29 Sep 2022 23:51:38 -0700
+ Thu, 29 Sep 2022 23:56:03 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@qtec.com header.s=google header.b=NdLDFNMv;
- spf=pass (domain: qtec.com, ip: 209.85.208.51, mailfrom: daniel@qtec.com)
-Received: by mail-ed1-f51.google.com with SMTP id a41so4751858edf.4
+ dkim=pass header.i=@qtec.com header.s=google header.b=A24rZMMe;
+ spf=pass (domain: qtec.com, ip: 209.85.221.175, mailfrom: daniel@qtec.com)
+Received: by mail-vk1-f175.google.com with SMTP id k9so1807109vke.4
         for <openembedded-devel@lists.openembedded.org>;
- Thu, 29 Sep 2022 23:51:36 -0700 (PDT)
+ Thu, 29 Sep 2022 23:56:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=qtec.com; s=google;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date;
-        bh=IfsbLs23kRH2GoN4X32wbIoWS49pUT6X5fFk1Bh1Zno=;
-        b=NdLDFNMv0PReDfsE7vD2uKdiVMQV5qpPamYK7DGAmAR+jIBKkzJcPdRLMe3owmP1o5
-         m7CcVmo1uK3OJ/LZGRiO/f0II6iRnPBEj6F2i/zt1u+zGhmiMP6hs6XNM6aEbEJhracj
-         9vcBCH/qT74UavjX49IkIZ/BtqsQfHR8HUAEYldSp5tF7lXMik/D3QKMqNU7lPdmxRve
-         rH/BvrwdpCXKwT7jTk4HMsu3hDVBxZ4+5zXs2uMbZy1pAFF7hGz1IiZNGsTicSuzh9Km
-         hVaF5RjfVPf58GBgwOflnnxIYdVeq2liE9+QbQfxfRbFcr9cwmkjB1XBeOjJFTbOpfVu
-         /1nA==
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date;
+        bh=/J4vUvx4Ga4bCPIjuOZaVa8MALP+O/ceveTogWTIDBk=;
+        b=A24rZMMextK9gJGITwSQVw6phO4US6VIDiNjHQcXKKftxd/XNDdyEdaNiaxylORXyT
+         LMrHH8HlLmJKHUEFyn2JJS/BTXcgL9qWKlwjjDn9UPz2vbIDIG64o3wOIcA/OCSrcGXt
+         3DK8FuwMzc5ozzNgs/HUdgsBEwASq7SVXpPGSWntEh6yhe2UvFVRH9mrwoAhlTJEhtE3
+         eHDeXz4mHMuAOZHl1jJiG5m9UM1K/WnxIPlAGWB6dN+dswhDXfShYAECwJLHxLCZNCyf
+         XCrQIbx946ZsDqRYGWAWDUf1UiczoipLpWu+g9x6sJ0MzH61Lh7l/KVQd75X+CW95VOD
+         3VrQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date;
-        bh=IfsbLs23kRH2GoN4X32wbIoWS49pUT6X5fFk1Bh1Zno=;
-        b=2ZnKEx/VKGx+CnDkUKSI0M6pf5OdIAD6iIUbf9KSafmD1w/coIL2jhspt8wlUHOv1f
-         +aIepd7qkE8JslRRPNsIa3sLuXh7B2WwZlOWznMMIZH2MjGBKGOyKnTG+fX+MMhGB/BQ
-         cXcvprK/ZsYWWuIbsIO2H01BWMu2KJBtbmnSS/NZMv1G8mAY4cqMZYO4/spfTg671p5B
-         +HiCOc4AXfwORBPMKiJZH6v1/4Shinec9HBHgaY72XT8ARLs7unAmvtNjODDzBbH3DHh
-         NVCLLC6z85Cz8KdUFj9QPbKy5ctvsGkI44MGIhpbajxFIdgYHHo9+IcIwz2+5Gq0k4JF
-         MbpQ==
-X-Gm-Message-State: ACrzQf2NkRmvayU7BOauGkb92/73wsQKyNtZvhb/lSfea/JIkJiYIBXh
-	DQfpynwvmS++2twKTr7RZTbZFtgpUv6vz7RzZ+PrtjReMIO11Gro2THbtyHNa0Hv183xwCSgPEq
-	69F+9evet/gJwTWgcACZOvk4jM69Lp2wgZgCSXxm7RhbRdyAIZrpC57yC+Oz81GxJxviaLFhE3y
-	u8OYm4ZJ6Vz9p1og==
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc:subject:date;
+        bh=/J4vUvx4Ga4bCPIjuOZaVa8MALP+O/ceveTogWTIDBk=;
+        b=kN0y8E4PZX1+7Jw388esmFlcAhKzqxbNqtkvTw0Lpj2E+tZPF7QeBk0QSitQV0V793
+         ahcMASaUSaL646Wz4VYjJdwYf7668bbGWdNwnDSsprjUCRjnJfOEuLNnWET8zxk4VFhB
+         opjRkG7IsJPqmYomgCeywCMK8NbL3f1YpKCY0freGtogo7bAQjn97dVUi6yg8PTmwIdv
+         Y+/DgymyEixyxS7/DFhLPn5baUwpvhx+FLL96y0YcRCr/RhV4ihHAbU/OC6LoA0QeZ/s
+         Kfk0cbq5ICU0b5WxR/25Qa1Hc7kd1lHDQLVr5eW4A5VM0CNKDrLwyNTPHvZ12VF8jDPl
+         IbLg==
+X-Gm-Message-State: ACrzQf0YQo9KBzjWd6UdIJd3pvaDMDdy1kzBxfs6VcQ0Pi/kwZbKTMNf
+	aumVcv3T+SGgccfe+OR6pPBPPbrnkplhXPsIjONtRf+6IRKV3w==
 X-Google-Smtp-Source: 
- AMsMyM60lmapnWaMR+JQeKtFTC/hLYtEdVT2NSek3mWnt+qY/I57qjKzfIZlbsQMdAH4ZgexSAt2mA==
-X-Received: by 2002:a05:6402:50d4:b0:451:bf26:8c41 with SMTP id
- h20-20020a05640250d400b00451bf268c41mr6689616edb.219.1664520694886;
-        Thu, 29 Sep 2022 23:51:34 -0700 (PDT)
-Received: from datops.qtec.com (cpe.ge-3-0-8-100.ryvnqe10.dk.customer.tdc.net.
- [80.197.57.18])
-        by smtp.gmail.com with ESMTPSA id
- rk14-20020a170907214e00b0078238c1c182sm665669ejb.222.2022.09.29.23.51.33
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 29 Sep 2022 23:51:34 -0700 (PDT)
-From: Daniel Gomez <daniel@qtec.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: dagmcr@gmail.com,
-	Daniel Gomez <daniel@qtec.com>
-Subject: [meta-oe][PATCH] v4l-utils: Update 1.22.1 -> 1.23.0+fd544473
-Date: Fri, 30 Sep 2022 08:42:07 +0200
-Message-Id: <20220930064207.29453-1-daniel@qtec.com>
-X-Mailer: git-send-email 2.35.1
-In-Reply-To: 
- <CAMKF1soDNbQF-mJL0c43=s7tm-+za0HdmvUM_PNz8Z6b4zMgHg@mail.gmail.com>
+ AMsMyM4ChlqI72JX2ZQgdeym86bz78oV5vrgnGkbHyxeF3I+tzvjxJyniZHpgLuQ4l+C+LF12iaVGVb4Y7aUvCORWOg=
+X-Received: by 2002:a1f:5c16:0:b0:39e:c313:cb5b with SMTP id
+ q22-20020a1f5c16000000b0039ec313cb5bmr3554548vkb.25.1664520960268; Thu, 29
+ Sep 2022 23:56:00 -0700 (PDT)
+MIME-Version: 1.0
 References: 
  <CAMKF1soDNbQF-mJL0c43=s7tm-+za0HdmvUM_PNz8Z6b4zMgHg@mail.gmail.com>
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+ <20220930064207.29453-1-daniel@qtec.com>
+In-Reply-To: <20220930064207.29453-1-daniel@qtec.com>
+From: Daniel Gomez <daniel@qtec.com>
+Date: Fri, 30 Sep 2022 08:55:49 +0200
+Message-ID: 
+ <CAH1Ww+R_U71pt9RFrtExnePNW1_AK6-8zb9e_wUoJut7Yk89Lg@mail.gmail.com>
+Subject: Re: [meta-oe][PATCH] v4l-utils: Update 1.22.1 -> 1.23.0+fd544473
+To: openembedded-devel@lists.openembedded.org
+Cc: dagmcr@gmail.com
+Content-Type: text/plain; charset="UTF-8"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 30 Sep 2022 06:51:47 -0000
+ <openembedded-devel@lists.openembedded.org>; Fri, 30 Sep 2022 06:56:07 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/99019
+ https://lists.openembedded.org/g/openembedded-devel/message/99020
 
-Use git instead of release tarball to close the gap between the latest
-1.22.1 and master.
-
-Add 'bootstrap.sh' call to fix configuration issues:
-
-Error:
-config.status: error: cannot find input file:
-`v4l-utils-po/Makefile.in.in
-
-Adapt patch '0007-Do-not-use-getsubopt.patch': Upstream has replaced
-the use of getsubopt with v4l_subopt which detects if getsubopt is
-provided via glibc or not. Otherwise it uses a static
-v4l_getsubopt copied from glibc.
-
-(From v4l-utils: 6e19bb895a16a9a247524ac526ab47f576cc36f6)
-
-Also rename patch number to '0004-Do-not-use-getsubopt.patch'.
-
-Add qv4l2 and qvidcap packages support but keep them disabled as
-they require meta-qt5.
-
-Enable alsa support if alsa is part of the DISTRO_FEATURES.
-
-Signed-off-by: Daniel Gomez <daniel@qtec.com>
----
- ....patch => 0004-Do-not-use-getsubopt.patch} | 19 ++++++--
- ...4l-utils_1.22.1.bb => v4l-utils_1.23.0.bb} | 45 +++++++++++++++----
- 2 files changed, 51 insertions(+), 13 deletions(-)
- rename meta-oe/recipes-multimedia/v4l2apps/v4l-utils/{0007-Do-not-use-getsubopt.patch => 0004-Do-not-use-getsubopt.patch} (73%)
- rename meta-oe/recipes-multimedia/v4l2apps/{v4l-utils_1.22.1.bb => v4l-utils_1.23.0.bb} (59%)
-
-diff --git a/meta-oe/recipes-multimedia/v4l2apps/v4l-utils/0007-Do-not-use-getsubopt.patch b/meta-oe/recipes-multimedia/v4l2apps/v4l-utils/0004-Do-not-use-getsubopt.patch
-similarity index 73%
-rename from meta-oe/recipes-multimedia/v4l2apps/v4l-utils/0007-Do-not-use-getsubopt.patch
-rename to meta-oe/recipes-multimedia/v4l2apps/v4l-utils/0004-Do-not-use-getsubopt.patch
-index d8d1b8d18..fb844acbe 100644
---- a/meta-oe/recipes-multimedia/v4l2apps/v4l-utils/0007-Do-not-use-getsubopt.patch
-+++ b/meta-oe/recipes-multimedia/v4l2apps/v4l-utils/0004-Do-not-use-getsubopt.patch
-@@ -1,4 +1,4 @@
--From e4582c11f76b9390a3e172dcf0741dca90a9dc8d Mon Sep 17 00:00:00 2001
-+From 6e7e52de7afe29597016952a7317faf9c3ea3268 Mon Sep 17 00:00:00 2001
- From: Khem Raj <raj.khem@gmail.com>
- Date: Sat, 30 Nov 2019 18:50:34 -0800
- Subject: [PATCH] Do not use getsubopt
-@@ -11,24 +11,32 @@ Simply avoid getsubopt, since we cannot rely on it.
- Imported from Alpine Linux
- 
- Upstream-Status: Pending
-+
- Signed-off-by: Khem Raj <raj.khem@gmail.com>
- 
-+Adapt patch to 1.23.0.
-+
-+(v4l-utils rev fd544473800d02e90bc289434cc44e5aa8fadd0f).
-+
-+%% original patch: 0007-Do-not-use-getsubopt.patch
-+
-+Signed-off-by: Daniel Gomez <daniel@qtec.com>
- ---
-  utils/v4l2-ctl/v4l2-ctl-common.cpp | 18 ++++++++++--------
-  1 file changed, 10 insertions(+), 8 deletions(-)
- 
- diff --git a/utils/v4l2-ctl/v4l2-ctl-common.cpp b/utils/v4l2-ctl/v4l2-ctl-common.cpp
--index c940171..49c0f39 100644
-+index d77f7104..838c297d 100644
- --- a/utils/v4l2-ctl/v4l2-ctl-common.cpp
- +++ b/utils/v4l2-ctl/v4l2-ctl-common.cpp
--@@ -956,15 +956,17 @@ static bool parse_subset(char *optarg)
-+@@ -994,15 +994,17 @@ static bool parse_subset(char *optarg)
-  
-  static bool parse_next_subopt(char **subs, char **value)
-  {
- -	static char *const subopts[] = {
- -	    nullptr
- -	};
---	int opt = getsubopt(subs, subopts, value);
-+-	int opt = v4l_getsubopt(subs, subopts, value);
- +	char *p = *subs;
- +	*value = *subs;
-  
-@@ -47,3 +55,6 @@ index c940171..49c0f39 100644
-  }
-  
-  void common_cmd(const std::string &media_bus_info, int ch, char *optarg)
-+-- 
-+2.35.1
-+
-diff --git a/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.22.1.bb b/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.23.0.bb
-similarity index 59%
-rename from meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.22.1.bb
-rename to meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.23.0.bb
-index 741e1030c..4a88d69f6 100644
---- a/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.22.1.bb
-+++ b/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.23.0.bb
-@@ -6,7 +6,10 @@ PROVIDES = "libv4l media-ctl"
- 
- DEPENDS = "jpeg \
-            ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'virtual/libx11', '', d)} \
--           ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)}"
-+           ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)} \
-+           ${@bb.utils.contains('DISTRO_FEATURES', 'alsa', 'alsa-lib', '', d)} \
-+           ${@bb.utils.contains_any('PACKAGECONFIG', 'qv4l2 qvidcap', 'qtbase qtbase-native', '', d)}"
-+
- DEPENDS:append:libc-musl = " argp-standalone"
- DEPENDS:append:class-target = " udev"
- LDFLAGS:append = " -pthread"
-@@ -15,30 +18,54 @@ inherit autotools gettext pkgconfig
- 
- PACKAGECONFIG ??= "media-ctl"
- PACKAGECONFIG[media-ctl] = "--enable-v4l-utils,--disable-v4l-utils,,"
-+PACKAGECONFIG[qv4l2] = ",--disable-qv4l2"
-+PACKAGECONFIG[qvidcap] = ",--disable-qvidcap"
-+
-+SRC_URI = "\
-+    git://git.linuxtv.org/v4l-utils.git;protocol=https;branch=master \
-+    file://0001-Revert-media-ctl-Don-t-install-libmediactl-and-libv4.patch \
-+    file://0002-original-patch-mediactl-pkgconfig.patch \
-+    file://0003-original-patch-export-mediactl-headers.patch \
-+    file://0004-Do-not-use-getsubopt.patch \
-+"
-+
-+SRCREV = "fd544473800d02e90bc289434cc44e5aa8fadd0f"
-+
-+S = "${WORKDIR}/git"
-+B = "${S}"
- 
--SRC_URI = "http://linuxtv.org/downloads/v4l-utils/v4l-utils-${PV}.tar.bz2 \
--           file://0001-Revert-media-ctl-Don-t-install-libmediactl-and-libv4.patch \
--           file://0002-original-patch-mediactl-pkgconfig.patch \
--           file://0003-original-patch-export-mediactl-headers.patch \
--           file://0007-Do-not-use-getsubopt.patch \
--           "
-+do_configure:prepend() {
-+    ${S}/bootstrap.sh
-+}
- 
- SRC_URI[md5sum] = "8aa73287320a49e9170a8255d7b2c7e6"
- SRC_URI[sha256sum] = "65c6fbe830a44ca105c443b027182c1b2c9053a91d1e72ad849dfab388b94e31"
- 
--EXTRA_OECONF = "--disable-qv4l2 --enable-shared --with-udevdir=${base_libdir}/udev \
-+EXTRA_OECONF = "--enable-shared --with-udevdir=${base_libdir}/udev \
-                 --disable-v4l2-compliance-32 --disable-v4l2-ctl-32"
- 
- VIRTUAL-RUNTIME_ir-keytable-keymaps ?= "rc-keymaps"
- 
--PACKAGES =+ "media-ctl ir-keytable rc-keymaps libv4l libv4l-dev"
-+PACKAGES =+ "media-ctl ir-keytable rc-keymaps libv4l libv4l-dev qv4l2 qvidcap"
- 
- RPROVIDES:${PN}-dbg += "libv4l-dbg"
- 
- FILES:media-ctl = "${bindir}/media-ctl ${libdir}/libmediactl.so.*"
-+FILES:qv4l2 = "\
-+    ${bindir}/qv4l2 \
-+    ${datadir}/applications/qv4l2.desktop \
-+    ${datadir}/icons/hicolor/*/apps/qv4l2.* \
-+"
-+FILES:qvidcap = "\
-+    ${bindir}/qvidcap \
-+    ${datadir}/applications/qvidcap.desktop \
-+    ${datadir}/icons/hicolor/*/apps/qvidcap.* \
-+"
- 
- FILES:ir-keytable = "${bindir}/ir-keytable ${base_libdir}/udev/rules.d/*-infrared.rules"
- RDEPENDS:ir-keytable += "${VIRTUAL-RUNTIME_ir-keytable-keymaps}"
-+RDEPENDS:qv4l2 += "qtbase"
-+RDEPENDS:qvidcap += "qtbase"
- 
- FILES:rc-keymaps = "${sysconfdir}/rc* ${base_libdir}/udev/rc*"
- 
--- 
-2.35.1
-
+On Fri, 30 Sept 2022 at 08:51, Daniel Gomez <daniel@qtec.com> wrote:
+>
+> Use git instead of release tarball to close the gap between the latest
+> 1.22.1 and master.
+>
+> Add 'bootstrap.sh' call to fix configuration issues:
+>
+> Error:
+> config.status: error: cannot find input file:
+> `v4l-utils-po/Makefile.in.in
+>
+> Adapt patch '0007-Do-not-use-getsubopt.patch': Upstream has replaced
+> the use of getsubopt with v4l_subopt which detects if getsubopt is
+> provided via glibc or not. Otherwise it uses a static
+> v4l_getsubopt copied from glibc.
+>
+> (From v4l-utils: 6e19bb895a16a9a247524ac526ab47f576cc36f6)
+>
+> Also rename patch number to '0004-Do-not-use-getsubopt.patch'.
+>
+> Add qv4l2 and qvidcap packages support but keep them disabled as
+> they require meta-qt5.
+>
+> Enable alsa support if alsa is part of the DISTRO_FEATURES.
+>
+> Signed-off-by: Daniel Gomez <daniel@qtec.com>
+> ---
+v2
+- Remove PACKAGECONFIG new defaults (remove qv4l2 and qvidcap).
+- Fix DEPENDS for qv4l2 and qvidcap using bb.utilscontains_any.
+-
+>  ....patch => 0004-Do-not-use-getsubopt.patch} | 19 ++++++--
+>  ...4l-utils_1.22.1.bb => v4l-utils_1.23.0.bb} | 45 +++++++++++++++----
+>  2 files changed, 51 insertions(+), 13 deletions(-)
+>  rename meta-oe/recipes-multimedia/v4l2apps/v4l-utils/{0007-Do-not-use-getsubopt.patch => 0004-Do-not-use-getsubopt.patch} (73%)
+>  rename meta-oe/recipes-multimedia/v4l2apps/{v4l-utils_1.22.1.bb => v4l-utils_1.23.0.bb} (59%)
+>
+> diff --git a/meta-oe/recipes-multimedia/v4l2apps/v4l-utils/0007-Do-not-use-getsubopt.patch b/meta-oe/recipes-multimedia/v4l2apps/v4l-utils/0004-Do-not-use-getsubopt.patch
+> similarity index 73%
+> rename from meta-oe/recipes-multimedia/v4l2apps/v4l-utils/0007-Do-not-use-getsubopt.patch
+> rename to meta-oe/recipes-multimedia/v4l2apps/v4l-utils/0004-Do-not-use-getsubopt.patch
+> index d8d1b8d18..fb844acbe 100644
+> --- a/meta-oe/recipes-multimedia/v4l2apps/v4l-utils/0007-Do-not-use-getsubopt.patch
+> +++ b/meta-oe/recipes-multimedia/v4l2apps/v4l-utils/0004-Do-not-use-getsubopt.patch
+> @@ -1,4 +1,4 @@
+> -From e4582c11f76b9390a3e172dcf0741dca90a9dc8d Mon Sep 17 00:00:00 2001
+> +From 6e7e52de7afe29597016952a7317faf9c3ea3268 Mon Sep 17 00:00:00 2001
+>  From: Khem Raj <raj.khem@gmail.com>
+>  Date: Sat, 30 Nov 2019 18:50:34 -0800
+>  Subject: [PATCH] Do not use getsubopt
+> @@ -11,24 +11,32 @@ Simply avoid getsubopt, since we cannot rely on it.
+>  Imported from Alpine Linux
+>
+>  Upstream-Status: Pending
+> +
+>  Signed-off-by: Khem Raj <raj.khem@gmail.com>
+>
+> +Adapt patch to 1.23.0.
+> +
+> +(v4l-utils rev fd544473800d02e90bc289434cc44e5aa8fadd0f).
+> +
+> +%% original patch: 0007-Do-not-use-getsubopt.patch
+> +
+> +Signed-off-by: Daniel Gomez <daniel@qtec.com>
+>  ---
+>   utils/v4l2-ctl/v4l2-ctl-common.cpp | 18 ++++++++++--------
+>   1 file changed, 10 insertions(+), 8 deletions(-)
+>
+>  diff --git a/utils/v4l2-ctl/v4l2-ctl-common.cpp b/utils/v4l2-ctl/v4l2-ctl-common.cpp
+> -index c940171..49c0f39 100644
+> +index d77f7104..838c297d 100644
+>  --- a/utils/v4l2-ctl/v4l2-ctl-common.cpp
+>  +++ b/utils/v4l2-ctl/v4l2-ctl-common.cpp
+> -@@ -956,15 +956,17 @@ static bool parse_subset(char *optarg)
+> +@@ -994,15 +994,17 @@ static bool parse_subset(char *optarg)
+>
+>   static bool parse_next_subopt(char **subs, char **value)
+>   {
+>  -      static char *const subopts[] = {
+>  -          nullptr
+>  -      };
+> --      int opt = getsubopt(subs, subopts, value);
+> +-      int opt = v4l_getsubopt(subs, subopts, value);
+>  +      char *p = *subs;
+>  +      *value = *subs;
+>
+> @@ -47,3 +55,6 @@ index c940171..49c0f39 100644
+>   }
+>
+>   void common_cmd(const std::string &media_bus_info, int ch, char *optarg)
+> +--
+> +2.35.1
+> +
+> diff --git a/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.22.1.bb b/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.23.0.bb
+> similarity index 59%
+> rename from meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.22.1.bb
+> rename to meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.23.0.bb
+> index 741e1030c..4a88d69f6 100644
+> --- a/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.22.1.bb
+> +++ b/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.23.0.bb
+> @@ -6,7 +6,10 @@ PROVIDES = "libv4l media-ctl"
+>
+>  DEPENDS = "jpeg \
+>             ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'virtual/libx11', '', d)} \
+> -           ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)}"
+> +           ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)} \
+> +           ${@bb.utils.contains('DISTRO_FEATURES', 'alsa', 'alsa-lib', '', d)} \
+> +           ${@bb.utils.contains_any('PACKAGECONFIG', 'qv4l2 qvidcap', 'qtbase qtbase-native', '', d)}"
+> +
+>  DEPENDS:append:libc-musl = " argp-standalone"
+>  DEPENDS:append:class-target = " udev"
+>  LDFLAGS:append = " -pthread"
+> @@ -15,30 +18,54 @@ inherit autotools gettext pkgconfig
+>
+>  PACKAGECONFIG ??= "media-ctl"
+>  PACKAGECONFIG[media-ctl] = "--enable-v4l-utils,--disable-v4l-utils,,"
+> +PACKAGECONFIG[qv4l2] = ",--disable-qv4l2"
+> +PACKAGECONFIG[qvidcap] = ",--disable-qvidcap"
+> +
+> +SRC_URI = "\
+> +    git://git.linuxtv.org/v4l-utils.git;protocol=https;branch=master \
+> +    file://0001-Revert-media-ctl-Don-t-install-libmediactl-and-libv4.patch \
+> +    file://0002-original-patch-mediactl-pkgconfig.patch \
+> +    file://0003-original-patch-export-mediactl-headers.patch \
+> +    file://0004-Do-not-use-getsubopt.patch \
+> +"
+> +
+> +SRCREV = "fd544473800d02e90bc289434cc44e5aa8fadd0f"
+> +
+> +S = "${WORKDIR}/git"
+> +B = "${S}"
+>
+> -SRC_URI = "http://linuxtv.org/downloads/v4l-utils/v4l-utils-${PV}.tar.bz2 \
+> -           file://0001-Revert-media-ctl-Don-t-install-libmediactl-and-libv4.patch \
+> -           file://0002-original-patch-mediactl-pkgconfig.patch \
+> -           file://0003-original-patch-export-mediactl-headers.patch \
+> -           file://0007-Do-not-use-getsubopt.patch \
+> -           "
+> +do_configure:prepend() {
+> +    ${S}/bootstrap.sh
+> +}
+>
+>  SRC_URI[md5sum] = "8aa73287320a49e9170a8255d7b2c7e6"
+>  SRC_URI[sha256sum] = "65c6fbe830a44ca105c443b027182c1b2c9053a91d1e72ad849dfab388b94e31"
+>
+> -EXTRA_OECONF = "--disable-qv4l2 --enable-shared --with-udevdir=${base_libdir}/udev \
+> +EXTRA_OECONF = "--enable-shared --with-udevdir=${base_libdir}/udev \
+>                  --disable-v4l2-compliance-32 --disable-v4l2-ctl-32"
+>
+>  VIRTUAL-RUNTIME_ir-keytable-keymaps ?= "rc-keymaps"
+>
+> -PACKAGES =+ "media-ctl ir-keytable rc-keymaps libv4l libv4l-dev"
+> +PACKAGES =+ "media-ctl ir-keytable rc-keymaps libv4l libv4l-dev qv4l2 qvidcap"
+>
+>  RPROVIDES:${PN}-dbg += "libv4l-dbg"
+>
+>  FILES:media-ctl = "${bindir}/media-ctl ${libdir}/libmediactl.so.*"
+> +FILES:qv4l2 = "\
+> +    ${bindir}/qv4l2 \
+> +    ${datadir}/applications/qv4l2.desktop \
+> +    ${datadir}/icons/hicolor/*/apps/qv4l2.* \
+> +"
+> +FILES:qvidcap = "\
+> +    ${bindir}/qvidcap \
+> +    ${datadir}/applications/qvidcap.desktop \
+> +    ${datadir}/icons/hicolor/*/apps/qvidcap.* \
+> +"
+>
+>  FILES:ir-keytable = "${bindir}/ir-keytable ${base_libdir}/udev/rules.d/*-infrared.rules"
+>  RDEPENDS:ir-keytable += "${VIRTUAL-RUNTIME_ir-keytable-keymaps}"
+> +RDEPENDS:qv4l2 += "qtbase"
+> +RDEPENDS:qvidcap += "qtbase"
+>
+>  FILES:rc-keymaps = "${sysconfdir}/rc* ${base_libdir}/udev/rc*"
+>
+> --
+> 2.35.1
+>
 
