@@ -1,102 +1,247 @@
-Return-Path: <mathieu.dubois-briand@hyprua.org>
+Return-Path: <beniaminsandu@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3EA40C433FE
-	for <webhook@archiver.kernel.org>; Fri, 30 Sep 2022 10:34:38 +0000 (UTC)
-Received: from mail-wm1-f44.google.com (mail-wm1-f44.google.com
- [209.85.128.44])
- by mx.groups.io with SMTP id smtpd.web12.3993.1664534075306460017
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8C261C4332F
+	for <webhook@archiver.kernel.org>; Fri, 30 Sep 2022 14:30:19 +0000 (UTC)
+Received: from mail-lf1-f44.google.com (mail-lf1-f44.google.com
+ [209.85.167.44])
+ by mx.groups.io with SMTP id smtpd.web12.6252.1664548213877590470
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 30 Sep 2022 03:34:35 -0700
+ Fri, 30 Sep 2022 07:30:14 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@hyprua-org.20210112.gappssmtp.com header.s=20210112
- header.b=7C14QZdn;
- spf=none, err=SPF record not found (domain: hyprua.org, ip: 209.85.128.44,
- mailfrom: mathieu.dubois-briand@hyprua.org)
-Received: by mail-wm1-f44.google.com with SMTP id e18so2622873wmq.3
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=g02m8IQZ;
+ spf=pass (domain: gmail.com, ip: 209.85.167.44,
+ mailfrom: beniaminsandu@gmail.com)
+Received: by mail-lf1-f44.google.com with SMTP id j16so7172041lfg.1
         for <openembedded-devel@lists.openembedded.org>;
- Fri, 30 Sep 2022 03:34:35 -0700 (PDT)
+ Fri, 30 Sep 2022 07:30:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=hyprua-org.20210112.gappssmtp.com; s=20210112;
+        d=gmail.com; s=20210112;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date;
-        bh=SVmdCiuTJngr8OMvWgtoe5dtbLGr6ociTpBqrdg0/+Y=;
-        b=7C14QZdnWra3KEJxRYzmewjSZgHQa6aWWNCq7avKFN8cRGRxd42KCh/Tx5mtdXv6pU
-         lMyyqWxKqn1/1Q1/aIZ4ioEl7NCgjhARaxRWov4ddiVk9NwU0rQpeVOhP7djyBgxd440
-         UsYUkBo4pxRpSAWV1xX6KQwE4oADe1gymJgz1rmqyHqm5vdAcwRK17z8BDIruc9Z+Z/A
-         2vWtYASbQWygs+zNRgaqDBjtTDl6MoKEeBB/J4zw3mhMwv/OvtkU7YZd05s+umOwVxgR
-         dquNdY5ig3g4IcQr1H9dCd3y2WsnApy2sYdt42Vmt5FdFIWvYvi+h5Uvh8mh1UFKtmJ7
-         BPng==
+        bh=IrPtROcgPjEr8DANfTrtIcRNTD2wLRJKgXYgQLbmg8M=;
+        b=g02m8IQZdnHrDJXzu5AjQ2vaYNybJqPmksgfcti7sbLu7AhhLble8EcdJSQW0XZsMk
+         W3kVB08s72vY8HaTMvCQGmzrcD8d78A1DRxAocKpRMvrcO651iImlbPgL+X5xiLIz8cu
+         FntcBbePiziuHQuzZRE8riloljtTACqd9D5WmJ+rUYzW4Eex036GvxeVrLCp1SFa+d0m
+         Ii4nflcP8oavZQM2fq9oSf9k2oh7W1leZfVfPY5b2YM6HrZOEYQ1TJmMtZXOnbPfscsk
+         rle/K5bwFWv8SsRElyNDacZJ8S4OtX5W0W1tRH3gKyzF6782YYF+vra/dwQe1BD8Pvm0
+         4DKw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date;
-        bh=SVmdCiuTJngr8OMvWgtoe5dtbLGr6ociTpBqrdg0/+Y=;
-        b=qrMTzINhKAAJQOmu3FENygCV6sCjMQyw8rX3DAw6OAkbbOJ4/kiBqAo//2RmoJ4U+t
-         i3/+OZy8O9UGXwv0hXIGhgOO/QFyk9PiPOqjoUhZntbqkLsIh1K+YiMjJsVteZLiK5Iy
-         +GOhs9kQa3UxKEL/t84XIsO3mChrXrb3V2XEeGUt96euFqoOuahZIlu1ajyDK+b+Afeb
-         z7UGN7Po6/6OPXYStjvVAcHSU6rElU+2RyS0fpwTQ2t6NbucLzdcyICV+azCV8VQ9clS
-         /aT0QrzjxvFYRG11z0M5juP2+vAHaYe7adpDCrEAKegl3zNXpaCdEL4HwiD9whASnaeD
-         1w1g==
-X-Gm-Message-State: ACrzQf25PSuK9nkl9a4OkKf4T2fmgoepzp13frqL/kOU4hW07qqvedGb
-	9cWJQcIJIu8+SlpYuP3NyFwkeoR74ur7GAxQOs0=
+        bh=IrPtROcgPjEr8DANfTrtIcRNTD2wLRJKgXYgQLbmg8M=;
+        b=nfMhXvyZl+n66E9smXdncxlLOPv6rUpp2VaoV7NZt4V613eMLMXQ4w7shiY1Chrv8E
+         hrF1mhOMLYDukysW9ImkTvNJKcr/T5YQOKHMzBw6IoglnoSKKoI5QnS4+XHIizDZHyZ3
+         BwSuNRetkkz5YmGK3g0LoFJAz4a14VCH33h1vn+tAyYnaGw9tug39VilGTTQbCEtODWe
+         L0WMXOwmBUo8VgxRSbgn1tMPFnuEk9W3exevazelIenjh0BnF/+K7+WOjzpyzDBbJrtd
+         N/Xcj5uTnXSFoJdI73kqqsGWyTaopZP7CCk0hIJ0s3XEafQCuhGmsV3Ws8ESXmjOSYZ3
+         vntg==
+X-Gm-Message-State: ACrzQf3USKvzbrbK/O59uK5Y/WuGVfPPnY5lcHMRu0B/3/RMDAvon20S
+	ccFYUHCYDPOGSS7BJelGa7htueo5SiahXrwq
 X-Google-Smtp-Source: 
- AMsMyM6MrZLaMjKO1RiWg+wBYAFY6VkmQk3ySMcddFzjFi9mKeCuFHqcmvXO7wAWNyte5tMo2O+GjQ==
-X-Received: by 2002:a05:600c:444b:b0:3b4:fdbd:5965 with SMTP id
- v11-20020a05600c444b00b003b4fdbd5965mr5378063wmn.128.1664534073184;
-        Fri, 30 Sep 2022 03:34:33 -0700 (PDT)
-Received: from WIPC21110265.. ([2a04:cec0:1074:c7f5:a030:e974:fd06:787c])
+ AMsMyM7d/4/X9pNn1gqJ3yPZ2ZVoIKUeMAnU8U3TFzSQ3xE4MOWTDnofb0wUaKYTHVJzZ8cOIf6ZNQ==
+X-Received: by 2002:a05:6512:1309:b0:492:e273:d800 with SMTP id
+ x9-20020a056512130900b00492e273d800mr3298577lfu.93.1664548210758;
+        Fri, 30 Sep 2022 07:30:10 -0700 (PDT)
+Received: from localhost.localdomain (c80-216-73-242.bredband.tele2.se.
+ [80.216.73.242])
         by smtp.gmail.com with ESMTPSA id
- d10-20020a5d6dca000000b0022917d58603sm1646632wrz.32.2022.09.30.03.34.32
+ o12-20020a056512230c00b00494a27500c1sm307125lfu.163.2022.09.30.07.30.09
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 30 Sep 2022 03:34:32 -0700 (PDT)
-From: Mathieu Dubois-Briand <mathieu.dubois-briand@hyprua.org>
-X-Google-Original-From: Mathieu Dubois-Briand <mbriand@witekio.com>
+        Fri, 30 Sep 2022 07:30:10 -0700 (PDT)
+From: Beniamin Sandu <beniaminsandu@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Mathieu Dubois-Briand <mbriand@witekio.com>
-Subject: [meta-networking][dunfell][PATCH] networkmanager: Update to 1.22.16
-Date: Fri, 30 Sep 2022 12:33:44 +0200
-Message-Id: <20220930103343.4012796-1-mbriand@witekio.com>
-X-Mailer: git-send-email 2.34.1
+Cc: Beniamin Sandu <beniaminsandu@gmail.com>
+Subject: [meta-oe][PATCH] libnet: update to v1.2 release
+Date: Fri, 30 Sep 2022 16:29:57 +0200
+Message-Id: <20220930142957.1394549-1-beniaminsandu@gmail.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 30 Sep 2022 10:34:38 -0000
+ <openembedded-devel@lists.openembedded.org>; Fri, 30 Sep 2022 14:30:19 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/99024
+ https://lists.openembedded.org/g/openembedded-devel/message/99025
 
-Update network manager stable branch to last version, allowing to fix
-CVE-2020-10754.
+The previous recipe was building a release candidate from
+2014. Switch to the official git repo which is currently
+maintained and use the v1.2 release instead.
+
+The extra patch fixes build on musl.
+
+Signed-off-by: Beniamin Sandu <beniaminsandu@gmail.com>
 ---
- .../{networkmanager_1.22.10.bb => networkmanager_1.22.16.bb}   | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
- rename meta-networking/recipes-connectivity/networkmanager/{networkmanager_1.22.10.bb => networkmanager_1.22.16.bb} (98%)
+ ...sl-libc-remove-support-for-glibc-2.1.patch | 58 -------------------
+ ...64_t-instead-of-__int64_t-for-mingw-.patch | 31 ++++++++++
+ .../libnet/libnet_1.2-rc3.bb                  | 24 --------
+ .../recipes-connectivity/libnet/libnet_1.2.bb | 19 ++++++
+ 4 files changed, 50 insertions(+), 82 deletions(-)
+ delete mode 100644 meta-oe/recipes-connectivity/libnet/libnet/0001-Support-musl-libc-remove-support-for-glibc-2.1.patch
+ create mode 100644 meta-oe/recipes-connectivity/libnet/libnet/0001-Use-standard-int64_t-instead-of-__int64_t-for-mingw-.patch
+ delete mode 100644 meta-oe/recipes-connectivity/libnet/libnet_1.2-rc3.bb
+ create mode 100644 meta-oe/recipes-connectivity/libnet/libnet_1.2.bb
 
-diff --git a/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.22.10.bb b/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.22.16.bb
-similarity index 98%
-rename from meta-networking/recipes-connectivity/networkmanager/networkmanager_1.22.10.bb
-rename to meta-networking/recipes-connectivity/networkmanager/networkmanager_1.22.16.bb
-index 33a2b7c0ce93..a28372dd1f9e 100644
---- a/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.22.10.bb
-+++ b/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.22.16.bb
-@@ -33,11 +33,12 @@ SRC_URI_append_libc-musl = " \
-     file://musl/0003-Fix-build-with-musl-for-n-dhcp4.patch \
-     file://musl/0004-Fix-build-with-musl-systemd-specific.patch \
- "
--SRC_URI[sha256sum] = "2b29ccc1531ba7ebba95a97f40c22b963838e8b6833745efe8e6fb71fd8fca77"
-+SRC_URI[sha256sum] = "377aa053752eaa304b72c9906f9efcd9fbd5f7f6cb4cd4ad72425a68982cffc6"
- 
- S = "${WORKDIR}/NetworkManager-${PV}"
- 
- EXTRA_OECONF = " \
-+    --disable-firewalld-zone \
-     --disable-ifcfg-rh \
-     --disable-more-warnings \
-     --with-iptables=${sbindir}/iptables \
+diff --git a/meta-oe/recipes-connectivity/libnet/libnet/0001-Support-musl-libc-remove-support-for-glibc-2.1.patch b/meta-oe/recipes-connectivity/libnet/libnet/0001-Support-musl-libc-remove-support-for-glibc-2.1.patch
+deleted file mode 100644
+index 98008dba9..000000000
+--- a/meta-oe/recipes-connectivity/libnet/libnet/0001-Support-musl-libc-remove-support-for-glibc-2.1.patch
++++ /dev/null
+@@ -1,58 +0,0 @@
+-From ffd7fab744a9ad2893169a8fb6244074604d5d0d Mon Sep 17 00:00:00 2001
+-From: rofl0r <retnyg@gmx.net>
+-Date: Tue, 12 Aug 2014 21:51:39 +0200
+-Subject: [PATCH] Support musl libc, remove support for glibc < 2.1
+-
+-Upstream-Status: Backport
+-
+-The workarounds for glibc < 2.1 (was released february 1999) break the
+-build with musl libc.
+-
+-It is very unlikely that 2.0 or earlier is still in use, and if so,
+-1) that's a big security hole
+-2) code wouldnt compile anyway since noone tested build in the last decade
+-3) user of it wouldn't expect anyway to get bleeding edge sw built on it,
+-   so he would just use the latest version that works for him.
+-
+-Closes #52
+-
+-Signed-off-by: rofl0r <retnyg@gmx.net>
+-Signed-off-by: Ming Liu <peter.x.liu@external.atlascopco.com>
+----
+- libnet/src/libnet_link_linux.c | 11 -----------
+- 1 file changed, 11 deletions(-)
+-
+-diff --git a/src/libnet_link_linux.c b/src/libnet_link_linux.c
+-index 054458d..3c6df3c 100644
+---- a/src/libnet_link_linux.c
+-+++ b/src/libnet_link_linux.c
+-@@ -30,26 +30,15 @@
+- #include <sys/time.h>
+- 
+- #include <net/if.h>
+--#if (__GLIBC__)
+- #include <netinet/if_ether.h>
+- #include <net/if_arp.h>
+--#else
+--#include <linux/if_arp.h>
+--#include <linux/if_ether.h>
+--#endif
+- 
+- #if (HAVE_PACKET_SOCKET)
+- #ifndef SOL_PACKET
+- #define SOL_PACKET 263
+- #endif  /* SOL_PACKET */
+--#if __GLIBC__ >= 2 && __GLIBC_MINOR >= 1
+- #include <netpacket/packet.h>
+- #include <net/ethernet.h>     /* the L2 protocols */
+--#else
+--#include <asm/types.h>
+--#include <linux/if_packet.h>
+--#include <linux/if_ether.h>   /* The L2 protocols */
+--#endif
+- #endif  /* HAVE_PACKET_SOCKET */
+- 
+- #include "../include/libnet.h"
+--- 
+-1.9.1
+-
+diff --git a/meta-oe/recipes-connectivity/libnet/libnet/0001-Use-standard-int64_t-instead-of-__int64_t-for-mingw-.patch b/meta-oe/recipes-connectivity/libnet/libnet/0001-Use-standard-int64_t-instead-of-__int64_t-for-mingw-.patch
+new file mode 100644
+index 000000000..f1c607dd8
+--- /dev/null
++++ b/meta-oe/recipes-connectivity/libnet/libnet/0001-Use-standard-int64_t-instead-of-__int64_t-for-mingw-.patch
+@@ -0,0 +1,31 @@
++From a1659e261888bdbed51803132d52d9a6c6803c8a Mon Sep 17 00:00:00 2001
++From: Joachim Nilsson <troglobit@gmail.com>
++Date: Sat, 19 Oct 2019 12:26:26 +0200
++Subject: [PATCH] Use standard int64_t instead of __int64_t for mingw cross
++ build
++
++Signed-off-by: Joachim Nilsson <troglobit@gmail.com>
++---
++ include/libnet/libnet-structures.h | 6 +++---
++ 1 file changed, 3 insertions(+), 3 deletions(-)
++
++diff --git a/include/libnet/libnet-structures.h b/include/libnet/libnet-structures.h
++index 6084caa..34fffc6 100644
++--- a/include/libnet/libnet-structures.h
+++++ b/include/libnet/libnet-structures.h
++@@ -49,9 +49,9 @@ struct libnet_port_list_chain
++ /* libnet statistics structure */
++ struct libnet_stats
++ {
++-    __int64_t packets_sent;               /* packets sent */
++-    __int64_t packet_errors;              /* packets errors */
++-    __int64_t bytes_written;              /* bytes written */
+++    int64_t packets_sent;               /* packets sent */
+++    int64_t packet_errors;              /* packets errors */
+++    int64_t bytes_written;              /* bytes written */
++ };
++ 
++ 
++-- 
++2.25.1
++
+diff --git a/meta-oe/recipes-connectivity/libnet/libnet_1.2-rc3.bb b/meta-oe/recipes-connectivity/libnet/libnet_1.2-rc3.bb
+deleted file mode 100644
+index 785abf66d..000000000
+--- a/meta-oe/recipes-connectivity/libnet/libnet_1.2-rc3.bb
++++ /dev/null
+@@ -1,24 +0,0 @@
+-SUMMARY = "A packet dissection and creation library"
+-# libnet at packetfactory.net is dead
+-HOMEPAGE = "https://github.com/sam-github/libnet"
+-SECTION = "libs"
+-LICENSE = "BSD-2-Clause"
+-LIC_FILES_CHKSUM = "file://doc/COPYING;md5=3ec839e00408b484d33b472a86b7c266"
+-DEPENDS = "libpcap"
+-# There are major API changes beween libnet v1.0 and libnet v1.1
+-PROVIDES = "libnet-1.2rc2"
+-
+-SRC_URI = "${SOURCEFORGE_MIRROR}/libnet-dev/${BPN}-${PV}.tar.gz \
+-           file://0001-Support-musl-libc-remove-support-for-glibc-2.1.patch \
+-          "
+-
+-SRC_URI[md5sum] = "f051e6e5bdecddb90f77c701c2ca1804"
+-SRC_URI[sha256sum] = "72c380785ad44183005e654b47cc12485ee0228d7fa6b0a87109ff7614be4a63"
+-
+-UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/libnet-dev/files/"
+-UPSTREAM_CHECK_REGEX = "libnet-(?P<pver>\d+(\.\d+)+-*[a-z]*\d*)\.tar"
+-
+-S = "${WORKDIR}/${BPN}-${PV}"
+-
+-inherit autotools binconfig
+-
+diff --git a/meta-oe/recipes-connectivity/libnet/libnet_1.2.bb b/meta-oe/recipes-connectivity/libnet/libnet_1.2.bb
+new file mode 100644
+index 000000000..a996f9404
+--- /dev/null
++++ b/meta-oe/recipes-connectivity/libnet/libnet_1.2.bb
+@@ -0,0 +1,19 @@
++SUMMARY = "A packet dissection and creation library"
++HOMEPAGE = "https://github.com/libnet/libnet"
++
++SECTION = "libs"
++
++LICENSE = "BSD-2-Clause"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=07f291bf6e78efa05cec668cf6a09acc"
++
++DEPENDS = "libpcap"
++
++SRC_URI = "git://github.com/libnet/libnet.git;protocol=https;branch=master \
++	file://0001-Use-standard-int64_t-instead-of-__int64_t-for-mingw-.patch"
++
++SRC_URI[sha256sum] = "1e9e9054d688b059bcbaf878d8c4fbf69bfc0c9386cd4e7779fbb53339050d2e"
++SRCREV = "deeeeaeb84f8bc5d2299913d4ccf53d0d4c26966"
++
++S = "${WORKDIR}/git"
++
++inherit autotools binconfig
 -- 
-2.34.1
+2.25.1
 
 
