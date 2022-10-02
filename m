@@ -1,263 +1,284 @@
-Return-Path: <daniel@qtec.com>
+Return-Path: <liu.ming50@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 157F0C433FE
-	for <webhook@archiver.kernel.org>; Sat,  1 Oct 2022 21:46:49 +0000 (UTC)
-Received: from mail-lf1-f48.google.com (mail-lf1-f48.google.com
- [209.85.167.48])
- by mx.groups.io with SMTP id smtpd.web12.2082.1664660797711054056
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 152DAC433F5
+	for <webhook@archiver.kernel.org>; Sun,  2 Oct 2022 14:52:04 +0000 (UTC)
+Received: from mail-lj1-f171.google.com (mail-lj1-f171.google.com
+ [209.85.208.171])
+ by mx.groups.io with SMTP id smtpd.web12.8235.1664722323167124147
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 01 Oct 2022 14:46:39 -0700
+ Sun, 02 Oct 2022 07:52:03 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@qtec.com header.s=google header.b=X+UxAHJ6;
- spf=pass (domain: qtec.com, ip: 209.85.167.48, mailfrom: daniel@qtec.com)
-Received: by mail-lf1-f48.google.com with SMTP id 25so1450311lft.9
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=SMpRVkvL;
+ spf=pass (domain: gmail.com, ip: 209.85.208.171,
+ mailfrom: liu.ming50@gmail.com)
+Received: by mail-lj1-f171.google.com with SMTP id t16so9417723ljh.3
         for <openembedded-devel@lists.openembedded.org>;
- Sat, 01 Oct 2022 14:46:37 -0700 (PDT)
+ Sun, 02 Oct 2022 07:52:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=qtec.com; s=google;
+        d=gmail.com; s=20210112;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date;
-        bh=Ht38dHHNAeCBE71j/2bztKfUIvSVdQA/SJ+/BvEorZ4=;
-        b=X+UxAHJ6vEmQpVlq99M0c2zSLpgT2b7a3woe5uRLojoigjU8OTg6/ITsW2cQgGnA/f
-         wHG+fonePC3+snEmiGELKrtV0oV0gON9k48UAkxVjoognoGZCW5Gf63Su5CWVR2nSRVz
-         uYdXQAikoIMxhUYQ2xmLlxyi5Guqsa3GW1WgT4RNHuBEe9H9ku1FxoPrG/9Oae9OWJjR
-         SQiVxf4LqXFZC4XlB2g//EU5jf7YW7cjV0nUfmRvcYjvWwLxF7hacPYfkheTJJwF9w9o
-         XtqQtQExj+il+6B6kqOf0OwX0nJTEuw6EfS23EEwH9YVyNrfdtBgvUsI3Er9SQSkGfnF
-         O3Fg==
+        bh=1TpOdCctbPgv8EtQlwK7IGWg8Y7Xm/v8zERNSbLnW+M=;
+        b=SMpRVkvLRHroczmjTTubGlKSFLbADKxVp38Ecp1KD6wbcIV4KjUwDrr3R9KkAxouS8
+         ckGwsorkUbaAbz5R7MHIDCKjb9jwctkRXVgc3GIaFemVpJ9eSYYKqMZyvdTOarSntiXi
+         x/HM+jsIfY1BoUi/DB7pDLYEL4hvwD8sPNWOyuRIdrz9CDZay6pp1LaTJJImN/twna/A
+         oOVigQzsOOBNC/IqKpS3HyVF1hFLlUSTF1HpxW0nmW1DSO5imRvKWGSdkeo0Cz8kp/zx
+         8F5ZWS5jHrBJn2r089Ost4nGn5U46hXk3oIEsPVWOrr2bvIZqVy3hjc3JwHGXktZQ0AM
+         jlwQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date;
-        bh=Ht38dHHNAeCBE71j/2bztKfUIvSVdQA/SJ+/BvEorZ4=;
-        b=ypvwMd0rx63xKOQiEcUGWWIpOzgEAyIkiC002z1sqpSOcdm6aNkrGsFtfFHux9VEkX
-         GpkqCUUZ+jkNEj7oNke8D9UUiKhtKYV8NnmAsucU7FBEfmCmyEcBkrSyHT9RaN8fn5OT
-         tMhJCK0WvF6pribEFiR31PqVjxuC1b8tewpxNVpHnBNi20u+zPcA6gcf5iNO/H+3F9vF
-         NHJh0hyVyZn2JP1pgJd0WTLWn+LHXy0GizwYDlJh4ZYC6WiGoVAS11tUPYkSHoN7RdSv
-         d75deRxJ40QyEYppxfeNCwWwQfND8OdLpkyaMEg/v0HpQWkmm/kWUYU9yleNaJRIkW6l
-         6dUg==
-X-Gm-Message-State: ACrzQf0W/xH5n0UysX52q6KkVKDQ1BEISptp7M3SnueXt6e6fRO16aoo
-	+OXNjelEWXOSueM6K/dQVj2zB+ytoH+6kArcIpOE8ZuNvfDHSVpY9hayB6HVuviDpIEXOuZO7dO
-	lj5rNr4RtRYluAG/xi6dfL6fXf+bxA1ekYju/WR7ukcE/cObob44c2JrYMLSWOs/9Eo7uepP4v6
-	hRD/6sxggxBaY3fQ==
+        bh=1TpOdCctbPgv8EtQlwK7IGWg8Y7Xm/v8zERNSbLnW+M=;
+        b=y8tjkMqLzK0HE2C/rxG38xtKTxRBzpZyQSHI6YwO3z+JfDutNGpgTy2rmXTJ5NnhiO
+         jt8fXg2S8s3JnMhQsBXSOKxvXC5yUoRCM7eT6rpKf1sfZrQv6AQJHHrh/2M6GYWkxnoj
+         tVWU/oLsKuXLIEb/VcbXBsIor+/GFEZGROHtHuHsiGxG7+0GlmCHjhV3oc4miiPDRp73
+         PkWqzkgrmg1ugsHQrbIpZvZx1f62z2J1QYAw1TDxpIM/MJ64ajGZ7C2bgq8cTV7JnuCb
+         CcLBtoPyILHb+XHvy1JRa4xz+v12s2dRdHhe/QPoRhFWCWoehp0SDKGtz4GT90nE6CUW
+         C/ZA==
+X-Gm-Message-State: ACrzQf3SPWfOVeeiI32/wJnn1p/m9M4iVyYWrVjFx1KKK48yRLoLK3q2
+	A+IWsneC/0xQcTgrjQmjhcgQhtVk1t4=
 X-Google-Smtp-Source: 
- AMsMyM47ykW6dBGDRYmbVBE6Sdvbqg7aP4DolKg6eBaecnXglEelBA9GZwVDflYo9viH/C2EBRf71g==
-X-Received: by 2002:a05:6512:318c:b0:4a2:2b6d:166 with SMTP id
- i12-20020a056512318c00b004a22b6d0166mr813888lfe.141.1664660795084;
-        Sat, 01 Oct 2022 14:46:35 -0700 (PDT)
-Received: from localhost.localdomain (188-177-43-54-cable.dk.customer.tdc.net.
- [188.177.43.54])
+ AMsMyM4TICUkblDbUzQD/iLUR/+xTeF1wyaZVSRrX26A8oKcgpKCGIvG8Lnt5nm+BXSNP7eTgYV71Q==
+X-Received: by 2002:a2e:95d5:0:b0:26d:c9f4:730e with SMTP id
+ y21-20020a2e95d5000000b0026dc9f4730emr2312795ljh.522.1664722320779;
+        Sun, 02 Oct 2022 07:52:00 -0700 (PDT)
+Received: from peterliu-Precision-7530.emea.group.atlascopco.com
+ (customer-212-100-112-191.stosn.net. [212.100.112.191])
         by smtp.gmail.com with ESMTPSA id
- s9-20020a05651c048900b00261beb471d1sm513619ljc.121.2022.10.01.14.46.33
+ k21-20020a05651210d500b00492f1b2ac0bsm1104979lfg.101.2022.10.02.07.52.00
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 01 Oct 2022 14:46:34 -0700 (PDT)
-From: Daniel Gomez <daniel@qtec.com>
+        Sun, 02 Oct 2022 07:52:00 -0700 (PDT)
+From: liu.ming50@gmail.com
 To: openembedded-devel@lists.openembedded.org
-Cc: dagmcr@gmail.com,
-	Daniel Gomez <daniel@qtec.com>
-Subject: [meta-oe][PATCH v5] v4l-utils: Update 1.22.1 -> 1.23.0+fd544473
-Date: Sat,  1 Oct 2022 23:46:20 +0200
-Message-Id: <20221001214620.138675-1-daniel@qtec.com>
-X-Mailer: git-send-email 2.35.1
+Cc: sergio.prado@toradex.com,
+	Ming Liu <liu.ming50@gmail.com>
+Subject: [meta-oe] [PATCH] plymouth: uprev to 22.02.122
+Date: Sun,  2 Oct 2022 16:51:57 +0200
+Message-Id: <20221002145157.2309000-1-liu.ming50@gmail.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 01 Oct 2022 21:46:49 -0000
+ <openembedded-devel@lists.openembedded.org>; Sun, 02 Oct 2022 14:52:04 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/99035
+ https://lists.openembedded.org/g/openembedded-devel/message/99036
 
-Use git instead of release tarball to close the gap between the latest
-1.22.1 and master.
+From: Ming Liu <liu.ming50@gmail.com>
 
-Add 'bootstrap.sh' call to fix configuration issues:
+Also introduce more PACKAGECONFIGs to make build more predicable.
 
-Error:
-config.status: error: cannot find input file:
-`v4l-utils-po/Makefile.in.in
-
-Adapt patch '0007-Do-not-use-getsubopt.patch': Upstream has replaced
-the use of getsubopt with v4l_subopt which detects if getsubopt is
-provided via glibc or not. Otherwise it uses a static
-v4l_getsubopt copied from glibc.
-
-(From v4l-utils: 6e19bb895a16a9a247524ac526ab47f576cc36f6)
-
-Also rename patch number to '0004-Do-not-use-getsubopt.patch'.
-
-Add qv4l2 and qvidcap packages support but keep them disabled as
-they require meta-qt5.
-
-Enable alsa support if alsa is part of the DISTRO_FEATURES.
-
-Signed-off-by: Daniel Gomez <daniel@qtec.com>
+Signed-off-by: Ming Liu <liu.ming50@gmail.com>
 ---
-v5
-* Do not remove trailing whitespaces when 'git-send-email 
---annotate'. This was corrupting the output patch and making it
-fail to apply.
+ ...tall-ignoring-configured-runstatedir.patch | 30 +++++++++++
+ ...-standard-runstatedir-vs-custom-flag.patch | 50 +++++++++++++++++
+ ...lymouth_0.9.5.bb => plymouth_22.02.122.bb} | 54 +++++++++----------
+ 3 files changed, 107 insertions(+), 27 deletions(-)
+ create mode 100644 meta-oe/recipes-core/plymouth/files/0001-Fix-daemon-install-ignoring-configured-runstatedir.patch
+ create mode 100644 meta-oe/recipes-core/plymouth/files/0001-Use-standard-runstatedir-vs-custom-flag.patch
+ rename meta-oe/recipes-core/plymouth/{plymouth_0.9.5.bb => plymouth_22.02.122.bb} (61%)
 
-v4
-* Rebase on top of master-next.
-
-v3
-* Fix RDEPENDS:qv4l2 and RDEPENDS:qvidcap using conditional
-'bb.utils.contains' to prevent missing runtime dependency when
-the meta-qt5 layer is not present.
-
-v2
-* Remove PACKAGECONFIG new defaults (remove qv4l2 and qvidcap).
-* Fix DEPENDS for qv4l2 and qvidcap using bb.utilscontains_any.
-
- ....patch => 0004-Do-not-use-getsubopt.patch} | 19 ++++++--
- ...4l-utils_1.22.1.bb => v4l-utils_1.23.0.bb} | 47 +++++++++++++++----
- 2 files changed, 53 insertions(+), 13 deletions(-)
- rename meta-oe/recipes-multimedia/v4l2apps/v4l-utils/{0007-Do-not-use-getsubopt.patch => 0004-Do-not-use-getsubopt.patch} (73%)
- rename meta-oe/recipes-multimedia/v4l2apps/{v4l-utils_1.22.1.bb => v4l-utils_1.23.0.bb} (56%)
-
-diff --git a/meta-oe/recipes-multimedia/v4l2apps/v4l-utils/0007-Do-not-use-getsubopt.patch b/meta-oe/recipes-multimedia/v4l2apps/v4l-utils/0004-Do-not-use-getsubopt.patch
-similarity index 73%
-rename from meta-oe/recipes-multimedia/v4l2apps/v4l-utils/0007-Do-not-use-getsubopt.patch
-rename to meta-oe/recipes-multimedia/v4l2apps/v4l-utils/0004-Do-not-use-getsubopt.patch
-index d8d1b8d18..fb844acbe 100644
---- a/meta-oe/recipes-multimedia/v4l2apps/v4l-utils/0007-Do-not-use-getsubopt.patch
-+++ b/meta-oe/recipes-multimedia/v4l2apps/v4l-utils/0004-Do-not-use-getsubopt.patch
-@@ -1,4 +1,4 @@
--From e4582c11f76b9390a3e172dcf0741dca90a9dc8d Mon Sep 17 00:00:00 2001
-+From 6e7e52de7afe29597016952a7317faf9c3ea3268 Mon Sep 17 00:00:00 2001
- From: Khem Raj <raj.khem@gmail.com>
- Date: Sat, 30 Nov 2019 18:50:34 -0800
- Subject: [PATCH] Do not use getsubopt
-@@ -11,24 +11,32 @@ Simply avoid getsubopt, since we cannot rely on it.
- Imported from Alpine Linux
- 
- Upstream-Status: Pending
+diff --git a/meta-oe/recipes-core/plymouth/files/0001-Fix-daemon-install-ignoring-configured-runstatedir.patch b/meta-oe/recipes-core/plymouth/files/0001-Fix-daemon-install-ignoring-configured-runstatedir.patch
+new file mode 100644
+index 000000000..e04917e30
+--- /dev/null
++++ b/meta-oe/recipes-core/plymouth/files/0001-Fix-daemon-install-ignoring-configured-runstatedir.patch
+@@ -0,0 +1,30 @@
++From 4c90a66fb7fd9dbb861c5a888fc828f3795fe540 Mon Sep 17 00:00:00 2001
++From: Ben Brown <ben@demerara.io>
++Date: Tue, 19 Jul 2022 16:12:12 +0100
++Subject: [PATCH] Fix daemon install ignoring configured runstatedir
 +
- Signed-off-by: Khem Raj <raj.khem@gmail.com>
- 
-+Adapt patch to 1.23.0.
++Upstream-Status: Backport
 +
-+(v4l-utils rev fd544473800d02e90bc289434cc44e5aa8fadd0f).
++Signed-off-by: Ben Brown <ben@demerara.io>
++Signed-off-by: Ming Liu <liu.ming50@gmail.com>
 +
-+%% original patch: 0007-Do-not-use-getsubopt.patch
++---
++ src/Makefile.am | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
 +
-+Signed-off-by: Daniel Gomez <daniel@qtec.com>
- ---
-  utils/v4l2-ctl/v4l2-ctl-common.cpp | 18 ++++++++++--------
-  1 file changed, 10 insertions(+), 8 deletions(-)
- 
- diff --git a/utils/v4l2-ctl/v4l2-ctl-common.cpp b/utils/v4l2-ctl/v4l2-ctl-common.cpp
--index c940171..49c0f39 100644
-+index d77f7104..838c297d 100644
- --- a/utils/v4l2-ctl/v4l2-ctl-common.cpp
- +++ b/utils/v4l2-ctl/v4l2-ctl-common.cpp
--@@ -956,15 +956,17 @@ static bool parse_subset(char *optarg)
-+@@ -994,15 +994,17 @@ static bool parse_subset(char *optarg)
-  
-  static bool parse_next_subopt(char **subs, char **value)
-  {
- -	static char *const subopts[] = {
- -	    nullptr
- -	};
---	int opt = getsubopt(subs, subopts, value);
-+-	int opt = v4l_getsubopt(subs, subopts, value);
- +	char *p = *subs;
- +	*value = *subs;
-  
-@@ -47,3 +55,6 @@ index c940171..49c0f39 100644
-  }
-  
-  void common_cmd(const std::string &media_bus_info, int ch, char *optarg)
++diff --git a/src/Makefile.am b/src/Makefile.am
++index ad3655d..abd7a4c 100644
++--- a/src/Makefile.am
+++++ b/src/Makefile.am
++@@ -37,7 +37,7 @@ escrow_PROGRAMS = plymouthd-fd-escrow
++ 
++ plymouthd_fd_escrow_SOURCES = plymouthd-fd-escrow.c
++ 
++-plymouthdrundir = $(localstatedir)/run/plymouth
+++plymouthdrundir = $(plymouthruntimedir)
++ plymouthdspooldir = $(localstatedir)/spool/plymouth
++ plymouthdtimedir = $(localstatedir)/lib/plymouth
++ 
 +-- 
-+2.35.1
++2.25.1
 +
-diff --git a/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.22.1.bb b/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.23.0.bb
-similarity index 56%
-rename from meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.22.1.bb
-rename to meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.23.0.bb
-index 741e1030c..2f5ae3586 100644
---- a/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.22.1.bb
-+++ b/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.23.0.bb
-@@ -6,7 +6,10 @@ PROVIDES = "libv4l media-ctl"
+diff --git a/meta-oe/recipes-core/plymouth/files/0001-Use-standard-runstatedir-vs-custom-flag.patch b/meta-oe/recipes-core/plymouth/files/0001-Use-standard-runstatedir-vs-custom-flag.patch
+new file mode 100644
+index 000000000..e351098f3
+--- /dev/null
++++ b/meta-oe/recipes-core/plymouth/files/0001-Use-standard-runstatedir-vs-custom-flag.patch
+@@ -0,0 +1,50 @@
++From 97012d2c38b84fffb32867fb5eeac64a93455626 Mon Sep 17 00:00:00 2001
++From: Ben Brown <ben@demerara.io>
++Date: Tue, 19 Jul 2022 16:10:24 +0100
++Subject: [PATCH] Use standard runstatedir vs custom flag
++
++Upstream-Status: Backport
++
++---
++ configure.ac | 11 ++---------
++ 1 file changed, 2 insertions(+), 9 deletions(-)
++
++Signed-off-by: Ben Brown <ben@demerara.io>
++Signed-off-by: Ming Liu <liu.ming50@gmail.com>
++
++diff --git a/configure.ac b/configure.ac
++index 608ad02..34a2f2c 100644
++--- a/configure.ac
+++++ b/configure.ac
++@@ -140,9 +140,7 @@ if test x$enable_systemd_integration = xyes; then
++   AC_SUBST(SYSTEMD_UNIT_DIR)
++ fi
++ 
++-AC_ARG_WITH([runtimedir],
++-            AC_HELP_STRING([--with-runtimedir=DIR], [runtime data dir [LOCALSTATEDIR/run]]),
++-            [plymouthruntimedir=${withval}/plymouth], [plymouthruntimedir=""])
+++AC_ARG_WITH([runtimedir], [], [AC_MSG_ERROR([--with-runtimedir is obsolete, use --runstatedir instead])], [])
++ 
++ AC_ARG_WITH(system-root-install, AS_HELP_STRING([--with-system-root-install],[Install client in /bin and daemon in /sbin]),with_system_root_install=${withval},with_system_root_install=no)
++ AM_CONDITIONAL(WITH_SYSTEM_ROOT_INSTALL,  [test "$with_system_root_install" = yes])
++@@ -150,16 +148,11 @@ AM_CONDITIONAL(WITH_SYSTEM_ROOT_INSTALL,  [test "$with_system_root_install" = ye
++ if test x$with_system_root_install = xyes; then
++   plymouthclientdir=/bin
++   plymouthdaemondir=/sbin
++-  if (test -z "${plymouthruntimedir}"); then
++-    plymouthruntimedir=/run/plymouth
++-  fi
++ else
++   plymouthclientdir=$bindir
++   plymouthdaemondir=$sbindir
++-  if (test -z "${plymouthruntimedir}"); then
++-    plymouthruntimedir=$localstatedir/run/plymouth
++-  fi
++ fi
+++plymouthruntimedir=$runstatedir/plymouth
++ AC_SUBST(plymouthclientdir)
++ AC_SUBST(plymouthdaemondir)
++ AC_SUBST(plymouthruntimedir)
++-- 
++2.25.1
++
+diff --git a/meta-oe/recipes-core/plymouth/plymouth_0.9.5.bb b/meta-oe/recipes-core/plymouth/plymouth_22.02.122.bb
+similarity index 61%
+rename from meta-oe/recipes-core/plymouth/plymouth_0.9.5.bb
+rename to meta-oe/recipes-core/plymouth/plymouth_22.02.122.bb
+index 143ffa10d..469914cd4 100644
+--- a/meta-oe/recipes-core/plymouth/plymouth_0.9.5.bb
++++ b/meta-oe/recipes-core/plymouth/plymouth_22.02.122.bb
+@@ -1,62 +1,58 @@
+ SUMMARY = "Plymouth is a project from Fedora providing a flicker-free graphical boot process."
+-
+ DESCRIPTION = "Plymouth is an application that runs very early in the boot process \
+-    (even before the root filesystem is mounted!) that provides a \
+-    graphical boot animation while the boot process happens in the background. \
+-"
+-
++(even before the root filesystem is mounted!) that provides a \
++graphical boot animation while the boot process happens in the background."
+ HOMEPAGE = "http://www.freedesktop.org/wiki/Software/Plymouth"
+ SECTION = "base"
  
- DEPENDS = "jpeg \
-            ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'virtual/libx11', '', d)} \
--           ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)}"
-+           ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)} \
-+           ${@bb.utils.contains('DISTRO_FEATURES', 'alsa', 'alsa-lib', '', d)} \
-+           ${@bb.utils.contains_any('PACKAGECONFIG', 'qv4l2 qvidcap', 'qtbase qtbase-native', '', d)}"
-+
- DEPENDS:append:libc-musl = " argp-standalone"
- DEPENDS:append:class-target = " udev"
- LDFLAGS:append = " -pthread"
-@@ -15,30 +18,56 @@ inherit autotools gettext pkgconfig
+ LICENSE = "GPL-2.0-or-later"
+-
+ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
  
- PACKAGECONFIG ??= "media-ctl"
- PACKAGECONFIG[media-ctl] = "--enable-v4l-utils,--disable-v4l-utils,,"
-+PACKAGECONFIG[qv4l2] = ",--disable-qv4l2"
-+PACKAGECONFIG[qvidcap] = ",--disable-qvidcap"
-+
-+SRC_URI = "\
-+    git://git.linuxtv.org/v4l-utils.git;protocol=https;branch=master \
-+    file://0001-Revert-media-ctl-Don-t-install-libmediactl-and-libv4.patch \
-+    file://0002-original-patch-mediactl-pkgconfig.patch \
-+    file://0003-original-patch-export-mediactl-headers.patch \
-+    file://0004-Do-not-use-getsubopt.patch \
+-DEPENDS = "libcap libpng cairo dbus udev"
+-DEPENDS:append:libc-musl = " musl-rpmatch"
+-PROVIDES = "virtual/psplash"
+-RPROVIDES:${PN} = "virtual-psplash virtual-psplash-support"
+-
+ SRC_URI = " \
+     http://www.freedesktop.org/software/plymouth/releases/${BPN}-${PV}.tar.xz \
+     file://0001-Make-full-path-to-systemd-tty-ask-password-agent-con.patch \
+-    file://0001-systemd-switch-to-KillMode-mixed.patch \
+     file://0001-plymouth-start-service-in-add-related-kernel-paramet.patch \
+     file://0001-plymouth-Add-the-retain-splash-option.patch \
+-        "
++    file://0001-Use-standard-runstatedir-vs-custom-flag.patch \
++    file://0001-Fix-daemon-install-ignoring-configured-runstatedir.patch \
 +"
+ 
+-SRC_URI[md5sum] = "8a25d23f3ae732af300a56fa33cacff2"
++SRC_URI[sha256sum] = "100551442221033ce868c447ad6c74d831d209c18ae232b98ae0207e34eadaeb"
+ 
+-EXTRA_OECONF += " --enable-shared --disable-static --disable-gtk --disable-documentation \
+-    --with-logo=${LOGO} \
+-    ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '--enable-systemd-integration --with-systemd-tty-ask-password-agent=${base_bindir}/systemd-tty-ask-password-agent', '--disable-systemd-integration', d)} \
+-    ${@bb.utils.contains('DISTRO_FEATURES', 'usrmerge','--without-system-root-install','--with-system-root-install',d)} \
+-"
++LOGO ??= "${datadir}/plymouth/bizcom.png"
++RUNSTATEDIR ??= "${localstatedir}/run"
 +
-+SRCREV = "fd544473800d02e90bc289434cc44e5aa8fadd0f"
++EXTRA_OECONF = "--runstatedir=${RUNSTATEDIR}"
+ 
+-PACKAGECONFIG ??= "pango initrd"
++PACKAGECONFIG ??= "initrd logo pango udev ${@bb.utils.filter('DISTRO_FEATURES', 'systemd usrmerge', d)}"
+ PACKAGECONFIG:append:x86 = " drm"
+ PACKAGECONFIG:append:x86-64 = " drm"
+ 
+ PACKAGECONFIG[drm] = "--enable-drm,--disable-drm,libdrm"
+-PACKAGECONFIG[pango] = "--enable-pango,--disable-pango,pango"
++PACKAGECONFIG[documentation] = "--enable-documentation,--disable-documentation"
++PACKAGECONFIG[initrd] = ",,"
+ PACKAGECONFIG[gtk] = "--enable-gtk,--disable-gtk,gtk+3"
+-PACKAGECONFIG[initrd] = ",,,"
+-
+-LOGO ??= "${datadir}/plymouth/bizcom.png"
++PACKAGECONFIG[logo] = "--with-logo=${LOGO},--without-logo"
++PACKAGECONFIG[pango] = "--enable-pango,--disable-pango,pango"
++PACKAGECONFIG[systemd] = "--enable-systemd-integration --with-systemd-tty-ask-password-agent=${base_bindir}/systemd-tty-ask-password-agent,--disable-systemd-integration,systemd"
++PACKAGECONFIG[udev] = "--with-udev,--without-udev,udev"
++PACKAGECONFIG[upstart-monitoring] = "--enable-upstart-monitoring,--disable-upstart-monitoring,ncurses dbus"
++PACKAGECONFIG[usrmerge] = "--without-system-root-install,--with-system-root-install"
+ 
+ inherit autotools pkgconfig systemd gettext
+ 
+-LDFLAGS:append:libc-musl = " -lrpmatch"
+-
+ do_install:append() {
+     # Remove /var/run from package as plymouth will populate it on startup
+-    rm -fr "${D}${localstatedir}/run"
++    rm -fr ${D}${RUNSTATEDIR}
+ 
+     if ! ${@bb.utils.contains('PACKAGECONFIG', 'initrd', 'true', 'false', d)}; then
+         rm -rf "${D}${libexecdir}"
+     fi
+ }
+ 
++PROVIDES = "virtual/psplash"
++RPROVIDES:${PN} = "virtual-psplash virtual-psplash-support"
 +
-+S = "${WORKDIR}/git"
-+B = "${S}"
+ PACKAGES =. "${@bb.utils.contains('PACKAGECONFIG', 'initrd', '${PN}-initrd ', '', d)}"
+ PACKAGES =+ "${PN}-set-default-theme"
  
--SRC_URI = "http://linuxtv.org/downloads/v4l-utils/v4l-utils-${PV}.tar.bz2 \
--           file://0001-Revert-media-ctl-Don-t-install-libmediactl-and-libv4.patch \
--           file://0002-original-patch-mediactl-pkgconfig.patch \
--           file://0003-original-patch-export-mediactl-headers.patch \
--           file://0007-Do-not-use-getsubopt.patch \
--           "
-+do_configure:prepend() {
-+    ${S}/bootstrap.sh
-+}
+@@ -66,6 +62,10 @@ FILES:${PN}-set-default-theme = "${sbindir}/plymouth-set-default-theme"
+ FILES:${PN} += "${systemd_unitdir}/system/*"
+ FILES:${PN}-dbg += "${libdir}/plymouth/renderers/.debug"
  
- SRC_URI[md5sum] = "8aa73287320a49e9170a8255d7b2c7e6"
- SRC_URI[sha256sum] = "65c6fbe830a44ca105c443b027182c1b2c9053a91d1e72ad849dfab388b94e31"
++DEPENDS = "libcap libpng"
++DEPENDS:append:libc-musl = " musl-rpmatch"
++
++LDFLAGS:append:libc-musl = " -lrpmatch"
  
--EXTRA_OECONF = "--disable-qv4l2 --enable-shared --with-udevdir=${base_libdir}/udev \
-+EXTRA_OECONF = "--enable-shared --with-udevdir=${base_libdir}/udev \
-                 --disable-v4l2-compliance-32 --disable-v4l2-ctl-32"
- 
- VIRTUAL-RUNTIME_ir-keytable-keymaps ?= "rc-keymaps"
- 
--PACKAGES =+ "media-ctl ir-keytable rc-keymaps libv4l libv4l-dev"
-+PACKAGES =+ "media-ctl ir-keytable rc-keymaps libv4l libv4l-dev qv4l2 qvidcap"
- 
- RPROVIDES:${PN}-dbg += "libv4l-dbg"
- 
- FILES:media-ctl = "${bindir}/media-ctl ${libdir}/libmediactl.so.*"
-+FILES:qv4l2 = "\
-+    ${bindir}/qv4l2 \
-+    ${datadir}/applications/qv4l2.desktop \
-+    ${datadir}/icons/hicolor/*/apps/qv4l2.* \
-+"
-+FILES:qvidcap = "\
-+    ${bindir}/qvidcap \
-+    ${datadir}/applications/qvidcap.desktop \
-+    ${datadir}/icons/hicolor/*/apps/qvidcap.* \
-+"
- 
- FILES:ir-keytable = "${bindir}/ir-keytable ${base_libdir}/udev/rules.d/*-infrared.rules"
- RDEPENDS:ir-keytable += "${VIRTUAL-RUNTIME_ir-keytable-keymaps}"
-+RDEPENDS:qv4l2 += "\
-+    ${@bb.utils.contains('PACKAGECONFIG', 'qv4l2', 'qtbase', '', d)}"
-+RDEPENDS:qvidcap += "\
-+    ${@bb.utils.contains('PACKAGECONFIG', 'qvidcap', 'qtbase', '', d)}"
- 
- FILES:rc-keymaps = "${sysconfdir}/rc* ${base_libdir}/udev/rc*"
- 
+ RDEPENDS:${PN}-initrd = "bash dracut"
+ RDEPENDS:${PN}-set-default-theme = "bash"
 -- 
-2.35.1
+2.25.1
 
 
