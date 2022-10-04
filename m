@@ -1,204 +1,177 @@
-Return-Path: <alex.kiernan@gmail.com>
+Return-Path: <ross.burton@arm.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 44FB2C433F5
-	for <webhook@archiver.kernel.org>; Tue,  4 Oct 2022 07:56:46 +0000 (UTC)
-Received: from mail-il1-f172.google.com (mail-il1-f172.google.com
- [209.85.166.172])
- by mx.groups.io with SMTP id smtpd.web12.8160.1664870203094521311
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A0111C4332F
+	for <webhook@archiver.kernel.org>; Tue,  4 Oct 2022 09:33:36 +0000 (UTC)
+Received: from EUR04-VI1-obe.outbound.protection.outlook.com
+ (EUR04-VI1-obe.outbound.protection.outlook.com [40.107.8.41])
+ by mx.groups.io with SMTP id smtpd.web09.8686.1664876007762154726
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 04 Oct 2022 00:56:43 -0700
+ Tue, 04 Oct 2022 02:33:28 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=O6pnK1Xt;
- spf=pass (domain: gmail.com, ip: 209.85.166.172,
- mailfrom: alex.kiernan@gmail.com)
-Received: by mail-il1-f172.google.com with SMTP id u2so1858528ilv.6
-        for <openembedded-devel@lists.openembedded.org>;
- Tue, 04 Oct 2022 00:56:43 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date;
-        bh=vc+BRWU6SOl5xsOqVSktrt/aP7sa9xP1B02QJJBxMYI=;
-        b=O6pnK1XtzHgz6hc/oGXN7pE9xicPjSMIurwV70X320VQ0AgnSF1wXjrS1GJwrPT+od
-         HBwhTXI8Wy0i0YoyQ4Mi8GFfMuacSB/aH0Ij2UCWJNRvnAmhDx4QrVFi4pHgZaudNWX8
-         0DjeP5FUTCLVddfb50Z1yHcrtp1t9lHO3XtsK2uuMlsT86pHyA2L9JlY9T8Nii4p/a2a
-         bNsyK8VDUKouONROsW+aSwfEo/jYfcB14LDK1gO/HueTrLkqe8/cj43jhCXg1dxXdKiw
-         cYapqdajaumfaJPt19xSlPxLCa9BsoDIiUUyLxWaJMvHiClQ9k19KaXBL32Rb5H+NCMb
-         Sa3Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date;
-        bh=vc+BRWU6SOl5xsOqVSktrt/aP7sa9xP1B02QJJBxMYI=;
-        b=F6goir/j/JpRyekQAdsDyVMW9G20wvv5H+h+7K6NaVudljO+xWvDESsUtm6gJ+x+/B
-         UUEMYOVRkm0USIxONAEmUQ/vB3aIl4kl/bmPt+90Kzb0qwnHj1PGpLWS/7tAJP1XVJU6
-         SRu4bH2mKGX4zWpl6+ocZ8Y3P5OIvQ3p/8qGduEcCtfv2BOIGtb20UdTUUaQyEMGJOMC
-         oNt01nVGllGQgHd53MuzpWo1kqLy2NC9Q3JSGDw7cC8uxnPWueaJ6gVAYlpQRhpyP75R
-         5mdmobEu5GQMl9O6lA6SMCvc4Q/L3hcnPpgPGk3XrmoyTktZRouK1f/F+K2tByqu5Gc7
-         W4Tw==
-X-Gm-Message-State: ACrzQf1knoGTSzvJoVu5ArVoqqrLkQDVcNAjQXY/R/36YL6f8L7ycKos
-	fXactEXm1sGdvr7B+VcSwXQIGowAq9Psx1RyuVI=
-X-Google-Smtp-Source: 
- AMsMyM79RAyLLbAPMKOy6Iysu3oorTfSqHzs7gobk4sN5HLbm2AT7BnmHWlA7WAE3rMFK4DDFikUZz6iVLydmnTaeyc=
-X-Received: by 2002:a05:6e02:168c:b0:2f9:bae6:a4bf with SMTP id
- f12-20020a056e02168c00b002f9bae6a4bfmr4358928ila.241.1664870202330; Tue, 04
- Oct 2022 00:56:42 -0700 (PDT)
+ dkim=pass header.i=@armh.onmicrosoft.com
+ header.s=selector2-armh-onmicrosoft-com header.b=dsBnOUsK;
+ spf=pass (domain: arm.com, ip: 40.107.8.41, mailfrom: ross.burton@arm.com)
+ARC-Seal: i=2; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=pass;
+ b=BgEFr1dRAK7Xh0m8r41b1UO28hdsUrVBLCi4w0U+NQfXaZH8gcsJqbRATbDW3M2OpK9HlEJz2IZW4D8bCQCHXgW13805b1gRfpyAQM8cJUUmLkkVF1JjMHvdWf85bknX9jy8I+ILpGWk5WI3FeACPtjU9nU/dmo3r0STgB0cQCVDn3eqze0+8SiqIvN1hZx7AhqbcRB613og0inuNwolYO2OT4hFR7gP5ueRASj0Wq50LBUoTJtTDupqjP6aCNKlxeu+xUdVuxwR986lGJLIC8dsgzUaIgmT6jS05Hi8uGJHDGADl3jbww2ZAwISrbFvH3aPujt16BNt91JM+FH0Vw==
+ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=xSXBtELclmqk1v6IBYaPo/2dUdtuuBIGzYUb6W49oAY=;
+ b=GNuQjkwDfZOaoOZpyJg8S9ZbArYFKKhMuTwP93WrcLGKHFi5ElHuXxtq7t5QqYpP2ybkKZGPBioblniJ1x2PpmBau1DEwCHl6Uz93FADOnjgSXhMEqa6Q483k7eRNsL3JJqInZplSlUQMOo9j+K/azjFlqLKwT8mU/M158NXPol0zt/NBhwXsWuWeOYxA5G/kd5g3qiUbaOOvEEfVW+8uiHz554Fap57Dz4cnI/qtXGWaAoU6lAqtYo1TqyGc0PQhhGRDbk981ahU2RxGcPibZRV06zRAN4lWkOAh4W/d9tb6QQzH/yZOKd0nmYrPopcnBSdbzXi2Xqji6t8p+r+Dg==
+ARC-Authentication-Results: i=2; mx.microsoft.com 1; spf=pass (sender ip is
+ 63.35.35.123) smtp.rcpttodomain=lists.openembedded.org smtp.mailfrom=arm.com;
+ dmarc=pass (p=none sp=none pct=100) action=none header.from=arm.com;
+ dkim=pass (signature was verified) header.d=armh.onmicrosoft.com; arc=pass (0
+ oda=1 ltdi=1 spf=[1,1,smtp.mailfrom=arm.com] dkim=[1,1,header.d=arm.com]
+ dmarc=[1,1,header.from=arm.com])
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
+ s=selector2-armh-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=xSXBtELclmqk1v6IBYaPo/2dUdtuuBIGzYUb6W49oAY=;
+ b=dsBnOUsKBIWQthHNhfBqK3zBxQKTMOEC8d7i0zX73oPXiY6JJuuLtlJ1QmKhqj3i0Z6hqAxMxM1jS+oroZ89TrrQJZGf8IXhaxsEjNJ1Y9CWjQOWD123S0JgwnKvQWzo05GiSHzqPI3/mgkdB4uBzi/wm1AXwwwfuxgfRq07Q48=
+Received: from DUZPR01CA0060.eurprd01.prod.exchangelabs.com
+ (2603:10a6:10:469::18) by AS2PR08MB8576.eurprd08.prod.outlook.com
+ (2603:10a6:20b:55f::9) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5676.28; Tue, 4 Oct
+ 2022 09:33:24 +0000
+Received: from DBAEUR03FT052.eop-EUR03.prod.protection.outlook.com
+ (2603:10a6:10:469:cafe::27) by DUZPR01CA0060.outlook.office365.com
+ (2603:10a6:10:469::18) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5676.20 via Frontend
+ Transport; Tue, 4 Oct 2022 09:33:24 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 63.35.35.123)
+ smtp.mailfrom=arm.com; dkim=pass (signature was verified)
+ header.d=armh.onmicrosoft.com;dmarc=pass action=none header.from=arm.com;
+Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
+ 63.35.35.123 as permitted sender) receiver=protection.outlook.com;
+ client-ip=63.35.35.123; helo=64aa7808-outbound-1.mta.getcheckrecipient.com;
+ pr=C
+Received: from 64aa7808-outbound-1.mta.getcheckrecipient.com (63.35.35.123) by
+ DBAEUR03FT052.mail.protection.outlook.com (100.127.142.144) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.5676.17 via Frontend Transport; Tue, 4 Oct 2022 09:33:24 +0000
+Received: ("Tessian outbound d354c7aef2bc:v128");
+ Tue, 04 Oct 2022 09:33:24 +0000
+X-CheckRecipientChecked: true
+X-CR-MTA-CID: a216099f2e1ebf1c
+X-CR-MTA-TID: 64aa7808
+Received: from 53f75aa99242.1
+	by 64aa7808-outbound-1.mta.getcheckrecipient.com id
+ 10809C75-531D-460D-A860-D2B5E879A492.1;
+	Tue, 04 Oct 2022 09:33:16 +0000
+Received: from EUR05-AM6-obe.outbound.protection.outlook.com
+    by 64aa7808-outbound-1.mta.getcheckrecipient.com with ESMTPS id
+ 53f75aa99242.1
+    (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384);
+    Tue, 04 Oct 2022 09:33:16 +0000
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=C+A1BbBMnGORlnk/r1nuQxCwsBSmgKealm+FyeVmmXBbbO3ooAAC/YQzs6ygvH3py+TTYX/91LAsfC7JsXnF2EYSxzueFz5iYbFiMSFpsO/ziPgWhgJzOSr4TjC5NstBIImjO/1EW1kh05Wr5JpU0eK58GztfqkB/ZUM/2msMOqvB9quLXqZe161QeyhfToJl09xXvyo1nK456GsXSa/CKGqwU5T5e+PtsFMoL7pesr9y9jozNhjC/ZD56n/o24ctBDqmAF4mtP4KnldyxWXaUywgjhLqXAp+TszaBM4/c/Ti8YdFTLlCNgY2JvOWbk0/HWOiksv4VuXc0riMXzWLw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=xSXBtELclmqk1v6IBYaPo/2dUdtuuBIGzYUb6W49oAY=;
+ b=W9tneLNUN9lgUMNwDBj0Ju5CXPorYftX7hs+y9YeVb9oE+ss9pNizaO/R9VQXReBZ2giADlBUhYR0LVo/pgNO3Z5JPBWDEqcr24hQtnZNes18yMwbbRp73RZe9+IoS6SkNaHBBoRvLCe5cur0VmeSwxx4LIca429rgXVx4FjHDoiqSHS1FEhRPoJ9ubh6dYXJT0Mu2WgA5NH/X+bbTgU80LKoA1RXaRu7Aok8B36ORl5MTV8a+A00zIRb+UVbzHSMfn79sr/gWUk3tRJjyPizVD2r3h0ZIsl+fIddE24f6Ay53iML7vur74MASE0W3nyhwlPzgjLL3wZSPFjm9JZDQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=arm.com; dmarc=pass action=none header.from=arm.com; dkim=pass
+ header.d=arm.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
+ s=selector2-armh-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=xSXBtELclmqk1v6IBYaPo/2dUdtuuBIGzYUb6W49oAY=;
+ b=dsBnOUsKBIWQthHNhfBqK3zBxQKTMOEC8d7i0zX73oPXiY6JJuuLtlJ1QmKhqj3i0Z6hqAxMxM1jS+oroZ89TrrQJZGf8IXhaxsEjNJ1Y9CWjQOWD123S0JgwnKvQWzo05GiSHzqPI3/mgkdB4uBzi/wm1AXwwwfuxgfRq07Q48=
+Received: from PA4PR08MB7411.eurprd08.prod.outlook.com (2603:10a6:102:2a3::12)
+ by PR3PR08MB5754.eurprd08.prod.outlook.com (2603:10a6:102:91::15) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5676.28; Tue, 4 Oct
+ 2022 09:33:15 +0000
+Received: from PA4PR08MB7411.eurprd08.prod.outlook.com
+ ([fe80::7d2b:2570:9a99:a3d2]) by PA4PR08MB7411.eurprd08.prod.outlook.com
+ ([fe80::7d2b:2570:9a99:a3d2%5]) with mapi id 15.20.5676.028; Tue, 4 Oct 2022
+ 09:33:15 +0000
+From: Ross Burton <Ross.Burton@arm.com>
+To: "mathieu.dubois-briand@hyprua.org" <mathieu.dubois-briand@hyprua.org>
+CC: openembeded-devel <openembedded-devel@lists.openembedded.org>, Khem Raj
+	<raj.khem@gmail.com>, "joe@deserted.net" <joe@deserted.net>, Mathieu
+ Dubois-Briand <mbriand@witekio.com>
+Subject: Re: [oe] [meta-networking][PATCH 3/3] mbedtls: Whitelist
+ CVE-2021-43666, CVE-2021-45451
+Thread-Topic: [oe] [meta-networking][PATCH 3/3] mbedtls: Whitelist
+ CVE-2021-43666, CVE-2021-45451
+Thread-Index: AQHY17obgNFDo7BkU0Si/733xGxAgq39+TIA
+Date: Tue, 4 Oct 2022 09:33:15 +0000
+Message-ID: <34F93D06-612B-475D-A3EE-62FD50EF5445@arm.com>
+References: <20221004062437.2541052-1-mbriand@witekio.com>
+ <20221004062437.2541052-3-mbriand@witekio.com>
+In-Reply-To: <20221004062437.2541052-3-mbriand@witekio.com>
+Accept-Language: en-GB, en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-mailer: Apple Mail (2.3696.120.41.1.1)
+Authentication-Results-Original: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=arm.com;
+x-ms-traffictypediagnostic: 
+	PA4PR08MB7411:EE_|PR3PR08MB5754:EE_|DBAEUR03FT052:EE_|AS2PR08MB8576:EE_
+X-MS-Office365-Filtering-Correlation-Id: 324dc884-61d6-4c80-e420-08daa5eb7be3
+x-checkrecipientrouted: true
+nodisclaimer: true
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam-Untrusted: BCL:0;
+X-Microsoft-Antispam-Message-Info-Original: 
+ ZSPhnOTN+CQILqYGaVHkpShcNBaKvnPhM7RFLpGBV+LP//2RB1F3QicpaeUO86pK+pXs1It9uLBHNhBMA5RgJzD/8yQAIGZkJ8RoenuI2Dt/U16AbOuXDaSqg6gGDnGcL/Yi49hNL6tNQU86tdcZFUXuuNLPKJpZpicRcQyu9sXaV2B1a8qXkjGgIbjr5ve/axmIOIrpH44bWr5R8qcJquJwayWjXYgeUs9WAfP5WVXRpY7pZ/4/gw5la6KquAQHxSTMFrFdSsKJ5kJ5NE2kt8gO8+zj43EDWwn2TS7w44nIeBspMR0OdGp40TMACnMQpmAi64dntU7WdG8RugDZvKenrkChU2XsHSdgEJUsGRvixO9o6iqP6oWsev3JwGDJesKVwfmERyCoz/GjBj9fdOZOsyZmOnihEmhcO0Ngn7T273zyGT8GXB1Vej7PSgUxlFjwXV4Lm5NwCvbU3LVkTcPvERs539zC8YBd6/GDk++JJ1qh00gwJ72WjXgCRx/LGhyz71wipuD8Dzywo3B3uJcYVXaH6VhH3t0Vm3XKEo0aZqAbcbjaC9BIKMiKOQ5pP5aIJ7+06BhF+jWm3x4WqPfblWEVFDSfBRIHfgwNK388TCMpyCBhjmLeixOcLJk2yCJkTwAp0XKH2bgBtNuj1ofYL/S4I6ehW/Cu7HAt7cYbnAbcAC+XJ7kHd0uRSoMhHrQmHfG9jTK0lJJSSsCrDwYAKbGgU+Lh7ljyzWewJK9UCorQrjO3Nym19UzYob/JJSjDHmyHCcylx4TziiAhiCz5X1ZvhmHXnmBqziZqM7OvzL7sonvN6HPWVk2KmrKRbbdKRMr6W+NorwKJv2HPwDqZfMSXDsAIm5cgUsVyG3XXlPop4zU+al/D4E+MHzsK
+X-Forefront-Antispam-Report-Untrusted: 
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PA4PR08MB7411.eurprd08.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230022)(4636009)(39860400002)(396003)(376002)(366004)(346002)(136003)(451199015)(2906002)(91956017)(5660300002)(316002)(33656002)(66446008)(64756008)(4326008)(8676002)(66556008)(76116006)(66476007)(66946007)(71200400001)(54906003)(966005)(6486002)(6916009)(86362001)(36756003)(8936002)(4744005)(41300700001)(478600001)(53546011)(26005)(83380400001)(38070700005)(6506007)(2616005)(38100700002)(6512007)(186003)(122000001)(45980500001);DIR:OUT;SFP:1101;
+Content-Type: text/plain; charset="utf-8"
+Content-ID: <8A478936AA7CDA45907D2B93DB327278@eurprd08.prod.outlook.com>
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-References: <20221003170623.26207-1-alex.kiernan@gmail.com>
- <CAMKF1sqHAaDkmf1BqvXPNgwHzuW3_tt5hJg7WLt6gOgefOj7gg@mail.gmail.com>
-In-Reply-To: 
- <CAMKF1sqHAaDkmf1BqvXPNgwHzuW3_tt5hJg7WLt6gOgefOj7gg@mail.gmail.com>
-From: Alex Kiernan <alex.kiernan@gmail.com>
-Date: Tue, 4 Oct 2022 08:56:31 +0100
-Message-ID: 
- <CAO5Uq5QNeFZ1URNavPkZLcfnV2yutg=KorBHPnE4AvrUOv0hmA@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH 1/3] jansson: Honour multilib paths
-To: Khem Raj <raj.khem@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PR3PR08MB5754
+Original-Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=arm.com;
+X-EOPAttributedMessage: 0
+X-MS-Exchange-Transport-CrossTenantHeadersStripped: 
+ DBAEUR03FT052.eop-EUR03.prod.protection.outlook.com
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id-Prvs: 
+	f534e281-39c1-48b3-aa52-08daa5eb76b5
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 
+	XJaMr3K2oe60kizKe7nSso1EiVF9k0c2LVepfvevmSuEkT4FLrYis0+vMrJKp/hOHkgz6+5thPk71lecQGyxzxF9i5P5I8rztStIBkgjAvE7CdTQa9J64E3OiffsjO1iYpJf3pmOmPIiXDMFIgSFKXst7SdxqeSeFAVAAnNQ11IyE/bbsiegu2BHaRh2jdNcycN3YrEwPbYFmVL12rn928uiXk477g3rUHQD7uKPvcTDzvaJTLoKwVRb5XYZq+SwKrn4ihXK2/gxHiRmeguAo3n8MmGXVHDvI36O6ur0H4XSZY8j4/JcnHwWbmSXzWxRFb1mj5JIyHl7rZcRwat9Z98+B4mwZCFIieUVBPBJzCWxR/408aR/46CRRtgiu2cpSWZC6R8HGZuuR+QoV1hzdnCSBs/KKotq76qwjfbMAl/ee6W04dieB8vVjYqBwO/BeV2qMcEPz11t4sfDy/RY586X/Z0zj2OS871pK+YsPAGBTctg1uEVv58aF/S/iXLt1ND0bM6enUJwgY/42VyQPTdvmcwVmUOhpl1S2Jqk4qKA1F0E10RP169LRmVlxag4MGq2GDVzgKVhYdiBT7Rc00u79xVsaNg2A2WUizfBEqErFMJ7Ie5ngJXSMN06fBa9soOTwSYOtuue1CSfZ0ibmSdYXfSCONj421nd/HIV4PhlY/Awjih4UlZG+s2tkTQByHxtCgF1IPmW3/iyBubV4yUwf0x3vkt0t/Ci/Di32+b+wqCDC2mrJn9gepbB373fKycrJhPzxSfOSj3iFPofR+tRqjOnOkK0/fga1OC0IhN/1f79JR/ooqA3v7rwibf/IW8u2M5IH6fCeADhLC2idw==
+X-Forefront-Antispam-Report: 
+	CIP:63.35.35.123;CTRY:IE;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:64aa7808-outbound-1.mta.getcheckrecipient.com;PTR:ec2-63-35-35-123.eu-west-1.compute.amazonaws.com;CAT:NONE;SFS:(13230022)(4636009)(136003)(346002)(396003)(39860400002)(376002)(451199015)(40470700004)(36840700001)(46966006)(40460700003)(4744005)(107886003)(70206006)(5660300002)(6506007)(2906002)(82740400003)(356005)(86362001)(36756003)(33656002)(54906003)(81166007)(6486002)(966005)(316002)(478600001)(41300700001)(40480700001)(36860700001)(6512007)(83380400001)(26005)(186003)(70586007)(2616005)(82310400005)(47076005)(6862004)(8936002)(4326008)(336012)(8676002);DIR:OUT;SFP:1101;
+X-OriginatorOrg: arm.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Oct 2022 09:33:24.0620
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 
+ 324dc884-61d6-4c80-e420-08daa5eb7be3
+X-MS-Exchange-CrossTenant-Id: f34e5979-57d9-4aaa-ad4d-b122a662184d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: 
+ TenantId=f34e5979-57d9-4aaa-ad4d-b122a662184d;Ip=[63.35.35.123];Helo=[64aa7808-outbound-1.mta.getcheckrecipient.com]
+X-MS-Exchange-CrossTenant-AuthSource: 
+	DBAEUR03FT052.eop-EUR03.prod.protection.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS2PR08MB8576
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 04 Oct 2022 07:56:46 -0000
+ <openembedded-devel@lists.openembedded.org>; Tue, 04 Oct 2022 09:33:36 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/99057
+ https://lists.openembedded.org/g/openembedded-devel/message/99058
 
-Probably, only cmake scares me every time I have to touch it :) When I
-was digging through all of this, I wondered if going back to autotools
-would be preferable and fixing up the lld case (the --default-symver
-test exists in CMakeLists.txt, but not configure.ac).
-
-On Mon, Oct 3, 2022 at 10:37 PM Khem Raj <raj.khem@gmail.com> wrote:
->
-> Should it be using GNUInstallDirs cmake module I wonder
->
-> On Mon, Oct 3, 2022 at 10:06 AM Alex Kiernan <alex.kiernan@gmail.com> wrote:
-> >
-> > When multilib is enabled, builds fail during package_qa:
-> >
-> > ERROR: jansson-2.14-r0 do_package: QA Issue: jansson: Files/directories were installed but not shipped in any package:
-> >   /usr/lib
-> >   /usr/lib/libjansson.a
-> >   /usr/lib/pkgconfig
-> >   /usr/lib/cmake
-> >   /usr/lib/pkgconfig/jansson.pc
-> >   /usr/lib/cmake/jansson
-> >   /usr/lib/cmake/jansson/janssonTargets-noconfig.cmake
-> >   /usr/lib/cmake/jansson/janssonConfig.cmake
-> >   /usr/lib/cmake/jansson/janssonConfigVersion.cmake
-> >   /usr/lib/cmake/jansson/janssonTargets.cmake
-> > Please set FILES such that these items are packaged. Alternatively if they are unneeded, avoid installing them or delete them within do_install.
-> > jansson: 10 installed and not shipped files. [installed-vs-shipped]
-> > ERROR: jansson-2.14-r0 do_package: Fatal QA errors were found, failing task.
-> >
-> > Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
-> > ---
-> >  .../jansson/0001-Honour-multilib-paths.patch  | 63 +++++++++++++++++++
-> >  .../recipes-extended/jansson/jansson_2.14.bb  |  4 +-
-> >  2 files changed, 66 insertions(+), 1 deletion(-)
-> >  create mode 100644 meta-oe/recipes-extended/jansson/jansson/0001-Honour-multilib-paths.patch
-> >
-> > diff --git a/meta-oe/recipes-extended/jansson/jansson/0001-Honour-multilib-paths.patch b/meta-oe/recipes-extended/jansson/jansson/0001-Honour-multilib-paths.patch
-> > new file mode 100644
-> > index 000000000000..513d1094593a
-> > --- /dev/null
-> > +++ b/meta-oe/recipes-extended/jansson/jansson/0001-Honour-multilib-paths.patch
-> > @@ -0,0 +1,63 @@
-> > +From e66885e66a2ce7fd916933b12d1ba523a25141e4 Mon Sep 17 00:00:00 2001
-> > +From: Alex Kiernan <alex.kiernan@gmail.com>
-> > +Date: Mon, 3 Oct 2022 13:25:05 +0100
-> > +Subject: [PATCH] Honour multilib paths
-> > +
-> > +Upstream-Status: Pending
-> > +Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
-> > +---
-> > + CMakeLists.txt | 14 +++++++-------
-> > + 1 file changed, 7 insertions(+), 7 deletions(-)
-> > +
-> > +diff --git a/CMakeLists.txt b/CMakeLists.txt
-> > +index 39b9ad365f78..bf297e936a72 100644
-> > +--- a/CMakeLists.txt
-> > ++++ b/CMakeLists.txt
-> > +@@ -20,8 +20,8 @@ endif ()
-> > +
-> > + # Set some nicer output dirs.
-> > + set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/bin)
-> > +-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/lib)
-> > +-set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/lib)
-> > ++set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_INSTALL_LIBDIR})
-> > ++set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_INSTALL_LIBDIR})
-> > + set(JANSSON_TEMP_DIR ${CMAKE_CURRENT_BINARY_DIR}/tmp)
-> > +
-> > + # Give the debug version a different postfix for windows,
-> > +@@ -573,14 +573,14 @@ endif ()
-> > + #
-> > +
-> > + # Allow the user to override installation directories.
-> > +-set(JANSSON_INSTALL_LIB_DIR       lib CACHE PATH "Installation directory for libraries")
-> > ++set(JANSSON_INSTALL_LIB_DIR       ${CMAKE_INSTALL_LIBDIR} CACHE PATH "Installation directory for libraries")
-> > + set(JANSSON_INSTALL_BIN_DIR       bin CACHE PATH "Installation directory for executables")
-> > + set(JANSSON_INSTALL_INCLUDE_DIR   include CACHE PATH "Installation directory for header files")
-> > +
-> > + if(WIN32 AND NOT CYGWIN)
-> > +   set(DEF_INSTALL_CMAKE_DIR cmake)
-> > + else()
-> > +-  set(DEF_INSTALL_CMAKE_DIR lib/cmake/jansson)
-> > ++  set(DEF_INSTALL_CMAKE_DIR ${CMAKE_INSTALL_LIBDIR}/cmake/jansson)
-> > + endif()
-> > +
-> > + set(JANSSON_INSTALL_CMAKE_DIR ${DEF_INSTALL_CMAKE_DIR} CACHE PATH "Installation directory for CMake files")
-> > +@@ -633,8 +633,8 @@ option(JANSSON_INSTALL "Generate installation target" ON)
-> > + if (JANSSON_INSTALL)
-> > +   install(TARGETS jansson
-> > +           EXPORT janssonTargets
-> > +-          LIBRARY DESTINATION "lib"
-> > +-          ARCHIVE DESTINATION "lib"
-> > ++          LIBRARY DESTINATION "${CMAKE_INSTALL_LIBDIR}"
-> > ++          ARCHIVE DESTINATION "${CMAKE_INSTALL_LIBDIR}"
-> > +           RUNTIME DESTINATION "bin"
-> > +           INCLUDES DESTINATION "include")
-> > +
-> > +@@ -644,7 +644,7 @@ if (JANSSON_INSTALL)
-> > +   # Install the pkg-config.
-> > +   install(FILES
-> > +           ${CMAKE_CURRENT_BINARY_DIR}/jansson.pc
-> > +-          DESTINATION lib/pkgconfig)
-> > ++          DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkgconfig)
-> > +
-> > +   # Install the configs.
-> > +   install(FILES
-> > diff --git a/meta-oe/recipes-extended/jansson/jansson_2.14.bb b/meta-oe/recipes-extended/jansson/jansson_2.14.bb
-> > index 94bb99ab71a9..68e24c890726 100644
-> > --- a/meta-oe/recipes-extended/jansson/jansson_2.14.bb
-> > +++ b/meta-oe/recipes-extended/jansson/jansson_2.14.bb
-> > @@ -4,7 +4,9 @@ BUGTRACKER = "https://github.com/akheron/jansson/issues"
-> >  LICENSE = "MIT"
-> >  LIC_FILES_CHKSUM = "file://LICENSE;md5=afd92c4cfc08f4896003251b878cc0bf"
-> >
-> > -SRC_URI = "https://github.com/akheron/${BPN}/releases/download/v${PV}/${BP}.tar.bz2"
-> > +SRC_URI = "https://github.com/akheron/${BPN}/releases/download/v${PV}/${BP}.tar.bz2 \
-> > +           file://0001-Honour-multilib-paths.patch \
-> > +           "
-> >  SRC_URI[sha256sum] = "fba956f27c6ae56ce6dfd52fbf9d20254aad42821f74fa52f83957625294afb9"
-> >
-> >  UPSTREAM_CHECK_URI = "https://github.com/akheron/${BPN}/releases"
-> > --
-> > 2.35.1
-> >
-> >
-> > -=-=-=-=-=-=-=-=-=-=-=-
-> > Links: You receive all messages sent to this group.
-> > View/Reply Online (#99040): https://lists.openembedded.org/g/openembedded-devel/message/99040
-> > Mute This Topic: https://lists.openembedded.org/mt/94095620/1997914
-> > Group Owner: openembedded-devel+owner@lists.openembedded.org
-> > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [raj.khem@gmail.com]
-> > -=-=-=-=-=-=-=-=-=-=-=-
-> >
-
-
-
--- 
-Alex Kiernan
+DQpPbiA0IE9jdCAyMDIyLCBhdCAwNzoyNCwgTWF0aGlldSBEdWJvaXMtQnJpYW5kIHZpYSBsaXN0
+cy5vcGVuZW1iZWRkZWQub3JnIDxtYXRoaWV1LmR1Ym9pcy1icmlhbmQ9aHlwcnVhLm9yZ0BsaXN0
+cy5vcGVuZW1iZWRkZWQub3JnPiB3cm90ZToNCj4gKyMgRml4IG1lcmdlZCB1cHN0cmVhbSBodHRw
+czovL2dpdGh1Yi5jb20vTWJlZC1UTFMvbWJlZHRscy9wdWxsLzUzMTANCj4gK0NWRV9DSEVDS19J
+R05PUkUgKz0gIkNWRS0yMDIxLTQzNjY2Ig0KPiArIyBGaXggbWVyZ2VkIHVwc3RyZWFtIGh0dHBz
+Oi8vZ2l0aHViLmNvbS9NYmVkLVRMUy9tYmVkdGxzL2NvbW1pdC85YTRhOWM2NmE0OGVkZmU5ZWNl
+MDNjN2U0YTUzMzEwYWRmNzNhODZjDQo+ICtDVkVfQ0hFQ0tfSUdOT1JFICs9ICJDVkUtMjAyMS00
+NTQ1MSINCg0KSWYgcG9zc2libGUgaXTigJlzIGJlc3QgdG8gY29udGFjdCBOSVNUIGFuZCBnZXQg
+dGhlIENQRSBlbnRyaWVzIHVwZGF0ZWQgaW5zdGVhZCBvZiB3aGl0ZWxpc3RpbmcsIGFzIG1vcmUg
+YWNjdXJhdGUgZGF0YSBpcyBhbHdheXMgYmV0dGVyLiAgSXTigJlzIGNvbXBsaWNhdGVkIGluIHRo
+aXMgc2l0dWF0aW9uIGJlY2F1c2Ugb2YgdGhlIGJhY2twb3J0cywgYnV0IEnigJl2ZSBtYWlsZWQg
+dGhlbSB0byBzZWUgd2hhdCBjYW4gYmUgZG9uZS4NCg0KUm9zcw0KDQo=
 
