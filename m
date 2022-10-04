@@ -1,190 +1,161 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <uvv.mail@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4C24EC433FE
-	for <webhook@archiver.kernel.org>; Mon,  3 Oct 2022 21:37:13 +0000 (UTC)
-Received: from mail-oa1-f48.google.com (mail-oa1-f48.google.com
- [209.85.160.48])
- by mx.groups.io with SMTP id smtpd.web08.3371.1664833024117244861
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A2DA4C433F5
+	for <webhook@archiver.kernel.org>; Tue,  4 Oct 2022 05:27:55 +0000 (UTC)
+Received: from mail-wr1-f50.google.com (mail-wr1-f50.google.com
+ [209.85.221.50])
+ by mx.groups.io with SMTP id smtpd.web11.7381.1664861272364081261
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 03 Oct 2022 14:37:04 -0700
+ Mon, 03 Oct 2022 22:27:52 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=k5Hu7Ltd;
- spf=pass (domain: gmail.com, ip: 209.85.160.48, mailfrom: raj.khem@gmail.com)
-Received: by mail-oa1-f48.google.com with SMTP id
- 586e51a60fabf-132555b7121so5492318fac.2
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=hO5mVu6c;
+ spf=pass (domain: gmail.com, ip: 209.85.221.50, mailfrom: uvv.mail@gmail.com)
+Received: by mail-wr1-f50.google.com with SMTP id u10so19460157wrq.2
         for <openembedded-devel@lists.openembedded.org>;
- Mon, 03 Oct 2022 14:37:04 -0700 (PDT)
+ Mon, 03 Oct 2022 22:27:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date;
-        bh=gzVD+h2B6cb+FTl+wXp9RFTA037wjyapluk5LVr4XRk=;
-        b=k5Hu7LtdMemmKgTjTA3BJt+dFBt+nBMmP+fOn/926HJB3pA+w69r8ZfUOAnyafMKgG
-         SNcajghn+TfO+YP21jD9EnRj/hYYDEwiLz3snYEv0qQhFgrh+t+50QbyEbrS9ZFO9QlE
-         mqCpTmmWWc7GDcoUxxfd5/BjYzj8aVCqS+JouzBDtNW7CoubscC7AZ3f7NJv1es6d0rZ
-         6R8DaMd9ZiPUV82JuuroYouoKgQHu+9XrSpvxHTtMESvUAjFkj6QaoZY1uoujTw4A9fP
-         JJDYMLvjAqcgxvs/+a4mA6F3ueNjMFRwaJt1RfJUT2o785jEvBL+ADMPQFLvq2mhNZc5
-         fIiA==
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date;
+        bh=fmBdStii50m/e+vwxiA0WmkFq1AcGh3RAr65vktTlS8=;
+        b=hO5mVu6cyrWOMUf+FcyC5ANk7LP0xLKCxYLEEV7pvFTmPcPVdYyUiVQgHSNP9cppsn
+         szyevDigPLSh6ai6NXmFrJvhwijdzYDlXQWbxbhm70kHkFF03pfCM4XJPrZL3n9VMNEA
+         hH4IfUO9V6u/N22ommd/MeNmOcPI3ZkZUVT6Cy0+r3WBMku4z47JNDCk1QpOfHttSEM1
+         Z9gucsIPAUHlZC5flCgdZ5FtA5v3OaXN5ZfxHumNNyHJNMdGG7U1RekSpXsLNaPvdksh
+         pfiKm/g9lDeR3jlgZRid9xIQ9FhoAMEoTnD26x64r3JcUIx+zffDWFLomWXLEm5hfLbU
+         upuw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date;
-        bh=gzVD+h2B6cb+FTl+wXp9RFTA037wjyapluk5LVr4XRk=;
-        b=HjIK/BSFI4S6RM4+NVx40oJ7YQGQqp8+RynlmOCy2iQiD2WOhXbNvUkaAB8zBf7gCM
-         DzJK23f2b61+Oo42xAf2WSc7ZD/9Pi3qfisH5WG8t5Z5G2MNmjjBfSgYvcv7TbCfXjq0
-         qDWQse8Gk4kx9uMzLcu6mYLWKMAfKpTJH82xLSezErQrG8zSOEd4XHlatXJB/YeCPoyi
-         /zzXX7+EQDOnD8kmwn5nakPYbDjxhkipk0Em6Dklv6PmCgwPdjmJmTERUpvccOaw+jPb
-         I+r8K4XulIovwPLUfeK7gVfJLlQvmpRSSrVU5fTSd9mFRyNHdAEWCxB/yubG10Fn+9Xi
-         R35A==
-X-Gm-Message-State: ACrzQf0tdrI7Y2OSTIjJbYsxdcVhNHJsp8Knz7OvsRot4U7pndfEzuyy
-	YVxZVwZGLXHUa3eK9TXZynp9gprWoTanGdArqmJLNmwVCSnWWQ==
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date;
+        bh=fmBdStii50m/e+vwxiA0WmkFq1AcGh3RAr65vktTlS8=;
+        b=oCyj76JQES31UF1QEw4oiktd/cSO6cQ4Tsm+W5X+OYj9nhhFAfNNFaTcKbt7V8FuR0
+         Gv7cCo7gyXK71f/VklesxKtkCXPe3kDC40nv404McqN6wdA6bBd7+nMYb0YPx13hSJtz
+         J0wNVtIyyfn8JKeY64TaU3hw5bNu+Aab+pNrRT2t5I94qEKtau6zPIUCfXQJgYQQvkeR
+         uqQ0BFl3jWu4MQY0S8FHVFuHYlA6IjTaJQGrg5gqxvXrUOzWWFwQlLXVDkbgqSwQm6Yr
+         BeFTkeO3vyIPfQPBuVm7bgdlyCTtWhOAaIpUd2nD/ey9iZ/VBWMXOHQbeTfisQJ5Wphh
+         dHRw==
+X-Gm-Message-State: ACrzQf33AdX9JixMsqYtvn5n4giOyBRixQ5qLkiOBYWtyZjyNRaxcuKL
+	7lI52+YryzTd6qLGO+0GLKDuHebdru5wHQ==
 X-Google-Smtp-Source: 
- AMsMyM4Zmk6Ie3/5tNX4f2CZ/SiruGtjOpJdych+T5vvQEGO0gYhzujgJRKgcX+9HO/Lj1vuwjxGW8Eb3vlAxMV6m3M=
-X-Received: by 2002:a05:6870:b00b:b0:127:2d3d:3c16 with SMTP id
- y11-20020a056870b00b00b001272d3d3c16mr6125439oae.262.1664833023375; Mon, 03
- Oct 2022 14:37:03 -0700 (PDT)
+ AMsMyM5Wkxu5OcejNvlZArs53fw8z8jb/YCRsp0c7OD92QG5mdcumQjivHQNpuqh/OjPCtN5wld7Kw==
+X-Received: by 2002:a5d:4b8b:0:b0:22e:4185:bcc7 with SMTP id
+ b11-20020a5d4b8b000000b0022e4185bcc7mr3951572wrt.174.1664861270459;
+        Mon, 03 Oct 2022 22:27:50 -0700 (PDT)
+Received: from developer.localdomain
+ (dslb-002-205-007-169.002.205.pools.vodafone-ip.de. [2.205.7.169])
+        by smtp.gmail.com with ESMTPSA id
+ f15-20020a05600c490f00b003a2e92edeccsm17611010wmp.46.2022.10.03.22.27.49
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 03 Oct 2022 22:27:50 -0700 (PDT)
+From: Vyacheslav Yurkov <uvv.mail@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Vyacheslav Yurkov <v.yurkov@precitec.de>
+Subject: [meta-networking][PATCH] opcua: Add new recipe
+Date: Tue,  4 Oct 2022 07:27:07 +0200
+Message-Id: <20221004052707.1499760-1-uvv.mail@gmail.com>
+X-Mailer: git-send-email 2.30.2
 MIME-Version: 1.0
-References: <20221003170623.26207-1-alex.kiernan@gmail.com>
-In-Reply-To: <20221003170623.26207-1-alex.kiernan@gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 3 Oct 2022 14:36:37 -0700
-Message-ID: 
- <CAMKF1sqHAaDkmf1BqvXPNgwHzuW3_tt5hJg7WLt6gOgefOj7gg@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH 1/3] jansson: Honour multilib paths
-To: Alex Kiernan <alex.kiernan@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 03 Oct 2022 21:37:13 -0000
+ <openembedded-devel@lists.openembedded.org>; Tue, 04 Oct 2022 05:27:55 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/99045
+ https://lists.openembedded.org/g/openembedded-devel/message/99046
 
-Should it be using GNUInstallDirs cmake module I wonder
+From: Vyacheslav Yurkov <v.yurkov@precitec.de>
 
-On Mon, Oct 3, 2022 at 10:06 AM Alex Kiernan <alex.kiernan@gmail.com> wrote:
->
-> When multilib is enabled, builds fail during package_qa:
->
-> ERROR: jansson-2.14-r0 do_package: QA Issue: jansson: Files/directories were installed but not shipped in any package:
->   /usr/lib
->   /usr/lib/libjansson.a
->   /usr/lib/pkgconfig
->   /usr/lib/cmake
->   /usr/lib/pkgconfig/jansson.pc
->   /usr/lib/cmake/jansson
->   /usr/lib/cmake/jansson/janssonTargets-noconfig.cmake
->   /usr/lib/cmake/jansson/janssonConfig.cmake
->   /usr/lib/cmake/jansson/janssonConfigVersion.cmake
->   /usr/lib/cmake/jansson/janssonTargets.cmake
-> Please set FILES such that these items are packaged. Alternatively if they are unneeded, avoid installing them or delete them within do_install.
-> jansson: 10 installed and not shipped files. [installed-vs-shipped]
-> ERROR: jansson-2.14-r0 do_package: Fatal QA errors were found, failing task.
->
-> Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
-> ---
->  .../jansson/0001-Honour-multilib-paths.patch  | 63 +++++++++++++++++++
->  .../recipes-extended/jansson/jansson_2.14.bb  |  4 +-
->  2 files changed, 66 insertions(+), 1 deletion(-)
->  create mode 100644 meta-oe/recipes-extended/jansson/jansson/0001-Honour-multilib-paths.patch
->
-> diff --git a/meta-oe/recipes-extended/jansson/jansson/0001-Honour-multilib-paths.patch b/meta-oe/recipes-extended/jansson/jansson/0001-Honour-multilib-paths.patch
-> new file mode 100644
-> index 000000000000..513d1094593a
-> --- /dev/null
-> +++ b/meta-oe/recipes-extended/jansson/jansson/0001-Honour-multilib-paths.patch
-> @@ -0,0 +1,63 @@
-> +From e66885e66a2ce7fd916933b12d1ba523a25141e4 Mon Sep 17 00:00:00 2001
-> +From: Alex Kiernan <alex.kiernan@gmail.com>
-> +Date: Mon, 3 Oct 2022 13:25:05 +0100
-> +Subject: [PATCH] Honour multilib paths
-> +
-> +Upstream-Status: Pending
-> +Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
-> +---
-> + CMakeLists.txt | 14 +++++++-------
-> + 1 file changed, 7 insertions(+), 7 deletions(-)
-> +
-> +diff --git a/CMakeLists.txt b/CMakeLists.txt
-> +index 39b9ad365f78..bf297e936a72 100644
-> +--- a/CMakeLists.txt
-> ++++ b/CMakeLists.txt
-> +@@ -20,8 +20,8 @@ endif ()
-> +
-> + # Set some nicer output dirs.
-> + set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/bin)
-> +-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/lib)
-> +-set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/lib)
-> ++set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_INSTALL_LIBDIR})
-> ++set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_INSTALL_LIBDIR})
-> + set(JANSSON_TEMP_DIR ${CMAKE_CURRENT_BINARY_DIR}/tmp)
-> +
-> + # Give the debug version a different postfix for windows,
-> +@@ -573,14 +573,14 @@ endif ()
-> + #
-> +
-> + # Allow the user to override installation directories.
-> +-set(JANSSON_INSTALL_LIB_DIR       lib CACHE PATH "Installation directory for libraries")
-> ++set(JANSSON_INSTALL_LIB_DIR       ${CMAKE_INSTALL_LIBDIR} CACHE PATH "Installation directory for libraries")
-> + set(JANSSON_INSTALL_BIN_DIR       bin CACHE PATH "Installation directory for executables")
-> + set(JANSSON_INSTALL_INCLUDE_DIR   include CACHE PATH "Installation directory for header files")
-> +
-> + if(WIN32 AND NOT CYGWIN)
-> +   set(DEF_INSTALL_CMAKE_DIR cmake)
-> + else()
-> +-  set(DEF_INSTALL_CMAKE_DIR lib/cmake/jansson)
-> ++  set(DEF_INSTALL_CMAKE_DIR ${CMAKE_INSTALL_LIBDIR}/cmake/jansson)
-> + endif()
-> +
-> + set(JANSSON_INSTALL_CMAKE_DIR ${DEF_INSTALL_CMAKE_DIR} CACHE PATH "Installation directory for CMake files")
-> +@@ -633,8 +633,8 @@ option(JANSSON_INSTALL "Generate installation target" ON)
-> + if (JANSSON_INSTALL)
-> +   install(TARGETS jansson
-> +           EXPORT janssonTargets
-> +-          LIBRARY DESTINATION "lib"
-> +-          ARCHIVE DESTINATION "lib"
-> ++          LIBRARY DESTINATION "${CMAKE_INSTALL_LIBDIR}"
-> ++          ARCHIVE DESTINATION "${CMAKE_INSTALL_LIBDIR}"
-> +           RUNTIME DESTINATION "bin"
-> +           INCLUDES DESTINATION "include")
-> +
-> +@@ -644,7 +644,7 @@ if (JANSSON_INSTALL)
-> +   # Install the pkg-config.
-> +   install(FILES
-> +           ${CMAKE_CURRENT_BINARY_DIR}/jansson.pc
-> +-          DESTINATION lib/pkgconfig)
-> ++          DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkgconfig)
-> +
-> +   # Install the configs.
-> +   install(FILES
-> diff --git a/meta-oe/recipes-extended/jansson/jansson_2.14.bb b/meta-oe/recipes-extended/jansson/jansson_2.14.bb
-> index 94bb99ab71a9..68e24c890726 100644
-> --- a/meta-oe/recipes-extended/jansson/jansson_2.14.bb
-> +++ b/meta-oe/recipes-extended/jansson/jansson_2.14.bb
-> @@ -4,7 +4,9 @@ BUGTRACKER = "https://github.com/akheron/jansson/issues"
->  LICENSE = "MIT"
->  LIC_FILES_CHKSUM = "file://LICENSE;md5=afd92c4cfc08f4896003251b878cc0bf"
->
-> -SRC_URI = "https://github.com/akheron/${BPN}/releases/download/v${PV}/${BP}.tar.bz2"
-> +SRC_URI = "https://github.com/akheron/${BPN}/releases/download/v${PV}/${BP}.tar.bz2 \
-> +           file://0001-Honour-multilib-paths.patch \
-> +           "
->  SRC_URI[sha256sum] = "fba956f27c6ae56ce6dfd52fbf9d20254aad42821f74fa52f83957625294afb9"
->
->  UPSTREAM_CHECK_URI = "https://github.com/akheron/${BPN}/releases"
-> --
-> 2.35.1
->
->
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#99040): https://lists.openembedded.org/g/openembedded-devel/message/99040
-> Mute This Topic: https://lists.openembedded.org/mt/94095620/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [raj.khem@gmail.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
->
+open62541 (http://open62541.org) is an open source and free implementation
+of OPC Unified Architecture according to IEC62541 standard
+
+The patch exclude git-related files from installation directory
+Upstream-Status: Accepted
+https://github.com/open62541/open62541/commit/a0328d4cb527f9778a262fc4a6b42bfbdffc38e9
+
+Signed-off-by: Vyacheslav Yurkov <v.yurkov@precitec.de>
+---
+ ...1-fix-build-do-not-install-git-files.patch | 22 +++++++++++
+ .../opcua/open62541_1.3.3.bb                  | 38 +++++++++++++++++++
+ 2 files changed, 60 insertions(+)
+ create mode 100644 meta-networking/recipes-protocols/opcua/open62541/0001-fix-build-do-not-install-git-files.patch
+ create mode 100644 meta-networking/recipes-protocols/opcua/open62541_1.3.3.bb
+
+diff --git a/meta-networking/recipes-protocols/opcua/open62541/0001-fix-build-do-not-install-git-files.patch b/meta-networking/recipes-protocols/opcua/open62541/0001-fix-build-do-not-install-git-files.patch
+new file mode 100644
+index 000000000..44ee7b92c
+--- /dev/null
++++ b/meta-networking/recipes-protocols/opcua/open62541/0001-fix-build-do-not-install-git-files.patch
+@@ -0,0 +1,22 @@
++From a490e82dca5a669b0af27a13d74759d8f77e2333 Mon Sep 17 00:00:00 2001
++From: Vyacheslav Yurkov <v.yurkov@precitec.de>
++Date: Mon, 3 Oct 2022 18:25:15 +0200
++Subject: [PATCH] fix(build): do not install git files
++
++Signed-off-by: Vyacheslav Yurkov <v.yurkov@precitec.de>
++---
++ CMakeLists.txt | 1 +
++ 1 file changed, 1 insertion(+)
++
++diff --git a/CMakeLists.txt b/CMakeLists.txt
++index 1934374e..bc5c8bad 100644
++--- a/CMakeLists.txt
+++++ b/CMakeLists.txt
++@@ -1703,6 +1703,7 @@ install(DIRECTORY ${UA_install_tools_dirs}
++     FILES_MATCHING
++     PATTERN "*"
++     PATTERN "*.pyc" EXCLUDE
+++    PATTERN ".git*" EXCLUDE
++     )
++ 
++ install(FILES ${UA_install_tools_files} DESTINATION ${open62541_install_tools_dir})
+diff --git a/meta-networking/recipes-protocols/opcua/open62541_1.3.3.bb b/meta-networking/recipes-protocols/opcua/open62541_1.3.3.bb
+new file mode 100644
+index 000000000..317697262
+--- /dev/null
++++ b/meta-networking/recipes-protocols/opcua/open62541_1.3.3.bb
+@@ -0,0 +1,38 @@
++DESCRIPTION = "open62541 is an implementation of OPC UA (OPC Unified Architecture)"
++HOMEPAGE = "https://github.com/open62541/open62541.git"
++LICENSE = "MPL-2.0 & BSD-3-Clause & MIT"
++LIC_FILES_CHKSUM = "\
++    file://LICENSE;md5=815ca599c9df247a0c7f619bab123dad \
++    file://deps/mdnsd/LICENSE;md5=3bb4047dc4095cd7336de3e2a9be94f0 \
++    file://deps/mqtt-c/LICENSE;md5=9226377baf0b79174c89a1ab55592456 \
++"
++
++SRCREV_FORMAT = "opcua_mdnsd_ua-nodeset_mqtt-c"
++SRCREV_opcua = "ff73268829359639531ff02905c889f73a77b408"
++SRCREV_mdnsd = "3151afe5899dba5125dffa9f4cf3ae1fe2edc0f0"
++SRCREV_ua-nodeset = "f71b3f411d5cb16097c3ae0c744f67ad45535ffb"
++SRCREV_mqtt-c = "f69ce1e7fd54f3b1834c9c9137ce0ec5d703cb4d"
++
++SRC_URI = " \
++    git://github.com/open62541/open62541.git;name=opcua;branch=1.3;protocol=https \
++    git://github.com/Pro/mdnsd.git;name=mdnsd;protocol=https;branch=master;destsuffix=git/deps/mdnsd \
++    git://github.com/OPCFoundation/UA-Nodeset;name=ua-nodeset;protocol=https;branch=v1.04;destsuffix=git/deps/ua-nodeset \
++    git://github.com/LiamBindle/MQTT-C.git;name=mqtt-c;protocol=https;branch=master;destsuffix=git/deps/mqtt-c \
++    file://0001-fix-build-do-not-install-git-files.patch \
++"
++
++S = "${WORKDIR}/git"
++
++inherit cmake python3native
++
++EXTRA_OECMAKE += "\
++    -DBUILD_SHARED_LIBS=ON \
++    -DUA_NAMESPACE_ZERO=FULL \
++    -DUA_LOGLEVEL=600 \
++"
++
++PACKAGECONFIG ?= "encryption pubsub pubsub-eth"
++PACKAGECONFIG[amalgamation] = "-DUA_ENABLE_AMALGAMATION=ON, -DUA_ENABLE_AMALGAMATION=OFF"
++PACKAGECONFIG[encryption] = "-DUA_ENABLE_ENCRYPTION=ON, -DUA_ENABLE_ENCRYPTION=OFF, mbedtls"
++PACKAGECONFIG[pubsub] = "-DUA_ENABLE_PUBSUB=ON, -DUA_ENABLE_PUBSUB=OFF"
++PACKAGECONFIG[pubsub-eth] = "-DUA_ENABLE_PUBSUB_ETH_UADP=ON, -DUA_ENABLE_PUBSUB_ETH_UADP=OFF"
+-- 
+2.30.2
+
 
