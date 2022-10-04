@@ -2,112 +2,95 @@ Return-Path: <mathieu.dubois-briand@hyprua.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EE8B1C43217
-	for <webhook@archiver.kernel.org>; Tue,  4 Oct 2022 06:29:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D21EEC433FE
+	for <webhook@archiver.kernel.org>; Tue,  4 Oct 2022 06:34:55 +0000 (UTC)
 Received: from mail-wr1-f49.google.com (mail-wr1-f49.google.com
  [209.85.221.49])
- by mx.groups.io with SMTP id smtpd.web08.7549.1664864939738313986
+ by mx.groups.io with SMTP id smtpd.web12.7733.1664865287052625433
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 03 Oct 2022 23:29:00 -0700
+ Mon, 03 Oct 2022 23:34:47 -0700
 Authentication-Results: mx.groups.io;
  dkim=pass header.i=@hyprua-org.20210112.gappssmtp.com header.s=20210112
- header.b=3xogDTb0;
+ header.b=pTG2Mn4g;
  spf=none, err=SPF record not found (domain: hyprua.org, ip: 209.85.221.49,
  mailfrom: mathieu.dubois-briand@hyprua.org)
-Received: by mail-wr1-f49.google.com with SMTP id u10so19619083wrq.2
+Received: by mail-wr1-f49.google.com with SMTP id c11so19760468wrp.11
         for <openembedded-devel@lists.openembedded.org>;
- Mon, 03 Oct 2022 23:28:59 -0700 (PDT)
+ Mon, 03 Oct 2022 23:34:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=hyprua-org.20210112.gappssmtp.com; s=20210112;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date;
-        bh=LYb5xbRJXtOYnxdayn6ae0NZ9tRjNwYQayZa2hUcPJY=;
-        b=3xogDTb0Idoj4oq77ZF59J2pg0LNqOrsG2LKqq5/1kwuWTpPahFpgDvoio0eRwafMx
-         iItqLrTu1Sb4kZhOsEgUUy73UVsmeQqS99OO5BM3DFoxwuhI3sJoB0CwFtCDyim3KTS+
-         oMha95hOjUBo6QJAjlcRRtJukj70iFm+QDSWNFqHwBVWf5ZKvTx0yjwMadlPBx6hVN6j
-         x7DdavUDt3stzUXpwJkbKx/AcYUTjkEVdRN7nmse7u/zqVPgmD8lGjEtR7vwLqVKK5kD
-         i5/r6JHizkulEFbhRyYQvPkFhsoXMOa7zTuZCRzPb7a+w/bLLkwBEbM23538CULi/jJL
-         C5LA==
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:from:to:cc:subject:date;
+        bh=8ym85k1xMLiF8ct0Gv+n7mqB6tzgJ3TsyuOoMDfMf8g=;
+        b=pTG2Mn4gM3pVe0zCl2rH8BX/k+FstIvhtKkB0Dlgo9O4OHzw7QOLnRxKSY1NGaM3Cc
+         5vnvByt5Xqogk3jH85mFLzi+0jGqfaaQyVdb2Wj81gYlB67d8SF40susmnAFgSyocjfl
+         GuBon3X34h1gKj2qsLlVM0tFWtEkbb4UDoDe0iShtwtQzYUIfqmE5XNLtzeYFSzWmanx
+         ziszZFhEeXx4jVLhxbmXVidXWgJs9KK3oMDZNUx9BWyxHzD+KdK65uwQvF8eJJ+cGPfP
+         Fa5NdjeEOwHQZTv7FXNAwKX4PeHJW2Uk7/vGliQF88g0kPr6Q8xfl5HLPaYUSDI2UqNl
+         wfag==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date;
-        bh=LYb5xbRJXtOYnxdayn6ae0NZ9tRjNwYQayZa2hUcPJY=;
-        b=S8lpXIkWgETTow5/csq4/82YKER1SsE822+GTrcuOP1geCtbEU8docchvtnRkifCvu
-         z7j2VpZ4MW7BiELKClkl/uZmKBZzFSht9Epm+hnv4e5JAuZFl0/yFghIsdWxG2xUBycg
-         bVbV9MW7E168SpJIkpZ72F1eR1BztbA7ezoLhPUzcsJjLex3Kx3FAjSoVnhAvwoXB4yC
-         ftB7JxOPYe4mUZMUdV6KyxFjZ/t5aHDXtr7ldUc1lKZKEFYwRMR5BXh7IqRqKOXacZ7p
-         vleOzWHtL8waQskhnnK1NKB9raWqSitZk49LpRdaoWLT3B7DQfxyoZnn+k/htgYoew0o
-         RXUw==
-X-Gm-Message-State: ACrzQf1PWBJ/wPEZnzkkJMP5OiZLca0xP6DmopUpeumKgNoctR4I1GEw
-	uwWbP226IcBW3n3URUPxvFPjzp8Mc0lErnv1oSY=
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date;
+        bh=8ym85k1xMLiF8ct0Gv+n7mqB6tzgJ3TsyuOoMDfMf8g=;
+        b=VuRMCgmOt8LqAAayMYR4U85vrrF276J3LYZl38yP1o0dK3HtTXQsDI4SGybZqQmhco
+         YSzlTnm+341b/ZSqzwGecGqsnzm4ES2xOme7ax8uzgM1dZHvZXIwUJ/6yyW/hqYaDA1p
+         Y9ELH+vdusmHahIfQhfbYBOa4qqpwwJDR6PAlWIyLx94lAsmjdQByrlJVv7ezyt5u5+w
+         jz9dKmUXLOsPXcbUPSPXWGqI2Ek3zusF8SrJHz1hzQJB/UHBj+SuuX2MTW0S5Z4IvDIQ
+         YI76hzP2p7WfSyhdjY0LGtTMhA4dIGLaDWJzDSUylba0LaXD5iRKdjUtftc7hNFFzgIt
+         F9Zw==
+X-Gm-Message-State: ACrzQf3TpR3oAT8r9xZdon3YAF5ci/0bXQzkj0yRQsUCOTDQWLkeldt1
+	o7phfdaSeEo4gHchi7ThZok4YaBHrW/RSQwojQY=
 X-Google-Smtp-Source: 
- AMsMyM7/exNws+7KwZgpWhaH3FZuoO/hWiu4Mv9Fbpi8H6RB9rrvYyNmaZqZ7pB1gKZb887ILoNrxA==
-X-Received: by 2002:adf:e10f:0:b0:22a:43e8:969f with SMTP id
- t15-20020adfe10f000000b0022a43e8969fmr16094200wrz.292.1664864937891;
-        Mon, 03 Oct 2022 23:28:57 -0700 (PDT)
-Received: from WIPC21110265.. ([2a01:e0a:9a8:8b40:238e:3570:9587:5b36])
+ AMsMyM6cwGoOtZEBNIaXFiJRjYySFtdLKuMFLpjiR2lzCIs9ueFFx9nLKQVH/qT/EJ6GYKwtJL5TzA==
+X-Received: by 2002:a5d:6c6e:0:b0:22e:355e:4bc8 with SMTP id
+ r14-20020a5d6c6e000000b0022e355e4bc8mr6576039wrz.24.1664865285057;
+        Mon, 03 Oct 2022 23:34:45 -0700 (PDT)
+Received: from WIPC21110265 ([2a01:e0a:9a8:8b40:238e:3570:9587:5b36])
         by smtp.gmail.com with ESMTPSA id
- l22-20020a056000023600b00225239d9265sm11993296wrz.74.2022.10.03.23.28.56
+ a14-20020adfed0e000000b0022ae4f8395dsm11373103wro.96.2022.10.03.23.34.44
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 03 Oct 2022 23:28:56 -0700 (PDT)
+        Mon, 03 Oct 2022 23:34:44 -0700 (PDT)
+Date: Tue, 4 Oct 2022 08:34:43 +0200
 From: Mathieu Dubois-Briand <mathieu.dubois-briand@hyprua.org>
-X-Google-Original-From: Mathieu Dubois-Briand <mbriand@witekio.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: akuster808@gmail.com,
-	Mathieu Dubois-Briand <mbriand@witekio.com>
-Subject: [meta-networking][dunfell][PATCH 2/4] mbedtls: Update to 2.16.12
- stable version
-Date: Tue,  4 Oct 2022 08:28:41 +0200
-Message-Id: <20221004062843.2541778-2-mbriand@witekio.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20221004062843.2541778-1-mbriand@witekio.com>
+Cc: akuster808@gmail.com, Mathieu Dubois-Briand <mbriand@witekio.com>
+Subject: Re: [meta-networking][dunfell][PATCH 1/4] mbedtls: Fix CVE product
+ name
+Message-ID: <YzvUA8zS7tmm+81H@WIPC21110265>
 References: <20221004062843.2541778-1-mbriand@witekio.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20221004062843.2541778-1-mbriand@witekio.com>
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 04 Oct 2022 06:29:05 -0000
+ <openembedded-devel@lists.openembedded.org>; Tue, 04 Oct 2022 06:34:55 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/99051
+ https://lists.openembedded.org/g/openembedded-devel/message/99054
 
-Signed-off-by: Mathieu Dubois-Briand <mbriand@witekio.com>
----
- .../mbedtls/{mbedtls_2.16.6.bb => mbedtls_2.16.12.bb} | 11 +++++++----
- 1 file changed, 7 insertions(+), 4 deletions(-)
- rename meta-networking/recipes-connectivity/mbedtls/{mbedtls_2.16.6.bb => mbedtls_2.16.12.bb} (81%)
+Hi,
 
-diff --git a/meta-networking/recipes-connectivity/mbedtls/mbedtls_2.16.6.bb b/meta-networking/recipes-connectivity/mbedtls/mbedtls_2.16.12.bb
-similarity index 81%
-rename from meta-networking/recipes-connectivity/mbedtls/mbedtls_2.16.6.bb
-rename to meta-networking/recipes-connectivity/mbedtls/mbedtls_2.16.12.bb
-index 0ad1e02630a8..adb8e4a2c994 100644
---- a/meta-networking/recipes-connectivity/mbedtls/mbedtls_2.16.6.bb
-+++ b/meta-networking/recipes-connectivity/mbedtls/mbedtls_2.16.12.bb
-@@ -18,13 +18,16 @@ understand what the code does. It features:                          \
- HOMEPAGE = "https://tls.mbed.org/"
- 
- LICENSE = "Apache-2.0"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=302d50a6369f5f22efdb674db908167a"
-+LIC_FILES_CHKSUM = " \
-+    file://LICENSE;md5=d32b51202e173d9e438ca20f008209a1 \
-+    file://apache-2.0.txt;md5=3b83ef96387f14655fc854ddc3c6bd57 \
-+    "
- 
- SECTION = "libs"
- 
--SRC_URI = "https://tls.mbed.org/download/mbedtls-${PV}-apache.tgz"
--SRC_URI[md5sum] = "1f629a43c166de2eca808f3e30aa961d"
--SRC_URI[sha256sum] = "66455e23a6190a30142cdc1113f7418158839331a9d8e6b0778631d077281770"
-+SRC_URI = "https://github.com/Mbed-TLS/mbedtls/archive/refs/tags/v${PV}.tar.gz"
-+SRC_URI[md5sum] = "f3a7b041c43b35c883632a1773bf61a6"
-+SRC_URI[sha256sum] = "294871ab1864a65d0b74325e9219d5bcd6e91c34a3c59270c357bb9ae4d5c393"
- 
- inherit cmake
- 
--- 
-2.34.1
+Fixing the CVE product name from mbedtls uncover a lot of CVEs. Some of these
+are fixed in the last 2.16 version, but some remain. Here is what I found:
 
+- CVE-2020-36477 and CVE-2022-35409: I added patches in this PR, but they did
+  NOT apply cleanly when cherry-picking them. Original commits:
+  https://github.com/Mbed-TLS/mbedtls/commit/f3e4bd8632b71dc491e52e6df87dc3e409d2b869
+  https://github.com/Mbed-TLS/mbedtls/commit/e5af9fabf7d68e3807b6ea78792794b8352dbba2
+
+- CVE-2021-43666: Patch is merged in 2.16.12 but CPE do not exclude 2.16.12, so
+  I added it to whitelist.
+
+- CVE-2021-45450 and CVE-2021-45451: I believed the CPE are completely wrong
+  here, as PSA was introduced in mbedtls-2.22.0. I may add it to the whitelist,
+  but I believe the CPE has to be modified.
+
+- CVE-2021-24119: Fixed in master and has to be backported, but it's not clear
+  which commits exactly fixed the issue. Seems to be be165bd32b87 and some
+  parents (from https://github.com/Mbed-TLS/mbedtls/pull/4305).
+
+Best regards,
+Mathieu
 
