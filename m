@@ -1,98 +1,96 @@
-Return-Path: <devendra.tewari@gmail.com>
+Return-Path: <mathieu.dubois-briand@hyprua.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D7438C433FE
-	for <webhook@archiver.kernel.org>; Tue,  4 Oct 2022 22:51:20 +0000 (UTC)
-Received: from mail-oi1-f178.google.com (mail-oi1-f178.google.com
- [209.85.167.178])
- by mx.groups.io with SMTP id smtpd.web10.17303.1664923879500717109
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CD5BAC433FE
+	for <webhook@archiver.kernel.org>; Wed,  5 Oct 2022 08:24:23 +0000 (UTC)
+Received: from mail-wm1-f51.google.com (mail-wm1-f51.google.com
+ [209.85.128.51])
+ by mx.groups.io with SMTP id smtpd.web11.21280.1664958261572887490
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 04 Oct 2022 15:51:19 -0700
+ Wed, 05 Oct 2022 01:24:22 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=kje16HBX;
- spf=pass (domain: gmail.com, ip: 209.85.167.178,
- mailfrom: devendra.tewari@gmail.com)
-Received: by mail-oi1-f178.google.com with SMTP id r186so81949oie.4
+ dkim=pass header.i=@hyprua-org.20210112.gappssmtp.com header.s=20210112
+ header.b=O9MexVbD;
+ spf=none, err=SPF record not found (domain: hyprua.org, ip: 209.85.128.51,
+ mailfrom: mathieu.dubois-briand@hyprua.org)
+Received: by mail-wm1-f51.google.com with SMTP id
+ ay7-20020a05600c1e0700b003b49861bf48so1681373wmb.0
         for <openembedded-devel@lists.openembedded.org>;
- Tue, 04 Oct 2022 15:51:19 -0700 (PDT)
+ Wed, 05 Oct 2022 01:24:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date;
-        bh=iXEERn+aDir/Ek2gAX/gTu8w8IyI6NwfAD8myQHq12E=;
-        b=kje16HBXEwsdjUAeUfO2bsM999LXysVdFavemUMHX7Z9djnD5i+zYFHR8Icb5yWLcX
-         O/lb0YXVyGWLIlSyyNRntZjnulqQGt2XhiarotDorUfzaqLX37LFq9Alg2kb0SVZC3L5
-         ecJhQglm2RTo3g3XaAvRz6LtV8jXjjA7axdSZVZLHnWk7OqTPjPvY7AJVUQW5+AeXqaP
-         mNK9nKZU8q9IaL/Et8fGBbd0bix272lTDsugFNShr1hhbBJY/8WjG8eVWLp+FhF1hURd
-         DgulIOlfMmVFzs4v2fsVKNDb5lRUtsud6y4yP3DvnMLFascM7WM/9pasiNQ6rvyUgzxM
-         Uyig==
+        d=hyprua-org.20210112.gappssmtp.com; s=20210112;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:from:to:cc:subject:date;
+        bh=D9AwiQNoN+CJA56qZfTrZgXxmjvxpr4XSrak33MVY0M=;
+        b=O9MexVbDcNzX0QBbDyEziEnM4P0S4p7xLysJOLCyyki9SDEij2qttkpQs+3AdZAikS
+         1Wa1BO95FAIUeyZHNnMXOB0QC4u2uY6qoKR8IaO+oSCVo4JNgnpIU1k+mORkZhqqVEU6
+         Pc5RuRjrh8tfMptL83+if++axFzm03jYq19TypoKlscL/IMQayKM3ig6zbIcdurhu0o8
+         6/A2QG/ufvGfiGz2IFyXmRNsl5agyrsE9sSNWOoURAlY2enoojJnO0i/JouOjPjlHGct
+         mKbsaKGGvIIUN4YkxZC1xLIFJ1SOSezlBXsQ0sbSAmOC9lIdbilObemayRSZz5Zcutxa
+         ryiA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date;
-        bh=iXEERn+aDir/Ek2gAX/gTu8w8IyI6NwfAD8myQHq12E=;
-        b=yH2cWjK+wMMc5Ss7kibZz2cGqPxfLCH4OFxo6NDm2YO+hiIgSfQGtz/yJFKzWLrGY6
-         +7w5gRlKdt18Nwf1GSabP1T7k6rGo5e4RMZd0u6unxIZkMA56RHMdHSCh1tFcgmpickR
-         e7s9N0N6g3/wY+WodhTu4qhvpfOT442nifhnc+h39hqqp6H7G3mv1IrW3MOU2ez4iRf8
-         6aqLDxCKUJ5lTy1uUR/jczl7xwGPWrk+TO3fIt3J9mq/giloTUEripQJTUDuiCFAvFNQ
-         ksDybWf6tUyc37Su6d6/LmA0CX8w197wCICs2yfh7vBE7svSDbMq305MNnMNHgcGdtDv
-         Zecw==
-X-Gm-Message-State: ACrzQf2JIdEe/VfY1i1cMIDxVc9gW5rZ0+qx8AlkNLysIZBBPx4WfLAe
-	Sxp20XcAd56BZ8QPLa5EUcMOHTXri0w=
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date;
+        bh=D9AwiQNoN+CJA56qZfTrZgXxmjvxpr4XSrak33MVY0M=;
+        b=Fwss9wANE8WGTR0zz64xifgybTop4A4XvqdYXQu+VSgAyZ/gXW2nAPBBOkPh1heTDR
+         Q5mgwX2OkOcG4A5NFhz21k/WPGvo7/pIqXr5CCgkPKi9gniVnqnbyhfPNmij2R1r2c0f
+         VEPGZo9IzLKTMrJaRW4HIq7u8JHPka96xk4zeHPW39QLHnTyjyb8QA+F7kcYyoN+GK7w
+         4T1gs5lWjr5qEt+EE5aM5tTX2zZNbQdFURz1bgjQoEnSAsOD/4VhR/GeGefe2I2D5if9
+         /TrqVa2aiwOHAiULGVC2xhXrHzpjarX15tk+FWTf9VP/Xc7JnkqS0Ysbx1gAoo03W4zx
+         Q7/g==
+X-Gm-Message-State: ACrzQf1kIxn62L9EMZkHdnsrBoIAKjhYAqeOmsol+5YZMfLX+sa56RfB
+	DRtMw1TS4tsMbJHXlyvTwhwcrw==
 X-Google-Smtp-Source: 
- AMsMyM73Vnx29U0YvWB7Z5YJTcFyZXJo6Xpo45TB+alDIB/0MSmBbGTUIlJHh3Bn+AXzvYUL0LhPFQ==
-X-Received: by 2002:a05:6808:7cc:b0:34f:9881:7f9e with SMTP id
- f12-20020a05680807cc00b0034f98817f9emr918978oij.57.1664923878434;
-        Tue, 04 Oct 2022 15:51:18 -0700 (PDT)
-Received: from ma-mailsvcp-relay-lapp01.apple.com ([187.105.4.40])
+ AMsMyM4maK942jqZVnCQDWyI6AS13e8t68xDRQqPeJvQevX075xVIP69CA5Jg60az3yWUxmc9+YwfA==
+X-Received: by 2002:a05:600c:2191:b0:3b4:868a:aad3 with SMTP id
+ e17-20020a05600c219100b003b4868aaad3mr2519433wme.112.1664958259531;
+        Wed, 05 Oct 2022 01:24:19 -0700 (PDT)
+Received: from WIPC21110265 ([2a04:cec0:106f:7e5:30ab:9650:2c19:c65b])
         by smtp.gmail.com with ESMTPSA id
- h94-20020a9d2f67000000b0065932853f5esm3294357otb.61.2022.10.04.15.51.16
+ c13-20020adfed8d000000b0022dc6e76bbdsm14018095wro.46.2022.10.05.01.24.17
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 04 Oct 2022 15:51:18 -0700 (PDT)
-From: Devendra Tewari <devendra.tewari@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Devendra Tewari <devendra.tewari@gmail.com>
-Subject: [meta-multimedia][PATCH] libcamera: Bump SRCREV and add libyaml to
- DEPENDS
-Date: Tue,  4 Oct 2022 19:51:06 -0300
-Message-Id: <20221004225106.29537-1-devendra.tewari@gmail.com>
-X-Mailer: git-send-email 2.37.3
+        Wed, 05 Oct 2022 01:24:18 -0700 (PDT)
+Date: Wed, 5 Oct 2022 10:24:15 +0200
+From: Mathieu Dubois-Briand <mathieu.dubois-briand@hyprua.org>
+To: akuster808 <akuster808@gmail.com>
+Cc: openembedded-devel@lists.openembedded.org,
+	Mathieu Dubois-Briand <mbriand@witekio.com>
+Subject: Re: [meta-networking][dunfell][PATCH 2/4] mbedtls: Update to 2.16.12
+ stable version
+Message-ID: <Yz0/LyUoeJSfdSNQ@WIPC21110265>
+References: <20221004062843.2541778-1-mbriand@witekio.com>
+ <20221004062843.2541778-2-mbriand@witekio.com>
+ <9d4accb4-515f-0b72-9670-7c5aad728ef4@gmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <9d4accb4-515f-0b72-9670-7c5aad728ef4@gmail.com>
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 04 Oct 2022 22:51:20 -0000
+ <openembedded-devel@lists.openembedded.org>; Wed, 05 Oct 2022 08:24:23 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/99061
+ https://lists.openembedded.org/g/openembedded-devel/message/99062
 
-Signed-off-by: Devendra Tewari <devendra.tewari@gmail.com>
----
- meta-multimedia/recipes-multimedia/libcamera/libcamera.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+On Tue, Oct 04, 2022 at 02:16:35PM -0400, akuster808 wrote:
+> Why did the LIC_FILES_CHKSUM change?
+> 
 
-diff --git a/meta-multimedia/recipes-multimedia/libcamera/libcamera.bb b/meta-multimedia/recipes-multimedia/libcamera/libcamera.bb
-index 0b9f3f7a5d6..2d3f5e94937 100644
---- a/meta-multimedia/recipes-multimedia/libcamera/libcamera.bb
-+++ b/meta-multimedia/recipes-multimedia/libcamera/libcamera.bb
-@@ -12,13 +12,13 @@ SRC_URI = " \
-         git://git.libcamera.org/libcamera/libcamera.git;protocol=https;branch=master \
- "
- 
--SRCREV = "acf8d028edda0a59b10e15962c2606137a4940af"
-+SRCREV = "ed591e705c451d0ce14988ae96829a31a2ae2f9a"
- 
- PV = "202105+git${SRCPV}"
- 
- S = "${WORKDIR}/git"
- 
--DEPENDS = "python3-pyyaml-native python3-jinja2-native python3-ply-native python3-jinja2-native udev gnutls boost chrpath-native libevent"
-+DEPENDS = "python3-pyyaml-native python3-jinja2-native python3-ply-native python3-jinja2-native udev gnutls boost chrpath-native libevent libyaml"
- DEPENDS += "${@bb.utils.contains('DISTRO_FEATURES', 'qt', 'qtbase qtbase-native', '', d)}"
- 
- PACKAGES =+ "${PN}-gst"
--- 
-2.37.3
+Oh yeh, good question !
 
+Previous LICENSE file was Apache 2.0 license, now we have three files:
+- LICENSE, who basically says "SPDX-License-Identifier: Apache-2.0 OR
+  GPL-2.0-or-later". https://github.com/Mbed-TLS/mbedtls/blob/v2.16.12/LICENSE
+- apache-2.0.txt, well the Apache 2.0 license.
+- gpl-2.0.txt, that I choose to not include in LIC_FILES_CHKSUM, as
+  LICENSE only refer to Apache.
+
+Now, saying this, maybe I should switch LICENSE to
+"GPL-2.0-or-later|Apache-2.0" and use all three files in
+LIC_FILES_CHKSUM ?
+
+Best regards,
+Mathieu
 
