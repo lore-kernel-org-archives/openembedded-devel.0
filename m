@@ -1,112 +1,114 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8EC03C433FE
-	for <webhook@archiver.kernel.org>; Sat,  8 Oct 2022 18:49:04 +0000 (UTC)
-Received: from mail-oa1-f44.google.com (mail-oa1-f44.google.com
- [209.85.160.44])
- by mx.groups.io with SMTP id smtpd.web08.6772.1665254939323909953
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 40F8AC433F5
+	for <webhook@archiver.kernel.org>; Sun,  9 Oct 2022 00:33:56 +0000 (UTC)
+Received: from mail1.bemta37.messagelabs.com (mail1.bemta37.messagelabs.com
+ [85.158.142.112])
+ by mx.groups.io with SMTP id smtpd.web09.9566.1665275625652241842
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 08 Oct 2022 11:48:59 -0700
+ Sat, 08 Oct 2022 17:33:46 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=HZYREvRI;
- spf=pass (domain: gmail.com, ip: 209.85.160.44, mailfrom: raj.khem@gmail.com)
-Received: by mail-oa1-f44.google.com with SMTP id
- 586e51a60fabf-1322d768ba7so8810117fac.5
-        for <openembedded-devel@lists.openembedded.org>;
- Sat, 08 Oct 2022 11:48:59 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=NaZKypnzTG0n0Z14qJ0niYRHbPVLhrnGgMPejM4Creo=;
-        b=HZYREvRI+vdygUfu2LikrlA+ej8I99YoBpfwV4Dy4vyyKm4TMR57Rpv7zxsHfkmTtn
-         BNutkn8TF1DDwOji4cWDh354aZyrRx3ZJs9YiuKR550P7OgOR6ibTB1MO9u5CulRlWPZ
-         9OZ4EQn9Ql7l+vvTWXUA1kVlshbqWiufCN/4EMt+6GJLgSMYSBYlsgOS8vxaUQL45uC9
-         HK39KNHLxX9u+/gMRx2vV74KCu/+DSOcLVe4w3BOfK0Xycb10xt703sKj3VmySwPTI1I
-         kJufKkDfzvHXFSUrMrgK9oSp7+xl48e3ewFZrjdi4wlyVmiJOkAlhdgnSBK0O0GHDxDC
-         wbIA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=NaZKypnzTG0n0Z14qJ0niYRHbPVLhrnGgMPejM4Creo=;
-        b=o/gTc5E1RWhojLljJBwIdRdjowbbTuWh+fnJc/eTSmNr4kyf9InAieYMsPzHeWlc+X
-         E8uQ8qNgXh+0lbZrbTt4vmrQOSa/j46bI3Ca3818+HkzwviIjPKbpqgyvbKxrtgJNqjJ
-         WA2fdl3p0RljsiS6lqkh/OozVC/DPxKwwR3F0G62yLLRtYLGYk91W/bPpYCoknhkBkMT
-         z83G0eYUpiQFPmfM3BSRTMUfH7Oi1A3+uvqYr7wDxr9BQ+C/vJrhqn4TC3TcK/GT2KYH
-         UTiCkehEMKQMuqf5d3LtIM4dqnk9U9GJZ6rl3EVcJXTwFWFDCF/VuL0SYGXvpvwY9mSs
-         jzjg==
-X-Gm-Message-State: ACrzQf13RR9LMHiMttlKd6hbDGEmFTgdZN3CuIc5SKRZgohruaD+dS/d
-	sspSpwzut2Ih43K1j5F6iufIGFt4ao2aFcbCSGY=
-X-Google-Smtp-Source: 
- AMsMyM5YtcxzYFspEJLE+Dmgt6DFE0LjetcD0c/rcMz55WIXvIv91xh6E0VrZQlskUOO1lz3Cr7rU4aha8Nwevi/g2U=
-X-Received: by 2002:a05:6870:b00b:b0:127:2d3d:3c16 with SMTP id
- y11-20020a056870b00b00b001272d3d3c16mr10815714oae.262.1665254938469; Sat, 08
- Oct 2022 11:48:58 -0700 (PDT)
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=IJzMUUVN;
+ spf=pass (domain: fujitsu.com, ip: 85.158.142.112,
+ mailfrom: wangmy@fujitsu.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
+	s=170520fj; t=1665275623; i=@fujitsu.com;
+	bh=fuvdJaLzx04hVzT8yup8fFScvwbegiehZeLNohDxg0Q=;
+	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
+	b=IJzMUUVNcR6wWyQlKRnZ3HYzhIYjJj/eUi5f36wlNl6kfXZkIy+sf9Cyw7e5ESAjB
+	 EmxEFW/0q7V79Ev4wXlATxJrvwCXn3fN6sQG3Y3YS+sKmYo8AVqYJ0xvX0sPmggktj
+	 nTipH2UoSazP66XO9VTKEbWo0MHK12k9Opx8v4VRZdzqU9ksgMv3xzD8yiGm5gNoeU
+	 ZRfIi5+MTk6MqrCVgJXtGOHeAVLs/EeJmy83rFBECVuYN9YN6Rbn0T0RCkbzm+Fh+a
+	 uaoggQzvJs9EhKmdnRM91NZqrt1bU2shtCgX+zOgsb2V5BNjvUX4I+6mRPAoO1KZuF
+	 xZjz2BbiV7gUg==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrDIsWRWlGSWpSXmKPExsViZ8OxWfepmFO
+  ywbl1FhYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8bC3u3MBV85Kr4+3c7SwDiZo4uRk0NI4AGj
+  xMZexi5GLiD7MpPEzelrWCCc3YwST1uOMYNUsQmoSUy/dYMVxBYR0JdYOnsPWJxZQEXixe8ed
+  hBbWMBZYv2U52BxFqD4ummHwWxeASeJvf+2gPVKCChITHn4HiouKHFy5hMWiDkSEgdfvGCGqF
+  GUmH25mQXCrpCYNauNCcJWk7h6bhPzBEb+WUjaZyFpX8DItIrRJqkoMz2jJDcxM0fX0MBA19D
+  QVNfSTNfI0EAvsUo3US+1VDcvv6gkQ9dQL7G8WC+1uFivuDI3OSdFLy+1ZBMjMDBTihMu7WBc
+  t++X3iFGSQ4mJVHep1sdkoX4kvJTKjMSizPii0pzUosPMcpwcChJ8DqxOyULCRalpqdWpGXmA
+  KMEJi3BwaMkwhv2zzFZiLe4IDG3ODMdInWK0ZJj6ux/+5k5loPJmV/bDjALseTl56VKifPGCg
+  PNEwBpyCjNgxsHi+RLjLJSwryMDAwMQjwFqUW5mSWo8q8YxTkYlYR5PwgATeHJzCuB2/oK6CA
+  moIOsHtqBHFSSiJCSamBKdJ0uZbRj800fwwXxB9Y5LM3VKg66zS13eWNA4My1fEultOt3q329
+  NjHfefGqHYrzZu5au2iD0nE/yc/v50uKhDx8/V16b9o3Z6c7F5ym6osFLd8VahP2M9x23w/34
+  sqO5PkLD7oqJExh+Kzon8rxZ+f7hEeuwadd3RbqJWXvOJ5jur2him1riIX9wZy3hdYb375NMH
+  sW7egx18D6Rv6O3zt2ZwgWCOxYsmLxB5cO6V1C567y2WtqrVDR2dvWX3pLK0lfZeasU4/5f3B
+  unB4579jF/e7T2wUK7uyesP+n1Pvyq8fnvb47sfwiW8KhenOmmtk1NX8usnaXrJgW2sO66YfF
+  hTtW9cbc6x8cFrwUp8RSnJFoqMVcVJwIACHV2FpfAwAA
+X-Env-Sender: wangmy@fujitsu.com
+X-Msg-Ref: server-12.tower-728.messagelabs.com!1665275621!211372!1
+X-Originating-IP: [62.60.8.179]
+X-SYMC-ESS-Client-Auth: outbound-route-from=pass
+X-StarScan-Received: 
+X-StarScan-Version: 9.87.3; banners=-,-,-
+X-VirusChecked: Checked
+Received: (qmail 3499 invoked from network); 9 Oct 2022 00:33:41 -0000
+Received: from unknown (HELO n03ukasimr04.n03.fujitsu.local) (62.60.8.179)
+  by server-12.tower-728.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
+ encrypted SMTP; 9 Oct 2022 00:33:41 -0000
+Received: from n03ukasimr04.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTP id 5CADA7C
+	for <openembedded-devel@lists.openembedded.org>;
+ Sun,  9 Oct 2022 01:33:41 +0100 (BST)
+Received: from R01UKEXCASM126.r01.fujitsu.local (R01UKEXCASM126
+ [10.183.43.178])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTPS id 4FB837B
+	for <openembedded-devel@lists.openembedded.org>;
+ Sun,  9 Oct 2022 01:33:41 +0100 (BST)
+Received: from localhost.localdomain (10.167.225.33) by
+ R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
+ (TLS) id 15.0.1497.32; Sun, 9 Oct 2022 01:33:39 +0100
+From: Wang Mingyu <wangmy@fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: Wang Mingyu <wangmy@fujitsu.com>
+Subject: [oe] [meta-gnome] [PATCH] gspell: upgrade 1.11.1 -> 1.12.0
+Date: Sun, 9 Oct 2022 08:33:22 +0800
+Message-ID: <1665275606-29112-1-git-send-email-wangmy@fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-References: <20221008112024.39451-1-devendra.tewari@gmail.com>
-In-Reply-To: <20221008112024.39451-1-devendra.tewari@gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Sat, 8 Oct 2022 11:48:32 -0700
-Message-ID: 
- <CAMKF1srRYuRWDuis7OAyuyV4PFs5gC+hRUPc5M9X-z3dhhTKUw@mail.gmail.com>
-Subject: Re: [oe] [meta-multimedia][PATCH] libcamera: Bump SRCREV and add
- libyaml to DEPENDS
-To: Devendra Tewari <devendra.tewari@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain
+X-Originating-IP: [10.167.225.33]
+X-ClientProxiedBy: G08CNEXCHPEKD07.g08.fujitsu.local (10.167.33.80) To
+ R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
+X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 08 Oct 2022 18:49:04 -0000
+ <openembedded-devel@lists.openembedded.org>; Sun, 09 Oct 2022 00:33:56 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/99098
+ https://lists.openembedded.org/g/openembedded-devel/message/99099
 
-can you rebase this on master and resend?
+Changelog:
+==========
+* Use G_MODULE_EXPORT instead of the custom _GSPELL_EXTERN macro.
+* Small maintenance tasks, some minor simplifications.
+* Translation updates.
 
-On Sat, Oct 8, 2022 at 4:20 AM Devendra Tewari
-<devendra.tewari@gmail.com> wrote:
->
-> Remove boost from DEPENDS because it is no longer needed.
->
-> Signed-off-by: Devendra Tewari <devendra.tewari@gmail.com>
-> ---
->  meta-multimedia/recipes-multimedia/libcamera/libcamera.bb | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
->
-> diff --git a/meta-multimedia/recipes-multimedia/libcamera/libcamera.bb b/meta-multimedia/recipes-multimedia/libcamera/libcamera.bb
-> index 0b9f3f7a5d6..53cd94cbf0e 100644
-> --- a/meta-multimedia/recipes-multimedia/libcamera/libcamera.bb
-> +++ b/meta-multimedia/recipes-multimedia/libcamera/libcamera.bb
-> @@ -12,13 +12,13 @@ SRC_URI = " \
->          git://git.libcamera.org/libcamera/libcamera.git;protocol=https;branch=master \
->  "
->
-> -SRCREV = "acf8d028edda0a59b10e15962c2606137a4940af"
-> +SRCREV = "ed591e705c451d0ce14988ae96829a31a2ae2f9a"
->
->  PV = "202105+git${SRCPV}"
->
->  S = "${WORKDIR}/git"
->
-> -DEPENDS = "python3-pyyaml-native python3-jinja2-native python3-ply-native python3-jinja2-native udev gnutls boost chrpath-native libevent"
-> +DEPENDS = "python3-pyyaml-native python3-jinja2-native python3-ply-native python3-jinja2-native udev gnutls chrpath-native libevent libyaml"
->  DEPENDS += "${@bb.utils.contains('DISTRO_FEATURES', 'qt', 'qtbase qtbase-native', '', d)}"
->
->  PACKAGES =+ "${PN}-gst"
-> --
-> 2.37.3
->
->
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#99096): https://lists.openembedded.org/g/openembedded-devel/message/99096
-> Mute This Topic: https://lists.openembedded.org/mt/94197373/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [raj.khem@gmail.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
->
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+---
+ .../recipes-gnome/gspell/{gspell_1.11.1.bb => gspell_1.12.0.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-gnome/recipes-gnome/gspell/{gspell_1.11.1.bb => gspell_1.12.0.bb} (76%)
+
+diff --git a/meta-gnome/recipes-gnome/gspell/gspell_1.11.1.bb b/meta-gnome/recipes-gnome/gspell/gspell_1.12.0.bb
+similarity index 76%
+rename from meta-gnome/recipes-gnome/gspell/gspell_1.11.1.bb
+rename to meta-gnome/recipes-gnome/gspell/gspell_1.12.0.bb
+index c76a48f19a..b7e4954964 100644
+--- a/meta-gnome/recipes-gnome/gspell/gspell_1.11.1.bb
++++ b/meta-gnome/recipes-gnome/gspell/gspell_1.12.0.bb
+@@ -7,4 +7,4 @@ DEPENDS = "gtk+3 iso-codes enchant2"
+ 
+ inherit gnomebase gettext gobject-introspection vala
+ 
+-SRC_URI[archive.sha256sum] = "ef6aa4e3f711775158a7e241a5f809cf2426bc0e02c23a7d2b5c71fc3de00292"
++SRC_URI[archive.sha256sum] = "40d2850f1bb6e8775246fa1e39438b36caafbdbada1d28a19fa1ca07e1ff82ad"
+-- 
+2.25.1
+
 
