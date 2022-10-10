@@ -2,76 +2,75 @@ Return-Path: <steve@sakoman.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 61D5AC433FE
-	for <webhook@archiver.kernel.org>; Mon, 10 Oct 2022 16:30:46 +0000 (UTC)
-Received: from mail-ed1-f45.google.com (mail-ed1-f45.google.com
- [209.85.208.45])
- by mx.groups.io with SMTP id smtpd.web12.8384.1665419439289382330
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 63977C433F5
+	for <webhook@archiver.kernel.org>; Mon, 10 Oct 2022 16:33:16 +0000 (UTC)
+Received: from mail-ed1-f52.google.com (mail-ed1-f52.google.com
+ [209.85.208.52])
+ by mx.groups.io with SMTP id smtpd.web08.8374.1665419586013270459
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 10 Oct 2022 09:30:39 -0700
+ Mon, 10 Oct 2022 09:33:06 -0700
 Authentication-Results: mx.groups.io;
  dkim=pass header.i=@sakoman-com.20210112.gappssmtp.com header.s=20210112
- header.b=P5eRcThR;
- spf=softfail (domain: sakoman.com, ip: 209.85.208.45,
+ header.b=cmuk6Rz7;
+ spf=softfail (domain: sakoman.com, ip: 209.85.208.52,
  mailfrom: steve@sakoman.com)
-Received: by mail-ed1-f45.google.com with SMTP id g27so16623802edf.11
+Received: by mail-ed1-f52.google.com with SMTP id l22so16640349edj.5
         for <openembedded-devel@lists.openembedded.org>;
- Mon, 10 Oct 2022 09:30:39 -0700 (PDT)
+ Mon, 10 Oct 2022 09:33:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=sakoman-com.20210112.gappssmtp.com; s=20210112;
         h=cc:to:subject:message-id:date:from:in-reply-to:references
          :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=RSccP0m1gcl5chgQIRnikpLqgArFAvY2jEWgyASpvaE=;
-        b=P5eRcThRn6+AjA0HSABN3Mk4nuxvyOOumIqMtS9zbZi8JRSMXH1y+DU0Wu3cTv6ejB
-         T8YYicLXQotk8B2IjF37XHkRbwRdK83u9800u5BENbdf3Se/OddlIvef9eEPc+T/AQYI
-         aY+w0NWX8hGA1/Q8DEUkAVRpWc4K3Lb2rhn0Bs6VaPs/Il9PAeeP/EZtZJmV5Tcanmze
-         kuX4lb6ThNyBFZMHbU0jAJNna1XDxM57tC5xvvFNBVG/bT99Nxl+BKR9CYAuNkq/fjf8
-         FRvRVwi16qaGf5hIT9i/g1rz7SM8Psv01wS+OhYfR0WRvpm1CLAUuenyiMfHbinz3Nad
-         sZxw==
+        bh=DW5Q6UVSdE//0uV+RyhSpXUV1zeIi2kRhyUkxicRJJ8=;
+        b=cmuk6Rz7C6kr0/KL04GbxkICJ5VcU5k8qkY68qVpSHkijyta+taJyPEFCKLKfe1tq9
+         K0QEpmUsknKzrKQVJVPdV9yOys7TXq436YDuE0QhZgMeiIL4yT2ITaeT4ez/VtIvJcSk
+         gBJAePOaWJ1T3+a/Xz9KXUCDqubio1qHVcU6V30GLCPOqiqANk2fGNe/fxahG/6skRAF
+         ZN1Ycjeq8+To3HVf9BaspJfdgZHto5RT8Sn294XAj37YUsKiLFb4KYxsEKB6cATWhmaQ
+         JD2fXGPy1fdqpPSUmbXKr4R3UgW4JIFIQwytr3G39h1XvMmMd9fbQqepfjKV8Yt+xUs2
+         2QNQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=cc:to:subject:message-id:date:from:in-reply-to:references
          :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=RSccP0m1gcl5chgQIRnikpLqgArFAvY2jEWgyASpvaE=;
-        b=r9Spxe43gu9SPWVff/0D5K3BSYtUw3KILdHBKwqlMYANAo7ApUbwXdAMMyBEfR7KI+
-         Q+fbisfBHa7uXSnrfIp0pxIrH327tW3TmhOTv57NQJgZhcgjReKsqdGQwlk6ebmYBCeo
-         Tpz91RXt8IgAGOmWAEFXnCB4DzOy+X+beW7bN+KIaFlDBh9pBT/XyBF5ENw6QguB40Hc
-         Ph87ulEHKdF6GgvLaO8JuSQ0CmaiOEOkQfe6qacrLMLfp+FzMkPJa1U7rOZYrOo/G7CD
-         XjgFGOJ7P6QCguPnkpSy6E5yzScaZUtk+ZbJWgOd+yrJMqwWMpjHkvEmI0RounvUirgD
-         FRZw==
-X-Gm-Message-State: ACrzQf2BI6sz1xFC9cXIOao9h+2osjLE2K2k8XwCAb1T0Rp3V1bY1B3q
-	sYLhsSP5QnlS4AB1Ez4TmPtvUsxXoYKsb8M11cHr2v9/f76g2cDo
+        bh=DW5Q6UVSdE//0uV+RyhSpXUV1zeIi2kRhyUkxicRJJ8=;
+        b=CeHX8tshLUXhhr1himt25STiZcHj73b96a2EWOh2Y7AA1ahRE18+mTcypCU7y/f+Zp
+         +OaTY/EBd2o8XHO7h5WHu6OHXigkOpbd+dhJPHqKYkaZUx4NdyWkCKLo9rQVbD3jRCAP
+         6PJrNJZsurcnoGrHxzvUJrXe3y5ZlXLEARKh1u1gq4DU0noRUr+oCd1Ps3P3q6Sk33XX
+         9o4zd/XFPfcfcWSxustPUxdf6GmsEuvKSSJdAG+j8l1e1Mmp/a4/wUVhOvhevYajHsio
+         TODgqa3YNTlH2YaUUinPsdlO2q67Z2dN2AoQSYALD1jBYfAHNQ8mM/QQaYsFG4rKAGLH
+         FQsA==
+X-Gm-Message-State: ACrzQf367gFCQ3yjvNpXIpzIId1ek5KpgT5AEtRrMbH3T4LgOZRQmoeZ
+	kpO4EbEflRsYGXrxS0/dFK2b7kipPHgzA226jGNUDg==
 X-Google-Smtp-Source: 
- AMsMyM6XcKQj1R3mVfH94kXj10PTII0ZfCoNWQH+giDI/nvbwin6yNqwfRSL+oDYcXkl84xl7i7T6YFcvBXF/5oMn8M=
-X-Received: by 2002:a05:6402:2554:b0:459:b3e9:a6b1 with SMTP id
- l20-20020a056402255400b00459b3e9a6b1mr18739867edb.124.1665419437640; Mon, 10
- Oct 2022 09:30:37 -0700 (PDT)
+ AMsMyM7ZGgyYSHYf/xBIE1f3RCdfoyauLMJg/6Cnl5rhbDX1treKeserW7NHoc4FU1MFFAgR5stf1Nf+5M4HpRLjwJg=
+X-Received: by 2002:a05:6402:f08:b0:459:5f08:1b26 with SMTP id
+ i8-20020a0564020f0800b004595f081b26mr18824929eda.190.1665419584397; Mon, 10
+ Oct 2022 09:33:04 -0700 (PDT)
 MIME-Version: 1.0
-References: <20221009155421.278430-1-vkumbhar@mvista.com>
-In-Reply-To: <20221009155421.278430-1-vkumbhar@mvista.com>
+References: <20221010132640.51046-1-vkumbhar@mvista.com>
+In-Reply-To: <20221010132640.51046-1-vkumbhar@mvista.com>
 From: Steve Sakoman <steve@sakoman.com>
-Date: Mon, 10 Oct 2022 06:30:26 -1000
+Date: Mon, 10 Oct 2022 06:32:53 -1000
 Message-ID: 
- <CAOSpxdapKxaW=FHxBhS0-OVOtWc-+ng_vi7v+P2mpNT9F=F6Zg@mail.gmail.com>
-Subject: Re: [oe] [OE-core][dunfell][PATCH] CVE-2022-39177 bluez: BlueZ allows
- physically proximate attackers to cause a denial of service because malformed
- and invalid capabilities can be processed in profiles/audio/avdtp.c
+ <CAOSpxdaut=PvGVpfZ4LoehEuPnQy5Sf3mWi6xP2G0qajw_Lp8w@mail.gmail.com>
+Subject: Re: [oe] [OE-core][dunfell][PATCH] CVE-2021-20196 QEMU: block: fdc:
+ null pointer dereference may lead to guest crash
 To: vkumbhar <vkumbhar@mvista.com>
 Cc: openembedded-devel@lists.openembedded.org
 Content-Type: text/plain; charset="UTF-8"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 10 Oct 2022 16:30:46 -0000
+ <openembedded-devel@lists.openembedded.org>; Mon, 10 Oct 2022 16:33:16 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/99133
+ https://lists.openembedded.org/g/openembedded-devel/message/99134
 
 You sent this to the wrong list!  You should resend to
 openembedded-core@lists.openembedded.org
 
 A more standard subject/shortlog would be something like:
-[OE-core][dunfell][PATCH] bluez: fix CVE-2022-39177
+[OE-core][dunfell][PATCH] qemu: fix CVE-2021-20196
 
 You can give a detailed description in the commit message, so you just
 need the top level info in the subject line. And it should always
@@ -81,76 +80,86 @@ Thanks!
 
 Steve
 
-On Sun, Oct 9, 2022 at 12:06 PM vkumbhar <vkumbhar@mvista.com> wrote:
+On Mon, Oct 10, 2022 at 3:30 AM vkumbhar <vkumbhar@mvista.com> wrote:
 >
-> Source: https://git.kernel.org/pub/scm/bluetooth/bluez.git/commit/?id=e2b0f0d8d63e1223bb714a9efb37e2257818268b
-> MR: 122138
+> Source: https://gitlab.com/qemu-project/qemu/-/commit/1ab95af033a419e7a64e2d58e67dd96b20af5233
+> MR: 111637
 > Type: Security Fix
-> Disposition: Backport from https://git.kernel.org/pub/scm/bluetooth/bluez.git/commit/?id=e2b0f0d8d63e1223bb714a9efb37e2257818268b
-> ChangeID: 680cf2af29d34d7925523e413b40008a71b0a26c
+> Disposition: Backport from https://gitlab.com/qemu-project/qemu/-/commit/1ab95af033a419e7a64e2d58e67dd96b20af5233
+> ChangeID: c1e435aa25bb60b362bb68ab253ff55504e0328d
 > Description:
->     avrcp: Fix not checking if params_len match number of received bytes
+>     hw/block/fdc: Kludge missing floppy drive to fix CVE-2021-20196
 >
->     This makes sure the number of bytes in the params_len matches the
->     remaining bytes received so the code don't end up accessing invalid
->     memory.
+>     Guest might select another drive on the bus by setting the
+>     DRIVE_SEL bit of the DIGITAL OUTPUT REGISTER (DOR).
+>     The current controller model doesn't expect a BlockBackend
+>     to be NULL. A simple way to fix CVE-2021-20196 is to create
+>     an empty BlockBackend when it is missing. All further
+>     accesses will be safely handled, and the controller state
+>     machines keep behaving correctly.
 >
 > Signed-off-by: Vivek Kumbhar <vkumbhar@mvista.com>
 > ---
->  meta/recipes-connectivity/bluez5/bluez5.inc   |  1 +
->  .../bluez5/bluez5/0001-CVE-2022-39177.patch   | 34 +++++++++++++++++++
->  2 files changed, 35 insertions(+)
->  create mode 100644 meta/recipes-connectivity/bluez5/bluez5/0001-CVE-2022-39177.patch
+>  meta/recipes-devtools/qemu/qemu.inc           |  1 +
+>  .../qemu/qemu/0001-CVE-2021-20196.patch       | 40 +++++++++++++++++++
+>  2 files changed, 41 insertions(+)
+>  create mode 100644 meta/recipes-devtools/qemu/qemu/0001-CVE-2021-20196.patch
 >
-> diff --git a/meta/recipes-connectivity/bluez5/bluez5.inc b/meta/recipes-connectivity/bluez5/bluez5.inc
-> index f34ba0dce5..f7d5f57c75 100644
-> --- a/meta/recipes-connectivity/bluez5/bluez5.inc
-> +++ b/meta/recipes-connectivity/bluez5/bluez5.inc
-> @@ -52,6 +52,7 @@ SRC_URI = "${KERNELORG_MIRROR}/linux/bluetooth/bluez-${PV}.tar.xz \
->             ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '', 'file://0001-Allow-using-obexd-without-systemd-in-the-user-sessio.patch', d)} \
->             file://0001-tests-add-a-target-for-building-tests-without-runnin.patch \
->             file://0001-test-gatt-Fix-hung-issue.patch \
-> +           file://0001-CVE-2022-39177.patch \
->             "
->  S = "${WORKDIR}/bluez-${PV}"
+> diff --git a/meta/recipes-devtools/qemu/qemu.inc b/meta/recipes-devtools/qemu/qemu.inc
+> index 7a963ad57c..2cdb718b1f 100644
+> --- a/meta/recipes-devtools/qemu/qemu.inc
+> +++ b/meta/recipes-devtools/qemu/qemu.inc
+> @@ -52,6 +52,7 @@ SRC_URI = "https://download.qemu.org/${BPN}-${PV}.tar.xz \
+>            file://CVE-2019-20175.patch \
+>            file://CVE-2020-24352.patch \
+>            file://CVE-2020-25723.patch \
+> +          file://0001-CVE-2021-20196.patch \
+>            "
+>  UPSTREAM_CHECK_REGEX = "qemu-(?P<pver>\d+(\.\d+)+)\.tar"
 >
-> diff --git a/meta/recipes-connectivity/bluez5/bluez5/0001-CVE-2022-39177.patch b/meta/recipes-connectivity/bluez5/bluez5/0001-CVE-2022-39177.patch
+> diff --git a/meta/recipes-devtools/qemu/qemu/0001-CVE-2021-20196.patch b/meta/recipes-devtools/qemu/qemu/0001-CVE-2021-20196.patch
 > new file mode 100644
-> index 0000000000..54709e0cb1
+> index 0000000000..affc8ead58
 > --- /dev/null
-> +++ b/meta/recipes-connectivity/bluez5/bluez5/0001-CVE-2022-39177.patch
-> @@ -0,0 +1,34 @@
-> +From e5c8613fe171f0dc3aa812270bb15063aaa73d45 Mon Sep 17 00:00:00 2001
+> +++ b/meta/recipes-devtools/qemu/qemu/0001-CVE-2021-20196.patch
+> @@ -0,0 +1,40 @@
+> +From a253e632aea9e0e3f3f2ad3d157f34908e9c2008 Mon Sep 17 00:00:00 2001
 > +From: Vivek Kumbhar <vkumbhar@mvista.com>
-> +Date: Sun, 9 Oct 2022 21:06:51 +0530
-> +Subject: [PATCH] CVE-2022-39177
+> +Date: Mon, 10 Oct 2022 10:00:53 +0530
+> +Subject: [PATCH] CVE-2021-20196
 > +
-> +Upstream-Status: https://git.kernel.org/pub/scm/bluetooth/bluez.git/commit/?id=e2b0f0d8d63e1223bb714a9efb37e2257818268b
-> +CVE: CVE-2022-39177
+> +Upstream-Status: https://gitlab.com/qemu-project/qemu/-/commit/1ab95af033a419e7a64e2d58e67dd96b20af5233
+> +CVE: CVE-2021-20196
 > +Signed-off-by: Vivek Kumbhar <vkumbhar@mvista.com>
 > +---
-> + profiles/audio/avrcp.c | 8 ++++++++
-> + 1 file changed, 8 insertions(+)
+> + hw/block/fdc.c | 14 +++++++++++++-
+> + 1 file changed, 13 insertions(+), 1 deletion(-)
 > +
-> +diff --git a/profiles/audio/avrcp.c b/profiles/audio/avrcp.c
-> +index d9471c0..0233d53 100644
-> +--- a/profiles/audio/avrcp.c
-> ++++ b/profiles/audio/avrcp.c
-> +@@ -1916,6 +1916,14 @@ static size_t handle_vendordep_pdu(struct avctp *conn, uint8_t transaction,
-> +               goto err_metadata;
-> +       }
+> +diff --git a/hw/block/fdc.c b/hw/block/fdc.c
+> +index ac5d31e8..a887369c 100644
+> +--- a/hw/block/fdc.c
+> ++++ b/hw/block/fdc.c
+> +@@ -1356,7 +1356,19 @@ static FDrive *get_drv(FDCtrl *fdctrl, int unit)
 > +
-> ++      operands += sizeof(*pdu);
-> ++      operand_count -= sizeof(*pdu);
+> + static FDrive *get_cur_drv(FDCtrl *fdctrl)
+> + {
+> +-    return get_drv(fdctrl, fdctrl->cur_drv);
+> ++    FDrive *cur_drv = get_drv(fdctrl, fdctrl->cur_drv);
 > ++
-> ++      if (pdu->params_len != operand_count) {
-> ++              DBG("AVRCP PDU parameters length don't match");
-> ++              pdu->params_len = operand_count;
-> ++      }
-> ++
-> +       for (handler = session->control_handlers; handler->pdu_id; handler++) {
-> +               if (handler->pdu_id == pdu->pdu_id)
-> +                       break;
+> ++    if (!cur_drv->blk) {
+> ++        /*
+> ++         * Kludge: empty drive line selected. Create an anonymous
+> ++         * BlockBackend to avoid NULL deref with various BlockBackend
+> ++         * API calls within this model (CVE-2021-20196).
+> ++         * Due to the controller QOM model limitations, we don't
+> ++         * attach the created to the controller device.
+> ++         */
+> ++        cur_drv->blk = blk_create_empty_drive();
+> ++    }
+> ++    return cur_drv;
+> + }
+> +
+> + /* Status A register : 0x00 (read-only) */
 > +--
 > +2.25.1
 > +
@@ -160,8 +169,8 @@ On Sun, Oct 9, 2022 at 12:06 PM vkumbhar <vkumbhar@mvista.com> wrote:
 >
 > -=-=-=-=-=-=-=-=-=-=-=-
 > Links: You receive all messages sent to this group.
-> View/Reply Online (#99112): https://lists.openembedded.org/g/openembedded-devel/message/99112
-> Mute This Topic: https://lists.openembedded.org/mt/94225396/3620601
+> View/Reply Online (#99128): https://lists.openembedded.org/g/openembedded-devel/message/99128
+> Mute This Topic: https://lists.openembedded.org/mt/94236015/3620601
 > Group Owner: openembedded-devel+owner@lists.openembedded.org
 > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [steve@sakoman.com]
 > -=-=-=-=-=-=-=-=-=-=-=-
