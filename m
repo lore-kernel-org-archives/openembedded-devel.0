@@ -1,97 +1,158 @@
-Return-Path: <leon.anavi@konsulko.com>
+Return-Path: <steve@sakoman.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D9E73C4332F
-	for <webhook@archiver.kernel.org>; Mon, 10 Oct 2022 14:43:35 +0000 (UTC)
-Received: from voyager.superhosting.bg (voyager.superhosting.bg
- [79.124.30.14])
- by mx.groups.io with SMTP id smtpd.web12.7068.1665413010772540685
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5B02FC433F5
+	for <webhook@archiver.kernel.org>; Mon, 10 Oct 2022 16:27:46 +0000 (UTC)
+Received: from mail-ed1-f52.google.com (mail-ed1-f52.google.com
+ [209.85.208.52])
+ by mx.groups.io with SMTP id smtpd.web11.8158.1665419262609228671
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 10 Oct 2022 07:43:32 -0700
+ Mon, 10 Oct 2022 09:27:43 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@anavi.org header.s=default header.b=fdE+Xpjm;
- spf=permerror,
- err=parse error for token &{10 18 spf.securedserverspace.com}: parse error
- for token &{10 18 _netblocks4.securedserverspace.com}: limit exceeded
- (domain: konsulko.com, ip: 79.124.30.14, mailfrom: leon.anavi@konsulko.com)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=anavi.org;
-	s=default; h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:
-	Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:Content-Description:
-	Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
-	In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
-	List-Post:List-Owner:List-Archive;
-	bh=UbPo/ObWWIHRIEPiJKOpipsrUGM92FrkKu7WP1ZWxeQ=; b=fdE+XpjmBfSKGUR+kdPSzdJII5
-	PggUVSfvxfAfnber6woKJLAu3ZjtM6aQWAqVnMHivJ5X6yyVs6d/hXSNLff16a9VM5nI2PV38VLjB
-	L9IR8LP9EKtfML1BI+/isUWu9ewdbuwzMk65AtJPwmYCs3D+rWfy7TxCFcMNglO1tLMwQiJpvEADQ
-	pDVDHY88tdUbABzX13uIh9RtkApHdmBC25SF8wUx8osEWJsQBaqdZGM5ojCCdq/FmB9zGWhi+3zcM
-	jQmQHFtKKHaZ+ZT2qAGcm5NbgfmBEpgIlUqcgEo2yhuuIMFTPRBsFoOv0UptwskMj8efhJ9pf1Fwf
-	845CoSxw==;
-Received: from lan.nucleusys.com ([92.247.61.126]:49634 helo=tone.k.g)
-	by voyager.superhosting.bg with esmtpsa  (TLS1.2) tls
- TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
-	(Exim 4.95)
-	(envelope-from <leon.anavi@konsulko.com>)
-	id 1ohu0O-0000vn-U9;
-	Mon, 10 Oct 2022 17:43:29 +0300
-From: Leon Anavi <leon.anavi@konsulko.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 1/2] python3-astroid: Upgrade 2.12.10 -> 2.12.11
-Date: Mon, 10 Oct 2022 17:43:19 +0300
-Message-Id: <20221010144320.3908330-1-leon.anavi@konsulko.com>
-X-Mailer: git-send-email 2.30.2
+ dkim=pass header.i=@sakoman-com.20210112.gappssmtp.com header.s=20210112
+ header.b=IhCNKm7r;
+ spf=softfail (domain: sakoman.com, ip: 209.85.208.52,
+ mailfrom: steve@sakoman.com)
+Received: by mail-ed1-f52.google.com with SMTP id s30so16669397eds.1
+        for <openembedded-devel@lists.openembedded.org>;
+ Mon, 10 Oct 2022 09:27:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=sakoman-com.20210112.gappssmtp.com; s=20210112;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=KQWMvUoO7RP5DgpnxNOxMoxklUUY6r+28835ukudpvk=;
+        b=IhCNKm7rk9DhN+Qy9krLGMimS2870GH2R1l39SiCbTxQpkidCctnEnOoHfSzIkdQ+W
+         n14b/6Hkzkjxi0YjeCykIdrCKi1L6pQAqt31nyeEdq0+XJD55ZxB7w9EtYu0tEd8Sdje
+         KeVyBk+hcKG2t3ND144B6q98YnAebBgO1uoOPkgSHY9MyICxoL1wvMHexXO1mm0e18DH
+         b08XBiZEcQl5hY0LEBLtSxGSfkNHEwxZtFOb0ywMxHlMH78srnbdw5wBTQ8XUAspM0+3
+         0kNSaYd5RQrQqeM/bzPkzLWBwg8jPkw2EqAcLUc4LFSKo6ENK97O4b2UbsOsDeDQdQJW
+         ARsQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=KQWMvUoO7RP5DgpnxNOxMoxklUUY6r+28835ukudpvk=;
+        b=UCxOBFi/AVUYRRkANqOHvR3xFEM/dcfqV8znqx/GwQ3JKMQ0MJvI+dWDFOrJCrwUOB
+         dgDwDjmbeQvNVVPaExWC+USjWSL08Eu56MvO+Org+AOovP3+gJKWdPCOFYn52u/qGcYx
+         SwF9ahBnmDhHkazEugyV86Wmf4nXMA4JMx8DPp+cIy0DBmNHgDleyfgQc8Y5Ll9qTQqG
+         lMlhsgpTLDSxNjSkrcTeV6UTbLb0eiZdgBJmf3yqdrjCRikW8IIBBuTErIQKyNJYMemK
+         1A4Gjduejwdf4roitxMUpqOzkXPXh9T/NObsuboyiyQ4tgorx3GPAsRy50jhWbtyvKZ/
+         cBBA==
+X-Gm-Message-State: ACrzQf1jHu5KWR7Y/hdu59ZQpS28Mox+q9tVPOzNyX8sC4+69hg6XQ+V
+	VrFuL7v+s+AmHrSxg/vyb0smPuOrbTreCAOxoOWMoQ==
+X-Google-Smtp-Source: 
+ AMsMyM5HqiotyUyk8OuOOebgnAP4Asi2Z0N5qetQKsRsGhSaaPThEueADNNSaGCpLkuMsJ4NxO2iOlFbnTT+4FHPyEU=
+X-Received: by 2002:a05:6402:501a:b0:457:f093:cadb with SMTP id
+ p26-20020a056402501a00b00457f093cadbmr18368585eda.143.1665419260801; Mon, 10
+ Oct 2022 09:27:40 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-AntiAbuse: This header was added to track abuse,
- please include it with any abuse report
-X-AntiAbuse: Primary Hostname - voyager.superhosting.bg
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - konsulko.com
-X-Get-Message-Sender-Via: voyager.superhosting.bg: authenticated_id:
- leon@anavi.org
-X-Authenticated-Sender: voyager.superhosting.bg: leon@anavi.org
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
+References: <20221009144614.275815-1-vkumbhar@mvista.com>
+In-Reply-To: <20221009144614.275815-1-vkumbhar@mvista.com>
+From: Steve Sakoman <steve@sakoman.com>
+Date: Mon, 10 Oct 2022 06:27:29 -1000
+Message-ID: 
+ <CAOSpxdY0Ed5DO+MAotKpW1kbCXzi40DA0nM5guXt9NgnKRvGAQ@mail.gmail.com>
+Subject: Re: [oe] [OE-core][dunfell][PATCH] CVE-2022-38178 bind: memory leaks
+ in EdDSA DNSSEC verification code
+To: vkumbhar <vkumbhar@mvista.com>
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 10 Oct 2022 14:43:35 -0000
+ <openembedded-devel@lists.openembedded.org>; Mon, 10 Oct 2022 16:27:46 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/99130
+ https://lists.openembedded.org/g/openembedded-devel/message/99132
 
-Upgrade to release 2.12.11:
+You sent this to the wrong list!  You should resend to
+openembedded-core@lists.openembedded.org
 
-- Improve detection of namespace packages for the modules with
-  __spec__ set to None.
-- Fixed a regression in the creation of the __init__ of dataclasses
-  with multiple inheritance.
+A more standard subject/shortlog would be something like:
+[OE-core][dunfell][PATCH] bind: fix CVE-2022-38178
 
-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
----
- .../{python3-astroid_2.12.10.bb => python3-astroid_2.12.11.bb}  | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-astroid_2.12.10.bb => python3-astroid_2.12.11.bb} (89%)
+You can give a detailed description in the commit message, so you just
+need the top level info in the subject line. And it should always
+start with the package/recipe name.
 
-diff --git a/meta-python/recipes-devtools/python/python3-astroid_2.12.10.bb b/meta-python/recipes-devtools/python/python3-astroid_2.12.11.bb
-similarity index 89%
-rename from meta-python/recipes-devtools/python/python3-astroid_2.12.10.bb
-rename to meta-python/recipes-devtools/python/python3-astroid_2.12.11.bb
-index c1d746b89..b9dc58082 100644
---- a/meta-python/recipes-devtools/python/python3-astroid_2.12.10.bb
-+++ b/meta-python/recipes-devtools/python/python3-astroid_2.12.11.bb
-@@ -4,7 +4,7 @@ SECTION = "devel/python"
- LICENSE = "LGPL-2.1-only"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=a70cf540abf41acb644ac3b621b2fad1"
- 
--SRC_URI[sha256sum] = "81f870105d892e73bf535da77a8261aa5bde838fa4ed12bb2f435291a098c581"
-+SRC_URI[sha256sum] = "2df4f9980c4511474687895cbfdb8558293c1a826d9118bb09233d7c2bff1c83"
- 
- inherit pypi setuptools3
- 
--- 
-2.30.2
+Thanks!
 
+Steve
+
+On Sun, Oct 9, 2022 at 4:49 AM vkumbhar <vkumbhar@mvista.com> wrote:
+>
+> Source: https://gitlab.isc.org/isc-projects/bind9/-/commit/1af23378ebb11da2eb0f412e4563d6c4165fbd3d
+> MR: 122537
+> Type: Security Fix
+> Disposition: Backport from https://gitlab.isc.org/isc-projects/bind9/-/commit/1af23378ebb11da2eb0f412e4563d6c4165fbd3d
+> ChangeID: f93f9a7755124934083d77cf9334fffb32a0c220
+> Description:
+>     CVE-2022-38178 bind: Free ctx on invalid siglen
+>
+> Signed-off-by: Vivek Kumbhar <vkumbhar@mvista.com>
+> ---
+>  .../bind/bind/0001-CVE-2022-38178.patch       | 28 +++++++++++++++++++
+>  .../recipes-connectivity/bind/bind_9.11.22.bb |  1 +
+>  2 files changed, 29 insertions(+)
+>  create mode 100644 meta/recipes-connectivity/bind/bind/0001-CVE-2022-38178.patch
+>
+> diff --git a/meta/recipes-connectivity/bind/bind/0001-CVE-2022-38178.patch b/meta/recipes-connectivity/bind/bind/0001-CVE-2022-38178.patch
+> new file mode 100644
+> index 0000000000..bf48dd69a1
+> --- /dev/null
+> +++ b/meta/recipes-connectivity/bind/bind/0001-CVE-2022-38178.patch
+> @@ -0,0 +1,28 @@
+> +From cedf585da4809d1bde70cfe800d0f15e3cdccb58 Mon Sep 17 00:00:00 2001
+> +From: Vivek Kumbhar <vkumbhar@mvista.com>
+> +Date: Sun, 9 Oct 2022 19:54:32 +0530
+> +Subject: [PATCH] CVE-2022-38178
+> +
+> +Upstream-Status: https://gitlab.isc.org/isc-projects/bind9/-/commit/7c0028cfad2ae5fdf82c4d02d3b8b3a1e96dc6ec
+> +CVE: CVE-2022-38178
+> +Signed-off-by: Vivek Kumbhar <vkumbhar@mvista.com>
+> +---
+> + lib/dns/openssleddsa_link.c | 2 +-
+> + 1 file changed, 1 insertion(+), 1 deletion(-)
+> +
+> +diff --git a/lib/dns/openssleddsa_link.c b/lib/dns/openssleddsa_link.c
+> +index 76c7737..295f08e 100644
+> +--- a/lib/dns/openssleddsa_link.c
+> ++++ b/lib/dns/openssleddsa_link.c
+> +@@ -325,7 +325,7 @@ openssleddsa_verify(dst_context_t *dctx, const isc_region_t *sig) {
+> +               siglen = DNS_SIG_ED448SIZE;
+> +
+> +       if (sig->length != siglen)
+> +-              return (DST_R_VERIFYFAILURE);
+> ++               DST_RET(DST_R_VERIFYFAILURE);
+> +
+> +       isc_buffer_usedregion(buf, &tbsreg);
+> +
+> +--
+> +2.25.1
+> +
+> diff --git a/meta/recipes-connectivity/bind/bind_9.11.22.bb b/meta/recipes-connectivity/bind/bind_9.11.22.bb
+> index 3b4a299b36..b075d01e2b 100644
+> --- a/meta/recipes-connectivity/bind/bind_9.11.22.bb
+> +++ b/meta/recipes-connectivity/bind/bind_9.11.22.bb
+> @@ -18,6 +18,7 @@ SRC_URI = "https://ftp.isc.org/isc/bind9/${PV}/${BPN}-${PV}.tar.gz \
+>             file://0001-configure.in-remove-useless-L-use_openssl-lib.patch \
+>             file://0001-named-lwresd-V-and-start-log-hide-build-options.patch \
+>             file://0001-avoid-start-failure-with-bind-user.patch \
+> +           file://0001-CVE-2022-38178.patch \
+>             "
+>
+>  SRC_URI[sha256sum] = "afc6d8015006f1cabf699ff19f517bb8fd9c1811e5231f26baf51c3550262ac9"
+> --
+> 2.25.1
+>
+>
+> -=-=-=-=-=-=-=-=-=-=-=-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#99110): https://lists.openembedded.org/g/openembedded-devel/message/99110
+> Mute This Topic: https://lists.openembedded.org/mt/94217455/3620601
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [steve@sakoman.com]
+> -=-=-=-=-=-=-=-=-=-=-=-
+>
 
