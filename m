@@ -1,178 +1,96 @@
-Return-Path: <steve@sakoman.com>
+Return-Path: <festevam@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 63977C433F5
-	for <webhook@archiver.kernel.org>; Mon, 10 Oct 2022 16:33:16 +0000 (UTC)
-Received: from mail-ed1-f52.google.com (mail-ed1-f52.google.com
- [209.85.208.52])
- by mx.groups.io with SMTP id smtpd.web08.8374.1665419586013270459
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B2DCCC433F5
+	for <webhook@archiver.kernel.org>; Mon, 10 Oct 2022 20:21:27 +0000 (UTC)
+Received: from mail-oi1-f177.google.com (mail-oi1-f177.google.com
+ [209.85.167.177])
+ by mx.groups.io with SMTP id smtpd.web09.2671.1665433279677152459
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 10 Oct 2022 09:33:06 -0700
+ Mon, 10 Oct 2022 13:21:19 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@sakoman-com.20210112.gappssmtp.com header.s=20210112
- header.b=cmuk6Rz7;
- spf=softfail (domain: sakoman.com, ip: 209.85.208.52,
- mailfrom: steve@sakoman.com)
-Received: by mail-ed1-f52.google.com with SMTP id l22so16640349edj.5
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=gqkqvu8O;
+ spf=pass (domain: gmail.com, ip: 209.85.167.177,
+ mailfrom: festevam@gmail.com)
+Received: by mail-oi1-f177.google.com with SMTP id m81so13862117oia.1
         for <openembedded-devel@lists.openembedded.org>;
- Mon, 10 Oct 2022 09:33:05 -0700 (PDT)
+ Mon, 10 Oct 2022 13:21:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=sakoman-com.20210112.gappssmtp.com; s=20210112;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=DW5Q6UVSdE//0uV+RyhSpXUV1zeIi2kRhyUkxicRJJ8=;
-        b=cmuk6Rz7C6kr0/KL04GbxkICJ5VcU5k8qkY68qVpSHkijyta+taJyPEFCKLKfe1tq9
-         K0QEpmUsknKzrKQVJVPdV9yOys7TXq436YDuE0QhZgMeiIL4yT2ITaeT4ez/VtIvJcSk
-         gBJAePOaWJ1T3+a/Xz9KXUCDqubio1qHVcU6V30GLCPOqiqANk2fGNe/fxahG/6skRAF
-         ZN1Ycjeq8+To3HVf9BaspJfdgZHto5RT8Sn294XAj37YUsKiLFb4KYxsEKB6cATWhmaQ
-         JD2fXGPy1fdqpPSUmbXKr4R3UgW4JIFIQwytr3G39h1XvMmMd9fbQqepfjKV8Yt+xUs2
-         2QNQ==
+        d=gmail.com; s=20210112;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=mWjb/QeSQZaUWFWHcJasq11PZWPxHkVTFW3dq3hV+HI=;
+        b=gqkqvu8OUF9A8M0Jz63Q1lD/2eRK3As9RXHFYs1Z5UOTEQBal55XcLX3XD4lkiVAqO
+         SD4BlCxyr4yZp+ti6kcjSzK5Fme7Njk+i9w3M39o5zSRrtjtIwo2fib4gne/qEnLIPwd
+         Tr3iusK9vG4HODAvN1+Hw7h7Zm1XTVezlomaOrLZanixPTwbSbv3K2wRYzaR1UG+jqYQ
+         FcalPkkvY8Qy2Wn3ZmfddT5PO1uAUUU20qbOzACzhidobjoQ/yNfoCaxhtfXRCtEgHUs
+         KgDI8jjDjlQXhgwPlyvBAMVmyBOUIhAFZs0NjlUqUjekuco/vBlSc/+NdACQimUB6LFX
+         VLOg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=DW5Q6UVSdE//0uV+RyhSpXUV1zeIi2kRhyUkxicRJJ8=;
-        b=CeHX8tshLUXhhr1himt25STiZcHj73b96a2EWOh2Y7AA1ahRE18+mTcypCU7y/f+Zp
-         +OaTY/EBd2o8XHO7h5WHu6OHXigkOpbd+dhJPHqKYkaZUx4NdyWkCKLo9rQVbD3jRCAP
-         6PJrNJZsurcnoGrHxzvUJrXe3y5ZlXLEARKh1u1gq4DU0noRUr+oCd1Ps3P3q6Sk33XX
-         9o4zd/XFPfcfcWSxustPUxdf6GmsEuvKSSJdAG+j8l1e1Mmp/a4/wUVhOvhevYajHsio
-         TODgqa3YNTlH2YaUUinPsdlO2q67Z2dN2AoQSYALD1jBYfAHNQ8mM/QQaYsFG4rKAGLH
-         FQsA==
-X-Gm-Message-State: ACrzQf367gFCQ3yjvNpXIpzIId1ek5KpgT5AEtRrMbH3T4LgOZRQmoeZ
-	kpO4EbEflRsYGXrxS0/dFK2b7kipPHgzA226jGNUDg==
+        bh=mWjb/QeSQZaUWFWHcJasq11PZWPxHkVTFW3dq3hV+HI=;
+        b=pU8JWPrBpN4TVU43Eyg/PIRROVqkNUPhJP8n1Rkhg4O6x5Mbfyq8ZWOineJMrAx1ib
+         q8lYgOGrXbivfwsx5LDc3QaFTOKfrj6XGRLCzy+PmGd5xXrUgfw8msUGEk9dBeOJuJLk
+         xn8gwboOLuiOdeGrdrYu+1/S7ylSCzoX1vwkme0PX6rVDvYFcdjossucAcyKsU2k4icf
+         EH7FMeWDgSLCmS6UOoSCgJnP+wDT0wmlwvdwZztB45soG6iWNc0ZtssFxaHRt25Cyq3q
+         pRIa9q0sHuDdPtgVq/p+yiPBT8yESGeEHnn5zt4KhPPpCmMkF0Wad1EjQhpfjS/pwsg/
+         9d0g==
+X-Gm-Message-State: ACrzQf1+lkDRQZzpikjEiioBb1BVt0r6szQrouzQfD33ZAy6T4OtwBAU
+	i0/Db215zbpxwSupPKXCmMvEHl6nvUU=
 X-Google-Smtp-Source: 
- AMsMyM7ZGgyYSHYf/xBIE1f3RCdfoyauLMJg/6Cnl5rhbDX1treKeserW7NHoc4FU1MFFAgR5stf1Nf+5M4HpRLjwJg=
-X-Received: by 2002:a05:6402:f08:b0:459:5f08:1b26 with SMTP id
- i8-20020a0564020f0800b004595f081b26mr18824929eda.190.1665419584397; Mon, 10
- Oct 2022 09:33:04 -0700 (PDT)
+ AMsMyM52jxFOhG3c22PlLjVLAFJoAS1xs9x/8uVsf03fY3YnI2wLsuYedT/HgMqb44yoKQ7rtDaD+g==
+X-Received: by 2002:a05:6808:188a:b0:351:75c9:e4a8 with SMTP id
+ bi10-20020a056808188a00b0035175c9e4a8mr9528819oib.246.1665433278492;
+        Mon, 10 Oct 2022 13:21:18 -0700 (PDT)
+Received: from localhost.localdomain ([2804:14c:485:4b69:3cd6:908a:6ce1:5bc8])
+        by smtp.gmail.com with ESMTPSA id
+ e19-20020a544f13000000b00344a22e71a9sm4655226oiy.9.2022.10.10.13.21.16
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 10 Oct 2022 13:21:17 -0700 (PDT)
+From: Fabio Estevam <festevam@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Fabio Estevam <festevam@denx.de>
+Subject: [meta-networking][PATCH] spice: Include aarch64 to COMPATIBLE_HOST
+Date: Mon, 10 Oct 2022 17:21:05 -0300
+Message-Id: <20221010202105.2471515-1-festevam@gmail.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-References: <20221010132640.51046-1-vkumbhar@mvista.com>
-In-Reply-To: <20221010132640.51046-1-vkumbhar@mvista.com>
-From: Steve Sakoman <steve@sakoman.com>
-Date: Mon, 10 Oct 2022 06:32:53 -1000
-Message-ID: 
- <CAOSpxdaut=PvGVpfZ4LoehEuPnQy5Sf3mWi6xP2G0qajw_Lp8w@mail.gmail.com>
-Subject: Re: [oe] [OE-core][dunfell][PATCH] CVE-2021-20196 QEMU: block: fdc:
- null pointer dereference may lead to guest crash
-To: vkumbhar <vkumbhar@mvista.com>
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 10 Oct 2022 16:33:16 -0000
+ <openembedded-devel@lists.openembedded.org>; Mon, 10 Oct 2022 20:21:27 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/99134
+ https://lists.openembedded.org/g/openembedded-devel/message/99135
 
-You sent this to the wrong list!  You should resend to
-openembedded-core@lists.openembedded.org
+From: Fabio Estevam <festevam@denx.de>
 
-A more standard subject/shortlog would be something like:
-[OE-core][dunfell][PATCH] qemu: fix CVE-2021-20196
+Allow spice to be built on ARM64 as well, so add aarch64
+entry to COMPATIBLE_HOST.
 
-You can give a detailed description in the commit message, so you just
-need the top level info in the subject line. And it should always
-start with the package/recipe name.
+Signed-off-by: Fabio Estevam <festevam@denx.de>
+---
+ meta-networking/recipes-support/spice/spice_git.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Thanks!
+diff --git a/meta-networking/recipes-support/spice/spice_git.bb b/meta-networking/recipes-support/spice/spice_git.bb
+index 1887a5582fa0..b3e687476b0d 100644
+--- a/meta-networking/recipes-support/spice/spice_git.bb
++++ b/meta-networking/recipes-support/spice/spice_git.bb
+@@ -58,7 +58,7 @@ PACKAGECONFIG[opus] = "--enable-opus,--disable-opus,libopus,"
+ PACKAGECONFIG[opengl] = "--enable-opengl,--disable-opengl,,"
+ PACKAGECONFIG[xinerama] = "--enable-xinerama,--disable-xinerama,libxinerama,"
+ 
+-COMPATIBLE_HOST = '(x86_64|i.86).*-linux'
++COMPATIBLE_HOST = '(x86_64|i.86|aarch64).*-linux'
+ 
+ BBCLASSEXTEND = "native nativesdk"
+ 
+-- 
+2.25.1
 
-Steve
-
-On Mon, Oct 10, 2022 at 3:30 AM vkumbhar <vkumbhar@mvista.com> wrote:
->
-> Source: https://gitlab.com/qemu-project/qemu/-/commit/1ab95af033a419e7a64e2d58e67dd96b20af5233
-> MR: 111637
-> Type: Security Fix
-> Disposition: Backport from https://gitlab.com/qemu-project/qemu/-/commit/1ab95af033a419e7a64e2d58e67dd96b20af5233
-> ChangeID: c1e435aa25bb60b362bb68ab253ff55504e0328d
-> Description:
->     hw/block/fdc: Kludge missing floppy drive to fix CVE-2021-20196
->
->     Guest might select another drive on the bus by setting the
->     DRIVE_SEL bit of the DIGITAL OUTPUT REGISTER (DOR).
->     The current controller model doesn't expect a BlockBackend
->     to be NULL. A simple way to fix CVE-2021-20196 is to create
->     an empty BlockBackend when it is missing. All further
->     accesses will be safely handled, and the controller state
->     machines keep behaving correctly.
->
-> Signed-off-by: Vivek Kumbhar <vkumbhar@mvista.com>
-> ---
->  meta/recipes-devtools/qemu/qemu.inc           |  1 +
->  .../qemu/qemu/0001-CVE-2021-20196.patch       | 40 +++++++++++++++++++
->  2 files changed, 41 insertions(+)
->  create mode 100644 meta/recipes-devtools/qemu/qemu/0001-CVE-2021-20196.patch
->
-> diff --git a/meta/recipes-devtools/qemu/qemu.inc b/meta/recipes-devtools/qemu/qemu.inc
-> index 7a963ad57c..2cdb718b1f 100644
-> --- a/meta/recipes-devtools/qemu/qemu.inc
-> +++ b/meta/recipes-devtools/qemu/qemu.inc
-> @@ -52,6 +52,7 @@ SRC_URI = "https://download.qemu.org/${BPN}-${PV}.tar.xz \
->            file://CVE-2019-20175.patch \
->            file://CVE-2020-24352.patch \
->            file://CVE-2020-25723.patch \
-> +          file://0001-CVE-2021-20196.patch \
->            "
->  UPSTREAM_CHECK_REGEX = "qemu-(?P<pver>\d+(\.\d+)+)\.tar"
->
-> diff --git a/meta/recipes-devtools/qemu/qemu/0001-CVE-2021-20196.patch b/meta/recipes-devtools/qemu/qemu/0001-CVE-2021-20196.patch
-> new file mode 100644
-> index 0000000000..affc8ead58
-> --- /dev/null
-> +++ b/meta/recipes-devtools/qemu/qemu/0001-CVE-2021-20196.patch
-> @@ -0,0 +1,40 @@
-> +From a253e632aea9e0e3f3f2ad3d157f34908e9c2008 Mon Sep 17 00:00:00 2001
-> +From: Vivek Kumbhar <vkumbhar@mvista.com>
-> +Date: Mon, 10 Oct 2022 10:00:53 +0530
-> +Subject: [PATCH] CVE-2021-20196
-> +
-> +Upstream-Status: https://gitlab.com/qemu-project/qemu/-/commit/1ab95af033a419e7a64e2d58e67dd96b20af5233
-> +CVE: CVE-2021-20196
-> +Signed-off-by: Vivek Kumbhar <vkumbhar@mvista.com>
-> +---
-> + hw/block/fdc.c | 14 +++++++++++++-
-> + 1 file changed, 13 insertions(+), 1 deletion(-)
-> +
-> +diff --git a/hw/block/fdc.c b/hw/block/fdc.c
-> +index ac5d31e8..a887369c 100644
-> +--- a/hw/block/fdc.c
-> ++++ b/hw/block/fdc.c
-> +@@ -1356,7 +1356,19 @@ static FDrive *get_drv(FDCtrl *fdctrl, int unit)
-> +
-> + static FDrive *get_cur_drv(FDCtrl *fdctrl)
-> + {
-> +-    return get_drv(fdctrl, fdctrl->cur_drv);
-> ++    FDrive *cur_drv = get_drv(fdctrl, fdctrl->cur_drv);
-> ++
-> ++    if (!cur_drv->blk) {
-> ++        /*
-> ++         * Kludge: empty drive line selected. Create an anonymous
-> ++         * BlockBackend to avoid NULL deref with various BlockBackend
-> ++         * API calls within this model (CVE-2021-20196).
-> ++         * Due to the controller QOM model limitations, we don't
-> ++         * attach the created to the controller device.
-> ++         */
-> ++        cur_drv->blk = blk_create_empty_drive();
-> ++    }
-> ++    return cur_drv;
-> + }
-> +
-> + /* Status A register : 0x00 (read-only) */
-> +--
-> +2.25.1
-> +
-> --
-> 2.25.1
->
->
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#99128): https://lists.openembedded.org/g/openembedded-devel/message/99128
-> Mute This Topic: https://lists.openembedded.org/mt/94236015/3620601
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [steve@sakoman.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
->
 
