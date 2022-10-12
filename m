@@ -1,329 +1,459 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EF364C4332F
-	for <webhook@archiver.kernel.org>; Wed, 12 Oct 2022 00:45:04 +0000 (UTC)
-Received: from mail-pj1-f42.google.com (mail-pj1-f42.google.com [209.85.216.42])
- by mx.groups.io with SMTP id smtpd.web08.14899.1665535494942744213
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2C282C4332F
+	for <webhook@archiver.kernel.org>; Wed, 12 Oct 2022 04:04:16 +0000 (UTC)
+Received: from mail1.bemta37.messagelabs.com (mail1.bemta37.messagelabs.com [85.158.142.112])
+ by mx.groups.io with SMTP id smtpd.web08.16382.1665547452498342967
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 11 Oct 2022 17:44:55 -0700
+ Tue, 11 Oct 2022 21:04:13 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=bUkzn3xK;
- spf=pass (domain: gmail.com, ip: 209.85.216.42, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f42.google.com with SMTP id a5-20020a17090aa50500b002008eeb040eso2369371pjq.1
-        for <openembedded-devel@lists.openembedded.org>; Tue, 11 Oct 2022 17:44:54 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=7CVVss3tVZveNOnIsfQEKFARQLTGkmVsyuiTIf6gIzQ=;
-        b=bUkzn3xKcUeiAFUiKUo33lgiLdN8+W3GiEfxq5Ld7C9pKCJi8/bZTqmwadiTYt2jAd
-         WIX0tJ1DphhJTeCJxwvYPgTeIOSwB+utz4JX2xdemmmLDZqzJKbEBnXz122OTKmoqvbd
-         GBHM3BO+QN7Upaf12OcmQbQZ4bot1d3bOvmE2vKi4YDD7juA6aZ7NtARhNCCD8bQe6YY
-         oF2g7hS1S9yir2m9XazluYwwg7sN5WHJSr88r+okRZID7XKVtRtlqYWUw7CRNS2zp+n5
-         v4ThaoTe7KJkZZ4qslvZ2MZ6Smwquwx6Zk3pglkCT0cex7lKH3oVgSogbH6VPRo4IZz+
-         tjVQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=7CVVss3tVZveNOnIsfQEKFARQLTGkmVsyuiTIf6gIzQ=;
-        b=pUNwmVJXTRonI480205ReHtUIfPKhjW0FAlY5QR2VuU7XdTQHNLBWOZUhRXwsYn499
-         z5v7Sh27lXQ140GJbz/AC3BwfZJSAAYTwcRdZus+FztmOZKda0oGn1WNWcp6ujLiWULI
-         L/RMjhGc+NUCee+Lg0q7L2HJaWUEdTD7HAe3v5ial7XhyC1LZbmS8vUbyMe3xXlZp2IY
-         MiWsmSIfkP+rDgesJkRNHBuzpty9Ls9bQi7buMX7At+b+Hb/9rMQisPQILAV6flm8PBz
-         yOOg1DMn87TBA6uJEzBRnAPcsBeLXMkz9zkHYJ8VIYzUbvNKcew537W3NNaHygyJC1RW
-         2QGQ==
-X-Gm-Message-State: ACrzQf1JVQtax8GvxiqdRl2cE5FryrJpdJnjwNw2KnuP+zeuD4Zk2Ghp
-	zzvCGhA2xrlfNpVX8um5Bn6cMSDH3WMj3g==
-X-Google-Smtp-Source: AMsMyM4IR6pIPmmvdb3ydqwJVf/MUxCAkkUD4wzvKeyPu4jnZvAQVI0n4yFDei7JxkSFYsJ4nQUc2w==
-X-Received: by 2002:a17:90b:4c8b:b0:203:5db5:8b71 with SMTP id my11-20020a17090b4c8b00b002035db58b71mr2108584pjb.51.1665535493985;
-        Tue, 11 Oct 2022 17:44:53 -0700 (PDT)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9181:1cf0::32cd])
-        by smtp.gmail.com with ESMTPSA id h73-20020a62834c000000b0056164b52bd8sm9625579pfe.32.2022.10.11.17.44.53
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 11 Oct 2022 17:44:53 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>,
-	Alexander Kanavin <alex@linutronix.de>
-Subject: [meta-python][PATCH v2] python3-gevent: Upgrade to 22.8.0
-Date: Tue, 11 Oct 2022 17:44:51 -0700
-Message-Id: <20221012004451.317150-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.38.0
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=jm12bBJn;
+ spf=pass (domain: fujitsu.com, ip: 85.158.142.112, mailfrom: wangmy@fujitsu.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
+	s=170520fj; t=1665547450; i=@fujitsu.com;
+	bh=288MgClIzE7Ba+zdAzxMKZGYgww7OjX9h4REwCeBqdY=;
+	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
+	b=jm12bBJnPEH6OR9TaiYi6dabn8E582bQHsy7VJHhKNCXTRTnPlSmh+p3j8ngBatyb
+	 vGuh/MaTZ9PlIKe+EYTXlV1lfdpuuMISsDjZ6tMsgTR4YQr4sasv9Bc4mktNBiBrqT
+	 aINxTshdGnqiProwVAVgbdry1dAFkWwI/lGQkGfb9E/G5+5ii37y39xktqHi3U3GVR
+	 TOkIlB9ZltaPh313ZzMUGbz9cgYzHCnnVsR7AqNiRZtHaXks7XOBU9zWlSW6w0O9/S
+	 GLFvEiT9BGmeBGpwKVb02gNFNX1aJWrmUhtJjnluDqgxPWgYj9s6QLgnPC9xfvAmZF
+	 a5m3a+BWsiRWQ==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrHIsWRWlGSWpSXmKPExsViZ8MxSXenjVu
+  ywfolOhYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8bPlasZC2YmVUx4tI+9gXGZSxcjF4eQwBNG
+  iZPnbzFBONeZJLrm7mPrYuQEcvYwSqx/EANiswmoSUy/dYMVxBYR0JdYOnsPM4jNLKAi8eJ3D
+  zuILSwQLrFp/hQmEJtFQFXibNNfxi5GDg5eASeJyW/dQcISAgoSUx6+B2vlFRCUODnzCQvEGA
+  mJgy9eMEPUKErMvtzMAmFXSMya1cYEYatJXD23iXkCI/8sJO2zkLQvYGRaxWidVJSZnlGSm5i
+  Zo2toYKBraGiqa2mma2iml1ilm6iXWqqbl19UkqFrqJdYXqyXWlysV1yZm5yTopeXWrKJERiU
+  KcUJAjsY9+77pXeIUZKDSUmUV6XHNVmILyk/pTIjsTgjvqg0J7X4EKMMB4eSBO9PS7dkIcGi1
+  PTUirTMHGCEwKQlOHiURHgVLIDSvMUFibnFmekQqVOMuhxTZ//bzyzEkpeflyolzvvfCqhIAK
+  QoozQPbgQsWi8xykoJ8zIyMDAI8RSkFuVmlqDKv2IU52BUEub9BLKKJzOvBG7TK6AjmICOOHn
+  VCeSIkkSElFQDk1GVxPzN3y2u73rQuPjqpB+it1ds3/ri2va4Y4d3xXZYlJzyNXT95T5zx2Yp
+  +a2/HJj08qx1qjlWrpK8FqCgZsUR8OO5gFPNtJLldz3LZOeLOLyN5jqUHZj2dkmo+q4bc3/fc
+  Di9dXOT4/q/X6PFLY4rd64LO3TG8Xh94gH9J7FTtx9q7f/kXbrmg92h9DfLX79bmrhhvonv3t
+  zUIgHf/PJohrwlEhtW3nu6xONUvFvCsj2H7qj+77+8V9WoXn9b5LGFT6fOPJ2488b0gP2c//+
+  dkLholzXveuy5tTrdiUsEZ6uG2Cgv2P8zi3FT+yux7Q9F3K/vEK7hmqd38ve+fIGgPYeUd/49
+  83/CHZOZt2adVWIpzkg01GIuKk4EADjrxkhRAwAA
+X-Env-Sender: wangmy@fujitsu.com
+X-Msg-Ref: server-4.tower-728.messagelabs.com!1665547449!184990!1
+X-Originating-IP: [62.60.8.146]
+X-SYMC-ESS-Client-Auth: outbound-route-from=pass
+X-StarScan-Received: 
+X-StarScan-Version: 9.87.3; banners=-,-,-
+X-VirusChecked: Checked
+Received: (qmail 32257 invoked from network); 12 Oct 2022 04:04:09 -0000
+Received: from unknown (HELO n03ukasimr02.n03.fujitsu.local) (62.60.8.146)
+  by server-4.tower-728.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 12 Oct 2022 04:04:09 -0000
+Received: from n03ukasimr02.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTP id 1EB941000CD
+	for <openembedded-devel@lists.openembedded.org>; Wed, 12 Oct 2022 05:04:09 +0100 (BST)
+Received: from R01UKEXCASM126.r01.fujitsu.local (R01UKEXCASM126 [10.183.43.178])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTPS id 11DA91000C1
+	for <openembedded-devel@lists.openembedded.org>; Wed, 12 Oct 2022 05:04:09 +0100 (BST)
+Received: from localhost.localdomain (10.167.225.33) by
+ R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
+ (TLS) id 15.0.1497.32; Wed, 12 Oct 2022 05:04:07 +0100
+From: Wang Mingyu <wangmy@fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: Wang Mingyu <wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] Add nativesdk-systemd-systemctl as dependency of dnf-plugin-tui
+Date: Wed, 12 Oct 2022 12:03:49 +0800
+Message-ID: <1665547429-23508-1-git-send-email-wangmy@fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.167.225.33]
+X-ClientProxiedBy: G08CNEXCHPEKD07.g08.fujitsu.local (10.167.33.80) To
+ R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
+X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 12 Oct 2022 00:45:04 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99141
+ <openembedded-devel@lists.openembedded.org>; Wed, 12 Oct 2022 04:04:16 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99142
 
-This has the python 3.11 fix in it so drop the patch
-Add a patch to avoid adding native include paths to compiler cmdline
-
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-Cc: Alexander Kanavin <alex@linutronix.de>
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
-v2: Fix native path inclusion issue
+ .../systemd/nativesdk-systemd-systemctl.bb    |  17 +
+ .../systemd/systemd-systemctl/systemctl       | 340 ++++++++++++++++++
+ 2 files changed, 357 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/systemd/nativesdk-systemd-systemctl.bb
+ create mode 100755 meta-oe/recipes-devtools/systemd/systemd-systemctl/systemctl
 
- ...setuputils.py-Do-not-add-sys_inc_dir.patch |  40 +++++
- .../python/python3-gevent/py-3.11.patch       | 170 ------------------
- ...nt_21.12.0.bb => python3-gevent_22.8.0.bb} |   6 +-
- 3 files changed, 43 insertions(+), 173 deletions(-)
- create mode 100644 meta-python/recipes-devtools/python/python3-gevent/0001-_setuputils.py-Do-not-add-sys_inc_dir.patch
- delete mode 100644 meta-python/recipes-devtools/python/python3-gevent/py-3.11.patch
- rename meta-python/recipes-devtools/python/{python3-gevent_21.12.0.bb => python3-gevent_22.8.0.bb} (87%)
-
-diff --git a/meta-python/recipes-devtools/python/python3-gevent/0001-_setuputils.py-Do-not-add-sys_inc_dir.patch b/meta-python/recipes-devtools/python/python3-gevent/0001-_setuputils.py-Do-not-add-sys_inc_dir.patch
+diff --git a/meta-oe/recipes-devtools/systemd/nativesdk-systemd-systemctl.bb b/meta-oe/recipes-devtools/systemd/nativesdk-systemd-systemctl.bb
 new file mode 100644
-index 0000000000..ac8b031cf5
+index 0000000000..7ac21aa260
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-gevent/0001-_setuputils.py-Do-not-add-sys_inc_dir.patch
-@@ -0,0 +1,40 @@
-+From f3267ad7994a4b66e6bcf72cb0e418105f77bd52 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Tue, 11 Oct 2022 17:37:01 -0700
-+Subject: [PATCH] _setuputils.py: Do not add sys_inc_dir
++++ b/meta-oe/recipes-devtools/systemd/nativesdk-systemd-systemctl.bb
+@@ -0,0 +1,17 @@
++SUMMARY = "Wrapper for enabling systemd services"
 +
-+sys_inc_dir computes to ignore sysroot and ends with paths into host
-+system include area, which is then flagged by OE gcc since it finds
-+the host include path poisoning. Since we are adding the syroot anyway
-+we really do not need setuptools to deduce it for us.
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384361b4de20420"
 +
-+Upstream-Status: Inappropriate [ Cross-compile specific ]
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ _setuputils.py | 3 +--
-+ 1 file changed, 1 insertion(+), 2 deletions(-)
++PR = "r6"
 +
-+diff --git a/_setuputils.py b/_setuputils.py
-+index d98f716..31134a4 100644
-+--- a/_setuputils.py
-++++ b/_setuputils.py
-+@@ -161,7 +161,6 @@ def get_include_dirs(*extra_paths):
-+     # Neither sysconfig dir is not enough if we're in a virtualenv; the greenlet.h
-+     # header goes into a site/ subdir. See https://github.com/pypa/pip/issues/4610
-+     dist_inc_dir = os.path.abspath(dist_sysconfig.get_python_inc()) # 1
-+-    sys_inc_dir = os.path.abspath(sysconfig.get_path("include")) # 2
-+     venv_include_dir = os.path.join(
-+         sys.prefix, 'include', 'site',
-+         'python' + sysconfig.get_python_version()
-+@@ -175,7 +174,7 @@ def get_include_dirs(*extra_paths):
-+ 
-+     return [
-+         p
-+-        for p in (dist_inc_dir, sys_inc_dir, dep_inc_dir) + extra_paths
-++        for p in (dist_inc_dir, dep_inc_dir) + extra_paths
-+         if os.path.exists(p)
-+     ]
-+ 
-+-- 
-+2.38.0
++inherit nativesdk
 +
-diff --git a/meta-python/recipes-devtools/python/python3-gevent/py-3.11.patch b/meta-python/recipes-devtools/python/python3-gevent/py-3.11.patch
-deleted file mode 100644
-index 6750c1a3cf..0000000000
---- a/meta-python/recipes-devtools/python/python3-gevent/py-3.11.patch
-+++ /dev/null
-@@ -1,170 +0,0 @@
--From 90e9169c915a640739880b55ed95f88ce21fa7b0 Mon Sep 17 00:00:00 2001
--From: Victor Stinner <vstinner@python.org>
--Date: Tue, 1 Mar 2022 22:28:40 +0100
--Subject: [PATCH] Add Python 3.11 alpha 6 support
--
--* On Python 3.11a6 and newer, get the PyFrameObject structure from
--  the internal C API ("internal/pycore_frame.h").
--* On Python 3.9 and newer, use PyFrame_GetBack() and
--  PyFrame_GetCode().
--* Add frame getter and setter functions to greenlet:
--
--  * get_f_code(frame)
--  * set_f_lineno(frame, lineno)
--  * set_f_code(frame, code)
--
--* greenlet.h: the CFrame type has been renamed to _PyCFrame.
--
--Upstream-Status: Submitted [https://github.com/gevent/gevent/pull/1872]
--Signed-off-by: Alexander Kanavin <alex@linutronix.de>
-----
-- _setuputils.py                   |  4 +++
-- deps/greenlet/greenlet.h         |  6 +++-
-- src/gevent/_gevent_cgreenlet.pxd | 59 ++++++++++++++++++++++++--------
-- src/gevent/greenlet.py           |  7 ++--
-- 4 files changed, 59 insertions(+), 17 deletions(-)
--
--diff --git a/_setuputils.py b/_setuputils.py
--index 7257b3eea..0b14ab1f0 100644
----- a/_setuputils.py
--+++ b/_setuputils.py
--@@ -244,6 +244,10 @@ def cythonize1(ext):
--                 'infer_types': True,
--                 'nonecheck': False,
--             },
--+            compile_time_env={
--+                'PY39B1': sys.hexversion >= 0x030900B1,
--+                'PY311A6': sys.hexversion >= 0x030B00A6,
--+            },
--             # The common_utility_include_dir (not well documented)
--             # causes Cython to emit separate files for much of the
--             # static support code. Each of the modules then includes
--diff --git a/deps/greenlet/greenlet.h b/deps/greenlet/greenlet.h
--index 830bef8dd..f07ce1833 100644
----- a/deps/greenlet/greenlet.h
--+++ b/deps/greenlet/greenlet.h
--@@ -14,6 +14,10 @@ extern "C" {
-- /* This is deprecated and undocumented. It does not change. */
-- #define GREENLET_VERSION "1.0.0"
-- 
--+#if PY_VERSION_HEX < 0x30B00A6
--+#  define _PyCFrame CFrame
--+#endif
--+
-- typedef struct _greenlet {
--     PyObject_HEAD
--     char* stack_start;
--@@ -39,7 +43,7 @@ typedef struct _greenlet {
--     PyObject* context;
-- #endif
-- #if PY_VERSION_HEX >= 0x30A00B1
---    CFrame* cframe;
--+    _PyCFrame* cframe;
-- #endif
-- } PyGreenlet;
-- 
--diff --git a/src/gevent/_gevent_cgreenlet.pxd b/src/gevent/_gevent_cgreenlet.pxd
--index cbb81a638..246773e24 100644
----- a/src/gevent/_gevent_cgreenlet.pxd
--+++ b/src/gevent/_gevent_cgreenlet.pxd
--@@ -57,30 +57,61 @@ cdef extern from "Python.h":
--     ctypedef class types.CodeType [object PyCodeObject]:
--         pass
-- 
---cdef extern from "frameobject.h":
---
---    ctypedef class types.FrameType [object PyFrameObject]:
---        cdef CodeType f_code
---        # Accessing the f_lineno directly doesn't work. There is an accessor
---        # function, PyFrame_GetLineNumber that is needed to turn the raw line number
---        # into the executing line number.
---        # cdef int f_lineno
---        # We can't declare this in the object as an object, because it's
---        # allowed to be NULL, and Cython can't handle that.
---        # We have to go through the python machinery to get a
---        # proper None instead, or use an inline function.
---        cdef void* f_back
--+IF PY311A6:
--+    cdef extern from "internal/pycore_frame.h":
--+        ctypedef class types._PyInterpreterFrame [object _PyInterpreterFrame]:
--+            cdef CodeType f_code
--+
--+        ctypedef class types.FrameType [object PyFrameObject]:
--+            cdef _PyInterpreterFrame f_frame
--+            # Accessing the f_lineno directly doesn't work. There is an accessor
--+            # function, PyFrame_GetLineNumber that is needed to turn the raw line number
--+            # into the executing line number.
--+            # cdef int f_lineno
--+            # We can't declare this in the object as an object, because it's
--+            # allowed to be NULL, and Cython can't handle that.
--+            # We have to go through the python machinery to get a
--+            # proper None instead, or use an inline function.
--+            cdef void* f_back
--+ELSE:
--+    cdef extern from "frameobject.h":
--+        ctypedef class types.FrameType [object PyFrameObject]:
--+            cdef CodeType f_code
--+            cdef void* f_back
-- 
--+cdef extern from "frameobject.h":
--     int PyFrame_GetLineNumber(FrameType frame)
--+    IF PY39B1:
--+        CodeType PyFrame_GetCode(FrameType frame)
--+        void* PyFrame_GetBack(FrameType frame)
-- 
-- @cython.nonecheck(False)
-- cdef inline FrameType get_f_back(FrameType frame):
--+    IF PY39B1:
--+        f_back = PyFrame_GetBack(frame)
--+    ELSE:
--+        f_back = frame.f_back
--     if frame.f_back != NULL:
---        return <FrameType>frame.f_back
--+        return <FrameType>f_back
-- 
-- cdef inline int get_f_lineno(FrameType frame):
--     return PyFrame_GetLineNumber(frame)
-- 
--+cdef inline void set_f_lineno(FrameType frame, int lineno):
--+    frame.f_lineno = lineno
--+
--+cdef inline CodeType get_f_code(FrameType frame):
--+    IF PY39B1:
--+        return PyFrame_GetCode(frame)
--+    ELSE:
--+        return frame.f_code
--+
--+cdef inline void set_f_code(FrameType frame, CodeType code):
--+    IF PY311A6:
--+        frame.f_frame.f_code = code
--+    ELSE:
--+        frame.f_code = code
--+
-- cdef void _init()
-- 
-- cdef class SpawnedLink:
--diff --git a/src/gevent/greenlet.py b/src/gevent/greenlet.py
--index bed12ed44..f925770bb 100644
----- a/src/gevent/greenlet.py
--+++ b/src/gevent/greenlet.py
--@@ -58,6 +58,9 @@
-- # Frame access
-- locals()['get_f_back'] = lambda frame: frame.f_back
-- locals()['get_f_lineno'] = lambda frame: frame.f_lineno
--+locals()['set_f_lineno'] = lambda frame, lineno: setattr(frame, 'f_lineno', lineno)
--+locals()['get_f_code'] = lambda frame: frame.f_code
--+locals()['set_f_code'] = lambda frame, code: setattr(frame, 'f_code', code)
-- 
-- if _PYPY:
--     import _continuation # pylint:disable=import-error
--@@ -157,8 +160,8 @@ def _extract_stack(limit):
--         # Arguments are always passed to the constructor as Python objects,
--         # meaning we wind up boxing the f_lineno just to unbox it if we pass it.
--         # It's faster to simply assign once the object is created.
---        older_Frame.f_code = frame.f_code
---        older_Frame.f_lineno = get_f_lineno(frame) # pylint:disable=undefined-variable
--+        set_f_code(older_Frame.f_code, get_f_code(frame))
--+        set_f_lineno(older_Frame.f_lineno, get_f_lineno(frame)) # pylint:disable=undefined-variable
--         if newer_Frame is not None:
--             newer_Frame.f_back = older_Frame
--         newer_Frame = older_Frame
-diff --git a/meta-python/recipes-devtools/python/python3-gevent_21.12.0.bb b/meta-python/recipes-devtools/python/python3-gevent_22.8.0.bb
-similarity index 87%
-rename from meta-python/recipes-devtools/python/python3-gevent_21.12.0.bb
-rename to meta-python/recipes-devtools/python/python3-gevent_22.8.0.bb
-index f891c2eeab..96a0cb78e2 100644
---- a/meta-python/recipes-devtools/python/python3-gevent_21.12.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-gevent_22.8.0.bb
-@@ -11,7 +11,9 @@ RDEPENDS:${PN} = "${PYTHON_PN}-greenlet \
- 		  ${PYTHON_PN}-pprint \
- 		 "
- 
--SRC_URI[sha256sum] = "f48b64578c367b91fa793bf8eaaaf4995cb93c8bc45860e473bf868070ad094e"
-+SRC_URI += "file://0001-_setuputils.py-Do-not-add-sys_inc_dir.patch"
++SRC_URI = "file://systemctl"
 +
-+SRC_URI[sha256sum] = "868d500fe2b7f9750eadc07ada8ab32360c0e71976be2bf5919482f14a6477c7"
- 
- inherit pypi setuptools3
- 
-@@ -31,5 +33,3 @@ do_configure:append() {
- do_compile:append() {
-         sed -i -e 's#${WORKDIR}##g' ${S}/src/gevent/*.c ${S}/src/gevent/libev/*.c ${S}/src/gevent/resolver/*.c
- }
--
--SRC_URI += "file://py-3.11.patch"
++S = "${WORKDIR}"
++
++do_install() {
++	install -d ${D}${bindir}
++	install -m 0755 ${WORKDIR}/systemctl ${D}${bindir}
++}
+diff --git a/meta-oe/recipes-devtools/systemd/systemd-systemctl/systemctl b/meta-oe/recipes-devtools/systemd/systemd-systemctl/systemctl
+new file mode 100755
+index 0000000000..6324319a45
+--- /dev/null
++++ b/meta-oe/recipes-devtools/systemd/systemd-systemctl/systemctl
+@@ -0,0 +1,340 @@
++#!/usr/bin/env python3
++"""systemctl: subset of systemctl used for image construction
++
++Mask/preset systemd units
++"""
++
++import argparse
++import fnmatch
++import os
++import re
++import sys
++
++from collections import namedtuple
++from pathlib import Path
++
++version = 1.0
++
++ROOT = Path("/")
++SYSCONFDIR = Path("etc")
++BASE_LIBDIR = Path("lib")
++LIBDIR = Path("usr", "lib")
++
++locations = list()
++
++
++class SystemdFile():
++    """Class representing a single systemd configuration file"""
++    def __init__(self, root, path):
++        self.sections = dict()
++        self._parse(root, path)
++        dirname = os.path.basename(path.name) + ".d"
++        for location in locations:
++            for path2 in sorted((root / location / "system" / dirname).glob("*.conf")):                
++                self._parse(root, path2)
++
++    def _parse(self, root, path):
++        """Parse a systemd syntax configuration file
++
++        Args:
++            path: A pathlib.Path object pointing to the file
++
++        """
++        skip_re = re.compile(r"^\s*([#;]|$)")
++        section_re = re.compile(r"^\s*\[(?P<section>.*)\]")
++        kv_re = re.compile(r"^\s*(?P<key>[^\s]+)\s*=\s*(?P<value>.*)")
++        section = None
++
++        if path.is_symlink():
++            try:
++                path.resolve()
++            except FileNotFoundError:
++                # broken symlink, try relative to root
++                path = root / Path(os.readlink(str(path))).relative_to(ROOT)
++
++        with path.open() as f:
++            for line in f:
++                if skip_re.match(line):
++                    continue
++
++                line = line.strip()
++                m = section_re.match(line)
++                if m:
++                    if m.group('section') not in self.sections:
++                        section = dict()
++                        self.sections[m.group('section')] = section
++                    else:
++                        section = self.sections[m.group('section')]
++                    continue
++
++                while line.endswith("\\"):
++                    line += f.readline().rstrip("\n")
++
++                m = kv_re.match(line)
++                k = m.group('key')
++                v = m.group('value')
++                if k not in section:
++                    section[k] = list()
++                section[k].extend(v.split())
++
++    def get(self, section, prop):
++        """Get a property from section
++
++        Args:
++            section: Section to retrieve property from
++            prop: Property to retrieve
++
++        Returns:
++            List representing all properties of type prop in section.
++
++        Raises:
++            KeyError: if ``section`` or ``prop`` not found
++        """
++        return self.sections[section][prop]
++
++
++class Presets():
++    """Class representing all systemd presets"""
++    def __init__(self, scope, root):
++        self.directives = list()
++        self._collect_presets(scope, root)
++
++    def _parse_presets(self, presets):
++        """Parse presets out of a set of preset files"""
++        skip_re = re.compile(r"^\s*([#;]|$)")
++        directive_re = re.compile(r"^\s*(?P<action>enable|disable)\s+(?P<unit_name>(.+))")
++
++        Directive = namedtuple("Directive", "action unit_name")
++        for preset in presets:
++            with preset.open() as f:
++                for line in f:
++                    m = directive_re.match(line)
++                    if m:
++                        directive = Directive(action=m.group('action'),
++                                              unit_name=m.group('unit_name'))
++                        self.directives.append(directive)
++                    elif skip_re.match(line):
++                        pass
++                    else:
++                        sys.exit("Unparsed preset line in {}".format(preset))
++
++    def _collect_presets(self, scope, root):
++        """Collect list of preset files"""
++        presets = dict()
++        for location in locations:
++            paths = (root / location / scope).glob("*.preset")
++            for path in paths:
++                # earlier names override later ones
++                if path.name not in presets:
++                    presets[path.name] = path
++
++        self._parse_presets([v for k, v in sorted(presets.items())])
++
++    def state(self, unit_name):
++        """Return state of preset for unit_name
++
++        Args:
++            presets: set of presets
++            unit_name: name of the unit
++
++        Returns:
++            None: no matching preset
++            `enable`: unit_name is enabled
++            `disable`: unit_name is disabled
++        """
++        for directive in self.directives:
++            if fnmatch.fnmatch(unit_name, directive.unit_name):
++                return directive.action
++
++        return None
++
++
++def add_link(path, target):
++    try:
++        path.parent.mkdir(parents=True)
++    except FileExistsError:
++        pass
++    if not path.is_symlink():
++        print("ln -s {} {}".format(target, path))
++        path.symlink_to(target)
++
++
++class SystemdUnitNotFoundError(Exception):
++    def __init__(self, path, unit):
++        self.path = path
++        self.unit = unit
++
++
++class SystemdUnit():
++    def __init__(self, root, unit):
++        self.root = root
++        self.unit = unit
++        self.config = None
++
++    def _path_for_unit(self, unit):
++        for location in locations:
++            path = self.root / location / "system" / unit
++            if path.exists() or path.is_symlink():
++                return path
++
++        raise SystemdUnitNotFoundError(self.root, unit)
++
++    def _process_deps(self, config, service, location, prop, dirstem):
++        systemdir = self.root / SYSCONFDIR / "systemd" / "system"
++
++        target = ROOT / location.relative_to(self.root)
++        try:
++            for dependent in config.get('Install', prop):
++                wants = systemdir / "{}.{}".format(dependent, dirstem) / service
++                add_link(wants, target)
++
++        except KeyError:
++            pass
++
++    def enable(self, caller_unit=None):
++        # if we're enabling an instance, first extract the actual instance
++        # then figure out what the template unit is
++        template = re.match(r"[^@]+@(?P<instance>[^\.]*)\.", self.unit)
++        if template:
++            instance = template.group('instance')
++            unit = re.sub(r"@[^\.]*\.", "@.", self.unit, 1)
++        else:
++            instance = None
++            unit = self.unit
++
++        path = self._path_for_unit(unit)
++
++        if path.is_symlink():
++            # ignore aliases
++            return
++
++        config = SystemdFile(self.root, path)
++        if instance == "":
++            try:
++                default_instance = config.get('Install', 'DefaultInstance')[0]
++            except KeyError:
++                # no default instance, so nothing to enable
++                return
++
++            service = self.unit.replace("@.",
++                                        "@{}.".format(default_instance))
++        else:
++            service = self.unit
++
++        self._process_deps(config, service, path, 'WantedBy', 'wants')
++        self._process_deps(config, service, path, 'RequiredBy', 'requires')
++
++        try:
++            for also in config.get('Install', 'Also'):
++                try:
++                    if caller_unit != also:
++                        SystemdUnit(self.root, also).enable(unit)
++                except SystemdUnitNotFoundError as e:
++                    sys.exit("Error: Systemctl also enable issue with  %s (%s)" % (service, e.unit))
++
++        except KeyError:
++            pass
++
++        systemdir = self.root / SYSCONFDIR / "systemd" / "system"
++        target = ROOT / path.relative_to(self.root)
++        try:
++            for dest in config.get('Install', 'Alias'):
++                alias = systemdir / dest
++                add_link(alias, target)
++
++        except KeyError:
++            pass
++
++    def mask(self):
++        systemdir = self.root / SYSCONFDIR / "systemd" / "system"
++        add_link(systemdir / self.unit, "/dev/null")
++
++
++def collect_services(root):
++    """Collect list of service files"""
++    services = set()
++    for location in locations:
++        paths = (root / location / "system").glob("*")
++        for path in paths:
++            if path.is_dir():
++                continue
++            services.add(path.name)
++
++    return services
++
++
++def preset_all(root):
++    presets = Presets('system-preset', root)
++    services = collect_services(root)
++
++    for service in services:
++        state = presets.state(service)
++
++        if state == "enable" or state is None:
++            try:
++                SystemdUnit(root, service).enable()
++            except SystemdUnitNotFoundError:
++                sys.exit("Error: Systemctl preset_all issue in %s" % service)
++
++    # If we populate the systemd links we also create /etc/machine-id, which
++    # allows systemd to boot with the filesystem read-only before generating
++    # a real value and then committing it back.
++    #
++    # For the stateless configuration, where /etc is generated at runtime
++    # (for example on a tmpfs), this script shouldn't run at all and we
++    # allow systemd to completely populate /etc.
++    (root / SYSCONFDIR / "machine-id").touch()
++
++
++def main():
++    if sys.version_info < (3, 4, 0):
++        sys.exit("Python 3.4 or greater is required")
++
++    parser = argparse.ArgumentParser()
++    parser.add_argument('command', nargs='?', choices=['enable', 'mask',
++                                                     'preset-all'])
++    parser.add_argument('service', nargs=argparse.REMAINDER)
++    parser.add_argument('--root')
++    parser.add_argument('--preset-mode',
++                        choices=['full', 'enable-only', 'disable-only'],
++                        default='full')
++
++    args = parser.parse_args()
++
++    root = Path(args.root) if args.root else ROOT
++
++    locations.append(SYSCONFDIR / "systemd")
++    # Handle the usrmerge case by ignoring /lib when it's a symlink
++    if not (root / BASE_LIBDIR).is_symlink():
++        locations.append(BASE_LIBDIR / "systemd")
++    locations.append(LIBDIR / "systemd")
++
++    command = args.command
++    if not command:
++        parser.print_help()
++        return 0
++
++    if command == "mask":
++        for service in args.service:
++            try:
++                SystemdUnit(root, service).mask()
++            except SystemdUnitNotFoundError as e:
++                sys.exit("Error: Systemctl main mask issue in %s (%s)" % (service, e.unit))
++    elif command == "enable":
++        for service in args.service:
++            try:
++                SystemdUnit(root, service).enable()
++            except SystemdUnitNotFoundError as e:
++                sys.exit("Error: Systemctl main enable issue in %s (%s)" % (service, e.unit))
++    elif command == "preset-all":
++        if len(args.service) != 0:
++            sys.exit("Too many arguments.")
++        if args.preset_mode != "enable-only":
++            sys.exit("Only enable-only is supported as preset-mode.")
++        preset_all(root)
++    else:
++        raise RuntimeError()
++
++
++if __name__ == '__main__':
++    main()
 -- 
-2.38.0
+2.25.1
 
 
