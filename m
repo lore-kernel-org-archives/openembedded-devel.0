@@ -2,76 +2,127 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BA544C433FE
-	for <webhook@archiver.kernel.org>; Wed, 12 Oct 2022 00:19:54 +0000 (UTC)
-Received: from mail-pj1-f44.google.com (mail-pj1-f44.google.com [209.85.216.44])
- by mx.groups.io with SMTP id smtpd.web09.15036.1665533991713319777
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EF364C4332F
+	for <webhook@archiver.kernel.org>; Wed, 12 Oct 2022 00:45:04 +0000 (UTC)
+Received: from mail-pj1-f42.google.com (mail-pj1-f42.google.com [209.85.216.42])
+ by mx.groups.io with SMTP id smtpd.web08.14899.1665535494942744213
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 11 Oct 2022 17:19:51 -0700
+ Tue, 11 Oct 2022 17:44:55 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=Zq9nPSQp;
- spf=pass (domain: gmail.com, ip: 209.85.216.44, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f44.google.com with SMTP id a5-20020a17090aa50500b002008eeb040eso2338638pjq.1
-        for <openembedded-devel@lists.openembedded.org>; Tue, 11 Oct 2022 17:19:51 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=bUkzn3xK;
+ spf=pass (domain: gmail.com, ip: 209.85.216.42, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f42.google.com with SMTP id a5-20020a17090aa50500b002008eeb040eso2369371pjq.1
+        for <openembedded-devel@lists.openembedded.org>; Tue, 11 Oct 2022 17:44:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=HxOwgnjaqvKkevYMbpcoiTkS+r1C1f6mV7zsA0OWyTo=;
-        b=Zq9nPSQpTG/8pWFXa5X4pbKzi8i0GqNo8cQOT9xnLsHbZoEtYwFS6XJSFtGThnb7Fc
-         yMT3GmZ8ZB7m6JtuJHGecQh692Ldtkw3A7vNiPBPRhIfuaCPdttzXbor+jtc+mzEPcko
-         1ZB/BOZzYS7DWwpTQeBsd+mY/LdfQUiellwSmNtOM95RUQijd4r8mA0fP9JRG62AHzLV
-         UEhy1Ev9KbjhYjb1vqs3Zngk1MLLZ384yiSM3nYNvJADtqfG4+MAuqNT2fnOndYyQo+O
-         pEw+S5zOuWVOwAZ2Vk32EKwsqzBEeV8S7mEVqs91vBG3nBTdSD3UZrtuGA74x1NOa36W
-         eAJg==
+        bh=7CVVss3tVZveNOnIsfQEKFARQLTGkmVsyuiTIf6gIzQ=;
+        b=bUkzn3xKcUeiAFUiKUo33lgiLdN8+W3GiEfxq5Ld7C9pKCJi8/bZTqmwadiTYt2jAd
+         WIX0tJ1DphhJTeCJxwvYPgTeIOSwB+utz4JX2xdemmmLDZqzJKbEBnXz122OTKmoqvbd
+         GBHM3BO+QN7Upaf12OcmQbQZ4bot1d3bOvmE2vKi4YDD7juA6aZ7NtARhNCCD8bQe6YY
+         oF2g7hS1S9yir2m9XazluYwwg7sN5WHJSr88r+okRZID7XKVtRtlqYWUw7CRNS2zp+n5
+         v4ThaoTe7KJkZZ4qslvZ2MZ6Smwquwx6Zk3pglkCT0cex7lKH3oVgSogbH6VPRo4IZz+
+         tjVQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=HxOwgnjaqvKkevYMbpcoiTkS+r1C1f6mV7zsA0OWyTo=;
-        b=cEUFZ1AbiNibIwfe8zpqKT5sec/pmSc+qpOu45EsnDIPrMpo2X0N+QqgOrB0agfygJ
-         jaQVCN9VcRaZ86gtjM1HzKdeY165ZrPnXTZHmGRMMU8HeDUsRXzLEf6+zF2Nf8NzFtNU
-         H2adIpEussW+bgm593d/b9eVppf1ZrtkVjNmF/6s7zXPEkzmJWfSQdqF34s6ltRbXwrk
-         YXI2PofDlio0HUPM4VYHGp+Tr0oE0DvE5pGj1hCEbnAwxZocrr576HxQAM+wcusBD4cM
-         9O0DlkB2wdQaLXvcq7knF+7Zdm/0o9HsSnkbQ1W6poPzBfbMLzeyOy4b5m+tGkkmUjZO
-         cjLg==
-X-Gm-Message-State: ACrzQf3t0M7UdEHk8xS3XnjMVhjvb9dB0XazceFdnEOi2LOn4oMpWvDP
-	mpTXPbhZ/495HFd8PGQgEwwziyf9aZ+0Pw==
-X-Google-Smtp-Source: AMsMyM6OQanq48FuWsLpPpHY6upmDPsWuzUuoeIKBf4FNaEA4bcNFGVqWkX7ZOLaWbtfgWQEul/yjA==
-X-Received: by 2002:a17:902:d70e:b0:178:2d9d:ba7b with SMTP id w14-20020a170902d70e00b001782d9dba7bmr27408407ply.90.1665533990819;
-        Tue, 11 Oct 2022 17:19:50 -0700 (PDT)
+        bh=7CVVss3tVZveNOnIsfQEKFARQLTGkmVsyuiTIf6gIzQ=;
+        b=pUNwmVJXTRonI480205ReHtUIfPKhjW0FAlY5QR2VuU7XdTQHNLBWOZUhRXwsYn499
+         z5v7Sh27lXQ140GJbz/AC3BwfZJSAAYTwcRdZus+FztmOZKda0oGn1WNWcp6ujLiWULI
+         L/RMjhGc+NUCee+Lg0q7L2HJaWUEdTD7HAe3v5ial7XhyC1LZbmS8vUbyMe3xXlZp2IY
+         MiWsmSIfkP+rDgesJkRNHBuzpty9Ls9bQi7buMX7At+b+Hb/9rMQisPQILAV6flm8PBz
+         yOOg1DMn87TBA6uJEzBRnAPcsBeLXMkz9zkHYJ8VIYzUbvNKcew537W3NNaHygyJC1RW
+         2QGQ==
+X-Gm-Message-State: ACrzQf1JVQtax8GvxiqdRl2cE5FryrJpdJnjwNw2KnuP+zeuD4Zk2Ghp
+	zzvCGhA2xrlfNpVX8um5Bn6cMSDH3WMj3g==
+X-Google-Smtp-Source: AMsMyM4IR6pIPmmvdb3ydqwJVf/MUxCAkkUD4wzvKeyPu4jnZvAQVI0n4yFDei7JxkSFYsJ4nQUc2w==
+X-Received: by 2002:a17:90b:4c8b:b0:203:5db5:8b71 with SMTP id my11-20020a17090b4c8b00b002035db58b71mr2108584pjb.51.1665535493985;
+        Tue, 11 Oct 2022 17:44:53 -0700 (PDT)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9181:1cf0::32cd])
-        by smtp.gmail.com with ESMTPSA id bc8-20020a656d88000000b0043a1c0a0ab1sm8247253pgb.83.2022.10.11.17.19.49
+        by smtp.gmail.com with ESMTPSA id h73-20020a62834c000000b0056164b52bd8sm9625579pfe.32.2022.10.11.17.44.53
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 11 Oct 2022 17:19:49 -0700 (PDT)
+        Tue, 11 Oct 2022 17:44:53 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>,
 	Alexander Kanavin <alex@linutronix.de>
-Subject: [meta-python][PATCH] python3-gevent: Upgrade to 22.8.0
-Date: Tue, 11 Oct 2022 17:19:47 -0700
-Message-Id: <20221012001947.309710-1-raj.khem@gmail.com>
+Subject: [meta-python][PATCH v2] python3-gevent: Upgrade to 22.8.0
+Date: Tue, 11 Oct 2022 17:44:51 -0700
+Message-Id: <20221012004451.317150-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.38.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 12 Oct 2022 00:19:54 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99140
+ <openembedded-devel@lists.openembedded.org>; Wed, 12 Oct 2022 00:45:04 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99141
 
 This has the python 3.11 fix in it so drop the patch
+Add a patch to avoid adding native include paths to compiler cmdline
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 Cc: Alexander Kanavin <alex@linutronix.de>
 ---
- .../python/python3-gevent/py-3.11.patch       | 170 ------------------
- ...nt_21.12.0.bb => python3-gevent_22.8.0.bb} |   5 +-
- 2 files changed, 1 insertion(+), 174 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python3-gevent/py-3.11.patch
- rename meta-python/recipes-devtools/python/{python3-gevent_21.12.0.bb => python3-gevent_22.8.0.bb} (89%)
+v2: Fix native path inclusion issue
 
+ ...setuputils.py-Do-not-add-sys_inc_dir.patch |  40 +++++
+ .../python/python3-gevent/py-3.11.patch       | 170 ------------------
+ ...nt_21.12.0.bb => python3-gevent_22.8.0.bb} |   6 +-
+ 3 files changed, 43 insertions(+), 173 deletions(-)
+ create mode 100644 meta-python/recipes-devtools/python/python3-gevent/0001-_setuputils.py-Do-not-add-sys_inc_dir.patch
+ delete mode 100644 meta-python/recipes-devtools/python/python3-gevent/py-3.11.patch
+ rename meta-python/recipes-devtools/python/{python3-gevent_21.12.0.bb => python3-gevent_22.8.0.bb} (87%)
+
+diff --git a/meta-python/recipes-devtools/python/python3-gevent/0001-_setuputils.py-Do-not-add-sys_inc_dir.patch b/meta-python/recipes-devtools/python/python3-gevent/0001-_setuputils.py-Do-not-add-sys_inc_dir.patch
+new file mode 100644
+index 0000000000..ac8b031cf5
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-gevent/0001-_setuputils.py-Do-not-add-sys_inc_dir.patch
+@@ -0,0 +1,40 @@
++From f3267ad7994a4b66e6bcf72cb0e418105f77bd52 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Tue, 11 Oct 2022 17:37:01 -0700
++Subject: [PATCH] _setuputils.py: Do not add sys_inc_dir
++
++sys_inc_dir computes to ignore sysroot and ends with paths into host
++system include area, which is then flagged by OE gcc since it finds
++the host include path poisoning. Since we are adding the syroot anyway
++we really do not need setuptools to deduce it for us.
++
++Upstream-Status: Inappropriate [ Cross-compile specific ]
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ _setuputils.py | 3 +--
++ 1 file changed, 1 insertion(+), 2 deletions(-)
++
++diff --git a/_setuputils.py b/_setuputils.py
++index d98f716..31134a4 100644
++--- a/_setuputils.py
+++++ b/_setuputils.py
++@@ -161,7 +161,6 @@ def get_include_dirs(*extra_paths):
++     # Neither sysconfig dir is not enough if we're in a virtualenv; the greenlet.h
++     # header goes into a site/ subdir. See https://github.com/pypa/pip/issues/4610
++     dist_inc_dir = os.path.abspath(dist_sysconfig.get_python_inc()) # 1
++-    sys_inc_dir = os.path.abspath(sysconfig.get_path("include")) # 2
++     venv_include_dir = os.path.join(
++         sys.prefix, 'include', 'site',
++         'python' + sysconfig.get_python_version()
++@@ -175,7 +174,7 @@ def get_include_dirs(*extra_paths):
++ 
++     return [
++         p
++-        for p in (dist_inc_dir, sys_inc_dir, dep_inc_dir) + extra_paths
+++        for p in (dist_inc_dir, dep_inc_dir) + extra_paths
++         if os.path.exists(p)
++     ]
++ 
++-- 
++2.38.0
++
 diff --git a/meta-python/recipes-devtools/python/python3-gevent/py-3.11.patch b/meta-python/recipes-devtools/python/python3-gevent/py-3.11.patch
 deleted file mode 100644
 index 6750c1a3cf..0000000000
@@ -249,23 +300,24 @@ index 6750c1a3cf..0000000000
 -             newer_Frame.f_back = older_Frame
 -         newer_Frame = older_Frame
 diff --git a/meta-python/recipes-devtools/python/python3-gevent_21.12.0.bb b/meta-python/recipes-devtools/python/python3-gevent_22.8.0.bb
-similarity index 89%
+similarity index 87%
 rename from meta-python/recipes-devtools/python/python3-gevent_21.12.0.bb
 rename to meta-python/recipes-devtools/python/python3-gevent_22.8.0.bb
-index f891c2eeab..c51c4c4971 100644
+index f891c2eeab..96a0cb78e2 100644
 --- a/meta-python/recipes-devtools/python/python3-gevent_21.12.0.bb
 +++ b/meta-python/recipes-devtools/python/python3-gevent_22.8.0.bb
-@@ -10,8 +10,7 @@ RDEPENDS:${PN} = "${PYTHON_PN}-greenlet \
- 		  ${PYTHON_PN}-mime \
+@@ -11,7 +11,9 @@ RDEPENDS:${PN} = "${PYTHON_PN}-greenlet \
  		  ${PYTHON_PN}-pprint \
  		 "
--
+ 
 -SRC_URI[sha256sum] = "f48b64578c367b91fa793bf8eaaaf4995cb93c8bc45860e473bf868070ad094e"
++SRC_URI += "file://0001-_setuputils.py-Do-not-add-sys_inc_dir.patch"
++
 +SRC_URI[sha256sum] = "868d500fe2b7f9750eadc07ada8ab32360c0e71976be2bf5919482f14a6477c7"
  
  inherit pypi setuptools3
  
-@@ -31,5 +30,3 @@ do_configure:append() {
+@@ -31,5 +33,3 @@ do_configure:append() {
  do_compile:append() {
          sed -i -e 's#${WORKDIR}##g' ${S}/src/gevent/*.c ${S}/src/gevent/libev/*.c ${S}/src/gevent/resolver/*.c
  }
