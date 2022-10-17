@@ -1,1023 +1,216 @@
-Return-Path: <akuster808@gmail.com>
+Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 62433C433FE
-	for <webhook@archiver.kernel.org>; Mon, 17 Oct 2022 12:28:23 +0000 (UTC)
-Received: from mail-oa1-f53.google.com (mail-oa1-f53.google.com [209.85.160.53])
- by mx.groups.io with SMTP id smtpd.web08.40142.1666009693955233330
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 36D3EC43217
+	for <webhook@archiver.kernel.org>; Mon, 17 Oct 2022 14:54:04 +0000 (UTC)
+Received: from mailout03.t-online.de (mailout03.t-online.de [194.25.134.81])
+ by mx.groups.io with SMTP id smtpd.web12.42067.1666018434860193050
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 17 Oct 2022 05:28:14 -0700
+ Mon, 17 Oct 2022 07:53:55 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=MKdKq7rV;
- spf=pass (domain: gmail.com, ip: 209.85.160.53, mailfrom: akuster808@gmail.com)
-Received: by mail-oa1-f53.google.com with SMTP id 586e51a60fabf-132fb4fd495so12998657fac.12
-        for <openembedded-devel@lists.openembedded.org>; Mon, 17 Oct 2022 05:28:13 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=content-transfer-encoding:in-reply-to:from:references:to
-         :content-language:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=8uNvPDnz6NskltvPqGBugZQzMkhD4azVGsPxRK7/aaE=;
-        b=MKdKq7rV65hoex/8oHOA4KmYhgHC9Eml5EZBq6yTX50m+jWjerlsVLN0yO92yzJ8An
-         BV6XphuDyJvinmZAPsZHTm2dLhaCBfUt1tu+zY1glyxdC6ACLQttJV8oWBGX4lqkIvGY
-         9G5Vwho0PzuYZRGS+K871ic6+m3xFkAY2STGj7J5AFskhndmnJbcThjebM6nc1VBnxxi
-         SYtT1kFaKG3L6gzEwxpQx98lc4430BCPkm++bcaUzkJHtd0UdXfVjIHUPZ+Vw+Ju8iJA
-         ENJGfgybc9f56zMOVKEMSBbGrR9FGSMcYDI23ZHQwr/kVvJpxsGUUv5o81+YJWQ873kb
-         JoFA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=content-transfer-encoding:in-reply-to:from:references:to
-         :content-language:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=8uNvPDnz6NskltvPqGBugZQzMkhD4azVGsPxRK7/aaE=;
-        b=Sb5otEwAugSQv4BP0My400yhCPUfGhp9zaaVc2YYuFk5/r4R4K5qZOcNfej/NmJ573
-         +U9YjE6OxGBG7jj5Jy285AoQNQMBT3gbrCOl2srkkrvDlV3PbjCOMRKM1ySoiy5LK/Vp
-         AubuyC5MU1ct5GSn2MkF3s3qRFv+De8yvqrVB+VmUrHj1Sk+m/gAMSscimeNNLG6aOkZ
-         ubnbxowcL19OLQGXmK1aiPoGk6I0BApfbDqRyxVFhnzYXaOzPUUzBdRdHV8+DNVu2TVh
-         4jBB22ReBBKvuOD0lZm5kZDskFc497Vdn9ZsmimWxjPFuuQdhhPFl8wKUCshh1UP009U
-         EUIw==
-X-Gm-Message-State: ACrzQf3Hfsghu4mFQTBs5h+CwyhK2EhltKc1EbEfODFf9aVpCUgQ5cwx
-	J4Ex29hZmATERPYpYVdxzYQ=
-X-Google-Smtp-Source: AMsMyM4U2mihx9fN6gm+0i9+yKkSTNUmd99Es3xt2UT3d/5ZlMPE7HbV5ksWs+0JbR2td0RWf8EGpQ==
-X-Received: by 2002:a05:6870:a99a:b0:128:1283:1df1 with SMTP id ep26-20020a056870a99a00b0012812831df1mr5333660oab.259.1666009692599;
-        Mon, 17 Oct 2022 05:28:12 -0700 (PDT)
-Received: from ?IPV6:2600:1700:9190:ba10:4d4c:e983:fca5:2bbb? ([2600:1700:9190:ba10:4d4c:e983:fca5:2bbb])
-        by smtp.gmail.com with ESMTPSA id bb18-20020a056808169200b00354d732ed87sm4247441oib.36.2022.10.17.05.28.11
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 17 Oct 2022 05:28:12 -0700 (PDT)
-Message-ID: <4b2786ff-a817-2083-f6e6-3d4c3134f5f9@gmail.com>
-Date: Mon, 17 Oct 2022 08:28:11 -0400
+ dkim=missing; spf=none, err=SPF record not found (domain: t-online.de, ip: 194.25.134.81, mailfrom: f_l_k@t-online.de)
+Received: from fwd88.dcpf.telekom.de (fwd88.aul.t-online.de [10.223.144.114])
+	by mailout03.t-online.de (Postfix) with SMTP id 6D8072756
+	for <openembedded-devel@lists.openembedded.org>; Mon, 17 Oct 2022 16:53:52 +0200 (CEST)
+Received: from flk-MS-7C91.. ([84.163.46.75]) by fwd88.t-online.de
+	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
+	esmtp id 1okRV1-3JCbnV0; Mon, 17 Oct 2022 16:53:51 +0200
+From: Markus Volk <f_l_k@t-online.de>
+To: openembedded-devel@lists.openembedded.org
+Cc: Markus Volk <f_l_k@t-online.de>
+Subject: [meta-oe][PATCH] perfetto: build libperfetto
+Date: Mon, 17 Oct 2022 16:53:39 +0200
+Message-Id: <20221017145339.1097602-1-f_l_k@t-online.de>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.2.2
-Subject: Re: [oe] [meta-oe][dunfell][PATCH] postgresql: Fix CVE-2022-2625
-Content-Language: en-US
-To: Hitendra Prajapati <hprajapati@mvista.com>,
- openembedded-devel@lists.openembedded.org
-References: <20221017041850.6122-1-hprajapati@mvista.com>
-From: akuster808 <akuster808@gmail.com>
-In-Reply-To: <20221017041850.6122-1-hprajapati@mvista.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-TOI-EXPURGATEID: 150726::1666018431-E30B0E65-9A58B3FC/0/0 CLEAN NORMAL
+X-TOI-MSGID: c1627fc9-1723-4fc7-9672-7e27f24fbf1d
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 17 Oct 2022 12:28:23 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99198
+ <openembedded-devel@lists.openembedded.org>; Mon, 17 Oct 2022 14:54:04 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99199
 
+- Mesa has support for perfetto, but the libperfetto library is needed
+- Only v27 seems to be supported for now. Update perfetto accordingly
+- Make sure perfetto and libperfetto share the same codebase
+- Patch meson.build to allow shared build
+- Add a version number to avoid having a non symlink so file packaged int=
+o dev package.
+- Create a PC file for libperfetto to allow mesa to find it using pkgconf=
+ig.
+- Add nobranch=3D1 for the git repos to silence warnings about missing de=
+fault branch
 
+Signed-off-by: Markus Volk <f_l_k@t-online.de>
+---
+ ...1-meson-add-pc-file-for-lib_perfetto.patch | 38 +++++++++++++++++++
+ .../recipes-devtools/perfetto/libperfetto.bb  | 11 ++++++
+ meta-oe/recipes-devtools/perfetto/perfetto.bb | 14 +++----
+ .../recipes-devtools/perfetto/perfetto.inc    |  9 +++++
+ 4 files changed, 65 insertions(+), 7 deletions(-)
+ create mode 100644 meta-oe/recipes-devtools/perfetto/files/0001-meson-ad=
+d-pc-file-for-lib_perfetto.patch
+ create mode 100644 meta-oe/recipes-devtools/perfetto/libperfetto.bb
+ create mode 100644 meta-oe/recipes-devtools/perfetto/perfetto.inc
 
-On 10/17/22 12:18 AM, Hitendra Prajapati wrote:
-> Upstream-Status: Backport from https://git.postgresql.org/gitweb/?p=postgresql.git;a=commit;h=5579726bd60a6e7afb04a3548bced348cd5ffd89
-> Description:
-> 	CVE-2022-2625 postgresql: Extension scripts replace objects not belonging to the extension.
-
-As mentioned earlier, Postgres 12.12 has been released and if this 
-package was updated to that version, this patch would have been 
-unnecessary.
-
-I am rejecting this patch as a package update is a cleaner way to go.
-
--armin
->
-> Signed-off-by: Hitendra Prajapati <hprajapati@mvista.com>
-> ---
->   .../postgresql/files/CVE-2022-2625.patch      | 904 ++++++++++++++++++
->   .../recipes-dbs/postgresql/postgresql_12.9.bb |   1 +
->   2 files changed, 905 insertions(+)
->   create mode 100644 meta-oe/recipes-dbs/postgresql/files/CVE-2022-2625.patch
->
-> diff --git a/meta-oe/recipes-dbs/postgresql/files/CVE-2022-2625.patch b/meta-oe/recipes-dbs/postgresql/files/CVE-2022-2625.patch
-> new file mode 100644
-> index 0000000000..6417d8a2b7
-> --- /dev/null
-> +++ b/meta-oe/recipes-dbs/postgresql/files/CVE-2022-2625.patch
-> @@ -0,0 +1,904 @@
-> +From 84375c1db25ef650902cf80712495fc514b0ff63 Mon Sep 17 00:00:00 2001
-> +From: Hitendra Prajapati <hprajapati@mvista.com>
-> +Date: Thu, 13 Oct 2022 10:35:32 +0530
-> +Subject: [PATCH] CVE-2022-2625
-> +
-> +Upstream-Status: Backport [https://git.postgresql.org/gitweb/?p=postgresql.git;a=commit;h=5579726bd60a6e7afb04a3548bced348cd5ffd89]
-> +CVE: CVE-2022-2625
-> +Signed-off-by: Hitendra Prajapati <hprajapati@mvista.com>
-> +---
-> + doc/src/sgml/extend.sgml                      |  11 --
-> + src/backend/catalog/pg_collation.c            |  49 ++++--
-> + src/backend/catalog/pg_depend.c               |  74 ++++++++-
-> + src/backend/catalog/pg_operator.c             |   2 +-
-> + src/backend/catalog/pg_type.c                 |   7 +-
-> + src/backend/commands/createas.c               |  18 ++-
-> + src/backend/commands/foreigncmds.c            |  19 ++-
-> + src/backend/commands/schemacmds.c             |  25 ++-
-> + src/backend/commands/sequence.c               |   8 +
-> + src/backend/commands/statscmds.c              |   4 +
-> + src/backend/commands/view.c                   |  16 +-
-> + src/backend/parser/parse_utilcmd.c            |  10 ++
-> + src/include/catalog/dependency.h              |   2 +
-> + src/test/modules/test_extensions/Makefile     |   5 +-
-> + .../expected/test_extensions.out              | 153 ++++++++++++++++++
-> + .../test_extensions/sql/test_extensions.sql   | 110 +++++++++++++
-> + .../test_ext_cine--1.0--1.1.sql               |  26 +++
-> + .../test_extensions/test_ext_cine--1.0.sql    |  25 +++
-> + .../test_extensions/test_ext_cine.control     |   3 +
-> + .../test_extensions/test_ext_cor--1.0.sql     |  20 +++
-> + .../test_extensions/test_ext_cor.control      |   3 +
-> + 21 files changed, 540 insertions(+), 50 deletions(-)
-> + create mode 100644 src/test/modules/test_extensions/test_ext_cine--1.0--1.1.sql
-> + create mode 100644 src/test/modules/test_extensions/test_ext_cine--1.0.sql
-> + create mode 100644 src/test/modules/test_extensions/test_ext_cine.control
-> + create mode 100644 src/test/modules/test_extensions/test_ext_cor--1.0.sql
-> + create mode 100644 src/test/modules/test_extensions/test_ext_cor.control
-> +
-> +diff --git a/doc/src/sgml/extend.sgml b/doc/src/sgml/extend.sgml
-> +index 53f2638..bcc7a80 100644
-> +--- a/doc/src/sgml/extend.sgml
-> ++++ b/doc/src/sgml/extend.sgml
-> +@@ -1109,17 +1109,6 @@ SELECT * FROM pg_extension_update_paths('<replaceable>extension_name</replaceabl
-> +       <varname>search_path</varname>.  However, no mechanism currently exists
-> +       to require that.
-> +      </para>
-> +-
-> +-     <para>
-> +-      Do <emphasis>not</emphasis> use <command>CREATE OR REPLACE
-> +-      FUNCTION</command>, except in an update script that must change the
-> +-      definition of a function that is known to be an extension member
-> +-      already.  (Likewise for other <literal>OR REPLACE</literal> options.)
-> +-      Using <literal>OR REPLACE</literal> unnecessarily not only has a risk
-> +-      of accidentally overwriting someone else's function, but it creates a
-> +-      security hazard since the overwritten function would still be owned by
-> +-      its original owner, who could modify it.
-> +-     </para>
-> +     </sect3>
-> +    </sect2>
-> +
-> +diff --git a/src/backend/catalog/pg_collation.c b/src/backend/catalog/pg_collation.c
-> +index dd99d53..ba4c3ef 100644
-> +--- a/src/backend/catalog/pg_collation.c
-> ++++ b/src/backend/catalog/pg_collation.c
-> +@@ -78,15 +78,25 @@ CollationCreate(const char *collname, Oid collnamespace,
-> + 	 * friendlier error message.  The unique index provides a backstop against
-> + 	 * race conditions.
-> + 	 */
-> +-	if (SearchSysCacheExists3(COLLNAMEENCNSP,
-> +-							  PointerGetDatum(collname),
-> +-							  Int32GetDatum(collencoding),
-> +-							  ObjectIdGetDatum(collnamespace)))
-> ++	oid = GetSysCacheOid3(COLLNAMEENCNSP,
-> ++						  Anum_pg_collation_oid,
-> ++						  PointerGetDatum(collname),
-> ++						  Int32GetDatum(collencoding),
-> ++						  ObjectIdGetDatum(collnamespace));
-> ++	if (OidIsValid(oid))
-> + 	{
-> + 		if (quiet)
-> + 			return InvalidOid;
-> + 		else if (if_not_exists)
-> + 		{
-> ++			/*
-> ++			 * If we are in an extension script, insist that the pre-existing
-> ++			 * object be a member of the extension, to avoid security risks.
-> ++			 */
-> ++			ObjectAddressSet(myself, CollationRelationId, oid);
-> ++			checkMembershipInCurrentExtension(&myself);
-> ++
-> ++			/* OK to skip */
-> + 			ereport(NOTICE,
-> + 					(errcode(ERRCODE_DUPLICATE_OBJECT),
-> + 					 collencoding == -1
-> +@@ -116,16 +126,19 @@ CollationCreate(const char *collname, Oid collnamespace,
-> + 	 * so we take a ShareRowExclusiveLock earlier, to protect against
-> + 	 * concurrent changes fooling this check.
-> + 	 */
-> +-	if ((collencoding == -1 &&
-> +-		 SearchSysCacheExists3(COLLNAMEENCNSP,
-> +-							   PointerGetDatum(collname),
-> +-							   Int32GetDatum(GetDatabaseEncoding()),
-> +-							   ObjectIdGetDatum(collnamespace))) ||
-> +-		(collencoding != -1 &&
-> +-		 SearchSysCacheExists3(COLLNAMEENCNSP,
-> +-							   PointerGetDatum(collname),
-> +-							   Int32GetDatum(-1),
-> +-							   ObjectIdGetDatum(collnamespace))))
-> ++	if (collencoding == -1)
-> ++		oid = GetSysCacheOid3(COLLNAMEENCNSP,
-> ++							  Anum_pg_collation_oid,
-> ++							  PointerGetDatum(collname),
-> ++							  Int32GetDatum(GetDatabaseEncoding()),
-> ++							  ObjectIdGetDatum(collnamespace));
-> ++	else
-> ++		oid = GetSysCacheOid3(COLLNAMEENCNSP,
-> ++							  Anum_pg_collation_oid,
-> ++							  PointerGetDatum(collname),
-> ++							  Int32GetDatum(-1),
-> ++							  ObjectIdGetDatum(collnamespace));
-> ++	if (OidIsValid(oid))
-> + 	{
-> + 		if (quiet)
-> + 		{
-> +@@ -134,6 +147,14 @@ CollationCreate(const char *collname, Oid collnamespace,
-> + 		}
-> + 		else if (if_not_exists)
-> + 		{
-> ++			/*
-> ++			 * If we are in an extension script, insist that the pre-existing
-> ++			 * object be a member of the extension, to avoid security risks.
-> ++			 */
-> ++			ObjectAddressSet(myself, CollationRelationId, oid);
-> ++			checkMembershipInCurrentExtension(&myself);
-> ++
-> ++			/* OK to skip */
-> + 			table_close(rel, NoLock);
-> + 			ereport(NOTICE,
-> + 					(errcode(ERRCODE_DUPLICATE_OBJECT),
-> +diff --git a/src/backend/catalog/pg_depend.c b/src/backend/catalog/pg_depend.c
-> +index 9ffadbb..71c7cef 100644
-> +--- a/src/backend/catalog/pg_depend.c
-> ++++ b/src/backend/catalog/pg_depend.c
-> +@@ -124,15 +124,23 @@ recordMultipleDependencies(const ObjectAddress *depender,
-> +
-> + /*
-> +  * If we are executing a CREATE EXTENSION operation, mark the given object
-> +- * as being a member of the extension.  Otherwise, do nothing.
-> ++ * as being a member of the extension, or check that it already is one.
-> ++ * Otherwise, do nothing.
-> +  *
-> +  * This must be called during creation of any user-definable object type
-> +  * that could be a member of an extension.
-> +  *
-> +- * If isReplace is true, the object already existed (or might have already
-> +- * existed), so we must check for a pre-existing extension membership entry.
-> +- * Passing false is a guarantee that the object is newly created, and so
-> +- * could not already be a member of any extension.
-> ++ * isReplace must be true if the object already existed, and false if it is
-> ++ * newly created.  In the former case we insist that it already be a member
-> ++ * of the current extension.  In the latter case we can skip checking whether
-> ++ * it is already a member of any extension.
-> ++ *
-> ++ * Note: isReplace = true is typically used when updating a object in
-> ++ * CREATE OR REPLACE and similar commands.  We used to allow the target
-> ++ * object to not already be an extension member, instead silently absorbing
-> ++ * it into the current extension.  However, this was both error-prone
-> ++ * (extensions might accidentally overwrite free-standing objects) and
-> ++ * a security hazard (since the object would retain its previous ownership).
-> +  */
-> + void
-> + recordDependencyOnCurrentExtension(const ObjectAddress *object,
-> +@@ -150,6 +158,12 @@ recordDependencyOnCurrentExtension(const ObjectAddress *object,
-> + 		{
-> + 			Oid			oldext;
-> +
-> ++			/*
-> ++			 * Side note: these catalog lookups are safe only because the
-> ++			 * object is a pre-existing one.  In the not-isReplace case, the
-> ++			 * caller has most likely not yet done a CommandCounterIncrement
-> ++			 * that would make the new object visible.
-> ++			 */
-> + 			oldext = getExtensionOfObject(object->classId, object->objectId);
-> + 			if (OidIsValid(oldext))
-> + 			{
-> +@@ -163,6 +177,13 @@ recordDependencyOnCurrentExtension(const ObjectAddress *object,
-> + 								getObjectDescription(object),
-> + 								get_extension_name(oldext))));
-> + 			}
-> ++			/* It's a free-standing object, so reject */
-> ++			ereport(ERROR,
-> ++					(errcode(ERRCODE_OBJECT_NOT_IN_PREREQUISITE_STATE),
-> ++					 errmsg("%s is not a member of extension \"%s\"",
-> ++							getObjectDescription(object),
-> ++							get_extension_name(CurrentExtensionObject)),
-> ++					 errdetail("An extension is not allowed to replace an object that it does not own.")));
-> + 		}
-> +
-> + 		/* OK, record it as a member of CurrentExtensionObject */
-> +@@ -174,6 +195,49 @@ recordDependencyOnCurrentExtension(const ObjectAddress *object,
-> + 	}
-> + }
-> +
-> ++/*
-> ++ * If we are executing a CREATE EXTENSION operation, check that the given
-> ++ * object is a member of the extension, and throw an error if it isn't.
-> ++ * Otherwise, do nothing.
-> ++ *
-> ++ * This must be called whenever a CREATE IF NOT EXISTS operation (for an
-> ++ * object type that can be an extension member) has found that an object of
-> ++ * the desired name already exists.  It is insecure for an extension to use
-> ++ * IF NOT EXISTS except when the conflicting object is already an extension
-> ++ * member; otherwise a hostile user could substitute an object with arbitrary
-> ++ * properties.
-> ++ */
-> ++void
-> ++checkMembershipInCurrentExtension(const ObjectAddress *object)
-> ++{
-> ++	/*
-> ++	 * This is actually the same condition tested in
-> ++	 * recordDependencyOnCurrentExtension; but we want to issue a
-> ++	 * differently-worded error, and anyway it would be pretty confusing to
-> ++	 * call recordDependencyOnCurrentExtension in these circumstances.
-> ++	 */
-> ++
-> ++	/* Only whole objects can be extension members */
-> ++	Assert(object->objectSubId == 0);
-> ++
-> ++	if (creating_extension)
-> ++	{
-> ++		Oid			oldext;
-> ++
-> ++		oldext = getExtensionOfObject(object->classId, object->objectId);
-> ++		/* If already a member of this extension, OK */
-> ++		if (oldext == CurrentExtensionObject)
-> ++			return;
-> ++		/* Else complain */
-> ++		ereport(ERROR,
-> ++				(errcode(ERRCODE_OBJECT_NOT_IN_PREREQUISITE_STATE),
-> ++				 errmsg("%s is not a member of extension \"%s\"",
-> ++						getObjectDescription(object),
-> ++						get_extension_name(CurrentExtensionObject)),
-> ++				 errdetail("An extension may only use CREATE ... IF NOT EXISTS to skip object creation if the conflicting object is one that it already owns.")));
-> ++	}
-> ++}
-> ++
-> + /*
-> +  * deleteDependencyRecordsFor -- delete all records with given depender
-> +  * classId/objectId.  Returns the number of records deleted.
-> +diff --git a/src/backend/catalog/pg_operator.c b/src/backend/catalog/pg_operator.c
-> +index bcaa26c..84784e6 100644
-> +--- a/src/backend/catalog/pg_operator.c
-> ++++ b/src/backend/catalog/pg_operator.c
-> +@@ -867,7 +867,7 @@ makeOperatorDependencies(HeapTuple tuple, bool isUpdate)
-> + 							oper->oprowner);
-> +
-> + 	/* Dependency on extension */
-> +-	recordDependencyOnCurrentExtension(&myself, true);
-> ++	recordDependencyOnCurrentExtension(&myself, isUpdate);
-> +
-> + 	return myself;
-> + }
-> +diff --git a/src/backend/catalog/pg_type.c b/src/backend/catalog/pg_type.c
-> +index 2a51501..3ff017f 100644
-> +--- a/src/backend/catalog/pg_type.c
-> ++++ b/src/backend/catalog/pg_type.c
-> +@@ -528,10 +528,9 @@ TypeCreate(Oid newTypeOid,
-> +  * If rebuild is true, we remove existing dependencies and rebuild them
-> +  * from scratch.  This is needed for ALTER TYPE, and also when replacing
-> +  * a shell type.  We don't remove an existing extension dependency, though.
-> +- * (That means an extension can't absorb a shell type created in another
-> +- * extension, nor ALTER a type created by another extension.  Also, if it
-> +- * replaces a free-standing shell type or ALTERs a free-standing type,
-> +- * that type will become a member of the extension.)
-> ++ * That means an extension can't absorb a shell type that is free-standing
-> ++ * or belongs to another extension, nor ALTER a type that is free-standing or
-> ++ * belongs to another extension.
-> +  */
-> + void
-> + GenerateTypeDependencies(Oid typeObjectId,
-> +diff --git a/src/backend/commands/createas.c b/src/backend/commands/createas.c
-> +index 4c1d909..a68d945 100644
-> +--- a/src/backend/commands/createas.c
-> ++++ b/src/backend/commands/createas.c
-> +@@ -243,15 +243,27 @@ ExecCreateTableAs(CreateTableAsStmt *stmt, const char *queryString,
-> + 	if (stmt->if_not_exists)
-> + 	{
-> + 		Oid			nspid;
-> ++		Oid			oldrelid;
-> +
-> +-		nspid = RangeVarGetCreationNamespace(stmt->into->rel);
-> ++		nspid = RangeVarGetCreationNamespace(into->rel);
-> +
-> +-		if (get_relname_relid(stmt->into->rel->relname, nspid))
-> ++		oldrelid = get_relname_relid(into->rel->relname, nspid);
-> ++		if (OidIsValid(oldrelid))
-> + 		{
-> ++			/*
-> ++			 * The relation exists and IF NOT EXISTS has been specified.
-> ++			 *
-> ++			 * If we are in an extension script, insist that the pre-existing
-> ++			 * object be a member of the extension, to avoid security risks.
-> ++			 */
-> ++			ObjectAddressSet(address, RelationRelationId, oldrelid);
-> ++			checkMembershipInCurrentExtension(&address);
-> ++
-> ++			/* OK to skip */
-> + 			ereport(NOTICE,
-> + 					(errcode(ERRCODE_DUPLICATE_TABLE),
-> + 					 errmsg("relation \"%s\" already exists, skipping",
-> +-							stmt->into->rel->relname)));
-> ++							into->rel->relname)));
-> + 			return InvalidObjectAddress;
-> + 		}
-> + 	}
-> +diff --git a/src/backend/commands/foreigncmds.c b/src/backend/commands/foreigncmds.c
-> +index d7bc6e3..bc583c6 100644
-> +--- a/src/backend/commands/foreigncmds.c
-> ++++ b/src/backend/commands/foreigncmds.c
-> +@@ -887,13 +887,22 @@ CreateForeignServer(CreateForeignServerStmt *stmt)
-> + 	ownerId = GetUserId();
-> +
-> + 	/*
-> +-	 * Check that there is no other foreign server by this name. Do nothing if
-> +-	 * IF NOT EXISTS was enforced.
-> ++	 * Check that there is no other foreign server by this name.  If there is
-> ++	 * one, do nothing if IF NOT EXISTS was specified.
-> + 	 */
-> +-	if (GetForeignServerByName(stmt->servername, true) != NULL)
-> ++	srvId = get_foreign_server_oid(stmt->servername, true);
-> ++	if (OidIsValid(srvId))
-> + 	{
-> + 		if (stmt->if_not_exists)
-> + 		{
-> ++			/*
-> ++			 * If we are in an extension script, insist that the pre-existing
-> ++			 * object be a member of the extension, to avoid security risks.
-> ++			 */
-> ++			ObjectAddressSet(myself, ForeignServerRelationId, srvId);
-> ++			checkMembershipInCurrentExtension(&myself);
-> ++
-> ++			/* OK to skip */
-> + 			ereport(NOTICE,
-> + 					(errcode(ERRCODE_DUPLICATE_OBJECT),
-> + 					 errmsg("server \"%s\" already exists, skipping",
-> +@@ -1182,6 +1191,10 @@ CreateUserMapping(CreateUserMappingStmt *stmt)
-> + 	{
-> + 		if (stmt->if_not_exists)
-> + 		{
-> ++			/*
-> ++			 * Since user mappings aren't members of extensions (see comments
-> ++			 * below), no need for checkMembershipInCurrentExtension here.
-> ++			 */
-> + 			ereport(NOTICE,
-> + 					(errcode(ERRCODE_DUPLICATE_OBJECT),
-> + 					 errmsg("user mapping for \"%s\" already exists for server \"%s\", skipping",
-> +diff --git a/src/backend/commands/schemacmds.c b/src/backend/commands/schemacmds.c
-> +index 6cf94a3..6bc4edc 100644
-> +--- a/src/backend/commands/schemacmds.c
-> ++++ b/src/backend/commands/schemacmds.c
-> +@@ -113,14 +113,25 @@ CreateSchemaCommand(CreateSchemaStmt *stmt, const char *queryString,
-> + 	 * the permissions checks, but since CREATE TABLE IF NOT EXISTS makes its
-> + 	 * creation-permission check first, we do likewise.
-> + 	 */
-> +-	if (stmt->if_not_exists &&
-> +-		SearchSysCacheExists1(NAMESPACENAME, PointerGetDatum(schemaName)))
-> ++	if (stmt->if_not_exists)
-> + 	{
-> +-		ereport(NOTICE,
-> +-				(errcode(ERRCODE_DUPLICATE_SCHEMA),
-> +-				 errmsg("schema \"%s\" already exists, skipping",
-> +-						schemaName)));
-> +-		return InvalidOid;
-> ++		namespaceId = get_namespace_oid(schemaName, true);
-> ++		if (OidIsValid(namespaceId))
-> ++		{
-> ++			/*
-> ++			 * If we are in an extension script, insist that the pre-existing
-> ++			 * object be a member of the extension, to avoid security risks.
-> ++			 */
-> ++			ObjectAddressSet(address, NamespaceRelationId, namespaceId);
-> ++			checkMembershipInCurrentExtension(&address);
-> ++
-> ++			/* OK to skip */
-> ++			ereport(NOTICE,
-> ++					(errcode(ERRCODE_DUPLICATE_SCHEMA),
-> ++					 errmsg("schema \"%s\" already exists, skipping",
-> ++							schemaName)));
-> ++			return InvalidOid;
-> ++		}
-> + 	}
-> +
-> + 	/*
-> +diff --git a/src/backend/commands/sequence.c b/src/backend/commands/sequence.c
-> +index 0960b33..0577184 100644
-> +--- a/src/backend/commands/sequence.c
-> ++++ b/src/backend/commands/sequence.c
-> +@@ -149,6 +149,14 @@ DefineSequence(ParseState *pstate, CreateSeqStmt *seq)
-> + 		RangeVarGetAndCheckCreationNamespace(seq->sequence, NoLock, &seqoid);
-> + 		if (OidIsValid(seqoid))
-> + 		{
-> ++			/*
-> ++			 * If we are in an extension script, insist that the pre-existing
-> ++			 * object be a member of the extension, to avoid security risks.
-> ++			 */
-> ++			ObjectAddressSet(address, RelationRelationId, seqoid);
-> ++			checkMembershipInCurrentExtension(&address);
-> ++
-> ++			/* OK to skip */
-> + 			ereport(NOTICE,
-> + 					(errcode(ERRCODE_DUPLICATE_TABLE),
-> + 					 errmsg("relation \"%s\" already exists, skipping",
-> +diff --git a/src/backend/commands/statscmds.c b/src/backend/commands/statscmds.c
-> +index 5678d31..409cf28 100644
-> +--- a/src/backend/commands/statscmds.c
-> ++++ b/src/backend/commands/statscmds.c
-> +@@ -173,6 +173,10 @@ CreateStatistics(CreateStatsStmt *stmt)
-> + 	{
-> + 		if (stmt->if_not_exists)
-> + 		{
-> ++			/*
-> ++			 * Since stats objects aren't members of extensions (see comments
-> ++			 * below), no need for checkMembershipInCurrentExtension here.
-> ++			 */
-> + 			ereport(NOTICE,
-> + 					(errcode(ERRCODE_DUPLICATE_OBJECT),
-> + 					 errmsg("statistics object \"%s\" already exists, skipping",
-> +diff --git a/src/backend/commands/view.c b/src/backend/commands/view.c
-> +index 87ed453..dd7cc97 100644
-> +--- a/src/backend/commands/view.c
-> ++++ b/src/backend/commands/view.c
-> +@@ -205,7 +205,7 @@ DefineVirtualRelation(RangeVar *relation, List *tlist, bool replace,
-> + 		CommandCounterIncrement();
-> +
-> + 		/*
-> +-		 * Finally update the view options.
-> ++		 * Update the view's options.
-> + 		 *
-> + 		 * The new options list replaces the existing options list, even if
-> + 		 * it's empty.
-> +@@ -218,8 +218,22 @@ DefineVirtualRelation(RangeVar *relation, List *tlist, bool replace,
-> + 		/* EventTriggerAlterTableStart called by ProcessUtilitySlow */
-> + 		AlterTableInternal(viewOid, atcmds, true);
-> +
-> ++		/*
-> ++		 * There is very little to do here to update the view's dependencies.
-> ++		 * Most view-level dependency relationships, such as those on the
-> ++		 * owner, schema, and associated composite type, aren't changing.
-> ++		 * Because we don't allow changing type or collation of an existing
-> ++		 * view column, those dependencies of the existing columns don't
-> ++		 * change either, while the AT_AddColumnToView machinery took care of
-> ++		 * adding such dependencies for new view columns.  The dependencies of
-> ++		 * the view's query could have changed arbitrarily, but that was dealt
-> ++		 * with inside StoreViewQuery.  What remains is only to check that
-> ++		 * view replacement is allowed when we're creating an extension.
-> ++		 */
-> + 		ObjectAddressSet(address, RelationRelationId, viewOid);
-> +
-> ++		recordDependencyOnCurrentExtension(&address, true);
-> ++
-> + 		/*
-> + 		 * Seems okay, so return the OID of the pre-existing view.
-> + 		 */
-> +diff --git a/src/backend/parser/parse_utilcmd.c b/src/backend/parser/parse_utilcmd.c
-> +index 44aa38a..8f4d940 100644
-> +--- a/src/backend/parser/parse_utilcmd.c
-> ++++ b/src/backend/parser/parse_utilcmd.c
-> +@@ -206,6 +206,16 @@ transformCreateStmt(CreateStmt *stmt, const char *queryString)
-> + 	 */
-> + 	if (stmt->if_not_exists && OidIsValid(existing_relid))
-> + 	{
-> ++		/*
-> ++		 * If we are in an extension script, insist that the pre-existing
-> ++		 * object be a member of the extension, to avoid security risks.
-> ++		 */
-> ++		ObjectAddress address;
-> ++
-> ++		ObjectAddressSet(address, RelationRelationId, existing_relid);
-> ++		checkMembershipInCurrentExtension(&address);
-> ++
-> ++		/* OK to skip */
-> + 		ereport(NOTICE,
-> + 				(errcode(ERRCODE_DUPLICATE_TABLE),
-> + 				 errmsg("relation \"%s\" already exists, skipping",
-> +diff --git a/src/include/catalog/dependency.h b/src/include/catalog/dependency.h
-> +index 8b1e3aa..27c7509 100644
-> +--- a/src/include/catalog/dependency.h
-> ++++ b/src/include/catalog/dependency.h
-> +@@ -201,6 +201,8 @@ extern void recordMultipleDependencies(const ObjectAddress *depender,
-> + extern void recordDependencyOnCurrentExtension(const ObjectAddress *object,
-> + 											   bool isReplace);
-> +
-> ++extern void checkMembershipInCurrentExtension(const ObjectAddress *object);
-> ++
-> + extern long deleteDependencyRecordsFor(Oid classId, Oid objectId,
-> + 									   bool skipExtensionDeps);
-> +
-> +diff --git a/src/test/modules/test_extensions/Makefile b/src/test/modules/test_extensions/Makefile
-> +index d18108e..7428f15 100644
-> +--- a/src/test/modules/test_extensions/Makefile
-> ++++ b/src/test/modules/test_extensions/Makefile
-> +@@ -4,10 +4,13 @@ MODULE = test_extensions
-> + PGFILEDESC = "test_extensions - regression testing for EXTENSION support"
-> +
-> + EXTENSION = test_ext1 test_ext2 test_ext3 test_ext4 test_ext5 test_ext6 \
-> +-            test_ext7 test_ext8 test_ext_cyclic1 test_ext_cyclic2
-> ++            test_ext7 test_ext8 test_ext_cine test_ext_cor \
-> ++            test_ext_cyclic1 test_ext_cyclic2
-> + DATA = test_ext1--1.0.sql test_ext2--1.0.sql test_ext3--1.0.sql \
-> +        test_ext4--1.0.sql test_ext5--1.0.sql test_ext6--1.0.sql \
-> +        test_ext7--1.0.sql test_ext7--1.0--2.0.sql test_ext8--1.0.sql \
-> ++       test_ext_cine--1.0.sql test_ext_cine--1.0--1.1.sql \
-> ++       test_ext_cor--1.0.sql \
-> +        test_ext_cyclic1--1.0.sql test_ext_cyclic2--1.0.sql
-> +
-> + REGRESS = test_extensions test_extdepend
-> +diff --git a/src/test/modules/test_extensions/expected/test_extensions.out b/src/test/modules/test_extensions/expected/test_extensions.out
-> +index b5cbdfc..1e91640 100644
-> +--- a/src/test/modules/test_extensions/expected/test_extensions.out
-> ++++ b/src/test/modules/test_extensions/expected/test_extensions.out
-> +@@ -154,3 +154,156 @@ DROP TABLE test_ext4_tab;
-> + DROP FUNCTION create_extension_with_temp_schema();
-> + RESET client_min_messages;
-> + \unset SHOW_CONTEXT
-> ++-- It's generally bad style to use CREATE OR REPLACE unnecessarily.
-> ++-- Test what happens if an extension does it anyway.
-> ++-- Replacing a shell type or operator is sort of like CREATE OR REPLACE;
-> ++-- check that too.
-> ++CREATE FUNCTION ext_cor_func() RETURNS text
-> ++  AS $$ SELECT 'ext_cor_func: original'::text $$ LANGUAGE sql;
-> ++CREATE EXTENSION test_ext_cor;  -- fail
-> ++ERROR:  function ext_cor_func() is not a member of extension "test_ext_cor"
-> ++DETAIL:  An extension is not allowed to replace an object that it does not own.
-> ++SELECT ext_cor_func();
-> ++      ext_cor_func
-> ++------------------------
-> ++ ext_cor_func: original
-> ++(1 row)
-> ++
-> ++DROP FUNCTION ext_cor_func();
-> ++CREATE VIEW ext_cor_view AS
-> ++  SELECT 'ext_cor_view: original'::text AS col;
-> ++CREATE EXTENSION test_ext_cor;  -- fail
-> ++ERROR:  view ext_cor_view is not a member of extension "test_ext_cor"
-> ++DETAIL:  An extension is not allowed to replace an object that it does not own.
-> ++SELECT ext_cor_func();
-> ++ERROR:  function ext_cor_func() does not exist
-> ++LINE 1: SELECT ext_cor_func();
-> ++               ^
-> ++HINT:  No function matches the given name and argument types. You might need to add explicit type casts.
-> ++SELECT * FROM ext_cor_view;
-> ++          col
-> ++------------------------
-> ++ ext_cor_view: original
-> ++(1 row)
-> ++
-> ++DROP VIEW ext_cor_view;
-> ++CREATE TYPE test_ext_type;
-> ++CREATE EXTENSION test_ext_cor;  -- fail
-> ++ERROR:  type test_ext_type is not a member of extension "test_ext_cor"
-> ++DETAIL:  An extension is not allowed to replace an object that it does not own.
-> ++DROP TYPE test_ext_type;
-> ++-- this makes a shell "point <<@@ polygon" operator too
-> ++CREATE OPERATOR @@>> ( PROCEDURE = poly_contain_pt,
-> ++  LEFTARG = polygon, RIGHTARG = point,
-> ++  COMMUTATOR = <<@@ );
-> ++CREATE EXTENSION test_ext_cor;  -- fail
-> ++ERROR:  operator <<@@(point,polygon) is not a member of extension "test_ext_cor"
-> ++DETAIL:  An extension is not allowed to replace an object that it does not own.
-> ++DROP OPERATOR <<@@ (point, polygon);
-> ++CREATE EXTENSION test_ext_cor;  -- now it should work
-> ++SELECT ext_cor_func();
-> ++         ext_cor_func
-> ++------------------------------
-> ++ ext_cor_func: from extension
-> ++(1 row)
-> ++
-> ++SELECT * FROM ext_cor_view;
-> ++             col
-> ++------------------------------
-> ++ ext_cor_view: from extension
-> ++(1 row)
-> ++
-> ++SELECT 'x'::test_ext_type;
-> ++ test_ext_type
-> ++---------------
-> ++ x
-> ++(1 row)
-> ++
-> ++SELECT point(0,0) <<@@ polygon(circle(point(0,0),1));
-> ++ ?column?
-> ++----------
-> ++ t
-> ++(1 row)
-> ++
-> ++\dx+ test_ext_cor
-> ++Objects in extension "test_ext_cor"
-> ++      Object description
-> ++------------------------------
-> ++ function ext_cor_func()
-> ++ operator <<@@(point,polygon)
-> ++ type test_ext_type
-> ++ view ext_cor_view
-> ++(4 rows)
-> ++
-> ++--
-> ++-- CREATE IF NOT EXISTS is an entirely unsound thing for an extension
-> ++-- to be doing, but let's at least plug the major security hole in it.
-> ++--
-> ++CREATE COLLATION ext_cine_coll
-> ++  ( LC_COLLATE = "C", LC_CTYPE = "C" );
-> ++CREATE EXTENSION test_ext_cine;  -- fail
-> ++ERROR:  collation ext_cine_coll is not a member of extension "test_ext_cine"
-> ++DETAIL:  An extension may only use CREATE ... IF NOT EXISTS to skip object creation if the conflicting object is one that it already owns.
-> ++DROP COLLATION ext_cine_coll;
-> ++CREATE MATERIALIZED VIEW ext_cine_mv AS SELECT 11 AS f1;
-> ++CREATE EXTENSION test_ext_cine;  -- fail
-> ++ERROR:  materialized view ext_cine_mv is not a member of extension "test_ext_cine"
-> ++DETAIL:  An extension may only use CREATE ... IF NOT EXISTS to skip object creation if the conflicting object is one that it already owns.
-> ++DROP MATERIALIZED VIEW ext_cine_mv;
-> ++CREATE FOREIGN DATA WRAPPER dummy;
-> ++CREATE SERVER ext_cine_srv FOREIGN DATA WRAPPER dummy;
-> ++CREATE EXTENSION test_ext_cine;  -- fail
-> ++ERROR:  server ext_cine_srv is not a member of extension "test_ext_cine"
-> ++DETAIL:  An extension may only use CREATE ... IF NOT EXISTS to skip object creation if the conflicting object is one that it already owns.
-> ++DROP SERVER ext_cine_srv;
-> ++CREATE SCHEMA ext_cine_schema;
-> ++CREATE EXTENSION test_ext_cine;  -- fail
-> ++ERROR:  schema ext_cine_schema is not a member of extension "test_ext_cine"
-> ++DETAIL:  An extension may only use CREATE ... IF NOT EXISTS to skip object creation if the conflicting object is one that it already owns.
-> ++DROP SCHEMA ext_cine_schema;
-> ++CREATE SEQUENCE ext_cine_seq;
-> ++CREATE EXTENSION test_ext_cine;  -- fail
-> ++ERROR:  sequence ext_cine_seq is not a member of extension "test_ext_cine"
-> ++DETAIL:  An extension may only use CREATE ... IF NOT EXISTS to skip object creation if the conflicting object is one that it already owns.
-> ++DROP SEQUENCE ext_cine_seq;
-> ++CREATE TABLE ext_cine_tab1 (x int);
-> ++CREATE EXTENSION test_ext_cine;  -- fail
-> ++ERROR:  table ext_cine_tab1 is not a member of extension "test_ext_cine"
-> ++DETAIL:  An extension may only use CREATE ... IF NOT EXISTS to skip object creation if the conflicting object is one that it already owns.
-> ++DROP TABLE ext_cine_tab1;
-> ++CREATE TABLE ext_cine_tab2 AS SELECT 42 AS y;
-> ++CREATE EXTENSION test_ext_cine;  -- fail
-> ++ERROR:  table ext_cine_tab2 is not a member of extension "test_ext_cine"
-> ++DETAIL:  An extension may only use CREATE ... IF NOT EXISTS to skip object creation if the conflicting object is one that it already owns.
-> ++DROP TABLE ext_cine_tab2;
-> ++CREATE EXTENSION test_ext_cine;
-> ++\dx+ test_ext_cine
-> ++Objects in extension "test_ext_cine"
-> ++        Object description
-> ++-----------------------------------
-> ++ collation ext_cine_coll
-> ++ foreign-data wrapper ext_cine_fdw
-> ++ materialized view ext_cine_mv
-> ++ schema ext_cine_schema
-> ++ sequence ext_cine_seq
-> ++ server ext_cine_srv
-> ++ table ext_cine_tab1
-> ++ table ext_cine_tab2
-> ++(8 rows)
-> ++
-> ++ALTER EXTENSION test_ext_cine UPDATE TO '1.1';
-> ++\dx+ test_ext_cine
-> ++Objects in extension "test_ext_cine"
-> ++        Object description
-> ++-----------------------------------
-> ++ collation ext_cine_coll
-> ++ foreign-data wrapper ext_cine_fdw
-> ++ materialized view ext_cine_mv
-> ++ schema ext_cine_schema
-> ++ sequence ext_cine_seq
-> ++ server ext_cine_srv
-> ++ table ext_cine_tab1
-> ++ table ext_cine_tab2
-> ++ table ext_cine_tab3
-> ++(9 rows)
-> ++
-> +diff --git a/src/test/modules/test_extensions/sql/test_extensions.sql b/src/test/modules/test_extensions/sql/test_extensions.sql
-> +index f505466..b3d4579 100644
-> +--- a/src/test/modules/test_extensions/sql/test_extensions.sql
-> ++++ b/src/test/modules/test_extensions/sql/test_extensions.sql
-> +@@ -93,3 +93,113 @@ DROP TABLE test_ext4_tab;
-> + DROP FUNCTION create_extension_with_temp_schema();
-> + RESET client_min_messages;
-> + \unset SHOW_CONTEXT
-> ++
-> ++-- It's generally bad style to use CREATE OR REPLACE unnecessarily.
-> ++-- Test what happens if an extension does it anyway.
-> ++-- Replacing a shell type or operator is sort of like CREATE OR REPLACE;
-> ++-- check that too.
-> ++
-> ++CREATE FUNCTION ext_cor_func() RETURNS text
-> ++  AS $$ SELECT 'ext_cor_func: original'::text $$ LANGUAGE sql;
-> ++
-> ++CREATE EXTENSION test_ext_cor;  -- fail
-> ++
-> ++SELECT ext_cor_func();
-> ++
-> ++DROP FUNCTION ext_cor_func();
-> ++
-> ++CREATE VIEW ext_cor_view AS
-> ++  SELECT 'ext_cor_view: original'::text AS col;
-> ++
-> ++CREATE EXTENSION test_ext_cor;  -- fail
-> ++
-> ++SELECT ext_cor_func();
-> ++
-> ++SELECT * FROM ext_cor_view;
-> ++
-> ++DROP VIEW ext_cor_view;
-> ++
-> ++CREATE TYPE test_ext_type;
-> ++
-> ++CREATE EXTENSION test_ext_cor;  -- fail
-> ++
-> ++DROP TYPE test_ext_type;
-> ++
-> ++-- this makes a shell "point <<@@ polygon" operator too
-> ++CREATE OPERATOR @@>> ( PROCEDURE = poly_contain_pt,
-> ++  LEFTARG = polygon, RIGHTARG = point,
-> ++  COMMUTATOR = <<@@ );
-> ++
-> ++CREATE EXTENSION test_ext_cor;  -- fail
-> ++
-> ++DROP OPERATOR <<@@ (point, polygon);
-> ++
-> ++CREATE EXTENSION test_ext_cor;  -- now it should work
-> ++
-> ++SELECT ext_cor_func();
-> ++
-> ++SELECT * FROM ext_cor_view;
-> ++
-> ++SELECT 'x'::test_ext_type;
-> ++
-> ++SELECT point(0,0) <<@@ polygon(circle(point(0,0),1));
-> ++
-> ++\dx+ test_ext_cor
-> ++
-> ++--
-> ++-- CREATE IF NOT EXISTS is an entirely unsound thing for an extension
-> ++-- to be doing, but let's at least plug the major security hole in it.
-> ++--
-> ++
-> ++CREATE COLLATION ext_cine_coll
-> ++  ( LC_COLLATE = "C", LC_CTYPE = "C" );
-> ++
-> ++CREATE EXTENSION test_ext_cine;  -- fail
-> ++
-> ++DROP COLLATION ext_cine_coll;
-> ++
-> ++CREATE MATERIALIZED VIEW ext_cine_mv AS SELECT 11 AS f1;
-> ++
-> ++CREATE EXTENSION test_ext_cine;  -- fail
-> ++
-> ++DROP MATERIALIZED VIEW ext_cine_mv;
-> ++
-> ++CREATE FOREIGN DATA WRAPPER dummy;
-> ++
-> ++CREATE SERVER ext_cine_srv FOREIGN DATA WRAPPER dummy;
-> ++
-> ++CREATE EXTENSION test_ext_cine;  -- fail
-> ++
-> ++DROP SERVER ext_cine_srv;
-> ++
-> ++CREATE SCHEMA ext_cine_schema;
-> ++
-> ++CREATE EXTENSION test_ext_cine;  -- fail
-> ++
-> ++DROP SCHEMA ext_cine_schema;
-> ++
-> ++CREATE SEQUENCE ext_cine_seq;
-> ++
-> ++CREATE EXTENSION test_ext_cine;  -- fail
-> ++
-> ++DROP SEQUENCE ext_cine_seq;
-> ++
-> ++CREATE TABLE ext_cine_tab1 (x int);
-> ++
-> ++CREATE EXTENSION test_ext_cine;  -- fail
-> ++
-> ++DROP TABLE ext_cine_tab1;
-> ++
-> ++CREATE TABLE ext_cine_tab2 AS SELECT 42 AS y;
-> ++
-> ++CREATE EXTENSION test_ext_cine;  -- fail
-> ++
-> ++DROP TABLE ext_cine_tab2;
-> ++
-> ++CREATE EXTENSION test_ext_cine;
-> ++
-> ++\dx+ test_ext_cine
-> ++
-> ++ALTER EXTENSION test_ext_cine UPDATE TO '1.1';
-> ++
-> ++\dx+ test_ext_cine
-> +diff --git a/src/test/modules/test_extensions/test_ext_cine--1.0--1.1.sql b/src/test/modules/test_extensions/test_ext_cine--1.0--1.1.sql
-> +new file mode 100644
-> +index 0000000..6dadfd2
-> +--- /dev/null
-> ++++ b/src/test/modules/test_extensions/test_ext_cine--1.0--1.1.sql
-> +@@ -0,0 +1,26 @@
-> ++/* src/test/modules/test_extensions/test_ext_cine--1.0--1.1.sql */
-> ++-- complain if script is sourced in psql, rather than via ALTER EXTENSION
-> ++\echo Use "ALTER EXTENSION test_ext_cine UPDATE TO '1.1'" to load this file. \quit
-> ++
-> ++--
-> ++-- These are the same commands as in the 1.0 script; we expect them
-> ++-- to do nothing.
-> ++--
-> ++
-> ++CREATE COLLATION IF NOT EXISTS ext_cine_coll
-> ++  ( LC_COLLATE = "POSIX", LC_CTYPE = "POSIX" );
-> ++
-> ++CREATE MATERIALIZED VIEW IF NOT EXISTS ext_cine_mv AS SELECT 42 AS f1;
-> ++
-> ++CREATE SERVER IF NOT EXISTS ext_cine_srv FOREIGN DATA WRAPPER ext_cine_fdw;
-> ++
-> ++CREATE SCHEMA IF NOT EXISTS ext_cine_schema;
-> ++
-> ++CREATE SEQUENCE IF NOT EXISTS ext_cine_seq;
-> ++
-> ++CREATE TABLE IF NOT EXISTS ext_cine_tab1 (x int);
-> ++
-> ++CREATE TABLE IF NOT EXISTS ext_cine_tab2 AS SELECT 42 AS y;
-> ++
-> ++-- just to verify the script ran
-> ++CREATE TABLE ext_cine_tab3 (z int);
-> +diff --git a/src/test/modules/test_extensions/test_ext_cine--1.0.sql b/src/test/modules/test_extensions/test_ext_cine--1.0.sql
-> +new file mode 100644
-> +index 0000000..01408ff
-> +--- /dev/null
-> ++++ b/src/test/modules/test_extensions/test_ext_cine--1.0.sql
-> +@@ -0,0 +1,25 @@
-> ++/* src/test/modules/test_extensions/test_ext_cine--1.0.sql */
-> ++-- complain if script is sourced in psql, rather than via CREATE EXTENSION
-> ++\echo Use "CREATE EXTENSION test_ext_cine" to load this file. \quit
-> ++
-> ++--
-> ++-- CREATE IF NOT EXISTS is an entirely unsound thing for an extension
-> ++-- to be doing, but let's at least plug the major security hole in it.
-> ++--
-> ++
-> ++CREATE COLLATION IF NOT EXISTS ext_cine_coll
-> ++  ( LC_COLLATE = "POSIX", LC_CTYPE = "POSIX" );
-> ++
-> ++CREATE MATERIALIZED VIEW IF NOT EXISTS ext_cine_mv AS SELECT 42 AS f1;
-> ++
-> ++CREATE FOREIGN DATA WRAPPER ext_cine_fdw;
-> ++
-> ++CREATE SERVER IF NOT EXISTS ext_cine_srv FOREIGN DATA WRAPPER ext_cine_fdw;
-> ++
-> ++CREATE SCHEMA IF NOT EXISTS ext_cine_schema;
-> ++
-> ++CREATE SEQUENCE IF NOT EXISTS ext_cine_seq;
-> ++
-> ++CREATE TABLE IF NOT EXISTS ext_cine_tab1 (x int);
-> ++
-> ++CREATE TABLE IF NOT EXISTS ext_cine_tab2 AS SELECT 42 AS y;
-> +diff --git a/src/test/modules/test_extensions/test_ext_cine.control b/src/test/modules/test_extensions/test_ext_cine.control
-> +new file mode 100644
-> +index 0000000..ced713b
-> +--- /dev/null
-> ++++ b/src/test/modules/test_extensions/test_ext_cine.control
-> +@@ -0,0 +1,3 @@
-> ++comment = 'Test extension using CREATE IF NOT EXISTS'
-> ++default_version = '1.0'
-> ++relocatable = true
-> +diff --git a/src/test/modules/test_extensions/test_ext_cor--1.0.sql b/src/test/modules/test_extensions/test_ext_cor--1.0.sql
-> +new file mode 100644
-> +index 0000000..2e8d89c
-> +--- /dev/null
-> ++++ b/src/test/modules/test_extensions/test_ext_cor--1.0.sql
-> +@@ -0,0 +1,20 @@
-> ++/* src/test/modules/test_extensions/test_ext_cor--1.0.sql */
-> ++-- complain if script is sourced in psql, rather than via CREATE EXTENSION
-> ++\echo Use "CREATE EXTENSION test_ext_cor" to load this file. \quit
-> ++
-> ++-- It's generally bad style to use CREATE OR REPLACE unnecessarily.
-> ++-- Test what happens if an extension does it anyway.
-> ++
-> ++CREATE OR REPLACE FUNCTION ext_cor_func() RETURNS text
-> ++  AS $$ SELECT 'ext_cor_func: from extension'::text $$ LANGUAGE sql;
-> ++
-> ++CREATE OR REPLACE VIEW ext_cor_view AS
-> ++  SELECT 'ext_cor_view: from extension'::text AS col;
-> ++
-> ++-- These are for testing replacement of a shell type/operator, which works
-> ++-- enough like an implicit OR REPLACE to be important to check.
-> ++
-> ++CREATE TYPE test_ext_type AS ENUM('x', 'y');
-> ++
-> ++CREATE OPERATOR <<@@ ( PROCEDURE = pt_contained_poly,
-> ++  LEFTARG = point, RIGHTARG = polygon );
-> +diff --git a/src/test/modules/test_extensions/test_ext_cor.control b/src/test/modules/test_extensions/test_ext_cor.control
-> +new file mode 100644
-> +index 0000000..0e972e5
-> +--- /dev/null
-> ++++ b/src/test/modules/test_extensions/test_ext_cor.control
-> +@@ -0,0 +1,3 @@
-> ++comment = 'Test extension using CREATE OR REPLACE'
-> ++default_version = '1.0'
-> ++relocatable = true
-> +--
-> +2.25.1
-> +
-> diff --git a/meta-oe/recipes-dbs/postgresql/postgresql_12.9.bb b/meta-oe/recipes-dbs/postgresql/postgresql_12.9.bb
-> index 67bf2b9604..4b7c1d69fc 100644
-> --- a/meta-oe/recipes-dbs/postgresql/postgresql_12.9.bb
-> +++ b/meta-oe/recipes-dbs/postgresql/postgresql_12.9.bb
-> @@ -7,6 +7,7 @@ SRC_URI += "\
->      file://0001-Add-support-for-RISC-V.patch \
->      file://0001-Improve-reproducibility.patch \
->      file://remove_duplicate.patch \
-> +   file://CVE-2022-2625.patch \
->   "
->   
->   SRC_URI[sha256sum] = "89fda2de33ed04a98548e43f3ee5f15b882be17505d631fe0dd1a540a2b56dce"
->
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#99187): https://lists.openembedded.org/g/openembedded-devel/message/99187
-> Mute This Topic: https://lists.openembedded.org/mt/94378159/3616698
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [akuster808@gmail.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
->
+diff --git a/meta-oe/recipes-devtools/perfetto/files/0001-meson-add-pc-fi=
+le-for-lib_perfetto.patch b/meta-oe/recipes-devtools/perfetto/files/0001-=
+meson-add-pc-file-for-lib_perfetto.patch
+new file mode 100644
+index 000000000..056382156
+--- /dev/null
++++ b/meta-oe/recipes-devtools/perfetto/files/0001-meson-add-pc-file-for-=
+lib_perfetto.patch
+@@ -0,0 +1,38 @@
++From 4712b1252ecf6270b5bb2931358b4a368351eaa3 Mon Sep 17 00:00:00 2001
++From: Markus Volk <f_l_k@t-online.de>
++Date: Mon, 17 Oct 2022 15:39:26 +0200
++Subject: [PATCH] meson: add PC file for lib_perfetto
++
++---
++ meson.build | 7 ++++++-
++ 1 file changed, 6 insertions(+), 1 deletion(-)
++
++diff --git a/meson.build b/meson.build
++index 06015141c..c67358cae 100644
++--- a/meson.build
+++++ b/meson.build
++@@ -30,8 +30,9 @@ endif
++=20
++ dep_threads =3D dependency('threads')
++=20
++-lib_perfetto =3D static_library(
+++lib_perfetto =3D shared_library(
++     'perfetto',
+++    version: '27.1',
++     sources: 'sdk/perfetto.cc',
++     dependencies: dep_threads,
++     install: true,
++@@ -39,6 +40,10 @@ lib_perfetto =3D static_library(
++=20
++ inc_perfetto =3D include_directories('sdk')
++=20
+++install_headers('sdk/perfetto.h')
+++pkg =3D import('pkgconfig')
+++pkg.generate(lib_perfetto)
+++
++ dep_perfetto =3D declare_dependency(
++     link_with: lib_perfetto,
++     include_directories: inc_perfetto,
++--=20
++2.34.1
++
+diff --git a/meta-oe/recipes-devtools/perfetto/libperfetto.bb b/meta-oe/r=
+ecipes-devtools/perfetto/libperfetto.bb
+new file mode 100644
+index 000000000..d58e31414
+--- /dev/null
++++ b/meta-oe/recipes-devtools/perfetto/libperfetto.bb
+@@ -0,0 +1,11 @@
++LICENSE =3D "Apache-2.0"
++LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Df87516e0b698007e9e75a1fe1012b=
+390"
++
++require perfetto.inc
++
++inherit meson
++
++SRC_URI:append =3D " file://0001-meson-add-pc-file-for-lib_perfetto.patc=
+h"
++
++FILES:${PN} +=3D "${datadir}"
++BBCLASSEXTEND =3D "native nativesdk"
+diff --git a/meta-oe/recipes-devtools/perfetto/perfetto.bb b/meta-oe/reci=
+pes-devtools/perfetto/perfetto.bb
+index 94c39e9cc..c1b099430 100644
+--- a/meta-oe/recipes-devtools/perfetto/perfetto.bb
++++ b/meta-oe/recipes-devtools/perfetto/perfetto.bb
+@@ -10,16 +10,15 @@ LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Df87516e0b6=
+98007e9e75a1fe1012b390 \
+                     file://debian/copyright;md5=3D4e08364c82141f181de69d=
+0a2b89d612 \
+                     file://python/LICENSE;md5=3Dc602a632c34ade9c78a97673=
+4077bce7"
+=20
+-SRC_URI =3D "git://github.com/google/perfetto.git;protocol=3Dhttps;name=3D=
+perfetto \
++SRC_URI:append =3D " \
+            git://github.com/protocolbuffers/protobuf.git;branch=3D3.9.x;=
+protocol=3Dhttps;destsuffix=3Dgit/buildtools/protobuf;name=3Dprotobuf \
+-           git://chromium.googlesource.com/external/github.com/llvm/llvm=
+-project/libcxx.git;protocol=3Dhttps;destsuffix=3Dgit/buildtools/libcxx;n=
+ame=3Dlibcxx \
+-           git://chromium.googlesource.com/external/github.com/llvm/llvm=
+-project/libcxxabi.git;protocol=3Dhttps;destsuffix=3Dgit/buildtools/libcx=
+xabi;name=3Dlibcxxabi \
+-           git://chromium.googlesource.com/external/github.com/llvm/llvm=
+-project/libunwind.git;protocol=3Dhttps;destsuffix=3Dgit/buildtools/libun=
+wind;name=3Dlibunwind \
+-           git://android.googlesource.com/platform/external/zlib.git;bra=
+nch=3Dmaster;protocol=3Dhttps;destsuffix=3Dgit/buildtools/zlib;name=3Dzli=
+b \
++           git://chromium.googlesource.com/external/github.com/llvm/llvm=
+-project/libcxx.git;protocol=3Dhttps;destsuffix=3Dgit/buildtools/libcxx;n=
+ame=3Dlibcxx;nobranch=3D1 \
++           git://chromium.googlesource.com/external/github.com/llvm/llvm=
+-project/libcxxabi.git;protocol=3Dhttps;destsuffix=3Dgit/buildtools/libcx=
+xabi;name=3Dlibcxxabi;nobranch=3D1 \
++           git://chromium.googlesource.com/external/github.com/llvm/llvm=
+-project/libunwind.git;protocol=3Dhttps;destsuffix=3Dgit/buildtools/libun=
+wind;name=3Dlibunwind;nobranch=3D1 \
++           git://android.googlesource.com/platform/external/zlib.git;bra=
+nch=3Dmaster;protocol=3Dhttps;destsuffix=3Dgit/buildtools/zlib;name=3Dzli=
+b;nobranch=3D1 \
+            https://storage.googleapis.com/perfetto/gn-linux64-1968-0725d=
+782;subdir=3Dgit/buildtools/;name=3Dgn \
+            file://0001-Remove-check_build_deps-build-steps.patch "
+=20
+-SRCREV_perfetto =3D "5bd3f582c075d0d026c5fe0b5e291d34dee0d976"
+ SRCREV_protobuf =3D "6a59a2ad1f61d9696092f79b6d74368b4d7970a3"
+ SRCREV_libcxx =3D "d9040c75cfea5928c804ab7c235fed06a63f743a"
+ SRCREV_libcxxabi =3D "196ba1aaa8ac285d94f4ea8d9836390a45360533"
+@@ -27,6 +26,8 @@ SRCREV_libunwind =3D "d999d54f4bca789543a2eb6c995af2d9b=
+5a1f3ed"
+ SRCREV_zlib =3D "5c85a2da4c13eda07f69d81a1579a5afddd35f59"
+ SRC_URI[gn.sha256sum] =3D "f706aaa0676e3e22f5fc9ca482295d7caee8535d1869f=
+99efa2358177b64f5cd"
+=20
++require perfetto.inc
++
+ DEPENDS +=3D " ninja-native"
+=20
+ COMPATIBLE_HOST =3D "(i.86|x86_64|aarch64|arm).*-linux*"
+@@ -35,7 +36,6 @@ FILES:${PN}:append =3D " \
+   ${bindir}/tracebox \
+   "
+=20
+-S =3D "${WORKDIR}/git"
+ B =3D "${WORKDIR}/build"
+=20
+ CXXFLAGS:append:arm =3D "${@bb.utils.contains('TUNE_FEATURES', 'callconv=
+ention-hard', ' -mfloat-abi=3Dhard', '', d)}"
+diff --git a/meta-oe/recipes-devtools/perfetto/perfetto.inc b/meta-oe/rec=
+ipes-devtools/perfetto/perfetto.inc
+new file mode 100644
+index 000000000..5cb6f8bb3
+--- /dev/null
++++ b/meta-oe/recipes-devtools/perfetto/perfetto.inc
+@@ -0,0 +1,9 @@
++SUMMARY =3D "Perfetto - System profiling, app tracing and trace analysis=
+."
++HOMEPAGE =3D "https://github.com/google/perfetto"
++
++SRC_URI =3D "git://github.com/google/perfetto.git;protocol=3Dhttps;name=3D=
+perfetto;nobranch=3D1"
++
++SRCREV_perfetto =3D "1c52b5e132312aeb007ed180d4ba1d8d66227923"
++PV =3D "27.1"
++
++S =3D "${WORKDIR}/git"
+--=20
+2.34.1
 
 
