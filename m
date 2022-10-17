@@ -2,96 +2,97 @@ Return-Path: <sebastian.suesens@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6E400C4332F
-	for <webhook@archiver.kernel.org>; Mon, 17 Oct 2022 06:17:41 +0000 (UTC)
-Received: from mail-ej1-f53.google.com (mail-ej1-f53.google.com [209.85.218.53])
- by mx.groups.io with SMTP id smtpd.web08.37832.1665987453350197573
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 614F3C4332F
+	for <webhook@archiver.kernel.org>; Mon, 17 Oct 2022 06:19:11 +0000 (UTC)
+Received: from mail-ej1-f42.google.com (mail-ej1-f42.google.com [209.85.218.42])
+ by mx.groups.io with SMTP id smtpd.web12.37992.1665987544049186620
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 16 Oct 2022 23:17:33 -0700
+ Sun, 16 Oct 2022 23:19:04 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=EUyOKHm3;
- spf=pass (domain: gmail.com, ip: 209.85.218.53, mailfrom: sebastian.suesens@gmail.com)
-Received: by mail-ej1-f53.google.com with SMTP id 13so22570893ejn.3
-        for <openembedded-devel@lists.openembedded.org>; Sun, 16 Oct 2022 23:17:33 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=d5T4xyQH;
+ spf=pass (domain: gmail.com, ip: 209.85.218.42, mailfrom: sebastian.suesens@gmail.com)
+Received: by mail-ej1-f42.google.com with SMTP id w18so22509871ejq.11
+        for <openembedded-devel@lists.openembedded.org>; Sun, 16 Oct 2022 23:19:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=AMsuFrpjPC0qZxPO+AZVPIm6QkzitHQOW9ozUZMjo5g=;
-        b=EUyOKHm3uOOUvArgPgVi9qfgbU6RA0c9FX9rLIo4Br9NRBIvhVStLbwl2KOmRQHWyS
-         8JnsH9AocKEqorhS0/Q0ngbu7zJZtP/J3BOeeW7C0l38BVh/4NyLi5e9PX7T6CzO2CLU
-         9h5hDIlc0LjJQnWC5jXbS6yPqbQyDf47QJpFlhQZQW/BI4HTJhJRUSBfrmQSIBDgXuq4
-         dMZij9Y5K98V5X9SfE5emp+PNyy4kZQ/6wijqJ0r8bXvFKeJ+daKqghv4F3isxBD5MHj
-         WsKWPrKcsluD5NY+fUGZCIdP9FeNLfkAcwi3nfh4F4UOPTutEFwclzJLWXcLwUQEfy4s
-         aRPg==
+        bh=aNGKRNM+LACfnXAPWrAqOgVPbuKfkaWXkeMz8JO1Z9I=;
+        b=d5T4xyQHQ/0ZYq8Le1fQKFveb6cyG6//nhFJpUoh6OzfXjtqTnMQ1/YoW/JPursoxV
+         ocGUCbK39eSetQdeV26Yxwx/MGDLTjZkQmqo/UxCYQOl3lbiRwvjqNiazfV4uM31mU/N
+         fQFnAPW7oTr10FDPSWQe781lif69ySbiw6UkCN7ik1Cra0oObkhcUNTv93f1loVhTDVe
+         0UjvvVfBsCZ5lGzJfIG05IF25PAi5ZOgC34q+tmGp1mFGGcEgH6iFqnGeWsegk75469X
+         04JIRiKJTv6QAc5LzAY4qR3ch3o2qA7UI+hBKMZFqiQP47yhEdE14lrmI/WnvU5Wa9iR
+         Oxhg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=AMsuFrpjPC0qZxPO+AZVPIm6QkzitHQOW9ozUZMjo5g=;
-        b=1mhPaeFHNxqefywkzDFAiOAs1YTxyve5z5NeYIffR8AArEKarB/f3ZhCGhRhEsP6v4
-         KE9f5y4aKO1xyyqBIaYXCIeKvsIQnKJoYtde9hsZaKO9IAotqbE4VJ/B8XigP5ZF3OSg
-         iUItHOc6Bb+V1LUWiGOmNX/YVanCuPHJNhFYHCC3TTFs8p7OKEFd0amao4KaLQg7an/b
-         X7Hma6X+eePYjxoIYEcoHvBzUBas9YIRfXmtaFSwOvZQSs8p95xcyg2pB7xiHTdFqBcO
-         PzpwR6Ug4Jkd+36/NFcpGMRfO8Zrc68RE/GFNZ2S8Xmuo7owUS2Hrl4RySC2jxmqRfFS
-         1Dyg==
-X-Gm-Message-State: ACrzQf3dcFyuHW1rbBcrn/vkjKLDFgumAE/Wn4nvpZEQPXGqsgVO1x+J
-	XtP9mblZ3ViR1OfR2xd8a1JzLC4ha/A=
-X-Google-Smtp-Source: AMsMyM48TCKp5HyKJSMkIMkObxxGNgCfP1Dh8Gn0KQqYsTUfgTEiCjOlfa+BgU1lC7pZpLTQ7oA6OA==
-X-Received: by 2002:a17:907:161f:b0:78e:11b3:8962 with SMTP id hb31-20020a170907161f00b0078e11b38962mr7601485ejc.0.1665987451551;
-        Sun, 16 Oct 2022 23:17:31 -0700 (PDT)
+        bh=aNGKRNM+LACfnXAPWrAqOgVPbuKfkaWXkeMz8JO1Z9I=;
+        b=PvjKjD7duhJtWy6+PgFspIPKDiLSQ7CONDJ8dE6zuucTKPYOGhSPk73tts3vcRHSvx
+         ALQnWZ2lwS79nFTT3jsVKrbLilJwSD0k5aFYMipiejF6oZCyA6VKzemzBYemfCTwgkKv
+         rCTsx/Az1PJotN1BWRRcxVEAEqR6rZA/57jnYV5rh/r+opbbhyzyOdP7WK0VDfw5E27+
+         m8MmJYrHmAWeH5skHnghW/yAVa9Lnn8MmYKKffZVSJUHppwaDL/uLAL8upC6CK1SOOfR
+         kRHYctCk4lTx874kOr9A3bnIZk2E5MyHcSJzMM57+StTociq9fC3VWH92qZP23nFLWfn
+         WSMQ==
+X-Gm-Message-State: ACrzQf0kUCkIodqVcrjNOAwrjJzBKTJpmkYBawmlTAthRnF94jeJMhLn
+	7AAHZSt8kdgcINUZzd0o4wRbNq37qec=
+X-Google-Smtp-Source: AMsMyM43s0AzCy+yuzpx4GedzHgRGmAKWBkGx0eVFH7IgysZzNwj5UPw1ScaWPG/J5O1O2T+8L1lUg==
+X-Received: by 2002:a17:907:1de1:b0:78d:9919:38cc with SMTP id og33-20020a1709071de100b0078d991938ccmr7249441ejc.311.1665987542508;
+        Sun, 16 Oct 2022 23:19:02 -0700 (PDT)
 Received: from DENM-LSVR0-A070.basler.corp ([185.12.91.67])
-        by smtp.gmail.com with ESMTPSA id ss5-20020a170907038500b0073c80d008d5sm5452803ejb.122.2022.10.16.23.17.30
+        by smtp.gmail.com with ESMTPSA id 15-20020a170906308f00b0078d4e39d87esm5523206ejv.225.2022.10.16.23.19.01
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 16 Oct 2022 23:17:31 -0700 (PDT)
+        Sun, 16 Oct 2022 23:19:01 -0700 (PDT)
 From: Sebastian Suesens <sebastian.suesens@gmail.com>
 X-Google-Original-From: Sebastian Suesens <sebastian.suesens@baslerweb.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Sebastian Suesens <sebastian.suesens@baslerweb.com>
-Subject: [meta-oe][PATCH] md4c: added md4c lib
-Date: Mon, 17 Oct 2022 06:17:29 +0000
-Message-Id: <20221017061729.2168166-1-sebastian.suesens@baslerweb.com>
+Subject: [meta-oe][PATCH] double-conversion: added double-conversion lib
+Date: Mon, 17 Oct 2022 06:18:59 +0000
+Message-Id: <20221017061859.2168842-1-sebastian.suesens@baslerweb.com>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 17 Oct 2022 06:17:41 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99189
+ <openembedded-devel@lists.openembedded.org>; Mon, 17 Oct 2022 06:19:11 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99190
 
-MD4C is Markdown parser implementation in C.
+This provides binary-decimal and decimal-binary routines for IEEE doubles.
 
 Signed-off-by: Sebastian Suesens <sebastian.suesens@baslerweb.com>
 ---
- meta-oe/recipes-support/md4c/md4c_0.4.8.bb | 17 +++++++++++++++++
- 1 file changed, 17 insertions(+)
- create mode 100644 meta-oe/recipes-support/md4c/md4c_0.4.8.bb
+ .../dc/double-conversion_3.2.1.bb              | 18 ++++++++++++++++++
+ 1 file changed, 18 insertions(+)
+ create mode 100644 meta-oe/recipes-support/dc/double-conversion_3.2.1.bb
 
-diff --git a/meta-oe/recipes-support/md4c/md4c_0.4.8.bb b/meta-oe/recipes-support/md4c/md4c_0.4.8.bb
+diff --git a/meta-oe/recipes-support/dc/double-conversion_3.2.1.bb b/meta-oe/recipes-support/dc/double-conversion_3.2.1.bb
 new file mode 100644
-index 000000000..fc3dbb3ae
+index 000000000..cc54dc648
 --- /dev/null
-+++ b/meta-oe/recipes-support/md4c/md4c_0.4.8.bb
-@@ -0,0 +1,17 @@
-+SUMMARY = "Markdown for C"
-+DESCRIPTION = "MD4C is Markdown parser implementation in C."
-+HOMEPAGE = "http://github.com/mity/md4c"
++++ b/meta-oe/recipes-support/dc/double-conversion_3.2.1.bb
+@@ -0,0 +1,18 @@
++SUMMARY = "Double conversion libraries"
++DESCRIPTION = "This provides binary-decimal and decimal-binary routines for IEEE doubles."
++HOMEPAGE = "https://github.com/google/double-conversion.git"
 +
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://LICENSE.md;md5=7e0fbcf3701aad22f2d2e0624a703795"
++LICENSE = "BSD-3-Clause"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=1ea35644f0ec0d9767897115667e901f"
 +
 +
 +S = "${WORKDIR}/git"
 +
 +SRC_URI = " \
-+        git://github.com/mity/md4c.git;protocol=https;branch=master \
++        git://github.com/google/double-conversion.git;protocol=https;branch=master \
 +"
-+
-+SRCREV = "c3340b480e5232711858108be07460a9836c8ab5"
++SRCREV = "af09fd65fcf24eee95dc62813ba9123414635428"
 +
 +inherit cmake
++
++EXTRA_OECMAKE = "-DBUILD_SHARED_LIBS=ON"
 -- 
 2.25.1
 
