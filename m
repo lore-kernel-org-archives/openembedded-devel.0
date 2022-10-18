@@ -2,68 +2,71 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 14D72C433FE
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2D4ABC43219
 	for <webhook@archiver.kernel.org>; Tue, 18 Oct 2022 01:06:47 +0000 (UTC)
-Received: from mail3.bemta32.messagelabs.com (mail3.bemta32.messagelabs.com [195.245.230.82])
- by mx.groups.io with SMTP id smtpd.web11.1741.1666055196923600140
+Received: from mail1.bemta32.messagelabs.com (mail1.bemta32.messagelabs.com [195.245.230.65])
+ by mx.groups.io with SMTP id smtpd.web11.1742.1666055200068040024
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 17 Oct 2022 18:06:37 -0700
+ Mon, 17 Oct 2022 18:06:40 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=p1Q4Q2/I;
- spf=pass (domain: fujitsu.com, ip: 195.245.230.82, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=n6LuY+5G;
+ spf=pass (domain: fujitsu.com, ip: 195.245.230.65, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1666055195; i=@fujitsu.com;
-	bh=nl11FS09BoGn/600NFlQqAdiPUWpTxxsvs8b2RKPCBo=;
-	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=p1Q4Q2/Ipjx6xLW6LFek/FHcBgyoBzsJoUTcYP4ZSO13BnrotcrF658ER++8Q3xin
-	 EhO0+MwiGV2VwV5nAnxWgGW7Z1iiW8K3ULiHpAGyeNaHZF3/pgkXV/UaBuzsW9lrFy
-	 RAdz+XmJHqftB/d3k1QOUl0HNO07omwfohB/RehicR7j3F/IIPJ8TGWAf7dNrq+qhY
-	 Hjs061v6M3nJatwcqIFAcpAgP1ylUcyvayhiK9KOcUAyDaUCtlHpDlJnyitcYmG9Av
-	 LrC98NxXLcJ8qXt8StyEi6Uj52uXksJ9Wn6tJhhXDb7/VIjgaS7qrIcPZU3e6lMP9P
-	 OSa+EBDBKcMkQ==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFlrLIsWRWlGSWpSXmKPExsViZ8OxWVfqj2+
-  ywev5ghYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8bvg2fYCq6zV/w9PI+tgXEaexcjF4eQwENG
-  iVtbF7NCOFeYJK5e/QnkcAI5exglbn+KArHZBNQkpt+6ARYXEdCXWDp7DzOIzSygIvHidw87i
-  C0sYCvx9NYGNhCbRUBVYvKnyywgNq+Ao8TND98ZQWwJAQWJKQ/fM0PEBSVOznzCAjFHQuLgix
-  fMEDWKErMvN7NA2BUSs2a1MUHYahJXz21insDIPwtJ+ywk7QsYmVYxmhanFpWlFula6iUVZaZ
-  nlOQmZuboJVbpJuqlluqWpxaX6BrqJZYX66UWF+sVV+Ym56To5aWWbGIEhmJKMdvvHYznl/3R
-  O8QoycGkJMrbMcM3WYgvKT+lMiOxOCO+qDQntfgQowwHh5IEb8cPoJxgUWp6akVaZg4wLmDSE
-  hw8SiK8UWeA0rzFBYm5xZnpEKlTjIpS4rynQfoEQBIZpXlwbbBYvMQoKyXMy8jAwCDEU5BalJ
-  tZgir/ilGcg1FJmPcAyBSezLwSuOmvgBYzAS3O2O8FsrgkESEl1cDkHH6Aoexgt/jMjReZWTN
-  0TrJsy3vc9vjftJ63OUXKNxvm5P//GNh3P1H6l5ez2pHM3pdm/8/0xCxZ03jmqtiNtwy+B6LX
-  37vxpjlB99fPNUzrOFfOY1f+HvZBMNnotM4hs5LS+ITtWz507nzPGbv3ivsOFuGmR/wbC1umW
-  7U2m297/yZ5fvOakxZXFulzR80+N0Os6179LIXX2dPjdmZM2vDg+M2v+aXq1jXT2VTMrhl2/0
-  v2Pb7Canu58qnVa1ML2Jqtyw4E/mv5+VEltUBj367C0GrdjyH3D0z/dTRkyeOtXUdyBNhTVn1
-  Q6tn6ccrfWzccV8/YedFO7sDGWvklE+s++069ouxm68ji/tRbWYmlOCPRUIu5qDgRAKETqnBA
-  AwAA
+	s=170520fj; t=1666055198; i=@fujitsu.com;
+	bh=N01GsdyHUufZuKwtmqxeWifpaDEqXdZQzhpM2o45Pyk=;
+	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type;
+	b=n6LuY+5G5cEHntlZ9wwQwOPb7AjZklnTg/+YbYqQ3Y9w4yNS4FKyK9qSgIxoj0oYk
+	 lWUC7ipDDQLYBB3Xv2x/S41p28mF9dVwhrlQL+1M/LsqK7YlcIFlra+vO7qWlhn76v
+	 Ra+v6FVh1wkGa+j2N04unD1XwGgzftiBkdw5KzMvRSTMwpfd8eHrb2jqKOPfz63u58
+	 5e0Y24uY57wtAThQ+/cJCFsaLXNbVC1eS0imMM7UtVsJFqy3Kh0DatDPHTzDXl4Xhh
+	 Ve6qI+76iBATIDrsDYC7DQ4w/zZualgD5sd1suZWaqrKNWASal7dsSf7tsC0y85rEk
+	 2HgSNNuo/X9QA==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrLIsWRWlGSWpSXmKPExsViZ8MxSVf2j2+
+  ywf3lHBYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa0ZH10mmgl6OivUn7BoYl7J3MXJxCAk8YZSY
+  /u8TI4RznUmiee9hFghnD6PEnN8XgTKcHGwCahLTb91gBbFFBPQlls7ewwxiMwuoSLz43cMOY
+  gsL2EkcuPYPrJ5FQFXi/cO1TCA2r4CjxLlVi8F6JQQUJKY8fA/WyyngJPGv6SGYLQRUM/HSAh
+  aIekGJkzOfsEDMl5A4+OIFM0SvosTsy80sEHaFxKxZbUwQtprE1XObmCcwCs5C0j4LSfsCRqZ
+  VjKbFqUVlqUW6xnpJRZnpGSW5iZk5eolVuol6qaW65anFJbqGeonlxXqpxcV6xZW5yTkpenmp
+  JZsYgaGbUsxWvYPx7dI/eocYJTmYlER5O2b4JgvxJeWnVGYkFmfEF5XmpBYfYpTh4FCS4O34A
+  ZQTLEpNT61Iy8wBxhFMWoKDR0mEN+oMUJq3uCAxtzgzHSJ1itGSY+rsf/uZOZaDyZlf2w4wC7
+  Hk5eelSonzGv4GahAAacgozYMbB4v1S4yyUsK8jAwMDEI8BalFuZklqPKvGMU5GJWEed/8BJr
+  Ck5lXArf1FdBBTEAHZez3AjmoJBEhJdXApMosVWD31KBYWOT05w8rfl18pXLruli1bB/HNt6+
+  xxGXNdn17Eq3738Vxfnm3Nqta5rmXY+pd358J/rEZV35jeXmhx68lPDzFj3qoNv5uiSlvPNjT
+  Li/eeD9vwseCDKa3HvMdaos4vrsdt9tGw4q2MWdjnpauZ0rXq1EI21113sB7vUr6yZwu2XtSJ
+  6ww+/q87Mb99f9aVlTcuxh3RVFn4x2q8QABhu96+l7f+oUayffkFN7+8vq670NvB8Sbu/+4z5
+  p9lOPIzkSYkv4i1q/v6ywCBT+LdXp8/LC/zaVoxvvnWzZF8sQ9mnX1tdX9px73G62uunD1Gka
+  UXP91lnvYDsxReFh+arWUCk9JqcvG5VYijMSDbWYi4oTAVUZMmBwAwAA
 X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-4.tower-585.messagelabs.com!1666055194!581550!1
-X-Originating-IP: [62.60.8.179]
+X-Msg-Ref: server-17.tower-591.messagelabs.com!1666055196!279700!1
+X-Originating-IP: [62.60.8.146]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.87.3; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 17485 invoked from network); 18 Oct 2022 01:06:34 -0000
-Received: from unknown (HELO n03ukasimr04.n03.fujitsu.local) (62.60.8.179)
-  by server-4.tower-585.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 18 Oct 2022 01:06:34 -0000
-Received: from n03ukasimr04.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTP id E3A7C151
-	for <openembedded-devel@lists.openembedded.org>; Tue, 18 Oct 2022 02:06:33 +0100 (BST)
+Received: (qmail 20317 invoked from network); 18 Oct 2022 01:06:37 -0000
+Received: from unknown (HELO n03ukasimr02.n03.fujitsu.local) (62.60.8.146)
+  by server-17.tower-591.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 18 Oct 2022 01:06:37 -0000
+Received: from n03ukasimr02.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTP id BFEA71000CC
+	for <openembedded-devel@lists.openembedded.org>; Tue, 18 Oct 2022 02:06:36 +0100 (BST)
 Received: from R01UKEXCASM126.r01.fujitsu.local (R01UKEXCASM126 [10.183.43.178])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTPS id D748B142
-	for <openembedded-devel@lists.openembedded.org>; Tue, 18 Oct 2022 02:06:33 +0100 (BST)
+	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTPS id B3765100078
+	for <openembedded-devel@lists.openembedded.org>; Tue, 18 Oct 2022 02:06:36 +0100 (BST)
 Received: from localhost.localdomain (10.167.225.33) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.32; Tue, 18 Oct 2022 02:06:32 +0100
+ (TLS) id 15.0.1497.32; Tue, 18 Oct 2022 02:06:35 +0100
 From: Wang Mingyu <wangmy@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-oe] [PATCH] broadcom-bt-firmware: upgrade
-Date: Tue, 18 Oct 2022 09:06:12 +0800
-Message-ID: <1666055176-8001-1-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH] cppzmq: upgrade 4.8.1 -> 4.9.0
+Date: Tue, 18 Oct 2022 09:06:13 +0800
+Message-ID: <1666055176-8001-2-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
+In-Reply-To: <1666055176-8001-1-git-send-email-wangmy@fujitsu.com>
+References: <1666055176-8001-1-git-send-email-wangmy@fujitsu.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-Originating-IP: [10.167.225.33]
@@ -74,25 +77,37 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 18 Oct 2022 01:06:47 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99207
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99208
+
+Changelog:
+==========
+Type-safe socket.get(sockopt::type) #523
+GCC C++14 fix #553
+Support ZMQ_ONLY_FIRST_SUBSCRIBE #558
+Add pkg-config file and instructions #564 #570
+Fix missing include #568
+Fix monitor test failures #576
+Improved documentation #519 #524
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../broadcom-bt-firmware/broadcom-bt-firmware_12.0.1.1105_p3.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-oe/recipes-connectivity/zeromq/cppzmq_git.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-oe/recipes-kernel/broadcom-bt-firmware/broadcom-bt-firmware_12.0.1.1105_p3.bb b/meta-oe/recipes-kernel/broadcom-bt-firmware/broadcom-bt-firmware_12.0.1.1105_p3.bb
-index f45ea5e4a9..4b6026ebc0 100644
---- a/meta-oe/recipes-kernel/broadcom-bt-firmware/broadcom-bt-firmware_12.0.1.1105_p3.bb
-+++ b/meta-oe/recipes-kernel/broadcom-bt-firmware/broadcom-bt-firmware_12.0.1.1105_p3.bb
-@@ -10,7 +10,7 @@ NO_GENERIC_LICENSE[Firmware-Broadcom-WIDCOMM] = "LICENSE.broadcom_bcm20702"
+diff --git a/meta-oe/recipes-connectivity/zeromq/cppzmq_git.bb b/meta-oe/recipes-connectivity/zeromq/cppzmq_git.bb
+index 7189115092..1dbdc3e46a 100644
+--- a/meta-oe/recipes-connectivity/zeromq/cppzmq_git.bb
++++ b/meta-oe/recipes-connectivity/zeromq/cppzmq_git.bb
+@@ -4,8 +4,8 @@ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=db174eaf7b55a34a7c89551197f66e94"
+ DEPENDS = "zeromq"
  
- LIC_FILES_CHKSUM = "file://LICENSE.broadcom_bcm20702;md5=c0d5ea0502b00df74173d0f8a48b619d"
- SRC_URI = "git://github.com/winterheart/broadcom-bt-firmware.git;branch=master;protocol=https"
--SRCREV = "68a7a8a4f2c4bdd3425c23653a3b9b6609e41d0b"
-+SRCREV = "a0eb4805dbb232f02f156b9351a23790c1a4cec7"
+-SRCREV = "dd663fafd830466d34cba278c2cfd0f92eb67614"
+-PV = "4.8.1"
++SRCREV = "d67b6352b87a238775cd17e4376b980d07fa7939"
++PV = "4.9.0"
  
- PE = "1"
+ SRC_URI = "git://github.com/zeromq/cppzmq.git;branch=master;protocol=https"
  
 -- 
 2.25.1
