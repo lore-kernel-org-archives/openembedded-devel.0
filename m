@@ -1,332 +1,208 @@
-Return-Path: <f_l_k@t-online.de>
+Return-Path: <zhengrq.fnst@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 00B55C433FE
-	for <webhook@archiver.kernel.org>; Tue, 18 Oct 2022 07:44:09 +0000 (UTC)
-Received: from mailout08.t-online.de (mailout08.t-online.de [194.25.134.20])
- by mx.groups.io with SMTP id smtpd.web11.4129.1666079044667351238
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 13C3AC433FE
+	for <webhook@archiver.kernel.org>; Tue, 18 Oct 2022 08:02:59 +0000 (UTC)
+Received: from esa8.fujitsucc.c3s2.iphmx.com (esa8.fujitsucc.c3s2.iphmx.com [68.232.159.88])
+ by mx.groups.io with SMTP id smtpd.web09.4327.1666080174037805224
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 18 Oct 2022 00:44:05 -0700
+ Tue, 18 Oct 2022 01:02:55 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=SPF record not found (domain: t-online.de, ip: 194.25.134.20, mailfrom: f_l_k@t-online.de)
-Received: from fwd79.dcpf.telekom.de (fwd79.aul.t-online.de [10.223.144.105])
-	by mailout08.t-online.de (Postfix) with SMTP id BC016FC62;
-	Tue, 18 Oct 2022 09:44:01 +0200 (CEST)
-Received: from [192.168.178.83] ([79.219.224.241]) by fwd79.t-online.de
-	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1okhGa-0fFbt20; Tue, 18 Oct 2022 09:44:01 +0200
-Date: Tue, 18 Oct 2022 09:43:54 +0200
-From: Markus Volk <f_l_k@t-online.de>
-Subject: Re: [oe] [meta-oe][PATCHv2] perfetto: build libperfetto
-To: Khem Raj <raj.khem@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org
-Message-Id: <6TUXJR.8EEZKPW6WUOR3@t-online.de>
-In-Reply-To: 
-	<CAMKF1spYXx0OQ=EbLM0QxwNk_m8rsehVanL49KYKuGv9qa8brA@mail.gmail.com>
-References: <171EEB7FBCE4C195.8835@lists.openembedded.org>
-	<5ERWJR.J938KA2481R81@t-online.de>
-	<CAMKF1spYXx0OQ=EbLM0QxwNk_m8rsehVanL49KYKuGv9qa8brA@mail.gmail.com>
-X-Mailer: geary/40.0
+ dkim=pass header.i=@fujitsu.com header.s=fj1 header.b=nJx4+tAN;
+ spf=pass (domain: fujitsu.com, ip: 68.232.159.88, mailfrom: zhengrq.fnst@fujitsu.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj1;
+  t=1666080174; x=1697616174;
+  h=from:to:cc:subject:date:message-id:references:
+   in-reply-to:content-transfer-encoding:mime-version;
+  bh=tTcekW1Dqfnu6SUisHRSeXN+fRIZFeuVIuWUyJCBQLs=;
+  b=nJx4+tANzu/de0b9sNttI9VLfvnjYHomiU47LE+FRwSoRWyyNT7d99dX
+   d0/ccqspF3MvgLRzfkYHCpwcFPdIm4X+h4QZygIsjAn48XvwD/gh6NKyT
+   FOXijgz91OLukNX4K7Drb1r2zhIyL2RzW21BebiF1kKzoocVfq/bO8up/
+   b0PxvPOzMpPhGppy0rUR03mL7UDHbsJMqq3yPOvEGSo06apMHXDxLfqhV
+   KW+MmcDtMxvbKComM3Xx1rPNAnLtGH0ohM5m+QnqZeMp7coAtmk35AIky
+   JKkv7KXdP8LlugyokAQY0ifKwEcUGZ83wwcJ9LjkZw6Dc5nKqCWPnL5s8
+   Q==;
+X-IronPort-AV: E=McAfee;i="6500,9779,10503"; a="67757577"
+X-IronPort-AV: E=Sophos;i="5.95,193,1661785200"; 
+   d="scan'208";a="67757577"
+Received: from mail-tycjpn01lp2172.outbound.protection.outlook.com (HELO JPN01-TYC-obe.outbound.protection.outlook.com) ([104.47.23.172])
+  by ob1.fujitsucc.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 18 Oct 2022 17:02:50 +0900
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=JUYJtCX7VV8/RilWd67fR//27MYgenL5aZemgz76G8Xlbv6t35CmXghToP9nH7pNbTtXZMNOMFSQ/fZoeMFEnGC7qwNGq8IdvbsyZlXwUqidrG06gm5a163QuHQoev9L04AUd6l/Gj9zsTsrJ5EYhTKVBkAi0A4JecVFem3iX2jdCfJnNoR86Z1WWir4GqqOiPtrzrKdXm0xcvGSohHmkHon73yQAkcCuPI9E/jDI9TBpBK/vJs1j+m/T0ZGUBBhQWbkngc+MTm4IeLWH1D/SZfzWh9QspQQ3Jsdhg4LTTa4lYIauKCEEv6GMwTVVguoxh8DR0zBZ6o536n8chk2vg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=tTcekW1Dqfnu6SUisHRSeXN+fRIZFeuVIuWUyJCBQLs=;
+ b=DUyC2b7umhA3xX8utiYV7TJycH4iLfJi7w41peSQET0wLkolSKjnVIiTP72GrS/L7zlQFeawPrO8eIOE8Ui4QyqdEKvri5KbLu0W8qly2dxgwHglZGqTvK6xTUI5Q7bZs1LFSdZgKU7nKNXgdvW0tCcUR2NvVoOYHwXvFQptfkl+cfRZlw1gH9QuJj0ISgERjqrvCB9CNT6uBgI8H17wY5QJrWZukwSD96h0JJR1umXd9EX/IfcVOwYBqmT9/CrZHl7B+VqzagQDuAMhGNx44MP3tjXZTYL8cttNJuFaiTvRyTyWqMJr1EcY/kAbuQK5mkMw0JEXM/JP14bgqAF2zg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=fujitsu.com; dmarc=pass action=none header.from=fujitsu.com;
+ dkim=pass header.d=fujitsu.com; arc=none
+Received: from OS3PR01MB6241.jpnprd01.prod.outlook.com (2603:1096:604:f1::6)
+ by OS0PR01MB5443.jpnprd01.prod.outlook.com (2603:1096:604:a1::13) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5723.30; Tue, 18 Oct
+ 2022 08:02:47 +0000
+Received: from OS3PR01MB6241.jpnprd01.prod.outlook.com
+ ([fe80::943:925d:ebae:86ea]) by OS3PR01MB6241.jpnprd01.prod.outlook.com
+ ([fe80::943:925d:ebae:86ea%6]) with mapi id 15.20.5723.033; Tue, 18 Oct 2022
+ 08:02:47 +0000
+From: "zhengrq.fnst@fujitsu.com" <zhengrq.fnst@fujitsu.com>
+To: Michael Opdenacker <michael.opdenacker@bootlin.com>
+CC: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: RE: [oe] [meta-python] [PATCH] python3-stevedore: upgrade 4.0.0 ->
+ 4.0.1
+Thread-Topic: [oe] [meta-python] [PATCH] python3-stevedore: upgrade 4.0.0 ->
+ 4.0.1
+Thread-Index: AQHY4r/m/JtQdBwAmE6Rqg4zZpB0Oa4TyZgw
+Date: Tue, 18 Oct 2022 08:02:47 +0000
+Message-ID: 
+ <OS3PR01MB6241FFBAF7FD44E74DB522A78B289@OS3PR01MB6241.jpnprd01.prod.outlook.com>
+References: <1666055730-2392-1-git-send-email-zhengrq.fnst@fujitsu.com>
+ <8c5b5936-bd07-b42d-71d9-284ce47270fa@bootlin.com>
+In-Reply-To: <8c5b5936-bd07-b42d-71d9-284ce47270fa@bootlin.com>
+Accept-Language: zh-CN, en-US
+Content-Language: zh-CN
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+msip_labels: 
+ =?utf-8?B?TVNJUF9MYWJlbF9hNzI5NWNjMS1kMjc5LTQyYWMtYWI0ZC0zYjBmNGZlY2Uw?=
+ =?utf-8?B?NTBfQWN0aW9uSWQ9ZTcxOGVjNGUtZmRlZi00NTAwLTg5MzQtZjY3YTk0MmFl?=
+ =?utf-8?B?ZGY3O01TSVBfTGFiZWxfYTcyOTVjYzEtZDI3OS00MmFjLWFiNGQtM2IwZjRm?=
+ =?utf-8?B?ZWNlMDUwX0NvbnRlbnRCaXRzPTA7TVNJUF9MYWJlbF9hNzI5NWNjMS1kMjc5?=
+ =?utf-8?B?LTQyYWMtYWI0ZC0zYjBmNGZlY2UwNTBfRW5hYmxlZD10cnVlO01TSVBfTGFi?=
+ =?utf-8?B?ZWxfYTcyOTVjYzEtZDI3OS00MmFjLWFiNGQtM2IwZjRmZWNlMDUwX01ldGhv?=
+ =?utf-8?B?ZD1TdGFuZGFyZDtNU0lQX0xhYmVsX2E3Mjk1Y2MxLWQyNzktNDJhYy1hYjRk?=
+ =?utf-8?B?LTNiMGY0ZmVjZTA1MF9OYW1lPUZVSklUU1UtUkVTVFJJQ1RFRO+/ou++gA==?=
+ =?utf-8?B?776LO01TSVBfTGFiZWxfYTcyOTVjYzEtZDI3OS00MmFjLWFiNGQtM2IwZjRm?=
+ =?utf-8?B?ZWNlMDUwX1NldERhdGU9MjAyMi0xMC0xOFQwNzo1OToyOFo7TVNJUF9MYWJl?=
+ =?utf-8?B?bF9hNzI5NWNjMS1kMjc5LTQyYWMtYWI0ZC0zYjBmNGZlY2UwNTBfU2l0ZUlk?=
+ =?utf-8?Q?=3Da19f121d-81e1-4858-a9d8-736e267fd4c7;?=
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=fujitsu.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: OS3PR01MB6241:EE_|OS0PR01MB5443:EE_
+x-ms-office365-filtering-correlation-id: ee0bebc2-d23a-4709-bc63-08dab0df252a
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: 
+ fXrFaheJks90Y1foi6lxitwIyGGLi5inUpaTC19G8DrCXWE9P2Q7Krgk6XzsfTssJzoLprlLimdwSNCzKMNEauCDEgtnbH7DSWl+aUfWJtuVx5+deFdPq5tG/XkoFQwUekZ/l/ei7bQ+KZhP3qxr/4Ihb17Z4AF81uQDOlqIPh2+R1RR5XOetxTeVjiqZT2AENDDZu9WFs7fHSA6aNU5qC7LZoaUOjDRwJbyMVaAgICXGj8fyjqJHVDOavZYyYOjwMnwpYPPPIiH1bc28C4BOxOn/eZxCoM/FKOs8qfe1Blq6tSBeyYIecauA8KS0dzgT+KX7W0+OqV8ykWeG33iuIo88XKHkK2rk+xcKF9lng6XJrUjUQgufz+sE9wcB4ixPAG+w8/D6n5bedWNHqZ2nQ01lj5oBhBgZwIqNjl872hVlFcHGIIisTBJxh5uRejCHalqSlOYKhsTteOCMk3dcgeRH/lMq3ep5SciPpEQo7i/8GX9m0U6FChCPq3LYlbUb1V2OkuVWdSra6XKQD5WKqG6QDJ76MpkFq1j2w9R5uvpsNmJAhBNxfOkXFiTYT+eUsDayZ64l7dUHBlrpB/gByYauOyiXLVxymqce4PvP6TBva3d1bU3ivWQ13coYRUA7JQ71do2PttIIDC+V4V3u9BZSeu7TGWpL4mA2uppJex8Ce470H6jbi5qge9lXmp0YaBzeEmqYYQS7362ucMsGbCU8xyfi4S1TZBGEUL5sOjNbOIp073GnB7SN6ZPsqZPbeCyUyipOftUBanmZT1aDapeanJmLE6CyTH6FxcCyvCeT30vQ1+ezwWqbCuMPL2v
+x-forefront-antispam-report: 
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:OS3PR01MB6241.jpnprd01.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230022)(4636009)(366004)(136003)(39860400002)(376002)(346002)(396003)(451199015)(1590799012)(38070700005)(478600001)(71200400001)(1580799009)(122000001)(82960400001)(38100700002)(966005)(8676002)(186003)(33656002)(316002)(66446008)(66556008)(66946007)(66476007)(64756008)(6916009)(76116006)(86362001)(6506007)(5660300002)(7696005)(26005)(53546011)(41300700001)(85182001)(52536014)(8936002)(4326008)(55016003)(9686003)(2906002)(83380400001);DIR:OUT;SFP:1101;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: 
+ =?utf-8?B?Y2FCTUpEN0R2dXhXbGl4VWxaQTRqblZoQ1pNRjFjSVVWUHpvQ2gzRm1QTmkv?=
+ =?utf-8?B?eE40aUFXaVRaNXk3TnFZL2lCK3gyYXNTZ1k3UGJiZlVJUkVDSTREZUw3RmZN?=
+ =?utf-8?B?NDN3eFRrWGZKSE1xb1FIOEgzdjVYVkxtZUxRZG42SWZ0ejZYdHdFNVkyUGxR?=
+ =?utf-8?B?YXdvTkZhWERIWjh5bnZBYWhZU0RHK1ZBenhNWFcxalpWT3lyWUpWTjZrVkpV?=
+ =?utf-8?B?ZWh6c2VSQmdhUVNHQXRWZ2VyMUpmaklhSG5xVURHODdTbFdLc3dzQmFTOWZu?=
+ =?utf-8?B?S2p2M3FFbDdtdlN4NlM2SkZDQ3pick9uVzhVL3VqUDNKeWdob0Fjclh5R1JK?=
+ =?utf-8?B?d1Boa3RyK01MQW5UMndLR3FNK2o3dkE1Si9uM2Rtc1Rlc3RaU015Ny96UVBT?=
+ =?utf-8?B?ZjdnRVV0VmJnbWpJbzhTa2NjM1dZOHZheG5Kd1lUUU1YamVRMUlIcWdWQUor?=
+ =?utf-8?B?cklmNmFZRUlyMUZiYzVvRTRnY0RkY21oeXBDTENja0ZIdDluNSt0QnpHMFhZ?=
+ =?utf-8?B?N2JpcS9taUl2ZDBxaUZ1eEtBMTdMWS9qTlpaN1pleVc1Ny91SU13a2Q3K0Uv?=
+ =?utf-8?B?b3pjSXE3NmlPNUo3V3NmSDl6WHBsQVpoL3B6YzZ6S21XbFNxZFZOeXY0a2tY?=
+ =?utf-8?B?NGNpRk80TG40NWQrTWtLSk1henVGbFN0ZjJJOGdFVnBGbzFYTm1WTU40Z011?=
+ =?utf-8?B?QjJkeEVTVk80SFFsSlNuWm9SNEhidXNHRS9rY28wa2U5VDdOWHA3ODAzSE9a?=
+ =?utf-8?B?RjVaOWlaTG5Pakxua1FzUUY2MlJrSXpNNndRYUJITFZybnRESEtZVHdjN0Za?=
+ =?utf-8?B?ZlZhVi93UU83U0llWXZiQmRBR3JzdnhOS3NEK0JadUxuVFNYaFRDL1JHb1BW?=
+ =?utf-8?B?MVQydTZTbUpsZWRqVHNBZXRXRVo1akZLSDJTY2hpL3d3eGpvaXJLdlZUZ3ZE?=
+ =?utf-8?B?MjJFQkFlbUF1bFdraUJVVkxKMmJRM09QTVhjZWtEeEE3S2Q3cFE1S0VZWEI5?=
+ =?utf-8?B?V2Z5NWJVdmQ5bWk3NW94L3J2L3puTkpLS21VOXBBbk9zSklvQ2I2amdnWGJI?=
+ =?utf-8?B?RUhEWXRON3BYREFvLzhrQTRoMW9xdm5wbk1zTUFNSWt4TitONXJkOFRnRHV6?=
+ =?utf-8?B?YlZrbGNLSkl4ZDByZ01OMkg3R1pBdWtwTlpvS1RQQVpyWTdjdmlKZ0xNRXNk?=
+ =?utf-8?B?RTg0Y09uajdCeFF4SDF4YTlsN1BjWTBzdFZGSU1FRHNaKytvU2lJNXp5a2tD?=
+ =?utf-8?B?bjN3MWZsbzAyaHpnZExIeGZkMGdTU21sYU4rSnhzK0Y3SHNvODNBRUdnVnZv?=
+ =?utf-8?B?azlvOUJVNGw0c3lFZFdER1d3emJOS3JVRE9YcC83RGxEU2taNTBXYUVVVUhl?=
+ =?utf-8?B?UGIvMy9lbEpZSHEvdDc0Y1huWG43VFIwNjJnTm9xZTZHRmZFVk1tU1FOM3Rq?=
+ =?utf-8?B?bzcvb1FUSGRwSTdwK0NuOVc2dWZqUWx0WG5rRy9mTHAzQncrOUdzL2Zza3Bn?=
+ =?utf-8?B?b2t1SERUeU9lK2E1MGdRYVJ3OEdnaGFGS2lFRDVybjdqWUtrMUZjWW9nSGM4?=
+ =?utf-8?B?dDJhTmNrdFlwaU15aXF0WlRDb1ZoKzFOZkxyY1pidnV1VmhRTFJjdXF6cVgy?=
+ =?utf-8?B?bTEramZPQStCdEVFNUNQMGxXT3A4amllZmdXWHlYRjBER05sdGNoNlVaa1FE?=
+ =?utf-8?B?WUY4Zk5EZTJOMFh1TEpyMkhFS1BvaWVobndvdzUyZWNUUjNocE1XeE5SWTdG?=
+ =?utf-8?B?eVJsbm5ZOEVzemVtc0J0K3BGZGdPR1ExYmY2Rkh3WU5VQUFpV2RZOXZhaEMv?=
+ =?utf-8?B?MERsdEZPRXpQVnFIS3VCcTNpa0ZzR2ZocXpnTlVWZlR1VStWei9NdmtqZWtw?=
+ =?utf-8?B?SlQ0alMzczY4SFEwakM5ME9KUW43Q3c3WURWaU5QZ1pjRXdPTk5pRnAxWjZN?=
+ =?utf-8?B?L1AvWlNxY1NEQVBhamFnME52OTk2bjJnVEV1U3I2b0ovN2lubkdUb2o5bHNz?=
+ =?utf-8?B?L3NJcldGZ1VOL21wdW1jdDUwaUwzS0liOU91bkkxL3lJNERPeDRrUDBscmYv?=
+ =?utf-8?B?NnZHcWRrTmZqYkdNbkxUSmtMZ2FkaWFTWmc0WmRVK1FhNE0rQXY4NlU5blF0?=
+ =?utf-8?Q?EYwJAfoyIfp42YgY/DnbH3rbH?=
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-Content-Type: multipart/alternative; boundary="=-avluJYVPKb1EsGU5dtc8"
-X-TOI-EXPURGATEID: 150726::1666079041-0A697417-CBD10A63/0/0 CLEAN NORMAL
-X-TOI-MSGID: 023cb164-b128-42ed-8825-0f11e65c3423
+X-OriginatorOrg: fujitsu.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: OS3PR01MB6241.jpnprd01.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: ee0bebc2-d23a-4709-bc63-08dab0df252a
+X-MS-Exchange-CrossTenant-originalarrivaltime: 18 Oct 2022 08:02:47.3944
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: a19f121d-81e1-4858-a9d8-736e267fd4c7
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: 3Pk894gMD/N7Np1e/ei3iOxej6r3IeecetGjVYA7RT2VVjGcdjsLPawjCaJH2kGQbfg5i+EBPajLZFEmkQnfIwtfcdJK5tydUOXLmgHoRL0=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: OS0PR01MB5443
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 18 Oct 2022 07:44:08 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99235
+ <openembedded-devel@lists.openembedded.org>; Tue, 18 Oct 2022 08:02:59 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99236
 
---=-avluJYVPKb1EsGU5dtc8
-Content-Type: text/plain; charset=us-ascii; format=flowed
-
-Hi Khem,
-
-i've added latomic to LDFLAGS and ensured, that it would at least help 
-for qemumips.
-
-Am Mo, 17. Okt 2022 um 19:19:02 -0700 schrieb Khem Raj 
-<raj.khem@gmail.com>:
-> Hi Markus
-> 
-> I think it needs linking -latomic on few arches e.g. mips/riscv32 see
-> <https://errors.yoctoproject.org/Errors/Details/673100/>
-> 
-> On Mon, Oct 17, 2022 at 10:32 AM Markus Volk <f_l_k@t-online.de 
-> <mailto:f_l_k@t-online.de>> wrote:
->> 
->>  v2 adds meson.project_version() to fix 'version: undefined' in the 
->> pc file
->> 
->>  Am Mo, 17. Okt 2022 um 19:30:21 +0200 schrieb Markus Volk 
->> <f_l_k@t-online.de <mailto:f_l_k@t-online.de>>:
->> 
->>  - Mesa has support for perfetto, but the libperfetto library is 
->> needed - Only v27 seems to be supported for now. Update perfetto 
->> accordingly - Make sure perfetto and libperfetto share the same 
->> codebase - Patch meson.build to allow shared build - Add a version 
->> number to avoid having a non symlink so file packaged into dev 
->> package. - Create a PC file for libperfetto to allow mesa to find it 
->> using pkgconfig. - Add nobranch=1 for the git repos to silence 
->> warnings about missing default branch Signed-off-by: Markus Volk 
->> <f_l_k@t-online.de <mailto:f_l_k@t-online.de>> --- 
->> ...1-meson-add-pc-file-for-lib_perfetto.patch | 52 
->> +++++++++++++++++++ .../recipes-devtools/perfetto/libperfetto.bb | 
->> 11 ++++ meta-oe/recipes-devtools/perfetto/perfetto.bb | 14 ++--- 
->> .../recipes-devtools/perfetto/perfetto.inc | 9 ++++ 4 files changed, 
->> 79 insertions(+), 7 deletions(-) create mode 100644 
->> meta-oe/recipes-devtools/perfetto/files/0001-meson-add-pc-file-for-lib_perfetto.patch 
->> create mode 100644 meta-oe/recipes-devtools/perfetto/libperfetto.bb 
->> create mode 100644 meta-oe/recipes-devtools/perfetto/perfetto.inc 
->> diff --git 
->> a/meta-oe/recipes-devtools/perfetto/files/0001-meson-add-pc-file-for-lib_perfetto.patch 
->> b/meta-oe/recipes-devtools/perfetto/files/0001-meson-add-pc-file-for-lib_perfetto.patch 
->> new file mode 100644 index 000000000..70de44173 --- /dev/null +++ 
->> b/meta-oe/recipes-devtools/perfetto/files/0001-meson-add-pc-file-for-lib_perfetto.patch 
->> @@ -0,0 +1,52 @@ +From 027f90dc9386ec08f2a5107025683e5fed6f3444 Mon 
->> Sep 17 00:00:00 2001 +From: Markus Volk <f_l_k@t-online.de> +Date: 
->> Mon, 17 Oct 2022 19:20:53 +0200 +Subject: [PATCH] meson: add PC file 
->> for lib_perfetto + +--- + meson.build | 12 ++++++++++-- + 1 file 
->> changed, 10 insertions(+), 2 deletions(-) + +diff --git 
->> a/meson.build b/meson.build +index 06015141c..752b4d928 100644 +--- 
->> a/meson.build ++++ b/meson.build +@@ -19,9 +19,12 @@ + project( + 
->> 'perfetto', + ['c','cpp'], +- default_options: ['c_std=c99', 
->> 'cpp_std=c++11'] ++ default_options: ['c_std=c99', 'cpp_std=c++11'], 
->> ++ version: '27.1' + ) + ++soversion = meson.project_version() ++ + 
->> fs = import('fs') + + if not fs.is_dir('sdk') +@@ -30,8 +33,9 @@ 
->> endif + + dep_threads = dependency('threads') + +-lib_perfetto = 
->> static_library( ++lib_perfetto = shared_library( + 'perfetto', ++ 
->> version: soversion, + sources: 'sdk/perfetto.cc', + dependencies: 
->> dep_threads, + install: true, +@@ -39,6 +43,10 @@ lib_perfetto = 
->> static_library( + + inc_perfetto = include_directories('sdk') + 
->> ++install_headers('sdk/perfetto.h') ++pkg = import('pkgconfig') 
->> ++pkg.generate(lib_perfetto) ++ + dep_perfetto = declare_dependency( 
->> + link_with: lib_perfetto, + include_directories: inc_perfetto, +-- 
->> +2.34.1 + diff --git 
->> a/meta-oe/recipes-devtools/perfetto/libperfetto.bb 
->> b/meta-oe/recipes-devtools/perfetto/libperfetto.bb new file mode 
->> 100644 index 000000000..d58e31414 --- /dev/null +++ 
->> b/meta-oe/recipes-devtools/perfetto/libperfetto.bb @@ -0,0 +1,11 @@ 
->> +LICENSE = "Apache-2.0" +LIC_FILES_CHKSUM = 
->> "file://LICENSE;md5=f87516e0b698007e9e75a1fe1012b390" + +require 
->> perfetto.inc + +inherit meson + +SRC_URI:append = " 
->> file://0001-meson-add-pc-file-for-lib_perfetto.patch" + +FILES:${PN} 
->> += "${datadir}" +BBCLASSEXTEND = "native nativesdk" diff --git 
->> a/meta-oe/recipes-devtools/perfetto/perfetto.bb 
->> b/meta-oe/recipes-devtools/perfetto/perfetto.bb index 
->> 94c39e9cc..c1b099430 100644 --- 
->> a/meta-oe/recipes-devtools/perfetto/perfetto.bb +++ 
->> b/meta-oe/recipes-devtools/perfetto/perfetto.bb @@ -10,16 +10,15 @@ 
->> LIC_FILES_CHKSUM = 
->> "file://LICENSE;md5=f87516e0b698007e9e75a1fe1012b390 \ 
->> file://debian/copyright;md5=4e08364c82141f181de69d0a2b89d612 \ 
->> file://python/LICENSE;md5=c602a632c34ade9c78a976734077bce7" -SRC_URI 
->> = "git://github.com/google/perfetto.git;protocol=https;name=perfetto 
->> \ +SRC_URI:append = " \ 
->> git://github.com/protocolbuffers/protobuf.git;branch=3.9.x;protocol=https;destsuffix=git/buildtools/protobuf;name=protobuf 
->> \ - 
->> git://chromium.googlesource.com/external/github.com/llvm/llvm-project/libcxx.git;protocol=https;destsuffix=git/buildtools/libcxx;name=libcxx 
->> \ - 
->> git://chromium.googlesource.com/external/github.com/llvm/llvm-project/libcxxabi.git;protocol=https;destsuffix=git/buildtools/libcxxabi;name=libcxxabi 
->> \ - 
->> git://chromium.googlesource.com/external/github.com/llvm/llvm-project/libunwind.git;protocol=https;destsuffix=git/buildtools/libunwind;name=libunwind 
->> \ - 
->> git://android.googlesource.com/platform/external/zlib.git;branch=master;protocol=https;destsuffix=git/buildtools/zlib;name=zlib 
->> \ + 
->> git://chromium.googlesource.com/external/github.com/llvm/llvm-project/libcxx.git;protocol=https;destsuffix=git/buildtools/libcxx;name=libcxx;nobranch=1 
->> \ + 
->> git://chromium.googlesource.com/external/github.com/llvm/llvm-project/libcxxabi.git;protocol=https;destsuffix=git/buildtools/libcxxabi;name=libcxxabi;nobranch=1 
->> \ + 
->> git://chromium.googlesource.com/external/github.com/llvm/llvm-project/libunwind.git;protocol=https;destsuffix=git/buildtools/libunwind;name=libunwind;nobranch=1 
->> \ + 
->> git://android.googlesource.com/platform/external/zlib.git;branch=master;protocol=https;destsuffix=git/buildtools/zlib;name=zlib;nobranch=1 
->> \ 
->> https://storage.googleapis.com/perfetto/gn-linux64-1968-0725d782;subdir=git/buildtools/;name=gn 
->> \ file://0001-Remove-check_build_deps-build-steps.patch " 
->> -SRCREV_perfetto = "5bd3f582c075d0d026c5fe0b5e291d34dee0d976" 
->> SRCREV_protobuf = "6a59a2ad1f61d9696092f79b6d74368b4d7970a3" 
->> SRCREV_libcxx = "d9040c75cfea5928c804ab7c235fed06a63f743a" 
->> SRCREV_libcxxabi = "196ba1aaa8ac285d94f4ea8d9836390a45360533" @@ 
->> -27,6 +26,8 @@ SRCREV_libunwind = 
->> "d999d54f4bca789543a2eb6c995af2d9b5a1f3ed" SRCREV_zlib = 
->> "5c85a2da4c13eda07f69d81a1579a5afddd35f59" SRC_URI[gn.sha256sum] = 
->> "f706aaa0676e3e22f5fc9ca482295d7caee8535d1869f99efa2358177b64f5cd" 
->> +require perfetto.inc + DEPENDS += " ninja-native" COMPATIBLE_HOST = 
->> "(i.86|x86_64|aarch64|arm).*-linux*" @@ -35,7 +36,6 @@ 
->> FILES:${PN}:append = " \ ${bindir}/tracebox \ " -S = 
->> "${WORKDIR}/git" B = "${WORKDIR}/build" CXXFLAGS:append:arm = 
->> "${@bb.utils.contains('TUNE_FEATURES', 'callconvention-hard', ' 
->> -mfloat-abi=hard', '', d)}" diff --git 
->> a/meta-oe/recipes-devtools/perfetto/perfetto.inc 
->> b/meta-oe/recipes-devtools/perfetto/perfetto.inc new file mode 
->> 100644 index 000000000..5cb6f8bb3 --- /dev/null +++ 
->> b/meta-oe/recipes-devtools/perfetto/perfetto.inc @@ -0,0 +1,9 @@ 
->> +SUMMARY = "Perfetto - System profiling, app tracing and trace 
->> analysis." +HOMEPAGE = "https://github.com/google/perfetto" + 
->> +SRC_URI = 
->> "git://github.com/google/perfetto.git;protocol=https;name=perfetto;nobranch=1" 
->> + +SRCREV_perfetto = "1c52b5e132312aeb007ed180d4ba1d8d66227923" +PV 
->> = "27.1" + +S = "${WORKDIR}/git"
->>  --
->>  2.34.1
->> 
->> 
->> 
->> 
-> 
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#99231): 
-> <https://lists.openembedded.org/g/openembedded-devel/message/99231>
-> Mute This Topic: <https://lists.openembedded.org/mt/94390265/3618223>
-> Group Owner: openembedded-devel+owner@lists.openembedded.org 
-> <mailto:openembedded-devel+owner@lists.openembedded.org>
-> Unsubscribe: 
-> <https://lists.openembedded.org/g/openembedded-devel/unsub> 
-> [f_l_k@t-online.de <mailto:f_l_k@t-online.de>]
-> -=-=-=-=-=-=-=-=-=-=-=-
-> 
-
-
---=-avluJYVPKb1EsGU5dtc8
-Content-Type: text/html; charset=us-ascii
-Content-Transfer-Encoding: quoted-printable
-
-<div id=3D"geary-body" dir=3D"auto"><div>Hi Khem,</div><div><br></div><div>=
-i've added latomic to LDFLAGS and ensured, that it would at least help for =
-qemumips.</div></div><div id=3D"geary-quote" dir=3D"auto"><br>Am Mo, 17. Ok=
-t 2022 um 19:19:02 -0700 schrieb Khem Raj &lt;raj.khem@gmail.com&gt;:<br><b=
-lockquote type=3D"cite"><div class=3D"plaintext" style=3D"white-space: brea=
-k-spaces;">Hi Markus
-
-I think it needs linking -latomic on few arches e.g. mips/riscv32 see
-<a href=3D"https://errors.yoctoproject.org/Errors/Details/673100/">https://=
-errors.yoctoproject.org/Errors/Details/673100/</a>
-
-On Mon, Oct 17, 2022 at 10:32 AM Markus Volk &lt;<a href=3D"mailto:f_l_k@t-=
-online.de">f_l_k@t-online.de</a>&gt; wrote:
-<blockquote>
- v2 adds meson.project_version() to fix 'version: undefined' in the pc file
-
- Am Mo, 17. Okt 2022 um 19:30:21 +0200 schrieb Markus Volk &lt;<a href=3D"m=
-ailto:f_l_k@t-online.de">f_l_k@t-online.de</a>&gt;:
-
- - Mesa has support for perfetto, but the libperfetto library is needed - O=
-nly v27 seems to be supported for now. Update perfetto accordingly - Make s=
-ure perfetto and libperfetto share the same codebase - Patch meson.build to=
- allow shared build - Add a version number to avoid having a non symlink so=
- file packaged into dev package. - Create a PC file for libperfetto to allo=
-w mesa to find it using pkgconfig. - Add nobranch=3D1 for the git repos to =
-silence warnings about missing default branch Signed-off-by: Markus Volk &l=
-t;<a href=3D"mailto:f_l_k@t-online.de">f_l_k@t-online.de</a>&gt; --- ...1-m=
-eson-add-pc-file-for-lib_perfetto.patch | 52 +++++++++++++++++++ .../recipe=
-s-devtools/perfetto/libperfetto.bb | 11 ++++ meta-oe/recipes-devtools/perfe=
-tto/perfetto.bb | 14 ++--- .../recipes-devtools/perfetto/perfetto.inc | 9 +=
-+++ 4 files changed, 79 insertions(+), 7 deletions(-) create mode 100644 me=
-ta-oe/recipes-devtools/perfetto/files/0001-meson-add-pc-file-for-lib_perfet=
-to.patch create mode 100644 meta-oe/recipes-devtools/perfetto/libperfetto.b=
-b create mode 100644 meta-oe/recipes-devtools/perfetto/perfetto.inc diff --=
-git a/meta-oe/recipes-devtools/perfetto/files/0001-meson-add-pc-file-for-li=
-b_perfetto.patch b/meta-oe/recipes-devtools/perfetto/files/0001-meson-add-p=
-c-file-for-lib_perfetto.patch new file mode 100644 index 000000000..70de441=
-73 --- /dev/null +++ b/meta-oe/recipes-devtools/perfetto/files/0001-meson-a=
-dd-pc-file-for-lib_perfetto.patch @@ -0,0 +1,52 @@ +From 027f90dc9386ec08f2=
-a5107025683e5fed6f3444 Mon Sep 17 00:00:00 2001 +From: Markus Volk &lt;f_l_=
-k@t-online.de&gt; +Date: Mon, 17 Oct 2022 19:20:53 +0200 +Subject: [PATCH] =
-meson: add PC file for lib_perfetto + +--- + meson.build | 12 ++++++++++-- =
-+ 1 file changed, 10 insertions(+), 2 deletions(-) + +diff --git a/meson.bu=
-ild b/meson.build +index 06015141c..752b4d928 100644 +--- a/meson.build +++=
-+ b/meson.build +@@ -19,9 +19,12 @@ + project( + 'perfetto', + ['c','cpp'],=
- +- default_options: ['c_std=3Dc99', 'cpp_std=3Dc++11'] ++ default_options:=
- ['c_std=3Dc99', 'cpp_std=3Dc++11'], ++ version: '27.1' + ) + ++soversion =
-=3D meson.project_version() ++ + fs =3D import('fs') + + if not fs.is_dir('=
-sdk') +@@ -30,8 +33,9 @@ endif + + dep_threads =3D dependency('threads') + =
-+-lib_perfetto =3D static_library( ++lib_perfetto =3D shared_library( + 'pe=
-rfetto', ++ version: soversion, + sources: 'sdk/perfetto.cc', + dependencie=
-s: dep_threads, + install: true, +@@ -39,6 +43,10 @@ lib_perfetto =3D stati=
-c_library( + + inc_perfetto =3D include_directories('sdk') + ++install_head=
-ers('sdk/perfetto.h') ++pkg =3D import('pkgconfig') ++pkg.generate(lib_perf=
-etto) ++ + dep_perfetto =3D declare_dependency( + link_with: lib_perfetto, =
-+ include_directories: inc_perfetto, +-- +2.34.1 + diff --git a/meta-oe/rec=
-ipes-devtools/perfetto/libperfetto.bb b/meta-oe/recipes-devtools/perfetto/l=
-ibperfetto.bb new file mode 100644 index 000000000..d58e31414 --- /dev/null=
- +++ b/meta-oe/recipes-devtools/perfetto/libperfetto.bb @@ -0,0 +1,11 @@ +L=
-ICENSE =3D "Apache-2.0" +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Df87516e=
-0b698007e9e75a1fe1012b390" + +require perfetto.inc + +inherit meson + +SRC_=
-URI:append =3D " file://0001-meson-add-pc-file-for-lib_perfetto.patch" + +F=
-ILES:${PN} +=3D "${datadir}" +BBCLASSEXTEND =3D "native nativesdk" diff --g=
-it a/meta-oe/recipes-devtools/perfetto/perfetto.bb b/meta-oe/recipes-devtoo=
-ls/perfetto/perfetto.bb index 94c39e9cc..c1b099430 100644 --- a/meta-oe/rec=
-ipes-devtools/perfetto/perfetto.bb +++ b/meta-oe/recipes-devtools/perfetto/=
-perfetto.bb @@ -10,16 +10,15 @@ LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D=
-f87516e0b698007e9e75a1fe1012b390 \ file://debian/copyright;md5=3D4e08364c82=
-141f181de69d0a2b89d612 \ file://python/LICENSE;md5=3Dc602a632c34ade9c78a976=
-734077bce7" -SRC_URI =3D "git://github.com/google/perfetto.git;protocol=3Dh=
-ttps;name=3Dperfetto \ +SRC_URI:append =3D " \ git://github.com/protocolbuf=
-fers/protobuf.git;branch=3D3.9.x;protocol=3Dhttps;destsuffix=3Dgit/buildtoo=
-ls/protobuf;name=3Dprotobuf \ - git://chromium.googlesource.com/external/gi=
-thub.com/llvm/llvm-project/libcxx.git;protocol=3Dhttps;destsuffix=3Dgit/bui=
-ldtools/libcxx;name=3Dlibcxx \ - git://chromium.googlesource.com/external/g=
-ithub.com/llvm/llvm-project/libcxxabi.git;protocol=3Dhttps;destsuffix=3Dgit=
-/buildtools/libcxxabi;name=3Dlibcxxabi \ - git://chromium.googlesource.com/=
-external/github.com/llvm/llvm-project/libunwind.git;protocol=3Dhttps;destsu=
-ffix=3Dgit/buildtools/libunwind;name=3Dlibunwind \ - git://android.googleso=
-urce.com/platform/external/zlib.git;branch=3Dmaster;protocol=3Dhttps;destsu=
-ffix=3Dgit/buildtools/zlib;name=3Dzlib \ + git://chromium.googlesource.com/=
-external/github.com/llvm/llvm-project/libcxx.git;protocol=3Dhttps;destsuffi=
-x=3Dgit/buildtools/libcxx;name=3Dlibcxx;nobranch=3D1 \ + git://chromium.goo=
-glesource.com/external/github.com/llvm/llvm-project/libcxxabi.git;protocol=
-=3Dhttps;destsuffix=3Dgit/buildtools/libcxxabi;name=3Dlibcxxabi;nobranch=3D=
-1 \ + git://chromium.googlesource.com/external/github.com/llvm/llvm-project=
-/libunwind.git;protocol=3Dhttps;destsuffix=3Dgit/buildtools/libunwind;name=
-=3Dlibunwind;nobranch=3D1 \ + git://android.googlesource.com/platform/exter=
-nal/zlib.git;branch=3Dmaster;protocol=3Dhttps;destsuffix=3Dgit/buildtools/z=
-lib;name=3Dzlib;nobranch=3D1 \ https://storage.googleapis.com/perfetto/gn-l=
-inux64-1968-0725d782;subdir=3Dgit/buildtools/;name=3Dgn \ file://0001-Remov=
-e-check_build_deps-build-steps.patch " -SRCREV_perfetto =3D "5bd3f582c075d0=
-d026c5fe0b5e291d34dee0d976" SRCREV_protobuf =3D "6a59a2ad1f61d9696092f79b6d=
-74368b4d7970a3" SRCREV_libcxx =3D "d9040c75cfea5928c804ab7c235fed06a63f743a=
-" SRCREV_libcxxabi =3D "196ba1aaa8ac285d94f4ea8d9836390a45360533" @@ -27,6 =
-+26,8 @@ SRCREV_libunwind =3D "d999d54f4bca789543a2eb6c995af2d9b5a1f3ed" SR=
-CREV_zlib =3D "5c85a2da4c13eda07f69d81a1579a5afddd35f59" SRC_URI[gn.sha256s=
-um] =3D "f706aaa0676e3e22f5fc9ca482295d7caee8535d1869f99efa2358177b64f5cd" =
-+require perfetto.inc + DEPENDS +=3D " ninja-native" COMPATIBLE_HOST =3D "(=
-i.86|x86_64|aarch64|arm).*-linux*" @@ -35,7 +36,6 @@ FILES:${PN}:append =3D=
- " \ ${bindir}/tracebox \ " -S =3D "${WORKDIR}/git" B =3D "${WORKDIR}/build=
-" CXXFLAGS:append:arm =3D "${@bb.utils.contains('TUNE_FEATURES', 'callconve=
-ntion-hard', ' -mfloat-abi=3Dhard', '', d)}" diff --git a/meta-oe/recipes-d=
-evtools/perfetto/perfetto.inc b/meta-oe/recipes-devtools/perfetto/perfetto.=
-inc new file mode 100644 index 000000000..5cb6f8bb3 --- /dev/null +++ b/met=
-a-oe/recipes-devtools/perfetto/perfetto.inc @@ -0,0 +1,9 @@ +SUMMARY =3D "P=
-erfetto - System profiling, app tracing and trace analysis." +HOMEPAGE =3D =
-"https://github.com/google/perfetto" + +SRC_URI =3D "git://github.com/googl=
-e/perfetto.git;protocol=3Dhttps;name=3Dperfetto;nobranch=3D1" + +SRCREV_per=
-fetto =3D "1c52b5e132312aeb007ed180d4ba1d8d66227923" +PV =3D "27.1" + +S =
-=3D "${WORKDIR}/git"
- --
- 2.34.1
-
-
-=20
-
-</blockquote></div><div class=3D"plaintext" style=3D"white-space: break-spa=
-ces;">
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-Links: You receive all messages sent to this group.
-View/Reply Online (#99231): <a href=3D"https://lists.openembedded.org/g/ope=
-nembedded-devel/message/99231">https://lists.openembedded.org/g/openembedde=
-d-devel/message/99231</a>
-Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/94390265/3618=
-223">https://lists.openembedded.org/mt/94390265/3618223</a>
-Group Owner: <a href=3D"mailto:openembedded-devel+owner@lists.openembedded.=
-org">openembedded-devel+owner@lists.openembedded.org</a>
-Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
-/unsub">https://lists.openembedded.org/g/openembedded-devel/unsub</a> [<a h=
-ref=3D"mailto:f_l_k@t-online.de">f_l_k@t-online.de</a>]
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-
-</div></blockquote></div>
---=-avluJYVPKb1EsGU5dtc8--
-
+SGkgTWljaGFlbA0KDQpJIGhhdmUgdHJpZWQgcnVubmluZyBnaXQgY29uZmlnIC0tZ2xvYmFsIHNl
+bmRlbWFpbC5mcm9tIGFuZCBzZW5kIHlvdSBhIG5ldyBtYWlsLg0KDQpDb3VsZCBoZWxwIG1lIHRv
+IGNoZWNrIGl0Pw0KDQpUaGFua3MgDQoNCi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tDQpaaGVuZyBSdW9xaW4NCk5hbmppbmcgRnVqaXRzdSBOYW5kYSBT
+b2Z0d2FyZSBUZWNoLiBDby4sIEx0ZC4oRk5TVCkNCkFERFIuOiBOby42IFdlbnpodSBSb2FkLCBT
+b2Z0d2FyZSBBdmVudWUsDQogICAgICAgTmFuamluZywgMjEwMDEyLCBDaGluYQ0KTUFJTCA6IHpo
+ZW5ncnEuZm5zdEBmdWppc3R1LmNvbQ0KDQoNCj4gLS0tLS1PcmlnaW5hbCBNZXNzYWdlLS0tLS0N
+Cj4gRnJvbTogTWljaGFlbCBPcGRlbmFja2VyIDxtaWNoYWVsLm9wZGVuYWNrZXJAYm9vdGxpbi5j
+b20+DQo+IFNlbnQ6IFR1ZXNkYXksIE9jdG9iZXIgMTgsIDIwMjIgMzowNSBQTQ0KPiBUbzogWmhl
+bmcsIFJ1b3Fpbi/pg5Eg6Iul6ZKmIDx6aGVuZ3JxLmZuc3RAZnVqaXRzdS5jb20+DQo+IENjOiBv
+cGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9yZw0KPiBTdWJqZWN0OiBSZTog
+W29lXSBbbWV0YS1weXRob25dIFtQQVRDSF0gcHl0aG9uMy1zdGV2ZWRvcmU6IHVwZ3JhZGUgNC4w
+LjAgLT4NCj4gNC4wLjENCj4gDQo+IEhpIFpoZW5nDQo+IA0KPiBUaGFuayB5b3UgZm9yIHRoZSBw
+YXRjaCENCj4gDQo+IE9uIDEwLzE4LzIyIDAzOjE1LCB6aGVuZ3J1b3FpbiB3cm90ZToNCj4gPiBT
+aWduZWQtb2ZmLWJ5OiBaaGVuZyBSdW9xaW4gPHpoZW5ncnEuZm5zdEBmdWppdHN1LmNvbT4NCj4g
+PiAtLS0NCj4gPiAgIC4uLi97cHl0aG9uMy1zdGV2ZWRvcmVfNC4wLjAuYmIgPT4gcHl0aG9uMy1z
+dGV2ZWRvcmVfNC4wLjEuYmJ9ICB8IDIgKy0NCj4gPiAgIDEgZmlsZSBjaGFuZ2VkLCAxIGluc2Vy
+dGlvbigrKSwgMSBkZWxldGlvbigtKQ0KPiA+ICAgcmVuYW1lDQo+ID4gbWV0YS1weXRob24vcmVj
+aXBlcy1kZXZ0b29scy9weXRob24ve3B5dGhvbjMtc3RldmVkb3JlXzQuMC4wLmJiID0+DQo+ID4g
+cHl0aG9uMy1zdGV2ZWRvcmVfNC4wLjEuYmJ9ICg4MCUpDQo+ID4NCj4gPiBkaWZmIC0tZ2l0DQo+
+ID4gYS9tZXRhLXB5dGhvbi9yZWNpcGVzLWRldnRvb2xzL3B5dGhvbi9weXRob24zLXN0ZXZlZG9y
+ZV80LjAuMC5iYg0KPiA+IGIvbWV0YS1weXRob24vcmVjaXBlcy1kZXZ0b29scy9weXRob24vcHl0
+aG9uMy1zdGV2ZWRvcmVfNC4wLjEuYmINCj4gPiBzaW1pbGFyaXR5IGluZGV4IDgwJQ0KPiA+IHJl
+bmFtZSBmcm9tDQo+ID4gbWV0YS1weXRob24vcmVjaXBlcy1kZXZ0b29scy9weXRob24vcHl0aG9u
+My1zdGV2ZWRvcmVfNC4wLjAuYmINCj4gPiByZW5hbWUgdG8NCj4gPiBtZXRhLXB5dGhvbi9yZWNp
+cGVzLWRldnRvb2xzL3B5dGhvbi9weXRob24zLXN0ZXZlZG9yZV80LjAuMS5iYg0KPiA+IGluZGV4
+IDQ2YzZkODMxYWEuLjcwYzQzZjNhY2UgMTAwNjQ0DQo+ID4gLS0tIGEvbWV0YS1weXRob24vcmVj
+aXBlcy1kZXZ0b29scy9weXRob24vcHl0aG9uMy1zdGV2ZWRvcmVfNC4wLjAuYmINCj4gPiArKysg
+Yi9tZXRhLXB5dGhvbi9yZWNpcGVzLWRldnRvb2xzL3B5dGhvbi9weXRob24zLXN0ZXZlZG9yZV80
+LjAuMS5iYg0KPiA+IEBAIC0zLDcgKzMsNyBAQCBIT01FUEFHRSA9DQo+ICJodHRwczovL2RvY3Mu
+b3BlbnN0YWNrLm9yZy9zdGV2ZWRvcmUvbGF0ZXN0LyINCj4gPiAgIExJQ0VOU0UgPSAiQXBhY2hl
+LTIuMCINCj4gPiAgIExJQ19GSUxFU19DSEtTVU0gPQ0KPiAiZmlsZTovL0xJQ0VOU0U7bWQ1PTNi
+ODNlZjk2Mzg3ZjE0NjU1ZmM4NTRkZGMzYzZiZDU3Ig0KPiA+DQo+ID4gLVNSQ19VUklbc2hhMjU2
+c3VtXSA9DQo+ICJmODJjYzk5YTFmZjU1MjMxMGQxOWMzNzk4MjdjMmM2NGRkOWY4NWEzOGJjZDU1
+NTlkYjI0NzAxNjE4NjdiNzg2Ig0KPiA+ICtTUkNfVVJJW3NoYTI1NnN1bV0gPQ0KPiAiOWEyMzEx
+MWE2ZTYxMjI3MGM1OTFmZDMxZmYzMzIxYzZiNWYzZDVmM2RhYmIxNDI3MzE3YTVhYjYwOGZjMjYx
+YSINCj4gPg0KPiA+ICAgREVQRU5EUyArPSAiJHtQWVRIT05fUE59LXBici1uYXRpdmUiDQo+ID4N
+Cj4gVGhlcmUncyBhIHByb2JsZW0gd2l0aCB0aGUgd2F5IHlvdSBzZW5kIHlvdXIgcGF0Y2hlcyB0
+aG91Z2guDQo+IA0KPiBJZiBJIGFwcGx5IHlvdXIgcGF0Y2ggdGhyb3VnaCAiZ2l0IGFtIiwgdGhl
+IGF1dGhvciBvZiB0aGUgY29tbWl0IGlzOg0KPiANCj4gemhlbmdycS5mbnN0QGZ1aml0c3UuY29t
+DQo+IA0KPiBpbnN0ZWFkIG9mDQo+IA0KPiBaaGVuZyBSdW9xaW4gPHpoZW5ncnEuZm5zdEBmdWpp
+dHN1LmNvbT4NCj4gDQo+IA0KPiBCZWNhdXNlIG9mIHRoaXMgaXNzdWUsIHRoZSBtYWludGFpbmVy
+IGhhcyB0byBtYW51YWxseSBmaXggdGhpcyBmaWVsZCB3aGVuDQo+IGFjY2VwdGluZyB5b3VyIHBh
+dGNoLiBXb3JzZSwgaWYgaGUgZG9lc24ndCBjYXRjaCB0aGlzLCB0aGF0J3MgaGFyZGVyIHRvIGZp
+eA0KPiBhZnRlcndhcmRzLg0KPiANCj4gWW91IHNob3VsZCBiZSBhYmxlIHRvIGZpeCB0aGlzIGJ5
+IHJ1bm5pbmc6DQo+IA0KPiBnaXQgY29uZmlnIC0tZ2xvYmFsIHNlbmRlbWFpbC5mcm9tICJ6aGVu
+Z3JxLmZuc3RAZnVqaXRzdS5jb20iDQo+IFRoaXMgc2hvdWxkIGFkZCBhICJGcm9tIiBmaWVsZCB0
+byB0aGUgc2VudCBwYXRjaCB3aGljaCAiZ2l0IGFtIiBzaG91bGQgYmUgYWJsZQ0KPiB0byBtYXRj
+aCB3aXRoIHlvdXIgbmFtZS4NCj4gDQo+IFNlZQ0KPiBodHRwczovL3d3dy5vcGVuZW1iZWRkZWQu
+b3JnL3dpa2kvSG93X3RvX3N1Ym1pdF9hX3BhdGNoX3RvX09wZW5FbWJlDQo+IGRkZWQjU2VuZGlu
+Z191c2luZ19naXQtc2VuZC1lbWFpbA0KPiANCj4gQ291bGQgeW91IHRyeSB0byBzZW5kIGFuIHVw
+ZGF0ZT8gWW91IGNvdWxkIHNlbmQgaXQgdG8gbWUgYWdhaW4gdGhyb3VnaA0KPiBwcml2YXRlLWVt
+YWlsIGZpcnN0Lg0KPiANCj4gVGhhbmtzIGluIGFkdmFuY2UNCj4gTWljaGFlbC4NCj4gDQo+IC0t
+DQo+IE1pY2hhZWwgT3BkZW5hY2tlciwgQm9vdGxpbg0KPiBFbWJlZGRlZCBMaW51eCBhbmQgS2Vy
+bmVsIGVuZ2luZWVyaW5nDQo+IGh0dHBzOi8vYm9vdGxpbi5jb20NCg0K
 
