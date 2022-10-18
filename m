@@ -1,96 +1,236 @@
-Return-Path: <michael.opdenacker@bootlin.com>
+Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C7DA0C433FE
-	for <webhook@archiver.kernel.org>; Tue, 18 Oct 2022 07:10:38 +0000 (UTC)
-Received: from relay2-d.mail.gandi.net (relay2-d.mail.gandi.net [217.70.183.194])
- by mx.groups.io with SMTP id smtpd.web11.3950.1666077031411448048
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EA710C433FE
+	for <webhook@archiver.kernel.org>; Tue, 18 Oct 2022 07:40:58 +0000 (UTC)
+Received: from mailout03.t-online.de (mailout03.t-online.de [194.25.134.81])
+ by mx.groups.io with SMTP id smtpd.web11.4113.1666078857890392340
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 18 Oct 2022 00:10:32 -0700
+ Tue, 18 Oct 2022 00:40:58 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@bootlin.com header.s=gm1 header.b=czultKYi;
- spf=pass (domain: bootlin.com, ip: 217.70.183.194, mailfrom: michael.opdenacker@bootlin.com)
-Received: (Authenticated sender: michael.opdenacker@bootlin.com)
-	by mail.gandi.net (Postfix) with ESMTPSA id 4CE0140015;
-	Tue, 18 Oct 2022 07:10:29 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
-	t=1666077029;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=msGaWo04zUxTpc5a6QZgNRmatKQBSH0mcGeE+CkO9n4=;
-	b=czultKYiMWRJw6l6peN8qXE7Sf8IiFFUkzDA/z69b1718Qyxy9/2iMa++5dnRmPKRuk9v+
-	t63/sjBvSsu4GDyNvrrZQRBfflHlspTjv2LpiPWD9vxqOcV3HHq7jlKTApKKEbuMaZ0oZQ
-	vRIWY/HiQdCTegFSQ8E0aHj/WzN+7c0DXmKSeM/uHi0RMAhzOrppwtDrizxGOHj8XgDndm
-	Ytr/Bv5ld5UiZX8WzFU35I/J40yTNtNYkHJUL9vqA+EFVLhqf0qRldAyYxRkFdofDCLNeP
-	07iuHBzzcJTzJHtiN/p3N9wLo2fMRLCKzNjudTnneLkAPNjXLPjCQBLkfLz9Eg==
-Message-ID: <bb5646aa-666f-4432-16a9-43fcfbffc639@bootlin.com>
-Date: Tue, 18 Oct 2022 09:10:28 +0200
+ dkim=missing; spf=none, err=SPF record not found (domain: t-online.de, ip: 194.25.134.81, mailfrom: f_l_k@t-online.de)
+Received: from fwd72.dcpf.telekom.de (fwd72.aul.t-online.de [10.223.144.98])
+	by mailout03.t-online.de (Postfix) with SMTP id B846C7BB9
+	for <openembedded-devel@lists.openembedded.org>; Tue, 18 Oct 2022 09:40:49 +0200 (CEST)
+Received: from flk-MS-7C91.. ([79.219.224.241]) by fwd72.t-online.de
+	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
+	esmtp id 1okhDV-3ew1RZ0; Tue, 18 Oct 2022 09:40:49 +0200
+From: Markus Volk <f_l_k@t-online.de>
+To: openembedded-devel@lists.openembedded.org
+Cc: Markus Volk <f_l_k@t-online.de>
+Subject: [meta-oe][PATCHv3] perfetto: build libperfetto
+Date: Tue, 18 Oct 2022 09:40:41 +0200
+Message-Id: <20221018074041.873034-1-f_l_k@t-online.de>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.2.2
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [oe] [meta-oe] [PATCH] broadcom-bt-firmware: upgrade
-Content-Language: en-US
-To: wangmy <wangmy@fujitsu.com>
-References: <1666055176-8001-1-git-send-email-wangmy@fujitsu.com>
-From: Michael Opdenacker <michael.opdenacker@bootlin.com>
-Organization: Bootlin
-In-Reply-To: <1666055176-8001-1-git-send-email-wangmy@fujitsu.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-TOI-EXPURGATEID: 150726::1666078849-01449CE0-6E039694/0/0 CLEAN NORMAL
+X-TOI-MSGID: 58705d7c-ca92-440f-9ebd-09f7676e1cc2
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 18 Oct 2022 07:10:38 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99233
+ <openembedded-devel@lists.openembedded.org>; Tue, 18 Oct 2022 07:40:58 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99234
 
-Hi Wang
+- Mesa has support for perfetto, but the libperfetto library is needed
+- Only v27 seems to be supported for now. Update perfetto accordingly
+- Make sure perfetto and libperfetto share the same codebase
+- Patch meson.build to allow shared build
+  - Add a version number to avoid having a non symlink so file packaged i=
+nto dev package
+  - Create a PC file for libperfetto to allow mesa to find it using pkgco=
+nfig
+  - Install needed header file
+  - Add -latomic to LDFLAGS for some arch where the compiler doesn't prov=
+ide it
+- Add nobranch=3D1 for the git repos to silence warnings about missing de=
+fault branch
 
-Thanks for the patch.
+Signed-off-by: Markus Volk <f_l_k@t-online.de>
+---
+ ...1-meson-add-pc-file-for-lib_perfetto.patch | 52 +++++++++++++++++++
+ .../recipes-devtools/perfetto/libperfetto.bb  | 14 +++++
+ meta-oe/recipes-devtools/perfetto/perfetto.bb | 14 ++---
+ .../recipes-devtools/perfetto/perfetto.inc    |  9 ++++
+ 4 files changed, 82 insertions(+), 7 deletions(-)
+ create mode 100644 meta-oe/recipes-devtools/perfetto/files/0001-meson-ad=
+d-pc-file-for-lib_perfetto.patch
+ create mode 100644 meta-oe/recipes-devtools/perfetto/libperfetto.bb
+ create mode 100644 meta-oe/recipes-devtools/perfetto/perfetto.inc
 
-On 10/18/22 03:06, wangmy wrote:
-> Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
-> ---
->   .../broadcom-bt-firmware/broadcom-bt-firmware_12.0.1.1105_p3.bb | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/meta-oe/recipes-kernel/broadcom-bt-firmware/broadcom-bt-firmware_12.0.1.1105_p3.bb b/meta-oe/recipes-kernel/broadcom-bt-firmware/broadcom-bt-firmware_12.0.1.1105_p3.bb
-> index f45ea5e4a9..4b6026ebc0 100644
-> --- a/meta-oe/recipes-kernel/broadcom-bt-firmware/broadcom-bt-firmware_12.0.1.1105_p3.bb
-> +++ b/meta-oe/recipes-kernel/broadcom-bt-firmware/broadcom-bt-firmware_12.0.1.1105_p3.bb
-> @@ -10,7 +10,7 @@ NO_GENERIC_LICENSE[Firmware-Broadcom-WIDCOMM] = "LICENSE.broadcom_bcm20702"
->   
->   LIC_FILES_CHKSUM = "file://LICENSE.broadcom_bcm20702;md5=c0d5ea0502b00df74173d0f8a48b619d"
->   SRC_URI = "git://github.com/winterheart/broadcom-bt-firmware.git;branch=master;protocol=https"
-> -SRCREV = "68a7a8a4f2c4bdd3425c23653a3b9b6609e41d0b"
-> +SRCREV = "a0eb4805dbb232f02f156b9351a23790c1a4cec7"
->   
->   PE = "1"
-
-
-There are still issues with your identity in the patches you send by 
-e-mail. Because of this, we don't get your real name as commit author. 
-This propagates to the release notes which then have to be fixed manually.
-
-Did you try to run
-
-git config --global sendemail.from "wangmy@fujitsu.com"?
-
-This should add a "From" field to your e-mail that "git am" should be 
-able to match with the name in the "Signed-off-by" field.
-
-Don't hesitate to send a patch directly to me to test.
-
-Thanks in advance
-Cheers
-Michael
-
--- 
-Michael Opdenacker, Bootlin
-Embedded Linux and Kernel engineering
-https://bootlin.com
+diff --git a/meta-oe/recipes-devtools/perfetto/files/0001-meson-add-pc-fi=
+le-for-lib_perfetto.patch b/meta-oe/recipes-devtools/perfetto/files/0001-=
+meson-add-pc-file-for-lib_perfetto.patch
+new file mode 100644
+index 000000000..70de44173
+--- /dev/null
++++ b/meta-oe/recipes-devtools/perfetto/files/0001-meson-add-pc-file-for-=
+lib_perfetto.patch
+@@ -0,0 +1,52 @@
++From 027f90dc9386ec08f2a5107025683e5fed6f3444 Mon Sep 17 00:00:00 2001
++From: Markus Volk <f_l_k@t-online.de>
++Date: Mon, 17 Oct 2022 19:20:53 +0200
++Subject: [PATCH] meson: add PC file for lib_perfetto
++
++---
++ meson.build | 12 ++++++++++--
++ 1 file changed, 10 insertions(+), 2 deletions(-)
++
++diff --git a/meson.build b/meson.build
++index 06015141c..752b4d928 100644
++--- a/meson.build
+++++ b/meson.build
++@@ -19,9 +19,12 @@
++ project(
++     'perfetto',
++     ['c','cpp'],
++-    default_options: ['c_std=3Dc99', 'cpp_std=3Dc++11']
+++    default_options: ['c_std=3Dc99', 'cpp_std=3Dc++11'],
+++    version: '27.1'
++ )
++=20
+++soversion =3D meson.project_version()
+++
++ fs =3D import('fs')
++=20
++ if not fs.is_dir('sdk')
++@@ -30,8 +33,9 @@ endif
++=20
++ dep_threads =3D dependency('threads')
++=20
++-lib_perfetto =3D static_library(
+++lib_perfetto =3D shared_library(
++     'perfetto',
+++    version: soversion,
++     sources: 'sdk/perfetto.cc',
++     dependencies: dep_threads,
++     install: true,
++@@ -39,6 +43,10 @@ lib_perfetto =3D static_library(
++=20
++ inc_perfetto =3D include_directories('sdk')
++=20
+++install_headers('sdk/perfetto.h')
+++pkg =3D import('pkgconfig')
+++pkg.generate(lib_perfetto)
+++
++ dep_perfetto =3D declare_dependency(
++     link_with: lib_perfetto,
++     include_directories: inc_perfetto,
++--=20
++2.34.1
++
+diff --git a/meta-oe/recipes-devtools/perfetto/libperfetto.bb b/meta-oe/r=
+ecipes-devtools/perfetto/libperfetto.bb
+new file mode 100644
+index 000000000..c8f56fd52
+--- /dev/null
++++ b/meta-oe/recipes-devtools/perfetto/libperfetto.bb
+@@ -0,0 +1,14 @@
++LICENSE =3D "Apache-2.0"
++LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Df87516e0b698007e9e75a1fe1012b=
+390"
++
++require perfetto.inc
++
++inherit meson
++
++SRC_URI:append =3D " file://0001-meson-add-pc-file-for-lib_perfetto.patc=
+h"
++
++LDFLAGS +=3D "-Wl,--as-needed -latomic -Wl,--no-as-needed"
++
++FILES:${PN} +=3D "${datadir}"
++
++BBCLASSEXTEND =3D "native nativesdk"
+diff --git a/meta-oe/recipes-devtools/perfetto/perfetto.bb b/meta-oe/reci=
+pes-devtools/perfetto/perfetto.bb
+index 94c39e9cc..c1b099430 100644
+--- a/meta-oe/recipes-devtools/perfetto/perfetto.bb
++++ b/meta-oe/recipes-devtools/perfetto/perfetto.bb
+@@ -10,16 +10,15 @@ LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Df87516e0b6=
+98007e9e75a1fe1012b390 \
+                     file://debian/copyright;md5=3D4e08364c82141f181de69d=
+0a2b89d612 \
+                     file://python/LICENSE;md5=3Dc602a632c34ade9c78a97673=
+4077bce7"
+=20
+-SRC_URI =3D "git://github.com/google/perfetto.git;protocol=3Dhttps;name=3D=
+perfetto \
++SRC_URI:append =3D " \
+            git://github.com/protocolbuffers/protobuf.git;branch=3D3.9.x;=
+protocol=3Dhttps;destsuffix=3Dgit/buildtools/protobuf;name=3Dprotobuf \
+-           git://chromium.googlesource.com/external/github.com/llvm/llvm=
+-project/libcxx.git;protocol=3Dhttps;destsuffix=3Dgit/buildtools/libcxx;n=
+ame=3Dlibcxx \
+-           git://chromium.googlesource.com/external/github.com/llvm/llvm=
+-project/libcxxabi.git;protocol=3Dhttps;destsuffix=3Dgit/buildtools/libcx=
+xabi;name=3Dlibcxxabi \
+-           git://chromium.googlesource.com/external/github.com/llvm/llvm=
+-project/libunwind.git;protocol=3Dhttps;destsuffix=3Dgit/buildtools/libun=
+wind;name=3Dlibunwind \
+-           git://android.googlesource.com/platform/external/zlib.git;bra=
+nch=3Dmaster;protocol=3Dhttps;destsuffix=3Dgit/buildtools/zlib;name=3Dzli=
+b \
++           git://chromium.googlesource.com/external/github.com/llvm/llvm=
+-project/libcxx.git;protocol=3Dhttps;destsuffix=3Dgit/buildtools/libcxx;n=
+ame=3Dlibcxx;nobranch=3D1 \
++           git://chromium.googlesource.com/external/github.com/llvm/llvm=
+-project/libcxxabi.git;protocol=3Dhttps;destsuffix=3Dgit/buildtools/libcx=
+xabi;name=3Dlibcxxabi;nobranch=3D1 \
++           git://chromium.googlesource.com/external/github.com/llvm/llvm=
+-project/libunwind.git;protocol=3Dhttps;destsuffix=3Dgit/buildtools/libun=
+wind;name=3Dlibunwind;nobranch=3D1 \
++           git://android.googlesource.com/platform/external/zlib.git;bra=
+nch=3Dmaster;protocol=3Dhttps;destsuffix=3Dgit/buildtools/zlib;name=3Dzli=
+b;nobranch=3D1 \
+            https://storage.googleapis.com/perfetto/gn-linux64-1968-0725d=
+782;subdir=3Dgit/buildtools/;name=3Dgn \
+            file://0001-Remove-check_build_deps-build-steps.patch "
+=20
+-SRCREV_perfetto =3D "5bd3f582c075d0d026c5fe0b5e291d34dee0d976"
+ SRCREV_protobuf =3D "6a59a2ad1f61d9696092f79b6d74368b4d7970a3"
+ SRCREV_libcxx =3D "d9040c75cfea5928c804ab7c235fed06a63f743a"
+ SRCREV_libcxxabi =3D "196ba1aaa8ac285d94f4ea8d9836390a45360533"
+@@ -27,6 +26,8 @@ SRCREV_libunwind =3D "d999d54f4bca789543a2eb6c995af2d9b=
+5a1f3ed"
+ SRCREV_zlib =3D "5c85a2da4c13eda07f69d81a1579a5afddd35f59"
+ SRC_URI[gn.sha256sum] =3D "f706aaa0676e3e22f5fc9ca482295d7caee8535d1869f=
+99efa2358177b64f5cd"
+=20
++require perfetto.inc
++
+ DEPENDS +=3D " ninja-native"
+=20
+ COMPATIBLE_HOST =3D "(i.86|x86_64|aarch64|arm).*-linux*"
+@@ -35,7 +36,6 @@ FILES:${PN}:append =3D " \
+   ${bindir}/tracebox \
+   "
+=20
+-S =3D "${WORKDIR}/git"
+ B =3D "${WORKDIR}/build"
+=20
+ CXXFLAGS:append:arm =3D "${@bb.utils.contains('TUNE_FEATURES', 'callconv=
+ention-hard', ' -mfloat-abi=3Dhard', '', d)}"
+diff --git a/meta-oe/recipes-devtools/perfetto/perfetto.inc b/meta-oe/rec=
+ipes-devtools/perfetto/perfetto.inc
+new file mode 100644
+index 000000000..5cb6f8bb3
+--- /dev/null
++++ b/meta-oe/recipes-devtools/perfetto/perfetto.inc
+@@ -0,0 +1,9 @@
++SUMMARY =3D "Perfetto - System profiling, app tracing and trace analysis=
+."
++HOMEPAGE =3D "https://github.com/google/perfetto"
++
++SRC_URI =3D "git://github.com/google/perfetto.git;protocol=3Dhttps;name=3D=
+perfetto;nobranch=3D1"
++
++SRCREV_perfetto =3D "1c52b5e132312aeb007ed180d4ba1d8d66227923"
++PV =3D "27.1"
++
++S =3D "${WORKDIR}/git"
+--=20
+2.34.1
 
 
