@@ -2,68 +2,71 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 08544C4332F
-	for <webhook@archiver.kernel.org>; Tue, 18 Oct 2022 01:08:17 +0000 (UTC)
-Received: from mail1.bemta32.messagelabs.com (mail1.bemta32.messagelabs.com [195.245.230.66])
- by mx.groups.io with SMTP id smtpd.web12.1838.1666055294522626776
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E5A3EC43217
+	for <webhook@archiver.kernel.org>; Tue, 18 Oct 2022 01:08:26 +0000 (UTC)
+Received: from mail1.bemta34.messagelabs.com (mail1.bemta34.messagelabs.com [195.245.231.2])
+ by mx.groups.io with SMTP id smtpd.web09.1751.1666055305048248092
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 17 Oct 2022 18:08:15 -0700
+ Mon, 17 Oct 2022 18:08:26 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=pPAnyqKi;
- spf=pass (domain: fujitsu.com, ip: 195.245.230.66, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=ODY6R9p5;
+ spf=pass (domain: fujitsu.com, ip: 195.245.231.2, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1666055292; i=@fujitsu.com;
-	bh=AzYUPIYaRaHRDTnzF7BWUXQSXgt5ftv6zKAafunTx4M=;
-	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=pPAnyqKiTIxOHIIMlfo6BERuITuSvCyWe32hcnsydo38Uu0EzSJuvY02BOWbf2k5A
-	 4EUKozQU1JmcDDcvwkDWpLtU6bw7AXrbKgdkMRqfPmeWL6yKfkLB1LXeG4jxdFkgG3
-	 pRhwKDdsRrpk7QVFskY/6o3zR4caPMXNx8tJrL+DPcfGgPCxyUB0/HWtXx5X/Nv0as
-	 hJJgC64VFEHXJBbHvKgBgAMhcZHPTCtBi1uw4ub978cx4d7M9enxdBBqOKyMS/GZgJ
-	 J/FQMVsqyz6LsWSEoBUicbEKWeABeHyIeJGAPjLK5eSxCd9Y7hP+mBgY2GlOjmcC1U
-	 1x9lq3HTXw9Tw==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrNIsWRWlGSWpSXmKPExsViZ8ORqFvzxzf
-  Z4Nc5HouLh5cyOzB6nNu4gjGAMYo1My8pvyKBNWPu42OMBce4Kn5d/8ncwPiBs4uRi0NI4Amj
-  xL4DR1kgnOtMEleOrWaCcPYwShydt4Wxi5GTg01ATWL6rRusILaIgL7E0tl7mEFsZgEViRe/e
-  9hBbGEBP4kV07eC2SwCqhJP5j4FquHg4BVwlJhwwgAkLCGgIDHl4XuwVl4BQYmTM5+wQIyRkD
-  j44gUzRI2ixOzLzSwQdoXErFltTBC2msTVc5uYJzDyz0LSPgtJ+wJGplWMpsWpRWWpRbqmekl
-  FmekZJbmJmTl6iVW6iXqppbrlqcUluoZ6ieXFeqnFxXrFlbnJOSl6eaklmxiBoZhSzFi2g7F7
-  2R+9Q4ySHExKorwdM3yThfiS8lMqMxKLM+KLSnNSiw8xynBwKEnwdvwAygkWpaanVqRl5gDjA
-  iYtwcGjJMIbdQYozVtckJhbnJkOkTrFaM8xdfa//cwcy8HkzK9tB5g5mv//PsAsxJKXn5cqJc
-  57+jdQmwBIW0ZpHtxQWBxfYpSVEuZlZGBgEOIpSC3KzSxBlX/FKM7BqCTMm/oLaApPZl4J3O5
-  XQGcxAZ2Vsd8L5KySRISUVAOTpVYun2iPi1Dji+XOQiyv+6MM/UOVLnPtUPkr4LnStc7zWQnb
-  E83WiVtyBSw3x2wRMb1/UuZnTZVI27TqqEkS4feYJ4Z5X/vi5LbLRGrp1Jj97qVBu+SuTzGd7
-  KgnksDJ3hnM9eGXhe0X16sLJMTOlvKpndcIPaEtIvTjlFwgqxSvfN7lHX3n+l7Zxc9f9P3K73
-  iDjLri7GyFDXx7utgUZfVmGosXZe1z3PPo2t83e784irz4tmqf1/1YlnPs8us3yrz99LJjaWL
-  9uowCo6ynP00fM7XeSi38+c0vRKFx75w97BNF/kbIzH13Y29ddrXX1+O/3F2T82dtfngr/pS9
-  zbv/s096Bd6fH2O7T02JpTgj0VCLuag4EQAiUIfKXgMAAA==
+	s=170520fj; t=1666055303; i=@fujitsu.com;
+	bh=zdfH5am61uVPENTYRd3lhkup5Wx+HQ4z3wnRKwNudqA=;
+	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type;
+	b=ODY6R9p56aHy51LPeUpcgz35rvOvbnM2if3Z5Kp7glfi7ft03jBMa5PAwogotPcrC
+	 zggb4v28OVydXQplIZCmd9E06eSTvtCulFC3lV1vOeW+rCQ+4fEGozWNXnps51Nsgm
+	 6kmZsfgyYaEBUrOshI5kaQloeFctPUILx+1mXhVdEPofXUAGeg7v5O4OjvV9iXdB5S
+	 bHzjyuNWqY2zgRZZAho3os8upLq55LtGgLlhE86i23VT0yprwpOrSyP8c2TwRmwkTj
+	 nfyd5G/XVbuitCdL8rqSDgDUKYfpOFhPDyZIe+Ja4hGgV/qsA2tL3f1yCb6adbADSt
+	 97OY90nRvJ5JA==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrMIsWRWlGSWpSXmKPExsViZ8ORpNv2xzf
+  Z4E63lMXFw0uZHRg9zm1cwRjAGMWamZeUX5HAmnHq6RyWghaOiv7GpWwNjEvZuxi5OIQEHjJK
+  NP1pZYVwrjBJTJ01lxHC2cMocebOKpYuRk4ONgE1iem3brCC2CIC+hJLZ+9hBrGZBVQkXvzuY
+  QexhQU8JJbuvAlWzyKgKjH/1wpGEJtXwFHi7aa1YHEJAQWJKQ/fg/VyCjhJPN25AGymEFDN6f
+  ln2CHqBSVOznzCAjFfQuLgixfMEL2KErMvN0PNqZCYNauNCcJWk7h6bhPzBEbBWUjaZyFpX8D
+  ItIrRrDi1qCy1SNfQWC+pKDM9oyQ3MTNHL7FKN1EvtVS3PLW4RNdIL7G8WC+1uFivuDI3OSdF
+  Ly+1ZBMjMHxTihVn7GD8t+yP3iFGSQ4mJVHejhm+yUJ8SfkplRmJxRnxRaU5qcWHGGU4OJQke
+  Dt+AOUEi1LTUyvSMnOAsQSTluDgURLhjToDlOYtLkjMLc5Mh0idYtTlmPm17QCzEEtefl6qlD
+  jv6d9ARQIgRRmleXAjYHF9iVFWSpiXkYGBQYinILUoN7MEVf4VozgHo5Iwb+ovoCk8mXklcJt
+  eAR3BBHRExn4vkCNKEhFSUg1MBZ+v7bz4R3U727aG/rPVvWanvKf9lD8psqlfunBN1AG3BXI/
+  Cuz1Vl9U3Ot5kEfxpv13pqN6URnlLjs81jIZZ57/tGqu51Gj6Xvk1garBQddWry8ZIHunS1MW
+  dq8IoryL2dy+/JsqNuiNiGor/qV1aPgQCa3LXskfVeY5qfv3/81+oq95P5ve7oWNzKp/wxbd2
+  /FNK6m7kUGrpnllbMnzfPg8ErRn5/+VUxEmVHX9PD6uCeW2RHOvNIaa8s2VV37G7KVf3Xww6c
+  JVauX737ydKqvVPUOptlH1tjMPpbXXMyW0mCXsNJ5VrfpbPsz102r+4458hUJHlHSrt51+K5J
+  YWNEfEQs98/TJwviC4yUWIozEg21mIuKEwETwu0zZgMAAA==
 X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-7.tower-591.messagelabs.com!1666055292!278382!1
-X-Originating-IP: [62.60.8.97]
+X-Msg-Ref: server-7.tower-548.messagelabs.com!1666055302!11282!1
+X-Originating-IP: [62.60.8.98]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
-X-StarScan-Version: 9.87.3; banners=-,-,-
+X-StarScan-Version: 9.100.1; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 3709 invoked from network); 18 Oct 2022 01:08:12 -0000
-Received: from unknown (HELO n03ukasimr01.n03.fujitsu.local) (62.60.8.97)
-  by server-7.tower-591.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 18 Oct 2022 01:08:12 -0000
-Received: from n03ukasimr01.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTP id D14F110018D
-	for <openembedded-devel@lists.openembedded.org>; Tue, 18 Oct 2022 02:08:11 +0100 (BST)
+Received: (qmail 3300 invoked from network); 18 Oct 2022 01:08:22 -0000
+Received: from unknown (HELO n03ukasimr03.n03.fujitsu.local) (62.60.8.98)
+  by server-7.tower-548.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 18 Oct 2022 01:08:22 -0000
+Received: from n03ukasimr03.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr03.n03.fujitsu.local (Postfix) with ESMTP id 268531AE
+	for <openembedded-devel@lists.openembedded.org>; Tue, 18 Oct 2022 02:08:22 +0100 (BST)
 Received: from R01UKEXCASM126.r01.fujitsu.local (R01UKEXCASM126 [10.183.43.178])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTPS id C5D8E100043
-	for <openembedded-devel@lists.openembedded.org>; Tue, 18 Oct 2022 02:08:11 +0100 (BST)
+	by n03ukasimr03.n03.fujitsu.local (Postfix) with ESMTPS id 1B5821AC
+	for <openembedded-devel@lists.openembedded.org>; Tue, 18 Oct 2022 02:08:22 +0100 (BST)
 Received: from localhost.localdomain (10.167.225.33) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.32; Tue, 18 Oct 2022 02:08:10 +0100
+ (TLS) id 15.0.1497.32; Tue, 18 Oct 2022 02:08:20 +0100
 From: Wang Mingyu <wangmy@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-oe] [PATCH] gst-editing-services: upgrade 1.20.3 -> 1.20.4
-Date: Tue, 18 Oct 2022 09:07:52 +0800
-Message-ID: <1666055276-8042-1-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-networking] [PATCH] nbdkit: upgrade 1.33.1 -> 1.33.2
+Date: Tue, 18 Oct 2022 09:07:54 +0800
+Message-ID: <1666055276-8042-3-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
+In-Reply-To: <1666055276-8042-1-git-send-email-wangmy@fujitsu.com>
+References: <1666055276-8042-1-git-send-email-wangmy@fujitsu.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-Originating-IP: [10.167.225.33]
@@ -73,30 +76,30 @@ X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 18 Oct 2022 01:08:17 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99212
+ <openembedded-devel@lists.openembedded.org>; Tue, 18 Oct 2022 01:08:26 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99214
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- ...diting-services_1.20.3.bb => gst-editing-services_1.20.4.bb} | 2 +-
+ .../nbdkit/{nbdkit_1.33.1.bb => nbdkit_1.33.2.bb}               | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-devtools/gst-editing-services/{gst-editing-services_1.20.3.bb => gst-editing-services_1.20.4.bb} (92%)
+ rename meta-networking/recipes-support/nbdkit/{nbdkit_1.33.1.bb => nbdkit_1.33.2.bb} (95%)
 
-diff --git a/meta-oe/recipes-devtools/gst-editing-services/gst-editing-services_1.20.3.bb b/meta-oe/recipes-devtools/gst-editing-services/gst-editing-services_1.20.4.bb
-similarity index 92%
-rename from meta-oe/recipes-devtools/gst-editing-services/gst-editing-services_1.20.3.bb
-rename to meta-oe/recipes-devtools/gst-editing-services/gst-editing-services_1.20.4.bb
-index d14869b06b..37f7746846 100644
---- a/meta-oe/recipes-devtools/gst-editing-services/gst-editing-services_1.20.3.bb
-+++ b/meta-oe/recipes-devtools/gst-editing-services/gst-editing-services_1.20.4.bb
-@@ -18,7 +18,7 @@ inherit meson pkgconfig upstream-version-is-even gobject-introspection features_
- EXTRA_OEMESON = "-Dvalidate=disabled"
+diff --git a/meta-networking/recipes-support/nbdkit/nbdkit_1.33.1.bb b/meta-networking/recipes-support/nbdkit/nbdkit_1.33.2.bb
+similarity index 95%
+rename from meta-networking/recipes-support/nbdkit/nbdkit_1.33.1.bb
+rename to meta-networking/recipes-support/nbdkit/nbdkit_1.33.2.bb
+index 322f89c22b..ad7b9a6fab 100644
+--- a/meta-networking/recipes-support/nbdkit/nbdkit_1.33.1.bb
++++ b/meta-networking/recipes-support/nbdkit/nbdkit_1.33.2.bb
+@@ -11,7 +11,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=f9dcc2d8acdde215fa4bd6ac12bb14f0"
  
- SRC_URI = "http://gstreamer.freedesktop.org/src/gst-editing-services/gst-editing-services-${PV}.tar.xz"
--SRC_URI[sha256sum] = "5fd896de69fbe24421eb6b0ff8d2f8b4c3cba3f3025ceacd302172f39a8abaa2"
-+SRC_URI[sha256sum] = "aa03e983af5d79c1befffe3575b034e60960619a96bf877447cb73c28016fc41"
+ SRC_URI = "git://github.com/libguestfs/nbdkit.git;protocol=https;branch=master \
+ "
+-SRCREV = "9ebc70dae82220f962167b1668fd2af6de886b16"
++SRCREV = "9e2fdefc1ba4c883c5e6aa4f32ab21777980a978"
  
- PACKAGES += "gst-validate-launcher libges"
+ S = "${WORKDIR}/git"
  
 -- 
 2.25.1
