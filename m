@@ -2,71 +2,68 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id F3EA6C433FE
-	for <webhook@archiver.kernel.org>; Tue, 18 Oct 2022 01:07:06 +0000 (UTC)
-Received: from mail1.bemta32.messagelabs.com (mail1.bemta32.messagelabs.com [195.245.230.1])
- by mx.groups.io with SMTP id smtpd.web10.1698.1666055218171852323
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 08544C4332F
+	for <webhook@archiver.kernel.org>; Tue, 18 Oct 2022 01:08:17 +0000 (UTC)
+Received: from mail1.bemta32.messagelabs.com (mail1.bemta32.messagelabs.com [195.245.230.66])
+ by mx.groups.io with SMTP id smtpd.web12.1838.1666055294522626776
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 17 Oct 2022 18:06:58 -0700
+ Mon, 17 Oct 2022 18:08:15 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=RDUXZgwD;
- spf=pass (domain: fujitsu.com, ip: 195.245.230.1, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=pPAnyqKi;
+ spf=pass (domain: fujitsu.com, ip: 195.245.230.66, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1666055216; i=@fujitsu.com;
-	bh=87nFM01dNvIHwHjhPPP6dXRZffesV8Yg5bQCxN6qQOM=;
-	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type;
-	b=RDUXZgwDb3IxZ78pZLFHSV0U6bJ6zClNN17CpIU7Om/V76bJ089ehYS80IEw1fJkh
-	 Cgbjze6OvXwkawO1Y0E7TbuQ9okvG4LqMn/VRfr0GVSPtvqC19wG0siZqX+WLCJUgi
-	 yuPURBql1zZ/lzBQ+EJzoVQ4cni/iuKWT3gayRJz4zvt9U0e+1fUv4ZPsQnSRRnApm
-	 jMJ/9scfkBDk7awtaAIIBeX/SaSOurpEvn4cFfVuOyaCn+tmbQ0KglzgES29xvbLyn
-	 aycpKTMaoY1wB69YgDbvj1HDkwErJdhnF1NV3Rd6r2nUPdtXKoAFujn/3vR8azOJ0M
-	 gVciDKMqFE5pA==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrEIsWRWlGSWpSXmKPExsViZ8ORpKv7xzf
-  Z4NBaXYuLh5cyOzB6nNu4gjGAMYo1My8pvyKBNaP9zV/WgoW8FY9u/mNrYLzF3cXIxSEk8JBR
-  YkfLZHYI5wqTxMKd+1khnD2MEn8v3GTpYuTkYBNQk5h+6wYriC0ioC+xdPYeZhCbWUBF4sXvH
-  qBuDg5hAXuJjpYCkDCLgKpE76EpjCA2r4CjxIEnP9hAbAkBBYkpD9+DtXIKOEn8a3oIZgsB1U
-  y8tIAFol5Q4uTMJywQ4yUkDr54wQzRqygx+3IzC4RdITFrVhsThK0mcfXcJuYJjIKzkLTPQtK
-  +gJFpFaNZcWpRWWqRrqGZXlJRZnpGSW5iZo5eYpVuol5qqW55anGJrqFeYnmxXmpxsV5xZW5y
-  TopeXmrJJkZg8KYUMz3fwXh22R+9Q4ySHExKorwdM3yThfiS8lMqMxKLM+KLSnNSiw8xynBwK
-  EnwdvwAygkWpaanVqRl5gAjCSYtwcGjJMIbdQYozVtckJhbnJkOkTrFqMsx82vbAWYhlrz8vF
-  QpcV7D30BFAiBFGaV5cCNgUX2JUVZKmJeRgYFBiKcgtSg3swRV/hWjOAejkjDvm59AU3gy80r
-  gNr0COoIJ6IiM/V4gR5QkIqSkGphalKs+vy4s0lNiUTWVNl32XL7Ge0lBqLDqonTGvt0e0r9P
-  7/Ev3pL/+8IMfwW3V4t7NR5t0bOY07zy2BeOxc7RX9bfnnR6/YVPRjIzJgYUF0YZqB6si39uN
-  fUv546cre9/8cf/Wnw5Pniy0pLqY1VzRDxKXaOjrrxem1Ij4tAmnPfII7Fj1d7bf8UexehpfP
-  uiyff3ikb77vJLW3pPPXp6KyhTqcHhX8qRuOfW/hrqE4/EHHn4wJPnebfmd05lOZ2/z1o2XJh
-  qskhwx12TWZJH1p0NZr9Um1p0M7dLgyvyJefDprNbr0Tlh67ILj4ySeJgRMAb4wNxYnFJ75lq
-  Vnrv3ybvtPz4/T8bGN6HWSQrsRRnJBpqMRcVJwIAHYpIXGUDAAA=
+	s=170520fj; t=1666055292; i=@fujitsu.com;
+	bh=AzYUPIYaRaHRDTnzF7BWUXQSXgt5ftv6zKAafunTx4M=;
+	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
+	b=pPAnyqKiTIxOHIIMlfo6BERuITuSvCyWe32hcnsydo38Uu0EzSJuvY02BOWbf2k5A
+	 4EUKozQU1JmcDDcvwkDWpLtU6bw7AXrbKgdkMRqfPmeWL6yKfkLB1LXeG4jxdFkgG3
+	 pRhwKDdsRrpk7QVFskY/6o3zR4caPMXNx8tJrL+DPcfGgPCxyUB0/HWtXx5X/Nv0as
+	 hJJgC64VFEHXJBbHvKgBgAMhcZHPTCtBi1uw4ub978cx4d7M9enxdBBqOKyMS/GZgJ
+	 J/FQMVsqyz6LsWSEoBUicbEKWeABeHyIeJGAPjLK5eSxCd9Y7hP+mBgY2GlOjmcC1U
+	 1x9lq3HTXw9Tw==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrNIsWRWlGSWpSXmKPExsViZ8ORqFvzxzf
+  Z4Nc5HouLh5cyOzB6nNu4gjGAMYo1My8pvyKBNWPu42OMBce4Kn5d/8ncwPiBs4uRi0NI4Amj
+  xL4DR1kgnOtMEleOrWaCcPYwShydt4Wxi5GTg01ATWL6rRusILaIgL7E0tl7mEFsZgEViRe/e
+  9hBbGEBP4kV07eC2SwCqhJP5j4FquHg4BVwlJhwwgAkLCGgIDHl4XuwVl4BQYmTM5+wQIyRkD
+  j44gUzRI2ixOzLzSwQdoXErFltTBC2msTVc5uYJzDyz0LSPgtJ+wJGplWMpsWpRWWpRbqmekl
+  FmekZJbmJmTl6iVW6iXqppbrlqcUluoZ6ieXFeqnFxXrFlbnJOSl6eaklmxiBoZhSzFi2g7F7
+  2R+9Q4ySHExKorwdM3yThfiS8lMqMxKLM+KLSnNSiw8xynBwKEnwdvwAygkWpaanVqRl5gDjA
+  iYtwcGjJMIbdQYozVtckJhbnJkOkTrFaM8xdfa//cwcy8HkzK9tB5g5mv//PsAsxJKXn5cqJc
+  57+jdQmwBIW0ZpHtxQWBxfYpSVEuZlZGBgEOIpSC3KzSxBlX/FKM7BqCTMm/oLaApPZl4J3O5
+  XQGcxAZ2Vsd8L5KySRISUVAOTpVYun2iPi1Dji+XOQiyv+6MM/UOVLnPtUPkr4LnStc7zWQnb
+  E83WiVtyBSw3x2wRMb1/UuZnTZVI27TqqEkS4feYJ4Z5X/vi5LbLRGrp1Jj97qVBu+SuTzGd7
+  KgnksDJ3hnM9eGXhe0X16sLJMTOlvKpndcIPaEtIvTjlFwgqxSvfN7lHX3n+l7Zxc9f9P3K73
+  iDjLri7GyFDXx7utgUZfVmGosXZe1z3PPo2t83e784irz4tmqf1/1YlnPs8us3yrz99LJjaWL
+  9uowCo6ynP00fM7XeSi38+c0vRKFx75w97BNF/kbIzH13Y29ddrXX1+O/3F2T82dtfngr/pS9
+  zbv/s096Bd6fH2O7T02JpTgj0VCLuag4EQAiUIfKXgMAAA==
 X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-5.tower-587.messagelabs.com!1666055213!282664!1
-X-Originating-IP: [62.60.8.98]
+X-Msg-Ref: server-7.tower-591.messagelabs.com!1666055292!278382!1
+X-Originating-IP: [62.60.8.97]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.87.3; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 27567 invoked from network); 18 Oct 2022 01:06:53 -0000
-Received: from unknown (HELO n03ukasimr03.n03.fujitsu.local) (62.60.8.98)
-  by server-5.tower-587.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 18 Oct 2022 01:06:53 -0000
-Received: from n03ukasimr03.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr03.n03.fujitsu.local (Postfix) with ESMTP id 57EE31AF
-	for <openembedded-devel@lists.openembedded.org>; Tue, 18 Oct 2022 02:06:53 +0100 (BST)
+Received: (qmail 3709 invoked from network); 18 Oct 2022 01:08:12 -0000
+Received: from unknown (HELO n03ukasimr01.n03.fujitsu.local) (62.60.8.97)
+  by server-7.tower-591.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 18 Oct 2022 01:08:12 -0000
+Received: from n03ukasimr01.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTP id D14F110018D
+	for <openembedded-devel@lists.openembedded.org>; Tue, 18 Oct 2022 02:08:11 +0100 (BST)
 Received: from R01UKEXCASM126.r01.fujitsu.local (R01UKEXCASM126 [10.183.43.178])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by n03ukasimr03.n03.fujitsu.local (Postfix) with ESMTPS id 4D1D81AE
-	for <openembedded-devel@lists.openembedded.org>; Tue, 18 Oct 2022 02:06:53 +0100 (BST)
+	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTPS id C5D8E100043
+	for <openembedded-devel@lists.openembedded.org>; Tue, 18 Oct 2022 02:08:11 +0100 (BST)
 Received: from localhost.localdomain (10.167.225.33) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.32; Tue, 18 Oct 2022 02:06:51 +0100
+ (TLS) id 15.0.1497.32; Tue, 18 Oct 2022 02:08:10 +0100
 From: Wang Mingyu <wangmy@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-oe] [PATCH] freerdp: upgrade 2.8.0 -> 2.8.1
-Date: Tue, 18 Oct 2022 09:06:16 +0800
-Message-ID: <1666055176-8001-5-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH] gst-editing-services: upgrade 1.20.3 -> 1.20.4
+Date: Tue, 18 Oct 2022 09:07:52 +0800
+Message-ID: <1666055276-8042-1-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
-In-Reply-To: <1666055176-8001-1-git-send-email-wangmy@fujitsu.com>
-References: <1666055176-8001-1-git-send-email-wangmy@fujitsu.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-Originating-IP: [10.167.225.33]
@@ -76,51 +73,31 @@ X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 18 Oct 2022 01:07:06 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99211
-
-Changelog:
-============
-Notewhorth changes:
-
-Fixed CVE-2022-39282
-Fixed CVE-2022-39283
-Added missing commit for backported #8041: Remove ALAW/ULAW codecs from linux backends (unreliable)
-Added hash checks for android build script dependencies
-Fixed issues:
-
-#8190: Fix build break with newer FFMPEG versions
-#8234: Updated flatpak with build script
-#8210: Better execinfo support check for android
-#7708: Header now defines DumpThreadHandles
-#8176: Check fullscreen state and not setting
-#8236: Send resize on window state change
-#7611: Audin macOS monterey fix
-#8291: Android build script update
-Fix length checks and initialization in the deprecated (disabled per default) tsmf channel
+ <openembedded-devel@lists.openembedded.org>; Tue, 18 Oct 2022 01:08:17 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99212
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../freerdp/{freerdp_2.8.0.bb => freerdp_2.8.1.bb}              | 2 +-
+ ...diting-services_1.20.3.bb => gst-editing-services_1.20.4.bb} | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-support/freerdp/{freerdp_2.8.0.bb => freerdp_2.8.1.bb} (98%)
+ rename meta-oe/recipes-devtools/gst-editing-services/{gst-editing-services_1.20.3.bb => gst-editing-services_1.20.4.bb} (92%)
 
-diff --git a/meta-oe/recipes-support/freerdp/freerdp_2.8.0.bb b/meta-oe/recipes-support/freerdp/freerdp_2.8.1.bb
-similarity index 98%
-rename from meta-oe/recipes-support/freerdp/freerdp_2.8.0.bb
-rename to meta-oe/recipes-support/freerdp/freerdp_2.8.1.bb
-index 33782e56b7..5f539671bc 100644
---- a/meta-oe/recipes-support/freerdp/freerdp_2.8.0.bb
-+++ b/meta-oe/recipes-support/freerdp/freerdp_2.8.1.bb
-@@ -13,7 +13,7 @@ inherit pkgconfig cmake gitpkgv
- PE = "1"
- PKGV = "${GITPKGVTAG}"
+diff --git a/meta-oe/recipes-devtools/gst-editing-services/gst-editing-services_1.20.3.bb b/meta-oe/recipes-devtools/gst-editing-services/gst-editing-services_1.20.4.bb
+similarity index 92%
+rename from meta-oe/recipes-devtools/gst-editing-services/gst-editing-services_1.20.3.bb
+rename to meta-oe/recipes-devtools/gst-editing-services/gst-editing-services_1.20.4.bb
+index d14869b06b..37f7746846 100644
+--- a/meta-oe/recipes-devtools/gst-editing-services/gst-editing-services_1.20.3.bb
++++ b/meta-oe/recipes-devtools/gst-editing-services/gst-editing-services_1.20.4.bb
+@@ -18,7 +18,7 @@ inherit meson pkgconfig upstream-version-is-even gobject-introspection features_
+ EXTRA_OEMESON = "-Dvalidate=disabled"
  
--SRCREV = "e3fc97feb512053189e276b2ca79762990bb8c4c"
-+SRCREV = "0ad3f49f0e7eb78586acc6bf6e4605f96f88954e"
- SRC_URI = "git://github.com/FreeRDP/FreeRDP.git;branch=stable-2.0;protocol=https \
-     file://winpr-makecert-Build-with-install-RPATH.patch \
- "
+ SRC_URI = "http://gstreamer.freedesktop.org/src/gst-editing-services/gst-editing-services-${PV}.tar.xz"
+-SRC_URI[sha256sum] = "5fd896de69fbe24421eb6b0ff8d2f8b4c3cba3f3025ceacd302172f39a8abaa2"
++SRC_URI[sha256sum] = "aa03e983af5d79c1befffe3575b034e60960619a96bf877447cb73c28016fc41"
+ 
+ PACKAGES += "gst-validate-launcher libges"
+ 
 -- 
 2.25.1
 
