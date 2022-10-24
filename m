@@ -2,67 +2,67 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0A3A6C3A59D
-	for <webhook@archiver.kernel.org>; Mon, 24 Oct 2022 06:40:56 +0000 (UTC)
-Received: from mail1.bemta37.messagelabs.com (mail1.bemta37.messagelabs.com [85.158.142.1])
- by mx.groups.io with SMTP id smtpd.web12.16441.1666593649288439962
+	by smtp.lore.kernel.org (Postfix) with ESMTP id F3955C3A59D
+	for <webhook@archiver.kernel.org>; Mon, 24 Oct 2022 06:42:05 +0000 (UTC)
+Received: from mail1.bemta34.messagelabs.com (mail1.bemta34.messagelabs.com [195.245.231.3])
+ by mx.groups.io with SMTP id smtpd.web08.16287.1666593717435768553
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 23 Oct 2022 23:40:49 -0700
+ Sun, 23 Oct 2022 23:41:57 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=VHgRkfaK;
- spf=pass (domain: fujitsu.com, ip: 85.158.142.1, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=WGIKBpQn;
+ spf=pass (domain: fujitsu.com, ip: 195.245.231.3, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1666593647; i=@fujitsu.com;
-	bh=GAG7JT2NGQKsLgvt7nUaJ67+RxfpXqdUv1NzVVQnsf4=;
+	s=170520fj; t=1666593715; i=@fujitsu.com;
+	bh=tEf5yfmaNcsF0x2lJFVF9Zh+CZv1EReheuhuLkgU0SA=;
 	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=VHgRkfaKoRIHIIO79CWqWXBkBJomzQLrbgYToFIbHzp+KvZuUDz1tJuVBjPIJshGB
-	 TBJSvf2pjBxdcNIwZo66hBwFAk3MTik5c5wpYotLwAsRSz4kIxnAPtcF/JftF8KI+Y
-	 Ld9ugwEj2ikg0fx6j3lnWK1PcoumbH7pWWr/t0VtFGnHyB0/n01QHIuo74MS6JABA9
-	 ZPIfTrbQe3PhlnNCo4V8Zfp50EQJG1MGQajc+qdCQUko4ldYIb0yZUoAL2yYW3G9n+
-	 0ps0EsoMMxTTT594KlQD39q5h/FVWnnxEIY6sbGjgwQ1gkI/C+QmFTQvx/wib1gnF9
-	 Eh4Q+q+Nix8Og==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrFIsWRWlGSWpSXmKPExsViZ8OxWTfPOCz
-  Z4PVaZYuLh5cyOzB6nNu4gjGAMYo1My8pvyKBNePr5CVsBdt5KqbOuszYwLiDu4uRi0NI4CGj
-  xL2fm1kgnMtMEndbv7BBOHsYJRouzAFyODnYBKQkbtz/D2aLCOhLLJ29hxnEZhZQkXjxu4cdx
-  BYW8JeYeeweYxcjBweLgKrExRlFICavgJPExAYZkAoJAQWJKQ/fg3XyCghKnJz5hAViioTEwR
-  cvmCFqFCVmX25mgbArJGbNamOCsNUkrp7bxDyBkX8WkvZZSNoXMDKtYjQvTi0qSy3SNTTSSyr
-  KTM8oyU3MzNFLrNJN1Est1c3LLyrJ0DXUSywv1kstLtYrrsxNzknRy0st2cQIDMaU4uS7Oxg7
-  l//RO8QoycGkJMrLIB6WLMSXlJ9SmZFYnBFfVJqTWnyIUYaDQ0mCt0YLKCdYlJqeWpGWmQOMD
-  Ji0BAePkghvghFQmre4IDG3ODMdInWKUZdj5te2A8xCLHn5ealS4rx8IEUCIEUZpXlwI2BReo
+	b=WGIKBpQnu6NUIDCIMalxNZmMe3a3XNaT0ee8W+PDe4pf/dhJnQz3pT9ZAjErYzm+g
+	 4UgjruxKYB257MwEqF9aFvHpAtdAfYApDINj9BMieNnAkblLJU+bWDqujDPdrBSxMM
+	 hyHWSnNVhm9RfAxBPkg18/oM9+tFEsc8PXzwLvzLKW9u8gMfYoeNSBX5160zNIQZf3
+	 fBMfLDKQmv6+ebN6Xvan8eMIbY1ZSCOWmeXIOPuCJQB+DTzuwOmrxlsd0sTo8DhuNT
+	 0iMKwV20AUwHjLNl7sQ4bDUET4O2FEbW/3KEDHKldaRJOCJtBvlxmAKGyX8S/S17y4
+	 uvjuJDa8/UVzA==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrBIsWRWlGSWpSXmKPExsViZ8MxSXezcVi
+  ywdePkhYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8aUzotsBbvEKg4sm83YwHhGuIuRi0NI4Amj
+  RPvWaUxdjJxAznUmie9roiASexglnradZQVJsAlISdy4/58NxBYR0JdYOnsPM4jNLKAi8eJ3D
+  zuILSwQJrGi+SRQnIODRUBV4m5bMojJK+AksXeaDUiFhICCxJSH78E6eQUEJU7OfMICMUVC4u
+  CLF8wQNYoSsy83s0DYFRKzZrUxQdhqElfPbWKewMg/C0n7LCTtCxiZVjGaFacWlaUW6Roa6CU
+  VZaZnlOQmZuboJVbpJuqlluqWpxaX6BrpJZYX66UWF+sVV+Ym56To5aWWbGIEBmJKsUrfDsa3
+  y/7oHWKU5GBSEuVlEA9LFuJLyk+pzEgszogvKs1JLT7EKMPBoSTBW6MFlBMsSk1PrUjLzAFGB
+  UxagoNHSYR3lhFQmre4IDG3ODMdInWKUZdj5te2A8xCLHn5ealS4rx8IEUCIEUZpXlwI2AReo
   lRVkqYl5GBgUGIpyC1KDezBFX+FaM4B6OSMO9sA6ApPJl5JXCbXgEdwQR0xKUVQSBHlCQipKQ
-  amOT7/v66Z7OFl8ltIdOy/qnsx5flJOvPtzh3d3Mvz/O3jWqZiQd0hAV7ZmaLfJAvCT85n/lq
-  gOzUOw/tpwkHW386/yDZ7J/c/0IpB3XRKzkVS7fJyb9LmyYraVegXuXsqDvt6Le6Y9PFPxmms
-  nqkXs+4HLPgvZb4/bOb3f6rqM6O5l+xTYAnT2lCYeVMw8P77Wx1i9J2mUw76vtqyf1vmxcXnZ
-  ryPVyTsexbUdUPgXM2eeVXs8pX9/Y5rdzya8q/IAF5u4wjb6Z1XyqX/yl6YkPm3NoA984fyW8
-  /CLXbP9s01Xc+A7cKbwrnuffs9W0/t3FEtKoV5TM0GrC9Mnl4UfBe1e75Z9c7TOS1erV/vxJL
-  cUaioRZzUXEiACc5ZZ5NAwAA
+  amHq0r/0WO+KTEbg179+d97NzuRZzcH5aslOp4VjJhSoBhrrJ0rvqXx957jPn9EbvghuLqyyL
+  X+WLGei6d6zizzm5M9X+/cfavuh5a9gd/ge8uBtXa5a/+H3n8cgkvm05m/8XM5+61T69fzqTF
+  9OqxS08fyfqT1B3NmCVMD9WlFkovu/hj5LW1Ce5aYcF719+HTTZ5f6D51Vvv99SO355yZk3+W
+  Vf3zz5tc2u6U5E3eH0DeeVVhvyabSwyt4Oy0l/f4n3TuIDruVPr51w+tEQ/OXXlSKpslullZo
+  5bWcle/YL8tvqaDl9TRaI7Xu61fVD+OeaIp4HGl+v+oV94Jw4WW6xsLrqhC+cx/vWK+tz7lZi
+  Kc5INNRiLipOBAB4+l1dSwMAAA==
 X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-13.tower-745.messagelabs.com!1666593646!196188!1
-X-Originating-IP: [62.60.8.179]
+X-Msg-Ref: server-7.tower-548.messagelabs.com!1666593715!111544!1
+X-Originating-IP: [62.60.8.146]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.100.1; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 9197 invoked from network); 24 Oct 2022 06:40:46 -0000
-Received: from unknown (HELO n03ukasimr04.n03.fujitsu.local) (62.60.8.179)
-  by server-13.tower-745.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 24 Oct 2022 06:40:46 -0000
-Received: from n03ukasimr04.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTP id 14781142
-	for <openembedded-devel@lists.openembedded.org>; Mon, 24 Oct 2022 07:40:46 +0100 (BST)
+Received: (qmail 13832 invoked from network); 24 Oct 2022 06:41:55 -0000
+Received: from unknown (HELO n03ukasimr02.n03.fujitsu.local) (62.60.8.146)
+  by server-7.tower-548.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 24 Oct 2022 06:41:55 -0000
+Received: from n03ukasimr02.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTP id 22FC21000E7
+	for <openembedded-devel@lists.openembedded.org>; Mon, 24 Oct 2022 07:41:55 +0100 (BST)
 Received: from R01UKEXCASM126.r01.fujitsu.local (R01UKEXCASM126 [10.183.43.178])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTPS id 07D097B
-	for <openembedded-devel@lists.openembedded.org>; Mon, 24 Oct 2022 07:40:46 +0100 (BST)
+	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTPS id 15CEF1000DC
+	for <openembedded-devel@lists.openembedded.org>; Mon, 24 Oct 2022 07:41:55 +0100 (BST)
 Received: from localhost.localdomain (10.167.225.33) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.32; Mon, 24 Oct 2022 07:40:44 +0100
+ (TLS) id 15.0.1497.32; Mon, 24 Oct 2022 07:41:53 +0100
 From: <wangmy@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-python] [PATCH] python3-portalocker: upgrade 2.5.1 -> 2.6.0
-Date: Mon, 24 Oct 2022 14:40:27 +0800
-Message-ID: <1666593628-28701-1-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH] python3-charset-normalizer: upgrade 2.1.1 -> 3.0.0
+Date: Mon, 24 Oct 2022 14:41:36 +0800
+Message-ID: <1666593696-28739-1-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
 Content-Type: text/plain
@@ -73,41 +73,63 @@ X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 24 Oct 2022 06:40:56 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99273
+ <openembedded-devel@lists.openembedded.org>; Mon, 24 Oct 2022 06:42:05 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99274
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
-License-Update: updated to BSD-3-Clause
-
 Changelog:
-==========
-Added fileno() support. Fixes #80 on posix systems
+===========
+Added
+
+    Extend the capability of explain=True when cp_isolation contains at most two entries (min one), will log in details of the Mess-detector results
+    Support for alternative language frequency set in charset_normalizer.assets.FREQUENCIES
+    Add parameter language_threshold in from_bytes, from_path and from_fp to adjust the minimum expected coherence ratio
+    normalizer --version now specify if current version provide extra speedup (meaning mypyc compilation whl)
+
+Changed
+
+    Build with static metadata using 'build' frontend
+    Make the language detection stricter
+    Optional: Module md.py can be compiled using Mypyc to provide an extra speedup up to 4x faster than v2.1
+
+Fixed
+
+    CLI with opt --normalize fail when using full path for files
+    TooManyAccentuatedPlugin induce false positive on the mess detection when too few alpha character have been fed to it
+    Sphinx warnings when generating the documentation
+
+Removed
+
+    Coherence detector no longer return 'Simple English' instead return 'English'
+    Coherence detector no longer return 'Classical Chinese' instead return 'Chinese'
+    Breaking: Method first() and best() from CharsetMatch
+    UTF-7 will no longer appear as "detected" without a recognized SIG/mark (is unreliable/conflict with ASCII)
+    Breaking: Class aliases CharsetDetector, CharsetDoctor, CharsetNormalizerMatch and CharsetNormalizerMatches
+    Breaking: Top-level function normalize
+    Breaking: Properties chaos_secondary_pass, coherence_non_latin and w_counter from CharsetMatch
+    Support for the backport unicodedata2
+
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- ...n3-portalocker_2.5.1.bb => python3-portalocker_2.6.0.bb} | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-python/recipes-extended/python3-portalocker/{python3-portalocker_2.5.1.bb => python3-portalocker_2.6.0.bb} (59%)
+ ...-normalizer_2.1.1.bb => python3-charset-normalizer_3.0.0.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-charset-normalizer_2.1.1.bb => python3-charset-normalizer_3.0.0.bb} (82%)
 
-diff --git a/meta-python/recipes-extended/python3-portalocker/python3-portalocker_2.5.1.bb b/meta-python/recipes-extended/python3-portalocker/python3-portalocker_2.6.0.bb
-similarity index 59%
-rename from meta-python/recipes-extended/python3-portalocker/python3-portalocker_2.5.1.bb
-rename to meta-python/recipes-extended/python3-portalocker/python3-portalocker_2.6.0.bb
-index 55037d1ebd..1762ae3a5e 100644
---- a/meta-python/recipes-extended/python3-portalocker/python3-portalocker_2.5.1.bb
-+++ b/meta-python/recipes-extended/python3-portalocker/python3-portalocker_2.6.0.bb
-@@ -1,10 +1,10 @@
- SUMMARY = "Cross-platform locking library"
- DESCRIPTION = "Portalocker is a library to provide an easy API to file locking"
--LICENSE = "PSF-2.0"
-+LICENSE = "BSD-3-Clause"
+diff --git a/meta-python/recipes-devtools/python/python3-charset-normalizer_2.1.1.bb b/meta-python/recipes-devtools/python/python3-charset-normalizer_3.0.0.bb
+similarity index 82%
+rename from meta-python/recipes-devtools/python/python3-charset-normalizer_2.1.1.bb
+rename to meta-python/recipes-devtools/python/python3-charset-normalizer_3.0.0.bb
+index 1ab72e53d1..895f88a62e 100644
+--- a/meta-python/recipes-devtools/python/python3-charset-normalizer_2.1.1.bb
++++ b/meta-python/recipes-devtools/python/python3-charset-normalizer_3.0.0.bb
+@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/ousret/charset_normalizer"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=0974a390827087287db39928f7c524b5"
  
--LIC_FILES_CHKSUM = "file://LICENSE;md5=f9273424c73af966635d66eb53487e14"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=152634da660a374ca18c0734ed07c63c"
- 
--SRC_URI[sha256sum] = "ae8e9cc2660da04bf41fa1a0eef7e300bb5e4a5869adfb1a6d8551632b559b2b"
-+SRC_URI[sha256sum] = "964f6830fb42a74b5d32bce99ed37d8308c1d7d44ddf18f3dd89f4680de97b39"
+-SRC_URI[sha256sum] = "5a3d016c7c547f69d6f81fb0db9449ce888b418b5b9952cc5e6e66843e9dd845"
++SRC_URI[sha256sum] = "b27d10ad15740b45fd55f76e6901a4391e6dca3917ef48ecdcf17edf6e00d770"
  
  inherit pypi setuptools3
  
