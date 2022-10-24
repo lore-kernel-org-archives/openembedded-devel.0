@@ -2,68 +2,68 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BD1B2FA373F
-	for <webhook@archiver.kernel.org>; Mon, 24 Oct 2022 05:51:05 +0000 (UTC)
-Received: from mail1.bemta34.messagelabs.com (mail1.bemta34.messagelabs.com [195.245.231.1])
- by mx.groups.io with SMTP id smtpd.web08.16026.1666590659440487306
+	by smtp.lore.kernel.org (Postfix) with ESMTP id ACA1BC38A2D
+	for <webhook@archiver.kernel.org>; Mon, 24 Oct 2022 05:51:15 +0000 (UTC)
+Received: from mail1.bemta32.messagelabs.com (mail1.bemta32.messagelabs.com [195.245.230.66])
+ by mx.groups.io with SMTP id smtpd.web12.16207.1666590664528757359
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 23 Oct 2022 22:51:00 -0700
+ Sun, 23 Oct 2022 22:51:05 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=WD66btL7;
- spf=pass (domain: fujitsu.com, ip: 195.245.231.1, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=v61vBCjx;
+ spf=pass (domain: fujitsu.com, ip: 195.245.230.66, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1666590657; i=@fujitsu.com;
-	bh=CzhjIIfdo1XifTJr2LZJxzww11JPsQVpAGT1lr3DO+o=;
+	s=170520fj; t=1666590662; i=@fujitsu.com;
+	bh=ETu6FbLJM6ZN3SN/jfIvVFPFWWYN1grhEsQyw/78POQ=;
 	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
 	 MIME-Version:Content-Type;
-	b=WD66btL7Uj/mV7I0P7xCG+QmmU5k1y3Wiz2cpRCYrwNEYrg2UYFGC0W3x+f/ZHR9B
-	 z0NBDRITqnW70s+ObumZQSJW2Ec+AtAh7+k/OYfZsQ99GLl/+SMpmHHkgPG7X6bwMe
-	 5ZhL8pHt1yQTMys8gI34fl5sCy+CbWTLOdN+Qma0NhY/sDqIuebjYIidAck5XMrbLH
-	 hOtRQsF3hLgDc/W20U4VhXZt2+e7tn3LKB/DmX05U7N9mGBOu7teZC9XPSyLzybFz+
-	 u0nhRuDgkIyEZAt7cEXKeCwp+xFA1NkK79GCV+f/8B4nRWSX32FT0ouR+8OI/yQHnq
-	 6XUdG9JZQXPbQ==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrNIsWRWlGSWpSXmKPExsViZ8MxSfegeli
-  ywZ90i4uHlzI7MHqc27iCMYAxijUzLym/IoE149vyxcwFNzgq1rXMY21g/M/excjFISTwhFHi
-  wMrnrBDOdSaJnbeeADmcQM4eRokX981AbDYBKYkb9/+zgdgiAvoSS2fvYQaxmQVUJF787gGax
-  MEhLOAv8f9AMUiYRUBVYtW6LSwgNq+Ak0T/r0NgrRICChJTHr4Ha+UUcJZYuvIoI8QqJ4kN83
-  YzQtQLSpyc+YQFYryExMEXL5ghehUlZl9uZoGwKyRmzWpjgrDVJK6e28Q8gVFwFpL2WUjaFzA
-  yrWI0LU4tKkst0rXUSyrKTM8oyU3MzNFLrNJN1Est1S1PLS7RNdJLLC/WSy0u1iuuzE3OSdHL
-  Sy3ZxAgM25RiddUdjOeW/dE7xCjJwaQkyssgHpYsxJeUn1KZkVicEV9UmpNafIhRhoNDSYL3p
-  DJQTrAoNT21Ii0zBxhDMGkJDh4lEd6LIGne4oLE3OLMdIjUKUZLjqmz/+1n5lgOJmd+bTvALM
-  SSl5+XKiXOe1YFqEEApCGjNA9uHCzOLzHKSgnzMjIwMAjxFKQW5WaWoMq/YhTnYFQS5p0PMoU
-  nM68EbusroIOYgA66tCII5KCSRISUVANTSNu9VlNT5rmMaqnVmaulA4Uf/Ly6+VDjmXKby4+M
-  rXhW3zKeO/Ot+59Vqp/Or7PYwXwtYsLp20cnHuWSv/Tv/qrvNp8P2CU+/2q4e94204TvN6Jfz
-  dMVWP1tQfY/8w+GQrw+lwVvrj5cHnNPylo3brXi1s2rGkPuNPrebTpwdU5IRFvVknssUVZ6QZ
-  q5BtPCApeZbD/5YVGe7FdTxczjOTE3U/eG1vb96FkjtZ6lh6ssY3Voueu0n4YX95rtPj/j37q
-  /j71C9tTaf0v+F7TYXENaZW9n8upnj9YUvlbd8vop0y3GH4eEGM+9rvycoqJrOOfgijK9PQW7
-  SwKNN/3vOScfdO1i/CydlXMM090dTimxFGckGmoxFxUnAgCq6zUcbgMAAA==
+	b=v61vBCjxjtG112pSQFGQlaPW14rMxUvN3wluKr6dT3p3JPSs5uovkNQj2Lzyg//uy
+	 1fLgEUg3JhLsropBWrTR9HBOeJPIDPZLtNlZLmY4I4fETlFLcIwWbMAgjRku3hNG7P
+	 tMrXMFq25+YuQv2y3LEF1PuTuICDb8DJJY9P8euozkxR/ApxgB+mpd07rijoCfJouY
+	 Ojmquz6mqJX4SUhmEEhBX2wzEkKEeXVBolm+wN2Bj2EHYDt6qMQnsiryNL8+EVsbzu
+	 NtXeWZErO0js3z2TDuk910hf8K3/z0+sPMCYDn5MqU+PhZed6pv77/s7uPeG2PI+CI
+	 eZ7+W2cXzNcvg==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrJIsWRWlGSWpSXmKPExsViZ8OxWfeYeli
+  ywZctwhYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa0bD+kaWgtWcFVt6vjA1MG7l6GLk4hASeMgo
+  8ePQLhYI5zKTxOqNt9ghnD2MEo0nTzJ1MXJysAlISdy4/58NxBYR0JdYOnsPM4jNLKAi8eJ3D
+  zuILSzgIvF79ncWEJtFQFXi+K9GsBpeASeJrv9vwWwJAQWJKQ/fg9mcAs4SS1ceZQSxhYBqNs
+  zbzQhRLyhxcuYTFoj5EhIHX7yA6lWUmH25mQXCrpCYNauNCcJWk7h6bhPzBEbBWUjaZyFpX8D
+  ItIrRrDi1qCy1SNfIQC+pKDM9oyQ3MTNHL7FKN1EvtVS3PLW4RNdQL7G8WC+1uFivuDI3OSdF
+  Ly+1ZBMjMHxTihmn7GDsWfZH7xCjJAeTkigvg3hYshBfUn5KZUZicUZ8UWlOavEhRhkODiUJ3
+  pPKQDnBotT01Iq0zBxgLMGkJTh4lER4L4KkeYsLEnOLM9MhUqcYjTnWNhzYy8wx82vbAWYhlr
+  z8vFQpcd6zKkClAiClGaV5cINgMX6JUVZKmJeRgYFBiKcgtSg3swRV/hWjOAejkjDvfJApPJl
+  5JXD7XgGdwgR0yqUVQSCnlCQipKQamGZOPVK99+D9w/EsAjzqige//5vG80De6cju3MvTsp53
+  LHrcYvPZ80Hyw0SjzIXVLZvMNW/7/18hZ2qq8P7y5iD9z+0VRm/eiGR4yqw2tUza8OZa049U2
+  Q/LXpyW6Zz+O2ffAr7VVzSX23ttD97UEh1TuXxd08KHT2aHv3DctWTC+e1M7NnMj3/W3auQNM
+  oOVdpuIHFK4pLcq4mPe/a/m+Ow5Ij2ele55qdt2y6Es9lbr9VdkSJ95FPMvWuq1stnMhxneDD
+  Nam3U5A3RzG8WNmZe2qGTKxnJaTJdxuFR/5WVL7gCpcKDXld3KU2c4R6af2LH42XbrYykhTxl
+  b0z6f3q31gZJz1QdEVPD73/8zk5QYinOSDTUYi4qTgQAO58Om2wDAAA=
 X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-4.tower-565.messagelabs.com!1666590656!202766!1
-X-Originating-IP: [62.60.8.146]
+X-Msg-Ref: server-15.tower-587.messagelabs.com!1666590662!194312!1
+X-Originating-IP: [62.60.8.179]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.100.1; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 16344 invoked from network); 24 Oct 2022 05:50:57 -0000
-Received: from unknown (HELO n03ukasimr02.n03.fujitsu.local) (62.60.8.146)
-  by server-4.tower-565.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 24 Oct 2022 05:50:57 -0000
-Received: from n03ukasimr02.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTP id B81D51000E7
-	for <openembedded-devel@lists.openembedded.org>; Mon, 24 Oct 2022 06:50:56 +0100 (BST)
+Received: (qmail 3226 invoked from network); 24 Oct 2022 05:51:02 -0000
+Received: from unknown (HELO n03ukasimr04.n03.fujitsu.local) (62.60.8.179)
+  by server-15.tower-587.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 24 Oct 2022 05:51:02 -0000
+Received: from n03ukasimr04.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTP id E894C142
+	for <openembedded-devel@lists.openembedded.org>; Mon, 24 Oct 2022 06:51:01 +0100 (BST)
 Received: from R01UKEXCASM126.r01.fujitsu.local (R01UKEXCASM126 [10.183.43.178])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTPS id AB5751000D2
-	for <openembedded-devel@lists.openembedded.org>; Mon, 24 Oct 2022 06:50:56 +0100 (BST)
+	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTPS id DC18B73
+	for <openembedded-devel@lists.openembedded.org>; Mon, 24 Oct 2022 06:51:01 +0100 (BST)
 Received: from localhost.localdomain (10.167.225.33) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.32; Mon, 24 Oct 2022 06:50:55 +0100
+ (TLS) id 15.0.1497.32; Mon, 24 Oct 2022 06:51:00 +0100
 From: <wangmy@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-oe] [PATCH] ctags: upgrade 5.9.20221009.0 -> 5.9.20221016.0
-Date: Mon, 24 Oct 2022 13:50:30 +0800
-Message-ID: <1666590633-27850-2-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH] makedumpfile: upgrade 1.7.1 -> 1.7.2
+Date: Mon, 24 Oct 2022 13:50:32 +0800
+Message-ID: <1666590633-27850-4-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 In-Reply-To: <1666590633-27850-1-git-send-email-wangmy@fujitsu.com>
 References: <1666590633-27850-1-git-send-email-wangmy@fujitsu.com>
@@ -76,33 +76,38 @@ X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 24 Oct 2022 05:51:05 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99263
+ <openembedded-devel@lists.openembedded.org>; Mon, 24 Oct 2022 05:51:15 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99264
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
+Changelog:
+=========
+- LoongArch64 architecture support
+- Support kernels up to v6.0 (x86_64)
+
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../ctags/{ctags_5.9.20221009.0.bb => ctags_5.9.20221016.0.bb}  | 2 +-
+ .../{makedumpfile_1.7.1.bb => makedumpfile_1.7.2.bb}            | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-devtools/ctags/{ctags_5.9.20221009.0.bb => ctags_5.9.20221016.0.bb} (95%)
+ rename meta-oe/recipes-kernel/makedumpfile/{makedumpfile_1.7.1.bb => makedumpfile_1.7.2.bb} (96%)
 
-diff --git a/meta-oe/recipes-devtools/ctags/ctags_5.9.20221009.0.bb b/meta-oe/recipes-devtools/ctags/ctags_5.9.20221016.0.bb
-similarity index 95%
-rename from meta-oe/recipes-devtools/ctags/ctags_5.9.20221009.0.bb
-rename to meta-oe/recipes-devtools/ctags/ctags_5.9.20221016.0.bb
-index 5564a9b853..809f578803 100644
---- a/meta-oe/recipes-devtools/ctags/ctags_5.9.20221009.0.bb
-+++ b/meta-oe/recipes-devtools/ctags/ctags_5.9.20221016.0.bb
-@@ -14,7 +14,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3"
+diff --git a/meta-oe/recipes-kernel/makedumpfile/makedumpfile_1.7.1.bb b/meta-oe/recipes-kernel/makedumpfile/makedumpfile_1.7.2.bb
+similarity index 96%
+rename from meta-oe/recipes-kernel/makedumpfile/makedumpfile_1.7.1.bb
+rename to meta-oe/recipes-kernel/makedumpfile/makedumpfile_1.7.2.bb
+index eb004c2ed5..1c3538a3da 100644
+--- a/meta-oe/recipes-kernel/makedumpfile/makedumpfile_1.7.1.bb
++++ b/meta-oe/recipes-kernel/makedumpfile/makedumpfile_1.7.2.bb
+@@ -11,7 +11,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
+ LICENSE = "GPL-2.0-only"
  
- inherit autotools-brokensep pkgconfig manpages
+ SRCBRANCH ?= "master"
+-SRCREV = "74bbdd14ec861552ace1ca63953eb2ef73e1f965"
++SRCREV = "9fefc6848d0b3765760e709cfe92fb9d76d5d452"
  
--SRCREV = "5d506a1a3b6850f05de5e785c5d14cfd6f9b1620"
-+SRCREV = "a2995833175678358767e1c9a36ad3946667edf1"
- SRC_URI = "git://github.com/universal-ctags/ctags;branch=master;protocol=https"
- 
- S = "${WORKDIR}/git"
+ DEPENDS = "bzip2 zlib elfutils xz"
+ RDEPENDS:${PN}-tools = "perl ${PN}"
 -- 
 2.25.1
 
