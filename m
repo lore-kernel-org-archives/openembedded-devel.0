@@ -1,98 +1,70 @@
-Return-Path: <f_l_k@t-online.de>
+Return-Path: <robert.joslyn@redrectangle.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 96977C433FE
-	for <webhook@archiver.kernel.org>; Sat, 22 Oct 2022 13:53:15 +0000 (UTC)
-Received: from mailout05.t-online.de (mailout05.t-online.de [194.25.134.82])
- by mx.groups.io with SMTP id smtpd.web12.6340.1666446787445486509
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 91004C433FE
+	for <webhook@archiver.kernel.org>; Mon, 24 Oct 2022 01:27:54 +0000 (UTC)
+Received: from relay8-d.mail.gandi.net (relay8-d.mail.gandi.net [217.70.183.201])
+ by mx.groups.io with SMTP id smtpd.web10.14778.1666574872647397317
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 22 Oct 2022 06:53:07 -0700
+ Sun, 23 Oct 2022 18:27:53 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=SPF record not found (domain: t-online.de, ip: 194.25.134.82, mailfrom: f_l_k@t-online.de)
-Received: from fwd70.dcpf.telekom.de (fwd70.aul.t-online.de [10.223.144.96])
-	by mailout05.t-online.de (Postfix) with SMTP id C9DEA9CF6
-	for <openembedded-devel@lists.openembedded.org>; Sat, 22 Oct 2022 15:53:03 +0200 (CEST)
-Received: from flk-MS-7C91.. ([84.163.47.116]) by fwd70.t-online.de
-	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1omEvv-0Dz1Cj0; Sat, 22 Oct 2022 15:53:03 +0200
-From: Markus Volk <f_l_k@t-online.de>
+ dkim=pass header.i=@redrectangle.org header.s=gm1 header.b=BibZi/Y/;
+ spf=none, err=permanent DNS error (domain: redrectangle.org, ip: 217.70.183.201, mailfrom: robert.joslyn@redrectangle.org)
+Received: (Authenticated sender: robert.joslyn@redrectangle.org)
+	by mail.gandi.net (Postfix) with ESMTPSA id 7E7ED1BF205;
+	Mon, 24 Oct 2022 01:27:48 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redrectangle.org;
+	s=gm1; t=1666574870;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding;
+	bh=oXMeGi0NDUeAddZMJqu7Ozlyrcx/W8eFxh5D3vN1hWI=;
+	b=BibZi/Y/5rhXouVazPTpuaXhgG3yu9rM01NXZ1/dJ2LZpYLYisQk/pjisKfA1UmqUJ4lsg
+	E9RvzCEQoYe2kiELSDLjwqD7hdpAZ4pcfdCZ89l45S7A5y4N/scrk8J9vNHWJRu8HesalX
+	1Gur73mAD8Oky6doWQrPT49xLwbsfhylT7Z6yZ9QBDOTMk4NzbmJWKI68rO+eQu/ofHO/0
+	PfHGm+cdTUJMOnKxIHG6Bppssp32YkrIDDLvINz7JowOqhkxQM97l+vbz164XFR6o4HgV6
+	Ha8vB/cQucBE3AMy/3Vi1v9H8Mrw1VWofpXO9GKvwpm4U9yheMHgx8vlTGn8Mg==
+From: Robert Joslyn <robert.joslyn@redrectangle.org>
 To: openembedded-devel@lists.openembedded.org
-Cc: Markus Volk <f_l_k@t-online.de>
-Subject: [meta-multimedia][PATCHv2] libcamera: upgrade -> 0.0.1
-Date: Sat, 22 Oct 2022 15:52:46 +0200
-Message-Id: <20221022135246.1689613-1-f_l_k@t-online.de>
-X-Mailer: git-send-email 2.34.1
+Cc: Robert Joslyn <robert.joslyn@redrectangle.org>
+Subject: [meta-oe][master][langdale][PATCH] fwupd: Fix plugin_gpio PACKAGECONFIG
+Date: Sun, 23 Oct 2022 18:27:16 -0700
+Message-Id: <20221024012716.1444793-1-robert.joslyn@redrectangle.org>
+X-Mailer: git-send-email 2.37.4
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1666446783-4AFF5689-713D81BF/0/0 CLEAN NORMAL
-X-TOI-MSGID: 0d357e8a-77e7-4844-8079-fe3af30ec900
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 22 Oct 2022 13:53:15 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99260
+ <openembedded-devel@lists.openembedded.org>; Mon, 24 Oct 2022 01:27:54 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99261
 
-libcamera has recently received its first release.
-Note: meta-raspberrypi needs to adjust the name of libcamera.bbappend
+Trying to disable the gpio plugin results in an error
 
-Signed-off-by: Markus Volk <f_l_k@t-online.de>
+	ERROR: Option 'plugin_gpio' must have a value separated by equals sign.
+
+Correct the PACKAGECONFIG for this option so it can be disabled.
+
+Signed-off-by: Robert Joslyn <robert.joslyn@redrectangle.org>
 ---
- .../{libcamera.bb =3D> libcamera_0.0.1.bb}       | 18 +++++-------------
- 1 file changed, 5 insertions(+), 13 deletions(-)
- rename meta-multimedia/recipes-multimedia/libcamera/{libcamera.bb =3D> l=
-ibcamera_0.0.1.bb} (74%)
+ meta-oe/recipes-bsp/fwupd/fwupd_1.8.4.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-multimedia/recipes-multimedia/libcamera/libcamera.bb b/=
-meta-multimedia/recipes-multimedia/libcamera/libcamera_0.0.1.bb
-similarity index 74%
-rename from meta-multimedia/recipes-multimedia/libcamera/libcamera.bb
-rename to meta-multimedia/recipes-multimedia/libcamera/libcamera_0.0.1.bb
-index 53cd94cbf..2b77d9937 100644
---- a/meta-multimedia/recipes-multimedia/libcamera/libcamera.bb
-+++ b/meta-multimedia/recipes-multimedia/libcamera/libcamera_0.0.1.bb
-@@ -12,9 +12,9 @@ SRC_URI =3D " \
-         git://git.libcamera.org/libcamera/libcamera.git;protocol=3Dhttps=
-;branch=3Dmaster \
- "
-=20
--SRCREV =3D "ed591e705c451d0ce14988ae96829a31a2ae2f9a"
-+SRCREV =3D "a83aed77df1258e469c0eb42d9cb4f1938db53f2"
-=20
--PV =3D "202105+git${SRCPV}"
-+PE =3D "1"
-=20
- S =3D "${WORKDIR}/git"
-=20
-@@ -45,8 +45,8 @@ do_configure:prepend() {
- }
-=20
- do_install:append() {
--    chrpath -d ${D}${libdir}/libcamera.so.0.0.0
--    chrpath -d ${D}${libdir}/libcamera-base.so.0.0.0
-+    chrpath -d ${D}${libdir}/libcamera.so
-+    chrpath -d ${D}${libdir}/v4l2-compat.so
- }
-=20
- addtask do_recalculate_ipa_signatures_package after do_package before do=
-_packagedata
-@@ -62,13 +62,5 @@ do_recalculate_ipa_signatures_package() {
-     ${S}/src/ipa/ipa-sign-install.sh ${B}/src/ipa-priv-key.pem "${module=
-s}"
- }
-=20
--FILES:${PN}-dev =3D "${includedir} ${libdir}/pkgconfig"
--FILES:${PN}-dev +=3D " ${libdir}/libcamera.so"
--FILES:${PN} +=3D " ${libdir}/libcamera.so.0"
--FILES:${PN} +=3D " ${libdir}/libcamera.so.0.0.0"
--FILES:${PN}-dev +=3D " ${libdir}/libcamera-base.so"
--FILES:${PN} +=3D " ${libdir}/libcamera-base.so.0"
--FILES:${PN} +=3D " ${libdir}/libcamera-base.so.0.0.0"
- FILES:${PN} +=3D " ${libdir}/v4l2-compat.so"
--FILES:${PN}-gst =3D "${libdir}/gstreamer-1.0/libgstlibcamera.so"
--FILES:${PN} +=3D " ${bindir}/cam"
-+FILES:${PN}-gst =3D "${libdir}/gstreamer-1.0"
---=20
-2.34.1
+diff --git a/meta-oe/recipes-bsp/fwupd/fwupd_1.8.4.bb b/meta-oe/recipes-bsp/fwupd/fwupd_1.8.4.bb
+index 72f37aea8..99077923d 100644
+--- a/meta-oe/recipes-bsp/fwupd/fwupd_1.8.4.bb
++++ b/meta-oe/recipes-bsp/fwupd/fwupd_1.8.4.bb
+@@ -83,7 +83,7 @@ PACKAGECONFIG[plugin_emmc] = "-Dplugin_emmc=true,-Dplugin_emmc=false"
+ PACKAGECONFIG[plugin_ep963x] = "-Dplugin_ep963x=true,-Dplugin_ep963x=false"
+ PACKAGECONFIG[plugin_fastboot] = "-Dplugin_fastboot=true,-Dplugin_fastboot=false"
+ PACKAGECONFIG[plugin_flashrom] = "-Dplugin_flashrom=true,-Dplugin_flashrom=false,flashrom"
+-PACKAGECONFIG[plugin_gpio] = "-Dplugin_gpio=true,-Dplugin_gpio"
++PACKAGECONFIG[plugin_gpio] = "-Dplugin_gpio=true,-Dplugin_gpio=false"
+ PACKAGECONFIG[plugin_intel_spi] = "-Dplugin_intel_spi=true -Dlzma=true,-Dplugin_intel_spi=false -Dlzma=false,xz"
+ PACKAGECONFIG[plugin_logitech_bulkcontroller] = "-Dplugin_logitech_bulkcontroller=true,-Dplugin_logitech_bulkcontroller=false,protobuf-c-native protobuf-c"
+ PACKAGECONFIG[plugin_modem_manager] = "-Dplugin_modem_manager=true,-Dplugin_modem_manager=false,libqmi modemmanager"
+-- 
+2.37.4
 
 
