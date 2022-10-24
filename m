@@ -1,137 +1,107 @@
-Return-Path: <wangmy@fujitsu.com>
+Return-Path: <zhengrq.fnst@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D068FC3A59D
-	for <webhook@archiver.kernel.org>; Mon, 24 Oct 2022 06:38:25 +0000 (UTC)
-Received: from mail3.bemta32.messagelabs.com (mail3.bemta32.messagelabs.com [195.245.230.18])
- by mx.groups.io with SMTP id smtpd.web11.16252.1666593501847166046
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D2176C38A2D
+	for <webhook@archiver.kernel.org>; Mon, 24 Oct 2022 06:38:55 +0000 (UTC)
+Received: from mail1.bemta32.messagelabs.com (mail1.bemta32.messagelabs.com [195.245.230.2])
+ by mx.groups.io with SMTP id smtpd.web12.16430.1666593525623324952
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 23 Oct 2022 23:38:22 -0700
+ Sun, 23 Oct 2022 23:38:46 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=O57rU402;
- spf=pass (domain: fujitsu.com, ip: 195.245.230.18, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=ND3m4soS;
+ spf=pass (domain: fujitsu.com, ip: 195.245.230.2, mailfrom: zhengrq.fnst@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1666593500; i=@fujitsu.com;
-	bh=1olntGHP4gUvZXjwiDVKPXQILeN0l6+D4rMJ3saa1Ko=;
-	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=O57rU402duz7wTZA3qDa5Nta38lrx1C3Fo+9DgHUadg898MrJ2se5T4WANsIw/b7X
-	 oQIfAZyOqpsjSItY7s/uihdgvAmCVmMQrV/6ozPS+Wm+ZTbuJnhi1nryC6DsG+WMuO
-	 wdq7s6nHIrF7BjoJVLNfPjZmmr1NeAA1qwOFhkJTsM9Puqg7eF8pGNkTSt7pimsqG6
-	 f/srpQst05aRQxR3tKkDRvEbHto9/ktxkqNYGFfB4uUTlLyTBTGTK8T61aNcPaSAfg
-	 /zARRoblelnHMLQhPjJX07R23RgZt+EfwA4TvId4Ns1lQEsoHkiyYwx6JpdDmBbrG/
-	 X9OvqovqhtbWw==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrIIsWRWlGSWpSXmKPExsViZ8OxWfe2UVi
-  ywY4jKhYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8atCY4FFwQrnjfNYmxgPMnfxcjFISTwgFHi
-  XUcXG4RzmUni2cL7UM4eRoln346zdDFycrAJSEncuP+fDcQWEdCXWDp7DzOIzSygIvHidw87i
-  C0sYC9xes09RhCbRUBV4vqpW0wgNq+Ak8TqL7fAaiQEFCSmPHzPDBEXlDg58wkLxBwJiYMvXj
-  BD1ChKzL7czAJhV0jMmtXGBGGrSVw9t4l5AiP/LCTts5C0L2BkWsVoWpxaVJZapGuml1SUmZ5
-  RkpuYmaOXWKWbqJdaqlueWlyia6iXWF6sl1pcrFdcmZuck6KXl1qyiREYiinF7AU7GGcu+6N3
-  iFGSg0lJlJdBPCxZiC8pP6UyI7E4I76oNCe1+BCjDAeHkgRvjRZQTrAoNT21Ii0zBxgXMGkJD
-  h4lEd5nhkBp3uKCxNzizHSI1ClGV46rV67sZeaYOvvffmaO5WBy5te2A8wcm/Z1HWAWYsnLz0
-  uVEueNAmkWAGnOKM2DGw2L6UuMslLCvIwMDAxCPAWpRbmZJajyrxjFORiVhHlnGwBN4cnMK4G
-  74BXQcUxAx11aEQRyXEkiQkqqgWnCj2kdT4LD8lee75okX/3xiMicFdsrLZrtF/7gby5s02/c
-  Jy52fMvWj/a9+19lxM+rfF18h0FEhq3BgdM7P9GCl123wbnh58ZHHene+xYHVGzu3JbRnH+iS
-  fT9tHsRfQvOpWl/eCIpH1tdqjGNZWbwV43fAt5vJX9sDP5l7/89Ytpjy5z125XCYzz3Wa6pNa
-  hLnnjt3xeDvxNO/e0S3zF75tfqX3fkJ/W/17cKNnSY+XKq7Oe48xlV26RYDpdHOrKdFLz/g+f
-  GDWGnEF8ls0OHDHniNcxmdpxcXrfO48zkAPUur4WF8ZNUUw3kD27InJM5NcMpconRyndrDU4X
-  PhXWLf61e1dPu3XBkUeO/kosxRmJhlrMRcWJAByycXlkAwAA
-X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-6.tower-585.messagelabs.com!1666593499!199463!1
-X-Originating-IP: [62.60.8.179]
+	s=170520fj; t=1666593523; i=@fujitsu.com;
+	bh=IgWiN5arUBaj9QiRyEbXDyloqlxUUJPi3pevHKIejKw=;
+	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type;
+	b=ND3m4soSDW7OEJ+i0siL0xAjDale81WRekFIO498YG9cE8ZQcyC2gtQNIBTXKLouD
+	 YEAhl+RFJXD6MOwNHmzO4QIxcYyGUgFPj1DZItS65KyQnI5BPHRRvSd1nMmx3xOyrY
+	 1UPau9dXr18ctr+qx/InbKR0yoSqzGGcItTSAL9+f/WjqoBzyelnAGiTluf1WsMEqF
+	 umV6UI66vtAHPqoA6edg65UrGI0tJ36G6EMqWQyzrJTepAkKaIoL8f9JREsydXrsxe
+	 RUzPm3ynLMlJ/5ND1bmt76a6GF3Me3drkz2NHWM+aVmJfWqZMK4q9LKyjijfqwOCM0
+	 bgoNPC6mMFTyQ==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrJIsWRWlGSWpSXmKPExsViZ8MxSfezUVi
+  ywfFf0hYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8a+hZUF6zkrHna3szcwnuHoYuTiEBJ4wiix
+  b8l8ZgjnOpPEg5enWSGcA4wSd1ousnQxcnKwCShILNx6hhXEFhHQl1g6ew8ziC0s4CVxfNJRs
+  DiLgKpE2/xmMJtXwF1i7aoJ7CC2BFDvlIfvmSHighInZz4Bm8ksICFx8MULoDgHUI2ixOzp8h
+  DlFRKzZrUxQdhqElfPbWKewMg3C0n3LCTdCxiZVjGaFacWlaUW6Rqa6CUVZaZnlOQmZuboJVb
+  pJuqlluqWpxaX6BrqJZYX66UWF+sVV+Ym56To5aWWbGIEhlxKMduqHYy/lv3RO8QoycGkJMrL
+  IB6WLMSXlJ9SmZFYnBFfVJqTWnyIUYaDQ0mCt0YLKCdYlJqeWpGWmQMMf5i0BAePkgjvM0OgN
+  G9xQWJucWY6ROoUoyXH1Nn/9jNzLAeTM7+2HWAWYsnLz0uVEueNAmkQAGnIKM2DGweL0UuMsl
+  LCvIwMDAxCPAWpRbmZJajyrxjFORiVhHlnGwBN4cnMK4Hb+groICaggy6tCAI5qCQRISXVwGS
+  16ahW/1fp1xdElbL8AnviFmW9WJBtWb59goNS08lJKx7sn3LsyiJ+/2hloU9zV38Oi/v657Jw
+  jbfoTmV5IeUdWf8XOS0yabaYrMywJfvS4do7c2c/X3XP+XSFa8i5LR0fOp7kxRlYv1/SV/rV0
+  EQs62LQxBVnWNzudjqzl25lKg8+a7v4qmza8vopxycv4V1eP1NuY0prm5iKuOmrOxIcS6J6y5
+  +o5ZjeruNz/uqz6qWj0uavLYrfj/4IiFIQP32jKeObY7Wv72dG5y1TI1lM1lmK/vggdNV65k8
+  3rkNH77Xueac6ZfLEX3Ny5tWt2cL33WDCv423DBgqUwM3Xw09na5vrWH4wnndKW4BoQtKLMUZ
+  iYZazEXFiQC+DbzMTAMAAA==
+X-Env-Sender: zhengrq.fnst@fujitsu.com
+X-Msg-Ref: server-10.tower-587.messagelabs.com!1666593523!250586!1
+X-Originating-IP: [62.60.8.146]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.100.1; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 18554 invoked from network); 24 Oct 2022 06:38:19 -0000
-Received: from unknown (HELO n03ukasimr04.n03.fujitsu.local) (62.60.8.179)
-  by server-6.tower-585.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 24 Oct 2022 06:38:19 -0000
-Received: from n03ukasimr04.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTP id 3A7C67B
-	for <openembedded-devel@lists.openembedded.org>; Mon, 24 Oct 2022 07:38:19 +0100 (BST)
+Received: (qmail 27904 invoked from network); 24 Oct 2022 06:38:43 -0000
+Received: from unknown (HELO n03ukasimr02.n03.fujitsu.local) (62.60.8.146)
+  by server-10.tower-587.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 24 Oct 2022 06:38:43 -0000
+Received: from n03ukasimr02.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTP id 1B5D01000DC
+	for <openembedded-devel@lists.openembedded.org>; Mon, 24 Oct 2022 07:38:43 +0100 (BST)
 Received: from R01UKEXCASM126.r01.fujitsu.local (R01UKEXCASM126 [10.183.43.178])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTPS id 2DE0C73
-	for <openembedded-devel@lists.openembedded.org>; Mon, 24 Oct 2022 07:38:19 +0100 (BST)
-Received: from localhost.localdomain (10.167.225.33) by
+	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTPS id 0E4951000D2
+	for <openembedded-devel@lists.openembedded.org>; Mon, 24 Oct 2022 07:38:43 +0100 (BST)
+Received: from CentOS7.g08.fujitsu.local (10.167.225.35) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.32; Mon, 24 Oct 2022 07:38:17 +0100
-From: <wangmy@fujitsu.com>
+ (TLS) id 15.0.1497.32; Mon, 24 Oct 2022 07:38:41 +0100
+From: <zhengrq.fnst@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-oe] [PATCH] sanlock: upgrade 3.8.4 -> 3.8.5
-Date: Mon, 24 Oct 2022 14:37:58 +0800
-Message-ID: <1666593480-28643-1-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH] python3-xxhash: upgrade 3.0.0 -> 3.1.0
+Date: Mon, 24 Oct 2022 14:38:33 +0800
+Message-ID: <1666593513-2652-1-git-send-email-zhengrq.fnst@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
 Content-Type: text/plain
-X-Originating-IP: [10.167.225.33]
+X-Originating-IP: [10.167.225.35]
 X-ClientProxiedBy: G08CNEXCHPEKD07.g08.fujitsu.local (10.167.33.80) To
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
 X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 24 Oct 2022 06:38:25 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99271
+ <openembedded-devel@lists.openembedded.org>; Mon, 24 Oct 2022 06:38:55 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99272
 
-From: Wang Mingyu <wangmy@fujitsu.com>
+Changelog:
+=========
+ Type annotations.
+ Enabled muslinux wheels building.
 
-setuptools.patch
-removed since it's included in 3.8.5.
-
-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+Signed-off-by: Zheng Ruoqin <zhengrq.fnst@fujitsu.com>
 ---
- .../sanlock/sanlock/setuptools.patch           | 18 ------------------
- .../{sanlock_3.8.4.bb => sanlock_3.8.5.bb}     |  3 +--
- 2 files changed, 1 insertion(+), 20 deletions(-)
- delete mode 100644 meta-oe/recipes-extended/sanlock/sanlock/setuptools.patch
- rename meta-oe/recipes-extended/sanlock/{sanlock_3.8.4.bb => sanlock_3.8.5.bb} (95%)
+ .../python/{python3-xxhash_3.0.0.bb => python3-xxhash_3.1.0.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-xxhash_3.0.0.bb => python3-xxhash_3.1.0.bb} (83%)
 
-diff --git a/meta-oe/recipes-extended/sanlock/sanlock/setuptools.patch b/meta-oe/recipes-extended/sanlock/sanlock/setuptools.patch
-deleted file mode 100644
-index c375e10f75..0000000000
---- a/meta-oe/recipes-extended/sanlock/sanlock/setuptools.patch
-+++ /dev/null
-@@ -1,18 +0,0 @@
--Switch to setuptools as distutils is deprecated.
--
--Upstream-Status: Backport [https://pagure.io/sanlock/c/75758fc10db2354dda397d3aba63c7b72a420982]
--Signed-off-by: Ross Burton <ross.burton@arm.com>
--
--diff --git a/python/setup.py b/python/setup.py
--index b3bfaf1..dfbaf21 100644
----- a/python/setup.py
--+++ b/python/setup.py
--@@ -4,7 +4,7 @@
-- # modify, copy, or redistribute it subject to the terms and conditions
-- # of the GNU General Public License v.2.
-- 
---from distutils.core import setup, Extension
--+from setuptools import setup, Extension
-- 
-- sanlocklib = ['sanlock']
-- sanlock = Extension(name='sanlock',
-diff --git a/meta-oe/recipes-extended/sanlock/sanlock_3.8.4.bb b/meta-oe/recipes-extended/sanlock/sanlock_3.8.5.bb
-similarity index 95%
-rename from meta-oe/recipes-extended/sanlock/sanlock_3.8.4.bb
-rename to meta-oe/recipes-extended/sanlock/sanlock_3.8.5.bb
-index 3b4ae318c6..c2a17d06b9 100644
---- a/meta-oe/recipes-extended/sanlock/sanlock_3.8.4.bb
-+++ b/meta-oe/recipes-extended/sanlock/sanlock_3.8.5.bb
-@@ -15,10 +15,9 @@ PV .= "+git${SRCPV}"
+diff --git a/meta-python/recipes-devtools/python/python3-xxhash_3.0.0.bb b/meta-python/recipes-devtools/python/python3-xxhash_3.1.0.bb
+similarity index 83%
+rename from meta-python/recipes-devtools/python/python3-xxhash_3.0.0.bb
+rename to meta-python/recipes-devtools/python/python3-xxhash_3.1.0.bb
+index ca8ed3b01e..bb7bdd3141 100644
+--- a/meta-python/recipes-devtools/python/python3-xxhash_3.0.0.bb
++++ b/meta-python/recipes-devtools/python/python3-xxhash_3.1.0.bb
+@@ -3,7 +3,7 @@ SECTION = "devel/python"
+ LICENSE = "BSD-2-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=3a9dab7f159514231249aa3e108ab26b"
  
- SRC_URI = "git://pagure.io/sanlock.git;protocol=http;branch=master \
-            file://0001-sanlock-Replace-cp-a-with-cp-R-no-dereference-preser.patch \
--           file://setuptools.patch \
-            file://0001-add-missing-system-header-string.h.patch \
-           "
--SRCREV = "a181e951376d49a82eef17920c8ebedec80b4823"
-+SRCREV = "b820c63093c4ae85d7da4f719cf3026d7fca5d09"
+-SRC_URI[sha256sum] = "30b2d97aaf11fb122023f6b44ebb97c6955e9e00d7461a96415ca030b5ceb9c7"
++SRC_URI[sha256sum] = "ac21b1e21dc6fdfee9a57b53f4777539d53a84f2e1546a3f802f159f9966bdc1"
  
- S = "${WORKDIR}/git"
- 
+ SRC_URI += " \
+     file://run-ptest \
 -- 
 2.25.1
 
