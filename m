@@ -1,114 +1,125 @@
-Return-Path: <peter.kjellerstedt@axis.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9B4E8C38A2D
-	for <webhook@archiver.kernel.org>; Mon, 24 Oct 2022 16:31:08 +0000 (UTC)
-Received: from smtp1.axis.com (smtp1.axis.com [195.60.68.17])
- by mx.groups.io with SMTP id smtpd.web10.270.1666629062504204004
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AD4EDFA3740
+	for <webhook@archiver.kernel.org>; Mon, 24 Oct 2022 16:49:18 +0000 (UTC)
+Received: from mail-oi1-f181.google.com (mail-oi1-f181.google.com [209.85.167.181])
+ by mx.groups.io with SMTP id smtpd.web12.498.1666630157631346017
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 24 Oct 2022 09:31:03 -0700
+ Mon, 24 Oct 2022 09:49:17 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="signature has expired" header.i=@axis.com header.s=axis-central1 header.b=Ck3sP9O+;
- spf=pass (domain: axis.com, ip: 195.60.68.17, mailfrom: peter.kjellerstedt@axis.com)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=AmKb2cA6;
+ spf=pass (domain: gmail.com, ip: 209.85.167.181, mailfrom: raj.khem@gmail.com)
+Received: by mail-oi1-f181.google.com with SMTP id w74so11505493oie.0
+        for <openembedded-devel@lists.openembedded.org>; Mon, 24 Oct 2022 09:49:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=axis.com; q=dns/txt; s=axis-central1; t=1666629062;
-  x=1698165062;
-  h=from:to:subject:date:message-id:references:in-reply-to:
-   content-transfer-encoding:mime-version;
-  bh=J4per76zR1OFZSc6EpMX74F+6RaOVFE8dPTjgczOSiU=;
-  b=Ck3sP9O+NXZT9KpW7jRmhAZ6L3zuqM9ipeh7YfBxNaAdJAfGu9qC8IsZ
-   oyy0uUQ5Sw6jD+8QYQhhAaBldaTiE1mldDlxdXiUoAWcj5lkOoWOSs9yd
-   eLYkmHnpH4T7hPHO2DF/qGxayjBFrSk6KxYljSydNQzNEUbAnC71aU7KD
-   2YJT4ffbfBk7aUgALF2jK4TyxVDyUg7fGGiwuW3DywJA3SfNEBxAVCMqU
-   +C2IlAXaZOywC5S6NhAg4Xmrszu1clNpf2sBHvJ7Q00o61qHJdoIeVysm
-   IaqpinKBJi99sM6eR6nUIwbCzGbj8I6c7nSmHuTTg1BKLGt2pVB2bzWO+
-   w==;
-From: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
-To: Xiangyu Chen <xiangyu.chen@windriver.com>,
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: RE: [oe] [meta-oe][PATCH] ipmitool: add default iana enterprise
- numbers database
-Thread-Topic: [oe] [meta-oe][PATCH] ipmitool: add default iana enterprise
- numbers database
-Thread-Index: AQHY55N+tvg6KbhP+UGCHDThXeALa64dazLw
-Date: Mon, 24 Oct 2022 16:30:59 +0000
-Message-ID: <91f4d7befff848f9a308e5ed77b9c510@axis.com>
-References: <20221024095656.292305-1-xiangyu.chen@windriver.com>
-In-Reply-To: <20221024095656.292305-1-xiangyu.chen@windriver.com>
-Accept-Language: en-US, sv-SE
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.0.5.60]
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+        d=gmail.com; s=20210112;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=wl0gcwubFcOlEtouGlHiGzoH/Ts5XrEZf7TUBeCWvIw=;
+        b=AmKb2cA6iHMQ6PjxDfbD5N7gADKf5syXkTjpzpWCi+sBtZBABj9ZMRvgNEo3Ft1LRw
+         uph64N0TLB775vvlrE12JHmr4E6CnrSmjIIP6xAybqIZtsuoew1uAa3qtL2aozipoBxC
+         JPe/Iek0T4WZP3smH4xI0wiOMDh8DHXb3F7AroaqWhrq92gulX34I88tDl/2TE5vT8tk
+         250YLHV0wll0Ltp85n9q0WVBV7NuCzyjQunCPWYV/rKvt8jyAQf+RcsbseHkIjNcEttl
+         iAdrYk2dnDKEVEcbdlb+RXxgzugqj3S3HCFTIszCjQFzj6imVWaGvEADSD7qvESlH+hz
+         Favw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=wl0gcwubFcOlEtouGlHiGzoH/Ts5XrEZf7TUBeCWvIw=;
+        b=iCZtP9p38seySqSUyiiWuE/PnNI4Nnhh1jDXsq1/KiEdxrCcEnKDWjndJIqZA4iqO4
+         ITX9LgRor+8oQlEV9mTPsUstsU2I5q9x3WWXj08yqTE29crfn/uzTyPgVTCc55sRbcI5
+         nKGshlOLes+zmpnCVk3tbx2AJs7ol5WXgCiOLsiW9CuJS/unYZ+4yFUb0wlW9dJtrBgi
+         t+c58TG6JwlRGuXXo+zL2Lf4Wsj7Hsbw3ANg3egESTkdidqY25JProkyXRe1x140eAH5
+         NSFDqjyMx9MSqoHDZze5RB01IBQQ5en5KZS3z0P+cFkCPUfJZWHquOorH9+bKdmt1N4C
+         OE/Q==
+X-Gm-Message-State: ACrzQf0/bETCupO6P7tR5U5JwrCAUqny1bJXyA3UWIZ/85cAk3d9Oe0D
+	5t7TOAMRZv48aK+Hp/0YX1LaGYjl86zw5YvfXJc=
+X-Google-Smtp-Source: AMsMyM7lOpxDiUBgTMRb9ngosOF3HaI7qo8iA4USLDPOI+CF0/RAHx1JW/D0FIplHEmIZy2ja24nDkhlkDaQ0/3qvLQ=
+X-Received: by 2002:a05:6808:f03:b0:355:3cb7:b5a with SMTP id
+ m3-20020a0568080f0300b003553cb70b5amr18773638oiw.55.1666630156848; Mon, 24
+ Oct 2022 09:49:16 -0700 (PDT)
 MIME-Version: 1.0
+References: <20221021165738.1803166-1-raj.khem@gmail.com> <CAJiuCce5syr+YSZQ7n0_0uZdFD0+=XzKmVGUJd-2Nny9ZqLR5A@mail.gmail.com>
+In-Reply-To: <CAJiuCce5syr+YSZQ7n0_0uZdFD0+=XzKmVGUJd-2Nny9ZqLR5A@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 24 Oct 2022 09:48:50 -0700
+Message-ID: <CAMKF1sqRm=fP+he79ySLZa+22wuMQBivNsS+dqiJTn7ex=AwEA@mail.gmail.com>
+Subject: Re: [oe] [PATCH] protobuf: Enable protoc binary in nativesdk
+To: =?UTF-8?B?Q2zDqW1lbnQgUMOpcm9u?= <peron.clem@gmail.com>
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 24 Oct 2022 16:31:08 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99298
+ <openembedded-devel@lists.openembedded.org>; Mon, 24 Oct 2022 16:49:18 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99299
 
-PiAtLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQ0KPiBGcm9tOiBvcGVuZW1iZWRkZWQtZGV2ZWxA
-bGlzdHMub3BlbmVtYmVkZGVkLm9yZyA8b3BlbmVtYmVkZGVkLWRldmVsQGxpc3RzLm9wZW5lbWJl
-ZGRlZC5vcmc+IE9uIEJlaGFsZiBPZiBYaWFuZ3l1IENoZW4NCj4gU2VudDogZGVuIDI0IG9rdG9i
-ZXIgMjAyMiAxMTo1Nw0KPiBUbzogb3BlbmVtYmVkZGVkLWRldmVsQGxpc3RzLm9wZW5lbWJlZGRl
-ZC5vcmcNCj4gU3ViamVjdDogW29lXSBbbWV0YS1vZV1bUEFUQ0hdIGlwbWl0b29sOiBhZGQgZGVm
-YXVsdCBpYW5hIGVudGVycHJpc2UgbnVtYmVycyBkYXRhYmFzZQ0KPiANCj4gV2hlbiB1c2luZyBk
-ZWZhdWx0IGNvbmZpZ3VyYXRpb24gd2l0aG91dCBhZGQgSUFOQV9FTlRFUlBSSVNFX05VTUJFUlMg
-YW5kDQo+IFNSQ19VUkkgaW4gYSBiYmFwcGVuZCwgdGhlIGlwbWl0b29sIHdvdWxkIHJlcG9ydCBh
-biBlcnJvciBhcyBiZWxvdzoNCj4gDQo+ICINCj4gcm9vdEBpbnRlbC14ODYtNjQ6fiMgaXBtaXRv
-b2wgLUkgb3BlbiBibWMgZ2V0ZW5hYmxlcw0KPiBJQU5BIFBFTiByZWdpc3RyeSBvcGVuIGZhaWxl
-ZDogTm8gc3VjaCBmaWxlIG9yIGRpcmVjdG9yeQ0KPiAiDQo+IA0KPiBBZGQgYSBkZWZhdWx0IGlh
-bmEgZW50ZXJwcmlzZSBudW1iZXJzIGRhdGFiYXNlIHRvIGF2b2lkIHRoZSBlcnJvcg0KPiBoYXBw
-ZW4gaWYgdXNpbmcgaXBtaXRvb2wgZGVmYXVsdCBiYiBjb25maWd1cmF0aW9uLg0KPiANCj4gU2ln
-bmVkLW9mZi1ieTogWGlhbmd5dSBDaGVuIDx4aWFuZ3l1LmNoZW5Ad2luZHJpdmVyLmNvbT4NCj4g
-LS0tDQo+ICAuLi4vaXBtaXRvb2wvaXBtaXRvb2wvaWFuYS1lbnRlcnByaXNlLW51bWJlcnMgfCAy
-Mzc2ODIgKysrKysrKysrKysrKysrDQo+ICAuLi4vaXBtaXRvb2wvaXBtaXRvb2xfMS44LjE5LmJi
-ICAgICAgICAgICAgICAgfCAgICAgIDYgKy0NCj4gIDIgZmlsZXMgY2hhbmdlZCwgMjM3Njg2IGlu
-c2VydGlvbnMoKyksIDIgZGVsZXRpb25zKC0pDQo+ICBjcmVhdGUgbW9kZSAxMDA2NDQgbWV0YS1v
-ZS9yZWNpcGVzLWtlcm5lbC9pcG1pdG9vbC9pcG1pdG9vbC9pYW5hLWVudGVycHJpc2UtbnVtYmVy
-cw0KPiANCj4gZGlmZiAtLWdpdCBhL21ldGEtb2UvcmVjaXBlcy1rZXJuZWwvaXBtaXRvb2wvaXBt
-aXRvb2wvaWFuYS1lbnRlcnByaXNlLW51bWJlcnMgYi9tZXRhLW9lL3JlY2lwZXMta2VybmVsL2lw
-bWl0b29sL2lwbWl0b29sL2lhbmEtZW50ZXJwcmlzZS1udW1iZXJzDQo+IG5ldyBmaWxlIG1vZGUg
-MTAwNjQ0DQo+IGluZGV4IDAwMDAwMDAwMC4uZjhjMzI4Nzk2DQo+IC0tLSAvZGV2L251bGwNCg0K
-W2N1dCAyMzdrKyBsaW5lcy4uLiBdDQoNCkZvciB0aGUgYmVuZWZpdCBvZiBhbGwgbWVtYmVycyBv
-ZiB0aGlzIGxpc3QsIGRvIG5vdCBzZW5kIGEgMjM3aysgDQpsaW5lcyBwYXRjaCBhcyBhIG1haWwh
-IFRoZSByZXN1bHRpbmcgbWFpbCB3YXMgMjAgTUIuIEl0IHRvb2sgbXkgDQpPdXRsb29rIGNsaWVu
-dCBvdmVyIHR3byBob3VycyB0byBjcmVhdGUgdGhpcyByZXNwb25zZSAod2hlcmUgSSANCnRoZW4g
-aGFkIHRvIHJlbW92ZSBtb3N0IG9mIHRob3NlIDIzN2srIGxpbmVzIGFnYWluKS4uLg0KDQpJbnN0
-ZWFkIHB1c2ggdGhlIGNoYW5nZSB0byBzb21lIHB1YmxpYyByZXBvc2l0b3J5LiBGb3IgDQpPcGVu
-RW1iZWRkZWQgeW91IHNob3VsZCBiZSBhYmxlIHRvIHVzZSB0aGUgZ2l0aHViIHJlcG9zaXRvcnkg
-YW5kIA0KY3JlYXRlIGEgbWVyZ2UgcmVxdWVzdCB0aGF0IHdheSAoYW5kIGxldCB1cyBob3BlIHRo
-YXQgS2hlbSBkb2VzIA0Kbm90IGhhdmUgYXV0b21hdGljIHRvb2xpbmcgdGhhdCBzZW5kcyBhbGwg
-bWVyZ2UgcmVxdWVzdHMgYXMgDQpwYXRjaGVzIHRvIHRoZSBtYWlsaW5nIGxpc3QuLi4pDQoNCj4g
-KysrIGIvbWV0YS1vZS9yZWNpcGVzLWtlcm5lbC9pcG1pdG9vbC9pcG1pdG9vbC9pYW5hLWVudGVy
-cHJpc2UtbnVtYmVycw0KPiBkaWZmIC0tZ2l0IGEvbWV0YS1vZS9yZWNpcGVzLWtlcm5lbC9pcG1p
-dG9vbC9pcG1pdG9vbF8xLjguMTkuYmIgYi9tZXRhLW9lL3JlY2lwZXMta2VybmVsL2lwbWl0b29s
-L2lwbWl0b29sXzEuOC4xOS5iYg0KPiBpbmRleCAwYTYwMGUyM2IuLmUxNjZlYTIxMyAxMDA2NDQN
-Cj4gLS0tIGEvbWV0YS1vZS9yZWNpcGVzLWtlcm5lbC9pcG1pdG9vbC9pcG1pdG9vbF8xLjguMTku
-YmINCj4gKysrIGIvbWV0YS1vZS9yZWNpcGVzLWtlcm5lbC9pcG1pdG9vbC9pcG1pdG9vbF8xLjgu
-MTkuYmINCj4gQEAgLTI3LDkgKzI3LDExIEBAIFNSQ19VUkkgPSAiZ2l0Oi8vZ2l0aHViLmNvbS9p
-cG1pdG9vbC9pcG1pdG9vbDtwcm90b2NvbD1odHRwczticmFuY2g9bWFzdGVyIFwNCj4gICAgICAg
-ICAgICAgZmlsZTovLzAwMDEtaXBtaV9mcnUuYy1Qcm92aWRlLW1pc3NpbmctZnVuY3Rpb24tZGVj
-bGFyYXRpb25zLnBhdGNoIFwNCj4gICAgICAgICAgICAgZmlsZTovLzAwMDEtY29uZmlndXJlLVJl
-bW92ZS10aGUtbG9naWMtdG8tZG93bmxvYWQtSUFOQS1QRU4tZGF0YS5wYXRjaCBcDQo+ICAgICAg
-ICAgICAgICINCj4gLUlBTkFfRU5URVJQUklTRV9OVU1CRVJTID89ICIiDQo+IA0KPiAtIyBBZGQg
-dGhlc2UgdmlhIGJiYXBwZW5kIGlmIHRoaXMgZGF0YWJhc2UgaXMgbmVlZGVkIGJ5IHRoZSBzeXN0
-ZW0NCj4gKyMgRGVmYXVsdCBJQU5BIGVudGVycHJpc2UgZGF0YWJhc2UgdmVyc2lvbiBpcyAyMDIy
-LTEwLTI0DQo+ICtJQU5BX0VOVEVSUFJJU0VfTlVNQkVSUyA/PSAiZmlsZTovL2lhbmEtZW50ZXJw
-cmlzZS1udW1iZXJzIg0KDQpJZiB5b3UgY29tcHJlc3MgdGhlIGZpbGUgd2l0aCB4eiwgdGhlIHNp
-emUgaXMgcmVkdWNlZCB0byBhIHRoaXJkLgkNCkJpdGJha2Ugd2lsbCB0aGVuIHVuY29tcHJlc3Mg
-aXQgYXV0b21hdGljYWxseSBkdXJpbmcgZG9fdW5wYWNrKCkuIA0KDQo+ICsNCj4gKyMgQWRkIHRo
-ZXNlIHZpYSBiYmFwcGVuZCBpZiB0aGUgbGF0ZXN0IHZlcnNpb24gZGF0YWJhc2UgaXMgbmVlZGVk
-IGJ5IHRoZSBzeXN0ZW0NCj4gICNJQU5BX0VOVEVSUFJJU0VfTlVNQkVSUyA/PSAiaHR0cDovL3d3
-dy5pYW5hLm9yZy9hc3NpZ25tZW50cy9lbnRlcnByaXNlLW51bWJlcnM7bmFtZT1pYW5hLWVudGVy
-cHJpc2UtbnVtYmVycztkb3dubG9hZGZpbGVuYW1lPWlhbmEtZW50ZXJwcmlzZS1udW1iZXJzIg0K
-DQpDaGFuZ2UgIj89IiB0byAiPSIsIG9yIHRoZSBzdWdnZXN0aW9uIHRvIGFkZCBpdCBhcyBhIGJi
-YXBwZW5kIHdpbGwgDQpub3Qgd29yay4NCg0KPiAgI1NSQ19VUklbaWFuYS1lbnRlcnByaXNlLW51
-bWJlcnMuc2hhMjU2c3VtXSA9ICJjZGQ5N2ZjMDgzMjU2Njc0MzRiODA1ZWI1ODkxMDRhZTYzZjdh
-OWViNzIwZWNlYTczY2I1NTExMGIzODM5MzRjIg0KPiANCj4gLS0NCj4gMi4zNC4xDQoNCi8vUGV0
-ZXINCg0K
+On Mon, Oct 24, 2022 at 4:41 AM Cl=C3=A9ment P=C3=A9ron <peron.clem@gmail.c=
+om> wrote:
+>
+> Hi Khem,
+>
+> On Fri, 21 Oct 2022 at 18:57, Khem Raj <raj.khem@gmail.com> wrote:
+> >
+> > When it was disabled for target, it was enabled for native but not for
+> > nativesdk explicitly, lets do it here.
+> >
+> > Signed-off-by: Khem Raj <raj.khem@gmail.com>
+>
+> I sent something similar 3 weeks ago:
+> https://www.mail-archive.com/openembedded-devel@lists.openembedded.org/ms=
+g84850.html
+>
+> Just to be sure, is my submission format okay?
+
+Thanks for bringing this to my attention. I can not find this patch in
+my inbox, which might be that I accidentally deleted it
+but I can not find it on patchwork either, which might be the reason
+that I never saw it. I have seen patchwork and lore not
+grok certain patches from the mailing list, and it does not seem to be
+obvious why. Unfortunately, the patch I sent is already
+applied to master, otherwise I would have credited it to you :)
+
+>
+> BR,
+> Clement
+>
+> > ---
+> >  meta-oe/recipes-devtools/protobuf/protobuf_3.21.5.bb | 1 +
+> >  1 file changed, 1 insertion(+)
+> >
+> > diff --git a/meta-oe/recipes-devtools/protobuf/protobuf_3.21.5.bb b/met=
+a-oe/recipes-devtools/protobuf/protobuf_3.21.5.bb
+> > index 0bc9cbedc0..c8b9158e6c 100644
+> > --- a/meta-oe/recipes-devtools/protobuf/protobuf_3.21.5.bb
+> > +++ b/meta-oe/recipes-devtools/protobuf/protobuf_3.21.5.bb
+> > @@ -26,6 +26,7 @@ inherit cmake pkgconfig ptest
+> >
+> >  PACKAGECONFIG ??=3D ""
+> >  PACKAGECONFIG:class-native ?=3D "compiler"
+> > +PACKAGECONFIG:class-nativesdk ?=3D "compiler"
+> >  PACKAGECONFIG[python] =3D ",,"
+> >  PACKAGECONFIG[compiler] =3D "-Dprotobuf_BUILD_PROTOC_BINARIES=3DON,-Dp=
+rotobuf_BUILD_PROTOC_BINARIES=3DOFF"
+> >
+> > --
+> > 2.38.1
+> >
+> >
+> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> > Links: You receive all messages sent to this group.
+> > View/Reply Online (#99255): https://lists.openembedded.org/g/openembedd=
+ed-devel/message/99255
+> > Mute This Topic: https://lists.openembedded.org/mt/94480264/4240582
+> > Group Owner: openembedded-devel+owner@lists.openembedded.org
+> > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub =
+[peron.clem@gmail.com]
+> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> >
 
