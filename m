@@ -2,43 +2,43 @@ Return-Path: <robert.joslyn@redrectangle.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 91004C433FE
-	for <webhook@archiver.kernel.org>; Mon, 24 Oct 2022 01:27:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D225EC433FE
+	for <webhook@archiver.kernel.org>; Mon, 24 Oct 2022 02:52:24 +0000 (UTC)
 Received: from relay8-d.mail.gandi.net (relay8-d.mail.gandi.net [217.70.183.201])
- by mx.groups.io with SMTP id smtpd.web10.14778.1666574872647397317
+ by mx.groups.io with SMTP id smtpd.web12.15296.1666579941915540320
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 23 Oct 2022 18:27:53 -0700
+ Sun, 23 Oct 2022 19:52:22 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@redrectangle.org header.s=gm1 header.b=BibZi/Y/;
+ dkim=pass header.i=@redrectangle.org header.s=gm1 header.b=Ll5U1xQ6;
  spf=none, err=permanent DNS error (domain: redrectangle.org, ip: 217.70.183.201, mailfrom: robert.joslyn@redrectangle.org)
 Received: (Authenticated sender: robert.joslyn@redrectangle.org)
-	by mail.gandi.net (Postfix) with ESMTPSA id 7E7ED1BF205;
-	Mon, 24 Oct 2022 01:27:48 +0000 (UTC)
+	by mail.gandi.net (Postfix) with ESMTPSA id 8B74D1BF205;
+	Mon, 24 Oct 2022 02:52:18 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redrectangle.org;
-	s=gm1; t=1666574870;
+	s=gm1; t=1666579939;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding;
-	bh=oXMeGi0NDUeAddZMJqu7Ozlyrcx/W8eFxh5D3vN1hWI=;
-	b=BibZi/Y/5rhXouVazPTpuaXhgG3yu9rM01NXZ1/dJ2LZpYLYisQk/pjisKfA1UmqUJ4lsg
-	E9RvzCEQoYe2kiELSDLjwqD7hdpAZ4pcfdCZ89l45S7A5y4N/scrk8J9vNHWJRu8HesalX
-	1Gur73mAD8Oky6doWQrPT49xLwbsfhylT7Z6yZ9QBDOTMk4NzbmJWKI68rO+eQu/ofHO/0
-	PfHGm+cdTUJMOnKxIHG6Bppssp32YkrIDDLvINz7JowOqhkxQM97l+vbz164XFR6o4HgV6
-	Ha8vB/cQucBE3AMy/3Vi1v9H8Mrw1VWofpXO9GKvwpm4U9yheMHgx8vlTGn8Mg==
+	bh=Lg077h0/bl7p2urFQGH0SFXG+VDgpeSJN7s4I+JnkIU=;
+	b=Ll5U1xQ6FU9uRK1VJkM0hGQQjrAqsaIBp+iMU+DVEyaIjwPOmk7V/L9hHowNqT7M7b6I8j
+	l29DmgcVIN7CtmXC5J2sMd5geQSJic7nEpCcNbqud+gBEygv/wv72ViyA4W7M/MnDrY1DW
+	KEHZxeUE+9G0Il4XxxffZ9qGnFp0UHxf3vJH8tUjYNNa8zZ8P22EtTA9s87Au5S9unkLbX
+	7nG6DVPxSLEULqVSVL5cHYRfqPB5ayjuWfforpgk94RIwn/Q9u9Lpyq55V1xasLeJjCmUh
+	3Iopoork829h829UU3m4dj61AlKsvJFfOILm6ZEjsk151pa33uZS/3vsSx5nIA==
 From: Robert Joslyn <robert.joslyn@redrectangle.org>
 To: openembedded-devel@lists.openembedded.org
 Cc: Robert Joslyn <robert.joslyn@redrectangle.org>
-Subject: [meta-oe][master][langdale][PATCH] fwupd: Fix plugin_gpio PACKAGECONFIG
-Date: Sun, 23 Oct 2022 18:27:16 -0700
-Message-Id: <20221024012716.1444793-1-robert.joslyn@redrectangle.org>
+Subject: [meta-oe][kirkstone][PATCH] fwupd: Fix plugin_gpio PACKAGECONFIG
+Date: Sun, 23 Oct 2022 19:51:41 -0700
+Message-Id: <20221024025141.2506774-1-robert.joslyn@redrectangle.org>
 X-Mailer: git-send-email 2.37.4
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 24 Oct 2022 01:27:54 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99261
+ <openembedded-devel@lists.openembedded.org>; Mon, 24 Oct 2022 02:52:24 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99262
 
 Trying to disable the gpio plugin results in an error
 
@@ -48,13 +48,13 @@ Correct the PACKAGECONFIG for this option so it can be disabled.
 
 Signed-off-by: Robert Joslyn <robert.joslyn@redrectangle.org>
 ---
- meta-oe/recipes-bsp/fwupd/fwupd_1.8.4.bb | 2 +-
+ meta-oe/recipes-bsp/fwupd/fwupd_1.7.6.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-bsp/fwupd/fwupd_1.8.4.bb b/meta-oe/recipes-bsp/fwupd/fwupd_1.8.4.bb
-index 72f37aea8..99077923d 100644
---- a/meta-oe/recipes-bsp/fwupd/fwupd_1.8.4.bb
-+++ b/meta-oe/recipes-bsp/fwupd/fwupd_1.8.4.bb
+diff --git a/meta-oe/recipes-bsp/fwupd/fwupd_1.7.6.bb b/meta-oe/recipes-bsp/fwupd/fwupd_1.7.6.bb
+index 53f1720b0..62d054586 100644
+--- a/meta-oe/recipes-bsp/fwupd/fwupd_1.7.6.bb
++++ b/meta-oe/recipes-bsp/fwupd/fwupd_1.7.6.bb
 @@ -83,7 +83,7 @@ PACKAGECONFIG[plugin_emmc] = "-Dplugin_emmc=true,-Dplugin_emmc=false"
  PACKAGECONFIG[plugin_ep963x] = "-Dplugin_ep963x=true,-Dplugin_ep963x=false"
  PACKAGECONFIG[plugin_fastboot] = "-Dplugin_fastboot=true,-Dplugin_fastboot=false"
