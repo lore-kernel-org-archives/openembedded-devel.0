@@ -1,116 +1,93 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <ticotimo@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EA95DC38A2D
-	for <webhook@archiver.kernel.org>; Tue, 25 Oct 2022 15:13:29 +0000 (UTC)
-Received: from mail-oi1-f176.google.com (mail-oi1-f176.google.com [209.85.167.176])
- by mx.groups.io with SMTP id smtpd.web08.8279.1666710803500167093
- for <openembedded-devel@lists.openembedded.org>;
- Tue, 25 Oct 2022 08:13:23 -0700
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2E3B9FA373F
+	for <webhook@archiver.kernel.org>; Tue, 25 Oct 2022 16:02:40 +0000 (UTC)
+Received: from mail-ej1-f41.google.com (mail-ej1-f41.google.com [209.85.218.41])
+ by mx.groups.io with SMTP id smtpd.web10.8889.1666713750403501950
+ for <Openembedded-devel@lists.openembedded.org>;
+ Tue, 25 Oct 2022 09:02:31 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=nORNORgH;
- spf=pass (domain: gmail.com, ip: 209.85.167.176, mailfrom: raj.khem@gmail.com)
-Received: by mail-oi1-f176.google.com with SMTP id w196so14538157oiw.8
-        for <openembedded-devel@lists.openembedded.org>; Tue, 25 Oct 2022 08:13:23 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=hjPDzWVV;
+ spf=pass (domain: gmail.com, ip: 209.85.218.41, mailfrom: ticotimo@gmail.com)
+Received: by mail-ej1-f41.google.com with SMTP id bj12so13643182ejb.13;
+        Tue, 25 Oct 2022 09:02:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=8ajTnefiUFCLiEv1Oua4vWM7UQGpafsIHKzRUx8ClTE=;
-        b=nORNORgHQpWKgl4qJA2YOq6s8qG8SkINSBrMph20BGkxBYCHlmmnkVJOQqG/0o09XM
-         csZe0f1smPQIT/qZ6Q8ZCn+DbalyA70iZBjtmgrKkuGfrqCAyVbrezuxGv/bLuhe/Res
-         05gxfVcUOPMRwNeKIgEzsJEJnsoXoQdEu2JbZo584m4mqv/oIPt4L+Fx7XTuQEzd/bPZ
-         sH253pVnX0haKTorvsZiarlFUgslXQTbAuSx+Y2yh/12Vxh7RrRj9ahFj+nw1G7IJxO0
-         poJIF9lFim4wWMWeLa6OcMasHp7YCMg+JqqwtBnWpTmjjA89KKy5WftYIrObZyg2cobN
-         fNig==
+        h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+         :date:message-id:reply-to;
+        bh=YUd7pkTJCMbm6tJi8SWoWO00nDOiBS8/5Eiexm6UAS4=;
+        b=hjPDzWVV5Y8M1CcDK9lN1/LbeAXhhOA/yeZT9PFelEOUFyHYUTLwHVx0QxfMgT/nrT
+         n5pohBdYD20+r0u+SduCwktVSzFaOlz71H9Hmx2LUvWr5E5gPehuAhsmVn0stMwDwCdO
+         IX3e3M1IsiKYxkttqf9EUzbfJp3q1DkvqaRbLxRdw8CLMhwAQfvZ72fYkIo/73+sRatG
+         Zmu4T11ixDx899stXjDUhofdGAL7MtD7Z82aj/XNRK7+bdWn07asYWLB9ef/OC2hfkWd
+         OgQiXy5/oBSrqNnurbuH84HMobdCzd2bsvyOTSrDF40FFe/ytNf1QICU0P3qxMSJySew
+         ZvZQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=8ajTnefiUFCLiEv1Oua4vWM7UQGpafsIHKzRUx8ClTE=;
-        b=JTQvNne1V/x56gD4rwAm3KKcj0U9mJ6Wv/M6bNRr+NyUD8fC+EXKP9r6X/+645U00/
-         oIiK/KcSnPalVlTqPBHPcqhpWMa1vjtsH2kyMzThcEk5A0tcEcJGHC530FtKwDayhU3g
-         e6dp60EI3RyXZLyNBBh8MNmAdCdRONBLcKWQo9MrC8LuBKBGPPMKptV9s6u144tCNJHf
-         aK8I2BD3BjEsWQqhYHF0h1AHyEuECVeWCT19KYO2C9e8Frh0oVGi6V3LHsy7cWT1nmsp
-         VkTXNOq2SE91CakrEwgq4c4ExZ3PI/oi0Gi9L1UQCP1tc9QMS4lL+e0i/+swhYUUNeq7
-         UFrA==
-X-Gm-Message-State: ACrzQf0CVUH8BbZJdxfUTPaDyo/UwlPla7pVSNlZsVkrcUhAo7lJDOqX
-	jL+na9tOi8TXgUAnKhYfNUcxmEp2dIgDDpEVECI=
-X-Google-Smtp-Source: AMsMyM4Nsh2VC9U67vBaVgs7/UHSkp3Uowf53GMAUMnvNpPQKKb6jOu8EMd1HXtI9+u+gh2L5iVjODY8uHCV8Dc9mCE=
-X-Received: by 2002:a05:6808:f03:b0:355:3cb7:b5a with SMTP id
- m3-20020a0568080f0300b003553cb70b5amr21025996oiw.55.1666710802514; Tue, 25
- Oct 2022 08:13:22 -0700 (PDT)
+        h=to:subject:message-id:date:from:mime-version:x-gm-message-state
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=YUd7pkTJCMbm6tJi8SWoWO00nDOiBS8/5Eiexm6UAS4=;
+        b=6kGe024QRh5q6K+xRX9A/Y/oYDfoVFSaJEaR/sFkx7Uqhz3HcbfE/TdB3g5WbNG2nC
+         FhRZBQXj0MUKHgOyV4cHa56nikSu2C2xXsxLRwG2MPfUu+dvo/zOSY3+s8HAXFdZk12P
+         YxQ0Gu28BuSK12+EZ+iRoKBYQMBj3jyuEwd+/D8B7hG6FU3cN3pRZP6s54o14pMI8T7B
+         UyP6CYz7FT7cZkFQ3ROjx+YsLu4J4hI362vwy49JkWTeB0K1tV7ews5JrdyJCh8Dn0Oo
+         DPPj6uS0p9XqX6ugH02X5D1MaryDUz2x2EFMJ6U5pgHpBPdYrAYYnPzhaD+O2XanhRW1
+         3+XA==
+X-Gm-Message-State: ACrzQf031nHYY2HUL4wSHkPehh4WC81e2MgVfwP2Om8M6fzxbYZJyBk+
+	nV04ecP6iE6O501vqe4Fk+DztQwouATql4m23wY8RrhGOxNC0g==
+X-Google-Smtp-Source: AMsMyM7lMcEI4KOGFzcdMeeuqgm6/rl241FUNptYZUnYJJLptUILrd4zUV216AUYOZTHLguye53TkZxQQiF92YTApJg=
+X-Received: by 2002:a17:907:a06b:b0:78d:d25f:b726 with SMTP id
+ ia11-20020a170907a06b00b0078dd25fb726mr33237967ejc.203.1666713748316; Tue, 25
+ Oct 2022 09:02:28 -0700 (PDT)
 MIME-Version: 1.0
-References: <CAD6RADBEPh-m7N4Xmf_GuLP+Q+zm1FMUBoQF1Wsr+UBsUkrF-w@mail.gmail.com>
-In-Reply-To: <CAD6RADBEPh-m7N4Xmf_GuLP+Q+zm1FMUBoQF1Wsr+UBsUkrF-w@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 25 Oct 2022 08:12:54 -0700
-Message-ID: <CAMKF1spYEKMExWJ3TwACwPVhKYut=rk6j=cX_w6p=S89sfTbxw@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH v2] jwt-cpp: add recipe
-To: Meier Boas <boas.meier@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
+From: Tim Orling <ticotimo@gmail.com>
+Date: Tue, 25 Oct 2022 09:02:17 -0700
+Message-ID: <CANx9H-C2h-9920kje9fJv+0QhwZQ42cqC-hcP5J9x=bULu26fQ@mail.gmail.com>
+Subject: OpenEmbedded Happy Hour October 26 9pm/2100 UTC
+To: openembedded-core <openembedded-core@lists.openembedded.org>, 
+	"openembedded-devel@lists.openembedded.org" <Openembedded-devel@lists.openembedded.org>, 
+	"Yocto (yocto@lists.yoctoproject.org)" <yocto@lists.yoctoproject.org>
+Content-Type: multipart/alternative; boundary="000000000000e924d905ebde088a"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 25 Oct 2022 15:13:29 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99307
+ <openembedded-devel@lists.openembedded.org>; Tue, 25 Oct 2022 16:02:40 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99308
 
-On Tue, Oct 25, 2022 at 5:12 AM Meier Boas <boas.meier@gmail.com> wrote:
->
-> From d3daf755814f0cff7e57bb521520fe6a52685050 Mon Sep 17 00:00:00 2001
-> From: Boas Meier <boas.meier@siemens.com>
-> Date: Tue, 25 Oct 2022 11:28:40 +0200
-> Subject: [PATCH 1/1] jwt-cpp: add v0.6.0
->
-> Signed-off-by: Boas Meier <boas.meier@siemens.com>
-> ---
->  .../recipes-devtools/jwt-cpp/jwt-cpp_0.6.0.bb | 20 +++++++++++++++++++
->  1 file changed, 20 insertions(+)
->  create mode 100644 meta-oe/recipes-devtools/jwt-cpp/jwt-cpp_0.6.0.bb
->
-> diff --git a/meta-oe/recipes-devtools/jwt-cpp/jwt-cpp_0.6.0.bb b/meta-oe/recipes-devtools/jwt-cpp/jwt-cpp_0.6.0.bb
-> new file mode 100644
-> index 000000000..bd3baa863
-> --- /dev/null
-> +++ b/meta-oe/recipes-devtools/jwt-cpp/jwt-cpp_0.6.0.bb
-> @@ -0,0 +1,20 @@
-> +SUMMARY = "A header only library for creating and validating json web tokens in c++"
-> +HOMEPAGE = "https://thalhammer.github.io/jwt-cpp/"
-> +SECTION = "libs"
-> +LICENSE = "MIT"
-> +LIC_FILES_CHECKSUM = "file://LICENSE;md5=8325a5ce4414c65ffdda392e0d96a9ff"
-> +
-> +SRC_URI = "git://github.com/Thalhammer/jwt-cpp.git;branch=master;protocol=https \
-> +            "
-> +
-> +SRCREV = "4a537e969891dde542ad8b1a4a214955a83be29f"
-> +
-> +S = "${WORKDIR}/git"
-> +
-> +DEPENDS = "openssl"
-> +
-> +inherit cmake
-> +
-> +EXTRA_OECMAKE += "-DJWT_BUILD_EXAMPLES=OFF"
-> +
-> +FILES:${PN} = "/usr/cmake"
+--000000000000e924d905ebde088a
+Content-Type: text/plain; charset="UTF-8"
 
-/usr/cmake is a rather unusual location. Can you investigate it a bit
-more and figure out if we can have its content packaged under
-${datadir}/cmake or ${libdir}/cmake depending upon what it contains.
+All,
 
-> --
-> 2.30.2
->
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#99306): https://lists.openembedded.org/g/openembedded-devel/message/99306
-> Mute This Topic: https://lists.openembedded.org/mt/94556657/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [raj.khem@gmail.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
->
+You are cordially invited to the next OpenEmbedded Happy Hour on October 26
+for Asia/Pacific time zones @ 2100/9pm UTC (5pm ET / 2pm PT).
+
+https://www.openembedded.org/wiki/Calendar
+https://www.openembedded.org/wiki/Happy_Hours
+https://www.timeanddate.com/worldclock/fixedtime.html?msg=OpenEmbedded+Happy+Hour+October+26&iso=20221026T21&p1=1440&ah=1
+
+Regards,
+Tim "moto-timo" Orling
+
+--000000000000e924d905ebde088a
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr">All,<div><br></div><div>You are cordially invited to the n=
+ext OpenEmbedded Happy Hour on October 26</div><div>for Asia/Pacific time z=
+ones=C2=A0@ 2100/9pm UTC (5pm ET / 2pm PT).</div><div><br></div><div><a hre=
+f=3D"https://www.openembedded.org/wiki/Calendar" rel=3D"noreferrer" target=
+=3D"_blank">https://www.openembedded.org/wiki/Calendar</a><br></div><div><a=
+ href=3D"https://www.openembedded.org/wiki/Happy_Hours" rel=3D"noreferrer" =
+target=3D"_blank">https://www.openembedded.org/wiki/Happy_Hours</a><br></di=
+v><div><a href=3D"https://www.timeanddate.com/worldclock/fixedtime.html?msg=
+=3DOpenEmbedded+Happy+Hour+October+26&amp;iso=3D20221026T21&amp;p1=3D1440&a=
+mp;ah=3D1">https://www.timeanddate.com/worldclock/fixedtime.html?msg=3DOpen=
+Embedded+Happy+Hour+October+26&amp;iso=3D20221026T21&amp;p1=3D1440&amp;ah=
+=3D1</a><br></div><div><br></div><div>Regards,</div><div>Tim &quot;moto-tim=
+o&quot; Orling</div></div>
+
+--000000000000e924d905ebde088a--
 
