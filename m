@@ -2,98 +2,135 @@ Return-Path: <boas.meier@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E42DFC04A95
-	for <webhook@archiver.kernel.org>; Tue, 25 Oct 2022 11:34:08 +0000 (UTC)
-Received: from mail-ed1-f43.google.com (mail-ed1-f43.google.com [209.85.208.43])
- by mx.groups.io with SMTP id smtpd.web08.5985.1666697648109922124
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0C8CCC04A95
+	for <webhook@archiver.kernel.org>; Tue, 25 Oct 2022 12:12:29 +0000 (UTC)
+Received: from mail-ej1-f46.google.com (mail-ej1-f46.google.com [209.85.218.46])
+ by mx.groups.io with SMTP id smtpd.web08.6257.1666699947948295471
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 25 Oct 2022 04:34:08 -0700
+ Tue, 25 Oct 2022 05:12:28 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=oDxE4rsP;
- spf=pass (domain: gmail.com, ip: 209.85.208.43, mailfrom: boas.meier@gmail.com)
-Received: by mail-ed1-f43.google.com with SMTP id a67so35696757edf.12
-        for <openembedded-devel@lists.openembedded.org>; Tue, 25 Oct 2022 04:34:07 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=gc+HpCJe;
+ spf=pass (domain: gmail.com, ip: 209.85.218.46, mailfrom: boas.meier@gmail.com)
+Received: by mail-ej1-f46.google.com with SMTP id k2so11966543ejr.2
+        for <openembedded-devel@lists.openembedded.org>; Tue, 25 Oct 2022 05:12:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
          :date:message-id:reply-to;
-        bh=JHPPRcCbRaNlPX2qYsMRcqE0ej66g+yUDAwwO/O72mY=;
-        b=oDxE4rsPrNf6sx0n9L2QxZl6E503YHY4FeCfEB9D+JBQVE0mOBQywt97PyZHljeRJ0
-         DusCMsQ38ANzjtup4HbKsvQxqet/7KoWnigOZwAbHPToc5bN9uycIqX+0ikuSh3BU77/
-         KZxrH16s/s505Ay74LgIhKrMq8gdNCCn+i9/0UzlT8dK9KjbTB3mIqMHRlEQTkpI9zRn
-         hMS5OyVWoyuVRHAE1K3d4UR6X1cqw7KcI6R+6PskYa4a6eS/Nt69FTLocYzKucsa+10A
-         pdTVdpwQJe6rBtUCt4SpltEkB8Gu4+7hxZPQMfGBa3jIEWTn1ujASHy50i7dsbwFE72b
-         Oynw==
+        bh=iRFAI34cTYgZTgijvanf6ly6dgifYC0zCLu6ggKrn3c=;
+        b=gc+HpCJehf0WLgy1RnS04i0SRVmj5s1Os2h50z2t7bT1h7/IVUC8th82bf0IJ/MXaq
+         qF0v08As589wTaBAkzy9JfqGOXjR0xeUJQ7Sz57eHi5nRF+JcBIgI+OfKLgSdRQv68te
+         cPghtbRRyjg+IMHubDQ9ABTF01MH3r1SQtYI0by11psPSE+k5USVqZVxwhIhia4Yh2WB
+         kTJob75lwHBOayuHcVPmAjC+byvB/8YdsfNfOs0o76R7EoPdvI1Av2MW6T6y7Jzfb52w
+         o0MpzGu9Wo0hIMcmWq/LcNDNgbtQc9kHnb8EXkudRI4qAFVUCeX4rTrHK9Dwj2Nk7MI+
+         vKEg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=to:subject:message-id:date:from:mime-version:x-gm-message-state
          :from:to:cc:subject:date:message-id:reply-to;
-        bh=JHPPRcCbRaNlPX2qYsMRcqE0ej66g+yUDAwwO/O72mY=;
-        b=K/Z+dZpbL/2CrAl1Y43z1fE4kfyZlLc3Wfaqh5rTkqie4sjVAS03Ov2fqdGRLmdzqL
-         moGFhsw1Ga3rqTYnaCRfkLbb8Ls6x4dEJfr3oeICEtf7ulNFVhdOOl0l00NG2KFBdGnw
-         PqdfqHsXCwIqkByQnOAgxACINd//7xUU1ok7kozglVNlaVEhR1iRItthtx0r/CXCEzKb
-         FNWEsOt659X6/HpPIOvk67nPUQU5SG5RSqZFZH/0P5Y+c45A4KRODEVHsAomhIJ2k2oG
-         sRL7+9UsemmfMmbLHf3G5Pvl5oEpQZs0bhqhqy+Bx34P27kL/mxHyBN1L5eCXHsEjGXk
-         3D3Q==
-X-Gm-Message-State: ACrzQf1F7tuP2CCJWqCqlVrbJrqvGGMTb6OSv8FpTIGX3ifY59MkwbwP
-	+EpEPnm6B1mkPIH/YUI57ww+O9EQ69xxG5t+VDqZ2Q2WVYw=
-X-Google-Smtp-Source: AMsMyM63W6FWpHQroX3siD0VD87is1jkSOFkatoEmoodOpHIKrQbO+XhuV4d6WO3cCnJ4s/13XgrqrcM/uHc5+LU0As=
-X-Received: by 2002:a05:6402:1911:b0:461:f0d8:4eb6 with SMTP id
- e17-20020a056402191100b00461f0d84eb6mr5959379edz.297.1666697646082; Tue, 25
- Oct 2022 04:34:06 -0700 (PDT)
+        bh=iRFAI34cTYgZTgijvanf6ly6dgifYC0zCLu6ggKrn3c=;
+        b=7mJMQDUMbIu+k+ExSRcl38kRZK4zSKaB5zAzRmDCxKJWBKrpa1I+dh1xHclNtSF9Ff
+         Wz6wFVEl9XB0axyn22xEM9NeCZZbVzfTS+q2eS8vBCN4QiPMJtkRU/2yaBkOevLLaYfk
+         hUn1Vby+IduHIvopkr4ibAozgctA8Lijr5cZJX1nOuC7M504HjDqqLrrw63rY/xz0Va/
+         3X/2d/O+BALuRlIoTNv5c/30qIDu0p1gzRLTic78JIEG79J/+v6d78hIGc2aZP/IfxDe
+         TYDck6w52FTm4jgfo9TWv7mUwmhKZ1Ha7vRuGUZUMJiQ2qMRWcq0TrUFvgckH4Hi1SOd
+         jS7w==
+X-Gm-Message-State: ACrzQf321mKZ6bx7tlkVEURvrzwn29P/zT6U2/s3XQjp/RVQs6V7U2z0
+	9VRtD7uxAgbJAvVrSSoUai4reN6+lk6D2JJeTMPwLFte2Xg=
+X-Google-Smtp-Source: AMsMyM5AvYCuDXYf2UUhKyAfMI6TRem4o8j/4b0g7T1zb2ODpTmeW3ohrnqNZxVwiwlrcLCR1uW+Wlq9Eno6m7Povgo=
+X-Received: by 2002:a17:906:5dda:b0:78d:e7d2:7499 with SMTP id
+ p26-20020a1709065dda00b0078de7d27499mr32635529ejv.588.1666699945923; Tue, 25
+ Oct 2022 05:12:25 -0700 (PDT)
 MIME-Version: 1.0
 From: Meier Boas <boas.meier@gmail.com>
-Date: Tue, 25 Oct 2022 13:33:30 +0200
-Message-ID: <CAD6RADDQ2V-Hp=qpJU1wapYsh6KfiGtx8LHNx1xDxNb5Mv=_=Q@mail.gmail.com>
-Subject: [meta-oe] jwt-cpp: add v0.6.0
+Date: Tue, 25 Oct 2022 14:11:49 +0200
+Message-ID: <CAD6RADBEPh-m7N4Xmf_GuLP+Q+zm1FMUBoQF1Wsr+UBsUkrF-w@mail.gmail.com>
+Subject: [meta-oe][PATCH v2] jwt-cpp: add recipe
 To: openembedded-devel@lists.openembedded.org
-Content-Type: multipart/alternative; boundary="000000000000248dfd05ebda497e"
+Content-Type: multipart/alternative; boundary="0000000000003956b705ebdad200"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 25 Oct 2022 11:34:08 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99305
+ <openembedded-devel@lists.openembedded.org>; Tue, 25 Oct 2022 12:12:29 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99306
 
---000000000000248dfd05ebda497e
+--0000000000003956b705ebdad200
 Content-Type: text/plain; charset="UTF-8"
 
-The following changes since commit 2ab46bac63c32a1f37576b4b8be61c95585ffcf2:
+From d3daf755814f0cff7e57bb521520fe6a52685050 Mon Sep 17 00:00:00 2001
+From: Boas Meier <boas.meier@siemens.com>
+Date: Tue, 25 Oct 2022 11:28:40 +0200
+Subject: [PATCH 1/1] jwt-cpp: add v0.6.0
 
-  fwupd: Fix plugin_gpio PACKAGECONFIG (2022-10-23 22:10:01 -0700)
-
-are available in the Git repository at:
-
-  https://github.com/boasmeier/meta-openembedded
-
-for you to fetch changes up to 71181860d47f14ce0d53789469a744af86a6c50f:
-
-  jwt-cpp: add v0.6.0 (2022-10-25 11:28:40 +0200)
-
-----------------------------------------------------------------
-Boas Meier (1):
-      jwt-cpp: add v0.6.0
-
- meta-oe/recipes-devtools/jwt-cpp/jwt-cpp_0.6.0.bb | 20 ++++++++++++++++++++
+Signed-off-by: Boas Meier <boas.meier@siemens.com>
+---
+ .../recipes-devtools/jwt-cpp/jwt-cpp_0.6.0.bb | 20 +++++++++++++++++++
  1 file changed, 20 insertions(+)
  create mode 100644 meta-oe/recipes-devtools/jwt-cpp/jwt-cpp_0.6.0.bb
 
---000000000000248dfd05ebda497e
+diff --git a/meta-oe/recipes-devtools/jwt-cpp/jwt-cpp_0.6.0.bb
+b/meta-oe/recipes-devtools/jwt-cpp/jwt-cpp_0.6.0.bb
+new file mode 100644
+index 000000000..bd3baa863
+--- /dev/null
++++ b/meta-oe/recipes-devtools/jwt-cpp/jwt-cpp_0.6.0.bb
+@@ -0,0 +1,20 @@
++SUMMARY = "A header only library for creating and validating json web
+tokens in c++"
++HOMEPAGE = "https://thalhammer.github.io/jwt-cpp/"
++SECTION = "libs"
++LICENSE = "MIT"
++LIC_FILES_CHECKSUM = "file://LICENSE;md5=8325a5ce4414c65ffdda392e0d96a9ff"
++
++SRC_URI = "git://
+github.com/Thalhammer/jwt-cpp.git;branch=master;protocol=https \
++            "
++
++SRCREV = "4a537e969891dde542ad8b1a4a214955a83be29f"
++
++S = "${WORKDIR}/git"
++
++DEPENDS = "openssl"
++
++inherit cmake
++
++EXTRA_OECMAKE += "-DJWT_BUILD_EXAMPLES=OFF"
++
++FILES:${PN} = "/usr/cmake"
+-- 
+2.30.2
+
+--0000000000003956b705ebdad200
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-<div dir=3D"ltr">The following changes since commit 2ab46bac63c32a1f37576b4=
-b8be61c95585ffcf2:<br><br>=C2=A0 fwupd: Fix plugin_gpio PACKAGECONFIG (2022=
--10-23 22:10:01 -0700)<br><br>are available in the Git repository at:<br><b=
-r>=C2=A0 <a href=3D"https://github.com/boasmeier/meta-openembedded">https:/=
-/github.com/boasmeier/meta-openembedded</a> <br><br>for you to fetch change=
-s up to 71181860d47f14ce0d53789469a744af86a6c50f:<br><br>=C2=A0 jwt-cpp: ad=
-d v0.6.0 (2022-10-25 11:28:40 +0200)<br><br>-------------------------------=
----------------------------------<br>Boas Meier (1):<br>=C2=A0 =C2=A0 =C2=
-=A0 jwt-cpp: add v0.6.0<br><br>=C2=A0meta-oe/recipes-devtools/jwt-cpp/<a hr=
-ef=3D"http://jwt-cpp_0.6.0.bb">jwt-cpp_0.6.0.bb</a> | 20 ++++++++++++++++++=
-++<br>=C2=A01 file changed, 20 insertions(+)<br>=C2=A0create mode 100644 me=
-ta-oe/recipes-devtools/jwt-cpp/<a href=3D"http://jwt-cpp_0.6.0.bb">jwt-cpp_=
-0.6.0.bb</a><br></div>
+<div dir=3D"ltr">From d3daf755814f0cff7e57bb521520fe6a52685050 Mon Sep 17 0=
+0:00:00 2001<br>From: Boas Meier &lt;<a href=3D"mailto:boas.meier@siemens.c=
+om">boas.meier@siemens.com</a>&gt;<br>Date: Tue, 25 Oct 2022 11:28:40 +0200=
+<br>Subject: [PATCH 1/1] jwt-cpp: add v0.6.0<br><br>Signed-off-by: Boas Mei=
+er &lt;<a href=3D"mailto:boas.meier@siemens.com">boas.meier@siemens.com</a>=
+&gt;<br>---<br>=C2=A0.../recipes-devtools/jwt-cpp/<a href=3D"http://jwt-cpp=
+_0.6.0.bb">jwt-cpp_0.6.0.bb</a> | 20 +++++++++++++++++++<br>=C2=A01 file ch=
+anged, 20 insertions(+)<br>=C2=A0create mode 100644 meta-oe/recipes-devtool=
+s/jwt-cpp/<a href=3D"http://jwt-cpp_0.6.0.bb">jwt-cpp_0.6.0.bb</a><br><br>d=
+iff --git a/meta-oe/recipes-devtools/jwt-cpp/<a href=3D"http://jwt-cpp_0.6.=
+0.bb">jwt-cpp_0.6.0.bb</a> b/meta-oe/recipes-devtools/jwt-cpp/<a href=3D"ht=
+tp://jwt-cpp_0.6.0.bb">jwt-cpp_0.6.0.bb</a><br>new file mode 100644<br>inde=
+x 000000000..bd3baa863<br>--- /dev/null<br>+++ b/meta-oe/recipes-devtools/j=
+wt-cpp/<a href=3D"http://jwt-cpp_0.6.0.bb">jwt-cpp_0.6.0.bb</a><br>@@ -0,0 =
++1,20 @@<br>+SUMMARY =3D &quot;A header only library for creating and valid=
+ating json web tokens in c++&quot;<br>+HOMEPAGE =3D &quot;<a href=3D"https:=
+//thalhammer.github.io/jwt-cpp/">https://thalhammer.github.io/jwt-cpp/</a>&=
+quot;<br>+SECTION =3D &quot;libs&quot;<br>+LICENSE =3D &quot;MIT&quot;<br>+=
+LIC_FILES_CHECKSUM =3D &quot;file://LICENSE;md5=3D8325a5ce4414c65ffdda392e0=
+d96a9ff&quot;<br>+<br>+SRC_URI =3D &quot;git://<a href=3D"http://github.com=
+/Thalhammer/jwt-cpp.git;branch=3Dmaster;protocol=3Dhttps">github.com/Thalha=
+mmer/jwt-cpp.git;branch=3Dmaster;protocol=3Dhttps</a> \<br>+ =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0&quot;<br>+<br>+SRCREV =3D &quot;4a537e969891dde=
+542ad8b1a4a214955a83be29f&quot;<br>+<br>+S =3D &quot;${WORKDIR}/git&quot;<b=
+r>+<br>+DEPENDS =3D &quot;openssl&quot;<br>+<br>+inherit cmake<br>+<br>+EXT=
+RA_OECMAKE +=3D &quot;-DJWT_BUILD_EXAMPLES=3DOFF&quot;<br>+<br>+FILES:${PN}=
+ =3D &quot;/usr/cmake&quot;<br>-- <br>2.30.2<br></div>
 
---000000000000248dfd05ebda497e--
+--0000000000003956b705ebdad200--
 
