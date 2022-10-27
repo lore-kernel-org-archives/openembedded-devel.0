@@ -2,86 +2,139 @@ Return-Path: <alex.kanavin@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D6DF6FA3741
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D5892C67871
 	for <webhook@archiver.kernel.org>; Thu, 27 Oct 2022 07:26:17 +0000 (UTC)
-Received: from mail-ej1-f41.google.com (mail-ej1-f41.google.com [209.85.218.41])
- by mx.groups.io with SMTP id smtpd.web08.3893.1666855568444128785
+Received: from mail-ed1-f45.google.com (mail-ed1-f45.google.com [209.85.208.45])
+ by mx.groups.io with SMTP id smtpd.web10.3884.1666855567272265342
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 27 Oct 2022 00:26:08 -0700
+ Thu, 27 Oct 2022 00:26:07 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=E+yDAqOb;
- spf=pass (domain: gmail.com, ip: 209.85.218.41, mailfrom: alex.kanavin@gmail.com)
-Received: by mail-ej1-f41.google.com with SMTP id sc25so1999770ejc.12
-        for <openembedded-devel@lists.openembedded.org>; Thu, 27 Oct 2022 00:26:08 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=ot69vn4E;
+ spf=pass (domain: gmail.com, ip: 209.85.208.45, mailfrom: alex.kanavin@gmail.com)
+Received: by mail-ed1-f45.google.com with SMTP id a5so1209366edb.11
+        for <openembedded-devel@lists.openembedded.org>; Thu, 27 Oct 2022 00:26:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=CIqqEQitfmKucH7L7mp8ya+dmh6x2Q7+4UoSwseKTCc=;
-        b=E+yDAqObkH8Wx0UrPl2UvUwLzW6fksJrSS2dO1lIM6fI6EwsdNUVvxLD3oScn0bKh1
-         Osd0LqZagz0Wcv66rrpu5XRl0Ms0OLYzuLIk2uPdJv8Dj5f2gLPB7UIWrzlQCThA2jvN
-         0WhRGE4zQGKcM1XOysD4/5pWbF0ebI6YSTP6mRm4+ykgIJJd04qwArLqqbzwnt9UAs45
-         3AUbhQLJh3QpWcb8T1LC3LxJzhtc4bvDlc2EdVqhI32140DUlmWTchPxZr5MgN/NxuK0
-         VvzAlxSsAt9jGG6aPlUEFg/J4ULS9UQIDYppzinHDnDURRHkLgNFGk1yu6e6LNItmFKx
-         xSEA==
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=Tj1OwTeSLD2R1YgnEuC9K4KFVOGeGqEYmMqjUjpXll4=;
+        b=ot69vn4El6FYdq++zEDjjX6UHWqwi4PHcUfdpOL82Dft6SJgTqllMdl0MkFmKu+9qo
+         4zqowdsETfGMPLiqLwl3HNVIvODOF8ugqsBD5t9BFXNpF2qxA4CGzmfSZn02OqqS+8tq
+         IajEu3UT9KsfrHhCLe5sy+4JN4gtlccWBPFq4c3vVX8EJGKn2Z58Xy0loCJJVkcnqhqk
+         9sLkXJhDCRceGY9wOdtz7yl32zwqnolkTPrxXX1cHD7+D6DyA2tQ1HRHbZp+fn2PYNgY
+         9PGvn71vcuFvg1z0RAxM9124C5dl+JgnFH/83XoAiGyKQGFARWy4egaHeqrkSQi0/5Ca
+         uPNA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=CIqqEQitfmKucH7L7mp8ya+dmh6x2Q7+4UoSwseKTCc=;
-        b=xfJqBSIfKg1Y5FpPFkh+CZmGqSJSVFABWX1AdHuQ59c9720gA+PdZ5ghDY224lH5pJ
-         sSp4gl4TacTkSz8/dA8ZydiecokOIompVgc0+7VLMdloEXkPfw26FWcDYoU6XkUcOplI
-         9T943wj6FzFeE3M7JaEi0E5NKk1YI9nMDWjbjuLEToq0i9LnZJnJPLz2y5KVqD28Isff
-         5RNMN/1cSZLa/76hSpzFEya23/GMtz9SBN3wb/5+EyXlB3uA0WMi6ZOctJ72BkvvSJgZ
-         OVoqkPKZXrxoAkrnEdWY1iViu+M9lLNlTl9TT5h7v4ED7RFsyJsgydRnitDvl8HfSw4N
-         aVAg==
-X-Gm-Message-State: ACrzQf003c8vgkJlszGmIm/OH0+9t90K+nvUiSAe/svGXT9hRH2z4Obt
-	gIK6tpJzMakYTYyRhu5zdh29SJ6Aixo=
-X-Google-Smtp-Source: AMsMyM6FGcj7k1KbRXU6h1K9OXk4mKpRq8pXpy16xpKTsev/EYWuG1tDdE95bhzY7hyvd4Ikk5n0Fg==
-X-Received: by 2002:a17:907:728c:b0:78e:2856:7fed with SMTP id dt12-20020a170907728c00b0078e28567fedmr40853099ejc.2.1666855567029;
-        Thu, 27 Oct 2022 00:26:07 -0700 (PDT)
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=Tj1OwTeSLD2R1YgnEuC9K4KFVOGeGqEYmMqjUjpXll4=;
+        b=ratn+DbThZV3hmxkA2VAh6YWPhFKq0HgdPKwKcZjyZlvpPDfwkjJbMY5t+61nGrRrq
+         FwnEdRsYpju0F8vj1wQYQBs8vhm/4csYpCZWU6PVFNWmZHmEkn3T/1bQFjgThev1sl2p
+         4CNmw+UAq5gHHji2sLeaKoml9c4neXWIAHqVQEyUw4FigeKbVkPIDaHGUuFi56p+02m8
+         rsTn4cwn7QnPESvIm/qha+q+wq64LVy4sgPHjyQfvylcsQuZP+xR9sffxotf4KjirbOp
+         eUL1NCiex36HWqevKcNbDw/4LGlvoH7RTRV/4tg0NSpvGZ8WToPMD1AIDsR63Zkh0zDS
+         Q8pw==
+X-Gm-Message-State: ACrzQf1wULLQiur6i2Yvg0bfH7ovQ35PZAt8ruDgYrv0aUirxaC9jpzj
+	Nw2EfmTvZ+gfBII6v5olOL/1IiNdYbo=
+X-Google-Smtp-Source: AMsMyM68qOCVi1sGlVhZqaIO/Fbol7Wngn6OvZ+2TJyMlF6hi5TNFfMEbXvOOErRfKapgL20HPV4Uw==
+X-Received: by 2002:a05:6402:1e8d:b0:454:79a9:201f with SMTP id f13-20020a0564021e8d00b0045479a9201fmr45116777edf.176.1666855565593;
+        Thu, 27 Oct 2022 00:26:05 -0700 (PDT)
 Received: from Zen2.lab.linutronix.de. (drugstore.linutronix.de. [80.153.143.164])
-        by smtp.gmail.com with ESMTPSA id f22-20020a170906561600b0078d9c2c8250sm356238ejq.84.2022.10.27.00.26.06
+        by smtp.gmail.com with ESMTPSA id f22-20020a170906561600b0078d9c2c8250sm356238ejq.84.2022.10.27.00.26.04
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 27 Oct 2022 00:26:06 -0700 (PDT)
+        Thu, 27 Oct 2022 00:26:05 -0700 (PDT)
 From: Alexander Kanavin <alex.kanavin@gmail.com>
 X-Google-Original-From: Alexander Kanavin <alex@linutronix.de>
 To: openembedded-devel@lists.openembedded.org
 Cc: Alexander Kanavin <alex@linutronix.de>
-Subject: [PATCH 3/3] python3-yappi: mark as incompatible with python 3.11
-Date: Thu, 27 Oct 2022 09:25:49 +0200
-Message-Id: <20221027072549.3525217-3-alex@linutronix.de>
+Subject: [PATCH 1/3] sip3: remove the recipe
+Date: Thu, 27 Oct 2022 09:25:47 +0200
+Message-Id: <20221027072549.3525217-1-alex@linutronix.de>
 X-Mailer: git-send-email 2.30.2
-In-Reply-To: <20221027072549.3525217-1-alex@linutronix.de>
-References: <20221027072549.3525217-1-alex@linutronix.de>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 27 Oct 2022 07:26:17 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99317
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99315
 
-A request to release a new version is here:
-https://github.com/sumerc/yappi/issues/122
+It is not compatible with python 3.11, and all
+development on that series has ceased:
+https://riverbankcomputing.com/software/sip/download
+
+There is an actively maintained version
+https://www.riverbankcomputing.com/news/SIP_v6.6.2_Released
+https://pypi.org/project/sip/
+but it probably needs a newly written recipe if someone has interest in it.
 
 Signed-off-by: Alexander Kanavin <alex@linutronix.de>
 ---
- meta-python/recipes-devtools/python/python3-yappi_1.3.6.bb | 2 ++
- 1 file changed, 2 insertions(+)
+ .../packagegroups/packagegroup-meta-oe.bb     |  1 -
+ meta-oe/recipes-devtools/sip/sip3_4.19.23.bb  | 40 -------------------
+ 2 files changed, 41 deletions(-)
+ delete mode 100644 meta-oe/recipes-devtools/sip/sip3_4.19.23.bb
 
-diff --git a/meta-python/recipes-devtools/python/python3-yappi_1.3.6.bb b/meta-python/recipes-devtools/python/python3-yappi_1.3.6.bb
-index 2f2444319..526af346b 100644
---- a/meta-python/recipes-devtools/python/python3-yappi_1.3.6.bb
-+++ b/meta-python/recipes-devtools/python/python3-yappi_1.3.6.bb
-@@ -32,3 +32,5 @@ do_install_ptest() {
-     cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
-     cp -f ${S}/yappi/yappi.py ${D}/${PTEST_PATH}/
- }
-+
-+SKIP_RECIPE[python3-yappi] ?= "Not compatible with py3.11; needs a new release"
+diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
+index cd99fb48c..a5a033cae 100644
+--- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
++++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
+@@ -300,7 +300,6 @@ RDEPENDS:packagegroup-meta-oe-devtools ="\
+     python3-distutils-extra \
+     python3-pycups \
+     rapidjson \
+-    sip3 \
+     squashfs-tools-ng \
+     uftrace \
+     unifex \
+diff --git a/meta-oe/recipes-devtools/sip/sip3_4.19.23.bb b/meta-oe/recipes-devtools/sip/sip3_4.19.23.bb
+deleted file mode 100644
+index d6335585e..000000000
+--- a/meta-oe/recipes-devtools/sip/sip3_4.19.23.bb
++++ /dev/null
+@@ -1,40 +0,0 @@
+-SUMMARY = "SIP is a C++/Python Wrapper Generator"
+-HOMEPAGE = "https://riverbankcomputing.com/software/sip/"
+-SECTION = "devel"
+-LICENSE = "GPL-2.0-or-later"
+-LIC_FILES_CHKSUM = "file://LICENSE-GPL2;md5=e91355d8a6f8bd8f7c699d62863c7303"
+-
+-SRC_URI = "https://www.riverbankcomputing.com/static/Downloads/sip/${PV}/sip-${PV}.tar.gz \
+-"
+-SRC_URI[md5sum] = "70adc0c9734e2d9dcd241d3f931dfc74"
+-SRC_URI[sha256sum] = "22ca9bcec5388114e40d4aafd7ccd0c4fe072297b628d0c5cdfa2f010c0bc7e7"
+-
+-inherit python3-dir python3native
+-
+-S = "${WORKDIR}/sip-${PV}"
+-
+-DEPENDS = "python3"
+-
+-PACKAGES += "python3-sip3"
+-
+-BBCLASSEXTEND = "native"
+-
+-CONFIGURE_SYSROOT = "${STAGING_DIR_HOST}"
+-CONFIGURE_SYSROOT:class-native = "${STAGING_DIR_NATIVE}"
+-
+-do_configure:prepend() {
+-    echo "py_platform = linux" > sip.cfg
+-    echo "py_inc_dir = ${STAGING_INCDIR}/python%(py_major).%(py_minor)${PYTHON_ABI}" >> sip.cfg
+-    echo "sip_bin_dir = ${D}/${bindir}" >> sip.cfg
+-    echo "sip_inc_dir = ${D}/${includedir}" >> sip.cfg
+-    echo "sip_module_dir = ${D}/${libdir}/python%(py_major).%(py_minor)/site-packages" >> sip.cfg
+-    echo "sip_sip_dir = ${D}/${datadir}/sip" >> sip.cfg
+-    ${PYTHON} configure.py --configuration sip.cfg --sip-module PyQt5.sip --sysroot ${CONFIGURE_SYSROOT} CC="${CC}" CXX="${CXX}" LINK="${CXX}" STRIP="" LINK_SHLIB="${CXX}" CFLAGS="${CFLAGS}" CXXFLAGS="${CXXFLAGS}" LFLAGS="${LDFLAGS}"
+-}
+-
+-do_install() {
+-    oe_runmake install
+-}
+-
+-FILES:python3-sip3 = "${libdir}/${PYTHON_DIR}/site-packages/"
+-FILES:${PN}-dbg += "${libdir}/${PYTHON_DIR}/site-packages/.debug"
 -- 
 2.30.2
 
