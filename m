@@ -1,112 +1,85 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <alex.kanavin@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0C1D9C38A2D
-	for <webhook@archiver.kernel.org>; Wed, 26 Oct 2022 14:04:04 +0000 (UTC)
-Received: from mail-oa1-f42.google.com (mail-oa1-f42.google.com [209.85.160.42])
- by mx.groups.io with SMTP id smtpd.web09.8038.1666793040203650021
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D4532C38A2D
+	for <webhook@archiver.kernel.org>; Thu, 27 Oct 2022 07:26:17 +0000 (UTC)
+Received: from mail-ed1-f51.google.com (mail-ed1-f51.google.com [209.85.208.51])
+ by mx.groups.io with SMTP id smtpd.web08.3892.1666855568167742197
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 26 Oct 2022 07:04:00 -0700
+ Thu, 27 Oct 2022 00:26:08 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=nFL8018B;
- spf=pass (domain: gmail.com, ip: 209.85.160.42, mailfrom: raj.khem@gmail.com)
-Received: by mail-oa1-f42.google.com with SMTP id 586e51a60fabf-13ba9a4430cso11390758fac.11
-        for <openembedded-devel@lists.openembedded.org>; Wed, 26 Oct 2022 07:04:00 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=eMhbDWud;
+ spf=pass (domain: gmail.com, ip: 209.85.208.51, mailfrom: alex.kanavin@gmail.com)
+Received: by mail-ed1-f51.google.com with SMTP id a67so1199488edf.12
+        for <openembedded-devel@lists.openembedded.org>; Thu, 27 Oct 2022 00:26:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=gYlmBcVEpn4nh/38MfN15WVtHTGJhAjL/ntMZRbeAtM=;
-        b=nFL8018B6H1j54B5DooZQMMXoaDa1rO281Au67usj2dyL2Cn3D2oStFlY42ZME/sl1
-         boNC1Onf5Vnoj3K2kOS/pdn+XBlCEWiGCxzYQAJn85gW0M9IsDFfpN+XEhHW7fcp3FDt
-         mH7MzAvXJYfanxuT0u7TYrbDdGYxpKHj4IrrNkTmr6Zc21MfEqPJjatrnsjnhi4xlS+0
-         IaqduSizFH3QTsvPhPb2p9l6H4JrM2fz0belPRKklwVgZsqcP8kmu+jyy+VgDHWqoIwq
-         OOc+xAZPfo9L/R49fYzKh78bAciIebIPzrbUb0LDM1SYXbTU92C/yQ5lZjlIZk4aK1aV
-         sdUA==
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=HZ1kqrMWgoAC7P7T8hXMjXCLTvkouft0aNRGtB/5n1w=;
+        b=eMhbDWud2e37/0iztAvgQvBNdZi2gJW/9Nk3P9it3kQtZsbiZualbwCGrz5wiPlYnP
+         A9BewmJ+ODw1066lUCAtpM15mu8Dp13uOcF5Cn1u3cjUrz47q0A928qRUjyUIcvRP4Em
+         w0xOJoNtEkJUBofp1D0bA2soY1bvFHUWis/UBgAphn8L0SVcnS+noztZLaumxfljHG2r
+         KrQgqNXqIavAgHUyjy6ATDUf1uyyEQIELu+WPpo3Hco/mchxXKZ/bmPnx+hvQBJEoIza
+         L9xxjdxiAGH0ZutKxEpcA71f3qCcSLYf4uVBgsA+QIFOYx2TgXFgXX5QdrWa5wfwEtIh
+         MqTA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=gYlmBcVEpn4nh/38MfN15WVtHTGJhAjL/ntMZRbeAtM=;
-        b=0loonA3vIWpC1ihOJLLEm2DUuyndRp8fTT7o32roBz2ck+aLd2XYek9hb4rI9Pu4l/
-         AxeeCTzEk6GNCw9d1ztUSDWWMlmsyQpj+TAvZY28+hdVRhhcxbbScw0you/yQb9WZBcH
-         YuAnsGMsC0cg3tASdm+BbfmW5SrMiohTT51uD6v89GvQ2nSNV6JICsVCCf59IW3a/Acy
-         q+4jch4Q/YrWfHJdGYlQXZM7sK6Bb9SH1ExqAIY6FzunOXfunopU9/hAhEWfIyLcvRyA
-         /5dpsMq6btscdk0Uld3vc2J9pHAfiRRgFvjmBnrZuyxdG4q7EpexegQz7r2fwHAYPpsA
-         mAHw==
-X-Gm-Message-State: ACrzQf1ueIMyd45PJ4AicTOqYfglUYs9tQ+/qAS1Vx9RahGSHmqiYF3i
-	YP8OS8hfexcUmZHCqU4ejhqRqgzRcAAni4wc/4Q=
-X-Google-Smtp-Source: AMsMyM7XpOIHUfRCl445Iss402kYNnBB3X+i0drrKDOzi5SHK2LnoS6MD9na9OV7mkywsFSZxEkJmpZ9N3kkMUarWIY=
-X-Received: by 2002:a05:6870:80cd:b0:13b:9ee7:34cc with SMTP id
- r13-20020a05687080cd00b0013b9ee734ccmr2158693oab.55.1666793038019; Wed, 26
- Oct 2022 07:03:58 -0700 (PDT)
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=HZ1kqrMWgoAC7P7T8hXMjXCLTvkouft0aNRGtB/5n1w=;
+        b=w9e4SuKa+jLUlzNKYs71VoRR84z7rf8NSHk0V08bUHyXsPRRjoRwgN+Z/oTiEmFrZJ
+         6JrX8HeC/+Sk7rKlIoBjaFB9ciQHbMKfCqaiPk1QEKken6ZONaGdnnyK4G64BSK9oWFH
+         arDBiVcNj45/1rCUcOYo98lHrCLCFNpH5WWDhoCt2VMii5zNKtyhDnCZ8STQdafGJ7Co
+         GbsGrIQaCOGx+IlEo2ePmqj1xSI/iw37LusMmrk6IFchyoRZQ3jEfGefX+AHPBCrheIJ
+         YqrNyTg5O6AUCDwO7m/JXPVMasSy2FdOsgVTqiI4lZhIcG6DaoN4oR9vWs8fTjUOedWe
+         /uvA==
+X-Gm-Message-State: ACrzQf3WvGxG8E0RDeBmgpx0wYF7/g7I4n5M8ZL8DTnJnSBf0oZqwDiw
+	CLtVfLYUL4XRr324dXZ7ol3QKvqDQyI=
+X-Google-Smtp-Source: AMsMyM7PG+UQoj3f9tJKTiPEs2yKRv1K3jQcK6eh+0zaLYeWHl/i0udEX1VhCWfs4cSnYW0yXRGkKg==
+X-Received: by 2002:a50:871a:0:b0:461:52a9:1da6 with SMTP id i26-20020a50871a000000b0046152a91da6mr28448857edb.94.1666855566299;
+        Thu, 27 Oct 2022 00:26:06 -0700 (PDT)
+Received: from Zen2.lab.linutronix.de. (drugstore.linutronix.de. [80.153.143.164])
+        by smtp.gmail.com with ESMTPSA id f22-20020a170906561600b0078d9c2c8250sm356238ejq.84.2022.10.27.00.26.05
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 27 Oct 2022 00:26:05 -0700 (PDT)
+From: Alexander Kanavin <alex.kanavin@gmail.com>
+X-Google-Original-From: Alexander Kanavin <alex@linutronix.de>
+To: openembedded-devel@lists.openembedded.org
+Cc: Alexander Kanavin <alex@linutronix.de>
+Subject: [PATCH 2/3] python3-wxgtk4: skip the recipe
+Date: Thu, 27 Oct 2022 09:25:48 +0200
+Message-Id: <20221027072549.3525217-2-alex@linutronix.de>
+X-Mailer: git-send-email 2.30.2
+In-Reply-To: <20221027072549.3525217-1-alex@linutronix.de>
+References: <20221027072549.3525217-1-alex@linutronix.de>
 MIME-Version: 1.0
-References: <CAD6RADDDwCV8mnAzL68r2X28yJHXnk-Rcxh9MzqCZVXg6GOrFQ@mail.gmail.com>
-In-Reply-To: <CAD6RADDDwCV8mnAzL68r2X28yJHXnk-Rcxh9MzqCZVXg6GOrFQ@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 26 Oct 2022 07:03:31 -0700
-Message-ID: <CAMKF1sqDAHBX6t-zeeBrorf6CSio0qPhVXte=UJJJaL6A9x7Xg@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH v3] jwt-cpp: add recipe
-To: Meier Boas <boas.meier@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 26 Oct 2022 14:04:04 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99314
+ <openembedded-devel@lists.openembedded.org>; Thu, 27 Oct 2022 07:26:17 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99316
 
-the patch seems to not apply perhaps due to malformed characters in
-it. Can you check and see if your mailer is ok
+Signed-off-by: Alexander Kanavin <alex@linutronix.de>
+---
+ .../recipes-devtools/python3-wxgtk4/python3-wxgtk4_4.1.1.bb     | 2 ++
+ 1 file changed, 2 insertions(+)
 
-On Tue, Oct 25, 2022 at 11:27 PM Meier Boas <boas.meier@gmail.com> wrote:
->
-> From 02b6a81c2a98bcc0a643f20d1e96d14b4269db30 Mon Sep 17 00:00:00 2001
-> From: Boas Meier <boas.meier@siemens.com>
-> Date: Tue, 25 Oct 2022 11:28:40 +0200
-> Subject: [PATCH 1/1] jwt-cpp: add v0.6.0
->
-> Signed-off-by: Boas Meier <boas.meier@siemens.com>
-> ---
->  .../recipes-devtools/jwt-cpp/jwt-cpp_0.6.0.bb  | 18 ++++++++++++++++++
->  1 file changed, 18 insertions(+)
->  create mode 100644 meta-oe/recipes-devtools/jwt-cpp/jwt-cpp_0.6.0.bb
->
-> diff --git a/meta-oe/recipes-devtools/jwt-cpp/jwt-cpp_0.6.0.bb b/meta-oe/recipes-devtools/jwt-cpp/jwt-cpp_0.6.0.bb
-> new file mode 100644
-> index 000000000..8929115fd
-> --- /dev/null
-> +++ b/meta-oe/recipes-devtools/jwt-cpp/jwt-cpp_0.6.0.bb
-> @@ -0,0 +1,18 @@
-> +SUMMARY = "A header only library for creating and validating json web tokens in c++"
-> +HOMEPAGE = "https://thalhammer.github.io/jwt-cpp/"
-> +SECTION = "libs"
-> +LICENSE = "MIT"
-> +LIC_FILES_CHKSUM = "file://LICENSE;md5=8325a5ce4414c65ffdda392e0d96a9ff"
-> +
-> +SRC_URI = "git://github.com/Thalhammer/jwt-cpp.git;branch=master;protocol=https \
-> +            "
-> +
-> +SRCREV = "4a537e969891dde542ad8b1a4a214955a83be29f"
-> +
-> +S = "${WORKDIR}/git"
-> +
-> +DEPENDS = "openssl"
-> +
-> +inherit cmake
-> +
-> +EXTRA_OECMAKE += "-DJWT_BUILD_EXAMPLES=OFF -DJWT_CMAKE_FILES_INSTALL_DIR=${libdir}/cmake"
-> --
-> 2.30.2
->
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#99310): https://lists.openembedded.org/g/openembedded-devel/message/99310
-> Mute This Topic: https://lists.openembedded.org/mt/94576306/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [raj.khem@gmail.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
->
+diff --git a/meta-python/recipes-devtools/python3-wxgtk4/python3-wxgtk4_4.1.1.bb b/meta-python/recipes-devtools/python3-wxgtk4/python3-wxgtk4_4.1.1.bb
+index 4d739b86f..842c57646 100644
+--- a/meta-python/recipes-devtools/python3-wxgtk4/python3-wxgtk4_4.1.1.bb
++++ b/meta-python/recipes-devtools/python3-wxgtk4/python3-wxgtk4_4.1.1.bb
+@@ -33,3 +33,5 @@ RDEPENDS:${PN} = "\
+     python3-six \
+     python3-xml \
+ "
++
++SKIP_RECIPE[python3-wxgtk4] ?= "Not compatible with py3.11; needs version update for both itself and wxwidgets"
+-- 
+2.30.2
+
 
