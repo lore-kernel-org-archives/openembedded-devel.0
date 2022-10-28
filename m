@@ -1,183 +1,103 @@
-Return-Path: <ticotimo@gmail.com>
+Return-Path: <vince@underview.tech>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6E9CCFA373D
-	for <webhook@archiver.kernel.org>; Fri, 28 Oct 2022 01:57:53 +0000 (UTC)
-Received: from mail-ej1-f44.google.com (mail-ej1-f44.google.com [209.85.218.44])
- by mx.groups.io with SMTP id smtpd.web09.1721.1666922271659623190
- for <Openembedded-devel@lists.openembedded.org>;
- Thu, 27 Oct 2022 18:57:52 -0700
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4BEB2ECAAA1
+	for <webhook@archiver.kernel.org>; Fri, 28 Oct 2022 01:58:23 +0000 (UTC)
+Received: from mail-io1-f45.google.com (mail-io1-f45.google.com [209.85.166.45])
+ by mx.groups.io with SMTP id smtpd.web11.1754.1666922297543695914
+ for <openembedded-devel@lists.openembedded.org>;
+ Thu, 27 Oct 2022 18:58:17 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=pwZqXfL6;
- spf=pass (domain: gmail.com, ip: 209.85.218.44, mailfrom: ticotimo@gmail.com)
-Received: by mail-ej1-f44.google.com with SMTP id f27so9754064eje.1
-        for <Openembedded-devel@lists.openembedded.org>; Thu, 27 Oct 2022 18:57:51 -0700 (PDT)
+ dkim=pass header.i=@underview.tech header.s=google header.b=HvX1MyjW;
+ spf=pass (domain: underview.tech, ip: 209.85.166.45, mailfrom: vince@underview.tech)
+Received: by mail-io1-f45.google.com with SMTP id h206so37760iof.10
+        for <openembedded-devel@lists.openembedded.org>; Thu, 27 Oct 2022 18:58:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=NLV/fOJfM4b/PHQyAC8ujqR2Q0zNmgTNG3ty+/gf6K4=;
-        b=pwZqXfL6rXaErGWNl7x6xTz8lZuewfDehx3Xlri0j4AX+G7hoM4B/RTD1LHFPweCrG
-         dtwpW2qcfNH08042L+moNux7xib78eiO5ul7xbu2q1aud9H8EvGhKI+oDtV7jXNxUBXJ
-         c8jw+L6zEJqTqMfR8S1sD2aRs6lJ2TxaSpTrpzPkB1vzidbhKOks8cGrfUEYSBuco07E
-         mofhw3xZk47BCyZ45jfpr/ZaqztLhDPAfm6Wcy1I9APKgHn+LJ/dlIbpV61fLJrTfCtn
-         J7l/lWEbtbOjHzjAzRj1Y/D9hR+N+T+CWUtc1pimfbCTuQuOy8e3jxDSbbY1hlbI3oDt
-         skMQ==
+        d=underview.tech; s=google;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=zd/g+diC6JwOpaR10Lg9vTOcTR3DOuNa/nYaOeMApjw=;
+        b=HvX1MyjWs8CsgYgmv0HIPcpfVOJo6hUc50Bg582VAGR7+W0L7Pi0GMCk1HLHni62J4
+         sObvaa645seaKq0sd4zmjS4X5g9TLmwWkQ2fQmYRJNIQEtL1IAsLTMqzHUgWObU+y2QP
+         4mO5jj2w0Uc7IHkkr64RGgLJGGALP1eP5fv/opGJIo1TT/FGC1olPjUJOGenyqDH8vsW
+         uBX4QbCOKyyEaXvaGY5YQYWV2GmC1enVqHnMuZyqN9oE8HcJ5ISkEg/lq/O6FNqSZd12
+         jjB4YTcJMa1412KWBkHEfGdOegbEbD6LOxWdXLMgIM3TGjuYnQnycEMr9i3q1z6/be0O
+         3qTw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=NLV/fOJfM4b/PHQyAC8ujqR2Q0zNmgTNG3ty+/gf6K4=;
-        b=ZMugWO7IO4mif+qvSVM1vqSrLQLzmpoBJoVB3AYaXJg7c9xoskZuD1WjGj2V1oc8QJ
-         ieSc6NVavPdTTNuIs5VfrKlM+xDwyI4rcf6A58RPFMBAACJPSKiQ8EawshLVn7QfkZ+J
-         rYjFykLMsYuzGwT2R1iech/p5YlSAGSDPUl4JeFQCyChVNqZE8IPH2rGo6MpTWYkJJZF
-         fgcJiq78F4k+Nidnh+TGEPJsJwosl5+Bkz17DwDE82uVH6+uCzP368U9lo9p7uxSU3C6
-         YrCLargiADhsczyWmxvAyvET2/6wtkXQx979mj0hUxazqsAWrmtxfra1YkKnNuV7YGJX
-         choQ==
-X-Gm-Message-State: ACrzQf2MI1Ch3fEbMiWknY7lXlj68tCTTf/5GvAuba+3rmz5EGKqnUB3
-	bgo8OC0/J4EZVBGH/MRFgaafkIYq2WjTke7BIfs=
-X-Google-Smtp-Source: AMsMyM55/7Ezw63CwW3yICDIQlw42czAtGTM+75hvWLSUFkdYXxHJUUPO/EgQ/6VqDCVjWXBGPyJGT1ijA1K31bwwFE=
-X-Received: by 2002:a17:906:cc10:b0:78d:f741:9d87 with SMTP id
- ml16-20020a170906cc1000b0078df7419d87mr44747739ejb.295.1666922270092; Thu, 27
- Oct 2022 18:57:50 -0700 (PDT)
+        bh=zd/g+diC6JwOpaR10Lg9vTOcTR3DOuNa/nYaOeMApjw=;
+        b=bXLcO3c20vr3oVwv+z8wXb+VinSwRrXiDvvUAHgmxt/LMZSh2ktV8tNT8/Cwh7P133
+         l1eIdj5R3uO0vEP66ZBfs8VB5NuQz/C+hR4cdeBarnVJdJIQZjdNcjKWvN17qIus3FaP
+         j7AQG/dPc4pAqLlelYQLpS2evbFhkGACFYdxdnCBP3+0u0BpWLEor4rTf0QxmMwoAyaF
+         sgwzrWffLoLaoKTT7DgotazZ6O9XO/TaDW2F0K/nnauzGau33dRtLne4uwVY29zqy9C6
+         qA0HRm59gjfLW7GESQr3TdyU43kOLWfow1Caj8mj3yRaUwsPDidPTBMpoXRoDzwITxqG
+         HH8g==
+X-Gm-Message-State: ACrzQf1Rsehr/aXj7A6kAI/FXRdPtTKTMoNWRsKYMrWxsX4EsQAMjo/b
+	jlIF41ujL7nxnhr+mfSwe2OweTJU8JPpnWiu
+X-Google-Smtp-Source: AMsMyM4XLsxagXERVl535OBLnyrjk7oyhIXwC+rluk2bzqvKKUy3Jhy5EMOFJAfbjrn3iMGWYJSn8Q==
+X-Received: by 2002:a05:6638:3590:b0:364:21e:d0bf with SMTP id v16-20020a056638359000b00364021ed0bfmr31946224jal.124.1666922296540;
+        Thu, 27 Oct 2022 18:58:16 -0700 (PDT)
+Received: from vince-ubuntu.attlocal.net (99-113-4-128.lightspeed.hstntx.sbcglobal.net. [99.113.4.128])
+        by smtp.gmail.com with ESMTPSA id k26-20020a02cb5a000000b00363fbcad265sm1216074jap.25.2022.10.27.18.58.15
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 27 Oct 2022 18:58:16 -0700 (PDT)
+From: Vincent Davis Jr <vince@underview.tech>
+To: openembedded-devel@lists.openembedded.org
+Cc: Vincent Davis Jr <vince@underview.tech>
+Subject: [meta-oe][PATCH] xf86-video-amdgpu: add new recipe xf86-video-amdgpu
+Date: Thu, 27 Oct 2022 20:56:41 -0500
+Message-Id: <20221028015641.1081402-1-vince@underview.tech>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <20221027142043.177983-1-JPEWhacker@gmail.com> <20221027173334.312517-1-JPEWhacker@gmail.com>
-In-Reply-To: <20221027173334.312517-1-JPEWhacker@gmail.com>
-From: Tim Orling <ticotimo@gmail.com>
-Date: Thu, 27 Oct 2022 18:57:39 -0700
-Message-ID: <CANx9H-BFKJQT8tOoEfyi03Wwp46kfZPYRe9VRTvoM62uNH3HBg@mail.gmail.com>
-Subject: Re: [oe][meta-webserver][PATCH v2] meta-webserver: nginx: Add ipv6 support
-To: Joshua Watt <jpewhacker@gmail.com>
-Cc: Openembedded-devel@lists.openembedded.org
-Content-Type: multipart/alternative; boundary="000000000000c6f04b05ec0e955e"
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 28 Oct 2022 01:57:53 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99326
+ <openembedded-devel@lists.openembedded.org>; Fri, 28 Oct 2022 01:58:23 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99327
 
---000000000000c6f04b05ec0e955e
-Content-Type: text/plain; charset="UTF-8"
+Supports the Xorg driver for AMD Radeon GPUs that
+utilizes the amdgpu kernel driver.
 
-On Thu, Oct 27, 2022 at 10:33 AM Joshua Watt <JPEWhacker@gmail.com> wrote:
+Signed-off-by: Vincent Davis Jr <vince@underview.tech>
+---
+ .../xorg-driver/xf86-video-amdgpu_22.0.0.bb   | 22 +++++++++++++++++++
+ 1 file changed, 22 insertions(+)
+ create mode 100644 meta-oe/recipes-graphics/xorg-driver/xf86-video-amdgpu_22.0.0.bb
 
-> Adds a PACKAGECONFIG to enable ipv6 in nginx
->
-> Signed-off-by: Joshua Watt <JPEWhacker@gmail.com>
-> ---
->  meta-webserver/recipes-httpd/nginx/nginx.inc | 3 ++-
->  1 file changed, 2 insertions(+), 1 deletion(-)
->
-> diff --git a/meta-webserver/recipes-httpd/nginx/nginx.inc
-> b/meta-webserver/recipes-httpd/nginx/nginx.inc
-> index dfced3330..260f5f320 100644
-> --- a/meta-webserver/recipes-httpd/nginx/nginx.inc
-> +++ b/meta-webserver/recipes-httpd/nginx/nginx.inc
-> @@ -37,12 +37,13 @@ NGINX_USER   ?= "www"
->  EXTRA_OECONF = ""
->  DISABLE_STATIC = ""
->
-> -PACKAGECONFIG ??= "ssl"
-> +PACKAGECONFIG ??= "ssl ${@bb.utils.filter('DISTRO_FEATURES', 'ipv6', d)}"
+diff --git a/meta-oe/recipes-graphics/xorg-driver/xf86-video-amdgpu_22.0.0.bb b/meta-oe/recipes-graphics/xorg-driver/xf86-video-amdgpu_22.0.0.bb
+new file mode 100644
+index 000000000..94e2ea43e
+--- /dev/null
++++ b/meta-oe/recipes-graphics/xorg-driver/xf86-video-amdgpu_22.0.0.bb
+@@ -0,0 +1,22 @@
++require recipes-graphics/xorg-driver/xorg-driver-video.inc
++
++LIC_FILES_CHKSUM = "file://COPYING;md5=aabff1606551f9461ccf567739af63dc"
++
++SUMMARY = "X.Org X server -- AMD Radeon GPU display driver"
++
++DESCRIPTION = "Xorg driver for AMD Radeon GPUs using the amdgpu kernel driver"
++
++SRC_URI[md5sum] = "73efb437f5eb29b2c52a9d82c7e15d72"
++SRC_URI[sha256sum] = "bc47a1a8854e790270fa5de2fb9dfe8558139b03d8f68ac1057dcd235d572dcc"
++
++XORG_DRIVER_COMPRESSOR = ".tar.gz"
++DEPENDS += "virtual/libx11 libdrm virtual/libgbm xorgproto"
++
++PACKAGECONFIG ??= "udev glamor"
++PACKAGECONFIG[udev] = "--enable-udev,--disable-udev,udev"
++PACKAGECONFIG[glamor] = "--enable-glamor,--disable-glamor"
++
++RRECOMMENDS:${PN} += "linux-firmware-amdgpu"
++
++FILES:${PN}-config = "${datadir}/X11/xorg.conf.d"
++FILES:${PN} += "${datadir}/X11"
+-- 
+2.34.1
 
-
-much better, I was also going to suggest this
-
->
->
->  PACKAGECONFIG[gunzip] = "--with-http_gunzip_module,,"
->  PACKAGECONFIG[http2] = "--with-http_v2_module,,"
->  PACKAGECONFIG[ssl] = "--with-http_ssl_module,,openssl"
->  PACKAGECONFIG[http-auth-request] = "--with-http_auth_request_module,,"
-> +PACKAGECONFIG[ipv6] = "--with-ipv6,,"
->
->  do_configure () {
->      if [ "${SITEINFO_BITS}" = "64" ]; then
-> --
-> 2.33.0
->
->
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#99325):
-> https://lists.openembedded.org/g/openembedded-devel/message/99325
-> Mute This Topic: https://lists.openembedded.org/mt/94609597/924729
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
-> ticotimo@gmail.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
->
->
-
---000000000000c6f04b05ec0e955e
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div><br></div><div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=
-=3D"gmail_attr">On Thu, Oct 27, 2022 at 10:33 AM Joshua Watt &lt;<a href=3D=
-"mailto:JPEWhacker@gmail.com">JPEWhacker@gmail.com</a>&gt; wrote:<br></div>=
-<blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-=
-left-width:1px;border-left-style:solid;padding-left:1ex;border-left-color:r=
-gb(204,204,204)">Adds a PACKAGECONFIG to enable ipv6 in nginx<br>
-<br>
-Signed-off-by: Joshua Watt &lt;<a href=3D"mailto:JPEWhacker@gmail.com" targ=
-et=3D"_blank">JPEWhacker@gmail.com</a>&gt;<br>
----<br>
-=C2=A0meta-webserver/recipes-httpd/nginx/nginx.inc | 3 ++-<br>
-=C2=A01 file changed, 2 insertions(+), 1 deletion(-)<br>
-<br>
-diff --git a/meta-webserver/recipes-httpd/nginx/nginx.inc b/meta-webserver/=
-recipes-httpd/nginx/nginx.inc<br>
-index dfced3330..260f5f320 100644<br>
---- a/meta-webserver/recipes-httpd/nginx/nginx.inc<br>
-+++ b/meta-webserver/recipes-httpd/nginx/nginx.inc<br>
-@@ -37,12 +37,13 @@ NGINX_USER=C2=A0 =C2=A0?=3D &quot;www&quot;<br>
-=C2=A0EXTRA_OECONF =3D &quot;&quot;<br>
-=C2=A0DISABLE_STATIC =3D &quot;&quot;<br>
-<br>
--PACKAGECONFIG ??=3D &quot;ssl&quot;<br>
-+PACKAGECONFIG ??=3D &quot;ssl ${@bb.utils.filter(&#39;DISTRO_FEATURES&#39;=
-, &#39;ipv6&#39;, d)}&quot;</blockquote><div dir=3D"auto"><br></div><div di=
-r=3D"auto">much better, I was also going to suggest this</div><blockquote c=
-lass=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left-width:1p=
-x;border-left-style:solid;padding-left:1ex;border-left-color:rgb(204,204,20=
-4)" dir=3D"auto"><br>
-<br>
-=C2=A0PACKAGECONFIG[gunzip] =3D &quot;--with-http_gunzip_module,,&quot;<br>
-=C2=A0PACKAGECONFIG[http2] =3D &quot;--with-http_v2_module,,&quot;<br>
-=C2=A0PACKAGECONFIG[ssl] =3D &quot;--with-http_ssl_module,,openssl&quot;<br=
->
-=C2=A0PACKAGECONFIG[http-auth-request] =3D &quot;--with-http_auth_request_m=
-odule,,&quot;<br>
-+PACKAGECONFIG[ipv6] =3D &quot;--with-ipv6,,&quot;<br>
-<br>
-=C2=A0do_configure () {<br>
-=C2=A0 =C2=A0 =C2=A0if [ &quot;${SITEINFO_BITS}&quot; =3D &quot;64&quot; ];=
- then<br>
--- <br>
-2.33.0<br>
-<br>
-<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-Links: You receive all messages sent to this group.<br>
-View/Reply Online (#99325): <a href=3D"https://lists.openembedded.org/g/ope=
-nembedded-devel/message/99325" rel=3D"noreferrer" target=3D"_blank">https:/=
-/lists.openembedded.org/g/openembedded-devel/message/99325</a><br>
-Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/94609597/9247=
-29" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/mt/=
-94609597/924729</a><br>
-Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
-d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
-><br>
-Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
-/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
-/g/openembedded-devel/unsub</a> [<a href=3D"mailto:ticotimo@gmail.com" targ=
-et=3D"_blank">ticotimo@gmail.com</a>]<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-<br>
-</blockquote></div></div>
-
---000000000000c6f04b05ec0e955e--
 
