@@ -1,94 +1,108 @@
-Return-Path: <costamagna.gianfranco@gmail.com>
+Return-Path: <mikko.rapeli@linaro.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 78F0BC38A02
-	for <webhook@archiver.kernel.org>; Fri, 28 Oct 2022 12:32:06 +0000 (UTC)
-Received: from mail-wr1-f47.google.com (mail-wr1-f47.google.com [209.85.221.47])
- by mx.groups.io with SMTP id smtpd.web12.5634.1666960317540515019
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BFE5DC38A02
+	for <webhook@archiver.kernel.org>; Fri, 28 Oct 2022 13:10:46 +0000 (UTC)
+Received: from mail.kapsi.fi (mail.kapsi.fi [91.232.154.25])
+ by mx.groups.io with SMTP id smtpd.web09.6042.1666962645167770816
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 28 Oct 2022 05:31:57 -0700
+ Fri, 28 Oct 2022 06:10:45 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=etXwIACT;
- spf=pass (domain: gmail.com, ip: 209.85.221.47, mailfrom: costamagna.gianfranco@gmail.com)
-Received: by mail-wr1-f47.google.com with SMTP id bk15so6368661wrb.13
-        for <openembedded-devel@lists.openembedded.org>; Fri, 28 Oct 2022 05:31:57 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=EhOeA0NRAwzB9kiwcu1HO4leHSsnTIgO3i+7vZPDD7k=;
-        b=etXwIACTPxDshVKb9lS887fsyB8pIxlFA995Hg99HiavuCLDsFU/MKvaDC8OW+Xux5
-         03RgbKx3k6vLytQdCfHihpVGLhg1ayvfRjG7t5sZcchMm1INPNyEJy8l269Wj+qlqRQD
-         GDVDx4/tR3gMKtyTrhQogc5TzeL6fOxVb5xi1DKeq1CE66HK1Qdc5KUvF5C/3JHDIpl0
-         HiKYZUC14EX0g8XgqXPvnM1zMotKgtUz5UznaHJCWV4KM4Uqy16OmHYW8WwzCa/N111B
-         776zIdp2xEHWsLvHeRR91+XGbrRRl+x+Nyg0Z6+CY3ZnNYwt2h+5PX3eVGnyokLHxaQY
-         Josw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=EhOeA0NRAwzB9kiwcu1HO4leHSsnTIgO3i+7vZPDD7k=;
-        b=edzfUSElDwuu5PXDNiOP+/QZcxE1Becnr/4ac3gxSQOUDCz/E3tdlIWLuRRCIDZwkW
-         uxPiKIItjOU6g1UC4oxO5acyx1nyxBm7EAIsynmJ/ZySgW/3WBd0CiLlt9lZ1RBAi4FJ
-         Styy/Dq6cvcjqG0HopRpCcinbNzggXesQY2RW2XjU0hbewFDj9tBhbNemigWo/A38gdO
-         pEmkW9YBgAYw4ur6ncJmwbcNLFwQuKAMlTNg77N4UjeYj7K2nQCU7HP68T0mhucUFYME
-         bCGJg43YzvIO4IBOapDNSbkfPIk3FQsYafJm0VQbsh+tL7nqZdMf013MILF8ZnKYLqgw
-         iYPw==
-X-Gm-Message-State: ACrzQf0SKz1Gg7e2EpLR7mPHSmwMaMLRtmYsZsHCHaL+BfZaSVEL37Qk
-	354MCqM5/NODAmGfRIsdRBbOtAPNrTU=
-X-Google-Smtp-Source: AMsMyM5XxHaoSYRsyan6hyFvq6ps6he8CqYMDKpRaXYzVKeZ+E91De2IqnusE9ZFteVd+heBzJUSbw==
-X-Received: by 2002:a5d:6550:0:b0:236:960f:15cf with SMTP id z16-20020a5d6550000000b00236960f15cfmr5438788wrv.177.1666960315310;
-        Fri, 28 Oct 2022 05:31:55 -0700 (PDT)
-Received: from Unimatrix08-Jammy.. (mob-31-159-21-5.net.vodafone.it. [31.159.21.5])
-        by smtp.gmail.com with ESMTPSA id w7-20020adfd4c7000000b002362f6fcaf5sm3488044wrk.48.2022.10.28.05.31.54
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 28 Oct 2022 05:31:54 -0700 (PDT)
-From: Gianfranco Costamagna <costamagna.gianfranco@gmail.com>
-X-Google-Original-From: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
+ dkim=missing; spf=none, err=permanent DNS error (domain: lakka.kapsi.fi, ip: 91.232.154.25, mailfrom: mcfrisk@lakka.kapsi.fi)
+Received: from kapsi.fi ([2001:67c:1be8::11] helo=lakka.kapsi.fi)
+	by mail.kapsi.fi with esmtps  (TLS1.3) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+	(Exim 4.94.2)
+	(envelope-from <mcfrisk@lakka.kapsi.fi>)
+	id 1ooP8D-006gD7-Uw; Fri, 28 Oct 2022 16:10:42 +0300
+Received: from mcfrisk by lakka.kapsi.fi with local (Exim 4.94.2)
+	(envelope-from <mcfrisk@lakka.kapsi.fi>)
+	id 1ooP8D-00F6sM-Jl; Fri, 28 Oct 2022 16:10:41 +0300
+From: Mikko Rapeli <mikko.rapeli@linaro.org>
 To: openembedded-devel@lists.openembedded.org
-Cc: Gianfranco Costamagna <gianfranco.costamagna@abinsula.com>,
-	Gianfranco Costamagna <costamagnagianfranco@yahoo.it>,
-	Gianfranco Costamagna <locutusofborg@debian.org>
-Subject: [meta-oe][PATCH] vbxguestdrivers: upgrade 7.0.0 -> 7.0.2
-Date: Fri, 28 Oct 2022 14:31:52 +0200
-Message-Id: <20221028123152.3407172-1-costamagnagianfranco@yahoo.it>
-X-Mailer: git-send-email 2.34.1
+Cc: Mikko Rapeli <mikko.rapeli@linaro.org>
+Subject: [meta-oe][master][kirkstone][PATCH] fwupd: fix ${datadir}/polkit-1/rules.d permissions
+Date: Fri, 28 Oct 2022 16:10:37 +0300
+Message-Id: <20221028131037.3600179-1-mikko.rapeli@linaro.org>
+X-Mailer: git-send-email 2.30.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+X-Rspam-Score: -0.2 (/)
+X-Rspam-Report: Action: no action
+ Symbol: RCVD_TLS_LAST(0.00)
+ Symbol: ARC_NA(0.00)
+ Symbol: DMARC_POLICY_SOFTFAIL(0.10)
+ Symbol: FROM_HAS_DN(0.00)
+ Symbol: TO_DN_SOME(0.00)
+ Symbol: R_MISSING_CHARSET(0.50)
+ Symbol: TO_MATCH_ENVRCPT_ALL(0.00)
+ Symbol: MIME_GOOD(-0.10)
+ Symbol: SUBJECT_HAS_CURRENCY(1.00)
+ Symbol: RCPT_COUNT_TWO(0.00)
+ Symbol: MID_CONTAINS_FROM(1.00)
+ Symbol: NEURAL_HAM(-0.00)
+ Symbol: R_SPF_NA(0.00)
+ Symbol: FORGED_SENDER(0.30)
+ Symbol: R_DKIM_NA(0.00)
+ Symbol: MIME_TRACE(0.00)
+ Symbol: ASN(0.00)
+ Symbol: FROM_NEQ_ENVFROM(0.00)
+ Symbol: BAYES_HAM(-3.00)
+ Symbol: RCVD_COUNT_TWO(0.00)
+ Message-ID: 20221028131037.3600179-1-mikko.rapeli@linaro.org
+X-SA-Exim-Connect-IP: 2001:67c:1be8::11
+X-SA-Exim-Mail-From: mcfrisk@lakka.kapsi.fi
+X-SA-Exim-Scanned: No (on mail.kapsi.fi); SAEximRunCond expanded to false
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 28 Oct 2022 12:32:06 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99333
+ <openembedded-devel@lists.openembedded.org>; Fri, 28 Oct 2022 13:10:46 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99334
 
-From: Gianfranco Costamagna <gianfranco.costamagna@abinsula.com>
+They need to be the same as systemd which creates the
+directory or rpm/dnf will fail rootfs build with error:
 
-Signed-off-by: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
-Signed-off-by: Gianfranco Costamagna <locutusofborg@debian.org>
+Error: Transaction test error:
+  file /usr/share/polkit-1/rules.d conflicts between attempted installs of fwupd-1.7.6-r0.qemuarm64 and systemd-1:250.5-r0.armv8a
+
+"bitbake -c install systemd && bitbake -c devshell systemd"
+shows that the permissons should be:
+
+  2581167      1 drwx------   2 polkitd  root            3 Oct 28 11:22 ../image/usr/share/polkit-1/rules.d
+
+but "bitbake -c install fwupd && bitbake -c devshell fwupd" shows
+the permissions as:
+
+  2554626      1 drwxr-xr-x   2 root     root            3 Oct 28 11:17 ../image/usr/share/polkit-1/rules.d
+
+Now they are fixed to be the same and installing both systemd and fwupd
+to rootfs works with rpm and dnf.
+
+Signed-off-by: Mikko Rapeli <mikko.rapeli@linaro.org>
 ---
- .../{vboxguestdrivers_7.0.0.bb => vboxguestdrivers_7.0.2.bb}    | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-support/vboxguestdrivers/{vboxguestdrivers_7.0.0.bb => vboxguestdrivers_7.0.2.bb} (97%)
+ meta-oe/recipes-bsp/fwupd/fwupd_1.7.6.bb | 11 +++++++++++
+ 1 file changed, 11 insertions(+)
 
-diff --git a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_7.0.0.bb b/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_7.0.2.bb
-similarity index 97%
-rename from meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_7.0.0.bb
-rename to meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_7.0.2.bb
-index 46484475e..49c2a3f2a 100644
---- a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_7.0.0.bb
-+++ b/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_7.0.2.bb
-@@ -15,7 +15,7 @@ SRC_URI = "http://download.virtualbox.org/virtualbox/${PV}/${VBOX_NAME}.tar.bz2
-     file://Makefile.utils \
- "
- 
--SRC_URI[sha256sum] = "1e5b321bf20eec03154e2b3e16331f827a472d6e8e5b1e04c27041978975a97a"
-+SRC_URI[sha256sum] = "612fd6fc417e0067653091a613e1d4fa084d3f42407dff5f991a0eb1e2ab26c8"
- 
- S ?= "${WORKDIR}/vbox_module"
- S:task-patch = "${WORKDIR}/${VBOX_NAME}"
+diff --git a/meta-oe/recipes-bsp/fwupd/fwupd_1.7.6.bb b/meta-oe/recipes-bsp/fwupd/fwupd_1.7.6.bb
+index 53f1720b0..ccce4b1df 100644
+--- a/meta-oe/recipes-bsp/fwupd/fwupd_1.7.6.bb
++++ b/meta-oe/recipes-bsp/fwupd/fwupd_1.7.6.bb
+@@ -125,3 +125,14 @@ FILES:${PN} += "${libdir}/fwupd-plugins-* \
+ FILES:${PN}-ptest += "${libexecdir}/installed-tests/ \
+                       ${datadir}/installed-tests/"
+ RDEPENDS:${PN}-ptest += "gnome-desktop-testing"
++
++do_install:append() {
++        # do the same as systemd to avoid rpm/dnf errors when installing both
++        # If polkit is setup fixup permissions and ownership
++        if ${@bb.utils.contains('PACKAGECONFIG', 'polkit', 'true', 'false', d)}; then
++                if [ -d ${D}${datadir}/polkit-1/rules.d ]; then
++                        chmod 700 ${D}${datadir}/polkit-1/rules.d
++                        chown polkitd:root ${D}${datadir}/polkit-1/rules.d
++                fi
++        fi
++}
 -- 
-2.34.1
+2.17.1
 
 
