@@ -1,277 +1,442 @@
-Return-Path: <randy.macleod@windriver.com>
+Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7AEF6C433FE
-	for <webhook@archiver.kernel.org>; Sun, 30 Oct 2022 02:08:01 +0000 (UTC)
-Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.web08.4678.1667095674879710307
+	by smtp.lore.kernel.org (Postfix) with ESMTP id F365FFA373D
+	for <webhook@archiver.kernel.org>; Sun, 30 Oct 2022 06:36:42 +0000 (UTC)
+Received: from mailout07.t-online.de (mailout07.t-online.de [194.25.134.83])
+ by mx.groups.io with SMTP id smtpd.web08.5908.1667111790465591149
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 29 Oct 2022 19:07:55 -0700
+ Sat, 29 Oct 2022 23:36:31 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=pps06212021 header.b=by3rTr0k;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=83027ac7d5=randy.macleod@windriver.com)
-Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 29U27s6R014988
-	for <openembedded-devel@lists.openembedded.org>; Sat, 29 Oct 2022 19:07:54 -0700
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com; h=message-id : date
- : subject : to : cc : references : from : in-reply-to : content-type :
- content-transfer-encoding : mime-version; s=PPS06212021;
- bh=pCm/XXtZVY897SpwJw085KkiUL0mR1mVEpIm4AXRs+0=;
- b=by3rTr0kc64SAt9vNhEDl1ezoUCZV2fo4kfufyK3f/SjhqAvauLMaSt/0wVWdgUCUfBI
- Qib+r+igFbfZFnO+gOiViniQEb54yA9fz5EGfykpGsbT/hVsNp5B8DiKN1yYZPaai3Pq
- NTkFC2MjxwbP6lq09e9ZrqpWrvbK88awLLOiGRe9rixWYb6xIlF2WJjrAEuBlE9yESbu
- MZQvG7Ai3hDIMlWrwmNesA3YbWPO8ERhGj4n2Orx7kfKtC0ISb+qGygLMVEaqtx/15/v
- LUHIN+nwKtGl11cVf+Ji3JL4mlPrgH+F0t470rMg5/FkD7VhTgcwCEvrUDJZEeY4zGVM sw== 
-Received: from pps.reinject (localhost [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3kgyf3rfh8-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Sat, 29 Oct 2022 19:07:54 -0700
-Received: from m0250810.ppops.net (m0250810.ppops.net [127.0.0.1])
-	by pps.reinject (8.17.1.5/8.17.1.5) with ESMTP id 29U27sCL014970
-	for <openembedded-devel@lists.openembedded.org>; Sat, 29 Oct 2022 19:07:54 -0700
-Received: from nam12-bn8-obe.outbound.protection.outlook.com (mail-bn8nam12lp2176.outbound.protection.outlook.com [104.47.55.176])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3kgyf3rfh7-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Sat, 29 Oct 2022 19:07:53 -0700
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=Q6YFQYuSd2EMFYFL7ZKEP0kVH5a+noT/XDoC+PNFwxIEneL1vxzxJk1TyjE4eQwNNPZoIOyWT8dejmG5grk0JCCmtEuofhW4DuoL0pPUWPJIYtQDbaf/gJwOe2bubZVRnmcd9zlgF1Y7aGK+QJUd1IIno52dDCwdg/s2gcilhV6SdcYmY2iOFwyDAso+3cG+F6n1aeDoNdXWnw1GDFS/z6egzNtKnYJ26NFBCQtVvuhFnpXCnQ9KUfnb/YG9OpsF5ZkSwjvzmmtexxIQRYwWfL2c3C855j/E+u2oUGAWXPlMbtT68d2e0yfaZQph/h9N7f3YLWKsbS+Zl7ph9rx+hw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=pCm/XXtZVY897SpwJw085KkiUL0mR1mVEpIm4AXRs+0=;
- b=QOIVIoyMs9QPHj41s/xJ8gtIkIXM3BjW85No7ZuW61kYBqPUnxt56y7klKgmFo1BNB33NdgEEppGD+d2ptsLlD/2TgofpkDrsVHkYEo/7RGMunEEh8CBBg0tcYqMp78+oIc3arZPOKIiIm5+DsOSSmjY08bb1aH3Esw/zz+w4Oo8BkEBFknnjqGXu4wGGfv0XFJZSHoegN/QB95RdiSzbkrsgGPLdL2BDd8usZAoKfkp2O16jCsKl32+r52lLAiAiWyVF3lRjmSMwuTkfidKewUpU4ndufE7hG+iuL8IYd8Ui3d1PerhAfnn33DIMVsa8B7lVC2VeUetLhGpH6kQ6Q==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=windriver.com; dmarc=pass action=none
- header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
-Received: from DM6PR11MB3994.namprd11.prod.outlook.com (2603:10b6:5:193::19)
- by SA2PR11MB4860.namprd11.prod.outlook.com (2603:10b6:806:11b::10) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5769.18; Sun, 30 Oct
- 2022 02:07:50 +0000
-Received: from DM6PR11MB3994.namprd11.prod.outlook.com
- ([fe80::daa9:a3d:d4ac:7043]) by DM6PR11MB3994.namprd11.prod.outlook.com
- ([fe80::daa9:a3d:d4ac:7043%6]) with mapi id 15.20.5769.015; Sun, 30 Oct 2022
- 02:07:50 +0000
-Message-ID: <77bd11cb-1a37-44f0-6931-e9aa9619bc03@windriver.com>
-Date: Sat, 29 Oct 2022 22:07:45 -0400
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.2.2
-Subject: Re: [oe] [meta-oe][PATCH] grpc: Update to 1.50.x release
-Content-Language: en-CA
-To: Khem Raj <raj.khem@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org
-References: <20221018173118.784429-1-raj.khem@gmail.com>
- <7f680b57-19b4-d43e-df23-e774b259416e@windriver.com>
- <CAMKF1spqB47ApZms=BVwe3eCpLZbDLj4e4jKYqShmeCZ9uOgDA@mail.gmail.com>
-From: Randy MacLeod <randy.macleod@windriver.com>
-In-Reply-To: <CAMKF1spqB47ApZms=BVwe3eCpLZbDLj4e4jKYqShmeCZ9uOgDA@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: BY5PR03CA0009.namprd03.prod.outlook.com
- (2603:10b6:a03:1e0::19) To DM6PR11MB3994.namprd11.prod.outlook.com
- (2603:10b6:5:193::19)
+ dkim=missing; spf=none, err=SPF record not found (domain: t-online.de, ip: 194.25.134.83, mailfrom: f_l_k@t-online.de)
+Received: from fwd77.dcpf.telekom.de (fwd77.aul.t-online.de [10.223.144.103])
+	by mailout07.t-online.de (Postfix) with SMTP id 24359763F
+	for <openembedded-devel@lists.openembedded.org>; Sun, 30 Oct 2022 07:36:28 +0100 (CET)
+Received: from flk-MS-7C91.fritz.box ([79.219.234.64]) by fwd77.t-online.de
+	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
+	esmtp id 1op1vm-3863Kj0; Sun, 30 Oct 2022 07:36:26 +0100
+From: Markus Volk <f_l_k@t-online.de>
+To: openembedded-devel@lists.openembedded.org
+Cc: Markus Volk <f_l_k@t-online.de>
+Subject: [meta-networking][PATCHv2] spice: upgrade 0.14.2 -> 0.15.1
+Date: Sun, 30 Oct 2022 07:36:17 +0100
+Message-Id: <20221030063617.72097-1-f_l_k@t-online.de>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DM6PR11MB3994:EE_|SA2PR11MB4860:EE_
-X-MS-Office365-Filtering-Correlation-Id: 6937dd13-8191-4cab-f635-08daba1b8bdc
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 
-	DWtFu/O/jXU2BJ3qaK1vkiJxl6XEK+qrRaBHEYr3dT862XasFxu+/z1sQyEnuDL+rYBrfWciPE0p8YF0XICkqrG+LohkPptJJ4AnTRfb1lf4fcsFj+GBKotgSywUCsWcmVKMugpFBPmpsPuvum34BX45vPO8ypEtKalYqp686pDRjQ4uf+FMoPtG8lJm/Bmnp1dne+MGS4K5gpVRFbBH+kCF/wKNwlNjkxoGZ9rofUUGN0dNLS2UyVJtONnAl/3VA6i+ouo4TP2/6GqbPK+phghls1ztmH22AOyTSkC0oNIcshZO1iryJqwIaJsnbYQkKr/CzRtxAm2hH+WY+ge4bDzEWdPpBy+wnOt68rFX0DedgPSQqRDoclwvqp2jUBzHaH+6SOG6RE9n8vq3BFLql9rckPNmDD/KZHDt6N6Fva5GIZJ75aS6GrvxBAmYVDy8aJdYx8pSDYv+3sOE6/YezDSTdhgrrIKXkb7jTKi7m33H9QEnTEYb9OZ1PFf9FhXjSuUxv5GWniFdFJ3/A8vx1mWNaiIaIKOZmQobG1Xqq1e85XRIimU+xJo8LEuu1xpkmkWufC4xF9dwRUrdvY7Md6NK9+hd73iJIJSHK2b3zIn60bEROw2gT9kTS54lgPkgIBKyTonqpFltsbl91WfbFH6V8rZC87Jt/qFvNitSqATuE8bvc0IBH1Xt8pZmi/pf9bvQFvwJyW6hDdjxJatXQJw0AIkpktwDk+d4OaJvlZJgtH1C9V2YlgbujajI/lQ/XM0ZD/llTGAon0nmEAQRtSUuA5gLpKnv0zak2EAWvqiYma8gPkD4M3/drJl2b0dcT4jXnkOxUUbNjl4FJEP/QIJpuCwhj2ifch03HRUokabS3KI40YmezABqUX7I1wFw
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM6PR11MB3994.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230022)(4636009)(346002)(376002)(366004)(396003)(136003)(39830400003)(451199015)(316002)(6916009)(6666004)(478600001)(41300700001)(66899015)(966005)(31686004)(6506007)(66946007)(66556008)(4326008)(8676002)(6486002)(66476007)(53546011)(2616005)(186003)(15650500001)(8936002)(5660300002)(2906002)(4001150100001)(6512007)(83380400001)(26005)(36756003)(38100700002)(86362001)(31696002)(45980500001)(43740500002);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?utf-8?B?Q1lIWnJtc2tzczhhb0JTby9GZUpXTG10MVYxb2tIVVQwb2dZMHV5RC96MmlB?=
- =?utf-8?B?Q01RdmtEbmVyRHA0Y0t5RzJ4R2g0Sm5nVWVqc3gwanRnVy95Rkl3dWJ4d2Nq?=
- =?utf-8?B?OXhSOWJUS0xKcHMxNElmYmpuZ2dHZG56aHBDNVZDTTBML0lVL3B6VUd5Q0Ew?=
- =?utf-8?B?VG1QQXF4aUI2RzJpNDYyRlhZMDhJU29lSTFtSU5CeVFwTCt2QjVaMWgwcWpW?=
- =?utf-8?B?aG40Syt1bkE5K2dCbitWcUdlUmdBTVNZdUhpMitsekROcUFTdXR5OUZpczRB?=
- =?utf-8?B?cU5lbnF3amIwV1l3aWpsVVRlL3h5Rk1maXAxeHVSbGpoSUpFbkRsNDNXZndo?=
- =?utf-8?B?KzRSZHFWQUJLU2JjaWtnby9hTWVzcnBlN0dhaWo5UllvYnpZS3NELytka0k3?=
- =?utf-8?B?Y2JHUUgzMEM5RDhzUXBUb215cVRXQU1ZeVNTY0RQTGU4WFJ4YldsWnhuMS93?=
- =?utf-8?B?TVBROWdzVi83RCtCejB2OC84WkhqY0JiREtvbXJQSXc2ejhZcU0xU3BUYWth?=
- =?utf-8?B?QXpyN0FVSktZZnBVZ2s1UVZsQy9qTFEwNHVWc0JqeDRxSnlFRVNFOU0wUTQ5?=
- =?utf-8?B?WmYxRGtEWlZ5bmtoMjdRenVYa1N5N3lpSk5DWUNUbkpETnJqMkxPeWV4TDVB?=
- =?utf-8?B?VXIvbitUOWppT2xXTUluMDBXT2ZNU2xoa1ZiVVd6cWpua2hQTFRjTDBSbVpM?=
- =?utf-8?B?L1ZCTVZSTFpPVjNPMmdjNjJjMXNNbDRGTFRLZXB3dFIxcmtOc1lRWkxrV0Y3?=
- =?utf-8?B?dFRKaXkxNTlCUitMQTBRbWtEYVVVTXhqNTQvUUcyTUZoUFozd1A0NmcrWS9V?=
- =?utf-8?B?cTRqaWVzWkdDcmFHUGxyWGM0MWl3TkllSHR0UUVxdDQwQVRkc2wvK0hxbW1o?=
- =?utf-8?B?MFdQeEtuOEZHZ0NBclNxNEZwWmJmZ2ZCMm4xZnRNU0RxcGxyVzRMYkJaVkpR?=
- =?utf-8?B?RUJRUWdRWnN2a0k5YjFjbmkwbWxJYzR0WUZRK2MrWHRGeG1lMUJBUExKcmdp?=
- =?utf-8?B?MTcvL3N1WmY4bm1XdEJkRVNnUHA5ZGplQW90Y2paVktabnFMd1diZStHWVFy?=
- =?utf-8?B?ZVpFZjZwbjVEYmxGQVF0b2owSFpNRDduSTV6Y0hZa2Z5bHhKV0dhZnMvN3lw?=
- =?utf-8?B?cnBBOGFoVlVTWlRSYzlIenRvYnh5UTJhZlFUaTdhSTMvcXVvY2J4T0dYU3Rt?=
- =?utf-8?B?Z0VZWUcvaGZiMFhXTWF4QzNOQy9JRjJSb2dBbzFncjduTTFxVTAybUVua0tN?=
- =?utf-8?B?WjNKRUNxNU4vMUN2WWQxdjh3QU1MUkNyM3UrYzNjd2JvMTZWYVg1K0pwNFRh?=
- =?utf-8?B?Q2QzdVFiSGVaN1JtT1llc0hJTnIyTGpoM3JQL0hpZEU2T3RtcmhxUi9PVGRJ?=
- =?utf-8?B?ZFUvUmQ1YVdyWW5mRXB5L3RQMkdMZTJwazMwR0Z5eWhmN2JSWEZaV2l2Y1BQ?=
- =?utf-8?B?Y2NUaEFBN3d4UUErTlpGNmtqQllZZFh1TTU0RUxpK3BlZ1Y1aFFrUmsxYk01?=
- =?utf-8?B?aU5UK1BWMlYvaTc0UzBlWVlRSktCOUhWL1RGNXNnUDhiSytIRURwdEhvSlF1?=
- =?utf-8?B?eDBwMXpOdTZkaDQ5YkMzTThsYmFha2RrM3A3bUFBb1hsa2orNmNvU0Z6cm5Z?=
- =?utf-8?B?RGF2ZlZFS3BKSDNsUzRxU1ZQSEptVUZ2eXBIUTY1QWMwRkFqQm9RMFExSE1V?=
- =?utf-8?B?MjNSMWtTRGVuSk9ML1dGRGxRWkVFdGdsMUNRN2NBbk1GSnZxT0RMcXBud1h5?=
- =?utf-8?B?dHVLb3FJQmxSM1BLaUt0dGJ2Ymk2YXFRQzMrQTJjQXpXdlNTZnJQN0lycGpW?=
- =?utf-8?B?aGtBbmNpbVhkYzlLekNGQU1HdXV3Z3JyR3ZWemJzY3ZVVjJhSEx5RWJTV3dz?=
- =?utf-8?B?dmRrT1hFV0lFTVl1aVZLalZLWCtVRk13R21wQ0N4RHpCM2lnVjRUNjhsa1pS?=
- =?utf-8?B?dHVFMktsVlgwUm8xRFNmK01Rd2J4MjRtSlZ0b1NNekx5WWo1TmM5MVFTbEx1?=
- =?utf-8?B?SjBMRkpBdHRERmRZWWE3dGRIOVlPWEFZZFh5OENVRnFidWJhYmFxcFRORTl4?=
- =?utf-8?B?NnBYT2Q0WVhEUTZUOWZMVUc0MEt5anpRTFRocUdTa2JySVpqUkpMbnJQbW9t?=
- =?utf-8?B?Sk15Szg0TEgwNHV1cithUVZROCtRWVFERm1Cb0ZpNVpPbXUyZFc3dlFyd2VJ?=
- =?utf-8?B?MXc9PQ==?=
-X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 6937dd13-8191-4cab-f635-08daba1b8bdc
-X-MS-Exchange-CrossTenant-AuthSource: DM6PR11MB3994.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Oct 2022 02:07:50.1462
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 3zLynBO89qN+Yusdxc2btzTjBcTRza1KOttJ3a1AcQvWLPqM3FDh3WGMUbiZjMXmzblNeYqPGJKWLYORDzppZW6/p64u7JU31stGYMrdztU=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA2PR11MB4860
-X-Proofpoint-ORIG-GUID: qJpIyG5tuScuf089Ta2J3Tdkjf86Zl3f
-X-Proofpoint-GUID: xyv1BhaDl5a0Z6UN_OvhoxyXIq--Bmea
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.205,Aquarius:18.0.895,Hydra:6.0.545,FMLib:17.11.122.1
- definitions=2022-10-29_16,2022-10-27_01,2022-06-22_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 priorityscore=1501
- suspectscore=0 adultscore=0 clxscore=1015 lowpriorityscore=0 phishscore=0
- impostorscore=0 spamscore=0 malwarescore=0 mlxscore=0 mlxlogscore=999
- bulkscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2210170000 definitions=main-2210300011
+X-TOI-EXPURGATEID: 150726::1667111786-717F581F-11379963/0/0 CLEAN NORMAL
+X-TOI-MSGID: 44814814-c9ca-4e25-ad95-bfca777496b7
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 30 Oct 2022 02:08:01 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99347
+ <openembedded-devel@lists.openembedded.org>; Sun, 30 Oct 2022 06:36:42 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99348
 
-On 2022-10-29 19:56, Khem Raj wrote:
-> On Sat, Oct 29, 2022 at 2:08 PM Randy MacLeod
-> <randy.macleod@windriver.com> wrote:
->>
->> On 2022-10-18 13:31, Khem Raj wrote:
->>
->> License-update: Include MPL-2.0 [1]
->>
->> Add missing BSD 3-clause and MPL-2.0 to license field
->>
->> Switch to git submodules since its using locked versions of some
->> components like opencensus-proto
->>
->> [1] https://github.com/grpc/grpc/commit/05fcd826f477ef1a024a2defa5e4b3d78f5e6eb4
->> Signed-off-by: Khem Raj <raj.khem@gmail.com>
->> ---
->>   .../grpc/{grpc_1.45.2.bb => grpc_1.50.0.bb}            | 10 +++++-----
->>
->>
->> Is anyone else seeing:
->>
->> error: #error "C++ versions less than C++14 are not supported."
->>
->>
->> i.e.
->>
->> TOPDIR/tmp-glibc/hosttools/g++ -Dgpr_EXPORTS \
->> -ITOPDIR/tmp-glibc/work/x86_64-linux/grpc-native/1.45.2-r0/git/include \
->> -ITOPDIR/tmp-glibc/work/x86_64-linux/grpc-native/1.45.2-r0/git \
->> -ITOPDIR/tmp-glibc/work/x86_64-linux/grpc-native/1.45.2-r0/git/third_party/address_sorting/include \
->> -ITOPDIR/tmp-glibc/work/x86_64-linux/grpc-native/1.45.2-r0/git/src/core/ext/upb-generated \
->> -ITOPDIR/tmp-glibc/work/x86_64-linux/grpc-native/1.45.2-r0/git/src/core/ext/upbdefs-generated \
->> -ITOPDIR/tmp-glibc/work/x86_64-linux/grpc-native/1.45.2-r0/git/third_party/upb \
->> -ITOPDIR/tmp-glibc/work/x86_64-linux/grpc-native/1.45.2-r0/git/third_party/xxhash \
->> -isystemTOPDIR/tmp-glibc/work/x86_64-linux/grpc-native/1.45.2-r0/recipe-sysroot-native/usr/include \
->> -O2 -pipe -Wl,--no-as-needed -fPIC -std=c++11 \
->> -MD -MT \
->> CMakeFiles/gpr.dir/src/core/lib/gpr/murmur_hash.cc.o \
->> -MF \
->> CMakeFiles/gpr.dir/src/core/lib/gpr/murmur_hash.cc.o.d \
->> -o \
->> CMakeFiles/gpr.dir/src/core/lib/gpr/murmur_hash.cc.o \
->> -c \
->> TOPDIR/tmp-glibc/work/x86_64-linux/grpc-native/1.45.2-r0/git/src/core/lib/gpr/murmur_hash.cc
->> In file included from
->> TOPDIR/tmp-glibc/work/x86_64-linux/grpc-native/1.45.2-r0/recipe-sysroot-native/usr/include/absl/base/config.h:86,
->> from
->> TOPDIR/tmp-glibc/work/x86_64-linux/grpc-native/1.45.2-r0/recipe-sysroot-native/usr/include/absl/base/attributes.h:37, \
->> from \
->> TOPDIR/tmp-glibc/work/x86_64-linux/grpc-native/1.45.2-r0/git/src/core/lib/gpr/murmur_hash.cc:25: \
->> TOPDIR/tmp-glibc/work/x86_64-linux/grpc-native/1.45.2-r0/recipe-sysroot-native/usr/include/absl/base/policy_checks.h:79:2: \
->> error: #error "C++ versions less than C++14 are not supported."
->> 79 | #error "C++ versions less than C++14 are not supported." \
->> | ^~~~~
->>
->>
->> Happening for a variety of distros.
->>
->> fedora: 34, 35, 36, ubuntu: 1804, 2004, opensuse153
-> 
-> you seem to be still building 1.45.2 and the upgrade to 1.50x fixed
-> exactly this.
+ - switch buildsystem to meson
+ - cleanup dependencies
 
-Huh, look at that.
+Signed-off-by: Markus Volk <f_l_k@t-online.de>
+---
+ ...0001-Convert-pthread_t-to-be-numeric.patch | 59 ------------
+ ...compile-errors-on-Linux-32bit-system.patch | 96 -------------------
+ ...igure.ac-explicitly-link-to-jpeg-lib.patch | 48 ----------
+ .../recipes-support/spice/spice_0.15.1.bb     | 40 ++++++++
+ .../recipes-support/spice/spice_git.bb        | 65 -------------
+ 5 files changed, 40 insertions(+), 268 deletions(-)
+ delete mode 100644 meta-networking/recipes-support/spice/spice/0001-Conv=
+ert-pthread_t-to-be-numeric.patch
+ delete mode 100644 meta-networking/recipes-support/spice/spice/0001-Fix-=
+compile-errors-on-Linux-32bit-system.patch
+ delete mode 100644 meta-networking/recipes-support/spice/spice/0001-conf=
+igure.ac-explicitly-link-to-jpeg-lib.patch
+ create mode 100644 meta-networking/recipes-support/spice/spice_0.15.1.bb
+ delete mode 100644 meta-networking/recipes-support/spice/spice_git.bb
 
-Thanks Khem.
-../Randy
-
-> 
->>
->>
->> ../Randy
->>
->>   1 file changed, 5 insertions(+), 5 deletions(-)
->>   rename meta-oe/recipes-devtools/grpc/{grpc_1.45.2.bb => grpc_1.50.0.bb} (90%)
->>
->> diff --git a/meta-oe/recipes-devtools/grpc/grpc_1.45.2.bb b/meta-oe/recipes-devtools/grpc/grpc_1.50.0.bb
->> similarity index 90%
->> rename from meta-oe/recipes-devtools/grpc/grpc_1.45.2.bb
->> rename to meta-oe/recipes-devtools/grpc/grpc_1.50.0.bb
->> index c2f952fc64..8efd9321ca 100644
->> --- a/meta-oe/recipes-devtools/grpc/grpc_1.45.2.bb
->> +++ b/meta-oe/recipes-devtools/grpc/grpc_1.50.0.bb
->> @@ -3,8 +3,8 @@ Provides gRPC libraries for multiple languages written on top of shared C core l
->>   (C++, Node.js, Python, Ruby, Objective-C, PHP, C#)"
->>   HOMEPAGE = "https://github.com/grpc/grpc"
->>   SECTION = "libs"
->> -LICENSE = "Apache-2.0"
->> -LIC_FILES_CHKSUM = "file://LICENSE;md5=6e4cf218112648d22420a84281b68b88"
->> +LICENSE = "Apache-2.0 && BSD-3-Clause && MPL-2.0"
->> +LIC_FILES_CHKSUM = "file://LICENSE;md5=731e401b36f8077ae0c134b59be5c906"
->>
->>   DEPENDS = "c-ares protobuf protobuf-native protobuf-c protobuf-c-native openssl libnsl2 abseil-cpp re2"
->>   DEPENDS:append:class-target = " googletest grpc-native "
->> @@ -20,9 +20,9 @@ RDEPENDS:${PN}-dev:append:class-native = " ${PN}-compiler"
->>   # RDEPENDS:${PN}-dev += "${PN}-compiler"
->>
->>   S = "${WORKDIR}/git"
->> -SRCREV_grpc = "b39ffcc425ea990a537f98ec6fe6a1dcb90470d7"
->> -BRANCH = "v1.45.x"
->> -SRC_URI = "git://github.com/grpc/grpc.git;protocol=https;name=grpc;branch=${BRANCH} \
->> +SRCREV_grpc = "91091e3668144de9c6aa392f496bb7639f7025a7"
->> +BRANCH = "v1.50.x"
->> +SRC_URI = "gitsm://github.com/grpc/grpc.git;protocol=https;name=grpc;branch=${BRANCH} \
->>              file://0001-Revert-Changed-GRPCPP_ABSEIL_SYNC-to-GPR_ABSEIL_SYNC.patch \
->>              file://0001-cmake-add-separate-export-for-plugin-targets.patch \
->>              file://0001-cmake-Link-with-libatomic-on-rv32-rv64.patch \
->>
->>
->> -=-=-=-=-=-=-=-=-=-=-=-
->> Links: You receive all messages sent to this group.
->> View/Reply Online (#99241): https://lists.openembedded.org/g/openembedded-devel/message/99241
->> Mute This Topic: https://lists.openembedded.org/mt/94413640/3616765
->> Group Owner: openembedded-devel+owner@lists.openembedded.org
->> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [randy.macleod@windriver.com]
->> -=-=-=-=-=-=-=-=-=-=-=-
->>
->>
->> --
->> # Randy MacLeod
->> # Wind River Linux
-
--- 
-# Randy MacLeod
-# Wind River Linux
+diff --git a/meta-networking/recipes-support/spice/spice/0001-Convert-pth=
+read_t-to-be-numeric.patch b/meta-networking/recipes-support/spice/spice/=
+0001-Convert-pthread_t-to-be-numeric.patch
+deleted file mode 100644
+index e63cbe3b7..000000000
+--- a/meta-networking/recipes-support/spice/spice/0001-Convert-pthread_t-=
+to-be-numeric.patch
++++ /dev/null
+@@ -1,59 +0,0 @@
+-From 0726ce6d6f52e135e28f15ca8392568c84909b1d Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Sat, 16 Jun 2018 16:21:39 -0700
+-Subject: [PATCH] Convert pthread_t to be numeric
+-
+-typecast pthread_t to unsigned long
+-pthread_t is implemented as a struct point in musl and its as per standa=
+rd
+-
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+-Upstream-Status: Pending
+-
+- server/red-channel.c | 5 +++--
+- server/red-client.c  | 6 +++---
+- 2 files changed, 6 insertions(+), 5 deletions(-)
+-
+---- a/server/red-channel.c
+-+++ b/server/red-channel.c
+-@@ -204,7 +204,7 @@ red_channel_constructed(GObject *object)
+- {
+-     RedChannel *self =3D RED_CHANNEL(object);
+-=20
+--    red_channel_debug(self, "thread_id 0x%" G_GSIZE_MODIFIER "x", self-=
+>priv->thread_id);
+-+    red_channel_debug(self, "thread_id 0x%" G_GSIZE_MODIFIER "x", (unsi=
+gned long)self->priv->thread_id);
+-=20
+-     RedChannelClass *klass =3D RED_CHANNEL_GET_CLASS(self);
+-=20
+-@@ -479,7 +479,8 @@ void red_channel_remove_client(RedChanne
+-                             "pthread_self (0x%" G_GSIZE_MODIFIER "x)."
+-                             "If one of the threads is !=3D io-thread &&=
+ !=3D vcpu-thread, "
+-                             "this might be a BUG",
+--                            channel->priv->thread_id, pthread_self());
+-+                            (unsigned long)channel->priv->thread_id,
+-+                            (unsigned long)pthread_self());
+-     }
+-     spice_return_if_fail(channel);
+-     link =3D g_list_find(channel->priv->clients, rcc);
+---- a/server/red-client.c
+-+++ b/server/red-client.c
+-@@ -180,7 +180,7 @@ void red_client_migrate(RedClient *clien
+-                       "pthread_self (0x%" G_GSIZE_MODIFIER "x)."
+-                       "If one of the threads is !=3D io-thread && !=3D =
+vcpu-thread,"
+-                       " this might be a BUG",
+--                      client->thread_id, pthread_self());
+-+                      (unsigned long)client->thread_id, (unsigned long)=
+pthread_self());
+-     }
+-     FOREACH_CHANNEL_CLIENT(client, rcc) {
+-         if (red_channel_client_is_connected(rcc)) {
+-@@ -199,8 +199,8 @@ void red_client_destroy(RedClient *clien
+-                       "pthread_self (0x%" G_GSIZE_MODIFIER "x)."
+-                       "If one of the threads is !=3D io-thread && !=3D =
+vcpu-thread,"
+-                       " this might be a BUG",
+--                      client->thread_id,
+--                      pthread_self());
+-+                      (unsigned long)client->thread_id,
+-+                      (unsigned long)pthread_self());
+-     }
+-     red_client_set_disconnecting(client);
+-     FOREACH_CHANNEL_CLIENT(client, rcc) {
+diff --git a/meta-networking/recipes-support/spice/spice/0001-Fix-compile=
+-errors-on-Linux-32bit-system.patch b/meta-networking/recipes-support/spi=
+ce/spice/0001-Fix-compile-errors-on-Linux-32bit-system.patch
+deleted file mode 100644
+index d04bee95f..000000000
+--- a/meta-networking/recipes-support/spice/spice/0001-Fix-compile-errors=
+-on-Linux-32bit-system.patch
++++ /dev/null
+@@ -1,96 +0,0 @@
+-From a2af005b5d4a62839e56f42a43df793356e78f58 Mon Sep 17 00:00:00 2001
+-From: "Hongzhi.Song" <hongzhi.song@windriver.com>
+-Date: Tue, 4 Jun 2019 03:58:17 -0400
+-Subject: [PATCH] Fix compile errors on Linux 32bit system
+-
+-There are folowing compile errors on Linux 32bit system:
+-
+-red-channel.c:207:73: error: format '%x' expects argument of type
+-'unsigned int', but argument 7 has type 'long unsigned int' [-Werror=3Df=
+ormat=3D]
+-|207| red_channel_debug(self, "thread_id 0x%" G_GSIZE_MODIFIER "x",
+-                                ~~~~~~~~~~~~~~~~~~~~~^
+-                        self->priv->thread_id);
+-                ~~~~~~~~~~~~~~~~~~~~~^
+-
+-On 32bit system, #define G_GSIZE_MODIFIER "". But the type of
+-'self->priv->thread_id' is 'unsigned long int' which should match '%lx'
+-not '%x'.
+-
+-So we should recovery the <0x%" G_GSIZE_MODIFIER "x"> to <0x%lx">.
+-And others files modification are similar to G_GSIZE_MODIFIER.
+-
+-Signed-off-by: Hongzhi.Song <hongzhi.song@windriver.com>
+----
+-Upstream-Status: Submitted [https://lists.freedesktop.org/archives/spice=
+-devel/2019-June/049285.html]
+-
+- server/red-channel.c    | 6 +++---
+- server/red-client.c     | 8 ++++----
+- server/red-replay-qxl.c | 2 +-
+- 3 files changed, 8 insertions(+), 8 deletions(-)
+-
+-diff --git a/server/red-channel.c b/server/red-channel.c
+-index f81142d..6a03ec2 100644
+---- a/server/red-channel.c
+-+++ b/server/red-channel.c
+-@@ -202,7 +202,7 @@ red_channel_constructed(GObject *object)
+- {
+-     RedChannel *self =3D RED_CHANNEL(object);
+-=20
+--    red_channel_debug(self, "thread_id 0x%" G_GSIZE_MODIFIER "x", (unsi=
+gned long)self->priv->thread_id);
+-+    red_channel_debug(self, "thread_id 0x%lx", (unsigned long)self->pri=
+v->thread_id);
+-=20
+-     RedChannelClass *klass =3D RED_CHANNEL_GET_CLASS(self);
+-=20
+-@@ -473,8 +473,8 @@ void red_channel_remove_client(RedChannel *channel, =
+RedChannelClient *rcc)
+-=20
+-     if (!pthread_equal(pthread_self(), channel->priv->thread_id)) {
+-         red_channel_warning(channel,
+--                            "channel->thread_id (0x%" G_GSIZE_MODIFIER =
+"x) !=3D "
+--                            "pthread_self (0x%" G_GSIZE_MODIFIER "x)."
+-+                            "channel->thread_id (0x%lx) !=3D "
+-+                            "pthread_self (0x%lx)."
+-                             "If one of the threads is !=3D io-thread &&=
+ !=3D vcpu-thread, "
+-                             "this might be a BUG",
+-                             (unsigned long)channel->priv->thread_id,
+-diff --git a/server/red-client.c b/server/red-client.c
+-index 2b859cb..ff4da2a 100644
+---- a/server/red-client.c
+-+++ b/server/red-client.c
+-@@ -174,8 +174,8 @@ void red_client_migrate(RedClient *client)
+-     RedChannel *channel;
+-=20
+-     if (!pthread_equal(pthread_self(), client->thread_id)) {
+--        spice_warning("client->thread_id (0x%" G_GSIZE_MODIFIER "x) !=3D=
+ "
+--                      "pthread_self (0x%" G_GSIZE_MODIFIER "x)."
+-+        spice_warning("client->thread_id (0x%lx) !=3D "
+-+                      "pthread_self (0x%lx)."
+-                       "If one of the threads is !=3D io-thread && !=3D =
+vcpu-thread,"
+-                       " this might be a BUG",
+-                       (unsigned long)client->thread_id, (unsigned long)=
+pthread_self());
+-@@ -193,8 +193,8 @@ void red_client_destroy(RedClient *client)
+-     RedChannelClient *rcc;
+-=20
+-     if (!pthread_equal(pthread_self(), client->thread_id)) {
+--        spice_warning("client->thread_id (0x%" G_GSIZE_MODIFIER "x) !=3D=
+ "
+--                      "pthread_self (0x%" G_GSIZE_MODIFIER "x)."
+-+        spice_warning("client->thread_id (0x%lx) !=3D "
+-+                      "pthread_self (0x%lx)."
+-                       "If one of the threads is !=3D io-thread && !=3D =
+vcpu-thread,"
+-                       " this might be a BUG",
+-                       (unsigned long)client->thread_id,
+-diff --git a/server/red-replay-qxl.c b/server/red-replay-qxl.c
+-index 6d34818..0deb406 100644
+---- a/server/red-replay-qxl.c
+-+++ b/server/red-replay-qxl.c
+-@@ -264,7 +264,7 @@ static replay_t read_binary(SpiceReplay *replay, con=
+st char *prefix, size_t *siz
+-             exit(1);
+-         }
+-         if ((ret =3D inflate(&strm, Z_NO_FLUSH)) !=3D Z_STREAM_END) {
+--            spice_error("inflate error %d (disc: %" G_GSSIZE_FORMAT ")"=
+,
+-+            spice_error("inflate error %d (disc: %li)",
+-                         ret, *size - strm.total_out);
+-             if (ret =3D=3D Z_DATA_ERROR) {
+-                 /* last operation may be wrong. since we do the recordi=
+ng
+---=20
+-2.8.1
+-
+diff --git a/meta-networking/recipes-support/spice/spice/0001-configure.a=
+c-explicitly-link-to-jpeg-lib.patch b/meta-networking/recipes-support/spi=
+ce/spice/0001-configure.ac-explicitly-link-to-jpeg-lib.patch
+deleted file mode 100644
+index 2d05143db..000000000
+--- a/meta-networking/recipes-support/spice/spice/0001-configure.ac-expli=
+citly-link-to-jpeg-lib.patch
++++ /dev/null
+@@ -1,48 +0,0 @@
+-From 6ffd9db8e02e411bda2f421abf7951dab6cf0e38 Mon Sep 17 00:00:00 2001
+-From: Hongxu Jia <hongxu.jia@windriver.com>
+-Date: Fri, 5 Feb 2021 01:43:44 -0800
+-Subject: [PATCH] configure.ac: explicitly link to jpeg lib
+-
+-Since oe has added lib jpeg to the depends, explicitly link to jpeg lib
+-to workaround build failure with autoconf 2.7
+-
+-Upstream-Status: Inappropriate [oe specific]
+-
+-Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+----
+- configure.ac | 14 +-------------
+- 1 file changed, 1 insertion(+), 13 deletions(-)
+-
+-diff --git a/configure.ac b/configure.ac
+-index 1ce81f91..8bbb50de 100644
+---- a/configure.ac
+-+++ b/configure.ac
+-@@ -191,24 +191,12 @@ AC_SUBST(SSL_CFLAGS)
+- AC_SUBST(SSL_LIBS)
+- AS_VAR_APPEND([SPICE_REQUIRES], [" openssl"])
+-=20
+--AC_CHECK_LIB(jpeg, jpeg_destroy_decompress,
+--    AC_MSG_CHECKING([for jpeglib.h])
+--    AC_TRY_CPP(
+--[#include <stdio.h>
+--#undef PACKAGE
+--#undef VERSION
+--#undef HAVE_STDLIB_H
+--#include <jpeglib.h>],
+--        JPEG_LIBS=3D'-ljpeg'
+--        AC_MSG_RESULT($jpeg_ok),
+--	AC_MSG_ERROR([jpeglib.h not found])),
+--    AC_MSG_ERROR([libjpeg not found]))
+-+JPEG_LIBS=3D'-ljpeg'
+- AC_SUBST(JPEG_LIBS)
+-=20
+- AC_CHECK_LIB(z, deflate, Z_LIBS=3D'-lz', AC_MSG_ERROR([zlib not found])=
+)
+- AC_SUBST(Z_LIBS)
+-=20
+--
+- AC_ARG_ENABLE([manual],
+-                AS_HELP_STRING([--enable-manual=3D@<:@auto/yes/no@:>@],
+-                               [Build SPICE manual]),
+---=20
+-2.29.2
+-
+diff --git a/meta-networking/recipes-support/spice/spice_0.15.1.bb b/meta=
+-networking/recipes-support/spice/spice_0.15.1.bb
+new file mode 100644
+index 000000000..e1509d063
+--- /dev/null
++++ b/meta-networking/recipes-support/spice/spice_0.15.1.bb
+@@ -0,0 +1,40 @@
++#
++# Copyright (C) 2013 Wind River Systems, Inc.
++#
++
++SUMMARY =3D "Simple Protocol for Independent Computing Environments"
++DESCRIPTION =3D "SPICE (the Simple Protocol for Independent Computing \
++Environments) is a remote-display system built for virtual \
++environments which allows users to view a computing 'desktop' \=20
++environment - not only on its computer-server machine, but also from \
++anywhere on the Internet and using a wide variety of machine \
++architectures."
++
++LICENSE =3D "LGPL-2.1-only"
++LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D4fbd65380cdd255951079008b3645=
+16c"
++
++SRC_URI =3D "gitsm://gitlab.freedesktop.org/spice/spice.git;protocol=3Dh=
+ttps;nobranch=3D1"
++SRCREV =3D "c7b313ba31ebf02d7173551ee8dd6710b7676441"
++S =3D "${WORKDIR}/git"
++
++CVE_CHECK_IGNORE +=3D "\
++    CVE-2016-0749 \
++    CVE-2016-2150 \
++    CVE-2018-10893 \
++"
++
++inherit meson gettext python3native pkgconfig
++
++DEPENDS +=3D "glib-2.0 jpeg openssl python3-pyparsing-native python3-six=
+-native orc pixman spice-protocol"
++
++PACKAGECONFIG:class-native =3D ""
++PACKAGECONFIG:class-nativesdk =3D ""
++PACKAGECONFIG ?=3D "sasl gstreamer lz4 opus"
++
++PACKAGECONFIG[gstreamer] =3D "-Dgstreamer=3D1.0,-Dgstreamer=3Dno,gstream=
+er1.0 gstreamer1.0-plugins-base gstreamer1.0-vaapi"
++PACKAGECONFIG[lz4] =3D "-Dlz4=3Dtrue,-Dlz4=3Dfalse,lz4"
++PACKAGECONFIG[smartcard] =3D "-Dsmartcard=3Denabled,-Dsmartcard=3Ddisabl=
+ed,libcacard"
++PACKAGECONFIG[sasl] =3D "-Dsasl=3Dtrue,.Dsasl=3Dfalse,cyrus-sasl"
++PACKAGECONFIG[opus] =3D "-Dopus=3Denabled,-Dopus=3Ddisabled,libopus"
++
++BBCLASSEXTEND =3D "native nativesdk"
+diff --git a/meta-networking/recipes-support/spice/spice_git.bb b/meta-ne=
+tworking/recipes-support/spice/spice_git.bb
+deleted file mode 100644
+index b3e687476..000000000
+--- a/meta-networking/recipes-support/spice/spice_git.bb
++++ /dev/null
+@@ -1,65 +0,0 @@
+-#
+-# Copyright (C) 2013 Wind River Systems, Inc.
+-#
+-
+-SUMMARY =3D "Simple Protocol for Independent Computing Environments"
+-DESCRIPTION =3D "SPICE (the Simple Protocol for Independent Computing \
+-Environments) is a remote-display system built for virtual \
+-environments which allows users to view a computing 'desktop' \=20
+-environment - not only on its computer-server machine, but also from \
+-anywhere on the Internet and using a wide variety of machine \
+-architectures."
+-
+-LICENSE =3D "LGPL-2.1-or-later"
+-LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D4fbd65380cdd255951079008b3645=
+16c"
+-
+-PV =3D "0.14.2+git${SRCPV}"
+-
+-SRCREV_spice =3D "7cbd70b931db76c69c89c2d9d5d704f67381a81b"
+-SRCREV_spice-common =3D "4fc4c2db36c7f07b906e9a326a9d3dc0ae6a2671"
+-
+-SRCREV_FORMAT =3D "spice_spice-common"
+-
+-SRC_URI =3D " \
+-    git://anongit.freedesktop.org/spice/spice;name=3Dspice;branch=3Dmast=
+er \
+-    git://anongit.freedesktop.org/spice/spice-common;destsuffix=3Dgit/su=
+bprojects/spice-common;name=3Dspice-common;branch=3Dmaster \
+-    file://0001-Convert-pthread_t-to-be-numeric.patch \
+-    file://0001-Fix-compile-errors-on-Linux-32bit-system.patch \
+-    file://0001-configure.ac-explicitly-link-to-jpeg-lib.patch \
+-"
+-
+-S =3D "${WORKDIR}/git"
+-
+-CVE_CHECK_IGNORE +=3D "\
+-    CVE-2016-0749 \
+-    CVE-2016-2150 \
+-    CVE-2018-10893 \
+-"
+-
+-inherit autotools gettext python3native python3-dir pkgconfig
+-
+-DEPENDS +=3D "spice-protocol jpeg pixman alsa-lib glib-2.0 python3-pypar=
+sing-native python3-six-native glib-2.0-native"
+-DEPENDS:append:class-nativesdk =3D " nativesdk-openssl"
+-
+-export PYTHON=3D"${STAGING_BINDIR_NATIVE}/python3-native/python3"
+-
+-CFLAGS:append =3D " -Wno-error"
+-
+-PACKAGECONFIG:class-native =3D ""
+-PACKAGECONFIG:class-nativesdk =3D ""
+-PACKAGECONFIG ?=3D "sasl"
+-
+-PACKAGECONFIG[celt051] =3D "--enable-celt051,--disable-celt051,celt051"
+-PACKAGECONFIG[smartcard] =3D "--enable-smartcard,--disable-smartcard,lib=
+cacard,"
+-PACKAGECONFIG[sasl] =3D "--with-sasl,--without-sasl,cyrus-sasl,"
+-PACKAGECONFIG[client] =3D "--enable-client,--disable-client,,"
+-PACKAGECONFIG[gui] =3D "--enable-gui,--disable-gui,,"
+-PACKAGECONFIG[opus] =3D "--enable-opus,--disable-opus,libopus,"
+-PACKAGECONFIG[opengl] =3D "--enable-opengl,--disable-opengl,,"
+-PACKAGECONFIG[xinerama] =3D "--enable-xinerama,--disable-xinerama,libxin=
+erama,"
+-
+-COMPATIBLE_HOST =3D '(x86_64|i.86|aarch64).*-linux'
+-
+-BBCLASSEXTEND =3D "native nativesdk"
+-
+-EXTRA_OECONF:append:toolchain-clang =3D " --disable-werror"
+--=20
+2.34.1
 
 
