@@ -2,127 +2,128 @@ Return-Path: <sakib.sajal@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1AEE1ECAAA1
-	for <webhook@archiver.kernel.org>; Mon, 31 Oct 2022 14:49:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 345E4FA3741
+	for <webhook@archiver.kernel.org>; Mon, 31 Oct 2022 15:05:42 +0000 (UTC)
 Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.web12.10244.1667227746860282552
+ by mx.groups.io with SMTP id smtpd.web12.10477.1667228734372886630
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 31 Oct 2022 07:49:07 -0700
+ Mon, 31 Oct 2022 08:05:34 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=pps06212021 header.b=ijzRC9ZI;
+ dkim=pass header.i=@windriver.com header.s=pps06212021 header.b=nS3sag3K;
  spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=8303e5831f=sakib.sajal@windriver.com)
-Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 29VCtxGP001559
-	for <openembedded-devel@lists.openembedded.org>; Mon, 31 Oct 2022 07:49:06 -0700
+Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 29VDmAV8022964
+	for <openembedded-devel@lists.openembedded.org>; Mon, 31 Oct 2022 08:05:34 -0700
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com; h=from : to :
  subject : date : message-id : content-transfer-encoding : content-type :
  mime-version; s=PPS06212021;
- bh=yDJNBAeo2K/5qKbxO+mxWAWD/vUh1SVIMKsFUjCVgHQ=;
- b=ijzRC9ZIJwprMexFFPObCtCkf0/aZ8B2eoHVBlg2b2RDd7Lrb+ZXb9pEx0iVkZIU5VQr
- zq/u9/rPWOP/6ezUjARcfI3WuBoO5V3I6pygJW+GjMPCg8kklrzfwUDDvAF9GMe/lV0t
- 2TYCyLKf+s1bNUWdh8nomNrYGQP5ZZB0btBBQ+lF5rfK3MewMSyvgyFI7WY4rDlNB111
- jYeiyed8Ubjf7SEWFPG6hbvjPm0cbLHj6uN52Htd3/yYFDReZKUzGPdd3Gow9cc3VP84
- i/UVbs6dV/4pqpI7c38lXV5Tjc8fGHkN0AghPiSAvtYfj2EHzYPtTf4Aj+wVz3Y86QLm pA== 
-Received: from nam02-dm3-obe.outbound.protection.outlook.com (mail-dm3nam02lp2045.outbound.protection.outlook.com [104.47.56.45])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3kj2gs8frf-1
+ bh=nh6ut4JLFqoG+4NsisN0alFgUkIbYn5FOJyAc9N4Smk=;
+ b=nS3sag3KtDJ+a/Ava0WJ2ZMwTXoQDIPFsRdljOV7Bt5JKnqex1+AA6hFb11xXpdL3QN7
+ CmVGTd1ZnyZMnKgZLVO5tt5SzygRKg+NrgyPGddE2LiVVHWl2z4E25Jf35PCG4oEfiIS
+ jwZUoVr6e50zrGwUXjQip7YrYiiY6e8toGhYUKpSFGL8aavKTC6zjgA755mZkRdQ8u6C
+ qlLyW4sDXYklD8+d+lWXi6MTnSNGBT3RCoQGWR7MofQZYxMHFUoy7DyeH0Fi+ISoKWjE
+ 805KtezgXa5nrnmXq/hR6YfgT0Ps1PSjqa1Fa4FqfcbgKz4VIbNU+xwiOyfEA73Tvwyn LQ== 
+Received: from nam11-co1-obe.outbound.protection.outlook.com (mail-co1nam11lp2173.outbound.protection.outlook.com [104.47.56.173])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3kh3pkhbat-1
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Mon, 31 Oct 2022 07:49:05 -0700
+	for <openembedded-devel@lists.openembedded.org>; Mon, 31 Oct 2022 08:05:33 -0700
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=TLqnoUhcvDNf/7RHo9AU5aRSq+u549jjvPu7GTtKekJWD/++0Dxvq00tIhrqS00iPvrSquwy1AyV34L2xoJ6KiMXG7vniMrtT2DqhgHIYVgk3p9nKfNmV/zvXU1HIgHNBKT3rR3upPUPrDheLNJpkOKeZs08v63SFMu3CO0rwcI/3WuZsAqsgm6MKfjyY1c+xgLt683SfH+0zWtsMolPQK+q4/Yim9GDVYDTrrO0rg6glVLt5mLne9QD4JXBqvo4+I6gVE2CbY6TiZAOENbHMPKDq4J5i3uKwSlVzZrBbKYyckZU1JT1G0ofdievwnarLfGsFOFL1RN1SlS/OR31dA==
+ b=oUCThBkVyvsiFGhKfM1AUjCuOzMiVigUK8LIoPgfh2Oa8jDKqHHpMeKkbWa9pcUAtDClZLlZSpGiyh0mYHykgbLhGBL3uyMvAbomhfhEPJCc4kiN0N4HZG4JGhdaaABsJ44YzScxic/1DchmoBJVv4nxxCGjF8lBap+yk48CzRZjgDGjVJ5069Zsl6yjTZWw4h8dqZZ0aZkl2LtMW8LLd6/e9DbVAj8QElb/xK7HRACqWvhpuAa+KlxUicRTzlSMpJMN/bMHtuyHNbg6HWFD66YT1bfFi0erMJWL3RQBNeYBS8eoLCUQqFhyxezcnSVtrHEZ8c2EcOnE5QnnYlHjYA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=yDJNBAeo2K/5qKbxO+mxWAWD/vUh1SVIMKsFUjCVgHQ=;
- b=ZuA6zJ2bAntxNKxo/ETYlZuOZSNUobQyHbUqfGYu4ODwKuSZ2LervcoROFEo6Jy8xuHrBehDpLDqTJ6REBICAxj8GNtDDDVJ4NBJKt9MlZWiq3wOo/gBVLBxRQqUMNdsCkRUEYlUL5/hy9Ixqph3f+ZQ06al0S0ic8Rb74plCbHiC5csy48ZQgi9p7jiHEdCQOG0RZ4Prac90Wl/x8No3hE0DaxYZXKsGL0AFAb3O3W5AQr9k1rAX+Ooy95kzjU1BDLPuMDzHo4K+SR56h3DL1qU0aRLuGcxT317yyHzlBINxIBrRiV/bVvtHJ6YOdbqe+lr9XK7hEoGER19/xwWBQ==
+ bh=nh6ut4JLFqoG+4NsisN0alFgUkIbYn5FOJyAc9N4Smk=;
+ b=TPANamAiKzUYzWqrkbHQ5ODRcax8JC6matI+fh28oVQbPB+urk1VvyEQM+X/qMV+N0Ob/xtX7AlfKe1ThQX7jSODrEe/nL58pc7xiv2INO3jYxWQXQDyaINcPv4M+GohxA8ZE1+jatxwls0uh6NdAiXHQCe4bvZaGrPmKXmO7cjq9lsZrQOPYIzBXBx3bx2mGbpXpnVSyDADWDWM9e7O68VL+0pnziBKK/jMeZlldp6yDozIKFIEUF+Wy8T6C+dIvVvXNOS67xwPk8CKsCrsarG2RGRi5H9zeZFGFV6N1X0G61bS57ngEPs+g5T4xwsmMJVOa29LcraX3KLDPhfW7A==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
 Received: from DM6PR11MB2538.namprd11.prod.outlook.com (2603:10b6:5:be::20) by
- CY8PR11MB6820.namprd11.prod.outlook.com (2603:10b6:930:60::15) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.5769.15; Mon, 31 Oct 2022 14:49:00 +0000
+ BL3PR11MB6459.namprd11.prod.outlook.com (2603:10b6:208:3be::11) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5769.19; Mon, 31 Oct
+ 2022 15:05:28 +0000
 Received: from DM6PR11MB2538.namprd11.prod.outlook.com
  ([fe80::1f24:5efb:1519:ef4d]) by DM6PR11MB2538.namprd11.prod.outlook.com
  ([fe80::1f24:5efb:1519:ef4d%7]) with mapi id 15.20.5769.019; Mon, 31 Oct 2022
- 14:49:00 +0000
+ 15:05:28 +0000
 From: Sakib Sajal <sakib.sajal@windriver.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH V3] minio: add recipe for minio client
-Date: Mon, 31 Oct 2022 10:48:41 -0400
-Message-Id: <20221031144841.39646-1-sakib.sajal@windriver.com>
+Subject: [meta-oe][PATCH V4] minio: add recipe for minio client
+Date: Mon, 31 Oct 2022 11:05:11 -0400
+Message-Id: <20221031150511.1947-1-sakib.sajal@windriver.com>
 X-Mailer: git-send-email 2.33.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-ClientProxiedBy: YQBPR01CA0158.CANPRD01.PROD.OUTLOOK.COM
- (2603:10b6:c01:7e::16) To DM6PR11MB2538.namprd11.prod.outlook.com
+X-ClientProxiedBy: YQBPR0101CA0294.CANPRD01.PROD.OUTLOOK.COM
+ (2603:10b6:c01:6d::18) To DM6PR11MB2538.namprd11.prod.outlook.com
  (2603:10b6:5:be::20)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DM6PR11MB2538:EE_|CY8PR11MB6820:EE_
-X-MS-Office365-Filtering-Correlation-Id: f1cbccfa-6045-401d-0cb7-08dabb4f0bb4
+X-MS-TrafficTypeDiagnostic: DM6PR11MB2538:EE_|BL3PR11MB6459:EE_
+X-MS-Office365-Filtering-Correlation-Id: 56775951-6c49-4965-ccf7-08dabb515886
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	qnpNSKxT06CvgVNNasND/MHDiuieMLVM46xHQA8QUMJAGQXxCL2Jwth/NtiGK5dmRd5JvMhtSdpBz5lBU/DpIC70IthhYlZjcsR32v6lEQIL/dCSGHS4AoSOIcbpC2J0VNvIdxi3MvNoMQqFIymY0V6t5YNEzdkb043FeDjUF46Bv73fxrke+waz6H64OMYdTtIT1c186d1vsvQlp9GNubsivHiom7D+l/Y+5vFUizPXMHFnfmxYhiSQFqsDYWx7oeeihusIUa3+QElSLf84ba/XPMuyw/kSUZ3x7Syacl/NJhISU901dbRzgc/bHCMPItSUimVzKltkulTstPOSlbs94++v9sSnYkjAGoKwcUFfEqryH6M1+7aTx8aO9KZvNugfYgZQA+zBPJiki4YTyWiKE02x1x6X3SEzSAoIplUMYUqCEIcP0oCFDgQBWPziw0xXk9QX7QD2MkVuhWQ7g6oLNZYInuWna5dRPxWdHaI5u5NBBXLxlcYj4SWqUDAGDSc20lknahcUEnNBPsMlsmZJHFHpzJe7y94AAk+vMgC1Wn96eGxLQ5bjGTEDyzxRBsv5Af4VtUYmyjLoPon5WhYYPHqCFdxkWP+mIniNqkwdhCCaAohBR23ehVOsKMyQBMyOBbSMlOzzoa1nVSBn8OlGX7bllKYxwykqK6WpNBeJBGh4/NHW1EgX03O1u6Z6OaX9V0Y8z+ELJuL6YcA7EKDbYm+kze2Qr07vQxyfh58ciWV081bG6Ni/RXFjgfckLsF2bAl/vd7iwJQ0KjGaG6ZOIoHchM3bxPGaD2KNfxJtgynCpfNnLhmNPm5hXtS3
+	18Uhs2r88kCy6JInByohl/EFw8OihrxLF7pGzNsGSUPocUIGRhXCQv17UWeGVjs9TiCOlw+OxuZnUEuhqg91gZ3kSzKyPr/bd9gLs8L6MU/wEJFGfaMQxeM2lXoY1qzfiJOK30DeClrMaz9zFQvLcp3wFV6flCbB4hem/LSk83+7G+0qe4P5xiTN6UgGkr82WfuzQ/UYcH+mN1N3J0FZBf6crbNJ8gEQ5rZ9fW+6w5TCL1HUF1zpdfcIA2zfuaPIxuHA+5ydkUxhTNJZEmnMsVLWinzDEO6iFv/bCrwhzHOdvTcdjd0k/rflCT3JYzmIXrTzAJL8xBWaSISsY1z8A9syIHkDEHE7gQGekYS8IObi1zqhHOIWmNhjQI/cX3hgutKXlmE5g3oazEj8pkLM/3JSZ029189XKhUTNPfeAawWJA3ng0XzXZ8u3fCHnxVOZ7b5wX9zD6uhh0lCtZOFyElplZdAqiDzVVHDyV4gSGVgPjT0FYkoaC+iieokUMZkJ5aXNZ8FLeuL8KH/NYCWMOMvcDvhgUS++E49WmUUe1ASIRABjM5d65i2DKfMPUgEvwfd/AaGiCj8jLoIMjbL0IGMBrtfgI3dk5WNdwPH8JJheH0h7kTJiTT/3QNj0JYjeQ/cR1D8yxaA5xhjaCWM4ESTlZj0nEggezkmImsrZWeb6sPBDmTRkTlmmCda2P+nej2WkBrV+j9WuLHz7KGUar8lt4QzrBhdErvmtvE4lllQ4xJosipqn+IdPxnbJc9dA2hmfrmE837kEMlaMpbrjy7lXocXBttP/VqIsSFNSZ55nbSRWmrYS9Fa6735IoAD
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM6PR11MB2538.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230022)(4636009)(346002)(396003)(376002)(136003)(39850400004)(366004)(451199015)(1076003)(478600001)(186003)(8676002)(6666004)(83380400001)(8936002)(41300700001)(2616005)(2906002)(84970400001)(66556008)(52116002)(6506007)(316002)(66946007)(966005)(6916009)(26005)(36756003)(6512007)(66476007)(86362001)(6486002)(44832011)(30864003)(5660300002)(38350700002)(38100700002)(559001)(579004);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM6PR11MB2538.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230022)(4636009)(346002)(376002)(366004)(39850400004)(136003)(396003)(451199015)(478600001)(1076003)(26005)(186003)(6666004)(52116002)(6512007)(2616005)(6506007)(83380400001)(44832011)(2906002)(966005)(316002)(6916009)(30864003)(6486002)(66946007)(8936002)(5660300002)(8676002)(66476007)(66556008)(41300700001)(86362001)(38350700002)(38100700002)(36756003)(84970400001)(579004)(559001);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?us-ascii?Q?dkwrJYvIGIIcoi4aBZnzHM2xGnbXK315rB4wlkY+gH4uBLA36mus3iUYa80m?=
- =?us-ascii?Q?69SLJT+Xsa119cRXl/br0ahNNhYS5sN6tErz5cDyVRPPF/J0RxRc55jZI0ao?=
- =?us-ascii?Q?BcNu2NhKLpiS0tqbN9Y9LB1n1kDZlGZhg3haX6IqoMq+nd0q4UlehqPlavY/?=
- =?us-ascii?Q?TDJJeN3p06xD5CNWRU/y44lvX1Wju0bDcQq49EMUnWNeMEEZ9CKyb1CI/8tU?=
- =?us-ascii?Q?IcMKDH0lMM+Ns/TG8TNRLDuULolq9Bm5L/RdbfvddJnrGaeAPACxCa1eQMaa?=
- =?us-ascii?Q?zD0lMr+hyyR0h8fnVJjNyfcVbDNdUzdJJKF9h2Ll93N4QpFK5eHeGsXAZVu0?=
- =?us-ascii?Q?QY0w/TcT18GAnUqJ+3fq4oi1Mhhci2qHyxsOHtiO62W6Mtx/GcPhQ9aTO1aV?=
- =?us-ascii?Q?NC3JlgXNugucGU5EXFOrsRs8GZvaNP0uEGNSJcgOoSEOI1BW3QjsZoTCMt4/?=
- =?us-ascii?Q?WQtND6E2KSRyVwpCsmbw/vDESE/h5AK/tVfZp+TGVGIFnXgrMprwM8BVfwja?=
- =?us-ascii?Q?Cs9a8wUSie/0TiMHATtyRSjcGxKMWe9ZKmcj46FPe1ZdNO9mng9CKrMobkoU?=
- =?us-ascii?Q?L8EL5H2/pA3rfaHmMfTAjpVfW+IOqQ+ePMwFk3vehS8+PG27sJ0WINjt8aQ8?=
- =?us-ascii?Q?WuGZHUviJ4YbEMKGVtiXD/eSmSpGyHe/NvnQaNRKqSezoCDQBEj7rpNWd/Zz?=
- =?us-ascii?Q?7AFHSnFxF2DfOCfp9QLDvlDCq4U6dQWz9yxngdOqKKXVZIiEN2IT0USRx5LM?=
- =?us-ascii?Q?d4G/YxMVVvPLJ2efQyIM++y2Kpv7zaiDBaiuAHjPXyv9Hes7kufMdeLeH1eI?=
- =?us-ascii?Q?INx9+8GxLkkqz15OmQ9XWPcTtFOAL0r2Z5N4exEbc/w87rDxliLOnroNR+Bz?=
- =?us-ascii?Q?SpM8MHsdRGr+mLlNh4DLhDVV3FSKlXu1LnQvDcxyyZDPusruAelSLZwNnBgg?=
- =?us-ascii?Q?IEFA09JsXkXV7ArY9lNRXcve31nYZ5PZxpSDYktFO77+lDGOARpCZZEaZAUv?=
- =?us-ascii?Q?fcMg6tQraVAxx2Wg4/thFeRL8AIQN1UFkNcFkluB8XP/xF9eYXm3JSQo/KrG?=
- =?us-ascii?Q?eWOHk3Wgu82dsq03lnZIbnfEksgiiMnD5HmcWRPXkkZlbaNEnzRMJaJtkpGH?=
- =?us-ascii?Q?m6F10yeMZMqc8F+qsVi/qJn6/iBQRr4LqnvYnTm/5Rql3bESD1bC7hwnmN4+?=
- =?us-ascii?Q?ZXygIY8ywpsbjvA4KJGo0xmuik+aa7RxgWyC0tO9LkanDJvkjoVPYgID47Wg?=
- =?us-ascii?Q?WNyBc3XB8qVHUpqgohbOVDk7FugssPXMDN3SC4p4qZQlQ+4r3hKkR42LYOza?=
- =?us-ascii?Q?CSesId5iVtgPMVhOcz8b0KYDrjGUFFi6qvg25xbIt9p/3OkXcO4vxNtJPjd6?=
- =?us-ascii?Q?Aig7x+LuJ7cAJtF0Ne+duLYddTwaUuCRtgPGWRGJjf2Qb2mImUPY3iHoVIjI?=
- =?us-ascii?Q?HgpsLQ1Z3ZjOQRaYCzsM7fcfpe34QC3d7O0ESn06EjNg4mEsrwSkedUm68nW?=
- =?us-ascii?Q?SSVSlxW5jhNKhvVhDQ/awCJoM07+meEH+xYc/xHg/VxvtePh0yzRswiEesXR?=
- =?us-ascii?Q?WqnESMM/5JhKg6ydWDpE/vx6JBCQHm4OR21fXbQVzmtIZg9NWVEVpjMaO3Mi?=
- =?us-ascii?Q?6g=3D=3D?=
+	=?us-ascii?Q?qRSYZ9vsI86gRs233Nk+cKVTefeGEW/sbFpoDKTCEvnoH4CNva7ysWy37Esf?=
+ =?us-ascii?Q?8MXQm8ZsCxjZ5eAfGcr5jSycfKTL2U2x9xG/4/G6IO8ZhbBiKmZ/nnb0+jEm?=
+ =?us-ascii?Q?NRWsxPkKtjdFHIfi6TeFOQOCH7UT8iy8vg2dgCAMl7m7sdSu8dzYWoXHk99t?=
+ =?us-ascii?Q?hyiCMQk4PR7KWTzsR58eLudjCqnqTZpPJF8z8y7Zat2u3QPf5B4fRcZU7/TN?=
+ =?us-ascii?Q?0g4U446ptQAszu3eKGmHl/t8cPSFyoAzc4mwo+P7DRkI66CyKt3GIwILPlW4?=
+ =?us-ascii?Q?WpF7H/UBRO/cf6UOwih47o9fNJMWvJ6rxBHuQ5AoORxq79if3WjrGb3ecf7Z?=
+ =?us-ascii?Q?AgTwmRNDcOhzIyqhKXZeszCb0xa0leYMb3Fn1Ebd+D2pVDBieFCq7/DzxUVW?=
+ =?us-ascii?Q?1Q6qzfFo2iljSyZQqNFqOEZYFMpkBeXxtmXM3ob/1wAQvO65Gphyd9LatGV3?=
+ =?us-ascii?Q?DMFXhDU7MTwOUUgSRBrhlmU/CEzU8gHxZ1um4mtkbCLVLfXrQc/0tjl5UjUF?=
+ =?us-ascii?Q?ujNZQ1b8rLqgRXra6UufybOC/E62kEHZrbiPlavWDZuJUhOGXSy3vGN0DDCp?=
+ =?us-ascii?Q?bZzEfzRl+ovxgQ7H/8Eohv4WFCsuL/YNnmnBQ4/zDEm6MTLOdbbdfvDsRsCE?=
+ =?us-ascii?Q?Y3oALvcH9ezmb9WMlEwpE2OnsTe/PSsgT1PDXV+3lDyDDPOsbZxirfA/Dff5?=
+ =?us-ascii?Q?3UzLT/vlyW/5XpuPNT9Ka2ftY+3vI3eFljsXp9BODWWuAE/+pmI+/hEG3BgX?=
+ =?us-ascii?Q?dgASIwxmks3WWQ4+6k7ZViDPh4ech245oKXzhAaOd2Rn00+UmGrdPJ5yr+5i?=
+ =?us-ascii?Q?d3VcdYOoXYfqgg55TvGHW9VbQfmnC7IDbNfBk7vHWunLjFoYdq86jDj6q9ep?=
+ =?us-ascii?Q?gLIJnoog9NkEHSfb38ZCCOQNP+ZSWZr1+PLv31LhZH1PKyYbsVyzxuA13RCt?=
+ =?us-ascii?Q?xt6VrujiHMTzEuiKUg5QQNRxqrvHyubzpsy662d/a/OZO/APuW1O00rTj7Zu?=
+ =?us-ascii?Q?79BrdaqJ6YzlwU6wvPF+DsH7gXUrgMEcmBpokCcGm9MnEZhXCa+jtBsh5YJ1?=
+ =?us-ascii?Q?Dj8HS2FcO8l3SEydkPP1OUH2BlHh6cRCNzzxHbQc0OaAyKTISYVVavkqZnBg?=
+ =?us-ascii?Q?xGa0XvEtUKRRd9CdALLwRmclP/cKVdS7PFn5iGbqnbBjQyif9Os2tER+Qde3?=
+ =?us-ascii?Q?jdUkHhi4O4ByDilK+rwATBIRFLiFHCk9DZFYFRSpBJshgpOSkaYOOsx6iu89?=
+ =?us-ascii?Q?pL6sKBw2hqYTG1weP4r/Dnkn/Nmly+es0s4bH4ON5Lf7Y/sPqNgdrRmRXd1S?=
+ =?us-ascii?Q?jn+i4EME5mbghZaf3w4DhX6oJSZv5GIePqeh+3sgH4AWtJt3qvMEcSC8hdXk?=
+ =?us-ascii?Q?iLMLCzCmqt2JCNLbco6qYeudq1FkLWdsT2Mlj4PYRvRK/JQtGtlBqnbx+0Iu?=
+ =?us-ascii?Q?73yPhwdkHtt8C6//KZFOYUbQWV9pXFFCSgRcIqCsEQladmT3N53i/qw/Qoyf?=
+ =?us-ascii?Q?EcmKaSzaCDSs9tKTo6t5K4L75nOF0eFTBS5nyS4KfMLjfjOScAbnSErzYy0w?=
+ =?us-ascii?Q?d8HBQk8yVXN8FoWCkH2p8GG40ztjjXcJ9bbacnycH/w4W5kYRwiLOID6WojH?=
+ =?us-ascii?Q?XQ=3D=3D?=
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: f1cbccfa-6045-401d-0cb7-08dabb4f0bb4
+X-MS-Exchange-CrossTenant-Network-Message-Id: 56775951-6c49-4965-ccf7-08dabb515886
 X-MS-Exchange-CrossTenant-AuthSource: DM6PR11MB2538.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 31 Oct 2022 14:49:00.2630
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 31 Oct 2022 15:05:28.0664
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: CrCKBb0ifWxQ7WwWAn+PnPNZXJ6/Cso1yUwVNiswpmECisoXBci5CCtCFWd7fSx0mnrnUCe8IHg6lRfBrR6a3xGRQenUhc+Puy5i1iFkd+g=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY8PR11MB6820
-X-Proofpoint-GUID: dkzt8qwp9jVvyzf6GEGd57TuFa0AHOum
-X-Proofpoint-ORIG-GUID: dkzt8qwp9jVvyzf6GEGd57TuFa0AHOum
+X-MS-Exchange-CrossTenant-UserPrincipalName: wHjGseqGfiSIC2JLxXag5ZnREQplDmBySplDXDP3Ygl6kg49tmCWyUs19pu+fsawyx1LTuHwvcWf26AWt9kzhcM/GEBCvHuV/G4NRt841gc=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BL3PR11MB6459
+X-Proofpoint-ORIG-GUID: BDpvrqEkWp0MraAW1SUnqK3Z9kkFmYwv
+X-Proofpoint-GUID: BDpvrqEkWp0MraAW1SUnqK3Z9kkFmYwv
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.205,Aquarius:18.0.895,Hydra:6.0.545,FMLib:17.11.122.1
  definitions=2022-10-31_17,2022-10-31_01,2022-06-22_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 clxscore=1015 mlxscore=0
- spamscore=0 malwarescore=0 adultscore=0 mlxlogscore=999 impostorscore=0
- priorityscore=1501 lowpriorityscore=0 phishscore=0 bulkscore=0
- suspectscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2210170000 definitions=main-2210310093
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 impostorscore=0
+ lowpriorityscore=0 bulkscore=0 phishscore=0 mlxscore=0 clxscore=1015
+ suspectscore=0 priorityscore=1501 spamscore=0 malwarescore=0 adultscore=0
+ mlxlogscore=999 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.12.0-2210170000 definitions=main-2210310094
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 31 Oct 2022 14:49:12 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99377
+ <openembedded-devel@lists.openembedded.org>; Mon, 31 Oct 2022 15:05:42 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99378
 
 MinIO Client (mc) provides a modern alternative to UNIX commands like
 ls, cat, cp, mirror, diff, find etc. It supports filesystems and Amazon
@@ -130,125 +131,14 @@ S3 compatible cloud storage service (AWS Signature v2 and v4).
 
 Signed-off-by: Sakib Sajal <sakib.sajal@windriver.com>
 ---
- go_recipes.txt                                | 103 ++++
  .../recipes-extended/minio/minio/modules.txt  | 208 +++++++
  meta-oe/recipes-extended/minio/minio_git.bb   | 158 ++++++
  meta-oe/recipes-extended/minio/src_uri.inc    | 509 ++++++++++++++++++
- 4 files changed, 978 insertions(+)
- create mode 100644 go_recipes.txt
+ 3 files changed, 875 insertions(+)
  create mode 100644 meta-oe/recipes-extended/minio/minio/modules.txt
  create mode 100644 meta-oe/recipes-extended/minio/minio_git.bb
  create mode 100644 meta-oe/recipes-extended/minio/src_uri.inc
 
-diff --git a/go_recipes.txt b/go_recipes.txt
-new file mode 100644
-index 000000000..d0841ce04
---- /dev/null
-+++ b/go_recipes.txt
-@@ -0,0 +1,103 @@
-+./meta-xfce/recipes-extended/imsettings/imsettings_1.8.3.bb:inherit autotools gtk-doc gobject-introspection gettext features_check
-+./meta-xfce/recipes-xfce/libxfce4ui/libxfce4ui_4.16.1.bb:inherit xfce gtk-doc gobject-introspection features_check
-+./meta-xfce/recipes-xfce/xfconf/xfconf_4.16.0.bb:inherit xfce gtk-doc gobject-introspection bash-completion vala
-+./meta-xfce/recipes-xfce/garcon/garcon_4.16.1.bb:inherit xfce gtk-doc gobject-introspection features_check
-+./meta-xfce/recipes-xfce/thunar/thunar_4.16.9.bb:inherit xfce gobject-introspection features_check mime-xdg perlnative
-+./meta-xfce/recipes-xfce/xfce4-panel/xfce4-panel_4.16.3.bb:inherit xfce gtk-doc gobject-introspection features_check mime-xdg
-+./meta-xfce/recipes-xfce/libxfce4util/libxfce4util_4.16.0.bb:inherit xfce gtk-doc gobject-introspection vala
-+./meta-gnome/recipes-support/keybinder/keybinder_3.0.bb:inherit features_check autotools gtk-doc gobject-introspection
-+./meta-gnome/recipes-support/accountsservice/accountsservice_22.08.8.bb:inherit meson gobject-introspection gtk-doc features_check systemd vala
-+./meta-gnome/recipes-support/appstream-glib/appstream-glib_0.7.18.bb:inherit meson gobject-introspection gettext bash-completion pkgconfig manpages
-+./meta-gnome/recipes-support/colord-gtk/colord-gtk_0.3.0.bb:inherit meson gobject-introspection gettext gtk-doc features_check
-+./meta-gnome/recipes-connectivity/geary/geary_40.0.bb:inherit meson pkgconfig mime-xdg gtk-icon-cache gobject-introspection vala features_check
-+./meta-gnome/recipes-connectivity/folks/folks_0.15.5.bb:inherit pkgconfig gnomebase gettext gobject-introspection vala features_check
-+./meta-gnome/recipes-connectivity/libnma/libnma_1.8.38.bb:inherit gnomebase gobject-introspection gtk-doc gettext vala features_check
-+./meta-gnome/recipes-gnome/gexiv2/gexiv2_0.14.0.bb:inherit gnomebase gobject-introspection gtk-doc python3native
-+./meta-gnome/recipes-gnome/libgweather/libgweather_40.0.bb:inherit gnomebase gsettings gobject-introspection gettext gtk-doc vala features_check upstream-version-is-even
-+./meta-gnome/recipes-gnome/libgweather/libgweather4_4.0.0.bb:inherit gnomebase gsettings gobject-introspection gettext gtk-doc vala
-+./meta-gnome/recipes-gnome/gnome-online-accounts/gnome-online-accounts_3.44.0.bb:inherit gnomebase gsettings gobject-introspection gsettings gtk-doc vala gettext features_check
-+./meta-gnome/recipes-gnome/libchamplain/libchamplain_0.12.20.bb:inherit features_check gobject-introspection meson pkgconfig
-+./meta-gnome/recipes-gnome/gdm/gdm_42.0.bb:inherit gnomebase gsettings gobject-introspection gettext systemd useradd itstool gnome-help features_check
-+./meta-gnome/recipes-gnome/gnome-shell/gnome-shell_42.0.bb:inherit gnomebase gsettings gettext gobject-introspection gtk-icon-cache features_check bash-completion
-+./meta-gnome/recipes-gnome/libgsf/libgsf_1.14.50.bb:inherit gnomebase gobject-introspection gettext gtk-doc
-+./meta-gnome/recipes-gnome/libwnck/libwnck_2.31.0.bb:inherit gnomebase gobject-introspection features_check
-+./meta-gnome/recipes-gnome/libwnck/libwnck3_40.1.bb:inherit gnomebase gobject-introspection gtk-doc gettext features_check
-+./meta-gnome/recipes-gnome/libxklavier/libxklavier_5.4.bb:inherit autotools pkgconfig gettext gobject-introspection features_check
-+./meta-gnome/recipes-gnome/gnome-tweaks/gnome-tweaks_40.0.bb:inherit gnomebase gtk-icon-cache gobject-introspection features_check
-+./meta-gnome/recipes-gnome/tepl/tepl_6.00.0.bb:inherit gnomebase gobject-introspection gettext features_check
-+./meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server.bb:inherit pkgconfig gsettings gobject-introspection features_check cmake gtk-doc gettext perlnative vala
-+./meta-gnome/recipes-gnome/libadwaita/libadwaita_1.2.0.bb:inherit gnomebase gobject-introspection gtk-doc vala features_check
-+./meta-gnome/recipes-gnome/gtk4/gtk4_4.6.7.bb:inherit meson gettext pkgconfig gtk-doc update-alternatives gsettings features_check gobject-introspection
-+./meta-gnome/recipes-gnome/mutter/mutter_42.0.bb:inherit gnomebase gsettings gobject-introspection gettext features_check
-+./meta-gnome/recipes-gnome/amtk/amtk_5.3.1.bb:inherit gnomebase gettext features_check gobject-introspection
-+./meta-gnome/recipes-gnome/evince/evince_42.3.bb:inherit gnomebase itstool gnome-help pkgconfig gsettings gobject-introspection gettext mime-xdg gtk-doc
-+./meta-gnome/recipes-gnome/gfbgraph/gfbgraph_0.2.5.bb:inherit gnomebase gtk-doc gobject-introspection pkgconfig features_check
-+./meta-gnome/recipes-gnome/libportal/libportal_0.6.bb:inherit meson gtk-doc gobject-introspection features_check
-+./meta-gnome/recipes-gnome/libgtop/libgtop_2.40.0.bb:inherit gnomebase lib_package gtk-doc gobject-introspection gettext upstream-version-is-even features_check
-+./meta-gnome/recipes-gnome/rest/rest_0.8.1.bb:inherit gnomebase gobject-introspection gtk-doc vala
-+./meta-gnome/recipes-gnome/libgdata/libgdata_0.18.1.bb:inherit gnomebase pkgconfig gettext gtk-doc vala gobject-introspection manpages features_check
-+./meta-gnome/recipes-gnome/tracker/tracker_3.4.0.bb:inherit gnomebase gsettings gobject-introspection vala gtk-doc manpages bash-completion features_check python3native
-+./meta-gnome/recipes-gnome/tracker/tracker-miners_3.2.1.bb:inherit gnomebase gsettings gobject-introspection vala bash-completion features_check
-+./meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth_42.4.bb:inherit features_check gnomebase gtk-icon-cache gtk-doc gobject-introspection
-+./meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth3_3.34.5.bb:inherit features_check gnomebase gtk-icon-cache gtk-doc gobject-introspection upstream-version-is-even
-+./meta-gnome/recipes-gnome/geocode-glib/geocode-glib_3.26.4.bb:inherit gnomebase gobject-introspection gettext gtk-doc upstream-version-is-even
-+./meta-gnome/recipes-gnome/grilo/grilo_0.3.14.bb:inherit gnomebase gobject-introspection gtk-doc gettext vala
-+./meta-gnome/recipes-gnome/gspell/gspell_1.12.0.bb:inherit gnomebase gettext gobject-introspection vala
-+./meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop_42.0.bb:inherit gnomebase itstool pkgconfig upstream-version-is-even gobject-introspection features_check gtk-doc
-+./meta-gnome/recipes-gnome/libtimezonemap/libtimezonemap_0.4.6.bb:inherit features_check autotools pkgconfig gobject-introspection
-+./meta-gnome/recipes-gnome/gsound/gsound_1.0.3.bb:inherit gnomebase gettext gobject-introspection vala
-+./meta-gnome/recipes-gnome/gjs/gjs_1.72.2.bb:inherit gnomebase gsettings gobject-introspection vala gettext features_check upstream-version-is-even pkgconfig
-+./meta-gnome/recipes-gnome/gedit/gedit_42.2.bb:inherit gnomebase gsettings itstool gnome-help gobject-introspection gtk-doc vala gettext features_check mime-xdg python3targetconfig
-+./meta-gnome/recipes-gnome/gnome-menus/gnome-menus_3.36.0.bb:inherit features_check gnomebase gettext pkgconfig gobject-introspection upstream-version-is-even
-+./meta-gnome/recipes-gnome/gtksourceview/gtksourceview5_5.4.2.bb:inherit gnomebase lib_package gettext features_check gtk-doc gtk-icon-cache gobject-introspection vala
-+./meta-gnome/recipes-gnome/gtksourceview/gtksourceview3_3.24.11.bb:inherit gnomebase lib_package gettext features_check gtk-doc gobject-introspection upstream-version-is-even
-+./meta-gnome/recipes-gnome/gtksourceview/gtksourceview4_4.8.2.bb:inherit gnomebase lib_package gettext features_check gtk-doc gobject-introspection vala
-+./meta-gnome/recipes-gnome/nautilus/nautilus_42.2.bb:inherit gnomebase gsettings gobject-introspection gtk-doc gettext features_check mime-xdg
-+./meta-gnome/recipes-gnome/gnome-autoar/gnome-autoar_0.4.3.bb:inherit gnomebase gobject-introspection gtk-doc vala
-+./meta-gnome/recipes-gnome/gnome-calculator/gnome-calculator_42.2.bb:inherit gnomebase gobject-introspection gnome-help vala gtk-icon-cache gettext features_check
-+./meta-gnome/recipes-gnome/gnome-settings-daemon/gnome-settings-daemon_42.1.bb:inherit gnomebase gsettings gobject-introspection gettext features_check upstream-version-is-even
-+./meta-gnome/recipes-gimp/mypaint/libmypaint_git.bb:inherit autotools gobject-introspection gettext pkgconfig python3native
-+./meta-gnome/recipes-gimp/gegl/gegl_0.4.38.bb:inherit features_check gnomebase vala gobject-introspection
-+./meta-gnome/recipes-gimp/babl/babl_0.1.96.bb:inherit setuptools3 gnomebase gobject-introspection vala
-+./meta-oe/recipes-core/uutils-coreutils/uutils-coreutils_0.0.16.bb:inherit cargo
-+./meta-oe/recipes-test/syzkaller/syzkaller_git.bb:inherit go-mod
-+./meta-oe/recipes-navigation/geoclue/geoclue_2.5.7.bb:inherit meson pkgconfig gtk-doc gobject-introspection vala
-+./meta-oe/recipes-support/poppler/poppler_22.10.0.bb:inherit cmake pkgconfig gobject-introspection
-+./meta-oe/recipes-support/libmanette/libmanette_0.2.6.bb:inherit meson pkgconfig gobject-introspection ptest vala
-+./meta-oe/recipes-support/upower/upower_0.99.17.bb:inherit meson pkgconfig gtk-doc gettext gobject-introspection systemd
-+./meta-oe/recipes-support/gosu/gosu_1.14.bb:inherit go
-+./meta-oe/recipes-support/libgusb/libgusb_0.3.10.bb:inherit meson gobject-introspection gtk-doc gettext vala
-+./meta-oe/recipes-support/crucible/crucible_2022.05.25.bb:inherit go-mod
-+./meta-oe/recipes-support/colord/colord.bb:inherit meson gobject-introspection gsettings gettext bash-completion systemd features_check useradd pkgconfig
-+./meta-oe/recipes-support/udisks/udisks2_2.9.4.bb:inherit autotools-brokensep systemd gtk-doc gobject-introspection gettext features_check
-+./meta-oe/recipes-support/farsight/libnice_0.1.18.bb:inherit meson gtk-doc gobject-introspection
-+./meta-oe/recipes-connectivity/modemmanager/modemmanager_1.18.12.bb:inherit gnomebase gettext systemd gobject-introspection bash-completion
-+./meta-oe/recipes-connectivity/libmbim/libmbim_1.26.4.bb:inherit autotools pkgconfig bash-completion gobject-introspection
-+./meta-oe/recipes-connectivity/telepathy/telepathy-glib_0.24.1.bb:inherit autotools pkgconfig gettext gobject-introspection vala
-+./meta-oe/recipes-connectivity/libqmi/libqmi_1.30.8.bb:inherit meson pkgconfig bash-completion gobject-introspection
-+./meta-oe/recipes-connectivity/libqrtr-glib/libqrtr-glib_git.bb:inherit meson pkgconfig gobject-introspection
-+./meta-oe/recipes-bsp/fwupd/fwupd_1.8.4.bb:inherit meson vala gobject-introspection systemd bash-completion pkgconfig gi-docgen ptest manpages
-+./meta-oe/recipes-extended/minio/minio_git.bb:inherit go
-+./meta-oe/recipes-extended/minio/minio_git.bb:inherit goarch
-+./meta-oe/recipes-extended/ostree/ostree_2022.5.bb:inherit autotools bash-completion gobject-introspection gtk-doc manpages pkgconfig ptest-gnome systemd
-+./meta-oe/recipes-extended/polkit/polkit_0.119.bb:inherit autotools gtk-doc pkgconfig useradd systemd gobject-introspection features_check
-+./meta-oe/recipes-extended/libblockdev/libblockdev_2.28.bb:inherit autotools gobject-introspection pkgconfig
-+./meta-oe/recipes-devtools/glade/glade_3.22.2.bb:inherit features_check autotools pkgconfig gnomebase gobject-introspection mime-xdg
-+./meta-oe/recipes-devtools/libgee/libgee_0.20.6.bb:inherit gnomebase vala gobject-introspection
-+./meta-oe/recipes-devtools/gst-editing-services/gst-editing-services_1.20.4.bb:inherit meson pkgconfig upstream-version-is-even gobject-introspection features_check bash-completion
-+./meta-oe/recipes-gnome/libxmlb/libxmlb_0.3.10.bb:inherit gobject-introspection gtk-doc meson ptest-gnome lib_package
-+./meta-oe/recipes-gnome/gmime/gmime_3.2.7.bb:inherit gnomebase gobject-introspection vala
-+./meta-oe/recipes-gnome/libpeas/libpeas_1.34.0.bb:inherit gnomebase gobject-introspection gtk-doc gtk-icon-cache features_check
-+./meta-oe/recipes-gnome/gcab/gcab_1.4.bb:inherit gobject-introspection gtk-doc manpages meson ptest-gnome vala
-+./meta-oe/recipes-gnome/libjcat/libjcat_0.1.12.bb:inherit gobject-introspection gtk-doc meson ptest-gnome vala lib_package
-+./meta-oe/recipes-dbs/influxdb/influxdb_1.8.10.bb:inherit go-mod pkgconfig systemd update-rc.d useradd
-+./meta-oe/recipes-graphics/graphene/graphene_1.10.8.bb:inherit gnomebase gobject-introspection gtk-doc
-+./meta-multimedia/recipes-multimedia/wireplumber/wireplumber_0.4.12.bb:inherit meson pkgconfig gobject-introspection systemd
-+./meta-multimedia/recipes-support/libmediaart/libmediaart-2.0_1.9.5.bb:inherit gnomebase gobject-introspection vala features_check
-+./meta-multimedia/recipes-connectivity/gupnp/gupnp-av_0.14.0.bb:inherit meson pkgconfig gobject-introspection vala
-+./meta-multimedia/recipes-connectivity/gupnp/gupnp-igd_1.2.0.bb:inherit meson pkgconfig gtk-doc gobject-introspection
-+./meta-multimedia/recipes-connectivity/gupnp/gupnp-dlna_0.12.0.bb:inherit meson pkgconfig gobject-introspection vala
-+./meta-multimedia/recipes-connectivity/gupnp/gupnp_1.4.1.bb:inherit meson pkgconfig vala gobject-introspection
-+./meta-multimedia/recipes-connectivity/gupnp/gssdp_1.4.0.1.bb:inherit meson pkgconfig gobject-introspection vala gtk-doc
-+./meta-multimedia/recipes-connectivity/rygel/rygel_0.40.4.bb:inherit gnomebase features_check vala gobject-introspection gettext systemd meson
-+./meta-networking/recipes-connectivity/networkmanager/networkmanager_1.40.0.bb:inherit gnomebase gettext update-rc.d systemd gobject-introspection gtk-doc update-alternatives upstream-version-is-even
 diff --git a/meta-oe/recipes-extended/minio/minio/modules.txt b/meta-oe/recipes-extended/minio/minio/modules.txt
 new file mode 100644
 index 000000000..fbd01e51a
