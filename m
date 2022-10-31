@@ -1,122 +1,95 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <ticotimo@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 540FCFA373D
-	for <webhook@archiver.kernel.org>; Mon, 31 Oct 2022 00:50:47 +0000 (UTC)
-Received: from mail-oa1-f51.google.com (mail-oa1-f51.google.com [209.85.160.51])
- by mx.groups.io with SMTP id smtpd.web10.4250.1667177442542546184
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 92864FA3744
+	for <webhook@archiver.kernel.org>; Mon, 31 Oct 2022 01:44:47 +0000 (UTC)
+Received: from mail-pf1-f178.google.com (mail-pf1-f178.google.com [209.85.210.178])
+ by mx.groups.io with SMTP id smtpd.web12.4828.1667180686334052515
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 30 Oct 2022 17:50:42 -0700
+ Sun, 30 Oct 2022 18:44:46 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=hBYWSHFu;
- spf=pass (domain: gmail.com, ip: 209.85.160.51, mailfrom: raj.khem@gmail.com)
-Received: by mail-oa1-f51.google.com with SMTP id 586e51a60fabf-13bd19c3b68so12060416fac.7
-        for <openembedded-devel@lists.openembedded.org>; Sun, 30 Oct 2022 17:50:42 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=Yb4BQgF5;
+ spf=pass (domain: gmail.com, ip: 209.85.210.178, mailfrom: ticotimo@gmail.com)
+Received: by mail-pf1-f178.google.com with SMTP id g62so9437224pfb.10
+        for <openembedded-devel@lists.openembedded.org>; Sun, 30 Oct 2022 18:44:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=SUUiCyPeiEMgvSbuOYqzZaGdeiofxnD/hQtqbyL/U2Y=;
-        b=hBYWSHFuXRiCtNeZEpaYT681Tw1362k16csrTLMA2umf+kHa+39wH+QAG3LYUGZrAO
-         ncbBnlbbZnvnC4kv/PsZxE0ssM7F8PIUSatffVP7ZoTCfRKF4KFKLRd7RM8NXPkFk+jF
-         nBu5RFQ+EiG7rKPmf8PJhIjUwsyNlziNZVJLqkechOeEPNInPGVa9ZstIQ7q/mpZ7Z/a
-         rNTRrHJNrR1GLYuaOLqT8bI2dBbNsdDZK9EOvUID9LMdGu67dLBx3+smag/hEUVLKHyI
-         f3cBerkj4Ks5YroO1BfXxs9R4hxvCSyJ47VsWYTELybxWZEl8uQliaCwFpKVgUIwxzud
-         whOA==
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=y0zEAa6uRpbyo2YN27fLFFhJxeypSjwY1bpiaMgk71U=;
+        b=Yb4BQgF5a5N0lhkzEX1h7luD5/0XU/IsOzUs8oC5D15+3gzpSzGZ+gswSRHPcALtyO
+         rAqqJfbAa/z2u4M5GSPD/hPZpJpjLq3Z26Ags9bXXkxZEcPF0XL7KeL9ONCBfFZjRSC5
+         Lec8V9rBNEzpKsO7nAMA7sclrr43CbT3WrOoNsye2WR+Kd+EwmGm5lcZfoaN/wuZDh9N
+         88Q1kgbXmpZiSvvl/ciqeZGxzvHeJIv69HBc6PXIvHImv6WejwLPwmgilN4F8i9re3On
+         7CnH+prWIyJNplcSe1Jub1mXWltXXL/oASg6t2/h+haWewVhfRuE+Jj00a0PZ1XomX7m
+         RRfw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=SUUiCyPeiEMgvSbuOYqzZaGdeiofxnD/hQtqbyL/U2Y=;
-        b=mDczFiHHeKV25GOpcM2MDcnvzU0P5oblaXZHlJ2iqGSolgig9tyEFelrxCwcoP9PLh
-         yaIEJrGtfQNNpj+f+CAIMRX9fPMpYhqTIz4Z+eAaHTju0WQPPAmT4hh5d1sUMc6U0nx0
-         5aMY23iN6i6Sk5sykVc07pJsi8KVaSWz/u2H8V3pyjuL6o3hSSUwWIaU467umGBNGFpa
-         cDIpXVV1/JfPzycFARtdI8s8jKRMB/Bj6qFgtkDMGS0V7CfgCLaCN6GH3fUfwSm7uVeG
-         86ACq/zMEzoN4NL0m5pBkPuV3P0u+cAdJ50ZT1wIaHcMz0PX//i3n/19jRjz7sBJV7Y1
-         DVGQ==
-X-Gm-Message-State: ACrzQf2g3WeXINk5Fpr/ANsXnY5dhiAv03DJOoyH4SFmVaICBxIn0twm
-	inzK0vdGCBL+1Of3v2H6nKf1sgVnEU2R1Ea0+gE=
-X-Google-Smtp-Source: AMsMyM6/7zg5ivIxKwQCc5fMW2tp4/s5vB6vg+rK6Y7s5m3Lp6hMoqJktWS9HWObjpUY3+JtXTc98b50GkLhIspYvLw=
-X-Received: by 2002:a05:6870:80cd:b0:13b:9ee7:34cc with SMTP id
- r13-20020a05687080cd00b0013b9ee734ccmr15229021oab.55.1667177441637; Sun, 30
- Oct 2022 17:50:41 -0700 (PDT)
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=y0zEAa6uRpbyo2YN27fLFFhJxeypSjwY1bpiaMgk71U=;
+        b=WLybqB274YXezkYpgYD/fYdh1gTNrfIYgPHH6O5fB5Oph6HXSA4OnYijmunzqVWzJb
+         S+SQo4kkTRBqiuqj8ltWFjceSzo/Gtuhatxw6rUNge23iVuCBC1uHapEGT3Rbbru56hg
+         v231LCnkvoNKWs16+6BalIdqYdZ7COZclEQK8l2LnNcskDpA+JHLt/+Q8RH9MQgLI9Kh
+         UGgEPM8nCkd88UjqwXWRQHsU1zDV+mW1cy6QHGhSjorghFNxA7vWXLknQfDuBT0U4uRl
+         cXApkS8iGkWhQeXLpM50GhNkkr1q5tqXWaUL1OR67wv4cBcoZo673VtKgo0Et5PLj7HK
+         o6PA==
+X-Gm-Message-State: ACrzQf2pXc7OfSL8+MZ3Zcfr++Z8SIeLt7MmiDHZBghS8UGWwT/KTTOK
+	julDXhkFgERbX9QBdxRul+WIwcz6ufAZWg==
+X-Google-Smtp-Source: AMsMyM6tNpnTQBNyJAFrRf0stCpZxrIUpBVGgqgA4v/5DQm4fQl31slVWWBmFS8qaUMW6ye/67ijYw==
+X-Received: by 2002:a63:5a50:0:b0:429:8580:fc61 with SMTP id k16-20020a635a50000000b004298580fc61mr10911069pgm.215.1667180685348;
+        Sun, 30 Oct 2022 18:44:45 -0700 (PDT)
+Received: from chiron.hsd1.or.comcast.net ([2601:1c0:ca00:cea0:f504:8040:1a2:6bab])
+        by smtp.gmail.com with ESMTPSA id a19-20020aa79713000000b0056b3c863950sm3267428pfg.8.2022.10.30.18.44.44
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sun, 30 Oct 2022 18:44:44 -0700 (PDT)
+From: Tim Orling <ticotimo@gmail.com>
+X-Google-Original-From: Tim Orling <tim.orling@konsulko.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-perl][PATCH 1/3] libcompress-raw*-perl: move from libio/compress-*
+Date: Sun, 30 Oct 2022 18:44:32 -0700
+Message-Id: <ddae5ba523f9fd7df9d0af168d335d1551a5bf72.1667179899.git.tim.orling@konsulko.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <cover.1667179899.git.tim.orling@konsulko.com>
+References: <cover.1667179899.git.tim.orling@konsulko.com>
 MIME-Version: 1.0
-References: <ba7c7560-4a2d-717d-1c1e-644dd04ccea5@gmail.com>
-In-Reply-To: <ba7c7560-4a2d-717d-1c1e-644dd04ccea5@gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Sun, 30 Oct 2022 17:50:15 -0700
-Message-ID: <CAMKF1srrR3xpWW2o8uV2YFuN_bOJdJh8f+LSkFHvaCC-uazNug@mail.gmail.com>
-Subject: Re: dunfell merge request: Oct 30th
-To: akuster808 <akuster808@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 31 Oct 2022 00:50:47 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99355
+ <openembedded-devel@lists.openembedded.org>; Mon, 31 Oct 2022 01:44:47 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99357
 
-merged thanks Armin.
+These modules do not follow our Debian naming and should never have been
+allowed to be added as libio/compress-raw*.bb.
 
-On Sun, Oct 30, 2022 at 11:50 AM akuster808 <akuster808@gmail.com> wrote:
->
-> The following changes since commit 6792ebdd966aa0fb662989529193a0940fbfee00:
->
->    c-ares: upgrade 1.17.2 -> 1.18.1 (2022-09-11 13:49:52 -0400)
->
-> are available in the Git repository at:
->
->    https://git.openembedded.org/meta-openembedded dunfell-next
->
-> for you to fetch changes up to 7203130ed8b58c0df75cb72222ac2bcf546bce44:
->
->    [dunfell] wireguard: Upgrade to 1.0.20220627 (module) and
-> 1.0.20210914 (tools) (2022-10-30 14:47:43 -0400)
->
-> ----------------------------------------------------------------
-> Colin Finck (1):
->        [dunfell] wireguard: Upgrade to 1.0.20220627 (module) and
-> 1.0.20210914 (tools)
->
-> Hitendra Prajapati (2):
->        postgresql: CVE-2022-1552 Autovacuum, REINDEX, and others omit
-> "security restricted operation" sandbox
->        dnsmasq: CVE-2022-0934 Heap use after free in dhcp6_no_relay
->
-> Mathieu Dubois-Briand (1):
->        networkmanager: Update to 1.22.16
->
->   .../{networkmanager_1.22.10.bb => networkmanager_1.22.16.bb} |   3 +-
->   ...0001-compat-SYM_FUNC_-START-END-were-backported-to-5.4.patch | 29 -
->   ...1-compat-icmp_ndo_send-functions-were-backported-exten.patch | 32 -
->   .../recipes-kernel/wireguard/wireguard-module_1.0.20200401.bb   | 30 -
->   .../recipes-kernel/wireguard/wireguard-module_1.0.20220627.bb   | 23 +
->   ...rd-tools_1.0.20200319.bb => wireguard-tools_1.0.20210914.bb} |   4 +-
->   .../recipes-support/dnsmasq/dnsmasq/CVE-2022-0934.patch         | 188
-> ++++++
->   meta-networking/recipes-support/dnsmasq/dnsmasq_2.81.bb         | 1 +
->   meta-oe/recipes-dbs/postgresql/files/CVE-2022-1552.patch        | 947
-> ++++++++++++++++++++++++++++
->   meta-oe/recipes-dbs/postgresql/postgresql_12.9.bb               | 1 +
->   10 files changed, 1164 insertions(+), 94 deletions(-)
->   rename
-> meta-networking/recipes-connectivity/networkmanager/{networkmanager_1.22.10.bb
-> => networkmanager_1.22.16.bb} (98%)
->   delete mode 100644
-> meta-networking/recipes-kernel/wireguard/files/0001-compat-SYM_FUNC_-START-END-were-backported-to-5.4.patch
->   delete mode 100644
-> meta-networking/recipes-kernel/wireguard/files/0001-compat-icmp_ndo_send-functions-were-backported-exten.patch
->   delete mode 100644
-> meta-networking/recipes-kernel/wireguard/wireguard-module_1.0.20200401.bb
->   create mode 100644
-> meta-networking/recipes-kernel/wireguard/wireguard-module_1.0.20220627.bb
->   rename
-> meta-networking/recipes-kernel/wireguard/{wireguard-tools_1.0.20200319.bb
-> => wireguard-tools_1.0.20210914.bb} (84%)
->   create mode 100644
-> meta-networking/recipes-support/dnsmasq/dnsmasq/CVE-2022-0934.patch
->   create mode 100644
-> meta-oe/recipes-dbs/postgresql/files/CVE-2022-1552.patch
+Signed-off-by: Tim Orling <tim.orling@konsulko.com>
+---
+ .../libcompress-raw-bzip2-perl_2.096.bb}                          | 0
+ .../libcompress-raw-lzma-perl_2.096.bb}                           | 0
+ .../libcompress-raw-zlib-perl_2.096.bb}                           | 0
+ 3 files changed, 0 insertions(+), 0 deletions(-)
+ rename meta-perl/recipes-perl/{libio/compress-raw-bzip2-perl_2.096.bb => libcompress/libcompress-raw-bzip2-perl_2.096.bb} (100%)
+ rename meta-perl/recipes-perl/{libio/compress-raw-lzma-perl_2.096.bb => libcompress/libcompress-raw-lzma-perl_2.096.bb} (100%)
+ rename meta-perl/recipes-perl/{libio/compress-raw-zlib-perl_2.096.bb => libcompress/libcompress-raw-zlib-perl_2.096.bb} (100%)
+
+diff --git a/meta-perl/recipes-perl/libio/compress-raw-bzip2-perl_2.096.bb b/meta-perl/recipes-perl/libcompress/libcompress-raw-bzip2-perl_2.096.bb
+similarity index 100%
+rename from meta-perl/recipes-perl/libio/compress-raw-bzip2-perl_2.096.bb
+rename to meta-perl/recipes-perl/libcompress/libcompress-raw-bzip2-perl_2.096.bb
+diff --git a/meta-perl/recipes-perl/libio/compress-raw-lzma-perl_2.096.bb b/meta-perl/recipes-perl/libcompress/libcompress-raw-lzma-perl_2.096.bb
+similarity index 100%
+rename from meta-perl/recipes-perl/libio/compress-raw-lzma-perl_2.096.bb
+rename to meta-perl/recipes-perl/libcompress/libcompress-raw-lzma-perl_2.096.bb
+diff --git a/meta-perl/recipes-perl/libio/compress-raw-zlib-perl_2.096.bb b/meta-perl/recipes-perl/libcompress/libcompress-raw-zlib-perl_2.096.bb
+similarity index 100%
+rename from meta-perl/recipes-perl/libio/compress-raw-zlib-perl_2.096.bb
+rename to meta-perl/recipes-perl/libcompress/libcompress-raw-zlib-perl_2.096.bb
+-- 
+2.34.1
+
 
