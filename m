@@ -1,149 +1,108 @@
-Return-Path: <xiangyu.chen@windriver.com>
+Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DB1CBC38A02
-	for <webhook@archiver.kernel.org>; Mon, 31 Oct 2022 08:01:39 +0000 (UTC)
-Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.web08.6747.1667203285201437940
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1AEBDFA3742
+	for <webhook@archiver.kernel.org>; Mon, 31 Oct 2022 08:40:10 +0000 (UTC)
+Received: from mail1.bemta34.messagelabs.com (mail1.bemta34.messagelabs.com [195.245.231.2])
+ by mx.groups.io with SMTP id smtpd.web10.7036.1667205608979384418
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 31 Oct 2022 01:01:25 -0700
+ Mon, 31 Oct 2022 01:40:09 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=pps06212021 header.b=c7vdmkTi;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=830306a705=xiangyu.chen@windriver.com)
-Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 29V7wuDF000707
-	for <openembedded-devel@lists.openembedded.org>; Mon, 31 Oct 2022 01:01:24 -0700
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com; h=from : to :
- subject : date : message-id : content-transfer-encoding : content-type :
- mime-version; s=PPS06212021;
- bh=Y3fT39hOcCqG0ew3lxqHQLgWC+p6U6zi1JoM9ABQiRI=;
- b=c7vdmkTiGJWkqk9+styNCkDMXNFlVt1FpC9tnysiR9UEr30PU/qy+wV1f+prrCu4v+rM
- E0Qzk9I+rXUuwJ9NbXJu2wZsIs05DEyDlo39E/tY0wbsID9ORaQjdLLBgv/dTUwwIKBA
- GRHFh/Nl3XJv0/4jMu1+oPSvYFlittOymY1P38KQqNrSBrGAQeslcsddFNoJjkJJFkTQ
- /WF8McGsFGqmHnvQwDqU3xd0I1vaRp+cXTlctyUvXabV+QhR9MLPaaI7P5h0lsYvHYkx
- xubMoIpjp+qCWxp2IgylJkTBzwBdUhwsa/sVXnWcywCjZFN7TUVO8Ce4OG3SbORgyevt yA== 
-Received: from nam12-bn8-obe.outbound.protection.outlook.com (mail-bn8nam12lp2177.outbound.protection.outlook.com [104.47.55.177])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3kh3pkh2ue-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Mon, 31 Oct 2022 01:01:24 -0700
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=JaGgvAarVtRuOcqbzR/8HWyxR//YzFamRYHINz6MTPbxlSHPal8xFfAvaV9d843IO2YKZsgf2a1jXKJCRmn5shPYYsbKPyMIsuZUYXA+QwLv3aP4K4UbCsalyUljiGdNlc3WF2OrYmPiEmTjfpmQfiqynfGvt0cXmhnlRBG+jvW4zz+rzU4Ksp+cPgeLlH8fhusuqZrDclqHrfaAmDGFz9jQ8mCQkLvrX9OlOACqJQNEsFAw6S6ajIp57axWTVkt97Laot4uRzYfzcwIpjSZI82svh/gyrQ/PHr4rgd7ro3DjgXhtNhVSSnuLLA7QuMajWTeOTpjG8jocW2eziPptg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Y3fT39hOcCqG0ew3lxqHQLgWC+p6U6zi1JoM9ABQiRI=;
- b=DjIob6JBKsC+um7c8yFVidPcRxOZaE4/f5+WpOJLcBsx99DeBd29STICIubWudxk88vsoJDodIv4meQeuLzM0dUvrOIwDXzOsObbk0MoncgIP1sAy4xVH8aFSVi6hVZsYLHVXImO8th9JsINZet9O1DwMG3L8XIAviAUze2BKogPvgElOEUN/qslcTGrlYnyyTyK7O6My9qo8APh+UlEkW8K8lNTIIBVh0Xzo2Jr05Lo89nO28ZnEjLj5H6YjfBHwi3f9QHNaJktV7mCDCHyu5ugipTiEdMrSjCcBlZsJBdxoXZ/Eg2nxG2Zhf+UzXo9hgrUzW61ddi3BEqiTQnL+Q==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=windriver.com; dmarc=pass action=none
- header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
-Received: from MW4PR11MB5824.namprd11.prod.outlook.com (2603:10b6:303:187::19)
- by DM4PR11MB5390.namprd11.prod.outlook.com (2603:10b6:5:395::13) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5769.15; Mon, 31 Oct
- 2022 08:01:22 +0000
-Received: from MW4PR11MB5824.namprd11.prod.outlook.com
- ([fe80::99b5:140d:8487:5f3]) by MW4PR11MB5824.namprd11.prod.outlook.com
- ([fe80::99b5:140d:8487:5f3%8]) with mapi id 15.20.5769.019; Mon, 31 Oct 2022
- 08:01:22 +0000
-From: Xiangyu Chen <xiangyu.chen@windriver.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: [oe][meta-oe][PATCH] =?UTF-8?q?ipmitool:=20fix=20typo=20in=20.bb?= =?UTF-8?q?=20file's=20comments,=20using=20=3D=20instead=20of=20=3D=3F?=
-Date: Mon, 31 Oct 2022 16:01:05 +0800
-Message-Id: <20221031080105.228383-1-xiangyu.chen@windriver.com>
-X-Mailer: git-send-email 2.34.1
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: SG2PR03CA0128.apcprd03.prod.outlook.com
- (2603:1096:4:91::32) To MW4PR11MB5824.namprd11.prod.outlook.com
- (2603:10b6:303:187::19)
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=xwX2hieV;
+ spf=pass (domain: fujitsu.com, ip: 195.245.231.2, mailfrom: wangmy@fujitsu.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
+	s=170520fj; t=1667205607; i=@fujitsu.com;
+	bh=L9n3WBb5QUPGHNG4gocw/IqtQbxOMuqYmaWegOGvzE4=;
+	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type;
+	b=xwX2hieVaS9MO5wRkcPwkHFFOvUGHZDQPRSAKrLUe0EofS91N+/an5wZQko4zWJQu
+	 /t0wnZ/+keMrMUBPrpy6o5/uvqEDad70U1J07VOhl35uR9uZdlQfLEUc8+nntpctTR
+	 6a4Gah1Her8mWcMXd8K1YXAQgEUzl5ogYUCC2r5Hc9LbYUaMN0JVCNsDM9GT5JJtY2
+	 um6uG+ISxI3zaPTYcpdYBRvyPaOIkiaKjqBicGqplRmjSg6lLNiQS9a6BN5lMaSje1
+	 5h7EbDuUJR3UmHa3x5hswJNXtjHflrDycX04upclXZfplQpzlndFmCqvpMrr7yk6G+
+	 OFum9Eln9QK5g==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrEIsWRWlGSWpSXmKPExsViZ8ORqPu8Mz7
+  Z4OwFJouLh5cyOzB6nNu4gjGAMYo1My8pvyKBNWP1Q6WCD2wV88/cY21gnM7WxcjFISTwhFFi
+  +rKHLBDOdSaJ11d+QWX2MEp0f1zE3MXIycEmICVx4/5/NhBbREBfYunsPWBxZgEViRe/e9hBb
+  GEBD4mD926C1bAIqEps/fySFcTmFXCU2DG5AywuIaAgMeXhe7BeTgEniUW75jCB2EJANU/eXW
+  OHqBeUODnzCQvEfAmJgy9eMEP0KkrMvtzMAmFXSMya1cYEYatJXD23iXkCo+AsJO2zkLQvYGR
+  axWhWnFpUllqka2ikl1SUmZ5RkpuYmaOXWKWbqJdaqlueWlyia6SXWF6sl1pcrFdcmZuck6KX
+  l1qyiREYvCnFSs07GP8u+6N3iFGSg0lJlPddS3yyEF9SfkplRmJxRnxRaU5q8SFGGQ4OJQlex
+  nagnGBRanpqRVpmDjCSYNISHDxKIry9rUBp3uKCxNzizHSI1ClGXY6rV67sZRZiycvPS5US5+
+  3uACoSACnKKM2DGwGL6kuMslLCvIwMDAxCPAWpRbmZJajyrxjFORiVhHm3glzCk5lXArfpFdA
+  RTEBHsLXHgRxRkoiQkmpgKhEKauYVl/0vdef7EQmJi/WZotartvZ9Efmi/GhZpUxSOhPv9KAU
+  jylHd5ssFKyvLp/C5iP4O9m6t7FGd8c1zi8msbk2vs4btTtbN3WfLDk26ZSxbeKrvqMdC3jjA
+  i+WW7y8PWWh2tm6g6WVcx8FLrrlyP9qs+bpyzME1F8Wz7N+yn+sVsF62pMNOZGhGfc07RVUXm
+  u/4/jt7+fSNOvo6e0PfrzPu6W1XnrbTBfeA47NvWfiP93LuHdlwqIfFd/lN7ttn7RZ86Ghoqn
+  1/gVb4/5v7kzRtvr+0vbFbmHz81kfWoVSD9596vo8p65i34XWhzw50iWJKtfXrH3z5NAaiQOu
+  l32sDq27uW3a4bBJq5RYijMSDbWYi4oTATd+xtFlAwAA
+X-Env-Sender: wangmy@fujitsu.com
+X-Msg-Ref: server-4.tower-565.messagelabs.com!1667205606!404630!1
+X-Originating-IP: [62.60.8.97]
+X-SYMC-ESS-Client-Auth: outbound-route-from=pass
+X-StarScan-Received: 
+X-StarScan-Version: 9.100.1; banners=-,-,-
+X-VirusChecked: Checked
+Received: (qmail 24535 invoked from network); 31 Oct 2022 08:40:07 -0000
+Received: from unknown (HELO n03ukasimr01.n03.fujitsu.local) (62.60.8.97)
+  by server-4.tower-565.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 31 Oct 2022 08:40:07 -0000
+Received: from n03ukasimr01.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTP id B8D1A100198
+	for <openembedded-devel@lists.openembedded.org>; Mon, 31 Oct 2022 08:40:06 +0000 (GMT)
+Received: from R01UKEXCASM126.r01.fujitsu.local (R01UKEXCASM126 [10.183.43.178])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTPS id A8B5E100194
+	for <openembedded-devel@lists.openembedded.org>; Mon, 31 Oct 2022 08:40:06 +0000 (GMT)
+Received: from localhost.localdomain (10.167.225.33) by
+ R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
+ (TLS) id 15.0.1497.32; Mon, 31 Oct 2022 08:40:04 +0000
+From: <wangmy@fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: Wang Mingyu <wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH] flatbuffers: upgrade 22.9.29 -> 22.10.26
+Date: Mon, 31 Oct 2022 16:39:44 +0800
+Message-ID: <1667205585-3786-4-git-send-email-wangmy@fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
+In-Reply-To: <1667205585-3786-1-git-send-email-wangmy@fujitsu.com>
+References: <1667205585-3786-1-git-send-email-wangmy@fujitsu.com>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: MW4PR11MB5824:EE_|DM4PR11MB5390:EE_
-X-MS-Office365-Filtering-Correlation-Id: d315bba5-c3d5-4a35-534a-08dabb16199d
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 
-	XtcP9u9SB3azyYoBgsJG7okJhtFSfjeb8DVlUMdBrYVAzad9nMk0iM+ru44VF17FH9IdtXHmLQMJxjG9fK7cHV0e3BrPtv9/UgU1Q+Ui42uV0Nb3T8VpioXpW4t+faEY4azsM4wuD013Bi+0kRM4uj/kYdwGGXc9blkhxeXF2Jk48MnBtXPGUeGie4gDDQ81zguKlqH4XW9pBs5T//m/eItdktFkY+/t7IjB1vhU6Mxav5qnlkatGenw0852QnPZ5VAmc6oVKBePv8KjOsm7rhF3jDA8H8VUw0QSCuB4i2hpXwZZo6HMD8cHXExgGVppNBcplCPzh/DqcgCrjIpbNWJ0gA6pF8eNuvFob5Y5TZ7olDaROrniFHAKWo5zki574cBX+ev45t03Nfo2tmeA3cv4L3nJZiNLLsm9/PYE9ri0MQ708UulewI9L6cFArMYLidZXOIoRuvRHPsZZQxGzIPM+DnlZqPCFaS+9bFlGoN/DBeH7KYscOT7lwGJd72MybLJvk0Ux+OHUskpBiKC7t8x672P8u3WSSgKJQf8JYQzLOJi1eCGwPGbHS7k2uqn3MKGnCOPWRKW7uld6QblOoqV1cs2eH0tXBOMKkjue2A81RFY+y2NEdGLo0dERMD7Ie21L52ks0QU93USl5i18gnEJ4DMc7Re/o8kq33DNadEqrv5a8lQuyP6yv3Oq0j04Ecp8vX+xix0S7EPy4AUTb50ALnFdq/thQO2kj78M/QKkJPtznU8TanpWSAV+h7bBuWIgdYK7U5NX1FRhbA+PGTtSPQX0LdgWkSuqR5WYc8=
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:MW4PR11MB5824.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230022)(4636009)(366004)(39850400004)(396003)(376002)(346002)(136003)(451199015)(38350700002)(86362001)(6512007)(38100700002)(5660300002)(2906002)(44832011)(66556008)(41300700001)(8676002)(8936002)(66946007)(66476007)(6666004)(186003)(2616005)(1076003)(26005)(316002)(478600001)(6916009)(52116002)(6506007)(83380400001)(36756003)(6486002)(142923001);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?us-ascii?Q?Qy9STCKLX4AAhpGrtRhiBmF5tsZBBuACGsTbLifsoR8H5/4FGUOhqtVfBAq+?=
- =?us-ascii?Q?+5EQOmq3/blITF9IWjOLFMNyn1kiaemT8QvO6WNBcM5GpFIXqaszncOVv5Ow?=
- =?us-ascii?Q?vyFOaXrY7zHZ6E74fWCzC+zfgae51MawLJt6IqUTqQkbUoFjPKNPBZmTniqj?=
- =?us-ascii?Q?C+UhJQGD/K4g9uotsRMAGekgHEsJjACgRhv64bEji+eTk2xbKVQCAsaaEQv9?=
- =?us-ascii?Q?b8kfgeMobJAqOOxY5HR71NFYDATq9BvS++TmsHRJuIddld3i5xk9HvIuNPrB?=
- =?us-ascii?Q?w9c0UwAXTs5sVbQsoAXzl69WNLKx3R7lGZBiQTfTNQiVZ0dckLx1CHbuyDMx?=
- =?us-ascii?Q?QJeIKnaqSFPxSn4JjfWy4im+nV2/712JelJoUm1XQxcnc90eOsS9d4x96db3?=
- =?us-ascii?Q?8Zx3mVW2y2rkGX8BQNdb2M09djhXVtf7L/vxDzcd/4WQT3eITIaMCDnZvDBE?=
- =?us-ascii?Q?E7gymn+5W3adv5cyOGjyRYG6fyTISPShvQ8O8SyqAy549VrxwJCylOHTAULE?=
- =?us-ascii?Q?2FtM1ukYuBgFPCN6Z50qYS2be51HobeTbxL3HJ0cHIOx6yYWrY5OuV18T3ls?=
- =?us-ascii?Q?F6uaLXjvDDYw9X7QK4sR3UrYJ07gGd4WnZNMhkcpvGZRbfTGS2BSHs/Lj61A?=
- =?us-ascii?Q?pJebD0d2htk1IMpA+d0HDY3wqLTcZT/TbFT7gKm9a+3MP0lXj9r0a2btkuAk?=
- =?us-ascii?Q?XOidNadedd8yjSjDT/TjPxgvznIALfc/7f30aeLIj/3TngwSzq2fjiaZ9SjD?=
- =?us-ascii?Q?VzEtdVy1z4H5SlNl/czOOX8eUlLni4JrsVkOoNkthKGJmMX2vooTHWWq0jbM?=
- =?us-ascii?Q?mG2+s2tubyRH49k3ICd4bxXLiJr++OYXZx/8zKE7RHDKqmaz9bHMoAhAToLd?=
- =?us-ascii?Q?ip8h5HWZI4GDvB1EChV9biPVZ21Rnr2dAdgK6PpRUHHRR8/mpgTVXyVB4v2F?=
- =?us-ascii?Q?do2jYzX8gcmxIx/DVcOZm2QwKr83c7MbIQTnrzNTp9P/e1lJnrBya1cbDxwz?=
- =?us-ascii?Q?KZIAzff696McXiWbt1GnTemvaBtWPAa24opPIlYyzv3u2EDE2E3uWk+k6Dtf?=
- =?us-ascii?Q?A5ktIDp1dCAO/cw30kPYoYb4BttEfCXsz3LdYTpM3oqVbgrBiUVf+F8YDubV?=
- =?us-ascii?Q?MCbuASDcXIReijslOBQ1br3IRJdSFEYXt8WVYHJrj0nE/eNjc4FRDNND3qxD?=
- =?us-ascii?Q?0EbRx4Z4e3cZZEE0U9tBya/aNyQFLO1S8kt1ZnT+/O38jYfPFMNhJ1d7T3z5?=
- =?us-ascii?Q?Z3KV086XXAoNmCVw1G/RQUGn0bnylS1wyzZzP6OBfWHtQMNVC35LG4dEIuJ1?=
- =?us-ascii?Q?1siUjKMLEDLcgn2qZX7x7sRRYA/yUbl3yIlIgJAgEgHvJER7tp6uOmJ/DlZq?=
- =?us-ascii?Q?PGVzVuE8gaj6HgVbwWIjHonAkkxCN+XIfyqGbNlZP6VqAQ4T7+xiG8dbXop2?=
- =?us-ascii?Q?WVAjUksFXCD895eslFS8r88Ar2o7LMjiTSK0XNl16fCc66BSRQ99e9/A1iaX?=
- =?us-ascii?Q?6Gy8pNrMg02wdgE6dA10lFYlBYO09oSGcaYGWrsN1fReHWmcnkTi0gX6CfI/?=
- =?us-ascii?Q?PchMeqHmiKlD/9NIuP8zQPe2ssKlrm3U27wkwFytNHi93R/iw5TViNM4/lfL?=
- =?us-ascii?Q?VA=3D=3D?=
-X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: d315bba5-c3d5-4a35-534a-08dabb16199d
-X-MS-Exchange-CrossTenant-AuthSource: MW4PR11MB5824.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 31 Oct 2022 08:01:22.2886
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: vm+hzYcay/UJa1jNA48KvbZ/fpyCEFvSGZLYBaxUD1nhM6RFtC9mi/whZRAKnPB2q4sW4JNSvrGmJHaFAAnya7M7rGTOn7yW57ds2+69WII=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR11MB5390
-X-Proofpoint-ORIG-GUID: nAd-AYs7ZaUyU45le2PMvSPLDuYq2iW8
-X-Proofpoint-GUID: nAd-AYs7ZaUyU45le2PMvSPLDuYq2iW8
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.205,Aquarius:18.0.895,Hydra:6.0.545,FMLib:17.11.122.1
- definitions=2022-10-31_06,2022-10-27_01,2022-06-22_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 impostorscore=0
- lowpriorityscore=0 bulkscore=0 phishscore=0 mlxscore=0 clxscore=1015
- suspectscore=0 priorityscore=1501 spamscore=0 malwarescore=0 adultscore=0
- mlxlogscore=858 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2210170000 definitions=main-2210310050
+Content-Type: text/plain
+X-Originating-IP: [10.167.225.33]
+X-ClientProxiedBy: G08CNEXCHPEKD07.g08.fujitsu.local (10.167.33.80) To
+ R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
+X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 31 Oct 2022 08:01:39 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99364
+ <openembedded-devel@lists.openembedded.org>; Mon, 31 Oct 2022 08:40:10 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99368
 
-Signed-off-by: Xiangyu Chen <xiangyu.chen@windriver.com>
+From: Wang Mingyu <wangmy@fujitsu.com>
+
+Changelog:
+==========
+    Create release.yml
+    [Python] Fixed the issue with nested unions relying on InitFromBuf.
+    FlatBuffers Version 22.10.26
+
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- meta-oe/recipes-kernel/ipmitool/ipmitool_1.8.19.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-oe/recipes-devtools/flatbuffers/flatbuffers.inc | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-oe/recipes-kernel/ipmitool/ipmitool_1.8.19.bb b/meta-oe/recipes-kernel/ipmitool/ipmitool_1.8.19.bb
-index 0a600e23b..a8d203e59 100644
---- a/meta-oe/recipes-kernel/ipmitool/ipmitool_1.8.19.bb
-+++ b/meta-oe/recipes-kernel/ipmitool/ipmitool_1.8.19.bb
-@@ -30,7 +30,7 @@ SRC_URI = "git://github.com/ipmitool/ipmitool;protocol=https;branch=master \
- IANA_ENTERPRISE_NUMBERS ?= ""
- 
- # Add these via bbappend if this database is needed by the system
--#IANA_ENTERPRISE_NUMBERS ?= "http://www.iana.org/assignments/enterprise-numbers;name=iana-enterprise-numbers;downloadfilename=iana-enterprise-numbers"
-+#IANA_ENTERPRISE_NUMBERS = "http://www.iana.org/assignments/enterprise-numbers;name=iana-enterprise-numbers;downloadfilename=iana-enterprise-numbers"
- #SRC_URI[iana-enterprise-numbers.sha256sum] = "cdd97fc08325667434b805eb589104ae63f7a9eb720ecea73cb55110b383934c"
- 
- S = "${WORKDIR}/git"
+diff --git a/meta-oe/recipes-devtools/flatbuffers/flatbuffers.inc b/meta-oe/recipes-devtools/flatbuffers/flatbuffers.inc
+index fc85e571ee..0700c5bd34 100644
+--- a/meta-oe/recipes-devtools/flatbuffers/flatbuffers.inc
++++ b/meta-oe/recipes-devtools/flatbuffers/flatbuffers.inc
+@@ -1,3 +1,3 @@
+-PV = "22.9.29"
+-SRCREV = "c92e78a9f841a6110ec27180d68d1f7f2afda21d"
++PV = "22.10.26"
++SRCREV = "203241ed3275625c8a25c4a1e7b86e3c0289c488"
+ SRC_URI = "git://github.com/google/flatbuffers.git;branch=master;protocol=https"
 -- 
-2.34.1
+2.25.1
 
 
