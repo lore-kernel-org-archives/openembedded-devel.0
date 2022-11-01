@@ -1,229 +1,119 @@
-Return-Path: <leimaohui@fujitsu.com>
+Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 27E9DFA3740
-	for <webhook@archiver.kernel.org>; Tue,  1 Nov 2022 01:59:57 +0000 (UTC)
-Received: from mail1.bemta32.messagelabs.com (mail1.bemta32.messagelabs.com [195.245.230.1])
- by mx.groups.io with SMTP id smtpd.web11.1606.1667267991572621469
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 208C8FA3740
+	for <webhook@archiver.kernel.org>; Tue,  1 Nov 2022 02:07:07 +0000 (UTC)
+Received: from mail1.bemta37.messagelabs.com (mail1.bemta37.messagelabs.com [85.158.142.113])
+ by mx.groups.io with SMTP id smtpd.web10.1662.1667268425810706083
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 31 Oct 2022 18:59:52 -0700
+ Mon, 31 Oct 2022 19:07:06 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=WvH7wxe2;
- spf=pass (domain: fujitsu.com, ip: 195.245.230.1, mailfrom: leimaohui@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=g3kFi191;
+ spf=pass (domain: fujitsu.com, ip: 85.158.142.113, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1667267989; i=@fujitsu.com;
-	bh=EshThV1jICSny8rrktkLC2sHPsxnJISLufjWAqSoh6c=;
+	s=170520fj; t=1667268423; i=@fujitsu.com;
+	bh=CHl4nI448A+FClCnIfp9WprknFuh3cQoRjcfNXNXXBA=;
 	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=WvH7wxe2e5YGy8Rt/51YEFHKs88XKMGIfzso4qEEiey5yFgjgtnFREf1HxH7Mnl5W
-	 MkmHmkDy16+GF+Z87bN3EY3XUcGu5nEDMUEdeH9/BTFdZbBmYCwTERySPpgwOQ+ce+
-	 pVD+oUVSodVQvbLuE6xZO38gdFnSLFzcCP8lfiHzE+NEbolAxSbEULF5oisyrUDn5n
-	 GwL0nOlwWMfTBddAfUGMdKe9htN/vR+bXEuTrBfYSjvdB+CvxfaJmf8jlLO3/5RqYA
-	 F1VBcdHyudHuaVrz3vU9x4nOZavnmx/Lu3QvjRMummys2QeYm8DGQANxhNeT+lEmEV
-	 4bOylGMOL6WFw==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrFIsWRWlGSWpSXmKPExsViZ8OxWXdKbUK
-  ywcONGhYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8aDtjVMBV8NK9Yeus/ewHhEp4uRi0NI4CGj
-  ROe7F2wQzmUmiQd/djFBOHsYJU4u6QdyODnYBDQkdk+9zAxiiwjoSyydvQfMZhZQkzj68ieYL
-  SzgLHFx4z2wehYBFYmdnx8ygti8Ai4SNxoeg8UlBBQkpjx8zwwRF5Q4OfMJC8QcCYmDL14wQ9
-  QoSby9tIcRwq6QmDWrDapXTeLquU3MExj5ZyFpn4WkfQEj0ypG0+LUorLUIl0LvaSizPSMktz
-  EzBy9xCrdRL3UUt3y1OISXUO9xPJivdTiYr3iytzknBS9vNSSTYzAYEwpZnLfwXh02R+9Q4yS
-  HExKorz/JRKShfiS8lMqMxKLM+KLSnNSiw8xynBwKEnwymYC5QSLUtNTK9Iyc4CRAZOW4OBRE
-  uH9VQ2U5i0uSMwtzkyHSJ1i1OXo3N91gFmIJS8/L1VKnPcoSJEASFFGaR7cCFiUXmKUlRLmZW
-  RgYBDiKUgtys0sQZV/xSjOwagkzMtRAzSFJzOvBG7TK6AjmICOYGuPAzmiJBEhJdXA5NB4q3v
-  5WsY3Uz1Nlru/5d4j2S/kXmHKeXXn6c+XXtQpu57Plp8enPlEcvIck1uynObHDtx+m895/WOZ
-  9g3+a9LVvzV2nHrzzXyPlPH1R1L3XzTec9Auq5Occvdo6lW576qWLurfvCb531KJvLlH9ujSv
-  kSjCkmb5ZMVW01Wh8ZWneUsSedvqPjkFZPH9LnxTG3BzZYEJbWu34stdr5nUmLPDRF49HDjUt
-  PU+b/mXDkT5NC7J/lBnNSf0BrjnVl+TnvvLdUPCdPnmeYw70u2uevye3y1Sw75ntd5ynV+zj3
-  bfatzIz8v0TBT2bduFUdMdFVV4TTrvT56W4QZt9+v4Tp+QHuei777znRF2Z9aSizFGYmGWsxF
-  xYkAt+cJ8k0DAAA=
-X-Env-Sender: leimaohui@fujitsu.com
-X-Msg-Ref: server-10.tower-591.messagelabs.com!1667267988!874265!1
+	b=g3kFi191QIpmkXVQ8vK7vFKQkoq898tvmXhC3TF8sAm8CmCYnQXUSsy6h/2XdGuGU
+	 pJBVRvfHhpbuVyWQ1W4Ddd6CDmCSA8vuOzvM4HHihz0wUsMFl4hGEq/MBpYFNnzf3w
+	 MYVRiZFMO2cA3N5ARmX5WhPJgqQ3UD+nJE6ye9q6LKEMNWwGb1FZjXoQuc1lO0hr3L
+	 gvmJDnLPxREbx0b/iUETTlomK/6ItUXdtTVr1oJPcjaaff5cUzzrgZqMDQOAt1W1my
+	 oa76/fCoJ6gO3kg0UO5hNUoME9+YfGRF8IWepZ4XDxF3xNkzoKfCxKv+Cgrq5zYqTW
+	 4BAcP8kCD/04Q==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrGIsWRWlGSWpSXmKPExsViZ8OxWdetPiH
+  Z4M43dYuLh5cyOzB6nNu4gjGAMYo1My8pvyKBNWPl/6tsBWd5K44tOsfYwLiGp4uRi0NI4CGj
+  xNF/71kgnMtMEr9a1rN3MXICObsZJU5s0Aax2QSkJG7c/88GYosI6Essnb2HGcRmFlCRePG7B
+  6xeWCBU4v2UHrAaFqD4jmc3weK8Ao4SL7oXs4LYEgIKElMevmeGiAtKnJz5hAVijoTEwRcvmC
+  FqFCVmX25mgbArJGbNamOCsNUkrp7bxDyBkX8WkvZZSNoXMDKtYjQrTi0qSy3SNdRLKspMzyj
+  JTczM0Uus0k3USy3VzcsvKskASiWWF+ulFhfrFVfmJuek6OWllmxiBAZjSnEy+w7GN0v+6B1i
+  lORgUhLl/S+RkCzEl5SfUpmRWJwRX1Sak1p8iFGGg0NJgjeyBignWJSanlqRlpkDjAyYtAQHj
+  5II769qoDRvcUFibnFmOkTqFKMlx9TZ//YzcywHkzO/th1gFmLJy89LlRLndaoFahAAacgozY
+  MbB4veS4yyUsK8jAwMDEI8BalFuZklqPKvGMU5GJWEeRtAruLJzCuB2/oK6CAmoIPY2uNADip
+  JREhJNTDtPLVB6Ftu+JFUrymWc29LOl0Lmfpo99S2Y8mfH07WEU59krWEjb+Ut8J2zgn+j55z
+  vFPUStbpysg9OnNrfZrE65qCWc3nA/Wu1G2TKuTa9XS14JF/D/Z6Wd54IFQ39Vp5RuXrhzYh6
+  6uOc8t5bKn0LJjaalHY+lK7OVLjw6mrrxQbL+pbu4jVfjR2Opm22/bC5LX7r/jLTk2aksQh/+
+  j7c+//Oycf8+wr1tWd9nR9hnWTGuNx80gFlV830uJtmRRNclb8ubDfpaZfrtyrqmPrtjkW7ye
+  9+bfIcs2X74L7tv8+FMFs9+K+T2jnh8j4aUFVy3b+P3NfI6r1R/H57g12K6bFH5ryL3LN1FOb
+  pGe8UGIpzkg01GIuKk4EACvNC1dZAwAA
+X-Env-Sender: wangmy@fujitsu.com
+X-Msg-Ref: server-7.tower-745.messagelabs.com!1667268422!869797!1
 X-Originating-IP: [62.60.8.179]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.100.1; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 12261 invoked from network); 1 Nov 2022 01:59:48 -0000
+Received: (qmail 12891 invoked from network); 1 Nov 2022 02:07:02 -0000
 Received: from unknown (HELO n03ukasimr04.n03.fujitsu.local) (62.60.8.179)
-  by server-10.tower-591.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 1 Nov 2022 01:59:48 -0000
+  by server-7.tower-745.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 1 Nov 2022 02:07:02 -0000
 Received: from n03ukasimr04.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTP id 4D740151
-	for <openembedded-devel@lists.openembedded.org>; Tue,  1 Nov 2022 01:59:48 +0000 (GMT)
+	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTP id 25EAF150
+	for <openembedded-devel@lists.openembedded.org>; Tue,  1 Nov 2022 02:07:02 +0000 (GMT)
 Received: from R01UKEXCASM126.r01.fujitsu.local (R01UKEXCASM126 [10.183.43.178])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTPS id 4082173
-	for <openembedded-devel@lists.openembedded.org>; Tue,  1 Nov 2022 01:59:48 +0000 (GMT)
-Received: from localhost.localdomain (10.167.225.227) by
+	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTPS id 18B2973
+	for <openembedded-devel@lists.openembedded.org>; Tue,  1 Nov 2022 02:07:02 +0000 (GMT)
+Received: from localhost.localdomain (10.167.225.33) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.32; Tue, 1 Nov 2022 01:59:46 +0000
-From: Lei Maohui <leimaohui@fujitsu.com>
+ (TLS) id 15.0.1497.32; Tue, 1 Nov 2022 02:07:00 +0000
+From: <wangmy@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-CC: Lei Maohui <leimaohui@fujitsu.com>
-Subject: [PATCH] samba: Fix install conflict with multilib enabled.
-Date: Tue, 1 Nov 2022 09:59:34 +0800
-Message-ID: <1667267974-3848-1-git-send-email-leimaohui@fujitsu.com>
+CC: Wang Mingyu <wangmy@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH] python3-lazy-object-proxy: upgrade 1.7.1 -> 1.8.0
+Date: Tue, 1 Nov 2022 10:06:44 +0800
+Message-ID: <1667268408-9931-1-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
 Content-Type: text/plain
-X-Originating-IP: [10.167.225.227]
+X-Originating-IP: [10.167.225.33]
 X-ClientProxiedBy: G08CNEXCHPEKD07.g08.fujitsu.local (10.167.33.80) To
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
 X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 01 Nov 2022 01:59:57 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99381
+ <openembedded-devel@lists.openembedded.org>; Tue, 01 Nov 2022 02:07:07 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99382
 
-Signed-off-by: Lei Maohui <leimaohui@fujitsu.com>
+From: Wang Mingyu <wangmy@fujitsu.com>
+
+License-Update: Copyright year updated to 2022.
+
+Changelog:
+==========
+    Cleaned up use of cPickle. Contributed by Sandro Tosi in #62.
+    Cleaned up more dead Python 2 code.
+    Added Python 3.11 wheels.
+    Dropped support for Python 3.6.
+
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- ...tiong-of-python-to-fix-the-install-confli.patch | 122 +++++++++++++++++++++
- .../recipes-connectivity/samba/samba_4.14.14.bb    |   1 +
- 2 files changed, 123 insertions(+)
- create mode 100644 meta-networking/recipes-connectivity/samba/samba/0001-Deleted-settiong-of-python-to-fix-the-install-confli.patch
+ ...ject-proxy_1.7.1.bb => python3-lazy-object-proxy_1.8.0.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-lazy-object-proxy_1.7.1.bb => python3-lazy-object-proxy_1.8.0.bb} (61%)
 
-diff --git a/meta-networking/recipes-connectivity/samba/samba/0001-Deleted-settiong-of-python-to-fix-the-install-confli.patch b/meta-networking/recipes-connectivity/samba/samba/0001-Deleted-settiong-of-python-to-fix-the-install-confli.patch
-new file mode 100644
-index 0000000..6e4cdf1
---- /dev/null
-+++ b/meta-networking/recipes-connectivity/samba/samba/0001-Deleted-settiong-of-python-to-fix-the-install-confli.patch
-@@ -0,0 +1,122 @@
-+From f8e1d71e702dfc6965ecb3109738b5d188af4267 Mon Sep 17 00:00:00 2001
-+From: Lei Maohui <leimaohui@fujitsu.com>
-+Date: Sun, 30 Oct 2022 11:59:31 +0900
-+Subject: [PATCH] Deleted settiong of python to fix the install conflict error
-+ when enable multilib.
-+
-+  file /usr/bin/samba-tool conflicts between attempted installs of samba-4.14.14-r0.core2_64 and lib32-samba-4.14.14-r0.i686
-+  file /usr/sbin/samba-gpupdate conflicts between attempted installs of samba-4.14.14-r0.core2_64 and lib32-samba-4.14.14-r0.i686
-+  file /usr/sbin/samba_dnsupdate conflicts between attempted installs of samba-4.14.14-r0.core2_64 and lib32-samba-4.14.14-r0.i686
-+  file /usr/sbin/samba_downgrade_db conflicts between attempted installs of samba-4.14.14-r0.core2_64 and lib32-samba-4.14.14-r0.i686
-+  file /usr/sbin/samba_kcc conflicts between attempted installs of samba-4.14.14-r0.core2_64 and lib32-samba-4.14.14-r0.i686
-+  file /usr/sbin/samba_spnupdate conflicts between attempted installs of samba-4.14.14-r0.core2_64 and lib32-samba-4.14.14-r0.i686
-+  file /usr/sbin/samba_upgradedns conflicts between attempted installs of samba-4.14.14-r0.core2_64 and lib32-samba-4.14.14-r0.i686
-+
-+The conflict is because there is a  difference between of lib32-samba-* and samba-* as the following:
-+64bit:
-+sys.path.insert(0, "/usr/lib64/python3.10/site-packages")
-+
-+32bit:
-+sys.path.insert(0, "/usr/lib/python3.10/site-packages")
-+
-+But this setting is for environment when running from source tree. There
-+is no necessary on target.
-+
-+Upstream-Status: Inappropriate
-+Signed-off-by: Lei Maohui <leimaohui@fujitsu.com>
-+---
-+ source4/scripting/bin/samba-gpupdate     | 1 -
-+ source4/scripting/bin/samba-tool         | 1 -
-+ source4/scripting/bin/samba_dnsupdate    | 1 -
-+ source4/scripting/bin/samba_downgrade_db | 1 -
-+ source4/scripting/bin/samba_kcc          | 1 -
-+ source4/scripting/bin/samba_spnupdate    | 1 -
-+ source4/scripting/bin/samba_upgradedns   | 1 -
-+ 7 files changed, 7 deletions(-)
-+
-+diff --git a/source4/scripting/bin/samba-gpupdate b/source4/scripting/bin/samba-gpupdate
-+index 85300e1..02f40cd 100755
-+--- a/source4/scripting/bin/samba-gpupdate
-++++ b/source4/scripting/bin/samba-gpupdate
-+@@ -25,7 +25,6 @@ applied, have changed, or is in the right container'''
-+ import os
-+ import sys
-+
-+-sys.path.insert(0, "bin/python")
-+
-+ import optparse
-+ from samba import getopt as options
-+diff --git a/source4/scripting/bin/samba-tool b/source4/scripting/bin/samba-tool
-+index f8a70a6..3c818de 100755
-+--- a/source4/scripting/bin/samba-tool
-++++ b/source4/scripting/bin/samba-tool
-+@@ -22,7 +22,6 @@
-+ import sys
-+
-+ # Find right direction when running from source tree
-+-sys.path.insert(0, "bin/python")
-+
-+ # make sure the script dies immediately when hitting control-C,
-+ # rather than raising KeyboardInterrupt. As we do all database
-+diff --git a/source4/scripting/bin/samba_dnsupdate b/source4/scripting/bin/samba_dnsupdate
-+index 518bb89..277f0ee 100755
-+--- a/source4/scripting/bin/samba_dnsupdate
-++++ b/source4/scripting/bin/samba_dnsupdate
-+@@ -36,7 +36,6 @@ os.environ['PYTHONUNBUFFERED'] = '1'
-+ os.environ["TZ"] = "GMT"
-+
-+ # Find right directory when running from source tree
-+-sys.path.insert(0, "bin/python")
-+
-+ import samba
-+ import optparse
-+diff --git a/source4/scripting/bin/samba_downgrade_db b/source4/scripting/bin/samba_downgrade_db
-+index 87a989b..93a7f8c 100755
-+--- a/source4/scripting/bin/samba_downgrade_db
-++++ b/source4/scripting/bin/samba_downgrade_db
-+@@ -24,7 +24,6 @@ import optparse
-+ import sys
-+
-+ # Find right directory when running from source tree
-+-sys.path.insert(0, "bin/python")
-+
-+
-+ import samba
-+diff --git a/source4/scripting/bin/samba_kcc b/source4/scripting/bin/samba_kcc
-+index 122a5ed..79165f3 100755
-+--- a/source4/scripting/bin/samba_kcc
-++++ b/source4/scripting/bin/samba_kcc
-+@@ -37,7 +37,6 @@ os.environ['PYTHONUNBUFFERED'] = '1'
-+ os.environ["TZ"] = "GMT"
-+
-+ # Find right directory when running from source tree
-+-sys.path.insert(0, "bin/python")
-+
-+ import optparse
-+ import time
-+diff --git a/source4/scripting/bin/samba_spnupdate b/source4/scripting/bin/samba_spnupdate
-+index 84ff771..b6fe041 100755
-+--- a/source4/scripting/bin/samba_spnupdate
-++++ b/source4/scripting/bin/samba_spnupdate
-+@@ -32,7 +32,6 @@ os.environ['PYTHONUNBUFFERED'] = '1'
-+ os.environ["TZ"] = "GMT"
-+
-+ # Find right directory when running from source tree
-+-sys.path.insert(0, "bin/python")
-+
-+ import samba, ldb
-+ import optparse
-+diff --git a/source4/scripting/bin/samba_upgradedns b/source4/scripting/bin/samba_upgradedns
-+index 308dbb0..d00244f 100755
-+--- a/source4/scripting/bin/samba_upgradedns
-++++ b/source4/scripting/bin/samba_upgradedns
-+@@ -27,7 +27,6 @@ import grp
-+ from base64 import b64encode
-+ import shlex
-+
-+-sys.path.insert(0, "bin/python")
-+
-+ import ldb
-+ import samba
-+--
-+2.25.1
-diff --git a/meta-networking/recipes-connectivity/samba/samba_4.14.14.bb b/meta-networking/recipes-connectivity/samba/samba_4.14.14.bb
-index f88dee6..9d7259e 100644
---- a/meta-networking/recipes-connectivity/samba/samba_4.14.14.bb
-+++ b/meta-networking/recipes-connectivity/samba/samba_4.14.14.bb
-@@ -23,6 +23,7 @@ SRC_URI = "${SAMBA_MIRROR}/stable/samba-${PV}.tar.gz \
-            file://0001-Fix-pyext_PATTERN-for-cross-compilation.patch \
-            file://0001-smbtorture-skip-test-case-tfork_cmd_send.patch \
-            file://0001-waf-Fix-errors-with-Werror-implicit-function-declara.patch \
-+           file://0001-Deleted-settiong-of-python-to-fix-the-install-confli.patch \
-            "
+diff --git a/meta-python/recipes-devtools/python/python3-lazy-object-proxy_1.7.1.bb b/meta-python/recipes-devtools/python/python3-lazy-object-proxy_1.8.0.bb
+similarity index 61%
+rename from meta-python/recipes-devtools/python/python3-lazy-object-proxy_1.7.1.bb
+rename to meta-python/recipes-devtools/python/python3-lazy-object-proxy_1.8.0.bb
+index 4c20fcc861..46ef296262 100644
+--- a/meta-python/recipes-devtools/python/python3-lazy-object-proxy_1.7.1.bb
++++ b/meta-python/recipes-devtools/python/python3-lazy-object-proxy_1.8.0.bb
+@@ -2,10 +2,10 @@ SUMMARY = "A fast and thorough lazy object proxy"
+ HOMEPAGE = "https://python-lazy-object-proxy.readthedocs.io/"
+ LICENSE = "BSD-2-Clause"
+ SECTION = "devel/python"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=9c5c2c74370826468065c5702b8a1fcf"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=c7d2e9d24c2b5bad57ca894da972e22e"
  
- SRC_URI:append:libc-musl = " \
+ DEPENDS += "${PYTHON_PN}-setuptools-scm-native ${PYTHON_PN}-pip-native"
+ 
+-SRC_URI[sha256sum] = "d609c75b986def706743cdebe5e47553f4a5a1da9c5ff66d76013ef396b5a8a4"
++SRC_URI[sha256sum] = "c219a00245af0f6fa4e95901ed28044544f50152840c5b6a3e7b2568db34d156"
+ 
+ inherit pypi setuptools3
 -- 
-1.8.3.1
+2.25.1
 
 
