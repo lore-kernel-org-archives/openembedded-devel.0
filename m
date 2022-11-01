@@ -1,157 +1,229 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <leimaohui@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3FD54FA3743
-	for <webhook@archiver.kernel.org>; Mon, 31 Oct 2022 15:42:32 +0000 (UTC)
-Received: from mail-ot1-f48.google.com (mail-ot1-f48.google.com [209.85.210.48])
- by mx.groups.io with SMTP id smtpd.web11.10747.1667230947523715653
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 27E9DFA3740
+	for <webhook@archiver.kernel.org>; Tue,  1 Nov 2022 01:59:57 +0000 (UTC)
+Received: from mail1.bemta32.messagelabs.com (mail1.bemta32.messagelabs.com [195.245.230.1])
+ by mx.groups.io with SMTP id smtpd.web11.1606.1667267991572621469
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 31 Oct 2022 08:42:27 -0700
+ Mon, 31 Oct 2022 18:59:52 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=BvFnnSYI;
- spf=pass (domain: gmail.com, ip: 209.85.210.48, mailfrom: raj.khem@gmail.com)
-Received: by mail-ot1-f48.google.com with SMTP id br15-20020a056830390f00b0061c9d73b8bdso6974381otb.6
-        for <openembedded-devel@lists.openembedded.org>; Mon, 31 Oct 2022 08:42:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=YkBdiGy2nc7F/InJ9zdXVOQ4eTA3gSB/+x7eyxlsM6M=;
-        b=BvFnnSYIaQJ0jBWollmGonvlnrT7L5uzGiht0ywtFXu3H2G0b5k1VCxyEirME9hxZ/
-         /S+AjOdA+ro4NMRpUI0vSKCpunnV8XqN21tWWNNrPFc2rXSI3ohKPAC4hi35r+0AhAb/
-         f4xlspIqxFPS7DfPrRVEkq/Yd1BeUrS/SHwfNzxBp8Bsvf82pAfONxr4d4iOvvhyH91y
-         3W5mYctOI2fTOScVKrOsTpGjMwz8Jhr1nZnrehOUVFQXoteNKweBAfyC0i8jz0K7faXN
-         TFBl/SZXx+SSwdtZ5+Mbcon0yUp9hmKrkNBfcy+BJhyK2YuzIDgUugrIm4W0SVzLp6Vk
-         F2Gg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=YkBdiGy2nc7F/InJ9zdXVOQ4eTA3gSB/+x7eyxlsM6M=;
-        b=mPVTtvepmVIcUWM3qxq9dTLqwUqUHW229figB5LWw1BIcOLVYtcRCDhh5F8FQVt1k9
-         RiuYeOZN8UCdDPgSMnjXII0Qwp3uwN2pYw0GOpyioPEHcMiqbWfguiVtfjw0dVB3liYZ
-         DmrVtFVfpUizfDGCnbDry+zCuJfh9eN8XvdgdV0oCDsLw3FwpNRK08QlSl8/d2ROxUAJ
-         y0WFOA4dbsA5IND3AIQCTsWFCBSYh8pmmtzxjOWKCYKUCuUn94R17WHZH+IpEAo9PtVd
-         rGgLlkAwjUsMC54uSuDTW5kwqpwagIZPo3ajzgzWbCZP3V8UU9+HYXLwKHPbvm1no34p
-         DfWQ==
-X-Gm-Message-State: ACrzQf1k4FmWrqze+/+R8FQ8fCGVKw4HuahZaA2jaVpO/Op/jxJj6O05
-	BGofoelUL7F1YmnAqGoxs3zePbT+x8usJ+iLHeI=
-X-Google-Smtp-Source: AMsMyM7Rqe6X6+4Q+zcgj0np8aRRh31TFeIRp1trcICzxcmP/55qSRxESFoYmsVa6xZRyplEON2x6muI0I/kOSUjFGs=
-X-Received: by 2002:a9d:6c84:0:b0:66c:4825:1c3e with SMTP id
- c4-20020a9d6c84000000b0066c48251c3emr4159661otr.55.1667230946601; Mon, 31 Oct
- 2022 08:42:26 -0700 (PDT)
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=WvH7wxe2;
+ spf=pass (domain: fujitsu.com, ip: 195.245.230.1, mailfrom: leimaohui@fujitsu.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
+	s=170520fj; t=1667267989; i=@fujitsu.com;
+	bh=EshThV1jICSny8rrktkLC2sHPsxnJISLufjWAqSoh6c=;
+	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
+	b=WvH7wxe2e5YGy8Rt/51YEFHKs88XKMGIfzso4qEEiey5yFgjgtnFREf1HxH7Mnl5W
+	 MkmHmkDy16+GF+Z87bN3EY3XUcGu5nEDMUEdeH9/BTFdZbBmYCwTERySPpgwOQ+ce+
+	 pVD+oUVSodVQvbLuE6xZO38gdFnSLFzcCP8lfiHzE+NEbolAxSbEULF5oisyrUDn5n
+	 GwL0nOlwWMfTBddAfUGMdKe9htN/vR+bXEuTrBfYSjvdB+CvxfaJmf8jlLO3/5RqYA
+	 F1VBcdHyudHuaVrz3vU9x4nOZavnmx/Lu3QvjRMummys2QeYm8DGQANxhNeT+lEmEV
+	 4bOylGMOL6WFw==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrFIsWRWlGSWpSXmKPExsViZ8OxWXdKbUK
+  ywcONGhYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8aDtjVMBV8NK9Yeus/ewHhEp4uRi0NI4CGj
+  ROe7F2wQzmUmiQd/djFBOHsYJU4u6QdyODnYBDQkdk+9zAxiiwjoSyydvQfMZhZQkzj68ieYL
+  SzgLHFx4z2wehYBFYmdnx8ygti8Ai4SNxoeg8UlBBQkpjx8zwwRF5Q4OfMJC8QcCYmDL14wQ9
+  QoSby9tIcRwq6QmDWrDapXTeLquU3MExj5ZyFpn4WkfQEj0ypG0+LUorLUIl0LvaSizPSMktz
+  EzBy9xCrdRL3UUt3y1OISXUO9xPJivdTiYr3iytzknBS9vNSSTYzAYEwpZnLfwXh02R+9Q4yS
+  HExKorz/JRKShfiS8lMqMxKLM+KLSnNSiw8xynBwKEnwymYC5QSLUtNTK9Iyc4CRAZOW4OBRE
+  uH9VQ2U5i0uSMwtzkyHSJ1i1OXo3N91gFmIJS8/L1VKnPcoSJEASFFGaR7cCFiUXmKUlRLmZW
+  RgYBDiKUgtys0sQZV/xSjOwagkzMtRAzSFJzOvBG7TK6AjmICOYGuPAzmiJBEhJdXA5NB4q3v
+  5WsY3Uz1Nlru/5d4j2S/kXmHKeXXn6c+XXtQpu57Plp8enPlEcvIck1uynObHDtx+m895/WOZ
+  9g3+a9LVvzV2nHrzzXyPlPH1R1L3XzTec9Auq5Occvdo6lW576qWLurfvCb531KJvLlH9ujSv
+  kSjCkmb5ZMVW01Wh8ZWneUsSedvqPjkFZPH9LnxTG3BzZYEJbWu34stdr5nUmLPDRF49HDjUt
+  PU+b/mXDkT5NC7J/lBnNSf0BrjnVl+TnvvLdUPCdPnmeYw70u2uevye3y1Sw75ntd5ynV+zj3
+  bfatzIz8v0TBT2bduFUdMdFVV4TTrvT56W4QZt9+v4Tp+QHuei777znRF2Z9aSizFGYmGWsxF
+  xYkAt+cJ8k0DAAA=
+X-Env-Sender: leimaohui@fujitsu.com
+X-Msg-Ref: server-10.tower-591.messagelabs.com!1667267988!874265!1
+X-Originating-IP: [62.60.8.179]
+X-SYMC-ESS-Client-Auth: outbound-route-from=pass
+X-StarScan-Received: 
+X-StarScan-Version: 9.100.1; banners=-,-,-
+X-VirusChecked: Checked
+Received: (qmail 12261 invoked from network); 1 Nov 2022 01:59:48 -0000
+Received: from unknown (HELO n03ukasimr04.n03.fujitsu.local) (62.60.8.179)
+  by server-10.tower-591.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 1 Nov 2022 01:59:48 -0000
+Received: from n03ukasimr04.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTP id 4D740151
+	for <openembedded-devel@lists.openembedded.org>; Tue,  1 Nov 2022 01:59:48 +0000 (GMT)
+Received: from R01UKEXCASM126.r01.fujitsu.local (R01UKEXCASM126 [10.183.43.178])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTPS id 4082173
+	for <openembedded-devel@lists.openembedded.org>; Tue,  1 Nov 2022 01:59:48 +0000 (GMT)
+Received: from localhost.localdomain (10.167.225.227) by
+ R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
+ (TLS) id 15.0.1497.32; Tue, 1 Nov 2022 01:59:46 +0000
+From: Lei Maohui <leimaohui@fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: Lei Maohui <leimaohui@fujitsu.com>
+Subject: [PATCH] samba: Fix install conflict with multilib enabled.
+Date: Tue, 1 Nov 2022 09:59:34 +0800
+Message-ID: <1667267974-3848-1-git-send-email-leimaohui@fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-References: <20221031153801.236081-1-psaavedra@igalia.com>
-In-Reply-To: <20221031153801.236081-1-psaavedra@igalia.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 31 Oct 2022 08:42:00 -0700
-Message-ID: <CAMKF1spJKD_1GtAe0VpgNkPFDs=gQWH3Qj4iJnnyOmQvseJd-Q@mail.gmail.com>
-Subject: Re: [oe] [master][PATCH] weston: update 10.0.2 -> 11.0.0
-To: "Pablo Saavedra Rodi?o" <psaavedra@igalia.com>
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain
+X-Originating-IP: [10.167.225.227]
+X-ClientProxiedBy: G08CNEXCHPEKD07.g08.fujitsu.local (10.167.33.80) To
+ R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
+X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 31 Oct 2022 15:42:32 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99380
+ <openembedded-devel@lists.openembedded.org>; Tue, 01 Nov 2022 01:59:57 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99381
 
-On Mon, Oct 31, 2022 at 8:38 AM Pablo Saavedra Rodi?o
-<psaavedra@igalia.com> wrote:
->
-> Highlights for this release:
->
-> - Continued work on color management infrastructure:
->   In Weston 11, if you enable the tentative, experimental and WIP color
->   management option, Weston will not only blend in linear light, but
->   you can also set up a monitor ICC profile and Weston will do some
->   kind of color mapping from sRGB to that profile. Furthermore, you can
->   configure a monitor into HDR mode and deliver HDR characteristics from
->   weston.ini to the monitor, but Weston will *not* produce proper HDR
->   content yet, meaning the display is incorrect.
-> - Various RDP improvements.
-> - Performance improvements in the DRM backend.
-> - Support for the wp_single_pixel_buffer_v1 protocol.
-> - weston_buffer refactoring.
-> - Groundwork for running multiple backends at the same time (e.g. KMS + RDP)
->   and for multi-GPU support in the DRM backend. This is not supported
->   yet, but may be in a future release.
->
-> Breaking changes for users:
->
-> - The cms-static and cms-colord plugins are now deprecated.
-> - A number of features have been removed from desktop-shell: multiple
->   workspaces, zoom, exposay.
-> - wl_shell support has been removed (superseded by xdg-shell).
-> - The fbdev backend has been removed (superseded by KMS).
-> - weston-launch and launcher-direct have been removed (superseded by libseat).
-> - The weston-info and weston-gears clients have been removed (weston-info is
->   superseded by wayland-info).
-> - The KMS max-bpc property is now set by default. If you experience black
->   screens with (faulty) monitors, try lowering it in weston.ini.
-> - Weston will now abort when running out of memory. Weston is not suitable
->   for memory constrained environments.
+Signed-off-by: Lei Maohui <leimaohui@fujitsu.com>
+---
+ ...tiong-of-python-to-fix-the-install-confli.patch | 122 +++++++++++++++++++++
+ .../recipes-connectivity/samba/samba_4.14.14.bb    |   1 +
+ 2 files changed, 123 insertions(+)
+ create mode 100644 meta-networking/recipes-connectivity/samba/samba/0001-Deleted-settiong-of-python-to-fix-the-install-confli.patch
 
-Thanks for your contribution Pablo. This recipe belongs to
-openembedded-core and that has its own mailing list for patches
-called openembedded-core@lists.openembedded.org, so please resend it
-to that ml.
+diff --git a/meta-networking/recipes-connectivity/samba/samba/0001-Deleted-settiong-of-python-to-fix-the-install-confli.patch b/meta-networking/recipes-connectivity/samba/samba/0001-Deleted-settiong-of-python-to-fix-the-install-confli.patch
+new file mode 100644
+index 0000000..6e4cdf1
+--- /dev/null
++++ b/meta-networking/recipes-connectivity/samba/samba/0001-Deleted-settiong-of-python-to-fix-the-install-confli.patch
+@@ -0,0 +1,122 @@
++From f8e1d71e702dfc6965ecb3109738b5d188af4267 Mon Sep 17 00:00:00 2001
++From: Lei Maohui <leimaohui@fujitsu.com>
++Date: Sun, 30 Oct 2022 11:59:31 +0900
++Subject: [PATCH] Deleted settiong of python to fix the install conflict error
++ when enable multilib.
++
++  file /usr/bin/samba-tool conflicts between attempted installs of samba-4.14.14-r0.core2_64 and lib32-samba-4.14.14-r0.i686
++  file /usr/sbin/samba-gpupdate conflicts between attempted installs of samba-4.14.14-r0.core2_64 and lib32-samba-4.14.14-r0.i686
++  file /usr/sbin/samba_dnsupdate conflicts between attempted installs of samba-4.14.14-r0.core2_64 and lib32-samba-4.14.14-r0.i686
++  file /usr/sbin/samba_downgrade_db conflicts between attempted installs of samba-4.14.14-r0.core2_64 and lib32-samba-4.14.14-r0.i686
++  file /usr/sbin/samba_kcc conflicts between attempted installs of samba-4.14.14-r0.core2_64 and lib32-samba-4.14.14-r0.i686
++  file /usr/sbin/samba_spnupdate conflicts between attempted installs of samba-4.14.14-r0.core2_64 and lib32-samba-4.14.14-r0.i686
++  file /usr/sbin/samba_upgradedns conflicts between attempted installs of samba-4.14.14-r0.core2_64 and lib32-samba-4.14.14-r0.i686
++
++The conflict is because there is a  difference between of lib32-samba-* and samba-* as the following:
++64bit:
++sys.path.insert(0, "/usr/lib64/python3.10/site-packages")
++
++32bit:
++sys.path.insert(0, "/usr/lib/python3.10/site-packages")
++
++But this setting is for environment when running from source tree. There
++is no necessary on target.
++
++Upstream-Status: Inappropriate
++Signed-off-by: Lei Maohui <leimaohui@fujitsu.com>
++---
++ source4/scripting/bin/samba-gpupdate     | 1 -
++ source4/scripting/bin/samba-tool         | 1 -
++ source4/scripting/bin/samba_dnsupdate    | 1 -
++ source4/scripting/bin/samba_downgrade_db | 1 -
++ source4/scripting/bin/samba_kcc          | 1 -
++ source4/scripting/bin/samba_spnupdate    | 1 -
++ source4/scripting/bin/samba_upgradedns   | 1 -
++ 7 files changed, 7 deletions(-)
++
++diff --git a/source4/scripting/bin/samba-gpupdate b/source4/scripting/bin/samba-gpupdate
++index 85300e1..02f40cd 100755
++--- a/source4/scripting/bin/samba-gpupdate
+++++ b/source4/scripting/bin/samba-gpupdate
++@@ -25,7 +25,6 @@ applied, have changed, or is in the right container'''
++ import os
++ import sys
++
++-sys.path.insert(0, "bin/python")
++
++ import optparse
++ from samba import getopt as options
++diff --git a/source4/scripting/bin/samba-tool b/source4/scripting/bin/samba-tool
++index f8a70a6..3c818de 100755
++--- a/source4/scripting/bin/samba-tool
+++++ b/source4/scripting/bin/samba-tool
++@@ -22,7 +22,6 @@
++ import sys
++
++ # Find right direction when running from source tree
++-sys.path.insert(0, "bin/python")
++
++ # make sure the script dies immediately when hitting control-C,
++ # rather than raising KeyboardInterrupt. As we do all database
++diff --git a/source4/scripting/bin/samba_dnsupdate b/source4/scripting/bin/samba_dnsupdate
++index 518bb89..277f0ee 100755
++--- a/source4/scripting/bin/samba_dnsupdate
+++++ b/source4/scripting/bin/samba_dnsupdate
++@@ -36,7 +36,6 @@ os.environ['PYTHONUNBUFFERED'] = '1'
++ os.environ["TZ"] = "GMT"
++
++ # Find right directory when running from source tree
++-sys.path.insert(0, "bin/python")
++
++ import samba
++ import optparse
++diff --git a/source4/scripting/bin/samba_downgrade_db b/source4/scripting/bin/samba_downgrade_db
++index 87a989b..93a7f8c 100755
++--- a/source4/scripting/bin/samba_downgrade_db
+++++ b/source4/scripting/bin/samba_downgrade_db
++@@ -24,7 +24,6 @@ import optparse
++ import sys
++
++ # Find right directory when running from source tree
++-sys.path.insert(0, "bin/python")
++
++
++ import samba
++diff --git a/source4/scripting/bin/samba_kcc b/source4/scripting/bin/samba_kcc
++index 122a5ed..79165f3 100755
++--- a/source4/scripting/bin/samba_kcc
+++++ b/source4/scripting/bin/samba_kcc
++@@ -37,7 +37,6 @@ os.environ['PYTHONUNBUFFERED'] = '1'
++ os.environ["TZ"] = "GMT"
++
++ # Find right directory when running from source tree
++-sys.path.insert(0, "bin/python")
++
++ import optparse
++ import time
++diff --git a/source4/scripting/bin/samba_spnupdate b/source4/scripting/bin/samba_spnupdate
++index 84ff771..b6fe041 100755
++--- a/source4/scripting/bin/samba_spnupdate
+++++ b/source4/scripting/bin/samba_spnupdate
++@@ -32,7 +32,6 @@ os.environ['PYTHONUNBUFFERED'] = '1'
++ os.environ["TZ"] = "GMT"
++
++ # Find right directory when running from source tree
++-sys.path.insert(0, "bin/python")
++
++ import samba, ldb
++ import optparse
++diff --git a/source4/scripting/bin/samba_upgradedns b/source4/scripting/bin/samba_upgradedns
++index 308dbb0..d00244f 100755
++--- a/source4/scripting/bin/samba_upgradedns
+++++ b/source4/scripting/bin/samba_upgradedns
++@@ -27,7 +27,6 @@ import grp
++ from base64 import b64encode
++ import shlex
++
++-sys.path.insert(0, "bin/python")
++
++ import ldb
++ import samba
++--
++2.25.1
+diff --git a/meta-networking/recipes-connectivity/samba/samba_4.14.14.bb b/meta-networking/recipes-connectivity/samba/samba_4.14.14.bb
+index f88dee6..9d7259e 100644
+--- a/meta-networking/recipes-connectivity/samba/samba_4.14.14.bb
++++ b/meta-networking/recipes-connectivity/samba/samba_4.14.14.bb
+@@ -23,6 +23,7 @@ SRC_URI = "${SAMBA_MIRROR}/stable/samba-${PV}.tar.gz \
+            file://0001-Fix-pyext_PATTERN-for-cross-compilation.patch \
+            file://0001-smbtorture-skip-test-case-tfork_cmd_send.patch \
+            file://0001-waf-Fix-errors-with-Werror-implicit-function-declara.patch \
++           file://0001-Deleted-settiong-of-python-to-fix-the-install-confli.patch \
+            "
+ 
+ SRC_URI:append:libc-musl = " \
+-- 
+1.8.3.1
 
-> ---
->  .../wayland/{weston_10.0.2.bb => weston_11.0.0.bb}        | 8 ++------
->  1 file changed, 2 insertions(+), 6 deletions(-)
->  rename meta/recipes-graphics/wayland/{weston_10.0.2.bb => weston_11.0.0.bb} (93%)
->
-> diff --git a/meta/recipes-graphics/wayland/weston_10.0.2.bb b/meta/recipes-graphics/wayland/weston_11.0.0.bb
-> similarity index 93%
-> rename from meta/recipes-graphics/wayland/weston_10.0.2.bb
-> rename to meta/recipes-graphics/wayland/weston_11.0.0.bb
-> index 786d12be61..ba4f4062d0 100644
-> --- a/meta/recipes-graphics/wayland/weston_10.0.2.bb
-> +++ b/meta/recipes-graphics/wayland/weston_11.0.0.bb
-> @@ -13,7 +13,7 @@ SRC_URI = "https://gitlab.freedesktop.org/wayland/weston/-/releases/${PV}/downlo
->             file://systemd-notify.weston-start \
->             "
->
-> -SRC_URI[sha256sum] = "89646ca0d9f8d413c2767e5c3828eaa3fa149c2a105b3729a6894fa7cf1549e7"
-> +SRC_URI[sha256sum] = "a6138d4dc9554560ac304312df456019f4be025ec79130f05fb5f2e41c091e1d"
->
->  UPSTREAM_CHECK_URI = "https://wayland.freedesktop.org/releases.html"
->  UPSTREAM_CHECK_REGEX = "weston-(?P<pver>\d+\.\d+\.(?!9\d+)\d+)"
-> @@ -58,12 +58,8 @@ PACKAGECONFIG[wayland] = "-Dbackend-wayland=true,-Dbackend-wayland=false,virtual
->  PACKAGECONFIG[x11] = "-Dbackend-x11=true,-Dbackend-x11=false,virtual/libx11 libxcb libxcb libxcursor cairo"
->  # Headless Weston
->  PACKAGECONFIG[headless] = "-Dbackend-headless=true,-Dbackend-headless=false"
-> -# Weston on framebuffer
-> -PACKAGECONFIG[fbdev] = "-Ddeprecated-backend-fbdev=true,-Ddeprecated-backend-fbdev=false,udev mtdev"
->  # Weston on RDP
->  PACKAGECONFIG[rdp] = "-Dbackend-rdp=true,-Dbackend-rdp=false,freerdp"
-> -# weston-launch
-> -PACKAGECONFIG[launch] = "-Ddeprecated-weston-launch=true,-Ddeprecated-weston-launch=false,drm"
->  # VA-API desktop recorder
->  PACKAGECONFIG[vaapi] = "-Dbackend-drm-screencast-vaapi=true,-Dbackend-drm-screencast-vaapi=false,libva"
->  # Weston with EGL support
-> @@ -77,7 +73,7 @@ PACKAGECONFIG[systemd] = "-Dsystemd=true -Dlauncher-logind=true,-Dsystemd=false
->  # Weston with Xwayland support (requires X11 and Wayland)
->  PACKAGECONFIG[xwayland] = "-Dxwayland=true,-Dxwayland=false"
->  # colord CMS support
-> -PACKAGECONFIG[colord] = "-Dcolor-management-colord=true,-Dcolor-management-colord=false,colord"
-> +PACKAGECONFIG[colord] = "-Ddeprecated-color-management-colord=true,-Ddeprecated-color-management-colord=false,colord"
->  # Clients support
->  PACKAGECONFIG[clients] = "-Dsimple-clients=${SIMPLECLIENTS} -Ddemo-clients=true,-Dsimple-clients= -Ddemo-clients=false"
->  # Virtual remote output with GStreamer on DRM backend
-> --
-> 2.34.1
->
->
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#99379): https://lists.openembedded.org/g/openembedded-devel/message/99379
-> Mute This Topic: https://lists.openembedded.org/mt/94688210/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [raj.khem@gmail.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
->
 
