@@ -1,110 +1,106 @@
-Return-Path: <wangmy@fujitsu.com>
+Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4ADADC43217
-	for <webhook@archiver.kernel.org>; Wed,  2 Nov 2022 06:51:53 +0000 (UTC)
-Received: from mail1.bemta32.messagelabs.com (mail1.bemta32.messagelabs.com [195.245.230.2])
- by mx.groups.io with SMTP id smtpd.web10.3267.1667371905734464421
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D6229C4332F
+	for <webhook@archiver.kernel.org>; Wed,  2 Nov 2022 08:42:33 +0000 (UTC)
+Received: from mail-qt1-f182.google.com (mail-qt1-f182.google.com [209.85.160.182])
+ by mx.groups.io with SMTP id smtpd.web11.3909.1667378552896849305
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 01 Nov 2022 23:51:47 -0700
+ Wed, 02 Nov 2022 01:42:33 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=pI5eABEm;
- spf=pass (domain: fujitsu.com, ip: 195.245.230.2, mailfrom: wangmy@fujitsu.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1667371904; i=@fujitsu.com;
-	bh=3+awjYmHIYobqR+Tt9LCBSzJBt7DCsOnI7aIPcxbmiY=;
-	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type;
-	b=pI5eABEmnQfmgFgUeFVIOZ2n4HqZH4oyKI97raYM5XcSX69SCpyZ9tynnHvl9bGLJ
-	 HhTBUugVrYDzWb+OK+mSNn2wH2S6jy1EcTvZNK7zQ9yPPqlzlEMyvFGlEqyt1+lqzP
-	 9hy6vrtL0FLttlF8n37x9pzlEjTvAXiJHSBduKwIeX5mcmU+kdSMxNxaVZN4bGBteR
-	 4u+voPakoJBRTSkbapUzKjJq5YicY4QWomeZDX3NBRXKO0skcmJnDIHCmbbNf3Ehjh
-	 AnIefrbnyWB9NMLepDwyQkQhDJhR+8OcPCP5ENqQARGNEp9mEhUsgYaZsp4nZdZbpD
-	 hTN4FQj2vaPBg==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrGIsWRWlGSWpSXmKPExsViZ8MxSbdeOCn
-  Z4N5ObouLh5cyOzB6nNu4gjGAMYo1My8pvyKBNWPq/Q72gi1cFTPW/WVuYLzK2cXIxSEk8IRR
-  4tD8r2xdjJxAznUmiXe/xCESuxkl5i+aywSSYBOQkrhx/z9YkYiAvsTS2XuYQWxmARWJF7972
-  LsYOTiEBZwlVhxlBQmzAIX7L3Uwg4R5BZwkTq7OBwlLCChITHn4HqyTE6j6+KYmZoi1ThKb3r
-  aBTecVEJQ4OfMJC8R0CYmDL14wQ/QqSsy+3MwCYVdIzJrVxgRhq0lcPbeJeQKj4Cwk7bOQtC9
-  gZFrFaFacWlSWWqRraKqXVJSZnlGSm5iZo5dYpZuol1qqW55aXKJrqJdYXqyXWlysV1yZm5yT
-  opeXWrKJERi4KcXsxTsYHyz7o3eIUZKDSUmUN5k9KVmILyk/pTIjsTgjvqg0J7X4EKMMB4eSB
-  O8nPqCcYFFqempFWmYOMIpg0hIcPEoivJosQGne4oLE3OLMdIjUKUZjjrUNB/Yyc8z82naAWY
-  glLz8vVUqcd5oQUKkASGlGaR7cIFh0X2KUlRLmZWRgYBDiKUgtys0sQZV/xSjOwagkzOvFDzS
-  FJzOvBG7fK6BTmIBOYWuPAzmlJBEhJdXApBljf3r1w9SjR5f/3eBzik3s1qyfk8LjGo1ESvSL
-  Lq2bHp8puuOVQZxMh8zGmmX1N6Y7L75iaLrlHM//LX/1div2lyxRzNwYmlDDu+qLhTy31IKcA
-  xVtUw5tU8n99U5VxXTRI1nuw4q9Kof98j60JupF8FwLKSqZ28Pzem+FKLPgDQujq+6P2T9sSR
-  efkr75lYrOzSv7w+RYpCINVr7dcWDGyfmVrIdCxHfE/pI8c37an8uPJ/bn+F1Se5HMZnv32rx
-  X6nbmq1J2HfNJbeKIcXwnqrnBaNmOh9s7FW/8PiHH1pxx5Hj+ksx8C8nvJyNeJ5+bfjCoXNWz
-  zUG7wqo/asety+JHxDgtL603vcp2TomlOCPRUIu5qDgRAJMJVfNpAwAA
-X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-8.tower-587.messagelabs.com!1667371902!981664!1
-X-Originating-IP: [62.60.8.146]
-X-SYMC-ESS-Client-Auth: outbound-route-from=pass
-X-StarScan-Received: 
-X-StarScan-Version: 9.100.1; banners=-,-,-
-X-VirusChecked: Checked
-Received: (qmail 21570 invoked from network); 2 Nov 2022 06:51:43 -0000
-Received: from unknown (HELO n03ukasimr02.n03.fujitsu.local) (62.60.8.146)
-  by server-8.tower-587.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 2 Nov 2022 06:51:43 -0000
-Received: from n03ukasimr02.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTP id C907B1000FB
-	for <openembedded-devel@lists.openembedded.org>; Wed,  2 Nov 2022 06:51:42 +0000 (GMT)
-Received: from R01UKEXCASM126.r01.fujitsu.local (R01UKEXCASM126 [10.183.43.178])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTPS id B21581000D7
-	for <openembedded-devel@lists.openembedded.org>; Wed,  2 Nov 2022 06:51:42 +0000 (GMT)
-Received: from localhost.localdomain (10.167.225.33) by
- R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.32; Wed, 2 Nov 2022 06:51:41 +0000
-From: <wangmy@fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-oe] [PATCH] libxpresent: upgrade 1.0.0 -> 1.0.1
-Date: Wed, 2 Nov 2022 14:51:23 +0800
-Message-ID: <1667371885-20154-2-git-send-email-wangmy@fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
-In-Reply-To: <1667371885-20154-1-git-send-email-wangmy@fujitsu.com>
-References: <1667371885-20154-1-git-send-email-wangmy@fujitsu.com>
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=lOmpW4Nk;
+ spf=pass (domain: gmail.com, ip: 209.85.160.182, mailfrom: akuster808@gmail.com)
+Received: by mail-qt1-f182.google.com with SMTP id w4so287675qts.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 02 Nov 2022 01:42:32 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=qzeaBMTsyzqU073TKlswimbxG/bOTYCEvERI3C0Lygo=;
+        b=lOmpW4Nk3ap3yTXoZk3fx6zdvNQtdVlcKFr1vH7tT+d2bU2zDLAfgsj5REFvDNYQJ6
+         9hRASxyz9OO2FOw6lrLRkBFF3J4fTKgcdMOHkYeJyQnUGndms7dHhI8H0RRCV3/IWAaG
+         4bno+ZY8OH6IyWOPY+m3ZDvEqnJQT0aJsMTQJbZHbngwBUfSj9RU9hGg+qzVBBRiFG2V
+         8iUkd+HWyALtb+zB3UKedCBPDM1bwQ4jmWPFJa8yeqQX/aE9OGedU4zBLKv9BG+4ShkQ
+         h+rbBaUewaMV0ax8X46kBJEJsj67kVAwThpg4hS4xg90F6iwaWAE0ZSLF2rkJQUqjOJP
+         DxqA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=qzeaBMTsyzqU073TKlswimbxG/bOTYCEvERI3C0Lygo=;
+        b=580y8bOsrp+K/kq8VpxbzsWQU6ygm/WCf4IHHReV76s2YfoCSfliqVIviqt8xeCPUA
+         eSAxgE+WKVxde3kbHTy+C3yp8Tdi/1+LRmUejFrv1kH7Ree8rd+cwCVQNCvm3ufRUXF/
+         J07BvgG8HdbfN4YDicik7+Z65QzQY2y+pwGeJq5JkAWS8dwjpNpTyzO2DU4DLk+EB8zg
+         aRNc2b8DYDVhzyj+b3+jZSAv7IFedMaL1sO1X45znUPXne5YwRD23wTTlONGwdYE2vvz
+         VnweOGDJ8q1s5ukii/TcVAuuxbAa5iWi8uV+NmGw6JaQLY97CGd/m4wf3eLCnamuEf7T
+         WHSQ==
+X-Gm-Message-State: ACrzQf3rR6+0wsxOdP8NXTSAWphPFUfTsD9XmHq/m8PhEZqbNQakWqxv
+	oPuHdAPAh1F2Dl3vdQJyTyIZ0MLr4gR8aw==
+X-Google-Smtp-Source: AMsMyM56m1OXItbw5rMbxVhzrSh9unXPdPrKf6IGnM4BGYgk0vN3ROUJh92xy0m2Fi78ydWpiNqFtQ==
+X-Received: by 2002:a05:622a:4815:b0:3a5:25a0:9b7c with SMTP id fb21-20020a05622a481500b003a525a09b7cmr12630152qtb.668.1667378550421;
+        Wed, 02 Nov 2022 01:42:30 -0700 (PDT)
+Received: from keaua.attlocal.net ([2600:1700:9190:ba10:8259:e903:8d8:7eb0])
+        by smtp.gmail.com with ESMTPSA id t11-20020a05620a450b00b006fa2b1c3c1esm5631202qkp.58.2022.11.02.01.42.29
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 02 Nov 2022 01:42:29 -0700 (PDT)
+From: Armin Kuster <akuster808@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Philippe Coval <philippe.coval.ext@huawei.com>,
+	Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][kirkstone][PATCH 2/5] pim435: Relocate sources to eclipse
+Date: Wed,  2 Nov 2022 04:42:24 -0400
+Message-Id: <20221102084227.1210486-2-akuster808@gmail.com>
+X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20221102084227.1210486-1-akuster808@gmail.com>
+References: <20221102084227.1210486-1-akuster808@gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain
-X-Originating-IP: [10.167.225.33]
-X-ClientProxiedBy: G08CNEXCHPEKD07.g08.fujitsu.local (10.167.33.80) To
- R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
-X-Virus-Scanned: ClamAV using ClamSMTP
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 02 Nov 2022 06:51:53 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99407
+ <openembedded-devel@lists.openembedded.org>; Wed, 02 Nov 2022 08:42:33 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99411
 
-From: Wang Mingyu <wangmy@fujitsu.com>
+From: Philippe Coval <philippe.coval.ext@huawei.com>
 
-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+This driver is now part of Eclipse's oniro-blueprints project
+
+Note: Once transition is finished,
+existing copies will be need to be archived
+For history referer to related tickets if curious.
+
+Relate-to: https://gitlab.eclipse.org/eclipse/oniro-core/oniro/-/issues/787
+Relate-to: https://gitlab.eclipse.org/eclipse/oniro-blueprints/vending-machine/meta-oniro-blueprints-vending-machine/-/issues/1
+Relate-to: https://gitlab.eclipse.org/pcoval/pim435/-/issues/2
+Relate-to: https://git.ostc-eu.org/distro/components/vending-machine-control-application/-/issues/2
+Forwarded: https://github.com/openembedded/meta-openembedded/pull/603
+Origin: https://github.com/astrolabe-coop/meta-openembedded
+Signed-off-by: Philippe Coval <philippe.coval.ext@huawei.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+(cherry picked from commit 6b50ce8f07b61d111f82c3ca88c5125192c214a0)
+Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../xorg-lib/{libxpresent_1.0.0.bb => libxpresent_1.0.1.bb}  | 5 ++---
- 1 file changed, 2 insertions(+), 3 deletions(-)
- rename meta-oe/recipes-graphics/xorg-lib/{libxpresent_1.0.0.bb => libxpresent_1.0.1.bb} (63%)
+ meta-oe/recipes-core/pim435/pim435_git.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-oe/recipes-graphics/xorg-lib/libxpresent_1.0.0.bb b/meta-oe/recipes-graphics/xorg-lib/libxpresent_1.0.1.bb
-similarity index 63%
-rename from meta-oe/recipes-graphics/xorg-lib/libxpresent_1.0.0.bb
-rename to meta-oe/recipes-graphics/xorg-lib/libxpresent_1.0.1.bb
-index 4fe9992f20..2a59a80e49 100644
---- a/meta-oe/recipes-graphics/xorg-lib/libxpresent_1.0.0.bb
-+++ b/meta-oe/recipes-graphics/xorg-lib/libxpresent_1.0.1.bb
-@@ -4,8 +4,7 @@ DEPENDS += "xorgproto libxfixes libxrandr"
+diff --git a/meta-oe/recipes-core/pim435/pim435_git.bb b/meta-oe/recipes-core/pim435/pim435_git.bb
+index f73a0fd54e..80e3cc6298 100644
+--- a/meta-oe/recipes-core/pim435/pim435_git.bb
++++ b/meta-oe/recipes-core/pim435/pim435_git.bb
+@@ -9,8 +9,8 @@ written in C"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSES/MIT.txt;md5=7dda4e90ded66ab88b86f76169f28663"
  
- LIC_FILES_CHKSUM = "file://COPYING;md5=3c1ce42c334a6f5cccb0277556a053e0"
+-SRC_URI = "git://booting.oniroproject.org/distro/components/pim435;protocol=https;branch=main"
+-SRCREV = "ee07a83de4d0ecdf4b5de20a7e374d36a9a6f5d5"
++SRC_URI = "git://gitlab.eclipse.org/eclipse/oniro-blueprints/core/pim435;protocol=https;branch=main"
++SRCREV = "445ed623ec8d3ecbb1d566900b4ef3fb3031d689"
+ S = "${WORKDIR}/git"
  
--SRC_URI = "http://xorg.freedesktop.org/archive/individual/lib/libXpresent-${PV}.tar.bz2"
--SRC_URI[md5sum] = "edd87ac15bb666081898dd7382fcbff5"
--SRC_URI[sha256sum] = "c11ae015141a9afbe10f4f2b8ee00b11adca6373dc1b9808d7c6c138b2da7b8a"
-+SRC_URI = "http://xorg.freedesktop.org/archive/individual/lib/libXpresent-${PV}.tar.xz"
-+SRC_URI[sha256sum] = "b964df9e5a066daa5e08d2dc82692c57ca27d00b8cc257e8e960c9f1cf26231b"
- 
- XORG_PN = "libXpresent"
+ DEPENDS = "i2c-tools"
 -- 
 2.25.1
 
