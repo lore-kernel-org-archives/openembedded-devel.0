@@ -2,105 +2,94 @@ Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 88FE0C4332F
-	for <webhook@archiver.kernel.org>; Sat,  5 Nov 2022 17:38:05 +0000 (UTC)
-Received: from mail-qv1-f44.google.com (mail-qv1-f44.google.com [209.85.219.44])
- by mx.groups.io with SMTP id smtpd.web11.8306.1667669884711766364
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 99E91C4332F
+	for <webhook@archiver.kernel.org>; Sun,  6 Nov 2022 13:46:11 +0000 (UTC)
+Received: from mail-oi1-f172.google.com (mail-oi1-f172.google.com [209.85.167.172])
+ by mx.groups.io with SMTP id smtpd.web10.16388.1667742363366601375
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 05 Nov 2022 10:38:05 -0700
+ Sun, 06 Nov 2022 05:46:03 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=Ueyw2IdY;
- spf=pass (domain: gmail.com, ip: 209.85.219.44, mailfrom: akuster808@gmail.com)
-Received: by mail-qv1-f44.google.com with SMTP id c8so5477162qvn.10
-        for <openembedded-devel@lists.openembedded.org>; Sat, 05 Nov 2022 10:38:04 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=DOfmlQwn;
+ spf=pass (domain: gmail.com, ip: 209.85.167.172, mailfrom: akuster808@gmail.com)
+Received: by mail-oi1-f172.google.com with SMTP id v81so9751576oie.5
+        for <openembedded-devel@lists.openembedded.org>; Sun, 06 Nov 2022 05:46:03 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=content-transfer-encoding:subject:from:to:content-language
          :user-agent:mime-version:date:message-id:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=U5yW0ADfn6HsscvTdDLQ5gX7/wnSIvOdJtKJcxirlQw=;
-        b=Ueyw2IdYMmIm4I/jvZDGTJILexPH/IExiXR72eDhKbJ5r3bTnuomNe429oKRXA3Mxh
-         qKJ96PIIRIAD3Ko8tsQ19tbKCQxVUSzLnl+wBS9vgx89jorTiVM4JNTtqjPGPSuF+705
-         Q5/yafGMzoQ3htEfghkru4Uc7aI9Gx5zsMrFZZ74AbpvLl0OVVLdP1kaOsrVtsd3hR+E
-         ECcbmpx1geQ4pyRIwZaUkE5ur+AaFMA1WVtDwCPY5vUK3fFJnA/AGtntkVw2BucquNOL
-         6iOQiEkGkY6gvuBUsRhd6VnLSbTW8aytNmrODKm9rrQER/opkmc16YVwmEe4iwwqcWwl
-         CN7Q==
+        bh=laLqkSmrFFNyPtrR/15UQflsgHy4I4c3D0sioLjnMpU=;
+        b=DOfmlQwnZHEMEVNQf+lH3dFWALwuif9FZEDNGy7rYVel2P3tX78UmQyhiPNUK2y5nS
+         x9/6c8v3BJXcYNDHA1L4o7A35qkDLkoeCIhry+pnNE1grP15mhycMHTHGcMwY/m7Y3F3
+         pWM5+crg7KI6pQxa6CU4xEVTalyL/wN2Bdp5QOmqtxY3hc2eDTkc1PeDUpp7UG29mXvy
+         b543dgHr99FEcEd/tQPRcDvpIucg+kF2Fb3M3wpbs7SOze6q05fZNQue8ftwxU6jZSaD
+         tO8/SmwNEQ9Y3PelalqNmJF5TuhuVof2XBdfHa6c2cqQLg0UP3AKA+k1lu4YIp738BSo
+         Defw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=content-transfer-encoding:subject:from:to:content-language
          :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
          :cc:subject:date:message-id:reply-to;
-        bh=U5yW0ADfn6HsscvTdDLQ5gX7/wnSIvOdJtKJcxirlQw=;
-        b=Z5R0LJnx4/NsdJA3SEzimfZAz9s77EbxnzBXW5FL7k64qFZ8lhSbyXHdY/u05AyCA3
-         r9wm4zR5pO863ir+/GmTcPiGDOY5juwJ3KD+bSumUgJkx56AXQYVunfgZ4YthCF5lElW
-         tdM3nNv5X5UaaRpXs7clLnQZSyvdsN0bG8dcdk6DR+UtDzO+yqW7tc9M9SbwJfS5cf47
-         t+681FIBa+PCWiGAdSxdPeKxsJszrZs4/wB4OYao5+yWxMmikzOot5DTFD4W+uBRs9uh
-         1VxEbPkbiGGy50msPABWx9U11e/RJlIPZrAD7wWxNONvezN4NTGHC8m07D5oTvxrEWkv
-         ai0Q==
-X-Gm-Message-State: ACrzQf1pnT8B4r46Z08R5oWap7cOiDrVN5H8CxIHMhm0+pLOCjRD55NL
-	uC0qNNxhMTSeIOcVT8jB5cg=
-X-Google-Smtp-Source: AMsMyM7MxBpkNiOxJ34eCY/vVxFuWfE9oQeDs28f0GelKzREG1+LjEyLITM8YS+3WVp0U+8v+h/IqQ==
-X-Received: by 2002:a0c:a987:0:b0:4c0:3b8b:8f6e with SMTP id a7-20020a0ca987000000b004c03b8b8f6emr11473273qvb.114.1667669883790;
-        Sat, 05 Nov 2022 10:38:03 -0700 (PDT)
+        bh=laLqkSmrFFNyPtrR/15UQflsgHy4I4c3D0sioLjnMpU=;
+        b=s1SDAm/gQ+Mz3EsC06ylaghBM4osR9cPx/lUvOOIxAW/UcBswopmR8feJ/d5MwWPnB
+         c5AzH+OhXHnnyzgpoKSBmzXwmUgo0XbIsl+/VmUV0ltc5lxLzu1nDs3x7ZilKL77lgQW
+         cFlgm2w4jsKAH4N5sK2Q38FIiaID7VOXVd5en8zfM/kSfgKdoJlQ3wn+ohSYstUDUjOu
+         SbbU8PMUq9IW0fvVPF9E3pMy/QOTaGv6eBkJIlp0IzTnpmTrbm0GkX65YyCsyeDQaXUd
+         /QvlbkjXdjIv+D37d24peWsgWsppTV66UajJO5OhEodxHy49crcvLfxcYAReIBrCKRml
+         3o2Q==
+X-Gm-Message-State: ACrzQf0+Qb7G8lQxTfKXEpPyUyL2P7E0ViubY4+QUg+NqlwhThQ0YdGB
+	2BmDp/W9xtvtGrNcSXD4HK72St7hzCj0cg==
+X-Google-Smtp-Source: AMsMyM7yQ1GzX+O5Sjdq6jRoCSpw0DZ2reaSWG7upGsTu082LhdRgF1B0p1X+/ztuwnq3ahVNYvc4Q==
+X-Received: by 2002:a05:6808:20a7:b0:35a:eb3:de37 with SMTP id s39-20020a05680820a700b0035a0eb3de37mr19921620oiw.3.1667742362026;
+        Sun, 06 Nov 2022 05:46:02 -0800 (PST)
 Received: from ?IPV6:2600:1700:9190:ba10:b2f4:9028:9984:940f? ([2600:1700:9190:ba10:b2f4:9028:9984:940f])
-        by smtp.gmail.com with ESMTPSA id bm35-20020a05620a19a300b006eed75805a2sm2230718qkb.126.2022.11.05.10.38.02
+        by smtp.gmail.com with ESMTPSA id h19-20020a9d6a53000000b0066aba96addbsm1880089otn.81.2022.11.06.05.46.01
+        for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Sat, 05 Nov 2022 10:38:03 -0700 (PDT)
-Message-ID: <3e7cf342-f958-dfad-cc82-a29528f0dab3@gmail.com>
-Date: Sat, 5 Nov 2022 13:38:02 -0400
+        Sun, 06 Nov 2022 05:46:01 -0800 (PST)
+Message-ID: <7a81daa7-9062-6dc2-377f-5875bad23d1f@gmail.com>
+Date: Sun, 6 Nov 2022 08:46:00 -0500
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.2.2
 Content-Language: en-US
-To: Khem Raj <raj.khem@gmail.com>,
- OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
 From: akuster808 <akuster808@gmail.com>
-Subject: kirkstone merge request.
+Subject: webserver Monkey package
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 05 Nov 2022 17:38:05 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99432
+ <openembedded-devel@lists.openembedded.org>; Sun, 06 Nov 2022 13:46:11 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99433
 
-The following changes since commit 744a4b6eda88b9a9ca1cf0df6e18be384d9054e3:
+Hello,
 
-   frr: Security fix CVE-2022-37032 (2022-10-13 10:59:41 -0400)
 
-are available in the Git repository at:
+Is anyone interested in the "Monkey" webserver? if so listen up.
 
-   https://git.openembedded.org/meta-openembedded kirkstone-next
+The Monkey package has not built for Langdale ever since I took over the 
+branch. The main project website appears to be offline for weeks now.  
+The version 1.6.9 was released 7 years ago. There is a github go this 
+package and has many changes applied since 2016 but no new versions 
+noted. The hash for the tag v16.9 does not exist in any branch. I cloned 
+the repo and checkout the hash and it gave me a detached head.
 
-for you to fetch changes up to 50d4a8d2a983a68383ef1ffec2c8e21adf0c1a79:
+For langdale, I plan on adding "SKIP_RECIPE". Updating it to the top up 
+branch does not work for me as I don't use this package in any 
+capacity.  Now, if someone does have an interest in making Monkey work 
+in langdale, let me know. I am open to seeing how this might be achieved.
 
-   re2: fix branch name from master to main (2022-11-02 06:50:29 -0400)
+The tip of Monkey does not build in current master scenario so upgrading 
+will need some work.
 
-----------------------------------------------------------------
-Alexander Thoma (1):
-       Fix tigervnc crash due to missing xkbcomp rdepends
+I don't know how the current master meta-openembedded CI is behaving for 
+this package.
 
-Carsten Bäcker (1):
-       spdlog: Fix CMake flag
+Please let me know if there is any feedback on this approach for Langdale.
 
-Chase Qi (1):
-       kernel-selftest: install kselftest runner
 
-Howard Cochran (1):
-       ufw: Fix "could not find required binary 'iptables'"
-
-Martin Jansa (1):
-       re2: fix branch name from master to main
-
-Philippe Coval (1):
-       pim435: Relocate sources to eclipse
-
-  meta-networking/recipes-connectivity/ufw/ufw_0.36.1.bb    | 4 ++--
-  meta-oe/recipes-core/pim435/pim435_git.bb                 | 4 ++--
-  meta-oe/recipes-graphics/tigervnc/tigervnc_1.11.0.bb      | 2 +-
-  meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb | 8 +++++++-
-  meta-oe/recipes-support/re2/re2_2020.11.01.bb             | 2 +-
-  meta-oe/recipes-support/spdlog/spdlog_1.9.2.bb            | 4 ++--
-  6 files changed, 15 insertions(+), 9 deletions(-)
-
+BR,
+Armin
 
