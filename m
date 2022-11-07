@@ -1,85 +1,107 @@
-Return-Path: <akuster808@gmail.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B807CC43219
-	for <webhook@archiver.kernel.org>; Mon,  7 Nov 2022 12:38:01 +0000 (UTC)
-Received: from mail-oi1-f178.google.com (mail-oi1-f178.google.com [209.85.167.178])
- by mx.groups.io with SMTP id smtpd.web12.2743.1667824672789922458
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D5D30C433FE
+	for <webhook@archiver.kernel.org>; Mon,  7 Nov 2022 16:29:43 +0000 (UTC)
+Received: from mail-oi1-f172.google.com (mail-oi1-f172.google.com [209.85.167.172])
+ by mx.groups.io with SMTP id smtpd.web08.416.1667838577361562854
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 07 Nov 2022 04:37:52 -0800
+ Mon, 07 Nov 2022 08:29:37 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=n35pdlvh;
- spf=pass (domain: gmail.com, ip: 209.85.167.178, mailfrom: akuster808@gmail.com)
-Received: by mail-oi1-f178.google.com with SMTP id p127so11938903oih.9
-        for <openembedded-devel@lists.openembedded.org>; Mon, 07 Nov 2022 04:37:52 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=EgkkO9Fh;
+ spf=pass (domain: gmail.com, ip: 209.85.167.172, mailfrom: raj.khem@gmail.com)
+Received: by mail-oi1-f172.google.com with SMTP id c129so12733477oia.0
+        for <openembedded-devel@lists.openembedded.org>; Mon, 07 Nov 2022 08:29:37 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=aUosu3XdMIcwQ9dTRxdVDm3DdNWDDoQ2UDBcVjUlAIU=;
-        b=n35pdlvhDwobPi5pneMh6eXmi9ba8SA++7oXUogUPdVfxx/uoIeer9oomgGPxLoE8Q
-         wTFLk8oYzGkxg8GIEPbdj2bj9qEgkNn8cVjzQbEw2uirHwyC+rkXmJjt3PV2HcccvtVM
-         G4lthuDYYNOOUSDmF/s4nyUVYYTrjs1Zt54J58QP7jj4ambEPkPdG01MinOcgTtrYDyn
-         QZmZOiJoheO6q15M8tB1gqrG4zwp09nvEtYCks34NfRBDUdqEZ7Ckcg/mdEUXOEQ+VWG
-         zEwOLqjXjX21b/GO5zRiwm/FKJxuiOoEgOm5Ly2z+Pclh2zoFfIh/fL2UoLtCIVR8Hsc
-         g5OA==
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=RPj8GifNYYpSzOAMFln7FZqdyl/8Nq7/vxoFqWiDlEk=;
+        b=EgkkO9FhXsDoW8/5R3/S1obhQ/UkytYqujH7jRC/wsPZMVX0O0zDoe7FPSiUoPlQ82
+         jlwJI7E12OgpTQ0CcjFXdC74zraAOHWnhfN2D9Tm8Sc5iq0j4f8qS32tcVOY/VjEW+Up
+         LRrFE4X2UG9T40DpHmRBbpUTdN06rr/AiENR/66557/rf06kyGvLigDSQOk/ffUjVH6u
+         /MlwTgSSDwtNGHX8CZNLu6yo0gdluvNtRP/Ixl3w4/q09lRSdGfQPh+0eHjKwu+BIM8M
+         xEZqXTCJuGbipMK8ybPG6ktWssMwGYBoRjsbur8yNnv0cZeR7vuQaz8ZHcIZ7BZ3BXJU
+         WZyw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=aUosu3XdMIcwQ9dTRxdVDm3DdNWDDoQ2UDBcVjUlAIU=;
-        b=eLG5JIi5Df2H6/TvDwTBlFj0Ls6mJ+m4ijqugFZtUtGF9UP1hTTu8qtQKZQ8QlfLLF
-         qczRsebqbNiBG2gpCXJOT9cYBiR4GtkkJyghnD4/sys6opf/ElNSmUqydKJkC59G58a5
-         we/WJZEjNlH0TyMVDIlD22J2MYlrlXS/L82y8eEMIfpTEdtNj3JAi6bg/fdS4Fnq1ZZN
-         AQJ3O6mFeKXk1i2Bc5zUt+savPtuFm9gBaHpaDKDV/UGP7HFRdyaW9CDZeMWey8joerQ
-         QJgpCdQ892EKcBSo6RTEcc4kJq13iFwFVYh9MVmlXC8nc2smEPdUFKKCYz/BG3uNETJC
-         TLdg==
-X-Gm-Message-State: ACrzQf1iU0IOcZAYs2kgfmhy6+/Q5STAgdtWjDd4hmqtj9vgHq9djSAU
-	aBOXPxn6oYj3ff4ZAw6ZNGgp48r1w3vjCw==
-X-Google-Smtp-Source: AMsMyM4M7uVIR+KiytoBJdg4Wt7lol4JzXYRBwSmySc2vbzGPo4D/50YXd/bMxLUh3NMnIoR0bxJ+Q==
-X-Received: by 2002:a05:6808:1706:b0:351:6d17:51e0 with SMTP id bc6-20020a056808170600b003516d1751e0mr26315323oib.114.1667824671717;
-        Mon, 07 Nov 2022 04:37:51 -0800 (PST)
-Received: from keaua.caveonetworks.com ([2600:1700:9190:ba10:4ae3:e295:586e:47cb])
-        by smtp.gmail.com with ESMTPSA id g9-20020a9d6189000000b0066ca7af5745sm2363980otk.26.2022.11.07.04.37.50
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 07 Nov 2022 04:37:50 -0800 (PST)
-From: Armin Kuster <akuster808@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: [master][langdale]meta-oe][PATCH] gst-editing-services: fix typo in LICENSE field.
-Date: Mon,  7 Nov 2022 07:37:49 -0500
-Message-Id: <20221107123749.3205445-1-akuster808@gmail.com>
-X-Mailer: git-send-email 2.25.1
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=RPj8GifNYYpSzOAMFln7FZqdyl/8Nq7/vxoFqWiDlEk=;
+        b=kGM6WAlHc9RN4gHF8/60t82Ic59od3P7+PBXVlKVvZw+xd7t+zuIcx3y72z55r76aa
+         k1oxa+0QzU14AqDO+Fuo+Q0EwRjWuHipqnuk7x0orsfjVCRGD6eIdAbaakRhkrsz7WHV
+         hn2f5FeH2Tp90YEsRw6BSR8PQVjcshEqCVY9R03YWLSH0t4ovpussCiI3gT3NdGV/1L7
+         eQnosG+mnPGhsSEmcYGS4nsPoT6BDYLmtNaswN+1icHsbRR6BFd2i+sePH800oo5hLAz
+         hkrR7Nd2jwrXQEpBCJ1+1uBRmQWq4wPB6z467M3juznnejxPhSolZn9f5juBUWTdEvwa
+         DrgQ==
+X-Gm-Message-State: ACrzQf0iiGTuVZ6sYgrW7qobLoNx7Wo5YVA4e6vymf8bkoc7sOS92pOh
+	nJ4vERJy2dudBgQeCeLMMgUCy5COseXn15wGb84=
+X-Google-Smtp-Source: AMsMyM64vymAU+9Cdrf+rxLa0xGsFebTK5ASUTopj2WGVXJq3a6QxcLgRFtCazTzfY2BjhI48lqKn5STqkGAILgVHls=
+X-Received: by 2002:a05:6808:20a0:b0:359:e4d6:8bd3 with SMTP id
+ s32-20020a05680820a000b00359e4d68bd3mr26865966oiw.262.1667838576487; Mon, 07
+ Nov 2022 08:29:36 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <3e7cf342-f958-dfad-cc82-a29528f0dab3@gmail.com>
+In-Reply-To: <3e7cf342-f958-dfad-cc82-a29528f0dab3@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 7 Nov 2022 08:29:10 -0800
+Message-ID: <CAMKF1sqfp_eyHhXmccWUUn=-p6jKDgCjWkS=h2NTwaJrVq_zwA@mail.gmail.com>
+Subject: Re: kirkstone merge request.
+To: akuster808 <akuster808@gmail.com>
+Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 07 Nov 2022 12:38:01 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99472
+ <openembedded-devel@lists.openembedded.org>; Mon, 07 Nov 2022 16:29:43 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99473
 
-WARNING: gst-editing-services-1.20.4-r0 do_populate_lic: QA Issue: gst-editing-services: No generic license file exists for: GPL-2.0-on-later in any provider [license-exists]
+merged thanks Armin.
 
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
----
- .../gst-editing-services/gst-editing-services_1.20.4.bb         | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/meta-oe/recipes-devtools/gst-editing-services/gst-editing-services_1.20.4.bb b/meta-oe/recipes-devtools/gst-editing-services/gst-editing-services_1.20.4.bb
-index 37f7746846..6f76013dbd 100644
---- a/meta-oe/recipes-devtools/gst-editing-services/gst-editing-services_1.20.4.bb
-+++ b/meta-oe/recipes-devtools/gst-editing-services/gst-editing-services_1.20.4.bb
-@@ -4,7 +4,7 @@
- SUMMARY = "Gstreamer editing services"
- HOMEPAGE = "http://cgit.freedesktop.org/gstreamer/gst-editing-services/"
- 
--LICENSE = "GPL-2.0-on-later & LGPL-2.1-or-later"
-+LICENSE = "GPL-2.0-or-later & LGPL-2.1-or-later"
- LIC_FILES_CHKSUM = "file://COPYING;md5=6762ed442b3822387a51c92d928ead0d \
-                     file://COPYING.LIB;md5=6762ed442b3822387a51c92d928ead0d"
- 
--- 
-2.25.1
-
+On Sat, Nov 5, 2022 at 10:38 AM akuster808 <akuster808@gmail.com> wrote:
+>
+> The following changes since commit 744a4b6eda88b9a9ca1cf0df6e18be384d9054=
+e3:
+>
+>    frr: Security fix CVE-2022-37032 (2022-10-13 10:59:41 -0400)
+>
+> are available in the Git repository at:
+>
+>    https://git.openembedded.org/meta-openembedded kirkstone-next
+>
+> for you to fetch changes up to 50d4a8d2a983a68383ef1ffec2c8e21adf0c1a79:
+>
+>    re2: fix branch name from master to main (2022-11-02 06:50:29 -0400)
+>
+> ----------------------------------------------------------------
+> Alexander Thoma (1):
+>        Fix tigervnc crash due to missing xkbcomp rdepends
+>
+> Carsten B=C3=A4cker (1):
+>        spdlog: Fix CMake flag
+>
+> Chase Qi (1):
+>        kernel-selftest: install kselftest runner
+>
+> Howard Cochran (1):
+>        ufw: Fix "could not find required binary 'iptables'"
+>
+> Martin Jansa (1):
+>        re2: fix branch name from master to main
+>
+> Philippe Coval (1):
+>        pim435: Relocate sources to eclipse
+>
+>   meta-networking/recipes-connectivity/ufw/ufw_0.36.1.bb    | 4 ++--
+>   meta-oe/recipes-core/pim435/pim435_git.bb                 | 4 ++--
+>   meta-oe/recipes-graphics/tigervnc/tigervnc_1.11.0.bb      | 2 +-
+>   meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb | 8 +++++++-
+>   meta-oe/recipes-support/re2/re2_2020.11.01.bb             | 2 +-
+>   meta-oe/recipes-support/spdlog/spdlog_1.9.2.bb            | 4 ++--
+>   6 files changed, 15 insertions(+), 9 deletions(-)
+>
 
