@@ -1,69 +1,39 @@
-Return-Path: <cp0613@linux.alibaba.com>
+Return-Path: <hpprajapati@mvista.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E13E9C433FE
-	for <webhook@archiver.kernel.org>; Mon,  7 Nov 2022 03:15:31 +0000 (UTC)
-Received: from out199-13.us.a.mail.aliyun.com (out199-13.us.a.mail.aliyun.com [47.90.199.13])
- by mx.groups.io with SMTP id smtpd.web12.5.1667790929145835387
- for <openembedded-devel@lists.openembedded.org>;
- Sun, 06 Nov 2022 19:15:30 -0800
-Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: linux.alibaba.com, ip: 47.90.199.13, mailfrom: cp0613@linux.alibaba.com)
-X-Alimail-AntiSpam: AC=PASS;BC=-1|-1;BR=01201311R931e4;CH=green;DM=||false|;DS=||;FP=0|-1|-1|-1|0|-1|-1|-1;HT=ay29a033018046059;MF=cp0613@linux.alibaba.com;NM=1;PH=DS;RN=2;SR=0;TI=SMTPD_---0VU5I.mT_1667790920;
-Received: from DESKTOP-AMMB16H.localdomain(mailfrom:cp0613@linux.alibaba.com fp:SMTPD_---0VU5I.mT_1667790920)
-          by smtp.aliyun-inc.com;
-          Mon, 07 Nov 2022 11:15:24 +0800
-From: cp0613@linux.alibaba.com
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B8393C433FE
+	for <webhook@archiver.kernel.org>; Mon,  7 Nov 2022 05:29:09 +0000 (UTC)
+Subject: Re: [meta-networking][kirkstone][PATCH] dhcp: Fix CVE-2022-2928 & CVE-2022-2929
 To: openembedded-devel@lists.openembedded.org
-Cc: Chen Pei <cp0613@linux.alibaba.com>
-Subject: [meta-python] [PATCH V2] add meta-python/recipes-devtools/python/python3-brotli_1.0.9.bb
-Date: Mon,  7 Nov 2022 11:14:27 +0800
-Message-Id: <20221107031426.381-1-cp0613@linux.alibaba.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <CANx9H-C2mOAsEXQRqOj3GgJoTA7eP50GzufyJepfSbS8tEC-NA@mail.gmail.com>
-References: <CANx9H-C2mOAsEXQRqOj3GgJoTA7eP50GzufyJepfSbS8tEC-NA@mail.gmail.com>
+From: "Hitendra Prajapati" <hpprajapati@mvista.com>
+X-Originating-Location: Nadiad, Gujarat, IN (43.249.234.214)
+X-Originating-Platform: Linux Firefox 106
+User-Agent: GROUPS.IO Web Poster
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Date: Sun, 06 Nov 2022 21:29:07 -0800
+References: <20221010045826.87924-1-hprajapati@mvista.com>
+In-Reply-To: <20221010045826.87924-1-hprajapati@mvista.com>
+Message-ID: <6976.1667798947630482909@lists.openembedded.org>
+Content-Type: multipart/alternative; boundary="wGODTHsjkRQWNHi7WGfH"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 07 Nov 2022 03:15:31 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99439
+ <openembedded-devel@lists.openembedded.org>; Mon, 07 Nov 2022 05:29:09 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99440
 
-From: Chen Pei <cp0613@linux.alibaba.com>
+--wGODTHsjkRQWNHi7WGfH
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Chen Pei <cp0613@linux.alibaba.com>
----
- .../python/python3-brotli_1.0.9.bb             | 18 ++++++++++++++++++
- 1 file changed, 18 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-brotli_1.0.9.bb
+Hi Team,
+Any update or comments on that patches ??
 
-diff --git a/meta-python/recipes-devtools/python/python3-brotli_1.0.9.bb b/meta-python/recipes-devtools/python/python3-brotli_1.0.9.bb
-new file mode 100644
-index 000000000..5dfac5823
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-brotli_1.0.9.bb
-@@ -0,0 +1,18 @@
-+SUMMARY = "Brotli compression format"
-+HOMEPAGE = "https://pypi.org/project/Brotli/"
-+SECTION = "devel/python"
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=941ee9cd1609382f946352712a319b4b"
-+
-+PYPI_PACKAGE = "Brotli"
-+PYPI_PACKAGE_EXT = "zip"
-+
-+SRC_URI[sha256sum] = "4d1b810aa0ed773f81dceda2cc7b403d01057458730e309856356d4ef4188438"
-+
-+inherit pypi setuptools3
-+
-+RDEPENDS:${PN} = "\
-+  ${PYTHON_PN}-cffi \
-+"
-+
-+BBCLASSEXTEND = "native nativesdk"
--- 
-2.25.1
+--wGODTHsjkRQWNHi7WGfH
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 
+Hi Team,<br />Any update or comments on that patches ??
+
+--wGODTHsjkRQWNHi7WGfH--
 
