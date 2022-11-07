@@ -2,68 +2,68 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6F48FC4332F
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6F4C4C43217
 	for <webhook@archiver.kernel.org>; Mon,  7 Nov 2022 08:30:20 +0000 (UTC)
-Received: from mail1.bemta37.messagelabs.com (mail1.bemta37.messagelabs.com [85.158.142.1])
- by mx.groups.io with SMTP id smtpd.web11.1127.1667809811538110840
+Received: from mail1.bemta32.messagelabs.com (mail1.bemta32.messagelabs.com [195.245.230.66])
+ by mx.groups.io with SMTP id smtpd.web10.1219.1667809813381494455
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 07 Nov 2022 00:30:12 -0800
+ Mon, 07 Nov 2022 00:30:15 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=xYgLkKoR;
- spf=pass (domain: fujitsu.com, ip: 85.158.142.1, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=t27GoiA4;
+ spf=pass (domain: fujitsu.com, ip: 195.245.230.66, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1667809809; i=@fujitsu.com;
-	bh=dJ1wtFBynp7PfvCOL8l1qp6ysRhiYm3E/0RbUnZusWY=;
+	s=170520fj; t=1667809815; i=@fujitsu.com;
+	bh=UdGgvrRSF6qgh9Ngap5imHHMMNzBujflE/7u88ziVAU=;
 	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
 	 MIME-Version:Content-Type;
-	b=xYgLkKoRfzbOlh8+3jQ70nQ2x8F/xidftWe7GZYRQERDJ3SwVQrpitNif1JSRS2J6
-	 VBGeQwTqlOzrLPJMQh1i8815AOkJ4ypHa5E6G92YwfkiRLEd1RU2nPUoODeg6BIk92
-	 fdD7f4FRhTTVEu55XoUjokgyt4ggS7WV9igY0kTTfJA7BfO9R2YPqfqHpv1YuKQnlI
-	 dlhD02EG1kU7Yf/Nl63fepqGLS6XwT3EdwzTpYKJRJAmG9vj2P6CadfsYZPvetMWng
-	 KD1zZUeQNtaTPs+CAYQgPLVpVgtucfXsvo46jBpLqQkI+8pcWrKeOACmFtIv5Cm9gl
-	 UvUHMVY3t4/5Q==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrPIsWRWlGSWpSXmKPExsViZ8OxWVfgUEa
-  ywfoLBhYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8ae9fOZCm5yVqzfuJqpgfEVRxcjF4eQwENG
-  iZlfP7FDOJeZJNbevsEC4exmlFh79glrFyMnB5uAlMSN+//ZQGwRAX2JpbP3MIPYzAIqEi9+9
-  wB1c3AIC9hJHL1TBhJmAQq/ffIIrJVXwEmiZetNsHIJAQWJKQ/fg9mcAs4S61++BKsRAqp5+X
-  oKM0S9oMTJmU9YIMZLSBx88QKqV1Fi9uVmFgi7QmLWrDYmCFtN4uq5TcwTGAVnIWmfhaR9ASP
-  TKkbz4tSistQiXUMDvaSizPSMktzEzBy9xCrdRL3UUt28/KKSDF1DvcTyYr3U4mK94src5JwU
-  vbzUkk2MwPBNKU65uIPxybI/eocYJTmYlER5fy/PSBbiS8pPqcxILM6ILyrNSS0+xCjDwaEkw
-  XtjI1BOsCg1PbUiLTMHGEswaQkOHiUR3rB9QGne4oLE3OLMdIjUKUZLjqmz/+1n5lgOJmd+bT
-  vALMSSl5+XKiXOe203UIMASENGaR7cOFi8X2KUlRLmZWRgYBDiKUgtys0sQZV/xSjOwagkzMu
-  8B2gKT2ZeCdzWV0AHMQEdVF2QBnJQSSJCSqqBaeGslNIDbjnTLsz6Zx+VsnBHXfBdi2npXflJ
-  E3fJJ2ru259u6ajxs+NJi/p0Lt6NR9v1pCuXz0jIWJkZf0H+x/0HOnzvdoRf4vcMXN4oqxat8
-  czm7vrqY0w2jcnsrnP8DEQ1FrnqP7mnWKysFHu0+H6JpfcTqeP7l0kq6a1LSVe6/6LzsI/l5v
-  qlTjL1goxfn7Fp366PuveqzIXR2mDe6aVL+G/b3LjFP0k0uizyfoBTleSGa1kKq6sKj3+d1f7
-  KPqzikk1Aom8ze+CZCM1/hRvdeBYmb2reuYiHcaLNz4U/pWb9/FThV+jtsOR6I8O0brmOk3+e
-  NLfaibY0PW1uY9NNOmuvKbEuquTCFHUlluKMREMt5qLiRACmdy4JcgMAAA==
+	b=t27GoiA4ehwBnVjb2IyC8bJD+E7G/EAFxanVjbQT2J/C1oK5sax0mP/a4F/aiCXWU
+	 0t8bcFFWioObbZs7OThs8ew2ZH+c1hR200bQzuuXXUruRaQe7W+v54rQk0e5EtopAg
+	 cAT8Y0xeSAg/swqTtPZNJ7+22XvqG3gnFpvFlyQrtq97NV2vUDAiDCWock03lqkboN
+	 Ox/yMJGLuFCvirF8hS2mKM4jI82+n5t8Vt6jS98YTY7z3SPt5xLWZjnLhSXJNnnAF9
+	 xaGQTpScw1midixWlSmOJLjlpLEbBGG5fPg4hVk5+BP3dWRIdeaApbye78X816ljb2
+	 2Nu7o4yv5UwHA==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrIIsWRWlGSWpSXmKPExsViZ8ORqCt2KCP
+  ZYMVtc4uLh5cyOzB6nNu4gjGAMYo1My8pvyKBNeP3Mb2CswIVTVsWMjUwHuXrYuTiEBJ4wigx
+  b+MCRgjnOpNEy/Z+VghnN6PEodebgRxODjYBKYkb9/+zgdgiAvoSS2fvYQaxmQVUJF787mEHs
+  YUF3CXaL34Dsjk4WIDifessQMK8Ak4SZzt/gZVLCChITHn4HszmFHCWWP/yJdh4IaCal6+nME
+  PUC0qcnPmEBWK8hMTBFy+gehUlZl9uZoGwKyRmzWpjgrDVJK6e28Q8gVFwFpL2WUjaFzAyrWI
+  0K04tKkst0jUy0EsqykzPKMlNzMzRS6zSTdRLLdUtTy0u0TXUSywv1kstLtYrrsxNzknRy0st
+  2cQIDN2UYsYpOxh7lv3RO8QoycGkJMr7e3lGshBfUn5KZUZicUZ8UWlOavEhRhkODiUJ3hsbg
+  XKCRanpqRVpmTnAOIJJS3DwKInwhu0DSvMWFyTmFmemQ6ROMepyzPzadoBZiCUvPy9VSpz32m
+  6gIgGQoozSPLgRsJi+xCgrJczLyMDAIMRTkFqUm1mCKv+KUZyDUUmYl3kP0BSezLwSuE2vgI5
+  gAjqiuiAN5IiSRISUVAOTh2dK1vy/eml+nmt/dGmu/yN0eOrddK33Sukm/RVnK6d31E+61NK6
+  +pbUv1U2k8+++pd15OWLa9K7w3JmLIzg+9TuFZVz4Qp/gNHE3gcXXMs6fA5sn7Knu8r612ZBe
+  RvRGO4zEax/P6dn1ad8WlcQ+N3dvpdfuYfdJ03hpFsVx98Y52X9oRHxJbbtC6K2XsrMEDjEKJ
+  IYpLyDxcNL4b9o3tL7/2VO1L2UzbBccjdA5Ypo7YRDlhwX4jIutoh7vth1wP9eTfz6jT4+Zx5
+  eFvwhqJ/ytThm78lNtXInqo5PDs6d5LtqxhcP5Wcnj2pazbquXXB26UPGxLP/JlYGtXyd9LNn
+  YnP15p0KRVMftYoosRRnJBpqMRcVJwIAPVO/pWQDAAA=
 X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-13.tower-732.messagelabs.com!1667809808!243404!1
-X-Originating-IP: [62.60.8.179]
+X-Msg-Ref: server-5.tower-591.messagelabs.com!1667809814!249456!1
+X-Originating-IP: [62.60.8.97]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.100.1; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 4618 invoked from network); 7 Nov 2022 08:30:08 -0000
-Received: from unknown (HELO n03ukasimr04.n03.fujitsu.local) (62.60.8.179)
-  by server-13.tower-732.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 7 Nov 2022 08:30:08 -0000
-Received: from n03ukasimr04.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTP id 4491F152
-	for <openembedded-devel@lists.openembedded.org>; Mon,  7 Nov 2022 08:30:08 +0000 (GMT)
+Received: (qmail 19010 invoked from network); 7 Nov 2022 08:30:14 -0000
+Received: from unknown (HELO n03ukasimr01.n03.fujitsu.local) (62.60.8.97)
+  by server-5.tower-591.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 7 Nov 2022 08:30:14 -0000
+Received: from n03ukasimr01.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTP id 860C6100198
+	for <openembedded-devel@lists.openembedded.org>; Mon,  7 Nov 2022 08:30:14 +0000 (GMT)
 Received: from R01UKEXCASM126.r01.fujitsu.local (R01UKEXCASM126 [10.183.43.178])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTPS id 411A873
-	for <openembedded-devel@lists.openembedded.org>; Mon,  7 Nov 2022 08:30:08 +0000 (GMT)
+	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTPS id 7A3FB100194
+	for <openembedded-devel@lists.openembedded.org>; Mon,  7 Nov 2022 08:30:14 +0000 (GMT)
 Received: from localhost.localdomain (10.167.225.33) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.32; Mon, 7 Nov 2022 08:30:06 +0000
+ (TLS) id 15.0.1497.32; Mon, 7 Nov 2022 08:30:12 +0000
 From: <wangmy@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-oe] [PATCH] libbpf: upgrade 0.8.0 -> 1.0.1
-Date: Mon, 7 Nov 2022 16:29:46 +0800
-Message-ID: <1667809788-30849-3-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-networking] [PATCH] openvpn: upgrade 2.5.7 -> 2.5.8
+Date: Mon, 7 Nov 2022 16:29:48 +0800
+Message-ID: <1667809788-30849-5-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 In-Reply-To: <1667809788-30849-1-git-send-email-wangmy@fujitsu.com>
 References: <1667809788-30849-1-git-send-email-wangmy@fujitsu.com>
@@ -77,37 +77,51 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 07 Nov 2022 08:30:20 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99449
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99451
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
 Changelog:
-https://github.com/libbpf/libbpf/releases
+==========
+  tls-crypt-v2: bail out if the client key is too small
+  Remove useless empty line from CR_RESPONSE message
+  Allow running a default configuration with TLS libraries without BF-CBC
+  Change command help to match man page and implementation
+  Fix OpenVPN querying user/password if auth-token with user expires
+  t_client: Allow to force FAIL on prerequisite fails
+  t_client.sh: do not require fping6
+  Preparing release 2.5.8
+  msvc: add branch name and commit hash to version output
+  Update the replay-window backtrack log message
+  Do not skip ERROR:/SUCCESS: response from management interface
+  Fix auth-token usage with management-def-auth
+  Allow a few levels of recursion in virtual_output_callback()
+  Ensure --auth-nocache is handled during renegotiation
+  Purge auth-token as well while purging passwords
+  Do not copy auth_token username to itself
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../libbpf/{libbpf_0.8.0.bb => libbpf_1.0.1.bb}               | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-kernel/libbpf/{libbpf_0.8.0.bb => libbpf_1.0.1.bb} (89%)
+ .../openvpn/{openvpn_2.5.7.bb => openvpn_2.5.8.bb}              | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-networking/recipes-support/openvpn/{openvpn_2.5.7.bb => openvpn_2.5.8.bb} (97%)
 
-diff --git a/meta-oe/recipes-kernel/libbpf/libbpf_0.8.0.bb b/meta-oe/recipes-kernel/libbpf/libbpf_1.0.1.bb
-similarity index 89%
-rename from meta-oe/recipes-kernel/libbpf/libbpf_0.8.0.bb
-rename to meta-oe/recipes-kernel/libbpf/libbpf_1.0.1.bb
-index 76fd86214..5137a4cb3 100644
---- a/meta-oe/recipes-kernel/libbpf/libbpf_0.8.0.bb
-+++ b/meta-oe/recipes-kernel/libbpf/libbpf_1.0.1.bb
-@@ -8,8 +8,8 @@ LIC_FILES_CHKSUM = "file://../LICENSE.LGPL-2.1;md5=b370887980db5dd40659b50909238
+diff --git a/meta-networking/recipes-support/openvpn/openvpn_2.5.7.bb b/meta-networking/recipes-support/openvpn/openvpn_2.5.8.bb
+similarity index 97%
+rename from meta-networking/recipes-support/openvpn/openvpn_2.5.7.bb
+rename to meta-networking/recipes-support/openvpn/openvpn_2.5.8.bb
+index a28c73ab5..b2783d992 100644
+--- a/meta-networking/recipes-support/openvpn/openvpn_2.5.7.bb
++++ b/meta-networking/recipes-support/openvpn/openvpn_2.5.8.bb
+@@ -14,7 +14,7 @@ SRC_URI = "http://swupdate.openvpn.org/community/releases/${BP}.tar.gz \
  
- DEPENDS = "zlib elfutils"
+ UPSTREAM_CHECK_URI = "https://openvpn.net/community-downloads"
  
--SRC_URI = "git://github.com/libbpf/libbpf.git;protocol=https;branch=master"
--SRCREV = "86eb09863c1c0177e99c2c703092042d3cdba910"
-+SRC_URI = "git://github.com/libbpf/libbpf.git;protocol=https;branch=libbpf-v1.0.1"
-+SRCREV = "a6d7530cb7dff87ac1e64a540e63b67ddde2e0f9"
+-SRC_URI[sha256sum] = "08340a389905c84196b6cd750add1bc0fa2d46a1afebfd589c24120946c13e68"
++SRC_URI[sha256sum] = "a6f315b7231d44527e65901ff646f87d7f07862c87f33531daa109fb48c53db2"
  
- PACKAGE_ARCH = "${MACHINE_ARCH}"
- COMPATIBLE_HOST = "(x86_64|i.86|aarch64|riscv64|powerpc64).*-linux"
+ # CVE-2020-7224 and CVE-2020-27569 are for Aviatrix OpenVPN client, not for openvpn.
+ CVE_CHECK_IGNORE += "CVE-2020-7224 CVE-2020-27569"
 -- 
 2.25.1
 
