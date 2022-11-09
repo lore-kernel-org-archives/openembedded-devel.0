@@ -1,279 +1,176 @@
-Return-Path: <alex.kanavin@gmail.com>
+Return-Path: <ross.burton@arm.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 75BC8C433FE
-	for <webhook@archiver.kernel.org>; Wed,  9 Nov 2022 21:02:37 +0000 (UTC)
-Received: from mail-lf1-f42.google.com (mail-lf1-f42.google.com [209.85.167.42])
- by mx.groups.io with SMTP id smtpd.web12.381.1668027749550883273
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2E991C433FE
+	for <webhook@archiver.kernel.org>; Wed,  9 Nov 2022 22:41:16 +0000 (UTC)
+Received: from EUR04-HE1-obe.outbound.protection.outlook.com (EUR04-HE1-obe.outbound.protection.outlook.com [40.107.7.74])
+ by mx.groups.io with SMTP id smtpd.web08.29.1668033670683680934
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 09 Nov 2022 13:02:29 -0800
+ Wed, 09 Nov 2022 14:41:11 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=jcvwALzx;
- spf=pass (domain: gmail.com, ip: 209.85.167.42, mailfrom: alex.kanavin@gmail.com)
-Received: by mail-lf1-f42.google.com with SMTP id a29so9348829lfj.9
-        for <openembedded-devel@lists.openembedded.org>; Wed, 09 Nov 2022 13:02:29 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=oECdSdPzgfzy12UFSCBGkpNNzKq02nKOloSvcjxrAks=;
-        b=jcvwALzxhAPdd1nP/X8Lbd+Jq2tGCV4z+tYWGjwTxf/tfsXBro18M4z1R3GeHPEnHo
-         hL2NIdG5mdS608cDLH1S0X/Nehk1qHRHLTvqvou5mhpyIRbtcyH+HkeJfUvF1GxCRS4N
-         D6JwoYI4rulCZMYKFCBA+A5/g2NEbBC0N3N5Bhv8g3tqutRfRbyaaHWCWyFFlH1uYwtJ
-         DtUvo+E03ryC0nQqEee9+WYt5oWmW/C+OcH7F/D1O+Eldu9oQwHirrGkr04HgaYn6uEb
-         BTXZWtAOFTVMiZl7k3Qg1uvN46QX1Rw+GE31RuzKgsB3vAsGjR8QxgWnRNYqA6fCB/8k
-         sE5g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=oECdSdPzgfzy12UFSCBGkpNNzKq02nKOloSvcjxrAks=;
-        b=TtzvcHEmhtbd/0lyW+vXUGygqmoRxU2H4RJrpLvCMY7D/BdgVI9YokwPVwlNURG1Xp
-         m0WEw9vZAk5G8FmO+/I2SwhsDEUQJNA4jWf7R3A9U49CazfIRGe2ylqVn1Pn042OYZV3
-         qJQeq0MWV1XsPmKLvPbPYNCNL1/sBv9c94DNLJVjVnqwhvkjOq1gnr0pQUWcKsdl+RB2
-         TsnJ/ykgmlzQzSk5SkehGeq+OCidAEkVruylsgmU2HqR7/l8vl6PO+s8fcnOL6UTJZ2u
-         804rPNgPrYY7eIOgVoJGjsqaXwURi/TxoXFceV1214saCu7DpkNocZbov/x/JOddOjfX
-         jJMA==
-X-Gm-Message-State: ACrzQf274TjS9/HY9mJglJhNr4fNMWLMgSewq8FjupLyJbv9qKjpUuUl
-	tcg1yU8T2l4s0DbIn/qgr4A9AR+w9Oib/Zv56+0=
-X-Google-Smtp-Source: AMsMyM4GPwdGENmaYb2kRwWZ8bkXfeGrC24SypTkZ51biUvKhjhUXlS4YRsCybuwH7ho+mgm37Vm12y+B4jkO1YwaSg=
-X-Received: by 2002:a19:4f18:0:b0:4a2:4aad:8fff with SMTP id
- d24-20020a194f18000000b004a24aad8fffmr788515lfb.445.1668027747568; Wed, 09
- Nov 2022 13:02:27 -0800 (PST)
-MIME-Version: 1.0
-References: <20221109200558.2034000-1-alex@linutronix.de> <20221109200558.2034000-2-alex@linutronix.de>
- <CA+chaQdcgf-CTZHQTNooWgYnM5HbJygXucGnizaKoqmbCcCvMw@mail.gmail.com>
- <CANNYZj-HjY+JdC39wPLC1v+o0VWcErY8ivPf1+bTGto0Ns1_NQ@mail.gmail.com>
- <CA+chaQddR_ytsNfV32fXUTNTWxHfuwiZac895Frv0MBrFD1KiA@mail.gmail.com>
- <CANNYZj_KWjtYpyQdhNWWjT_u4nPCdTGf6Gx4cfP_QoMiJDuifg@mail.gmail.com> <CA+chaQfd8CbNi0ziu+RJK5md31iUYqTopSgBqD6VtWUvPkjkwA@mail.gmail.com>
-In-Reply-To: <CA+chaQfd8CbNi0ziu+RJK5md31iUYqTopSgBqD6VtWUvPkjkwA@mail.gmail.com>
-From: Alexander Kanavin <alex.kanavin@gmail.com>
-Date: Wed, 9 Nov 2022 22:02:16 +0100
-Message-ID: <CANNYZj8S+tTOcxK=h3J4LuK5fx-BOL-jbqXdkjgp29UfcM94Ng@mail.gmail.com>
-Subject: Re: [oe] [PATCH 2/2] lirc: correctly use PYTHONPATH
-To: Martin Jansa <martin.jansa@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org, 
-	Alexander Kanavin <alex@linutronix.de>
-Content-Type: text/plain; charset="UTF-8"
+ dkim=pass header.i=@armh.onmicrosoft.com header.s=selector2-armh-onmicrosoft-com header.b=wS5L48BJ;
+ spf=pass (domain: arm.com, ip: 40.107.7.74, mailfrom: ross.burton@arm.com)
+ARC-Seal: i=2; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=pass;
+ b=DpWHcz0OqwBfGbktg5t5kjC3h/95tmHXdvZIrBE6uAKZwNBu1B6uztIemVYsZWeHXValKOFIS1INqikmaXBnlv54Mj0q0mAriKHdKDy4XIoWPEKd5bRfkj/FSPX38KsZAZrzU46bv2QFCvk6CNrxfnLAEfaoJTlZ6mWudUgUBwN0BQYybHvSaZWWhJa9W+YjLGwJJzkg7SqycjhXtF4AlU2S2qOloYhoetDc4shP4+tfUbVP7G7gZ34aEZgw+jrd0TutpkEaHT4bzTV0ZcphgE5oDJgFMCWGrDQxKS/w20Q9tEXjxBhTQmFev+uVigOpIOcqp5qEf5Qsw74rxyfYIA==
+ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=rpcRkMkBvs5v3tE9Rq/6lfcpp0DymXiPZKoPPzNNy1o=;
+ b=GLVBlCRDino3P1ioJPbCVjJZTfWR+MSNPJqqHLNO1H+TW0plgqOZlBhESzECsG7cG/YDuwiaEeSN16vrlg0EEuJfEvLjra3uKznSx5EOePoE8yB6GlfgnvTUu8RYyUbBcP/aKptKLt5DpOdxyXtQm4GeocT2fs6PIKjDyi8QYNF3k7KgP4HYLGuKErzJP61FjX0XOftjqXRQTTyntkEPeewUTN49JxsDgdEmAZMC37ATOTdz3Wt1d0t/OQSc5vk0CA8yYrZuBzU/zfv4SEdE4ZVWOMhvlcqr9anCxCS7fQxek8TPBjAomGnejCiN9ixE+SuBnFE8BsfUHbFdEYvUrQ==
+ARC-Authentication-Results: i=2; mx.microsoft.com 1; spf=pass (sender ip is
+ 63.35.35.123) smtp.rcpttodomain=lists.openembedded.org smtp.mailfrom=arm.com;
+ dmarc=pass (p=none sp=none pct=100) action=none header.from=arm.com;
+ dkim=pass (signature was verified) header.d=armh.onmicrosoft.com; arc=pass (0
+ oda=1 ltdi=1 spf=[1,1,smtp.mailfrom=arm.com] dkim=[1,1,header.d=arm.com]
+ dmarc=[1,1,header.from=arm.com])
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
+ s=selector2-armh-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=rpcRkMkBvs5v3tE9Rq/6lfcpp0DymXiPZKoPPzNNy1o=;
+ b=wS5L48BJUmEu3HPpyAbhl5PnCTuJkdHsnhmW9dpqHzF0t2VKzyQuAXz6F/ZrgMatuHzgKaqPBEJPaWeCGHpo+3WfHFXanTP7y45p1/1Asi2BNvyakK8EPbMr7sRJZlq16uliadonAms/7KeU/eL/nPzo2Aw6vd5ZANsefjvdxmU=
+Received: from AS9PR04CA0141.eurprd04.prod.outlook.com (2603:10a6:20b:48a::11)
+ by PAXPR08MB6526.eurprd08.prod.outlook.com (2603:10a6:102:df::24) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5813.13; Wed, 9 Nov
+ 2022 22:41:07 +0000
+Received: from VI1EUR03FT015.eop-EUR03.prod.protection.outlook.com
+ (2603:10a6:20b:48a:cafe::b3) by AS9PR04CA0141.outlook.office365.com
+ (2603:10a6:20b:48a::11) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5813.12 via Frontend
+ Transport; Wed, 9 Nov 2022 22:41:07 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 63.35.35.123)
+ smtp.mailfrom=arm.com; dkim=pass (signature was verified)
+ header.d=armh.onmicrosoft.com;dmarc=pass action=none header.from=arm.com;
+Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
+ 63.35.35.123 as permitted sender) receiver=protection.outlook.com;
+ client-ip=63.35.35.123; helo=64aa7808-outbound-1.mta.getcheckrecipient.com;
+ pr=C
+Received: from 64aa7808-outbound-1.mta.getcheckrecipient.com (63.35.35.123) by
+ VI1EUR03FT015.mail.protection.outlook.com (100.127.144.121) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.5813.12 via Frontend Transport; Wed, 9 Nov 2022 22:41:06 +0000
+Received: ("Tessian outbound 0800d254cb3b:v130"); Wed, 09 Nov 2022 22:41:06 +0000
+X-CheckRecipientChecked: true
+X-CR-MTA-CID: 9973fcccc974f410
+X-CR-MTA-TID: 64aa7808
+Received: from 09db7f0e2dab.1
+	by 64aa7808-outbound-1.mta.getcheckrecipient.com id A7CF8C49-1292-4E5C-80CB-75455FEEA74B.1;
+	Wed, 09 Nov 2022 22:40:58 +0000
+Received: from EUR05-VI1-obe.outbound.protection.outlook.com
+    by 64aa7808-outbound-1.mta.getcheckrecipient.com with ESMTPS id 09db7f0e2dab.1
+    (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384);
+    Wed, 09 Nov 2022 22:40:58 +0000
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=CdjvAhqW5cpClnabzY3dy947yKSb9/1AQ2EklC+CJM+cqs5iCJagC+C8YX+Wkkb0wxy2zkdm2ZHrogIpKd2EqnTO5nsyZKmjVs5t979mOeukGDuszkQxnBPe0me+LMHKtVWAIt9M7nFd65mZMSTuCdU/aAyObzIi2QtzowofyUJuPtGSm7xPJ3z3DIDdN0su2KcM2Jw9rh6ZfBmkCVPV5hNyPLpX8rz05B/+KcqAELdB4etTYkV2Bap9eJe3Ih/ADxctV5JhoKBUxckieALiRNU478rKUlAHpYQYPiBQgtbbtyWSjqZYC72kDO21VfMiCR26ZFDRcDJf61TtR07iSQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=rpcRkMkBvs5v3tE9Rq/6lfcpp0DymXiPZKoPPzNNy1o=;
+ b=oaa22QStq/ymEo1Orv1iQFMq8IR4HtqCdGTUSCdiUkFUjitd0Ry2jU74+NOdxCiuV86Cef1yHG9Njnd5jfpCJB6kR+eAh/p0ErzIt2OWsDcVcgFmWyKS7Sl3e9KpMg2NN/zPr6Gknrd78jWGl1Sxh34wuVRdTpw+XLcFL5j91CPPejUUzy3aanxlI587EYxoDZMTPZDNKWOgdyzmeXsGPNDSwh7WzMPE3vPca2RvpgHkMoNdZpFdHLaRK/NVyoTjtMUuSapRH8mPrf4cq4ZjjB1Gt+X+M0XRyR+/j+mmSW3LiX5yc8YGUB9wUsjzWlecOCibMp1lOGeyCWXB0SasbA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=arm.com; dmarc=pass action=none header.from=arm.com; dkim=pass
+ header.d=arm.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
+ s=selector2-armh-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=rpcRkMkBvs5v3tE9Rq/6lfcpp0DymXiPZKoPPzNNy1o=;
+ b=wS5L48BJUmEu3HPpyAbhl5PnCTuJkdHsnhmW9dpqHzF0t2VKzyQuAXz6F/ZrgMatuHzgKaqPBEJPaWeCGHpo+3WfHFXanTP7y45p1/1Asi2BNvyakK8EPbMr7sRJZlq16uliadonAms/7KeU/eL/nPzo2Aw6vd5ZANsefjvdxmU=
+Received: from AS4PR08MB7429.eurprd08.prod.outlook.com (2603:10a6:20b:4e1::9)
+ by DB9PR08MB6570.eurprd08.prod.outlook.com (2603:10a6:10:251::14) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5813.12; Wed, 9 Nov
+ 2022 22:40:57 +0000
+Received: from AS4PR08MB7429.eurprd08.prod.outlook.com
+ ([fe80::2044:53b2:87b3:eb0b]) by AS4PR08MB7429.eurprd08.prod.outlook.com
+ ([fe80::2044:53b2:87b3:eb0b%5]) with mapi id 15.20.5813.011; Wed, 9 Nov 2022
+ 22:40:56 +0000
+From: Ross Burton <Ross.Burton@arm.com>
+To: Markus Volk <f_l_k@t-online.de>
+CC: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [oe] [meta-oe][PATCH] hwdata: allow to build native and nativesdk
+Thread-Topic: [oe] [meta-oe][PATCH] hwdata: allow to build native and
+ nativesdk
+Thread-Index: 
+ AQHY9B7Gyuz6ptEObUC3T3flD/vmxa42iwiAgAAO0kqAAA4zgIAAGMaAgAALuACAABSyAIAATyIA
+Date: Wed, 9 Nov 2022 22:40:56 +0000
+Message-ID: <CDDECDFC-F9F2-484F-BC3D-7BE01702B584@arm.com>
+References: <20221109093534.2718027-1-f_l_k@t-online.de>
+ <D7B0F690-42BF-4D57-9A34-FB8650CBB7C7@arm.com>
+ <1725ECAD7BE80329.32043@lists.openembedded.org>
+ <C123LR.D2SJ40BPAVYN@t-online.de>
+ <9CE090EB-662D-4CCB-B3EC-D103E13575FA@arm.com>
+ <JI83LR.6DI8KX778AKI@t-online.de>
+ <6DDF75A0-A98E-4E64-A718-87232BE33CDD@arm.com>
+ <WVD3LR.DM4P4WUIIJ2L1@t-online.de>
+In-Reply-To: <WVD3LR.DM4P4WUIIJ2L1@t-online.de>
+Accept-Language: en-GB, en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-mailer: Apple Mail (2.3731.200.110.1.12)
+Authentication-Results-Original: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=arm.com;
+x-ms-traffictypediagnostic: 
+	AS4PR08MB7429:EE_|DB9PR08MB6570:EE_|VI1EUR03FT015:EE_|PAXPR08MB6526:EE_
+X-MS-Office365-Filtering-Correlation-Id: 7cd0a876-95f8-4519-4a72-08dac2a37db6
+x-checkrecipientrouted: true
+nodisclaimer: true
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam-Untrusted: BCL:0;
+X-Microsoft-Antispam-Message-Info-Original: 
+ 7Ekt8ZabFUs4o/a6gIRXVClp6yp/yohlHSqB8vUWSovp1d5OsjoPue747B4hC0zgyAZU6wtophN7j6DqUugkK3L2f7apWrhDO3k5/qjjdKzBFBmcUDkKse8lfrEaXTq+f9fqcc3EB+huKP1LcxlMr6st4j8Pg39VvGsB8kkE+xcRxQDhyORKo2dSMc9M1xa6iwBb4l3bZ7KDttGSVTCFUYhrNWzNB0Mo4ywbBsefMdBPN9xnlmEZb4GJRvQv+8QYhHfKVBTOsXiCxrKpzXNib1mjce2nCswYO2GCZKub58WPgMK09bl9bi4f+whs2fuxolX5O62FnWLiivmJpYw6vG/G2qaEVfivxqijL58ld7J6mM8RgYW+hRUCDdc3UXcKtdi7cqR8GXfENoYCifPo4sK4OglJka9dEOjH+oGFE+mI52OQr6Kei1rqqGr3ncKSToWlPemL7InYFcCKmlYPX8md6aSswJ7c1kO6TZI4L28Q/foBWamLiEQR0f0wzAGBy6odQwKmsoSgs6BEotzouUoISmY6RPnnYhRkUPNMwOOy+xXhdTk5xDVkC+o6qPaT44YwE74qIRIrP8FdmfExha6fGfbJYAi0TV4o+kO6QD4Uq0yUHSVveza36GKPjZtLB/6rzFcVAD7dmexmr9bYwGb803dVL+apFD3AJva3TehcQ9C8p9bOlVErI2+7371PMQ+FMx+ioTLN5eI/ISQar4wgprHAkKV/WgCjXT+CuPbCizrKZehEj1doXlO96PaYGsvqIJr7EJd47seRw9/TR1brkj3mp6moWKrSmGy6vAA=
+X-Forefront-Antispam-Report-Untrusted: 
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AS4PR08MB7429.eurprd08.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230022)(4636009)(396003)(366004)(346002)(39860400002)(136003)(376002)(451199015)(2616005)(186003)(41300700001)(33656002)(8936002)(4744005)(83380400001)(6916009)(5660300002)(36756003)(316002)(38100700002)(71200400001)(38070700005)(86362001)(478600001)(66446008)(66556008)(66946007)(6486002)(66476007)(76116006)(8676002)(4326008)(91956017)(53546011)(6506007)(6512007)(26005)(64756008)(2906002)(122000001)(45980500001);DIR:OUT;SFP:1101;
+Content-Type: text/plain; charset="us-ascii"
+Content-ID: <329C59AFBE1DAA469B5A1E986A2138ED@eurprd08.prod.outlook.com>
 Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9PR08MB6570
+Original-Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=arm.com;
+X-EOPAttributedMessage: 0
+X-MS-Exchange-Transport-CrossTenantHeadersStripped: 
+ VI1EUR03FT015.eop-EUR03.prod.protection.outlook.com
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id-Prvs: 
+	2ce00674-544b-4d50-c4c5-08dac2a377a0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 
+	3eBsP7bs/eDqjn4oz/7Oa1fzoL1VG/YeNfnctNm9E/yexmL+NZEX0MFvOUmfz6k+3oWfdII6G1dviXPmt47qX4EuR+CveEmkubqjlx0nYwXS1O+kIJ2NXPqTkvVwRt0W4hjdPPyvRj1d+hrC4P98apFKPMS8nUXKd6TNXVMcHeA1Fuuaa42GnF2iXAkDaneQrxLhs3oh98qqDAX+SsKfOPbypiCtIx9HdTrm7n7ddK6J05BBa9k+QTuGDB3bCs5p4CHE9dvkSL1PqOnAZNaRLdsARWjC1l9mbMZaXGv2pZQ1Q77UTyOE25WyvnJRNBfBpfnsx3g13JoDvwB7AgeGhTgyQBBkDUY0veSjSUJq2uuMvRcZtbiLL7gnhNP0SRyPHvyZC4T7x/ztteAIEpCZMKnWLZtcPKEHbgudyZiFGFMNlTOnLBfVrodcYfOWrbLlrkT+E4cu+3kKCz64nGJ8zzo1Td27E9G20mZGViXVGVuFg9d6zuSLzBZNsJbUO+tZzZm+2XgNWl1E8hHOweaZRpVlJcV/8GNgWQILOFrija+s7FlOK6W+vgW6E18QkD8nfxHuEHyV2LwLG1BE09PNh89sFK8URo5gKQtBDSTXGYpfrdFfZCRjrN17cEzCIGdoRvOjbNIJF+GyGM9nyMP1NWqbz9fTeKfR0NI084k7SeMtOay47NSu+GE1SW0qLooKxJQaNxsq1pCBvYQXM7X/L0NmDSQ7HMDo5ypbc5yMBzOMX9D4SjAtYOqRg+WHJgBvqRcLQgY52LP6SmvN8K4Ehg==
+X-Forefront-Antispam-Report: 
+	CIP:63.35.35.123;CTRY:IE;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:64aa7808-outbound-1.mta.getcheckrecipient.com;PTR:ec2-63-35-35-123.eu-west-1.compute.amazonaws.com;CAT:NONE;SFS:(13230022)(4636009)(346002)(376002)(136003)(396003)(39860400002)(451199015)(36840700001)(40470700004)(46966006)(33656002)(2906002)(316002)(4326008)(8676002)(70586007)(5660300002)(478600001)(40480700001)(6486002)(36756003)(4744005)(8936002)(41300700001)(6862004)(36860700001)(70206006)(83380400001)(81166007)(356005)(82740400003)(53546011)(86362001)(26005)(6512007)(6506007)(2616005)(47076005)(40460700003)(336012)(186003)(82310400005);DIR:OUT;SFP:1101;
+X-OriginatorOrg: arm.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Nov 2022 22:41:06.9809
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 7cd0a876-95f8-4519-4a72-08dac2a37db6
+X-MS-Exchange-CrossTenant-Id: f34e5979-57d9-4aaa-ad4d-b122a662184d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=f34e5979-57d9-4aaa-ad4d-b122a662184d;Ip=[63.35.35.123];Helo=[64aa7808-outbound-1.mta.getcheckrecipient.com]
+X-MS-Exchange-CrossTenant-AuthSource: 
+	VI1EUR03FT015.eop-EUR03.prod.protection.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAXPR08MB6526
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 09 Nov 2022 21:02:37 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99515
+ <openembedded-devel@lists.openembedded.org>; Wed, 09 Nov 2022 22:41:16 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99516
 
-That I can certainly agree with. Still, the problem is that devtool
-knows only one style of formatting and resets to it, and I'm not sure
-it's a good use of time to implement auto-detection of the other style
-when modifying recipes.
+On 9 Nov 2022, at 17:57, Markus Volk via lists.openembedded.org <f_l_k=3Dt-=
+online.de@lists.openembedded.org> wrote:
+>=20
+> Got it. You suggest fixing hwdata .pc file first.
+> I didn't know about the pc_sysrootdir variable, thanks for pointing it ou=
+t.
+>=20
+> With this gehangen wlroots is built when 'native: true' is removed.
+> Would this be good enough to send upstream ,or should i create a patch fo=
+r the hwdata recipe?
 
-Alex
+Both? Send upstream, apply patch to the recipe until we upgrade.
 
-On Wed, 9 Nov 2022 at 21:55, Martin Jansa <martin.jansa@gmail.com> wrote:
->
-> Well the obvious difference is that your commit which I was reviewing cho=
-ws 11 changed lines, instead of just 1 added .patch file in SRC_URI.
->
-> Style changes shouldn't be applied together with functional changes, espe=
-cially when they make it worse.
->
-> On Wed, Nov 9, 2022 at 9:50 PM Alexander Kanavin <alex.kanavin@gmail.com>=
- wrote:
->>
->> This commit shows that at some point in the past you fixed up
->> formatting to your preference. It does not set one way or another way
->> as the 'correct' one, particularly as it is not mentioned anywhere in
->> the layer.
->>
->> And honestly, I don't care if it's consistent or not, and neither
->> should you or anyone else. It helps nobody to spend time and energy
->> enforcing those 4 spaces throughout the layer, as opposed to some
->> recipes having 4 spaces and some aligning with the value on the first
->> line. What's so bad about that, seriously?
->>
->> If you feel strongly about this, you can just run a linter
->> periodically to fix it up.
->>
->> Alex
->>
->> On Wed, 9 Nov 2022 at 21:37, Martin Jansa <martin.jansa@gmail.com> wrote=
-:
->> >
->> > Style guide says:
->> > "Some layers prefer to use four-space indentation on sucessive lines a=
-nd prefer the closing quote as the first character"
->> >
->> > And this commit:
->> > https://git.openembedded.org/meta-openembedded/commit/?id=3Da45830a39b=
-b47a9eab27980d52966226c9504ea4
->> > shows that meta-oe/meta-* layers belong to this group.
->> >
->> > Yes, it's not 100% consistent, but lets not make it less consistent, j=
-ust because "devtool finish" prepared such change.
->> >
->> > On Wed, Nov 9, 2022 at 9:32 PM Alexander Kanavin <alex.kanavin@gmail.c=
-om> wrote:
->> >>
->> >> This was re-set by devtool modify/devtool finish, I didn't
->> >> specifically adjust it.
->> >>
->> >> The styleguide says either way is ok. I'd suggest we spend our time o=
-n
->> >> more important matters.
->> >>
->> >> Alex
->> >>
->> >> On Wed, 9 Nov 2022 at 21:16, Martin Jansa <martin.jansa@gmail.com> wr=
-ote:
->> >> >
->> >> > Please don't change SRC_URI indentation, meta-oe uses 4 spaces for =
-indentation with closing quote as the first character as described on https=
-://www.openembedded.org/wiki/Styleguide
->> >> >
->> >> > On Wed, Nov 9, 2022 at 9:06 PM Alexander Kanavin <alex.kanavin@gmai=
-l.com> wrote:
->> >> >>
->> >> >> Signed-off-by: Alexander Kanavin <alex@linutronix.de>
->> >> >> ---
->> >> >>  ...ot-clobber-PYTHONPATH-from-build-env.patch | 55 ++++++++++++++=
-+++++
->> >> >>  .../recipes-connectivity/lirc/lirc_0.10.2.bb  | 21 +++----
->> >> >>  2 files changed, 66 insertions(+), 10 deletions(-)
->> >> >>  create mode 100644 meta-oe/dynamic-layers/meta-python/recipes-con=
-nectivity/lirc/lirc/0001-Makefile.am-do-not-clobber-PYTHONPATH-from-build-e=
-nv.patch
->> >> >>
->> >> >> diff --git a/meta-oe/dynamic-layers/meta-python/recipes-connectivi=
-ty/lirc/lirc/0001-Makefile.am-do-not-clobber-PYTHONPATH-from-build-env.patc=
-h b/meta-oe/dynamic-layers/meta-python/recipes-connectivity/lirc/lirc/0001-=
-Makefile.am-do-not-clobber-PYTHONPATH-from-build-env.patch
->> >> >> new file mode 100644
->> >> >> index 000000000..089ed23c7
->> >> >> --- /dev/null
->> >> >> +++ b/meta-oe/dynamic-layers/meta-python/recipes-connectivity/lirc=
-/lirc/0001-Makefile.am-do-not-clobber-PYTHONPATH-from-build-env.patch
->> >> >> @@ -0,0 +1,55 @@
->> >> >> +From 5e3b74927b4fef03d91518d235e9e3ba8cd7ab2e Mon Sep 17 00:00:00=
- 2001
->> >> >> +From: Alexander Kanavin <alex@linutronix.de>
->> >> >> +Date: Wed, 9 Nov 2022 20:49:41 +0100
->> >> >> +Subject: [PATCH] Makefile.am: do not clobber PYTHONPATH from buil=
-d environment
->> >> >> +
->> >> >> +This environment variable has special significance for python,
->> >> >> +and so lirc's variable has to be named something else.
->> >> >> +
->> >> >> +Signed-off-by: Alexander Kanavin <alex@linutronix.de>
->> >> >> +---
->> >> >> + Makefile.am       | 2 +-
->> >> >> + pylint.mak        | 2 +-
->> >> >> + tools/Makefile.am | 2 +-
->> >> >> + 3 files changed, 3 insertions(+), 3 deletions(-)
->> >> >> +
->> >> >> +diff --git a/Makefile.am b/Makefile.am
->> >> >> +index 6718af1..fae423e 100644
->> >> >> +--- a/Makefile.am
->> >> >> ++++ b/Makefile.am
->> >> >> +@@ -128,7 +128,7 @@ endif
->> >> >> +
->> >> >> + pylint: .phony
->> >> >> +       $(MAKE) -C tools pylint
->> >> >> +-      -PYTHONPATH=3D$(PYTHONPATH) $(PYLINT) --rcfile=3Dpylint.co=
-nf \
->> >> >> ++      -PYTHONPATH=3D$(LIRCPYTHONPATH) $(PYLINT) --rcfile=3Dpylin=
-t.conf \
->> >> >> +       --msg-template=3D'$(pylint_template)' $(py_PYTHON)
->> >> >> +
->> >> >> + pep8: $(py_PYTHON)
->> >> >> +diff --git a/pylint.mak b/pylint.mak
->> >> >> +index bf427ab..2692951 100644
->> >> >> +--- a/pylint.mak
->> >> >> ++++ b/pylint.mak
->> >> >> +@@ -1,5 +1,5 @@
->> >> >> + PYTHONPATH1      =3D $(abs_top_srcdir)/python-pkg/lirc:
->> >> >> + PYTHONPATH2      =3D $(abs_top_srcdir)/python-pkg/lirc/lib/.libs
->> >> >> +-PYTHONPATH       =3D $(PYTHONPATH1):$(PYTHONPATH2)
->> >> >> ++LIRCPYTHONPATH   =3D $(PYTHONPATH1):$(PYTHONPATH2)
->> >> >> + PYLINT           =3D python3-pylint
->> >> >> + pylint_template  =3D {path}:{line}: [{msg_id}({symbol}), {obj}] =
-{msg}
->> >> >> +diff --git a/tools/Makefile.am b/tools/Makefile.am
->> >> >> +index 85d1fd0..96b17f8 100644
->> >> >> +--- a/tools/Makefile.am
->> >> >> ++++ b/tools/Makefile.am
->> >> >> +@@ -142,7 +142,7 @@ force-pylint: .phony
->> >> >> +
->> >> >> + pylint: .pylint-stamp
->> >> >> + .pylint-stamp: $(py_sources)
->> >> >> +-      -PYTHONPATH=3D$(PYTHONPATH) $(PYLINT) --rcfile=3D../pylint=
-.conf \
->> >> >> ++      -PYTHONPATH=3D$(LIRCPYTHONPATH) $(PYLINT) --rcfile=3D../py=
-lint.conf \
->> >> >> +       --msg-template=3D'$(pylint_template)' $? && touch $@
->> >> >> +
->> >> >> + .phony:
->> >> >> +--
->> >> >> +2.30.2
->> >> >> +
->> >> >> diff --git a/meta-oe/dynamic-layers/meta-python/recipes-connectivi=
-ty/lirc/lirc_0.10.2.bb b/meta-oe/dynamic-layers/meta-python/recipes-connect=
-ivity/lirc/lirc_0.10.2.bb
->> >> >> index 234d347af..458d9d7cd 100644
->> >> >> --- a/meta-oe/dynamic-layers/meta-python/recipes-connectivity/lirc=
-/lirc_0.10.2.bb
->> >> >> +++ b/meta-oe/dynamic-layers/meta-python/recipes-connectivity/lirc=
-/lirc_0.10.2.bb
->> >> >> @@ -11,16 +11,17 @@ DEPENDS =3D "libxslt-native alsa-lib libftdi l=
-ibusb1 libusb-compat jack portaudio-
->> >> >>  LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Db234ee4d69f5fce4486a80=
-fdaf4a4263"
->> >> >>
->> >> >>  SRC_URI =3D "http://prdownloads.sourceforge.net/lirc/lirc-${PV}.t=
-ar.bz2 \
->> >> >> -    file://0001-Fix-build-on-32bit-arches-with-64bit-time_t.patch=
- \
->> >> >> -    file://fix_build_errors.patch \
->> >> >> -    file://0001-mplay-Fix-build-with-musl.patch \
->> >> >> -    file://lircd.service \
->> >> >> -    file://lircd.init \
->> >> >> -    file://lircexec.init \
->> >> >> -    file://lircd.conf \
->> >> >> -    file://lirc_options.conf \
->> >> >> -    file://lirc.tmpfiles \
->> >> >> -"
->> >> >> +           file://0001-Fix-build-on-32bit-arches-with-64bit-time_=
-t.patch \
->> >> >> +           file://fix_build_errors.patch \
->> >> >> +           file://0001-mplay-Fix-build-with-musl.patch \
->> >> >> +           file://lircd.service \
->> >> >> +           file://lircd.init \
->> >> >> +           file://lircexec.init \
->> >> >> +           file://lircd.conf \
->> >> >> +           file://lirc_options.conf \
->> >> >> +           file://lirc.tmpfiles \
->> >> >> +           file://0001-Makefile.am-do-not-clobber-PYTHONPATH-from=
--build-env.patch \
->> >> >> +           "
->> >> >>  SRC_URI[sha256sum] =3D "3d44ec8274881cf262f160805641f0827ffcc20ad=
-e0d85e7e6f3b90e0d3d222a"
->> >> >>
->> >> >>  SYSTEMD_PACKAGES =3D "lirc lirc-exec"
->> >> >> --
->> >> >> 2.30.2
->> >> >>
->> >> >>
->> >> >> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->> >> >> Links: You receive all messages sent to this group.
->> >> >> View/Reply Online (#99509): https://lists.openembedded.org/g/opene=
-mbedded-devel/message/99509
->> >> >> Mute This Topic: https://lists.openembedded.org/mt/94921643/361715=
-6
->> >> >> Group Owner: openembedded-devel+owner@lists.openembedded.org
->> >> >> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/u=
-nsub [Martin.Jansa@gmail.com]
->> >> >> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->> >> >>
+Ross=
 
