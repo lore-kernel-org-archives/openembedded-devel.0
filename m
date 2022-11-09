@@ -1,4448 +1,882 @@
-Return-Path: <f_l_k@t-online.de>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B18CFC4332F
-	for <webhook@archiver.kernel.org>; Wed,  9 Nov 2022 19:01:29 +0000 (UTC)
-Received: from mailout10.t-online.de (mailout10.t-online.de [194.25.134.21])
- by mx.groups.io with SMTP id smtpd.web12.1190.1668020482641297476
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C915CC4167D
+	for <webhook@archiver.kernel.org>; Wed,  9 Nov 2022 19:31:49 +0000 (UTC)
+Received: from mail-ot1-f49.google.com (mail-ot1-f49.google.com [209.85.210.49])
+ by mx.groups.io with SMTP id smtpd.web08.1500.1668022307299586511
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 09 Nov 2022 11:01:23 -0800
+ Wed, 09 Nov 2022 11:31:47 -0800
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=SPF record not found (domain: t-online.de, ip: 194.25.134.21, mailfrom: f_l_k@t-online.de)
-Received: from fwd88.dcpf.telekom.de (fwd88.aul.t-online.de [10.223.144.114])
-	by mailout10.t-online.de (Postfix) with SMTP id 917FA5420;
-	Wed,  9 Nov 2022 20:00:42 +0100 (CET)
-Received: from [192.168.178.128] ([84.163.39.174]) by fwd88.t-online.de
-	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1osqJW-024xw80; Wed, 9 Nov 2022 20:00:42 +0100
-Date: Wed, 09 Nov 2022 20:00:36 +0100
-From: Markus Volk <f_l_k@t-online.de>
-Subject: Re: [oe] [meta-gnome][PATCHv2] rest: upgrade 0.8.1 -> 0.9.0
-To: Khem Raj <raj.khem@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org
-Message-Id: <0TG3LR.DDOLKVC0WOAP1@t-online.de>
-In-Reply-To: <1725FD7EDA20D50E.7571@lists.openembedded.org>
-References: <20221107191537.45452-1-f_l_k@t-online.de>
-	<CAMKF1soT7ND6M6i76d3jL1a7ycrW=eY+nwM9uRwTp5uya4HzFQ@mail.gmail.com>
-	<1725FD7EDA20D50E.7571@lists.openembedded.org>
-X-Mailer: geary/40.0
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=h5l5Gf4m;
+ spf=pass (domain: gmail.com, ip: 209.85.210.49, mailfrom: raj.khem@gmail.com)
+Received: by mail-ot1-f49.google.com with SMTP id w26-20020a056830061a00b0066c320f5b49so10694020oti.5
+        for <openembedded-devel@lists.openembedded.org>; Wed, 09 Nov 2022 11:31:47 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=lJ30sJsf61TQOvJkyR16OduLmGVg35WKiBGLg1StAZ8=;
+        b=h5l5Gf4mPGB18jdD/DjI0VGX6gItxfRsP+ka/lBeL4IALWSWw6jxM5VN7RY+3r30YY
+         mFzKUrD9jrEhZ8qsp5Zq/FXxz9MN3JvhMmuJssVm6xIwSAxYe1A1/Pc2U8jNvuVcQ6to
+         ec1HC9jgGYD3G5Dh8oilUNZecNVTuDXiNrcOa4NyM6m/wTQYG4JBP79k8aRbYjMZ5XbZ
+         QK+jWs6yvDbk4iyzxrPl5kePaLVPe9u/pgdot4oOoCFYUHdB8Doq0l4x3uMoi3R7a3zm
+         89Pko4AJOMaATLo/K1D2pvsZEmmuDIxBNxz6iCulfkZnrDzMomCeSlqoxTd1x4h7NhnD
+         vlJQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=lJ30sJsf61TQOvJkyR16OduLmGVg35WKiBGLg1StAZ8=;
+        b=EZyYybrSz/9iwqm1IkiKpBFcvgJXH+fSuqApBUkWt2RujU/+MH6FANG/BNnqYDlyhJ
+         3+qQEdZD9L2s6quzv1bul+SkLqmTK7Pt/8XhVbCPTUaqXkb6JtJfzG3dIP8/qhKmmLVU
+         QqjXq8wY3qZ0PH6Gz6D4KC8+XH9fmR9q1DQGrngh9QwNOf8wtX5uaV3i6cFb9t9f7mSd
+         fSfH+KfCdAuiYXT6vOIqFuYoW6OCakPTV3opihmLR65yWyitTCgC6SmDpC3noREdHboM
+         sI/0F7+4AG2OXQ7v55fiSWE9rAhdgoPnEnrc7mTjkxgCHbnsn1WDCDps68WngU4Mb2dp
+         qPkw==
+X-Gm-Message-State: ACrzQf2sfzc/kzy5NuillQis+41vRkxgnNoelfkaUqW+ze+unn/+p2pH
+	5iZ4+t1+iOfj4Mw2DgDGPgWC1TbctPh1Q8gPysXF8vOW
+X-Google-Smtp-Source: AMsMyM76ejqKB4SG8btiyh9vkaW6X7U28SjY9G7NaRSfuxU8/49sBEmUMzFbnpuBHU7Vg8hGvr58Uqy2hJCmWlfEOYs=
+X-Received: by 2002:a9d:65c9:0:b0:66c:5124:909a with SMTP id
+ z9-20020a9d65c9000000b0066c5124909amr26671890oth.111.1668022305865; Wed, 09
+ Nov 2022 11:31:45 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: multipart/alternative; boundary="=-FTAJqS5SIUwkR741LSGd"
-X-TOI-EXPURGATEID: 150726::1668020442-E28B3E65-4BB668ED/0/0 CLEAN NORMAL
-X-TOI-MSGID: 91c5fade-ddd2-47fd-8d17-534adb2aeb60
+References: <20221107191537.45452-1-f_l_k@t-online.de> <CAMKF1soT7ND6M6i76d3jL1a7ycrW=eY+nwM9uRwTp5uya4HzFQ@mail.gmail.com>
+ <1725FD7EDA20D50E.7571@lists.openembedded.org> <0TG3LR.DDOLKVC0WOAP1@t-online.de>
+In-Reply-To: <0TG3LR.DDOLKVC0WOAP1@t-online.de>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 9 Nov 2022 11:31:19 -0800
+Message-ID: <CAMKF1so__R_y4X4kGBaEP0xC+eaPtKOz6socOS6j3Q0pvAnN2w@mail.gmail.com>
+Subject: Re: [oe] [meta-gnome][PATCHv2] rest: upgrade 0.8.1 -> 0.9.0
+To: Markus Volk <f_l_k@t-online.de>
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 09 Nov 2022 19:01:29 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99506
+ <openembedded-devel@lists.openembedded.org>; Wed, 09 Nov 2022 19:31:49 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99507
 
---=-FTAJqS5SIUwkR741LSGd
-Content-Type: text/plain; charset=us-ascii; format=flowed
+On Wed, Nov 9, 2022 at 11:01 AM Markus Volk <f_l_k@t-online.de> wrote:
+>
+> Building rest-0.7 is not a big problem, but gfbgraph still fails because =
+goa is built with soup-3.0. Also, the current goa code has completely remov=
+ed support for Facebook. Personally, I can live with this just fine, so I w=
+ould just drop the deprecated gfbgraph recipe.
+>
+> Does anyone make use of this?
+>
+> If so, I'll additionally add an older goa recipe that was built with Soup=
+-2.4 and still has the Facebook support.
 
-Building rest-0.7 is not a big problem, but gfbgraph still fails 
-because goa is built with soup-3.0. Also, the current goa code has 
-completely removed support for Facebook. Personally, I can live with 
-this just fine, so I would just drop the deprecated gfbgraph recipe.
+I would be fine to just add this recipe to the exclusion list if no one car=
+es.
 
-Does anyone make use of this?
-
-If so, I'll additionally add an older goa recipe that was built with 
-Soup-2.4 and still has the Facebook support.
-
-Am Mi, 9. Nov 2022 um 19:19:06 +0100 schrieb Markus Volk 
-<f_l_k@t-online.de>:
+>
+> Am Mi, 9. Nov 2022 um 19:19:06 +0100 schrieb Markus Volk <f_l_k@t-online.=
+de>:
+>
 > Hi Khem,
-> 
-> gfbgraph hasn't seen much activity in the last years. It still 
-> depends on soup-2.4, probably always will. Since i believe also 
-> libgovirt will need it too, the best aproach might be adding a 
-> aditional recipe for librest-0.7 ?
+>
+> gfbgraph hasn't seen much activity in the last years. It still depends on=
+ soup-2.4, probably always will. Since i believe also libgovirt will need i=
+t too, the best aproach might be adding a aditional recipe for librest-0.7 =
+?
 > I'll do some testing
-> 
-> Am Mi, 9. Nov 2022 um 09:26:09 -0800 schrieb Khem Raj 
-> <raj.khem@gmail.com>:
->> Thanks Markus for these fixes now that rest and gnome-online-accounts
->> is building, next one in line is gfbgraph see
->> 
->> <https://errors.yoctoproject.org/Errors/Details/675756/>
->> 
->> On Mon, Nov 7, 2022 at 11:16 AM Markus Volk <f_l_k@t-online.de 
->> <mailto:f_l_k@t-online.de>> wrote:
->>> 
->>>  Signed-off-by: Markus Volk <f_l_k@t-online.de 
->>> <mailto:f_l_k@t-online.de>>
->>>  ---
->>>   .../0001-Use-GUri-instead-of-SoupURI.patch    |  181 --
->>>   .../rest/files/0002-Port-to-libsoup3.patch    | 1696 
->>> -----------------
->>>   meta-gnome/recipes-gnome/rest/rest_0.8.1.bb   |   33 -
->>>   meta-gnome/recipes-gnome/rest/rest_0.9.0.bb   |   25 +
->>>   4 files changed, 25 insertions(+), 1910 deletions(-)
->>>   delete mode 100644 
->>> meta-gnome/recipes-gnome/rest/files/0001-Use-GUri-instead-of-SoupURI.patch
->>>   delete mode 100644 
->>> meta-gnome/recipes-gnome/rest/files/0002-Port-to-libsoup3.patch
->>>   delete mode 100644 meta-gnome/recipes-gnome/rest/rest_0.8.1.bb
->>>   create mode 100644 meta-gnome/recipes-gnome/rest/rest_0.9.0.bb
->>> 
->>>  diff --git 
->>> a/meta-gnome/recipes-gnome/rest/files/0001-Use-GUri-instead-of-SoupURI.patch 
->>> b/meta-gnome/recipes-gnome/rest/files/0001-Use-GUri-instead-of-SoupURI.patch
->>>  deleted file mode 100644
->>>  index 37ba0a042..000000000
->>>  --- 
->>> a/meta-gnome/recipes-gnome/rest/files/0001-Use-GUri-instead-of-SoupURI.patch
->>>  +++ /dev/null
->>>  @@ -1,181 +0,0 @@
->>>  -From d39fd6d5f4c0a63cc048b84b0f989cb83f31e5fe Mon Sep 17 00:00:00 
->>> 2001
->>>  -From: Carlos Garcia Campos <cgarcia@igalia.com 
->>> <mailto:cgarcia@igalia.com>>
->>>  -Date: Tue, 8 Jun 2021 10:57:06 +0200
->>>  -Subject: [PATCH 1/2] Use GUri instead of SoupURI
->>>  -
->>>  -Upstream-Status: Submitted 
->>> [<https://gitlab.gnome.org/GNOME/librest/-/merge_requests/6>]
->>>  ----
->>>  - configure.ac               |  2 +-
->>>  - rest-extras/flickr-proxy.c | 19 ++++++++++++++-----
->>>  - rest/oauth-proxy-call.c    | 19 ++++++++++++++-----
->>>  - rest/oauth2-proxy.c        | 22 +++++++++++-----------
->>>  - 4 files changed, 40 insertions(+), 22 deletions(-)
->>>  -
->>>  -diff --git a/configure.ac b/configure.ac
->>>  -index d15e592..d586e69 100644
->>>  ---- a/configure.ac
->>>  -+++ b/configure.ac
->>>  -@@ -40,7 +40,7 @@ AM_PROG_CC_C_O
->>>  - LT_PREREQ([2.2.6])
->>>  - LT_INIT([disable-static])
->>>  -
->>>  --PKG_CHECK_MODULES(GLIB, glib-2.0 >= 2.44)
->>>  -+PKG_CHECK_MODULES(GLIB, glib-2.0 >= 2.67.4)
->>>  - PKG_CHECK_MODULES(SOUP, libsoup-2.4 >= 2.42)
->>>  - PKG_CHECK_MODULES(XML, libxml-2.0)
->>>  - PKG_CHECK_MODULES(GTHREAD, gthread-2.0)
->>>  -diff --git a/rest-extras/flickr-proxy.c 
->>> b/rest-extras/flickr-proxy.c
->>>  -index 3342a4d..7726359 100644
->>>  ---- a/rest-extras/flickr-proxy.c
->>>  -+++ b/rest-extras/flickr-proxy.c
->>>  -@@ -304,13 +304,13 @@ flickr_proxy_build_login_url (FlickrProxy 
->>> *proxy,
->>>  -                               const char  *frob,
->>>  -                               const char  *perms)
->>>  - {
->>>  --  SoupURI *uri;
->>>  -+  GUri *uri;
->>>  -   GHashTable *params;
->>>  -   char *sig, *s;
->>>  -+  char *query;
->>>  -
->>>  -   g_return_val_if_fail (FLICKR_IS_PROXY (proxy), NULL);
->>>  -
->>>  --  uri = soup_uri_new ("<http://flickr.com/services/auth/>");
->>>  -   params = g_hash_table_new (g_str_hash, g_str_equal);
->>>  -
->>>  -   g_hash_table_insert (params, "api_key", proxy->priv->api_key);
->>>  -@@ -321,14 +321,23 @@ flickr_proxy_build_login_url (FlickrProxy 
->>> *proxy,
->>>  -
->>>  -   sig = flickr_proxy_sign (proxy, params);
->>>  -   g_hash_table_insert (params, "api_sig", sig);
->>>  -+  query = soup_form_encode_hash (params);
->>>  -
->>>  --  soup_uri_set_query_from_form (uri, params);
->>>  -+  uri = g_uri_build (G_URI_FLAGS_ENCODED,
->>>  -+                     "http",
->>>  -+                     NULL,
->>>  -+                     "flickr.com",
->>>  -+                     -1,
->>>  -+                     "services/auth/",
->>>  -+                     query,
->>>  -+                     NULL);
->>>  -
->>>  --  s = soup_uri_to_string (uri, FALSE);
->>>  -+  s = g_uri_to_string (uri);
->>>  -
->>>  -+  g_free (query);
->>>  -   g_free (sig);
->>>  -   g_hash_table_destroy (params);
->>>  --  soup_uri_free (uri);
->>>  -+  g_uri_unref (uri);
->>>  -
->>>  -   return s;
->>>  - }
->>>  -diff --git a/rest/oauth-proxy-call.c b/rest/oauth-proxy-call.c
->>>  -index c90c69d..e238c3c 100644
->>>  ---- a/rest/oauth-proxy-call.c
->>>  -+++ b/rest/oauth-proxy-call.c
->>>  -@@ -30,7 +30,7 @@
->>>  -
->>>  - G_DEFINE_TYPE (OAuthProxyCall, oauth_proxy_call, 
->>> REST_TYPE_PROXY_CALL)
->>>  -
->>>  --#define OAUTH_ENCODE_STRING(x_) (x_ ? soup_uri_encode( (x_), 
->>> "!$&'()*+,;=@") : g_strdup (""))
->>>  -+#define OAUTH_ENCODE_STRING(x_) (x_ ? g_uri_escape_string( (x_), 
->>> NULL, TRUE) : g_strdup (""))
->>>  -
->>>  - static char *
->>>  - sign_plaintext (OAuthProxyPrivate *priv)
->>>  -@@ -136,15 +136,24 @@ sign_hmac (OAuthProxy *proxy, RestProxyCall 
->>> *call, GHashTable *oauth_params)
->>>  -   if (priv->oauth_echo) {
->>>  -     g_string_append_uri_escaped (text, priv->service_url, NULL, 
->>> FALSE);
->>>  -   } else if (priv->signature_host != NULL) {
->>>  --    SoupURI *url = soup_uri_new (url_str);
->>>  -+    GUri *url = g_uri_parse (url_str, G_URI_FLAGS_ENCODED, NULL);
->>>  -+    GUri *new_url;
->>>  -     gchar *signing_url;
->>>  -
->>>  --    soup_uri_set_host (url, priv->signature_host);
->>>  --    signing_url = soup_uri_to_string (url, FALSE);
->>>  -+    new_url = g_uri_build (g_uri_get_flags (url),
->>>  -+                           g_uri_get_scheme (url),
->>>  -+                           g_uri_get_userinfo (url),
->>>  -+                           priv->signature_host,
->>>  -+                           g_uri_get_port (url),
->>>  -+                           g_uri_get_path (url),
->>>  -+                           g_uri_get_query (url),
->>>  -+                           g_uri_get_fragment (url));
->>>  -+    signing_url = g_uri_to_string (new_url);
->>>  -
->>>  -     g_string_append_uri_escaped (text, signing_url, NULL, FALSE);
->>>  -
->>>  --    soup_uri_free (url);
->>>  -+    g_uri_unref (new_url);
->>>  -+    g_uri_unref (url);
->>>  -     g_free (signing_url);
->>>  -   } else {
->>>  -     g_string_append_uri_escaped (text, url_str, NULL, FALSE);
->>>  -diff --git a/rest/oauth2-proxy.c b/rest/oauth2-proxy.c
->>>  -index 24e5da0..3382f8b 100644
->>>  ---- a/rest/oauth2-proxy.c
->>>  -+++ b/rest/oauth2-proxy.c
->>>  -@@ -37,8 +37,6 @@ oauth2_proxy_error_quark (void)
->>>  -     return g_quark_from_static_string ("rest-oauth2-proxy");
->>>  - }
->>>  -
->>>  --#define EXTRA_CHARS_ENCODE "!$&'()*+,;=@"
->>>  --
->>>  - enum {
->>>  -   PROP_0,
->>>  -   PROP_CLIENT_ID,
->>>  -@@ -242,8 +240,8 @@ append_query_param (gpointer key, gpointer 
->>> value, gpointer user_data)
->>>  -     char *encoded_val, *encoded_key;
->>>  -     char *param;
->>>  -
->>>  --    encoded_val = soup_uri_encode (value, EXTRA_CHARS_ENCODE);
->>>  --    encoded_key = soup_uri_encode (key, EXTRA_CHARS_ENCODE);
->>>  -+    encoded_val = g_uri_escape_string (value, NULL, TRUE);
->>>  -+    encoded_key = g_uri_escape_string (key, NULL, TRUE);
->>>  -
->>>  -     param = g_strdup_printf ("%s=%s", encoded_key, encoded_val);
->>>  -     g_free (encoded_key);
->>>  -@@ -295,8 +293,8 @@ oauth2_proxy_build_login_url_full 
->>> (OAuth2Proxy *proxy,
->>>  -         g_hash_table_foreach (extra_params, append_query_param, 
->>> params);
->>>  -     }
->>>  -
->>>  --    encoded_uri = soup_uri_encode (redirect_uri, 
->>> EXTRA_CHARS_ENCODE);
->>>  --    encoded_id = soup_uri_encode (proxy->priv->client_id, 
->>> EXTRA_CHARS_ENCODE);
->>>  -+    encoded_uri = g_uri_escape_string (redirect_uri, NULL, TRUE);
->>>  -+    encoded_id = g_uri_escape_string (proxy->priv->client_id, 
->>> NULL, TRUE);
->>>  -
->>>  -     url = g_strdup_printf 
->>> ("%s?client_id=%s&redirect_uri=%s&type=user_agent",
->>>  -                            proxy->priv->auth_endpoint, 
->>> encoded_id,
->>>  -@@ -378,20 +376,22 @@ oauth2_proxy_extract_access_token (const 
->>> char *url)
->>>  - {
->>>  -   GHashTable *params;
->>>  -   char *token = NULL;
->>>  --  SoupURI *soupuri = soup_uri_new (url);
->>>  -+  const char *fragment;
->>>  -+  GUri *uri = g_uri_parse (url, G_URI_FLAGS_ENCODED, NULL);
->>>  -
->>>  --  if (soupuri->fragment != NULL) {
->>>  --    params = soup_form_decode (soupuri->fragment);
->>>  -+  fragment = g_uri_get_fragment (uri);
->>>  -+  if (fragment != NULL) {
->>>  -+    params = soup_form_decode (fragment);
->>>  -
->>>  -     if (params) {
->>>  -       char *encoded = g_hash_table_lookup (params, 
->>> "access_token");
->>>  -       if (encoded)
->>>  --        token = soup_uri_decode (encoded);
->>>  -+        token = g_uri_unescape_string (encoded, NULL);
->>>  -
->>>  -       g_hash_table_destroy (params);
->>>  -     }
->>>  -   }
->>>  --  soup_uri_free (soupuri);
->>>  -+  g_uri_unref (uri);
->>>  -
->>>  -   return token;
->>>  - }
->>>  ---
->>>  -2.33.1
->>>  -
->>>  diff --git 
->>> a/meta-gnome/recipes-gnome/rest/files/0002-Port-to-libsoup3.patch 
->>> b/meta-gnome/recipes-gnome/rest/files/0002-Port-to-libsoup3.patch
->>>  deleted file mode 100644
->>>  index eed522f77..000000000
->>>  --- 
->>> a/meta-gnome/recipes-gnome/rest/files/0002-Port-to-libsoup3.patch
->>>  +++ /dev/null
->>>  @@ -1,1696 +0,0 @@
->>>  -From 3dc630ae5b9dc6cda1ba318de2cd654aaba7b4a2 Mon Sep 17 00:00:00 
->>> 2001
->>>  -From: Carlos Garcia Campos <cgarcia@igalia.com 
->>> <mailto:cgarcia@igalia.com>>
->>>  -Date: Tue, 8 Jun 2021 17:44:04 +0200
->>>  -Subject: [PATCH 2/2] Port to libsoup3
->>>  -
->>>  -Upstream-Status: Submitted 
->>> [<https://gitlab.gnome.org/GNOME/librest/-/merge_requests/6>]
->>>  ----
->>>  - configure.ac                |  39 ++++-
->>>  - rest-extras.pc.in           |   2 +-
->>>  - rest-extras/youtube-proxy.c | 110 +++++++++++---
->>>  - rest.pc.in                  |   2 +-
->>>  - rest/rest-private.h         |  22 ++-
->>>  - rest/rest-proxy-auth.c      |  16 ++
->>>  - rest/rest-proxy-call.c      | 296 
->>> +++++++++++++++++++++++++++++-------
->>>  - rest/rest-proxy.c           | 209 ++++++++++++++++++++++---
->>>  - tests/custom-serialize.c    |  18 +++
->>>  - tests/proxy-continuous.c    |  37 ++++-
->>>  - tests/proxy.c               |  63 +++++++-
->>>  - tests/threaded.c            |  17 +++
->>>  - 12 files changed, 719 insertions(+), 112 deletions(-)
->>>  -
->>>  -diff --git a/configure.ac b/configure.ac
->>>  -index d586e69..75c02fe 100644
->>>  ---- a/configure.ac
->>>  -+++ b/configure.ac
->>>  -@@ -20,12 +20,6 @@ AM_INIT_AUTOMAKE([1.11 foreign 
->>> -Wno-portability no-define dist-xz])
->>>  -
->>>  - AM_SILENT_RULES([yes])
->>>  -
->>>  --API_MAJOR=1
->>>  --API_MINOR=0
->>>  --AC_SUBST([API_VERSION],[$API_MAJOR.$API_MINOR])
->>>  --AC_SUBST([API_VERSION_AM],[$API_MAJOR\_$API_MINOR])
->>>  --AC_DEFINE_UNQUOTED(API_VERSION, [$API_VERSION], [API version])
->>>  --
->>>  - AC_CANONICAL_HOST
->>>  -
->>>  - AC_PROG_CC
->>>  -@@ -41,7 +35,6 @@ LT_PREREQ([2.2.6])
->>>  - LT_INIT([disable-static])
->>>  -
->>>  - PKG_CHECK_MODULES(GLIB, glib-2.0 >= 2.67.4)
->>>  --PKG_CHECK_MODULES(SOUP, libsoup-2.4 >= 2.42)
->>>  - PKG_CHECK_MODULES(XML, libxml-2.0)
->>>  - PKG_CHECK_MODULES(GTHREAD, gthread-2.0)
->>>  -
->>>  -@@ -58,6 +51,37 @@ AC_PATH_PROG([GLIB_MKENUMS],[glib-mkenums])
->>>  - localedir=${datadir}/locale
->>>  - AC_SUBST(localedir)
->>>  -
->>>  -+AC_MSG_CHECKING([for libsoup version to use])
->>>  -+AC_ARG_WITH(soup,
->>>  -+            [AC_HELP_STRING([--soup=2|3],
->>>  -+                            [version of libsoup library to use 
->>> (default: 2)])],
->>>  -+            [case "$withval" in
->>>  -+                2|3) ;;
->>>  -+                *) AC_MSG_ERROR([invalid argument "$withval" for 
->>> --with-soup]) ;;
->>>  -+             esac],
->>>  -+            [with_soup=2])
->>>  -+AC_MSG_RESULT([$with_soup])
->>>  -+
->>>  -+API_MAJOR=1
->>>  -+
->>>  -+if test "$with_soup" = "2"; then
->>>  -+    PKG_CHECK_MODULES(SOUP, libsoup-2.4 >= 2.42)
->>>  -+    SOUP_API_VERSION=2.4
->>>  -+    API_MINOR=0
->>>  -+    AC_DEFINE([WITH_SOUP_2],[1],[Define if libsoup version used 
->>> is 2])
->>>  -+else
->>>  -+    PKG_CHECK_MODULES(SOUP, libsoup-3.0 >= 2.99.8)
->>>  -+    SOUP_API_VERSION=3.0
->>>  -+    API_MINOR=1
->>>  -+fi
->>>  -+
->>>  -+AM_CONDITIONAL([WITH_SOUP_2],[test "$with_soup" = "2"])
->>>  -+AC_SUBST(SOUP_API_VERSION)
->>>  -+
->>>  -+AC_SUBST([API_VERSION],[$API_MAJOR.$API_MINOR])
->>>  -+AC_SUBST([API_VERSION_AM],[$API_MAJOR\_$API_MINOR])
->>>  -+AC_DEFINE_UNQUOTED(API_VERSION, [$API_VERSION], [API version])
->>>  -+
->>>  - dnl === Coverage report 
->>> =======================================================
->>>  - AC_PATH_PROG([GCOV], [lcov], [enable_gcov=no])
->>>  -
->>>  -@@ -130,6 +154,7 @@ echo "                 LibRest $VERSION"
->>>  - echo "                 ================"
->>>  - echo ""
->>>  - echo "                   prefix:   ${prefix}"
->>>  -+echo "          libsoup version:   ${with_soup}"
->>>  - echo ""
->>>  - echo "            Documentation:   ${enable_gtk_doc}"
->>>  - echo "       Introspection data:   ${enable_introspection}"
->>>  -diff --git a/rest-extras.pc.in b/rest-extras.pc.in
->>>  -index 39f21bf..3723d6d 100644
->>>  ---- a/rest-extras.pc.in
->>>  -+++ b/rest-extras.pc.in
->>>  -@@ -9,4 +9,4 @@ Description: RESTful web api query library
->>>  - Version: @VERSION@
->>>  - Libs: -L${libdir} -lrest-extras-${apiversion}
->>>  - Cflags: -I${includedir}/rest-${apiversion}
->>>  --Requires: glib-2.0 libsoup-2.4 libxml-2.0
->>>  -+Requires: glib-2.0 libsoup-@SOUP_API_VERSION@ libxml-2.0
->>>  -diff --git a/rest-extras/youtube-proxy.c 
->>> b/rest-extras/youtube-proxy.c
->>>  -index be0cf08..cd598f4 100644
->>>  ---- a/rest-extras/youtube-proxy.c
->>>  -+++ b/rest-extras/youtube-proxy.c
->>>  -@@ -246,6 +246,9 @@ typedef struct {
->>>  -   GObject *weak_object;
->>>  -   gpointer user_data;
->>>  -   gsize uploaded;
->>>  -+#ifndef WITH_SOUP_2
->>>  -+  GCancellable *cancellable;
->>>  -+#endif
->>>  - } YoutubeProxyUploadClosure;
->>>  -
->>>  - static void
->>>  -@@ -255,7 +258,11 @@ _upload_async_weak_notify_cb (gpointer *data,
->>>  -   YoutubeProxyUploadClosure *closure =
->>>  -     (YoutubeProxyUploadClosure *) data;
->>>  -
->>>  -+#ifdef WITH_SOUP_2
->>>  -   _rest_proxy_cancel_message (REST_PROXY (closure->proxy), 
->>> closure->message);
->>>  -+#else
->>>  -+  g_cancellable_cancel (closure->cancellable);
->>>  -+#endif
->>>  - }
->>>  -
->>>  - static void
->>>  -@@ -267,6 +274,9 @@ _upload_async_closure_free 
->>> (YoutubeProxyUploadClosure *closure)
->>>  -                          closure);
->>>  -
->>>  -   g_object_unref (closure->proxy);
->>>  -+#ifndef WITH_SOUP_2
->>>  -+  g_object_unref (closure->cancellable);
->>>  -+#endif
->>>  -
->>>  -   g_slice_free (YoutubeProxyUploadClosure, closure);
->>>  - }
->>>  -@@ -286,6 +296,9 @@ _upload_async_closure_new (YoutubeProxy *self,
->>>  -   closure->message = message;
->>>  -   closure->weak_object = weak_object;
->>>  -   closure->user_data = user_data;
->>>  -+#ifndef WITH_SOUP_2
->>>  -+  closure->cancellable = g_cancellable_new ();
->>>  -+#endif
->>>  -
->>>  -   if (weak_object != NULL)
->>>  -     g_object_weak_ref (weak_object,
->>>  -@@ -295,41 +308,67 @@ _upload_async_closure_new (YoutubeProxy 
->>> *self,
->>>  - }
->>>  -
->>>  - static void
->>>  --_upload_completed_cb (SoupSession *session,
->>>  --                      SoupMessage *message,
->>>  -+_upload_completed_cb (SoupMessage *message,
->>>  -+                      GBytes      *payload,
->>>  -+                      GError      *error,
->>>  -                       gpointer     user_data)
->>>  - {
->>>  -   YoutubeProxyUploadClosure *closure =
->>>  -     (YoutubeProxyUploadClosure *) user_data;
->>>  --  GError *error = NULL;
->>>  -+  gsize length;
->>>  -+  gconstpointer data;
->>>  -+  guint status_code;
->>>  -+  const char *reason_phrase;
->>>  -
->>>  -   if (closure->callback == NULL)
->>>  -     return;
->>>  -
->>>  --  if (message->status_code < 200 || message->status_code >= 300)
->>>  --    error = g_error_new_literal (REST_PROXY_ERROR,
->>>  --                                 message->status_code,
->>>  --                                 message->reason_phrase);
->>>  --
->>>  --  closure->callback (closure->proxy, 
->>> message->response_body->data,
->>>  --                     message->request_body->length,
->>>  --                     message->request_body->length,
->>>  -+#ifdef WITH_SOUP_2
->>>  -+  status_code = message->status_code;
->>>  -+  reason_phrase = message->reason_phrase;
->>>  -+#else
->>>  -+  status_code = soup_message_get_status (message);
->>>  -+  reason_phrase = soup_message_get_reason_phrase (message);
->>>  -+#endif
->>>  -+
->>>  -+  if (status_code < 200 || status_code >= 300)
->>>  -+    {
->>>  -+      g_clear_error (&error);
->>>  -+      error = g_error_new_literal (REST_PROXY_ERROR,
->>>  -+                                   status_code,
->>>  -+                                   reason_phrase);
->>>  -+    }
->>>  -+
->>>  -+  data = g_bytes_get_data (payload, &length);
->>>  -+  closure->callback (closure->proxy, data, length, length,
->>>  -                      error, closure->weak_object, 
->>> closure->user_data);
->>>  -+  g_bytes_unref (payload);
->>>  -
->>>  -   _upload_async_closure_free (closure);
->>>  - }
->>>  -
->>>  - static void
->>>  - _message_wrote_data_cb (SoupMessage               *msg,
->>>  -+#ifdef WITH_SOUP_2
->>>  -                         SoupBuffer                *chunk,
->>>  -+#else
->>>  -+                        gsize                      chunk_size,
->>>  -+#endif
->>>  -                         YoutubeProxyUploadClosure *closure)
->>>  - {
->>>  --  closure->uploaded = closure->uploaded + chunk->length;
->>>  -+#ifdef WITH_SOUP_2
->>>  -+  gsize chunk_size = chunk->length;
->>>  -+  goffset content_length = msg->request_body->length;
->>>  -+#else
->>>  -+  goffset content_length = 
->>> soup_message_headers_get_content_length 
->>> (soup_message_get_request_headers (msg));
->>>  -+#endif
->>>  -+
->>>  -+  closure->uploaded = closure->uploaded + chunk_size;
->>>  -
->>>  --  if (closure->uploaded < msg->request_body->length)
->>>  -+  if (closure->uploaded < content_length)
->>>  -     closure->callback (closure->proxy,
->>>  -                        NULL,
->>>  --                       msg->request_body->length,
->>>  -+                       content_length,
->>>  -                        closure->uploaded,
->>>  -                        NULL,
->>>  -                        closure->weak_object,
->>>  -@@ -364,7 +403,12 @@ youtube_proxy_upload_async (YoutubeProxy     
->>>          *self,
->>>  -   SoupMultipart *mp;
->>>  -   SoupMessage *message;
->>>  -   SoupMessageHeaders *part_headers;
->>>  -+  SoupMessageHeaders *request_headers;
->>>  -+#ifdef WITH_SOUP_2
->>>  -   SoupBuffer *sb;
->>>  -+#else
->>>  -+  GBytes *sb;
->>>  -+#endif
->>>  -   gchar *content_type;
->>>  -   gchar *atom_xml;
->>>  -   GMappedFile *map;
->>>  -@@ -380,10 +424,17 @@ youtube_proxy_upload_async (YoutubeProxy    
->>>           *self,
->>>  -
->>>  -   atom_xml = _construct_upload_atom_xml (fields, incomplete);
->>>  -
->>>  -+#ifdef WITH_SOUP_2
->>>  -   sb = soup_buffer_new_with_owner (atom_xml,
->>>  -                                    strlen(atom_xml),
->>>  -                                    atom_xml,
->>>  -                                    (GDestroyNotify) g_free);
->>>  -+#else
->>>  -+  sb = g_bytes_new_with_free_func (atom_xml,
->>>  -+                                   strlen (atom_xml),
->>>  -+                                   (GDestroyNotify) g_free,
->>>  -+                                   atom_xml);
->>>  -+#endif
->>>  -
->>>  -   part_headers = soup_message_headers_new 
->>> (SOUP_MESSAGE_HEADERS_MULTIPART);
->>>  -
->>>  -@@ -393,7 +444,11 @@ youtube_proxy_upload_async (YoutubeProxy     
->>>          *self,
->>>  -
->>>  -   soup_multipart_append_part (mp, part_headers, sb);
->>>  -
->>>  -+#ifdef WITH_SOUP_2
->>>  -   soup_buffer_free (sb);
->>>  -+#else
->>>  -+  g_bytes_unref (sb);
->>>  -+#endif
->>>  -
->>>  -   content_type = g_content_type_guess (
->>>  -       filename,
->>>  -@@ -401,24 +456,37 @@ youtube_proxy_upload_async (YoutubeProxy    
->>>           *self,
->>>  -       g_mapped_file_get_length (map),
->>>  -       NULL);
->>>  -
->>>  -+#ifdef WITH_SOUP_2
->>>  -   sb = soup_buffer_new_with_owner (g_mapped_file_get_contents 
->>> (map),
->>>  -                                    g_mapped_file_get_length 
->>> (map),
->>>  -                                    map,
->>>  -                                    (GDestroyNotify) 
->>> g_mapped_file_unref);
->>>  -+#else
->>>  -+  sb = g_bytes_new_with_free_func (g_mapped_file_get_contents 
->>> (map),
->>>  -+                                   g_mapped_file_get_length 
->>> (map),
->>>  -+                                   (GDestroyNotify) 
->>> g_mapped_file_unref,
->>>  -+                                   map);
->>>  -+#endif
->>>  -
->>>  -   soup_message_headers_replace (part_headers, "Content-Type", 
->>> content_type);
->>>  -
->>>  -   soup_multipart_append_part (mp, part_headers, sb);
->>>  -
->>>  -+#ifdef WITH_SOUP_2
->>>  -   soup_buffer_free (sb);
->>>  --
->>>  -   soup_message_headers_free (part_headers);
->>>  --
->>>  -   message = soup_form_request_new_from_multipart (UPLOAD_URL, 
->>> mp);
->>>  -+  request_headers = message->request_headers;
->>>  -+#else
->>>  -+  g_bytes_unref (sb);
->>>  -+  soup_message_headers_unref (part_headers);
->>>  -+  message = soup_message_new_from_multipart (UPLOAD_URL, mp);
->>>  -+  request_headers = soup_message_get_request_headers (message);
->>>  -+#endif
->>>  -
->>>  -   soup_multipart_free (mp);
->>>  -
->>>  --  _set_upload_headers (self, message->request_headers, filename);
->>>  -+  _set_upload_headers (self, request_headers, filename);
->>>  -
->>>  -   closure = _upload_async_closure_new (self, callback, message, 
->>> weak_object,
->>>  -                                        user_data);
->>>  -@@ -429,7 +497,13 @@ youtube_proxy_upload_async (YoutubeProxy     
->>>          *self,
->>>  -                     closure);
->>>  -
->>>  -
->>>  --  _rest_proxy_queue_message (REST_PROXY (self), message, 
->>> _upload_completed_cb,
->>>  -+  _rest_proxy_queue_message (REST_PROXY (self), message,
->>>  -+#ifdef WITH_SOUP_2
->>>  -+                             NULL,
->>>  -+#else
->>>  -+                             closure->cancellable,
->>>  -+#endif
->>>  -+                             _upload_completed_cb,
->>>  -                              closure);
->>>  -
->>>  -   return TRUE;
->>>  -diff --git a/rest.pc.in b/rest.pc.in
->>>  -index 94c384b..e6bae3e 100644
->>>  ---- a/rest.pc.in
->>>  -+++ b/rest.pc.in
->>>  -@@ -9,4 +9,4 @@ Description: RESTful web api query library
->>>  - Version: @VERSION@
->>>  - Libs: -L${libdir} -lrest-${apiversion}
->>>  - Cflags: -I${includedir}/rest-${apiversion}
->>>  --Requires: glib-2.0 libsoup-2.4 libxml-2.0
->>>  -+Requires: glib-2.0 libsoup-@SOUP_API_VERSION@ libxml-2.0
->>>  -diff --git a/rest/rest-private.h b/rest/rest-private.h
->>>  -index 9e91fa0..6e71322 100644
->>>  ---- a/rest/rest-private.h
->>>  -+++ b/rest/rest-private.h
->>>  -@@ -31,6 +31,11 @@
->>>  -
->>>  - G_BEGIN_DECLS
->>>  -
->>>  -+typedef void (*RestMessageFinishedCallback) (SoupMessage *msg,
->>>  -+                                             GBytes      *body,
->>>  -+                                             GError      *error,
->>>  -+                                             gpointer     
->>> user_data);
->>>  -+
->>>  - typedef enum
->>>  - {
->>>  -   REST_DEBUG_XML_PARSER = 1 << 0,
->>>  -@@ -53,12 +58,23 @@ gboolean _rest_proxy_get_binding_required 
->>> (RestProxy *proxy);
->>>  - const gchar *_rest_proxy_get_bound_url (RestProxy *proxy);
->>>  - void _rest_proxy_queue_message (RestProxy   *proxy,
->>>  -                                 SoupMessage *message,
->>>  --                                SoupSessionCallback callback,
->>>  -+                                GCancellable *cancellable,
->>>  -+                                RestMessageFinishedCallback 
->>> callback,
->>>  -                                 gpointer user_data);
->>>  - void _rest_proxy_cancel_message (RestProxy   *proxy,
->>>  -                                  SoupMessage *message);
->>>  --guint _rest_proxy_send_message (RestProxy   *proxy,
->>>  --                                SoupMessage *message);
->>>  -+GBytes *_rest_proxy_send_message (RestProxy    *proxy,
->>>  -+                                  SoupMessage  *message,
->>>  -+                                  GCancellable *cancellable,
->>>  -+                                  GError      **error);
->>>  -+void _rest_proxy_send_message_async (RestProxy          *proxy,
->>>  -+                                     SoupMessage        *message,
->>>  -+                                     GCancellable       
->>> *cancellable,
->>>  -+                                     GAsyncReadyCallback 
->>> callback,
->>>  -+                                     gpointer            
->>> user_data);
->>>  -+GInputStream *_rest_proxy_send_message_finish (RestProxy    
->>> *proxy,
->>>  -+                                               GAsyncResult 
->>> *result,
->>>  -+                                               GError      
->>> **error);
->>>  -
->>>  - RestXmlNode *_rest_xml_node_new (void);
->>>  - void         _rest_xml_node_reverse_children_siblings 
->>> (RestXmlNode *node);
->>>  -diff --git a/rest/rest-proxy-auth.c b/rest/rest-proxy-auth.c
->>>  -index b96e443..0b2ec9f 100644
->>>  ---- a/rest/rest-proxy-auth.c
->>>  -+++ b/rest/rest-proxy-auth.c
->>>  -@@ -29,7 +29,9 @@
->>>  - struct _RestProxyAuthPrivate {
->>>  -   /* used to hold state during async authentication */
->>>  -   RestProxy *proxy;
->>>  -+#ifdef WITH_SOUP_2
->>>  -   SoupSession *session;
->>>  -+#endif
->>>  -   SoupMessage *message;
->>>  -   SoupAuth *auth;
->>>  -   gboolean paused;
->>>  -@@ -43,7 +45,9 @@ rest_proxy_auth_dispose (GObject *object)
->>>  -   RestProxyAuthPrivate *priv = ((RestProxyAuth*)object)->priv;
->>>  -
->>>  -   g_clear_object (&priv->proxy);
->>>  -+#ifdef WITH_SOUP_2
->>>  -   g_clear_object (&priv->session);
->>>  -+#endif
->>>  -   g_clear_object (&priv->message);
->>>  -   g_clear_object (&priv->auth);
->>>  -
->>>  -@@ -73,13 +77,17 @@ rest_proxy_auth_new (RestProxy *proxy,
->>>  -   RestProxyAuth *rest_auth;
->>>  -
->>>  -   g_return_val_if_fail (REST_IS_PROXY (proxy), NULL);
->>>  -+#ifdef WITH_SOUP_2
->>>  -   g_return_val_if_fail (SOUP_IS_SESSION (session), NULL);
->>>  -+#endif
->>>  -   g_return_val_if_fail (SOUP_IS_MESSAGE (message), NULL);
->>>  -   g_return_val_if_fail (SOUP_IS_AUTH (soup_auth), NULL);
->>>  -
->>>  -   rest_auth = REST_PROXY_AUTH (g_object_new 
->>> (REST_TYPE_PROXY_AUTH, NULL));
->>>  -   rest_auth->priv->proxy = g_object_ref(proxy);
->>>  -+#ifdef WITH_SOUP_2
->>>  -   rest_auth->priv->session = g_object_ref(session);
->>>  -+#endif
->>>  -   rest_auth->priv->message = g_object_ref(message);
->>>  -   rest_auth->priv->auth = g_object_ref(soup_auth);
->>>  -
->>>  -@@ -104,7 +112,9 @@ rest_proxy_auth_pause (RestProxyAuth *auth)
->>>  -       return;
->>>  -
->>>  -   auth->priv->paused = TRUE;
->>>  -+#ifdef WITH_SOUP_2
->>>  -   soup_session_pause_message (auth->priv->session, 
->>> auth->priv->message);
->>>  -+#endif
->>>  - }
->>>  -
->>>  - /**
->>>  -@@ -128,7 +138,9 @@ rest_proxy_auth_unpause (RestProxyAuth *auth)
->>>  -   soup_auth_authenticate (auth->priv->auth, username, password);
->>>  -   g_free (username);
->>>  -   g_free (password);
->>>  -+#ifdef WITH_SOUP_2
->>>  -   soup_session_unpause_message (auth->priv->session, 
->>> auth->priv->message);
->>>  -+#endif
->>>  -   auth->priv->paused = FALSE;
->>>  - }
->>>  -
->>>  -@@ -146,7 +158,11 @@ rest_proxy_auth_cancel (RestProxyAuth *auth)
->>>  - {
->>>  -   g_return_if_fail (REST_IS_PROXY_AUTH (auth));
->>>  -
->>>  -+#ifdef WITH_SOUP_2
->>>  -   soup_session_cancel_message (auth->priv->session, 
->>> auth->priv->message, SOUP_STATUS_CANCELLED);
->>>  -+#else
->>>  -+  soup_auth_cancel (auth->priv->auth);
->>>  -+#endif
->>>  - }
->>>  -
->>>  - G_GNUC_INTERNAL gboolean rest_proxy_auth_is_paused 
->>> (RestProxyAuth *auth)
->>>  -diff --git a/rest/rest-proxy-call.c b/rest/rest-proxy-call.c
->>>  -index 2ab722f..62b00da 100644
->>>  ---- a/rest/rest-proxy-call.c
->>>  -+++ b/rest/rest-proxy-call.c
->>>  -@@ -20,12 +20,14 @@
->>>  -  *
->>>  -  */
->>>  -
->>>  -+#include <config.h>
->>>  - #include <rest/rest-proxy.h>
->>>  - #include <rest/rest-proxy-call.h>
->>>  - #include <rest/rest-params.h>
->>>  - #include <libsoup/soup.h>
->>>  -
->>>  - #include "rest-private.h"
->>>  -+#include "rest-proxy-auth-private.h"
->>>  - #include "rest-proxy-call-private.h"
->>>  -
->>>  -
->>>  -@@ -38,12 +40,15 @@ struct _RestProxyCallAsyncClosure {
->>>  - };
->>>  - typedef struct _RestProxyCallAsyncClosure 
->>> RestProxyCallAsyncClosure;
->>>  -
->>>  -+#define READ_BUFFER_SIZE 8192
->>>  -+
->>>  - struct _RestProxyCallContinuousClosure {
->>>  -   RestProxyCall *call;
->>>  -   RestProxyCallContinuousCallback callback;
->>>  -   GObject *weak_object;
->>>  -   gpointer userdata;
->>>  -   SoupMessage *message;
->>>  -+  guchar buffer[READ_BUFFER_SIZE];
->>>  - };
->>>  - typedef struct _RestProxyCallContinuousClosure 
->>> RestProxyCallContinuousClosure;
->>>  -
->>>  -@@ -70,8 +75,7 @@ struct _RestProxyCallPrivate {
->>>  -   gchar *url;
->>>  -
->>>  -   GHashTable *response_headers;
->>>  --  goffset length;
->>>  --  gchar *payload;
->>>  -+  GBytes *payload;
->>>  -   guint status_code;
->>>  -   gchar *status_message;
->>>  -
->>>  -@@ -160,7 +164,7 @@ rest_proxy_call_finalize (GObject *object)
->>>  -   g_free (priv->method);
->>>  -   g_free (priv->function);
->>>  -
->>>  --  g_free (priv->payload);
->>>  -+  g_clear_pointer (&priv->payload, g_bytes_unref);
->>>  -   g_free (priv->status_message);
->>>  -
->>>  -   g_free (priv->url);
->>>  -@@ -546,14 +550,23 @@ _populate_headers_hash_table (const gchar 
->>> *name,
->>>  -   g_hash_table_insert (headers, g_strdup (name), g_strdup 
->>> (value));
->>>  - }
->>>  -
->>>  -+#ifdef WITH_SOUP_2
->>>  - /* I apologise for this macro, but it saves typing ;-) */
->>>  - #define error_helper(x) g_set_error_literal(error, 
->>> REST_PROXY_ERROR, x, message->reason_phrase)
->>>  -+#endif
->>>  - static gboolean
->>>  - _handle_error_from_message (SoupMessage *message, GError **error)
->>>  - {
->>>  --  if (message->status_code < 100)
->>>  -+  guint status_code;
->>>  -+  const char *reason_phrase;
->>>  -+
->>>  -+#ifdef WITH_SOUP_2
->>>  -+  status_code = message->status_code;
->>>  -+
->>>  -+  if (status_code < 100)
->>>  -   {
->>>  --    switch (message->status_code)
->>>  -+    g_clear_error (error);
->>>  -+    switch (status_code)
->>>  -     {
->>>  -       case SOUP_STATUS_CANCELLED:
->>>  -         error_helper (REST_PROXY_ERROR_CANCELLED);
->>>  -@@ -580,61 +593,84 @@ _handle_error_from_message (SoupMessage 
->>> *message, GError **error)
->>>  -     }
->>>  -     return FALSE;
->>>  -   }
->>>  -+  reason_phrase = message->reason_phrase;
->>>  -+#else
->>>  -+  status_code = soup_message_get_status (message);
->>>  -+  reason_phrase = soup_message_get_reason_phrase (message);
->>>  -+#endif
->>>  -
->>>  --  if (message->status_code >= 200 && message->status_code < 300)
->>>  -+  if (status_code >= 200 && status_code < 300)
->>>  -   {
->>>  -     return TRUE;
->>>  -   }
->>>  -
->>>  -+  if (*error != NULL)
->>>  -+    return FALSE;
->>>  -+
->>>  -   /* If we are here we must be in some kind of HTTP error, lets 
->>> try */
->>>  -   g_set_error_literal (error,
->>>  -                        REST_PROXY_ERROR,
->>>  --                       message->status_code,
->>>  --                       message->reason_phrase);
->>>  -+                       status_code,
->>>  -+                       reason_phrase);
->>>  -   return FALSE;
->>>  - }
->>>  -
->>>  - static gboolean
->>>  --finish_call (RestProxyCall *call, SoupMessage *message, GError 
->>> **error)
->>>  -+finish_call (RestProxyCall *call, SoupMessage *message, GBytes 
->>> *payload, GError **error)
->>>  - {
->>>  -   RestProxyCallPrivate *priv = GET_PRIVATE (call);
->>>  -+  SoupMessageHeaders *response_headers;
->>>  -
->>>  -   g_assert (call);
->>>  -   g_assert (message);
->>>  -+  g_assert (payload);
->>>  -+
->>>  -+#ifdef WITH_SOUP_2
->>>  -+  response_headers = message->response_headers;
->>>  -+#else
->>>  -+  response_headers = soup_message_get_response_headers (message);
->>>  -+#endif
->>>  -
->>>  -   /* Convert the soup headers in to hash */
->>>  -   /* FIXME: Eeek..are you allowed duplicate headers? ... */
->>>  -   g_hash_table_remove_all (priv->response_headers);
->>>  --  soup_message_headers_foreach (message->response_headers,
->>>  -+  soup_message_headers_foreach (response_headers,
->>>  -       
->>> (SoupMessageHeadersForeachFunc)_populate_headers_hash_table,
->>>  -       priv->response_headers);
->>>  -
->>>  --  priv->payload = g_memdup (message->response_body->data,
->>>  --                            message->response_body->length + 1);
->>>  --  priv->length = message->response_body->length;
->>>  -+  priv->payload = payload;
->>>  -
->>>  -+#ifdef WITH_SOUP_2
->>>  -   priv->status_code = message->status_code;
->>>  -   priv->status_message = g_strdup (message->reason_phrase);
->>>  -+#else
->>>  -+  priv->status_code = soup_message_get_status (message);
->>>  -+  priv->status_message = g_strdup 
->>> (soup_message_get_reason_phrase (message));
->>>  -+#endif
->>>  -
->>>  -   return _handle_error_from_message (message, error);
->>>  - }
->>>  -
->>>  - static void
->>>  --_continuous_call_message_completed_cb (SoupSession *session,
->>>  --                                       SoupMessage *message,
->>>  --                                       gpointer     userdata)
->>>  -+_continuous_call_message_completed (SoupMessage *message,
->>>  -+                                    GError      *error,
->>>  -+                                    gpointer     userdata)
->>>  - {
->>>  -   RestProxyCallContinuousClosure *closure;
->>>  -   RestProxyCall *call;
->>>  -   RestProxyCallPrivate *priv;
->>>  --  GError *error = NULL;
->>>  -
->>>  -   closure = (RestProxyCallContinuousClosure *)userdata;
->>>  -   call = closure->call;
->>>  -   priv = GET_PRIVATE (call);
->>>  -
->>>  -+#ifdef WITH_SOUP_2
->>>  -   priv->status_code = message->status_code;
->>>  -   priv->status_message = g_strdup (message->reason_phrase);
->>>  -+#else
->>>  -+  priv->status_code = soup_message_get_status (message);
->>>  -+  priv->status_message = g_strdup 
->>> (soup_message_get_reason_phrase (message));
->>>  -+#endif
->>>  -
->>>  -   _handle_error_from_message (message, &error);
->>>  -
->>>  -@@ -657,6 +693,7 @@ _continuous_call_message_completed_cb 
->>> (SoupSession *session,
->>>  -
->>>  -   priv->cur_call_closure = NULL;
->>>  -   g_object_unref (closure->call);
->>>  -+  g_object_unref (message);
->>>  -   g_slice_free (RestProxyCallContinuousClosure, closure);
->>>  - }
->>>  -
->>>  -@@ -715,6 +752,49 @@ set_url (RestProxyCall *call)
->>>  -   return TRUE;
->>>  - }
->>>  -
->>>  -+#ifndef WITH_SOUP_2
->>>  -+static gboolean
->>>  -+authenticate (RestProxyCall *call,
->>>  -+              SoupAuth      *soup_auth,
->>>  -+              gboolean       retrying,
->>>  -+              SoupMessage   *message)
->>>  -+{
->>>  -+  RestProxyCallPrivate *priv = GET_PRIVATE (call);
->>>  -+  RestProxyAuth *rest_auth;
->>>  -+  gboolean try_auth;
->>>  -+
->>>  -+  rest_auth = rest_proxy_auth_new (priv->proxy, NULL, message, 
->>> soup_auth);
->>>  -+  g_signal_emit_by_name (priv->proxy, "authenticate", rest_auth, 
->>> retrying, &try_auth);
->>>  -+  if (try_auth && !rest_proxy_auth_is_paused (rest_auth)) {
->>>  -+    char *username, *password;
->>>  -+
->>>  -+    g_object_get (priv->proxy, "username", &username, 
->>> "password", &password, NULL);
->>>  -+    soup_auth_authenticate (soup_auth, username, password);
->>>  -+    g_free (username);
->>>  -+    g_free (password);
->>>  -+  }
->>>  -+  g_object_unref (rest_auth);
->>>  -+
->>>  -+  return try_auth;
->>>  -+}
->>>  -+
->>>  -+static gboolean
->>>  -+accept_certificate (RestProxyCall        *call,
->>>  -+                    GTlsCertificate      *tls_certificate,
->>>  -+                    GTlsCertificateFlags *tls_errors,
->>>  -+                    SoupMessage          *message)
->>>  -+{
->>>  -+        RestProxyCallPrivate *priv = GET_PRIVATE (call);
->>>  -+        gboolean ssl_strict;
->>>  -+
->>>  -+        if (tls_errors == 0)
->>>  -+                return TRUE;
->>>  -+
->>>  -+        g_object_get (priv->proxy, "ssl-strict", &ssl_strict, 
->>> NULL);
->>>  -+        return !ssl_strict;
->>>  -+}
->>>  -+#endif
->>>  -+
->>>  - static SoupMessage *
->>>  - prepare_message (RestProxyCall *call, GError **error_out)
->>>  - {
->>>  -@@ -722,6 +802,7 @@ prepare_message (RestProxyCall *call, GError 
->>> **error_out)
->>>  -   RestProxyCallClass *call_class;
->>>  -   const gchar *user_agent;
->>>  -   SoupMessage *message;
->>>  -+  SoupMessageHeaders *request_headers;
->>>  -   GError *error = NULL;
->>>  -
->>>  -   call_class = REST_PROXY_CALL_GET_CLASS (call);
->>>  -@@ -748,6 +829,9 @@ prepare_message (RestProxyCall *call, GError 
->>> **error_out)
->>>  -     gchar *content;
->>>  -     gchar *content_type;
->>>  -     gsize content_len;
->>>  -+#ifndef WITH_SOUP_2
->>>  -+    GBytes *body;
->>>  -+#endif
->>>  -
->>>  -     if (!call_class->serialize_params (call, &content_type,
->>>  -                                        &content, &content_len, 
->>> &error))
->>>  -@@ -780,8 +864,14 @@ prepare_message (RestProxyCall *call, GError 
->>> **error_out)
->>>  -                              "Could not parse URI");
->>>  -         return NULL;
->>>  -     }
->>>  -+#ifdef WITH_SOUP_2
->>>  -     soup_message_set_request (message, content_type,
->>>  -                               SOUP_MEMORY_TAKE, content, 
->>> content_len);
->>>  -+#else
->>>  -+    body = g_bytes_new_take (content, content_len);
->>>  -+    soup_message_set_request_body_from_bytes (message, 
->>> content_type, body);
->>>  -+    g_bytes_unref (body);
->>>  -+#endif
->>>  -
->>>  -     g_free (content_type);
->>>  -   } else if (rest_params_are_strings (priv->params)) {
->>>  -@@ -798,9 +888,15 @@ prepare_message (RestProxyCall *call, GError 
->>> **error_out)
->>>  -
->>>  -     hash = rest_params_as_string_hash_table (priv->params);
->>>  -
->>>  -+#ifdef WITH_SOUP_2
->>>  -     message = soup_form_request_new_from_hash (priv->method,
->>>  -                                                priv->url,
->>>  -                                                hash);
->>>  -+#else
->>>  -+    message = soup_message_new_from_encoded_form (priv->method,
->>>  -+                                                  priv->url,
->>>  -+                                                  
->>> soup_form_encode_hash (hash));
->>>  -+#endif
->>>  -
->>>  -     g_hash_table_unref (hash);
->>>  -
->>>  -@@ -827,19 +923,28 @@ prepare_message (RestProxyCall *call, 
->>> GError **error_out)
->>>  -       if (rest_param_is_string (param)) {
->>>  -         soup_multipart_append_form_string (mp, name, 
->>> rest_param_get_content (param));
->>>  -       } else {
->>>  --        SoupBuffer *sb;
->>>  --
->>>  --        sb = soup_buffer_new_with_owner (rest_param_get_content 
->>> (param),
->>>  --                                         
->>> rest_param_get_content_length (param),
->>>  --                                         rest_param_ref (param),
->>>  --                                         
->>> (GDestroyNotify)rest_param_unref);
->>>  -+#ifdef WITH_SOUP_2
->>>  -+        SoupBuffer *sb = soup_buffer_new_with_owner 
->>> (rest_param_get_content (param),
->>>  -+                                                     
->>> rest_param_get_content_length (param),
->>>  -+                                                     
->>> rest_param_ref (param),
->>>  -+                                                     
->>> (GDestroyNotify)rest_param_unref);
->>>  -+#else
->>>  -+        GBytes *sb = g_bytes_new_with_free_func 
->>> (rest_param_get_content (param),
->>>  -+                                                 
->>> rest_param_get_content_length (param),
->>>  -+                                                 
->>> (GDestroyNotify)rest_param_unref,
->>>  -+                                                 rest_param_ref 
->>> (param));
->>>  -+#endif
->>>  -
->>>  -         soup_multipart_append_form_file (mp, name,
->>>  -                                          
->>> rest_param_get_file_name (param),
->>>  -                                          
->>> rest_param_get_content_type (param),
->>>  -                                          sb);
->>>  -
->>>  -+#ifdef WITH_SOUP_2
->>>  -         soup_buffer_free (sb);
->>>  -+#else
->>>  -+        g_bytes_unref (sb);
->>>  -+#endif
->>>  -       }
->>>  -     }
->>>  -
->>>  -@@ -853,19 +958,36 @@ prepare_message (RestProxyCall *call, 
->>> GError **error_out)
->>>  -         return NULL;
->>>  -     }
->>>  -
->>>  -+#ifdef WITH_SOUP_2
->>>  -     message = soup_form_request_new_from_multipart (priv->url, 
->>> mp);
->>>  -+#else
->>>  -+    message = soup_message_new_from_multipart (priv->url, mp);
->>>  -+#endif
->>>  -
->>>  -     soup_multipart_free (mp);
->>>  -   }
->>>  -
->>>  -+#ifdef WITH_SOUP_2
->>>  -+  request_headers = message->request_headers;
->>>  -+#else
->>>  -+  request_headers = soup_message_get_request_headers (message);
->>>  -+  g_signal_connect_swapped (message, "authenticate",
->>>  -+                            G_CALLBACK (authenticate),
->>>  -+                            call);
->>>  -+  g_signal_connect_swapped (message, "accept-certificate",
->>>  -+                            G_CALLBACK (accept_certificate),
->>>  -+                            call);
->>>  -+#endif
->>>  -+
->>>  -+
->>>  -   /* Set the user agent, if one was set in the proxy */
->>>  -   user_agent = rest_proxy_get_user_agent (priv->proxy);
->>>  -   if (user_agent) {
->>>  --    soup_message_headers_append (message->request_headers, 
->>> "User-Agent", user_agent);
->>>  -+    soup_message_headers_append (request_headers, "User-Agent", 
->>> user_agent);
->>>  -   }
->>>  -
->>>  -   /* Set the headers */
->>>  --  g_hash_table_foreach (priv->headers, set_header, 
->>> message->request_headers);
->>>  -+  g_hash_table_foreach (priv->headers, set_header, 
->>> request_headers);
->>>  -
->>>  -   return message;
->>>  - }
->>>  -@@ -878,17 +1000,17 @@ _call_message_call_cancelled_cb 
->>> (GCancellable  *cancellable,
->>>  - }
->>>  -
->>>  - static void
->>>  --_call_message_call_completed_cb (SoupSession *session,
->>>  --                                 SoupMessage *message,
->>>  -+_call_message_call_completed_cb (SoupMessage *message,
->>>  -+                                 GBytes      *payload,
->>>  -+                                 GError      *error,
->>>  -                                  gpointer     user_data)
->>>  - {
->>>  -   GTask *task = user_data;
->>>  -   RestProxyCall *call;
->>>  --  GError *error = NULL;
->>>  -
->>>  -   call = REST_PROXY_CALL (g_task_get_source_object (task));
->>>  -
->>>  --  finish_call (call, message, &error);
->>>  -+  finish_call (call, message, payload, &error);
->>>  -
->>>  -   if (error != NULL)
->>>  -     g_task_return_error (task, error);
->>>  -@@ -938,6 +1060,7 @@ rest_proxy_call_invoke_async (RestProxyCall  
->>>     *call,
->>>  -
->>>  -   _rest_proxy_queue_message (priv->proxy,
->>>  -                              message,
->>>  -+                             priv->cancellable,
->>>  -                              _call_message_call_completed_cb,
->>>  -                              task);
->>>  - }
->>>  -@@ -962,16 +1085,55 @@ rest_proxy_call_invoke_finish 
->>> (RestProxyCall  *call,
->>>  - }
->>>  -
->>>  - static void
->>>  --_continuous_call_message_got_chunk_cb (SoupMessage               
->>>      *msg,
->>>  --                                       SoupBuffer                
->>>      *chunk,
->>>  --                                       
->>> RestProxyCallContinuousClosure *closure)
->>>  -+_continuous_call_read_cb (GObject      *source,
->>>  -+                          GAsyncResult *result,
->>>  -+                          gpointer      user_data)
->>>  - {
->>>  -+  GInputStream *stream = G_INPUT_STREAM (source);
->>>  -+  RestProxyCallContinuousClosure *closure = user_data;
->>>  -+  RestProxyCallPrivate *priv = GET_PRIVATE (closure->call);
->>>  -+  gssize bytes_read;
->>>  -+  GError *error = NULL;
->>>  -+
->>>  -+  bytes_read = g_input_stream_read_finish (stream, result, 
->>> &error);
->>>  -+  if (bytes_read <= 0)
->>>  -+    {
->>>  -+      _continuous_call_message_completed (closure->message, 
->>> error, user_data);
->>>  -+      return;
->>>  -+    }
->>>  -+
->>>  -   closure->callback (closure->call,
->>>  --                     chunk->data,
->>>  --                     chunk->length,
->>>  -+                     (gconstpointer)closure->buffer,
->>>  -+                     bytes_read,
->>>  -                      NULL,
->>>  -                      closure->weak_object,
->>>  -                      closure->userdata);
->>>  -+
->>>  -+  g_input_stream_read_async (stream, closure->buffer, 
->>> READ_BUFFER_SIZE, G_PRIORITY_DEFAULT,
->>>  -+                             priv->cancellable, 
->>> _continuous_call_read_cb, closure);
->>>  -+}
->>>  -+
->>>  -+static void
->>>  -+_continuous_call_message_sent_cb (GObject      *source,
->>>  -+                                  GAsyncResult *result,
->>>  -+                                  gpointer      user_data)
->>>  -+{
->>>  -+  RestProxy *proxy = REST_PROXY (source);
->>>  -+  RestProxyCallContinuousClosure *closure = user_data;
->>>  -+  RestProxyCallPrivate *priv = GET_PRIVATE (closure->call);
->>>  -+  GInputStream *stream;
->>>  -+  GError *error = NULL;
->>>  -+
->>>  -+  stream = _rest_proxy_send_message_finish (proxy, result, 
->>> &error);
->>>  -+  if (!stream)
->>>  -+    {
->>>  -+      _continuous_call_message_completed (closure->message, 
->>> error, user_data);
->>>  -+      return;
->>>  -+    }
->>>  -+
->>>  -+  g_input_stream_read_async (stream, closure->buffer, 
->>> READ_BUFFER_SIZE, G_PRIORITY_DEFAULT,
->>>  -+                             priv->cancellable, 
->>> _continuous_call_read_cb, closure);
->>>  -+  g_object_unref (stream);
->>>  - }
->>>  -
->>>  -
->>>  -@@ -1021,9 +1183,6 @@ rest_proxy_call_continuous (RestProxyCall   
->>>                  *call,
->>>  -   if (message == NULL)
->>>  -     return FALSE;
->>>  -
->>>  --  /* Must turn off accumulation */
->>>  --  soup_message_body_set_accumulate (message->response_body, 
->>> FALSE);
->>>  --
->>>  -   closure = g_slice_new0 (RestProxyCallContinuousClosure);
->>>  -   closure->call = g_object_ref (call);
->>>  -   closure->callback = callback;
->>>  -@@ -1041,33 +1200,29 @@ rest_proxy_call_continuous (RestProxyCall 
->>>                    *call,
->>>  -         closure);
->>>  -   }
->>>  -
->>>  --  g_signal_connect (message,
->>>  --                    "got-chunk",
->>>  --                    
->>> (GCallback)_continuous_call_message_got_chunk_cb,
->>>  --                    closure);
->>>  --
->>>  --  _rest_proxy_queue_message (priv->proxy,
->>>  --                             message,
->>>  --                             
->>> _continuous_call_message_completed_cb,
->>>  --                             closure);
->>>  -+  _rest_proxy_send_message_async (priv->proxy,
->>>  -+                                  message,
->>>  -+                                  priv->cancellable,
->>>  -+                                  
->>> _continuous_call_message_sent_cb,
->>>  -+                                  closure);
->>>  -   return TRUE;
->>>  - }
->>>  -
->>>  - static void
->>>  --_upload_call_message_completed_cb (SoupSession *session,
->>>  --                                   SoupMessage *message,
->>>  -+_upload_call_message_completed_cb (SoupMessage *message,
->>>  -+                                   GBytes      *payload,
->>>  -+                                   GError      *error,
->>>  -                                    gpointer     user_data)
->>>  - {
->>>  -   RestProxyCall *call;
->>>  -   RestProxyCallPrivate *priv;
->>>  --  GError *error = NULL;
->>>  -   RestProxyCallUploadClosure *closure;
->>>  -
->>>  -   closure = (RestProxyCallUploadClosure *) user_data;
->>>  -   call = closure->call;
->>>  -   priv = GET_PRIVATE (call);
->>>  -
->>>  --  finish_call (call, message, &error);
->>>  -+  finish_call (call, message, payload, &error);
->>>  -
->>>  -   closure->callback (closure->call,
->>>  -                      closure->uploaded,
->>>  -@@ -1093,14 +1248,25 @@ _upload_call_message_completed_cb 
->>> (SoupSession *session,
->>>  -
->>>  - static void
->>>  - _upload_call_message_wrote_data_cb (SoupMessage                
->>> *msg,
->>>  -+#ifdef WITH_SOUP_2
->>>  -                                     SoupBuffer                 
->>> *chunk,
->>>  -+#else
->>>  -+                                    gsize                       
->>> chunk_size,
->>>  -+#endif
->>>  -                                     RestProxyCallUploadClosure 
->>> *closure)
->>>  - {
->>>  --  closure->uploaded = closure->uploaded + chunk->length;
->>>  -+#ifdef WITH_SOUP_2
->>>  -+  gsize chunk_size = chunk->length;
->>>  -+  goffset content_length = msg->request_body->length;
->>>  -+#else
->>>  -+  goffset content_length = 
->>> soup_message_headers_get_content_length 
->>> (soup_message_get_request_headers (msg));
->>>  -+#endif
->>>  -
->>>  --  if (closure->uploaded < msg->request_body->length)
->>>  -+  closure->uploaded = closure->uploaded + chunk_size;
->>>  -+
->>>  -+  if (closure->uploaded < content_length)
->>>  -     closure->callback (closure->call,
->>>  --                       msg->request_body->length,
->>>  -+                       content_length,
->>>  -                        closure->uploaded,
->>>  -                        NULL,
->>>  -                        closure->weak_object,
->>>  -@@ -1178,6 +1344,7 @@ rest_proxy_call_upload (RestProxyCall       
->>>          *call,
->>>  -
->>>  -   _rest_proxy_queue_message (priv->proxy,
->>>  -                              message,
->>>  -+                             priv->cancellable,
->>>  -                              _upload_call_message_completed_cb,
->>>  -                              closure);
->>>  -   return TRUE;
->>>  -@@ -1206,6 +1373,10 @@ rest_proxy_call_cancel (RestProxyCall 
->>> *call)
->>>  -   if (priv->cancellable)
->>>  -     {
->>>  -       g_signal_handler_disconnect (priv->cancellable, 
->>> priv->cancel_sig);
->>>  -+#ifndef WITH_SOUP_2
->>>  -+      if (!g_cancellable_is_cancelled (priv->cancellable))
->>>  -+              g_cancellable_cancel (priv->cancellable);
->>>  -+#endif
->>>  -       g_clear_object (&priv->cancellable);
->>>  -     }
->>>  -
->>>  -@@ -1240,6 +1411,7 @@ rest_proxy_call_sync (RestProxyCall *call,
->>>  -   RestProxyCallPrivate *priv = GET_PRIVATE (call);
->>>  -   SoupMessage *message;
->>>  -   gboolean ret;
->>>  -+  GBytes *payload;
->>>  -
->>>  -   g_return_val_if_fail (REST_IS_PROXY_CALL (call), FALSE);
->>>  -
->>>  -@@ -1247,9 +1419,9 @@ rest_proxy_call_sync (RestProxyCall *call,
->>>  -   if (!message)
->>>  -     return FALSE;
->>>  -
->>>  --  _rest_proxy_send_message (priv->proxy, message);
->>>  -+  payload = _rest_proxy_send_message (priv->proxy, message, 
->>> priv->cancellable, error_out);
->>>  -
->>>  --  ret = finish_call (call, message, error_out);
->>>  -+  ret = finish_call (call, message, payload, error_out);
->>>  -
->>>  -   g_object_unref (message);
->>>  -
->>>  -@@ -1314,9 +1486,16 @@ rest_proxy_call_get_response_headers 
->>> (RestProxyCall *call)
->>>  - goffset
->>>  - rest_proxy_call_get_payload_length (RestProxyCall *call)
->>>  - {
->>>  -+  GBytes *payload;
->>>  -+
->>>  -   g_return_val_if_fail (REST_IS_PROXY_CALL (call), 0);
->>>  -
->>>  --  return GET_PRIVATE (call)->length;
->>>  -+  payload = GET_PRIVATE (call)->payload;
->>>  -+#ifdef WITH_SOUP_2
->>>  -+  return payload ? g_bytes_get_size (payload) - 1 : 0;
->>>  -+#else
->>>  -+  return payload ? g_bytes_get_size (payload) : 0;
->>>  -+#endif
->>>  - }
->>>  -
->>>  - /**
->>>  -@@ -1331,9 +1510,12 @@ rest_proxy_call_get_payload_length 
->>> (RestProxyCall *call)
->>>  - const gchar *
->>>  - rest_proxy_call_get_payload (RestProxyCall *call)
->>>  - {
->>>  -+  GBytes *payload;
->>>  -+
->>>  -   g_return_val_if_fail (REST_IS_PROXY_CALL (call), NULL);
->>>  -
->>>  --  return GET_PRIVATE (call)->payload;
->>>  -+  payload = GET_PRIVATE (call)->payload;
->>>  -+  return payload ? g_bytes_get_data (payload, NULL) : NULL;
->>>  - }
->>>  -
->>>  - /**
->>>  -diff --git a/rest/rest-proxy.c b/rest/rest-proxy.c
->>>  -index 80972a3..171f6cb 100644
->>>  ---- a/rest/rest-proxy.c
->>>  -+++ b/rest/rest-proxy.c
->>>  -@@ -45,6 +45,9 @@ struct _RestProxyPrivate {
->>>  -   SoupSession *session;
->>>  -   gboolean disable_cookies;
->>>  -   char *ssl_ca_file;
->>>  -+#ifndef WITH_SOUP_2
->>>  -+  gboolean ssl_strict;
->>>  -+#endif
->>>  - };
->>>  -
->>>  -
->>>  -@@ -116,11 +119,15 @@ rest_proxy_get_property (GObject   *object,
->>>  -       g_value_set_string (value, priv->password);
->>>  -       break;
->>>  -     case PROP_SSL_STRICT: {
->>>  -+#ifdef WITH_SOUP_2
->>>  -       gboolean ssl_strict;
->>>  -       g_object_get (G_OBJECT(priv->session),
->>>  -                     "ssl-strict", &ssl_strict,
->>>  -                     NULL);
->>>  -       g_value_set_boolean (value, ssl_strict);
->>>  -+#else
->>>  -+      g_value_set_boolean (value, priv->ssl_strict);
->>>  -+#endif
->>>  -       break;
->>>  -     }
->>>  -     case PROP_SSL_CA_FILE:
->>>  -@@ -172,9 +179,13 @@ rest_proxy_set_property (GObject      
->>> *object,
->>>  -       priv->password = g_value_dup_string (value);
->>>  -       break;
->>>  -     case PROP_SSL_STRICT:
->>>  -+#ifdef WITH_SOUP_2
->>>  -       g_object_set (G_OBJECT(priv->session),
->>>  -                     "ssl-strict", g_value_get_boolean (value),
->>>  -                     NULL);
->>>  -+#else
->>>  -+      priv->ssl_strict = g_value_get_boolean (value);
->>>  -+#endif
->>>  -       break;
->>>  -     case PROP_SSL_CA_FILE:
->>>  -       g_free(priv->ssl_ca_file);
->>>  -@@ -207,6 +218,7 @@ default_authenticate_cb (RestProxy *self,
->>>  -   return !retrying;
->>>  - }
->>>  -
->>>  -+#ifdef WITH_SOUP_2
->>>  - static void
->>>  - authenticate (RestProxy   *self,
->>>  -               SoupMessage *msg,
->>>  -@@ -224,6 +236,7 @@ authenticate (RestProxy   *self,
->>>  -     soup_auth_authenticate (soup_auth, priv->username, 
->>> priv->password);
->>>  -   g_object_unref (G_OBJECT (rest_auth));
->>>  - }
->>>  -+#endif
->>>  -
->>>  - static void
->>>  - rest_proxy_constructed (GObject *object)
->>>  -@@ -238,14 +251,20 @@ rest_proxy_constructed (GObject *object)
->>>  -   }
->>>  -
->>>  -   if (REST_DEBUG_ENABLED(PROXY)) {
->>>  -+#ifdef WITH_SOUP_2
->>>  -     SoupSessionFeature *logger = 
->>> (SoupSessionFeature*)soup_logger_new (SOUP_LOGGER_LOG_BODY, 0);
->>>  -+#else
->>>  -+    SoupSessionFeature *logger = 
->>> (SoupSessionFeature*)soup_logger_new (SOUP_LOGGER_LOG_HEADERS);
->>>  -+#endif
->>>  -     soup_session_add_feature (priv->session, logger);
->>>  -     g_object_unref (logger);
->>>  -   }
->>>  -
->>>  -+#ifdef WITH_SOUP_2
->>>  -   /* session lifetime is same as self, no need to keep signalid 
->>> */
->>>  -   g_signal_connect_swapped (priv->session, "authenticate",
->>>  -                             G_CALLBACK(authenticate), object);
->>>  -+#endif
->>>  - }
->>>  -
->>>  - static void
->>>  -@@ -391,23 +410,62 @@ rest_proxy_class_init (RestProxyClass 
->>> *klass)
->>>  -   proxy_class->authenticate = default_authenticate_cb;
->>>  - }
->>>  -
->>>  -+static gboolean
->>>  -+transform_ssl_ca_file_to_tls_database (GBinding     *binding,
->>>  -+                                       const GValue *from_value,
->>>  -+                                       GValue       *to_value,
->>>  -+                                       gpointer      user_data)
->>>  -+{
->>>  -+  g_value_take_object (to_value,
->>>  -+                       g_tls_file_database_new 
->>> (g_value_get_string (from_value), NULL));
->>>  -+  return TRUE;
->>>  -+}
->>>  -+
->>>  -+static gboolean
->>>  -+transform_tls_database_to_ssl_ca_file (GBinding     *binding,
->>>  -+                                       const GValue *from_value,
->>>  -+                                       GValue       *to_value,
->>>  -+                                       gpointer      user_data)
->>>  -+{
->>>  -+  GTlsDatabase *tls_database;
->>>  -+  char *path = NULL;
->>>  -+
->>>  -+  tls_database = g_value_get_object (from_value);
->>>  -+  if (tls_database)
->>>  -+    g_object_get (tls_database, "anchors", &path, NULL);
->>>  -+  g_value_take_string (to_value, path);
->>>  -+  return TRUE;
->>>  -+}
->>>  -+
->>>  - static void
->>>  - rest_proxy_init (RestProxy *self)
->>>  - {
->>>  -   RestProxyPrivate *priv = GET_PRIVATE (self);
->>>  -+  GTlsDatabase *tls_database;
->>>  -+
->>>  -+#ifndef WITH_SOUP_2
->>>  -+  priv->ssl_strict = TRUE;
->>>  -+#endif
->>>  -
->>>  -   priv->session = soup_session_new ();
->>>  -
->>>  - #ifdef REST_SYSTEM_CA_FILE
->>>  -   /* with ssl-strict (defaults TRUE) setting ssl-ca-file forces 
->>> all
->>>  -    * certificates to be trusted */
->>>  --  g_object_set (priv->session,
->>>  --                "ssl-ca-file", REST_SYSTEM_CA_FILE,
->>>  --                NULL);
->>>  -+  tls_database = g_tls_file_database_new (REST_SYSTEM_CA_FILE, 
->>> NULL);
->>>  -+  if (tls_database) {
->>>  -+          g_object_set (priv->session,
->>>  -+                        "tls-database", tls_database,
->>>  -+                        NULL);
->>>  -+          g_object_unref (tls_database);
->>>  -+  }
->>>  - #endif
->>>  --  g_object_bind_property (self, "ssl-ca-file",
->>>  --                          priv->session, "ssl-ca-file",
->>>  --                          G_BINDING_BIDIRECTIONAL);
->>>  -+  g_object_bind_property_full (self, "ssl-ca-file",
->>>  -+                               priv->session, "tls-database",
->>>  -+                               G_BINDING_BIDIRECTIONAL,
->>>  -+                               
->>> transform_ssl_ca_file_to_tls_database,
->>>  -+                               
->>> transform_tls_database_to_ssl_ca_file,
->>>  -+                               NULL, NULL);
->>>  - }
->>>  -
->>>  - /**
->>>  -@@ -689,27 +747,127 @@ rest_proxy_simple_run (RestProxy *proxy,
->>>  -   return ret;
->>>  - }
->>>  -
->>>  -+typedef struct {
->>>  -+  RestMessageFinishedCallback callback;
->>>  -+  gpointer user_data;
->>>  -+} RestMessageQueueData;
->>>  -+
->>>  -+#ifdef WITH_SOUP_2
->>>  -+static void
->>>  -+message_finished_cb (SoupSession *session,
->>>  -+                     SoupMessage *message,
->>>  -+                     gpointer     user_data)
->>>  -+{
->>>  -+  RestMessageQueueData *data = user_data;
->>>  -+  GBytes *body;
->>>  -+  GError *error = NULL;
->>>  -+
->>>  -+  body = g_bytes_new (message->response_body->data,
->>>  -+                      message->response_body->length + 1);
->>>  -+  data->callback (message, body, error, data->user_data);
->>>  -+  g_free (data);
->>>  -+}
->>>  -+#else
->>>  -+static void
->>>  -+message_send_and_read_ready_cb (GObject      *source,
->>>  -+                                GAsyncResult *result,
->>>  -+                                gpointer      user_data)
->>>  -+{
->>>  -+  SoupSession *session = SOUP_SESSION (source);
->>>  -+  RestMessageQueueData *data = user_data;
->>>  -+  GBytes *body;
->>>  -+  GError *error = NULL;
->>>  -+
->>>  -+  body = soup_session_send_and_read_finish (session, result, 
->>> &error);
->>>  -+  data->callback (soup_session_get_async_result_message 
->>> (session, result), body, error, data->user_data);
->>>  -+  g_free (data);
->>>  -+}
->>>  -+#endif
->>>  -+
->>>  - void
->>>  --_rest_proxy_queue_message (RestProxy   *proxy,
->>>  --                           SoupMessage *message,
->>>  --                           SoupSessionCallback callback,
->>>  --                           gpointer user_data)
->>>  -+_rest_proxy_queue_message (RestProxy                  *proxy,
->>>  -+                           SoupMessage                *message,
->>>  -+                           GCancellable               
->>> *cancellable,
->>>  -+                           RestMessageFinishedCallback callback,
->>>  -+                           gpointer                    user_data)
->>>  - {
->>>  -   RestProxyPrivate *priv = GET_PRIVATE (proxy);
->>>  -+  RestMessageQueueData *data;
->>>  -
->>>  -   g_return_if_fail (REST_IS_PROXY (proxy));
->>>  -   g_return_if_fail (SOUP_IS_MESSAGE (message));
->>>  -
->>>  -+  data = g_new0 (RestMessageQueueData, 1);
->>>  -+  data->callback = callback;
->>>  -+  data->user_data = user_data;
->>>  -+
->>>  -+#ifdef WITH_SOUP_2
->>>  -   soup_session_queue_message (priv->session,
->>>  -                               message,
->>>  --                              callback,
->>>  --                              user_data);
->>>  -+                              message_finished_cb,
->>>  -+                              data);
->>>  -+#else
->>>  -+  soup_session_send_and_read_async (priv->session,
->>>  -+                                    message,
->>>  -+                                    G_PRIORITY_DEFAULT,
->>>  -+                                    cancellable,
->>>  -+                                    
->>> message_send_and_read_ready_cb,
->>>  -+                                    data);
->>>  -+#endif
->>>  -+}
->>>  -+
->>>  -+static void
->>>  -+message_send_ready_cb (GObject      *source,
->>>  -+                       GAsyncResult *result,
->>>  -+                       gpointer      user_data)
->>>  -+{
->>>  -+  SoupSession *session = SOUP_SESSION (source);
->>>  -+  GTask *task = user_data;
->>>  -+  GInputStream *stream;
->>>  -+  GError *error = NULL;
->>>  -+
->>>  -+  stream = soup_session_send_finish (session, result, &error);
->>>  -+  if (stream)
->>>  -+    g_task_return_pointer (task, stream, g_object_unref);
->>>  -+  else
->>>  -+    g_task_return_error (task, error);
->>>  -+  g_object_unref (task);
->>>  -+}
->>>  -+
->>>  -+void
->>>  -+_rest_proxy_send_message_async (RestProxy          *proxy,
->>>  -+                                SoupMessage        *message,
->>>  -+                                GCancellable       *cancellable,
->>>  -+                                GAsyncReadyCallback callback,
->>>  -+                                gpointer            user_data)
->>>  -+{
->>>  -+  RestProxyPrivate *priv = GET_PRIVATE (proxy);
->>>  -+  GTask *task;
->>>  -+
->>>  -+  task = g_task_new (proxy, cancellable, callback, user_data);
->>>  -+  soup_session_send_async (priv->session,
->>>  -+                           message,
->>>  -+#ifndef WITH_SOUP_2
->>>  -+                           G_PRIORITY_DEFAULT,
->>>  -+#endif
->>>  -+                           cancellable,
->>>  -+                           message_send_ready_cb,
->>>  -+                           task);
->>>  -+}
->>>  -+
->>>  -+GInputStream *
->>>  -+_rest_proxy_send_message_finish (RestProxy    *proxy,
->>>  -+                                 GAsyncResult *result,
->>>  -+                                 GError      **error)
->>>  -+{
->>>  -+  return g_task_propagate_pointer (G_TASK (result), error);
->>>  - }
->>>  -
->>>  - void
->>>  - _rest_proxy_cancel_message (RestProxy   *proxy,
->>>  -                             SoupMessage *message)
->>>  - {
->>>  -+#ifdef WITH_SOUP_2
->>>  -   RestProxyPrivate *priv = GET_PRIVATE (proxy);
->>>  -
->>>  -   g_return_if_fail (REST_IS_PROXY (proxy));
->>>  -@@ -718,16 +876,31 @@ _rest_proxy_cancel_message (RestProxy   
->>> *proxy,
->>>  -   soup_session_cancel_message (priv->session,
->>>  -                                message,
->>>  -                                SOUP_STATUS_CANCELLED);
->>>  -+#endif
->>>  - }
->>>  -
->>>  --guint
->>>  --_rest_proxy_send_message (RestProxy   *proxy,
->>>  --                          SoupMessage *message)
->>>  -+GBytes *
->>>  -+_rest_proxy_send_message (RestProxy    *proxy,
->>>  -+                          SoupMessage  *message,
->>>  -+                          GCancellable *cancellable,
->>>  -+                          GError      **error)
->>>  - {
->>>  -   RestProxyPrivate *priv = GET_PRIVATE (proxy);
->>>  -+  GBytes *body;
->>>  -
->>>  --  g_return_val_if_fail (REST_IS_PROXY (proxy), 0);
->>>  --  g_return_val_if_fail (SOUP_IS_MESSAGE (message), 0);
->>>  -+  g_return_val_if_fail (REST_IS_PROXY (proxy), NULL);
->>>  -+  g_return_val_if_fail (SOUP_IS_MESSAGE (message), NULL);
->>>  -+
->>>  -+#ifdef WITH_SOUP_2
->>>  -+  soup_session_send_message (priv->session, message);
->>>  -+  body = g_bytes_new (message->response_body->data,
->>>  -+                      message->response_body->length + 1);
->>>  -+#else
->>>  -+  body = soup_session_send_and_read (priv->session,
->>>  -+                                     message,
->>>  -+                                     cancellable,
->>>  -+                                     error);
->>>  -+#endif
->>>  -
->>>  --  return soup_session_send_message (priv->session, message);
->>>  -+  return body;
->>>  - }
->>>  -diff --git a/tests/custom-serialize.c b/tests/custom-serialize.c
->>>  -index c3fde93..01b3a56 100644
->>>  ---- a/tests/custom-serialize.c
->>>  -+++ b/tests/custom-serialize.c
->>>  -@@ -88,22 +88,40 @@ custom_proxy_call_init (CustomProxyCall *self)
->>>  - }
->>>  -
->>>  - static void
->>>  -+#ifdef WITH_SOUP_2
->>>  - server_callback (SoupServer *server, SoupMessage *msg,
->>>  -                  const char *path, GHashTable *query,
->>>  -                  SoupClientContext *client, gpointer user_data)
->>>  -+#else
->>>  -+server_callback (SoupServer *server, SoupServerMessage *msg,
->>>  -+                 const char *path, GHashTable *query, gpointer 
->>> user_data)
->>>  -+#endif
->>>  - {
->>>  -   if (g_str_equal (path, "/ping")) {
->>>  -     const char *content_type = NULL;
->>>  -+#ifdef WITH_SOUP_2
->>>  -     SoupMessageHeaders *headers = msg->request_headers;
->>>  -     SoupMessageBody *body = msg->request_body;
->>>  -+#else
->>>  -+    SoupMessageHeaders *headers = 
->>> soup_server_message_get_request_headers (msg);
->>>  -+    SoupMessageBody *body = soup_server_message_get_request_body 
->>> (msg);
->>>  -+#endif
->>>  -     content_type = soup_message_headers_get_content_type 
->>> (headers, NULL);
->>>  -     g_assert_cmpstr (content_type, ==, "application/json");
->>>  -
->>>  -     g_assert_cmpstr (body->data, ==, "{}");
->>>  -
->>>  -+#ifdef WITH_SOUP_2
->>>  -     soup_message_set_status (msg, SOUP_STATUS_OK);
->>>  -+#else
->>>  -+    soup_server_message_set_status (msg, SOUP_STATUS_OK, NULL);
->>>  -+#endif
->>>  -   } else {
->>>  -+#ifdef WITH_SOUP_2
->>>  -     soup_message_set_status (msg, SOUP_STATUS_NOT_IMPLEMENTED);
->>>  -+#else
->>>  -+    soup_server_message_set_status (msg, 
->>> SOUP_STATUS_NOT_IMPLEMENTED, NULL);
->>>  -+#endif
->>>  -   }
->>>  - }
->>>  -
->>>  -diff --git a/tests/proxy-continuous.c b/tests/proxy-continuous.c
->>>  -index 8f4b7a8..7967bbd 100644
->>>  ---- a/tests/proxy-continuous.c
->>>  -+++ b/tests/proxy-continuous.c
->>>  -@@ -39,9 +39,15 @@ static SoupServer *server;
->>>  - static gboolean
->>>  - send_chunks (gpointer user_data)
->>>  - {
->>>  --  SoupMessage *msg = SOUP_MESSAGE (user_data);
->>>  -   guint i;
->>>  -   guint8 data[SIZE_CHUNK];
->>>  -+#ifdef WITH_SOUP_2
->>>  -+  SoupMessage *msg = SOUP_MESSAGE (user_data);
->>>  -+  SoupMessageBody *response_body = msg->response_body;
->>>  -+#else
->>>  -+  SoupServerMessage *msg = SOUP_SERVER_MESSAGE (user_data);
->>>  -+  SoupMessageBody *response_body = 
->>> soup_server_message_get_response_body (msg);
->>>  -+#endif
->>>  -
->>>  -   for (i = 0; i < SIZE_CHUNK; i++)
->>>  -   {
->>>  -@@ -49,12 +55,12 @@ send_chunks (gpointer user_data)
->>>  -     server_count++;
->>>  -   }
->>>  -
->>>  --  soup_message_body_append (msg->response_body, 
->>> SOUP_MEMORY_COPY, data, SIZE_CHUNK);
->>>  -+  soup_message_body_append (response_body, SOUP_MEMORY_COPY, 
->>> data, SIZE_CHUNK);
->>>  -   soup_server_unpause_message (server, msg);
->>>  -
->>>  -   if (server_count == NUM_CHUNKS * SIZE_CHUNK)
->>>  -   {
->>>  --    soup_message_body_complete (msg->response_body);
->>>  -+    soup_message_body_complete (response_body);
->>>  -     return FALSE;
->>>  -   } else {
->>>  -     return TRUE;
->>>  -@@ -62,13 +68,28 @@ send_chunks (gpointer user_data)
->>>  - }
->>>  -
->>>  - static void
->>>  -+#ifdef WITH_SOUP_2
->>>  - server_callback (SoupServer *server, SoupMessage *msg,
->>>  -                  const char *path, GHashTable *query,
->>>  -                  SoupClientContext *client, gpointer user_data)
->>>  -+#else
->>>  -+server_callback (SoupServer *server, SoupServerMessage *msg,
->>>  -+                 const char *path, GHashTable *query, gpointer 
->>> user_data)
->>>  -+#endif
->>>  - {
->>>  -+#ifdef WITH_SOUP_2
->>>  -+  SoupMessageHeaders *response_headers = msg->response_headers;
->>>  -+#else
->>>  -+  SoupMessageHeaders *response_headers = 
->>> soup_server_message_get_response_headers (msg);
->>>  -+#endif
->>>  -+
->>>  -   g_assert_cmpstr (path, ==, "/stream");
->>>  -+#ifdef WITH_SOUP_2
->>>  -   soup_message_set_status (msg, SOUP_STATUS_OK);
->>>  --  soup_message_headers_set_encoding (msg->response_headers,
->>>  -+#else
->>>  -+  soup_server_message_set_status (msg, SOUP_STATUS_OK, NULL);
->>>  -+#endif
->>>  -+  soup_message_headers_set_encoding (response_headers,
->>>  -                                      SOUP_ENCODING_CHUNKED);
->>>  -   soup_server_pause_message (server, msg);
->>>  -
->>>  -@@ -142,13 +163,21 @@ continuous ()
->>>  -   uris = soup_server_get_uris (server);
->>>  -   g_assert (g_slist_length (uris) > 0);
->>>  -
->>>  -+#ifdef WITH_SOUP_2
->>>  -   url = soup_uri_to_string (uris->data, FALSE);
->>>  -+#else
->>>  -+  url = g_uri_to_string (uris->data);
->>>  -+#endif
->>>  -
->>>  -   loop = g_main_loop_new (NULL, FALSE);
->>>  -
->>>  -   proxy = rest_proxy_new (url, FALSE);
->>>  -   stream_test (proxy);
->>>  -+#ifdef WITH_SOUP_2
->>>  -   g_slist_free_full (uris, (GDestroyNotify)soup_uri_free);
->>>  -+#else
->>>  -+  g_slist_free_full (uris, (GDestroyNotify)g_uri_unref);
->>>  -+#endif
->>>  -
->>>  -   g_main_loop_run (loop);
->>>  -   g_free (url);
->>>  -diff --git a/tests/proxy.c b/tests/proxy.c
->>>  -index 89a9325..652c600 100644
->>>  ---- a/tests/proxy.c
->>>  -+++ b/tests/proxy.c
->>>  -@@ -49,20 +49,35 @@ SoupServer *server;
->>>  - GMainLoop *server_loop;
->>>  -
->>>  - static void
->>>  -+#ifdef WITH_SOUP_2
->>>  - server_callback (SoupServer *server, SoupMessage *msg,
->>>  -                  const char *path, GHashTable *query,
->>>  -                  SoupClientContext *client, gpointer user_data)
->>>  -+#else
->>>  -+server_callback (SoupServer *server, SoupServerMessage *msg,
->>>  -+                 const char *path, GHashTable *query, gpointer 
->>> user_data)
->>>  -+#endif
->>>  - {
->>>  -   if (g_str_equal (path, "/ping")) {
->>>  -+#ifdef WITH_SOUP_2
->>>  -     soup_message_set_status (msg, SOUP_STATUS_OK);
->>>  -+#else
->>>  -+    soup_server_message_set_status (msg, SOUP_STATUS_OK, NULL);
->>>  -+#endif
->>>  -   }
->>>  -   else if (g_str_equal (path, "/echo")) {
->>>  -     const char *value;
->>>  -
->>>  -     value = g_hash_table_lookup (query, "value");
->>>  -+#ifdef WITH_SOUP_2
->>>  -     soup_message_set_response (msg, "text/plain", 
->>> SOUP_MEMORY_COPY,
->>>  -                                value, strlen (value));
->>>  -     soup_message_set_status (msg, SOUP_STATUS_OK);
->>>  -+#else
->>>  -+    soup_server_message_set_response (msg, "text/plain", 
->>> SOUP_MEMORY_COPY,
->>>  -+                                      value, strlen (value));
->>>  -+    soup_server_message_set_status (msg, SOUP_STATUS_OK, NULL);
->>>  -+#endif
->>>  -   }
->>>  -   else if (g_str_equal (path, "/reverse")) {
->>>  -     char *value;
->>>  -@@ -70,9 +85,15 @@ server_callback (SoupServer *server, 
->>> SoupMessage *msg,
->>>  -     value = g_strdup (g_hash_table_lookup (query, "value"));
->>>  -     g_strreverse (value);
->>>  -
->>>  -+#ifdef WITH_SOUP_2
->>>  -     soup_message_set_response (msg, "text/plain", 
->>> SOUP_MEMORY_TAKE,
->>>  -                                value, strlen (value));
->>>  -     soup_message_set_status (msg, SOUP_STATUS_OK);
->>>  -+#else
->>>  -+    soup_server_message_set_response (msg, "text/plain", 
->>> SOUP_MEMORY_TAKE,
->>>  -+                                       value, strlen (value));
->>>  -+    soup_server_message_set_status (msg, SOUP_STATUS_OK, NULL);
->>>  -+#endif
->>>  -   }
->>>  -   else if (g_str_equal (path, "/status")) {
->>>  -     const char *value;
->>>  -@@ -81,25 +102,61 @@ server_callback (SoupServer *server, 
->>> SoupMessage *msg,
->>>  -     value = g_hash_table_lookup (query, "status");
->>>  -     if (value) {
->>>  -       status = atoi (value);
->>>  -+#ifdef WITH_SOUP_2
->>>  -       soup_message_set_status (msg, status ?: 
->>> SOUP_STATUS_INTERNAL_SERVER_ERROR);
->>>  -+#else
->>>  -+      soup_server_message_set_status (msg, status ?: 
->>> SOUP_STATUS_INTERNAL_SERVER_ERROR, NULL);
->>>  -+#endif
->>>  -     } else {
->>>  -+#ifdef WITH_SOUP_2
->>>  -       soup_message_set_status (msg, 
->>> SOUP_STATUS_INTERNAL_SERVER_ERROR);
->>>  -+#else
->>>  -+      soup_server_message_set_status (msg, 
->>> SOUP_STATUS_INTERNAL_SERVER_ERROR, NULL);
->>>  -+#endif
->>>  -     }
->>>  -   }
->>>  -   else if (g_str_equal (path, "/useragent/none")) {
->>>  --    if (soup_message_headers_get (msg->request_headers, 
->>> "User-Agent") == NULL) {
->>>  -+#ifdef WITH_SOUP_2
->>>  -+    SoupMessageHeaders *request_headers = msg->request_headers;
->>>  -+#else
->>>  -+    SoupMessageHeaders *request_headers = 
->>> soup_server_message_get_request_headers (msg);
->>>  -+#endif
->>>  -+
->>>  -+    if (soup_message_headers_get (request_headers, "User-Agent") 
->>> == NULL) {
->>>  -+#ifdef WITH_SOUP_2
->>>  -       soup_message_set_status (msg, SOUP_STATUS_OK);
->>>  -+#else
->>>  -+      soup_server_message_set_status (msg, SOUP_STATUS_OK, NULL);
->>>  -+#endif
->>>  -     } else {
->>>  -+#ifdef WITH_SOUP_2
->>>  -       soup_message_set_status (msg, 
->>> SOUP_STATUS_EXPECTATION_FAILED);
->>>  -+#else
->>>  -+      soup_server_message_set_status (msg, 
->>> SOUP_STATUS_EXPECTATION_FAILED, NULL);
->>>  -+#endif
->>>  -     }
->>>  -   }
->>>  -   else if (g_str_equal (path, "/useragent/testsuite")) {
->>>  -+#ifdef WITH_SOUP_2
->>>  -+    SoupMessageHeaders *request_headers = msg->request_headers;
->>>  -+#else
->>>  -+    SoupMessageHeaders *request_headers = 
->>> soup_server_message_get_request_headers (msg);
->>>  -+#endif
->>>  -     const char *value;
->>>  --    value = soup_message_headers_get (msg->request_headers, 
->>> "User-Agent");
->>>  -+    value = soup_message_headers_get (request_headers, 
->>> "User-Agent");
->>>  -     if (g_strcmp0 (value, "TestSuite-1.0") == 0) {
->>>  -+#ifdef WITH_SOUP_2
->>>  -       soup_message_set_status (msg, SOUP_STATUS_OK);
->>>  -+#else
->>>  -+      soup_server_message_set_status (msg, SOUP_STATUS_OK, NULL);
->>>  -+#endif
->>>  -     } else {
->>>  -+#ifdef WITH_SOUP_2
->>>  -       soup_message_set_status (msg, 
->>> SOUP_STATUS_EXPECTATION_FAILED);
->>>  -+#else
->>>  -+      soup_server_message_set_status (msg, 
->>> SOUP_STATUS_EXPECTATION_FAILED, NULL);
->>>  -+#endif
->>>  -+
->>>  -     }
->>>  -   }
->>>  - }
->>>  -@@ -325,7 +382,7 @@ main (int argc, char **argv)
->>>  -   char *url;
->>>  -   RestProxy *proxy;
->>>  -
->>>  --  server = soup_server_new ("", NULL);
->>>  -+  server = soup_server_new (NULL);
->>>  -   g_thread_new ("Server Thread", server_thread_func, NULL);
->>>  -
->>>  -   url = g_strdup_printf ("http://127.0.0.1 
->>> <http://127.0.0.1/>:%d/", PORT);
->>>  -diff --git a/tests/threaded.c b/tests/threaded.c
->>>  -index a251900..411361c 100644
->>>  ---- a/tests/threaded.c
->>>  -+++ b/tests/threaded.c
->>>  -@@ -36,13 +36,22 @@ GMainLoop *main_loop;
->>>  - SoupServer *server;
->>>  -
->>>  - static void
->>>  -+#ifdef WITH_SOUP_2
->>>  - server_callback (SoupServer *server, SoupMessage *msg,
->>>  -                  const char *path, GHashTable *query,
->>>  -                  SoupClientContext *client, gpointer user_data)
->>>  -+#else
->>>  -+server_callback (SoupServer *server, SoupServerMessage *msg,
->>>  -+                 const char *path, GHashTable *query, gpointer 
->>> user_data)
->>>  -+#endif
->>>  - {
->>>  -   g_assert_cmpstr (path, ==, "/ping");
->>>  -
->>>  -+#ifdef WITH_SOUP_2
->>>  -   soup_message_set_status (msg, SOUP_STATUS_OK);
->>>  -+#else
->>>  -+  soup_server_message_set_status (msg, SOUP_STATUS_OK, NULL);
->>>  -+#endif
->>>  -   g_atomic_int_add (&threads_done, 1);
->>>  -
->>>  -   if (threads_done == N_THREADS) {
->>>  -@@ -96,7 +105,11 @@ static void ping ()
->>>  -   uris = soup_server_get_uris (server);
->>>  -   g_assert (g_slist_length (uris) > 0);
->>>  -
->>>  -+#ifdef WITH_SOUP_2
->>>  -   url = soup_uri_to_string (uris->data, FALSE);
->>>  -+#else
->>>  -+  url = g_uri_to_string (uris->data);
->>>  -+#endif
->>>  -
->>>  -   main_loop = g_main_loop_new (NULL, TRUE);
->>>  -
->>>  -@@ -109,7 +122,11 @@ static void ping ()
->>>  -   g_main_loop_run (main_loop);
->>>  -
->>>  -   g_free (url);
->>>  -+#ifdef WITH_SOUP_2
->>>  -   g_slist_free_full (uris, (GDestroyNotify)soup_uri_free);
->>>  -+#else
->>>  -+  g_slist_free_full (uris, (GDestroyNotify)g_uri_unref);
->>>  -+#endif
->>>  -   g_object_unref (server);
->>>  -   g_main_loop_unref (main_loop);
->>>  - }
->>>  ---
->>>  -2.33.1
->>>  -
->>>  diff --git a/meta-gnome/recipes-gnome/rest/rest_0.8.1.bb 
->>> b/meta-gnome/recipes-gnome/rest/rest_0.8.1.bb
->>>  deleted file mode 100644
->>>  index f1c9915c0..000000000
->>>  --- a/meta-gnome/recipes-gnome/rest/rest_0.8.1.bb
->>>  +++ /dev/null
->>>  @@ -1,33 +0,0 @@
->>>  -SUMMARY = "library to access web services that claim to be 
->>> "RESTful""
->>>  -HOMEPAGE = "<https://wiki.gnome.org/Projects/Librest>"
->>>  -LICENSE = "LGPL-2.1-only"
->>>  -LIC_FILES_CHKSUM = 
->>> "file://COPYING;md5=2d5025d4aa3495befef8f17206a5b0a1" 
->>> <file://copying;md5=2d5025d4aa3495befef8f17206a5b0a1/>
->>>  -
->>>  -GNOMEBASEBUILDCLASS = "autotools"
->>>  -
->>>  -DEPENDS = " \
->>>  -    libxml2-native \
->>>  -    glib-2.0-native \
->>>  -    glib-2.0 \
->>>  -    libsoup-2.4 \
->>>  -"
->>>  -
->>>  -inherit gnomebase gobject-introspection gtk-doc vala
->>>  -
->>>  -PV .= "+git${SRCPV}"
->>>  -SRCREV = "7b46065dea860ef09861f4d70124728b8270c8b7"
->>>  -SRC_URI = 
->>> "git://gitlab.gnome.org/GNOME/librest;protocol=https;branch=master \
->>>  -    file://0001-Use-GUri-instead-of-SoupURI.patch 
->>> <file://0001-use-guri-instead-of-soupuri.patch/> \
->>>  -    file://0002-Port-to-libsoup3.patch 
->>> <file://0002-port-to-libsoup3.patch/> \
->>>  -"
->>>  -S = "${WORKDIR}/git"
->>>  -
->>>  -do_configure:prepend() {
->>>  -    # rest expects introspection.m4 at custom location (see 
->>> aclocal.m4).
->>>  -    cp -f 
->>> ${STAGING_DIR_TARGET}/${datadir}/aclocal/introspection.m4 ${S}/build
->>>  -}
->>>  -
->>>  -do_compile:prepend() {
->>>  -    export GIR_EXTRA_LIBS_PATH="${B}/rest/.libs"
->>>  -}
->>>  -
->>>  diff --git a/meta-gnome/recipes-gnome/rest/rest_0.9.0.bb 
->>> b/meta-gnome/recipes-gnome/rest/rest_0.9.0.bb
->>>  new file mode 100644
->>>  index 000000000..2256a1899
->>>  --- /dev/null
->>>  +++ b/meta-gnome/recipes-gnome/rest/rest_0.9.0.bb
->>>  @@ -0,0 +1,25 @@
->>>  +SUMMARY = "library to access web services that claim to be 
->>> "RESTful""
->>>  +HOMEPAGE = "<https://wiki.gnome.org/Projects/Librest>"
->>>  +LICENSE = "LGPL-2.1-only"
->>>  +LIC_FILES_CHKSUM = 
->>> "file://COPYING;md5=2d5025d4aa3495befef8f17206a5b0a1" 
->>> <file://copying;md5=2d5025d4aa3495befef8f17206a5b0a1/>
->>>  +
->>>  +GNOMEBASEBUILDCLASS = "meson"
->>>  +
->>>  +DEPENDS = " \
->>>  +    gi-docgen \
->>>  +    gi-docgen-native \
->>>  +    glib-2.0 \
->>>  +    glib-2.0-native \
->>>  +    json-glib \
->>>  +    libxml2-native \
->>>  +"
->>>  +
->>>  +inherit gnomebase gobject-introspection vala pkgconfig
->>>  +
->>>  +PACKAGECONFIG_SOUP ?= "soup3"
->>>  +PACKAGECONFIG ??= "${PACKAGECONFIG_SOUP}"
->>>  +
->>>  +PACKAGECONFIG[soup2] = "-Dsoup2=true,,libsoup-2.4"
->>>  +PACKAGECONFIG[soup3] = "-Dsoup2=false,,libsoup-3.0"
->>>  +
->>>  +SRC_URI[archive.sha256sum] = 
->>> "85b2bc9341128139539b53ee53f0533310bc96392fd645863a040410b81ebe66"
->>>  --
->>>  2.34.1
->>> 
->>> 
->>> 
->>> 
->> 
->> 
->> 
-
-
---=-FTAJqS5SIUwkR741LSGd
-Content-Type: text/html; charset=us-ascii
-Content-Transfer-Encoding: quoted-printable
-
-<div id=3D"geary-body" dir=3D"auto"><div>Building rest-0.7 is not a big pro=
-blem, but gfbgraph still fails because goa is built with soup-3.0. Also, th=
-e current goa code has completely removed support for Facebook. Personally,=
- I can live with this just fine, so I would just drop the deprecated gfbgra=
-ph recipe.&nbsp;</div><div><br></div><div>Does anyone make use of this?</di=
-v><div><br></div><div>If so, I'll additionally add an older goa recipe that=
- was built with Soup-2.4 and still has the Facebook support. &nbsp;</div></=
-div><div id=3D"geary-quote" dir=3D"auto"><br>Am Mi, 9. Nov 2022 um 19:19:06=
- +0100 schrieb Markus Volk &lt;f_l_k@t-online.de&gt;:<br><blockquote type=
-=3D"cite"><div id=3D"geary-body" dir=3D"auto"><div>Hi Khem,</div><div><br><=
-/div><div>gfbgraph hasn't seen much activity in the last years. It still de=
-pends on soup-2.4, probably always will. Since i believe also libgovirt wil=
-l need it too, the best aproach might be adding a aditional recipe for libr=
-est-0.7 ?</div><div>I'll do some testing</div></div><div id=3D"geary-quote"=
- dir=3D"auto"><br>Am Mi, 9. Nov 2022 um 09:26:09 -0800 schrieb Khem Raj &lt=
-;raj.khem@gmail.com&gt;:<br><blockquote type=3D"cite"><div class=3D"plainte=
-xt" style=3D"white-space: break-spaces;">Thanks Markus for these fixes now =
-that rest and gnome-online-accounts
-is building, next one in line is gfbgraph see
-
-<a href=3D"https://errors.yoctoproject.org/Errors/Details/675756/">https://=
-errors.yoctoproject.org/Errors/Details/675756/</a>
-
-On Mon, Nov 7, 2022 at 11:16 AM Markus Volk &lt;<a href=3D"mailto:f_l_k@t-o=
-nline.de">f_l_k@t-online.de</a>&gt; wrote:
-<blockquote>
- Signed-off-by: Markus Volk &lt;<a href=3D"mailto:f_l_k@t-online.de">f_l_k@=
-t-online.de</a>&gt;
- ---
-  .../0001-Use-GUri-instead-of-SoupURI.patch    |  181 --
-  .../rest/files/0002-Port-to-libsoup3.patch    | 1696 -----------------
-  meta-gnome/recipes-gnome/rest/rest_0.8.1.bb   |   33 -
-  meta-gnome/recipes-gnome/rest/rest_0.9.0.bb   |   25 +
-  4 files changed, 25 insertions(+), 1910 deletions(-)
-  delete mode 100644 meta-gnome/recipes-gnome/rest/files/0001-Use-GUri-inst=
-ead-of-SoupURI.patch
-  delete mode 100644 meta-gnome/recipes-gnome/rest/files/0002-Port-to-libso=
-up3.patch
-  delete mode 100644 meta-gnome/recipes-gnome/rest/rest_0.8.1.bb
-  create mode 100644 meta-gnome/recipes-gnome/rest/rest_0.9.0.bb
-
- diff --git a/meta-gnome/recipes-gnome/rest/files/0001-Use-GUri-instead-of-=
-SoupURI.patch b/meta-gnome/recipes-gnome/rest/files/0001-Use-GUri-instead-o=
-f-SoupURI.patch
- deleted file mode 100644
- index 37ba0a042..000000000
- --- a/meta-gnome/recipes-gnome/rest/files/0001-Use-GUri-instead-of-SoupURI=
-.patch
- +++ /dev/null
- @@ -1,181 +0,0 @@
- -From d39fd6d5f4c0a63cc048b84b0f989cb83f31e5fe Mon Sep 17 00:00:00 2001
- -From: Carlos Garcia Campos &lt;<a href=3D"mailto:cgarcia@igalia.com">cgar=
-cia@igalia.com</a>&gt;
- -Date: Tue, 8 Jun 2021 10:57:06 +0200
- -Subject: [PATCH 1/2] Use GUri instead of SoupURI
- -
- -Upstream-Status: Submitted [<a href=3D"https://gitlab.gnome.org/GNOME/lib=
-rest/-/merge_requests/6">https://gitlab.gnome.org/GNOME/librest/-/merge_req=
-uests/6</a>]
- ----
- - configure.ac               |  2 +-
- - rest-extras/flickr-proxy.c | 19 ++++++++++++++-----
- - rest/oauth-proxy-call.c    | 19 ++++++++++++++-----
- - rest/oauth2-proxy.c        | 22 +++++++++++-----------
- - 4 files changed, 40 insertions(+), 22 deletions(-)
- -
- -diff --git a/configure.ac b/configure.ac
- -index d15e592..d586e69 100644
- ---- a/configure.ac
- -+++ b/configure.ac
- -@@ -40,7 +40,7 @@ AM_PROG_CC_C_O
- - LT_PREREQ([2.2.6])
- - LT_INIT([disable-static])
- -
- --PKG_CHECK_MODULES(GLIB, glib-2.0 &gt;=3D 2.44)
- -+PKG_CHECK_MODULES(GLIB, glib-2.0 &gt;=3D 2.67.4)
- - PKG_CHECK_MODULES(SOUP, libsoup-2.4 &gt;=3D 2.42)
- - PKG_CHECK_MODULES(XML, libxml-2.0)
- - PKG_CHECK_MODULES(GTHREAD, gthread-2.0)
- -diff --git a/rest-extras/flickr-proxy.c b/rest-extras/flickr-proxy.c
- -index 3342a4d..7726359 100644
- ---- a/rest-extras/flickr-proxy.c
- -+++ b/rest-extras/flickr-proxy.c
- -@@ -304,13 +304,13 @@ flickr_proxy_build_login_url (FlickrProxy *proxy,
- -                               const char  *frob,
- -                               const char  *perms)
- - {
- --  SoupURI *uri;
- -+  GUri *uri;
- -   GHashTable *params;
- -   char *sig, *s;
- -+  char *query;
- -
- -   g_return_val_if_fail (FLICKR_IS_PROXY (proxy), NULL);
- -
- --  uri =3D soup_uri_new ("<a href=3D"http://flickr.com/services/auth/">ht=
-tp://flickr.com/services/auth/</a>");
- -   params =3D g_hash_table_new (g_str_hash, g_str_equal);
- -
- -   g_hash_table_insert (params, "api_key", proxy-&gt;priv-&gt;api_key);
- -@@ -321,14 +321,23 @@ flickr_proxy_build_login_url (FlickrProxy *proxy,
- -
- -   sig =3D flickr_proxy_sign (proxy, params);
- -   g_hash_table_insert (params, "api_sig", sig);
- -+  query =3D soup_form_encode_hash (params);
- -
- --  soup_uri_set_query_from_form (uri, params);
- -+  uri =3D g_uri_build (G_URI_FLAGS_ENCODED,
- -+                     "http",
- -+                     NULL,
- -+                     "flickr.com",
- -+                     -1,
- -+                     "services/auth/",
- -+                     query,
- -+                     NULL);
- -
- --  s =3D soup_uri_to_string (uri, FALSE);
- -+  s =3D g_uri_to_string (uri);
- -
- -+  g_free (query);
- -   g_free (sig);
- -   g_hash_table_destroy (params);
- --  soup_uri_free (uri);
- -+  g_uri_unref (uri);
- -
- -   return s;
- - }
- -diff --git a/rest/oauth-proxy-call.c b/rest/oauth-proxy-call.c
- -index c90c69d..e238c3c 100644
- ---- a/rest/oauth-proxy-call.c
- -+++ b/rest/oauth-proxy-call.c
- -@@ -30,7 +30,7 @@
- -
- - G_DEFINE_TYPE (OAuthProxyCall, oauth_proxy_call, REST_TYPE_PROXY_CALL)
- -
- --#define OAUTH_ENCODE_STRING(x_) (x_ ? soup_uri_encode( (x_), "!$&amp;'()=
-*+,;=3D@") : g_strdup (""))
- -+#define OAUTH_ENCODE_STRING(x_) (x_ ? g_uri_escape_string( (x_), NULL, T=
-RUE) : g_strdup (""))
- -
- - static char *
- - sign_plaintext (OAuthProxyPrivate *priv)
- -@@ -136,15 +136,24 @@ sign_hmac (OAuthProxy *proxy, RestProxyCall *call, =
-GHashTable *oauth_params)
- -   if (priv-&gt;oauth_echo) {
- -     g_string_append_uri_escaped (text, priv-&gt;service_url, NULL, FALSE=
-);
- -   } else if (priv-&gt;signature_host !=3D NULL) {
- --    SoupURI *url =3D soup_uri_new (url_str);
- -+    GUri *url =3D g_uri_parse (url_str, G_URI_FLAGS_ENCODED, NULL);
- -+    GUri *new_url;
- -     gchar *signing_url;
- -
- --    soup_uri_set_host (url, priv-&gt;signature_host);
- --    signing_url =3D soup_uri_to_string (url, FALSE);
- -+    new_url =3D g_uri_build (g_uri_get_flags (url),
- -+                           g_uri_get_scheme (url),
- -+                           g_uri_get_userinfo (url),
- -+                           priv-&gt;signature_host,
- -+                           g_uri_get_port (url),
- -+                           g_uri_get_path (url),
- -+                           g_uri_get_query (url),
- -+                           g_uri_get_fragment (url));
- -+    signing_url =3D g_uri_to_string (new_url);
- -
- -     g_string_append_uri_escaped (text, signing_url, NULL, FALSE);
- -
- --    soup_uri_free (url);
- -+    g_uri_unref (new_url);
- -+    g_uri_unref (url);
- -     g_free (signing_url);
- -   } else {
- -     g_string_append_uri_escaped (text, url_str, NULL, FALSE);
- -diff --git a/rest/oauth2-proxy.c b/rest/oauth2-proxy.c
- -index 24e5da0..3382f8b 100644
- ---- a/rest/oauth2-proxy.c
- -+++ b/rest/oauth2-proxy.c
- -@@ -37,8 +37,6 @@ oauth2_proxy_error_quark (void)
- -     return g_quark_from_static_string ("rest-oauth2-proxy");
- - }
- -
- --#define EXTRA_CHARS_ENCODE "!$&amp;'()*+,;=3D@"
- --
- - enum {
- -   PROP_0,
- -   PROP_CLIENT_ID,
- -@@ -242,8 +240,8 @@ append_query_param (gpointer key, gpointer value, gpo=
-inter user_data)
- -     char *encoded_val, *encoded_key;
- -     char *param;
- -
- --    encoded_val =3D soup_uri_encode (value, EXTRA_CHARS_ENCODE);
- --    encoded_key =3D soup_uri_encode (key, EXTRA_CHARS_ENCODE);
- -+    encoded_val =3D g_uri_escape_string (value, NULL, TRUE);
- -+    encoded_key =3D g_uri_escape_string (key, NULL, TRUE);
- -
- -     param =3D g_strdup_printf ("%s=3D%s", encoded_key, encoded_val);
- -     g_free (encoded_key);
- -@@ -295,8 +293,8 @@ oauth2_proxy_build_login_url_full (OAuth2Proxy *proxy=
-,
- -         g_hash_table_foreach (extra_params, append_query_param, params);
- -     }
- -
- --    encoded_uri =3D soup_uri_encode (redirect_uri, EXTRA_CHARS_ENCODE);
- --    encoded_id =3D soup_uri_encode (proxy-&gt;priv-&gt;client_id, EXTRA_=
-CHARS_ENCODE);
- -+    encoded_uri =3D g_uri_escape_string (redirect_uri, NULL, TRUE);
- -+    encoded_id =3D g_uri_escape_string (proxy-&gt;priv-&gt;client_id, NU=
-LL, TRUE);
- -
- -     url =3D g_strdup_printf ("%s?client_id=3D%s&amp;redirect_uri=3D%s&am=
-p;type=3Duser_agent",
- -                            proxy-&gt;priv-&gt;auth_endpoint, encoded_id,
- -@@ -378,20 +376,22 @@ oauth2_proxy_extract_access_token (const char *url)
- - {
- -   GHashTable *params;
- -   char *token =3D NULL;
- --  SoupURI *soupuri =3D soup_uri_new (url);
- -+  const char *fragment;
- -+  GUri *uri =3D g_uri_parse (url, G_URI_FLAGS_ENCODED, NULL);
- -
- --  if (soupuri-&gt;fragment !=3D NULL) {
- --    params =3D soup_form_decode (soupuri-&gt;fragment);
- -+  fragment =3D g_uri_get_fragment (uri);
- -+  if (fragment !=3D NULL) {
- -+    params =3D soup_form_decode (fragment);
- -
- -     if (params) {
- -       char *encoded =3D g_hash_table_lookup (params, "access_token");
- -       if (encoded)
- --        token =3D soup_uri_decode (encoded);
- -+        token =3D g_uri_unescape_string (encoded, NULL);
- -
- -       g_hash_table_destroy (params);
- -     }
- -   }
- --  soup_uri_free (soupuri);
- -+  g_uri_unref (uri);
- -
- -   return token;
- - }
- ---
- -2.33.1
- -
- diff --git a/meta-gnome/recipes-gnome/rest/files/0002-Port-to-libsoup3.pat=
-ch b/meta-gnome/recipes-gnome/rest/files/0002-Port-to-libsoup3.patch
- deleted file mode 100644
- index eed522f77..000000000
- --- a/meta-gnome/recipes-gnome/rest/files/0002-Port-to-libsoup3.patch
- +++ /dev/null
- @@ -1,1696 +0,0 @@
- -From 3dc630ae5b9dc6cda1ba318de2cd654aaba7b4a2 Mon Sep 17 00:00:00 2001
- -From: Carlos Garcia Campos &lt;<a href=3D"mailto:cgarcia@igalia.com">cgar=
-cia@igalia.com</a>&gt;
- -Date: Tue, 8 Jun 2021 17:44:04 +0200
- -Subject: [PATCH 2/2] Port to libsoup3
- -
- -Upstream-Status: Submitted [<a href=3D"https://gitlab.gnome.org/GNOME/lib=
-rest/-/merge_requests/6">https://gitlab.gnome.org/GNOME/librest/-/merge_req=
-uests/6</a>]
- ----
- - configure.ac                |  39 ++++-
- - rest-extras.pc.in           |   2 +-
- - rest-extras/youtube-proxy.c | 110 +++++++++++---
- - rest.pc.in                  |   2 +-
- - rest/rest-private.h         |  22 ++-
- - rest/rest-proxy-auth.c      |  16 ++
- - rest/rest-proxy-call.c      | 296 +++++++++++++++++++++++++++++-------
- - rest/rest-proxy.c           | 209 ++++++++++++++++++++++---
- - tests/custom-serialize.c    |  18 +++
- - tests/proxy-continuous.c    |  37 ++++-
- - tests/proxy.c               |  63 +++++++-
- - tests/threaded.c            |  17 +++
- - 12 files changed, 719 insertions(+), 112 deletions(-)
- -
- -diff --git a/configure.ac b/configure.ac
- -index d586e69..75c02fe 100644
- ---- a/configure.ac
- -+++ b/configure.ac
- -@@ -20,12 +20,6 @@ AM_INIT_AUTOMAKE([1.11 foreign -Wno-portability no-def=
-ine dist-xz])
- -
- - AM_SILENT_RULES([yes])
- -
- --API_MAJOR=3D1
- --API_MINOR=3D0
- --AC_SUBST([API_VERSION],[$API_MAJOR.$API_MINOR])
- --AC_SUBST([API_VERSION_AM],[$API_MAJOR\_$API_MINOR])
- --AC_DEFINE_UNQUOTED(API_VERSION, [$API_VERSION], [API version])
- --
- - AC_CANONICAL_HOST
- -
- - AC_PROG_CC
- -@@ -41,7 +35,6 @@ LT_PREREQ([2.2.6])
- - LT_INIT([disable-static])
- -
- - PKG_CHECK_MODULES(GLIB, glib-2.0 &gt;=3D 2.67.4)
- --PKG_CHECK_MODULES(SOUP, libsoup-2.4 &gt;=3D 2.42)
- - PKG_CHECK_MODULES(XML, libxml-2.0)
- - PKG_CHECK_MODULES(GTHREAD, gthread-2.0)
- -
- -@@ -58,6 +51,37 @@ AC_PATH_PROG([GLIB_MKENUMS],[glib-mkenums])
- - localedir=3D${datadir}/locale
- - AC_SUBST(localedir)
- -
- -+AC_MSG_CHECKING([for libsoup version to use])
- -+AC_ARG_WITH(soup,
- -+            [AC_HELP_STRING([--soup=3D2|3],
- -+                            [version of libsoup library to use (default:=
- 2)])],
- -+            [case "$withval" in
- -+                2|3) ;;
- -+                *) AC_MSG_ERROR([invalid argument "$withval" for --with-=
-soup]) ;;
- -+             esac],
- -+            [with_soup=3D2])
- -+AC_MSG_RESULT([$with_soup])
- -+
- -+API_MAJOR=3D1
- -+
- -+if test "$with_soup" =3D "2"; then
- -+    PKG_CHECK_MODULES(SOUP, libsoup-2.4 &gt;=3D 2.42)
- -+    SOUP_API_VERSION=3D2.4
- -+    API_MINOR=3D0
- -+    AC_DEFINE([WITH_SOUP_2],[1],[Define if libsoup version used is 2])
- -+else
- -+    PKG_CHECK_MODULES(SOUP, libsoup-3.0 &gt;=3D 2.99.8)
- -+    SOUP_API_VERSION=3D3.0
- -+    API_MINOR=3D1
- -+fi
- -+
- -+AM_CONDITIONAL([WITH_SOUP_2],[test "$with_soup" =3D "2"])
- -+AC_SUBST(SOUP_API_VERSION)
- -+
- -+AC_SUBST([API_VERSION],[$API_MAJOR.$API_MINOR])
- -+AC_SUBST([API_VERSION_AM],[$API_MAJOR\_$API_MINOR])
- -+AC_DEFINE_UNQUOTED(API_VERSION, [$API_VERSION], [API version])
- -+
- - dnl =3D=3D=3D Coverage report =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+>
+> Am Mi, 9. Nov 2022 um 09:26:09 -0800 schrieb Khem Raj <raj.khem@gmail.com=
+>:
+>
+> Thanks Markus for these fixes now that rest and gnome-online-accounts is =
+building, next one in line is gfbgraph see https://errors.yoctoproject.org/=
+Errors/Details/675756/ On Mon, Nov 7, 2022 at 11:16 AM Markus Volk <f_l_k@t=
+-online.de> wrote:
+>
+> Signed-off-by: Markus Volk <f_l_k@t-online.de> --- .../0001-Use-GUri-inst=
+ead-of-SoupURI.patch | 181 -- .../rest/files/0002-Port-to-libsoup3.patch | =
+1696 ----------------- meta-gnome/recipes-gnome/rest/rest_0.8.1.bb | 33 - m=
+eta-gnome/recipes-gnome/rest/rest_0.9.0.bb | 25 + 4 files changed, 25 inser=
+tions(+), 1910 deletions(-) delete mode 100644 meta-gnome/recipes-gnome/res=
+t/files/0001-Use-GUri-instead-of-SoupURI.patch delete mode 100644 meta-gnom=
+e/recipes-gnome/rest/files/0002-Port-to-libsoup3.patch delete mode 100644 m=
+eta-gnome/recipes-gnome/rest/rest_0.8.1.bb create mode 100644 meta-gnome/re=
+cipes-gnome/rest/rest_0.9.0.bb diff --git a/meta-gnome/recipes-gnome/rest/f=
+iles/0001-Use-GUri-instead-of-SoupURI.patch b/meta-gnome/recipes-gnome/rest=
+/files/0001-Use-GUri-instead-of-SoupURI.patch deleted file mode 100644 inde=
+x 37ba0a042..000000000 --- a/meta-gnome/recipes-gnome/rest/files/0001-Use-G=
+Uri-instead-of-SoupURI.patch +++ /dev/null @@ -1,181 +0,0 @@ -From d39fd6d5=
+f4c0a63cc048b84b0f989cb83f31e5fe Mon Sep 17 00:00:00 2001 -From: Carlos Gar=
+cia Campos <cgarcia@igalia.com> -Date: Tue, 8 Jun 2021 10:57:06 +0200 -Subj=
+ect: [PATCH 1/2] Use GUri instead of SoupURI - -Upstream-Status: Submitted =
+[https://gitlab.gnome.org/GNOME/librest/-/merge_requests/6] ---- - configur=
+e.ac | 2 +- - rest-extras/flickr-proxy.c | 19 ++++++++++++++----- - rest/oa=
+uth-proxy-call.c | 19 ++++++++++++++----- - rest/oauth2-proxy.c | 22 ++++++=
++++++----------- - 4 files changed, 40 insertions(+), 22 deletions(-) - -di=
+ff --git a/configure.ac b/configure.ac -index d15e592..d586e69 100644 ---- =
+a/configure.ac -+++ b/configure.ac -@@ -40,7 +40,7 @@ AM_PROG_CC_C_O - LT_P=
+REREQ([2.2.6]) - LT_INIT([disable-static]) - --PKG_CHECK_MODULES(GLIB, glib=
+-2.0 >=3D 2.44) -+PKG_CHECK_MODULES(GLIB, glib-2.0 >=3D 2.67.4) - PKG_CHECK=
+_MODULES(SOUP, libsoup-2.4 >=3D 2.42) - PKG_CHECK_MODULES(XML, libxml-2.0) =
+- PKG_CHECK_MODULES(GTHREAD, gthread-2.0) -diff --git a/rest-extras/flickr-=
+proxy.c b/rest-extras/flickr-proxy.c -index 3342a4d..7726359 100644 ---- a/=
+rest-extras/flickr-proxy.c -+++ b/rest-extras/flickr-proxy.c -@@ -304,13 +3=
+04,13 @@ flickr_proxy_build_login_url (FlickrProxy *proxy, - const char *fr=
+ob, - const char *perms) - { -- SoupURI *uri; -+ GUri *uri; - GHashTable *p=
+arams; - char *sig, *s; -+ char *query; - - g_return_val_if_fail (FLICKR_IS=
+_PROXY (proxy), NULL); - -- uri =3D soup_uri_new ("http://flickr.com/servic=
+es/auth/"); - params =3D g_hash_table_new (g_str_hash, g_str_equal); - - g_=
+hash_table_insert (params, "api_key", proxy->priv->api_key); -@@ -321,14 +3=
+21,23 @@ flickr_proxy_build_login_url (FlickrProxy *proxy, - - sig =3D flic=
+kr_proxy_sign (proxy, params); - g_hash_table_insert (params, "api_sig", si=
+g); -+ query =3D soup_form_encode_hash (params); - -- soup_uri_set_query_fr=
+om_form (uri, params); -+ uri =3D g_uri_build (G_URI_FLAGS_ENCODED, -+ "htt=
+p", -+ NULL, -+ "flickr.com", -+ -1, -+ "services/auth/", -+ query, -+ NULL=
+); - -- s =3D soup_uri_to_string (uri, FALSE); -+ s =3D g_uri_to_string (ur=
+i); - -+ g_free (query); - g_free (sig); - g_hash_table_destroy (params); -=
+- soup_uri_free (uri); -+ g_uri_unref (uri); - - return s; - } -diff --git =
+a/rest/oauth-proxy-call.c b/rest/oauth-proxy-call.c -index c90c69d..e238c3c=
+ 100644 ---- a/rest/oauth-proxy-call.c -+++ b/rest/oauth-proxy-call.c -@@ -=
+30,7 +30,7 @@ - - G_DEFINE_TYPE (OAuthProxyCall, oauth_proxy_call, REST_TYP=
+E_PROXY_CALL) - --#define OAUTH_ENCODE_STRING(x_) (x_ ? soup_uri_encode( (x=
+_), "!$&'()*+,;=3D@") : g_strdup ("")) -+#define OAUTH_ENCODE_STRING(x_) (x=
+_ ? g_uri_escape_string( (x_), NULL, TRUE) : g_strdup ("")) - - static char=
+ * - sign_plaintext (OAuthProxyPrivate *priv) -@@ -136,15 +136,24 @@ sign_h=
+mac (OAuthProxy *proxy, RestProxyCall *call, GHashTable *oauth_params) - if=
+ (priv->oauth_echo) { - g_string_append_uri_escaped (text, priv->service_ur=
+l, NULL, FALSE); - } else if (priv->signature_host !=3D NULL) { -- SoupURI =
+*url =3D soup_uri_new (url_str); -+ GUri *url =3D g_uri_parse (url_str, G_U=
+RI_FLAGS_ENCODED, NULL); -+ GUri *new_url; - gchar *signing_url; - -- soup_=
+uri_set_host (url, priv->signature_host); -- signing_url =3D soup_uri_to_st=
+ring (url, FALSE); -+ new_url =3D g_uri_build (g_uri_get_flags (url), -+ g_=
+uri_get_scheme (url), -+ g_uri_get_userinfo (url), -+ priv->signature_host,=
+ -+ g_uri_get_port (url), -+ g_uri_get_path (url), -+ g_uri_get_query (url)=
+, -+ g_uri_get_fragment (url)); -+ signing_url =3D g_uri_to_string (new_url=
+); - - g_string_append_uri_escaped (text, signing_url, NULL, FALSE); - -- s=
+oup_uri_free (url); -+ g_uri_unref (new_url); -+ g_uri_unref (url); - g_fre=
+e (signing_url); - } else { - g_string_append_uri_escaped (text, url_str, N=
+ULL, FALSE); -diff --git a/rest/oauth2-proxy.c b/rest/oauth2-proxy.c -index=
+ 24e5da0..3382f8b 100644 ---- a/rest/oauth2-proxy.c -+++ b/rest/oauth2-prox=
+y.c -@@ -37,8 +37,6 @@ oauth2_proxy_error_quark (void) - return g_quark_fro=
+m_static_string ("rest-oauth2-proxy"); - } - --#define EXTRA_CHARS_ENCODE "=
+!$&'()*+,;=3D@" -- - enum { - PROP_0, - PROP_CLIENT_ID, -@@ -242,8 +240,8 @=
+@ append_query_param (gpointer key, gpointer value, gpointer user_data) - c=
+har *encoded_val, *encoded_key; - char *param; - -- encoded_val =3D soup_ur=
+i_encode (value, EXTRA_CHARS_ENCODE); -- encoded_key =3D soup_uri_encode (k=
+ey, EXTRA_CHARS_ENCODE); -+ encoded_val =3D g_uri_escape_string (value, NUL=
+L, TRUE); -+ encoded_key =3D g_uri_escape_string (key, NULL, TRUE); - - par=
+am =3D g_strdup_printf ("%s=3D%s", encoded_key, encoded_val); - g_free (enc=
+oded_key); -@@ -295,8 +293,8 @@ oauth2_proxy_build_login_url_full (OAuth2Pr=
+oxy *proxy, - g_hash_table_foreach (extra_params, append_query_param, param=
+s); - } - -- encoded_uri =3D soup_uri_encode (redirect_uri, EXTRA_CHARS_ENC=
+ODE); -- encoded_id =3D soup_uri_encode (proxy->priv->client_id, EXTRA_CHAR=
+S_ENCODE); -+ encoded_uri =3D g_uri_escape_string (redirect_uri, NULL, TRUE=
+); -+ encoded_id =3D g_uri_escape_string (proxy->priv->client_id, NULL, TRU=
+E); - - url =3D g_strdup_printf ("%s?client_id=3D%s&redirect_uri=3D%s&type=
+=3Duser_agent", - proxy->priv->auth_endpoint, encoded_id, -@@ -378,20 +376,=
+22 @@ oauth2_proxy_extract_access_token (const char *url) - { - GHashTable =
+*params; - char *token =3D NULL; -- SoupURI *soupuri =3D soup_uri_new (url)=
+; -+ const char *fragment; -+ GUri *uri =3D g_uri_parse (url, G_URI_FLAGS_E=
+NCODED, NULL); - -- if (soupuri->fragment !=3D NULL) { -- params =3D soup_f=
+orm_decode (soupuri->fragment); -+ fragment =3D g_uri_get_fragment (uri); -=
++ if (fragment !=3D NULL) { -+ params =3D soup_form_decode (fragment); - - =
+if (params) { - char *encoded =3D g_hash_table_lookup (params, "access_toke=
+n"); - if (encoded) -- token =3D soup_uri_decode (encoded); -+ token =3D g_=
+uri_unescape_string (encoded, NULL); - - g_hash_table_destroy (params); - }=
+ - } -- soup_uri_free (soupuri); -+ g_uri_unref (uri); - - return token; - =
+} --- -2.33.1 - diff --git a/meta-gnome/recipes-gnome/rest/files/0002-Port-=
+to-libsoup3.patch b/meta-gnome/recipes-gnome/rest/files/0002-Port-to-libsou=
+p3.patch deleted file mode 100644 index eed522f77..000000000 --- a/meta-gno=
+me/recipes-gnome/rest/files/0002-Port-to-libsoup3.patch +++ /dev/null @@ -1=
+,1696 +0,0 @@ -From 3dc630ae5b9dc6cda1ba318de2cd654aaba7b4a2 Mon Sep 17 00:=
+00:00 2001 -From: Carlos Garcia Campos <cgarcia@igalia.com> -Date: Tue, 8 J=
+un 2021 17:44:04 +0200 -Subject: [PATCH 2/2] Port to libsoup3 - -Upstream-S=
+tatus: Submitted [https://gitlab.gnome.org/GNOME/librest/-/merge_requests/6=
+] ---- - configure.ac | 39 ++++- - rest-extras.pc.in | 2 +- - rest-extras/y=
+outube-proxy.c | 110 +++++++++++--- - rest.pc.in | 2 +- - rest/rest-private=
+.h | 22 ++- - rest/rest-proxy-auth.c | 16 ++ - rest/rest-proxy-call.c | 296=
+ +++++++++++++++++++++++++++++------- - rest/rest-proxy.c | 209 +++++++++++=
++++++++++++--- - tests/custom-serialize.c | 18 +++ - tests/proxy-continuous=
+.c | 37 ++++- - tests/proxy.c | 63 +++++++- - tests/threaded.c | 17 +++ - 1=
+2 files changed, 719 insertions(+), 112 deletions(-) - -diff --git a/config=
+ure.ac b/configure.ac -index d586e69..75c02fe 100644 ---- a/configure.ac -+=
+++ b/configure.ac -@@ -20,12 +20,6 @@ AM_INIT_AUTOMAKE([1.11 foreign -Wno-p=
+ortability no-define dist-xz]) - - AM_SILENT_RULES([yes]) - --API_MAJOR=3D1=
+ --API_MINOR=3D0 --AC_SUBST([API_VERSION],[$API_MAJOR.$API_MINOR]) --AC_SUB=
+ST([API_VERSION_AM],[$API_MAJOR\_$API_MINOR]) --AC_DEFINE_UNQUOTED(API_VERS=
+ION, [$API_VERSION], [API version]) -- - AC_CANONICAL_HOST - - AC_PROG_CC -=
+@@ -41,7 +35,6 @@ LT_PREREQ([2.2.6]) - LT_INIT([disable-static]) - - PKG_CH=
+ECK_MODULES(GLIB, glib-2.0 >=3D 2.67.4) --PKG_CHECK_MODULES(SOUP, libsoup-2=
+.4 >=3D 2.42) - PKG_CHECK_MODULES(XML, libxml-2.0) - PKG_CHECK_MODULES(GTHR=
+EAD, gthread-2.0) - -@@ -58,6 +51,37 @@ AC_PATH_PROG([GLIB_MKENUMS],[glib-m=
+kenums]) - localedir=3D${datadir}/locale - AC_SUBST(localedir) - -+AC_MSG_C=
+HECKING([for libsoup version to use]) -+AC_ARG_WITH(soup, -+ [AC_HELP_STRIN=
+G([--soup=3D2|3], -+ [version of libsoup library to use (default: 2)])], -+=
+ [case "$withval" in -+ 2|3) ;; -+ *) AC_MSG_ERROR([invalid argument "$with=
+val" for --with-soup]) ;; -+ esac], -+ [with_soup=3D2]) -+AC_MSG_RESULT([$w=
+ith_soup]) -+ -+API_MAJOR=3D1 -+ -+if test "$with_soup" =3D "2"; then -+ PK=
+G_CHECK_MODULES(SOUP, libsoup-2.4 >=3D 2.42) -+ SOUP_API_VERSION=3D2.4 -+ A=
+PI_MINOR=3D0 -+ AC_DEFINE([WITH_SOUP_2],[1],[Define if libsoup version used=
+ is 2]) -+else -+ PKG_CHECK_MODULES(SOUP, libsoup-3.0 >=3D 2.99.8) -+ SOUP_=
+API_VERSION=3D3.0 -+ API_MINOR=3D1 -+fi -+ -+AM_CONDITIONAL([WITH_SOUP_2],[=
+test "$with_soup" =3D "2"]) -+AC_SUBST(SOUP_API_VERSION) -+ -+AC_SUBST([API=
+_VERSION],[$API_MAJOR.$API_MINOR]) -+AC_SUBST([API_VERSION_AM],[$API_MAJOR\=
+_$API_MINOR]) -+AC_DEFINE_UNQUOTED(API_VERSION, [$API_VERSION], [API versio=
+n]) -+ - dnl =3D=3D=3D Coverage report =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
 =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
- - AC_PATH_PROG([GCOV], [lcov], [enable_gcov=3Dno])
- -
- -@@ -130,6 +154,7 @@ echo "                 LibRest $VERSION"
- - echo "                 =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D"
- - echo ""
- - echo "                   prefix:   ${prefix}"
- -+echo "          libsoup version:   ${with_soup}"
- - echo ""
- - echo "            Documentation:   ${enable_gtk_doc}"
- - echo "       Introspection data:   ${enable_introspection}"
- -diff --git a/rest-extras.pc.in b/rest-extras.pc.in
- -index 39f21bf..3723d6d 100644
- ---- a/rest-extras.pc.in
- -+++ b/rest-extras.pc.in
- -@@ -9,4 +9,4 @@ Description: RESTful web api query library
- - Version: @VERSION@
- - Libs: -L${libdir} -lrest-extras-${apiversion}
- - Cflags: -I${includedir}/rest-${apiversion}
- --Requires: glib-2.0 libsoup-2.4 libxml-2.0
- -+Requires: glib-2.0 libsoup-@SOUP_API_VERSION@ libxml-2.0
- -diff --git a/rest-extras/youtube-proxy.c b/rest-extras/youtube-proxy.c
- -index be0cf08..cd598f4 100644
- ---- a/rest-extras/youtube-proxy.c
- -+++ b/rest-extras/youtube-proxy.c
- -@@ -246,6 +246,9 @@ typedef struct {
- -   GObject *weak_object;
- -   gpointer user_data;
- -   gsize uploaded;
- -+#ifndef WITH_SOUP_2
- -+  GCancellable *cancellable;
- -+#endif
- - } YoutubeProxyUploadClosure;
- -
- - static void
- -@@ -255,7 +258,11 @@ _upload_async_weak_notify_cb (gpointer *data,
- -   YoutubeProxyUploadClosure *closure =3D
- -     (YoutubeProxyUploadClosure *) data;
- -
- -+#ifdef WITH_SOUP_2
- -   _rest_proxy_cancel_message (REST_PROXY (closure-&gt;proxy), closure-&g=
-t;message);
- -+#else
- -+  g_cancellable_cancel (closure-&gt;cancellable);
- -+#endif
- - }
- -
- - static void
- -@@ -267,6 +274,9 @@ _upload_async_closure_free (YoutubeProxyUploadClosure=
- *closure)
- -                          closure);
- -
- -   g_object_unref (closure-&gt;proxy);
- -+#ifndef WITH_SOUP_2
- -+  g_object_unref (closure-&gt;cancellable);
- -+#endif
- -
- -   g_slice_free (YoutubeProxyUploadClosure, closure);
- - }
- -@@ -286,6 +296,9 @@ _upload_async_closure_new (YoutubeProxy *self,
- -   closure-&gt;message =3D message;
- -   closure-&gt;weak_object =3D weak_object;
- -   closure-&gt;user_data =3D user_data;
- -+#ifndef WITH_SOUP_2
- -+  closure-&gt;cancellable =3D g_cancellable_new ();
- -+#endif
- -
- -   if (weak_object !=3D NULL)
- -     g_object_weak_ref (weak_object,
- -@@ -295,41 +308,67 @@ _upload_async_closure_new (YoutubeProxy *self,
- - }
- -
- - static void
- --_upload_completed_cb (SoupSession *session,
- --                      SoupMessage *message,
- -+_upload_completed_cb (SoupMessage *message,
- -+                      GBytes      *payload,
- -+                      GError      *error,
- -                       gpointer     user_data)
- - {
- -   YoutubeProxyUploadClosure *closure =3D
- -     (YoutubeProxyUploadClosure *) user_data;
- --  GError *error =3D NULL;
- -+  gsize length;
- -+  gconstpointer data;
- -+  guint status_code;
- -+  const char *reason_phrase;
- -
- -   if (closure-&gt;callback =3D=3D NULL)
- -     return;
- -
- --  if (message-&gt;status_code &lt; 200 || message-&gt;status_code &gt;=
-=3D 300)
- --    error =3D g_error_new_literal (REST_PROXY_ERROR,
- --                                 message-&gt;status_code,
- --                                 message-&gt;reason_phrase);
- --
- --  closure-&gt;callback (closure-&gt;proxy, message-&gt;response_body-&gt=
-;data,
- --                     message-&gt;request_body-&gt;length,
- --                     message-&gt;request_body-&gt;length,
- -+#ifdef WITH_SOUP_2
- -+  status_code =3D message-&gt;status_code;
- -+  reason_phrase =3D message-&gt;reason_phrase;
- -+#else
- -+  status_code =3D soup_message_get_status (message);
- -+  reason_phrase =3D soup_message_get_reason_phrase (message);
- -+#endif
- -+
- -+  if (status_code &lt; 200 || status_code &gt;=3D 300)
- -+    {
- -+      g_clear_error (&amp;error);
- -+      error =3D g_error_new_literal (REST_PROXY_ERROR,
- -+                                   status_code,
- -+                                   reason_phrase);
- -+    }
- -+
- -+  data =3D g_bytes_get_data (payload, &amp;length);
- -+  closure-&gt;callback (closure-&gt;proxy, data, length, length,
- -                      error, closure-&gt;weak_object, closure-&gt;user_da=
-ta);
- -+  g_bytes_unref (payload);
- -
- -   _upload_async_closure_free (closure);
- - }
- -
- - static void
- - _message_wrote_data_cb (SoupMessage               *msg,
- -+#ifdef WITH_SOUP_2
- -                         SoupBuffer                *chunk,
- -+#else
- -+                        gsize                      chunk_size,
- -+#endif
- -                         YoutubeProxyUploadClosure *closure)
- - {
- --  closure-&gt;uploaded =3D closure-&gt;uploaded + chunk-&gt;length;
- -+#ifdef WITH_SOUP_2
- -+  gsize chunk_size =3D chunk-&gt;length;
- -+  goffset content_length =3D msg-&gt;request_body-&gt;length;
- -+#else
- -+  goffset content_length =3D soup_message_headers_get_content_length (so=
-up_message_get_request_headers (msg));
- -+#endif
- -+
- -+  closure-&gt;uploaded =3D closure-&gt;uploaded + chunk_size;
- -
- --  if (closure-&gt;uploaded &lt; msg-&gt;request_body-&gt;length)
- -+  if (closure-&gt;uploaded &lt; content_length)
- -     closure-&gt;callback (closure-&gt;proxy,
- -                        NULL,
- --                       msg-&gt;request_body-&gt;length,
- -+                       content_length,
- -                        closure-&gt;uploaded,
- -                        NULL,
- -                        closure-&gt;weak_object,
- -@@ -364,7 +403,12 @@ youtube_proxy_upload_async (YoutubeProxy            =
-  *self,
- -   SoupMultipart *mp;
- -   SoupMessage *message;
- -   SoupMessageHeaders *part_headers;
- -+  SoupMessageHeaders *request_headers;
- -+#ifdef WITH_SOUP_2
- -   SoupBuffer *sb;
- -+#else
- -+  GBytes *sb;
- -+#endif
- -   gchar *content_type;
- -   gchar *atom_xml;
- -   GMappedFile *map;
- -@@ -380,10 +424,17 @@ youtube_proxy_upload_async (YoutubeProxy           =
-   *self,
- -
- -   atom_xml =3D _construct_upload_atom_xml (fields, incomplete);
- -
- -+#ifdef WITH_SOUP_2
- -   sb =3D soup_buffer_new_with_owner (atom_xml,
- -                                    strlen(atom_xml),
- -                                    atom_xml,
- -                                    (GDestroyNotify) g_free);
- -+#else
- -+  sb =3D g_bytes_new_with_free_func (atom_xml,
- -+                                   strlen (atom_xml),
- -+                                   (GDestroyNotify) g_free,
- -+                                   atom_xml);
- -+#endif
- -
- -   part_headers =3D soup_message_headers_new (SOUP_MESSAGE_HEADERS_MULTIP=
-ART);
- -
- -@@ -393,7 +444,11 @@ youtube_proxy_upload_async (YoutubeProxy            =
-  *self,
- -
- -   soup_multipart_append_part (mp, part_headers, sb);
- -
- -+#ifdef WITH_SOUP_2
- -   soup_buffer_free (sb);
- -+#else
- -+  g_bytes_unref (sb);
- -+#endif
- -
- -   content_type =3D g_content_type_guess (
- -       filename,
- -@@ -401,24 +456,37 @@ youtube_proxy_upload_async (YoutubeProxy           =
-   *self,
- -       g_mapped_file_get_length (map),
- -       NULL);
- -
- -+#ifdef WITH_SOUP_2
- -   sb =3D soup_buffer_new_with_owner (g_mapped_file_get_contents (map),
- -                                    g_mapped_file_get_length (map),
- -                                    map,
- -                                    (GDestroyNotify) g_mapped_file_unref)=
-;
- -+#else
- -+  sb =3D g_bytes_new_with_free_func (g_mapped_file_get_contents (map),
- -+                                   g_mapped_file_get_length (map),
- -+                                   (GDestroyNotify) g_mapped_file_unref,
- -+                                   map);
- -+#endif
- -
- -   soup_message_headers_replace (part_headers, "Content-Type", content_ty=
-pe);
- -
- -   soup_multipart_append_part (mp, part_headers, sb);
- -
- -+#ifdef WITH_SOUP_2
- -   soup_buffer_free (sb);
- --
- -   soup_message_headers_free (part_headers);
- --
- -   message =3D soup_form_request_new_from_multipart (UPLOAD_URL, mp);
- -+  request_headers =3D message-&gt;request_headers;
- -+#else
- -+  g_bytes_unref (sb);
- -+  soup_message_headers_unref (part_headers);
- -+  message =3D soup_message_new_from_multipart (UPLOAD_URL, mp);
- -+  request_headers =3D soup_message_get_request_headers (message);
- -+#endif
- -
- -   soup_multipart_free (mp);
- -
- --  _set_upload_headers (self, message-&gt;request_headers, filename);
- -+  _set_upload_headers (self, request_headers, filename);
- -
- -   closure =3D _upload_async_closure_new (self, callback, message, weak_o=
-bject,
- -                                        user_data);
- -@@ -429,7 +497,13 @@ youtube_proxy_upload_async (YoutubeProxy            =
-  *self,
- -                     closure);
- -
- -
- --  _rest_proxy_queue_message (REST_PROXY (self), message, _upload_complet=
-ed_cb,
- -+  _rest_proxy_queue_message (REST_PROXY (self), message,
- -+#ifdef WITH_SOUP_2
- -+                             NULL,
- -+#else
- -+                             closure-&gt;cancellable,
- -+#endif
- -+                             _upload_completed_cb,
- -                              closure);
- -
- -   return TRUE;
- -diff --git a/rest.pc.in b/rest.pc.in
- -index 94c384b..e6bae3e 100644
- ---- a/rest.pc.in
- -+++ b/rest.pc.in
- -@@ -9,4 +9,4 @@ Description: RESTful web api query library
- - Version: @VERSION@
- - Libs: -L${libdir} -lrest-${apiversion}
- - Cflags: -I${includedir}/rest-${apiversion}
- --Requires: glib-2.0 libsoup-2.4 libxml-2.0
- -+Requires: glib-2.0 libsoup-@SOUP_API_VERSION@ libxml-2.0
- -diff --git a/rest/rest-private.h b/rest/rest-private.h
- -index 9e91fa0..6e71322 100644
- ---- a/rest/rest-private.h
- -+++ b/rest/rest-private.h
- -@@ -31,6 +31,11 @@
- -
- - G_BEGIN_DECLS
- -
- -+typedef void (*RestMessageFinishedCallback) (SoupMessage *msg,
- -+                                             GBytes      *body,
- -+                                             GError      *error,
- -+                                             gpointer     user_data);
- -+
- - typedef enum
- - {
- -   REST_DEBUG_XML_PARSER =3D 1 &lt;&lt; 0,
- -@@ -53,12 +58,23 @@ gboolean _rest_proxy_get_binding_required (RestProxy =
-*proxy);
- - const gchar *_rest_proxy_get_bound_url (RestProxy *proxy);
- - void _rest_proxy_queue_message (RestProxy   *proxy,
- -                                 SoupMessage *message,
- --                                SoupSessionCallback callback,
- -+                                GCancellable *cancellable,
- -+                                RestMessageFinishedCallback callback,
- -                                 gpointer user_data);
- - void _rest_proxy_cancel_message (RestProxy   *proxy,
- -                                  SoupMessage *message);
- --guint _rest_proxy_send_message (RestProxy   *proxy,
- --                                SoupMessage *message);
- -+GBytes *_rest_proxy_send_message (RestProxy    *proxy,
- -+                                  SoupMessage  *message,
- -+                                  GCancellable *cancellable,
- -+                                  GError      **error);
- -+void _rest_proxy_send_message_async (RestProxy          *proxy,
- -+                                     SoupMessage        *message,
- -+                                     GCancellable       *cancellable,
- -+                                     GAsyncReadyCallback callback,
- -+                                     gpointer            user_data);
- -+GInputStream *_rest_proxy_send_message_finish (RestProxy    *proxy,
- -+                                               GAsyncResult *result,
- -+                                               GError      **error);
- -
- - RestXmlNode *_rest_xml_node_new (void);
- - void         _rest_xml_node_reverse_children_siblings (RestXmlNode *node=
-);
- -diff --git a/rest/rest-proxy-auth.c b/rest/rest-proxy-auth.c
- -index b96e443..0b2ec9f 100644
- ---- a/rest/rest-proxy-auth.c
- -+++ b/rest/rest-proxy-auth.c
- -@@ -29,7 +29,9 @@
- - struct _RestProxyAuthPrivate {
- -   /* used to hold state during async authentication */
- -   RestProxy *proxy;
- -+#ifdef WITH_SOUP_2
- -   SoupSession *session;
- -+#endif
- -   SoupMessage *message;
- -   SoupAuth *auth;
- -   gboolean paused;
- -@@ -43,7 +45,9 @@ rest_proxy_auth_dispose (GObject *object)
- -   RestProxyAuthPrivate *priv =3D ((RestProxyAuth*)object)-&gt;priv;
- -
- -   g_clear_object (&amp;priv-&gt;proxy);
- -+#ifdef WITH_SOUP_2
- -   g_clear_object (&amp;priv-&gt;session);
- -+#endif
- -   g_clear_object (&amp;priv-&gt;message);
- -   g_clear_object (&amp;priv-&gt;auth);
- -
- -@@ -73,13 +77,17 @@ rest_proxy_auth_new (RestProxy *proxy,
- -   RestProxyAuth *rest_auth;
- -
- -   g_return_val_if_fail (REST_IS_PROXY (proxy), NULL);
- -+#ifdef WITH_SOUP_2
- -   g_return_val_if_fail (SOUP_IS_SESSION (session), NULL);
- -+#endif
- -   g_return_val_if_fail (SOUP_IS_MESSAGE (message), NULL);
- -   g_return_val_if_fail (SOUP_IS_AUTH (soup_auth), NULL);
- -
- -   rest_auth =3D REST_PROXY_AUTH (g_object_new (REST_TYPE_PROXY_AUTH, NUL=
-L));
- -   rest_auth-&gt;priv-&gt;proxy =3D g_object_ref(proxy);
- -+#ifdef WITH_SOUP_2
- -   rest_auth-&gt;priv-&gt;session =3D g_object_ref(session);
- -+#endif
- -   rest_auth-&gt;priv-&gt;message =3D g_object_ref(message);
- -   rest_auth-&gt;priv-&gt;auth =3D g_object_ref(soup_auth);
- -
- -@@ -104,7 +112,9 @@ rest_proxy_auth_pause (RestProxyAuth *auth)
- -       return;
- -
- -   auth-&gt;priv-&gt;paused =3D TRUE;
- -+#ifdef WITH_SOUP_2
- -   soup_session_pause_message (auth-&gt;priv-&gt;session, auth-&gt;priv-&=
-gt;message);
- -+#endif
- - }
- -
- - /**
- -@@ -128,7 +138,9 @@ rest_proxy_auth_unpause (RestProxyAuth *auth)
- -   soup_auth_authenticate (auth-&gt;priv-&gt;auth, username, password);
- -   g_free (username);
- -   g_free (password);
- -+#ifdef WITH_SOUP_2
- -   soup_session_unpause_message (auth-&gt;priv-&gt;session, auth-&gt;priv=
--&gt;message);
- -+#endif
- -   auth-&gt;priv-&gt;paused =3D FALSE;
- - }
- -
- -@@ -146,7 +158,11 @@ rest_proxy_auth_cancel (RestProxyAuth *auth)
- - {
- -   g_return_if_fail (REST_IS_PROXY_AUTH (auth));
- -
- -+#ifdef WITH_SOUP_2
- -   soup_session_cancel_message (auth-&gt;priv-&gt;session, auth-&gt;priv-=
-&gt;message, SOUP_STATUS_CANCELLED);
- -+#else
- -+  soup_auth_cancel (auth-&gt;priv-&gt;auth);
- -+#endif
- - }
- -
- - G_GNUC_INTERNAL gboolean rest_proxy_auth_is_paused (RestProxyAuth *auth)
- -diff --git a/rest/rest-proxy-call.c b/rest/rest-proxy-call.c
- -index 2ab722f..62b00da 100644
- ---- a/rest/rest-proxy-call.c
- -+++ b/rest/rest-proxy-call.c
- -@@ -20,12 +20,14 @@
- -  *
- -  */
- -
- -+#include &lt;config.h&gt;
- - #include &lt;rest/rest-proxy.h&gt;
- - #include &lt;rest/rest-proxy-call.h&gt;
- - #include &lt;rest/rest-params.h&gt;
- - #include &lt;libsoup/soup.h&gt;
- -
- - #include "rest-private.h"
- -+#include "rest-proxy-auth-private.h"
- - #include "rest-proxy-call-private.h"
- -
- -
- -@@ -38,12 +40,15 @@ struct _RestProxyCallAsyncClosure {
- - };
- - typedef struct _RestProxyCallAsyncClosure RestProxyCallAsyncClosure;
- -
- -+#define READ_BUFFER_SIZE 8192
- -+
- - struct _RestProxyCallContinuousClosure {
- -   RestProxyCall *call;
- -   RestProxyCallContinuousCallback callback;
- -   GObject *weak_object;
- -   gpointer userdata;
- -   SoupMessage *message;
- -+  guchar buffer[READ_BUFFER_SIZE];
- - };
- - typedef struct _RestProxyCallContinuousClosure RestProxyCallContinuousCl=
-osure;
- -
- -@@ -70,8 +75,7 @@ struct _RestProxyCallPrivate {
- -   gchar *url;
- -
- -   GHashTable *response_headers;
- --  goffset length;
- --  gchar *payload;
- -+  GBytes *payload;
- -   guint status_code;
- -   gchar *status_message;
- -
- -@@ -160,7 +164,7 @@ rest_proxy_call_finalize (GObject *object)
- -   g_free (priv-&gt;method);
- -   g_free (priv-&gt;function);
- -
- --  g_free (priv-&gt;payload);
- -+  g_clear_pointer (&amp;priv-&gt;payload, g_bytes_unref);
- -   g_free (priv-&gt;status_message);
- -
- -   g_free (priv-&gt;url);
- -@@ -546,14 +550,23 @@ _populate_headers_hash_table (const gchar *name,
- -   g_hash_table_insert (headers, g_strdup (name), g_strdup (value));
- - }
- -
- -+#ifdef WITH_SOUP_2
- - /* I apologise for this macro, but it saves typing ;-) */
- - #define error_helper(x) g_set_error_literal(error, REST_PROXY_ERROR, x, =
-message-&gt;reason_phrase)
- -+#endif
- - static gboolean
- - _handle_error_from_message (SoupMessage *message, GError **error)
- - {
- --  if (message-&gt;status_code &lt; 100)
- -+  guint status_code;
- -+  const char *reason_phrase;
- -+
- -+#ifdef WITH_SOUP_2
- -+  status_code =3D message-&gt;status_code;
- -+
- -+  if (status_code &lt; 100)
- -   {
- --    switch (message-&gt;status_code)
- -+    g_clear_error (error);
- -+    switch (status_code)
- -     {
- -       case SOUP_STATUS_CANCELLED:
- -         error_helper (REST_PROXY_ERROR_CANCELLED);
- -@@ -580,61 +593,84 @@ _handle_error_from_message (SoupMessage *message, G=
-Error **error)
- -     }
- -     return FALSE;
- -   }
- -+  reason_phrase =3D message-&gt;reason_phrase;
- -+#else
- -+  status_code =3D soup_message_get_status (message);
- -+  reason_phrase =3D soup_message_get_reason_phrase (message);
- -+#endif
- -
- --  if (message-&gt;status_code &gt;=3D 200 &amp;&amp; message-&gt;status_=
-code &lt; 300)
- -+  if (status_code &gt;=3D 200 &amp;&amp; status_code &lt; 300)
- -   {
- -     return TRUE;
- -   }
- -
- -+  if (*error !=3D NULL)
- -+    return FALSE;
- -+
- -   /* If we are here we must be in some kind of HTTP error, lets try */
- -   g_set_error_literal (error,
- -                        REST_PROXY_ERROR,
- --                       message-&gt;status_code,
- --                       message-&gt;reason_phrase);
- -+                       status_code,
- -+                       reason_phrase);
- -   return FALSE;
- - }
- -
- - static gboolean
- --finish_call (RestProxyCall *call, SoupMessage *message, GError **error)
- -+finish_call (RestProxyCall *call, SoupMessage *message, GBytes *payload,=
- GError **error)
- - {
- -   RestProxyCallPrivate *priv =3D GET_PRIVATE (call);
- -+  SoupMessageHeaders *response_headers;
- -
- -   g_assert (call);
- -   g_assert (message);
- -+  g_assert (payload);
- -+
- -+#ifdef WITH_SOUP_2
- -+  response_headers =3D message-&gt;response_headers;
- -+#else
- -+  response_headers =3D soup_message_get_response_headers (message);
- -+#endif
- -
- -   /* Convert the soup headers in to hash */
- -   /* FIXME: Eeek..are you allowed duplicate headers? ... */
- -   g_hash_table_remove_all (priv-&gt;response_headers);
- --  soup_message_headers_foreach (message-&gt;response_headers,
- -+  soup_message_headers_foreach (response_headers,
- -       (SoupMessageHeadersForeachFunc)_populate_headers_hash_table,
- -       priv-&gt;response_headers);
- -
- --  priv-&gt;payload =3D g_memdup (message-&gt;response_body-&gt;data,
- --                            message-&gt;response_body-&gt;length + 1);
- --  priv-&gt;length =3D message-&gt;response_body-&gt;length;
- -+  priv-&gt;payload =3D payload;
- -
- -+#ifdef WITH_SOUP_2
- -   priv-&gt;status_code =3D message-&gt;status_code;
- -   priv-&gt;status_message =3D g_strdup (message-&gt;reason_phrase);
- -+#else
- -+  priv-&gt;status_code =3D soup_message_get_status (message);
- -+  priv-&gt;status_message =3D g_strdup (soup_message_get_reason_phrase (=
-message));
- -+#endif
- -
- -   return _handle_error_from_message (message, error);
- - }
- -
- - static void
- --_continuous_call_message_completed_cb (SoupSession *session,
- --                                       SoupMessage *message,
- --                                       gpointer     userdata)
- -+_continuous_call_message_completed (SoupMessage *message,
- -+                                    GError      *error,
- -+                                    gpointer     userdata)
- - {
- -   RestProxyCallContinuousClosure *closure;
- -   RestProxyCall *call;
- -   RestProxyCallPrivate *priv;
- --  GError *error =3D NULL;
- -
- -   closure =3D (RestProxyCallContinuousClosure *)userdata;
- -   call =3D closure-&gt;call;
- -   priv =3D GET_PRIVATE (call);
- -
- -+#ifdef WITH_SOUP_2
- -   priv-&gt;status_code =3D message-&gt;status_code;
- -   priv-&gt;status_message =3D g_strdup (message-&gt;reason_phrase);
- -+#else
- -+  priv-&gt;status_code =3D soup_message_get_status (message);
- -+  priv-&gt;status_message =3D g_strdup (soup_message_get_reason_phrase (=
-message));
- -+#endif
- -
- -   _handle_error_from_message (message, &amp;error);
- -
- -@@ -657,6 +693,7 @@ _continuous_call_message_completed_cb (SoupSession *s=
-ession,
- -
- -   priv-&gt;cur_call_closure =3D NULL;
- -   g_object_unref (closure-&gt;call);
- -+  g_object_unref (message);
- -   g_slice_free (RestProxyCallContinuousClosure, closure);
- - }
- -
- -@@ -715,6 +752,49 @@ set_url (RestProxyCall *call)
- -   return TRUE;
- - }
- -
- -+#ifndef WITH_SOUP_2
- -+static gboolean
- -+authenticate (RestProxyCall *call,
- -+              SoupAuth      *soup_auth,
- -+              gboolean       retrying,
- -+              SoupMessage   *message)
- -+{
- -+  RestProxyCallPrivate *priv =3D GET_PRIVATE (call);
- -+  RestProxyAuth *rest_auth;
- -+  gboolean try_auth;
- -+
- -+  rest_auth =3D rest_proxy_auth_new (priv-&gt;proxy, NULL, message, soup=
-_auth);
- -+  g_signal_emit_by_name (priv-&gt;proxy, "authenticate", rest_auth, retr=
-ying, &amp;try_auth);
- -+  if (try_auth &amp;&amp; !rest_proxy_auth_is_paused (rest_auth)) {
- -+    char *username, *password;
- -+
- -+    g_object_get (priv-&gt;proxy, "username", &amp;username, "password",=
- &amp;password, NULL);
- -+    soup_auth_authenticate (soup_auth, username, password);
- -+    g_free (username);
- -+    g_free (password);
- -+  }
- -+  g_object_unref (rest_auth);
- -+
- -+  return try_auth;
- -+}
- -+
- -+static gboolean
- -+accept_certificate (RestProxyCall        *call,
- -+                    GTlsCertificate      *tls_certificate,
- -+                    GTlsCertificateFlags *tls_errors,
- -+                    SoupMessage          *message)
- -+{
- -+        RestProxyCallPrivate *priv =3D GET_PRIVATE (call);
- -+        gboolean ssl_strict;
- -+
- -+        if (tls_errors =3D=3D 0)
- -+                return TRUE;
- -+
- -+        g_object_get (priv-&gt;proxy, "ssl-strict", &amp;ssl_strict, NUL=
-L);
- -+        return !ssl_strict;
- -+}
- -+#endif
- -+
- - static SoupMessage *
- - prepare_message (RestProxyCall *call, GError **error_out)
- - {
- -@@ -722,6 +802,7 @@ prepare_message (RestProxyCall *call, GError **error_=
-out)
- -   RestProxyCallClass *call_class;
- -   const gchar *user_agent;
- -   SoupMessage *message;
- -+  SoupMessageHeaders *request_headers;
- -   GError *error =3D NULL;
- -
- -   call_class =3D REST_PROXY_CALL_GET_CLASS (call);
- -@@ -748,6 +829,9 @@ prepare_message (RestProxyCall *call, GError **error_=
-out)
- -     gchar *content;
- -     gchar *content_type;
- -     gsize content_len;
- -+#ifndef WITH_SOUP_2
- -+    GBytes *body;
- -+#endif
- -
- -     if (!call_class-&gt;serialize_params (call, &amp;content_type,
- -                                        &amp;content, &amp;content_len, &=
-amp;error))
- -@@ -780,8 +864,14 @@ prepare_message (RestProxyCall *call, GError **error=
-_out)
- -                              "Could not parse URI");
- -         return NULL;
- -     }
- -+#ifdef WITH_SOUP_2
- -     soup_message_set_request (message, content_type,
- -                               SOUP_MEMORY_TAKE, content, content_len);
- -+#else
- -+    body =3D g_bytes_new_take (content, content_len);
- -+    soup_message_set_request_body_from_bytes (message, content_type, bod=
-y);
- -+    g_bytes_unref (body);
- -+#endif
- -
- -     g_free (content_type);
- -   } else if (rest_params_are_strings (priv-&gt;params)) {
- -@@ -798,9 +888,15 @@ prepare_message (RestProxyCall *call, GError **error=
-_out)
- -
- -     hash =3D rest_params_as_string_hash_table (priv-&gt;params);
- -
- -+#ifdef WITH_SOUP_2
- -     message =3D soup_form_request_new_from_hash (priv-&gt;method,
- -                                                priv-&gt;url,
- -                                                hash);
- -+#else
- -+    message =3D soup_message_new_from_encoded_form (priv-&gt;method,
- -+                                                  priv-&gt;url,
- -+                                                  soup_form_encode_hash =
-(hash));
- -+#endif
- -
- -     g_hash_table_unref (hash);
- -
- -@@ -827,19 +923,28 @@ prepare_message (RestProxyCall *call, GError **erro=
-r_out)
- -       if (rest_param_is_string (param)) {
- -         soup_multipart_append_form_string (mp, name, rest_param_get_cont=
-ent (param));
- -       } else {
- --        SoupBuffer *sb;
- --
- --        sb =3D soup_buffer_new_with_owner (rest_param_get_content (param=
-),
- --                                         rest_param_get_content_length (=
-param),
- --                                         rest_param_ref (param),
- --                                         (GDestroyNotify)rest_param_unre=
-f);
- -+#ifdef WITH_SOUP_2
- -+        SoupBuffer *sb =3D soup_buffer_new_with_owner (rest_param_get_co=
-ntent (param),
- -+                                                     rest_param_get_cont=
-ent_length (param),
- -+                                                     rest_param_ref (par=
-am),
- -+                                                     (GDestroyNotify)res=
-t_param_unref);
- -+#else
- -+        GBytes *sb =3D g_bytes_new_with_free_func (rest_param_get_conten=
-t (param),
- -+                                                 rest_param_get_content_=
-length (param),
- -+                                                 (GDestroyNotify)rest_pa=
-ram_unref,
- -+                                                 rest_param_ref (param))=
-;
- -+#endif
- -
- -         soup_multipart_append_form_file (mp, name,
- -                                          rest_param_get_file_name (param=
-),
- -                                          rest_param_get_content_type (pa=
-ram),
- -                                          sb);
- -
- -+#ifdef WITH_SOUP_2
- -         soup_buffer_free (sb);
- -+#else
- -+        g_bytes_unref (sb);
- -+#endif
- -       }
- -     }
- -
- -@@ -853,19 +958,36 @@ prepare_message (RestProxyCall *call, GError **erro=
-r_out)
- -         return NULL;
- -     }
- -
- -+#ifdef WITH_SOUP_2
- -     message =3D soup_form_request_new_from_multipart (priv-&gt;url, mp);
- -+#else
- -+    message =3D soup_message_new_from_multipart (priv-&gt;url, mp);
- -+#endif
- -
- -     soup_multipart_free (mp);
- -   }
- -
- -+#ifdef WITH_SOUP_2
- -+  request_headers =3D message-&gt;request_headers;
- -+#else
- -+  request_headers =3D soup_message_get_request_headers (message);
- -+  g_signal_connect_swapped (message, "authenticate",
- -+                            G_CALLBACK (authenticate),
- -+                            call);
- -+  g_signal_connect_swapped (message, "accept-certificate",
- -+                            G_CALLBACK (accept_certificate),
- -+                            call);
- -+#endif
- -+
- -+
- -   /* Set the user agent, if one was set in the proxy */
- -   user_agent =3D rest_proxy_get_user_agent (priv-&gt;proxy);
- -   if (user_agent) {
- --    soup_message_headers_append (message-&gt;request_headers, "User-Agen=
-t", user_agent);
- -+    soup_message_headers_append (request_headers, "User-Agent", user_age=
-nt);
- -   }
- -
- -   /* Set the headers */
- --  g_hash_table_foreach (priv-&gt;headers, set_header, message-&gt;reques=
-t_headers);
- -+  g_hash_table_foreach (priv-&gt;headers, set_header, request_headers);
- -
- -   return message;
- - }
- -@@ -878,17 +1000,17 @@ _call_message_call_cancelled_cb (GCancellable  *ca=
-ncellable,
- - }
- -
- - static void
- --_call_message_call_completed_cb (SoupSession *session,
- --                                 SoupMessage *message,
- -+_call_message_call_completed_cb (SoupMessage *message,
- -+                                 GBytes      *payload,
- -+                                 GError      *error,
- -                                  gpointer     user_data)
- - {
- -   GTask *task =3D user_data;
- -   RestProxyCall *call;
- --  GError *error =3D NULL;
- -
- -   call =3D REST_PROXY_CALL (g_task_get_source_object (task));
- -
- --  finish_call (call, message, &amp;error);
- -+  finish_call (call, message, payload, &amp;error);
- -
- -   if (error !=3D NULL)
- -     g_task_return_error (task, error);
- -@@ -938,6 +1060,7 @@ rest_proxy_call_invoke_async (RestProxyCall      *ca=
-ll,
- -
- -   _rest_proxy_queue_message (priv-&gt;proxy,
- -                              message,
- -+                             priv-&gt;cancellable,
- -                              _call_message_call_completed_cb,
- -                              task);
- - }
- -@@ -962,16 +1085,55 @@ rest_proxy_call_invoke_finish (RestProxyCall  *cal=
-l,
- - }
- -
- - static void
- --_continuous_call_message_got_chunk_cb (SoupMessage                    *m=
-sg,
- --                                       SoupBuffer                     *c=
-hunk,
- --                                       RestProxyCallContinuousClosure *c=
-losure)
- -+_continuous_call_read_cb (GObject      *source,
- -+                          GAsyncResult *result,
- -+                          gpointer      user_data)
- - {
- -+  GInputStream *stream =3D G_INPUT_STREAM (source);
- -+  RestProxyCallContinuousClosure *closure =3D user_data;
- -+  RestProxyCallPrivate *priv =3D GET_PRIVATE (closure-&gt;call);
- -+  gssize bytes_read;
- -+  GError *error =3D NULL;
- -+
- -+  bytes_read =3D g_input_stream_read_finish (stream, result, &amp;error)=
-;
- -+  if (bytes_read &lt;=3D 0)
- -+    {
- -+      _continuous_call_message_completed (closure-&gt;message, error, us=
-er_data);
- -+      return;
- -+    }
- -+
- -   closure-&gt;callback (closure-&gt;call,
- --                     chunk-&gt;data,
- --                     chunk-&gt;length,
- -+                     (gconstpointer)closure-&gt;buffer,
- -+                     bytes_read,
- -                      NULL,
- -                      closure-&gt;weak_object,
- -                      closure-&gt;userdata);
- -+
- -+  g_input_stream_read_async (stream, closure-&gt;buffer, READ_BUFFER_SIZ=
-E, G_PRIORITY_DEFAULT,
- -+                             priv-&gt;cancellable, _continuous_call_read=
-_cb, closure);
- -+}
- -+
- -+static void
- -+_continuous_call_message_sent_cb (GObject      *source,
- -+                                  GAsyncResult *result,
- -+                                  gpointer      user_data)
- -+{
- -+  RestProxy *proxy =3D REST_PROXY (source);
- -+  RestProxyCallContinuousClosure *closure =3D user_data;
- -+  RestProxyCallPrivate *priv =3D GET_PRIVATE (closure-&gt;call);
- -+  GInputStream *stream;
- -+  GError *error =3D NULL;
- -+
- -+  stream =3D _rest_proxy_send_message_finish (proxy, result, &amp;error)=
-;
- -+  if (!stream)
- -+    {
- -+      _continuous_call_message_completed (closure-&gt;message, error, us=
-er_data);
- -+      return;
- -+    }
- -+
- -+  g_input_stream_read_async (stream, closure-&gt;buffer, READ_BUFFER_SIZ=
-E, G_PRIORITY_DEFAULT,
- -+                             priv-&gt;cancellable, _continuous_call_read=
-_cb, closure);
- -+  g_object_unref (stream);
- - }
- -
- -
- -@@ -1021,9 +1183,6 @@ rest_proxy_call_continuous (RestProxyCall          =
-          *call,
- -   if (message =3D=3D NULL)
- -     return FALSE;
- -
- --  /* Must turn off accumulation */
- --  soup_message_body_set_accumulate (message-&gt;response_body, FALSE);
- --
- -   closure =3D g_slice_new0 (RestProxyCallContinuousClosure);
- -   closure-&gt;call =3D g_object_ref (call);
- -   closure-&gt;callback =3D callback;
- -@@ -1041,33 +1200,29 @@ rest_proxy_call_continuous (RestProxyCall        =
-            *call,
- -         closure);
- -   }
- -
- --  g_signal_connect (message,
- --                    "got-chunk",
- --                    (GCallback)_continuous_call_message_got_chunk_cb,
- --                    closure);
- --
- --  _rest_proxy_queue_message (priv-&gt;proxy,
- --                             message,
- --                             _continuous_call_message_completed_cb,
- --                             closure);
- -+  _rest_proxy_send_message_async (priv-&gt;proxy,
- -+                                  message,
- -+                                  priv-&gt;cancellable,
- -+                                  _continuous_call_message_sent_cb,
- -+                                  closure);
- -   return TRUE;
- - }
- -
- - static void
- --_upload_call_message_completed_cb (SoupSession *session,
- --                                   SoupMessage *message,
- -+_upload_call_message_completed_cb (SoupMessage *message,
- -+                                   GBytes      *payload,
- -+                                   GError      *error,
- -                                    gpointer     user_data)
- - {
- -   RestProxyCall *call;
- -   RestProxyCallPrivate *priv;
- --  GError *error =3D NULL;
- -   RestProxyCallUploadClosure *closure;
- -
- -   closure =3D (RestProxyCallUploadClosure *) user_data;
- -   call =3D closure-&gt;call;
- -   priv =3D GET_PRIVATE (call);
- -
- --  finish_call (call, message, &amp;error);
- -+  finish_call (call, message, payload, &amp;error);
- -
- -   closure-&gt;callback (closure-&gt;call,
- -                      closure-&gt;uploaded,
- -@@ -1093,14 +1248,25 @@ _upload_call_message_completed_cb (SoupSession *s=
-ession,
- -
- - static void
- - _upload_call_message_wrote_data_cb (SoupMessage                *msg,
- -+#ifdef WITH_SOUP_2
- -                                     SoupBuffer                 *chunk,
- -+#else
- -+                                    gsize                       chunk_si=
-ze,
- -+#endif
- -                                     RestProxyCallUploadClosure *closure)
- - {
- --  closure-&gt;uploaded =3D closure-&gt;uploaded + chunk-&gt;length;
- -+#ifdef WITH_SOUP_2
- -+  gsize chunk_size =3D chunk-&gt;length;
- -+  goffset content_length =3D msg-&gt;request_body-&gt;length;
- -+#else
- -+  goffset content_length =3D soup_message_headers_get_content_length (so=
-up_message_get_request_headers (msg));
- -+#endif
- -
- --  if (closure-&gt;uploaded &lt; msg-&gt;request_body-&gt;length)
- -+  closure-&gt;uploaded =3D closure-&gt;uploaded + chunk_size;
- -+
- -+  if (closure-&gt;uploaded &lt; content_length)
- -     closure-&gt;callback (closure-&gt;call,
- --                       msg-&gt;request_body-&gt;length,
- -+                       content_length,
- -                        closure-&gt;uploaded,
- -                        NULL,
- -                        closure-&gt;weak_object,
- -@@ -1178,6 +1344,7 @@ rest_proxy_call_upload (RestProxyCall              =
-  *call,
- -
- -   _rest_proxy_queue_message (priv-&gt;proxy,
- -                              message,
- -+                             priv-&gt;cancellable,
- -                              _upload_call_message_completed_cb,
- -                              closure);
- -   return TRUE;
- -@@ -1206,6 +1373,10 @@ rest_proxy_call_cancel (RestProxyCall *call)
- -   if (priv-&gt;cancellable)
- -     {
- -       g_signal_handler_disconnect (priv-&gt;cancellable, priv-&gt;cancel=
-_sig);
- -+#ifndef WITH_SOUP_2
- -+      if (!g_cancellable_is_cancelled (priv-&gt;cancellable))
- -+              g_cancellable_cancel (priv-&gt;cancellable);
- -+#endif
- -       g_clear_object (&amp;priv-&gt;cancellable);
- -     }
- -
- -@@ -1240,6 +1411,7 @@ rest_proxy_call_sync (RestProxyCall *call,
- -   RestProxyCallPrivate *priv =3D GET_PRIVATE (call);
- -   SoupMessage *message;
- -   gboolean ret;
- -+  GBytes *payload;
- -
- -   g_return_val_if_fail (REST_IS_PROXY_CALL (call), FALSE);
- -
- -@@ -1247,9 +1419,9 @@ rest_proxy_call_sync (RestProxyCall *call,
- -   if (!message)
- -     return FALSE;
- -
- --  _rest_proxy_send_message (priv-&gt;proxy, message);
- -+  payload =3D _rest_proxy_send_message (priv-&gt;proxy, message, priv-&g=
-t;cancellable, error_out);
- -
- --  ret =3D finish_call (call, message, error_out);
- -+  ret =3D finish_call (call, message, payload, error_out);
- -
- -   g_object_unref (message);
- -
- -@@ -1314,9 +1486,16 @@ rest_proxy_call_get_response_headers (RestProxyCal=
-l *call)
- - goffset
- - rest_proxy_call_get_payload_length (RestProxyCall *call)
- - {
- -+  GBytes *payload;
- -+
- -   g_return_val_if_fail (REST_IS_PROXY_CALL (call), 0);
- -
- --  return GET_PRIVATE (call)-&gt;length;
- -+  payload =3D GET_PRIVATE (call)-&gt;payload;
- -+#ifdef WITH_SOUP_2
- -+  return payload ? g_bytes_get_size (payload) - 1 : 0;
- -+#else
- -+  return payload ? g_bytes_get_size (payload) : 0;
- -+#endif
- - }
- -
- - /**
- -@@ -1331,9 +1510,12 @@ rest_proxy_call_get_payload_length (RestProxyCall =
-*call)
- - const gchar *
- - rest_proxy_call_get_payload (RestProxyCall *call)
- - {
- -+  GBytes *payload;
- -+
- -   g_return_val_if_fail (REST_IS_PROXY_CALL (call), NULL);
- -
- --  return GET_PRIVATE (call)-&gt;payload;
- -+  payload =3D GET_PRIVATE (call)-&gt;payload;
- -+  return payload ? g_bytes_get_data (payload, NULL) : NULL;
- - }
- -
- - /**
- -diff --git a/rest/rest-proxy.c b/rest/rest-proxy.c
- -index 80972a3..171f6cb 100644
- ---- a/rest/rest-proxy.c
- -+++ b/rest/rest-proxy.c
- -@@ -45,6 +45,9 @@ struct _RestProxyPrivate {
- -   SoupSession *session;
- -   gboolean disable_cookies;
- -   char *ssl_ca_file;
- -+#ifndef WITH_SOUP_2
- -+  gboolean ssl_strict;
- -+#endif
- - };
- -
- -
- -@@ -116,11 +119,15 @@ rest_proxy_get_property (GObject   *object,
- -       g_value_set_string (value, priv-&gt;password);
- -       break;
- -     case PROP_SSL_STRICT: {
- -+#ifdef WITH_SOUP_2
- -       gboolean ssl_strict;
- -       g_object_get (G_OBJECT(priv-&gt;session),
- -                     "ssl-strict", &amp;ssl_strict,
- -                     NULL);
- -       g_value_set_boolean (value, ssl_strict);
- -+#else
- -+      g_value_set_boolean (value, priv-&gt;ssl_strict);
- -+#endif
- -       break;
- -     }
- -     case PROP_SSL_CA_FILE:
- -@@ -172,9 +179,13 @@ rest_proxy_set_property (GObject      *object,
- -       priv-&gt;password =3D g_value_dup_string (value);
- -       break;
- -     case PROP_SSL_STRICT:
- -+#ifdef WITH_SOUP_2
- -       g_object_set (G_OBJECT(priv-&gt;session),
- -                     "ssl-strict", g_value_get_boolean (value),
- -                     NULL);
- -+#else
- -+      priv-&gt;ssl_strict =3D g_value_get_boolean (value);
- -+#endif
- -       break;
- -     case PROP_SSL_CA_FILE:
- -       g_free(priv-&gt;ssl_ca_file);
- -@@ -207,6 +218,7 @@ default_authenticate_cb (RestProxy *self,
- -   return !retrying;
- - }
- -
- -+#ifdef WITH_SOUP_2
- - static void
- - authenticate (RestProxy   *self,
- -               SoupMessage *msg,
- -@@ -224,6 +236,7 @@ authenticate (RestProxy   *self,
- -     soup_auth_authenticate (soup_auth, priv-&gt;username, priv-&gt;passw=
-ord);
- -   g_object_unref (G_OBJECT (rest_auth));
- - }
- -+#endif
- -
- - static void
- - rest_proxy_constructed (GObject *object)
- -@@ -238,14 +251,20 @@ rest_proxy_constructed (GObject *object)
- -   }
- -
- -   if (REST_DEBUG_ENABLED(PROXY)) {
- -+#ifdef WITH_SOUP_2
- -     SoupSessionFeature *logger =3D (SoupSessionFeature*)soup_logger_new =
-(SOUP_LOGGER_LOG_BODY, 0);
- -+#else
- -+    SoupSessionFeature *logger =3D (SoupSessionFeature*)soup_logger_new =
-(SOUP_LOGGER_LOG_HEADERS);
- -+#endif
- -     soup_session_add_feature (priv-&gt;session, logger);
- -     g_object_unref (logger);
- -   }
- -
- -+#ifdef WITH_SOUP_2
- -   /* session lifetime is same as self, no need to keep signalid */
- -   g_signal_connect_swapped (priv-&gt;session, "authenticate",
- -                             G_CALLBACK(authenticate), object);
- -+#endif
- - }
- -
- - static void
- -@@ -391,23 +410,62 @@ rest_proxy_class_init (RestProxyClass *klass)
- -   proxy_class-&gt;authenticate =3D default_authenticate_cb;
- - }
- -
- -+static gboolean
- -+transform_ssl_ca_file_to_tls_database (GBinding     *binding,
- -+                                       const GValue *from_value,
- -+                                       GValue       *to_value,
- -+                                       gpointer      user_data)
- -+{
- -+  g_value_take_object (to_value,
- -+                       g_tls_file_database_new (g_value_get_string (from=
-_value), NULL));
- -+  return TRUE;
- -+}
- -+
- -+static gboolean
- -+transform_tls_database_to_ssl_ca_file (GBinding     *binding,
- -+                                       const GValue *from_value,
- -+                                       GValue       *to_value,
- -+                                       gpointer      user_data)
- -+{
- -+  GTlsDatabase *tls_database;
- -+  char *path =3D NULL;
- -+
- -+  tls_database =3D g_value_get_object (from_value);
- -+  if (tls_database)
- -+    g_object_get (tls_database, "anchors", &amp;path, NULL);
- -+  g_value_take_string (to_value, path);
- -+  return TRUE;
- -+}
- -+
- - static void
- - rest_proxy_init (RestProxy *self)
- - {
- -   RestProxyPrivate *priv =3D GET_PRIVATE (self);
- -+  GTlsDatabase *tls_database;
- -+
- -+#ifndef WITH_SOUP_2
- -+  priv-&gt;ssl_strict =3D TRUE;
- -+#endif
- -
- -   priv-&gt;session =3D soup_session_new ();
- -
- - #ifdef REST_SYSTEM_CA_FILE
- -   /* with ssl-strict (defaults TRUE) setting ssl-ca-file forces all
- -    * certificates to be trusted */
- --  g_object_set (priv-&gt;session,
- --                "ssl-ca-file", REST_SYSTEM_CA_FILE,
- --                NULL);
- -+  tls_database =3D g_tls_file_database_new (REST_SYSTEM_CA_FILE, NULL);
- -+  if (tls_database) {
- -+          g_object_set (priv-&gt;session,
- -+                        "tls-database", tls_database,
- -+                        NULL);
- -+          g_object_unref (tls_database);
- -+  }
- - #endif
- --  g_object_bind_property (self, "ssl-ca-file",
- --                          priv-&gt;session, "ssl-ca-file",
- --                          G_BINDING_BIDIRECTIONAL);
- -+  g_object_bind_property_full (self, "ssl-ca-file",
- -+                               priv-&gt;session, "tls-database",
- -+                               G_BINDING_BIDIRECTIONAL,
- -+                               transform_ssl_ca_file_to_tls_database,
- -+                               transform_tls_database_to_ssl_ca_file,
- -+                               NULL, NULL);
- - }
- -
- - /**
- -@@ -689,27 +747,127 @@ rest_proxy_simple_run (RestProxy *proxy,
- -   return ret;
- - }
- -
- -+typedef struct {
- -+  RestMessageFinishedCallback callback;
- -+  gpointer user_data;
- -+} RestMessageQueueData;
- -+
- -+#ifdef WITH_SOUP_2
- -+static void
- -+message_finished_cb (SoupSession *session,
- -+                     SoupMessage *message,
- -+                     gpointer     user_data)
- -+{
- -+  RestMessageQueueData *data =3D user_data;
- -+  GBytes *body;
- -+  GError *error =3D NULL;
- -+
- -+  body =3D g_bytes_new (message-&gt;response_body-&gt;data,
- -+                      message-&gt;response_body-&gt;length + 1);
- -+  data-&gt;callback (message, body, error, data-&gt;user_data);
- -+  g_free (data);
- -+}
- -+#else
- -+static void
- -+message_send_and_read_ready_cb (GObject      *source,
- -+                                GAsyncResult *result,
- -+                                gpointer      user_data)
- -+{
- -+  SoupSession *session =3D SOUP_SESSION (source);
- -+  RestMessageQueueData *data =3D user_data;
- -+  GBytes *body;
- -+  GError *error =3D NULL;
- -+
- -+  body =3D soup_session_send_and_read_finish (session, result, &amp;erro=
-r);
- -+  data-&gt;callback (soup_session_get_async_result_message (session, res=
-ult), body, error, data-&gt;user_data);
- -+  g_free (data);
- -+}
- -+#endif
- -+
- - void
- --_rest_proxy_queue_message (RestProxy   *proxy,
- --                           SoupMessage *message,
- --                           SoupSessionCallback callback,
- --                           gpointer user_data)
- -+_rest_proxy_queue_message (RestProxy                  *proxy,
- -+                           SoupMessage                *message,
- -+                           GCancellable               *cancellable,
- -+                           RestMessageFinishedCallback callback,
- -+                           gpointer                    user_data)
- - {
- -   RestProxyPrivate *priv =3D GET_PRIVATE (proxy);
- -+  RestMessageQueueData *data;
- -
- -   g_return_if_fail (REST_IS_PROXY (proxy));
- -   g_return_if_fail (SOUP_IS_MESSAGE (message));
- -
- -+  data =3D g_new0 (RestMessageQueueData, 1);
- -+  data-&gt;callback =3D callback;
- -+  data-&gt;user_data =3D user_data;
- -+
- -+#ifdef WITH_SOUP_2
- -   soup_session_queue_message (priv-&gt;session,
- -                               message,
- --                              callback,
- --                              user_data);
- -+                              message_finished_cb,
- -+                              data);
- -+#else
- -+  soup_session_send_and_read_async (priv-&gt;session,
- -+                                    message,
- -+                                    G_PRIORITY_DEFAULT,
- -+                                    cancellable,
- -+                                    message_send_and_read_ready_cb,
- -+                                    data);
- -+#endif
- -+}
- -+
- -+static void
- -+message_send_ready_cb (GObject      *source,
- -+                       GAsyncResult *result,
- -+                       gpointer      user_data)
- -+{
- -+  SoupSession *session =3D SOUP_SESSION (source);
- -+  GTask *task =3D user_data;
- -+  GInputStream *stream;
- -+  GError *error =3D NULL;
- -+
- -+  stream =3D soup_session_send_finish (session, result, &amp;error);
- -+  if (stream)
- -+    g_task_return_pointer (task, stream, g_object_unref);
- -+  else
- -+    g_task_return_error (task, error);
- -+  g_object_unref (task);
- -+}
- -+
- -+void
- -+_rest_proxy_send_message_async (RestProxy          *proxy,
- -+                                SoupMessage        *message,
- -+                                GCancellable       *cancellable,
- -+                                GAsyncReadyCallback callback,
- -+                                gpointer            user_data)
- -+{
- -+  RestProxyPrivate *priv =3D GET_PRIVATE (proxy);
- -+  GTask *task;
- -+
- -+  task =3D g_task_new (proxy, cancellable, callback, user_data);
- -+  soup_session_send_async (priv-&gt;session,
- -+                           message,
- -+#ifndef WITH_SOUP_2
- -+                           G_PRIORITY_DEFAULT,
- -+#endif
- -+                           cancellable,
- -+                           message_send_ready_cb,
- -+                           task);
- -+}
- -+
- -+GInputStream *
- -+_rest_proxy_send_message_finish (RestProxy    *proxy,
- -+                                 GAsyncResult *result,
- -+                                 GError      **error)
- -+{
- -+  return g_task_propagate_pointer (G_TASK (result), error);
- - }
- -
- - void
- - _rest_proxy_cancel_message (RestProxy   *proxy,
- -                             SoupMessage *message)
- - {
- -+#ifdef WITH_SOUP_2
- -   RestProxyPrivate *priv =3D GET_PRIVATE (proxy);
- -
- -   g_return_if_fail (REST_IS_PROXY (proxy));
- -@@ -718,16 +876,31 @@ _rest_proxy_cancel_message (RestProxy   *proxy,
- -   soup_session_cancel_message (priv-&gt;session,
- -                                message,
- -                                SOUP_STATUS_CANCELLED);
- -+#endif
- - }
- -
- --guint
- --_rest_proxy_send_message (RestProxy   *proxy,
- --                          SoupMessage *message)
- -+GBytes *
- -+_rest_proxy_send_message (RestProxy    *proxy,
- -+                          SoupMessage  *message,
- -+                          GCancellable *cancellable,
- -+                          GError      **error)
- - {
- -   RestProxyPrivate *priv =3D GET_PRIVATE (proxy);
- -+  GBytes *body;
- -
- --  g_return_val_if_fail (REST_IS_PROXY (proxy), 0);
- --  g_return_val_if_fail (SOUP_IS_MESSAGE (message), 0);
- -+  g_return_val_if_fail (REST_IS_PROXY (proxy), NULL);
- -+  g_return_val_if_fail (SOUP_IS_MESSAGE (message), NULL);
- -+
- -+#ifdef WITH_SOUP_2
- -+  soup_session_send_message (priv-&gt;session, message);
- -+  body =3D g_bytes_new (message-&gt;response_body-&gt;data,
- -+                      message-&gt;response_body-&gt;length + 1);
- -+#else
- -+  body =3D soup_session_send_and_read (priv-&gt;session,
- -+                                     message,
- -+                                     cancellable,
- -+                                     error);
- -+#endif
- -
- --  return soup_session_send_message (priv-&gt;session, message);
- -+  return body;
- - }
- -diff --git a/tests/custom-serialize.c b/tests/custom-serialize.c
- -index c3fde93..01b3a56 100644
- ---- a/tests/custom-serialize.c
- -+++ b/tests/custom-serialize.c
- -@@ -88,22 +88,40 @@ custom_proxy_call_init (CustomProxyCall *self)
- - }
- -
- - static void
- -+#ifdef WITH_SOUP_2
- - server_callback (SoupServer *server, SoupMessage *msg,
- -                  const char *path, GHashTable *query,
- -                  SoupClientContext *client, gpointer user_data)
- -+#else
- -+server_callback (SoupServer *server, SoupServerMessage *msg,
- -+                 const char *path, GHashTable *query, gpointer user_data=
-)
- -+#endif
- - {
- -   if (g_str_equal (path, "/ping")) {
- -     const char *content_type =3D NULL;
- -+#ifdef WITH_SOUP_2
- -     SoupMessageHeaders *headers =3D msg-&gt;request_headers;
- -     SoupMessageBody *body =3D msg-&gt;request_body;
- -+#else
- -+    SoupMessageHeaders *headers =3D soup_server_message_get_request_head=
-ers (msg);
- -+    SoupMessageBody *body =3D soup_server_message_get_request_body (msg)=
-;
- -+#endif
- -     content_type =3D soup_message_headers_get_content_type (headers, NUL=
-L);
- -     g_assert_cmpstr (content_type, =3D=3D, "application/json");
- -
- -     g_assert_cmpstr (body-&gt;data, =3D=3D, "{}");
- -
- -+#ifdef WITH_SOUP_2
- -     soup_message_set_status (msg, SOUP_STATUS_OK);
- -+#else
- -+    soup_server_message_set_status (msg, SOUP_STATUS_OK, NULL);
- -+#endif
- -   } else {
- -+#ifdef WITH_SOUP_2
- -     soup_message_set_status (msg, SOUP_STATUS_NOT_IMPLEMENTED);
- -+#else
- -+    soup_server_message_set_status (msg, SOUP_STATUS_NOT_IMPLEMENTED, NU=
-LL);
- -+#endif
- -   }
- - }
- -
- -diff --git a/tests/proxy-continuous.c b/tests/proxy-continuous.c
- -index 8f4b7a8..7967bbd 100644
- ---- a/tests/proxy-continuous.c
- -+++ b/tests/proxy-continuous.c
- -@@ -39,9 +39,15 @@ static SoupServer *server;
- - static gboolean
- - send_chunks (gpointer user_data)
- - {
- --  SoupMessage *msg =3D SOUP_MESSAGE (user_data);
- -   guint i;
- -   guint8 data[SIZE_CHUNK];
- -+#ifdef WITH_SOUP_2
- -+  SoupMessage *msg =3D SOUP_MESSAGE (user_data);
- -+  SoupMessageBody *response_body =3D msg-&gt;response_body;
- -+#else
- -+  SoupServerMessage *msg =3D SOUP_SERVER_MESSAGE (user_data);
- -+  SoupMessageBody *response_body =3D soup_server_message_get_response_bo=
-dy (msg);
- -+#endif
- -
- -   for (i =3D 0; i &lt; SIZE_CHUNK; i++)
- -   {
- -@@ -49,12 +55,12 @@ send_chunks (gpointer user_data)
- -     server_count++;
- -   }
- -
- --  soup_message_body_append (msg-&gt;response_body, SOUP_MEMORY_COPY, dat=
-a, SIZE_CHUNK);
- -+  soup_message_body_append (response_body, SOUP_MEMORY_COPY, data, SIZE_=
-CHUNK);
- -   soup_server_unpause_message (server, msg);
- -
- -   if (server_count =3D=3D NUM_CHUNKS * SIZE_CHUNK)
- -   {
- --    soup_message_body_complete (msg-&gt;response_body);
- -+    soup_message_body_complete (response_body);
- -     return FALSE;
- -   } else {
- -     return TRUE;
- -@@ -62,13 +68,28 @@ send_chunks (gpointer user_data)
- - }
- -
- - static void
- -+#ifdef WITH_SOUP_2
- - server_callback (SoupServer *server, SoupMessage *msg,
- -                  const char *path, GHashTable *query,
- -                  SoupClientContext *client, gpointer user_data)
- -+#else
- -+server_callback (SoupServer *server, SoupServerMessage *msg,
- -+                 const char *path, GHashTable *query, gpointer user_data=
-)
- -+#endif
- - {
- -+#ifdef WITH_SOUP_2
- -+  SoupMessageHeaders *response_headers =3D msg-&gt;response_headers;
- -+#else
- -+  SoupMessageHeaders *response_headers =3D soup_server_message_get_respo=
-nse_headers (msg);
- -+#endif
- -+
- -   g_assert_cmpstr (path, =3D=3D, "/stream");
- -+#ifdef WITH_SOUP_2
- -   soup_message_set_status (msg, SOUP_STATUS_OK);
- --  soup_message_headers_set_encoding (msg-&gt;response_headers,
- -+#else
- -+  soup_server_message_set_status (msg, SOUP_STATUS_OK, NULL);
- -+#endif
- -+  soup_message_headers_set_encoding (response_headers,
- -                                      SOUP_ENCODING_CHUNKED);
- -   soup_server_pause_message (server, msg);
- -
- -@@ -142,13 +163,21 @@ continuous ()
- -   uris =3D soup_server_get_uris (server);
- -   g_assert (g_slist_length (uris) &gt; 0);
- -
- -+#ifdef WITH_SOUP_2
- -   url =3D soup_uri_to_string (uris-&gt;data, FALSE);
- -+#else
- -+  url =3D g_uri_to_string (uris-&gt;data);
- -+#endif
- -
- -   loop =3D g_main_loop_new (NULL, FALSE);
- -
- -   proxy =3D rest_proxy_new (url, FALSE);
- -   stream_test (proxy);
- -+#ifdef WITH_SOUP_2
- -   g_slist_free_full (uris, (GDestroyNotify)soup_uri_free);
- -+#else
- -+  g_slist_free_full (uris, (GDestroyNotify)g_uri_unref);
- -+#endif
- -
- -   g_main_loop_run (loop);
- -   g_free (url);
- -diff --git a/tests/proxy.c b/tests/proxy.c
- -index 89a9325..652c600 100644
- ---- a/tests/proxy.c
- -+++ b/tests/proxy.c
- -@@ -49,20 +49,35 @@ SoupServer *server;
- - GMainLoop *server_loop;
- -
- - static void
- -+#ifdef WITH_SOUP_2
- - server_callback (SoupServer *server, SoupMessage *msg,
- -                  const char *path, GHashTable *query,
- -                  SoupClientContext *client, gpointer user_data)
- -+#else
- -+server_callback (SoupServer *server, SoupServerMessage *msg,
- -+                 const char *path, GHashTable *query, gpointer user_data=
-)
- -+#endif
- - {
- -   if (g_str_equal (path, "/ping")) {
- -+#ifdef WITH_SOUP_2
- -     soup_message_set_status (msg, SOUP_STATUS_OK);
- -+#else
- -+    soup_server_message_set_status (msg, SOUP_STATUS_OK, NULL);
- -+#endif
- -   }
- -   else if (g_str_equal (path, "/echo")) {
- -     const char *value;
- -
- -     value =3D g_hash_table_lookup (query, "value");
- -+#ifdef WITH_SOUP_2
- -     soup_message_set_response (msg, "text/plain", SOUP_MEMORY_COPY,
- -                                value, strlen (value));
- -     soup_message_set_status (msg, SOUP_STATUS_OK);
- -+#else
- -+    soup_server_message_set_response (msg, "text/plain", SOUP_MEMORY_COP=
-Y,
- -+                                      value, strlen (value));
- -+    soup_server_message_set_status (msg, SOUP_STATUS_OK, NULL);
- -+#endif
- -   }
- -   else if (g_str_equal (path, "/reverse")) {
- -     char *value;
- -@@ -70,9 +85,15 @@ server_callback (SoupServer *server, SoupMessage *msg,
- -     value =3D g_strdup (g_hash_table_lookup (query, "value"));
- -     g_strreverse (value);
- -
- -+#ifdef WITH_SOUP_2
- -     soup_message_set_response (msg, "text/plain", SOUP_MEMORY_TAKE,
- -                                value, strlen (value));
- -     soup_message_set_status (msg, SOUP_STATUS_OK);
- -+#else
- -+    soup_server_message_set_response (msg, "text/plain", SOUP_MEMORY_TAK=
-E,
- -+                                       value, strlen (value));
- -+    soup_server_message_set_status (msg, SOUP_STATUS_OK, NULL);
- -+#endif
- -   }
- -   else if (g_str_equal (path, "/status")) {
- -     const char *value;
- -@@ -81,25 +102,61 @@ server_callback (SoupServer *server, SoupMessage *ms=
-g,
- -     value =3D g_hash_table_lookup (query, "status");
- -     if (value) {
- -       status =3D atoi (value);
- -+#ifdef WITH_SOUP_2
- -       soup_message_set_status (msg, status ?: SOUP_STATUS_INTERNAL_SERVE=
-R_ERROR);
- -+#else
- -+      soup_server_message_set_status (msg, status ?: SOUP_STATUS_INTERNA=
-L_SERVER_ERROR, NULL);
- -+#endif
- -     } else {
- -+#ifdef WITH_SOUP_2
- -       soup_message_set_status (msg, SOUP_STATUS_INTERNAL_SERVER_ERROR);
- -+#else
- -+      soup_server_message_set_status (msg, SOUP_STATUS_INTERNAL_SERVER_E=
-RROR, NULL);
- -+#endif
- -     }
- -   }
- -   else if (g_str_equal (path, "/useragent/none")) {
- --    if (soup_message_headers_get (msg-&gt;request_headers, "User-Agent")=
- =3D=3D NULL) {
- -+#ifdef WITH_SOUP_2
- -+    SoupMessageHeaders *request_headers =3D msg-&gt;request_headers;
- -+#else
- -+    SoupMessageHeaders *request_headers =3D soup_server_message_get_requ=
-est_headers (msg);
- -+#endif
- -+
- -+    if (soup_message_headers_get (request_headers, "User-Agent") =3D=3D =
-NULL) {
- -+#ifdef WITH_SOUP_2
- -       soup_message_set_status (msg, SOUP_STATUS_OK);
- -+#else
- -+      soup_server_message_set_status (msg, SOUP_STATUS_OK, NULL);
- -+#endif
- -     } else {
- -+#ifdef WITH_SOUP_2
- -       soup_message_set_status (msg, SOUP_STATUS_EXPECTATION_FAILED);
- -+#else
- -+      soup_server_message_set_status (msg, SOUP_STATUS_EXPECTATION_FAILE=
-D, NULL);
- -+#endif
- -     }
- -   }
- -   else if (g_str_equal (path, "/useragent/testsuite")) {
- -+#ifdef WITH_SOUP_2
- -+    SoupMessageHeaders *request_headers =3D msg-&gt;request_headers;
- -+#else
- -+    SoupMessageHeaders *request_headers =3D soup_server_message_get_requ=
-est_headers (msg);
- -+#endif
- -     const char *value;
- --    value =3D soup_message_headers_get (msg-&gt;request_headers, "User-A=
-gent");
- -+    value =3D soup_message_headers_get (request_headers, "User-Agent");
- -     if (g_strcmp0 (value, "TestSuite-1.0") =3D=3D 0) {
- -+#ifdef WITH_SOUP_2
- -       soup_message_set_status (msg, SOUP_STATUS_OK);
- -+#else
- -+      soup_server_message_set_status (msg, SOUP_STATUS_OK, NULL);
- -+#endif
- -     } else {
- -+#ifdef WITH_SOUP_2
- -       soup_message_set_status (msg, SOUP_STATUS_EXPECTATION_FAILED);
- -+#else
- -+      soup_server_message_set_status (msg, SOUP_STATUS_EXPECTATION_FAILE=
-D, NULL);
- -+#endif
- -+
- -     }
- -   }
- - }
- -@@ -325,7 +382,7 @@ main (int argc, char **argv)
- -   char *url;
- -   RestProxy *proxy;
- -
- --  server =3D soup_server_new ("", NULL);
- -+  server =3D soup_server_new (NULL);
- -   g_thread_new ("Server Thread", server_thread_func, NULL);
- -
- -   url =3D g_strdup_printf ("<a href=3D"http://127.0.0.1">http://127.0.0.=
-1</a>:%d/", PORT);
- -diff --git a/tests/threaded.c b/tests/threaded.c
- -index a251900..411361c 100644
- ---- a/tests/threaded.c
- -+++ b/tests/threaded.c
- -@@ -36,13 +36,22 @@ GMainLoop *main_loop;
- - SoupServer *server;
- -
- - static void
- -+#ifdef WITH_SOUP_2
- - server_callback (SoupServer *server, SoupMessage *msg,
- -                  const char *path, GHashTable *query,
- -                  SoupClientContext *client, gpointer user_data)
- -+#else
- -+server_callback (SoupServer *server, SoupServerMessage *msg,
- -+                 const char *path, GHashTable *query, gpointer user_data=
-)
- -+#endif
- - {
- -   g_assert_cmpstr (path, =3D=3D, "/ping");
- -
- -+#ifdef WITH_SOUP_2
- -   soup_message_set_status (msg, SOUP_STATUS_OK);
- -+#else
- -+  soup_server_message_set_status (msg, SOUP_STATUS_OK, NULL);
- -+#endif
- -   g_atomic_int_add (&amp;threads_done, 1);
- -
- -   if (threads_done =3D=3D N_THREADS) {
- -@@ -96,7 +105,11 @@ static void ping ()
- -   uris =3D soup_server_get_uris (server);
- -   g_assert (g_slist_length (uris) &gt; 0);
- -
- -+#ifdef WITH_SOUP_2
- -   url =3D soup_uri_to_string (uris-&gt;data, FALSE);
- -+#else
- -+  url =3D g_uri_to_string (uris-&gt;data);
- -+#endif
- -
- -   main_loop =3D g_main_loop_new (NULL, TRUE);
- -
- -@@ -109,7 +122,11 @@ static void ping ()
- -   g_main_loop_run (main_loop);
- -
- -   g_free (url);
- -+#ifdef WITH_SOUP_2
- -   g_slist_free_full (uris, (GDestroyNotify)soup_uri_free);
- -+#else
- -+  g_slist_free_full (uris, (GDestroyNotify)g_uri_unref);
- -+#endif
- -   g_object_unref (server);
- -   g_main_loop_unref (main_loop);
- - }
- ---
- -2.33.1
- -
- diff --git a/meta-gnome/recipes-gnome/rest/rest_0.8.1.bb b/meta-gnome/reci=
-pes-gnome/rest/rest_0.8.1.bb
- deleted file mode 100644
- index f1c9915c0..000000000
- --- a/meta-gnome/recipes-gnome/rest/rest_0.8.1.bb
- +++ /dev/null
- @@ -1,33 +0,0 @@
- -SUMMARY =3D "library to access web services that claim to be "RESTful""
- -HOMEPAGE =3D "<a href=3D"https://wiki.gnome.org/Projects/Librest">https:/=
-/wiki.gnome.org/Projects/Librest</a>"
- -LICENSE =3D "LGPL-2.1-only"
- -LIC_FILES_CHKSUM =3D "<a href=3D"file://COPYING;md5=3D2d5025d4aa3495befef=
-8f17206a5b0a1" "=3D"">file://COPYING;md5=3D2d5025d4aa3495befef8f17206a5b0a1=
-"</a>
- -
- -GNOMEBASEBUILDCLASS =3D "autotools"
- -
- -DEPENDS =3D " \
- -    libxml2-native \
- -    glib-2.0-native \
- -    glib-2.0 \
- -    libsoup-2.4 \
- -"
- -
- -inherit gnomebase gobject-introspection gtk-doc vala
- -
- -PV .=3D "+git${SRCPV}"
- -SRCREV =3D "7b46065dea860ef09861f4d70124728b8270c8b7"
- -SRC_URI =3D "git://gitlab.gnome.org/GNOME/librest;protocol=3Dhttps;branch=
-=3Dmaster \
- -    <a href=3D"file://0001-Use-GUri-instead-of-SoupURI.patch">file://0001=
--Use-GUri-instead-of-SoupURI.patch</a> \
- -    <a href=3D"file://0002-Port-to-libsoup3.patch">file://0002-Port-to-li=
-bsoup3.patch</a> \
- -"
- -S =3D "${WORKDIR}/git"
- -
- -do_configure:prepend() {
- -    # rest expects introspection.m4 at custom location (see aclocal.m4).
- -    cp -f ${STAGING_DIR_TARGET}/${datadir}/aclocal/introspection.m4 ${S}/=
-build
- -}
- -
- -do_compile:prepend() {
- -    export GIR_EXTRA_LIBS_PATH=3D"${B}/rest/.libs"
- -}
- -
- diff --git a/meta-gnome/recipes-gnome/rest/rest_0.9.0.bb b/meta-gnome/reci=
-pes-gnome/rest/rest_0.9.0.bb
- new file mode 100644
- index 000000000..2256a1899
- --- /dev/null
- +++ b/meta-gnome/recipes-gnome/rest/rest_0.9.0.bb
- @@ -0,0 +1,25 @@
- +SUMMARY =3D "library to access web services that claim to be "RESTful""
- +HOMEPAGE =3D "<a href=3D"https://wiki.gnome.org/Projects/Librest">https:/=
-/wiki.gnome.org/Projects/Librest</a>"
- +LICENSE =3D "LGPL-2.1-only"
- +LIC_FILES_CHKSUM =3D "<a href=3D"file://COPYING;md5=3D2d5025d4aa3495befef=
-8f17206a5b0a1" "=3D"">file://COPYING;md5=3D2d5025d4aa3495befef8f17206a5b0a1=
-"</a>
- +
- +GNOMEBASEBUILDCLASS =3D "meson"
- +
- +DEPENDS =3D " \
- +    gi-docgen \
- +    gi-docgen-native \
- +    glib-2.0 \
- +    glib-2.0-native \
- +    json-glib \
- +    libxml2-native \
- +"
- +
- +inherit gnomebase gobject-introspection vala pkgconfig
- +
- +PACKAGECONFIG_SOUP ?=3D "soup3"
- +PACKAGECONFIG ??=3D "${PACKAGECONFIG_SOUP}"
- +
- +PACKAGECONFIG[soup2] =3D "-Dsoup2=3Dtrue,,libsoup-2.4"
- +PACKAGECONFIG[soup3] =3D "-Dsoup2=3Dfalse,,libsoup-3.0"
- +
- +SRC_URI[archive.sha256sum] =3D "85b2bc9341128139539b53ee53f0533310bc96392=
-fd645863a040410b81ebe66"
- --
- 2.34.1
-
-
-=20
-
-</blockquote></div><div class=3D"plaintext" style=3D"white-space: break-spa=
-ces;">
-
-
-</div></blockquote></div>
-</blockquote></div>
---=-FTAJqS5SIUwkR741LSGd--
-
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D - AC_PATH_PROG([GCOV=
+], [lcov], [enable_gcov=3Dno]) - -@@ -130,6 +154,7 @@ echo " LibRest $VERSI=
+ON" - echo " =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D" - echo "" - =
+echo " prefix: ${prefix}" -+echo " libsoup version: ${with_soup}" - echo ""=
+ - echo " Documentation: ${enable_gtk_doc}" - echo " Introspection data: ${=
+enable_introspection}" -diff --git a/rest-extras.pc.in b/rest-extras.pc.in =
+-index 39f21bf..3723d6d 100644 ---- a/rest-extras.pc.in -+++ b/rest-extras.=
+pc.in -@@ -9,4 +9,4 @@ Description: RESTful web api query library - Version=
+: @VERSION@ - Libs: -L${libdir} -lrest-extras-${apiversion} - Cflags: -I${i=
+ncludedir}/rest-${apiversion} --Requires: glib-2.0 libsoup-2.4 libxml-2.0 -=
++Requires: glib-2.0 libsoup-@SOUP_API_VERSION@ libxml-2.0 -diff --git a/res=
+t-extras/youtube-proxy.c b/rest-extras/youtube-proxy.c -index be0cf08..cd59=
+8f4 100644 ---- a/rest-extras/youtube-proxy.c -+++ b/rest-extras/youtube-pr=
+oxy.c -@@ -246,6 +246,9 @@ typedef struct { - GObject *weak_object; - gpoin=
+ter user_data; - gsize uploaded; -+#ifndef WITH_SOUP_2 -+ GCancellable *can=
+cellable; -+#endif - } YoutubeProxyUploadClosure; - - static void -@@ -255,=
+7 +258,11 @@ _upload_async_weak_notify_cb (gpointer *data, - YoutubeProxyUp=
+loadClosure *closure =3D - (YoutubeProxyUploadClosure *) data; - -+#ifdef W=
+ITH_SOUP_2 - _rest_proxy_cancel_message (REST_PROXY (closure->proxy), closu=
+re->message); -+#else -+ g_cancellable_cancel (closure->cancellable); -+#en=
+dif - } - - static void -@@ -267,6 +274,9 @@ _upload_async_closure_free (Yo=
+utubeProxyUploadClosure *closure) - closure); - - g_object_unref (closure->=
+proxy); -+#ifndef WITH_SOUP_2 -+ g_object_unref (closure->cancellable); -+#=
+endif - - g_slice_free (YoutubeProxyUploadClosure, closure); - } -@@ -286,6=
+ +296,9 @@ _upload_async_closure_new (YoutubeProxy *self, - closure->messag=
+e =3D message; - closure->weak_object =3D weak_object; - closure->user_data=
+ =3D user_data; -+#ifndef WITH_SOUP_2 -+ closure->cancellable =3D g_cancell=
+able_new (); -+#endif - - if (weak_object !=3D NULL) - g_object_weak_ref (w=
+eak_object, -@@ -295,41 +308,67 @@ _upload_async_closure_new (YoutubeProxy =
+*self, - } - - static void --_upload_completed_cb (SoupSession *session, --=
+ SoupMessage *message, -+_upload_completed_cb (SoupMessage *message, -+ GBy=
+tes *payload, -+ GError *error, - gpointer user_data) - { - YoutubeProxyUpl=
+oadClosure *closure =3D - (YoutubeProxyUploadClosure *) user_data; -- GErro=
+r *error =3D NULL; -+ gsize length; -+ gconstpointer data; -+ guint status_=
+code; -+ const char *reason_phrase; - - if (closure->callback =3D=3D NULL) =
+- return; - -- if (message->status_code < 200 || message->status_code >=3D =
+300) -- error =3D g_error_new_literal (REST_PROXY_ERROR, -- message->status=
+_code, -- message->reason_phrase); -- -- closure->callback (closure->proxy,=
+ message->response_body->data, -- message->request_body->length, -- message=
+->request_body->length, -+#ifdef WITH_SOUP_2 -+ status_code =3D message->st=
+atus_code; -+ reason_phrase =3D message->reason_phrase; -+#else -+ status_c=
+ode =3D soup_message_get_status (message); -+ reason_phrase =3D soup_messag=
+e_get_reason_phrase (message); -+#endif -+ -+ if (status_code < 200 || stat=
+us_code >=3D 300) -+ { -+ g_clear_error (&error); -+ error =3D g_error_new_=
+literal (REST_PROXY_ERROR, -+ status_code, -+ reason_phrase); -+ } -+ -+ da=
+ta =3D g_bytes_get_data (payload, &length); -+ closure->callback (closure->=
+proxy, data, length, length, - error, closure->weak_object, closure->user_d=
+ata); -+ g_bytes_unref (payload); - - _upload_async_closure_free (closure);=
+ - } - - static void - _message_wrote_data_cb (SoupMessage *msg, -+#ifdef W=
+ITH_SOUP_2 - SoupBuffer *chunk, -+#else -+ gsize chunk_size, -+#endif - You=
+tubeProxyUploadClosure *closure) - { -- closure->uploaded =3D closure->uplo=
+aded + chunk->length; -+#ifdef WITH_SOUP_2 -+ gsize chunk_size =3D chunk->l=
+ength; -+ goffset content_length =3D msg->request_body->length; -+#else -+ =
+goffset content_length =3D soup_message_headers_get_content_length (soup_me=
+ssage_get_request_headers (msg)); -+#endif -+ -+ closure->uploaded =3D clos=
+ure->uploaded + chunk_size; - -- if (closure->uploaded < msg->request_body-=
+>length) -+ if (closure->uploaded < content_length) - closure->callback (cl=
+osure->proxy, - NULL, -- msg->request_body->length, -+ content_length, - cl=
+osure->uploaded, - NULL, - closure->weak_object, -@@ -364,7 +403,12 @@ yout=
+ube_proxy_upload_async (YoutubeProxy *self, - SoupMultipart *mp; - SoupMess=
+age *message; - SoupMessageHeaders *part_headers; -+ SoupMessageHeaders *re=
+quest_headers; -+#ifdef WITH_SOUP_2 - SoupBuffer *sb; -+#else -+ GBytes *sb=
+; -+#endif - gchar *content_type; - gchar *atom_xml; - GMappedFile *map; -@=
+@ -380,10 +424,17 @@ youtube_proxy_upload_async (YoutubeProxy *self, - - at=
+om_xml =3D _construct_upload_atom_xml (fields, incomplete); - -+#ifdef WITH=
+_SOUP_2 - sb =3D soup_buffer_new_with_owner (atom_xml, - strlen(atom_xml), =
+- atom_xml, - (GDestroyNotify) g_free); -+#else -+ sb =3D g_bytes_new_with_=
+free_func (atom_xml, -+ strlen (atom_xml), -+ (GDestroyNotify) g_free, -+ a=
+tom_xml); -+#endif - - part_headers =3D soup_message_headers_new (SOUP_MESS=
+AGE_HEADERS_MULTIPART); - -@@ -393,7 +444,11 @@ youtube_proxy_upload_async =
+(YoutubeProxy *self, - - soup_multipart_append_part (mp, part_headers, sb);=
+ - -+#ifdef WITH_SOUP_2 - soup_buffer_free (sb); -+#else -+ g_bytes_unref (=
+sb); -+#endif - - content_type =3D g_content_type_guess ( - filename, -@@ -=
+401,24 +456,37 @@ youtube_proxy_upload_async (YoutubeProxy *self, - g_mappe=
+d_file_get_length (map), - NULL); - -+#ifdef WITH_SOUP_2 - sb =3D soup_buff=
+er_new_with_owner (g_mapped_file_get_contents (map), - g_mapped_file_get_le=
+ngth (map), - map, - (GDestroyNotify) g_mapped_file_unref); -+#else -+ sb =
+=3D g_bytes_new_with_free_func (g_mapped_file_get_contents (map), -+ g_mapp=
+ed_file_get_length (map), -+ (GDestroyNotify) g_mapped_file_unref, -+ map);=
+ -+#endif - - soup_message_headers_replace (part_headers, "Content-Type", c=
+ontent_type); - - soup_multipart_append_part (mp, part_headers, sb); - -+#i=
+fdef WITH_SOUP_2 - soup_buffer_free (sb); -- - soup_message_headers_free (p=
+art_headers); -- - message =3D soup_form_request_new_from_multipart (UPLOAD=
+_URL, mp); -+ request_headers =3D message->request_headers; -+#else -+ g_by=
+tes_unref (sb); -+ soup_message_headers_unref (part_headers); -+ message =
+=3D soup_message_new_from_multipart (UPLOAD_URL, mp); -+ request_headers =
+=3D soup_message_get_request_headers (message); -+#endif - - soup_multipart=
+_free (mp); - -- _set_upload_headers (self, message->request_headers, filen=
+ame); -+ _set_upload_headers (self, request_headers, filename); - - closure=
+ =3D _upload_async_closure_new (self, callback, message, weak_object, - use=
+r_data); -@@ -429,7 +497,13 @@ youtube_proxy_upload_async (YoutubeProxy *se=
+lf, - closure); - - -- _rest_proxy_queue_message (REST_PROXY (self), messag=
+e, _upload_completed_cb, -+ _rest_proxy_queue_message (REST_PROXY (self), m=
+essage, -+#ifdef WITH_SOUP_2 -+ NULL, -+#else -+ closure->cancellable, -+#e=
+ndif -+ _upload_completed_cb, - closure); - - return TRUE; -diff --git a/re=
+st.pc.in b/rest.pc.in -index 94c384b..e6bae3e 100644 ---- a/rest.pc.in -+++=
+ b/rest.pc.in -@@ -9,4 +9,4 @@ Description: RESTful web api query library -=
+ Version: @VERSION@ - Libs: -L${libdir} -lrest-${apiversion} - Cflags: -I${=
+includedir}/rest-${apiversion} --Requires: glib-2.0 libsoup-2.4 libxml-2.0 =
+-+Requires: glib-2.0 libsoup-@SOUP_API_VERSION@ libxml-2.0 -diff --git a/re=
+st/rest-private.h b/rest/rest-private.h -index 9e91fa0..6e71322 100644 ----=
+ a/rest/rest-private.h -+++ b/rest/rest-private.h -@@ -31,6 +31,11 @@ - - G=
+_BEGIN_DECLS - -+typedef void (*RestMessageFinishedCallback) (SoupMessage *=
+msg, -+ GBytes *body, -+ GError *error, -+ gpointer user_data); -+ - typede=
+f enum - { - REST_DEBUG_XML_PARSER =3D 1 << 0, -@@ -53,12 +58,23 @@ gboolea=
+n _rest_proxy_get_binding_required (RestProxy *proxy); - const gchar *_rest=
+_proxy_get_bound_url (RestProxy *proxy); - void _rest_proxy_queue_message (=
+RestProxy *proxy, - SoupMessage *message, -- SoupSessionCallback callback, =
+-+ GCancellable *cancellable, -+ RestMessageFinishedCallback callback, - gp=
+ointer user_data); - void _rest_proxy_cancel_message (RestProxy *proxy, - S=
+oupMessage *message); --guint _rest_proxy_send_message (RestProxy *proxy, -=
+- SoupMessage *message); -+GBytes *_rest_proxy_send_message (RestProxy *pro=
+xy, -+ SoupMessage *message, -+ GCancellable *cancellable, -+ GError **erro=
+r); -+void _rest_proxy_send_message_async (RestProxy *proxy, -+ SoupMessage=
+ *message, -+ GCancellable *cancellable, -+ GAsyncReadyCallback callback, -=
++ gpointer user_data); -+GInputStream *_rest_proxy_send_message_finish (Res=
+tProxy *proxy, -+ GAsyncResult *result, -+ GError **error); - - RestXmlNode=
+ *_rest_xml_node_new (void); - void _rest_xml_node_reverse_children_sibling=
+s (RestXmlNode *node); -diff --git a/rest/rest-proxy-auth.c b/rest/rest-pro=
+xy-auth.c -index b96e443..0b2ec9f 100644 ---- a/rest/rest-proxy-auth.c -+++=
+ b/rest/rest-proxy-auth.c -@@ -29,7 +29,9 @@ - struct _RestProxyAuthPrivate=
+ { - /* used to hold state during async authentication */ - RestProxy *prox=
+y; -+#ifdef WITH_SOUP_2 - SoupSession *session; -+#endif - SoupMessage *mes=
+sage; - SoupAuth *auth; - gboolean paused; -@@ -43,7 +45,9 @@ rest_proxy_au=
+th_dispose (GObject *object) - RestProxyAuthPrivate *priv =3D ((RestProxyAu=
+th*)object)->priv; - - g_clear_object (&priv->proxy); -+#ifdef WITH_SOUP_2 =
+- g_clear_object (&priv->session); -+#endif - g_clear_object (&priv->messag=
+e); - g_clear_object (&priv->auth); - -@@ -73,13 +77,17 @@ rest_proxy_auth_=
+new (RestProxy *proxy, - RestProxyAuth *rest_auth; - - g_return_val_if_fail=
+ (REST_IS_PROXY (proxy), NULL); -+#ifdef WITH_SOUP_2 - g_return_val_if_fail=
+ (SOUP_IS_SESSION (session), NULL); -+#endif - g_return_val_if_fail (SOUP_I=
+S_MESSAGE (message), NULL); - g_return_val_if_fail (SOUP_IS_AUTH (soup_auth=
+), NULL); - - rest_auth =3D REST_PROXY_AUTH (g_object_new (REST_TYPE_PROXY_=
+AUTH, NULL)); - rest_auth->priv->proxy =3D g_object_ref(proxy); -+#ifdef WI=
+TH_SOUP_2 - rest_auth->priv->session =3D g_object_ref(session); -+#endif - =
+rest_auth->priv->message =3D g_object_ref(message); - rest_auth->priv->auth=
+ =3D g_object_ref(soup_auth); - -@@ -104,7 +112,9 @@ rest_proxy_auth_pause =
+(RestProxyAuth *auth) - return; - - auth->priv->paused =3D TRUE; -+#ifdef W=
+ITH_SOUP_2 - soup_session_pause_message (auth->priv->session, auth->priv->m=
+essage); -+#endif - } - - /** -@@ -128,7 +138,9 @@ rest_proxy_auth_unpause =
+(RestProxyAuth *auth) - soup_auth_authenticate (auth->priv->auth, username,=
+ password); - g_free (username); - g_free (password); -+#ifdef WITH_SOUP_2 =
+- soup_session_unpause_message (auth->priv->session, auth->priv->message); =
+-+#endif - auth->priv->paused =3D FALSE; - } - -@@ -146,7 +158,11 @@ rest_p=
+roxy_auth_cancel (RestProxyAuth *auth) - { - g_return_if_fail (REST_IS_PROX=
+Y_AUTH (auth)); - -+#ifdef WITH_SOUP_2 - soup_session_cancel_message (auth-=
+>priv->session, auth->priv->message, SOUP_STATUS_CANCELLED); -+#else -+ sou=
+p_auth_cancel (auth->priv->auth); -+#endif - } - - G_GNUC_INTERNAL gboolean=
+ rest_proxy_auth_is_paused (RestProxyAuth *auth) -diff --git a/rest/rest-pr=
+oxy-call.c b/rest/rest-proxy-call.c -index 2ab722f..62b00da 100644 ---- a/r=
+est/rest-proxy-call.c -+++ b/rest/rest-proxy-call.c -@@ -20,12 +20,14 @@ - =
+* - */ - -+#include <config.h> - #include <rest/rest-proxy.h> - #include <r=
+est/rest-proxy-call.h> - #include <rest/rest-params.h> - #include <libsoup/=
+soup.h> - - #include "rest-private.h" -+#include "rest-proxy-auth-private.h=
+" - #include "rest-proxy-call-private.h" - - -@@ -38,12 +40,15 @@ struct _R=
+estProxyCallAsyncClosure { - }; - typedef struct _RestProxyCallAsyncClosure=
+ RestProxyCallAsyncClosure; - -+#define READ_BUFFER_SIZE 8192 -+ - struct _=
+RestProxyCallContinuousClosure { - RestProxyCall *call; - RestProxyCallCont=
+inuousCallback callback; - GObject *weak_object; - gpointer userdata; - Sou=
+pMessage *message; -+ guchar buffer[READ_BUFFER_SIZE]; - }; - typedef struc=
+t _RestProxyCallContinuousClosure RestProxyCallContinuousClosure; - -@@ -70=
+,8 +75,7 @@ struct _RestProxyCallPrivate { - gchar *url; - - GHashTable *re=
+sponse_headers; -- goffset length; -- gchar *payload; -+ GBytes *payload; -=
+ guint status_code; - gchar *status_message; - -@@ -160,7 +164,7 @@ rest_pr=
+oxy_call_finalize (GObject *object) - g_free (priv->method); - g_free (priv=
+->function); - -- g_free (priv->payload); -+ g_clear_pointer (&priv->payloa=
+d, g_bytes_unref); - g_free (priv->status_message); - - g_free (priv->url);=
+ -@@ -546,14 +550,23 @@ _populate_headers_hash_table (const gchar *name, - =
+g_hash_table_insert (headers, g_strdup (name), g_strdup (value)); - } - -+#=
+ifdef WITH_SOUP_2 - /* I apologise for this macro, but it saves typing ;-) =
+*/ - #define error_helper(x) g_set_error_literal(error, REST_PROXY_ERROR, x=
+, message->reason_phrase) -+#endif - static gboolean - _handle_error_from_m=
+essage (SoupMessage *message, GError **error) - { -- if (message->status_co=
+de < 100) -+ guint status_code; -+ const char *reason_phrase; -+ -+#ifdef W=
+ITH_SOUP_2 -+ status_code =3D message->status_code; -+ -+ if (status_code <=
+ 100) - { -- switch (message->status_code) -+ g_clear_error (error); -+ swi=
+tch (status_code) - { - case SOUP_STATUS_CANCELLED: - error_helper (REST_PR=
+OXY_ERROR_CANCELLED); -@@ -580,61 +593,84 @@ _handle_error_from_message (So=
+upMessage *message, GError **error) - } - return FALSE; - } -+ reason_phras=
+e =3D message->reason_phrase; -+#else -+ status_code =3D soup_message_get_s=
+tatus (message); -+ reason_phrase =3D soup_message_get_reason_phrase (messa=
+ge); -+#endif - -- if (message->status_code >=3D 200 && message->status_cod=
+e < 300) -+ if (status_code >=3D 200 && status_code < 300) - { - return TRU=
+E; - } - -+ if (*error !=3D NULL) -+ return FALSE; -+ - /* If we are here w=
+e must be in some kind of HTTP error, lets try */ - g_set_error_literal (er=
+ror, - REST_PROXY_ERROR, -- message->status_code, -- message->reason_phrase=
+); -+ status_code, -+ reason_phrase); - return FALSE; - } - - static gboole=
+an --finish_call (RestProxyCall *call, SoupMessage *message, GError **error=
+) -+finish_call (RestProxyCall *call, SoupMessage *message, GBytes *payload=
+, GError **error) - { - RestProxyCallPrivate *priv =3D GET_PRIVATE (call); =
+-+ SoupMessageHeaders *response_headers; - - g_assert (call); - g_assert (m=
+essage); -+ g_assert (payload); -+ -+#ifdef WITH_SOUP_2 -+ response_headers=
+ =3D message->response_headers; -+#else -+ response_headers =3D soup_messag=
+e_get_response_headers (message); -+#endif - - /* Convert the soup headers =
+in to hash */ - /* FIXME: Eeek..are you allowed duplicate headers? ... */ -=
+ g_hash_table_remove_all (priv->response_headers); -- soup_message_headers_=
+foreach (message->response_headers, -+ soup_message_headers_foreach (respon=
+se_headers, - (SoupMessageHeadersForeachFunc)_populate_headers_hash_table, =
+- priv->response_headers); - -- priv->payload =3D g_memdup (message->respon=
+se_body->data, -- message->response_body->length + 1); -- priv->length =3D =
+message->response_body->length; -+ priv->payload =3D payload; - -+#ifdef WI=
+TH_SOUP_2 - priv->status_code =3D message->status_code; - priv->status_mess=
+age =3D g_strdup (message->reason_phrase); -+#else -+ priv->status_code =3D=
+ soup_message_get_status (message); -+ priv->status_message =3D g_strdup (s=
+oup_message_get_reason_phrase (message)); -+#endif - - return _handle_error=
+_from_message (message, error); - } - - static void --_continuous_call_mess=
+age_completed_cb (SoupSession *session, -- SoupMessage *message, -- gpointe=
+r userdata) -+_continuous_call_message_completed (SoupMessage *message, -+ =
+GError *error, -+ gpointer userdata) - { - RestProxyCallContinuousClosure *=
+closure; - RestProxyCall *call; - RestProxyCallPrivate *priv; -- GError *er=
+ror =3D NULL; - - closure =3D (RestProxyCallContinuousClosure *)userdata; -=
+ call =3D closure->call; - priv =3D GET_PRIVATE (call); - -+#ifdef WITH_SOU=
+P_2 - priv->status_code =3D message->status_code; - priv->status_message =
+=3D g_strdup (message->reason_phrase); -+#else -+ priv->status_code =3D sou=
+p_message_get_status (message); -+ priv->status_message =3D g_strdup (soup_=
+message_get_reason_phrase (message)); -+#endif - - _handle_error_from_messa=
+ge (message, &error); - -@@ -657,6 +693,7 @@ _continuous_call_message_compl=
+eted_cb (SoupSession *session, - - priv->cur_call_closure =3D NULL; - g_obj=
+ect_unref (closure->call); -+ g_object_unref (message); - g_slice_free (Res=
+tProxyCallContinuousClosure, closure); - } - -@@ -715,6 +752,49 @@ set_url =
+(RestProxyCall *call) - return TRUE; - } - -+#ifndef WITH_SOUP_2 -+static g=
+boolean -+authenticate (RestProxyCall *call, -+ SoupAuth *soup_auth, -+ gbo=
+olean retrying, -+ SoupMessage *message) -+{ -+ RestProxyCallPrivate *priv =
+=3D GET_PRIVATE (call); -+ RestProxyAuth *rest_auth; -+ gboolean try_auth; =
+-+ -+ rest_auth =3D rest_proxy_auth_new (priv->proxy, NULL, message, soup_a=
+uth); -+ g_signal_emit_by_name (priv->proxy, "authenticate", rest_auth, ret=
+rying, &try_auth); -+ if (try_auth && !rest_proxy_auth_is_paused (rest_auth=
+)) { -+ char *username, *password; -+ -+ g_object_get (priv->proxy, "userna=
+me", &username, "password", &password, NULL); -+ soup_auth_authenticate (so=
+up_auth, username, password); -+ g_free (username); -+ g_free (password); -=
++ } -+ g_object_unref (rest_auth); -+ -+ return try_auth; -+} -+ -+static g=
+boolean -+accept_certificate (RestProxyCall *call, -+ GTlsCertificate *tls_=
+certificate, -+ GTlsCertificateFlags *tls_errors, -+ SoupMessage *message) =
+-+{ -+ RestProxyCallPrivate *priv =3D GET_PRIVATE (call); -+ gboolean ssl_s=
+trict; -+ -+ if (tls_errors =3D=3D 0) -+ return TRUE; -+ -+ g_object_get (p=
+riv->proxy, "ssl-strict", &ssl_strict, NULL); -+ return !ssl_strict; -+} -+=
+#endif -+ - static SoupMessage * - prepare_message (RestProxyCall *call, GE=
+rror **error_out) - { -@@ -722,6 +802,7 @@ prepare_message (RestProxyCall *=
+call, GError **error_out) - RestProxyCallClass *call_class; - const gchar *=
+user_agent; - SoupMessage *message; -+ SoupMessageHeaders *request_headers;=
+ - GError *error =3D NULL; - - call_class =3D REST_PROXY_CALL_GET_CLASS (ca=
+ll); -@@ -748,6 +829,9 @@ prepare_message (RestProxyCall *call, GError **er=
+ror_out) - gchar *content; - gchar *content_type; - gsize content_len; -+#i=
+fndef WITH_SOUP_2 -+ GBytes *body; -+#endif - - if (!call_class->serialize_=
+params (call, &content_type, - &content, &content_len, &error)) -@@ -780,8 =
++864,14 @@ prepare_message (RestProxyCall *call, GError **error_out) - "Cou=
+ld not parse URI"); - return NULL; - } -+#ifdef WITH_SOUP_2 - soup_message_=
+set_request (message, content_type, - SOUP_MEMORY_TAKE, content, content_le=
+n); -+#else -+ body =3D g_bytes_new_take (content, content_len); -+ soup_me=
+ssage_set_request_body_from_bytes (message, content_type, body); -+ g_bytes=
+_unref (body); -+#endif - - g_free (content_type); - } else if (rest_params=
+_are_strings (priv->params)) { -@@ -798,9 +888,15 @@ prepare_message (RestP=
+roxyCall *call, GError **error_out) - - hash =3D rest_params_as_string_hash=
+_table (priv->params); - -+#ifdef WITH_SOUP_2 - message =3D soup_form_reque=
+st_new_from_hash (priv->method, - priv->url, - hash); -+#else -+ message =
+=3D soup_message_new_from_encoded_form (priv->method, -+ priv->url, -+ soup=
+_form_encode_hash (hash)); -+#endif - - g_hash_table_unref (hash); - -@@ -8=
+27,19 +923,28 @@ prepare_message (RestProxyCall *call, GError **error_out) =
+- if (rest_param_is_string (param)) { - soup_multipart_append_form_string (=
+mp, name, rest_param_get_content (param)); - } else { -- SoupBuffer *sb; --=
+ -- sb =3D soup_buffer_new_with_owner (rest_param_get_content (param), -- r=
+est_param_get_content_length (param), -- rest_param_ref (param), -- (GDestr=
+oyNotify)rest_param_unref); -+#ifdef WITH_SOUP_2 -+ SoupBuffer *sb =3D soup=
+_buffer_new_with_owner (rest_param_get_content (param), -+ rest_param_get_c=
+ontent_length (param), -+ rest_param_ref (param), -+ (GDestroyNotify)rest_p=
+aram_unref); -+#else -+ GBytes *sb =3D g_bytes_new_with_free_func (rest_par=
+am_get_content (param), -+ rest_param_get_content_length (param), -+ (GDest=
+royNotify)rest_param_unref, -+ rest_param_ref (param)); -+#endif - - soup_m=
+ultipart_append_form_file (mp, name, - rest_param_get_file_name (param), - =
+rest_param_get_content_type (param), - sb); - -+#ifdef WITH_SOUP_2 - soup_b=
+uffer_free (sb); -+#else -+ g_bytes_unref (sb); -+#endif - } - } - -@@ -853=
+,19 +958,36 @@ prepare_message (RestProxyCall *call, GError **error_out) - =
+return NULL; - } - -+#ifdef WITH_SOUP_2 - message =3D soup_form_request_new=
+_from_multipart (priv->url, mp); -+#else -+ message =3D soup_message_new_fr=
+om_multipart (priv->url, mp); -+#endif - - soup_multipart_free (mp); - } - =
+-+#ifdef WITH_SOUP_2 -+ request_headers =3D message->request_headers; -+#el=
+se -+ request_headers =3D soup_message_get_request_headers (message); -+ g_=
+signal_connect_swapped (message, "authenticate", -+ G_CALLBACK (authenticat=
+e), -+ call); -+ g_signal_connect_swapped (message, "accept-certificate", -=
++ G_CALLBACK (accept_certificate), -+ call); -+#endif -+ -+ - /* Set the us=
+er agent, if one was set in the proxy */ - user_agent =3D rest_proxy_get_us=
+er_agent (priv->proxy); - if (user_agent) { -- soup_message_headers_append =
+(message->request_headers, "User-Agent", user_agent); -+ soup_message_heade=
+rs_append (request_headers, "User-Agent", user_agent); - } - - /* Set the h=
+eaders */ -- g_hash_table_foreach (priv->headers, set_header, message->requ=
+est_headers); -+ g_hash_table_foreach (priv->headers, set_header, request_h=
+eaders); - - return message; - } -@@ -878,17 +1000,17 @@ _call_message_call=
+_cancelled_cb (GCancellable *cancellable, - } - - static void --_call_messa=
+ge_call_completed_cb (SoupSession *session, -- SoupMessage *message, -+_cal=
+l_message_call_completed_cb (SoupMessage *message, -+ GBytes *payload, -+ G=
+Error *error, - gpointer user_data) - { - GTask *task =3D user_data; - Rest=
+ProxyCall *call; -- GError *error =3D NULL; - - call =3D REST_PROXY_CALL (g=
+_task_get_source_object (task)); - -- finish_call (call, message, &error); =
+-+ finish_call (call, message, payload, &error); - - if (error !=3D NULL) -=
+ g_task_return_error (task, error); -@@ -938,6 +1060,7 @@ rest_proxy_call_i=
+nvoke_async (RestProxyCall *call, - - _rest_proxy_queue_message (priv->prox=
+y, - message, -+ priv->cancellable, - _call_message_call_completed_cb, - ta=
+sk); - } -@@ -962,16 +1085,55 @@ rest_proxy_call_invoke_finish (RestProxyCa=
+ll *call, - } - - static void --_continuous_call_message_got_chunk_cb (Soup=
+Message *msg, -- SoupBuffer *chunk, -- RestProxyCallContinuousClosure *clos=
+ure) -+_continuous_call_read_cb (GObject *source, -+ GAsyncResult *result, =
+-+ gpointer user_data) - { -+ GInputStream *stream =3D G_INPUT_STREAM (sour=
+ce); -+ RestProxyCallContinuousClosure *closure =3D user_data; -+ RestProxy=
+CallPrivate *priv =3D GET_PRIVATE (closure->call); -+ gssize bytes_read; -+=
+ GError *error =3D NULL; -+ -+ bytes_read =3D g_input_stream_read_finish (s=
+tream, result, &error); -+ if (bytes_read <=3D 0) -+ { -+ _continuous_call_=
+message_completed (closure->message, error, user_data); -+ return; -+ } -+ =
+- closure->callback (closure->call, -- chunk->data, -- chunk->length, -+ (g=
+constpointer)closure->buffer, -+ bytes_read, - NULL, - closure->weak_object=
+, - closure->userdata); -+ -+ g_input_stream_read_async (stream, closure->b=
+uffer, READ_BUFFER_SIZE, G_PRIORITY_DEFAULT, -+ priv->cancellable, _continu=
+ous_call_read_cb, closure); -+} -+ -+static void -+_continuous_call_message=
+_sent_cb (GObject *source, -+ GAsyncResult *result, -+ gpointer user_data) =
+-+{ -+ RestProxy *proxy =3D REST_PROXY (source); -+ RestProxyCallContinuous=
+Closure *closure =3D user_data; -+ RestProxyCallPrivate *priv =3D GET_PRIVA=
+TE (closure->call); -+ GInputStream *stream; -+ GError *error =3D NULL; -+ =
+-+ stream =3D _rest_proxy_send_message_finish (proxy, result, &error); -+ i=
+f (!stream) -+ { -+ _continuous_call_message_completed (closure->message, e=
+rror, user_data); -+ return; -+ } -+ -+ g_input_stream_read_async (stream, =
+closure->buffer, READ_BUFFER_SIZE, G_PRIORITY_DEFAULT, -+ priv->cancellable=
+, _continuous_call_read_cb, closure); -+ g_object_unref (stream); - } - - -=
+@@ -1021,9 +1183,6 @@ rest_proxy_call_continuous (RestProxyCall *call, - if=
+ (message =3D=3D NULL) - return FALSE; - -- /* Must turn off accumulation *=
+/ -- soup_message_body_set_accumulate (message->response_body, FALSE); -- -=
+ closure =3D g_slice_new0 (RestProxyCallContinuousClosure); - closure->call=
+ =3D g_object_ref (call); - closure->callback =3D callback; -@@ -1041,33 +1=
+200,29 @@ rest_proxy_call_continuous (RestProxyCall *call, - closure); - } =
+- -- g_signal_connect (message, -- "got-chunk", -- (GCallback)_continuous_c=
+all_message_got_chunk_cb, -- closure); -- -- _rest_proxy_queue_message (pri=
+v->proxy, -- message, -- _continuous_call_message_completed_cb, -- closure)=
+; -+ _rest_proxy_send_message_async (priv->proxy, -+ message, -+ priv->canc=
+ellable, -+ _continuous_call_message_sent_cb, -+ closure); - return TRUE; -=
+ } - - static void --_upload_call_message_completed_cb (SoupSession *sessio=
+n, -- SoupMessage *message, -+_upload_call_message_completed_cb (SoupMessag=
+e *message, -+ GBytes *payload, -+ GError *error, - gpointer user_data) - {=
+ - RestProxyCall *call; - RestProxyCallPrivate *priv; -- GError *error =3D =
+NULL; - RestProxyCallUploadClosure *closure; - - closure =3D (RestProxyCall=
+UploadClosure *) user_data; - call =3D closure->call; - priv =3D GET_PRIVAT=
+E (call); - -- finish_call (call, message, &error); -+ finish_call (call, m=
+essage, payload, &error); - - closure->callback (closure->call, - closure->=
+uploaded, -@@ -1093,14 +1248,25 @@ _upload_call_message_completed_cb (SoupS=
+ession *session, - - static void - _upload_call_message_wrote_data_cb (Soup=
+Message *msg, -+#ifdef WITH_SOUP_2 - SoupBuffer *chunk, -+#else -+ gsize ch=
+unk_size, -+#endif - RestProxyCallUploadClosure *closure) - { -- closure->u=
+ploaded =3D closure->uploaded + chunk->length; -+#ifdef WITH_SOUP_2 -+ gsiz=
+e chunk_size =3D chunk->length; -+ goffset content_length =3D msg->request_=
+body->length; -+#else -+ goffset content_length =3D soup_message_headers_ge=
+t_content_length (soup_message_get_request_headers (msg)); -+#endif - -- if=
+ (closure->uploaded < msg->request_body->length) -+ closure->uploaded =3D c=
+losure->uploaded + chunk_size; -+ -+ if (closure->uploaded < content_length=
+) - closure->callback (closure->call, -- msg->request_body->length, -+ cont=
+ent_length, - closure->uploaded, - NULL, - closure->weak_object, -@@ -1178,=
+6 +1344,7 @@ rest_proxy_call_upload (RestProxyCall *call, - - _rest_proxy_q=
+ueue_message (priv->proxy, - message, -+ priv->cancellable, - _upload_call_=
+message_completed_cb, - closure); - return TRUE; -@@ -1206,6 +1373,10 @@ re=
+st_proxy_call_cancel (RestProxyCall *call) - if (priv->cancellable) - { - g=
+_signal_handler_disconnect (priv->cancellable, priv->cancel_sig); -+#ifndef=
+ WITH_SOUP_2 -+ if (!g_cancellable_is_cancelled (priv->cancellable)) -+ g_c=
+ancellable_cancel (priv->cancellable); -+#endif - g_clear_object (&priv->ca=
+ncellable); - } - -@@ -1240,6 +1411,7 @@ rest_proxy_call_sync (RestProxyCal=
+l *call, - RestProxyCallPrivate *priv =3D GET_PRIVATE (call); - SoupMessage=
+ *message; - gboolean ret; -+ GBytes *payload; - - g_return_val_if_fail (RE=
+ST_IS_PROXY_CALL (call), FALSE); - -@@ -1247,9 +1419,9 @@ rest_proxy_call_s=
+ync (RestProxyCall *call, - if (!message) - return FALSE; - -- _rest_proxy_=
+send_message (priv->proxy, message); -+ payload =3D _rest_proxy_send_messag=
+e (priv->proxy, message, priv->cancellable, error_out); - -- ret =3D finish=
+_call (call, message, error_out); -+ ret =3D finish_call (call, message, pa=
+yload, error_out); - - g_object_unref (message); - -@@ -1314,9 +1486,16 @@ =
+rest_proxy_call_get_response_headers (RestProxyCall *call) - goffset - rest=
+_proxy_call_get_payload_length (RestProxyCall *call) - { -+ GBytes *payload=
+; -+ - g_return_val_if_fail (REST_IS_PROXY_CALL (call), 0); - -- return GET=
+_PRIVATE (call)->length; -+ payload =3D GET_PRIVATE (call)->payload; -+#ifd=
+ef WITH_SOUP_2 -+ return payload ? g_bytes_get_size (payload) - 1 : 0; -+#e=
+lse -+ return payload ? g_bytes_get_size (payload) : 0; -+#endif - } - - /*=
+* -@@ -1331,9 +1510,12 @@ rest_proxy_call_get_payload_length (RestProxyCall=
+ *call) - const gchar * - rest_proxy_call_get_payload (RestProxyCall *call)=
+ - { -+ GBytes *payload; -+ - g_return_val_if_fail (REST_IS_PROXY_CALL (cal=
+l), NULL); - -- return GET_PRIVATE (call)->payload; -+ payload =3D GET_PRIV=
+ATE (call)->payload; -+ return payload ? g_bytes_get_data (payload, NULL) :=
+ NULL; - } - - /** -diff --git a/rest/rest-proxy.c b/rest/rest-proxy.c -ind=
+ex 80972a3..171f6cb 100644 ---- a/rest/rest-proxy.c -+++ b/rest/rest-proxy.=
+c -@@ -45,6 +45,9 @@ struct _RestProxyPrivate { - SoupSession *session; - g=
+boolean disable_cookies; - char *ssl_ca_file; -+#ifndef WITH_SOUP_2 -+ gboo=
+lean ssl_strict; -+#endif - }; - - -@@ -116,11 +119,15 @@ rest_proxy_get_pr=
+operty (GObject *object, - g_value_set_string (value, priv->password); - br=
+eak; - case PROP_SSL_STRICT: { -+#ifdef WITH_SOUP_2 - gboolean ssl_strict; =
+- g_object_get (G_OBJECT(priv->session), - "ssl-strict", &ssl_strict, - NUL=
+L); - g_value_set_boolean (value, ssl_strict); -+#else -+ g_value_set_boole=
+an (value, priv->ssl_strict); -+#endif - break; - } - case PROP_SSL_CA_FILE=
+: -@@ -172,9 +179,13 @@ rest_proxy_set_property (GObject *object, - priv->p=
+assword =3D g_value_dup_string (value); - break; - case PROP_SSL_STRICT: -+=
+#ifdef WITH_SOUP_2 - g_object_set (G_OBJECT(priv->session), - "ssl-strict",=
+ g_value_get_boolean (value), - NULL); -+#else -+ priv->ssl_strict =3D g_va=
+lue_get_boolean (value); -+#endif - break; - case PROP_SSL_CA_FILE: - g_fre=
+e(priv->ssl_ca_file); -@@ -207,6 +218,7 @@ default_authenticate_cb (RestPro=
+xy *self, - return !retrying; - } - -+#ifdef WITH_SOUP_2 - static void - au=
+thenticate (RestProxy *self, - SoupMessage *msg, -@@ -224,6 +236,7 @@ authe=
+nticate (RestProxy *self, - soup_auth_authenticate (soup_auth, priv->userna=
+me, priv->password); - g_object_unref (G_OBJECT (rest_auth)); - } -+#endif =
+- - static void - rest_proxy_constructed (GObject *object) -@@ -238,14 +251=
+,20 @@ rest_proxy_constructed (GObject *object) - } - - if (REST_DEBUG_ENAB=
+LED(PROXY)) { -+#ifdef WITH_SOUP_2 - SoupSessionFeature *logger =3D (SoupSe=
+ssionFeature*)soup_logger_new (SOUP_LOGGER_LOG_BODY, 0); -+#else -+ SoupSes=
+sionFeature *logger =3D (SoupSessionFeature*)soup_logger_new (SOUP_LOGGER_L=
+OG_HEADERS); -+#endif - soup_session_add_feature (priv->session, logger); -=
+ g_object_unref (logger); - } - -+#ifdef WITH_SOUP_2 - /* session lifetime =
+is same as self, no need to keep signalid */ - g_signal_connect_swapped (pr=
+iv->session, "authenticate", - G_CALLBACK(authenticate), object); -+#endif =
+- } - - static void -@@ -391,23 +410,62 @@ rest_proxy_class_init (RestProxy=
+Class *klass) - proxy_class->authenticate =3D default_authenticate_cb; - } =
+- -+static gboolean -+transform_ssl_ca_file_to_tls_database (GBinding *bind=
+ing, -+ const GValue *from_value, -+ GValue *to_value, -+ gpointer user_dat=
+a) -+{ -+ g_value_take_object (to_value, -+ g_tls_file_database_new (g_valu=
+e_get_string (from_value), NULL)); -+ return TRUE; -+} -+ -+static gboolean=
+ -+transform_tls_database_to_ssl_ca_file (GBinding *binding, -+ const GValu=
+e *from_value, -+ GValue *to_value, -+ gpointer user_data) -+{ -+ GTlsDatab=
+ase *tls_database; -+ char *path =3D NULL; -+ -+ tls_database =3D g_value_g=
+et_object (from_value); -+ if (tls_database) -+ g_object_get (tls_database,=
+ "anchors", &path, NULL); -+ g_value_take_string (to_value, path); -+ retur=
+n TRUE; -+} -+ - static void - rest_proxy_init (RestProxy *self) - { - Rest=
+ProxyPrivate *priv =3D GET_PRIVATE (self); -+ GTlsDatabase *tls_database; -=
++ -+#ifndef WITH_SOUP_2 -+ priv->ssl_strict =3D TRUE; -+#endif - - priv->se=
+ssion =3D soup_session_new (); - - #ifdef REST_SYSTEM_CA_FILE - /* with ssl=
+-strict (defaults TRUE) setting ssl-ca-file forces all - * certificates to =
+be trusted */ -- g_object_set (priv->session, -- "ssl-ca-file", REST_SYSTEM=
+_CA_FILE, -- NULL); -+ tls_database =3D g_tls_file_database_new (REST_SYSTE=
+M_CA_FILE, NULL); -+ if (tls_database) { -+ g_object_set (priv->session, -+=
+ "tls-database", tls_database, -+ NULL); -+ g_object_unref (tls_database); =
+-+ } - #endif -- g_object_bind_property (self, "ssl-ca-file", -- priv->sess=
+ion, "ssl-ca-file", -- G_BINDING_BIDIRECTIONAL); -+ g_object_bind_property_=
+full (self, "ssl-ca-file", -+ priv->session, "tls-database", -+ G_BINDING_B=
+IDIRECTIONAL, -+ transform_ssl_ca_file_to_tls_database, -+ transform_tls_da=
+tabase_to_ssl_ca_file, -+ NULL, NULL); - } - - /** -@@ -689,27 +747,127 @@ =
+rest_proxy_simple_run (RestProxy *proxy, - return ret; - } - -+typedef stru=
+ct { -+ RestMessageFinishedCallback callback; -+ gpointer user_data; -+} Re=
+stMessageQueueData; -+ -+#ifdef WITH_SOUP_2 -+static void -+message_finishe=
+d_cb (SoupSession *session, -+ SoupMessage *message, -+ gpointer user_data)=
+ -+{ -+ RestMessageQueueData *data =3D user_data; -+ GBytes *body; -+ GErro=
+r *error =3D NULL; -+ -+ body =3D g_bytes_new (message->response_body->data=
+, -+ message->response_body->length + 1); -+ data->callback (message, body,=
+ error, data->user_data); -+ g_free (data); -+} -+#else -+static void -+mes=
+sage_send_and_read_ready_cb (GObject *source, -+ GAsyncResult *result, -+ g=
+pointer user_data) -+{ -+ SoupSession *session =3D SOUP_SESSION (source); -=
++ RestMessageQueueData *data =3D user_data; -+ GBytes *body; -+ GError *err=
+or =3D NULL; -+ -+ body =3D soup_session_send_and_read_finish (session, res=
+ult, &error); -+ data->callback (soup_session_get_async_result_message (ses=
+sion, result), body, error, data->user_data); -+ g_free (data); -+} -+#endi=
+f -+ - void --_rest_proxy_queue_message (RestProxy *proxy, -- SoupMessage *=
+message, -- SoupSessionCallback callback, -- gpointer user_data) -+_rest_pr=
+oxy_queue_message (RestProxy *proxy, -+ SoupMessage *message, -+ GCancellab=
+le *cancellable, -+ RestMessageFinishedCallback callback, -+ gpointer user_=
+data) - { - RestProxyPrivate *priv =3D GET_PRIVATE (proxy); -+ RestMessageQ=
+ueueData *data; - - g_return_if_fail (REST_IS_PROXY (proxy)); - g_return_if=
+_fail (SOUP_IS_MESSAGE (message)); - -+ data =3D g_new0 (RestMessageQueueDa=
+ta, 1); -+ data->callback =3D callback; -+ data->user_data =3D user_data; -=
++ -+#ifdef WITH_SOUP_2 - soup_session_queue_message (priv->session, - messa=
+ge, -- callback, -- user_data); -+ message_finished_cb, -+ data); -+#else -=
++ soup_session_send_and_read_async (priv->session, -+ message, -+ G_PRIORIT=
+Y_DEFAULT, -+ cancellable, -+ message_send_and_read_ready_cb, -+ data); -+#=
+endif -+} -+ -+static void -+message_send_ready_cb (GObject *source, -+ GAs=
+yncResult *result, -+ gpointer user_data) -+{ -+ SoupSession *session =3D S=
+OUP_SESSION (source); -+ GTask *task =3D user_data; -+ GInputStream *stream=
+; -+ GError *error =3D NULL; -+ -+ stream =3D soup_session_send_finish (ses=
+sion, result, &error); -+ if (stream) -+ g_task_return_pointer (task, strea=
+m, g_object_unref); -+ else -+ g_task_return_error (task, error); -+ g_obje=
+ct_unref (task); -+} -+ -+void -+_rest_proxy_send_message_async (RestProxy =
+*proxy, -+ SoupMessage *message, -+ GCancellable *cancellable, -+ GAsyncRea=
+dyCallback callback, -+ gpointer user_data) -+{ -+ RestProxyPrivate *priv =
+=3D GET_PRIVATE (proxy); -+ GTask *task; -+ -+ task =3D g_task_new (proxy, =
+cancellable, callback, user_data); -+ soup_session_send_async (priv->sessio=
+n, -+ message, -+#ifndef WITH_SOUP_2 -+ G_PRIORITY_DEFAULT, -+#endif -+ can=
+cellable, -+ message_send_ready_cb, -+ task); -+} -+ -+GInputStream * -+_re=
+st_proxy_send_message_finish (RestProxy *proxy, -+ GAsyncResult *result, -+=
+ GError **error) -+{ -+ return g_task_propagate_pointer (G_TASK (result), e=
+rror); - } - - void - _rest_proxy_cancel_message (RestProxy *proxy, - SoupM=
+essage *message) - { -+#ifdef WITH_SOUP_2 - RestProxyPrivate *priv =3D GET_=
+PRIVATE (proxy); - - g_return_if_fail (REST_IS_PROXY (proxy)); -@@ -718,16 =
++876,31 @@ _rest_proxy_cancel_message (RestProxy *proxy, - soup_session_can=
+cel_message (priv->session, - message, - SOUP_STATUS_CANCELLED); -+#endif -=
+ } - --guint --_rest_proxy_send_message (RestProxy *proxy, -- SoupMessage *=
+message) -+GBytes * -+_rest_proxy_send_message (RestProxy *proxy, -+ SoupMe=
+ssage *message, -+ GCancellable *cancellable, -+ GError **error) - { - Rest=
+ProxyPrivate *priv =3D GET_PRIVATE (proxy); -+ GBytes *body; - -- g_return_=
+val_if_fail (REST_IS_PROXY (proxy), 0); -- g_return_val_if_fail (SOUP_IS_ME=
+SSAGE (message), 0); -+ g_return_val_if_fail (REST_IS_PROXY (proxy), NULL);=
+ -+ g_return_val_if_fail (SOUP_IS_MESSAGE (message), NULL); -+ -+#ifdef WIT=
+H_SOUP_2 -+ soup_session_send_message (priv->session, message); -+ body =3D=
+ g_bytes_new (message->response_body->data, -+ message->response_body->leng=
+th + 1); -+#else -+ body =3D soup_session_send_and_read (priv->session, -+ =
+message, -+ cancellable, -+ error); -+#endif - -- return soup_session_send_=
+message (priv->session, message); -+ return body; - } -diff --git a/tests/c=
+ustom-serialize.c b/tests/custom-serialize.c -index c3fde93..01b3a56 100644=
+ ---- a/tests/custom-serialize.c -+++ b/tests/custom-serialize.c -@@ -88,22=
+ +88,40 @@ custom_proxy_call_init (CustomProxyCall *self) - } - - static vo=
+id -+#ifdef WITH_SOUP_2 - server_callback (SoupServer *server, SoupMessage =
+*msg, - const char *path, GHashTable *query, - SoupClientContext *client, g=
+pointer user_data) -+#else -+server_callback (SoupServer *server, SoupServe=
+rMessage *msg, -+ const char *path, GHashTable *query, gpointer user_data) =
+-+#endif - { - if (g_str_equal (path, "/ping")) { - const char *content_typ=
+e =3D NULL; -+#ifdef WITH_SOUP_2 - SoupMessageHeaders *headers =3D msg->req=
+uest_headers; - SoupMessageBody *body =3D msg->request_body; -+#else -+ Sou=
+pMessageHeaders *headers =3D soup_server_message_get_request_headers (msg);=
+ -+ SoupMessageBody *body =3D soup_server_message_get_request_body (msg); -=
++#endif - content_type =3D soup_message_headers_get_content_type (headers, =
+NULL); - g_assert_cmpstr (content_type, =3D=3D, "application/json"); - - g_=
+assert_cmpstr (body->data, =3D=3D, "{}"); - -+#ifdef WITH_SOUP_2 - soup_mes=
+sage_set_status (msg, SOUP_STATUS_OK); -+#else -+ soup_server_message_set_s=
+tatus (msg, SOUP_STATUS_OK, NULL); -+#endif - } else { -+#ifdef WITH_SOUP_2=
+ - soup_message_set_status (msg, SOUP_STATUS_NOT_IMPLEMENTED); -+#else -+ s=
+oup_server_message_set_status (msg, SOUP_STATUS_NOT_IMPLEMENTED, NULL); -+#=
+endif - } - } - -diff --git a/tests/proxy-continuous.c b/tests/proxy-contin=
+uous.c -index 8f4b7a8..7967bbd 100644 ---- a/tests/proxy-continuous.c -+++ =
+b/tests/proxy-continuous.c -@@ -39,9 +39,15 @@ static SoupServer *server; -=
+ static gboolean - send_chunks (gpointer user_data) - { -- SoupMessage *msg=
+ =3D SOUP_MESSAGE (user_data); - guint i; - guint8 data[SIZE_CHUNK]; -+#ifd=
+ef WITH_SOUP_2 -+ SoupMessage *msg =3D SOUP_MESSAGE (user_data); -+ SoupMes=
+sageBody *response_body =3D msg->response_body; -+#else -+ SoupServerMessag=
+e *msg =3D SOUP_SERVER_MESSAGE (user_data); -+ SoupMessageBody *response_bo=
+dy =3D soup_server_message_get_response_body (msg); -+#endif - - for (i =3D=
+ 0; i < SIZE_CHUNK; i++) - { -@@ -49,12 +55,12 @@ send_chunks (gpointer use=
+r_data) - server_count++; - } - -- soup_message_body_append (msg->response_=
+body, SOUP_MEMORY_COPY, data, SIZE_CHUNK); -+ soup_message_body_append (res=
+ponse_body, SOUP_MEMORY_COPY, data, SIZE_CHUNK); - soup_server_unpause_mess=
+age (server, msg); - - if (server_count =3D=3D NUM_CHUNKS * SIZE_CHUNK) - {=
+ -- soup_message_body_complete (msg->response_body); -+ soup_message_body_c=
+omplete (response_body); - return FALSE; - } else { - return TRUE; -@@ -62,=
+13 +68,28 @@ send_chunks (gpointer user_data) - } - - static void -+#ifdef =
+WITH_SOUP_2 - server_callback (SoupServer *server, SoupMessage *msg, - cons=
+t char *path, GHashTable *query, - SoupClientContext *client, gpointer user=
+_data) -+#else -+server_callback (SoupServer *server, SoupServerMessage *ms=
+g, -+ const char *path, GHashTable *query, gpointer user_data) -+#endif - {=
+ -+#ifdef WITH_SOUP_2 -+ SoupMessageHeaders *response_headers =3D msg->resp=
+onse_headers; -+#else -+ SoupMessageHeaders *response_headers =3D soup_serv=
+er_message_get_response_headers (msg); -+#endif -+ - g_assert_cmpstr (path,=
+ =3D=3D, "/stream"); -+#ifdef WITH_SOUP_2 - soup_message_set_status (msg, S=
+OUP_STATUS_OK); -- soup_message_headers_set_encoding (msg->response_headers=
+, -+#else -+ soup_server_message_set_status (msg, SOUP_STATUS_OK, NULL); -+=
+#endif -+ soup_message_headers_set_encoding (response_headers, - SOUP_ENCOD=
+ING_CHUNKED); - soup_server_pause_message (server, msg); - -@@ -142,13 +163=
+,21 @@ continuous () - uris =3D soup_server_get_uris (server); - g_assert (=
+g_slist_length (uris) > 0); - -+#ifdef WITH_SOUP_2 - url =3D soup_uri_to_st=
+ring (uris->data, FALSE); -+#else -+ url =3D g_uri_to_string (uris->data); =
+-+#endif - - loop =3D g_main_loop_new (NULL, FALSE); - - proxy =3D rest_pro=
+xy_new (url, FALSE); - stream_test (proxy); -+#ifdef WITH_SOUP_2 - g_slist_=
+free_full (uris, (GDestroyNotify)soup_uri_free); -+#else -+ g_slist_free_fu=
+ll (uris, (GDestroyNotify)g_uri_unref); -+#endif - - g_main_loop_run (loop)=
+; - g_free (url); -diff --git a/tests/proxy.c b/tests/proxy.c -index 89a932=
+5..652c600 100644 ---- a/tests/proxy.c -+++ b/tests/proxy.c -@@ -49,20 +49,=
+35 @@ SoupServer *server; - GMainLoop *server_loop; - - static void -+#ifde=
+f WITH_SOUP_2 - server_callback (SoupServer *server, SoupMessage *msg, - co=
+nst char *path, GHashTable *query, - SoupClientContext *client, gpointer us=
+er_data) -+#else -+server_callback (SoupServer *server, SoupServerMessage *=
+msg, -+ const char *path, GHashTable *query, gpointer user_data) -+#endif -=
+ { - if (g_str_equal (path, "/ping")) { -+#ifdef WITH_SOUP_2 - soup_message=
+_set_status (msg, SOUP_STATUS_OK); -+#else -+ soup_server_message_set_statu=
+s (msg, SOUP_STATUS_OK, NULL); -+#endif - } - else if (g_str_equal (path, "=
+/echo")) { - const char *value; - - value =3D g_hash_table_lookup (query, "=
+value"); -+#ifdef WITH_SOUP_2 - soup_message_set_response (msg, "text/plain=
+", SOUP_MEMORY_COPY, - value, strlen (value)); - soup_message_set_status (m=
+sg, SOUP_STATUS_OK); -+#else -+ soup_server_message_set_response (msg, "tex=
+t/plain", SOUP_MEMORY_COPY, -+ value, strlen (value)); -+ soup_server_messa=
+ge_set_status (msg, SOUP_STATUS_OK, NULL); -+#endif - } - else if (g_str_eq=
+ual (path, "/reverse")) { - char *value; -@@ -70,9 +85,15 @@ server_callbac=
+k (SoupServer *server, SoupMessage *msg, - value =3D g_strdup (g_hash_table=
+_lookup (query, "value")); - g_strreverse (value); - -+#ifdef WITH_SOUP_2 -=
+ soup_message_set_response (msg, "text/plain", SOUP_MEMORY_TAKE, - value, s=
+trlen (value)); - soup_message_set_status (msg, SOUP_STATUS_OK); -+#else -+=
+ soup_server_message_set_response (msg, "text/plain", SOUP_MEMORY_TAKE, -+ =
+value, strlen (value)); -+ soup_server_message_set_status (msg, SOUP_STATUS=
+_OK, NULL); -+#endif - } - else if (g_str_equal (path, "/status")) { - cons=
+t char *value; -@@ -81,25 +102,61 @@ server_callback (SoupServer *server, S=
+oupMessage *msg, - value =3D g_hash_table_lookup (query, "status"); - if (v=
+alue) { - status =3D atoi (value); -+#ifdef WITH_SOUP_2 - soup_message_set_=
+status (msg, status ?: SOUP_STATUS_INTERNAL_SERVER_ERROR); -+#else -+ soup_=
+server_message_set_status (msg, status ?: SOUP_STATUS_INTERNAL_SERVER_ERROR=
+, NULL); -+#endif - } else { -+#ifdef WITH_SOUP_2 - soup_message_set_status=
+ (msg, SOUP_STATUS_INTERNAL_SERVER_ERROR); -+#else -+ soup_server_message_s=
+et_status (msg, SOUP_STATUS_INTERNAL_SERVER_ERROR, NULL); -+#endif - } - } =
+- else if (g_str_equal (path, "/useragent/none")) { -- if (soup_message_hea=
+ders_get (msg->request_headers, "User-Agent") =3D=3D NULL) { -+#ifdef WITH_=
+SOUP_2 -+ SoupMessageHeaders *request_headers =3D msg->request_headers; -+#=
+else -+ SoupMessageHeaders *request_headers =3D soup_server_message_get_req=
+uest_headers (msg); -+#endif -+ -+ if (soup_message_headers_get (request_he=
+aders, "User-Agent") =3D=3D NULL) { -+#ifdef WITH_SOUP_2 - soup_message_set=
+_status (msg, SOUP_STATUS_OK); -+#else -+ soup_server_message_set_status (m=
+sg, SOUP_STATUS_OK, NULL); -+#endif - } else { -+#ifdef WITH_SOUP_2 - soup_=
+message_set_status (msg, SOUP_STATUS_EXPECTATION_FAILED); -+#else -+ soup_s=
+erver_message_set_status (msg, SOUP_STATUS_EXPECTATION_FAILED, NULL); -+#en=
+dif - } - } - else if (g_str_equal (path, "/useragent/testsuite")) { -+#ifd=
+ef WITH_SOUP_2 -+ SoupMessageHeaders *request_headers =3D msg->request_head=
+ers; -+#else -+ SoupMessageHeaders *request_headers =3D soup_server_message=
+_get_request_headers (msg); -+#endif - const char *value; -- value =3D soup=
+_message_headers_get (msg->request_headers, "User-Agent"); -+ value =3D sou=
+p_message_headers_get (request_headers, "User-Agent"); - if (g_strcmp0 (val=
+ue, "TestSuite-1.0") =3D=3D 0) { -+#ifdef WITH_SOUP_2 - soup_message_set_st=
+atus (msg, SOUP_STATUS_OK); -+#else -+ soup_server_message_set_status (msg,=
+ SOUP_STATUS_OK, NULL); -+#endif - } else { -+#ifdef WITH_SOUP_2 - soup_mes=
+sage_set_status (msg, SOUP_STATUS_EXPECTATION_FAILED); -+#else -+ soup_serv=
+er_message_set_status (msg, SOUP_STATUS_EXPECTATION_FAILED, NULL); -+#endif=
+ -+ - } - } - } -@@ -325,7 +382,7 @@ main (int argc, char **argv) - char *u=
+rl; - RestProxy *proxy; - -- server =3D soup_server_new ("", NULL); -+ serv=
+er =3D soup_server_new (NULL); - g_thread_new ("Server Thread", server_thre=
+ad_func, NULL); - - url =3D g_strdup_printf ("http://127.0.0.1:%d/", PORT);=
+ -diff --git a/tests/threaded.c b/tests/threaded.c -index a251900..411361c =
+100644 ---- a/tests/threaded.c -+++ b/tests/threaded.c -@@ -36,13 +36,22 @@=
+ GMainLoop *main_loop; - SoupServer *server; - - static void -+#ifdef WITH_=
+SOUP_2 - server_callback (SoupServer *server, SoupMessage *msg, - const cha=
+r *path, GHashTable *query, - SoupClientContext *client, gpointer user_data=
+) -+#else -+server_callback (SoupServer *server, SoupServerMessage *msg, -+=
+ const char *path, GHashTable *query, gpointer user_data) -+#endif - { - g_=
+assert_cmpstr (path, =3D=3D, "/ping"); - -+#ifdef WITH_SOUP_2 - soup_messag=
+e_set_status (msg, SOUP_STATUS_OK); -+#else -+ soup_server_message_set_stat=
+us (msg, SOUP_STATUS_OK, NULL); -+#endif - g_atomic_int_add (&threads_done,=
+ 1); - - if (threads_done =3D=3D N_THREADS) { -@@ -96,7 +105,11 @@ static v=
+oid ping () - uris =3D soup_server_get_uris (server); - g_assert (g_slist_l=
+ength (uris) > 0); - -+#ifdef WITH_SOUP_2 - url =3D soup_uri_to_string (uri=
+s->data, FALSE); -+#else -+ url =3D g_uri_to_string (uris->data); -+#endif =
+- - main_loop =3D g_main_loop_new (NULL, TRUE); - -@@ -109,7 +122,11 @@ sta=
+tic void ping () - g_main_loop_run (main_loop); - - g_free (url); -+#ifdef =
+WITH_SOUP_2 - g_slist_free_full (uris, (GDestroyNotify)soup_uri_free); -+#e=
+lse -+ g_slist_free_full (uris, (GDestroyNotify)g_uri_unref); -+#endif - g_=
+object_unref (server); - g_main_loop_unref (main_loop); - } --- -2.33.1 - d=
+iff --git a/meta-gnome/recipes-gnome/rest/rest_0.8.1.bb b/meta-gnome/recipe=
+s-gnome/rest/rest_0.8.1.bb deleted file mode 100644 index f1c9915c0..000000=
+000 --- a/meta-gnome/recipes-gnome/rest/rest_0.8.1.bb +++ /dev/null @@ -1,3=
+3 +0,0 @@ -SUMMARY =3D "library to access web services that claim to be "RE=
+STful"" -HOMEPAGE =3D "https://wiki.gnome.org/Projects/Librest" -LICENSE =
+=3D "LGPL-2.1-only" -LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D2d5025d4aa3=
+495befef8f17206a5b0a1" - -GNOMEBASEBUILDCLASS =3D "autotools" - -DEPENDS =
+=3D " \ - libxml2-native \ - glib-2.0-native \ - glib-2.0 \ - libsoup-2.4 \=
+ -" - -inherit gnomebase gobject-introspection gtk-doc vala - -PV .=3D "+gi=
+t${SRCPV}" -SRCREV =3D "7b46065dea860ef09861f4d70124728b8270c8b7" -SRC_URI =
+=3D "git://gitlab.gnome.org/GNOME/librest;protocol=3Dhttps;branch=3Dmaster =
+\ - file://0001-Use-GUri-instead-of-SoupURI.patch \ - file://0002-Port-to-l=
+ibsoup3.patch \ -" -S =3D "${WORKDIR}/git" - -do_configure:prepend() { - # =
+rest expects introspection.m4 at custom location (see aclocal.m4). - cp -f =
+${STAGING_DIR_TARGET}/${datadir}/aclocal/introspection.m4 ${S}/build -} - -=
+do_compile:prepend() { - export GIR_EXTRA_LIBS_PATH=3D"${B}/rest/.libs" -} =
+- diff --git a/meta-gnome/recipes-gnome/rest/rest_0.9.0.bb b/meta-gnome/rec=
+ipes-gnome/rest/rest_0.9.0.bb new file mode 100644 index 000000000..2256a18=
+99 --- /dev/null +++ b/meta-gnome/recipes-gnome/rest/rest_0.9.0.bb @@ -0,0 =
++1,25 @@ +SUMMARY =3D "library to access web services that claim to be "RES=
+Tful"" +HOMEPAGE =3D "https://wiki.gnome.org/Projects/Librest" +LICENSE =3D=
+ "LGPL-2.1-only" +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D2d5025d4aa3495=
+befef8f17206a5b0a1" + +GNOMEBASEBUILDCLASS =3D "meson" + +DEPENDS =3D " \ +=
+ gi-docgen \ + gi-docgen-native \ + glib-2.0 \ + glib-2.0-native \ + json-g=
+lib \ + libxml2-native \ +" + +inherit gnomebase gobject-introspection vala=
+ pkgconfig + +PACKAGECONFIG_SOUP ?=3D "soup3" +PACKAGECONFIG ??=3D "${PACKA=
+GECONFIG_SOUP}" + +PACKAGECONFIG[soup2] =3D "-Dsoup2=3Dtrue,,libsoup-2.4" +=
+PACKAGECONFIG[soup3] =3D "-Dsoup2=3Dfalse,,libsoup-3.0" + +SRC_URI[archive.=
+sha256sum] =3D "85b2bc9341128139539b53ee53f0533310bc96392fd645863a040410b81=
+ebe66" -- 2.34.1
 
