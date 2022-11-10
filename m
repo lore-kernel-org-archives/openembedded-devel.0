@@ -1,73 +1,108 @@
-Return-Path: <u.oelmann@pengutronix.de>
+Return-Path: <peter.kjellerstedt@axis.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3171DC433FE
-	for <webhook@archiver.kernel.org>; Thu, 10 Nov 2022 10:31:10 +0000 (UTC)
-Received: from metis.ext.pengutronix.de (metis.ext.pengutronix.de [85.220.165.71])
- by mx.groups.io with SMTP id smtpd.web10.5782.1668076260117902002
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 163CDC4332F
+	for <webhook@archiver.kernel.org>; Thu, 10 Nov 2022 12:44:21 +0000 (UTC)
+Received: from smtp2.axis.com (smtp2.axis.com [195.60.68.18])
+ by mx.groups.io with SMTP id smtpd.web08.6806.1668084256888256620
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 10 Nov 2022 02:31:01 -0800
+ Thu, 10 Nov 2022 04:44:17 -0800
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: pengutronix.de, ip: 85.220.165.71, mailfrom: u.oelmann@pengutronix.de)
-Received: from dude.hi.pengutronix.de ([2001:67c:670:100:1d::7])
-	by metis.ext.pengutronix.de with esmtps (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
-	(Exim 4.92)
-	(envelope-from <u.oelmann@pengutronix.de>)
-	id 1ot4pl-0008Vx-UV; Thu, 10 Nov 2022 11:30:57 +0100
-Received: from uol by dude.hi.pengutronix.de with local (Exim 4.94.2)
-	(envelope-from <u.oelmann@pengutronix.de>)
-	id 1ot4pl-00D1z3-Hg; Thu, 10 Nov 2022 11:30:57 +0100
-References: <17241B2BA7BC32D1.10169@lists.openembedded.org>
-User-agent: mu4e 1.6.9; emacs 29.0.50
-From: Ulrich =?utf-8?Q?=C3=96lmann?= <u.oelmann@pengutronix.de>
-To: openembedded-devel@lists.openembedded.org
-Cc: Ulrich =?utf-8?Q?=C3=96lmann?= <u.oelmann@pengutronix.de>
-Subject: Re: [oe] [meta-java][PATCH] layer.conf: Mark as compatible with
- langdale
-Date: Thu, 10 Nov 2022 11:30:26 +0100
-In-reply-to: <17241B2BA7BC32D1.10169@lists.openembedded.org>
-Message-ID: <6rv8nn3xum.fsf@pengutronix.de>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
+ dkim=pass header.i=@axis.com header.s=axis-central1 header.b=mCjhCKw3;
+ spf=pass (domain: axis.com, ip: 195.60.68.18, mailfrom: peter.kjellerstedt@axis.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+  d=axis.com; q=dns/txt; s=axis-central1; t=1668084257;
+  x=1699620257;
+  h=from:to:subject:date:message-id:references:in-reply-to:
+   content-transfer-encoding:mime-version;
+  bh=O1NxSuVN8rEBuHIxmFsrxxopjx2IA50ZdHMSmCbAVI0=;
+  b=mCjhCKw3zjiHTLIGZO0iNeXs94mOLieX6V2mWsANfDSRTmnE2eDfwinN
+   RQ5djalBwQQ+/w47zoJN0XqrMhcdnKGuCT9DD/7khUBW019T032Ns0sPK
+   Dnmt5clK9kvusQH1HWATV2gyks3mYLMbNVPCnXSmWZNUyNyDG0dK5ZFvv
+   iOTwaEOA13VXOP/a3V242/CH4XmFM2fJN18FdGom1Cdk9uzBgOpF8ddnZ
+   hRW6tMvvkO/PrunVBBLBAwv/ymkfkrun/IAnOJEF96V74tD5z+7RpYchW
+   OLKvQF5KGmtd1YBd4RD4pvceW3ue4MbU59doBoV4bw9lYagx5pltPQs9t
+   Q==;
+From: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
+To: Markus Volk <f_l_k@t-online.de>,
+	"openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: RE: [oe] [meta-oe][PATCH] hwdata: add patch to use sysroot prefix for
+ pkgdatadir
+Thread-Topic: [oe] [meta-oe][PATCH] hwdata: add patch to use sysroot prefix
+ for pkgdatadir
+Thread-Index: AQHY9NWdPc+F4+XneUmN+e+/dDDxMK44Gfjg
+Date: Thu, 10 Nov 2022 12:44:14 +0000
+Message-ID: <2537e681d5fb4b979b323578ecfede6e@axis.com>
+References: <20221110072509.13944-1-f_l_k@t-online.de>
+In-Reply-To: <20221110072509.13944-1-f_l_k@t-online.de>
+Accept-Language: en-US, sv-SE
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.0.5.60]
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: quoted-printable
-X-SA-Exim-Connect-IP: 2001:67c:670:100:1d::7
-X-SA-Exim-Mail-From: u.oelmann@pengutronix.de
-X-SA-Exim-Scanned: No (on metis.ext.pengutronix.de); SAEximRunCond expanded to false
-X-PTX-Original-Recipient: openembedded-devel@lists.openembedded.org
+MIME-Version: 1.0
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 10 Nov 2022 10:31:10 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99547
+ <openembedded-devel@lists.openembedded.org>; Thu, 10 Nov 2022 12:44:21 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99548
 
-Gentle ping!
-
-On Thu, Nov 03 2022 at 16:00 +0100, Ulrich =C3=96lmann <u.oelmann@pengutron=
-ix.de> wrote:
-> Signed-off-by: Ulrich =C3=96lmann <u.oelmann@pengutronix.de>
+> -----Original Message-----
+> From: openembedded-devel@lists.openembedded.org <openembedded-devel@lists=
+.openembedded.org> On Behalf Of Markus Volk
+> Sent: den 10 november 2022 08:25
+> To: openembedded-devel@lists.openembedded.org
+> Cc: Markus Volk <f_l_k@t-online.de>
+> Subject: [oe] [meta-oe][PATCH] hwdata: add patch to use sysroot prefix fo=
+r pkgdatadir
+>=20
+> This patch has been submitted upstream here:
+> https://github.com/vcrhonek/hwdata/pull/19/commits/d3325fd72bd45ba74e709b=
+4083521104193b224e
+>=20
+> Signed-off-by: Markus Volk <f_l_k@t-online.de>
 > ---
->  conf/layer.conf | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/conf/layer.conf b/conf/layer.conf
-> index 2e2ce1677ecc..99a137608744 100644
-> --- a/conf/layer.conf
-> +++ b/conf/layer.conf
-> @@ -7,7 +7,7 @@ BBFILES +=3D "${LAYERDIR}/recipes*/*/*.bb ${LAYERDIR}/rec=
-ipes*/*/*.bbappend"
->  BBFILE_COLLECTIONS +=3D "meta-java"
->  BBFILE_PATTERN_meta-java :=3D "^${LAYERDIR}/"
->  BBFILE_PRIORITY_meta-java =3D "10"
-> -LAYERSERIES_COMPAT_meta-java =3D "kirkstone"
-> +LAYERSERIES_COMPAT_meta-java =3D "kirkstone langdale"
->  LAYERDEPENDS_meta-java +=3D "openembedded-layer"
->=20=20
->  LICENSE_PATH +=3D "${LAYERDIR}/licenses"
---=20
-Pengutronix e.K.                           | Ulrich =C3=96lmann            =
-   |
-Industrial Linux Solutions                 | http://www.pengutronix.de/  |
-Peiner Str. 6-8, 31137 Hildesheim, Germany | Phone: +49-5121-206917-0    |
-Amtsgericht Hildesheim, HRA 2686           | Fax:   +49-5121-206917-5555 |
+>  ...-sysroot-prefix-for-pkgdatadir-varia.patch | 31 +++++++++++++++++++
+>  .../recipes-support/hwdata/hwdata_0.364.bb    |  6 +++-
+>  2 files changed, 36 insertions(+), 1 deletion(-)
+>  create mode 100644 meta-oe/recipes-support/hwdata/hwdata/0001-hwdata.pc.=
+in-use-sysroot-prefix-for-pkgdatadir-varia.patch
+>=20
+> diff --git a/meta-oe/recipes-support/hwdata/hwdata/0001-hwdata.pc.in-use-=
+sysroot-prefix-for-pkgdatadir-varia.patch b/meta-oe/recipes-support/hwdata/=
+hwdata/0001-hwdata.pc.in-use-sysroot-prefix-for-pkgdatadir-varia.patch
+> new file mode 100644
+> index 000000000..2ee63bc32
+> --- /dev/null
+> +++ b/meta-oe/recipes-support/hwdata/hwdata/0001-hwdata.pc.in-use-sysroot=
+-prefix-for-pkgdatadir-varia.patch
+> @@ -0,0 +1,31 @@
+> +From f5311fb8519c6360333934537abeb64198e2c212 Mon Sep 17 00:00:00 2001
+> +From: Markus Volk <f_l_k@t-online.de>
+> +Date: Wed, 9 Nov 2022 18:37:41 +0100
+> +Subject: [PATCH] hwdata.pc.in: use sysroot prefix for pkgdatadir variabl=
+e
+> +
+> +The pc_sysroot is automatically added to cflags and libs but not
+> +to 'pkg-config --variable'. This matches what wayland-protocols does.
+> +
+> +Signed-off-by: Markus Volk <f_l_k@t-online.de>
+> +
+> +Patch-Status: Submitted
+> +https://github.com/vcrhonek/hwdata/pull/19/commits/d3325fd72bd45ba74e709=
+b4083521104193b224e
+
+That should be on one line, i.e.:
+
+Patch-Status: Submitted [https://github.com/vcrhonek/hwdata/pull/19/commits=
+/d3325fd72bd45ba74e709b4083521104193b224e]
+
+Makes it a lot easier for tools like grep...
+
+//Peter
+
 
