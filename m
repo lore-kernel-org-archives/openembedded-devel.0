@@ -2,91 +2,96 @@ Return-Path: <mingli.yu@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 45471C43217
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 45446C4332F
 	for <webhook@archiver.kernel.org>; Thu, 10 Nov 2022 08:36:49 +0000 (UTC)
 Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
- by mx.groups.io with SMTP id smtpd.web08.4571.1668069402045595302
+ by mx.groups.io with SMTP id smtpd.web08.4569.1668069401105376834
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 10 Nov 2022 00:36:42 -0800
+ Thu, 10 Nov 2022 00:36:41 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=pps06212021 header.b=dJK4OLAm;
+ dkim=pass header.i=@windriver.com header.s=pps06212021 header.b=NnaFCy2w;
  spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=83133c4ff4=mingli.yu@windriver.com)
-Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 2AA85X3l030427
-	for <openembedded-devel@lists.openembedded.org>; Thu, 10 Nov 2022 08:36:41 GMT
+Received: from pps.filterd (m0250811.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 2AA7vdd9019680
+	for <openembedded-devel@lists.openembedded.org>; Thu, 10 Nov 2022 08:36:40 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com; h=from : to :
  subject : date : message-id : in-reply-to : references : mime-version :
  content-transfer-encoding : content-type; s=PPS06212021;
- bh=af3EhnRqZsg9aN85OPQsnqPrA+FjZZOLizYxVNMqeko=;
- b=dJK4OLAmxsp7RQmGdxYcDrn0GTDJf2K0RyXkWuuI56SBWidmmEJcDfMR+3y/C3iU+EPA
- j8e0ddVMaRQszg5YbVhINz/Lt6usjOs8kyO1Y65zOvfL2jbDKE++VJ402nPU5zNae1Tl
- lNNgqpJ69WxDLr2TQvcdg28ln5a5TyZ/9NdJoy3EGmuO3ASuFb03dkSjHOLtOeYj3G0S
- 9mj7tE8ln/LEKT894WlYQDHXb48S7vsBdvOqrh0B90iTzqBiHQk0DVOF1YUr3USrqZ/S
- gBOph0EL2QeNg7Ww96vykdI68ANe2Sim6qyJ7PEmDV8ykPS8sNAIrRky+sq3m97sBHkQ bA== 
-Received: from ala-exchng02.corp.ad.wrs.com (unknown-82-254.windriver.com [147.11.82.254])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3knet9mfjb-1
+ bh=wf1y5ctmTjDDE3zR73k16UslUbHG27xNBZimYWw2BhQ=;
+ b=NnaFCy2w3Me+4SoxyPxHI7C/PTJ4G+UV1P+uOrXSPuqOCnyM+P4XDf9aQr6PC4zIYaHX
+ gKNQc9BJ+y0gEfpUOVY0KCFqXD00rTzAYbP6oHBslr58Cp/eSpCHxxRWtyeDHGi/r1jH
+ TSyVo3Q2nF99k2P/IA0yk6W6PQ8Fjk3aQa90ahwOrPd90spYC05Zwv+dGYzC6mAAGmIh
+ OGDGQYWf1jgcoku69jYuaEFdQt+yylnt57F6DCEfy3iKu18HEHG+RB7OSahdBpkX+5ay
+ cwyKfHrxhtr23e+/crwCnU7MA1XlZbTI0RjoQ8CAnvCUOxSkyP370X0jMnwkcFPx81N5 wA== 
+Received: from ala-exchng01.corp.ad.wrs.com (unknown-82-252.windriver.com [147.11.82.252])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3knd21mhug-1
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Thu, 10 Nov 2022 08:36:41 +0000
+	for <openembedded-devel@lists.openembedded.org>; Thu, 10 Nov 2022 08:36:40 +0000
 Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
- ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2308.27; Thu, 10 Nov 2022 00:36:40 -0800
+ 15.1.2242.12; Thu, 10 Nov 2022 00:36:39 -0800
 Received: from pek-lpg-core2.wrs.com (128.224.153.41) by
  ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
- 15.1.2242.12 via Frontend Transport; Thu, 10 Nov 2022 00:36:39 -0800
+ 15.1.2242.12 via Frontend Transport; Thu, 10 Nov 2022 00:36:38 -0800
 From: <mingli.yu@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [PATCH 14/14] gnome-calendar: add opengl to REQUIRED_DISTRO_FEATURES
-Date: Thu, 10 Nov 2022 16:36:25 +0800
-Message-ID: <20221110083625.840996-14-mingli.yu@windriver.com>
+Subject: [PATCH 13/14] evince: add opengl to REQUIRED_DISTRO_FEATURES
+Date: Thu, 10 Nov 2022 16:36:24 +0800
+Message-ID: <20221110083625.840996-13-mingli.yu@windriver.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20221110083625.840996-1-mingli.yu@windriver.com>
 References: <20221110083625.840996-1-mingli.yu@windriver.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-Proofpoint-GUID: zgxYUAxm-D_n48Fc_x6-f6yGDNnAF2kA
-X-Proofpoint-ORIG-GUID: zgxYUAxm-D_n48Fc_x6-f6yGDNnAF2kA
+X-Proofpoint-GUID: f79ibA9mePHuysIqy-S1eciTE_1Unekk
+X-Proofpoint-ORIG-GUID: f79ibA9mePHuysIqy-S1eciTE_1Unekk
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.219,Aquarius:18.0.895,Hydra:6.0.545,FMLib:17.11.122.1
  definitions=2022-11-10_06,2022-11-09_01,2022-06-22_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 suspectscore=0 adultscore=0
- mlxlogscore=735 clxscore=1015 malwarescore=0 phishscore=0 bulkscore=0
- mlxscore=0 priorityscore=1501 spamscore=0 impostorscore=0
- lowpriorityscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 spamscore=0 clxscore=1015
+ suspectscore=0 lowpriorityscore=0 mlxscore=0 malwarescore=0 adultscore=0
+ bulkscore=0 phishscore=0 impostorscore=0 priorityscore=1501
+ mlxlogscore=623 classifier=spam adjust=0 reason=mlx scancount=1
  engine=8.12.0-2210170000 definitions=main-2211100064
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 10 Nov 2022 08:36:49 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99531
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99530
 
 From: Mingli Yu <mingli.yu@windriver.com>
 
+Add opengl to REQUIRED_DISTRO_FEATURES if x11 is enabled in DISTRO_FEATURES
+as it needs gnome-desktop when x11 enabled.
+
 Fixes:
-  ERROR: Nothing PROVIDES 'libadwaita' (but /build/layers/meta-openembedded/meta-gnome/recipes-gnome/gnome-calendar/gnome-calendar_42.0.bb DEPENDS on or otherwise requires it)
-  libadwaita was skipped: missing required distro feature 'opengl' (not in DISTRO_FEATURES)
+  ERROR: Nothing PROVIDES 'gnome-desktop' (but /build/layers/meta-openembedded/meta-gnome/recipes-gnome/evince/evince_42.3.bb DEPENDS on or otherwise requires it)
+  gnome-desktop was skipped: missing required distro feature 'opengl' (not in DISTRO_FEATURES)
   ERROR: Required build target 'meta-world-pkgdata' has no buildable providers.
-  Missing or unbuildable dependency chain was: ['meta-world-pkgdata', 'gnome-calendar', 'libadwaita']
+  Missing or unbuildable dependency chain was: ['meta-world-pkgdata', 'evince', 'gnome-desktop']
 
 Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
 ---
- meta-gnome/recipes-gnome/gnome-calendar/gnome-calendar_42.0.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-gnome/recipes-gnome/evince/evince_42.3.bb | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
-diff --git a/meta-gnome/recipes-gnome/gnome-calendar/gnome-calendar_42.0.bb b/meta-gnome/recipes-gnome/gnome-calendar/gnome-calendar_42.0.bb
-index 7b32be611..5498bb6ea 100644
---- a/meta-gnome/recipes-gnome/gnome-calendar/gnome-calendar_42.0.bb
-+++ b/meta-gnome/recipes-gnome/gnome-calendar/gnome-calendar_42.0.bb
-@@ -20,7 +20,7 @@ GNOMEBASEBUILDCLASS = "meson"
+diff --git a/meta-gnome/recipes-gnome/evince/evince_42.3.bb b/meta-gnome/recipes-gnome/evince/evince_42.3.bb
+index 0c97f75e9..5f35d5b33 100644
+--- a/meta-gnome/recipes-gnome/evince/evince_42.3.bb
++++ b/meta-gnome/recipes-gnome/evince/evince_42.3.bb
+@@ -19,7 +19,9 @@ DEPENDS = " \
  
- inherit gnomebase gsettings gtk-icon-cache gettext features_check upstream-version-is-even mime-xdg
+ GNOMEBASEBUILDCLASS = "meson"
  
--REQUIRED_DISTRO_FEATURES = "x11"
-+REQUIRED_DISTRO_FEATURES = "x11 opengl"
+-inherit gnomebase itstool gnome-help pkgconfig gsettings gobject-introspection gettext mime-xdg gtk-doc
++inherit gnomebase itstool gnome-help pkgconfig gsettings gobject-introspection gettext mime-xdg gtk-doc features_check
++
++REQUIRED_DISTRO_FEATURES = "${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'opengl', '', d)}"
  
- SRC_URI[archive.sha256sum] = "b63f73f55032fc1390442f94cdf6b3cab9c91c774ddd2e5c61ecfec9d2c5e9aa"
- 
+ def gnome_verdir(v):
+     return oe.utils.trim_version(v, 1)
 -- 
 2.25.1
 
