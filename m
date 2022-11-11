@@ -1,250 +1,189 @@
-Return-Path: <hprajapati@mvista.com>
+Return-Path: <xiangyu.chen@eng.windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 55D3EC43217
-	for <webhook@archiver.kernel.org>; Fri, 11 Nov 2022 05:16:21 +0000 (UTC)
-Received: from mail-pg1-f170.google.com (mail-pg1-f170.google.com [209.85.215.170])
- by mx.groups.io with SMTP id smtpd.web11.2230.1668143772515830760
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3843EC433FE
+	for <webhook@archiver.kernel.org>; Fri, 11 Nov 2022 08:22:42 +0000 (UTC)
+Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
+ by mx.groups.io with SMTP id smtpd.web10.3275.1668154954102053900
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 10 Nov 2022 21:16:12 -0800
+ Fri, 11 Nov 2022 00:22:34 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@mvista.com header.s=google header.b=RZ8e3ws7;
- spf=pass (domain: mvista.com, ip: 209.85.215.170, mailfrom: hprajapati@mvista.com)
-Received: by mail-pg1-f170.google.com with SMTP id b62so3597171pgc.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 10 Nov 2022 21:16:12 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=mvista.com; s=google;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=mvM9rdSIWlEBmH4meDgz5VtY5OEyJ+tmqGDTfIvP+nQ=;
-        b=RZ8e3ws7J+R8FU29GV/peXt88jzJUSSjf5FmQjY+udCH5RJAra9K13nDAhl+u8Jxiv
-         AZJ89VkIXZG40CwiuN4uOl8NQDnnnONFZMtoI4WhDa0RAeqefKMupkj8S85nUXHZAw58
-         K5jC0F/SlVYCVKa3kxW0qEzNjZievcBe29z/o=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=mvM9rdSIWlEBmH4meDgz5VtY5OEyJ+tmqGDTfIvP+nQ=;
-        b=XWp4Ln2KCjncYmWxjVQW/0mIE4a0xhMgPB1JieR/io0nMSqCxo6oAotcenVZEkczAF
-         gemL/Ux3uIlo3/Muj97yCiqrR3UMXxZaqpcxLI7qnTesJ9Mpp8UvrYPb/a9vYqa/GNyj
-         fE6XQnmGD2RVY7IygHwGHeeh2KUpyX18vlmzbkgNjN4Ogtasw/wJZyj/gxhnwCcWPRFs
-         upbTTztyIMLukWmZg94XkQB7wxJ8ctcXohJNbgHU5EdsofJ8JJMZIZB6ffyT2E1PTbz/
-         6h7qIhtyhLDtmXUnEkQJ4xUkhr+SBjLYrMMXvU9g070E3F/k8Vvxp9TvFPfpXc6UUquD
-         CSGw==
-X-Gm-Message-State: ANoB5pna9WE/dvjZ8e/sw+PXrpapLwcYU9nC8DwDbkXXm0tWMegEIFX3
-	+jEKsCbNzaXRiFOXpev9vjw1OqMumxN/Vg==
-X-Google-Smtp-Source: AA0mqf7jCp2gxSqEWWkS33VC2dMvDdw6JExuBGO75S2yEB3KFghPDy2fzMHL7IbRI+a463amfgCz0Q==
-X-Received: by 2002:a63:fa18:0:b0:464:3f16:e2b0 with SMTP id y24-20020a63fa18000000b004643f16e2b0mr170030pgh.566.1668143771524;
-        Thu, 10 Nov 2022 21:16:11 -0800 (PST)
-Received: from MVIN00024 ([49.34.234.22])
-        by smtp.gmail.com with ESMTPSA id 135-20020a62178d000000b0056da073b2b7sm561918pfx.210.2022.11.10.21.16.08
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 10 Nov 2022 21:16:11 -0800 (PST)
-Received: by MVIN00024 (sSMTP sendmail emulation); Fri, 11 Nov 2022 10:43:54 +0530
-From: Hitendra Prajapati <hprajapati@mvista.com>
+ dkim=missing; spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=8314de451f=xiangyu.chen@windriver.com)
+Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 2AB6LZhL023583
+	for <openembedded-devel@lists.openembedded.org>; Fri, 11 Nov 2022 00:22:33 -0800
+Received: from nam12-dm6-obe.outbound.protection.outlook.com (mail-dm6nam12lp2169.outbound.protection.outlook.com [104.47.59.169])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3knk43ddx9-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Fri, 11 Nov 2022 00:22:33 -0800
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=UjOIvN1kImmI2ckhYuosf8oMh9PJ2KOLpR97OsktbhekTJybBsOu09r8I/OMaUXOvKSCguW4EpIxTXEmSyDKQcnNIA5DHIXoJMyAPuogWDt+gS61YF+QLJq0gtpts69yfjBHjVfCal/ks6qNL449I09jt5AqdNJFR+cSJ2kGsCGSteFN3PtQ1QPKNNOOIP/e8YilS+zAz6K0DYRhq0cxGTf88niR1bo+ohYQaenYnKKhR6oRC61xWKUvcTeUe4gGlI93ae7L3nGRmMVk2LNXGy7U7ve14qi4ZHu6Q2pmPHSfm9ypWkFtZL1IawJTj4k0H29LL93odSYTJD4QvbLuPA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=UBEWbwgdnXqqlwzfg4vWos5xRp2GLmrjCGGq3CTwnis=;
+ b=DfRu89nF3hXTRRAVoY5pOj/pB1UmLWVMf0uQL1ucSPrM77SVR1eyfSADqXpupTSd+AoRyO7VMvgZFT6l233qcuZT5Prc5qOj4y9vTeLrI5k83Ljq+7jlyE2xbWEyTWuW090Qk9U4inoJ0i2TPgw6oI75YEpiuWSgN2zcDmhWsdqLPhMjY9IJF9DuLl7JHltBM5PI4xUrhabmXlfDPqieiu0NI9lxQrZbRQrhtRKI1YzIXejpYF2dArD37dA3FIeuqBGhX/KxO745VEo3XU13JyKJ9vg1m26BMbGAV1ailCZes3pvpSsVz3Xh1mgTTYj2xDTzNa5vtw39HSiRfSSe/Q==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=windriver.com; dmarc=pass action=none
+ header.from=eng.windriver.com; dkim=pass header.d=eng.windriver.com; arc=none
+Received: from MW4PR11MB5824.namprd11.prod.outlook.com (2603:10b6:303:187::19)
+ by SA1PR11MB6565.namprd11.prod.outlook.com (2603:10b6:806:250::10) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5813.13; Fri, 11 Nov
+ 2022 08:22:30 +0000
+Received: from MW4PR11MB5824.namprd11.prod.outlook.com
+ ([fe80::d252:a0d:467e:ad16]) by MW4PR11MB5824.namprd11.prod.outlook.com
+ ([fe80::d252:a0d:467e:ad16%3]) with mapi id 15.20.5813.013; Fri, 11 Nov 2022
+ 08:22:30 +0000
+From: Xiangyu Chen <xiangyu.chen@eng.windriver.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Hitendra Prajapati <hprajapati@mvista.com>
-Subject: [meta-networking][kirkstone][PATCH] strongswan: CVE-2022-40617 A possible DoS in Using Untrusted URIs for Revocation Checking
-Date: Fri, 11 Nov 2022 10:43:52 +0530
-Message-Id: <20221111051352.44135-1-hprajapati@mvista.com>
-X-Mailer: git-send-email 2.25.1
-MIME-Version: 1.0
+Subject: [oe][meta-networking][PATCH] lldpd: add ptest for lldpd package
+Date: Fri, 11 Nov 2022 16:22:00 +0800
+Message-Id: <20221111082200.215065-1-xiangyu.chen@eng.windriver.com>
+X-Mailer: git-send-email 2.34.1
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: SL2P216CA0098.KORP216.PROD.OUTLOOK.COM
+ (2603:1096:101:3::13) To MW4PR11MB5824.namprd11.prod.outlook.com
+ (2603:10b6:303:187::19)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: MW4PR11MB5824:EE_|SA1PR11MB6565:EE_
+X-MS-Office365-Filtering-Correlation-Id: 9ea1d174-ca3c-4887-f93c-08dac3bddf3a
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 
+	3Xoenb7fRjEBd5DR9G8metewkrs2ywh1tza6RvgeTHQfgGzl3g3PThtgOUNiQ3KiKO23Q0TVkYfD+b12r7CqJOEMkhTjY5n5A/jl/jszLw5JALWA3oRsaFgYjD3iRKuCUNSEVbKReJaL9pOexRd42iM/7r0547L5mv4WSWwxgU2B7mY0Bo9tRv2/yIDz+CboBMt22dWvbFn03bmPepoeJWAGhAK60GZqde6KuGlx0h8+FT2gZgP7nxfk6Xb2MjV0nboevibBkXg8qOZzhyqwsl8MmU6jmk0aKrxlaNZ8PlM/T4j3YKKH/yMz3wrB2zTFx0ticzqPHA9JMDHouUEv26TWQIvZFPMSrMdfnqNgYCTuVnv+aJbLXiBJyaqpRWEUSWztmQ5fAjAFr9Ps3wDqCAt45IGs6m32BaPaQ6XgJdrDEOUc82Ksmb5IG2carxwzFSYkGfy1BXhTESSMBXwdzOSuN6szsD4kGWKPUeIDqDf4pvYVTZXmMcLDys1HUhVlu/x28EKApxCaJaz+q/jM0Vv3DLE7HAbtcfxRzzAB7sNVORAw0gVD4Vqv9BNB7KSLijnegCim5MmgH2zi+nI/QM4RhxosGvEWacQ+bwpQqaqq8f/Gf3GHJp/+HggjVaV7YtbeUA8JhyPffY2OhciaTriD9Rw7pn5JNwB64qaSGacbDJl2pK6jiqf1kB/sJlwZXTqlDN0X6Ifk6TRy6jYE9q0jrOXWiLgZKmLwSTyVIXnQJBpzbIMft2SoTqoI/OFOTlRX8u+UgIaHKLLY6jrYyZqcGACuh0f8TsY0JVP2wig=
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:MW4PR11MB5824.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230022)(4636009)(346002)(366004)(376002)(136003)(39850400004)(396003)(451199015)(83170400001)(6506007)(2906002)(6666004)(44832011)(38100700002)(38350700002)(41300700001)(6916009)(5660300002)(1076003)(8936002)(186003)(478600001)(83380400001)(2616005)(66476007)(66946007)(966005)(52116002)(26005)(6512007)(66556008)(6486002)(316002)(8676002);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?us-ascii?Q?E047mkbr3DgM2TCn62BZVTSoAl6hYjyqEXULxnvjW7N+7vdEbIsf15MOuYYG?=
+ =?us-ascii?Q?U27DoUPuKEWFmtZHO7J0DrXjLAqlij5QefuvFNlmeHdgfeu2VG3SORAlbGUX?=
+ =?us-ascii?Q?XwomR1V0PEYWdYmm5O0S33eFMipDYP5RAtxiQhEDKFULulk/WkyaZKRrkXNf?=
+ =?us-ascii?Q?t1oxa/qLM7/h849myZ9J7ahnvKtGJdnP0xlng80FDq4JoD8nRG5SA8i0onFq?=
+ =?us-ascii?Q?QWQXevzJDv33UbiNmP7aAJtj/0GXkafbB5WbYHI6cnZZCLtu5wDqsdPpbwRB?=
+ =?us-ascii?Q?zBd6u0W+ec/f/cG6KZ9Th8jzd4qeFpbHWKckoRCMllrOst+WU9n7KWxWe44h?=
+ =?us-ascii?Q?V3MbUjKi8MFpYYEVFPtsbEf13ZOT+md9xRa+J4bkszdmbpt+Ncte36nMdqLU?=
+ =?us-ascii?Q?rfOAtyd4hRFTcOJcHRc9ZlBR1DQ87q7uuekKyNW6laFtlHu+SvNC0m0yPJvn?=
+ =?us-ascii?Q?ERN9JlR8tsvzq5KkQt9LSzQWW4YkW12px5Tcdm3UlOQA4ZnHgEmS7dc53sQN?=
+ =?us-ascii?Q?TncGpLM3t8xOnt6BOtIHhx99ofyXIUcAX4RhKNiP22LNIGgUSx9b/KbmHii1?=
+ =?us-ascii?Q?LPpGZx5aTWCPylqb1pr98sG5Ar9dT2mtk9YOpEH8Km1uZuV1z0I1VxefOf+6?=
+ =?us-ascii?Q?3PM7luuFMWqI6bD1DMdvHVfZScqphaA8gCB1jQyG/IDAFpD2XDAlO15xgiYP?=
+ =?us-ascii?Q?LzOO84qmYor2+OevVLiR5B6jo3PFmY/dQADoCJwmE6Gl6+SACIlaT3rpbcPV?=
+ =?us-ascii?Q?+v8X/arnG+X/S2BlIdfIOh3mKCfoWUoErlwTCDB+OsINiy/rPikDTleLj4kJ?=
+ =?us-ascii?Q?kpoU3MbX5ditMbe7+Gze+CKS5xGxMyTBKseGlHHtIZyADL2nH5EtxJ0bAjrF?=
+ =?us-ascii?Q?Ig+UlOzVZyLhBebUnc6qOakZp25OiYJbSUAYH64hx5V3RkUh3zY7uuDf9nSw?=
+ =?us-ascii?Q?nB1E0edqIi8XSM2b3kzq4xSDxWezX/uUlF+3VDZz5kQztlcR4kETrn/HhpET?=
+ =?us-ascii?Q?mYIvewjkGLUSxxyh5Mf+MTR3kAHYVGzpNWjtVMvif5zapebV+sPIgu+6ApNY?=
+ =?us-ascii?Q?Sh189U9k1lrdO4lD4a4XPEX/nUK3AhfAaa6tGwvo4YPAH9AcJrZFSGE8vq60?=
+ =?us-ascii?Q?llvJenBaeb5hpTwmtKjzpWy4XeoTM/rpUJE2BTnvpmDdkzrU2N38musy32np?=
+ =?us-ascii?Q?Oo0CvcTZ6psy2u6/yjuFYU76ei1IjIPMzAkjrHuvl2xa0bUIWPOJJD5LqsuU?=
+ =?us-ascii?Q?sQZAMQXfqcErOEf0jZGvuprUnX/24Mp0e6Z1fZJ/yJGueUtZZaxBhj5lBpnc?=
+ =?us-ascii?Q?P+FK2bCa+NWqf1G0lLaorKJky8oX98h/6e2sbvPqp7r65s6xD29pMy5KNkBh?=
+ =?us-ascii?Q?ygyin/dD7u8FoiMQeuJ3MeD5TZHmfOv1QpkWG84os+iwp8t/GjDzXxSNqQ4N?=
+ =?us-ascii?Q?ST9bAAPC0ElQneWJ1PX4uqXC2CYf9WY2vRdnUaNKhhGoEezXsQfJCDMOgJJ4?=
+ =?us-ascii?Q?zIjGfSMSls7n4ITEBHNPLVmzq8VrlS6j1RCdTFQzTAaP1QMqxTuNv/+gP12S?=
+ =?us-ascii?Q?fFjGGmETMZKBUKfEtnYUkGokhu/sCpU3fuF+2tj+TGWaG7DjoVyXEOl8CJ3/?=
+ =?us-ascii?Q?fA=3D=3D?=
+X-OriginatorOrg: eng.windriver.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 9ea1d174-ca3c-4887-f93c-08dac3bddf3a
+X-MS-Exchange-CrossTenant-AuthSource: MW4PR11MB5824.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Nov 2022 08:22:30.2138
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: QaFYafvC604fX/tf+NIZa8lNJBKFIbOU3bdWImu4Wbt5kPDxNvEKGCf/+vYvLeEyb+crbzgN724FdrZuwHp5xmI/NsIm7RclkfF/aM4l1Bo=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR11MB6565
+X-Proofpoint-ORIG-GUID: trxKM4KUsQALY9CSPf16uiAT0FdNyZEW
+X-Proofpoint-GUID: trxKM4KUsQALY9CSPf16uiAT0FdNyZEW
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.219,Aquarius:18.0.895,Hydra:6.0.545,FMLib:17.11.122.1
+ definitions=2022-11-11_04,2022-11-09_01,2022-06-22_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 spamscore=0 clxscore=1011
+ mlxlogscore=851 lowpriorityscore=0 suspectscore=0 priorityscore=1501
+ phishscore=0 mlxscore=0 adultscore=0 impostorscore=0 bulkscore=0
+ malwarescore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.12.0-2210170000 definitions=main-2211110055
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 11 Nov 2022 05:16:21 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99552
+ <openembedded-devel@lists.openembedded.org>; Fri, 11 Nov 2022 08:22:42 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99553
 
-Upstream-Status: Backport from https://download.strongswan.org/security/CVE-2022-40617
-
-Affects "strongswan < 5.9.8"
-
-Signed-off-by: Hitendra Prajapati <hprajapati@mvista.com>
+Signed-off-by: Xiangyu Chen <xiangyu.chen@eng.windriver.com>
 ---
- .../strongswan/files/CVE-2022-40617.patch     | 157 ++++++++++++++++++
- .../strongswan/strongswan_5.9.6.bb            |   1 +
- 2 files changed, 158 insertions(+)
- create mode 100644 meta-networking/recipes-support/strongswan/files/CVE-2022-40617.patch
+ .../recipes-daemons/lldpd/files/run-ptest     | 16 +++++++++++++++
+ .../recipes-daemons/lldpd/lldpd_1.0.15.bb     | 20 ++++++++++++++++++-
+ 2 files changed, 35 insertions(+), 1 deletion(-)
+ create mode 100755 meta-networking/recipes-daemons/lldpd/files/run-ptest
 
-diff --git a/meta-networking/recipes-support/strongswan/files/CVE-2022-40617.patch b/meta-networking/recipes-support/strongswan/files/CVE-2022-40617.patch
-new file mode 100644
-index 000000000..ffef6800e
+diff --git a/meta-networking/recipes-daemons/lldpd/files/run-ptest b/meta-networking/recipes-daemons/lldpd/files/run-ptest
+new file mode 100755
+index 000000000..da686eb46
 --- /dev/null
-+++ b/meta-networking/recipes-support/strongswan/files/CVE-2022-40617.patch
-@@ -0,0 +1,157 @@
-+From 6a6c275534e31b41f6d203cfd92685b7526a45e8 Mon Sep 17 00:00:00 2001
-+From: Hitendra Prajapati <hprajapati@mvista.com>
-+Date: Fri, 11 Nov 2022 10:15:38 +0530
-+Subject: [PATCH] CVE-2022-40617
++++ b/meta-networking/recipes-daemons/lldpd/files/run-ptest
+@@ -0,0 +1,16 @@
++#!/bin/sh
 +
-+Upstream-Status: Backport [https://download.strongswan.org/security/CVE-2022-40617]
-+CVE: CVE-2022-40617
-+Signed-off-by: Hitendra Prajapati <hprajapati@mvista.com>
++num_fail=0
 +
-+credential-manager: Do online revocation checks only after
-+ basic trust chain validation
++for test in tests/check*
++do
++    ./"$test" \
++         && echo "PASS: $test" \
++         || {
++            echo "FAIL: $test"
++            num_fail=$(( ${num_fail} + 1))
++         }
 +
-+This avoids querying URLs of potentially untrusted certificates, e.g. if
-+an attacker sends a specially crafted end-entity and intermediate CA
-+certificate with a CDP that points to a server that completes the
-+TCP handshake but then does not send any further data, which will block
-+the fetcher thread (depending on the plugin) for as long as the default
-+timeout for TCP.  Doing that multiple times will block all worker threads,
-+leading to a DoS attack.
++done
 +
-+The logging during the certificate verification obviously changes.
-+---
-+ .../credentials/credential_manager.c          | 54 +++++++++++++++----
-+ 1 file changed, 45 insertions(+), 9 deletions(-)
-+
-+diff --git a/src/libstrongswan/credentials/credential_manager.c b/src/libstrongswan/credentials/credential_manager.c
-+index 3be0190..f65372b 100644
-+--- a/src/libstrongswan/credentials/credential_manager.c
-++++ b/src/libstrongswan/credentials/credential_manager.c
-+@@ -555,7 +555,7 @@ static void cache_queue(private_credential_manager_t *this)
-+  */
-+ static bool check_lifetime(private_credential_manager_t *this,
-+ 						   certificate_t *cert, char *label,
-+-						   int pathlen, bool trusted, auth_cfg_t *auth)
-++						   int pathlen, bool anchor, auth_cfg_t *auth)
-+ {
-+ 	time_t not_before, not_after;
-+ 	cert_validator_t *validator;
-+@@ -570,7 +570,7 @@ static bool check_lifetime(private_credential_manager_t *this,
-+ 			continue;
-+ 		}
-+ 		status = validator->check_lifetime(validator, cert,
-+-										   pathlen, trusted, auth);
-++										   pathlen, anchor, auth);
-+ 		if (status != NEED_MORE)
-+ 		{
-+ 			break;
-+@@ -603,13 +603,13 @@ static bool check_lifetime(private_credential_manager_t *this,
-+  */
-+ static bool check_certificate(private_credential_manager_t *this,
-+ 				certificate_t *subject, certificate_t *issuer, bool online,
-+-				int pathlen, bool trusted, auth_cfg_t *auth)
-++				int pathlen, bool anchor, auth_cfg_t *auth)
-+ {
-+ 	cert_validator_t *validator;
-+ 	enumerator_t *enumerator;
-+ 
-+ 	if (!check_lifetime(this, subject, "subject", pathlen, FALSE, auth) ||
-+-		!check_lifetime(this, issuer, "issuer", pathlen + 1, trusted, auth))
-++		!check_lifetime(this, issuer, "issuer", pathlen + 1, anchor, auth))
-+ 	{
-+ 		return FALSE;
-+ 	}
-+@@ -622,7 +622,7 @@ static bool check_certificate(private_credential_manager_t *this,
-+ 			continue;
-+ 		}
-+ 		if (!validator->validate(validator, subject, issuer,
-+-								 online, pathlen, trusted, auth))
-++								 online, pathlen, anchor, auth))
-+ 		{
-+ 			enumerator->destroy(enumerator);
-+ 			return FALSE;
-+@@ -725,6 +725,7 @@ static bool verify_trust_chain(private_credential_manager_t *this,
-+ 	auth_cfg_t *auth;
-+ 	signature_params_t *scheme;
-+ 	int pathlen;
-++	bool is_anchor = FALSE;
-+ 
-+ 	auth = auth_cfg_create();
-+ 	get_key_strength(subject, auth);
-+@@ -742,7 +743,7 @@ static bool verify_trust_chain(private_credential_manager_t *this,
-+ 				auth->add(auth, AUTH_RULE_CA_CERT, issuer->get_ref(issuer));
-+ 				DBG1(DBG_CFG, "  using trusted ca certificate \"%Y\"",
-+ 							  issuer->get_subject(issuer));
-+-				trusted = TRUE;
-++				trusted = is_anchor = TRUE;
-+ 			}
-+ 			else
-+ 			{
-+@@ -777,11 +778,18 @@ static bool verify_trust_chain(private_credential_manager_t *this,
-+ 				DBG1(DBG_CFG, "  issuer is \"%Y\"",
-+ 					 current->get_issuer(current));
-+ 				call_hook(this, CRED_HOOK_NO_ISSUER, current);
-++				if (trusted)
-++				{
-++					DBG1(DBG_CFG, "  reached end of incomplete trust chain for "
-++						 "trusted certificate \"%Y\"",
-++						 subject->get_subject(subject));
-++				}
-+ 				break;
-+ 			}
-+ 		}
-+-		if (!check_certificate(this, current, issuer, online,
-+-							   pathlen, trusted, auth))
-++		/* don't do online verification here */
-++		if (!check_certificate(this, current, issuer, FALSE,
-++							   pathlen, is_anchor, auth))
-+ 		{
-+ 			trusted = FALSE;
-+ 			issuer->destroy(issuer);
-+@@ -793,7 +801,7 @@ static bool verify_trust_chain(private_credential_manager_t *this,
-+ 		}
-+ 		current->destroy(current);
-+ 		current = issuer;
-+-		if (trusted)
-++		if (is_anchor)
-+ 		{
-+ 			DBG1(DBG_CFG, "  reached self-signed root ca with a "
-+ 				 "path length of %d", pathlen);
-+@@ -806,6 +814,34 @@ static bool verify_trust_chain(private_credential_manager_t *this,
-+ 		DBG1(DBG_CFG, "maximum path length of %d exceeded", MAX_TRUST_PATH_LEN);
-+ 		call_hook(this, CRED_HOOK_EXCEEDED_PATH_LEN, subject);
-+ 	}
-++	else if (trusted && online)
-++	{
-++		enumerator_t *enumerator;
-++		auth_rule_t rule;
-++
-++		/* do online revocation checks after basic validation of the chain */
-++		pathlen = 0;
-++		current = subject;
-++		enumerator = auth->create_enumerator(auth);
-++		while (enumerator->enumerate(enumerator, &rule, &issuer))
-++		{
-++			if (rule == AUTH_RULE_CA_CERT || rule == AUTH_RULE_IM_CERT)
-++			{
-++				if (!check_certificate(this, current, issuer, TRUE, pathlen++,
-++									   rule == AUTH_RULE_CA_CERT, auth))
-++				{
-++					trusted = FALSE;
-++					break;
-++				}
-++				else if (rule == AUTH_RULE_CA_CERT)
-++				{
-++					break;
-++				}
-++				current = issuer;
-++			}
-++		}
-++		enumerator->destroy(enumerator);
-++	}
-+ 	if (trusted)
-+ 	{
-+ 		result->merge(result, auth, FALSE);
-+-- 
-+2.25.1
-+
-diff --git a/meta-networking/recipes-support/strongswan/strongswan_5.9.6.bb b/meta-networking/recipes-support/strongswan/strongswan_5.9.6.bb
-index 1b82dceac..b8d44db26 100644
---- a/meta-networking/recipes-support/strongswan/strongswan_5.9.6.bb
-+++ b/meta-networking/recipes-support/strongswan/strongswan_5.9.6.bb
-@@ -10,6 +10,7 @@ DEPENDS:append = "${@bb.utils.contains('DISTRO_FEATURES', 'tpm2', '  tpm2-tss',
++exit $num_fail
+diff --git a/meta-networking/recipes-daemons/lldpd/lldpd_1.0.15.bb b/meta-networking/recipes-daemons/lldpd/lldpd_1.0.15.bb
+index 6a3687cf7..c7237d74b 100644
+--- a/meta-networking/recipes-daemons/lldpd/lldpd_1.0.15.bb
++++ b/meta-networking/recipes-daemons/lldpd/lldpd_1.0.15.bb
+@@ -9,11 +9,12 @@ SRC_URI = "\
+     http://media.luffy.cx/files/${BPN}/${BPN}-${PV}.tar.gz \
+     file://lldpd.init.d \
+     file://lldpd.default \
++    file://run-ptest \
+     "
  
- SRC_URI = "http://download.strongswan.org/strongswan-${PV}.tar.bz2 \
-            file://0001-enum-Fix-compiler-warning.patch \
-+           file://CVE-2022-40617.patch \
-            "
+ SRC_URI[sha256sum] = "f7fe3a130be98a19c491479ef60f36b8ee41a9e6bc4d7f2c41033f63956a3126"
  
- SRC_URI[sha256sum] = "91d0978ac448912759b85452d8ff0d578aafd4507aaf4f1c1719f9d0c7318ab7"
+-inherit autotools update-rc.d useradd systemd pkgconfig bash-completion github-releases
++inherit autotools update-rc.d useradd systemd pkgconfig bash-completion github-releases ptest
+ 
+ USERADD_PACKAGES = "${PN}"
+ USERADD_PARAM:${PN} = "--system -g lldpd --shell /bin/false lldpd"
+@@ -61,3 +62,20 @@ RDEPENDS:${PN} += "os-release"
+ FILES:${PN}-zsh-completion += "${datadir}/zsh/"
+ # FIXME: zsh is broken in meta-oe so this cannot be enabled for now
+ #RDEPENDS:${PN}-zsh-completion += "zsh"
++
++RDEPENDS:${PN}-ptest = "libcheck"
++DEPENDS += "${@bb.utils.contains('PTEST_ENABLED', '1', 'libcheck', '', d)}"
++
++TESTDIR = "tests"
++do_compile_ptest () {
++    # hack to remove the call to `make check-TESTS`
++    sed -i 's/$(MAKE) $(AM_MAKEFLAGS) check-TESTS//g' ${TESTDIR}/Makefile
++    oe_runmake check
++}
++
++do_install_ptest () {
++    # install the tests
++    cp -rf ${B}/${TESTDIR} ${D}${PTEST_PATH}
++    # remove the object files
++    rm ${D}${PTEST_PATH}/${TESTDIR}/*.o
++}
 -- 
-2.25.1
+2.34.1
 
 
