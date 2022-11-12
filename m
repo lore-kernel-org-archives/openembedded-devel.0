@@ -1,51 +1,83 @@
-Return-Path: <f_l_k@t-online.de>
+Return-Path: <peter.kjellerstedt@axis.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E8350C43217
-	for <webhook@archiver.kernel.org>; Fri, 11 Nov 2022 17:51:30 +0000 (UTC)
-Received: from mailout03.t-online.de (mailout03.t-online.de [194.25.134.81])
- by mx.groups.io with SMTP id smtpd.web11.346.1668189083822128142
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 685D5C43217
+	for <webhook@archiver.kernel.org>; Sat, 12 Nov 2022 12:59:49 +0000 (UTC)
+Received: from smtp1.axis.com (smtp1.axis.com [195.60.68.17])
+ by mx.groups.io with SMTP id smtpd.web09.2339.1668257986314669791
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 11 Nov 2022 09:51:24 -0800
+ Sat, 12 Nov 2022 04:59:48 -0800
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=SPF record not found (domain: t-online.de, ip: 194.25.134.81, mailfrom: f_l_k@t-online.de)
-Received: from fwd72.dcpf.telekom.de (fwd72.aul.t-online.de [10.223.144.98])
-	by mailout03.t-online.de (Postfix) with SMTP id 5B556E7F
-	for <openembedded-devel@lists.openembedded.org>; Fri, 11 Nov 2022 18:50:56 +0100 (CET)
-Received: from [192.168.178.83] ([79.219.225.57]) by fwd72.t-online.de
-	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1otYB5-2cOCh60; Fri, 11 Nov 2022 18:50:55 +0100
-Date: Fri, 11 Nov 2022 18:50:49 +0100
-From: Markus Volk <f_l_k@t-online.de>
-Subject: Re: [meta-oe][PATCHv4] hwdata: add patch to use sysroot prefix for
- pkgdatadir
-To: openembedded-devel@lists.openembedded.org
-Message-Id: <PW27LR.8HMKSF8U44JR2@t-online.de>
-In-Reply-To: <20221111174949.3329742-1-f_l_k@t-online.de>
-References: <20221111174949.3329742-1-f_l_k@t-online.de>
-X-Mailer: geary/40.0
+ dkim=pass header.i=@axis.com header.s=axis-central1 header.b=PMEV8Tmu;
+ spf=pass (domain: axis.com, ip: 195.60.68.17, mailfrom: peter.kjellerstedt@axis.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+  d=axis.com; q=dns/txt; s=axis-central1; t=1668257988;
+  x=1699793988;
+  h=from:to:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=ZLdBflKdrN2dRaFbgroc6J1OpnAAXRBy6fP2US2b+gA=;
+  b=PMEV8Tmu3ML970c6IW6xcCbZ48qLRmO2kCcUIzrtsK2dyjtSG4eRzkDa
+   jyR+Zx6xwybXpm3U4g8sS7TLrxpula0sTYw7edFeAbbilkBUFc7rL83Oq
+   g1jDHPV/5LqACH1m086bbR11WxZPG6ePZkg5zh6XLl/7PGdybxLXdDyaB
+   WlfkTTfHru0WgrNWfxb72QY9Ram3HxeEE5+vdBiIYZA47/g/GJzlTJg5H
+   HfMVyD3LRG8EFP0Ig3QElR+Ujd498XvZLrbSXT5CFoOjnrNRhGJVdN8fV
+   MHO0bVgARsTKbwu+W0DHN4Cpf+P3RYZB2pEZYE7wFO2xHZJVxMteThT2w
+   g==;
+From: Peter Kjellerstedt <pkj@axis.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [meta-networking][PATCH 1/2] chrony: Make it possible to enable editline support again
+Date: Sat, 12 Nov 2022 13:59:38 +0100
+Message-ID: <20221112125939.2258996-1-pkj@axis.com>
+X-Mailer: git-send-email 2.38.1
 MIME-Version: 1.0
-Content-Type: multipart/alternative; boundary="=-EaVQCaSgNEjHbnnrQQSp"
-X-TOI-EXPURGATEID: 150726::1668189055-01449CE0-D9249E4A/0/0 CLEAN NORMAL
-X-TOI-MSGID: daab4b4e-05be-4823-832a-6a745911adb2
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 11 Nov 2022 17:51:30 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99559
+ <openembedded-devel@lists.openembedded.org>; Sat, 12 Nov 2022 12:59:49 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99561
 
---=-EaVQCaSgNEjHbnnrQQSp
-Content-Type: text/plain; charset=us-ascii; format=flowed
+Support for readline was dropped in Chrony 4.2. However, the
+--disable-readline option still remains (it is used to completely ignore
+all forms of command line editing, even though the only remaining
+variant is editline). So keeping the readline PACKAGECONFIG and making
+it pass --disable-readline when it is not enabled disabled support for
+editline, and if it was enabled it instead passed --without-editline,
+which also disabled support for editline. Thus there was no way to
+enable editline support.
 
-Added Upstream-Status: Backport
-> 
+Signed-off-by: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
+---
+ meta-networking/recipes-support/chrony/chrony_4.3.bb | 9 ---------
+ 1 file changed, 9 deletions(-)
 
-
---=-EaVQCaSgNEjHbnnrQQSp
-Content-Type: text/html; charset=us-ascii
-
-<div id="geary-body" dir="auto"><div>Added Upstream-Status: Backport</div></div>
---=-EaVQCaSgNEjHbnnrQQSp--
-
+diff --git a/meta-networking/recipes-support/chrony/chrony_4.3.bb b/meta-networking/recipes-support/chrony/chrony_4.3.bb
+index d0e2c4b54..b09a58b08 100644
+--- a/meta-networking/recipes-support/chrony/chrony_4.3.bb
++++ b/meta-networking/recipes-support/chrony/chrony_4.3.bb
+@@ -53,14 +53,6 @@ USERADD_PACKAGES = "${@bb.utils.contains('PACKAGECONFIG', 'privdrop', '${PN}', '
+ USERADD_PARAM:${PN} += "${@bb.utils.contains('PACKAGECONFIG', 'privdrop', '--system -d / -M --shell /bin/nologin chronyd;', '', d)}"
+ 
+ # Configuration options:
+-# - For command line editing support in chronyc, you may specify either
+-#   'editline' or 'readline' but not both.  editline is smaller, but
+-#   many systems already have readline for other purposes so you might want
+-#   to choose that instead.  However, beware license incompatibility
+-#   since chrony is GPLv2 and readline versions after 6.0 are GPLv3+.
+-#   You can of course choose neither, but if you're that tight on space
+-#   consider dropping chronyc entirely (you can use it remotely with
+-#   appropriate chrony.conf options).
+ # - Security-related:
+ #   - 'sechash' is omitted by default because it pulls in nss which is huge.
+ #   - 'privdrop' allows chronyd to run as non-root; would need changes to
+@@ -70,7 +62,6 @@ USERADD_PARAM:${PN} += "${@bb.utils.contains('PACKAGECONFIG', 'privdrop', '--sys
+ PACKAGECONFIG ??= "editline \
+     ${@bb.utils.filter('DISTRO_FEATURES', 'ipv6', d)} \
+ "
+-PACKAGECONFIG[readline] = "--without-editline,--disable-readline,readline"
+ PACKAGECONFIG[editline] = ",--without-editline,libedit"
+ PACKAGECONFIG[sechash] = "--without-tomcrypt,--disable-sechash,nss"
+ PACKAGECONFIG[privdrop] = "--with-libcap,--disable-privdrop --without-libcap,libcap"
 
