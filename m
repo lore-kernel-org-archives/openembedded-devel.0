@@ -1,90 +1,109 @@
-Return-Path: <akuster808@gmail.com>
+Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B7589C4332F
-	for <webhook@archiver.kernel.org>; Sat, 12 Nov 2022 20:08:56 +0000 (UTC)
-Received: from mail-ot1-f48.google.com (mail-ot1-f48.google.com [209.85.210.48])
- by mx.groups.io with SMTP id smtpd.web12.595.1668283728819109332
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 27865C43217
+	for <webhook@archiver.kernel.org>; Sun, 13 Nov 2022 03:15:46 +0000 (UTC)
+Received: from mail1.bemta37.messagelabs.com (mail1.bemta37.messagelabs.com [85.158.142.112])
+ by mx.groups.io with SMTP id smtpd.web08.299.1668309342327562863
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 12 Nov 2022 12:08:48 -0800
+ Sat, 12 Nov 2022 19:15:42 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=pmNOGten;
- spf=pass (domain: gmail.com, ip: 209.85.210.48, mailfrom: akuster808@gmail.com)
-Received: by mail-ot1-f48.google.com with SMTP id 94-20020a9d0067000000b0066c8d13a33dso4587725ota.12
-        for <openembedded-devel@lists.openembedded.org>; Sat, 12 Nov 2022 12:08:48 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=content-transfer-encoding:in-reply-to:from:references:to
-         :content-language:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=zY+1DwuIu8tt/H2qfqioJfd7jzaD8+bgumrf6jvKM9E=;
-        b=pmNOGtenx8VT4o+IpotHaLms+KSOXYabp37Azxj+yw0xcF2BFtGgpjFUyu/JfQcyWC
-         NqwfFEXYWuhy+KQLXiv1uJ+nIgPfjjcTjiaS7GJFLoDy4Fz7peJBPB0x/+KkbpKi7LxN
-         mnJQcaMiCKGP6w/vczuBXSgJcLzHso6BL6veNuRKrH4nj12IT8seoUzQt033BvRSHG7z
-         oXLLsfcYLkmw/bJ8vxmOljD9MBSZa9AGB/bImgd7N7WW2BEQkS5b7EluI2gN/g5mD/63
-         HxgrgIBJ0gcNXDLF6wcaiQ67ybW+IDKZoXR2FTs+zsboYOL8ex1qoWxfDpAKqnQnBfey
-         R2gg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=content-transfer-encoding:in-reply-to:from:references:to
-         :content-language:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=zY+1DwuIu8tt/H2qfqioJfd7jzaD8+bgumrf6jvKM9E=;
-        b=ElZt9w9OqI47DvZr9s3h8e7gjbWtgP3fTrmMBEem6ugPsQKAzlx6kArf4mrOAG6HUt
-         6rmuKGFcdrM24hkigw3i2x9h+i3XnulZd6qjxy3WUU7PDdTau17uPYh09FXDOn0DK8tY
-         Q8Y2e3f0oav31q7A/Avd/d0SaaZxQ0+69fhL4PCA20xpPL/cOyAll3YXQMu7cX6CVFm/
-         8WBuB67Z/aqez0TDxWttshEKjcIx4IBOiQ5cGnJEDnCp50YnPdMRsIH4JQVRfn1GesVf
-         YBhIg/fpZOEQqX1BxweDSFm+orJKbEKYtWWSLXIUo7wLb8gYBiV1zY/plN2Qb8+BBHTT
-         TJZA==
-X-Gm-Message-State: ANoB5pkBMex5p/MiPAQBZ9ARBmVr/LnYKMGCJPg5vQIXaMhFVCtQm9R/
-	8sxKvFIB+u3/GObWTWOH5Fw=
-X-Google-Smtp-Source: AA0mqf6mdorxAN62e7a7E7qEjYTL11Y12cFHIOZTFIUtpULpuGk2rMdv/H6VXDdHYQmgguONuDroeg==
-X-Received: by 2002:a9d:d88:0:b0:66d:6611:614e with SMTP id 8-20020a9d0d88000000b0066d6611614emr3079915ots.13.1668283727944;
-        Sat, 12 Nov 2022 12:08:47 -0800 (PST)
-Received: from ?IPV6:2600:1700:9190:ba10:5dbd:990c:5828:4a83? ([2600:1700:9190:ba10:5dbd:990c:5828:4a83])
-        by smtp.gmail.com with ESMTPSA id g37-20020a9d2da8000000b0066cacb8343bsm2437818otb.41.2022.11.12.12.08.46
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Sat, 12 Nov 2022 12:08:47 -0800 (PST)
-Message-ID: <00a9cc3a-6388-8e7d-6b44-f14816d4455d@gmail.com>
-Date: Sat, 12 Nov 2022 15:08:46 -0500
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=Mb/ZEXIP;
+ spf=pass (domain: fujitsu.com, ip: 85.158.142.112, mailfrom: wangmy@fujitsu.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
+	s=170520fj; t=1668309340; i=@fujitsu.com;
+	bh=7AkH+ZBalCEMCQOwjE3kX4o/gvMLD5jrdUm9LrkUEls=;
+	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type;
+	b=Mb/ZEXIP8Vsw1DmOPQgaLmQ1DoNlOtVog+DPdXiU0gMwrazleqdOuWsg4cizOv1rG
+	 QiyrPxb5KV0zGToedkGI6Z2QnJVXfzwcZTw4aW306lVmKhCc4SR3Nc2jWmIE9OL9mO
+	 sxgkFsB2smym0mWyCSxXdDW4edgEnJyw5ovtdDkSLqkdqxx+3uvty2NGgb1ngDQGlz
+	 5uAFLztbdzMrD3gmHR0totShs1r0DyV8hNiXnyESvSVusvPnLqC+1w5c3rVbD8PPkh
+	 5+PWifYunCETmKQWwin7nCq0s2Ambu4lJUjUBRFmW3mqQbAD9bTYGkhIZJ/Xp7ki3b
+	 Q9aFn/Fw8EauQ==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrEIsWRWlGSWpSXmKPExsViZ8MxSTcqsSD
+  Z4Nt3bYuLh5cyOzB6nNu4gjGAMYo1My8pvyKBNWPSqwXMBc84Ku4++MHewPidvYuRi0NI4Amj
+  xPSj85ghnOtMEh03z7FCOHsYJY4faQVyODnYBKQkbtz/zwZiiwjoSyydvYcZxGYWUJF48buHH
+  cQWFjCVuDP3OxOIzSKgKrHkTQ8LiM0r4CSxaNdKsLiEgILElIfvgXo5ODgFnCUmHJIBCQsBlU
+  ydcYIVolxQ4uTMJywQ4yUkDr54wQzRqigx+3IzC4RdITFrVhvUSDWJq+c2MU9gFJyFpH0WkvY
+  FjEyrGM2KU4vKUot0jfSSijLTM0pyEzNz9BKrdBP1Ukt18/KLSjJ0DfUSy4v1UouL9Yorc5Nz
+  UvTyUks2MQKDN6U4OWwHY+/SP3qHGCU5mJREedOu5ycL8SXlp1RmJBZnxBeV5qQWH2KU4eBQk
+  uD9HVmQLCRYlJqeWpGWmQOMJJi0BAePkghvhR1Qmre4IDG3ODMdInWKUZdjbcOBvcxCLHn5ea
+  lS4ryzE4CKBECKMkrz4EbAovoSo6yUMC8jAwODEE9BalFuZgmq/CtGcQ5GJWHetdFAU3gy80r
+  gNr0COoIJ6IjvkXkgR5QkIqSkGpgWmKRNvmgTOCGt9FlPt6uy94Jb1ib/lSZ/Cf2s99MwSn+W
+  2C8f9xOLmZkNvx5gPM3a9a37OGeevhr3DdVT77k9/lVduaZWvFmocF2ZmbbhwVu1m3KOrjzj/
+  +MuQ+JX9R9p3hPOKnnE/jgRnsEzdVtdkMqn5/cXu384PZ35s+3rpgf6LddiTlltPzirqXbXis
+  cZJ+pmF3At4Jz288njkKfR6zYEn82ZZWSw6/sa1xNv3ud/lM5Ki5JaPF1x66TmTeV5Hm9SXcO
+  d5vcW9p/8utq/pqni8VOP2SxXd6hzXhacwp64fEV7m1eZzxox3qUTNrjc+2rwRH3fjaXMCYdP
+  v9TfuOtgK//0OWIZ69f/nWeWq8RSnJFoqMVcVJwIAA2pTZ9lAwAA
+X-Env-Sender: wangmy@fujitsu.com
+X-Msg-Ref: server-3.tower-745.messagelabs.com!1668309338!685312!1
+X-Originating-IP: [62.60.8.146]
+X-SYMC-ESS-Client-Auth: outbound-route-from=pass
+X-StarScan-Received: 
+X-StarScan-Version: 9.100.1; banners=-,-,-
+X-VirusChecked: Checked
+Received: (qmail 5839 invoked from network); 13 Nov 2022 03:15:38 -0000
+Received: from unknown (HELO n03ukasimr02.n03.fujitsu.local) (62.60.8.146)
+  by server-3.tower-745.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 13 Nov 2022 03:15:38 -0000
+Received: from n03ukasimr02.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTP id 2FA651000E7
+	for <openembedded-devel@lists.openembedded.org>; Sun, 13 Nov 2022 03:15:38 +0000 (GMT)
+Received: from R01UKEXCASM126.r01.fujitsu.local (R01UKEXCASM126 [10.183.43.178])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTPS id 235C41000D5
+	for <openembedded-devel@lists.openembedded.org>; Sun, 13 Nov 2022 03:15:38 +0000 (GMT)
+Received: from localhost.localdomain (10.167.225.33) by
+ R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
+ (TLS) id 15.0.1497.32; Sun, 13 Nov 2022 03:15:36 +0000
+From: <wangmy@fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: Wang Mingyu <wangmy@fujitsu.com>
+Subject: [PATCH] libforms: upgrade 1.2.4 -> 1.2.5pre1
+Date: Sun, 13 Nov 2022 11:15:13 +0800
+Message-ID: <1668309316-15398-2-git-send-email-wangmy@fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
+In-Reply-To: <1668309316-15398-1-git-send-email-wangmy@fujitsu.com>
+References: <1668309316-15398-1-git-send-email-wangmy@fujitsu.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.2.2
-Subject: Re: [oe] [meta-networking][kirkstone][PATCH] dhcp: Fix CVE-2022-2928
- & CVE-2022-2929
-Content-Language: en-US
-To: Hitendra Prajapati <hpprajapati@mvista.com>,
- openembedded-devel@lists.openembedded.org
-References: <20221010045826.87924-1-hprajapati@mvista.com>
- <6976.1667798947630482909@lists.openembedded.org>
-From: akuster808 <akuster808@gmail.com>
-In-Reply-To: <6976.1667798947630482909@lists.openembedded.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain
+X-Originating-IP: [10.167.225.33]
+X-ClientProxiedBy: G08CNEXCHPEKD07.g08.fujitsu.local (10.167.33.80) To
+ R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
+X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 12 Nov 2022 20:08:56 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99566
+ <openembedded-devel@lists.openembedded.org>; Sun, 13 Nov 2022 03:15:46 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99568
 
+From: Wang Mingyu <wangmy@fujitsu.com>
 
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+---
+ .../libforms/{libforms_1.2.4.bb => libforms_1.2.5pre1.bb}       | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-graphics/libforms/{libforms_1.2.4.bb => libforms_1.2.5pre1.bb} (90%)
 
-On 11/7/22 12:29 AM, Hitendra Prajapati wrote:
-> Hi Team,
-> Any update or comments on that patches ??
-
-thanks for the reminder. I got it now.
-
--armin
->
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#99440): https://lists.openembedded.org/g/openembedded-devel/message/99440
-> Mute This Topic: https://lists.openembedded.org/mt/94230529/3616698
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [akuster808@gmail.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
->
+diff --git a/meta-oe/recipes-graphics/libforms/libforms_1.2.4.bb b/meta-oe/recipes-graphics/libforms/libforms_1.2.5pre1.bb
+similarity index 90%
+rename from meta-oe/recipes-graphics/libforms/libforms_1.2.4.bb
+rename to meta-oe/recipes-graphics/libforms/libforms_1.2.5pre1.bb
+index 01db3c4d3..52bddbd0d 100644
+--- a/meta-oe/recipes-graphics/libforms/libforms_1.2.4.bb
++++ b/meta-oe/recipes-graphics/libforms/libforms_1.2.5pre1.bb
+@@ -12,7 +12,7 @@ SRC_URI = "http://download.savannah.nongnu.org/releases/xforms/xforms-${PV}.tar.
+            file://0001-Modify-include-dir.patch \
+           "
+ 
+-SRC_URI[sha256sum] = "78cc6b07071bbeaa1f906e0a22d5e9980e48f8913577bc082d661afe5cb75696"
++SRC_URI[sha256sum] = "92b5e6466ea2dffca7332aec12734e65b3e961825eb3100b7d889c0d1abb4697"
+ 
+ inherit autotools features_check
+ 
+-- 
+2.25.1
 
 
