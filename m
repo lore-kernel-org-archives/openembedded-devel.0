@@ -1,150 +1,79 @@
-Return-Path: <crg7475@mailbox.org>
+Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id ECA0CC4332F
-	for <webhook@archiver.kernel.org>; Mon, 14 Nov 2022 13:36:29 +0000 (UTC)
-Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org [80.241.56.152])
- by mx.groups.io with SMTP id smtpd.web10.5485.1668432984829015012
+	by smtp.lore.kernel.org (Postfix) with ESMTP id ED280C433FE
+	for <webhook@archiver.kernel.org>; Mon, 14 Nov 2022 16:44:00 +0000 (UTC)
+Received: from mailout06.t-online.de (mailout06.t-online.de [194.25.134.19])
+ by mx.groups.io with SMTP id smtpd.web12.8086.1668444230972599532
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 14 Nov 2022 05:36:25 -0800
+ Mon, 14 Nov 2022 08:43:51 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@mailbox.org header.s=mail20150812 header.b=pfaIJ/dx;
- spf=pass (domain: mailbox.org, ip: 80.241.56.152, mailfrom: crg7475@mailbox.org)
-Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange ECDHE (P-384) server-signature RSA-PSS (4096 bits) server-digest SHA256)
-	(No client certificate requested)
-	by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4N9r1b2VtNz9sTt
-	for <openembedded-devel@lists.openembedded.org>; Mon, 14 Nov 2022 14:36:19 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org; s=mail20150812;
-	t=1668432979;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=WGNHEuyg3dzcFLPzdJc2dJ4CVLyxP1eQQcUGX6pgQcU=;
-	b=pfaIJ/dxoqygmbzAeV8tncrOl6ca2h2l6EowPqfw9qYeRl3fpp28lesuLW7+gIR21L/ZQb
-	lEqW0QzfsthDwyKzFoAgvoZ57x/Kyf+ZLt2FApYYCN60Mw0tdIm6IE+aVey20XgX6hWzKS
-	twgUfJHuLzFqaGO4+cmrpbWwz98FYYWMe/h/uNPS9aGESn7B88Apm/mGTn6sC6JjqqR84L
-	xvyk7f5a7remRbFWX75RKAXP93NxTI63DtaRM+PetZgytPV2rhNXDX7AVfvVO2xMihe5eB
-	n0p1BTIaR+bq/t3fmWZkM7iLihhblh/cZ/UkROG79AztG9nUztkwgeOAFYv2ig==
-Content-Type: multipart/alternative;
- boundary="------------UmMiwLgr4Q0zMEyZ5o2vg4dD"
-Message-ID: <ef125b71-594a-c235-bf16-097c292d38f0@mailbox.org>
-Date: Mon, 14 Nov 2022 14:36:18 +0100
-MIME-Version: 1.0
+ dkim=missing; spf=none, err=SPF record not found (domain: t-online.de, ip: 194.25.134.19, mailfrom: f_l_k@t-online.de)
+Received: from fwd75.dcpf.telekom.de (fwd75.aul.t-online.de [10.223.144.101])
+	by mailout06.t-online.de (Postfix) with SMTP id E50801B884;
+	Mon, 14 Nov 2022 17:43:48 +0100 (CET)
+Received: from [192.168.178.83] ([84.154.161.52]) by fwd75.t-online.de
+	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
+	esmtp id 1oucYm-07tT3Q0; Mon, 14 Nov 2022 17:43:48 +0100
+Date: Mon, 14 Nov 2022 17:43:43 +0100
+From: Markus Volk <f_l_k@t-online.de>
 Subject: Re: [oe] [meta-multimedia][PATCHv12] pipewire: update to v0.3.56
-To: openembedded-devel@lists.openembedded.org
+To: crg7475@mailbox.org
+Cc: openembedded-devel@lists.openembedded.org
+Message-Id: <VSJCLR.ZAF187FG7SZ53@t-online.de>
+In-Reply-To: <ef125b71-594a-c235-bf16-097c292d38f0@mailbox.org>
 References: <20220822171940.4736-1-f_l_k@t-online.de>
- <8c1dd697-ddee-d297-fc92-fe59391ff7a3@mailbox.org>
- <17268605DB982F0F.19634@lists.openembedded.org>
- <PU17LR.6HATELSCM57B@t-online.de>
-Content-Language: en-US
-From: Carlos Rafael Giani <crg7475@mailbox.org>
-In-Reply-To: <PU17LR.6HATELSCM57B@t-online.de>
-X-MBO-RS-META: oywtmhsztw8bgtkf7wy1ogejxk5g6563
-X-MBO-RS-ID: 7980d1457b432a627c5
+	<8c1dd697-ddee-d297-fc92-fe59391ff7a3@mailbox.org>
+	<17268605DB982F0F.19634@lists.openembedded.org>
+	<PU17LR.6HATELSCM57B@t-online.de>
+	<ef125b71-594a-c235-bf16-097c292d38f0@mailbox.org>
+X-Mailer: geary/40.0
+MIME-Version: 1.0
+Content-Type: multipart/alternative; boundary="=-3oJCrnDuwWy+CD73l0RM"
+X-TOI-EXPURGATEID: 150726::1668444228-2DFFA535-B818271E/0/0 CLEAN NORMAL
+X-TOI-MSGID: 09c0d366-077b-4afa-b864-300fd73e9286
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 14 Nov 2022 13:36:29 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99586
+ <openembedded-devel@lists.openembedded.org>; Mon, 14 Nov 2022 16:44:00 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99587
 
-This is a multi-part message in MIME format.
---------------UmMiwLgr4Q0zMEyZ5o2vg4dD
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+--=-3oJCrnDuwWy+CD73l0RM
+Content-Type: text/plain; charset=us-ascii; format=flowed
 
-I'm upgrading the recipe right now, and I am skeptical about the 
-media-session and wireplumber packageconfigs. Sure, they make sure that 
-these two can't be in the same image, but this creates circular 
-dependencies, because pipewire now depends on wireplumber, which depends 
-on pipewire. And the same thing applies to media-session.
+Am Mo, 14. Nov 2022 um 14:36:18 +0100 schrieb Carlos Rafael Giani via 
+lists.openembedded.org <crg7475=mailbox.org@lists.openembedded.org>:
+> I'm upgrading the recipe right now, and I am skeptical about the 
+> media-session and wireplumber packageconfigs. Sure, they make sure 
+> that these two can't be in the same image, but this creates circular 
+> dependencies, because pipewire now depends on wireplumber, which 
+> depends on pipewire. And the same thing applies to media-session.
 
-I am instead in favor of removing those packageconfigs and document that 
-only one session manager should exist at the same time.
+pipewire-media-session and wireplumber only set RRECOMMENDS on 
+pipewire, not RDEPENDS. This avoids circular dependencies for my 
+builds. Personally, I am not a fan of virual/xyz packages and try to 
+avoid them as long as possible. I have had some issues with them in the 
+past. If you are still having problems with circular dependencies, I 
+would vote to remove "pipewire" completely from the RECCOMENDS_$[PN} 
+lines in the session-manager recipes. I think it's more important to 
+install a session manager together with pipwire than the other way 
+around.
 
-It would perhaps also be a good idea to establish a virtual package like 
-"virtual/pipewire-session-manager" and add this as an RPROVIDES variable 
-to the wireplumber and media-session recipes.
-
-Finally, I asked the main wireplumber developed whether media-session 
-shouldn't really be used anymore, and he agreed. But media-session 
-removal can be done in a separate commit if we want to.
+But I'm just a user, the openembedded developers should be able to 
+judge this better.
 
 
-On 11.11.22 18:28, Markus Volk wrote:
-> Am Fr, 11. Nov 2022 um 13:00:59 +0100 schrieb Markus Volk 
-> <f_l_k@t-online.de>:
->> As to why wireplumber is not the default
->
-> I would suggest that you create a patch that changes the default to 
-> wireplumber and send it to the mailing list.
->
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#99557):https://lists.openembedded.org/g/openembedded-devel/message/99557
-> Mute This Topic:https://lists.openembedded.org/mt/93186419/3617253
-> Group Owner:openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe:https://lists.openembedded.org/g/openembedded-devel/unsub  [crg7475@mailbox.org]
-> -=-=-=-=-=-=-=-=-=-=-=-
->
---------------UmMiwLgr4Q0zMEyZ5o2vg4dD
-Content-Type: text/html; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+--=-3oJCrnDuwWy+CD73l0RM
+Content-Type: text/html; charset=us-ascii
 
-<html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  </head>
-  <body>
-    <p><font face="Helvetica, Arial, sans-serif">I'm upgrading the
+<div id="geary-body" dir="auto">Am Mo, 14. Nov 2022 um 14:36:18 +0100 schrieb Carlos Rafael Giani via lists.openembedded.org &lt;crg7475=mailbox.org@lists.openembedded.org&gt;:<br><blockquote type="cite">I'm upgrading the
         recipe right now, and I am skeptical about the media-session and
         wireplumber packageconfigs. Sure, they make sure that these two
         can't be in the same image, but this creates circular
         dependencies, because pipewire now depends on wireplumber, which
         depends on pipewire. And the same thing applies to
-        media-session.</font></p>
-    <p><font face="Helvetica, Arial, sans-serif">I am instead in favor
-        of removing those packageconfigs and document that only one
-        session manager should exist at the same time.</font></p>
-    <p><font face="Helvetica, Arial, sans-serif">It would perhaps also
-        be a good idea to establish a virtual package like
-        "virtual/pipewire-session-manager" and add this as an RPROVIDES
-        variable to the wireplumber and media-session recipes.</font></p>
-    <p><font face="Helvetica, Arial, sans-serif">Finally, I asked the
-        main wireplumber developed whether media-session shouldn't
-        really be used anymore, and he agreed. But media-session removal
-        can be done in a separate commit if we want to.</font></p>
-    <p><br>
-    </p>
-    <div class="moz-cite-prefix">On 11.11.22 18:28, Markus Volk wrote:<br>
-    </div>
-    <blockquote type="cite" cite="mid:PU17LR.6HATELSCM57B@t-online.de">
-      <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-      <div id="geary-body" dir="auto">Am Fr, 11. Nov 2022 um 13:00:59
-        +0100 schrieb Markus Volk <a class="moz-txt-link-rfc2396E" href="mailto:f_l_k@t-online.de">&lt;f_l_k@t-online.de&gt;</a>:<br>
-        <blockquote type="cite">As to why wireplumber is not the default</blockquote>
-        <div><br>
-        </div>
-        <div>I would suggest that you create a patch that changes the
-          default to wireplumber and send it to the mailing list.</div>
-      </div>
-      <br>
-      <fieldset class="moz-mime-attachment-header"></fieldset>
-      <pre class="moz-quote-pre" wrap="">
--=-=-=-=-=-=-=-=-=-=-=-
-Links: You receive all messages sent to this group.
-View/Reply Online (#99557): <a class="moz-txt-link-freetext" href="https://lists.openembedded.org/g/openembedded-devel/message/99557">https://lists.openembedded.org/g/openembedded-devel/message/99557</a>
-Mute This Topic: <a class="moz-txt-link-freetext" href="https://lists.openembedded.org/mt/93186419/3617253">https://lists.openembedded.org/mt/93186419/3617253</a>
-Group Owner: <a class="moz-txt-link-abbreviated" href="mailto:openembedded-devel+owner@lists.openembedded.org">openembedded-devel+owner@lists.openembedded.org</a>
-Unsubscribe: <a class="moz-txt-link-freetext" href="https://lists.openembedded.org/g/openembedded-devel/unsub">https://lists.openembedded.org/g/openembedded-devel/unsub</a> [<a class="moz-txt-link-abbreviated" href="mailto:crg7475@mailbox.org">crg7475@mailbox.org</a>]
--=-=-=-=-=-=-=-=-=-=-=-
+        media-session.</blockquote><div><br></div><div><div>pipewire-media-session and wireplumber only set RRECOMMENDS on pipewire, not RDEPENDS. This avoids circular dependencies for my builds. Personally, I am not a fan of virual/xyz packages and try to avoid them as long as possible. I have had some issues with them in the past. If you are still having problems with circular dependencies, I would vote to remove "pipewire" completely from the RECCOMENDS_$[PN} lines in the session-manager recipes. I think it's more important to install a session manager together with pipwire than the other way around.</div><div><br></div><div>But I'm just a user, the openembedded developers should be able to judge this better.</div></div></div>
+--=-3oJCrnDuwWy+CD73l0RM--
 
-</pre>
-    </blockquote>
-  </body>
-</html>
-
---------------UmMiwLgr4Q0zMEyZ5o2vg4dD--
 
