@@ -1,122 +1,150 @@
-Return-Path: <akuster808@gmail.com>
+Return-Path: <crg7475@mailbox.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 11D65C4332F
-	for <webhook@archiver.kernel.org>; Mon, 14 Nov 2022 13:30:20 +0000 (UTC)
-Received: from mail-qt1-f171.google.com (mail-qt1-f171.google.com [209.85.160.171])
- by mx.groups.io with SMTP id smtpd.web11.5474.1668432614240432757
+	by smtp.lore.kernel.org (Postfix) with ESMTP id ECA0CC4332F
+	for <webhook@archiver.kernel.org>; Mon, 14 Nov 2022 13:36:29 +0000 (UTC)
+Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org [80.241.56.152])
+ by mx.groups.io with SMTP id smtpd.web10.5485.1668432984829015012
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 14 Nov 2022 05:30:14 -0800
+ Mon, 14 Nov 2022 05:36:25 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=XMQdGKDa;
- spf=pass (domain: gmail.com, ip: 209.85.160.171, mailfrom: akuster808@gmail.com)
-Received: by mail-qt1-f171.google.com with SMTP id h21so6719605qtu.2
-        for <openembedded-devel@lists.openembedded.org>; Mon, 14 Nov 2022 05:30:14 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=content-transfer-encoding:in-reply-to:from:references:to
-         :content-language:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=ynvpsBojFwTFXiq81gOcpmiqjayKN+QJBPTdOE9TLoU=;
-        b=XMQdGKDa+VZ+lOjCtcOCh40Wa0mnvznhi+ZNT4FhKX+UAtHto0OYkLIW3u/5HgaJHj
-         SLPkmYvNCeVocVTqYEYpKtiEIrsxYhpAVdvda/TvoHTsDzQ3V6D8vWMeAzVztN+q0JmI
-         I/FoBIzXP40SExtrvo6zcPXGbx1ee+2GufXtrUnPDQN8W6BfTyKrhvh175XxklgtcULX
-         ioEQ93fFEFIffZiNszwlv6zzdoyZ79cbAvtWLmOxSgrpyf2/KAELsxDM5DNYFENsdeWS
-         zeY5A/8by3q7yzNuXeZRm1gBma9asEmjHQx4vQEdcwC7DHiJ3tpQm+JJY9QuZUE+YQP3
-         AVQQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=content-transfer-encoding:in-reply-to:from:references:to
-         :content-language:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=ynvpsBojFwTFXiq81gOcpmiqjayKN+QJBPTdOE9TLoU=;
-        b=zI1VOK8GoHCaYpvCHDJHRcRby/EIJZGMtb8ecgpIsr3mOpvf+zm70GVzzztkQ6jKq0
-         +Vdg0tRbV/RzPwLdJKEoiT7j79mIRHlUU/JgHPfodPcFcI8Z+ZIlEoPRRASFxM0ER/CO
-         6rigviQTKY6SwAAVv0gtzymRJg94vNYyuNnQydYFJsVZgEkhv0Z6EK7PKMzBroydFz1g
-         FTIBuVOFPCz4XZS/S7sacky4pAxnyZz8Og7LmFIJX4xU8BQ40X1mmalHEv1Dvipe5NO6
-         Zj4IMU369/M7X9ui1x1Dv6MZYpKHn7fFCNvEPvz87t+IEke2OqWfoOxwGvijFJ5LTO1Y
-         A9EQ==
-X-Gm-Message-State: ANoB5plJAGHCXF1U9j+eeMLXWpaD6nHbRHJSs6vXXM2J0LnT5858SD/Y
-	jCn7h5hmf5x2QWYV5VtEfl4=
-X-Google-Smtp-Source: AA0mqf77oemSX+/+zdvUnZrETgKpiu3SgUg0OdQrPgRDGe+qsIUVcYerRuo3o8TGX5i3dVpMctR+IQ==
-X-Received: by 2002:a05:622a:5818:b0:397:dd21:a231 with SMTP id fg24-20020a05622a581800b00397dd21a231mr12148665qtb.134.1668432613121;
-        Mon, 14 Nov 2022 05:30:13 -0800 (PST)
-Received: from ?IPV6:2600:1700:9190:ba10:631:ae64:7d09:b9c7? ([2600:1700:9190:ba10:631:ae64:7d09:b9c7])
-        by smtp.gmail.com with ESMTPSA id v7-20020a05620a0f0700b006bba46e5eeasm6585676qkl.37.2022.11.14.05.30.12
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 14 Nov 2022 05:30:12 -0800 (PST)
-Message-ID: <99e47dc5-aa2c-f983-6f80-838deb305a83@gmail.com>
-Date: Mon, 14 Nov 2022 08:30:11 -0500
+ dkim=pass header.i=@mailbox.org header.s=mail20150812 header.b=pfaIJ/dx;
+ spf=pass (domain: mailbox.org, ip: 80.241.56.152, mailfrom: crg7475@mailbox.org)
+Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange ECDHE (P-384) server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	(No client certificate requested)
+	by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4N9r1b2VtNz9sTt
+	for <openembedded-devel@lists.openembedded.org>; Mon, 14 Nov 2022 14:36:19 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org; s=mail20150812;
+	t=1668432979;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references;
+	bh=WGNHEuyg3dzcFLPzdJc2dJ4CVLyxP1eQQcUGX6pgQcU=;
+	b=pfaIJ/dxoqygmbzAeV8tncrOl6ca2h2l6EowPqfw9qYeRl3fpp28lesuLW7+gIR21L/ZQb
+	lEqW0QzfsthDwyKzFoAgvoZ57x/Kyf+ZLt2FApYYCN60Mw0tdIm6IE+aVey20XgX6hWzKS
+	twgUfJHuLzFqaGO4+cmrpbWwz98FYYWMe/h/uNPS9aGESn7B88Apm/mGTn6sC6JjqqR84L
+	xvyk7f5a7remRbFWX75RKAXP93NxTI63DtaRM+PetZgytPV2rhNXDX7AVfvVO2xMihe5eB
+	n0p1BTIaR+bq/t3fmWZkM7iLihhblh/cZ/UkROG79AztG9nUztkwgeOAFYv2ig==
+Content-Type: multipart/alternative;
+ boundary="------------UmMiwLgr4Q0zMEyZ5o2vg4dD"
+Message-ID: <ef125b71-594a-c235-bf16-097c292d38f0@mailbox.org>
+Date: Mon, 14 Nov 2022 14:36:18 +0100
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.2.2
-Subject: Re: [oe] #error [kirkstone] mariadb-native is unbuildable for 2
- reasons
+Subject: Re: [oe] [meta-multimedia][PATCHv12] pipewire: update to v0.3.56
+To: openembedded-devel@lists.openembedded.org
+References: <20220822171940.4736-1-f_l_k@t-online.de>
+ <8c1dd697-ddee-d297-fc92-fe59391ff7a3@mailbox.org>
+ <17268605DB982F0F.19634@lists.openembedded.org>
+ <PU17LR.6HATELSCM57B@t-online.de>
 Content-Language: en-US
-To: wojciech@rbmail.pl, openembedded-devel@lists.openembedded.org
-References: <l50T.1668421414074374713.i1ex@lists.openembedded.org>
-From: akuster808 <akuster808@gmail.com>
-In-Reply-To: <l50T.1668421414074374713.i1ex@lists.openembedded.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+From: Carlos Rafael Giani <crg7475@mailbox.org>
+In-Reply-To: <PU17LR.6HATELSCM57B@t-online.de>
+X-MBO-RS-META: oywtmhsztw8bgtkf7wy1ogejxk5g6563
+X-MBO-RS-ID: 7980d1457b432a627c5
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 14 Nov 2022 13:30:20 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99585
+ <openembedded-devel@lists.openembedded.org>; Mon, 14 Nov 2022 13:36:29 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99586
+
+This is a multi-part message in MIME format.
+--------------UmMiwLgr4Q0zMEyZ5o2vg4dD
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+
+I'm upgrading the recipe right now, and I am skeptical about the 
+media-session and wireplumber packageconfigs. Sure, they make sure that 
+these two can't be in the same image, but this creates circular 
+dependencies, because pipewire now depends on wireplumber, which depends 
+on pipewire. And the same thing applies to media-session.
+
+I am instead in favor of removing those packageconfigs and document that 
+only one session manager should exist at the same time.
+
+It would perhaps also be a good idea to establish a virtual package like 
+"virtual/pipewire-session-manager" and add this as an RPROVIDES variable 
+to the wireplumber and media-session recipes.
+
+Finally, I asked the main wireplumber developed whether media-session 
+shouldn't really be used anymore, and he agreed. But media-session 
+removal can be done in a separate commit if we want to.
 
 
-
-On 11/14/22 5:23 AM, wojciech@rbmail.pl wrote:
+On 11.11.22 18:28, Markus Volk wrote:
+> Am Fr, 11. Nov 2022 um 13:00:59 +0100 schrieb Markus Volk 
+> <f_l_k@t-online.de>:
+>> As to why wireplumber is not the default
 >
-> Hi,
->
-> I found 2 bugs in 'mariadb-native' package in 'kirkstone' branch.
->
-> 1. Missing 'gnutls-native' in DEPENDS
-> 2. Unable to successfuly perform 'do_compile' task:
->
-
-Have you seen this on Master?
->
->
-> The migration notes for 'kirkstone' states: 
-> https://docs.yoctoproject.org/4.0.5/migration-guides/migration-4.0.html#fetching-changes
-> "/Network access from tasks is now disabled by default on kernels 
-> which support this feature (on most recent distros such as CentOS 8 
-> and Debian 11 onwards). This means that tasks accessing the network 
-> need to be marked as such with the |network| flag./"
->
-> But during compilation there is a place in some CMakeLists.txt being 
-> downloaded libfmt-8.0.1 from the internet, so the possibility to 
-> download it must be unlocked in the recipe:
->
-> do_compile[network] = "1".
->
-> Finally my bbappend (mariadb-native_10.7.%.bbappend) looked like this:
->
-> DEPENDS:append = " gnutls-native"
-> do_compile[network] = "1"
->
-
-Can you send a patch?
-
--armin
->
->
-> Regards,
-> Wojciech
->
+> I would suggest that you create a patch that changes the default to 
+> wireplumber and send it to the mailing list.
 >
 > -=-=-=-=-=-=-=-=-=-=-=-
 > Links: You receive all messages sent to this group.
-> View/Reply Online (#99584): https://lists.openembedded.org/g/openembedded-devel/message/99584
-> Mute This Topic: https://lists.openembedded.org/mt/95016077/3616698
-> Mute #error:https://lists.openembedded.org/g/openembedded-devel/mutehashtag/error
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [akuster808@gmail.com]
+> View/Reply Online (#99557):https://lists.openembedded.org/g/openembedded-devel/message/99557
+> Mute This Topic:https://lists.openembedded.org/mt/93186419/3617253
+> Group Owner:openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe:https://lists.openembedded.org/g/openembedded-devel/unsub  [crg7475@mailbox.org]
 > -=-=-=-=-=-=-=-=-=-=-=-
 >
+--------------UmMiwLgr4Q0zMEyZ5o2vg4dD
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  </head>
+  <body>
+    <p><font face="Helvetica, Arial, sans-serif">I'm upgrading the
+        recipe right now, and I am skeptical about the media-session and
+        wireplumber packageconfigs. Sure, they make sure that these two
+        can't be in the same image, but this creates circular
+        dependencies, because pipewire now depends on wireplumber, which
+        depends on pipewire. And the same thing applies to
+        media-session.</font></p>
+    <p><font face="Helvetica, Arial, sans-serif">I am instead in favor
+        of removing those packageconfigs and document that only one
+        session manager should exist at the same time.</font></p>
+    <p><font face="Helvetica, Arial, sans-serif">It would perhaps also
+        be a good idea to establish a virtual package like
+        "virtual/pipewire-session-manager" and add this as an RPROVIDES
+        variable to the wireplumber and media-session recipes.</font></p>
+    <p><font face="Helvetica, Arial, sans-serif">Finally, I asked the
+        main wireplumber developed whether media-session shouldn't
+        really be used anymore, and he agreed. But media-session removal
+        can be done in a separate commit if we want to.</font></p>
+    <p><br>
+    </p>
+    <div class="moz-cite-prefix">On 11.11.22 18:28, Markus Volk wrote:<br>
+    </div>
+    <blockquote type="cite" cite="mid:PU17LR.6HATELSCM57B@t-online.de">
+      <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+      <div id="geary-body" dir="auto">Am Fr, 11. Nov 2022 um 13:00:59
+        +0100 schrieb Markus Volk <a class="moz-txt-link-rfc2396E" href="mailto:f_l_k@t-online.de">&lt;f_l_k@t-online.de&gt;</a>:<br>
+        <blockquote type="cite">As to why wireplumber is not the default</blockquote>
+        <div><br>
+        </div>
+        <div>I would suggest that you create a patch that changes the
+          default to wireplumber and send it to the mailing list.</div>
+      </div>
+      <br>
+      <fieldset class="moz-mime-attachment-header"></fieldset>
+      <pre class="moz-quote-pre" wrap="">
+-=-=-=-=-=-=-=-=-=-=-=-
+Links: You receive all messages sent to this group.
+View/Reply Online (#99557): <a class="moz-txt-link-freetext" href="https://lists.openembedded.org/g/openembedded-devel/message/99557">https://lists.openembedded.org/g/openembedded-devel/message/99557</a>
+Mute This Topic: <a class="moz-txt-link-freetext" href="https://lists.openembedded.org/mt/93186419/3617253">https://lists.openembedded.org/mt/93186419/3617253</a>
+Group Owner: <a class="moz-txt-link-abbreviated" href="mailto:openembedded-devel+owner@lists.openembedded.org">openembedded-devel+owner@lists.openembedded.org</a>
+Unsubscribe: <a class="moz-txt-link-freetext" href="https://lists.openembedded.org/g/openembedded-devel/unsub">https://lists.openembedded.org/g/openembedded-devel/unsub</a> [<a class="moz-txt-link-abbreviated" href="mailto:crg7475@mailbox.org">crg7475@mailbox.org</a>]
+-=-=-=-=-=-=-=-=-=-=-=-
+
+</pre>
+    </blockquote>
+  </body>
+</html>
+
+--------------UmMiwLgr4Q0zMEyZ5o2vg4dD--
 
