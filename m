@@ -2,66 +2,66 @@ Return-Path: <zhengrq.fnst@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E5A88C43217
-	for <webhook@archiver.kernel.org>; Mon, 14 Nov 2022 03:21:06 +0000 (UTC)
-Received: from mail1.bemta37.messagelabs.com (mail1.bemta37.messagelabs.com [85.158.142.113])
- by mx.groups.io with SMTP id smtpd.web11.1738.1668396057266830891
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DDF61C4332F
+	for <webhook@archiver.kernel.org>; Mon, 14 Nov 2022 03:21:16 +0000 (UTC)
+Received: from mail1.bemta34.messagelabs.com (mail1.bemta34.messagelabs.com [195.245.231.4])
+ by mx.groups.io with SMTP id smtpd.web09.1729.1668396068490190159
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 13 Nov 2022 19:20:58 -0800
+ Sun, 13 Nov 2022 19:21:08 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=WSET8Xjr;
- spf=pass (domain: fujitsu.com, ip: 85.158.142.113, mailfrom: zhengrq.fnst@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=KUaOY+8z;
+ spf=pass (domain: fujitsu.com, ip: 195.245.231.4, mailfrom: zhengrq.fnst@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1668396055; i=@fujitsu.com;
-	bh=5K+awNp3dp/63nMA4Pitc0eHylhTesHoY1GjuCXLr8c=;
+	s=170520fj; t=1668396067; i=@fujitsu.com;
+	bh=vuv1YiR6ERsrMixOT8zU6adw7Yn2FOpVjSXuSLrz6R0=;
 	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=WSET8XjraJcPdkPn7E0E8pQHbKKFZiBcJnGugxqdQ3oOvgjaUNIndF+Px4q6b4NR3
-	 KkmxhnYZlSE3SVtMeaDoxIOEyt9I/ZxOt4HptJGFEthpGVzIWBqLOQGstKeuzxKG1C
-	 Ok7QV3kbSK1ojNM+rBlDV2oR4w2rgrK2d1PZCfzjvxtanMvPt7gYyZHl1TDFxeGh52
-	 Hs/ioUzDTIPFT6q4Qbmo6+y5jBNun2efXRyfemUFS32nr/q1op20r50XFqUNDvPWHb
-	 9M1tCKr5H8m1YqjdQC2gdjhoxTH7Ug3qiJOk01UTUXDKjI+31H3PyhxnqbdQ8Tf2AX
-	 lMQuKRG6a4rNg==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrFIsWRWlGSWpSXmKPExsViZ8OxWVd0S2G
-  ywY87lhYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8a2lW9ZC74JVay9fYSxgXGmQBcjF4eQwENG
-  idtLOti6GDmBnCtMEos/W0MkDjBKHJ23kQkkwSagILFw6xlWEFtEQF9i6ew9zCC2sICPxJ8vR
-  9lBbBYBVYlD77azgNi8Ah4SjY9nM4LYEkC9Ux6+Z4aIC0qcnPkErIZZQELi4IsXQHEOoBpFid
-  nT5SHKKyRmzWpjgrDVJK6e28Q8gZFvFpLuWUi6FzAyrWI0L04tKkst0jU010sqykzPKMlNzMz
-  RS6zSTdRLLdXNyy8qydA11EssL9ZLLS7WK67MTc5J0ctLLdnECAy6lOLU1zsYjy37o3eIUZKD
-  SUmUl399YbIQX1J+SmVGYnFGfFFpTmrxIUYZDg4lCV6hDUA5waLU9NSKtMwcYATApCU4eJREe
-  Es3AaV5iwsSc4sz0yFSpxgtOabO/refmWM5mJz5te0AsxBLXn5eqpQ471qQBgGQhozSPLhxsC
-  i9xCgrJczLyMDAIMRTkFqUm1mCKv+KUZyDUUmY12wj0BSezLwSuK2vgA5iAjroe2QeyEEliQg
-  pqQYmQ/HG40arn72cvPLwwQ/SoTsZTQ/2KiXOnLlBXrxMPufFZXWFw7aamg72oR+dMl+X1/s3
-  7eXdMuf/1Si5GS8m/Hm3JeFTT2raksjtb1J+5L7K5pgzQ2z33fkBP2cVFnVNXh3Ssav69av3B
-  5rSbDiFbmo/v6/0esXGTYYLThcEqkQUXn4y51Kb7xKdS2G/AjkK2iVaQiXOnQvTi8mO/F6pcb
-  98rsM8ruTcR7Om3Twvwzlv6k7lLaVHVYvcOqwf8Ltk8PR9sVO2sl7R5tyzaulUV/HJn75c5dF
-  f/r9FtPLFTDf5g4m/Z70uVZ8cFNL1timu6IHl+WP33PJWal9p3Knbsr/oTvxLseNBEhU2mcW8
-  SizFGYmGWsxFxYkAQuA5X00DAAA=
+	b=KUaOY+8zeUIQkxioULGtT6CdiNW0fG6E/rQeS0t28WtMptdYVcaUVE3FBJ0+RTU5K
+	 mK7wRBpL1CWkTN9K9aJH3Yp5DezWCBpt4pwOLzH4CZh5TV940YFl+HxxGCTM+HKEEc
+	 4bY+Z54F7rDSQuNSXDk5D5xUqemZRsiyX4waAP24mZJ5QU5JjKIMxhK8CbL58xT2nr
+	 yBmnByUtZgRbNpYzXRIkNgj2eSYs5ZRD4JeWiGiYDaCwmmuerLq4cfTEdaCCE1Ug2b
+	 yecYD/wMmj8byT0inZ4iS7GoZFjbe50w8+Rv4ZAu1rcai7MJwxgG5cLyMvQdE4yNaE
+	 rIFC0XeroU/ZA==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFlrLIsWRWlGSWpSXmKPExsViZ8MxSVdpS2G
+  ywbvJHBYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa0bP7gtsBUc4K553fWRrYPzE0cXIxSEk8IRR
+  onHtQjYI5zqTRMO36SwQzgFGibNzO1m7GDk52AQUJBZuPQNmiwjoSyydvYcZxBYW8JeYfWgik
+  M3BwSKgKtHwSwEkzCvgIfGk/RhYuQRQ65SH75kh4oISJ2c+YQGxmQUkJA6+eAHWKiGgKDF7uj
+  xEeYXErFltTBC2msTVc5uYJzDyzULSPQtJ9wJGplWMZsWpRWWpRbqGBnpJRZnpGSW5iZk5eol
+  Vuol6qaW65anFJbpGeonlxXqpxcV6xZW5yTkpenmpJZsYgSGXUqzSt4Px7bI/eocYJTmYlER5
+  +dcXJgvxJeWnVGYkFmfEF5XmpBYfYpTh4FCS4L2wGSgnWJSanlqRlpkDDH+YtAQHj5IIb+kmo
+  DRvcUFibnFmOkTqFKMux8yvbQeYhVjy8vNSpcR5VUBmCIAUZZTmwY2AxeIlRlkpYV5GBgYGIZ
+  6C1KLczBJU+VeM4hyMSsK8d0BW8WTmlcBtegV0BBPQEd8j80COKElESEk1MKWK9328tCXk9es
+  u1bDTC5x3irw3KDk98WW6bnZJbua1ps+qT6ekW2oe/iR1JVjz4Zcs88QvVbyl66oTnW69e7z2
+  uG3GAt2TDgHr6gr/h/kW7xFqU7vGurRMIE573lfekF8fzC+t+bi/dL2XY+mzb3WC8fxBz9d85
+  7xveM3oirRgnT4vf1qtzrxGFeMpNpYplfda44/O5D+Z5X1ZrvGcynzBKVNu+f/7VnHmyO7FJ1
+  fMLLR2L43b5vGM69PLug8Mqyb6bLv3qPJ5dpvP1hdJWz1usF6rnT6ncP26Tyq70vtfclmt+dq
+  5+MTLWQGPTl/s/njT9KeJQVqd8ZKw/y+fh8pYfORUF5vm23FT5LD3rjIlluKMREMt5qLiRAA3
+  wl/YQAMAAA==
 X-Env-Sender: zhengrq.fnst@fujitsu.com
-X-Msg-Ref: server-6.tower-732.messagelabs.com!1668396053!835735!1
-X-Originating-IP: [62.60.8.179]
+X-Msg-Ref: server-6.tower-565.messagelabs.com!1668396066!260297!1
+X-Originating-IP: [62.60.8.146]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.100.1; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 7421 invoked from network); 14 Nov 2022 03:20:53 -0000
-Received: from unknown (HELO n03ukasimr04.n03.fujitsu.local) (62.60.8.179)
-  by server-6.tower-732.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 14 Nov 2022 03:20:53 -0000
-Received: from n03ukasimr04.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTP id 72A52151
-	for <openembedded-devel@lists.openembedded.org>; Mon, 14 Nov 2022 03:20:53 +0000 (GMT)
+Received: (qmail 8357 invoked from network); 14 Nov 2022 03:21:06 -0000
+Received: from unknown (HELO n03ukasimr02.n03.fujitsu.local) (62.60.8.146)
+  by server-6.tower-565.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 14 Nov 2022 03:21:06 -0000
+Received: from n03ukasimr02.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTP id D79E610032B
+	for <openembedded-devel@lists.openembedded.org>; Mon, 14 Nov 2022 03:21:05 +0000 (GMT)
 Received: from R01UKEXCASM126.r01.fujitsu.local (R01UKEXCASM126 [10.183.43.178])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTPS id 65A7C142
-	for <openembedded-devel@lists.openembedded.org>; Mon, 14 Nov 2022 03:20:53 +0000 (GMT)
+	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTPS id CB50D100323
+	for <openembedded-devel@lists.openembedded.org>; Mon, 14 Nov 2022 03:21:05 +0000 (GMT)
 Received: from CentOS7.g08.fujitsu.local (10.167.225.35) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.32; Mon, 14 Nov 2022 03:20:52 +0000
+ (TLS) id 15.0.1497.32; Mon, 14 Nov 2022 03:21:04 +0000
 From: <zhengrq.fnst@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-python] [PATCH] python3-pymodbus: upgrade 3.0.0 -> 3.0.2
-Date: Mon, 14 Nov 2022 11:20:42 +0800
-Message-ID: <1668396042-24375-1-git-send-email-zhengrq.fnst@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH] python3-pywbemtools: upgrade 1.0.1 -> 1.1.0
+Date: Mon, 14 Nov 2022 11:20:56 +0800
+Message-ID: <1668396056-24421-1-git-send-email-zhengrq.fnst@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
 Content-Type: text/plain
@@ -72,61 +72,31 @@ X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 14 Nov 2022 03:21:06 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99579
-
-Changelog:
-==========
-    Add pygments as requirement for repl
-    Update datastore remote to handle write requests (#1166)
-    Allow multiple servers. (#1164)
-    Fix typo. (#1162)
-    Transfer parms. to connected client. (#1161)
-    Repl enhancements 2 (#1141)
-    Server simulator with datastore with json data. (#1157)
-    Avoid unwanted reconnects (#1154)
-    Do not initialize framer twice. (#1153)
-    Allow timeout as float. (#1152)
-    Improve Docker Support (#1145)
-    Fix unreachable code in AsyncModbusTcpClient (#1151)
-    Fix type hints for port and timeout (#1147)
-    Start/stop multiple servers. (#1138)
-    Server/asyncio.py correct logging when disconnecting the socket (#1135)
-    Add Docker and container registry support (#1132)
-    Removes undue reported error when forwarding (#1134)
-    Obey timeout parameter on connection (#1131)
-    Readme typos (#1129)
-    Clean noqa directive. (#1125)
-    Add isort and activate CI fail for black/isort. (#1124)
-    Update examples. (#1117)
-    Move logging configuration behind function call (#1120)
-    serial2TCP forwarding example (#1116)
-    Make serial import dynamic. (#1114)
-    Bugfix ModbusSerialServer setup so handler is called correctly. (#1113)
-    Clean configurations. (#1111)
+ <openembedded-devel@lists.openembedded.org>; Mon, 14 Nov 2022 03:21:16 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99580
 
 Signed-off-by: Zheng Ruoqin <zhengrq.fnst@fujitsu.com>
 ---
- .../{python3-pymodbus_3.0.0.bb => python3-pymodbus_3.0.2.bb}    | 2 +-
+ ...ython3-pywbemtools_1.0.1.bb => python3-pywbemtools_1.1.0.bb} | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-pymodbus_3.0.0.bb => python3-pymodbus_3.0.2.bb} (91%)
+ rename meta-python/recipes-extended/pywbemtools/{python3-pywbemtools_1.0.1.bb => python3-pywbemtools_1.1.0.bb} (92%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-pymodbus_3.0.0.bb b/meta-python/recipes-devtools/python/python3-pymodbus_3.0.2.bb
-similarity index 91%
-rename from meta-python/recipes-devtools/python/python3-pymodbus_3.0.0.bb
-rename to meta-python/recipes-devtools/python/python3-pymodbus_3.0.2.bb
-index 829241947..95cc3e351 100644
---- a/meta-python/recipes-devtools/python/python3-pymodbus_3.0.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-pymodbus_3.0.2.bb
-@@ -4,7 +4,7 @@ LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=2c2223d66c7e674b40527b5a4c35bd76"
- DEPENDS += "python3-six-native"
+diff --git a/meta-python/recipes-extended/pywbemtools/python3-pywbemtools_1.0.1.bb b/meta-python/recipes-extended/pywbemtools/python3-pywbemtools_1.1.0.bb
+similarity index 92%
+rename from meta-python/recipes-extended/pywbemtools/python3-pywbemtools_1.0.1.bb
+rename to meta-python/recipes-extended/pywbemtools/python3-pywbemtools_1.1.0.bb
+index ea9d6528d..e02485dde 100644
+--- a/meta-python/recipes-extended/pywbemtools/python3-pywbemtools_1.0.1.bb
++++ b/meta-python/recipes-extended/pywbemtools/python3-pywbemtools_1.1.0.bb
+@@ -4,7 +4,7 @@ HOMEPAGE = "https://pywbemtools.readthedocs.io/en/stable/"
+ LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=e23fadd6ceef8c618fc1c65191d846fa"
  
--SRC_URI[sha256sum] = "37c9b6f3e5c82f39ee42047ca48cbc9fd0c49a6731126789500191e9deea6cbc"
-+SRC_URI[sha256sum] = "704cb7fb90631c45f9c3a70b89d0c990fe0e208ac56f14a5c449e21bebd1e201"
- S = "${WORKDIR}/pymodbus-${PV}"
+-SRC_URI[sha256sum] = "3fd2fec6a11992afb8a34c0181b76c8d36c6fae1b79d83fb4542ce08e0fb4127"
++SRC_URI[sha256sum] = "5428169d9704f98519666cc81a33bfbb813612108979d4c9ce10d6202faf621e"
  
  inherit pypi setuptools3
+ 
 -- 
 2.25.1
 
