@@ -1,88 +1,117 @@
-Return-Path: <Martin.Jansa@gmail.com>
+Return-Path: <peron.clem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 31281C4332F
-	for <webhook@archiver.kernel.org>; Mon, 14 Nov 2022 21:26:18 +0000 (UTC)
-Received: from mail-wm1-f47.google.com (mail-wm1-f47.google.com [209.85.128.47])
- by mx.groups.io with SMTP id smtpd.web12.898.1668461169476985244
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 68113C43219
+	for <webhook@archiver.kernel.org>; Tue, 15 Nov 2022 09:44:24 +0000 (UTC)
+Received: from mail-wr1-f53.google.com (mail-wr1-f53.google.com [209.85.221.53])
+ by mx.groups.io with SMTP id smtpd.web12.3816.1668505459115875026
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 14 Nov 2022 13:26:09 -0800
+ Tue, 15 Nov 2022 01:44:19 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=N7chdWKk;
- spf=pass (domain: gmail.com, ip: 209.85.128.47, mailfrom: martin.jansa@gmail.com)
-Received: by mail-wm1-f47.google.com with SMTP id t4so8397401wmj.5
-        for <openembedded-devel@lists.openembedded.org>; Mon, 14 Nov 2022 13:26:09 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=WN8mKULR;
+ spf=pass (domain: gmail.com, ip: 209.85.221.53, mailfrom: peron.clem@gmail.com)
+Received: by mail-wr1-f53.google.com with SMTP id o4so23143082wrq.6
+        for <openembedded-devel@lists.openembedded.org>; Tue, 15 Nov 2022 01:44:18 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=wMGXKYZdB7tyk9ZaU2dARORPS0zv67+5o9ZawXqyk3s=;
-        b=N7chdWKkHY8P8jj+OHCM2AjyhkNNf0sjTHc7GF13tIgwtXOMoRLz+diTOF1PzdaxCm
-         jLNtfhe5WoyvV2Q2DZT9810KjlSkePLjPfqZ6tK2KQIHd1HmcdyeVdP5UYn4kb+7Z9Nt
-         2kq75UgpdcpjPNaIJq1+9IA1vZPBdrUQl4lHEu6/mbbOBp0ed3cildQhxO8w6K1oE6OV
-         83Y0MnNIMfmsSX51ucSE16PwtqacNGQZtwq39ACZJ/C2Tt4wHO0bgZskT9+ImsEaYSsz
-         Zv6VrJF1pFGbushnYSRpWs0DkSpbyySnS7Xt8nxi0zYorX7vH8u/HjOy9jWzkbm4hyhP
-         ff8Q==
+        bh=Kdi98te820yP7e2c+xgu8akpxrvDchFfSnEJNjkIjPE=;
+        b=WN8mKULRfuSRKr1eMCCjsG4JOBx3F8/zAHJG1gEw3qIfdA5ZaDYuzSqqRshsGasxuv
+         PqxZvZsavY0qD9py8iNVZaln355RVaCgF3IptJTJqkyE4xQ9+NOA9gDmvK4DCb9egdK6
+         mHTXbv/pGbQ7fzZChS5NmjekJMIH5y5fHkSq/0q9soiQGwHspLz6Q0a3RRr94YLgrIev
+         IxrlLM/x7N5VEtcyTc2KLtZ3lzA5PJoT3LAl2QOyNi9kkvZY+Q+plozoGv5AhdkSquiW
+         ZQAlWeDoO8WSHpxOQ6cN6BY3C8/wCXQpLulN7aTuo9+WFBZbiGDSUkl7SUKyjJjvMzp8
+         gFog==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=wMGXKYZdB7tyk9ZaU2dARORPS0zv67+5o9ZawXqyk3s=;
-        b=v50YBXS0f33liymGBxcyp/zPf9zyuFZDhMkQslowH/YPmyLm+F91L5LwsLQify/4+H
-         omxS5bp706u0+L3hanA9HVPrK9OikVjPcOPnohJ2tNejlcr2BDmk6I9I2Rm3+LVA+qVD
-         cYklsSA+yzEpQu8bXw7hqKsjjoHgRCYCYZiAdc/zj2HDLwF6TBJs4PNlNBEQUzx/UhM8
-         gnbXBnu7zw2zOkppzW1XJOgVb/Eq/H9FG3CMh+uS6FmiNJ4DQBbTvW6M6WcRmHl+0Tr5
-         tuD5VgwKZME+FQtAXUv5wu9WZFrk7WhCuYTVWE3+x/8eE9And06+0Z1NSSO/sZvAY8DQ
-         fX7Q==
-X-Gm-Message-State: ANoB5pn+4fTJOIjm/zDZSCeMpnUSjCc0OOfjPAfFJAkH4sGaRnW3iSEI
-	3Yff5QqZmmC0w3bwUj4YZOHQWme9s0U=
-X-Google-Smtp-Source: AA0mqf4Q6hs09VW0yL3GEVySPqoYnuHKcxtHbY0h9a+Bm1tHzO8yL/QmMGDTppYf/np1rQOql9hxmA==
-X-Received: by 2002:a05:600c:350c:b0:3c6:c013:9345 with SMTP id h12-20020a05600c350c00b003c6c0139345mr9297209wmq.172.1668461167838;
-        Mon, 14 Nov 2022 13:26:07 -0800 (PST)
-Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
-        by smtp.gmail.com with ESMTPSA id q10-20020adff94a000000b0022cc6b8df5esm10489640wrr.7.2022.11.14.13.26.07
+        bh=Kdi98te820yP7e2c+xgu8akpxrvDchFfSnEJNjkIjPE=;
+        b=VKLvhgnVggpAdvrXFOuCNwCJUJBAl91BJJZ/68X0MJLSzIk3Xz1RyTwoQtdF5uuSYv
+         NKhP84l9c5b43aEjnFc72UfD9tqT3edNj7S3Gh3wbOzPWYBkc3B5dZaXgRYXhvKUAh3C
+         6z48bPo18dZiSfw2vSNyveGP4+7F79HtVUYNeLMqOg2SDJR3qGMcZ17xSisVsBFqiZK2
+         reZ7U5Udl8M+Jok0LjLrV6YfdqKovz23Z1kZloMtNZ9rw+LXvzWTBXCEGJBgVMz6/iVw
+         FY+tk9EI1jAelCK8o0W385YJ/mEBt/FDAGhxoc3VFCtlEOCjAIv0AYXTbviRa6w7yfP3
+         /LwQ==
+X-Gm-Message-State: ANoB5pkr3qp2ARmwoKoomhPQ60n1Gun6CONacexP13UwPWewwEFioaqa
+	6wDdroyrhG9ZwneN8OZLtEqNUe50dr9tug==
+X-Google-Smtp-Source: AA0mqf4/hRXh8uU/hsiz/TOX4tb5lgmcLFOUZmftTDXSfvytT4J88xJg8EmJq5ug6KdiXjMeKLhwrw==
+X-Received: by 2002:adf:e80e:0:b0:22e:3e28:f8de with SMTP id o14-20020adfe80e000000b0022e3e28f8demr10405199wrm.157.1668505456906;
+        Tue, 15 Nov 2022 01:44:16 -0800 (PST)
+Received: from Clement-Blade14.outsight.local (lputeaux-656-1-11-33.w82-127.abo.wanadoo.fr. [82.127.142.33])
+        by smtp.gmail.com with ESMTPSA id 3-20020a05600c024300b003c6b874a0dfsm16999845wmj.14.2022.11.15.01.44.15
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 14 Nov 2022 13:26:07 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+        Tue, 15 Nov 2022 01:44:16 -0800 (PST)
+From: =?UTF-8?q?Cl=C3=A9ment=20P=C3=A9ron?= <peron.clem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Martin Jansa <Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH] nss: fix SRC_URI
-Date: Mon, 14 Nov 2022 22:26:04 +0100
-Message-Id: <20221114212604.3149068-1-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.38.1
+Cc: raj.khem@gmail.com,
+	=?UTF-8?q?Cl=C3=A9ment=20P=C3=A9ron?= <peron.clem@gmail.com>
+Subject: [PATCH] navigation: bump proj to 9.1.0 library
+Date: Tue, 15 Nov 2022 10:44:10 +0100
+Message-Id: <20221115094410.22736-1-peron.clem@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 14 Nov 2022 21:26:18 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99588
+ <openembedded-devel@lists.openembedded.org>; Tue, 15 Nov 2022 09:44:24 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99589
 
-* http://ftp.mozilla.org/pub/mozilla.org now returns 404, but the SRC_URI still works without
-  "mozilla.org" directory
+Proj has moved to CMake build system.
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+Update the recipe and make more PACKAGECONFIG available following
+the ./contrib/oe-stylize.py output.
+
+Signed-off-by: Clément Péron <peron.clem@gmail.com>
 ---
- meta-oe/recipes-support/nss/nss_3.74.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ .../proj/{proj_8.2.1.bb => proj_9.1.0.bb}      | 18 ++++++++----------
+ 1 file changed, 8 insertions(+), 10 deletions(-)
+ rename meta-oe/recipes-navigation/proj/{proj_8.2.1.bb => proj_9.1.0.bb} (50%)
 
-diff --git a/meta-oe/recipes-support/nss/nss_3.74.bb b/meta-oe/recipes-support/nss/nss_3.74.bb
-index 333bbdfef0..591b12a917 100644
---- a/meta-oe/recipes-support/nss/nss_3.74.bb
-+++ b/meta-oe/recipes-support/nss/nss_3.74.bb
-@@ -20,7 +20,7 @@ LIC_FILES_CHKSUM = "file://nss/COPYING;md5=3b1e88e1b9c0b5a4b2881d46cce06a18 \
+diff --git a/meta-oe/recipes-navigation/proj/proj_8.2.1.bb b/meta-oe/recipes-navigation/proj/proj_9.1.0.bb
+similarity index 50%
+rename from meta-oe/recipes-navigation/proj/proj_8.2.1.bb
+rename to meta-oe/recipes-navigation/proj/proj_9.1.0.bb
+index 0c1104926..bc3523ec8 100644
+--- a/meta-oe/recipes-navigation/proj/proj_8.2.1.bb
++++ b/meta-oe/recipes-navigation/proj/proj_9.1.0.bb
+@@ -1,22 +1,20 @@
+ SUMMARY = "PROJ.4 - Cartographic Projections library"
+ HOMEPAGE = "http://trac.osgeo.org/proj/"
+ SECTION = "libs"
+-
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=f27445198ba1500f508fce2b183ce0ff"
++DEPENDS = "sqlite3 sqlite3-native"
  
- VERSION_DIR = "${@d.getVar('BP').upper().replace('-', '_').replace('.', '_') + '_RTM'}"
+ SRC_URI = "http://download.osgeo.org/${BPN}/${BP}.tar.gz"
++SRC_URI[sha256sum] = "81b2239b94cad0886222cde4f53cb49d34905aad2a1317244a0c30a553db2315"
  
--SRC_URI = "http://ftp.mozilla.org/pub/mozilla.org/security/nss/releases/${VERSION_DIR}/src/${BP}.tar.gz \
-+SRC_URI = "http://ftp.mozilla.org/pub/security/nss/releases/${VERSION_DIR}/src/${BP}.tar.gz \
-            file://nss.pc.in \
-            file://0001-nss-fix-support-cross-compiling.patch \
-            file://nss-no-rpath-for-cross-compiling.patch \
+-SRC_URI[sha256sum] = "76ed3d0c3a348a6693dfae535e5658bbfd47f71cb7ff7eb96d9f12f7e068b1cf"
+-
+-DEPENDS = "sqlite3 sqlite3-native tiff"
+-
+-inherit autotools pkgconfig lib_package
+-
+-PACKAGECONFIG ?= "curl"
+-
+-PACKAGECONFIG[curl] = ",--without-curl,curl"
++inherit cmake lib_package
+ 
+ FILES:${PN} += "${datadir}/proj"
+ 
+ BBCLASSEXTEND = "native"
++
++PACKAGECONFIG ?= "curl"
++PACKAGECONFIG[apps] = "-DBUILD_APPS=ON, -DBUILD_APPS=OFF"
++PACKAGECONFIG[curl] = "-DENABLE_CURL=ON,-DENABLE_CURL=OFF,curl"
++PACKAGECONFIG[tiff] = "-DENABLE_TIFF=ON,-DENABLE_TIFF=OFF,tiff"
 -- 
-2.38.1
+2.34.1
 
 
