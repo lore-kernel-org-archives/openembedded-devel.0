@@ -1,412 +1,185 @@
-Return-Path: <hprajapati@mvista.com>
+Return-Path: <Zheng.Qiu@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CACDDC433FE
-	for <webhook@archiver.kernel.org>; Wed, 16 Nov 2022 11:14:23 +0000 (UTC)
-Received: from mail-pl1-f174.google.com (mail-pl1-f174.google.com [209.85.214.174])
- by mx.groups.io with SMTP id smtpd.web11.6031.1668597261985044744
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CFA8CC433FE
+	for <webhook@archiver.kernel.org>; Wed, 16 Nov 2022 21:28:50 +0000 (UTC)
+Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
+ by mx.groups.io with SMTP id smtpd.web10.1387.1668634123361080066
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 16 Nov 2022 03:14:22 -0800
+ Wed, 16 Nov 2022 13:28:43 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@mvista.com header.s=google header.b=JNq2CxQ6;
- spf=pass (domain: mvista.com, ip: 209.85.214.174, mailfrom: hprajapati@mvista.com)
-Received: by mail-pl1-f174.google.com with SMTP id b21so16108282plc.9
-        for <openembedded-devel@lists.openembedded.org>; Wed, 16 Nov 2022 03:14:21 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=mvista.com; s=google;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=Lzgd6dDb2aBNJnqi8iGcf6loFzKrgW4MWorKwnWQxbA=;
-        b=JNq2CxQ6QyUj5qIWSrAHNmKLe+evWKH85KoZSUc9A6pKoFyaic+fO6ow8ey0vNub2p
-         4nDsrfNc075BfkgoWieeZzEp51En+4igcJMtHPzKVB2krueeCmvhkrcmBn1K3sPHj0Vi
-         WXRGg6w6Kv+xGnvSThG2aTahxsdn+y5PhAp68=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=Lzgd6dDb2aBNJnqi8iGcf6loFzKrgW4MWorKwnWQxbA=;
-        b=yxWSHAguWGucZiWLkhs2RZjLySzgaZPN4pXBstMx9urqeAz8W6vo9W4JN1FuyBWOVy
-         rjg+3zUsSTTyV573C0cvCrskSUeElLYXdKJCqtFojQ2ZZRIw2w6NvEmIx1saQWh3rCV7
-         YW4FhY69Fm/UO3FOgUo2TZyWFNEnVlxb4x1gsnyLLcB8cjK+FwABXks15Td0u4WHjtUk
-         whOUI5h8YrDI69JqiEgO0Wt08AxmV9pFbP2I6Ob/WLSvap7QZY+mxD2OqGmST8ttWKp4
-         rHbqRJpjDI1M63K2Wm0vZvj/cL0LS5XQnITiG1ge0gy9fvI4oXOSt383u09nB0tGSZeV
-         tjqQ==
-X-Gm-Message-State: ANoB5pk9vCOF1rvU/Zk7PUa6ocoHOf5vNAcJypMfrHydBsrmSfzuOVau
-	nJ4kbNhBb6sGJdvd9UWJJW+UbmDJ0vb0jw==
-X-Google-Smtp-Source: AA0mqf75irmY+PYSdIOkl3ebcEiTwUAFw8idc0m/7cEP42He9RSukiH53LEwsD3CTl1i66VDf4OS7g==
-X-Received: by 2002:a17:902:e946:b0:17f:66ae:b84 with SMTP id b6-20020a170902e94600b0017f66ae0b84mr8476526pll.32.1668597260993;
-        Wed, 16 Nov 2022 03:14:20 -0800 (PST)
-Received: from MVIN00024 ([150.129.170.236])
-        by smtp.gmail.com with ESMTPSA id pv4-20020a17090b3c8400b00213c7cf21c0sm1306766pjb.5.2022.11.16.03.14.18
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 16 Nov 2022 03:14:20 -0800 (PST)
-Received: by MVIN00024 (sSMTP sendmail emulation); Wed, 16 Nov 2022 16:44:14 +0530
-From: Hitendra Prajapati <hprajapati@mvista.com>
+ dkim=pass header.i=@windriver.com header.s=pps06212021 header.b=aQXDNiEC;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=83194643dc=zheng.qiu@windriver.com)
+Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 2AGCwWh6004501
+	for <openembedded-devel@lists.openembedded.org>; Wed, 16 Nov 2022 13:28:42 -0800
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com; h=from : to : cc :
+ subject : date : message-id : content-transfer-encoding : content-type :
+ mime-version; s=PPS06212021;
+ bh=qWgIWLIjqXCVbwy0qVP3BvP1Ta+nzerDs2QKxIdY1k0=;
+ b=aQXDNiECBVJe4xJicXjC0UgSs7zItk7lCnSmgYIjPjyNJFC67mRUAfaDdaiWPmPufvpD
+ vRUYrFfTVvHk7+zNjMK2h9x+75nnolspN9pFP18hGTF554xWIa3/quTtgkM3lr7m7aeL
+ 7n+UBQDZ8UCRHDfXpu2zvCrbPJM8/Q0zDj4BUVmnD08qntP2aoG3Ls2YvL+PgI3KeJky
+ yRvnFjm6Qj51B6wX8OxPRc6/KMNJTs/gc8ibiaJaPBzAjXXUpXEucQIbbx9bKs1S4U1o
+ 005WaRluGCsHsQ2TFguoi+yh5xJGjEox4KvHfIJ4X1cCS6XLOOr8tppnUlwbduG9AEJj Aw== 
+Received: from nam04-bn8-obe.outbound.protection.outlook.com (mail-bn8nam04lp2045.outbound.protection.outlook.com [104.47.74.45])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3ktbvrbken-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Wed, 16 Nov 2022 13:28:42 -0800
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=diNkRaJ565oYBWVw0yQYAtK1OVOgFA0S0NYEtQ2abOm9h0qj7SAgx8t5bzQkFx5LQmU+klMKNhgUCMEPgqkz9hPqiLz7rBTVj/RAHAn43kNJQOqx6aXlVZoiPkCC5dLCp0jBxotCH5vPWKO8Rvba3KnQ42ZIAQjxu6fC1eAbnah/YnlcYJD8+rSGdLYnmaxFMhFkxR3bexYkdeiWPrUd67VZyejNzK0e2Z8/K/I6PMy/rBncI/OfoFvE7bKqps4NjsaskrvPNV/pOxltxbxFabjwph1FVkgmW0s5wuktWowdhqRPadby8qAWuyNPulcYcwPb5iqvvhggUQdTMRTbKg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=qWgIWLIjqXCVbwy0qVP3BvP1Ta+nzerDs2QKxIdY1k0=;
+ b=jDkWIq6MlaA2RAqzZT/slkFuvgCzgt35a6mxErujPvhy/lr3z7EtZTRTdQrVbWVUm7fbr8pdGgHezl3GPYHunqoyFQKtjxXwt24Er8/IxUT6PoPPI4IE5anUGp61m6bVusXgw2xOg16gGcM9jTNHY45nSENqii9vEjoZWwaWE/rfvRv72CvEzAsXSvX0dYkKxOwnxDo0uU+YknUsW4+j+Xa96SkIz454CrR+GhRxF6Gz66qucfmM0WmyZs0MAvnSR6r0rHuGXokYrlZxo/HvkkaordUWbqD0pZTj+4gbqfmQ6Wss8k1uPGke9ZDRYAH8gMVC7juikhvyZseMsRrGlw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=windriver.com; dmarc=pass action=none
+ header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
+Received: from DM4PR11MB5536.namprd11.prod.outlook.com (2603:10b6:5:39b::15)
+ by SJ0PR11MB4943.namprd11.prod.outlook.com (2603:10b6:a03:2ad::17) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5813.19; Wed, 16 Nov
+ 2022 21:28:39 +0000
+Received: from DM4PR11MB5536.namprd11.prod.outlook.com
+ ([fe80::3f89:e405:8373:8c98]) by DM4PR11MB5536.namprd11.prod.outlook.com
+ ([fe80::3f89:e405:8373:8c98%9]) with mapi id 15.20.5813.019; Wed, 16 Nov 2022
+ 21:28:39 +0000
+From: Zheng Qiu <zheng.qiu@windriver.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Hitendra Prajapati <hprajapati@mvista.com>
-Subject: [kirkstone][PATCH] nginx: CVE-2022-41741, CVE-2022-41742 Memory corruption in the ngx_http_mp4_module
-Date: Wed, 16 Nov 2022 16:44:10 +0530
-Message-Id: <20221116111410.38508-1-hprajapati@mvista.com>
-X-Mailer: git-send-email 2.25.1
-MIME-Version: 1.0
+Cc: zheng.qiu@windriver.com, randy.macleod@windriver.com
+Subject: [kirkstone][PATCH] redis: build with USE_SYSTEMD=yes when systemd is enabled
+Date: Wed, 16 Nov 2022 16:28:24 -0500
+Message-Id: <20221116212824.25421-1-zheng.qiu@windriver.com>
+X-Mailer: git-send-email 2.33.0
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: YQXPR0101CA0029.CANPRD01.PROD.OUTLOOK.COM
+ (2603:10b6:c00:15::42) To DM4PR11MB5536.namprd11.prod.outlook.com
+ (2603:10b6:5:39b::15)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DM4PR11MB5536:EE_|SJ0PR11MB4943:EE_
+X-MS-Office365-Filtering-Correlation-Id: e056a798-bf66-4720-6a5a-08dac81986c5
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 
+	Z3ZycJB0duieJ82zXMD7z9zyj1muxlF+nF9VsCtlwWrRxVmDxD1Tws5QLA/HOehdzk4wUjHC8mcuek0p57PLEqOJaIA4s9tMouG/hT54UqrtiKSRVaykyINKf8uo93zQRRDhWNUUKr75b87h5O/SUWurkk2GmZYekBlPbmvMvMLBRgolJH9zNZ+2U650afS3rMpbLrgOZ1+mAgnkVN5Nnql+1BLkBgZHyeL78y0bmyxblBeBlj61myF09CYAGCovktpo0/9sPWrIpb1d/FU5M1a9MxMH0t66cRh718cLrEwMqLpFpS6KrNXTrul9TQA66kXqnTV4s4EI7/9nJ/WIjqqud5zMO9Q91QNkUItBXgNcAkELflAX41n5xCMu4IQyUJsVhJ8ewY8KmQ0IXmHVfPdT9rgyCYiZ4jJKleGndYkecap+ugYxpDfWOOvfBD/FSmdPO03JWB8CqBfhZdDjRU/YrgFs2m0XINlD36nB43f2ilaH7rv47Pug5WLUntJwzFbtH5TpUXidimlWMXFKyJP3FgUDhrI7dbViNagISyPp87im0yLB0zfCbx9T3zpy3v4HcXor9L/hPu9uf05Bp22M0OB4rmSp51dbU1pPQ/4ug4NVD1JN9cJEsjgwxfT4Dpf9JJi6oGyFUYwwvffKgklrwWmc+BLUDXny581k5ArjPHVwxM815GcKXSpsm0yhrXQdLSLuWW2y2+2BdPrPeGhg6bChCEqDOLGtjbUQnP+f9D/VaDv8IvJT4v4Y2WpsKHVWYmpnCtihxkutSUAEWw==
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM4PR11MB5536.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230022)(4636009)(366004)(376002)(396003)(346002)(136003)(39850400004)(451199015)(8936002)(5660300002)(2906002)(41300700001)(44832011)(316002)(66946007)(36756003)(6666004)(107886003)(6916009)(66476007)(66556008)(478600001)(6486002)(8676002)(4326008)(52116002)(6506007)(1076003)(6512007)(86362001)(26005)(186003)(83380400001)(2616005)(38350700002)(38100700002);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?us-ascii?Q?HeLtmZ9b4Wa0jyZ10yBDJI9nO0OBhaHC2eBIV63KWVVwwNJZNUGedCZWPR3a?=
+ =?us-ascii?Q?e78CSywAJnehwbAaZlf+Ws5B0ThUPeGOp02ubyKjYKBgTk5sv5oJF73qikME?=
+ =?us-ascii?Q?Gerui9AL7Edm2xL2hI/mEZvbtU3mWeBuvTWE2WW2GRHuKVvAhZR6jjkvsqtn?=
+ =?us-ascii?Q?u6TIulcx1sf9nBwTmdToQ0Q5Zze6pYPa66YAhvYS77P6Xyk2vyruFC/yjXAf?=
+ =?us-ascii?Q?ZzdaO0AE8KZ9K7HwPqSYKRXg1OwsU6+tJ4j4T2pzSr7k/pdVaCWWDbqjl/Cd?=
+ =?us-ascii?Q?iQeYJsFrBMdgdOApXDOINWIMIeqJOvsCqaa9kYog0EJcDF6CbfVOsiEU+eS3?=
+ =?us-ascii?Q?9Xd4YaD1qsnQcAuJNzNTwgIujJfiKfrpXMqSTiz7oD8X1QGtkDjxZ1uVvamK?=
+ =?us-ascii?Q?wslGEzY02GeRNlTGhfW/tnj8+7OJoY/gEBkLpe46SmUFTMarUur4EJ3Q0MHc?=
+ =?us-ascii?Q?nr5J8gk1sEQ2FF97vLJ3/MV5tFu1+OV3QtBFdTBfKQb0fsNa6p318nFwlqnE?=
+ =?us-ascii?Q?PGag4LoBDj9KJueKXu5wBpvBiwetl8GgFDyDA2+jTFf4KaAd8V5W6xcR3cpT?=
+ =?us-ascii?Q?VTWeCnPViGITcttKCOCcdOvMQCR/53kMHw07q0VwKUynBrg8XcaUXimpxJmu?=
+ =?us-ascii?Q?ssIpG3HIpCKZjcl3rN9BjSjb316E2YBbA5D0IbWLuJyOEdFhBKzHG7+bQlFV?=
+ =?us-ascii?Q?xSPeQmWhFYXr3l650fj4iDGJ37bLDh7RYlesbVtH4eqxMYWyohqaIJatUE9i?=
+ =?us-ascii?Q?lNSqACuj+dGRCcB6eCiJXfeOEqy9wTNmovjLOC+UJDqjLM6+Rq2uXXrQlrYL?=
+ =?us-ascii?Q?MPyTEcRC0eWzwieJ+YWtZl2JIShrrH3IUZlXikfEs89043gj8KlyMSH0wVmX?=
+ =?us-ascii?Q?gNvqEByECbYZ3sVUffn4/bjLoq0ELZL2MnVrWXxMuJ+J+T5Ho2UI3jz+rxsh?=
+ =?us-ascii?Q?IraCZUpO0J0ypqc0k7TZXLn5dh4ChOAVnp8SoROlRo8BFz/6/V8/W04JQlLv?=
+ =?us-ascii?Q?Z71rWM5t1p/Z1ZM8UWGYTJ0nOwz76jO2MaLD7AoBQKjuUcKlB1CyObLa0Dkq?=
+ =?us-ascii?Q?c7vVIoqXIQ16fLtTAFawvtn3JC86EZbIYz96q9BLlC08P7IkgWUfnpyfrP3T?=
+ =?us-ascii?Q?7RS4V4MZPVZ5pEHD+gMoYOA0RPn8mQ3RKRBTiIBYAk7tkIOahl55vcgTRwLa?=
+ =?us-ascii?Q?jRsB1eQvhJt0iM144LjRSlw4+L9KaQjOizpzcM9fLed0AmvWE1BVhxGpfv6o?=
+ =?us-ascii?Q?TkDKFH17rafhKdALfOxGp9TcjXegaAxcHcQ/MGM+VVhfWtSZ4aabYCfLfLdH?=
+ =?us-ascii?Q?s03d2EEDeidPQTizkwR/P7gPDo1sa9sRFEm9I+WnV9K81STf0SEBTLyP3pFN?=
+ =?us-ascii?Q?egzV8LWrASC5eVmRew4KE1rh6yLZZh9ca6WD+yK2GZXKAyWXGldXtbf59rXx?=
+ =?us-ascii?Q?fd7EJT7TfaAqB8X5DtSTLxrUDgPTQzHtj+8EXsoiDMsovltMlagNKF2uoxLu?=
+ =?us-ascii?Q?WrGQGau5lcwcuYmDdJF82OqrPmwlSEWxBT/DSwpwkQjoGW8ncorrGOeSrk1+?=
+ =?us-ascii?Q?rayK6xrmX2+PVI2IjsAinGKxWZOjQnWixaHInrIxZuqwKqGCr8kOM4MPd92g?=
+ =?us-ascii?Q?NA=3D=3D?=
+X-OriginatorOrg: windriver.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: e056a798-bf66-4720-6a5a-08dac81986c5
+X-MS-Exchange-CrossTenant-AuthSource: DM4PR11MB5536.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Nov 2022 21:28:39.0761
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: kV3bQMuC3LEWgBAQxqB+u03f5owWcMlgSL6Pa4UWe1mqAYrmZ1WOMXWEOPpwsOipG2ymuTYkSd6eHt/ZN7z4/A==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR11MB4943
+X-Proofpoint-ORIG-GUID: YLlwUt_bmDm65kgbKZhyZSyjr0dMkacE
+X-Proofpoint-GUID: YLlwUt_bmDm65kgbKZhyZSyjr0dMkacE
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.219,Aquarius:18.0.895,Hydra:6.0.545,FMLib:17.11.122.1
+ definitions=2022-11-16_03,2022-11-16_01,2022-06-22_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 adultscore=0
+ priorityscore=1501 lowpriorityscore=0 suspectscore=0 mlxscore=0
+ clxscore=1011 spamscore=0 bulkscore=0 malwarescore=0 mlxlogscore=892
+ impostorscore=0 phishscore=0 classifier=spam adjust=0 reason=mlx
+ scancount=1 engine=8.12.0-2210170000 definitions=main-2211160146
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 16 Nov 2022 11:14:23 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99596
+ <openembedded-devel@lists.openembedded.org>; Wed, 16 Nov 2022 21:28:50 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99597
 
-Upstream-Status: Backport from https://github.com/nginx/nginx/commit/6b022a5556af22b6e18532e547a6ae46b0d8c6ea
+Compile redis with full systemd support when the chosen init system is
+systemd.
 
-Signed-off-by: Hitendra Prajapati <hprajapati@mvista.com>
+Enabling systemd supervision allows redis to communicate the actual
+server status (i.e. "Loading dataset", "Waiting for master<->replica
+sync") to systemd, instead of declaring readiness right after
+initializing the server process.
+
+Signed-off-by: Zheng Qiu <zheng.qiu@windriver.com>
 ---
- .../files/CVE-2022-41741-CVE-2022-41742.patch | 319 ++++++++++++++++++
- .../recipes-httpd/nginx/nginx_1.20.1.bb       |   4 +-
- 2 files changed, 322 insertions(+), 1 deletion(-)
- create mode 100644 meta-webserver/recipes-httpd/nginx/files/CVE-2022-41741-CVE-2022-41742.patch
+ meta-oe/recipes-extended/redis/redis-7/redis.service | 1 +
+ meta-oe/recipes-extended/redis/redis_7.0.4.bb        | 8 ++++++--
+ 2 files changed, 7 insertions(+), 2 deletions(-)
 
-diff --git a/meta-webserver/recipes-httpd/nginx/files/CVE-2022-41741-CVE-2022-41742.patch b/meta-webserver/recipes-httpd/nginx/files/CVE-2022-41741-CVE-2022-41742.patch
-new file mode 100644
-index 000000000..d151256b3
---- /dev/null
-+++ b/meta-webserver/recipes-httpd/nginx/files/CVE-2022-41741-CVE-2022-41742.patch
-@@ -0,0 +1,319 @@
-+From 91a3b5302d6a2467df70d3b43450991a53f9946b Mon Sep 17 00:00:00 2001
-+From: Hitendra Prajapati <hprajapati@mvista.com>
-+Date: Wed, 16 Nov 2022 11:24:25 +0530
-+Subject: [PATCH] CVE-2022-41741, CVE-2022-41742
-+
-+Upstream-Status: Backport [https://github.com/nginx/nginx/commit/6b022a5556af22b6e18532e547a6ae46b0d8c6ea]
-+CVE: CVE-2022-41741, CVE-2022-41742
-+Signed-off-by: Hitendra Prajapati <hprajapati@mvista.com>
-+
-+Mp4: disabled duplicate atoms.
-+
-+Most atoms should not appear more than once in a container.  Previously,
-+this was not enforced by the module, which could result in worker process
-+crash, memory corruption and disclosure.
-+---
-+ src/http/modules/ngx_http_mp4_module.c | 147 +++++++++++++++++++++++++
-+ 1 file changed, 147 insertions(+)
-+
-+diff --git a/src/http/modules/ngx_http_mp4_module.c b/src/http/modules/ngx_http_mp4_module.c
-+index 0e93fbd..4f4d89d 100644
-+--- a/src/http/modules/ngx_http_mp4_module.c
-++++ b/src/http/modules/ngx_http_mp4_module.c
-+@@ -1070,6 +1070,12 @@ ngx_http_mp4_read_ftyp_atom(ngx_http_mp4_file_t *mp4, uint64_t atom_data_size)
-+         return NGX_ERROR;
-+     }
-+ 
-++    if (mp4->ftyp_atom.buf) {
-++        ngx_log_error(NGX_LOG_ERR, mp4->file.log, 0,
-++                      "duplicate mp4 ftyp atom in \"%s\"", mp4->file.name.data);
-++        return NGX_ERROR;
-++    }
-++
-+     atom_size = sizeof(ngx_mp4_atom_header_t) + (size_t) atom_data_size;
-+ 
-+     ftyp_atom = ngx_palloc(mp4->request->pool, atom_size);
-+@@ -1128,6 +1134,12 @@ ngx_http_mp4_read_moov_atom(ngx_http_mp4_file_t *mp4, uint64_t atom_data_size)
-+         return NGX_DECLINED;
-+     }
-+ 
-++    if (mp4->moov_atom.buf) {
-++        ngx_log_error(NGX_LOG_ERR, mp4->file.log, 0,
-++                      "duplicate mp4 moov atom in \"%s\"", mp4->file.name.data);
-++        return NGX_ERROR;
-++    }
-++
-+     conf = ngx_http_get_module_loc_conf(mp4->request, ngx_http_mp4_module);
-+ 
-+     if (atom_data_size > mp4->buffer_size) {
-+@@ -1195,6 +1207,12 @@ ngx_http_mp4_read_mdat_atom(ngx_http_mp4_file_t *mp4, uint64_t atom_data_size)
-+ 
-+     ngx_log_debug0(NGX_LOG_DEBUG_HTTP, mp4->file.log, 0, "mp4 mdat atom");
-+ 
-++    if (mp4->mdat_atom.buf) {
-++        ngx_log_error(NGX_LOG_ERR, mp4->file.log, 0,
-++                      "duplicate mp4 mdat atom in \"%s\"", mp4->file.name.data);
-++        return NGX_ERROR;
-++    }
-++
-+     data = &mp4->mdat_data_buf;
-+     data->file = &mp4->file;
-+     data->in_file = 1;
-+@@ -1321,6 +1339,12 @@ ngx_http_mp4_read_mvhd_atom(ngx_http_mp4_file_t *mp4, uint64_t atom_data_size)
-+ 
-+     ngx_log_debug0(NGX_LOG_DEBUG_HTTP, mp4->file.log, 0, "mp4 mvhd atom");
-+ 
-++    if (mp4->mvhd_atom.buf) {
-++        ngx_log_error(NGX_LOG_ERR, mp4->file.log, 0,
-++                      "duplicate mp4 mvhd atom in \"%s\"", mp4->file.name.data);
-++        return NGX_ERROR;
-++    }
-++
-+     atom_header = ngx_mp4_atom_header(mp4);
-+     mvhd_atom = (ngx_mp4_mvhd_atom_t *) atom_header;
-+     mvhd64_atom = (ngx_mp4_mvhd64_atom_t *) atom_header;
-+@@ -1586,6 +1610,13 @@ ngx_http_mp4_read_tkhd_atom(ngx_http_mp4_file_t *mp4, uint64_t atom_data_size)
-+     atom_size = sizeof(ngx_mp4_atom_header_t) + (size_t) atom_data_size;
-+ 
-+     trak = ngx_mp4_last_trak(mp4);
-++
-++    if (trak->out[NGX_HTTP_MP4_TKHD_ATOM].buf) {
-++        ngx_log_error(NGX_LOG_ERR, mp4->file.log, 0,
-++                      "duplicate mp4 tkhd atom in \"%s\"", mp4->file.name.data);
-++        return NGX_ERROR;
-++    }
-++
-+     trak->tkhd_size = atom_size;
-+ 
-+     ngx_mp4_set_32value(tkhd_atom->size, atom_size);
-+@@ -1624,6 +1655,12 @@ ngx_http_mp4_read_mdia_atom(ngx_http_mp4_file_t *mp4, uint64_t atom_data_size)
-+ 
-+     trak = ngx_mp4_last_trak(mp4);
-+ 
-++    if (trak->out[NGX_HTTP_MP4_MDIA_ATOM].buf) {
-++        ngx_log_error(NGX_LOG_ERR, mp4->file.log, 0,
-++                      "duplicate mp4 mdia atom in \"%s\"", mp4->file.name.data);
-++        return NGX_ERROR;
-++    }
-++
-+     atom = &trak->mdia_atom_buf;
-+     atom->temporary = 1;
-+     atom->pos = atom_header;
-+@@ -1747,6 +1784,13 @@ ngx_http_mp4_read_mdhd_atom(ngx_http_mp4_file_t *mp4, uint64_t atom_data_size)
-+     atom_size = sizeof(ngx_mp4_atom_header_t) + (size_t) atom_data_size;
-+ 
-+     trak = ngx_mp4_last_trak(mp4);
-++
-++    if (trak->out[NGX_HTTP_MP4_MDHD_ATOM].buf) {
-++        ngx_log_error(NGX_LOG_ERR, mp4->file.log, 0,
-++                      "duplicate mp4 mdhd atom in \"%s\"", mp4->file.name.data);
-++        return NGX_ERROR;
-++    }
-++
-+     trak->mdhd_size = atom_size;
-+     trak->timescale = timescale;
-+ 
-+@@ -1789,6 +1833,12 @@ ngx_http_mp4_read_hdlr_atom(ngx_http_mp4_file_t *mp4, uint64_t atom_data_size)
-+ 
-+     trak = ngx_mp4_last_trak(mp4);
-+ 
-++    if (trak->out[NGX_HTTP_MP4_HDLR_ATOM].buf) {
-++        ngx_log_error(NGX_LOG_ERR, mp4->file.log, 0,
-++                      "duplicate mp4 hdlr atom in \"%s\"", mp4->file.name.data);
-++        return NGX_ERROR;
-++    }
-++
-+     atom = &trak->hdlr_atom_buf;
-+     atom->temporary = 1;
-+     atom->pos = atom_header;
-+@@ -1817,6 +1867,12 @@ ngx_http_mp4_read_minf_atom(ngx_http_mp4_file_t *mp4, uint64_t atom_data_size)
-+ 
-+     trak = ngx_mp4_last_trak(mp4);
-+ 
-++    if (trak->out[NGX_HTTP_MP4_MINF_ATOM].buf) {
-++        ngx_log_error(NGX_LOG_ERR, mp4->file.log, 0,
-++                      "duplicate mp4 minf atom in \"%s\"", mp4->file.name.data);
-++        return NGX_ERROR;
-++    }
-++
-+     atom = &trak->minf_atom_buf;
-+     atom->temporary = 1;
-+     atom->pos = atom_header;
-+@@ -1860,6 +1916,15 @@ ngx_http_mp4_read_vmhd_atom(ngx_http_mp4_file_t *mp4, uint64_t atom_data_size)
-+ 
-+     trak = ngx_mp4_last_trak(mp4);
-+ 
-++    if (trak->out[NGX_HTTP_MP4_VMHD_ATOM].buf
-++        || trak->out[NGX_HTTP_MP4_SMHD_ATOM].buf)
-++    {
-++        ngx_log_error(NGX_LOG_ERR, mp4->file.log, 0,
-++                      "duplicate mp4 vmhd/smhd atom in \"%s\"",
-++                      mp4->file.name.data);
-++        return NGX_ERROR;
-++    }
-++
-+     atom = &trak->vmhd_atom_buf;
-+     atom->temporary = 1;
-+     atom->pos = atom_header;
-+@@ -1891,6 +1956,15 @@ ngx_http_mp4_read_smhd_atom(ngx_http_mp4_file_t *mp4, uint64_t atom_data_size)
-+ 
-+     trak = ngx_mp4_last_trak(mp4);
-+ 
-++    if (trak->out[NGX_HTTP_MP4_VMHD_ATOM].buf
-++        || trak->out[NGX_HTTP_MP4_SMHD_ATOM].buf)
-++    {
-++        ngx_log_error(NGX_LOG_ERR, mp4->file.log, 0,
-++                      "duplicate mp4 vmhd/smhd atom in \"%s\"",
-++                      mp4->file.name.data);
-++        return NGX_ERROR;
-++    }
-++
-+     atom = &trak->smhd_atom_buf;
-+     atom->temporary = 1;
-+     atom->pos = atom_header;
-+@@ -1922,6 +1996,12 @@ ngx_http_mp4_read_dinf_atom(ngx_http_mp4_file_t *mp4, uint64_t atom_data_size)
-+ 
-+     trak = ngx_mp4_last_trak(mp4);
-+ 
-++    if (trak->out[NGX_HTTP_MP4_DINF_ATOM].buf) {
-++        ngx_log_error(NGX_LOG_ERR, mp4->file.log, 0,
-++                      "duplicate mp4 dinf atom in \"%s\"", mp4->file.name.data);
-++        return NGX_ERROR;
-++    }
-++
-+     atom = &trak->dinf_atom_buf;
-+     atom->temporary = 1;
-+     atom->pos = atom_header;
-+@@ -1950,6 +2030,12 @@ ngx_http_mp4_read_stbl_atom(ngx_http_mp4_file_t *mp4, uint64_t atom_data_size)
-+ 
-+     trak = ngx_mp4_last_trak(mp4);
-+ 
-++    if (trak->out[NGX_HTTP_MP4_STBL_ATOM].buf) {
-++        ngx_log_error(NGX_LOG_ERR, mp4->file.log, 0,
-++                      "duplicate mp4 stbl atom in \"%s\"", mp4->file.name.data);
-++        return NGX_ERROR;
-++    }
-++
-+     atom = &trak->stbl_atom_buf;
-+     atom->temporary = 1;
-+     atom->pos = atom_header;
-+@@ -2018,6 +2104,12 @@ ngx_http_mp4_read_stsd_atom(ngx_http_mp4_file_t *mp4, uint64_t atom_data_size)
-+ 
-+     trak = ngx_mp4_last_trak(mp4);
-+ 
-++    if (trak->out[NGX_HTTP_MP4_STSD_ATOM].buf) {
-++        ngx_log_error(NGX_LOG_ERR, mp4->file.log, 0,
-++                      "duplicate mp4 stsd atom in \"%s\"", mp4->file.name.data);
-++        return NGX_ERROR;
-++    }
-++
-+     atom = &trak->stsd_atom_buf;
-+     atom->temporary = 1;
-+     atom->pos = atom_header;
-+@@ -2086,6 +2178,13 @@ ngx_http_mp4_read_stts_atom(ngx_http_mp4_file_t *mp4, uint64_t atom_data_size)
-+     atom_end = atom_table + entries * sizeof(ngx_mp4_stts_entry_t);
-+ 
-+     trak = ngx_mp4_last_trak(mp4);
-++
-++    if (trak->out[NGX_HTTP_MP4_STTS_ATOM].buf) {
-++        ngx_log_error(NGX_LOG_ERR, mp4->file.log, 0,
-++                      "duplicate mp4 stts atom in \"%s\"", mp4->file.name.data);
-++        return NGX_ERROR;
-++    }
-++
-+     trak->time_to_sample_entries = entries;
-+ 
-+     atom = &trak->stts_atom_buf;
-+@@ -2291,6 +2390,13 @@ ngx_http_mp4_read_stss_atom(ngx_http_mp4_file_t *mp4, uint64_t atom_data_size)
-+                    "sync sample entries:%uD", entries);
-+ 
-+     trak = ngx_mp4_last_trak(mp4);
-++
-++    if (trak->out[NGX_HTTP_MP4_STSS_ATOM].buf) {
-++        ngx_log_error(NGX_LOG_ERR, mp4->file.log, 0,
-++                      "duplicate mp4 stss atom in \"%s\"", mp4->file.name.data);
-++        return NGX_ERROR;
-++    }
-++
-+     trak->sync_samples_entries = entries;
-+ 
-+     atom_table = atom_header + sizeof(ngx_http_mp4_stss_atom_t);
-+@@ -2489,6 +2595,13 @@ ngx_http_mp4_read_ctts_atom(ngx_http_mp4_file_t *mp4, uint64_t atom_data_size)
-+                    "composition offset entries:%uD", entries);
-+ 
-+     trak = ngx_mp4_last_trak(mp4);
-++
-++    if (trak->out[NGX_HTTP_MP4_CTTS_ATOM].buf) {
-++        ngx_log_error(NGX_LOG_ERR, mp4->file.log, 0,
-++                      "duplicate mp4 ctts atom in \"%s\"", mp4->file.name.data);
-++        return NGX_ERROR;
-++    }
-++
-+     trak->composition_offset_entries = entries;
-+ 
-+     atom_table = atom_header + sizeof(ngx_mp4_ctts_atom_t);
-+@@ -2692,6 +2805,13 @@ ngx_http_mp4_read_stsc_atom(ngx_http_mp4_file_t *mp4, uint64_t atom_data_size)
-+     atom_end = atom_table + entries * sizeof(ngx_mp4_stsc_entry_t);
-+ 
-+     trak = ngx_mp4_last_trak(mp4);
-++
-++    if (trak->out[NGX_HTTP_MP4_STSC_ATOM].buf) {
-++        ngx_log_error(NGX_LOG_ERR, mp4->file.log, 0,
-++                      "duplicate mp4 stsc atom in \"%s\"", mp4->file.name.data);
-++        return NGX_ERROR;
-++    }
-++
-+     trak->sample_to_chunk_entries = entries;
-+ 
-+     atom = &trak->stsc_atom_buf;
-+@@ -3024,6 +3144,13 @@ ngx_http_mp4_read_stsz_atom(ngx_http_mp4_file_t *mp4, uint64_t atom_data_size)
-+                    "sample uniform size:%uD, entries:%uD", size, entries);
-+ 
-+     trak = ngx_mp4_last_trak(mp4);
-++
-++    if (trak->out[NGX_HTTP_MP4_STSZ_ATOM].buf) {
-++        ngx_log_error(NGX_LOG_ERR, mp4->file.log, 0,
-++                      "duplicate mp4 stsz atom in \"%s\"", mp4->file.name.data);
-++        return NGX_ERROR;
-++    }
-++
-+     trak->sample_sizes_entries = entries;
-+ 
-+     atom_table = atom_header + sizeof(ngx_mp4_stsz_atom_t);
-+@@ -3207,6 +3334,16 @@ ngx_http_mp4_read_stco_atom(ngx_http_mp4_file_t *mp4, uint64_t atom_data_size)
-+     atom_end = atom_table + entries * sizeof(uint32_t);
-+ 
-+     trak = ngx_mp4_last_trak(mp4);
-++
-++    if (trak->out[NGX_HTTP_MP4_STCO_ATOM].buf
-++        || trak->out[NGX_HTTP_MP4_CO64_ATOM].buf)
-++    {
-++        ngx_log_error(NGX_LOG_ERR, mp4->file.log, 0,
-++                      "duplicate mp4 stco/co64 atom in \"%s\"",
-++                      mp4->file.name.data);
-++        return NGX_ERROR;
-++    }
-++
-+     trak->chunks = entries;
-+ 
-+     atom = &trak->stco_atom_buf;
-+@@ -3413,6 +3550,16 @@ ngx_http_mp4_read_co64_atom(ngx_http_mp4_file_t *mp4, uint64_t atom_data_size)
-+     atom_end = atom_table + entries * sizeof(uint64_t);
-+ 
-+     trak = ngx_mp4_last_trak(mp4);
-++
-++    if (trak->out[NGX_HTTP_MP4_STCO_ATOM].buf
-++        || trak->out[NGX_HTTP_MP4_CO64_ATOM].buf)
-++    {
-++        ngx_log_error(NGX_LOG_ERR, mp4->file.log, 0,
-++                      "duplicate mp4 stco/co64 atom in \"%s\"",
-++                      mp4->file.name.data);
-++        return NGX_ERROR;
-++    }
-++
-+     trak->chunks = entries;
-+ 
-+     atom = &trak->co64_atom_buf;
-+-- 
-+2.25.1
-+
-diff --git a/meta-webserver/recipes-httpd/nginx/nginx_1.20.1.bb b/meta-webserver/recipes-httpd/nginx/nginx_1.20.1.bb
-index d686c627f..09a1b4559 100644
---- a/meta-webserver/recipes-httpd/nginx/nginx_1.20.1.bb
-+++ b/meta-webserver/recipes-httpd/nginx/nginx_1.20.1.bb
-@@ -1,6 +1,8 @@
- require nginx.inc
+diff --git a/meta-oe/recipes-extended/redis/redis-7/redis.service b/meta-oe/recipes-extended/redis/redis-7/redis.service
+index 36d29852d..a52204cc7 100644
+--- a/meta-oe/recipes-extended/redis/redis-7/redis.service
++++ b/meta-oe/recipes-extended/redis/redis-7/redis.service
+@@ -9,6 +9,7 @@ ExecStart=/usr/bin/redis-server /etc/redis/redis.conf
+ ExecStop=/usr/bin/redis-cli shutdown
+ Restart=always
+ LimitNOFILE=10032
++Type=notify
  
--SRC_URI += "file://CVE-2021-3618.patch"
-+SRC_URI += "file://CVE-2021-3618.patch \
-+            file://CVE-2022-41741-CVE-2022-41742.patch \
-+           "
+ [Install]
+ WantedBy=multi-user.target
+diff --git a/meta-oe/recipes-extended/redis/redis_7.0.4.bb b/meta-oe/recipes-extended/redis/redis_7.0.4.bb
+index 993ff34b1..6eb657376 100644
+--- a/meta-oe/recipes-extended/redis/redis_7.0.4.bb
++++ b/meta-oe/recipes-extended/redis/redis_7.0.4.bb
+@@ -35,7 +35,10 @@ USERADD_PACKAGES = "${PN}"
+ USERADD_PARAM:${PN}  = "--system --home-dir /var/lib/redis -g redis --shell /bin/false redis"
+ GROUPADD_PARAM:${PN} = "--system redis"
  
- LIC_FILES_CHKSUM = "file://LICENSE;md5=206629dc7c7b3e87acb31162363ae505"
+-REDIS_ON_SYSTEMD = "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}"
++PACKAGECONFIG = "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
++PACKAGECONFIG[systemd] = "USE_SYSTEMD=yes,USE_SYSTEMD=no,systemd"
++
++EXTRA_OEMAKE += "${PACKAGECONFIG_CONFARGS}"
+ 
+ do_compile:prepend() {
+     (cd deps && oe_runmake hiredis lua linenoise)
+@@ -55,8 +58,9 @@ do_install() {
+     install -m 0644 ${WORKDIR}/redis.service ${D}${systemd_system_unitdir}
+     sed -i 's!/usr/sbin/!${sbindir}/!g' ${D}${systemd_system_unitdir}/redis.service
+ 
+-    if [ "${REDIS_ON_SYSTEMD}" = true ]; then
++    if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
+         sed -i 's!daemonize yes!# daemonize yes!' ${D}/${sysconfdir}/redis/redis.conf
++        sed -i 's!supervised no!supervised systemd!' ${D}/${sysconfdir}/redis/redis.conf
+     fi
+ }
  
 -- 
-2.25.1
+2.33.0
 
 
