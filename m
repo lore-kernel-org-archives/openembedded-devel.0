@@ -2,132 +2,114 @@ Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1C2C0C4332F
-	for <webhook@archiver.kernel.org>; Thu, 17 Nov 2022 14:42:04 +0000 (UTC)
-Received: from mail-oo1-f49.google.com (mail-oo1-f49.google.com [209.85.161.49])
- by mx.groups.io with SMTP id smtpd.web10.17175.1668696118813014655
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 28E3DC4332F
+	for <webhook@archiver.kernel.org>; Thu, 17 Nov 2022 14:44:14 +0000 (UTC)
+Received: from mail-oa1-f52.google.com (mail-oa1-f52.google.com [209.85.160.52])
+ by mx.groups.io with SMTP id smtpd.web11.17394.1668696243931864042
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 17 Nov 2022 06:41:58 -0800
+ Thu, 17 Nov 2022 06:44:04 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=RjbDy1AF;
- spf=pass (domain: gmail.com, ip: 209.85.161.49, mailfrom: akuster808@gmail.com)
-Received: by mail-oo1-f49.google.com with SMTP id v7-20020a4aa507000000b00496e843fdfeso317444ook.7
-        for <openembedded-devel@lists.openembedded.org>; Thu, 17 Nov 2022 06:41:58 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=ppTEkxdr;
+ spf=pass (domain: gmail.com, ip: 209.85.160.52, mailfrom: akuster808@gmail.com)
+Received: by mail-oa1-f52.google.com with SMTP id 586e51a60fabf-12c8312131fso2375288fac.4
+        for <openembedded-devel@lists.openembedded.org>; Thu, 17 Nov 2022 06:44:03 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=content-transfer-encoding:in-reply-to:from:references:cc:to
          :content-language:subject:user-agent:mime-version:date:message-id
          :from:to:cc:subject:date:message-id:reply-to;
-        bh=ljSyDavJov9UyWYmlnjrETtnk9CGcK70M9ik9dIfBsI=;
-        b=RjbDy1AFHFqLE57zEIN9HCcPrEsv9Pd2fCDx8tS0X0eDplu5rpYlDs0NUlqKJyVCVF
-         eTyv+5dqOh2UV57W8w/BXORgUwsBvSYLgXdyM0vYC3BXhaH6znduDAvdfNyuZIPV/CxG
-         Xa1SKEvRb0GawYHOykYVPLqRHtepe7iWZDpw/ZXDh3zf6JerJ7GRs4hY2NR/Hklb0PrA
-         LqdBnTh5OMlotUs8IXQg4LnI/M8nghibtS1lhzU7jj6EkWJnNXn6/8P9jGGZtMzqF3pl
-         QFVF8/AnYalsl/vF//d5Z6JbsEt0WIh5oLcR7gVlNQ9mOYMVITx2pmAmSLRn2lj3DB+K
-         f0/g==
+        bh=oa+EYCIbX1ds+/g6zRn6tV++ugFZTB9TXt3xJ86UxVo=;
+        b=ppTEkxdrkWy3hr+N8iV+IKvuQ7O7IMprc9THGzADWxkSMRJuDK2+qJMhgzJujhvxUO
+         yVAI6tYn4zasABba3BkQHeeiSjau5aaC6sNDdcYEhjDpGRPm8zOxsRYfJWTL6hiKTpZo
+         RkQINgMT6AJWI+D6WaLeWkHSnOKkmavAhOr5NIKsCK//2WQYR7XmOKMU2wEb1qdRCUsT
+         bMsJ3EstdFkZZnwi8Hy8JgEGDod2FaprUL/FtbNSP0cNtv3ZIwNmX70SYjLlQ+VkI9Y2
+         xbKc9yEIJKa15YR90Eqs+EwSBSec4bpzAkBRfvi5k41zUcHutaH2765aN+zHbJZt/EPn
+         0s3w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=content-transfer-encoding:in-reply-to:from:references:cc:to
          :content-language:subject:user-agent:mime-version:date:message-id
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=ljSyDavJov9UyWYmlnjrETtnk9CGcK70M9ik9dIfBsI=;
-        b=02XI8zc0YLIMOexyNTAf6n9OQI0u68NXovW7D0QwX5nE8YXFjW/1yraLpUOG0poRZL
-         c17DXHpRbYd/4Cx5XE/hEfC5LTSsBDFCVR1D6X3oRnb8VIpxAbA3TFNve/5JgxdeTtuw
-         Jkv5W0FqKb4HBQBTY0GZ0b4dKU7CMAx15aiycQ6XkvXnliwCEtPi14zmTbwza/IoW57+
-         fw2PhY0wiVojq6NU9AL5WfhrmeDSGgYuTjk8DBQ3feiUAat2n0oYAOaT6jopMXpmZCp4
-         hDYcXbSjzkYLwnqMueMpPyyvpMRAJdYWjafPy0wqiufn7asVTgzFJqgrnMvFOWu51XZc
-         59Gw==
-X-Gm-Message-State: ANoB5pns3glGn6Mg5i9a4s/i1xrg9csdGWn4S86Ks5oc8B+zhbr8I4qN
-	QdeMMat98gpb2v3Y8e/rDH4=
-X-Google-Smtp-Source: AA0mqf6IfWBp48G3KBhzqQMS8yiTYoxt2DyrYY+QbvXAeNAzEXjlrhcFtJnVmNuq52WI7s6sS4jjZA==
-X-Received: by 2002:a4a:d64d:0:b0:49e:e5dd:9ac8 with SMTP id y13-20020a4ad64d000000b0049ee5dd9ac8mr1418470oos.43.1668696118047;
-        Thu, 17 Nov 2022 06:41:58 -0800 (PST)
+        bh=oa+EYCIbX1ds+/g6zRn6tV++ugFZTB9TXt3xJ86UxVo=;
+        b=hITX5E+GSjoOl0mRMP30ynwyZzBMqXhjQlvBWXZ1198P6KacheQpjyiiGjju9FYMZ3
+         IY4BFT9Vps/3M4jntYds9zk8oqpkZhnR1eEWLPmy4pEDXeVxZHRvmzya991uoGldd8xI
+         RL7wSxxghrIFOCNnmGAbz6CrQRjSeGSdcfEm2y+D+p/5uujDd+naW+fAYaL6FXCHuog5
+         mBHNSSfPV+2ttvYhY38CIebYdzkpghY7GHmZXRIo5R9+gvdVTyAOtXqfLMgOp1ieJuri
+         HnOa0VAcjDb00f872r3XxGesnDaR2NNynB8MR1IAJ5PmGGQ2r1CWiahGYmWLapf0AWSa
+         YFfw==
+X-Gm-Message-State: ANoB5pkbWrxbu0a2mc1Qr3jcGYq9XIbFIxC14RDosiW1zObpLgNnpysX
+	swed4chjqSUeKo6mikFnFXA=
+X-Google-Smtp-Source: AA0mqf6vW6hD98s8argewWYepV9Tsa+Z6e3ubQYJj9yzItbtZLkylmc4mfi2Tpr6mpbLJMxY5yuuZg==
+X-Received: by 2002:a05:6870:3c10:b0:13c:ac50:ff72 with SMTP id gk16-20020a0568703c1000b0013cac50ff72mr4499868oab.164.1668696243301;
+        Thu, 17 Nov 2022 06:44:03 -0800 (PST)
 Received: from ?IPV6:2600:1700:9190:ba10:f729:3f6d:92d:73af? ([2600:1700:9190:ba10:f729:3f6d:92d:73af])
-        by smtp.gmail.com with ESMTPSA id r23-20020a4acb17000000b0047f72b6988fsm356347ooq.45.2022.11.17.06.41.57
+        by smtp.gmail.com with ESMTPSA id k65-20020acaba44000000b0035aa617156bsm372955oif.17.2022.11.17.06.44.02
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 17 Nov 2022 06:41:57 -0800 (PST)
-Message-ID: <a513c661-7b83-c16d-6824-1060981979cc@gmail.com>
-Date: Thu, 17 Nov 2022 09:41:56 -0500
+        Thu, 17 Nov 2022 06:44:02 -0800 (PST)
+Message-ID: <9d34f83a-c684-08ac-cead-9e3ed1b659c6@gmail.com>
+Date: Thu, 17 Nov 2022 09:44:01 -0500
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.4.2
-Subject: Re: [oe][meta-oe][dunfell][PATCH] flatbuffers: adapt for
- cross-compilation environments
+Subject: Re: [oe][meta-filesystems][dunfell][PATCH] ntfs-3g-ntfsprogs: Upgrade
+ 2022.5.17 to 2022.10.3
 Content-Language: en-US
-To: BINDU <bindudaniel1996@gmail.com>,
- openembedded-devel@lists.openembedded.org
-Cc: Ivan.Stepic@bmw.de, nisha.m.parrakat@bmw.de,
- Bhabu Bindu <bhabu.bindu@kpit.com>
-References: <20221117115119.11222-1-bindudaniel1996@gmail.com>
+To: omkar <omkarpatil10.93@gmail.com>,
+ openembedded-devel@lists.openembedded.org, omkar.patil@kpit.com
+Cc: ranjitsinh.rathod@kpit.com
+References: <20221117082359.19378-1-omkarpatil10.93@gmail.com>
 From: akuster808 <akuster808@gmail.com>
-In-Reply-To: <20221117115119.11222-1-bindudaniel1996@gmail.com>
+In-Reply-To: <20221117082359.19378-1-omkarpatil10.93@gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 17 Nov 2022 14:42:04 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99608
+ <openembedded-devel@lists.openembedded.org>; Thu, 17 Nov 2022 14:44:14 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99609
 
 
 
-On 11/17/22 6:51 AM, BINDU wrote:
-> From: Ivan Stepic <Ivan.Stepic@bmw.de>
+On 11/17/22 3:23 AM, omkar wrote:
+> From: Omkar Patil <omkar.patil@kpit.com>
 >
-> Flatbuffers contains a library and a schema compiler. The package
-> contains cmake files to discover the libraries and the compiler tool.
-> Currently, all of these cmake files are installed into the target
-> sysroot. However, the compiler utility isn't installed into the sysroot
-> (as it is not runnable on the build machine).
+> Changes:
+> Rejected zero-sized runs
+> Avoided merging runlists with no runs
 >
-> When an application that depends on flatbuffers gets built, it uses
-> flatbuffers' exported cmake targets to configure the project. One of the
-> exported targets is FlatcTarget.cmake which expects to see flatc binary
-> in /usr/bin of the sysroot. Since binaries for target don't end up in
-> target sysroot, cmake configuration fails.
->
-> This patch addresses this problem of flatbuffers' build infrastructure
-> in cross-compiling environments. By removing FlatcTarget.cmake for
-> target builds from the sysroot we essentially skip this step of
-> flatbuffers' configuration.
+> Fix CVE-2022-40284
 
-Are any of the other branches affected by this issue?
-- armin
+Won't this affect langdale and Kirkstone too?
+
+-armin
 >
-> Signed-off-by: Ivan Stepic <Ivan.Stepic@bmw.de>
-> Signed-off-by: Bhabu Bindu <bhabu.bindu@kpit.com>
+> Signed-off-by: Omkar Patil <omkarpatil10.93@gmail.com>
 > ---
->   meta-oe/recipes-devtools/flatbuffers/flatbuffers_1.12.0.bb | 7 ++++++-
->   1 file changed, 6 insertions(+), 1 deletion(-)
+>   ...3g-ntfsprogs_2022.5.17.bb => ntfs-3g-ntfsprogs_2022.10.3.bb} | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
+>   rename meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/{ntfs-3g-ntfsprogs_2022.5.17.bb => ntfs-3g-ntfsprogs_2022.10.3.bb} (95%)
 >
-> diff --git a/meta-oe/recipes-devtools/flatbuffers/flatbuffers_1.12.0.bb b/meta-oe/recipes-devtools/flatbuffers/flatbuffers_1.12.0.bb
-> index 859d6a0b0..c4f3594f3 100644
-> --- a/meta-oe/recipes-devtools/flatbuffers/flatbuffers_1.12.0.bb
-> +++ b/meta-oe/recipes-devtools/flatbuffers/flatbuffers_1.12.0.bb
-> @@ -24,12 +24,17 @@ BUILD_CXXFLAGS += "-std=c++11 -fPIC"
->   # BUILD_TYPE=Release is required, otherwise flatc is not installed
->   EXTRA_OECMAKE += "\
->       -DCMAKE_BUILD_TYPE=Release \
-> -    -DFLATBUFFERS_BUILD_TESTS=OFF \
-> +    -DFLATBUFFERS_BUILD_TESTS=OFF \
->       -DFLATBUFFERS_BUILD_SHAREDLIB=ON \
+> diff --git a/meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/ntfs-3g-ntfsprogs_2022.5.17.bb b/meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/ntfs-3g-ntfsprogs_2022.10.3.bb
+> similarity index 95%
+> rename from meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/ntfs-3g-ntfsprogs_2022.5.17.bb
+> rename to meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/ntfs-3g-ntfsprogs_2022.10.3.bb
+> index cb52c5567..efb331d7b 100644
+> --- a/meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/ntfs-3g-ntfsprogs_2022.5.17.bb
+> +++ b/meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/ntfs-3g-ntfsprogs_2022.10.3.bb
+> @@ -10,7 +10,7 @@ SRC_URI = "http://tuxera.com/opensource/ntfs-3g_ntfsprogs-${PV}.tgz \
+>              file://0001-libntfs-3g-Makefile.am-fix-install-failed-while-host.patch \
 >   "
+>   S = "${WORKDIR}/ntfs-3g_ntfsprogs-${PV}"
+> -SRC_URI[sha256sum] = "0489fbb6972581e1b417ab578d543f6ae522e7fa648c3c9b49c789510fd5eb93"
+> +SRC_URI[sha256sum] = "f20e36ee68074b845e3629e6bced4706ad053804cbaf062fbae60738f854170c"
 >   
->   inherit cmake
->   
-> +rm_flatc_cmaketarget_for_target() {
-> +    rm -f "${SYSROOT_DESTDIR}/${libdir}/cmake/flatbuffers/FlatcTargets.cmake"
-> +}
-> +SYSROOT_PREPROCESS_FUNCS:class-target += "rm_flatc_cmaketarget_for_target"
-> +
->   S = "${WORKDIR}/git"
->   
->   FILES_${PN}-compiler = "${bindir}"
+>   UPSTREAM_CHECK_URI = "https://www.tuxera.com/community/open-source-ntfs-3g/"
+>   UPSTREAM_CHECK_REGEX = "ntfs-3g_ntfsprogs-(?P<pver>\d+(\.\d+)+)\.tgz"
 >
 > -=-=-=-=-=-=-=-=-=-=-=-
 > Links: You receive all messages sent to this group.
-> View/Reply Online (#99604): https://lists.openembedded.org/g/openembedded-devel/message/99604
-> Mute This Topic: https://lists.openembedded.org/mt/95087923/3616698
+> View/Reply Online (#99602): https://lists.openembedded.org/g/openembedded-devel/message/99602
+> Mute This Topic: https://lists.openembedded.org/mt/95086139/3616698
 > Group Owner: openembedded-devel+owner@lists.openembedded.org
 > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [akuster808@gmail.com]
 > -=-=-=-=-=-=-=-=-=-=-=-
