@@ -2,74 +2,72 @@ Return-Path: <ticotimo@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2DAB0C433FE
-	for <webhook@archiver.kernel.org>; Fri, 18 Nov 2022 20:13:51 +0000 (UTC)
-Received: from mail-pj1-f50.google.com (mail-pj1-f50.google.com [209.85.216.50])
- by mx.groups.io with SMTP id smtpd.web10.4061.1668802422930672156
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4FD2FC4332F
+	for <webhook@archiver.kernel.org>; Fri, 18 Nov 2022 20:18:11 +0000 (UTC)
+Received: from mail-pj1-f47.google.com (mail-pj1-f47.google.com [209.85.216.47])
+ by mx.groups.io with SMTP id smtpd.web10.4191.1668802690378592847
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 18 Nov 2022 12:13:42 -0800
+ Fri, 18 Nov 2022 12:18:10 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=TSJZxYK1;
- spf=pass (domain: gmail.com, ip: 209.85.216.50, mailfrom: ticotimo@gmail.com)
-Received: by mail-pj1-f50.google.com with SMTP id w3-20020a17090a460300b00218524e8877so7661823pjg.1
-        for <openembedded-devel@lists.openembedded.org>; Fri, 18 Nov 2022 12:13:42 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=Zd+kDN6y;
+ spf=pass (domain: gmail.com, ip: 209.85.216.47, mailfrom: ticotimo@gmail.com)
+Received: by mail-pj1-f47.google.com with SMTP id v4-20020a17090a088400b00212cb0ed97eso6068246pjc.5
+        for <openembedded-devel@lists.openembedded.org>; Fri, 18 Nov 2022 12:18:10 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=p1f2kaVnotp3n0q3TEQ7XV4UaID8rqRZipdajok1MXw=;
-        b=TSJZxYK1gPkahGjCaPCqYbEnOOCQXcar43l0R7qOwIOQ6Q4I6rKmJ3GA3nKyvp+quw
-         AI1vNs6UBax8del8+trM93B7ZITF9L0fQFLLqgaBWKmlpbh1jMINvb/v/a4ijdpdmBo+
-         KMZp6KT5vtWZZsxNuMD27RBspB6hExNAPD+J0v3Q7Ui57j/Lbk5uI+tfHiIOB3d/ljk3
-         Z9t3+8cmPV4T4eyhlzDx2lR7Y3Pmetf4HycVYHNCL5VlxGN+Kt8auPOWNQg8utvDabrR
-         /TW82aWC+YbV3TL8pzTMN2qMLrs0Kc5ikbaCqjfXIyTUa4pTdB4OZDJEC/3Xxp0feVG+
-         lMqQ==
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=JTqU1iJRjqwi9s19UHTGSgLtcAOUd8jIfDf2UIkRQiQ=;
+        b=Zd+kDN6yu6vWmVIuuIrFsYds435bS2GDgbeiadqv5xchC+JfPJHR9SSi56lcaVW/7B
+         Yxnv0IbMOWSiMM93n7OGlz1cTO+9f9lyeGap0r8x2iVqz+Hgfhu6K/OZXB8iE6qxlImR
+         OqTydXHwBAdnbGi/UvTE+Jwo+3VxuNLUWydLMe+4iLnf+e+/hO46rQvStmn8EdNRh631
+         5pGbVAnvtf/gaRhNHPi8rps/vH+W4yKELiVjWNlDU9OXnDEuheR821duqhZdWwXiKoqG
+         PXoBAVIj5DcmJg3hq/VwugJ5vnkq98uvVniFS0slK1EfbRMSvKQrPTbDZQiHqYU479TO
+         yTdQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=p1f2kaVnotp3n0q3TEQ7XV4UaID8rqRZipdajok1MXw=;
-        b=wWoMXI2nwHfYiLDIyuTA1O57rJP5+eeEc9Kkc8Uy13gA4APlrmkTFEryK3VMBL/LC/
-         +orDkrUtLpHCr+puvz4njqQOgEAv+Co+h8BSAhYxxdKVyJmG9l7Vl2nN5yb+DH3aL0zE
-         acjINZX88Cb+JDGKe6sKfH+rkL+WfkvwnV8b3+TBGp/Aqus/u+sZE8Taav9QlfLdYjLi
-         FbM6Zq8tn5LAOUTIw4DdCwx0XOQGHaONs6nCnvDhXPwDf38AXYfsA5cAkr7+vp5OPq4Q
-         Ak6WoK4sg7weuv0usplPPoHYW6p0aGAcRXLVq4tLBAFqYBw0ofTJ32CL9DjRlaQh/ILj
-         Ikcw==
-X-Gm-Message-State: ANoB5plhRcb/NqkKPDnbaGA6u0sF1kiFEjMkv+Wj2gbsJ4sie7oWd/m0
-	3t3Ok1MVV87sIVX8lP8OeneGEqdZlLLCTg==
-X-Google-Smtp-Source: AA0mqf5IkFmu+e5owXiFCYTIu910AzeH5xEpALEWlxw836mwPQICFLMDTOCLGbAWeToz+VNquDDHgg==
-X-Received: by 2002:a17:902:d58d:b0:186:8af2:8bc8 with SMTP id k13-20020a170902d58d00b001868af28bc8mr951313plh.146.1668802421739;
-        Fri, 18 Nov 2022 12:13:41 -0800 (PST)
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=JTqU1iJRjqwi9s19UHTGSgLtcAOUd8jIfDf2UIkRQiQ=;
+        b=7ob1xSykXDKBp+KSHX1fCUcyWle2yAhZgM20dCmuKYjQ5QXqtlAHUomVnm27oxmJQf
+         Ao65j0rM/YOP/vTEQSUP+G4SbvtnrCpRh4qikrFGk2tAgNKMEgKei7iXFnf2URkFsGT7
+         OwSebu1oXDNwidKOvuO7MMeirykHNqjnyUwZZ3zsHQmOJsp1/ja9SarF2XJ9dIZg8iM1
+         iojmdLK/M+xRQDv7b9I+NeSw8qwFnJZ9H0C0gDgbM0UrbzR2zU2PHS/wHt1FZIlVwHVk
+         psg8NxKokmgDYU5kg7szo/+2cxcjdhpYCsumRXsPLyMbRc7IEPc1DQA4j/sPKlff1ImI
+         Js0A==
+X-Gm-Message-State: ANoB5pmEA+A6RwzH80JRt2LZAJlDhMQgkRL7UqMI49rW6QE0GtMV4fzH
+	p4amzbNm3sanek+mwWWGCS6XUcd7Pi4Jrw==
+X-Google-Smtp-Source: AA0mqf65zAhrDbxcrqpT1H6rBYhFIZf9gTqt2rC7pNpdp864gjMikuBX5Po7324bnHaF+N9pqwDN4w==
+X-Received: by 2002:a17:902:ab8b:b0:176:7852:dae3 with SMTP id f11-20020a170902ab8b00b001767852dae3mr1191441plr.25.1668802689403;
+        Fri, 18 Nov 2022 12:18:09 -0800 (PST)
 Received: from nereus.hsd1.or.comcast.net ([2601:1c0:ca00:cea0:b88b:808f:8d53:97bd])
-        by smtp.gmail.com with ESMTPSA id b7-20020a170902d50700b001869efb722csm4132722plg.215.2022.11.18.12.13.40
-        for <openembedded-devel@lists.openembedded.org>
+        by smtp.gmail.com with ESMTPSA id b8-20020a170902bd4800b00188fc33e96dsm2538626plx.198.2022.11.18.12.18.08
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 18 Nov 2022 12:13:41 -0800 (PST)
+        Fri, 18 Nov 2022 12:18:08 -0800 (PST)
 From: Tim Orling <ticotimo@gmail.com>
 X-Google-Original-From: Tim Orling <tim.orling@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-perl][PATCH 3/3] libtest-warnings-perl: move to oe-core
-Date: Fri, 18 Nov 2022 12:13:24 -0800
-Message-Id: <470ba5f51c06b7ae8edc4e541b9f86dbe2d924e7.1668802119.git.tim.orling@konsulko.com>
+Cc: Tim Orling <tim.orling@konsulko.com>
+Subject: [meta-perl][PATCH v2] libtest-warnings-perl: move to oe-core
+Date: Fri, 18 Nov 2022 12:17:54 -0800
+Message-Id: <20221118201754.3640374-1-tim.orling@konsulko.com>
 X-Mailer: git-send-email 2.30.2
-In-Reply-To: <cover.1668802119.git.tim.orling@konsulko.com>
-References: <cover.1668802119.git.tim.orling@konsulko.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 18 Nov 2022 20:13:51 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99620
+ <openembedded-devel@lists.openembedded.org>; Fri, 18 Nov 2022 20:18:11 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99621
 
 This is now a dependency for liburi-perl-ptest.
 
 Signed-off-by: Tim Orling <tim.orling@konsulko.com>
 ---
  .../libtest/libtest-warnings-perl_0.031.bb    | 28 -------------------
- 1 file changed, 28 deletions(-)
+ .../packagegroups/packagegroup-meta-perl.bb   |  1 -
+ 2 files changed, 29 deletions(-)
  delete mode 100644 meta-perl/recipes-perl/libtest/libtest-warnings-perl_0.031.bb
 
 diff --git a/meta-perl/recipes-perl/libtest/libtest-warnings-perl_0.031.bb b/meta-perl/recipes-perl/libtest/libtest-warnings-perl_0.031.bb
@@ -106,6 +104,18 @@ index d1c0d95fd3..0000000000
 -inherit cpan ptest-perl
 -
 -BBCLASSEXTEND = "native nativesdk"
+diff --git a/meta-perl/recipes-perl/packagegroups/packagegroup-meta-perl.bb b/meta-perl/recipes-perl/packagegroups/packagegroup-meta-perl.bb
+index e4e50957f1..187424b449 100644
+--- a/meta-perl/recipes-perl/packagegroups/packagegroup-meta-perl.bb
++++ b/meta-perl/recipes-perl/packagegroups/packagegroup-meta-perl.bb
+@@ -78,7 +78,6 @@ RDEPENDS:packagegroup-meta-perl = "\
+     libtest-harness-perl \
+     libtest-nowarnings-perl \
+     libtest-warn-perl \
+-    libtest-warnings-perl \
+     libunicode-linebreak-perl \
+     po4a \
+ "
 -- 
 2.30.2
 
