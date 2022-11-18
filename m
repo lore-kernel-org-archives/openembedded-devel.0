@@ -2,66 +2,66 @@ Return-Path: <archana.polampalli@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A0C37C4332F
-	for <webhook@archiver.kernel.org>; Fri, 18 Nov 2022 18:25:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B4AE2C4332F
+	for <webhook@archiver.kernel.org>; Fri, 18 Nov 2022 18:27:30 +0000 (UTC)
 Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
- by mx.groups.io with SMTP id smtpd.web11.976.1668795936173514485
+ by mx.groups.io with SMTP id smtpd.web11.1017.1668796047226863184
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 18 Nov 2022 10:25:36 -0800
+ Fri, 18 Nov 2022 10:27:27 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="body hash did not verify" header.i=@windriver.com header.s=pps06212021 header.b=UzKukVZb;
+ dkim=fail reason="body hash did not verify" header.i=@windriver.com header.s=pps06212021 header.b=dwCLCm+q;
  spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=832165193f=archana.polampalli@windriver.com)
 Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 2AIFimoE003073
-	for <openembedded-devel@lists.openembedded.org>; Fri, 18 Nov 2022 18:25:35 GMT
+	by mx0a-0064b401.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 2AIFheUG001212
+	for <openembedded-devel@lists.openembedded.org>; Fri, 18 Nov 2022 18:27:26 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com; h=from : to : cc :
  subject : date : message-id : mime-version : content-type :
  content-transfer-encoding; s=PPS06212021;
  bh=FAMXi8Sonniy55OcbeJO9UNwkY83lHx6Qr+1fXTp05c=;
- b=UzKukVZbwOa4DZHXNff9bySLB8t42JelIW8Q7m23fiSIMHe6PZ4J8r2U3AoIPNhDByAn
- 3HgAfZhs0/5yQu0OzY1w8Ios/Qqn2sNuzaWnZO5x5vpTm6U/p+krxzbujGI76AiLkqmi
- kVbw3L49O9jLZ6JiOe4ZSVa8qq5tobIO/tMjUYu3faNFl8V85ydXRcUuiPhlvAK1acM1
- n7Ca6sfmaHyYQFd4gur4FoBaY9BVD9ymkWdT3Y/CXS2992Nn+Cx9KkYU+HVGEJ30UeJy
- B43xOIG1wu8+Iw5oaJ8ykdjoeX4g0yc5vpliTDNdEm3ViZBiPLmjFgziuMZXvDwskCuB 4g== 
-Received: from ala-exchng02.corp.ad.wrs.com (unknown-82-254.windriver.com [147.11.82.254])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3kx0s90n19-1
+ b=dwCLCm+qtzeyHFCoiWhVR4OjEofcYHpFY3oY3VlV/gWNVti8dgMiRiBoDakZWNLIl99Y
+ BNS7yEn768RGr/hlkWrvL7tYJIPL/uT5+/kbM0EX4Y+lLL9Xz425h2GBfxCWvkT46GSM
+ Tv3/sJFUyfue7V4jEH+3juurFe98PXBkLuS0w5Pc1++CrKrWGjNn+gEW9/fi9Ekr2ZCF
+ OnhyK41/cECAZ4qCijWO1KfKkJ38tktCJ+dpnDroEKyA901ILJ5xqXJEdy9vfMMxieJ6
+ YoM3RBm+xUnaaO6bPKDCJb9q8oqP7W7u6kgyh4TJWNBmjuRqG96727oCG8iIIseNQoM+ Aw== 
+Received: from ala-exchng01.corp.ad.wrs.com (unknown-82-252.windriver.com [147.11.82.252])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3kx0s90n38-1
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Fri, 18 Nov 2022 18:25:35 +0000
+	for <openembedded-devel@lists.openembedded.org>; Fri, 18 Nov 2022 18:27:26 +0000
 Received: from ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) by
- ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2308.27; Fri, 18 Nov 2022 10:25:33 -0800
+ 15.1.2242.12; Fri, 18 Nov 2022 10:27:24 -0800
 Received: from blr-linux-engg1.wrs.com (147.11.136.210) by
  ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server id
- 15.1.2308.27 via Frontend Transport; Fri, 18 Nov 2022 10:25:32 -0800
+ 15.1.2308.27 via Frontend Transport; Fri, 18 Nov 2022 10:27:23 -0800
 From: Archana Polampalli <archana.polampalli@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: <randy.macleod@windriver.com>, <hari.gpillai@windriver.com>,
         "Archana
  Polampalli" <archana.polampalli@windriver.com>
-Subject: [oe][meta-oe][PATCH 1/1] Nodejs - Upgrade to 16.18.1
-Date: Fri, 18 Nov 2022 18:25:27 +0000
-Message-ID: <20221118182527.2548091-1-archana.polampalli@windriver.com>
+Subject: [oe][meta-oe][kirkstone][PATCH 1/1] Nodejs - Upgrade to 16.18.1
+Date: Fri, 18 Nov 2022 18:27:18 +0000
+Message-ID: <20221118182718.2548901-1-archana.polampalli@windriver.com>
 X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Type: text/plain; charset="yes"
-X-Proofpoint-ORIG-GUID: fzPEgGIH1nGcFszH1ItVRC3UiZJvK6On
-X-Proofpoint-GUID: fzPEgGIH1nGcFszH1ItVRC3UiZJvK6On
+X-Proofpoint-ORIG-GUID: DhkQ7vH5POtSxawShmz-Y8kLK-e8W0iI
+X-Proofpoint-GUID: DhkQ7vH5POtSxawShmz-Y8kLK-e8W0iI
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.219,Aquarius:18.0.895,Hydra:6.0.545,FMLib:17.11.122.1
  definitions=2022-11-18_06,2022-11-18_01,2022-06-22_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 impostorscore=0 clxscore=1011
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 impostorscore=0 clxscore=1015
  lowpriorityscore=0 suspectscore=0 bulkscore=0 mlxlogscore=999
  priorityscore=1501 spamscore=0 adultscore=0 malwarescore=0 phishscore=0
  mlxscore=0 classifier=spam adjust=0 reason=mlx scancount=1
  engine=8.12.0-2210170000 definitions=main-2211180109
 Content-Transfer-Encoding: quoted-printable
-X-MIME-Autoconverted: from 8bit to quoted-printable by mx0a-0064b401.pphosted.com id 2AIFimoE003073
+X-MIME-Autoconverted: from 8bit to quoted-printable by mx0a-0064b401.pphosted.com id 2AIFheUG001212
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 18 Nov 2022 18:25:40 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99613
+ <openembedded-devel@lists.openembedded.org>; Fri, 18 Nov 2022 18:27:30 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99614
 
 * Drop Openssl legacy provider patch and install both binaries patch
   which are already available in 16.x
