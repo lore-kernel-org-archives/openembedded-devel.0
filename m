@@ -1,134 +1,108 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <ticotimo@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 001D0C43217
-	for <webhook@archiver.kernel.org>; Fri, 18 Nov 2022 19:41:20 +0000 (UTC)
-Received: from mail-oi1-f182.google.com (mail-oi1-f182.google.com [209.85.167.182])
- by mx.groups.io with SMTP id smtpd.web11.3006.1668800480513897778
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3F483C4332F
+	for <webhook@archiver.kernel.org>; Fri, 18 Nov 2022 20:13:41 +0000 (UTC)
+Received: from mail-pg1-f181.google.com (mail-pg1-f181.google.com [209.85.215.181])
+ by mx.groups.io with SMTP id smtpd.web10.4055.1668802417996677481
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 18 Nov 2022 11:41:20 -0800
+ Fri, 18 Nov 2022 12:13:38 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=aKZVNl+i;
- spf=pass (domain: gmail.com, ip: 209.85.167.182, mailfrom: raj.khem@gmail.com)
-Received: by mail-oi1-f182.google.com with SMTP id l127so6434948oia.8
-        for <openembedded-devel@lists.openembedded.org>; Fri, 18 Nov 2022 11:41:20 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=Ea+ARacg;
+ spf=pass (domain: gmail.com, ip: 209.85.215.181, mailfrom: ticotimo@gmail.com)
+Received: by mail-pg1-f181.google.com with SMTP id h193so5884826pgc.10
+        for <openembedded-devel@lists.openembedded.org>; Fri, 18 Nov 2022 12:13:37 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=7KV1X/q0dUVq5F96VfoU+kwq51+XMqYH39fMM42f8Yc=;
-        b=aKZVNl+i+u0iyc0tXEubnuiFX0BPKov08zkEqbwNCZDgqpmODgPiMYEFFXSELxwnp6
-         GG5RXrR4RO/lCJZQXU41vIa3EIEZZ1extq4hCu/6in0D6eWX6WIhyG9T/t3avVr3xMVT
-         xRCWofVz8zsNtB1XpUsSbbBdhv8uflIGFLlPaOWtc9RvF2fCmobHWwWEUbYBGvbQonnP
-         er4/0Ztybr+YKcfm0b/0JqqCeuiPJEdgEBghR0ynMDIa9zvm6IooEYuqnIG0fOoUeXuX
-         4NMUDqGMGhdUmRHOmj+/hlgVUcVi1guovMEs2GaiYjaHviqaWc7cKklnvz1Ec6XKGoFs
-         X6ig==
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=iM3pYGs+TLw6+qaskGa+7M6aQxyWKBVv+ljqUMkHLts=;
+        b=Ea+ARacg9I/WhEIZk7MbLpeioe8b+p3DidL0YJ6tziel12sKL+i54D+iQgO/KO5hyH
+         /c9yrZHw72yaghddCOyXBY1DBzncUYDDlZ2ViB0AqHJUD4eQOMd94b56KnT6+9VIige/
+         X3Y/SrnIq5nN3pNV5wSgDJpHTOeO+E4RVAod8rX9NkckcemEqFfNK2xrWmw551UFFdRU
+         bfrE5yjQr2tJxZluFM+mxv9vwqtptB/dRvOj1A6NhNmmZPFC5AjE8Fg7K17cILnSWJBH
+         5Jd/UbpEP8CLo8udLF9WXRWkWmjcyx62l21V51I6wje3QtFgx7sCp0utV+OOZLZBysym
+         rUgA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=7KV1X/q0dUVq5F96VfoU+kwq51+XMqYH39fMM42f8Yc=;
-        b=n6SILeX8ZKyavnsoKLG8VR6aTML5K0WfLPgfeogDz1LSojKk+coouh1Pb6x1+IZ7wM
-         HkQVL3ZZz6XfXKFfpAdFSMK0ygpEdQONrS4+6vzNjE/Om84AJoCanwujfpPi3qkZMr31
-         xEa27+Z9vaJRZEBtegXDHaNV/AIYYVOahHewDlMNdI8hlRE/BCwmEN64SVA1yAmOGuy/
-         +u/IAqebNHmhmV9Gc3oIK6pA/36EmrpzTLJNSI1Yxe0rF1ObsqSWMFUOHCEoSZTPwq0d
-         ZHD+irIDuJvMRsO/QKnUHLDkARvoDkYL7QP0qvAEMJ7dtPip7ZDt9BubJFhAW8yabncy
-         UYcQ==
-X-Gm-Message-State: ANoB5pm73EreIJcN5qSjigINScYw92TLkkaD7Bv1Ou8457Te9NFTNnzC
-	bhO3nucsZwX8ue2xFnWGWV1Wxf1izGZq4Htj1c0=
-X-Google-Smtp-Source: AA0mqf7gSzBtwyfSZCKSehq9Sodb74nMnXDOaPR1ZWKA/fwoQ3TGxaBRkA1iXscBxJur3UfwUS85ZID2NK5Hu4jm9nY=
-X-Received: by 2002:a54:4491:0:b0:359:d852:616d with SMTP id
- v17-20020a544491000000b00359d852616dmr6953219oiv.55.1668800479550; Fri, 18
- Nov 2022 11:41:19 -0800 (PST)
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=iM3pYGs+TLw6+qaskGa+7M6aQxyWKBVv+ljqUMkHLts=;
+        b=YPuMSQLIovS0ZmceWmvRyPypmUJGsC9lnt2O6MrKlpRHB0+oYleXK3BOYQ+Mr62INa
+         1pb/KJDPxBRFs+K663I5pG+GixG+Pgumj+HwgA7CJSE+NgqlKPOlRYCnw4fvNvM3K4Xo
+         a2E2u/lkieEpAW3veiSb+f3AieHtnRym944qktVSMVUBX+MUwA+jpT8dm1hzljS5limX
+         /j88TEkVc5zW2XUxTBA0XP4/CIK8W33wnYl59H73fZK/FnR60gkLvA4r03dVKdjVcGrQ
+         lvWdspwdbdxLj96uJ+R4hvJD+DgI7kg6nCS2f8tfYZu5zSAtjiZDUPZobUjEY19Ir5XN
+         4CTg==
+X-Gm-Message-State: ANoB5pl7Fd54DZNl/GMLu5JOFsPWBvcNngoeD7mmgaOtQD2Y3tUA9Mu5
+	3f3h3400Cw9HPMiS//2X/hYeEmTh0jTYDA==
+X-Google-Smtp-Source: AA0mqf7Qa9eHJ+5tvnnvwv3prjEP9StNNnS9+X5UMm05v3bNHxvt/8ALM42gmW4Gc2IqpHg1THk4Lg==
+X-Received: by 2002:a63:f925:0:b0:470:88:8c18 with SMTP id h37-20020a63f925000000b0047000888c18mr7984458pgi.23.1668802417020;
+        Fri, 18 Nov 2022 12:13:37 -0800 (PST)
+Received: from nereus.hsd1.or.comcast.net ([2601:1c0:ca00:cea0:b88b:808f:8d53:97bd])
+        by smtp.gmail.com with ESMTPSA id b7-20020a170902d50700b001869efb722csm4132722plg.215.2022.11.18.12.13.36
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 18 Nov 2022 12:13:36 -0800 (PST)
+From: Tim Orling <ticotimo@gmail.com>
+X-Google-Original-From: Tim Orling <tim.orling@konsulko.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-perl][PATCH 1/3] libmozilla-ca-perl: add recipe for 20221114
+Date: Fri, 18 Nov 2022 12:13:22 -0800
+Message-Id: <97d5a9fbf64037303ae5df86920f0879e52afde7.1668802119.git.tim.orling@konsulko.com>
+X-Mailer: git-send-email 2.30.2
+In-Reply-To: <cover.1668802119.git.tim.orling@konsulko.com>
+References: <cover.1668802119.git.tim.orling@konsulko.com>
 MIME-Version: 1.0
-References: <17283AC183E85183.19660@lists.openembedded.org> <CANx9H-B=VEQSrUsdWjNK9YkN-fO54snSiPM55c66Zy2_rsyfqw@mail.gmail.com>
-In-Reply-To: <CANx9H-B=VEQSrUsdWjNK9YkN-fO54snSiPM55c66Zy2_rsyfqw@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 18 Nov 2022 11:40:53 -0800
-Message-ID: <CAMKF1srJbReDdRZOf8BqkMY42zRM1t5KYXZ_6=HusRK8NM1Z-w@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH] libio-pty-perl: upgrade 1.16 -> 1.17;
- enable ptest
-To: Tim Orling <ticotimo@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org, 
-	Tim Orling <tim.orling@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 18 Nov 2022 19:41:20 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99616
+ <openembedded-devel@lists.openembedded.org>; Fri, 18 Nov 2022 20:13:41 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99618
 
-On Fri, Nov 18, 2022 at 10:20 AM Tim Orling <ticotimo@gmail.com> wrote:
->
-> Ping. I think this one missed getting pulled in.
->
+Mozilla::CA - Mozilla's CA cert bundle in PEM format
 
-Thanks its on master-next now.
+Declared runtime dependency for libio-socket-ssl-perl
 
-> On Wed, Nov 16, 2022 at 5:24 PM Tim Orling via lists.openembedded.org <ticotimo=gmail.com@lists.openembedded.org> wrote:
->>
->> * Fix RDEPENDS for a minimal image
->> * Inherit ptest-perl and add RDEPENDS
->>
->> 1.17 2022-11-11 Todd Rinaldo <toddr@cpan.org>
->>     * Switch changelog entries to metacpan friendly format
->>     * #29 - Fix printf format conversion specifiers in croak to support size_t on all platforms
->>     * #11,#30 - Tty.pm: pre-allocate buffer for ioctl but leave it length 0
->>     * #28 - Use $arg to match @ARGV in Makefile.PL
->>
->> https://metacpan.org/release/TODDR/IO-Tty-1.17
->>
->> Signed-off-by: Tim Orling <tim.orling@konsulko.com>
->> ---
->>  ...o-pty-perl_1.16.bb => libio-pty-perl_1.17.bb} | 16 +++++++++++++---
->>  1 file changed, 13 insertions(+), 3 deletions(-)
->>  rename meta-oe/recipes-devtools/perl/{libio-pty-perl_1.16.bb => libio-pty-perl_1.17.bb} (60%)
->>
->> diff --git a/meta-oe/recipes-devtools/perl/libio-pty-perl_1.16.bb b/meta-oe/recipes-devtools/perl/libio-pty-perl_1.17.bb
->> similarity index 60%
->> rename from meta-oe/recipes-devtools/perl/libio-pty-perl_1.16.bb
->> rename to meta-oe/recipes-devtools/perl/libio-pty-perl_1.17.bb
->> index 0f1c71b70c..684788f199 100644
->> --- a/meta-oe/recipes-devtools/perl/libio-pty-perl_1.16.bb
->> +++ b/meta-oe/recipes-devtools/perl/libio-pty-perl_1.17.bb
->> @@ -7,12 +7,22 @@ SRC_URI = "http://www.cpan.org/modules/by-module/IO/IO-Tty-${PV}.tar.gz \
->>             file://0001-Tty.xs-Do-not-mark-strlcpy-as-static.patch \
->>             "
->>
->> -SRC_URI[md5sum] = "5ee30bf7c76f00cc69f92388ad776e2a"
->> -SRC_URI[sha256sum] = "8f1a09c070738adc695df903f2e7f74308dd8d991b914c0bc390a0e6021294dd"
->> +SRC_URI[sha256sum] = "a5f1a83020bc5b5dd6c1b570f48c7546e0a8f7fac10a068740b03925ad9e14e8"
->>
->>  S = "${WORKDIR}/IO-Tty-${PV}"
->>
->> -inherit cpan
->> +inherit cpan ptest-perl
->> +
->> +RDEPENDS:${PN} += "\
->> +    perl-module-carp \
->> +    perl-module-exporter \
->> +    perl-module-io-handle \
->> +    perl-module-posix \
->> +"
->> +
->> +RDEPENDS:${PN}-ptest += "\
->> +    perl-module-test-more \
->> +"
->>
->>  FILES:${PN}-dbg += "${libdir}/perl/vendor_perl/*/auto/IO/Tty/.debug/"
->>
->> --
->> 2.30.2
->>
->>
->> -=-=-=-=-=-=-=-=-=-=-=-
->> Links: You receive all messages sent to this group.
->> View/Reply Online (#99601): https://lists.openembedded.org/g/openembedded-devel/message/99601
->> Mute This Topic: https://lists.openembedded.org/mt/95081317/924729
->> Group Owner: openembedded-devel+owner@lists.openembedded.org
->> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [ticotimo@gmail.com]
->> -=-=-=-=-=-=-=-=-=-=-=-
->>
+Signed-off-by: Tim Orling <tim.orling@konsulko.com>
+---
+ .../libmozilla/libmozilla-ca-perl_20221114.bb | 22 +++++++++++++++++++
+ 1 file changed, 22 insertions(+)
+ create mode 100644 meta-perl/recipes-perl/libmozilla/libmozilla-ca-perl_20221114.bb
+
+diff --git a/meta-perl/recipes-perl/libmozilla/libmozilla-ca-perl_20221114.bb b/meta-perl/recipes-perl/libmozilla/libmozilla-ca-perl_20221114.bb
+new file mode 100644
+index 0000000000..c5839b9b67
+--- /dev/null
++++ b/meta-perl/recipes-perl/libmozilla/libmozilla-ca-perl_20221114.bb
+@@ -0,0 +1,22 @@
++SUMMARY = "Mozilla's CA cert bundle in PEM format"
++DESCRIPTION = "Mozilla::CA provides a copy of Mozilla's bundle of \
++Certificate Authority certificates in a form that can be consumed by  \
++modules and libraries based on OpenSSL."
++HOMEPAGE = "https://metacpan.org/pod/Mozilla::CA"
++BUGTRACKER = "https://github.com/libwww-perl/Mozilla-CA/issues"
++SECTION = "libs"
++
++LICENSE = "MPL-2.0"
++LIC_FILES_CHKSUM = "file://README;beginline=32;endline=39;md5=51e666dce556490a1132e937ad3f8729"
++
++SRC_URI = "${CPAN_MIRROR}/authors/id/H/HA/HAARG/Mozilla-CA-${PV}.tar.gz"
++SRC_URI[sha256sum] = "701bea67be670add5a102f9f8c879402b4983096b1cb0e20dd47d52d7a10666b"
++
++S = "${WORKDIR}/Mozilla-CA-${PV}"
++
++inherit cpan ptest-perl
++
++RDEPENDS:${PN}-ptest += "\
++    perl-module-test-more \
++"
++BBCLASSEXTEND = "native"
+-- 
+2.30.2
+
 
