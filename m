@@ -2,56 +2,56 @@ Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 78748C4321E
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6DC00C43219
 	for <webhook@archiver.kernel.org>; Sat, 19 Nov 2022 15:58:17 +0000 (UTC)
-Received: from mail-qv1-f41.google.com (mail-qv1-f41.google.com [209.85.219.41])
- by mx.groups.io with SMTP id smtpd.web10.23538.1668873490902736845
+Received: from mail-qt1-f178.google.com (mail-qt1-f178.google.com [209.85.160.178])
+ by mx.groups.io with SMTP id smtpd.web11.23266.1668873487408168750
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 19 Nov 2022 07:58:11 -0800
+ Sat, 19 Nov 2022 07:58:07 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=RI+3WqqP;
- spf=pass (domain: gmail.com, ip: 209.85.219.41, mailfrom: akuster808@gmail.com)
-Received: by mail-qv1-f41.google.com with SMTP id p8so4684616qvn.5
-        for <openembedded-devel@lists.openembedded.org>; Sat, 19 Nov 2022 07:58:10 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=L1HwqYk9;
+ spf=pass (domain: gmail.com, ip: 209.85.160.178, mailfrom: akuster808@gmail.com)
+Received: by mail-qt1-f178.google.com with SMTP id fz10so4960291qtb.3
+        for <openembedded-devel@lists.openembedded.org>; Sat, 19 Nov 2022 07:58:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=udapmnW/GVwl0UXWWt/KXtDXFrzN1QLq8PRCrKlRMB8=;
-        b=RI+3WqqPO5jqMuwSshjkknUeE/m4zhCtgScu5OX5UgJsRtbvPRGC0XeIB57t9j4m8R
-         bx8p92UkWcjAfWy7wpl1+aAl4qr9JeH4puOb2iDmyc3oCxNZByF4zgvaRCNNG9GZOz1C
-         ljBfWnCSacMI9Uk1RKe1hKKrsWnwQns/iTkkCAT54VG//EBOWPDtTjSAtgI6pY2JaYOH
-         zZ/WCp7N9pVM1t4EPE3EoVLGd2pVSs/770Q5Nkxse0SMAdbsTkX+k0+x6zhbop+L3Dd4
-         34NLTbFoR+50KGxDIzzfslWLtNKufQEONvgv5+vYNdcjzOGneZFz8Wkn9CZO9sDdwgOs
-         GRdQ==
+        bh=avXrl2bdJk+9W5dOrzAkZxn/1DbPqxCrCMtLALWjam4=;
+        b=L1HwqYk9LhX1CG0GmiklgOv1IOapihyjmBzl2urLZHaoTxf92GmDeWWfA/KU6Drwqr
+         VZM3FPPtwH11sXw8FMf/Q2+SAKRGPKUhCoB/b7nMO1wOXJaDynbS4HSgnsovseaeDec4
+         MX8SS508XtAhYWywboj1VIFZns0PvTtolSTbQpxQssqGYJ3xE8VUrNtU5NJGnZ5DE1IK
+         /MrmtKcuucRpDa3cY+6PQps/EW6s0dTzEHdQw5MJa3wvdybqW5/qodQVXlpnhSUmpnAx
+         s0JjrhuhCJFJUEIB1lp+g5Kin+oRMQGITK4xYxmMsmKhoG+dMnhchrq95FyJANma6Cm8
+         sOfA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=udapmnW/GVwl0UXWWt/KXtDXFrzN1QLq8PRCrKlRMB8=;
-        b=A+SuoJdBPjAUCUdcM02Rm/acCdvzlNCoL8POFiP23nxgTcTjiuRQe1AtQugl/DkmQx
-         HiK3c7g9ei3uOAiy/4AjolUrbnhjBeWVnfRoHDFE+yKJqv6zV2fIZ1IVfyB/KbQxLCzL
-         Y2j3x53dWEu0wsR6kZKkKqXQGNaLFlaCw7qZsXP+/9c7tWZgFVO1KUY1tn+nQkUQ1ThR
-         6hKZEuckT860ifrDWC0HF9OtYkMpP6kY0DAgAcnBVT3Ku6C3rFXFzUNKXnvZoqhC7lTG
-         ZdI4EKetcVB+48faGJJTcyeuY7/gKI653vaqQPL+y1uX2pg5Td4kJI1CDVkiXmdQ9KPE
-         shyg==
-X-Gm-Message-State: ANoB5pkfFhY10tM5wUmrEkIC8NYNdKxP5kDgey0j0tTOVNk5s5YcXG3c
-	OGh3QVlsF310n1jbZNuY9PPsdBmtHZfbFQ==
-X-Google-Smtp-Source: AA0mqf5ep4xr/V01P8jT+2a2/QXVjwji5mTnN+pF6G6V3j/GhDlpeV0H7i5IqwJsBMI2EJmBVyCI+Q==
-X-Received: by 2002:a05:6214:131:b0:4b1:92ca:9cd7 with SMTP id w17-20020a056214013100b004b192ca9cd7mr1930989qvs.103.1668873489547;
-        Sat, 19 Nov 2022 07:58:09 -0800 (PST)
+        bh=avXrl2bdJk+9W5dOrzAkZxn/1DbPqxCrCMtLALWjam4=;
+        b=7PvRUjiKVeC7L1uA+WWMHYHVirF/kDVqZZIuT5C7YIbQjMz4DGGU6t9JCYtvGOIKb0
+         M8K2/XthvAdG+OOQPxsb57gD0/ttUA1dnWoRDDeCE027dx5hJAindZ4xrhbuk3MJB/LF
+         B/XIPiBTcBdnou5v+7fALYumwNX8fLgedkOJK1Glqzm90Xt5N65JtIx3bZtolk8ylLvo
+         sK13JiA7iejUufLkh+BJ0OyllpKpuDXof3OL9KVgKWwpCkiS/+Cb6o+sKs8acgPMULCR
+         sbzwXUPMwsJdr6Qgrcas9/xN0kRJz7/SztyaLo9S4n6Lr//egxqMyoNOwtmONptA3Nm3
+         /iFg==
+X-Gm-Message-State: ANoB5pnZbAds/uN5JGoAFY/0vxyhiKOc97cJJihXBSkaIBAPrWxa3dVN
+	PNFuyihUakQQkimXRmubC4+7pn4GoWCBvQ==
+X-Google-Smtp-Source: AA0mqf6SUTUKXJUCbVG2iRP7X7EzQH9dAjvrZJbAkPs9EgZJ4Fs8r6qQgskbXmOGjuCQe6TRH1PMAw==
+X-Received: by 2002:ac8:4454:0:b0:3a5:28eb:82e with SMTP id m20-20020ac84454000000b003a528eb082emr11045466qtn.674.1668873486030;
+        Sat, 19 Nov 2022 07:58:06 -0800 (PST)
 Received: from keaua.attlocal.net ([2600:1700:9190:ba10:8dbe:f48d:8b1a:1569])
-        by smtp.gmail.com with ESMTPSA id c7-20020a05620a268700b006fb112f512csm4821314qkp.74.2022.11.19.07.58.08
+        by smtp.gmail.com with ESMTPSA id c7-20020a05620a268700b006fb112f512csm4821314qkp.74.2022.11.19.07.58.05
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 19 Nov 2022 07:58:08 -0800 (PST)
+        Sat, 19 Nov 2022 07:58:05 -0800 (PST)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [langdale 05/35] bats: upgrade 1.8.0 -> 1.8.2
-Date: Sat, 19 Nov 2022 10:57:29 -0500
-Message-Id: <3018bb81d91b6eac51fb53a91ed4164f6c688276.1668873377.git.akuster808@gmail.com>
+Subject: [langdale 02/35] libcamera: upgrade -> 0.0.1
+Date: Sat, 19 Nov 2022 10:57:26 -0500
+Message-Id: <29fa64fa2d951cd6465772c7e7702fa92c75c004.1668873377.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <cover.1668873377.git.akuster808@gmail.com>
 References: <cover.1668873377.git.akuster808@gmail.com>
@@ -61,35 +61,67 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sat, 19 Nov 2022 15:58:17 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99644
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99641
 
-From: Wang Mingyu <wangmy@fujitsu.com>
+From: Markus Volk <f_l_k@t-online.de>
 
-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+libcamera has recently received its first release.
+Note: meta-raspberrypi needs to adjust the name of libcamera.bbappend
+
+Signed-off-by: Markus Volk <f_l_k@t-online.de>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 8dd9faa5c6f214414b4776e05e87eb33a0080203)
+(cherry picked from commit 1032bce77885f20afb40fff4ed430167c75db59b)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-oe/recipes-test/bats/{bats_1.8.0.bb => bats_1.8.2.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-test/bats/{bats_1.8.0.bb => bats_1.8.2.bb} (95%)
+ .../{libcamera.bb => libcamera_0.0.1.bb}       | 18 +++++-------------
+ 1 file changed, 5 insertions(+), 13 deletions(-)
+ rename meta-multimedia/recipes-multimedia/libcamera/{libcamera.bb => libcamera_0.0.1.bb} (74%)
 
-diff --git a/meta-oe/recipes-test/bats/bats_1.8.0.bb b/meta-oe/recipes-test/bats/bats_1.8.2.bb
-similarity index 95%
-rename from meta-oe/recipes-test/bats/bats_1.8.0.bb
-rename to meta-oe/recipes-test/bats/bats_1.8.2.bb
-index 4b90dcc579..74e683e589 100644
---- a/meta-oe/recipes-test/bats/bats_1.8.0.bb
-+++ b/meta-oe/recipes-test/bats/bats_1.8.2.bb
-@@ -11,7 +11,7 @@ SRC_URI = "\
-   "
+diff --git a/meta-multimedia/recipes-multimedia/libcamera/libcamera.bb b/meta-multimedia/recipes-multimedia/libcamera/libcamera_0.0.1.bb
+similarity index 74%
+rename from meta-multimedia/recipes-multimedia/libcamera/libcamera.bb
+rename to meta-multimedia/recipes-multimedia/libcamera/libcamera_0.0.1.bb
+index 53cd94cbf0..2b77d99371 100644
+--- a/meta-multimedia/recipes-multimedia/libcamera/libcamera.bb
++++ b/meta-multimedia/recipes-multimedia/libcamera/libcamera_0.0.1.bb
+@@ -12,9 +12,9 @@ SRC_URI = " \
+         git://git.libcamera.org/libcamera/libcamera.git;protocol=https;branch=master \
+ "
  
- # v1.7.0
--SRCREV = "e9b286bb39ad7b0cb7b7d2e819d44d1aff387522"
-+SRCREV = "e8c840b58f0833e23461c682655fe540aa923f85"
+-SRCREV = "ed591e705c451d0ce14988ae96829a31a2ae2f9a"
++SRCREV = "a83aed77df1258e469c0eb42d9cb4f1938db53f2"
+ 
+-PV = "202105+git${SRCPV}"
++PE = "1"
  
  S = "${WORKDIR}/git"
  
+@@ -45,8 +45,8 @@ do_configure:prepend() {
+ }
+ 
+ do_install:append() {
+-    chrpath -d ${D}${libdir}/libcamera.so.0.0.0
+-    chrpath -d ${D}${libdir}/libcamera-base.so.0.0.0
++    chrpath -d ${D}${libdir}/libcamera.so
++    chrpath -d ${D}${libdir}/v4l2-compat.so
+ }
+ 
+ addtask do_recalculate_ipa_signatures_package after do_package before do_packagedata
+@@ -62,13 +62,5 @@ do_recalculate_ipa_signatures_package() {
+     ${S}/src/ipa/ipa-sign-install.sh ${B}/src/ipa-priv-key.pem "${modules}"
+ }
+ 
+-FILES:${PN}-dev = "${includedir} ${libdir}/pkgconfig"
+-FILES:${PN}-dev += " ${libdir}/libcamera.so"
+-FILES:${PN} += " ${libdir}/libcamera.so.0"
+-FILES:${PN} += " ${libdir}/libcamera.so.0.0.0"
+-FILES:${PN}-dev += " ${libdir}/libcamera-base.so"
+-FILES:${PN} += " ${libdir}/libcamera-base.so.0"
+-FILES:${PN} += " ${libdir}/libcamera-base.so.0.0.0"
+ FILES:${PN} += " ${libdir}/v4l2-compat.so"
+-FILES:${PN}-gst = "${libdir}/gstreamer-1.0/libgstlibcamera.so"
+-FILES:${PN} += " ${bindir}/cam"
++FILES:${PN}-gst = "${libdir}/gstreamer-1.0"
 -- 
 2.25.1
 
