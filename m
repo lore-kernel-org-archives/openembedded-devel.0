@@ -2,56 +2,56 @@ Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6C4BDC433FE
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 78D3CC4167B
 	for <webhook@archiver.kernel.org>; Sat, 19 Nov 2022 15:58:17 +0000 (UTC)
-Received: from mail-qk1-f169.google.com (mail-qk1-f169.google.com [209.85.222.169])
- by mx.groups.io with SMTP id smtpd.web11.23274.1668873495541287135
+Received: from mail-qv1-f50.google.com (mail-qv1-f50.google.com [209.85.219.50])
+ by mx.groups.io with SMTP id smtpd.web11.23270.1668873491973601070
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 19 Nov 2022 07:58:15 -0800
+ Sat, 19 Nov 2022 07:58:12 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=CZcj0lld;
- spf=pass (domain: gmail.com, ip: 209.85.222.169, mailfrom: akuster808@gmail.com)
-Received: by mail-qk1-f169.google.com with SMTP id s20so5431485qkg.5
-        for <openembedded-devel@lists.openembedded.org>; Sat, 19 Nov 2022 07:58:15 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=RyT4MHDX;
+ spf=pass (domain: gmail.com, ip: 209.85.219.50, mailfrom: akuster808@gmail.com)
+Received: by mail-qv1-f50.google.com with SMTP id d18so1821902qvs.6
+        for <openembedded-devel@lists.openembedded.org>; Sat, 19 Nov 2022 07:58:11 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=d6mKcPhR1Kr9+E+35Oulu3aK0q2n5vykz1ho7o+ZKc0=;
-        b=CZcj0llduYPtpk5dCKTixc7h2CxhMR7w9GgHvCM/NAXGd4Ey4XVXIXizMr8b/D/ijK
-         opyiMB493oKIFyKoUUTPpwzL2aftZxZXupNpVa+qAM53sLLB1t98ZFERl/C9zAba/I9C
-         PYXwH3uBKgbx2uhWuYplUPbwV2FJJAbrBEtCQGOm+vx5W6lA55ZnAUKIkZ+C7bMgMT0R
-         Gp2qq2vyANzDijnk8zbQU4GnhLkJabqooYp9wiZ4rFIh2EY1srGEWEzOjTnY0HTyj2SJ
-         fvlze3xUO9ErRVuF+APx6tdnlVJlXpg5OjoI7mig1I5yYp3QbWWSelNvxMRWHLQE+4lq
-         ow+g==
+        bh=tNdrJS4H3mv6Eozq7xuJOZNIcXjOBh+uZNoSaNMTiaI=;
+        b=RyT4MHDXSw0YSInbGK+EqDHIjbGxvQWyxSGUF775t9WzKRDpNfG0uNKzxd90glIuJ7
+         eUpJc0fj+nYgZrkRxACmyTuZ741rglQVstKMhO9bIdxIC23d7tLcPK8NPEohEDlTVZpg
+         OZq45Hkv1+kBFGHWCT498j4hZzRUIYKs8F4y269lC5NzCpQwtLotlOAhx+CyhGw7lFlE
+         PELkCi7cQYmSsy3/BhVmL3SNnU4ub++yup+n7O0VysYOr8kj0i16l9Gq0EH9DUOyJmqD
+         xLYTZ8+pCDxrGC+eZJ1HMzp8ZcTP90QqZJvKvEO2GGQ1Kz5YgHBs3p15PQsC+3PX5u01
+         SYZQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=d6mKcPhR1Kr9+E+35Oulu3aK0q2n5vykz1ho7o+ZKc0=;
-        b=S+gAYs3+YdM+DyvvsjLuQ9yg5wu3LSq2AiyAJzGpldCdFXQKe7in2RN+hUZaCoA7RI
-         JDd17MuFMp/2brgZ6V221lAjb7ocHoWGdvFKy9QiZt3Mj5u8ZY8gqwVNYIMC16lj0TGq
-         AxPjOKrfaERhwB1FRt+JGVnkMU7OZAksvXKF2Y/QOv16hsVL/++uJtDLky08ySLPGrvL
-         yx5mUiW1vQhayaAZ9YE1yCIW97j15TaJtNpKTTXEPJHyQ0IDpYugPhaLnVr2wUrjji2r
-         dnuPYhSJhovZNtWGRSxi+UogjvAZzKMyn853bNs7drrnYPa9gFZ6OIEnbA3kH3OjxTJw
-         VLBQ==
-X-Gm-Message-State: ANoB5ploKST/4mOReWNlP44ZzHa25ySFsnxCDrJj98v1BKJ7qgqolEG3
-	tfjGRPgPRNkJ9XCITbpeqijAaxd0detfzA==
-X-Google-Smtp-Source: AA0mqf4nli+kgb8jZKqdd8QE1dV7HX0QAqOkEgeyWpue0oilgpkPGup00rKoXDFcdMUvNlQJgi1lYw==
-X-Received: by 2002:a37:b105:0:b0:6fb:db6f:d5f1 with SMTP id a5-20020a37b105000000b006fbdb6fd5f1mr5093176qkf.771.1668873494148;
-        Sat, 19 Nov 2022 07:58:14 -0800 (PST)
+        bh=tNdrJS4H3mv6Eozq7xuJOZNIcXjOBh+uZNoSaNMTiaI=;
+        b=vIMz4PmIgOG6B0bJUy9PuvD01sYjmu5z35DZ8j9iy0uk4N42ga4Pr2EftRu4K7h4Tn
+         0FhXvBTqjvGGqYYoBn9+Gxk1ny93QXyE0ziPTi1GrjyeklcoukXpffUIAzmyIpPGpVGj
+         E2g8X6qlvvMSws5SUJx5neGjeowa5RZUEf+IPtXrIiuqrQ6zDq5pJAB/e6sjABfAcSyy
+         xmNtek5jzm/3hTk9zJ0PfDmaJILESsMFRKpkp+gh+zyILXO9yfbpb13/z1iHUIJGVdzw
+         oPKm8Eb0eYoDnkTuCc6Vt12FRSf//4CoB4LTl/VHDCNOdAJ59uVKC4/96usFuBHhOTwi
+         /TkA==
+X-Gm-Message-State: ANoB5pn1sOlnYRjGe7MaG0R9W7QkI+up5wA2mzcGVPc9gXxGz6w4/h+x
+	StvHJRblNhZXrfl+ElN8bqPjrfsV4mEt0w==
+X-Google-Smtp-Source: AA0mqf4dt2MX8ZAI0mJU6azgarW4UQ1h4OUaIRLKFhUPoMEIIC3IfQddTFFXWEtdpqC6CSTsrA8AwA==
+X-Received: by 2002:a05:6214:3688:b0:4bb:9180:638f with SMTP id nl8-20020a056214368800b004bb9180638fmr837565qvb.98.1668873490616;
+        Sat, 19 Nov 2022 07:58:10 -0800 (PST)
 Received: from keaua.attlocal.net ([2600:1700:9190:ba10:8dbe:f48d:8b1a:1569])
-        by smtp.gmail.com with ESMTPSA id c7-20020a05620a268700b006fb112f512csm4821314qkp.74.2022.11.19.07.58.13
+        by smtp.gmail.com with ESMTPSA id c7-20020a05620a268700b006fb112f512csm4821314qkp.74.2022.11.19.07.58.09
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 19 Nov 2022 07:58:13 -0800 (PST)
+        Sat, 19 Nov 2022 07:58:09 -0800 (PST)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [langdale 09/35] sanlock: upgrade 3.8.4 -> 3.8.5
-Date: Sat, 19 Nov 2022 10:57:33 -0500
-Message-Id: <3a11c4bd18a79d7fcb62bf78db5e589e38a68e4e.1668873377.git.akuster808@gmail.com>
+Subject: [langdale 06/35] ctags: upgrade 5.9.20221009.0 -> 5.9.20221016.0
+Date: Sat, 19 Nov 2022 10:57:30 -0500
+Message-Id: <c4aad13f8a77726f57ffc88cd85834bfca23f93f.1668873377.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <cover.1668873377.git.akuster808@gmail.com>
 References: <cover.1668873377.git.akuster808@gmail.com>
@@ -61,67 +61,35 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sat, 19 Nov 2022 15:58:17 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99648
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99645
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
-setuptools.patch
-removed since it's included in 3.8.5.
-
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit cc532b9d4e0394f442cc3e3b6c7f65858a551a3c)
+(cherry picked from commit 443259d5db7959609be2358c2359345039739651)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../sanlock/sanlock/setuptools.patch           | 18 ------------------
- .../{sanlock_3.8.4.bb => sanlock_3.8.5.bb}     |  3 +--
- 2 files changed, 1 insertion(+), 20 deletions(-)
- delete mode 100644 meta-oe/recipes-extended/sanlock/sanlock/setuptools.patch
- rename meta-oe/recipes-extended/sanlock/{sanlock_3.8.4.bb => sanlock_3.8.5.bb} (95%)
+ .../ctags/{ctags_5.9.20221009.0.bb => ctags_5.9.20221016.0.bb}  | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-devtools/ctags/{ctags_5.9.20221009.0.bb => ctags_5.9.20221016.0.bb} (95%)
 
-diff --git a/meta-oe/recipes-extended/sanlock/sanlock/setuptools.patch b/meta-oe/recipes-extended/sanlock/sanlock/setuptools.patch
-deleted file mode 100644
-index c375e10f75..0000000000
---- a/meta-oe/recipes-extended/sanlock/sanlock/setuptools.patch
-+++ /dev/null
-@@ -1,18 +0,0 @@
--Switch to setuptools as distutils is deprecated.
--
--Upstream-Status: Backport [https://pagure.io/sanlock/c/75758fc10db2354dda397d3aba63c7b72a420982]
--Signed-off-by: Ross Burton <ross.burton@arm.com>
--
--diff --git a/python/setup.py b/python/setup.py
--index b3bfaf1..dfbaf21 100644
----- a/python/setup.py
--+++ b/python/setup.py
--@@ -4,7 +4,7 @@
-- # modify, copy, or redistribute it subject to the terms and conditions
-- # of the GNU General Public License v.2.
-- 
---from distutils.core import setup, Extension
--+from setuptools import setup, Extension
-- 
-- sanlocklib = ['sanlock']
-- sanlock = Extension(name='sanlock',
-diff --git a/meta-oe/recipes-extended/sanlock/sanlock_3.8.4.bb b/meta-oe/recipes-extended/sanlock/sanlock_3.8.5.bb
+diff --git a/meta-oe/recipes-devtools/ctags/ctags_5.9.20221009.0.bb b/meta-oe/recipes-devtools/ctags/ctags_5.9.20221016.0.bb
 similarity index 95%
-rename from meta-oe/recipes-extended/sanlock/sanlock_3.8.4.bb
-rename to meta-oe/recipes-extended/sanlock/sanlock_3.8.5.bb
-index 3b4ae318c6..c2a17d06b9 100644
---- a/meta-oe/recipes-extended/sanlock/sanlock_3.8.4.bb
-+++ b/meta-oe/recipes-extended/sanlock/sanlock_3.8.5.bb
-@@ -15,10 +15,9 @@ PV .= "+git${SRCPV}"
+rename from meta-oe/recipes-devtools/ctags/ctags_5.9.20221009.0.bb
+rename to meta-oe/recipes-devtools/ctags/ctags_5.9.20221016.0.bb
+index 5564a9b853..809f578803 100644
+--- a/meta-oe/recipes-devtools/ctags/ctags_5.9.20221009.0.bb
++++ b/meta-oe/recipes-devtools/ctags/ctags_5.9.20221016.0.bb
+@@ -14,7 +14,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3"
  
- SRC_URI = "git://pagure.io/sanlock.git;protocol=http;branch=master \
-            file://0001-sanlock-Replace-cp-a-with-cp-R-no-dereference-preser.patch \
--           file://setuptools.patch \
-            file://0001-add-missing-system-header-string.h.patch \
-           "
--SRCREV = "a181e951376d49a82eef17920c8ebedec80b4823"
-+SRCREV = "b820c63093c4ae85d7da4f719cf3026d7fca5d09"
+ inherit autotools-brokensep pkgconfig manpages
+ 
+-SRCREV = "5d506a1a3b6850f05de5e785c5d14cfd6f9b1620"
++SRCREV = "a2995833175678358767e1c9a36ad3946667edf1"
+ SRC_URI = "git://github.com/universal-ctags/ctags;branch=master;protocol=https"
  
  S = "${WORKDIR}/git"
- 
 -- 
 2.25.1
 
