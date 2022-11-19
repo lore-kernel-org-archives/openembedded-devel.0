@@ -2,56 +2,56 @@ Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9C067C4167B
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8E385C43217
 	for <webhook@archiver.kernel.org>; Sat, 19 Nov 2022 15:58:47 +0000 (UTC)
-Received: from mail-qv1-f46.google.com (mail-qv1-f46.google.com [209.85.219.46])
- by mx.groups.io with SMTP id smtpd.web11.23277.1668873500241349036
+Received: from mail-qk1-f174.google.com (mail-qk1-f174.google.com [209.85.222.174])
+ by mx.groups.io with SMTP id smtpd.web11.23287.1668873519364497487
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 19 Nov 2022 07:58:44 -0800
+ Sat, 19 Nov 2022 07:58:39 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=Xcsanfvh;
- spf=pass (domain: gmail.com, ip: 209.85.219.46, mailfrom: akuster808@gmail.com)
-Received: by mail-qv1-f46.google.com with SMTP id c8so5325502qvn.10
-        for <openembedded-devel@lists.openembedded.org>; Sat, 19 Nov 2022 07:58:44 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=NTaviOyH;
+ spf=pass (domain: gmail.com, ip: 209.85.222.174, mailfrom: akuster808@gmail.com)
+Received: by mail-qk1-f174.google.com with SMTP id v8so5406445qkg.12
+        for <openembedded-devel@lists.openembedded.org>; Sat, 19 Nov 2022 07:58:39 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=Eq2JQbzzOsCAoiQDS9HbPQAFpFuqv1Zc4PVckNTUVZw=;
-        b=XcsanfvhorYYMRReRYlpoxVdbSo5jqX6EFeQEy8FJwuYjIll0CIqa6UTkv2Ps2NQvE
-         jukkpIUQPr1bca7QN7zHRb/Rhqgq12b0gjFe2nKHuHIhmDhOFOpyspEeYroYQHF2natL
-         foBsQvWrXmMCwGtOgMqKzAeYj7tf7hfpBJeqtHtKbaT8jyzFNsDK72aGICb7+SYx3S/o
-         A0PaqDJqz/uziQ7LsrcKfBirwHRXNYWqZYxOFUO//nFzCYJ9/3Xq14rkobRppTc+yEqk
-         R6ywvaHRKyQqeER7TjnXVRHlFbsj/Tva5byaNcvQTUMqoENV6erAv9AMh9AGxNMknhue
-         hQng==
+        bh=zHa0bmLIF5qhk/VQ3a+fWrTciLs89emaGTd/xXnbv2k=;
+        b=NTaviOyHrImpMc9vEq8RtfItRUH6yMU2BHd71H78ImzFsKVWrgTDIpTm7oiqbpTuQO
+         GC9zWHuXO6TDl44JsiyR6uY6NTFRbRP1Wf4fafYok3pfrn3ZGvsu6+9ieBmocai5p4dU
+         wMJkImpHwx9rXNGEC1FBur9q8CWWuEPnrfmvqfOT36X94vgSeNyddGbBiCflskli2vhQ
+         a/s2GDuL+LfI59V2vjYx1ol2KLavGrQxOs3qV9OyzwJoEIkcsyd76316BvYvfqLoXWKE
+         Y45MWMMVdSpmRFjygWmRROg7YO4bxw68QrGTtBoLeRfyvygTwEgF1wlybynaODRUUzLZ
+         QRPA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=Eq2JQbzzOsCAoiQDS9HbPQAFpFuqv1Zc4PVckNTUVZw=;
-        b=ZNMQKMSVn/W+R7df8B4+JpuD4n0VY3tkC0l+rD+TTftQNg+/PCusogxUiVVNOXMMqo
-         xe0FCe6x5h/a0KQlvRwDVHw1do10MdhU5vZAnQv6FeEcvXK3uT2/fl7CBACT+DZ/SyzI
-         53Q2NJxZb+l5GemsrBf3CrmEBb1SWJmKV/F35OUmOrs5bKhHbw6QR5qkMME2t7+En3HE
-         +QEHQmRSqbDU1a7fA3j/eopp22ZLpbI0oNi0k4EGUaCWhZhQdCmE2kdadTuslzkB5wlT
-         kD1Y+uvOk2oNJIzoaIJSAg8+Y5Csqkk4bWwsGq/rXDVShx56S3sMhJyD3AvUnjMU3KrT
-         uV6Q==
-X-Gm-Message-State: ANoB5pncGjSruTMH7bpnnhJRkc7qYhbA+ciDXzl7w6wvKTLhRBh2+TUP
-	yaE8gdd2Cy2k4KpqEyqPTK2M/SBqmf+i+w==
-X-Google-Smtp-Source: AA0mqf7nMqyfwjaW3eDC9jP0ynYyscW53Ev66Tt8nuWcy8aZ8MxXI+1ZypBVwIpmLRWSrkLQyXLonA==
-X-Received: by 2002:ad4:5441:0:b0:4af:9759:6f4b with SMTP id h1-20020ad45441000000b004af97596f4bmr11041402qvt.31.1668873523394;
-        Sat, 19 Nov 2022 07:58:43 -0800 (PST)
+        bh=zHa0bmLIF5qhk/VQ3a+fWrTciLs89emaGTd/xXnbv2k=;
+        b=3xVN7mkjn0R062tMAeGfLY/UKrdhyg1cwPMyuqR08IUQ8zJdly+4yJYtDEueRCz9l8
+         ND2PDZwnpPh8Xr/hJmQ2CDNuIZn8vB7t6HUmNOb+fouZUBMOk8EaMrkxepsgZgpn3VdQ
+         CfnDVlf1dWdvyoeBHdjxZQ9V/Pu4oU3rP+lDHWDqELIXUaGzyUF+3Mx26SILlziy+vcP
+         HQ0hhvSsVAEtXw5jf/2Qnm63OxzJsWXCMD0o7hB5chE9QBlckpC0rk3oKQveo4xWcp0c
+         oGtIBTVn6XSddM88pDPcnfHPNOzmP546PBbeYQ1hNhZjw8tBF95/kgx9GfhqGajVb9Cs
+         NxcQ==
+X-Gm-Message-State: ANoB5pnom/iDGWVXFUkkI7KgMRffR9Rz6A0bTjemckscMqICgBDdbN5a
+	QMHM+SOscHUxhxbc+WCBBcPmhPOZ/yANOg==
+X-Google-Smtp-Source: AA0mqf4Du6hTieF72mHuKoDL82bI5fLnI7wKHvuLikVHf5m+4cqa93pQXY8qO3pwLSdI6zZmQMvmdQ==
+X-Received: by 2002:ae9:e507:0:b0:6fa:5778:8e with SMTP id w7-20020ae9e507000000b006fa5778008emr10393560qkf.71.1668873518066;
+        Sat, 19 Nov 2022 07:58:38 -0800 (PST)
 Received: from keaua.attlocal.net ([2600:1700:9190:ba10:8dbe:f48d:8b1a:1569])
-        by smtp.gmail.com with ESMTPSA id c7-20020a05620a268700b006fb112f512csm4821314qkp.74.2022.11.19.07.58.42
+        by smtp.gmail.com with ESMTPSA id c7-20020a05620a268700b006fb112f512csm4821314qkp.74.2022.11.19.07.58.36
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 19 Nov 2022 07:58:42 -0800 (PST)
+        Sat, 19 Nov 2022 07:58:37 -0800 (PST)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [langdale 27/35] cglm: upgrade 0.8.5 -> 0.8.7
-Date: Sat, 19 Nov 2022 10:57:51 -0500
-Message-Id: <e64b9d596d9c9fe9f4a6681c4397ae5b126f2aff.1668873377.git.akuster808@gmail.com>
+Subject: [langdale 23/35] python3-pythonping: Upgrade 1.1.3 -> 1.1.4
+Date: Sat, 19 Nov 2022 10:57:47 -0500
+Message-Id: <34e92233b2a221745d98f70573b29575f10c2032.1668873377.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <cover.1668873377.git.akuster808@gmail.com>
 References: <cover.1668873377.git.akuster808@gmail.com>
@@ -61,37 +61,40 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sat, 19 Nov 2022 15:58:47 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99666
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99662
 
-From: Wang Mingyu <wangmy@fujitsu.com>
+From: Leon Anavi <leon.anavi@konsulko.com>
 
-Changelog:
-fix build: add missing struct affine functions and headers
+Upgrade to release 1.1.4:
 
-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+- count parameter can now go beyond 16-bit
+- README.md is updated to describe how the module works in detail
+- Linting issues have been fixed
+
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit e1736749520913fe49546a03a0767f6ca91a830e)
+(cherry picked from commit 6b4f2590d82d542a975fe50ef42f3d7c2dfa4db0)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-oe/recipes-graphics/cglm/{cglm_0.8.5.bb => cglm_0.8.7.bb} | 2 +-
+ ...{python3-pythonping_1.1.3.bb => python3-pythonping_1.1.4.bb} | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-graphics/cglm/{cglm_0.8.5.bb => cglm_0.8.7.bb} (93%)
+ rename meta-python/recipes-devtools/python/{python3-pythonping_1.1.3.bb => python3-pythonping_1.1.4.bb} (77%)
 
-diff --git a/meta-oe/recipes-graphics/cglm/cglm_0.8.5.bb b/meta-oe/recipes-graphics/cglm/cglm_0.8.7.bb
-similarity index 93%
-rename from meta-oe/recipes-graphics/cglm/cglm_0.8.5.bb
-rename to meta-oe/recipes-graphics/cglm/cglm_0.8.7.bb
-index 5a437c102f..95a651dd03 100644
---- a/meta-oe/recipes-graphics/cglm/cglm_0.8.5.bb
-+++ b/meta-oe/recipes-graphics/cglm/cglm_0.8.7.bb
-@@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=8dc95c4110ba741c43832734b51b7de7"
+diff --git a/meta-python/recipes-devtools/python/python3-pythonping_1.1.3.bb b/meta-python/recipes-devtools/python/python3-pythonping_1.1.4.bb
+similarity index 77%
+rename from meta-python/recipes-devtools/python/python3-pythonping_1.1.3.bb
+rename to meta-python/recipes-devtools/python/python3-pythonping_1.1.4.bb
+index 5e016fb928..62f5c0caad 100644
+--- a/meta-python/recipes-devtools/python/python3-pythonping_1.1.3.bb
++++ b/meta-python/recipes-devtools/python/python3-pythonping_1.1.4.bb
+@@ -4,7 +4,7 @@ SECTION = "devel/python"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://setup.py;beginline=12;endline=12;md5=2d33c00f47720c7e35e1fdb4b9fab027"
  
- SRC_URI = "git://github.com/recp/cglm;branch=master;protocol=https"
- # Tag v0.8.5
--SRCREV = "7e5d1f435f628b873347eb052b7d6605b0b997f2"
-+SRCREV = "8cfc98d2835a8cd1a9041f257c7ba0bfe4fbc1f3"
+-SRC_URI[sha256sum] = "3555a03439eb48d5e0e8c201f7c334c1e13b997d744f93453d4d601c0fc8330f"
++SRC_URI[sha256sum] = "acef84640fee6f20b725f2a1d2392771f2845554cfabcef30b1fdea5030161af"
  
- S = "${WORKDIR}/git"
+ inherit pypi setuptools3
  
 -- 
 2.25.1
