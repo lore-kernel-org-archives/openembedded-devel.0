@@ -2,56 +2,56 @@ Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8C43AC433FE
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9ACA1C4167B
 	for <webhook@archiver.kernel.org>; Sat, 19 Nov 2022 15:58:37 +0000 (UTC)
 Received: from mail-qv1-f50.google.com (mail-qv1-f50.google.com [209.85.219.50])
  by mx.groups.io with SMTP id smtpd.web11.23270.1668873491973601070
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 19 Nov 2022 07:58:37 -0800
+ Sat, 19 Nov 2022 07:58:32 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=lLSsCpcq;
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=HAkeWxrs;
  spf=pass (domain: gmail.com, ip: 209.85.219.50, mailfrom: akuster808@gmail.com)
-Received: by mail-qv1-f50.google.com with SMTP id d18so1822429qvs.6
-        for <openembedded-devel@lists.openembedded.org>; Sat, 19 Nov 2022 07:58:36 -0800 (PST)
+Received: by mail-qv1-f50.google.com with SMTP id d18so1822322qvs.6
+        for <openembedded-devel@lists.openembedded.org>; Sat, 19 Nov 2022 07:58:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=8UBAkj4QoqM8Hsx1bqWl87xG69fKFO3tPAsHQIPnJds=;
-        b=lLSsCpcqEca3cAbqYwj8AztPC/ByHTxjgpQu3YQxJDPAcp2EXL0F23Z1iTO5mAnUBP
-         lSUACxG6rORKVJ8h9wJrIir+3CF7EWfdxxdgK7IrQJmL3YFM+afVDDhxhvdVRWLrEjXk
-         0NPWPmOKGIr5KMvNrxRW8v5rT4MW9uvEtqqlaTQChvwIL7aWN1dCiPBPvOIGMtOdL5Ew
-         1EeSwfvixNr0jJ1lSXjZMnvUhY8j8kjaLib5VNUpJdJITkEkbeFGudaNnIlbTCGbJ6S0
-         u5+wsJg6OEWlN92YB/XVydSZGsGjU7b9GEgAB33QXg6KoxnD6NWuagLAz+lDAbrPQqsB
-         eaJA==
+        bh=d7/D6q8KLcFjT3njTnt1xYYflhTPyxX4+yYBFByBEhU=;
+        b=HAkeWxrs87qD1jXFtsohIjHjFFjEEBJ/KQxUhzUrQBm7oZLuXkSWWi0gr1KQsq+jZL
+         MXr8PUvE3fpGRcXdZNI8GHLq8gYTB1PSTdVa3nsmXMIgZ2bYIn5DYhYmQmL49pTjvWJX
+         TMPKshwANoWPy5UtfeihoybwOqFCBN4eRTw2AmVaR780uCUVm4rD2uUP9vDlisQZDGo9
+         2C+f/mIBJz6wExCHBSe+EOmolLUM9AwdCF88OoBEn51/H+jdt3KfE1CYlKzzBBSAS0YM
+         rTI82J85aNs2ktdO6besMupFTGxqiVRbGrWC4oRgUMZLoveO+DTw0FlGa8Kn+0Jqxqbp
+         B1AQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=8UBAkj4QoqM8Hsx1bqWl87xG69fKFO3tPAsHQIPnJds=;
-        b=v0J6SQToLpwvKqe7RATQKKoWpejBCgbVbxjf0Zz5ILc+2zXXQH2DrUH72zHx0mh6wS
-         ZL+XDNJMoYou8Wnu9FX0PshrncZPna6eQ/Pnte3kkHTNF3cSx0Py1wKofEehzIor0tO3
-         sUVD7Pa2h9KbRFTmeImvcceDCZEKWGPpDqvrleGIbGJeFp4QJHssXMtDerkmmawuhFNg
-         stKz7wsdB4hiIbxwMThwCPyDyrnTL64066LowIccGIoLV4XCEDWw5BC1+bHSN5TSeKNV
-         Cg30MfvI3kfQE1hi+hRAQmlb9WVq13Iufkw6xCfU9+meUwA7lWU2JB8mAeXJAXobDZJB
-         XbqA==
-X-Gm-Message-State: ANoB5pmBnB+ffaesH1uQQ5VNTEcL4XFBYJ+4jvzcSq4lO7ghdhE31Y7c
-	G0UQ3A6spE5oRFk+oF6SIWAiwcPJRSXw6g==
-X-Google-Smtp-Source: AA0mqf4Eav+h14E7p4UvbUVuoo6quRdhbWaw6XTkCS9aPwHLH2RnByX5PVA1IzqTnYymUH+equo4jA==
-X-Received: by 2002:a05:6214:a61:b0:4bb:746b:b643 with SMTP id ef1-20020a0562140a6100b004bb746bb643mr1590145qvb.19.1668873516163;
-        Sat, 19 Nov 2022 07:58:36 -0800 (PST)
+        bh=d7/D6q8KLcFjT3njTnt1xYYflhTPyxX4+yYBFByBEhU=;
+        b=B/tzWBj1G0/4YYFgIP1LzqEoL/XKQZQT134eG4VyvuMJKrRTPRrxgHwP8GkO3GnoDb
+         LExMClATGeUAqSLmNiTXRIzlxcP+Xy1rp2uM23RNHrxT5NUeiBESRD6olXVS4Z8TQysF
+         0JZ37wOXg2xgMnqNNRiOb2spartln5FiYkl8r7Ir+S2gWW/kpYyQXLcCzEn2VOXo3cxP
+         BGlH+chNn9lxdEjADoWqYSU2eQTxjPV1uWilLnBUrVJqxSg8oX9nlbY42g7bGmgApwx9
+         PTak7CEcfutAYSGBlDJhmZDI6LH/ym/KK5UnDOY30mNJSnGb09QLVMSAFzSfvr5b3uSH
+         TSJw==
+X-Gm-Message-State: ANoB5pkqsDNa9SI3aHjqmSR7xemgjGUqvo82trDM8iDoVyri5Yg28fq2
+	ZD1A7e0uAEz0BvdD2KODaQ/+pzJSri/C4A==
+X-Google-Smtp-Source: AA0mqf4GBn/7f3Rl6VV5lOI8kTe+ieGVroeLVUjUan1HvEEI3ZK2gGZRUL18Xabhwlcw7RBjQfScJw==
+X-Received: by 2002:a0c:fa0f:0:b0:4c6:90b1:b19d with SMTP id q15-20020a0cfa0f000000b004c690b1b19dmr8788165qvn.59.1668873511955;
+        Sat, 19 Nov 2022 07:58:31 -0800 (PST)
 Received: from keaua.attlocal.net ([2600:1700:9190:ba10:8dbe:f48d:8b1a:1569])
-        by smtp.gmail.com with ESMTPSA id c7-20020a05620a268700b006fb112f512csm4821314qkp.74.2022.11.19.07.58.34
+        by smtp.gmail.com with ESMTPSA id c7-20020a05620a268700b006fb112f512csm4821314qkp.74.2022.11.19.07.58.30
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 19 Nov 2022 07:58:34 -0800 (PST)
+        Sat, 19 Nov 2022 07:58:30 -0800 (PST)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [langdale 22/35] python3-sqlalchemy: upgrade 1.4.41 -> 1.4.42
-Date: Sat, 19 Nov 2022 10:57:46 -0500
-Message-Id: <5dec8c3f39d7ba43077cf83f10ba6676583cabac.1668873377.git.akuster808@gmail.com>
+Subject: [langdale 20/35] python3-pywbemtools: upgrade 1.0.0 -> 1.0.1
+Date: Sat, 19 Nov 2022 10:57:44 -0500
+Message-Id: <410c3dd0c1273e54c1af76b585eaf3a834bfa214.1668873377.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <cover.1668873377.git.akuster808@gmail.com>
 References: <cover.1668873377.git.akuster808@gmail.com>
@@ -61,35 +61,35 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sat, 19 Nov 2022 15:58:37 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99661
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99659
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit c6ef4d9828344fefb5010ac6b4de170808ef1640)
+(cherry picked from commit 1605c2bf33f0a45ca9c31b90af468022d66f9985)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- ...ython3-sqlalchemy_1.4.41.bb => python3-sqlalchemy_1.4.42.bb} | 2 +-
+ ...ython3-pywbemtools_1.0.0.bb => python3-pywbemtools_1.0.1.bb} | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-sqlalchemy_1.4.41.bb => python3-sqlalchemy_1.4.42.bb} (87%)
+ rename meta-python/recipes-extended/pywbemtools/{python3-pywbemtools_1.0.0.bb => python3-pywbemtools_1.0.1.bb} (92%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-sqlalchemy_1.4.41.bb b/meta-python/recipes-devtools/python/python3-sqlalchemy_1.4.42.bb
-similarity index 87%
-rename from meta-python/recipes-devtools/python/python3-sqlalchemy_1.4.41.bb
-rename to meta-python/recipes-devtools/python/python3-sqlalchemy_1.4.42.bb
-index 5b93458792..6999554b81 100644
---- a/meta-python/recipes-devtools/python/python3-sqlalchemy_1.4.41.bb
-+++ b/meta-python/recipes-devtools/python/python3-sqlalchemy_1.4.42.bb
-@@ -4,7 +4,7 @@ HOMEPAGE = "http://www.sqlalchemy.org/"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=f4001d1ca15b69d096fa1b4fd1bdce79"
+diff --git a/meta-python/recipes-extended/pywbemtools/python3-pywbemtools_1.0.0.bb b/meta-python/recipes-extended/pywbemtools/python3-pywbemtools_1.0.1.bb
+similarity index 92%
+rename from meta-python/recipes-extended/pywbemtools/python3-pywbemtools_1.0.0.bb
+rename to meta-python/recipes-extended/pywbemtools/python3-pywbemtools_1.0.1.bb
+index 3a9f0ad6fd..ea9d6528d4 100644
+--- a/meta-python/recipes-extended/pywbemtools/python3-pywbemtools_1.0.0.bb
++++ b/meta-python/recipes-extended/pywbemtools/python3-pywbemtools_1.0.1.bb
+@@ -4,7 +4,7 @@ HOMEPAGE = "https://pywbemtools.readthedocs.io/en/stable/"
+ LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=e23fadd6ceef8c618fc1c65191d846fa"
  
--SRC_URI[sha256sum] = "0292f70d1797e3c54e862e6f30ae474014648bc9c723e14a2fda730adb0a9791"
-+SRC_URI[sha256sum] = "177e41914c476ed1e1b77fd05966ea88c094053e17a85303c4ce007f88eff363"
+-SRC_URI[sha256sum] = "0af7e067e0c0ba32cc19c2c2dc67875c591b806c4b49480ebe46e37bfb399684"
++SRC_URI[sha256sum] = "3fd2fec6a11992afb8a34c0181b76c8d36c6fae1b79d83fb4542ce08e0fb4127"
  
- PYPI_PACKAGE = "SQLAlchemy"
  inherit pypi setuptools3
+ 
 -- 
 2.25.1
 
