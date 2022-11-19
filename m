@@ -1,122 +1,109 @@
-Return-Path: <ticotimo@gmail.com>
+Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4FD2FC4332F
-	for <webhook@archiver.kernel.org>; Fri, 18 Nov 2022 20:18:11 +0000 (UTC)
-Received: from mail-pj1-f47.google.com (mail-pj1-f47.google.com [209.85.216.47])
- by mx.groups.io with SMTP id smtpd.web10.4191.1668802690378592847
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4938AC4332F
+	for <webhook@archiver.kernel.org>; Sat, 19 Nov 2022 07:36:35 +0000 (UTC)
+Received: from mail1.bemta37.messagelabs.com (mail1.bemta37.messagelabs.com [85.158.142.113])
+ by mx.groups.io with SMTP id smtpd.web11.15705.1668843387294002265
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 18 Nov 2022 12:18:10 -0800
+ Fri, 18 Nov 2022 23:36:28 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=Zd+kDN6y;
- spf=pass (domain: gmail.com, ip: 209.85.216.47, mailfrom: ticotimo@gmail.com)
-Received: by mail-pj1-f47.google.com with SMTP id v4-20020a17090a088400b00212cb0ed97eso6068246pjc.5
-        for <openembedded-devel@lists.openembedded.org>; Fri, 18 Nov 2022 12:18:10 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=JTqU1iJRjqwi9s19UHTGSgLtcAOUd8jIfDf2UIkRQiQ=;
-        b=Zd+kDN6yu6vWmVIuuIrFsYds435bS2GDgbeiadqv5xchC+JfPJHR9SSi56lcaVW/7B
-         Yxnv0IbMOWSiMM93n7OGlz1cTO+9f9lyeGap0r8x2iVqz+Hgfhu6K/OZXB8iE6qxlImR
-         OqTydXHwBAdnbGi/UvTE+Jwo+3VxuNLUWydLMe+4iLnf+e+/hO46rQvStmn8EdNRh631
-         5pGbVAnvtf/gaRhNHPi8rps/vH+W4yKELiVjWNlDU9OXnDEuheR821duqhZdWwXiKoqG
-         PXoBAVIj5DcmJg3hq/VwugJ5vnkq98uvVniFS0slK1EfbRMSvKQrPTbDZQiHqYU479TO
-         yTdQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=JTqU1iJRjqwi9s19UHTGSgLtcAOUd8jIfDf2UIkRQiQ=;
-        b=7ob1xSykXDKBp+KSHX1fCUcyWle2yAhZgM20dCmuKYjQ5QXqtlAHUomVnm27oxmJQf
-         Ao65j0rM/YOP/vTEQSUP+G4SbvtnrCpRh4qikrFGk2tAgNKMEgKei7iXFnf2URkFsGT7
-         OwSebu1oXDNwidKOvuO7MMeirykHNqjnyUwZZ3zsHQmOJsp1/ja9SarF2XJ9dIZg8iM1
-         iojmdLK/M+xRQDv7b9I+NeSw8qwFnJZ9H0C0gDgbM0UrbzR2zU2PHS/wHt1FZIlVwHVk
-         psg8NxKokmgDYU5kg7szo/+2cxcjdhpYCsumRXsPLyMbRc7IEPc1DQA4j/sPKlff1ImI
-         Js0A==
-X-Gm-Message-State: ANoB5pmEA+A6RwzH80JRt2LZAJlDhMQgkRL7UqMI49rW6QE0GtMV4fzH
-	p4amzbNm3sanek+mwWWGCS6XUcd7Pi4Jrw==
-X-Google-Smtp-Source: AA0mqf65zAhrDbxcrqpT1H6rBYhFIZf9gTqt2rC7pNpdp864gjMikuBX5Po7324bnHaF+N9pqwDN4w==
-X-Received: by 2002:a17:902:ab8b:b0:176:7852:dae3 with SMTP id f11-20020a170902ab8b00b001767852dae3mr1191441plr.25.1668802689403;
-        Fri, 18 Nov 2022 12:18:09 -0800 (PST)
-Received: from nereus.hsd1.or.comcast.net ([2601:1c0:ca00:cea0:b88b:808f:8d53:97bd])
-        by smtp.gmail.com with ESMTPSA id b8-20020a170902bd4800b00188fc33e96dsm2538626plx.198.2022.11.18.12.18.08
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 18 Nov 2022 12:18:08 -0800 (PST)
-From: Tim Orling <ticotimo@gmail.com>
-X-Google-Original-From: Tim Orling <tim.orling@konsulko.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Tim Orling <tim.orling@konsulko.com>
-Subject: [meta-perl][PATCH v2] libtest-warnings-perl: move to oe-core
-Date: Fri, 18 Nov 2022 12:17:54 -0800
-Message-Id: <20221118201754.3640374-1-tim.orling@konsulko.com>
-X-Mailer: git-send-email 2.30.2
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=uM80dSnV;
+ spf=pass (domain: fujitsu.com, ip: 85.158.142.113, mailfrom: wangmy@fujitsu.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
+	s=170520fj; t=1668843385; i=@fujitsu.com;
+	bh=sIQxaaR39LEhhrZCeCndh16YUjINpU33R/ltCf/hx0g=;
+	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
+	b=uM80dSnVUX7600Jk3UFskLeQ8F8moXHk1CZE9rUZmeDrL8G0Y4K4ea/fFSh5UuOaF
+	 KpOTcPiDNxi5ftQxcr00PI1aKvHNRT0aj/N+2MckjRFpMhcKoutfqMkQ3esqPs33AC
+	 gERU8YrfD2V7WkfddC9e8awGdu5ewAs8PbFfcJ+NwE2UUxL/SsA5h59qwJbi6juvyc
+	 fHzLqPK+CMfIjjz68c6EEyKaKbpYUWdhl/1MsDKARolrXN6cGFZIVbs5FVYmBygkt7
+	 aVn4yf8BmDiyx8/hINNkNcVuR6xbtXh7waC4nULsezsJ715JIo/4NhKubCJjaiXfHU
+	 2XZpf4fSKppAg==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrNIsWRWlGSWpSXmKPExsViZ8MxSbeivSL
+  Z4PIZYYuLh5cyOzB6nNu4gjGAMYo1My8pvyKBNWPFinusBdc4Kz43rmNsYHzD0cXIxSEk8IRR
+  YvHNfewQznUmiUlTzrJCOHsYJTrXvALKcHKwCUhJ3Lj/nw3EFhHQl1g6ew8ziM0soCLx4ncPW
+  I2wgKPEvAXLWEFsFgFVidatt8BqeIHip1rWM4HYEgIKElMevoeKC0qcnPmEBWKOhMTBFy+YIW
+  oUJWZfbmaBsCskZs1qg+pVk7h6bhPzBEb+WUjaZyFpX8DItIrRrDi1qCy1SNdQL6koMz2jJDc
+  xM0cvsUo3US+1VDcvv6gkAyiVWF6sl1pcrFdcmZuck6KXl1qyiREYjinFyew7GN8s+aN3iFGS
+  g0lJlHdve3myEF9SfkplRmJxRnxRaU5q8SFGGQ4OJQneuLaKZCHBotT01Iq0zBxgbMCkJTh4l
+  ER4RXyA0rzFBYm5xZnpEKlTjLocM7+2HWAWYsnLz0uVEudNApkhAFKUUZoHNwIWp5cYZaWEeR
+  kZGBiEeApSi3IzS1DlXzGKczAqCfNOB5nCk5lXArfpFdARTEBH5DiXgRxRkoiQkmpgEmk0eh4
+  y6W2kvP0CFZdX72W3Xgkt003g/CFzSqN4wnWP5ymiB3wuvVGRXfkgZkNAP7fhvgOLWF5Ep5Zu
+  /araUL32a1aQmONWLearbcer9ZdYblocsOPHGlbZI2bRsvdjl+2OFOH4WHF072L7nN0dksHh6
+  RNcGN6FZZukXxPo4fyZcPynRMuahf0RRjPTz63df3F66mlnM8ZdyTM83xZ1eZ/+b8VRzmJqKP
+  k1IKftyvbnt7f9evlo9cMEo6xeo2vzp0aVHecMn/7V9F6Omm7Oaik37Zfxpy1UxW58O6wZ9eD
+  uytydJZ/Vuf9lFndtMOD7zL7ZSCz8RJePI5PI5HdZrEKMSue3v498Wth4O+aeEktxRqKhFnNR
+  cSIAPiNo4E4DAAA=
+X-Env-Sender: wangmy@fujitsu.com
+X-Msg-Ref: server-8.tower-745.messagelabs.com!1668843383!126390!1
+X-Originating-IP: [62.60.8.146]
+X-SYMC-ESS-Client-Auth: outbound-route-from=pass
+X-StarScan-Received: 
+X-StarScan-Version: 9.101.1; banners=-,-,-
+X-VirusChecked: Checked
+Received: (qmail 13488 invoked from network); 19 Nov 2022 07:36:24 -0000
+Received: from unknown (HELO n03ukasimr02.n03.fujitsu.local) (62.60.8.146)
+  by server-8.tower-745.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 19 Nov 2022 07:36:24 -0000
+Received: from n03ukasimr02.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTP id C4CA61039DB
+	for <openembedded-devel@lists.openembedded.org>; Sat, 19 Nov 2022 07:36:23 +0000 (GMT)
+Received: from R01UKEXCASM126.r01.fujitsu.local (R01UKEXCASM126 [10.183.43.178])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTPS id B87A61039DA
+	for <openembedded-devel@lists.openembedded.org>; Sat, 19 Nov 2022 07:36:23 +0000 (GMT)
+Received: from localhost.localdomain (10.167.225.33) by
+ R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
+ (TLS) id 15.0.1497.32; Sat, 19 Nov 2022 07:36:22 +0000
+From: <wangmy@fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: Wang Mingyu <wangmy@fujitsu.com>
+Subject: [oe] [meta-gnome] [PATCH] babl: upgrade 0.1.96 -> 0.1.98
+Date: Sat, 19 Nov 2022 15:35:57 +0800
+Message-ID: <1668843361-2892-1-git-send-email-wangmy@fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.167.225.33]
+X-ClientProxiedBy: G08CNEXCHPEKD07.g08.fujitsu.local (10.167.33.80) To
+ R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
+X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 18 Nov 2022 20:18:11 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99621
+ <openembedded-devel@lists.openembedded.org>; Sat, 19 Nov 2022 07:36:35 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99622
 
-This is now a dependency for liburi-perl-ptest.
+From: Wang Mingyu <wangmy@fujitsu.com>
 
-Signed-off-by: Tim Orling <tim.orling@konsulko.com>
+Changelog:
+More robust bounds protection in ICC handling, avoid garbage collecting lookup
+tables in-line with processing.
+
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../libtest/libtest-warnings-perl_0.031.bb    | 28 -------------------
- .../packagegroups/packagegroup-meta-perl.bb   |  1 -
- 2 files changed, 29 deletions(-)
- delete mode 100644 meta-perl/recipes-perl/libtest/libtest-warnings-perl_0.031.bb
+ meta-gnome/recipes-gimp/babl/{babl_0.1.96.bb => babl_0.1.98.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-gnome/recipes-gimp/babl/{babl_0.1.96.bb => babl_0.1.98.bb} (87%)
 
-diff --git a/meta-perl/recipes-perl/libtest/libtest-warnings-perl_0.031.bb b/meta-perl/recipes-perl/libtest/libtest-warnings-perl_0.031.bb
-deleted file mode 100644
-index d1c0d95fd3..0000000000
---- a/meta-perl/recipes-perl/libtest/libtest-warnings-perl_0.031.bb
-+++ /dev/null
-@@ -1,28 +0,0 @@
--# Copyright (C) 2020 Jens Rehsack <sno@netbsd.org>
--# Released under the MIT license (see COPYING.MIT for the terms)
--
--DESCRIPTION = "If you've ever tried to use Test::NoWarnings to confirm there are no \
--warnings generated by your tests, combined with the convenience of \
--\\"done_testing\\" to not have to declare a test count, you'll have discovered \
--that these two features do not play well together, as the test count will \
--be calculated *before* the warnings test is run, resulting in a TAP error. \
--(See "examples/test_nowarnings.pl" in this distribution for a \
--demonstration.)"
--
--SECTION = "libs"
--LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
--
--HOMEPAGE=       "https://metacpan.org/release/Test-Warnings"
--
--LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/Artistic-1.0;md5=cda03bbdc3c1951996392b872397b798 \
--file://${COMMON_LICENSE_DIR}/GPL-1.0-or-later;md5=30c0b8a5048cc2f4be5ff15ef0d8cf61"
--
--SRC_URI = "https://cpan.metacpan.org/authors/id/E/ET/ETHER/Test-Warnings-${PV}.tar.gz"
--
--SRC_URI[sha256sum] = "1e542909fef305e45563e9878ea1c3b0c7cef1b28bb7ae07eba2e1efabec477b"
--
--S = "${WORKDIR}/Test-Warnings-${PV}"
--
--inherit cpan ptest-perl
--
--BBCLASSEXTEND = "native nativesdk"
-diff --git a/meta-perl/recipes-perl/packagegroups/packagegroup-meta-perl.bb b/meta-perl/recipes-perl/packagegroups/packagegroup-meta-perl.bb
-index e4e50957f1..187424b449 100644
---- a/meta-perl/recipes-perl/packagegroups/packagegroup-meta-perl.bb
-+++ b/meta-perl/recipes-perl/packagegroups/packagegroup-meta-perl.bb
-@@ -78,7 +78,6 @@ RDEPENDS:packagegroup-meta-perl = "\
-     libtest-harness-perl \
-     libtest-nowarnings-perl \
-     libtest-warn-perl \
--    libtest-warnings-perl \
-     libunicode-linebreak-perl \
-     po4a \
- "
+diff --git a/meta-gnome/recipes-gimp/babl/babl_0.1.96.bb b/meta-gnome/recipes-gimp/babl/babl_0.1.98.bb
+similarity index 87%
+rename from meta-gnome/recipes-gimp/babl/babl_0.1.96.bb
+rename to meta-gnome/recipes-gimp/babl/babl_0.1.98.bb
+index 85cc7793c..a9e192b75 100644
+--- a/meta-gnome/recipes-gimp/babl/babl_0.1.96.bb
++++ b/meta-gnome/recipes-gimp/babl/babl_0.1.98.bb
+@@ -15,6 +15,6 @@ CFLAGS:append:toolchain-clang:mipsarch = " -ffp-exception-behavior=ignore "
+ CFLAGS:append:toolchain-clang:riscv64 = " -ffp-exception-behavior=ignore "
+ 
+ SRC_URI = "https://download.gimp.org/pub/${BPN}/0.1/${BP}.tar.xz"
+-SRC_URI[sha256sum] = "33673fe459a983f411245a49f81fd7f1966af1ea8eca9b095a940c542b8545f6"
++SRC_URI[sha256sum] = "f3b222f84e462735de63fa9c3651942f2b78fd314c73a22e05ff7c73afd23af1"
+ 
+ BBCLASSEXTEND = "native"
 -- 
-2.30.2
+2.25.1
 
 
