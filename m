@@ -2,56 +2,56 @@ Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B0D4CC4167B
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A91EFC43219
 	for <webhook@archiver.kernel.org>; Sat, 19 Nov 2022 15:58:57 +0000 (UTC)
-Received: from mail-qk1-f170.google.com (mail-qk1-f170.google.com [209.85.222.170])
- by mx.groups.io with SMTP id smtpd.web10.23561.1668873530618690521
+Received: from mail-qv1-f44.google.com (mail-qv1-f44.google.com [209.85.219.44])
+ by mx.groups.io with SMTP id smtpd.web11.23297.1668873534374276137
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 19 Nov 2022 07:58:50 -0800
+ Sat, 19 Nov 2022 07:58:54 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=DDC5ir9J;
- spf=pass (domain: gmail.com, ip: 209.85.222.170, mailfrom: akuster808@gmail.com)
-Received: by mail-qk1-f170.google.com with SMTP id 8so5439548qka.1
-        for <openembedded-devel@lists.openembedded.org>; Sat, 19 Nov 2022 07:58:50 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=AArEuBp+;
+ spf=pass (domain: gmail.com, ip: 209.85.219.44, mailfrom: akuster808@gmail.com)
+Received: by mail-qv1-f44.google.com with SMTP id df6so3120303qvb.0
+        for <openembedded-devel@lists.openembedded.org>; Sat, 19 Nov 2022 07:58:54 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=fI0FMzDPJkrItFLW0VYeWAHczrEFL8xtpGZw/MuDXu8=;
-        b=DDC5ir9JhuBggbjfmm4nhUpY7z8zeDTEfFkvjRs/NfE6z/GoaPIFwuil3QC1fJ21Mg
-         0EjiB8ugWb2xF/C0tw1hbH4ZURcyPAbD7Pa+YClngGYY1iellU96b5G5Hscd7OiINUJ1
-         P9wP0SGqf0xzy/PDJ47E5sG5CwhUataWzQfa0ZRGyZ+rozRUCB4sz+NF6GrkdyeZ+GHY
-         KstEifbUf26a4PjggU68SJx9dY7byt4zivfx+Q1TQ2c+xlOIz7zEh+dtj3ReJIl7mEui
-         f8NNahaA+A2vxGOCm+1d0O1l++cw+iE3PkmfHti3iT/f6R8DRsDvPS0GK2y5ul6+sE2A
-         aYZw==
+        bh=aDPLGyEPwxdzrP14PB1aBSUb87hFJ4MU1bawYBYrxw8=;
+        b=AArEuBp+tXS3pIffjSOmtFS9rqJjAuDnHPfbsuUutT7pZtI7A48eesLNDxLDVlp6c9
+         XId4Eu8eo7C4e251v+cvyxN+4db87kTovdgGoFGdWMDqEu6gAOZFtbuOj2ssAibZCTh5
+         hSmT7B7DEbbSWPHpVdIERbo5Cl9xMKhpVr4/C1hTCaSNvCAISb23IX6GEn8oG1KnCjgi
+         +Sfj6/kGriphwjtJJs0qzZzaf+gL+2wP+CxEzHH9QTGu1sdEiAeXZKLuo4pFT8Oz7S30
+         OGeXveiqJgTlKL3N2hdAb1A9uR5vEkcUMRm5MQpv/nUY51oXDSkiHE2DW0fFITd6FO+v
+         w4Tg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=fI0FMzDPJkrItFLW0VYeWAHczrEFL8xtpGZw/MuDXu8=;
-        b=n985j0bL+S/MWM5vCin8w6ZZ8iPkNlfKfyxpxzygmjJIpdGb8vAKB5R/77NYTRcid7
-         fTXTPLTZzyHHTFSZBVIBuOEAP1GKYqQedSpb3J+lEOr5FSNtBAme/6sKdr+QLUf3eB83
-         WcOODSr0ktI0ZQzQWIT2NNoVhIF+sfgZP3Stq10xfqREprwSK4SloFv/liDjIOZK0G7j
-         oo+6ImcsUISiezGMs0fyqW6N2kRrJhvwnNlBw/Gw8DdKGuWa2usbe3l72m1vpaTr0e2G
-         IQLACGCF2jFDjZSfsjXw0yo/KYb6cv6HIBF1EhVT20Nozxlbv9ufqByTFaO1uhHLaRIJ
-         MPhQ==
-X-Gm-Message-State: ANoB5pkBzPqlPgo3Xk3DV+X1jXiLVnROUmU29biAZX0UYLut3QIA+NwQ
-	NHaAcR5vMLYcMKNPxJIZ99g78MWY41YiHw==
-X-Google-Smtp-Source: AA0mqf5+h1DQUqUCui4xYt/wMNsyawC3dKSqnhCf5Wr84ePVQS9+3wfuQpDD9OY9EjCg30oFmFaV5A==
-X-Received: by 2002:a37:503:0:b0:6fb:c3b3:a937 with SMTP id 3-20020a370503000000b006fbc3b3a937mr58986qkf.34.1668873529229;
-        Sat, 19 Nov 2022 07:58:49 -0800 (PST)
+        bh=aDPLGyEPwxdzrP14PB1aBSUb87hFJ4MU1bawYBYrxw8=;
+        b=Vw2jS923OEhV/2ZDUs0C86h8kfoJEriTeTQIGMui5pvNTrsCNBtPhOvlgyXbmTnNv6
+         SIY5drW+2n0ogpC+KbYYrkn4kI9RQW9617AHdAIKPsYTDtkJvK9NsNtLa/whr+HNrtNA
+         t5ZGmFNUSHa7XGR53yfbqEX0XbTTlUMNPRJz+vl4Tw7EUa9mzFi9u8/J12MsZEL3xtMW
+         xwkBljThmGo1eX9xoMxj14NJ4L78NEGPzywW/TF6D8RRKDjbcQ9bnTVRfkyQfqCTFPvC
+         CzGho+LSCkW1erSkoln4jrC5oOBuGX2prOPi41GJL8D8djCfRjQuE4tR4J+kJ6+IoIac
+         3YYA==
+X-Gm-Message-State: ANoB5pkwr1A1nlK2qDIArNdUYk8xwclACLCtmS//bQQGWAWimwi51hOZ
+	plY0qqN21SxZilZubNZO1ngG+F9VMHiAkw==
+X-Google-Smtp-Source: AA0mqf6lC3DepTbBdzcNWtTjoWSAgsalejGPrAzO/zb5DjR3PQrUm8pg7tt0d5a+JdFhZ07wbgprJg==
+X-Received: by 2002:a0c:e810:0:b0:4bc:10c8:96fc with SMTP id y16-20020a0ce810000000b004bc10c896fcmr11079401qvn.120.1668873533028;
+        Sat, 19 Nov 2022 07:58:53 -0800 (PST)
 Received: from keaua.attlocal.net ([2600:1700:9190:ba10:8dbe:f48d:8b1a:1569])
-        by smtp.gmail.com with ESMTPSA id c7-20020a05620a268700b006fb112f512csm4821314qkp.74.2022.11.19.07.58.47
+        by smtp.gmail.com with ESMTPSA id c7-20020a05620a268700b006fb112f512csm4821314qkp.74.2022.11.19.07.58.51
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 19 Nov 2022 07:58:47 -0800 (PST)
+        Sat, 19 Nov 2022 07:58:51 -0800 (PST)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [langdale 31/35] =?UTF-8?q?ipmitool:=20fix=20typo=20in=20.bb=20fi?= =?UTF-8?q?le's=20comments,=20using=20=3D=20instead=20of=20=3D=3F?=
-Date: Sat, 19 Nov 2022 10:57:55 -0500
-Message-Id: <665824e498f814059d0c1915f2e3e286e9098d2f.1668873377.git.akuster808@gmail.com>
+Subject: [langdale 33/35] monkey: use git fetcher
+Date: Sat, 19 Nov 2022 10:57:57 -0500
+Message-Id: <16c5d44d421a10510e7d31f9368df5a9560ddd05.1668873377.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <cover.1668873377.git.akuster808@gmail.com>
 References: <cover.1668873377.git.akuster808@gmail.com>
@@ -61,31 +61,41 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sat, 19 Nov 2022 15:58:57 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99670
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99672
 
-From: Xiangyu Chen <xiangyu.chen@windriver.com>
+From: Martin Jansa <martin.jansa@gmail.com>
 
-Signed-off-by: Xiangyu Chen <xiangyu.chen@windriver.com>
+* monkey-project.com doesn't resolve anymore
+* use v1.6.9 tag from github
+
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 6ebff843cce0a66a7749e048f280bb9cfdca5946)
+(cherry picked from commit d04444509a220fcb61496d7e64f3ba09c647543b)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-oe/recipes-kernel/ipmitool/ipmitool_1.8.19.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-webserver/recipes-httpd/monkey/monkey_1.6.9.bb | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
 
-diff --git a/meta-oe/recipes-kernel/ipmitool/ipmitool_1.8.19.bb b/meta-oe/recipes-kernel/ipmitool/ipmitool_1.8.19.bb
-index 0a600e23bb..a8d203e599 100644
---- a/meta-oe/recipes-kernel/ipmitool/ipmitool_1.8.19.bb
-+++ b/meta-oe/recipes-kernel/ipmitool/ipmitool_1.8.19.bb
-@@ -30,7 +30,7 @@ SRC_URI = "git://github.com/ipmitool/ipmitool;protocol=https;branch=master \
- IANA_ENTERPRISE_NUMBERS ?= ""
+diff --git a/meta-webserver/recipes-httpd/monkey/monkey_1.6.9.bb b/meta-webserver/recipes-httpd/monkey/monkey_1.6.9.bb
+index 5b7e32733c..d3e22757c4 100644
+--- a/meta-webserver/recipes-httpd/monkey/monkey_1.6.9.bb
++++ b/meta-webserver/recipes-httpd/monkey/monkey_1.6.9.bb
+@@ -7,12 +7,13 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=2ee41112a44fe7014dce33e26468ba93"
  
- # Add these via bbappend if this database is needed by the system
--#IANA_ENTERPRISE_NUMBERS ?= "http://www.iana.org/assignments/enterprise-numbers;name=iana-enterprise-numbers;downloadfilename=iana-enterprise-numbers"
-+#IANA_ENTERPRISE_NUMBERS = "http://www.iana.org/assignments/enterprise-numbers;name=iana-enterprise-numbers;downloadfilename=iana-enterprise-numbers"
- #SRC_URI[iana-enterprise-numbers.sha256sum] = "cdd97fc08325667434b805eb589104ae63f7a9eb720ecea73cb55110b383934c"
+ SECTION = "net"
  
- S = "${WORKDIR}/git"
+-SRC_URI = "http://monkey-project.com/releases/1.6/monkey-${PV}.tar.gz \
++SRC_URI = "git://github.com/monkey/monkey;branch=1.6;protocol=https \
+            file://0001-fastcgi-Use-value-instead-of-address-of-sin6_port.patch \
+            file://monkey.service \
+            file://monkey.init"
+ 
+-SRC_URI[sha256sum] = "f1122e89cda627123286542b0a18fcaa131cbe9d4f5dd897d9455157289148fb"
++SRCREV = "7999b487fded645381d387ec0e057e92407b0d2c"
++S = "${WORKDIR}/git"
+ 
+ UPSTREAM_CHECK_URI = "https://github.com/monkey/monkey/releases"
+ UPSTREAM_CHECK_REGEX = "v(?P<pver>\d+(\.\d+)+).tar.gz"
 -- 
 2.25.1
 
