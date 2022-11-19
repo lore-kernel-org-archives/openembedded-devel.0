@@ -2,56 +2,56 @@ Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8DB6DC4332F
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 90B27C43219
 	for <webhook@archiver.kernel.org>; Sat, 19 Nov 2022 15:58:47 +0000 (UTC)
-Received: from mail-qk1-f174.google.com (mail-qk1-f174.google.com [209.85.222.174])
- by mx.groups.io with SMTP id smtpd.web10.23560.1668873526007968465
+Received: from mail-qv1-f46.google.com (mail-qv1-f46.google.com [209.85.219.46])
+ by mx.groups.io with SMTP id smtpd.web11.23277.1668873500241349036
  for <openembedded-devel@lists.openembedded.org>;
  Sat, 19 Nov 2022 07:58:46 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=a7wj5pDm;
- spf=pass (domain: gmail.com, ip: 209.85.222.174, mailfrom: akuster808@gmail.com)
-Received: by mail-qk1-f174.google.com with SMTP id x18so5426811qki.4
-        for <openembedded-devel@lists.openembedded.org>; Sat, 19 Nov 2022 07:58:45 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=m/1Z4R61;
+ spf=pass (domain: gmail.com, ip: 209.85.219.46, mailfrom: akuster808@gmail.com)
+Received: by mail-qv1-f46.google.com with SMTP id c8so5325545qvn.10
+        for <openembedded-devel@lists.openembedded.org>; Sat, 19 Nov 2022 07:58:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=PtA6yz3SGvAJyD2xJbDVxXYvFOuneOLOOE7cWl18CJg=;
-        b=a7wj5pDmVhLEfeCJC+n3dXGdfZCwc2ua3KiJiUep7J/onKbvbWV56DOzMPkMKq9TZ2
-         t3KWrMN7Hsuw7sc7OWDVi+zqx0azZQz9K6iPeTguXLOhrxkyJV/sUbAZnsYUbCJ1L6AN
-         QYemSLlYQ0U8qbnistoXzY5EQv7N5QuwTNz48GeBdjf+pa3f0KX8Wkc66L03W5nsHCEV
-         AwKtS8zPugGz1Eyy4FhkupK58d8+ZdS8QoUrr5R0w2oc5xmpYhuQy8ZsfxaAgXSe5h/5
-         9/uSiXGdg5Qu60QRef261FGmfRkFurF5VhsMeq2H5PxHwoFbTbpqYIFu+0xKsn6ehki0
-         N6cA==
+        bh=E3/JFeZ/8DmQSYyEDWspjzla8iFz7vUSERBerygtNpU=;
+        b=m/1Z4R61XrywH1BMGocV5Gu7ZZxrMIZ72eYup6nRFRFbM3UwdcZ0Tk3LqIbZofAy5k
+         DZszAilkgXJGBpooNHLWp26FfTbfiqRyPzsH2oiZhA5MSc6CPKug4p82IOCoSVr0CmDr
+         +psbKrJfnpyt3AXbDht82PeHmbqXTPeqXIdRNoeI0Qv0w4U+nWhgmkF28qJEucIpqWj8
+         XPGhdSUhhlT2bUg0FY1Knz/Em8atfzpVRB2WHD3xeF3ldpOQPEkk0ampZq/rwJI+5uml
+         CjGN6DWTMkt5CBJ/lt9YGqOMYlAUJl07eIMMPSGffJXK7Sv6+ALp7VI8OuTbKz+n5Yl5
+         6x6Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=PtA6yz3SGvAJyD2xJbDVxXYvFOuneOLOOE7cWl18CJg=;
-        b=5mzyfjze1o+s29pF4QEZypuC5gBjrhM9+pkgbRgKgJqMe0ZfknKibYL/a1aTdu5V41
-         9xQvCb14oG5jT74eJyeW2eGF9JXyE+gpgr6nZbjlqhy8y0/rVl33ByBOSCJHwBD6c9zR
-         E307pOJHg31qeZyK7WgtMH7HhspJ9kNbbeRJfR6jsXMd4araK1clbZXczKayqI2JWLEt
-         fYLomuCn7+O4bbAm4gPTOhrcInBGfSXWshj7DReKD0W7yfyAYU2RhdwCYdk4KFfw7g6r
-         MkCZfUte/C8cOFb5aSnlcpjnki2y/trVzkieD2cWAJOQ1GaVmbs2wUd7S6m1+T3QhVks
-         ZTHQ==
-X-Gm-Message-State: ANoB5pn4oPu1O8fvPZKjiGxjD2A8Ytate+u8vhld9CC0h2c2bjEAvF7b
-	81fEHkIf2uC+KPq6FP+5mohLY3fFc4dnBA==
-X-Google-Smtp-Source: AA0mqf5+t4nFtboUdHO2eF6XET8A/RZdF+LtsfFV3Vaivh3PmgfPv+1AA5HPdpHr3zKDi9OQk3n5EA==
-X-Received: by 2002:a05:620a:b08:b0:6ce:1a26:ff75 with SMTP id t8-20020a05620a0b0800b006ce1a26ff75mr10008228qkg.698.1668873524730;
-        Sat, 19 Nov 2022 07:58:44 -0800 (PST)
+        bh=E3/JFeZ/8DmQSYyEDWspjzla8iFz7vUSERBerygtNpU=;
+        b=eRedgqIJjMkfzlxvXZXr3QixONG0/mlAkCWzEQciUgw92MiIcDBo7Fgji7O75FkSe7
+         DysuiuvWViFkgG+8Dx+RyZNiA09ymMroxHYy7ScJXjDpqt/goKhasNimcYH+7G2gWLcF
+         eeSXKQCrz3DyjsyiR3CwxowWoQ0M3xh2Wm+jBjCJV5AelMlJjRhnnZpc/TIA+I46B9hV
+         Ue2btcSGqHn0SytTBI5W/htLLI7AVu/6eLdEb4LOs0nYDKPEaXpg3U1+l+02idAqN3Jw
+         X/FpenG5sVUFuKR6xQmXlfmhbltkDX0NKcuknr4d+jh/HLwCn1N7xaAqXxqRJGF1nzPU
+         4qeg==
+X-Gm-Message-State: ANoB5plSppg6baiNVxmVBw4Ok3+h4vEEgFaX9UEMiv4gbc6A5psEJCDN
+	pXb3shtnZPGWO9YpkVQa/RBSivzaCDnedQ==
+X-Google-Smtp-Source: AA0mqf5tg2VtKIBqtdx+OFy2RuE3Q/lP1bz6diuZbYPvqkN4ToOWq40c0E3C+uk/Fu3d9QEzsQT4kA==
+X-Received: by 2002:a0c:9068:0:b0:4bb:7f7d:2bb5 with SMTP id o95-20020a0c9068000000b004bb7f7d2bb5mr11189189qvo.80.1668873525723;
+        Sat, 19 Nov 2022 07:58:45 -0800 (PST)
 Received: from keaua.attlocal.net ([2600:1700:9190:ba10:8dbe:f48d:8b1a:1569])
-        by smtp.gmail.com with ESMTPSA id c7-20020a05620a268700b006fb112f512csm4821314qkp.74.2022.11.19.07.58.43
+        by smtp.gmail.com with ESMTPSA id c7-20020a05620a268700b006fb112f512csm4821314qkp.74.2022.11.19.07.58.44
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 19 Nov 2022 07:58:44 -0800 (PST)
+        Sat, 19 Nov 2022 07:58:45 -0800 (PST)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [langdale 28/35] ctags: upgrade 5.9.20221016.0 -> 5.9.20221023.0
-Date: Sat, 19 Nov 2022 10:57:52 -0500
-Message-Id: <7190b3bb18e889258c2786dbd00c67d38ea8cf1a.1668873377.git.akuster808@gmail.com>
+Subject: [langdale 29/35] function2: upgrade 4.2.1 -> 4.2.2
+Date: Sat, 19 Nov 2022 10:57:53 -0500
+Message-Id: <dba4edcef8ed7c18f4d341a9d28e3f99855f5f73.1668873377.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <cover.1668873377.git.akuster808@gmail.com>
 References: <cover.1668873377.git.akuster808@gmail.com>
@@ -61,38 +61,35 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sat, 19 Nov 2022 15:58:47 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99667
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99668
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
-Changelog:
-lregex: warn if mgroup= flag is not given in --mline-regex-<LANG>
-
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit e72998c0049154da98c4e8c4e2a90c74a7e5e996)
+(cherry picked from commit 30444c8a59f6adb050349ae069d176db83c54d3a)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../ctags/{ctags_5.9.20221016.0.bb => ctags_5.9.20221023.0.bb}  | 2 +-
+ .../function2/{function2_4.2.1.bb => function2_4.2.2.bb}        | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-devtools/ctags/{ctags_5.9.20221016.0.bb => ctags_5.9.20221023.0.bb} (95%)
+ rename meta-oe/recipes-support/function2/{function2_4.2.1.bb => function2_4.2.2.bb} (92%)
 
-diff --git a/meta-oe/recipes-devtools/ctags/ctags_5.9.20221016.0.bb b/meta-oe/recipes-devtools/ctags/ctags_5.9.20221023.0.bb
-similarity index 95%
-rename from meta-oe/recipes-devtools/ctags/ctags_5.9.20221016.0.bb
-rename to meta-oe/recipes-devtools/ctags/ctags_5.9.20221023.0.bb
-index 809f578803..b7703cef96 100644
---- a/meta-oe/recipes-devtools/ctags/ctags_5.9.20221016.0.bb
-+++ b/meta-oe/recipes-devtools/ctags/ctags_5.9.20221023.0.bb
-@@ -14,7 +14,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3"
+diff --git a/meta-oe/recipes-support/function2/function2_4.2.1.bb b/meta-oe/recipes-support/function2/function2_4.2.2.bb
+similarity index 92%
+rename from meta-oe/recipes-support/function2/function2_4.2.1.bb
+rename to meta-oe/recipes-support/function2/function2_4.2.2.bb
+index 8e3718102e..31cd077d91 100644
+--- a/meta-oe/recipes-support/function2/function2_4.2.1.bb
++++ b/meta-oe/recipes-support/function2/function2_4.2.2.bb
+@@ -3,7 +3,7 @@ DESCRIPTION = "Provides improved implementations of std::function."
+ HOMEPAGE = "https://naios.github.io/function2"
+ LICENSE = "BSL-1.0"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=e4224ccaecb14d942c71d31bef20d78c"
+-SRCREV = "f569a63cfe369df867a1a4d17aaa12269156536c"
++SRCREV = "2d3a878ef19dd5d2fb188898513610fac0a48621"
+ PV .= "+git${SRCPV}"
  
- inherit autotools-brokensep pkgconfig manpages
- 
--SRCREV = "a2995833175678358767e1c9a36ad3946667edf1"
-+SRCREV = "d8f5c062ea6ff484f4f1f5095a7d3c364f3019ea"
- SRC_URI = "git://github.com/universal-ctags/ctags;branch=master;protocol=https"
- 
- S = "${WORKDIR}/git"
+ SRC_URI += "gitsm://github.com/Naios/function2;branch=master;protocol=https"
 -- 
 2.25.1
 
