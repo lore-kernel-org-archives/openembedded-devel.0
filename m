@@ -2,68 +2,71 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3F966C433FE
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 40FF7C4332F
 	for <webhook@archiver.kernel.org>; Sat, 19 Nov 2022 07:45:25 +0000 (UTC)
-Received: from mail1.bemta32.messagelabs.com (mail1.bemta32.messagelabs.com [195.245.230.66])
- by mx.groups.io with SMTP id smtpd.web10.15993.1668843920495280256
+Received: from mail1.bemta34.messagelabs.com (mail1.bemta34.messagelabs.com [195.245.231.3])
+ by mx.groups.io with SMTP id smtpd.web11.15803.1668843921982624639
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 18 Nov 2022 23:45:20 -0800
+ Fri, 18 Nov 2022 23:45:22 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=AUSUFiM9;
- spf=pass (domain: fujitsu.com, ip: 195.245.230.66, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=vVuL8+UV;
+ spf=pass (domain: fujitsu.com, ip: 195.245.231.3, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1668843918; i=@fujitsu.com;
-	bh=zWfoPniqHGA8quYX1jugCpbMT+pN4eT02MoCEGpHKGU=;
-	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=AUSUFiM9aIMMKhA9YNaeof4vNWlxjTJNm6uRz0QRawylu2AbHM69owyL52woPj3bF
-	 NJooZIjTlP9gU8aB+BxpTpgNXwqTwx8qrd5JPxwFLyxsg55JlI3X1rUqOUW9+5CRAY
-	 ytxBmJImh4RNrDExkZL8TkEziGD/bxES0mOukW6FKZqmRX5dfc/+lR/qFYto20/t6j
-	 aZvpVaacB+/qqYNVvKPcPPQUxkV03MOnpX9xZrcvIspJmig93a+sel3s6h1sLqMWr/
-	 8UF04F+mXHqFjUH/VzaQ2mvkemCuwEvXF+4dTq9TC/XwW2i80b531+xP76TQUaMKV1
-	 23qIPf+PNDD1A==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrJIsWRWlGSWpSXmKPExsViZ8MxSbe3syL
-  ZYNY7PouLh5cyOzB6nNu4gjGAMYo1My8pvyKBNePDAbaCrbwVzbOnszQwruXpYuTiEBJ4wijR
-  dukKWxcjJ5BznUmif5IBRGIPo0TTmimMIAk2ASmJG/f/gxWJCOhLLJ29hxnEZhZQkXjxu4cdx
-  BYWiJDo/vieCcRmEVCVOL5pM1g9r4CjxIIJz8DiEgIKElMevmeGiAtKnJz5hAVijoTEwRcvmC
-  FqFCVmX25mgbArJGbNaoPqVZO4em4T8wRG/llI2mchaV/AyLSK0aw4tagstUjX0EAvqSgzPaM
-  kNzEzRy+xSjdRL7VUtzy1uETXUC+xvFgvtbhYr7gyNzknRS8vtWQTIzAUU4pZ4ncwPlz2R+8Q
-  oyQHk5Io79728mQhvqT8lMqMxOKM+KLSnNTiQ4wyHBxKErxxbRXJQoJFqempFWmZOcC4gElLc
-  PAoifCK+ACleYsLEnOLM9MhUqcYdTlmfm07wCzEkpeflyolzlvfDlQkAFKUUZoHNwIWo5cYZa
-  WEeRkZGBiEeApSi3IzS1DlXzGKczAqCfMeBZnCk5lXArfpFdARTEBH5DiXgRxRkoiQkmpgKlk
-  fHl/xU/fril1H+xb1/LLceXwNq6AFM1OyCPuqEOUst5KNnSWVJj/13D/uP8ZmsSjniOiLNFdv
-  J//zql+Mvx1fJ7eW04w1+WTm81Sv49oqau/Mp0rx3u3hF6t7d2G/lOdOnpeXhd6z9ao+ikhmu
-  BPxn83Uwtm36uFBtihvhXkTit1a73GzJX5Ofc5fXle+6DD35CkXmcsOl4WbzN709X6QSk/gpG
-  1fr7erpUc7rf06cU7tiV3ve0IW/CqRcd7vscx9f8ah+s3/Tz6foOVn0+bK7dOzyeRi3R3Vz5b
-  ZRxLfB8z9eSXokqzP30XC6RXJU6OY/P/OPcCblzbTVHKW4vn6jP0n+vwDMpJ+X2dQYinOSDTU
-  Yi4qTgQA5e3YKkwDAAA=
+	s=170520fj; t=1668843920; i=@fujitsu.com;
+	bh=omrzzJdj0Sdy9O7fYiCRZLl5nnDy0Z2BiK4X0uln/64=;
+	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type;
+	b=vVuL8+UVTOfwNAsk8iWll1P/m3g+G9Azr6KIDP7QE5T1AaBmBCSTCy16zwF+T7kn4
+	 jg7oLZIboujffDs/zfSCZSj0x7xtFoTsBFXCaqMmWUWqOwL9FWm1L7yTRJF3HOxjOb
+	 8TdQcRlt3RuyRc/wFqRXub46xsNli/3ahNv4eEJApV7ec3jbEfTqJEGMPQmne+brRv
+	 tJJorEob2YrNUO+B4q42tuWsKWeWDL+O/f2zg/qaJoGcNmGnUeOLtxEtUIN6FybYnu
+	 iEzj74u1TRplF4Hd6T58yOqLjNY0CUMi7mK/132n/hrtl6iFwMHonx9BKGNotnT3Fd
+	 BknGc64ctqqVg==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrOIsWRWlGSWpSXmKPExsViZ8ORqNvfWZF
+  ssO+tgsXFw0uZHRg9zm1cwRjAGMWamZeUX5HAmnHpyTeWgh0cFWf6T7A3MN5n72Lk4hASeMIo
+  MXfePxYI5zqTxPFlk5ghnD2MEm/uTAcq4+RgE5CSuHH/PxuILSKgL7F09h5mEJtZQEXixe8es
+  BphAQ+Jx+smM4HYLAKqEs9WzGcEsXkFHCUu7OoF65UQUJCY8vA9WC+ngJPE+WXXwGqEgGr2HP
+  3ABlEvKHFy5hMWiPkSEgdfvGCG6FWUmH25mQXCrpCYNauNCcJWk7h6bhPzBEbBWUjaZyFpX8D
+  ItIrRrDi1qCy1SNfQSC+pKDM9oyQ3MTNHL7FKN1EvtVS3PLW4RNdIL7G8WC+1uFivuDI3OSdF
+  Ly+1ZBMjMHxTipWadzD+XfZH7xCjJAeTkijv3vbyZCG+pPyUyozE4oz4otKc1OJDjDIcHEoSv
+  HFtFclCgkWp6akVaZk5wFiCSUtw8CiJ8Ir4AKV5iwsSc4sz0yFSpxgVpcR569uBEgIgiYzSPL
+  g2WPxeYpSVEuZlZGBgEOIpSC3KzSxBlX/FKM7BqCTMexRkCk9mXgnc9FdAi5mAFuc4l4EsLkl
+  ESEk1MBmt9D0efVC27srS2eGTvc6JHjh0VLqlr6aFb/KNoJ7OGnYN49d/HcMlT3u2aiuGfC44
+  tn6a5uoI34ZHR1aoTWMXSj2ys2+CybZ6dW5/z5oQjm/Oc6ZdivwQ8fC5iuc920kd0jJi2S/8+
+  tMmrBK3ejf30XaprT9Yau+dmblz1o0zQqejRCw07grqdxx1/1He/X5m1acJm2PUDXJS/Z4W2i
+  mL9WfMktn8IbWr7dvFc10xRZeXuN1SNc+btU7Y4+jjo1P/L5/eWyvW9/Bs+wOnSVz3N13oz1u
+  l3J10v1+xwIYzwn7mp5sPRLrXMzOs+8h36twMCYf8Qv9NqwseN0rtM37czKXGtLVsz3f1Y4xv
+  hZRYijMSDbWYi4oTAYc7Z/BaAwAA
 X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-6.tower-591.messagelabs.com!1668843917!177522!1
-X-Originating-IP: [62.60.8.146]
+X-Msg-Ref: server-14.tower-571.messagelabs.com!1668843919!64803!1
+X-Originating-IP: [62.60.8.97]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.101.1; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 1862 invoked from network); 19 Nov 2022 07:45:17 -0000
-Received: from unknown (HELO n03ukasimr02.n03.fujitsu.local) (62.60.8.146)
-  by server-6.tower-591.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 19 Nov 2022 07:45:17 -0000
-Received: from n03ukasimr02.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTP id D9FE41039DD
-	for <openembedded-devel@lists.openembedded.org>; Sat, 19 Nov 2022 07:45:16 +0000 (GMT)
+Received: (qmail 14227 invoked from network); 19 Nov 2022 07:45:19 -0000
+Received: from unknown (HELO n03ukasimr01.n03.fujitsu.local) (62.60.8.97)
+  by server-14.tower-571.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 19 Nov 2022 07:45:19 -0000
+Received: from n03ukasimr01.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTP id 431EB106EF5
+	for <openembedded-devel@lists.openembedded.org>; Sat, 19 Nov 2022 07:45:19 +0000 (GMT)
 Received: from R01UKEXCASM126.r01.fujitsu.local (R01UKEXCASM126 [10.183.43.178])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTPS id CD2C31039DA
-	for <openembedded-devel@lists.openembedded.org>; Sat, 19 Nov 2022 07:45:16 +0000 (GMT)
+	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTPS id 37338106EF4
+	for <openembedded-devel@lists.openembedded.org>; Sat, 19 Nov 2022 07:45:19 +0000 (GMT)
 Received: from localhost.localdomain (10.167.225.33) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.32; Sat, 19 Nov 2022 07:45:15 +0000
+ (TLS) id 15.0.1497.32; Sat, 19 Nov 2022 07:45:17 +0000
 From: <wangmy@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-networking] [PATCH] networkmanager-openvpn: upgrade 1.10.0 -> 1.10.2
-Date: Sat, 19 Nov 2022 15:44:53 +0800
-Message-ID: <1668843897-3019-1-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH] python3-django: upgrade 4.1 -> 4.1.3
+Date: Sat, 19 Nov 2022 15:44:54 +0800
+Message-ID: <1668843897-3019-2-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
+In-Reply-To: <1668843897-3019-1-git-send-email-wangmy@fujitsu.com>
+References: <1668843897-3019-1-git-send-email-wangmy@fujitsu.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-Originating-IP: [10.167.225.33]
@@ -74,41 +77,32 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sat, 19 Nov 2022 07:45:25 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99631
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99632
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
-Changelog:
-=========
-* IP condfiguration is no longer required in TAP mode.
-* Fix initialization of secret flags.
-* Add support for DOMAIN-SEARCH option.
-* Set data-ciphers option with chosen cipher.
-* Update Brazilian Portuguese, Croatian, Danish, Georgian, Polish, Serbian,
-  Slovenian, Swedish, Turkish and Ukrainian translations.
-
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- ...nager-openvpn_1.10.0.bb => networkmanager-openvpn_1.10.2.bb} | 2 +-
+ .../python/{python3-django_4.1.bb => python3-django_4.1.3.bb}   | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-networking/recipes-connectivity/networkmanager/{networkmanager-openvpn_1.10.0.bb => networkmanager-openvpn_1.10.2.bb} (94%)
+ rename meta-python/recipes-devtools/python/{python3-django_4.1.bb => python3-django_4.1.3.bb} (58%)
 
-diff --git a/meta-networking/recipes-connectivity/networkmanager/networkmanager-openvpn_1.10.0.bb b/meta-networking/recipes-connectivity/networkmanager/networkmanager-openvpn_1.10.2.bb
-similarity index 94%
-rename from meta-networking/recipes-connectivity/networkmanager/networkmanager-openvpn_1.10.0.bb
-rename to meta-networking/recipes-connectivity/networkmanager/networkmanager-openvpn_1.10.2.bb
-index 1fcb43539..3114731f2 100644
---- a/meta-networking/recipes-connectivity/networkmanager/networkmanager-openvpn_1.10.0.bb
-+++ b/meta-networking/recipes-connectivity/networkmanager/networkmanager-openvpn_1.10.2.bb
-@@ -10,7 +10,7 @@ inherit gnomebase useradd gettext systemd
+diff --git a/meta-python/recipes-devtools/python/python3-django_4.1.bb b/meta-python/recipes-devtools/python/python3-django_4.1.3.bb
+similarity index 58%
+rename from meta-python/recipes-devtools/python/python3-django_4.1.bb
+rename to meta-python/recipes-devtools/python/python3-django_4.1.3.bb
+index 44ea5394d..6d800982a 100644
+--- a/meta-python/recipes-devtools/python/python3-django_4.1.bb
++++ b/meta-python/recipes-devtools/python/python3-django_4.1.3.bb
+@@ -1,7 +1,7 @@
+ require python-django.inc
+ inherit setuptools3
  
- SRC_URI = "${GNOME_MIRROR}/NetworkManager-openvpn/${@gnome_verdir("${PV}")}/NetworkManager-openvpn-${PV}.tar.xz"
+-SRC_URI[sha256sum] = "032f8a6fc7cf05ccd1214e4a2e21dfcd6a23b9d575c6573cacc8c67828dbe642"
++SRC_URI[sha256sum] = "678bbfc8604eb246ed54e2063f0765f13b321a50526bdc8cb1f943eda7fa31f1"
  
--SRC_URI[sha256sum] = "5745d4107f3398a97afbb93f69239b510c9e45eb7fb62d60d9ed0a7297f4d101"
-+SRC_URI[sha256sum] = "62f0f2a8782221b923f212ac2a8ebbc1002efd6a90ee945dad4adfb56d076d21"
- 
- S = "${WORKDIR}/NetworkManager-openvpn-${PV}"
- 
+ RDEPENDS:${PN} += "\
+     ${PYTHON_PN}-sqlparse \
 -- 
 2.25.1
 
