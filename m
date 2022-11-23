@@ -1,91 +1,91 @@
-Return-Path: <kai.kang@eng.windriver.com>
+Return-Path: <costamagna.gianfranco@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0126FC433FE
-	for <webhook@archiver.kernel.org>; Wed, 23 Nov 2022 06:59:23 +0000 (UTC)
-Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
- by mx.groups.io with SMTP id smtpd.web11.14424.1669186759839081643
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 96E79C433FE
+	for <webhook@archiver.kernel.org>; Wed, 23 Nov 2022 08:37:43 +0000 (UTC)
+Received: from mail-wr1-f49.google.com (mail-wr1-f49.google.com [209.85.221.49])
+ by mx.groups.io with SMTP id smtpd.web10.15477.1669192661473239576
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 22 Nov 2022 22:59:20 -0800
+ Wed, 23 Nov 2022 00:37:41 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=pps06212021 header.b=VSLG8jBB;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=83266acff9=kai.kang@windriver.com)
-Received: from pps.filterd (m0250811.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 2AN6jP55032378
-	for <openembedded-devel@lists.openembedded.org>; Wed, 23 Nov 2022 06:59:19 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com; h=from : to :
- subject : date : message-id : mime-version : content-type; s=PPS06212021;
- bh=+kmaUQ1fgFPIx0wKPM2d+0ttctZfRFlbYmlG+d1ApnQ=;
- b=VSLG8jBBXarJgtcQenDNr7ZIP9hhAr4vYuJURVwHCO78Jpue4g7m8VMkSgN/nUCSdmXR
- hxhxIlqT4FrhU0S+mq/AkhL1xCv23Jd+g10wGmI7+DXDsKFa1KaIKjzR3dJB6qSPoDqU
- m1r+lWh9ZG+mJNd4ZIeO+1EKE2OQVUPq4LOeJ38XfDp70ppdcyyN0v8N3w3lulMH/1Wm
- RLgqU/ZvtmgVyQl+pLAjArdqZS+qjKTQT44ckdXUhGJPzVq/7T8/9mpl31Qsm+qqPhyW
- VVKk/m5sSGnp3W2III6Kj+8DzHe1bWx9xLZUpQzzaLyxOLWq9Q6R1wtQwLpapCO+IYBo 6g== 
-Received: from ala-exchng02.corp.ad.wrs.com (unknown-82-254.windriver.com [147.11.82.254])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3kxnxj36qn-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Wed, 23 Nov 2022 06:59:18 +0000
-Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
- ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2308.27; Tue, 22 Nov 2022 22:59:17 -0800
-Received: from pek-lpg-core3.wrs.com (128.224.153.232) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
- 15.1.2242.12 via Frontend Transport; Tue, 22 Nov 2022 22:59:17 -0800
-From: <kai.kang@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-xfce][PATCH] xfce4-settings: 4.16.3 -> 4.16.5
-Date: Wed, 23 Nov 2022 14:59:13 +0800
-Message-ID: <20221123065913.32174-1-kai.kang@windriver.com>
-X-Mailer: git-send-email 2.17.1
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=aORapDzP;
+ spf=pass (domain: gmail.com, ip: 209.85.221.49, mailfrom: costamagna.gianfranco@gmail.com)
+Received: by mail-wr1-f49.google.com with SMTP id s5so11086681wru.1
+        for <openembedded-devel@lists.openembedded.org>; Wed, 23 Nov 2022 00:37:41 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=GfoiBeBqAmoS4u+Fb0jVjf/qwf7xCidpOYVsDMPoJ1w=;
+        b=aORapDzPGZ98j4wqzSJ/vhaEBc178gJ4jEZam5Bp8SwgKWo7M2Cx/dc1ZvWGraO+mr
+         Tfhi2s5wBvI1cHfgQeeyW8Dw1wYx5UNQIo9qXzR053CIc/VdDMOP+08UGdXer+uOmE8a
+         L4M20bBHaencbjO24feiH42BW85YmSgmrCyEtSTrf2kspJ42PKXCOrJVpbW7lBc11J+C
+         FEEoxcCbH5jkqnGlpaPiELIItmTHAsqzRJ3qGdbzgfY7s8KHb4FDxutVndmESZRoorxr
+         lPZDMbdiSrnTmhzWFqtUtEagzjdfXcRO1x3IElQJrqIZkJpuKTjMlS5ZZlVZG0WyKQIv
+         wZmQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=GfoiBeBqAmoS4u+Fb0jVjf/qwf7xCidpOYVsDMPoJ1w=;
+        b=TUTjW9sPw0t5VFl76LDwfO3upO5zWRHnNBF3q4L8xEO8JX1z/DRXaSWfhPvqw9GKcD
+         SEM96Enqk9xN49eIdvs/UYBW/uc4as+cLVmAm3YPsQLYJNBS3I5GlsKO+IhDf0j+0+ys
+         XOlcliLibUzWIuKCPkbBHgJ1i/aavWeTVYGUpvGR2maPoycn8K6z4JxQvsUkf+wumTy6
+         5eST/9hmvZRoK8yhXWHyJj6WzLhVCjNOWX4lVpZ1Tf0Gh1eEE+evdFA9Kww/cRl5BKRN
+         erOrWQ+47lzOVEkSa6kWkhBIcTaT8Yc/1al6WbJzO6gTxp+G7BNLOVm46TKo2X4oGZBX
+         1Gvg==
+X-Gm-Message-State: ANoB5pku07ZJpCUSaKCjp2pZonBXmKc6Y4/zaCz2nn97BDw6ZH1Prull
+	rucXJUKOntjA2ACj2XJ29U1dzCKeHLM=
+X-Google-Smtp-Source: AA0mqf4OWroJQBl7hjti6uouxnv0tzXl1cisExmHCuhEZ4VN/348lwabKC1SP53fO6ZBzNVb19mleg==
+X-Received: by 2002:adf:e7cd:0:b0:236:960f:161d with SMTP id e13-20020adfe7cd000000b00236960f161dmr8749303wrn.376.1669192657346;
+        Wed, 23 Nov 2022 00:37:37 -0800 (PST)
+Received: from Unimatrix08-Jammy.. (mob-31-157-117-185.net.vodafone.it. [31.157.117.185])
+        by smtp.gmail.com with ESMTPSA id t11-20020adff60b000000b0022e035a4e93sm16156667wrp.87.2022.11.23.00.37.35
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 23 Nov 2022 00:37:36 -0800 (PST)
+From: Gianfranco Costamagna <costamagna.gianfranco@gmail.com>
+X-Google-Original-From: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
+To: openembedded-devel@lists.openembedded.org
+Cc: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>,
+	Gianfranco Costamagna <locutusofborg@debian.org>
+Subject: [meta-oe][PATCH] vbxguestdrivers: upgrade 7.0.2 -> 7.0.4
+Date: Wed, 23 Nov 2022 09:37:32 +0100
+Message-Id: <20221123083732.23539-1-costamagnagianfranco@yahoo.it>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: text/plain
-X-Proofpoint-GUID: 6iKqxWL7sFvKyzaPhp4ZZQxvBWjATYhE
-X-Proofpoint-ORIG-GUID: 6iKqxWL7sFvKyzaPhp4ZZQxvBWjATYhE
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.219,Aquarius:18.0.895,Hydra:6.0.545,FMLib:17.11.122.1
- definitions=2022-11-23_02,2022-11-18_01,2022-06-22_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 bulkscore=4 mlxscore=0
- spamscore=0 phishscore=0 lowpriorityscore=4 adultscore=0 mlxlogscore=557
- priorityscore=1501 clxscore=1015 malwarescore=0 impostorscore=0
- suspectscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2210170000 definitions=main-2211230052
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 23 Nov 2022 06:59:23 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99698
+ <openembedded-devel@lists.openembedded.org>; Wed, 23 Nov 2022 08:37:43 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99699
 
-From: Kai Kang <kai.kang@windriver.com>
-
-It fixes CVE-2022-45062 in xfce4-settings 4.16.5.
-
-CVE: CVE-2022-45062
-
-Signed-off-by: Kai Kang <kai.kang@windriver.com>
+Signed-off-by: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
+Signed-off-by: Gianfranco Costamagna <locutusofborg@debian.org>
 ---
- .../{xfce4-settings_4.16.3.bb => xfce4-settings_4.16.5.bb}      | 2 +-
+ .../{vboxguestdrivers_7.0.2.bb => vboxguestdrivers_7.0.4.bb}    | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-xfce/recipes-xfce/xfce4-settings/{xfce4-settings_4.16.3.bb => xfce4-settings_4.16.5.bb} (93%)
+ rename meta-oe/recipes-support/vboxguestdrivers/{vboxguestdrivers_7.0.2.bb => vboxguestdrivers_7.0.4.bb} (97%)
 
-diff --git a/meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings_4.16.3.bb b/meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings_4.16.5.bb
-similarity index 93%
-rename from meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings_4.16.3.bb
-rename to meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings_4.16.5.bb
-index f283edac6..4a4e9f188 100644
---- a/meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings_4.16.3.bb
-+++ b/meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings_4.16.5.bb
-@@ -9,7 +9,7 @@ inherit xfce features_check mime-xdg
- REQUIRED_DISTRO_FEATURES = "x11"
+diff --git a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_7.0.2.bb b/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_7.0.4.bb
+similarity index 97%
+rename from meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_7.0.2.bb
+rename to meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_7.0.4.bb
+index 49c2a3f2a..91f5ae0e0 100644
+--- a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_7.0.2.bb
++++ b/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_7.0.4.bb
+@@ -15,7 +15,7 @@ SRC_URI = "http://download.virtualbox.org/virtualbox/${PV}/${VBOX_NAME}.tar.bz2
+     file://Makefile.utils \
+ "
  
- SRC_URI += "file://0001-xsettings.xml-Set-default-themes.patch"
--SRC_URI[sha256sum] = "f299e6d26d8e142c0b7edeb9b8917d6bd50bc8647254ea585069c68f2bab8e64"
-+SRC_URI[sha256sum] = "7a4f74802486d7e77a1c9fa4fda19b13fc8a8dec3e5074f367e34fa82b40d28e"
+-SRC_URI[sha256sum] = "612fd6fc417e0067653091a613e1d4fa084d3f42407dff5f991a0eb1e2ab26c8"
++SRC_URI[sha256sum] = "58951f7d1bcda836c5e50ca0a6b13f0e61a07a904f476526a831df3d9bfe5b17"
  
- EXTRA_OECONF += "--enable-maintainer-mode --disable-debug"
- 
+ S ?= "${WORKDIR}/vbox_module"
+ S:task-patch = "${WORKDIR}/${VBOX_NAME}"
 -- 
-2.17.1
+2.34.1
 
 
