@@ -2,187 +2,204 @@ Return-Path: <Zheng.Qiu@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7E9BAC4332F
-	for <webhook@archiver.kernel.org>; Fri, 25 Nov 2022 17:11:09 +0000 (UTC)
-Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.web11.51829.1669396260601747406
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C429DC4332F
+	for <webhook@archiver.kernel.org>; Fri, 25 Nov 2022 17:48:29 +0000 (UTC)
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.web11.52649.1669398504946175188
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 25 Nov 2022 09:11:00 -0800
+ Fri, 25 Nov 2022 09:48:25 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=pps06212021 header.b=W1h1unQ0;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=8328c4fba4=zheng.qiu@windriver.com)
-Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 2APGue87024022
-	for <openembedded-devel@lists.openembedded.org>; Fri, 25 Nov 2022 09:11:00 -0800
+ dkim=pass header.i=@windriver.com header.s=pps06212021 header.b=csoIRkfd;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=8328c4fba4=zheng.qiu@windriver.com)
+Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 2APHWmaI024040
+	for <openembedded-devel@lists.openembedded.org>; Fri, 25 Nov 2022 17:48:24 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com; h=from : to : cc :
  subject : date : message-id : content-transfer-encoding : content-type :
  mime-version; s=PPS06212021;
- bh=fcHtD0zJyC6KpqfmNhcThdKS/L+pHVUGIbZAtl7qIFE=;
- b=W1h1unQ0u0G03FCr8oiOb+3Po0tlhSIaS2H5wMeuUJ4tWiweuCrCC/UdiLfpdYqmcbQN
- JGSrKtFS0Py2y35Wl751wtdT6W5oWdbfX7fN4nt+0bdbRGCTu7e9zen0jJt7V7YCpzwB
- nFug+oBrB5loROJjqgkk3v/Cx5SCMcnOvjVm23T1ZHttgf7RWirGiZvUm7VtEedRPZw4
- CGeITpdzrmtU8LGWbEeTwh9ZErYaW4CKc5/qI0mig49zDGjaHMnzAsT0JEAAELKWc7PG
- xWATOtpO7pVXOickSRFjBpKkZ5Uo6kRjAKo3qWwYXADIhbpJpm5GPCUif7HQbm91IPO2 nA== 
-Received: from nam10-bn7-obe.outbound.protection.outlook.com (mail-bn7nam10lp2105.outbound.protection.outlook.com [104.47.70.105])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3kxyhqcxyt-1
+ bh=eNH1D1WjPxC+EsTOvTekzjS57i939whZt1xY9Kdt+Ak=;
+ b=csoIRkfd1kpvV1x5OGBj/Wu4a0QxTovgIoR+lhQNHokbmmSnZ2qXye5GK8a2s96ZzL+5
+ l50U6RxHx+p0Edl69nIOXGC7ezyv0Hxi5un9HREvY67JXOqAj0CiF/W+fCazgfJVkygP
+ v1DIw85GLhFh42+HDCL1il1v1QfXRUgPV3i9QsTlmnq5HeR/z8bAg9DJ2lvyvCgAfZcL
+ NU76inidlxRefVfN3Q2YyOCczLxf2StJwRgJH4ZdXvAkzRIsM5SxCHoWKGal4ULs0pTx
+ 71zh57z1jdPeapHOTte4CIUQ2c0IpOv9htDKS9K4n02LH7Bwy7JDjmUFgyN4lOxtsnN5 /A== 
+Received: from nam10-dm6-obe.outbound.protection.outlook.com (mail-dm6nam10lp2104.outbound.protection.outlook.com [104.47.58.104])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3kxp48n5ht-1
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Fri, 25 Nov 2022 09:11:00 -0800
+	for <openembedded-devel@lists.openembedded.org>; Fri, 25 Nov 2022 17:48:24 +0000
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=jHJXtWEtuLq9kXfA2Rr6gQXdSlvny5VSl7DlO13t1ns/sQKFlSkEA0eyXdOBF2zvW3l0HWCBczLP6FslZKbHOEOz4JvR5Agqr+YLgeBx8hk0P04Pf9P5mJAVicH23p0/vc4od5L4QVA1MXF0SEx5/zvoPAVdPT+i48RT61CHFh9+4OzclxdBbPcv/vlhjb/I4TIwYwqGp4ZKNAaPIjHxbM6A1stWo/gLw7m2qKwDLdovuYS2Elsbi2fX6J27nlGFPjGDJBM0vkU1pnT+rur7ETc13mvkhMtm+JDSfDw2iZDFzOooxkWhF56oEvmJOTdgTS/bDkV8/QJSPDPsm0fuWQ==
+ b=aYn/0kYp+Jkb4ho37W1NTn7UcjIn6HOu6UiQ0UZ0a3FMh/L5T0PKbVF9ij2IlgxzNNv/oH9ZrGYTAdwF3mkXMhYiXurh+NPuzOyFVRC30q9YKAklZm/m5gRZCkIKbZPVUO8/rBboGp2XTt2UXH4BcEJVoADYPPUM9a/NF2YXOi7efvIoJL8/bEpMQ6MRhW/9qTDjAPk1HsebSFBj29JScf+1aBmOJzzfCdUBo2gpM/TjqcImhwM7rHk2Sco8/jIQU+Q5sYFLrLkx5prvqXXndTlx6hWt4ow/e1UXT651EbQtKp85+CqKoGYvfd+rNKEVwRGmdbYUSDa51T6LMpyrlQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=fcHtD0zJyC6KpqfmNhcThdKS/L+pHVUGIbZAtl7qIFE=;
- b=hdX6nQKu4OxLunTABVHGVTyf7r+zOeDuNlBF6/xja38UWOpKDXZadrkWmpFjcqrAYksKVJ9Fd5uXbuKS7Q0y3JqO06H4ANWg4anvaNdykD5WqB7RcJT7X3WNtMwNx9QydjE//rEeXT4HX/lJPIYX1TD3fJHcYemfj8AA1ZtUzVQ80m/hK13pJ6/+T4uoLQzdsgYh4zzKuyOuVNZtuZtrFEmLGS96PrANRoV/Ssu2waLn0X8CaRSREHhkwPq59tXfoLAwI/qzcpfn2S6vSE2IQRwsdBJyXuCftCYL8c3ltQ/efrYDrBlwzEIbb+nq6QM/31ihZ3JqvwvqqAuo/qwSeg==
+ bh=eNH1D1WjPxC+EsTOvTekzjS57i939whZt1xY9Kdt+Ak=;
+ b=YRS+z4FHa15Q9HLP6JUJF2fppEWD0VcYolpS6BbdJgq5x2aZ3/RYuiv0p2Rw6+vQlhE7Om981SlwWzP+2OW1eSSceHQkso79KEOlsI93f97FiEcCC5nuJ+zSSj6A/TfK/bGIrSo7+U58LxMp+XPtQgHMorNvWfU+I6SKgYMvYw87WYXgyZIVhN9REDNuHR6xfBV4z2JOYhUtxiGYAducUIurgHdk/zLNF5rffB2TYb9GA1rrXVIV0tweHIO7qeIO9dMhy4sk4laQgcwYqeWNBaP7UrEBt6C8NgH1R9OlHuaf3ygRhyOqLF5wBR5WudaXb9NXlUe5LoZqknwVzKpb7Q==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
 Received: from DM4PR11MB5536.namprd11.prod.outlook.com (2603:10b6:5:39b::15)
- by DM4PR11MB6453.namprd11.prod.outlook.com (2603:10b6:8:b6::16) with
+ by PH7PR11MB6475.namprd11.prod.outlook.com (2603:10b6:510:1f1::13) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5857.19; Fri, 25 Nov
- 2022 17:10:58 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5857.20; Fri, 25 Nov
+ 2022 17:48:20 +0000
 Received: from DM4PR11MB5536.namprd11.prod.outlook.com
  ([fe80::3fdd:fc11:e12c:46b0]) by DM4PR11MB5536.namprd11.prod.outlook.com
  ([fe80::3fdd:fc11:e12c:46b0%5]) with mapi id 15.20.5857.020; Fri, 25 Nov 2022
- 17:10:58 +0000
+ 17:48:20 +0000
 From: Zheng Qiu <zheng.qiu@windriver.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: zheng.qiu@windriver.com, randy.macleod@windriver.com
-Subject: [master][PATCH] python3-inotify: add ptest
-Date: Fri, 25 Nov 2022 12:10:44 -0500
-Message-Id: <20221125171044.3649193-1-zheng.qiu@windriver.com>
+Subject: [master][PATCH v3] tiff: Security fix for CVE-2022-3970
+Date: Fri, 25 Nov 2022 12:47:59 -0500
+Message-Id: <20221125174759.3658017-1-zheng.qiu@windriver.com>
 X-Mailer: git-send-email 2.33.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-ClientProxiedBy: QB1P288CA0010.CANP288.PROD.OUTLOOK.COM
- (2603:10b6:c00:2d::23) To DM4PR11MB5536.namprd11.prod.outlook.com
+X-ClientProxiedBy: YT3PR01CA0077.CANPRD01.PROD.OUTLOOK.COM
+ (2603:10b6:b01:84::25) To DM4PR11MB5536.namprd11.prod.outlook.com
  (2603:10b6:5:39b::15)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DM4PR11MB5536:EE_|DM4PR11MB6453:EE_
-X-MS-Office365-Filtering-Correlation-Id: 8e8d77f0-8ce8-4787-cd05-08dacf080526
+X-MS-TrafficTypeDiagnostic: DM4PR11MB5536:EE_|PH7PR11MB6475:EE_
+X-MS-Office365-Filtering-Correlation-Id: 4c983f37-d209-4fbf-aaa4-08dacf0d3cff
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	yRobt3LqzqK4iIstRc4grMOiyMC6a1h8ShTql+1LHI+IeSFy+sjKVersA378DZu/Wwth79k0Vfc+93LCdl4Be8ZJ3lWSqfNFtJQrSEmjuaZW73ouwvtggtrm6Skot7iB9P5nBa+4ttfTp5lDZvdkFlGrhwr5NXa/8OCtUPjfWABNZUxJQTj39ah32CeXa9Z48jH9q6S+aQMnuf0mWYXbBN2nxbq4DVBGbqm1xhKslMNgrOlBUpwtSomxP3EDfA5etUODBaV5ZJp0G+xkZHUfLg8SIOmWe1ED7zclS9HjP54QwF4ZDAsqQvEnXggRNoo+1OAaXp2yMFCZ7vCzjmNbbbduGLZLQb0E2qfJ46EgblgOkLfoOT96ecaCi3bE7Hz5q5EF4eDP9ITwEM3tMwYk+loj/r9tFUUVyTo0dYfTBQf/OpQpi3k6uvJKf+OBu16lFN4xe9Ap4K+XPn8ysOXTJw3+n56GtMuUx5ubaFeXtzEX2alKcg0LAOPs/fej+VG/wxQNkjfE3z7+gtCrkYqDvpKChTn1f3wO9MOPyp24hI8BphnMGYmZgb/+YZ4JMITD+gAFSubA8woXNEeAMBT1gcx6giGHGeK2pxnfFgC2kaIW83/UIPERdQJ5bEMVKZMFw/+5+WXMaUoj8MbE/bMgqg5X3jyc5d7u1M30RmbSm6Fb0dV+jsGLZsfxB9jZnftpDcw3VCTRDzFuf56BxLYxiw==
+	f5TGxUwUO94G8n1E4bNL8gssYfplZC5eZow8wLpdUGLN0nJZusJPJ/R2/KSZi72Z/EiEHlvP/Pq4qeq+WEJohZQ15J0pfUJuHQ74oXlz1zBRTDyJbq6J9afzPx66jNZhSO6GnN1Y0Qn2YqKTz6CkGC7hsND43MvAv6PG+0ahrk2IKMUXdLBTX5Izy5DgErM4Admwu1OSdufb/hyyU9oWCLqfqzqyP0/OY+dR3noM4l6TccXzzZSFjLSSmfxwRds2RjuroQbdQv78uGUNxqbUA7pXq3qzhyDckCEe8sxgXA3CtGeiEXB45ow5wje8TP8cNHeYToF87IWF6fxGp89RzwKfKAEdHNAfKrYOx2jrcmkFaBKsx2UAWu27GCck9Hkl4dsJmT8kZ+csDDdlc5Ls3hCndaqJxm8Ufo/1p7+gwH6ExZ0gO4KuK9RdZP468s4o8XuD1yRLVPj0b9Fa7cIBzsshGVSILlLIe+sLj3eBQkYHHfpsXtctsZ6zADUZ3oKkBfGmk2tn4btz16tKDfsl6fPSFrtJ72M62LUMBw2AheG+c7zstFAXG+QYli9sVAqBMBIslgd6xLacIkUhAqKAdbdvYwLAAsAAeYTEnw5wT5N/XjmccDiLJcXwRZKC69pA+ep39CaOh+r9cGCs7nYnTa+hgAa+txWePtttC2l5/i3Q/gvIidvOb7Bb+tNL5lwUmSJjUJt0RK0myxYK4oX4euGCwfF/culHIJ4fdoAkbWkdl9kN9C9ubGmg8kjE8CdTXEjP40H5dxCavoFr5OB3aw==
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM4PR11MB5536.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230022)(4636009)(366004)(39850400004)(396003)(136003)(346002)(376002)(451199015)(6486002)(5660300002)(8936002)(478600001)(6512007)(52116002)(316002)(6916009)(26005)(66476007)(66946007)(107886003)(6666004)(6506007)(36756003)(66556008)(86362001)(186003)(1076003)(41300700001)(44832011)(2616005)(8676002)(4326008)(2906002)(83380400001)(38100700002)(38350700002);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM4PR11MB5536.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230022)(4636009)(39850400004)(376002)(136003)(396003)(366004)(346002)(451199015)(15650500001)(66946007)(66556008)(36756003)(66476007)(8936002)(41300700001)(44832011)(8676002)(5660300002)(86362001)(107886003)(4326008)(26005)(6512007)(52116002)(6506007)(6666004)(83380400001)(2616005)(1076003)(186003)(6916009)(316002)(966005)(6486002)(38100700002)(38350700002)(478600001)(2906002);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?us-ascii?Q?rfLBrpO/ZwWKnS+aP4n7RP1MsySe4Iz3oVPbgPI/wCKGpno0LGeXSzMgf4RQ?=
- =?us-ascii?Q?ogaM09b3+8pM0/y+7oRB936hEKPGjLqzhLqG380Y1OwuiW45HIKzO5ATd7pF?=
- =?us-ascii?Q?oJVP6bzEuVptbJDpXirJKf1w1vQJe4ngOJzX+ldsviskILkVII8cizx+qxHx?=
- =?us-ascii?Q?uLrmen7n1lUrJnm3Xf9Z6GwNifwSo72UawzSmYm7s2XgowNyw5y9EunfZ8Fq?=
- =?us-ascii?Q?AIEhGb4bhPqb/G6gsQcZQ4CLjo9YVQVdy83LZGOUfjJ0IAwx1tcCTfaIB+fn?=
- =?us-ascii?Q?7JuGY9b2B2F++Ywhojqcu8n7D9b9HrR13+MExbzXpC8V9qkx0etme2GRcXbQ?=
- =?us-ascii?Q?eSYtr99q2tpozyXV/yE8fNBTkRjQ6SzUpHmr66uA7PtCtp9XbHRZIGQlIXZn?=
- =?us-ascii?Q?E8iGScyoCHo3ZVDrCJPdysUZwrDyKeDfva2hH9gEw4uhonml/gIiHKtIGcbQ?=
- =?us-ascii?Q?oPWHipZD0brCKJWLoAncD666vDsXeEffZ6+kGo6gfbPPIXSSOsJhnkSNmxQt?=
- =?us-ascii?Q?TLOyPd9XxxjfZHSPGOcXtt7sn2saD5ke0UHd9lLHAVwcLSLqU677TK3WVr2i?=
- =?us-ascii?Q?soROdFPl7GCNfuM5AogVhxIueRhcVBt8zdt35LDUFQQWyKZsazYMeO+f+4M2?=
- =?us-ascii?Q?NME5c0DM1zkGQLIhn7VoFPsdaQbSOCEvIav7Wg7TnjmKWNWXxBh14M6b/1rW?=
- =?us-ascii?Q?6768/laJ6gFzeG4YvcynzTDLfm7Cj7XLq+QmbmKgJNuBe475rcnNgEtCmTDt?=
- =?us-ascii?Q?jKhfc/p8Y7JJ7azqbdw2YF84k1fPBAeHnZ65sUA7TcE2Rf+2TinnUAodwyXf?=
- =?us-ascii?Q?hJ0g/s4RVtr05xOKeTg9PUNywULJ+Mvg7k7I6nGeCe9UeO0Wa2PlVx0ozI8G?=
- =?us-ascii?Q?nt9VvjKSLxzYe079U1nZoOl/yauORX3mY5rdjiUY8AR2krA6TyahqUSRtSZz?=
- =?us-ascii?Q?nlsUx3OzEZ1i5bJdbiO2pNgL8d98IRo+e/v0cymGVSDyp6BkepBPtJwc5sho?=
- =?us-ascii?Q?14EaNozE1Hv46stJt8cW+HFNV7Q0kbz+XdcTtZ1vPbNeUNB5QPe9y/MYC1Ty?=
- =?us-ascii?Q?/OIGjw//LGXhRqGQ+KSTinZ3imhoAYD1uizsSDS+L32zZNsrgNdB+zUVm84K?=
- =?us-ascii?Q?R885n4iZMsMfvGt8HqzIOhwIrgMIc9g1ya+7qtE4aCYszw4QuoJZIbu7P6ur?=
- =?us-ascii?Q?TG+C9RBbAVgnjqWMr85jEVcWZLq5ILLEN2pC3aeeJJT3PWaExwFi1GEuj7Ii?=
- =?us-ascii?Q?Zrf0iVSTQ9pIqAnhlHqzD4mjbSL33vd1p7ZBwSLaSZKwpH9rzPL+IEfa/HB+?=
- =?us-ascii?Q?w843H6Tuu6qmFHa6NTI5mLWC2U4Mq4qEF1TVuGN0+5/Kegf83Agnql3KJ+LH?=
- =?us-ascii?Q?qLkh+xMnoyIqht0NJexn9xVOtE8Uwb0EOxthcbA8rGeCPGQrYmG7vUZiW2M5?=
- =?us-ascii?Q?qdOGPQMIRwdhD7Ivipc3zGinan6u/FlOoIzhe8vLtFfiGe2NkGZTOmTrTTG2?=
- =?us-ascii?Q?7VvHh/fu7fTyps8zwuJqyudAeDaJ1gu75lZkeR3R3K/xzHMshTo21IFffdDK?=
- =?us-ascii?Q?tlYH3/1uc65WOsgRgkAvuKaUQvAKMIbF1e+mmeAq78Cj4zCUfH+Bt9ibxQ1R?=
- =?us-ascii?Q?2w=3D=3D?=
+	=?us-ascii?Q?RKo4Wc+aIrLyvf5xllIMmn0TGFH3JWAs9NQWWXWUxx5nfiy4pnXh/eO3RSwH?=
+ =?us-ascii?Q?oIEPv5O/JzSgSDxJ11ZYJoBXBmqfUYbceqLKMcPTQIkOj896dHVoar6yvH9+?=
+ =?us-ascii?Q?rAX8vOiWoTyWXGXs0ySrkX9p3z1Ep2PbD6AWqCokCIxIiK8/RhVo8CH2hNW/?=
+ =?us-ascii?Q?/HXsiPmWHsn+V3JbMFHzMZhkFdAzrFzZt9s4ki4N6OfRsYgM603dAC1BeCtz?=
+ =?us-ascii?Q?2exmZq8U5W8IyiAYHnhG0ijECLwmb2at919kbEgg9O6IxmI5YeBmUDz27tA/?=
+ =?us-ascii?Q?DXv1U2Qz0aX2Qq1Z/YxgDvo5Px6YgeEe4DfM/RwkPKnUVxtzwPN6eEBmmiOC?=
+ =?us-ascii?Q?5GFaXxj3A+Gptt7oOWgEpJnNl+WVb5kLXfUk2lNM5QoBWg7+nHuMRXC21Kfw?=
+ =?us-ascii?Q?IRZftJM73EBTAp/bXXm0V0GTqUiy68aGY86UcDlaEqRf9of06oEQ6cL3a22F?=
+ =?us-ascii?Q?oJ7lbtsevRrWj5zsVDKHNfRjQQO+4JdRGG/mN5r/1CbunUsh1wj+gJNSjBfs?=
+ =?us-ascii?Q?hJxjUogn1ASsna4iIh9/7PlWEezjq/Y8TaoJLruJVywgFI8XfEMRmwl6lhVJ?=
+ =?us-ascii?Q?HnGRfADl1A2lwZYBNQZcWjkf1l8qwNIGn8m+Z5mlktJJ6IaQDfbPUSPUbG3Q?=
+ =?us-ascii?Q?brL4ps7O4qiojSaMeJQWaY+gjqi9i6tjlwEQifHzdTGUJA2CgYSbtSwrKzxh?=
+ =?us-ascii?Q?ZOWMTSllTFn8CrME0wxVTI3aAKYST1SlxRI4rCL61c76S0lHcS7O483/aGuM?=
+ =?us-ascii?Q?orwZ3rRtS5ycjLmhIyp6yrrAO42aSoveeBE5NqwI83v3nDrv9cQABr6A9H0X?=
+ =?us-ascii?Q?PC/ish0VsLa21VF9NwMC9Ro4pL9JU09FVAyLUJrkzOmi8geZD0frRAuYt/ke?=
+ =?us-ascii?Q?M02P95tcgY2+V+kK9QMxsAQQK3BJZhDksoGRicNHPqDrjqSGOzbpA8QUHDZt?=
+ =?us-ascii?Q?lHfy9e4RNn78oo0h/ZAIkSoulA+frMc9siwn8L17J8yDiSdKcmCIy1+XLI4n?=
+ =?us-ascii?Q?gjiBehpQ442GuNe3JqGz+N0O5jswOx4VLY+LLo55iBtqJHF1VuYAu9+7LiF/?=
+ =?us-ascii?Q?jwydUWIAQ1j3/zqe/2rgFYDffYG+omaqkbfZ0aZyFMWozre4aWurVDxqJVka?=
+ =?us-ascii?Q?V4DFPwsthovioZFrZ/0+6QbgtGTU43MuiJfPqVmPfcUzwYSNtNkkPwjgT8q/?=
+ =?us-ascii?Q?8Q2IyoyGy9e9HYlIlUYu4ZJBkyyt6/EZBc14n14XYRrA1UnlLvmiPgp2azxj?=
+ =?us-ascii?Q?4b64pAf2ri+vDWLcI7FDmvCQnyXtfigpQ4cxLh31Ice0YamAH0yFK89cIdLY?=
+ =?us-ascii?Q?jrO63NOXxMJGSQzVaP8jjvSlEu514bLT1lQYgOVDn/eUDU1qm3xHRSSZelsN?=
+ =?us-ascii?Q?1Pj4N/ta8sCIio04UQ6Ny6q1U6PjmtSZ20HqSbJueJKw3en2PF62TFmrnA6G?=
+ =?us-ascii?Q?FWIXMVWSK5Q9ajrI8ua9HHqlEk5enlFM50C6lfohqiciAOxO3IgBu/tTDTmk?=
+ =?us-ascii?Q?1ViCw6Qd9GC97NBEZBGejXK2UjElTSAi+mFp1bJOuhsr8rmERbnNjrfBIN44?=
+ =?us-ascii?Q?XaEWCJ7obKPeTLKOkaCngxOvxO1Ih2lWcqt2SAWsVQ3qfRi0vq5wa/1qC54n?=
+ =?us-ascii?Q?Qg=3D=3D?=
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 8e8d77f0-8ce8-4787-cd05-08dacf080526
+X-MS-Exchange-CrossTenant-Network-Message-Id: 4c983f37-d209-4fbf-aaa4-08dacf0d3cff
 X-MS-Exchange-CrossTenant-AuthSource: DM4PR11MB5536.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Nov 2022 17:10:58.0258
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Nov 2022 17:48:20.2975
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 07VTF0kSTtRszYyWj+xJQOkvPqSRQOu/Ym4L+qPd2HSV7+Rh9VnPWrYA+gxh04MOeCWmXtW3yO4NSj047PBl8w==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR11MB6453
-X-Proofpoint-ORIG-GUID: LRUtiBbZX6ky3mJIlou1B0WCbY4GS8po
-X-Proofpoint-GUID: LRUtiBbZX6ky3mJIlou1B0WCbY4GS8po
+X-MS-Exchange-CrossTenant-UserPrincipalName: JK8P2yR//33MeAydPmVh/yVnLymNzFKkcJ8SJCFsmZ6UhPgwbYIrkF9Q4rfPYcGzppRImk6ljHTFBMKQtEfGog==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR11MB6475
+X-Proofpoint-GUID: KAGJsI89L5JMHYZvnwEDUapZbc_4oSFx
+X-Proofpoint-ORIG-GUID: KAGJsI89L5JMHYZvnwEDUapZbc_4oSFx
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.219,Aquarius:18.0.895,Hydra:6.0.545,FMLib:17.11.122.1
- definitions=2022-11-25_08,2022-11-25_01,2022-06-22_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 impostorscore=0
- mlxlogscore=934 adultscore=0 phishscore=0 priorityscore=1501 spamscore=0
- lowpriorityscore=0 clxscore=1015 mlxscore=0 malwarescore=0 bulkscore=0
- suspectscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2210170000 definitions=main-2211250134
+ definitions=2022-11-25_09,2022-11-25_01,2022-06-22_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 mlxlogscore=637
+ lowpriorityscore=0 spamscore=0 mlxscore=0 impostorscore=0 clxscore=1015
+ priorityscore=1501 suspectscore=0 adultscore=0 bulkscore=0 phishscore=0
+ malwarescore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.12.0-2210170000 definitions=main-2211250138
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 25 Nov 2022 17:11:09 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99735
+ <openembedded-devel@lists.openembedded.org>; Fri, 25 Nov 2022 17:48:29 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99736
 
-Add ptest provided from the source code, and run it using pytest.
+This patch contains a fix for CVE-2022-3970
 
-Since the tarball provided with pypi does not include ptest, switch the
-source to be its git repo.
+Reference:
+https://nvd.nist.gov/vuln/detail/CVE-2022-3970
+https://security-tracker.debian.org/tracker/CVE-2022-3970
+
+Patch generated from :
+https://gitlab.com/libtiff/libtiff/-/commit/227500897dfb07fb7d27f7aa570050e62617e3be
+
+Upstream-Status: Accepted
 
 Signed-off-by: Zheng Qiu <zheng.qiu@windriver.com>
 ---
- .../python/python3-inotify/run-ptest          |  3 +++
- .../python/python3-inotify_0.2.10.bb          | 23 ++++++++++++++++++-
- 2 files changed, 25 insertions(+), 1 deletion(-)
- create mode 100644 meta-python/recipes-devtools/python/python3-inotify/run-ptest
+ .../libtiff/files/CVE-2022-3970.patch         | 38 +++++++++++++++++++
+ meta/recipes-multimedia/libtiff/tiff_4.4.0.bb |  1 +
+ 2 files changed, 39 insertions(+)
+ create mode 100644 meta/recipes-multimedia/libtiff/files/CVE-2022-3970.patch
 
-diff --git a/meta-python/recipes-devtools/python/python3-inotify/run-ptest b/meta-python/recipes-devtools/python/python3-inotify/run-ptest
+diff --git a/meta/recipes-multimedia/libtiff/files/CVE-2022-3970.patch b/meta/recipes-multimedia/libtiff/files/CVE-2022-3970.patch
 new file mode 100644
-index 000000000..3385d6893
+index 0000000000..e8f143933a
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-inotify/run-ptest
-@@ -0,0 +1,3 @@
-+#!/bin/sh
++++ b/meta/recipes-multimedia/libtiff/files/CVE-2022-3970.patch
+@@ -0,0 +1,38 @@
++From 227500897dfb07fb7d27f7aa570050e62617e3be Mon Sep 17 00:00:00 2001
++From: Even Rouault <even.rouault@spatialys.com>
++Date: Tue, 8 Nov 2022 15:16:58 +0100
++Subject: [PATCH] TIFFReadRGBATileExt(): fix (unsigned) integer overflow on
++ strips/tiles > 2 GB
 +
-+pytest -o log_cli=true -o log_cli_level=INFO | sed -e 's/\[...%\]//g'| sed -e 's/PASSED/PASS/g'| sed -e 's/FAILED/FAIL/g'|sed -e 's/SKIPED/SKIP/g'| awk '{if ($NF=="PASS" || $NF=="FAIL" || $NF=="SKIP" || $NF=="XFAIL" || $NF=="XPASS"){printf "%s: %s\n", $NF, $0}else{print}}'| awk '{if ($NF=="PASS" || $NF=="FAIL" || $NF=="SKIP" || $NF=="XFAIL" || $NF=="XPASS") {$NF="";print $0}else{print}}'
-diff --git a/meta-python/recipes-devtools/python/python3-inotify_0.2.10.bb b/meta-python/recipes-devtools/python/python3-inotify_0.2.10.bb
-index 524c3a0d2..3306438a1 100644
---- a/meta-python/recipes-devtools/python/python3-inotify_0.2.10.bb
-+++ b/meta-python/recipes-devtools/python/python3-inotify_0.2.10.bb
-@@ -6,9 +6,30 @@ LIC_FILES_CHKSUM = "file://setup.py;md5=79b7ec72aa0d446a552d3cceb5799e41;beginli
- 
- SRC_URI[sha256sum] = "974a623a338482b62e16d4eb705fb863ed33ec178680fc3e96ccdf0df6c02a07"
- 
--inherit pypi setuptools3
-+SRC_URI = " \
-+    git://github.com/dsoprea/pyinotify.git;branch=master;protocol=https \
-+    file://run-ptest \
-+"
++Fixes https://bugs.chromium.org/p/oss-fuzz/issues/detail?id=53137
++---
++ libtiff/tif_getimage.c | 8 ++++----
++ 1 file changed, 4 insertions(+), 4 deletions(-)
 +
-+SRCREV = "f77596ae965e47124f38d7bd6587365924dcd8f7"
++diff --git a/libtiff/tif_getimage.c b/libtiff/tif_getimage.c
++index a4d0c1d6..60b94d8e 100644
++--- a/libtiff/tif_getimage.c
+++++ b/libtiff/tif_getimage.c
++@@ -3016,15 +3016,15 @@ TIFFReadRGBATileExt(TIFF* tif, uint32_t col, uint32_t row, uint32_t * raster, in
++         return( ok );
++ 
++     for( i_row = 0; i_row < read_ysize; i_row++ ) {
++-        memmove( raster + (tile_ysize - i_row - 1) * tile_xsize,
++-                 raster + (read_ysize - i_row - 1) * read_xsize,
+++        memmove( raster + (size_t)(tile_ysize - i_row - 1) * tile_xsize,
+++                 raster + (size_t)(read_ysize - i_row - 1) * read_xsize,
++                  read_xsize * sizeof(uint32_t) );
++-        _TIFFmemset( raster + (tile_ysize - i_row - 1) * tile_xsize+read_xsize,
+++        _TIFFmemset( raster + (size_t)(tile_ysize - i_row - 1) * tile_xsize+read_xsize,
++                      0, sizeof(uint32_t) * (tile_xsize - read_xsize) );
++     }
++ 
++     for( i_row = read_ysize; i_row < tile_ysize; i_row++ ) {
++-        _TIFFmemset( raster + (tile_ysize - i_row - 1) * tile_xsize,
+++        _TIFFmemset( raster + (size_t)(tile_ysize - i_row - 1) * tile_xsize,
++                      0, sizeof(uint32_t) * tile_xsize );
++     }
++ 
++-- 
++2.33.0
 +
-+S = "${WORKDIR}/git"
-+
-+inherit setuptools3 ptest
-+PIP_INSTALL_PACKAGE = "inotify"
-+PIP_INSTALL_DIST_PATH = "${S}/dist"
-+
- 
- RDEPENDS:${PN} += " \
-     python3-ctypes \
-     python3-logging \
- "
-+
-+RDEPENDS:${PN}-ptest += " \
-+    ${PYTHON_PN}-pytest \
-+"
-+
-+do_install_ptest() {
-+    install -d ${D}${PTEST_PATH}/tests
-+    cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
-+}
+diff --git a/meta/recipes-multimedia/libtiff/tiff_4.4.0.bb b/meta/recipes-multimedia/libtiff/tiff_4.4.0.bb
+index 29cb4111d6..970aab5433 100644
+--- a/meta/recipes-multimedia/libtiff/tiff_4.4.0.bb
++++ b/meta/recipes-multimedia/libtiff/tiff_4.4.0.bb
+@@ -12,6 +12,7 @@ SRC_URI = "http://download.osgeo.org/libtiff/tiff-${PV}.tar.gz \
+            file://0001-fix-the-FPE-in-tiffcrop-415-427-and-428.patch \
+            file://CVE-2022-34526.patch \
+            file://CVE-2022-2953.patch \
++           file://CVE-2022-3970.patch \
+            file://0001-Revised-handling-of-TIFFTAG_INKNAMES-and-related-TIF.patch \
+            file://0001-tiffcrop-S-option-Make-decision-simpler.patch \
+            file://0001-tiffcrop-disable-incompatibility-of-Z-X-Y-z-options-.patch \
 -- 
 2.33.0
 
