@@ -1,98 +1,90 @@
-Return-Path: <gdelaende@gmail.com>
+Return-Path: <tomasz.zyjewski@3mdeb.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2D27BC4332F
-	for <webhook@archiver.kernel.org>; Fri, 25 Nov 2022 09:19:17 +0000 (UTC)
-Received: from mail-wr1-f50.google.com (mail-wr1-f50.google.com [209.85.221.50])
- by mx.groups.io with SMTP id smtpd.web10.43516.1669367948457423456
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D59F9C43217
+	for <webhook@archiver.kernel.org>; Fri, 25 Nov 2022 11:44:27 +0000 (UTC)
+Received: from 11.mo582.mail-out.ovh.net (11.mo582.mail-out.ovh.net [188.165.38.119])
+ by mx.groups.io with SMTP id smtpd.web10.45326.1669376662923445269
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 25 Nov 2022 01:19:08 -0800
+ Fri, 25 Nov 2022 03:44:23 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=JKRXmiTr;
- spf=pass (domain: gmail.com, ip: 209.85.221.50, mailfrom: gdelaende@gmail.com)
-Received: by mail-wr1-f50.google.com with SMTP id b12so5858214wrn.2
-        for <openembedded-devel@lists.openembedded.org>; Fri, 25 Nov 2022 01:19:08 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=7CZYnLJvu818Bhk4hG5yYrsjy586RQ+RznOUBBtzAvA=;
-        b=JKRXmiTrxykeZNMaxiCbKIyMOgzuOygS1XHOadT0wSii1qhzUMnVDeAac4NPQxB4jh
-         uELsMmWw/5NUuOmnoi7k6wPNFwNZYLq5KdrU16PlzdzbahDuJYgMt1HHjaOmvUN0It5D
-         BrxiesP+ZngmrEZoZztF2rMLm7hOBMqWBzuWLTeSSAEciEbb6yxOZTo0IX/0GOYErMEi
-         3rqHQd9n8zNYq7Y8t2nQEck37Qfmto5vSsQkarebLX0pQ5OBbu/cLjhwUbRGM3LamVUX
-         aTHFPi0Wes3BHwObgnsvbQ9L96GP6yUrlM8avceKNWqDBdhpVl77QqhQ9T3PMvMeg+q2
-         iitg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=7CZYnLJvu818Bhk4hG5yYrsjy586RQ+RznOUBBtzAvA=;
-        b=KRoigrvlJrdYkfBdDJKg5O9m/QxtClhRjJVBuu0zIZnmqDincV+IkAU1nXGY1KFZv0
-         0Np19JeD80/jIscjbOmBXu1Hf1dnZGdM4AJX2N11G31PN5kHC2OdELEfhQQgXdLWTFii
-         h6pdzoaHt2UnYu17mSDap7N8AQE9LfvmekAjgS6i6/kp3gte7VrWNVbKvOFdyTnaoyH/
-         r8DLgYcN8SX2S/Wa9WzNnlpf/idR9wXfKjB/Lw9b84Mp/2ZC+zLekfb1NLChSCcln/F6
-         fokngjM7XtqL9g2D76Jh4LS9TM2k1sXW9Nj2cb/YhagZx5j4A3Nn2kD47f6NwoJBknfR
-         fRFw==
-X-Gm-Message-State: ANoB5plI4Ql0iYT9iF6mu9pfIjSWAbSEmeMtUphWKnh0wwepKvkbHezP
-	PAxGteO2u98/gOx+NlvN74hXOyuj33n8cA==
-X-Google-Smtp-Source: AA0mqf6HfEMFB3cOMCtLZZoegpuHSALct0cQ0DoCdrSDeRJPmnF0rz2L4sB2TEyKxiiu7xL1HvXUhw==
-X-Received: by 2002:a5d:58f4:0:b0:241:e7dd:db14 with SMTP id f20-20020a5d58f4000000b00241e7dddb14mr9254836wrd.271.1669367946693;
-        Fri, 25 Nov 2022 01:19:06 -0800 (PST)
-Received: from OP01570NB.oip.local (178-118-188-85.access.telenet.be. [178.118.188.85])
-        by smtp.gmail.com with ESMTPSA id l11-20020a5d668b000000b00241bc4880fesm3190491wru.111.2022.11.25.01.19.05
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 25 Nov 2022 01:19:06 -0800 (PST)
-From: Gerbrand De Laender <gdelaende@gmail.com>
+ dkim=missing; spf=softfail (domain: 3mdeb.com, ip: 188.165.38.119, mailfrom: tomasz.zyjewski@3mdeb.com)
+Received: from player734.ha.ovh.net (unknown [10.109.143.220])
+	by mo582.mail-out.ovh.net (Postfix) with ESMTP id CBF2425DDF
+	for <openembedded-devel@lists.openembedded.org>; Fri, 25 Nov 2022 11:44:20 +0000 (UTC)
+Received: from 3mdeb.com (84-10-27-202.static.chello.pl [84.10.27.202])
+	(Authenticated sender: tomasz.zyjewski@3mdeb.com)
+	by player734.ha.ovh.net (Postfix) with ESMTPSA id 202C330EFD54D;
+	Fri, 25 Nov 2022 11:44:17 +0000 (UTC)
+Authentication-Results: garm.ovh; auth=pass (GARM-99G0034996c2e3-bff4-4257-9c2b-8c28cc753860,
+                    74700EFE4BFF86247FC1340FF407CFB4262E75AB) smtp.auth=tomasz.zyjewski@3mdeb.com
+X-OVh-ClientIp: 84.10.27.202
+From: =?UTF-8?q?Tomasz=20=C5=BByjewski?= <tomasz.zyjewski@3mdeb.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Gerbrand De Laender <gdelaende@gmail.com>
-Subject: [PATCH] python3-aioserial: new package
-Date: Fri, 25 Nov 2022 10:19:02 +0100
-Message-Id: <20221125091903.446-1-gdelaende@gmail.com>
+Cc: piotr.krol@3mdeb.com,
+	maciej.pijanowski@3mdeb.com
+Subject: [meta-python][PATCH 2/2] python3-uefi-firmware: add recipe for version 1.9
+Date: Fri, 25 Nov 2022 12:44:11 +0100
+Message-Id: <20221125114411.128952-2-tomasz.zyjewski@3mdeb.com>
 X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20221125114411.128952-1-tomasz.zyjewski@3mdeb.com>
+References: <20221125114411.128952-1-tomasz.zyjewski@3mdeb.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=UTF-8
+X-Ovh-Tracer-Id: 12291449285354690856
+X-VR-SPAMSTATE: OK
+X-VR-SPAMSCORE: 0
+X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrgedvgedrieehgdefvdcutefuodetggdotefrodftvfcurfhrohhfihhlvgemucfqggfjpdevjffgvefmvefgnecuuegrihhlohhuthemucehtddtnecunecujfgurhephffvvefufffkofgjfhggtgfgsehtkeertdertdejnecuhfhrohhmpefvohhmrghsiiculjihjhgvfihskhhiuceothhomhgrshiirdiihihjvgifshhkihesfehmuggvsgdrtghomheqnecuggftrfgrthhtvghrnhepgfffgffhueehteeghfetleeiueelteffteetuedttdefhfeghfelueeiteejgeejnecuffhomhgrihhnpehgihhthhhusgdrtghomhdpphihthhhohhnhhhoshhtvggurdhorhhgnecukfhppeduvdejrddtrddtrddupdekgedruddtrddvjedrvddtvdenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepihhnvghtpeduvdejrddtrddtrddupdhmrghilhhfrhhomhepoehtohhmrghsiidriiihjhgvfihskhhiseefmhguvggsrdgtohhmqedpnhgspghrtghpthhtohepuddprhgtphhtthhopehophgvnhgvmhgsvgguuggvugdquggvvhgvlheslhhishhtshdrohhpvghnvghmsggvugguvggurdhorhhgpdfovfetjfhoshhtpehmohehkedvpdhmohguvgepshhmthhpohhuth
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 25 Nov 2022 09:19:17 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99727
+ <openembedded-devel@lists.openembedded.org>; Fri, 25 Nov 2022 11:44:27 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99729
 
-Adds a recipe for aioserial - an asynchronous serial port library for
-Python
+Install uefi-firmware-parser tool
 
-Signed-off-by: Gerbrand De Laender <gdelaende@gmail.com>
+Signed-off-by: Tomasz =C5=BByjewski <tomasz.zyjewski@3mdeb.com>
 ---
- .../python/python3-aioserial_1.3.1.bb           | 17 +++++++++++++++++
+ .../python/python3-uefi-firmware_1.9.bb         | 17 +++++++++++++++++
  1 file changed, 17 insertions(+)
- create mode 100755 meta-python/recipes-devtools/python/python3-aioserial_1.3.1.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-uefi-firm=
+ware_1.9.bb
 
-diff --git a/meta-python/recipes-devtools/python/python3-aioserial_1.3.1.bb b/meta-python/recipes-devtools/python/python3-aioserial_1.3.1.bb
-new file mode 100755
-index 000000000..7ef47a2f8
+diff --git a/meta-python/recipes-devtools/python/python3-uefi-firmware_1.=
+9.bb b/meta-python/recipes-devtools/python/python3-uefi-firmware_1.9.bb
+new file mode 100644
+index 000000000000..ba3124b36e60
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-aioserial_1.3.1.bb
++++ b/meta-python/recipes-devtools/python/python3-uefi-firmware_1.9.bb
 @@ -0,0 +1,17 @@
-+DESCRIPTION = "An asynchronous serial port library for Python"
-+HOMEPAGE = "https://github.com/changyuheng/aioserial.py"
-+SECTION = "devel/python"
++SUMMARY =3D "Various data structures and parsing tools for UEFI firmware=
+."
++DESCRIPTION =3D "This package contains Python UEFI firmware parser tool.=
+ The \
++UEFI firmware parser is a simple module and set of scripts for parsing, =
+\
++extracting, and recreating UEFI firmware volumes. This includes parsing =
+\
++modules for BIOS, OptionROM, Intel ME and other formats too."
++HOMEPAGE =3D "https://github.com/theopolis/uefi-firmware-parser"
++AUTHOR =3D "Teddy Reed <teddy@prosauce.org>"
++LICENSE =3D "BSD-2-Clause & BSD-3-Clause"
++LIC_FILES_CHKSUM =3D "file://setup.py;md5=3D90fa5bae1547550f1c1993f651ed=
+a955"
 +
-+LICENSE = "MPL-2.0"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=650b9179efef1ea560df5c08bc32b494"
++SRC_URI =3D "https://files.pythonhosted.org/packages/7e/b4/a4ec646d24a1a=
+ad709fdb83de6e5eddd6cb24faec02f3a94a3af3b0aba28/uefi_firmware-${PV}.tar.g=
+z"
++SRC_URI[md5sum] =3D "ee5011b4d0bcb0eb7c06295e0107894f"
++SRC_URI[sha256sum] =3D "234119dd92780c67cce3b664e86119c41d0b2af188d7f372=
+b69789b32c5d5cd0"
 +
-+PYPI_PACKAGE = "aioserial"
++S =3D "${WORKDIR}/uefi_firmware-${PV}"
 +
-+SRC_URI[sha256sum] = "702bf03b0eb84b8ef2d8dac5cb925e1e685dce98f77b125569bc6fd2b3b58228"
-+
-+inherit pypi setuptools3
-+
-+RDEPENDS:${PN} += "\
-+    ${PYTHON_PN}-core \
-+    ${PYTHON_PN}-pyserial \
-+"
--- 
++inherit setuptools3
+--=20
 2.25.1
 
 
