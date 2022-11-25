@@ -1,84 +1,71 @@
-Return-Path: <tomasz.zyjewski@3mdeb.com>
+Return-Path: <u.oelmann@pengutronix.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D59A7C4332F
-	for <webhook@archiver.kernel.org>; Fri, 25 Nov 2022 11:44:27 +0000 (UTC)
-Received: from 1.mo576.mail-out.ovh.net (1.mo576.mail-out.ovh.net [178.33.251.173])
- by mx.groups.io with SMTP id smtpd.web10.45325.1669376659168370076
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 172D9C4332F
+	for <webhook@archiver.kernel.org>; Fri, 25 Nov 2022 12:35:48 +0000 (UTC)
+Received: from metis.ext.pengutronix.de (metis.ext.pengutronix.de [85.220.165.71])
+ by mx.groups.io with SMTP id smtpd.web10.46102.1669379744271345290
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 25 Nov 2022 03:44:19 -0800
+ Fri, 25 Nov 2022 04:35:45 -0800
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=softfail (domain: 3mdeb.com, ip: 178.33.251.173, mailfrom: tomasz.zyjewski@3mdeb.com)
-Received: from player734.ha.ovh.net (unknown [10.108.16.216])
-	by mo576.mail-out.ovh.net (Postfix) with ESMTP id 41EC425CB6
-	for <openembedded-devel@lists.openembedded.org>; Fri, 25 Nov 2022 11:44:17 +0000 (UTC)
-Received: from 3mdeb.com (84-10-27-202.static.chello.pl [84.10.27.202])
-	(Authenticated sender: tomasz.zyjewski@3mdeb.com)
-	by player734.ha.ovh.net (Postfix) with ESMTPSA id 9760830EFD517;
-	Fri, 25 Nov 2022 11:44:14 +0000 (UTC)
-Authentication-Results: garm.ovh; auth=pass (GARM-99G00313297bd3-c8fd-4a6b-9f74-36a6feb9c5e3,
-                    74700EFE4BFF86247FC1340FF407CFB4262E75AB) smtp.auth=tomasz.zyjewski@3mdeb.com
-X-OVh-ClientIp: 84.10.27.202
-From: =?UTF-8?q?Tomasz=20=C5=BByjewski?= <tomasz.zyjewski@3mdeb.com>
+ dkim=missing; spf=pass (domain: pengutronix.de, ip: 85.220.165.71, mailfrom: uol@pengutronix.de)
+Received: from drehscheibe.grey.stw.pengutronix.de ([2a0a:edc0:0:c01:1d::a2])
+	by metis.ext.pengutronix.de with esmtps (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
+	(Exim 4.92)
+	(envelope-from <uol@pengutronix.de>)
+	id 1oyXvi-0005uS-DS; Fri, 25 Nov 2022 13:35:42 +0100
+Received: from [2a0a:edc0:0:1101:1d::39] (helo=dude03.red.stw.pengutronix.de)
+	by drehscheibe.grey.stw.pengutronix.de with esmtp (Exim 4.94.2)
+	(envelope-from <uol@pengutronix.de>)
+	id 1oyXvf-000ENA-0l; Fri, 25 Nov 2022 13:35:39 +0100
+Received: from uol by dude03.red.stw.pengutronix.de with local (Exim 4.94.2)
+	(envelope-from <uol@pengutronix.de>)
+	id 1oyXvf-003wGf-1M; Fri, 25 Nov 2022 13:35:39 +0100
+From: =?UTF-8?q?Ulrich=20=C3=96lmann?= <u.oelmann@pengutronix.de>
 To: openembedded-devel@lists.openembedded.org
-Cc: piotr.krol@3mdeb.com,
-	maciej.pijanowski@3mdeb.com
-Subject: [meta-python][PATCH 1/2] python3-binwalk: add recipe for version 2.3.3
-Date: Fri, 25 Nov 2022 12:44:10 +0100
-Message-Id: <20221125114411.128952-1-tomasz.zyjewski@3mdeb.com>
-X-Mailer: git-send-email 2.25.1
+Cc: Henning Heinold <henning@itconsulting-heinold.de>,
+	Otavio Salvador <otavio.salvador@ossystems.com.br>,
+	Richard Leitner <richard.leitner@skidata.com>,
+	=?UTF-8?q?Ulrich=20=C3=96lmann?= <u.oelmann@pengutronix.de>
+Subject: [meta-java][PATCH] jsch: switch to inclusive language
+Date: Fri, 25 Nov 2022 13:35:32 +0100
+Message-Id: <20221125123532.938920-1-u.oelmann@pengutronix.de>
+X-Mailer: git-send-email 2.30.2
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
-X-Ovh-Tracer-Id: 12290323386011654440
-X-VR-SPAMSTATE: OK
-X-VR-SPAMSCORE: 0
-X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrgedvgedrieehgdefvdcutefuodetggdotefrodftvfcurfhrohhfihhlvgemucfqggfjpdevjffgvefmvefgnecuuegrihhlohhuthemucehtddtnecunecujfgurhephffvvefufffkofggtgfgsehtkeertdertdejnecuhfhrohhmpefvohhmrghsiiculjihjhgvfihskhhiuceothhomhgrshiirdiihihjvgifshhkihesfehmuggvsgdrtghomheqnecuggftrfgrthhtvghrnhepvdfftdfhvdegtdelgeekjedtieejiefgudehgfdvkeetieejhefhuedvheeugfejnecuffhomhgrihhnpehgihhthhhusgdrtghomhenucfkphepuddvjedrtddrtddruddpkeegrddutddrvdejrddvtddvnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehinhgvthepuddvjedrtddrtddruddpmhgrihhlfhhrohhmpeeothhomhgrshiirdiihihjvgifshhkihesfehmuggvsgdrtghomheqpdhnsggprhgtphhtthhopedupdhrtghpthhtohepohhpvghnvghmsggvugguvgguqdguvghvvghlsehlihhsthhsrdhophgvnhgvmhgsvgguuggvugdrohhrghdpoffvtefjohhsthepmhhoheejiedpmhhouggvpehsmhhtphhouhht
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+X-SA-Exim-Connect-IP: 2a0a:edc0:0:c01:1d::a2
+X-SA-Exim-Mail-From: uol@pengutronix.de
+X-SA-Exim-Scanned: No (on metis.ext.pengutronix.de); SAEximRunCond expanded to false
+X-PTX-Original-Recipient: openembedded-devel@lists.openembedded.org
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 25 Nov 2022 11:44:27 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99728
+ <openembedded-devel@lists.openembedded.org>; Fri, 25 Nov 2022 12:35:48 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99730
 
-Install binwalk utility
-
-Signed-off-by: Tomasz =C5=BByjewski <tomasz.zyjewski@3mdeb.com>
+Signed-off-by: Ulrich Ölmann <u.oelmann@pengutronix.de>
 ---
- .../python/python3-binwalk_2.3.3.bb             | 17 +++++++++++++++++
- 1 file changed, 17 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-binwalk_2=
-.3.3.bb
+ recipes-core/jcraft/jsch_0.1.40.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-python/recipes-devtools/python/python3-binwalk_2.3.3.bb=
- b/meta-python/recipes-devtools/python/python3-binwalk_2.3.3.bb
-new file mode 100644
-index 000000000000..362efa275148
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-binwalk_2.3.3.bb
-@@ -0,0 +1,17 @@
-+SUMMARY =3D "Firmware analysis tool"
-+DESCRIPTION =3D "This package contains Python Binwalk tool. Binwalk is a=
- fast, \
-+easy to use tool for analyzing, reverse engineering, and extracting firm=
-ware \
-+images."
-+HOMEPAGE =3D "https://github.com/ReFirmLabs/binwalk"
-+LICENSE =3D "MIT"
-+LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D65bbee055d3ea3bfc475f07aecf4d=
-e64"
-+
-+SRC_URI =3D "git://github.com/ReFirmLabs/binwalk;protocol=3Dhttps;branch=
-=3Dmaster"
-+
-+SRCREV =3D "fa0c0bd59b8588814756942fe4cb5452e76c1dcd"
-+
-+S =3D "${WORKDIR}/git"
-+
-+inherit setuptools3
-+
-+RDEPENDS:${PN} +=3D "python3-core"
---=20
-2.25.1
+diff --git a/recipes-core/jcraft/jsch_0.1.40.bb b/recipes-core/jcraft/jsch_0.1.40.bb
+index 07d5b9e3108e..259712661f4d 100644
+--- a/recipes-core/jcraft/jsch_0.1.40.bb
++++ b/recipes-core/jcraft/jsch_0.1.40.bb
+@@ -25,8 +25,8 @@ do_compile() {
+ SRC_URI[md5sum] = "b59cec19a487e95aed68378976b4b566"
+ SRC_URI[sha256sum] = "ca9d2ae08fd7a8983fb00d04f0f0c216a985218a5eb364ff9bee73870f28e097"
+ 
+-# Whitelist the CVE because it only affects Windows platforms
+-CVE_CHECK_WHITELIST += "CVE-2016-5725"
++# Ignore the CVE because it only affects Windows platforms
++CVE_CHECK_IGNORE += "CVE-2016-5725"
+ 
+ BBCLASSEXTEND = "native"
+ 
+-- 
+2.30.2
 
 
