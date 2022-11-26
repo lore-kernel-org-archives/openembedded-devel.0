@@ -2,133 +2,122 @@ Return-Path: <ticotimo@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E8A7DC43217
-	for <webhook@archiver.kernel.org>; Sat, 26 Nov 2022 23:18:08 +0000 (UTC)
-Received: from mail-ej1-f45.google.com (mail-ej1-f45.google.com [209.85.218.45])
- by mx.groups.io with SMTP id smtpd.web11.81318.1669504679113438032
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E90A3C43217
+	for <webhook@archiver.kernel.org>; Sat, 26 Nov 2022 23:19:18 +0000 (UTC)
+Received: from mail-ed1-f42.google.com (mail-ed1-f42.google.com [209.85.208.42])
+ by mx.groups.io with SMTP id smtpd.web10.81327.1669504749030696267
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 26 Nov 2022 15:17:59 -0800
+ Sat, 26 Nov 2022 15:19:09 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=auwxu/Vn;
- spf=pass (domain: gmail.com, ip: 209.85.218.45, mailfrom: ticotimo@gmail.com)
-Received: by mail-ej1-f45.google.com with SMTP id n20so17809469ejh.0
-        for <openembedded-devel@lists.openembedded.org>; Sat, 26 Nov 2022 15:17:58 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=OcEqOI4r;
+ spf=pass (domain: gmail.com, ip: 209.85.208.42, mailfrom: ticotimo@gmail.com)
+Received: by mail-ed1-f42.google.com with SMTP id x2so10913520edd.2
+        for <openembedded-devel@lists.openembedded.org>; Sat, 26 Nov 2022 15:19:08 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=cc:to:subject:message-id:date:from:in-reply-to:references
          :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=9gIOdtNL06MD/BjICfhP++ZrWVqUM2TKtB+7RIQzSgA=;
-        b=auwxu/VnYc/uiwmpINtRYxyHCiiHcwfKT+gO8N/kxhe3NKZlhEn4DmEofBT63VoEA7
-         S7/0vhj2xX1df/O1phhIDpDMgQlLYOJZLgBhycxpJU8VIJLo1Ki23lvTJEf6jCwcqax6
-         G4dOi1Aug6US1DIT9BZoJPtHb78kujG8VbhHnxgWD6TBjD+d69yPQWHzHEY0rKIEHT18
-         5BrFuW6IWVSmlUmX5CNS149k9jKnX+ozmvxMvA2P6sTE24ZTDaorDUQkgq9phZmd5xqd
-         HZRcz5IcEY0wJaSkWQF1vkgdMLMjMhQXBjKff1uoS1cF5TxbpRVpcLEhLSlB3tXWPRnf
-         zb8w==
+        bh=rN5OJrqCrWkFkvEtkdG1pQ+pAUfu3sV8SHFH7j09lok=;
+        b=OcEqOI4rEylMzLMOUsmLxeVTAnHCJbVeJ+mpSHvI7MzEK13B2ZFwbsXx3yvDC/L0Df
+         BnW6uZbyzf33HJUbCQMacz/YHWPemrBzf2zwwLdy5dyv8ztvYSLMvSA2bJsGtrAKHK/8
+         lT1N1Xe8QzQkfpkvtfFhnJfq83aSCElS5ADh10aKGPKIDq0GyZ7FPlmJgGY74QnGPrbx
+         FcfgZT8AJZPyQ0Z1NFHHa1lXQItzyWEZyF0x9PnMb4KOo0SFNO/XfiTUjkqllX/7mPlY
+         4dJes3zVcfNGScgILEUv4f1PKanrzOk1ZtccxaZo0buToizLpBebupt0a/+maeoPbajN
+         m72A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=cc:to:subject:message-id:date:from:in-reply-to:references
          :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=9gIOdtNL06MD/BjICfhP++ZrWVqUM2TKtB+7RIQzSgA=;
-        b=tokclw9kdflHCFpvVBqUxz+cg7WE9FNJD3N/1u+05TczoIhS7XOQ15F6SGDP/Esxr9
-         BQUL68xvBfIrdVLxr/BL0qm3x77RpPKYeZeFQCgOMfvMEPGfKhq1Gm9owZWQd+xVLDUh
-         jkGwvRruo+ewNhZTYWWnidLo9Xz9U9XMFQhjR5EX7h/pegfrNdQAs9otp/5VsAuD+TXG
-         f0B9Eqg18JhFFgTjKsGL2K+svLooh2oso65ytJjMXjCOBZb1GTYMkvVwgQAIv7+wKi4N
-         zHbk3AnY03cFtoowwTx85HVuGWSBATPzf+4RVbgC4ea36NPZRiTxfPC5dAhAYjmSA4zW
-         CbLA==
-X-Gm-Message-State: ANoB5plvSm0ZlyWS1p30E18I14WQdjyLdrPvzCAYCGyzCEUuprE5kUV2
-	tzjEBCwu9iSwwqG4lQSYKeew7auSwuiO1tpgjjU=
-X-Google-Smtp-Source: AA0mqf6kxpALdtEICqLXym6peoGZbakXyMrBE2m1Vbmclabm+Ga0+XXUkbIsvjliwAZLBIJA13E4apOMj7OygTvRWNE=
-X-Received: by 2002:a17:907:601d:b0:78d:4abe:c4b6 with SMTP id
- fs29-20020a170907601d00b0078d4abec4b6mr21817387ejc.485.1669504677106; Sat, 26
- Nov 2022 15:17:57 -0800 (PST)
+        bh=rN5OJrqCrWkFkvEtkdG1pQ+pAUfu3sV8SHFH7j09lok=;
+        b=MxX78aBEzYPwaXYsuDFIRGGniPU79wCHr0jQRAKKjXBodiJlISJ9Ahym4YBoZCp93R
+         UU3n2iCbaTh7x7dnAZjmGM7TaRC0EPEENL4cbXdO8JHpYOOuD6iEvgiGu6oZ3mhEKTna
+         BsqtNlMvRQeMquLgqBtHvb7NrA8dzn/vWHAtsy4pF8Pfla4xNFUZmF+djUvO54frELu8
+         TA3mZO58Jo7bT3ALonlbp6cBonejE3oQ40dwF7dhQjx64U83qrGpSH9aaJnqi+MGXv9d
+         pLBmmIJRjZzBHBsAYPTGPbUdP6YizEGQAbIGV844H1uWMSnBlVmsf+gRDXgZynvLXGXG
+         KiAw==
+X-Gm-Message-State: ANoB5pmJE0xxEK1NBE+SFOtJM6Mw4Ov/0s9cIwwx0aE1J5jeBCfGb+Fi
+	pgA5QjnzlDYySiyPZI6cUZZxeZ9wVMyZUgr8Nxa4aNoP
+X-Google-Smtp-Source: AA0mqf5bYy5xI6SbIqpaA7CVcbKIGu9JrMr8lVqkMUN3KetNdd4wp7dGuMQFADVF//mYPZIBg6cdRqW29KHUkyM2CD4=
+X-Received: by 2002:aa7:c841:0:b0:45d:2a5:2db8 with SMTP id
+ g1-20020aa7c841000000b0045d02a52db8mr26783428edt.105.1669504747102; Sat, 26
+ Nov 2022 15:19:07 -0800 (PST)
 MIME-Version: 1.0
-References: <20221125114411.128952-1-tomasz.zyjewski@3mdeb.com> <20221125114411.128952-2-tomasz.zyjewski@3mdeb.com>
-In-Reply-To: <20221125114411.128952-2-tomasz.zyjewski@3mdeb.com>
+References: <20221125114411.128952-1-tomasz.zyjewski@3mdeb.com>
+In-Reply-To: <20221125114411.128952-1-tomasz.zyjewski@3mdeb.com>
 From: Tim Orling <ticotimo@gmail.com>
-Date: Sat, 26 Nov 2022 15:17:46 -0800
-Message-ID: <CANx9H-CFJ0KnQtNtejmpishDMxVdWaucGt05GYB+oHaADChdjA@mail.gmail.com>
-Subject: Re: [oe] [meta-python][PATCH 2/2] python3-uefi-firmware: add recipe
- for version 1.9
+Date: Sat, 26 Nov 2022 15:18:56 -0800
+Message-ID: <CANx9H-DEL_Z1BeT8VnPZ9jC0_VHEtQV_O2Vs8UdzdiC77-aCMA@mail.gmail.com>
+Subject: Re: [oe] [meta-python][PATCH 1/2] python3-binwalk: add recipe for
+ version 2.3.3
 To: tomzy <tomasz.zyjewski@3mdeb.com>
 Cc: maciej.pijanowski@3mdeb.com, openembedded-devel@lists.openembedded.org, 
 	piotr.krol@3mdeb.com
-Content-Type: multipart/alternative; boundary="0000000000003ad70305ee67d918"
+Content-Type: multipart/alternative; boundary="00000000000066e5e605ee67dd37"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 26 Nov 2022 23:18:08 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99766
+ <openembedded-devel@lists.openembedded.org>; Sat, 26 Nov 2022 23:19:18 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99767
 
---0000000000003ad70305ee67d918
+--00000000000066e5e605ee67dd37
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
 On Fri, Nov 25, 2022 at 3:44 AM tomzy <tomasz.zyjewski@3mdeb.com> wrote:
 
-> Install uefi-firmware-parser tool
+> Install binwalk utility
 >
 > Signed-off-by: Tomasz =C5=BByjewski <tomasz.zyjewski@3mdeb.com>
 > ---
->  .../python/python3-uefi-firmware_1.9.bb         | 17 +++++++++++++++++
+>  .../python/python3-binwalk_2.3.3.bb             | 17 +++++++++++++++++
 >  1 file changed, 17 insertions(+)
 >  create mode 100644 meta-python/recipes-devtools/python/
-> python3-uefi-firmware_1.9.bb
+> python3-binwalk_2.3.3.bb
 >
-> diff --git a/meta-python/recipes-devtools/python/
-> python3-uefi-firmware_1.9.bb b/meta-python/recipes-devtools/python/
-> python3-uefi-firmware_1.9.bb
+> diff --git a/meta-python/recipes-devtools/python/python3-binwalk_2.3.3.bb
+> b/meta-python/recipes-devtools/python/python3-binwalk_2.3.3.bb
 > new file mode 100644
-> index 000000000000..ba3124b36e60
+> index 000000000000..362efa275148
 > --- /dev/null
-> +++ b/meta-python/recipes-devtools/python/python3-uefi-firmware_1.9.bb
+> +++ b/meta-python/recipes-devtools/python/python3-binwalk_2.3.3.bb
 > @@ -0,0 +1,17 @@
-> +SUMMARY =3D "Various data structures and parsing tools for UEFI firmware=
-."
-> +DESCRIPTION =3D "This package contains Python UEFI firmware parser tool.
-> The \
-> +UEFI firmware parser is a simple module and set of scripts for parsing, =
-\
-> +extracting, and recreating UEFI firmware volumes. This includes parsing =
-\
-> +modules for BIOS, OptionROM, Intel ME and other formats too."
-> +HOMEPAGE =3D "https://github.com/theopolis/uefi-firmware-parser"
-> +AUTHOR =3D "Teddy Reed <teddy@prosauce.org>"
-> +LICENSE =3D "BSD-2-Clause & BSD-3-Clause"
-> +LIC_FILES_CHKSUM =3D "file://setup.py;md5=3D90fa5bae1547550f1c1993f651ed=
-a955"
+> +SUMMARY =3D "Firmware analysis tool"
+> +DESCRIPTION =3D "This package contains Python Binwalk tool. Binwalk is a
+> fast, \
+> +easy to use tool for analyzing, reverse engineering, and extracting
+> firmware \
+> +images."
+> +HOMEPAGE =3D "https://github.com/ReFirmLabs/binwalk"
+> +LICENSE =3D "MIT"
+> +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D65bbee055d3ea3bfc475f07aecf4d=
+e64"
 > +
-> +SRC_URI =3D "
-> https://files.pythonhosted.org/packages/7e/b4/a4ec646d24a1aad709fdb83de6e=
-5eddd6cb24faec02f3a94a3af3b0aba28/uefi_firmware-${PV}.tar.gz
-> "
->
-
-If you=E2=80=99re fetching from  pythonhosted, you could very likely simpli=
-fy the
-recipe by inheriting pypi bbclass
-
-+SRC_URI[md5sum] =3D "ee5011b4d0bcb0eb7c06295e0107894f"
-
-
-These days, we only really use the sha256sum
-
->
-> +SRC_URI[sha256sum] =3D
-> "234119dd92780c67cce3b664e86119c41d0b2af188d7f372b69789b32c5d5cd0"
+> +SRC_URI =3D "git://
+> github.com/ReFirmLabs/binwalk;protocol=3Dhttps;branch=3Dmaster"
 > +
-> +S =3D "${WORKDIR}/uefi_firmware-${PV}"
+
+
+Thank you for fetching the git repo which is much newer (and with better
+security apparently) than the pypi version.
+
+
+> +SRCREV =3D "fa0c0bd59b8588814756942fe4cb5452e76c1dcd"
+> +
+> +S =3D "${WORKDIR}/git"
 > +
 > +inherit setuptools3
+> +
+> +RDEPENDS:${PN} +=3D "python3-core"
 > --
 > 2.25.1
 >
 >
 > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
 > Links: You receive all messages sent to this group.
-> View/Reply Online (#99729):
-> https://lists.openembedded.org/g/openembedded-devel/message/99729
-> Mute This Topic: https://lists.openembedded.org/mt/95252447/924729
+> View/Reply Online (#99728):
+> https://lists.openembedded.org/g/openembedded-devel/message/99728
+> Mute This Topic: https://lists.openembedded.org/mt/95252446/924729
 > Group Owner: openembedded-devel+owner@lists.openembedded.org
 > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
 > ticotimo@gmail.com]
@@ -136,7 +125,7 @@ These days, we only really use the sha256sum
 >
 >
 
---0000000000003ad70305ee67d918
+--00000000000066e5e605ee67dd37
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
@@ -144,81 +133,71 @@ Content-Transfer-Encoding: quoted-printable
 =3D"gmail_attr">On Fri, Nov 25, 2022 at 3:44 AM tomzy &lt;<a href=3D"mailto=
 :tomasz.zyjewski@3mdeb.com">tomasz.zyjewski@3mdeb.com</a>&gt; wrote:<br></d=
 iv><blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left=
-:1px #ccc solid;padding-left:1ex">Install uefi-firmware-parser tool<br>
+:1px #ccc solid;padding-left:1ex">Install binwalk utility<br>
 <br>
 Signed-off-by: Tomasz =C5=BByjewski &lt;<a href=3D"mailto:tomasz.zyjewski@3=
 mdeb.com" target=3D"_blank">tomasz.zyjewski@3mdeb.com</a>&gt;<br>
 ---<br>
-=C2=A0.../python/<a href=3D"http://python3-uefi-firmware_1.9.bb" rel=3D"nor=
-eferrer" target=3D"_blank">python3-uefi-firmware_1.9.bb</a>=C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0| 17 +++++++++++++++++<br>
+=C2=A0.../python/<a href=3D"http://python3-binwalk_2.3.3.bb" rel=3D"norefer=
+rer" target=3D"_blank">python3-binwalk_2.3.3.bb</a>=C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0| 17 +++++++++++++++++<br>
 =C2=A01 file changed, 17 insertions(+)<br>
 =C2=A0create mode 100644 meta-python/recipes-devtools/python/<a href=3D"htt=
-p://python3-uefi-firmware_1.9.bb" rel=3D"noreferrer" target=3D"_blank">pyth=
-on3-uefi-firmware_1.9.bb</a><br>
+p://python3-binwalk_2.3.3.bb" rel=3D"noreferrer" target=3D"_blank">python3-=
+binwalk_2.3.3.bb</a><br>
 <br>
 diff --git a/meta-python/recipes-devtools/python/<a href=3D"http://python3-=
-uefi-firmware_1.9.bb" rel=3D"noreferrer" target=3D"_blank">python3-uefi-fir=
-mware_1.9.bb</a> b/meta-python/recipes-devtools/python/<a href=3D"http://py=
-thon3-uefi-firmware_1.9.bb" rel=3D"noreferrer" target=3D"_blank">python3-ue=
-fi-firmware_1.9.bb</a><br>
+binwalk_2.3.3.bb" rel=3D"noreferrer" target=3D"_blank">python3-binwalk_2.3.=
+3.bb</a> b/meta-python/recipes-devtools/python/<a href=3D"http://python3-bi=
+nwalk_2.3.3.bb" rel=3D"noreferrer" target=3D"_blank">python3-binwalk_2.3.3.=
+bb</a><br>
 new file mode 100644<br>
-index 000000000000..ba3124b36e60<br>
+index 000000000000..362efa275148<br>
 --- /dev/null<br>
-+++ b/meta-python/recipes-devtools/python/<a href=3D"http://python3-uefi-fi=
-rmware_1.9.bb" rel=3D"noreferrer" target=3D"_blank">python3-uefi-firmware_1=
-.9.bb</a><br>
++++ b/meta-python/recipes-devtools/python/<a href=3D"http://python3-binwalk=
+_2.3.3.bb" rel=3D"noreferrer" target=3D"_blank">python3-binwalk_2.3.3.bb</a=
+><br>
 @@ -0,0 +1,17 @@<br>
-+SUMMARY =3D &quot;Various data structures and parsing tools for UEFI firmw=
-are.&quot;<br>
-+DESCRIPTION =3D &quot;This package contains Python UEFI firmware parser to=
-ol. The \<br>
-+UEFI firmware parser is a simple module and set of scripts for parsing, \<=
-br>
-+extracting, and recreating UEFI firmware volumes. This includes parsing \<=
-br>
-+modules for BIOS, OptionROM, Intel ME and other formats too.&quot;<br>
-+HOMEPAGE =3D &quot;<a href=3D"https://github.com/theopolis/uefi-firmware-p=
-arser" rel=3D"noreferrer" target=3D"_blank">https://github.com/theopolis/ue=
-fi-firmware-parser</a>&quot;<br>
-+AUTHOR =3D &quot;Teddy Reed &lt;<a href=3D"mailto:teddy@prosauce.org" targ=
-et=3D"_blank">teddy@prosauce.org</a>&gt;&quot;<br>
-+LICENSE =3D &quot;BSD-2-Clause &amp; BSD-3-Clause&quot;<br>
-+LIC_FILES_CHKSUM =3D &quot;file://setup.py;md5=3D90fa5bae1547550f1c1993f65=
-1eda955&quot;<br>
++SUMMARY =3D &quot;Firmware analysis tool&quot;<br>
++DESCRIPTION =3D &quot;This package contains Python Binwalk tool. Binwalk i=
+s a fast, \<br>
++easy to use tool for analyzing, reverse engineering, and extracting firmwa=
+re \<br>
++images.&quot;<br>
++HOMEPAGE =3D &quot;<a href=3D"https://github.com/ReFirmLabs/binwalk" rel=
+=3D"noreferrer" target=3D"_blank">https://github.com/ReFirmLabs/binwalk</a>=
+&quot;<br>
++LICENSE =3D &quot;MIT&quot;<br>
++LIC_FILES_CHKSUM =3D &quot;file://LICENSE;md5=3D65bbee055d3ea3bfc475f07aec=
+f4de64&quot;<br>
 +<br>
-+SRC_URI =3D &quot;<a href=3D"https://files.pythonhosted.org/packages/7e/b4=
-/a4ec646d24a1aad709fdb83de6e5eddd6cb24faec02f3a94a3af3b0aba28/uefi_firmware=
--$%7BPV%7D.tar.gz" rel=3D"noreferrer" target=3D"_blank">https://files.pytho=
-nhosted.org/packages/7e/b4/a4ec646d24a1aad709fdb83de6e5eddd6cb24faec02f3a94=
-a3af3b0aba28/uefi_firmware-${PV}.tar.gz</a>&quot;<br>
-</blockquote><div dir=3D"auto"><br></div><div dir=3D"auto">If you=E2=80=99r=
-e fetching from =C2=A0pythonhosted, you could very likely simplify the reci=
-pe by inheriting pypi bbclass</div><div dir=3D"auto"><br></div><blockquote =
-class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid=
-;padding-left:1ex" dir=3D"auto">+SRC_URI[md5sum] =3D &quot;ee5011b4d0bcb0eb=
-7c06295e0107894f&quot;</blockquote><div dir=3D"auto"><br></div><div dir=3D"=
-auto">These days, we only really use the sha256sum</div><blockquote class=
-=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padd=
-ing-left:1ex" dir=3D"auto"><br>
-+SRC_URI[sha256sum] =3D &quot;234119dd92780c67cce3b664e86119c41d0b2af188d7f=
-372b69789b32c5d5cd0&quot;<br>
++SRC_URI =3D &quot;git://<a href=3D"http://github.com/ReFirmLabs/binwalk;pr=
+otocol=3Dhttps;branch=3Dmaster" rel=3D"noreferrer" target=3D"_blank">github=
+.com/ReFirmLabs/binwalk;protocol=3Dhttps;branch=3Dmaster</a>&quot;<br>
++</blockquote><div dir=3D"auto"><br></div><div dir=3D"auto">Thank you for f=
+etching the git repo which is much newer (and with better security apparent=
+ly) than the pypi version.</div><div dir=3D"auto"><br></div><blockquote cla=
+ss=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;pa=
+dding-left:1ex" dir=3D"auto"><br>
++SRCREV =3D &quot;fa0c0bd59b8588814756942fe4cb5452e76c1dcd&quot;<br>
 +<br>
-+S =3D &quot;${WORKDIR}/uefi_firmware-${PV}&quot;<br>
++S =3D &quot;${WORKDIR}/git&quot;<br>
 +<br>
 +inherit setuptools3<br>
++<br>
++RDEPENDS:${PN} +=3D &quot;python3-core&quot;<br>
 -- <br>
 2.25.1<br>
 <br>
 <br>
 -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
 Links: You receive all messages sent to this group.<br>
-View/Reply Online (#99729): <a href=3D"https://lists.openembedded.org/g/ope=
-nembedded-devel/message/99729" rel=3D"noreferrer" target=3D"_blank">https:/=
-/lists.openembedded.org/g/openembedded-devel/message/99729</a><br>
-Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/95252447/9247=
+View/Reply Online (#99728): <a href=3D"https://lists.openembedded.org/g/ope=
+nembedded-devel/message/99728" rel=3D"noreferrer" target=3D"_blank">https:/=
+/lists.openembedded.org/g/openembedded-devel/message/99728</a><br>
+Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/95252446/9247=
 29" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/mt/=
-95252447/924729</a><br>
+95252446/924729</a><br>
 Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
 d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
 ><br>
@@ -230,5 +209,5 @@ et=3D"_blank">ticotimo@gmail.com</a>]<br>
 <br>
 </blockquote></div></div>
 
---0000000000003ad70305ee67d918--
+--00000000000066e5e605ee67dd37--
 
