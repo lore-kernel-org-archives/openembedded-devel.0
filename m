@@ -2,75 +2,203 @@ Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DADA4C47090
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DB002C636F8
 	for <webhook@archiver.kernel.org>; Sun, 27 Nov 2022 12:29:12 +0000 (UTC)
-Received: from mailout05.t-online.de (mailout05.t-online.de [194.25.134.82])
- by mx.groups.io with SMTP id smtpd.web11.90658.1669552142053372883
+Received: from mailout06.t-online.de (mailout06.t-online.de [194.25.134.19])
+ by mx.groups.io with SMTP id smtpd.web10.90541.1669552142220256242
  for <openembedded-devel@lists.openembedded.org>;
  Sun, 27 Nov 2022 04:29:02 -0800
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=SPF record not found (domain: t-online.de, ip: 194.25.134.82, mailfrom: f_l_k@t-online.de)
+ dkim=missing; spf=none, err=SPF record not found (domain: t-online.de, ip: 194.25.134.19, mailfrom: f_l_k@t-online.de)
 Received: from fwd86.dcpf.telekom.de (fwd86.aul.t-online.de [10.223.144.112])
-	by mailout05.t-online.de (Postfix) with SMTP id 542E65D06
+	by mailout06.t-online.de (Postfix) with SMTP id 61D531F860
 	for <openembedded-devel@lists.openembedded.org>; Sun, 27 Nov 2022 13:29:00 +0100 (CET)
 Received: from flk-MS-7C91.fritz.box ([79.219.231.234]) by fwd86.t-online.de
 	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1ozGmJ-0sD6nM0; Sun, 27 Nov 2022 13:28:59 +0100
+	esmtp id 1ozGmK-0sD6nP0; Sun, 27 Nov 2022 13:29:00 +0100
 From: Markus Volk <f_l_k@t-online.de>
 To: openembedded-devel@lists.openembedded.org
 Cc: Markus Volk <f_l_k@t-online.de>
-Subject: [meta-gnome][PATCHv3 04/14] gjs: update 1.72.2 -> 1.75.1
-Date: Sun, 27 Nov 2022 13:28:36 +0100
-Message-Id: <20221127122846.1406944-4-f_l_k@t-online.de>
+Subject: [meta-gnome][PATCHv3 07/14] gnome-shell: update 42.0 -> 43.1
+Date: Sun, 27 Nov 2022 13:28:39 +0100
+Message-Id: <20221127122846.1406944-7-f_l_k@t-online.de>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20221127122846.1406944-1-f_l_k@t-online.de>
 References: <20221127122846.1406944-1-f_l_k@t-online.de>
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1669552139-C37F89D3-C58AAA1A/0/0 CLEAN NORMAL
-X-TOI-MSGID: 36a58e2a-cc5b-4c6c-9478-9f41a903fab8
+Content-Type: text/plain; charset=UTF-8
+X-TOI-EXPURGATEID: 150726::1669552140-D9A4E9D3-AC027363/0/0 CLEAN NORMAL
+X-TOI-MSGID: a9df7312-535f-4ae6-889d-71e5c326f237
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sun, 27 Nov 2022 12:29:12 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99771
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99772
 
-- build with mozjs-102
+- build with gtk4
 
 Signed-off-by: Markus Volk <f_l_k@t-online.de>
 ---
- meta-gnome/recipes-gnome/gjs/{gjs_1.72.2.bb =3D> gjs_1.75.1.bb} | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-gnome/recipes-gnome/gjs/{gjs_1.72.2.bb =3D> gjs_1.75.1.bb} (=
-90%)
+ ...42.0.bb =3D> gnome-shell-extensions_43.1.bb} |  0
+ ...s-gjs_path-to-optionally-set-path-to.patch | 27 ++++++++++---------
+ ...nome-shell_42.0.bb =3D> gnome-shell_43.1.bb} |  7 +++--
+ 3 files changed, 20 insertions(+), 14 deletions(-)
+ rename meta-gnome/recipes-gnome/gnome-shell/{gnome-shell-extensions_42.0=
+.bb =3D> gnome-shell-extensions_43.1.bb} (100%)
+ rename meta-gnome/recipes-gnome/gnome-shell/{gnome-shell_42.0.bb =3D> gn=
+ome-shell_43.1.bb} (88%)
 
-diff --git a/meta-gnome/recipes-gnome/gjs/gjs_1.72.2.bb b/meta-gnome/reci=
-pes-gnome/gjs/gjs_1.75.1.bb
-similarity index 90%
-rename from meta-gnome/recipes-gnome/gjs/gjs_1.72.2.bb
-rename to meta-gnome/recipes-gnome/gjs/gjs_1.75.1.bb
-index 317034156..b2c2b583b 100644
---- a/meta-gnome/recipes-gnome/gjs/gjs_1.72.2.bb
-+++ b/meta-gnome/recipes-gnome/gjs/gjs_1.75.1.bb
-@@ -4,11 +4,11 @@ LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D8dcea832f6ac=
-f45d856abfeb2d51ec48"
+diff --git a/meta-gnome/recipes-gnome/gnome-shell/gnome-shell-extensions_=
+42.0.bb b/meta-gnome/recipes-gnome/gnome-shell/gnome-shell-extensions_43.=
+1.bb
+similarity index 100%
+rename from meta-gnome/recipes-gnome/gnome-shell/gnome-shell-extensions_4=
+2.0.bb
+rename to meta-gnome/recipes-gnome/gnome-shell/gnome-shell-extensions_43.=
+1.bb
+diff --git a/meta-gnome/recipes-gnome/gnome-shell/gnome-shell/0001-Introd=
+uce-options-gjs_path-to-optionally-set-path-to.patch b/meta-gnome/recipes=
+-gnome/gnome-shell/gnome-shell/0001-Introduce-options-gjs_path-to-optiona=
+lly-set-path-to.patch
+index 4a3662518..b583199e9 100644
+--- a/meta-gnome/recipes-gnome/gnome-shell/gnome-shell/0001-Introduce-opt=
+ions-gjs_path-to-optionally-set-path-to.patch
++++ b/meta-gnome/recipes-gnome/gnome-shell/gnome-shell/0001-Introduce-opt=
+ions-gjs_path-to-optionally-set-path-to.patch
+@@ -1,4 +1,4 @@
+-From 3bf597b16e23cd2ce0ee3b05c23b46add5e26cd4 Mon Sep 17 00:00:00 2001
++From 9f11c9e53d91b23113202b40500540242bcabdb0 Mon Sep 17 00:00:00 2001
+ From: =3D?UTF-8?q?Andreas=3D20M=3DC3=3DBCller?=3D <schnitzeltony@gmail.c=
+om>
+ Date: Thu, 28 Oct 2021 18:57:24 +0200
+ Subject: [PATCH] Introduce options 'gjs_path' to optionally set path to =
+gjs
+@@ -6,9 +6,15 @@ MIME-Version: 1.0
+ Content-Type: text/plain; charset=3DUTF-8
+ Content-Transfer-Encoding: 8bit
 =20
- GNOMEBASEBUILDCLASS =3D "meson"
++From: =3D?UTF-8?q?Andreas=3D20M=3DC3=3DBCller?=3D <schnitzeltony@gmail.c=
+om>
++MIME-Version: 1.0
++Content-Type: text/plain; charset=3DUTF-8
++Content-Transfer-Encoding: 8bit
++
+ Upstream-Status: Pending
 =20
--DEPENDS =3D "mozjs-91 cairo"
-+DEPENDS =3D "mozjs-102 cairo"
+ Signed-off-by: Andreas M=C3=BCller <schnitzeltony@gmail.com>
++
+ ---
+  js/dbusServices/meson.build                  | 2 +-
+  meson.build                                  | 6 +++++-
+@@ -19,10 +25,10 @@ Signed-off-by: Andreas M=C3=BCller <schnitzeltony@gma=
+il.com>
+  6 files changed, 25 insertions(+), 4 deletions(-)
 =20
- inherit gnomebase gsettings gobject-introspection vala gettext features_=
-check upstream-version-is-even pkgconfig
+ diff --git a/js/dbusServices/meson.build b/js/dbusServices/meson.build
+-index eb941ed..16efaeb 100644
++index 48b7f89..700b590 100644
+ --- a/js/dbusServices/meson.build
+ +++ b/js/dbusServices/meson.build
+-@@ -27,7 +27,7 @@ foreach service, dir : dbus_services
++@@ -22,7 +22,7 @@ foreach service, dir : dbus_services
+ =20
+    serviceconf =3D configuration_data()
+    serviceconf.set('service', service)
+@@ -32,10 +38,10 @@ index eb941ed..16efaeb 100644
+ =20
+    configure_file(
+ diff --git a/meson.build b/meson.build
+-index 8d7478f..7c9cc6a 100644
++index 252fb1e..250f722 100644
+ --- a/meson.build
+ +++ b/meson.build
+-@@ -138,7 +138,11 @@ endif
++@@ -125,7 +125,11 @@ endif
+ =20
+  mutter_typelibdir =3D mutter_dep.get_variable('typelibdir')
+  python =3D find_program('python3')
+@@ -49,11 +55,11 @@ index 8d7478f..7c9cc6a 100644
+  cc =3D meson.get_compiler('c')
+ =20
+ diff --git a/meson_options.txt b/meson_options.txt
+-index f0f2ecf..a45f2e4 100644
++index 46ca8e7..3e9a31f 100644
+ --- a/meson_options.txt
+ +++ b/meson_options.txt
+ @@ -45,3 +45,9 @@ option('soup2',
+-   value: true,
++   value: false,
+    description: 'Use Soup 2.4 instead of Soup 3. Must be in sync with li=
+bgweather'
+  )
+ +
+@@ -76,10 +82,10 @@ index ce2a776..8f7bba4 100644
+  configure_file(
+    input: prgname + '.in',
+ diff --git a/subprojects/extensions-app/meson.build b/subprojects/extens=
+ions-app/meson.build
+-index c260d7a..c5b7554 100644
++index 66a39e9..331dc1d 100644
+ --- a/subprojects/extensions-app/meson.build
+ +++ b/subprojects/extensions-app/meson.build
+-@@ -44,7 +44,12 @@ localedir =3D join_paths(datadir, 'locale')
++@@ -46,7 +46,12 @@ localedir =3D join_paths(datadir, 'locale')
+  metainfodir =3D join_paths(datadir, 'metainfo')
+  servicedir =3D join_paths(datadir, 'dbus-1', 'services')
+ =20
+@@ -107,6 +113,3 @@ index ca2eb41..2787785 100644
+ +  value: '',
+ +  description: 'Instead of searching gjs executable, configure path'
+ +)
+---=20
+-2.34.1
+-
+diff --git a/meta-gnome/recipes-gnome/gnome-shell/gnome-shell_42.0.bb b/m=
+eta-gnome/recipes-gnome/gnome-shell/gnome-shell_43.1.bb
+similarity index 88%
+rename from meta-gnome/recipes-gnome/gnome-shell/gnome-shell_42.0.bb
+rename to meta-gnome/recipes-gnome/gnome-shell/gnome-shell_43.1.bb
+index f54d966c7..6adbb0a29 100644
+--- a/meta-gnome/recipes-gnome/gnome-shell/gnome-shell_42.0.bb
++++ b/meta-gnome/recipes-gnome/gnome-shell/gnome-shell_43.1.bb
+@@ -11,11 +11,13 @@ DEPENDS =3D " \
+     mutter \
+     evolution-data-server \
+     gcr \
++    geocode-glib \
+     gjs \
+     gnome-autoar \
+     polkit \
+     libcroco \
+-    startup-notification \
++    libsoup-3.0 \
++    ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', '', 'startup-noti=
+fication', d)} \
+     ibus \
+     gsettings-desktop-schemas \
+ "
+@@ -31,7 +33,7 @@ GIR_MESON_OPTION =3D ""
+ # gobject-introspection is mandatory and cannot be configured
+ REQUIRED_DISTRO_FEATURES +=3D "gobject-introspection-data"
 =20
--SRC_URI[archive.sha256sum] =3D "ddee379bdc5a7d303a5d894be2b281beb8ac5450=
-8604e7d3f20781a869da3977"
-+SRC_URI[archive.sha256sum] =3D "81dcdf49d2665d08fa7e251700ea36466d778774=
-18e9186d3a7e7efcd31aa960"
- SRC_URI +=3D " \
-     file://0001-Support-cross-builds-a-bit-better.patch \
-     file://0002-meson.build-Do-not-add-dir-installed-tests-when-inst.pat=
-ch \
+-SRC_URI[archive.sha256sum] =3D "33d404fb3c93b9de42984f0110a2969d6a4a7247=
+c27fe7f5e24c67ecfec75094"
++SRC_URI[archive.sha256sum] =3D "df0444765def1bd0afee9617d2b5919bc79b4db8=
+6e7e757ac0e1f73748ec1bdc"
+ SRC_URI +=3D "file://0001-Introduce-options-gjs_path-to-optionally-set-p=
+ath-to.patch"
+=20
+ PACKAGECONFIG ??=3D "bluetooth nm ${@bb.utils.filter('DISTRO_FEATURES', =
+'systemd', d)}"
+@@ -44,6 +46,7 @@ EXTRA_OEMESON =3D " \
+     -Dextensions-app:gjs_path=3D${bindir}/gjs \
+     -Dtests=3Dfalse \
+     -Dman=3Dfalse \
++    -Dsoup2=3Dfalse \
+ "
+=20
+ do_install:append() {
 --=20
 2.34.1
 
