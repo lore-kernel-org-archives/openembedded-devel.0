@@ -1,112 +1,88 @@
-Return-Path: <erwann.roussy@savoirfairelinux.com>
+Return-Path: <aj.bagwell@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CA9ABC43217
-	for <webhook@archiver.kernel.org>; Mon, 28 Nov 2022 15:21:00 +0000 (UTC)
-Received: from mail.savoirfairelinux.com (mail.savoirfairelinux.com [208.88.110.44])
- by mx.groups.io with SMTP id smtpd.web10.120453.1669648857909191528
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C7CD1C433FE
+	for <webhook@archiver.kernel.org>; Mon, 28 Nov 2022 15:31:40 +0000 (UTC)
+Received: from mail-wm1-f52.google.com (mail-wm1-f52.google.com [209.85.128.52])
+ by mx.groups.io with SMTP id smtpd.web11.121012.1669649499033841739
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 28 Nov 2022 07:20:59 -0800
+ Mon, 28 Nov 2022 07:31:39 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@savoirfairelinux.com header.s=dfc430d2-d198-11ec-948e-34200cb392d2 header.b=Et/9aAqQ;
- spf=pass (domain: savoirfairelinux.com, ip: 208.88.110.44, mailfrom: erwann.roussy@savoirfairelinux.com)
-Received: from localhost (localhost [127.0.0.1])
-	by mail.savoirfairelinux.com (Postfix) with ESMTP id 506769C06E7
-	for <openembedded-devel@lists.openembedded.org>; Mon, 28 Nov 2022 10:20:57 -0500 (EST)
-Received: from mail.savoirfairelinux.com ([127.0.0.1])
-	by localhost (mail.savoirfairelinux.com [127.0.0.1]) (amavisd-new, port 10032)
-	with ESMTP id qCnysnt7KZPc; Mon, 28 Nov 2022 10:20:56 -0500 (EST)
-Received: from localhost (localhost [127.0.0.1])
-	by mail.savoirfairelinux.com (Postfix) with ESMTP id 887829C07B9;
-	Mon, 28 Nov 2022 10:20:56 -0500 (EST)
-DKIM-Filter: OpenDKIM Filter v2.10.3 mail.savoirfairelinux.com 887829C07B9
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=M5sxWqV/;
+ spf=pass (domain: gmail.com, ip: 209.85.128.52, mailfrom: aj.bagwell@gmail.com)
+Received: by mail-wm1-f52.google.com with SMTP id c65-20020a1c3544000000b003cfffd00fc0so11957607wma.1
+        for <openembedded-devel@lists.openembedded.org>; Mon, 28 Nov 2022 07:31:38 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=savoirfairelinux.com; s=DFC430D2-D198-11EC-948E-34200CB392D2;
-	t=1669648856; bh=xxoUvzGOXmNtKGrqLIrWT6MZvEIEL6TFXEJ2SweDldk=;
-	h=From:To:Date:Message-Id:MIME-Version;
-	b=Et/9aAqQOt1gHwwqWMfRoyTABLMZCAUYV06Um7vSIDAhd/Ax4CCQ0CDZwYK4uYcno
-	 igBSUhRHR9moUbKTOUakYUtrKWQCEZcYZ0xI1wrfmo7fFJfa0HjYWK0kHryBhmAD4K
-	 ldllYa8O20/KjTUkriF55uMneZD1+/zyGciMm4zVLZ0im5+eSB7RnEtBZyX/QsVNkq
-	 e86OqNwsn6Suo9CkzcAMgdyTIg2X3P7gbM6/LcT5PktY6RekyabmrfQ8m0H5tfuImA
-	 Ag1eRuKMSOjuoglCiR+/tOwLzEPOYHfnz2cNYKxu2OzmpBKApO5WF1eAlw7y1zkccE
-	 RVgNUa1Y8eEBw==
-X-Virus-Scanned: amavisd-new at mail.savoirfairelinux.com
-Received: from mail.savoirfairelinux.com ([127.0.0.1])
-	by localhost (mail.savoirfairelinux.com [127.0.0.1]) (amavisd-new, port 10026)
-	with ESMTP id YhPGvlIA0OR7; Mon, 28 Nov 2022 10:20:56 -0500 (EST)
-Received: from jean.bzh.sfl (lmontsouris-657-1-69-118.w80-15.abo.wanadoo.fr [80.15.101.118])
-	by mail.savoirfairelinux.com (Postfix) with ESMTPSA id 1AD769C06E7;
-	Mon, 28 Nov 2022 10:20:56 -0500 (EST)
-From: Erwann Roussy <erwann.roussy@savoirfairelinux.com>
+        d=gmail.com; s=20210112;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=nwXIwrsuhLoQEZ08y7WJcuBOI1anxauTp0XM+0dm86E=;
+        b=M5sxWqV/fP19UG9Tt3/UALT3YyYHqUkykeNUrBCiVZyKXc83Ecswb3gsICLhL5ktyo
+         agyMAlFc5zJVw2KlT9P28u8kRW9f1Uh20PwPjyCYLOEJfBpLPfvxYkvO+FM+do9pWoIN
+         gKP4SIatHAGtI1h8bw1X+R5BHprCO2xAaGPLK6mRo180jaslHOn6e9NxOq/sE6ery3JM
+         Fl7u2iH3KPszPnnTm1eQ2toATkWoA9QGhL4Elz88ZJdHVGdXCHNdc62RN7FlpRzp32VW
+         xn3ec3GHt3vFRvlw9jEYG1vMV6qCpZ1yE7L6OHiuqzvLNjwLDIiDMtrvQDx8ronpP9RO
+         DzeQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=nwXIwrsuhLoQEZ08y7WJcuBOI1anxauTp0XM+0dm86E=;
+        b=BzXGAvnRtCXzwghO62hx58oMN3+VWNKyGgjOJmB1bSZ4Pf7I2Lilj04cRh41eA8X66
+         0y+BU8SOtoJTwDmsZm0aIZiP+t+okAEB2ArxFiZNBh2MVvmGC+15fCzWqxk3BTGUn0P8
+         Hf7ayyI+eaqZ/iy1i9BTjcJgFBOtNqJ94YLx1o2w5aFVGepQXxKJy/Lfgozv4WgUh0mF
+         td9xyKFisDbO1+JKUAWVhevao0KOpHLBGpqmuQjl0PsWPl4SXF802yyHocc7eIR4Ra99
+         QC3HX4R7sXxllsDYw8mjWz1d2w8UgXOk8zok0qLxCO9XnoTB1GIpRQpkBTHazlOrxP+i
+         6YFg==
+X-Gm-Message-State: ANoB5pkna+X1qIQikuo3S6xLJifYLH77yOhV0TPJciue3BaJV7hQjP/v
+	fhxg/wW4ISbpgyX5u2B9EUz6IVeXRIo=
+X-Google-Smtp-Source: AA0mqf7SZjApHdqxMHz0bySnY1ENjyQc0OwEoGRB79nid/aI59C133vyCX+i8G5UX34LEtdmTTlslg==
+X-Received: by 2002:a05:600c:688:b0:3cf:a18d:39a4 with SMTP id a8-20020a05600c068800b003cfa18d39a4mr37038634wmn.125.1669649497097;
+        Mon, 28 Nov 2022 07:31:37 -0800 (PST)
+Received: from CMM-C02QQ1FQG8WL.cable.virginm.net (cpc92720-cmbg20-2-0-cust203.5-4.cable.virginm.net. [82.21.82.204])
+        by smtp.gmail.com with ESMTPSA id fc12-20020a05600c524c00b003b4fdbb6319sm20098010wmb.21.2022.11.28.07.31.36
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 28 Nov 2022 07:31:36 -0800 (PST)
+From: AJ Bagwell <aj.bagwell@gmail.com>
+X-Google-Original-From: AJ Bagwell <anthony.bagwell@hivehome.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Erwann Roussy <erwann.roussy@savoirfairelinux.com>
-Subject: [meta-oe][PATCH 3/3] tuna: add recipe
-Date: Mon, 28 Nov 2022 16:19:20 +0100
-Message-Id: <20221128151916.3541948-4-erwann.roussy@savoirfairelinux.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20221128151916.3541948-1-erwann.roussy@savoirfairelinux.com>
-References: <20221128151916.3541948-1-erwann.roussy@savoirfairelinux.com>
+Cc: henning@itconsulting-heinold.de,
+	otavio@ossystems.com.br,
+	richard.leitner@skidata.com,
+	AJ Bagwell <anthony.bagwell@hivehome.com>
+Subject: [meta-java][PATCH] jsch: Variable CVE_CHECK_WHITELIST has been renamed to CVE_CHECK_IGNORE
+Date: Mon, 28 Nov 2022 15:31:21 +0000
+Message-Id: <20221128153121.94166-1-anthony.bagwell@hivehome.com>
+X-Mailer: git-send-email 2.37.1 (Apple Git-137.1)
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 28 Nov 2022 15:21:00 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99829
+ <openembedded-devel@lists.openembedded.org>; Mon, 28 Nov 2022 15:31:40 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99830
 
-Tuna is a cui/gui tool for tuning of running processes.
-It is useful to see and changed irq affinity on an embedded board.
-
-The chosen revision of tuna is the last commit to this day and not the
-last release. This is due to the python3-ethtool module which was
-required in the last release but isn't anymore. Tuna now has a built-in
-module instead.
-
-Despite tuna's homepage's dependencies section, python3-inet_diag isn't
-required anymore.
-
-Signed-off-by: Erwann Roussy <erwann.roussy@savoirfairelinux.com>
+Signed-off-by: AJ Bagwell <anthony.bagwell@hivehome.com>
 ---
- meta-oe/recipes-support/tuna/tuna_git.bb | 25 ++++++++++++++++++++++++
- 1 file changed, 25 insertions(+)
- create mode 100644 meta-oe/recipes-support/tuna/tuna_git.bb
+ recipes-core/jcraft/jsch_0.1.40.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-support/tuna/tuna_git.bb b/meta-oe/recipes-s=
-upport/tuna/tuna_git.bb
-new file mode 100644
-index 000000000..f698b2ea2
---- /dev/null
-+++ b/meta-oe/recipes-support/tuna/tuna_git.bb
-@@ -0,0 +1,25 @@
-+SUMMARY =3D "cui/gui tool for tuning of running processes"
-+HOMEPAGE =3D "https://rt.wiki.kernel.org/index.php/Tuna"
-+LICENSE =3D "GPL-2.0-only"
-+LIC_FILES_CHKSUM =3D "file://${COMMON_LICENSE_DIR}/GPL-2.0-only;md5=3D80=
-1f80980d171dd6425610833a22dbe6"
-+
-+SRC_URI =3D "git://git.kernel.org/pub/scm/utils/tuna/tuna.git;branch=3Dm=
-ain"
-+
-+SRCREV =3D "0681906e75e1c8166126bbfc2f3055e7507bfcb5"
-+
-+S =3D "${WORKDIR}/git"
-+
-+RDEPENDS:${PN} +=3D " \
-+    python3-io \
-+    python3-linux-procfs \
-+    python3-logging \
-+    python3-schedutils \
-+    python3-six \
-+    "
-+
-+inherit setuptools3
-+
-+do_install:append() {
-+    install -m 0755 -d ${D}${bindir}
-+    install -m 0755 ${S}/tuna-cmd.py ${D}${bindir}/tuna
-+}
---=20
-2.25.1
+diff --git a/recipes-core/jcraft/jsch_0.1.40.bb b/recipes-core/jcraft/jsch_0.1.40.bb
+index 07d5b9e..071d76a 100644
+--- a/recipes-core/jcraft/jsch_0.1.40.bb
++++ b/recipes-core/jcraft/jsch_0.1.40.bb
+@@ -26,7 +26,7 @@ SRC_URI[md5sum] = "b59cec19a487e95aed68378976b4b566"
+ SRC_URI[sha256sum] = "ca9d2ae08fd7a8983fb00d04f0f0c216a985218a5eb364ff9bee73870f28e097"
+ 
+ # Whitelist the CVE because it only affects Windows platforms
+-CVE_CHECK_WHITELIST += "CVE-2016-5725"
++CVE_CHECK_IGNORE += "CVE-2016-5725"
+ 
+ BBCLASSEXTEND = "native"
+ 
+-- 
+2.37.1 (Apple Git-137.1)
 
 
