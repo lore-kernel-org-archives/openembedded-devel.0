@@ -1,87 +1,101 @@
-Return-Path: <kai.kang@eng.windriver.com>
+Return-Path: <u.oelmann@pengutronix.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 22472C4332F
-	for <webhook@archiver.kernel.org>; Mon, 28 Nov 2022 09:04:19 +0000 (UTC)
-Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
- by mx.groups.io with SMTP id smtpd.web11.113396.1669626254425746569
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 41FBAC43217
+	for <webhook@archiver.kernel.org>; Mon, 28 Nov 2022 13:13:10 +0000 (UTC)
+Received: from metis.ext.pengutronix.de (metis.ext.pengutronix.de [85.220.165.71])
+ by mx.groups.io with SMTP id smtpd.web10.117219.1669641180193212263
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 28 Nov 2022 01:04:14 -0800
+ Mon, 28 Nov 2022 05:13:00 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=pps06212021 header.b=Rss2o1WY;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=83317b965e=kai.kang@windriver.com)
-Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 2AS8VOKs016175;
-	Mon, 28 Nov 2022 09:04:13 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com; h=from : to : cc :
- subject : date : message-id : mime-version : content-type; s=PPS06212021;
- bh=u9C79khklkxKjPS+y5VncsRqQMqUoeO6GhZpsTpMM4k=;
- b=Rss2o1WY5XSHEdxGYY/mDa6cIqQFJg3POAWRys/jWHqVexwb5f+N61tN3PSlNnd3X4Fl
- F7foIlHHKr7CPgJ/RCYSxS+w5UhFiAhGA9gy/p4xKT4A4N1QBxiDMYONEujYenWDVrkO
- 9xOPThZrX4uYlvmm+clO+aa7eOZaUXeJmUyzsrPH0yf+N4ZDJsGzwWB2MffYS6OouwL9
- BMkqlB71ucnK55AdtWk+2JdY0+S5uD7ndoufBsWkOIk3JDdsPqY6LsiQSDPbq7p1ihql
- 3xf4wPhw+b/IAxYNQ1iQyRh+Kwkt71+1/EIKuGp1qc0gLgUJtapoIXgmGFRAwAgSkRTD aQ== 
-Received: from ala-exchng01.corp.ad.wrs.com (unknown-82-252.windriver.com [147.11.82.252])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3m39sbsbc6-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT);
-	Mon, 28 Nov 2022 09:04:12 +0000
-Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2242.12; Mon, 28 Nov 2022 01:04:11 -0800
-Received: from pek-lpg-core3.wrs.com (128.224.153.232) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
- 15.1.2242.12 via Frontend Transport; Mon, 28 Nov 2022 01:04:10 -0800
-From: <kai.kang@windriver.com>
-To: <raj.khem@gmail.com>
-CC: <openembedded-devel@lists.openembedded.org>
-Subject: [PATCH] fixup! wxwidgets: 3.1.5 -> 3.2.1
-Date: Mon, 28 Nov 2022 17:02:02 +0800
-Message-ID: <20221128090202.13868-1-kai.kang@windriver.com>
-X-Mailer: git-send-email 2.17.1
+ dkim=missing; spf=pass (domain: pengutronix.de, ip: 85.220.165.71, mailfrom: u.oelmann@pengutronix.de)
+Received: from dude.hi.pengutronix.de ([2001:67c:670:100:1d::7])
+	by metis.ext.pengutronix.de with esmtps (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
+	(Exim 4.92)
+	(envelope-from <u.oelmann@pengutronix.de>)
+	id 1ozdwP-0001EX-1x; Mon, 28 Nov 2022 14:12:57 +0100
+Received: from uol by dude.hi.pengutronix.de with local (Exim 4.94.2)
+	(envelope-from <u.oelmann@pengutronix.de>)
+	id 1ozdwI-007Zjt-Rl; Mon, 28 Nov 2022 14:12:50 +0100
+References: <20221125123532.938920-1-u.oelmann@pengutronix.de>
+ <14384172-6b21-6a13-5896-c25c081ef08b@gmail.com>
+User-agent: mu4e 1.6.9; emacs 29.0.50
+From: Ulrich =?utf-8?Q?=C3=96lmann?= <u.oelmann@pengutronix.de>
+To: Jacob Kroon <jacob.kroon@gmail.com>
+Cc: Henning Heinold <henning@itconsulting-heinold.de>, Otavio Salvador
+ <otavio.salvador@ossystems.com.br>, Richard Leitner
+ <richard.leitner@skidata.com>, openembedded-devel@lists.openembedded.org
+Subject: Re: [oe] [meta-java][PATCH] jsch: switch to inclusive language
+Date: Mon, 28 Nov 2022 14:11:22 +0100
+In-reply-to: <14384172-6b21-6a13-5896-c25c081ef08b@gmail.com>
+Message-ID: <6rtu2j1aul.fsf@pengutronix.de>
 MIME-Version: 1.0
-Content-Type: text/plain
-X-Proofpoint-GUID: DGB041YZ_DtGPQKBPzKUjqIT_g-F-LDz
-X-Proofpoint-ORIG-GUID: DGB041YZ_DtGPQKBPzKUjqIT_g-F-LDz
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.219,Aquarius:18.0.895,Hydra:6.0.545,FMLib:17.11.122.1
- definitions=2022-11-28_07,2022-11-25_01,2022-06-22_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 priorityscore=1501 mlxscore=0
- adultscore=0 lowpriorityscore=0 clxscore=1011 impostorscore=0 bulkscore=0
- malwarescore=0 spamscore=0 suspectscore=0 mlxlogscore=815 phishscore=0
- classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2210170000
- definitions=main-2211280070
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+X-SA-Exim-Connect-IP: 2001:67c:670:100:1d::7
+X-SA-Exim-Mail-From: u.oelmann@pengutronix.de
+X-SA-Exim-Scanned: No (on metis.ext.pengutronix.de); SAEximRunCond expanded to false
+X-PTX-Original-Recipient: openembedded-devel@lists.openembedded.org
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 28 Nov 2022 09:04:19 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99823
+ <openembedded-devel@lists.openembedded.org>; Mon, 28 Nov 2022 13:13:10 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99824
 
-From: Kai Kang <kai.kang@windriver.com>
+Hi Jacob,
 
-The config file name is based on which package config among gtk, qt and
-no_gui is enabled. Fix it in do_install script.
+On Fri, Nov 25 2022 at 14:57 +0100, "Jacob Kroon" <jacob.kroon@gmail.com> w=
+rote:
+> On 11/25/22 13:35, Ulrich =C3=96lmann wrote:
+>> Signed-off-by: Ulrich =C3=96lmann <u.oelmann@pengutronix.de>
+>> ---
+>>   recipes-core/jcraft/jsch_0.1.40.bb | 4 ++--
+>>   1 file changed, 2 insertions(+), 2 deletions(-)
+>> diff --git a/recipes-core/jcraft/jsch_0.1.40.bb
+>> b/recipes-core/jcraft/jsch_0.1.40.bb
+>> index 07d5b9e3108e..259712661f4d 100644
+>> --- a/recipes-core/jcraft/jsch_0.1.40.bb
+>> +++ b/recipes-core/jcraft/jsch_0.1.40.bb
+>> @@ -25,8 +25,8 @@ do_compile() {
+>>   SRC_URI[md5sum] =3D "b59cec19a487e95aed68378976b4b566"
+>>   SRC_URI[sha256sum] =3D "ca9d2ae08fd7a8983fb00d04f0f0c216a985218a5eb364=
+ff9bee73870f28e097"
+>>   -# Whitelist the CVE because it only affects Windows platforms
+>> -CVE_CHECK_WHITELIST +=3D "CVE-2016-5725"
+>> +# Ignore the CVE because it only affects Windows platforms
+>> +CVE_CHECK_IGNORE +=3D "CVE-2016-5725"
+>>     BBCLASSEXTEND =3D "native"
+>>
+>
+> Also your commit:
+>
+> 3161106f0879a6be0a016df3a8bb8fa800bd6044
+> openjdk-8: refresh patches
+>
+> seems to have *introduced* fuzz warnings, rather than fix any on master b=
+ranch
+> ...
 
-Signed-off-by: Kai Kang <kai.kang@windriver.com>
----
- meta-oe/recipes-extended/wxwidgets/wxwidgets_3.2.1.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+after reading your hint, at first sight I felt ashamed seeing that my
+refreshed patches introduce fuzz warnings instead of fixing them as was
+intended by me. Looking more closely I then realized that before my
+commit 3161106f0879 ("openjdk-8: refresh patches") it was openjdk-8
+where the patches did not apply cleanly (but openjdk-8-native where
+everything was okay) while after that commit it is exactly the other way
+round. Unfortunately I did not realize that when I stumbled across it
+originally, sigh. At the bottom line sadly my commit neither improved
+the overall situation nor did it worsen it. So: sorry for the noise!
 
-diff --git a/meta-oe/recipes-extended/wxwidgets/wxwidgets_3.2.1.bb b/meta-oe/recipes-extended/wxwidgets/wxwidgets_3.2.1.bb
-index 4bb07fda0..7f0d27123 100644
---- a/meta-oe/recipes-extended/wxwidgets/wxwidgets_3.2.1.bb
-+++ b/meta-oe/recipes-extended/wxwidgets/wxwidgets_3.2.1.bb
-@@ -103,7 +103,7 @@ do_install:append() {
-     # fix host contamination
-     sed -i -e "s#${STAGING_DIR_NATIVE}##g" \
-            -e "s#${STAGING_DIR_TARGET}##g" \
--           ${D}${libdir}/wx/config/gtk3-unicode-3.2 \
-+           ${D}${libdir}/wx/config/*-unicode-3.2 \
-            ${D}${libdir}/cmake/wxWidgets/wxWidgetsTargets.cmake
- }
- 
--- 
-2.17.1
+Best regards
+Ulrich
 
+
+> Jacob
+--=20
+Pengutronix e.K.                           | Ulrich =C3=96lmann            =
+   |
+Industrial Linux Solutions                 | http://www.pengutronix.de/  |
+Peiner Str. 6-8, 31137 Hildesheim, Germany | Phone: +49-5121-206917-0    |
+Amtsgericht Hildesheim, HRA 2686           | Fax:   +49-5121-206917-5555 |
 
