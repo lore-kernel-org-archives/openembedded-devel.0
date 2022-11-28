@@ -2,71 +2,68 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 34592C4321E
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 345BEC4167D
 	for <webhook@archiver.kernel.org>; Mon, 28 Nov 2022 06:10:18 +0000 (UTC)
-Received: from mail3.bemta32.messagelabs.com (mail3.bemta32.messagelabs.com [195.245.230.82])
- by mx.groups.io with SMTP id smtpd.web10.111335.1669615817049827909
+Received: from mail1.bemta37.messagelabs.com (mail1.bemta37.messagelabs.com [85.158.142.112])
+ by mx.groups.io with SMTP id smtpd.web10.111334.1669615813290210118
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 27 Nov 2022 22:10:17 -0800
+ Sun, 27 Nov 2022 22:10:13 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=vlgo7SFn;
- spf=pass (domain: fujitsu.com, ip: 195.245.230.82, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=D/FDxbN0;
+ spf=pass (domain: fujitsu.com, ip: 85.158.142.112, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1669615815; i=@fujitsu.com;
-	bh=owXmeahdb9JDxuFZ24f5n3XW7QMT4hwGsXjqET4QWk4=;
-	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type;
-	b=vlgo7SFn7bPb9bF6oP6IwyXMAMA3JWOqe0394YUpTLdlYf/RZKrCm2Tgts2XRqLlZ
-	 XHpy9vyaEZeWN1RISYw2yNtG76p5jF6JmYVLIa7AVRmsqYP6L5GlydBjfyk/27ljRr
-	 s1YzcnHtAXGYnAcz7BNUCVleGJPpPGpKWlINVMzYH54ULdPvMN3O7UGTkmErv9VVWh
-	 +aSmUNFula+J37tPbJjp28tv7tsa6h6Cyh1oKkSOVIy9MR7DfK1JXW+SVjxt28KfXC
-	 YX4hhehFRnRCz16JoupZgUG1MjvV6g4VIRVIEdT/lbpK4sSbnYmCF1RhL/s8PNf7LV
-	 Vc1eL3qj4VCQg==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrHIsWRWlGSWpSXmKPExsViZ8MxSfd4QEu
-  ywa4nbBYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8bCFZtYCl5xVnyf9IytgfEjRxcjF4eQwBNG
-  iblfJjNBONeZJI5+72aBcPYwSiw+9YS1i5GTg01ASuLG/f9sILaIgL7E0tl7mEFsZgEViRe/e
-  9hBbGEBB4nDBzaDxVkEVCW2zJnLBGLzCjhJLF11GsyWEFCQmPLwPVgNp4CzxJ5HJ8DmCwHVnH
-  rcxghRLyhxcuYTFoj5EhIHX7xghuhVlJh9uZkFwq6QmDWrDWqmmsTVc5uYJzAKzkLSPgtJ+wJ
-  GplWMpsWpRWWpRbrGeklFmekZJbmJmTl6iVW6iXqppbrlqcUluoZ6ieXFeqnFxXrFlbnJOSl6
-  eaklmxiBwZtSzFa9g/Ht0j96hxglOZiURHkXXmpKFuJLyk+pzEgszogvKs1JLT7EKMPBoSTBu
-  96zJVlIsCg1PbUiLTMHGEkwaQkOHiUR3sX2QGne4oLE3OLMdIjUKUZLjg+Hruxl5rh6BUTO/N
-  p2gFmIJS8/L1VKnNfRH6hBAKQhozQPbhws2i8xykoJ8zIyMDAI8RSkFuVmlqDKv2IU52BUEuY
-  V9AOawpOZVwK39RXQQUxAB21SbAI5qCQRISXVwHSxzPHKhI1/o1e/3FK8Wy3T8dvNhhCHVDf3
-  nVu0dJnm9FW+Fm7YvTFE5aSG0D4H1VVvzOMPHcg//nhtw8wnS+coGWRazRPVWfqqNTpTUsLyz
-  LMqd7dfm3tO3RJ/+jnOPML+VmVh/2St+VnuTP8SM2/JvBT605BoptpyWLsgX346f96pFq416R
-  vU93E+clAV0to0ndXe5qvDyo4/NhOS3rJ9LVism/Z/ySSXv55ltoetpDMdPxuquD94IdS+/lW
-  ZmEo1z/5pL0ybf6/Yv9Xk2jN2b0FVidVN3FPua3nceLN266+7P9bqRuw4uclsc9KSuYZHS3Q2
-  Rv0Nd2l0N7b726hRPb32me7/CS5rZ8fskVZiKc5INNRiLipOBAAw4wCAcQMAAA==
+	s=170520fj; t=1669615811; i=@fujitsu.com;
+	bh=k3UzK4/lZjmkMQ0vAloH0Uqfx/bnEPbT1GkRk5D5B18=;
+	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
+	b=D/FDxbN0Eow9cLGXYgJZ/4sngKq49mxgohpPbm4hVaMw2vPvLlVLYYTezu6edk8mU
+	 APF1cR/XRMmqz/wL5RTw9SHGOC7LO0gxj+fJHIDoffTeClYrFVN9pAlJ2/nl62KMqp
+	 q/rngBeYMHI2wAf21iwnBVXZR3cAUF8W5rTX5hgLVE0pN8Jh7mzDeQgS2OeAxIL4vZ
+	 fB2aU/vfAsySARkk67PCLCaUEU/iY1bK1EtdVkmG7rgFerR4IdwzBINhTMST/vyWwA
+	 od/tnkEGOhUCGc3cw1E6slXpfKVdx+NeB4M/Pb8AT6TqzKSImy3WefidZ1HJ0qR17l
+	 xtFNmuFLTa+sg==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrEIsWRWlGSWpSXmKPExsViZ8OxWfdwQEu
+  ywfltjBYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8aNu29YCxYrVTy+NJe1gfG+XBcjF4eQwANG
+  ic1LVzJCOFeYJH40zQVyOIGcPYwSV75HgthsAlISN+7/ZwOxRQT0JZbO3sMMYjMLqEi8+N3DD
+  mILC9hJ7GvsBYpzcLAIqEo8+5sFEuYVcJK4OGM/WLmEgILElIfvmSHighInZz5hgRgjIXHwxQ
+  uoGkWJ2ZebWSDsColZs9qYIGw1iavnNjFPYOSfhaR9FpL2BYxMqxjNi1OLylKLdA2N9ZKKMtM
+  zSnITM3P0Eqt0E/VSS3Xz8otKMnQN9RLLi/VSi4v1iitzk3NS9PJSSzYxAoMxpThVYgdjw/I/
+  eocYJTmYlER5F15qShbiS8pPqcxILM6ILyrNSS0+xCjDwaEkwbvesyVZSLAoNT21Ii0zBxgZM
+  GkJDh4lEd7F9kBp3uKCxNzizHSI1ClGV46rV67sZeaYOvvffmaO5WBy5te2A8wcm/Z1HWAWYs
+  nLz0uVEud19AdqFgBpzijNgxsNi+pLjLJSwryMDAwMQjwFqUW5mSWo8q8YxTkYlYR5Bf2ApvB
+  k5pXAXfAK6DgmoOM2KTaBHFeSiJCSamBK6Pl0U0Y4eZni7bkci/QZE/rkQ18WLJjmKHLhZq/f
+  jF2bpT8F+ShManjN135zfvLm15Or1ucodga6HlvCF/xa/dnUDdwXFk7jVz1zyDemftJ0wyU7N
+  6Qtibnx8Hmb7NFPX3QWcD1YOUFSRVf+ycXdPtM+apxcc8uqoGfbuuXnpx2aUaXy22F5+Mwry6
+  e0TvvFEX5A80d+t/5v520dfMsvX/A9tT98wRsjxRzBHdYVdm8XXjSftnOZnMLddos5zokxjoW
+  HXi3ZND+2LnCZ/5TqM0dy3TQNWXt0Fbg7P757LPZn3Xn5nfO8bis0rtkjbNbK7XCwxa/g3upJ
+  s7hOOBcF7Tp3uvVWTpXA/sz/047MmK3EUpyRaKjFXFScCACLijQlZQMAAA==
 X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-21.tower-585.messagelabs.com!1669615814!221395!1
-X-Originating-IP: [62.60.8.146]
+X-Msg-Ref: server-21.tower-728.messagelabs.com!1669615810!10006!1
+X-Originating-IP: [62.60.8.179]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.101.1; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 18192 invoked from network); 28 Nov 2022 06:10:15 -0000
-Received: from unknown (HELO n03ukasimr02.n03.fujitsu.local) (62.60.8.146)
-  by server-21.tower-585.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 28 Nov 2022 06:10:15 -0000
-Received: from n03ukasimr02.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTP id B4ED61000E9
-	for <openembedded-devel@lists.openembedded.org>; Mon, 28 Nov 2022 06:10:14 +0000 (GMT)
+Received: (qmail 17520 invoked from network); 28 Nov 2022 06:10:10 -0000
+Received: from unknown (HELO n03ukasimr04.n03.fujitsu.local) (62.60.8.179)
+  by server-21.tower-728.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 28 Nov 2022 06:10:10 -0000
+Received: from n03ukasimr04.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTP id 790487B
+	for <openembedded-devel@lists.openembedded.org>; Mon, 28 Nov 2022 06:10:10 +0000 (GMT)
 Received: from R01UKEXCASM126.r01.fujitsu.local (R01UKEXCASM126 [10.183.43.178])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTPS id A89EE1000DB
-	for <openembedded-devel@lists.openembedded.org>; Mon, 28 Nov 2022 06:10:14 +0000 (GMT)
+	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTPS id 6C12E150
+	for <openembedded-devel@lists.openembedded.org>; Mon, 28 Nov 2022 06:10:10 +0000 (GMT)
 Received: from localhost.localdomain (10.167.225.33) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.32; Mon, 28 Nov 2022 06:10:12 +0000
+ (TLS) id 15.0.1497.32; Mon, 28 Nov 2022 06:10:08 +0000
 From: <wangmy@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-oe] [PATCH] libglvnd: upgrade 1.5.0 -> 1.6.0
-Date: Mon, 28 Nov 2022 14:09:43 +0800
-Message-ID: <1669615786-13094-2-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH] gensio: upgrade 2.5.2 -> 2.6.1
+Date: Mon, 28 Nov 2022 14:09:42 +0800
+Message-ID: <1669615786-13094-1-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
-In-Reply-To: <1669615786-13094-1-git-send-email-wangmy@fujitsu.com>
-References: <1669615786-13094-1-git-send-email-wangmy@fujitsu.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-Originating-IP: [10.167.225.33]
@@ -77,37 +74,117 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 28 Nov 2022 06:10:18 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99792
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99791
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
-Changelog:
-===========
-Added assembly dispatch support for loongarch64
-Fixed GLX assembly dispatch support for x32
-Fixed TLS handling for single-threaded programs on FreeBSD
+0001-configure-Check-for-request_init-API-when-probing-fo.patch
+0001-tools-gensiot-Fix-build-with-musl.patch
+removed since they're included in 2.6.1
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../libglvnd/{libglvnd_1.5.0.bb => libglvnd_1.6.0.bb}           | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-graphics/libglvnd/{libglvnd_1.5.0.bb => libglvnd_1.6.0.bb} (95%)
+ ...for-request_init-API-when-probing-fo.patch | 31 -------------------
+ ...01-tools-gensiot-Fix-build-with-musl.patch | 29 -----------------
+ .../{gensio_2.5.2.bb => gensio_2.6.1.bb}      |  7 ++---
+ 3 files changed, 2 insertions(+), 65 deletions(-)
+ delete mode 100644 meta-oe/recipes-connectivity/gensio/files/0001-configure-Check-for-request_init-API-when-probing-fo.patch
+ delete mode 100644 meta-oe/recipes-connectivity/gensio/files/0001-tools-gensiot-Fix-build-with-musl.patch
+ rename meta-oe/recipes-connectivity/gensio/{gensio_2.5.2.bb => gensio_2.6.1.bb} (78%)
 
-diff --git a/meta-oe/recipes-graphics/libglvnd/libglvnd_1.5.0.bb b/meta-oe/recipes-graphics/libglvnd/libglvnd_1.6.0.bb
-similarity index 95%
-rename from meta-oe/recipes-graphics/libglvnd/libglvnd_1.5.0.bb
-rename to meta-oe/recipes-graphics/libglvnd/libglvnd_1.6.0.bb
-index b92bad46e..b76373cf2 100644
---- a/meta-oe/recipes-graphics/libglvnd/libglvnd_1.5.0.bb
-+++ b/meta-oe/recipes-graphics/libglvnd/libglvnd_1.6.0.bb
-@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://README.md;beginline=323;md5=7ac5f0111f648b92fe5427efe
- SRC_URI = "git://git@gitlab.freedesktop.org/glvnd/libglvnd.git;protocol=https;branch=master"
+diff --git a/meta-oe/recipes-connectivity/gensio/files/0001-configure-Check-for-request_init-API-when-probing-fo.patch b/meta-oe/recipes-connectivity/gensio/files/0001-configure-Check-for-request_init-API-when-probing-fo.patch
+deleted file mode 100644
+index 3b4caa221..000000000
+--- a/meta-oe/recipes-connectivity/gensio/files/0001-configure-Check-for-request_init-API-when-probing-fo.patch
++++ /dev/null
+@@ -1,31 +0,0 @@
+-From f56e59712d8708c74a4cf66d24b5703fc16b22ae Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Thu, 1 Sep 2022 11:31:48 -0700
+-Subject: [PATCH] configure: Check for request_init API when probing for
+- libwrap
+-
+-checking for main() is not right check, since this function is not part
+-of libwrap but the app. Newer autocof and toolchain may fail
+-
+-Upstream-Status: Submitted [https://github.com/cminyard/gensio/pull/48]
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+- configure.ac | 2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
+-
+-diff --git a/configure.ac b/configure.ac
+-index 90cfcb6b..1c06d918 100644
+---- a/configure.ac
+-+++ b/configure.ac
+-@@ -109,7 +109,7 @@ AC_ARG_WITH(tcp-wrappers,
+- if test "$tcp_wrappers" != "no"
+- then
+-   AC_CHECK_HEADERS([tcpd.h])
+--  AC_CHECK_LIB(wrap,main)
+-+  AC_CHECK_LIB(wrap,request_init)
+- fi
+- 
+- AC_ARG_ENABLE([doc],
+--- 
+-2.37.3
+-
+diff --git a/meta-oe/recipes-connectivity/gensio/files/0001-tools-gensiot-Fix-build-with-musl.patch b/meta-oe/recipes-connectivity/gensio/files/0001-tools-gensiot-Fix-build-with-musl.patch
+deleted file mode 100644
+index 93831c380..000000000
+--- a/meta-oe/recipes-connectivity/gensio/files/0001-tools-gensiot-Fix-build-with-musl.patch
++++ /dev/null
+@@ -1,29 +0,0 @@
+-From 823b6754a4d7655480b6e8576a9d0037f842d653 Mon Sep 17 00:00:00 2001
+-From: Jan Luebbe <jlu@pengutronix.de>
+-Date: Thu, 25 Aug 2022 12:19:16 +0200
+-Subject: [PATCH] tools:gensiot: Fix build with musl
+-
+-According to POSIX getpid() is available in unistd.h, not sys/unistd.h.
+-
+-Upstream-Status: Submitted [https://github.com/cminyard/gensio/pull/47]
+-Signed-off-by: Jan Luebbe <jlu@pengutronix.de>
+----
+- tools/gensiotool.c | 2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
+-
+-diff --git a/tools/gensiotool.c b/tools/gensiotool.c
+-index cac531bb4b74..ab0bb9583f9f 100644
+---- a/tools/gensiotool.c
+-+++ b/tools/gensiotool.c
+-@@ -44,7 +44,7 @@
+- #include <signal.h>
+- #include <errno.h>
+- #include <sys/types.h>
+--#include <sys/unistd.h>
+-+#include <unistd.h>
+- #include <syslog.h>
+- #endif
+- 
+--- 
+-2.30.2
+-
+diff --git a/meta-oe/recipes-connectivity/gensio/gensio_2.5.2.bb b/meta-oe/recipes-connectivity/gensio/gensio_2.6.1.bb
+similarity index 78%
+rename from meta-oe/recipes-connectivity/gensio/gensio_2.5.2.bb
+rename to meta-oe/recipes-connectivity/gensio/gensio_2.6.1.bb
+index d6b5f1987..91450e2c7 100644
+--- a/meta-oe/recipes-connectivity/gensio/gensio_2.5.2.bb
++++ b/meta-oe/recipes-connectivity/gensio/gensio_2.6.1.bb
+@@ -5,12 +5,9 @@ LIC_FILES_CHKSUM = "file://COPYING.LIB;md5=a0fd36908af843bcee10cb6dfc47fa67 \
+                     file://COPYING;md5=bae3019b4c6dc4138c217864bd04331f \
+                     "
  
- # v1.5.0 tag
--SRCREV = "c7cdf0cc4395b57563294d1f340b6bb1b95366a0"
-+SRCREV = "b05bbcdaeb9b700cf7877e6d66f8fc3ac952295b"
+-SRCREV = "b6cd354afe6d5f63bc859c94fd3a455a3cdf0449"
++SRCREV = "d512218c4fa5667d4fe15977d3f15f05591f1f1a"
  
- REQUIRED_DISTRO_FEATURES = "opengl"
+-SRC_URI = "git://github.com/cminyard/gensio;protocol=https;branch=master \
+-           file://0001-tools-gensiot-Fix-build-with-musl.patch \
+-           file://0001-configure-Check-for-request_init-API-when-probing-fo.patch \
+-"
++SRC_URI = "git://github.com/cminyard/gensio;protocol=https;branch=master"
+ 
+ S = "${WORKDIR}/git"
  
 -- 
 2.25.1
