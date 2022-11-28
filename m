@@ -2,68 +2,68 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2ADA3C433FE
-	for <webhook@archiver.kernel.org>; Mon, 28 Nov 2022 06:21:38 +0000 (UTC)
-Received: from mail1.bemta37.messagelabs.com (mail1.bemta37.messagelabs.com [85.158.142.113])
- by mx.groups.io with SMTP id smtpd.web10.111513.1669616490642528904
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2AA39C4321E
+	for <webhook@archiver.kernel.org>; Mon, 28 Nov 2022 06:21:48 +0000 (UTC)
+Received: from mail1.bemta37.messagelabs.com (mail1.bemta37.messagelabs.com [85.158.142.1])
+ by mx.groups.io with SMTP id smtpd.web10.111515.1669616504345229686
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 27 Nov 2022 22:21:30 -0800
+ Sun, 27 Nov 2022 22:21:44 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=AkNshIBc;
- spf=pass (domain: fujitsu.com, ip: 85.158.142.113, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=CnUkWWO1;
+ spf=pass (domain: fujitsu.com, ip: 85.158.142.1, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1669616488; i=@fujitsu.com;
-	bh=ZI9MSLD0R3SOdEeChwAWZIlSVyvEeekrMgND060V9E0=;
+	s=170520fj; t=1669616502; i=@fujitsu.com;
+	bh=ywXAYgbrOUezdDWHx/uUsp96MuV5F5GYwipBYQsITT4=;
 	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
 	 MIME-Version:Content-Type;
-	b=AkNshIBcrNGfe8+sGCZ9YgaMfiA0KSd1kKASJSWE73gLykSWQp/IRuvMxJCmZoBYS
-	 GDK2FE1tDoR5HOI9slVXBTKfZrqxtCMu5YIoSVt5rxfwhNQ5TkOvz10Ap4GT0Mg85b
-	 Qmzh9KbZ+1+qWOxuHMDtSVR+lbJqNj1gHFjN0GwPRJtmx+IKcMmVQuS4OueaiPNpAK
-	 wHLtfQ/vKVTW4/eMULmNxDyZiUzcho9LJva0ij1AgO1G59Jw24wzgxDWJP4gdt+CsQ
-	 fqsSgiq6oRVHVcG4dDz65QlkYmOoQEZfXfAAo7yKZNsaBcklQTKaZ3LBBds47PTY1K
-	 LAzhhVJgKfKYA==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrBIsWRWlGSWpSXmKPExsViZ8ORpJse3JJ
-  s8PS7nsXFw0uZHRg9zm1cwRjAGMWamZeUX5HAmtH87jVjwTHOipnHd7M0ML7n6GLk4hASeMgo
-  sen4fxYI5zKTxKTjr9khnD2MEk8OfmbqYuTkYBOQkrhx/z8biC0ioC+xdPYeZhCbWUBF4sXvH
-  nYQW1ggSGLS3C4wm0VAVaLj8Rawel4BJ4lVc+6AxSUEFCSmPHwP1ssp4Cyx/c9EFhBbCKjm9c
-  pOJoh6QYmTM5+wQMyXkDj44gUzRK+ixOzLzSwQdoXErFltTBC2msTVc5uYJzAKzkLSPgtJ+wJ
-  GplWM5sWpRWWpRbpGBnpJRZnpGSW5iZk5eolVuol6qaW6eflFJRm6hnqJ5cV6qcXFesWVuck5
-  KXp5qSWbGIEBnFKclLiDsW/ZH71DjJIcTEqivB8DW5KF+JLyUyozEosz4otKc1KLDzHKcHAoS
-  fDOBckJFqWmp1akZeYAowkmLcHBoyTCu9geKM1bXJCYW5yZDpE6xagoJc4bAtInAJLIKM2Da4
-  NF8CVGWSlhXkYGBgYhnoLUotzMElT5V4ziHIxKwryXQabwZOaVwE1/BbSYCWjxJsUmkMUliQg
-  pqQam8HMV5nXSBhUTDpXUCH7/L9uT/qO2ULQv/W/hg4qDq1/mbTp2vmxvn5mXR3P4hS1MwvfP
-  lW5a4jv79NMdPoV/PhhKGO7jzjogUOx11agmNn8Dn5yJ01qZD82WOctcnr67x6Cg3KOXcS9JY
-  2pTzm6GfSsOSEQ+U1Hrc1EyNP5aztw0p73C48wL7z9y9tv0FG8G8DKwZFZu8IhxceZxSNqwe9
-  u2X//EdmbJL19uEjDVbcv95XnKE6w2ntFQLJ0b1Z19Tmjv26dtqzTvLp962ixzrtRjn+2cjYs
-  nVZRXXvty62HyjX85Dkq8kxZ1Lt2z89gFwaW3bubtvypVLDJHYML5dw2776dpip4WOXZzmscp
-  JZbijERDLeai4kQAFMGNp1sDAAA=
+	b=CnUkWWO1IW8A3SxWmR9dcdeSaFcQZuOVe3v5rYrPJolKzDXmecXliFCpn056eg/25
+	 BKEhIebc9fMwRSH5vkN4/TRM13MhnHfMumkIDicdSkMNYuP7hZOfm6FJ+VwFLr+oE3
+	 eTeuXd5xsQOKuk9lzB6JLQaPHJz1ubQ5I0cFrLHLdUCFaJkNU1zhRk0/yWPwLIqPHP
+	 sHI2pVL7ZZgv5Ko/Z+kClG9nQ7+z+IzpWnF+8DSml55cHDGKdc6YyX9Z/E1HDAjDD0
+	 wCKuUVd6qi805cPQaOXvXJjWBUwbgDqecxZ8Cf+bP1hH8pLU1/iLZ8laLvfHPBzirt
+	 2R/gXmS9aONMw==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFnrAIsWRWlGSWpSXmKPExsViZ8MxSbcsuCX
+  ZYNskDouLh5cyOzB6nNu4gjGAMYo1My8pvyKBNeN27y3mghXcFTv2v2VtYJzO1cXIxSEk8IRR
+  Yl37L1YI5zqTxOJt55kgnD2MEtfeTQTKcHKwCUhJ3Lj/nw3EFhHQl1g6ew8ziM0soCLx4ncPO
+  4gtLBAg0XDsOJjNIqAqceTGCyYQm1fASeLu38tgtoSAgsSUh+/BejkFnCW2/5nIAmILAdW8Xt
+  kJVS8ocXLmExaI+RISB1+8YIboVZSYfbmZBcKukJg1qw1qpprE1XObmCcwCs5C0j4LSfsCRqZ
+  VjObFqUVlqUW6hmZ6SUWZ6RkluYmZOXqJVbqJeqmlunn5RSUZuoZ6ieXFeqnFxXrFlbnJOSl6
+  eaklmxiBAZxSnMq8g/Hysj96hxglOZiURHk/BrYkC/El5adUZiQWZ8QXleakFh9ilOHgUJLgn
+  QuSEyxKTU+tSMvMAUYTTFqCg0dJhHexPVCat7ggMbc4Mx0idYrRkmPq7H/7mTmWg8mZX9sOMA
+  ux5OXnpUqJ8yYHATUIgDRklObBjYNF/CVGWSlhXkYGBgYhnoLUotzMElT5V4ziHIxKwrx8IFN
+  4MvNK4La+AjqICeigTYpNIAeVJCKkpBqYppyZY3/r9u16ldVCLPlfnv3Vk2RyW3TzhPDh8kNy
+  3+sfTf58a5Vaxpslid9W1stL7WLq8pocuyFgHU88q9CepAf2dxvWZD3JKGgJnDGLuYJvquED6
+  1Nb5mkvvbZ7Zsr+XRkT52aGv/Lbt445ZVHy1guzXqUdrHc/LXJ94xKRxY2HWTi0N3dbJfntdK
+  rQFcuT2Xih7vLSs7YzLvvGBJv11Bl+U7gmkq399FtyVIf2rvn6rSeMc14UP7w3naXmzQuBU7q
+  BfWw9H1Y8c072lazreWwZ+3YS3xfDu5xO74qUvTdHCxqqLn+VvOqWeOjDb8cWbDgXvph/Mudh
+  kzz/ue8+qTzLX7gzcjWj6LoZuXtLvyixFGckGmoxFxUnAgBwRr3ncwMAAA==
 X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-10.tower-732.messagelabs.com!1669616487!129797!1
-X-Originating-IP: [62.60.8.98]
+X-Msg-Ref: server-16.tower-728.messagelabs.com!1669616501!10720!1
+X-Originating-IP: [62.60.8.146]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.101.1; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 9603 invoked from network); 28 Nov 2022 06:21:27 -0000
-Received: from unknown (HELO n03ukasimr03.n03.fujitsu.local) (62.60.8.98)
-  by server-10.tower-732.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 28 Nov 2022 06:21:27 -0000
-Received: from n03ukasimr03.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr03.n03.fujitsu.local (Postfix) with ESMTP id 41B0A1AE
-	for <openembedded-devel@lists.openembedded.org>; Mon, 28 Nov 2022 06:21:27 +0000 (GMT)
+Received: (qmail 2094 invoked from network); 28 Nov 2022 06:21:42 -0000
+Received: from unknown (HELO n03ukasimr02.n03.fujitsu.local) (62.60.8.146)
+  by server-16.tower-728.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 28 Nov 2022 06:21:42 -0000
+Received: from n03ukasimr02.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTP id 965241000E7
+	for <openembedded-devel@lists.openembedded.org>; Mon, 28 Nov 2022 06:21:41 +0000 (GMT)
 Received: from R01UKEXCASM126.r01.fujitsu.local (R01UKEXCASM126 [10.183.43.178])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by n03ukasimr03.n03.fujitsu.local (Postfix) with ESMTPS id 36E3F7B
-	for <openembedded-devel@lists.openembedded.org>; Mon, 28 Nov 2022 06:21:27 +0000 (GMT)
+	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTPS id 8A5601000DB
+	for <openembedded-devel@lists.openembedded.org>; Mon, 28 Nov 2022 06:21:41 +0000 (GMT)
 Received: from localhost.localdomain (10.167.225.33) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.32; Mon, 28 Nov 2022 06:21:25 +0000
+ (TLS) id 15.0.1497.32; Mon, 28 Nov 2022 06:21:40 +0000
 From: <wangmy@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-python] [PATCH] python3-pychromecast: upgrade 12.1.4 -> 13.0.1
-Date: Mon, 28 Nov 2022 14:20:43 +0800
-Message-ID: <1669616444-13316-4-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH] python3-pycodestyle: upgrade 2.9.1 -> 2.10.0
+Date: Mon, 28 Nov 2022 14:20:44 +0800
+Message-ID: <1669616444-13316-5-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 In-Reply-To: <1669616444-13316-1-git-send-email-wangmy@fujitsu.com>
 References: <1669616444-13316-1-git-send-email-wangmy@fujitsu.com>
@@ -76,32 +76,39 @@ X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 28 Nov 2022 06:21:38 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99814
+ <openembedded-devel@lists.openembedded.org>; Mon, 28 Nov 2022 06:21:48 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99815
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
+Changes:
+========
+    E231: allow trailing comma inside 1-tuples in []. PR #1108.
+    W601, W602, W603, W604: removed (no longer relevant in python 3). PR #1111.
+    E741: also apply to lambdas. PR #1106.
+    E741: fix false positive for comparison operators. PR #1118.
+
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- ...n3-pychromecast_12.1.4.bb => python3-pychromecast_13.0.1.bb} | 2 +-
+ ...thon3-pycodestyle_2.9.1.bb => python3-pycodestyle_2.10.0.bb} | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-pychromecast_12.1.4.bb => python3-pychromecast_13.0.1.bb} (84%)
+ rename meta-python/recipes-devtools/python/{python3-pycodestyle_2.9.1.bb => python3-pycodestyle_2.10.0.bb} (76%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-pychromecast_12.1.4.bb b/meta-python/recipes-devtools/python/python3-pychromecast_13.0.1.bb
-similarity index 84%
-rename from meta-python/recipes-devtools/python/python3-pychromecast_12.1.4.bb
-rename to meta-python/recipes-devtools/python/python3-pychromecast_13.0.1.bb
-index 69372060b..59f1bfdfc 100644
---- a/meta-python/recipes-devtools/python/python3-pychromecast_12.1.4.bb
-+++ b/meta-python/recipes-devtools/python/python3-pychromecast_13.0.1.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/balloob/pychromecast"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=b1dbd4e85f47b389bdadee9c694669f5"
+diff --git a/meta-python/recipes-devtools/python/python3-pycodestyle_2.9.1.bb b/meta-python/recipes-devtools/python/python3-pycodestyle_2.10.0.bb
+similarity index 76%
+rename from meta-python/recipes-devtools/python/python3-pycodestyle_2.9.1.bb
+rename to meta-python/recipes-devtools/python/python3-pycodestyle_2.10.0.bb
+index 928e2b2ae..b29fd4861 100644
+--- a/meta-python/recipes-devtools/python/python3-pycodestyle_2.9.1.bb
++++ b/meta-python/recipes-devtools/python/python3-pycodestyle_2.10.0.bb
+@@ -4,7 +4,7 @@ LICENSE = "MIT"
+ SECTION = "devel/python"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=a8546d0e77f416fb05a26acd89c8b3bd"
  
--SRC_URI[sha256sum] = "9e57dc985a4a05db5bdcd5da219cbf6ced25548ca093f8d74bc107b3c554ec00"
-+SRC_URI[sha256sum] = "203aaf037afbaca12763a3a911929dd25b0a8a7b1ee00d010d3439bd31a98252"
+-SRC_URI[sha256sum] = "2c9607871d58c76354b697b42f5d57e1ada7d261c261efac224b664affdc5785"
++SRC_URI[sha256sum] = "347187bdb476329d98f695c213d7295a846d1152ff4fe9bacb8a9590b8ee7053"
  
- PYPI_PACKAGE = "PyChromecast"
+ inherit pypi setuptools3
  
 -- 
 2.25.1
