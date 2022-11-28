@@ -1,101 +1,86 @@
-Return-Path: <u.oelmann@pengutronix.de>
+Return-Path: <max.oss.09@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 41FBAC43217
-	for <webhook@archiver.kernel.org>; Mon, 28 Nov 2022 13:13:10 +0000 (UTC)
-Received: from metis.ext.pengutronix.de (metis.ext.pengutronix.de [85.220.165.71])
- by mx.groups.io with SMTP id smtpd.web10.117219.1669641180193212263
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BB462C433FE
+	for <webhook@archiver.kernel.org>; Mon, 28 Nov 2022 15:00:30 +0000 (UTC)
+Received: from mail-ed1-f44.google.com (mail-ed1-f44.google.com [209.85.208.44])
+ by mx.groups.io with SMTP id smtpd.web10.119922.1669647622995809832
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 28 Nov 2022 05:13:00 -0800
+ Mon, 28 Nov 2022 07:00:23 -0800
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: pengutronix.de, ip: 85.220.165.71, mailfrom: u.oelmann@pengutronix.de)
-Received: from dude.hi.pengutronix.de ([2001:67c:670:100:1d::7])
-	by metis.ext.pengutronix.de with esmtps (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
-	(Exim 4.92)
-	(envelope-from <u.oelmann@pengutronix.de>)
-	id 1ozdwP-0001EX-1x; Mon, 28 Nov 2022 14:12:57 +0100
-Received: from uol by dude.hi.pengutronix.de with local (Exim 4.94.2)
-	(envelope-from <u.oelmann@pengutronix.de>)
-	id 1ozdwI-007Zjt-Rl; Mon, 28 Nov 2022 14:12:50 +0100
-References: <20221125123532.938920-1-u.oelmann@pengutronix.de>
- <14384172-6b21-6a13-5896-c25c081ef08b@gmail.com>
-User-agent: mu4e 1.6.9; emacs 29.0.50
-From: Ulrich =?utf-8?Q?=C3=96lmann?= <u.oelmann@pengutronix.de>
-To: Jacob Kroon <jacob.kroon@gmail.com>
-Cc: Henning Heinold <henning@itconsulting-heinold.de>, Otavio Salvador
- <otavio.salvador@ossystems.com.br>, Richard Leitner
- <richard.leitner@skidata.com>, openembedded-devel@lists.openembedded.org
-Subject: Re: [oe] [meta-java][PATCH] jsch: switch to inclusive language
-Date: Mon, 28 Nov 2022 14:11:22 +0100
-In-reply-to: <14384172-6b21-6a13-5896-c25c081ef08b@gmail.com>
-Message-ID: <6rtu2j1aul.fsf@pengutronix.de>
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=H8tnjyrR;
+ spf=pass (domain: gmail.com, ip: 209.85.208.44, mailfrom: max.oss.09@gmail.com)
+Received: by mail-ed1-f44.google.com with SMTP id z18so15763022edb.9
+        for <openembedded-devel@lists.openembedded.org>; Mon, 28 Nov 2022 07:00:22 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=iTfFz/dYD0Zp3C9fowOjw/1dTd7ukZVu/4bH9l95nn4=;
+        b=H8tnjyrRTyzDFvmblqnkIJ3uA/am5eapIrd+s0WFbInKGQOxSS2dyPrRQq/F33mnuk
+         EePIlTttYdn3435VJWo+FmJ3OzNwXdChMmtM4VOEUcIoycA8Rr9xzxLtRPZQ3rp6v5Hw
+         ZE3chINIiCycM0GD+Lg80BhIQgI0X0/Qyfgq3c4OnOQzO1K3uBf2ZV2woJFWFu8nNw0L
+         Vz7FtvGy7jSfGcRPpSF4BABxeMX5oN7mMCYjaIFgPPW7J08GN8YVLjqKMZzNMr3cke8U
+         qBK3oSJIPAD2LuTSglsSVGs4uyWR6sGgeEsJSnxNsXrcZj5QtrO10BWmQMY62E0KLz5x
+         4SBA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=iTfFz/dYD0Zp3C9fowOjw/1dTd7ukZVu/4bH9l95nn4=;
+        b=Xao3XLoe/gbeRLCVb98VAXV0DhhBtEwMZXVwrwlzV4Wq0gUAv5qgcizaADzCF2Pxfq
+         JQqUXOCX88oIieFBhPM6d34bFE2HQjnt5ZtMij66cxrEEkIxHEnmDXT1JtdKL8jl8IT3
+         OQkBaQ7JH6NazvXNOk9Nt5u5Crk2s+LyTtbVY3H/6seQy6bUY4C/JBssQzQsfHcFO8Qs
+         nzU5qr4oqkXQyDlZV/5RBg0WYlJuXPV3295L0cRe1pFY4+FEDgt7b9arHQBbZa7IPDVy
+         essuO1afiu9dg4RSnzU4D75fwflubR7EfgUeO9h45ksGsi2gpW0Ezpl+ro83TPz9L7ks
+         u7gA==
+X-Gm-Message-State: ANoB5pnhltgkzd1OvwCvoOM4c3ZalDdHhcpMd/vzazcydJ7b1IFs+OIj
+	Q+DRAHAZ6UHGzYT7qY8HYbFuYstHV2o=
+X-Google-Smtp-Source: AA0mqf5hB1xiYvCL9xBQFT8RqPJ4+oVanbgeNjcaPzmv7rYz8p/KNE6W2JxM6YkkQgKq9vmFP9LIXA==
+X-Received: by 2002:a05:6402:1814:b0:46a:b1ba:22b8 with SMTP id g20-20020a056402181400b0046ab1ba22b8mr15768290edy.316.1669647620960;
+        Mon, 28 Nov 2022 07:00:20 -0800 (PST)
+Received: from linuxdev2.toradex.int (31-10-206-125.static.upc.ch. [31.10.206.125])
+        by smtp.gmail.com with ESMTPSA id i10-20020a05640242ca00b00467c3cbab6fsm5264261edc.77.2022.11.28.07.00.20
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 28 Nov 2022 07:00:20 -0800 (PST)
+From: Max Krummenacher <max.oss.09@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Max Krummenacher <max.krummenacher@toradex.com>
+Subject: [meta-oe][PATCH] opencv: follow changed name license_flags_accepted
+Date: Mon, 28 Nov 2022 16:00:17 +0100
+Message-Id: <20221128150017.3760740-1-max.oss.09@gmail.com>
+X-Mailer: git-send-email 2.35.3
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-SA-Exim-Connect-IP: 2001:67c:670:100:1d::7
-X-SA-Exim-Mail-From: u.oelmann@pengutronix.de
-X-SA-Exim-Scanned: No (on metis.ext.pengutronix.de); SAEximRunCond expanded to false
-X-PTX-Original-Recipient: openembedded-devel@lists.openembedded.org
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 28 Nov 2022 13:13:10 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99824
+ <openembedded-devel@lists.openembedded.org>; Mon, 28 Nov 2022 15:00:30 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99825
 
-Hi Jacob,
+From: Max Krummenacher <max.krummenacher@toradex.com>
 
-On Fri, Nov 25 2022 at 14:57 +0100, "Jacob Kroon" <jacob.kroon@gmail.com> w=
-rote:
-> On 11/25/22 13:35, Ulrich =C3=96lmann wrote:
->> Signed-off-by: Ulrich =C3=96lmann <u.oelmann@pengutronix.de>
->> ---
->>   recipes-core/jcraft/jsch_0.1.40.bb | 4 ++--
->>   1 file changed, 2 insertions(+), 2 deletions(-)
->> diff --git a/recipes-core/jcraft/jsch_0.1.40.bb
->> b/recipes-core/jcraft/jsch_0.1.40.bb
->> index 07d5b9e3108e..259712661f4d 100644
->> --- a/recipes-core/jcraft/jsch_0.1.40.bb
->> +++ b/recipes-core/jcraft/jsch_0.1.40.bb
->> @@ -25,8 +25,8 @@ do_compile() {
->>   SRC_URI[md5sum] =3D "b59cec19a487e95aed68378976b4b566"
->>   SRC_URI[sha256sum] =3D "ca9d2ae08fd7a8983fb00d04f0f0c216a985218a5eb364=
-ff9bee73870f28e097"
->>   -# Whitelist the CVE because it only affects Windows platforms
->> -CVE_CHECK_WHITELIST +=3D "CVE-2016-5725"
->> +# Ignore the CVE because it only affects Windows platforms
->> +CVE_CHECK_IGNORE +=3D "CVE-2016-5725"
->>     BBCLASSEXTEND =3D "native"
->>
->
-> Also your commit:
->
-> 3161106f0879a6be0a016df3a8bb8fa800bd6044
-> openjdk-8: refresh patches
->
-> seems to have *introduced* fuzz warnings, rather than fix any on master b=
-ranch
-> ...
+Signed-off-by: Max Krummenacher <max.krummenacher@toradex.com>
+---
+ meta-oe/recipes-support/opencv/opencv_4.6.0.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-after reading your hint, at first sight I felt ashamed seeing that my
-refreshed patches introduce fuzz warnings instead of fixing them as was
-intended by me. Looking more closely I then realized that before my
-commit 3161106f0879 ("openjdk-8: refresh patches") it was openjdk-8
-where the patches did not apply cleanly (but openjdk-8-native where
-everything was okay) while after that commit it is exactly the other way
-round. Unfortunately I did not realize that when I stumbled across it
-originally, sigh. At the bottom line sadly my commit neither improved
-the overall situation nor did it worsen it. So: sorry for the noise!
+diff --git a/meta-oe/recipes-support/opencv/opencv_4.6.0.bb b/meta-oe/recipes-support/opencv/opencv_4.6.0.bb
+index da1e659a4..158cb6342 100644
+--- a/meta-oe/recipes-support/opencv/opencv_4.6.0.bb
++++ b/meta-oe/recipes-support/opencv/opencv_4.6.0.bb
+@@ -109,7 +109,7 @@ EXTRA_OECMAKE:remove:x86 = " -DENABLE_SSE41=1 -DENABLE_SSE42=1"
+ 
+ PACKAGECONFIG ??= "gapi python3 eigen jpeg png tiff v4l libv4l gstreamer samples tbb gphoto2 \
+     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "gtk", "", d)} \
+-    ${@bb.utils.contains("LICENSE_FLAGS_WHITELIST", "commercial", "libav", "", d)}"
++    ${@bb.utils.contains("LICENSE_FLAGS_ACCEPTED", "commercial", "libav", "", d)}"
+ 
+ # TBB does not build for powerpc so disable that package config
+ PACKAGECONFIG:remove:powerpc = "tbb"
+-- 
+2.35.3
 
-Best regards
-Ulrich
-
-
-> Jacob
---=20
-Pengutronix e.K.                           | Ulrich =C3=96lmann            =
-   |
-Industrial Linux Solutions                 | http://www.pengutronix.de/  |
-Peiner Str. 6-8, 31137 Hildesheim, Germany | Phone: +49-5121-206917-0    |
-Amtsgericht Hildesheim, HRA 2686           | Fax:   +49-5121-206917-5555 |
 
