@@ -1,73 +1,87 @@
-Return-Path: <peter.kjellerstedt@axis.com>
+Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 88D57C4332F
-	for <webhook@archiver.kernel.org>; Tue, 29 Nov 2022 04:02:34 +0000 (UTC)
-Received: from smtp2.axis.com (smtp2.axis.com [195.60.68.18])
- by mx.groups.io with SMTP id smtpd.web11.140852.1669694552324670611
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C8CB8C433FE
+	for <webhook@archiver.kernel.org>; Tue, 29 Nov 2022 06:57:15 +0000 (UTC)
+Received: from mailout10.t-online.de (mailout10.t-online.de [194.25.134.21])
+ by mx.groups.io with SMTP id smtpd.web10.142760.1669705031701073435
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 28 Nov 2022 20:02:34 -0800
+ Mon, 28 Nov 2022 22:57:12 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@axis.com header.s=axis-central1 header.b=fBQwFsue;
- spf=pass (domain: axis.com, ip: 195.60.68.18, mailfrom: peter.kjellerstedt@axis.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=axis.com; q=dns/txt; s=axis-central1; t=1669694554;
-  x=1701230554;
-  h=from:to:subject:date:message-id:in-reply-to:references:
-   mime-version:content-transfer-encoding;
-  bh=pIPTgxUpRNKcIBqRiQTo8Mmc5o3KADwKM18h8sI78m4=;
-  b=fBQwFsueRi9V/dMpR4GRI/p1KNPZwGGJ7o8tuqg8Jnbz6pFatKOelbRz
-   C1qcV0RThmNL80Vml5f7WH8AdP5MDwlJb9L93BagwSIdADAQr+uLFUbx5
-   +Nk2qMw6BN2NcKGZxdVMXKe3iImm6wUwxBC18/adgxXVVDtI+KIEbQOZQ
-   DPJ/VkkMyShhpU0bIjjao8APRJwMljp9soFA+aiMSOBO8bgKfqTc4VXdF
-   Ye4KoMn7UY2nTYh/f2nK8FIiqtc10FFxSWQplcKf3FTzoj2Kna06wkC3G
-   SMshRxhXpEcPWEx6mB4MuHl1mUZIhRvMtc9KSnuXvXcyWCc86cXBIT3Qt
-   g==;
-From: Peter Kjellerstedt <pkj@axis.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-networking][PATCH 2/2] lldpd: Correct the checksum for the tar ball to match 1.0.16
-Date: Tue, 29 Nov 2022 05:02:05 +0100
-Message-ID: <20221129040205.2142015-2-pkj@axis.com>
-X-Mailer: git-send-email 2.38.1
-In-Reply-To: <20221129040205.2142015-1-pkj@axis.com>
-References: <20221129040205.2142015-1-pkj@axis.com>
+ dkim=missing; spf=none, err=SPF record not found (domain: t-online.de, ip: 194.25.134.21, mailfrom: f_l_k@t-online.de)
+Received: from fwd79.dcpf.telekom.de (fwd79.aul.t-online.de [10.223.144.105])
+	by mailout10.t-online.de (Postfix) with SMTP id D7CCF10032
+	for <openembedded-devel@lists.openembedded.org>; Tue, 29 Nov 2022 07:57:09 +0100 (CET)
+Received: from flk-MS-7C91.fritz.box ([79.219.228.163]) by fwd79.t-online.de
+	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
+	esmtp id 1ozuY7-3ii2410; Tue, 29 Nov 2022 07:56:59 +0100
+From: Markus Volk <f_l_k@t-online.de>
+To: openembedded-devel@lists.openembedded.org
+Cc: Markus Volk <f_l_k@t-online.de>
+Subject: [meta-gnome][PATCH 1/7] appstream-glib: update 0.7.18 -> 0.8.2
+Date: Tue, 29 Nov 2022 07:56:37 +0100
+Message-Id: <20221129065643.82373-1-f_l_k@t-online.de>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
+X-TOI-EXPURGATEID: 150726::1669705019-08E92417-0BD3C138/0/0 CLEAN NORMAL
+X-TOI-MSGID: 36d8938c-1933-4185-8224-9d5c03043820
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 29 Nov 2022 04:02:34 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99836
+ <openembedded-devel@lists.openembedded.org>; Tue, 29 Nov 2022 06:57:15 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99837
 
-The checksum was not updated when the recipe version was stepped.
+Code switched from using soup-2 to libcurl
 
-Also simplify the SRC_URI by replacing "${BPN}-${PV}" with "${BP}".
-
-Signed-off-by: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
+Signed-off-by: Markus Volk <f_l_k@t-online.de>
 ---
- meta-networking/recipes-daemons/lldpd/lldpd_1.0.16.bb | 4 ++--
+ .../{appstream-glib_0.7.18.bb =3D> appstream-glib_0.8.2.bb}     | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-gnome/recipes-support/appstream-glib/{appstream-glib_0.7.18.=
+bb =3D> appstream-glib_0.8.2.bb} (89%)
 
-diff --git a/meta-networking/recipes-daemons/lldpd/lldpd_1.0.16.bb b/meta-networking/recipes-daemons/lldpd/lldpd_1.0.16.bb
-index c7237d74b..799270510 100644
---- a/meta-networking/recipes-daemons/lldpd/lldpd_1.0.16.bb
-+++ b/meta-networking/recipes-daemons/lldpd/lldpd_1.0.16.bb
-@@ -6,13 +6,13 @@ LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/ISC;md5=f3b90e
- DEPENDS = "libbsd libevent"
- 
- SRC_URI = "\
--    http://media.luffy.cx/files/${BPN}/${BPN}-${PV}.tar.gz \
-+    http://media.luffy.cx/files/${BPN}/${BP}.tar.gz \
-     file://lldpd.init.d \
-     file://lldpd.default \
-     file://run-ptest \
-     "
- 
--SRC_URI[sha256sum] = "f7fe3a130be98a19c491479ef60f36b8ee41a9e6bc4d7f2c41033f63956a3126"
-+SRC_URI[sha256sum] = "e3b391650c7ba67cea2fe84d67fdb4d7fc8aa1ec5cf86eb8bb984711df8465a9"
- 
- inherit autotools update-rc.d useradd systemd pkgconfig bash-completion github-releases ptest
- 
+diff --git a/meta-gnome/recipes-support/appstream-glib/appstream-glib_0.7=
+.18.bb b/meta-gnome/recipes-support/appstream-glib/appstream-glib_0.8.2.b=
+b
+similarity index 89%
+rename from meta-gnome/recipes-support/appstream-glib/appstream-glib_0.7.=
+18.bb
+rename to meta-gnome/recipes-support/appstream-glib/appstream-glib_0.8.2.=
+bb
+index c56e9e3dd..efb85d77c 100644
+--- a/meta-gnome/recipes-support/appstream-glib/appstream-glib_0.7.18.bb
++++ b/meta-gnome/recipes-support/appstream-glib/appstream-glib_0.8.2.bb
+@@ -4,12 +4,12 @@ LICENSE =3D "LGPL-2.1-only"
+ LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D4fbd65380cdd255951079008b3645=
+16c"
+=20
+ DEPENDS =3D " \
++    curl \
+     gperf-native \
+     glib-2.0 \
+     gtk+3 \
+     libyaml \
+     libarchive \
+-    libsoup-2.4 \
+     json-glib \
+     gdk-pixbuf \
+     freetype \
+@@ -20,7 +20,7 @@ DEPENDS =3D " \
+ inherit meson gobject-introspection gettext bash-completion pkgconfig ma=
+npages
+=20
+ SRC_URI =3D "https://people.freedesktop.org/~hughsient/${BPN}/releases/$=
+{BP}.tar.xz"
+-SRC_URI[sha256sum] =3D "ca1ed22e3bde3912cb903aaa7de085d55771da454f1c0573=
+fd9608e1de9c4002"
++SRC_URI[sha256sum] =3D "71256500add5048d6f08878904708b3d0c3875f402e0adcd=
+358e91d47dcd8b96"
+=20
+ EXTRA_OEMESON =3D " \
+     -Drpm=3Dfalse \
+--=20
+2.34.1
+
 
