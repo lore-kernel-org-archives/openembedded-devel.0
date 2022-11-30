@@ -2,56 +2,57 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EEB1BC47089
-	for <webhook@archiver.kernel.org>; Wed, 30 Nov 2022 20:01:25 +0000 (UTC)
-Received: from mail-pg1-f174.google.com (mail-pg1-f174.google.com [209.85.215.174])
- by mx.groups.io with SMTP id smtpd.web11.22821.1669838482740933305
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 070F1C4708E
+	for <webhook@archiver.kernel.org>; Wed, 30 Nov 2022 20:01:26 +0000 (UTC)
+Received: from mail-pf1-f172.google.com (mail-pf1-f172.google.com [209.85.210.172])
+ by mx.groups.io with SMTP id smtpd.web10.22655.1669838481001263131
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 30 Nov 2022 12:01:22 -0800
+ Wed, 30 Nov 2022 12:01:21 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=Ej2Tg52d;
- spf=pass (domain: gmail.com, ip: 209.85.215.174, mailfrom: raj.khem@gmail.com)
-Received: by mail-pg1-f174.google.com with SMTP id w37so11933431pga.5
-        for <openembedded-devel@lists.openembedded.org>; Wed, 30 Nov 2022 12:01:22 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=W0MzJq6v;
+ spf=pass (domain: gmail.com, ip: 209.85.210.172, mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f172.google.com with SMTP id 21so4682038pfw.4
+        for <openembedded-devel@lists.openembedded.org>; Wed, 30 Nov 2022 12:01:20 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=T5O3hURQTB3kwJY2JZkRlKaokzCbydRxM104b4jnal0=;
-        b=Ej2Tg52d0On81UQf1OVmXWwjXuFhVVlAUqRjXnakNxIfkM9SJubDlyf74qsyWjgklG
-         BR1EgafAfZJU7Hj8RFgKGOEjOW2rgVygZOmj2slsFU1tEk2cE76FlO33EReEShz3feTc
-         HsTQALSp/EKYUjwXeHfEh0zOZc4Jvwud9P3LCdb6LZ9SJnrt75fiLqEhp17/TTiYs2Pj
-         zVmCV+Vd9K5/8Tec+nAk3v/at9nOMzMnbpBuu0cggxj8FDwZLHoF9vs/35P/6E2jRu9Q
-         /JKCzxxmsaQaLd8Muzz9nA23CIjsQNbMlR/iVQ1F7goEpvJQ8OB3OvaOevbXfi4EIIAr
-         m64w==
+        bh=egXq/ocrepqjSF1aEUSlynTUN+XMfVINF/xQxdDtj9E=;
+        b=W0MzJq6vSIiVkB7pbUVRfNbRzXas/HV4x4AJ7mvOOQju/8sqnNcDXmTBAtaxDXp5nv
+         E+BuuQDIGrCV7SeDGnunJTJ8WWMZ6Wf6ZDPIztTmDtAEgrFmb5VtFMMVDIQ7iM1loVTF
+         oNXtxfV4Yhyv+wZidRTvB4yq+RtE8r4zo9G5m0PVyCbvwJ6XHdJkSMCHEEz01KXVaax8
+         PvhiNegts4HSbchx82PKf9fdyviZ/KDyKYPMQWRCMYlwobWUyg42MBzs0PzL9Yey9MAR
+         Vxr4GqitGML/wPx8h2ZrR7vQyW/1f3Yjflmhhy80vJzETns/cfjJjWsVo5nCDBMv+VTe
+         dZRg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=T5O3hURQTB3kwJY2JZkRlKaokzCbydRxM104b4jnal0=;
-        b=RnUle8ZC9h8l0/YoV/yZf4xCrDNPvpuqNjb/N/8ZJd4vDdJ8ZiaawUADsPJVHmntlR
-         N1Mg5IH2pNU22QwaoFe5/I1INYCPB5fx190hM5xMnCwK+fEVYa4TPeiQm0qM0Ast047b
-         pLFFOg4gFG+2+itFuIWu600PiNsHG9eNPOUtOM6WXuZLerBN8Hpc5RMeTVXP94l406dA
-         mgVp4bk/OMYExqN2nvnuO9Jcv7NSsokFRrY6mB+SB1IwXYqG/IY+T3hpjzGRm9J5spPf
-         pWuTZGiPKgR5aGhyOj3HVRn20ISA2xRIoS7pGkFvtaruU9OKI/VjX9PDY+gAlsHszME3
-         EzJg==
-X-Gm-Message-State: ANoB5pmFrCaxxtGUheIRX427xWGehjLFgI2hJ71Z8rwpRsqW12a5ruET
-	+qSpsf3eAOl948IDoEC5nKV+/S82bBk=
-X-Google-Smtp-Source: AA0mqf4Hel1W24o/6uZaSywCem1ZJlKYQLI3H+JEgn938tGtYWX8VQCwHuTaSrKkZQRZd2+VAm3Mhw==
-X-Received: by 2002:a63:1915:0:b0:477:3803:674f with SMTP id z21-20020a631915000000b004773803674fmr36529790pgl.469.1669838481861;
-        Wed, 30 Nov 2022 12:01:21 -0800 (PST)
+        bh=egXq/ocrepqjSF1aEUSlynTUN+XMfVINF/xQxdDtj9E=;
+        b=hX8n84iNzArH0Bvbc+Dy/yyrpGopefTq6T+jrDInMgDIHeZ+kPG58R5/B/8ewZtXVM
+         Bn8nXhIf9RFQqitOIfN20G+vQISyV/YBb4EimoMF8wgeeWpk7gn0+nzcydNmEZ0u8ueU
+         JjpQtoz/KGKYO1zUoQG2zxUQZEkTv1BeWiKam8dDRjKbB5Rmlra6OR4ekSJqh7jFzBR9
+         8H9qe+AVsmgQcQO2UIPfPTChq4qpKIt5INU5Mr32Bhvct4K1Ai3FJ2b9lx91wSO0lYLw
+         ewQihJsJwJJO5ShW0/+2AUyUxVta2sHa5RqiAoV0+Ci2Uhr2dW/m0YAHy0gxa6v9q+TY
+         3vOQ==
+X-Gm-Message-State: ANoB5pmZYHQpMg2rwQaQ1UKpiV+UuaRFUDoRIEWVya5n66Ewo1vtyPjw
+	anIpleN5oSRxDF9eHDyOWQ1xRdSkfrQ=
+X-Google-Smtp-Source: AA0mqf7N4d4KXhMd2rDCeDZbXH6TqNT9Bav7+/hef/pTjg9nv8Sg8d80i6EGKyXbCIfpBcvaNFATpQ==
+X-Received: by 2002:a63:ec47:0:b0:46f:c465:5848 with SMTP id r7-20020a63ec47000000b0046fc4655848mr38583593pgj.148.1669838480171;
+        Wed, 30 Nov 2022 12:01:20 -0800 (PST)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9181:1cf0::a42c])
-        by smtp.gmail.com with ESMTPSA id ij22-20020a170902ab5600b001893a002107sm1916026plb.0.2022.11.30.12.01.21
+        by smtp.gmail.com with ESMTPSA id ij22-20020a170902ab5600b001893a002107sm1916026plb.0.2022.11.30.12.01.19
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 30 Nov 2022 12:01:21 -0800 (PST)
+        Wed, 30 Nov 2022 12:01:19 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-gnome][PATCH 6/7] gnome-photos: Upgrade to 43.0
-Date: Wed, 30 Nov 2022 12:01:14 -0800
-Message-Id: <20221130200115.1954308-6-raj.khem@gmail.com>
+Cc: Markus Volk <f_l_k@t-online.de>,
+	Khem Raj <raj.khem@gmail.com>
+Subject: [meta-gnome][PATCH 4/7] gtk4: remove recipe
+Date: Wed, 30 Nov 2022 12:01:12 -0800
+Message-Id: <20221130200115.1954308-4-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.38.1
 In-Reply-To: <20221130200115.1954308-1-raj.khem@gmail.com>
 References: <20221130200115.1954308-1-raj.khem@gmail.com>
@@ -60,41 +61,168 @@ Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 30 Nov 2022 20:01:25 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99876
+ <openembedded-devel@lists.openembedded.org>; Wed, 30 Nov 2022 20:01:26 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99874
 
-Add missing dependency on libportal
+From: Markus Volk <f_l_k@t-online.de>
 
+It has been moved to oe-core
+
+Signed-off-by: Markus Volk <f_l_k@t-online.de>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../{gnome-photos_42.0.bb => gnome-photos_43.0.bb}             | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
- rename meta-gnome/recipes-gnome/gnome-photos/{gnome-photos_42.0.bb => gnome-photos_43.0.bb} (89%)
+ meta-gnome/recipes-gnome/gtk4/gtk4_4.6.7.bb | 142 --------------------
+ 1 file changed, 142 deletions(-)
+ delete mode 100644 meta-gnome/recipes-gnome/gtk4/gtk4_4.6.7.bb
 
-diff --git a/meta-gnome/recipes-gnome/gnome-photos/gnome-photos_42.0.bb b/meta-gnome/recipes-gnome/gnome-photos/gnome-photos_43.0.bb
-similarity index 89%
-rename from meta-gnome/recipes-gnome/gnome-photos/gnome-photos_42.0.bb
-rename to meta-gnome/recipes-gnome/gnome-photos/gnome-photos_43.0.bb
-index 5af3088e3a..c87823ce31 100644
---- a/meta-gnome/recipes-gnome/gnome-photos/gnome-photos_42.0.bb
-+++ b/meta-gnome/recipes-gnome/gnome-photos/gnome-photos_43.0.bb
-@@ -19,6 +19,7 @@ DEPENDS = " \
-     gfbgraph \
-     tracker \
-     libhandy \
-+    libportal \
- "
- 
- GNOMEBASEBUILDCLASS = "meson"
-@@ -30,7 +31,7 @@ def gnome_verdir(v):
- 
- REQUIRED_DISTRO_FEATURES = "x11"
- 
--SRC_URI[archive.sha256sum] = "25cb281425199dec7b045f13f32f8f96034cb0cb8b94d96f9dffaf4f5be68551"
-+SRC_URI[archive.sha256sum] = "c7ac7458d533f29d955011c74b76224d79ea31bcc12e9d6d0ce7b6c3704d08e1"
- 
- do_install:append() {
-     # make gnome-photos available on all desktops
+diff --git a/meta-gnome/recipes-gnome/gtk4/gtk4_4.6.7.bb b/meta-gnome/recipes-gnome/gtk4/gtk4_4.6.7.bb
+deleted file mode 100644
+index c71be23a7d..0000000000
+--- a/meta-gnome/recipes-gnome/gtk4/gtk4_4.6.7.bb
++++ /dev/null
+@@ -1,142 +0,0 @@
+-SUMMARY = "Multi-platform toolkit for creating GUIs"
+-DESCRIPTION = "GTK is a multi-platform toolkit for creating graphical user interfaces. Offering a complete \
+-set of widgets, GTK is suitable for projects ranging from small one-off projects to complete application suites."
+-HOMEPAGE = "http://www.gtk.org"
+-BUGTRACKER = "https://bugzilla.gnome.org/"
+-SECTION = "libs"
+-
+-DEPENDS = " \
+-    sassc-native \
+-    glib-2.0 \
+-    libepoxy \
+-    graphene \
+-    cairo \
+-    pango \
+-    atk \
+-    jpeg \
+-    libpng \
+-    librsvg \
+-    tiff \
+-    gdk-pixbuf-native gdk-pixbuf \
+-"
+-
+-LICENSE = "LGPL-2.0-only & LGPL-2.0-or-later & LGPL-2.1-or-later"
+-LIC_FILES_CHKSUM = " \
+-    file://COPYING;md5=5f30f0716dfdd0d91eb439ebec522ec2 \
+-    file://gtk/gtk.h;endline=25;md5=1d8dc0fccdbfa26287a271dce88af737 \
+-    file://gdk/gdk.h;endline=25;md5=c920ce39dc88c6f06d3e7c50e08086f2 \
+-    file://tests/testgtk.c;endline=25;md5=49d06770681b8322466b52ed19d29fb2 \
+-"
+-
+-MAJ_VER = "${@oe.utils.trim_version("${PV}", 2)}"
+-
+-UPSTREAM_CHECK_REGEX = "gtk-(?P<pver>\d+\.(\d*[02468])+(\.\d+)+)\.tar.xz"
+-
+-SRC_URI = "http://ftp.gnome.org/pub/gnome/sources/gtk/${MAJ_VER}/gtk-${PV}.tar.xz"
+-SRC_URI[sha256sum] = "effd2e7c4b5e2a5c7fad43e0f24adea68baa4092abb0b752caff278e6bb010e8"
+-
+-S = "${WORKDIR}/gtk-${PV}"
+-
+-inherit meson gettext pkgconfig gtk-doc update-alternatives gsettings features_check gobject-introspection
+-
+-# TBD: nativesdk
+-# gobject-introspection.bbclass pins introspection off for nativesk. As long as
+-# we do not remove this wisdom or hack gtk4, it is not possible to build
+-# nativesdk-gtk4
+-BBCLASSEXTEND = "native"
+-
+-GSETTINGS_PACKAGE:class-native = ""
+-
+-ANY_OF_DISTRO_FEATURES = "${GTK3DISTROFEATURES}"
+-REQUIRED_DISTRO_FEATURES = "opengl"
+-
+-GIR_MESON_ENABLE_FLAG = 'enabled'
+-GIR_MESON_DISABLE_FLAG = 'disabled'
+-GTKDOC_MESON_OPTION = 'gtk_doc'
+-
+-EXTRA_OEMESON = " -Dbuild-tests=false"
+-
+-PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'wayland x11', d)}"
+-PACKAGECONFIG:class-native = "${@bb.utils.filter('DISTRO_FEATURES', 'x11', d)}"
+-PACKAGECONFIG:class-nativesdk = "${@bb.utils.filter('DISTRO_FEATURES', 'x11', d)}"
+-
+-PACKAGECONFIG[x11] = "-Dx11-backend=true,-Dx11-backend=false,at-spi2-atk fontconfig libx11 libxext libxcursor libxi libxdamage libxrandr libxrender libxcomposite libxfixes xinerama"
+-PACKAGECONFIG[wayland] = "-Dwayland-backend=true,-Dwayland-backend=false,wayland wayland-protocols libxkbcommon virtual/egl virtual/libgles2 wayland-native"
+-PACKAGECONFIG[cups] = "-Dprint-cups=enabled,-Dprint-cups=disabled,cups"
+-PACKAGECONFIG[colord] = "-Dcolord=enabled,-Dcolord=disabled,colord"
+-# gtk4 wants gstreamer-player-1.0 -> gstreamer1.0-plugins-bad
+-PACKAGECONFIG[gstreamer] = "-Dmedia-gstreamer=enabled,-Dmedia-gstreamer=disabled,gstreamer1.0-plugins-bad"
+-PACKAGECONFIG[tracker] = "-Dtracker=enabled,-Dtracker=disabled,tracker"
+-
+-
+-do_compile:prepend() {
+-    export GIR_EXTRA_LIBS_PATH="${B}/gdk/.libs"
+-}
+-
+-
+-PACKAGES =+ "${PN}-demo"
+-LIBV = "4.0.0"
+-
+-FILES:${PN}-demo = " \
+-    ${datadir}/applications/org.gtk.Demo4.desktop \
+-    ${datadir}/applications/org.gtk.IconBrowser4.desktop \
+-    ${datadir}/applications/org.gtk.WidgetFactory4.desktop \
+-    ${datadir}/icons/hicolor/*/apps/org.gtk.Demo4*.* \
+-    ${datadir}/icons/hicolor/*/apps/org.gtk.IconBrowser4*.* \
+-    ${datadir}/icons/hicolor/*/apps/org.gtk.WidgetFactory4*.* \
+-    ${bindir}/gtk4-demo \
+-    ${bindir}/gtk4-demo-application \
+-    ${bindir}/gtk4-icon-browser \
+-    ${bindir}/gtk4-widget-factory \
+-"
+-
+-FILES:${PN}:append = " \
+-    ${datadir}/glib-2.0/schemas/ \
+-    ${datadir}/gtk-4.0/emoji/ \
+-    ${datadir}/metainfo/ \
+-    ${datadir}/icons/hicolor/*/apps/org.gtk.PrintEditor4*.* \
+-    ${libdir}/gtk-4.0/${LIBV}/printbackends \
+-    ${bindir}/gtk4-update-icon-cache \
+-    ${bindir}/gtk4-launch \
+-"
+-
+-FILES:${PN}-dev += " \
+-    ${datadir}/gtk-4.0/gtk4builder.rng \
+-    ${datadir}/gtk-4.0/include \
+-    ${datadir}/gtk-4.0/valgrind \
+-    ${datadir}/gettext/its \
+-    ${bindir}/gtk4-builder-tool \
+-    ${bindir}/gtk4-encode-symbolic-svg \
+-    ${bindir}/gtk4-query-settings \
+-"
+-
+-GTKBASE_RRECOMMENDS ?= " \
+-    liberation-fonts \
+-    gdk-pixbuf-loader-png \
+-    gdk-pixbuf-loader-jpeg \
+-    gdk-pixbuf-loader-gif \
+-    gdk-pixbuf-loader-xpm \
+-    shared-mime-info \
+-    adwaita-icon-theme-symbolic \
+-"
+-
+-GTKBASE_RRECOMMENDS:class-native ?= ""
+-
+-GTKGLIBC_RRECOMMENDS ?= "${GTKBASE_RRECOMMENDS} glibc-gconv-iso8859-1"
+-
+-RRECOMMENDS:${PN} = "${GTKBASE_RRECOMMENDS}"
+-RRECOMMENDS:${PN}:libc-glibc = "${GTKGLIBC_RRECOMMENDS}"
+-RDEPENDS:${PN}-dev += "${@bb.utils.contains("PACKAGECONFIG", "wayland", "wayland-protocols", "", d)}"
+-
+-PACKAGES_DYNAMIC += "^gtk4-printbackend-.*"
+-python populate_packages:prepend () {
+-    import os.path
+-
+-    gtk_libdir = d.expand('${libdir}/gtk-3.0/${LIBV}')
+-    printmodules_root = os.path.join(gtk_libdir, 'printbackends');
+-
+-    do_split_packages(d, printmodules_root, r'^libprintbackend-(.*)\.so$', 'gtk4-printbackend-%s', 'GTK printbackend module for %s')
+-
+-    if (d.getVar('DEBIAN_NAMES')):
+-        d.setVar(d.expand('PKG:${PN}'), '${MLPREFIX}libgtk-4.0')
+-}
 -- 
 2.38.1
 
