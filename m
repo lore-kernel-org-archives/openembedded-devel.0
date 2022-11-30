@@ -1,165 +1,139 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <tomasz.zyjewski@3mdeb.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EB5C9C47088
-	for <webhook@archiver.kernel.org>; Wed, 30 Nov 2022 07:19:31 +0000 (UTC)
-Received: from mail-pl1-f179.google.com (mail-pl1-f179.google.com [209.85.214.179])
- by mx.groups.io with SMTP id smtpd.web11.5225.1669792761810633484
- for <openembedded-devel@lists.openembedded.org>;
- Tue, 29 Nov 2022 23:19:21 -0800
-Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=HNqczYsn;
- spf=pass (domain: gmail.com, ip: 209.85.214.179, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f179.google.com with SMTP id jn7so15803031plb.13
-        for <openembedded-devel@lists.openembedded.org>; Tue, 29 Nov 2022 23:19:21 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=RESxSbCXxIcZnDqc+OeJMuFrH6+zEVfWjMPiLkS4e38=;
-        b=HNqczYsn491en3SH5I6HZqYLB4eGHLcfhS/RUnVWh97lUUmTRohBGV2OO62m4Uoz+8
-         IaCzA5G24QT6ctPDQNRf5EJd5NYDn+G2DmkNROmePJtuUfAxZ8SJXXMyjNsdB9bdH0HZ
-         mpXGclcf6r6HJoRAVUrlGO5DrRlVjFpbCA4L3sBnQJxCD/URXC+VkUardf8OFqCcDEjH
-         din0aqNF/b4p+oVBVdp81r4OuqKyoHZN/q8Z4jVP0v060Ei1l3b8WYDjCKztIBm1w8wM
-         Jvc8+mmm0qLMtXO7uemQ89ZcMuU/n7LDJVvWkxLWW+FregxdxqE4Bnl4GsKJpPXQ141a
-         8Uyg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=RESxSbCXxIcZnDqc+OeJMuFrH6+zEVfWjMPiLkS4e38=;
-        b=0ZJhy4DBFm8ahiEWGtdeaN0JiIqyTkiNmzXa1yrcngYnAB+8J48hX9wRlm4i/lvKoT
-         hU7tG3P24PWlMiIo9BO+8TzuzUxiNP6QjtZSLWGUUzhop6v8vAmxjFs1IUq1Vwi0Jt1U
-         WVsE6lq20W8NlYiyPygt5dSQrcE/IP8k01gslFrZjy7yBJwxnHEeOJIABXtB93wXUg3P
-         lxLIIBXMHs5iIGm7Uc+UlX5Mu0e3VJU4PG8Y3cjKtSTBXROlv+Qz/dObtcxu49WlXD17
-         QA5j3O+Agg3GAkp2dxbYfNoMxoW0u/F22vIxKpM3YpHNuEKOMAI7qgI0srfwPDeTimvz
-         HYjQ==
-X-Gm-Message-State: ANoB5plD8yuTm8Z5Y7a0LEa2LcUHre/wFoRv7LYvPgB0dCnEw024ai5Z
-	prxLSxReoxyJqbpiZ/IYHLWow4gS5bA=
-X-Google-Smtp-Source: AA0mqf4lse/c7EFGaM1s/TEfXnNRM9N2sWaToaL+OD5VuhrPS2+AtUtxSzceE1uhSzOQp3Rk01zzaQ==
-X-Received: by 2002:a17:90a:4313:b0:212:e24e:16b3 with SMTP id q19-20020a17090a431300b00212e24e16b3mr68540611pjg.69.1669792760998;
-        Tue, 29 Nov 2022 23:19:20 -0800 (PST)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9181:1cf0::a42c])
-        by smtp.gmail.com with ESMTPSA id im15-20020a170902bb0f00b00189812a5397sm577447plb.180.2022.11.29.23.19.20
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 29 Nov 2022 23:19:20 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1B5DAC4321E
+	for <webhook@archiver.kernel.org>; Wed, 30 Nov 2022 07:28:12 +0000 (UTC)
+Subject: Re: [meta-python][PATCH 1/2] python3-binwalk: add recipe for version 2.3.3
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-gnome][PATCH 07/10] gfbgraph: Use rest 0.8.1
-Date: Tue, 29 Nov 2022 23:19:10 -0800
-Message-Id: <20221130071913.1805812-7-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.38.1
-In-Reply-To: <20221130071913.1805812-1-raj.khem@gmail.com>
-References: <20221130071913.1805812-1-raj.khem@gmail.com>
+From: "tomzy" <tomasz.zyjewski@3mdeb.com>
+X-Originating-Location: Warsaw, Mazovia, PL (84.10.27.202)
+X-Originating-Platform: Linux Firefox 107
+User-Agent: GROUPS.IO Web Poster
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Date: Tue, 29 Nov 2022 23:28:09 -0800
+References: <CANx9H-DEL_Z1BeT8VnPZ9jC0_VHEtQV_O2Vs8UdzdiC77-aCMA@mail.gmail.com>
+In-Reply-To: <CANx9H-DEL_Z1BeT8VnPZ9jC0_VHEtQV_O2Vs8UdzdiC77-aCMA@mail.gmail.com>
+Message-ID: <8531.1669793289706780131@lists.openembedded.org>
+Content-Type: multipart/alternative; boundary="JiN4NsufTeBA2GetsJi4"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 30 Nov 2022 07:19:31 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99864
+ <openembedded-devel@lists.openembedded.org>; Wed, 30 Nov 2022 07:28:12 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99868
 
-Drop the patch needed to use rest 1.0 API ( 0.9 onwards )
+--JiN4NsufTeBA2GetsJi4
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- ...-Update-rest-requirement-to-rest-1.0.patch | 58 -------------------
- .../recipes-gnome/gfbgraph/gfbgraph_0.2.5.bb  |  5 +-
- 2 files changed, 3 insertions(+), 60 deletions(-)
- delete mode 100644 meta-gnome/recipes-gnome/gfbgraph/gfbgraph/0001-Update-rest-requirement-to-rest-1.0.patch
+>=20
+> On Fri, Nov 25, 2022 at 3:44 AM tomzy < tomasz.zyjewski@... > wrote:
+>=20
 
-diff --git a/meta-gnome/recipes-gnome/gfbgraph/gfbgraph/0001-Update-rest-requirement-to-rest-1.0.patch b/meta-gnome/recipes-gnome/gfbgraph/gfbgraph/0001-Update-rest-requirement-to-rest-1.0.patch
-deleted file mode 100644
-index 21c623ea5b..0000000000
---- a/meta-gnome/recipes-gnome/gfbgraph/gfbgraph/0001-Update-rest-requirement-to-rest-1.0.patch
-+++ /dev/null
-@@ -1,58 +0,0 @@
--From d058e6eb6c9ebf5f4fff89ec0ac93323fc64c1ba Mon Sep 17 00:00:00 2001
--From: Tim Orling <ticotimo@gmail.com>
--Date: Mon, 18 Oct 2021 08:42:35 -0700
--Subject: [PATCH] Update rest requirement to rest-1.0
--
--librest 0.8.1 declares rest-1.0 and was released four years ago.
--
--https://gitlab.gnome.org/GNOME/librest/-/commit/2971b3b92701f70fc368ad64bd25cefaea043f87
--
--Upstream-Status: Submitted
--[https://gitlab.gnome.org/GNOME/libgfbgraph/-/merge_requests/6]
--
--Signed-off-by: Tim Orling <ticotimo@gmail.com>
--
-----
-- configure.ac         | 2 +-
-- gfbgraph/Makefile.am | 2 +-
-- libgfbgraph.pc.in    | 2 +-
-- 4 files changed, 4 insertions(+), 4 deletions(-)
--
--diff --git a/configure.ac b/configure.ac
--index fd1231f..9b49f3f 100644
----- a/configure.ac
--+++ b/configure.ac
--@@ -40,7 +40,7 @@ AM_CONDITIONAL([ENABLE_GTK_DOC], false)
-- 
-- GOBJECT_INTROSPECTION_CHECK([1.30.0])
-- 
---PKG_CHECK_MODULES(LIBGFBGRAPH, [glib-2.0 gio-2.0 gobject-2.0 rest-0.7 json-glib-1.0])
--+PKG_CHECK_MODULES(LIBGFBGRAPH, [glib-2.0 gio-2.0 gobject-2.0 rest-1.0 json-glib-1.0])
-- 
-- PKG_CHECK_MODULES(SOUP, [libsoup-2.4])
-- SOUP_UNSTABLE_CPPFLAGS=-DLIBSOUP_USE_UNSTABLE_REQUEST_API
--diff --git a/gfbgraph/Makefile.am b/gfbgraph/Makefile.am
--index d07b90d..b993ab7 100644
----- a/gfbgraph/Makefile.am
--+++ b/gfbgraph/Makefile.am
--@@ -60,7 +60,7 @@ GFBGraph_@API_MAJOR@_@API_MINOR@_gir_INCLUDES = \
-- 	GLib-2.0 	\
-- 	Gio-2.0		\
-- 	GObject-2.0	\
---	Rest-0.7	\
--+	Rest-1.0	\
-- 	Json-1.0	\
-- 	Soup-2.4
-- 
--diff --git a/libgfbgraph.pc.in b/libgfbgraph.pc.in
--index f87073e..d4f4e3a 100644
----- a/libgfbgraph.pc.in
--+++ b/libgfbgraph.pc.in
--@@ -9,6 +9,6 @@ apiversion=@API_VERSION@
-- Name: libgfbgraph
-- Description: GObject library for Facebook Graph API
-- Version: @VERSION@
---Requires: gio-2.0 glib-2.0 goa-1.0 json-glib-1.0 libsoup-2.4 rest-0.7
--+Requires: gio-2.0 glib-2.0 goa-1.0 json-glib-1.0 libsoup-2.4 rest-1.0
-- Libs: -L${libdir} -lgfbgraph-${apiversion}
-- Cflags: -I${includedir}/gfbgraph-@API_VERSION@
-diff --git a/meta-gnome/recipes-gnome/gfbgraph/gfbgraph_0.2.5.bb b/meta-gnome/recipes-gnome/gfbgraph/gfbgraph_0.2.5.bb
-index f3b54e7d05..faeaa8ccb9 100644
---- a/meta-gnome/recipes-gnome/gfbgraph/gfbgraph_0.2.5.bb
-+++ b/meta-gnome/recipes-gnome/gfbgraph/gfbgraph_0.2.5.bb
-@@ -6,7 +6,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=5804fe91d3294da4ac47c02b454bbc8a"
- DEPENDS = " \
-     glib-2.0 \
-     json-glib \
--    rest \
-+    librest \
-+    libsoup-2.4 \
-     gnome-online-accounts \
+>=20
+> Install binwalk utility
+>=20
+> Signed-off-by: Tomasz =C5=BByjewski < tomasz.zyjewski@... >
+> ---
+> .../python/ python3-binwalk_2.3.3.bb ( http://python3-binwalk_2.3.3.bb ) =
+|
+> 17 +++++++++++++++++
+> 1 file changed, 17 insertions(+)
+> create mode 100644 meta-python/recipes-devtools/python/ python3-binwalk_2=
+.3.3.bb
+> ( http://python3-binwalk_2.3.3.bb )
+>=20
+> diff --git a/meta-python/recipes-devtools/python/ python3-binwalk_2.3.3.b=
+b
+> ( http://python3-binwalk_2.3.3.bb ) b/meta-python/recipes-devtools/python=
+/
+> python3-binwalk_2.3.3.bb ( http://python3-binwalk_2.3.3.bb )
+> new file mode 100644
+> index 000000000000..362efa275148
+> --- /dev/null
+> +++ b/meta-python/recipes-devtools/python/ python3-binwalk_2.3.3.bb (
+> http://python3-binwalk_2.3.3.bb )
+> @@ -0,0 +1,17 @@
+> +SUMMARY =3D "Firmware analysis tool"
+> +DESCRIPTION =3D "This package contains Python Binwalk tool. Binwalk is a
+> fast, \
+> +easy to use tool for analyzing, reverse engineering, and extracting
+> firmware \
+> +images."
+> +HOMEPAGE =3D " https://github.com/ReFirmLabs/binwalk "
+> +LICENSE =3D "MIT"
+> +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D65bbee055d3ea3bfc475f07aecf4d=
+e64"
+> +
+> +SRC_URI =3D "git:// github.com/ReFirmLabs/binwalk;protocol=3Dhttps;branc=
+h=3Dmaster
+> ( http://github.com/ReFirmLabs/binwalk;protocol=3Dhttps;branch=3Dmaster )=
  "
- 
-@@ -15,7 +16,7 @@ inherit gnomebase gtk-doc gobject-introspection pkgconfig features_check
- # for gnome-online-accounts
- REQUIRED_DISTRO_FEATURES = "x11"
- 
--SRC_URI += " file://0001-Update-rest-requirement-to-rest-1.0.patch"
-+#SRC_URI += " file://0001-Update-rest-requirement-to-rest-1.0.patch"
- SRC_URI[archive.sha256sum] = "9cb381b3f78ba1136df97af3f06e3b11dcc2ab339ac08f74eda0f8057d6603e3"
- 
- do_install:append() {
--- 
-2.38.1
+> +
 
+>=20
+>=20
+> Thank you for fetching the git repo which is much newer (and with better
+> security apparently) than the pypi version.
+>=20
+
+I will do the same with the python3-uefi-firmware recipe
+
+>=20
+>=20
+>=20
+> +SRCREV =3D "fa0c0bd59b8588814756942fe4cb5452e76c1dcd" + +S =3D
+> "${WORKDIR}/git" + +inherit setuptools3 + +RDEPENDS:${PN} +=3D
+> "python3-core" -- 2.25.1
+
+--JiN4NsufTeBA2GetsJi4
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+
+<blockquote>
+<div class=3D"gmail_attr" dir=3D"ltr">On Fri, Nov 25, 2022 at 3:44 AM tomzy=
+ &lt;<a href=3D"mailto:tomasz.zyjewski@..." target=3D"_blank" rel=3D"nofoll=
+ow noopener">tomasz.zyjewski@...</a>&gt; wrote:</div>
+</blockquote>
+<blockquote class=3D"gmail_quote">Install binwalk utility<br /><br />Signed=
+-off-by: Tomasz =C5=BByjewski &lt;<a href=3D"mailto:tomasz.zyjewski@..." ta=
+rget=3D"_blank" rel=3D"nofollow noopener">tomasz.zyjewski@...</a>&gt;<br />=
+---<br />&nbsp;.../python/<a href=3D"http://python3-binwalk_2.3.3.bb" targe=
+t=3D"_blank" rel=3D"nofollow noopener">python3-binwalk_2.3.3.bb</a>&nbsp; &=
+nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;| 17 +++++++++++++++++<br />&nbsp;1=
+ file changed, 17 insertions(+)<br />&nbsp;create mode 100644 meta-python/r=
+ecipes-devtools/python/<a href=3D"http://python3-binwalk_2.3.3.bb" target=
+=3D"_blank" rel=3D"nofollow noopener">python3-binwalk_2.3.3.bb</a><br /><br=
+ />diff --git a/meta-python/recipes-devtools/python/<a href=3D"http://pytho=
+n3-binwalk_2.3.3.bb" target=3D"_blank" rel=3D"nofollow noopener">python3-bi=
+nwalk_2.3.3.bb</a> b/meta-python/recipes-devtools/python/<a href=3D"http://=
+python3-binwalk_2.3.3.bb" target=3D"_blank" rel=3D"nofollow noopener">pytho=
+n3-binwalk_2.3.3.bb</a><br />new file mode 100644<br />index 000000000000..=
+362efa275148<br />--- /dev/null<br />+++ b/meta-python/recipes-devtools/pyt=
+hon/<a href=3D"http://python3-binwalk_2.3.3.bb" target=3D"_blank" rel=3D"no=
+follow noopener">python3-binwalk_2.3.3.bb</a><br />@@ -0,0 +1,17 @@<br />+S=
+UMMARY =3D "Firmware analysis tool"<br />+DESCRIPTION =3D "This package con=
+tains Python Binwalk tool. Binwalk is a fast, \<br />+easy to use tool for =
+analyzing, reverse engineering, and extracting firmware \<br />+images."<br=
+ />+HOMEPAGE =3D "<a href=3D"https://github.com/ReFirmLabs/binwalk" target=
+=3D"_blank" rel=3D"nofollow noopener">https://github.com/ReFirmLabs/binwalk=
+</a>"<br />+LICENSE =3D "MIT"<br />+LIC_FILES_CHKSUM =3D "file://LICENSE;md=
+5=3D65bbee055d3ea3bfc475f07aecf4de64"<br />+<br />+SRC_URI =3D "git://<a hr=
+ef=3D"http://github.com/ReFirmLabs/binwalk;protocol=3Dhttps;branch=3Dmaster=
+" target=3D"_blank" rel=3D"nofollow noopener">github.com/ReFirmLabs/binwalk=
+;protocol=3Dhttps;branch=3Dmaster</a>"<br />+</blockquote>
+<blockquote>
+<div>&nbsp;</div>
+<div>Thank you for fetching the git repo which is much newer (and with bett=
+er security apparently) than the pypi version.</div>
+</blockquote>
+I will do the same with the python3-uefi-firmware recipe<br />
+<blockquote>
+<div>&nbsp;</div>
+<div>&nbsp;</div>
++SRCREV =3D "fa0c0bd59b8588814756942fe4cb5452e76c1dcd" + +S =3D "${WORKDIR}=
+/git" + +inherit setuptools3 + +RDEPENDS:${PN} +=3D "python3-core" -- 2.25.=
+1</blockquote>
+
+--JiN4NsufTeBA2GetsJi4--
 
