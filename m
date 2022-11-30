@@ -1,191 +1,132 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <zhengrq.fnst@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DE82AC433FE
-	for <webhook@archiver.kernel.org>; Tue, 29 Nov 2022 22:20:10 +0000 (UTC)
-Received: from mail-oa1-f53.google.com (mail-oa1-f53.google.com [209.85.160.53])
- by mx.groups.io with SMTP id smtpd.web11.1041.1669760405130563328
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5F74CC433FE
+	for <webhook@archiver.kernel.org>; Wed, 30 Nov 2022 04:30:10 +0000 (UTC)
+Received: from mail1.bemta37.messagelabs.com (mail1.bemta37.messagelabs.com [85.158.142.1])
+ by mx.groups.io with SMTP id smtpd.web10.2904.1669782599827842510
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 29 Nov 2022 14:20:05 -0800
+ Tue, 29 Nov 2022 20:30:00 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=l8Fce8e9;
- spf=pass (domain: gmail.com, ip: 209.85.160.53, mailfrom: raj.khem@gmail.com)
-Received: by mail-oa1-f53.google.com with SMTP id 586e51a60fabf-142b72a728fso18844067fac.9
-        for <openembedded-devel@lists.openembedded.org>; Tue, 29 Nov 2022 14:20:05 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=ahKjCfbNPAsdxnk6pXFNDu2Zz6Pgxr2uA3eTNTRmiwc=;
-        b=l8Fce8e98OUl8T7hjw+1qGLXxNRkRv71Gv3tUFKrAvf945D5U6sJEW3H+dfDgqkCeB
-         gnL+NqSMB+1kT20qjM6PpvMkSNosd4W7RwPvaYdzxi0fPaS7AzJ3c3Kfl9aQpj53hyGP
-         NaiPfsZQwzqMvUk7FQYfZxbdkSQGvVphtPfjvJRaLLXjujLZtJaOsAvNltPGKsP2ZE8f
-         yKEBXeoHe9wZMUBs1rAt4ULMP7vQXpDdN0XwdE9LRUoZcYkpIicdY3q/IIe+znrgMxsC
-         DTKZsebdRj7NtEwuGTtJcaUd14rE22FAUA4iUrH79xlmrOBa47k9sQdcvzZNq3H/WoSt
-         Fx4w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=ahKjCfbNPAsdxnk6pXFNDu2Zz6Pgxr2uA3eTNTRmiwc=;
-        b=lOLdQXxh+7M5MxFWXL74vGg+VcxV1Z3ShHcTj1w76gzqhdQrRCf20A5O9JhHVsWS0S
-         nMM5k/gAshBjD0Ag05+K5G1iEUt+DdSgPUjINRDYXbQeyzwlLFmH/nD9PaJDg9HE8CDt
-         tp5xMp1KeRPfCdrlNCCoDE+gwbGFxe8RE/kkyzR7lK+Jl9RVRnkVy0bn0Jy/+smCdeff
-         OqGriwoYDVGn0YHcqM93nVmmfE/09iEtiKXMG5E88NJoEGrdJmDqpfNwend/HplL3N8n
-         Hs8xu/mPV+z/vvMaxhVeWUR8TZdn11dJN0Jy2WAmED81O2TwKXi1ExENt0kksdGjt/4o
-         wmUA==
-X-Gm-Message-State: ANoB5pk37/D7wOaqyNQhapZ27mj3H3TtqAFKdxJIvJsjmE+CV7wJs0hz
-	mjtf9I6xmAvRQ1al9C+yryPyJSYeXGHwVwxSYfULAM0VB+U=
-X-Google-Smtp-Source: AA0mqf5gTBCcbEi7oDTvgyCpxOrQPZfISigFQjCHe3mTPPjfrZH/kllslDE3ZevGYx/bTc4FuvFBUzWPOi4KK584Tqg=
-X-Received: by 2002:a05:6871:4199:b0:142:d126:dc55 with SMTP id
- lc25-20020a056871419900b00142d126dc55mr22645746oab.262.1669760404155; Tue, 29
- Nov 2022 14:20:04 -0800 (PST)
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=bh6nJqcm;
+ spf=pass (domain: fujitsu.com, ip: 85.158.142.1, mailfrom: zhengrq.fnst@fujitsu.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
+	s=170520fj; t=1669782597; i=@fujitsu.com;
+	bh=EU3wy+2t1mQadQTf3k2Ar9oktj9aE+eUT7XQGxvBWs4=;
+	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type;
+	b=bh6nJqcmE00ni3SEKSnVf6oqPnuJAsXi7gkt/d0uuRVuK2ONsZoPtCOcLGBIF312V
+	 JaLXA7NIuXpWw7PD8JOV8zAD1PXIHe6xvQOoz3TjHYro1uVdHoAmP0mfd5oQJUINDT
+	 rpZ7/nkk/lfyR4WO02EUSIfXYpmffdfpYdjLOAz6WiBrp1mULsqfTyZaI5Z0g8pVI1
+	 ENFIiuLGBI9uOYIWNOcFyvG9SaYURgH8VUTlc5YrqlwrAkPXedynoAcBY2QMQZyySa
+	 4kOVuC6QV1QkVim7H+tX4XvrIqOQVTElFH6D5Fa2QCIEj+4OpgHh77c04VRpW0/iVv
+	 ixwBYaxCTdbog==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFlrPIsWRWlGSWpSXmKPExsViZ8ORqOtypy3
+  ZYPNMU4uLh5cyOzB6nNu4gjGAMYo1My8pvyKBNWPpweVsBZuEKr5NuM7awPiRv4uRi0NI4Amj
+  ROe3pUwQznUmiR9H57JCOAcYJTaee8zWxcjJwSagILFw6xlWEFtEQF9i6ew9zCC2sICnxJGXV
+  8BqWARUJd4+38AIYvMKeEhsa2liAbElgHqnPHzPDBEXlDg58wlYnFlAQuLgixdAcQ6gGkWJ2d
+  PlIcorJGbNamOCsNUkrp7bxDyBkW8Wku5ZSLoXMDKtYjQvTi0qSy3SNTTSSyrKTM8oyU3MzNF
+  LrNJN1Est1c3LLyrJ0DXUSywv1kstLtYrrsxNzknRy0st2cQIDLuU4uS7Oxg7l//RO8QoycGk
+  JMp79WhbshBfUn5KZUZicUZ8UWlOavEhRhkODiUJXvEbQDnBotT01Iq0zBxgDMCkJTh4lER4t
+  4K08hYXJOYWZ6ZDpE4x6nLM/Np2gFmIJS8/L1VKnDfjFlCRAEhRRmke3AhYPF5ilJUS5mVkYG
+  AQ4ilILcrNLEGVf8UozsGoJMw7DeQSnsy8ErhNr4COYAI6IlIM7IiSRISUVANT9tPOGy/120u
+  X94kZFKV8lF64/KV48Ts+zoqbh9rmGz8T2nbswVwekTnntPvbWnwuvNjGea2eWcmp8+bc6eGv
+  W9dNifFyyp9/bL7vv7lVmud3VMcVn7HxC/62OZvzRMtB1x2ftzYkTS5kP/2CKz95RfvxyYxXj
+  KLK/VLPm/zvaTsvLL4tS9TC7E75jrlPbjpOmWn2bE6pcxzbxejPU/Oju/uvd7ZfzSv6c91Y4v
+  4ES7t2g1sWH521ruQ3J+Xv61KTKkkXOuDm1i2WvMLr7afPf9n178yae+egYxf7jEBFgecr7Zo
+  +9U0rLGSv3ytz8dab25Msbq9if+P1MpP39Ksi9f1VMW0ZiUcb+aLZ+KWVWIozEg21mIuKEwF+
+  pkvPQgMAAA==
+X-Env-Sender: zhengrq.fnst@fujitsu.com
+X-Msg-Ref: server-12.tower-728.messagelabs.com!1669782596!202849!1
+X-Originating-IP: [62.60.8.97]
+X-SYMC-ESS-Client-Auth: outbound-route-from=pass
+X-StarScan-Received: 
+X-StarScan-Version: 9.101.1; banners=-,-,-
+X-VirusChecked: Checked
+Received: (qmail 11837 invoked from network); 30 Nov 2022 04:29:56 -0000
+Received: from unknown (HELO n03ukasimr01.n03.fujitsu.local) (62.60.8.97)
+  by server-12.tower-728.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 30 Nov 2022 04:29:56 -0000
+Received: from n03ukasimr01.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTP id 50807100198
+	for <openembedded-devel@lists.openembedded.org>; Wed, 30 Nov 2022 04:29:56 +0000 (GMT)
+Received: from R01UKEXCASM126.r01.fujitsu.local (R01UKEXCASM126 [10.183.43.178])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTPS id 44B23100194
+	for <openembedded-devel@lists.openembedded.org>; Wed, 30 Nov 2022 04:29:56 +0000 (GMT)
+Received: from CentOS7.g08.fujitsu.local (10.167.225.35) by
+ R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
+ (TLS) id 15.0.1497.32; Wed, 30 Nov 2022 04:29:54 +0000
+From: <zhengrq.fnst@fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [oe] [meta-python] [PATCH] python3-redis: upgrade 4.3.4 -> 4.3.5
+Date: Wed, 30 Nov 2022 12:29:51 +0800
+Message-ID: <1669782591-11870-1-git-send-email-zhengrq.fnst@fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-References: <20221129145137.18173-1-kai.kang@windriver.com>
-In-Reply-To: <20221129145137.18173-1-kai.kang@windriver.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 29 Nov 2022 14:19:38 -0800
-Message-ID: <CAMKF1srqJdZGB2OpQ3Phb_x_7rHF=hyryW9MhijKmBUkL_ykag@mail.gmail.com>
-Subject: Re: [oe] [meta-python][PATCH] python3-wxgtk4: replace deprecated inspect.getargspec
-To: Kai Kang <kai.kang@eng.windriver.com>
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain
+X-Originating-IP: [10.167.225.35]
+X-ClientProxiedBy: G08CNEXCHPEKD07.g08.fujitsu.local (10.167.33.80) To
+ R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
+X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 29 Nov 2022 22:20:10 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99851
+ <openembedded-devel@lists.openembedded.org>; Wed, 30 Nov 2022 04:30:10 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99852
 
-On Tue, Nov 29, 2022 at 6:51 AM Kai Kang <kai.kang@eng.windriver.com> wrote:
->
-> From: Kai Kang <kai.kang@windriver.com>
->
-> Backport patch to replace deprecated inspect.getargspec in lib pubsub.
->
-> And add python3-pip to RDEPENDS which is required by utils wxdemo,
-> wxdocs and wxget provided by python3-wxgtk4.
->
-> Signed-off-by: Kai Kang <kai.kang@windriver.com>
-> ---
->  ...eplace-deprecated-inspect.getargspec.patch | 65 +++++++++++++++++++
->  .../python3-wxgtk4/python3-wxgtk4_4.2.0.bb    |  2 +
->  2 files changed, 67 insertions(+)
->  create mode 100644 meta-python/recipes-devtools/python3-wxgtk4/python3-wxgtk4/0001-pypubsub-Replace-deprecated-inspect.getargspec.patch
->
-> diff --git a/meta-python/recipes-devtools/python3-wxgtk4/python3-wxgtk4/0001-pypubsub-Replace-deprecated-inspect.getargspec.patch b/meta-python/recipes-devtools/python3-wxgtk4/python3-wxgtk4/0001-pypubsub-Replace-deprecated-inspect.getargspec.patch
-> new file mode 100644
-> index 000000000..4501667f9
-> --- /dev/null
-> +++ b/meta-python/recipes-devtools/python3-wxgtk4/python3-wxgtk4/0001-pypubsub-Replace-deprecated-inspect.getargspec.patch
-> @@ -0,0 +1,65 @@
-> +Upstream-Status: Backport [https://github.com/wxWidgets/Phoenix/commit/9986a0d5]
-> +
-> +Signed-off-by: Kai Kang <kai.kang@windriver.com>
-> +
-> +From 9986a0d5c24b5d45ddf571d60351f68765a8a9be Mon Sep 17 00:00:00 2001
-> +From: Scott Talbert <swt@techie.net>
-> +Date: Mon, 8 Aug 2022 22:35:58 -0400
-> +Subject: [PATCH] pypubsub: Replace deprecated inspect.getargspec
-> +
-> +inspect.getargspec was removed in Python 3.11.  This is a backport of:
-> +https://github.com/schollii/pypubsub/commit/089c7a73f85c76a3aa22e4b10c71db1bf65a8637
-> +---
-> + wx/lib/pubsub/core/callables.py | 23 +++++++++++++++--------
-> + 1 file changed, 15 insertions(+), 8 deletions(-)
-> +
-> +diff --git a/wx/lib/pubsub/core/callables.py b/wx/lib/pubsub/core/callables.py
-> +index 65eb1ebe..7e798c54 100644
-> +--- a/wx/lib/pubsub/core/callables.py
-> ++++ b/wx/lib/pubsub/core/callables.py
-> +@@ -12,7 +12,7 @@ CallArgsInfo regarding its autoTopicArgName data member.
-> +
-> + """
-> +
-> +-from inspect import getargspec, ismethod, isfunction
-> ++from inspect import ismethod, isfunction, signature, Parameter
-> +
-> + from .. import py2and3
-> +
-> +@@ -133,19 +133,26 @@ class CallArgsInfo:
-> +         self.autoTopicArgName = None."""
-> +
-> +         #args, firstArgIdx, defaultVals, acceptsAllKwargs
-> +-        (allParams, varParamName, varOptParamName, defaultVals) = getargspec(func)
-> +-        if defaultVals is None:
-> +-            defaultVals = []
-> +-        else:
-> +-            defaultVals = list(defaultVals)
-> ++        allParams = []
-> ++        defaultVals = []
-> ++        varParamName = None
-> ++        varOptParamName = None
-> ++        for argName, param in signature(func).parameters.items():
-> ++            if param.default != Parameter.empty:
-> ++                defaultVals.append(param.default)
-> ++            if param.kind == Parameter.VAR_POSITIONAL:
-> ++                varParamName = argName
-> ++            elif param.kind == Parameter.VAR_KEYWORD:
-> ++                varOptParamName = argName
-> ++            else:
-> ++                allParams.append(argName)
-> +
-> +         self.acceptsAllKwargs      = (varOptParamName is not None)
-> +         self.acceptsAllUnnamedArgs = (varParamName    is not None)
-> +-
-> +         self.allParams = allParams
-> +-        del self.allParams[0:firstArgIdx] # does nothing if firstArgIdx == 0
-> +
-> +         self.numRequired = len(self.allParams) - len(defaultVals)
-> ++        assert len(self.allParams) >= len(defaultVals)
-> +         assert self.numRequired >= 0
-> +
-> +         # if listener wants topic, remove that arg from args/defaultVals
-> +--
-> +2.34.1
-> +
-> diff --git a/meta-python/recipes-devtools/python3-wxgtk4/python3-wxgtk4_4.2.0.bb b/meta-python/recipes-devtools/python3-wxgtk4/python3-wxgtk4_4.2.0.bb
-> index faea43777..df23037fc 100644
-> --- a/meta-python/recipes-devtools/python3-wxgtk4/python3-wxgtk4_4.2.0.bb
-> +++ b/meta-python/recipes-devtools/python3-wxgtk4/python3-wxgtk4_4.2.0.bb
-> @@ -13,6 +13,7 @@ PYPI_PACKAGE = "wxPython"
->  SRC_URI += "file://add-back-option-build-base.patch \
->              file://wxgtk-fixup-build-scripts.patch \
->              file://not-overwrite-cflags-cxxflags.patch \
-> +            file://0001-pypubsub-Replace-deprecated-inspect.getargspec.patch \
->              "
+Changelog:
+=========
+* New Features
+--------------
+    Add support for TIMESERIES 1.8 (#2296)
+    Graph - add counters for removed labels and properties (#2292)
+    Add support for TDIGEST.QUANTILE extensions (#2317)
+    Add TDIGEST.TRIMMED_MEAN (#2300)
+    Add support for async GRAPH module (#2273)
+    Support TDIGEST.MERGESTORE and make compression optional on TDIGEST.CREATE (#2319)
+    Adding reserve as an alias for create, so that we have BF.RESERVE and CF.RESERVE accuratenly supported (#2331)
 
-Fails to apply
+* Bug Fixes
+--------------
+    Fix async connection.is_connected to return a boolean value (#2278)
+    Fix: workaround asyncio bug on connection reset by peer (#2259)
+    Fix crash: key expire while search (#2270)
+    Async cluster: fix concurrent pipeline (#2280)
+    Fix async SEARCH pipeline (#2316)
+    Fix KeyError in async cluster - initialize before execute multi key commands (#2439)
 
-patching file wx/lib/pubsub/core/callables.py
-Hunk #1 FAILED at 12 (different line endings).
-Hunk #2 FAILED at 133 (different line endings).
-2 out of 2 hunks FAILED -- rejects in file wx/lib/pubsub/core/callables.py
-Patch 0001-pypubsub-Replace-deprecated-inspect.getargspec.patch does
-not apply (enforce with -f)
+* Maintenance
+----------------
+    Supply chain risk reduction: remove dependency on library named deprecated (#2386)
+    Search test - Ignore order of the items in the response (#2322)
+    Fix GRAPH.LIST & TDIGEST.QUANTILE tests (#2335)
+    Fix TimeSeries range aggregation (twa) tests (#2358)
+    Mark TOPK.COUNT as deprecated (#2363)
 
+Signed-off-by: Zheng Ruoqin <zhengrq.fnst@fujitsu.com>
+---
+ .../python/{python3-redis_4.3.4.bb => python3-redis_4.3.5.bb}   | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-redis_4.3.4.bb => python3-redis_4.3.5.bb} (82%)
 
->  SRC_URI[sha256sum] = "663cebc4509d7e5d113518865fe274f77f95434c5d57bc386ed58d65ceed86c7"
->
-> @@ -29,6 +30,7 @@ RDEPENDS:${PN} = "\
->      python3-image \
->      python3-numpy \
->      python3-pillow \
-> +    python3-pip \
->      python3-pprint \
->      python3-pycairo \
->      python3-six \
-> --
-> 2.17.1
->
->
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#99845): https://lists.openembedded.org/g/openembedded-devel/message/99845
-> Mute This Topic: https://lists.openembedded.org/mt/95335564/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [raj.khem@gmail.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
->
+diff --git a/meta-python/recipes-devtools/python/python3-redis_4.3.4.bb b/meta-python/recipes-devtools/python/python3-redis_4.3.5.bb
+similarity index 82%
+rename from meta-python/recipes-devtools/python/python3-redis_4.3.4.bb
+rename to meta-python/recipes-devtools/python/python3-redis_4.3.5.bb
+index e0f953ca4..f6dcebb16 100644
+--- a/meta-python/recipes-devtools/python/python3-redis_4.3.4.bb
++++ b/meta-python/recipes-devtools/python/python3-redis_4.3.5.bb
+@@ -4,7 +4,7 @@ HOMEPAGE = "http://github.com/andymccurdy/redis-py"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=51d9ad56299ab60ba7be65a621004f27"
+ 
+-SRC_URI[sha256sum] = "ddf27071df4adf3821c4f2ca59d67525c3a82e5f268bed97b813cb4fabf87880"
++SRC_URI[sha256sum] = "30c07511627a4c5c4d970e060000772f323174f75e745a26938319817ead7a12"
+ 
+ inherit pypi setuptools3
+ 
+-- 
+2.25.1
+
 
