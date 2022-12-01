@@ -2,56 +2,56 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C5330C47088
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D25FFC47089
 	for <webhook@archiver.kernel.org>; Thu,  1 Dec 2022 18:46:05 +0000 (UTC)
-Received: from mail-pl1-f181.google.com (mail-pl1-f181.google.com [209.85.214.181])
- by mx.groups.io with SMTP id smtpd.web11.53029.1669920357893820167
+Received: from mail-pj1-f41.google.com (mail-pj1-f41.google.com [209.85.216.41])
+ by mx.groups.io with SMTP id smtpd.web11.53027.1669920356955418286
  for <openembedded-devel@lists.openembedded.org>;
  Thu, 01 Dec 2022 10:45:57 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=UjrWht6w;
- spf=pass (domain: gmail.com, ip: 209.85.214.181, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f181.google.com with SMTP id y17so2490697plp.3
-        for <openembedded-devel@lists.openembedded.org>; Thu, 01 Dec 2022 10:45:57 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=qpW2q+gc;
+ spf=pass (domain: gmail.com, ip: 209.85.216.41, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f41.google.com with SMTP id k2-20020a17090a4c8200b002187cce2f92so6079773pjh.2
+        for <openembedded-devel@lists.openembedded.org>; Thu, 01 Dec 2022 10:45:56 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=I7EoRMcYpwJjKC66fKVkemAMn0mwjX+C5clCoUPaPNQ=;
-        b=UjrWht6wdKCCNoyNRNWySAFOo61KtzR1tARCT5D5X5qXO5wWjuEy/9D850HHwd7CAj
-         TCJ/Ja36B/YZPPPZtje6oRpotsCx2t0FXOw4MIRGfPZOEC9pLL7b/jPoXzt/5cfGLSw5
-         oo4Gcmh1+Nq1+lAJ9gCQqsM06SjR/Iqpl6reYMuR7uJQjaiJ77Opa/nmrVCmuPLsIjfD
-         dm+bC/1OVbwUiSmyvoqoUWBD4EhzXT4hIzLgf7V12YJbzL20kR46A/8TtRfPiakTChS+
-         oxpXDivDR5aIIZUibNENSy+aNGZLvDrd18z/C2A0r+MfuU1cwSkHZeGr3TSpcivc/GjJ
-         d+DA==
+        bh=KxlYRfF+66DsiyGV/bZ2x4r5/CTWwr2okPCRwWADhFY=;
+        b=qpW2q+gcqSWXoABzTRbRHQL8MhB21LgxFEZ6AYqR49OdSavPrGs5ZUnozNTV+/t6QI
+         TR6W4NafcU3w82PQbVjPJIqQv/9I5xh1yj8WoBmbsYJqgQCileFE5Dig5n273AQBPWK6
+         VR0zZlvVY6HSIz578BjjMO+1WM8jB0tgPvAC2XMW9OwleEftZwZncgwp4j/Tu4/gTmoz
+         Zny5+rYaElqIG4F7PLBx7XjRQ/XP+VpEtyxYJpS2b4p8twG9NXLE9+P4X7TjpvQJqtMp
+         VFZ0X32PYaEShvagaPXDVnLHuGK4MhaEcfqpj5LjDK7Qy8qSkNlzROA8nk2YvcZ9t0nk
+         X3AQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=I7EoRMcYpwJjKC66fKVkemAMn0mwjX+C5clCoUPaPNQ=;
-        b=TJo+APLmVz8MK9HIwo9ov3QvK6eGDYFN3lG9AKpR8oqOF68fw57Nk9ZwbZ3NUScjdh
-         hpAaFAZc71H15YyRgfHuBHJJjSBzOV1Z+yjFA72qwoUm2bipcUyi1Vk13+oe16L1g6Yd
-         G0KrLZWDr9XVpOH0VZyd/U+bF887UwFeoJN+e6fBBmwJZrKvAwF3e5/yDBr7AfcgGfQy
-         Rpdyiwi3Rh4w5iKKRLGZs0llfplwA0QMv1q1bjkNMSFsVRI9mxHyrhrV7YQ1n7Q5Fwfl
-         0I0qhSuJwA2gpbVUo+xbKiVKrpKGAC3/mD45P2ZDTlTOM2LDx9bGktOHG8DLL38skUTp
-         /A4g==
-X-Gm-Message-State: ANoB5pmYt8o76mbEco1EjPRLLvI1oUzrNY4mRNdu0q3fKw4W8W5HRkW4
-	OsLeoqvF/OjgsdKoOQ5jiQF0PVVcDmQ=
-X-Google-Smtp-Source: AA0mqf6NYbkx3pemGYk/LiAukfuRCEU4yKxgvZcvLTA1rHSsnVjBJfaJjQbzNZ6+qlddZp9bk8ux0g==
-X-Received: by 2002:a17:902:a50d:b0:188:547d:b15e with SMTP id s13-20020a170902a50d00b00188547db15emr50082985plq.50.1669920356991;
+        bh=KxlYRfF+66DsiyGV/bZ2x4r5/CTWwr2okPCRwWADhFY=;
+        b=qgiqPrZVeTJVzJftnN7BYGJUEShAOVxCbuOTt1qusQzVniHJpi+EeG0tduDpJaZjjJ
+         Ocj2hvx+392NdKaqWh38eWfvOdo4LIgz5ISR4rxW5wOBv8JHaFsECTncDvmwxRYa6OcP
+         HLoZ8icU5z+mVUBlOHMYJqT/GwL43GVQGx5ecrm8MO6U/6/kSEhhQZ4DTRAy+5BAKHZ8
+         U2A9IF5oI2cDCCYczF7d7RHpWlWN4TDrItRoRyCSnSW9c3k4vOevibyyPaZ3Vc4s/E9x
+         XEI+d8oZh5ZiJXbrkB8c5Hkyj5U2R57g/PBjxQ772lWJryykKTKfexb5QUtwbXLeUT9t
+         cLxA==
+X-Gm-Message-State: ANoB5pl+LX2PdwHN/ITG5z9NjTDN0zNCoOlWTBKOGZV8X/F75CYCaX3S
+	tGmhfllxHFAGu02Fy6RKaGOOqe0WrRM=
+X-Google-Smtp-Source: AA0mqf5yJmRnk24JYcl1VVqptiscumjvxJdxqcs/M7g2OScQmRh++KBPpCrLToa23aviUSxbcTJgGw==
+X-Received: by 2002:a17:903:2787:b0:189:b8a2:27ef with SMTP id jw7-20020a170903278700b00189b8a227efmr1308523plb.60.1669920356116;
         Thu, 01 Dec 2022 10:45:56 -0800 (PST)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9181:1cf0::d00])
-        by smtp.gmail.com with ESMTPSA id n16-20020a170902e55000b00188a1ae94bbsm4018120plf.23.2022.12.01.10.45.56
+        by smtp.gmail.com with ESMTPSA id n16-20020a170902e55000b00188a1ae94bbsm4018120plf.23.2022.12.01.10.45.55
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 01 Dec 2022 10:45:56 -0800 (PST)
+        Thu, 01 Dec 2022 10:45:55 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-gnome][PATCH 4/5] tepl: Add missing dep on python3-pygments-native
-Date: Thu,  1 Dec 2022 10:45:50 -0800
-Message-Id: <20221201184551.35272-4-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 3/5] fontforge: Inherit python3targetconfig
+Date: Thu,  1 Dec 2022 10:45:49 -0800
+Message-Id: <20221201184551.35272-3-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.38.1
 In-Reply-To: <20221201184551.35272-1-raj.khem@gmail.com>
 References: <20221201184551.35272-1-raj.khem@gmail.com>
@@ -61,30 +61,29 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 01 Dec 2022 18:46:05 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99900
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99899
 
-Fixes
-  File "TOPDIR/build/tmp/work/cortexa15t2hf-neon-yoe-linux-gnueabi/tepl/6.2.0-r0/recipe-sysroot-native/usr/share/gtk-doc/python/gtkdoc/highlight.py", line 27, in <module>
-    from pygments import highlight
-ModuleNotFoundError: No module named 'pygments'
+It currently ends up using native python3-config which adds native paths
+to compiler includes which is not what we want.
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-gnome/recipes-gnome/tepl/tepl_6.2.0.bb | 1 +
- 1 file changed, 1 insertion(+)
+ meta-oe/recipes-graphics/fontforge/fontforge_20220308.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-gnome/recipes-gnome/tepl/tepl_6.2.0.bb b/meta-gnome/recipes-gnome/tepl/tepl_6.2.0.bb
-index 8173b6d314..0eeb345cd4 100644
---- a/meta-gnome/recipes-gnome/tepl/tepl_6.2.0.bb
-+++ b/meta-gnome/recipes-gnome/tepl/tepl_6.2.0.bb
-@@ -13,6 +13,7 @@ DEPENDS = " \
-     gtk-doc-native \
-     libxslt-native \
-     docbook-xsl-stylesheets-native \
-+    python3-pygments-native \
- "
+diff --git a/meta-oe/recipes-graphics/fontforge/fontforge_20220308.bb b/meta-oe/recipes-graphics/fontforge/fontforge_20220308.bb
+index c53f2db01b..ddb4443baa 100644
+--- a/meta-oe/recipes-graphics/fontforge/fontforge_20220308.bb
++++ b/meta-oe/recipes-graphics/fontforge/fontforge_20220308.bb
+@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = " \
+ DEPENDS = "python3 glib-2.0 pango giflib tiff libxml2 jpeg libtool uthash gettext-native libspiro"
+ DEPENDS:append:class-target = " libxi"
  
- inherit meson gobject-introspection gettext features_check pkgconfig
+-inherit cmake pkgconfig python3native features_check gettext gtk-icon-cache mime mime-xdg
++inherit cmake pkgconfig python3native python3targetconfig features_check gettext gtk-icon-cache mime mime-xdg
+ 
+ REQUIRED_DISTRO_FEATURES:append:class-target = " x11"
+ 
 -- 
 2.38.1
 
