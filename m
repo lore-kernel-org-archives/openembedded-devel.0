@@ -2,56 +2,56 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CEBEEC43217
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C5330C47088
 	for <webhook@archiver.kernel.org>; Thu,  1 Dec 2022 18:46:05 +0000 (UTC)
-Received: from mail-pl1-f175.google.com (mail-pl1-f175.google.com [209.85.214.175])
- by mx.groups.io with SMTP id smtpd.web10.53012.1669920359097426457
+Received: from mail-pl1-f181.google.com (mail-pl1-f181.google.com [209.85.214.181])
+ by mx.groups.io with SMTP id smtpd.web11.53029.1669920357893820167
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 01 Dec 2022 10:45:59 -0800
+ Thu, 01 Dec 2022 10:45:57 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=m7DW3G9c;
- spf=pass (domain: gmail.com, ip: 209.85.214.175, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f175.google.com with SMTP id b21so2474815plc.9
-        for <openembedded-devel@lists.openembedded.org>; Thu, 01 Dec 2022 10:45:58 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=UjrWht6w;
+ spf=pass (domain: gmail.com, ip: 209.85.214.181, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f181.google.com with SMTP id y17so2490697plp.3
+        for <openembedded-devel@lists.openembedded.org>; Thu, 01 Dec 2022 10:45:57 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=OIaSSgQt2X06HXFaSb/vyvGL/IIsRcTy23b+3Gg8zEk=;
-        b=m7DW3G9cxL4Wfl+/C5SL56dq3btLYYcuaWyKRIihEmQOg6x6VaAFPodr3tBhrkTDnl
-         MXupltwS0HFnTCiWq6+Jqpegzg2lc8iWqA3YHcuxJTMp3KGeZChgcg1LhJgx3PkXESgh
-         qTye+7QItcUcErsKhGCkReIuGxHBX0rdQJQQBLGMLZewMciftUrlZjVdQt+AZfG0iVVC
-         8GKQGBumR3UKKBIdJKIKD0asyAy/OO6NTML2S4MmYkIv7dHQUj8ZUVS9GOPi0AmXxuvY
-         kXlzYdM12Eiu7JCXUxG34zqlKvfKxZ/50JRY6pW8kOAthxkhccz21/RkMvUMRRhtKIbR
-         Ah9Q==
+        bh=I7EoRMcYpwJjKC66fKVkemAMn0mwjX+C5clCoUPaPNQ=;
+        b=UjrWht6wdKCCNoyNRNWySAFOo61KtzR1tARCT5D5X5qXO5wWjuEy/9D850HHwd7CAj
+         TCJ/Ja36B/YZPPPZtje6oRpotsCx2t0FXOw4MIRGfPZOEC9pLL7b/jPoXzt/5cfGLSw5
+         oo4Gcmh1+Nq1+lAJ9gCQqsM06SjR/Iqpl6reYMuR7uJQjaiJ77Opa/nmrVCmuPLsIjfD
+         dm+bC/1OVbwUiSmyvoqoUWBD4EhzXT4hIzLgf7V12YJbzL20kR46A/8TtRfPiakTChS+
+         oxpXDivDR5aIIZUibNENSy+aNGZLvDrd18z/C2A0r+MfuU1cwSkHZeGr3TSpcivc/GjJ
+         d+DA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=OIaSSgQt2X06HXFaSb/vyvGL/IIsRcTy23b+3Gg8zEk=;
-        b=S+L/azkOC7QmEIFBV/EzSJ1I3Degs/Vb/kq/33l1O66mgzKuLwPE+buzX8QeiQ5Z1L
-         9Ab0FADv44s9YwDj/Tf4liJsuQEvcREdptDFlJsM6U4PMwdbqIP6OSMRxyXK3z1adWYq
-         gani4NFCm3V8ODXb2Qn20sVQzGjwnG8BfdNAMAhDxdKZF8YRLWk5Hr/qucP73AwXG3EB
-         GwWiO6waEAHDw7bozpnSQ/euLhwoJ5+p0V3SVmNAUjpQKm7cdNCwIxVW2MVqzEq/Iuwa
-         G7dFmQ+9Tb7B16M1LEb0O+/PCpWuf2ZD6Y+aOQOH9R94QiWpi8dWMk5qTG2A/NyUnL+o
-         +ezQ==
-X-Gm-Message-State: ANoB5pnmuOQctZ6Sgyu+Xqe4OhcR3SlvgiZNU0shazdZ/yNnosJXyFjU
-	7q5G7+9wJkPRzKvt5nJCc8q7hMfHKRE=
-X-Google-Smtp-Source: AA0mqf6Q6i78yOI5nlSkzsE0ktRj17CugbOdimeQWRiBS4BQ+eAscHu7ds7+XHoPAMKPzZeXgf4pSw==
-X-Received: by 2002:a17:902:7c0e:b0:186:7395:e36a with SMTP id x14-20020a1709027c0e00b001867395e36amr61148569pll.83.1669920358075;
-        Thu, 01 Dec 2022 10:45:58 -0800 (PST)
+        bh=I7EoRMcYpwJjKC66fKVkemAMn0mwjX+C5clCoUPaPNQ=;
+        b=TJo+APLmVz8MK9HIwo9ov3QvK6eGDYFN3lG9AKpR8oqOF68fw57Nk9ZwbZ3NUScjdh
+         hpAaFAZc71H15YyRgfHuBHJJjSBzOV1Z+yjFA72qwoUm2bipcUyi1Vk13+oe16L1g6Yd
+         G0KrLZWDr9XVpOH0VZyd/U+bF887UwFeoJN+e6fBBmwJZrKvAwF3e5/yDBr7AfcgGfQy
+         Rpdyiwi3Rh4w5iKKRLGZs0llfplwA0QMv1q1bjkNMSFsVRI9mxHyrhrV7YQ1n7Q5Fwfl
+         0I0qhSuJwA2gpbVUo+xbKiVKrpKGAC3/mD45P2ZDTlTOM2LDx9bGktOHG8DLL38skUTp
+         /A4g==
+X-Gm-Message-State: ANoB5pmYt8o76mbEco1EjPRLLvI1oUzrNY4mRNdu0q3fKw4W8W5HRkW4
+	OsLeoqvF/OjgsdKoOQ5jiQF0PVVcDmQ=
+X-Google-Smtp-Source: AA0mqf6NYbkx3pemGYk/LiAukfuRCEU4yKxgvZcvLTA1rHSsnVjBJfaJjQbzNZ6+qlddZp9bk8ux0g==
+X-Received: by 2002:a17:902:a50d:b0:188:547d:b15e with SMTP id s13-20020a170902a50d00b00188547db15emr50082985plq.50.1669920356991;
+        Thu, 01 Dec 2022 10:45:56 -0800 (PST)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9181:1cf0::d00])
-        by smtp.gmail.com with ESMTPSA id n16-20020a170902e55000b00188a1ae94bbsm4018120plf.23.2022.12.01.10.45.57
+        by smtp.gmail.com with ESMTPSA id n16-20020a170902e55000b00188a1ae94bbsm4018120plf.23.2022.12.01.10.45.56
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 01 Dec 2022 10:45:57 -0800 (PST)
+        Thu, 01 Dec 2022 10:45:56 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 5/5] alsa-oss: Remove recipe
-Date: Thu,  1 Dec 2022 10:45:51 -0800
-Message-Id: <20221201184551.35272-5-raj.khem@gmail.com>
+Subject: [meta-gnome][PATCH 4/5] tepl: Add missing dep on python3-pygments-native
+Date: Thu,  1 Dec 2022 10:45:50 -0800
+Message-Id: <20221201184551.35272-4-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.38.1
 In-Reply-To: <20221201184551.35272-1-raj.khem@gmail.com>
 References: <20221201184551.35272-1-raj.khem@gmail.com>
@@ -61,67 +61,30 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 01 Dec 2022 18:46:05 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99901
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99900
 
-This is not used anywhere in meta-openembedded and will have to be fixed
-when enanbling LFS and time64_t.
+Fixes
+  File "TOPDIR/build/tmp/work/cortexa15t2hf-neon-yoe-linux-gnueabi/tepl/6.2.0-r0/recipe-sysroot-native/usr/share/gtk-doc/python/gtkdoc/highlight.py", line 27, in <module>
+    from pygments import highlight
+ModuleNotFoundError: No module named 'pygments'
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../packagegroups/packagegroup-meta-oe.bb     |  3 ---
- .../recipes-multimedia/alsa/alsa-oss_1.1.8.bb | 22 -------------------
- 2 files changed, 25 deletions(-)
- delete mode 100644 meta-oe/recipes-multimedia/alsa/alsa-oss_1.1.8.bb
+ meta-gnome/recipes-gnome/tepl/tepl_6.2.0.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-index a5a033cae4..7166b67423 100644
---- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-+++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-@@ -657,7 +657,6 @@ RDEPENDS:packagegroup-meta-oe-kernel:remove:riscv64 = "crash makedumpfile oprofi
- RDEPENDS:packagegroup-meta-oe-kernel:remove:riscv32 = "crash makedumpfile oprofile"
- 
- RDEPENDS:packagegroup-meta-oe-multimedia ="\
--    alsa-oss \
-     ${@bb.utils.contains("LICENSE_FLAGS_ACCEPTED", "commercial", "faad2", "", d)} \
-     dirsplit \
-     genisoimage \
-@@ -691,8 +690,6 @@ RDEPENDS:packagegroup-meta-oe-multimedia ="\
-     libopusenc \
+diff --git a/meta-gnome/recipes-gnome/tepl/tepl_6.2.0.bb b/meta-gnome/recipes-gnome/tepl/tepl_6.2.0.bb
+index 8173b6d314..0eeb345cd4 100644
+--- a/meta-gnome/recipes-gnome/tepl/tepl_6.2.0.bb
++++ b/meta-gnome/recipes-gnome/tepl/tepl_6.2.0.bb
+@@ -13,6 +13,7 @@ DEPENDS = " \
+     gtk-doc-native \
+     libxslt-native \
+     docbook-xsl-stylesheets-native \
++    python3-pygments-native \
  "
  
--RDEPENDS:packagegroup-meta-oe-multimedia:remove:libc-musl = "alsa-oss"
--
- RDEPENDS:packagegroup-meta-oe-navigation ="\
-     geos \
-     ${@bb.utils.contains("DISTRO_FEATURES", "bluz4", "gpsd-machine-conf gpsd", "", d)} \
-diff --git a/meta-oe/recipes-multimedia/alsa/alsa-oss_1.1.8.bb b/meta-oe/recipes-multimedia/alsa/alsa-oss_1.1.8.bb
-deleted file mode 100644
-index 4c38df4027..0000000000
---- a/meta-oe/recipes-multimedia/alsa/alsa-oss_1.1.8.bb
-+++ /dev/null
-@@ -1,22 +0,0 @@
--SUMMARY = "Alsa OSS Compatibility Package"
--SECTION = "libs/multimedia"
--LICENSE = "GPL-2.0-only"
--LIC_FILES_CHKSUM = "file://COPYING;md5=ed055b4eff93da784176a01582e6ec1a"
--DEPENDS = "alsa-lib"
--
--SRC_URI = "https://www.alsa-project.org/files/pub/oss-lib/alsa-oss-${PV}.tar.bz2 \
--"
--SRC_URI[md5sum] = "9ec4bb783fdce19032aace086d65d874"
--SRC_URI[sha256sum] = "64adcef5927e848d2e024e64c4bf85b6f395964d9974ec61905ae4cb8d35d68e"
--
--inherit autotools
--
--LEAD_SONAME = "libaoss.so.0"
--
--do_configure:prepend () {
--    touch NEWS README AUTHORS ChangeLog
--    sed -i "s/libaoss.so/${LEAD_SONAME}/" ${S}/alsa/aoss.in
--}
--
--# http://errors.yoctoproject.org/Errors/Details/186961/
--COMPATIBLE_HOST:libc-musl = 'null'
+ inherit meson gobject-introspection gettext features_check pkgconfig
 -- 
 2.38.1
 
