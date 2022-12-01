@@ -1,124 +1,94 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <brgl@bgdev.pl>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0A219C4321E
-	for <webhook@archiver.kernel.org>; Thu,  1 Dec 2022 19:00:06 +0000 (UTC)
-Received: from mail-oi1-f172.google.com (mail-oi1-f172.google.com [209.85.167.172])
- by mx.groups.io with SMTP id smtpd.web11.53499.1669921197425741200
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 545CAC4321E
+	for <webhook@archiver.kernel.org>; Thu,  1 Dec 2022 19:37:16 +0000 (UTC)
+Received: from mail-wr1-f48.google.com (mail-wr1-f48.google.com [209.85.221.48])
+ by mx.groups.io with SMTP id smtpd.web10.54572.1669923428664605618
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 01 Dec 2022 10:59:57 -0800
+ Thu, 01 Dec 2022 11:37:09 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=Gqwa4WET;
- spf=pass (domain: gmail.com, ip: 209.85.167.172, mailfrom: raj.khem@gmail.com)
-Received: by mail-oi1-f172.google.com with SMTP id c129so3082819oia.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 01 Dec 2022 10:59:57 -0800 (PST)
+ dkim=pass header.i=@bgdev-pl.20210112.gappssmtp.com header.s=20210112 header.b=VlOin5Oa;
+ spf=none, err=SPF record not found (domain: bgdev.pl, ip: 209.85.221.48, mailfrom: brgl@bgdev.pl)
+Received: by mail-wr1-f48.google.com with SMTP id y16so4508218wrm.2
+        for <openembedded-devel@lists.openembedded.org>; Thu, 01 Dec 2022 11:37:08 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=CmtKIt6H+D0L9xjOLqmSNO0HDc8zfGgWJKzVNCBa1FA=;
-        b=Gqwa4WETa2QgUY5XV5XyZRj/46yh9kVcJavESJBsqhXnIf34JCpFcq/9Jzmy8P1jKh
-         62tz9pz/YzFKcnT3S2ICHk5RlX2Aywh81VL8bYAo6dzDwKvIQ2vwE2e66j27F2yci7WA
-         qStLhVFjTd+irasiRaOr59ZiGXGgD+4yam113r5BDojEE5nqfc5xpEde8hFv/xtmmn5g
-         v1OFFWUBpnv0nbGg9ysz2jjgKdiBTSScsGaZRK4hPn/+mI1PkJh5668QxdPjQkosLt9Y
-         wb4hEVIckA/Spf9gqMBNsbEQFEjHk8bFUKIIcJ7CpNM91RZL35/A6W0mAuzpu+jBBGoW
-         f2Iw==
+        d=bgdev-pl.20210112.gappssmtp.com; s=20210112;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=/1AfUBtIPrUwwtLxhVmlNBbVGFoxllEej31zGNVdAFs=;
+        b=VlOin5Oa5Ozt868xLXjK9dAvED8RGYSbe/CzTsHKVE5BqamZkjrv6EOjCyyzHrn1JT
+         J0aLbrkYysFd9AdKKhJnkvowIf/XIkGaPcL5Hz7qXLcc/ksEgvN/SiGrtwuTj9Xa5dVr
+         SDsiQ/3ahTPVrPH+uzkS7O3XAz3rRgvZzDltp7LxndgtHiTPbKPGD7GVNZdHA/HX5+XK
+         Xlj/XIuiy2/Mw0B51YijQfgeeCisNfOGhNDq0Zn1oFt9xSf651KVKq1XLZqCytnuSK3R
+         qpZrOSK/e+wxkt445/zNttDiyQNBlRPHKZ2vgQr96L8V7n5tHn11DNndqHN/p+iDZ2y0
+         0S2w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=CmtKIt6H+D0L9xjOLqmSNO0HDc8zfGgWJKzVNCBa1FA=;
-        b=uEvOzAyHimJM9/c2jxroSE6SWUioMxeFQe4jxJT7s5MY0T6jGd2eQ1fbEmFplpF/RT
-         hYyuT7+JHOP7Lt7ej1L8bSVSCKC47EIkBL8eVihRkaQZSzWLZOeYhubMfNM1Rzjhpilb
-         6NnqOpYmnd5/Kr80IPU4+5UTFPT4o9JF3bG+zYILqcG7ozG6fui0cDZg5NM/jlPwVhwm
-         f3iY4zWM9Nx0HmtndiK2wieZ8jIhby39tFfKXBASo+Gvg87B3D/eL0/dqqf3ficMQHnZ
-         qsv+kW8JHS84+xdpKd80q9gcMpExVb76MnANznXf3of1eoscLWvGMr8D8GVwgyhESgvH
-         bAUw==
-X-Gm-Message-State: ANoB5pnATLpJkxpUXjv9q1Mr6ytOHuuCQLEBjOSAr1eOaSX44Z0Q2qkS
-	QpPtZOA6Ot/ucBmVu3/IBusjv+wHQkE/VCBN00gRwigY
-X-Google-Smtp-Source: AA0mqf485iv9bJSW3KeCLcQVSHT/5GOGG9my56RLhZlhQuelM27P6u1sWHkd8iJnolMf4bLKWFohI9kphYKVbOyHL4Y=
-X-Received: by 2002:a54:4491:0:b0:359:d852:616d with SMTP id
- v17-20020a544491000000b00359d852616dmr23731409oiv.55.1669921196534; Thu, 01
- Dec 2022 10:59:56 -0800 (PST)
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=/1AfUBtIPrUwwtLxhVmlNBbVGFoxllEej31zGNVdAFs=;
+        b=dUfFJe9fYC0MKsBNs/BdyoIjdAS0BYoebugvG51uGiVRQ6fYfyx9M7orR7psCNWwja
+         Wn8MfukLBlp17qwutmQBx7nTEbxyRGqAF71e9tnwSTT+1hbdj6DoHEPM8buWgx1h1+Y2
+         FscLLDYhYXNEPwxwrNB9s1HKmNZxwUmKrIVCTSya4xG8pxVNhHnqGd21njz8Kj8njP2v
+         L+V4/4kbntIW6HdSNr4UI4DJe1OR5fYtTMJyVN5BmgJlrILkTxMWb90HS7//OHAs40Vv
+         DS2HNFQCQawl0r4bmoTRZx0w0UlJ/vYhK1779RViljHnW9FBfPUQwZdRKqNbVTUENqwk
+         bJVQ==
+X-Gm-Message-State: ANoB5pmJvpMp+5YJ9X5Q50UWMtR5SwUmtzRV9KOJwm9/+g/662lE+2bb
+	Zf+AN+dWTb71VCHoU7S9oVJzbw==
+X-Google-Smtp-Source: AA0mqf5rzbtYcLTPZTkeNFvj+vcQdXop050rCNGZL5EL3FDctVej+IlamVjcps1MVHJXLZOYf9jI3Q==
+X-Received: by 2002:adf:f54d:0:b0:242:9e6:ea4d with SMTP id j13-20020adff54d000000b0024209e6ea4dmr18483220wrp.251.1669923426583;
+        Thu, 01 Dec 2022 11:37:06 -0800 (PST)
+Received: from brgl-uxlite.home ([2a01:cb1d:334:ac00:26bb:b860:c227:f05d])
+        by smtp.gmail.com with ESMTPSA id i15-20020a05600011cf00b002366e3f1497sm5193266wrx.6.2022.12.01.11.37.05
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 01 Dec 2022 11:37:06 -0800 (PST)
+From: Bartosz Golaszewski <brgl@bgdev.pl>
+To: Khem Raj <raj.khem@gmail.com>,
+	Bruce Ashfield <bruce.ashfield@gmail.com>,
+	openembedded-devel@lists.openembedded.org
+Cc: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
+Subject: [meta-python][PATCH] python3-watchdogdev: new package
+Date: Thu,  1 Dec 2022 20:37:03 +0100
+Message-Id: <20221201193703.3568216-1-brgl@bgdev.pl>
+X-Mailer: git-send-email 2.37.2
 MIME-Version: 1.0
-References: <20221201083456.1573628-1-tomasz.zyjewski@3mdeb.com> <20221201083456.1573628-2-tomasz.zyjewski@3mdeb.com>
-In-Reply-To: <20221201083456.1573628-2-tomasz.zyjewski@3mdeb.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 1 Dec 2022 10:59:30 -0800
-Message-ID: <CAMKF1sqjESDw93VCuR82d4oMkETgK6tPVjwbJophgrHXeSPqwg@mail.gmail.com>
-Subject: Re: [oe] [meta-python][PATCH V3 2/2] python3-uefi-firmware: add
- recipe for version 1.9
-To: tomzy <tomasz.zyjewski@3mdeb.com>
-Cc: openembedded-devel@lists.openembedded.org, michal.kotyla@3mdeb.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 01 Dec 2022 19:00:06 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99903
+ <openembedded-devel@lists.openembedded.org>; Thu, 01 Dec 2022 19:37:16 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99904
 
-please rebase on top of master or master-next and resend
+From: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
 
-On Thu, Dec 1, 2022 at 12:35 AM tomzy <tomasz.zyjewski@3mdeb.com> wrote:
->
-> Install uefi-firmware-parser tool
->
-> The UEFI firmware parseer is a simple module and set of scripts for
-> parsing, extracting, and recreating UEFI firmware volumes.
->
-> Signed-off-by: Tomasz =C5=BByjewski <tomasz.zyjewski@3mdeb.com>
-> ---
->  .../python/python3-uefi-firmware_1.9.bb         | 17 +++++++++++++++++
->  1 file changed, 17 insertions(+)
->  create mode 100644 meta-python/recipes-devtools/python/python3-uefi-firm=
-ware_1.9.bb
->
-> diff --git a/meta-python/recipes-devtools/python/python3-uefi-firmware_1.=
-9.bb b/meta-python/recipes-devtools/python/python3-uefi-firmware_1.9.bb
-> new file mode 100644
-> index 000000000000..3837a17437b1
-> --- /dev/null
-> +++ b/meta-python/recipes-devtools/python/python3-uefi-firmware_1.9.bb
-> @@ -0,0 +1,17 @@
-> +SUMMARY =3D "Various data structures and parsing tools for UEFI firmware=
-."
-> +DESCRIPTION =3D "This package contains Python UEFI firmware parser tool.=
- The \
-> +UEFI firmware parser is a simple module and set of scripts for parsing, =
-\
-> +extracting, and recreating UEFI firmware volumes. This includes parsing =
-\
-> +modules for BIOS, OptionROM, Intel ME and other formats too."
-> +HOMEPAGE =3D "https://github.com/theopolis/uefi-firmware-parser"
-> +AUTHOR =3D "Teddy Reed <teddy@prosauce.org>"
-> +LICENSE =3D "BSD-2-Clause & BSD-3-Clause"
-> +LIC_FILES_CHKSUM =3D "file://setup.py;md5=3D90fa5bae1547550f1c1993f651ed=
-a955"
-> +
-> +SRC_URI =3D "git://github.com/theopolis/uefi-firmware-parser;protocol=3D=
-https;branch=3Dmaster"
-> +
-> +SRCREV =3D "502f1bada1ed11fdd1792646fda0bfafb8fa57fb"
-> +
-> +S =3D "${WORKDIR}/git"
-> +
-> +inherit setuptools3
-> --
-> 2.25.1
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#99883): https://lists.openembedded.org/g/openembedded=
--devel/message/99883
-> Mute This Topic: https://lists.openembedded.org/mt/95377963/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
-aj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
+Add a recipe for watchdogdev - a python module for controlling linux
+watchdog devices.
+
+Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
+---
+ .../recipes-devtools/python/python3-watchdogdev_1.0.0.bb | 9 +++++++++
+ 1 file changed, 9 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-watchdogdev_1.0.0.bb
+
+diff --git a/meta-python/recipes-devtools/python/python3-watchdogdev_1.0.0.bb b/meta-python/recipes-devtools/python/python3-watchdogdev_1.0.0.bb
+new file mode 100644
+index 000000000..3acb366c1
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-watchdogdev_1.0.0.bb
+@@ -0,0 +1,9 @@
++SUMMARY = "Linux watchdog device API for Python."
++HOMEPAGE = "https://github.com/timka/watchdogdev"
++SECTION = "devel/python"
++LICENSE = "Python-2.0"
++LIC_FILES_CHKSUM = "file://setup.py;beginline=47;endline=47;md5=ad880087bee2eb64e368954eb7b99bfd"
++
++inherit pypi setuptools3
++
++SRC_URI[sha256sum] = "776ba57a07aef0084466493f40ce20814a29f8914a10ef8177317d02559fd017"
+-- 
+2.37.2
+
 
