@@ -2,88 +2,86 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D25FFC47089
-	for <webhook@archiver.kernel.org>; Thu,  1 Dec 2022 18:46:05 +0000 (UTC)
-Received: from mail-pj1-f41.google.com (mail-pj1-f41.google.com [209.85.216.41])
- by mx.groups.io with SMTP id smtpd.web11.53027.1669920356955418286
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 04E51C47089
+	for <webhook@archiver.kernel.org>; Thu,  1 Dec 2022 18:53:46 +0000 (UTC)
+Received: from mail-pl1-f180.google.com (mail-pl1-f180.google.com [209.85.214.180])
+ by mx.groups.io with SMTP id smtpd.web11.53282.1669920821143119069
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 01 Dec 2022 10:45:57 -0800
+ Thu, 01 Dec 2022 10:53:41 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=qpW2q+gc;
- spf=pass (domain: gmail.com, ip: 209.85.216.41, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f41.google.com with SMTP id k2-20020a17090a4c8200b002187cce2f92so6079773pjh.2
-        for <openembedded-devel@lists.openembedded.org>; Thu, 01 Dec 2022 10:45:56 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=FhB/guvh;
+ spf=pass (domain: gmail.com, ip: 209.85.214.180, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f180.google.com with SMTP id d3so2489906plr.10
+        for <openembedded-devel@lists.openembedded.org>; Thu, 01 Dec 2022 10:53:41 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=KxlYRfF+66DsiyGV/bZ2x4r5/CTWwr2okPCRwWADhFY=;
-        b=qpW2q+gcqSWXoABzTRbRHQL8MhB21LgxFEZ6AYqR49OdSavPrGs5ZUnozNTV+/t6QI
-         TR6W4NafcU3w82PQbVjPJIqQv/9I5xh1yj8WoBmbsYJqgQCileFE5Dig5n273AQBPWK6
-         VR0zZlvVY6HSIz578BjjMO+1WM8jB0tgPvAC2XMW9OwleEftZwZncgwp4j/Tu4/gTmoz
-         Zny5+rYaElqIG4F7PLBx7XjRQ/XP+VpEtyxYJpS2b4p8twG9NXLE9+P4X7TjpvQJqtMp
-         VFZ0X32PYaEShvagaPXDVnLHuGK4MhaEcfqpj5LjDK7Qy8qSkNlzROA8nk2YvcZ9t0nk
-         X3AQ==
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=FVNkfGklIvakvmFunXB7/ppCs0rc9aV/MCaUQIn+h78=;
+        b=FhB/guvhd74bmyEq9iu8C0cUdmd6iPjK1/Vsc4lQ2V/1LHOoLs26Mx/yeszVqwAWae
+         OI/eHRDU83Zu9a+54CcbLUa8MMaEKcwQGSY9PxvSUEU9DtCfHeJVnfATLBH18raSlKD8
+         EF68TTJhhASCFYO8hGjOhDFO3C8pR8QEEnfHDn+cftrNxiykBo8ezG5014yzeKFQxj+p
+         U6mk9De19rkcnJ3mWXB08sBapyAZw7wW2zZQdJQcv8bDb9+TnzxUyqQZUxsqGLmACWk9
+         0GTpTp34zZ1FOmXoyaZYFrrEEwu7LwMoxOgb6j0/fWr+Ioep0qej9zLOMPHv+JJv3myc
+         ITug==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=KxlYRfF+66DsiyGV/bZ2x4r5/CTWwr2okPCRwWADhFY=;
-        b=qgiqPrZVeTJVzJftnN7BYGJUEShAOVxCbuOTt1qusQzVniHJpi+EeG0tduDpJaZjjJ
-         Ocj2hvx+392NdKaqWh38eWfvOdo4LIgz5ISR4rxW5wOBv8JHaFsECTncDvmwxRYa6OcP
-         HLoZ8icU5z+mVUBlOHMYJqT/GwL43GVQGx5ecrm8MO6U/6/kSEhhQZ4DTRAy+5BAKHZ8
-         U2A9IF5oI2cDCCYczF7d7RHpWlWN4TDrItRoRyCSnSW9c3k4vOevibyyPaZ3Vc4s/E9x
-         XEI+d8oZh5ZiJXbrkB8c5Hkyj5U2R57g/PBjxQ772lWJryykKTKfexb5QUtwbXLeUT9t
-         cLxA==
-X-Gm-Message-State: ANoB5pl+LX2PdwHN/ITG5z9NjTDN0zNCoOlWTBKOGZV8X/F75CYCaX3S
-	tGmhfllxHFAGu02Fy6RKaGOOqe0WrRM=
-X-Google-Smtp-Source: AA0mqf5yJmRnk24JYcl1VVqptiscumjvxJdxqcs/M7g2OScQmRh++KBPpCrLToa23aviUSxbcTJgGw==
-X-Received: by 2002:a17:903:2787:b0:189:b8a2:27ef with SMTP id jw7-20020a170903278700b00189b8a227efmr1308523plb.60.1669920356116;
-        Thu, 01 Dec 2022 10:45:56 -0800 (PST)
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=FVNkfGklIvakvmFunXB7/ppCs0rc9aV/MCaUQIn+h78=;
+        b=XWcvxBLeQhXODYBHVZZ23uQlw785do5b9o3JXzwYJ41gg2nPDTLuwE/QQ+mVujX/0S
+         Tp5I2CO+wiiNI0ml821ZyATu11holmQegqd5gEBWAK9KER9015jw7IAWdB093zRJKaiN
+         81gDNyMpJnua0/AZ4O4QFlGTYL2edgc33qYKRV/ZgNoXXlKRNE8QSUhYoGg1UuZy2h6J
+         91pQ1Q1fVpvbdV0R/4mWjL4lyN7ablVHD+d4GmyCRzQeF+wYVig71RL1EBgv32yjaaIO
+         32LVv17WabR3/iAHCDMC2384/bl27yNVgzOJrRxK+LpW45SlUDdZAXFENBp/1JHlT1Rr
+         63Sg==
+X-Gm-Message-State: ANoB5pmqZb6GPO7PX8x8xxUeR1Bnut5BiBBcpK6HqCICi/QLNJWdWveP
+	WYIkiPXEn8qaA02ANnKnsaIWATlJiNw=
+X-Google-Smtp-Source: AA0mqf5H+x3oRCs63E6MvM1yCpg5VfsN6V3KmqBo/UlJhuHSI6vk/1s9S2XRM9Xb9t2VMsMUkKiDKQ==
+X-Received: by 2002:a17:90a:e398:b0:219:61e2:226b with SMTP id b24-20020a17090ae39800b0021961e2226bmr10686585pjz.11.1669920820222;
+        Thu, 01 Dec 2022 10:53:40 -0800 (PST)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9181:1cf0::d00])
-        by smtp.gmail.com with ESMTPSA id n16-20020a170902e55000b00188a1ae94bbsm4018120plf.23.2022.12.01.10.45.55
+        by smtp.gmail.com with ESMTPSA id c15-20020a170902d48f00b001890cbd1ff1sm4016961plg.149.2022.12.01.10.53.39
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 01 Dec 2022 10:45:55 -0800 (PST)
+        Thu, 01 Dec 2022 10:53:39 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 3/5] fontforge: Inherit python3targetconfig
-Date: Thu,  1 Dec 2022 10:45:49 -0800
-Message-Id: <20221201184551.35272-3-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH] opencv: Check for commercial_ffmpeg as well to enable ffmpeg
+Date: Thu,  1 Dec 2022 10:53:37 -0800
+Message-Id: <20221201185337.77283-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.38.1
-In-Reply-To: <20221201184551.35272-1-raj.khem@gmail.com>
-References: <20221201184551.35272-1-raj.khem@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 01 Dec 2022 18:46:05 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99899
+ <openembedded-devel@lists.openembedded.org>; Thu, 01 Dec 2022 18:53:46 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99902
 
-It currently ends up using native python3-config which adds native paths
-to compiler includes which is not what we want.
+syntax for LICENSE_FLAGS_ACCEPTED can be "type_package" format as well
+and some distros may enable commercial license selectively by not using
+"commercial" as broadbrush but "commercial_ffmpeg" to just enable libav
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-oe/recipes-graphics/fontforge/fontforge_20220308.bb | 2 +-
+ meta-oe/recipes-support/opencv/opencv_4.6.0.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-graphics/fontforge/fontforge_20220308.bb b/meta-oe/recipes-graphics/fontforge/fontforge_20220308.bb
-index c53f2db01b..ddb4443baa 100644
---- a/meta-oe/recipes-graphics/fontforge/fontforge_20220308.bb
-+++ b/meta-oe/recipes-graphics/fontforge/fontforge_20220308.bb
-@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = " \
- DEPENDS = "python3 glib-2.0 pango giflib tiff libxml2 jpeg libtool uthash gettext-native libspiro"
- DEPENDS:append:class-target = " libxi"
+diff --git a/meta-oe/recipes-support/opencv/opencv_4.6.0.bb b/meta-oe/recipes-support/opencv/opencv_4.6.0.bb
+index 158cb63423..4403af1952 100644
+--- a/meta-oe/recipes-support/opencv/opencv_4.6.0.bb
++++ b/meta-oe/recipes-support/opencv/opencv_4.6.0.bb
+@@ -109,7 +109,7 @@ EXTRA_OECMAKE:remove:x86 = " -DENABLE_SSE41=1 -DENABLE_SSE42=1"
  
--inherit cmake pkgconfig python3native features_check gettext gtk-icon-cache mime mime-xdg
-+inherit cmake pkgconfig python3native python3targetconfig features_check gettext gtk-icon-cache mime mime-xdg
+ PACKAGECONFIG ??= "gapi python3 eigen jpeg png tiff v4l libv4l gstreamer samples tbb gphoto2 \
+     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "gtk", "", d)} \
+-    ${@bb.utils.contains("LICENSE_FLAGS_ACCEPTED", "commercial", "libav", "", d)}"
++    ${@bb.utils.contains_any("LICENSE_FLAGS_ACCEPTED", "commercial_ffmpeg commercial", "libav", "", d)}"
  
- REQUIRED_DISTRO_FEATURES:append:class-target = " x11"
- 
+ # TBB does not build for powerpc so disable that package config
+ PACKAGECONFIG:remove:powerpc = "tbb"
 -- 
 2.38.1
 
