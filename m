@@ -1,137 +1,130 @@
-Return-Path: <tomasz.zyjewski@3mdeb.com>
+Return-Path: <changqing.li@eng.windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E73B9C4332F
-	for <webhook@archiver.kernel.org>; Fri,  2 Dec 2022 06:51:39 +0000 (UTC)
-Subject: Re: [meta-python][PATCH V3 2/2] python3-uefi-firmware: add recipe for version 1.9
-To: openembedded-devel@lists.openembedded.org
-From: "tomzy" <tomasz.zyjewski@3mdeb.com>
-X-Originating-Location: Warsaw, Mazovia, PL (84.10.27.202)
-X-Originating-Platform: Linux Firefox 107
-User-Agent: GROUPS.IO Web Poster
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B6041C4332F
+	for <webhook@archiver.kernel.org>; Fri,  2 Dec 2022 09:45:00 +0000 (UTC)
+Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
+ by mx.groups.io with SMTP id smtpd.web10.71212.1669974294899521511
+ for <openembedded-devel@lists.openembedded.org>;
+ Fri, 02 Dec 2022 01:44:55 -0800
+Authentication-Results: mx.groups.io;
+ dkim=pass header.i=@windriver.com header.s=pps06212021 header.b=dppgOXcQ;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=933539f9f9=changqing.li@windriver.com)
+Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 2B29dNRF019552
+	for <openembedded-devel@lists.openembedded.org>; Fri, 2 Dec 2022 01:44:54 -0800
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com; h=from : to :
+ subject : date : message-id : mime-version : content-transfer-encoding :
+ content-type; s=PPS06212021;
+ bh=7CzWTYV614wyEnHhX1JLa0AyhKkn6naTMxKQxgpZ//c=;
+ b=dppgOXcQ0vqZaLGlid0P4XtaIhjUSRV+zLdXtbPCkM1zxxjRPC37Qphe9qjBDq1sTgrJ
+ rDEpn0rs7Gt6d65nhQ/A8f6U6cosjU3dvTv28YGqoNL3/E23gEFu5AWPXfqHUcowG5S6
+ urtBbp7EW3uzH/VIqR/UmHuA2wAR57kF7ClBIJFaghc3cNpdRE5pAW8BleoZ3XnPjKhD
+ OP6UrYOP8OVPXP+2a9cW7FyxCTm5GImOML7wh/Mzit5Tbf9G064V8mwBXyDrwQfvGBi6
+ wSkVq2VRliMaB9EsFZ5KEgOjW5JAERIlT16YPPTocq0M2mByJLTuHs0I5hUZ/L8HzD4j pg== 
+Received: from ala-exchng01.corp.ad.wrs.com (unknown-82-252.windriver.com [147.11.82.252])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3m3ey954hj-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Fri, 02 Dec 2022 01:44:54 -0800
+Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2242.12; Fri, 2 Dec 2022 01:44:53 -0800
+Received: from pek-lpg-core2.wrs.com (128.224.153.41) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
+ 15.1.2242.12 via Frontend Transport; Fri, 2 Dec 2022 01:44:52 -0800
+From: <changqing.li@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [meta-oe][PATCH] keyutils: fix ptest failed since "+++ Can't Determine Endianness"
+Date: Fri, 2 Dec 2022 17:44:52 +0800
+Message-ID: <20221202094452.2379260-1-changqing.li@windriver.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Date: Thu, 01 Dec 2022 22:51:32 -0800
-References: <CAMKF1sqjESDw93VCuR82d4oMkETgK6tPVjwbJophgrHXeSPqwg@mail.gmail.com>
-In-Reply-To: <CAMKF1sqjESDw93VCuR82d4oMkETgK6tPVjwbJophgrHXeSPqwg@mail.gmail.com>
-Message-ID: <6562.1669963892263015789@lists.openembedded.org>
-Content-Type: multipart/alternative; boundary="0tN4gqYc9MhS8HU0L612"
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Proofpoint-GUID: sdWVPx3FqUAaW4FVYtDfa0h_VLPcUzVB
+X-Proofpoint-ORIG-GUID: sdWVPx3FqUAaW4FVYtDfa0h_VLPcUzVB
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.219,Aquarius:18.0.923,Hydra:6.0.545,FMLib:17.11.122.1
+ definitions=2022-12-02_04,2022-12-01_01,2022-06-22_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 clxscore=1015 bulkscore=0
+ spamscore=0 phishscore=0 suspectscore=0 priorityscore=1501 impostorscore=0
+ malwarescore=0 lowpriorityscore=0 mlxscore=0 mlxlogscore=999 adultscore=0
+ classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2210170000
+ definitions=main-2212020075
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 02 Dec 2022 06:51:39 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99910
+ <openembedded-devel@lists.openembedded.org>; Fri, 02 Dec 2022 09:45:00 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99911
 
---0tN4gqYc9MhS8HU0L612
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
+From: Changqing Li <changqing.li@windriver.com>
 
-On Thu, Dec 1, 2022 at 07:59 PM, Khem Raj wrote:
+All the ptest cases are failed since error "+++ Can't Determine Endianness",
+update the regex for matching the endianness to fix this issue.
 
->=20
-> please rebase on top of master or master-next and resend
+Signed-off-by: Changqing Li <changqing.li@windriver.com>
+---
+ ...c.sh-update-regex-for-getting-endian.patch | 35 +++++++++++++++++++
+ .../keyutils/keyutils_1.6.1.bb                |  1 +
+ 2 files changed, 36 insertions(+)
+ create mode 100644 meta-oe/recipes-security/keyutils/files/0001-tests-toolbox.inc.sh-update-regex-for-getting-endian.patch
 
-There it is https://lists.openembedded.org/g/openembedded-devel/message/999=
-09
+diff --git a/meta-oe/recipes-security/keyutils/files/0001-tests-toolbox.inc.sh-update-regex-for-getting-endian.patch b/meta-oe/recipes-security/keyutils/files/0001-tests-toolbox.inc.sh-update-regex-for-getting-endian.patch
+new file mode 100644
+index 0000000000..728f464331
+--- /dev/null
++++ b/meta-oe/recipes-security/keyutils/files/0001-tests-toolbox.inc.sh-update-regex-for-getting-endian.patch
+@@ -0,0 +1,35 @@
++From 935a31dd6f14bd1aff735495f0fdbae4ca05c695 Mon Sep 17 00:00:00 2001
++From: Changqing Li <changqing.li@windriver.com>
++Date: Fri, 2 Dec 2022 15:35:40 +0800
++Subject: [PATCH] tests/toolbox.inc.sh: update regex for getting endian
++
++Update regex for getting endian in following condition:
++/proc/777/exe: ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2
++
++Upstream-Status: Submited [Submitted to keyrings@vger.kernel.org ]
++
++Signed-off-by: Changqing Li <changqing.li@windriver.com>
++---
++ tests/toolbox.inc.sh | 4 ++--
++ 1 file changed, 2 insertions(+), 2 deletions(-)
++
++diff --git a/tests/toolbox.inc.sh b/tests/toolbox.inc.sh
++index 1964450..e827e20 100644
++--- a/tests/toolbox.inc.sh
+++++ b/tests/toolbox.inc.sh
++@@ -13,10 +13,10 @@
++ echo === $OUTPUTFILE ===
++ 
++ endian=`file -L /proc/$$/exe`
++-if expr "$endian" : '.* MSB \+\(executable\|shared object\).*' >&/dev/null
+++if expr "$endian" : '.* MSB .*\(executable\|shared object\).*' >&/dev/null
++ then
++     endian=BE
++-elif expr "$endian" : '.* LSB \+\(executable\|shared object\).*' >&/dev/null
+++elif expr "$endian" : '.* LSB .*\(executable\|shared object\).*' >&/dev/null
++ then
++     endian=LE
++ else
++-- 
++2.25.1
++
+diff --git a/meta-oe/recipes-security/keyutils/keyutils_1.6.1.bb b/meta-oe/recipes-security/keyutils/keyutils_1.6.1.bb
+index 8a95a15f6f..019118f38b 100644
+--- a/meta-oe/recipes-security/keyutils/keyutils_1.6.1.bb
++++ b/meta-oe/recipes-security/keyutils/keyutils_1.6.1.bb
+@@ -19,6 +19,7 @@ SRC_URI = "http://people.redhat.com/dhowells/keyutils/${BP}.tar.bz2 \
+            file://keyutils-fix-error-report-by-adding-default-message.patch \
+            file://run-ptest \
+            file://fix_library_install_path.patch \
++           file://0001-tests-toolbox.inc.sh-update-regex-for-getting-endian.patch \
+            "
+ 
+ SRC_URI[md5sum] = "919af7f33576816b423d537f8a8692e8"
+-- 
+2.25.1
 
->=20
->=20
-> On Thu, Dec 1, 2022 at 12:35 AM tomzy <tomasz.zyjewski@3mdeb.com> wrote:
->=20
->> Install uefi-firmware-parser tool
->>=20
->> The UEFI firmware parseer is a simple module and set of scripts for
->> parsing, extracting, and recreating UEFI firmware volumes.
->>=20
->> Signed-off-by: Tomasz =C5=BByjewski <tomasz.zyjewski@3mdeb.com>
->> ---
->> .../python/python3-uefi-firmware_1.9.bb | 17 +++++++++++++++++
->> 1 file changed, 17 insertions(+)
->> create mode 100644
->> meta-python/recipes-devtools/python/python3-uefi-firmware_1.9.bb
->>=20
->> diff --git
->> a/meta-python/recipes-devtools/python/python3-uefi-firmware_1.9.bb
->> b/meta-python/recipes-devtools/python/python3-uefi-firmware_1.9.bb
->> new file mode 100644
->> index 000000000000..3837a17437b1
->> --- /dev/null
->> +++ b/meta-python/recipes-devtools/python/python3-uefi-firmware_1.9.bb
->> @@ -0,0 +1,17 @@
->> +SUMMARY =3D "Various data structures and parsing tools for UEFI firmwar=
-e."
->> +DESCRIPTION =3D "This package contains Python UEFI firmware parser tool=
-.
->> The \
->> +UEFI firmware parser is a simple module and set of scripts for parsing,=
- \
->>=20
->> +extracting, and recreating UEFI firmware volumes. This includes parsing=
- \
->>=20
->> +modules for BIOS, OptionROM, Intel ME and other formats too."
->> +HOMEPAGE =3D " https://github.com/theopolis/uefi-firmware-parser"
->> +AUTHOR =3D "Teddy Reed <teddy@prosauce.org>"
->> +LICENSE =3D "BSD-2-Clause & BSD-3-Clause"
->> +LIC_FILES_CHKSUM =3D "file://setup.py;md5=3D90fa5bae1547550f1c1993f651e=
-da955"
->>=20
->> +
->> +SRC_URI =3D
->> "git://github.com/theopolis/uefi-firmware-parser;protocol=3Dhttps;branch=
-=3Dmaster"
->>=20
->> +
->> +SRCREV =3D "502f1bada1ed11fdd1792646fda0bfafb8fa57fb"
->> +
->> +S =3D "${WORKDIR}/git"
->> +
->> +inherit setuptools3
->> --
->> 2.25.1
->>=20
->>=20
->>=20
->=20
->
-
---0tN4gqYc9MhS8HU0L612
-Content-Type: text/html; charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
-
-On Thu, Dec 1, 2022 at 07:59 PM, Khem Raj wrote:<br />
-<blockquote>please rebase on top of master or master-next and resend</block=
-quote>
-There it is https://lists.openembedded.org/g/openembedded-devel/message/999=
-09<br />
-<blockquote><br />On Thu, Dec 1, 2022 at 12:35 AM tomzy &lt;tomasz.zyjewski=
-@3mdeb.com&gt; wrote:<br />
-<blockquote>Install uefi-firmware-parser tool<br /><br />The UEFI firmware =
-parseer is a simple module and set of scripts for<br />parsing, extracting,=
- and recreating UEFI firmware volumes.<br /><br />Signed-off-by: Tomasz =C5=
-=BByjewski &lt;tomasz.zyjewski@3mdeb.com&gt;<br />---<br />.../python/pytho=
-n3-uefi-firmware_1.9.bb | 17 +++++++++++++++++<br />1 file changed, 17 inse=
-rtions(+)<br />create mode 100644 meta-python/recipes-devtools/python/pytho=
-n3-uefi-firmware_1.9.bb<br /><br />diff --git a/meta-python/recipes-devtool=
-s/python/python3-uefi-firmware_1.9.bb b/meta-python/recipes-devtools/python=
-/python3-uefi-firmware_1.9.bb<br />new file mode 100644<br />index 00000000=
-0000..3837a17437b1<br />--- /dev/null<br />+++ b/meta-python/recipes-devtoo=
-ls/python/python3-uefi-firmware_1.9.bb<br />@@ -0,0 +1,17 @@<br />+SUMMARY =
-=3D "Various data structures and parsing tools for UEFI firmware."<br />+DE=
-SCRIPTION =3D "This package contains Python UEFI firmware parser tool. The =
-\<br />+UEFI firmware parser is a simple module and set of scripts for pars=
-ing, \<br />+extracting, and recreating UEFI firmware volumes. This include=
-s parsing \<br />+modules for BIOS, OptionROM, Intel ME and other formats t=
-oo."<br />+HOMEPAGE =3D "<a href=3D"https://github.com/theopolis/uefi-firmw=
-are-parser&quot;" target=3D"_blank" rel=3D"noopener">https://github.com/the=
-opolis/uefi-firmware-parser"</a><br />+AUTHOR =3D "Teddy Reed &lt;teddy@pro=
-sauce.org&gt;"<br />+LICENSE =3D "BSD-2-Clause &amp; BSD-3-Clause"<br />+LI=
-C_FILES_CHKSUM =3D "file://setup.py;md5=3D90fa5bae1547550f1c1993f651eda955"=
-<br />+<br />+SRC_URI =3D "git://github.com/theopolis/uefi-firmware-parser;=
-protocol=3Dhttps;branch=3Dmaster"<br />+<br />+SRCREV =3D "502f1bada1ed11fd=
-d1792646fda0bfafb8fa57fb"<br />+<br />+S =3D "${WORKDIR}/git"<br />+<br />+=
-inherit setuptools3<br />--<br />2.25.1<br /><br /><br /></blockquote>
-</blockquote>
-
---0tN4gqYc9MhS8HU0L612--
 
