@@ -1,122 +1,93 @@
-Return-Path: <wangmy@fujitsu.com>
+Return-Path: <festevam@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CAAF2C352A1
-	for <webhook@archiver.kernel.org>; Sat,  3 Dec 2022 11:20:38 +0000 (UTC)
-Received: from mail1.bemta34.messagelabs.com (mail1.bemta34.messagelabs.com [195.245.231.2])
- by mx.groups.io with SMTP id smtpd.web11.101818.1670066429585815207
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 58F98C352A1
+	for <webhook@archiver.kernel.org>; Sat,  3 Dec 2022 12:47:59 +0000 (UTC)
+Received: from mail-oa1-f42.google.com (mail-oa1-f42.google.com [209.85.160.42])
+ by mx.groups.io with SMTP id smtpd.web11.103034.1670071671761369640
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 03 Dec 2022 03:20:29 -0800
+ Sat, 03 Dec 2022 04:47:51 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=CbdCEMp1;
- spf=pass (domain: fujitsu.com, ip: 195.245.231.2, mailfrom: wangmy@fujitsu.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1670066428; i=@fujitsu.com;
-	bh=AZdM5HcMzsYOp02vlYioKqI8tYJ6GytgDoZXQN3E8yo=;
-	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type;
-	b=CbdCEMp1vRnKY0gA8QunLo8pS+95J4hYgyRf/Xua0ES/ArZDB/1lBRvUYkBvfmlOw
-	 Z1XxKB1CqAeupS5zR17WOpk5ZyQreql8ohiznISnKa6RizonGNoxpwNuPm/irqvERL
-	 HeeGBqGEmIRnODEFMCGpVf3qeFBwwwWiia8XAB8teY9QDuRzIAONFQwPyZs2XsMgDt
-	 9BQ5Gt+N8AexTHiaT3/1pOckvxvpMa1rPCGexsQUqP+SVJqOnaHLzGOOY34XdQN81I
-	 FY+byDBCaZaCrv2y0C8M4v33Duuj1GDz0wTGIhChOuEZh5ym80mEgUVJhnJ7WC12sW
-	 GLwVOHRLtmhqQ==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrEIsWRWlGSWpSXmKPExsViZ8ORqPvboDv
-  ZYO4TVouLh5cyOzB6nNu4gjGAMYo1My8pvyKBNWPV79ksBQf4KpZ3n2duYLzP08XIxSEk8IRR
-  4vWmdhYI5zqTRPe7Z+wQzm5GidOLb7F1MXJysAlISdy4/x/MFhHQl1g6ew8ziM0soCLx4ncPO
-  4gtLOAhcaK9mRXEZgGKb91+CCzOK+AkseDgZDBbQkBBYsrD92C9nALOEl0bF4PVCwHVTO6ayw
-  JRLyhxcuYTFoj5EhIHX7xghuhVlJh9uZkFwq6QmDWrjQnCVpO4em4T8wRGwVlI2mchaV/AyLS
-  K0bQ4tagstUjXRC+pKDM9oyQ3MTNHL7FKN1EvtVS3PLW4RNdIL7G8WC+1uFivuDI3OSdFLy+1
-  ZBMjMHhTilU9dzD+WfpH7xCjJAeTkijvsbCuZCG+pPyUyozE4oz4otKc1OJDjDIcHEoSvIH63
-  clCgkWp6akVaZk5wEiCSUtw8CiJ8HapAqV5iwsSc4sz0yFSpxh1OWZ+bTvALMSSl5+XKiXOqw
-  QyQwCkKKM0D24ELKovMcpKCfMyMjAwCPEUpBblZpagyr9iFOdgVBLmFdMDmsKTmVcCt+kV0BF
-  MQEds5O8COaIkESEl1cAkdFPr0ocZd+TdHVn72BetdZopcXxZ/p8qjrLtYSbh98yEdgLTlebx
-  c1bfsr7csPzodjTp4sWJDIIrz97I47zB1flkoRv3GU/Zxecszi3h/Hm/yEZNLsvUYx3T5+LzK
-  +8pvb50gvfg427NAwtnthk5i3yKYtu6w+P382rfh//TPvHsd/ha8UfS5rMmq3iy0JbHvz/m62
-  W1nH8m8PN5l9Axoc3Zz3Zr/7684bWyj7UrV+k2i6Ocv8I/M+1dc+JXUHwXw5rfKvciJjlevW9
-  zbHfAzVKXyMADs/8+VljTIFSWEMw8z+NVjKJhcXriie2MKfOLPzjrnl9+ceWRy5sWd7/fxumi
-  ufD5nRnGZ2PMH+wUVGIpzkg01GIuKk4EADw/ad5lAwAA
-X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-7.tower-548.messagelabs.com!1670066426!65265!1
-X-Originating-IP: [62.60.8.97]
-X-SYMC-ESS-Client-Auth: outbound-route-from=pass
-X-StarScan-Received: 
-X-StarScan-Version: 9.101.1; banners=-,-,-
-X-VirusChecked: Checked
-Received: (qmail 8256 invoked from network); 3 Dec 2022 11:20:27 -0000
-Received: from unknown (HELO n03ukasimr01.n03.fujitsu.local) (62.60.8.97)
-  by server-7.tower-548.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 3 Dec 2022 11:20:27 -0000
-Received: from n03ukasimr01.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTP id C9C5210018D
-	for <openembedded-devel@lists.openembedded.org>; Sat,  3 Dec 2022 11:20:26 +0000 (GMT)
-Received: from R01UKEXCASM126.r01.fujitsu.local (R01UKEXCASM126 [10.183.43.178])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTPS id BE062100182
-	for <openembedded-devel@lists.openembedded.org>; Sat,  3 Dec 2022 11:20:26 +0000 (GMT)
-Received: from localhost.localdomain (10.167.225.33) by
- R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.42; Sat, 3 Dec 2022 11:20:25 +0000
-From: <wangmy@fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-networking] [PATCH] smcroute: upgrade 2.5.5 -> 2.5.6
-Date: Sat, 3 Dec 2022 19:19:54 +0800
-Message-ID: <1670066396-24989-3-git-send-email-wangmy@fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
-In-Reply-To: <1670066396-24989-1-git-send-email-wangmy@fujitsu.com>
-References: <1670066396-24989-1-git-send-email-wangmy@fujitsu.com>
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=aCGlwpLN;
+ spf=pass (domain: gmail.com, ip: 209.85.160.42, mailfrom: festevam@gmail.com)
+Received: by mail-oa1-f42.google.com with SMTP id 586e51a60fabf-1445ca00781so1828935fac.1
+        for <openembedded-devel@lists.openembedded.org>; Sat, 03 Dec 2022 04:47:51 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=XEWwAGzM9ZuT0xWHe5tJ0r90x/ihMNXxH8u59Cbuai4=;
+        b=aCGlwpLN64iGnPLqDdtXyeVah3H0RmpnvdJSB8Vvrfs2VDUGPcBAe5reyfv5/jJ/46
+         QophTLre75BAGN3nSXNh66/GhcyTDSC5/vEzvYs6aweH387RQrVk4NrwwfZEJLI2Z1nN
+         IB0wC27Rn2sitXsaKuxvgKAFf/59lOtPGvFm3qOMv1ZJJvFelKTjyOa8iR7agjMjIOwO
+         TedF54QS/p/fBNkSVCn7CsfFHL0bENOkZKeS2+fJa4MVhWFLVDTJL8K66fuuMEORNQWM
+         XAmfkTKUEtGW2kkWg/v896u5iiEnTy5YYKcBos3joMikav9F9kxcUcpPYv49plSlan8Q
+         GbWw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=XEWwAGzM9ZuT0xWHe5tJ0r90x/ihMNXxH8u59Cbuai4=;
+        b=s5OEt0dLU4fTLUazKytnDcusLfUIa/8HHxOrnn39vkM/+FhFHoxTR7qWHaXHmsB55h
+         wlostv61hk7yvoU0MoJbgi7fRY73zkITIJoEp8tsh0JgWhzXoCIj3REBIhuzJknQsict
+         Y9nfSjpZPn/Q4UAS4/pOwj1R8gOJKjuUNGMP3PTAC+zKMEslbW4BL+wugX5XvWgT+o2x
+         IvFk5Io5ztDbJF71cnenqOxiU3NEuuODAbZYM6xw95LladiQIpClfmz0HLR2391Pte3Y
+         ijixKx/EVB8aZaeggrNaJxlQ9rpS2nW2Pclzmj0LTIZtw1lnUg5Mj8hTOZLdCLLkCBg3
+         lBnQ==
+X-Gm-Message-State: ANoB5pn255iHJhw70mjudKLs6Ub/7jXsGXbLdCPPGx2XyRSeS9/0Jvtg
+	kasOqP4ZroZqZeQIvB67+xxLGciZgVw=
+X-Google-Smtp-Source: AA0mqf5Gpvwede+HuEkIe0HNBkzUip1X+JBuCqiuA+93YEQ04rjPD/04DqCEAPQc4mMDIw+iDhJCgw==
+X-Received: by 2002:a05:6871:792:b0:141:c075:9346 with SMTP id o18-20020a056871079200b00141c0759346mr31647153oap.30.1670071670253;
+        Sat, 03 Dec 2022 04:47:50 -0800 (PST)
+Received: from localhost.localdomain ([2804:431:d77e:9e9e:dfd6:58ac:75b7:34d2])
+        by smtp.gmail.com with ESMTPSA id f14-20020a4ad80e000000b0049fb39100a5sm4021011oov.37.2022.12.03.04.47.48
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sat, 03 Dec 2022 04:47:49 -0800 (PST)
+From: Fabio Estevam <festevam@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Fabio Estevam <festevam@denx.de>
+Subject: [PATCH] remmina: Update to 1.4.28
+Date: Sat,  3 Dec 2022 09:47:26 -0300
+Message-Id: <20221203124726.40982-1-festevam@gmail.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Type: text/plain
-X-Originating-IP: [10.167.225.33]
-X-ClientProxiedBy: G08CNEXCHPEKD07.g08.fujitsu.local (10.167.33.80) To
- R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
-X-Virus-Scanned: ClamAV using ClamSMTP
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 03 Dec 2022 11:20:38 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99938
+ <openembedded-devel@lists.openembedded.org>; Sat, 03 Dec 2022 12:47:59 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99941
 
-From: Wang Mingyu <wangmy@fujitsu.com>
+From: Fabio Estevam <festevam@denx.de>
 
-Changelog:
-==========
-- Add smcroutectl batch support, issue #189. Based on the IPC support added in issue #185
-- Fix #178: invalid systemd daemon type Simple/Notify vs simple/notify
-- Fix #179: typo in wildcard routes section of README
-- Fix #180: minor typo in file and directory names in documentation
-- Fix #183: casting in IPC code hides error handling of recv()
-- Fix #186: NULL pointer dereference in utimensat() replacement function.
-  Found accidentally by Alexey Smirnov. Only triggered on systems that don't
-  have a native utimensat() in their C-library, or if you try to build
-  SMCRoute without using its own build system ...
-- Fix #187: strange behavior joining/leaving the same group
-- Fix #192: typo in README
+Update to the 1.4.28 version, which includes the following changes:
 
-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+https://gitlab.com/Remmina/Remmina/-/compare/v1.4.27...v1.4.28
+
+Signed-off-by: Fabio Estevam <festevam@denx.de>
 ---
- .../smcroute/{smcroute_2.5.5.bb => smcroute_2.5.6.bb}           | 2 +-
+ .../remmina/{remmina_1.4.27.bb => remmina_1.4.28.bb}            | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-networking/recipes-support/smcroute/{smcroute_2.5.5.bb => smcroute_2.5.6.bb} (90%)
+ rename meta-oe/recipes-support/remmina/{remmina_1.4.27.bb => remmina_1.4.28.bb} (96%)
 
-diff --git a/meta-networking/recipes-support/smcroute/smcroute_2.5.5.bb b/meta-networking/recipes-support/smcroute/smcroute_2.5.6.bb
-similarity index 90%
-rename from meta-networking/recipes-support/smcroute/smcroute_2.5.5.bb
-rename to meta-networking/recipes-support/smcroute/smcroute_2.5.6.bb
-index b0b96bed8..09752825c 100644
---- a/meta-networking/recipes-support/smcroute/smcroute_2.5.5.bb
-+++ b/meta-networking/recipes-support/smcroute/smcroute_2.5.6.bb
-@@ -5,7 +5,7 @@ SECTION = "net"
- LICENSE = "GPL-2.0-or-later"
- LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
+diff --git a/meta-oe/recipes-support/remmina/remmina_1.4.27.bb b/meta-oe/recipes-support/remmina/remmina_1.4.28.bb
+similarity index 96%
+rename from meta-oe/recipes-support/remmina/remmina_1.4.27.bb
+rename to meta-oe/recipes-support/remmina/remmina_1.4.28.bb
+index 7eb87a00552c..aacba787ae5e 100644
+--- a/meta-oe/recipes-support/remmina/remmina_1.4.27.bb
++++ b/meta-oe/recipes-support/remmina/remmina_1.4.28.bb
+@@ -25,7 +25,7 @@ DEPENDS = " \
+ DEPENDS:append:libc-musl = " libexecinfo"
+ LDFLAGS:append:libc-musl = " -lexecinfo"
  
--SRCREV = "9ca7441add4427a91fe90c34ae4a178ed9a50553"
-+SRCREV = "999bdd724a1f963ac8bfd0598ffdd2a3d651646e"
- SRC_URI = "git://github.com/troglobit/smcroute.git;branch=master;protocol=https"
- 
+-SRCREV = "9d409a3556c8c2759a376b4f4ac5149db7aacf4f"
++SRCREV = "852ceab35b0feaba07124265d0e2fa8c629b9dc1"
+ SRC_URI = "git://gitlab.com/Remmina/Remmina;protocol=https;branch=master"
  S = "${WORKDIR}/git"
+ 
 -- 
 2.25.1
 
