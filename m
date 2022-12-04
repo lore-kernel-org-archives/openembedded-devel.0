@@ -1,172 +1,93 @@
-Return-Path: <kai.kang@eng.windriver.com>
+Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 92838C3A5A7
-	for <webhook@archiver.kernel.org>; Sun,  4 Dec 2022 06:44:44 +0000 (UTC)
-Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.web11.124043.1670136282036416048
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D6144C4321E
+	for <webhook@archiver.kernel.org>; Sun,  4 Dec 2022 07:34:54 +0000 (UTC)
+Received: from mailout07.t-online.de (mailout07.t-online.de [194.25.134.83])
+ by mx.groups.io with SMTP id smtpd.web10.124152.1670139287564427994
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 03 Dec 2022 22:44:42 -0800
+ Sat, 03 Dec 2022 23:34:48 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=pps06212021 header.b=fMMeSMyK;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=9337ef6b4b=kai.kang@windriver.com)
-Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 2B46ien5020888;
-	Sat, 3 Dec 2022 22:44:40 -0800
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com; h=from : to : cc :
- subject : date : message-id : in-reply-to : references : mime-version :
- content-type; s=PPS06212021;
- bh=8rJpvar3srCuAX35aRhnrmpKh9VyyocFzFsJt/C3cog=;
- b=fMMeSMyKXABgBORTJEP5awjMOuH9wpiTiv2A+FtM0MzGcjZW5eM4yri1MntUJiy+nJyp
- C2secO+TNPlwzD/gCo0pgN2mX6uXJU+7IfvOqvnz58rVKiRIlwXQrC5XfwArMgueZfef
- 3kPNCFJ9vNogI5bWrpMhovMb8nXH+IYc+CWOGaek7eQF78OuhsE3jQMrfKgG75tPJNiq
- vJutJ0UcByIKNLV1tBrSG0kpqxHZye4gQMy1NdzesvntnYl9PwdkYMBDq/ZFs7AaAaTH
- K52JhtDlkxoVUE3wwDt10sM8KEt5EUr4lF+Rh75D7hE0kuPvRd0Yi0REdKgnCf3nt704 bA== 
-Received: from ala-exchng01.corp.ad.wrs.com (unknown-82-252.windriver.com [147.11.82.252])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3m86uqrdfs-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT);
-	Sat, 03 Dec 2022 22:44:40 -0800
-Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2242.12; Sat, 3 Dec 2022 22:44:38 -0800
-Received: from pek-lpg-core3.wrs.com (128.224.153.232) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
- 15.1.2242.12 via Frontend Transport; Sat, 3 Dec 2022 22:44:38 -0800
-From: <kai.kang@windriver.com>
-To: <raj.khem@gmail.com>
-CC: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-python][PATCH v2 1/1] python3-wxgtk4: replace deprecated inspect.getargspec
-Date: Sun, 4 Dec 2022 14:44:33 +0800
-Message-ID: <20221204064433.5377-2-kai.kang@windriver.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20221204064433.5377-1-kai.kang@windriver.com>
-References: <20221204064433.5377-1-kai.kang@windriver.com>
+ dkim=missing; spf=none, err=SPF record not found (domain: t-online.de, ip: 194.25.134.83, mailfrom: f_l_k@t-online.de)
+Received: from fwd71.dcpf.telekom.de (fwd71.aul.t-online.de [10.223.144.97])
+	by mailout07.t-online.de (Postfix) with SMTP id 1418A5A90
+	for <openembedded-devel@lists.openembedded.org>; Sun,  4 Dec 2022 08:34:44 +0100 (CET)
+Received: from flk-MS-7C91.fritz.box ([79.219.224.208]) by fwd71.t-online.de
+	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
+	esmtp id 1p1jWL-0yFdPF0; Sun, 4 Dec 2022 08:34:41 +0100
+From: Markus Volk <f_l_k@t-online.de>
+To: openembedded-devel@lists.openembedded.org
+Cc: Markus Volk <f_l_k@t-online.de>
+Subject: [meta-oe][PATCHv2] perfetto: update -> 27.1 -> 28.0
+Date: Sun,  4 Dec 2022 08:34:26 +0100
+Message-Id: <20221204073426.53036-1-f_l_k@t-online.de>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: text/plain
-X-Proofpoint-ORIG-GUID: gCaaXo_gS7DkoUvLiwyNfII688y3m55J
-X-Proofpoint-GUID: gCaaXo_gS7DkoUvLiwyNfII688y3m55J
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.205,Aquarius:18.0.923,Hydra:6.0.545,FMLib:17.11.122.1
- definitions=2022-12-04_05,2022-12-01_01,2022-06-22_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 malwarescore=0
- impostorscore=0 phishscore=0 lowpriorityscore=0 clxscore=1015
- suspectscore=0 mlxscore=0 bulkscore=0 mlxlogscore=999 priorityscore=1501
- adultscore=0 spamscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2210170000 definitions=main-2212040062
+X-TOI-EXPURGATEID: 150726::1670139281-01604ECF-595B3E46/0/0 CLEAN NORMAL
+X-TOI-MSGID: fecaa868-1017-40d6-989a-741bf717222d
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 04 Dec 2022 06:44:44 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99943
+ <openembedded-devel@lists.openembedded.org>; Sun, 04 Dec 2022 07:34:54 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99944
 
-From: Kai Kang <kai.kang@windriver.com>
-
-Backport patch to replace deprecated inspect.getargspec in lib pubsub.
-
-And add python3-pip to RDEPENDS which is required by utils wxdemo,
-wxdocs and wxget provided by python3-wxgtk4.
-
-Signed-off-by: Kai Kang <kai.kang@windriver.com>
+Signed-off-by: Markus Volk <f_l_k@t-online.de>
 ---
- ...eplace-deprecated-inspect.getargspec.patch | 65 +++++++++++++++++++
- .../python3-wxgtk4/python3-wxgtk4_4.2.0.bb    |  2 +
- 2 files changed, 67 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python3-wxgtk4/python3-wxgtk4/0001-pypubsub-Replace-deprecated-inspect.getargspec.patch
+ .../files/0001-meson-add-pc-file-for-lib_perfetto.patch       | 2 +-
+ meta-oe/recipes-devtools/perfetto/perfetto.bb                 | 2 ++
+ meta-oe/recipes-devtools/perfetto/perfetto.inc                | 4 ++--
+ 3 files changed, 5 insertions(+), 3 deletions(-)
 
-diff --git a/meta-python/recipes-devtools/python3-wxgtk4/python3-wxgtk4/0001-pypubsub-Replace-deprecated-inspect.getargspec.patch b/meta-python/recipes-devtools/python3-wxgtk4/python3-wxgtk4/0001-pypubsub-Replace-deprecated-inspect.getargspec.patch
-new file mode 100644
-index 000000000..9bec4c5ba
---- /dev/null
-+++ b/meta-python/recipes-devtools/python3-wxgtk4/python3-wxgtk4/0001-pypubsub-Replace-deprecated-inspect.getargspec.patch
-@@ -0,0 +1,65 @@
-+Upstream-Status: Backport [https://github.com/wxWidgets/Phoenix/commit/9986a0d5]
-+
-+Signed-off-by: Kai Kang <kai.kang@windriver.com>
-+
-+From 9986a0d5c24b5d45ddf571d60351f68765a8a9be Mon Sep 17 00:00:00 2001
-+From: Scott Talbert <swt@techie.net>
-+Date: Mon, 8 Aug 2022 22:35:58 -0400
-+Subject: [PATCH] pypubsub: Replace deprecated inspect.getargspec
-+
-+inspect.getargspec was removed in Python 3.11.  This is a backport of:
-+https://github.com/schollii/pypubsub/commit/089c7a73f85c76a3aa22e4b10c71db1bf65a8637
-+---
-+ wx/lib/pubsub/core/callables.py | 23 +++++++++++++++--------
-+ 1 file changed, 15 insertions(+), 8 deletions(-)
-+
-+diff --git a/wx/lib/pubsub/core/callables.py b/wx/lib/pubsub/core/callables.py
-+index 65eb1ebe..7e798c54 100644
-+--- a/wx/lib/pubsub/core/callables.py
-++++ b/wx/lib/pubsub/core/callables.py
-+@@ -12,7 +12,7 @@ CallArgsInfo regarding its autoTopicArgName data member.
-+ 
-+ """
-+ 
-+-from inspect import getargspec, ismethod, isfunction
-++from inspect import ismethod, isfunction, signature, Parameter
-+ 
-+ from .. import py2and3
-+ 
-+@@ -133,19 +133,26 @@ class CallArgsInfo:
-+         self.autoTopicArgName = None."""
-+ 
-+         #args, firstArgIdx, defaultVals, acceptsAllKwargs
-+-        (allParams, varParamName, varOptParamName, defaultVals) = getargspec(func)
-+-        if defaultVals is None:
-+-            defaultVals = []
-+-        else:
-+-            defaultVals = list(defaultVals)
-++        allParams = []
-++        defaultVals = []
-++        varParamName = None
-++        varOptParamName = None
-++        for argName, param in signature(func).parameters.items():
-++            if param.default != Parameter.empty:
-++                defaultVals.append(param.default)
-++            if param.kind == Parameter.VAR_POSITIONAL:
-++                varParamName = argName
-++            elif param.kind == Parameter.VAR_KEYWORD:
-++                varOptParamName = argName
-++            else:
-++                allParams.append(argName)
-+ 
-+         self.acceptsAllKwargs      = (varOptParamName is not None)
-+         self.acceptsAllUnnamedArgs = (varParamName    is not None)
-+-
-+         self.allParams = allParams
-+-        del self.allParams[0:firstArgIdx] # does nothing if firstArgIdx == 0
-+ 
-+         self.numRequired = len(self.allParams) - len(defaultVals)
-++        assert len(self.allParams) >= len(defaultVals)
-+         assert self.numRequired >= 0
-+ 
-+         # if listener wants topic, remove that arg from args/defaultVals
-+-- 
-+2.34.1
-+
-diff --git a/meta-python/recipes-devtools/python3-wxgtk4/python3-wxgtk4_4.2.0.bb b/meta-python/recipes-devtools/python3-wxgtk4/python3-wxgtk4_4.2.0.bb
-index faea43777..df23037fc 100644
---- a/meta-python/recipes-devtools/python3-wxgtk4/python3-wxgtk4_4.2.0.bb
-+++ b/meta-python/recipes-devtools/python3-wxgtk4/python3-wxgtk4_4.2.0.bb
-@@ -13,6 +13,7 @@ PYPI_PACKAGE = "wxPython"
- SRC_URI += "file://add-back-option-build-base.patch \
-             file://wxgtk-fixup-build-scripts.patch \
-             file://not-overwrite-cflags-cxxflags.patch \
-+            file://0001-pypubsub-Replace-deprecated-inspect.getargspec.patch \
-             "
- SRC_URI[sha256sum] = "663cebc4509d7e5d113518865fe274f77f95434c5d57bc386ed58d65ceed86c7"
- 
-@@ -29,6 +30,7 @@ RDEPENDS:${PN} = "\
-     python3-image \
-     python3-numpy \
-     python3-pillow \
-+    python3-pip \
-     python3-pprint \
-     python3-pycairo \
-     python3-six \
--- 
-2.17.1
+diff --git a/meta-oe/recipes-devtools/perfetto/files/0001-meson-add-pc-fi=
+le-for-lib_perfetto.patch b/meta-oe/recipes-devtools/perfetto/files/0001-=
+meson-add-pc-file-for-lib_perfetto.patch
+index 70de44173..d6092afeb 100644
+--- a/meta-oe/recipes-devtools/perfetto/files/0001-meson-add-pc-file-for-=
+lib_perfetto.patch
++++ b/meta-oe/recipes-devtools/perfetto/files/0001-meson-add-pc-file-for-=
+lib_perfetto.patch
+@@ -17,7 +17,7 @@ index 06015141c..752b4d928 100644
+      ['c','cpp'],
+ -    default_options: ['c_std=3Dc99', 'cpp_std=3Dc++11']
+ +    default_options: ['c_std=3Dc99', 'cpp_std=3Dc++11'],
+-+    version: '27.1'
+++    version: '28.0'
+  )
+ =20
+ +soversion =3D meson.project_version()
+diff --git a/meta-oe/recipes-devtools/perfetto/perfetto.bb b/meta-oe/reci=
+pes-devtools/perfetto/perfetto.bb
+index 86ab18cac..3b29bc389 100644
+--- a/meta-oe/recipes-devtools/perfetto/perfetto.bb
++++ b/meta-oe/recipes-devtools/perfetto/perfetto.bb
+@@ -54,6 +54,8 @@ do_configure () {
+     STRIP_BIN=3D`echo $STRIP | awk '{print $1}'`
+=20
+     ARGS=3D"is_debug=3Dfalse "  # Tell gn to use release mode
++    ARGS=3D$ARGS" enable_perfetto_heapprofd=3Dfalse"
++    ARGS=3D$ARGS" enable_perfetto_traced_perf=3Dfalse"
+=20
+     if [ -z `echo ${TOOLCHAIN} | grep clang` ]; then
+         ARGS=3D$ARGS" is_clang=3Dfalse"
+diff --git a/meta-oe/recipes-devtools/perfetto/perfetto.inc b/meta-oe/rec=
+ipes-devtools/perfetto/perfetto.inc
+index 5cb6f8bb3..a8e72af1a 100644
+--- a/meta-oe/recipes-devtools/perfetto/perfetto.inc
++++ b/meta-oe/recipes-devtools/perfetto/perfetto.inc
+@@ -3,7 +3,7 @@ HOMEPAGE =3D "https://github.com/google/perfetto"
+=20
+ SRC_URI =3D "git://github.com/google/perfetto.git;protocol=3Dhttps;name=3D=
+perfetto;nobranch=3D1"
+=20
+-SRCREV_perfetto =3D "1c52b5e132312aeb007ed180d4ba1d8d66227923"
+-PV =3D "27.1"
++SRCREV_perfetto =3D "99ead408d98eaa25b7819c7e059734bea42fa148"
++PV =3D "28.0"
+=20
+ S =3D "${WORKDIR}/git"
+--=20
+2.34.1
 
 
