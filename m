@@ -1,98 +1,90 @@
-Return-Path: <brgl@bgdev.pl>
+Return-Path: <tomasz.zyjewski@3mdeb.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D93E9C4332F
-	for <webhook@archiver.kernel.org>; Mon,  5 Dec 2022 08:40:43 +0000 (UTC)
-Received: from mail-wr1-f45.google.com (mail-wr1-f45.google.com [209.85.221.45])
- by mx.groups.io with SMTP id smtpd.web10.10453.1670229638923265358
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D1C69C4332F
+	for <webhook@archiver.kernel.org>; Mon,  5 Dec 2022 08:43:23 +0000 (UTC)
+Received: from 4.mo584.mail-out.ovh.net (4.mo584.mail-out.ovh.net [178.32.98.131])
+ by mx.groups.io with SMTP id smtpd.web11.10717.1670229797437209354
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 05 Dec 2022 00:40:39 -0800
+ Mon, 05 Dec 2022 00:43:18 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@bgdev-pl.20210112.gappssmtp.com header.s=20210112 header.b=yhX4nswn;
- spf=none, err=SPF record not found (domain: bgdev.pl, ip: 209.85.221.45, mailfrom: brgl@bgdev.pl)
-Received: by mail-wr1-f45.google.com with SMTP id bx10so17515881wrb.0
-        for <openembedded-devel@lists.openembedded.org>; Mon, 05 Dec 2022 00:40:38 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=bgdev-pl.20210112.gappssmtp.com; s=20210112;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=xk8avtVx73LLYNGapfLRb2StQbCtW5PgK5Td49QZ9yo=;
-        b=yhX4nswnGK7zXt+kJ6eW/son5Hd0uFpjstk9X8p7krjehAuwgpN6/7Hn1m06qpeq0D
-         XbKJwTpczCXl8ucMT8AOXRKAxDa2t86iYcDuhcZauA/qEJuyXtgRV7Kg2pUL6DQZwlOh
-         iu6PpCfB+qXlSgTjCzPPD0G13otHVsqU6bGBWoo162cAdVV2WYWszBTtqqNmFN1eXfLP
-         GxBV1K17cnSkY3WqYeUpdNxkhLd6cIPRHn6BAEgxtYLg3aRkxB4vuQSRa/gQAPUvZWZB
-         NCkmewvLRxa1UqoKwoNnxZfE8VmrvLbzYNKColGqqqh0vsklkNgy8wTq2T1Rb+eNwcli
-         4VLw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=xk8avtVx73LLYNGapfLRb2StQbCtW5PgK5Td49QZ9yo=;
-        b=RKsfOYmzWehKOkKRheDEOcLLa4jaLFXaUzNueC4a2vecJn3oRDqdUSK0tYuZrod0P9
-         s0wr+VusHTCoiwvqibLcbGczTW8gyt64q83DrDttGZmWvnoD1G1uK5L0G4go2e7AUFcW
-         cSBBz+371KAfOER9dnu+MlS4zoUlsDmVOVUrt/1Yvuws7cWw0DTRnJwoqLqQr3ZHwsAR
-         FGiEqC+Czh+Vq8Y3vd9tRie/zs1DbtrcRaUZZb4xbsFLNKDd0GkwEy0aN+xu5i42MNHU
-         Qmow7o8cmGwknCCOKZHz2xqjjaJPZ2uvD7FZ8RtarKsR0wiBvE2SZ6WGUqAvc0np/hZs
-         BHOQ==
-X-Gm-Message-State: ANoB5plqNQJEPiTSOvIfTokcbo8QFdvVT/YcpcH67OPYqfe0kliZ8eeZ
-	JewvzuKJrozu8Wq8Oo2wgKKFqQ==
-X-Google-Smtp-Source: AA0mqf6+CklBqEtbCO1GRTzQZHpdFFkzBwBimwTXgpiybXB29VUhzHMNIIWFZXmFC1EF7RoWXcyk6w==
-X-Received: by 2002:a5d:5685:0:b0:235:f0a6:fafd with SMTP id f5-20020a5d5685000000b00235f0a6fafdmr50344320wrv.75.1670229637160;
-        Mon, 05 Dec 2022 00:40:37 -0800 (PST)
-Received: from brgl-uxlite.home ([2a01:cb1d:334:ac00:1845:911d:bbf3:b5df])
-        by smtp.gmail.com with ESMTPSA id m28-20020a056000025c00b00242257f2672sm13859561wrz.77.2022.12.05.00.40.36
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 05 Dec 2022 00:40:36 -0800 (PST)
-From: Bartosz Golaszewski <brgl@bgdev.pl>
-To: Khem Raj <raj.khem@gmail.com>,
-	Bruce Ashfield <bruce.ashfield@gmail.com>,
-	openembedded-devel@lists.openembedded.org
-Cc: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
-Subject: [meta-python][PATCH] packagegroup-meta-python: add missing packages
-Date: Mon,  5 Dec 2022 09:40:32 +0100
-Message-Id: <20221205084032.9829-1-brgl@bgdev.pl>
-X-Mailer: git-send-email 2.37.2
+ dkim=missing; spf=softfail (domain: 3mdeb.com, ip: 178.32.98.131, mailfrom: tomasz.zyjewski@3mdeb.com)
+Received: from player168.ha.ovh.net (unknown [10.110.171.136])
+	by mo584.mail-out.ovh.net (Postfix) with ESMTP id 230DE223F2
+	for <openembedded-devel@lists.openembedded.org>; Mon,  5 Dec 2022 08:43:14 +0000 (UTC)
+Received: from 3mdeb.com (84-10-27-202.static.chello.pl [84.10.27.202])
+	(Authenticated sender: tomasz.zyjewski@3mdeb.com)
+	by player168.ha.ovh.net (Postfix) with ESMTPSA id 5394F316C2A9E;
+	Mon,  5 Dec 2022 08:43:13 +0000 (UTC)
+Authentication-Results: garm.ovh; auth=pass (GARM-100R00386d19fe5-b0ba-4c87-85c8-adfadacb5814,
+                    1E67064A9E8056A726906ED957211C8DFB43AFA2) smtp.auth=tomasz.zyjewski@3mdeb.com
+X-OVh-ClientIp: 84.10.27.202
+From: tomasz.zyjewski@3mdeb.com
+To: openembedded-devel@lists.openembedded.org
+Cc: =?UTF-8?q?Tomasz=20=C5=BByjewski?= <tomasz.zyjewski@3mdeb.com>
+Subject: [meta-python][PATCH V3] python3-uefi-firmware: add recipe for version 1.9
+Date: Mon,  5 Dec 2022 09:42:52 +0100
+Message-Id: <20221205084252.3972744-1-tomasz.zyjewski@3mdeb.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=UTF-8
+X-Ovh-Tracer-Id: 12619649107595401625
+X-VR-SPAMSTATE: OK
+X-VR-SPAMSCORE: -100
+X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrgedvhedrudefgdduvdegucetufdoteggodetrfdotffvucfrrhhofhhilhgvmecuqfggjfdpvefjgfevmfevgfenuceurghilhhouhhtmecuhedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmnecujfgurhephffvvefufffkofggtgfgsehtkeertdertdejnecuhfhrohhmpehtohhmrghsiidriiihjhgvfihskhhiseefmhguvggsrdgtohhmnecuggftrfgrthhtvghrnhepfeejffekiedthfefleegveettddvhedtgfevkedugffhledulefgvdefjefhhfdtnecuffhomhgrihhnpehgihhthhhusgdrtghomhenucfkphepuddvjedrtddrtddruddpkeegrddutddrvdejrddvtddvnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehinhgvthepuddvjedrtddrtddruddpmhgrihhlfhhrohhmpeeothhomhgrshiirdiihihjvgifshhkihesfehmuggvsgdrtghomheqpdhnsggprhgtphhtthhopedupdhrtghpthhtohepohhpvghnvghmsggvugguvgguqdguvghvvghlsehlihhsthhsrdhophgvnhgvmhgsvgguuggvugdrohhrghdpoffvtefjohhsthepmhhoheekgedpmhhouggvpehsmhhtphhouhht
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 05 Dec 2022 08:40:43 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99949
+ <openembedded-devel@lists.openembedded.org>; Mon, 05 Dec 2022 08:43:23 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99950
 
-From: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
+From: Tomasz =C5=BByjewski <tomasz.zyjewski@3mdeb.com>
 
-The recently added kmod and watchdogdev packages were not added to the
-meta-python packagegroup. This fixes it.
+Install uefi-firmware-parser tool
 
-Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
+The UEFI firmware parseer is a simple module and set of scripts for
+parsing, extracting, and recreating UEFI firmware volumes.
+
+Signed-off-by: Tomasz =C5=BByjewski <tomasz.zyjewski@3mdeb.com>
 ---
- .../recipes-core/packagegroups/packagegroup-meta-python.bb      | 2 ++
- 1 file changed, 2 insertions(+)
+ .../python/python3-uefi-firmware_1.9.bb         | 17 +++++++++++++++++
+ 1 file changed, 17 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-uefi-firm=
+ware_1.9.bb
 
-diff --git a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
-index 1d2a9952c..4e318967d 100644
---- a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
-+++ b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
-@@ -218,6 +218,7 @@ RDEPENDS:packagegroup-meta-python3 = "\
-     python3-keras-preprocessing \
-     ${@bb.utils.contains("DISTRO_FEATURES", "x11 opengl", "python3-kivy", "", d)} \
-     python3-kiwisolver \
-+    python3-kmod \
-     python3-langtable \
-     python3-lazy-object-proxy \
-     python3-libconf \
-@@ -450,6 +451,7 @@ RDEPENDS:packagegroup-meta-python3 = "\
-     python3-visitor \
-     python3-waitress \
-     python3-watchdog \
-+    python3-watchdogdev \
-     python3-web3 \
-     python3-webcolors \
-     python3-webencodings \
--- 
-2.37.2
+diff --git a/meta-python/recipes-devtools/python/python3-uefi-firmware_1.=
+9.bb b/meta-python/recipes-devtools/python/python3-uefi-firmware_1.9.bb
+new file mode 100644
+index 000000000000..3837a17437b1
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-uefi-firmware_1.9.bb
+@@ -0,0 +1,17 @@
++SUMMARY =3D "Various data structures and parsing tools for UEFI firmware=
+."
++DESCRIPTION =3D "This package contains Python UEFI firmware parser tool.=
+ The \
++UEFI firmware parser is a simple module and set of scripts for parsing, =
+\
++extracting, and recreating UEFI firmware volumes. This includes parsing =
+\
++modules for BIOS, OptionROM, Intel ME and other formats too."
++HOMEPAGE =3D "https://github.com/theopolis/uefi-firmware-parser"
++AUTHOR =3D "Teddy Reed <teddy@prosauce.org>"
++LICENSE =3D "BSD-2-Clause & BSD-3-Clause"
++LIC_FILES_CHKSUM =3D "file://setup.py;md5=3D90fa5bae1547550f1c1993f651ed=
+a955"
++
++SRC_URI =3D "git://github.com/theopolis/uefi-firmware-parser;protocol=3D=
+https;branch=3Dmaster"
++
++SRCREV =3D "502f1bada1ed11fdd1792646fda0bfafb8fa57fb"
++
++S =3D "${WORKDIR}/git"
++
++inherit setuptools3
+--=20
+2.25.1
 
 
