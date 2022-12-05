@@ -1,156 +1,102 @@
-Return-Path: <tomasz.zyjewski@3mdeb.com>
+Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CFB7EC4332F
-	for <webhook@archiver.kernel.org>; Mon,  5 Dec 2022 08:46:23 +0000 (UTC)
-Subject: Re: [meta-python][PATCH V3 1/2] python3-binwalk: add recipe for version 2.3.3
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B5702C4321E
+	for <webhook@archiver.kernel.org>; Mon,  5 Dec 2022 14:47:25 +0000 (UTC)
+Received: from mailout09.t-online.de (mailout09.t-online.de [194.25.134.84])
+ by mx.groups.io with SMTP id smtpd.web11.17017.1670251642400815235
+ for <openembedded-devel@lists.openembedded.org>;
+ Mon, 05 Dec 2022 06:47:22 -0800
+Authentication-Results: mx.groups.io;
+ dkim=missing; spf=none, err=SPF record not found (domain: t-online.de, ip: 194.25.134.84, mailfrom: f_l_k@t-online.de)
+Received: from fwd78.dcpf.telekom.de (fwd78.aul.t-online.de [10.223.144.104])
+	by mailout09.t-online.de (Postfix) with SMTP id 51DA816D6
+	for <openembedded-devel@lists.openembedded.org>; Mon,  5 Dec 2022 15:47:20 +0100 (CET)
+Received: from flk-MS-7C91.fritz.box ([84.163.47.205]) by fwd78.t-online.de
+	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
+	esmtp id 1p2Cka-1wyh2v0; Mon, 5 Dec 2022 15:47:20 +0100
+From: Markus Volk <f_l_k@t-online.de>
 To: openembedded-devel@lists.openembedded.org
-From: "tomzy" <tomasz.zyjewski@3mdeb.com>
-X-Originating-Location: Warsaw, Mazovia, PL (84.10.27.202)
-X-Originating-Platform: Linux Firefox 107
-User-Agent: GROUPS.IO Web Poster
+Cc: Markus Volk <f_l_k@t-online.de>
+Subject: [meta-gnome][PATCH] gnome-photos: update dependencies
+Date: Mon,  5 Dec 2022 15:47:13 +0100
+Message-Id: <20221205144713.144260-1-f_l_k@t-online.de>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Date: Mon, 05 Dec 2022 00:46:18 -0800
-References: <CAMKF1spLpKLY9=4sTeesFJtarUm2hzQ34-VpQT=dXQwK6_VkKA@mail.gmail.com>
-In-Reply-To: <CAMKF1spLpKLY9=4sTeesFJtarUm2hzQ34-VpQT=dXQwK6_VkKA@mail.gmail.com>
-Message-ID: <9820.1670229978687823065@lists.openembedded.org>
-Content-Type: multipart/alternative; boundary="hik29u2y0QmWH9FJf1xA"
+X-TOI-EXPURGATEID: 150726::1670251640-78BAC9DD-89D54C03/0/0 CLEAN NORMAL
+X-TOI-MSGID: 162db12e-c2a2-4dfd-b98b-deae33f35645
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 05 Dec 2022 08:46:23 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99951
+ <openembedded-devel@lists.openembedded.org>; Mon, 05 Dec 2022 14:47:25 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99952
 
---hik29u2y0QmWH9FJf1xA
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
+- add PACKAGECONFIG for DOC
+-remove references to TMPDIR
 
-On Fri, Dec 2, 2022 at 05:50 PM, Khem Raj wrote:
+Signed-off-by: Markus Volk <f_l_k@t-online.de>
+---
+ .../gnome-photos/gnome-photos_43.0.bb         | 19 +++++++++++++++----
+ 1 file changed, 15 insertions(+), 4 deletions(-)
 
->=20
-> On Thu, Dec 1, 2022 at 10:49 PM tomzy <tomasz.zyjewski@3mdeb.com> wrote:
->=20
->> On Thu, Dec 1, 2022 at 07:43 PM, Khem Raj wrote:
->>=20
->> Can you rebase these patches on top of master or master-next and
->> resend v3 please ?
->>=20
->> I can but isn't it already merged in master?
->>=20
->> https://git.openembedded.org/meta-openembedded/commit/?id=3D7ea0e04aaee1=
-9f61e18bf998bb07f02e52d8146e
->>=20
->=20
-> It is, thats why I am asking for an incremental patch on top of what is
-> merged.
+diff --git a/meta-gnome/recipes-gnome/gnome-photos/gnome-photos_43.0.bb b=
+/meta-gnome/recipes-gnome/gnome-photos/gnome-photos_43.0.bb
+index c87823ce3..d9f71806c 100644
+--- a/meta-gnome/recipes-gnome/gnome-photos/gnome-photos_43.0.bb
++++ b/meta-gnome/recipes-gnome/gnome-photos/gnome-photos_43.0.bb
+@@ -4,19 +4,19 @@ LICENSE =3D "GPL-3.0-only"
+ LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D1ebbd3e34237af26da5dc08a4e440=
+464"
+=20
+ DEPENDS =3D " \
++    cairo \
+     glib-2.0-native \
+     gdk-pixbuf-native \
+     librsvg-native \
+     gtk+3 \
+     babl \
++    dbus \
+     gegl \
+     geocode-glib \
++    gexiv2 \
+     gnome-online-accounts \
+-    grilo \
+     gsettings-desktop-schemas \
+     libdazzle \
+-    libgdata \
+-    gfbgraph \
+     tracker \
+     libhandy \
+     libportal \
+@@ -31,6 +31,9 @@ def gnome_verdir(v):
+=20
+ REQUIRED_DISTRO_FEATURES =3D "x11"
+=20
++PACKAGECONFIG ?=3D ""
++PACKAGECONFIG[doc] =3D "-Dmanuals=3Dtrue,-Dmanuals=3Dfalse,libxslt-nativ=
+e docbook-xsl-stylesheets-native"
++
+ SRC_URI[archive.sha256sum] =3D "c7ac7458d533f29d955011c74b76224d79ea31bc=
+c12e9d6d0ce7b6c3704d08e1"
+=20
+ do_install:append() {
+@@ -44,4 +47,12 @@ FILES:${PN} +=3D " \
+     ${datadir}/gnome-shell \
+ "
+=20
+-RRECOMMENDS:${PN} =3D "grilo-plugins"
++do_compile:append() {
++    # glib-mkenums is embedding full paths into this file. There's no
++    # option to it to use a sysroot style variable. So to avoid QA
++    # errors, we sed WORKDIR out and make its includes relative
++    sed -i "s|${B}||" src/photos-enums.h
++    sed -i "s|${B}||" src/photos-enums.c
++    sed -i "s|${B}||" src/photos-enums-gegl.c
++    sed -i "s|${B}||" src/photos-enums-gegl.h
++}
+--=20
+2.34.1
 
-Hi, sorry I am not sure what you mean here. Did you want me to rebase the s=
-econd change and resend as V3?
-
-Something like this? https://lists.openembedded.org/g/openembedded-devel/me=
-ssage/99950
-
->=20
->=20
->=20
->> On Thu, Dec 1, 2022 at 12:35 AM tomzy <tomasz.zyjewski@3mdeb.com> wrote:
->>=20
->> Install binwalk utility.
->>=20
->> Binwalk is a fast, easy to use tool for analyzing, reverse engineering,
->> and extracting firmware images.
->>=20
->> Signed-off-by: Tomasz =C5=BByjewski <tomasz.zyjewski@3mdeb.com>
->> ---
->> .../python/python3-binwalk_2.3.3.bb | 17 +++++++++++++++++
->> 1 file changed, 17 insertions(+)
->> create mode 100644
->> meta-python/recipes-devtools/python/python3-binwalk_2.3.3.bb
->>=20
->> diff --git a/meta-python/recipes-devtools/python/python3-binwalk_2.3.3.b=
-b
->> b/meta-python/recipes-devtools/python/python3-binwalk_2.3.3.bb
->> new file mode 100644
->> index 000000000000..362efa275148
->> --- /dev/null
->> +++ b/meta-python/recipes-devtools/python/python3-binwalk_2.3.3.bb
->> @@ -0,0 +1,17 @@
->> +SUMMARY =3D "Firmware analysis tool"
->> +DESCRIPTION =3D "This package contains Python Binwalk tool. Binwalk is =
-a
->> fast, \
->> +easy to use tool for analyzing, reverse engineering, and extracting
->> firmware \
->> +images."
->> +HOMEPAGE =3D " https://github.com/ReFirmLabs/binwalk"
->> +LICENSE =3D "MIT"
->> +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D65bbee055d3ea3bfc475f07aecf4=
-de64"
->> +
->> +SRC_URI =3D
->> "git://github.com/ReFirmLabs/binwalk;protocol=3Dhttps;branch=3Dmaster"
->> +
->> +SRCREV =3D "fa0c0bd59b8588814756942fe4cb5452e76c1dcd"
->> +
->> +S =3D "${WORKDIR}/git"
->> +
->> +inherit setuptools3
->> +
->> +RDEPENDS:${PN} +=3D "python3-core"
->> --
->> 2.25.1
->>=20
->>=20
->>=20
->=20
->
-
---hik29u2y0QmWH9FJf1xA
-Content-Type: text/html; charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
-
-On Fri, Dec 2, 2022 at 05:50 PM, Khem Raj wrote:<br />
-<blockquote>On Thu, Dec 1, 2022 at 10:49 PM tomzy &lt;tomasz.zyjewski@3mdeb=
-.com&gt; wrote:<br />
-<blockquote>On Thu, Dec 1, 2022 at 07:43 PM, Khem Raj wrote:<br /><br />Can=
- you rebase these patches on top of master or master-next and<br />resend v=
-3 please ?<br /><br />I can but isn't it already merged in master?<br /><br=
- /><a href=3D"https://git.openembedded.org/meta-openembedded/commit/?id=3D7=
-ea0e04aaee19f61e18bf998bb07f02e52d8146e" target=3D"_blank" rel=3D"noopener"=
->https://git.openembedded.org/meta-openembedded/commit/?id=3D7ea0e04aaee19f=
-61e18bf998bb07f02e52d8146e</a></blockquote>
-It is, thats why I am asking for an incremental patch on top of what is mer=
-ged.</blockquote>
-<p>Hi, sorry I am not sure what you mean here. Did you want me to rebase th=
-e second change and resend as V3?</p>
-<p>Something like this? https://lists.openembedded.org/g/openembedded-devel=
-/message/99950</p>
-<blockquote><br />
-<blockquote>On Thu, Dec 1, 2022 at 12:35 AM tomzy &lt;tomasz.zyjewski@3mdeb=
-.com&gt; wrote:<br /><br />Install binwalk utility.<br /><br />Binwalk is a=
- fast, easy to use tool for analyzing, reverse engineering,<br />and extrac=
-ting firmware images.<br /><br />Signed-off-by: Tomasz =C5=BByjewski &lt;to=
-masz.zyjewski@3mdeb.com&gt;<br />---<br />.../python/python3-binwalk_2.3.3.=
-bb | 17 +++++++++++++++++<br />1 file changed, 17 insertions(+)<br />create=
- mode 100644 meta-python/recipes-devtools/python/python3-binwalk_2.3.3.bb<b=
-r /><br />diff --git a/meta-python/recipes-devtools/python/python3-binwalk_=
-2.3.3.bb b/meta-python/recipes-devtools/python/python3-binwalk_2.3.3.bb<br =
-/>new file mode 100644<br />index 000000000000..362efa275148<br />--- /dev/=
-null<br />+++ b/meta-python/recipes-devtools/python/python3-binwalk_2.3.3.b=
-b<br />@@ -0,0 +1,17 @@<br />+SUMMARY =3D "Firmware analysis tool"<br />+DE=
-SCRIPTION =3D "This package contains Python Binwalk tool. Binwalk is a fast=
-, \<br />+easy to use tool for analyzing, reverse engineering, and extracti=
-ng firmware \<br />+images."<br />+HOMEPAGE =3D "<a href=3D"https://github.=
-com/ReFirmLabs/binwalk&quot;" target=3D"_blank" rel=3D"noopener">https://gi=
-thub.com/ReFirmLabs/binwalk"</a><br />+LICENSE =3D "MIT"<br />+LIC_FILES_CH=
-KSUM =3D "file://LICENSE;md5=3D65bbee055d3ea3bfc475f07aecf4de64"<br />+<br =
-/>+SRC_URI =3D "git://github.com/ReFirmLabs/binwalk;protocol=3Dhttps;branch=
-=3Dmaster"<br />+<br />+SRCREV =3D "fa0c0bd59b8588814756942fe4cb5452e76c1dc=
-d"<br />+<br />+S =3D "${WORKDIR}/git"<br />+<br />+inherit setuptools3<br =
-/>+<br />+RDEPENDS:${PN} +=3D "python3-core"<br />--<br />2.25.1<br /><br /=
-><br /></blockquote>
-</blockquote>
-
---hik29u2y0QmWH9FJf1xA--
 
