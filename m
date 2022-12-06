@@ -1,94 +1,102 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <changqing.li@eng.windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4E201C352A1
-	for <webhook@archiver.kernel.org>; Tue,  6 Dec 2022 03:51:09 +0000 (UTC)
-Received: from mail-pg1-f177.google.com (mail-pg1-f177.google.com [209.85.215.177])
- by mx.groups.io with SMTP id smtpd.web10.38819.1670298663537454867
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 42619C352A1
+	for <webhook@archiver.kernel.org>; Tue,  6 Dec 2022 06:27:50 +0000 (UTC)
+Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
+ by mx.groups.io with SMTP id smtpd.web11.41099.1670308065626078656
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 05 Dec 2022 19:51:03 -0800
+ Mon, 05 Dec 2022 22:27:45 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=Yyx+NATV;
- spf=pass (domain: gmail.com, ip: 209.85.215.177, mailfrom: raj.khem@gmail.com)
-Received: by mail-pg1-f177.google.com with SMTP id s196so12293925pgs.3
-        for <openembedded-devel@lists.openembedded.org>; Mon, 05 Dec 2022 19:51:03 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=YXI3Qsdpf69t/0Ws5Bkv79CT0LV4ppOT3igNs5/hYr0=;
-        b=Yyx+NATVgQmxxGUmHWGBasK75qMhnyNLGsUZP1YTVjxXEeHwwbMZe65Ej3a79av4Yt
-         FMNzfvpZHnX9Frv/tKsSBBFcvJJ+Ntxh/vobg5ARfT1pNUGRb2dHJiDgYIaU5U17ZZ/5
-         e/NcCgKhI0tP/AgXcKPdgxqvI435Ir1H4eIKC8vSyw7nzN61fbYH7gpaclOZRJzH+LEV
-         xcgWN15qphMUvDg2dKXth+WXpPrnNnMeKvoc1qi+pVJiYwmj2ILvfnbXV/l1gb2R0KQT
-         1nwOLQMtPlIeA4byVlwmF13JJKpPJCTA8ucSxLGGYAvjKxjBWJhvjtsFBOEdQhgrUy5j
-         3mrA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=YXI3Qsdpf69t/0Ws5Bkv79CT0LV4ppOT3igNs5/hYr0=;
-        b=nMjFxS3Awg8kpv+et0DBoubVTPJKk7HYBEMGTKnp8f+2uu360IAaVnE9s7Tvm5iYSO
-         0TkVJYcpCHXC80GrRkC6gRWyuDvtASdGCbaisN5nhDPiYEsKt2t5hsa5BceND1OLvuP0
-         AqDuYB0pR2QAN0eWfXSBsrthXEY/0gEVYZF6OgA9A2UcEhOB4QH0HFT9fImXCTVyHDwa
-         mlG8Ta3grMqQJqjg+deLigFnQ5U8I+4wWYsnQayx/27P17ilkZagfdRZT2COcwSUmhEb
-         FVXoP7gEMhut1HSIchT/HvsJxQAObyWFznAsIVSE8ADoV7SjBFj1hNGq5Gt146PqLJ+t
-         Qj7g==
-X-Gm-Message-State: ANoB5pky5vIljIy1oa4XdHfszdmxKZWN7e76ok0Cpsz5DeVOjUJ98Yyp
-	rnBNIKJNixNkZXyJxrJT9IcinGs2KtQ=
-X-Google-Smtp-Source: AA0mqf59Jr5HZYm9w+DJImwwwjlAdtx/m32sD9s1z2sVCR5/XNfKaMpB9tlDByJlcahlv4QQBL6q7A==
-X-Received: by 2002:a63:155e:0:b0:476:95a8:de91 with SMTP id 30-20020a63155e000000b0047695a8de91mr58484114pgv.102.1670298662754;
-        Mon, 05 Dec 2022 19:51:02 -0800 (PST)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9181:1cf0::7d9c])
-        by smtp.gmail.com with ESMTPSA id x31-20020a63485f000000b00477055c6d85sm8872670pgk.22.2022.12.05.19.51.02
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 05 Dec 2022 19:51:02 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH] sip: Add recipe for 6.7.5
-Date: Mon,  5 Dec 2022 19:51:00 -0800
-Message-Id: <20221206035100.1876852-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.38.1
+ dkim=pass header.i=@windriver.com header.s=pps06212021 header.b=lnRtMnLY;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=9339f7e6b5=changqing.li@windriver.com)
+Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 2B6619Vo010088
+	for <openembedded-devel@lists.openembedded.org>; Mon, 5 Dec 2022 22:27:45 -0800
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com; h=from : to :
+ subject : date : message-id : mime-version : content-transfer-encoding :
+ content-type; s=PPS06212021;
+ bh=t/h3hpv7WxMx/NZvDARwR45BuPqr5occmQMia8+qIa0=;
+ b=lnRtMnLYnz+VKEZ9nJCpv0pPTv9DQWLCj3qYDm5Vjk5yJgJe46IlyjNElwJYJxrTd0FJ
+ pdOoju9pq82F5JIYVMFg47WpV3+Q6LwN6x6eBxx+lYUhS7x34P7OJyhjL32l1SRt5j9/
+ RJIMOCOje0Z9dfdgHrzTa8hLOJKEUIx2ITzcMzKFRF5GHtdbX5hA0kn9AwHf7DmimcPv
+ cW4jPeLHvwiP8VssiqlDSRQtjyKnBo6TbfPtSl6IhJG5T2hii4iVMwAaJP8BfDI8octi
+ jrOnwvas/dhV/XOfJ85TH/tQNfmQ9yYh7TEU+1MJU7e76XusK0himzRtfi5NBYFD0GMH pg== 
+Received: from ala-exchng01.corp.ad.wrs.com (unknown-82-252.windriver.com [147.11.82.252])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3m82m6t317-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Mon, 05 Dec 2022 22:27:45 -0800
+Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2242.12; Mon, 5 Dec 2022 22:27:44 -0800
+Received: from pek-lpg-core2.wrs.com (128.224.153.41) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
+ 15.1.2242.12 via Frontend Transport; Mon, 5 Dec 2022 22:27:43 -0800
+From: <changqing.li@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [meta-oe][PATCH] graphviz: Do not build tcl support for native
+Date: Tue, 6 Dec 2022 14:27:43 +0800
+Message-ID: <20221206062743.1746120-1-changqing.li@windriver.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Proofpoint-ORIG-GUID: MW_zoF_v_ye7n8QgfQArguHZQIAZ8BkX
+X-Proofpoint-GUID: MW_zoF_v_ye7n8QgfQArguHZQIAZ8BkX
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.205,Aquarius:18.0.923,Hydra:6.0.545,FMLib:17.11.122.1
+ definitions=2022-12-06_04,2022-12-05_01,2022-06-22_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 spamscore=0
+ lowpriorityscore=0 impostorscore=0 suspectscore=0 adultscore=0
+ phishscore=0 clxscore=1015 malwarescore=0 priorityscore=1501 mlxscore=0
+ bulkscore=0 mlxlogscore=947 classifier=spam adjust=0 reason=mlx
+ scancount=1 engine=8.12.0-2210170000 definitions=main-2212060052
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 06 Dec 2022 03:51:09 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99955
+ <openembedded-devel@lists.openembedded.org>; Tue, 06 Dec 2022 06:27:50 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99956
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+From: Changqing Li <changqing.li@windriver.com>
+
+with enable-tcl=yes, task do_configure looks for tclConfig.sh on
+buildhost, and source it. But there is no dpkg-architecture in current
+PATH, and the tclConfig.sh enter into an dead loop since
+dpkg-architecture not found and finanlly Segmentation faulted. Therefore
+it is better to disable tcl
+
+do_configure failure:
+using /usr/lib/tclConfig.sh
+/usr/lib/tclConfig.sh: line 2: dpkg-architecture: command not found
+/usr/lib//tcl8.6/tclConfig.sh: line 2: dpkg-architecture: command not found
+...
+/usr/lib//tcl8.6/tclConfig.sh: line 2: dpkg-architecture: command not found
+/usr/lib//tcl8.6/tclConfig.sh: line 2: dpkg-architecture: command not found
+NOTE: The following config.log files may provide further information.
+Segmentation fault (core dumped)
+
+Signed-off-by: Changqing Li <changqing.li@windriver.com>
 ---
- meta-oe/recipes-devtools/sip/sip_6.7.5.bb | 16 ++++++++++++++++
- 1 file changed, 16 insertions(+)
- create mode 100644 meta-oe/recipes-devtools/sip/sip_6.7.5.bb
+ meta-oe/recipes-graphics/graphviz/graphviz_2.50.0.bb | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/meta-oe/recipes-devtools/sip/sip_6.7.5.bb b/meta-oe/recipes-devtools/sip/sip_6.7.5.bb
-new file mode 100644
-index 0000000000..fb42ef476b
---- /dev/null
-+++ b/meta-oe/recipes-devtools/sip/sip_6.7.5.bb
-@@ -0,0 +1,16 @@
-+# Copyright (C) 2022 Khem Raj <raj.khem@gmail.com>
-+# Released under the MIT license (see COPYING.MIT for the terms)
-+
-+SUMMARY = "A Python bindings generator for C/C++ libraries"
-+
-+HOMEPAGE = "https://www.riverbankcomputing.com/software/sip/"
-+LICENSE = "GPL-2.0-or-later"
-+SECTION = "devel"
-+LIC_FILES_CHKSUM = "file://LICENSE-GPL2;md5=e91355d8a6f8bd8f7c699d62863c7303"
-+
-+inherit pypi setuptools3 python3native
-+
-+PYPI_PACKAGE = "sip"
-+SRC_URI[sha256sum] = "9655d089e1d0c5fbf66bde11558a874980729132b5bd0c2ae355ac1a7b893ab4"
-+
-+BBCLASSEXTEND = "native"
+diff --git a/meta-oe/recipes-graphics/graphviz/graphviz_2.50.0.bb b/meta-oe/recipes-graphics/graphviz/graphviz_2.50.0.bb
+index 4c51af669c..967b9321b8 100644
+--- a/meta-oe/recipes-graphics/graphviz/graphviz_2.50.0.bb
++++ b/meta-oe/recipes-graphics/graphviz/graphviz_2.50.0.bb
+@@ -58,6 +58,9 @@ EXTRA_OECONF:class-nativesdk = "\
+                 --disable-r \
+                 --disable-sharp \
+                 "
++EXTRA_OECONF:class-native = "\
++                --disable-tcl \
++                "
+ CFLAGS:append:class-target = " -D_typ_ssize_t=1 -D_long_double=1"
+ CFLAGS:append:class-nativesdk = " -D_typ_ssize_t=1 -D_long_double=1"
+ do_configure:prepend() {
 -- 
-2.38.1
+2.25.1
 
 
