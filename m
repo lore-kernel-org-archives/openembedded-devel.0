@@ -2,127 +2,87 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EF5AFC4708C
-	for <webhook@archiver.kernel.org>; Tue,  6 Dec 2022 02:02:48 +0000 (UTC)
-Received: from mail-oo1-f46.google.com (mail-oo1-f46.google.com [209.85.161.46])
- by mx.groups.io with SMTP id smtpd.web10.36491.1670292161155581191
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7D43CC3A5A7
+	for <webhook@archiver.kernel.org>; Tue,  6 Dec 2022 03:46:09 +0000 (UTC)
+Received: from mail-pg1-f172.google.com (mail-pg1-f172.google.com [209.85.215.172])
+ by mx.groups.io with SMTP id smtpd.web11.38680.1670298366417101669
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 05 Dec 2022 18:02:41 -0800
+ Mon, 05 Dec 2022 19:46:06 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=UXXvMYm8;
- spf=pass (domain: gmail.com, ip: 209.85.161.46, mailfrom: raj.khem@gmail.com)
-Received: by mail-oo1-f46.google.com with SMTP id t15-20020a4a96cf000000b0049f7e18db0dso1967238ooi.10
-        for <openembedded-devel@lists.openembedded.org>; Mon, 05 Dec 2022 18:02:40 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=OoImEExG;
+ spf=pass (domain: gmail.com, ip: 209.85.215.172, mailfrom: raj.khem@gmail.com)
+Received: by mail-pg1-f172.google.com with SMTP id 82so12316326pgc.0
+        for <openembedded-devel@lists.openembedded.org>; Mon, 05 Dec 2022 19:46:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=jjDbdZxSVGXWU5p5P0BGxuCmC0fLlS4lU07NmqpE0gA=;
-        b=UXXvMYm8xsSJAEsJY7woP+gHZg7ONZ6xDjpazgqCZwiQeGPcgv5UOhy8VPhpnm6TWp
-         7orqBLdr4L71gl3wGlHaLR49ld8OqBQH5Y3Lvzsg7B5vfVEwc9qkxgfdYVfF6jLmXzaB
-         uZfE4U78+UdAr7/Y/QB5Bjx0+xVgJfnrm8UCijznzFOY30cgsgEkdikHFpjl7vA4crLc
-         CgMag2Ut4vombxSXJTZKfD59Ur58KKcMbYN85AdGZCFJ5sn+SBf90WLCN4tJ5mpPEme9
-         8YnFPwoN8VK6Nd49tj+4Om+9biJ/Z/DUW2H7YISAG/AlKgFfMzurRahXAlzDbOXhyzUf
-         Gc9g==
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=8jTdsIv0Vp1pr82JWRldCD26wGoqf3LumC/LoU6DRAg=;
+        b=OoImEExGNmvRQojuzmZpdixba0L6I3K2l9Z2jWW0ZC3Z0pheXMMOoE0AzFqiMxq/l2
+         4gHq2wj92mRYSjRKFXIZGNb91oZx9eL7h0mGmlwz9QgoE8T7n7vRu16p+Lyn/b4UveOY
+         dxG8lhDNp0mE31PcZP+8Kx9dTvx72KsKEmMZ8mWtCh/eveX2jHmgZnqpFefVsJuNSqw8
+         IcUZwzJdM1cI+J5zrM+m1n8Wp8yNSVLasawpTQKX0yhWBrlQ1+SsC5IimMYXOArZCzUW
+         +5VgqDd3lqavZ8xrWgW+QfWkWwQrqUtk1UiweeAv2zlp5UWjKzZRMxp0D7/GLuY0tMYB
+         JGxA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=jjDbdZxSVGXWU5p5P0BGxuCmC0fLlS4lU07NmqpE0gA=;
-        b=HyaxP2uj7Th93x4yILndR9eSYE18OApdDtIxdtAIcJBCDvgwJnSoTdzJ5m6LJYzzme
-         HKf5qG2xlXp14N/N435lroJMdFHhJpHQJDJoBV6XpSx/HfhlC68yFddeb66LmiJB50QX
-         dRycLeOs64s+OWVEF/ReW/ju00Ir9JHEriEA9lNTl3VVzxJvXFBwDVJMBKI6fpApa8dM
-         WXdhnj2m6ioGUOYPqggKZ638Dn9ECwmfl0hanKqbYq7kV4IdRVeugIK2UMYOs3ep/6V8
-         MFUuOhVLqG9gib6AhMgsNIWM2gyKqlA/umGzuclxDd6QUMrkDkoSlfTqKQLAbQiQvw5g
-         Cnjg==
-X-Gm-Message-State: ANoB5pkwX9kfL2M++TVt2tTA2ccAKOHldSuhz7wS7GctZggviE4cZpam
-	mKw3aF71DjNDUM7nEg9RR+YSnCBQtxq2q14UqSU=
-X-Google-Smtp-Source: AA0mqf4rNWun6jYet1B+8x00oKQMEhQUqKLdt26kjJ2d6Itnsa3P3dZZwaUK1YqV6Kbm0AEKDy8VlcPyl2vZYYJi4RU=
-X-Received: by 2002:a4a:97a9:0:b0:4a0:9169:d7c1 with SMTP id
- w38-20020a4a97a9000000b004a09169d7c1mr7030413ooi.73.1670292160210; Mon, 05
- Dec 2022 18:02:40 -0800 (PST)
-MIME-Version: 1.0
-References: <20221204073426.53036-1-f_l_k@t-online.de>
-In-Reply-To: <20221204073426.53036-1-f_l_k@t-online.de>
+        bh=8jTdsIv0Vp1pr82JWRldCD26wGoqf3LumC/LoU6DRAg=;
+        b=uCnJAH1OHaKslh3LjHOzA6dv6VEq1Ht3KWlf8FBy4KpP5h9Ptd5mTwQBKAzidKaqUe
+         0pyCOIhGh2Bs26Lyd7PIrlViEJ0s6OmFQx/2uVSW3AElByKj/snuDRQkgtoIKpHKPXeu
+         KsVnMnDYv8jnhO3+J5eiNYryyVekq8KxXeQDNR3hVV0x3E9uUQZ0n5RoteBZOylwrkp9
+         cGDiva2Xm0O44MOgTpqyhNOdZC/TrcVrDkdoKghSIG5tVIiaSkXdyota57yPCC8POm5r
+         6XaxkBzFQINJtnN7w14ZbwGFW9cKuA9VosWPUN0fKfF5dUATGbkfkBTYCDLshVOvDqjg
+         PCnQ==
+X-Gm-Message-State: ANoB5pm0o1VnNmZMVnTIwe4D9dckYuKp/2sGqSlbkkj8Kd4pwPzITGJ5
+	EJ0//NrPnSlVwOESxkev0rBdcoV2a+o=
+X-Google-Smtp-Source: AA0mqf5FNg3dVf7D2RBj8FNGMzit0w1YpDr8aec3twvOyVps04S+em67IU55oDIn3rIKretzkqUp/A==
+X-Received: by 2002:a63:5254:0:b0:477:6195:34f8 with SMTP id s20-20020a635254000000b00477619534f8mr61557055pgl.286.1670298365532;
+        Mon, 05 Dec 2022 19:46:05 -0800 (PST)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9181:1cf0::7d9c])
+        by smtp.gmail.com with ESMTPSA id 188-20020a6304c5000000b00477bfac06b7sm8963667pge.34.2022.12.05.19.46.04
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 05 Dec 2022 19:46:05 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 5 Dec 2022 18:02:14 -0800
-Message-ID: <CAMKF1sru_cq_imRLX4s9xnLL0Aw84tZf7jmHe_XemONF7pQQdw@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCHv2] perfetto: update -> 27.1 -> 28.0
-To: Markus Volk <f_l_k@t-online.de>
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][PATCH] minio: Disable on mips
+Date: Mon,  5 Dec 2022 19:46:02 -0800
+Message-Id: <20221206034602.1874782-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.38.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 06 Dec 2022 02:02:48 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99953
+ <openembedded-devel@lists.openembedded.org>; Tue, 06 Dec 2022 03:46:09 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99954
 
-still fails
-arm
-https://errors.yoctoproject.org/Errors/Details/682104/
-x86
-https://errors.yoctoproject.org/Errors/Details/682060/
+It does not build due to CGO building in shared mode and needing PIC
+but somewhere it needs to be fixed to build. Until then disable it
 
-On Sat, Dec 3, 2022 at 11:34 PM Markus Volk <f_l_k@t-online.de> wrote:
->
-> Signed-off-by: Markus Volk <f_l_k@t-online.de>
-> ---
->  .../files/0001-meson-add-pc-file-for-lib_perfetto.patch       | 2 +-
->  meta-oe/recipes-devtools/perfetto/perfetto.bb                 | 2 ++
->  meta-oe/recipes-devtools/perfetto/perfetto.inc                | 4 ++--
->  3 files changed, 5 insertions(+), 3 deletions(-)
->
-> diff --git a/meta-oe/recipes-devtools/perfetto/files/0001-meson-add-pc-file-for-lib_perfetto.patch b/meta-oe/recipes-devtools/perfetto/files/0001-meson-add-pc-file-for-lib_perfetto.patch
-> index 70de44173..d6092afeb 100644
-> --- a/meta-oe/recipes-devtools/perfetto/files/0001-meson-add-pc-file-for-lib_perfetto.patch
-> +++ b/meta-oe/recipes-devtools/perfetto/files/0001-meson-add-pc-file-for-lib_perfetto.patch
-> @@ -17,7 +17,7 @@ index 06015141c..752b4d928 100644
->       ['c','cpp'],
->  -    default_options: ['c_std=c99', 'cpp_std=c++11']
->  +    default_options: ['c_std=c99', 'cpp_std=c++11'],
-> -+    version: '27.1'
-> ++    version: '28.0'
->   )
->
->  +soversion = meson.project_version()
-> diff --git a/meta-oe/recipes-devtools/perfetto/perfetto.bb b/meta-oe/recipes-devtools/perfetto/perfetto.bb
-> index 86ab18cac..3b29bc389 100644
-> --- a/meta-oe/recipes-devtools/perfetto/perfetto.bb
-> +++ b/meta-oe/recipes-devtools/perfetto/perfetto.bb
-> @@ -54,6 +54,8 @@ do_configure () {
->      STRIP_BIN=`echo $STRIP | awk '{print $1}'`
->
->      ARGS="is_debug=false "  # Tell gn to use release mode
-> +    ARGS=$ARGS" enable_perfetto_heapprofd=false"
-> +    ARGS=$ARGS" enable_perfetto_traced_perf=false"
->
->      if [ -z `echo ${TOOLCHAIN} | grep clang` ]; then
->          ARGS=$ARGS" is_clang=false"
-> diff --git a/meta-oe/recipes-devtools/perfetto/perfetto.inc b/meta-oe/recipes-devtools/perfetto/perfetto.inc
-> index 5cb6f8bb3..a8e72af1a 100644
-> --- a/meta-oe/recipes-devtools/perfetto/perfetto.inc
-> +++ b/meta-oe/recipes-devtools/perfetto/perfetto.inc
-> @@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/google/perfetto"
->
->  SRC_URI = "git://github.com/google/perfetto.git;protocol=https;name=perfetto;nobranch=1"
->
-> -SRCREV_perfetto = "1c52b5e132312aeb007ed180d4ba1d8d66227923"
-> -PV = "27.1"
-> +SRCREV_perfetto = "99ead408d98eaa25b7819c7e059734bea42fa148"
-> +PV = "28.0"
->
->  S = "${WORKDIR}/git"
-> --
-> 2.34.1
->
->
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#99944): https://lists.openembedded.org/g/openembedded-devel/message/99944
-> Mute This Topic: https://lists.openembedded.org/mt/95442831/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [raj.khem@gmail.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
->
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ meta-oe/recipes-extended/minio/minio_git.bb | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/meta-oe/recipes-extended/minio/minio_git.bb b/meta-oe/recipes-extended/minio/minio_git.bb
+index e88ea632f6..63451e883d 100644
+--- a/meta-oe/recipes-extended/minio/minio_git.bb
++++ b/meta-oe/recipes-extended/minio/minio_git.bb
+@@ -24,7 +24,8 @@ PV = "${SRCREV_mc}"
+ inherit go
+ inherit goarch
+ 
+-CGO_LDFLAGS:append:mips = " -no-pie"
++# | ./github.com/minio/mc/main.go:27:(.text+0xd258b8): relocation R_MIPS_HI16 against `a local symbol' cannot be used when making a shared object; recompile with -fPIC
++COMPATIBLE_HOST:mips = "null"
+ 
+ DEPENDS += "rsync-native"
+ 
+-- 
+2.38.1
+
 
