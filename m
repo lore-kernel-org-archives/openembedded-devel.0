@@ -1,105 +1,105 @@
-Return-Path: <leimaohui@fujitsu.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 75B09C352A1
-	for <webhook@archiver.kernel.org>; Wed,  7 Dec 2022 03:14:18 +0000 (UTC)
-Received: from mail3.bemta32.messagelabs.com (mail3.bemta32.messagelabs.com [195.245.230.82])
- by mx.groups.io with SMTP id smtpd.web11.6315.1670382851280280215
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BC6E6C352A1
+	for <webhook@archiver.kernel.org>; Wed,  7 Dec 2022 04:18:28 +0000 (UTC)
+Received: from mail-pl1-f175.google.com (mail-pl1-f175.google.com [209.85.214.175])
+ by mx.groups.io with SMTP id smtpd.web10.7323.1670386702539773024
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 06 Dec 2022 19:14:12 -0800
+ Tue, 06 Dec 2022 20:18:22 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=mPPdjbzY;
- spf=pass (domain: fujitsu.com, ip: 195.245.230.82, mailfrom: leimaohui@fujitsu.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1670382849; i=@fujitsu.com;
-	bh=lwjz79aioHxb5hD/UxHtRfSH+iihgbJ1JK9k9PSCLsA=;
-	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=mPPdjbzYZced1IOOnp/OQuY/cg1oI17jiqHZ/+Zqw5S532AMiCXbUoiaNewTlByTq
-	 Z21XJ1Ey3z82V2Vt8XoI9ySOI89m0cM32KM36XwIzgDTSojulTtPlun6aNOtmHnKOi
-	 l1w9I80OQ7CEA4347cu2M/ihTIxUq6/SZJS7YBVdabfx2jT38qMk+qmRx6vWwyFg/4
-	 lYoOlPkTB99Zw4Gz5oYzWwn+afEVvITdSTB7Jnzow5eZOuGk9WiMaRF3Fi/VlQVC9M
-	 OVm8YNk0N0OuLEtFwZUQbWqODF/qI4sxWrSNkSg1Qj4KXggzskAXDta/frO75tqmk0
-	 yVYKWGx8R7rUQ==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrDIsWRWlGSWpSXmKPExsViZ8ORqMvAOiH
-  Z4PF3OYuLh5cyOzB6nNu4gjGAMYo1My8pvyKBNWPlm/vsBZs4Kk6u28fewLiIvYuRi0NI4Amj
-  xMvGHijnOpPE0/+n2SCcPYwS76+9B8pwcrAJaEjsnnqZGcQWEdCXWDp7D5jNLKAmcfTlT2aQB
-  mGBiYwS33ddYwNJsAioSJx5cwTM5hVwkbg8sxesQUJAQWLKw/fMEHFBiZMzn7BADJKQOPjiBV
-  SNksTbS3sYIewKiVmz2pggbDWJq+c2MU9g5J+FpH0WkvYFjEyrGM2KU4vKUot0DY31kooy0zN
-  KchMzc/QSq3QT9VJLdctTi0t0DfUSy4v1UouL9Yorc5NzUvTyUks2MQIDMqWYYesOxo7lf/QO
-  MUpyMCmJ8r6o7k8W4kvKT6nMSCzOiC8qzUktPsQow8GhJMF7m2lCspBgUWp6akVaZg4wOmDSE
-  hw8SiK8s5mB0rzFBYm5xZnpEKlTjLocO99f2sssxJKXn5cqJc4bA1IkAFKUUZoHNwIWqZcYZa
-  WEeRkZGBiEeApSi3IzS1DlXzGKczAqCfMKg0zhycwrgdv0CugIJqAj7v3vBTmiJBEhJdXApOB
-  eYGb0Jent9YVX05Lfd/aLZF8Trl13QmNSh2vXNp/1pSVHBGVmtNhKzF16MJfXJvbOOu121c5X
-  nWKzJDzWxZ6cNv3HKcX6rgQOjw1/DBievgvXezlbJad/03w+VQeFrStWpTBb8Bct27v0gqhpb
-  Vwwi8+hoLfBx35EtyfwOdrfOnXouC2Lf5Rzldgv7jKRw352RyddFu4rPGCxb4KoMEfN+sneyY
-  e0N7AdKgx31D/Bd/D1u92Tpr3xEDn59uY6vkJujl2SOcFc80rFdFd7FnFe+PXu6sVZE+49+Be
-  5tpPt4me9U4pCwZndh4L6+acfU0l4IJBovVegY+0ii4K/H9YtsXtVzd6sm/+57J6YEktxRqKh
-  FnNRcSIAKwygYU8DAAA=
-X-Env-Sender: leimaohui@fujitsu.com
-X-Msg-Ref: server-14.tower-585.messagelabs.com!1670382848!75593!1
-X-Originating-IP: [62.60.8.97]
-X-SYMC-ESS-Client-Auth: outbound-route-from=pass
-X-StarScan-Received: 
-X-StarScan-Version: 9.101.1; banners=-,-,-
-X-VirusChecked: Checked
-Received: (qmail 921 invoked from network); 7 Dec 2022 03:14:08 -0000
-Received: from unknown (HELO n03ukasimr01.n03.fujitsu.local) (62.60.8.97)
-  by server-14.tower-585.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 7 Dec 2022 03:14:08 -0000
-Received: from n03ukasimr01.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTP id 24969100188
-	for <openembedded-devel@lists.openembedded.org>; Wed,  7 Dec 2022 03:14:08 +0000 (GMT)
-Received: from R01UKEXCASM126.r01.fujitsu.local (R01UKEXCASM126 [10.183.43.178])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTPS id 185F0100043
-	for <openembedded-devel@lists.openembedded.org>; Wed,  7 Dec 2022 03:14:08 +0000 (GMT)
-Received: from localhost.localdomain (10.167.225.227) by
- R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.42; Wed, 7 Dec 2022 03:14:06 +0000
-From: Lei Maohui <leimaohui@fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-CC: Lei Maohui <leimaohui@fujitsu.com>
-Subject: [oe] [meta-oe][PATCH] polkit: Recover  ${nonarch_libdir}/${BPN}-1 into FILES:${PN} to fix install do_package error when enable multilib.
-Date: Wed, 7 Dec 2022 11:13:37 +0800
-Message-ID: <1670382817-3426-1-git-send-email-leimaohui@fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=iD01cbn7;
+ spf=pass (domain: gmail.com, ip: 209.85.214.175, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f175.google.com with SMTP id 4so15975655pli.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 06 Dec 2022 20:18:22 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=SOH/Z8GG9a61ti8V87pLESv8gvGYuve5qs0lV7OR8vg=;
+        b=iD01cbn7xEgCLrPuY8cLL5dfuNi3UPcW0D8gwM2MojbNXW2dpY1ebhFpM5BiYrnlB6
+         jQyG0WLSEgpQN7WPzSUIeoA8HFIyNgZvhuz8Vepa0WzPW+TtJuMLTs6JrE7U+bAdBm5I
+         YMyigexmJJwK5uhcb8JoA/KWyehYJLRbWVdSaZv0SBYyi4Qhv55H3eqiQEgiRWF4X/4i
+         1/BUVTCmdDwpdA70YOKuWa144PkBUN86IJ+U5HCPD2dcvj5CAzu+7MpB1elQzoll4Nqw
+         4eFsWdgJkVt+hw1miFT5frMvnejMynGuTquhcX/uvo0Wm9bjvsHKaMuqEOAF7a8541d4
+         lCjg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=SOH/Z8GG9a61ti8V87pLESv8gvGYuve5qs0lV7OR8vg=;
+        b=xtB6X/j2VHb7faQW60XT20qU3YyeLxIJsQrFXqblqZ/kjO0/xtZBWdeiNBbG06mAbW
+         vHcTov6XsPu1JNKeDHi+p5nEiXosMQ1aCeXNNh5Wh91Xl78NHglkPjPq4i/R8/WP4p85
+         DzuChBYHLqO31LvPB4FBP3bve0j6Y3bAg4MaCGQcuz7C3SuYTrK490YUColT9Ryx9pZc
+         ei88xtpArb1DWSuxiiITZVvTZI4z3owdxZMU4AFHHNNV7bgfyuFn0Y5SsJtNflIYNL0i
+         qHicd2yy4TOJlmtXE/KBc6JciieemoJVLN+RI/0exsTeZ3r1pXCgGu18iCEM2ZHJS7R1
+         +Rqg==
+X-Gm-Message-State: ANoB5pkTqDHTqNIFN4XhtQg5hbKJzu/5EuU4i6B3XWNDsl/ViMbNhPbv
+	VxCDoA/o2lAWtwkzbHKlAxBNcLADqZw=
+X-Google-Smtp-Source: AA0mqf55TkT4gPA5IsKLHpcfzjWQGNqwFhBbzA8Dpp4FEgQviODwf5nwT89dGPI5GO7+8ixUoWzKXw==
+X-Received: by 2002:a17:902:b48f:b0:189:8b6:95f6 with SMTP id y15-20020a170902b48f00b0018908b695f6mr73841807plr.71.1670386701292;
+        Tue, 06 Dec 2022 20:18:21 -0800 (PST)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9181:1cf0::7d9c])
+        by smtp.gmail.com with ESMTPSA id gq21-20020a17090b105500b00219220edf0dsm166262pjb.48.2022.12.06.20.18.20
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 06 Dec 2022 20:18:20 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][PATCH] imapfilter: Upgrade to 2.7.6
+Date: Tue,  6 Dec 2022 20:18:18 -0800
+Message-Id: <20221207041818.1799199-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.38.1
 MIME-Version: 1.0
-Content-Type: text/plain
-X-Originating-IP: [10.167.225.227]
-X-ClientProxiedBy: G08CNEXCHPEKD07.g08.fujitsu.local (10.167.33.80) To
- R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
-X-Virus-Scanned: ClamAV using ClamSMTP
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 07 Dec 2022 03:14:18 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99968
+ <openembedded-devel@lists.openembedded.org>; Wed, 07 Dec 2022 04:18:28 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99969
 
-ERROR: polkit-122-r0 do_package: QA Issue: polkit: Files/directories were installed but not shipped in any package:
-  /usr/lib/polkit-1/polkit-agent-helper-1
-  /usr/lib/polkit-1/polkitd
-Please set FILES such that these items are packaged. Alternatively if they are unneeded, avoid installing them or delete them within do_install.
-polkit: 2 installed and not shipped files. [installed-vs-shipped]
+Use git fetcher to avoid src-uri-bad build QA error
 
-Signed-off-by: Lei Maohui <leimaohui@fujitsu.com>
+Changes in this release [1]
+
+License-Update: Update copyright years [2]
+
+[1] https://github.com/lefcha/imapfilter/compare/v2.7.5...v2.7.6
+[2] https://github.com/lefcha/imapfilter/commit/ce6b9050b284b9944ac52371a4a2254fc73bc219
+
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-oe/recipes-extended/polkit/polkit_122.bb | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+ .../{imapfilter_2.7.5.bb => imapfilter_2.7.6.bb}          | 8 +++++---
+ 1 file changed, 5 insertions(+), 3 deletions(-)
+ rename meta-oe/recipes-support/imapfilter/{imapfilter_2.7.5.bb => imapfilter_2.7.6.bb} (60%)
 
-diff --git a/meta-oe/recipes-extended/polkit/polkit_122.bb b/meta-oe/recipes-extended/polkit/polkit_122.bb
-index dfa6c14a4..a7cfbdd62 100644
---- a/meta-oe/recipes-extended/polkit/polkit_122.bb
-+++ b/meta-oe/recipes-extended/polkit/polkit_122.bb
-@@ -46,4 +46,6 @@ do_install:append() {
- 	chown polkitd:root ${D}/${datadir}/polkit-1/rules.d
- }
+diff --git a/meta-oe/recipes-support/imapfilter/imapfilter_2.7.5.bb b/meta-oe/recipes-support/imapfilter/imapfilter_2.7.6.bb
+similarity index 60%
+rename from meta-oe/recipes-support/imapfilter/imapfilter_2.7.5.bb
+rename to meta-oe/recipes-support/imapfilter/imapfilter_2.7.6.bb
+index 111a8208a9..eb23816e8a 100644
+--- a/meta-oe/recipes-support/imapfilter/imapfilter_2.7.5.bb
++++ b/meta-oe/recipes-support/imapfilter/imapfilter_2.7.6.bb
+@@ -1,11 +1,13 @@
+ SUMMARY = "IMAPFilter is a mail filtering utility that processes mailboxes based on IMAP queries"
+ LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=db3b99f230f9758fd77e4a0654e2266d"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=c11d4fd926d3ce7aac13b0ed1e9b3a63"
  
--FILES:${PN} += "${libdir}/polkit-1 ${datadir}"
-+FILES:${PN} += "${libdir}/polkit-1 ${datadir} \
-+                ${nonarch_libdir}/${BPN}-1 \
-+               "
+-SRC_URI = "https://codeload.github.com/lefcha/${BPN}/tar.gz/v${PV};downloadfilename=${BP}.tar.gz \
++# v2.7.6
++SRCREV = "b39d0430f29d7c953581186955c11b461e6c824f"
++SRC_URI = "git://github.com/lefcha/imapfilter;protocol=https;branch=master \
+            file://ldflags.patch \
+ "
+-SRC_URI[sha256sum] = "ab19f840712e6951e51c29e44c43b3b2fa42e93693f98f8969cc763a4fad56bf"
++S = "${WORKDIR}/git"
+ 
+ DEPENDS= "openssl lua libpcre2"
+ 
 -- 
-2.25.1
+2.38.1
 
 
