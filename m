@@ -2,68 +2,55 @@ Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BF2F9C352A1
-	for <webhook@archiver.kernel.org>; Wed,  7 Dec 2022 17:53:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C2C11C352A1
+	for <webhook@archiver.kernel.org>; Wed,  7 Dec 2022 17:54:32 +0000 (UTC)
 Received: from mailout05.t-online.de (mailout05.t-online.de [194.25.134.82])
- by mx.groups.io with SMTP id smtpd.web11.22702.1670435620315791417
+ by mx.groups.io with SMTP id smtpd.web10.22757.1670435662535517565
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 07 Dec 2022 09:53:40 -0800
+ Wed, 07 Dec 2022 09:54:22 -0800
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=none, err=SPF record not found (domain: t-online.de, ip: 194.25.134.82, mailfrom: f_l_k@t-online.de)
-Received: from fwd72.dcpf.telekom.de (fwd72.aul.t-online.de [10.223.144.98])
-	by mailout05.t-online.de (Postfix) with SMTP id 3DBA25BAA
-	for <openembedded-devel@lists.openembedded.org>; Wed,  7 Dec 2022 18:53:38 +0100 (CET)
-Received: from flk-MS-7C91.fritz.box ([84.163.47.147]) by fwd72.t-online.de
+Received: from fwd73.dcpf.telekom.de (fwd73.aul.t-online.de [10.223.144.99])
+	by mailout05.t-online.de (Postfix) with SMTP id 2319B1BE6E;
+	Wed,  7 Dec 2022 18:54:21 +0100 (CET)
+Received: from [192.168.178.83] ([84.163.47.147]) by fwd73.t-online.de
 	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1p2ybx-1gwdFJ0; Wed, 7 Dec 2022 18:53:38 +0100
+	esmtp id 1p2yce-0qQZ8K0; Wed, 7 Dec 2022 18:54:20 +0100
+Date: Wed, 07 Dec 2022 18:54:15 +0100
 From: Markus Volk <f_l_k@t-online.de>
-To: openembedded-devel@lists.openembedded.org
-Cc: Markus Volk <f_l_k@t-online.de>
-Subject: [meta-networking][PATCH] spice-gtk: add missing license information
-Date: Wed,  7 Dec 2022 18:53:31 +0100
-Message-Id: <20221207175331.217141-1-f_l_k@t-online.de>
-X-Mailer: git-send-email 2.34.1
+Subject: Re: [oe] [meta-openembedded][PATCHv2] spice-gtk: add recipe
+To: Fabio Estevam <festevam@gmail.com>
+Cc: openembedded-devel@lists.openembedded.org
+Message-Id: <FE8JMR.VYSEE91GK9LL@t-online.de>
+In-Reply-To: 
+	<CAOMZO5ARR3N=H=q-fZSLgQXGhcqOJDQU_UczqCdBPWhC5cfGTA@mail.gmail.com>
+References: <20221031065035.2308617-1-f_l_k@t-online.de>
+	<CAOMZO5ARR3N=H=q-fZSLgQXGhcqOJDQU_UczqCdBPWhC5cfGTA@mail.gmail.com>
+X-Mailer: geary/40.0
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1670435618-68DE2991-B4FBE3D7/0/0 CLEAN NORMAL
-X-TOI-MSGID: 077b09f6-74f0-43d1-939e-9b6f5e704f83
-Content-Transfer-Encoding: quoted-printable
+Content-Type: multipart/alternative; boundary="=-gcmJUKuI8nkipnqAKoCj"
+X-TOI-EXPURGATEID: 150726::1670435660-2508E98D-8EE3DA6B/0/0 CLEAN NORMAL
+X-TOI-MSGID: 57d06e3f-4edf-4af0-8060-39aab85d9a0b
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 07 Dec 2022 17:53:42 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99979
+ <openembedded-devel@lists.openembedded.org>; Wed, 07 Dec 2022 17:54:32 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99980
 
-Signed-off-by: Markus Volk <f_l_k@t-online.de>
----
- meta-networking/recipes-support/spice/spice-gtk_0.4.1.bb | 9 +++++++--
- 1 file changed, 7 insertions(+), 2 deletions(-)
+--=-gcmJUKuI8nkipnqAKoCj
+Content-Type: text/plain; charset=us-ascii; format=flowed
 
-diff --git a/meta-networking/recipes-support/spice/spice-gtk_0.4.1.bb b/m=
-eta-networking/recipes-support/spice/spice-gtk_0.4.1.bb
-index 58089c0a2..a6130cab3 100644
---- a/meta-networking/recipes-support/spice/spice-gtk_0.4.1.bb
-+++ b/meta-networking/recipes-support/spice/spice-gtk_0.4.1.bb
-@@ -1,7 +1,12 @@
- SUMMARY =3D "A Gtk client and libraries for SPICE remote desktop servers=
-."
- HOMEPAGE =3D "https://spice-space.org"
--LICENSE =3D "LGPL-2.1-only"
--LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D4fbd65380cdd255951079008b3645=
-16c"
-+LICENSE =3D "LGPL-2.1-only & BSD-3-Clause & GPL-2.0-only"
-+LIC_FILES_CHKSUM =3D " \
-+	file://COPYING;md5=3D4fbd65380cdd255951079008b364516c \
-+	file://subprojects/spice-common/COPYING;md5=3D4b54a1fd55a448865a0b32d41=
-598759d \
-+	file://subprojects/keycodemapdb/LICENSE.BSD;md5=3D5ae30ba4123bc4f2fa49a=
-a0b0dce887b \
-+	file://subprojects/keycodemapdb/LICENSE.GPL2;md5=3D751419260aa954499f7a=
-baabaa882bbe \
-+"
-=20
- SRCREV =3D "74e673d7c3d9cd281d85c691fbc520107066da01"
-=20
---=20
-2.34.1
+Am Mi, 7. Dez 2022 um 14:39:47 -0300 schrieb Fabio Estevam 
+<festevam@gmail.com>:
+> Shouldn't this be reflected in the LICENSE line
+
+Sent a patch for it
+
+
+--=-gcmJUKuI8nkipnqAKoCj
+Content-Type: text/html; charset=us-ascii
+
+<div id="geary-body" dir="auto">Am Mi, 7. Dez 2022 um 14:39:47 -0300 schrieb Fabio Estevam &lt;festevam@gmail.com&gt;:<br><blockquote type="cite"><div class="plaintext" style="white-space: break-spaces;">Shouldn't this be reflected in the LICENSE line</div></blockquote><span style="white-space: break-spaces;"><br></span><div><span style="white-space: break-spaces;">Sent a patch for it</span></div></div>
+--=-gcmJUKuI8nkipnqAKoCj--
 
 
