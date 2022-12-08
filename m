@@ -2,73 +2,73 @@ Return-Path: <alexander.stein@ew.tq-group.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 08528C3A5A7
-	for <webhook@archiver.kernel.org>; Thu,  8 Dec 2022 13:55:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E7056C63703
+	for <webhook@archiver.kernel.org>; Thu,  8 Dec 2022 14:02:26 +0000 (UTC)
 Received: from mx1.tq-group.com (mx1.tq-group.com [93.104.207.81])
- by mx.groups.io with SMTP id smtpd.web10.14236.1670507733376396319
+ by mx.groups.io with SMTP id smtpd.web11.14469.1670508145850866330
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 08 Dec 2022 05:55:33 -0800
+ Thu, 08 Dec 2022 06:02:26 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@tq-group.com header.s=key1 header.b=fzTRchQQ;
+ dkim=pass header.i=@tq-group.com header.s=key1 header.b=KH2GYV2V;
  spf=pass (domain: ew.tq-group.com, ip: 93.104.207.81, mailfrom: alexander.stein@ew.tq-group.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
   d=tq-group.com; i=@tq-group.com; q=dns/txt; s=key1;
-  t=1670507733; x=1702043733;
+  t=1670508146; x=1702044146;
   h=from:to:cc:subject:date:message-id:mime-version:
    content-transfer-encoding;
-  bh=Vxw2OkU0mm4FML77sbpsm560S/ZZPj0leyiBp0ueCuI=;
-  b=fzTRchQQ/17tNcv4KuJi0SLYfL43PTZ2dmIyuc02jJ1jJ3QdAySD3fC8
-   oN+jvbuL+wXXQkUeHfiVBibZSGqN5nn3HOZaNDSXbNBhdiuPQpX08rQhd
-   RQt7mc/ZptJRnTYyjwvC4pGvo9nDLl0iGJTUSxP3cyWSJ5FEsduf/hA0x
-   yK+UPaREcQLrzEjVLhauJIflWUjbNk+gJjiUR/+jXacPelGrr/9bpntKq
-   7QliFwvYUD33A+LQeQYtyWUQeRClKj14cM6lJX9qgKO+Ti/KubC1DoyCe
-   1cQasi+w7/I5KnWIdLgaXaiioS98rl0F0UEc2CgObtJ3kvlPacZRN5J2t
-   g==;
-X-IronPort-AV: E=Sophos;i="5.96,227,1665439200"; 
-   d="scan'208";a="27841630"
-Received: from unknown (HELO tq-pgp-pr1.tq-net.de) ([192.168.6.15])
-  by mx1-pgp.tq-group.com with ESMTP; 08 Dec 2022 14:55:31 +0100
-Received: from mx1.tq-group.com ([192.168.6.7])
-  by tq-pgp-pr1.tq-net.de (PGP Universal service);
-  Thu, 08 Dec 2022 14:55:31 +0100
-X-PGP-Universal: processed;
-	by tq-pgp-pr1.tq-net.de on Thu, 08 Dec 2022 14:55:31 +0100
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=tq-group.com; i=@tq-group.com; q=dns/txt; s=key1;
-  t=1670507731; x=1702043731;
-  h=from:to:cc:subject:date:message-id:mime-version:
-   content-transfer-encoding;
-  bh=Vxw2OkU0mm4FML77sbpsm560S/ZZPj0leyiBp0ueCuI=;
-  b=d79niXKimhagx9S9LGy5k8tYC9pWDu4DVg8G6kS4tJjWNLBdB3IQGOo5
-   uT10T04uFRVBQf1fI5Ot1UyIY5wqrMyl9F12hTyTGnTMCejN7tqtQMsii
-   FY0JH6VUoeM9Ot4+Gphfs7ChssIwFBiCVBCajmmf+AMzvCD+Fnm2XbzIC
-   C+VjLQ4Wi7zbRSTsemJgClvZ28ZZq3dMM7ZnuSywSib+rdwtwfvZjXBsq
-   va38VZ2sE7a/KNL44pUJoo43BTbVh0U90wxoATmXgn1ByyqZCWmbcXRVc
-   ghdylHCHY3GmYcseuqhVFZvc3vzDobhPf/I1JuMsYZbOdvzltFdP6jToj
+  bh=RP3ljY6hEWxnvOQG6njbTAvUDOzlXmt5XnRdF/dGTPA=;
+  b=KH2GYV2VQea+wdNReDBIGqEAQM/Urlr5thzXE2wU0a6DNOx+iR6d9OHX
+   lAl4jGeXuUOvxdn4JCSW+OEspHWB8K5QiTKMZhQx7ZnWwsTQsaVblhl0c
+   5lYb2BSxi3bG0MKviyeV0eC9cZmptM188A8xdc+dQ/C7jJlthU8TS8NNb
+   JIL+Sy6pe+0Dn1tpodSflmDPlHBR/O6UkpjVZ7DrzYwUpUw5BLNIxeW/F
+   0b7KZjyiMJCApsDYertBFNHI1qblMY7Dp3jq9Vq7vxBQsDVA+PO75FbB9
+   4dNrFtDJgAp+zevyfK50+BIAmmvO0miu3tqNO6G6AFZQGuI/Zru+WlZJ/
    A==;
 X-IronPort-AV: E=Sophos;i="5.96,227,1665439200"; 
-   d="scan'208";a="27841629"
+   d="scan'208";a="27841885"
+Received: from unknown (HELO tq-pgp-pr1.tq-net.de) ([192.168.6.15])
+  by mx1-pgp.tq-group.com with ESMTP; 08 Dec 2022 15:02:24 +0100
+Received: from mx1.tq-group.com ([192.168.6.7])
+  by tq-pgp-pr1.tq-net.de (PGP Universal service);
+  Thu, 08 Dec 2022 15:02:24 +0100
+X-PGP-Universal: processed;
+	by tq-pgp-pr1.tq-net.de on Thu, 08 Dec 2022 15:02:24 +0100
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+  d=tq-group.com; i=@tq-group.com; q=dns/txt; s=key1;
+  t=1670508144; x=1702044144;
+  h=from:to:cc:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=RP3ljY6hEWxnvOQG6njbTAvUDOzlXmt5XnRdF/dGTPA=;
+  b=hK40hpBlw3Xo/KTTV6n5UyDPsXUFlP4LiZ2nCfJBgEw/4Tl7m07YvQC0
+   RrfqQ+CLrrVaKD3i7qsfkgX5cUwiO5EHWpQD362SCPYn2rvAXrHoj6mPq
+   IbD9XFtc52pc1MvrvlFwvIysbYGpa5WKZeR2aN4fUKU1Q7a1Ni58bTxDW
+   ilgg4AKAPTioebAn1K/p2fmSHQzLPPN4zZCO6KC6Ux8c4OMFdyw7KQxZD
+   YAOKyfHZw5M7Ug6BrgR5K2jwkmxxH0fO0v8Gbx52jx6WN7ZYxR57zBxl/
+   jEpVvq5g96pNilpmapSk4NpAOKL+iLr0ifZeu/Q0gt5NVDIi2l1oYlqbX
+   g==;
+X-IronPort-AV: E=Sophos;i="5.96,227,1665439200"; 
+   d="scan'208";a="27841884"
 Received: from vtuxmail01.tq-net.de ([10.115.0.20])
-  by mx1.tq-group.com with ESMTP; 08 Dec 2022 14:55:31 +0100
+  by mx1.tq-group.com with ESMTP; 08 Dec 2022 15:02:24 +0100
 Received: from steina-w.tq-net.de (unknown [10.123.53.21])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
 	(No client certificate requested)
-	by vtuxmail01.tq-net.de (Postfix) with ESMTPSA id 287B5280071;
-	Thu,  8 Dec 2022 14:55:31 +0100 (CET)
+	by vtuxmail01.tq-net.de (Postfix) with ESMTPSA id CA91C280071;
+	Thu,  8 Dec 2022 15:02:23 +0100 (CET)
 From: Alexander Stein <alexander.stein@ew.tq-group.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Alexander Stein <alexander.stein@ew.tq-group.com>
-Subject: [meta-oe][PATCH] dool: Add patch to fix rebuild
-Date: Thu,  8 Dec 2022 14:55:24 +0100
-Message-Id: <20221208135525.3224333-1-alexander.stein@ew.tq-group.com>
+Subject: [meta-oe,kirkstone][PATCH] dool: Add patch to fix rebuild
+Date: Thu,  8 Dec 2022 15:02:17 +0100
+Message-Id: <20221208140217.3225701-1-alexander.stein@ew.tq-group.com>
 X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 08 Dec 2022 13:55:37 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99995
+ <openembedded-devel@lists.openembedded.org>; Thu, 08 Dec 2022 14:02:26 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99996
 
 When cleaning the package during rebuild in base_do_configure()
 'make clean' deletes docs/dool.1. This files comes from source repository
@@ -85,7 +85,7 @@ Steps to reproduce:
 Step 3 is just for invalidating the checksum.
 
  .../dool/dool/0001-Fix-rename-in-docs.patch   | 261 ++++++++++++++++++
- meta-oe/recipes-support/dool/dool_1.1.0.bb    |   1 +
+ meta-oe/recipes-support/dool/dool_1.0.0.bb    |   1 +
  2 files changed, 262 insertions(+)
  create mode 100644 meta-oe/recipes-support/dool/dool/0001-Fix-rename-in-docs.patch
 
@@ -356,10 +356,10 @@ index 000000000..8d576f5d5
 +-- 
 +2.34.1
 +
-diff --git a/meta-oe/recipes-support/dool/dool_1.1.0.bb b/meta-oe/recipes-support/dool/dool_1.1.0.bb
-index dcb66c7fd..211f3a2b1 100644
---- a/meta-oe/recipes-support/dool/dool_1.1.0.bb
-+++ b/meta-oe/recipes-support/dool/dool_1.1.0.bb
+diff --git a/meta-oe/recipes-support/dool/dool_1.0.0.bb b/meta-oe/recipes-support/dool/dool_1.0.0.bb
+index d34397c12..b70f41cb9 100644
+--- a/meta-oe/recipes-support/dool/dool_1.0.0.bb
++++ b/meta-oe/recipes-support/dool/dool_1.0.0.bb
 @@ -11,6 +11,7 @@ DEPENDS += "asciidoc-native xmlto-native"
  
  SRC_URI = "git://github.com/scottchiefbaker/dool.git;branch=master;protocol=https \
@@ -367,7 +367,7 @@ index dcb66c7fd..211f3a2b1 100644
 +	   file://0001-Fix-rename-in-docs.patch \
            "
  
- SRCREV = "41ec7b392b358dae29f0b587711d5c8f7f462805"
+ SRCREV = "34a3244b46aa70a31f871a7ca8ffa8d3a7b950d2"
 -- 
 2.34.1
 
