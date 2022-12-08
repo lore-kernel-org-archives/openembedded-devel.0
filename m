@@ -2,61 +2,61 @@ Return-Path: <hprajapati@mvista.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 39198C3A5A7
-	for <webhook@archiver.kernel.org>; Thu,  8 Dec 2022 07:20:13 +0000 (UTC)
-Received: from mail-pf1-f178.google.com (mail-pf1-f178.google.com [209.85.210.178])
- by mx.groups.io with SMTP id smtpd.web10.7755.1670484011300977302
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 37F01C3A5A7
+	for <webhook@archiver.kernel.org>; Thu,  8 Dec 2022 07:21:23 +0000 (UTC)
+Received: from mail-pg1-f180.google.com (mail-pg1-f180.google.com [209.85.215.180])
+ by mx.groups.io with SMTP id smtpd.web11.7841.1670484081771849378
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 07 Dec 2022 23:20:11 -0800
+ Wed, 07 Dec 2022 23:21:21 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@mvista.com header.s=google header.b=IOljoErI;
- spf=pass (domain: mvista.com, ip: 209.85.210.178, mailfrom: hprajapati@mvista.com)
-Received: by mail-pf1-f178.google.com with SMTP id 65so602554pfx.9
-        for <openembedded-devel@lists.openembedded.org>; Wed, 07 Dec 2022 23:20:11 -0800 (PST)
+ dkim=pass header.i=@mvista.com header.s=google header.b=dVnp99gT;
+ spf=pass (domain: mvista.com, ip: 209.85.215.180, mailfrom: hprajapati@mvista.com)
+Received: by mail-pg1-f180.google.com with SMTP id v3so531824pgh.4
+        for <openembedded-devel@lists.openembedded.org>; Wed, 07 Dec 2022 23:21:21 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=mvista.com; s=google;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
         bh=V0qUvnQggRhaHuqdxPsAfx2W25UF5eJCja5dFud9+EI=;
-        b=IOljoErIrg2tfb98dCI6bCvETOzc2bI4oAmnwtsHShUngksskfud/YvRs80OsGh9XD
-         88NV5FJ1hcMfWEPHU0aJqRq1dbKQbTZTmyxWb99fqa7CSrkt9OC/oIf0PBYdTzwFuvNl
-         BMX0X0T0t1+zGYEOiA6L9LeU08Ccru17ycGr0=
+        b=dVnp99gTiO1K8FTresM5vJ1ZKisCvRroKXgyMSGolbWoC1EeER6/56zoTlEWueRXgy
+         qgjBmn2VuA4srkGKjJtQq+sfruBTKQXlKhcXT0/JAWl38NTrbtgiAT69di/3wIjf1b4Q
+         DD9+deTf3sd4U7i35O89CyBRZl8CoDWoBw42M=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
         bh=V0qUvnQggRhaHuqdxPsAfx2W25UF5eJCja5dFud9+EI=;
-        b=HxgNtv/pa78x/cpIrS1FSqTN8hFchevvTfXFldiJA+1K6e5KMSs2/JSErOg+YS9ciI
-         nU0bPMbvCdcIBrzVhdrPMYhoBLXAce3WMPtw7cdnMF7omrTHlXn3ki+vXy0geqbnDlSM
-         LR4iG14R4N+PisV6ArM6gKDjrHm9MbuGTbJmT2ATv5EftiOD1Y5VzqfMJTrDwbCHeexR
-         C+6D09KeGXR3c3zGk7Adq8ufs0tq9n1Seo1Z4TiDz4YwdCEEjHtIHHSj+xjIsACmoyVQ
-         GPgRxKTOJES7j9/KIO2KaHt9sP2J9RmNf1PNhGEzbl0WZR8mZw3SpjSsQVRWvu4FTZE+
-         OlQw==
-X-Gm-Message-State: ANoB5pkWHEAe6TbnKiq5ZX/NcJAJGTZOW+N0Hi5pLfzCkLudStKTstco
-	YwW1d3t5TVglcrGdcse0SFK6ssViyB4omha2
-X-Google-Smtp-Source: AA0mqf5BbPaq/VxsCL4+FF1uLvUZPS2cpYjWsSA74bH3Wr3tmUz3fB5Zjhngfib45HYI4ltawCo+Pw==
-X-Received: by 2002:aa7:92c7:0:b0:574:39dd:f162 with SMTP id k7-20020aa792c7000000b0057439ddf162mr72826715pfa.44.1670484010518;
-        Wed, 07 Dec 2022 23:20:10 -0800 (PST)
+        b=kGGR2R7JoZ069cD3b3AdUMpPsUk6HpxowwwngJydOatvXU12DcXVqtpBFQT0bfNlSJ
+         QmqTOQ2unKI6URNvpvpgpyjzLdgz5lgf2eRkq1HnYjtHoQBe7ShaIPYAB7EqpIHOn3qd
+         fvgWiJcpH1tSKZ/OBxtTtT2JXy5srxNbdTb/TaKGed+1MpNWJxowh71g20NrEafkF3AE
+         vjCrUw778Fw0P7Sm7mFUdDTrAblgX9lj4oI9v44w7nOHc7wCKh/rYb7/6aMfc+sb/A8n
+         kzvvuwqgxbLytoBLBl4uV5/JmH6wgL5Uzy81v+eE/whdiqvk57fSLTRtn6f9PHxbpcbE
+         3rWw==
+X-Gm-Message-State: ANoB5pkoSBceoEZb586IR+90tkpZVAfVTcqTyPsidY1O4gK3rGfMGUx0
+	a+XSV8///CWZwzBVY8MIls9i9lYt/5d/ql4k
+X-Google-Smtp-Source: AA0mqf6mLEuXhsTSqSH81U/7SVlZoxAUr/PB1NPquqAn5HF36M2P3hFHkh6gqTT3xsTesvTiop2vEQ==
+X-Received: by 2002:a63:4287:0:b0:478:a97c:a1f7 with SMTP id p129-20020a634287000000b00478a97ca1f7mr18249761pga.496.1670484081044;
+        Wed, 07 Dec 2022 23:21:21 -0800 (PST)
 Received: from MVIN00024 ([103.250.136.158])
-        by smtp.gmail.com with ESMTPSA id 63-20020a17090a0fc500b00218fb3bec27sm2212995pjz.56.2022.12.07.23.20.07
+        by smtp.gmail.com with ESMTPSA id y7-20020a170902d64700b00186c54188b4sm15696837plh.240.2022.12.07.23.21.18
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 07 Dec 2022 23:20:10 -0800 (PST)
-Received: by MVIN00024 (sSMTP sendmail emulation); Thu, 08 Dec 2022 12:50:04 +0530
+        Wed, 07 Dec 2022 23:21:20 -0800 (PST)
+Received: by MVIN00024 (sSMTP sendmail emulation); Thu, 08 Dec 2022 12:51:15 +0530
 From: Hitendra Prajapati <hprajapati@mvista.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Hitendra Prajapati <hprajapati@mvista.com>
-Subject: [dunfell][meta-networking][PATCH] proftpd: CVE-2021-46854 memory disclosure to radius server
-Date: Thu,  8 Dec 2022 12:50:03 +0530
-Message-Id: <20221208072003.30395-1-hprajapati@mvista.com>
+Subject: [meta-networking][dunfell][PATCH] proftpd: CVE-2021-46854 memory disclosure to radius server
+Date: Thu,  8 Dec 2022 12:51:14 +0530
+Message-Id: <20221208072114.30455-1-hprajapati@mvista.com>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 08 Dec 2022 07:20:13 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99993
+ <openembedded-devel@lists.openembedded.org>; Thu, 08 Dec 2022 07:21:23 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/99994
 
 Upstream-Status: Backport from https://github.com/proftpd/proftpd/commit/10a227b4d50e0a2cd2faf87926f58d865da44e43
 
