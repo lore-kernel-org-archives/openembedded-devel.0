@@ -1,83 +1,101 @@
-Return-Path: <mingli.yu@eng.windriver.com>
+Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 768F6C4708E
-	for <webhook@archiver.kernel.org>; Sat, 10 Dec 2022 05:19:00 +0000 (UTC)
-Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
- by mx.groups.io with SMTP id smtpd.web10.8973.1670649531896986150
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 71996C4708D
+	for <webhook@archiver.kernel.org>; Sat, 10 Dec 2022 05:22:10 +0000 (UTC)
+Received: from mailout04.t-online.de (mailout04.t-online.de [194.25.134.18])
+ by mx.groups.io with SMTP id smtpd.web11.9055.1670649724868119780
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 09 Dec 2022 21:18:52 -0800
+ Fri, 09 Dec 2022 21:22:05 -0800
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=9343197d5b=mingli.yu@windriver.com)
-Received: from pps.filterd (m0250811.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 2BA5IoCv010487
-	for <openembedded-devel@lists.openembedded.org>; Sat, 10 Dec 2022 05:18:51 GMT
-Received: from ala-exchng01.corp.ad.wrs.com (unknown-82-252.windriver.com [147.11.82.252])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3mchn381xg-3
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Sat, 10 Dec 2022 05:18:51 +0000
-Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2242.12; Fri, 9 Dec 2022 21:18:43 -0800
-Received: from pek-lpg-core2.wrs.com (128.224.153.41) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
- 15.1.2242.12 via Frontend Transport; Fri, 9 Dec 2022 21:18:42 -0800
-From: <mingli.yu@eng.windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-oe][PATCH 3/3] geis: add opengl to REQUIRED_DISTRO_FEATURES
-Date: Sat, 10 Dec 2022 13:18:40 +0800
-Message-ID: <20221210051840.103991-3-mingli.yu@eng.windriver.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20221210051840.103991-1-mingli.yu@eng.windriver.com>
-References: <20221210051840.103991-1-mingli.yu@eng.windriver.com>
+ dkim=missing; spf=none, err=SPF record not found (domain: t-online.de, ip: 194.25.134.18, mailfrom: f_l_k@t-online.de)
+Received: from fwd82.dcpf.telekom.de (fwd82.aul.t-online.de [10.223.144.108])
+	by mailout04.t-online.de (Postfix) with SMTP id 5E7F2ED9
+	for <openembedded-devel@lists.openembedded.org>; Sat, 10 Dec 2022 06:22:02 +0100 (CET)
+Received: from flk-MS-7C91.fritz.box ([79.219.225.165]) by fwd82.t-online.de
+	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
+	esmtp id 1p3sJB-1hOgEf0; Sat, 10 Dec 2022 06:21:57 +0100
+From: Markus Volk <f_l_k@t-online.de>
+To: openembedded-devel@lists.openembedded.org
+Cc: Markus Volk <f_l_k@t-online.de>
+Subject: [meta-gnome][PATCH 5/6] gtksourceview5: update 5.4.2 -> 5.6.1
+Date: Sat, 10 Dec 2022 06:21:36 +0100
+Message-Id: <20221210052137.303984-5-f_l_k@t-online.de>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20221210052137.303984-1-f_l_k@t-online.de>
+References: <20221210052137.303984-1-f_l_k@t-online.de>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Proofpoint-GUID: vHX8P9RdfKO93T_9qD6GWAK5d5GCvfhP
-X-Proofpoint-ORIG-GUID: vHX8P9RdfKO93T_9qD6GWAK5d5GCvfhP
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.205,Aquarius:18.0.923,Hydra:6.0.545,FMLib:17.11.122.1
- definitions=2022-12-10_02,2022-12-08_01,2022-06-22_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 malwarescore=0 spamscore=0
- priorityscore=1501 bulkscore=0 suspectscore=0 phishscore=0 adultscore=0
- mlxlogscore=879 mlxscore=0 impostorscore=0 clxscore=1015
- lowpriorityscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2210170000 definitions=main-2212100044
+X-TOI-EXPURGATEID: 150726::1670649717-E67DE07E-BB5333EB/0/0 CLEAN NORMAL
+X-TOI-MSGID: fe2849ab-a472-492d-aa5f-66f1416cb9cf
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 10 Dec 2022 05:19:00 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100011
+ <openembedded-devel@lists.openembedded.org>; Sat, 10 Dec 2022 05:22:10 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100016
 
-From: Mingli Yu <mingli.yu@windriver.com>
-
-Fixes:
-  ERROR: Nothing PROVIDES 'grail' (but /build/layers/meta-openembedded/meta-oe/recipes-support/canonical-multitouch/geis_2.2.17.bb DEPENDS on or otherwise requires it)
-grail was skipped: missing required distro feature 'opengl' (not in DISTRO_FEATURES)
-  ERROR: Required build target 'meta-world-pkgdata' has no buildable providers.
-  Missing or unbuildable dependency chain was: ['meta-world-pkgdata', 'geis', 'grail']
-
-Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+Signed-off-by: Markus Volk <f_l_k@t-online.de>
 ---
- meta-oe/recipes-support/canonical-multitouch/geis_2.2.17.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ ...urceview5_5.4.2.bb =3D> gtksourceview5_5.6.1.bb} | 15 +++++++++------
+ 1 file changed, 9 insertions(+), 6 deletions(-)
+ rename meta-gnome/recipes-gnome/gtksourceview/{gtksourceview5_5.4.2.bb =3D=
+> gtksourceview5_5.6.1.bb} (65%)
 
-diff --git a/meta-oe/recipes-support/canonical-multitouch/geis_2.2.17.bb b/meta-oe/recipes-support/canonical-multitouch/geis_2.2.17.bb
-index e7f3b5131..aa595ebe5 100644
---- a/meta-oe/recipes-support/canonical-multitouch/geis_2.2.17.bb
-+++ b/meta-oe/recipes-support/canonical-multitouch/geis_2.2.17.bb
-@@ -15,7 +15,7 @@ LIC_FILES_CHKSUM = " \
- 
- inherit autotools pkgconfig python3native lib_package features_check
- 
--REQUIRED_DISTRO_FEATURES = "x11"
-+REQUIRED_DISTRO_FEATURES = "x11 opengl"
- 
- DEPENDS += "grail dbus-glib python3 virtual/libx11 libxext libxi libxcb dbus frame"
- 
--- 
-2.25.1
+diff --git a/meta-gnome/recipes-gnome/gtksourceview/gtksourceview5_5.4.2.=
+bb b/meta-gnome/recipes-gnome/gtksourceview/gtksourceview5_5.6.1.bb
+similarity index 65%
+rename from meta-gnome/recipes-gnome/gtksourceview/gtksourceview5_5.4.2.b=
+b
+rename to meta-gnome/recipes-gnome/gtksourceview/gtksourceview5_5.6.1.bb
+index 297f79fe2..a35a8df7d 100644
+--- a/meta-gnome/recipes-gnome/gtksourceview/gtksourceview5_5.4.2.bb
++++ b/meta-gnome/recipes-gnome/gtksourceview/gtksourceview5_5.6.1.bb
+@@ -5,13 +5,14 @@ LICENSE =3D "LGPL-2.1-only"
+ LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dfbc093901857fcd118f065f900982=
+c24"
+=20
+ DEPENDS =3D " \
++    fribidi \
+     glib-2.0-native \
+     gnome-common-native \
+-    intltool-native \
+-    gtk+3 \
++    fontconfig \
+     gtk4 \
+     libxml2 \
+     libpcre2 \
++    pango \
+ "
+=20
+ PNAME =3D "gtksourceview"
+@@ -22,14 +23,16 @@ GNOMEBASEBUILDCLASS =3D "meson"
+=20
+ inherit gnomebase lib_package gettext features_check gtk-doc gtk-icon-ca=
+che gobject-introspection vala
+=20
+-ANY_OF_DISTRO_FEATURES =3D "${GTK3DISTROFEATURES}"
+-REQUIRED_DISTRO_FEATURES =3D "opengl"
++REQUIRED_DISTRO_FEATURES =3D "opengl gtk"
+=20
+-SRC_URI =3D "https://download.gnome.org/sources/gtksourceview/5.4/${PNAM=
+E}-${PV}.tar.xz"
+-SRC_URI[sha256sum] =3D "ad140e07eb841910de483c092bd4885abd29baadd6e95fa2=
+2d93ed2df0b79de7"
++SRC_URI =3D "https://download.gnome.org/sources/gtksourceview/5.6/${PNAM=
+E}-${PV}.tar.xz"
++SRC_URI[sha256sum] =3D "659d9cc9d034a114f07e7e134ee80d77dec0497cb1516ae5=
+369119c2fcb9da16"
+=20
+ GIR_MESON_ENABLE_FLAG =3D 'enabled'
+ GIR_MESON_DISABLE_FLAG =3D 'disabled'
+ GTKDOC_MESON_OPTION =3D "gtk_doc"
+=20
++PACKAGECONFIG ?=3D "${@bb.utils.filter('DISTRO_FEATURES', 'vulkan', d)}"
++PACKAGECONFIG[vulkan] =3D ",,vulkan-loader vulkan-headers"
++
+ FILES:${PN} +=3D "${datadir}/gtksourceview-5"
+--=20
+2.34.1
 
 
