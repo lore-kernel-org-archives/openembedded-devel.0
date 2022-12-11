@@ -1,143 +1,86 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 14039C4332F
-	for <webhook@archiver.kernel.org>; Sat, 10 Dec 2022 19:46:08 +0000 (UTC)
-Received: from mail-ot1-f52.google.com (mail-ot1-f52.google.com [209.85.210.52])
- by mx.groups.io with SMTP id smtpd.web11.1782.1670701567084295586
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DA142C10F1B
+	for <webhook@archiver.kernel.org>; Sun, 11 Dec 2022 01:52:49 +0000 (UTC)
+Received: from mailout11.t-online.de (mailout11.t-online.de [194.25.134.85])
+ by mx.groups.io with SMTP id smtpd.web11.8601.1670723559653625516
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 10 Dec 2022 11:46:07 -0800
+ Sat, 10 Dec 2022 17:52:40 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=VAWdUgGo;
- spf=pass (domain: gmail.com, ip: 209.85.210.52, mailfrom: raj.khem@gmail.com)
-Received: by mail-ot1-f52.google.com with SMTP id l8-20020a056830054800b006705fd35eceso4911912otb.12
-        for <openembedded-devel@lists.openembedded.org>; Sat, 10 Dec 2022 11:46:06 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=htMDJq2OSDgacSViDCvKwznhDj5HrZOzcPL+jgNL3+4=;
-        b=VAWdUgGoy6kgeuKCys3KIiaxwYmZdY3pptb2uihYCu/Amkvy0t4WK/M1Pv0ZGP8Lf7
-         LFP02yaMYJv012+MJi19LEhSSbsVrNGsl+0rIyPtKt6X4a13ewUqzcAav4yb0iyHb+FB
-         jbbL27aZf+8BwZSbmFJoFtJzphFoKSf0HxD8T+wgx2W9ZnN/H2V5aZCp2gdi9cPUUCLi
-         pU9GKs01K+QbgqKMzxGeASxv3tNmYRenBgZX4m49ZQBMPMNOmK8mA7xfbmLXBLYIO2kW
-         0ARyTSTIWaxyMvkh8X3XFNbFLmi3uIo2+s8VwpDVnICh7DhyJ377oPA7LOjCrDsEnWmI
-         l0Og==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=htMDJq2OSDgacSViDCvKwznhDj5HrZOzcPL+jgNL3+4=;
-        b=ialK2S0bqbrN6oM/I0fET/NQVCPXn3vDZ6fQXqA9A9V5TF+PCA77s7mM9k4CC/kF7L
-         QDCML0qkjptif+ZXtPDxXNIayrcjXvQMZGX6a7lUdXYs0KSUtNEgfPc6fH7h2gmztr5S
-         fKUGg/kFbKmmDLeEk4ggfIlKctPUghNMJvcEktJagKocbnZWmCU9zNy+PUBuS6lp3fSi
-         QyAdHlyLT+/7BY4AZtoXtvhoghWW1dJfRePD+/mK0x6hE/vy8sA51Erap6f5MzeXY22R
-         N0OsKadx6rVMwIH9wNHZ6STaM1If2YSRsMqlK/+il5aV37Tsb0Gou//vt2vBeQprJW6N
-         zHbg==
-X-Gm-Message-State: ANoB5pkgH3PhlMFiSszcPf/UtfxyZ/N2Qnivu0P7mf6mSUBAgn2Xs92J
-	5V4rUGx4gY38/7Te/KBasYoeJ6tFRoaT+jZAm8w=
-X-Google-Smtp-Source: AA0mqf5UaHRHTZA5qtSVhAPQyOwkzC2XPeYVzbP4tMbuSOi+VCbdMca60eUGL3B8Dv+fn1g0JK/nTtR5vPNBBE48BHs=
-X-Received: by 2002:a9d:6a44:0:b0:66c:fb5b:1d67 with SMTP id
- h4-20020a9d6a44000000b0066cfb5b1d67mr48761308otn.111.1670701566230; Sat, 10
- Dec 2022 11:46:06 -0800 (PST)
+ dkim=missing; spf=none, err=SPF record not found (domain: t-online.de, ip: 194.25.134.85, mailfrom: f_l_k@t-online.de)
+Received: from fwd81.dcpf.telekom.de (fwd81.aul.t-online.de [10.223.144.107])
+	by mailout11.t-online.de (Postfix) with SMTP id 836CBB5AF;
+	Sun, 11 Dec 2022 02:52:37 +0100 (CET)
+Received: from flk-MS-7C91.fritz.box ([79.219.227.99]) by fwd81.t-online.de
+	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
+	esmtp id 1p4BW5-00DCLa0; Sun, 11 Dec 2022 02:52:34 +0100
+From: Markus Volk <f_l_k@t-online.de>
+To: openembedded-devel@lists.openembedded.org
+Cc: Markus Volk <f_l_k@t-online.de>,
+	Khem Raj <raj.khem@gmail.com>
+Subject: [meta-gnome][PATCHv2 2/2] gnome-text-editor: update 42.2 -> 43.1
+Date: Sun, 11 Dec 2022 02:52:15 +0100
+Message-Id: <20221211015215.3743566-2-f_l_k@t-online.de>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20221211015215.3743566-1-f_l_k@t-online.de>
+References: <20221211015215.3743566-1-f_l_k@t-online.de>
 MIME-Version: 1.0
-References: <20221210052137.303984-1-f_l_k@t-online.de> <20221210052137.303984-5-f_l_k@t-online.de>
-In-Reply-To: <20221210052137.303984-5-f_l_k@t-online.de>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Sat, 10 Dec 2022 11:45:40 -0800
-Message-ID: <CAMKF1sqATSxv4uihUDPtVQNaviVuaJytEw2ACyA0zdm7PAzGCQ@mail.gmail.com>
-Subject: Re: [oe] [meta-gnome][PATCH 5/6] gtksourceview5: update 5.4.2 -> 5.6.1
-To: Markus Volk <f_l_k@t-online.de>
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
+X-TOI-EXPURGATEID: 150726::1670723555-EFFE97E2-BD04A523/0/0 CLEAN NORMAL
+X-TOI-MSGID: c2beb895-1263-4c28-86a3-d8a996cfb8ad
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 10 Dec 2022 19:46:08 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100029
+ <openembedded-devel@lists.openembedded.org>; Sun, 11 Dec 2022 01:52:49 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100031
 
-On Fri, Dec 9, 2022 at 9:22 PM Markus Volk <f_l_k@t-online.de> wrote:
->
-> Signed-off-by: Markus Volk <f_l_k@t-online.de>
-> ---
->  ...urceview5_5.4.2.bb => gtksourceview5_5.6.1.bb} | 15 +++++++++------
->  1 file changed, 9 insertions(+), 6 deletions(-)
->  rename meta-gnome/recipes-gnome/gtksourceview/{gtksourceview5_5.4.2.bb => gtksourceview5_5.6.1.bb} (65%)
->
-> diff --git a/meta-gnome/recipes-gnome/gtksourceview/gtksourceview5_5.4.2.bb b/meta-gnome/recipes-gnome/gtksourceview/gtksourceview5_5.6.1.bb
-> similarity index 65%
-> rename from meta-gnome/recipes-gnome/gtksourceview/gtksourceview5_5.4.2.bb
-> rename to meta-gnome/recipes-gnome/gtksourceview/gtksourceview5_5.6.1.bb
-> index 297f79fe2..a35a8df7d 100644
-> --- a/meta-gnome/recipes-gnome/gtksourceview/gtksourceview5_5.4.2.bb
-> +++ b/meta-gnome/recipes-gnome/gtksourceview/gtksourceview5_5.6.1.bb
-> @@ -5,13 +5,14 @@ LICENSE = "LGPL-2.1-only"
->  LIC_FILES_CHKSUM = "file://COPYING;md5=fbc093901857fcd118f065f900982c24"
->
->  DEPENDS = " \
-> +    fribidi \
->      glib-2.0-native \
->      gnome-common-native \
-> -    intltool-native \
-> -    gtk+3 \
-> +    fontconfig \
->      gtk4 \
->      libxml2 \
->      libpcre2 \
-> +    pango \
->  "
->
->  PNAME = "gtksourceview"
-> @@ -22,14 +23,16 @@ GNOMEBASEBUILDCLASS = "meson"
->
->  inherit gnomebase lib_package gettext features_check gtk-doc gtk-icon-cache gobject-introspection vala
->
-> -ANY_OF_DISTRO_FEATURES = "${GTK3DISTROFEATURES}"
-> -REQUIRED_DISTRO_FEATURES = "opengl"
-> +REQUIRED_DISTRO_FEATURES = "opengl gtk"
->
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ .../{gnome-text-editor_42.2.bb =3D> gnome-text-editor_43.1.bb} | 5 ++---
+ 1 file changed, 2 insertions(+), 3 deletions(-)
+ rename meta-gnome/recipes-gnome/gnome-text-editor/{gnome-text-editor_42.=
+2.bb =3D> gnome-text-editor_43.1.bb} (75%)
 
-this will need few more recipes to be enabled only
-if gtk is in distro feature. Please test a parse step for
-world  build with meta-gnome without gtk in distro features
+diff --git a/meta-gnome/recipes-gnome/gnome-text-editor/gnome-text-editor=
+_42.2.bb b/meta-gnome/recipes-gnome/gnome-text-editor/gnome-text-editor_4=
+3.1.bb
+similarity index 75%
+rename from meta-gnome/recipes-gnome/gnome-text-editor/gnome-text-editor_=
+42.2.bb
+rename to meta-gnome/recipes-gnome/gnome-text-editor/gnome-text-editor_43=
+.1.bb
+index 763384b7e..a2ac710a0 100644
+--- a/meta-gnome/recipes-gnome/gnome-text-editor/gnome-text-editor_42.2.b=
+b
++++ b/meta-gnome/recipes-gnome/gnome-text-editor/gnome-text-editor_43.1.b=
+b
+@@ -9,18 +9,17 @@ DEPENDS =3D " \
+     libadwaita \
+     gtk4 \
+     gtksourceview5 \
++    editorconfig-core-c \
+     enchant2 \
+-    libpcre \
+ "
+=20
+ GTKIC_VERSION =3D "4"
+=20
+ inherit gnomebase gtk-icon-cache itstool gnome-help mime-xdg features_ch=
+eck
+=20
+-ANY_OF_DISTRO_FEATURES =3D "${GTK3DISTROFEATURES}"
+ REQUIRED_DISTRO_FEATURES =3D "opengl"
+=20
+-SRC_URI[archive.sha256sum] =3D "e56d4a8cdcbce8a8f1c0881b45de799f8b25205e=
+c0cbf2269e532025761cc5da"
++SRC_URI[archive.sha256sum] =3D "973a4b0deb68f9f91a54a4dd415b6afde9b5ae3e=
+e684bc761471f94290f9f6cb"
+=20
+ FILES:${PN} +=3D " \
+     ${datadir}/metainfo \
+--=20
+2.34.1
 
-ERROR: Nothing PROVIDES 'gtksourceview5' (but
-/home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-gnome/recipes-gnome/gnome-calculator/gnome-calculator_42.2.bb,
-/home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-gnome/recipes-gnome/gnome-text-editor/gnome-text-editor_43.1.bb
-DEPENDS on or otherwise requires it)
-gtksourceview5 was skipped: missing required distro feature 'gtk' (not
-in DISTRO_FEATURES)
-ERROR: Required build target 'meta-world-pkgdata' has no buildable providers.
-Missing or unbuildable dependency chain was: ['meta-world-pkgdata',
-'gnome-calculator', 'gtksourceview5']
-
-
-
-> -SRC_URI = "https://download.gnome.org/sources/gtksourceview/5.4/${PNAME}-${PV}.tar.xz"
-> -SRC_URI[sha256sum] = "ad140e07eb841910de483c092bd4885abd29baadd6e95fa22d93ed2df0b79de7"
-> +SRC_URI = "https://download.gnome.org/sources/gtksourceview/5.6/${PNAME}-${PV}.tar.xz"
-> +SRC_URI[sha256sum] = "659d9cc9d034a114f07e7e134ee80d77dec0497cb1516ae5369119c2fcb9da16"
->
->  GIR_MESON_ENABLE_FLAG = 'enabled'
->  GIR_MESON_DISABLE_FLAG = 'disabled'
->  GTKDOC_MESON_OPTION = "gtk_doc"
->
-> +PACKAGECONFIG ?= "${@bb.utils.filter('DISTRO_FEATURES', 'vulkan', d)}"
-> +PACKAGECONFIG[vulkan] = ",,vulkan-loader vulkan-headers"
-> +
->  FILES:${PN} += "${datadir}/gtksourceview-5"
-> --
-> 2.34.1
->
->
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#100016): https://lists.openembedded.org/g/openembedded-devel/message/100016
-> Mute This Topic: https://lists.openembedded.org/mt/95577353/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [raj.khem@gmail.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
->
 
