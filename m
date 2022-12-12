@@ -1,85 +1,89 @@
-Return-Path: <sakib.sajal@windriver.com>
+Return-Path: <livinsunny519@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4DBB2C4332F
-	for <webhook@archiver.kernel.org>; Mon, 12 Dec 2022 19:47:32 +0000 (UTC)
-Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.web11.53790.1670874450878385002
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5D62DC4332F
+	for <webhook@archiver.kernel.org>; Mon, 12 Dec 2022 20:06:32 +0000 (UTC)
+Received: from mail-ot1-f65.google.com (mail-ot1-f65.google.com [209.85.210.65])
+ by mx.groups.io with SMTP id smtpd.web10.54303.1670875588437087830
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 12 Dec 2022 11:47:30 -0800
+ Mon, 12 Dec 2022 12:06:28 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=pps06212021 header.b=c6wxEmUV;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=9345bae85a=sakib.sajal@windriver.com)
-Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 2BCEwcU1022270
-	for <openembedded-devel@lists.openembedded.org>; Mon, 12 Dec 2022 11:47:30 -0800
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com; h=from : to :
- subject : date : message-id : mime-version : content-transfer-encoding :
- content-type; s=PPS06212021;
- bh=AOEVya9wzuATMB5kMnyxtnQBkbuEn+RGY6MO5CZG7BU=;
- b=c6wxEmUV1b5+gqz/eAK74WT1MZRIInT6cddxScMzCx9LEOK5vAKWFb/A5jLJZvDkV/S3
- i0mB/nFvxPiGj+049YtINd+WH5hJ/JcWwLN7SduJ4ZIvH/EM6cP07QAz/COggQ0u7Yvb
- 5zP5ujGEPVS88UJ6DDT3X4qRb7SNiOgjofrOk4cVtN/zo90Z2ej0UNei1Bl9ANbLaiZc
- Ciay5dOjx66gKMSlJFp1FGYd+210HDmnRArkYqdb2evVYve6urD2uH3DF1FXH9NSSXYU
- ihjmhU+cT2b5+UK0JSRUWCNEuJY3t1Bk9/yzx9VCpRJMCURKwOybqO97P8DodFdwkyJB OQ== 
-Received: from ala-exchng01.corp.ad.wrs.com (unknown-82-252.windriver.com [147.11.82.252])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3mcp95sp48-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Mon, 12 Dec 2022 11:47:30 -0800
-Received: from ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2242.12; Mon, 12 Dec 2022 11:47:29 -0800
-Received: from localhost.localdomain (147.11.136.210) by
- ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server id
- 15.1.2308.27 via Frontend Transport; Mon, 12 Dec 2022 11:47:29 -0800
-From: Sakib Sajal <sakib.sajal@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-oe][PATCH] minio: fix license information
-Date: Mon, 12 Dec 2022 14:47:28 -0500
-Message-ID: <20221212194728.45878-1-sakib.sajal@windriver.com>
-X-Mailer: git-send-email 2.25.1
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=F3WWXtCi;
+ spf=pass (domain: gmail.com, ip: 209.85.210.65, mailfrom: livinsunny519@gmail.com)
+Received: by mail-ot1-f65.google.com with SMTP id db10-20020a0568306b0a00b0066d43e80118so8034898otb.1
+        for <openembedded-devel@lists.openembedded.org>; Mon, 12 Dec 2022 12:06:28 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=FlIJYv4tAjbdFLxG2TNWMYja4emM5f5OH0EsDuZ8kQI=;
+        b=F3WWXtCiHaX+HnPDbhqOjLVI9ddmY2dGyFymK6WljMJ8vquCS7P5/n8KOgkNA/hOTn
+         Rn7ir0L51GD0j1uR++JEu3qiiXr/Qyi9XgjZdn8UoaiV0nUqIzDo1+TBbLVjw5ESQPtr
+         LGVQOxoK8mOYn7grznJpuiIMIGO9MtHIXNOrr3c89v32Kz1G3X1RVqjGIV6Aj4WRwz2O
+         sM8eG+l6rnSMwzT1JFngzWloVRntdin6MB/9oAK9MQJHYwwI3XAr7GPbB6VD+uXR4TkI
+         4sfZ3b2Pie6Y/JIne3lccXYC0tio81+NfQk5YbQiB4g95W41iYsnho/Y5d15RTAnmK+s
+         Vl9g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=FlIJYv4tAjbdFLxG2TNWMYja4emM5f5OH0EsDuZ8kQI=;
+        b=CYiWa8vj2TsM40ASWaCgkvQLCVvVuD2alWfVs9nwdIpSaKibz0fwKDxysZb5fEciEN
+         HM30qUeeSReikbTuduRIUnZE/dk6z1rALm79NBrquI6czR0yqMQ1xwoOIyNHUFpB5d6X
+         bKAUoUgSUVZwSFuTdqFfxBA3F0X5qj6E//IMxamyirNIjlJXGZpggAp8giTY2j6oFvaF
+         Z8c1w6iWc8tq8BAt5wTXH0ZnwyL0+Suj33h0acOIIpKpeZno/QlYR2dRNwT/hcNMHXKa
+         sR8ExA6DJG5F+bWzRDBqTw5VpzpJ3Dqvs6uIoQOth2wSeuev/9/VEqjwn28+7uDHeWOt
+         zRvw==
+X-Gm-Message-State: ANoB5pnABYIm8kzE6QVWize0fyC8zJ752H1phZxcvhkBWP+UEzpvJaNl
+	ghruRnNVu1mMqbbz7wUTomIFwWMmju45wQ==
+X-Google-Smtp-Source: AA0mqf5VruFS9847ugnIfq/Ed9i5JuAdjFLazVSPCuz8uTEHFpwYKkT4Q8ODbmECdxbTRnfihuS7zw==
+X-Received: by 2002:a05:6830:6306:b0:66c:a612:30db with SMTP id cg6-20020a056830630600b0066ca61230dbmr9275046otb.31.1670875587356;
+        Mon, 12 Dec 2022 12:06:27 -0800 (PST)
+Received: from livin-virtualbox.ad.garmin.com ([204.77.163.55])
+        by smtp.gmail.com with ESMTPSA id k4-20020a9d7dc4000000b0066cacb8343bsm341946otn.41.2022.12.12.12.06.26
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 12 Dec 2022 12:06:26 -0800 (PST)
+From: livinsunny519@gmail.com
+To: openembedded-devel@lists.openembedded.org
+Cc: JPEWhacker@gmail.com,
+	Livin Sunny <livinsunny519@gmail.com>
+Subject: [meta-oe][PATCH] libwebsockets: add ipv6 in PACKAGECONFIG
+Date: Mon, 12 Dec 2022 14:05:58 -0600
+Message-Id: <20221212200558.30233-1-livinsunny519@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Proofpoint-GUID: 9X2ZkotQcEmqxO4iGHT4_5VxyOYWdmsT
-X-Proofpoint-ORIG-GUID: 9X2ZkotQcEmqxO4iGHT4_5VxyOYWdmsT
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.205,Aquarius:18.0.923,Hydra:6.0.545,FMLib:17.11.122.1
- definitions=2022-12-12_02,2022-12-12_02,2022-06-22_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 malwarescore=0 phishscore=0
- impostorscore=0 suspectscore=0 lowpriorityscore=0 adultscore=0 bulkscore=0
- mlxscore=0 spamscore=0 mlxlogscore=803 clxscore=1011 priorityscore=1501
- classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2210170000
- definitions=main-2212120177
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 12 Dec 2022 19:47:32 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100065
+ <openembedded-devel@lists.openembedded.org>; Mon, 12 Dec 2022 20:06:32 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100066
 
-minio carries AGPL license, not GPL.
+From: Livin Sunny <livinsunny519@gmail.com>
 
-Signed-off-by: Sakib Sajal <sakib.sajal@windriver.com>
+Adds a PACKAGECONFIG if ipv6 is enabled in DISTRO_FEATURES.
+
+Signed-off-by: Livin Sunny <livinsunny519@gmail.com>
 ---
- meta-oe/recipes-extended/minio/minio_git.bb | 2 +-
+ .../recipes-connectivity/libwebsockets/libwebsockets_4.3.2.bb   | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-extended/minio/minio_git.bb b/meta-oe/recipes-extended/minio/minio_git.bb
-index 63451e883..94986089c 100644
---- a/meta-oe/recipes-extended/minio/minio_git.bb
-+++ b/meta-oe/recipes-extended/minio/minio_git.bb
-@@ -16,7 +16,7 @@ SRCREV_mc = "01b87ecc02ffad47dfe13c2154ac31db3e3115df"
+diff --git a/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_4.3.2.bb b/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_4.3.2.bb
+index 0ce0513f3..d401a187e 100644
+--- a/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_4.3.2.bb
++++ b/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_4.3.2.bb
+@@ -14,7 +14,7 @@ UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\.\d+)+)"
  
- GO_IMPORT = "import"
+ inherit cmake pkgconfig
  
--LICENSE = "GPL-3.0-only"
-+LICENSE = "AGPL-3.0-only"
- LIC_FILES_CHKSUM = "file://src/${GO_IMPORT}/LICENSE;md5=eb1e647870add0502f8f010b19de32af"
- 
- PV = "${SRCREV_mc}"
+-PACKAGECONFIG ?= "libuv client server http2 ssl"
++PACKAGECONFIG ?= "libuv client server http2 ssl ${@bb.utils.filter('DISTRO_FEATURES', 'ipv6', d)}"
+ PACKAGECONFIG[client] = "-DLWS_WITHOUT_CLIENT=OFF,-DLWS_WITHOUT_CLIENT=ON,"
+ PACKAGECONFIG[http2] = "-DLWS_WITH_HTTP2=ON,-DLWS_WITH_HTTP2=OFF,"
+ PACKAGECONFIG[ipv6] = "-DLWS_IPV6=ON,-DLWS_IPV6=OFF,"
 -- 
-2.25.1
+2.34.1
 
 
