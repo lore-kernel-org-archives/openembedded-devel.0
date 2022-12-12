@@ -2,68 +2,68 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 67C39C4332F
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6E22AC10F31
 	for <webhook@archiver.kernel.org>; Mon, 12 Dec 2022 07:35:18 +0000 (UTC)
 Received: from mail1.bemta34.messagelabs.com (mail1.bemta34.messagelabs.com [195.245.231.1])
  by mx.groups.io with SMTP id smtpd.web10.37696.1670830507261093203
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 11 Dec 2022 23:35:08 -0800
+ Sun, 11 Dec 2022 23:35:14 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=RWi+rruW;
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=xvLhljI+;
  spf=pass (domain: fujitsu.com, ip: 195.245.231.1, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1670830508; i=@fujitsu.com;
-	bh=0dDStMqyYJ9zWQroFg4ZUBas173nxywcineTPNielx0=;
+	s=170520fj; t=1670830513; i=@fujitsu.com;
+	bh=tz6Tm/UfFnufhGfBYz2X3bDhfdi2cvNm7QLcKZh3hFA=;
 	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
 	 MIME-Version:Content-Type;
-	b=RWi+rruWGQvnOymbxw1OzyVf6aqBGwjeHjgnnCLEX7v0V0LQSPH9Ei/uRVHD9eTPD
-	 QBjPPzkI++5+erQzgrKBYPGZjOpmwr/DewqIIdhcQlJez11jgz7hrPQcqPcifrNHDy
-	 T++xzE16U9lq6tvsYTcdGK8aNet8HVd/lxWecufdQA/+Tf/R3OMfkL6zETtWe7/83b
-	 o6YwIRu2DDMQC+A6jGP7QEtr9xMEY8QQNBAwDu6E16qbKBzPdbz7S8Sc1ORG1HF7pT
-	 rvrv4E5THV9vJ/orWWXyfQYQoH/68W69nvGMxBEOcNKHZVskXXQXMmDb6h0L/Xp/J9
-	 eJpoXlxfOp5/A==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrIIsWRWlGSWpSXmKPExsViZ8ORpLv65rR
-  kg4vbzC0uHl7K7MDocW7jCsYAxijWzLyk/IoE1ozH51oZC26wVlz7HtfAOJe1i5GTQ0jgIaPE
-  u/2FXYxcQPYVJom3b5tZIJw9jBIrGv+wgFSxCUhJ3Lj/nw3EFhHQl1g6ew8ziM0soCLx4ncPO
-  4gtLOApMWPBLbAaFgFVie0314PZvAKOErt7d4PNkRBQkJjy8D1YL6eAk8SW7pXsEFc4Sty5tp
-  EFol5Q4uTMJywQ8yUkDr54wQzRqygx+3Iz1JwKiVmz2pggbDWJq+c2MU9gFJyFpH0WkvYFjEy
-  rGM2KU4vKUot0Dc30kooy0zNKchMzc/QSq3QT9VJLdctTi0t0jfQSy4v1UouL9Yorc5NzUvTy
-  Uks2MQJDN6VYcesOxhvL/ugdYpTkYFIS5a28Mi1ZiC8pP6UyI7E4I76oNCe1+BCjDAeHkgTvh
-  mtAOcGi1PTUirTMHGAcwaQlOHiURHjdQFp5iwsSc4sz0yFSpxh1OWZ+bTvALMSSl5+XKiXOy3
-  4DqEgApCijNA9uBCymLzHKSgnzMjIwMAjxFKQW5WaWoMq/YhTnYFQS5rW5DjSFJzOvBG7TK6A
-  jmICOiHo5FeSIkkSElFQDE4O38dU7XCafMgQMFi6cdjrYJ+nsqnLhq28WnvZ2nNYapnfmvfoO
-  3YXvTy6568pQ/Yl5ntK5pdKhiSs4BJpzBNM9FI1fLdt9flXb+pk5T5xv2Ep4q3A28lxaIHvQr
-  7tp1c/jfq0FW3+Vno+NXCpnu7Vx6nKN7neLehYo225Yui5sYvRiOyGFwMT7+lOcpi2ZMm9F+w
-  V1Djb5t+vvrZW//aWq6PG3f1sjy7K0b+uy87Rqvln9ai7n+ojP1SouZmeU0y/de33ANUMwvHf
-  vVX33y55XnrO8jw27J70h3l5uxY5PzKo1ql0Re2+4z2dSzQwtaP9gu26afEDJnMNfJtxctezR
-  yx8n9xltX71W3ux6qK8SS3FGoqEWc1FxIgC0msjgZAMAAA==
+	b=xvLhljI+LzQQ4cY1XCYTuypsifuz+b4aVzo+qAmB6UxVT/xojHaZzyyTtv8pqMooI
+	 9FQqtElbUfEQxPy4tF+R0/1Q1ScYdNe83o8IXdRIPiJbNHiq1/qaciIUsmpCQaaMjS
+	 AEwgu+IJ8YtH1H7QKZz3wQsoR/izjTEyzbcpRX8hU/ou748NVMn6za22Y3CwA8IGwW
+	 8WzOXhDAdT1BLn6uy0XSPtNcXp0DqmNcK4a41D3FSxPDBuT4DGsEJTrNDwYWD5v7oG
+	 cg6iZwdrlkSIx+443rihLRfZ/VECoTuJqKj6vdohowFAcf7P7shGUp7SZf3QXJzBBU
+	 Np25UzzZMr81w==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrEIsWRWlGSWpSXmKPExsViZ8OxWXfjzWn
+  JBh9aRS0uHl7K7MDocW7jCsYAxijWzLyk/IoE1oyz23ezFqziqFi35htTA+Mx9i5GLg4hgQeM
+  ErsffWGBcK4wSfzqvcAE4exhlNi/cx9bFyMnB5uAlMSN+//BbBEBfYmls/cwg9jMAioSL373s
+  IPYwgIeEvc//wOrYRFQlTg//xCQzcHBK+AoseOiEUhYQkBBYsrD92CtnAJOElu6V4K1CgGV3L
+  m2kQXE5hUQlDg58wkLxHgJiYMvXjBD9CpKzL7czAJhV0jMmtXGBGGrSVw9t4l5AqPgLCTts5C
+  0L2BkWsVoVpxaVJZapGtorJdUlJmeUZKbmJmjl1ilm6iXWqpbnlpcomukl1herJdaXKxXXJmb
+  nJOil5dasokRGLwpxYozdjD+W/ZH7xCjJAeTkihv5ZVpyUJ8SfkplRmJxRnxRaU5qcWHGGU4O
+  JQkeDdcA8oJFqWmp1akZeYAIwkmLcHBoyTC6wbSyltckJhbnJkOkTrFqMsx82vbAWYhlrz8vF
+  QpcV72G0BFAiBFGaV5cCNgUX2JUVZKmJeRgYFBiKcgtSg3swRV/hWjOAejkjCvzXWgKTyZeSV
+  wm14BHcEEdETUy6kgR5QkIqSkGpgst+w4v/fTj41Lmjf8flaw6uYfxeQbcw+e/sJ4wSF++mfB
+  KWc05FRPZfqwalcozS4yyjbw26zK9+NR5MbPcx3iZog8enRvi7JOo5tEo/O9it+TdFae2HDXx
+  XkWu/+BeLmHRR+752dbC23trpfdzRP8NNQ9V1QuJGBDifW1kh1/906YdOTVkVLDKucvP3sXdz
+  npnk6t4lAscHY/4earn75w1aFnsUcn3qpxePNUtHuJWPPTpC1G6QsYF7Dm+4tt8WuLuRzZvoh
+  xTfdtV/NyoUl2WTXeM2d5Fd8v7yt67zH9opRUkc71m+FtQo2xie/WtAj5Zwt4L/zds++4q66m
+  TAw3g/dTqYZHOzu2O8Q+36vEUpyRaKjFXFScCABp9TtiZQMAAA==
 X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-8.tower-571.messagelabs.com!1670830507!316398!1
-X-Originating-IP: [62.60.8.98]
+X-Msg-Ref: server-16.tower-565.messagelabs.com!1670830513!181962!1
+X-Originating-IP: [62.60.8.179]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.101.2; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 25275 invoked from network); 12 Dec 2022 07:35:07 -0000
-Received: from unknown (HELO n03ukasimr03.n03.fujitsu.local) (62.60.8.98)
-  by server-8.tower-571.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 12 Dec 2022 07:35:07 -0000
-Received: from n03ukasimr03.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr03.n03.fujitsu.local (Postfix) with ESMTP id 9B59D1B6
-	for <openembedded-devel@lists.openembedded.org>; Mon, 12 Dec 2022 07:35:07 +0000 (GMT)
+Received: (qmail 22389 invoked from network); 12 Dec 2022 07:35:13 -0000
+Received: from unknown (HELO n03ukasimr04.n03.fujitsu.local) (62.60.8.179)
+  by server-16.tower-565.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 12 Dec 2022 07:35:13 -0000
+Received: from n03ukasimr04.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTP id 14E3B7B
+	for <openembedded-devel@lists.openembedded.org>; Mon, 12 Dec 2022 07:35:13 +0000 (GMT)
 Received: from R01UKEXCASM126.r01.fujitsu.local (R01UKEXCASM126 [10.183.43.178])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by n03ukasimr03.n03.fujitsu.local (Postfix) with ESMTPS id 905EC1AF
-	for <openembedded-devel@lists.openembedded.org>; Mon, 12 Dec 2022 07:35:07 +0000 (GMT)
+	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTPS id 08CB2156
+	for <openembedded-devel@lists.openembedded.org>; Mon, 12 Dec 2022 07:35:13 +0000 (GMT)
 Received: from localhost.localdomain (10.167.225.33) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.42; Mon, 12 Dec 2022 07:35:05 +0000
+ (TLS) id 15.0.1497.42; Mon, 12 Dec 2022 07:35:11 +0000
 From: <wangmy@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-oe] [PATCH] flatbuffers: upgrade 22.11.23 -> 22.12.06
-Date: Mon, 12 Dec 2022 15:34:29 +0800
-Message-ID: <1670830471-3000-3-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-networking] [PATCH] nbdkit: upgrade 1.33.3 -> 1.33.4
+Date: Mon, 12 Dec 2022 15:34:31 +0800
+Message-ID: <1670830471-3000-5-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 In-Reply-To: <1670830471-3000-1-git-send-email-wangmy@fujitsu.com>
 References: <1670830471-3000-1-git-send-email-wangmy@fujitsu.com>
@@ -77,25 +77,32 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 12 Dec 2022 07:35:18 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100037
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100039
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- meta-oe/recipes-devtools/flatbuffers/flatbuffers.inc | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ .../nbdkit/{nbdkit_1.33.3.bb => nbdkit_1.33.4.bb}               | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-networking/recipes-support/nbdkit/{nbdkit_1.33.3.bb => nbdkit_1.33.4.bb} (95%)
 
-diff --git a/meta-oe/recipes-devtools/flatbuffers/flatbuffers.inc b/meta-oe/recipes-devtools/flatbuffers/flatbuffers.inc
-index a2294d1c7..c87a449f0 100644
---- a/meta-oe/recipes-devtools/flatbuffers/flatbuffers.inc
-+++ b/meta-oe/recipes-devtools/flatbuffers/flatbuffers.inc
-@@ -1,3 +1,3 @@
--PV = "22.11.23"
--SRCREV = "8f625561d053d232897790ad5fdcc9a6a1832133"
-+PV = "22.12.06"
-+SRCREV = "acf39ff056df8c9e5bfa32cf6f7b5e6b87a90544"
- SRC_URI = "git://github.com/google/flatbuffers.git;branch=master;protocol=https"
+diff --git a/meta-networking/recipes-support/nbdkit/nbdkit_1.33.3.bb b/meta-networking/recipes-support/nbdkit/nbdkit_1.33.4.bb
+similarity index 95%
+rename from meta-networking/recipes-support/nbdkit/nbdkit_1.33.3.bb
+rename to meta-networking/recipes-support/nbdkit/nbdkit_1.33.4.bb
+index af8354676..bc28eb84f 100644
+--- a/meta-networking/recipes-support/nbdkit/nbdkit_1.33.3.bb
++++ b/meta-networking/recipes-support/nbdkit/nbdkit_1.33.4.bb
+@@ -11,7 +11,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=f9dcc2d8acdde215fa4bd6ac12bb14f0"
+ 
+ SRC_URI = "git://github.com/libguestfs/nbdkit.git;protocol=https;branch=master \
+ "
+-SRCREV = "ef035f7090d8bec2700ef1f941e371d351d647ad"
++SRCREV = "eaca70ec362dcf745fc81188f6008528d1b17961"
+ 
+ S = "${WORKDIR}/git"
+ 
 -- 
 2.25.1
 
