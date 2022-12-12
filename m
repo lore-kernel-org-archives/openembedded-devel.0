@@ -1,115 +1,1270 @@
-Return-Path: <wangmy@fujitsu.com>
+Return-Path: <ovidiu.panait@eng.windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6B7FBC4167B
-	for <webhook@archiver.kernel.org>; Mon, 12 Dec 2022 07:40:18 +0000 (UTC)
-Received: from mail1.bemta34.messagelabs.com (mail1.bemta34.messagelabs.com [195.245.231.4])
- by mx.groups.io with SMTP id smtpd.web11.37668.1670830813432745715
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B29ECC4332F
+	for <webhook@archiver.kernel.org>; Mon, 12 Dec 2022 10:50:29 +0000 (UTC)
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.web10.40089.1670842222068776663
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 11 Dec 2022 23:40:13 -0800
+ Mon, 12 Dec 2022 02:50:22 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=nqOeEr3s;
- spf=pass (domain: fujitsu.com, ip: 195.245.231.4, mailfrom: wangmy@fujitsu.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1670830811; i=@fujitsu.com;
-	bh=Y0Ogm7dAsOrLI952RSICMWPSE9kKc+bqupot7l04o6M=;
-	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type;
-	b=nqOeEr3scRwKozeRBTVJ7YRvYDT3Ul3Xpev//F4Tozm2MLh42g4rRDPzUzhMLYb7C
-	 UdTOwKXN9AKrzU80hLSyijRKOXejsgNNiN8waCClEQArdRmh05LWEP4lnrVGUXMww/
-	 3XbejAtg29AaGNJq9t6uZj38HZ/ZMSoSrdS2KuBEaJX1qPxSfbJHS/j4yLII74Grev
-	 CA6Lb1P8hL3u8XjMO8xuGb96vR7Cmu54JhxGy9BMUXrSpubkDEZMQICJnZBXFGGRcA
-	 Q9n0vIaexX6uTfPvZbvxI1lYtWnsrUdlt7RDGDIxXSisBbUuWhfR7I7Ohl4qBpQfjD
-	 UyWIcOOeP+GJg==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrKIsWRWlGSWpSXmKPExsViZ8OxWff2rWn
-  JBvMXKFpcPLyU2YHR49zGFYwBjFGsmXlJ+RUJrBldm7gK9nNU7N6k1sB4gr2LkYtDSOABo8ST
-  vhMsEM5lJol9+3ZAOXsYJfY8bWTqYuTkYBOQkrhx/z8biC0ioC+xdPYeZhCbWUBF4sXvHnYQW
-  1jAXOLDjE4wm0VAVeLtogdgNq+Ao8T5ZVNZQGwJAQWJKQ/fg/VyCjhJbO+aywpiCwHVrHi5jw
-  2iXlDi5MwnLBDzJSQOvnjBDNGrKDH7cjPUnAqJWbPamCBsNYmr5zYxT2AUnIWkfRaS9gWMTKs
-  YzYpTi8pSi3QNLfSSijLTM0pyEzNz9BKrdBP1Ukt1y1OLS3SN9BLLi/VSi4v1iitzk3NS9PJS
-  SzYxAkM3pVj95A7GDcv+6B1ilORgUhLlrbwyLVmILyk/pTIjsTgjvqg0J7X4EKMMB4eSBO/Bm
-  0A5waLU9NSKtMwcYBzBpCU4eJREeFWAsSTEW1yQmFucmQ6ROsWoKCXOuxakTwAkkVGaB9cGi9
-  1LjLJSwryMDAwMQjwFqUW5mSWo8q8YxTkYlYR5eUHG82TmlcBNfwW0mAlocdTLqSCLSxIRUlI
-  NTOGZd3iLuI1m1ch6y5x8WDSPKer5phVy33veVmQ7qV6OrL+0KNi5eN5iO/mIy+f/RN0TZWjf
-  XfVMzucn1+9Czl3GP5PlvnWFH3j98WNB1+HoVSUR6y8HVa/8yrKZe15XzULfKSJSgWLr7N9fP
-  WQv/FIqKd3av1d4O/eaZTtm777IrHskq+D2HyOJ4gIhdqWJj4pW9Wy/+yhnv82yktf3fu9hT9
-  t3aqvYjvw5n3eveb3uWOeiw8qJEuKa0ZxHrz57vWTegxK/6WYn1BQnn7/+4pq3LfPvkoRV+ss
-  /3bKW5Red8/gXz03LbTVHVxux2tzO6dw/IZD14XSn9/7S+u4xn8oZ9y4B+jRrcfCx6z4+D5RY
-  ijMSDbWYi4oTAfssjUtYAwAA
-X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-11.tower-571.messagelabs.com!1670830811!316047!1
-X-Originating-IP: [62.60.8.179]
-X-SYMC-ESS-Client-Auth: outbound-route-from=pass
-X-StarScan-Received: 
-X-StarScan-Version: 9.101.2; banners=-,-,-
-X-VirusChecked: Checked
-Received: (qmail 2964 invoked from network); 12 Dec 2022 07:40:11 -0000
-Received: from unknown (HELO n03ukasimr04.n03.fujitsu.local) (62.60.8.179)
-  by server-11.tower-571.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 12 Dec 2022 07:40:11 -0000
-Received: from n03ukasimr04.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTP id 460AA7B
-	for <openembedded-devel@lists.openembedded.org>; Mon, 12 Dec 2022 07:40:11 +0000 (GMT)
-Received: from R01UKEXCASM126.r01.fujitsu.local (R01UKEXCASM126 [10.183.43.178])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTPS id 3987E73
-	for <openembedded-devel@lists.openembedded.org>; Mon, 12 Dec 2022 07:40:11 +0000 (GMT)
-Received: from localhost.localdomain (10.167.225.33) by
- R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.42; Mon, 12 Dec 2022 07:40:09 +0000
-From: <wangmy@fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-oe] [PATCH] tio: upgrade 2.3 -> 2.4
-Date: Mon, 12 Dec 2022 15:39:37 +0800
-Message-ID: <1670830778-3178-3-git-send-email-wangmy@fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
-In-Reply-To: <1670830778-3178-1-git-send-email-wangmy@fujitsu.com>
-References: <1670830778-3178-1-git-send-email-wangmy@fujitsu.com>
-MIME-Version: 1.0
+ dkim=missing; spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=9345604042=ovidiu.panait@windriver.com)
+Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 2BCA2PnJ020906
+	for <openembedded-devel@lists.openembedded.org>; Mon, 12 Dec 2022 10:50:21 GMT
+Received: from nam12-mw2-obe.outbound.protection.outlook.com (mail-mw2nam12lp2048.outbound.protection.outlook.com [104.47.66.48])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3mchn0sdku-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Mon, 12 Dec 2022 10:50:20 +0000
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=WLyG3Sa5Eu1nh8cV0TTMVz3bKyLfPHPNKwFbupZH/9dFp9NW/xe9OudX0jp0g7QQ0r6WOsPTQ6+704/e7rTe94R0bi7yeF6EIZLEa+AookwguGmko8kGYFA9JsJnO3xB9lq0Ix02Ru1gphTiCbejylcYlvDnn6IkbxDTPrcw4DjF1QOekIRiyZvJfVGHgFh2FqxvV6d+uvdf86BvVCQU13ZyZdqmn9tp/z8JtN/7XeSVGAQbKyOMmL42PcQlfScgkqlPuvU+k478Y4TlmB64r0yhh4qIiYxQxwdkY6MYDGtcANuVYPbLTE5HzWXFVwXiMRa83tUo85OKD/FL1rYmrw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=Egpx7Rkt9kvmx904KKiwh/FimSJNIWsNuMsUooDPj7M=;
+ b=cBZeGIdMLjO/P9/oMYHuoNOTF78TXSF+BZZF6F/7l/VlzMsv0JqoW7p4jEFwU/aF4y3cx0WhBEzsxWylCaeYXgqAvhEErYVaFeHGSDSHVBPvW7VNlvPiRgTT1oD/96l8luM6IxFbJ8f4+f9zC+NyvBsKr5PKBO37FFJVYAxPD9ok/nTlPEbjEwoxQzYIl2+hHkx1bj1NEt8E9ankv99Jb0GXQZAizihMvBmVehTz+Ht67DemJv+vY/yJArdz9F6JLo6kC/XT79KLnygC66376NEvpgOmrKbDZTunjaeFOks4fPPetmKthAsbASnSZT1bkyaIadYaZWGRpmB7oIKzEg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=windriver.com; dmarc=pass action=none
+ header.from=eng.windriver.com; dkim=pass header.d=eng.windriver.com; arc=none
+Received: from DM4PR11MB5327.namprd11.prod.outlook.com (2603:10b6:5:392::22)
+ by DS0PR11MB6469.namprd11.prod.outlook.com (2603:10b6:8:c3::19) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5880.19; Mon, 12 Dec
+ 2022 10:50:17 +0000
+Received: from DM4PR11MB5327.namprd11.prod.outlook.com
+ ([fe80::da82:93c2:307:df99]) by DM4PR11MB5327.namprd11.prod.outlook.com
+ ([fe80::da82:93c2:307:df99%7]) with mapi id 15.20.5880.019; Mon, 12 Dec 2022
+ 10:50:17 +0000
+From: Ovidiu Panait <ovidiu.panait@eng.windriver.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-oe][PATCH v2 1/1] multipath-tools: upgrade 0.8.4 -> 0.9.3
+Date: Mon, 12 Dec 2022 12:49:55 +0200
+Message-Id: <20221212104955.3404234-1-ovidiu.panait@eng.windriver.com>
+X-Mailer: git-send-email 2.38.1
+Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-Originating-IP: [10.167.225.33]
-X-ClientProxiedBy: G08CNEXCHPEKD07.g08.fujitsu.local (10.167.33.80) To
- R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
-X-Virus-Scanned: ClamAV using ClamSMTP
+X-ClientProxiedBy: VI1PR07CA0173.eurprd07.prod.outlook.com
+ (2603:10a6:802:3e::21) To DM4PR11MB5327.namprd11.prod.outlook.com
+ (2603:10b6:5:392::22)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DM4PR11MB5327:EE_|DS0PR11MB6469:EE_
+X-MS-Office365-Filtering-Correlation-Id: 94a087e3-6d08-4e39-c20c-08dadc2ea73f
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 
+	cQWwy7tkJVABAMrIaJC/o/J4sKRRFORP1zdEGQ7WoXlD/GTueSe+CRQE9Y6PK3885ZOmC4gUEyzpwdwOaNcuRMMd7qRRZUdHxUATMI9/79HEi8XX5v8S9OcdfWB1aJbzR/sLxbHyCdGtC4CbiVXqFoeIlGSUraqNzz91hF7UX+e37fqiE277X7qY81WMjivXqXejwbKm9diEsPizNUEpCzcUd2Cp9YDdqQkfMwa8gKtQc5LnoZ4QQOf4mNNvPtcs+MHy7sGsTonTLLD0BW0zJssZwUJ7Y7OKxDc2T4IeTuJLD1nErc43KTXWA/rzSzwzJ3+VrGHtpNgJbR2BpSt7eT8roXk+lfbzH0Xnr31sBBPbT5KlSm9IRXSs6xGurkRQbxCquuYXJizZFcwWrx+PnlvBY7sVp5PnjzmwQmVlvRkC0VkDL1XElEU0fLOkXjZUMbqUAPLHhVxaMma4om1XoUyz6O2huiIBKJm+IwhKzIV3ee/zxCTyKQpqJ6Lj+J1rYSR0CWg7A8+eGGyrNkZZ3ipJfSBI402nA9vQLLj/kZXdkXNk//Wwv8FDAtj6F86WRGbwVrDusOd3ZgZuoVt6myY66DZqtOPcX3LxE5fHkKTnivakInj6nZbDQmbl2PFAePQxyROaYZaFizELPMfwY9Gx2Wi93wrkFMnnzDW8MG78lW64awHVupUufn+tM5zYKX8SuwHoYr6Nt59kbxbH+ouzDbY95rXzQWkaM0F1h37eCMJhf002G/wfEzb7ms+z
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM4PR11MB5327.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230022)(4636009)(346002)(396003)(39850400004)(366004)(376002)(136003)(451199015)(66946007)(66476007)(66556008)(5660300002)(41300700001)(8676002)(44832011)(2906002)(30864003)(6916009)(316002)(8936002)(186003)(6666004)(6512007)(26005)(83380400001)(966005)(2616005)(6486002)(1076003)(38100700002)(52116002)(6506007)(83170400001)(53546011)(478600001)(38350700002)(579004);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?us-ascii?Q?pDpxxpqIg8L6kDoZavn+U8hQNlYU7gn+PNymM74fDrclGIfjAujNTDLLNbAz?=
+ =?us-ascii?Q?oYpsP6Odj8Y7elcOgXHhdAQzIQ/+oVPCgn09BxqevfdR3jCNUbIXNsznYjnP?=
+ =?us-ascii?Q?BoTkNLYmp/HSDL6oCcnh2FsobPNz5rhnyuon9fn5pLeY05Nf2jzPLCyVTv4u?=
+ =?us-ascii?Q?mkfxBxUY+t7CVX7cBoQiBZ1vvvT2YycTYmhPGLLcEkXodFK4mVnj2txvt7YH?=
+ =?us-ascii?Q?8EY0PWlhsFtqQcgSMW1O99XVXcQemeHAoXItrvgd8XzYP3Kp0ITNOuaiFDjF?=
+ =?us-ascii?Q?Tq9UZx0FMWMnioN0vVh0jfSGJAKygKoxaamz3LYn4chidfQEuRoUKLNhc5k4?=
+ =?us-ascii?Q?lR8b7dNk/tcB2CPBCY8/PwTISIQTSNl4X7gMFgoi2IvaWFZvXfqtSbAEYens?=
+ =?us-ascii?Q?AReQbziCdzgQpjeaUWpw+g+VIvycW+6MP8sRC2DoZ0MRc3gtTAH9k2o82QH4?=
+ =?us-ascii?Q?llq8xy9aWz8KSvKB+NpO3TnFWFU/g9Xxr3gir36WWtLx3ErTinmlzHdYwwlo?=
+ =?us-ascii?Q?nF/caxsfTlALpOPod43odQkyH0BSB6r1qHcn30gHUJr4gLHcctZCkqj5Zxj4?=
+ =?us-ascii?Q?/QldRRn+GehkXuu2yCKXDM7DEYUbHlp9N/iQEkXmYrVdkBVOboKmrsi/5ebk?=
+ =?us-ascii?Q?uvV6WEx4y+qZJ2nbU/bklPKgA9E4bqtMrqHeRPTxc29L0dd5SrfskThJtu7n?=
+ =?us-ascii?Q?7lJ4zY78jeZcLJkiYQIytsGiwSwcjYvTyACAI4hpCgB46qrPra7DlqUOrRee?=
+ =?us-ascii?Q?wwntFP+iezPUpby3A7GJ1r1bJ6+fG6g5xf85Uj5Nz8+0VKfkfz91/S1VygT3?=
+ =?us-ascii?Q?T2tbKJBoshU4s0QcE6w4iMHAgYgi5A3bpJPZY3IO6QiC0H1QW9JG+et2r6yM?=
+ =?us-ascii?Q?3zeWEwjukqSlt9C3T1wC0McI7Cco76CMNYbQGysx0MJk88T10/PTHvzzFvVt?=
+ =?us-ascii?Q?UHoXN1opKEfX3en3fllS93lQQUcp4qhrGyXXKaTqgE28vkFWc0v7FH0svRKB?=
+ =?us-ascii?Q?xkd64Ei7YTZGfN+wi5AlTCFkvZ+PoQrrmGkukRf6OzyRmCE2i3y5+uNnyVGc?=
+ =?us-ascii?Q?l4QAj4MyHY6lVUFFJGX9+SUSYAK/dWCg0zdoWt0CEouFA2ZPuMgd4AIJ5KF4?=
+ =?us-ascii?Q?Qb7FolSQssebkWOj4pXTq/TMGm/fmQcsS7n1FZdRXYY/AotC4lBkmIW6kLvQ?=
+ =?us-ascii?Q?J5zUme8SiuJyM4+H0ECenJ1uBGQJO0D6VQV6kj+kMjhRtiiMakjAvyptwZ0J?=
+ =?us-ascii?Q?hzmlFquUVFuP8/0HdrT+l0KLSSlZfqRwsyYPZCXvw9YKibFCVqmazG0BnUcN?=
+ =?us-ascii?Q?7ptPJTCdVv5nWzUBwu2euG9UKjygsN2tofG7nXvK1vH17YZwgvKuUGwK0SQe?=
+ =?us-ascii?Q?UBGPI4OgRNpidi+aLfJD4tAPi6bRdxQanMFfLCuZWzNZoo2SyPNdV+9x4i8c?=
+ =?us-ascii?Q?fBOA2j5ONqqBbULfU+rRKKuBjDk9We5BK0EpriDW/8Zs4XYfZZlwzS/a3LHY?=
+ =?us-ascii?Q?ljOBxvxHYyhZN+07mciQ8YL75qW3ajmr+0N/ERg6RaOYZnTKCLVvj70zPW0j?=
+ =?us-ascii?Q?H5ACumFWspZGH8XQEHPPaTZUSO0CnI6hMs4VBv+c0LvBZ/126ufaTxHzAgwc?=
+ =?us-ascii?Q?HA=3D=3D?=
+X-OriginatorOrg: eng.windriver.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 94a087e3-6d08-4e39-c20c-08dadc2ea73f
+X-MS-Exchange-CrossTenant-AuthSource: DM4PR11MB5327.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Dec 2022 10:50:17.2531
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: uZ2hANbvzd5vVwprdliKtXVg2uxlJdNbaIoy0nALUnE2Few7cFcEIvc98ptImGdDKXRy+9GSyo+ZLDOjNFbiYpodbbiI1/Qqb6mUz3Hzw+A=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS0PR11MB6469
+X-Proofpoint-GUID: 1-pt42PsCttcr4t76ADWAEG_dk6FQDwe
+X-Proofpoint-ORIG-GUID: 1-pt42PsCttcr4t76ADWAEG_dk6FQDwe
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.205,Aquarius:18.0.923,Hydra:6.0.545,FMLib:17.11.122.1
+ definitions=2022-12-12_02,2022-12-12_01,2022-06-22_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 clxscore=1015 impostorscore=0
+ bulkscore=0 adultscore=0 mlxlogscore=999 phishscore=0 mlxscore=0
+ lowpriorityscore=0 priorityscore=1501 spamscore=0 suspectscore=0
+ malwarescore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.12.0-2210170000 definitions=main-2212120099
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 12 Dec 2022 07:40:18 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100057
+ <openembedded-devel@lists.openembedded.org>; Mon, 12 Dec 2022 10:50:29 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100059
 
-From: Wang Mingyu <wangmy@fujitsu.com>
+From: Ovidiu Panait <ovidiu.panait@windriver.com>
 
-Chaneglog:
-==========
- * Add threaded input handling
- * Fix so that is it possible to quit tio in tio etc.
- * Add key command to toggle log on/off
+* most patches were rebased on top of 0.9.3 with various small adjustments.
 
-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+* the following patches were dropped:
+  0001-fix-boolean-value-with-json-c-0.14.patch
+  0001-libmultipath-uevent.c-fix-error-handling-for-udev_mo.patch
+
+  replaced by upstream commits:
+  82129852d747 ("fix boolean value with json-c 0.14")
+  54349bcfc818 ("libmultipath: avoid buffer size warning with systemd 240+")
+
+* prefix, usrlibdir, plugindir, modulesloaddir, and tmpfilesdir were added to
+  EXTRA_OEMAKE to fix QA.
+
+* libgcc was added to RDEPENDS in order to fix the following startup error:
+  "libgcc_s.so.1 must be installed for pthread_cancel to work"
+
+Signed-off-by: Ovidiu Panait <ovidiu.panait@windriver.com>
 ---
- meta-oe/recipes-support/tio/{tio_2.3.bb => tio_2.4.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-support/tio/{tio_2.3.bb => tio_2.4.bb} (91%)
+ ...add-explicit-dependency-on-libraries.patch | 24 +++---
+ ...1-fix-boolean-value-with-json-c-0.14.patch | 42 ----------
+ ...fix-bug-of-do_compile-and-do_install.patch | 33 ++++----
+ ...ent.c-fix-error-handling-for-udev_mo.patch | 39 ---------
+ .../0021-RH-fixup-udev-rules-for-redhat.patch | 40 ++++-----
+ ...property-blacklist-exception-builtin.patch | 25 +++---
+ ...RH-don-t-start-without-a-config-file.patch | 58 ++++++-------
+ .../0024-RH-use-rpm-optflags-if-present.patch | 44 ++++++----
+ .../files/0025-RH-add-mpathconf.patch         | 61 +++++++-------
+ ...om-kernel-cmdline-mpath.wwids-with-A.patch | 17 ++--
+ ...-on-invalid-regex-instead-of-failing.patch | 82 +++++++------------
+ ...modify-Makefile.inc-for-cross-compil.patch | 14 ++--
+ .../files/0030-Always-use-devmapper.patch     | 59 ++++++++-----
+ ...0031-Always-use-devmapper-for-kpartx.patch | 16 ++--
+ ...-replace-perl-with-sed-in-install-ta.patch | 14 ++--
+ ...ools_0.8.4.bb => multipath-tools_0.9.3.bb} | 11 ++-
+ 16 files changed, 257 insertions(+), 322 deletions(-)
+ delete mode 100644 meta-oe/recipes-support/multipath-tools/files/0001-fix-boolean-value-with-json-c-0.14.patch
+ delete mode 100644 meta-oe/recipes-support/multipath-tools/files/0001-libmultipath-uevent.c-fix-error-handling-for-udev_mo.patch
+ rename meta-oe/recipes-support/multipath-tools/{multipath-tools_0.8.4.bb => multipath-tools_0.9.3.bb} (93%)
 
-diff --git a/meta-oe/recipes-support/tio/tio_2.3.bb b/meta-oe/recipes-support/tio/tio_2.4.bb
-similarity index 91%
-rename from meta-oe/recipes-support/tio/tio_2.3.bb
-rename to meta-oe/recipes-support/tio/tio_2.4.bb
-index 665c8462f..548ee7c63 100644
---- a/meta-oe/recipes-support/tio/tio_2.3.bb
-+++ b/meta-oe/recipes-support/tio/tio_2.4.bb
-@@ -7,7 +7,7 @@ LICENSE = "GPL-2.0-or-later"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=0e1a95b7892d3015ecd6d0016f601f2c"
+diff --git a/meta-oe/recipes-support/multipath-tools/files/0001-add-explicit-dependency-on-libraries.patch b/meta-oe/recipes-support/multipath-tools/files/0001-add-explicit-dependency-on-libraries.patch
+index 2827bb874..3b0a70448 100644
+--- a/meta-oe/recipes-support/multipath-tools/files/0001-add-explicit-dependency-on-libraries.patch
++++ b/meta-oe/recipes-support/multipath-tools/files/0001-add-explicit-dependency-on-libraries.patch
+@@ -1,4 +1,4 @@
+-From 04884263d1de8c427a7a15bd1cf6466ea65d3a0b Mon Sep 17 00:00:00 2001
++From ee9f7b6e764be5668bc958f8bb97a46e5056d050 Mon Sep 17 00:00:00 2001
+ From: Hongxu Jia <hongxu.jia@windriver.com>
+ Date: Mon, 25 May 2020 23:22:55 -0700
+ Subject: [PATCH] add explicit dependency on libraries
+@@ -17,24 +17,24 @@ ln -sf libmpathpersist.so.0 libmpathpersist.so
+ Upstream-Status: Pending
  
- SRC_URI = "git://github.com/tio/tio;protocol=https;nobranch=1"
--SRCREV = "845e683fc9e2d2da686fe0c8e4b19b1245e9904b"
-+SRCREV = "6b084a53b84dd7b369a6486f59f74138f6d7221a"
+ Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
++[OP: Rebase to 0.9.3]
++Signed-off-by: Ovidiu Panait <ovidiu.panait@windriver.com>
+ ---
+- Makefile | 3 ++-
+- 1 file changed, 2 insertions(+), 1 deletion(-)
++ Makefile | 1 +
++ 1 file changed, 1 insertion(+)
+ 
+ diff --git a/Makefile b/Makefile
+-index bea0a0b2..37a77129 100644
++index f195b570..2d22881c 100644
+ --- a/Makefile
+ +++ b/Makefile
+-@@ -29,7 +29,8 @@ $(BUILDDIRS):
+- 	$(MAKE) -C $@
+- 
+- multipath multipathd mpathpersist libmpathpersist : libmultipath
+--mpathpersist:  libmpathpersist
+-+mpathpersist multipathd:  libmpathpersist
+-+libdmmp libmultipath mpathpersist multipath multipathd: libmpathcmd
++@@ -78,6 +78,7 @@ libmultipath: libmpathutil
++ libmpathpersist libmpathvalid multipath multipathd: libmultipath
++ libmultipath/prioritizers libmultipath/checkers libmultipath/foreign: libmultipath
++ mpathpersist multipathd:  libmpathpersist
+++libmultipath mpathpersist multipath multipathd: libmpathcmd
+  
+  DEPS_ON_MULTIPATH := \
+  	multipath \
+ -- 
+-2.21.0
++2.38.1
+ 
+diff --git a/meta-oe/recipes-support/multipath-tools/files/0001-fix-boolean-value-with-json-c-0.14.patch b/meta-oe/recipes-support/multipath-tools/files/0001-fix-boolean-value-with-json-c-0.14.patch
+deleted file mode 100644
+index cf97b491e..000000000
+--- a/meta-oe/recipes-support/multipath-tools/files/0001-fix-boolean-value-with-json-c-0.14.patch
++++ /dev/null
+@@ -1,42 +0,0 @@
+-From 5ae81386a8cfea4180738c261cd3f7944a631199 Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Wed, 3 Jun 2020 16:03:56 -0700
+-Subject: [PATCH] fix boolean value with json-c 0.14
+-
+-Patch from Christian Hesse posted here
+-https://www.spinics.net/lists/dm-devel/msg40646.html
+-
+-Upstream json-c 0.14+ removed the TRUE and FALSE defines in commit
+-0992aac61f8b087efd7094e9ac2b84fa9c040fcd.
+-
+-Upstream-Status: Submitted [https://www.spinics.net/lists/dm-devel/msg40646.html]
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+- libdmmp/libdmmp_private.h | 4 ++--
+- 1 file changed, 2 insertions(+), 2 deletions(-)
+-
+-diff --git a/libdmmp/libdmmp_private.h b/libdmmp/libdmmp_private.h
+-index ac85b63f..29400826 100644
+---- a/libdmmp/libdmmp_private.h
+-+++ b/libdmmp/libdmmp_private.h
+-@@ -82,7 +82,7 @@ static out_type func_name(struct dmmp_context *ctx, const char *var_name) { \
+- do { \
+- 	json_type j_type = json_type_null; \
+- 	json_object *j_obj_tmp = NULL; \
+--	if (json_object_object_get_ex(j_obj, key, &j_obj_tmp) != TRUE) { \
+-+	if (json_object_object_get_ex(j_obj, key, &j_obj_tmp) != 1) { \
+- 		_error(ctx, "Invalid JSON output from multipathd IPC: " \
+- 		       "key '%s' not found", key); \
+- 		rc = DMMP_ERR_IPC_ERROR; \
+-@@ -90,7 +90,7 @@ do { \
+- 	} \
+- 	if (j_obj_tmp == NULL) { \
+- 		_error(ctx, "BUG: Got NULL j_obj_tmp from " \
+--		       "json_object_object_get_ex() while it return TRUE"); \
+-+		       "json_object_object_get_ex() while it return 1"); \
+- 		rc = DMMP_ERR_BUG; \
+- 		goto out; \
+- 	} \
+--- 
+-2.27.0
+-
+diff --git a/meta-oe/recipes-support/multipath-tools/files/0001-fix-bug-of-do_compile-and-do_install.patch b/meta-oe/recipes-support/multipath-tools/files/0001-fix-bug-of-do_compile-and-do_install.patch
+index ac8733769..97425fe9b 100644
+--- a/meta-oe/recipes-support/multipath-tools/files/0001-fix-bug-of-do_compile-and-do_install.patch
++++ b/meta-oe/recipes-support/multipath-tools/files/0001-fix-bug-of-do_compile-and-do_install.patch
+@@ -1,4 +1,4 @@
+-From fd90d952edaa4b27e62a29fdba7a201288d440eb Mon Sep 17 00:00:00 2001
++From 51f1f351262a31d94c10504e4d135526c6a7caeb Mon Sep 17 00:00:00 2001
+ From: Wang Mingyu <wangmy@cn.fujitsu.com>
+ Date: Sun, 10 May 2020 21:22:53 +0800
+ Subject: [PATCH] fix bug of do_compile and do_install
+@@ -7,27 +7,24 @@ when multiple processes make run in parallel,
+ because of dependency error will occur.
+ 
+ Signed-off-by: Wang Mingyu <wangmy@cn.fujitsu.com>
++
++[OP: Rebase to 0.9.3]
++[OP: Drop dependencies that are already present in the 0.9.3 Makefile]
++Signed-off-by: Ovidiu Panait <ovidiu.panait@windriver.com>
+ ---
+- Makefile | 15 ++++++++++++++-
+- 1 file changed, 14 insertions(+), 1 deletion(-)
++ Makefile | 10 ++++++++++
++ 1 file changed, 10 insertions(+)
+ 
+ diff --git a/Makefile b/Makefile
+-index 1dee3680..bea0a0b2 100644
++index 27b4641f..f195b570 100644
+ --- a/Makefile
+ +++ b/Makefile
+-@@ -28,9 +28,22 @@ all:	$(BUILDDIRS)
+- $(BUILDDIRS):
+- 	$(MAKE) -C $@
+- 
+--multipath multipathd mpathpersist: libmultipath
+-+multipath multipathd mpathpersist libmpathpersist : libmultipath
+- mpathpersist:  libmpathpersist
++@@ -79,6 +79,16 @@ libmpathpersist libmpathvalid multipath multipathd: libmultipath
++ libmultipath/prioritizers libmultipath/checkers libmultipath/foreign: libmultipath
++ mpathpersist multipathd:  libmpathpersist
+  
+ +DEPS_ON_MULTIPATH := \
+ +	multipath \
+-+	libmultipath/prioritizers \
+-+	libmultipath/checkers \
+-+	libmultipath/foreign \
+ +	multipathd \
+ +	mpathpersist \
+ +	libmpathpersist
+@@ -36,9 +33,9 @@ index 1dee3680..bea0a0b2 100644
+ +mpathpersist.install:  libmpathpersist.install
+ +libdmmp.install libmultipath/foreign.install:  mpathpersist.install
+ +
+- $(BUILDDIRS.clean):
+- 	$(MAKE) -C ${@:.clean=} clean
+- 
++ libmultipath/checkers.install \
++ 	libmultipath/prioritizers.install \
++ 	libmultipath/foreign.install: libmultipath.install
+ -- 
+-2.17.1
++2.38.1
+ 
+diff --git a/meta-oe/recipes-support/multipath-tools/files/0001-libmultipath-uevent.c-fix-error-handling-for-udev_mo.patch b/meta-oe/recipes-support/multipath-tools/files/0001-libmultipath-uevent.c-fix-error-handling-for-udev_mo.patch
+deleted file mode 100644
+index d261b13d9..000000000
+--- a/meta-oe/recipes-support/multipath-tools/files/0001-libmultipath-uevent.c-fix-error-handling-for-udev_mo.patch
++++ /dev/null
+@@ -1,39 +0,0 @@
+-From 8579d8a35886f91974e0ac4dbdf2edb7dac06d52 Mon Sep 17 00:00:00 2001
+-From: Joe Slater <joe.slater@windriver.com>
+-Date: Fri, 18 Dec 2020 11:17:50 +0800
+-Subject: [PATCH] libmultipath/uevent.c: fix error handling for
+- udev_monitor_set_receive_buffer_size
+-
+-Since systemd v246.5[1], udev_monitor_set_receive_buffer_size() will
+-return 0 or 1 if successful. We only need to check a negative value for
+-the failure.
+-
+-[1] https://github.com/systemd/systemd-stable/commit/4dcae666889ae9469e4406c0bcaffadbc01c4f66
+-    https://github.com/systemd/systemd-stable/commit/fe9b92e566f837665cc06c82374e4e42f9295c99
+-    https://github.com/systemd/systemd-stable/commit/5dd4cc4b10daea5d2ba969425ba02d2098dd06a4
+-
+-Upstream-Status: Pending
+-
+-Signed-off-by: Joe Slater <joe.slater@windriver.com>
+-Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+----
+- libmultipath/uevent.c | 3 ++-
+- 1 file changed, 2 insertions(+), 1 deletion(-)
+-
+-diff --git a/libmultipath/uevent.c b/libmultipath/uevent.c
+-index d38e8a7f..4b298052 100644
+---- a/libmultipath/uevent.c
+-+++ b/libmultipath/uevent.c
+-@@ -810,7 +810,8 @@ int uevent_listen(struct udev *udev)
+- 	}
+- 	pthread_cleanup_push(monitor_cleanup, monitor);
+- #ifdef LIBUDEV_API_RECVBUF
+--	if (udev_monitor_set_receive_buffer_size(monitor, 128 * 1024 * 1024))
+-+	err = udev_monitor_set_receive_buffer_size(monitor, 128 * 1024 * 1024);
+-+	if (err < 0)
+- 		condlog(2, "failed to increase buffer size");
+- #endif
+- 	fd = udev_monitor_get_fd(monitor);
+--- 
+-2.17.1
+-
+diff --git a/meta-oe/recipes-support/multipath-tools/files/0021-RH-fixup-udev-rules-for-redhat.patch b/meta-oe/recipes-support/multipath-tools/files/0021-RH-fixup-udev-rules-for-redhat.patch
+index e88e25617..0b9971dc9 100644
+--- a/meta-oe/recipes-support/multipath-tools/files/0021-RH-fixup-udev-rules-for-redhat.patch
++++ b/meta-oe/recipes-support/multipath-tools/files/0021-RH-fixup-udev-rules-for-redhat.patch
+@@ -1,4 +1,4 @@
+-From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
++From 9a941729d3c0d19d30d65e16b291c380e589eeb3 Mon Sep 17 00:00:00 2001
+ From: Benjamin Marzinski <bmarzins@redhat.com>
+ Date: Thu, 13 Apr 2017 07:22:23 -0500
+ Subject: [PATCH] RH: fixup udev rules for redhat
+@@ -14,6 +14,8 @@ Signed-off-by: Benjamin Marzinski <bmarzins@redhat.com>
+ Update patch to 0.8.0
+ 
+ Signed-off-by: Changqing Li <changqing.li@windriver.com>
++[OP: Rebase to 0.9.3]
++Signed-off-by: Ovidiu Panait <ovidiu.panait@windriver.com>
+ ---
+  Makefile.inc        | 2 +-
+  kpartx/kpartx.rules | 2 +-
+@@ -21,23 +23,23 @@ Signed-off-by: Changqing Li <changqing.li@windriver.com>
+  3 files changed, 4 insertions(+), 4 deletions(-)
+ 
+ diff --git a/Makefile.inc b/Makefile.inc
+-index fc728ca..2f0bcea 100644
++index 4d843ce5..57779fd8 100644
+ --- a/Makefile.inc
+ +++ b/Makefile.inc
+-@@ -48,7 +48,7 @@ endif
++@@ -81,7 +81,7 @@ endif
+  prefix		=
+  exec_prefix	= $(prefix)
+  usr_prefix	= $(prefix)
+ -bindir		= $(exec_prefix)/sbin
+ +bindir		= $(exec_prefix)/usr/sbin
+  libudevdir	= $(prefix)/$(SYSTEMDPATH)/udev
++ tmpfilesdir	= $(prefix)/$(SYSTEMDPATH)/tmpfiles.d
+  udevrulesdir	= $(libudevdir)/rules.d
+- multipathdir	= $(TOPDIR)/libmultipath
+ diff --git a/kpartx/kpartx.rules b/kpartx/kpartx.rules
+-index 8f99049..8a3a171 100644
++index 1969dee0..d2b28233 100644
+ --- a/kpartx/kpartx.rules
+ +++ b/kpartx/kpartx.rules
+-@@ -32,6 +32,6 @@ LABEL="mpath_kpartx_end"
++@@ -39,6 +39,6 @@ LABEL="mpath_kpartx_end"
+  GOTO="kpartx_end"
+  
+  LABEL="run_kpartx"
+@@ -46,27 +48,27 @@ index 8f99049..8a3a171 100644
+  
+  LABEL="kpartx_end"
+ diff --git a/multipath/Makefile b/multipath/Makefile
+-index 0828a8f..b9bbb3c 100644
++index 116348e2..8482de6a 100644
+ --- a/multipath/Makefile
+ +++ b/multipath/Makefile
+-@@ -24,7 +24,7 @@ install:
++@@ -23,7 +23,7 @@ install:
+  	$(INSTALL_PROGRAM) -m 755 $(EXEC) $(DESTDIR)$(bindir)/
+  	$(INSTALL_PROGRAM) -d $(DESTDIR)$(udevrulesdir)
+  	$(INSTALL_PROGRAM) -m 644 11-dm-mpath.rules $(DESTDIR)$(udevrulesdir)
+--	$(INSTALL_PROGRAM) -m 644 $(EXEC).rules $(DESTDIR)$(libudevdir)/rules.d/56-multipath.rules
+-+	$(INSTALL_PROGRAM) -m 644 $(EXEC).rules $(DESTDIR)$(libudevdir)/rules.d/62-multipath.rules
+- 	$(INSTALL_PROGRAM) -d $(DESTDIR)$(man8dir)
+- 	$(INSTALL_PROGRAM) -m 644 $(EXEC).8.gz $(DESTDIR)$(man8dir)
+- 	$(INSTALL_PROGRAM) -d $(DESTDIR)$(man5dir)
+-@@ -33,7 +33,7 @@ install:
+- uninstall:
+- 	$(RM) $(DESTDIR)$(bindir)/$(EXEC)
++-	$(INSTALL_PROGRAM) -m 644 multipath.rules $(DESTDIR)$(udevrulesdir)/56-multipath.rules
+++	$(INSTALL_PROGRAM) -m 644 multipath.rules $(DESTDIR)$(udevrulesdir)/62-multipath.rules
++ 	$(INSTALL_PROGRAM) -d $(DESTDIR)$(modulesloaddir)
++ 	$(INSTALL_PROGRAM) -m 644 modules-load.conf $(DESTDIR)$(modulesloaddir)/multipath.conf
++ 	$(INSTALL_PROGRAM) -d $(DESTDIR)$(tmpfilesdir)
++@@ -43,7 +43,7 @@ uninstall:
+  	$(RM) $(DESTDIR)$(udevrulesdir)/11-dm-mpath.rules
++ 	$(RM) $(DESTDIR)$(modulesloaddir)/multipath.conf
++ 	$(RM) $(DESTDIR)$(modulesloaddir)/scsi_dh.conf
+ -	$(RM) $(DESTDIR)$(libudevdir)/rules.d/56-multipath.rules
+ +	$(RM) $(DESTDIR)$(libudevdir)/rules.d/62-multipath.rules
+- 	$(RM) $(DESTDIR)$(man8dir)/$(EXEC).8.gz
+- 	$(RM) $(DESTDIR)$(man5dir)/$(EXEC).conf.5.gz
++ 	$(RM) $(DESTDIR)$(man8dir)/$(EXEC).8
++ 	$(RM) $(DESTDIR)$(man5dir)/$(EXEC).conf.5
+  
+ -- 
+-2.7.4
++2.38.1
+ 
+diff --git a/meta-oe/recipes-support/multipath-tools/files/0022-RH-Remove-the-property-blacklist-exception-builtin.patch b/meta-oe/recipes-support/multipath-tools/files/0022-RH-Remove-the-property-blacklist-exception-builtin.patch
+index 21b8ec6b0..0eff18b85 100644
+--- a/meta-oe/recipes-support/multipath-tools/files/0022-RH-Remove-the-property-blacklist-exception-builtin.patch
++++ b/meta-oe/recipes-support/multipath-tools/files/0022-RH-Remove-the-property-blacklist-exception-builtin.patch
+@@ -17,28 +17,27 @@ Upsteam-Status: Pending
+ 
+ Update patch to 0.8.2
+ Signed-off-by: Changqing Li <changqing.li@windriver.com>
++[OP: Rebase to 0.9.3]
++Signed-off-by: Ovidiu Panait <ovidiu.panait@windriver.com>
+ ---
+- libmultipath/blacklist.c | 13 +++++--------
+- 1 file changed, 5 insertions(+), 8 deletions(-)
++ libmultipath/blacklist.c | 10 +++++-----
++ 1 file changed, 5 insertions(+), 5 deletions(-)
+ 
+ diff --git a/libmultipath/blacklist.c b/libmultipath/blacklist.c
+-index 00e8dbd..5204501 100644
++index 8d15d2ea..820b0d68 100644
+ --- a/libmultipath/blacklist.c
+ +++ b/libmultipath/blacklist.c
+-@@ -192,12 +192,6 @@ setup_default_blist (struct config * conf)
+- 	char * str;
++@@ -198,9 +198,6 @@ setup_default_blist (struct config * conf)
++ 	struct hwentry *hwe;
+  	int i;
+  
+--	str = STRDUP("^(ram|zram|raw|loop|fd|md|dm-|sr|scd|st|dcssblk)[0-9]");
+--	if (!str)
+--		return 1;
+--	if (store_ble(conf->blist_devnode, str, ORIGIN_DEFAULT))
++-	if (store_ble(conf->blist_devnode, "!^(sd[a-z]|dasd[a-z]|nvme[0-9])", ORIGIN_DEFAULT))
+ -		return 1;
+ -
+- 	str = STRDUP("^(td|hd|vd)[a-z]");
+- 	if (!str)
++ 	if (store_ble(conf->elist_property, "(SCSI_IDENT_|ID_WWN)", ORIGIN_DEFAULT))
+  		return 1;
+-@@ -437,8 +431,11 @@ filter_property(struct config *conf, struct udev_device *udev, int lvl,
++ 
++@@ -435,8 +432,11 @@ filter_property(const struct config *conf, struct udev_device *udev,
+  			r = MATCH_NOTHING;
+  	}
+  
+@@ -53,5 +52,5 @@ index 00e8dbd..5204501 100644
+  
+  static void free_ble(struct blentry *ble)
+ -- 
+-2.7.4
++2.38.1
+ 
+diff --git a/meta-oe/recipes-support/multipath-tools/files/0023-RH-don-t-start-without-a-config-file.patch b/meta-oe/recipes-support/multipath-tools/files/0023-RH-don-t-start-without-a-config-file.patch
+index ea6137f87..840b00093 100644
+--- a/meta-oe/recipes-support/multipath-tools/files/0023-RH-don-t-start-without-a-config-file.patch
++++ b/meta-oe/recipes-support/multipath-tools/files/0023-RH-don-t-start-without-a-config-file.patch
+@@ -1,4 +1,4 @@
+-From 0bf8ff8dab26201b268b419809844c07e168f17d Mon Sep 17 00:00:00 2001
++From 056fdaece0f1a3a5ca92e8c08912730faa89875d Mon Sep 17 00:00:00 2001
+ From: Changqing Li <changqing.li@windriver.com>
+ Date: Fri, 23 Nov 2018 17:25:15 +0800
+ Subject: [PATCH] From 0000000000000000000000000000000000000000 Mon Sep 17
+@@ -19,30 +19,32 @@ Upstream-Status: Pending
+ 
+ update this patch to new version
+ Signed-off-by: Changqing Li <changqing.li@windriver.com>
++[OP: Rebase to 0.9.3]
++Signed-off-by: Ovidiu Panait <ovidiu.panait@windriver.com>
+ ---
+  libmultipath/config.c         | 18 ++++++++++++++++++
+  libmultipath/config.h         |  1 +
+- multipath/multipath.rules     |  1 +
++ multipath/multipath.rules.in  |  1 +
+  multipathd/multipathd.8       |  2 ++
+  multipathd/multipathd.service |  1 +
+  5 files changed, 23 insertions(+)
+ 
+ diff --git a/libmultipath/config.c b/libmultipath/config.c
+-index 5af7af5..e4233f1 100644
++index 5c5c0726..31894810 100644
+ --- a/libmultipath/config.c
+ +++ b/libmultipath/config.c
+ @@ -26,6 +26,7 @@
+- #include "devmapper.h"
+  #include "mpath_cmd.h"
+  #include "propsel.h"
++ #include "foreign.h"
+ +#include "version.h"
+  
+- static int
+- hwe_strmatch (const struct hwentry *hwe1, const struct hwentry *hwe2)
+-@@ -743,6 +745,23 @@ load_config (char * file)
+- 			goto out;
++ /*
++  * We don't support re-initialization after
++@@ -966,6 +967,23 @@ int _init_config (const char *file, struct config *conf)
+  		}
+  		factorize_hwtable(conf->hwtable, builtin_hwtable_size, file);
++ 		validate_pctable(conf->overrides, 0, file);
+ +	} else {
+ +		condlog(0, "/etc/multipath.conf does not exist, blacklisting all devices.");
+ +		if (conf->blist_devnode == NULL) {
+@@ -64,21 +66,21 @@ index 5af7af5..e4233f1 100644
+  
+  	conf->processed_main_config = 1;
+ diff --git a/libmultipath/config.h b/libmultipath/config.h
+-index 7d0cd9a..d7fb8e2 100644
++index 87947469..0dc89c16 100644
+ --- a/libmultipath/config.h
+ +++ b/libmultipath/config.h
+-@@ -9,6 +9,7 @@
++@@ -10,6 +10,7 @@
+  
+  #define ORIGIN_DEFAULT 0
+  #define ORIGIN_CONFIG  1
+ +#define ORIGIN_NO_CONFIG 2
+  
+- /*
+-  * In kernel, fast_io_fail == 0 means immediate failure on rport delete.
+-diff --git a/multipath/multipath.rules b/multipath/multipath.rules
+-index 9df11a9..0486bf7 100644
+---- a/multipath/multipath.rules
+-+++ b/multipath/multipath.rules
++ enum devtypes {
++ 	DEV_NONE,
++diff --git a/multipath/multipath.rules.in b/multipath/multipath.rules.in
++index 8d3cf33a..5c4447a2 100644
++--- a/multipath/multipath.rules.in
+++++ b/multipath/multipath.rules.in
+ @@ -9,6 +9,7 @@ IMPORT{cmdline}="nompath"
+  ENV{nompath}=="?*", GOTO="end_mpath"
+  IMPORT{cmdline}="multipath"
+@@ -88,30 +90,30 @@ index 9df11a9..0486bf7 100644
+  ENV{DEVTYPE}!="partition", GOTO="test_dev"
+  IMPORT{parent}="DM_MULTIPATH_DEVICE_PATH"
+ diff --git a/multipathd/multipathd.8 b/multipathd/multipathd.8
+-index 94c3f97..ed13efd 100644
++index bdf102eb..a16a0bd5 100644
+ --- a/multipathd/multipathd.8
+ +++ b/multipathd/multipathd.8
+-@@ -38,6 +38,8 @@ map regains its maximum performance and redundancy.
+- This daemon executes the external \fBmultipath\fR tool when events occur.
+- In turn, the multipath tool signals the multipathd daemon when it is done with
+- devmap reconfiguration, so that it can refresh its failed path list.
++@@ -48,6 +48,8 @@ map regains its maximum performance and redundancy.
++ With the \fB-k\fR option, \fBmultipathd\fR acts as a client utility that
++ sends commands to a running instance of the multipathd daemon (see
++ \fBCOMMANDS\fR below).
+ +
+ +In this Linux distribution, multipathd does not run unless a /etc/multipath.conf file exists.
+  .
+  .
+  .\" ----------------------------------------------------------------------------
+ diff --git a/multipathd/multipathd.service b/multipathd/multipathd.service
+-index ba24983..17434ce 100644
++index aec62dbb..ab7585de 100644
+ --- a/multipathd/multipathd.service
+ +++ b/multipathd/multipathd.service
+-@@ -4,6 +4,7 @@ Wants=systemd-udev-trigger.service systemd-udev-settle.service
+- Before=iscsi.service iscsid.service lvm2-activation-early.service
+- Before=local-fs-pre.target blk-availability.service
+- After=multipathd.socket systemd-udev-trigger.service systemd-udev-settle.service
++@@ -5,6 +5,7 @@ Before=local-fs-pre.target blk-availability.service shutdown.target
++ Wants=systemd-udevd-kernel.socket
++ After=systemd-udevd-kernel.socket
++ After=multipathd.socket systemd-remount-fs.service
+ +ConditionPathExists=/etc/multipath.conf
++ Before=initrd-cleanup.service
+  DefaultDependencies=no
+  Conflicts=shutdown.target
+- ConditionKernelCommandLine=!nompath
+ -- 
+-2.7.4
++2.38.1
+ 
+diff --git a/meta-oe/recipes-support/multipath-tools/files/0024-RH-use-rpm-optflags-if-present.patch b/meta-oe/recipes-support/multipath-tools/files/0024-RH-use-rpm-optflags-if-present.patch
+index 17542fd4f..e7b3e1223 100644
+--- a/meta-oe/recipes-support/multipath-tools/files/0024-RH-use-rpm-optflags-if-present.patch
++++ b/meta-oe/recipes-support/multipath-tools/files/0024-RH-use-rpm-optflags-if-present.patch
+@@ -1,7 +1,8 @@
+-From 436f7594485e35523269e662c4b5dc3a2c10ff9b Mon Sep 17 00:00:00 2001
++From cc38276a5d3926fd96e58366e15ba887d7d02ed0 Mon Sep 17 00:00:00 2001
+ From: Changqing Li <changqing.li@windriver.com>
+ Date: Mon, 26 Nov 2018 09:19:17 +0800
+ Subject: [PATCH] From 0000000000000000000000000000000000000000 Mon Sep
++
+ 17
+  00:00:00 2001 From: Benjamin Marzinski <bmarzins@redhat.com> Date: Wed,
+ 19
+@@ -19,21 +20,29 @@ Upstream-Status: Pending
+ update this patch to new version
+ 
+ Signed-off-by: Changqing Li <changqing.li@windriver.com>
++[OP: Rebase to 0.9.3]
++Signed-off-by: Ovidiu Panait <ovidiu.panait@windriver.com>
+ ---
+- Makefile.inc | 24 ++++++++++++++++--------
+- 1 file changed, 16 insertions(+), 8 deletions(-)
++ Makefile.inc | 28 ++++++++++++++++++----------
++ 1 file changed, 18 insertions(+), 10 deletions(-)
+ 
+ diff --git a/Makefile.inc b/Makefile.inc
+-index 42dbb5bf..55a06c60 100644
++index 57779fd8..34f2cc6d 100644
+ --- a/Makefile.inc
+ +++ b/Makefile.inc
+-@@ -89,15 +89,23 @@ TEST_CC_OPTION = $(shell \
+- 		echo "$(2)"; \
++@@ -140,20 +140,28 @@ FORTIFY_OPT := $(shell \
++ 		echo "-D_FORTIFY_SOURCE=2"; \
+  	fi)
+  
+ -STACKPROT := $(call TEST_CC_OPTION,-fstack-protector-strong,-fstack-protector)
+ -ERROR_DISCARDED_QUALIFIERS := $(call TEST_CC_OPTION,-Werror=discarded-qualifiers,)
+--WNOCLOBBERED := $(call TEST_CC_OPTION,-Wno-clobbered,)
++-WNOCLOBBERED := $(call TEST_CC_OPTION,-Wno-clobbered -Wno-error=clobbered,)
++-WFORMATOVERFLOW := $(call TEST_CC_OPTION,-Wformat-overflow=2,)
++-
++-OPTFLAGS	:= -O2 -g $(STACKPROT) --param=ssp-buffer-size=4
++-WARNFLAGS	:= -Werror -Wall -Wextra -Wformat=2 $(WFORMATOVERFLOW) -Werror=implicit-int \
++-		  -Werror=implicit-function-declaration -Werror=format-security \
++-		  $(WNOCLOBBERED) -Werror=cast-qual $(ERROR_DISCARDED_QUALIFIERS)
+ +ifndef RPM_OPT_FLAGS
+ +       STACKPROT := $(call TEST_CC_OPTION,-fstack-protector-strong,-fstack-protector)
+ +       OPTFLAGS        = -O2 -g -pipe -Wall -Werror=format-security \
+@@ -50,15 +59,16 @@ index 42dbb5bf..55a06c60 100644
+ +                  -Werror=implicit-function-declaration -Wno-sign-compare \
+ +                  -Wno-unused-parameter -Werror=cast-qual \
+ +                  -Werror=discarded-qualifiers
+- 
+--OPTFLAGS	= -O2 -g -pipe -Werror -Wall -Wextra -Wformat=2 -Werror=implicit-int \
+--		  -Werror=implicit-function-declaration -Werror=format-security \
+--		  $(WNOCLOBBERED) \
+--		  -Werror=cast-qual $(ERROR_DISCARDED_QUALIFIERS) \
+--		  $(STACKPROT) --param=ssp-buffer-size=4
+- CPPFLAGS	:= -Wp,-D_FORTIFY_SOURCE=2 
+- CFLAGS		:= $(OPTFLAGS) -DBIN_DIR=\"$(bindir)\" -DLIB_STRING=\"${LIB}\" -DRUN_DIR=\"${RUN}\" \
+- 		   -MMD -MP $(CFLAGS)
+++
++ CPPFLAGS	:= $(FORTIFY_OPT) \
++ 		   -DBIN_DIR=\"$(bindir)\" -DMULTIPATH_DIR=\"$(plugindir)\" -DRUN_DIR=\"${RUN}\" \
++ 		   -DRUNTIME_DIR=\"$(runtimedir)\" \
++ 		   -DCONFIG_DIR=\"$(configdir)\" -DEXTRAVERSION=\"$(EXTRAVERSION)\" -MMD -MP
++-CFLAGS		:= --std=gnu99 $(CFLAGS) $(OPTFLAGS) $(WARNFLAGS) -pipe
+++CFLAGS		:= --std=gnu99 $(CFLAGS) $(OPTFLAGS) -pipe
++ BIN_CFLAGS	= -fPIE -DPIE
++ LIB_CFLAGS	= -fPIC
++ SHARED_FLAGS	= -shared
+ -- 
+-2.17.1
++2.38.1
+ 
+diff --git a/meta-oe/recipes-support/multipath-tools/files/0025-RH-add-mpathconf.patch b/meta-oe/recipes-support/multipath-tools/files/0025-RH-add-mpathconf.patch
+index a1407718d..471ff0932 100644
+--- a/meta-oe/recipes-support/multipath-tools/files/0025-RH-add-mpathconf.patch
++++ b/meta-oe/recipes-support/multipath-tools/files/0025-RH-add-mpathconf.patch
+@@ -1,4 +1,4 @@
+-From eb5a36e6e0caedf06008e48eb77b7bf7c6534ee5 Mon Sep 17 00:00:00 2001
++From b0b4cca566e3e0c3a232b3754555c41d4e0c1273 Mon Sep 17 00:00:00 2001
+ From: Changqing Li <changqing.li@windriver.com>
+ Date: Mon, 26 Nov 2018 09:55:12 +0800
+ Subject: [PATCH] From 0000000000000000000000000000000000000000 Mon Sep 17
+@@ -19,21 +19,23 @@ Upstream-Status: Pending
+ update this patch to new version
+ 
+ Signed-off-by: Changqing Li <changqing.li@windriver.com>
++[OP: Rebase to 0.9.3]
++Signed-off-by: Ovidiu Panait <ovidiu.panait@windriver.com>
+ ---
+  libmultipath/config.c |   1 +
+- multipath/Makefile    |   5 +
+- multipath/mpathconf   | 464 ++++++++++++++++++++++++++++++++++++++++++++++++++
+- multipath/mpathconf.8 | 101 +++++++++++
+- 4 files changed, 571 insertions(+)
++ multipath/Makefile    |   4 +
++ multipath/mpathconf   | 464 ++++++++++++++++++++++++++++++++++++++++++
++ multipath/mpathconf.8 | 101 +++++++++
++ 4 files changed, 570 insertions(+)
+  create mode 100644 multipath/mpathconf
+  create mode 100644 multipath/mpathconf.8
+ 
+ diff --git a/libmultipath/config.c b/libmultipath/config.c
+-index e4233f1..b779505 100644
++index 31894810..af59dd3c 100644
+ --- a/libmultipath/config.c
+ +++ b/libmultipath/config.c
+-@@ -747,6 +747,7 @@ load_config (char * file)
+- 		factorize_hwtable(conf->hwtable, builtin_hwtable_size, file);
++@@ -969,6 +969,7 @@ int _init_config (const char *file, struct config *conf)
++ 		validate_pctable(conf->overrides, 0, file);
+  	} else {
+  		condlog(0, "/etc/multipath.conf does not exist, blacklisting all devices.");
+ +		condlog(0, "You can run /sbin/mpathconf to create or modify /etc/multipath.conf");
+@@ -41,42 +43,39 @@ index e4233f1..b779505 100644
+  			conf->blist_devnode = vector_alloc();
+  			if (!conf->blist_devnode) {
+ diff --git a/multipath/Makefile b/multipath/Makefile
+-index b9bbb3c..e720c7f 100644
++index 8482de6a..780b1b73 100644
+ --- a/multipath/Makefile
+ +++ b/multipath/Makefile
+-@@ -18,10 +18,12 @@ $(EXEC): $(OBJS) $(multipathdir)/libmultipath.so $(mpathcmddir)/libmpathcmd.so
+- 	$(CC) $(CFLAGS) $(OBJS) -o $(EXEC) $(LDFLAGS) $(LIBDEPS)
+- 	$(GZIP) $(EXEC).8 > $(EXEC).8.gz
+- 	$(GZIP) $(EXEC).conf.5 > $(EXEC).conf.5.gz
+-+	$(GZIP) mpathconf.8 > mpathconf.8.gz
+- 
++@@ -21,6 +21,7 @@ $(EXEC): $(OBJS) $(multipathdir)/libmultipath.so $(mpathcmddir)/libmpathcmd.so
+  install:
+  	$(INSTALL_PROGRAM) -d $(DESTDIR)$(bindir)
+  	$(INSTALL_PROGRAM) -m 755 $(EXEC) $(DESTDIR)$(bindir)/
+ +	$(INSTALL_PROGRAM) -m 755 mpathconf $(DESTDIR)$(bindir)/
+  	$(INSTALL_PROGRAM) -d $(DESTDIR)$(udevrulesdir)
+  	$(INSTALL_PROGRAM) -m 644 11-dm-mpath.rules $(DESTDIR)$(udevrulesdir)
+- 	$(INSTALL_PROGRAM) -m 644 $(EXEC).rules $(DESTDIR)$(libudevdir)/rules.d/62-multipath.rules
+-@@ -29,13 +31,16 @@ install:
+- 	$(INSTALL_PROGRAM) -m 644 $(EXEC).8.gz $(DESTDIR)$(man8dir)
++ 	$(INSTALL_PROGRAM) -m 644 multipath.rules $(DESTDIR)$(udevrulesdir)/62-multipath.rules
++@@ -32,6 +33,7 @@ install:
++ 	$(INSTALL_PROGRAM) -m 644 $(EXEC).8 $(DESTDIR)$(man8dir)
+  	$(INSTALL_PROGRAM) -d $(DESTDIR)$(man5dir)
+- 	$(INSTALL_PROGRAM) -m 644 $(EXEC).conf.5.gz $(DESTDIR)$(man5dir)
+-+	$(INSTALL_PROGRAM) -m 644 mpathconf.8.gz $(DESTDIR)$(man8dir)
+- 
+- uninstall:
+- 	$(RM) $(DESTDIR)$(bindir)/$(EXEC)
+- 	$(RM) $(DESTDIR)$(udevrulesdir)/11-dm-mpath.rules
++ 	$(INSTALL_PROGRAM) -m 644 $(EXEC).conf.5 $(DESTDIR)$(man5dir)
+++	$(INSTALL_PROGRAM) -m 644 mpathconf.8 $(DESTDIR)$(man8dir)
++ ifneq ($(SCSI_DH_MODULES_PRELOAD),)
++ 	$(INSTALL_PROGRAM) -m 644 scsi_dh.conf $(DESTDIR)$(modulesloaddir)/scsi_dh.conf
++ 	for _x in $(SCSI_DH_MODULES_PRELOAD); do echo "$$_x"; done \
++@@ -44,8 +46,10 @@ uninstall:
++ 	$(RM) $(DESTDIR)$(modulesloaddir)/multipath.conf
++ 	$(RM) $(DESTDIR)$(modulesloaddir)/scsi_dh.conf
+  	$(RM) $(DESTDIR)$(libudevdir)/rules.d/62-multipath.rules
+ +	$(RM) $(DESTDIR)$(bindir)/mpathconf
+- 	$(RM) $(DESTDIR)$(man8dir)/$(EXEC).8.gz
+- 	$(RM) $(DESTDIR)$(man5dir)/$(EXEC).conf.5.gz
+-+	$(RM) $(DESTDIR)$(man8dir)/mpathconf.8.gz
++ 	$(RM) $(DESTDIR)$(man8dir)/$(EXEC).8
++ 	$(RM) $(DESTDIR)$(man5dir)/$(EXEC).conf.5
+++	$(RM) $(DESTDIR)$(man8dir)/mpathconf.8
+  
+  clean: dep_clean
+- 	$(RM) core *.o $(EXEC) *.gz
++ 	$(RM) core *.o $(EXEC) multipath.rules tmpfiles.conf
+ diff --git a/multipath/mpathconf b/multipath/mpathconf
+ new file mode 100644
+-index 0000000..e839134
++index 00000000..e8391347
+ --- /dev/null
+ +++ b/multipath/mpathconf
+ @@ -0,0 +1,464 @@
+@@ -546,7 +545,7 @@ index 0000000..e839134
+ +fi
+ diff --git a/multipath/mpathconf.8 b/multipath/mpathconf.8
+ new file mode 100644
+-index 0000000..4cd3267
++index 00000000..4cd32672
+ --- /dev/null
+ +++ b/multipath/mpathconf.8
+ @@ -0,0 +1,101 @@
+@@ -652,5 +651,5 @@ index 0000000..4cd3267
+ +.SH AUTHOR
+ +Benjamin Marzinski <bmarzins@redhat.com>
+ -- 
+-2.7.4
++2.38.1
+ 
+diff --git a/meta-oe/recipes-support/multipath-tools/files/0026-RH-add-wwids-from-kernel-cmdline-mpath.wwids-with-A.patch b/meta-oe/recipes-support/multipath-tools/files/0026-RH-add-wwids-from-kernel-cmdline-mpath.wwids-with-A.patch
+index 5fd6d668e..17c36e86c 100644
+--- a/meta-oe/recipes-support/multipath-tools/files/0026-RH-add-wwids-from-kernel-cmdline-mpath.wwids-with-A.patch
++++ b/meta-oe/recipes-support/multipath-tools/files/0026-RH-add-wwids-from-kernel-cmdline-mpath.wwids-with-A.patch
+@@ -1,7 +1,8 @@
+-From 0f54b3120ca06ff3168cdbf901a27b68c4638398 Mon Sep 17 00:00:00 2001
++From 262de33671ede81e424344ea9125d9e546cf8612 Mon Sep 17 00:00:00 2001
+ From: Changqing Li <changqing.li@windriver.com>
+ Date: Thu, 26 Sep 2019 16:29:48 +0800
+ Subject: [PATCH] From 0000000000000000000000000000000000000000 Mon Sep
++
+ 17
+  00:00:00 2001 From: Benjamin Marzinski <bmarzins@redhat.com> Date: Fri,
+ 17
+@@ -25,19 +26,21 @@ Upstream-Status: Pending
+ Update this patch to new version 0.8.2
+ 
+ Signed-off-by: Changqing Li <changqing.li@windriver.com>
++[OP: Rebase to 0.9.3]
++Signed-off-by: Ovidiu Panait <ovidiu.panait@windriver.com>
+ ---
+  libmultipath/wwids.c | 44 ++++++++++++++++++++++++++++++++++++++++++++
+  libmultipath/wwids.h |  1 +
+  2 files changed, 45 insertions(+)
+ 
+ diff --git a/libmultipath/wwids.c b/libmultipath/wwids.c
+-index 28a2150d..a0bfa851 100644
++index 89bb60ca..bab9aa85 100644
+ --- a/libmultipath/wwids.c
+ +++ b/libmultipath/wwids.c
+-@@ -454,3 +454,47 @@ int op ## _wwid(const char *wwid) \
+- declare_failed_wwid_op(is_failed, false)
+- declare_failed_wwid_op(mark_failed, true)
+- declare_failed_wwid_op(unmark_failed, true)
++@@ -451,3 +451,47 @@ int unmark_failed_wwid(const char *wwid)
++ 	print_failed_wwid_result("unmark_failed", wwid, r);
++ 	return r;
++ }
+ +
+ +int remember_cmdline_wwid(void)
+ +{
+@@ -95,5 +98,5 @@ index 0c6ee54d..e32a0b0e 100644
+  enum {
+  	WWID_IS_NOT_FAILED = 0,
+ -- 
+-2.17.1
++2.38.1
+ 
+diff --git a/meta-oe/recipes-support/multipath-tools/files/0027-RH-warn-on-invalid-regex-instead-of-failing.patch b/meta-oe/recipes-support/multipath-tools/files/0027-RH-warn-on-invalid-regex-instead-of-failing.patch
+index c59edbbb2..22cb4beeb 100644
+--- a/meta-oe/recipes-support/multipath-tools/files/0027-RH-warn-on-invalid-regex-instead-of-failing.patch
++++ b/meta-oe/recipes-support/multipath-tools/files/0027-RH-warn-on-invalid-regex-instead-of-failing.patch
+@@ -15,26 +15,41 @@ Upstream-Status: Pending
+ update this patch to 0.8.2
+ 
+ Signed-off-by: Changqing Li <changqing.li@windriver.com>
++[OP: Rebase to 0.9.3]
++[OP: adjusted FREE() -> free(), made set_regex_value() static]
++Signed-off-by: Ovidiu Panait <ovidiu.panait@windriver.com>
+ ---
+- libmultipath/dict.c   | 29 ++++++++++++++++++++++-------
+- libmultipath/parser.c | 13 +++++++++++++
+- libmultipath/parser.h |  1 +
+- 3 files changed, 36 insertions(+), 7 deletions(-)
++ libmultipath/dict.c | 42 +++++++++++++++++++++++++++++++++++-------
++ 1 file changed, 35 insertions(+), 7 deletions(-)
+ 
+ diff --git a/libmultipath/dict.c b/libmultipath/dict.c
+-index c6eba0f..05ed3d8 100644
++index aa93fe43..55a22d32 100644
+ --- a/libmultipath/dict.c
+ +++ b/libmultipath/dict.c
+-@@ -59,6 +59,21 @@ set_str(vector strvec, void *ptr)
++@@ -155,6 +155,34 @@ set_str_noslash(vector strvec, void *ptr, const char *file, int line_nr)
++ 	return 0;
+  }
+  
+- static int
+-+set_regex(vector strvec, void *ptr)
+++static void *
+++set_regex_value(vector strvec)
+++{
+++       char *buff = set_value(strvec);
+++
+++       if (buff && strcmp("*", buff) == 0) {
+++               condlog(0, "Invalid regular expression \"*\" in multipath.conf. Using \".*\"");
+++               free(buff);
+++               return strdup(".*");
+++       }
+++       return buff;
+++}
+++
+++static int
+++set_regex(vector strvec, void *ptr, const char *file, int line_nr)
+ +{
+ +       char **str_ptr = (char **)ptr;
+ +
+ +       if (*str_ptr)
+-+               FREE(*str_ptr);
+++               free(*str_ptr);
+ +       *str_ptr = set_regex_value(strvec);
+ +
+ +       if (!*str_ptr)
+@@ -43,11 +58,10 @@ index c6eba0f..05ed3d8 100644
+ +       return 0;
+ +}
+ +
+-+static int
+- set_yes_no(vector strvec, void *ptr)
++ static int
++ set_yes_no(vector strvec, void *ptr, const char *file, int line_nr)
+  {
+- 	char * buff;
+-@@ -1415,8 +1430,8 @@ ble_ ## option ## _handler (struct config *conf, vector strvec)		\
++@@ -1679,8 +1707,8 @@ ble_ ## option ## _handler (struct config *conf, vector strvec,		\
+  									\
+  	if (!conf->option)						\
+  		return 1;						\
+@@ -58,7 +72,7 @@ index c6eba0f..05ed3d8 100644
+  	if (!buff)							\
+  		return 1;						\
+  									\
+-@@ -1432,7 +1447,7 @@ ble_ ## option ## _ ## name ## _handler (struct config *conf, vector strvec) \
++@@ -1700,7 +1728,7 @@ ble_ ## option ## _ ## name ## _handler (struct config *conf, vector strvec, \
+  	if (!conf->option)						\
+  		return 1;						\
+  									\
+@@ -67,7 +81,7 @@ index c6eba0f..05ed3d8 100644
+  	if (!buff)							\
+  		return 1;						\
+  									\
+-@@ -1535,16 +1550,16 @@ device_handler(struct config *conf, vector strvec)
++@@ -1806,16 +1834,16 @@ device_handler(struct config *conf, vector strvec, const char *file,
+  	return 0;
+  }
+  
+@@ -88,42 +102,6 @@ index c6eba0f..05ed3d8 100644
+  declare_hw_snprint(bl_product, print_str)
+  
+  declare_hw_handler(hwhandler, set_str)
+-diff --git a/libmultipath/parser.c b/libmultipath/parser.c
+-index e00c5ff..6ca5842 100644
+---- a/libmultipath/parser.c
+-+++ b/libmultipath/parser.c
+-@@ -382,6 +382,19 @@ oom:
+- 	return NULL;
+- }
+- 
+-+void *
+-+set_regex_value(vector strvec)
+-+{
+-+       char *buff = set_value(strvec);
+-+
+-+       if (buff && strcmp("*", buff) == 0) {
+-+               condlog(0, "Invalid regular expression \"*\" in multipath.conf. Using \".*\"");
+-+               FREE(buff);
+-+               return strdup(".*");
+-+       }
+-+       return buff;
+-+}
+-+
+- /* non-recursive configuration stream handler */
+- static int kw_level = 0;
+- 
+-diff --git a/libmultipath/parser.h b/libmultipath/parser.h
+-index 62906e9..b791705 100644
+---- a/libmultipath/parser.h
+-+++ b/libmultipath/parser.h
+-@@ -77,6 +77,7 @@ extern void dump_keywords(vector keydump, int level);
+- extern void free_keywords(vector keywords);
+- extern vector alloc_strvec(char *string);
+- extern void *set_value(vector strvec);
+-+extern void *set_regex_value(vector strvec);
+- extern int process_file(struct config *conf, char *conf_file);
+- extern struct keyword * find_keyword(vector keywords, vector v, char * name);
+- int snprint_keyword(char *buff, int len, char *fmt, struct keyword *kw,
+ -- 
+-2.7.4
++2.38.1
+ 
+diff --git a/meta-oe/recipes-support/multipath-tools/files/0029-multipath-tools-modify-Makefile.inc-for-cross-compil.patch b/meta-oe/recipes-support/multipath-tools/files/0029-multipath-tools-modify-Makefile.inc-for-cross-compil.patch
+index 3919f9904..952009b1d 100644
+--- a/meta-oe/recipes-support/multipath-tools/files/0029-multipath-tools-modify-Makefile.inc-for-cross-compil.patch
++++ b/meta-oe/recipes-support/multipath-tools/files/0029-multipath-tools-modify-Makefile.inc-for-cross-compil.patch
+@@ -1,4 +1,4 @@
+-From c3436ec8a502a40579abf62be0a479fa9d7888ad Mon Sep 17 00:00:00 2001
++From d139474f2a6d87c1cd20dfbb916fe650bfcce968 Mon Sep 17 00:00:00 2001
+ From: Changqing Li <changqing.li@windriver.com>
+ Date: Tue, 4 Jun 2019 11:39:39 +0800
+ Subject: [PATCH] multipath-tools: modify Makefile.inc for cross-compilation
+@@ -26,21 +26,23 @@ Signed-off-by: Changqing Li <changqing.li@windriver.com>
+ 
+ update for version 0.8.1
+ Signed-off-by: Changqing Li <changqing.li@windriver.com>
++[OP: Rebase to 0.9.3]
++Signed-off-by: Ovidiu Panait <ovidiu.panait@windriver.com>
+ ---
+  Makefile.inc | 11 -----------
+  1 file changed, 11 deletions(-)
+ 
+ diff --git a/Makefile.inc b/Makefile.inc
+-index 661f141..3f9fd28 100644
++index 34f2cc6d..ee6a4c9f 100644
+ --- a/Makefile.inc
+ +++ b/Makefile.inc
+-@@ -35,17 +35,6 @@ ifndef RUN
++@@ -42,17 +42,6 @@ ifndef RUN
+  	endif
+  endif
+  
+ -ifndef SYSTEMD
+--	ifeq ($(shell pkg-config --modversion libsystemd >/dev/null 2>&1 && echo 1), 1)
+--		SYSTEMD = $(shell pkg-config --modversion libsystemd)
++-	ifeq ($(shell $(PKGCONFIG) --modversion libsystemd >/dev/null 2>&1 && echo 1), 1)
++-		SYSTEMD = $(shell $(PKGCONFIG) --modversion libsystemd | awk '{print $$1}')
+ -	else
+ -		ifeq ($(shell systemctl --version >/dev/null 2>&1 && echo 1), 1)
+ -			SYSTEMD = $(shell systemctl --version 2> /dev/null | \
+@@ -53,5 +55,5 @@ index 661f141..3f9fd28 100644
+  	SYSTEMDPATH=usr/lib
+  endif
+ -- 
+-2.7.4
++2.38.1
+ 
+diff --git a/meta-oe/recipes-support/multipath-tools/files/0030-Always-use-devmapper.patch b/meta-oe/recipes-support/multipath-tools/files/0030-Always-use-devmapper.patch
+index 3e88b4100..c2025ed6f 100644
+--- a/meta-oe/recipes-support/multipath-tools/files/0030-Always-use-devmapper.patch
++++ b/meta-oe/recipes-support/multipath-tools/files/0030-Always-use-devmapper.patch
+@@ -1,7 +1,7 @@
+-From e4acb46b10484d1da6f093257e34f269832e6a37 Mon Sep 17 00:00:00 2001
++From f20d7651a62efff818ebd0d1bc920f6f362c890d Mon Sep 17 00:00:00 2001
+ From: Changqing Li <changqing.li@windriver.com>
+ Date: Mon, 26 Nov 2018 11:17:41 +0800
+-Subject: [PATCH] Subject: [PATCH]  Always use devmapper
++Subject: [PATCH] Subject: [PATCH] Always use devmapper
+ 
+ Do not try to compute several _API_ make variables
+ from host information when cross-compiling.
+@@ -21,40 +21,57 @@ Signed-off-by: Changqing Li <changqing.li@windriver.com>
+ 
+ Rebase to 0.7.9
+ Signed-off-by: Changqing Li <changqing.li@windriver.com>
++[OP: Rebase to 0.9.3]
++Signed-off-by: Ovidiu Panait <ovidiu.panait@windriver.com>
+ ---
+- libmultipath/Makefile | 19 ++++---------------
+- 1 file changed, 4 insertions(+), 15 deletions(-)
++ libmultipath/Makefile | 34 +++++++---------------------------
++ 1 file changed, 7 insertions(+), 27 deletions(-)
+ 
+ diff --git a/libmultipath/Makefile b/libmultipath/Makefile
+-index 33f5269..adf6f4a 100644
++index 3b60a525..72aca7ca 100644
+ --- a/libmultipath/Makefile
+ +++ b/libmultipath/Makefile
+-@@ -20,21 +20,10 @@ ifdef SYSTEMD
++@@ -22,33 +22,13 @@ ifdef SYSTEMD
+  	endif
+  endif
+  
+--ifneq ($(call check_func,dm_task_no_flush,/usr/include/libdevmapper.h),0)
+--	CFLAGS += -DLIBDM_API_FLUSH -D_GNU_SOURCE
++-ifneq ($(call check_func,dm_task_no_flush,$(DEVMAPPER_INCDIR)/libdevmapper.h),0)
++-	CPPFLAGS += -DLIBDM_API_FLUSH
+ -endif
+ -
+--ifneq ($(call check_func,dm_task_set_cookie,/usr/include/libdevmapper.h),0)
+--	CFLAGS += -DLIBDM_API_COOKIE
++-ifneq ($(call check_func,dm_task_get_errno,$(DEVMAPPER_INCDIR)/libdevmapper.h),0)
++-	CPPFLAGS += -DLIBDM_API_GET_ERRNO
+ -endif
+ -
+--ifneq ($(call check_func,udev_monitor_set_receive_buffer_size,/usr/include/libudev.h),0)
+--	CFLAGS += -DLIBUDEV_API_RECVBUF
++-ifneq ($(call check_func,dm_task_set_cookie,$(DEVMAPPER_INCDIR)/libdevmapper.h),0)
++-	CPPFLAGS += -DLIBDM_API_COOKIE
+ -endif
+ -
+--ifneq ($(call check_func,dm_task_deferred_remove,/usr/include/libdevmapper.h),0)
+--	CFLAGS += -DLIBDM_API_DEFERRED
++-ifneq ($(call check_func,udev_monitor_set_receive_buffer_size,$(LIBUDEV_INCDIR)/libudev.h),0)
++-	CPPFLAGS += -DLIBUDEV_API_RECVBUF
+ -endif
+-+CFLAGS += -DLIBDM_API_FLUSH -D_GNU_SOURCE
+-+CFLAGS += -DLIBDM_API_COOKIE
+-+CFLAGS += -DLIBUDEV_API_RECVBUF
+-+CFLAGS += -DLIBDM_API_DEFERRED
++-
++-ifneq ($(call check_func,dm_task_deferred_remove,$(DEVMAPPER_INCDIR)/libdevmapper.h),0)
++-	CPPFLAGS += -DLIBDM_API_DEFERRED
++-endif
++-
++-ifneq ($(call check_func,dm_hold_control_dev,$(DEVMAPPER_INCDIR)/libdevmapper.h),0)
++-	CPPFLAGS += -DLIBDM_API_HOLD_CONTROL
++-endif
++-
++-ifneq ($(call check_var,ELS_DTAG_LNK_INTEGRITY,$(LINUX_HEADERS_INCDIR)/scsi/fc/fc_els.h),0)
++-	CPPFLAGS += -DFPIN_EVENT_HANDLER
++-endif
+++CPPFLAGS += -DLIBDM_API_FLUSH
+++CPPFLAGS += -DLIBDM_API_GET_ERRNO
+++CPPFLAGS += -DLIBDM_API_COOKIE
+++CPPFLAGS += -DLIBUDEV_API_RECVBUF
+++CPPFLAGS += -DLIBDM_API_DEFERRED
+++CPPFLAGS += -DLIBDM_API_HOLD_CONTROL
+++CPPFLAGS += -DFPIN_EVENT_HANDLER
+  
+- OBJS = memory.o parser.o vector.o devmapper.o callout.o \
+- 	hwtable.o blacklist.o util.o dmparser.o config.o \
++ # object files referencing MULTIPATH_DIR or CONFIG_DIR
++ # they need to be recompiled for unit tests
+ -- 
+-2.7.4
++2.38.1
+ 
+diff --git a/meta-oe/recipes-support/multipath-tools/files/0031-Always-use-devmapper-for-kpartx.patch b/meta-oe/recipes-support/multipath-tools/files/0031-Always-use-devmapper-for-kpartx.patch
+index 418c0200f..2d043c399 100644
+--- a/meta-oe/recipes-support/multipath-tools/files/0031-Always-use-devmapper-for-kpartx.patch
++++ b/meta-oe/recipes-support/multipath-tools/files/0031-Always-use-devmapper-for-kpartx.patch
+@@ -1,4 +1,4 @@
+-From 1fe937835311a2d0afbc85ce4a4dbd3c9e0c912f Mon Sep 17 00:00:00 2001
++From 820d2ef3596189041da43d1139da8689336bb918 Mon Sep 17 00:00:00 2001
+ From: Changqing Li <changqing.li@windriver.com>
+ Date: Mon, 26 Nov 2018 11:19:45 +0800
+ Subject: [PATCH] Subject: [PATCH] Always use devmapper for kpartx
+@@ -19,25 +19,27 @@ Signed-off-by: Changqing Li <changqing.li@windriver.com>
+ 
+ Rebase to 0.7.9
+ Signed-off-by: Changqing Li <changqing.li@windriver.com>
++[OP: Rebase to 0.9.3]
++Signed-off-by: Ovidiu Panait <ovidiu.panait@windriver.com>
+ ---
+  kpartx/Makefile | 4 +---
+  1 file changed, 1 insertion(+), 3 deletions(-)
+ 
+ diff --git a/kpartx/Makefile b/kpartx/Makefile
+-index 7eb467e..c143321 100644
++index 742d3bcd..d886483d 100644
+ --- a/kpartx/Makefile
+ +++ b/kpartx/Makefile
+-@@ -8,9 +8,7 @@ LDFLAGS += $(BIN_LDFLAGS)
++@@ -9,9 +9,7 @@ LDFLAGS += $(BIN_LDFLAGS)
+  
+  LIBDEPS += -ldevmapper
+  
+--ifneq ($(call check_func,dm_task_set_cookie,/usr/include/libdevmapper.h),0)
+--	CFLAGS += -DLIBDM_API_COOKIE
++-ifneq ($(call check_func,dm_task_set_cookie,$(DEVMAPPER_INCDIR)/libdevmapper.h),0)
++-	CPPFLAGS += -DLIBDM_API_COOKIE
+ -endif
+-+CFLAGS += -DLIBDM_API_COOKIE
+++CPPFLAGS += -DLIBDM_API_COOKIE
+  
+  OBJS = bsd.o dos.o kpartx.o solaris.o unixware.o dasd.o sun.o \
+  	gpt.o mac.o ps3.o crc32.o lopart.o xstrncpy.o devmapper.o
+ -- 
+-2.7.4
++2.38.1
+ 
+diff --git a/meta-oe/recipes-support/multipath-tools/files/0032-libdmmp-Makefile-replace-perl-with-sed-in-install-ta.patch b/meta-oe/recipes-support/multipath-tools/files/0032-libdmmp-Makefile-replace-perl-with-sed-in-install-ta.patch
+index b35d67cf5..407dff507 100644
+--- a/meta-oe/recipes-support/multipath-tools/files/0032-libdmmp-Makefile-replace-perl-with-sed-in-install-ta.patch
++++ b/meta-oe/recipes-support/multipath-tools/files/0032-libdmmp-Makefile-replace-perl-with-sed-in-install-ta.patch
+@@ -1,4 +1,4 @@
+-From 35421d03898ac1b38f97a76241e6a29086d0c9f1 Mon Sep 17 00:00:00 2001
++From 21a8680b7bd436867ac689a0b4b1b18a3359e208 Mon Sep 17 00:00:00 2001
+ From: Geoff Parker <geoffrey.parker@arthrex.com>
+ Date: Fri, 9 Oct 2020 17:48:47 +0000
+ Subject: [PATCH] libdmmp/Makefile: replace perl with sed in install target to
+@@ -12,15 +12,17 @@ ownership or permissions settings on the files. 'sed -i' is compatible
+ with pseudo.
+ 
+ Signed-off-by: Geoff Parker <geoffrey.parker@arthrex.com>
++[OP: Rebase to 0.9.3]
++Signed-off-by: Ovidiu Panait <ovidiu.panait@windriver.com>
+ ---
+  libdmmp/Makefile | 6 +++---
+  1 file changed, 3 insertions(+), 3 deletions(-)
+ 
+ diff --git a/libdmmp/Makefile b/libdmmp/Makefile
+-index 1dd3f340..8166075c 100644
++index e4589250..34e06425 100644
+ --- a/libdmmp/Makefile
+ +++ b/libdmmp/Makefile
+-@@ -34,11 +34,11 @@ install:
++@@ -39,11 +39,11 @@ install:
+  	$(LN) $(LIBS) $(DESTDIR)$(usrlibdir)/$(DEVLIB)
+  	$(INSTALL_PROGRAM) -m 644 -D \
+  		$(PKGFILE).in $(DESTDIR)$(pkgconfdir)/$(PKGFILE)
+@@ -33,8 +35,8 @@ index 1dd3f340..8166075c 100644
+ -	perl -i -pe 's|__INCLUDEDIR__|$(includedir)|g' \
+ +	sed -i 's|__INCLUDEDIR__|$(includedir)|g' \
+  		$(DESTDIR)$(pkgconfdir)/$(PKGFILE)
+- 	@for file in docs/man/*.3.gz; do \
+- 		$(INSTALL_PROGRAM) -m 644 -D \
++ 	$(INSTALL_PROGRAM) -d 755 $(DESTDIR)$(man3dir)
++ 	$(INSTALL_PROGRAM) -m 644 -t $(DESTDIR)$(man3dir) docs/man/*.3
+ -- 
+-2.20.1
++2.38.1
+ 
+diff --git a/meta-oe/recipes-support/multipath-tools/multipath-tools_0.8.4.bb b/meta-oe/recipes-support/multipath-tools/multipath-tools_0.9.3.bb
+similarity index 93%
+rename from meta-oe/recipes-support/multipath-tools/multipath-tools_0.8.4.bb
+rename to meta-oe/recipes-support/multipath-tools/multipath-tools_0.9.3.bb
+index 5a8db0877..ae4b3b9bf 100644
+--- a/meta-oe/recipes-support/multipath-tools/multipath-tools_0.8.4.bb
++++ b/meta-oe/recipes-support/multipath-tools/multipath-tools_0.9.3.bb
+@@ -46,13 +46,11 @@ SRC_URI = "git://github.com/opensvc/multipath-tools.git;protocol=http;branch=mas
+            file://0032-libdmmp-Makefile-replace-perl-with-sed-in-install-ta.patch \
+            file://0001-fix-bug-of-do_compile-and-do_install.patch \
+            file://0001-add-explicit-dependency-on-libraries.patch \
+-           file://0001-fix-boolean-value-with-json-c-0.14.patch \
+-           file://0001-libmultipath-uevent.c-fix-error-handling-for-udev_mo.patch \
+            "
+ 
+ LIC_FILES_CHKSUM = "file://COPYING;md5=5f30f0716dfdd0d91eb439ebec522ec2"
+ 
+-SRCREV = "d4915917655b3d205aa0e339ca13080ed8182d0d"
++SRCREV = "1332947447133fdf26246012b836868a3d974f0e"
  
  S = "${WORKDIR}/git"
  
+@@ -75,10 +73,15 @@ ARM_INSTRUCTION_SET:armv5 = "arm"
+ #
+ EXTRA_OEMAKE = 'MULTIPATH_VERSION=${PV} DESTDIR=${D} syslibdir=${base_libdir} \
+                 OPTFLAGS="${CFLAGS}" \
++                prefix=${prefix} \
+                 bindir=${base_sbindir} \
+                 LIB=${base_libdir} libdir=${base_libdir}/multipath \
++                usrlibdir=${libdir} \
++                plugindir=${base_libdir}/multipath \
+                 unitdir=${systemd_system_unitdir} \
+                 libudevdir=${nonarch_base_libdir}/udev \
++                modulesloaddir=${sysconfdir}/modules-load.d \
++                tmpfilesdir=${sysconfdir}/tmpfiles.d \
+                 ${@bb.utils.contains("DISTRO_FEATURES", "systemd", "SYSTEMD=216", "", d)} \
+                '
+ 
+@@ -105,7 +108,7 @@ FILES:${PN}-dbg += "${base_libdir}/multipath/.debug"
+ PACKAGES =+ "${PN}-libs"
+ FILES:${PN}-libs = "${base_libdir}/lib*.so.* \
+                     ${base_libdir}/multipath/lib*.so*"
+-RDEPENDS:${PN} += "${PN}-libs bash"
++RDEPENDS:${PN} += "${PN}-libs bash libgcc"
+ 
+ PROVIDES += "device-mapper-multipath"
+ RPROVIDES:${PN} += "device-mapper-multipath"
 -- 
-2.25.1
+2.38.1
 
 
