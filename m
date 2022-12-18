@@ -2,56 +2,56 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5E5FCC4167B
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5EF16C46467
 	for <webhook@archiver.kernel.org>; Sun, 18 Dec 2022 21:08:01 +0000 (UTC)
-Received: from mail-pj1-f44.google.com (mail-pj1-f44.google.com [209.85.216.44])
- by mx.groups.io with SMTP id smtpd.web11.6167.1671397674195986794
+Received: from mail-pf1-f182.google.com (mail-pf1-f182.google.com [209.85.210.182])
+ by mx.groups.io with SMTP id smtpd.web10.6203.1671397673284238172
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 18 Dec 2022 13:07:54 -0800
+ Sun, 18 Dec 2022 13:07:53 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=UVH4iweF;
- spf=pass (domain: gmail.com, ip: 209.85.216.44, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f44.google.com with SMTP id v23so1998317pju.3
-        for <openembedded-devel@lists.openembedded.org>; Sun, 18 Dec 2022 13:07:54 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=Wyt0sLIU;
+ spf=pass (domain: gmail.com, ip: 209.85.210.182, mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f182.google.com with SMTP id 21so5000661pfw.4
+        for <openembedded-devel@lists.openembedded.org>; Sun, 18 Dec 2022 13:07:53 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=RKECqfwmpCxd15IJEmxX4EURwfYFSZ312JouupCk0/Q=;
-        b=UVH4iweFCtfe2eV7pfAMAx8cT/tyZ1tMC3aKRdeqT0G+8yRRo1qbs6Jb6mOqu9TxIi
-         0szoub9dDfY4fVahE8SGgtLGGufaXEurttDWJ0v3ygrkpR7+G7Gor0SdnBh+AKEFPRWl
-         TMgAuYiMTupoB3I0u69DowcMBYQnJi+H3wNVdtDkgX+x00atLfyue7b3Bnpu98WoUoFh
-         0XMz+j1cwWAfwppuVSe3QSpX1GjbYFKNYkKYjOVFEnLo5/5T+WhxIAObPrMLcmpXW74G
-         MZ81+fj95Mjlc0OhuUhTVmyfbrbhL4w1kMMD9i8FhKfVkFHGCFmsAS09oxqxaROI20DH
-         jkFg==
+        bh=jleCWDp9RRHBXckGBvxOOz2owuHn+xEVd8B5VJ5/tFg=;
+        b=Wyt0sLIUX5MfJX4OBTfQ05A7ZhdFp3IifXuyIPDt5jPkanmSi1zQBiXsDFYItYd0Z4
+         4sAJEVXUBheCXMlffM4ozoPmQarauBj1udPukO1NZ5bqZmS+KNyi6nnmE5vfyjAS0RRe
+         aa6b2XXwd83JBgUb7xJwXS43IHC6C72yilFc9xrkcRskQ0OYg9/mdpj3zvs4wdOdrM9f
+         4jpVS3Y8LiFwAzanNkQZ6ssCa7VoGlljgN0o2ErzUuEfhzheJhHwQNTjYt8mKDb5+nof
+         NHiA4/ZlE1+EQltC27ZmGRoI48K4kxISwUfFo8NeAq0JjHTdneZRz4SQt2nJbCJc4+Vw
+         kccA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=RKECqfwmpCxd15IJEmxX4EURwfYFSZ312JouupCk0/Q=;
-        b=FhkiWcSXAPCWRVSCIdjTdmmy6ztp5NvG3PESpKWhRnAVXx70lSt4EbP0ufvvrmZw0C
-         pj9dfBroPMCC7f3YzivxA5P3nDGvOIZlVpp9GEBw6qT8mJgwx9qUe/JQ2842MHENNtHz
-         MjdfxBl2C2gzOmcAfOtgbs2uhBjYYwxCDtIMfkccxaN8yiL4qz3Bd+AxXAdT1OuoQTR2
-         aUxy+XM+Jd1Yrc1YMhIwWnVNheu+zBdvcrB4LVROpcCY7H724rMa80gyp471W/gtXCJ9
-         CzJVxCE8quxk02/19/bH0HcONuwaPFMBP87Amxk939tikIX9Rd3V0pGoi2Hx84ZtkfT0
-         UKjw==
-X-Gm-Message-State: AFqh2kqX18JyE3HAE+KPpUSjjpi51SHLTjbp4s/+ryW2NbRzYFOsovrX
-	i+dGmSr4LSCxfPIQqOIeL8tQkR73rVo=
-X-Google-Smtp-Source: AMrXdXtOMu26NlTl29ZeBkmj7hmFr1cD6HBmABhhOvLNyMiyku/tWcZI9BnH+emeoqp9pH7duFiYmg==
-X-Received: by 2002:a05:6a20:e616:b0:ae:47a6:e6d9 with SMTP id my22-20020a056a20e61600b000ae47a6e6d9mr8788119pzb.6.1671397673389;
-        Sun, 18 Dec 2022 13:07:53 -0800 (PST)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9181:1cf0::41f2])
-        by smtp.gmail.com with ESMTPSA id e64-20020a621e43000000b005770fd365d8sm5120928pfe.97.2022.12.18.13.07.52
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        bh=jleCWDp9RRHBXckGBvxOOz2owuHn+xEVd8B5VJ5/tFg=;
+        b=qHoluf0jr9l7uT9UdjKbKwXZWmwfDfcXl/Sk6x1ZNAMeSqDpzuwBCmOzcLDxZz/LfQ
+         yCXWQs8WuKpWs2eOHSsXkOtL3ig94BOr6anvCfSPCgVTfTy+6mWBmKqSF6M0weN0QNum
+         RX2hi+Zl7Agvh7REynohBWAanVWtDroCQHfVlWj7zw/kiFlVEtsITgdKwIJ9nFZ7Qb33
+         wRMwaH6bRUFx6I1GAcnP3MTRdmISHdR34z8Cu0Rth6vjuRL9EDgVp80StzDonXlqEX8f
+         Cv5M4SVUM68TOjnSiIMGPa6hmuV+qYsC4s/p5OkNDorCgk8R6nN/2WObn5Jln+/wqeuz
+         Z/3Q==
+X-Gm-Message-State: ANoB5pnFnzOSVrgGPwbKjf0neSSFLifZjm35kpESvt9/PsK9s682Z9+v
+	gnShfQiXzkZPc62TIIi/ukFyt18f6LA=
+X-Google-Smtp-Source: AA0mqf5bYMSLcgDNTt+07reht4qhZd5MrtRza0KsgdNF9H9fFL9mQgrJ8pAwMwXMsLJyBKca/irj6Q==
+X-Received: by 2002:a62:524c:0:b0:576:b277:2cd with SMTP id g73-20020a62524c000000b00576b27702cdmr38098918pfb.34.1671397672294;
         Sun, 18 Dec 2022 13:07:52 -0800 (PST)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9181:1cf0::41f2])
+        by smtp.gmail.com with ESMTPSA id e64-20020a621e43000000b005770fd365d8sm5120928pfe.97.2022.12.18.13.07.51
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sun, 18 Dec 2022 13:07:51 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 3/3] nspr: Upgrade to 4.35
-Date: Sun, 18 Dec 2022 13:07:48 -0800
-Message-Id: <20221218210748.225122-3-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 2/3] stressapptest: Fix build with largefile support and musl
+Date: Sun, 18 Dec 2022 13:07:47 -0800
+Message-Id: <20221218210748.225122-2-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.39.0
 In-Reply-To: <20221218210748.225122-1-raj.khem@gmail.com>
 References: <20221218210748.225122-1-raj.khem@gmail.com>
@@ -61,191 +61,273 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sun, 18 Dec 2022 21:08:01 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100088
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100087
 
-Use -D_PR_HAVE_LARGE_OFF_T instead of -D_PR_HAVE_OFF64_T on musl
-Drop remove-srcdir-from-configure-in.patch its fixed upstream
+Update status of patches as they are submitted upstream
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../nspr/0001-md-Fix-build-with-musl.patch    | 17 +++-----
- .../nspr/nspr/0002-Add-nios2-support.patch    | 39 +++++++------------
- .../remove-srcdir-from-configure-in.patch     | 19 ---------
- .../nspr/{nspr_4.29.bb => nspr_4.35.bb}       |  8 ++--
- 4 files changed, 21 insertions(+), 62 deletions(-)
- delete mode 100644 meta-oe/recipes-support/nspr/nspr/remove-srcdir-from-configure-in.patch
- rename meta-oe/recipes-support/nspr/{nspr_4.29.bb => nspr_4.35.bb} (93%)
+ .../0001-configure-Add-with-cpu.patch         |  37 +++++++
+ ...-Replace-lfs64-functions-and-defines.patch | 103 ++++++++++++++++++
+ ...for-pthread_rwlockattr_setkind_np-be.patch |  43 ++++++++
+ .../stressapptest/libcplusplus-compat.patch   |   2 +-
+ .../read_sysfs_for_cachesize.patch            |   2 +-
+ .../stressapptest/stressapptest_1.0.9.bb      |  10 +-
+ 6 files changed, 194 insertions(+), 3 deletions(-)
+ create mode 100644 meta-oe/recipes-benchmark/stressapptest/stressapptest/0001-configure-Add-with-cpu.patch
+ create mode 100644 meta-oe/recipes-benchmark/stressapptest/stressapptest/0002-Replace-lfs64-functions-and-defines.patch
+ create mode 100644 meta-oe/recipes-benchmark/stressapptest/stressapptest/0003-configure-Check-for-pthread_rwlockattr_setkind_np-be.patch
 
-diff --git a/meta-oe/recipes-support/nspr/nspr/0001-md-Fix-build-with-musl.patch b/meta-oe/recipes-support/nspr/nspr/0001-md-Fix-build-with-musl.patch
-index d2b9bf6420..09855a03dc 100644
---- a/meta-oe/recipes-support/nspr/nspr/0001-md-Fix-build-with-musl.patch
-+++ b/meta-oe/recipes-support/nspr/nspr/0001-md-Fix-build-with-musl.patch
-@@ -1,4 +1,4 @@
--From 147f3c2acbd96d44025cec11800ded0282327764 Mon Sep 17 00:00:00 2001
-+From 5f6fcaeb0b7a319c8afd32ddb48b3515b63a6c0c Mon Sep 17 00:00:00 2001
- From: Khem Raj <raj.khem@gmail.com>
- Date: Mon, 18 Sep 2017 17:22:43 -0700
- Subject: [PATCH] md: Fix build with musl
-@@ -6,24 +6,17 @@ Subject: [PATCH] md: Fix build with musl
- The MIPS specific header <sgidefs.h> is not provided by musl
- linux kernel headers provide <asm/sgidefs.h> which has same definitions
- 
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
- Upstream-Status: Pending
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
- 
-+---
-  pr/include/md/_linux.cfg | 2 +-
-  1 file changed, 1 insertion(+), 1 deletion(-)
- 
-+diff --git a/pr/include/md/_linux.cfg b/pr/include/md/_linux.cfg
-+index aa3af78..899826f 100644
- --- a/pr/include/md/_linux.cfg
- +++ b/pr/include/md/_linux.cfg
--@@ -499,7 +499,7 @@
-- #elif defined(__mips__)
-- 
-- /* For _ABI64 */
---#include <sgidefs.h>
--+#include <asm/sgidefs.h>
-- 
-- #ifdef __MIPSEB__
-- #define IS_BIG_ENDIAN 1
- @@ -511,7 +511,7 @@
-  #error "Unknown MIPS endianness."
-  #endif
-diff --git a/meta-oe/recipes-support/nspr/nspr/0002-Add-nios2-support.patch b/meta-oe/recipes-support/nspr/nspr/0002-Add-nios2-support.patch
-index 3a04d426a8..dab2a4e291 100644
---- a/meta-oe/recipes-support/nspr/nspr/0002-Add-nios2-support.patch
-+++ b/meta-oe/recipes-support/nspr/nspr/0002-Add-nios2-support.patch
-@@ -1,4 +1,4 @@
--From 95bda64fb4cf1825fea745e918cfe8202843f0ba Mon Sep 17 00:00:00 2001
-+From 4760065a58153e4dae24e4e437a5136592c624bc Mon Sep 17 00:00:00 2001
- From: Marek Vasut <marex@denx.de>
- Date: Sat, 30 Jan 2016 07:18:02 +0100
- Subject: [PATCH] Add nios2 support
-@@ -7,15 +7,14 @@ Add support for the nios2 CPU.
- 
- Signed-off-by: Marek Vasut <marex@denx.de>
- Upstream-Status: Submitted [ https://bugzilla.mozilla.org/show_bug.cgi?id=1244421 ]
+diff --git a/meta-oe/recipes-benchmark/stressapptest/stressapptest/0001-configure-Add-with-cpu.patch b/meta-oe/recipes-benchmark/stressapptest/stressapptest/0001-configure-Add-with-cpu.patch
+new file mode 100644
+index 0000000000..41fb456c6c
+--- /dev/null
++++ b/meta-oe/recipes-benchmark/stressapptest/stressapptest/0001-configure-Add-with-cpu.patch
+@@ -0,0 +1,37 @@
++From 73049e5a9e3698cc6d51471d70ac5e06bed803cc Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Sat, 17 Dec 2022 10:24:48 -0800
++Subject: [PATCH] configure: Add --with-cpu
 +
- ---
-- nspr/pr/include/md/_linux.cfg | 45 +++++++++++++++++++++++++++++++++++++++++++
-- nspr/pr/include/md/_linux.h   | 14 ++++++++++++++
-- 2 files changed, 59 insertions(+)
-+ pr/include/md/_linux.cfg | 45 +++++++++++++++++++++++++++++++++++
-+ pr/include/md/_linux.h   |  4 +++-
-+ 2 files changed, 48 insertions(+), 1 deletion(-)
++Some cross build systems e.g. yocto may use architectures different from cross compiler target tuple
++arm-yoe-gnueabi but build for armv7a, AC_CANONICAL_HOST will fail in
++this case even though target will be armv7a it will detect it as arm and
++disable armv7a specific optimization paths. This option provides the
++needed knob so it can be set explicitly e.g. --with-cpu=armv7a etc. if needed.
++
++Upstream-Status: Submitted [https://github.com/stressapptest/stressapptest/pull/100]
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ configure.ac | 9 ++++++++-
++ 1 file changed, 8 insertions(+), 1 deletion(-)
++
++diff --git a/configure.ac b/configure.ac
++index c839c87..403728c 100644
++--- a/configure.ac
+++++ b/configure.ac
++@@ -11,7 +11,14 @@ else
++   AC_MSG_NOTICE([Compiling with dynamically linked libraries.])
++ fi
++ 
++-AC_CANONICAL_HOST
+++AC_ARG_WITH(cpu, [  --with-cpu            define host cpu])
+++
+++if test -z "$with_cpu"
+++then
+++  AC_CANONICAL_HOST
+++else
+++  host_cpu=$with_cpu
+++fi
++ # Checking for target cpu and setting custom configuration
++ # for the different platforms
++ AS_CASE(["$host_cpu"],
+diff --git a/meta-oe/recipes-benchmark/stressapptest/stressapptest/0002-Replace-lfs64-functions-and-defines.patch b/meta-oe/recipes-benchmark/stressapptest/stressapptest/0002-Replace-lfs64-functions-and-defines.patch
+new file mode 100644
+index 0000000000..48ff3ef93b
+--- /dev/null
++++ b/meta-oe/recipes-benchmark/stressapptest/stressapptest/0002-Replace-lfs64-functions-and-defines.patch
+@@ -0,0 +1,103 @@
++From 9ab360fd018d267fe174713d7e14454408b26043 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Sat, 17 Dec 2022 10:33:01 -0800
++Subject: [PATCH] Replace lfs64 functions and defines
++
++AC_SYS_LARGEFILE is already in use in configure.ac which detects
++enabling lfs64 functions as needed, it will define _FILE_OFFSET_BITS=64
++which should make lseek same as lseek64 since off_t is 64bit on most of
++current 32bit linux platforms
++
++Upstream-Status: Submitted [https://github.com/stressapptest/stressapptest/pull/100]
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ src/os.cc     | 18 ++++++------------
++ src/worker.cc |  6 +++---
++ 2 files changed, 9 insertions(+), 15 deletions(-)
++
++diff --git a/src/os.cc b/src/os.cc
++index 1928e0a..faa6068 100644
++--- a/src/os.cc
+++++ b/src/os.cc
++@@ -142,7 +142,7 @@ int OsLayer::AddressMode() {
++ uint64 OsLayer::VirtualToPhysical(void *vaddr) {
++   uint64 frame, paddr, pfnmask, pagemask;
++   int pagesize = sysconf(_SC_PAGESIZE);
++-  off64_t off = ((uintptr_t)vaddr) / pagesize * 8;
+++  off_t off = ((uintptr_t)vaddr) / pagesize * 8;
++   int fd = open(kPagemapPath, O_RDONLY);
++ 
++   /*
++@@ -154,7 +154,7 @@ uint64 OsLayer::VirtualToPhysical(void *vaddr) {
++   if (fd < 0)
++     return 0;
++ 
++-  if (lseek64(fd, off, SEEK_SET) != off || read(fd, &frame, 8) != 8) {
+++  if (lseek(fd, off, SEEK_SET) != off || read(fd, &frame, 8) != 8) {
++     int err = errno;
++     string errtxt = ErrorString(err);
++     logprintf(0, "Process Error: failed to access %s with errno %d (%s)\n",
++@@ -607,9 +607,9 @@ bool OsLayer::AllocateTestMem(int64 length, uint64 paddr_base) {
++         dynamic_mapped_shmem_ = true;
++       } else {
++         // Do a full mapping here otherwise.
++-        shmaddr = mmap64(NULL, length, PROT_READ | PROT_WRITE,
++-                         MAP_SHARED | MAP_NORESERVE | MAP_LOCKED | MAP_POPULATE,
++-                         shm_object, 0);
+++        shmaddr = mmap(NULL, length, PROT_READ | PROT_WRITE,
+++                       MAP_SHARED | MAP_NORESERVE | MAP_LOCKED | MAP_POPULATE,
+++                       shm_object, 0);
++         if (shmaddr == reinterpret_cast<void*>(-1)) {
++           int err = errno;
++           string errtxt = ErrorString(err);
++@@ -704,18 +704,12 @@ void *OsLayer::PrepareTestMem(uint64 offset, uint64 length) {
++   if (dynamic_mapped_shmem_) {
++     // TODO(nsanders): Check if we can support MAP_NONBLOCK,
++     // and evaluate performance hit from not using it.
++-#ifdef HAVE_MMAP64
++-    void * mapping = mmap64(NULL, length, PROT_READ | PROT_WRITE,
++-                     MAP_SHARED | MAP_NORESERVE | MAP_LOCKED | MAP_POPULATE,
++-                     shmid_, offset);
++-#else
++     void * mapping = mmap(NULL, length, PROT_READ | PROT_WRITE,
++                      MAP_SHARED | MAP_NORESERVE | MAP_LOCKED | MAP_POPULATE,
++                      shmid_, offset);
++-#endif
++     if (mapping == MAP_FAILED) {
++       string errtxt = ErrorString(errno);
++-      logprintf(0, "Process Error: PrepareTestMem mmap64(%llx, %llx) failed. "
+++      logprintf(0, "Process Error: PrepareTestMem mmap(%llx, %llx) failed. "
++                    "error: %s.\n",
++                 offset, length, errtxt.c_str());
++       sat_assert(0);
++diff --git a/src/worker.cc b/src/worker.cc
++index 745a816..41e93a0 100644
++--- a/src/worker.cc
+++++ b/src/worker.cc
++@@ -1705,7 +1705,7 @@ bool FileThread::WritePages(int fd) {
++   int strict = sat_->strict();
++ 
++   // Start fresh at beginning of file for each batch of pages.
++-  lseek64(fd, 0, SEEK_SET);
+++  lseek(fd, 0, SEEK_SET);
++   for (int i = 0; i < sat_->disk_pages(); i++) {
++     struct page_entry src;
++     if (!GetValidPage(&src))
++@@ -1943,7 +1943,7 @@ bool FileThread::ReadPages(int fd) {
++   bool result = true;
++ 
++   // Read our data back out of the file, into it's new location.
++-  lseek64(fd, 0, SEEK_SET);
+++  lseek(fd, 0, SEEK_SET);
++   for (int i = 0; i < sat_->disk_pages(); i++) {
++     struct page_entry dst;
++     if (!GetEmptyPage(&dst))
++@@ -3153,7 +3153,7 @@ bool DiskThread::ValidateBlockOnDisk(int fd, BlockData *block) {
++ 
++   // Read block from disk and time the read.  If it takes longer than the
++   // threshold, complain.
++-  if (lseek64(fd, address * kSectorSize, SEEK_SET) == -1) {
+++  if (lseek(fd, address * kSectorSize, SEEK_SET) == -1) {
++     logprintf(0, "Process Error: Unable to seek to sector %lld in "
++               "DiskThread::ValidateSectorsOnDisk on disk %s "
++               "(thread %d).\n", address, device_name_.c_str(), thread_num_);
+diff --git a/meta-oe/recipes-benchmark/stressapptest/stressapptest/0003-configure-Check-for-pthread_rwlockattr_setkind_np-be.patch b/meta-oe/recipes-benchmark/stressapptest/stressapptest/0003-configure-Check-for-pthread_rwlockattr_setkind_np-be.patch
+new file mode 100644
+index 0000000000..b21a534d94
+--- /dev/null
++++ b/meta-oe/recipes-benchmark/stressapptest/stressapptest/0003-configure-Check-for-pthread_rwlockattr_setkind_np-be.patch
+@@ -0,0 +1,43 @@
++From d64a282b57352dde5f5b007947c005e504dc9a6b Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Sat, 17 Dec 2022 10:46:31 -0800
++Subject: [PATCH] configure: Check for pthread_rwlockattr_setkind_np before use
++
++musl does not implement this therefore detect this non-posix API before
++using it
++
++Upstream-Status: Submitted [https://github.com/stressapptest/stressapptest/pull/100]
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ configure.ac  | 1 +
++ src/worker.cc | 2 ++
++ 2 files changed, 3 insertions(+)
++
++diff --git a/configure.ac b/configure.ac
++index 403728c..47968cb 100644
++--- a/configure.ac
+++++ b/configure.ac
++@@ -157,6 +157,7 @@ AC_FUNC_STRERROR_R
++ AC_FUNC_VPRINTF
++ AC_CHECK_FUNCS([ftruncate gettimeofday memset munmap select socket strtol strtoull])
++ AC_CHECK_FUNCS([mmap64 posix_memalign rand_r sched_getaffinity])
+++AC_CHECK_FUNCS([pthread_rwlockattr_setkind_np])
++ 
++ AC_CONFIG_FILES([Makefile src/Makefile])
++ AC_OUTPUT
++diff --git a/src/worker.cc b/src/worker.cc
++index 41e93a0..c4abc87 100644
++--- a/src/worker.cc
+++++ b/src/worker.cc
++@@ -133,9 +133,11 @@ void WorkerStatus::Initialize() {
++ 
++   pthread_rwlockattr_t attrs;
++   sat_assert(0 == pthread_rwlockattr_init(&attrs));
+++#ifdef HAVE_PTHREAD_RWLOCKATTR_SETKIND_NP
++   // Avoid writer lock starvation.
++   sat_assert(0 == pthread_rwlockattr_setkind_np(
++                       &attrs, PTHREAD_RWLOCK_PREFER_WRITER_NONRECURSIVE_NP));
+++#endif
++   sat_assert(0 == pthread_rwlock_init(&status_rwlock_, &attrs));
++ 
++ #ifdef HAVE_PTHREAD_BARRIERS
+diff --git a/meta-oe/recipes-benchmark/stressapptest/stressapptest/libcplusplus-compat.patch b/meta-oe/recipes-benchmark/stressapptest/stressapptest/libcplusplus-compat.patch
+index f5e7da359d..8754e40697 100644
+--- a/meta-oe/recipes-benchmark/stressapptest/stressapptest/libcplusplus-compat.patch
++++ b/meta-oe/recipes-benchmark/stressapptest/stressapptest/libcplusplus-compat.patch
+@@ -11,7 +11,7 @@ Fixes
+ ./sattypes.h:33:17: error: expected namespace name
+ using namespace __gnu_cxx; //NOLINT
  
--Index: nspr/pr/include/md/_linux.cfg
--===================================================================
----- nspr.orig/pr/include/md/_linux.cfg
--+++ nspr/pr/include/md/_linux.cfg
-+--- a/pr/include/md/_linux.cfg
-++++ b/pr/include/md/_linux.cfg
- @@ -975,6 +975,51 @@
-  #define PR_BYTES_PER_WORD_LOG2   2
-  #define PR_BYTES_PER_DWORD_LOG2  3
-@@ -68,10 +67,8 @@ Index: nspr/pr/include/md/_linux.cfg
-  #elif defined(__or1k__)
-  
-  #undef  IS_LITTLE_ENDIAN
--Index: nspr/pr/include/md/_linux.h
--===================================================================
----- nspr.orig/pr/include/md/_linux.h
--+++ nspr/pr/include/md/_linux.h
-+--- a/pr/include/md/_linux.h
-++++ b/pr/include/md/_linux.h
- @@ -55,6 +55,8 @@
-  #define _PR_SI_ARCHITECTURE "avr32"
-  #elif defined(__m32r__)
-@@ -81,22 +78,12 @@ Index: nspr/pr/include/md/_linux.h
-  #elif defined(__or1k__)
-  #define _PR_SI_ARCHITECTURE "or1k"
-  #elif defined(__riscv) && (__riscv_xlen == 32)
--@@ -129,6 +131,18 @@ extern PRInt32 _PR_x86_64_AtomicSet(PRIn
-+@@ -143,7 +145,7 @@ extern PRInt32 _PR_x86_64_AtomicSet(PRIn
-  #define _MD_ATOMIC_SET                _PR_x86_64_AtomicSet
-  #endif
-  
--+#if defined(__nios2__)
--+#if defined(__GNUC__)
--+/* Use GCC built-in functions */
--+#define _PR_HAVE_ATOMIC_OPS
--+#define _MD_INIT_ATOMIC()
--+#define _MD_ATOMIC_INCREMENT(ptr) __sync_add_and_fetch(ptr, 1)
--+#define _MD_ATOMIC_DECREMENT(ptr) __sync_sub_and_fetch(ptr, 1)
--+#define _MD_ATOMIC_ADD(ptr, i) __sync_add_and_fetch(ptr, i)
--+#define _MD_ATOMIC_SET(ptr, nv) __sync_lock_test_and_set(ptr, nv)
--+#endif
--+#endif
--+
-- #if defined(__or1k__)
-+-#if defined(__loongarch__)
-++#if defined(__loongarch__) || defined(__nios2__)
-  #if defined(__GNUC__)
-  /* Use GCC built-in functions */
-+ #define _PR_HAVE_ATOMIC_OPS
-diff --git a/meta-oe/recipes-support/nspr/nspr/remove-srcdir-from-configure-in.patch b/meta-oe/recipes-support/nspr/nspr/remove-srcdir-from-configure-in.patch
-deleted file mode 100644
-index bde715c5dc..0000000000
---- a/meta-oe/recipes-support/nspr/nspr/remove-srcdir-from-configure-in.patch
-+++ /dev/null
-@@ -1,19 +0,0 @@
--the $srcdir is not defined at the time of gnu-configurize.
--
--Upstream-Status: Inappropriate [OE-Core specific]
--
--Signed-off-by: Saul Wold <sgw@linux.intel.com>
--
--Index: nspr/configure.in
--===================================================================
----- nspr.orig/configure.in
--+++ nspr/configure.in
--@@ -8,7 +8,7 @@ AC_PREREQ(2.61)
-- AC_INIT
-- AC_CONFIG_SRCDIR([pr/include/nspr.h])
-- 
---AC_CONFIG_AUX_DIR(${srcdir}/build/autoconf)
--+AC_CONFIG_AUX_DIR(build/autoconf)
-- AC_CANONICAL_TARGET
-- 
-- dnl ========================================================
-diff --git a/meta-oe/recipes-support/nspr/nspr_4.29.bb b/meta-oe/recipes-support/nspr/nspr_4.35.bb
-similarity index 93%
-rename from meta-oe/recipes-support/nspr/nspr_4.29.bb
-rename to meta-oe/recipes-support/nspr/nspr_4.35.bb
-index 92c5234c34..c8cb618bc9 100644
---- a/meta-oe/recipes-support/nspr/nspr_4.29.bb
-+++ b/meta-oe/recipes-support/nspr/nspr_4.35.bb
-@@ -8,24 +8,22 @@ SECTION = "libs/network"
- SRC_URI = "http://ftp.mozilla.org/pub/nspr/releases/v${PV}/src/nspr-${PV}.tar.gz \
-            file://remove-rpath-from-tests.patch \
-            file://fix-build-on-x86_64.patch \
--           file://remove-srcdir-from-configure-in.patch \
-            file://0002-Add-nios2-support.patch \
-            file://0001-md-Fix-build-with-musl.patch \
-            file://Makefile.in-remove-_BUILD_STRING-and-_BUILD_TIME.patch \
-            file://0001-config-nspr-config.in-don-t-pass-LDFLAGS.patch \
-            file://nspr.pc.in \
--"
+-Upstream-Status: Pending
++Upstream-Status: Submitted [https://github.com/stressapptest/stressapptest/pull/100]
+ Signed-off-by: Khem Raj <raj.khem@gmail.com>
+ 
+ --- stressapptest-1.0.9.orig/src/sattypes.h
+diff --git a/meta-oe/recipes-benchmark/stressapptest/stressapptest/read_sysfs_for_cachesize.patch b/meta-oe/recipes-benchmark/stressapptest/stressapptest/read_sysfs_for_cachesize.patch
+index 8c251aeb97..19261657ac 100644
+--- a/meta-oe/recipes-benchmark/stressapptest/stressapptest/read_sysfs_for_cachesize.patch
++++ b/meta-oe/recipes-benchmark/stressapptest/stressapptest/read_sysfs_for_cachesize.patch
+@@ -2,7 +2,7 @@ sysconf params like _SC_LEVEL1_DCACHE_LINESIZE are not universally
+ implemented, therefore check for them being available, if not there
+ then read the sysfs directly to get the value
+ 
+-Upstream-Status: Pending
++Upstream-Status: Submitted [https://github.com/stressapptest/stressapptest/pull/100]
+ Signed-off-by: Khem Raj <raj.khem@gmail.com>
+ --- a/src/sat.cc
+ +++ b/src/sat.cc
+diff --git a/meta-oe/recipes-benchmark/stressapptest/stressapptest_1.0.9.bb b/meta-oe/recipes-benchmark/stressapptest/stressapptest_1.0.9.bb
+index c8b9ca7cb9..02144c558a 100644
+--- a/meta-oe/recipes-benchmark/stressapptest/stressapptest_1.0.9.bb
++++ b/meta-oe/recipes-benchmark/stressapptest/stressapptest_1.0.9.bb
+@@ -13,10 +13,18 @@ SRCREV = "9146a8bfe3e3daefa95f7a61b75183e5fc64af2c"
+ 
+ PV .= "+1.0.10git${SRCPV}"
+ 
++EXTRA_AUTOCONF:append:armv7a = " --with-cpu=armv7a"
++EXTRA_AUTOCONF:append:armv7ve = " --with-cpu=armv7a"
++
++GI_DATA_ENABLED:libc-musl:armv7a = "False"
++GI_DATA_ENABLED:libc-musl:armv7ve = "False"
+ SRC_URI = "git://github.com/stressapptest/stressapptest;branch=master;protocol=https \
+            file://libcplusplus-compat.patch \
+            file://read_sysfs_for_cachesize.patch \
+-          "
++           file://0001-configure-Add-with-cpu.patch \
++           file://0002-Replace-lfs64-functions-and-defines.patch \
++           file://0003-configure-Check-for-pthread_rwlockattr_setkind_np-be.patch \
 +           "
  
- CACHED_CONFIGUREVARS:append:libc-musl = " CFLAGS='${CFLAGS} -D_PR_POLL_AVAILABLE \
--                                          -D_PR_HAVE_OFF64_T -D_PR_INET6 -D_PR_HAVE_INET_NTOP \
-+                                          -D_PR_HAVE_LARGE_OFF_T -D_PR_INET6 -D_PR_HAVE_INET_NTOP \
-                                           -D_PR_HAVE_GETHOSTBYNAME2 -D_PR_HAVE_GETADDRINFO \
-                                           -D_PR_INET6_PROBE -DNO_DLOPEN_NULL'"
- 
- UPSTREAM_CHECK_URI = "http://ftp.mozilla.org/pub/nspr/releases/"
- UPSTREAM_CHECK_REGEX = "v(?P<pver>\d+(\.\d+)+)/"
- 
--SRC_URI[md5sum] = "a546926d3c8e887be02c668c1293da92"
--SRC_URI[sha256sum] = "22286bdb8059d74632cc7c2865c139e63953ecfb33bf4362ab58827e86e92582"
-+SRC_URI[sha256sum] = "7ea3297ea5969b5d25a5dd8d47f2443cda88e9ee746301f6e1e1426f8a6abc8f"
- 
- CVE_PRODUCT = "netscape_portable_runtime"
+ S = "${WORKDIR}/git"
  
 -- 
 2.39.0
