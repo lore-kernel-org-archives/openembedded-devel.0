@@ -1,335 +1,148 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <narpat.mali@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5EF16C46467
-	for <webhook@archiver.kernel.org>; Sun, 18 Dec 2022 21:08:01 +0000 (UTC)
-Received: from mail-pf1-f182.google.com (mail-pf1-f182.google.com [209.85.210.182])
- by mx.groups.io with SMTP id smtpd.web10.6203.1671397673284238172
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E6F91C4332F
+	for <webhook@archiver.kernel.org>; Mon, 19 Dec 2022 05:37:03 +0000 (UTC)
+Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
+ by mx.groups.io with SMTP id smtpd.web11.14792.1671428222124597041
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 18 Dec 2022 13:07:53 -0800
+ Sun, 18 Dec 2022 21:37:02 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=Wyt0sLIU;
- spf=pass (domain: gmail.com, ip: 209.85.210.182, mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f182.google.com with SMTP id 21so5000661pfw.4
-        for <openembedded-devel@lists.openembedded.org>; Sun, 18 Dec 2022 13:07:53 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=jleCWDp9RRHBXckGBvxOOz2owuHn+xEVd8B5VJ5/tFg=;
-        b=Wyt0sLIUX5MfJX4OBTfQ05A7ZhdFp3IifXuyIPDt5jPkanmSi1zQBiXsDFYItYd0Z4
-         4sAJEVXUBheCXMlffM4ozoPmQarauBj1udPukO1NZ5bqZmS+KNyi6nnmE5vfyjAS0RRe
-         aa6b2XXwd83JBgUb7xJwXS43IHC6C72yilFc9xrkcRskQ0OYg9/mdpj3zvs4wdOdrM9f
-         4jpVS3Y8LiFwAzanNkQZ6ssCa7VoGlljgN0o2ErzUuEfhzheJhHwQNTjYt8mKDb5+nof
-         NHiA4/ZlE1+EQltC27ZmGRoI48K4kxISwUfFo8NeAq0JjHTdneZRz4SQt2nJbCJc4+Vw
-         kccA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=jleCWDp9RRHBXckGBvxOOz2owuHn+xEVd8B5VJ5/tFg=;
-        b=qHoluf0jr9l7uT9UdjKbKwXZWmwfDfcXl/Sk6x1ZNAMeSqDpzuwBCmOzcLDxZz/LfQ
-         yCXWQs8WuKpWs2eOHSsXkOtL3ig94BOr6anvCfSPCgVTfTy+6mWBmKqSF6M0weN0QNum
-         RX2hi+Zl7Agvh7REynohBWAanVWtDroCQHfVlWj7zw/kiFlVEtsITgdKwIJ9nFZ7Qb33
-         wRMwaH6bRUFx6I1GAcnP3MTRdmISHdR34z8Cu0Rth6vjuRL9EDgVp80StzDonXlqEX8f
-         Cv5M4SVUM68TOjnSiIMGPa6hmuV+qYsC4s/p5OkNDorCgk8R6nN/2WObn5Jln+/wqeuz
-         Z/3Q==
-X-Gm-Message-State: ANoB5pnFnzOSVrgGPwbKjf0neSSFLifZjm35kpESvt9/PsK9s682Z9+v
-	gnShfQiXzkZPc62TIIi/ukFyt18f6LA=
-X-Google-Smtp-Source: AA0mqf5bYMSLcgDNTt+07reht4qhZd5MrtRza0KsgdNF9H9fFL9mQgrJ8pAwMwXMsLJyBKca/irj6Q==
-X-Received: by 2002:a62:524c:0:b0:576:b277:2cd with SMTP id g73-20020a62524c000000b00576b27702cdmr38098918pfb.34.1671397672294;
-        Sun, 18 Dec 2022 13:07:52 -0800 (PST)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9181:1cf0::41f2])
-        by smtp.gmail.com with ESMTPSA id e64-20020a621e43000000b005770fd365d8sm5120928pfe.97.2022.12.18.13.07.51
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 18 Dec 2022 13:07:51 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 2/3] stressapptest: Fix build with largefile support and musl
-Date: Sun, 18 Dec 2022 13:07:47 -0800
-Message-Id: <20221218210748.225122-2-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.39.0
-In-Reply-To: <20221218210748.225122-1-raj.khem@gmail.com>
-References: <20221218210748.225122-1-raj.khem@gmail.com>
+ dkim=pass header.i=@windriver.com header.s=pps06212021 header.b=oYAuLQzJ;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=935257dbcc=narpat.mali@windriver.com)
+Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 2BJ5VKFU006476
+	for <openembedded-devel@lists.openembedded.org>; Sun, 18 Dec 2022 21:37:01 -0800
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com; h=from : to : cc :
+ subject : date : message-id : mime-version : content-transfer-encoding :
+ content-type; s=PPS06212021;
+ bh=0qN+z5/E61Ti4DIZ66DJwg20XoKy0poh4Lm3I5OJUuk=;
+ b=oYAuLQzJOuvZGgP7FdGh+BGfzLe+y0kHiyDpTEE+XKZrMGWjgOyv7tSduwd9TAPypxSn
+ 4hM/D3Myifu+gz8dNRutdTc76ovCJ0IuRKpnv7YEPyPQ3EcC3r7Tw6wVBQPhhAW/XlTd
+ D9fDnPHgVtkvtKQ8YlHFNMdTSezpFzEz4b6upur6K8JBLndKJAQlMh9CrHo0GNxt82wp
+ 73Z53cmAhBIZCPbZfhyyjl2k8/sgfT1ZXnyYg27krS9yF4xRlx4n2xqo8jD4JQBrzMfE
+ tw67qpe2fPv7WsYa4G0NL+g6ug+2SKpKOKjkRwa9cbLTnI/gXP9v71gO1ccwTqbVOv82 RQ== 
+Received: from ala-exchng02.corp.ad.wrs.com (unknown-82-254.windriver.com [147.11.82.254])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3mhe5q8xfc-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Sun, 18 Dec 2022 21:37:01 -0800
+Received: from ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) by
+ ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2308.27; Sun, 18 Dec 2022 21:37:01 -0800
+Received: from pek-hostel-deb01.wrs.com (147.11.136.210) by
+ ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server id
+ 15.1.2308.27 via Frontend Transport; Sun, 18 Dec 2022 21:36:59 -0800
+From: Narpat Mali <narpat.mali@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: <archana.polampalli@windriver.com>, <hari.gpillai@windriver.com>,
+        "Narpat
+ Mali" <narpat.mali@windriver.com>
+Subject: [oe][meta-python][kirkstone][PATCH 1/1] Fix collections.abc deprecation warning in downloadutils Warning appears as:
+Date: Mon, 19 Dec 2022 13:36:18 +0800
+Message-ID: <20221219053618.3558291-1-narpat.mali@windriver.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Proofpoint-ORIG-GUID: PyiEz26CXULjfBDWjLl97vNO5tXZN9K3
+X-Proofpoint-GUID: PyiEz26CXULjfBDWjLl97vNO5tXZN9K3
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.205,Aquarius:18.0.923,Hydra:6.0.545,FMLib:17.11.122.1
+ definitions=2022-12-18_13,2022-12-15_02,2022-06-22_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 malwarescore=0
+ impostorscore=0 lowpriorityscore=0 mlxlogscore=999 phishscore=0 mlxscore=0
+ adultscore=0 spamscore=0 suspectscore=0 priorityscore=1501 bulkscore=0
+ clxscore=1011 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.12.0-2212070000 definitions=main-2212190049
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 18 Dec 2022 21:08:01 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100087
+ <openembedded-devel@lists.openembedded.org>; Mon, 19 Dec 2022 05:37:03 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100089
 
-Update status of patches as they are submitted upstream
+tests/test_downloadutils.py::test_stream_response_to_specific_filename
+  requests_toolbelt/downloadutils/stream.py:161: DeprecationWarning: Using or importing the ABCs from 'collections' instead of from 'collections.abc' is deprecated, and in 3.8 it will stop working
+    if path and isinstance(getattr(path, 'write', None), collections.Callable):
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Upstream-Status: Backport [https://github.com/requests/toolbelt/commit/7188b06330e5260be20bce8cbcf0d5ae44e34eaf]
+
+Signed-off-by: Narpat Mali <narpat.mali@windriver.com>
 ---
- .../0001-configure-Add-with-cpu.patch         |  37 +++++++
- ...-Replace-lfs64-functions-and-defines.patch | 103 ++++++++++++++++++
- ...for-pthread_rwlockattr_setkind_np-be.patch |  43 ++++++++
- .../stressapptest/libcplusplus-compat.patch   |   2 +-
- .../read_sysfs_for_cachesize.patch            |   2 +-
- .../stressapptest/stressapptest_1.0.9.bb      |  10 +-
- 6 files changed, 194 insertions(+), 3 deletions(-)
- create mode 100644 meta-oe/recipes-benchmark/stressapptest/stressapptest/0001-configure-Add-with-cpu.patch
- create mode 100644 meta-oe/recipes-benchmark/stressapptest/stressapptest/0002-Replace-lfs64-functions-and-defines.patch
- create mode 100644 meta-oe/recipes-benchmark/stressapptest/stressapptest/0003-configure-Check-for-pthread_rwlockattr_setkind_np-be.patch
+ ...abc-deprecation-warning-in-downloadu.patch | 41 +++++++++++++++++++
+ .../python/python3-requests-toolbelt_0.9.1.bb |  5 ++-
+ 2 files changed, 44 insertions(+), 2 deletions(-)
+ create mode 100644 meta-python/recipes-devtools/python/python3-requests-toolbelt/0001-Fix-collections.abc-deprecation-warning-in-downloadu.patch
 
-diff --git a/meta-oe/recipes-benchmark/stressapptest/stressapptest/0001-configure-Add-with-cpu.patch b/meta-oe/recipes-benchmark/stressapptest/stressapptest/0001-configure-Add-with-cpu.patch
+diff --git a/meta-python/recipes-devtools/python/python3-requests-toolbelt/0001-Fix-collections.abc-deprecation-warning-in-downloadu.patch b/meta-python/recipes-devtools/python/python3-requests-toolbelt/0001-Fix-collections.abc-deprecation-warning-in-downloadu.patch
 new file mode 100644
-index 0000000000..41fb456c6c
+index 000000000..baa833b6d
 --- /dev/null
-+++ b/meta-oe/recipes-benchmark/stressapptest/stressapptest/0001-configure-Add-with-cpu.patch
-@@ -0,0 +1,37 @@
-+From 73049e5a9e3698cc6d51471d70ac5e06bed803cc Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Sat, 17 Dec 2022 10:24:48 -0800
-+Subject: [PATCH] configure: Add --with-cpu
++++ b/meta-python/recipes-devtools/python/python3-requests-toolbelt/0001-Fix-collections.abc-deprecation-warning-in-downloadu.patch
+@@ -0,0 +1,41 @@
++From 7188b06330e5260be20bce8cbcf0d5ae44e34eaf Mon Sep 17 00:00:00 2001
++From: Jon Dufresne <jon.dufresne@gmail.com>
++Date: Fri, 1 Feb 2019 16:30:01 -0800
++Subject: [PATCH] Fix collections.abc deprecation warning in downloadutils
 +
-+Some cross build systems e.g. yocto may use architectures different from cross compiler target tuple
-+arm-yoe-gnueabi but build for armv7a, AC_CANONICAL_HOST will fail in
-+this case even though target will be armv7a it will detect it as arm and
-+disable armv7a specific optimization paths. This option provides the
-+needed knob so it can be set explicitly e.g. --with-cpu=armv7a etc. if needed.
++Warning appears as:
 +
-+Upstream-Status: Submitted [https://github.com/stressapptest/stressapptest/pull/100]
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
++tests/test_downloadutils.py::test_stream_response_to_specific_filename
++  requests_toolbelt/downloadutils/stream.py:161: DeprecationWarning: Using or importing the ABCs from 'collections' instead of from 'collections.abc' is deprecated, and in 3.8 it will stop working
++    if path and isinstance(getattr(path, 'write', None), collections.Callable):
++
++Upstream-Status: Backport [https://github.com/requests/toolbelt/commit/7188b06330e5260be20bce8cbcf0d5ae44e34eaf]
++
++Signed-off-by: Narpat Mali <narpat.mali@windriver.com>
 +---
-+ configure.ac | 9 ++++++++-
-+ 1 file changed, 8 insertions(+), 1 deletion(-)
++ requests_toolbelt/downloadutils/stream.py | 3 +--
++ 1 file changed, 1 insertion(+), 2 deletions(-)
 +
-+diff --git a/configure.ac b/configure.ac
-+index c839c87..403728c 100644
-+--- a/configure.ac
-++++ b/configure.ac
-+@@ -11,7 +11,14 @@ else
-+   AC_MSG_NOTICE([Compiling with dynamically linked libraries.])
-+ fi
++diff --git a/requests_toolbelt/downloadutils/stream.py b/requests_toolbelt/downloadutils/stream.py
++index eed60a7..1d1c31b 100644
++--- a/requests_toolbelt/downloadutils/stream.py
+++++ b/requests_toolbelt/downloadutils/stream.py
++@@ -1,6 +1,5 @@
++ # -*- coding: utf-8 -*-
++ """Utilities for dealing with streamed requests."""
++-import collections
++ import os.path
++ import re
 + 
-+-AC_CANONICAL_HOST
-++AC_ARG_WITH(cpu, [  --with-cpu            define host cpu])
-++
-++if test -z "$with_cpu"
-++then
-++  AC_CANONICAL_HOST
-++else
-++  host_cpu=$with_cpu
-++fi
-+ # Checking for target cpu and setting custom configuration
-+ # for the different platforms
-+ AS_CASE(["$host_cpu"],
-diff --git a/meta-oe/recipes-benchmark/stressapptest/stressapptest/0002-Replace-lfs64-functions-and-defines.patch b/meta-oe/recipes-benchmark/stressapptest/stressapptest/0002-Replace-lfs64-functions-and-defines.patch
-new file mode 100644
-index 0000000000..48ff3ef93b
---- /dev/null
-+++ b/meta-oe/recipes-benchmark/stressapptest/stressapptest/0002-Replace-lfs64-functions-and-defines.patch
-@@ -0,0 +1,103 @@
-+From 9ab360fd018d267fe174713d7e14454408b26043 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Sat, 17 Dec 2022 10:33:01 -0800
-+Subject: [PATCH] Replace lfs64 functions and defines
++@@ -158,7 +157,7 @@ def stream_response_to_file(response, path=None, chunksize=_DEFAULT_CHUNKSIZE):
++     pre_opened = False
++     fd = None
++     filename = None
++-    if path and isinstance(getattr(path, 'write', None), collections.Callable):
+++    if path and callable(getattr(path, 'write', None)):
++         pre_opened = True
++         fd = path
++         filename = getattr(fd, 'name', None)
++-- 
++2.25.1
 +
-+AC_SYS_LARGEFILE is already in use in configure.ac which detects
-+enabling lfs64 functions as needed, it will define _FILE_OFFSET_BITS=64
-+which should make lseek same as lseek64 since off_t is 64bit on most of
-+current 32bit linux platforms
-+
-+Upstream-Status: Submitted [https://github.com/stressapptest/stressapptest/pull/100]
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ src/os.cc     | 18 ++++++------------
-+ src/worker.cc |  6 +++---
-+ 2 files changed, 9 insertions(+), 15 deletions(-)
-+
-+diff --git a/src/os.cc b/src/os.cc
-+index 1928e0a..faa6068 100644
-+--- a/src/os.cc
-++++ b/src/os.cc
-+@@ -142,7 +142,7 @@ int OsLayer::AddressMode() {
-+ uint64 OsLayer::VirtualToPhysical(void *vaddr) {
-+   uint64 frame, paddr, pfnmask, pagemask;
-+   int pagesize = sysconf(_SC_PAGESIZE);
-+-  off64_t off = ((uintptr_t)vaddr) / pagesize * 8;
-++  off_t off = ((uintptr_t)vaddr) / pagesize * 8;
-+   int fd = open(kPagemapPath, O_RDONLY);
-+ 
-+   /*
-+@@ -154,7 +154,7 @@ uint64 OsLayer::VirtualToPhysical(void *vaddr) {
-+   if (fd < 0)
-+     return 0;
-+ 
-+-  if (lseek64(fd, off, SEEK_SET) != off || read(fd, &frame, 8) != 8) {
-++  if (lseek(fd, off, SEEK_SET) != off || read(fd, &frame, 8) != 8) {
-+     int err = errno;
-+     string errtxt = ErrorString(err);
-+     logprintf(0, "Process Error: failed to access %s with errno %d (%s)\n",
-+@@ -607,9 +607,9 @@ bool OsLayer::AllocateTestMem(int64 length, uint64 paddr_base) {
-+         dynamic_mapped_shmem_ = true;
-+       } else {
-+         // Do a full mapping here otherwise.
-+-        shmaddr = mmap64(NULL, length, PROT_READ | PROT_WRITE,
-+-                         MAP_SHARED | MAP_NORESERVE | MAP_LOCKED | MAP_POPULATE,
-+-                         shm_object, 0);
-++        shmaddr = mmap(NULL, length, PROT_READ | PROT_WRITE,
-++                       MAP_SHARED | MAP_NORESERVE | MAP_LOCKED | MAP_POPULATE,
-++                       shm_object, 0);
-+         if (shmaddr == reinterpret_cast<void*>(-1)) {
-+           int err = errno;
-+           string errtxt = ErrorString(err);
-+@@ -704,18 +704,12 @@ void *OsLayer::PrepareTestMem(uint64 offset, uint64 length) {
-+   if (dynamic_mapped_shmem_) {
-+     // TODO(nsanders): Check if we can support MAP_NONBLOCK,
-+     // and evaluate performance hit from not using it.
-+-#ifdef HAVE_MMAP64
-+-    void * mapping = mmap64(NULL, length, PROT_READ | PROT_WRITE,
-+-                     MAP_SHARED | MAP_NORESERVE | MAP_LOCKED | MAP_POPULATE,
-+-                     shmid_, offset);
-+-#else
-+     void * mapping = mmap(NULL, length, PROT_READ | PROT_WRITE,
-+                      MAP_SHARED | MAP_NORESERVE | MAP_LOCKED | MAP_POPULATE,
-+                      shmid_, offset);
-+-#endif
-+     if (mapping == MAP_FAILED) {
-+       string errtxt = ErrorString(errno);
-+-      logprintf(0, "Process Error: PrepareTestMem mmap64(%llx, %llx) failed. "
-++      logprintf(0, "Process Error: PrepareTestMem mmap(%llx, %llx) failed. "
-+                    "error: %s.\n",
-+                 offset, length, errtxt.c_str());
-+       sat_assert(0);
-+diff --git a/src/worker.cc b/src/worker.cc
-+index 745a816..41e93a0 100644
-+--- a/src/worker.cc
-++++ b/src/worker.cc
-+@@ -1705,7 +1705,7 @@ bool FileThread::WritePages(int fd) {
-+   int strict = sat_->strict();
-+ 
-+   // Start fresh at beginning of file for each batch of pages.
-+-  lseek64(fd, 0, SEEK_SET);
-++  lseek(fd, 0, SEEK_SET);
-+   for (int i = 0; i < sat_->disk_pages(); i++) {
-+     struct page_entry src;
-+     if (!GetValidPage(&src))
-+@@ -1943,7 +1943,7 @@ bool FileThread::ReadPages(int fd) {
-+   bool result = true;
-+ 
-+   // Read our data back out of the file, into it's new location.
-+-  lseek64(fd, 0, SEEK_SET);
-++  lseek(fd, 0, SEEK_SET);
-+   for (int i = 0; i < sat_->disk_pages(); i++) {
-+     struct page_entry dst;
-+     if (!GetEmptyPage(&dst))
-+@@ -3153,7 +3153,7 @@ bool DiskThread::ValidateBlockOnDisk(int fd, BlockData *block) {
-+ 
-+   // Read block from disk and time the read.  If it takes longer than the
-+   // threshold, complain.
-+-  if (lseek64(fd, address * kSectorSize, SEEK_SET) == -1) {
-++  if (lseek(fd, address * kSectorSize, SEEK_SET) == -1) {
-+     logprintf(0, "Process Error: Unable to seek to sector %lld in "
-+               "DiskThread::ValidateSectorsOnDisk on disk %s "
-+               "(thread %d).\n", address, device_name_.c_str(), thread_num_);
-diff --git a/meta-oe/recipes-benchmark/stressapptest/stressapptest/0003-configure-Check-for-pthread_rwlockattr_setkind_np-be.patch b/meta-oe/recipes-benchmark/stressapptest/stressapptest/0003-configure-Check-for-pthread_rwlockattr_setkind_np-be.patch
-new file mode 100644
-index 0000000000..b21a534d94
---- /dev/null
-+++ b/meta-oe/recipes-benchmark/stressapptest/stressapptest/0003-configure-Check-for-pthread_rwlockattr_setkind_np-be.patch
-@@ -0,0 +1,43 @@
-+From d64a282b57352dde5f5b007947c005e504dc9a6b Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Sat, 17 Dec 2022 10:46:31 -0800
-+Subject: [PATCH] configure: Check for pthread_rwlockattr_setkind_np before use
-+
-+musl does not implement this therefore detect this non-posix API before
-+using it
-+
-+Upstream-Status: Submitted [https://github.com/stressapptest/stressapptest/pull/100]
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ configure.ac  | 1 +
-+ src/worker.cc | 2 ++
-+ 2 files changed, 3 insertions(+)
-+
-+diff --git a/configure.ac b/configure.ac
-+index 403728c..47968cb 100644
-+--- a/configure.ac
-++++ b/configure.ac
-+@@ -157,6 +157,7 @@ AC_FUNC_STRERROR_R
-+ AC_FUNC_VPRINTF
-+ AC_CHECK_FUNCS([ftruncate gettimeofday memset munmap select socket strtol strtoull])
-+ AC_CHECK_FUNCS([mmap64 posix_memalign rand_r sched_getaffinity])
-++AC_CHECK_FUNCS([pthread_rwlockattr_setkind_np])
-+ 
-+ AC_CONFIG_FILES([Makefile src/Makefile])
-+ AC_OUTPUT
-+diff --git a/src/worker.cc b/src/worker.cc
-+index 41e93a0..c4abc87 100644
-+--- a/src/worker.cc
-++++ b/src/worker.cc
-+@@ -133,9 +133,11 @@ void WorkerStatus::Initialize() {
-+ 
-+   pthread_rwlockattr_t attrs;
-+   sat_assert(0 == pthread_rwlockattr_init(&attrs));
-++#ifdef HAVE_PTHREAD_RWLOCKATTR_SETKIND_NP
-+   // Avoid writer lock starvation.
-+   sat_assert(0 == pthread_rwlockattr_setkind_np(
-+                       &attrs, PTHREAD_RWLOCK_PREFER_WRITER_NONRECURSIVE_NP));
-++#endif
-+   sat_assert(0 == pthread_rwlock_init(&status_rwlock_, &attrs));
-+ 
-+ #ifdef HAVE_PTHREAD_BARRIERS
-diff --git a/meta-oe/recipes-benchmark/stressapptest/stressapptest/libcplusplus-compat.patch b/meta-oe/recipes-benchmark/stressapptest/stressapptest/libcplusplus-compat.patch
-index f5e7da359d..8754e40697 100644
---- a/meta-oe/recipes-benchmark/stressapptest/stressapptest/libcplusplus-compat.patch
-+++ b/meta-oe/recipes-benchmark/stressapptest/stressapptest/libcplusplus-compat.patch
-@@ -11,7 +11,7 @@ Fixes
- ./sattypes.h:33:17: error: expected namespace name
- using namespace __gnu_cxx; //NOLINT
+diff --git a/meta-python/recipes-devtools/python/python3-requests-toolbelt_0.9.1.bb b/meta-python/recipes-devtools/python/python3-requests-toolbelt_0.9.1.bb
+index 366f41ca8..72ad7a618 100644
+--- a/meta-python/recipes-devtools/python/python3-requests-toolbelt_0.9.1.bb
++++ b/meta-python/recipes-devtools/python/python3-requests-toolbelt_0.9.1.bb
+@@ -6,7 +6,8 @@ LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=71760e0f1dda8cff91b0bc9246caf571"
  
--Upstream-Status: Pending
-+Upstream-Status: Submitted [https://github.com/stressapptest/stressapptest/pull/100]
- Signed-off-by: Khem Raj <raj.khem@gmail.com>
- 
- --- stressapptest-1.0.9.orig/src/sattypes.h
-diff --git a/meta-oe/recipes-benchmark/stressapptest/stressapptest/read_sysfs_for_cachesize.patch b/meta-oe/recipes-benchmark/stressapptest/stressapptest/read_sysfs_for_cachesize.patch
-index 8c251aeb97..19261657ac 100644
---- a/meta-oe/recipes-benchmark/stressapptest/stressapptest/read_sysfs_for_cachesize.patch
-+++ b/meta-oe/recipes-benchmark/stressapptest/stressapptest/read_sysfs_for_cachesize.patch
-@@ -2,7 +2,7 @@ sysconf params like _SC_LEVEL1_DCACHE_LINESIZE are not universally
- implemented, therefore check for them being available, if not there
- then read the sysfs directly to get the value
- 
--Upstream-Status: Pending
-+Upstream-Status: Submitted [https://github.com/stressapptest/stressapptest/pull/100]
- Signed-off-by: Khem Raj <raj.khem@gmail.com>
- --- a/src/sat.cc
- +++ b/src/sat.cc
-diff --git a/meta-oe/recipes-benchmark/stressapptest/stressapptest_1.0.9.bb b/meta-oe/recipes-benchmark/stressapptest/stressapptest_1.0.9.bb
-index c8b9ca7cb9..02144c558a 100644
---- a/meta-oe/recipes-benchmark/stressapptest/stressapptest_1.0.9.bb
-+++ b/meta-oe/recipes-benchmark/stressapptest/stressapptest_1.0.9.bb
-@@ -13,10 +13,18 @@ SRCREV = "9146a8bfe3e3daefa95f7a61b75183e5fc64af2c"
- 
- PV .= "+1.0.10git${SRCPV}"
- 
-+EXTRA_AUTOCONF:append:armv7a = " --with-cpu=armv7a"
-+EXTRA_AUTOCONF:append:armv7ve = " --with-cpu=armv7a"
-+
-+GI_DATA_ENABLED:libc-musl:armv7a = "False"
-+GI_DATA_ENABLED:libc-musl:armv7ve = "False"
- SRC_URI = "git://github.com/stressapptest/stressapptest;branch=master;protocol=https \
-            file://libcplusplus-compat.patch \
-            file://read_sysfs_for_cachesize.patch \
+ SRC_URI = "file://run-ptest \
 -          "
-+           file://0001-configure-Add-with-cpu.patch \
-+           file://0002-Replace-lfs64-functions-and-defines.patch \
-+           file://0003-configure-Check-for-pthread_rwlockattr_setkind_np-be.patch \
++           file://0001-Fix-collections.abc-deprecation-warning-in-downloadu.patch \
 +           "
  
- S = "${WORKDIR}/git"
- 
+ SRC_URI[md5sum] = "b1509735c4b4cf95df2619facbc3672e"
+ SRC_URI[sha256sum] = "968089d4584ad4ad7c171454f0a5c6dac23971e9472521ea3b6d49d610aa6fc0"
+@@ -31,4 +32,4 @@ do_install_ptest() {
+ 	# remove test test_multipart_encoder.py as it fails,
+ 	# downloaded file is not supported
+ 	rm -f ${D}${PTEST_PATH}/tests/test_multipart_encoder.py
+-}
++} 
 -- 
-2.39.0
+2.25.1
 
 
