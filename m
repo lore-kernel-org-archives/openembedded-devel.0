@@ -2,232 +2,300 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7D06EC4167B
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7EF4EC4708D
 	for <webhook@archiver.kernel.org>; Mon, 19 Dec 2022 07:34:14 +0000 (UTC)
-Received: from mail-pf1-f176.google.com (mail-pf1-f176.google.com [209.85.210.176])
- by mx.groups.io with SMTP id smtpd.web11.15969.1671435244715302496
+Received: from mail-pj1-f54.google.com (mail-pj1-f54.google.com [209.85.216.54])
+ by mx.groups.io with SMTP id smtpd.web11.15970.1671435245853989962
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 18 Dec 2022 23:34:04 -0800
+ Sun, 18 Dec 2022 23:34:05 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=pnlshpzp;
- spf=pass (domain: gmail.com, ip: 209.85.210.176, mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f176.google.com with SMTP id w26so5611294pfj.6
-        for <openembedded-devel@lists.openembedded.org>; Sun, 18 Dec 2022 23:34:04 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=CSqJaZ9e;
+ spf=pass (domain: gmail.com, ip: 209.85.216.54, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f54.google.com with SMTP id v23so2951868pju.3
+        for <openembedded-devel@lists.openembedded.org>; Sun, 18 Dec 2022 23:34:05 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=/YPhI3RN5a34N7I8WHgFh5q1JRZ3loI9IKG7soYceAc=;
-        b=pnlshpzp3va41QIECQc1X5ZwMao+9/Gzw0zfLcfIBUPWb/FbOrD6QtMh6Yo8butd4n
-         c3EbSEWlrusm7rsO4COtevouLqaKUtBnQG6jg6rCvp4qfFbpK6hECnIBWh/CCPUZaEtc
-         fLy9pQDdjP6r5eaum7MMX/Ki+8xtahW/DFkw39NbJ6orqx3pcS1bF7dHQNxFH58K07gS
-         QPfy+apQLP/8fpfaFWhUxNcRcxT7mKVo+03lgSeg1bLgcF+8nzRPlUZ5R+T7HIoLXiNU
-         HVOrQPujXCG9Wuo8zT6g8oLQyaK7EkiBIthk17mJiXTWmnUvEfAkM8OQeOeZrgGdLkXf
-         JkyA==
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=i7mMskHg1ISA56f0jIqJOvsBCpzGBpNfF2FMvUsM7GI=;
+        b=CSqJaZ9e1ExMDk+ZVIFwCbLfM66lcQAiwKDXTLYzsdfu/c9wPEm97tbkWUo5xPMLM5
+         iorZzCeYz8qAvDGF4lDNRTkwf9CHMRxpmqeU8qfsM1BBJE+aIZINNXOO7tDo5jozQp3h
+         sh2Q8zpm081/P8iSBBHZr8TRYFD2UuPhvAchHVy6MoMc1jKTXxlfPleH9uxy0mJX472M
+         BPZQbra8UyKfnQmnEp/1QhmFfUhXRuTzHi7w+bIR3+OIpmqnUDczjPthJSxTKajlwF8e
+         f58cbB9ujfj4NsT0KSGJPbuAM1kIrxKr9YmvJjCG3tHg70S1K2JEH6PCojAsXFV8TBmb
+         +yyw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=/YPhI3RN5a34N7I8WHgFh5q1JRZ3loI9IKG7soYceAc=;
-        b=B0H2kcTgMvFxIxTS35vx6plHCDN08uT11bkuYPoa2QWxgbqAjvbPp+PFSh1oc7tzEu
-         bMOLIVW/XEjtRTKR6ZHXRBdE061cWTryLECHxvlvmRzinEx2IPyrg5GZDIFb4tXwkh84
-         AprXRS2JwpOrz2uS0LHUgxJmK4i5fqTn3gmMXhJvtBRHZ24sVQ8629KDGSUuFk2PCdmt
-         /iDKXp+5KyeynQmTABnCt/fCItY4LwerZuNR8TdVZN5TgtTZlvR9rJ7IqQwRhxUzUEnI
-         sfTwpGVUpyulKaWiJL6UFbyXMDpo1YBE3bDGaKQx5B2GwFDsGFBGYElk4nnj3raLbu4C
-         KuSA==
-X-Gm-Message-State: ANoB5pmp7HEZ7YrqEIDNZAl4nfpVc15f4a1NpqBuhZbJtfsAkjpeAHbQ
-	75kt8Ra+HzVCa02L8lGut8cY5BjwM8A=
-X-Google-Smtp-Source: AA0mqf4UlKEsr8AuTXACBQA9cCOexs7hWGdpbq00XHtoyc1LykBzY+uWqZwQMLy6+jo9tIWhFnfQLQ==
-X-Received: by 2002:a05:6a00:1c9d:b0:577:753a:6af with SMTP id y29-20020a056a001c9d00b00577753a06afmr43249377pfw.31.1671435243494;
-        Sun, 18 Dec 2022 23:34:03 -0800 (PST)
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=i7mMskHg1ISA56f0jIqJOvsBCpzGBpNfF2FMvUsM7GI=;
+        b=k784uwnKi7o4KiAXfIjY5Gz+VioNJXWqEdL7iA7xzQpm++D7BnBIGZxeK+jMvai70s
+         Zy6OunyO0t3WFIYD2lyZnXIasCVdvs6cFgZGzaY3f0vG/hEIP64vycaz9cxZ5wIcgUYU
+         RR+jkGvzn+Z1xifSZl4sxp9ZLRfzsUJYbOmd8wyhU5lXwUUGpO3N3K+Vvk+RjEjTePoB
+         KEamIDMWRC+E5muksS8BbTpmV8mrCl34UoeHkXKUHo+K253TmIdumb5DAWw5ZzouNETw
+         TKeHid7h2kpPNiF1AIYBv2ANYB7gQ1piY0qBS+UjmM3H56Kyg9z/X+NtjhC4rwj0EFaH
+         en7A==
+X-Gm-Message-State: ANoB5pnrw9LhlViCheBjDV5jks2Pzt/TRSuSTTmfd8fU2RRTgIjkpCqJ
+	Er1d1L8wA50NOsWveHjKu9Lo1Tz/0UY=
+X-Google-Smtp-Source: AA0mqf4U6mO/OLK9d7w22JTntMaNtnYkRZulMGBfPBZ8kd4A7RJ+GgalN2dAqDoUbD23JJi7YVOPPg==
+X-Received: by 2002:a05:6a20:d48f:b0:9d:efbe:a0f5 with SMTP id im15-20020a056a20d48f00b0009defbea0f5mr50190967pzb.5.1671435244970;
+        Sun, 18 Dec 2022 23:34:04 -0800 (PST)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9181:1cf0::41f2])
-        by smtp.gmail.com with ESMTPSA id b17-20020a621b11000000b00576a89978e5sm5830350pfb.63.2022.12.18.23.34.02
+        by smtp.gmail.com with ESMTPSA id b17-20020a621b11000000b00576a89978e5sm5830350pfb.63.2022.12.18.23.34.04
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 18 Dec 2022 23:34:03 -0800 (PST)
+        Sun, 18 Dec 2022 23:34:04 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 1/3] cryptsetup: Upgrade to 2.6.0
-Date: Sun, 18 Dec 2022 23:33:58 -0800
-Message-Id: <20221219073400.1473072-1-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 3/3] libyui,libyui-ncurses: Upgrade to 4.2.3
+Date: Sun, 18 Dec 2022 23:34:00 -0800
+Message-Id: <20221219073400.1473072-3-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.39.0
+In-Reply-To: <20221219073400.1473072-1-raj.khem@gmail.com>
+References: <20221219073400.1473072-1-raj.khem@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 19 Dec 2022 07:34:14 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100090
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100092
 
-- Disable documentation as it needs asciidoctor which is not available
-- Rename cryptsetup-reencrypt packageconfig to luks2-reencryption to match
-  the relevant configure option.
-- Add a patch to enable 64bit off_t and lfs64
+Add a fix to build with lfs64
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../0001-Replace-off64_t-with-off_t.patch     | 101 ++++++++++++++++++
- ...ryptsetup_2.4.3.bb => cryptsetup_2.6.0.bb} |  13 ++-
- 2 files changed, 109 insertions(+), 5 deletions(-)
- create mode 100644 meta-oe/recipes-crypto/cryptsetup/cryptsetup/0001-Replace-off64_t-with-off_t.patch
- rename meta-oe/recipes-crypto/cryptsetup/{cryptsetup_2.4.3.bb => cryptsetup_2.6.0.bb} (92%)
+ ...eplace-off64_t-with-off_t-and-stat64.patch | 176 ++++++++++++++++++
+ ...urses_4.1.1.bb => libyui-ncurses_4.2.3.bb} |   6 +-
+ .../{libyui_4.1.1.bb => libyui_4.2.3.bb}      |   2 +-
+ 3 files changed, 181 insertions(+), 3 deletions(-)
+ create mode 100644 meta-oe/recipes-graphics/libyui/libyui-ncurses/0001-libyui-ncurses-Replace-off64_t-with-off_t-and-stat64.patch
+ rename meta-oe/recipes-graphics/libyui/{libyui-ncurses_4.1.1.bb => libyui-ncurses_4.2.3.bb} (89%)
+ rename meta-oe/recipes-graphics/libyui/{libyui_4.1.1.bb => libyui_4.2.3.bb} (95%)
 
-diff --git a/meta-oe/recipes-crypto/cryptsetup/cryptsetup/0001-Replace-off64_t-with-off_t.patch b/meta-oe/recipes-crypto/cryptsetup/cryptsetup/0001-Replace-off64_t-with-off_t.patch
+diff --git a/meta-oe/recipes-graphics/libyui/libyui-ncurses/0001-libyui-ncurses-Replace-off64_t-with-off_t-and-stat64.patch b/meta-oe/recipes-graphics/libyui/libyui-ncurses/0001-libyui-ncurses-Replace-off64_t-with-off_t-and-stat64.patch
 new file mode 100644
-index 0000000000..23aa86c0fb
+index 0000000000..b29e5dc7b2
 --- /dev/null
-+++ b/meta-oe/recipes-crypto/cryptsetup/cryptsetup/0001-Replace-off64_t-with-off_t.patch
-@@ -0,0 +1,101 @@
-+From 683d0c525765415be34c269edf9cc066276f9f65 Mon Sep 17 00:00:00 2001
++++ b/meta-oe/recipes-graphics/libyui/libyui-ncurses/0001-libyui-ncurses-Replace-off64_t-with-off_t-and-stat64.patch
+@@ -0,0 +1,176 @@
++From b81fb7942ab77b0bf6791e5fd98411dd68f133d9 Mon Sep 17 00:00:00 2001
 +From: Khem Raj <raj.khem@gmail.com>
-+Date: Sun, 18 Dec 2022 13:53:51 -0800
-+Subject: [PATCH] Replace off64_t with off_t
++Date: Sun, 18 Dec 2022 15:13:00 -0800
++Subject: [PATCH] libyui-ncurses: Replace off64_t with off_t and stat64 with stat
 +
-+AC_SYS_LARGEFILE autoconf macro is in use in configure script which will
-+add needed feature macros on commandline to enable 64bit off_t.
++stat is same as stat64 when 64bit off_t is used.
 +
-+Also replace lseek64 with lseek, since it will be same when
-+_FILE_OFFSET_BITS=64 is defined on relevant platforms via AC_SYS_LARGEFILE
-+
-+Upstream-Status: Submitted [https://gitlab.com/cryptsetup/cryptsetup/-/merge_requests/467]
++Upstream-Status: Submitted [https://github.com/libyui/libyui/pull/88]
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +---
-+ lib/utils.c                 |  4 ++--
-+ lib/utils_wipe.c            |  4 ++--
-+ src/utils_reencrypt_luks1.c | 12 ++++++------
-+ 3 files changed, 10 insertions(+), 10 deletions(-)
++ CMakeLists.txt         |  2 +-
++ src/NCAskForFile.cc    |  6 +++---
++ src/NCFileSelection.cc | 24 ++++++++++++------------
++ src/NCFileSelection.h  |  6 +++---
++ 4 files changed, 19 insertions(+), 19 deletions(-)
 +
-+diff --git a/lib/utils.c b/lib/utils.c
-+index 9d79ee29..be5f5287 100644
-+--- a/lib/utils.c
-++++ b/lib/utils.c
-+@@ -102,9 +102,9 @@ static int keyfile_seek(int fd, uint64_t bytes)
-+ 	char tmp[BUFSIZ];
-+ 	size_t next_read;
-+ 	ssize_t bytes_r;
-+-	off64_t r;
-++	off_t r;
-+ 
-+-	r = lseek64(fd, bytes, SEEK_CUR);
-++	r = lseek(fd, bytes, SEEK_CUR);
-+ 	if (r > 0)
-+ 		return 0;
-+ 	if (r < 0 && errno != ESPIPE)
-+diff --git a/lib/utils_wipe.c b/lib/utils_wipe.c
-+index 285a9e77..0c376f44 100644
-+--- a/lib/utils_wipe.c
-++++ b/lib/utils_wipe.c
-+@@ -150,7 +150,7 @@ static int wipe_block(struct crypt_device *cd, int devfd, crypt_wipe_pattern pat
-+ 	if (blockdev && pattern == CRYPT_WIPE_ZERO &&
-+ 	    !wipe_zeroout(cd, devfd, offset, wipe_block_size)) {
-+ 		/* zeroout ioctl does not move offset */
-+-		if (lseek64(devfd, offset + wipe_block_size, SEEK_SET) < 0) {
-++		if (lseek(devfd, offset + wipe_block_size, SEEK_SET) < 0) {
-+ 			log_err(cd, _("Cannot seek to device offset."));
-+ 			return -EINVAL;
-+ 		}
-+@@ -221,7 +221,7 @@ int crypt_wipe_device(struct crypt_device *cd,
-+ 	if (r)
-+ 		goto out;
-+ 
-+-	if (lseek64(devfd, offset, SEEK_SET) < 0) {
-++	if (lseek(devfd, offset, SEEK_SET) < 0) {
-+ 		log_err(cd, _("Cannot seek to device offset."));
-+ 		r = -EINVAL;
-+ 		goto out;
-+diff --git a/src/utils_reencrypt_luks1.c b/src/utils_reencrypt_luks1.c
-+index 96368bdb..d83a1da4 100644
-+--- a/src/utils_reencrypt_luks1.c
-++++ b/src/utils_reencrypt_luks1.c
-+@@ -729,8 +729,8 @@ static int copy_data_forward(struct reenc_ctx *rc, int fd_old, int fd_new,
-+ 
-+ 	log_dbg("Reencrypting in forward direction.");
-+ 
-+-	if (lseek64(fd_old, rc->device_offset, SEEK_SET) < 0 ||
-+-	    lseek64(fd_new, rc->device_offset, SEEK_SET) < 0) {
-++	if (lseek(fd_old, rc->device_offset, SEEK_SET) < 0 ||
-++	    lseek(fd_new, rc->device_offset, SEEK_SET) < 0) {
-+ 		log_err(_("Cannot seek to device offset."));
-+ 		goto out;
-+ 	}
-+@@ -788,7 +788,7 @@ static int copy_data_backward(struct reenc_ctx *rc, int fd_old, int fd_new,
-+ 			      size_t block_size, void *buf, uint64_t *bytes)
++diff --git a/CMakeLists.txt b/libyui-ncurses/CMakeLists.txt
++index b10eab8e..2000bb58 100644
++--- a/CMakeLists.txt
+++++ b/CMakeLists.txt
++@@ -58,7 +58,7 @@ set( CMAKE_INSTALL_MESSAGE LAZY ) # Suppress "up-to-date" messages during "make
++ # Initialize compiler flags for all targets in all subdirectories
++ add_compile_options( "-Wall" )
++ add_compile_options( "-Os" )    # Optimize for size (overrides CMake's -O3 in RELEASE builds)
++-
+++add_compile_options( "-D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64" ) # Enable largefile support
++ if ( WERROR )
++   add_compile_options( "-Werror" )
++ endif()
++diff --git a/src/NCAskForFile.cc b/libyui-ncurses/src/NCAskForFile.cc
++index aba6e0a6..44bb81bc 100644
++--- a/src/NCAskForFile.cc
+++++ b/src/NCAskForFile.cc
++@@ -73,8 +73,8 @@ std::string NCAskForFile::checkIniDir( std::string iniDir )
 + {
-+ 	ssize_t s1, s2, working_block;
-+-	off64_t working_offset;
-++	off_t working_offset;
-+ 	int r = -EIO;
-+ 	char *backing_file = NULL;
-+ 	struct tools_progress_params prog_parms = {
-+@@ -827,8 +827,8 @@ static int copy_data_backward(struct reenc_ctx *rc, int fd_old, int fd_new,
-+ 			working_block = block_size;
++     std::string dname = "";
++ 
++-    struct stat64 statInfo;
++-    stat64( iniDir.c_str(), &statInfo );
+++    struct stat statInfo;
+++    stat( iniDir.c_str(), &statInfo );
++ 
++     if ( S_ISDIR( statInfo.st_mode ) )
++     {
++@@ -90,7 +90,7 @@ std::string NCAskForFile::checkIniDir( std::string iniDir )
++ 	     && pos != 0 )
++ 	{
++ 	    std::string dir = iniDir.substr( 0, pos );
++-	    stat64( dir.c_str(), &statInfo );
+++	    stat( dir.c_str(), &statInfo );
++ 
++ 	    if ( S_ISDIR( statInfo.st_mode ) )
++ 	    {
++diff --git a/src/NCFileSelection.cc b/libyui-ncurses/src/NCFileSelection.cc
++index 3eb9c908..8894dc72 100644
++--- a/src/NCFileSelection.cc
+++++ b/src/NCFileSelection.cc
++@@ -46,7 +46,7 @@ using std::list;
++ 
++ 
++ NCFileInfo::NCFileInfo( string	        fileName,
++-			struct stat64 *	statInfo,
+++			struct stat *	statInfo,
++ 			bool	        link )
++ {
++     _name   = fileName;
++@@ -146,7 +146,7 @@ NCFileInfo::NCFileInfo()
++     _mode     = ( mode_t )0;
++     _device   = ( dev_t )0;
++     _links    = ( nlink_t )0;
++-    _size     = ( off64_t )0;
+++    _size     = ( off_t )0;
++     _mtime    = ( time_t )0;
++ }
++ 
++@@ -177,11 +177,11 @@ NCFileSelection::NCFileSelection( YWidget *           parent,
++ {
++     SetSepChar( ' ' );
++ 
++-    struct stat64 statInfo;
+++    struct stat statInfo;
++ 
++     if ( !iniDir.empty() )
++     {
++-	stat64( iniDir.c_str(), &statInfo );
+++	stat( iniDir.c_str(), &statInfo );
++     }
++ 
++     if ( iniDir.empty()
++@@ -559,8 +559,8 @@ NCursesEvent NCFileTable::wHandleInput( wint_t key )
++ bool NCFileTable::fillList()
++ {
++ 
++-    struct stat64	statInfo;
++-    struct stat64	linkInfo;
+++    struct stat	statInfo;
+++    struct stat	linkInfo;
++     struct dirent *	entry;
++     list<string>	tmpList;
++     list<string>::iterator   it;
++@@ -592,7 +592,7 @@ bool NCFileTable::fillList()
++ 	{
++ 	    string fullName = currentDir + "/" + ( *it );
++ 
++-	    if ( lstat64( fullName.c_str(), &statInfo ) == 0 )
+++	    if ( lstat( fullName.c_str(), &statInfo ) == 0 )
++ 	    {
++ 		if ( S_ISREG( statInfo.st_mode ) || S_ISBLK( statInfo.st_mode ) )
++ 		{
++@@ -604,7 +604,7 @@ bool NCFileTable::fillList()
 + 		}
++ 		else if ( S_ISLNK( statInfo.st_mode ) )
++ 		{
++-		    if ( stat64( fullName.c_str(), &linkInfo ) == 0 )
+++		    if ( stat( fullName.c_str(), &linkInfo ) == 0 )
++ 		    {
++ 			if ( S_ISREG( linkInfo.st_mode ) || S_ISBLK( linkInfo.st_mode ) )
++ 			{
++@@ -701,8 +701,8 @@ void NCDirectoryTable::fillHeader()
 + 
-+-		if (lseek64(fd_old, working_offset, SEEK_SET) < 0 ||
-+-		    lseek64(fd_new, working_offset, SEEK_SET) < 0) {
-++		if (lseek(fd_old, working_offset, SEEK_SET) < 0 ||
-++		    lseek(fd_new, working_offset, SEEK_SET) < 0) {
-+ 			log_err(_("Cannot seek to device offset."));
-+ 			goto out;
++ bool NCDirectoryTable::fillList()
++ {
++-    struct stat64	statInfo;
++-    struct stat64	linkInfo;
+++    struct stat	statInfo;
+++    struct stat	linkInfo;
++     struct dirent *	entry;
++     list<string>	tmpList;
++     list<string>::iterator   it;
++@@ -734,7 +734,7 @@ bool NCDirectoryTable::fillList()
++ 	{
++ 	    string fullName = currentDir + "/" + ( *it );
++ 
++-	    if ( lstat64( fullName.c_str(), &statInfo ) == 0 )
+++	    if ( lstat( fullName.c_str(), &statInfo ) == 0 )
++ 	    {
++ 		if ( S_ISDIR( statInfo.st_mode ) )
++ 		{
++@@ -746,7 +746,7 @@ bool NCDirectoryTable::fillList()
 + 		}
-+@@ -874,7 +874,7 @@ static void zero_rest_of_device(int fd, size_t block_size, void *buf,
++ 		else if ( S_ISLNK( statInfo.st_mode ) )
++ 		{
++-		    if ( stat64( fullName.c_str(), &linkInfo ) == 0 )
+++		    if ( stat( fullName.c_str(), &linkInfo ) == 0 )
++ 		    {
++ 			if ( S_ISDIR( linkInfo.st_mode ) )
++ 			{
++diff --git a/src/NCFileSelection.h b/libyui-ncurses/src/NCFileSelection.h
++index 0569215d..5c459d62 100644
++--- a/src/NCFileSelection.h
+++++ b/src/NCFileSelection.h
++@@ -44,10 +44,10 @@
++ struct NCFileInfo
++ {
++     /**
++-     * Constructor from a stat buffer (i.e. based on an lstat64() call).
+++     * Constructor from a stat buffer (i.e. based on an lstat() call).
++      **/
++     NCFileInfo( std::string	fileName,
++-		struct stat64	* statInfo,
+++		struct stat	* statInfo,
++ 		bool link	= false );
 + 
-+ 	log_dbg("Zeroing rest of device.");
++     NCFileInfo();
++@@ -65,7 +65,7 @@ struct NCFileInfo
++     dev_t		_device;	// device this object resides on
++     mode_t		_mode;		// file permissions + object type
++     nlink_t		_links;		// number of links
++-    off64_t		_size;		// size in bytes
+++    off_t		_size;		// size in bytes
++     time_t		_mtime;		// modification time
 + 
-+-	if (lseek64(fd, offset, SEEK_SET) < 0) {
-++	if (lseek(fd, offset, SEEK_SET) < 0) {
-+ 		log_dbg("Cannot seek to device offset.");
-+ 		return;
-+ 	}
-diff --git a/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.4.3.bb b/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.6.0.bb
-similarity index 92%
-rename from meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.4.3.bb
-rename to meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.6.0.bb
-index 652fd66614..1d4f440871 100644
---- a/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.4.3.bb
-+++ b/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.6.0.bb
-@@ -19,8 +19,10 @@ DEPENDS = " \
- DEPENDS:append:libc-musl = " argp-standalone"
- LDFLAGS:append:libc-musl = " -largp"
++     bool isDir()  { return (( S_ISDIR( _mode ) ) ? true : false ); }
++-- 
++2.39.0
++
+diff --git a/meta-oe/recipes-graphics/libyui/libyui-ncurses_4.1.1.bb b/meta-oe/recipes-graphics/libyui/libyui-ncurses_4.2.3.bb
+similarity index 89%
+rename from meta-oe/recipes-graphics/libyui/libyui-ncurses_4.1.1.bb
+rename to meta-oe/recipes-graphics/libyui/libyui-ncurses_4.2.3.bb
+index 8eb77291ab..bcc5ef33e2 100644
+--- a/meta-oe/recipes-graphics/libyui/libyui-ncurses_4.1.1.bb
++++ b/meta-oe/recipes-graphics/libyui/libyui-ncurses_4.2.3.bb
+@@ -4,11 +4,13 @@ LIC_FILES_CHKSUM = "file://../COPYING.lgpl-3;md5=e6a600fd5e1d9cbde2d983680233ad0
+     file://../COPYING.lgpl-2.1;md5=4fbd65380cdd255951079008b364516c \
+ "
  
--SRC_URI = "${KERNELORG_MIRROR}/linux/utils/${BPN}/v${@d.getVar('PV').split('.')[0]}.${@d.getVar('PV').split('.')[1]}/${BP}.tar.xz"
--SRC_URI[sha256sum] = "fc0df945188172264ec5bf1d0bda08264fadc8a3f856d47eba91f31fe354b507"
-+SRC_URI = "${KERNELORG_MIRROR}/linux/utils/${BPN}/v${@d.getVar('PV').split('.')[0]}.${@d.getVar('PV').split('.')[1]}/${BP}.tar.xz \
-+           file://0001-Replace-off64_t-with-off_t.patch \
-+           "
-+SRC_URI[sha256sum] = "44397ba76e75a9cde5b02177bc63cd7af428a785788e3a7067733e7761842735"
+-SRC_URI = "git://github.com/libyui/libyui.git;branch=master;protocol=https"
++SRC_URI = "git://github.com/libyui/libyui.git;branch=master;protocol=https \
++           file://0001-libyui-ncurses-Replace-off64_t-with-off_t-and-stat64.patch \
++          "
  
- inherit autotools gettext pkgconfig
+ SRC_URI:append:class-target = " file://0001-Fix-the-error-of-can-t-find-header-file.patch"
  
-@@ -30,7 +32,7 @@ PACKAGECONFIG ??= " \
-     keyring \
-     cryptsetup \
-     veritysetup \
--    cryptsetup-reencrypt \
-+    luks2-reencryption \
-     integritysetup \
-     ${@bb.utils.filter('DISTRO_FEATURES', 'selinux', d)} \
-     kernel_crypto \
-@@ -50,7 +52,7 @@ PACKAGECONFIG[pwquality] = "--enable-pwquality,--disable-pwquality,libpwquality"
- PACKAGECONFIG[passwdqc] = "--enable-passwdqc,--disable-passwdqc,passwdqc"
- PACKAGECONFIG[cryptsetup] = "--enable-cryptsetup,--disable-cryptsetup"
- PACKAGECONFIG[veritysetup] = "--enable-veritysetup,--disable-veritysetup"
--PACKAGECONFIG[cryptsetup-reencrypt] = "--enable-cryptsetup-reencrypt,--disable-cryptsetup-reencrypt"
-+PACKAGECONFIG[luks2-reencryption] = "--enable-luks2-reencryption,--disable-luks2-reencryption"
- PACKAGECONFIG[integritysetup] = "--enable-integritysetup,--disable-integritysetup"
- PACKAGECONFIG[selinux] = "--enable-selinux,--disable-selinux"
- PACKAGECONFIG[udev] = "--enable-udev,--disable-udev,,udev lvm2-udevrules"
-@@ -78,7 +80,8 @@ EXTRA_OECONF += "--enable-largefile"
- EXTRA_OECONF += "--disable-static-cryptsetup"
- # There's no recipe for libargon2 yet
- EXTRA_OECONF += "--disable-libargon2"
--
-+# Disable documentation, there is no asciidoctor-native available in OE
-+EXTRA_OECONF += "--disable-asciidoc"
- # libcryptsetup default PBKDF algorithm, Argon2 memory cost (KB), parallel threads and iteration time (ms)
- LUKS2_PBKDF ?= "argon2i"
- LUKS2_MEMORYKB ?= "1048576"
+-SRCREV = "718ac672374a2b0f50cbc7d637d90e6471babc3d"
++SRCREV = "dabdcd9cc6a0058fd6966d7d2e19d508debcc0ac"
+ 
+ S = "${WORKDIR}/git/libyui-ncurses"
+ 
+diff --git a/meta-oe/recipes-graphics/libyui/libyui_4.1.1.bb b/meta-oe/recipes-graphics/libyui/libyui_4.2.3.bb
+similarity index 95%
+rename from meta-oe/recipes-graphics/libyui/libyui_4.1.1.bb
+rename to meta-oe/recipes-graphics/libyui/libyui_4.2.3.bb
+index 4778561662..939f3f36e5 100644
+--- a/meta-oe/recipes-graphics/libyui/libyui_4.1.1.bb
++++ b/meta-oe/recipes-graphics/libyui/libyui_4.2.3.bb
+@@ -10,7 +10,7 @@ SRC_URI = "git://github.com/libyui/libyui.git;branch=master;protocol=https \
+            file://0001-Use-relative-install-paths-for-CMake.patch \
+            "
+ 
+-SRCREV = "718ac672374a2b0f50cbc7d637d90e6471babc3d"
++SRCREV = "dabdcd9cc6a0058fd6966d7d2e19d508debcc0ac"
+ 
+ S = "${WORKDIR}/git/libyui"
+ 
 -- 
 2.39.0
 
