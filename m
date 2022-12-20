@@ -2,52 +2,52 @@ Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id ECAE0C10F1E
-	for <webhook@archiver.kernel.org>; Tue, 20 Dec 2022 15:18:25 +0000 (UTC)
-Received: from mail-yw1-f181.google.com (mail-yw1-f181.google.com [209.85.128.181])
- by mx.groups.io with SMTP id smtpd.web11.52706.1671549503153917497
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E8BABC4332F
+	for <webhook@archiver.kernel.org>; Tue, 20 Dec 2022 15:20:23 +0000 (UTC)
+Received: from mail-vk1-f172.google.com (mail-vk1-f172.google.com [209.85.221.172])
+ by mx.groups.io with SMTP id smtpd.web11.52767.1671549622456192150
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 20 Dec 2022 07:18:23 -0800
+ Tue, 20 Dec 2022 07:20:22 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=R5WkZZrp;
- spf=pass (domain: gmail.com, ip: 209.85.128.181, mailfrom: akuster808@gmail.com)
-Received: by mail-yw1-f181.google.com with SMTP id 00721157ae682-3cbdd6c00adso173067097b3.11
-        for <openembedded-devel@lists.openembedded.org>; Tue, 20 Dec 2022 07:18:23 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=Yv0x+KQc;
+ spf=pass (domain: gmail.com, ip: 209.85.221.172, mailfrom: akuster808@gmail.com)
+Received: by mail-vk1-f172.google.com with SMTP id x65so5883479vkg.11
+        for <openembedded-devel@lists.openembedded.org>; Tue, 20 Dec 2022 07:20:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=content-transfer-encoding:in-reply-to:from:references:to
          :content-language:subject:user-agent:mime-version:date:message-id
          :from:to:cc:subject:date:message-id:reply-to;
-        bh=Bu2y9zAyztiS/7E82neHFruxh6TWGGYdr3EQDW+fTYA=;
-        b=R5WkZZrph98/X55z+qmqsC0EYdw1S5NZwVPoons/jzvW0lvadwV+oar+JFuVIjbHh1
-         tHxn8amkWb/FQA76AG5opNdz/t88Uq0IPByPzsH/vQsA4wajMm65/XYrViE76O9b7pz/
-         fj1h0PE2nLWIbkGq9xcZO11ilxnsHlx9YHsUDXxSoM2bt6zTil4koK38fRybwCml8NGN
-         217r9k2e4A0BKQgvFYqTHFg/HCKiXjeOM6PHiwKFVdIJDqQZqJ4L1tuy3neOwpI9OFh1
-         zTtvtEBuNWrXohjN/jhabGIgRugJnwDUmnvVQNiVresT7MrLSWgjuKfoil9vhxUW8pSr
-         2rBQ==
+        bh=xzUpz07aJv1KigBEIzcgn2dN+SVPej6g50Kux8YyF24=;
+        b=Yv0x+KQc3UoiW/bN9AC0Wq1OT0aqZoainSmqyjymLZJT5/83PQO4ct2OFV4s/XR1DL
+         btwdNjhE4wUolU9gnMKJc2xTeSSsQ8xpd0TqMhOH1rRl2hhdNszSJvbXW3BQPKNC4BbF
+         /ES6zDfB/EZachBEpuUnyiNxvufERg/ApYs2MujNzPptRSo5xwHMhNhGbu2pcUG1V9Jz
+         fscMUkU0xXJv9CCvYEu/jHQ8xGx/8OKk4WAdBc8mFdQx922WQSC5aRJj2vzZYXylkmNr
+         f1vM3cSJ8CGjw5ozQe3lj6ewchcXnE9QocYihT6p5Lg2G5XcNM3pETOaHzn+548n5WAs
+         NZSw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=content-transfer-encoding:in-reply-to:from:references:to
          :content-language:subject:user-agent:mime-version:date:message-id
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=Bu2y9zAyztiS/7E82neHFruxh6TWGGYdr3EQDW+fTYA=;
-        b=fq6V+YQXPNKAR47Os+b25g+ty5TAwkVWX1NvoYk4rF6OeYmegF3XErbdNfbKvKQMne
-         +g/sLNbUt5euo0idwY5rHDBuk22kGnc8SE0KfwjZ8i9CzpKyxrmL0vxLh1jI2B6MJEgg
-         MgUoXRhv53Ojksa6y+gBMV8tJA2tnCXriaR3HlvdpGhX2xpinvNBWl1z5UBVZxi6U7fe
-         cnuax/F9/QG+EV+F04abJ15pu7lTW4cCOboTdIEdyKAgBK+qy8XdkDvALfQhIH622YrY
-         32U1Hn4ApxwDrAAqP3hH9zr4TPgZfSA84rW+7Cv16fvazkN2opEoFFWwkL3SuZ/3ifzH
-         524A==
-X-Gm-Message-State: ANoB5pkHVE3TgHwIcOvAnvveB5UvuzSL4xCxDRbm0crSP31CVSpzU1q3
-	mCXVgiRBb6rWfUmmYKSJLsM=
-X-Google-Smtp-Source: AA0mqf7uIDQbY4U8yqUsWlYej0EnmDxIVwwe4jCvfjfc3PoYxEMXWBY4wXxc7wGo1YODrAKX8qUZmw==
-X-Received: by 2002:a05:7500:1d09:b0:eb:113e:e4fa with SMTP id du9-20020a0575001d0900b000eb113ee4famr3762430gab.52.1671549502242;
-        Tue, 20 Dec 2022 07:18:22 -0800 (PST)
+        bh=xzUpz07aJv1KigBEIzcgn2dN+SVPej6g50Kux8YyF24=;
+        b=u8ipiHU39nRH/sfNa1jpOlucER54YPiGUw5GCmQe/54DXb4Vr+bTyEU2YgzTt/vera
+         1bmeFR8hHCa7nErsHUVJfKV5lrBle/imbQg6IXvpB5U62I/LFF5sk3rA82tE+qkUMRIh
+         P8b6d7ARcBE0knKw02CK+55QN+s//I1/IvIFvxWQkQenQCVrMCiwowxUAKyOMpjvETqR
+         Gl0DgThVg9U3ioJD+jqOZa0VTDgwWLL23zUHbomnHEuBDU8GztG1ZmWs4JYoDZGCybb3
+         OiQXEmQWJVW5n9FKjGMInZj5ZVbjcpN41Y55KmNlual2Ai2FYBTgY5JD1pKjtZ+N8MDT
+         g+Zw==
+X-Gm-Message-State: ANoB5pkQm0dqx8SbUEDfqAIeHuL+9vS2fP/BkqRMLXBVb2EqBh6tiTnC
+	IU/MkBRbEmtAywQDBTPgMJo=
+X-Google-Smtp-Source: AA0mqf4n+ZFjX/BQE4og2E2yRakx7hiDmQ0fbCID7UAUi8lcM5OCG6Lcqx72hSP+JWU7EcKXGXJDHw==
+X-Received: by 2002:a1f:b283:0:b0:3bd:e14b:424c with SMTP id b125-20020a1fb283000000b003bde14b424cmr25029600vkf.7.1671549621433;
+        Tue, 20 Dec 2022 07:20:21 -0800 (PST)
 Received: from ?IPV6:2600:1700:9190:ba10:9fde:e2bd:d2b4:8a4b? ([2600:1700:9190:ba10:9fde:e2bd:d2b4:8a4b])
-        by smtp.gmail.com with ESMTPSA id q28-20020a05620a2a5c00b006f7ee901674sm9358496qkp.2.2022.12.20.07.18.21
+        by smtp.gmail.com with ESMTPSA id x20-20020a05620a449400b006eef13ef4c8sm9270189qkp.94.2022.12.20.07.20.20
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 20 Dec 2022 07:18:21 -0800 (PST)
-Message-ID: <843f6068-4ade-c9f8-e783-c18284149cfe@gmail.com>
-Date: Tue, 20 Dec 2022 10:18:20 -0500
+        Tue, 20 Dec 2022 07:20:20 -0800 (PST)
+Message-ID: <7561f784-419f-537a-3c58-c37f091780fc@gmail.com>
+Date: Tue, 20 Dec 2022 10:20:19 -0500
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.4.2
@@ -63,21 +63,21 @@ Content-Transfer-Encoding: 7bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 20 Dec 2022 15:18:25 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100156
+ <openembedded-devel@lists.openembedded.org>; Tue, 20 Dec 2022 15:20:23 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100157
 
 
 
 On 12/19/22 3:36 PM, Markus Volk wrote:
 > Signed-off-by: Markus Volk <f_l_k@t-online.de>
-
-Will you be sending a patch to remove it from meta-security?
-
-- armin
 > ---
 >   .../bubblewrap/bubblewrap_0.6.2.bb            | 25 +++++++++++++++++++
 >   1 file changed, 25 insertions(+)
 >   create mode 100644 meta-oe/recipes-security/bubblewrap/bubblewrap_0.6.2.bb
+
+BTW, Master has a later version.
+
+-armin
 >
 > diff --git a/meta-oe/recipes-security/bubblewrap/bubblewrap_0.6.2.bb b/meta-oe/recipes-security/bubblewrap/bubblewrap_0.6.2.bb
 > new file mode 100644
