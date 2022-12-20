@@ -2,136 +2,130 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C6313C4332F
-	for <webhook@archiver.kernel.org>; Tue, 20 Dec 2022 18:00:14 +0000 (UTC)
-Received: from mail-oi1-f173.google.com (mail-oi1-f173.google.com [209.85.167.173])
- by mx.groups.io with SMTP id smtpd.web10.56921.1671559212632822064
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 20679C4332F
+	for <webhook@archiver.kernel.org>; Tue, 20 Dec 2022 18:29:25 +0000 (UTC)
+Received: from mail-pj1-f48.google.com (mail-pj1-f48.google.com [209.85.216.48])
+ by mx.groups.io with SMTP id smtpd.web10.57662.1671560962476877636
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 20 Dec 2022 10:00:12 -0800
+ Tue, 20 Dec 2022 10:29:22 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=nA4j3lHt;
- spf=pass (domain: gmail.com, ip: 209.85.167.173, mailfrom: raj.khem@gmail.com)
-Received: by mail-oi1-f173.google.com with SMTP id c133so4286170oif.1
-        for <openembedded-devel@lists.openembedded.org>; Tue, 20 Dec 2022 10:00:12 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=WkcqAM8f;
+ spf=pass (domain: gmail.com, ip: 209.85.216.48, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f48.google.com with SMTP id gt4so13283739pjb.1
+        for <openembedded-devel@lists.openembedded.org>; Tue, 20 Dec 2022 10:29:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=d7Zw3vqagsHmTQ4owCfJhYbSTeJemDDBD2f1bPuc1tM=;
-        b=nA4j3lHt0+lsgL/6gu+JYHWFUI1qpyC8iu4Zzi4O+B2s0iGT8yLrxUgDI4QflU0vy4
-         37Gf9NN8/toeEVBA0V39UZlUa0v/91IJ+ng5y7vOOZuNIBJtsz78kYrYgWw7ozAG5v0k
-         Bh3T8ECkGqJl2RsHypFbOMXn07H3bog/h3J5bB9jHp2tYhRj54m5U3NIN/9MuNq5AeB2
-         aOfu2SasckzVxSQTRnMM4jXvMEi+wC79rWJbYLhMOtlqBUB0ynpKY8ze12ZM3lbceSZo
-         bx483AiqBVAd/UnFVA7A9Lnd1uhY9M7VdKn5qAQvX9jvTADBscP4Y0LP5mZZ2ppfh1PI
-         zttg==
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=Q76ljRBGd+9xcctyA6JG98hTT0vQCNGYeWoz7a5xxz0=;
+        b=WkcqAM8f6+7IBmJZ8aPR+KS6qmcLGlF3LfYayt+wsD5X3ZRXArEbOUxrdbkPcMiZ+M
+         CbrpcXrJD8Sj6AkPK7Jrt/g/1278QTimLNa/KkdQ+hsTPOVkYdXkuY4QlwhEnNX9pgu+
+         YAgc7UsoKbIjALAW9M6SckJK0SmveyR7KQXM0l6YPBWAC1KDS94xOpAuy2xn1uanKUhS
+         0fiqfie7jhUvslwQmDh0bOAW1ORIcrctz2/70QMMp2cHl0hmJyzUp/pqGYjobMwR0APs
+         qmV/9Q0BN2aY8ZEicEaXjkXDqpiO6Tu5D2f5n1ICoVdZebem1vvE7G88EOtgIvf5pIk2
+         k3ow==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=d7Zw3vqagsHmTQ4owCfJhYbSTeJemDDBD2f1bPuc1tM=;
-        b=4ljHUgMyWMOMZP6BBcupB8Xw8X8Bq8dZYrldHffvHnLzfI2IJRcV3LVN+TjemWL+G8
-         aDND/vQBxjtGd6JYiNHDVe4LfGi5HY8GuezXBPsjEcCNZEhQ2VaABMPvEn4to4OoQUiG
-         VNZAcXBNEUbVITDheU+Z9FbKZaXNwkyRzIPvhm+eT6pvz9x+ZW8Lj/zGvVsDfvpovMv7
-         d0I4T+JZXSU+sD5dcljo8YFO4r9x6Iyd9fg3NJ/t5a7jC7Vs7ZmdLLzQdjRfEoMMsVdV
-         qiRukTM01HkatKY/gmi1gmfB78F4QZ87sjHLtBEgpN1liZZZv0VLjpexf1Y+DI40FixG
-         zkkA==
-X-Gm-Message-State: ANoB5pkrP+H6daAQqqFtRRtGOWLC86+c3PkDrElDJNwq6j0Lw1K0KgyI
-	MeqCG2reS6J9G6f5NajTkcRts0XqUEBD06u77mk=
-X-Google-Smtp-Source: AA0mqf4N5RvWofFdnOoAyR0asX5c9fbMmceXInUrhpJBAZfePo32m0xjubs5BKSrfzyB+O0iOiqdtMceSMHZoE4rS6s=
-X-Received: by 2002:a05:6808:1999:b0:35c:53a9:5513 with SMTP id
- bj25-20020a056808199900b0035c53a95513mr1376026oib.262.1671559211757; Tue, 20
- Dec 2022 10:00:11 -0800 (PST)
-MIME-Version: 1.0
-References: <1671538789-7206-1-git-send-email-wangmy@fujitsu.com> <1671538789-7206-3-git-send-email-wangmy@fujitsu.com>
-In-Reply-To: <1671538789-7206-3-git-send-email-wangmy@fujitsu.com>
+        bh=Q76ljRBGd+9xcctyA6JG98hTT0vQCNGYeWoz7a5xxz0=;
+        b=HxCY+bqIb5JftCfbDnCyyMVLn2Ppt+xNiXzRNW8awcygyEQsaeJ+VJI5dLCN446/zW
+         g2U7rJ66kCkObjtKkWd293DFtZxbVtsdy1EJ0IkpKIoepFUAe1cRoG7pL5Uc7jftIXQn
+         KGu/o/43feqbVKlLYEYWmLlwuTUqsXDfr7hK3cQ1Hk3U5PwnlZ4tDEig9IyM1svsHYMP
+         RNdFCCkpNK3Y5n/Oq6p1sypUiIGMSkOmkXVknHO2wooOj/O1X9tRR1rU0ranacsx9u2I
+         soORiLlBB5AHlXRZptMJ2v1E2W5Z8ddYQBKVqCKgc842hM168tL81dJFscm72UXeDWLw
+         p/AA==
+X-Gm-Message-State: ANoB5pn6MBku92L3DqursQSrbgYBKpUSU/Pj4ucMsdReFW2P9xUho3z0
+	4GWp1o2rQUVSBFeknQJKkNEv5JybW2U=
+X-Google-Smtp-Source: AA0mqf5yMJggqxdf2aYJqxCJKJuL6eFfw6NkXv+upZ7DjarLf2hKfS62QrS42r891kTbiHoocI/Q4A==
+X-Received: by 2002:a17:90b:80f:b0:219:3d3a:6c51 with SMTP id bk15-20020a17090b080f00b002193d3a6c51mr48426184pjb.40.1671560961419;
+        Tue, 20 Dec 2022 10:29:21 -0800 (PST)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9181:1cf0::41f2])
+        by smtp.gmail.com with ESMTPSA id z3-20020a17090acb0300b002199eaa80e1sm8267266pjt.13.2022.12.20.10.29.20
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 20 Dec 2022 10:29:21 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 20 Dec 2022 09:59:45 -0800
-Message-ID: <CAMKF1sqsU1hJ8mP3KmvvZ4KXag6f=vrQRdtaDWGydY2n+ojbyw@mail.gmail.com>
-Subject: Re: [oe] [meta-python] [PATCH] python3-isort: upgrade 5.10.1 -> 5.11.3
-To: wangmy <wangmy@fujitsu.com>
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 1/2] wxwidgets: Set HAVE_LARGEFILE_SUPPORT
+Date: Tue, 20 Dec 2022 10:29:18 -0800
+Message-Id: <20221220182919.2420535-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.39.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 20 Dec 2022 18:00:14 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100162
+ <openembedded-devel@lists.openembedded.org>; Tue, 20 Dec 2022 18:29:25 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100163
 
-This ends with checksum mismatch
+cmake somehow fails to set it.
 
-https://autobuilder.yoctoproject.org/typhoon/#/builders/88/builds/2253/steps/14/logs/errors
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ ...VE_LARGEFILE_SUPPORT-to-1-explicitly.patch | 30 +++++++++++++++++++
+ .../wxwidgets/wxwidgets_3.2.1.bb              |  2 ++
+ 2 files changed, 32 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/wxwidgets/wxwidgets/0001-Set-HAVE_LARGEFILE_SUPPORT-to-1-explicitly.patch
 
-On Tue, Dec 20, 2022 at 4:20 AM wangmy <wangmy@fujitsu.com> wrote:
->
-> From: Wang Mingyu <wangmy@fujitsu.com>
->
-> Changelog:
-> ===========
->  Fixed #2007: settings for py3.11 (#2040)
->  Fixed #2038: packaging pypoetry (#2042)
->  Docs: renable portray (#2043)
->  Ci: add minimum GitHub token permissions for workflows (#1969)
->  Ci: general CI improvements (#2041)
->  Ci: add release workflow (#2026)
->  Hotfix #2034: isort --version is not accurate on 5.11.x releases (#2034)
->  Hotfix #2031: only call colorama.init if colorama is available (#2032)
->  Added official support for Python 3.11 (#1996, #2008, #2011)
->  Dropped support for Python 3.6 (#2019)
->  Fixed problematic tests (#2021, #2022)
->  Fixed #1960: Rich compatibility (#1961)
->  Fixed #1945, #1986: Python 4.0 upper bound dependency resolving issues
->  Fixed Pyodide CDN URL (#1991)
->  Docs: clarify description of use_parentheses (#1941)
->  Fixed #1976: black compatibility for .pyi files
->  Implemented #1683: magic trailing comma option (#1876)
->  Add missing space in unrecoverable exception message (#1933)
->  Fixed #1895: skip-gitignore: use allow list, not deny list
->  Fixed #1917: infinite loop for unmatched parenthesis (#1919)
->  Docs: shared profiles (#1896)
->  Fixed build-backend values in the example plugins (#1892)
->  Remove reference to jamescurtin/isort-action (#1885)
->  Split long cython import lines (#1931)
->  Update plone profile: copy of black, plus three settings. (#1926)
->  Fixed #1815, #1862: Add a command-line flag to sort all re-exports (#1863)
->  Fixed #1854: lines_before_imports appending lines after comments (#1861)
->  Remove redundant multi_line_output = 3 from "Compatibility with black" (#1858)
->  Add tox config example (#1856)
->  Docs: add examples for frozenset and tuple settings (#1822)
->  Docs: add multiple config documentation (#1850)
->
-> Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
-> ---
->  .../python/{python3-isort_5.10.1.bb => python3-isort_5.11.3.bb} | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->  rename meta-python/recipes-devtools/python/{python3-isort_5.10.1.bb => python3-isort_5.11.3.bb} (85%)
->
-> diff --git a/meta-python/recipes-devtools/python/python3-isort_5.10.1.bb b/meta-python/recipes-devtools/python/python3-isort_5.11.3.bb
-> similarity index 85%
-> rename from meta-python/recipes-devtools/python/python3-isort_5.10.1.bb
-> rename to meta-python/recipes-devtools/python/python3-isort_5.11.3.bb
-> index 27977821c..4b99c1755 100644
-> --- a/meta-python/recipes-devtools/python/python3-isort_5.10.1.bb
-> +++ b/meta-python/recipes-devtools/python/python3-isort_5.11.3.bb
-> @@ -4,7 +4,7
->  SECTION = "devel/python"
->  LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=6;endline=6;md5=8227180126797a0148f94f483f3e1489"
->
-> -SRC_URI[sha256sum] = "e8443a5e7a020e9d7f97f1d7d9cd17c88bcb3bc7e218bf9cf5095fe550be2951"
-> +SRC_URI[sha256sum] = "a8ca25fbfad0f7d5d8447a4314837298d9f6b23aed8618584c894574f626b64b"
->
->  inherit pypi python_poetry_core
->
-> --
-> 2.25.1
->
->
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#100142): https://lists.openembedded.org/g/openembedded-devel/message/100142
-> Mute This Topic: https://lists.openembedded.org/mt/95784531/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [raj.khem@gmail.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
->
+diff --git a/meta-oe/recipes-extended/wxwidgets/wxwidgets/0001-Set-HAVE_LARGEFILE_SUPPORT-to-1-explicitly.patch b/meta-oe/recipes-extended/wxwidgets/wxwidgets/0001-Set-HAVE_LARGEFILE_SUPPORT-to-1-explicitly.patch
+new file mode 100644
+index 0000000000..5160f2e1fe
+--- /dev/null
++++ b/meta-oe/recipes-extended/wxwidgets/wxwidgets/0001-Set-HAVE_LARGEFILE_SUPPORT-to-1-explicitly.patch
+@@ -0,0 +1,30 @@
++From e108aff9d6dae613f486c1b1681f4a3cdf17b845 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Mon, 19 Dec 2022 15:07:55 -0800
++Subject: [PATCH] Set HAVE_LARGEFILE_SUPPORT to 1 explicitly
++
++nothing sets this to 0, but for some reason it gets undef'd
++
++Upstream-Status: Pending
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ build/cmake/setup.h.in | 3 +--
++ 1 file changed, 1 insertion(+), 2 deletions(-)
++
++diff --git a/build/cmake/setup.h.in b/build/cmake/setup.h.in
++index bce33a73f3..22afb4cfa0 100644
++--- a/build/cmake/setup.h.in
+++++ b/build/cmake/setup.h.in
++@@ -869,8 +869,7 @@
++ /*
++  * Define if large (64 bit file offsets) files are supported.
++  */
++-#cmakedefine HAVE_LARGEFILE_SUPPORT 1
++-
+++#define HAVE_LARGEFILE_SUPPORT 1
++ /*
++  * Use OpenGL
++  */
++-- 
++2.39.0
++
+diff --git a/meta-oe/recipes-extended/wxwidgets/wxwidgets_3.2.1.bb b/meta-oe/recipes-extended/wxwidgets/wxwidgets_3.2.1.bb
+index ae2995db20..8b302f481f 100644
+--- a/meta-oe/recipes-extended/wxwidgets/wxwidgets_3.2.1.bb
++++ b/meta-oe/recipes-extended/wxwidgets/wxwidgets_3.2.1.bb
+@@ -26,6 +26,7 @@ SRC_URI = "gitsm://github.com/wxWidgets/wxWidgets.git;branch=3.2;protocol=https
+            file://wx-config-fix-libdir-for-multilib.patch \
+            file://0001-locale-Avoid-using-glibc-specific-defines-on-musl.patch \
+            file://musl-locale-l.patch \
++           file://0001-Set-HAVE_LARGEFILE_SUPPORT-to-1-explicitly.patch \
+            "
+ SRCREV= "97e99707c5d2271a70cb686720b48dbf34ced496"
+ S = "${WORKDIR}/git"
+@@ -39,6 +40,7 @@ EXTRA_OECMAKE += " \
+     -DwxUSE_LIBPNG=sys \
+     -DwxUSE_LIBTIFF=sys \
+     -DwxUSE_REGEX=builtin \
++    -DwxHAS_LARGE_FILES=ON \
+ "
+ EXTRA_OECMAKE:append:class-target = ' -DEGREP="/bin/grep -E"'
+ 
+-- 
+2.39.0
+
 
