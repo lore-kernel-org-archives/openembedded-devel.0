@@ -2,122 +2,108 @@ Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E8BABC4332F
-	for <webhook@archiver.kernel.org>; Tue, 20 Dec 2022 15:20:23 +0000 (UTC)
-Received: from mail-vk1-f172.google.com (mail-vk1-f172.google.com [209.85.221.172])
- by mx.groups.io with SMTP id smtpd.web11.52767.1671549622456192150
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0581EC4332F
+	for <webhook@archiver.kernel.org>; Tue, 20 Dec 2022 15:27:44 +0000 (UTC)
+Received: from mail-oi1-f171.google.com (mail-oi1-f171.google.com [209.85.167.171])
+ by mx.groups.io with SMTP id smtpd.web11.52971.1671550061084114011
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 20 Dec 2022 07:20:22 -0800
+ Tue, 20 Dec 2022 07:27:41 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=Yv0x+KQc;
- spf=pass (domain: gmail.com, ip: 209.85.221.172, mailfrom: akuster808@gmail.com)
-Received: by mail-vk1-f172.google.com with SMTP id x65so5883479vkg.11
-        for <openembedded-devel@lists.openembedded.org>; Tue, 20 Dec 2022 07:20:22 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=fTfpm1PT;
+ spf=pass (domain: gmail.com, ip: 209.85.167.171, mailfrom: akuster808@gmail.com)
+Received: by mail-oi1-f171.google.com with SMTP id t62so10825944oib.12
+        for <openembedded-devel@lists.openembedded.org>; Tue, 20 Dec 2022 07:27:40 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=content-transfer-encoding:in-reply-to:from:references:to
-         :content-language:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=xzUpz07aJv1KigBEIzcgn2dN+SVPej6g50Kux8YyF24=;
-        b=Yv0x+KQc3UoiW/bN9AC0Wq1OT0aqZoainSmqyjymLZJT5/83PQO4ct2OFV4s/XR1DL
-         btwdNjhE4wUolU9gnMKJc2xTeSSsQ8xpd0TqMhOH1rRl2hhdNszSJvbXW3BQPKNC4BbF
-         /ES6zDfB/EZachBEpuUnyiNxvufERg/ApYs2MujNzPptRSo5xwHMhNhGbu2pcUG1V9Jz
-         fscMUkU0xXJv9CCvYEu/jHQ8xGx/8OKk4WAdBc8mFdQx922WQSC5aRJj2vzZYXylkmNr
-         f1vM3cSJ8CGjw5ozQe3lj6ewchcXnE9QocYihT6p5Lg2G5XcNM3pETOaHzn+548n5WAs
-         NZSw==
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=wJbrKF+NAOyPWXcIhohzVQg3D4n1LmQ8pHj4o890gMs=;
+        b=fTfpm1PTLVDl3VtGj7R+TtNguwfo27LC+Xvk1L1TW0D7GArTxGQwiCUpO+jy2Tbvbx
+         +oUcmOlOhKKorJJ2eqMuVxhb48L6y/RTi+heV86q5+nBzR+F6c0hMZPrxDNREbjUrFiB
+         AuegIJV7zCqHF+c0yVeG2fHzxAYTJmviWdjFmB1x4qJ0PIq9Y1phKr9K5zAwG5wT/ZF7
+         d8q5TLdnZrlhGeLpQv8kwgWoRBPiwyRqFgnqgH9jC3MvYjdkGPvIZH5VgYYa1aeHYZZL
+         iI/YjPkv8ljCl/wrdGfcG3wcTqRzVeWX60FQdMuwkSM8tizhf71fQng0PWIJN5byEPkE
+         KVkg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=content-transfer-encoding:in-reply-to:from:references:to
-         :content-language:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=xzUpz07aJv1KigBEIzcgn2dN+SVPej6g50Kux8YyF24=;
-        b=u8ipiHU39nRH/sfNa1jpOlucER54YPiGUw5GCmQe/54DXb4Vr+bTyEU2YgzTt/vera
-         1bmeFR8hHCa7nErsHUVJfKV5lrBle/imbQg6IXvpB5U62I/LFF5sk3rA82tE+qkUMRIh
-         P8b6d7ARcBE0knKw02CK+55QN+s//I1/IvIFvxWQkQenQCVrMCiwowxUAKyOMpjvETqR
-         Gl0DgThVg9U3ioJD+jqOZa0VTDgwWLL23zUHbomnHEuBDU8GztG1ZmWs4JYoDZGCybb3
-         OiQXEmQWJVW5n9FKjGMInZj5ZVbjcpN41Y55KmNlual2Ai2FYBTgY5JD1pKjtZ+N8MDT
-         g+Zw==
-X-Gm-Message-State: ANoB5pkQm0dqx8SbUEDfqAIeHuL+9vS2fP/BkqRMLXBVb2EqBh6tiTnC
-	IU/MkBRbEmtAywQDBTPgMJo=
-X-Google-Smtp-Source: AA0mqf4n+ZFjX/BQE4og2E2yRakx7hiDmQ0fbCID7UAUi8lcM5OCG6Lcqx72hSP+JWU7EcKXGXJDHw==
-X-Received: by 2002:a1f:b283:0:b0:3bd:e14b:424c with SMTP id b125-20020a1fb283000000b003bde14b424cmr25029600vkf.7.1671549621433;
-        Tue, 20 Dec 2022 07:20:21 -0800 (PST)
-Received: from ?IPV6:2600:1700:9190:ba10:9fde:e2bd:d2b4:8a4b? ([2600:1700:9190:ba10:9fde:e2bd:d2b4:8a4b])
-        by smtp.gmail.com with ESMTPSA id x20-20020a05620a449400b006eef13ef4c8sm9270189qkp.94.2022.12.20.07.20.20
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 20 Dec 2022 07:20:20 -0800 (PST)
-Message-ID: <7561f784-419f-537a-3c58-c37f091780fc@gmail.com>
-Date: Tue, 20 Dec 2022 10:20:19 -0500
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=wJbrKF+NAOyPWXcIhohzVQg3D4n1LmQ8pHj4o890gMs=;
+        b=aogYISQwFNElAdQUnC9YjsBa7ffIVbAKdnE93+RfJHmwBIYbQhMwk/jl4dE60NX6ML
+         WAIIopGl6aqUhq2e7NMJAFgthRvYctK0652zHqE3I1WlRSO1hW1zctKeHcfim0QoxjLU
+         y9U3nkpAorGotVrymXbfBu8IGIibgC8M3YVg7l1FkOO8UjY9V5pHxHcHB4Bnfe8GxDp9
+         gIV5jBzDYRsZm3KikfVt2ijzSQLeYIBAmywMQHMv1GJ6cvrbpU90ig2AzSVdWlFh++2U
+         BZb3GBTT4p0XKcGNfEkBNFSpL8ajOKbs88BjhxmJwYSHu7KMRbE1hNLPshPhbPQOQcci
+         3jKw==
+X-Gm-Message-State: ANoB5plDU02TQ/uFinx8gqHnFE7kqBn2LNcr6dIuySd5zbUNhk5delI7
+	d2R8GQCEtHqGmsfKUYIW9WEglO9IgeQ=
+X-Google-Smtp-Source: AA0mqf5dR34/1/VD/YvyMnmNhZ4bd9XJtMXNpFO9cCIhK7QntqVQOzvsCgB9UgMmsdmRm2v1yttaRQ==
+X-Received: by 2002:a05:6808:190c:b0:35c:2729:8738 with SMTP id bf12-20020a056808190c00b0035c27298738mr26317790oib.29.1671550058738;
+        Tue, 20 Dec 2022 07:27:38 -0800 (PST)
+Received: from keaua.attlocal.net ([2600:1700:9190:ba10:9fde:e2bd:d2b4:8a4b])
+        by smtp.gmail.com with ESMTPSA id q11-20020a9d578b000000b0066c34486aa7sm5666026oth.73.2022.12.20.07.27.37
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 20 Dec 2022 07:27:38 -0800 (PST)
+From: Armin Kuster <akuster808@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][langdale][PATCH] imapfilter: Upgrade to 2.7.6
+Date: Tue, 20 Dec 2022 10:27:37 -0500
+Message-Id: <20221220152737.42702-1-akuster808@gmail.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.4.2
-Subject: Re: [oe] [meta-oe][PATCH] bubblewrap: import recipe from
- meta-security
-Content-Language: en-US
-To: Markus Volk <f_l_k@t-online.de>, openembedded-devel@lists.openembedded.org
-References: <20221219203614.3540198-1-f_l_k@t-online.de>
-From: akuster808 <akuster808@gmail.com>
-In-Reply-To: <20221219203614.3540198-1-f_l_k@t-online.de>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 20 Dec 2022 15:20:23 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100157
+ <openembedded-devel@lists.openembedded.org>; Tue, 20 Dec 2022 15:27:44 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100158
 
+From: Khem Raj <raj.khem@gmail.com>
 
+Use git fetcher to avoid src-uri-bad build QA error
 
-On 12/19/22 3:36 PM, Markus Volk wrote:
-> Signed-off-by: Markus Volk <f_l_k@t-online.de>
-> ---
->   .../bubblewrap/bubblewrap_0.6.2.bb            | 25 +++++++++++++++++++
->   1 file changed, 25 insertions(+)
->   create mode 100644 meta-oe/recipes-security/bubblewrap/bubblewrap_0.6.2.bb
+Changes in this release [1]
 
-BTW, Master has a later version.
+License-Update: Update copyright years [2]
 
--armin
->
-> diff --git a/meta-oe/recipes-security/bubblewrap/bubblewrap_0.6.2.bb b/meta-oe/recipes-security/bubblewrap/bubblewrap_0.6.2.bb
-> new file mode 100644
-> index 000000000..50f61adf8
-> --- /dev/null
-> +++ b/meta-oe/recipes-security/bubblewrap/bubblewrap_0.6.2.bb
-> @@ -0,0 +1,25 @@
-> +DESCRIPTION = "Unprivileged sandboxing tool"
-> +HOMEPAGE = "https://github.com/containers/bubblewrap"
-> +LICENSE = "LGPL-2.0-or-later"
-> +LIC_FILES_CHKSUM = "file://COPYING;md5=5f30f0716dfdd0d91eb439ebec522ec2"
-> +
-> +DEPENDS = "libcap"
-> +
-> +SRC_URI = "https://github.com/containers/${BPN}/releases/download/v${PV}/${BP}.tar.xz"
-> +SRC_URI[sha256sum] = "8a0ec802d1b3e956c5bb0a40a81c9ce0b055a31bf30a8efa547433603b8af20b"
-> +
-> +UPSTREAM_CHECK_URI = "https://github.com/containers/bubblewrap/releases"
-> +UPSTREAM_CHECK_REGEX = "bubblewrap-(?P<pver>\d+(\.\d+)+)\.tar"
-> +
-> +inherit autotools bash-completion manpages pkgconfig
-> +
-> +PACKAGECONFIG ?= "${@bb.utils.filter('DISTRO_FEATURES', 'selinux', d)}"
-> +PACKAGECONFIG[manpages] = "--enable-man,--disable-man,libxslt-native docbook-xsl-stylesheets-native xmlto-native"
-> +PACKAGECONFIG[selinux] = "--enable-selinux,--disable-selinux,libselinux"
-> +PACKAGECONFIG[setuid] = "--with-priv-mode=setuid,--with-priv-mode=none"
-> +
-> +PACKAGES += "${PN}-zsh-completion"
-> +
-> +FILES:${PN}-zsh-completion = "${datadir}/zsh/site-functions"
-> +
-> +BBCLASSEXTEND = "native"
->
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#100116): https://lists.openembedded.org/g/openembedded-devel/message/100116
-> Mute This Topic: https://lists.openembedded.org/mt/95773343/3616698
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [akuster808@gmail.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
->
+[1] https://github.com/lefcha/imapfilter/compare/v2.7.5...v2.7.6
+[2] https://github.com/lefcha/imapfilter/commit/ce6b9050b284b9944ac52371a4a2254fc73bc219
+
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+(cherry picked from commit 8299706b637b76d95716079455c276a825d6f0c9)
+Signed-off-by: Armin Kuster <akuster808@gmail.com>
+---
+ .../{imapfilter_2.7.5.bb => imapfilter_2.7.6.bb}          | 8 +++++---
+ 1 file changed, 5 insertions(+), 3 deletions(-)
+ rename meta-oe/recipes-support/imapfilter/{imapfilter_2.7.5.bb => imapfilter_2.7.6.bb} (60%)
+
+diff --git a/meta-oe/recipes-support/imapfilter/imapfilter_2.7.5.bb b/meta-oe/recipes-support/imapfilter/imapfilter_2.7.6.bb
+similarity index 60%
+rename from meta-oe/recipes-support/imapfilter/imapfilter_2.7.5.bb
+rename to meta-oe/recipes-support/imapfilter/imapfilter_2.7.6.bb
+index 111a8208a9..eb23816e8a 100644
+--- a/meta-oe/recipes-support/imapfilter/imapfilter_2.7.5.bb
++++ b/meta-oe/recipes-support/imapfilter/imapfilter_2.7.6.bb
+@@ -1,11 +1,13 @@
+ SUMMARY = "IMAPFilter is a mail filtering utility that processes mailboxes based on IMAP queries"
+ LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=db3b99f230f9758fd77e4a0654e2266d"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=c11d4fd926d3ce7aac13b0ed1e9b3a63"
+ 
+-SRC_URI = "https://codeload.github.com/lefcha/${BPN}/tar.gz/v${PV};downloadfilename=${BP}.tar.gz \
++# v2.7.6
++SRCREV = "b39d0430f29d7c953581186955c11b461e6c824f"
++SRC_URI = "git://github.com/lefcha/imapfilter;protocol=https;branch=master \
+            file://ldflags.patch \
+ "
+-SRC_URI[sha256sum] = "ab19f840712e6951e51c29e44c43b3b2fa42e93693f98f8969cc763a4fad56bf"
++S = "${WORKDIR}/git"
+ 
+ DEPENDS= "openssl lua libpcre2"
+ 
+-- 
+2.25.1
 
 
