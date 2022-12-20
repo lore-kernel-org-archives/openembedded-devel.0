@@ -1,96 +1,141 @@
-Return-Path: <Martin.Jansa@gmail.com>
+Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1D8DBC4332F
-	for <webhook@archiver.kernel.org>; Tue, 20 Dec 2022 09:00:52 +0000 (UTC)
-Received: from mail-ej1-f49.google.com (mail-ej1-f49.google.com [209.85.218.49])
- by mx.groups.io with SMTP id smtpd.web10.46099.1671526844266946577
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 573FEC10F1E
+	for <webhook@archiver.kernel.org>; Tue, 20 Dec 2022 09:52:32 +0000 (UTC)
+Received: from mailout03.t-online.de (mailout03.t-online.de [194.25.134.81])
+ by mx.groups.io with SMTP id smtpd.web10.46692.1671529950653853232
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 20 Dec 2022 01:00:44 -0800
+ Tue, 20 Dec 2022 01:52:31 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=gDqnvD7b;
- spf=pass (domain: gmail.com, ip: 209.85.218.49, mailfrom: martin.jansa@gmail.com)
-Received: by mail-ej1-f49.google.com with SMTP id m18so27615888eji.5
-        for <openembedded-devel@lists.openembedded.org>; Tue, 20 Dec 2022 01:00:44 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=1oroouW4uytJz7tyEOB5oMIBG13RGLsfLXETAp/KP9U=;
-        b=gDqnvD7bFU7R5Puhv62B95bHRKBWGGNxR/OZAQkfv6g3UXqGPCAtSIssuFtfqbtaEm
-         /Lj32t5Wkbdi98UVClitk2F4OuAgF+HymtFQk7F1JhdWHKA5YtUpuu4t2gSuo4QwIp+r
-         l5znI/hULUQlLFL5tPaIRVCNZplsSd4CdRJQVxRqQLrraERuuoCl/Iwa0rOwCHGIu6Es
-         3jSjPwbBq1v9Yl7JlSnDqerXQAr+xCkVWgJ8NXgVdz9BGSrCSx67/5l01vTaNe5NL8Fp
-         XGh7BKuCHOMJeCjKzYRLnb1bnYiokOKQxxsdpGK1jvQbJxxP1oqs/BqlVZUzW3Q2xfHP
-         xm5g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=1oroouW4uytJz7tyEOB5oMIBG13RGLsfLXETAp/KP9U=;
-        b=1wQKfl23qeOaEg3ssFX6C+7vURAvTslaXfZRE7hnm5ai1X6zvyMrauh5Yzr3LWVIzL
-         MchBb9Dk1O6fIVwAyS/Nra+/FVto+TrKhNpTlaSguuvEMvKwpMjWQOP9v21oJubtY+5K
-         6U3+3rUyzIHHZI+6FAuG+2ez6O/bwCOxjDCKhnJ+TdSDOCjrnKdwTJ9z9E7uAxYIqh5F
-         hJ7eiiiTzV4c7ZFjQJ+RzKb6du9hk7ZLQAPDcPEzq8iKCacADzrT+MgBDuzgEcB0HbP9
-         i5e+ZFXV9Gkh8d1c0VhxXjiG+HTS88nAsoByeWtsDl36OvDbMuvL/MQys5OcG/LPEZ6W
-         TCIg==
-X-Gm-Message-State: AFqh2kpUkQOCGRjvRdBPGBBSVAOBf3nh7L5QKZnSh4d1xhG+EUeEhJqQ
-	r81Rb+5TWPn19PRb8R5wwpTNNTV0mPU=
-X-Google-Smtp-Source: AMrXdXvXKu4CHUc8R4yLEk1LrxyxLuOUjtzeNOddw8mmTq3EnRIgUkpZGG1RZN6W5WJ13aAEHbwWCQ==
-X-Received: by 2002:a17:906:f45:b0:7d3:8159:f361 with SMTP id h5-20020a1709060f4500b007d38159f361mr1100942ejj.36.1671526842569;
-        Tue, 20 Dec 2022 01:00:42 -0800 (PST)
-Received: from localhost ([109.238.218.228])
-        by smtp.gmail.com with ESMTPSA id ec34-20020a0564020d6200b0046b4e0fae75sm5339392edb.40.2022.12.20.01.00.41
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 20 Dec 2022 01:00:42 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+ dkim=missing; spf=none, err=SPF record not found (domain: t-online.de, ip: 194.25.134.81, mailfrom: f_l_k@t-online.de)
+Received: from fwd84.dcpf.telekom.de (fwd84.aul.t-online.de [10.223.144.110])
+	by mailout03.t-online.de (Postfix) with SMTP id 358479FFB
+	for <openembedded-devel@lists.openembedded.org>; Tue, 20 Dec 2022 10:52:28 +0100 (CET)
+Received: from flk-MS-7C91.fritz.box ([79.219.224.229]) by fwd84.t-online.de
+	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
+	esmtp id 1p7ZIR-4UmI7d0; Tue, 20 Dec 2022 10:52:27 +0100
+From: Markus Volk <f_l_k@t-online.de>
 To: openembedded-devel@lists.openembedded.org
-Cc: Markus Volk <f_l_k@t-online.de>,
-	Martin Jansa <Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH] geoclue: fix polkit files only with modem-gps PACKAGECONFIG
-Date: Tue, 20 Dec 2022 10:00:37 +0100
-Message-Id: <20221220090037.1191034-1-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.39.0
+Cc: Markus Volk <f_l_k@t-online.de>
+Subject: [meta-oe][PATCHv3] xdg-desktop-portal: add recipe
+Date: Tue, 20 Dec 2022 10:52:07 +0100
+Message-Id: <20221220095207.34654-1-f_l_k@t-online.de>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-TOI-EXPURGATEID: 150726::1671529947-4CC58B8C-1A4E8BB6/0/0 CLEAN NORMAL
+X-TOI-MSGID: ac077121-1215-46f3-a276-38b838e7461a
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 20 Dec 2022 09:00:52 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100126
+ <openembedded-devel@lists.openembedded.org>; Tue, 20 Dec 2022 09:52:32 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100127
 
-* this directory is created only when modem-gps-source option is enabled
-  in meson
-* fix indentation to use 4 spaces instead of tabs
-
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+Signed-off-by: Markus Volk <f_l_k@t-online.de>
 ---
- meta-oe/recipes-navigation/geoclue/geoclue_2.6.0.bb | 8 +++++---
- 1 file changed, 5 insertions(+), 3 deletions(-)
+ ...p-portal-pc-in-add-pc_sysrootdir-dir.patch | 25 +++++++++++
+ .../xdg-desktop-portal_1.16.0.bb              | 41 +++++++++++++++++++
+ 2 files changed, 66 insertions(+)
+ create mode 100644 meta-oe/recipes-support/xdg-desktop-portal/xdg-deskto=
+p-portal/0001-xdg-desktop-portal-pc-in-add-pc_sysrootdir-dir.patch
+ create mode 100644 meta-oe/recipes-support/xdg-desktop-portal/xdg-deskto=
+p-portal_1.16.0.bb
 
-diff --git a/meta-oe/recipes-navigation/geoclue/geoclue_2.6.0.bb b/meta-oe/recipes-navigation/geoclue/geoclue_2.6.0.bb
-index 61b37cd9e8..798a9c16b6 100644
---- a/meta-oe/recipes-navigation/geoclue/geoclue_2.6.0.bb
-+++ b/meta-oe/recipes-navigation/geoclue/geoclue_2.6.0.bb
-@@ -38,9 +38,11 @@ USERADD_PACKAGES = "${PN}"
- USERADD_PARAM:${PN} = "--system --no-create-home --user-group --home-dir ${sysconfdir}/polkit-1 --shell /bin/nologin polkitd"
- 
- do_install:append() {
--	#Fix up permissions on polkit rules.d to work with rpm4 constraints
--	chmod 700 ${D}/${datadir}/polkit-1/rules.d
--	chown polkitd:root ${D}/${datadir}/polkit-1/rules.d
-+    if ${@bb.utils.contains('PACKAGECONFIG', 'modem-gps', 'true', 'false', d)}; then
-+        # Fix up permissions on polkit rules.d to work with rpm4 constraints
-+        chmod 700 ${D}/${datadir}/polkit-1/rules.d
-+        chown polkitd:root ${D}/${datadir}/polkit-1/rules.d
-+    fi
- }
- 
- FILES:${PN} += " \
--- 
-2.39.0
+diff --git a/meta-oe/recipes-support/xdg-desktop-portal/xdg-desktop-porta=
+l/0001-xdg-desktop-portal-pc-in-add-pc_sysrootdir-dir.patch b/meta-oe/rec=
+ipes-support/xdg-desktop-portal/xdg-desktop-portal/0001-xdg-desktop-porta=
+l-pc-in-add-pc_sysrootdir-dir.patch
+new file mode 100644
+index 000000000..4b80c6e9f
+--- /dev/null
++++ b/meta-oe/recipes-support/xdg-desktop-portal/xdg-desktop-portal/0001-=
+xdg-desktop-portal-pc-in-add-pc_sysrootdir-dir.patch
+@@ -0,0 +1,25 @@
++From 7727dbfef4dd7ced3958ae9ada59a8899976b12d Mon Sep 17 00:00:00 2001
++From: Markus Volk <f_l_k@t-online.de>
++Date: Mon, 12 Dec 2022 18:40:31 +0100
++Subject: [PATCH] xdg-desktop-portal.pc.in: add pc_sysrootdir dir
++
++---
++ xdg-desktop-portal.pc.in | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/xdg-desktop-portal.pc.in b/xdg-desktop-portal.pc.in
++index 585c0c8..15b5817 100644
++--- a/xdg-desktop-portal.pc.in
+++++ b/xdg-desktop-portal.pc.in
++@@ -2,7 +2,7 @@ prefix=3D@prefix@
++ datarootdir=3D@datarootdir@
++ datadir=3D@datadir@
++=20
++-interfaces_dir=3D${datadir}/dbus-1/interfaces/
+++interfaces_dir=3D${pc_sysrootdir}${datadir}/dbus-1/interfaces
++=20
++ Name: xdg-desktop-portal
++ Description: Desktop integration portal
++--=20
++2.34.1
++
+diff --git a/meta-oe/recipes-support/xdg-desktop-portal/xdg-desktop-porta=
+l_1.16.0.bb b/meta-oe/recipes-support/xdg-desktop-portal/xdg-desktop-port=
+al_1.16.0.bb
+new file mode 100644
+index 000000000..84e04e9f2
+--- /dev/null
++++ b/meta-oe/recipes-support/xdg-desktop-portal/xdg-desktop-portal_1.16.=
+0.bb
+@@ -0,0 +1,41 @@
++SUMMARY =3D "A portal frontend service for Flatpak and possibly other de=
+sktop containment frameworks."
++HOMEPAGE =3D "https://github.com/flatpak/xdg-desktop-portal"
++LICENSE =3D "LGPL-2.1-only"
++LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D4fbd65380cdd255951079008b3645=
+16c"
++
++REQUIRED_DISTRO_FEATURES =3D "polkit"
++
++DEPENDS =3D " \
++    json-glib \
++    glib-2.0 \
++    libportal \
++    geoclue \
++    pipewire \
++    dbus-native \
++    fuse3 \
++    bubblewrap-native \
++    xmlto-native \
++    flatpak \
++    python3-dbus-native \
++"
++
++PORTAL_BACKENDS ?=3D " \
++	${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'xdg-desktop-portal-=
+wlr', '', d)} \
++	${@bb.utils.contains('DISTRO_FEATURES', 'gtk', 'xdg-desktop-portal-gnom=
+e', '', d)} \
++	${@bb.utils.contains('DISTRO_FEATURES', 'gtk+3', 'xdg-desktop-portal-gn=
+ome', '', d)} \
++	${@bb.utils.contains('DISTRO_FEATURES', 'gtk4', 'xdg-desktop-portal-gno=
+me', '', d)} \
++"
++
++RDEPENDS:${PN} =3D "bubblewrap ${PORTAL_BACKENDS}"
++
++inherit meson pkgconfig python3native features_check
++
++SRC_URI =3D " \
++	git://github.com/flatpak/xdg-desktop-portal.git;protocol=3Dhttps;branch=
+=3Dmain \
++	file://0001-xdg-desktop-portal-pc-in-add-pc_sysrootdir-dir.patch \
++"
++
++S =3D "${WORKDIR}/git"
++SRCREV =3D "88af6c8ca4106fcf70925355350a669848e9fd5a"
++
++FILES:${PN} +=3D "${libdir}/systemd ${datadir}/dbus-1"
+--=20
+2.34.1
 
 
