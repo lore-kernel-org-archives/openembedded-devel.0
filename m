@@ -2,289 +2,231 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 997AAC4332F
-	for <webhook@archiver.kernel.org>; Wed, 21 Dec 2022 04:15:40 +0000 (UTC)
-Received: from mail-pj1-f42.google.com (mail-pj1-f42.google.com [209.85.216.42])
- by mx.groups.io with SMTP id smtpd.web11.11365.1671596130816073175
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CDE3CC4332F
+	for <webhook@archiver.kernel.org>; Wed, 21 Dec 2022 04:33:10 +0000 (UTC)
+Received: from mail-oa1-f50.google.com (mail-oa1-f50.google.com [209.85.160.50])
+ by mx.groups.io with SMTP id smtpd.web10.11922.1671597183169889664
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 20 Dec 2022 20:15:30 -0800
+ Tue, 20 Dec 2022 20:33:03 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=ETsYhF00;
- spf=pass (domain: gmail.com, ip: 209.85.216.42, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f42.google.com with SMTP id t11-20020a17090a024b00b0021932afece4so900296pje.5
-        for <openembedded-devel@lists.openembedded.org>; Tue, 20 Dec 2022 20:15:30 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=Pe9Gn3mf;
+ spf=pass (domain: gmail.com, ip: 209.85.160.50, mailfrom: raj.khem@gmail.com)
+Received: by mail-oa1-f50.google.com with SMTP id 586e51a60fabf-12c8312131fso17898888fac.4
+        for <openembedded-devel@lists.openembedded.org>; Tue, 20 Dec 2022 20:33:03 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=+YmaAaHC8iyqVOVVraPDeLUogEQHMIz+qiIxV+fvMqw=;
-        b=ETsYhF00sT3+Dv5VzX0KQqNkn/6AI36zrM+WndP3XiBK1uN2edjUvrhu1GXGC7Wfuy
-         kdcjP90Sh0whk4XYcsuhptj46vDXFLTTzjLFTo8AouZmc3jCJILsq2f8TvTKC+gUODM/
-         wyKNXjAD0PTniR0cSVEDsplnG08Npj2H9nrvTDHY7GdVuUnCZf1Fmb6sLnYbU8j8hTRr
-         rtPvYm97e7RUKvidfQHkXXGSNX1ymlHrcja2xmqqOiLoHetv9P0cz2WvtNLZxNTfV51s
-         XOysBjo+GesnrlhVn6pcQSDHdBSBrshWrvELFseiqTd6eXTZX2LL4EvORsenCsY5k/w0
-         G3bg==
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=Q3VoQkUBPoaXsMk23JadiWzlkId8i7xAHROBYsxssdI=;
+        b=Pe9Gn3mfIWAa1rE7WRXqsPIalgpJPu7XcJ/a4JQZlLUBrxQOh+DMi/Y1RcFY5fcsme
+         jE3p2KPJRQAvFPmqy9Yszi1WFIUmmgFOlaCoi/9I2qjca2NRJEKQ8jEQY5gg0/XKpD0d
+         AHSWYvHNvvjxtE6m6zMizE3lAqLKjQr7hMykDYwWbjtGLOJlzfUoaiiAW8qO52XaJqn2
+         3FdiWiSdBfRnkVNjGYP55KqzpQImyK/tLiK3ZaXdjvw0nGTcFwnIwvU/hV1zu3Etqgns
+         l40Dt7/ET4bm0ZjkEqy/8DTO17ZggZa+HAnYL77WlVNbA58GxkHs6hrvUT+VYBNWSTwt
+         mpUQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=+YmaAaHC8iyqVOVVraPDeLUogEQHMIz+qiIxV+fvMqw=;
-        b=SlasTuGqCCmecjSsm4iQZeFbjJeRxKxI96KOITFq2nOfEFbec3OB/ZZh9ohkKdt/Pq
-         BE4KwNT6X9FwcJTaatxXyVR0hHZ/nWqq+ill7FRZkODUl0tw75zHtgsRvj40qtb8bYL1
-         MufU+uXUMwLCyucbgUMKE5iMpbWgbhTPhRWr33dzGvxG2HBn/j2hi98JybqvQ2wco2og
-         I+IIOz8I93SOJ+UGa7wHXCmo/Ug8AAhvbdLMxQtbEu5A/YCbz83fqkvfJayzXkj2JcQH
-         +6w9xwcDgFmkM7Ov3Ok//QU+lWX32O9PRemTYxN+U7XFz+UOB1Swp212W5Re2HCXTcgQ
-         /APw==
-X-Gm-Message-State: AFqh2kpRBXseL7HGu8d9Oj0pFnBeT5ERvvorX7pmuM8FDjGu253t3x7C
-	sEVUGWuOvhaEmgRjN0hMYmjl7uTezuI=
-X-Google-Smtp-Source: AMrXdXuqDZJEe75QhDwttm3Zp+Caw6G6L6ix25lIz2T7ZO5Dz+AVYHVusKL8OrlqZfVNQkQY0cd5XQ==
-X-Received: by 2002:a05:6a20:4291:b0:9d:efbf:8171 with SMTP id o17-20020a056a20429100b0009defbf8171mr21876679pzj.58.1671596129709;
-        Tue, 20 Dec 2022 20:15:29 -0800 (PST)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9181:1cf0::41f2])
-        by smtp.gmail.com with ESMTPSA id z24-20020aa79498000000b005765df21e68sm9699027pfk.94.2022.12.20.20.15.29
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 20 Dec 2022 20:15:29 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH] sdbus-c++-libsystemd: Upgrade to 250.9 systemd release
-Date: Tue, 20 Dec 2022 20:15:27 -0800
-Message-Id: <20221221041527.2565080-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.39.0
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=Q3VoQkUBPoaXsMk23JadiWzlkId8i7xAHROBYsxssdI=;
+        b=bDWHoKjFz0hYC7o4nGi7sJnTM8Zp9+6B8CAt9Ucc7ncqVQizhf5yj8AdLQJ87wHxm+
+         qcKKwlOdFJynTxgfBpAX2Adv8oq8mGh0ADU77xvGXY4f2oAhpR131PL49vBZR+JnU9Jv
+         t/UMnJF4SwEWcFN6K4oruir9oJTomxjv+OL4W0ZmeYsn6tEx2tnaxAVBAix8KUsU5tty
+         8fzhCjwJ5Mmyf6ahBdGYrYLhzr63kcIIBhDjwOZ0flNK4tCypUDPpQdopAEbN24i/UKu
+         3/VO0A3llhSSrGPkyuNIQpMWSvO8rzrOHotoReCvo8orE2GUH9n1DVGDs/uRnbwTvzjF
+         waLQ==
+X-Gm-Message-State: AFqh2kqmH4jGQvnscU1iQD5GNga8lKso6z1dVDBDYXaHZU88VJTKxpSZ
+	eSI0bDR61xeNoYhJEOtxkxpXv55B/8NX6XoSHXg=
+X-Google-Smtp-Source: AMrXdXv09+NVf0sTXCewYA38CvC3W9DadUcYHYlPbL+txiLTHGacOJ2o/jV+VYLPcLiTKEjTqySiwO0g+u8DfmZsYI8=
+X-Received: by 2002:a05:6870:b01d:b0:144:e1eb:419 with SMTP id
+ y29-20020a056870b01d00b00144e1eb0419mr15488oae.262.1671597182339; Tue, 20 Dec
+ 2022 20:33:02 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <1671538789-7206-1-git-send-email-wangmy@fujitsu.com>
+ <1671538789-7206-3-git-send-email-wangmy@fujitsu.com> <CAMKF1sqsU1hJ8mP3KmvvZ4KXag6f=vrQRdtaDWGydY2n+ojbyw@mail.gmail.com>
+ <OSBPR01MB1845AEF2C68AA153AE1992DFDCEB9@OSBPR01MB1845.jpnprd01.prod.outlook.com>
+In-Reply-To: <OSBPR01MB1845AEF2C68AA153AE1992DFDCEB9@OSBPR01MB1845.jpnprd01.prod.outlook.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 20 Dec 2022 20:32:36 -0800
+Message-ID: <CAMKF1sri9gXaegd6F9LmxXX2Azaiv09dG+_N6JaaWYVgRFbKgA@mail.gmail.com>
+Subject: Re: [oe] [meta-python] [PATCH] python3-isort: upgrade 5.10.1 -> 5.11.3
+To: "wangmy@fujitsu.com" <wangmy@fujitsu.com>
+Cc: "openembedded-devel@lists.openembedded.org" <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 21 Dec 2022 04:15:40 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100168
+ <openembedded-devel@lists.openembedded.org>; Wed, 21 Dec 2022 04:33:10 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100169
 
-Fix build with latest musl
-Drop upstreamed patches
+yeah it looks like an AB error.
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- ...il-Remove-asserts-on-dirent64-dirent.patch | 38 ++++++++++
- ...lude-linux-fs.h-to-resolve-fsconfig_.patch | 74 -------------------
- ...ass-correct-parameters-to-getdents64.patch | 50 -------------
- ...250.3.bb => sdbus-c++-libsystemd_250.9.bb} |  5 +-
- 4 files changed, 40 insertions(+), 127 deletions(-)
- create mode 100644 meta-oe/recipes-core/sdbus-c++/sdbus-c++-libsystemd/0001-dirent-util-Remove-asserts-on-dirent64-dirent.patch
- delete mode 100644 meta-oe/recipes-core/sdbus-c++/sdbus-c++-libsystemd/0001-glibc-Remove-include-linux-fs.h-to-resolve-fsconfig_.patch
- delete mode 100644 meta-oe/recipes-core/sdbus-c++/sdbus-c++-libsystemd/0001-pass-correct-parameters-to-getdents64.patch
- rename meta-oe/recipes-core/sdbus-c++/{sdbus-c++-libsystemd_250.3.bb => sdbus-c++-libsystemd_250.9.bb} (94%)
-
-diff --git a/meta-oe/recipes-core/sdbus-c++/sdbus-c++-libsystemd/0001-dirent-util-Remove-asserts-on-dirent64-dirent.patch b/meta-oe/recipes-core/sdbus-c++/sdbus-c++-libsystemd/0001-dirent-util-Remove-asserts-on-dirent64-dirent.patch
-new file mode 100644
-index 0000000000..517886c727
---- /dev/null
-+++ b/meta-oe/recipes-core/sdbus-c++/sdbus-c++-libsystemd/0001-dirent-util-Remove-asserts-on-dirent64-dirent.patch
-@@ -0,0 +1,38 @@
-+From 19cc68d4a89b59889be442d2997ff030cdc3de73 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Tue, 20 Dec 2022 20:11:17 -0800
-+Subject: [PATCH] dirent-util: Remove asserts on dirent64 == dirent
-+
-+We already have assert_cc(_FILE_OFFSET_BITS == 64) which ensures that 64bit LFS functions are same as their original counterparts
-+
-+Upstream-Status: Submitted [https://github.com/systemd/systemd/pull/25809]
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ src/basic/dirent-util.h | 11 -----------
-+ 1 file changed, 11 deletions(-)
-+
-+diff --git a/src/basic/dirent-util.h b/src/basic/dirent-util.h
-+index 04bc53003f..4cb317184d 100644
-+--- a/src/basic/dirent-util.h
-++++ b/src/basic/dirent-util.h
-+@@ -35,17 +35,6 @@ struct dirent *readdir_no_dot(DIR *dirp);
-+ /* Only if 64bit off_t is enabled struct dirent + struct dirent64 are actually the same. We require this, and
-+  * we want them to be interchangeable to make getdents64() work, hence verify that. */
-+ assert_cc(_FILE_OFFSET_BITS == 64);
-+-assert_cc(sizeof(struct dirent) == sizeof(struct dirent64));
-+-assert_cc(offsetof(struct dirent, d_ino) == offsetof(struct dirent64, d_ino));
-+-assert_cc(sizeof_field(struct dirent, d_ino) == sizeof_field(struct dirent64, d_ino));
-+-assert_cc(offsetof(struct dirent, d_off) == offsetof(struct dirent64, d_off));
-+-assert_cc(sizeof_field(struct dirent, d_off) == sizeof_field(struct dirent64, d_off));
-+-assert_cc(offsetof(struct dirent, d_reclen) == offsetof(struct dirent64, d_reclen));
-+-assert_cc(sizeof_field(struct dirent, d_reclen) == sizeof_field(struct dirent64, d_reclen));
-+-assert_cc(offsetof(struct dirent, d_type) == offsetof(struct dirent64, d_type));
-+-assert_cc(sizeof_field(struct dirent, d_type) == sizeof_field(struct dirent64, d_type));
-+-assert_cc(offsetof(struct dirent, d_name) == offsetof(struct dirent64, d_name));
-+-assert_cc(sizeof_field(struct dirent, d_name) == sizeof_field(struct dirent64, d_name));
-+ 
-+ #define FOREACH_DIRENT_IN_BUFFER(de, buf, sz)                           \
-+         for (void *_end = (uint8_t*) ({ (de) = (buf); }) + (sz);        \
-+-- 
-+2.39.0
-+
-diff --git a/meta-oe/recipes-core/sdbus-c++/sdbus-c++-libsystemd/0001-glibc-Remove-include-linux-fs.h-to-resolve-fsconfig_.patch b/meta-oe/recipes-core/sdbus-c++/sdbus-c++-libsystemd/0001-glibc-Remove-include-linux-fs.h-to-resolve-fsconfig_.patch
-deleted file mode 100644
-index 01afd37a37..0000000000
---- a/meta-oe/recipes-core/sdbus-c++/sdbus-c++-libsystemd/0001-glibc-Remove-include-linux-fs.h-to-resolve-fsconfig_.patch
-+++ /dev/null
-@@ -1,74 +0,0 @@
--From b0933e76c6f0594c10cf8a9a70b34e15b68066d1 Mon Sep 17 00:00:00 2001
--From: Rudi Heitbaum <rudi@heitbaum.com>
--Date: Sat, 23 Jul 2022 10:38:49 +0000
--Subject: [PATCH] glibc: Remove #include <linux/fs.h> to resolve fsconfig_command/mount_attr conflict with glibc 2.36
--
--Upstream-Status: Backport [https://github.com/systemd/systemd/pull/23992/commits/21c03ad5e9d8d0350e30dae92a5e15da318a1539]
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
-- meson.build             | 13 ++++++++++++-
-- src/basic/fd-util.c     |  2 ++
-- src/core/namespace.c    |  2 ++
-- src/shared/mount-util.c |  2 ++
-- 4 files changed, 18 insertions(+), 1 deletion(-)
--
----- a/meson.build
--+++ b/meson.build
--@@ -474,7 +474,6 @@ decl_headers = '''
-- #include <uchar.h>
-- #include <sys/mount.h>
-- #include <sys/stat.h>
---#include <linux/fs.h>
-- '''
-- 
-- foreach decl : ['char16_t',
--@@ -486,6 +485,17 @@ foreach decl : ['char16_t',
--         # We get -1 if the size cannot be determined
--         have = cc.sizeof(decl, prefix : decl_headers, args : '-D_GNU_SOURCE') > 0
-- 
--+        if decl == 'struct mount_attr'
--+                if have
--+                        want_linux_fs_h = false
--+                else
--+                        have = cc.sizeof(decl,
--+                                         prefix : decl_headers + '#include <linux/fs.h>',
--+                                         args : '-D_GNU_SOURCE') > 0
--+                        want_linux_fs_h = have
--+                endif
--+        endif
--+
--         if decl == 'struct statx'
--                 if have
--                         want_linux_stat_h = false
--@@ -501,6 +511,7 @@ foreach decl : ['char16_t',
-- endforeach
-- 
-- conf.set10('WANT_LINUX_STAT_H', want_linux_stat_h)
--+conf.set10('WANT_LINUX_FS_H', want_linux_fs_h)
-- 
-- foreach ident : ['secure_getenv', '__secure_getenv']
--         conf.set10('HAVE_' + ident.to_upper(), cc.has_function(ident))
----- a/src/core/namespace.c
--+++ b/src/core/namespace.c
--@@ -6,7 +6,9 @@
-- #include <stdio.h>
-- #include <sys/mount.h>
-- #include <unistd.h>
--+#if WANT_LINUX_FS_H
-- #include <linux/fs.h>
--+#endif
-- 
-- #include "alloc-util.h"
-- #include "base-filesystem.h"
----- a/src/shared/mount-util.c
--+++ b/src/shared/mount-util.c
--@@ -7,7 +7,9 @@
-- #include <sys/statvfs.h>
-- #include <unistd.h>
-- #include <linux/loop.h>
--+#if WANT_LINUX_FS_H
-- #include <linux/fs.h>
--+#endif
-- 
-- #include "alloc-util.h"
-- #include "chase-symlinks.h"
-diff --git a/meta-oe/recipes-core/sdbus-c++/sdbus-c++-libsystemd/0001-pass-correct-parameters-to-getdents64.patch b/meta-oe/recipes-core/sdbus-c++/sdbus-c++-libsystemd/0001-pass-correct-parameters-to-getdents64.patch
-deleted file mode 100644
-index 03a29b5327..0000000000
---- a/meta-oe/recipes-core/sdbus-c++/sdbus-c++-libsystemd/0001-pass-correct-parameters-to-getdents64.patch
-+++ /dev/null
-@@ -1,50 +0,0 @@
--From fbc10748c7c59d82024a4d35146b8dfef8d52927 Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Fri, 21 Jan 2022 15:15:11 -0800
--Subject: [PATCH 1/2] pass correct parameters to getdents64
--
--Fixes
--../git/src/basic/recurse-dir.c:57:40: error: incompatible pointer types passing 'uint8_t *' (aka 'unsigned char *') to parameter of type 'struct dirent *' [-Werror,-Wincompatible-pointer-types]
--                n = getdents64(dir_fd, (uint8_t*) de->buffer + de->buffer_size, bs - de->buffer_size);
--                                       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
--
--../git/src/basic/stat-util.c:102:28: error: incompatible pointer types passing 'union (unnamed union at ../git/src/basic/stat-util.c:78:9) *' to parameter of type 'struct dirent *' [-Werror,-Wincompatible-pointer-types]
--        n = getdents64(fd, &buffer, sizeof(buffer));
--                           ^~~~~~~
--
--Upstream-Status: Pending
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
-- src/basic/recurse-dir.c | 2 +-
-- src/basic/stat-util.c   | 2 +-
-- 2 files changed, 2 insertions(+), 2 deletions(-)
--
--diff --git a/src/basic/recurse-dir.c b/src/basic/recurse-dir.c
--index efa1797b7b..797285e3be 100644
----- a/src/basic/recurse-dir.c
--+++ b/src/basic/recurse-dir.c
--@@ -54,7 +54,7 @@ int readdir_all(int dir_fd,
--                 bs = MIN(MALLOC_SIZEOF_SAFE(de) - offsetof(DirectoryEntries, buffer), (size_t) SSIZE_MAX);
--                 assert(bs > de->buffer_size);
-- 
---                n = getdents64(dir_fd, (uint8_t*) de->buffer + de->buffer_size, bs - de->buffer_size);
--+                n = getdents64(dir_fd, de->buffer + de->buffer_size, bs - de->buffer_size);
--                 if (n < 0)
--                         return -errno;
--                 if (n == 0)
--diff --git a/src/basic/stat-util.c b/src/basic/stat-util.c
--index efac7b002e..9e1fe7f5a0 100644
----- a/src/basic/stat-util.c
--+++ b/src/basic/stat-util.c
--@@ -99,7 +99,7 @@ int dir_is_empty_at(int dir_fd, const char *path) {
--                         return fd;
--         }
-- 
---        n = getdents64(fd, &buffer, sizeof(buffer));
--+        n = getdents64(fd, (struct dirent *)&buffer, sizeof(buffer));
--         if (n < 0)
--                 return -errno;
-- 
---- 
--2.34.1
--
-diff --git a/meta-oe/recipes-core/sdbus-c++/sdbus-c++-libsystemd_250.3.bb b/meta-oe/recipes-core/sdbus-c++/sdbus-c++-libsystemd_250.9.bb
-similarity index 94%
-rename from meta-oe/recipes-core/sdbus-c++/sdbus-c++-libsystemd_250.3.bb
-rename to meta-oe/recipes-core/sdbus-c++/sdbus-c++-libsystemd_250.9.bb
-index 853cc20b67..14e927d075 100644
---- a/meta-oe/recipes-core/sdbus-c++/sdbus-c++-libsystemd_250.3.bb
-+++ b/meta-oe/recipes-core/sdbus-c++/sdbus-c++-libsystemd_250.9.bb
-@@ -10,11 +10,11 @@ inherit meson pkgconfig
- 
- DEPENDS += "gperf-native gettext-native util-linux libcap util-linux python3-jinja2-native"
- 
--SRCREV = "73be9643910c3f7f3ff84765d63060846c110016"
-+SRCREV = "1d5e0e9910500f3c3584485f77bfc35e601036e3"
- SRCBRANCH = "v250-stable"
- SRC_URI = "git://github.com/systemd/systemd-stable.git;protocol=https;branch=${SRCBRANCH} \
-            file://static-libsystemd-pkgconfig.patch \
--           file://0001-glibc-Remove-include-linux-fs.h-to-resolve-fsconfig_.patch \
-+           file://0001-dirent-util-Remove-asserts-on-dirent64-dirent.patch \
-            "
- 
- # patches needed by musl
-@@ -44,7 +44,6 @@ SRC_URI_MUSL = "\
-                file://0025-Handle-__cpu_mask-usage.patch \
-                file://0026-Handle-missing-gshadow.patch \
-                file://0028-missing_syscall.h-Define-MIPS-ABI-defines-for-musl.patch \
--               file://0001-pass-correct-parameters-to-getdents64.patch \
-                file://0002-Add-sys-stat.h-for-S_IFDIR.patch \
-                file://0001-Adjust-for-musl-headers.patch \
-                "
--- 
-2.39.0
-
+On Tue, Dec 20, 2022 at 7:20 PM wangmy@fujitsu.com <wangmy@fujitsu.com> wro=
+te:
+>
+> stdio: ERROR: python3-isort-5.11.3-r0 do_fetch: Fetcher failure for URL: =
+'https://files.pythonhosted.org/packages/source/i/isort/isort-5.11.3.tar.gz=
+'. Checksum mismatch!
+>
+> I downloaded the package from the download address in the error message a=
+nd checked the sum, which is the same as the sum value in the patch.
+> The log is as follows:
+>
+> $ wget https://files.pythonhosted.org/packages/source/i/isort/isort-5.11.=
+3.tar.gz
+> --2022-12-21 12:13:08--  https://files.pythonhosted.org/packages/source/i=
+/isort/isort-5.11.3.tar.gz
+> Resolving rep.proxy.nic.fujitsu.com (rep.proxy.nic.fujitsu.com)... 10.128=
+.145.88
+> Connecting to rep.proxy.nic.fujitsu.com (rep.proxy.nic.fujitsu.com)|10.12=
+8.145.88|:8080... connected.
+> Proxy request sent, awaiting response... 302 Found
+> Location: https://files.pythonhosted.org/packages/e2/43/d99899bfa24a3914f=
+0318536918ab8c91c09350b5482e4e9bb7291840ae3/isort-5.11.3.tar.gz [following]
+> --2022-12-21 12:13:08--  https://files.pythonhosted.org/packages/e2/43/d9=
+9899bfa24a3914f0318536918ab8c91c09350b5482e4e9bb7291840ae3/isort-5.11.3.tar=
+.gz
+> Reusing existing connection to files.pythonhosted.org:443.
+> Proxy request sent, awaiting response... 200 OK
+> Length: 187083 (183K) [application/x-tar]
+> Saving to: =E2=80=98isort-5.11.3.tar.gz=E2=80=99
+>
+> isort-5.11.3.tar.gz                                 100%[=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D>] 182.70K  --.-KB/s    in 0.04s
+>
+> 2022-12-21 12:13:08 (4.72 MB/s) - =E2=80=98isort-5.11.3.tar.gz=E2=80=99 s=
+aved [187083/187083]
+>
+> $ sha256sum isort-5.11.3.tar.gz
+> a8ca25fbfad0f7d5d8447a4314837298d9f6b23aed8618584c894574f626b64b  isort-5=
+.11.3.tar.gz
+>
+> This is also the result of using devtool upgrade. And there's no problem =
+in the local environment when using bitbake.
+>
+> I don't know what the problem is.
+>
+>
+>
+>   --
+> Best Regards
+> ---------------------------------------------------
+> Wang Mingyu
+> Development Dept.I
+> Nanjing Fujitsu Nanda Software Tech. Co., Ltd.(FNST) No. 6 Wenzhu Road, N=
+anjing, 210012, China
+> TEL: +86+25-86630566-8568
+> COINS: 79988548
+> FAX: +86+25-83317685
+> MAIL: wangmy@fujitsu.com
+> http://www.fujitsu.com/cn/fnst/
+>
+> > -----Original Message-----
+> > From: Khem Raj <raj.khem@gmail.com>
+> > Sent: Wednesday, December 21, 2022 2:00 AM
+> > To: Wang, Mingyu/=E7=8E=8B =E9=B8=A3=E7=91=9C <wangmy@fujitsu.com>
+> > Cc: openembedded-devel@lists.openembedded.org
+> > Subject: Re: [oe] [meta-python] [PATCH] python3-isort: upgrade 5.10.1 -=
+> 5.11.3
+> >
+> > This ends with checksum mismatch
+> >
+> > https://autobuilder.yoctoproject.org/typhoon/#/builders/88/builds/2253/=
+steps/1
+> > 4/logs/errors
+> >
+> > On Tue, Dec 20, 2022 at 4:20 AM wangmy <wangmy@fujitsu.com> wrote:
+> > >
+> > > From: Wang Mingyu <wangmy@fujitsu.com>
+> > >
+> > > Changelog:
+> > > =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> > >  Fixed #2007: settings for py3.11 (#2040)  Fixed #2038: packaging
+> > > pypoetry (#2042)
+> > >  Docs: renable portray (#2043)
+> > >  Ci: add minimum GitHub token permissions for workflows (#1969)
+> > >  Ci: general CI improvements (#2041)
+> > >  Ci: add release workflow (#2026)
+> > >  Hotfix #2034: isort --version is not accurate on 5.11.x releases
+> > > (#2034)  Hotfix #2031: only call colorama.init if colorama is
+> > > available (#2032)  Added official support for Python 3.11 (#1996,
+> > > #2008, #2011)  Dropped support for Python 3.6 (#2019)  Fixed
+> > > problematic tests (#2021, #2022)  Fixed #1960: Rich compatibility
+> > > (#1961)  Fixed #1945, #1986: Python 4.0 upper bound dependency
+> > > resolving issues  Fixed Pyodide CDN URL (#1991)
+> > >  Docs: clarify description of use_parentheses (#1941)  Fixed #1976:
+> > > black compatibility for .pyi files  Implemented #1683: magic trailing
+> > > comma option (#1876)  Add missing space in unrecoverable exception
+> > > message (#1933)  Fixed #1895: skip-gitignore: use allow list, not den=
+y
+> > > list  Fixed #1917: infinite loop for unmatched parenthesis (#1919)
+> > >  Docs: shared profiles (#1896)
+> > >  Fixed build-backend values in the example plugins (#1892)  Remove
+> > > reference to jamescurtin/isort-action (#1885)  Split long cython
+> > > import lines (#1931)  Update plone profile: copy of black, plus three
+> > > settings. (#1926)  Fixed #1815, #1862: Add a command-line flag to sor=
+t
+> > > all re-exports (#1863)  Fixed #1854: lines_before_imports appending
+> > > lines after comments (#1861)  Remove redundant multi_line_output =3D =
+3
+> > > from "Compatibility with black" (#1858)  Add tox config example
+> > > (#1856)
+> > >  Docs: add examples for frozenset and tuple settings (#1822)
+> > >  Docs: add multiple config documentation (#1850)
+> > >
+> > > Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+> > > ---
+> > >  .../python/{python3-isort_5.10.1.bb =3D> python3-isort_5.11.3.bb} | =
+2
+> > > +-
+> > >  1 file changed, 1 insertion(+), 1 deletion(-)  rename
+> > > meta-python/recipes-devtools/python/{python3-isort_5.10.1.bb =3D>
+> > > python3-isort_5.11.3.bb} (85%)
+> > >
+> > > diff --git
+> > > a/meta-python/recipes-devtools/python/python3-isort_5.10.1.bb
+> > > b/meta-python/recipes-devtools/python/python3-isort_5.11.3.bb
+> > > similarity index 85%
+> > > rename from
+> > > meta-python/recipes-devtools/python/python3-isort_5.10.1.bb
+> > > rename to meta-python/recipes-devtools/python/python3-isort_5.11.3.bb
+> > > index 27977821c..4b99c1755 100644
+> > > --- a/meta-python/recipes-devtools/python/python3-isort_5.10.1.bb
+> > > +++ b/meta-python/recipes-devtools/python/python3-isort_5.11.3.bb
+> > > @@ -4,7 +4,7
+> > >  SECTION =3D "devel/python"
+> > >  LIC_FILES_CHKSUM =3D
+> > "file://PKG-INFO;beginline=3D6;endline=3D6;md5=3D8227180126797a0148f94f=
+483f3e
+> > 1489"
+> > >
+> > > -SRC_URI[sha256sum] =3D
+> > "e8443a5e7a020e9d7f97f1d7d9cd17c88bcb3bc7e218bf9cf5095fe550be2951"
+> > > +SRC_URI[sha256sum] =3D
+> > "a8ca25fbfad0f7d5d8447a4314837298d9f6b23aed8618584c894574f626b64b"
+> > >
+> > >  inherit pypi python_poetry_core
+> > >
+> > > --
+> > > 2.25.1
+> > >
+> > >
+> > > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> > > Links: You receive all messages sent to this group.
+> > > View/Reply Online (#100142):
+> > > https://lists.openembedded.org/g/openembedded-devel/message/100142
+> > > Mute This Topic: https://lists.openembedded.org/mt/95784531/1997914
+> > > Group Owner: openembedded-devel+owner@lists.openembedded.org
+> > > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsu=
+b
+> > > [raj.khem@gmail.com]
+> > > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> > >
 
