@@ -1,143 +1,170 @@
-Return-Path: <archana.polampalli@windriver.com>
+Return-Path: <Yogita.Urade@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EF347C4332F
-	for <webhook@archiver.kernel.org>; Wed, 21 Dec 2022 08:06:01 +0000 (UTC)
-Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.web10.14155.1671609951355994519
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 43551C4332F
+	for <webhook@archiver.kernel.org>; Wed, 21 Dec 2022 08:42:02 +0000 (UTC)
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.web11.14238.1671612115195566180
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 21 Dec 2022 00:05:51 -0800
+ Wed, 21 Dec 2022 00:41:55 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=pps06212021 header.b=cOlmJdD4;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=9354e08228=archana.polampalli@windriver.com)
-Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 2BL85oBp017236
-	for <openembedded-devel@lists.openembedded.org>; Wed, 21 Dec 2022 00:05:50 -0800
+ dkim=pass header.i=@windriver.com header.s=pps06212021 header.b=oT/Tek+e;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=9354b462db=yogita.urade@windriver.com)
+Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 2BL7MRPc028001
+	for <openembedded-devel@lists.openembedded.org>; Wed, 21 Dec 2022 08:41:54 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com; h=from : to : cc :
  subject : date : message-id : references : in-reply-to : content-type :
  mime-version; s=PPS06212021;
- bh=DgPiu8SHQ6E5Ppz/IawRe6JlzfwScyyEav5M4uHXt8g=;
- b=cOlmJdD4wdivmvxAhXPPwvqL4vSnhMLwywNi3ImcudSWXaI716/ziIBUxMJjY37gUHxd
- L56Cmj9Pnyz7XjBG2NfijP9/DK1pRpy3mJLpfcMot/VDjjbx0PSsUVgt4aH9Agnh9COq
- dvm/6WOg4qLqUDX3ggN2/Q3T+9b/ZpnGs7CykCaTpUC7s2e909ZbYVJ/mz8HSCmqopwl
- CfSEYyqZnyuIBqEM3jqWxaTelTAsJkjHY1AEYD0ETccEy0e2GjRTKrhe10bFhrHLxMmd
- F8REz8xu5SsC2T93L9feZbdhUMKAYfL+PaQtQ3TdJYznyAbMT2gn4COEqvDw09uk/itt Pw== 
-Received: from nam04-bn8-obe.outbound.protection.outlook.com (mail-bn8nam04lp2040.outbound.protection.outlook.com [104.47.74.40])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3mhe5qarrq-1
+ bh=bYgIH5y+jJ+ZRb2dW04HxWo51S7eTAFok07Dbwz7dAw=;
+ b=oT/Tek+eLYu9QKnqoVY+OnUHQDTYRFegP/DVsx78yXut5JkyrAHLX7d/X6a2qeEFKi0g
+ zUU17c6485AIHbQIkr3JUtWzCJEK+tV+iejja29JTMJ0ws8g+TB4TVM+CWxNC78rIaQu
+ phUqZBupe2xhvuTPXQ1ZVb15qYNJOZASRAVWqXTIJHNksnF6lqJoOcfNFNKj0AWc+A/K
+ ityWMNRlYqMRxgz+rf1ko/+F7eXioVIO3wmBmgy5NB8IPX1wZEgrb3AOFsFJ9FeEPUON
+ IFWOsapThHy44pec8/v72SIzJzpkmzh6ixXJAb35GYAJCHyi2x+10ZKM1Dma5zj3jPhx 2Q== 
+Received: from nam04-mw2-obe.outbound.protection.outlook.com (mail-mw2nam04lp2176.outbound.protection.outlook.com [104.47.73.176])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3mh4r9b0cb-1
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Wed, 21 Dec 2022 00:05:49 -0800
+	for <openembedded-devel@lists.openembedded.org>; Wed, 21 Dec 2022 08:41:54 +0000
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=ITZ+FFneuMJ9KaEEhGDNvqX2gkwj7N1qGphusKcPyTMO5kyLqTTX3NRAhqmv5Z+v3meho1hDGAvEzH+H/hswiZDQD705II3izWZTbyCSz/NYJ/otyO6/83Xl91bKG6K5SUWUmkUT2wgDxMIekP7XSJUjiGXfj8lKJirVTlofrMy6LLUqP9hxqpnt8clSvURWR4yblkXnn+Q3eAcG4rJ6zsbbaZ3FX0hPzkNpAHKU28Hsf9Z+EnggxVbJGcNEy7jKH6ehDMfWrRa70b+tR9x0QRxSYqQm7Tyn6SouZE/QQMVvNyl0/d9belZgckHrZv2fIbdfvSBKzVRvIVcwxN1Haw==
+ b=CD7HqWWz4me/sOetHWc7gwPLAXWR0fv7XS761tsxFsHoWspkEjj9VF5sgybuS7OhBR71R3SAUcxZlnwAYsxOydtg8zSnV5XYTA039HK+VdK4pFkkyQTI4+EXv1rNAbG+JIQzFZ6Y17IRAwCobWZjzwcsAk/TtcwL+nMbQ14Bh2JsjaZIlrj/V+44tTLvUV04mnqQ1xopc7gVJl7kwXf+F5ZKeBegr+DJhj3bQFxnqloF0XDTB8mu8kinZc5G6HqRsT3cxjaUiJMHlsvzjdMMXpHL4Sj93CdvWSilwVzb6RLmHX3xnQA/QuTsTtQ7M5oc2ZRanqMkVVIHMCblGVLA+A==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=DgPiu8SHQ6E5Ppz/IawRe6JlzfwScyyEav5M4uHXt8g=;
- b=Vulhr3kq0UpE5iBgJAVSIUDPxg0HCbsw9DCAwTj+DmXltGLY6SyafK99V0tf4qR8UT68yE1b9o/0v78d3I/oehNpUVOPPP/hnOoUF5vDSV/VF4/AAFN+5+MMubgWZj3xQeIrSKxAXVL29wA/mA2dOBZ1yNDDX8tbOvNS+G14zWAKwNJ+/tF+lwKXRGe7/Ea1FdQM58TGtwOaXvGZFAbeYbRsS+EW6qzMBd8HiHWkwk8zf30vcjVXWam9LDhFslAwtZWrhmKjr0YqWISsoQ94FHwYQHwKbHYFeWisA+bgIe5erdg367HTSKIMvkcIbzu7OiG5s4DmeXZMHYFExChc6A==
+ bh=bYgIH5y+jJ+ZRb2dW04HxWo51S7eTAFok07Dbwz7dAw=;
+ b=LQ81KM4AXkgfol7tbK3wKMBP4O4miMg92QyVdcE24ToxWJ/s6v5MpfD5VMQMysSCD6PoqjeZY2u56t5RcAyUZLyiTWC4ihmLN39/S7vnQIav0cL0ZXy/bdmYvDNujFkbe7Vo8tILOOXAkHMvGgidKq4CGMSdYW7FDTQCRthqL7P8uhz0/pJ93yy8/RID03ADo8YeqUK7Bc0slJ7b4voSPZ2xNOZpWDzGZKcQRMHoUedeiTizN1sg0jphjidF/colNepAc1URp4aaBBGhCMasxadQZW2it/i1EINP00Ty6wWbcQnnr4+NXXxMk4QXoUtfnYlfi7pqfZhQQyxgu2Fk3Q==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
-Received: from MW4PR11MB5822.namprd11.prod.outlook.com (2603:10b6:303:185::9)
- by MN0PR11MB6136.namprd11.prod.outlook.com (2603:10b6:208:3c8::5) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5924.16; Wed, 21 Dec
- 2022 08:05:47 +0000
-Received: from MW4PR11MB5822.namprd11.prod.outlook.com
- ([fe80::efde:3b28:b807:1f8c]) by MW4PR11MB5822.namprd11.prod.outlook.com
- ([fe80::efde:3b28:b807:1f8c%4]) with mapi id 15.20.5924.016; Wed, 21 Dec 2022
- 08:05:46 +0000
-From: "Polampalli, Archana" <Archana.Polampalli@windriver.com>
-To: "openembedded-devel@lists.openembedded.org"
+Received: from BL0PR11MB3410.namprd11.prod.outlook.com (2603:10b6:208:33::33)
+ by DS7PR11MB7808.namprd11.prod.outlook.com (2603:10b6:8:ee::6) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.5924.16; Wed, 21 Dec 2022 08:41:51 +0000
+Received: from BL0PR11MB3410.namprd11.prod.outlook.com
+ ([fe80::e0ff:22f9:8a29:4955]) by BL0PR11MB3410.namprd11.prod.outlook.com
+ ([fe80::e0ff:22f9:8a29:4955%7]) with mapi id 15.20.5924.016; Wed, 21 Dec 2022
+ 08:41:50 +0000
+From: "Urade, Yogita" <Yogita.Urade@windriver.com>
+To: "Polampalli, Archana" <Archana.Polampalli@windriver.com>,
+        "openembedded-devel@lists.openembedded.org"
 	<openembedded-devel@lists.openembedded.org>,
-        "Urade, Yogita"
-	<Yogita.Urade@windriver.com>
+        "Chen, Qi"
+	<Qi.Chen@windriver.com>
 CC: "G Pillai, Hari" <Hari.GPillai@windriver.com>
-Subject: Re: [oe][meta-oe][PATCH 1/1] multipath-tools: fix CVE-2022-41973
+Subject: RE: [oe][meta-oe][PATCH 1/1] multipath-tools: fix CVE-2022-41973
 Thread-Topic: [oe][meta-oe][PATCH 1/1] multipath-tools: fix CVE-2022-41973
-Thread-Index: AQHZFQp+hKXkSsBQ6ECTXRvnTSiNjK53+3Zv
-Date: Wed, 21 Dec 2022 08:05:46 +0000
+Thread-Index: AQHZFQp3w2QoF9YjVEaCCIzFXb3SgK53+/oAgAAEtJ4=
+Date: Wed, 21 Dec 2022 08:41:50 +0000
 Message-ID: 
- <MW4PR11MB5822338B5148FFBACF96864284EB9@MW4PR11MB5822.namprd11.prod.outlook.com>
+ <BL0PR11MB34103C0DCC60ABB542E6A9DC9FEB9@BL0PR11MB3410.namprd11.prod.outlook.com>
 References: <20221221070408.1871070-1-yogita.urade@windriver.com>
-In-Reply-To: <20221221070408.1871070-1-yogita.urade@windriver.com>
+ <MW4PR11MB5822338B5148FFBACF96864284EB9@MW4PR11MB5822.namprd11.prod.outlook.com>
+In-Reply-To: 
+ <MW4PR11MB5822338B5148FFBACF96864284EB9@MW4PR11MB5822.namprd11.prod.outlook.com>
 Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
+Content-Language: en-IN
+X-Mentions: Qi.Chen@windriver.com
+X-MS-Has-Attach: yes
 X-MS-TNEF-Correlator: 
-msip_labels: 
 x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: MW4PR11MB5822:EE_|MN0PR11MB6136:EE_
-x-ms-office365-filtering-correlation-id: 7676a486-7df9-44fb-9b5a-08dae32a2a9d
+x-ms-traffictypediagnostic: BL0PR11MB3410:EE_|DS7PR11MB7808:EE_
+x-ms-office365-filtering-correlation-id: b0eab52e-95d1-4a48-d556-08dae32f3449
 x-ms-exchange-senderadcheck: 1
 x-ms-exchange-antispam-relay: 0
 x-microsoft-antispam: BCL:0;
 x-microsoft-antispam-message-info: 
- KvCKJhKeoDXY50Bs5fP5MN1iMgt1l2gIJWZ/W/jdm1aizu00R4M7lsfJdfG8T4fQCPfGkmJkgOe0RJeKIPSU4E6yxYTpuqavaoQph8YF3OP3EWYog45S0HY+K3N3dbnJxQQYs6f8tZG4y/wD4wOYjiiKqxa0G4MLvqpDdZHeuKSsSV9IvSbVbYKdYx8hilPddKt8NJgm9bj8m7zCLj809ddvn4Hl/zFjxM8zSydKqyeRzeeRlQ/8oGVZ2UG//JrNzWIB8q0zfPerUhq611KVC36KTOTr5TOzsvvHMEtVqsJE5opmlK6ZB9oOqrAVrq99u6tE/7uVBCShdji81uDSx4o0SgD3QRW2hAUKBOD3m09kDJeH+e0DZxpOVOv62z3i0t01jnNNEHURAdRIjetAQZJEh3C1VtQLvB/Ls+5iTTaqcb9mknqQnZFgQy2y+23/fkOrru/hYIpgE0HFrlJ0IWlcY/xNAqqXmfi1CJeSu5ZNaNgNmYtQ4zgPWNWJbF/cX09g3uCMr542ZqzqOe9z0b7yXEBerF1k7uw6HC5sntlKVgS9gySEeEoCx21f8xtQOklElKOMSik1zSSJeaNiLelb4TuwkMM4x/cIu8nPom0PkOJefivTcS3oCd9kRbjh0GfkaZo0IDP8GYDTNVuHP5QW6Vaq0YlBHpOTJ2GcrStNyZmll/TybReVmnYGCeWf9SALYktD7V35E1rw9Uogdx6qvuEbJ1A1+brU3MytXtPRPG5LLx+JlxTb0aR2+Wh8BSi2W8Nw8ybxNKBY6XghGA==
+ ETcswK9V58njoMqa78yp5U8QaXVEydeio+wcyxq9HYyjehBUO0uADtcpeFkhMZNHvB3lbUjhk/MwQf8S4yaWHiKhRmd3jKq/v7Khl80GmUsANdjIywazP1HTJV9IXKQbHTZEl54zdXpDRT2TIx0Ehyq5NxAe9gIc6X2WRlYJa7mq+FTqYgJYOSl1kWIMuWSal3ZVrShfF471U2t93ccv5IwjNmTtNEnaSy4GgZlEV6gnCzGLroFKnqLV1qIbeoi0hKHJCAZ3haIunETOFWwo7u+6B5tratfIt50q9zEs+4PlIKxBQkY/7KX3vxCVTZBo9PCyjmgyqTE0by0omPIs7ZaF7uateAiY6A+h0Yi6Kr8lvagNNfN8IzO0nDHiLOT7KWQ2TfaQssBoq4+3IAfvAG1tnyDjsEYuDifm5XY+y98v/kheWlXWIpXOOTS/76jIJiSvsERBuMTTpa4dNGUrNea6ILnmMJ+7Y/yrGWg+EHW5jJHjlIg3FegOciaH/3FHnMShlTn9sw3MRl3z4Wm5+52CVaRkXcsucCj9QnlJ9aAkCRtZBpTJSoO9/G3FOWLinPE99ooFAgySzDzHIe9elozHvkg5X3ofdNYzw/KcjcRRelq/Siw5iBaHWmoCRHED6SiJCiJ4VxfOtuWdaWga0fxauQSF1GzS9Ouad1Xwj0bsF5dXsVIQeVRVR5GJIczZjrM68CZkWNKIpn7oHseJJA2pCOj9QzkL2tOG4ZJLpb6214uEQhgM+QMPCS0TF861
 x-forefront-antispam-report: 
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:MW4PR11MB5822.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230022)(4636009)(39850400004)(136003)(366004)(346002)(376002)(396003)(451199015)(55016003)(86362001)(966005)(478600001)(26005)(186003)(33656002)(71200400001)(9686003)(38100700002)(7696005)(66446008)(76116006)(64756008)(91956017)(66476007)(66556008)(5660300002)(41300700001)(2906002)(4326008)(6636002)(316002)(52536014)(8676002)(107886003)(66946007)(6506007)(8936002)(110136005)(166002)(122000001)(38070700005)(83380400001)(19627405001);DIR:OUT;SFP:1101;
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BL0PR11MB3410.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230022)(4636009)(346002)(396003)(136003)(376002)(366004)(39850400004)(451199015)(41300700001)(8676002)(4326008)(2906002)(38100700002)(83380400001)(122000001)(99936003)(9326002)(5660300002)(8936002)(38070700005)(166002)(53546011)(52536014)(7696005)(6506007)(107886003)(478600001)(33656002)(966005)(55016003)(26005)(91956017)(66556008)(6636002)(110136005)(66946007)(66446008)(71200400001)(66476007)(316002)(76116006)(64756008)(9686003)(86362001)(186003);DIR:OUT;SFP:1101;
 x-ms-exchange-antispam-messagedata-chunkcount: 1
 x-ms-exchange-antispam-messagedata-0: 
- =?us-ascii?Q?+yPmsK+x2o8EZFB3X/WL+88+FVlawfPfIXvm3Nq9neyhRkMI2fMY4RPU+Nmo?=
- =?us-ascii?Q?QmFytSoGxDSpqKoB5bSaaJ9kz9//EyYb6sbpHaWQFldxCc53ddnejAM9MyNc?=
- =?us-ascii?Q?fXsQwfxq6yV3sjL/LGHNtmRaYXe0RQUoKzLaDFjPpLHT1vjejQk2AADWcRLB?=
- =?us-ascii?Q?aCW8adyqyu//KGcCfCYAKIPA8rtrajO46ewR4WEvglKpZhLUvwDfM1erdOvu?=
- =?us-ascii?Q?YxzTHnoIYPcyXgPLHpxdukUhMUFhNdMkUc2Pj2ix1EMN0K0WeooS76JqN20H?=
- =?us-ascii?Q?ICFCnYa+4a1RGOtxl0QSjxcVKx87odY/kIhQb8Puwcw5C7rHcJR9B1t5suFx?=
- =?us-ascii?Q?sRL1TlYDu7/HidXrZLJGTiIjikkyoE4+J/+bpgi6rVVqni8pAjt9SDhHFuRS?=
- =?us-ascii?Q?NvvNq8mR3ljAl1kmDg6FbCiZ2x2YKIKuvikJnZTC2swEm6zqnZQaQzThhOmq?=
- =?us-ascii?Q?KrSUGs7af61OaBbRby65IXGvD4YgUcWEmAGwF821NZW3GacZuiqUzt/p5MD3?=
- =?us-ascii?Q?65rh3TSzMoHOWf9CS2kAAQEydYitnznNU5E3KwTovEqBJP+iLcdGc+TxjYUb?=
- =?us-ascii?Q?jlHiLtuDf6D8EFZp6C0qg00gkTtjmVItTttMwAZ/MfRWeredK1DKZiume1M4?=
- =?us-ascii?Q?Z2VLFuatSxwxRQMRFRguf5g3wv4M0iSal3TaIdSLhchSvwFP3YqjninWZpvW?=
- =?us-ascii?Q?F3q83vWVezOZu0KmYCe0nx/yoUCQ6T3S+a3L6u22ka03TMLvs8pTHj4EldGj?=
- =?us-ascii?Q?hQOEUwhjZGTPB+sOt06l5xbX9BF04/qLgaKo3NskF2fjvVcKIFgefZ9JtKcI?=
- =?us-ascii?Q?6vqSRQ97VpWviB3uGEjI80oWPNo8MH2P9TlFHdd0ZYLu7h/MyWO6QGfKZNwh?=
- =?us-ascii?Q?tBVfD/G0Y/04XZziYijwvzQT9042POAP8IRgttmlo7S2INS6yrvDY3YDfVbN?=
- =?us-ascii?Q?Vtik5qN6EPqYGKse/NN8tS9RbVzjlOuBUwaLl02I2jb1cCGJ83nF9+BkIj7h?=
- =?us-ascii?Q?ZRejxdxn3dc2SAk6jFmVW42/+kHpe2JBLYUaHMS1fxsVr+p1bodBBKJc20Ps?=
- =?us-ascii?Q?jYncMpVlwSHFqFB6js7yxdOGVR2vRMfSQgWrUs9Mn6/Z4wV+VOnUnao4brQh?=
- =?us-ascii?Q?RWdBN+sPhBIumyaWhkvWwmkj+0zU0P+u1xsjZV66Ue874vUuPSsoIkHNJABp?=
- =?us-ascii?Q?KCXOxfRU+pOMkBaObr8qfJQQXxWFzz3LuWTxEUucpnoF25a3ciK+d7NAqe0E?=
- =?us-ascii?Q?jDVauxEALc4IbCVcZ8imHAoUesG6aSFvbTfvDLu+NVEe72BgBLn3vCGAOg06?=
- =?us-ascii?Q?ilk0GW6wF7VKP+cVuO7PN1f1Mk4+XM3jZW5ko0CQ38FphxR3BC5DtUq6e6MW?=
- =?us-ascii?Q?yw9R6E58IV7X3h3NzzY6h2qPyMpmjeFjUSjavdtzPmyT0cQSBqzY/Bg+Tgjd?=
- =?us-ascii?Q?m58312R/HzGlZPG0oNrvQt3ZuFfQSPGp5KoneXmpa0u3hWgu1SQIMTufzzaf?=
- =?us-ascii?Q?5ZVPLAS0U8WMXwlLRuqVacSebK+el3DEB+8LKBZJ25ac06msK3eXPno2rhTF?=
- =?us-ascii?Q?Zl6RdEwNocLAFK++lhbLUufmB89ZlGsKfsQhyXT4+CtaA7JM6i4j2E1i0ebS?=
- =?us-ascii?Q?zA=3D=3D?=
-Content-Type: multipart/alternative;
-	boundary="_000_MW4PR11MB5822338B5148FFBACF96864284EB9MW4PR11MB5822namp_"
+ =?us-ascii?Q?qq+RREfz6PTOzTOnnXZ1QQvQjijOKEuW9Z7vmCQuN8aWXNUOzVYWUXhWcXHi?=
+ =?us-ascii?Q?HOo+/OcqwJ2lC8KnA0hokLM0c3YQV8An3Nj5OoXYOD0VxIG7oT598ANU25or?=
+ =?us-ascii?Q?OPEUVVWYLlpbMW0ckqUgrXpM6trJBqWLolnq0u05vClAsdYubr97wdSyUgvr?=
+ =?us-ascii?Q?2xaNR28VBi3Pj2gqRT2GLdxbANWxWpimvqNKDsIb1AJRbfOBq3jZXaW+ebaX?=
+ =?us-ascii?Q?4nySQah2sZ5dI7ts3jViMApHNUbwA9jJMmDnahgPNHqa0jOEq4OPVkDkioU/?=
+ =?us-ascii?Q?atpSVOD7lN9TvlLx/dXpCDc+F5clohYFkJZY2tNvBdeWEpK2/0wY8SMlRzhc?=
+ =?us-ascii?Q?9CcTwNIJQocPAYhL7g7JqcRDATByNyxdy3TcDUO+sYnMa7p0eXKai/wN9cPt?=
+ =?us-ascii?Q?tJ6CoaR/9eqgnZgaEHEcOUoF151CFt94pBXI9VVLSO/gzluwnaXvZWsfmL11?=
+ =?us-ascii?Q?yG5MXyJQFAgwIkwK8VRfBuD3AXlreM0+K8++frOxfgsPtAdJut5A1zRMi/Xm?=
+ =?us-ascii?Q?zd/zwC07O3nqLAve9MVGwYBLqZolnkbjuQEJk5+eugLyAFKyTz3CNat6Fhsk?=
+ =?us-ascii?Q?Yj75bxeUPGqfEP2LvZIxWB2T8aEwXqDZBOi5S6mOYgybTT4BJfu8T934n9bR?=
+ =?us-ascii?Q?XtMaOVFtpIcTwoSA49IGobozIZ9jInPBuwUJpNGNLZ/1pDWiUKjzZQPcs9NB?=
+ =?us-ascii?Q?S2UyRWFVI+sMJE4N0wCxHlJ5BzXuwOi7+aF3NqHlk72h6VXYpO7/X4ww/3SY?=
+ =?us-ascii?Q?vRLUgga0EETmmF8BVgK+4hE//6UOLTz3VK3YApZlJdta/6XUYuTUbOA1dExw?=
+ =?us-ascii?Q?T6Csy4Kg3rWdZKgXcGSO7PULhQ6K/iwc2dkcg7GwQ99sR5mY4G0jnuoYjJ1u?=
+ =?us-ascii?Q?QjRHxUdUW8o1h0vRQi922PNwTiQoO5wBjo8rgbsktQMdd2XhtBjdL1jKJrHS?=
+ =?us-ascii?Q?QKex0TYOyJX0Ry+RBqREzxrcfdMcyehvurss5Vl6SdLt9kZbgdzH+sQ7LUkp?=
+ =?us-ascii?Q?JLaKvAYTyfjfKczW+yjWAPv6VLsvs7hTXymKWCRWh1DP1eua2lTb9K68De1L?=
+ =?us-ascii?Q?Aj+WbrDf9ZYZPPXoyiK1uULi23EuL+rMqZ1UMMrEgeM6iis/uS+bFTk07CAL?=
+ =?us-ascii?Q?YRH9xUQTkhFJeFBWfvpXexGc6R9pKiS+fEkLi69puQJfsV3jW7NsoIVhyrOO?=
+ =?us-ascii?Q?rCxQgpNKjq3yTSCg/B78v2di5TyuxtrnltpxiyH/GWYhkp0gRzrfdoy7TNiU?=
+ =?us-ascii?Q?IaKElDDAGn3iCJhKn5n7C/SPQ/QvkIbuJktncc4xsD3ZR7abHcK1xKwagDAl?=
+ =?us-ascii?Q?nZTcvCGBve6ZffqPjPjCZ3vlLojCDadPogUnhh0LB8VyHpFG8OMhntvQjI3x?=
+ =?us-ascii?Q?ukToeRbz4s+hBl+ulColBGlAk8Wf4+zRYqjlimA83DPS8OCrz7rA4Mjqu/2m?=
+ =?us-ascii?Q?OC8ezLacCYR+eTgrLasypYYeFrqm3Uru/KyCRTcEM6mNgcN+OMdpECj2YYKi?=
+ =?us-ascii?Q?tgTV8PuIbVZ707bhuf1JBdddzanJKgTK5VtnlvEg0uRjf9qGHR1+2qPBxV/o?=
+ =?us-ascii?Q?SqYtop8diXCVKZ+CaDZE0TntLoUVfMQU6RuL/1yj6jnjTMl8ym273sGHBfl1?=
+ =?us-ascii?Q?jU0dsRmNnbLG19H8ru8RESg=3D?=
+Content-Type: multipart/related;
+	boundary="_004_BL0PR11MB34103C0DCC60ABB542E6A9DC9FEB9BL0PR11MB3410namp_";
+	type="multipart/alternative"
 MIME-Version: 1.0
 X-OriginatorOrg: windriver.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: MW4PR11MB5822.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 7676a486-7df9-44fb-9b5a-08dae32a2a9d
-X-MS-Exchange-CrossTenant-originalarrivaltime: 21 Dec 2022 08:05:46.9293
+X-MS-Exchange-CrossTenant-AuthSource: BL0PR11MB3410.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: b0eab52e-95d1-4a48-d556-08dae32f3449
+X-MS-Exchange-CrossTenant-originalarrivaltime: 21 Dec 2022 08:41:50.6099
  (UTC)
 X-MS-Exchange-CrossTenant-fromentityheader: Hosted
 X-MS-Exchange-CrossTenant-id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: qDHwWBl5ZqdqTl8//KGT/UB1N2cP7cLdCGrZ1iMvX45ctYzpkeqqBRoSDONNId9nS9dz8MzimC9Geev69psnewLyQFF2rnlWVlWZ6ZvQx+tLHvDzsPS7Y2DwDl4hXa7d
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN0PR11MB6136
-X-Proofpoint-ORIG-GUID: ViL7BtpycutPNAd30OCLxR_tbjD_mt5t
-X-Proofpoint-GUID: ViL7BtpycutPNAd30OCLxR_tbjD_mt5t
+X-MS-Exchange-CrossTenant-userprincipalname: zm31RiLgbiW9rJLoZIfXKiTyXyC42QZ3K1QBMdr/QNYH/9ULPk86JHzd9B1wh5lZL9jKY/fALqcDQ8+r0uGSbJPPAgibrR/uCDmKzZnLexU=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS7PR11MB7808
+X-Proofpoint-GUID: 0N7PPwAKZ2lVLjy-Eiyp5iHPeVaFf7WV
+X-Proofpoint-ORIG-GUID: 0N7PPwAKZ2lVLjy-Eiyp5iHPeVaFf7WV
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.205,Aquarius:18.0.923,Hydra:6.0.545,FMLib:17.11.122.1
- definitions=2022-12-21_03,2022-12-20_01,2022-06-22_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 malwarescore=0
- impostorscore=0 lowpriorityscore=0 mlxlogscore=999 phishscore=0 mlxscore=0
- adultscore=0 spamscore=0 suspectscore=0 priorityscore=1501 bulkscore=0
- clxscore=1015 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2212070000 definitions=main-2212210063
+ definitions=2022-12-21_04,2022-12-20_01,2022-06-22_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 adultscore=0 spamscore=0
+ mlxlogscore=999 priorityscore=1501 clxscore=1015 phishscore=0
+ lowpriorityscore=0 impostorscore=0 mlxscore=0 malwarescore=0
+ suspectscore=0 bulkscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.12.0-2212070000 definitions=main-2212210068
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 21 Dec 2022 08:06:01 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100175
+ <openembedded-devel@lists.openembedded.org>; Wed, 21 Dec 2022 08:42:02 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100176
 
---_000_MW4PR11MB5822338B5148FFBACF96864284EB9MW4PR11MB5822namp_
+--_004_BL0PR11MB34103C0DCC60ABB542E6A9DC9FEB9BL0PR11MB3410namp_
+Content-Type: multipart/alternative;
+	boundary="_000_BL0PR11MB34103C0DCC60ABB542E6A9DC9FEB9BL0PR11MB3410namp_"
+
+--_000_BL0PR11MB34103C0DCC60ABB542E6A9DC9FEB9BL0PR11MB3410namp_
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: quoted-printable
+
+Hi Archana,
+The same patch which I sent on 19th Dec,  for the kirkstone branch, in that=
+ I added the CVE ID & upstream-status.
+But @Chen, Qi<mailto:Qi.Chen@windriver.com> suggest me to remove that becau=
+se it was  already added in the patch.
+This is same patch, only difference is that this is for the master branch.
+
+Regards,
+Yogita
+
+Sent from Mail<https://go.microsoft.com/fwlink/?LinkId=3D550986> for Window=
+s
+
+From: Polampalli, Archana<mailto:Archana.Polampalli@windriver.com>
+Sent: 21 December 2022 13:35
+To: openembedded-devel@lists.openembedded.org<mailto:openembedded-devel@lis=
+ts.openembedded.org>; Urade, Yogita<mailto:Yogita.Urade@windriver.com>
+Cc: G Pillai, Hari<mailto:Hari.GPillai@windriver.com>
+Subject: Re: [oe][meta-oe][PATCH 1/1] multipath-tools: fix CVE-2022-41973
 
 Hi Yogita,
 
@@ -145,7 +172,7 @@ Please add CVE ID and Upstream-Status in main patch as well
 
 Regards,
 Archana
-________________________________
+
 From: openembedded-devel@lists.openembedded.org <openembedded-devel@lists.o=
 penembedded.org> on behalf of Urade, Yogita via lists.openembedded.org <Yog=
 ita.Urade=3Dwindriver.com@lists.openembedded.org>
@@ -384,69 +411,142 @@ o.patch \
 2.32.0
 
 
---_000_MW4PR11MB5822338B5148FFBACF96864284EB9MW4PR11MB5822namp_
+--_000_BL0PR11MB34103C0DCC60ABB542E6A9DC9FEB9BL0PR11MB3410namp_
 Content-Type: text/html; charset="us-ascii"
 Content-Transfer-Encoding: quoted-printable
 
-<html>
+<html xmlns:v=3D"urn:schemas-microsoft-com:vml" xmlns:o=3D"urn:schemas-micr=
+osoft-com:office:office" xmlns:w=3D"urn:schemas-microsoft-com:office:word" =
+xmlns:m=3D"http://schemas.microsoft.com/office/2004/12/omml" xmlns=3D"http:=
+//www.w3.org/TR/REC-html40">
 <head>
 <meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dus-ascii"=
 >
-<style type=3D"text/css" style=3D"display:none;"> P {margin-top:0;margin-bo=
-ttom:0;} </style>
+<meta name=3D"Generator" content=3D"Microsoft Word 15 (filtered medium)">
+<!--[if !mso]><style>v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+w\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+</style><![endif]--><style><!--
+/* Font Definitions */
+@font-face
+	{font-family:"Cambria Math";
+	panose-1:2 4 5 3 5 4 6 3 2 4;}
+@font-face
+	{font-family:Calibri;
+	panose-1:2 15 5 2 2 2 4 3 2 4;}
+/* Style Definitions */
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{margin:0cm;
+	font-size:11.0pt;
+	font-family:"Calibri",sans-serif;}
+a:link, span.MsoHyperlink
+	{mso-style-priority:99;
+	color:blue;
+	text-decoration:underline;}
+.MsoChpDefault
+	{mso-style-type:export-only;}
+@page WordSection1
+	{size:612.0pt 792.0pt;
+	margin:72.0pt 72.0pt 72.0pt 72.0pt;}
+div.WordSection1
+	{page:WordSection1;}
+--></style>
 </head>
-<body dir=3D"ltr">
-<div class=3D"elementToProof" style=3D"font-family: Calibri, Arial, Helveti=
-ca, sans-serif; font-size: 12pt; color: rgb(0, 0, 0); background-color: rgb=
-(255, 255, 255);">
-Hi Yogita,</div>
-<div class=3D"elementToProof" style=3D"font-family: Calibri, Arial, Helveti=
-ca, sans-serif; font-size: 12pt; color: rgb(0, 0, 0); background-color: rgb=
-(255, 255, 255);">
+<body lang=3D"EN-IN" link=3D"blue" vlink=3D"#954F72" style=3D"word-wrap:bre=
+ak-word">
+<div class=3D"WordSection1">
+<p class=3D"MsoNormal" style=3D"line-height:200%"><span lang=3D"EN-US">Hi A=
+rchana,<o:p></o:p></span></p>
+<p class=3D"MsoNormal" style=3D"line-height:200%"><span lang=3D"EN-US">The =
+same patch which I sent on 19<sup>th</sup> Dec, &nbsp;for the kirkstone bra=
+nch, in that I added the CVE ID &amp; upstream-status.<br>
+But <a id=3D"OWAAM6B62024851054EC39858BFA20575F5FDZ" href=3D"mailto:Qi.Chen=
+@windriver.com">
+<span style=3D"font-family:&quot;Calibri&quot;,sans-serif;text-decoration:n=
+one">@Chen, Qi</span></a> suggest me to remove that because it was&nbsp; al=
+ready added in the patch.<o:p></o:p></span></p>
+<p class=3D"MsoNormal" style=3D"line-height:200%"><span lang=3D"EN-US">This=
+ is same patch, only difference is that this is for the master branch.
+<o:p></o:p></span></p>
+<p class=3D"MsoNormal" style=3D"line-height:200%"><span lang=3D"EN-US"><o:p=
+>&nbsp;</o:p></span></p>
+<p class=3D"MsoNormal" style=3D"line-height:200%"><span lang=3D"EN-US">Rega=
+rds,<o:p></o:p></span></p>
+<p class=3D"MsoNormal" style=3D"line-height:200%"><span lang=3D"EN-US">Yogi=
+ta</span></p>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+<p class=3D"MsoNormal">Sent from <a href=3D"https://go.microsoft.com/fwlink=
+/?LinkId=3D550986">
+Mail</a> for Windows</p>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+<div style=3D"mso-element:para-border-div;border:none;border-top:solid #E1E=
+1E1 1.0pt;padding:3.0pt 0cm 0cm 0cm">
+<p class=3D"MsoNormal" style=3D"border:none;padding:0cm"><b>From: </b><a hr=
+ef=3D"mailto:Archana.Polampalli@windriver.com">Polampalli, Archana</a><br>
+<b>Sent: </b>21 December 2022 13:35<br>
+<b>To: </b><a href=3D"mailto:openembedded-devel@lists.openembedded.org">ope=
+nembedded-devel@lists.openembedded.org</a>;
+<a href=3D"mailto:Yogita.Urade@windriver.com">Urade, Yogita</a><br>
+<b>Cc: </b><a href=3D"mailto:Hari.GPillai@windriver.com">G Pillai, Hari</a>=
 <br>
+<b>Subject: </b>Re: [oe][meta-oe][PATCH 1/1] multipath-tools: fix CVE-2022-=
+41973</p>
 </div>
-<div class=3D"elementToProof" style=3D"font-family: Calibri, Arial, Helveti=
-ca, sans-serif; font-size: 12pt; color: rgb(0, 0, 0); background-color: rgb=
-(255, 255, 255);">
-Please add CVE ID and Upstream-Status in main patch as well</div>
-<div class=3D"elementToProof" style=3D"font-family: Calibri, Arial, Helveti=
-ca, sans-serif; font-size: 12pt; color: rgb(0, 0, 0); background-color: rgb=
-(255, 255, 255);">
-<br>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+<div>
+<p class=3D"MsoNormal" style=3D"background:white"><span style=3D"font-size:=
+12.0pt;color:black">Hi Yogita,<o:p></o:p></span></p>
 </div>
-<div class=3D"elementToProof" style=3D"font-family: Calibri, Arial, Helveti=
-ca, sans-serif; font-size: 12pt; color: rgb(0, 0, 0); background-color: rgb=
-(255, 255, 255);">
-Regards,</div>
-<div class=3D"elementToProof" style=3D"font-family: Calibri, Arial, Helveti=
-ca, sans-serif; font-size: 12pt; color: rgb(0, 0, 0); background-color: rgb=
-(255, 255, 255);">
-Archana</div>
-<div id=3D"appendonsend"></div>
-<hr style=3D"display:inline-block;width:98%" tabindex=3D"-1">
-<div id=3D"divRplyFwdMsg" dir=3D"ltr"><font face=3D"Calibri, sans-serif" st=
-yle=3D"font-size:11pt" color=3D"#000000"><b>From:</b> openembedded-devel@li=
-sts.openembedded.org &lt;openembedded-devel@lists.openembedded.org&gt; on b=
-ehalf of Urade, Yogita via lists.openembedded.org
- &lt;Yogita.Urade=3Dwindriver.com@lists.openembedded.org&gt;<br>
+<div>
+<p class=3D"MsoNormal" style=3D"background:white"><span style=3D"font-size:=
+12.0pt;color:black"><o:p>&nbsp;</o:p></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal" style=3D"background:white"><span style=3D"font-size:=
+12.0pt;color:black">Please add CVE ID and Upstream-Status in main patch as =
+well<o:p></o:p></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal" style=3D"background:white"><span style=3D"font-size:=
+12.0pt;color:black"><o:p>&nbsp;</o:p></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal" style=3D"background:white"><span style=3D"font-size:=
+12.0pt;color:black">Regards,<o:p></o:p></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal" style=3D"background:white"><span style=3D"font-size:=
+12.0pt;color:black">Archana<o:p></o:p></span></p>
+</div>
+<p class=3D"MsoNormal"><img border=3D"0" width=3D"471" height=3D"1" style=
+=3D"width:4.9097in;height:.0138in" id=3D"Horizontal_x0020_Line_x0020_1" src=
+=3D"cid:image001.png@01D91546.18CAFAF0"><o:p></o:p></p>
+<div id=3D"divRplyFwdMsg">
+<p class=3D"MsoNormal"><b><span style=3D"color:black">From:</span></b><span=
+ style=3D"color:black"> openembedded-devel@lists.openembedded.org &lt;opene=
+mbedded-devel@lists.openembedded.org&gt; on behalf of Urade, Yogita via lis=
+ts.openembedded.org &lt;Yogita.Urade=3Dwindriver.com@lists.openembedded.org=
+&gt;<br>
 <b>Sent:</b> Wednesday, December 21, 2022 12:34 PM<br>
 <b>To:</b> openembedded-devel@lists.openembedded.org &lt;openembedded-devel=
 @lists.openembedded.org&gt;<br>
 <b>Cc:</b> G Pillai, Hari &lt;Hari.GPillai@windriver.com&gt;; Urade, Yogita=
  &lt;Yogita.Urade@windriver.com&gt;<br>
 <b>Subject:</b> [oe][meta-oe][PATCH 1/1] multipath-tools: fix CVE-2022-4197=
-3</font>
-<div>&nbsp;</div>
+3</span>
+<o:p></o:p></p>
+<div>
+<p class=3D"MsoNormal">&nbsp;<o:p></o:p></p>
 </div>
-<div class=3D"BodyFragment"><font size=3D"2"><span style=3D"font-size:11pt;=
-">
-<div class=3D"PlainText">multipath-tools 0.7.7 through 0.9.x before 0.9.2 a=
-llows local users to obtain root access, as exploited in conjunction with C=
-VE-2022-41974. Local users able to access /dev/shm can change symlinks in m=
-ultipathd due to incorrect symlink
- handling, which could lead to controlled file writes outside of the /dev/s=
-hm directory. This could be used indirectly for local privilege escalation =
-to root.<br>
+</div>
+<p class=3D"MsoNormal" style=3D"margin-bottom:12.0pt">multipath-tools 0.7.7=
+ through 0.9.x before 0.9.2 allows local users to obtain root access, as ex=
+ploited in conjunction with CVE-2022-41974. Local users able to access /dev=
+/shm can change symlinks in multipathd
+ due to incorrect symlink handling, which could lead to controlled file wri=
+tes outside of the /dev/shm directory. This could be used indirectly for lo=
+cal privilege escalation to root.<br>
 <br>
 References:<br>
 <a href=3D"https://nvd.nist.gov/vuln/detail/CVE-2022-41973">https://nvd.nis=
@@ -726,12 +826,26 @@ c2</a>&quot;<br>
 +FILES:${PN}-libs +=3D &quot;usr/lib&quot;<br>
 +FILES:${PN}-libs +=3D &quot;usr/lib/tmpfiles.d&quot;<br>
 -- <br>
-2.32.0<br>
-<br>
+2.32.0<o:p></o:p></p>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
 </div>
-</span></font></div>
 </body>
 </html>
 
---_000_MW4PR11MB5822338B5148FFBACF96864284EB9MW4PR11MB5822namp_--
+--_000_BL0PR11MB34103C0DCC60ABB542E6A9DC9FEB9BL0PR11MB3410namp_--
+
+--_004_BL0PR11MB34103C0DCC60ABB542E6A9DC9FEB9BL0PR11MB3410namp_
+Content-Type: image/png; name="FDE94B1FC6E24792AB839251AE1F59B4.png"
+Content-Description: FDE94B1FC6E24792AB839251AE1F59B4.png
+Content-Disposition: inline; filename="FDE94B1FC6E24792AB839251AE1F59B4.png";
+	size=144; creation-date="Wed, 21 Dec 2022 08:41:49 GMT";
+	modification-date="Wed, 21 Dec 2022 08:41:49 GMT"
+Content-ID: <image001.png@01D91546.18CAFAF0>
+Content-Transfer-Encoding: base64
+
+iVBORw0KGgoAAAANSUhEUgAAAsMAAAACCAYAAAC9p9F6AAAAAXNSR0IArs4c6QAAAARnQU1BAACx
+jwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAlSURBVFhH7chBDQAACMQw/Js+EIAC6JJ+VlMA
+AOCpdQIAwHGVBilNgMa0a9wjAAAAAElFTkSuQmCC
+
+--_004_BL0PR11MB34103C0DCC60ABB542E6A9DC9FEB9BL0PR11MB3410namp_--
 
