@@ -1,106 +1,102 @@
-Return-Path: <wangmy@fujitsu.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BBA14C4332F
-	for <webhook@archiver.kernel.org>; Thu, 22 Dec 2022 08:15:09 +0000 (UTC)
-Received: from mail1.bemta34.messagelabs.com (mail1.bemta34.messagelabs.com [195.245.231.1])
- by mx.groups.io with SMTP id smtpd.web11.41323.1671696906764372153
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1456AC4332F
+	for <webhook@archiver.kernel.org>; Thu, 22 Dec 2022 09:08:30 +0000 (UTC)
+Received: from mail-pg1-f178.google.com (mail-pg1-f178.google.com [209.85.215.178])
+ by mx.groups.io with SMTP id smtpd.web11.41932.1671700109745292274
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 22 Dec 2022 00:15:07 -0800
+ Thu, 22 Dec 2022 01:08:29 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=LSCnc+Wl;
- spf=pass (domain: fujitsu.com, ip: 195.245.231.1, mailfrom: wangmy@fujitsu.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1671696904; i=@fujitsu.com;
-	bh=4uByGp4RnsP6VFMCu+UYiDWUSAUHn8LufW+Z99u63XE=;
-	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=LSCnc+WlAvhd+jhFNbZY4ARMMe36ch9yxP1dswzCbj5PKZOq1w6h+A1IlYvSmZxU8
-	 s6nsIC3QpNRNaTLZ/nhyOgLmTf24RwxvoA3VIsK49dvqmKNRGFoNF1hW2l3tOou8Rq
-	 iJdgk/V33Rj8fbepFGsM84RqKmAl5iFgoCS5VLuyAy4E6DmPdtlN9KooVGZONOsO24
-	 BtYtQOfyiLzfOcw7kTwFXa2m6FFF9xbrICBAm2JvTMVycfX4Y01GhBTMMME2Avdsm9
-	 MrjDMXA3ZKX+cm2znWEB4LrhO3j6co7NPLIjkFX1lTS68JwHQUvLch7gdOlSgttdkF
-	 JLZFTFoITeSvg==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrAIsWRWlGSWpSXmKPExsViZ8ORpMshtCT
-  ZoO+GgMXFw0uZHRg9zm1cwRjAGMWamZeUX5HAmnF24RumguOcFX+O6Tcw3uboYuTiEBJ4yCix
-  6+8kRgjnCpPEu2PdUM4eRokLl9uZuhg5OdgEpCRu3P/PBmKLCOhLLJ29hxnEZhZQkXjxu4cdx
-  BYWCJN4u2MemM0ioCrRuOoRWA2vgJNE17wJLCC2hICCxJSH76HighInZz5hgZgjIXHwxQtmiB
-  pFidmXm6HqKyRmzWpjgrDVJK6e28Q8gZF/FpL2WUjaFzAyrWI0K04tKkst0jU000sqykzPKMl
-  NzMzRS6zSTdRLLdUtTy0u0TXSSywv1kstLtYrrsxNzknRy0st2cQIDMaUYsWtOxhvLPujd4hR
-  koNJSZQ37ufiZCG+pPyUyozE4oz4otKc1OJDjDIcHEoSvEd4lyQLCRalpqdWpGXmACMDJi3Bw
-  aMkwnuXBSjNW1yQmFucmQ6ROsVozLG24cBeZo6rV67sZRZiycvPS5US5w0WACoVACnNKM2DGw
-  SL2EuMslLCvIwMDAxCPAWpRbmZJajyrxjFORiVhHkD+ICm8GTmlcDtewV0ChPQKdNuLgQ5pSQ
-  RISXVwBQwj1m0KPyR5OxfWh/at5eaH4mT2ypYlMQucVdZ8+4r9kd/g+fHJjAJbX5Q7a2lqH/q
-  QrNt6oMnEddLAiWi/1q/T7qmnugfHPuyuPfOqS19O/8LxiyrlXdd9FVRKUvy3v4f8mvSjgQ/s
-  CsKUFVXt++oOryq5dy5ZOOJm2YeOed75pRk49Tj06Ym3Dwawlfu2aDc9pp952uZrOA1l64fmm
-  bGpxcx/8Nq8bLTX1/Pc7vXVfC1WPpc0v9yayeTTUaXV89zvh512C5syu1jm+N/XV2xv+nq3/u
-  nS6pdFzlIf38nwyvdePb1TZ05Hz89e+FZ+nu3yHVN1RceW8xk5feePHl6e2/0EQWxlAsvzFd3
-  XmlUYinOSDTUYi4qTgQA55IW+FMDAAA=
-X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-17.tower-565.messagelabs.com!1671696904!560242!1
-X-Originating-IP: [62.60.8.98]
-X-SYMC-ESS-Client-Auth: outbound-route-from=pass
-X-StarScan-Received: 
-X-StarScan-Version: 9.101.2; banners=-,-,-
-X-VirusChecked: Checked
-Received: (qmail 9857 invoked from network); 22 Dec 2022 08:15:04 -0000
-Received: from unknown (HELO n03ukasimr03.n03.fujitsu.local) (62.60.8.98)
-  by server-17.tower-565.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 22 Dec 2022 08:15:04 -0000
-Received: from n03ukasimr03.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr03.n03.fujitsu.local (Postfix) with ESMTP id 00DE71B0
-	for <openembedded-devel@lists.openembedded.org>; Thu, 22 Dec 2022 08:15:04 +0000 (GMT)
-Received: from R01UKEXCASM126.r01.fujitsu.local (R01UKEXCASM126 [10.183.43.178])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by n03ukasimr03.n03.fujitsu.local (Postfix) with ESMTPS id EA5101AF
-	for <openembedded-devel@lists.openembedded.org>; Thu, 22 Dec 2022 08:15:03 +0000 (GMT)
-Received: from localhost.localdomain (10.167.225.33) by
- R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.42; Thu, 22 Dec 2022 08:15:02 +0000
-From: <wangmy@fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-filesystems] [PATCH v2] xfstests: upgrade 2022.11.27 -> 2022.12.11
-Date: Thu, 22 Dec 2022 16:14:29 +0800
-Message-ID: <1671696869-22824-1-git-send-email-wangmy@fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=XKnzKUMn;
+ spf=pass (domain: gmail.com, ip: 209.85.215.178, mailfrom: raj.khem@gmail.com)
+Received: by mail-pg1-f178.google.com with SMTP id 79so907731pgf.11
+        for <openembedded-devel@lists.openembedded.org>; Thu, 22 Dec 2022 01:08:29 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=8gi4m8FQH+5ngNBVqV1+djOqT/lOzd2riBWopgcfUXw=;
+        b=XKnzKUMnKvCO5vcqbjInuwOQ/LQNM2/U+47N/gjmaTyUjpmxCWi0skkxmR/c8il5eX
+         hgstQiCt0DKU5R1mqxtWL1vhMFTK/Tk1qh0ClGxPWmWB+X8JEfuNrO9lTPPj2+AZe7V0
+         8s3/TWPukOjaCdE6tOvQ8mowGvP+fJ+Tpc/C9Ea2G9RBFS83uUyEQXTmDvTzL5hPvZpe
+         THSGeTYUjKhOpwnhmV2UgZqV2TttZlAeWl1HwRUFT4031VY6asKI6y6ZAZxldSeur24+
+         BPLqmqM5WM1jnAPfIDC945cyY+TdkYBArQjSpEKYQDsDoM92puoMVP+rUZGGP5UIUuJj
+         zYZQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=8gi4m8FQH+5ngNBVqV1+djOqT/lOzd2riBWopgcfUXw=;
+        b=kPB64bQEs4PgociPeHnC2zFuiSfDheMVT6xtj2xgbuGeP2npiYXpiinqTMVqFsNi1U
+         x4IAQpLZ4AZ5kuZ8LyQAHeReLxjiRyMKLguHG+jkQEDH2BdVQNJCxgEV/RW24Xej6m5K
+         Yx3OxjS61S7CSRAYbXTv4W5Jc+i4J+cgNJnwNLzbbRH3wzkW/jPXljjM9Kbliiv16qGG
+         GzM22NUfmYIGuImdWaQwevRfK6vs0Jym7EOgGWMFewwKEOLKTZLY/68aFm6emd8vBqCf
+         Au6ODPSsgpb7ST0sF8vP8cEera4SO4406Mblw2U4EoPre1LKjinQ307SJ1UzNYuzEU+H
+         FNpQ==
+X-Gm-Message-State: AFqh2krdLmyQq+JreBtfjTMbZBdr5U4+Sn7lcEu1avknFm+NeofRVg2V
+	qHztgNvkj3+NJW8zC7iiZ4LA7oPcJyY=
+X-Google-Smtp-Source: AMrXdXtiMDI1klOiwoN//L1sRMgehxa/Xa8FKjBtH5UA2BFRgHX2hU5xuy+L0TTRH3iBxfufMxL+BQ==
+X-Received: by 2002:a62:65c3:0:b0:566:900d:6073 with SMTP id z186-20020a6265c3000000b00566900d6073mr5262033pfb.24.1671700108798;
+        Thu, 22 Dec 2022 01:08:28 -0800 (PST)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9181:1cf0::41f2])
+        by smtp.gmail.com with ESMTPSA id v29-20020aa799dd000000b00575bab45644sm200974pfi.61.2022.12.22.01.08.28
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 22 Dec 2022 01:08:28 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 1/3] libtraceevent: Add recipe
+Date: Thu, 22 Dec 2022 01:08:23 -0800
+Message-Id: <20221222090825.176892-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.39.0
 MIME-Version: 1.0
-Content-Type: text/plain
-X-Originating-IP: [10.167.225.33]
-X-ClientProxiedBy: G08CNEXCHPEKD07.g08.fujitsu.local (10.167.33.80) To
- R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
-X-Virus-Scanned: ClamAV using ClamSMTP
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 22 Dec 2022 08:15:09 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100187
+ <openembedded-devel@lists.openembedded.org>; Thu, 22 Dec 2022 09:08:30 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100188
 
-From: Wang Mingyu <wangmy@fujitsu.com>
+Its needed by trace-cmd
 
-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../xfstests/{xfstests_2022.11.27.bb => xfstests_2022.12.11.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-filesystems/recipes-utils/xfstests/{xfstests_2022.11.27.bb => xfstests_2022.12.11.bb} (97%)
+ .../libtraceevent/libtraceevent_1.7.0.bb      | 22 +++++++++++++++++++
+ 1 file changed, 22 insertions(+)
+ create mode 100644 meta-oe/recipes-kernel/libtraceevent/libtraceevent_1.7.0.bb
 
-diff --git a/meta-filesystems/recipes-utils/xfstests/xfstests_2022.11.27.bb b/meta-filesystems/recipes-utils/xfstests/xfstests_2022.12.11.bb
-similarity index 97%
-rename from meta-filesystems/recipes-utils/xfstests/xfstests_2022.11.27.bb
-rename to meta-filesystems/recipes-utils/xfstests/xfstests_2022.12.11.bb
-index 8c791a7e6..136fea8ad 100644
---- a/meta-filesystems/recipes-utils/xfstests/xfstests_2022.11.27.bb
-+++ b/meta-filesystems/recipes-utils/xfstests/xfstests_2022.12.11.bb
-@@ -10,7 +10,7 @@ SRC_URI = "git://git.kernel.org/pub/scm/fs/xfs/xfstests-dev.git;branch=master;na
-            file://0002-Drop-detached_mounts_propagation-and-remove-sys-moun.patch \
-            "
- 
--SRCREV_xfstests = "1e8502082ca94addc20b7cb0e86cbc6af397ebe0"
-+SRCREV_xfstests = "87ab8bdf20db7308e7ecc2ddcdce530ec1f08f1f"
- SRCREV_unionmount = "e3825b16b46f4c4574a1a69909944c059835f914"
- 
- S = "${WORKDIR}/git"
+diff --git a/meta-oe/recipes-kernel/libtraceevent/libtraceevent_1.7.0.bb b/meta-oe/recipes-kernel/libtraceevent/libtraceevent_1.7.0.bb
+new file mode 100644
+index 0000000000..cbd107a4b4
+--- /dev/null
++++ b/meta-oe/recipes-kernel/libtraceevent/libtraceevent_1.7.0.bb
+@@ -0,0 +1,22 @@
++# Copyright (C) 2022 Khem Raj <raj.khem@gmail.com>
++# Released under the MIT license (see COPYING.MIT for the terms)
++
++SUMMARY = "API to access the kernel tracefs directory"
++HOMEPAGE = "https://git.kernel.org/pub/scm/libs/libtrace/libtracefs.git/"
++LICENSE = "GPL-2.0-or-later & LGPL-2.1-or-later"
++LIC_FILES_CHKSUM = "file://LICENSES/GPL-2.0;md5=e6a75371ba4d16749254a51215d13f97 \
++                    file://LICENSES/LGPL-2.1;md5=b370887980db5dd40659b50909238dbd"
++SECTION = "libs"
++
++SRCREV = "826b06bb2484a53fdae196e12ec507a67ec87055"
++SRC_URI = "git://git.kernel.org/pub/scm/libs/libtrace/libtraceevent.git;branch=${BPN};protocol=https"
++
++S = "${WORKDIR}/git"
++
++inherit pkgconfig
++
++do_install() {
++    oe_runmake install DESTDIR=${D} pkgconfig_dir=${libdir}/pkgconfig
++}
++
++FILES:${PN} += "${libdir}/traceevent"
 -- 
-2.25.1
+2.39.0
 
 
