@@ -2,56 +2,56 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 051EFC001B2
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 03C80C4332F
 	for <webhook@archiver.kernel.org>; Thu, 22 Dec 2022 09:08:40 +0000 (UTC)
-Received: from mail-pg1-f174.google.com (mail-pg1-f174.google.com [209.85.215.174])
- by mx.groups.io with SMTP id smtpd.web10.41716.1671700110608040837
+Received: from mail-pg1-f181.google.com (mail-pg1-f181.google.com [209.85.215.181])
+ by mx.groups.io with SMTP id smtpd.web11.41934.1671700111323891440
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 22 Dec 2022 01:08:30 -0800
+ Thu, 22 Dec 2022 01:08:31 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=Mlwr9sUD;
- spf=pass (domain: gmail.com, ip: 209.85.215.174, mailfrom: raj.khem@gmail.com)
-Received: by mail-pg1-f174.google.com with SMTP id b12so921230pgj.6
-        for <openembedded-devel@lists.openembedded.org>; Thu, 22 Dec 2022 01:08:30 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=E7DT2cXV;
+ spf=pass (domain: gmail.com, ip: 209.85.215.181, mailfrom: raj.khem@gmail.com)
+Received: by mail-pg1-f181.google.com with SMTP id s196so931391pgs.3
+        for <openembedded-devel@lists.openembedded.org>; Thu, 22 Dec 2022 01:08:31 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=7PMrRoUxtAXJsLkwwVsLovBILQnkzqw5UC/jOrA/ieI=;
-        b=Mlwr9sUD8yocu8TX1+tSKj0ayftyNNR/A27SgryaBeViS74jR79W9ZR9CQpi7iN7RC
-         VnWnZZNm5u5X3ZE00E6HpA2eVw9/UI/NxjsP5O4wsl2gbmtTAW1VHJ1Y1rYrD6ySL80V
-         G6rwu91e1g+ZwQpTXSvaV0vEs9cGfRZvNStbQoDgEMDpKIrUsVwcnrYtcvLyVuT0KDvv
-         1CuPrfasQZPAfvL7uDWNL/4WhlOW/yJ366nvbRejn4reheV9kePXd4RoXMRn7b2zMsIP
-         c4aNp1RXDzqf6a8bIO1VMcx9yVRPVvN5vt7gn0Xf2Wsf2PiNHiapyZVo82PpIWcMXr6g
-         4QlA==
+        bh=NTF6/Gmib0KGCkrrJoLutUgKmUi7q4aorHUcXmct9K4=;
+        b=E7DT2cXVzs9uhmZY8RlooVndH13oPUeytl54gpts/tAJZHnHKYfMldQZ0zYnpIpNhy
+         ARpzfOr/KAGOKZ0vRTpwRv+q19rvm+Dh8pSEQ9o69+3Fh/f0x62ijEbTe2Zbd76mNniK
+         BrbYrtAf4sNGx9sRzHymWFVTUv1uVxaZhMWJKDAQFIyWZfgIVUZCEmdhnxG8KVLHHXEV
+         /W/XhsSvMq/Cgd+KEt+XEj9HBhzG6ZoM4frgZvBYDx8aGfskjvkhmWetwyTCuwFMbqrS
+         PRw5aQbn6WaKtD/mkdDH34bqolVT22oZGzHoFzreetbc+67si91oOVEH5TXQVCG3q7kR
+         0i7Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=7PMrRoUxtAXJsLkwwVsLovBILQnkzqw5UC/jOrA/ieI=;
-        b=r2MHTHrMnrl8vYf4SqPNJq79/IWyDP4IMgeEgZ6wwueDjkpTxtKUZSrP3+Rfsx7ysH
-         XLSjkmJ1WMjpuvqSnMSxfGPw+cLWhWOzi04bdz2Z2icIYaElgYT5P6cFRkF1zBZ1STeM
-         vz+6lI45yp6FQFuwYmOYHqpyc0xDMbxLU7X+BQ97MRw6PLtW0UXN89F+/8AzuM80ChoB
-         pVfEab5LgXuvrmujVUkmH9saFOUMM9g7EAc93IOJnUh6+ms8gkgVyPK9saVRexBbi5YZ
-         94aLNSUjyU4novaTiEHHPyNfzXOqqAoK1M32a/Lrz/3QC0BxV8FrnVlBTTkPsPG7FFSu
-         tIfA==
-X-Gm-Message-State: AFqh2ko4pn+7ktj/lTgmXxsTivsz2ESCyq7dn0+ibuK/b/5qy82jduVx
-	bFoVs2pDtwSi4pQFFVGrvINd+Y4O9hE=
-X-Google-Smtp-Source: AMrXdXuSsR6f63/tl9QsPmvbvuTyOtraWCFGp3Z+lSYla4wrFcKw15YVpEtq9TPUjljj/izYPC9whw==
-X-Received: by 2002:a05:6a00:1d97:b0:576:9eed:61de with SMTP id z23-20020a056a001d9700b005769eed61demr6086187pfw.4.1671700109638;
-        Thu, 22 Dec 2022 01:08:29 -0800 (PST)
+        bh=NTF6/Gmib0KGCkrrJoLutUgKmUi7q4aorHUcXmct9K4=;
+        b=QuU71KyKQSdL3lTG3Uc14zvgD0b/94miag1XWAWaqkWzvAWeSbtUG0+CsQXcyjvj2m
+         R7oDi3uR2XKVFrYut3nUTvf7FhgUe+CDgzUC/f4/hH3huXr10z7iqO+irmiNYfuDEWOy
+         TsHBtNh9mJk8qEWFWcVLwfQYP67795xMHHrJvuxDn5v+Sw7lP7yDqKN050l0DFrhU0m5
+         wzhP/7vLaqTJk8MGNYptZ+U1zI+sXlEd9cbzniFNekdX+udxOcXGauHcIoZANIGbPSH0
+         T/IQlfKvZcopgXC+dRNQqsRS4eIuNZyrHkbiNR+eWJLuKAmDJD2S3P/RH8LsMvIF7xL8
+         sYPA==
+X-Gm-Message-State: AFqh2krQVtPT12KZHAQgDNXBo1j4bJBRjcvNBBnkIt7A0g8Uh3k3xW/o
+	scMZ0Aiu9b0deMi2YVsKsRN76YfR8ZM=
+X-Google-Smtp-Source: AMrXdXtanau+al0kBCPn3fksNs2GED9tNnnbyxvG4f2EZfsqSRonmk/l5ffm6O/m4Z51sP8Q3/PfWA==
+X-Received: by 2002:a62:36c4:0:b0:578:7e9d:97b2 with SMTP id d187-20020a6236c4000000b005787e9d97b2mr6305009pfa.3.1671700110420;
+        Thu, 22 Dec 2022 01:08:30 -0800 (PST)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9181:1cf0::41f2])
-        by smtp.gmail.com with ESMTPSA id v29-20020aa799dd000000b00575bab45644sm200974pfi.61.2022.12.22.01.08.28
+        by smtp.gmail.com with ESMTPSA id v29-20020aa799dd000000b00575bab45644sm200974pfi.61.2022.12.22.01.08.29
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 22 Dec 2022 01:08:29 -0800 (PST)
+        Thu, 22 Dec 2022 01:08:30 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 2/3] libtracefs: Add recipe
-Date: Thu, 22 Dec 2022 01:08:24 -0800
-Message-Id: <20221222090825.176892-2-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 3/3] trace-cmd: Remove use of off64_t and lseek64
+Date: Thu, 22 Dec 2022 01:08:25 -0800
+Message-Id: <20221222090825.176892-3-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.39.0
 In-Reply-To: <20221222090825.176892-1-raj.khem@gmail.com>
 References: <20221222090825.176892-1-raj.khem@gmail.com>
@@ -61,83 +61,481 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 22 Dec 2022 09:08:40 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100189
-
-Needed by trace-cmd
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100190
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...not-preserve-ownership-in-cp-command.patch | 31 +++++++++++++++++++
- .../libtracefs/libtracefs_1.6.3.bb            | 22 +++++++++++++
- 2 files changed, 53 insertions(+)
- create mode 100644 meta-oe/recipes-kernel/libtracefs/libtracefs/0001-makefile-Do-not-preserve-ownership-in-cp-command.patch
- create mode 100644 meta-oe/recipes-kernel/libtracefs/libtracefs_1.6.3.bb
+ .../0002-replace-off64_t-and-lseek64.patch    | 426 ++++++++++++++++++
+ .../trace-cmd/trace-cmd_2.9.1.bb              |  16 +-
+ 2 files changed, 439 insertions(+), 3 deletions(-)
+ create mode 100644 meta-oe/recipes-kernel/trace-cmd/files/0002-replace-off64_t-and-lseek64.patch
 
-diff --git a/meta-oe/recipes-kernel/libtracefs/libtracefs/0001-makefile-Do-not-preserve-ownership-in-cp-command.patch b/meta-oe/recipes-kernel/libtracefs/libtracefs/0001-makefile-Do-not-preserve-ownership-in-cp-command.patch
+diff --git a/meta-oe/recipes-kernel/trace-cmd/files/0002-replace-off64_t-and-lseek64.patch b/meta-oe/recipes-kernel/trace-cmd/files/0002-replace-off64_t-and-lseek64.patch
 new file mode 100644
-index 0000000000..7ae0856f85
+index 0000000000..453a888b52
 --- /dev/null
-+++ b/meta-oe/recipes-kernel/libtracefs/libtracefs/0001-makefile-Do-not-preserve-ownership-in-cp-command.patch
-@@ -0,0 +1,31 @@
-+From 6650d0e79eea330b53635574885208a138fef97e Mon Sep 17 00:00:00 2001
++++ b/meta-oe/recipes-kernel/trace-cmd/files/0002-replace-off64_t-and-lseek64.patch
+@@ -0,0 +1,426 @@
++From 6dab4b10be4df906375d0dcfa5bbffc43d3d953a Mon Sep 17 00:00:00 2001
 +From: Khem Raj <raj.khem@gmail.com>
-+Date: Wed, 21 Dec 2022 22:50:56 -0800
-+Subject: [PATCH] makefile: Do not preserve ownership in cp command
++Date: Thu, 22 Dec 2022 00:58:26 -0800
++Subject: [PATCH 2/2] replace off64_t and lseek64
 +
-+Fixes
-+ERROR: libtracefs-1.6.3-r0 do_package_qa: QA Issue: libtracefs: /usr/lib/libtracefs.so is owned by uid 1000, which is the same as the user running bitbake. This may be due to host contamination [host-user-contaminated]
++Musl does not define these interfaces unless -D_LARGEFILE64_SOURCE is
++defined and that too it is transitional until apps switch to using 64bit
++off_t
 +
 +Upstream-Status: Pending
-+
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +---
-+ Makefile | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
++ lib/trace-cmd/trace-input.c    | 54 +++++++++++++++++-----------------
++ lib/trace-cmd/trace-output.c   | 44 +++++++++++++--------------
++ lib/trace-cmd/trace-recorder.c |  8 ++---
++ tracecmd/trace-dump.c          |  6 ++--
++ tracecmd/trace-read.c          |  2 +-
++ 5 files changed, 57 insertions(+), 57 deletions(-)
 +
-+diff --git a/Makefile b/Makefile
-+index 27d425c..3aea142 100644
-+--- a/Makefile
-++++ b/Makefile
-+@@ -273,7 +273,7 @@ endif # DESTDIR = ""
++diff --git a/lib/trace-cmd/trace-input.c b/lib/trace-cmd/trace-input.c
++index af97883e..c3f91fcd 100644
++--- a/lib/trace-cmd/trace-input.c
+++++ b/lib/trace-cmd/trace-input.c
++@@ -33,15 +33,15 @@ static int force_read = 0;
 + 
-+ install_libs: libs install_pkgconfig
-+ 	$(Q)$(call do_install,$(LIBTRACEFS_SHARED),$(libdir_SQ)); \
-+-		cp -fpR $(LIB_INSTALL) $(DESTDIR)$(libdir_SQ)
-++		cp --no-preserve=ownership --recursive $(LIB_INSTALL) $(DESTDIR)$(libdir_SQ)
-+ 	$(Q)$(call do_install,$(src)/include/tracefs.h,$(includedir_SQ),644)
-+ 	$(Q)$(call install_ld_config)
++ struct page_map {
++ 	struct list_head	list;
++-	off64_t			offset;
++-	off64_t			size;
+++	off_t			offset;
+++	off_t			size;
++ 	void			*map;
++ 	int			ref_count;
++ };
 + 
++ struct page {
++ 	struct list_head	list;
++-	off64_t			offset;
+++	off_t			offset;
++ 	struct tracecmd_input	*handle;
++ 	struct page_map		*page_map;
++ 	void			*map;
++@@ -385,7 +385,7 @@ static int read_header_files(struct tracecmd_input *handle)
++ 	free(header);
++ 
++ 	handle->ftrace_files_start =
++-		lseek64(handle->fd, 0, SEEK_CUR);
+++		lseek(handle->fd, 0, SEEK_CUR);
++ 
++ 	return 0;
++ 
++@@ -581,7 +581,7 @@ static int read_ftrace_files(struct tracecmd_input *handle, const char *regex)
++ 	}
++ 
++ 	handle->event_files_start =
++-		lseek64(handle->fd, 0, SEEK_CUR);
+++		lseek(handle->fd, 0, SEEK_CUR);
++ 
++ 	if (sreg) {
++ 		regfree(sreg);
++@@ -817,11 +817,11 @@ static unsigned long long calc_page_offset(struct tracecmd_input *handle,
++ 	return offset & ~(handle->page_size - 1);
++ }
++ 
++-static int read_page(struct tracecmd_input *handle, off64_t offset,
+++static int read_page(struct tracecmd_input *handle, off_t offset,
++ 		     int cpu, void *map)
++ {
++-	off64_t save_seek;
++-	off64_t ret;
+++	off_t save_seek;
+++	off_t ret;
++ 
++ 	if (handle->use_pipe) {
++ 		ret = read(handle->cpu_data[cpu].pipe_fd, map, handle->page_size);
++@@ -839,9 +839,9 @@ static int read_page(struct tracecmd_input *handle, off64_t offset,
++ 	}
++ 
++ 	/* other parts of the code may expect the pointer to not move */
++-	save_seek = lseek64(handle->fd, 0, SEEK_CUR);
+++	save_seek = lseek(handle->fd, 0, SEEK_CUR);
++ 
++-	ret = lseek64(handle->fd, offset, SEEK_SET);
+++	ret = lseek(handle->fd, offset, SEEK_SET);
++ 	if (ret < 0)
++ 		return -1;
++ 	ret = read(handle->fd, map, handle->page_size);
++@@ -849,7 +849,7 @@ static int read_page(struct tracecmd_input *handle, off64_t offset,
++ 		return -1;
++ 
++ 	/* reset the file pointer back */
++-	lseek64(handle->fd, save_seek, SEEK_SET);
+++	lseek(handle->fd, save_seek, SEEK_SET);
++ 
++ 	return 0;
++ }
++@@ -881,12 +881,12 @@ static void free_page_map(struct page_map *page_map)
++ }
++ 
++ static void *allocate_page_map(struct tracecmd_input *handle,
++-			       struct page *page, int cpu, off64_t offset)
+++			       struct page *page, int cpu, off_t offset)
++ {
++ 	struct cpu_data *cpu_data = &handle->cpu_data[cpu];
++ 	struct page_map *page_map;
++-	off64_t map_size;
++-	off64_t map_offset;
+++	off_t map_size;
+++	off_t map_offset;
++ 	void *map;
++ 	int ret;
++ 
++@@ -967,7 +967,7 @@ static void *allocate_page_map(struct tracecmd_input *handle,
++ }
++ 
++ static struct page *allocate_page(struct tracecmd_input *handle,
++-				  int cpu, off64_t offset)
+++				  int cpu, off_t offset)
++ {
++ 	struct cpu_data *cpu_data = &handle->cpu_data[cpu];
++ 	struct page **pages;
++@@ -1219,7 +1219,7 @@ static int update_page_info(struct tracecmd_input *handle, int cpu)
++  *        -1 on error
++  */
++ static int get_page(struct tracecmd_input *handle, int cpu,
++-		    off64_t offset)
+++		    off_t offset)
++ {
++ 	/* Don't map if the page is already where we want */
++ 	if (handle->cpu_data[cpu].offset == offset &&
++@@ -1263,7 +1263,7 @@ static int get_page(struct tracecmd_input *handle, int cpu,
++ 
++ static int get_next_page(struct tracecmd_input *handle, int cpu)
++ {
++-	off64_t offset;
+++	off_t offset;
++ 
++ 	if (!handle->cpu_data[cpu].page && !handle->use_pipe)
++ 		return 0;
++@@ -1484,7 +1484,7 @@ struct tep_record *
++ tracecmd_read_cpu_last(struct tracecmd_input *handle, int cpu)
++ {
++ 	struct tep_record *record = NULL;
++-	off64_t offset, page_offset;
+++	off_t offset, page_offset;
++ 
++ 	offset = handle->cpu_data[cpu].file_offset +
++ 		handle->cpu_data[cpu].file_size;
++@@ -1545,7 +1545,7 @@ tracecmd_set_cpu_to_timestamp(struct tracecmd_input *handle, int cpu,
++ 			      unsigned long long ts)
++ {
++ 	struct cpu_data *cpu_data = &handle->cpu_data[cpu];
++-	off64_t start, end, next;
+++	off_t start, end, next;
++ 
++ 	if (cpu < 0 || cpu >= handle->cpus) {
++ 		errno = -EINVAL;
++@@ -2965,7 +2965,7 @@ void tracecmd_print_events(struct tracecmd_input *handle, const char *regex)
++ 		regex = ".*";
++ 
++ 	if (!handle->ftrace_files_start) {
++-		lseek64(handle->fd, handle->header_files_start, SEEK_SET);
+++		lseek(handle->fd, handle->header_files_start, SEEK_SET);
++ 		read_header_files(handle);
++ 	}
++ 	ret = read_ftrace_files(handle, regex);
++@@ -3120,13 +3120,13 @@ struct tracecmd_input *tracecmd_alloc_fd(int fd)
++ 	handle->page_size = page_size;
++ 
++ 	handle->header_files_start =
++-		lseek64(handle->fd, 0, SEEK_CUR);
+++		lseek(handle->fd, 0, SEEK_CUR);
++ 
++ 	handle->total_file_size =
++-		lseek64(handle->fd, 0, SEEK_END);
+++		lseek(handle->fd, 0, SEEK_END);
++ 
++ 	handle->header_files_start =
++-		lseek64(handle->fd, handle->header_files_start, SEEK_SET);
+++		lseek(handle->fd, handle->header_files_start, SEEK_SET);
++ 
++ 	return handle;
++ 
++@@ -3419,7 +3419,7 @@ static int copy_header_files(struct tracecmd_input *handle, int fd)
++ {
++ 	unsigned long long size;
++ 
++-	lseek64(handle->fd, handle->header_files_start, SEEK_SET);
+++	lseek(handle->fd, handle->header_files_start, SEEK_SET);
++ 
++ 	/* "header_page"  */
++ 	if (read_copy_data(handle, 12, fd) < 0)
++@@ -3713,9 +3713,9 @@ tracecmd_buffer_instance_handle(struct tracecmd_input *handle, int indx)
++ 	new_handle->pid_maps = NULL;
++ 
++ 	/* Save where we currently are */
++-	offset = lseek64(handle->fd, 0, SEEK_CUR);
+++	offset = lseek(handle->fd, 0, SEEK_CUR);
++ 
++-	ret = lseek64(handle->fd, buffer->offset, SEEK_SET);
+++	ret = lseek(handle->fd, buffer->offset, SEEK_SET);
++ 	if (ret < 0) {
++ 		warning("could not seek to buffer %s offset %ld\n",
++ 			buffer->name, buffer->offset);
++@@ -3730,7 +3730,7 @@ tracecmd_buffer_instance_handle(struct tracecmd_input *handle, int indx)
++ 		goto error;
++ 	}
++ 
++-	ret = lseek64(handle->fd, offset, SEEK_SET);
+++	ret = lseek(handle->fd, offset, SEEK_SET);
++ 	if (ret < 0) {
++ 		warning("could not seek to back to offset %ld\n", offset);
++ 		goto error;
++diff --git a/lib/trace-cmd/trace-output.c b/lib/trace-cmd/trace-output.c
++index 4a9a857d..0f5acd2f 100644
++--- a/lib/trace-cmd/trace-output.c
+++++ b/lib/trace-cmd/trace-output.c
++@@ -800,8 +800,8 @@ static int save_tracing_file_data(struct tracecmd_output *handle,
++ 	unsigned long long endian8;
++ 	char *file = NULL;
++ 	struct stat st;
++-	off64_t check_size;
++-	off64_t size;
+++	off_t check_size;
+++	off_t size;
++ 	int ret = -1;
++ 
++ 	file = get_tracing_file(handle, filename);
++@@ -1069,7 +1069,7 @@ int tracecmd_write_options(struct tracecmd_output *handle)
++ 			return -1;
++ 
++ 		/* Save the data location in case it needs to be updated */
++-		options->offset = lseek64(handle->fd, 0, SEEK_CUR);
+++		options->offset = lseek(handle->fd, 0, SEEK_CUR);
++ 
++ 		if (do_write_check(handle, options->data,
++ 				   options->size))
++@@ -1099,9 +1099,9 @@ int tracecmd_append_options(struct tracecmd_output *handle)
++ 	if (handle->options_written)
++ 		return 0;
++ 
++-	if (lseek64(handle->fd, 0, SEEK_END) == (off_t)-1)
+++	if (lseek(handle->fd, 0, SEEK_END) == (off_t)-1)
++ 		return -1;
++-	offset = lseek64(handle->fd, -2, SEEK_CUR);
+++	offset = lseek(handle->fd, -2, SEEK_CUR);
++ 	if (offset == (off_t)-1)
++ 		return -1;
++ 
++@@ -1119,7 +1119,7 @@ int tracecmd_append_options(struct tracecmd_output *handle)
++ 			return -1;
++ 
++ 		/* Save the data location in case it needs to be updated */
++-		options->offset = lseek64(handle->fd, 0, SEEK_CUR);
+++		options->offset = lseek(handle->fd, 0, SEEK_CUR);
++ 
++ 		if (do_write_check(handle, options->data,
++ 				   options->size))
++@@ -1156,10 +1156,10 @@ int tracecmd_update_option(struct tracecmd_output *handle,
++ 	}
++ 
++ 	/* Save current offset */
++-	offset = lseek64(handle->fd, 0, SEEK_CUR);
+++	offset = lseek(handle->fd, 0, SEEK_CUR);
++ 
++-	ret = lseek64(handle->fd, option->offset, SEEK_SET);
++-	if (ret == (off64_t)-1) {
+++	ret = lseek(handle->fd, option->offset, SEEK_SET);
+++	if (ret == (off_t)-1) {
++ 		warning("could not seek to %lld\n", option->offset);
++ 		return -1;
++ 	}
++@@ -1167,8 +1167,8 @@ int tracecmd_update_option(struct tracecmd_output *handle,
++ 	if (do_write_check(handle, data, size))
++ 		return -1;
++ 
++-	ret = lseek64(handle->fd, offset, SEEK_SET);
++-	if (ret == (off64_t)-1) {
+++	ret = lseek(handle->fd, offset, SEEK_SET);
+++	if (ret == (off_t)-1) {
++ 		warning("could not seek to %lld\n", offset);
++ 		return -1;
++ 	}
++@@ -1243,11 +1243,11 @@ out_free:
++ int tracecmd_write_cpu_data(struct tracecmd_output *handle,
++ 			    int cpus, char * const *cpu_data_files)
++ {
++-	off64_t *offsets = NULL;
+++	off_t *offsets = NULL;
++ 	unsigned long long *sizes = NULL;
++-	off64_t offset;
+++	off_t offset;
++ 	unsigned long long endian8;
++-	off64_t check_size;
+++	off_t check_size;
++ 	char *file;
++ 	struct stat st;
++ 	int ret;
++@@ -1263,7 +1263,7 @@ int tracecmd_write_cpu_data(struct tracecmd_output *handle,
++ 	if (!sizes)
++ 		goto out_free;
++ 
++-	offset = lseek64(handle->fd, 0, SEEK_CUR);
+++	offset = lseek(handle->fd, 0, SEEK_CUR);
++ 
++ 	/* hold any extra data for data */
++ 	offset += cpus * (16);
++@@ -1318,8 +1318,8 @@ int tracecmd_write_cpu_data(struct tracecmd_output *handle,
++ 		if (!tracecmd_get_quiet(handle))
++ 			fprintf(stderr, "CPU%d data recorded at offset=0x%llx\n",
++ 				i, (unsigned long long) offsets[i]);
++-		offset = lseek64(handle->fd, offsets[i], SEEK_SET);
++-		if (offset == (off64_t)-1) {
+++		offset = lseek(handle->fd, offsets[i], SEEK_SET);
+++		if (offset == (off_t)-1) {
++ 			warning("could not seek to %lld\n", offsets[i]);
++ 			goto out_free;
++ 		}
++@@ -1369,11 +1369,11 @@ int tracecmd_append_buffer_cpu_data(struct tracecmd_output *handle,
++ 	tsize_t offset;
++ 	stsize_t ret;
++ 
++-	offset = lseek64(handle->fd, 0, SEEK_CUR);
+++	offset = lseek(handle->fd, 0, SEEK_CUR);
++ 
++ 	/* Go to the option data, where will write the offest */
++-	ret = lseek64(handle->fd, option->offset, SEEK_SET);
++-	if (ret == (off64_t)-1) {
+++	ret = lseek(handle->fd, option->offset, SEEK_SET);
+++	if (ret == (off_t)-1) {
++ 		warning("could not seek to %lld\n", option->offset);
++ 		return -1;
++ 	}
++@@ -1382,8 +1382,8 @@ int tracecmd_append_buffer_cpu_data(struct tracecmd_output *handle,
++ 		return -1;
++ 
++ 	/* Go back to end of file */
++-	ret = lseek64(handle->fd, offset, SEEK_SET);
++-	if (ret == (off64_t)-1) {
+++	ret = lseek(handle->fd, offset, SEEK_SET);
+++	if (ret == (off_t)-1) {
++ 		warning("could not seek to %lld\n", offset);
++ 		return -1;
++ 	}
++diff --git a/lib/trace-cmd/trace-recorder.c b/lib/trace-cmd/trace-recorder.c
++index 2a6e2b67..d83320d9 100644
++--- a/lib/trace-cmd/trace-recorder.c
+++++ b/lib/trace-cmd/trace-recorder.c
++@@ -53,7 +53,7 @@ static int append_file(int size, int dst, int src)
++ 	char buf[size];
++ 	int r;
++ 
++-	lseek64(src, 0, SEEK_SET);
+++	lseek(src, 0, SEEK_SET);
++ 
++ 	/* If there's an error, then we are pretty much screwed :-p */
++ 	do {
++@@ -84,10 +84,10 @@ void tracecmd_free_recorder(struct tracecmd_recorder *recorder)
++ 					  recorder->fd2, recorder->fd1);
++ 			/* Error on copying, then just keep fd1 */
++ 			if (ret) {
++-				lseek64(recorder->fd1, 0, SEEK_END);
+++				lseek(recorder->fd1, 0, SEEK_END);
++ 				goto close;
++ 			}
++-			lseek64(recorder->fd1, 0, SEEK_SET);
+++			lseek(recorder->fd1, 0, SEEK_SET);
++ 			ftruncate(recorder->fd1, 0);
++ 		}
++ 		append_file(recorder->page_size, recorder->fd1, recorder->fd2);
++@@ -371,7 +371,7 @@ static inline void update_fd(struct tracecmd_recorder *recorder, int size)
++ 		fd = recorder->fd1;
++ 
++ 	/* Zero out the new file we are writing to */
++-	lseek64(fd, 0, SEEK_SET);
+++	lseek(fd, 0, SEEK_SET);
++ 	ftruncate(fd, 0);
++ 
++ 	recorder->fd = fd;
++diff --git a/tracecmd/trace-dump.c b/tracecmd/trace-dump.c
++index 5642f12a..0a54bf42 100644
++--- a/tracecmd/trace-dump.c
+++++ b/tracecmd/trace-dump.c
++@@ -487,7 +487,7 @@ static void dump_options(int fd)
++ 
++ 		count++;
++ 		if (!DUMP_CHECK(OPTIONS)) {
++-			lseek64(fd, size, SEEK_CUR);
+++			lseek(fd, size, SEEK_CUR);
++ 			continue;
++ 		}
++ 		switch (option) {
++@@ -533,7 +533,7 @@ static void dump_options(int fd)
++ 		default:
++ 			do_print(OPTIONS, " %d %d\t[Unknown option, size - skipping]\n",
++ 				 option, size);
++-			lseek64(fd, size, SEEK_CUR);
+++			lseek(fd, size, SEEK_CUR);
++ 			break;
++ 		}
++ 	}
++@@ -579,7 +579,7 @@ static void dump_therest(int fd)
++ 		else if (strncmp(str, HEAD_FLYRECORD, 10) == 0)
++ 			dump_flyrecord(fd);
++ 		else {
++-			lseek64(fd, -10, SEEK_CUR);
+++			lseek(fd, -10, SEEK_CUR);
++ 			break;
++ 		}
++ 	}
++diff --git a/tracecmd/trace-read.c b/tracecmd/trace-read.c
++index e1811074..181a69df 100644
++--- a/tracecmd/trace-read.c
+++++ b/tracecmd/trace-read.c
++@@ -187,7 +187,7 @@ static void print_event(struct trace_seq *s, struct tracecmd_input *handle,
++ #define TEST_READ_AT 0
++ #if TEST_READ_AT
++ #define DO_TEST
++-static off64_t test_read_at_offset;
+++static off_t test_read_at_offset;
++ static int test_read_at_copy = 100;
++ static int test_read_at_index;
++ static void show_test(struct tracecmd_input *handle)
 +-- 
 +2.39.0
 +
-diff --git a/meta-oe/recipes-kernel/libtracefs/libtracefs_1.6.3.bb b/meta-oe/recipes-kernel/libtracefs/libtracefs_1.6.3.bb
-new file mode 100644
-index 0000000000..fbb6b76d10
---- /dev/null
-+++ b/meta-oe/recipes-kernel/libtracefs/libtracefs_1.6.3.bb
-@@ -0,0 +1,22 @@
-+# Copyright (C) 2022 Khem Raj <raj.khem@gmail.com>
-+# Released under the MIT license (see COPYING.MIT for the terms)
-+
-+SUMMARY = "Library to parse raw trace event formats	"
-+HOMEPAGE = "https://git.kernel.org/pub/scm/libs/libtrace/libtraceevent.git/"
-+LICENSE = "GPL-2.0-or-later & LGPL-2.1-or-later"
-+LIC_FILES_CHKSUM = "file://LICENSES/GPL-2.0;md5=e6a75371ba4d16749254a51215d13f97 \
-+                    file://LICENSES/LGPL-2.1;md5=b370887980db5dd40659b50909238dbd"
-+SECTION = "libs"
-+DEPENDS = "libtraceevent bison-native flex-native"
-+
-+SRCREV = "3395d484eadfd8ab38311032f28e7f79c4f0e33b"
-+SRC_URI = "git://git.kernel.org/pub/scm/libs/libtrace/libtracefs.git;branch=${BPN};protocol=https \
-+           file://0001-makefile-Do-not-preserve-ownership-in-cp-command.patch \
+diff --git a/meta-oe/recipes-kernel/trace-cmd/trace-cmd_2.9.1.bb b/meta-oe/recipes-kernel/trace-cmd/trace-cmd_2.9.1.bb
+index 6640707382..66bc2932ab 100644
+--- a/meta-oe/recipes-kernel/trace-cmd/trace-cmd_2.9.1.bb
++++ b/meta-oe/recipes-kernel/trace-cmd/trace-cmd_2.9.1.bb
+@@ -4,16 +4,26 @@ LICENSE = "GPL-2.0-only & LGPL-2.1-only"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=873f48a813bded3de6ebc54e6880c4ac"
+ 
+ SRC_URI = "git://git.kernel.org/pub/scm/linux/kernel/git/rostedt/trace-cmd.git;branch=master \
+-	file://0001-trace-cmd-make-it-build-with-musl.patch"
++           file://0001-trace-cmd-make-it-build-with-musl.patch \
++           file://0002-replace-off64_t-and-lseek64.patch \
 +           "
-+S = "${WORKDIR}/git"
+ 
+ SRCREV = "530b1a0caef39466e16bbd49de5afef89656f03f"
+ 
+ S = "${WORKDIR}/git"
+ 
++DEPENDS += "libtraceevent libtracefs zstd xmlto-native asciidoc-native"
 +
 +inherit pkgconfig
 +
-+do_install() {
-+    oe_runmake install DESTDIR=${D} pkgconfig_dir=${libdir}/pkgconfig
++do_compile() {
++        oe_runmake libdir_relative=${BASELIB} all libs
 +}
++
+ do_install() {
+-       oe_runmake etcdir=${sysconfdir} DESTDIR=${D} install
++       oe_runmake libdir_relative=${BASELIB} etcdir=${sysconfdir} DESTDIR=${D} install install_libs
+        mkdir -p ${D}${libdir}/traceevent/plugins/${BPN}
+        mv ${D}/${libdir}/traceevent/plugins/*.so ${D}${libdir}/traceevent/plugins/${BPN}/
+ }
+ 
+-FILES:${PN} += "${libdir}/traceevent/plugins"
++FILES:${PN} += "${libdir}/traceevent ${libdir}/traceevent/plugins ${libdir}/tracefs"
 -- 
 2.39.0
 
