@@ -2,925 +2,278 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 48DCCC4167B
-	for <webhook@archiver.kernel.org>; Thu, 22 Dec 2022 02:53:28 +0000 (UTC)
-Received: from mail-pf1-f173.google.com (mail-pf1-f173.google.com [209.85.210.173])
- by mx.groups.io with SMTP id smtpd.web10.37281.1671677606651116684
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6809AC4332F
+	for <webhook@archiver.kernel.org>; Thu, 22 Dec 2022 03:36:28 +0000 (UTC)
+Received: from mail-pj1-f53.google.com (mail-pj1-f53.google.com [209.85.216.53])
+ by mx.groups.io with SMTP id smtpd.web10.37882.1671680182633111023
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 21 Dec 2022 18:53:26 -0800
+ Wed, 21 Dec 2022 19:36:22 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=DERV5KgF;
- spf=pass (domain: gmail.com, ip: 209.85.210.173, mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f173.google.com with SMTP id 65so316877pfx.9
-        for <openembedded-devel@lists.openembedded.org>; Wed, 21 Dec 2022 18:53:26 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=Ycl8tbS1;
+ spf=pass (domain: gmail.com, ip: 209.85.216.53, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f53.google.com with SMTP id p4so615294pjk.2
+        for <openembedded-devel@lists.openembedded.org>; Wed, 21 Dec 2022 19:36:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=EVOOJJVlkkWT1fXjEidyFLUKMiuKIYvVsgkht0YUPBo=;
-        b=DERV5KgF5kBfY9dDKSlihY/qBlyadXRJKPSs0vFJr8wAxeMvWTF8ZkQOjkaryN4CWz
-         I8BRYXe2hD3GQr4t03wNYjq9Fao15RkJuEPxJxQvnQ6KMBKKSg8s/cOP5y/WLW5lCikw
-         sDgaZ/UX8HLSwaawSGw6LmnifVZiGZyFChhAQDgKYN6kQG9jR4zZNdLVyO1A/lLovzaS
-         iexO80dE9HOU3vwMCqa5jG2l1y1TQJHw7DClHY7I5toQCDLPv4wI35aVD9iPA+ak1p3r
-         gBH9qdKjqDf3GhP5MkcnNlSmzJci+HE2TJ7vAUXLhED4ktY3RVxIywuIQnbgPLJhmsiL
-         pJ/g==
+        bh=QmxmUJ0ACVMW+VfwJsMBVlC1J+9mzfF77wnH+VH06tk=;
+        b=Ycl8tbS1lXotXEtTih3C+L0UT+lTDMr75cdKeow3jVMW17ol3pdYIXf2H/2uCrWi7A
+         a8aQRChU+m3m2eRHW7act29oATxqOlHl2Ask4AzwDGqrGAXNV7K62iIXBX7JoaB9SZdx
+         OVzBQsjbVXZDJTtRL27iaPtNN66kGAu3QbrRPNTFqYkd/9e0QBpfMy46vhBWK0gzt81C
+         DXVe7tBjpR2fYns2c3p4vqKBE9Ye2no6ci4lyZZItaYnnu+kqBMhfU5laGjvym5ziaZ9
+         sRMr28AjfUlSKWvC1mUG1j7T5pRVbgRPBNFKqklgN801HYNnN5T2Y29CMynNrVUnpMLN
+         8kqg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=EVOOJJVlkkWT1fXjEidyFLUKMiuKIYvVsgkht0YUPBo=;
-        b=TQLOQRaBinMZYVbgptiLVABPMpwOYKrcI0Fb4pmKTX0x9NNgkh3pO2DRy0+1CuZGqC
-         jSTR3rICU+M5as/QJvMGposON8AdGOAVEarSRU0J2YL7k/2Ihi6aoVGH8JXQUY+M81KZ
-         STDS9Rln3hA9oUfFMOK+xcrtsP+Aq0398U2k2PPvpCDFByMVAMjush3JPjYKYDjdRUWr
-         RL44EsXh3+VQROtnE+AAGOUkW2Yism/YfJBn029NvZcy4OOS4idvI/HqD02fMcmSbrgi
-         GRd08DmZMZMzJ0Hu7BY7mwOVHlAPrh5Ca/OB8qpTJKHeYIXIP624wXVLLqmkF98wlAum
-         JH1g==
-X-Gm-Message-State: AFqh2kqDGGz0bEnI4qXdO0tpWS18V58X/1QvxQYxv7tTDSXB4TgJv4r5
-	4KnB85og4MWWekGFcqVVVCNnHzLO5Hs=
-X-Google-Smtp-Source: AMrXdXuDlaFP7UOyY+mdkuIZZmf/MjP3NnHn1w5VVAc2ypDyh3QB/whEwyLTB+6+Sy1nGNm/0nDKAg==
-X-Received: by 2002:a62:65c2:0:b0:566:900d:4667 with SMTP id z185-20020a6265c2000000b00566900d4667mr4523152pfb.1.1671677605375;
-        Wed, 21 Dec 2022 18:53:25 -0800 (PST)
+        bh=QmxmUJ0ACVMW+VfwJsMBVlC1J+9mzfF77wnH+VH06tk=;
+        b=RmnVHnFRpb2B8PFzF5g3e2M6H9yCRVSYR8EaPtVxhaLEYZe0Vj9SFqpLKLLLrc9U4G
+         U59lVPhiU6qxMqXoNrmBsNdqXgalbtVjDklYquWG11ZJA+3/CJRk533qbdMjJxAyUlGY
+         aR5zlK45B5HWlbIqT0x1hemtsDVqHe8w0gLoX3eb2ehlEpR1TrBAC6KEO/JuVDbB2rth
+         UnU009qaOPAI7zatyT6abpnko9e64v5sH6kOPOGX1U0cGYQEIqQc3yBSNb73P4Lkf0c3
+         z48rnZq1p1HPHJQPFa67fAeWOAZtTYyE80bABkEv4tav2PwX1XAhasUq9Y+NVQXleW4M
+         tznQ==
+X-Gm-Message-State: AFqh2koyRzFh/IeJSkG9fn1a9NL7n4GTRDb+T1LbD5EyEvtjNb3HT03e
+	SW5kFfsptFIwIC4YIbx618m4LGGXavg=
+X-Google-Smtp-Source: AMrXdXvuZMUxq3yrAIFyiDqe4PnfDGZFpowVWj3No1tbtvftu3c8uIVWNxYOB/O2d/B1bgnXk45lGQ==
+X-Received: by 2002:a05:6a20:b047:b0:ac:10:adfe with SMTP id dx7-20020a056a20b04700b000ac0010adfemr4665183pzb.30.1671680181793;
+        Wed, 21 Dec 2022 19:36:21 -0800 (PST)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9181:1cf0::41f2])
-        by smtp.gmail.com with ESMTPSA id g5-20020aa796a5000000b00576c291976dsm11283630pfk.201.2022.12.21.18.53.24
+        by smtp.gmail.com with ESMTPSA id o11-20020a170902778b00b0018941395c40sm12181244pll.285.2022.12.21.19.36.21
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 21 Dec 2022 18:53:25 -0800 (PST)
+        Wed, 21 Dec 2022 19:36:21 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-filesystems][PATCH 1/2] xfsprogs: Upgrade to 6.0.0
-Date: Wed, 21 Dec 2022 18:53:22 -0800
-Message-Id: <20221222025323.994194-1-raj.khem@gmail.com>
+Subject: [meta-networking][PATCH] drbd,drbd-utils: Upgrade to 9.2.1 and drbd-utils to 9.22.0
+Date: Wed, 21 Dec 2022 19:36:17 -0800
+Message-Id: <20221222033617.1014467-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.39.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 22 Dec 2022 02:53:28 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100183
-
-Fix build with largefile support
+ <openembedded-devel@lists.openembedded.org>; Thu, 22 Dec 2022 03:36:28 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100185
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...001-Check-for-MAP_SYNC-in-sys-mman.h.patch |  52 --
- ...Use-AC_SYS_LARGERFILE-autoconf-macro.patch |  27 +
- ...place-off64_t-stat64-with-off_t-stat.patch | 723 ++++++++++++++++++
- .../{xfsprogs_5.13.0.bb => xfsprogs_6.0.0.bb} |   7 +-
- 4 files changed, 754 insertions(+), 55 deletions(-)
- delete mode 100644 meta-filesystems/recipes-utils/xfsprogs/files/0001-Check-for-MAP_SYNC-in-sys-mman.h.patch
- create mode 100644 meta-filesystems/recipes-utils/xfsprogs/files/0004-configure-Use-AC_SYS_LARGERFILE-autoconf-macro.patch
- create mode 100644 meta-filesystems/recipes-utils/xfsprogs/files/0005-Replace-off64_t-stat64-with-off_t-stat.patch
- rename meta-filesystems/recipes-utils/xfsprogs/{xfsprogs_5.13.0.bb => xfsprogs_6.0.0.bb} (89%)
+ .../0001-replace-off64_t-with-off_t.patch     | 48 ++++++++++
+ ...-of-GLOB_MAGCHAR-use-strchr-heuristi.patch | 96 +++++++++++++++++++
+ ...d-utils_9.20.2.bb => drbd-utils_9.22.0.bb} |  9 +-
+ .../drbd/{drbd_9.0.24-1.bb => drbd_9.2.1.bb}  |  4 +-
+ 4 files changed, 151 insertions(+), 6 deletions(-)
+ create mode 100644 meta-networking/recipes-support/drbd/drbd-utils/0001-replace-off64_t-with-off_t.patch
+ create mode 100644 meta-networking/recipes-support/drbd/drbd-utils/0002-drbdadm-drop-use-of-GLOB_MAGCHAR-use-strchr-heuristi.patch
+ rename meta-networking/recipes-support/drbd/{drbd-utils_9.20.2.bb => drbd-utils_9.22.0.bb} (90%)
+ rename meta-networking/recipes-support/drbd/{drbd_9.0.24-1.bb => drbd_9.2.1.bb} (82%)
 
-diff --git a/meta-filesystems/recipes-utils/xfsprogs/files/0001-Check-for-MAP_SYNC-in-sys-mman.h.patch b/meta-filesystems/recipes-utils/xfsprogs/files/0001-Check-for-MAP_SYNC-in-sys-mman.h.patch
-deleted file mode 100644
-index 75b227ac19..0000000000
---- a/meta-filesystems/recipes-utils/xfsprogs/files/0001-Check-for-MAP_SYNC-in-sys-mman.h.patch
-+++ /dev/null
-@@ -1,52 +0,0 @@
--From f41ef1f06d428c81fcdef73d896dfc7ceda1809c Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Thu, 23 Aug 2018 04:59:39 +0000
--Subject: [PATCH] Check for MAP_SYNC in sys/mman.h
--
--Not all arches have wired MAP_SYNC e.g. mips
--which have conflicts with definition, so checking
--a generic file is going to mis-configure xfsprogs
--for such arches.
--
--libc now has added the relevant macros to
--sys/mman.h, and returns the right values for arches
--where its implemented and nothing for others
--unlike asm-generic/mman.h which only checks
--for kernel headers and ignored arches
--
--Upstream-Status: Pending
--
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
-- include/linux.h       | 3 +--
-- m4/package_libcdev.m4 | 3 +--
-- 2 files changed, 2 insertions(+), 4 deletions(-)
--
--diff --git a/include/linux.h b/include/linux.h
--index 1998941..7e5c9ab 100644
----- a/include/linux.h
--+++ b/include/linux.h
--@@ -331,8 +331,7 @@ fsmap_advance(
-- #define MAP_SYNC 0
-- #define MAP_SHARED_VALIDATE 0
-- #else
---#include <asm-generic/mman.h>
---#include <asm-generic/mman-common.h>
--+#include <sys/mman.h>
-- #endif /* HAVE_MAP_SYNC */
-- 
-- #endif	/* __XFS_LINUX_H__ */
--diff --git a/m4/package_libcdev.m4 b/m4/package_libcdev.m4
--index 0a6b514..2b47d2f 100644
----- a/m4/package_libcdev.m4
--+++ b/m4/package_libcdev.m4
--@@ -335,8 +335,7 @@ AC_DEFUN([AC_HAVE_STATFS_FLAGS],
-- AC_DEFUN([AC_HAVE_MAP_SYNC],
--   [ AC_MSG_CHECKING([for MAP_SYNC])
--     AC_TRY_COMPILE([
---#include <asm-generic/mman.h>
---#include <asm-generic/mman-common.h>
--+#include <sys/mman.h>
--     ], [
--         int flags = MAP_SYNC | MAP_SHARED_VALIDATE;
--     ], have_map_sync=yes
-diff --git a/meta-filesystems/recipes-utils/xfsprogs/files/0004-configure-Use-AC_SYS_LARGERFILE-autoconf-macro.patch b/meta-filesystems/recipes-utils/xfsprogs/files/0004-configure-Use-AC_SYS_LARGERFILE-autoconf-macro.patch
+diff --git a/meta-networking/recipes-support/drbd/drbd-utils/0001-replace-off64_t-with-off_t.patch b/meta-networking/recipes-support/drbd/drbd-utils/0001-replace-off64_t-with-off_t.patch
 new file mode 100644
-index 0000000000..60be8bfa34
+index 0000000000..2841d0feaf
 --- /dev/null
-+++ b/meta-filesystems/recipes-utils/xfsprogs/files/0004-configure-Use-AC_SYS_LARGERFILE-autoconf-macro.patch
-@@ -0,0 +1,27 @@
-+From f62d3e5cc1d4e416b97778059f0b3c20d777a4c2 Mon Sep 17 00:00:00 2001
++++ b/meta-networking/recipes-support/drbd/drbd-utils/0001-replace-off64_t-with-off_t.patch
+@@ -0,0 +1,48 @@
++From 5adae6737e919d957a08df437951ccb6996f9882 Mon Sep 17 00:00:00 2001
 +From: Khem Raj <raj.khem@gmail.com>
-+Date: Wed, 21 Dec 2022 17:40:11 -0800
-+Subject: [PATCH] configure: Use AC_SYS_LARGERFILE autoconf macro
++Date: Wed, 21 Dec 2022 19:16:03 -0800
++Subject: [PATCH 1/2] replace off64_t with off_t
 +
-+Helps define largefile support on relevant platforms
++off_t is already 64-bits when _FILE_OFFSET_BITS=64
++using off_t also makes it portable on musl systems
 +
-+Upstream-Status: Submitted [https://lore.kernel.org/linux-xfs/20221222015327.939932-1-raj.khem@gmail.com/T/#t]
++Upstream-Status: Pending
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +---
-+ configure.ac | 3 +++
-+ 1 file changed, 3 insertions(+)
++ user/v9/drbdadm_main.c | 10 +++++-----
++ 1 file changed, 5 insertions(+), 5 deletions(-)
 +
-+diff --git a/configure.ac b/configure.ac
-+index 5a6bf185..a6f556ec 100644
-+--- a/configure.ac
-++++ b/configure.ac
-+@@ -10,6 +10,9 @@ AC_PROG_INSTALL
-+ LT_INIT
++diff --git a/user/v9/drbdadm_main.c b/user/v9/drbdadm_main.c
++index 91e9507d..2030946c 100644
++--- a/user/v9/drbdadm_main.c
+++++ b/user/v9/drbdadm_main.c
++@@ -1264,11 +1264,11 @@ static int adm_resource(const struct cfg_ctx *ctx)
++ 	return ex;
++ }
 + 
-+ AC_PROG_CC
-++
-++AC_SYS_LARGEFILE
-++
-+ AC_ARG_VAR(BUILD_CC, [C compiler for build tools])
-+ if test "${BUILD_CC+set}" != "set"; then
-+   if test $cross_compiling = no; then
-diff --git a/meta-filesystems/recipes-utils/xfsprogs/files/0005-Replace-off64_t-stat64-with-off_t-stat.patch b/meta-filesystems/recipes-utils/xfsprogs/files/0005-Replace-off64_t-stat64-with-off_t-stat.patch
++-static off64_t read_drbd_dev_size(int minor)
+++static off_t read_drbd_dev_size(int minor)
++ {
++ 	char *path;
++ 	FILE *file;
++-	off64_t val;
+++	off_t val;
++ 	int r;
++ 
++ 	m_asprintf(&path, "/sys/block/drbd%d/size", minor);
++@@ -1289,9 +1289,9 @@ int adm_resize(const struct cfg_ctx *ctx)
++ 	char *argv[MAX_ARGS];
++ 	struct d_option *opt;
++ 	bool is_resize = !strcmp(ctx->cmd->name, "resize");
++-	off64_t old_size = -1;
++-	off64_t target_size = 0;
++-	off64_t new_size;
+++	off_t old_size = -1;
+++	off_t target_size = 0;
+++	off_t new_size;
++ 	int argc = 0;
++ 	int silent;
++ 	int ex;
++-- 
++2.39.0
++
+diff --git a/meta-networking/recipes-support/drbd/drbd-utils/0002-drbdadm-drop-use-of-GLOB_MAGCHAR-use-strchr-heuristi.patch b/meta-networking/recipes-support/drbd/drbd-utils/0002-drbdadm-drop-use-of-GLOB_MAGCHAR-use-strchr-heuristi.patch
 new file mode 100644
-index 0000000000..e10364a20e
+index 0000000000..45f7d6d415
 --- /dev/null
-+++ b/meta-filesystems/recipes-utils/xfsprogs/files/0005-Replace-off64_t-stat64-with-off_t-stat.patch
-@@ -0,0 +1,723 @@
-+From 1ff0d95604c406ddfc764c97ed2cb147d155f608 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Wed, 21 Dec 2022 17:43:07 -0800
-+Subject: [PATCH] Replace off64_t/stat64 with off_t/stat
++++ b/meta-networking/recipes-support/drbd/drbd-utils/0002-drbdadm-drop-use-of-GLOB_MAGCHAR-use-strchr-heuristi.patch
+@@ -0,0 +1,96 @@
++From b70e5bf5bfa5fa2c2fffe08bcf300da1d3583602 Mon Sep 17 00:00:00 2001
++From: Lars Ellenberg <lars.ellenberg@linbit.com>
++Date: Wed, 9 Nov 2022 11:01:54 +0100
++Subject: [PATCH 2/2] drbdadm: drop use of GLOB_MAGCHAR, use strchr heuristic only
 +
-+When using AC_SYS_LARGEFILE, it will automatically add
-+-D_FILE_OFFSET_BITS=64 to enable 64bit off_t and all lfs64 support
++Fixup for
++2022-09-05 4a1b5900 drbdadm: allow files from an expanded include glob to vanish
 +
-+helps compile on musl where off_t was always 64bit and lfs64 were never
-+needed
++When using the `include` statement, if the glob did not match any file,
++there is nothing to do, silently ignore.  Unless it was no glob, but a literal,
++which we would expect to exist.
 +
-+Upstream-Status: Submitted [https://lore.kernel.org/linux-xfs/20221222015327.939932-1-raj.khem@gmail.com/T/#t]
++Also, there is a race between expanding a glob and accessing the file.
++That also should not happen for literals, though.
++
++Since we still had the heuristic anyways, because apparently |GLOB_MAGCHAR
++does not happen for GLOB_NOMATCH returns, and there exist non-GNU libc that
++don't (and likely won't) implement that extension, just forget about
++(gl_flags & GLOB_MAGCHAR) but use the incomplete strchr heuristic only.
++
++Sourced From Alpine: https://git.alpinelinux.org/aports/tree/main/drbd-utils/drop_use_of_GLOB_MAGCHAR.patch
++
++Upstream-Status: Pending
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +---
-+ copy/xfs_copy.c           |  2 +-
-+ fsr/xfs_fsr.c             |  2 +-
-+ io/bmap.c                 |  6 +++---
-+ io/copy_file_range.c      |  4 ++--
-+ io/cowextsize.c           |  6 +++---
-+ io/fadvise.c              |  2 +-
-+ io/fiemap.c               |  6 +++---
-+ io/fsmap.c                |  6 +++---
-+ io/io.h                   | 10 +++++-----
-+ io/madvise.c              |  2 +-
-+ io/mincore.c              |  2 +-
-+ io/mmap.c                 | 12 ++++++------
-+ io/pread.c                | 22 +++++++++++-----------
-+ io/pwrite.c               | 20 ++++++++++----------
-+ io/reflink.c              |  4 ++--
-+ io/seek.c                 |  6 +++---
-+ io/sendfile.c             |  6 +++---
-+ io/stat.c                 |  2 +-
-+ io/sync_file_range.c      |  2 +-
-+ io/truncate.c             |  2 +-
-+ libxfs/rdwr.c             |  8 ++++----
-+ mdrestore/xfs_mdrestore.c |  2 +-
-+ repair/prefetch.c         |  2 +-
-+ scrub/spacemap.c          |  6 +++---
-+ spaceman/freesp.c         |  4 ++--
-+ spaceman/trim.c           |  2 +-
-+ 26 files changed, 74 insertions(+), 74 deletions(-)
++ user/v9/drbdadm_parser.c | 35 ++++++++++++++++++++---------------
++ 1 file changed, 20 insertions(+), 15 deletions(-)
 +
-+diff --git a/copy/xfs_copy.c b/copy/xfs_copy.c
-+index 79f65946..854fd7f4 100644
-+--- a/copy/xfs_copy.c
-++++ b/copy/xfs_copy.c
-+@@ -888,7 +888,7 @@ main(int argc, char **argv)
-+ 			}
-+ 		} else  {
-+ 			char	*lb[XFS_MAX_SECTORSIZE] = { NULL };
-+-			off64_t	off;
-++			off_t	off;
++diff --git a/user/v9/drbdadm_parser.c b/user/v9/drbdadm_parser.c
++index b2f6ed8a..9a0a775d 100644
++--- a/user/v9/drbdadm_parser.c
+++++ b/user/v9/drbdadm_parser.c
++@@ -1947,14 +1947,29 @@ void include_stmt(char *str)
++ 	size_t i;
++ 	int r;
 + 
-+ 			/* ensure device files are sufficiently large */
-+ 
-+diff --git a/fsr/xfs_fsr.c b/fsr/xfs_fsr.c
-+index ba02506d..12fffbd8 100644
-+--- a/fsr/xfs_fsr.c
-++++ b/fsr/xfs_fsr.c
-+@@ -1148,7 +1148,7 @@ packfile(char *fname, char *tname, int fd,
-+ 	struct dioattr	dio;
-+ 	static xfs_swapext_t   sx;
-+ 	struct xfs_flock64  space;
-+-	off64_t 	cnt, pos;
-++	off_t 	cnt, pos;
-+ 	void 		*fbuf = NULL;
-+ 	int 		ct, wc, wc_b4;
-+ 	char		ffname[SMBUFSZ];
-+diff --git a/io/bmap.c b/io/bmap.c
-+index 27383ca6..0b14bb7b 100644
-+--- a/io/bmap.c
-++++ b/io/bmap.c
-+@@ -257,7 +257,7 @@ bmap_f(
-+ #define	FLG_BSW		0000010	/* Not on begin of stripe width */
-+ #define	FLG_ESW		0000001	/* Not on end   of stripe width */
-+ 		int	agno;
-+-		off64_t agoff, bbperag;
-++		off_t agoff, bbperag;
-+ 		int	foff_w, boff_w, aoff_w, tot_w, agno_w;
-+ 		char	rbuf[32], bbuf[32], abuf[32];
-+ 		int	sunit, swidth;
-+@@ -267,8 +267,8 @@ bmap_f(
-+ 		if (is_rt)
-+ 			sunit = swidth = bbperag = 0;
-+ 		else {
-+-			bbperag = (off64_t)fsgeo.agblocks *
-+-				  (off64_t)fsgeo.blocksize / BBSIZE;
-++			bbperag = (off_t)fsgeo.agblocks *
-++				  (off_t)fsgeo.blocksize / BBSIZE;
-+ 			sunit = (fsgeo.sunit * fsgeo.blocksize) / BBSIZE;
-+ 			swidth = (fsgeo.swidth * fsgeo.blocksize) / BBSIZE;
++-	cwd = pushd_to_current_config_file_unless_stdin();
++-
++-	/* """
+++	/*
+++	 * If the glob did not match any file,
+++	 * there is nothing to do, silently ignore.
+++	 * Unless it was no glob, but a literal,
+++	 * which we would expect to exist.
+++	 *
+++	 * """
++ 	 * As a GNU extension, pglob->gl_flags is set to the
++ 	 * flags specified, ored with GLOB_MAGCHAR if any
++ 	 * metacharacters were found.
++ 	 * """
+++	 *
+++	 * But apparently |GLOB_MAGCHAR does not happen for GLOB_NOMATCH returns,
+++	 * at least not consistently :-(
+++	 * Also, there exist non-GNU libc
+++	 * So we have this incomplete strchr heuristic anyways.
++ 	 */
+++	bool contains_glob_magic_char =
+++			strchr(str, '*') ||
+++			strchr(str, '?') ||
+++			strchr(str, '[');
+++
+++	cwd = pushd_to_current_config_file_unless_stdin();
++ 	r = glob(str, 0, NULL, &glob_buf);
++ 	if (r == 0) {
++ 		for (i=0; i<glob_buf.gl_pathc; i++) {
++@@ -1965,7 +1980,7 @@ void include_stmt(char *str)
++ 			if (f) {
++ 				include_file(f, strdup(glob_buf.gl_pathv[i]));
++ 				fclose(f);
++-			} else if (errno == ENOENT && glob_buf.gl_flags & GLOB_MAGCHAR) {
+++			} else if (errno == ENOENT && contains_glob_magic_char) {
++ 				/* Noisily ignore race between glob expansion
++ 				 * and actual open. */
++ 				err("%s:%d: include file vanished after glob expansion '%s'.\n",
++@@ -1979,17 +1994,7 @@ void include_stmt(char *str)
 + 		}
-+diff --git a/io/copy_file_range.c b/io/copy_file_range.c
-+index d154fa76..422e691a 100644
-+--- a/io/copy_file_range.c
-++++ b/io/copy_file_range.c
-+@@ -54,7 +54,7 @@ copy_file_range_cmd(int fd, long long *src_off, long long *dst_off, size_t len)
-+ 	return 0;
-+ }
-+ 
-+-static off64_t
-++static off_t
-+ copy_src_filesize(int fd)
-+ {
-+ 	struct stat st;
-+@@ -154,7 +154,7 @@ copy_range_f(int argc, char **argv)
-+ 	}
-+ 
-+ 	if (!len_specified) {
-+-		off64_t	sz;
-++		off_t	sz;
-+ 
-+ 		sz = copy_src_filesize(fd);
-+ 		if (sz < 0 || (unsigned long long)sz > SIZE_MAX) {
-+diff --git a/io/cowextsize.c b/io/cowextsize.c
-+index f6b134df..00e40c6f 100644
-+--- a/io/cowextsize.c
-++++ b/io/cowextsize.c
-+@@ -50,10 +50,10 @@ static int
-+ set_cowextsize(const char *path, int fd, long extsz)
-+ {
-+ 	struct fsxattr	fsx;
-+-	struct stat64	stat;
-++	struct stat	stat;
-+ 
-+-	if (fstat64(fd, &stat) < 0) {
-+-		perror("fstat64");
-++	if (fstat(fd, &stat) < 0) {
-++		perror("fstat");
-+ 		exitcode = 1;
-+ 		return 0;
-+ 	}
-+diff --git a/io/fadvise.c b/io/fadvise.c
-+index 60cc0f08..0966c41b 100644
-+--- a/io/fadvise.c
-++++ b/io/fadvise.c
-+@@ -39,7 +39,7 @@ fadvise_f(
-+ 	int		argc,
-+ 	char		**argv)
-+ {
-+-	off64_t		offset = 0, length = 0;
-++	off_t		offset = 0, length = 0;
-+ 	int		c, range = 0, advise = POSIX_FADV_NORMAL;
-+ 
-+ 	while ((c = getopt(argc, argv, "dnrsw")) != EOF) {
-+diff --git a/io/fiemap.c b/io/fiemap.c
-+index f0c74dfe..b41f71bf 100644
-+--- a/io/fiemap.c
-++++ b/io/fiemap.c
-+@@ -234,9 +234,9 @@ fiemap_f(
-+ 	int		tot_w = 5;	/* 5 since its just one number */
-+ 	int		flg_w = 5;
-+ 	__u64		last_logical = 0;	/* last extent offset handled */
-+-	off64_t		start_offset = 0;	/* mapping start */
-+-	off64_t		length = -1LL;		/* mapping length */
-+-	off64_t		range_end = -1LL;	/* mapping end*/
-++	off_t		start_offset = 0;	/* mapping start */
-++	off_t		length = -1LL;		/* mapping length */
-++	off_t		range_end = -1LL;	/* mapping end*/
-+ 	size_t		fsblocksize, fssectsize;
-+ 	struct stat	st;
-+ 
-+diff --git a/io/fsmap.c b/io/fsmap.c
-+index 9dd19cc0..dfdaa1b4 100644
-+--- a/io/fsmap.c
-++++ b/io/fsmap.c
-+@@ -170,7 +170,7 @@ dump_map_verbose(
-+ 	unsigned long long	i;
-+ 	struct fsmap		*p;
-+ 	int			agno;
-+-	off64_t			agoff, bperag;
-++	off_t			agoff, bperag;
-+ 	int			foff_w, boff_w, aoff_w, tot_w, agno_w, own_w;
-+ 	int			nr_w, dev_w;
-+ 	char			rbuf[40], bbuf[40], abuf[40], obuf[40];
-+@@ -183,8 +183,8 @@ dump_map_verbose(
-+ 	dev_w = 3;
-+ 	nr_w = 4;
-+ 	tot_w = MINTOT_WIDTH;
-+-	bperag = (off64_t)fsgeo->agblocks *
-+-		  (off64_t)fsgeo->blocksize;
-++	bperag = (off_t)fsgeo->agblocks *
-++		  (off_t)fsgeo->blocksize;
-+ 	sunit = (fsgeo->sunit * fsgeo->blocksize);
-+ 	swidth = (fsgeo->swidth * fsgeo->blocksize);
-+ 
-+diff --git a/io/io.h b/io/io.h
-+index 64b7a663..5f423016 100644
-+--- a/io/io.h
-++++ b/io/io.h
-+@@ -53,7 +53,7 @@ extern int stat_f(int argc, char **argv);
-+ typedef struct mmap_region {
-+ 	void		*addr;		/* address of start of mapping */
-+ 	size_t		length;		/* length of mapping */
-+-	off64_t		offset;		/* start offset into backing file */
-++	off_t		offset;		/* start offset into backing file */
-+ 	int		prot;		/* protection mode of the mapping */
-+ 	int		flags;		/* MAP_* flags passed to mmap() */
-+ 	char		*name;		/* name of backing file */
-+@@ -63,13 +63,13 @@ extern mmap_region_t	*maptable;	/* mmap'd region array */
-+ extern int		mapcount;	/* #entries in the mapping table */
-+ extern mmap_region_t	*mapping;	/* active mapping table entry */
-+ extern int maplist_f(void);
-+-extern void *check_mapping_range(mmap_region_t *, off64_t, size_t, int);
-++extern void *check_mapping_range(mmap_region_t *, off_t, size_t, int);
-+ 
-+ /*
-+  * Various xfs_io helper routines/globals
-+  */
-+ 
-+-extern off64_t		filesize(void);
-++extern off_t		filesize(void);
-+ extern int		openfile(char *, struct xfs_fsop_geom *, int, mode_t,
-+ 				 struct fs_path *);
-+ extern int		addfile(char *, int , struct xfs_fsop_geom *, int,
-+@@ -84,9 +84,9 @@ extern size_t		io_buffersize;
-+ extern int		vectors;
-+ extern struct iovec	*iov;
-+ extern int		alloc_buffer(size_t, int, unsigned int);
-+-extern int		read_buffer(int, off64_t, long long, long long *,
-++extern int		read_buffer(int, off_t, long long, long long *,
-+ 					int, int);
-+-extern void		dump_buffer(off64_t, ssize_t);
-++extern void		dump_buffer(off_t, ssize_t);
-+ 
-+ extern void		attr_init(void);
-+ extern void		bmap_init(void);
-+diff --git a/io/madvise.c b/io/madvise.c
-+index bde31539..6e9c5b12 100644
-+--- a/io/madvise.c
-++++ b/io/madvise.c
-+@@ -39,7 +39,7 @@ madvise_f(
-+ 	int		argc,
-+ 	char		**argv)
-+ {
-+-	off64_t		offset, llength;
-++	off_t		offset, llength;
-+ 	size_t		length;
-+ 	void		*start;
-+ 	int		advise = MADV_NORMAL, c;
-+diff --git a/io/mincore.c b/io/mincore.c
-+index 67f1d6c4..24147ac2 100644
-+--- a/io/mincore.c
-++++ b/io/mincore.c
-+@@ -17,7 +17,7 @@ mincore_f(
-+ 	int		argc,
-+ 	char		**argv)
-+ {
-+-	off64_t		offset, llength;
-++	off_t		offset, llength;
-+ 	size_t		length;
-+ 	size_t		blocksize, sectsize;
-+ 	void		*start;
-+diff --git a/io/mmap.c b/io/mmap.c
-+index 7114404b..128a2c06 100644
-+--- a/io/mmap.c
-++++ b/io/mmap.c
-+@@ -64,11 +64,11 @@ print_mapping(
-+ void *
-+ check_mapping_range(
-+ 	mmap_region_t	*map,
-+-	off64_t		offset,
-++	off_t		offset,
-+ 	size_t		length,
-+ 	int		pagealign)
-+ {
-+-	off64_t		relative;
-++	off_t		relative;
-+ 
-+ 	if (offset < mapping->offset) {
-+ 		printf(_("offset (%lld) is before start of mapping (%lld)\n"),
-+@@ -156,7 +156,7 @@ mmap_f(
-+ 	int		argc,
-+ 	char		**argv)
-+ {
-+-	off64_t		offset;
-++	off_t		offset;
-+ 	ssize_t		length = 0, length2 = 0;
-+ 	void		*address = NULL;
-+ 	char		*filename;
-+@@ -309,7 +309,7 @@ msync_f(
-+ 	int		argc,
-+ 	char		**argv)
-+ {
-+-	off64_t		offset;
-++	off_t		offset;
-+ 	ssize_t		length;
-+ 	void		*start;
-+ 	int		c, flags = 0;
-+@@ -402,7 +402,7 @@ mread_f(
-+ 	int		argc,
-+ 	char		**argv)
-+ {
-+-	off64_t		offset, tmp, dumpoffset, printoffset;
-++	off_t		offset, tmp, dumpoffset, printoffset;
-+ 	ssize_t		length;
-+ 	size_t		dumplen, cnt = 0;
-+ 	char		*bp;
-+@@ -567,7 +567,7 @@ mwrite_f(
-+ 	int		argc,
-+ 	char		**argv)
-+ {
-+-	off64_t		offset, tmp;
-++	off_t		offset, tmp;
-+ 	ssize_t		length;
-+ 	void		*start;
-+ 	char		*sp;
-+diff --git a/io/pread.c b/io/pread.c
-+index 458a78b8..89fab81d 100644
-+--- a/io/pread.c
-++++ b/io/pread.c
-+@@ -116,7 +116,7 @@ alloc_buffer(
-+ void
-+ __dump_buffer(
-+ 	void		*buf,
-+-	off64_t		offset,
-++	off_t		offset,
-+ 	ssize_t		len)
-+ {
-+ 	int		i, j;
-+@@ -141,7 +141,7 @@ __dump_buffer(
-+ 
-+ void
-+ dump_buffer(
-+-	off64_t		offset,
-++	off_t		offset,
-+ 	ssize_t		len)
-+ {
-+ 	int		i, l;
-+@@ -164,7 +164,7 @@ dump_buffer(
-+ static ssize_t
-+ do_preadv(
-+ 	int		fd,
-+-	off64_t		offset,
-++	off_t		offset,
-+ 	long long	count)
-+ {
-+ 	int		vecs = 0;
-+@@ -199,7 +199,7 @@ do_preadv(
-+ static ssize_t
-+ do_pread(
-+ 	int		fd,
-+-	off64_t		offset,
-++	off_t		offset,
-+ 	long long	count,
-+ 	size_t		buffer_size)
-+ {
-+@@ -212,13 +212,13 @@ do_pread(
-+ static int
-+ read_random(
-+ 	int		fd,
-+-	off64_t		offset,
-++	off_t		offset,
-+ 	long long	count,
-+ 	long long	*total,
-+ 	unsigned int	seed,
-+ 	int		eof)
-+ {
-+-	off64_t		end, off, range;
-++	off_t		end, off, range;
-+ 	ssize_t		bytes;
-+ 	int		ops = 0;
-+ 
-+@@ -259,12 +259,12 @@ read_random(
-+ static int
-+ read_backward(
-+ 	int		fd,
-+-	off64_t		*offset,
-++	off_t		*offset,
-+ 	long long	*count,
-+ 	long long	*total,
-+ 	int		eof)
-+ {
-+-	off64_t		end, off = *offset;
-++	off_t		end, off = *offset;
-+ 	ssize_t		bytes = 0, bytes_requested;
-+ 	long long	cnt = *count;
-+ 	int		ops = 0;
-+@@ -319,7 +319,7 @@ read_backward(
-+ static int
-+ read_forward(
-+ 	int		fd,
-+-	off64_t		offset,
-++	off_t		offset,
-+ 	long long	count,
-+ 	long long	*total,
-+ 	int		verbose,
-+@@ -353,7 +353,7 @@ read_forward(
-+ int
-+ read_buffer(
-+ 	int		fd,
-+-	off64_t		offset,
-++	off_t		offset,
-+ 	long long	count,
-+ 	long long	*total,
-+ 	int		verbose,
-+@@ -368,7 +368,7 @@ pread_f(
-+ 	char		**argv)
-+ {
-+ 	size_t		bsize;
-+-	off64_t		offset;
-++	off_t		offset;
-+ 	unsigned int	zeed = 0;
-+ 	long long	count, total, tmp;
-+ 	size_t		fsblocksize, fssectsize;
-+diff --git a/io/pwrite.c b/io/pwrite.c
-+index 467bfa9f..8d134c56 100644
-+--- a/io/pwrite.c
-++++ b/io/pwrite.c
-+@@ -54,7 +54,7 @@ pwrite_help(void)
-+ static ssize_t
-+ do_pwritev(
-+ 	int		fd,
-+-	off64_t		offset,
-++	off_t		offset,
-+ 	long long	count,
-+ 	int		pwritev2_flags)
-+ {
-+@@ -97,7 +97,7 @@ do_pwritev(
-+ static ssize_t
-+ do_pwrite(
-+ 	int		fd,
-+-	off64_t		offset,
-++	off_t		offset,
-+ 	long long	count,
-+ 	size_t		buffer_size,
-+ 	int		pwritev2_flags)
-+@@ -110,13 +110,13 @@ do_pwrite(
-+ 
-+ static int
-+ write_random(
-+-	off64_t		offset,
-++	off_t		offset,
-+ 	long long	count,
-+ 	unsigned int	seed,
-+ 	long long	*total,
-+ 	int 		pwritev2_flags)
-+ {
-+-	off64_t		off, range;
-++	off_t		off, range;
-+ 	ssize_t		bytes;
-+ 	int		ops = 0;
-+ 
-+@@ -155,12 +155,12 @@ write_random(
-+ 
-+ static int
-+ write_backward(
-+-	off64_t		offset,
-++	off_t		offset,
-+ 	long long	*count,
-+ 	long long	*total,
-+ 	int		pwritev2_flags)
-+ {
-+-	off64_t		end, off = offset;
-++	off_t		end, off = offset;
-+ 	ssize_t		bytes = 0, bytes_requested;
-+ 	long long	cnt = *count;
-+ 	int		ops = 0;
-+@@ -214,11 +214,11 @@ write_backward(
-+ 
-+ static int
-+ write_buffer(
-+-	off64_t		offset,
-++	off_t		offset,
-+ 	long long	count,
-+ 	size_t		bs,
-+ 	int		fd,
-+-	off64_t		skip,
-++	off_t		skip,
-+ 	long long	*total,
-+ 	int		pwritev2_flags)
-+ {
-+@@ -253,7 +253,7 @@ write_buffer(
-+ 
-+ static int
-+ write_once(
-+-	off64_t		offset,
-++	off_t		offset,
-+ 	long long	count,
-+ 	long long	*total,
-+ 	int		pwritev2_flags)
-+@@ -275,7 +275,7 @@ pwrite_f(
-+ 	char		**argv)
-+ {
-+ 	size_t		bsize;
-+-	off64_t		offset, skip = 0;
-++	off_t		offset, skip = 0;
-+ 	long long	count, total, tmp;
-+ 	unsigned int	zeed = 0, seed = 0xcdcdcdcd;
-+ 	size_t		fsblocksize, fssectsize;
-+diff --git a/io/reflink.c b/io/reflink.c
-+index 8e4f3899..b6a3c05a 100644
-+--- a/io/reflink.c
-++++ b/io/reflink.c
-+@@ -98,7 +98,7 @@ dedupe_f(
-+ 	int		argc,
-+ 	char		**argv)
-+ {
-+-	off64_t		soffset, doffset;
-++	off_t		soffset, doffset;
-+ 	long long	count, total;
-+ 	char		*infile;
-+ 	int		condensed, quiet_flag;
-+@@ -226,7 +226,7 @@ reflink_f(
-+ 	int		argc,
-+ 	char		**argv)
-+ {
-+-	off64_t		soffset, doffset;
-++	off_t		soffset, doffset;
-+ 	long long	count = 0, total;
-+ 	char		*infile = NULL;
-+ 	int		condensed, quiet_flag;
-+diff --git a/io/seek.c b/io/seek.c
-+index 6734ecb5..ffe7439c 100644
-+--- a/io/seek.c
-++++ b/io/seek.c
-+@@ -63,8 +63,8 @@ static void
-+ seek_output(
-+ 	int	startflag,
-+ 	char	*type,
-+-	off64_t	start,
-+-	off64_t	offset)
-++	off_t	start,
-++	off_t	offset)
-+ {
-+ 	if (offset == -1) {
-+ 		if (errno == ENXIO) {
-+@@ -92,7 +92,7 @@ seek_f(
-+ 	int	argc,
-+ 	char	**argv)
-+ {
-+-	off64_t		offset, start;
-++	off_t		offset, start;
-+ 	size_t		fsblocksize, fssectsize;
-+ 	int		c;
-+ 	int		current;	/* specify data or hole */
-+diff --git a/io/sendfile.c b/io/sendfile.c
-+index a003bb55..2ce569c2 100644
-+--- a/io/sendfile.c
-++++ b/io/sendfile.c
-+@@ -34,12 +34,12 @@ sendfile_help(void)
-+ 
-+ static int
-+ send_buffer(
-+-	off64_t		offset,
-++	off_t		offset,
-+ 	size_t		count,
-+ 	int		fd,
-+ 	long long	*total)
-+ {
-+-	off64_t		off = offset;
-++	off_t		off = offset;
-+ 	ssize_t		bytes, bytes_remaining = count;
-+ 	int		ops = 0;
-+ 
-+@@ -66,7 +66,7 @@ sendfile_f(
-+ 	int		argc,
-+ 	char		**argv)
-+ {
-+-	off64_t		offset = 0;
-++	off_t		offset = 0;
-+ 	long long	count, total;
-+ 	size_t		blocksize, sectsize;
-+ 	struct timeval	t1, t2;
-+diff --git a/io/stat.c b/io/stat.c
-+index b57f9eef..e8f68dc3 100644
-+--- a/io/stat.c
-++++ b/io/stat.c
-+@@ -21,7 +21,7 @@ static cmdinfo_t stat_cmd;
-+ static cmdinfo_t statfs_cmd;
-+ static cmdinfo_t statx_cmd;
-+ 
-+-off64_t
-++off_t
-+ filesize(void)
-+ {
-+ 	struct stat	st;
-+diff --git a/io/sync_file_range.c b/io/sync_file_range.c
-+index 94285c22..2375a060 100644
-+--- a/io/sync_file_range.c
-++++ b/io/sync_file_range.c
-+@@ -30,7 +30,7 @@ sync_range_f(
-+ 	int		argc,
-+ 	char		**argv)
-+ {
-+-	off64_t		offset = 0, length = 0;
-++	off_t		offset = 0, length = 0;
-+ 	int		c, sync_mode = 0;
-+ 	size_t		blocksize, sectsize;
-+ 
-+diff --git a/io/truncate.c b/io/truncate.c
-+index 1d049194..a74b6131 100644
-+--- a/io/truncate.c
-++++ b/io/truncate.c
-+@@ -16,7 +16,7 @@ truncate_f(
-+ 	int		argc,
-+ 	char		**argv)
-+ {
-+-	off64_t		offset;
-++	off_t		offset;
-+ 	size_t		blocksize, sectsize;
-+ 
-+ 	init_cvtnum(&blocksize, &sectsize);
-+diff --git a/libxfs/rdwr.c b/libxfs/rdwr.c
-+index 20e0793c..0e67b7b0 100644
-+--- a/libxfs/rdwr.c
-++++ b/libxfs/rdwr.c
-+@@ -568,7 +568,7 @@ libxfs_balloc(
-+ 
-+ 
-+ static int
-+-__read_buf(int fd, void *buf, int len, off64_t offset, int flags)
-++__read_buf(int fd, void *buf, int len, off_t offset, int flags)
-+ {
-+ 	int	sts;
-+ 
-+@@ -631,7 +631,7 @@ libxfs_readbufr_map(struct xfs_buftarg *btp, struct xfs_buf *bp, int flags)
-+ 	fd = libxfs_device_to_fd(btp->bt_bdev);
-+ 	buf = bp->b_addr;
-+ 	for (i = 0; i < bp->b_nmaps; i++) {
-+-		off64_t	offset = LIBXFS_BBTOOFF64(bp->b_maps[i].bm_bn);
-++		off_t	offset = LIBXFS_BBTOOFF64(bp->b_maps[i].bm_bn);
-+ 		int len = BBTOB(bp->b_maps[i].bm_len);
-+ 
-+ 		error = __read_buf(fd, buf, len, offset, flags);
-+@@ -790,7 +790,7 @@ err:
-+ }
-+ 
-+ static int
-+-__write_buf(int fd, void *buf, int len, off64_t offset, int flags)
-++__write_buf(int fd, void *buf, int len, off_t offset, int flags)
-+ {
-+ 	int	sts;
-+ 
-+@@ -856,7 +856,7 @@ libxfs_bwrite(
-+ 		void	*buf = bp->b_addr;
-+ 
-+ 		for (i = 0; i < bp->b_nmaps; i++) {
-+-			off64_t	offset = LIBXFS_BBTOOFF64(bp->b_maps[i].bm_bn);
-++			off_t	offset = LIBXFS_BBTOOFF64(bp->b_maps[i].bm_bn);
-+ 			int len = BBTOB(bp->b_maps[i].bm_len);
-+ 
-+ 			bp->b_error = __write_buf(fd, buf, len, offset,
-+diff --git a/mdrestore/xfs_mdrestore.c b/mdrestore/xfs_mdrestore.c
-+index 7c1a66c4..bb54e382 100644
-+--- a/mdrestore/xfs_mdrestore.c
-++++ b/mdrestore/xfs_mdrestore.c
-+@@ -116,7 +116,7 @@ perform_restore(
-+ 		/* ensure device is sufficiently large enough */
-+ 
-+ 		char		*lb[XFS_MAX_SECTORSIZE] = { NULL };
-+-		off64_t		off;
-++		off_t		off;
-+ 
-+ 		off = sb.sb_dblocks * sb.sb_blocksize - sizeof(lb);
-+ 		if (pwrite(dst_fd, lb, sizeof(lb), off) < 0)
-+diff --git a/repair/prefetch.c b/repair/prefetch.c
-+index 017750e9..35b50134 100644
-+--- a/repair/prefetch.c
-++++ b/repair/prefetch.c
-+@@ -475,7 +475,7 @@ pf_batch_read(
-+ {
-+ 	struct xfs_buf		*bplist[MAX_BUFS];
-+ 	unsigned int		num;
-+-	off64_t			first_off, last_off, next_off;
-++	off_t			first_off, last_off, next_off;
-+ 	int			len, size;
-+ 	int			i;
-+ 	int			inode_bufs;
-+diff --git a/scrub/spacemap.c b/scrub/spacemap.c
-+index 03440d3a..00bee179 100644
-+--- a/scrub/spacemap.c
-++++ b/scrub/spacemap.c
-+@@ -97,11 +97,11 @@ scan_ag_rmaps(
-+ 	struct scrub_ctx	*ctx = (struct scrub_ctx *)wq->wq_ctx;
-+ 	struct scan_blocks	*sbx = arg;
-+ 	struct fsmap		keys[2];
-+-	off64_t			bperag;
-++	off_t			bperag;
-+ 	int			ret;
-+ 
-+-	bperag = (off64_t)ctx->mnt.fsgeom.agblocks *
-+-		 (off64_t)ctx->mnt.fsgeom.blocksize;
-++	bperag = (off_t)ctx->mnt.fsgeom.agblocks *
-++		 (off_t)ctx->mnt.fsgeom.blocksize;
-+ 
-+ 	memset(keys, 0, sizeof(struct fsmap) * 2);
-+ 	keys->fmr_device = ctx->fsinfo.fs_datadev;
-+diff --git a/spaceman/freesp.c b/spaceman/freesp.c
-+index 423568a4..df878ce8 100644
-+--- a/spaceman/freesp.c
-++++ b/spaceman/freesp.c
-+@@ -62,7 +62,7 @@ static void
-+ addtohist(
-+ 	xfs_agnumber_t	agno,
-+ 	xfs_agblock_t	agbno,
-+-	off64_t		len)
-++	off_t		len)
-+ {
-+ 	long		i;
-+ 
-+@@ -152,7 +152,7 @@ scan_ag(
-+ 	struct fsmap		*l, *h;
-+ 	struct fsmap		*p;
-+ 	struct xfs_fd		*xfd = &file->xfd;
-+-	off64_t			aglen;
-++	off_t			aglen;
-+ 	xfs_agblock_t		agbno;
-+ 	unsigned long long	freeblks = 0;
-+ 	unsigned long long	freeexts = 0;
-+diff --git a/spaceman/trim.c b/spaceman/trim.c
-+index e9ed47e4..727dd818 100644
-+--- a/spaceman/trim.c
-++++ b/spaceman/trim.c
-+@@ -26,7 +26,7 @@ trim_f(
-+ 	struct xfs_fd		*xfd = &file->xfd;
-+ 	struct xfs_fsop_geom	*fsgeom = &xfd->fsgeom;
-+ 	xfs_agnumber_t		agno = 0;
-+-	off64_t			offset = 0;
-++	off_t			offset = 0;
-+ 	ssize_t			length = 0;
-+ 	ssize_t			minlen = 0;
-+ 	int			aflag = 0;
-diff --git a/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_5.13.0.bb b/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_6.0.0.bb
-similarity index 89%
-rename from meta-filesystems/recipes-utils/xfsprogs/xfsprogs_5.13.0.bb
-rename to meta-filesystems/recipes-utils/xfsprogs/xfsprogs_6.0.0.bb
-index fae7a93a1f..bb8c55d9d5 100644
---- a/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_5.13.0.bb
-+++ b/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_6.0.0.bb
-@@ -8,16 +8,17 @@ LIC_FILES_CHKSUM = "file://LICENSES/GPL-2.0;md5=e6a75371ba4d16749254a51215d13f97
- DEPENDS = "util-linux util-linux-native"
- SRC_URI = "https://www.kernel.org/pub/linux/utils/fs/xfs/xfsprogs/${BP}.tar.xz \
-            file://remove_flags_from_build_flags.patch \
--           file://0001-Check-for-MAP_SYNC-in-sys-mman.h.patch \
-            file://0002-include-include-xfs-linux.h-after-sys-mman.h.patch \
-            file://0001-support-usrmerge.patch \
-+           file://0004-configure-Use-AC_SYS_LARGERFILE-autoconf-macro.patch \
-+           file://0005-Replace-off64_t-stat64-with-off_t-stat.patch \
++ 		globfree(&glob_buf);
++ 	} else if (r == GLOB_NOMATCH) {
++-		/*
++-		 * If the glob did not match any file,
++-		 * there is nothing to do, silently ignore.
++-		 * Unless it was no glob, but a literal,
++-		 * which we would expect to exist.
++-		 * Apparently |GLOB_MAGCHAR does not happen for GLOB_NOMATCH returns,
++-		 * at least not consistently :-(
++-		 * So we have this strchr heuristic anyways.
++-		 */
++-		/* if (!(glob_buf.gl_flags & GLOB_MAGCHAR)) { */
++-		if (!strchr(str, '?') && !strchr(str, '*') && !strchr(str, '[')) {
+++		if (!contains_glob_magic_char) {
++ 			err("%s:%d: Failed to open include file '%s'.\n",
++ 			    config_save, line, str);
++ 			config_valid = 0;
++-- 
++2.39.0
++
+diff --git a/meta-networking/recipes-support/drbd/drbd-utils_9.20.2.bb b/meta-networking/recipes-support/drbd/drbd-utils_9.22.0.bb
+similarity index 90%
+rename from meta-networking/recipes-support/drbd/drbd-utils_9.20.2.bb
+rename to meta-networking/recipes-support/drbd/drbd-utils_9.22.0.bb
+index deaab641e2..89bf529165 100644
+--- a/meta-networking/recipes-support/drbd/drbd-utils_9.20.2.bb
++++ b/meta-networking/recipes-support/drbd/drbd-utils_9.22.0.bb
+@@ -8,14 +8,15 @@ SECTION = "admin"
+ LICENSE = "GPL-2.0-or-later"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=5574c6965ae5f583e55880e397fbb018"
+ 
+-SRC_URI = "git://github.com/LINBIT/drbd-utils;name=drbd-utils;branch=${PV};protocol=https \
++SRC_URI = "git://github.com/LINBIT/drbd-utils;name=drbd-utils;branch=master;protocol=https \
+            git://github.com/LINBIT/drbd-headers;name=drbd-headers;destsuffix=git/drbd-headers;branch=master;protocol=https \
+            file://0001-drbdmon-add-LDFLAGS-when-linking.patch \
++           file://0001-replace-off64_t-with-off_t.patch \
+            ${@bb.utils.contains('DISTRO_FEATURES','usrmerge','file://0001-drbd-utils-support-usrmerge.patch','',d)} \
             "
--SRC_URI[sha256sum] = "4e142d4babe086adf9016d8c606c805829da08e46389a4433f40346204f90cdb"
-+SRC_URI[sha256sum] = "b77cec2364aab0b8ae8d8c67daac7fdb3801e0979f1d8328d9c3469e57ca9ca0"
- inherit autotools-brokensep pkgconfig
+-
+-SRCREV_drbd-utils = "087ee6b4961ca154d76e4211223b03149373bed8"
+-SRCREV_drbd-headers = "f1529aa84e9d2f66c96ad283a1bbb708aabf03f7"
++SRC_URI:append:libc-musl = " file://0002-drbdadm-drop-use-of-GLOB_MAGCHAR-use-strchr-heuristi.patch "
++SRCREV_drbd-utils = "409097fe02187f83790b88ac3e0d94f3c167adab"
++SRCREV_drbd-headers = "9a0f151fa0085f57910a2dcbbd658d6069554f62"
  
- PACKAGES =+ "${PN}-fsck ${PN}-mkfs ${PN}-repair libhandle"
+ SRCREV_FORMAT = "drbd-utils_drbd-headers"
  
--DEPENDS += "util-linux libinih"
-+DEPENDS += "util-linux libinih liburcu"
+diff --git a/meta-networking/recipes-support/drbd/drbd_9.0.24-1.bb b/meta-networking/recipes-support/drbd/drbd_9.2.1.bb
+similarity index 82%
+rename from meta-networking/recipes-support/drbd/drbd_9.0.24-1.bb
+rename to meta-networking/recipes-support/drbd/drbd_9.2.1.bb
+index 0766f7f4bd..48ce2abf09 100644
+--- a/meta-networking/recipes-support/drbd/drbd_9.0.24-1.bb
++++ b/meta-networking/recipes-support/drbd/drbd_9.2.1.bb
+@@ -8,10 +8,10 @@ LICENSE = "GPL-2.0-only"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=5574c6965ae5f583e55880e397fbb018"
+ DEPENDS = "virtual/kernel"
  
- RDEPENDS:${PN} = "${PN}-fsck ${PN}-mkfs ${PN}-repair"
+-SRC_URI = "http://www.linbit.com/downloads/drbd/9.0/drbd-${PV}.tar.gz \
++SRC_URI = "https://pkg.linbit.com//downloads/drbd/9/${BP}.tar.gz \
+            file://check_existence_of_modules_before_installing.patch \
+            "
+-SRC_URI[sha256sum] = "14970459f55bc465503b88b24d1a266b2ace0d69fe3cb387005b8477cd6475ed"
++SRC_URI[sha256sum] = "f59ee795188f21d4a62c5319c371ebad65ab3fb9b55e5212c3f1dd558978a843"
+ 
+ inherit module
  
 -- 
 2.39.0
