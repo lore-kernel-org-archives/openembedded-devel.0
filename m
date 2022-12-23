@@ -1,127 +1,149 @@
-Return-Path: <richard.leitner@skidata.com>
+Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AB8ABC4332F
-	for <webhook@archiver.kernel.org>; Thu, 22 Dec 2022 10:50:30 +0000 (UTC)
-Received: from CHE01-GV0-obe.outbound.protection.outlook.com (CHE01-GV0-obe.outbound.protection.outlook.com [40.107.23.106])
- by mx.groups.io with SMTP id smtpd.web10.42828.1671706224399779392
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B867DC4332F
+	for <webhook@archiver.kernel.org>; Fri, 23 Dec 2022 03:11:35 +0000 (UTC)
+Received: from mailout06.t-online.de (mailout06.t-online.de [194.25.134.19])
+ by mx.groups.io with SMTP id smtpd.web11.64369.1671765088555903795
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 22 Dec 2022 02:50:25 -0800
+ Thu, 22 Dec 2022 19:11:28 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@skidata.com header.s=selector1 header.b=pfwgCzh1;
- spf=pass (domain: skidata.com, ip: 40.107.23.106, mailfrom: richard.leitner@skidata.com)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=Et9gHeZKlKMRquZgTe5cNg9gYe40hoaccEXzg63uK6P6WEBoLeGiNzFBiVxcqdO0Bv+N8puzTJ5IFIbRRCwoKvm7QEP4lx7WzCCLsKboFmZcVhZwC0LRLfB+DpZVPHZEAQwsrlPtkNMW34GehMrpFxOPTNxQ/NCL3u1Sw7Z3Uf/QGi9oMNKCyonAi+mlwXUy5xwP8Z0lP7jwYhlbNyiYqykuo5l2CNh/cIL+vvfiG9iTmyBJ4Bm/Oc2wyKBaH14Xejn7m/FTztcjiYAqivKZKeb1cMPw3JvfzT2hsY/d1T2jCAaDhEo7POZcd/dhJzsacF+DfMuMZjZ3P9aQONXIFg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=5/FoovgFFdxV00OZac3byUKvCba5XtSqdDKPvy89pz0=;
- b=Df3Plmf5ZZmwo330BlIGNzWi0PuSR4iSt4uLL1+pZ8HxqT3/O0IdhxKW5beBrCX3YMIkSgu41wWRM6Xbd12ty3JQTeq50AKr82d+P8Gp0Q9CthkXmRj39i5RsEHmTBMZrQBTz7dtIUqWFDEf4mQhPo32dNNOdb2suH9zhShNCTe9EZVjFlHMr11uG+//1NSlhX5wr7ku45IKjYu7AO3gVgQ2fJIP3i/hSHclIsjvxqTGVJaF426X3nhGzm6la4QZPx/1KfWG2J6Tw2VUQYGsZTkXibUlYXJfKkKL2TPYq4lTuaXzaku0JIsDdWEZe2KOVAhgGBVEBqAsyTS5BoMj7Q==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=skidata.com; dmarc=pass action=none header.from=skidata.com;
- dkim=pass header.d=skidata.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=skidata.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=5/FoovgFFdxV00OZac3byUKvCba5XtSqdDKPvy89pz0=;
- b=pfwgCzh1UDdB45XW3pRSQqQB/XlE2ZmPJPJUGlFF9ycARCBQ3ohPE9xBDyMyJhvNXjuZj4drG36sA8vp1YWuTQnwF0Z8BcVR1jMbfcpFeOlO6zKOhK4aAccFjLRxuukAJ/pPAT+ATDgu0DO+qkr1QuHqCfxGjxAbCXkKxNnW1BPgM9VEw5C/CIUlgivi1sKoAaM+i+66481O+nMulYVYCjS7P0qEsTujSmuyBYG3hHOBT4Q4ReX7gv0mpxnP1W+0N32Zok52D1Szy+Kbs71X2NUw8PE1EGR5XkZzw9KBGz9FhEtB9mGyJC1T6jyioqZoLTde+35WcVeVKla8FWMOyQ==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=skidata.com;
-Received: from GV0P278MB0211.CHEP278.PROD.OUTLOOK.COM (2603:10a6:710:30::7) by
- ZR0P278MB0870.CHEP278.PROD.OUTLOOK.COM (2603:10a6:910:4d::11) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.5924.16; Thu, 22 Dec 2022 10:50:21 +0000
-Received: from GV0P278MB0211.CHEP278.PROD.OUTLOOK.COM
- ([fe80::d5f4:92f8:c46f:ac68]) by GV0P278MB0211.CHEP278.PROD.OUTLOOK.COM
- ([fe80::d5f4:92f8:c46f:ac68%4]) with mapi id 15.20.5924.016; Thu, 22 Dec 2022
- 10:50:21 +0000
-Date: Thu, 22 Dec 2022 11:50:15 +0100
-From: Richard Leitner <richard.leitner@skidata.com>
-To: hadkeakash4@gmail.com
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [oe] [meta-java][dunfell][PATCH] openjdk: Fix CVE-2022-34169 for
- openjdk
-Message-ID: <Y6Q2ZzdPffSXeEqP@skidata.com>
-References: <20220828150648.6850-1-virendra.thakur@kpit.com>
- <28414.1671703673943644882@lists.openembedded.org>
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <28414.1671703673943644882@lists.openembedded.org>
-X-ClientProxiedBy: FR3P281CA0065.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:4b::20) To GV0P278MB0211.CHEP278.PROD.OUTLOOK.COM
- (2603:10a6:710:30::7)
+ dkim=missing; spf=none, err=SPF record not found (domain: t-online.de, ip: 194.25.134.19, mailfrom: f_l_k@t-online.de)
+Received: from fwd89.dcpf.telekom.de (fwd89.aul.t-online.de [10.223.144.115])
+	by mailout06.t-online.de (Postfix) with SMTP id 55E7941BE
+	for <openembedded-devel@lists.openembedded.org>; Fri, 23 Dec 2022 04:11:26 +0100 (CET)
+Received: from flk-MS-7C91.fritz.box ([84.163.43.10]) by fwd89.t-online.de
+	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
+	esmtp id 1p8YSq-4MWH3a0; Fri, 23 Dec 2022 04:11:16 +0100
+From: Markus Volk <f_l_k@t-online.de>
+To: openembedded-devel@lists.openembedded.org
+Cc: Markus Volk <f_l_k@t-online.de>
+Subject: [meta-oe][PATCHv2 2/3] appstream: add recipe
+Date: Fri, 23 Dec 2022 04:11:03 +0100
+Message-Id: <20221223031104.13517-2-f_l_k@t-online.de>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20221223031104.13517-1-f_l_k@t-online.de>
+References: <20221223031104.13517-1-f_l_k@t-online.de>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: GV0P278MB0211:EE_|ZR0P278MB0870:EE_
-X-MS-Office365-Filtering-Correlation-Id: 960c45e0-986e-4f69-a43e-08dae40a5271
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 
-	MrPvx8azVbgz8+QoQbgdFYjnk4Flw57NBP1jHTkSN0z51wGRHFiS2dYxLmDXMOPL00po+LgFXrV+n18UotcM38GS6NcHA9WM+07Hbf6u0RZgK8mtSXUPAmmsKEz8SFuCVfSvk4xe2dGj4RuRxwVqoYCzYHmhF7rannaI8E6kdLEXtJcnYSwF2Ijn5pnfnGTYH6F5w3TJXzeQJQe7QFrl9958NhQDFaXC84I8qqnwLWVUHSIupx1BLYoyCZy2zi5cMkfy2ztr6HVHQLoOCV6jB2afvUdXNzaD7i0JGjY8v+ZZo1pKiXK/GXheGSNDbRax0euFD2RNIDkjd+RJ6pF/shmgkg4KJseOpdPZeGxMdiRZ5T0+/VTa67aYGeJmPLcPfW9Wi+4IFoLBYMKUoGp4fiH4fsWF4sH/dPE9viF/DIgMrYbR6tKRPKc3qR0Pnpl7FCf+EwxlkMsF+J4FkmqdVXi29QITP/kiPXNagMZjayW90tg4/p+Orv3RaiaeQ4ttkawItR9vD4vZdm7vUY1wvuYUVNtYa3QTg63hYqLsIyJylKe1aYEk8WKFRVf9jJKLWlVOkzAOcPun9Lig2JvAPton4NU5vA3o+7TsWJYbjLgruVrKbqfvleDLkywxdgKYox0b47jOqvddFP10Znqoyg==
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:GV0P278MB0211.CHEP278.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230022)(4636009)(366004)(396003)(346002)(376002)(39850400004)(136003)(451199015)(2616005)(86362001)(2906002)(38100700002)(6666004)(186003)(6512007)(6506007)(36756003)(478600001)(6486002)(8936002)(316002)(6916009)(8676002)(66946007)(4326008)(41300700001)(66476007)(44832011)(66556008)(5660300002)(4744005)(83380400001);DIR:OUT;SFP:1102;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?us-ascii?Q?5IgSC6UlDpd30xmEhNxvJ8MYGiqYVQ532j+tdFo6ykXRG0Jg8QwdIWU51Z+B?=
- =?us-ascii?Q?wZVon3Hx5Jd9OL2T1Y7nLIrMHQAxpuSeZKed9tTDDE5yZnzXGMwiMfIk+V2N?=
- =?us-ascii?Q?L98LcTAxY4Bb/XfuJZF2UBNZKooB+5jeOs4EY11j8ahYxatjW+s+pU/SCWSQ?=
- =?us-ascii?Q?z0udC6qZsHA7xrDEK6Hl6J0H9z1HdTgR+dxjUtJxphp61v1vo77WzDKc4OHm?=
- =?us-ascii?Q?jjuWfULwMyhIIl/TZawU1RB5AawA9Q0GQJjXqxE5GYzty5woqcOL+J1a/3CX?=
- =?us-ascii?Q?Ndxb91E/6XulNMxu1uiGDNX9zDEXcpq6tWPhwFHKceNBGeeKl1f/+Z85sK4/?=
- =?us-ascii?Q?doXeqylD8R/PMxZadwCCkBgwZKUXGzUbaPCNj26hzgFzdDZP1TUYKLwuU1Hh?=
- =?us-ascii?Q?ygKad4epP9o7r+N1Q5dQv8rRF3S87VZEI6dsvNJe/eaZbDirLKDKoSn44iV2?=
- =?us-ascii?Q?CHH6J5DeihpZyWXSbqBP7V5PqpDXw1Gqt1EB9+Ejql4CuwRTavjS5ainsBn+?=
- =?us-ascii?Q?H80jbfMFK7otXEcI5Ov9vqRbC9CtuDSdFRb2W5lmuKkOlBnECW+9wNH2YMoS?=
- =?us-ascii?Q?PUMKNVIarlqSZXGmylqizbyVQvMP1WnDrU5K/3sc1p810Hn58JXf6RbK0SDB?=
- =?us-ascii?Q?EjZs+7aYlgFbJtz6+Y1Gg0WCSluSkAQzZQAtuKVcAwnqRAazR9sBaBBdDURt?=
- =?us-ascii?Q?F6mUN0bXaRJV/3RX3kcyRmGkRKfO3dqqRR39TypHpwceYoxbt2y5ufR1I+Xm?=
- =?us-ascii?Q?3saoP23myYZ4cfEIcrakvCnc8Qb2iIddBa9C5hmuJ3kvOvVVfehJ/uFpviBK?=
- =?us-ascii?Q?LIvcInWgohywUO+qbAVuxsfbg4ZxLCjFS3c348H9N7ZF1RfOVNuVlSDdovFD?=
- =?us-ascii?Q?x3GwwTAL9rRUsUc97mgeYOk1RE3ee7w6hcqhVJxMfYA0VmJ8EJBCPBtNibO+?=
- =?us-ascii?Q?e7t3AfOpmW5RW6oivVrfUQljQNv3CpoUtPSuS1dlzDw7F8mE4rOTpoabj5xH?=
- =?us-ascii?Q?zh9V8Sr+L7OUi61n92fLOtkoz55kB6jCsRWCjdxGPSdW/VUZYL2Oy7lnUfWc?=
- =?us-ascii?Q?ICd05FsFMEXEEApLMSwP5NX74FrJKdlZccJ6Ov88O6s53Q6t9UFuz6661VQT?=
- =?us-ascii?Q?o3tMWDVVU0IBGmB1uo6UzdfSHiZT4+UGuC8g48maF9iAH/oFzc+YBc30yNYG?=
- =?us-ascii?Q?mZ2AMFGztec4ozkiusOVR/sIdXbPZ9NFmU8cSCiysNsZIDGGy8/EedfySBzz?=
- =?us-ascii?Q?2PDmjn3/Ih0vhvYpO/ivuxygmyivNA0Qq2DytLm8EKuvTsAxQgRPgAnMrOBw?=
- =?us-ascii?Q?14Zk5FbBbekMxqebse1aLZrKbtdhe2mlMd+iz4czwVJ/bNUIl4MOKVwjOxT1?=
- =?us-ascii?Q?1mldjzBCJUIM6PilXSa3tGRX1IukAC8/1jOqGQq6QAdyHrdmz7wCyi45oWOi?=
- =?us-ascii?Q?QP6xtbTSIv5phbTnzP3sO+RWDwlLAqDzibykqO+/gmK/Ix9O+kSBA61RatBo?=
- =?us-ascii?Q?eKULEde72kbA3BmH9WcaQgxoL54j01E8XbLkUtGnjsBe/l4iP1ZlfyW7ZZsA?=
- =?us-ascii?Q?ruY59bVnZ1puggrVWy7cyAQroMkDZ25D9YDd5yngspI8DBKhkJiEtt8s/8oF?=
- =?us-ascii?Q?6LUHWznGpOYeR/uXnDddpCod/md5i2dP2vrt4YK/CBHyB9j0rmqnWxvV3QRc?=
- =?us-ascii?Q?/SqBuw=3D=3D?=
-X-OriginatorOrg: skidata.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 960c45e0-986e-4f69-a43e-08dae40a5271
-X-MS-Exchange-CrossTenant-AuthSource: GV0P278MB0211.CHEP278.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Dec 2022 10:50:21.1424
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: e5733095-4425-4f08-b6ba-487b9a46a425
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: gV6x9ohjii4zD9pwtgTRy5NZ3eGxWd5rihFh/q1PYpoetUzxkPhmW6HuBUFb+Oce8AGLQZJCRBPrX66ndMNsWiIbBn/BYDwvCO5NAuLFIMY=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: ZR0P278MB0870
+X-TOI-EXPURGATEID: 150726::1671765076-FAC5D742-63680497/0/0 CLEAN NORMAL
+X-TOI-MSGID: 90a2fc7e-657b-45c1-b81c-935a94ee81a9
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 22 Dec 2022 10:50:30 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100193
+ <openembedded-devel@lists.openembedded.org>; Fri, 23 Dec 2022 03:11:35 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100194
 
-Hi,
-thanks for the reminder!
+Signed-off-by: Markus Volk <f_l_k@t-online.de>
+---
+ .../appstream/0001-fix-crosscompile.patch     | 43 +++++++++++++++++++
+ .../appstream/appstream_0.15.5.bb             | 33 ++++++++++++++
+ 2 files changed, 76 insertions(+)
+ create mode 100644 meta-oe/recipes-support/appstream/appstream/0001-fix-=
+crosscompile.patch
+ create mode 100644 meta-oe/recipes-support/appstream/appstream_0.15.5.bb
 
-On Thu, Dec 22, 2022 at 02:07:53AM -0800, akash hadke via lists.openembedded.org wrote:
-> 
-> Hello Team,
-> 
-> Is there any update on this fix are we going you going to consider this CVE fix?
+diff --git a/meta-oe/recipes-support/appstream/appstream/0001-fix-crossco=
+mpile.patch b/meta-oe/recipes-support/appstream/appstream/0001-fix-crossc=
+ompile.patch
+new file mode 100644
+index 000000000..3cf039259
+--- /dev/null
++++ b/meta-oe/recipes-support/appstream/appstream/0001-fix-crosscompile.p=
+atch
+@@ -0,0 +1,43 @@
++From 6ab00a4279823829a9b82dc9e4d055da4de88c6e Mon Sep 17 00:00:00 2001
++From: Markus Volk <f_l_k@t-online.de>
++Date: Mon, 12 Dec 2022 15:42:42 +0100
++Subject: [PATCH] fix crosscompile
++
++Signed-off-by: Markus Volk <f_l_k@t-online.de>
++
++Upstream-Status: Inappropriate [oe-specific]
++---
++ data/meson.build  | 2 +-
++ meson.build       | 2 +-
++ tools/meson.build | 9 +++++++++
++ 3 files changed, 11 insertions(+), 2 deletions(-)
++
++diff --git a/data/meson.build b/data/meson.build
++index aea0cb25..1a085fc9 100644
++--- a/data/meson.build
+++++ b/data/meson.build
++@@ -14,7 +14,7 @@ install_data('its/metainfo.loc',
++ metainfo_with_relinfo =3D custom_target('gen-output',
++     input : ['../NEWS', 'org.freedesktop.appstream.cli.metainfo.xml'],
++     output : ['nol10n_withrelinfo_org.freedesktop.appstream.cli.metainf=
+o.xml'],
++-    command : [ascli_exe, 'news-to-metainfo', '--limit=3D6', '@INPUT0@'=
+, '@INPUT1@', '@OUTPUT@']
+++    command : ['/usr/bin/appstreamcli', 'news-to-metainfo', '--limit=3D=
+6', '@INPUT0@', '@INPUT1@', '@OUTPUT@']
++ )
++=20
++ metainfo_i18n =3D i18n.itstool_join(
++diff --git a/meson.build b/meson.build
++index fd0e3373..2f273ada 100644
++--- a/meson.build
+++++ b/meson.build
++@@ -124,7 +124,7 @@ if get_option ('gir')
++     dependency('gobject-introspection-1.0', version: '>=3D1.56')
++ endif
++=20
++-stemmer_inc_dirs =3D include_directories(['/usr/include'])
+++stemmer_inc_dirs =3D include_directories([''])
++ if get_option('stemming')
++     stemmer_lib =3D cc.find_library('stemmer', required: true)
++     if not cc.has_header('libstemmer.h')
++--=20
++2.34.1
++
+diff --git a/meta-oe/recipes-support/appstream/appstream_0.15.5.bb b/meta=
+-oe/recipes-support/appstream/appstream_0.15.5.bb
+new file mode 100644
+index 000000000..f9f04526f
+--- /dev/null
++++ b/meta-oe/recipes-support/appstream/appstream_0.15.5.bb
+@@ -0,0 +1,33 @@
++SUMMARY =3D "AppStream is a collaborative effort for making machine-read=
+able software metadata easily available."
++HOMEPAGE =3D "https://github.com/ximion/appstream"
++LICENSE =3D "LGPL-2.1-only"
++LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D435ed639f84d4585d93824e7da3d8=
+5da"
++
++DEPENDS =3D " \
++    curl-native \
++    curl \
++    docbook-xml-dtd4-native \
++    gperf-native \
++    glib-2.0 \
++    libyaml \
++    libstemmer \
++    libxml2 \
++    libxmlb \
++    libxslt-native \
++    itstool-native \
++    docbook-xsl-stylesheets-native \
++    python3-pygments-native \
++"
++
++inherit meson gobject-introspection gettext gtk-doc pkgconfig vala
++
++GIR_MESON_OPTION =3D ""
++SRC_URI =3D " \
++    https://www.freedesktop.org/software/appstream/releases/AppStream-${=
+PV}.tar.xz \
++    file://0001-fix-crosscompile.patch \
++"
++
++SRC_URI[sha256sum] =3D "cb15ed62cc2729683879a2dbf98c0a3267ea2b4d57bba6bc=
+55e70a25500e04c2"
++S =3D "${WORKDIR}/AppStream-${PV}"
++
++FILES:${PN} +=3D "${datadir}"
+--=20
+2.34.1
 
-Tbh, I wanted to update openjdk so backporting this patch is not necessary.
-Unfortunately I didn't have time for it. Are you interested to update
-the openjdk/jre version according to docs/UPDATING.md?
-
-regards;rl
 
