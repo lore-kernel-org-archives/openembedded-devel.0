@@ -2,164 +2,111 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8113DC4167B
-	for <webhook@archiver.kernel.org>; Mon, 26 Dec 2022 03:16:07 +0000 (UTC)
-Received: from mail-oa1-f46.google.com (mail-oa1-f46.google.com [209.85.160.46])
- by mx.groups.io with SMTP id smtpd.web10.129617.1672024562770438123
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9077DC4167B
+	for <webhook@archiver.kernel.org>; Mon, 26 Dec 2022 03:25:27 +0000 (UTC)
+Received: from mail-pj1-f54.google.com (mail-pj1-f54.google.com [209.85.216.54])
+ by mx.groups.io with SMTP id smtpd.web11.130540.1672025123417175110
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 25 Dec 2022 19:16:02 -0800
+ Sun, 25 Dec 2022 19:25:23 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=AFiYYdkD;
- spf=pass (domain: gmail.com, ip: 209.85.160.46, mailfrom: raj.khem@gmail.com)
-Received: by mail-oa1-f46.google.com with SMTP id 586e51a60fabf-1442977d77dso11695331fac.6
-        for <openembedded-devel@lists.openembedded.org>; Sun, 25 Dec 2022 19:16:02 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=ne9BJOdX;
+ spf=pass (domain: gmail.com, ip: 209.85.216.54, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f54.google.com with SMTP id o2so4176622pjh.4
+        for <openembedded-devel@lists.openembedded.org>; Sun, 25 Dec 2022 19:25:23 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=uKYNqyZ8sdqdEIrPOws9s6NVF4jbriOLgJLPglZrxb0=;
-        b=AFiYYdkD0c8WqJUlsV7Cxe2fLhQERdesI4j6TqL967iOh5oxILq6UwesLiJgBYKv7I
-         8A4w0OBGhjsUi9D1aU+tcMedT20vMmxOP3UBo5dNEnEdEgRTt2H/HIjgYHzGc7FhY2gF
-         U3lh/SpDDzXVtgjXzPUGHALeiVO1C+nTKchFh9M9x9oMwtRr/POFwNilAIfn+HGdPrgY
-         Yp7dC1fT5Ya1wU6Ys03qNMgKIIDWlUfEFqvjIAJbgYwhBfTY2grRqZOyAaJHTXgZn+ju
-         kOfn58okNjxNrIH+WlSmpiPnrhG7akHo42Iy43WNBTRObnMTq0jwhWIF5NU43//cQeD4
-         kR3Q==
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=Fr+reDitv3u4+bePwhS6cRkO9S1Hcp8+ClR7WgXjwe4=;
+        b=ne9BJOdXDgzxNN6uEHgQ2mAdD4pl7AS9tnB1XcGDu99VIAaHzeQlCIP0HW1LC37NCP
+         3bQhHz1cl4Z9YvYiziaYhRlqkaeySonNIiNfOSWc2LPcmvN09V/4zgX/7r7UB76IlJce
+         04ZG3ng4pijWcEacaTHsQ2RpyPnFXItblpXKDQ+i1dUusEVbNZaKaqFbulUKisORfa0M
+         7pJ0A8uV3S7wpt9T/qNmOYzi50oXk0dqbgoiPT96vtqdTNrORG/Le9xNXbIQMxtNoc7A
+         Ryv9YUUzHCScCWrJCRA8Bu1nvKedkntocvZvuhX/+59zsjf64zm4U75pO+LJ99KJAK4p
+         +y8Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=uKYNqyZ8sdqdEIrPOws9s6NVF4jbriOLgJLPglZrxb0=;
-        b=6j/+sKGohFiGecY2VwYKDxtNOgTXV8480YpsPRvSbT53ME+B957tdEaw3vtQ48jlAX
-         n7z7IC58N1cmcByvBkxUhdfBCaau1se5YjuKeT6sfDvtmzRZ/UNjxgTb2/eMH6VRctfE
-         5RpJxvGs3mdd0vPMmJPZyErHP1Sk4x1bZPIBXA+tA62HcAVpbhdFadIFz7tt7tF7Kghn
-         oNL1uJJOc5SX1r/3bsTiGdW92J0DJvCWk1qCgyn+RhlrTCE4D5bjkHWR6s2TnRj5vZgv
-         aNQR3KWijpiLoAVsG1YygMrtW/UAk7As0WCcc/5mhlg3jCklVg6Z9OJddvFQ8Yn1z/Y1
-         scHA==
-X-Gm-Message-State: AFqh2krQKeOAEDWsr26zUY6gj0pWA426KBUXyVBUbPndVClS941Emiil
-	ALcfIooaOXNFRoiLJzU3hvfAisAxnbJeU7M7Tdk=
-X-Google-Smtp-Source: AMrXdXtBLJpdvR+VHsIi4bF1DWqpnW1chqi9Ot/7XAH+ivUHkoY6fsOmgRq7YMq5n9ye/jU3y7DYqx+4Un7H8ycuXos=
-X-Received: by 2002:a05:6870:b01d:b0:144:e1eb:419 with SMTP id
- y29-20020a056870b01d00b00144e1eb0419mr1154818oae.262.1672024561867; Sun, 25
- Dec 2022 19:16:01 -0800 (PST)
-MIME-Version: 1.0
-References: <20221224213347.39959-1-kai.kang@windriver.com>
- <CAMKF1srPffhVDHQ4-RfkmK+OhebrLc5Xc232RAVvDmMb5ao-Yw@mail.gmail.com> <c24b48cb-4c80-c5cc-ac6d-4a911f7ec3b7@windriver.com>
-In-Reply-To: <c24b48cb-4c80-c5cc-ac6d-4a911f7ec3b7@windriver.com>
+        bh=Fr+reDitv3u4+bePwhS6cRkO9S1Hcp8+ClR7WgXjwe4=;
+        b=LZbMH0O81EVsbc3MYtBw4QoUiP1eILRlSzpLoYTaRvlhoump3IyHIIPhsYByJr7cvH
+         ZRtzJ0FyB4ikBIchMVEM1hw/9iPI4DmzTBCt/8C4/sDTgeFJFzgS2r7YKazqn5eV7ZMn
+         3CUf9QY1P0QzyGvT65JLJCgLr7V6lYwoJlZ3fZMGw3JamuJNjca2LV5X3IIef4BowTIu
+         CtlL1FvcwA4rGlyg0v4AivJVwP/9eAkcrUQbp4PYNfsMZ9uYAd/iI8dnWtnMcX26o/4h
+         HVeMX0C7Ov1RcqxL6yZ0SrebR85XvagkiC/N03Vo3NCHwY00EiXU2rgJx9PozBn+cL+i
+         4ftA==
+X-Gm-Message-State: AFqh2krsMJdDmNqwtctdSnPkI+sCn84HRnZfpO5Dv1p/jr9H0Y3WVqv/
+	rw3+vdG72+egdlbrVWNyxkEbQN/o/6Q=
+X-Google-Smtp-Source: AMrXdXtb9qYbktP3DZa70NgGBn8gGMpBsEDSmd2arujxFwETLyErgZTjhRGN7EAQbu42ZYGTwi26Og==
+X-Received: by 2002:a17:902:e801:b0:190:d283:7faf with SMTP id u1-20020a170902e80100b00190d2837fafmr24859126plg.13.1672025122426;
+        Sun, 25 Dec 2022 19:25:22 -0800 (PST)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9181:1cf0::bccc])
+        by smtp.gmail.com with ESMTPSA id e11-20020a170902784b00b0017f74cab9eesm5911053pln.128.2022.12.25.19.25.21
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sun, 25 Dec 2022 19:25:22 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
-Date: Sun, 25 Dec 2022 19:15:35 -0800
-Message-ID: <CAMKF1soO3eFZaONBUOaBKfigaDHVzyiDn_uZCb=NzJpG8tj8bw@mail.gmail.com>
-Subject: Re: [oe] [meta-xfce][PATCH 00/16] Update core xfce components to 4.18.0
-To: Kai <kai.kang@windriver.com>
-Cc: Kai Kang <kai.kang@eng.windriver.com>, schnitzeltony@gmail.com, 
-	openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][PATCH] mariadb: Alias lseek64/open64/ftruncate64 on musl systems
+Date: Sun, 25 Dec 2022 19:25:20 -0800
+Message-Id: <20221226032520.3637522-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.39.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 26 Dec 2022 03:16:07 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100233
+ <openembedded-devel@lists.openembedded.org>; Mon, 26 Dec 2022 03:25:27 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100234
 
-I also see it on qemuarm
+This ensures it can keep building with newer musl
 
-https://errors.yoctoproject.org/Errors/Build/157426/
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ meta-oe/recipes-dbs/mysql/mariadb.inc         |  1 +
+ meta-oe/recipes-dbs/mysql/mariadb/lfs64.patch | 19 +++++++++++++++++++
+ 2 files changed, 20 insertions(+)
+ create mode 100644 meta-oe/recipes-dbs/mysql/mariadb/lfs64.patch
 
-x86
+diff --git a/meta-oe/recipes-dbs/mysql/mariadb.inc b/meta-oe/recipes-dbs/mysql/mariadb.inc
+index 1a7cce2ea1..4e285aea7e 100644
+--- a/meta-oe/recipes-dbs/mysql/mariadb.inc
++++ b/meta-oe/recipes-dbs/mysql/mariadb.inc
+@@ -21,6 +21,7 @@ SRC_URI = "https://archive.mariadb.org/${BP}/source/${BP}.tar.gz \
+            file://sys_futex.patch \
+            file://cross-compiling.patch \
+            file://0001-sql-CMakeLists.txt-fix-gen_lex_hash-not-found.patch \
++           file://lfs64.patch \
+           "
+ SRC_URI:append:libc-musl = " file://ppc-remove-glibc-dep.patch"
+ SRC_URI[sha256sum] = "ffacf84e74daf249ad64b9573d79a4e882f66b004614f8b33bfcb14a8e25da1d"
+diff --git a/meta-oe/recipes-dbs/mysql/mariadb/lfs64.patch b/meta-oe/recipes-dbs/mysql/mariadb/lfs64.patch
+new file mode 100644
+index 0000000000..9867908c6c
+--- /dev/null
++++ b/meta-oe/recipes-dbs/mysql/mariadb/lfs64.patch
+@@ -0,0 +1,19 @@
++--- a/storage/connect/os.h
+++++ b/storage/connect/os.h
++@@ -2,13 +2,15 @@
++ #ifndef _OS_H_INCLUDED
++ #define _OS_H_INCLUDED
++ 
++-#if defined(__FreeBSD__) || defined(__NetBSD__) || defined(__OpenBSD__) || defined(__DragonFly__) || defined(__APPLE__)
+++#if defined(__FreeBSD__) || defined(__NetBSD__) || defined(__OpenBSD__) || defined(__DragonFly__) || defined(__APPLE__) || (defined(__linux__) && !defined(__GLIBC__))
++ typedef off_t off64_t;
++ #define lseek64(fd, offset, whence) lseek((fd), (offset), (whence))
++ #define open64(path, flags, mode)   open((path), (flags), (mode))
++ #define ftruncate64(fd, length)     ftruncate((fd), (length))
+++#ifndef O_LARGEFILE
++ #define O_LARGEFILE 0
++ #endif
+++#endif
++ 
++ #ifdef _AIX
++ #ifndef O_LARGEFILE
+-- 
+2.39.0
 
-https://errors.yoctoproject.org/Errors/Build/157418/
-
-On Sun, Dec 25, 2022 at 5:01 PM Kai <kai.kang@windriver.com> wrote:
->
-> On 12/26/22 01:56, Khem Raj wrote:
-> > Thanks for that patches. They fail to build see xfce related recipe
-> > failures here.
-> >
-> > https://errors.yoctoproject.org/Errors/Build/157414/
->
-> It seems all are qemumips related. I'll check them.
->
-> Kai
->
-> >
-> > On Sat, Dec 24, 2022 at 1:34 PM Kai Kang <kai.kang@eng.windriver.com> wrote:
-> >> From: Kai Kang <kai.kang@windriver.com>
-> >>
-> >>
-> >> Kai Kang (16):
-> >>    xfce4-dev-tools: 4.16.0 -> 4.18.0
-> >>    libxfce4util: 4.16.0 -> 4.18.0
-> >>    libxfce4ui: 4.16.1 -> 4.18.0
-> >>    exo: 4.16.4 -> 4.18.0
-> >>    garcon: 4.16.1 -> 4.18.0
-> >>    xfce4-panel: 4.16.3 -> 4.18.0
-> >>    thunar: 4.16.9 -> 4.18.0
-> >>    thunar-volman: 4.16.0 -> 4.18.0
-> >>    tumbler: 4.16.0 -> 4.18.0
-> >>    xfconf: 4.16.0 -> 4.18.0
-> >>    xfce4-appfinder: 4.16.1 -> 4.18.0
-> >>    xfce4-power-manager: 4.16.0 -> 4.18.0
-> >>    xfce4-session: 4.16.0 -> 4.18.0
-> >>    xfce4-settings: 4.16.5 -> 4.18.0
-> >>    xfdesktop: 4.16.0 -> 4.18.0
-> >>    xfwm4: 4.16.1 -> 4.18.0
-> >>
-> >>   .../recipes-xfce/exo/exo/configure.patch      | 57 ------------
-> >>   .../exo/exo/exo-no-tests-0.8.patch            |  9 +-
-> >>   .../reduce-build-to-exo-csource-only.patch    | 90 -------------------
-> >>   .../exo/{exo_4.16.4.bb => exo_4.18.0.bb}      |  5 +-
-> >>   .../{garcon_4.16.1.bb => garcon_4.18.0.bb}    |  2 +-
-> >>   ...xfce4ui_4.16.1.bb => libxfce4ui_4.18.0.bb} |  6 +-
-> >>   .../libxfce4util/libxfce4util_4.16.0.bb       |  9 --
-> >>   .../libxfce4util/libxfce4util_4.18.0.bb       |  9 ++
-> >>   ...lman_4.16.0.bb => thunar-volman_4.18.0.bb} |  6 +-
-> >>   .../{thunar_4.16.9.bb => thunar_4.18.0.bb}    |  8 +-
-> >>   .../{tumbler_4.16.0.bb => tumbler_4.18.0.bb}  |  9 +-
-> >>   ...er_4.16.1.bb => xfce4-appfinder_4.18.0.bb} |  6 +-
-> >>   ...ls_4.16.0.bb => xfce4-dev-tools_4.18.0.bb} | 14 +--
-> >>   ...t-display-desktop-icon-when-no-windo.patch | 15 ++--
-> >>   ...-panel_4.16.3.bb => xfce4-panel_4.18.0.bb} |  4 +-
-> >>   ....16.0.bb => xfce4-power-manager_4.18.0.bb} |  2 +-
-> >>   ...sion_4.16.0.bb => xfce4-session_4.18.0.bb} | 10 +--
-> >>   ...ngs_4.16.5.bb => xfce4-settings_4.18.0.bb} |  6 +-
-> >>   .../{xfconf_4.16.0.bb => xfconf_4.18.0.bb}    |  4 +-
-> >>   ...fdesktop_4.16.0.bb => xfdesktop_4.18.0.bb} |  4 +-
-> >>   .../{xfwm4_4.16.1.bb => xfwm4_4.18.0.bb}      |  4 +-
-> >>   21 files changed, 69 insertions(+), 210 deletions(-)
-> >>   delete mode 100644 meta-xfce/recipes-xfce/exo/exo/configure.patch
-> >>   delete mode 100644 meta-xfce/recipes-xfce/exo/exo/reduce-build-to-exo-csource-only.patch
-> >>   rename meta-xfce/recipes-xfce/exo/{exo_4.16.4.bb => exo_4.18.0.bb} (84%)
-> >>   rename meta-xfce/recipes-xfce/garcon/{garcon_4.16.1.bb => garcon_4.18.0.bb} (89%)
-> >>   rename meta-xfce/recipes-xfce/libxfce4ui/{libxfce4ui_4.16.1.bb => libxfce4ui_4.18.0.bb} (84%)
-> >>   delete mode 100644 meta-xfce/recipes-xfce/libxfce4util/libxfce4util_4.16.0.bb
-> >>   create mode 100644 meta-xfce/recipes-xfce/libxfce4util/libxfce4util_4.18.0.bb
-> >>   rename meta-xfce/recipes-xfce/thunar-volman/{thunar-volman_4.16.0.bb => thunar-volman_4.18.0.bb} (63%)
-> >>   rename meta-xfce/recipes-xfce/thunar/{thunar_4.16.9.bb => thunar_4.18.0.bb} (77%)
-> >>   rename meta-xfce/recipes-xfce/tumbler/{tumbler_4.16.0.bb => tumbler_4.18.0.bb} (80%)
-> >>   rename meta-xfce/recipes-xfce/xfce4-appfinder/{xfce4-appfinder_4.16.1.bb => xfce4-appfinder_4.18.0.bb} (54%)
-> >>   rename meta-xfce/recipes-xfce/xfce4-dev-tools/{xfce4-dev-tools_4.16.0.bb => xfce4-dev-tools_4.18.0.bb} (78%)
-> >>   rename meta-xfce/recipes-xfce/xfce4-panel/{xfce4-panel_4.16.3.bb => xfce4-panel_4.18.0.bb} (93%)
-> >>   rename meta-xfce/recipes-xfce/xfce4-power-manager/{xfce4-power-manager_4.16.0.bb => xfce4-power-manager_4.18.0.bb} (93%)
-> >>   rename meta-xfce/recipes-xfce/xfce4-session/{xfce4-session_4.16.0.bb => xfce4-session_4.18.0.bb} (82%)
-> >>   rename meta-xfce/recipes-xfce/xfce4-settings/{xfce4-settings_4.16.5.bb => xfce4-settings_4.18.0.bb} (85%)
-> >>   rename meta-xfce/recipes-xfce/xfconf/{xfconf_4.16.0.bb => xfconf_4.18.0.bb} (85%)
-> >>   rename meta-xfce/recipes-xfce/xfdesktop/{xfdesktop_4.16.0.bb => xfdesktop_4.18.0.bb} (77%)
-> >>   rename meta-xfce/recipes-xfce/xfwm4/{xfwm4_4.16.1.bb => xfwm4_4.18.0.bb} (90%)
-> >>
-> >> --
-> >> 2.17.1
-> >>
-> >>
-> >> -=-=-=-=-=-=-=-=-=-=-=-
-> >> Links: You receive all messages sent to this group.
-> >> View/Reply Online (#100209): https://lists.openembedded.org/g/openembedded-devel/message/100209
-> >> Mute This Topic: https://lists.openembedded.org/mt/95868220/1997914
-> >> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> >> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [raj.khem@gmail.com]
-> >> -=-=-=-=-=-=-=-=-=-=-=-
-> >>
->
-> --
-> Kai Kang
-> Wind River Linux
->
 
