@@ -2,110 +2,170 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9077DC4167B
-	for <webhook@archiver.kernel.org>; Mon, 26 Dec 2022 03:25:27 +0000 (UTC)
-Received: from mail-pj1-f54.google.com (mail-pj1-f54.google.com [209.85.216.54])
- by mx.groups.io with SMTP id smtpd.web11.130540.1672025123417175110
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C6B78C3DA79
+	for <webhook@archiver.kernel.org>; Mon, 26 Dec 2022 04:14:37 +0000 (UTC)
+Received: from mail-pf1-f170.google.com (mail-pf1-f170.google.com [209.85.210.170])
+ by mx.groups.io with SMTP id smtpd.web10.130266.1672028074257002883
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 25 Dec 2022 19:25:23 -0800
+ Sun, 25 Dec 2022 20:14:34 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=ne9BJOdX;
- spf=pass (domain: gmail.com, ip: 209.85.216.54, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f54.google.com with SMTP id o2so4176622pjh.4
-        for <openembedded-devel@lists.openembedded.org>; Sun, 25 Dec 2022 19:25:23 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=lDPwalcC;
+ spf=pass (domain: gmail.com, ip: 209.85.210.170, mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f170.google.com with SMTP id 65so6629942pfx.9
+        for <openembedded-devel@lists.openembedded.org>; Sun, 25 Dec 2022 20:14:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=Fr+reDitv3u4+bePwhS6cRkO9S1Hcp8+ClR7WgXjwe4=;
-        b=ne9BJOdXDgzxNN6uEHgQ2mAdD4pl7AS9tnB1XcGDu99VIAaHzeQlCIP0HW1LC37NCP
-         3bQhHz1cl4Z9YvYiziaYhRlqkaeySonNIiNfOSWc2LPcmvN09V/4zgX/7r7UB76IlJce
-         04ZG3ng4pijWcEacaTHsQ2RpyPnFXItblpXKDQ+i1dUusEVbNZaKaqFbulUKisORfa0M
-         7pJ0A8uV3S7wpt9T/qNmOYzi50oXk0dqbgoiPT96vtqdTNrORG/Le9xNXbIQMxtNoc7A
-         Ryv9YUUzHCScCWrJCRA8Bu1nvKedkntocvZvuhX/+59zsjf64zm4U75pO+LJ99KJAK4p
-         +y8Q==
+        bh=9WMQs23bw8bJxHTy8OMmdb1qwzlTDIa2fc4zeCVXoTk=;
+        b=lDPwalcCCAeTSfcNoJPFyOtULHmV1t4Uk9BnORyOjplcpcRdsaef8lcpdaZLHmRkB1
+         w80g7L1Z1C/pBJK62N+XwQCf/sWyvsrkcn0GQSC1GkW2j0hB6mL7NfqBvBv01x1qMBG9
+         LMmJHH+2z6teBgGJJ55tXGsAjd1rhvQFkxmYg0hsLyEUKYV5R3jF325TOL2puWiH1e/B
+         YFiugdZSuEds5hO4tkHmxszYjmCEUnR456YLFGO6X2lliX/IQWRSCr+FqM0oZL/5GLM1
+         00tP6ubg5CzaAuDF0Zf4cVlTZWNrsKnkYDLcYtXxfyl/mq9QEQ3GP0jyXbd7q/3MhTLL
+         hYgw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=Fr+reDitv3u4+bePwhS6cRkO9S1Hcp8+ClR7WgXjwe4=;
-        b=LZbMH0O81EVsbc3MYtBw4QoUiP1eILRlSzpLoYTaRvlhoump3IyHIIPhsYByJr7cvH
-         ZRtzJ0FyB4ikBIchMVEM1hw/9iPI4DmzTBCt/8C4/sDTgeFJFzgS2r7YKazqn5eV7ZMn
-         3CUf9QY1P0QzyGvT65JLJCgLr7V6lYwoJlZ3fZMGw3JamuJNjca2LV5X3IIef4BowTIu
-         CtlL1FvcwA4rGlyg0v4AivJVwP/9eAkcrUQbp4PYNfsMZ9uYAd/iI8dnWtnMcX26o/4h
-         HVeMX0C7Ov1RcqxL6yZ0SrebR85XvagkiC/N03Vo3NCHwY00EiXU2rgJx9PozBn+cL+i
-         4ftA==
-X-Gm-Message-State: AFqh2krsMJdDmNqwtctdSnPkI+sCn84HRnZfpO5Dv1p/jr9H0Y3WVqv/
-	rw3+vdG72+egdlbrVWNyxkEbQN/o/6Q=
-X-Google-Smtp-Source: AMrXdXtb9qYbktP3DZa70NgGBn8gGMpBsEDSmd2arujxFwETLyErgZTjhRGN7EAQbu42ZYGTwi26Og==
-X-Received: by 2002:a17:902:e801:b0:190:d283:7faf with SMTP id u1-20020a170902e80100b00190d2837fafmr24859126plg.13.1672025122426;
-        Sun, 25 Dec 2022 19:25:22 -0800 (PST)
+        bh=9WMQs23bw8bJxHTy8OMmdb1qwzlTDIa2fc4zeCVXoTk=;
+        b=WQ5dll+Wp5j5CcseA+Yiffx5sg9xkoXA+Qxmu7ALO93pcxV0NsHQFKgwT6vYQgD2QC
+         O5j8qCSzriRDvH3GHpWXtX6qtTttQjy1hF1BVLXS5UfZvPLuPvn+aCgstozGImW1rwv5
+         ESb3UxS1mA45cjnUUuV6njYOLbODhte5/xCIuU0OdeFjuq7XmY2uLi1eUEmZJzkQhdn6
+         RiEfmIvrW8ADWBlws15oXIAZAQn7Xa+WxMElZF40eb9gjoJr/7NArxH7pNitHnWIhSGd
+         t9X0VT5+FK7ZHz1TpuKouAJtKXdFgsU3f7AuSpQUscqm8j14Jf0feto76R0c8EY0jwSd
+         PXMg==
+X-Gm-Message-State: AFqh2krjEzI/CwZIAsUtt2adNcNrzftm3gXsTWjphBLBAfZy109pa4rv
+	Qo4WDkKRwG1b4Hz4S9Jp2JUYlDb+9Ok=
+X-Google-Smtp-Source: AMrXdXtYC9tPoOKjch7o8dNd2eNm3r3rfpFOOeDghMqJmzzVfeV9mUxQIzR+kZy23/N8UKXSqwsofg==
+X-Received: by 2002:a05:6a00:1906:b0:580:9d4a:4e1c with SMTP id y6-20020a056a00190600b005809d4a4e1cmr13144226pfi.3.1672028073266;
+        Sun, 25 Dec 2022 20:14:33 -0800 (PST)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9181:1cf0::bccc])
-        by smtp.gmail.com with ESMTPSA id e11-20020a170902784b00b0017f74cab9eesm5911053pln.128.2022.12.25.19.25.21
+        by smtp.gmail.com with ESMTPSA id x7-20020aa79a47000000b005800cb7cbcasm5892983pfj.120.2022.12.25.20.14.32
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 25 Dec 2022 19:25:22 -0800 (PST)
+        Sun, 25 Dec 2022 20:14:32 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH] mariadb: Alias lseek64/open64/ftruncate64 on musl systems
-Date: Sun, 25 Dec 2022 19:25:20 -0800
-Message-Id: <20221226032520.3637522-1-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH] gperftools: Define off64_t on musl
+Date: Sun, 25 Dec 2022 20:14:30 -0800
+Message-Id: <20221226041430.3700024-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.39.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 26 Dec 2022 03:25:27 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100234
+ <openembedded-devel@lists.openembedded.org>; Mon, 26 Dec 2022 04:14:37 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100235
 
-This ensures it can keep building with newer musl
+alias it to off_t which is 64bit always on musl
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-oe/recipes-dbs/mysql/mariadb.inc         |  1 +
- meta-oe/recipes-dbs/mysql/mariadb/lfs64.patch | 19 +++++++++++++++++++
- 2 files changed, 20 insertions(+)
- create mode 100644 meta-oe/recipes-dbs/mysql/mariadb/lfs64.patch
+ ...0001-Define-off64_t-as-off_t-on-musl.patch | 33 ++++++++++++++++++
+ .../0001-fix-build-with-musl-libc.patch       | 34 -------------------
+ .../gperftools/gperftools_2.10.bb             |  2 +-
+ 3 files changed, 34 insertions(+), 35 deletions(-)
+ create mode 100644 meta-oe/recipes-support/gperftools/gperftools/0001-Define-off64_t-as-off_t-on-musl.patch
+ delete mode 100644 meta-oe/recipes-support/gperftools/gperftools/0001-fix-build-with-musl-libc.patch
 
-diff --git a/meta-oe/recipes-dbs/mysql/mariadb.inc b/meta-oe/recipes-dbs/mysql/mariadb.inc
-index 1a7cce2ea1..4e285aea7e 100644
---- a/meta-oe/recipes-dbs/mysql/mariadb.inc
-+++ b/meta-oe/recipes-dbs/mysql/mariadb.inc
-@@ -21,6 +21,7 @@ SRC_URI = "https://archive.mariadb.org/${BP}/source/${BP}.tar.gz \
-            file://sys_futex.patch \
-            file://cross-compiling.patch \
-            file://0001-sql-CMakeLists.txt-fix-gen_lex_hash-not-found.patch \
-+           file://lfs64.patch \
-           "
- SRC_URI:append:libc-musl = " file://ppc-remove-glibc-dep.patch"
- SRC_URI[sha256sum] = "ffacf84e74daf249ad64b9573d79a4e882f66b004614f8b33bfcb14a8e25da1d"
-diff --git a/meta-oe/recipes-dbs/mysql/mariadb/lfs64.patch b/meta-oe/recipes-dbs/mysql/mariadb/lfs64.patch
+diff --git a/meta-oe/recipes-support/gperftools/gperftools/0001-Define-off64_t-as-off_t-on-musl.patch b/meta-oe/recipes-support/gperftools/gperftools/0001-Define-off64_t-as-off_t-on-musl.patch
 new file mode 100644
-index 0000000000..9867908c6c
+index 0000000000..2b782c2040
 --- /dev/null
-+++ b/meta-oe/recipes-dbs/mysql/mariadb/lfs64.patch
-@@ -0,0 +1,19 @@
-+--- a/storage/connect/os.h
-++++ b/storage/connect/os.h
-+@@ -2,13 +2,15 @@
-+ #ifndef _OS_H_INCLUDED
-+ #define _OS_H_INCLUDED
++++ b/meta-oe/recipes-support/gperftools/gperftools/0001-Define-off64_t-as-off_t-on-musl.patch
+@@ -0,0 +1,33 @@
++From 41260e21e271eb1dc8b34f952ea3f90a0dc35e9e Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Sun, 25 Dec 2022 20:01:29 -0800
++Subject: [PATCH] Define off64_t as off_t on musl
++
++Musl's default bitlength for off_t is always 64bit therefore define
++off64_t as off_t on musl
++
++Upstream-Status: Submitted [https://github.com/gperftools/gperftools/pull/1379]
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ src/malloc_hook_mmap_linux.h | 5 +++++
++ 1 file changed, 5 insertions(+)
++
++diff --git a/src/malloc_hook_mmap_linux.h b/src/malloc_hook_mmap_linux.h
++index c7d8b4b..a10687e 100644
++--- a/src/malloc_hook_mmap_linux.h
+++++ b/src/malloc_hook_mmap_linux.h
++@@ -45,6 +45,11 @@
++ #include <sys/syscall.h>
++ #include <unistd.h>
 + 
-+-#if defined(__FreeBSD__) || defined(__NetBSD__) || defined(__OpenBSD__) || defined(__DragonFly__) || defined(__APPLE__)
-++#if defined(__FreeBSD__) || defined(__NetBSD__) || defined(__OpenBSD__) || defined(__DragonFly__) || defined(__APPLE__) || (defined(__linux__) && !defined(__GLIBC__))
-+ typedef off_t off64_t;
-+ #define lseek64(fd, offset, whence) lseek((fd), (offset), (whence))
-+ #define open64(path, flags, mode)   open((path), (flags), (mode))
-+ #define ftruncate64(fd, length)     ftruncate((fd), (length))
-++#ifndef O_LARGEFILE
-+ #define O_LARGEFILE 0
-+ #endif
+++// musl's off_t is already 64-bit
+++#if defined(__linux__) && !defined(__GLIBC__)
+++typedef off_t off64_t;
 ++#endif
-+ 
-+ #ifdef _AIX
-+ #ifndef O_LARGEFILE
+++
++ // The x86-32 case and the x86-64 case differ:
++ // 32b has a mmap2() syscall, 64b does not.
++ // 64b and 32b have different calling conventions for mmap().
++-- 
++2.39.0
++
+diff --git a/meta-oe/recipes-support/gperftools/gperftools/0001-fix-build-with-musl-libc.patch b/meta-oe/recipes-support/gperftools/gperftools/0001-fix-build-with-musl-libc.patch
+deleted file mode 100644
+index baaaa4b53b..0000000000
+--- a/meta-oe/recipes-support/gperftools/gperftools/0001-fix-build-with-musl-libc.patch
++++ /dev/null
+@@ -1,34 +0,0 @@
+-From 696674a800cb6d2070897a565b92d7e63022a8f1 Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Sun, 16 Jul 2017 15:51:28 -0700
+-Subject: [PATCH] fix build with musl libc
+-
+-Patch from https://github.com/gperftools/gperftools/pull/765/
+-
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+- src/malloc_hook_mmap_linux.h | 6 +++++-
+- 1 file changed, 5 insertions(+), 1 deletion(-)
+-
+---- a/src/malloc_hook_mmap_linux.h
+-+++ b/src/malloc_hook_mmap_linux.h
+-@@ -45,6 +45,10 @@
+- #include <sys/syscall.h>
+- #include <unistd.h>
+- 
+-+#ifndef __GLIBC__
+-+typedef off64_t   __off64_t;
+-+#endif
+-+
+- // The x86-32 case and the x86-64 case differ:
+- // 32b has a mmap2() syscall, 64b does not.
+- // 64b and 32b have different calling conventions for mmap().
+-@@ -175,7 +179,7 @@ extern "C" void* mmap64(void *start, siz
+-   return result;
+- }
+- 
+--# if !defined(__USE_FILE_OFFSET64) || !defined(__REDIRECT_NTH)
+-+# if defined(__GLIBC__) && (!defined(__USE_FILE_OFFSET64) || !defined(__REDIRECT_NTH))
+- 
+- extern "C" void* mmap(void *start, size_t length, int prot, int flags,
+-                       int fd, off_t offset) __THROW {
+diff --git a/meta-oe/recipes-support/gperftools/gperftools_2.10.bb b/meta-oe/recipes-support/gperftools/gperftools_2.10.bb
+index 602a7e263a..8db0cecbfd 100644
+--- a/meta-oe/recipes-support/gperftools/gperftools_2.10.bb
++++ b/meta-oe/recipes-support/gperftools/gperftools_2.10.bb
+@@ -13,10 +13,10 @@ DEPENDS:append:libc-musl = " libucontext"
+ SRCREV = "bf8b714bf5075d0a6f2f28504b43095e2b1e11c5"
+ SRC_URI = "git://github.com/gperftools/gperftools;branch=master;protocol=https \
+            file://0001-Support-Atomic-ops-on-clang.patch \
+-           file://0001-fix-build-with-musl-libc.patch \
+            file://0001-disbale-heap-checkers-and-debug-allocator-on-musl.patch \
+            file://disable_libunwind_aarch64.patch \
+            file://sgidef.patch \
++           file://0001-Define-off64_t-as-off_t-on-musl.patch \
+            "
+ 
+ SRC_URI:append:libc-musl = " file://ppc-musl.patch"
 -- 
 2.39.0
 
