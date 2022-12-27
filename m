@@ -2,68 +2,71 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 876A1C10F1B
-	for <webhook@archiver.kernel.org>; Tue, 27 Dec 2022 06:38:55 +0000 (UTC)
-Received: from mail1.bemta37.messagelabs.com (mail1.bemta37.messagelabs.com [85.158.142.2])
- by mx.groups.io with SMTP id smtpd.web11.153515.1672123134639873908
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6FA54C4708E
+	for <webhook@archiver.kernel.org>; Tue, 27 Dec 2022 06:39:05 +0000 (UTC)
+Received: from mail3.bemta32.messagelabs.com (mail3.bemta32.messagelabs.com [195.245.230.81])
+ by mx.groups.io with SMTP id smtpd.web11.153518.1672123142152898284
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 26 Dec 2022 22:38:55 -0800
+ Mon, 26 Dec 2022 22:39:02 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=cB3DgSkJ;
- spf=pass (domain: fujitsu.com, ip: 85.158.142.2, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=EBLA+AJq;
+ spf=pass (domain: fujitsu.com, ip: 195.245.230.81, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1672123132; i=@fujitsu.com;
-	bh=U3JzWiQGTzuJFCzQDyCngkZFNepd0xqiywx4WqqoLZI=;
-	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=cB3DgSkJkg+SBrmODq8HOq0nOGt2NzGsq+39hTi7WdkgE9ISMWsDCpX8MLB7SmHye
-	 pWaaVCazWvl/i3UtT9k6csKmusYX2SfAOktt7HVaMJxSqJbfuGdAPE42oeKNOY4kwF
-	 DnbRoFALI+WE6Mbk8KC0RFKMfuEh88TmUcJFfhLMvdXHAxDj9lHYmrPpy5TxWtIDD9
-	 ya03Ze4vQA4BSbq85kTmbrxbaahPA5SNaBYxiJi+02dTPJpOyRnSFC8Bx/SJUr2ZYL
-	 Cdd4G1+bYtAy8AT0rOie/LzDTGluE3P2arXMryiE4HvtqegTpWhjoi0JazlwmxiMMc
-	 bVdRlpfpM2qTg==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFlrDIsWRWlGSWpSXmKPExsViZ8MxSffPpFX
-  JBqf+cFpcPLyU2YHR49zGFYwBjFGsmXlJ+RUJrBkNn86zF0znrrh8SqmBcTJXFyMXh5DAE0aJ
-  Hcsb2SCc60wSe07fYupi5ARy9jBKTH5rAGKzCUhJ3Lj/nw3EFhHQl1g6ew8ziM0soCLx4ncPe
-  xcjB4ewgKvEqlOlIGEWAVWJtguzGEHCvAJOEscbU0DCEgIKElMevgfr5BUQlDg58wkLxBQJiY
-  MvXjBD1ChKzL7czAJhV0jMmtXGBGGrSVw9t4l5AiP/LCTts5C0L2BkWsVoXpxaVJZapGtorpd
-  UlJmeUZKbmJmjl1ilm6iXWqqbl19UkqFrqJdYXqyXWlysV1yZm5yTopeXWrKJERiIKcWpr3cw
-  Hlv2R+8QoyQHk5Ior1T3qmQhvqT8lMqMxOKM+KLSnNTiQ4wyHBxKEryXQXKCRanpqRVpmTnAq
-  IBJS3DwKIlAtPIWFyTmFmemQ6ROMSpKifN2TgRKCIAkMkrz4NpgkXiJUVZKmJeRgYFBiKcgtS
-  g3swRV/hWjOAejkjCvOsh4nsy8Erjpr4AWMwEt/nBoJcjikkSElFQD06mjqocei8+bOHvtilq
-  l42k7VGVmZ6vfmOL20Cf9sr6qscbZPXYvPjOHc9bZpFgvzyw7OdWle925/f+ZX1uEP72h+P2G
-  TrXsnu8vlqovEnok32QTu+VT9jbjar5Vmtc/74/kZz7wT9RVqvMsk/nWR6kH3rIdPXAybeu67
-  2/anRsPPuF/2V3FctHv1ur7IT/yHs7duEXlnOvG549/ewSWOPqKi+ewycz9aXVhuQ6Tr0eavd
-  vhtpRXfQwTfxiY3Nt5LqyX63ZCxSoD/bbN/x7JVs7gV9/scF1d+qe1ZtaxIJc+03Wzl4u/+bz
-  QcIfU7weqR9t3OT8xk2Y4sbqNYz/L53thr1Vi173jLo6LMWYRnKPEUpyRaKjFXFScCABqA/7C
-  PwMAAA==
+	s=170520fj; t=1672123140; i=@fujitsu.com;
+	bh=z6Nn6K0wUoPIzV3tYiwi7DeNjrOo9y3hQWSaRbPQEUQ=;
+	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type;
+	b=EBLA+AJqIxgMZQvhkAG8CYN+XYasOXF16UWYzkrmjyo1b2HsHlsZ59MvqiK+ZZFhF
+	 DCNWYZbv1xmoyShbq+3UmQURuQmXlphnXvE/E5XgjDBP520t74X1Cz0/iLtQ+ilWEN
+	 f7u9u+iCngoIE6dTjUixKLopQj0xedwJc7laqIahhb9jTcRw2AOvgfZmIrtrZyYALC
+	 lZ0ThsEZ4UFAMxOE5iqLnJtXTjefrS5t9f4Ri775Ycpn8ecAa+lTszkzP9Bc7V1JTL
+	 G7H1F+boBE5rX9Z+VKEoMRfoJZYTbQG2LLaRroWnAjT6mTH8yiVioN7yQAYVZFTe84
+	 fhPfqXzo7jaPw==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrGIsWRWlGSWpSXmKPExsViZ8ORpMs0eVW
+  ywcqpohYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8bCa2tZC9bzVXT+a2ZvYHzN08XIxSEk8IBR
+  YtOdlYwQzhUmia8rvzNDOHsYJXbe+MXSxcjJwSYgJXHj/n82EFtEQF9i6ew9zCA2s4CKxIvfP
+  ewgtrCAt8SdqcfA4iwCqhKTXh8D6+UVcJL4sPMTmC0hoCAx5eF7sBpOAWeJzo2/WEFsIaCaI5
+  3dUPWCEidnPmGBmC8hcfDFC2aIXkWJ2ZeboeZUSMya1cYEYatJXD23iXkCo+AsJO2zkLQvYGR
+  axWhanFpUllqka6SXVJSZnlGSm5iZo5dYpZuol1qqW55aXKJrqJdYXqyXWlysV1yZm5yTopeX
+  WrKJERi8KcUss3cw9iz9o3eIUZKDSUmUV6p7VbIQX1J+SmVGYnFGfFFpTmrxIUYZDg4lCd7LI
+  DnBotT01Iq0zBxgJMGkJTh4lEQgWnmLCxJzizPTIVKnGBWlxHk7JwIlBEASGaV5cG2w6L3EKC
+  slzMvIwMAgxFOQWpSbWYIq/4pRnINRSZhXHWQ8T2ZeCdz0V0CLmYAWfzi0EmRxSSJCSqqBaZY
+  eR3/8F4WsW6cZ3xfN3XS1vTTI4tzjGyrxPQsOnHXru7kk3ZixYl7gEe+6x9dbK9LMXwrwO7xz
+  WHzC9s81sfiyPvYiN91pT6v8LpmExlrOXuykcjvAjtHvdf53rVfyR/cxn34/balW9NWkNJmbG
+  TmfmLqUt9vlLKnI1v+zx9r+atWlD9NF3lzkevjy7dJ4RavZNyyjfqSxuu8obvoebpm72XS5hO
+  G9O6/N2/ntzn32lul6te+8f8M6o4uVK3QEH/DZ/M3hd16vec5+vlVvxfGSyc8mTvQuv9DeJWM
+  WXCkdnak3Wb7L+/axOaW68gJFS+ruh0U7P+tz/31EVPjit5QQiYLshraLrcLlz3YosRRnJBpq
+  MRcVJwIAmh1Jb1kDAAA=
 X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-6.tower-728.messagelabs.com!1672123131!306928!1
-X-Originating-IP: [62.60.8.146]
+X-Msg-Ref: server-17.tower-585.messagelabs.com!1672123138!308607!1
+X-Originating-IP: [62.60.8.98]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.101.2; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 389 invoked from network); 27 Dec 2022 06:38:52 -0000
-Received: from unknown (HELO n03ukasimr02.n03.fujitsu.local) (62.60.8.146)
-  by server-6.tower-728.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 27 Dec 2022 06:38:52 -0000
-Received: from n03ukasimr02.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTP id 994671000D5
-	for <openembedded-devel@lists.openembedded.org>; Tue, 27 Dec 2022 06:38:51 +0000 (GMT)
+Received: (qmail 11797 invoked from network); 27 Dec 2022 06:38:58 -0000
+Received: from unknown (HELO n03ukasimr03.n03.fujitsu.local) (62.60.8.98)
+  by server-17.tower-585.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 27 Dec 2022 06:38:58 -0000
+Received: from n03ukasimr03.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr03.n03.fujitsu.local (Postfix) with ESMTP id F11227B
+	for <openembedded-devel@lists.openembedded.org>; Tue, 27 Dec 2022 06:38:57 +0000 (GMT)
 Received: from R01UKEXCASM126.r01.fujitsu.local (R01UKEXCASM126 [10.183.43.178])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTPS id 8D0621000D2
-	for <openembedded-devel@lists.openembedded.org>; Tue, 27 Dec 2022 06:38:51 +0000 (GMT)
+	by n03ukasimr03.n03.fujitsu.local (Postfix) with ESMTPS id E529E1AD
+	for <openembedded-devel@lists.openembedded.org>; Tue, 27 Dec 2022 06:38:57 +0000 (GMT)
 Received: from localhost.localdomain (10.167.225.33) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.42; Tue, 27 Dec 2022 06:38:49 +0000
+ (TLS) id 15.0.1497.42; Tue, 27 Dec 2022 06:38:56 +0000
 From: <wangmy@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-gnome] [PATCH] metacity: upgrade 3.46.0 -> 3.46.1
-Date: Tue, 27 Dec 2022 14:38:14 +0800
-Message-ID: <1672123098-31844-1-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH] python3-alembic: upgrade 1.9.0 -> 1.9.1
+Date: Tue, 27 Dec 2022 14:38:17 +0800
+Message-ID: <1672123098-31844-4-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
+In-Reply-To: <1672123098-31844-1-git-send-email-wangmy@fujitsu.com>
+References: <1672123098-31844-1-git-send-email-wangmy@fujitsu.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-Originating-IP: [10.167.225.33]
@@ -73,40 +76,47 @@ X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 27 Dec 2022 06:38:55 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100260
+ <openembedded-devel@lists.openembedded.org>; Tue, 27 Dec 2022 06:39:05 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100263
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
 Changelog:
 ===========
-- Improve switching between windows of same application. (#26)
-- Fix crash when background pixmap has non-default depth. (#34)
-- Unminimaze child window together with main window. (#31)
-- Updated translations.
+-Fixed issue where server default compare would not work for string defaults
+ that contained backslashes, due to mis-rendering of these values when comparing
+ their contents.
+-Implemented basic server default comparison for the Oracle backend; previously,
+ Oracle's formatting of reflected defaults prevented any matches from occurring.
+-Adjusted SQLite's compare server default implementation to better handle
+ defaults with or without parens around them, from both the reflected and the
+ local metadata side.
+-Adjusted SQL Server's compare server default implementation to better handle
+ defaults with or without parens around them, from both the reflected and the
+ local metadata side.
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../metacity/{metacity_3.46.0.bb => metacity_3.46.1.bb}         | 2 +-
+ .../{python3-alembic_1.9.0.bb => python3-alembic_1.9.1.bb}      | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-gnome/recipes-gnome/metacity/{metacity_3.46.0.bb => metacity_3.46.1.bb} (91%)
+ rename meta-python/recipes-devtools/python/{python3-alembic_1.9.0.bb => python3-alembic_1.9.1.bb} (81%)
 
-diff --git a/meta-gnome/recipes-gnome/metacity/metacity_3.46.0.bb b/meta-gnome/recipes-gnome/metacity/metacity_3.46.1.bb
-similarity index 91%
-rename from meta-gnome/recipes-gnome/metacity/metacity_3.46.0.bb
-rename to meta-gnome/recipes-gnome/metacity/metacity_3.46.1.bb
-index 2760d73df..3ada6515f 100644
---- a/meta-gnome/recipes-gnome/metacity/metacity_3.46.0.bb
-+++ b/meta-gnome/recipes-gnome/metacity/metacity_3.46.1.bb
-@@ -23,7 +23,7 @@ REQUIRED_DISTRO_FEATURES = "x11"
+diff --git a/meta-python/recipes-devtools/python/python3-alembic_1.9.0.bb b/meta-python/recipes-devtools/python/python3-alembic_1.9.1.bb
+similarity index 81%
+rename from meta-python/recipes-devtools/python/python3-alembic_1.9.0.bb
+rename to meta-python/recipes-devtools/python/python3-alembic_1.9.1.bb
+index 071c60705..03a38d5ff 100644
+--- a/meta-python/recipes-devtools/python/python3-alembic_1.9.0.bb
++++ b/meta-python/recipes-devtools/python/python3-alembic_1.9.1.bb
+@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=f5a8522010db1a393833988dbe2c7f0b"
  
- inherit gnomebase gsettings gettext upstream-version-is-even features_check
+ inherit pypi setuptools3
  
--SRC_URI[archive.sha256sum] = "4ba777e938547bfccbf9acca0967574c46643022e054c93a033419cb3cc7c1ec"
-+SRC_URI[archive.sha256sum] = "00ba49f7612088f2b3baeca79c45eb2a30423c2e4a7bea4015872beae25dd6c5"
- SRC_URI += "file://0001-drop-zenity-detection.patch"
+-SRC_URI[sha256sum] = "6af6792fe699730b27480382701b16028ebbaac6bc5cd4f06daf5fa3e4690364"
++SRC_URI[sha256sum] = "f9f76e41061f5ebe27d4fe92600df9dd612521a7683f904dab328ba02cffa5a2"
  
- PACKAGECONFIG[xinerama] = "--enable-xinerama,--disable-xinerama,libxinerama"
+ PYPI_PACKAGE = "alembic"
+ 
 -- 
 2.25.1
 
