@@ -2,56 +2,56 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EF7D8C4332F
-	for <webhook@archiver.kernel.org>; Tue, 27 Dec 2022 01:37:53 +0000 (UTC)
-Received: from mail-pj1-f53.google.com (mail-pj1-f53.google.com [209.85.216.53])
- by mx.groups.io with SMTP id smtpd.web11.149945.1672105064035495636
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 06531C4708D
+	for <webhook@archiver.kernel.org>; Tue, 27 Dec 2022 01:37:54 +0000 (UTC)
+Received: from mail-pl1-f180.google.com (mail-pl1-f180.google.com [209.85.214.180])
+ by mx.groups.io with SMTP id smtpd.web11.149947.1672105064859749098
  for <openembedded-devel@lists.openembedded.org>;
  Mon, 26 Dec 2022 17:37:44 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=VMH3VsCU;
- spf=pass (domain: gmail.com, ip: 209.85.216.53, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f53.google.com with SMTP id u4-20020a17090a518400b00223f7eba2c4so11934366pjh.5
-        for <openembedded-devel@lists.openembedded.org>; Mon, 26 Dec 2022 17:37:43 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=exzm60cP;
+ spf=pass (domain: gmail.com, ip: 209.85.214.180, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f180.google.com with SMTP id u7so11925559plq.11
+        for <openembedded-devel@lists.openembedded.org>; Mon, 26 Dec 2022 17:37:44 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=vQwomKZ2uBknIj8MNR5u+Z1JqgsmcJjN1OY8SGo+pR8=;
-        b=VMH3VsCUgmqs1tz5X2iPEyB+pjzneHjGtqfQ4SEF34AcnLxOD+4ZF9V340LBFLKLcs
-         M6Qq6RB+qfxmBqYoD2SCBBKiGX9Jz5CjgaYTZky35Liz4/DbxyOTepypDgUwc+G7t/wS
-         gk/8FLo5bBwQLqBqWX3IH+M7mSrtXxYyFjsjz9YMvkFfTycg4m9H46OipBtlR9/f/D3G
-         TmR3rBvqamHP2SJLy7tk/IyPmTwnmGg/JF82KoDfvZaDC83ftnvuuv8eKgUFCvu9im+R
-         14vH4Kb4LQKHwCnbJK0IsTRiaEE4yHAyu5v6CPcoKTubrOuZGFUoDD/iMON2VPrRCqwj
-         MGxQ==
+        bh=Pl7oTwHtNL3luRmTz79WqDwaCDMe060lPB7jTy7GUzk=;
+        b=exzm60cP9Gubo+MN4FHcIESCAf+KmLz92i9E10ne0OWdtPrxlVFUuJuvbqARIE+jCy
+         NljNTr/Odg5LdTbUpH9nR/UjFYaVqtocElQf/e2TT9qKCfjxvSBDV5mrQ+sM9mAxd5g8
+         cNTc7ayj8hycuddkUv/loAZ+xO7OFRXUPsEhkQonZWSEgPwBhdHGDlNFiDPss+NDiC7F
+         9VsmO8KYXCVSaJjXNsgyF13UXEcypVekLSPr0E/RmuIH6NXoGObPhhk6WDmZaoZj8mvM
+         eBvM/0bETXC+KA7eRD3qhsb06VeaPx5YfOU/b82Oo2YYZtySnD/gryFjpYAqT32gdhQA
+         zoyw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=vQwomKZ2uBknIj8MNR5u+Z1JqgsmcJjN1OY8SGo+pR8=;
-        b=Uet8ISAOuX7qwEfJ47pHxg1n8oT701cbYUU7Ecj6P7ne8o1u+mml0+TQ5zKtXVXmJH
-         uymukvGNdnFoEB2KQDpWA5bxRILaQlDE4OMqaT1c/bP0gzxVfV77h8MGSax0K6L3RMz4
-         2KcUMWSNq5/Iv0ArQMT8vjurK0KiY+TEnba++bnYY7mJBvlzVdrRAirro1IES/kmMaDD
-         F72oJwR/zvDb+kJde9ArRuI+M3Lwr3gHY2jUFbuUg5Oksx2rsxhCT1vN9+AaJ6BQYMLr
-         EqdfU0Qx2710IBkKStgJzBWga05s0Rq3o4d5h6RlXDUFlJR9WU1NbzCKkVffv8Yp/ZsQ
-         KH/w==
-X-Gm-Message-State: AFqh2krrvjfW9bVC+domwVdng5zSzLe/GN6q6TcUvs+87g2Q8y94MILT
-	j7LeUe4Gw6zik/gUlPlHAUKHkTt4jvU=
-X-Google-Smtp-Source: AMrXdXsmDxdZq8cM2z91ONJSZpYgN/94TJ2whGPlLSHP6p4l1UeY2DLP5bLesxNRzsFnrV1I8rlX3w==
-X-Received: by 2002:a17:902:ed44:b0:18f:f3e4:3912 with SMTP id y4-20020a170902ed4400b0018ff3e43912mr22377883plb.34.1672105063158;
-        Mon, 26 Dec 2022 17:37:43 -0800 (PST)
+        bh=Pl7oTwHtNL3luRmTz79WqDwaCDMe060lPB7jTy7GUzk=;
+        b=x1jqmCt7b/Vb5CEs1qCGQd7cMLGg16CSYgXnIsm3bLiqRkG7hczcrHK1SC+D48Gh+I
+         c94tByZPTY049XWrRQ7RU+sFclL3CZO9VR9VwZlwuCAUV4DXcf3eqKlIW6FzPv0PTcoM
+         xTF3tNtBThP8AHFnytskUDnoR992ThX5Swxe+uoQRso5G18xQZhDsq8lamJLQtJCF5Tw
+         lJUA8LixG7JhTQuBJCi4qTgGOJ/y60SZuOSNdKPLk7ZxnTUKy21EOEUoTtwFPcVwWF2l
+         eSZpDgfMQ+Eb3SbU+xTpRpKxSxKp/LR110e2jGOpRzWOapJc9FsPNWD1SvifCoQf0z4x
+         Jp2Q==
+X-Gm-Message-State: AFqh2krkFIjadG7C2eYfVT9Wrqk3V72OgAJylHlXqw7dCEZXR/2R2Yij
+	qZ8/sIy8PGLRS+S5FQMPgY2DOfo+QkY=
+X-Google-Smtp-Source: AMrXdXuyV0TmYTsOYt8CgJ6jmhf3OmAGBrERmi3lW15TrHADSdACNDV0nWYC1Z8vdwMh2K1XBM3Rzw==
+X-Received: by 2002:a17:902:904b:b0:186:95c9:ddc9 with SMTP id w11-20020a170902904b00b0018695c9ddc9mr25924172plz.55.1672105064082;
+        Mon, 26 Dec 2022 17:37:44 -0800 (PST)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9181:1cf0::bccc])
-        by smtp.gmail.com with ESMTPSA id a13-20020a1709027e4d00b00183c6784704sm7596442pln.291.2022.12.26.17.37.42
+        by smtp.gmail.com with ESMTPSA id a13-20020a1709027e4d00b00183c6784704sm7596442pln.291.2022.12.26.17.37.43
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 26 Dec 2022 17:37:42 -0800 (PST)
+        Mon, 26 Dec 2022 17:37:43 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH v2 3/6] wxwidgets: Set HAVE_LARGEFILE_SUPPORT
-Date: Mon, 26 Dec 2022 17:37:35 -0800
-Message-Id: <20221227013738.3840802-3-raj.khem@gmail.com>
+Subject: [meta-python][PATCH v2 4/6] python3-wxgtk4: Do not use GetAssertStackTrace with USE_STACKWALKER disabled
+Date: Mon, 26 Dec 2022 17:37:36 -0800
+Message-Id: <20221227013738.3840802-4-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.39.0
 In-Reply-To: <20221227013738.3840802-1-raj.khem@gmail.com>
 References: <20221227013738.3840802-1-raj.khem@gmail.com>
@@ -60,76 +60,74 @@ Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 27 Dec 2022 01:37:53 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100251
-
-cmake somehow fails to set it.
+ <openembedded-devel@lists.openembedded.org>; Tue, 27 Dec 2022 01:37:54 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100252
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...VE_LARGEFILE_SUPPORT-to-1-explicitly.patch | 30 +++++++++++++++++++
- .../wxwidgets/wxwidgets_3.2.1.bb              |  4 +++
- 2 files changed, 34 insertions(+)
- create mode 100644 meta-oe/recipes-extended/wxwidgets/wxwidgets/0001-Set-HAVE_LARGEFILE_SUPPORT-to-1-explicitly.patch
+ ...y-use-GetAssertStackTrace-under-USE_.patch | 32 +++++++++++++++++++
+ .../python3-wxgtk4/python3-wxgtk4_4.2.0.bb    |  9 +++---
+ 2 files changed, 37 insertions(+), 4 deletions(-)
+ create mode 100644 meta-python/recipes-devtools/python3-wxgtk4/python3-wxgtk4/0001-sip-Conditionally-use-GetAssertStackTrace-under-USE_.patch
 
-diff --git a/meta-oe/recipes-extended/wxwidgets/wxwidgets/0001-Set-HAVE_LARGEFILE_SUPPORT-to-1-explicitly.patch b/meta-oe/recipes-extended/wxwidgets/wxwidgets/0001-Set-HAVE_LARGEFILE_SUPPORT-to-1-explicitly.patch
+diff --git a/meta-python/recipes-devtools/python3-wxgtk4/python3-wxgtk4/0001-sip-Conditionally-use-GetAssertStackTrace-under-USE_.patch b/meta-python/recipes-devtools/python3-wxgtk4/python3-wxgtk4/0001-sip-Conditionally-use-GetAssertStackTrace-under-USE_.patch
 new file mode 100644
-index 0000000000..5160f2e1fe
+index 0000000000..f8a3061ae0
 --- /dev/null
-+++ b/meta-oe/recipes-extended/wxwidgets/wxwidgets/0001-Set-HAVE_LARGEFILE_SUPPORT-to-1-explicitly.patch
-@@ -0,0 +1,30 @@
-+From e108aff9d6dae613f486c1b1681f4a3cdf17b845 Mon Sep 17 00:00:00 2001
++++ b/meta-python/recipes-devtools/python3-wxgtk4/python3-wxgtk4/0001-sip-Conditionally-use-GetAssertStackTrace-under-USE_.patch
+@@ -0,0 +1,32 @@
++From b9f95c06b2e7a525f4f93d705976882e8dcba6ab Mon Sep 17 00:00:00 2001
 +From: Khem Raj <raj.khem@gmail.com>
-+Date: Mon, 19 Dec 2022 15:07:55 -0800
-+Subject: [PATCH] Set HAVE_LARGEFILE_SUPPORT to 1 explicitly
++Date: Tue, 20 Dec 2022 09:46:31 -0800
++Subject: [PATCH] sip: Conditionally use GetAssertStackTrace under
++ USE_STACKWALKER
 +
-+nothing sets this to 0, but for some reason it gets undef'd
++Musl eg. does not implement stack walker ( backtrace ) therefore it gets
++disabled for wxwidgets on those systems. This needs to be checked before using
++GetAssertStackTrace()
 +
 +Upstream-Status: Pending
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +---
-+ build/cmake/setup.h.in | 3 +--
-+ 1 file changed, 1 insertion(+), 2 deletions(-)
++ sip/cpp/sip_corewxAppTraits.cpp | 4 ++++
++ 1 file changed, 4 insertions(+)
 +
-+diff --git a/build/cmake/setup.h.in b/build/cmake/setup.h.in
-+index bce33a73f3..22afb4cfa0 100644
-+--- a/build/cmake/setup.h.in
-++++ b/build/cmake/setup.h.in
-+@@ -869,8 +869,7 @@
-+ /*
-+  * Define if large (64 bit file offsets) files are supported.
-+  */
-+-#cmakedefine HAVE_LARGEFILE_SUPPORT 1
-+-
-++#define HAVE_LARGEFILE_SUPPORT 1
-+ /*
-+  * Use OpenGL
-+  */
-+-- 
-+2.39.0
-+
-diff --git a/meta-oe/recipes-extended/wxwidgets/wxwidgets_3.2.1.bb b/meta-oe/recipes-extended/wxwidgets/wxwidgets_3.2.1.bb
-index ae2995db20..39b6a2bc7c 100644
---- a/meta-oe/recipes-extended/wxwidgets/wxwidgets_3.2.1.bb
-+++ b/meta-oe/recipes-extended/wxwidgets/wxwidgets_3.2.1.bb
-@@ -26,6 +26,7 @@ SRC_URI = "gitsm://github.com/wxWidgets/wxWidgets.git;branch=3.2;protocol=https
-            file://wx-config-fix-libdir-for-multilib.patch \
-            file://0001-locale-Avoid-using-glibc-specific-defines-on-musl.patch \
-            file://musl-locale-l.patch \
-+           file://0001-Set-HAVE_LARGEFILE_SUPPORT-to-1-explicitly.patch \
-            "
- SRCREV= "97e99707c5d2271a70cb686720b48dbf34ced496"
- S = "${WORKDIR}/git"
-@@ -76,6 +77,9 @@ PACKAGECONFIG[sdl_audio] = "-DwxUSE_LIBSDL=ON,-DwxUSE_LIBSDL=OFF,libsdl2"
- PACKAGECONFIG[webkit] = "-DwxUSE_WEBVIEW_WEBKIT=ON,-DwxUSE_WEBVIEW_WEBKIT=OFF,webkitgtk,,,no_gui"
- PACKAGECONFIG[curl] = "-DwxUSE_WEBREQUEST_CURL=ON,-DwxUSE_WEBREQUEST_CURL=OFF,curl"
++diff --git a/sip/cpp/sip_corewxAppTraits.cpp b/sip/cpp/sip_corewxAppTraits.cpp
++index 9c9f9d5b..1d2d2f90 100644
++--- a/sip/cpp/sip_corewxAppTraits.cpp
+++++ b/sip/cpp/sip_corewxAppTraits.cpp
++@@ -471,7 +471,11 @@ static PyObject *meth_wxAppTraits_GetAssertStackTrace(PyObject *sipSelf, PyObjec
++             PyErr_Clear();
++ 
++             Py_BEGIN_ALLOW_THREADS
+++#if wxUSE_STACKWALKER
++             sipRes = new  ::wxString((sipSelfWasArg ? sipCpp-> ::wxAppTraits::GetAssertStackTrace() : sipCpp->GetAssertStackTrace()));
+++#else
+++            sipRes = new  ::wxString("");
+++#endif
++             Py_END_ALLOW_THREADS
++ 
++             if (PyErr_Occurred())
+diff --git a/meta-python/recipes-devtools/python3-wxgtk4/python3-wxgtk4_4.2.0.bb b/meta-python/recipes-devtools/python3-wxgtk4/python3-wxgtk4_4.2.0.bb
+index df23037fc6..bf87b0a73d 100644
+--- a/meta-python/recipes-devtools/python3-wxgtk4/python3-wxgtk4_4.2.0.bb
++++ b/meta-python/recipes-devtools/python3-wxgtk4/python3-wxgtk4_4.2.0.bb
+@@ -11,10 +11,11 @@ DEPENDS = "python3-attrdict3-native python3-six-native wxwidgets-native \
+ PYPI_PACKAGE = "wxPython"
  
-+# Support LFS unconditionally
-+CXXFLAGS += "-D_FILE_OFFSET_BITS=64"
-+
- do_compile:append() {
-     # if not at re-compile
-     if [ -L ${B}/wx-config ]; then
+ SRC_URI += "file://add-back-option-build-base.patch \
+-            file://wxgtk-fixup-build-scripts.patch \
+-            file://not-overwrite-cflags-cxxflags.patch \
+-            file://0001-pypubsub-Replace-deprecated-inspect.getargspec.patch \
+-            "
++           file://wxgtk-fixup-build-scripts.patch \
++           file://not-overwrite-cflags-cxxflags.patch \
++           file://0001-pypubsub-Replace-deprecated-inspect.getargspec.patch \
++           file://0001-sip-Conditionally-use-GetAssertStackTrace-under-USE_.patch \
++           "
+ SRC_URI[sha256sum] = "663cebc4509d7e5d113518865fe274f77f95434c5d57bc386ed58d65ceed86c7"
+ 
+ S = "${WORKDIR}/wxPython-${PV}"
 -- 
 2.39.0
 
