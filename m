@@ -2,68 +2,68 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 85388C3DA7D
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 77F69C10F1B
 	for <webhook@archiver.kernel.org>; Tue, 27 Dec 2022 06:47:15 +0000 (UTC)
-Received: from mail1.bemta34.messagelabs.com (mail1.bemta34.messagelabs.com [195.245.231.4])
- by mx.groups.io with SMTP id smtpd.web11.153585.1672123627278838935
+Received: from mail1.bemta32.messagelabs.com (mail1.bemta32.messagelabs.com [195.245.230.1])
+ by mx.groups.io with SMTP id smtpd.web10.152453.1672123630040980023
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 26 Dec 2022 22:47:07 -0800
+ Mon, 26 Dec 2022 22:47:10 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=Kq+twmeo;
- spf=pass (domain: fujitsu.com, ip: 195.245.231.4, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=F13NHygD;
+ spf=pass (domain: fujitsu.com, ip: 195.245.230.1, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1672123625; i=@fujitsu.com;
-	bh=aZ972YN5scTLhM+gilyoeoXfXBy3hsivym/PIFLU7pY=;
+	s=170520fj; t=1672123628; i=@fujitsu.com;
+	bh=58B7gz5MvxVSooLnPDJYEF67UIiAAb3MeUP0AE8W1Sw=;
 	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
 	 MIME-Version:Content-Type;
-	b=Kq+twmeo3GO4f1imDpyQxIPYfKzkPPwWB5HF40kj5QWdMUjJFW6eMpOqq4a3eUosh
-	 Ec0fyQ6lWM1/LV4Ofy46IT1bzk9qXNN4zQwCRunEJbsOpr6XLx9Oj28V+HfCp4c8Wa
-	 AqAmJpoR2xXEKZCU3nrbEethd0/U4Rb8OwFeEsUFqfcfRGDwhYR3JgUUMbmH6aLWHp
-	 57Bo/3kCASZ/f1D/RQLvGPgRvbMwqd+hf9SeuPvMErk63wkH4PfSshncTcv/yR9XYV
-	 ohFuZr4KiA7wmuZcajoUk/6n9E6H7qi+cvhwH/gBfYXkpPH6yvmotP3cJaVLJHBF34
-	 h6I1xT+tiJmPw==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrCIsWRWlGSWpSXmKPExsViZ8OxWffllFX
-  JBpNbOSwuHl7K7MDocW7jCsYAxijWzLyk/IoE1owPt68zF3RzVvy/LdHAuIaji5GLQ0jgAaPE
-  tZ03WCCcy0wSRye2MHUxcgI5exgl9q2qBbHZBKQkbtz/zwZiiwjoSyydvYcZxGYWUJF48buHH
-  cQWFgiQuHR6BiOIzSKgKrHlzl4gm4ODV8BJommOBEhYQkBBYsrD92CtnALOElf2dzNCrHKS2L
-  vqBCuIzSsgKHFy5hMWiPESEgdfvGCG6FWUmH25mQXCrpCYNauNCcJWk7h6bhPzBEbBWUjaZyF
-  pX8DItIrRrDi1qCy1SNfQXC+pKDM9oyQ3MTNHL7FKN1EvtVS3PLW4RNdIL7G8WC+1uFivuDI3
-  OSdFLy+1ZBMjMHBTihUTdjAeWvZH7xCjJAeTkiivVPeqZCG+pPyUyozE4oz4otKc1OJDjDIcH
-  EoSvKWTgHKCRanpqRVpmTnAKIJJS3DwKIlAtPIWFyTmFmemQ6ROMSpKifN+BekTAElklObBtc
-  Ei9xKjrJQwLyMDA4MQT0FqUW5mCar8K0ZxDkYlYV51kPE8mXklcNNfAS1mAlr84dBKkMUliQg
-  pqQam7usBVxYmPucQW3dtcshMHs11ol+m75PS2nw4MepgY/60G6u098tFuO2O/yPWcur86093
-  XpsrLRScvVTnNf+ENbvlTB4ypW+89yrO7sPF6axvWXvPnVtp8TNWfWHIjBZrw2OTrOYuezv3/
-  Ipdjud//r2yzrn6SqlVkPdflsULPweaa9+YU+J49YCgWOrvE9PKTPNUz/lwHRQV89ZLP8iu8z
-  j4SfnxRwdSJDiF/X32a0aIPFJ8ry996k/Z1In1s3VWfq3Wv2BYoRV/a1qt+KryaluGhMiX4im
-  sr57t67kv3exqo+Gjk3JSdXae5dEWPo6e7abGd3pD2Satn1gwacKryxmiZUJLevPXXq5+InHa
-  S4mlOCPRUIu5qDgRAGZf8cBXAwAA
+	b=F13NHygDW5L8zh5KYdItP4x8FpizZReGec0ODHi3hxtWsg2eWwhCHaHMXHTdebTQH
+	 hUDElJEa9w62mq+ivOaTlQDd6qmi20CazRHIAtr6+orNartPWlDv55pKyoyTCW8D6P
+	 N5s4/8Q94S6/Lh9q93xC6bgRt5Tx9HlPz+ByE4s5mSD9EtjvK4oZZoMn0XtsoyInsq
+	 FS9oTYfgLyCcs/h8xCLBHAkjCcuQdT2QCxHSR/vPo7MR1nbJmlYVRR0l433KMg/TCD
+	 mdWMFyjvoylcc2AgqAJJX0AT9yc9K8/K6MElZaox0hy06DpAcng1qsPPuBV1HKLlkB
+	 Dpr2VarBAjYeg==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrKIsWRWlGSWpSXmKPExsViZ8ORpPt6yqp
+  kg7kvZCwuHl7K7MDocW7jCsYAxijWzLyk/IoE1oxTPZvZCxYKVkz4+YyxgXE1fxcjF4eQwENG
+  iYUnu9ggnMtMEt82N0E5exgl1uz8xt7FyMnBJiAlceP+fzYQW0RAX2Lp7D3MIDazgIrEi989Y
+  DXCAn4SD79eZuxi5OBgEVCVWL/RECTMK+AksenzDbByCQEFiSkP34PZnALOElf2dzOC2EJANX
+  tXnWCFqBeUODnzCQvEeAmJgy9eQPUqSsy+3MwCYVdIzJrVxgRhq0lcPbeJeQKj4Cwk7bOQtC9
+  gZFrFaFqcWlSWWqRrqpdUlJmeUZKbmJmjl1ilm6iXWqpbnlpcomuol1herJdaXKxXXJmbnJOi
+  l5dasokRGLopxYxlOxi7l/3RO8QoycGkJMor1b0qWYgvKT+lMiOxOCO+qDQntfgQowwHh5IEb
+  +kkoJxgUWp6akVaZg4wjmDSEhw8SiIQrbzFBYm5xZnpEKlTjIpS4rxfQfoEQBIZpXlwbbDYvc
+  QoKyXMy8jAwCDEU5BalJtZgir/ilGcg1FJmFcdZDxPZl4J3PRXQIuZgBZ/OLQSZHFJIkJKqoG
+  pxkRi3SQz/vB1BeGH/rb9DtIMfvPliRWD0o6w3Uaeqfyp8wx8dBmqpvy2W/D1/5R5GrsOL4pK
+  li4O/aLW8cemInnPuoArE549KDA3sxW9LFfe/uTBwgN8uxw2+n0tEth5ynh9vVmKpkGlrmbQd
+  717DEV3S22km6M7nSU6jTVzn5czbfhXdp5h3YQPxxiOsPmx+p7n6Ge6LZbI1GLp47mhT2heuZ
+  foFeewTU4ljtrXHdxitmaX/2PkfdM2Ofe3hafqEd+Ggkn5+SU1Qjf/OqU+X1f8P7fitYV2t84
+  Fw4r9//eu0y++bFr5kpm5Ikx+1lXLaasnlaa6PT704KbcBfWoT0w2Lf2NV2KEXtfHKLEUZyQa
+  ajEXFScCADjZVshYAwAA
 X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-4.tower-565.messagelabs.com!1672123625!260245!1
-X-Originating-IP: [62.60.8.179]
+X-Msg-Ref: server-14.tower-587.messagelabs.com!1672123627!180775!1
+X-Originating-IP: [62.60.8.98]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.101.2; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 7218 invoked from network); 27 Dec 2022 06:47:05 -0000
-Received: from unknown (HELO n03ukasimr04.n03.fujitsu.local) (62.60.8.179)
-  by server-4.tower-565.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 27 Dec 2022 06:47:05 -0000
-Received: from n03ukasimr04.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTP id CF8657B
-	for <openembedded-devel@lists.openembedded.org>; Tue, 27 Dec 2022 06:47:04 +0000 (GMT)
+Received: (qmail 16932 invoked from network); 27 Dec 2022 06:47:07 -0000
+Received: from unknown (HELO n03ukasimr03.n03.fujitsu.local) (62.60.8.98)
+  by server-14.tower-587.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 27 Dec 2022 06:47:07 -0000
+Received: from n03ukasimr03.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr03.n03.fujitsu.local (Postfix) with ESMTP id 16E121B1
+	for <openembedded-devel@lists.openembedded.org>; Tue, 27 Dec 2022 06:47:07 +0000 (GMT)
 Received: from R01UKEXCASM126.r01.fujitsu.local (R01UKEXCASM126 [10.183.43.178])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTPS id C351473
-	for <openembedded-devel@lists.openembedded.org>; Tue, 27 Dec 2022 06:47:04 +0000 (GMT)
+	by n03ukasimr03.n03.fujitsu.local (Postfix) with ESMTPS id 0BD6C7B
+	for <openembedded-devel@lists.openembedded.org>; Tue, 27 Dec 2022 06:47:07 +0000 (GMT)
 Received: from localhost.localdomain (10.167.225.33) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.42; Tue, 27 Dec 2022 06:47:03 +0000
+ (TLS) id 15.0.1497.42; Tue, 27 Dec 2022 06:47:05 +0000
 From: <wangmy@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-python] [PATCH] python3-sentry-sdk: upgrade 1.12.0 -> 1.12.1
-Date: Tue, 27 Dec 2022 14:46:24 +0800
-Message-ID: <1672123586-32004-3-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH] python3-supervisor: upgrade 4.2.4 -> 4.2.5
+Date: Tue, 27 Dec 2022 14:46:25 +0800
+Message-ID: <1672123586-32004-4-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 In-Reply-To: <1672123586-32004-1-git-send-email-wangmy@fujitsu.com>
 References: <1672123586-32004-1-git-send-email-wangmy@fujitsu.com>
@@ -77,35 +77,51 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 27 Dec 2022 06:47:15 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100272
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100273
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
 Changelog:
-Fix link errors to OTel spans (#1787) 
+==========
+-Fixed a bug where the XML-RPC method supervisor.startProcess() would return 500
+ Internal Server Error instead of an XML-RPC fault response if the command could
+ not be parsed.
+-Fixed a bug on Python 2.7 where a UnicodeDecodeError may have occurred when
+ using the web interface.
+-Removed use of urllib.parse functions splithost, splitport, and splittype
+ deprecated in Python 3.8.
+-Removed use of asynchat and asyncore deprecated in Python 3.10.
+-The return value of the XML-RPC method supervisor.getAllConfigInfo() now
+ includes the directory, uid, and serverurl of the program.
+-If a subprocess exits with a unexpected exit code (one not listed in
+ exitcodes= in a [program:x] section) then the exit will now be logged at
+ the WARN level instead of INFO.
+-supervisorctl shutdown now shows an error message if an argument is given.
+-File descriptors are now closed using the faster os.closerange() instead of
+ calling os.close() in a loop.
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- ...ython3-sentry-sdk_1.12.0.bb => python3-sentry-sdk_1.12.1.bb} | 2 +-
+ ...{python3-supervisor_4.2.4.bb => python3-supervisor_4.2.5.bb} | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-sentry-sdk_1.12.0.bb => python3-sentry-sdk_1.12.1.bb} (86%)
+ rename meta-python/recipes-devtools/python/{python3-supervisor_4.2.4.bb => python3-supervisor_4.2.5.bb} (91%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-sentry-sdk_1.12.0.bb b/meta-python/recipes-devtools/python/python3-sentry-sdk_1.12.1.bb
-similarity index 86%
-rename from meta-python/recipes-devtools/python/python3-sentry-sdk_1.12.0.bb
-rename to meta-python/recipes-devtools/python/python3-sentry-sdk_1.12.1.bb
-index 455faf8a5..00b14ed1a 100644
---- a/meta-python/recipes-devtools/python/python3-sentry-sdk_1.12.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-sentry-sdk_1.12.1.bb
-@@ -15,7 +15,7 @@ RDEPENDS:${PN} += "\
- 	${PYTHON_PN}-datetime \
- "
+diff --git a/meta-python/recipes-devtools/python/python3-supervisor_4.2.4.bb b/meta-python/recipes-devtools/python/python3-supervisor_4.2.5.bb
+similarity index 91%
+rename from meta-python/recipes-devtools/python/python3-supervisor_4.2.4.bb
+rename to meta-python/recipes-devtools/python/python3-supervisor_4.2.5.bb
+index d67707557..53f8011b0 100644
+--- a/meta-python/recipes-devtools/python/python3-supervisor_4.2.4.bb
++++ b/meta-python/recipes-devtools/python/python3-supervisor_4.2.5.bb
+@@ -7,7 +7,7 @@ HOMEPAGE = "https://github.com/Supervisor/supervisor"
+ LICENSE = "BSD-4-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSES.txt;md5=5b4e3a2172bba4c47cded5885e7e507e"
  
--SRC_URI[sha256sum] = "dc0fe6ef2f77a3853b399c75c97d87be7666098817c1c314f8fcdf68a6865914"
-+SRC_URI[sha256sum] = "5bbe4b72de22f9ac1e67f2a4e6efe8fbd595bb59b7b223443f50fe5802a5551c"
+-SRC_URI[sha256sum] = "40dc582ce1eec631c3df79420b187a6da276bbd68a4ec0a8f1f123ea616b97a2"
++SRC_URI[sha256sum] = "34761bae1a23c58192281a5115fb07fbf22c9b0133c08166beffc70fed3ebc12"
  
- PYPI_PACKAGE = "sentry-sdk"
- 
+ PYPI_PACKAGE = "supervisor"
+ inherit pypi systemd setuptools3
 -- 
 2.25.1
 
