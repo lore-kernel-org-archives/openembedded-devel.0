@@ -1,419 +1,876 @@
-Return-Path: <alex.kiernan@gmail.com>
+Return-Path: <sdoshi@mvista.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0DC51C4332F
-	for <webhook@archiver.kernel.org>; Thu, 29 Dec 2022 09:45:31 +0000 (UTC)
-Received: from mail-wm1-f49.google.com (mail-wm1-f49.google.com [209.85.128.49])
- by mx.groups.io with SMTP id smtpd.web10.201028.1672307123269533808
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 270A1C4332F
+	for <webhook@archiver.kernel.org>; Thu, 29 Dec 2022 13:01:42 +0000 (UTC)
+Received: from mail-pl1-f169.google.com (mail-pl1-f169.google.com [209.85.214.169])
+ by mx.groups.io with SMTP id smtpd.web10.203249.1672318891277710775
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 29 Dec 2022 01:45:23 -0800
+ Thu, 29 Dec 2022 05:01:33 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=Yj4fib0R;
- spf=pass (domain: gmail.com, ip: 209.85.128.49, mailfrom: alex.kiernan@gmail.com)
-Received: by mail-wm1-f49.google.com with SMTP id i17-20020a05600c355100b003d99434b1cfso2637289wmq.1
-        for <openembedded-devel@lists.openembedded.org>; Thu, 29 Dec 2022 01:45:23 -0800 (PST)
+ dkim=pass header.i=@mvista.com header.s=google header.b=MRfQlcTu;
+ spf=pass (domain: mvista.com, ip: 209.85.214.169, mailfrom: sdoshi@mvista.com)
+Received: by mail-pl1-f169.google.com with SMTP id 20so5430390plo.3
+        for <openembedded-devel@lists.openembedded.org>; Thu, 29 Dec 2022 05:01:31 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
+        d=mvista.com; s=google;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=ecq0vUKjlDgHgve2UJhHhXsQB3AY3ULuvMh46nV+Sf0=;
-        b=Yj4fib0RjALJCebwRtWl+znnbyHNMoUPehNrVuBGPwFs/dHpTuwHwzKu89/Bb5cit9
-         revY/4t+c3Vejr3Z5xWiIEwvOx+I2OdNEipSLxFQjqLleVHE/LV/Z7IXLEh2DGngb3n/
-         +BNn8FIg4Xmbrqf6BMuqm6GcQKCTCguxOP1NVOwVOQ/QV6qvXP1WtekEygk0Z8iHqG7i
-         3vhikLeJXDNzHlYLyvxitmgWEp4ZwMc0M9AVvklOxiBTSLmLOVZsmAupIEhcKQwvX2EN
-         ed+RoyYlCbUcL7Porba8AVA5B/89X6JoUamn78FlQA6qcpMd/daZ0BcCJfFf7FSaH0Pe
-         cpvw==
+        bh=LHR5kbP0Z6fpADdK93vSmXyYBR/EVqXosJLZ3L/BGIg=;
+        b=MRfQlcTul3bdZyBCjvAzbr0tKLRKuWFGq2JVIldfshuuOpoAYkWKkWQoFR0xzJqijQ
+         W9lTgtr8b+vHSBZHw0ZpnjH7tMMRJvp9SDxFow7Si/vXj9fjWFkX5kaQ1yXyW/9I/HhA
+         Mu+srS3zRXQubLn5ktPRqT7ersfTdo90L9D6I=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=ecq0vUKjlDgHgve2UJhHhXsQB3AY3ULuvMh46nV+Sf0=;
-        b=B/5Jo4gbVvxT8nk+kG3FImRSpN1379DzdkFpTwKv3ptqv6vQjhK9l66OGSiFHQYL4X
-         Hzq7H459oPrd3EsNSjhuTwYEdWSyb/hsKOaF0x/WIXQtms37RfHLjF9e64+vnwJfawsM
-         uyFG+ImrHIUpkQqqcWMOtPLFDStcGsUZoTSbMNsFOicnNpfcyZc5diHDvxZg1c46qfrK
-         CF3naJppkVfIAcy9HgOW3UPfNP9CHTRjG2Lt4W93zwmDRb5yUkL3jCZhrqnlt8z73l2c
-         wV+D/jsPLgn4dWpOEqpAZulOz/nT3qMk0tpYLTF1X34lN5ilCsIz5pBgB3NMDbhJF0Iw
-         cHvg==
-X-Gm-Message-State: AFqh2koLcb+C0QsjFnK5BLEupNxVINThirNA1jl+oPYGRZcCSInnINkC
-	W+fvVNDKQwzKMPH+KCYtrIvdCHD8NlU=
-X-Google-Smtp-Source: AMrXdXuUu+12lqX+NgpNQhZQgAIsrugLHUBAgc3A9ab8DQQhZ2WlgRCR4Xg2uT0NnKrpFDfFtsy50g==
-X-Received: by 2002:a05:600c:4c21:b0:3d3:468e:cedf with SMTP id d33-20020a05600c4c2100b003d3468ecedfmr19711177wmp.16.1672307121362;
-        Thu, 29 Dec 2022 01:45:21 -0800 (PST)
-Received: from localhost.localdomain (cust246-dsl91-135-6.idnet.net. [91.135.6.246])
-        by smtp.gmail.com with ESMTPSA id m8-20020a05600c4f4800b003cfaae07f68sm30448428wmq.17.2022.12.29.01.45.20
+        bh=LHR5kbP0Z6fpADdK93vSmXyYBR/EVqXosJLZ3L/BGIg=;
+        b=cswNK9NhcpU1HzTcPomuBuVoo7exm+KiwlQq3BuFQ+IhKHEGAV2wJLO/L9svH3shVV
+         GY/TvLWzIYTKrRAv0KFfx1spKc8HtczBnsYwXw03NHyZRRz6xIz1lfYiONWUTehXEHK4
+         f3ZHLBxYFHll3DcFI6Ok+IseGh2TAxDirUEj6Rrn/uUhafPytgs8Opsi3YBvI1t+RZM+
+         OGYwSrKMlXKNDFp272zAmKa9U1kYtTNCInL8ZI7x3cNXl+uuhHv/d16NiH0n223lFbNM
+         DgK5xyH6vN7cT6/SE68Mx8dMqQE6O43jpAzZ/zBoy4lt8BY5rYF0sjx0rIU8lsntSP0A
+         LHBQ==
+X-Gm-Message-State: AFqh2kqj2KU06busw4PdxetW7ZXV6BR/uiv6SyQmriHEvmOnCEsM3o21
+	znngDXQAMoQFX6WkExwRSSe6KdkBYOiqQcJKhrQ=
+X-Google-Smtp-Source: AMrXdXugnNmMzoBGFUwFXQ1vJLT2t+ERmCGD7vJbDBIi02yh15lQwvsZNlC9YS8vFKyKl8W06QKkPQ==
+X-Received: by 2002:a05:6a20:438e:b0:a5:7700:2a1a with SMTP id i14-20020a056a20438e00b000a577002a1amr40000299pzl.1.1672318889741;
+        Thu, 29 Dec 2022 05:01:29 -0800 (PST)
+Received: from mv-Latitude-3420.mvista.com ([49.34.204.49])
+        by smtp.gmail.com with ESMTPSA id w66-20020a623045000000b0057fec210d33sm11956609pfw.152.2022.12.29.05.01.27
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 29 Dec 2022 01:45:20 -0800 (PST)
-From: Alex Kiernan <alex.kiernan@gmail.com>
+        Thu, 29 Dec 2022 05:01:29 -0800 (PST)
+From: Siddharth <sdoshi@mvista.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Alex Kiernan <alex.kiernan@gmail.com>
-Subject: [meta-oe][PATCH] ostree: Upgrade 2022.5 -> 2022.7
-Date: Thu, 29 Dec 2022 09:45:15 +0000
-Message-Id: <20221229094515.15178-1-alex.kiernan@gmail.com>
-X-Mailer: git-send-email 2.39.0
+Cc: Siddharth Doshi <sdoshi@mvista.com>
+Subject: [[kirkstone][meta-oe][PATCH] xterm : Fix CVE-2022-45063 code execution via OSC 50 input sequences]  CVE-2022-45063
+Date: Thu, 29 Dec 2022 18:29:20 +0530
+Message-Id: <20221229125920.567710-1-sdoshi@mvista.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 29 Dec 2022 09:45:31 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100296
+ <openembedded-devel@lists.openembedded.org>; Thu, 29 Dec 2022 13:01:42 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100297
 
-Convert to tarballs which are now being published. Drop backported
-fixes, drop s390 bash patch (done differently upstream).
+From: Siddharth Doshi <sdoshi@mvista.com>
 
-v2022.7
-(Some of these commits are actually only for the Rust bindings;
-will try to enhance the release flow to more clearly filter
-those out)
+Upstream-Status: Backport
+[https://github.com/ThomasDickey/xterm-snapshots/commit/787636674918873a091e7a4ef5977263ba982322]
+CVE: CVE-2022-45063
 
-On the feature front, there's new APIs for idempotent delete operations on
-kernel arguments, and for handling unshare() to
-manipulate (otherwise) read-only sysroot.
-
-A few very small memory leak fixes.
-
-Many people will be happy that we now retry HTTP requests after
-receiving HTTP 500 errors.
-
-There's a notable bugfix avoiding rebuilding SELinux policy
-when creating a first deployment.
-
-Thanks to all contributors!
-
-Colin Walters (18):
-      Remove readdir-rand
-      deploy: Don't rebuild selinux policy on first deployment
-      ci: Bump memory for ISO testing flow
-      rust: Update to cap-std 1.0
-      rust: Drop `openat` dependency
-      ci: Fix case where cosa != buildroot
-      rust: Update to gio 0.16
-      repo: Avoid potential double unwind when writing panic value
-      Allow missing docs on two `glib::wrapper` functions
-      sysroot: Add an API to initialize with mountns
-      rust: Regenerate with latest gir and C sources
-      tests/inst: Update to latest ostree-ext
-      tests/inst: Drop nix dependency
-      tests/inst: Update cap-std-ext to 1.0
-      tests/inst: Update sh-inline
-      tests: Require OSTREE_TEST_SUDO to be set to use `sudo`
-      ci: Add a flow that combines C build and Rust integration tests
-      Release 2022.7
-
-Jonathan Lebon (4):
-      ci: Bump memory request, use fcosKolaTestIso
-      ci: Drop unnecessary outer stage
-      ci: Use new names for custom kola steps
-      ci: bump cosaPod memory requirement to 5Gi
-
-Luca BRUNO (20):
-      configure: post-release version bump
-      lib/repo-checkout: fix typo in error message
-      lib/bootloader-zipl: check for errors when opening initrd
-      lib/static-delta: document and check parameters format
-      rust/tests: fix static delta generation testcase
-      lib/sign-ed25519: convert invariant checks to assertions
-      rust: regenerate bindings after latest release (2022.6)
-      ostree: manually patch generated files
-      rust: update manual helpers
-      ci/rust: bump linting toolchain to latest stable (1.64)
-      lib/repo-refs: properly return an error value
-      rust: update pinned gir tool to 0.15
-      rust/ostree-sys: regenerate for gtk-rs 0.15
-      rust/ostree: regenerate for gtk-rs 0.15
-      ci/rust: test from git using latest feature
-      cargo: prepare ostree 0.16.0 and ostree-sys 0.11.0
-      copr: only use libostree tags
-      ci: adjust git tags filtering
-      cargo: bump minimum Rust version to 1.63
-      ostree: manually patch generated files
-
-Manuel Stühn (1):
-      Add test for generating static delta to file
-
-Philip Withnall (4):
-      ot-builtin-commit: Fix a typo in a command line help string
-      ot-builtin-commit: Don’t mention a C function name in a help string
-      lib/pull: Fix a small leak when a variable is reused
-      ot-builtin-pull: Fix a minor leak with progress reporting
-
-Rafael Garcia Ruiz (2):
-      ostree_kernel_args_contains for OstreeKernelArgs
-      Idempotent delete operation for  OstreeKernelArgs
-
-Ricardo Noriega (2):
-      Enabling retry for HTTP 500 internal server error
-      Add tests for cases under random 500s
-
-Simon McVittie (2):
-      readdir-rand: Copy full size of struct dirent
-      Replace calls to g_memdup() with g_memdup2()
-
-dependabot[bot] (2):
-      build(deps): bump libglnx from `26375b5` to `e701578`
-      build(deps): bump libglnx from `e701578` to `4e44fd9`
-
-2022.6
-This release contains a collection of bugfixes and enhancements. Notable
-fixes concern finalize-staged, which should now better support
-automounted partitions and skip waiting for termination signal.
-
-A file descriptor leak has been fixed in the commit logic. The codebase
-has also been fixed to avoid conflicting declarations when building with
-latest glibc (>= 2.36). Thanks @GeorgesStavracas for both fixes!
-
-On the feature side, there is now basic support for handling overlayfs
-whiteouts on checkout through a new --process-passthrough-whiteouts
-flag. This is useful for users that need to carry container storage
-embedded into ostree commits. Thanks @mangelajo for that!
-
-The ostree rev-parse command gained a new --single flag to better
-support repositories containing exactly one commit.  Overall, the s390x
-Secure Execution (SE) logic has been reworked to stop relying on glue
-scripts.
-
-Thanks to all contributors!
-
-Andrea Perotti (1):
-      Fix recursive git archive reference
-
-Colin Walters (12):
-      configure: post-release version bump
-      rust-bindings: Fix `cargo fmt`
-      deny.toml: Add `Unicode-DFS-2016`
-      Remove unused `linux/fs.h` includes
-      Move FIFREEZE/FITHAW ioctl invocations into linuxfsutil.c
-      cli/rev-parse: Port to new code style
-      cli/rev-parse: Add `--single` option
-      rust: Update to latest git
-      ci: Also drop seccomp on debian testing
-      rust: Bind `ostree_repo_list_commits_starting_with`
-      finalize-staged: Don't listen to `SIGTERM`, just let kernel exit us
-      README.md: Link otto
-
-Dan Nicholson (3):
-      main: Factor out sysroot loading
-      finalize-staged: Ensure /boot automount doesn't expire
-      lib/pull: Fix max-metadata-size documentation
-
-Georges Basile Stavracas Neto (1):
-      lib/commit: Unref repo on success
-
-Huijing Hei (1):
-      Fix `ostree admin kargs edit-in-place` assertion when deployments are pending
-
-Jon Oster (1):
-      docs: Add aktualizr and TorizonCore to related projects
-
-Jonathan Lebon (3):
-      lib/commit: Directly use FICLONE for payload link
-      tests/kolainst/staged-deploy: parse `rpm-ostree status --json` instead
-      docs: Add section about staged deployments
-
-Luca BRUNO (7):
-      libostree: fix a typo in annotation
-      lib/bootloader: assert invariants
-      lib/mtree: drop redundant name checks
-      otutil: add error handling to variant builders
-      lib/sign: convert invariant checks to assertions
-      lib/repo: properly initialize boolean variable
-      lib/sysroot-deploy: explicitly handle `g_variant_lookup` results
-
-Lukas Kalbertodt (1):
-      Update to `libtest-mimic` 0.5.0
-
-Miguel Angel Ajo (1):
-      Support overlayfs whiteouts on checkout
-
-Nikita Dubrovskii (3):
-      s390x: ensure both 'root' and 'boot' luks keys exist
-      s390x: simplify 's390x-se-luks-gencpio' script
-      s390x: use 'libarchive' to modify initrd in SE case
-
-Sam James (1):
-      buildutil/glibtests.m4: fix bashism
-
-dependabot[bot] (1):
-      build(deps): bump libglnx from `c59eb27` to `26375b5`
-
-git-bruh (1):
-      ostree-fetcher-curl: check for HTTP2 support before trying to use it
-
-Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
+Signed-off-by: Siddharth Doshi <sdoshi@mvista.com>
 ---
+ .../xorg-app/xterm/CVE-2022-45063.patch       | 782 ++++++++++++++++++
+ .../recipes-graphics/xorg-app/xterm_372.bb    |   1 +
+ 2 files changed, 783 insertions(+)
+ create mode 100644 meta-oe/recipes-graphics/xorg-app/xterm/CVE-2022-45063.patch
 
- ...01-Remove-unused-linux-fs.h-includes.patch | 42 ------------------
- ...uild-selinux-policy-on-first-deploym.patch | 44 -------------------
- ...-se-luks-gencpio-There-is-no-bashism.patch | 25 -----------
- .../{ostree_2022.5.bb => ostree_2022.7.bb}    |  9 ++--
- 4 files changed, 3 insertions(+), 117 deletions(-)
- delete mode 100644 meta-oe/recipes-extended/ostree/ostree/0001-Remove-unused-linux-fs.h-includes.patch
- delete mode 100644 meta-oe/recipes-extended/ostree/ostree/0001-deploy-Don-t-rebuild-selinux-policy-on-first-deploym.patch
- delete mode 100644 meta-oe/recipes-extended/ostree/ostree/0001-s390x-se-luks-gencpio-There-is-no-bashism.patch
- rename meta-oe/recipes-extended/ostree/{ostree_2022.5.bb => ostree_2022.7.bb} (95%)
-
-diff --git a/meta-oe/recipes-extended/ostree/ostree/0001-Remove-unused-linux-fs.h-includes.patch b/meta-oe/recipes-extended/ostree/ostree/0001-Remove-unused-linux-fs.h-includes.patch
-deleted file mode 100644
-index 2659e4696d61..000000000000
---- a/meta-oe/recipes-extended/ostree/ostree/0001-Remove-unused-linux-fs.h-includes.patch
-+++ /dev/null
-@@ -1,42 +0,0 @@
--From 7d32c352f628747cfadabf9fe7fcc13608e5dfe6 Mon Sep 17 00:00:00 2001
--From: Colin Walters <walters@verbum.org>
--Date: Wed, 3 Aug 2022 10:37:40 -0400
--Subject: [PATCH] Remove unused `linux/fs.h` includes
--
--Prep for fixing conflicts introduced by newer glibc.
--cc https://github.com/ostreedev/ostree/issues/2685
--
--Upstream-Status: Backport [https://github.com/ostreedev/ostree/commit/edba4b33be10c05253bfa94895dfbc8477e44d76]
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
-- src/libostree/ostree-repo-commit.c | 1 -
-- src/ostree/ot-main.c               | 1 -
-- 2 files changed, 2 deletions(-)
--
--diff --git a/src/libostree/ostree-repo-commit.c b/src/libostree/ostree-repo-commit.c
--index afab3fdf..35b16c71 100644
----- a/src/libostree/ostree-repo-commit.c
--+++ b/src/libostree/ostree-repo-commit.c
--@@ -30,7 +30,6 @@
-- #include <sys/xattr.h>
-- #include <glib/gprintf.h>
-- #include <sys/ioctl.h>
---#include <linux/fs.h>
-- #include <ext2fs/ext2_fs.h>
-- 
-- #include "otutil.h"
--diff --git a/src/ostree/ot-main.c b/src/ostree/ot-main.c
--index b7b50d67..7a4405a5 100644
----- a/src/ostree/ot-main.c
--+++ b/src/ostree/ot-main.c
--@@ -28,7 +28,6 @@
-- #include <string.h>
-- #include <sys/statvfs.h>
-- #include <sys/mount.h>
---#include <linux/fs.h>
-- 
-- #include "ot-main.h"
-- #include "ostree.h"
---- 
--2.37.1
--
-diff --git a/meta-oe/recipes-extended/ostree/ostree/0001-deploy-Don-t-rebuild-selinux-policy-on-first-deploym.patch b/meta-oe/recipes-extended/ostree/ostree/0001-deploy-Don-t-rebuild-selinux-policy-on-first-deploym.patch
-deleted file mode 100644
-index 248dcf49b864..000000000000
---- a/meta-oe/recipes-extended/ostree/ostree/0001-deploy-Don-t-rebuild-selinux-policy-on-first-deploym.patch
-+++ /dev/null
-@@ -1,44 +0,0 @@
--From bd325061dc9585886f7e60e58d9fc0c8b37e71db Mon Sep 17 00:00:00 2001
--From: Colin Walters <walters@verbum.org>
--Date: Wed, 9 Nov 2022 11:18:36 -0500
--Subject: [PATCH] deploy: Don't rebuild selinux policy on first deployment
--
--Basically, it should not be necessary - the policy should be
--up-to-date.  We don't want to force on continual policy rebuilds.
--
--Even trying to run bwrap when we're *not* in a booted
--root can cause failures in nested containerization scenarios.
--
--Closes: https://github.com/ostreedev/ostree/issues/2758
--
--Upstream-Status: Backport
--[https://github.com/ostreedev/ostree/commit/bd325061dc9585886f7e60e58d9fc0c8b37e71db]
--
--Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
-----
-- src/libostree/ostree-sysroot-deploy.c | 6 +++---
-- 1 file changed, 3 insertions(+), 3 deletions(-)
--
--diff --git a/src/libostree/ostree-sysroot-deploy.c b/src/libostree/ostree-sysroot-deploy.c
--index f27ae0e1..26b07080 100644
----- a/src/libostree/ostree-sysroot-deploy.c
--+++ b/src/libostree/ostree-sysroot-deploy.c
--@@ -2987,12 +2987,12 @@ sysroot_finalize_deployment (OstreeSysroot     *self,
--       if (!merge_configuration_from (self, merge_deployment, deployment, deployment_dfd,
--                                      cancellable, error))
--         return FALSE;
---    }
-- 
-- #ifdef HAVE_SELINUX
---  if (!sysroot_finalize_selinux_policy(deployment_dfd, error))
---    return FALSE;
--+      if (!sysroot_finalize_selinux_policy (deployment_dfd, error))
--+        return FALSE;
-- #endif /* HAVE_SELINUX */
--+    }
-- 
--   const char *osdeploypath = glnx_strjoina ("ostree/deploy/", ostree_deployment_get_osname (deployment));
--   glnx_autofd int os_deploy_dfd = -1;
---- 
--2.25.1
--
-diff --git a/meta-oe/recipes-extended/ostree/ostree/0001-s390x-se-luks-gencpio-There-is-no-bashism.patch b/meta-oe/recipes-extended/ostree/ostree/0001-s390x-se-luks-gencpio-There-is-no-bashism.patch
-deleted file mode 100644
-index 5cf5784f145d..000000000000
---- a/meta-oe/recipes-extended/ostree/ostree/0001-s390x-se-luks-gencpio-There-is-no-bashism.patch
-+++ /dev/null
-@@ -1,25 +0,0 @@
--From dd55633e49aa43dede3c8e1770ae8761487f050e Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Sat, 6 Aug 2022 21:52:31 -0700
--Subject: [PATCH] s390x-se-luks-gencpio: There is no bashism
--
--Upstream-Status: Pending
--
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
-- src/libostree/s390x-se-luks-gencpio | 2 +-
-- 1 file changed, 1 insertion(+), 1 deletion(-)
--
--diff --git a/src/libostree/s390x-se-luks-gencpio b/src/libostree/s390x-se-luks-gencpio
--index e821e2fe..96c1d123 100755
----- a/src/libostree/s390x-se-luks-gencpio
--+++ b/src/libostree/s390x-se-luks-gencpio
--@@ -1,4 +1,4 @@
---#!/bin/bash
--+#!/bin/sh
-- # This script creates new initramdisk with LUKS config within
-- set -euo pipefail
-- 
---- 
--2.37.1
--
-diff --git a/meta-oe/recipes-extended/ostree/ostree_2022.5.bb b/meta-oe/recipes-extended/ostree/ostree_2022.7.bb
-similarity index 95%
-rename from meta-oe/recipes-extended/ostree/ostree_2022.5.bb
-rename to meta-oe/recipes-extended/ostree/ostree_2022.7.bb
-index c6ac7cbea4fa..9e81e93d6eca 100644
---- a/meta-oe/recipes-extended/ostree/ostree_2022.5.bb
-+++ b/meta-oe/recipes-extended/ostree/ostree_2022.7.bb
-@@ -18,18 +18,15 @@ DEPENDS = " \
- "
+diff --git a/meta-oe/recipes-graphics/xorg-app/xterm/CVE-2022-45063.patch b/meta-oe/recipes-graphics/xorg-app/xterm/CVE-2022-45063.patch
+new file mode 100644
+index 000000000..167c32682
+--- /dev/null
++++ b/meta-oe/recipes-graphics/xorg-app/xterm/CVE-2022-45063.patch
+@@ -0,0 +1,782 @@
++From 787636674918873a091e7a4ef5977263ba982322 Mon Sep 17 00:00:00 2001
++From: "Thomas E. Dickey" <dickey@invisible-island.net>
++Date: Sun, 23 Oct 2022 22:59:52 +0000
++Subject: [PATCH] snapshot of project "xterm", label xterm-374c
++
++Upstream-Status: https://github.com/ThomasDickey/xterm-snapshots/commit/787636674918873a091e7a4ef5977263ba982322
++CVE: CVE-2022-45063
++
++Signed-off-by: Siddharth Doshi <sdoshi@mvista.com>
++---
++ button.c       |  14 +--
++ charproc.c     |   9 +-
++ doublechr.c    |   4 +-
++ fontutils.c    | 266 ++++++++++++++++++++++++++-----------------------
++ fontutils.h    |   4 +-
++ misc.c         |   7 +-
++ screen.c       |   2 +-
++ xterm.h        |   2 +-
++ xterm.log.html |   6 ++
++ 9 files changed, 163 insertions(+), 151 deletions(-)
++
++diff --git a/button.c b/button.c
++index f10092a..0bbf76e 100644
++--- a/button.c
+++++ b/button.c
++@@ -2051,13 +2051,8 @@ void
++ UnmapSelections(XtermWidget xw)
++ {
++     TScreen *screen = TScreenOf(xw);
++-    Cardinal n;
++ 
++-    if (screen->mappedSelect) {
++-	for (n = 0; screen->mappedSelect[n] != 0; ++n)
++-	    free((void *) screen->mappedSelect[n]);
++-	FreeAndNull(screen->mappedSelect);
++-    }
+++    FreeAndNull(screen->mappedSelect);
++ }
++ 
++ /*
++@@ -2093,14 +2088,11 @@ MapSelections(XtermWidget xw, String *params, Cardinal num_params)
++ 	    if ((result = TypeMallocN(String, num_params + 1)) != 0) {
++ 		result[num_params] = 0;
++ 		for (j = 0; j < num_params; ++j) {
++-		    result[j] = x_strdup((isSELECT(params[j])
+++		    result[j] = (String) (isSELECT(params[j])
++ 					  ? mapTo
++-					  : params[j]));
+++					  : params[j]);
++ 		    if (result[j] == 0) {
++ 			UnmapSelections(xw);
++-			while (j != 0) {
++-			    free((void *) result[--j]);
++-			}
++ 			FreeAndNull(result);
++ 			break;
++ 		    }
++diff --git a/charproc.c b/charproc.c
++index 2a3c69a..91cbcea 100644
++--- a/charproc.c
+++++ b/charproc.c
++@@ -13605,7 +13605,6 @@ DoSetSelectedFont(Widget w,
++ 	Bell(xw, XkbBI_MinorError, 0);
++     } else {
++ 	Boolean failed = False;
++-	int oldFont = TScreenOf(xw)->menu_font_number;
++ 	char *save = TScreenOf(xw)->SelectFontName();
++ 	char *val;
++ 	char *test;
++@@ -13650,10 +13649,6 @@ DoSetSelectedFont(Widget w,
++ 		failed = True;
++ 	    }
++ 	    if (failed) {
++-		(void) xtermLoadFont(xw,
++-				     xtermFontName(TScreenOf(xw)->MenuFontName(oldFont)),
++-				     True,
++-				     oldFont);
++ 		Bell(xw, XkbBI_MinorError, 0);
++ 	    }
++ 	    free(used);
++@@ -13662,7 +13657,7 @@ DoSetSelectedFont(Widget w,
++     }
++ }
++ 
++-void
+++Bool
++ FindFontSelection(XtermWidget xw, const char *atom_name, Bool justprobe)
++ {
++     TScreen *screen = TScreenOf(xw);
++@@ -13702,7 +13697,7 @@ FindFontSelection(XtermWidget xw, const char *atom_name, Bool justprobe)
++ 			    DoSetSelectedFont, NULL,
++ 			    XtLastTimestampProcessed(XtDisplay(xw)));
++     }
++-    return;
+++    return (screen->SelectFontName() != NULL) ? True : False;
++ }
++ 
++ Bool
++diff --git a/doublechr.c b/doublechr.c
++index a802e32..6416849 100644
++--- a/doublechr.c
+++++ b/doublechr.c
++@@ -295,7 +295,7 @@ xterm_DoubleGC(XTermDraw * params, GC old_gc, int *inxp)
++ 	    temp.flags = (params->attr_flags & BOLD);
++ 	    temp.warn = fwResource;
++ 
++-	    if (!xtermOpenFont(params->xw, name, &temp, False)) {
+++	    if (!xtermOpenFont(params->xw, name, &temp, NULL, False)) {
++ 		XTermDraw local = *params;
++ 		char *nname;
++ 
++@@ -304,7 +304,7 @@ xterm_DoubleGC(XTermDraw * params, GC old_gc, int *inxp)
++ 		nname = xtermSpecialFont(&local);
++ 		if (nname != 0) {
++ 		    found = (Boolean) xtermOpenFont(params->xw, nname, &temp,
++-						    False);
+++						    NULL, False);
++ 		    free(nname);
++ 		}
++ 	    } else {
++diff --git a/fontutils.c b/fontutils.c
++index 1646b4b..71f4ec2 100644
++--- a/fontutils.c
+++++ b/fontutils.c
++@@ -92,9 +92,9 @@
++ }
++ 
++ #define FREE_FNAME(field) \
++-	    if (fonts == 0 || myfonts.field != fonts->field) { \
++-		FREE_STRING(myfonts.field); \
++-		myfonts.field = 0; \
+++	    if (fonts == 0 || new_fnames.field != fonts->field) { \
+++		FREE_STRING(new_fnames.field); \
+++		new_fnames.field = 0; \
++ 	    }
++ 
++ /*
++@@ -573,7 +573,7 @@ open_italic_font(XtermWidget xw, int n, FontNameProperties *fp, XTermFonts * dat
++ 	if ((name = italic_font_name(fp, slant[pass])) != 0) {
++ 	    TRACE(("open_italic_font %s %s\n",
++ 		   whichFontEnum((VTFontEnum) n), name));
++-	    if (xtermOpenFont(xw, name, data, False)) {
+++	    if (xtermOpenFont(xw, name, data, NULL, False)) {
++ 		result = (data->fs != 0);
++ #if OPT_REPORT_FONTS
++ 		if (resource.reportFonts) {
++@@ -1037,20 +1037,26 @@ xtermLoadQueryFont(XtermWidget xw, const char *name)
++ }
++ 
++ /*
++- * Open the given font and verify that it is non-empty.  Return a null on
+++ * Open the given font and verify that it is non-empty.  Return false on
++  * failure.
++  */
++ Bool
++ xtermOpenFont(XtermWidget xw,
++ 	      const char *name,
++ 	      XTermFonts * result,
+++	      XTermFonts * current,
++ 	      Bool force)
++ {
++     Bool code = False;
++ 
++     TRACE(("xtermOpenFont %d:%d '%s'\n",
++ 	   result->warn, xw->misc.fontWarnings, NonNull(name)));
+++
++     if (!IsEmpty(name)) {
+++	Bool existing = (current != NULL
+++			 && current->fs != NULL
+++			 && current->fn != NULL);
+++
++ 	if ((result->fs = xtermLoadQueryFont(xw, name)) != 0) {
++ 	    code = True;
++ 	    if (EmptyFont(result->fs)) {
++@@ -1069,9 +1075,13 @@ xtermOpenFont(XtermWidget xw,
++ 	    } else {
++ 		TRACE(("xtermOpenFont: cannot load font '%s'\n", name));
++ 	    }
++-	    if (force) {
+++	    if (existing) {
+++		TRACE(("...continue using font '%s'\n", current->fn));
+++		result->fn = x_strdup(current->fn);
+++		result->fs = current->fs;
+++	    } else if (force) {
++ 		NoFontWarning(result);
++-		code = xtermOpenFont(xw, DEFFONT, result, True);
+++		code = xtermOpenFont(xw, DEFFONT, result, NULL, True);
++ 	    }
++ 	}
++     }
++@@ -1321,6 +1331,7 @@ static Bool
++ loadNormFP(XtermWidget xw,
++ 	   char **nameOutP,
++ 	   XTermFonts * infoOut,
+++	   XTermFonts * current,
++ 	   int fontnum)
++ {
++     Bool status = True;
++@@ -1330,7 +1341,7 @@ loadNormFP(XtermWidget xw,
++     if (!xtermOpenFont(xw,
++ 		       *nameOutP,
++ 		       infoOut,
++-		       (fontnum == fontMenu_default))) {
+++		       current, (fontnum == fontMenu_default))) {
++ 	/*
++ 	 * If we are opening the default font, and it happens to be missing,
++ 	 * force that to the compiled-in default font, e.g., "fixed".  If we
++@@ -1365,10 +1376,10 @@ loadBoldFP(XtermWidget xw,
++ 	if (fp != 0) {
++ 	    NoFontWarning(infoOut);
++ 	    *nameOutP = bold_font_name(fp, fp->average_width);
++-	    if (!xtermOpenFont(xw, *nameOutP, infoOut, False)) {
+++	    if (!xtermOpenFont(xw, *nameOutP, infoOut, NULL, False)) {
++ 		free(*nameOutP);
++ 		*nameOutP = bold_font_name(fp, -1);
++-		xtermOpenFont(xw, *nameOutP, infoOut, False);
+++		xtermOpenFont(xw, *nameOutP, infoOut, NULL, False);
++ 	    }
++ 	    TRACE(("...derived bold '%s'\n", NonNull(*nameOutP)));
++ 	}
++@@ -1386,7 +1397,7 @@ loadBoldFP(XtermWidget xw,
++ 	    TRACE(("...did not get a matching bold font\n"));
++ 	}
++ 	free(normal);
++-    } else if (!xtermOpenFont(xw, *nameOutP, infoOut, False)) {
+++    } else if (!xtermOpenFont(xw, *nameOutP, infoOut, NULL, False)) {
++ 	xtermCopyFontInfo(infoOut, infoRef);
++ 	TRACE(("...cannot load bold font '%s'\n", NonNull(*nameOutP)));
++     } else {
++@@ -1440,7 +1451,7 @@ loadWideFP(XtermWidget xw,
++     }
++ 
++     if (check_fontname(*nameOutP)) {
++-	if (xtermOpenFont(xw, *nameOutP, infoOut, False)
+++	if (xtermOpenFont(xw, *nameOutP, infoOut, NULL, False)
++ 	    && is_derived_font_name(*nameOutP)
++ 	    && EmptyFont(infoOut->fs)) {
++ 	    xtermCloseFont2(xw, infoOut - fWide, fWide);
++@@ -1493,7 +1504,7 @@ loadWBoldFP(XtermWidget xw,
++ 
++     if (check_fontname(*nameOutP)) {
++ 
++-	if (xtermOpenFont(xw, *nameOutP, infoOut, False)
+++	if (xtermOpenFont(xw, *nameOutP, infoOut, NULL, False)
++ 	    && is_derived_font_name(*nameOutP)
++ 	    && !compatibleWideCounts(wideInfoRef->fs, infoOut->fs)) {
++ 	    xtermCloseFont2(xw, infoOut - fWBold, fWBold);
++@@ -1546,6 +1557,10 @@ loadWBoldFP(XtermWidget xw,
++ }
++ #endif
++ 
+++/*
+++ * Load a given bitmap font, along with the bold/wide variants.
+++ * Returns nonzero on success.
+++ */
++ int
++ xtermLoadFont(XtermWidget xw,
++ 	      const VTFontNames * fonts,
++@@ -1555,33 +1570,37 @@ xtermLoadFont(XtermWidget xw,
++     TScreen *screen = TScreenOf(xw);
++     VTwin *win = WhichVWin(screen);
++ 
++-    VTFontNames myfonts;
++-    XTermFonts fnts[fMAX];
+++    VTFontNames new_fnames;
+++    XTermFonts new_fonts[fMAX];
+++    XTermFonts old_fonts[fMAX];
++     char *tmpname = NULL;
++     Boolean proportional = False;
+++    Boolean recovered;
+++    int code = 0;
++ 
++-    memset(&myfonts, 0, sizeof(myfonts));
++-    memset(fnts, 0, sizeof(fnts));
+++    memset(&new_fnames, 0, sizeof(new_fnames));
+++    memset(new_fonts, 0, sizeof(new_fonts));
+++    memcpy(&old_fonts, screen->fnts, sizeof(old_fonts));
++ 
++     if (fonts != 0)
++-	myfonts = *fonts;
++-    if (!check_fontname(myfonts.f_n))
++-	return 0;
+++	new_fnames = *fonts;
+++    if (!check_fontname(new_fnames.f_n))
+++	return code;
++ 
++     if (fontnum == fontMenu_fontescape
++-	&& myfonts.f_n != screen->MenuFontName(fontnum)) {
++-	if ((tmpname = x_strdup(myfonts.f_n)) == 0)
++-	    return 0;
+++	&& new_fnames.f_n != screen->MenuFontName(fontnum)) {
+++	if ((tmpname = x_strdup(new_fnames.f_n)) == 0)
+++	    return code;
++     }
++ 
++-    TRACE(("Begin Cgs - xtermLoadFont(%s)\n", myfonts.f_n));
+++    TRACE(("Begin Cgs - xtermLoadFont(%s)\n", new_fnames.f_n));
++     releaseWindowGCs(xw, win);
++ 
++ #define DbgResource(name, field, index) \
++     TRACE(("xtermLoadFont #%d "name" %s%s\n", \
++     	   fontnum, \
++-	   (fnts[index].warn == fwResource) ? "*" : " ", \
++-	   NonNull(myfonts.field)))
+++	   (new_fonts[index].warn == fwResource) ? "*" : " ", \
+++	   NonNull(new_fnames.field)))
++     DbgResource("normal", f_n, fNorm);
++     DbgResource("bold  ", f_b, fBold);
++ #if OPT_WIDE_CHARS
++@@ -1590,16 +1609,17 @@ xtermLoadFont(XtermWidget xw,
++ #endif
++ 
++     if (!loadNormFP(xw,
++-		    &myfonts.f_n,
++-		    &fnts[fNorm],
+++		    &new_fnames.f_n,
+++		    &new_fonts[fNorm],
+++		    &old_fonts[fNorm],
++ 		    fontnum))
++ 	goto bad;
++ 
++     if (!loadBoldFP(xw,
++-		    &myfonts.f_b,
++-		    &fnts[fBold],
++-		    myfonts.f_n,
++-		    &fnts[fNorm],
+++		    &new_fnames.f_b,
+++		    &new_fonts[fBold],
+++		    new_fnames.f_n,
+++		    &new_fonts[fNorm],
++ 		    fontnum))
++ 	goto bad;
++ 
++@@ -1611,20 +1631,20 @@ xtermLoadFont(XtermWidget xw,
++     if_OPT_WIDE_CHARS(screen, {
++ 
++ 	if (!loadWideFP(xw,
++-			&myfonts.f_w,
++-			&fnts[fWide],
++-			myfonts.f_n,
++-			&fnts[fNorm],
+++			&new_fnames.f_w,
+++			&new_fonts[fWide],
+++			new_fnames.f_n,
+++			&new_fonts[fNorm],
++ 			fontnum))
++ 	    goto bad;
++ 
++ 	if (!loadWBoldFP(xw,
++-			 &myfonts.f_wb,
++-			 &fnts[fWBold],
++-			 myfonts.f_w,
++-			 &fnts[fWide],
++-			 myfonts.f_b,
++-			 &fnts[fBold],
+++			 &new_fnames.f_wb,
+++			 &new_fonts[fWBold],
+++			 new_fnames.f_w,
+++			 &new_fonts[fWide],
+++			 new_fnames.f_b,
+++			 &new_fonts[fBold],
++ 			 fontnum))
++ 	    goto bad;
++ 
++@@ -1634,30 +1654,30 @@ xtermLoadFont(XtermWidget xw,
++      * Normal/bold fonts should be the same width.  Also, the min/max
++      * values should be the same.
++      */
++-    if (fnts[fNorm].fs != 0
++-	&& fnts[fBold].fs != 0
++-	&& (!is_fixed_font(fnts[fNorm].fs)
++-	    || !is_fixed_font(fnts[fBold].fs)
++-	    || differing_widths(fnts[fNorm].fs, fnts[fBold].fs))) {
+++    if (new_fonts[fNorm].fs != 0
+++	&& new_fonts[fBold].fs != 0
+++	&& (!is_fixed_font(new_fonts[fNorm].fs)
+++	    || !is_fixed_font(new_fonts[fBold].fs)
+++	    || differing_widths(new_fonts[fNorm].fs, new_fonts[fBold].fs))) {
++ 	TRACE(("Proportional font! normal %d/%d, bold %d/%d\n",
++-	       fnts[fNorm].fs->min_bounds.width,
++-	       fnts[fNorm].fs->max_bounds.width,
++-	       fnts[fBold].fs->min_bounds.width,
++-	       fnts[fBold].fs->max_bounds.width));
+++	       new_fonts[fNorm].fs->min_bounds.width,
+++	       new_fonts[fNorm].fs->max_bounds.width,
+++	       new_fonts[fBold].fs->min_bounds.width,
+++	       new_fonts[fBold].fs->max_bounds.width));
++ 	proportional = True;
++     }
++ 
++     if_OPT_WIDE_CHARS(screen, {
++-	if (fnts[fWide].fs != 0
++-	    && fnts[fWBold].fs != 0
++-	    && (!is_fixed_font(fnts[fWide].fs)
++-		|| !is_fixed_font(fnts[fWBold].fs)
++-		|| differing_widths(fnts[fWide].fs, fnts[fWBold].fs))) {
+++	if (new_fonts[fWide].fs != 0
+++	    && new_fonts[fWBold].fs != 0
+++	    && (!is_fixed_font(new_fonts[fWide].fs)
+++		|| !is_fixed_font(new_fonts[fWBold].fs)
+++		|| differing_widths(new_fonts[fWide].fs, new_fonts[fWBold].fs))) {
++ 	    TRACE(("Proportional font! wide %d/%d, wide bold %d/%d\n",
++-		   fnts[fWide].fs->min_bounds.width,
++-		   fnts[fWide].fs->max_bounds.width,
++-		   fnts[fWBold].fs->min_bounds.width,
++-		   fnts[fWBold].fs->max_bounds.width));
+++		   new_fonts[fWide].fs->min_bounds.width,
+++		   new_fonts[fWide].fs->max_bounds.width,
+++		   new_fonts[fWBold].fs->min_bounds.width,
+++		   new_fonts[fWBold].fs->max_bounds.width));
++ 	    proportional = True;
++ 	}
++     });
++@@ -1676,13 +1696,13 @@ xtermLoadFont(XtermWidget xw,
++     screen->ifnts_ok = False;
++ #endif
++ 
++-    xtermCopyFontInfo(GetNormalFont(screen, fNorm), &fnts[fNorm]);
++-    xtermCopyFontInfo(GetNormalFont(screen, fBold), &fnts[fBold]);
+++    xtermCopyFontInfo(GetNormalFont(screen, fNorm), &new_fonts[fNorm]);
+++    xtermCopyFontInfo(GetNormalFont(screen, fBold), &new_fonts[fBold]);
++ #if OPT_WIDE_CHARS
++-    xtermCopyFontInfo(GetNormalFont(screen, fWide), &fnts[fWide]);
++-    if (fnts[fWBold].fs == NULL)
++-	xtermCopyFontInfo(GetNormalFont(screen, fWide), &fnts[fWide]);
++-    xtermCopyFontInfo(GetNormalFont(screen, fWBold), &fnts[fWBold]);
+++    xtermCopyFontInfo(GetNormalFont(screen, fWide), &new_fonts[fWide]);
+++    if (new_fonts[fWBold].fs == NULL)
+++	xtermCopyFontInfo(GetNormalFont(screen, fWide), &new_fonts[fWide]);
+++    xtermCopyFontInfo(GetNormalFont(screen, fWBold), &new_fonts[fWBold]);
++ #endif
++ 
++     xtermUpdateFontGCs(xw, getNormalFont);
++@@ -1713,7 +1733,7 @@ xtermLoadFont(XtermWidget xw,
++ 	unsigned ch;
++ 
++ #if OPT_TRACE
++-#define TRACE_MISS(index) show_font_misses(#index, &fnts[index])
+++#define TRACE_MISS(index) show_font_misses(#index, &new_fonts[index])
++ 	TRACE_MISS(fNorm);
++ 	TRACE_MISS(fBold);
++ #if OPT_WIDE_CHARS
++@@ -1730,8 +1750,8 @@ xtermLoadFont(XtermWidget xw,
++ 		if ((n != UCS_REPL)
++ 		    && (n != ch)
++ 		    && (screen->fnt_boxes & 2)) {
++-		    if (xtermMissingChar(n, &fnts[fNorm]) ||
++-			xtermMissingChar(n, &fnts[fBold])) {
+++		    if (xtermMissingChar(n, &new_fonts[fNorm]) ||
+++			xtermMissingChar(n, &new_fonts[fBold])) {
++ 			UIntClr(screen->fnt_boxes, 2);
++ 			TRACE(("missing graphics character #%d, U+%04X\n",
++ 			       ch, n));
++@@ -1743,12 +1763,12 @@ xtermLoadFont(XtermWidget xw,
++ #endif
++ 
++ 	for (ch = 1; ch < 32; ch++) {
++-	    if (xtermMissingChar(ch, &fnts[fNorm])) {
+++	    if (xtermMissingChar(ch, &new_fonts[fNorm])) {
++ 		TRACE(("missing normal char #%d\n", ch));
++ 		UIntClr(screen->fnt_boxes, 1);
++ 		break;
++ 	    }
++-	    if (xtermMissingChar(ch, &fnts[fBold])) {
+++	    if (xtermMissingChar(ch, &new_fonts[fBold])) {
++ 		TRACE(("missing bold   char #%d\n", ch));
++ 		UIntClr(screen->fnt_boxes, 1);
++ 		break;
++@@ -1765,8 +1785,8 @@ xtermLoadFont(XtermWidget xw,
++ 	screen->enbolden = screen->bold_mode;
++     } else {
++ 	screen->enbolden = screen->bold_mode
++-	    && ((fnts[fNorm].fs == fnts[fBold].fs)
++-		|| same_font_name(myfonts.f_n, myfonts.f_b));
+++	    && ((new_fonts[fNorm].fs == new_fonts[fBold].fs)
+++		|| same_font_name(new_fnames.f_n, new_fnames.f_b));
++     }
++     TRACE(("Will %suse 1-pixel offset/overstrike to simulate bold\n",
++ 	   screen->enbolden ? "" : "not "));
++@@ -1782,7 +1802,7 @@ xtermLoadFont(XtermWidget xw,
++ 	    update_font_escape();
++ 	}
++ #if OPT_SHIFT_FONTS
++-	screen->menu_font_sizes[fontnum] = FontSize(fnts[fNorm].fs);
+++	screen->menu_font_sizes[fontnum] = FontSize(new_fonts[fNorm].fs);
++ #endif
++     }
++     set_cursor_gcs(xw);
++@@ -1797,20 +1817,21 @@ xtermLoadFont(XtermWidget xw,
++     FREE_FNAME(f_w);
++     FREE_FNAME(f_wb);
++ #endif
++-    if (fnts[fNorm].fn == fnts[fBold].fn) {
++-	free(fnts[fNorm].fn);
+++    if (new_fonts[fNorm].fn == new_fonts[fBold].fn) {
+++	free(new_fonts[fNorm].fn);
++     } else {
++-	free(fnts[fNorm].fn);
++-	free(fnts[fBold].fn);
+++	free(new_fonts[fNorm].fn);
+++	free(new_fonts[fBold].fn);
++     }
++ #if OPT_WIDE_CHARS
++-    free(fnts[fWide].fn);
++-    free(fnts[fWBold].fn);
+++    free(new_fonts[fWide].fn);
+++    free(new_fonts[fWBold].fn);
++ #endif
++     xtermSetWinSize(xw);
++     return 1;
++ 
++   bad:
+++    recovered = False;
++     free(tmpname);
++ 
++ #if OPT_RENDERFONT
++@@ -1820,15 +1841,15 @@ xtermLoadFont(XtermWidget xw,
++ 	SetItemSensitivity(fontMenuEntries[fontnum].widget, True);
++ #endif
++ 	Bell(xw, XkbBI_MinorError, 0);
++-	myfonts.f_n = screen->MenuFontName(old_fontnum);
++-	return xtermLoadFont(xw, &myfonts, doresize, old_fontnum);
++-    } else if (x_strcasecmp(myfonts.f_n, DEFFONT)) {
++-	int code;
++-
++-	myfonts.f_n = x_strdup(DEFFONT);
++-	TRACE(("...recovering for TrueType fonts\n"));
++-	code = xtermLoadFont(xw, &myfonts, doresize, fontnum);
++-	if (code) {
+++	new_fnames.f_n = screen->MenuFontName(old_fontnum);
+++	if (xtermLoadFont(xw, &new_fnames, doresize, old_fontnum))
+++	    recovered = True;
+++    } else if (x_strcasecmp(new_fnames.f_n, DEFFONT)
+++	       && x_strcasecmp(new_fnames.f_n, old_fonts[fNorm].fn)) {
+++	new_fnames.f_n = x_strdup(old_fonts[fNorm].fn);
+++	TRACE(("...recovering from failed font-load\n"));
+++	if (xtermLoadFont(xw, &new_fnames, doresize, fontnum)) {
+++	    recovered = True;
++ 	    if (fontnum != fontMenu_fontsel) {
++ 		SetItemSensitivity(fontMenuEntries[fontnum].widget,
++ 				   UsingRenderFont(xw));
++@@ -1837,15 +1858,15 @@ xtermLoadFont(XtermWidget xw,
++ 		   FontHeight(screen),
++ 		   FontWidth(screen)));
++ 	}
++-	return code;
++     }
++ #endif
++-
++-    releaseWindowGCs(xw, win);
++-
++-    xtermCloseFonts(xw, fnts);
++-    TRACE(("Fail Cgs - xtermLoadFont\n"));
++-    return 0;
+++    if (!recovered) {
+++	releaseWindowGCs(xw, win);
+++	xtermCloseFonts(xw, new_fonts);
+++	TRACE(("Fail Cgs - xtermLoadFont\n"));
+++	code = 0;
+++    }
+++    return code;
++ }
++ 
++ #if OPT_WIDE_ATTRS
++@@ -1893,7 +1914,7 @@ xtermLoadItalics(XtermWidget xw)
++ 			} else {
++ 			    xtermOpenFont(xw,
++ 					  getNormalFont(screen, n)->fn,
++-					  data, False);
+++					  data, NULL, False);
++ 			}
++ 		    }
++ 		}
++@@ -4250,6 +4271,8 @@ findXftGlyph(XtermWidget xw, XftFont *given, unsigned wc)
++ 		    }
++ #endif
++ 		    if (foundXftGlyph(xw, check, wc)) {
+++	    (void) added;
+++	    (void) actual;
++ 			markXftOpened(xw, which, n, wc);
++ 			reportXftFonts(xw, check, "fallback", tag, myReport);
++ 			result = check;
++@@ -4451,7 +4474,7 @@ lookupOneFontSize(XtermWidget xw, int fontnum)
++ 
++ 	memset(&fnt, 0, sizeof(fnt));
++ 	screen->menu_font_sizes[fontnum] = -1;
++-	if (xtermOpenFont(xw, screen->MenuFontName(fontnum), &fnt, True)) {
+++	if (xtermOpenFont(xw, screen->MenuFontName(fontnum), &fnt, NULL, True)) {
++ 	    if (fontnum <= fontMenu_lastBuiltin
++ 		|| strcmp(fnt.fn, DEFFONT)) {
++ 		screen->menu_font_sizes[fontnum] = FontSize(fnt.fs);
++@@ -4864,13 +4887,14 @@ HandleSetFont(Widget w,
++     }
++ }
++ 
++-void
+++Bool
++ SetVTFont(XtermWidget xw,
++ 	  int which,
++ 	  Bool doresize,
++ 	  const VTFontNames * fonts)
++ {
++     TScreen *screen = TScreenOf(xw);
+++    Bool result = False;
++ 
++     TRACE(("SetVTFont(which=%d, f_n=%s, f_b=%s)\n", which,
++ 	   (fonts && fonts->f_n) ? fonts->f_n : "<null>",
++@@ -4879,34 +4903,31 @@ SetVTFont(XtermWidget xw,
++     if (IsIcon(screen)) {
++ 	Bell(xw, XkbBI_MinorError, 0);
++     } else if (which >= 0 && which < NMENUFONTS) {
++-	VTFontNames myfonts;
+++	VTFontNames new_fnames;
++ 
++-	memset(&myfonts, 0, sizeof(myfonts));
+++	memset(&new_fnames, 0, sizeof(new_fnames));
++ 	if (fonts != 0)
++-	    myfonts = *fonts;
+++	    new_fnames = *fonts;
++ 
++ 	if (which == fontMenu_fontsel) {	/* go get the selection */
++-	    FindFontSelection(xw, myfonts.f_n, False);
+++	    result = FindFontSelection(xw, new_fnames.f_n, False);
++ 	} else {
++-	    int oldFont = screen->menu_font_number;
++-
++ #define USE_CACHED(field, name) \
++-	    if (myfonts.field == 0) { \
++-		myfonts.field = x_strdup(screen->menu_font_names[which][name]); \
++-		TRACE(("set myfonts." #field " from menu_font_names[%d][" #name "] %s\n", \
++-		       which, NonNull(myfonts.field))); \
+++	    if (new_fnames.field == NULL) { \
+++		new_fnames.field = x_strdup(screen->menu_font_names[which][name]); \
+++		TRACE(("set new_fnames." #field " from menu_font_names[%d][" #name "] %s\n", \
+++		       which, NonNull(new_fnames.field))); \
++ 	    } else { \
++-		TRACE(("set myfonts." #field " reused\n")); \
+++		TRACE(("set new_fnames." #field " reused\n")); \
++ 	    }
++ #define SAVE_FNAME(field, name) \
++-	    if (myfonts.field != 0) { \
++-		if (screen->menu_font_names[which][name] == 0 \
++-		 || strcmp(screen->menu_font_names[which][name], myfonts.field)) { \
++-		    TRACE(("updating menu_font_names[%d][" #name "] to \"%s\"\n", \
++-			   which, myfonts.field)); \
++-		    FREE_STRING(screen->menu_font_names[which][name]); \
++-		    screen->menu_font_names[which][name] = x_strdup(myfonts.field); \
++-		} \
+++	    if (new_fnames.field != NULL \
+++		&& (screen->menu_font_names[which][name] == NULL \
+++		 || strcmp(screen->menu_font_names[which][name], new_fnames.field))) { \
+++		TRACE(("updating menu_font_names[%d][" #name "] to \"%s\"\n", \
+++		       which, new_fnames.field)); \
+++		FREE_STRING(screen->menu_font_names[which][name]); \
+++		screen->menu_font_names[which][name] = x_strdup(new_fnames.field); \
++ 	    }
++ 
++ 	    USE_CACHED(f_n, fNorm);
++@@ -4916,7 +4937,7 @@ SetVTFont(XtermWidget xw,
++ 	    USE_CACHED(f_wb, fWBold);
++ #endif
++ 	    if (xtermLoadFont(xw,
++-			      &myfonts,
+++			      &new_fnames,
++ 			      doresize, which)) {
++ 		/*
++ 		 * If successful, save the data so that a subsequent query via
++@@ -4928,10 +4949,8 @@ SetVTFont(XtermWidget xw,
++ 		SAVE_FNAME(f_w, fWide);
++ 		SAVE_FNAME(f_wb, fWBold);
++ #endif
+++		result = True;
++ 	    } else {
++-		(void) xtermLoadFont(xw,
++-				     xtermFontName(screen->MenuFontName(oldFont)),
++-				     doresize, oldFont);
++ 		Bell(xw, XkbBI_MinorError, 0);
++ 	    }
++ 	    FREE_FNAME(f_n);
++@@ -4944,7 +4963,8 @@ SetVTFont(XtermWidget xw,
++     } else {
++ 	Bell(xw, XkbBI_MinorError, 0);
++     }
++-    return;
+++    TRACE(("...SetVTFont: %d\n", result));
+++    return result;
++ }
++ 
++ #if OPT_RENDERFONT
++diff --git a/fontutils.h b/fontutils.h
++index 2267f24..5b3afe0 100644
++--- a/fontutils.h
+++++ b/fontutils.h
++@@ -37,7 +37,7 @@
++ /* *INDENT-OFF* */
++ 
++ extern Bool xtermLoadDefaultFonts (XtermWidget /* xw */);
++-extern Bool xtermOpenFont (XtermWidget /* xw */, const char */* name */, XTermFonts * /* result */, Bool /* force */);
+++extern Bool xtermOpenFont (XtermWidget /* xw */, const char */* name */, XTermFonts * /* result */, XTermFonts * /* current */, Bool /* force */);
++ extern XFontStruct * xtermLoadQueryFont(XtermWidget /* xw */, const char * /*name */);
++ extern XTermFonts * getDoubleFont (TScreen * /* screen */, int /* which */);
++ extern XTermFonts * getItalicFont (TScreen * /* screen */, int /* which */);
++@@ -51,7 +51,7 @@ extern int lookupRelativeFontSize (XtermWidget /* xw */, int /* old */, int /* r
++ extern int xtermGetFont (const char * /* param */);
++ extern int xtermLoadFont (XtermWidget /* xw */, const VTFontNames */* fonts */, Bool /* doresize */, int /* fontnum */);
++ extern void HandleSetFont PROTO_XT_ACTIONS_ARGS;
++-extern void SetVTFont (XtermWidget /* xw */, int /* i */, Bool /* doresize */, const VTFontNames */* fonts */);
+++extern Bool SetVTFont (XtermWidget /* xw */, int /* i */, Bool /* doresize */, const VTFontNames */* fonts */);
++ extern void allocFontList (XtermWidget /* xw */, const char * /* name */, XtermFontNames * /* target */, VTFontEnum /* which */, const char * /* source */, Bool /* ttf */);
++ extern void copyFontList (char *** /* targetp */, char ** /* source */);
++ extern void initFontLists (XtermWidget /* xw */);
++diff --git a/misc.c b/misc.c
++index cbb2679..aafbb08 100644
++--- a/misc.c
+++++ b/misc.c
++@@ -3941,9 +3941,9 @@ ChangeFontRequest(XtermWidget xw, String buf)
++ 	    {
++ 		memset(&fonts, 0, sizeof(fonts));
++ 		fonts.f_n = name;
++-		SetVTFont(xw, num, True, &fonts);
++-		if (num == screen->menu_font_number &&
++-		    num != fontMenu_fontescape) {
+++		if (SetVTFont(xw, num, True, &fonts)
+++		    && num == screen->menu_font_number
+++		    && num != fontMenu_fontescape) {
++ 		    screen->EscapeFontName() = x_strdup(name);
++ 		}
++ 	    }
++@@ -6422,7 +6422,6 @@ xtermSetenv(const char *var, const char *value)
++ 
++ 	    found = envindex;
++ 	    environ[found + 1] = NULL;
++-	    environ = environ;
++ 	}
++ 
++ 	environ[found] = malloc(2 + len + strlen(value));
++diff --git a/screen.c b/screen.c
++index 93e36b3..f82ee44 100644
++--- a/screen.c
+++++ b/screen.c
++@@ -1454,7 +1454,7 @@ ScrnRefresh(XtermWidget xw,
++ 	maxrow += StatusLineRows;
++     }
++ #endif
++-
+++    (void) recurse;
++     ++recurse;
++ 
++     if (screen->cursorp.col >= leftcol
++diff --git a/xterm.h b/xterm.h
++index e6bd123..c4fe811 100644
++--- a/xterm.h
+++++ b/xterm.h
++@@ -999,7 +999,7 @@ extern Bool CheckBufPtrs (TScreen * /* screen */);
++ extern Bool set_cursor_gcs (XtermWidget /* xw */);
++ extern char * vt100ResourceToString (XtermWidget /* xw */, const char * /* name */);
++ extern int VTInit (XtermWidget /* xw */);
++-extern void FindFontSelection (XtermWidget /* xw */, const char * /* atom_name */, Bool  /* justprobe */);
+++extern Bool FindFontSelection (XtermWidget /* xw */, const char * /* atom_name */, Bool  /* justprobe */);
++ extern void HideCursor (XtermWidget /* xw */);
++ extern void RestartBlinking(XtermWidget /* xw */);
++ extern void ShowCursor (XtermWidget /* xw */);
++diff --git a/xterm.log.html b/xterm.log.html
++index 03324b1..0f28658 100644
++--- a/xterm.log.html
+++++ b/xterm.log.html
++@@ -1026,6 +1026,12 @@
++   2022/03/09</a></h1>
++ 
++   <ul>
+++    <li>improve error-recovery when setting a bitmap font for the
+++    VT100 window, e.g., in case <em>OSC&nbsp;50</em> failed,
+++    restoring the most recent valid font so that a subsequent
+++    <em>OSC&nbsp;50</em> reports this correctly (report by David
+++    Leadbeater).</li>
+++
++     <li>amend allocation/freeing of scrollback lines, eliminating
++     an adjustment for status-line added in <a href=
++     "#xterm_371">patch #371</a> (report/testcase by Rajeev V.
++-- 
++2.25.1
++
+diff --git a/meta-oe/recipes-graphics/xorg-app/xterm_372.bb b/meta-oe/recipes-graphics/xorg-app/xterm_372.bb
+index 3e1e9d704..223bc0a49 100644
+--- a/meta-oe/recipes-graphics/xorg-app/xterm_372.bb
++++ b/meta-oe/recipes-graphics/xorg-app/xterm_372.bb
+@@ -6,6 +6,7 @@ LIC_FILES_CHKSUM = "file://xterm.h;beginline=3;endline=31;md5=5ec6748ed90e588caa
  
- SRC_URI = " \
--    gitsm://github.com/ostreedev/ostree;branch=main;protocol=https \
--    file://0001-Remove-unused-linux-fs.h-includes.patch \
-+    https://github.com/ostreedev/ostree/releases/download/v${PV}/libostree-${PV}.tar.xz \
-     file://0001-libostree-Remove-including-sys-mount.h.patch \
--    file://0001-s390x-se-luks-gencpio-There-is-no-bashism.patch \
--    file://0001-deploy-Don-t-rebuild-selinux-policy-on-first-deploym.patch \
-     file://run-ptest \
- "
--SRCREV = "15740d042c9c5258a1c082b5e228cf6f115edbb0"
-+SRC_URI[sha256sum] = "8be2a9261c94e8b9ec4113380ffc480f8598245fb321a009bad4fae4b822411f"
+ SRC_URI = "http://invisible-mirror.net/archives/${BPN}/${BP}.tgz \
+            file://0001-Add-configure-time-check-for-setsid.patch \
++           file://CVE-2022-45063.patch \
+           "
  
- UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+\.\d+)"
- 
--S = "${WORKDIR}/git"
-+S = "${WORKDIR}/libostree-${PV}"
- 
- inherit autotools bash-completion gobject-introspection gtk-doc manpages pkgconfig ptest-gnome systemd
- 
+ SRC_URI[sha256sum] = "c6d08127cb2409c3a04bcae559b7025196ed770bb7bf26630abcb45d95f60ab1"
 -- 
-2.39.0
+2.25.1
 
 
