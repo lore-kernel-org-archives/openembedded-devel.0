@@ -1,88 +1,143 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9225BC3DA7A
-	for <webhook@archiver.kernel.org>; Tue,  3 Jan 2023 03:10:48 +0000 (UTC)
-Received: from mail-pj1-f43.google.com (mail-pj1-f43.google.com [209.85.216.43])
- by mx.groups.io with SMTP id smtpd.web11.55272.1672715438958556914
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A699CC5479D
+	for <webhook@archiver.kernel.org>; Tue,  3 Jan 2023 03:29:08 +0000 (UTC)
+Received: from mail1.bemta37.messagelabs.com (mail1.bemta37.messagelabs.com [85.158.142.112])
+ by mx.groups.io with SMTP id smtpd.web11.55580.1672716544767499714
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 02 Jan 2023 19:10:39 -0800
+ Mon, 02 Jan 2023 19:29:05 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=GZQghMnI;
- spf=pass (domain: gmail.com, ip: 209.85.216.43, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f43.google.com with SMTP id n65-20020a17090a2cc700b0021bc5ef7a14so29848303pjd.0
-        for <openembedded-devel@lists.openembedded.org>; Mon, 02 Jan 2023 19:10:38 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=MFX7WhEMoYAFG6VINKRrrN+fZYZLwK1Ysnh2DLRFP9o=;
-        b=GZQghMnIejGImqmVwRGzYCjKBTgAbSHGNECzYaPoiJdZ902jFtKsu6nnwMJb+mpykt
-         oFObsaePsrMS/4L7mb8UGNnbtpdQlp/9PXYR2BXl5Mk01NLoH9CJDQUXbDCtWhL5sjgk
-         xkYA9DNZA66DlwFzbLQiiukszRQQ93r2O0gF3BAB+3D0RmO6qGul+8mYuTvPQ1Qaqky7
-         LP0pX3H7XvCWDDVeYqpZJelv+/In6Ab+ixkAcqClIslyIc2T1AMOD36+saqLdIazhOPR
-         0OF+tJffg955fDjye9JQ6fNi85XgwAasq/YNgAknSG/T2bKfwy8FFfaWJFoml6JJ3xFZ
-         nRhQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=MFX7WhEMoYAFG6VINKRrrN+fZYZLwK1Ysnh2DLRFP9o=;
-        b=T9PIHG9eoPi5VCj6PAFstENbNXCpNuEbs2tl5qO3l1oXHWhRKCW/bXu3If6IaW3rb4
-         SsGE8/3Ql+2oMFEihf3dBbKx+uUogR0zOttq3DZxukynlLRqMlvOldhOwxuC01CxfK/s
-         6AR5xmfhmWHt18ErjWRl0RIkEC5YG/fj3Skjp+1fQIH02RzE1Pk8U+vzGNS80Gc3wTzY
-         8Rp8s69VPsB2VIF5436D40BQ7lajLCopJVAEeF3JHiZqv0hWLljZ+MInJ9b8ZhVHYVKe
-         eQ77SEQMKP/+a0GNSnIWVQLiGgka6xJ6rYOpcLS4vbpC9q50W1ktGAYdI3HM3aEw9jQj
-         1Qjw==
-X-Gm-Message-State: AFqh2krWvp2u6IHXQB/GjBl7sk/2KCdH4qczZYIZCShxj00PrreonDjX
-	MVl3oSAWi0YUCbei7vBtb/AcLs60EII=
-X-Google-Smtp-Source: AMrXdXvgufZuZwa7oDqDg4qr/f1ZkTO6m04cQWMI+v/kzgvL7uOZn5F38PpvahVwlJdncYctn5BoMQ==
-X-Received: by 2002:a17:902:d491:b0:192:ad82:dc98 with SMTP id c17-20020a170902d49100b00192ad82dc98mr19898607plg.34.1672715437922;
-        Mon, 02 Jan 2023 19:10:37 -0800 (PST)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9181:1cf0::bccc])
-        by smtp.gmail.com with ESMTPSA id j4-20020a170902c3c400b00172cb8b97a8sm20979084plj.5.2023.01.02.19.10.36
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 02 Jan 2023 19:10:36 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-networking][PATCH] opensaf: Fix the check for __fsblkcnt64_t size
-Date: Mon,  2 Jan 2023 19:10:34 -0800
-Message-Id: <20230103031034.3261309-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.39.0
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=Su4dZTuy;
+ spf=pass (domain: fujitsu.com, ip: 85.158.142.112, mailfrom: wangmy@fujitsu.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
+	s=170520fj; t=1672716542; i=@fujitsu.com;
+	bh=1Z/EkcpcJrCN49qmYcBvDm2Ldlo11L8ZBvSZoO8TpmQ=;
+	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
+	b=Su4dZTuywVbQ82EC35QWGHYu/tgGPfNRYajCEIBF8TI67rwDVcylJej+f5lFMmF7/
+	 ISkI54ohUdhdg8jIn5PLekJ/JIXWHK3CFgO+lPB1lU+oIJKDW+ZOpreHz4dyi1UjOL
+	 xIsGbWejiXqkJpolzuwUo26DEnVuPe1al69qDBl1XnX/5QcM5z5uzw5u4foSGMPNNb
+	 xwurOFAe9SgHCAX4XntErfcCMCxW1lyu/cA6y1NSBWxdvPnVIN91wNYxahJ2qDQYYT
+	 knqrPznfuqsPKu5Dxb2YNc8xD95eGuY7k4vlHCVIVfVk76efV1MjHy2dlu2IPGEhTO
+	 IuclP3SjmBKeA==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrNIsWRWlGSWpSXmKPExsViZ8ORpPt3weZ
+  kgy17tSwuHl7K7MDocW7jCsYAxijWzLyk/IoE1ozTK6YyFXwUrXi9cjNjA2OvcBcjF4eQwENG
+  iceTdjBCOJeZJLZdP88O4exmlLj4tBsow8nBJiAlceP+fzYQW0RAX2Lp7D3MIDazgIrEi989Q
+  A0cHMICzhKXpnKBhFkEVCUuH13PCmLzCjhJLFnQxAJiSwgoSEx5+J4ZIi4ocXLmExaIMRISB1
+  +8YIaoUZSYfbkZqr5CYtasNiYIW03i6rlNzBMY+WchaZ+FpH0BI9MqRvPi1KKy1CJdQ2O9pKL
+  M9IyS3MTMHL3EKt1EvdRS3bz8opIMXUO9xPJivdTiYr3iytzknBS9vNSSTYzAcEwpTpXYwdiw
+  /I/eIUZJDiYlUd7yvZuShfiS8lMqMxKLM+KLSnNSiw8xynBwKEnw8szfnCwkWJSanlqRlpkDj
+  A2YtAQHj5II76F5QGne4oLE3OLMdIjUKUZdjrsL9+5lFmLJy89LlRLnFZkLVCQAUpRRmgc3Ah
+  anlxhlpYR5GRkYGIR4ClKLcjNLUOVfMYpzMCoJ884HuYQnM68EbtMroCOYgI5IWrMR5IiSRIS
+  UVAOTUELvozerSm68rlTdenRZ4+yLc30Csrlun2pX2sB2qz33U1XrSx1hx2ltLAfStga+ddy+
+  60CAqtLu9PxlM3MCj4VonVtSeP3cmcQ6i9MOTXprZyTKTDqrn5A+denScoly7yqXwj01il88n
+  nrOk/ZQPWsWbOvM+5ndnf/u+0ptm+3Z344X996v3zTnnuqyCyEyQi3b39jMmfnw6b3vke8Ov9
+  G2sVU22/dP+IqKvfnLqtVt13+2TPpzWuZW4zblVa3GredOaLFJOFkd9Ureq5/wKWeV+C4NpvQ
+  78ZlPrd9UJV8WenwnwKCt6/xXngefvuUwqi9r6pxmJXXC6TGD96qUSXd77d02tEb/3//hyOor
+  SizFGYmGWsxFxYkA+TyGqU4DAAA=
+X-Env-Sender: wangmy@fujitsu.com
+X-Msg-Ref: server-21.tower-745.messagelabs.com!1672716541!277873!1
+X-Originating-IP: [62.60.8.98]
+X-SYMC-ESS-Client-Auth: outbound-route-from=pass
+X-StarScan-Received: 
+X-StarScan-Version: 9.101.2; banners=-,-,-
+X-VirusChecked: Checked
+Received: (qmail 16567 invoked from network); 3 Jan 2023 03:29:01 -0000
+Received: from unknown (HELO n03ukasimr03.n03.fujitsu.local) (62.60.8.98)
+  by server-21.tower-745.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 3 Jan 2023 03:29:01 -0000
+Received: from n03ukasimr03.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr03.n03.fujitsu.local (Postfix) with ESMTP id 1BBFA1AE
+	for <openembedded-devel@lists.openembedded.org>; Tue,  3 Jan 2023 03:29:01 +0000 (GMT)
+Received: from R01UKEXCASM126.r01.fujitsu.local (R01UKEXCASM126 [10.183.43.178])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by n03ukasimr03.n03.fujitsu.local (Postfix) with ESMTPS id 100517B
+	for <openembedded-devel@lists.openembedded.org>; Tue,  3 Jan 2023 03:29:01 +0000 (GMT)
+Received: from localhost.localdomain (10.167.225.33) by
+ R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
+ (TLS) id 15.0.1497.42; Tue, 3 Jan 2023 03:28:59 +0000
+From: <wangmy@fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: Wang Mingyu <wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH] appstream: upgrade 0.15.5 -> 0.15.6
+Date: Thu, 29 Dec 2022 12:45:28 +0800
+Message-ID: <1672289132-16078-1-git-send-email-wangmy@fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.167.225.33]
+X-ClientProxiedBy: G08CNEXCHPEKD07.g08.fujitsu.local (10.167.33.80) To
+ R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
+X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 03 Jan 2023 03:10:48 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100344
+ <openembedded-devel@lists.openembedded.org>; Tue, 03 Jan 2023 03:29:08 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100345
 
-The size on glibc depends on time_t size which is 64bit on newer
-architectures like rv32 while on musl it is indicated by _FILE_OFFSET_BITS
-therefore check for both
+From: Wang Mingyu <wangmy@fujitsu.com>
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Changelog:
+==========
+Features:
+ * qt: Add API for ContentRating descriptions and ratingIds
+ * Add some coccinelle semantic patches for common style issues
+ * compose: Allow building without SVG support (for bootstrap only)
+ * validator: Check for nodes that are text nodes even though they shouldn't be
+ * validator: Extend validation for custom tag
+ * validator: Improve Screenshot validation
+
+Specification:
+ * docs: Fix typos in <extends> documentation
+
+Bugfixes:
+ * validator: internat: Don't allow bandwidth_mbitps when value is offline-only
+ * validator: Fix timestamp validation
+ * validator: Allow release descriptions to start with punctuation
+ * compose: Only add no-metainfo tag if component isn't already ignored
+ * compose: Show better error in AscImage if compose was build without rsvg
+ * Add a hack to clarify proper PtrArray element ownership for language bindings
+ * qt: Port away from deprecated QDateTime API
+ * qt: Deprecate Component::requires
+ * qt: Fix warning
+ * qt: Fix stringListToCharArray and Pool::componentsByCategories
+ * qt: Port away from deprecated foreach
+ * as-review: Add a typedef for property enums
+ * as-review: Install properties at once rather than individually
+ * as-review: Specify G_PARAM_STATIC_STRINGS for properties
+ * as-review: Emit GObject::notify on property value changes
+ * as-review: Add missing property for as_review_{get,set}_priority()
+ * ascli: fix NULL pointer dereference
+
+Miscellaneous:
+ * docs: Split releases specification into its own section
+ * style: Make code easier to read by using helper macros in all places
+ * Make some compiler warnings fatal unconditionally
+
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../0001-Use-correct-printf-format-for-__fsblkcnt_t.patch       | 2 +-
+ .../appstream/{appstream_0.15.5.bb => appstream_0.15.6.bb}      | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-support/appstream/{appstream_0.15.5.bb => appstream_0.15.6.bb} (92%)
 
-diff --git a/meta-networking/recipes-daemons/opensaf/opensaf/0001-Use-correct-printf-format-for-__fsblkcnt_t.patch b/meta-networking/recipes-daemons/opensaf/opensaf/0001-Use-correct-printf-format-for-__fsblkcnt_t.patch
-index d44ceb0d2e..7e88c498ee 100644
---- a/meta-networking/recipes-daemons/opensaf/opensaf/0001-Use-correct-printf-format-for-__fsblkcnt_t.patch
-+++ b/meta-networking/recipes-daemons/opensaf/opensaf/0001-Use-correct-printf-format-for-__fsblkcnt_t.patch
-@@ -21,7 +21,7 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
-  			    ((statsvfs.f_bfree - 1) * statsvfs.f_frsize)) {
-  				syslog(
-  				    LOG_ERR,
--+#if _FILE_OFFSET_BITS == 64 && __WORDSIZE == 32
-++#if (_FILE_OFFSET_BITS == 64 || __TIMESIZE == 64) && __WORDSIZE == 32
- +				    "Insufficient shared memory (%lld) to write the data of size: %" PRId64
- +#else
-  				    "Insufficient shared memory (%ld) to write the data of size: %" PRId64
+diff --git a/meta-oe/recipes-support/appstream/appstream_0.15.5.bb b/meta-oe/recipes-support/appstream/appstream_0.15.6.bb
+similarity index 92%
+rename from meta-oe/recipes-support/appstream/appstream_0.15.5.bb
+rename to meta-oe/recipes-support/appstream/appstream_0.15.6.bb
+index e8637b5ee..d91253bea 100644
+--- a/meta-oe/recipes-support/appstream/appstream_0.15.5.bb
++++ b/meta-oe/recipes-support/appstream/appstream_0.15.6.bb
+@@ -26,7 +26,7 @@ GIR_MESON_OPTION = ""
+ 
+ SRC_URI = "https://www.freedesktop.org/software/appstream/releases/AppStream-${PV}.tar.xz"
+ SRC_URI:append:class-target = " file://0001-fix-crosscompile.patch"
+-SRC_URI[sha256sum] = "cb15ed62cc2729683879a2dbf98c0a3267ea2b4d57bba6bc55e70a25500e04c2"
++SRC_URI[sha256sum] = "23d6c940368b5a6cedf622df3707c0dd8679cf4b0739f7aba13f925c58cdf10e"
+ 
+ S = "${WORKDIR}/AppStream-${PV}"
+ 
 -- 
-2.39.0
+2.25.1
 
 
