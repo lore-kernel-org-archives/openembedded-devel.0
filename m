@@ -2,68 +2,68 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A5778C3DA7D
-	for <webhook@archiver.kernel.org>; Tue,  3 Jan 2023 03:29:08 +0000 (UTC)
-Received: from mail1.bemta34.messagelabs.com (mail1.bemta34.messagelabs.com [195.245.231.3])
- by mx.groups.io with SMTP id smtpd.web10.56071.1672716546871525737
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 83278C3DA7D
+	for <webhook@archiver.kernel.org>; Tue,  3 Jan 2023 03:29:18 +0000 (UTC)
+Received: from mail1.bemta37.messagelabs.com (mail1.bemta37.messagelabs.com [85.158.142.113])
+ by mx.groups.io with SMTP id smtpd.web11.55584.1672716552072918455
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 02 Jan 2023 19:29:07 -0800
+ Mon, 02 Jan 2023 19:29:12 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=Iv+Qi5Co;
- spf=pass (domain: fujitsu.com, ip: 195.245.231.3, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=PR3Jsm3O;
+ spf=pass (domain: fujitsu.com, ip: 85.158.142.113, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1672716544; i=@fujitsu.com;
-	bh=1hdZdhRYkPCERb8ARiUvJQlUL4RGQO9IZRyxP8Gw110=;
+	s=170520fj; t=1672716550; i=@fujitsu.com;
+	bh=yv3pB+DFuXdqfvfcZeu3p/pqWQ7mvnn+51iZ5nWMsw0=;
 	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
 	 MIME-Version:Content-Type;
-	b=Iv+Qi5Coxyh/iOSUpdfJYdk/55hEuGj9KIkRkqyh1NvmQS/xTQoRkwk7xGbEuWynN
-	 h0WkUY4EeFpLSHYtPofAC/oH67+PjUm/1OYnO3P7da9nu5KzXgPn1aDmShAkrEOMAy
-	 3IIXcXn4oTk2mW/rcCsIr8/TErNNu2rRdJUdjMqhVeufewFSnjVRJdLR/Sd4O+5Gkp
-	 bGPl4nZgFaEn1JR0iti2h0qntncJeMtvvHr6fYekdwNndl1VhQj0YEOLkNvzSyuvY0
-	 O7p5WTBKw877vzuRA0FnxPtjGQ0SOuG1B4NGdSzc+XKTBNs5JjvvCSK681o5VVhci1
-	 5PTZU0un6Lyiw==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrBIsWRWlGSWpSXmKPExsViZ8MxSff/gs3
-  JBse+a1pcPLyU2YHR49zGFYwBjFGsmXlJ+RUJrBlXT+5iKvjPVfH/6Ry2Bsb3nF2MXBxCAk8Y
-  JeY+62KBcK4zSdzev4oVwtnNKLHq6Hkgh5ODTUBK4sb9/2wgtoiAvsTS2XuYQWxmARWJF7972
-  EFsYQFniWN7LoLZLAKqEmeanoDZvAJOErt7rrGA2BICChJTHr4H6+UEqt/e+wFsphBQzbkLf5
-  gh6gUlTs58wgIxX0Li4IsXzBC9ihKzLzdDzamQmDWrjQnCVpO4em4T8wRGwVlI2mchaV/AyLS
-  K0bQ4tagstUjXVC+pKDM9oyQ3MTNHL7FKN1EvtVS3PLW4RNdIL7G8WC+1uFivuDI3OSdFLy+1
-  ZBMjMHhTipX6djB2Lfujd4hRkoNJSZS3fO+mZCG+pPyUyozE4oz4otKc1OJDjDIcHEoSvDzzN
-  ycLCRalpqdWpGXmACMJJi3BwaMkwntoHlCat7ggMbc4Mx0idYrRmOPuwr17mTk2Hb6yl1mIJS
-  8/L1VKnFdkLlCpAEhpRmke3CBYhF9ilJUS5mVkYGAQ4ilILcrNLEGVf8UozsGoJMw7H+Qensy
-  8Erh9r4BOYQI6JWnNRpBTShIRUlINTIxHr4f3RjO8i55w7gZTSom7mqEjTwdXcYffMY352fpH
-  gt646Uz9wBmluP6Fw724/Z9S7Va8uC1aqbTkx2aGmIgUV16Hm31Be1UDDkfvOPPr8crYprvdp
-  zNqBSsZeSTTPwu9Cv1ec0yIf6vfnHrOsB8tyqp735rNn1EY1jilqEvl9qpXVyY9yDeo6T4q8s
-  np3p7Y1E+57/lvL2dVkzt0J/FMppp5+fTVFwxlmQ56LG9PX916prF6us0FiUm9N9OO8FblHb+
-  2LavJOevYgh+RF6vWbTJ+mVWnIz7JWUji8Meb09MfPd0p4Ny74LRcrejE3jlHes7utRew39TP
-  f+/j992HikQf1T1v3/SnbvEVWyWW4oxEQy3mouJEAGrBE21rAwAA
+	b=PR3Jsm3OlY7UD1g85omyIAODerh1Nz6cp6Gwh/LIUHeMrIVl6Pfg7cloXFLq+KQeo
+	 7OcKQIoiAisl5GMzjGsWAiQ+o2/j9Jdfd6vPWteVNOoWZESQrMDSweMkdtKCzFkafc
+	 at1CckgPHROZrSQKyke+1pIon01MLWy35p2/42gWRgeaEG2n14dr4a9naSI4OCj7RX
+	 mdF7CeUiTS5zErk/S72dMS62BiZqlZGsRfktHcRXBsbhNKb560X3MCqLwYUNYi/G2Q
+	 2otCW5WuEe4Yc9FOZQeO61qm8BI67+i5BaKozrnT7O67Nh4RsuT91OmQST0kWJhvP7
+	 BlAsSv+935zBw==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrEIsWRWlGSWpSXmKPExsViZ8OxWZd14eZ
+  kgzU7FC0uHl7K7MDocW7jCsYAxijWzLyk/IoE1ow/J94zFuyQrdg5dyprA+MsqS5GLg4hgYeM
+  Eg/6zrNAOFeYJFqbnrB1MXICObsZJbZd0gGx2QSkJG7c/w8WFxHQl1g6ew8ziM0soCLx4ncPO
+  4gtLGAnMef/PlYQm0VAVaL563ywOK+Ak8SxW4vBbAkBBYkpD9+D9XIKOEts7/0AtctJ4tyFP8
+  wQ9YISJ2c+YYGYLyFx8MULZoheRYnZl5tZIOwKiVmz2pggbDWJq+c2MU9gFJyFpH0WkvYFjEy
+  rGM2KU4vKUot0TfWSijLTM0pyEzNz9BKrdBP1Ukt18/KLSjJ0DfUSy4v1UouL9Yorc5NzUvTy
+  Uks2MQKDN6U4wWkH45Rlf/QOMUpyMCmJ8pbv3ZQsxJeUn1KZkVicEV9UmpNafIhRhoNDSYKXZ
+  /7mZCHBotT01Iq0zBxgJMGkJTh4lER4D80DSvMWFyTmFmemQ6ROMepy3F24dy+zEEtefl6qlD
+  ivyFygIgGQoozSPLgRsKi+xCgrJczLyMDAIMRTkFqUm1mCKv+KUZyDUUmYdz7IJTyZeSVwm14
+  BHcEEdETSmo0gR5QkIqSkGpgCmvL2SZzOS8pLZ+Z7UaBrtDRGv+/KSdfiC62vv/0UllpVe+aB
+  Weh/VrmTgdNceSKTFilFnQzaN1fe8dusv3lPDv9xmKF+XUbwKQ+XbJ13QMzaZ98nXo30jY78+
+  vtUDXOwgPmUUsW1AeEWy0xPPXCal2vIzbR9zm5Z933S97pMFvVE//62pWBh1f/ZPgG7C23c1r
+  wOUnuqyHUsRvFVRe3xopnqfds97e/8f3jfZ1f768eeTG7fNZglrJbEWt67ocuz1nuKouH9Vyv
+  3LWyIfeBryL3EdU1UzxXj8q/8saVzrWJSLkxSKZ37eeklnqTTk6YVrTCc/L2e9VvMKn2uyVa9
+  57ST/2pt8uhOW7bb57ASS3FGoqEWc1FxIgA4dqnzZQMAAA==
 X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-13.tower-565.messagelabs.com!1672716543!294708!1
-X-Originating-IP: [62.60.8.146]
+X-Msg-Ref: server-17.tower-732.messagelabs.com!1672716549!870857!1
+X-Originating-IP: [62.60.8.179]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.101.2; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 31598 invoked from network); 3 Jan 2023 03:29:03 -0000
-Received: from unknown (HELO n03ukasimr02.n03.fujitsu.local) (62.60.8.146)
-  by server-13.tower-565.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 3 Jan 2023 03:29:03 -0000
-Received: from n03ukasimr02.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTP id 675A41000DB
-	for <openembedded-devel@lists.openembedded.org>; Tue,  3 Jan 2023 03:29:03 +0000 (GMT)
+Received: (qmail 31752 invoked from network); 3 Jan 2023 03:29:09 -0000
+Received: from unknown (HELO n03ukasimr04.n03.fujitsu.local) (62.60.8.179)
+  by server-17.tower-732.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 3 Jan 2023 03:29:09 -0000
+Received: from n03ukasimr04.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTP id 01433152
+	for <openembedded-devel@lists.openembedded.org>; Tue,  3 Jan 2023 03:29:09 +0000 (GMT)
 Received: from R01UKEXCASM126.r01.fujitsu.local (R01UKEXCASM126 [10.183.43.178])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTPS id 5ACD91000D7
-	for <openembedded-devel@lists.openembedded.org>; Tue,  3 Jan 2023 03:29:03 +0000 (GMT)
+	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTPS id E8DE8151
+	for <openembedded-devel@lists.openembedded.org>; Tue,  3 Jan 2023 03:29:08 +0000 (GMT)
 Received: from localhost.localdomain (10.167.225.33) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.42; Tue, 3 Jan 2023 03:29:01 +0000
+ (TLS) id 15.0.1497.42; Tue, 3 Jan 2023 03:29:07 +0000
 From: <wangmy@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-oe] [PATCH] byacc: upgrade 20221106 -> 20221229
-Date: Thu, 29 Dec 2022 12:45:29 +0800
-Message-ID: <1672289132-16078-2-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH] flashrom: upgrade 1.2 -> 1.2.1
+Date: Thu, 29 Dec 2022 12:45:31 +0800
+Message-ID: <1672289132-16078-4-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 In-Reply-To: <1672289132-16078-1-git-send-email-wangmy@fujitsu.com>
 References: <1672289132-16078-1-git-send-email-wangmy@fujitsu.com>
@@ -76,41 +76,95 @@ X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 03 Jan 2023 03:29:08 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100346
+ <openembedded-devel@lists.openembedded.org>; Tue, 03 Jan 2023 03:29:18 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100348
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
-Changelog:
-==========
- * configure: regen
- * configure.in:
- correct help-message for --disable-btyacc option, and fix the reporting of
- the selected option value in the configure script's output (report by Daniel
- Weaver)
- * VERSION, package/byacc.spec, package/debian/changelog,
-   package/mingw-byacc.spec, package/pkgsrc/Makefile: bump
- * aclocal.m4: resync with my-autconf
+0001-typecast-enum-conversions-explicitly.patc
+removed since it's included in 1.2.1
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../byacc/{byacc_20221106.bb => byacc_20221229.bb}              | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-extended/byacc/{byacc_20221106.bb => byacc_20221229.bb} (82%)
+ ...typecast-enum-conversions-explicitly.patch | 45 -------------------
+ .../{flashrom_1.2.bb => flashrom_1.2.1.bb}    |  4 +-
+ 2 files changed, 1 insertion(+), 48 deletions(-)
+ delete mode 100644 meta-oe/recipes-bsp/flashrom/flashrom/0001-typecast-enum-conversions-explicitly.patch
+ rename meta-oe/recipes-bsp/flashrom/{flashrom_1.2.bb => flashrom_1.2.1.bb} (79%)
 
-diff --git a/meta-oe/recipes-extended/byacc/byacc_20221106.bb b/meta-oe/recipes-extended/byacc/byacc_20221229.bb
-similarity index 82%
-rename from meta-oe/recipes-extended/byacc/byacc_20221106.bb
-rename to meta-oe/recipes-extended/byacc/byacc_20221229.bb
-index 3a8b5f841..f7f75b02c 100644
---- a/meta-oe/recipes-extended/byacc/byacc_20221106.bb
-+++ b/meta-oe/recipes-extended/byacc/byacc_20221229.bb
-@@ -7,4 +7,4 @@ LICENSE = "PD"
- LIC_FILES_CHKSUM = "file://package/debian/copyright;md5=62c37a10a2faf90235ee64280ad72737"
- require byacc.inc
+diff --git a/meta-oe/recipes-bsp/flashrom/flashrom/0001-typecast-enum-conversions-explicitly.patch b/meta-oe/recipes-bsp/flashrom/flashrom/0001-typecast-enum-conversions-explicitly.patch
+deleted file mode 100644
+index f2302dbcc..000000000
+--- a/meta-oe/recipes-bsp/flashrom/flashrom/0001-typecast-enum-conversions-explicitly.patch
++++ /dev/null
+@@ -1,45 +0,0 @@
+-Upstream-Status: Backport
+-Signed-off-by: Ross Burton <ross.burton@arm.com>
+-
+-From 3a0c1966e4c66f91e6e8551e906b6db38002acb4 Mon Sep 17 00:00:00 2001
+-From: Angel Pons <th3fanbus@gmail.com>
+-Date: Wed, 27 May 2020 12:15:51 +0200
+-Subject: [PATCH] libflashrom.c: Use casts on enum conversions
+-
+-This allows flashrom to build with GCC 10.
+-
+-Change-Id: I2166cdf3681452631ef8e980face2924e9a6c81a
+-Signed-off-by: Angel Pons <th3fanbus@gmail.com>
+-Reviewed-on: https://review.coreboot.org/c/flashrom/+/41775
+-Tested-by: build bot (Jenkins) <no-reply@coreboot.org>
+-Reviewed-by: HAOUAS Elyes <ehaouas@noos.fr>
+----
+- libflashrom.c | 6 ++++--
+- 1 file changed, 4 insertions(+), 2 deletions(-)
+-
+-diff --git a/libflashrom.c b/libflashrom.c
+-index ab7e364..c20d9c7 100644
+---- a/libflashrom.c
+-+++ b/libflashrom.c
+-@@ -188,7 +188,8 @@ struct flashrom_board_info *flashrom_supported_boards(void)
+- 		for (; i < boards_known_size; ++i) {
+- 			supported_boards[i].vendor = binfo[i].vendor;
+- 			supported_boards[i].name = binfo[i].name;
+--			supported_boards[i].working = binfo[i].working;
+-+			supported_boards[i].working =
+-+				(enum flashrom_test_state) binfo[i].working;
+- 		}
+- 	} else {
+- 		msg_gerr("Memory allocation error!\n");
+-@@ -226,7 +227,8 @@ struct flashrom_chipset_info *flashrom_supported_chipsets(void)
+- 			supported_chipsets[i].chipset = chipset[i].device_name;
+- 			supported_chipsets[i].vendor_id = chipset[i].vendor_id;
+- 			supported_chipsets[i].chipset_id = chipset[i].device_id;
+--			supported_chipsets[i].status = chipset[i].status;
+-+			supported_chipsets[i].status =
+-+				(enum flashrom_test_state) chipset[i].status;
+- 	  }
+- 	} else {
+- 		msg_gerr("Memory allocation error!\n");
+--- 
+-2.25.1
+diff --git a/meta-oe/recipes-bsp/flashrom/flashrom_1.2.bb b/meta-oe/recipes-bsp/flashrom/flashrom_1.2.1.bb
+similarity index 79%
+rename from meta-oe/recipes-bsp/flashrom/flashrom_1.2.bb
+rename to meta-oe/recipes-bsp/flashrom/flashrom_1.2.1.bb
+index bdc3ca084..b2592d294 100644
+--- a/meta-oe/recipes-bsp/flashrom/flashrom_1.2.bb
++++ b/meta-oe/recipes-bsp/flashrom/flashrom_1.2.1.bb
+@@ -4,13 +4,11 @@ HOMEPAGE = "http://flashrom.org"
  
--SRC_URI[sha256sum] = "a899be227bbcac9cf7700f7dbb5a8494688f1f9f0617b510762daeace47b9d12"
-+SRC_URI[sha256sum] = "1316c6f790fafa6688427f1ff91267b61d8b7873b443c620eef69a6eff0503bc"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
+ SRC_URI = "https://download.flashrom.org/releases/flashrom-v${PV}.tar.bz2 \
+-           file://0001-typecast-enum-conversions-explicitly.patch \
+            file://meson-fixes.patch \
+            file://0001-flashrom-Mark-RISCV-as-non-memory-mapped-I-O-archite.patch \
+            file://0001-hwaccess-use-__asm__-as-is-done-elsewhere.patch \
+            "
+-SRC_URI[md5sum] = "7f8e4b87087eb12ecee0fcc5445b4956"
+-SRC_URI[sha256sum] = "e1f8d95881f5a4365dfe58776ce821dfcee0f138f75d0f44f8a3cd032d9ea42b"
++SRC_URI[sha256sum] = "89a7ff5beb08c89b8795bbd253a51b9453547a864c31793302296b56bbc56d65"
+ 
+ S = "${WORKDIR}/flashrom-v${PV}"
+ 
 -- 
 2.25.1
 
