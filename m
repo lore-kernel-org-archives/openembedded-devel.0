@@ -1,135 +1,206 @@
-Return-Path: <kai.kang@eng.windriver.com>
+Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E9360C4332F
-	for <webhook@archiver.kernel.org>; Thu, 29 Dec 2022 13:13:01 +0000 (UTC)
-Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.web11.204786.1672319581427727090
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A9BFDC4332F
+	for <webhook@archiver.kernel.org>; Thu, 29 Dec 2022 15:14:02 +0000 (UTC)
+Received: from mailout07.t-online.de (mailout07.t-online.de [194.25.134.83])
+ by mx.groups.io with SMTP id smtpd.web10.205842.1672326836188845212
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 29 Dec 2022 05:13:01 -0800
+ Thu, 29 Dec 2022 07:13:56 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=pps06212021 header.b=eIz1H3G3;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=0362fa9fb2=kai.kang@windriver.com)
-Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 2BTDCHbO029366
-	for <openembedded-devel@lists.openembedded.org>; Thu, 29 Dec 2022 05:13:01 -0800
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com; h=from : to :
- subject : date : message-id : mime-version : content-type; s=PPS06212021;
- bh=OfPQr7euT5Wb0P8J7C4vF50Syx6Y3yACulZaOpgzg1I=;
- b=eIz1H3G3XV5CQ0lp1GpWOpwtc1rIuSCfwOpHO/m683fYicUoaDLAnYmlmTltDx095x7d
- ZYc/FU6Y4D98YQqXV8XTFk/Q/POfYywRetLYR/TKPTl7zC9yieDXba3p0uo/tN7szV9Q
- RxfEOA7UKbtl/gb6oUuIvYyVsnPWoegQBVYck5t0mWWxG9JGDZvSKkr2hTHMqC7opdEI
- vKFcbJyvIvg0m+5kAkXHT+O5K33nUQR+VGfEFuajdhCt4wIfbPVKmP5NW4O7J5/sDkYL
- gBUo02IH8Lxqcp0DbJ0cfUonHlVLm8NIQUNfZHAveTK75MtP0M+b30zR4ab37eSU7AjK Ng== 
-Received: from ala-exchng01.corp.ad.wrs.com (unknown-82-252.windriver.com [147.11.82.252])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3mp1trjrm2-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Thu, 29 Dec 2022 05:13:00 -0800
-Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.16; Thu, 29 Dec 2022 05:12:58 -0800
-Received: from pek-lpg-core3.wrs.com (128.224.153.232) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
- 15.1.2507.16 via Frontend Transport; Thu, 29 Dec 2022 05:12:57 -0800
-From: <kai.kang@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-oe][PATCH] xorg-lib: set XORG_EXT for recipes
-Date: Thu, 29 Dec 2022 21:12:58 +0800
-Message-ID: <20221229131258.29096-1-kai.kang@windriver.com>
-X-Mailer: git-send-email 2.17.1
+ dkim=missing; spf=none, err=SPF record not found (domain: t-online.de, ip: 194.25.134.83, mailfrom: f_l_k@t-online.de)
+Received: from fwd75.dcpf.telekom.de (fwd75.aul.t-online.de [10.223.144.101])
+	by mailout07.t-online.de (Postfix) with SMTP id 9ACC2C64C
+	for <openembedded-devel@lists.openembedded.org>; Thu, 29 Dec 2022 16:13:54 +0100 (CET)
+Received: from flk-MS-7C91.fritz.box ([79.219.226.205]) by fwd75.t-online.de
+	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
+	esmtp id 1pAubF-19j0vh0; Thu, 29 Dec 2022 16:13:41 +0100
+From: Markus Volk <f_l_k@t-online.de>
+To: openembedded-devel@lists.openembedded.org
+Cc: Markus Volk <f_l_k@t-online.de>
+Subject: [meta-gnome][PATCH] gnome-control-center: update 42.0 -> 43.2
+Date: Thu, 29 Dec 2022 16:13:32 +0100
+Message-Id: <20221229151332.224449-1-f_l_k@t-online.de>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: text/plain
-X-Proofpoint-GUID: RGKrEy-9d7di_rN5yCGYiYAibTKqesOW
-X-Proofpoint-ORIG-GUID: RGKrEy-9d7di_rN5yCGYiYAibTKqesOW
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.205,Aquarius:18.0.923,Hydra:6.0.545,FMLib:17.11.122.1
- definitions=2022-12-29_06,2022-12-29_02,2022-06-22_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 adultscore=0 mlxlogscore=655
- spamscore=0 mlxscore=0 lowpriorityscore=0 suspectscore=0 clxscore=1015
- priorityscore=1501 bulkscore=0 impostorscore=0 phishscore=0 malwarescore=0
- classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2212070000
- definitions=main-2212290109
+Content-Type: text/plain; charset=UTF-8
+X-TOI-EXPURGATEID: 150726::1672326821-2EFF8535-25F9E65A/0/0 CLEAN NORMAL
+X-TOI-MSGID: 2ff5b30d-60ab-46e2-b505-2a2505f203fd
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 29 Dec 2022 13:13:01 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100299
+ <openembedded-devel@lists.openembedded.org>; Thu, 29 Dec 2022 15:14:02 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100300
 
-From: Kai Kang <kai.kang@windriver.com>
-
-It sets default value of XORG_EXT with 'tar.xz' in xorg-lib-common.inc,
-so set XORG_EXT with previous default value 'tar.bz2' to make recipes
-work, including libxaw, libxkbui, libxpresent and liblbxutil.
-
-Signed-off-by: Kai Kang <kai.kang@windriver.com>
+Signed-off-by: Markus Volk <f_l_k@t-online.de>
 ---
- meta-oe/recipes-graphics/xorg-lib/liblbxutil_1.1.0.bb  | 2 ++
- meta-oe/recipes-graphics/xorg-lib/libxaw_1.0.14.bb     | 5 +++--
- meta-oe/recipes-graphics/xorg-lib/libxkbui_1.0.2.bb    | 2 ++
- meta-oe/recipes-graphics/xorg-lib/libxpresent_1.0.1.bb | 2 ++
- 4 files changed, 9 insertions(+), 2 deletions(-)
+ ...001-Add-meson-option-to-pass-sysroot.patch | 45 ------------------
+ ...r_42.0.bb =3D> gnome-control-center_43.2.bb} | 46 ++++++++++---------
+ 2 files changed, 24 insertions(+), 67 deletions(-)
+ delete mode 100644 meta-gnome/recipes-gnome/gnome-control-center/gnome-c=
+ontrol-center/0001-Add-meson-option-to-pass-sysroot.patch
+ rename meta-gnome/recipes-gnome/gnome-control-center/{gnome-control-cent=
+er_42.0.bb =3D> gnome-control-center_43.2.bb} (68%)
 
-diff --git a/meta-oe/recipes-graphics/xorg-lib/liblbxutil_1.1.0.bb b/meta-oe/recipes-graphics/xorg-lib/liblbxutil_1.1.0.bb
-index 58b4f31b1..ce064903b 100644
---- a/meta-oe/recipes-graphics/xorg-lib/liblbxutil_1.1.0.bb
-+++ b/meta-oe/recipes-graphics/xorg-lib/liblbxutil_1.1.0.bb
-@@ -7,6 +7,8 @@ DEPENDS += " xorgproto zlib"
- PE = "1"
- PR = "r11"
- 
-+XORG_EXT = "tar.bz2"
-+
- SRC_URI += "file://mkg3states-1.1.patch \
-             file://0001-lbx_zlib-Mark-declration-with-extern.patch \
-            "
-diff --git a/meta-oe/recipes-graphics/xorg-lib/libxaw_1.0.14.bb b/meta-oe/recipes-graphics/xorg-lib/libxaw_1.0.14.bb
-index 08d9b232e..4a909848a 100644
---- a/meta-oe/recipes-graphics/xorg-lib/libxaw_1.0.14.bb
-+++ b/meta-oe/recipes-graphics/xorg-lib/libxaw_1.0.14.bb
-@@ -6,6 +6,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=1c65719d42900bb81b83e8293c20a364"
- 
- PE = "1"
- 
-+XORG_PN = "libXaw"
-+XORG_EXT = "tar.bz2"
-+
- SRC_URI[md5sum] = "c1ce21c296bbf3da3e30cf651649563e"
- SRC_URI[sha256sum] = "76aef98ea3df92615faec28004b5ce4e5c6855e716fa16de40c32030722a6f8e"
- 
-@@ -23,5 +26,3 @@ FILES:libxaw8 = "${libdir}/libXaw8.so.8*"
- 
- # Avoid dependency on libxaw as it is not build
- RDEPENDS:${PN}-dev = ""
+diff --git a/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-=
+center/0001-Add-meson-option-to-pass-sysroot.patch b/meta-gnome/recipes-g=
+nome/gnome-control-center/gnome-control-center/0001-Add-meson-option-to-p=
+ass-sysroot.patch
+deleted file mode 100644
+index 768ba5439..000000000
+--- a/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center/=
+0001-Add-meson-option-to-pass-sysroot.patch
++++ /dev/null
+@@ -1,45 +0,0 @@
+-From ba8aebe1259ae3f7f5a4827e5a47bb95c568b218 Mon Sep 17 00:00:00 2001
+-From: =3D?UTF-8?q?Andreas=3D20M=3DC3=3DBCller?=3D <schnitzeltony@gmail.c=
+om>
+-Date: Tue, 21 May 2019 16:07:46 +0200
+-Subject: [PATCH] Add meson option to pass sysroot
+-MIME-Version: 1.0
+-Content-Type: text/plain; charset=3DUTF-8
+-Content-Transfer-Encoding: 8bit
 -
--XORG_PN = "libXaw"
-diff --git a/meta-oe/recipes-graphics/xorg-lib/libxkbui_1.0.2.bb b/meta-oe/recipes-graphics/xorg-lib/libxkbui_1.0.2.bb
-index 103da1f08..e7c9b64e8 100644
---- a/meta-oe/recipes-graphics/xorg-lib/libxkbui_1.0.2.bb
-+++ b/meta-oe/recipes-graphics/xorg-lib/libxkbui_1.0.2.bb
-@@ -6,5 +6,7 @@ DEPENDS += "virtual/libx11 libxt libxkbfile"
- PE = "1"
- PR = "r10"
- 
-+XORG_EXT = "tar.bz2"
-+
- SRC_URI[md5sum] = "1143e456f7429e18e88f2eadb2f2b6b1"
- SRC_URI[sha256sum] = "20c23101d63234ee5f6d696dfa069b29c6c58e39eff433bcd7705b50b3ffa214"
-diff --git a/meta-oe/recipes-graphics/xorg-lib/libxpresent_1.0.1.bb b/meta-oe/recipes-graphics/xorg-lib/libxpresent_1.0.1.bb
-index 2a59a80e4..3b15153b6 100644
---- a/meta-oe/recipes-graphics/xorg-lib/libxpresent_1.0.1.bb
-+++ b/meta-oe/recipes-graphics/xorg-lib/libxpresent_1.0.1.bb
-@@ -4,6 +4,8 @@ DEPENDS += "xorgproto libxfixes libxrandr"
- 
- LIC_FILES_CHKSUM = "file://COPYING;md5=3c1ce42c334a6f5cccb0277556a053e0"
- 
-+XORG_EXT = "tar.bz2"
-+
- SRC_URI = "http://xorg.freedesktop.org/archive/individual/lib/libXpresent-${PV}.tar.xz"
- SRC_URI[sha256sum] = "b964df9e5a066daa5e08d2dc82692c57ca27d00b8cc257e8e960c9f1cf26231b"
- 
--- 
-2.17.1
+-We need to pass this to meson to help it finding gdesktop-enums.h:
+-
+-| panels/background/meson.build:38:0: ERROR: File /usr/include/gsettings=
+-desktop-schemas/gdesktop-enums.h does not exist.
+-
+-Upstream-Status: Inappropriate [OE specific]
+-
+-Signed-off-by: Andreas M=C3=BCller <schnitzeltony@gmail.com>
+----
+- meson_options.txt             | 1 +
+- panels/background/meson.build | 2 +-
+- 2 files changed, 2 insertions(+), 1 deletion(-)
+-
+-diff --git a/meson_options.txt b/meson_options.txt
+-index dbca723..af0f871 100644
+---- a/meson_options.txt
+-+++ b/meson_options.txt
+-@@ -1,3 +1,4 @@
+-+option('oe_sysroot', type: 'string', value: '', description: 'Directory=
+ for OE-sysroot')
+- option('documentation', type: 'boolean', value: false, description: 'bu=
+ild documentation')
+- option('ibus', type: 'boolean', value: true, description: 'build with I=
+Bus support')
+- option('privileged_group', type: 'string', value: 'wheel', description:=
+ 'name of group that has elevated permissions')
+-diff --git a/panels/background/meson.build b/panels/background/meson.bui=
+ld
+-index 3634c47..459ccfe 100644
+---- a/panels/background/meson.build
+-+++ b/panels/background/meson.build
+-@@ -25,7 +25,7 @@ common_sources =3D []
+-=20
+- enums =3D 'gdesktop-enums-types'
+- enums_header =3D files(
+--  gsettings_desktop_dep.get_pkgconfig_variable('prefix') + '/include/gs=
+ettings-desktop-schemas/gdesktop-enums.h',
+-+  get_option('oe_sysroot') + gsettings_desktop_dep.get_pkgconfig_variab=
+le('prefix') + '/include/gsettings-desktop-schemas/gdesktop-enums.h',
+-   'cc-background-item.h'
+- )
+-=20
+---=20
+-2.34.1
+-
+diff --git a/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-=
+center_42.0.bb b/meta-gnome/recipes-gnome/gnome-control-center/gnome-cont=
+rol-center_43.2.bb
+similarity index 68%
+rename from meta-gnome/recipes-gnome/gnome-control-center/gnome-control-c=
+enter_42.0.bb
+rename to meta-gnome/recipes-gnome/gnome-control-center/gnome-control-cen=
+ter_43.2.bb
+index 6fe999a19..5772d6b73 100644
+--- a/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center_=
+42.0.bb
++++ b/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center_=
+43.2.bb
+@@ -4,46 +4,48 @@ LICENSE =3D "GPL-2.0-only"
+ LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D75859989545e37968a99b631ef427=
+22e"
+=20
+ GNOMEBASEBUILDCLASS =3D "meson"
++GTKIC_VERSION =3D "4"
+=20
+-inherit gnomebase gsettings gettext vala upstream-version-is-even bash-c=
+ompletion features_check
++inherit gtk-icon-cache pkgconfig gnomebase gsettings gettext upstream-ve=
+rsion-is-even bash-completion features_check useradd
+=20
+ DEPENDS =3D " \
+-    gdk-pixbuf-native \
+-    colord-gtk \
+-    udisks2 \
+-    upower \
+-    polkit \
+-    pulseaudio \
+     accountsservice \
+-    samba \
+-    gsettings-desktop-schemas \
+-    gnome-settings-daemon \
++    colord-gtk \
++    gcr3 \
++    gdk-pixbuf \
++    glib-2.0 \
++    gnome-bluetooth \
+     gnome-desktop \
+     gnome-online-accounts \
+-    libnma \
+-    gnome-bluetooth \
+-    grilo \
++    gnome-settings-daemon \
++    gsettings-desktop-schemas \
++    gtk4 \
++    libadwaita \
++    libepoxy \
+     libgtop \
+-    gsound \
++    libgudev \
++    libnma \
+     libpwquality \
+-    libadwaita \
++    libxml2 \
++    polkit \
++    pulseaudio \
++    samba \
++    udisks2 \
++    upower \
+ "
+=20
+-REQUIRED_DISTRO_FEATURES +=3D "polkit pulseaudio systemd x11"
++REQUIRED_DISTRO_FEATURES +=3D "opengl polkit pulseaudio systemd x11"
+=20
+-SRC_URI[archive.sha256sum] =3D "0732efa7c4171ce0a0ed4106580b4ce35a57b101=
+52c0ea36d239134913777eda"
+-SRC_URI +=3D "file://0001-Add-meson-option-to-pass-sysroot.patch"
++SRC_URI[archive.sha256sum] =3D "d7f256aba80a92c727b329fd01c8602da4b78f0f=
+ddaec93fcd91096964700563"
+=20
+ PACKAGECONFIG ??=3D "ibus ${@bb.utils.filter('DISTRO_FEATURES', 'wayland=
+', d)}"
+ PACKAGECONFIG[ibus] =3D "-Dibus=3Dtrue, -Dibus=3Dfalse, ibus"
+ PACKAGECONFIG[wayland] =3D "-Dwayland=3Dtrue, -Dwayland=3Dfalse, wayland=
+"
+=20
+-EXTRA_OEMESON =3D " \
+-    -Doe_sysroot=3D${STAGING_DIR_HOST} \
+-"
++USERADD_PACKAGES =3D "${PN}"
++USERADD_PARAM:${PN} =3D "--system --no-create-home --user-group --home-d=
+ir ${sysconfdir}/polkit-1 polkitd"
+=20
+ do_install:append() {
+-	# If polkit is setup fixup permissions and ownership
+     if [ -d ${D}${datadir}/polkit-1/rules.d ]; then
+         chmod 700 ${D}${datadir}/polkit-1/rules.d
+         chown polkitd:root ${D}${datadir}/polkit-1/rules.d
+--=20
+2.34.1
 
 
