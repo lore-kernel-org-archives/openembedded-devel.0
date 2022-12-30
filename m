@@ -2,71 +2,71 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1E3FFC4708D
-	for <webhook@archiver.kernel.org>; Wed,  4 Jan 2023 03:40:39 +0000 (UTC)
-Received: from mail1.bemta34.messagelabs.com (mail1.bemta34.messagelabs.com [195.245.231.4])
- by mx.groups.io with SMTP id smtpd.web11.3825.1672803631434460873
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 17A7DC4708D
+	for <webhook@archiver.kernel.org>; Wed,  4 Jan 2023 03:41:39 +0000 (UTC)
+Received: from mail1.bemta34.messagelabs.com (mail1.bemta34.messagelabs.com [195.245.231.2])
+ by mx.groups.io with SMTP id smtpd.web10.3743.1672803692730297018
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 03 Jan 2023 19:40:31 -0800
+ Tue, 03 Jan 2023 19:41:33 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=sxY6/J9g;
- spf=pass (domain: fujitsu.com, ip: 195.245.231.4, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=LGl8e0Mn;
+ spf=pass (domain: fujitsu.com, ip: 195.245.231.2, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1672803629; i=@fujitsu.com;
-	bh=LwT581u05TYZRkBjq/HQkL3qcaGR7Th3cvzGgAbk9Kc=;
+	s=170520fj; t=1672803691; i=@fujitsu.com;
+	bh=p63tLcquE5svPNNZ8LBNlHwLaV0NIg3S4SU/uWp7RwQ=;
 	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
 	 MIME-Version:Content-Type;
-	b=sxY6/J9gWWM4PwlONnK9RlgmIg7mKmAd6YiUXa+hH4wgPb6OCLAmyRyb278tT3RIa
-	 r0y1GV2Ql46MdaufijEaslKmw5XJwHDVXdsNqEm0/PsJdbBavBIjxU++tWM7+iKAkx
-	 6wsREzqPFwlgLj8txq3MVFXhIUpnJE2QU70XuyxuFwYSq/LaurZZFjWcqPY2EXu5mK
-	 a0Bkc+n0E881k26L0likS8gfl433MKpeOedSgXduZHBaP9faLyeJAOb7/zmrWEAmfV
-	 nwNuBz+bR8ZHlZG9D0NAqIO3AP7r8ztL0BTHLuHdbr4cTV7GzBLpHCKwaxtX9kHK+J
-	 u7JGOgtlTb5Dg==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrMIsWRWlGSWpSXmKPExsViZ8ORpKvzdUu
-  ywZZWc4uLh5cyOzB6nNu4gjGAMYo1My8pvyKBNePe/8esBS95K/7NWMfSwLiXp4uRi0NI4CGj
-  ROuSZ6wQzmUmiTf9b5ggnN2MEkcefQFyODnYBKQkbtz/zwZiiwjoSyydvYcZxGYWUJF48buHH
-  cQWFvCT2HR4IwuIzSKgKrHu2wywOK+Ak8TnxVfA4hICChJTHr4H6+UUcJb49nonWFwIqObP0a
-  fMEPWCEidnPmGBmC8hcfDFC2aIXkWJ2ZeboeZUSMya1cYEYatJXD23iXkCo+AsJO2zkLQvYGR
-  axWhWnFpUllqka2ipl1SUmZ5RkpuYmaOXWKWbqJdaqlueWlyia6SXWF6sl1pcrFdcmZuck6KX
-  l1qyiREYvinFiut2ME5f9kfvEKMkB5OSKG/J5y3JQnxJ+SmVGYnFGfFFpTmpxYcYZTg4lCR41
-  T8B5QSLUtNTK9Iyc4CxBJOW4OBREuHNAmnlLS5IzC3OTIdInWLU5bi7cO9eZiGWvPy8VClxXt
-  cvQEUCIEUZpXlwI2BxfYlRVkqYl5GBgUGIpyC1KDezBFX+FaM4B6OSMO9qkFU8mXklcJteAR3
-  BBHRE0pqNIEeUJCKkpBqYOBKPT277v//9R142sZ0851jDtVMedLN6vxL6+ZpR96vnYuWlqgs/
-  x6ZxljTlnvx40uxqc0hZ58EbRx/eaZ7uHtBw/T+blJYBi796x5u/h9Z5pujdlU9Z8Vkzlk+7Q
-  ct4/rPOZW9KFUs7Tar8Vm74Wlse/GRN6sddCg71H+fZ/n53rSTXVWdJvUNxI1vIrZJ3BRkrfF
-  r4ux7fcr9rmf7t89XsCydk/d8vzNReK7et3HfGe4MjLC/knwcqehX7Fv9YP3W2T1Lkiq6YRnO
-  Ptz81Z85O+mpwSvB7WiOn5uvYmQ9W8JmnPHJpdJ36eMpXjvx/H5eGBr79JX5HIJ/xQdlxkZ8p
-  64uOfZ17nzfZprJPiaU4I9FQi7moOBEAvz6YQWYDAAA=
+	b=LGl8e0MnvS67l/obS+HOfKfYmgC8fpd3prjEI4Y6c9olQCaYO9qQo6GxE2DT+KZQ9
+	 YyYmbNBCyps2vx57ecrAQQiMKU/OZuday/W8IcKxLPOCNIQHfLOO8jCKqG1cLWl4R9
+	 wq9AMf5m3FZkc4vPDIehTtjk1IC9i1KWJSofVgSK+ilKY149gRTXzF0s/uFkQR8NAA
+	 BPj4aa0oAshmthOGMGRTUZxLPSvBJn12CKuaynbP6A9QMUuwSVVyVLBBPEq2YG68TX
+	 a72btUZIReyaQfC/2p2pAUUUC/Hz6kzbvMT+6STLEUZbUTG6DPxQDGj1J6sqJyUolS
+	 ZgD8t0UpHl1bw==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrAIsWRWlGSWpSXmKPExsViZ8ORpJv1dUu
+  yQf8hc4uLh5cyOzB6nNu4gjGAMYo1My8pvyKBNeNyw3r2gincFdfeNDE3MPZzdTFycQgJPGSU
+  aLtykQXCucwkcXdnM2sXIyeQs5tR4lyXLIjNJiAlceP+fzYQW0RAX2Lp7D3MIDazgIrEi9897
+  CC2sICPxLcj05lAbBYBVYm2+R/AangFnCRW3moH65UQUJCY8vA9UJyDg1PAWaKrTQBilZNE88
+  dmFohyQYmTM5+wQIyXkDj44gUzRKuixOzLEDUSAhUSs2a1MUHYahJXz21insAoOAtJ+ywk7Qs
+  YmVYxmhanFpWlFula6iUVZaZnlOQmZuboJVbpJuqlluqWpxaX6BrpJZYX66UWF+sVV+Ym56To
+  5aWWbGIEBm5KsbrqDsZzy/7oHWKU5GBSEuUt+bwlWYgvKT+lMiOxOCO+qDQntfgQowwHh5IEr
+  /onoJxgUWp6akVaZg4wimDSEhw8SiK8WSCtvMUFibnFmekQqVOMuhx3F+7dyyzEkpeflyolzu
+  v6BahIAKQoozQPbgQsoi8xykoJ8zIyMDAI8RSkFuVmlqDKv2IU52BUEuZdDbKKJzOvBG7TK6A
+  jmICOSFqzEeSIkkSElFQD0xJpkYucPaJ7p0kpqWZq73hwLPLedzfpL3pMi0VU5iVO/MjpeN8v
+  e0fZos2zk0Lsp9+2XrXPt9e04EJovcI5g2WTgpZ9MAuc7yi05sFVvTL1/ruSjcFJv7pcTnS0R
+  DNsvne8fG5fskah+d2JFyqfCrflbKyOzXuw6GKhikyDVvDSZbfSS/g/z/718cZPxSe8ebJMaw
+  1V2Jo9j32u/1cyve6s7fLP121535r22X/0rv01XWpJgdO6SKXu9z1u6qXR8t1SVqErahN1wtY
+  rbExoXVDqJzNp+pJNjIwpWhfmOHG90aks6zu49s73pi87p9SIR7qeevV+Ce+5GsvaUAPzhzo+
+  n1SNJVQP1uq+ulWnxFKckWioxVxUnAgA3dZSRWMDAAA=
 X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-11.tower-565.messagelabs.com!1672803628!384019!1
+X-Msg-Ref: server-20.tower-571.messagelabs.com!1672803690!363571!1
 X-Originating-IP: [62.60.8.98]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.101.2; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 12977 invoked from network); 4 Jan 2023 03:40:28 -0000
+Received: (qmail 22849 invoked from network); 4 Jan 2023 03:41:30 -0000
 Received: from unknown (HELO n03ukasimr03.n03.fujitsu.local) (62.60.8.98)
-  by server-11.tower-565.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 4 Jan 2023 03:40:28 -0000
+  by server-20.tower-571.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 4 Jan 2023 03:41:30 -0000
 Received: from n03ukasimr03.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr03.n03.fujitsu.local (Postfix) with ESMTP id 9C7151B0
-	for <openembedded-devel@lists.openembedded.org>; Wed,  4 Jan 2023 03:40:28 +0000 (GMT)
+	by n03ukasimr03.n03.fujitsu.local (Postfix) with ESMTP id 9BD321B0
+	for <openembedded-devel@lists.openembedded.org>; Wed,  4 Jan 2023 03:41:30 +0000 (GMT)
 Received: from R01UKEXCASM126.r01.fujitsu.local (R01UKEXCASM126 [10.183.43.178])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by n03ukasimr03.n03.fujitsu.local (Postfix) with ESMTPS id 90FDA7B
-	for <openembedded-devel@lists.openembedded.org>; Wed,  4 Jan 2023 03:40:28 +0000 (GMT)
+	by n03ukasimr03.n03.fujitsu.local (Postfix) with ESMTPS id 913C17B
+	for <openembedded-devel@lists.openembedded.org>; Wed,  4 Jan 2023 03:41:30 +0000 (GMT)
 Received: from localhost.localdomain (10.167.225.33) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.42; Wed, 4 Jan 2023 03:40:26 +0000
+ (TLS) id 15.0.1497.42; Wed, 4 Jan 2023 03:41:29 +0000
 From: <wangmy@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-python] [PATCH] python3-xlsxwriter: upgrade 3.0.3 -> 3.0.5
-Date: Fri, 30 Dec 2022 12:56:50 +0800
-Message-ID: <1672376212-25291-3-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH] python3-bidict: upgrade 0.22.0 -> 0.22.1
+Date: Fri, 30 Dec 2022 12:57:58 +0800
+Message-ID: <1672376281-25331-2-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
-In-Reply-To: <1672376212-25291-1-git-send-email-wangmy@fujitsu.com>
-References: <1672376212-25291-1-git-send-email-wangmy@fujitsu.com>
+In-Reply-To: <1672376281-25331-1-git-send-email-wangmy@fujitsu.com>
+References: <1672376281-25331-1-git-send-email-wangmy@fujitsu.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-Originating-IP: [10.167.225.33]
@@ -76,50 +76,40 @@ X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 04 Jan 2023 03:40:39 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100373
+ <openembedded-devel@lists.openembedded.org>; Wed, 04 Jan 2023 03:41:39 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100377
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
 Changelog:
 ==========
-* Added 'OverlappingRange' exception which is raised during Worksheet
-  :func:'add_table()' or :func:'merge_range()' if the range overlaps an existing
-  worksheet table or merge range. This is a file corruption error in Excel. See
-  :ref:'exceptions'.
-
-License-Update: Copyright year updated to 2023.
+-Only include the source code in the source distribution. This reduces the
+ size of the source distribution from 200kB to 30kB.
+-Fix the return type hint of bidict.inverted() to return an Iterator, rather
+ than an Iterable.
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- ...ython3-xlsxwriter_3.0.3.bb => python3-xlsxwriter_3.0.5.bb} | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-xlsxwriter_3.0.3.bb => python3-xlsxwriter_3.0.5.bb} (67%)
+ .../{python3-bidict_0.22.0.bb => python3-bidict_0.22.1.bb}      | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-bidict_0.22.0.bb => python3-bidict_0.22.1.bb} (79%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-xlsxwriter_3.0.3.bb b/meta-python/recipes-devtools/python/python3-xlsxwriter_3.0.5.bb
-similarity index 67%
-rename from meta-python/recipes-devtools/python/python3-xlsxwriter_3.0.3.bb
-rename to meta-python/recipes-devtools/python/python3-xlsxwriter_3.0.5.bb
-index 0f8dd35e0f..e64463edca 100644
---- a/meta-python/recipes-devtools/python/python3-xlsxwriter_3.0.3.bb
-+++ b/meta-python/recipes-devtools/python/python3-xlsxwriter_3.0.5.bb
-@@ -2,7 +2,7 @@ SUMMARY = "Python 2 and 3 compatibility library"
- HOMEPAGE = "https://xlsxwriter.readthedocs.io"
- SECTION = "devel/python"
- LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=2b9a26d1a52d2c66df334bbdad23896a"
-+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=12d9fac1f0049be71ab5aa4a78da02b0"
+diff --git a/meta-python/recipes-devtools/python/python3-bidict_0.22.0.bb b/meta-python/recipes-devtools/python/python3-bidict_0.22.1.bb
+similarity index 79%
+rename from meta-python/recipes-devtools/python/python3-bidict_0.22.0.bb
+rename to meta-python/recipes-devtools/python/python3-bidict_0.22.1.bb
+index 088931d14..1ed0af81a 100644
+--- a/meta-python/recipes-devtools/python/python3-bidict_0.22.0.bb
++++ b/meta-python/recipes-devtools/python/python3-bidict_0.22.1.bb
+@@ -4,7 +4,7 @@ HOMEPAGE = "https://bidict.readthedocs.io/"
+ LICENSE = "MPL-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=858e74278ef3830d46481172ae03c819"
  
- inherit pypi setuptools3
+-SRC_URI[sha256sum] = "5c826b3e15e97cc6e615de295756847c282a79b79c5430d3bfc909b1ac9f5bd8"
++SRC_URI[sha256sum] = "1e0f7f74e4860e6d0943a05d4134c63a2fad86f3d4732fb265bd79e4e856d81d"
  
-@@ -16,6 +16,6 @@ RDEPENDS:${PN} += " \
- 	python3-io \
- "
+ inherit pypi python_setuptools_build_meta
  
--SRC_URI[sha256sum] = "e89f4a1d2fa2c9ea15cde77de95cd3fd8b0345d0efb3964623f395c8c4988b7f"
-+SRC_URI[sha256sum] = "fe2b1e2dec38ef8952e9a41a0290861a052e6771a9f43f5e3d56dc63b7112348"
- 
- BBCLASSEXTEND = "native nativesdk"
 -- 
 2.25.1
 
