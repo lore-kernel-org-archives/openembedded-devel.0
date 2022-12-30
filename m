@@ -2,68 +2,68 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 311E7C4332F
-	for <webhook@archiver.kernel.org>; Wed,  4 Jan 2023 03:40:29 +0000 (UTC)
-Received: from mail1.bemta34.messagelabs.com (mail1.bemta34.messagelabs.com [195.245.231.3])
- by mx.groups.io with SMTP id smtpd.web10.3723.1672803628418312672
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 15B07C53210
+	for <webhook@archiver.kernel.org>; Wed,  4 Jan 2023 03:40:39 +0000 (UTC)
+Received: from mail1.bemta37.messagelabs.com (mail1.bemta37.messagelabs.com [85.158.142.113])
+ by mx.groups.io with SMTP id smtpd.web11.3827.1672803636939498620
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 03 Jan 2023 19:40:28 -0800
+ Tue, 03 Jan 2023 19:40:37 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=nVLQla3i;
- spf=pass (domain: fujitsu.com, ip: 195.245.231.3, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=PsIiQNXi;
+ spf=pass (domain: fujitsu.com, ip: 85.158.142.113, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1672803626; i=@fujitsu.com;
-	bh=20pvDAC7Fjr8tfP9MXIR5P0b1CG/5urnr8CqnZB5NVw=;
+	s=170520fj; t=1672803634; i=@fujitsu.com;
+	bh=VuwjdQl16n/xrT+yshAmnh4ROPhybtHbC+Za1ivHSbI=;
 	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
 	 MIME-Version:Content-Type;
-	b=nVLQla3iBxoCea1qYBJljkt17O7cOPAgCy/4vBfarO+IvpO7HEhhpOIE+k6YRaA2m
-	 ov12VWJfDjkWW5cuWrr3yPd2X8ELmBI6hKnUn405zex1Sm5ZBbM6NhikyNjWyGfGYg
-	 Kpb4X8GQDPDt09ZAnLTevc6d3ux6As7p+5Loe15DvuJsEkTQTcasY6iRa+G9qOB7FX
-	 rSM+j1t8rerUbKEOAlhFT4J7IPgbekdcETkmOKjnp/n2/UzrvSDMQ7PwxSKF/xz1OT
-	 XZ1oBDeTtzGRaFilwgPQxnzCFxjhxhwYGoyXndhPBlSP2sMTtziu/dOucI6+oBG1f0
-	 arGucQ3CWAsrA==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrHIsWRWlGSWpSXmKPExsViZ8OxWVfz65Z
-  kg2PdihYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8adrdNYCo7LVvxo2crYwHhJsouRi0NI4CGj
-  ROvhQ6wQzhUmiUmfVkE5uxklln+6zdbFyMnBJiAlceP+fzBbREBfYunsPcwgNrOAisSL3z3sI
-  LawgLfEjykvwGwWAVWJv1e+sIDYvAJOElsaHzGB2BICChJTHr4H6+UUcJb49nonWI0QUM2fo0
-  +ZIeoFJU7OfMICMV9C4uCLF8wQvYoSsy83s0DYFRKzZrVBzVSTuHpuE/MERsFZSNpnIWlfwMi
-  0itG0OLWoLLVI10IvqSgzPaMkNzEzRy+xSjdRL7VUtzy1uETXSC+xvFgvtbhYr7gyNzknRS8v
-  tWQTIzB4U4rVt+5gPLzsj94hRkkOJiVR3pLPW5KF+JLyUyozEosz4otKc1KLDzHKcHAoSfCqf
-  wLKCRalpqdWpGXmACMJJi3BwaMkwpsF0spbXJCYW5yZDpE6xWjJcXfh3r3MHFtuHwCSm/Z1HW
-  AWYsnLz0uVEud9CtIgANKQUZoHNw4W7ZcYZaWEeRkZGBiEeApSi3IzS1DlXzGKczAqCfOuBpn
-  Ck5lXArf1FdBBTEAHJa3ZCHJQSSJCSqqBSe5gf7H4qrl3z7eGy1i3reXd80/r6e6DdxoX5y2y
-  KI9hvLf/x4pzfncqpu5Tfz6jYHuA5Kvg1+srww+v3MKwjv/kVoOJxW/X8J554ulUYHLg8quy7
-  aqvVWXdtvCcS7Zf8/fZA07Dvzb6WxdxiWTEcObLead5Kwh58XrbSDC/CP30pORI6sobmt+rT8
-  2psNd/vTtYNsi1SqrjkHiGQqfxw7f20b9Y5yYZWN46Xhj598m7fA+enheBxVuOHVqb2/Lubue
-  nLEdNP/Mtebunvv6hu6nIJEXxSqpgW7OzfEXbx4pZd9ZXL1npforp/nopAzHl0+sWrP2WpWuz
-  ZpGEzBT5i6yna+pWXornuF3j2Ft0UYmlOCPRUIu5qDgRAAK9ogJxAwAA
+	b=PsIiQNXiv3+UQdClSm/FmetoDtWFx7pm8I7/LdQJF706A7UW+Uwzt11CBU2IitZaC
+	 y04fuTDHUcDqX8P7vWwSPNrb+HkRhoTWcomha+9ZEkYdXSNrF+oEd31m6+iuQEwT+5
+	 s5fM+ezazMZMymH8AlwLvpbdvGOUVy7vYpSOEiHAvVZhB3sQ61XlEdQk28tl3mExud
+	 U3zd2RduoOWvJjkOfkIWH1MFFg7zdWaaTrt4I5ltnwmkcYZF9umfgvsZY2vIcwzNTE
+	 7WpnQ5y8SKfQZEipGNvtQkZhg+9T8amHdVo0zHsBeyJ9L+g/7MlSQKLRO4uIEKNYQC
+	 M1mjzPeYl0xEQ==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrBIsWRWlGSWpSXmKPExsViZ8ORqGv4dUu
+  ywdxLOhYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa0bz7EesBT3cFf92nmJqYPzC2cXIxSEk8IRR
+  4taa9cwQznUmieM/d7JAOLsZJQ597QbKcHKwCUhJ3Lj/nw3EFhHQl1g6ew9YnFlAReLF7x72L
+  kYODmEBJ4mGtlqQMIuAqsTVtT+YQGxeoPCKzS8YQWwJAQWJKQ/fg7VyCjhLfHsNsosTaJeTxJ
+  +jT5kh6gUlTs58wgIxXkLi4IsXzBC9ihKzLzezQNgVErNmtTFB2GoSV89tYp7AKDgLSfssJO0
+  LGJlWMZoVpxaVpRbpmuslFWWmZ5TkJmbm6CVW6SbqpZbq5uUXlWToGuollhfrpRYX6xVX5ibn
+  pOjlpZZsYgQGb0pxws8djBuX/dE7xCjJwaQkylvyeUuyEF9SfkplRmJxRnxRaU5q8SFGGQ4OJ
+  Qle9U9AOcGi1PTUirTMHGAkwaQlOHiURHizQFp5iwsSc4sz0yFSpxiNOe4u3LuXmePqlSt7mY
+  VY8vLzUqXEeZ+ClAqAlGaU5sENgkX4JUZZKWFeRgYGBiGegtSi3MwSVPlXjOIcjErCvKtBpvB
+  k5pXA7XsFdAoT0ClJazaCnFKSiJCSamCSeMmp0qgv0nVnheu2iZ8mZ/zhnbAlscz2+WuBrLfH
+  vJJkpkTMj2vO/n5v7/3Lt54fNYuoTlTv+7wpfYP5x1nbwzof8Tx5s+Lph7lxMukdd7Xub1Qw5
+  3ozqeezIZPFjKQl/WJXJurf5EtYJLjn09KME5028wR/bBH8n3P74uX1vgePCm2MdrRM0v1Tzu
+  F1l3Xag6CHnjo61tvtJQxbZBjKMtWTLI6sVyhhc3M6Ntf+nVvP1x+OirHiW2K00nn0096EKjB
+  vWni+Zq4uq92mY1JHbuuLGaq2Wu+elXL/UJ78FhU5Vq61DHpSTJMeBaycG2alcbLppn3Yuj1H
+  5WbeSVeY5nyF5d1N6w0vzUNDL79VYinOSDTUYi4qTgQAEkPzb2sDAAA=
 X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-7.tower-548.messagelabs.com!1672803625!367426!1
-X-Originating-IP: [62.60.8.179]
+X-Msg-Ref: server-15.tower-728.messagelabs.com!1672803633!358893!1
+X-Originating-IP: [62.60.8.97]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.101.2; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 13896 invoked from network); 4 Jan 2023 03:40:25 -0000
-Received: from unknown (HELO n03ukasimr04.n03.fujitsu.local) (62.60.8.179)
-  by server-7.tower-548.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 4 Jan 2023 03:40:25 -0000
-Received: from n03ukasimr04.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTP id 43E0C152
-	for <openembedded-devel@lists.openembedded.org>; Wed,  4 Jan 2023 03:40:25 +0000 (GMT)
+Received: (qmail 17583 invoked from network); 4 Jan 2023 03:40:33 -0000
+Received: from unknown (HELO n03ukasimr01.n03.fujitsu.local) (62.60.8.97)
+  by server-15.tower-728.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 4 Jan 2023 03:40:33 -0000
+Received: from n03ukasimr01.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTP id 2A708100192
+	for <openembedded-devel@lists.openembedded.org>; Wed,  4 Jan 2023 03:40:33 +0000 (GMT)
 Received: from R01UKEXCASM126.r01.fujitsu.local (R01UKEXCASM126 [10.183.43.178])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTPS id 37669151
-	for <openembedded-devel@lists.openembedded.org>; Wed,  4 Jan 2023 03:40:25 +0000 (GMT)
+	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTPS id 1E635100188
+	for <openembedded-devel@lists.openembedded.org>; Wed,  4 Jan 2023 03:40:33 +0000 (GMT)
 Received: from localhost.localdomain (10.167.225.33) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.42; Wed, 4 Jan 2023 03:40:23 +0000
+ (TLS) id 15.0.1497.42; Wed, 4 Jan 2023 03:40:31 +0000
 From: <wangmy@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-python] [PATCH] python3-pyephem: upgrade 4.1.3 -> 4.1.4
-Date: Fri, 30 Dec 2022 12:56:49 +0800
-Message-ID: <1672376212-25291-2-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH] pcsc-tools: upgrade 1.6.0 -> 1.6.1
+Date: Fri, 30 Dec 2022 12:56:52 +0800
+Message-ID: <1672376212-25291-5-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 In-Reply-To: <1672376212-25291-1-git-send-email-wangmy@fujitsu.com>
 References: <1672376212-25291-1-git-send-email-wangmy@fujitsu.com>
@@ -76,98 +76,44 @@ X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 04 Jan 2023 03:40:29 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100372
+ <openembedded-devel@lists.openembedded.org>; Wed, 04 Jan 2023 03:40:39 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100375
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
-0001-Don-t-set-tp_print-on-Python-3.patch
-removed since it's included in 4.1.4
-
 Changelog:
 ==========
-In previous versions, if you asked for the position of a body (a) whose
-elliptical or hyperbolic orbit has an eccentricity very close to 1.0 and (b)
-which is very far from perihelion, then the underlying C library would print
-a warning Near-parabolic orbit: inaccurate result but let your Python script
-continue on unawares. Now, no message is printed directly to the screen, and
-instead a RuntimeError will tell you why PyEphem can't compute the body's
-position.
+ 196 new ATRs
+ use colors on NetBSD ("wsvt25" terminal)
+ pcsc_scan: always print the version in verbose mode
+ Fix Hungarian eID URL
+ Update smartcard_list.txt
+ update ATR name
+ Fix typos in card list: healt -> health
+ Add 6 issuer card ATR descriptions
+ Updated Finnish-related info in smartcard_list.txt to make it up to date
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../0001-Don-t-set-tp_print-on-Python-3.patch | 44 -------------------
- ...phem_4.1.3.bb => python3-pyephem_4.1.4.bb} |  3 +-
- 2 files changed, 1 insertion(+), 46 deletions(-)
- delete mode 100644 meta-python/recipes-extended/python-pyephem/python3-pyephem/0001-Don-t-set-tp_print-on-Python-3.patch
- rename meta-python/recipes-extended/python-pyephem/{python3-pyephem_4.1.3.bb => python3-pyephem_4.1.4.bb} (67%)
+ .../pcsc-tools/{pcsc-tools_1.6.0.bb => pcsc-tools_1.6.1.bb}     | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-support/pcsc-tools/{pcsc-tools_1.6.0.bb => pcsc-tools_1.6.1.bb} (89%)
 
-diff --git a/meta-python/recipes-extended/python-pyephem/python3-pyephem/0001-Don-t-set-tp_print-on-Python-3.patch b/meta-python/recipes-extended/python-pyephem/python3-pyephem/0001-Don-t-set-tp_print-on-Python-3.patch
-deleted file mode 100644
-index a84d852fb0..0000000000
---- a/meta-python/recipes-extended/python-pyephem/python3-pyephem/0001-Don-t-set-tp_print-on-Python-3.patch
-+++ /dev/null
-@@ -1,44 +0,0 @@
--From 866f7560034e8b7a604432611b3cb2c92e76def9 Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Sun, 28 Aug 2022 11:03:39 -0700
--Subject: [PATCH] Don't set tp_print on Python 3.
--
--In 3.8 it produces a compilation warning, in earlier versions it is ignored.
--
--Upstream-Status: Submitted [https://github.com/brandon-rhodes/pyephem/pull/245]
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
-- extensions/_libastro.c | 8 ++++++++
-- 1 file changed, 8 insertions(+)
--
--diff --git a/extensions/_libastro.c b/extensions/_libastro.c
--index ce07d93..c9ef1e6 100644
----- a/extensions/_libastro.c
--+++ b/extensions/_libastro.c
--@@ -372,7 +372,11 @@ static PyTypeObject AngleType = {
--      sizeof(AngleObject),
--      0,
--      0,				/* tp_dealloc */
--+#if PY_MAJOR_VERSION < 3
--      Angle_print,		/* tp_print */
--+#else
--+     0,				/* reserved in 3.x */
--+#endif
--      0,				/* tp_getattr */
--      0,				/* tp_setattr */
--      0,				/* tp_compare */
--@@ -669,7 +673,11 @@ static PyTypeObject DateType = {
--      sizeof(PyFloatObject),
--      0,
--      0,				/* tp_dealloc */
--+#if PY_MAJOR_VERSION < 3
--      Date_print,		/* tp_print */
--+#else
--+     0,				/* tp_print slot is reserved and unused in Python 3 */
--+#endif
--      0,				/* tp_getattr */
--      0,				/* tp_setattr */
--      0,				/* tp_compare */
---- 
--2.37.2
--
-diff --git a/meta-python/recipes-extended/python-pyephem/python3-pyephem_4.1.3.bb b/meta-python/recipes-extended/python-pyephem/python3-pyephem_4.1.4.bb
-similarity index 67%
-rename from meta-python/recipes-extended/python-pyephem/python3-pyephem_4.1.3.bb
-rename to meta-python/recipes-extended/python-pyephem/python3-pyephem_4.1.4.bb
-index 8c4f0eb405..8850b79e8c 100644
---- a/meta-python/recipes-extended/python-pyephem/python3-pyephem_4.1.3.bb
-+++ b/meta-python/recipes-extended/python-pyephem/python3-pyephem_4.1.4.bb
-@@ -4,8 +4,7 @@ HOMEPAGE = "http://rhodesmill.org/pyephem/"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=9c930b395b435b00bb13ec83b0c99f40"
+diff --git a/meta-oe/recipes-support/pcsc-tools/pcsc-tools_1.6.0.bb b/meta-oe/recipes-support/pcsc-tools/pcsc-tools_1.6.1.bb
+similarity index 89%
+rename from meta-oe/recipes-support/pcsc-tools/pcsc-tools_1.6.0.bb
+rename to meta-oe/recipes-support/pcsc-tools/pcsc-tools_1.6.1.bb
+index c9e7eae27..6a2e1b2e0 100644
+--- a/meta-oe/recipes-support/pcsc-tools/pcsc-tools_1.6.0.bb
++++ b/meta-oe/recipes-support/pcsc-tools/pcsc-tools_1.6.1.bb
+@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENCE;md5=94d55d512a9ba36caa9b7df079bae19f"
  
--SRC_URI += "file://0001-Don-t-set-tp_print-on-Python-3.patch"
--SRC_URI[sha256sum] = "7fa18685981ba528edd504052a9d5212a09aa5bf15c11a734edc6a86e8a8b56a"
-+SRC_URI[sha256sum] = "73a59f0d2162d1624535c3c3b75f956556bdbb2055eaf554a7bef147d3f9c760"
+ SRC_URI = "git://github.com/LudovicRousseau/pcsc-tools;protocol=https;branch=master"
  
- PYPI_PACKAGE = "ephem"
+-SRCREV = "c6e9fa746d00e08fc71c57c79e305669ff2e3106"
++SRCREV = "63e532cfa97932aac76ca5f7473d1ce11602a139"
+ 
+ inherit autotools pkgconfig
  
 -- 
 2.25.1
