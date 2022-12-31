@@ -2,122 +2,123 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 85C3BC3DA7D
-	for <webhook@archiver.kernel.org>; Sat, 31 Dec 2022 22:27:24 +0000 (UTC)
-Received: from mail-pj1-f49.google.com (mail-pj1-f49.google.com [209.85.216.49])
- by mx.groups.io with SMTP id smtpd.web11.52685.1672525642350573150
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A54C7C4332F
+	for <webhook@archiver.kernel.org>; Sat, 31 Dec 2022 22:50:34 +0000 (UTC)
+Received: from mail-pg1-f176.google.com (mail-pg1-f176.google.com [209.85.215.176])
+ by mx.groups.io with SMTP id smtpd.web10.53629.1672527025184504229
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 31 Dec 2022 14:27:22 -0800
+ Sat, 31 Dec 2022 14:50:25 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=FuTOlc21;
- spf=pass (domain: gmail.com, ip: 209.85.216.49, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f49.google.com with SMTP id n12so13136422pjp.1
-        for <openembedded-devel@lists.openembedded.org>; Sat, 31 Dec 2022 14:27:22 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=TdiG/Gci;
+ spf=pass (domain: gmail.com, ip: 209.85.215.176, mailfrom: raj.khem@gmail.com)
+Received: by mail-pg1-f176.google.com with SMTP id 78so16262734pgb.8
+        for <openembedded-devel@lists.openembedded.org>; Sat, 31 Dec 2022 14:50:25 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=4bHJcM5TZfQuTVTtmC2zik5RlkNhgDwa39xEcqWB/cY=;
-        b=FuTOlc21i/029kYYwYrPSmuw+6KdOxzmqnRDDHo/AnjGupQf/1lTmVhm9xAWp1iOOZ
-         +v4R3UAO9s+vz1OGxYjWyBIfsLDYm6YTVLhr4HPJJk7OQTuPHAFiqupABb4/hnZrXuNr
-         9TY2laLpy2BbXsSV068rbg0kevTa5ggVE6q89zhoGOUAIPKelq2XY5UbgBtNOvUEi1Kn
-         8RPfWVBxhiyF4Ef3g0z4k+8CJWWWqrnFLhRw+F0pMu/eB5RNrzC1Jnk+dVcJgjAY4Kdt
-         vHYfeyBX8xI+OBcltfYI/36uDtp/8SjIcGnhMaWqflOIZPRXwtSz05XRbIhEnBSqtubm
-         +lYg==
+        bh=fwUH4weZBr+sZVwWiaEdc8R3rQGU6+i0gnmksM+GWa4=;
+        b=TdiG/Gci+aNd9usNN2rufAE+mb1pekDpB2cIACNvDtI8J/VVl6KhXQpJYLiZCL/qD7
+         IQLVPGTjvDt5YRJYAC3c3m5IKabi3p5WaSWrn6xp5fP148mw7OnirWJTuf+Dwqon6W6E
+         sqoXlwu+ASt7Z8ZyWbVZ6fbpdE2uLlyj4tTvVnVm/jkGVq+H8rkMJOBI2kbSKYWpuUYJ
+         eiEYTf7iNZjwDqtKBi9nx0aE+B2QWT0425R2QADUvMKOzkTgVaHERFWdidZVG1V3tcDf
+         pxbopQMW2VGixHnxSGHSGnBEiGb77ojqChvnHyxsuGrbBhwDd70IFkUTl0FFnNB4oz4+
+         uX5Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=4bHJcM5TZfQuTVTtmC2zik5RlkNhgDwa39xEcqWB/cY=;
-        b=cpD3PqoSecPaoCbwKxs3hx8o+HNRiJX8N4001/Sfa3tTlGYHo5eErZBIDTnwm/zt6C
-         M3/xhSvXn8XJO3p8/EdkHcrN6h9heU7GjL9X32lDOCnQaaYlP0Mq3pSq1VSFDWE/7r58
-         aBC6/XHVsDauzJLYfRJHCTigD2mIZMZzIPNik5tl0ZTIQlJV1qB5e2OZ/R4CJYfSc26a
-         cXJvwCnnH4AYkBp+OxL5GW1qF5tt0C4lHWNQ+UUaPfSJOQ9SMpMB9Hsd7QkBJCEUJMKU
-         +2Kstafm90PcB6ORx2kzR7z9ogd6bUtATv7x7Jvuy8X5oKailMM6pv1uvQSdvNktLhik
-         aHVQ==
-X-Gm-Message-State: AFqh2kpulzGBISod1jwjDKEoo2Os3MutDt7X0q7YTj7FilwDmdKPSJaJ
-	LtbFJz3zDrYh0WTnbx3ImE0lDGG93As=
-X-Google-Smtp-Source: AMrXdXtrRalQ0w4Z+9bnSDP0t+NYGBDbrDDOoMkrx8O+gEOnrP+FIvnc2FrocCtSAGB56hBdkUg1iQ==
-X-Received: by 2002:a17:90a:f8b:b0:223:f235:bc6 with SMTP id 11-20020a17090a0f8b00b00223f2350bc6mr38156144pjz.2.1672525641288;
-        Sat, 31 Dec 2022 14:27:21 -0800 (PST)
+        bh=fwUH4weZBr+sZVwWiaEdc8R3rQGU6+i0gnmksM+GWa4=;
+        b=bjdbCStDBWYHnmZN0O0gqaL0UXDsR8FQh6AO4ER2dx/51LKTcbPbcVaPkQNBKVPEPD
+         ddsAA90fKDzGc9OHrYgL8sURhDSv6EJ2HMbrltH+AK2/RzZZeoS3Kmm0GyYDff1c13+0
+         /8M9OIOqRjLk3HRPAEn8F4i7d5qv87jEti+LEK2PAYIA9UwrvbtT6dT/fwAHGrCbtLaY
+         4YRw/vGSCf+oh/MD2VR4DWtPvRjbJPLs3pz+wdoCHW41Hx70GWwsuZRcN+NnVf0NAMJ9
+         dnwAaKxtpkcdfLb7NAZkO6zNENYN16B+SaEnCf3s3Fg7wW+ChUH5Egv8i+winOIq48rS
+         UUaQ==
+X-Gm-Message-State: AFqh2kp0a8KPXQvISRlNscj6JqHduI//UGslQEZXaWB00PzhslUuicjU
+	ttEXBya9fDS7DaPgLGnw6rfZarcNz6M=
+X-Google-Smtp-Source: AMrXdXsBRLtYg7syyP+E/ciMdsSwXEpVVPjvuC4e9u8r2y045dvlZg8+TBHSXsiCQRGlIk9fGEi67A==
+X-Received: by 2002:a62:1687:0:b0:57a:7b74:4ec5 with SMTP id 129-20020a621687000000b0057a7b744ec5mr39462667pfw.13.1672527024196;
+        Sat, 31 Dec 2022 14:50:24 -0800 (PST)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9181:1cf0::bccc])
-        by smtp.gmail.com with ESMTPSA id c21-20020a17090aa61500b00219463262desm14671427pjq.39.2022.12.31.14.27.20
+        by smtp.gmail.com with ESMTPSA id b8-20020aa79508000000b0057691fb0d37sm8714682pfp.193.2022.12.31.14.50.23
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 31 Dec 2022 14:27:20 -0800 (PST)
+        Sat, 31 Dec 2022 14:50:23 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 1/2] spdlog: Do not use LFS64 functions with musl
-Date: Sat, 31 Dec 2022 14:27:17 -0800
-Message-Id: <20221231222718.1455310-1-raj.khem@gmail.com>
+Subject: [meta-initramfs][PATCH] dracut: Do not undefine _FILE_OFFSET_BITS
+Date: Sat, 31 Dec 2022 14:50:21 -0800
+Message-Id: <20221231225021.1486486-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.39.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 31 Dec 2022 22:27:24 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100326
+ <openembedded-devel@lists.openembedded.org>; Sat, 31 Dec 2022 22:50:34 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100328
+
+Fixes build with 64bit time_t
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...ot-use-LFS64-functions-on-linux-musl.patch | 30 +++++++++++++++++++
- .../recipes-support/spdlog/spdlog_1.11.0.bb   |  4 ++-
- 2 files changed, 33 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-support/spdlog/spdlog/0001-Do-not-use-LFS64-functions-on-linux-musl.patch
+ ...stall-Do-not-undef-_FILE_OFFSET_BITS.patch | 32 +++++++++++++++++++
+ .../recipes-devtools/dracut/dracut_056.bb     |  1 +
+ 2 files changed, 33 insertions(+)
+ create mode 100644 meta-initramfs/recipes-devtools/dracut/dracut/0001-install-Do-not-undef-_FILE_OFFSET_BITS.patch
 
-diff --git a/meta-oe/recipes-support/spdlog/spdlog/0001-Do-not-use-LFS64-functions-on-linux-musl.patch b/meta-oe/recipes-support/spdlog/spdlog/0001-Do-not-use-LFS64-functions-on-linux-musl.patch
+diff --git a/meta-initramfs/recipes-devtools/dracut/dracut/0001-install-Do-not-undef-_FILE_OFFSET_BITS.patch b/meta-initramfs/recipes-devtools/dracut/dracut/0001-install-Do-not-undef-_FILE_OFFSET_BITS.patch
 new file mode 100644
-index 0000000000..b997389aa2
+index 0000000000..170df7119f
 --- /dev/null
-+++ b/meta-oe/recipes-support/spdlog/spdlog/0001-Do-not-use-LFS64-functions-on-linux-musl.patch
-@@ -0,0 +1,30 @@
-+From ce7a593e74c8e0c2ece15c73e7614d4f13a19a53 Mon Sep 17 00:00:00 2001
++++ b/meta-initramfs/recipes-devtools/dracut/dracut/0001-install-Do-not-undef-_FILE_OFFSET_BITS.patch
+@@ -0,0 +1,32 @@
++From 7f8ef553b7c433af153d48c6a16b2943780abf67 Mon Sep 17 00:00:00 2001
 +From: Khem Raj <raj.khem@gmail.com>
-+Date: Fri, 30 Dec 2022 13:04:08 -0800
-+Subject: [PATCH] Do not use LFS64 functions on linux/musl
++Date: Sat, 31 Dec 2022 14:41:52 -0800
++Subject: [PATCH] install: Do not undef _FILE_OFFSET_BITS
 +
-+On musl, off_t is 64bit always ( even on 32bit platforms ), therefore using
-+LFS64 funcitons is not needed on such platforms. Moreover, musl has stopped
-+providing aliases for these functions [1] which means it wont compile on
-+newer musl systems. Therefore only use it on 32bit glibc/linux platforms
-+and exclude musl like cygwin or OSX
++_FILE_OFFSET_BITS is a feature test macro to determine largefile
++support. Usually its set to 64 on systems supporting LFS. Its also
++needed to be set to 64 for supporting 64bit time_t on glibc on 32bit
++systems. If its undefined explicitly, then 64bit time_t can not be
++enabled.
 +
-+[1] https://git.musl-libc.org/cgit/musl/commit/?id=246f1c811448f37a44b41cd8df8d0ef9736d95f4
-+
-+Upstream-Status: Submitted [https://github.com/gabime/spdlog/pull/2589]
++Upstream-Status: Submitted [https://github.com/dracutdevs/dracut/pull/2157]
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +---
-+ include/spdlog/details/os.h | 4 +++-
-+ 1 file changed, 3 insertions(+), 1 deletion(-)
++ src/install/dracut-install.c | 1 -
++ 1 file changed, 1 deletion(-)
 +
-+--- a/include/spdlog/details/os-inl.h
-++++ b/include/spdlog/details/os-inl.h
-+@@ -237,7 +237,7 @@ SPDLOG_INLINE size_t filesize(FILE *f)
-+     int fd = ::fileno(f);
-+ #    endif
-+ // 64 bits(but not in osx or cygwin, where fstat64 is deprecated)
-+-#    if (defined(__linux__) || defined(__sun) || defined(_AIX)) && (defined(__LP64__) || defined(_LP64))
-++#    if ((defined(__linux__) && defined(__GLIBC__)) || defined(__sun) || defined(_AIX)) && (defined(__LP64__) || defined(_LP64))
-+     struct stat64 st;
-+     if (::fstat64(fd, &st) == 0)
-+     {
-diff --git a/meta-oe/recipes-support/spdlog/spdlog_1.11.0.bb b/meta-oe/recipes-support/spdlog/spdlog_1.11.0.bb
-index 2c71331ffa..ec985fb039 100644
---- a/meta-oe/recipes-support/spdlog/spdlog_1.11.0.bb
-+++ b/meta-oe/recipes-support/spdlog/spdlog_1.11.0.bb
-@@ -4,7 +4,9 @@ LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/MIT;md5=0835ade698e0bcf8506ecda2f7b4f302"
++diff --git a/src/install/dracut-install.c b/src/install/dracut-install.c
++index dda0caca..05a67a03 100644
++--- a/src/install/dracut-install.c
+++++ b/src/install/dracut-install.c
++@@ -22,7 +22,6 @@
++ #ifndef _GNU_SOURCE
++ #define _GNU_SOURCE
++ #endif
++-#undef _FILE_OFFSET_BITS
++ #include <ctype.h>
++ #include <errno.h>
++ #include <fcntl.h>
++-- 
++2.39.0
++
+diff --git a/meta-initramfs/recipes-devtools/dracut/dracut_056.bb b/meta-initramfs/recipes-devtools/dracut/dracut_056.bb
+index 7b89006103..364beec5d8 100644
+--- a/meta-initramfs/recipes-devtools/dracut/dracut_056.bb
++++ b/meta-initramfs/recipes-devtools/dracut/dracut_056.bb
+@@ -11,6 +11,7 @@ SRCREV = "631d5f72a223288aa1f48bb8e8d0313e75947400"
+ SRC_URI = "git://git.kernel.org/pub/scm/boot/dracut/dracut.git;protocol=http;branch=master \
+            file://0001-util.h-include-sys-reg.h-when-libc-glibc.patch \
+            file://0001-Guard-against-__GLIBC_PREREQ-for-musl-libc.patch \
++           file://0001-install-Do-not-undef-_FILE_OFFSET_BITS.patch \
+            "
  
- SRCREV = "ad0e89cbfb4d0c1ce4d097e134eb7be67baebb36"
--SRC_URI = "git://github.com/gabime/spdlog.git;protocol=https;branch=v1.x"
-+SRC_URI = "git://github.com/gabime/spdlog.git;protocol=https;branch=v1.x \
-+           file://0001-Do-not-use-LFS64-functions-on-linux-musl.patch \
-+           "
- 
- DEPENDS += "fmt"
- 
+ DEPENDS += "kmod"
 -- 
 2.39.0
 
