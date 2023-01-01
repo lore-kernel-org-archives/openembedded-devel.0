@@ -2,38 +2,38 @@ Return-Path: <yi.zhao@eng.windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 11156C4167B
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 252F0C3DA79
 	for <webhook@archiver.kernel.org>; Sun,  1 Jan 2023 07:28:03 +0000 (UTC)
 Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.web10.7308.1672558074727580088
+ by mx.groups.io with SMTP id smtpd.web11.7052.1672558072566571752
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 31 Dec 2022 23:27:54 -0800
+ Sat, 31 Dec 2022 23:27:53 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=pps06212021 header.b=raTMByQE;
+ dkim=pass header.i=@windriver.com header.s=pps06212021 header.b=bSpe6sHV;
  spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=03651cea20=yi.zhao@windriver.com)
-Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 3017PZpt018539
-	for <openembedded-devel@lists.openembedded.org>; Sat, 31 Dec 2022 23:27:54 -0800
+Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 3017PQ2S005202
+	for <openembedded-devel@lists.openembedded.org>; Sat, 31 Dec 2022 23:27:52 -0800
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com; h=from : to :
- subject : date : message-id : in-reply-to : references :
- content-transfer-encoding : content-type : mime-version; s=PPS06212021;
- bh=dWu7m+XBE5XYo/cQVYNdVP6QoM//hTzO7prOdmK+X+A=;
- b=raTMByQE3bJkNdvvEPhbl8MmT6ZF6nk8oXuPByCQsKHpuvwWJcTrzl/E7yyaLAuMsA26
- WyKss7qQjzj1EvtKR7Zzs+Zj84DH0Nl6VGloYln8UYuj8PGxNHIlZie3X2sztYsndzec
- t7KHikEPLmis1G8Yuc8nx6HfhLQ7uC/JwS3z9szYyiDu333ikL2xHUAnCiRYALL/FQ74
- uLiCUhII3BnuLwxpkmt2mhaWMf9nu6S7Prch48oaNHoYp+HOWAR4oomZHl+1OOssGFcn
- aoFcDiLMvvwl7/QA+qxiMaiEtzuT6y8AudI1qvq0YNuUJDqHimrufdSNkaf1IPRCgSP+ Jw== 
-Received: from nam10-dm6-obe.outbound.protection.outlook.com (mail-dm6nam10lp2101.outbound.protection.outlook.com [104.47.58.101])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3mtnfrrakf-1
+ subject : date : message-id : content-transfer-encoding : content-type :
+ mime-version; s=PPS06212021;
+ bh=HHT10DLPqvxMO+F7CxWn6vJwNXxJuwyM0gScQaQSc5c=;
+ b=bSpe6sHVl3Hy+TnM5FjYDig73g3OoiYYZUjQaImRocmovZO6Jzx1x5lnpuGwrbOHAE3d
+ kNeaBy7yyeuH46bzxcSYnZzPH1cX+l29U3zkf8bOY7r/yXlRki9JrotZx7pYkxgp9hUx
+ w+sNFG1b73sjhP4j6fSFa6E1v4qNXeGz3NlyQpSBiQriHQNHhH9wiH3+AInQ/WErRGCa
+ l8abefF7tBShSA/5hgLMKVC0XA4moGlcjtsN4iiBd1kfyZGN63tdCIPp4cEYgp74Ljxt
+ YooeIcHHUoOllEPbz4yeL+gOHAARiDRKhCHK+KjikqBPjgjUU1TTQV8H8ZtHu3MzW4e3 BQ== 
+Received: from nam10-dm6-obe.outbound.protection.outlook.com (mail-dm6nam10lp2109.outbound.protection.outlook.com [104.47.58.109])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3mth87rd7s-1
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Sat, 31 Dec 2022 23:27:54 -0800
+	for <openembedded-devel@lists.openembedded.org>; Sat, 31 Dec 2022 23:27:52 -0800
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=ccB3mOhWphx5MN53X5XkimcG+Z4O/5v0lxvlgIgAQd8ybdsY8NEr4Lq/gmSA9qSQzahg2Hp3cYFMO5gNBP8dW+J3I8F98G4Wb3n3qaUH+YvSgkzAxIdBqeKOuzcYdD6LZCDnQtwhE2hknj/ofc094O95izFOINcA34tFjHNNNv/tPYxu7aC0KRj22We5RRkcdJQleohqH5Hl7RsSfm3IIJ4pdvbhsvOoOphfTgRJzdxMCNaCP6oyqNMVwMSaWHHu8abOqEoY8OmsqB4TICGByGrW9dJVHANQMkg66vuNOYT5upqXb4t30f/BtXQ2BD7R4I4m+9L8G/VWrwA8qK1AeA==
+ b=JSx2S6aDOBB8i8Jc83GrqLTDcngDDC7yxYkaP3CjPUFCApeAe+4k3o4EBFhTAKeXarLzwQ7yI2y7iPVCDn7iHo77qzx6W+ri37GbYMiLjRDlLPc4Ao0G96KuFrg57I8zUxHklP9mOer4v3eQCpbj12WaJmyJ1EneV19etoM3s0pWM5uzNs6pejeNybbBbRgWiN6U0sdU4Wm+VcujHq4T81XbfXjWaUl18G6Gl3latI0ULbM3+n8itBnmGHV0yhHg6gM4ziDOcFRkbvoIKxzSiw79fS3CTQsktx+AJvFgEvQCFxMBNHb9+5+M9WQ7fqGfVRxIMgcYKi89o5jPk2RTog==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=dWu7m+XBE5XYo/cQVYNdVP6QoM//hTzO7prOdmK+X+A=;
- b=cvASHMankXcw6OFoIi5bLf5wsu3vpQt4VrEFv9J3urSGkF3f3x8aQUU+iDiwT+yajstCQVolFvzzDUOvZWSOQEZSH414P2fFYAn5SHVxMX/H3KPZBSCB2kOnMfPKBdHYNa0IRVGSlY29HtBcpsV0G0sRjfIl37B6YHCW45fEuCX8SHQ7nwSBqdojAkjub5ezMe2moSivEmm7RrWDajj5IMXUmerGUGMFc0ZMok410p8OVjG09avqY5iZOlEANuSB0QRYZBae5JFBU/+vyWL6d/gGolZLmIPvj55CwR61JHTTuO5m1wO17AoiF4lZo17P/rVajAXhuS+F5+Rr3S5Z8A==
+ bh=HHT10DLPqvxMO+F7CxWn6vJwNXxJuwyM0gScQaQSc5c=;
+ b=V2/wCtX1iOFMR8ycUG7cvJgQoRNcJtov5DT9Ht/HSIch8/IJWaoFHxvYO8CVNcA/BLd1pLtvHa6JB9c39sE+z2XgRW0eJFrSJtiAkbJ6B2fPBpGhz4feRuUeA73TOAnC+zEJpNq1sQFUNxjHeX0pakQzyQS9fMEY5i7VZyzvJiZQx8LEydZT8wDKj29F4KxMUbqnKHrIWC0mTOQkLUq9G/zZzq5D/ZYL07uLzTyt2kooAtKweyyaCGe5dp4h7zvzcLchLYx8Bi7N8TZVw5kevvsHF34ooe+e6hSLqI5K5c6xUSV6qDPxewlPfmePtLKpdY6K0D5vCdpf8NoBGp1Rcg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
@@ -41,19 +41,17 @@ Received: from CO1PR11MB4867.namprd11.prod.outlook.com (2603:10b6:303:9a::13)
  by SN7PR11MB7638.namprd11.prod.outlook.com (2603:10b6:806:34b::22) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5944.18; Sun, 1 Jan
- 2023 07:27:52 +0000
+ 2023 07:27:49 +0000
 Received: from CO1PR11MB4867.namprd11.prod.outlook.com
  ([fe80::eb7b:3a04:80bb:4a5f]) by CO1PR11MB4867.namprd11.prod.outlook.com
  ([fe80::eb7b:3a04:80bb:4a5f%4]) with mapi id 15.20.5944.019; Sun, 1 Jan 2023
- 07:27:52 +0000
+ 07:27:49 +0000
 From: Yi Zhao <yi.zhao@windriver.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-networking][PATCH 4/5] libldb: upgrade 2.3.4 -> 2.6.1
-Date: Sun,  1 Jan 2023 15:27:38 +0800
-Message-Id: <20230101072739.75462-4-yi.zhao@windriver.com>
+Subject: [meta-networking][PATCH 1/5] libtalloc: upgrade 2.3.3 -> 2.3.4
+Date: Sun,  1 Jan 2023 15:27:35 +0800
+Message-Id: <20230101072739.75462-1-yi.zhao@windriver.com>
 X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20230101072739.75462-1-yi.zhao@windriver.com>
-References: <20230101072739.75462-1-yi.zhao@windriver.com>
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-ClientProxiedBy: SJ0PR05CA0103.namprd05.prod.outlook.com
@@ -62,147 +60,118 @@ X-ClientProxiedBy: SJ0PR05CA0103.namprd05.prod.outlook.com
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: CO1PR11MB4867:EE_|SN7PR11MB7638:EE_
-X-MS-Office365-Filtering-Correlation-Id: f2a5989d-1580-49d3-02ca-08daebc9b13c
+X-MS-Office365-Filtering-Correlation-Id: 068d45c6-3a6d-44b1-5d20-08daebc9af36
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	F2uVs/2NJmW0RTgO4r6v3J1cME5LY0spOPIw8hB6ZLBqiSlVL2W55MH57dtklNcmyg50DrQ+hdquEQH8LHgyM4GeE6o0T85Uouq1pa5tsgGSS/9LgrbM255vraEPGdaB4upKTsGHqT95+x+3mP3+V2DvBgurEv1kEoeE6tbDdV+N6GEYrsOM5R9drJOb7tVFW9GD8jK9G8w/8baLksZ+pMrWHIlkp4DZ01IIRqgLz1q//lgs8cPAQPm+nssV6CeTbm+7WgJaxtpn26pPpNSwuQpqmS6j0TpItExN7zFc+j0tCNAWiiYXjdHB5lXL2odt9Z1OdmJjMAUpIKRr+O3ST0C7kus4Euqz91egsrsYA08sSBrH/3BdzPlWvsns7aS3Xb9HNVszJBe6i86qJ225AoW1DlWy/TOtmOxndXScrTttnJnSSHnvBP00BFwVQqKsMfVXwZNgQ1Q+8Xctbp4d5aO50+XhywkYIq01iUW0cZjd/F9lHr3TBGBk5eRc/zfl/VXYGrnOE/1QK3sEx+7euH29T6KhHU9DjA/EJseBYNPNH9DwNv9R4tSG6w2Ehy+GAtz9ivuLwhniXUZ5PcgaDsN65+efd9HoRsJuj9XkphN4Wd0goQWKyJL45zrxktB7Wp5bPeVYX2CAt7W28lr+dlEOh0E+m1HerHzC01PrbXsvaIM5Q/5BDdnta4NexiACAHKk8MMy919j3xjBX1i07IVm+YuJfC8lJp7J4By1g/GY5KeyoxJ4tsG0NNPmGtB8
+	fTqDfi91icf3bAr2RnMpTXRuBIpva1GiX0Wq+WDVGbWSb3jf8bNgstwH4n/zPMYm4TShkCAByICYR+9C3hmo4CEl042Z3y0z4B9mz7W641Ag4dUseRwkDLihDC9EWEFYunqUauO0afScbd3tvfy8chGS3Al4OtwySgOa0h5hUQokldmMbUuk4GW79Ngr34eQ2UNabjcHL38CCK/lG54qloNPTId1ibqRKYwNmGEpEttR3IW5VgxO3w/UWB7/aTVVV5JQQtAL1qwmE6mjpnCalmHuBayJPgUg8YEDb36fSUi3AqkHrs7hL/wBNAmYX3gx9GI0UhI4N7LfIKa7FJPx7y0u4omCfZhYT5ACnkH4jaKpH7cf3no2TTU65KG8zc94GZDvk7MSw+mKI+lT2gM/Z/dUAwmWuXq51bOgjw3sEzwa5ULnfcKo2w6y/4keC0JVBmsLyVBZh55nyIqdlrfWpuomXpayDfF94rSyv1khfSUGAC8mTJ/JcLcgtZtiyn1c/GEnrKcPphbePU52ASkaSqjAX1wjOWfmPrxjum1OVQKNYY0BO127zKd6oMaMVMXlDjBEkv3PvfnwfPniaPZhndSAIZrdUFih8MKbSXjEf86eRegE1G+/v4BqQkQu2ynLjZlQQ3ptzWyc7hWAXIk+FzVadHu/jSfRQAYEMDwZZTywmkN7+xorU4rykhlNoLB8Jt53glyFDowLA55WTuvxy0PAjrzDfG9oL4SzAG47ovj8xWHiER1qJzz1SqdKZ/+V
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CO1PR11MB4867.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230022)(4636009)(136003)(346002)(39840400004)(396003)(376002)(366004)(451199015)(6666004)(8936002)(53546011)(38350700002)(478600001)(6506007)(38100700002)(6916009)(52116002)(2906002)(86362001)(41300700001)(2616005)(26005)(186003)(6512007)(36756003)(44832011)(66556008)(30864003)(83380400001)(66476007)(5660300002)(316002)(6486002)(66946007)(1076003)(8676002)(22166003);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CO1PR11MB4867.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230022)(4636009)(136003)(346002)(39840400004)(396003)(376002)(366004)(451199015)(6666004)(8936002)(53546011)(38350700002)(478600001)(6506007)(38100700002)(6916009)(52116002)(2906002)(86362001)(41300700001)(2616005)(26005)(186003)(6512007)(36756003)(44832011)(66556008)(83380400001)(66476007)(5660300002)(316002)(6486002)(66946007)(1076003)(8676002)(22166003);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?us-ascii?Q?Y7oO/ZgpQMgv3iAFggyCBzkeYJAIkH2QLRB+xFt9edOCnYy2hdiYCh5MxXfD?=
- =?us-ascii?Q?H2Z2X6zq4du+wC8TB+Nrwjg4cZKkokSRZuj8iB862ZK0XvK4i1IF5SmYGmlf?=
- =?us-ascii?Q?uzV2oiS6VW6sSAMvcVLB3+tUXNJkdMcMdPmAsLH3GqklNZAoTghYTG+1dOwB?=
- =?us-ascii?Q?fJABtjuBe2Ap4xFAk7wDfve22021qxktRUiCpAMOhIsNPLWmCRI4h8UUkr/g?=
- =?us-ascii?Q?w7V4OBvd1Mjt+HcU3kCJKgZxcSIgqljz00Q2aD4LsXb7KBuz+kXIZPalvuvK?=
- =?us-ascii?Q?tCsIGq3ZbfTfoBkv1vOkYefqhyM2DcX4ZyKNlvkFIVMyWkPA6szkxLnmhXUR?=
- =?us-ascii?Q?CHxUCuEE+udVpd1tiuQ5HmghQo4V3Y3dUBJOnRqry1dwqCxRopOYbBeO6TpR?=
- =?us-ascii?Q?Y57y7VZHeTSlpYpVvkt/154e0bt0Jh6R4sDThMLdIXfKMMH3tKv9YcKmzYz6?=
- =?us-ascii?Q?ny3bFjuINt13BwKAen9fSPkVfc/8tcrZh+w+DoTwdBbqtU5qTDlgwZd8MZOT?=
- =?us-ascii?Q?SxDLywWCAPPG41jePdoC7ekDJGL7Dz7Ots1VXBc0Qreje+q7lVGBCx6UHcf8?=
- =?us-ascii?Q?CersAXuxPdYBc535JYVydMKP1+YWe0e3/HauDEH5RaLjIsoTf6U2LEvCn6Ff?=
- =?us-ascii?Q?RuWNXJDpzYWOEyjkJXBkFOeCJDf2hbcSOGzRJnamzfB+/Yle0b2W3oF4gNdi?=
- =?us-ascii?Q?GelYuu0wyvc0CTyfphL2rOSiyMFYCZqh6kjtGOJbp0ypuUaC6gXR655cLVqN?=
- =?us-ascii?Q?xaRIZsukQVj5fk7EjUTUrPDHRIzC02lCjhr1MXaQnXgMPt1KThOl4RvarHBn?=
- =?us-ascii?Q?Ai0DJ5fRRRKUpvLSFj+zSUhc5VhDL+SbZQI+gInFV2FJeUSlkPh9L83gfpXx?=
- =?us-ascii?Q?c2IgRp7zEuY8kZCJLTmgeff1k4mRUAUNCRiVGfGEXV2dkRx//BvLEsEU0EpY?=
- =?us-ascii?Q?yRZL79VOUj8SeVybgT6G6RzVo5nt7X8s9DFBOlZ+mWnIOmqLrY+bLxuAObFT?=
- =?us-ascii?Q?Zj9BkL8ntIhVqEpD80Yd/KkTkGUDkk9vIkjdjgIpKh6AoP1i7wRXjxEjx5tF?=
- =?us-ascii?Q?tbk84HwhJzFzQqm/MWPE7RpdSIJEymEutwc493UBjyPQwFCk3ss5griwtAmv?=
- =?us-ascii?Q?jH0Qe1vZpKb87wg7DzYeb1queDAzWPAcY8QO06pDBHfBCW/p/5W2JeEk0jON?=
- =?us-ascii?Q?DR5c0YIBlAwWHLscS3DhME9V0kmRmqvSh775UCXYyDij4s67kTuvXhDqQIlg?=
- =?us-ascii?Q?LYP4kIWQAmpuQEwJ8SRWibyao+rzcxrP6HEvh/6Zggr8Er/sgs6Tr47hLc72?=
- =?us-ascii?Q?SKZpPgo4teb9Yy1fIunEjBNHHdJn/jEjPu/FWDB0J9z2sqYQhTau/Zel4rur?=
- =?us-ascii?Q?9SfZs8+cnNfELwYMDeaATlpEpTrHvAE0WzDn7nRrBbSGymiMgDAxhzxi9mI8?=
- =?us-ascii?Q?ourFOtHOe9rHzQGn4nsueZ3RZes9Jv9IcFY12WTrLHII9938z5eJAoiMlOHP?=
- =?us-ascii?Q?zlzkYTfGKcrGiNTxFwXY9riciHEVQ3Oo3wac51Hm597K6wuQd8xTVWdZ/DAs?=
- =?us-ascii?Q?xrzinraoqMwUePnGowIVUa/2uF8MtS4Jw/nNF41b?=
+	=?us-ascii?Q?ee9E/gStUSmKknmfPLZvqCUAa4sMZMPssCA0sTGPch/5yFT03/8kW3M4ZZAY?=
+ =?us-ascii?Q?p0iSpAx1EaKvton7Ws6Fu8iVrU6XvEepzEO6E67Czs+dtMOfAvjfzePiEuaf?=
+ =?us-ascii?Q?7X0KobSFVyKk+vs1PHxtOtcELDDKRmQV0sul5iKMINvQ0Hx6HCJi3sLuX3QA?=
+ =?us-ascii?Q?Vdme93vRbra4a4mcCTnt4oj+oX8DpxvJfYFr11Sn5ObdXIsj2mfunOGPAf1j?=
+ =?us-ascii?Q?PQEJB3MLvYHvjighXbYH4AsiprJlhcupm3OO2ZOO8XUoKvOUbFejD2HqWEhH?=
+ =?us-ascii?Q?fuEJBtZAk5qU27OhQ3r5rMr8Eaoh/iol62z/ghGYsBnrTd5BnAIt+rsL4UHv?=
+ =?us-ascii?Q?RlGibuJ5V9LC40tuGxUtPoHwfVBUWRbZsc07L51M1YNj+9IKmThd7LTVbvij?=
+ =?us-ascii?Q?KiVd2teLJd44bHNOWbsK9Pkk5LeuXjknyDifFbRMbyQPYfq0bG0nMqq3S7SO?=
+ =?us-ascii?Q?cioc1C5+8FyoLelBjMB1YC9BWl/73HnhDW7rSnGyX20r8HVGhkJiNDZv8kdq?=
+ =?us-ascii?Q?g2VLbAa7m/+Vl8k+9+9TG1r+yf3k75j9cX0AiRMMdmbt6opMv7J/2GG7pGV2?=
+ =?us-ascii?Q?VB0X0AggBAfyEuFebhxkPpVU7ecXvoRmtd7OV1DbsDY/yOmCi2UzfbXxyo0a?=
+ =?us-ascii?Q?aIoJhQFMX4dZfWzSwerJ15mY8x8dR+ATvXLqXIBUTqCBfa2oim3TEYWdMNsb?=
+ =?us-ascii?Q?LO3shw+WG4Ou9CxnavepIKQ7EfARpDENm/znsmNWTAO/DLOHlIz6tkDSz0tY?=
+ =?us-ascii?Q?R6g5bUiLmKJxFIm1i6ZocYbWdxRvVHMTkQU7VCFcd31iJba1vl7jRANczDWu?=
+ =?us-ascii?Q?HP9JdJfP9SglkSa0m9DDrz1fvYaTvVg7eKy90SaScf8if7dgVQ+3L3n9NxV1?=
+ =?us-ascii?Q?Q3hVm8qEE55F+xOsbC3BU5bbwJZU2O7xG35NLlUO686uLIv9nLXcCq7Vp3NG?=
+ =?us-ascii?Q?wAvKL0L8fgDzSGADxWDtKQuP+h1KxmThFiT7gnBDjJECZCKW2NN1fLZr33MI?=
+ =?us-ascii?Q?3YULRYz9++KgJMQurjPrq4CUQF3dfFzdcYEZB3oiyiyCOCtyAkvTZnR4UbwN?=
+ =?us-ascii?Q?rvpKexCmGk68juB4g7Zn1jESuWUwZVfatxIYk3p/4hplaH/IbzoxG/2ee1OQ?=
+ =?us-ascii?Q?C29FJJUXo/ZlG2g9rr7wgyYfyfSrCZ1zXkE9XNSvH6ysETsK/dIIQifuaHo5?=
+ =?us-ascii?Q?hgK5ojNaVdU/6zho/MvFXSOjSmL7jj/nCUSlKunUpLtsXDE5yXphifiZ1ici?=
+ =?us-ascii?Q?x1BGf03N3QAPt4ZK9bAZH2zKBEYLWH+dU9TLmlSrqUtfM4AN0OnqFTJehynT?=
+ =?us-ascii?Q?iVAMtIDMv/E0SenCNwXtVIEfe6aaAv3JYF8uRSKZAES3MifIqyCp7jIUX8br?=
+ =?us-ascii?Q?Qtqwg8K8yOdOShpchWmxWSDN2P9f69B1XSIlnRpGoyILpj4vGjTJaf6IpquW?=
+ =?us-ascii?Q?4b8UXqfgw0iIEp9jSlz4es85ydPM/rvdIJlfHZD5bEfNXqz+y5F6vsnrlmaM?=
+ =?us-ascii?Q?qW2S3H+ythE1NLdcP5bDHWYKMG6Ud78VNkKhOcd7IhGw+y79RmR2AVkAjoMD?=
+ =?us-ascii?Q?/qJbAAW7Tlmdf5r/b7Vrb7w92+ylcteLt3MzXlxn?=
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: f2a5989d-1580-49d3-02ca-08daebc9b13c
+X-MS-Exchange-CrossTenant-Network-Message-Id: 068d45c6-3a6d-44b1-5d20-08daebc9af36
 X-MS-Exchange-CrossTenant-AuthSource: CO1PR11MB4867.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Jan 2023 07:27:52.3299
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Jan 2023 07:27:48.9375
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: zD9v5naH3fnIqt0EMQjEaFjcSAI7msJYZhP8DhLDCu/yb6ZqHj45vnQZM56o2OBQZcmwDrY7hP4oAZbLlSG1sA==
+X-MS-Exchange-CrossTenant-UserPrincipalName: QhDCF+VQLur05Rd/4IlpFWuqeRv6Nm+Nvwh8ly4KANXvbDg9wEQ8WBBVhYkBXqhuD/Quz/8FNwgfyG5hhyu7wg==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN7PR11MB7638
-X-Proofpoint-ORIG-GUID: XNweHblj1ZAJ9r8Ho9B-bkGdJVo3W6Ux
-X-Proofpoint-GUID: XNweHblj1ZAJ9r8Ho9B-bkGdJVo3W6Ux
+X-Proofpoint-ORIG-GUID: tlnlA3KV8tzg2E3Na_jfzYymt5yVbObQ
+X-Proofpoint-GUID: tlnlA3KV8tzg2E3Na_jfzYymt5yVbObQ
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.205,Aquarius:18.0.923,Hydra:6.0.545,FMLib:17.11.122.1
  definitions=2022-12-31_16,2022-12-30_01,2022-06-22_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 phishscore=0 mlxlogscore=999
- impostorscore=0 mlxscore=0 spamscore=0 clxscore=1015 lowpriorityscore=0
- bulkscore=0 priorityscore=1501 adultscore=0 malwarescore=0 suspectscore=0
- classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2212070000
- definitions=main-2301010068
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 spamscore=0 adultscore=0
+ malwarescore=0 bulkscore=0 lowpriorityscore=0 impostorscore=0
+ priorityscore=1501 clxscore=1015 mlxscore=0 suspectscore=0 phishscore=0
+ mlxlogscore=999 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.12.0-2212070000 definitions=main-2301010068
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sun, 01 Jan 2023 07:28:03 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100333
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100331
 
 * Refresh patches
 * Add a patch to skip checking PYTHONHASHSEED
 
 Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
 ---
- ...rt-target-module-while-cross-compile.patch | 10 +++----
- ...b-Add-configure-options-for-packages.patch | 14 ++++-----
+ ...-Add-configure-options-for-packages.patch} | 12 ++++----
  ...pyext_PATTERN-for-cross-compilation.patch} | 10 +++----
  ...wscript-skip-checking-PYTHONHASHSEED.patch | 30 +++++++++++++++++++
- ...tch => avoid-openldap-unless-wanted.patch} |  9 +++---
- ...x-musl-libc-conflicting-types-error.patch} | 16 +++++-----
- .../{libldb_2.3.4.bb => libldb_2.6.1.bb}      | 14 +++++----
- 7 files changed, 68 insertions(+), 35 deletions(-)
- rename meta-networking/recipes-support/libldb/libldb/{0001-Fix-pyext_PATTERN-for-cross-compilation.patch => 0003-Fix-pyext_PATTERN-for-cross-compilation.patch} (88%)
- create mode 100644 meta-networking/recipes-support/libldb/libldb/0004-wscript-skip-checking-PYTHONHASHSEED.patch
- rename meta-networking/recipes-support/libldb/libldb/{0003-avoid-openldap-unless-wanted.patch => avoid-openldap-unless-wanted.patch} (80%)
- rename meta-networking/recipes-support/libldb/libldb/{libldb-fix-musl-libc-conflict-type-error.patch => cmocka-fix-musl-libc-conflicting-types-error.patch} (76%)
- rename meta-networking/recipes-support/libldb/{libldb_2.3.4.bb => libldb_2.6.1.bb} (86%)
+ .../libtalloc/avoid-attr-unless-wanted.patch  | 19 ++++++++++--
+ ...{libtalloc_2.3.3.bb => libtalloc_2.3.4.bb} | 10 +++----
+ 5 files changed, 62 insertions(+), 19 deletions(-)
+ rename meta-networking/recipes-support/libtalloc/libtalloc/{options-2.2.0.patch => 0001-talloc-Add-configure-options-for-packages.patch} (96%)
+ rename meta-networking/recipes-support/libtalloc/libtalloc/{0001-Fix-pyext_PATTERN-for-cross-compilation.patch => 0002-Fix-pyext_PATTERN-for-cross-compilation.patch} (87%)
+ create mode 100644 meta-networking/recipes-support/libtalloc/libtalloc/0003-wscript-skip-checking-PYTHONHASHSEED.patch
+ rename meta-networking/recipes-support/libtalloc/{libtalloc_2.3.3.bb => libtalloc_2.3.4.bb} (85%)
 
-diff --git a/meta-networking/recipes-support/libldb/libldb/0001-do-not-import-target-module-while-cross-compile.patch b/meta-networking/recipes-support/libldb/libldb/0001-do-not-import-target-module-while-cross-compile.patch
-index 74f8d8ad0..e21524237 100644
---- a/meta-networking/recipes-support/libldb/libldb/0001-do-not-import-target-module-while-cross-compile.patch
-+++ b/meta-networking/recipes-support/libldb/libldb/0001-do-not-import-target-module-while-cross-compile.patch
+diff --git a/meta-networking/recipes-support/libtalloc/libtalloc/options-2.2.0.patch b/meta-networking/recipes-support/libtalloc/libtalloc/0001-talloc-Add-configure-options-for-packages.patch
+similarity index 96%
+rename from meta-networking/recipes-support/libtalloc/libtalloc/options-2.2.0.patch
+rename to meta-networking/recipes-support/libtalloc/libtalloc/0001-talloc-Add-configure-options-for-packages.patch
+index 46fef1096..026a34899 100644
+--- a/meta-networking/recipes-support/libtalloc/libtalloc/options-2.2.0.patch
++++ b/meta-networking/recipes-support/libtalloc/libtalloc/0001-talloc-Add-configure-options-for-packages.patch
 @@ -1,4 +1,4 @@
--From 00500909ebb0f51dd3b4e90c665f07158e7fe255 Mon Sep 17 00:00:00 2001
-+From 69c409195ede704ed7e9298ed4942cc70a52e099 Mon Sep 17 00:00:00 2001
- From: Changqing Li <changqing.li@windriver.com>
- Date: Tue, 25 Jun 2019 14:25:08 +0800
- Subject: [PATCH] do not import target module while cross compile
-@@ -19,7 +19,7 @@ Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
-  1 file changed, 19 insertions(+), 8 deletions(-)
- 
- diff --git a/buildtools/wafsamba/samba_bundled.py b/buildtools/wafsamba/samba_bundled.py
--index 5f080dd..cdc115e 100644
-+index 7d2d855..01dcb56 100644
- --- a/buildtools/wafsamba/samba_bundled.py
- +++ b/buildtools/wafsamba/samba_bundled.py
- @@ -4,6 +4,7 @@ import sys
-@@ -28,9 +28,9 @@ index 5f080dd..cdc115e 100644
-  from wafsamba import samba_utils
- +import importlib.util, os
-  
-- def PRIVATE_NAME(bld, name, private_extension, private_library):
-+ def PRIVATE_NAME(bld, name):
-      '''possibly rename a library to include a bundled extension'''
--@@ -249,17 +250,27 @@ def CHECK_BUNDLED_SYSTEM_PYTHON(conf, libname, modulename, minversion='0.0.0'):
-+@@ -241,17 +242,27 @@ def CHECK_BUNDLED_SYSTEM_PYTHON(conf, libname, modulename, minversion='0.0.0'):
-      # versions
-      minversion = minimum_library_version(conf, libname, minversion)
-  
-@@ -67,5 +67,5 @@ index 5f080dd..cdc115e 100644
-          Logs.error('ERROR: Python module %s of version %s not found, and bundling disabled' % (libname, minversion))
-          sys.exit(1)
- -- 
--2.17.1
-+2.25.1
- 
-diff --git a/meta-networking/recipes-support/libldb/libldb/0002-ldb-Add-configure-options-for-packages.patch b/meta-networking/recipes-support/libldb/libldb/0002-ldb-Add-configure-options-for-packages.patch
-index a55d46bf7..988931c49 100644
---- a/meta-networking/recipes-support/libldb/libldb/0002-ldb-Add-configure-options-for-packages.patch
-+++ b/meta-networking/recipes-support/libldb/libldb/0002-ldb-Add-configure-options-for-packages.patch
-@@ -1,4 +1,4 @@
--From 100d16aaa6fe9a28a5ba77b2de2bde81a3fa3dac Mon Sep 17 00:00:00 2001
-+From b4e04e5dd13c9de8b336f7d0c254973a225e3b5f Mon Sep 17 00:00:00 2001
- From: Changqing Li <changqing.li@windriver.com>
- Date: Mon, 1 Jul 2019 16:14:16 +0800
- Subject: [PATCH] ldb: Add configure options for packages
-@@ -26,7 +26,7 @@ Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
-  2 files changed, 78 insertions(+), 20 deletions(-)
+-From 8a82056ba2f70137714f225d82993aa4b11042da Mon Sep 17 00:00:00 2001
++From 888bfe48236b4ce382dc3aa49791cadb70a1fbe4 Mon Sep 17 00:00:00 2001
+ From: Wang Mingyu <wangmy@cn.fujitsu.com>
+ Date: Fri, 25 Dec 2020 14:14:08 +0900
+ Subject: [PATCH] talloc: Add configure options for packages
+@@ -27,7 +27,7 @@ Signed-off-by: Changqing Li <changqing.li@windriver.com>
+  2 files changed, 75 insertions(+), 21 deletions(-)
  
  diff --git a/lib/replace/wscript b/lib/replace/wscript
--index 2c856b6..36b696d 100644
-+index 4c774d9..63c9967 100644
+-index a2bc604..2e2e7bf 100644
++index 827d74f..0348715 100644
  --- a/lib/replace/wscript
  +++ b/lib/replace/wscript
  @@ -25,6 +25,41 @@ def options(opt):
-@@ -101,7 +101,7 @@ index 2c856b6..36b696d 100644
+@@ -72,7 +72,7 @@ index a2bc604..2e2e7bf 100644
+  @Utils.run_once
+  def configure(conf):
+      conf.RECURSE('buildtools/wafsamba')
+-@@ -34,12 +69,25 @@ def configure(conf):
++@@ -35,12 +70,25 @@ def configure(conf):
+      conf.DEFINE('HAVE_LIBREPLACE', 1)
+      conf.DEFINE('LIBREPLACE_NETWORK_CHECKS', 1)
+  
+@@ -102,7 +102,7 @@ index a2bc604..2e2e7bf 100644
       conf.CHECK_HEADERS('port.h')
       conf.CHECK_HEADERS('sys/fcntl.h sys/filio.h sys/filsys.h sys/fs/s5param.h')
       conf.CHECK_HEADERS('sys/id.h sys/ioctl.h sys/ipc.h sys/mman.h sys/mode.h sys/ndir.h sys/priv.h')
@@ -211,49 +180,38 @@ index a55d46bf7..988931c49 100644
       conf.CHECK_HEADERS('sys/fileio.h sys/filesys.h sys/dustat.h sys/sysmacros.h')
       conf.CHECK_HEADERS('xfs/libxfs.h netgroup.h')
   
-@@ -113,7 +113,7 @@ index 2c856b6..36b696d 100644
+@@ -114,7 +114,7 @@ index a2bc604..2e2e7bf 100644
       conf.CHECK_HEADERS('nss_common.h nsswitch.h ns_api.h')
       conf.CHECK_HEADERS('sys/extattr.h sys/ea.h sys/proplist.h sys/cdefs.h')
       conf.CHECK_HEADERS('utmp.h utmpx.h lastlog.h')
--@@ -418,20 +467,21 @@ def configure(conf):
-+@@ -434,20 +483,21 @@ def configure(conf):
+-@@ -418,20 +467,20 @@ def configure(conf):
++@@ -431,20 +480,20 @@ def configure(conf):
   
       strlcpy_in_bsd = False
   
-@@ -150,10 +150,10 @@ index 2c856b6..36b696d 100644
+@@ -150,7 +150,7 @@ index a2bc604..2e2e7bf 100644
       conf.CHECK_CODE('''
                   struct ucred cred;
  diff --git a/wscript b/wscript
--index bf6129b..722fdf6 100644
-+index 60bb7cf..7f14847 100644
+-index b955d21..4ac6e1e 100644
++index 3089663..fdf9510 100644
  --- a/wscript
  +++ b/wscript
--@@ -39,6 +39,14 @@ def options(opt):
-+@@ -40,6 +40,14 @@ def options(opt):
-                     help='disable new LMDB backend for LDB',
-                     action='store_true', dest='without_ldb_lmdb', default=False)
-  
-@@ -169,5 +169,5 @@ index bf6129b..722fdf6 100644
-  def configure(conf):
-      conf.RECURSE('lib/tdb')
- -- 
--2.17.1
-+2.25.1
- 
-diff --git a/meta-networking/recipes-support/libldb/libldb/0001-Fix-pyext_PATTERN-for-cross-compilation.patch b/meta-networking/recipes-support/libldb/libldb/0003-Fix-pyext_PATTERN-for-cross-compilation.patch
-similarity index 88%
-rename from meta-networking/recipes-support/libldb/libldb/0001-Fix-pyext_PATTERN-for-cross-compilation.patch
-rename to meta-networking/recipes-support/libldb/libldb/0003-Fix-pyext_PATTERN-for-cross-compilation.patch
-index 382a19ced..acd521e69 100644
---- a/meta-networking/recipes-support/libldb/libldb/0001-Fix-pyext_PATTERN-for-cross-compilation.patch
-+++ b/meta-networking/recipes-support/libldb/libldb/0003-Fix-pyext_PATTERN-for-cross-compilation.patch
+ @@ -31,7 +31,12 @@ def options(opt):
+diff --git a/meta-networking/recipes-support/libtalloc/libtalloc/0001-Fix-pyext_PATTERN-for-cross-compilation.patch b/meta-networking/recipes-support/libtalloc/libtalloc/0002-Fix-pyext_PATTERN-for-cross-compilation.patch
+similarity index 87%
+rename from meta-networking/recipes-support/libtalloc/libtalloc/0001-Fix-pyext_PATTERN-for-cross-compilation.patch
+rename to meta-networking/recipes-support/libtalloc/libtalloc/0002-Fix-pyext_PATTERN-for-cross-compilation.patch
+index 47ee4bb24..058ac34f8 100644
+--- a/meta-networking/recipes-support/libtalloc/libtalloc/0001-Fix-pyext_PATTERN-for-cross-compilation.patch
++++ b/meta-networking/recipes-support/libtalloc/libtalloc/0002-Fix-pyext_PATTERN-for-cross-compilation.patch
 @@ -1,4 +1,4 @@
--From c67c7cee024150fcbdca18764a026aed8724d7ae Mon Sep 17 00:00:00 2001
-+From d9f4d5bbd3e58ca7fd7cbc4ab7656fe27bf4c346 Mon Sep 17 00:00:00 2001
+-From b5eaeb7ed4e75012d2715f995e15a13850064f61 Mon Sep 17 00:00:00 2001
++From 6580e8191c219909d50c991662310e668973722d Mon Sep 17 00:00:00 2001
  From: Yi Zhao <yi.zhao@windriver.com>
  Date: Wed, 24 Nov 2021 13:33:35 +0800
  Subject: [PATCH] Fix pyext_PATTERN for cross compilation
-@@ -42,18 +42,18 @@ Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+@@ -40,18 +40,18 @@ Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
   1 file changed, 1 insertion(+), 1 deletion(-)
  
  diff --git a/third_party/waf/waflib/Tools/python.py b/third_party/waf/waflib/Tools/python.py
@@ -276,13 +234,13 @@ index 382a19ced..acd521e69 100644
 -2.17.1
 +2.25.1
  
-diff --git a/meta-networking/recipes-support/libldb/libldb/0004-wscript-skip-checking-PYTHONHASHSEED.patch b/meta-networking/recipes-support/libldb/libldb/0004-wscript-skip-checking-PYTHONHASHSEED.patch
+diff --git a/meta-networking/recipes-support/libtalloc/libtalloc/0003-wscript-skip-checking-PYTHONHASHSEED.patch b/meta-networking/recipes-support/libtalloc/libtalloc/0003-wscript-skip-checking-PYTHONHASHSEED.patch
 new file mode 100644
-index 000000000..8747175d2
+index 000000000..617eaa7dc
 --- /dev/null
-+++ b/meta-networking/recipes-support/libldb/libldb/0004-wscript-skip-checking-PYTHONHASHSEED.patch
++++ b/meta-networking/recipes-support/libtalloc/libtalloc/0003-wscript-skip-checking-PYTHONHASHSEED.patch
 @@ -0,0 +1,30 @@
-+From 6e403b3bac2edadb67776434da54ac2fc2e8de04 Mon Sep 17 00:00:00 2001
++From 4a1b8659235dcac5382a627a4add4d636a65a886 Mon Sep 17 00:00:00 2001
 +From: Yi Zhao <yi.zhao@windriver.com>
 +Date: Wed, 28 Dec 2022 16:31:05 +0800
 +Subject: [PATCH] wscript: skip checking PYTHONHASHSEED
@@ -312,145 +270,76 @@ index 000000000..8747175d2
 +-- 
 +2.25.1
 +
-diff --git a/meta-networking/recipes-support/libldb/libldb/0003-avoid-openldap-unless-wanted.patch b/meta-networking/recipes-support/libldb/libldb/avoid-openldap-unless-wanted.patch
-similarity index 80%
-rename from meta-networking/recipes-support/libldb/libldb/0003-avoid-openldap-unless-wanted.patch
-rename to meta-networking/recipes-support/libldb/libldb/avoid-openldap-unless-wanted.patch
-index dd1246538..87909c952 100644
---- a/meta-networking/recipes-support/libldb/libldb/0003-avoid-openldap-unless-wanted.patch
-+++ b/meta-networking/recipes-support/libldb/libldb/avoid-openldap-unless-wanted.patch
-@@ -1,20 +1,21 @@
--From 1f24231095a59debcf25d0e3309dc5d1056a7fad Mon Sep 17 00:00:00 2001
-+From cc86b8bdd45ca30bdf65a3b8b0960b27aeb34522 Mon Sep 17 00:00:00 2001
- From: Jens Rehsack <rehsack@gmail.com>
- Date: Thu, 19 Nov 2015 20:45:56 +0100
- Subject: [PATCH] avoid openldap unless wanted
- 
- Upstream-Status: Inappropriate [embedded specific]
- 
-+Signed-off-by: Jens Rehsack <rehsack@gmail.com>
- Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
- ---
-  wscript | 4 +---
-  1 file changed, 1 insertion(+), 3 deletions(-)
- 
- diff --git a/wscript b/wscript
--index 722fdf6..22700d5 100644
-+index 7f14847..092da2d 100644
- --- a/wscript
- +++ b/wscript
--@@ -153,9 +153,7 @@ def configure(conf):
-+@@ -154,9 +154,7 @@ def configure(conf):
-      if conf.env.standalone_ldb:
-          conf.CHECK_XSLTPROC_MANPAGES()
-  
-@@ -26,5 +27,5 @@ index 722fdf6..22700d5 100644
-          # we don't want any libraries or modules to rely on runtime
-          # resolution of symbols
- -- 
--2.17.1
-+2.25.1
- 
-diff --git a/meta-networking/recipes-support/libldb/libldb/libldb-fix-musl-libc-conflict-type-error.patch b/meta-networking/recipes-support/libldb/libldb/cmocka-fix-musl-libc-conflicting-types-error.patch
-similarity index 76%
-rename from meta-networking/recipes-support/libldb/libldb/libldb-fix-musl-libc-conflict-type-error.patch
-rename to meta-networking/recipes-support/libldb/libldb/cmocka-fix-musl-libc-conflicting-types-error.patch
-index 444fa3ff1..8e756d8d3 100644
---- a/meta-networking/recipes-support/libldb/libldb/libldb-fix-musl-libc-conflict-type-error.patch
-+++ b/meta-networking/recipes-support/libldb/libldb/cmocka-fix-musl-libc-conflicting-types-error.patch
-@@ -1,7 +1,7 @@
--From 5bd7b5d04435bd593349825973ce32290f5f604d Mon Sep 17 00:00:00 2001
-+From a37eb0a46669592e32ed4e004abb2698ee4f90c5 Mon Sep 17 00:00:00 2001
- From: Changqing Li <changqing.li@windriver.com>
- Date: Wed, 25 Jul 2018 09:55:25 +0800
--Subject: [PATCH] libldb: fix musl libc conflicting types error
-+Subject: [PATCH] cmocka: fix musl libc conflicting types error
- 
- /third_party/cmocka/cmocka.h:126:28: error: conflicting types for 'uintptr_t'
-             typedef unsigned int uintptr_t;
-@@ -16,19 +16,19 @@ Signed-off-by: Changqing Li <changqing.li@windriver.com>
-  1 file changed, 3 insertions(+), 4 deletions(-)
- 
- diff --git a/third_party/cmocka/cmocka.h b/third_party/cmocka/cmocka.h
--index 4fd82a9..5443a08 100644
-+index e6861c8..238201d 100644
- --- a/third_party/cmocka/cmocka.h
- +++ b/third_party/cmocka/cmocka.h
--@@ -110,7 +110,7 @@ typedef uintmax_t LargestIntegralType;
-+@@ -111,7 +111,7 @@ typedef uintmax_t LargestIntegralType;
-      ((LargestIntegralType)(value))
-  
-  /* Smallest integral type capable of holding a pointer. */
- -#if !defined(_UINTPTR_T) && !defined(_UINTPTR_T_DEFINED)
--+#if !defined(__DEFINED_uintptr_t) 
-++#if !defined(__DEFINED_uintptr_t)
-  # if defined(_WIN32)
-      /* WIN32 is an ILP32 platform */
-      typedef unsigned int uintptr_t;
--@@ -134,9 +134,8 @@ typedef uintmax_t LargestIntegralType;
-+@@ -135,9 +135,8 @@ typedef uintmax_t LargestIntegralType;
-  #  endif /* __WORDSIZE */
-  # endif /* _WIN32 */
-  
-@@ -36,10 +36,10 @@ index 4fd82a9..5443a08 100644
- -# define _UINTPTR_T_DEFINED
- -#endif /* !defined(_UINTPTR_T) || !defined(_UINTPTR_T_DEFINED) */
- +# define __DEFINED_uintptr_t
--+#endif /* !defined(__DEFINED_uintptr_t) 
-++#endif /* !defined(__DEFINED_uintptr_t) */
-  
-  /* Perform an unsigned cast to uintptr_t. */
-  #define cast_to_pointer_integral_type(value) \
- -- 
--2.7.4
-+2.25.1
- 
-diff --git a/meta-networking/recipes-support/libldb/libldb_2.3.4.bb b/meta-networking/recipes-support/libldb/libldb_2.6.1.bb
-similarity index 86%
-rename from meta-networking/recipes-support/libldb/libldb_2.3.4.bb
-rename to meta-networking/recipes-support/libldb/libldb_2.6.1.bb
-index af5f0427d..d5440cce2 100644
---- a/meta-networking/recipes-support/libldb/libldb_2.3.4.bb
-+++ b/meta-networking/recipes-support/libldb/libldb_2.6.1.bb
-@@ -1,5 +1,5 @@
- SUMMARY = "Hierarchical, reference counted memory pool system with destructors"
--HOMEPAGE = "http://ldb.samba.org"
-+HOMEPAGE = "https://ldb.samba.org"
- SECTION = "libs"
- LICENSE = "LGPL-3.0-or-later & LGPL-2.1-or-later & GPL-3.0-or-later"
- 
-@@ -9,10 +9,12 @@ RDEPENDS:pyldb += "python3"
- SRC_URI = "http://samba.org/ftp/ldb/ldb-${PV}.tar.gz \
-            file://0001-do-not-import-target-module-while-cross-compile.patch \
-            file://0002-ldb-Add-configure-options-for-packages.patch \
--           file://0001-Fix-pyext_PATTERN-for-cross-compilation.patch \
--           file://libldb-fix-musl-libc-conflict-type-error.patch \
-+           file://0003-Fix-pyext_PATTERN-for-cross-compilation.patch \
-+           file://0004-wscript-skip-checking-PYTHONHASHSEED.patch \
-           "
- 
-+SRC_URI:append:libc-musl = " file://cmocka-fix-musl-libc-conflicting-types-error.patch"
+diff --git a/meta-networking/recipes-support/libtalloc/libtalloc/avoid-attr-unless-wanted.patch b/meta-networking/recipes-support/libtalloc/libtalloc/avoid-attr-unless-wanted.patch
+index 5b7f69ec0..3c85a8a2d 100644
+--- a/meta-networking/recipes-support/libtalloc/libtalloc/avoid-attr-unless-wanted.patch
++++ b/meta-networking/recipes-support/libtalloc/libtalloc/avoid-attr-unless-wanted.patch
+@@ -1,6 +1,17 @@
++From e18370c204056de799064d8ac72a656eb3745f95 Mon Sep 17 00:00:00 2001
++From: Wang Mingyu <wangmy@cn.fujitsu.com>
++Date: Fri, 25 Dec 2020 15:10:58 +0900
++Subject: [PATCH] avoid attr unless wanted
 +
- PACKAGECONFIG ??= "\
-     ${@bb.utils.filter('DISTRO_FEATURES', 'acl', d)} \
-     ${@bb.utils.contains('DISTRO_FEATURES', 'xattr', 'attr', '', d)} \
-@@ -26,14 +28,14 @@ PACKAGECONFIG[libcap] = "--with-libcap,--without-libcap,libcap"
- PACKAGECONFIG[valgrind] = "--with-valgrind,--without-valgrind,valgrind"
- PACKAGECONFIG[lmdb] = ",--without-ldb-lmdb,lmdb,"
++---
++ lib/replace/wscript | 4 +---
++ 1 file changed, 1 insertion(+), 3 deletions(-)
++
++diff --git a/lib/replace/wscript b/lib/replace/wscript
++index 0348715..a8554d9 100644
+ --- a/lib/replace/wscript
+ +++ b/lib/replace/wscript
+-@@ -947,8 +947,6 @@ def build(bld):
++@@ -967,8 +967,6 @@ def build(bld):
+      if not bld.CONFIG_SET('HAVE_INET_ATON'):     REPLACE_SOURCE += ' inet_aton.c'
+      if not bld.CONFIG_SET('HAVE_INET_NTOP'):     REPLACE_SOURCE += ' inet_ntop.c'
+      if not bld.CONFIG_SET('HAVE_INET_PTON'):     REPLACE_SOURCE += ' inet_pton.c'
+@@ -9,13 +20,15 @@
+  
+      if not bld.CONFIG_SET('HAVE_CLOSEFROM'):
+          REPLACE_SOURCE += ' closefrom.c'
+-@@ -962,7 +960,7 @@ def build(bld):
+-                       # at the moment:
++@@ -983,7 +981,7 @@ def build(bld):
+                        # hide_symbols=bld.BUILTIN_LIBRARY('replace'),
+                        private_library=True,
++                       provide_builtin_linking=True,
+ -                      deps='dl attr' + extra_libs)
+ +                      deps='dl' + extra_libs)
+  
+      replace_test_cflags = ''
+      if bld.CONFIG_SET('HAVE_WNO_FORMAT_TRUNCATION'):
++-- 
++2.25.1
  
--SRC_URI += "${@bb.utils.contains('PACKAGECONFIG', 'ldap', '', 'file://0003-avoid-openldap-unless-wanted.patch', d)}"
-+SRC_URI += "${@bb.utils.contains('PACKAGECONFIG', 'ldap', '', 'file://avoid-openldap-unless-wanted.patch', d)}"
+diff --git a/meta-networking/recipes-support/libtalloc/libtalloc_2.3.3.bb b/meta-networking/recipes-support/libtalloc/libtalloc_2.3.4.bb
+similarity index 85%
+rename from meta-networking/recipes-support/libtalloc/libtalloc_2.3.3.bb
+rename to meta-networking/recipes-support/libtalloc/libtalloc_2.3.4.bb
+index b3f8b2ce2..ad812da80 100644
+--- a/meta-networking/recipes-support/libtalloc/libtalloc_2.3.3.bb
++++ b/meta-networking/recipes-support/libtalloc/libtalloc_2.3.4.bb
+@@ -1,17 +1,17 @@
+ SUMMARY = "Hierarchical, reference counted memory pool system with destructors"
+-HOMEPAGE = "http://talloc.samba.org"
++HOMEPAGE = "https://talloc.samba.org"
+ SECTION = "libs"
+ LICENSE = "LGPL-3.0-or-later & GPL-3.0-or-later"
+ LIC_FILES_CHKSUM = "file://talloc.h;beginline=3;endline=27;md5=a301712782cad6dd6d5228bfa7825249 \
+                     file://pytalloc.h;beginline=1;endline=18;md5=21ab13bd853679d7d47a1739cb3b7db6 \
+                     "
  
- LIC_FILES_CHKSUM = "file://pyldb.h;endline=24;md5=dfbd238cecad76957f7f860fbe9adade \
-                     file://man/ldb.3.xml;beginline=261;endline=262;md5=137f9fd61040c1505d1aa1019663fd08 \
-                     file://tools/ldbdump.c;endline=19;md5=a7d4fc5d1f75676b49df491575a86a42"
+-
+ SRC_URI = "https://www.samba.org/ftp/talloc/talloc-${PV}.tar.gz \
+-           file://options-2.2.0.patch \
+-           file://0001-Fix-pyext_PATTERN-for-cross-compilation.patch \
++           file://0001-talloc-Add-configure-options-for-packages.patch \
++           file://0002-Fix-pyext_PATTERN-for-cross-compilation.patch \
++           file://0003-wscript-skip-checking-PYTHONHASHSEED.patch \
+ "
+-SRC_URI[sha256sum] = "6be95b2368bd0af1c4cd7a88146eb6ceea18e46c3ffc9330bf6262b40d1d8aaa"
++SRC_URI[sha256sum] = "179f9ebe265e67e4ab2c26cad2b7de4b6a77c6c212f966903382869f06be6505"
  
--SRC_URI[md5sum] = "b01d6913a06901c22c5bc6caedc548ac"
--SRC_URI[sha256sum] = "f2e88dcab7b6007d92724b62f8a16e7c6e77275885c60eb4f87097e4aa4082c1"
-+SRC_URI[md5sum] = "3a5f54f511fb237b83e1f34e2c7e25cd"
-+SRC_URI[sha256sum] = "467403f77df86782c3965bb175440baa2ed751a9feb9560194bd8c06bf1736c9"
- 
- inherit pkgconfig waf-samba
+ inherit waf-samba
  
 -- 
 2.25.1
