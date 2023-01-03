@@ -1,115 +1,877 @@
-Return-Path: <wangmy@fujitsu.com>
+Return-Path: <sdoshi@mvista.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 85655C53210
-	for <webhook@archiver.kernel.org>; Tue,  3 Jan 2023 03:30:38 +0000 (UTC)
-Received: from mail1.bemta34.messagelabs.com (mail1.bemta34.messagelabs.com [195.245.231.1])
- by mx.groups.io with SMTP id smtpd.web10.56108.1672716631272229943
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5D143C3DA7D
+	for <webhook@archiver.kernel.org>; Tue,  3 Jan 2023 05:46:39 +0000 (UTC)
+Received: from mail-pl1-f180.google.com (mail-pl1-f180.google.com [209.85.214.180])
+ by mx.groups.io with SMTP id smtpd.web10.57809.1672724796029142157
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 02 Jan 2023 19:30:31 -0800
+ Mon, 02 Jan 2023 21:46:36 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=ubfpz29B;
- spf=pass (domain: fujitsu.com, ip: 195.245.231.1, mailfrom: wangmy@fujitsu.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1672716629; i=@fujitsu.com;
-	bh=k06idP5VvyDO3IkerVgkaQmMPycwxEjpGEOXhnuMA9s=;
-	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type;
-	b=ubfpz29BNn93zK/XEO0aOUoz7m0gE5xtYubc+6usBOdn3GwuAOSzxhrDVTGP2+lqX
-	 7ubIeXLkTz5jhsjVsjJLPv5HSGJo2g+YkNVbMKyigIkzajOkWoV84Nt5ZMAZRnBq7u
-	 n4HVfeX8baBeJIp+44c4lP8cWXJv+5vIe7geIGx0g4t+tW/wc+IlX1qkk/QXJ0Uqp6
-	 vp5dcCPtMZXoj/wLMtO5ku/uAMSPk75oAnR6etKfozzerOKKZT7ZHmq1SfCCvYPcq2
-	 hUv2LG6kOx3RGrLCgAQhpxk1kxfY2yw+oiDAwYqk8qOBccDkECLQUIcA8SO8VMmhAC
-	 CNsDn+QwpOc9Q==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrEIsWRWlGSWpSXmKPExsViZ8MxSTd04eZ
-  kg2/7uS0uHl7K7MDocW7jCsYAxijWzLyk/IoE1owFu4+xFRznqrjTNou9gfEiZxcjF4eQwBNG
-  iRf/l7NCONeZJNb/OAbl7GaUOLf2JHMXIycHm4CUxI37/9lAbBEBfYmls/eAxZkFVCRe/O5h7
-  2Lk4BAWcJe4sc0LJMwioCrxc/N8RhCbV8BJ4sjUt+wgtoSAgsSUh+/BWjkFnCWmvl4BViMEVP
-  Nh4iaoekGJkzOfsECMl5A4+OIFM0SvosTsy80sEHaFxKxZbUwQtprE1XObmCcwCs5C0j4LSfs
-  CRqZVjGbFqUVlqUW6hiZ6SUWZ6RkluYmZOXqJVbqJeqmluuWpxSW6RnqJ5cV6qcXFesWVuck5
-  KXp5qSWbGIHBm1Ks0r6D8dOyP3qHGCU5mJREecv3bkoW4kvKT6nMSCzOiC8qzUktPsQow8GhJ
-  MHLM39zspBgUWp6akVaZg4wkmDSEhw8SiK8h+YBpXmLCxJzizPTIVKnGHU57i7cu5dZiCUvPy
-  9VSpxXZC5QkQBIUUZpHtwIWFRfYpSVEuZlZGBgEOIpSC3KzSxBlX/FKM7BqCTMOx/kEp7MvBK
-  4Ta+AjmACOiJpzUaQI0oSEVJSDUydcVycEyOyBGOyKz6y6/48bhYmdcPS63uCwOnFAbOPWG1c
-  5vqW/4N1iYrWkZMTlmyz+rn9/JuHVWv3Tflj2bcolvvU5MosV8uvD1Ws1h9WZA6L1Fu5peN2J
-  O/hrtxjiyQuxCXe3n0txlgi5IGs+c9JPTYll3cZPc7/9M7lcfCJPW11+YmZDO4iuhqy3DrMPJ
-  eY0/bLcx58FqRZfKxt2mvtnNQt4R7px9qs2Rh370iW38v2/t2V/cU1Plkh39ZHXVcz26zIx7w
-  nu7ZQ58MeuS/Gfa7HwxR/XvKr3RiV+UIsN6/75qmSrUtZLASsVnLM0eK8VDMno0SeyS9cuPkl
-  k5phLiPD19y1F1oZ5XZqKLEUZyQaajEXFScCAOZahCJlAwAA
-X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-11.tower-565.messagelabs.com!1672716629!294439!1
-X-Originating-IP: [62.60.8.146]
-X-SYMC-ESS-Client-Auth: outbound-route-from=pass
-X-StarScan-Received: 
-X-StarScan-Version: 9.101.2; banners=-,-,-
-X-VirusChecked: Checked
-Received: (qmail 779 invoked from network); 3 Jan 2023 03:30:29 -0000
-Received: from unknown (HELO n03ukasimr02.n03.fujitsu.local) (62.60.8.146)
-  by server-11.tower-565.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 3 Jan 2023 03:30:29 -0000
-Received: from n03ukasimr02.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTP id E08EA1000DB
-	for <openembedded-devel@lists.openembedded.org>; Tue,  3 Jan 2023 03:30:28 +0000 (GMT)
-Received: from R01UKEXCASM126.r01.fujitsu.local (R01UKEXCASM126 [10.183.43.178])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTPS id D41261000D5
-	for <openembedded-devel@lists.openembedded.org>; Tue,  3 Jan 2023 03:30:28 +0000 (GMT)
-Received: from localhost.localdomain (10.167.225.33) by
- R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.42; Tue, 3 Jan 2023 03:30:27 +0000
-From: <wangmy@fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-perl] [PATCH] libnet-dns-perl: upgrade 1.35 -> 1.36
-Date: Thu, 29 Dec 2022 12:46:54 +0800
-Message-ID: <1672289215-16118-3-git-send-email-wangmy@fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
-In-Reply-To: <1672289215-16118-1-git-send-email-wangmy@fujitsu.com>
-References: <1672289215-16118-1-git-send-email-wangmy@fujitsu.com>
+ dkim=pass header.i=@mvista.com header.s=google header.b=LnRSGZDR;
+ spf=pass (domain: mvista.com, ip: 209.85.214.180, mailfrom: sdoshi@mvista.com)
+Received: by mail-pl1-f180.google.com with SMTP id b2so31542764pld.7
+        for <openembedded-devel@lists.openembedded.org>; Mon, 02 Jan 2023 21:46:35 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=mvista.com; s=google;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=0sbeOgJcq5YMRBzFF2LQH91GllcAuZvebJQ2dBeah/M=;
+        b=LnRSGZDR2b/9/JvWrpBwEapXTUklTyLVF1L7lcZESldD/lKrfrrzLUJYe3mjhw6GXc
+         DehDd2wZ6akmsdeor4dXJ4FLK8+gQl6WhUAFmZl13JvZkTdKpX9VeQBnMA7VAR+SQZ+m
+         GCHf7R2AWphK7wGjWO2EftQ8PHZNaNFyvaDpY=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=0sbeOgJcq5YMRBzFF2LQH91GllcAuZvebJQ2dBeah/M=;
+        b=H8g74lHiSy3qaaBkFx0L/hVnTbr5HZyu902rvrfpjr+vuZiLFWkqNlshtOLuh45ehg
+         fnBPyfp7HGfd6lAyO2QIVyTBlztP4I7HIIBjz4wXf19fu4fZKuqRIeSU6Mm/QOb+8oPA
+         rHMdSz/93nfwPFHxQbZ0/LCCcosvbPnK+b49nZOfFq2T2558Ra9UgCBmxOazh0oAgN8o
+         OavO9U17J1kUVwMn1eIuZFtCrXUyII+YtT528ormDRLaGp2WiwM9BSdPs8avxtw5RQyO
+         wPm3tzZXvm6aEX7+ZrLMsb02lZrUbtcQMmEejmZu1uTFLV9zYcXIftGpdUjTlld7Yue0
+         uYNw==
+X-Gm-Message-State: AFqh2kpV+lkK1jVcPJpmjEB4u6V7UsIZsKNrseJxO30wRY634kJ+RIQn
+	Bnua1l9WkhFxu4Ng/22UybCz1vIrnZE1bhmNxDQ=
+X-Google-Smtp-Source: AMrXdXsb5J94Ua0dJ/2o6szEyf1Vg3WToJdkcJViO7f1pPv6UPRhlUno9uTQ6ZN+yKOttmHu6R+0aQ==
+X-Received: by 2002:a17:903:1315:b0:192:ccfc:c178 with SMTP id iy21-20020a170903131500b00192ccfcc178mr6019104plb.52.1672724794452;
+        Mon, 02 Jan 2023 21:46:34 -0800 (PST)
+Received: from mv-Latitude-3420.mvista.com ([49.34.182.184])
+        by smtp.gmail.com with ESMTPSA id j7-20020a170902da8700b0018980f14940sm21092857plx.178.2023.01.02.21.46.32
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 02 Jan 2023 21:46:33 -0800 (PST)
+From: Siddharth <sdoshi@mvista.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Siddharth Doshi <sdoshi@mvista.com>
+Subject: [[dunfell][meta-oe][PATCH] xterm : Fix CVE-2022-45063 code execution via OSC 50 input sequences]  CVE-2022-45063
+Date: Tue,  3 Jan 2023 11:14:27 +0530
+Message-Id: <20230103054427.8026-1-sdoshi@mvista.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Type: text/plain
-X-Originating-IP: [10.167.225.33]
-X-ClientProxiedBy: G08CNEXCHPEKD07.g08.fujitsu.local (10.167.33.80) To
- R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
-X-Virus-Scanned: ClamAV using ClamSMTP
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 03 Jan 2023 03:30:38 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100352
+ <openembedded-devel@lists.openembedded.org>; Tue, 03 Jan 2023 05:46:39 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100354
 
-From: Wang Mingyu <wangmy@fujitsu.com>
+From: Siddharth Doshi <sdoshi@mvista.com>
 
-Changelog:
-==========
- Adopt JSON as presentation notation for EDNS options.
- Zero packet->id not allowed in outbound packet.
- Remove deprecated 2-argument TSIG->create() method.
- Revise TSIG test scripts and documentation.
+Upstream-Status: Backport [https://github.com/ThomasDickey/xterm-snapshots/commit/787636674918873a091e7a4ef5977263ba982322]
+CVE: CVE-2022-45063
 
-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+Signed-off-by: Siddharth Doshi <sdoshi@mvista.com>
 ---
- .../libnet/{libnet-dns-perl_1.35.bb => libnet-dns-perl_1.36.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-perl/recipes-perl/libnet/{libnet-dns-perl_1.35.bb => libnet-dns-perl_1.36.bb} (95%)
+ .../xorg-app/xterm/CVE-2022-45063.patch       | 785 ++++++++++++++++++
+ .../recipes-graphics/xorg-app/xterm_353.bb    |   1 +
+ 2 files changed, 786 insertions(+)
+ create mode 100644 meta-oe/recipes-graphics/xorg-app/xterm/CVE-2022-45063.patch
 
-diff --git a/meta-perl/recipes-perl/libnet/libnet-dns-perl_1.35.bb b/meta-perl/recipes-perl/libnet/libnet-dns-perl_1.36.bb
-similarity index 95%
-rename from meta-perl/recipes-perl/libnet/libnet-dns-perl_1.35.bb
-rename to meta-perl/recipes-perl/libnet/libnet-dns-perl_1.36.bb
-index 5df586da1..2c9b47a4c 100644
---- a/meta-perl/recipes-perl/libnet/libnet-dns-perl_1.35.bb
-+++ b/meta-perl/recipes-perl/libnet/libnet-dns-perl_1.36.bb
-@@ -9,7 +9,7 @@ DEPENDS += "perl"
- 
- SRC_URI = "http://search.cpan.org/CPAN/authors/id/N/NL/NLNETLABS/Net-DNS-${PV}.tar.gz"
- 
--SRC_URI[sha256sum] = "f1a1478e4acbdb6b96de63070b35050dec9b9fce6c95bb2215bfc64a2d98e167"
-+SRC_URI[sha256sum] = "143ba0e530f8b727be61ec052974cbf52df5b0afc0582d75b04809e0b2a95ebe"
- 
- UPSTREAM_CHECK_REGEX = "Net\-DNS\-(?P<pver>(\d+\.\d+))(?!_\d+).tar"
- 
+diff --git a/meta-oe/recipes-graphics/xorg-app/xterm/CVE-2022-45063.patch b/meta-oe/recipes-graphics/xorg-app/xterm/CVE-2022-45063.patch
+new file mode 100644
+index 000000000..8d1be3210
+--- /dev/null
++++ b/meta-oe/recipes-graphics/xorg-app/xterm/CVE-2022-45063.patch
+@@ -0,0 +1,785 @@
++From 787636674918873a091e7a4ef5977263ba982322 Mon Sep 17 00:00:00 2001
++From: "Thomas E. Dickey" <dickey@invisible-island.net>
++Date: Sun, 23 Oct 2022 22:59:52 +0000
++Subject: [PATCH] snapshot of project "xterm", label xterm-374c
++
++Upstream-Status: Backport [https://github.com/ThomasDickey/xterm-snapshots/commit/787636674918873a091e7a4ef5977263ba982322]
++CVE: CVE-2022-45063
++
++Signed-off-by: Siddharth Doshi <sdoshi@mvista.com>
++---
++ button.c       |  16 +--
++ charproc.c     |   9 +-
++ doublechr.c    |   4 +-
++ fontutils.c    | 266 ++++++++++++++++++++++++++-----------------------
++ fontutils.h    |   4 +-
++ misc.c         |   7 +-
++ screen.c       |   2 +-
++ xterm.h        |   2 +-
++ xterm.log.html |   6 ++
++ 9 files changed, 164 insertions(+), 152 deletions(-)
++
++diff --git a/button.c b/button.c
++index 66a6181..e05ca50 100644
++--- a/button.c
+++++ b/button.c
++@@ -1619,14 +1619,9 @@ static void
++ UnmapSelections(XtermWidget xw)
++ {
++     TScreen *screen = TScreenOf(xw);
++-    Cardinal n;
++ 
++-    if (screen->mappedSelect) {
++-	for (n = 0; screen->mappedSelect[n] != 0; ++n)
++-	    free((void *) screen->mappedSelect[n]);
++-	free(screen->mappedSelect);
++-	screen->mappedSelect = 0;
++-    }
+++    free(screen->mappedSelect);
+++    screen->mappedSelect = 0;
++ }
++ 
++ /*
++@@ -1662,14 +1657,11 @@ MapSelections(XtermWidget xw, String *params, Cardinal num_params)
++ 	    if ((result = TypeMallocN(String, num_params + 1)) != 0) {
++ 		result[num_params] = 0;
++ 		for (j = 0; j < num_params; ++j) {
++-		    result[j] = x_strdup((isSELECT(params[j])
+++		    result[j] = (String) (isSELECT(params[j])
++ 					  ? mapTo
++-					  : params[j]));
+++					  : params[j]);
++ 		    if (result[j] == 0) {
++ 			UnmapSelections(xw);
++-			while (j != 0) {
++-			    free((void *) result[--j]);
++-			}
++ 			free(result);
++ 			result = 0;
++ 			break;
++diff --git a/charproc.c b/charproc.c
++index 55f0108..b07de4c 100644
++--- a/charproc.c
+++++ b/charproc.c
++@@ -12548,7 +12548,6 @@ DoSetSelectedFont(Widget w,
++ 	Bell(xw, XkbBI_MinorError, 0);
++     } else {
++ 	Boolean failed = False;
++-	int oldFont = TScreenOf(xw)->menu_font_number;
++ 	char *save = TScreenOf(xw)->SelectFontName();
++ 	char *val;
++ 	char *test;
++@@ -12593,10 +12592,6 @@ DoSetSelectedFont(Widget w,
++ 		failed = True;
++ 	    }
++ 	    if (failed) {
++-		(void) xtermLoadFont(xw,
++-				     xtermFontName(TScreenOf(xw)->MenuFontName(oldFont)),
++-				     True,
++-				     oldFont);
++ 		Bell(xw, XkbBI_MinorError, 0);
++ 	    }
++ 	    free(used);
++@@ -12605,7 +12600,7 @@ DoSetSelectedFont(Widget w,
++     }
++ }
++ 
++-void
+++Bool
++ FindFontSelection(XtermWidget xw, const char *atom_name, Bool justprobe)
++ {
++     TScreen *screen = TScreenOf(xw);
++@@ -12645,7 +12640,7 @@ FindFontSelection(XtermWidget xw, const char *atom_name, Bool justprobe)
++ 			    DoSetSelectedFont, NULL,
++ 			    XtLastTimestampProcessed(XtDisplay(xw)));
++     }
++-    return;
+++    return (screen->SelectFontName() != NULL) ? True : False;
++ }
++ 
++ Bool
++diff --git a/doublechr.c b/doublechr.c
++index a60f5bd..f7b6bae 100644
++--- a/doublechr.c
+++++ b/doublechr.c
++@@ -294,7 +294,7 @@ xterm_DoubleGC(XTermDraw * params, GC old_gc, int *inxp)
++ 	    temp.flags = (params->attr_flags & BOLD);
++ 	    temp.warn = fwResource;
++ 
++-	    if (!xtermOpenFont(params->xw, name, &temp, False)) {
+++	    if (!xtermOpenFont(params->xw, name, &temp, NULL, False)) {
++ 		XTermDraw local = *params;
++ 		char *nname;
++ 
++@@ -303,7 +303,7 @@ xterm_DoubleGC(XTermDraw * params, GC old_gc, int *inxp)
++ 		nname = xtermSpecialFont(&local);
++ 		if (nname != 0) {
++ 		    found = (Boolean) xtermOpenFont(params->xw, nname, &temp,
++-						    False);
+++						    NULL, False);
++ 		    free(nname);
++ 		}
++ 	    } else {
++diff --git a/fontutils.c b/fontutils.c
++index 4b0ef85..d9bfaf8 100644
++--- a/fontutils.c
+++++ b/fontutils.c
++@@ -92,9 +92,9 @@
++ }
++ 
++ #define FREE_FNAME(field) \
++-	    if (fonts == 0 || myfonts.field != fonts->field) { \
++-		FREE_STRING(myfonts.field); \
++-		myfonts.field = 0; \
+++	    if (fonts == 0 || new_fnames.field != fonts->field) { \
+++		FREE_STRING(new_fnames.field); \
+++		new_fnames.field = 0; \
++ 	    }
++ 
++ /*
++@@ -573,7 +573,7 @@ open_italic_font(XtermWidget xw, int n, FontNameProperties *fp, XTermFonts * dat
++ 	if ((name = italic_font_name(fp, slant[pass])) != 0) {
++ 	    TRACE(("open_italic_font %s %s\n",
++ 		   whichFontEnum((VTFontEnum) n), name));
++-	    if (xtermOpenFont(xw, name, data, False)) {
+++	    if (xtermOpenFont(xw, name, data, NULL, False)) {
++ 		result = (data->fs != 0);
++ #if OPT_REPORT_FONTS
++ 		if (resource.reportFonts) {
++@@ -1006,13 +1006,14 @@ cannotFont(XtermWidget xw, const char *who, const char *tag, const char *name)
++ }
++ 
++ /*
++- * Open the given font and verify that it is non-empty.  Return a null on
+++ * Open the given font and verify that it is non-empty.  Return false on
++  * failure.
++  */
++ Bool
++ xtermOpenFont(XtermWidget xw,
++ 	      const char *name,
++ 	      XTermFonts * result,
+++	      XTermFonts * current,
++ 	      Bool force)
++ {
++     Bool code = False;
++@@ -1020,7 +1021,12 @@ xtermOpenFont(XtermWidget xw,
++ 
++     TRACE(("xtermOpenFont %d:%d '%s'\n",
++ 	   result->warn, xw->misc.fontWarnings, NonNull(name)));
+++
++     if (!IsEmpty(name)) {
+++	Bool existing = (current != NULL
+++			 && current->fs != NULL
+++			 && current->fn != NULL);
+++
++ 	if ((result->fs = XLoadQueryFont(screen->display, name)) != 0) {
++ 	    code = True;
++ 	    if (EmptyFont(result->fs)) {
++@@ -1039,9 +1045,13 @@ xtermOpenFont(XtermWidget xw,
++ 	    } else {
++ 		TRACE(("xtermOpenFont: cannot load font '%s'\n", name));
++ 	    }
++-	    if (force) {
+++	    if (existing) {
+++		TRACE(("...continue using font '%s'\n", current->fn));
+++		result->fn = x_strdup(current->fn);
+++		result->fs = current->fs;
+++	    } else if (force) {
++ 		NoFontWarning(result);
++-		code = xtermOpenFont(xw, DEFFONT, result, True);
+++		code = xtermOpenFont(xw, DEFFONT, result, NULL, True);
++ 	    }
++ 	}
++     }
++@@ -1289,6 +1299,7 @@ static Bool
++ loadNormFP(XtermWidget xw,
++ 	   char **nameOutP,
++ 	   XTermFonts * infoOut,
+++	   XTermFonts * current,
++ 	   int fontnum)
++ {
++     Bool status = True;
++@@ -1298,7 +1309,7 @@ loadNormFP(XtermWidget xw,
++     if (!xtermOpenFont(xw,
++ 		       *nameOutP,
++ 		       infoOut,
++-		       (fontnum == fontMenu_default))) {
+++		       current, (fontnum == fontMenu_default))) {
++ 	/*
++ 	 * If we are opening the default font, and it happens to be missing,
++ 	 * force that to the compiled-in default font, e.g., "fixed".  If we
++@@ -1333,10 +1344,10 @@ loadBoldFP(XtermWidget xw,
++ 	if (fp != 0) {
++ 	    NoFontWarning(infoOut);
++ 	    *nameOutP = bold_font_name(fp, fp->average_width);
++-	    if (!xtermOpenFont(xw, *nameOutP, infoOut, False)) {
+++	    if (!xtermOpenFont(xw, *nameOutP, infoOut, NULL, False)) {
++ 		free(*nameOutP);
++ 		*nameOutP = bold_font_name(fp, -1);
++-		xtermOpenFont(xw, *nameOutP, infoOut, False);
+++		xtermOpenFont(xw, *nameOutP, infoOut, NULL, False);
++ 	    }
++ 	    TRACE(("...derived bold '%s'\n", NonNull(*nameOutP)));
++ 	}
++@@ -1354,7 +1365,7 @@ loadBoldFP(XtermWidget xw,
++ 	    TRACE(("...did not get a matching bold font\n"));
++ 	}
++ 	free(normal);
++-    } else if (!xtermOpenFont(xw, *nameOutP, infoOut, False)) {
+++    } else if (!xtermOpenFont(xw, *nameOutP, infoOut, NULL, False)) {
++ 	xtermCopyFontInfo(infoOut, infoRef);
++ 	TRACE(("...cannot load bold font '%s'\n", NonNull(*nameOutP)));
++     } else {
++@@ -1408,7 +1419,7 @@ loadWideFP(XtermWidget xw,
++     }
++ 
++     if (check_fontname(*nameOutP)) {
++-	if (xtermOpenFont(xw, *nameOutP, infoOut, False)
+++	if (xtermOpenFont(xw, *nameOutP, infoOut, NULL, False)
++ 	    && is_derived_font_name(*nameOutP)
++ 	    && EmptyFont(infoOut->fs)) {
++ 	    xtermCloseFont2(xw, infoOut - fWide, fWide);
++@@ -1452,7 +1463,7 @@ loadWBoldFP(XtermWidget xw,
++ 
++     if (check_fontname(*nameOutP)) {
++ 
++-	if (xtermOpenFont(xw, *nameOutP, infoOut, False)
+++	if (xtermOpenFont(xw, *nameOutP, infoOut, NULL, False)
++ 	    && is_derived_font_name(*nameOutP)
++ 	    && !compatibleWideCounts(wideInfoRef->fs, infoOut->fs)) {
++ 	    xtermCloseFont2(xw, infoOut - fWBold, fWBold);
++@@ -1505,6 +1516,10 @@ loadWBoldFP(XtermWidget xw,
++ }
++ #endif
++ 
+++/*
+++ * Load a given bitmap font, along with the bold/wide variants.
+++ * Returns nonzero on success.
+++ */
++ int
++ xtermLoadFont(XtermWidget xw,
++ 	      const VTFontNames * fonts,
++@@ -1514,33 +1529,37 @@ xtermLoadFont(XtermWidget xw,
++     TScreen *screen = TScreenOf(xw);
++     VTwin *win = WhichVWin(screen);
++ 
++-    VTFontNames myfonts;
++-    XTermFonts fnts[fMAX];
+++    VTFontNames new_fnames;
+++    XTermFonts new_fonts[fMAX];
+++    XTermFonts old_fonts[fMAX];
++     char *tmpname = NULL;
++     Boolean proportional = False;
+++    Boolean recovered;
+++    int code = 0;
++ 
++-    memset(&myfonts, 0, sizeof(myfonts));
++-    memset(fnts, 0, sizeof(fnts));
+++    memset(&new_fnames, 0, sizeof(new_fnames));
+++    memset(new_fonts, 0, sizeof(new_fonts));
+++    memcpy(&old_fonts, screen->fnts, sizeof(old_fonts));
++ 
++     if (fonts != 0)
++-	myfonts = *fonts;
++-    if (!check_fontname(myfonts.f_n))
++-	return 0;
+++	new_fnames = *fonts;
+++    if (!check_fontname(new_fnames.f_n))
+++	return code;
++ 
++     if (fontnum == fontMenu_fontescape
++-	&& myfonts.f_n != screen->MenuFontName(fontnum)) {
++-	if ((tmpname = x_strdup(myfonts.f_n)) == 0)
++-	    return 0;
+++	&& new_fnames.f_n != screen->MenuFontName(fontnum)) {
+++	if ((tmpname = x_strdup(new_fnames.f_n)) == 0)
+++	    return code;
++     }
++ 
++-    TRACE(("Begin Cgs - xtermLoadFont(%s)\n", myfonts.f_n));
+++    TRACE(("Begin Cgs - xtermLoadFont(%s)\n", new_fnames.f_n));
++     releaseWindowGCs(xw, win);
++ 
++ #define DbgResource(name, field, index) \
++     TRACE(("xtermLoadFont #%d "name" %s%s\n", \
++     	   fontnum, \
++-	   (fnts[index].warn == fwResource) ? "*" : " ", \
++-	   NonNull(myfonts.field)))
+++	   (new_fonts[index].warn == fwResource) ? "*" : " ", \
+++	   NonNull(new_fnames.field)))
++     DbgResource("normal", f_n, fNorm);
++     DbgResource("bold  ", f_b, fBold);
++ #if OPT_WIDE_CHARS
++@@ -1549,16 +1568,17 @@ xtermLoadFont(XtermWidget xw,
++ #endif
++ 
++     if (!loadNormFP(xw,
++-		    &myfonts.f_n,
++-		    &fnts[fNorm],
+++		    &new_fnames.f_n,
+++		    &new_fonts[fNorm],
+++		    &old_fonts[fNorm],
++ 		    fontnum))
++ 	goto bad;
++ 
++     if (!loadBoldFP(xw,
++-		    &myfonts.f_b,
++-		    &fnts[fBold],
++-		    myfonts.f_n,
++-		    &fnts[fNorm],
+++		    &new_fnames.f_b,
+++		    &new_fonts[fBold],
+++		    new_fnames.f_n,
+++		    &new_fonts[fNorm],
++ 		    fontnum))
++ 	goto bad;
++ 
++@@ -1570,20 +1590,20 @@ xtermLoadFont(XtermWidget xw,
++     if_OPT_WIDE_CHARS(screen, {
++ 
++ 	if (!loadWideFP(xw,
++-			&myfonts.f_w,
++-			&fnts[fWide],
++-			myfonts.f_n,
++-			&fnts[fNorm],
+++			&new_fnames.f_w,
+++			&new_fonts[fWide],
+++			new_fnames.f_n,
+++			&new_fonts[fNorm],
++ 			fontnum))
++ 	    goto bad;
++ 
++ 	if (!loadWBoldFP(xw,
++-			 &myfonts.f_wb,
++-			 &fnts[fWBold],
++-			 myfonts.f_w,
++-			 &fnts[fWide],
++-			 myfonts.f_b,
++-			 &fnts[fBold],
+++			 &new_fnames.f_wb,
+++			 &new_fonts[fWBold],
+++			 new_fnames.f_w,
+++			 &new_fonts[fWide],
+++			 new_fnames.f_b,
+++			 &new_fonts[fBold],
++ 			 fontnum))
++ 	    goto bad;
++ 
++@@ -1593,30 +1613,30 @@ xtermLoadFont(XtermWidget xw,
++      * Normal/bold fonts should be the same width.  Also, the min/max
++      * values should be the same.
++      */
++-    if (fnts[fNorm].fs != 0
++-	&& fnts[fBold].fs != 0
++-	&& (!is_fixed_font(fnts[fNorm].fs)
++-	    || !is_fixed_font(fnts[fBold].fs)
++-	    || differing_widths(fnts[fNorm].fs, fnts[fBold].fs))) {
+++    if (new_fonts[fNorm].fs != 0
+++	&& new_fonts[fBold].fs != 0
+++	&& (!is_fixed_font(new_fonts[fNorm].fs)
+++	    || !is_fixed_font(new_fonts[fBold].fs)
+++	    || differing_widths(new_fonts[fNorm].fs, new_fonts[fBold].fs))) {
++ 	TRACE(("Proportional font! normal %d/%d, bold %d/%d\n",
++-	       fnts[fNorm].fs->min_bounds.width,
++-	       fnts[fNorm].fs->max_bounds.width,
++-	       fnts[fBold].fs->min_bounds.width,
++-	       fnts[fBold].fs->max_bounds.width));
+++	       new_fonts[fNorm].fs->min_bounds.width,
+++	       new_fonts[fNorm].fs->max_bounds.width,
+++	       new_fonts[fBold].fs->min_bounds.width,
+++	       new_fonts[fBold].fs->max_bounds.width));
++ 	proportional = True;
++     }
++ 
++     if_OPT_WIDE_CHARS(screen, {
++-	if (fnts[fWide].fs != 0
++-	    && fnts[fWBold].fs != 0
++-	    && (!is_fixed_font(fnts[fWide].fs)
++-		|| !is_fixed_font(fnts[fWBold].fs)
++-		|| differing_widths(fnts[fWide].fs, fnts[fWBold].fs))) {
+++	if (new_fonts[fWide].fs != 0
+++	    && new_fonts[fWBold].fs != 0
+++	    && (!is_fixed_font(new_fonts[fWide].fs)
+++		|| !is_fixed_font(new_fonts[fWBold].fs)
+++		|| differing_widths(new_fonts[fWide].fs, new_fonts[fWBold].fs))) {
++ 	    TRACE(("Proportional font! wide %d/%d, wide bold %d/%d\n",
++-		   fnts[fWide].fs->min_bounds.width,
++-		   fnts[fWide].fs->max_bounds.width,
++-		   fnts[fWBold].fs->min_bounds.width,
++-		   fnts[fWBold].fs->max_bounds.width));
+++		   new_fonts[fWide].fs->min_bounds.width,
+++		   new_fonts[fWide].fs->max_bounds.width,
+++		   new_fonts[fWBold].fs->min_bounds.width,
+++		   new_fonts[fWBold].fs->max_bounds.width));
++ 	    proportional = True;
++ 	}
++     });
++@@ -1635,13 +1655,13 @@ xtermLoadFont(XtermWidget xw,
++     screen->ifnts_ok = False;
++ #endif
++ 
++-    xtermCopyFontInfo(GetNormalFont(screen, fNorm), &fnts[fNorm]);
++-    xtermCopyFontInfo(GetNormalFont(screen, fBold), &fnts[fBold]);
+++    xtermCopyFontInfo(GetNormalFont(screen, fNorm), &new_fonts[fNorm]);
+++    xtermCopyFontInfo(GetNormalFont(screen, fBold), &new_fonts[fBold]);
++ #if OPT_WIDE_CHARS
++-    xtermCopyFontInfo(GetNormalFont(screen, fWide), &fnts[fWide]);
++-    if (fnts[fWBold].fs == NULL)
++-	xtermCopyFontInfo(GetNormalFont(screen, fWide), &fnts[fWide]);
++-    xtermCopyFontInfo(GetNormalFont(screen, fWBold), &fnts[fWBold]);
+++    xtermCopyFontInfo(GetNormalFont(screen, fWide), &new_fonts[fWide]);
+++    if (new_fonts[fWBold].fs == NULL)
+++	xtermCopyFontInfo(GetNormalFont(screen, fWide), &new_fonts[fWide]);
+++    xtermCopyFontInfo(GetNormalFont(screen, fWBold), &new_fonts[fWBold]);
++ #endif
++ 
++     xtermUpdateFontGCs(xw, getNormalFont);
++@@ -1672,7 +1692,7 @@ xtermLoadFont(XtermWidget xw,
++ 	unsigned ch;
++ 
++ #if OPT_TRACE
++-#define TRACE_MISS(index) show_font_misses(#index, &fnts[index])
+++#define TRACE_MISS(index) show_font_misses(#index, &new_fonts[index])
++ 	TRACE_MISS(fNorm);
++ 	TRACE_MISS(fBold);
++ #if OPT_WIDE_CHARS
++@@ -1689,8 +1709,8 @@ xtermLoadFont(XtermWidget xw,
++ 		if ((n != UCS_REPL)
++ 		    && (n != ch)
++ 		    && (screen->fnt_boxes & 2)) {
++-		    if (xtermMissingChar(n, &fnts[fNorm]) ||
++-			xtermMissingChar(n, &fnts[fBold])) {
+++		    if (xtermMissingChar(n, &new_fonts[fNorm]) ||
+++			xtermMissingChar(n, &new_fonts[fBold])) {
++ 			UIntClr(screen->fnt_boxes, 2);
++ 			TRACE(("missing graphics character #%d, U+%04X\n",
++ 			       ch, n));
++@@ -1702,12 +1722,12 @@ xtermLoadFont(XtermWidget xw,
++ #endif
++ 
++ 	for (ch = 1; ch < 32; ch++) {
++-	    if (xtermMissingChar(ch, &fnts[fNorm])) {
+++	    if (xtermMissingChar(ch, &new_fonts[fNorm])) {
++ 		TRACE(("missing normal char #%d\n", ch));
++ 		UIntClr(screen->fnt_boxes, 1);
++ 		break;
++ 	    }
++-	    if (xtermMissingChar(ch, &fnts[fBold])) {
+++	    if (xtermMissingChar(ch, &new_fonts[fBold])) {
++ 		TRACE(("missing bold   char #%d\n", ch));
++ 		UIntClr(screen->fnt_boxes, 1);
++ 		break;
++@@ -1724,8 +1744,8 @@ xtermLoadFont(XtermWidget xw,
++ 	screen->enbolden = screen->bold_mode;
++     } else {
++ 	screen->enbolden = screen->bold_mode
++-	    && ((fnts[fNorm].fs == fnts[fBold].fs)
++-		|| same_font_name(myfonts.f_n, myfonts.f_b));
+++	    && ((new_fonts[fNorm].fs == new_fonts[fBold].fs)
+++		|| same_font_name(new_fnames.f_n, new_fnames.f_b));
++     }
++     TRACE(("Will %suse 1-pixel offset/overstrike to simulate bold\n",
++ 	   screen->enbolden ? "" : "not "));
++@@ -1741,7 +1761,7 @@ xtermLoadFont(XtermWidget xw,
++ 	    update_font_escape();
++ 	}
++ #if OPT_SHIFT_FONTS
++-	screen->menu_font_sizes[fontnum] = FontSize(fnts[fNorm].fs);
+++	screen->menu_font_sizes[fontnum] = FontSize(new_fonts[fNorm].fs);
++ #endif
++     }
++     set_cursor_gcs(xw);
++@@ -1756,20 +1776,21 @@ xtermLoadFont(XtermWidget xw,
++     FREE_FNAME(f_w);
++     FREE_FNAME(f_wb);
++ #endif
++-    if (fnts[fNorm].fn == fnts[fBold].fn) {
++-	free(fnts[fNorm].fn);
+++    if (new_fonts[fNorm].fn == new_fonts[fBold].fn) {
+++	free(new_fonts[fNorm].fn);
++     } else {
++-	free(fnts[fNorm].fn);
++-	free(fnts[fBold].fn);
+++	free(new_fonts[fNorm].fn);
+++	free(new_fonts[fBold].fn);
++     }
++ #if OPT_WIDE_CHARS
++-    free(fnts[fWide].fn);
++-    free(fnts[fWBold].fn);
+++    free(new_fonts[fWide].fn);
+++    free(new_fonts[fWBold].fn);
++ #endif
++     xtermSetWinSize(xw);
++     return 1;
++ 
++   bad:
+++    recovered = False;
++     if (tmpname)
++ 	free(tmpname);
++ 
++@@ -1780,15 +1801,15 @@ xtermLoadFont(XtermWidget xw,
++ 	SetItemSensitivity(fontMenuEntries[fontnum].widget, True);
++ #endif
++ 	Bell(xw, XkbBI_MinorError, 0);
++-	myfonts.f_n = screen->MenuFontName(old_fontnum);
++-	return xtermLoadFont(xw, &myfonts, doresize, old_fontnum);
++-    } else if (x_strcasecmp(myfonts.f_n, DEFFONT)) {
++-	int code;
++-
++-	myfonts.f_n = x_strdup(DEFFONT);
++-	TRACE(("...recovering for TrueType fonts\n"));
++-	code = xtermLoadFont(xw, &myfonts, doresize, fontnum);
++-	if (code) {
+++	new_fnames.f_n = screen->MenuFontName(old_fontnum);
+++	if (xtermLoadFont(xw, &new_fnames, doresize, old_fontnum))
+++	    recovered = True;
+++    } else if (x_strcasecmp(new_fnames.f_n, DEFFONT)
+++	       && x_strcasecmp(new_fnames.f_n, old_fonts[fNorm].fn)) {
+++	new_fnames.f_n = x_strdup(old_fonts[fNorm].fn);
+++	TRACE(("...recovering from failed font-load\n"));
+++	if (xtermLoadFont(xw, &new_fnames, doresize, fontnum)) {
+++	    recovered = True;
++ 	    if (fontnum != fontMenu_fontsel) {
++ 		SetItemSensitivity(fontMenuEntries[fontnum].widget,
++ 				   UsingRenderFont(xw));
++@@ -1797,15 +1818,15 @@ xtermLoadFont(XtermWidget xw,
++ 		   FontHeight(screen),
++ 		   FontWidth(screen)));
++ 	}
++-	return code;
++     }
++ #endif
++-
++-    releaseWindowGCs(xw, win);
++-
++-    xtermCloseFonts(xw, fnts);
++-    TRACE(("Fail Cgs - xtermLoadFont\n"));
++-    return 0;
+++    if (!recovered) {
+++	releaseWindowGCs(xw, win);
+++	xtermCloseFonts(xw, new_fonts);
+++	TRACE(("Fail Cgs - xtermLoadFont\n"));
+++	code = 0;
+++    }
+++    return code;
++ }
++ 
++ #if OPT_WIDE_ATTRS
++@@ -1853,7 +1874,7 @@ xtermLoadItalics(XtermWidget xw)
++ 			} else {
++ 			    xtermOpenFont(xw,
++ 					  getNormalFont(screen, n)->fn,
++-					  data, False);
+++					  data, NULL, False);
++ 			}
++ 		    }
++ 		}
++@@ -4119,6 +4140,8 @@ findXftGlyph(XtermWidget xw, XftFont *given, unsigned wc)
++ 		    }
++ #endif
++ 		    if (foundXftGlyph(xw, check, wc)) {
+++	    (void) added;
+++	    (void) actual;
++ 			markXftOpened(xw, which, n, wc);
++ 			reportXftFonts(xw, check, "fallback", tag, myReport);
++ 			result = check;
++@@ -4317,7 +4340,7 @@ lookupOneFontSize(XtermWidget xw, int fontnum)
++ 
++ 	memset(&fnt, 0, sizeof(fnt));
++ 	screen->menu_font_sizes[fontnum] = -1;
++-	if (xtermOpenFont(xw, screen->MenuFontName(fontnum), &fnt, True)) {
+++	if (xtermOpenFont(xw, screen->MenuFontName(fontnum), &fnt, NULL, True)) {
++ 	    if (fontnum <= fontMenu_lastBuiltin
++ 		|| strcmp(fnt.fn, DEFFONT)) {
++ 		screen->menu_font_sizes[fontnum] = FontSize(fnt.fs);
++@@ -4722,13 +4745,14 @@ HandleSetFont(Widget w GCC_UNUSED,
++     }
++ }
++ 
++-void
+++Bool
++ SetVTFont(XtermWidget xw,
++ 	  int which,
++ 	  Bool doresize,
++ 	  const VTFontNames * fonts)
++ {
++     TScreen *screen = TScreenOf(xw);
+++    Bool result = False;
++ 
++     TRACE(("SetVTFont(which=%d, f_n=%s, f_b=%s)\n", which,
++ 	   (fonts && fonts->f_n) ? fonts->f_n : "<null>",
++@@ -4737,34 +4761,31 @@ SetVTFont(XtermWidget xw,
++     if (IsIcon(screen)) {
++ 	Bell(xw, XkbBI_MinorError, 0);
++     } else if (which >= 0 && which < NMENUFONTS) {
++-	VTFontNames myfonts;
+++	VTFontNames new_fnames;
++ 
++-	memset(&myfonts, 0, sizeof(myfonts));
+++	memset(&new_fnames, 0, sizeof(new_fnames));
++ 	if (fonts != 0)
++-	    myfonts = *fonts;
+++	    new_fnames = *fonts;
++ 
++ 	if (which == fontMenu_fontsel) {	/* go get the selection */
++-	    FindFontSelection(xw, myfonts.f_n, False);
+++	    result = FindFontSelection(xw, new_fnames.f_n, False);
++ 	} else {
++-	    int oldFont = screen->menu_font_number;
++-
++ #define USE_CACHED(field, name) \
++-	    if (myfonts.field == 0) { \
++-		myfonts.field = x_strdup(screen->menu_font_names[which][name]); \
++-		TRACE(("set myfonts." #field " from menu_font_names[%d][" #name "] %s\n", \
++-		       which, NonNull(myfonts.field))); \
+++	    if (new_fnames.field == NULL) { \
+++		new_fnames.field = x_strdup(screen->menu_font_names[which][name]); \
+++		TRACE(("set new_fnames." #field " from menu_font_names[%d][" #name "] %s\n", \
+++		       which, NonNull(new_fnames.field))); \
++ 	    } else { \
++-		TRACE(("set myfonts." #field " reused\n")); \
+++		TRACE(("set new_fnames." #field " reused\n")); \
++ 	    }
++ #define SAVE_FNAME(field, name) \
++-	    if (myfonts.field != 0) { \
++-		if (screen->menu_font_names[which][name] == 0 \
++-		 || strcmp(screen->menu_font_names[which][name], myfonts.field)) { \
++-		    TRACE(("updating menu_font_names[%d][" #name "] to %s\n", \
++-			   which, myfonts.field)); \
++-		    FREE_STRING(screen->menu_font_names[which][name]); \
++-		    screen->menu_font_names[which][name] = x_strdup(myfonts.field); \
++-		} \
+++	    if (new_fnames.field != NULL \
+++		&& (screen->menu_font_names[which][name] == NULL \
+++		 || strcmp(screen->menu_font_names[which][name], new_fnames.field))) { \
+++		TRACE(("updating menu_font_names[%d][" #name "] to \"%s\"\n", \
+++		       which, new_fnames.field)); \
+++		FREE_STRING(screen->menu_font_names[which][name]); \
+++		screen->menu_font_names[which][name] = x_strdup(new_fnames.field); \
++ 	    }
++ 
++ 	    USE_CACHED(f_n, fNorm);
++@@ -4774,7 +4795,7 @@ SetVTFont(XtermWidget xw,
++ 	    USE_CACHED(f_wb, fWBold);
++ #endif
++ 	    if (xtermLoadFont(xw,
++-			      &myfonts,
+++			      &new_fnames,
++ 			      doresize, which)) {
++ 		/*
++ 		 * If successful, save the data so that a subsequent query via
++@@ -4786,10 +4807,8 @@ SetVTFont(XtermWidget xw,
++ 		SAVE_FNAME(f_w, fWide);
++ 		SAVE_FNAME(f_wb, fWBold);
++ #endif
+++		result = True;
++ 	    } else {
++-		(void) xtermLoadFont(xw,
++-				     xtermFontName(screen->MenuFontName(oldFont)),
++-				     doresize, oldFont);
++ 		Bell(xw, XkbBI_MinorError, 0);
++ 	    }
++ 	    FREE_FNAME(f_n);
++@@ -4802,7 +4821,8 @@ SetVTFont(XtermWidget xw,
++     } else {
++ 	Bell(xw, XkbBI_MinorError, 0);
++     }
++-    return;
+++    TRACE(("...SetVTFont: %d\n", result));
+++    return result;
++ }
++ 
++ #if OPT_RENDERFONT
++diff --git a/fontutils.h b/fontutils.h
++index 9d530c5..ceaf44a 100644
++--- a/fontutils.h
+++++ b/fontutils.h
++@@ -37,7 +37,7 @@
++ /* *INDENT-OFF* */
++ 
++ extern Bool xtermLoadDefaultFonts (XtermWidget /* xw */);
++-extern Bool xtermOpenFont (XtermWidget /* xw */, const char */* name */, XTermFonts * /* result */, Bool /* force */);
+++extern Bool xtermOpenFont (XtermWidget /* xw */, const char */* name */, XTermFonts * /* result */, XTermFonts * /* current */, Bool /* force */);
++ extern XTermFonts * getDoubleFont (TScreen * /* screen */, int /* which */);
++ extern XTermFonts * getItalicFont (TScreen * /* screen */, int /* which */);
++ extern XTermFonts * getNormalFont (TScreen * /* screen */, int /* which */);
++@@ -50,7 +50,7 @@ extern int lookupRelativeFontSize (XtermWidget /* xw */, int /* old */, int /* r
++ extern int xtermGetFont (const char * /* param */);
++ extern int xtermLoadFont (XtermWidget /* xw */, const VTFontNames */* fonts */, Bool /* doresize */, int /* fontnum */);
++ extern void HandleSetFont PROTO_XT_ACTIONS_ARGS;
++-extern void SetVTFont (XtermWidget /* xw */, int /* i */, Bool /* doresize */, const VTFontNames */* fonts */);
+++extern Bool SetVTFont (XtermWidget /* xw */, int /* i */, Bool /* doresize */, const VTFontNames */* fonts */);
++ extern void allocFontList (XtermWidget /* xw */, const char * /* name */, XtermFontNames * /* target */, VTFontEnum /* which */, const char * /* source */, Bool /* ttf */);
++ extern void copyFontList (char *** /* targetp */, char ** /* source */);
++ extern void initFontLists (XtermWidget /* xw */);
++diff --git a/misc.c b/misc.c
++index cc323f8..6c5e938 100644
++--- a/misc.c
+++++ b/misc.c
++@@ -3787,9 +3787,9 @@ ChangeFontRequest(XtermWidget xw, String buf)
++ 	    {
++ 		memset(&fonts, 0, sizeof(fonts));
++ 		fonts.f_n = name;
++-		SetVTFont(xw, num, True, &fonts);
++-		if (num == screen->menu_font_number &&
++-		    num != fontMenu_fontescape) {
+++		if (SetVTFont(xw, num, True, &fonts)
+++		    && num == screen->menu_font_number
+++		    && num != fontMenu_fontescape) {
++ 		    screen->EscapeFontName() = x_strdup(name);
++ 		}
++ 	    }
++@@ -6237,7 +6237,6 @@ xtermSetenv(const char *var, const char *value)
++ 
++ 	    found = envindex;
++ 	    environ[found + 1] = NULL;
++-	    environ = environ;
++ 	}
++ 
++ 	environ[found] = TextAlloc(1 + len + strlen(value));
++diff --git a/screen.c b/screen.c
++index 690e3e2..f84254f 100644
++--- a/screen.c
+++++ b/screen.c
++@@ -1497,7 +1497,7 @@ ScrnRefresh(XtermWidget xw,
++ 	   screen->topline, toprow, leftcol,
++ 	   nrows, ncols,
++ 	   force ? " force" : ""));
++-
+++    (void) recurse;
++     ++recurse;
++ 
++     if (screen->cursorp.col >= leftcol
++diff --git a/xterm.h b/xterm.h
++index ec70e43..aa71f96 100644
++--- a/xterm.h
+++++ b/xterm.h
++@@ -967,7 +967,7 @@ extern Bool CheckBufPtrs (TScreen * /* screen */);
++ extern Bool set_cursor_gcs (XtermWidget /* xw */);
++ extern char * vt100ResourceToString (XtermWidget /* xw */, const char * /* name */);
++ extern int VTInit (XtermWidget /* xw */);
++-extern void FindFontSelection (XtermWidget /* xw */, const char * /* atom_name */, Bool  /* justprobe */);
+++extern Bool FindFontSelection (XtermWidget /* xw */, const char * /* atom_name */, Bool  /* justprobe */);
++ extern void HideCursor (void);
++ extern void RestartBlinking(XtermWidget /* xw */);
++ extern void ShowCursor (void);
++diff --git a/xterm.log.html b/xterm.log.html
++index 47d590b..e27dc31 100644
++--- a/xterm.log.html
+++++ b/xterm.log.html
++@@ -991,6 +991,12 @@
++   2020/02/01</a></h1>
++ 
++   <ul>
+++    <li>improve error-recovery when setting a bitmap font for the
+++    VT100 window, e.g., in case <em>OSC&nbsp;50</em> failed,
+++    restoring the most recent valid font so that a subsequent
+++    <em>OSC&nbsp;50</em> reports this correctly (report by David
+++    Leadbeater).</li>
+++
++     <li>amend change in <a href="#xterm_352">patch #352</a> for
++     button-events to fix a case where some followup events were not
++     processed soon enough (report/patch by Jimmy Aguilar
++-- 
++2.24.4
++
+diff --git a/meta-oe/recipes-graphics/xorg-app/xterm_353.bb b/meta-oe/recipes-graphics/xorg-app/xterm_353.bb
+index 1862b250e..4e2b0c9d5 100644
+--- a/meta-oe/recipes-graphics/xorg-app/xterm_353.bb
++++ b/meta-oe/recipes-graphics/xorg-app/xterm_353.bb
+@@ -8,6 +8,7 @@ SRC_URI = "http://invisible-mirror.net/archives/${BPN}/${BP}.tgz \
+            file://0001-Add-configure-time-check-for-setsid.patch \
+            file://CVE-2021-27135.patch \
+            file://CVE-2022-24130.patch \
++           file://CVE-2022-45063.patch \
+           "
+ SRC_URI[md5sum] = "247c30ebfa44623f3a2d100e0cae5c7f"
+ SRC_URI[sha256sum] = "e521d3ee9def61f5d5c911afc74dd5c3a56ce147c7071c74023ea24cac9bb768"
 -- 
 2.25.1
 
