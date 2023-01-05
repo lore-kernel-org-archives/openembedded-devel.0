@@ -2,40 +2,42 @@ Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A3BEBC3DA7A
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A28ADC53210
 	for <webhook@archiver.kernel.org>; Thu,  5 Jan 2023 10:27:30 +0000 (UTC)
 Received: from voyager.superhosting.bg (voyager.superhosting.bg [79.124.30.14])
- by mx.groups.io with SMTP id smtpd.web11.9802.1672914441610942839
+ by mx.groups.io with SMTP id smtpd.web11.9803.1672914446346167856
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 05 Jan 2023 02:27:22 -0800
+ Thu, 05 Jan 2023 02:27:26 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@anavi.org header.s=default header.b=XZO4tf/1;
+ dkim=pass header.i=@anavi.org header.s=default header.b=avyzJtdF;
  spf=softfail (domain: konsulko.com, ip: 79.124.30.14, mailfrom: leon.anavi@konsulko.com)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=anavi.org;
-	s=default; h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:
-	Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:Content-Description:
-	Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
-	In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+	s=default; h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:
+	Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+	:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
 	List-Post:List-Owner:List-Archive;
-	bh=sMh1jdeZCsrpbF4HUoZ1un6qkdiOkdLfOhg27yFjQms=; b=XZO4tf/1ednOdlETWyhQqfeH2C
-	Yoxi6lAzxacSseb88OEVBpQ5THqfnWuq2JJmrFDcKETxjblFUX1Plx0yvq8FlHDCleVFOdhiFb5Xp
-	QKUaDZEmmOpnCzasfGwIdd0ngBz5+QRnYm9vamtunocU5AzE2I3OFqlwLnH9ljhDu4VZdE+Jmm7vF
-	89yodfWs4QsYBrsLV9cD9PR0yr6rHnzWk16gjWyTBg8WiCluHvHEIHNqthz6ktGkyCKwJXgheoU1g
-	odQJ4/HSMV/0wSIaLxn20gn8orF5/k3ZDnzzyFuoBe+VJS0xwymkNRKkDQSwyVW4R037lT77axPqg
-	6l6f0TIg==;
+	bh=1WBQN+9vTow2vDSy3sEItzkmYn56Ox0R5DtQL+JCqu0=; b=avyzJtdFqU1aqnGbne9P1NChxi
+	EveU3tw6KsKcSV/yudwi3WESku/WZi8XbYNJCX0uTWWpTm+QNSRxBGyC2A7+0gfT1RX34mKQ7toJa
+	4o4eUIyCJ4ftjr5G+OYDQbMD9RPWkkB7mxVbsIZx7bTS15C+IKjH2dY58kJEmdO0yooZ/oya+hIxk
+	VF+poQud12a06Pvr+ZPifK6kc4+oHn4/1jULapP+phLdyTUs1m7FHBQazSASWmfUiraOqWMt0b2GG
+	+FdK0o6MpBueNcRF5yQr3VA6sMrrLJODdS4ba/rWzHCPtwET0pDimer5zjNpANbDJ+IDyybFxWOs7
+	4nuWIv3g==;
 Received: from lan.nucleusys.com ([92.247.61.126]:57110 helo=tone.k.g)
 	by voyager.superhosting.bg with esmtpsa  (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
 	(Exim 4.95)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1pDNTi-000BqI-Dj;
-	Thu, 05 Jan 2023 12:27:18 +0200
+	id 1pDNTo-000BqI-J0;
+	Thu, 05 Jan 2023 12:27:24 +0200
 From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 1/3] python3-termcolor: Upgrade 2.1.1 -> 2.2.0
-Date: Thu,  5 Jan 2023 12:27:08 +0200
-Message-Id: <20230105102710.166099-1-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 3/3] python3-cantools: Upgrade 37.2.0 -> 38.0.0
+Date: Thu,  5 Jan 2023 12:27:10 +0200
+Message-Id: <20230105102710.166099-3-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.30.2
+In-Reply-To: <20230105102710.166099-1-leon.anavi@konsulko.com>
+References: <20230105102710.166099-1-leon.anavi@konsulko.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
@@ -52,34 +54,47 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 05 Jan 2023 10:27:30 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100410
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100412
 
-Upgrade to release 2.2.0:
+Upgrade to release 38.0.0:
 
-- Add light shades, dark grey and black
+- Major bump due to minimum required Python version being raised
+  to 3.8
+- do no longer use the ncurses module in the dump subparser
+- Fix 'Assertation' NameError typo in test_database
+- Add missing crccheck dependency to setup.py
+- Bugfix in handling more than one node mapped attribute per signal
+- A few bug fixes
+- Typing improvements
+- Use tox
+- Fix CI
+- Ensure that only Decimal types are stored in the Signal.decimal
+  attribute
+- cantools library import lib from a relative path (unified)
+- Test on python 3.11, build docs again
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../{python3-termcolor_2.1.1.bb => python3-termcolor_2.2.0.bb}  | 2 +-
+ .../{python3-cantools_37.2.0.bb => python3-cantools_38.0.0.bb}  | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-termcolor_2.1.1.bb => python3-termcolor_2.2.0.bb} (81%)
+ rename meta-python/recipes-devtools/python/{python3-cantools_37.2.0.bb => python3-cantools_38.0.0.bb} (84%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-termcolor_2.1.1.bb b/meta-python/recipes-devtools/python/python3-termcolor_2.2.0.bb
-similarity index 81%
-rename from meta-python/recipes-devtools/python/python3-termcolor_2.1.1.bb
-rename to meta-python/recipes-devtools/python/python3-termcolor_2.2.0.bb
-index 4f48f5e5c..05c39c2c5 100644
---- a/meta-python/recipes-devtools/python/python3-termcolor_2.1.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-termcolor_2.2.0.bb
-@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING.txt;md5=e5f5f7c9b280511f124dba5dda3d180e"
+diff --git a/meta-python/recipes-devtools/python/python3-cantools_37.2.0.bb b/meta-python/recipes-devtools/python/python3-cantools_38.0.0.bb
+similarity index 84%
+rename from meta-python/recipes-devtools/python/python3-cantools_37.2.0.bb
+rename to meta-python/recipes-devtools/python/python3-cantools_38.0.0.bb
+index 7d159340c..96e193d4f 100644
+--- a/meta-python/recipes-devtools/python/python3-cantools_37.2.0.bb
++++ b/meta-python/recipes-devtools/python/python3-cantools_38.0.0.bb
+@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/eerimoq/cantools"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=d9aa4ec07de78abae21c490c9ffe61bd"
  
- inherit pypi python_setuptools_build_meta
+-SRC_URI[sha256sum] = "bbb0e802af02a1dc792c32d10b61b51deaefc1c8e9c776b50d2d2e194b702fac"
++SRC_URI[sha256sum] = "b7d5465aba357ce4c103a7d38c9e01a6f12d8265090b4147b3cc1fa4c3adb993"
  
--SRC_URI[sha256sum] = "67cee2009adc6449c650f6bcf3bdeed00c8ba53a8cda5362733c53e0a39fb70b"
-+SRC_URI[sha256sum] = "dfc8ac3f350788f23b2947b3e6cfa5a53b630b612e6cd8965a015a776020b99a"
+ PYPI_PACKAGE = "cantools"
  
- DEPENDS += " \
- 	${PYTHON_PN}-toml-native \
 -- 
 2.30.2
 
