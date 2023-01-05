@@ -1,113 +1,92 @@
-Return-Path: <alex.kanavin@gmail.com>
+Return-Path: <alex.kiernan@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4371EC3DA7A
-	for <webhook@archiver.kernel.org>; Thu,  5 Jan 2023 15:43:42 +0000 (UTC)
-Received: from mail-lf1-f43.google.com (mail-lf1-f43.google.com [209.85.167.43])
- by mx.groups.io with SMTP id smtpd.web10.16033.1672933415740800209
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B3225C3DA7A
+	for <webhook@archiver.kernel.org>; Thu,  5 Jan 2023 17:09:42 +0000 (UTC)
+Received: from mail-wr1-f41.google.com (mail-wr1-f41.google.com [209.85.221.41])
+ by mx.groups.io with SMTP id smtpd.web10.18548.1672938580516246298
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 05 Jan 2023 07:43:36 -0800
+ Thu, 05 Jan 2023 09:09:40 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=Ul9DHaEO;
- spf=pass (domain: gmail.com, ip: 209.85.167.43, mailfrom: alex.kanavin@gmail.com)
-Received: by mail-lf1-f43.google.com with SMTP id z26so55547206lfu.8
-        for <openembedded-devel@lists.openembedded.org>; Thu, 05 Jan 2023 07:43:35 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=Rz8wtDLX;
+ spf=pass (domain: gmail.com, ip: 209.85.221.41, mailfrom: alex.kiernan@gmail.com)
+Received: by mail-wr1-f41.google.com with SMTP id h16so36724808wrz.12
+        for <openembedded-devel@lists.openembedded.org>; Thu, 05 Jan 2023 09:09:40 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=LyoaFiYkWlgUB0PsPkIkY6WKQpaKG/OqlihiA5fqgIU=;
-        b=Ul9DHaEO76Cd6zgIQxOQS5ztarN3Wgc1jc9raOCbbegTKTXpFRKt2PWQy2QZrRd+oG
-         wxPb8En/d1ooD2Sv2VeFTs2Lrngb/P33bDDD1qEkysBlJQRYkpGuksuNO9Z1Feuc4bWt
-         m9XbeEn5AkgnwJ+/iEUxPSeUNzj68rxxsUb+R/KDeTe6MBOo+u00l65pmJgci1HT3DK6
-         N7rRenO1JUMxUp6MlsQhnuFLsMX9i5VGMCYknRGXHNJ67PhYND+y/rexnL5P4Rk9QOEi
-         vFu9Xn/Hgt8XuVUT1ap8MqRULOo9kekKmX/uV6FarOSC6NosrbWRtIt2n3zRH5xXT96K
-         mFfg==
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=AqBEpX+IFwqtrbme4QfvGEYwkUdq96qMvGXFkQcg/tk=;
+        b=Rz8wtDLX4O36iTBGK5+FFi4Ef8q58MhDYAlLROsgRHgl5D7qkAQYc5cS5zxq3vCPXt
+         vrQFOxa3f63kAHKqtp4KS2k8TdaoOKFpdJ6oDVCU4ZvcQdAtOCFUMzAXohn0MHLtSO7x
+         PmQPOa+gJgTSya5+QmZYIOwVpj1hbS99YU3KAMdDgs4ogI2Il32jLr2DrVMreqfb4rGr
+         bbNGgunto3Rcl+YPtoWITfLPx0dU7j3+ZN3j98RpWh6CIrZzyAlN8Pn4Z1wTx/7pI+G3
+         Z4DW7HDzwU09IHEjmy4/EuEOnIiT3BFUWsLTe3IbTJ9FEPNhli2kWBras70EfuJA+ZJb
+         MvUQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=LyoaFiYkWlgUB0PsPkIkY6WKQpaKG/OqlihiA5fqgIU=;
-        b=0s0ztbe5ZzhifBH2AKnfn+8jiqeoc7fJQRa3jYxtLeBND+MBPmUgmfARzfFQvY4LJ9
-         OVz0B/dMA9XD2JRWm3NOBLRncMxOOC5F439OSk4Lg5NUSEs8V/+9MBwT/me920bbBCT3
-         nwhCW+utrQ+RS0ga7ZRwVj/049IPu6PGatg0x492L3UEpXdQHCW0e+3UEhZabYMuBWNJ
-         K8g28YFWcwXG3x4WILEnQd1mm0csHeDndUdbQLtLubnaaZrgV4YoyZWTiPV73cqZX08Z
-         S3cvUNPG99ICUf1LvZ9F8I1bwZJiTNnNtWSdx/gjxGUuAtycwauAIwD0FZRkxlsqe8/v
-         +x9g==
-X-Gm-Message-State: AFqh2kpnE1DpvONnM1MB3czyDDEQagA4XVpWTfPMtfuIRDeAS4uIze5b
-	CdHTrJVe/e+4LAZSl6mZG5P0dER9UW9uuWY/yi8=
-X-Google-Smtp-Source: AMrXdXvRIC9jpZlAn9LIoylZ2M93b/grHWlCS/6cT0+8mCSLqTD9RVh6K49/edTBiCVuwIjdRQJlPRB3LWQW/pQQZo4=
-X-Received: by 2002:a05:6512:261f:b0:4ca:fd2a:d984 with SMTP id
- bt31-20020a056512261f00b004cafd2ad984mr1799146lfb.445.1672933413696; Thu, 05
- Jan 2023 07:43:33 -0800 (PST)
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=AqBEpX+IFwqtrbme4QfvGEYwkUdq96qMvGXFkQcg/tk=;
+        b=AeQOUpjaHlrQq3Zm1ah9OhbeM+LtPdkvWZI8Fe5xxe1fd5BuklrRtENH6QrPKQozrA
+         NEU2+9gsS95591bM6FTrgr9E/r0UrHIbQMwwFeUZkV3FOYb2HdqDLwtR5X4G8Zy53Jqw
+         /ODrgkn2Af9T1Z16kXnjREb+fG1G3unm5DaRRHSYgTehYIxc56PAXxCFtZvhKmeC4lfY
+         3K6rctd7E8Qj06r2QIGfe2i0tAuypysHSzebIlAmT+ugmffXQnPXG8YFaLzUoeQakNgg
+         8f8zd8q0ZUFyFX4xrenHUSNo/W+61ElRD34lFTIOn7jMnbZgQxcuPuPvREE7AIGuKQfg
+         E5Iw==
+X-Gm-Message-State: AFqh2krSkvhjPKuCz3HUqRRRjDFqByA+6v4w2ggKww67FPY0omhrOKKE
+	kJn8jtMUF4KHHK9GjDE/d7/J+xYCUbc=
+X-Google-Smtp-Source: AMrXdXsT8f/Ij5bNZzJwuhSPT3SowxjT/o4+caMDI/d6CqIdi0pCegDjGDBqzWhwY52q+17cmMz/UQ==
+X-Received: by 2002:adf:e449:0:b0:27c:fdb:cfef with SMTP id t9-20020adfe449000000b0027c0fdbcfefmr22683043wrm.49.1672938578500;
+        Thu, 05 Jan 2023 09:09:38 -0800 (PST)
+Received: from localhost.localdomain (cust246-dsl91-135-6.idnet.net. [91.135.6.246])
+        by smtp.gmail.com with ESMTPSA id e27-20020adf9bdb000000b00272c0767b4asm37090980wrc.109.2023.01.05.09.09.37
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 05 Jan 2023 09:09:38 -0800 (PST)
+From: Alex Kiernan <alex.kiernan@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Alex Kiernan <alex.kiernan@gmail.com>
+Subject: [meta-oe][PATCH 2/2] usbguard: Upgrade 1.1.1 -> 1.1.2
+Date: Thu,  5 Jan 2023 17:09:29 +0000
+Message-Id: <20230105170929.12088-2-alex.kiernan@gmail.com>
+X-Mailer: git-send-email 2.39.0
+In-Reply-To: <20230105170929.12088-1-alex.kiernan@gmail.com>
+References: <20230105170929.12088-1-alex.kiernan@gmail.com>
 MIME-Version: 1.0
-References: <20230105153531.932402-1-f_l_k@t-online.de>
-In-Reply-To: <20230105153531.932402-1-f_l_k@t-online.de>
-From: Alexander Kanavin <alex.kanavin@gmail.com>
-Date: Thu, 5 Jan 2023 16:43:22 +0100
-Message-ID: <CANNYZj97X95U7uaWAa4v9k3aVGSbYz=0WLU79_U7GiU3BcGCWw@mail.gmail.com>
-Subject: Re: [oe] [meta-gnome][PATCH] gnome:terminal add missing inherit meson
-To: Markus Volk <f_l_k@t-online.de>
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 05 Jan 2023 15:43:42 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100417
+ <openembedded-devel@lists.openembedded.org>; Thu, 05 Jan 2023 17:09:42 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100419
 
-Presence of '  GNOMEBASEBUILDCLASS = "meson"' indicates that the
-recipe should be inheriting gnomebase class rather. Did it get
-erroneously dropped at some point?
+Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
+---
 
-Alex
+ .../usbguard/{usbguard_1.1.1.bb => usbguard_1.1.2.bb}           | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-security/usbguard/{usbguard_1.1.1.bb => usbguard_1.1.2.bb} (97%)
 
-On Thu, 5 Jan 2023 at 16:36, Markus Volk <f_l_k@t-online.de> wrote:
->
-> When testing Gnome recipes at runtime, I noticed that inherit meson was missing
-> and gnome-terminal was not compiled. Fix this
->
-> Signed-off-by: Markus Volk <f_l_k@t-online.de>
-> ---
->  .../recipes-gnome/gnome-terminal/gnome-terminal_3.46.7.bb   | 6 +++---
->  1 file changed, 3 insertions(+), 3 deletions(-)
->
-> diff --git a/meta-gnome/recipes-gnome/gnome-terminal/gnome-terminal_3.46.7.bb b/meta-gnome/recipes-gnome/gnome-terminal/gnome-terminal_3.46.7.bb
-> index 69af11c91..d9afeec46 100644
-> --- a/meta-gnome/recipes-gnome/gnome-terminal/gnome-terminal_3.46.7.bb
-> +++ b/meta-gnome/recipes-gnome/gnome-terminal/gnome-terminal_3.46.7.bb
-> @@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = " \
->
->  GNOMEBASEBUILDCLASS = "meson"
->
-> -inherit gsettings gnome-help gettext itstool upstream-version-is-even
-> +inherit pkgconfig meson gsettings gnome-help gettext itstool upstream-version-is-even
->
->  DEPENDS = " \
->      glib-2.0 \
-> @@ -30,8 +30,8 @@ PACKAGECONFIG[nautilus] = "-Dnautilus_extension=true,-Dnautilus_extension=false,
->  PACKAGECONFIG[search_provider] = "-Dsearch_provider=true,-Dsearch_provider=false,,gnome-shell"
->
->  FILES:${PN} += " \
-> -    ${datadir}/metainfo \
-> -    ${datadir}/dbus-1 \
-> +    ${datadir} \
-> +    ${libdir}/nautilus/extensions-4 \
->      ${systemd_user_unitdir} \
->  "
->
-> --
-> 2.34.1
->
->
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#100416): https://lists.openembedded.org/g/openembedded-devel/message/100416
-> Mute This Topic: https://lists.openembedded.org/mt/96074078/1686489
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [alex.kanavin@gmail.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
->
+diff --git a/meta-oe/recipes-security/usbguard/usbguard_1.1.1.bb b/meta-oe/recipes-security/usbguard/usbguard_1.1.2.bb
+similarity index 97%
+rename from meta-oe/recipes-security/usbguard/usbguard_1.1.1.bb
+rename to meta-oe/recipes-security/usbguard/usbguard_1.1.2.bb
+index 2e0934931de2..e1e087a6d01e 100644
+--- a/meta-oe/recipes-security/usbguard/usbguard_1.1.1.bb
++++ b/meta-oe/recipes-security/usbguard/usbguard_1.1.2.bb
+@@ -14,7 +14,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+ SRC_URI = "https://github.com/USBGuard/usbguard/releases/download/${BPN}-${PV}/${BPN}-${PV}.tar.gz \
+     file://0001-Add-and-use-pkgconfig-instead-of-libgcrypt-config.patch"
+ 
+-SRC_URI[sha256sum] = "460ebfb4ffc5609739a202a3a1d9fda1c30de033b634845b8baa136352bfb432"
++SRC_URI[sha256sum] = "dcf5c90f3f93030e04df1baeb8d388b678c40dd48b135ea12a7be7dee8944934"
+ 
+ inherit autotools-brokensep bash-completion pkgconfig systemd github-releases
+ 
+-- 
+2.39.0
+
 
