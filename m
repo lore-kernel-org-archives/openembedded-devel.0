@@ -1,102 +1,86 @@
-Return-Path: <wangmy@fujitsu.com>
+Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 146D5C3DA7A
-	for <webhook@archiver.kernel.org>; Thu,  5 Jan 2023 08:05:00 +0000 (UTC)
-Received: from mail1.bemta37.messagelabs.com (mail1.bemta37.messagelabs.com [85.158.142.113])
- by mx.groups.io with SMTP id smtpd.web11.8235.1672905898083975629
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A3BEBC3DA7A
+	for <webhook@archiver.kernel.org>; Thu,  5 Jan 2023 10:27:30 +0000 (UTC)
+Received: from voyager.superhosting.bg (voyager.superhosting.bg [79.124.30.14])
+ by mx.groups.io with SMTP id smtpd.web11.9802.1672914441610942839
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 05 Jan 2023 00:04:58 -0800
+ Thu, 05 Jan 2023 02:27:22 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=Aph2JAVc;
- spf=pass (domain: fujitsu.com, ip: 85.158.142.113, mailfrom: wangmy@fujitsu.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1672905896; i=@fujitsu.com;
-	bh=fDwuFdA5FXw/iboohsXrw7AcSk73FWzuStWSWxBi9YI=;
-	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=Aph2JAVceDiJXipqo8mD3W51AcygpydwhqBpqv3qrHdy+IuYEMKZCdAKSAsJG8EGu
-	 lx7by7aWVW+xrHa4uigJav8SjNkvZE/OcPoP2p4AV0u0/ID0vYx53BDHvanswXRHYD
-	 sGoW+u+h82sCmpUwLLH23/W5DSxnc8XZ0wmksKdnNMvPOdPkd3NouG4WYGKLZbF6uc
-	 3iAG4Q3rWFJZwpd2c7210LNWoWX7/3bV2kxr67z4ywt1cJzZp6EBwNOGH1xJiIravp
-	 3XZ7v+MCeD0E48meikMclcBOwwntEA4pELA748pqmrKUKlxWNkCt4o0RwU1dCZWtGm
-	 6a9iKVx7EALhg==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrPIsWRWlGSWpSXmKPExsViZ8OxWXd5y7Z
-  kg6c9shYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8bE1TfZCqawV7x/6NXAeJqti5GLQ0jgIaPE
-  6dunGbsYOYGcK0wS3StZIBK7GSX+n3zBDJJgE5CSuHH/PxuILSKgL7F09h6wOLOAisSL3z3sI
-  LawQJzEvV2/weIsAqoSr16cZwKxeQUcJXo614PZEgIKElMevmeGiAtKnJz5hAVijoTEwRcQuy
-  QEFCVmX25mgbArJGbNaoPqVZO4em4T8wRG/llI2mchaV/AyLSK0aw4tagstUjXQi+pKDM9oyQ
-  3MTNHL7FKN1EvtVQ3L7+oJEPXUC+xvFgvtbhYr7gyNzknRS8vtWQTIzAUU4pT3HcwHl/2R+8Q
-  oyQHk5Ior4/L1mQhvqT8lMqMxOKM+KLSnNTiQ4wyHBxKEryuTduShQSLUtNTK9Iyc4BxAZOW4
-  OBREuE9nQ+U5i0uSMwtzkyHSJ1iNOa4u3DvXmaOq1eu7GUWYsnLz0uVEuctAJkkAFKaUZoHNw
-  gWr5cYZaWEeRkZGBiEeApSi3IzS1DlXzGKczAqCfO+AJnCk5lXArfvFdApTECnhCzcCnJKSSJ
-  CSqqByfl1ygLe4xoLzt0rluUtcJqavGnrJsviEh6JLfdtazbYfBE9/kDquafF9uX8a9eKL9L6
-  uVvRVGbd+aQvy/3dLPtjTK79/ShQ/2yxZjonY2j0Q23fydKzW1bfvtq7eO7977dUFO4t2bmU+
-  f/jOHHtI7UiwUdecfybunl9z3UPv//2BsKXG7w1H3G08RhMeeDsU3D2rHSIefLn/n2qy15cjp
-  /NuULxFZND7fnNgvunqE6OfS3KYvlcaFJ4u0eTlG79mf0P4kPdbq3m6zDLXf9ogclCnvNfdP7
-  25dz8e+Kvkca824d+8zqf2/a70C9U7aRIVvtxkYxp5+tdWwNCOW/sulekyh20R5dXSjnx5G1/
-  XyWW4oxEQy3mouJEAFlGojhSAwAA
-X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-7.tower-732.messagelabs.com!1672905895!65709!1
-X-Originating-IP: [62.60.8.179]
-X-SYMC-ESS-Client-Auth: outbound-route-from=pass
-X-StarScan-Received: 
-X-StarScan-Version: 9.101.2; banners=-,-,-
-X-VirusChecked: Checked
-Received: (qmail 4276 invoked from network); 5 Jan 2023 08:04:55 -0000
-Received: from unknown (HELO n03ukasimr04.n03.fujitsu.local) (62.60.8.179)
-  by server-7.tower-732.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 5 Jan 2023 08:04:55 -0000
-Received: from n03ukasimr04.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTP id E9AB7153
-	for <openembedded-devel@lists.openembedded.org>; Thu,  5 Jan 2023 08:04:54 +0000 (GMT)
-Received: from R01UKEXCASM126.r01.fujitsu.local (R01UKEXCASM126 [10.183.43.178])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTPS id DD1F1151
-	for <openembedded-devel@lists.openembedded.org>; Thu,  5 Jan 2023 08:04:54 +0000 (GMT)
-Received: from localhost.localdomain (10.167.225.33) by
- R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.42; Thu, 5 Jan 2023 08:04:53 +0000
-From: <wangmy@fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-oe] dnf-plugins/rpm.py: Fix grammar when RPM_PREFER_ELF_ARCH doesn't exit.
-Date: Sat, 31 Dec 2022 17:21:24 +0800
-Message-ID: <1672478484-3244-1-git-send-email-wangmy@fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
+ dkim=pass header.i=@anavi.org header.s=default header.b=XZO4tf/1;
+ spf=softfail (domain: konsulko.com, ip: 79.124.30.14, mailfrom: leon.anavi@konsulko.com)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=anavi.org;
+	s=default; h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:
+	Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:Content-Description:
+	Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
+	In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+	List-Post:List-Owner:List-Archive;
+	bh=sMh1jdeZCsrpbF4HUoZ1un6qkdiOkdLfOhg27yFjQms=; b=XZO4tf/1ednOdlETWyhQqfeH2C
+	Yoxi6lAzxacSseb88OEVBpQ5THqfnWuq2JJmrFDcKETxjblFUX1Plx0yvq8FlHDCleVFOdhiFb5Xp
+	QKUaDZEmmOpnCzasfGwIdd0ngBz5+QRnYm9vamtunocU5AzE2I3OFqlwLnH9ljhDu4VZdE+Jmm7vF
+	89yodfWs4QsYBrsLV9cD9PR0yr6rHnzWk16gjWyTBg8WiCluHvHEIHNqthz6ktGkyCKwJXgheoU1g
+	odQJ4/HSMV/0wSIaLxn20gn8orF5/k3ZDnzzyFuoBe+VJS0xwymkNRKkDQSwyVW4R037lT77axPqg
+	6l6f0TIg==;
+Received: from lan.nucleusys.com ([92.247.61.126]:57110 helo=tone.k.g)
+	by voyager.superhosting.bg with esmtpsa  (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
+	(Exim 4.95)
+	(envelope-from <leon.anavi@konsulko.com>)
+	id 1pDNTi-000BqI-Dj;
+	Thu, 05 Jan 2023 12:27:18 +0200
+From: Leon Anavi <leon.anavi@konsulko.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 1/3] python3-termcolor: Upgrade 2.1.1 -> 2.2.0
+Date: Thu,  5 Jan 2023 12:27:08 +0200
+Message-Id: <20230105102710.166099-1-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.30.2
 MIME-Version: 1.0
-Content-Type: text/plain
-X-Originating-IP: [10.167.225.33]
-X-ClientProxiedBy: G08CNEXCHPEKD07.g08.fujitsu.local (10.167.33.80) To
- R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
-X-Virus-Scanned: ClamAV using ClamSMTP
+Content-Transfer-Encoding: 8bit
+X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
+X-AntiAbuse: Primary Hostname - voyager.superhosting.bg
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - konsulko.com
+X-Get-Message-Sender-Via: voyager.superhosting.bg: authenticated_id: leon@anavi.org
+X-Authenticated-Sender: voyager.superhosting.bg: leon@anavi.org
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 05 Jan 2023 08:05:00 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100409
+ <openembedded-devel@lists.openembedded.org>; Thu, 05 Jan 2023 10:27:30 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100410
 
-From: Wang Mingyu <wangmy@fujitsu.com>
+Upgrade to release 2.2.0:
 
-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+- Add light shades, dark grey and black
+
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- meta-oe/recipes-devtools/dnf-plugin-tui/dnf-plugin-tui_git.bb | 2 +-
+ .../{python3-termcolor_2.1.1.bb => python3-termcolor_2.2.0.bb}  | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-termcolor_2.1.1.bb => python3-termcolor_2.2.0.bb} (81%)
 
-diff --git a/meta-oe/recipes-devtools/dnf-plugin-tui/dnf-plugin-tui_git.bb b/meta-oe/recipes-devtools/dnf-plugin-tui/dnf-plugin-tui_git.bb
-index 9f961882a..ca2b20108 100644
---- a/meta-oe/recipes-devtools/dnf-plugin-tui/dnf-plugin-tui_git.bb
-+++ b/meta-oe/recipes-devtools/dnf-plugin-tui/dnf-plugin-tui_git.bb
-@@ -4,7 +4,7 @@ LICENSE = "GPL-2.0-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+diff --git a/meta-python/recipes-devtools/python/python3-termcolor_2.1.1.bb b/meta-python/recipes-devtools/python/python3-termcolor_2.2.0.bb
+similarity index 81%
+rename from meta-python/recipes-devtools/python/python3-termcolor_2.1.1.bb
+rename to meta-python/recipes-devtools/python/python3-termcolor_2.2.0.bb
+index 4f48f5e5c..05c39c2c5 100644
+--- a/meta-python/recipes-devtools/python/python3-termcolor_2.1.1.bb
++++ b/meta-python/recipes-devtools/python/python3-termcolor_2.2.0.bb
+@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING.txt;md5=e5f5f7c9b280511f124dba5dda3d180e"
  
- SRC_URI = "git://github.com/ubinux/dnf-plugin-tui.git;branch=master;protocol=https"
--SRCREV = "b0d80b7129f1d84cc563a4098d869e7420bcf4bc"
-+SRCREV = "8d21f52577aa03958732a5a346a678c699e98cb6"
- PV = "1.3"
+ inherit pypi python_setuptools_build_meta
  
- SRC_URI:append:class-target = " file://oe-remote.repo.sample"
+-SRC_URI[sha256sum] = "67cee2009adc6449c650f6bcf3bdeed00c8ba53a8cda5362733c53e0a39fb70b"
++SRC_URI[sha256sum] = "dfc8ac3f350788f23b2947b3e6cfa5a53b630b612e6cd8965a015a776020b99a"
+ 
+ DEPENDS += " \
+ 	${PYTHON_PN}-toml-native \
 -- 
-2.25.1
+2.30.2
 
 
