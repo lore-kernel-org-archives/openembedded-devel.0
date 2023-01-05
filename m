@@ -1,383 +1,140 @@
-Return-Path: <quaresma.jose@gmail.com>
+Return-Path: <ceggers@arri.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2C57AC3DA7A
-	for <webhook@archiver.kernel.org>; Thu,  5 Jan 2023 12:01:41 +0000 (UTC)
-Received: from mail-wr1-f49.google.com (mail-wr1-f49.google.com [209.85.221.49])
- by mx.groups.io with SMTP id smtpd.web11.11109.1672920099359137605
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7EC53C3DA7D
+	for <webhook@archiver.kernel.org>; Thu,  5 Jan 2023 13:11:51 +0000 (UTC)
+Received: from EUR05-DB8-obe.outbound.protection.outlook.com (EUR05-DB8-obe.outbound.protection.outlook.com [40.107.20.137])
+ by mx.groups.io with SMTP id smtpd.web10.12337.1672924304603724495
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 05 Jan 2023 04:01:39 -0800
+ Thu, 05 Jan 2023 05:11:44 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=FD2Cbk8j;
- spf=pass (domain: gmail.com, ip: 209.85.221.49, mailfrom: quaresma.jose@gmail.com)
-Received: by mail-wr1-f49.google.com with SMTP id bn26so16415392wrb.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 05 Jan 2023 04:01:39 -0800 (PST)
+ dkim=fail reason="body hash did not verify" header.i=@arrigroup.onmicrosoft.com header.s=selector1-arrigroup-onmicrosoft-com header.b=rulqwGas;
+ spf=pass (domain: arri.de, ip: 40.107.20.137, mailfrom: ceggers@arri.de)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=K/JtYocx59HdShrjNVIFJP2YFTeLXzMyM5iXw/zMeBiesFfvKn0kKqB2KRi5eVkoW/BJAbmmNtCQfOZtIUtI1LAEq8nDNlIA+XR/+YH5tq169AVN1b6ELFGA9I3FbYhTkYiBy6s2viBEpr0vPh4UswR1tmbD7TwsuGFQBYyhJywYRTdMB5zNjS0hOG106ERTTlTadxuCDV0/qr527C72WfV7/0FqFZb/cwLIU//1S0uK2TpSbsot/Am37rcYuGh+lBhJvYjXEunCRKQp326YMzwsk4rBEB4P1qHbcug3KuYOdmljFwJTInhepSy5CJwHSZhDq0CXfAxzOT/zD2Q0jw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=O6+MvOtJX/6ikMGZgoH//7FNB8TOEd/zxR9AzZAXkjM=;
+ b=RVVwiMS8anKZbGKc40B1rUsLwCIs+/H9ZLdraemBk7gfk653dQu0FUFG4xc95On0zI4kS/8KI15D46M47oaB/52pUqQBpikkfnMnbFPp1ILsFRJSH6knttGsvRKsa4eBGiz5NJSPzNffNsshd+uIQ9sQbIrk3j+05flEifJ78GGAx6nI7T4YpkQiANM3HWC2zHyMctvVkdUD1IdwY8a6+7sQAih1gSRXDjGLi6LZ8hiitL4bvGnnwB1rK0lTFfaAy0SdBnE9U7bl+yH87UIcsBiD7+v6238lWV8I1qz/oO7+GlTkM18Vi6A6Ph3Tc8wE5WL8AkUYiMD2k7vyN1cBBQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
+ 217.111.95.7) smtp.rcpttodomain=lists.openembedded.org smtp.mailfrom=arri.de;
+ dmarc=none action=none header.from=arri.de; dkim=none (message not signed);
+ arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=hYObMkLAySUElExT04HHKNw7wfjX6ICzEOIlzurzgVM=;
-        b=FD2Cbk8juF8QDP/ruY+1MLpmTawqel8UmGQ9gT0naDHleWlHtLByH7lwSHyOA+IVWt
-         e7N9MoFYS5KtHluylaCdc2A2GK/ZcGgvgzzmY7uQMp9tjrThVH3eRVfA3IJHSGuiiSa3
-         sFTGYaeVt8gcdMRcizouCq5fxYos+Pm3hxzm0XHodbsVhWySDUlTroN+DV8C6gj6tP7m
-         2Ic6fKB4HjaEGL6YrljTqaL79pRtn8zl1uEB7Ghw/+YSrPHIhL7IUR/wLsZy5nGj9s0U
-         D7oBjumnxOOHnU74Ufk7zNn1RPDSkV12qPOXDihcZD2MC9SXQZhJYYjdPAFVwroPWgGr
-         Td8g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=hYObMkLAySUElExT04HHKNw7wfjX6ICzEOIlzurzgVM=;
-        b=q/6Y0vwuOfTL9mfKvfz4KtHE889AXa+QKxTM6xCv7I9XK99TpxNfIGzQM44qePorn0
-         Ll/9GkBZrEULS9/23ocYoFiIar96EDTkOIll5BvrIxpbNcS4gjxwcFr7UO0OfAGJNRoa
-         JOJx0cDNi0wVIgaaJfb8/7aWBwyk9yxrMyXnlk9SUSqFYOoZAH62/pSeawIFtyXcW9qb
-         THMmlthVAYtMt9aVmGJM0yYvY6SpyKl4V60uwPHtbvHrxgMBrdXRf3M5wHnyKfYTDIVZ
-         w2uF+6wm5q2wB/tS0NvkcEGCPKFqtR1vhafAIIdKFCwMMrjqTKtPxpUYQFEsu5SmNELN
-         7pTQ==
-X-Gm-Message-State: AFqh2kpDGkTyUCHMaJsyIAYCDQeMvYJ2Kj1zyKUFNOrphNScaJOPlmHf
-	38oQ+BUxZ5BizYx+lzUgBF+pQ+1mohe3tA==
-X-Google-Smtp-Source: AMrXdXtWFvE09XnPhxRWU8pWCDnAdJQrRgts6e+LjY72kcDqOVvERLy/UebYfWQPqo5UBOC+m2/+1Q==
-X-Received: by 2002:a5d:538a:0:b0:26f:dae9:2b1d with SMTP id d10-20020a5d538a000000b0026fdae92b1dmr31279870wrv.14.1672920097419;
-        Thu, 05 Jan 2023 04:01:37 -0800 (PST)
-Received: from og-worker-dev-01.infra.foundries.io.net (51-159-19-113.rev.poneytelecom.eu. [51.159.19.113])
-        by smtp.gmail.com with ESMTPSA id c11-20020a5d4ccb000000b002b6bcc0b64dsm273152wrt.4.2023.01.05.04.01.36
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 05 Jan 2023 04:01:36 -0800 (PST)
-From: Jose Quaresma <quaresma.jose@gmail.com>
-X-Google-Original-From: Jose Quaresma <jose.quaresma@foundries.io>
-To: openembedded-devel@lists.openembedded.org
-Cc: Jose Quaresma <jose.quaresma@foundries.io>
-Subject: [meta-oe][PATCH] lshw: bump to 42fef565
-Date: Thu,  5 Jan 2023 12:00:49 +0000
-Message-Id: <20230105120049.3070935-1-jose.quaresma@foundries.io>
-X-Mailer: git-send-email 2.34.1
+ d=arrigroup.onmicrosoft.com; s=selector1-arrigroup-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=O6+MvOtJX/6ikMGZgoH//7FNB8TOEd/zxR9AzZAXkjM=;
+ b=rulqwGaspvdsIw/4uSD1mCBmaWimSFAxnAbEGVSiKMEpOTwAaHLo6U9Mrw3YGeOmShYotahCOGCq1J7jyFziAMu06Zh1fOGVY6cPiEEWJxEtvoNC32RJ6vr1wesBZ35gDoMqIkmkCC9fN98xsmSsb8GQ9b6lCm6+lAE3U6Wq6eo=
+Received: from AS9PR06CA0779.eurprd06.prod.outlook.com (2603:10a6:20b:484::34)
+ by AM7PR07MB6964.eurprd07.prod.outlook.com (2603:10a6:20b:1be::5) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5944.19; Thu, 5 Jan
+ 2023 13:11:42 +0000
+Received: from AM0EUR02FT041.eop-EUR02.prod.protection.outlook.com
+ (2603:10a6:20b:484:cafe::81) by AS9PR06CA0779.outlook.office365.com
+ (2603:10a6:20b:484::34) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5986.15 via Frontend
+ Transport; Thu, 5 Jan 2023 13:11:41 +0000
+X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 217.111.95.7)
+ smtp.mailfrom=arri.de; dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=arri.de;
+Received-SPF: Fail (protection.outlook.com: domain of arri.de does not
+ designate 217.111.95.7 as permitted sender) receiver=protection.outlook.com;
+ client-ip=217.111.95.7; helo=mta.arri.de;
+Received: from mta.arri.de (217.111.95.7) by
+ AM0EUR02FT041.mail.protection.outlook.com (10.13.54.114) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.5966.18 via Frontend Transport; Thu, 5 Jan 2023 13:11:41 +0000
+Received: from N95HX1G2.arri.de (10.30.5.13) by mta.arri.de (10.10.18.5) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.34; Thu, 5 Jan
+ 2023 14:11:41 +0100
+From: Christian Eggers <ceggers@arri.de>
+To: <openembedded-devel@lists.openembedded.org>
+CC: Christian Eggers <ceggers@arri.de>
+Subject: [meta-oe][PATCH] boost-url: remove recipe
+Date: Thu, 5 Jan 2023 14:11:26 +0100
+Message-ID: <20230105131126.30175-1-ceggers@arri.de>
+X-Mailer: git-send-email 2.35.3
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain
+X-Originating-IP: [10.30.5.13]
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AM0EUR02FT041:EE_|AM7PR07MB6964:EE_
+X-MS-Office365-Filtering-Correlation-Id: e47bd024-aaa4-4136-e3a9-08daef1e6315
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 
+	CCIF7s8FwQdF1FjKKAJsqHJdJPrXAN3+gkaGlpqYtFoGchX937Z1YS+twuver3IT2qNaLJHthpXmFng50kd2wCLfS+ZhPm46+Kd43RU/zt5XSITV5oJHhQMBxAxXYTSpM/NatX1nLrEAPjq0NYpPszzQW8cVP1QFK38I8j6sVA0viSdo9oo0ethWvCJwXu1wXu0uHx9n8i27JePp6kJn6msI6R3iFWdXqg0pRlzUju9toK95dZP0SdcmyPdcIYMdpVdvDUPza9v/a7wMSSItoRTLDOI7F2HdZr7UceXyQVhUum7Lk5bDFGeAFUTnXmPaqGMLry9wLgNpfa9eDPfxrX8N87eiKhSNWqJWLFTqVuvc2DAj06XkVOj2p2BY+xzEY/D1eFicSQJHfMx5I/D/jz2mzsQuPPL/Q9lBJCErcNIFNEaaSyJPilXSvU2hdmT+v+oImcsoiWk7wKpADoXnMSn2/Q1evYUZ/g9hp9N1/g+MeQPeXVDso0Z4A/NN+i15p5rsXs12O0BTEUKtpAoSQi+B1pml1jawgD6511cOVP66HnvXVIkrtaFX2vuoG6ctW0+Uug9LxWRVEE5u8n2Vb6nNwgFhNJ2YwnAxaJpu2ZExes2XlskgpValWnt774hPTHLtvFUFRNrIB8zJECDRt05pF2NHBzpGR0B/JIBsN+rNuRkJmCI85DtfOPD7L2WUQBc0hdUfYuD5SdsUHvPCf8uQFIaFUhyOPP9KrPD2kWBxSQeotSlmNmXQDNK2zZ2H7SFrxmB0cwXM2AfWoqPzlVwRvJvty2qzvs+7lYv/pII=
+X-Forefront-Antispam-Report: 
+	CIP:217.111.95.7;CTRY:DE;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:mta.arri.de;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230022)(4636009)(346002)(136003)(39850400004)(376002)(396003)(451199015)(46966006)(36840700001)(2906002)(36860700001)(82740400003)(356005)(36756003)(40480700001)(2616005)(70586007)(316002)(16526019)(6916009)(82310400005)(81166007)(86362001)(4326008)(47076005)(83380400001)(5660300002)(41300700001)(426003)(8676002)(336012)(1076003)(7696005)(8936002)(478600001)(26005)(186003)(70206006)(6666004)(107886003)(36900700001);DIR:OUT;SFP:1102;
+X-OriginatorOrg: arri.de
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Jan 2023 13:11:41.6314
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: e47bd024-aaa4-4136-e3a9-08daef1e6315
+X-MS-Exchange-CrossTenant-Id: e6a73a5a-614d-4c51-b3e3-53b660a9433a
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e6a73a5a-614d-4c51-b3e3-53b660a9433a;Ip=[217.111.95.7];Helo=[mta.arri.de]
+X-MS-Exchange-CrossTenant-AuthSource: 
+	AM0EUR02FT041.eop-EUR02.prod.protection.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM7PR07MB6964
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 05 Jan 2023 12:01:41 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100413
+ <openembedded-devel@lists.openembedded.org>; Thu, 05 Jan 2023 13:11:51 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100414
 
-* gettext is need for translation
-* riscv64 machines are supported
-* add packageconfig support for sqlite and zlib
-  - add native pkgconfig
-  - enable zlib as it will reduce considerable the data files sizes
-* patches
-  - add 0001-disable-docbook2man.patch to not build .sgml file
-  - drop 0001-Fix-musl-build.patch as it is merged in:
-   https://github.com/lyonel/lshw/commit/d3c66a6b2a0799d6982f4dc77b291934fcba80c9
-   https://github.com/lyonel/lshw/commit/0140f7f28a09d33dc46531212d095da5e021b027
+The boost recipe in oe-core has recently been updated to boost-1.81.0.
+Starting with this release, boost-url is included in the boost
+distribution.
 
-Changelog:
-- PA-RISC: handle pushd failure
-- make version check optional
-- Github PR85  Set product name for all netdevs sharing the same PCI number
-- Merge pull request 'Add Spanish translation' (#48) from alexhenrie/lshw:es into master
-- Merge branch 'master' into es
-- Merge pull request 'Fix mistakes in Catalan translation' (#47) from alexhenrie/lshw:ca into master
-- Add Spanish translation
-- Fix mistakes in Catalan translation
-- Merge pull request 'Add Catalan translation' (#46) from alexhenrie/lshw:ca into master
-- merge Github PR#77
-- use max (9) Gzip compression
-- Add Catalan translation
-- Update POT file
-- Add more network speeds
-- Merge pull request 'Remove unnecessary space before closing parenthesis' (#45) from alexhenrie/lshw:punctuation into master
-- Merge pull request 'Translate all words of a phrase together' (#44) from alexhenrie/lshw:legos into master
-- Merge pull request 'Fix another typo' (#43) from alexhenrie/lshw:typos into master
-- Merge branch 'master' of https://ezix.org/src/pkg/lshw
-- add some includes
-- fix typo
-- cosmetic fixes
-- support for new ethtool capabilities
-- code clean-up
-- code clean-up
-- allow pkg-config override
-- allow pkg-config override
-- Remove unnecessary space before closing parenthesis
-- Translate all words of a phrase together
-- Fix another typo
-- Merge pull request 'Fix typos in translatable messages' (#42) from alexhenrie/lshw:typos into master
-- Fix typos in translatable messages
-- Fix getting size of memory banks <32GiB
-- Merge pull request 'devtree: Add UUID property' (#40) from hegdevasant/lshw:lpar-uuid into master
-- devtree: Add UUID property
-- code clean-up
-- improve portability (esp. musl)
-- fix potential crash
-- add static target to Makefile
-- Avoid crash on device-tree parsing
-- Add JEDEC manufacturer
-- Report correct memory size on SMBIOS < 2.7
-- fix man page after previous update
-- update man page
-- Update 'docs/TODO'
-- Update 'docs/TODO'
-- Merge pull request 'Replace the about GtkDialog with a GtkAboutDialog' (#39) from linkmauve/lshw:better-about into master
-- Replace the about GtkDialog with a GtkAboutDialog
-- Merge pull request 'Move from GtkMenuBar to GMenu' (#38) from linkmauve/lshw:gmenu into master
-- Move from GtkMenuBar to GMenu
-- Merge pull request 'Switch to gtk3 by default for gtk-lshw' (#37) from linkmauve/lshw:gtk3 into master
-- Enable/Disable GSimpleAction instead of button sensitivity
-- Replace signals with GSimpleActions
-- Move to GtkApplication
-- Remove deprecated use_action_appearance property
-- Remove deprecated widgets
-- Replace the last GtkStock in overwrite dialog
-- Replace deprecated GtkIconFactory with GHashTable
-- Use GtkFileChooserNative instead of GtkFileChooserDialog
-- Remove hack which is apparently not useful anymore
-- Remove deprecated stock messages
-- Build against gtk3 instead of gtk2
-- Merge pull request 'Fix few memory leaks' (#34) from shivaprasadbhat/lshw:master into master
-- Fix few memory leaks
-- report product model on Power systems
-- clean-up JSON output
-- JSON output clean-up (list/object)
-- code clean-up for read(3)
-- Merge pull request 'devtree: Add capabilites to the OPAL Firmware' (#33) from shivaprasadbhat/lshw:master into master
-- Merge pull request 'volumes: fix segfault in apfs volume code' (#32) from hjmallon/lshw:pr.segfault into master
-- fix issue with logical names being truncated (`/dev/sda` → `sda`)
-- devtree: Add capabilites to the OPAL Firmware
-- merge Github PR #53
-- volumes: fix segfault in apfs volume code
-- Merge pull request 'devtree: Add chip-id from CPU node' (#31) from shivaprasadbhat/lshw:master into master
-- devtree: Add chip-id from CPU node
-- Merge pull request 'devtree: Add chip-id from the dimm module' (#30) from shivaprasadbhat/lshw:master into master
-- devtree: Add chip-id from the dimm module
-- try to connect input devices to the right parent
-- detect framebuffers
-- detect sound devices
-- cosmetic fixes
-- begin work on input devices
-- cosmetic clean-up
-- correctly format SMBIOS UUID
-- move PnP devices to the ISA/LPC bridge
-- report CPU family/model/stepping
-- get rid of RPM's debug packages
-- add debug flag to GUI build
+As a prerequisite for creating the -url sub package from the boost
+recipe, the boost-url recipe should be removed in order to avoid
+conflicts with installed files.
 
-Signed-off-by: Jose Quaresma <jose.quaresma@foundries.io>
+Signed-off-by: Christian Eggers <ceggers@arri.de>
 ---
- .../lshw/files/0001-Fix-musl-build.patch      | 125 ------------------
- .../lshw/files/0001-disable-docbook2man.patch |  30 +++++
- meta-oe/recipes-devtools/lshw/lshw_02.19.2.bb |  23 +++-
- 3 files changed, 47 insertions(+), 131 deletions(-)
- delete mode 100644 meta-oe/recipes-devtools/lshw/files/0001-Fix-musl-build.patch
- create mode 100644 meta-oe/recipes-devtools/lshw/files/0001-disable-docbook2man.patch
+ .../boost-url/boost-url_git.bb                | 20 -------------------
+ 1 file changed, 20 deletions(-)
+ delete mode 100644 meta-oe/recipes-devtools/boost-url/boost-url_git.bb
 
-diff --git a/meta-oe/recipes-devtools/lshw/files/0001-Fix-musl-build.patch b/meta-oe/recipes-devtools/lshw/files/0001-Fix-musl-build.patch
+diff --git a/meta-oe/recipes-devtools/boost-url/boost-url_git.bb b/meta-oe/=
+recipes-devtools/boost-url/boost-url_git.bb
 deleted file mode 100644
-index fa90aa121..000000000
---- a/meta-oe/recipes-devtools/lshw/files/0001-Fix-musl-build.patch
+index 14da3ca3f1af..000000000000
+--- a/meta-oe/recipes-devtools/boost-url/boost-url_git.bb
 +++ /dev/null
-@@ -1,125 +0,0 @@
--From a5a4bb4254b2109bd3e272174946f0bb36ee99a8 Mon Sep 17 00:00:00 2001
--From: Leon Anavi <leon.anavi@konsulko.com>
--Date: Tue, 25 Aug 2020 11:45:45 +0300
--Subject: [PATCH] Fix musl build
+@@ -1,20 +0,0 @@
+-DESCRIPTION =3D "Boost.URL is a library for manipulating Uniform Resource =
+Identifiers (URI) and Locators (URL)"
+-HOMEPAGE =3D "https://github.com/CPPAlliance/url"
+-SECTION =3D "libs"
+-LICENSE =3D "BSL-1.0"
+-LIC_FILES_CHKSUM =3D "file://LICENSE_1_0.txt;md5=3De4224ccaecb14d942c71d31=
+bef20d78c"
 -
--Apply the following fixes for musl:
+-SRC_URI =3D "git://github.com/CPPAlliance/url.git;branch=3Ddevelop;protoco=
+l=3Dhttps"
 -
--- Fix basename() is in libgen.h
--- Fix wrong usage of LONG_BIT
+-SRCREV =3D "d740a92d38e3a8f4d5b2153f53b82f1c98e312ab"
 -
--Same fixes have been submitted to the upstream of lshw by Sergio
--Prado but they have not been merged yet.
+-S =3D "${WORKDIR}/git"
 -
--Upstream-Status: Submitted
+-DEPENDS =3D "boost"
 -
--Co-Authored-By: Sergio Prado <sergio.prado@e-labworks.com>
--Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
-----
-- src/core/abi.cc   |  4 +---
-- src/core/sysfs.cc | 19 ++++++++++---------
-- 2 files changed, 11 insertions(+), 12 deletions(-)
+-BBCLASSEXTEND =3D "native nativesdk"
 -
--diff --git a/src/core/abi.cc b/src/core/abi.cc
--index adff7b5..76c664c 100644
----- a/src/core/abi.cc
--+++ b/src/core/abi.cc
--@@ -20,9 +20,7 @@ __ID("@(#) $Id: mem.cc 1352 2006-05-27 23:54:13Z ezix $");
-- bool scan_abi(hwNode & system)
-- {
--   // are we compiled as 32- or 64-bit process ?
---  long sc = sysconf(LONG_BIT);
---  if(sc==-1) sc = sysconf(_SC_LONG_BIT);
---  if(sc!=-1) system.setWidth(sc);
--+  system.setWidth(LONG_BIT);
-- 
--   pushd(PROC_SYS);
-- 
--diff --git a/src/core/sysfs.cc b/src/core/sysfs.cc
--index 32d6564..c2fa84f 100644
----- a/src/core/sysfs.cc
--+++ b/src/core/sysfs.cc
--@@ -16,6 +16,7 @@
-- #include <sys/stat.h>
-- #include <sys/types.h>
-- #include <sys/mount.h>
--+#include <libgen.h>
-- 
-- 
-- __ID("@(#) $Id$");
--@@ -100,7 +101,7 @@ static string sysfs_getbustype(const string & path)
--   {
--     devname =
--       string(fs.path + "/bus/") + string(namelist[i]->d_name) +
---      "/devices/" + basename(path.c_str());
--+      "/devices/" + basename(const_cast<char*>(path.c_str()));
-- 
--     if (samefile(devname, path))
--       return string(namelist[i]->d_name);
--@@ -140,7 +141,7 @@ static string sysfstobusinfo(const string & path)
-- 
--   if (bustype == "usb")
--   {
---    string name = basename(path.c_str());
--+    string name = basename(const_cast<char*>(path.c_str()));
--     if (matches(name, "^[0-9]+-[0-9]+(\\.[0-9]+)*:[0-9]+\\.[0-9]+$"))
--     {
--       size_t colon = name.rfind(":");
--@@ -151,7 +152,7 @@ static string sysfstobusinfo(const string & path)
-- 
--   if (bustype == "virtio")
--   {
---    string name = basename(path.c_str());
--+    string name = basename(const_cast<char*>(path.c_str()));
--     if (name.compare(0, 6, "virtio") == 0)
--       return "virtio@" + name.substr(6);
--     else
--@@ -159,10 +160,10 @@ static string sysfstobusinfo(const string & path)
--   }
-- 
--   if (bustype == "vio")
---    return string("vio@") + basename(path.c_str());
--+    return string("vio@") + basename(const_cast<char*>(path.c_str()));
-- 
--   if (bustype == "ccw")
---    return string("ccw@") + basename(path.c_str());
--+    return string("ccw@") + basename(const_cast<char*>(path.c_str()));
-- 
--   if (bustype == "ccwgroup")
--   {
--@@ -240,7 +241,7 @@ string entry::driver() const
--   string driverlink = This->devpath + "/driver";
--   if (!exists(driverlink))
--     return "";
---  return basename(readlink(driverlink).c_str());
--+  return basename(const_cast<char*>(readlink(driverlink).c_str()));
-- }
-- 
-- 
--@@ -328,7 +329,7 @@ string entry::name_in_class(const string & classname) const
-- 
-- string entry::name() const
-- {
---  return basename(This->devpath.c_str());
--+  return basename(const_cast<char*>(This->devpath.c_str()));
-- }
-- 
-- 
--@@ -340,12 +341,12 @@ entry entry::parent() const
-- 
-- string entry::classname() const
-- {
---  return basename(dirname(This->devpath).c_str());
--+  return basename(const_cast<char*>(dirname(This->devpath).c_str()));
-- }
-- 
-- bool entry::isvirtual() const
-- {
---  return string(basename(dirname(dirname(This->devpath)).c_str())) == "virtual";
--+  return string(basename(const_cast<char*>(dirname(dirname(This->devpath)).c_str()))) == "virtual";
-- }
-- 
-- string entry::string_attr(const string & name, const string & def) const
---- 
--2.17.1
--
-diff --git a/meta-oe/recipes-devtools/lshw/files/0001-disable-docbook2man.patch b/meta-oe/recipes-devtools/lshw/files/0001-disable-docbook2man.patch
-new file mode 100644
-index 000000000..00f7b8674
---- /dev/null
-+++ b/meta-oe/recipes-devtools/lshw/files/0001-disable-docbook2man.patch
-@@ -0,0 +1,30 @@
-+From 544df0f5fd99925a3ce568c777413e0c31cb0028 Mon Sep 17 00:00:00 2001
-+From: Jose Quaresma <jose.quaresma@foundries.io>
-+Date: Mon, 2 Jan 2023 15:32:39 +0000
-+Subject: [PATCH] build: Do not build .sgml file
-+
-+It needs docbook2man tool which we do not have recipe for
-+
-+Upstream-Status: OE-Specific [needs native docbook2man tool]
-+
-+Signed-off-by: Jose Quaresma <jose.quaresma@foundries.io>
-+---
-+ src/Makefile | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/src/Makefile b/src/Makefile
-+index ac726d0..af6281d 100644
-+--- a/src/Makefile
-++++ b/src/Makefile
-+@@ -102,7 +102,7 @@ $(PACKAGENAME)-compressed: $(PACKAGENAME)-static
-+ 	upx -9 -o $@ $<
-+ 
-+ $(PACKAGENAME).1: $(PACKAGENAME).sgml
-+-	docbook2man $<
-++	@echo "Needs docbook2man"
-+ 
-+ pci.ids:
-+ 	wget http://pciids.sourceforge.net/pci.ids
-+-- 
-+2.25.1
-+
-diff --git a/meta-oe/recipes-devtools/lshw/lshw_02.19.2.bb b/meta-oe/recipes-devtools/lshw/lshw_02.19.2.bb
-index 8b3608a24..f2de593cf 100644
---- a/meta-oe/recipes-devtools/lshw/lshw_02.19.2.bb
-+++ b/meta-oe/recipes-devtools/lshw/lshw_02.19.2.bb
-@@ -9,16 +9,27 @@ SECTION = "console/tools"
- LICENSE = "GPL-2.0-or-later"
- LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
- 
--COMPATIBLE_HOST = "(i.86|x86_64|arm|aarch64).*-linux"
-+COMPATIBLE_HOST = "(i.86|x86_64|arm|aarch64|riscv64).*-linux"
- 
-+PV .= "+git${SRCPV}"
-+SRCREV = "42fef565731411a784101de614a54bff79d1858e"
- SRC_URI = " \
--    http://ezix.org/software/files/lshw-B.${PV}.tar.gz \
--    file://0001-Fix-musl-build.patch \
-+    git://github.com/lyonel/lshw.git;protocol=https;branch=master \
-+    file://0001-disable-docbook2man.patch \
- "
--SRC_URI[md5sum] = "8c70d46e906688309095c73ecb9396e3"
--SRC_URI[sha256sum] = "9bb347ac87142339a366a1759ac845e3dbb337ec000aa1b99b50ac6758a80f80"
- 
--S = "${WORKDIR}/lshw-B.${PV}"
-+S = "${WORKDIR}/git"
-+
-+inherit pkgconfig
-+
-+DEPENDS = "gettext-native"
-+
-+PACKAGECONFIG ??= "zlib"
-+PACKAGECONFIG[sqlite] = "SQLITE=1,SQLITE=0,sqlite3"
-+PACKAGECONFIG[zlib]   = "ZLIB=1,ZLIB=0,zlib gzip-native"
-+
-+# use the PACKAGECONFIG configurations arguments
-+EXTRA_OEMAKE = "${PACKAGECONFIG_CONFARGS}"
- 
- do_compile() {
-     # build core only - don't ship gui
--- 
-2.34.1
+-do_install() {
+-    mkdir -p ${D}/${includedir}
+-    cp -r ${S}/include/** ${D}/${includedir}/
+-}
+--=20
+2.35.3
 
 
