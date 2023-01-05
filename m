@@ -1,219 +1,243 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <alex.stewart@ni.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BC989C3DA7A
-	for <webhook@archiver.kernel.org>; Thu,  5 Jan 2023 19:51:52 +0000 (UTC)
-Received: from mail-pj1-f52.google.com (mail-pj1-f52.google.com [209.85.216.52])
- by mx.groups.io with SMTP id smtpd.web11.3690.1672948310951081976
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B8645C3DA7D
+	for <webhook@archiver.kernel.org>; Thu,  5 Jan 2023 21:21:56 +0000 (UTC)
+Received: from mx0b-00010702.pphosted.com (mx0b-00010702.pphosted.com [148.163.156.75])
+ by mx.groups.io with SMTP id smtpd.web11.1854.1672953709003119024
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 05 Jan 2023 11:51:51 -0800
+ Thu, 05 Jan 2023 13:21:49 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=mmPD71HV;
- spf=pass (domain: gmail.com, ip: 209.85.216.52, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f52.google.com with SMTP id z9-20020a17090a468900b00226b6e7aeeaso3103431pjf.1
-        for <openembedded-devel@lists.openembedded.org>; Thu, 05 Jan 2023 11:51:50 -0800 (PST)
+ dkim=pass header.i=@ni.com header.s=pps11062020 header.b=cf0IK0Ss;
+ spf=pass (domain: ni.com, ip: 148.163.156.75, mailfrom: prvs=03696f000c=alex.stewart@ni.com)
+Received: from pps.filterd (m0098781.ppops.net [127.0.0.1])
+	by mx0a-00010702.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 305Jnb3M019600;
+	Thu, 5 Jan 2023 15:21:48 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ni.com; h=from : to : cc : subject
+ : date : message-id : content-transfer-encoding : content-type :
+ mime-version; s=PPS11062020;
+ bh=pNgCSZDNypUUR2Ze+YQ5ksZxl79I1xPB8PNQD2vIPzM=;
+ b=cf0IK0SsyQRjq1bAXfN0g/m7+ojiu5njhTC++Vr8diDFskVMpL+A3NNcufWnD/XFK9fC
+ K9AahGeUz3uIaoWwSwmUJIIdoMAKV0ZAwWYF96hExSfUop+uCMVJo7VA6Y/hEFXClxGv
+ R4q9lQwLd/L/8NShlNRykFnFUzKLc4Kmtnz0RqkBE0LlT5+BdLN8Gh6nd1JK1pJnSc7m
+ iiW1vJrTCPRe0jJX3zAoyf9Km8QwyJSHuC6too6kaCF6kSkIvvbvTJogGmq9NDnUpfRq
+ PYS/KqXbbGmj6n60kKQoqKJZ5iqJSoYsd0orxr5vfaLR0MobbtK1wW1J4FGLY5WBk1Wz mg== 
+Received: from nam12-mw2-obe.outbound.protection.outlook.com (mail-mw2nam12lp2041.outbound.protection.outlook.com [104.47.66.41])
+	by mx0a-00010702.pphosted.com (PPS) with ESMTPS id 3mtj067scr-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+	Thu, 05 Jan 2023 15:21:47 -0600
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=fwDmOgpVsQpxaw+2sDLIssrN4/0S4Gbguhf3BaWsVDjKQ0JZM2IcWbZitEf/A29rEvD/VVurvvODkK24yCUO6CTVgM61hhJfMAleBGObqyntiNIOjxU0g9gQOY8D1ui6PfTs/1KUkcKlrK9gGc/IFbSBSxcEG87NFZCRgzOBpk/hLnm23cDnIdR+FqOxm/BJfgNJxx0OcHUllKAEr9ENiAeOQ/vE3wWJtl1SVObAA6SQNIGxdOaciXlAD2ftoH0FqUk33IK+s43bVUWkb1nF7xgCKJgJqBtGi1mGirspSfsYN3a0Ij6kt+Kca4FYsQXT3H9YqYL6H3ZMIZo4nBtOzw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=pNgCSZDNypUUR2Ze+YQ5ksZxl79I1xPB8PNQD2vIPzM=;
+ b=CibxQZ4HLdMXwozUDModyGgZbp/y+ZMcIAy8ciT7Q108FUD7zMsRp8zl5ZyQs14lwLvGaAIA85KV6dQjuOCVC9xHqfHkXmUL2EkkwQyxsRZ37eDf3YruO/SxCXWQv43BzGuuniVjyP7xsdVPBOszKaFudSDVykHUeXEz8AWN748dSy1Ht01CX+zWblPome0sFdMwMbS8Brx+29mnZ5Vgj6xLSKTObzHHPmxgA1l1+iB3dgDFT6plhsyGX00BJSoS02oNhARi+IJ9C1pBrBoT7zHGx4qGz4jopMBwnOpmihYwF2V8Myu+8/61y/umg+FdAakHV881lxIHIpAze61zQA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=ni.com; dmarc=pass action=none header.from=ni.com; dkim=pass
+ header.d=ni.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=in-reply-to:autocrypt:from:references:to:content-language:subject
-         :user-agent:mime-version:date:message-id:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=zuWx3xjDiNsOJsYPVTisTVSO6UjY4930NTSQ018tKfc=;
-        b=mmPD71HVfDgGDRjf5HoJgkB7Q4FnbhagQvJvJ+2n+HVtWNdDTF3jxzqugbRDeWTNog
-         Nn9aAviI641XA1JvMYKuQ7rashmmX8ROttojp/pV93urUmldJ8rD1kAfeGQ1N9uYGlgz
-         H9FcHdub6Jg4tFuxr384Tt8yKvNejHG5I+V/hDkRTiyxc1VMfgEMXnslaQ0nq1tvSU4G
-         0ySu6EbhSmwVWYaDrwMH/EU7OU7bw9cedj5UhlSU+dpuu15PJfAJEaHZwfxM03WZgw7c
-         FxUs2pJhKqv5Yc+006/uXsRi668YVBTaTsIAW6AAZOFUe3LzPmjvm/Hu4pssLqWmphVD
-         8Khw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=in-reply-to:autocrypt:from:references:to:content-language:subject
-         :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=zuWx3xjDiNsOJsYPVTisTVSO6UjY4930NTSQ018tKfc=;
-        b=3pgh8+PalKaMtqMnkMNtk9z/fMmV3E+siHOZlIAUVnvQcjl6l5EXDsO9ChNsw91NXe
-         3hNjVvIq22oZRxiZF251hRofCtsv6X0lrhiILBQoQb8PnxNamlQZiWgveSftJ4qQE9t6
-         fXT7P6ZSw2Ho8IiVxj8DdWaSe9E2LXJc1rvzfSf7dW8rqtIa845MfR6BI6gk13oAiVtx
-         Q4mCnPxQ4zAHsv9p3T9IMYMjZRyW+fYZTEgYw+e4Mr1MJU6/0uMlo+xV+QpiyxK+KACn
-         kHMrLIVZbBVMqu5Cmks/OYisggBumtmebyh7xz1CeU1RxrPaLVaHu4p5x7X26q/yELEy
-         FSrw==
-X-Gm-Message-State: AFqh2ko1NQpL+5q57Usp6s8XTNCrpB765WKy+Df4dpTghmpIINe2a3aF
-	pvhkgCn9tZA5xnELGwclcGw=
-X-Google-Smtp-Source: AMrXdXs/HsxCI8PnPf6rgFrW/6fquGhWQ69sXFZcYvf5SFngItLHb6KuOsmwyjct+HdljW3FvV9cWA==
-X-Received: by 2002:a17:902:b70f:b0:192:bd3b:5720 with SMTP id d15-20020a170902b70f00b00192bd3b5720mr18463934pls.68.1672948309902;
-        Thu, 05 Jan 2023 11:51:49 -0800 (PST)
-Received: from ?IPV6:2601:646:9181:1cf0:3402:e7af:2a33:dac3? ([2601:646:9181:1cf0:3402:e7af:2a33:dac3])
-        by smtp.gmail.com with ESMTPSA id l2-20020a170903244200b001888cadf8f6sm26508003pls.49.2023.01.05.11.51.48
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 05 Jan 2023 11:51:49 -0800 (PST)
-Message-ID: <f5506158-946d-d49d-040c-2536f62ec445@gmail.com>
-Date: Thu, 5 Jan 2023 11:51:47 -0800
+ d=nio365.onmicrosoft.com; s=selector2-nio365-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=pNgCSZDNypUUR2Ze+YQ5ksZxl79I1xPB8PNQD2vIPzM=;
+ b=TIgzP7+d0DFMCXFryZw1S71SSjh5/e2Q7WHGLxy5OqdcX8WeUMgSsjHdAm3eG8YyDqMJcZX7GLMGuv9DsqH0GrCIdq1TQazOL675WhNKM5TaZHHpgf3PSc7d13b6I/EIRxQEEImsiL9+utUBBNgJH2xPqeMdDqzFoVjQiai6bJs=
+Received: from SN6PR04MB5151.namprd04.prod.outlook.com (2603:10b6:805:90::25)
+ by BN8PR04MB5748.namprd04.prod.outlook.com (2603:10b6:408:a4::19) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5944.19; Thu, 5 Jan
+ 2023 21:21:38 +0000
+Received: from SN6PR04MB5151.namprd04.prod.outlook.com
+ ([fe80::7297:3404:defc:f77c]) by SN6PR04MB5151.namprd04.prod.outlook.com
+ ([fe80::7297:3404:defc:f77c%7]) with mapi id 15.20.5944.019; Thu, 5 Jan 2023
+ 21:21:38 +0000
+From: Alex Stewart <alex.stewart@ni.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Alex Stewart <alex.stewart@ni.com>, schnitzeltony@gmail.com
+Subject: [oe][meta-gnome][PATCH] gvfs: obviate the ssh-client requirement for gvfs
+Date: Thu,  5 Jan 2023 15:21:19 -0600
+Message-Id: <20230105212119.2022447-1-alex.stewart@ni.com>
+X-Mailer: git-send-email 2.38.1
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: SN7PR04CA0029.namprd04.prod.outlook.com
+ (2603:10b6:806:f2::34) To SN6PR04MB5151.namprd04.prod.outlook.com
+ (2603:10b6:805:90::25)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
- Gecko/20100101 Thunderbird/102.6.1
-Subject: Re: [oe] [meta-oe] dnf-plugins/rpm.py: Fix grammar when
- RPM_PREFER_ELF_ARCH doesn't exit.
-Content-Language: en-US
-To: wangmy <wangmy@fujitsu.com>, openembedded-devel@lists.openembedded.org
-References: <1672478484-3244-1-git-send-email-wangmy@fujitsu.com>
-From: Khem Raj <raj.khem@gmail.com>
-Autocrypt: addr=raj.khem@gmail.com; keydata=
- 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
-In-Reply-To: <1672478484-3244-1-git-send-email-wangmy@fujitsu.com>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="------------YB0yaB2L0I02v0DBIiZ6nVO3"
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SN6PR04MB5151:EE_|BN8PR04MB5748:EE_
+X-MS-Office365-Filtering-Correlation-Id: cab58939-e2c7-4ed0-41b8-08daef62d4a8
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 
+	4WKu1cguT+Yok+fJWpcuPvijeW8sAg9mngpovKnNLZNa5b06PI5dL4tlg7PV0xX1v9ExBQkPcPWAbBXcWTONXJttdFQClv37c6csf4/FS7+3cumMIGyeetzhGaPObYiEJHHuCuuwI5IIzbEx1rMrRNdWdxORzn82eMVjntl7LjUU5wSVrF46CIrKkzMub8BbzNO7jfdZA7rQbNxjesahTAXo67XMV04SWHNxKFU9U1wmkxIIV0OGPFM/zOxWUPWfpBzZSEO6PhckRjQbg14GjIWXKNcE4NjwISyDtWhbgJFnZPMjfVI+R6s/JsABpTl1TAcAndf/NbCjm/gvmFkXJNnnY0diyR2kT25+eWF7Z9+Nm8C6LzSTjPhPLMWT19cNiPSZtookmvIgfoxFdGzd0+SOTHitNUsRPtUou49cbwMEQ3I114S2sBYtDXKPKC00tzvhmKnmYLPuSYZOkgHvHB13Ly5pKgbd488Gngj9FfxY2R7+16AQk14t69TwK6HI/KdbhMSIaiCb6HJU9qvGpi3ckraXnettHZ6GbzlGYM+9EeX2ArnTdYh5JKp6ERFPOZMcgYiAnLv/91iiHoqt/wG5pTnnZeRsrPF4eu5kN/fceKIU3EGNYqDkIgljw/01dosbGk2x4l/3pImOAmtJ5Vg1zGfq0oxqkAN4o+CzM15vIPmtZROzdtL//25v3VPg
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:SN6PR04MB5151.namprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230022)(396003)(366004)(136003)(376002)(39860400002)(346002)(451199015)(5660300002)(2906002)(44832011)(41300700001)(8676002)(4326008)(8936002)(66946007)(66556008)(316002)(6916009)(66476007)(478600001)(966005)(6486002)(6506007)(83380400001)(1076003)(26005)(6512007)(186003)(6666004)(38100700002)(2616005)(36756003)(86362001);DIR:OUT;SFP:1102;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?us-ascii?Q?NlaaBl+zhXy2szk7/yJR0EwphuBrcv9rzo4IwQ+kwhiniXHmL4XuNU4538dE?=
+ =?us-ascii?Q?GOGCF7N3xqodKXvbBEm+gmjTs0oZ60BTVJ34Ou34FLgZMFS7Ii2V3KRbfrwh?=
+ =?us-ascii?Q?LCqOjER4vxuud5KUG9+e5ySM6eygdODITeNU2QjTG4Ze7OaYqsNt723BLEIs?=
+ =?us-ascii?Q?ElwWtyHwDV4ZIrEPHooDjBgyReJX3C5uUCyZjrVc9K9XcVz5PpqMSvN37T4s?=
+ =?us-ascii?Q?0Zk1VIym06URIJgTZ6fgFA6q412qd8KmvI+MY7EePmlYa+ElQYN0y8S6v+K+?=
+ =?us-ascii?Q?/z/4kkXiJGkVTwX7QYZvemW0sTl39CKcdCIlhroj/6FGoyJrVpqMXSjbf/Kn?=
+ =?us-ascii?Q?xVp90j99putjoxlxcqjIxGYpFIA3tI0CBj+J6PXRVH5nxFchNhmnqt7rdVH7?=
+ =?us-ascii?Q?2YgVPJdPXfp/ln7CqtyV9nXuMaW+s5Lh1Kbsj5I5hr/meWWjc9G5F17bC30n?=
+ =?us-ascii?Q?3ZwILrKOCnPEIFArFqRkqPwOvNtL8TbbH/HP7W5CsHA7rB0yPXR8mi6C9uef?=
+ =?us-ascii?Q?6iVciA52Rt1n3jUTJpZKXyEaDzdRLUHU6q6HbUlaIcPqdrCipdIUvPUXh5bz?=
+ =?us-ascii?Q?ZfXObIx7ALAZwi04LkQGbtzRF/x9Fz22QT19hkUT/pFQz7jU7kvKJVsxssta?=
+ =?us-ascii?Q?fG5l3RS7ur/87+VVb+clIOZh9iQI2BdrrBDjt4W9+XrmIKBzzDPMd80AL9DT?=
+ =?us-ascii?Q?93kbGdbXA/vl35I/tAUiUeybcbnNiV7AHM5UMxJxeZP4IRWJPegOydNTEac6?=
+ =?us-ascii?Q?ZZrJSso7QaSYaqgRI1aIHycvPz0FsPZMVH3MER3cY/zJt0MOXu+lzpIbkTfc?=
+ =?us-ascii?Q?rN3SuWWXtQmTv49yYGyAbX75RFPhyDukxZ2LkIiqraWxXxfmkwfXicg8VC41?=
+ =?us-ascii?Q?yaYtjvpk8TbtqAneAINJetL1+hmRfxmXVG1JtfvnebEtx52B9YznvibGfkD4?=
+ =?us-ascii?Q?8pyvpetM9n8u3kYulhSbPSEcw0HzXyzWvOa4YUYCN6DJ3edTpJZrJkzzk5JF?=
+ =?us-ascii?Q?CTvuqBp5qIzSDrU5GjLcCdzrXhoxbyCoQ8XgoEfKkJ0MWiy7KzR6lUxbffe/?=
+ =?us-ascii?Q?G9ScHVBjaGoBSZVXN2LV1FpqyQrXyF/758jms93LP+oUKQMPuiJ3COhE15Te?=
+ =?us-ascii?Q?BXKJ+z/dDilslLVjoZJQPlbQaTTDxl2EiA6CZ7Mrc45fod1AQ+uKcmKGomQk?=
+ =?us-ascii?Q?OIxQ1tgAS3LQwaJOBl20DmyRdbHekHeOlH1qKYJDpFWt8Q6AI+xB/jhEK92e?=
+ =?us-ascii?Q?OFF6N2VKBvaxMrgmfVt+I3LpzC5MJEX4gyApOW6mEe53YaGtP4EhBK75JZb7?=
+ =?us-ascii?Q?3Q+9MVNpp1wbpQcT7JK4YhXESrdPffezWYUApbidISGp7CIa3tvvuGb55i5y?=
+ =?us-ascii?Q?kIy+JO1zg4O3BkaVFhcYrsfYB1YUcyeOJ99QVep1sg8aRx9V5w/ftMxFdAd5?=
+ =?us-ascii?Q?sWjLgGFQPzmAbEd1EPI++Nv/13Pm1D5K21nX7E2ZW5FrY/cFoPUO2XQ+O8X2?=
+ =?us-ascii?Q?N5IQKX2woiAzVrjtlg1Ra77KbkTwpuBI9zJ5YMN5PUIptxW3A/BwMwIGvDzC?=
+ =?us-ascii?Q?9bNLAOb8bDnXDiOJQTX+draEsIzL7cki/QbRAnEnjRDMMLcnFvp6gOAy8Rte?=
+ =?us-ascii?Q?LA=3D=3D?=
+X-OriginatorOrg: ni.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: cab58939-e2c7-4ed0-41b8-08daef62d4a8
+X-MS-Exchange-CrossTenant-AuthSource: SN6PR04MB5151.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Jan 2023 21:21:38.2007
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 87ba1f9a-44cd-43a6-b008-6fdb45a5204e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: Y2ZxBspzOWI9sstSiqjh4gbxH7lOQX7sOgdcaBg1r6DRmaVvZf2k9iJ1G6qg7/BTaOK+3VyyDEId0WSe4LfUjg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN8PR04MB5748
+X-Proofpoint-GUID: WTAt_0AoWqwn_2-DdVqixcp3MgHoGvzs
+X-Proofpoint-ORIG-GUID: WTAt_0AoWqwn_2-DdVqixcp3MgHoGvzs
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.205,Aquarius:18.0.923,Hydra:6.0.545,FMLib:17.11.122.1
+ definitions=2023-01-05_12,2023-01-05_01,2022-06-22_01
+X-Proofpoint-Spam-Details: rule=outbound_policy_notspam policy=outbound_policy score=30 malwarescore=0
+ suspectscore=0 clxscore=1011 adultscore=0 mlxlogscore=999 impostorscore=0
+ mlxscore=0 priorityscore=1501 bulkscore=0 lowpriorityscore=0 phishscore=0
+ spamscore=0 classifier=spam adjust=30 reason=mlx scancount=1
+ engine=8.12.0-2212070000 definitions=main-2301050167
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 05 Jan 2023 19:51:52 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100420
+ <openembedded-devel@lists.openembedded.org>; Thu, 05 Jan 2023 21:21:56 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100421
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------YB0yaB2L0I02v0DBIiZ6nVO3
-Content-Type: multipart/mixed; boundary="------------OUW6nw2JIw9BSPtn4iz0kVQ4";
- protected-headers="v1"
-From: Khem Raj <raj.khem@gmail.com>
-To: wangmy <wangmy@fujitsu.com>, openembedded-devel@lists.openembedded.org
-Message-ID: <f5506158-946d-d49d-040c-2536f62ec445@gmail.com>
-Subject: Re: [oe] [meta-oe] dnf-plugins/rpm.py: Fix grammar when
- RPM_PREFER_ELF_ARCH doesn't exit.
-References: <1672478484-3244-1-git-send-email-wangmy@fujitsu.com>
-In-Reply-To: <1672478484-3244-1-git-send-email-wangmy@fujitsu.com>
+The gvfs project meson configuration attempts to locate and resolve the
+path to an ssh-client on the build host, then pass that full-path to the
+gvfs sftp-backend as a constant string, to be used at runtime to fork
+ssh subprocesses.
 
---------------OUW6nw2JIw9BSPtn4iz0kVQ4
-Content-Type: multipart/mixed; boundary="------------hWJ9UpqQWwz06eYotjT4AXl0"
+As a consequence, if the build machine's ssh client path differs from
+the gvfs target's path - as is common for OE/buildroot builds - gvfs can
+fail at runtime. Further, build machines cannot configure gvfs without
+an ssh client, even though nothing *uses* the client during the build.
 
---------------hWJ9UpqQWwz06eYotjT4AXl0
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: base64
+The .patch in this commit has been upstreamed with gvfs, and modifies
+the configuration to instead pass the string-literal `ssh` to the sftp
+backend. With this change, gvfs will instead rely on PATH-expansion to
+locate the user's ssh-client at runtime.
 
-DQpUaGUgdGltZSBpcyBpbiBwYXN0IG9uIHRoaXMgcGF0Y2guIFBsZWFzZSBmaXggaXQgb24g
-eW91ciBtYWNoaW5lIGJlZm9yZSANCnNlbmRpbmcvY3JlYXRpbmcgcGF0Y2hlcy4gSSBjYW4g
-ZWFzaWx5IG1pc3MgdGhlbSBzaW5jZSB0aGV5IGRvIG5vdCBzb3J0IA0KcHJvcGVybHkgaW4g
-bXkgcXVldWUuDQoNCk9uIDEyLzMxLzIyIDE6MjEgQU0sIHdhbmdteSB3cm90ZToNCj4gRnJv
-bTogV2FuZyBNaW5neXUgPHdhbmdteUBmdWppdHN1LmNvbT4NCj4gDQo+IFNpZ25lZC1vZmYt
-Ynk6IFdhbmcgTWluZ3l1IDx3YW5nbXlAZnVqaXRzdS5jb20+DQo+IC0tLQ0KPiAgIG1ldGEt
-b2UvcmVjaXBlcy1kZXZ0b29scy9kbmYtcGx1Z2luLXR1aS9kbmYtcGx1Z2luLXR1aV9naXQu
-YmIgfCAyICstDQo+ICAgMSBmaWxlIGNoYW5nZWQsIDEgaW5zZXJ0aW9uKCspLCAxIGRlbGV0
-aW9uKC0pDQo+IA0KPiBkaWZmIC0tZ2l0IGEvbWV0YS1vZS9yZWNpcGVzLWRldnRvb2xzL2Ru
-Zi1wbHVnaW4tdHVpL2RuZi1wbHVnaW4tdHVpX2dpdC5iYiBiL21ldGEtb2UvcmVjaXBlcy1k
-ZXZ0b29scy9kbmYtcGx1Z2luLXR1aS9kbmYtcGx1Z2luLXR1aV9naXQuYmINCj4gaW5kZXgg
-OWY5NjE4ODJhLi5jYTJiMjAxMDggMTAwNjQ0DQo+IC0tLSBhL21ldGEtb2UvcmVjaXBlcy1k
-ZXZ0b29scy9kbmYtcGx1Z2luLXR1aS9kbmYtcGx1Z2luLXR1aV9naXQuYmINCj4gKysrIGIv
-bWV0YS1vZS9yZWNpcGVzLWRldnRvb2xzL2RuZi1wbHVnaW4tdHVpL2RuZi1wbHVnaW4tdHVp
-X2dpdC5iYg0KPiBAQCAtNCw3ICs0LDcgQEAgTElDRU5TRSA9ICJHUEwtMi4wLW9ubHkiDQo+
-ICAgTElDX0ZJTEVTX0NIS1NVTSA9ICJmaWxlOi8vQ09QWUlORzttZDU9YjIzNGVlNGQ2OWY1
-ZmNlNDQ4NmE4MGZkYWY0YTQyNjMiDQo+ICAgDQo+ICAgU1JDX1VSSSA9ICJnaXQ6Ly9naXRo
-dWIuY29tL3ViaW51eC9kbmYtcGx1Z2luLXR1aS5naXQ7YnJhbmNoPW1hc3Rlcjtwcm90b2Nv
-bD1odHRwcyINCj4gLVNSQ1JFViA9ICJiMGQ4MGI3MTI5ZjFkODRjYzU2M2E0MDk4ZDg2OWU3
-NDIwYmNmNGJjIg0KPiArU1JDUkVWID0gIjhkMjFmNTI1NzdhYTAzOTU4NzMyYTVhMzQ2YTY3
-OGM2OTllOThjYjYiDQo+ICAgUFYgPSAiMS4zIg0KPiAgIA0KPiAgIFNSQ19VUkk6YXBwZW5k
-OmNsYXNzLXRhcmdldCA9ICIgZmlsZTovL29lLXJlbW90ZS5yZXBvLnNhbXBsZSINCj4gDQo+
-IA0KPiANCj4gLT0tPS09LT0tPS09LT0tPS09LT0tPS0NCj4gTGlua3M6IFlvdSByZWNlaXZl
-IGFsbCBtZXNzYWdlcyBzZW50IHRvIHRoaXMgZ3JvdXAuDQo+IFZpZXcvUmVwbHkgT25saW5l
-ICgjMTAwNDA5KTogaHR0cHM6Ly9saXN0cy5vcGVuZW1iZWRkZWQub3JnL2cvb3BlbmVtYmVk
-ZGVkLWRldmVsL21lc3NhZ2UvMTAwNDA5DQo+IE11dGUgVGhpcyBUb3BpYzogaHR0cHM6Ly9s
-aXN0cy5vcGVuZW1iZWRkZWQub3JnL210Lzk2MDY4NDMxLzE5OTc5MTQNCj4gR3JvdXAgT3du
-ZXI6IG9wZW5lbWJlZGRlZC1kZXZlbCtvd25lckBsaXN0cy5vcGVuZW1iZWRkZWQub3JnDQo+
-IFVuc3Vic2NyaWJlOiBodHRwczovL2xpc3RzLm9wZW5lbWJlZGRlZC5vcmcvZy9vcGVuZW1i
-ZWRkZWQtZGV2ZWwvdW5zdWIgW3Jhai5raGVtQGdtYWlsLmNvbV0NCj4gLT0tPS09LT0tPS09
-LT0tPS09LT0tPS0NCj4gDQo=
---------------hWJ9UpqQWwz06eYotjT4AXl0
-Content-Type: application/pgp-keys; name="OpenPGP_0xBB053355919D3314.asc"
-Content-Disposition: attachment; filename="OpenPGP_0xBB053355919D3314.asc"
-Content-Description: OpenPGP public key
-Content-Transfer-Encoding: quoted-printable
+This obviates the requirement that the build machine have an ssh-client.
 
------BEGIN PGP PUBLIC KEY BLOCK-----
+Signed-off-by: Alex Stewart <alex.stewart@ni.com>
+---
+ ...H-expand-the-sftp-backend-ssh-client.patch | 60 +++++++++++++++++++
+ meta-gnome/recipes-gnome/gvfs/gvfs_1.50.2.bb  |  5 +-
+ 2 files changed, 64 insertions(+), 1 deletion(-)
+ create mode 100644 meta-gnome/recipes-gnome/gvfs/gvfs/0001-daemon-PATH-expand-the-sftp-backend-ssh-client.patch
 
-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
-//VuX4EDPW3CZmbPy6U=3D
-=3D+jUt
------END PGP PUBLIC KEY BLOCK-----
+diff --git a/meta-gnome/recipes-gnome/gvfs/gvfs/0001-daemon-PATH-expand-the-sftp-backend-ssh-client.patch b/meta-gnome/recipes-gnome/gvfs/gvfs/0001-daemon-PATH-expand-the-sftp-backend-ssh-client.patch
+new file mode 100644
+index 0000000000..011858e80c
+--- /dev/null
++++ b/meta-gnome/recipes-gnome/gvfs/gvfs/0001-daemon-PATH-expand-the-sftp-backend-ssh-client.patch
+@@ -0,0 +1,60 @@
++From 8327383e262e1e7f32750a8a2d3dd708195b0f53 Mon Sep 17 00:00:00 2001
++From: Alex Stewart <alex.stewart@ni.com>
++Date: Wed, 14 Dec 2022 03:05:45 -0600
++Subject: [PATCH] daemon: PATH-expand the sftp backend ssh client
++
++Meson is currently configured to search the gvfs builder's PATH for an
++ssh client, and hardcode its fullpath as the canonical ssh client for
++the gvfs sftp backend.
++
++This setup breaks in cases where the builder has a different ssh client
++from the final runtime root, or where the client's pathes differ.
++Builders using OpenEmbedded or buildroot workspaces are particularly
++affected.
++
++Instead, set SSH_PROGRAM to `ssh` so that it gets PATH-expanded at
++runtime.
++
++Closes: https://gitlab.gnome.org/GNOME/gvfs/-/issues/465
++Signed-off-by: Alex Stewart <alex.stewart@ni.com>
++
++Upstream-Status: Accepted
++* https://gitlab.gnome.org/GNOME/gvfs/-/merge_requests/157
++  * Expect upstream merge in GNOME 44
++
++---
++ daemon/meson.build | 2 +-
++ meson.build        | 4 ----
++ 2 files changed, 1 insertion(+), 5 deletions(-)
++
++diff --git a/daemon/meson.build b/daemon/meson.build
++index e20ada29..72a16890 100644
++--- a/daemon/meson.build
+++++ b/daemon/meson.build
++@@ -256,7 +256,7 @@ if enable_sftp
++     '-DDEFAULT_BACKEND_TYPE=sftp',
++     '-DBACKEND_TYPES="sftp", G_VFS_TYPE_BACKEND_SFTP,',
++     '-DMAX_JOB_THREADS=1',
++-    '-DSSH_PROGRAM="@0@"'.format(ssh.full_path()),
+++    '-DSSH_PROGRAM="ssh"',
++   ]
++ 
++   programs += {'gvfsd-sftp': {'sources': sources, 'dependencies': deps, 'c_args': cflags}}
++diff --git a/meson.build b/meson.build
++index 7fd67427..a84c0104 100644
++--- a/meson.build
+++++ b/meson.build
++@@ -457,10 +457,6 @@ endif
++ 
++ # *** SFTP backend ***
++ enable_sftp = get_option('sftp')
++-if enable_sftp
++-  ssh = find_program('ssh', required: false)
++-  assert(ssh.found(), 'SFTP backend requested but a ssh client is required')
++-endif
++ 
++ # *** Enable development utils ***
++ enable_devel_utils = get_option('devel_utils')
++-- 
++2.38.1
++
+diff --git a/meta-gnome/recipes-gnome/gvfs/gvfs_1.50.2.bb b/meta-gnome/recipes-gnome/gvfs/gvfs_1.50.2.bb
+index 5bad2153ce..6ea8727539 100644
+--- a/meta-gnome/recipes-gnome/gvfs/gvfs_1.50.2.bb
++++ b/meta-gnome/recipes-gnome/gvfs/gvfs_1.50.2.bb
+@@ -18,7 +18,10 @@ DEPENDS += "\
+ 
+ RDEPENDS:${PN} += "gsettings-desktop-schemas"
+ 
+-SRC_URI = "https://download.gnome.org/sources/${BPN}/${@gnome_verdir("${PV}")}/${BPN}-${PV}.tar.xz;name=archive"
++SRC_URI = "\
++    https://download.gnome.org/sources/${BPN}/${@gnome_verdir("${PV}")}/${BPN}-${PV}.tar.xz;name=archive \
++    file://0001-daemon-PATH-expand-the-sftp-backend-ssh-client.patch \
++"
+ 
+ SRC_URI[archive.sha256sum] = "03d72b8c15ef438110f0cf457b5655266c8b515d0412b30f4d55cfa0da06ac5e"
+ 
+-- 
+2.38.1
 
---------------hWJ9UpqQWwz06eYotjT4AXl0--
-
---------------OUW6nw2JIw9BSPtn4iz0kVQ4--
-
---------------YB0yaB2L0I02v0DBIiZ6nVO3
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature"
-
------BEGIN PGP SIGNATURE-----
-
-wmMEABEIACMWIQSPpVvapDR0rgZCCc27BTNVkZ0zFAUCY7cqUwUDAAAAAAAKCRC7BTNVkZ0zFFpf
-AJ4g7bc3EKAdQF9f9LlzhX0VoK+PMwCfcQfQJLuM1t0G35Bn+uWTsQzcFpw=
-=ESCA
------END PGP SIGNATURE-----
-
---------------YB0yaB2L0I02v0DBIiZ6nVO3--
 
