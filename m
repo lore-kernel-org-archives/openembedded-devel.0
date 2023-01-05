@@ -1,191 +1,98 @@
-Return-Path: <changqing.li@eng.windriver.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D6754C46467
-	for <webhook@archiver.kernel.org>; Thu,  5 Jan 2023 00:54:37 +0000 (UTC)
-Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
- by mx.groups.io with SMTP id smtpd.web10.2077.1672880072421966213
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 86ED6C46467
+	for <webhook@archiver.kernel.org>; Thu,  5 Jan 2023 03:12:38 +0000 (UTC)
+Received: from mail-pg1-f181.google.com (mail-pg1-f181.google.com [209.85.215.181])
+ by mx.groups.io with SMTP id smtpd.web11.4704.1672888353219063437
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 04 Jan 2023 16:54:32 -0800
+ Wed, 04 Jan 2023 19:12:33 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=pps06212021 header.b=eIRGGVm7;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=036985b30f=changqing.li@windriver.com)
-Received: from pps.filterd (m0250811.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 3050T5Vm007819
-	for <openembedded-devel@lists.openembedded.org>; Thu, 5 Jan 2023 00:54:31 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com; h=from : to :
- subject : date : message-id : mime-version : content-transfer-encoding :
- content-type; s=PPS06212021;
- bh=q49Lg8T2K4tr5lM57gS0e0+96bRS8oJgJ4d6CiCB1zE=;
- b=eIRGGVm7BPby9nH9HUcMUctf6JkAHAs/W37pXtMhjnYqrHf0SSsHzXf+JtBkEN27tied
- GSmRP14zyVZHhnljtOarVCFj47PA+1JS1dOiNENHetu/1ASl3mNgJn+/iLOnFSa5B3Xi
- xcNcorY463GBAZiNgL+gquMdv0x+F4YtUFr3tI3jDk7ayOxQutFxTLYYyZg210KSsu9N
- 4LbDBeAVtaJkDp7TqTwGtSXSzVkEnwhoNNl1Iha0NeFsYreXKc5g9vLN8ovroaRc19SY
- o6Vr1YLz3G2ciRM+ENIelg1Mjf8eg0V+PRZvfDDPDTQcjIGtk6Bh0gXwUZ+nbxB0MDPP Hw== 
-Received: from ala-exchng02.corp.ad.wrs.com (unknown-82-254.windriver.com [147.11.82.254])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3mtaa2ju6b-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Thu, 05 Jan 2023 00:54:31 +0000
-Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
- ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.16; Wed, 4 Jan 2023 16:54:30 -0800
-Received: from pek-lpg-core2.wrs.com (128.224.153.41) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
- 15.1.2507.16 via Frontend Transport; Wed, 4 Jan 2023 16:54:29 -0800
-From: <changqing.li@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [kirkstone][meta-oe][PATCH] zabbix: fix CVE-2022-43515,CVE-2022-46768
-Date: Thu, 5 Jan 2023 08:54:29 +0800
-Message-ID: <20230105005429.1197627-1-changqing.li@windriver.com>
-X-Mailer: git-send-email 2.25.1
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=Otfhf4YZ;
+ spf=pass (domain: gmail.com, ip: 209.85.215.181, mailfrom: raj.khem@gmail.com)
+Received: by mail-pg1-f181.google.com with SMTP id 7so23694803pga.1
+        for <openembedded-devel@lists.openembedded.org>; Wed, 04 Jan 2023 19:12:33 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=Q+UQqheO5XQhkSkbOomfZbb1vE8CP4b9cl4stzy7d38=;
+        b=Otfhf4YZS2iKiLKL24abk8DAWfIsM0pRvUxSYiS0td0kmhPZs4rSTt6fKGKXdoA/Nx
+         ENIPNTYgsj4XGy8Q7e07ZS9Pk1r6axqBtSTTu/BeY+nJhDfkAca18aVUZaXBHG/1pl5H
+         Z5xo0kVLDsxGNjr4kff4lTclyDWeJ9At3myq3k80BOmFX1+GpwvvlMtDqB2hESkuiMrt
+         7uvOnRdsZ105tDUOxMf3BA+FjUkd71ewX0JnpjOztPnBeDn6kdSJv3lVAzAqEFGNuBe4
+         htbuhR9j5WedA+XaL4ey5KDTK/vn38FGon0Xwi0YYtINuJBr/v9AkknOgYM8XIXnaPWe
+         sT9w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=Q+UQqheO5XQhkSkbOomfZbb1vE8CP4b9cl4stzy7d38=;
+        b=gUabQCdvIhgGxrtW5lWvWGHAPkfnQmtWUwRILNnBXfexJ7QuKB1MtUz2ZRDHiU5+A9
+         sBt3EUOYps+AsX65DfjJwRmpd3qLSeGWQ12n24CJmSInRok/xh2cmXW98PO27t7VqWqC
+         ye9B5YP1LGVrGvHDPQjp05HZUB9dc+bAlbrwAx9iQXLpg3jFAYoJmDFpBziZe6vDfq0m
+         cYdkJp2Z97pq7h+oo8c5N/g5lHlzGikOW1lkhuKwGC1MFeO3XD3um0dHJ/YdpEIlnmbY
+         bU/tVwDU6/HxWt1+s2FWE8+KrP5uz4S2y3YJtsqLbCLpeldHz2mPLTQTbPmQcf0taCwY
+         A2kA==
+X-Gm-Message-State: AFqh2ko/bG7f1FYyskOLCZd1u6TdbodjMYhy4RQn/vCDfLOcaTHUr2Or
+	0wFpqQwdDueDownyYbM87qlnYm2NgSY=
+X-Google-Smtp-Source: AMrXdXttPW+IGUvhtsBrwvqhXMbneFDihvaL567oVrKHWmSUiuUEzFxsSvxCDjvHJforp8QnxS/RVw==
+X-Received: by 2002:a62:148f:0:b0:582:46a4:87f6 with SMTP id 137-20020a62148f000000b0058246a487f6mr14990488pfu.22.1672888352185;
+        Wed, 04 Jan 2023 19:12:32 -0800 (PST)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9181:1cf0::bccc])
+        by smtp.gmail.com with ESMTPSA id 123-20020a621881000000b00528a097aeffsm23141757pfy.118.2023.01.04.19.12.30
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 04 Jan 2023 19:12:31 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-networking][PATCH] nftables: Upgrade to 1.0.6
+Date: Wed,  4 Jan 2023 19:12:28 -0800
+Message-Id: <20230105031228.4126802-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.39.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Proofpoint-ORIG-GUID: TdSGxK1D-THDhjqMfwUwrwv8AKEGkoNw
-X-Proofpoint-GUID: TdSGxK1D-THDhjqMfwUwrwv8AKEGkoNw
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.205,Aquarius:18.0.923,Hydra:6.0.545,FMLib:17.11.122.1
- definitions=2023-01-04_07,2023-01-04_02,2022-06-22_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 clxscore=1015 malwarescore=0
- bulkscore=0 priorityscore=1501 lowpriorityscore=0 adultscore=0
- phishscore=0 mlxlogscore=999 impostorscore=0 spamscore=0 mlxscore=0
- suspectscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2212070000 definitions=main-2301050005
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 05 Jan 2023 00:54:37 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100406
+ <openembedded-devel@lists.openembedded.org>; Thu, 05 Jan 2023 03:12:38 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100407
 
-From: Changqing Li <changqing.li@windriver.com>
+Changes are here [1], change to xz compressed archives
 
-Signed-off-by: Changqing Li <changqing.li@windriver.com>
+[1] https://www.netfilter.org/projects/nftables/files/changes-nftables-1.0.6.txt
+
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../zabbix/zabbix/CVE-2022-43515.patch        | 37 +++++++++++++
- .../zabbix/zabbix/CVE-2022-46768.patch        | 53 +++++++++++++++++++
- .../zabbix/zabbix_5.4.12.bb                   |  2 +
- 3 files changed, 92 insertions(+)
- create mode 100644 meta-oe/recipes-connectivity/zabbix/zabbix/CVE-2022-43515.patch
- create mode 100644 meta-oe/recipes-connectivity/zabbix/zabbix/CVE-2022-46768.patch
+ .../nftables/{nftables_1.0.5.bb => nftables_1.0.6.bb}        | 5 ++---
+ 1 file changed, 2 insertions(+), 3 deletions(-)
+ rename meta-networking/recipes-filter/nftables/{nftables_1.0.5.bb => nftables_1.0.6.bb} (95%)
 
-diff --git a/meta-oe/recipes-connectivity/zabbix/zabbix/CVE-2022-43515.patch b/meta-oe/recipes-connectivity/zabbix/zabbix/CVE-2022-43515.patch
-new file mode 100644
-index 0000000000..6028520923
---- /dev/null
-+++ b/meta-oe/recipes-connectivity/zabbix/zabbix/CVE-2022-43515.patch
-@@ -0,0 +1,37 @@
-+From 6b5dfdb31aa503bb0358784c632ff3a04e7a8ff4 Mon Sep 17 00:00:00 2001
-+From: Changqing Li <changqing.li@windriver.com>
-+Date: Wed, 4 Jan 2023 13:51:03 +0800
-+Subject: [PATCH] [DEV-2301] fixed spoofing X-Forwarded-For request header
-+ allows to access Frontend in maintenace mode
-+
-+Upstream-Status: Backport [https://git.zabbix.com/projects/ZBX/repos/zabbix/commits/50668e9d64af32cdc67a45082c556699ff86565e]
-+CVE: CVE-2022-43515
-+
-+Signed-off-by: Changqing Li <changqing.li@windriver.com>
-+---
-+ ui/include/classes/user/CWebUser.php | 6 ++----
-+ 1 file changed, 2 insertions(+), 4 deletions(-)
-+
-+diff --git a/ui/include/classes/user/CWebUser.php b/ui/include/classes/user/CWebUser.php
-+index e6e651e..bfacce7 100644
-+--- a/ui/include/classes/user/CWebUser.php
-++++ b/ui/include/classes/user/CWebUser.php
-+@@ -231,13 +231,11 @@ class CWebUser {
-+ 	}
-+ 
-+ 	/**
-+-	 * Get user ip address.
-++	 * Get user IP address.
-+ 	 *
-+ 	 * @return string
-+ 	 */
-+ 	public static function getIp(): string {
-+-		return (array_key_exists('HTTP_X_FORWARDED_FOR', $_SERVER) && $_SERVER['HTTP_X_FORWARDED_FOR'] !== '')
-+-			? $_SERVER['HTTP_X_FORWARDED_FOR']
-+-			: $_SERVER['REMOTE_ADDR'];
-++		return $_SERVER['REMOTE_ADDR'];
-+ 	}
-+ }
-+-- 
-+2.25.1
-+
-diff --git a/meta-oe/recipes-connectivity/zabbix/zabbix/CVE-2022-46768.patch b/meta-oe/recipes-connectivity/zabbix/zabbix/CVE-2022-46768.patch
-new file mode 100644
-index 0000000000..debd0aaa8e
---- /dev/null
-+++ b/meta-oe/recipes-connectivity/zabbix/zabbix/CVE-2022-46768.patch
-@@ -0,0 +1,53 @@
-+From 7373f92c80eb89941428468cd6b9d5c8879a7f93 Mon Sep 17 00:00:00 2001
-+From: Changqing Li <changqing.li@windriver.com>
-+Date: Wed, 4 Jan 2023 14:23:34 +0800
-+Subject: [PATCH] [DEV-2283] added validation of the scheduled report
-+ generation URL to zabbix-web-service
-+
-+Upstream-Status: Backport [https://git.zabbix.com/projects/ZBX/repos/zabbix/commits/fdb03971867]
-+CVE: CVE-2022-46768
-+
-+Signed-off-by: Changqing Li <changqing.li@windriver.com>
-+---
-+ .../zabbix_web_service/pdf_report_creator.go   | 18 ++++++++++++++++++
-+ 1 file changed, 18 insertions(+)
-+
-+diff --git a/src/go/cmd/zabbix_web_service/pdf_report_creator.go b/src/go/cmd/zabbix_web_service/pdf_report_creator.go
-+index 391b58b..8452a3d 100644
-+--- a/src/go/cmd/zabbix_web_service/pdf_report_creator.go
-++++ b/src/go/cmd/zabbix_web_service/pdf_report_creator.go
-+@@ -29,6 +29,7 @@ import (
-+ 	"net/http"
-+ 	"net/url"
-+ 	"strconv"
-++	"strings"
-+ 	"time"
-+ 
-+ 	"github.com/chromedp/cdproto/emulation"
-+@@ -123,6 +124,23 @@ func (h *handler) report(w http.ResponseWriter, r *http.Request) {
-+ 		return
-+ 	}
-+ 
-++	if u.Scheme != "http" && u.Scheme != "https" {
-++		logAndWriteError(w, fmt.Sprintf("Unexpected URL scheme: \"%s\"", u.Scheme), http.StatusBadRequest)
-++		return
-++	}
-++
-++	if !strings.HasSuffix(u.Path, "/zabbix.php") {
-++		logAndWriteError(w, fmt.Sprintf("Unexpected URL path: \"%s\"", u.Path), http.StatusBadRequest)
-++		return
-++	}
-++
-++	queryParams := u.Query()
-++
-++	if queryParams.Get("action") != "dashboard.print" {
-++		logAndWriteError(w, fmt.Sprintf("Unexpected URL action: \"%s\"", queryParams.Get("action")), http.StatusBadRequest)
-++		return
-++	}
-++
-+ 	log.Tracef(
-+ 		"making chrome headless request with parameters url: %s, width: %s, height: %s for report request from %s",
-+ 		u.String(), req.Parameters["width"], req.Parameters["height"], r.RemoteAddr)
-+-- 
-+2.25.1
-+
-diff --git a/meta-oe/recipes-connectivity/zabbix/zabbix_5.4.12.bb b/meta-oe/recipes-connectivity/zabbix/zabbix_5.4.12.bb
-index f5d89d6c3d..d72d3b1122 100644
---- a/meta-oe/recipes-connectivity/zabbix/zabbix_5.4.12.bb
-+++ b/meta-oe/recipes-connectivity/zabbix/zabbix_5.4.12.bb
-@@ -26,6 +26,8 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
- SRC_URI = "https://cdn.zabbix.com/zabbix/sources/stable/5.4/${BPN}-${PV}.tar.gz \
-     file://0001-Fix-configure.ac.patch \
-     file://zabbix-agent.service \
-+    file://CVE-2022-43515.patch \
-+    file://CVE-2022-46768.patch \
- "
+diff --git a/meta-networking/recipes-filter/nftables/nftables_1.0.5.bb b/meta-networking/recipes-filter/nftables/nftables_1.0.6.bb
+similarity index 95%
+rename from meta-networking/recipes-filter/nftables/nftables_1.0.5.bb
+rename to meta-networking/recipes-filter/nftables/nftables_1.0.6.bb
+index c5a2968d18..789a493127 100644
+--- a/meta-networking/recipes-filter/nftables/nftables_1.0.5.bb
++++ b/meta-networking/recipes-filter/nftables/nftables_1.0.6.bb
+@@ -6,12 +6,11 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d1a78fdd879a263a5e0b42d1fc565e79"
+ DEPENDS = "libmnl libnftnl bison-native \
+            ${@bb.utils.contains('PACKAGECONFIG', 'mini-gmp', '', 'gmp', d)}"
  
- SRC_URI[md5sum] = "f295fd2df86143d72f6ff26e47d9e39e"
+-SRC_URI = "http://www.netfilter.org/projects/nftables/files/${BP}.tar.bz2 \
++SRC_URI = "http://www.netfilter.org/projects/nftables/files/${BP}.tar.xz \
+            file://0001-nftables-python-Split-root-from-prefix.patch \
+            file://run-ptest \
+           "
+-
+-SRC_URI[sha256sum] = "8d1b4b18393af43698d10baa25d2b9b6397969beecac7816c35dd0714e4de50a"
++SRC_URI[sha256sum] = "2407430ddd82987670e48dc2fda9e280baa8307abec04ab18d609df3db005e4c"
+ 
+ inherit autotools manpages pkgconfig ptest
+ 
 -- 
-2.25.1
+2.39.0
 
 
