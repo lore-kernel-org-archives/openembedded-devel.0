@@ -2,56 +2,56 @@ Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 195C5C54EBD
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 19639C63797
 	for <webhook@archiver.kernel.org>; Sun,  8 Jan 2023 15:21:42 +0000 (UTC)
-Received: from mail-ot1-f51.google.com (mail-ot1-f51.google.com [209.85.210.51])
- by mx.groups.io with SMTP id smtpd.web11.46805.1673191280498950988
+Received: from mail-oi1-f181.google.com (mail-oi1-f181.google.com [209.85.167.181])
+ by mx.groups.io with SMTP id smtpd.web11.46814.1673191299254596760
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 08 Jan 2023 07:21:40 -0800
+ Sun, 08 Jan 2023 07:21:39 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=ckr7oXFB;
- spf=pass (domain: gmail.com, ip: 209.85.210.51, mailfrom: akuster808@gmail.com)
-Received: by mail-ot1-f51.google.com with SMTP id m7-20020a9d73c7000000b00683e2f36c18so3904150otk.0
-        for <openembedded-devel@lists.openembedded.org>; Sun, 08 Jan 2023 07:21:40 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=ERsMBsCx;
+ spf=pass (domain: gmail.com, ip: 209.85.167.181, mailfrom: akuster808@gmail.com)
+Received: by mail-oi1-f181.google.com with SMTP id i127so5176866oif.8
+        for <openembedded-devel@lists.openembedded.org>; Sun, 08 Jan 2023 07:21:39 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=qqakWtwzBQPVvrZFBkrUAL1LsG1+MzxxlprJnGD8bCQ=;
-        b=ckr7oXFBmapoG8OZ6nv6ppL8bvGu2hp8dVN6KWnRW2FYXzZk+ZenBIgbl+zj1UVSyI
-         NzUFbuX9BB49XRq8zooPv25tbjLmQ2lxUGmgF8GQD3cXub85g1rxzg2LIZX1e4Xua6ks
-         QoXJt4QcInyl5GRl0ToapntviKbkuR+x8/GX9yrzTbAJqyAyyCRa8X1qjhIjMkR9dEGi
-         4PlDifB/AEINSI5LKqVh2lDxfm3LW2L1LXjQPaOX2RKpYObOJHF0bTYmM8S2+recyaB6
-         LQuqguS4LaVzrauR6vSUXqIrhdTqlNV7WpTBCowrvrdX2IetDlKctuPU5ZoosklRIsg7
-         LoLQ==
+        bh=TtsuWYOcfwDcNYKi51X6Yo7QJ6wN9dZA7+REMnXUzUI=;
+        b=ERsMBsCxtP1UTetZ6CRw2JvQXfLXrsga6WlOmDttVaSV4WZukUrNkbDf1I66F/5AoH
+         /UlpGFlLh/EeMg4eNtrmH5anvx40bhh5Yoh6NdniWDC5qwj1e6VreTHUYOE9vn9GUCMO
+         SMeDd7lJVctCO5GBFE+Wt4bhn8E6+yg/4FfxD/mDtr5qTzrPb3SrtGbnJmttMnL9O/ZB
+         XpJjH2BcoPzVDhtAcgKAfUnSdtndPzawonSCjzw4rKqLXzuDqLWcDKRYGDc3IqNahILx
+         nf9QxAYoVRAW0taOtt+wYXY2iMGYm+zjj+7N0P1u+tgXTwOYYJ2QSIoAtW1gKfd+ImzG
+         fjCA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=qqakWtwzBQPVvrZFBkrUAL1LsG1+MzxxlprJnGD8bCQ=;
-        b=EVc5SX7h8bGeTuQxnqEzW7uMm8DLQNob8w0QD5fbAI9f6DXxFdbPZ1qFoKXH2m+TUh
-         Yx7Daguf+j5EYRoU7PypcwIt7PCU7iOm2nMqnWiQxqAooE+03YCXavzZfkfOY0elGIxn
-         m1MkdLBT0nGGWz+7dTUJYmxbtRb7DeJX0d0hoeVyobu1W2bRW0SUmwqJImeKOJJW/c+G
-         GnYKduqsU6JAIudk1Cz6hPaAwRAwKP+b1XI8ZgboOb5YxgzRry0nz1KMWHmhdN/xe7CR
-         vOG6Fcp9rNhBsl2zvXRTFFhhhHomkuyWdmJ6Zf1ebnfu8G8EHKM6yi6yNakCle1FhWNN
-         158g==
-X-Gm-Message-State: AFqh2kr8/XilMKQmgxLHDGpYavQEXuWxFRahMMaWOQNj7br5E+wQcVQ6
-	YZabq6GKso3fSCej+lUkauzvVCa45FE=
-X-Google-Smtp-Source: AMrXdXsQR3xlBQoa/Vq7mYx1NCNE+VfHhOSrDaTC6hPRCqAfcp25RjNefy3bsNpgJWb/YHg2B9DlbA==
-X-Received: by 2002:a9d:6e9:0:b0:66d:ef2d:1ded with SMTP id 96-20020a9d06e9000000b0066def2d1dedmr28936473otx.9.1673191300024;
-        Sun, 08 Jan 2023 07:21:40 -0800 (PST)
+        bh=TtsuWYOcfwDcNYKi51X6Yo7QJ6wN9dZA7+REMnXUzUI=;
+        b=b4tOy0Cu6ix8vQpJ5gN7Lm0UZNYgNSUPfeD7HXxZdBeAPNS8V7sYzfm60x+DxeMny1
+         HfLypQwaFnhTIvM1IyH7NAGwzT3pywNlPVWU+GergbmrGM1k7wrfCgvRuIvqc/Rwmabi
+         /iPHNjPUzuTKtAPmAf6va+uPCKslLMdq5VpwI8HUhRUB0WFAOTk8pLXtQiCfocaSf/mx
+         1mz2hVAXpiR/HcrVSsDb8NOAV7BuZ0d1dbYTNTBY57KD13IztkwSyHegT0SXa1PC8UKU
+         J4dmwUHaWKDV4sveQejHLmMjU4YUG1cPTw8REV/5oVzwWTsaap9VPFxpiBtDhH5oQcWI
+         MmsA==
+X-Gm-Message-State: AFqh2kqySFOlTZiqV8Hj/f22fkRiBg1qUIsggouUo1G20uauoqY3sxlK
+	CoBa2PiU/1NcDnqZPfndexi7FuUuAuI=
+X-Google-Smtp-Source: AMrXdXsNa4rwTxHEuZTY3ZsCaEZljua6B6pqFJgnFuKu+kqHODYXFQN0EkgcwuHoIg/ZDo2oUQU9xg==
+X-Received: by 2002:a05:6808:14c1:b0:35b:9e91:305c with SMTP id f1-20020a05680814c100b0035b9e91305cmr36394720oiw.9.1673191298433;
+        Sun, 08 Jan 2023 07:21:38 -0800 (PST)
 Received: from keaua.attlocal.net ([2600:1700:9190:ba10:14ca:f21f:f9fe:c54d])
-        by smtp.gmail.com with ESMTPSA id s24-20020a056830125800b00684074fbce6sm3184725otp.54.2023.01.08.07.21.39
+        by smtp.gmail.com with ESMTPSA id s24-20020a056830125800b00684074fbce6sm3184725otp.54.2023.01.08.07.21.37
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 08 Jan 2023 07:21:39 -0800 (PST)
+        Sun, 08 Jan 2023 07:21:38 -0800 (PST)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [langdale 21/26] postfix: fix multilib conflict of sample-main.cf
-Date: Sun,  8 Jan 2023 10:20:56 -0500
-Message-Id: <f4b166416f982da54cfb1f9546e89020451ef2b4.1673191116.git.akuster808@gmail.com>
+Subject: [langdale 20/26] smcroute: upgrade 2.5.5 -> 2.5.6
+Date: Sun,  8 Jan 2023 10:20:55 -0500
+Message-Id: <0b07e0e16801d2a0963871899fa138cdb902d9bc.1673191116.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <cover.1673191116.git.akuster808@gmail.com>
 References: <cover.1673191116.git.akuster808@gmail.com>
@@ -61,39 +61,49 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sun, 08 Jan 2023 15:21:42 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100466
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100465
 
-From: Kai Kang <kai.kang@windriver.com>
+From: Wang Mingyu <wangmy@fujitsu.com>
 
-It fails to install postfix and lib32-postfix at same time:
+Changelog:
+==========
+- Add smcroutectl batch support, issue #189. Based on the IPC support added in issue #185
+- Fix #178: invalid systemd daemon type Simple/Notify vs simple/notify
+- Fix #179: typo in wildcard routes section of README
+- Fix #180: minor typo in file and directory names in documentation
+- Fix #183: casting in IPC code hides error handling of recv()
+- Fix #186: NULL pointer dereference in utimensat() replacement function.
+  Found accidentally by Alexey Smirnov. Only triggered on systems that don't
+  have a native utimensat() in their C-library, or if you try to build
+  SMCRoute without using its own build system ...
+- Fix #187: strange behavior joining/leaving the same group
+- Fix #192: typo in README
 
-| Error: Transaction test error:
-|   file /etc/postfix/sample-main.cf conflicts between attempted installs of
-    lib32-postfix-cfg-3.7.3-r0.i586 and postfix-cfg-3.7.3-r0.core2_64
-
-Rename sample-main.cf with ${MLPREFIX}.
-
-Signed-off-by: Kai Kang <kai.kang@windriver.com>
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit b75c138a1cdfacb4a9fba2a291a0d15f0691526b)
+(cherry picked from commit abc501113aa7e136963c1bbab9b202d425014dbf)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-networking/recipes-daemons/postfix/postfix.inc | 2 +-
+ .../smcroute/{smcroute_2.5.5.bb => smcroute_2.5.6.bb}           | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-networking/recipes-support/smcroute/{smcroute_2.5.5.bb => smcroute_2.5.6.bb} (90%)
 
-diff --git a/meta-networking/recipes-daemons/postfix/postfix.inc b/meta-networking/recipes-daemons/postfix/postfix.inc
-index 8a4428c504..5133caaa46 100644
---- a/meta-networking/recipes-daemons/postfix/postfix.inc
-+++ b/meta-networking/recipes-daemons/postfix/postfix.inc
-@@ -115,7 +115,7 @@ do_install () {
-         'data_directory=${localstatedir}/lib/postfix' \
-         -non-interactive
-     rm -rf ${D}${localstatedir}/spool/postfix
--    mv ${D}${sysconfdir}/postfix/main.cf ${D}${sysconfdir}/postfix/sample-main.cf
-+    mv ${D}${sysconfdir}/postfix/main.cf ${D}${sysconfdir}/postfix/${MLPREFIX}sample-main.cf
-     install -m 755 ${S}/bin/smtp-sink ${D}/${sbindir}/
-     install -d ${D}${sysconfdir}/init.d
-     install -m 644 ${WORKDIR}/main.cf ${D}${sysconfdir}/postfix/main.cf
+diff --git a/meta-networking/recipes-support/smcroute/smcroute_2.5.5.bb b/meta-networking/recipes-support/smcroute/smcroute_2.5.6.bb
+similarity index 90%
+rename from meta-networking/recipes-support/smcroute/smcroute_2.5.5.bb
+rename to meta-networking/recipes-support/smcroute/smcroute_2.5.6.bb
+index b0b96bed8f..09752825c2 100644
+--- a/meta-networking/recipes-support/smcroute/smcroute_2.5.5.bb
++++ b/meta-networking/recipes-support/smcroute/smcroute_2.5.6.bb
+@@ -5,7 +5,7 @@ SECTION = "net"
+ LICENSE = "GPL-2.0-or-later"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
+ 
+-SRCREV = "9ca7441add4427a91fe90c34ae4a178ed9a50553"
++SRCREV = "999bdd724a1f963ac8bfd0598ffdd2a3d651646e"
+ SRC_URI = "git://github.com/troglobit/smcroute.git;branch=master;protocol=https"
+ 
+ S = "${WORKDIR}/git"
 -- 
 2.25.1
 
