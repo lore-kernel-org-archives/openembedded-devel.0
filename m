@@ -2,56 +2,56 @@ Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0D738C54EBD
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 083D0C53210
 	for <webhook@archiver.kernel.org>; Sun,  8 Jan 2023 15:21:32 +0000 (UTC)
-Received: from mail-oi1-f178.google.com (mail-oi1-f178.google.com [209.85.167.178])
- by mx.groups.io with SMTP id smtpd.web11.46810.1673191288505181490
+Received: from mail-ot1-f44.google.com (mail-ot1-f44.google.com [209.85.210.44])
+ by mx.groups.io with SMTP id smtpd.web11.46806.1673191282128701687
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 08 Jan 2023 07:21:28 -0800
+ Sun, 08 Jan 2023 07:21:22 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=BITQTFIB;
- spf=pass (domain: gmail.com, ip: 209.85.167.178, mailfrom: akuster808@gmail.com)
-Received: by mail-oi1-f178.google.com with SMTP id r11so5152167oie.13
-        for <openembedded-devel@lists.openembedded.org>; Sun, 08 Jan 2023 07:21:28 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=kSoDSs1h;
+ spf=pass (domain: gmail.com, ip: 209.85.210.44, mailfrom: akuster808@gmail.com)
+Received: by mail-ot1-f44.google.com with SMTP id x44-20020a05683040ac00b006707c74330eso3833073ott.10
+        for <openembedded-devel@lists.openembedded.org>; Sun, 08 Jan 2023 07:21:21 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=vYylRMTDTH0U53TXHHiLy/2ksDT9UdvRXlNOxLzYBIo=;
-        b=BITQTFIBHO+dOGl4nAxEmhKI4JWoV0/AAtpr0uQz8B11FZ5SIIv0ns5ZtEC31vIKr+
-         biraxKwcoop8/tEHk6d2bS0ScornTfvduZQ9edKILxDL8epy0nbfVz60k3dyiPYQxkvP
-         TVzyiO938DyZEDyO/Uf/XP7lM3hwn3Hc9aC6lPnXOD2Zx1+Rb1xCNIxYBzQxDCDAGmtc
-         RUpFbUpzIvDWxcHrAY+SvQcrBq8Mn0KHJh96LbZCXhccPfVdO1b+E14rUYSVTGIU1C7i
-         TYLl6Zs1/6A+7o/4r5BeeMds+0N449ONjfDeHIjNHzWY1vXax0EQ3BDCRwkjdbYx2uqv
-         ewMQ==
+        bh=85gfWC0+v9s9SKcF1NDhVkZbXsFsbBnTrOuJXQDPdgg=;
+        b=kSoDSs1h04qGRBmGOh2zNjw1ke2WekwLuKoU6zju61u559aJdeVp/NvHuFLTyfFT6u
+         TmnfYRIGPZvbFNZCtxvdi8PlvAI4Lzxb1ILHLxn181Lcm5uetDC1I9+8ZiGLArNK+G7z
+         ANaPE8+1ZahlAogZAWc6DdTMqe7XqKFoJarak5eFwQmc2eDmsRHK1c6BNWYXrkEPLGl9
+         5/5NOji355TCbbtwv2+3JAmZ7F45Pmr/5dQyzhNe1IxmtJn2Y4tq1jxxuNu/qqaW5XXM
+         srdQv647ZJyEM6nCUrRzlWw0w+vuCi71S/EW+Yb+h6xgAAPknT2msSAIGBp7tezojdYC
+         u+QQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=vYylRMTDTH0U53TXHHiLy/2ksDT9UdvRXlNOxLzYBIo=;
-        b=Ap4ifwokE3z3cv5GTVTOALz0qjI9C9udHhs2ZCGgiN5MACnX3DGFXnaIquz4cCwfEy
-         ClkqZXKJKC1Iyju/7K9XIPyWJxmtsxoblJMBio9t4+J8gspAGrrA3ylA2ZarbP/++uXv
-         aNbTawaY2kvy4XPOPoHha/LNGeE48I3CXW88wVRWFQQPSS3w5PegNnSZIfOvB7GW+61s
-         /AiRYJJ4mFcTJoemZ/0Z6YpH4jgy29cKKFoai0P2OYaRbjRA900OhuGUeC2lslNw17k8
-         A6T9ckvW2JvVPuz/cofwg2ChTRFfJK0+J0YTIjdUSm2cth4edmOIIOqbiq3LH/p2A2Lr
-         73Kg==
-X-Gm-Message-State: AFqh2kr+E0rtKC5PGDb2fUCy124Ijn+Xp1WDA+VGidhwzdkKwq4D60o7
-	Ij2jQ9WJrWFTRuqj+2Qj+ImcQfIsZn4=
-X-Google-Smtp-Source: AMrXdXvmBTJK8nWnIPDuqVJwLVhq991oUzb3/48LLOUO1GR9G3AiQGRDsnTFoEhpD4CI0YDpXqd9YQ==
-X-Received: by 2002:a05:6808:18a5:b0:35b:e81d:285b with SMTP id bi37-20020a05680818a500b0035be81d285bmr32499319oib.28.1673191287714;
-        Sun, 08 Jan 2023 07:21:27 -0800 (PST)
+        bh=85gfWC0+v9s9SKcF1NDhVkZbXsFsbBnTrOuJXQDPdgg=;
+        b=mF7e3tJkz6Sh5Dx778pK2YonrdCaeWpUMesV4UlGgTbKg4/tmDGoX5UxgsQHaBn6Lw
+         uZ3rOd+tK62dniXyVPp1yx2g+7AqkaEUuiZeBOvRRLGS7Pnlpe66CoNJlpzuwXVjkQT2
+         bI0Qj+ZBXyN+F8kg82g9nwk5IJR6JWtWEiPIYnSJECeudB/ug63t29J7fTnPdwMg56BE
+         rNrnaUW5bnFqkLwsqPR3s5KAspPS4LiNRgvIotJ5zMuZoKCvVGc9698/XE7zMAZmnh63
+         1Ei7dLRFDhYniMt8REyeCaiLGkhNFHWe/pbDFb1wtWsT9m7e2/7eAGQd1to3CsLVgJ41
+         7pMA==
+X-Gm-Message-State: AFqh2kr64yeeepWxD9YJBt/2jJCVk1oejNEOvgxnBv4VAKD+0k/MkmVS
+	k8VvE+Z2YX1dTCfODzIcfpktaPY7qLo=
+X-Google-Smtp-Source: AMrXdXuuokNn6G5+JRbcRw0g0p4/sapx+zrR4ALgsxWnhpgxQ8sRYvWU2Z7t056UZKBko1zc+FhNFg==
+X-Received: by 2002:a05:6830:1da6:b0:670:a09e:c7d2 with SMTP id z6-20020a0568301da600b00670a09ec7d2mr39791927oti.30.1673191281326;
+        Sun, 08 Jan 2023 07:21:21 -0800 (PST)
 Received: from keaua.attlocal.net ([2600:1700:9190:ba10:14ca:f21f:f9fe:c54d])
-        by smtp.gmail.com with ESMTPSA id s24-20020a056830125800b00684074fbce6sm3184725otp.54.2023.01.08.07.21.27
+        by smtp.gmail.com with ESMTPSA id s24-20020a056830125800b00684074fbce6sm3184725otp.54.2023.01.08.07.21.20
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 08 Jan 2023 07:21:27 -0800 (PST)
+        Sun, 08 Jan 2023 07:21:20 -0800 (PST)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [langdale 15/26] aufs-util: Fix build with large file support enabled systems
-Date: Sun,  8 Jan 2023 10:20:50 -0500
-Message-Id: <dfab7834b6d2bcfe7f6fafcc2b69273a5b0ad5c5.1673191116.git.akuster808@gmail.com>
+Subject: [langdale 09/26] protobuf: stage protoc binary to sysroot
+Date: Sun,  8 Jan 2023 10:20:44 -0500
+Message-Id: <a7212d75fcfe871d6a9c292df8620cc68ec5fb39.1673191116.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <cover.1673191116.git.akuster808@gmail.com>
 References: <cover.1673191116.git.akuster808@gmail.com>
@@ -61,76 +61,52 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sun, 08 Jan 2023 15:21:32 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100460
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100454
 
-From: Khem Raj <raj.khem@gmail.com>
+From: Samuli Piippo <samuli.piippo@gmail.com>
 
-Fixes
+If protoc is enabled for the build, recipes using protobuf will
+fail when protoc is not available in the recipe sysroot:
 
-| /mnt/b/yoe/master/build/tmp/work/cortexa15t2hf-neon-yoe-linux-gnueabi/aufs-util/4.9+gitAUTOINC+8f35db59ef-r0/recipe-sysroot-native/usr/bin/arm-yoe-linux-gnueabi/arm-yoe-linux-gnueabi-ld: rdu64.o: in function `readdir64':
-| <unknown>:122: multiple definition of `readdir64'; rdu.o:<unknown>:122: first defined here
-| /mnt/b/yoe/master/build/tmp/work/cortexa15t2hf-neon-yoe-linux-gnueabi/aufs-util/4.9+gitAUTOINC+8f35db59ef-r0/recipe-sysroot-native/usr/bin/arm-yoe-linux-gnueabi/arm-yoe-linux-gnueabi-ld: rdu64.o: in function `readdir64_r':
-| <unknown>:139: multiple definition of `readdir64_r'; rdu.o:<unknown>:139: first defined here
+|   The imported target "protobuf::protoc" references the file
+|
+|      ".../recipe-sysroot/usr/local/oe-sdk-hardcoded-buildpath/sysroots/x86_64-pokysdk-linux/usr/bin/protoc-3.21.5.0"
+|
+|   but this file does not exist.  Possible reasons include:
+|
+|   * The file was deleted, renamed, or moved to another location.
+|
+|   * An install or uninstall procedure did not complete successfully.
+|
+|   * The installation package was faulty and contained
+|
+|      ".../recipe-sysroot/usr/local/oe-sdk-hardcoded-buildpath/sysroots/x86_64-pokysdk-linux/usr/lib/cmake/protobuf/protobuf-targets.cmake"
+|
+|   but not all the files it references.
 
+Use SYSROOT_DIRS to stage the binary to sysroot so it's always
+available for other recipes.
+
+Signed-off-by: Samuli Piippo <samuli.piippo@qt.io>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit c8e7f93867671a23f2b6d4a7559ea024a0dfc784)
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
+(cherry picked from commit d7f46fa816964e30edb2ccfecc57a26251cc351c)
 ---
- ...-Do-not-build-LFS-version-of-readdir.patch | 32 +++++++++++++++++++
- .../recipes-utils/aufs-util/aufs-util_git.bb  |  1 +
- 2 files changed, 33 insertions(+)
- create mode 100644 meta-filesystems/recipes-utils/aufs-util/aufs-util/0001-libau-Do-not-build-LFS-version-of-readdir.patch
+ meta-oe/recipes-devtools/protobuf/protobuf_3.21.5.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-filesystems/recipes-utils/aufs-util/aufs-util/0001-libau-Do-not-build-LFS-version-of-readdir.patch b/meta-filesystems/recipes-utils/aufs-util/aufs-util/0001-libau-Do-not-build-LFS-version-of-readdir.patch
-new file mode 100644
-index 0000000000..c983733dcb
---- /dev/null
-+++ b/meta-filesystems/recipes-utils/aufs-util/aufs-util/0001-libau-Do-not-build-LFS-version-of-readdir.patch
-@@ -0,0 +1,32 @@
-+From 12ba95281d0bbea3576350d635b4dee0f953b94a Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Tue, 29 Nov 2022 18:38:07 -0800
-+Subject: [PATCH] libau: Do not build LFS version of readdir
+diff --git a/meta-oe/recipes-devtools/protobuf/protobuf_3.21.5.bb b/meta-oe/recipes-devtools/protobuf/protobuf_3.21.5.bb
+index c8b9158e6c..201908f3c9 100644
+--- a/meta-oe/recipes-devtools/protobuf/protobuf_3.21.5.bb
++++ b/meta-oe/recipes-devtools/protobuf/protobuf_3.21.5.bb
+@@ -92,6 +92,8 @@ PACKAGE_BEFORE_PN = "${PN}-compiler ${PN}-lite"
+ FILES:${PN}-compiler = "${bindir} ${libdir}/libprotoc${SOLIBS}"
+ FILES:${PN}-lite = "${libdir}/libprotobuf-lite${SOLIBS}"
+ 
++SYSROOT_DIRS += "${bindir}"
 +
-+rdu64 is providing largefile supported version of readdir and readdir_r
-+however, we enable largefile support unconditionally in OE therefore its
-+not needed since readdir() and readdir_r() are already LFS capable
-+
-+Upstream-Status: Inappropriate [OE-Specific]
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ libau/Makefile | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/libau/Makefile b/libau/Makefile
-+index 9ada831..1fd1ccc 100644
-+--- a/libau/Makefile
-++++ b/libau/Makefile
-+@@ -30,7 +30,7 @@ STRIP ?= strip
-+ all: ${LibSo}
-+ 
-+ ifeq (${Glibc},yes)
-+-LibSoObj += rdu64.o
-++#LibSoObj += rdu64.o
-+ 
-+ # this is unnecessary on 64bit system?
-+ rdu64.c: rdu.c
-+-- 
-+2.38.1
-+
-diff --git a/meta-filesystems/recipes-utils/aufs-util/aufs-util_git.bb b/meta-filesystems/recipes-utils/aufs-util/aufs-util_git.bb
-index f565be3f7e..fbf7753b02 100644
---- a/meta-filesystems/recipes-utils/aufs-util/aufs-util_git.bb
-+++ b/meta-filesystems/recipes-utils/aufs-util/aufs-util_git.bb
-@@ -12,6 +12,7 @@ SRC_URI = "git://git.code.sf.net/p/aufs/aufs-util;protocol=git;branch=aufs4.9 \
-            https://raw.githubusercontent.com/sfjro/aufs4-linux/aufs4.9/include/uapi/linux/aufs_type.h;name=aufs_type \
-            file://aufs-util-don-t-strip-executables.patch \
-            file://aufs-util-add-tool-concept-to-Makefile-for-cross-com.patch \
-+           file://0001-libau-Do-not-build-LFS-version-of-readdir.patch \
- "
- SRC_URI[aufs_type.md5sum] = "b37129ef0703de72a852db7e48bdedc6"
- SRC_URI[aufs_type.sha256sum] = "7ff6566adb9c7a3b6862cdc85a690ab546f1d0bc81ddd595fd663c0a69031683"
+ RDEPENDS:${PN}-compiler = "${PN}"
+ RDEPENDS:${PN}-dev += "${PN}-compiler"
+ RDEPENDS:${PN}-ptest = "bash ${@bb.utils.contains('PACKAGECONFIG', 'python', 'python3-protobuf', '', d)}"
 -- 
 2.25.1
 
