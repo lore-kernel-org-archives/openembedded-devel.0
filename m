@@ -1,83 +1,86 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <geoffhp@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 75737C46467
-	for <webhook@archiver.kernel.org>; Sat,  7 Jan 2023 03:28:11 +0000 (UTC)
-Received: from mail-pj1-f54.google.com (mail-pj1-f54.google.com [209.85.216.54])
- by mx.groups.io with SMTP id smtpd.web10.13365.1673062087260178293
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6E9DAC46467
+	for <webhook@archiver.kernel.org>; Sun,  8 Jan 2023 02:34:08 +0000 (UTC)
+Received: from mail-pf1-f171.google.com (mail-pf1-f171.google.com [209.85.210.171])
+ by mx.groups.io with SMTP id smtpd.web10.36988.1673145246608761450
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 06 Jan 2023 19:28:07 -0800
+ Sat, 07 Jan 2023 18:34:06 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=I8XQCG7W;
- spf=pass (domain: gmail.com, ip: 209.85.216.54, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f54.google.com with SMTP id z4-20020a17090a170400b00226d331390cso3766500pjd.5
-        for <openembedded-devel@lists.openembedded.org>; Fri, 06 Jan 2023 19:28:07 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=oqcM+Y2k;
+ spf=pass (domain: gmail.com, ip: 209.85.210.171, mailfrom: geoffhp@gmail.com)
+Received: by mail-pf1-f171.google.com with SMTP id a184so3781536pfa.9
+        for <openembedded-devel@lists.openembedded.org>; Sat, 07 Jan 2023 18:34:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=+JiB1FCTRKKFdL+V8I8PCkhOWcKMV6eZ0VSrOoeg1rk=;
-        b=I8XQCG7WNuvbAoKKsnTbJhgec8v6CYxZQBfdPhN0GRB9CTrsniQWdXO1eSa94/paXy
-         +6G4fHnsCOdlfMbmva2+d+BusULBq72AL1TBy0uc5MhSGM1D4OTE1fGnFlWZoKIchRoL
-         UuUpCt5AJmyGg3mbe38d/QLsgpKy8aVy0I/neluwQXATVEJsTywYUh3L1fsxkb/0Mkf4
-         uqnWjUFnHkPwbES5Vo1SMcVtukYpANgGEXhqt7TtmEgmUyvdpAoLBVSqcefzn9p8RHKO
-         /A7vPL51LQ7+LqIPm03/7iBadByJA1kOqbbD0X/x1skonbNJOBM9Z58TBcAueGI6LOoP
-         w0CQ==
+        bh=+5UrE/bGb85nwO9J1RG5z9Ynr1anUI5B4utRISZ4GiY=;
+        b=oqcM+Y2kLpoEas9z4vS+dBm73bTxqkVC4rlu7ku33ANakuuWE2MURdICKYqQK1QGFT
+         JGwHyjtr4vZO2S0xxWt9SBuJv5eWwKiCtEP+slK6igGKAVOYgtEvYNbOEswcMc4AuKDr
+         PvXeG1sYGx9e7UiYO3Ckp4uSZGZ/UDFRKXj0JYCUuZunGfjQXb4co7gRtVcKcTPgbRYn
+         je5L3g1slfjwHO1cfslc7qlrjYbomuHpRsSm9JKv0gZaxzeeQZz8LNjfLXdGkYunG5G2
+         CDhzEF1Kg0iU8CK1TsqpBz90TnE5Uo1XF/tvPydLqVNglYub7ZES5AKWxP5UU7IMYoJw
+         RNqA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=+JiB1FCTRKKFdL+V8I8PCkhOWcKMV6eZ0VSrOoeg1rk=;
-        b=D2rowEWmEMffMPNVvTyXLOJiilLeFBGYNoFZsXhj+ptivc6SSXWm4t9zXkRcKxKwuy
-         +esZ0Jm/m+St02Ue00FbdhecL2oaXXji3KmpW8UAkJi091emrVSkmAV/wTR3Jk+ne1MA
-         5/qj61FyZ3nPA6VD2cj1a/UskkYFq+5lcraMLDgnUnstpKqc8f5yVJ+uqNJcxK0+/z0j
-         OSVV1t6/OZbauzehSaBspmAcW7LBnQDus380Aommdm3Tg6oRxPOCHHH/vzBquIBIZq/7
-         i9UI9IkUc6y2QMpI9U/mgQuGfrA4V9CP1HjQPlfZenrewVGR2WKd3TQwK3nG7kPx0Dtv
-         jv9Q==
-X-Gm-Message-State: AFqh2kp9JEgtFAm2Sz1XlZdZZYltrWJDgvXNKY+fIkev5yX531AVXdOP
-	id4B12nwA6Si3Xp6f6cjv9HoZ0fahZ+Gzw==
-X-Google-Smtp-Source: AMrXdXscIKapuN3Sh0KMfjLVoorjqtheSo6oZANghZtkZkd4q4gu2DWQ1vixYU/XcXc/zfyl2iQ+yg==
-X-Received: by 2002:a17:902:8e8b:b0:192:e4cf:ca64 with SMTP id bg11-20020a1709028e8b00b00192e4cfca64mr13564316plb.28.1673062086460;
-        Fri, 06 Jan 2023 19:28:06 -0800 (PST)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9181:1cf0::ee35])
-        by smtp.gmail.com with ESMTPSA id w19-20020a170902ca1300b001896040022asm1617131pld.190.2023.01.06.19.28.05
+        bh=+5UrE/bGb85nwO9J1RG5z9Ynr1anUI5B4utRISZ4GiY=;
+        b=uUtD+ADqjTVefneGBpWt94/q2m0ONqPun1twKfQ1VB8v7Bh+b/Fwx0yFTUzBOx5Rkb
+         XseyGPN32osLednCYjMnPPzWCWHQzPls696We+DqdgB/qTK/A+b9aHUpHFlL48RltB9b
+         NiMAVcxhm1kUu9DNAvlYIlMN02yfXxrF7+ufYij+DqKLBdb4ALwZ7Cf0zJJhBf79r5u0
+         oZ4gYhGjOQxNpzfXBZM0zt4yvTyd8/ka2Yx0cwXCKSD9H0iAbamMWQEXO+35HJIv2drV
+         Xq6S45/a5ngSJOCjKSOB8Fz4sbbAczqj026n6kwzrolYWWCfg+ZFMfsK19EBtUjipZSC
+         b81A==
+X-Gm-Message-State: AFqh2koc8GwyrGxD2wPnUZR4e+M9/VB4mprq291P52TQ8TI/hLxLkFDj
+	W7fCV7O15UX1j+MnmzuHzGEvrUBApAA=
+X-Google-Smtp-Source: AMrXdXuNK8f9Ky9KLT/Gv2UNJ7004VfnScob4UtUzoaXhdR4br9QjL/xLP3taxweB140MV8XKzxMtw==
+X-Received: by 2002:a62:d45e:0:b0:56e:dca8:ba71 with SMTP id u30-20020a62d45e000000b0056edca8ba71mr52727134pfl.32.1673145245707;
+        Sat, 07 Jan 2023 18:34:05 -0800 (PST)
+Received: from localhost.localdomain (cpe-107-185-48-203.socal.res.rr.com. [107.185.48.203])
+        by smtp.gmail.com with ESMTPSA id o13-20020a63e34d000000b004a3510effa5sm2917516pgj.65.2023.01.07.18.34.04
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 06 Jan 2023 19:28:06 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
+        Sat, 07 Jan 2023 18:34:05 -0800 (PST)
+From: geoffhp@gmail.com
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH] concurrencykit: Set correct PLAT value for riscv32
-Date: Fri,  6 Jan 2023 19:28:03 -0800
-Message-Id: <20230107032803.1593510-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.39.0
+Cc: Geoff Parker <geoffrey.parker@arthrex.com>
+Subject: [meta-java][master][PATCH] layer.conf: Switch LAYERSERIES_COMPAT to mickledore
+Date: Sat,  7 Jan 2023 18:33:39 -0800
+Message-Id: <20230108023339.3626880-1-geoffhp@gmail.com>
+X-Mailer: git-send-email 2.30.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 07 Jan 2023 03:28:11 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100433
+ <openembedded-devel@lists.openembedded.org>; Sun, 08 Jan 2023 02:34:08 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100434
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+From: Geoff Parker <geoffrey.parker@arthrex.com>
+
+Signed-off-by: Geoff Parker <geoffrey.parker@arthrex.com>
 ---
- meta-oe/recipes-devtools/concurrencykit/concurrencykit_git.bb | 1 +
- 1 file changed, 1 insertion(+)
+ conf/layer.conf | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-devtools/concurrencykit/concurrencykit_git.bb b/meta-oe/recipes-devtools/concurrencykit/concurrencykit_git.bb
-index cb65250e9a..fe2c1d201a 100644
---- a/meta-oe/recipes-devtools/concurrencykit/concurrencykit_git.bb
-+++ b/meta-oe/recipes-devtools/concurrencykit/concurrencykit_git.bb
-@@ -21,6 +21,7 @@ inherit autotools-brokensep
+diff --git a/conf/layer.conf b/conf/layer.conf
+index bf592de..c571df5 100644
+--- a/conf/layer.conf
++++ b/conf/layer.conf
+@@ -7,7 +7,7 @@ BBFILES += "${LAYERDIR}/recipes*/*/*.bb ${LAYERDIR}/recipes*/*/*.bbappend"
+ BBFILE_COLLECTIONS += "meta-java"
+ BBFILE_PATTERN_meta-java := "^${LAYERDIR}/"
+ BBFILE_PRIORITY_meta-java = "10"
+-LAYERSERIES_COMPAT_meta-java = "kirkstone langdale"
++LAYERSERIES_COMPAT_meta-java = "mickledore"
+ LAYERDEPENDS_meta-java += "openembedded-layer"
  
- PLAT:powerpc64 = "ppc64"
- PLAT:powerpc64le = "ppc64"
-+PLAT:riscv32 = "riscv"
- PLAT ?= "${HOST_ARCH}"
- 
- do_configure () {
+ LICENSE_PATH += "${LAYERDIR}/licenses"
 -- 
-2.39.0
+2.30.2
 
 
