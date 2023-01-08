@@ -2,56 +2,56 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0B76BC54EBC
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2B394C63797
 	for <webhook@archiver.kernel.org>; Sun,  8 Jan 2023 04:54:09 +0000 (UTC)
-Received: from mail-pl1-f170.google.com (mail-pl1-f170.google.com [209.85.214.170])
- by mx.groups.io with SMTP id smtpd.web10.38873.1673153645592527506
+Received: from mail-pj1-f45.google.com (mail-pj1-f45.google.com [209.85.216.45])
+ by mx.groups.io with SMTP id smtpd.web10.38875.1673153646503023262
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 07 Jan 2023 20:54:05 -0800
+ Sat, 07 Jan 2023 20:54:06 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=ZrjtGcfQ;
- spf=pass (domain: gmail.com, ip: 209.85.214.170, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f170.google.com with SMTP id c4so6059770plc.5
-        for <openembedded-devel@lists.openembedded.org>; Sat, 07 Jan 2023 20:54:05 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=cbocX5f2;
+ spf=pass (domain: gmail.com, ip: 209.85.216.45, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f45.google.com with SMTP id c8-20020a17090a4d0800b00225c3614161so9414299pjg.5
+        for <openembedded-devel@lists.openembedded.org>; Sat, 07 Jan 2023 20:54:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=m5d8WEL5HYSw9wDGS8m5yz3F81uhRei28HzMpXXgkqM=;
-        b=ZrjtGcfQy3jAYh++L/JXXdZjaHyRHY8W58pJ8yiS5dm34yr5GiBpswKrWjmAf2OSAw
-         mwu+3TziPmbR24AXRkCaoTHrAeqm3VCIkG1C+3GOcdgWo6EYN1i24o9ir4B/U5dZheVl
-         TzFwe+DaLRlEOBbmmTc66GqEbXPo/+SWsjeQoFpZbozWFFeleqHdMy5P/CjM3u1bJbpT
-         0Sl1HMJGXIgtyy7+IryoFX3QMdG2njAbFEFKw21nO58JOUv+G0eODFzn/LdP236fbHSg
-         w2GjQUzvck7cGmkXWsK8/vzfNMqjMW9sw+yhyl3Q7U8eNSeJDc5/T78gvP/kJ3tCJZQ4
-         2z4Q==
+        bh=pdqYuOlKa6esYU0LnN7ZSxqqWiFvv0fKhaJeIRxe/Jc=;
+        b=cbocX5f28KFbMOrHXaLKpivg+BEE5SJ+hACDiAcVAxtVtE1aGkra9bcUDoWIYn1nmi
+         tkrdw7084ESQP+FfjRHn+bMwBVkJnLH0XsS0dQHDxnHbFstzMYICYJUdRvOX61Urtq28
+         HvfAYsr4E4NzVhnWiMsx/aFIUH9u74NtgXYBdpIKPikUAcPVTomX41yt/qhT6w6bbcHc
+         5v6u19IxtXmAdgHxpVN+NzI5I8ipLRo6IehQL8tdKJUpsM5QtIwH5+0CUeLvZPHWRzr9
+         04JCLJPexxr93xEdoAXkKdwa8GrVZBG3MzuwG2cYyWqcxpo4zzXuwt/biESkoQefJHa3
+         FGMg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=m5d8WEL5HYSw9wDGS8m5yz3F81uhRei28HzMpXXgkqM=;
-        b=Mw4R1GglhuG/YKTdN1v8iAK7QfdghwabkSh1jcLsYrKA6UcaSl6e2CJ9O2k8wiO4aG
-         BfF+uwqq2w6RyTO6+tSZSJlcgIXp4VcVlX81RJkbL7WHQyxyPIqpH/rHT4uLHc8KRmjl
-         ZUvxVXpQl+p5rZv7N8F67UPJypzCyeDx5UWY/ykuU+KF/iqoKy80Huhv5neAo2n1v1XI
-         RPMzqx9A6sDL/W9PE9FDxL5N5vJaV599DJMXmeDCQilmSC6QjAes45ooYd7Pr5Ne1uqT
-         pmJ+ixhRFa0k4DcC0BPgCc4pfS8TQhSAhofWprhgAD9/uX7C6/iU6ab443fDBlqwslhy
-         H3AQ==
-X-Gm-Message-State: AFqh2kqnRISF0QcbVVSxXO/wPxYI2XI78T4DRBZdFrnSovEf2bDinu3i
-	2oTlsvkoOhQ9Pxsgwp6uGBiqnyM0n458zw==
-X-Google-Smtp-Source: AMrXdXv3CuHgxD8/G4JzlC916yOz7EvxoxGacUV6DYUPclIIEs0uyJOaIMPV9e994p2hpPQvGYAM8w==
-X-Received: by 2002:a17:902:ce82:b0:192:fb92:327 with SMTP id f2-20020a170902ce8200b00192fb920327mr18551108plg.58.1673153644762;
-        Sat, 07 Jan 2023 20:54:04 -0800 (PST)
+        bh=pdqYuOlKa6esYU0LnN7ZSxqqWiFvv0fKhaJeIRxe/Jc=;
+        b=t3nXNM16N738fLwCWda69VTYvnigQjp88JT5zI3YfSStJ4HSiJaZU+9zL/GIzKtkWV
+         CqL4WxasNXJqTuKkO97vUcurF25DULrCiGdowvCYFvYKdAhWDcq+TS2f40FBm/xMUq1T
+         vTEseBUGQnrO2XmquS5RDKFvyurBNUfZh4ZmCmrpzETWg0FWwubqA9s19RtYJmDfdv+E
+         67BR5T1L7KTlG+LK+Sdtvj32W5F6kiujTgEjrRzP/cq5KkQfLu1sjA5EFHdLBlnT88zV
+         MvAHlDRSNp3IBProUdyVcI/V7QBRilDl4EkJazi6LdAxaT429Q3v0sCYNa9vphsHYAQ/
+         7hgg==
+X-Gm-Message-State: AFqh2koPQ88YivTq+9pUxQE/3XqY2q70o3an1fe8z5inMf6a2q7mxmwV
+	mQ0hxMlf6z4UtJwYtZXf2IagXdrvAcoYNg==
+X-Google-Smtp-Source: AMrXdXuv2G27eSuFN4zwI7AnxZdRbGPRKVa2/91rzALxLTBxn51EETWAl4LKvLr3o9FgCok7F00Mpg==
+X-Received: by 2002:a17:903:2348:b0:192:fc57:23dd with SMTP id c8-20020a170903234800b00192fc5723ddmr18697976plh.17.1673153645650;
+        Sat, 07 Jan 2023 20:54:05 -0800 (PST)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9181:1cf0::ee35])
         by smtp.gmail.com with ESMTPSA id k15-20020a170902c40f00b0019276616e9fsm3498835plk.183.2023.01.07.20.54.04
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 07 Jan 2023 20:54:04 -0800 (PST)
+        Sat, 07 Jan 2023 20:54:05 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 2/4] concurrencykit: Fix build on riscv32
-Date: Sat,  7 Jan 2023 20:53:59 -0800
-Message-Id: <20230108045401.1559499-2-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 3/4] sysbench: Enable only on architectures supporting LuaJIT
+Date: Sat,  7 Jan 2023 20:54:00 -0800
+Message-Id: <20230108045401.1559499-3-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.39.0
 In-Reply-To: <20230108045401.1559499-1-raj.khem@gmail.com>
 References: <20230108045401.1559499-1-raj.khem@gmail.com>
@@ -61,59 +61,28 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sun, 08 Jan 2023 04:54:09 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100436
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100437
+
+LuaJIT is a hard dependency for newer sysbench
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...0001-build-Use-ilp32d-abi-on-riscv32.patch | 24 +++++++++++++++++++
- .../concurrencykit/concurrencykit_git.bb      |  3 ++-
- 2 files changed, 26 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-devtools/concurrencykit/concurrencykit/0001-build-Use-ilp32d-abi-on-riscv32.patch
+ meta-oe/recipes-benchmark/sysbench/sysbench_1.0.20.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-devtools/concurrencykit/concurrencykit/0001-build-Use-ilp32d-abi-on-riscv32.patch b/meta-oe/recipes-devtools/concurrencykit/concurrencykit/0001-build-Use-ilp32d-abi-on-riscv32.patch
-new file mode 100644
-index 0000000000..a2f79e5464
---- /dev/null
-+++ b/meta-oe/recipes-devtools/concurrencykit/concurrencykit/0001-build-Use-ilp32d-abi-on-riscv32.patch
-@@ -0,0 +1,24 @@
-+From b709cef30e9e9c7c6c96dc416d141e7283dc4b50 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Sat, 7 Jan 2023 19:31:58 -0800
-+Subject: [PATCH] build: Use ilp32d abi on riscv32
-+
-+ilp32d is common ABI used for linux distributions therefore a better
-+default
-+
-+Upstream-Status: Submitted [https://github.com/concurrencykit/ck/pull/204]
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ build/ck.build.riscv | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/build/ck.build.riscv b/build/ck.build.riscv
-+index 61e0033..11ac840 100644
-+--- a/build/ck.build.riscv
-++++ b/build/ck.build.riscv
-+@@ -1 +1 @@
-+-CFLAGS+=-mabi=ilp32
-++CFLAGS+=-mabi=ilp32d
-+-- 
-+2.39.0
-+
-diff --git a/meta-oe/recipes-devtools/concurrencykit/concurrencykit_git.bb b/meta-oe/recipes-devtools/concurrencykit/concurrencykit_git.bb
-index fe2c1d201a..ae2bab7e24 100644
---- a/meta-oe/recipes-devtools/concurrencykit/concurrencykit_git.bb
-+++ b/meta-oe/recipes-devtools/concurrencykit/concurrencykit_git.bb
-@@ -11,7 +11,8 @@ PV = "0.7.0+git${SRCPV}"
- SRCREV = "6e8e5bec2e2f8cef2072a68579cbb07ababf3331"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=a0b24c1a8f9ad516a297d055b0294231"
- SRC_URI = "git://github.com/concurrencykit/ck.git;branch=master;protocol=https \
--           file://0001-configure-Fix-compoiler-detection-logic-for-cross-co.patch"
-+           file://0001-configure-Fix-compoiler-detection-logic-for-cross-co.patch \
-+           file://0001-build-Use-ilp32d-abi-on-riscv32.patch"
+diff --git a/meta-oe/recipes-benchmark/sysbench/sysbench_1.0.20.bb b/meta-oe/recipes-benchmark/sysbench/sysbench_1.0.20.bb
+index 098954af37..945e2c3274 100644
+--- a/meta-oe/recipes-benchmark/sysbench/sysbench_1.0.20.bb
++++ b/meta-oe/recipes-benchmark/sysbench/sysbench_1.0.20.bb
+@@ -15,7 +15,7 @@ SRCREV = "ebf1c90da05dea94648165e4f149abc20c979557"
  
  S = "${WORKDIR}/git"
  
+-COMPATIBLE_HOST = "(arm|aarch64|i.86|x86_64|powerpc|powerpc64|riscv32|riscv64).*-linux*"
++COMPATIBLE_HOST = "(arm|aarch64|i.86|x86_64).*-linux*"
+ 
+ EXTRA_OECONF += "--enable-largefile --with-system-luajit --with-system-ck --without-gcc-arch"
+ PACKAGECONFIG ??= ""
 -- 
 2.39.0
 
