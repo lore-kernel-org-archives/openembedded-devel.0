@@ -2,88 +2,124 @@ Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 83837C53210
-	for <webhook@archiver.kernel.org>; Sun,  8 Jan 2023 13:08:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 60403C53210
+	for <webhook@archiver.kernel.org>; Sun,  8 Jan 2023 13:08:11 +0000 (UTC)
 Received: from mailout03.t-online.de (mailout03.t-online.de [194.25.134.81])
- by mx.groups.io with SMTP id smtpd.web11.44274.1673183276105115359
+ by mx.groups.io with SMTP id smtpd.web11.44278.1673183282475335298
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 08 Jan 2023 05:07:56 -0800
+ Sun, 08 Jan 2023 05:08:02 -0800
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=none, err=SPF record not found (domain: t-online.de, ip: 194.25.134.81, mailfrom: f_l_k@t-online.de)
 Received: from fwd71.dcpf.telekom.de (fwd71.aul.t-online.de [10.223.144.97])
-	by mailout03.t-online.de (Postfix) with SMTP id 632201C8C5
-	for <openembedded-devel@lists.openembedded.org>; Sun,  8 Jan 2023 14:07:53 +0100 (CET)
+	by mailout03.t-online.de (Postfix) with SMTP id A222025C39
+	for <openembedded-devel@lists.openembedded.org>; Sun,  8 Jan 2023 14:07:58 +0100 (CET)
 Received: from flk-MS-7C91.fritz.box ([79.219.228.124]) by fwd71.t-online.de
 	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1pEVOx-43c1Z30; Sun, 8 Jan 2023 14:07:51 +0100
+	esmtp id 1pEVP4-43c1Z70; Sun, 8 Jan 2023 14:07:58 +0100
 From: Markus Volk <f_l_k@t-online.de>
 To: openembedded-devel@lists.openembedded.org
 Cc: Markus Volk <f_l_k@t-online.de>
-Subject: [meta-gnome][PATCH 1/5] gnome-disk-utility: update 42.0 -> 43.0
-Date: Sun,  8 Jan 2023 14:07:39 +0100
-Message-Id: <20230108130743.983639-1-f_l_k@t-online.de>
+Subject: [meta-gnome][PATCH 5/5] gnome-chess: import recipe
+Date: Sun,  8 Jan 2023 14:07:43 +0100
+Message-Id: <20230108130743.983639-5-f_l_k@t-online.de>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20230108130743.983639-1-f_l_k@t-online.de>
+References: <20230108130743.983639-1-f_l_k@t-online.de>
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1673183271-F3FF3ECF-1C8533DC/0/0 CLEAN NORMAL
-X-TOI-MSGID: b231ba51-cc44-4eba-bc90-425a76f2345b
+X-TOI-EXPURGATEID: 150726::1673183278-F2FF5ECF-F7E002B3/0/0 CLEAN NORMAL
+X-TOI-MSGID: 00f17fd2-1bdb-4b42-b242-19ec824fa114
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 08 Jan 2023 13:08:01 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100440
+ <openembedded-devel@lists.openembedded.org>; Sun, 08 Jan 2023 13:08:11 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100444
 
 Signed-off-by: Markus Volk <f_l_k@t-online.de>
 ---
- ...{gnome-disk-utility_42.0.bb =3D> gnome-disk-utility_43.0.bb} | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
- rename meta-gnome/recipes-gnome/gnome-disk-utility/{gnome-disk-utility_4=
-2.0.bb =3D> gnome-disk-utility_43.0.bb} (87%)
+ .../gnome-chess/gnome-chess_43.1.bb           | 35 +++++++++++++++++++
+ .../gnome-chess/gnuchess_6.2.9.bb             | 19 ++++++++++
+ 2 files changed, 54 insertions(+)
+ create mode 100644 meta-gnome/recipes-gnome/gnome-chess/gnome-chess_43.1=
+.bb
+ create mode 100644 meta-gnome/recipes-gnome/gnome-chess/gnuchess_6.2.9.b=
+b
 
-diff --git a/meta-gnome/recipes-gnome/gnome-disk-utility/gnome-disk-utili=
-ty_42.0.bb b/meta-gnome/recipes-gnome/gnome-disk-utility/gnome-disk-utili=
-ty_43.0.bb
-similarity index 87%
-rename from meta-gnome/recipes-gnome/gnome-disk-utility/gnome-disk-utilit=
-y_42.0.bb
-rename to meta-gnome/recipes-gnome/gnome-disk-utility/gnome-disk-utility_=
-43.0.bb
-index c3789b0c1..247bf141c 100644
---- a/meta-gnome/recipes-gnome/gnome-disk-utility/gnome-disk-utility_42.0=
-.bb
-+++ b/meta-gnome/recipes-gnome/gnome-disk-utility/gnome-disk-utility_43.0=
-.bb
-@@ -5,6 +5,7 @@ LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Db234ee4d69f5fc=
-e4486a80fdaf4a4263"
- SECTION =3D "x11/gnome"
-=20
- DEPENDS =3D " \
+diff --git a/meta-gnome/recipes-gnome/gnome-chess/gnome-chess_43.1.bb b/m=
+eta-gnome/recipes-gnome/gnome-chess/gnome-chess_43.1.bb
+new file mode 100644
+index 000000000..643e6befe
+--- /dev/null
++++ b/meta-gnome/recipes-gnome/gnome-chess/gnome-chess_43.1.bb
+@@ -0,0 +1,35 @@
++SUMMARY =3D "GNOME Chess is a 2D chess game, where games can be played b=
+etween a combination of human and computer players."
++HOMEPAGE =3D "https://wiki.gnome.org/Apps/Chess"
++LICENSE =3D "GPL-3.0-only"
++
++LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dd32239bcb673463ab874e80d47fae=
+504"
++
++REQUIRED_DISTRO_FEATURES =3D "gobject-introspection-data opengl"
++
++GTKIC_VERSION =3D "4"
++
++DEPENDS =3D " \
++    appstream-glib-native \
++    cairo \
 +    desktop-file-utils-native \
-     gtk+3 \
-     libdvdread \
-     libnotify \
-@@ -12,6 +13,7 @@ DEPENDS =3D " \
-     libpwquality \
-     udisks2 \
-     libhandy \
-+    xz \
- "
-=20
- GNOMEBASEBUILDCLASS =3D "meson"
-@@ -28,7 +30,7 @@ PACKAGECONFIG[systemd] =3D "-Dlogind=3Dlibsystemd,-Dlog=
-ind=3Dnone,systemd"
- PACKAGECONFIG[x11] =3D ",,libcanberra"
-=20
- SRC_URI:append =3D " ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', =
-'file://0001-gnome-disk-utility-remove-libcanberra-dependency.patch', '',=
- d)}"
--SRC_URI[archive.sha256sum] =3D "1b6564454d67426322cb3bfc5a5558653bfc7dfe=
-ea2ae0825b1d08629f01090b"
-+SRC_URI[archive.sha256sum] =3D "7afca9805a6b92db6933dd7efcec4af8386c01bb=
-c1f871e2dae4def7e192a2c5"
-=20
- EXTRA_OEMESON =3D "-Dman=3Dfalse"
-=20
++    glib-2.0 \
++    glib-2.0 \
++    gtk4 \
++    libadwaita \
++    librsvg \
++    pango \
++"
++
++RRECOMMENDS:${PN}  =3D "gnuchess"
++
++SRC_URI =3D "git://github.com/GNOME/gnome-chess.git;protocol=3Dhttps;nob=
+ranch=3D1"
++
++inherit meson pkgconfig gobject-introspection gtk-icon-cache vala featur=
+es_check mime-xdg gsettings
++
++GIR_MESON_OPTION =3D ""
++
++S =3D "${WORKDIR}/git"
++PV =3D "43.1"
++SRCREV =3D "95c7fb91daf36014fc1c2a7ec20b7400a21cd316"
++
++FILES:${PN} +=3D "${datadir}"
+diff --git a/meta-gnome/recipes-gnome/gnome-chess/gnuchess_6.2.9.bb b/met=
+a-gnome/recipes-gnome/gnome-chess/gnuchess_6.2.9.bb
+new file mode 100644
+index 000000000..8ca40229e
+--- /dev/null
++++ b/meta-gnome/recipes-gnome/gnome-chess/gnuchess_6.2.9.bb
+@@ -0,0 +1,19 @@
++SUMMARY =3D "GNU Chess is a chess-playing program."
++HOMEPAGE =3D "http://www.gnu.org/software/chess/"
++LICENSE =3D "GPL-3.0-only"
++
++LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dd32239bcb673463ab874e80d47fae=
+504"
++
++SRC_URI =3D "https://git.savannah.gnu.org/cgit/chess.git/snapshot/chess-=
+${PV}.tar.gz"
++SRC_URI[sha256sum] =3D "03f9e844ccdd48d20ee49314174404f8b643d83bb8ce9ec9=
+d2e6a21f1b6fb9f5"
++
++S =3D "${WORKDIR}/chess-${PV}"
++
++inherit autotools gettext
++
++do_configure:prepend() {
++    touch ${S}/ABOUT-NLS
++    touch ${S}/man/gnuchess.1
++}
++
++FILES:${PN} +=3D "${datadir}"
 --=20
 2.34.1
 
