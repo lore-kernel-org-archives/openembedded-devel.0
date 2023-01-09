@@ -2,26 +2,26 @@ Return-Path: <philip@balister.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5C9D4C61DB3
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5E4C5C67871
 	for <webhook@archiver.kernel.org>; Mon,  9 Jan 2023 19:18:10 +0000 (UTC)
 Received: from relay1-d.mail.gandi.net (relay1-d.mail.gandi.net [217.70.183.193])
- by mx.groups.io with SMTP id smtpd.web10.77887.1673283760990057583
+ by mx.groups.io with SMTP id smtpd.web11.78193.1673283758112645253
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 09 Jan 2023 09:02:41 -0800
+ Mon, 09 Jan 2023 09:02:38 -0800
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=fail (domain: theobroma-systems.com, ip: 217.70.183.193, mailfrom: quentin.schulz@theobroma-systems.com)
 Received: (Authenticated sender: foss@0leil.net)
-	by mail.gandi.net (Postfix) with ESMTPSA id 70F1C240010;
-	Mon,  9 Jan 2023 17:02:36 +0000 (UTC)
+	by mail.gandi.net (Postfix) with ESMTPSA id EAE5024000F;
+	Mon,  9 Jan 2023 17:02:33 +0000 (UTC)
 From: "Quentin Schulz" <quentin.schulz@theobroma-systems.com>
 To: Tim moto-timo Orling <TicoTimo@gmail.com>,
 	Derek Straka <derek@asterius.io>,
 	openembedded-devel@lists.openembedded.org,
 	Quentin Schulz <quentin.schulz@theobroma-systems.com>
 Cc: Quentin Schulz <foss+yocto@0leil.net>
-Subject: [PATCH meta-python 2/2] devtools: add recipe for esptool
-Date: Mon,  9 Jan 2023 18:02:15 +0100
-Message-Id: <20230109-esptool-v1-2-938893bfd362@theobroma-systems.com>
+Subject: [PATCH meta-python 1/2] devtools: add new recipe for reedsolo
+Date: Mon,  9 Jan 2023 18:02:14 +0100
+Message-Id: <20230109-esptool-v1-1-938893bfd362@theobroma-systems.com>
 X-Mailer: git-send-email 2.39.0
 In-Reply-To: <20230109-esptool-v1-0-938893bfd362@theobroma-systems.com>
 References: <20230109-esptool-v1-0-938893bfd362@theobroma-systems.com>
@@ -33,56 +33,34 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 09 Jan 2023 19:18:10 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100488
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100487
 
-esptool Python module is a collection of libs and scripts to interact
-with the bootloader on Espressif SoCs. The Python module happens to
-provide three useful scripts: esptool, espefuse and espsecure. esptool
-is the backbone of communication with the Espressif SoC's bootloader.
-espefuse is useful when one needs to burn fuses or read the current fuse
-state. Finally, espsecure is a tool for setting up Espressif
-implementation of secure boot on their SoC.
-
-espsecure depends on python3-cryptography which is a Rust-based Python
-module, making it a heavy tool dependency-wise which is the reason why
-the scripts have been split in their own package so that people only
-interested in esptool script have the smallest possible dependency
-chain.
+reedsolo is a pure-Python Reed Solomon encoder/decoder.
+It is required by esptool which will be added in the next commit.
+This adds a recipe for the Python module.
 
 Cc: Quentin Schulz <foss+yocto@0leil.net>
 Signed-off-by: Quentin Schulz <quentin.schulz@theobroma-systems.com>
 ---
- .../python3-esptool/python3-esptool_4.4.bb         | 22 ++++++++++++++++++++++
- 1 file changed, 22 insertions(+)
+ .../python3-reedsolo/python3-reedsolo_1.6.1.bb                 | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
 
-diff --git a/meta-python/recipes-devtools/python3-esptool/python3-esptool_4.4.bb b/meta-python/recipes-devtools/python3-esptool/python3-esptool_4.4.bb
+diff --git a/meta-python/recipes-devtools/python3-reedsolo/python3-reedsolo_1.6.1.bb b/meta-python/recipes-devtools/python3-reedsolo/python3-reedsolo_1.6.1.bb
 new file mode 100644
-index 0000000000..573e5fbdd1
+index 0000000000..51651f3bcf
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python3-esptool/python3-esptool_4.4.bb
-@@ -0,0 +1,22 @@
-+SUMMARY = "A Python-based, open-source, platform-independent utility to communicate with the ROM bootloader in Espressif chips."
-+HOMEPAGE = "https://github.com/espressif/esptool"
-+BUGTRACKER = "https://github.com/espressif/esptool/issues"
-+LICENSE = "GPL-2.0-or-later"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=b234ee4d69f5fce4486a80fdaf4a4263"
++++ b/meta-python/recipes-devtools/python3-reedsolo/python3-reedsolo_1.6.1.bb
+@@ -0,0 +1,10 @@
++SUMMARY = "Pure-Python Reed Solomon encoder/decoder"
++HOMEPAGE = "https://github.com/tomerfiliba/reedsolomon"
++LICENSE = "MIT-0 | Unlicense"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=ffde61aeb8917e70e0257e0a4b6d103c"
 +
-+SRC_URI[sha256sum] = "8acd4dfe70819b1302861ae92894380fb4700b377f5a4739479a4ec276e0b256"
++SRC_URI[sha256sum] = "a7ce6b0efad8df491a70b87b6ab3543e751f7700dc4ac0b12081a456ef634f5d"
 +
 +inherit pypi setuptools3
 +
-+# Split the Python package into multiple Yocto packages to avoid bringing in
-+# heavy dependencies like python3-cryptography when only esptool.py might be
-+# needed.
-+PACKAGE_BEFORE_PN += "${PN}-espefuse ${PN}-espsecure"
-+
-+RDEPENDS:${PN} += "python3-core python3-pyserial"
-+
-+RDEPENDS:${PN}-espsecure += "${PN} python3-cryptography python3-ecdsa"
-+FILES:${PN}-espsecure = "${bindir}/espsecure.py ${PYTHON_SITEPACKAGES_DIR}/espsecure/*"
-+
-+RDEPENDS:${PN}-espefuse += "${PN} python3-bitstring ${PN}-espsecure python3-reedsolo"
-+FILES:${PN}-espefuse = "${bindir}/espefuse.py ${PYTHON_SITEPACKAGES_DIR}/espefuse/*"
++RDEPENDS:${PN} += "python3-core"
 
 -- 
 2.39.0
