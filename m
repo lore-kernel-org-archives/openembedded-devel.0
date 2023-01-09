@@ -1,175 +1,220 @@
-Return-Path: <peron.clem@gmail.com>
+Return-Path: <chee.yang.lee@intel.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 661F2C5479D
-	for <webhook@archiver.kernel.org>; Mon,  9 Jan 2023 09:20:17 +0000 (UTC)
-Received: from mail-qt1-f182.google.com (mail-qt1-f182.google.com [209.85.160.182])
- by mx.groups.io with SMTP id smtpd.web11.67336.1673256007181425857
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2F78CC54EBD
+	for <webhook@archiver.kernel.org>; Mon,  9 Jan 2023 15:22:39 +0000 (UTC)
+Received: from mga06.intel.com (mga06.intel.com [134.134.136.31])
+ by mx.groups.io with SMTP id smtpd.web11.74963.1673277756022018280
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 09 Jan 2023 01:20:07 -0800
+ Mon, 09 Jan 2023 07:22:36 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=kAFUDHTf;
- spf=pass (domain: gmail.com, ip: 209.85.160.182, mailfrom: peron.clem@gmail.com)
-Received: by mail-qt1-f182.google.com with SMTP id s5so2914940qtx.6
-        for <openembedded-devel@lists.openembedded.org>; Mon, 09 Jan 2023 01:20:07 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=QozZ/OH0+J1XkvbNzUfU8Dj/40sFi6SKOvTnew8125o=;
-        b=kAFUDHTfWk/1S1DiB/OlcZSGc2A/YonEsK7ufGkX0LmpB8uaV/RUgkspIUMVMZZ9JP
-         iBDDGJjiIAR20wHnx2ZskNwIxo4uD9cIIsC9spbodnAt3spj3owPg0mwn3PlQT847A5O
-         HktwpCHQlTK2Ifibr3XX63azyURM8l8wr/3Jtj2P7MdkT5phTaYVbQQuXxegQh0DXP9z
-         QPiXzB4HETXeBArW0GfNFY0OWaMCEbbzKZq2fkBty0myBLJ8X21XpMjmiZmA8xbpr5Cg
-         076Uz6ijg6/UWcMO90fKfc/gH+ORRLIWFDRJmGv7h8DADFjDAHo+EM/VoAd5N/KCCOkp
-         vtBw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=QozZ/OH0+J1XkvbNzUfU8Dj/40sFi6SKOvTnew8125o=;
-        b=zh3gAFqjMV/HiDeLgP4cGpjr/BhODbaWRhReHEFh1aJoRRPPp1nJ3a8ft2dAWfZrwh
-         0ZNCArVsCPN6QnmVe9xK6PRG1R4o69wceZ//MGyF+PYpk2YFH2tlBN4DdZN9mgvOqh05
-         pb6uQXbHXYq3efAkr85qOM+DASIDe4QrQ0RJhn5ZhwFrNaGBmPYUqNC92sCLnsVwOH3d
-         gNKTrlfYZiwEe3LDQrpK3UC/Oz2wICI8xMRx4eLpqc0lFU/bSgD7ua3/JEyPi+h7V0dI
-         IVWrCtqHcS1F2r9UdxG9bKvC2UWSAs4mYA3sKe+NEIiDUSqKtcmoCz4tndQe1lCs7gP2
-         y5sg==
-X-Gm-Message-State: AFqh2krRm4am0qVtzM4zkCHwTXfXGmQnPAzLoEDKk1d9AZXW0qTF+ukj
-	Cac6Oj08WrLqH7XdTQiNNOex3vT7H/8WUSonEsI=
-X-Google-Smtp-Source: AMrXdXu2LqwtCuUd2P+LT/Sd6XAWrEPulGs9YLhHjTR6vNPEVD3oDYBWM7Vb6QDyzaN7zRkCDVsQkOIETS3fMKpp734=
-X-Received: by 2002:ac8:4a07:0:b0:3a7:eb5d:73e4 with SMTP id
- x7-20020ac84a07000000b003a7eb5d73e4mr3099800qtq.250.1673256005991; Mon, 09
- Jan 2023 01:20:05 -0800 (PST)
+ dkim=fail reason="unable to parse pub key" header.i=@intel.com header.s=intel header.b=ieQY3nPh;
+ spf=pass (domain: intel.com, ip: 134.134.136.31, mailfrom: chee.yang.lee@intel.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1673277756; x=1704813756;
+  h=from:to:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=LMCgSESmXJEzYaO8m/JqucbUxhUf3K1D0402O7Z1CK4=;
+  b=ieQY3nPhbGw+7Heg9FIJGsgqvVMmJPpgq/89RkicJmis7YRTuRjJ8SZl
+   Pvci+jwdSU3eWHpuhdkhlZagnErwR/WNtT+l121qBw1qVoK6fmUsyzqe7
+   rWeZXIdbdR/3VXyk0DHE+/dmiE+A9HbMqraB7owMRR/VSqSeVCNIa1hRt
+   6jBbOe6m1eLZShBWJZdfAOXRLlI2Y/bBRIg9iogO38LD05zx4/ovsVfxA
+   AAGS0bTH116jfTvfpHDB+R3TPUtaRSPo2y00zKdt5QnyCFhZHg5phmnYI
+   KxD6L7GGytlM2xj1+GByL5cAcfl2AZUIOKwpPTQA70A95pBbz7Un5o5hm
+   Q==;
+X-IronPort-AV: E=McAfee;i="6500,9779,10585"; a="385199849"
+X-IronPort-AV: E=Sophos;i="5.96,311,1665471600"; 
+   d="scan'208";a="385199849"
+Received: from fmsmga006.fm.intel.com ([10.253.24.20])
+  by orsmga104.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 09 Jan 2023 07:22:34 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=McAfee;i="6500,9779,10585"; a="902022715"
+X-IronPort-AV: E=Sophos;i="5.96,311,1665471600"; 
+   d="scan'208";a="902022715"
+Received: from andromeda02.png.intel.com ([10.221.253.198])
+  by fmsmga006.fm.intel.com with ESMTP; 09 Jan 2023 07:22:32 -0800
+From: chee.yang.lee@intel.com
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-oe][PATCH] opencv: fix reproducible builds
+Date: Mon,  9 Jan 2023 23:22:25 +0800
+Message-Id: <20230109152225.309213-1-chee.yang.lee@intel.com>
+X-Mailer: git-send-email 2.37.3
 MIME-Version: 1.0
-References: <1729E999E4AE6822.5511@lists.openembedded.org>
-In-Reply-To: <1729E999E4AE6822.5511@lists.openembedded.org>
-From: =?UTF-8?B?Q2zDqW1lbnQgUMOpcm9u?= <peron.clem@gmail.com>
-Date: Mon, 9 Jan 2023 10:19:55 +0100
-Message-ID: <CAJiuCceZepMz2j+uQ8NOw=SojWq31utbCPR==V_Z0tMYfLnt2g@mail.gmail.com>
-Subject: Re: [oe] [PATCH v2] navigation: bump proj to 9.1.0 library
-To: peron.clem@gmail.com, Khem Raj <raj.khem@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 09 Jan 2023 09:20:17 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100480
+ <openembedded-devel@lists.openembedded.org>; Mon, 09 Jan 2023 15:22:39 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100481
 
-Hi Khem and OE Users,
+From: Chee Yang Lee <chee.yang.lee@intel.com>
 
-On Tue, 22 Nov 2022 at 13:59, Cl=C3=A9ment P=C3=A9ron via lists.openembedde=
-d.org
-<peron.clem=3Dgmail.com@lists.openembedded.org> wrote:
->
-> Proj has moved to CMake build system.
->
-> Update the recipe and make more PACKAGECONFIG available following
-> the ./contrib/oe-stylize.py output.
->
-> Signed-off-by: Cl=C3=A9ment P=C3=A9ron <peron.clem@gmail.com>
-> ---
->
-> Changes in v2:
->  - Disable BUILD_TESTING
->
->  meta-oe/recipes-navigation/proj/proj_8.2.1.bb | 22 -------------------
->  meta-oe/recipes-navigation/proj/proj_9.1.0.bb | 22 +++++++++++++++++++
->  2 files changed, 22 insertions(+), 22 deletions(-)
->  delete mode 100644 meta-oe/recipes-navigation/proj/proj_8.2.1.bb
->  create mode 100644 meta-oe/recipes-navigation/proj/proj_9.1.0.bb
->
-> diff --git a/meta-oe/recipes-navigation/proj/proj_8.2.1.bb b/meta-oe/reci=
-pes-navigation/proj/proj_8.2.1.bb
-> deleted file mode 100644
-> index 0c1104926..000000000
-> --- a/meta-oe/recipes-navigation/proj/proj_8.2.1.bb
-> +++ /dev/null
-> @@ -1,22 +0,0 @@
-> -SUMMARY =3D "PROJ.4 - Cartographic Projections library"
-> -HOMEPAGE =3D "http://trac.osgeo.org/proj/"
-> -SECTION =3D "libs"
-> -
-> -LICENSE =3D "MIT"
-> -LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Df27445198ba1500f508fce2b183ce=
-0ff"
-> -
-> -SRC_URI =3D "http://download.osgeo.org/${BPN}/${BP}.tar.gz"
-> -
-> -SRC_URI[sha256sum] =3D "76ed3d0c3a348a6693dfae535e5658bbfd47f71cb7ff7eb9=
-6d9f12f7e068b1cf"
-> -
-> -DEPENDS =3D "sqlite3 sqlite3-native tiff"
-> -
-> -inherit autotools pkgconfig lib_package
-> -
-> -PACKAGECONFIG ?=3D "curl"
-> -
-> -PACKAGECONFIG[curl] =3D ",--without-curl,curl"
-> -
-> -FILES:${PN} +=3D "${datadir}/proj"
+Signed-off-by: Chee Yang Lee <chee.yang.lee@intel.com>
+---
+ ...ot-embed-build-directory-in-binaries.patch | 138 ++++++++++++++++++
+ .../recipes-support/opencv/opencv_4.6.0.bb    |   1 +
+ 2 files changed, 139 insertions(+)
+ create mode 100644 meta-oe/recipes-support/opencv/opencv/0008-Do-not-embed-build-directory-in-binaries.patch
 
-When marking the proj as a DEPENDS of another recipe only the lib.so
-is installed.
-Running my executable will failed saying that:
-"Cannot find proj.db"
+diff --git a/meta-oe/recipes-support/opencv/opencv/0008-Do-not-embed-build-directory-in-binaries.patch b/meta-oe/recipes-support/opencv/opencv/0008-Do-not-embed-build-directory-in-binaries.patch
+new file mode 100644
+index 0000000000..8fda857080
+--- /dev/null
++++ b/meta-oe/recipes-support/opencv/opencv/0008-Do-not-embed-build-directory-in-binaries.patch
+@@ -0,0 +1,138 @@
++From: Victor Westerhuis <victor@westerhu.is>
++Date: Sat, 19 Nov 2022 21:45:39 +0100
++Subject: Do not embed build directory in binaries
++
++This makes the opencv core module build reproducibly.
++
++https://salsa.debian.org/science-team/opencv/-/raw/master/debian/patches/0008-Do-not-embed-build-directory-in-binaries.patch
++Upstream-Status: Backport
++Signed-off-by: Chee Yang Lee <chee.yang.lee@intel.com>
++---
++ modules/core/CMakeLists.txt                   | 10 ------
++ modules/core/include/opencv2/core/private.hpp |  4 +--
++ modules/core/include/opencv2/core/utility.hpp |  4 +--
++ modules/core/src/utils/datafile.cpp           | 48 +--------------------------
++ 4 files changed, 5 insertions(+), 61 deletions(-)
++
++diff --git a/modules/core/CMakeLists.txt b/modules/core/CMakeLists.txt
++index b78bb98..d96b669 100644
++--- a/modules/core/CMakeLists.txt
+++++ b/modules/core/CMakeLists.txt
++@@ -188,16 +188,6 @@ if(OPENCV_OTHER_INSTALL_PATH)
++ ")
++ endif()
++ 
++-set(OPENCV_DATA_CONFIG_STR "${OPENCV_DATA_CONFIG_STR}
++-#define OPENCV_BUILD_DIR \"${CMAKE_BINARY_DIR}\"
++-")
++-
++-file(RELATIVE_PATH SOURCE_DIR_RELATIVE ${CMAKE_BINARY_DIR} ${CMAKE_SOURCE_DIR})
++-set(OPENCV_DATA_CONFIG_STR "${OPENCV_DATA_CONFIG_STR}
++-#define OPENCV_DATA_BUILD_DIR_SEARCH_PATHS \\
++-    \"${SOURCE_DIR_RELATIVE}/\"
++-")
++-
++ if(WIN32)
++   file(RELATIVE_PATH INSTALL_DATA_DIR_RELATIVE "${CMAKE_INSTALL_PREFIX}/${OPENCV_BIN_INSTALL_PATH}" "${CMAKE_INSTALL_PREFIX}/${OPENCV_OTHER_INSTALL_PATH}")
++ else()
++diff --git a/modules/core/include/opencv2/core/private.hpp b/modules/core/include/opencv2/core/private.hpp
++index 146d37f..dd675bc 100644
++--- a/modules/core/include/opencv2/core/private.hpp
+++++ b/modules/core/include/opencv2/core/private.hpp
++@@ -818,10 +818,10 @@ Search directories:
++ 2. Check path specified by configuration parameter with "_HINT" suffix (name of environment variable).
++ 3. Check path specified by configuration parameter (name of environment variable).
++    If parameter value is not empty and nothing is found then stop searching.
++-4. Detects build/install path based on:
+++4. Detects install path based on:
++    a. current working directory (CWD)
++    b. and/or binary module location (opencv_core/opencv_world, doesn't work with static linkage)
++-5. Scan `<source>/{,data}` directories if build directory is detected or the current directory is in source tree.
+++5. Scan `<source>/{,data}` directories if the current directory is in source tree.
++ 6. Scan `<install>/share/OpenCV` directory if install directory is detected.
++ 
++ @param relative_path Relative path to data file
++diff --git a/modules/core/include/opencv2/core/utility.hpp b/modules/core/include/opencv2/core/utility.hpp
++index 108c0d9..f15d9ea 100644
++--- a/modules/core/include/opencv2/core/utility.hpp
+++++ b/modules/core/include/opencv2/core/utility.hpp
++@@ -1163,10 +1163,10 @@ Search directories:
++ 2. OPENCV_SAMPLES_DATA_PATH_HINT environment variable
++ 3. OPENCV_SAMPLES_DATA_PATH environment variable
++    If parameter value is not empty and nothing is found then stop searching.
++-4. Detects build/install path based on:
+++4. Detects install path based on:
++    a. current working directory (CWD)
++    b. and/or binary module location (opencv_core/opencv_world, doesn't work with static linkage)
++-5. Scan `<source>/{,data,samples/data}` directories if build directory is detected or the current directory is in source tree.
+++5. Scan `<source>/{,data,samples/data}` directories if the current directory is in source tree.
++ 6. Scan `<install>/share/OpenCV` directory if install directory is detected.
++ 
++ @see cv::utils::findDataFile
++diff --git a/modules/core/src/utils/datafile.cpp b/modules/core/src/utils/datafile.cpp
++index 3af83a5..6bda857 100644
++--- a/modules/core/src/utils/datafile.cpp
+++++ b/modules/core/src/utils/datafile.cpp
++@@ -280,32 +280,8 @@ cv::String findDataFile(const cv::String& relative_path,
++ 
++ 
++     // Steps: 4, 5, 6
++-    cv::String cwd = utils::fs::getcwd();
++-    cv::String build_dir(OPENCV_BUILD_DIR);
++-    bool has_tested_build_directory = false;
++-    if (isSubDirectory(build_dir, cwd) || isSubDirectory(utils::fs::canonical(build_dir), utils::fs::canonical(cwd)))
++-    {
++-        CV_LOG_DEBUG(NULL, "utils::findDataFile(): the current directory is build sub-directory: " << cwd);
++-        const char* build_subdirs[] = { OPENCV_DATA_BUILD_DIR_SEARCH_PATHS };
++-        for (size_t k = 0; k < sizeof(build_subdirs)/sizeof(build_subdirs[0]); k++)
++-        {
++-            CV_LOG_DEBUG(NULL, "utils::findDataFile(): <build>/" << build_subdirs[k]);
++-            cv::String datapath = utils::fs::join(build_dir, build_subdirs[k]);
++-            if (utils::fs::isDirectory(datapath))
++-            {
++-                for(size_t i = search_subdir.size(); i > 0; i--)
++-                {
++-                    const cv::String& subdir = search_subdir[i - 1];
++-                    cv::String prefix = utils::fs::join(datapath, subdir);
++-                    TRY_FILE_WITH_PREFIX(prefix);
++-                }
++-            }
++-        }
++-        has_tested_build_directory = true;
++-    }
++-
++     cv::String source_dir;
++-    cv::String try_source_dir = cwd;
+++    cv::String try_source_dir = utils::fs::getcwd();
++     for (int levels = 0; levels < 3; ++levels)
++     {
++         if (utils::fs::exists(utils::fs::join(try_source_dir, "modules/core/include/opencv2/core/version.hpp")))
++@@ -341,28 +317,6 @@ cv::String findDataFile(const cv::String& relative_path,
++         CV_LOG_INFO(NULL, "Can't detect module binaries location");
++     }
++ 
++-    if (!has_tested_build_directory &&
++-        (isSubDirectory(build_dir, module_path) || isSubDirectory(utils::fs::canonical(build_dir), utils::fs::canonical(module_path)))
++-    )
++-    {
++-        CV_LOG_DEBUG(NULL, "utils::findDataFile(): the binary module directory is build sub-directory: " << module_path);
++-        const char* build_subdirs[] = { OPENCV_DATA_BUILD_DIR_SEARCH_PATHS };
++-        for (size_t k = 0; k < sizeof(build_subdirs)/sizeof(build_subdirs[0]); k++)
++-        {
++-            CV_LOG_DEBUG(NULL, "utils::findDataFile(): <build>/" << build_subdirs[k]);
++-            cv::String datapath = utils::fs::join(build_dir, build_subdirs[k]);
++-            if (utils::fs::isDirectory(datapath))
++-            {
++-                for(size_t i = search_subdir.size(); i > 0; i--)
++-                {
++-                    const cv::String& subdir = search_subdir[i - 1];
++-                    cv::String prefix = utils::fs::join(datapath, subdir);
++-                    TRY_FILE_WITH_PREFIX(prefix);
++-                }
++-            }
++-        }
++-    }
++-
++ #if defined OPENCV_INSTALL_DATA_DIR_RELATIVE
++     if (!module_path.empty())  // require module path
++     {
+diff --git a/meta-oe/recipes-support/opencv/opencv_4.6.0.bb b/meta-oe/recipes-support/opencv/opencv_4.6.0.bb
+index a90baddc26..fcbafd78a9 100644
+--- a/meta-oe/recipes-support/opencv/opencv_4.6.0.bb
++++ b/meta-oe/recipes-support/opencv/opencv_4.6.0.bb
+@@ -52,6 +52,7 @@ SRC_URI = "git://github.com/opencv/opencv.git;name=opencv;branch=master;protocol
+            file://download.patch \
+            file://0001-Make-ts-module-external.patch \
+            file://0001-Add-missing-header-for-LIBAVCODEC_VERSION_INT.patch \
++           file://0008-Do-not-embed-build-directory-in-binaries.patch \
+            "
+ SRC_URI:append:riscv64 = " file://0001-Use-Os-to-compile-tinyxml2.cpp.patch;patchdir=contrib"
+ 
+-- 
+2.37.3
 
-I can fix this by marking the proj as a RDEPENDS of my recipe.
-But is it the correct fix?
-Can I tell bitbake that the proj.db is a dependency of the library?
-
-Regards,
-Clement
-
-> -
-> -BBCLASSEXTEND =3D "native"
-> diff --git a/meta-oe/recipes-navigation/proj/proj_9.1.0.bb b/meta-oe/reci=
-pes-navigation/proj/proj_9.1.0.bb
-> new file mode 100644
-> index 000000000..b956ce50f
-> --- /dev/null
-> +++ b/meta-oe/recipes-navigation/proj/proj_9.1.0.bb
-> @@ -0,0 +1,22 @@
-> +SUMMARY =3D "PROJ.4 - Cartographic Projections library"
-> +HOMEPAGE =3D "http://trac.osgeo.org/proj/"
-> +SECTION =3D "libs"
-> +LICENSE =3D "MIT"
-> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Df27445198ba1500f508fce2b183ce=
-0ff"
-> +DEPENDS =3D "sqlite3 sqlite3-native"
-> +
-> +SRC_URI =3D "http://download.osgeo.org/${BPN}/${BP}.tar.gz"
-> +SRC_URI[sha256sum] =3D "81b2239b94cad0886222cde4f53cb49d34905aad2a131724=
-4a0c30a553db2315"
-> +
-> +inherit cmake lib_package
-> +
-> +EXTRA_OECMAKE =3D "-DBUILD_TESTING=3DOFF"
-> +
-> +FILES:${PN} +=3D "${datadir}/proj"
-> +
-> +BBCLASSEXTEND =3D "native"
-> +
-> +PACKAGECONFIG ?=3D "curl"
-> +PACKAGECONFIG[apps] =3D "-DBUILD_APPS=3DON, -DBUILD_APPS=3DOFF"
-> +PACKAGECONFIG[curl] =3D "-DENABLE_CURL=3DON,-DENABLE_CURL=3DOFF,curl"
-> +PACKAGECONFIG[tiff] =3D "-DENABLE_TIFF=3DON,-DENABLE_TIFF=3DOFF,tiff"
-> --
-> 2.34.1
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#99686): https://lists.openembedded.org/g/openembedded=
--devel/message/99686
-> Mute This Topic: https://lists.openembedded.org/mt/95194626/4240582
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [p=
-eron.clem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
 
