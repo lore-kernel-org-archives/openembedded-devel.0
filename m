@@ -1,100 +1,105 @@
-Return-Path: <chee.yang.lee@intel.com>
+Return-Path: <leimaohui@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 195D3C46467
-	for <webhook@archiver.kernel.org>; Tue, 10 Jan 2023 07:23:04 +0000 (UTC)
-Received: from mga02.intel.com (mga02.intel.com [134.134.136.20])
- by mx.groups.io with SMTP id smtpd.web10.98124.1673335373719364285
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C8EC3C46467
+	for <webhook@archiver.kernel.org>; Tue, 10 Jan 2023 07:23:13 +0000 (UTC)
+Received: from mail1.bemta32.messagelabs.com (mail1.bemta32.messagelabs.com [195.245.230.1])
+ by mx.groups.io with SMTP id smtpd.web10.98126.1673335387716362484
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 09 Jan 2023 23:22:54 -0800
+ Mon, 09 Jan 2023 23:23:08 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="unable to parse pub key" header.i=@intel.com header.s=intel header.b=BhfXIGxR;
- spf=pass (domain: intel.com, ip: 134.134.136.20, mailfrom: chee.yang.lee@intel.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1673335373; x=1704871373;
-  h=from:to:subject:date:message-id:mime-version:
-   content-transfer-encoding;
-  bh=tTNV+FvayzlOLINF6zM9ZnTlenlotbmrbTGAvtpI0E4=;
-  b=BhfXIGxRwEKK+owX9RmLfeyzC/1VWQ9ItCfpyWAPxEvBQF/CeO08mj8P
-   cgNUEzFMzSlTGcFzeWYcFfXmgTt7lzDucW0BEvwYcUu7WTbA2T0WJJD9c
-   6eFNRLXLac60O9MGfPaP+T0Wj5cf34sZCK2nyMvtADsof09jk23MoJKGm
-   5stO3IA8MyGv5PjysXKABAejuE2bexCYdHvpxwzxS1t1WSZ8tgY5urnA9
-   hrwJ3YPiqC0rqMJ++fIjenPDK7RwqzAYsadN/xEug+f/SR8STP2BmN2HJ
-   Kbah5CNu5pFD3KoHi2pJidzm3ZjAU7Yv/Bi9JWuP6p9W67VHvvlBzsY5j
-   w==;
-X-IronPort-AV: E=McAfee;i="6500,9779,10585"; a="310882542"
-X-IronPort-AV: E=Sophos;i="5.96,314,1665471600"; 
-   d="scan'208";a="310882542"
-Received: from fmsmga003.fm.intel.com ([10.253.24.29])
-  by orsmga101.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 09 Jan 2023 23:22:53 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6500,9779,10585"; a="745667309"
-X-IronPort-AV: E=Sophos;i="5.96,314,1665471600"; 
-   d="scan'208";a="745667309"
-Received: from andromeda02.png.intel.com ([10.221.253.198])
-  by FMSMGA003.fm.intel.com with ESMTP; 09 Jan 2023 23:22:52 -0800
-From: chee.yang.lee@intel.com
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCHc] xerces-c: upgrade to 3.2.4
-Date: Tue, 10 Jan 2023 15:22:45 +0800
-Message-Id: <20230110072245.2179070-1-chee.yang.lee@intel.com>
-X-Mailer: git-send-email 2.37.3
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=bpG3r9On;
+ spf=pass (domain: fujitsu.com, ip: 195.245.230.1, mailfrom: leimaohui@fujitsu.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
+	s=170520fj; t=1673335385; i=@fujitsu.com;
+	bh=Ub72M/H+iraWqZzuD20dFbDWty807FysGKW7lNRsXzE=;
+	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
+	b=bpG3r9OnpiAQz5b6+3ma/WTuFV7RQlUGi3h1X6mvQab5UjaQAlGUB9b/Nf5ndTMUh
+	 KuEmqEGDQ/FblUiLfnEwj+kU3Br2Et8RaBXHiTokBcJ73mfFuWIRO0yjD9xZ0eVzL0
+	 ugLuA5KJHoWjDAzKNWr3YZBGE1uAO2/MvvFc9OOAEpHTjnATIZ9ksMGvZd+bnZu2X8
+	 Na36u4i7ncyFmN9sywkCOZ8d/gyjsW/kM8dMIxZC9FYTszFxpPyii2h7PQmHIrn9ei
+	 AktRIP9xCT6V7UwDxR0h55AB4tpVoeGhTRbBNzhIYPojDjV5HdvBLoqajmZZOBav0l
+	 WeCkwf1WDa/jg==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFlrHIsWRWlGSWpSXmKPExsViZ8ORqBsptDf
+  ZoOk5k8XFw0uZHRg9zm1cwRjAGMWamZeUX5HAmrGxYQ5LwXOOiumzP7I1MN5j72Lk4hASeMIo
+  8Xz7LlYI5waTxJS5J5kgnH2MEjPvf2HuYuTkYBPQkNg99TKYLSKgL7F09h4wm1lATeLoy59gt
+  rBAlETjk6ksIDaLgKrEg3XrGEFsXgFXiY8XHzGB2BICChJTHr5nhogLSpyc+YQFYo6ExMEXL5
+  ghapQk3l7awwhhV0q0fvjFAmGrSVw9t4l5AiP/LCTts5C0L2BkWsVoWpxaVJZapGusl1SUmZ5
+  RkpuYmaOXWKWbqJdaqlueWlyia6iXWF6sl1pcrFdcmZuck6KXl1qyiREYjCnFbNU7GN8u/aN3
+  iFGSg0lJlLfo055kIb6k/JTKjMTijPii0pzU4kOMMhwcShK8k/n3JgsJFqWmp1akZeYAIwMmL
+  cHBoyTCW8EBlOYtLkjMLc5Mh0idYlSUEucVEwRKCIAkMkrz4Npg0XiJUVZKmJeRgYFBiKcgtS
+  g3swRV/hWjOAejkjDvbh6gKTyZeSVw018BLWYCWvxj6k6QxSWJCCmpBqY9MTOiGp3WBRlfTzj
+  6v3mX1R75qc9vGc6fXhiR9mXK8rP3xPq3ROkW1HXHLnLnn8nrIsF0OrmzbkWThlaix+RHp/PZ
+  NZ4/1P0/673+jt6eZdFbbDXeWMt8WrJTMfVAs7HqqQPnz6gxPwx9XPDuKb/c6uv/5JV5/QPdF
+  H/fYDdLnLq1p2VL2L/Ja9iNPnm4Kdj/4XjF+uD/Orkzkx755835tlSCy2X7h29MxWJn979xXr
+  qB1/N2vEZfzRuz1fYLqzzK/LwqDi281Bg1w3jR3FuB4kFZ/C37gs5eW/tjqdLRikuShetnOle
+  qF+b5JNWtMY89H3/D49+VFyFnLvJs7drwR+Qsx+rt60NnZDeX/eZTYinOSDTUYi4qTgQA7/UN
+  nkEDAAA=
+X-Env-Sender: leimaohui@fujitsu.com
+X-Msg-Ref: server-3.tower-587.messagelabs.com!1673335384!400643!1
+X-Originating-IP: [62.60.8.97]
+X-SYMC-ESS-Client-Auth: outbound-route-from=pass
+X-StarScan-Received: 
+X-StarScan-Version: 9.101.2; banners=-,-,-
+X-VirusChecked: Checked
+Received: (qmail 6457 invoked from network); 10 Jan 2023 07:23:05 -0000
+Received: from unknown (HELO n03ukasimr01.n03.fujitsu.local) (62.60.8.97)
+  by server-3.tower-587.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 10 Jan 2023 07:23:05 -0000
+Received: from n03ukasimr01.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTP id A517D100188
+	for <openembedded-devel@lists.openembedded.org>; Tue, 10 Jan 2023 07:23:04 +0000 (GMT)
+Received: from R01UKEXCASM223.r01.fujitsu.local (R01UKEXCASM223 [10.182.185.121])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTPS id 98BDF100043
+	for <openembedded-devel@lists.openembedded.org>; Tue, 10 Jan 2023 07:23:04 +0000 (GMT)
+Received: from localhost.localdomain (10.167.225.227) by
+ R01UKEXCASM223.r01.fujitsu.local (10.182.185.121) with Microsoft SMTP Server
+ (TLS) id 15.0.1497.42; Tue, 10 Jan 2023 07:23:03 +0000
+From: Lei Maohui <leimaohui@fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: Lei Maohui <leimaohui@fujitsu.com>
+Subject: [oe] [meta-oe][PATCH] trace-cmd: Fix QA Issue of do_package when enable multilib:
+Date: Tue, 10 Jan 2023 15:22:53 +0800
+Message-ID: <1673335373-31576-1-git-send-email-leimaohui@fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.167.225.227]
+X-ClientProxiedBy: G08CNEXCHPEKD07.g08.fujitsu.local (10.167.33.80) To
+ R01UKEXCASM223.r01.fujitsu.local (10.182.185.121)
+X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 10 Jan 2023 07:23:04 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100511
+ <openembedded-devel@lists.openembedded.org>; Tue, 10 Jan 2023 07:23:13 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100512
 
-From: Chee Yang Lee <chee.yang.lee@intel.com>
+ERROR: trace-cmd-3.1.5-r0 do_package: QA Issue: trace-cmd: Files/directories were installed but not shipped in any package:
+  /usr/usr/lib64/libtracecmd.so
+  /usr/usr/lib64/libtracecmd.so.1.3.0
+  /usr/usr/lib64/libtracecmd.so.1
 
-also fix reproducible build
-
-Signed-off-by: Chee Yang Lee <chee.yang.lee@intel.com>
+Signed-off-by: Lei Maohui <leimaohui@fujitsu.com>
 ---
- .../xerces-c/{xerces-c_3.1.4.bb => xerces-c_3.2.4.bb}      | 7 +++----
- 1 file changed, 3 insertions(+), 4 deletions(-)
- rename meta-oe/recipes-devtools/xerces-c/{xerces-c_3.1.4.bb => xerces-c_3.2.4.bb} (83%)
+ meta-oe/recipes-kernel/trace-cmd/trace-cmd_3.1.5.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-devtools/xerces-c/xerces-c_3.1.4.bb b/meta-oe/recipes-devtools/xerces-c/xerces-c_3.2.4.bb
-similarity index 83%
-rename from meta-oe/recipes-devtools/xerces-c/xerces-c_3.1.4.bb
-rename to meta-oe/recipes-devtools/xerces-c/xerces-c_3.2.4.bb
-index 22fd94b093..582c29379a 100644
---- a/meta-oe/recipes-devtools/xerces-c/xerces-c_3.1.4.bb
-+++ b/meta-oe/recipes-devtools/xerces-c/xerces-c_3.2.4.bb
-@@ -10,8 +10,7 @@ LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
- 
- SRC_URI = "http://archive.apache.org/dist/xerces/c/3/sources/${BP}.tar.bz2"
--SRC_URI[md5sum] = "d04ae9d8b2dee2157c6db95fa908abfd"
--SRC_URI[sha256sum] = "9408f12c1628ecf80730bedbe8b2caad810edd01bb4c66f77b60c873e8cc6891"
-+SRC_URI[sha256sum] = "74aa626fc71e729ee227602870dd29a5a01cd8c9c1c7330837a51da2eb5722cc"
- 
- inherit autotools
- 
-@@ -20,7 +19,7 @@ PACKAGECONFIG[curl] = "--with-curl=${STAGING_DIR_TARGET}${prefix},--with-curl=no
- PACKAGECONFIG[icu] = "--with-icu=${STAGING_DIR_TARGET}${prefix},--with-icu=no,icu"
- 
- do_install:prepend () {
--    sed -i -e 's:-L${STAGING_DIR}/lib:-L\$\{libdir\}:g' ${B}/xerces-c.pc
-+    sed -i s:-L${STAGING_LIBDIR}::g ${B}/xerces-c.pc
+diff --git a/meta-oe/recipes-kernel/trace-cmd/trace-cmd_3.1.5.bb b/meta-oe/recipes-kernel/trace-cmd/trace-cmd_3.1.5.bb
+index 50d73df03..78315553b 100644
+--- a/meta-oe/recipes-kernel/trace-cmd/trace-cmd_3.1.5.bb
++++ b/meta-oe/recipes-kernel/trace-cmd/trace-cmd_3.1.5.bb
+@@ -25,7 +25,7 @@ do_compile() {
  }
  
- PACKAGES = "libxerces-c \
-@@ -32,7 +31,7 @@ PACKAGES = "libxerces-c \
- 
- RPROVIDES:${PN}-dbg += "libxerces-c-dbg xerces-c-samples-dbg"
- 
--FILES:libxerces-c = "${libdir}/libxerces-c-3.1.so"
-+FILES:libxerces-c = "${libdir}/libxerces-c-3.2.so"
- FILES:libxerces-c-dev = "${libdir}/lib*.la \
-     ${libdir}/libxerces-c.so \
-     ${libdir}/pkgconfig/xerces-c.pc \
+ do_install() {
+-       oe_runmake libdir_relative=${BASELIB} etcdir=${sysconfdir} pkgconfig_dir=${libdir}/pkgconfig DESTDIR=${D} install install_libs
++       oe_runmake libdir_relative=${baselib} etcdir=${sysconfdir} pkgconfig_dir=${libdir}/pkgconfig DESTDIR=${D} install install_libs
+        # Because makefile uses cp instead of install we need to change owner of files
+        chown -R root:root ${D}${libdir}
+ }
 -- 
-2.37.3
+2.25.1
 
 
