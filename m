@@ -1,116 +1,106 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 44EF1C54EBE
-	for <webhook@archiver.kernel.org>; Tue, 10 Jan 2023 05:26:23 +0000 (UTC)
-Received: from mail-pl1-f181.google.com (mail-pl1-f181.google.com [209.85.214.181])
- by mx.groups.io with SMTP id smtpd.web11.97171.1673328374535850748
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 559E2C46467
+	for <webhook@archiver.kernel.org>; Tue, 10 Jan 2023 05:39:43 +0000 (UTC)
+Received: from mail1.bemta37.messagelabs.com (mail1.bemta37.messagelabs.com [85.158.142.2])
+ by mx.groups.io with SMTP id smtpd.web11.97329.1673329173222921480
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 09 Jan 2023 21:26:14 -0800
+ Mon, 09 Jan 2023 21:39:33 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=GslMie1P;
- spf=pass (domain: gmail.com, ip: 209.85.214.181, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f181.google.com with SMTP id w3so12050289ply.3
-        for <openembedded-devel@lists.openembedded.org>; Mon, 09 Jan 2023 21:26:14 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=yJpAqASqTahckl1UgEP+Bgur9OGJx66SbVZEHjauyNs=;
-        b=GslMie1PYxmBn4MVqInX2R+U1jGmz4fwjVL/tVmdtJziAbyI9MT7V3wQBI5oeQt6fR
-         FSZr2tIceRznSoUUvus9t3htyM0ZH2DXew6LlPPTbc2gQLQpzq/JKLGgyilp2Op09VWo
-         9Pi7r8dOIzYclTSbpppY0JYzOBx2oGuydvdI9+jo/k+MeP3nad7Rh12si/Fr77tu8dyT
-         E/06Z3v6jtz0NIZYZmb7POYx7Nxpio8rWFeQqTzPwjRkgCuy/CnmnKpifU2VjjXyMGLu
-         bR192W0I3tjypm1agaS8JAD3T7YGjW0qcyE8x89U49XOMWKam4fnlMwf41lveu1/7F3e
-         TB1w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=yJpAqASqTahckl1UgEP+Bgur9OGJx66SbVZEHjauyNs=;
-        b=z80gQisR9DsjslFOf+N3NrTFz2fz8rI2Sx4KXS1C6uEEiz9uMP+4TdGdmQEuAu+EMG
-         ZnVouUwPfvHkAxiYOurXJRhXUh8oD2vIKMK6xnYynKKSxxAblCkMxI0TFWdLABl7n2mZ
-         g1gpojQWKvHpyxBhy3anoV9dEk6pMZmcoREANCvu4t6292x65Lzk8xL3enJUlf8zuzgB
-         OnBDcaicagaTnNlGZnSkRizMNsmG85iH2gd7UL6llxS58zZKGgU8+7th0AbNZquH6xxl
-         Pf5dytgVgV4aiKYFkmmdpRNEqnnY3DYHKwIaHSveTTKfErq919yVkZLG5MLIz7QnjLWL
-         Q+Dg==
-X-Gm-Message-State: AFqh2koW/tTyYJSAAUvMvBDlBWjlZ+Afu8GKwSLEAM1bUS2Kx6+wrL9Q
-	lDMQEMHJhrsZ1StmaklzOr6e63QgdcbOqg==
-X-Google-Smtp-Source: AMrXdXt3SpT1VUQZX+rupTa0JezJMPWs18/YTLSn7glc99p/LrvZSfhTtSsLN2ApzSqFxcQZuIM3Zg==
-X-Received: by 2002:a17:902:d2ce:b0:192:a4d5:55b8 with SMTP id n14-20020a170902d2ce00b00192a4d555b8mr63827968plc.52.1673328373516;
-        Mon, 09 Jan 2023 21:26:13 -0800 (PST)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9181:1cf0::ee35])
-        by smtp.gmail.com with ESMTPSA id a22-20020a1709027d9600b00174d9bbeda4sm6999268plm.197.2023.01.09.21.26.12
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 09 Jan 2023 21:26:12 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH] packagegroup-meta-oe: Update to reflect latest recipes
-Date: Mon,  9 Jan 2023 21:26:10 -0800
-Message-Id: <20230110052610.2599141-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.39.0
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=kXJG9eQK;
+ spf=pass (domain: fujitsu.com, ip: 85.158.142.2, mailfrom: wangmy@fujitsu.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
+	s=170520fj; t=1673329171; i=@fujitsu.com;
+	bh=y8+p2cCDnWpgsh4MH1lJakjs15D1hGQc7x/0dILWq5M=;
+	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
+	b=kXJG9eQKNEeq6w5FnGkb1QXrkPZAJqEkCCiQr/odgbs+hWHZrd0xhM5oSHv1j5CXm
+	 hwDkTbCVZKp589PHMzN4gwUcYFO6FEn0THgqgjLIItJP+8vM67RZ44FDFIOmtr6oJ9
+	 EgZIBPCwG64CidgsNIWjKSY1ID636xSUp6kdMzxh4WklgCgsNEXoHiWs8OvNDhG2Tz
+	 HHrTNqD3c0Q+qTgyUDSCK3jCRWJH1+u3k0XPxxy2xhd4D59nAbBjvMAZXuvnip957l
+	 fsMPu+Lbp4cSSP88J5Op7n6BuWrfWYajuQyX5IANvQsZHFeO5RdcrRNW5NkXEJw8Wr
+	 2zr6ySHFF0lLA==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrFIsWRWlGSWpSXmKPExsViZ8MxSVfo155
+  kg7uvpSwuHl7K7MDocW7jCsYAxijWzLyk/IoE1oxpPb0sBdc4Ki4c/8rcwPiXvYuRi0NI4Amj
+  RMu9ycwQzg0miWldh4AcTiBnL6NE854qEJtNQErixv3/bCC2iIC+xNLZe8BqmAVUJF787mEHs
+  YUF/CVObVnBBGKzCKhKfHp1iQXE5hVwlHhx+AeYLSGgIDHl4XtmiLigxMmZT1gg5khIHHzxgh
+  miRlFi9uVmqPpKidYPv6BsNYmr5zYxT2Dkn4WkfRaS9gWMTKsYzYpTi8pSi3SN9ZKKMtMzSnI
+  TM3P0Eqt0E/VSS3Xz8otKMnQN9RLLi/VSi4v1iitzk3NS9PJSSzYxAoMxpTh9/Q7Gd0v/6B1i
+  lORgUhLlLfq0J1mILyk/pTIjsTgjvqg0J7X4EKMMB4eSBK/OD6CcYFFqempFWmYOMDJg0hIcP
+  EoivPOuA6V5iwsSc4sz0yFSpxh1Oa5eubKXWYglLz8vVUqcdynIDAGQoozSPLgRsCi9xCgrJc
+  zLyMDAIMRTkFqUm1mCKv+KUZyDUUmY1/or0BSezLwSuE2vgI5gAjrix9SdIEeUJCKkpBqYaqt
+  madi8+5v1v85561GGXX7Vm0RSm6Yd5Z2+VdkgMyDyCz+DvlkaU5MRa8AUsVda7np7J/ALZS61
+  kdwxtZkxZMbipZOvHLjffEfF6MP1O2fP2B/JuJ4+/2dRZFHEn66Psbds9l7OSayflnb4VEi9v
+  cAj++93phYdNGHz18s9UMCxq/9w6vvaGR9n6bvqc5icFd23ebvtRN67/gGu9VPaPj5eXLbxWb
+  ykf/O/679eLXNi/WDa1qN6niffMv9n8vcTM1Slmn53qX46bRm3qePLam/eqC0LNQqylycJV1T
+  OjHELvGeid8Bse/WCfVYM/47cEODcJlG5fxWnvMezg5OLsiZcNDhr638kQJnpa9omJZbijERD
+  Leai4kQAd/vTrE0DAAA=
+X-Env-Sender: wangmy@fujitsu.com
+X-Msg-Ref: server-3.tower-732.messagelabs.com!1673329170!319617!1
+X-Originating-IP: [62.60.8.146]
+X-SYMC-ESS-Client-Auth: outbound-route-from=pass
+X-StarScan-Received: 
+X-StarScan-Version: 9.101.2; banners=-,-,-
+X-VirusChecked: Checked
+Received: (qmail 7254 invoked from network); 10 Jan 2023 05:39:30 -0000
+Received: from unknown (HELO n03ukasimr02.n03.fujitsu.local) (62.60.8.146)
+  by server-3.tower-732.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 10 Jan 2023 05:39:30 -0000
+Received: from n03ukasimr02.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTP id D529F1000D2
+	for <openembedded-devel@lists.openembedded.org>; Tue, 10 Jan 2023 05:39:29 +0000 (GMT)
+Received: from R01UKEXCASM223.r01.fujitsu.local (R01UKEXCASM223 [10.182.185.121])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTPS id C988D1000C1
+	for <openembedded-devel@lists.openembedded.org>; Tue, 10 Jan 2023 05:39:29 +0000 (GMT)
+Received: from localhost.localdomain (10.167.225.33) by
+ R01UKEXCASM223.r01.fujitsu.local (10.182.185.121) with Microsoft SMTP Server
+ (TLS) id 15.0.1497.42; Tue, 10 Jan 2023 05:39:28 +0000
+From: <wangmy@fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: Wang Mingyu <wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH] ctags: upgrade 6.0.20230101.0 -> 6.0.20230108.0
+Date: Tue, 10 Jan 2023 13:39:14 +0800
+Message-ID: <1673329158-5189-1-git-send-email-wangmy@fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.167.225.33]
+X-ClientProxiedBy: G08CNEXCHPEKD07.g08.fujitsu.local (10.167.33.80) To
+ R01UKEXCASM223.r01.fujitsu.local (10.182.185.121)
+X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 10 Jan 2023 05:26:23 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100498
+ <openembedded-devel@lists.openembedded.org>; Tue, 10 Jan 2023 05:39:43 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100499
 
-Some recipes are removed and some have changed PROVIDERS, adjust
-accordingly.
+From: Wang Mingyu <wangmy@fujitsu.com>
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../recipes-core/packagegroups/packagegroup-meta-oe.bbappend   | 3 +--
- meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb     | 2 --
- 2 files changed, 1 insertion(+), 4 deletions(-)
+ .../ctags/{ctags_6.0.20230101.0.bb => ctags_6.0.20230108.0.bb}  | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-devtools/ctags/{ctags_6.0.20230101.0.bb => ctags_6.0.20230108.0.bb} (95%)
 
-diff --git a/meta-oe/dynamic-layers/meta-python/recipes-core/packagegroups/packagegroup-meta-oe.bbappend b/meta-oe/dynamic-layers/meta-python/recipes-core/packagegroups/packagegroup-meta-oe.bbappend
-index ae4d38085a..43afad7515 100644
---- a/meta-oe/dynamic-layers/meta-python/recipes-core/packagegroups/packagegroup-meta-oe.bbappend
-+++ b/meta-oe/dynamic-layers/meta-python/recipes-core/packagegroups/packagegroup-meta-oe.bbappend
-@@ -1,7 +1,6 @@
- RDEPENDS:packagegroup-meta-oe-devtools += "\
-     python3-distutils-extra \
-     rwmem \
--    speedtest-cli \
-     mongodb \
- "
+diff --git a/meta-oe/recipes-devtools/ctags/ctags_6.0.20230101.0.bb b/meta-oe/recipes-devtools/ctags/ctags_6.0.20230108.0.bb
+similarity index 95%
+rename from meta-oe/recipes-devtools/ctags/ctags_6.0.20230101.0.bb
+rename to meta-oe/recipes-devtools/ctags/ctags_6.0.20230108.0.bb
+index faeca6ce8..60579ede0 100644
+--- a/meta-oe/recipes-devtools/ctags/ctags_6.0.20230101.0.bb
++++ b/meta-oe/recipes-devtools/ctags/ctags_6.0.20230108.0.bb
+@@ -14,7 +14,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3"
  
-@@ -11,7 +10,7 @@ RDEPENDS:packagegroup-meta-oe-connectivity += "\
+ inherit autotools-brokensep pkgconfig manpages
  
- RDEPENDS:packagegroup-meta-oe-extended += "\
-     lcdproc \
--    mozjs \
-+    mozjs-102 \
- "
- RDEPENDS:packagegroup-meta-oe-support += "\
-     nvmetcli \
-diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-index 0bb4f7c407..20291b576d 100644
---- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-+++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-@@ -189,7 +189,6 @@ RDEPENDS:packagegroup-meta-oe-core = "\
-     distro-feed-configs \
-     mm-common \
-     ${@bb.utils.contains("DISTRO_FEATURES", "systemd", "ndctl", "", d)} \
--    opencl-icd-loader \
-     pim435 \
-     proxy-libintl \
-     safec \
-@@ -304,7 +303,6 @@ RDEPENDS:packagegroup-meta-oe-devtools ="\
-     rapidjson \
-     squashfs-tools-ng \
-     uftrace \
--    unifex \
-     valijson \
-     libxerces-c \
-     xerces-c-samples \
+-SRCREV = "c89b92d5622221be2e02e71092dcdbc72733b08a"
++SRCREV = "dfdabb5ba13b3db2c278a732b4cc1d51f1d9bcf8"
+ SRC_URI = "git://github.com/universal-ctags/ctags;branch=master;protocol=https"
+ 
+ S = "${WORKDIR}/git"
 -- 
-2.39.0
+2.25.1
 
 
