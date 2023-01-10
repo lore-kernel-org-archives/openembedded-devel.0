@@ -2,68 +2,68 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 54038C67871
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 59A70C6379F
 	for <webhook@archiver.kernel.org>; Tue, 10 Jan 2023 05:40:43 +0000 (UTC)
-Received: from mail1.bemta37.messagelabs.com (mail1.bemta37.messagelabs.com [85.158.142.1])
- by mx.groups.io with SMTP id smtpd.web10.96893.1673329236216560502
+Received: from mail1.bemta32.messagelabs.com (mail1.bemta32.messagelabs.com [195.245.230.1])
+ by mx.groups.io with SMTP id smtpd.web11.97337.1673329238242255072
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 09 Jan 2023 21:40:36 -0800
+ Mon, 09 Jan 2023 21:40:38 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=pWX56+Kv;
- spf=pass (domain: fujitsu.com, ip: 85.158.142.1, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=CSWRrMMG;
+ spf=pass (domain: fujitsu.com, ip: 195.245.230.1, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1673329234; i=@fujitsu.com;
-	bh=lxtvMpPbFBzBO6uMmTd1OPV6Qex3UkL4Vsj1PsQndhY=;
+	s=170520fj; t=1673329236; i=@fujitsu.com;
+	bh=KvDHtRAcrs/ek1mIjAiOdzeEc9/d5rdScEsYZkcEuuY=;
 	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
 	 MIME-Version:Content-Type;
-	b=pWX56+KvFrUr4cRLGkrSEGtEJMvrrLbHTNy2oWB4ItiGDCTrlS+7IiyKdRnfpCslL
-	 qyyz4K7U3iCsfbB4yycKWWftgycIofv8wYH3PX3Pd/6TkxGirfsVepltvGuAmBmhSJ
-	 34nLyaxrpzMzECj+KaP++9TtdE7Fz2ZMsigfHcwcjV6kD7Fvm8qxwihDqTA6O764Hz
-	 e7cvmDk6E6Sx7c7kM3MjOJWWewlS1HcbC2WZAPLbp066BEbE/7GupnZRhNoPUuxRYx
-	 16K5MFQw/2uOeuyGyDxAyKo2hd4JlY2PrmCvBMDrxX+Owh9a6JiAuLTVA+hPz+rUmS
-	 Bc2tnr4/gmFQQ==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrOIsWRWlGSWpSXmKPExsViZ8ORpBv4a0+
-  ywcv5chYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8bGdUfYCq5zVjRdns/YwHiKo4uRi0NI4CGj
-  xPJpB1ggnKtMEq2nVjJCOHsZJQ5te8HWxcjJwSYgJXHj/n8wW0RAX2Lp7D3MIDazgIrEi9897
-  CC2sECkxN47zWBxFgFViWUbTrKA2LwCjhL/j79lBLElBBQkpjx8D1bDKeAk0T3hKliNEFDN10
-  9fGCHqBSVOznzCAjFfQuLgixfMEL2KErMvN7NA2JUSrR9+QdlqElfPbWKewCg4C0n7LCTtCxi
-  ZVjGaFacWlaUW6VroJRVlpmeU5CZm5uglVukm6qWW6ublF5Vk6BrqJZYX66UWF+sVV+Ym56To
-  5aWWbGIEhm9KcYr7Dsbjy/7oHWKU5GBSEuUt+rQnWYgvKT+lMiOxOCO+qDQntfgQowwHh5IEr
-  84PoJxgUWp6akVaZg4wlmDSEhw8SiK8864DpXmLCxJzizPTIVKnGBWlxHkn/QRKCIAkMkrz4N
-  pg8XuJUVZKmJeRgYFBiKcgtSg3swRV/hWjOAejkjCv9VegKTyZeSVw018BLWYCWvxj6k6QxSW
-  JCCmpBqZDJW5rA5/fbnrs+yeV/csxk8Y5Z7rmS0pMmB7B9KBstob6+9r1D3TdJhgxFK7Zfm6W
-  0+WCu5dz3HyKJnLEH3BvlJM8Zqu6OaJVKWyb13TDdbn1knPeL8+5ay9Ws0xE081oyi5lqy3dd
-  3UETnnU9aiUqhy2aREwDozMc5k83cTh68Mb128KNG5ewiPfFiIYkbDryayI+ullk/4YXRBp4z
-  rP4pzQ8v7SPhHN47YiBXdnZMwrVH2ylve5t/PxL8KzHdW7YgI+bT3BX9F6S5LV+JWkwGVGR/u
-  HXI8fyugJTyj78vbWwTeMZV8toptWXNCbL6Lz4IB43ZrePdvVTQQPq6wQ3cUz+ciO01obLigF
-  LVBiKc5INNRiLipOBABYp6PxWgMAAA==
+	b=CSWRrMMGLUlN2nWLTgSiaFOXTYgLVGZ4G6tkkbZEeM8OANNmgjxjL1svcMRFENYXk
+	 qaxKZYyiXCz44RR6yIZ/YFGVSegVcK6rmRZCwW+Q5+eNmbi/XHWQ9PtDxMng/a39Wl
+	 h2urlPxTvsjcOvQd5MmDIk684YiKkfPIvGHqkEPIffyqsE/pIV+tViJ7AoNxwRLc2I
+	 pNuJ+lWA5iWcL3APCUIldDpzX/Keo3Py7JSNIgTW8+AOzIxuH8kQZKvjPruHeGtBX+
+	 lxu9pPuTVpdzxrDNmU+Sln0I9mQDxzW+eDa3keE162lLlro/dzTP4ig4q0gI2FLkp8
+	 ghz+s2v7lLGIQ==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrEIsWRWlGSWpSXmKPExsViZ8MxSTf4155
+  kg3l/5SwuHl7K7MDocW7jCsYAxijWzLyk/IoE1oyD67ayFDznq2ja/4apgbGPt4uRi0NI4Amj
+  xN8n25kgnBtMEvcfnmSGcPYySmxobWHvYuTkYBOQkrhx/z8biC0ioC+xdPYeZhCbWUBF4sXvH
+  rAaYQFbiYf9s1hAbBYBVYnWrRvBbF4BR4lFU7oZQWwJAQWJKQ/fg/VyCjhJdE+4ClYjBFTz9d
+  MXRoh6QYmTM5+wQMyXkDj44gUzRK+ixOzLzSwQdqVE64dfULaaxNVzm5gnMArOQtI+C0n7Aka
+  mVYymxalFZalFuuZ6SUWZ6RkluYmZOXqJVbqJeqmluuWpxSW6hnqJ5cV6qcXFesWVuck5KXp5
+  qSWbGIHBm1LMmLuDceeyP3qHGCU5mJREeYs+7UkW4kvKT6nMSCzOiC8qzUktPsQow8GhJMGr8
+  wMoJ1iUmp5akZaZA4wkmLQEB4+SCO+860Bp3uKCxNzizHSI1ClGXY6rV67sZRZiycvPS5US55
+  30E6hIAKQoozQPbgQsqi8xykoJ8zIyMDAI8RSkFuVmlqDKv2IU52BUEua1/go0hSczrwRu0yu
+  gI5iAjvgxdSfIESWJCCmpBqa9S+ZNzK5lM337emX8Gvfkw+q5diK309d9PF/hnLv6/qp9TKER
+  QjcvuPywtumTenPnrvsrrntLNISu1iqr1dq7H6mM3Hw75mGS0YTUd7ZXtgXWn0xb6njz6yz2A
+  wZCd+fr6zvcPaCW/LLb3Pu3o3DOTL3MOznR3bcfn9i9pT+/b7ua68H0Pzsjviy6dJP5ocbHH0
+  /L4h7UmiVpF3M8/BpenPhVnF38vvJuDj+vtWwHA25JdB2z9WA4IJvzv1ziSGWTKodPgPCviIs
+  B38pcYhpf8p4OWeck4tyw9/Bxy3NblLzZJm3R5pr7QUP83K2P52O363z3ZeacLGA3+7z1g3qt
+  LXe8ZJp3n2pd5W5744ASS3FGoqEWc1FxIgBJRhD9ZQMAAA==
 X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-7.tower-728.messagelabs.com!1673329233!406042!1
-X-Originating-IP: [62.60.8.98]
+X-Msg-Ref: server-2.tower-591.messagelabs.com!1673329235!448397!1
+X-Originating-IP: [62.60.8.146]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.101.2; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 25501 invoked from network); 10 Jan 2023 05:40:33 -0000
-Received: from unknown (HELO n03ukasimr03.n03.fujitsu.local) (62.60.8.98)
-  by server-7.tower-728.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 10 Jan 2023 05:40:33 -0000
-Received: from n03ukasimr03.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr03.n03.fujitsu.local (Postfix) with ESMTP id EA3F71B0
-	for <openembedded-devel@lists.openembedded.org>; Tue, 10 Jan 2023 05:40:32 +0000 (GMT)
+Received: (qmail 3139 invoked from network); 10 Jan 2023 05:40:35 -0000
+Received: from unknown (HELO n03ukasimr02.n03.fujitsu.local) (62.60.8.146)
+  by server-2.tower-591.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 10 Jan 2023 05:40:35 -0000
+Received: from n03ukasimr02.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTP id 16AF71000E7
+	for <openembedded-devel@lists.openembedded.org>; Tue, 10 Jan 2023 05:40:35 +0000 (GMT)
 Received: from R01UKEXCASM223.r01.fujitsu.local (R01UKEXCASM223 [10.182.185.121])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by n03ukasimr03.n03.fujitsu.local (Postfix) with ESMTPS id DEB641AF
-	for <openembedded-devel@lists.openembedded.org>; Tue, 10 Jan 2023 05:40:32 +0000 (GMT)
+	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTPS id 0A3E91000D2
+	for <openembedded-devel@lists.openembedded.org>; Tue, 10 Jan 2023 05:40:35 +0000 (GMT)
 Received: from localhost.localdomain (10.167.225.33) by
  R01UKEXCASM223.r01.fujitsu.local (10.182.185.121) with Microsoft SMTP Server
- (TLS) id 15.0.1497.42; Tue, 10 Jan 2023 05:40:31 +0000
+ (TLS) id 15.0.1497.42; Tue, 10 Jan 2023 05:40:33 +0000
 From: <wangmy@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-gnome] [PATCH] evolution-data-server-native: upgrade 3.46.2 -> 3.46.3
-Date: Tue, 10 Jan 2023 13:40:17 +0800
-Message-ID: <1673329220-5227-2-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH] cli11: upgrade 2.3.1 -> 2.3.2
+Date: Tue, 10 Jan 2023 13:40:18 +0800
+Message-ID: <1673329220-5227-3-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 In-Reply-To: <1673329220-5227-1-git-send-email-wangmy@fujitsu.com>
 References: <1673329220-5227-1-git-send-email-wangmy@fujitsu.com>
@@ -77,37 +77,49 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 10 Jan 2023 05:40:43 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100505
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100506
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
 Changelog:
-==========
-Bug Fixes:
-        I#442 - e_util_change_uri_component: Reset default port when changing scheme
-        ews-I#208 - Prompting for password too often
+===========
+- Bugfix: Consistently use ADL for 'lexical_cast', making it easier to extend
+  for custom template types [#820][]
+- Bugfix: Tweak the parsing of files for flags with 'disable_flag_override'
+  [#800][]
+- Bugfix: Handle out of bounds long long [#807][]
+- Bugfix: Spacing of 'make_description' min option output [#808][]
+- Bugfix: Print last parsed subcommand's help message [#822][]
+- Bugfix: Avoid floating point warning in GCC 12 [#803][]
+- Bugfix: Fix a few gcc warnings [#813][]
+- Backend: Max CMake tested 3.22 -> 3.24 [#823][]
 
-Miscellaneous:
-        Fix a crash under source_registry_object_added_no_owner()
-        ESoupAuthBearer: Add debug prints
+License-Update: Copyright updated to 2023.
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../evolution-data-server/evolution-data-server.inc           | 4 ++--
+ .../recipes-support/cli11/{cli11_2.3.1.bb => cli11_2.3.2.bb}  | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-support/cli11/{cli11_2.3.1.bb => cli11_2.3.2.bb} (87%)
 
-diff --git a/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server.inc b/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server.inc
-index 86f01ab377..2b74b2e605 100644
---- a/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server.inc
-+++ b/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server.inc
-@@ -9,5 +9,5 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=6a6e689d19255cf0557f3fe7d7068212 \
+diff --git a/meta-oe/recipes-support/cli11/cli11_2.3.1.bb b/meta-oe/recipes-support/cli11/cli11_2.3.2.bb
+similarity index 87%
+rename from meta-oe/recipes-support/cli11/cli11_2.3.1.bb
+rename to meta-oe/recipes-support/cli11/cli11_2.3.2.bb
+index cdba31e704..313973326d 100644
+--- a/meta-oe/recipes-support/cli11/cli11_2.3.1.bb
++++ b/meta-oe/recipes-support/cli11/cli11_2.3.2.bb
+@@ -2,8 +2,8 @@ SUMMARY = "C++11 command line parser"
+ DESCRIPTION = "A command line parser for C++11 and beyond that provides a rich feature set with a simple and intuitive interface."
+ HOMEPAGE = "https://github.com/CLIUtils/CLI11"
+ LICENSE = "BSD-3-Clause"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=9ad746b5f49c0fd53c08ca1faff1922c"
+-SRCREV = "c2ea58c7f9bb2a1da2d3d7f5b462121ac6a07f16"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=afb20fe5f67e21074b10b864d9563c11"
++SRCREV = "291c58789c031208f08f4f261a858b5b7083e8e2"
+ PV .= "+git${SRCPV}"
  
- inherit gnomebase upstream-version-is-even
- 
--SRC_URI[archive.sha256sum] = "f9bd52008b7e535d816920cfcec70a0e5562bde28af71f996e203ff6a86e46e0"
--PV = "3.46.2"
-+SRC_URI[archive.sha256sum] = "0938e2279e5cfbc2204766ca9d3fea570911699b07c10cbe01aca62a7e8b2bee"
-+PV = "3.46.3"
+ SRC_URI += "gitsm://github.com/CLIUtils/CLI11;branch=main;protocol=https \
 -- 
 2.25.1
 
