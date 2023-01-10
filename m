@@ -1,109 +1,98 @@
-Return-Path: <wangmy@fujitsu.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 40847C46467
-	for <webhook@archiver.kernel.org>; Tue, 10 Jan 2023 05:40:43 +0000 (UTC)
-Received: from mail1.bemta32.messagelabs.com (mail1.bemta32.messagelabs.com [195.245.230.65])
- by mx.groups.io with SMTP id smtpd.web10.96891.1673329233247853783
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AE276C46467
+	for <webhook@archiver.kernel.org>; Tue, 10 Jan 2023 06:23:23 +0000 (UTC)
+Received: from mail-oa1-f43.google.com (mail-oa1-f43.google.com [209.85.160.43])
+ by mx.groups.io with SMTP id smtpd.web11.97898.1673331793809760194
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 09 Jan 2023 21:40:33 -0800
+ Mon, 09 Jan 2023 22:23:13 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=MLg8L/Lq;
- spf=pass (domain: fujitsu.com, ip: 195.245.230.65, mailfrom: wangmy@fujitsu.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1673329231; i=@fujitsu.com;
-	bh=eRKB1tDeFDDLp4vnVj1DN8lVR+kD7deBfczAlnjCEsI=;
-	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=MLg8L/Lq0aKISDvF5CThh7aWmPoNwHeaseLjededp9BtcZDzLXgLlr7JaqX3Efzqo
-	 3tpsZBf/jZLbIASMX/veDyXWchDtTnw2AaIWFtmIGPRUhMkMkah278bBDgzOhhg4x6
-	 7CIFBG9/TH9oUuhlEeQ/59Ku5xZJT0jJeUaXDIrs8hAO2N8tYSQiuWNtsxNQcK4Hrk
-	 mbucZWdchXO1kWoyWTlyy4h+cebR/ZSAtWlO798gBbFB0zOVCbAtmNmpj694SbGNFU
-	 apvVBxC/8CEg75fjMJfwCm8wpDAAQLk7AAplJoHuWQxw9fGIeEvef6x/bXpVESsyr6
-	 Fbj3p2dUSB/Zw==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFlrDIsWRWlGSWpSXmKPExsViZ8OxWdfv155
-  kg3WPdS0uHl7K7MDocW7jCsYAxijWzLyk/IoE1oz9z2ewFLRwVmxftoC5gXE+RxcjF4eQwENG
-  id7XXxkhnCtMEluXL2LrYuQEcvYySty+qANiswlISdy4/x8sLiKgL7F09h5mEJtZQEXixe8e9
-  i5GDg5hAWeJU6vAwiwCqhLLn2xjBAnzCjhKPNhjABKWEFCQmPLwPVgJr4CgxMmZT1ggpkhIHH
-  zxghmiRlFi9uVmFgi7UqL1wy8oW03i6rlNzBMY+WchaZ+FpH0BI9MqRrPi1KKy1CJdQ0u9pKL
-  M9IyS3MTMHL3EKt1EvdRS3fLU4hJdQ73E8mK91OJiveLK3OScFL281JJNjMBATClmu76Dccay
-  P3qHGCU5mJREeYs+7UkW4kvKT6nMSCzOiC8qzUktPsQow8GhJMGr8wMoJ1iUmp5akZaZA4wKm
-  LQEB4+SCO+860Bp3uKCxNzizHSI1ClGRSlx3kk/gRICIImM0jy4NlgkXmKUlRLmZWRgYBDiKU
-  gtys0sQZV/xSjOwagkzGv9FWgKT2ZeCdz0V0CLmYAW/5i6E2RxSSJCSqqBaeHSVa3xK57aP74
-  meNDUMKEg5s/GEEel0zJP/04172ZVlFLukL/4sqNJbPJWj5Z2tjszi8N8mEzXfLAyF9ns3CAb
-  fMXliFIyU6We9LJ9CiUHOO9HTTKbMWXVH+nvW6TPSVlYq6SadS9o1/DMfKPEccFnGccSk6cc0
-  4+GPDJb2Olrvtvwr7Xl1giGBXKz7zR15cmJbGLUnm+/+v33OoG5Tid/n7brUJ5zfL/RjIInSv
-  Yn1nR8dAtaw7CyO9tlzWrLPac5i1TEuS06XZNylx48sHBXyjMt/mVpFj27TRxiHpjy9iSEeqZ
-  JvFOI0vbculXp2Tezixw5GcYBRkcTDrov72XZfit1T+vzHflPM94rsRRnJBpqMRcVJwIAvhZr
-  UT8DAAA=
-X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-11.tower-591.messagelabs.com!1673329230!415127!1
-X-Originating-IP: [62.60.8.179]
-X-SYMC-ESS-Client-Auth: outbound-route-from=pass
-X-StarScan-Received: 
-X-StarScan-Version: 9.101.2; banners=-,-,-
-X-VirusChecked: Checked
-Received: (qmail 31361 invoked from network); 10 Jan 2023 05:40:30 -0000
-Received: from unknown (HELO n03ukasimr04.n03.fujitsu.local) (62.60.8.179)
-  by server-11.tower-591.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 10 Jan 2023 05:40:30 -0000
-Received: from n03ukasimr04.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTP id 5E3A2150
-	for <openembedded-devel@lists.openembedded.org>; Tue, 10 Jan 2023 05:40:30 +0000 (GMT)
-Received: from R01UKEXCASM223.r01.fujitsu.local (R01UKEXCASM223 [10.182.185.121])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTPS id 526977C
-	for <openembedded-devel@lists.openembedded.org>; Tue, 10 Jan 2023 05:40:30 +0000 (GMT)
-Received: from localhost.localdomain (10.167.225.33) by
- R01UKEXCASM223.r01.fujitsu.local (10.182.185.121) with Microsoft SMTP Server
- (TLS) id 15.0.1497.42; Tue, 10 Jan 2023 05:40:28 +0000
-From: <wangmy@fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-perl] [PATCH] libcgi-perl: upgrade 4.54 -> 4.55
-Date: Tue, 10 Jan 2023 13:40:16 +0800
-Message-ID: <1673329220-5227-1-git-send-email-wangmy@fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=cleEfFQB;
+ spf=pass (domain: gmail.com, ip: 209.85.160.43, mailfrom: raj.khem@gmail.com)
+Received: by mail-oa1-f43.google.com with SMTP id 586e51a60fabf-15085b8a2f7so11220893fac.2
+        for <openembedded-devel@lists.openembedded.org>; Mon, 09 Jan 2023 22:23:13 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=CzCR6TjBg8pKT5CkdeYIrCvaC36xUIRVK+a/Cmj9edc=;
+        b=cleEfFQB8juiuzY1ES+hr50e1jcFrYX6LZvtEwcy8d+rrXpRrKNGZQ7us3h+cplrNg
+         dkhOBhkWKQQUICsHL2PASPNThkMbCj4Arxcco2KKzkb962AAZGVVrRXfP1q9VnJGHi0X
+         3UytRoY7SiOzvTRVpl080GO1sLC4zR/vY9Nxh7TYUUmdC+ZY61/HWNGTurZsaisiFNFj
+         +cXA3lYeeQOvlR/csNIm6KM6//IQoqLmVEDHyFisLwsCCb7Hiwg8GG6V7JQpYjwH/yA4
+         uX2PRPx3dLC5Jgv6vGy+ig1uTmd3Rw7JKv1XvLRbsbrNhM/vnuE7r4bmyzdGpHo8aWet
+         66lg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=CzCR6TjBg8pKT5CkdeYIrCvaC36xUIRVK+a/Cmj9edc=;
+        b=P43nKGY8wQIgmgucb/Oc1nO7CiJaKM5grKRoxM8Svlse6Hp8b3577qtZTkPdv/Ftn+
+         ouzbZVNuYU4m4Wewq+VBQrPKtT81OpM16bYd0ILyLH08F/o2zcaf6YRMJxWGmnUY0aik
+         L9QJ66G22O+r00peTOGxdwgMWATQh6w0SLbJMSSrexQn0kxmY0B9fonhvOiy4XHfP8m5
+         peyLCImtwTMo+FRyWqzDKXdUr7NsJsOVk6WlheLZ9RC1F6RHnZtDS8K2p8XW+WhXZ4WF
+         H9RxoVwKeqVJX+TgR1r2YOBK4qQW57Jp+D+M5pT1nFrQQ+puNxtiZEn3GPooHko1Y8xO
+         R0jw==
+X-Gm-Message-State: AFqh2kqrKEf2mX4fCR1rvCgwHJzvDKo/mZyi3D4iH5vzQbYs4jqivu7q
+	a1wn7baq/Ha9alU9Rr2LrVwqJkmGdVFmeEaZiQfXsYGeLrm8Ig==
+X-Google-Smtp-Source: AMrXdXug7rYnKMBrJ/OGI3gIG1u1sLuGY8JJ3rZtIKQTEg5ruW/YglFktsAaj2nHeiWaHPqDh8UpqlRqXOe3axaFkVk=
+X-Received: by 2002:a05:6871:4049:b0:150:ab7d:7012 with SMTP id
+ ky9-20020a056871404900b00150ab7d7012mr1927483oab.55.1673331792928; Mon, 09
+ Jan 2023 22:23:12 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain
-X-Originating-IP: [10.167.225.33]
-X-ClientProxiedBy: G08CNEXCHPEKD07.g08.fujitsu.local (10.167.33.80) To
- R01UKEXCASM223.r01.fujitsu.local (10.182.185.121)
-X-Virus-Scanned: ClamAV using ClamSMTP
+References: <1673329158-5189-1-git-send-email-wangmy@fujitsu.com> <1673329158-5189-3-git-send-email-wangmy@fujitsu.com>
+In-Reply-To: <1673329158-5189-3-git-send-email-wangmy@fujitsu.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 9 Jan 2023 22:22:47 -0800
+Message-ID: <CAMKF1sodXKUTOxjFxm_pGucfX933Z38XKmu5LZPN2VDXL=cv4g@mail.gmail.com>
+Subject: Re: [oe] [meta-oe] [PATCH] hidapi: upgrade 0.12.0 -> 0.13.0
+To: wangmy <wangmy@fujitsu.com>
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 10 Jan 2023 05:40:43 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100504
+ <openembedded-devel@lists.openembedded.org>; Tue, 10 Jan 2023 06:23:23 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100509
 
-From: Wang Mingyu <wangmy@fujitsu.com>
+On Mon, Jan 9, 2023 at 9:39 PM wangmy <wangmy@fujitsu.com> wrote:
+>
+> From: Wang Mingyu <wangmy@fujitsu.com>
+>
+> Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+> ---
+>  meta-oe/recipes-support/hidapi/hidapi_git.bb | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+>
+> diff --git a/meta-oe/recipes-support/hidapi/hidapi_git.bb b/meta-oe/recipes-support/hidapi/hidapi_git.bb
+> index 4aa58ec7f..812a07da3 100644
+> --- a/meta-oe/recipes-support/hidapi/hidapi_git.bb
+> +++ b/meta-oe/recipes-support/hidapi/hidapi_git.bb
+> @@ -12,6 +12,6 @@ RDEPENDS:${PN}:append:libc-glibc = " glibc-gconv-utf-16"
+>  inherit autotools pkgconfig
+>
+>  SRC_URI = "git://github.com/libusb/hidapi.git;protocol=https;branch=master"
+> -PV = "0.12.0"
+> -SRCREV = "76108294092c023a4ece99eb3219559cea0d5066"
+> +PV = "0.13.0"
 
-Changelog:
-remove dependency on Test::Deep (GH #254)
+Drop setting PV here instead rename the recipe hidapi_git.bb -> hidapi_0.13.0.bb
 
-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
----
- .../libcgi/{libcgi-perl_4.54.bb => libcgi-perl_4.55.bb}         | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-perl/recipes-perl/libcgi/{libcgi-perl_4.54.bb => libcgi-perl_4.55.bb} (93%)
-
-diff --git a/meta-perl/recipes-perl/libcgi/libcgi-perl_4.54.bb b/meta-perl/recipes-perl/libcgi/libcgi-perl_4.55.bb
-similarity index 93%
-rename from meta-perl/recipes-perl/libcgi/libcgi-perl_4.54.bb
-rename to meta-perl/recipes-perl/libcgi/libcgi-perl_4.55.bb
-index 4c9864094..2278d14f6 100644
---- a/meta-perl/recipes-perl/libcgi/libcgi-perl_4.54.bb
-+++ b/meta-perl/recipes-perl/libcgi/libcgi-perl_4.55.bb
-@@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=415fc49abed2728f9480cd32c8d67beb"
- 
- SRC_URI = "http://search.cpan.org/CPAN/authors/id/L/LE/LEEJO/CGI-${PV}.tar.gz"
- 
--SRC_URI[sha256sum] = "9608a044ae2e87cefae8e69b113e3828552ddaba0d596a02f9954c6ac17fa294"
-+SRC_URI[sha256sum] = "67895e94b13fdf46a3893c9a17c2d0d4c3d4cd2550e1f41e26696c10cb8c64b2"
- 
- S = "${WORKDIR}/CGI-${PV}"
- 
--- 
-2.25.1
-
+> +SRCREV = "c3a6150d8801f79a59034045275176e9738b13e4"
+>  S = "${WORKDIR}/git"
+> --
+> 2.25.1
+>
+>
+> -=-=-=-=-=-=-=-=-=-=-=-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#100501): https://lists.openembedded.org/g/openembedded-devel/message/100501
+> Mute This Topic: https://lists.openembedded.org/mt/96171760/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [raj.khem@gmail.com]
+> -=-=-=-=-=-=-=-=-=-=-=-
+>
 
