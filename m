@@ -2,68 +2,68 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4AB46C6379F
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 41E39C46467
 	for <webhook@archiver.kernel.org>; Tue, 10 Jan 2023 05:39:53 +0000 (UTC)
-Received: from mail1.bemta32.messagelabs.com (mail1.bemta32.messagelabs.com [195.245.230.66])
- by mx.groups.io with SMTP id smtpd.web10.96878.1673329190667086923
+Received: from mail1.bemta34.messagelabs.com (mail1.bemta34.messagelabs.com [195.245.231.2])
+ by mx.groups.io with SMTP id smtpd.web10.96876.1673329186321475171
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 09 Jan 2023 21:39:50 -0800
+ Mon, 09 Jan 2023 21:39:47 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=No0+ypOS;
- spf=pass (domain: fujitsu.com, ip: 195.245.230.66, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=HF7cA6r5;
+ spf=pass (domain: fujitsu.com, ip: 195.245.231.2, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1673329189; i=@fujitsu.com;
-	bh=0hT04TOfgEE1raDj0EonKysneHIynC2PnLZd0Ou311c=;
+	s=170520fj; t=1673329186; i=@fujitsu.com;
+	bh=W53xddHbjlrAjbatnOunR6V0+bhoPGDfWK5C9jwFev4=;
 	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
 	 MIME-Version:Content-Type;
-	b=No0+ypOSjFdLQNEoyiQC0O+XfSkENgLblblVmAsGTVjvWMp7V2Y2UeTlvtb9HZXN3
-	 qC1lYjildt2sbsTtVU9n/fMfQlyZklc7JI9M2nWotP5xDuZpEEkewcIi6KY1T+BjpU
-	 QXhp1M+uXa3eumRhQ8Ql+jEECZMWGt7xkkJnFWHwFzLNvGDGDeRabR9CcoB4MVQaoS
-	 7YL+tcFt3ZBAjDdfsoW42XObShKYlXYVJ6b08bNYBJ3295VBfOTFwyDF1k2qzJ0aXB
-	 jJoUK1/od9TMr07U77Cupkvm8S9IKMKqMdgl5YwSq46EgfBqqTIHEX6+9bvgd+CsMQ
-	 NLRglHttmep5Q==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrGIsWRWlGSWpSXmKPExsViZ8MxSVfl155
-  kg32H2C0uHl7K7MDocW7jCsYAxijWzLyk/IoE1ozOTTtYCp4KVKzb/pe1gXE/XxcjF4eQwBNG
-  iRn9u5kgnBtMElNvP2aDcPYySlzach0ow8nBJiAlceP+fzYQW0RAX2Lp7D3MIDazgIrEi9897
-  CC2sICrxIFLS8FsFgFViTfztrN0MXJw8Ao4Shzd5gkSlhBQkJjy8D1YK6eAk8SSzb1g5UJAJW
-  92rwGzeQUEJU7OfMICMV5C4uCLF8wQvYoSsy83s0DYlRKtH35B2WoSV89tYp7AKDgLSfssJO0
-  LGJlWMZoVpxaVpRbpGhrrJRVlpmeU5CZm5uglVukm6qWW6panFpfoGuollhfrpRYX6xVX5ibn
-  pOjlpZZsYgQGb0oxw9YdjB3L/+gdYpTkYFIS5S36tCdZiC8pP6UyI7E4I76oNCe1+BCjDAeHk
-  gSvzg+gnGBRanpqRVpmDjCSYNISHDxKIrzzrgOleYsLEnOLM9MhUqcYFaXEeZeC9AmAJDJK8+
-  DaYNF7iVFWSpiXkYGBQYinILUoN7MEVf4VozgHo5Iwr/VXoCk8mXklcNNfAS1mAlr8Y+pOkMU
-  liQgpqQYmlftGzKK8j34rnPA+VPxxQ5SbidyHbnu59c5Ho0unMe5p+izUuj+o8yfnovX1kbLi
-  nnc2i/Lqse55+LVVuuHhA4OoJXZT7Wbz+j+Zq3HB7OW7MPEpQp4X+j2eVnO+rPTkr9U5eeebQ
-  YFLZrT6iTNz2dMmhSjsjGW2Evq27txM5f3s76q7ti5zlP0l/f/uJ2GDfbVe703+T+u+9cZh4i
-  Pn/c5bpC/+5vizzy+YpflgZdBOgbPT5sot3qgQOl9/z5yPB/8nruZaE3VX/nKQYFBnqJ3M78N
-  TNtQYSWz/bhK/tNBqfrT1LfcJDr36bIFbJxn1ih2YklmYUPEvRDupg+tlKefFLYlluoL3t8/e
-  onJJiaU4I9FQi7moOBEA4oKUjFkDAAA=
+	b=HF7cA6r5/4XITqgzpTcePb5D2qMZQLUF0Lyt/7bcqVKQnedghapT6doUWc44bIqYW
+	 rhQo1zzdAL8xkTscpEur8rDrc9y9sHVxOV8tVJSFjjQnXUIUDlqzIPIgqN/hQ+1Vy5
+	 pxO/W36EVLf81hceGuxUoroSKwKwaCoRLXcpUDUzXXvkDRC8oCBrhQIxbLBSH84rDv
+	 wjo1tStlOSPrw08AletjLObygdO97NOZtEvVMSHtKIcZNPzsrGkFWbeEgrFS6tCzcX
+	 BvacpTOj+UeK2sj5Qz0sC//xPtpKoMmn032alCQ9s6Jp6Xp1kZV2vLhsQf83PMnWtc
+	 vla6fxNEhIDOg==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrGIsWRWlGSWpSXmKPExsViZ8ORpKv4a0+
+  yQfMCPYuLh5cyOzB6nNu4gjGAMYo1My8pvyKBNaP7zwqmgqUcFRu332JpYDzF3sXIxSEk8JBR
+  4tebdkYI5wqTxP9PR5ggnL2MEvOu3GftYuTkYBOQkrhx/z8biC0ioC+xdPYeZhCbWUBF4sXvH
+  nYQW1jATmLChkagGg4OFgFVietf6kHCvAKOEn09y8BaJQQUJKY8fA/WyingJLFkcy9YqxBQzZ
+  vda9gh6gUlTs58wgIxXkLi4IsXzBC9ihKzLzezQNiVEq0ffkHZahJXz21insAoOAtJ+ywk7Qs
+  YmVYxmhWnFpWlFukamuglFWWmZ5TkJmbm6CVW6SbqpZbqlqcWl+ga6SWWF+ulFhfrFVfmJuek
+  6OWllmxiBAZvSrFK+w7GT8v+6B1ilORgUhLlLfq0J1mILyk/pTIjsTgjvqg0J7X4EKMMB4eSB
+  K/OD6CcYFFqempFWmYOMJJg0hIcPEoivPOuA6V5iwsSc4sz0yFSpxgVpcR5l4L0CYAkMkrz4N
+  pg0XuJUVZKmJeRgYFBiKcgtSg3swRV/hWjOAejkjCv9VegKTyZeSVw018BLWYCWvxj6k6QxSW
+  JCCmpBqYuq99J4U+i1KXTzqfwdN+f171syyz72w9upCovPFEozbR0ncLemVWBVyRKOV2SNwW9
+  V/c43Nn27hznLKMbTSGBRuGTbLR7767cw9O2sPL1zZSlD3SSS7rtzu9z6zs0d1HAsp+yHb3+t
+  zgbFQI5gpdp1htPDDGb9T0t3sbNWmerhluW34UCz7nLTq4xmr/Z44H/ko6bOwpX39hQG3ptWS
+  bHMRdvB4mjNbJ7DgUu6875vSfMdO+jo8tnndQMNXEzbXWS8PmmnbRRWul/jYrrFS7L22UHr7S
+  Kbtkz74qaePZSwTcy2wM2xBZsXOamuP72DKnPRrmqKy+XvZL+2HKoY+fx7lUf5no6vL8u7tfd
+  OluJpTgj0VCLuag4EQArPm2mWQMAAA==
 X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-15.tower-587.messagelabs.com!1673329187!408441!1
-X-Originating-IP: [62.60.8.146]
+X-Msg-Ref: server-9.tower-565.messagelabs.com!1673329185!340889!1
+X-Originating-IP: [62.60.8.98]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.101.2; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 28068 invoked from network); 10 Jan 2023 05:39:48 -0000
-Received: from unknown (HELO n03ukasimr02.n03.fujitsu.local) (62.60.8.146)
-  by server-15.tower-587.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 10 Jan 2023 05:39:48 -0000
-Received: from n03ukasimr02.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTP id B5E1E1000DC
-	for <openembedded-devel@lists.openembedded.org>; Tue, 10 Jan 2023 05:39:47 +0000 (GMT)
+Received: (qmail 10205 invoked from network); 10 Jan 2023 05:39:45 -0000
+Received: from unknown (HELO n03ukasimr03.n03.fujitsu.local) (62.60.8.98)
+  by server-9.tower-565.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 10 Jan 2023 05:39:45 -0000
+Received: from n03ukasimr03.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr03.n03.fujitsu.local (Postfix) with ESMTP id 77C0E1AF
+	for <openembedded-devel@lists.openembedded.org>; Tue, 10 Jan 2023 05:39:45 +0000 (GMT)
 Received: from R01UKEXCASM223.r01.fujitsu.local (R01UKEXCASM223 [10.182.185.121])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTPS id AA10B1000C1
-	for <openembedded-devel@lists.openembedded.org>; Tue, 10 Jan 2023 05:39:47 +0000 (GMT)
+	by n03ukasimr03.n03.fujitsu.local (Postfix) with ESMTPS id 6C3E97B
+	for <openembedded-devel@lists.openembedded.org>; Tue, 10 Jan 2023 05:39:45 +0000 (GMT)
 Received: from localhost.localdomain (10.167.225.33) by
  R01UKEXCASM223.r01.fujitsu.local (10.182.185.121) with Microsoft SMTP Server
- (TLS) id 15.0.1497.42; Tue, 10 Jan 2023 05:39:46 +0000
+ (TLS) id 15.0.1497.42; Tue, 10 Jan 2023 05:39:43 +0000
 From: <wangmy@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-gnome] [PATCH] libadwaita: upgrade 1.2.0 -> 1.2.1
-Date: Tue, 10 Jan 2023 13:39:18 +0800
-Message-ID: <1673329158-5189-5-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH] hwdata: upgrade 0.365 -> 0.366
+Date: Tue, 10 Jan 2023 13:39:17 +0800
+Message-ID: <1673329158-5189-4-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 In-Reply-To: <1673329158-5189-1-git-send-email-wangmy@fujitsu.com>
 References: <1673329158-5189-1-git-send-email-wangmy@fujitsu.com>
@@ -77,76 +77,32 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 10 Jan 2023 05:39:53 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100503
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100502
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
-Changelog:
-==========
-- AdwActionRow
-  - Fix spacing after removing all prefixes/suffixes
-- AdwAvatar
-  - Correctly redraw on custom image changes
-- AdwEntryRow
-  - Respect use-markup property
-  - Fix error/warning/success styles
-  - Fix spacing after removing all prefixes/suffixes
-- AdwExpanderRow
-  - Fix spacing after removing all prefixes/suffixes
-- AdwFlap
-  - Fix natural width with fold-policy=never
-- AdwMessageDialog
-  - Fix focus styles in RTL
-- AdwPreferencesWindow
-  - Fix a memory leak
-- AdwSplitButton
-  - Don't make dropdown insensitive when the button is
-- AdwTabBar
-  - Fix focus handling
-  - Fix autoscroll for non-local drags
-- AdwToastOverlay
-  - Clarify documentation
-- AdwViewSwitcherBar
-  - Fix typos in examples
-- AdwViewSwitcherTitle
-  - Fix typos in examples
-- Stylesheet
-  - Fix GtkSpinButton inside toolbars
-- Translation updates
-  - Abkhazian
-  - British English
-  - Croatian
-  - Friulian
-  - German
-  - Greek
-  - Hebrew
-  - Indonesian
-  - Persian
-  - Slovak
-  - Turkish
-
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../libadwaita/{libadwaita_1.2.0.bb => libadwaita_1.2.1.bb}     | 2 +-
+ .../recipes-support/hwdata/{hwdata_0.365.bb => hwdata_0.366.bb} | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-gnome/recipes-gnome/libadwaita/{libadwaita_1.2.0.bb => libadwaita_1.2.1.bb} (85%)
+ rename meta-oe/recipes-support/hwdata/{hwdata_0.365.bb => hwdata_0.366.bb} (91%)
 
-diff --git a/meta-gnome/recipes-gnome/libadwaita/libadwaita_1.2.0.bb b/meta-gnome/recipes-gnome/libadwaita/libadwaita_1.2.1.bb
-similarity index 85%
-rename from meta-gnome/recipes-gnome/libadwaita/libadwaita_1.2.0.bb
-rename to meta-gnome/recipes-gnome/libadwaita/libadwaita_1.2.1.bb
-index a518f251b..3a9576634 100644
---- a/meta-gnome/recipes-gnome/libadwaita/libadwaita_1.2.0.bb
-+++ b/meta-gnome/recipes-gnome/libadwaita/libadwaita_1.2.1.bb
-@@ -10,7 +10,7 @@ DEPENDS = " \
+diff --git a/meta-oe/recipes-support/hwdata/hwdata_0.365.bb b/meta-oe/recipes-support/hwdata/hwdata_0.366.bb
+similarity index 91%
+rename from meta-oe/recipes-support/hwdata/hwdata_0.365.bb
+rename to meta-oe/recipes-support/hwdata/hwdata_0.366.bb
+index d37b73af2..4cab9b0fb 100644
+--- a/meta-oe/recipes-support/hwdata/hwdata_0.365.bb
++++ b/meta-oe/recipes-support/hwdata/hwdata_0.366.bb
+@@ -5,7 +5,7 @@ SECTION = "System/Base"
+ LICENSE = "GPL-2.0-or-later | XFree86-1.0"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=1556547711e8246992b999edd9445a57"
  
- inherit gnomebase gobject-introspection gtk-doc vala features_check
+-SRCREV = "803068db92b8bb249014f1c947b91b452f539f5f"
++SRCREV = "2fa514ff86da425726dea8629bcf4ceac9d8e7ff"
+ SRC_URI = "git://github.com/vcrhonek/${BPN}.git;branch=master;protocol=https"
  
--SRC_URI[archive.sha256sum] = "322f3e1be39ba67981d9fe7228a85818eccaa2ed0aa42bcafe263af881c6460c"
-+SRC_URI[archive.sha256sum] = "326f142a4f0f3de5a63f0d5e7a9de66ea85348a4726cbfd13930dcf666d22779"
- 
- ANY_OF_DISTRO_FEATURES = "${GTK3DISTROFEATURES}"
- REQUIRED_DISTRO_FEATURES = "opengl"
+ S = "${WORKDIR}/git"
 -- 
 2.25.1
 
