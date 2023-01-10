@@ -1,134 +1,203 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BBABFC46467
-	for <webhook@archiver.kernel.org>; Tue, 10 Jan 2023 16:51:16 +0000 (UTC)
-Received: from mail-oi1-f180.google.com (mail-oi1-f180.google.com [209.85.167.180])
- by mx.groups.io with SMTP id smtpd.web11.109395.1673369468654886474
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C8FF7C46467
+	for <webhook@archiver.kernel.org>; Tue, 10 Jan 2023 18:21:44 +0000 (UTC)
+Received: from mail-oa1-f42.google.com (mail-oa1-f42.google.com [209.85.160.42])
+ by mx.groups.io with SMTP id smtpd.web10.896.1673374896737985934
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 10 Jan 2023 08:51:08 -0800
+ Tue, 10 Jan 2023 10:21:36 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=fFXdD6Vp;
- spf=pass (domain: gmail.com, ip: 209.85.167.180, mailfrom: raj.khem@gmail.com)
-Received: by mail-oi1-f180.google.com with SMTP id r132so10156oif.10
-        for <openembedded-devel@lists.openembedded.org>; Tue, 10 Jan 2023 08:51:08 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=W5Z3BI/M;
+ spf=pass (domain: gmail.com, ip: 209.85.160.42, mailfrom: akuster808@gmail.com)
+Received: by mail-oa1-f42.google.com with SMTP id 586e51a60fabf-12c8312131fso13022147fac.4
+        for <openembedded-devel@lists.openembedded.org>; Tue, 10 Jan 2023 10:21:36 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=5hNFAa4owz8J8t0ffVr864HBHNNxf8zCjZUfVURxIBQ=;
-        b=fFXdD6VpOsN0VHenCp7rI+D6PW1QoFSVbxv4pxanUmADofE1V7pKfDvkDfj9EcSq6y
-         rgsAPDoZtOhhhFocmYDo70a5bwNteqMl1jsHbpiEky+7KkGWc+4IXNAoNISjJOu6ed99
-         Z6SI1oAB85p7qpyR6vcL6Gf7khi823kVHF8D3Lzwha7FKISyL/Gy8CkJMWpjBYEHtLQO
-         t0vx1ludR3Uuki5ZkQpOReFnx/3zG4gFiUzrL8Z+EPecJviq8MfezvT07iiZtGADmCPV
-         NrJD4T+851VdULTFYJ1ZTvu7UrAElZZLmodKUCgPt2ukGuMgvofJ0Jt9Ptbw0buU3hnG
-         y3uA==
+        h=content-transfer-encoding:in-reply-to:from:references:cc:to
+         :content-language:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=J6ujH7IHJC+jqTf5OcGmpWMRc5SBdDlRYLRynFUyq5M=;
+        b=W5Z3BI/MgztNEBvi7wRAIMrWmGoWEqZCGpL8hhEHFOcP1OyOhBHNEob66HYf2ejbCa
+         D6Dh+qxujNotO1iX9W3FKtGr6Gj6nSiWTePTYv60aAsefbOaPlVni7o2T7TbyGp7m8XQ
+         q/ccBWFNl8W+PhL+SnHJPC4t++Yz8vi5MZH/KBF0u3t79lcZusInO1d7xoVy+FsT8nYG
+         17GGoUM34r4vIdvo1E8JqJDxlV7Yl0XiFJSXVC09OOiRJjPcCBIz49ner0BEY3jIXhqq
+         WCnx+jDj/SDWqFjplPhi0G6a2dvMX/ZjMdr3AejVzfKtj7psvP598f6+6RAntOAFaBpa
+         Dpgg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=5hNFAa4owz8J8t0ffVr864HBHNNxf8zCjZUfVURxIBQ=;
-        b=QCTdik7a5REtJupCsvVDV/QGAia49rTSBz4AM98PoPF9rctH59FMUu5KO3sme+x3BB
-         Mx7mmXIiKzjXHZmD6dTq8i5DRocPxa5g4/zbepSoAGy1Q3nPfluqAZXn9MXSWXGJtltl
-         IykXOPpYzbkOjyjrkMoL6dRJ3/Kd8x54IKn/h76/+WXbyjuydze21vWAD5X+xIsEQS4/
-         bB/LegWAA1bTi46yoqYsLnIA2tvGDfTSRVo+947hBp9yH5NnlUUGx/XZddE+b9U77Yhk
-         KhUVkV6z974r2x6Moj85tF8V2ue07DGaOxPanVusxTHwEDpEt75HSrrOud2G9PKBY0U6
-         wZPg==
-X-Gm-Message-State: AFqh2kol5Ak2AjtqqPnwlIJyp+lJGtO0XZO0DuhUAuYXtDs/bZO28RBx
-	KrloqKXx710xsiEo+6xUsuxxgRGqQQ7CtH9gu4M=
-X-Google-Smtp-Source: AMrXdXuotPU5VkiM9rc4go1rYgoLJtYz7RC6jSkxy3TTrGXgrAnocdzBoq14SpxvrS5bF4n0gknGayNJuvHc3e2MSzw=
-X-Received: by 2002:aca:6085:0:b0:363:240c:bdc7 with SMTP id
- u127-20020aca6085000000b00363240cbdc7mr3118843oib.55.1673369467825; Tue, 10
- Jan 2023 08:51:07 -0800 (PST)
+        h=content-transfer-encoding:in-reply-to:from:references:cc:to
+         :content-language:subject:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=J6ujH7IHJC+jqTf5OcGmpWMRc5SBdDlRYLRynFUyq5M=;
+        b=fOqUfcNrKo0u/KxEJhG9Ac9xhlt13lNKJMDSoqIoBKn1Ug5ca6zgsXW6/6bYmiRpUq
+         lJ3A3uIV1RB99OraMfLjuN/d9XRpgAv1GTm7xhz4juraYsGPrO45ecpFuT/xvOXktceb
+         N+epcT3kytrJQlj1Mp5AFRW6at4L6KuMRirTLwRpwOa3tNQ2EebEkwWOIfqnTBo9O75I
+         Wd2uT99MeeDrI0zUG16qicsNttpiE8J8Zg559GlFjPmpGqBu2DsXD6WK+mri5ZnD7MKs
+         44CN042CihpAu8+iGzHOeITWkDW/A6OdgVnM3EGlUMryqU3ceatp1B6X1AUXN+JZ2ZbV
+         /zyA==
+X-Gm-Message-State: AFqh2kojj/YXPUrLzqoLZl6YAf/lWPj6ACPDzX3N+oOd+573pQDMFVVg
+	O99Gqx8ACY8jxySKjgMTjh4=
+X-Google-Smtp-Source: AMrXdXusSbPbXKnWqqarMKZw9FV3MqvZMbPWiWtDuG9wprgCer9t5nucJnbgQp6WGYO7f/c4i2SVsw==
+X-Received: by 2002:a05:6870:3c0c:b0:143:b8bb:f2bf with SMTP id gk12-20020a0568703c0c00b00143b8bbf2bfmr32821894oab.41.1673374895930;
+        Tue, 10 Jan 2023 10:21:35 -0800 (PST)
+Received: from ?IPV6:2600:1700:9190:ba10:826d:df1d:b0a7:6601? ([2600:1700:9190:ba10:826d:df1d:b0a7:6601])
+        by smtp.gmail.com with ESMTPSA id q6-20020a4a9606000000b004a388af96f9sm5998609ooi.4.2023.01.10.10.21.35
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Tue, 10 Jan 2023 10:21:35 -0800 (PST)
+Message-ID: <43ed2cf8-aebc-9590-b92d-96df4a1d7d92@gmail.com>
+Date: Tue, 10 Jan 2023 13:21:34 -0500
 MIME-Version: 1.0
-References: <1673329158-5189-1-git-send-email-wangmy@fujitsu.com>
- <1673329158-5189-2-git-send-email-wangmy@fujitsu.com> <CAMKF1sqYpa5b3fMJGRJST776-LprzrebvEfo=yJQikw4o0QR4w@mail.gmail.com>
- <OSBPR01MB18454AD24C04392688A20EF5DCFF9@OSBPR01MB1845.jpnprd01.prod.outlook.com>
-In-Reply-To: <OSBPR01MB18454AD24C04392688A20EF5DCFF9@OSBPR01MB1845.jpnprd01.prod.outlook.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 10 Jan 2023 08:50:42 -0800
-Message-ID: <CAMKF1spZ0WaTinzHOAcYtXcqmhqWfXqTghxmdLtOj26q6a_wZg@mail.gmail.com>
-Subject: Re: [oe] [meta-oe] [PATCH] flatbuffers: upgrade 22.12.06 -> 23.1.4
-To: "wangmy@fujitsu.com" <wangmy@fujitsu.com>
-Cc: "openembedded-devel@lists.openembedded.org" <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.4.2
+Subject: Re: [oe] Kirkstone merge request: Jan 8th
+Content-Language: en-US
+To: Khem Raj <raj.khem@gmail.com>, Geoff Parker <geoffhp@gmail.com>
+Cc: yogita.urade@windriver.com,
+ OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
+ Stephanie Lockwood-Childs <sjl@vctlabs.com>
+References: <48dfc489-5c28-88bf-f714-a3c4b4cf840f@gmail.com>
+ <CAMKF1sp3jzrMqz1n_nTZ=C8Py9sBwWV_e9btzp1FrStJBYNNrg@mail.gmail.com>
+ <CAHNuFG+Drd_x2bwtnOMOqkXXnd7QdEA=RoCe6vyKPEvdtstXXw@mail.gmail.com>
+ <CAMKF1soKMA93qC-DEyYZsn9pdut4=kSnAPNU+6R873zbb=UKaQ@mail.gmail.com>
+ <CAHNuFGKUVw9nm7pRT0WVhN-4=jzLMr276RyUyOraaSZNfv=Pwg@mail.gmail.com>
+ <CAMKF1srF9aNRxpNN3FSK2Q9sr94h17JyUyWf18ZEncYSGqCMaw@mail.gmail.com>
+From: akuster808 <akuster808@gmail.com>
+In-Reply-To: <CAMKF1srF9aNRxpNN3FSK2Q9sr94h17JyUyWf18ZEncYSGqCMaw@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 10 Jan 2023 16:51:16 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100520
+ <openembedded-devel@lists.openembedded.org>; Tue, 10 Jan 2023 18:21:44 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100521
 
-On Tue, Jan 10, 2023 at 12:07 AM wangmy@fujitsu.com <wangmy@fujitsu.com> wr=
-ote:
->
-> In September 2022, the suffix of bb file was removed from the following p=
-atch:
->
-> [oe] [oe-core][PATCH] flatbuffers: upgrade 2.0.6 -> 2.0.8
->
-> The purpose of the patch is to update flatbuffers and python3-flatbuffers=
- together.
->
-> Please confirm whether it is necessary to change back.
+noted
 
-I think version recipes are easy to bbappend. For now lets keep it as it is=
-.
-
->   --
-> Best Regards
-> ---------------------------------------------------
-> Wang Mingyu
-> Development Dept.I
-> Nanjing Fujitsu Nanda Software Tech. Co., Ltd.(FNST) No. 6 Wenzhu Road, N=
-anjing, 210012, China
-> TEL: +86+25-86630566-8568
-> COINS: 79988548
-> FAX: +86+25-83317685
-> MAIL: wangmy@fujitsu.com
-> http://www.fujitsu.com/cn/fnst/
+On 1/9/23 10:45 PM, Khem Raj wrote:
+> Great, thanks for testing. I am sure Armin will get this sorted soon
 >
-> > -----Original Message-----
-> > From: openembedded-devel@lists.openembedded.org
-> > <openembedded-devel@lists.openembedded.org> On Behalf Of Khem Raj
-> > Sent: Tuesday, January 10, 2023 2:24 PM
-> > To: Wang, Mingyu/=E7=8E=8B =E9=B8=A3=E7=91=9C <wangmy@fujitsu.com>
-> > Cc: openembedded-devel@lists.openembedded.org
-> > Subject: Re: [oe] [meta-oe] [PATCH] flatbuffers: upgrade 22.12.06 -> 23=
-.1.4
-> >
-> > On Mon, Jan 9, 2023 at 9:39 PM wangmy <wangmy@fujitsu.com> wrote:
-> > >
-> > > From: Wang Mingyu <wangmy@fujitsu.com>
-> > >
-> > > Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
-> > > ---
-> > >  meta-oe/recipes-devtools/flatbuffers/flatbuffers.inc | 4 ++--
-> > >  1 file changed, 2 insertions(+), 2 deletions(-)
-> > >
-> > > diff --git a/meta-oe/recipes-devtools/flatbuffers/flatbuffers.inc
-> > b/meta-oe/recipes-devtools/flatbuffers/flatbuffers.inc
-> > > index c87a449f0..a85c74c12 100644
-> > > --- a/meta-oe/recipes-devtools/flatbuffers/flatbuffers.inc
-> > > +++ b/meta-oe/recipes-devtools/flatbuffers/flatbuffers.inc
-> > > @@ -1,3 +1,3 @@
-> > > -PV =3D "22.12.06"
-> > > -SRCREV =3D "acf39ff056df8c9e5bfa32cf6f7b5e6b87a90544"
-> > > +PV =3D "23.1.4"
-> >
-> > here also its good to rename the recipes to reflect PV.
-> >
-> > > +SRCREV =3D "af9ceabeef1a10c1004e2741f8c0c090ca59e5af"
-> > >  SRC_URI =3D
-> > "git://github.com/google/flatbuffers.git;branch=3Dmaster;protocol=3Dhtt=
-ps"
-> > > --
-> > > 2.25.1
-> > >
-> > >
-> > >
-> > >
+> On Mon, Jan 9, 2023 at 6:24 PM Geoff Parker <geoffhp@gmail.com> wrote:
+>> Hi Khem,
+>>
+>> Stephanie's patch worked for me.
+>>
+>> On Mon, Jan 9, 2023 at 5:04 PM Khem Raj <raj.khem@gmail.com> wrote:
+>>> Can you try https://patchwork.yoctoproject.org/project/oe/patch/20230110002358.GC1773006@codepurple/
+>>>
+>>> On Mon, Jan 9, 2023 at 3:31 PM Geoff Parker <geoffhp@gmail.com> wrote:
+>>>> Since the merge of
+>>>> .../recipes-support/multipath-tools/multipath-tools_0.8.4.bb  CVE fix,
+>>>> I've been getting build failures on my kirkstone builds due to this
+>>>> do_package_qa Error.
+>>>>
+>>>> ERROR: multipath-tools-0.8.4-r0 do_package_qa: QA Issue: non
+>>>> -dev/-dbg/nativesdk- package multipath-tools-libs contains symlink .so
+>>>> '/usr/lib/libdmmp.so'
+>>>> non -dev/-dbg/nativesdk- package multipath-tools-libs contains symlink
+>>>> .so '/usr/lib/libmpathcmd.so'
+>>>> non -dev/-dbg/nativesdk- package multipath-tools-libs contains symlink
+>>>> .so '/usr/lib/libmultipath.so'
+>>>> non -dev/-dbg/nativesdk- package multipath-tools-libs contains symlink
+>>>> .so '/usr/lib/libmpathpersist.so' [dev-so]
+>>>> ERROR: multipath-tools-0.8.4-r0 do_package_qa: Fatal QA errors were
+>>>> found, failing task.
+>>>>
+>>>> The only ways I've been able to resolve the QA Error is to either
+>>>> revert the multipath-tools CVE fix commit, or add
+>>>> 'INSANE_SKIP:${PN}-libs = "dev-so" '  to a .bbappend.
+>>>>
+>>>> I'm happy to send a patch for the INSSANE_SKIP work-around, but I'm
+>>>> not sure this is a proper fix to this or not.
+>>>>
+>>>> On Sun, Jan 8, 2023 at 7:54 AM Khem Raj <raj.khem@gmail.com> wrote:
+>>>>> merged thanks.
+>>>>>
+>>>>> On Sun, Jan 8, 2023 at 7:32 AM akuster808 <akuster808@gmail.com> wrote:
+>>>>>> The following changes since commit a8055484f2829e8dfd03d5c8520b2c611aa7ebd2:
+>>>>>>
+>>>>>>     dool: Add patch to fix rebuild (2022-12-11 16:18:53 -0500)
+>>>>>>
+>>>>>> are available in the Git repository at:
+>>>>>>
+>>>>>>     https://git.openembedded.org/meta-openembedded kirkstone-next
+>>>>>>
+>>>>>> for you to fetch changes up to a9c25bef8882a69fd35ea7dbac3d978ce440fe06:
+>>>>>>
+>>>>>>     mariadb: Upgrade to 10.7.7 (2023-01-04 11:46:45 -0500)
+>>>>>>
+>>>>>> ----------------------------------------------------------------
+>>>>>> Archana Polampalli (1):
+>>>>>>         Nodejs: Fixed python3 DeprecationWarning
+>>>>>>
+>>>>>> Mingli Yu (3):
+>>>>>>         php: Upgrade to 8.1.12
+>>>>>>         mariadb: not use qemu to run cross-compiled binaries
+>>>>>>         mariadb: Upgrade to 10.7.7
+>>>>>>
+>>>>>> Narpat Mali (1):
+>>>>>>         Fix collections.abc deprecation warning in downloadutils Warning
+>>>>>> appears as:
+>>>>>>
+>>>>>> Polampalli, Archana (1):
+>>>>>>         xfce4-settings: 4.16.2 -> 4.16.5
+>>>>>>
+>>>>>> Siddharth Doshi (1):
+>>>>>>         xterm : Fix CVE-2022-45063 code execution via OSC 50 input
+>>>>>> sequences] CVE-2022-45063
+>>>>>>
+>>>>>> Yogita Urade (1):
+>>>>>>         multipath-tools:fix CVE-2022-41973
+>>>>>>
+>>>>>>    .../{mariadb-native_10.7.4.bb => mariadb-native_10.7.7.bb} |   4 +-
+>>>>>>    meta-oe/recipes-dbs/mysql/mariadb.inc                           | 23 +-
+>>>>>>    .../0001-sql-CMakeLists.txt-fix-gen_lex_hash-not-found.patch    | 69 +++
+>>>>>>    meta-oe/recipes-dbs/mysql/mariadb/cross-compiling.patch         | 34 ++
+>>>>>>    meta-oe/recipes-dbs/mysql/mariadb/mariadb-openssl3.patch        | 416
+>>>>>> ---------------
+>>>>>>    .../recipes-dbs/mysql/{mariadb_10.7.4.bb => mariadb_10.7.7.bb} |   6 +-
+>>>>>>    .../nodejs/0001-Nodejs-Fixed-pipes-DeprecationWarning.patch     | 35 ++
+>>>>>>    meta-oe/recipes-devtools/nodejs/nodejs_16.18.1.bb               | 3 +-
+>>>>>>    meta-oe/recipes-devtools/php/{php_8.1.10.bb => php_8.1.12.bb} |   2 +-
+>>>>>>    meta-oe/recipes-graphics/xorg-app/xterm/CVE-2022-45063.patch    | 782
+>>>>>> ++++++++++++++++++++++++++++
+>>>>>>    meta-oe/recipes-graphics/xorg-app/xterm_372.bb                  | 1 +
+>>>>>>    .../files/0001-multipath-tools-use-run-instead-of-dev-shm.patch | 159
+>>>>>> ++++++
+>>>>>>    .../recipes-support/multipath-tools/multipath-tools_0.8.4.bb    | 4 +
+>>>>>>    ...1-Fix-collections.abc-deprecation-warning-in-downloadu.patch | 41 ++
+>>>>>>    .../recipes-devtools/python/python3-requests-toolbelt_0.9.1.bb  | 5 +-
+>>>>>>    .../{xfce4-settings_4.16.2.bb => xfce4-settings_4.16.5.bb} |   2 +-
+>>>>>>    16 files changed, 1147 insertions(+), 439 deletions(-)
+>>>>>>    rename meta-oe/recipes-dbs/mysql/{mariadb-native_10.7.4.bb =>
+>>>>>> mariadb-native_10.7.7.bb} (93%)
+>>>>>>    create mode 100644
+>>>>>> meta-oe/recipes-dbs/mysql/mariadb/0001-sql-CMakeLists.txt-fix-gen_lex_hash-not-found.patch
+>>>>>>    create mode 100644 meta-oe/recipes-dbs/mysql/mariadb/cross-compiling.patch
+>>>>>>    delete mode 100644
+>>>>>> meta-oe/recipes-dbs/mysql/mariadb/mariadb-openssl3.patch
+>>>>>>    rename meta-oe/recipes-dbs/mysql/{mariadb_10.7.4.bb =>
+>>>>>> mariadb_10.7.7.bb} (81%)
+>>>>>>    create mode 100644
+>>>>>> meta-oe/recipes-devtools/nodejs/nodejs/0001-Nodejs-Fixed-pipes-DeprecationWarning.patch
+>>>>>>    rename meta-oe/recipes-devtools/php/{php_8.1.10.bb => php_8.1.12.bb} (99%)
+>>>>>>    create mode 100644
+>>>>>> meta-oe/recipes-graphics/xorg-app/xterm/CVE-2022-45063.patch
+>>>>>>    create mode 100644
+>>>>>> meta-oe/recipes-support/multipath-tools/files/0001-multipath-tools-use-run-instead-of-dev-shm.patch
+>>>>>>    create mode 100644
+>>>>>> meta-python/recipes-devtools/python/python3-requests-toolbelt/0001-Fix-collections.abc-deprecation-warning-in-downloadu.patch
+>>>>>>    rename meta-xfce/recipes-xfce/xfce4-settings/{xfce4-settings_4.16.2.bb
+>>>>>> => xfce4-settings_4.16.5.bb} (93%)
+>>>>>>
+>>>>> -=-=-=-=-=-=-=-=-=-=-=-
+>>>>> Links: You receive all messages sent to this group.
+>>>>> View/Reply Online (#100476): https://lists.openembedded.org/g/openembedded-devel/message/100476
+>>>>> Mute This Topic: https://lists.openembedded.org/mt/96132811/141655
+>>>>> Group Owner: openembedded-devel+owner@lists.openembedded.org
+>>>>> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [geoffhp@gmail.com]
+>>>>> -=-=-=-=-=-=-=-=-=-=-=-
+>>>>>
+
 
