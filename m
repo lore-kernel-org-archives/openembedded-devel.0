@@ -2,71 +2,68 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3D7EAC54EBE
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 40847C46467
 	for <webhook@archiver.kernel.org>; Tue, 10 Jan 2023 05:40:43 +0000 (UTC)
-Received: from mail1.bemta37.messagelabs.com (mail1.bemta37.messagelabs.com [85.158.142.112])
- by mx.groups.io with SMTP id smtpd.web11.97338.1673329240521002716
+Received: from mail1.bemta32.messagelabs.com (mail1.bemta32.messagelabs.com [195.245.230.65])
+ by mx.groups.io with SMTP id smtpd.web10.96891.1673329233247853783
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 09 Jan 2023 21:40:40 -0800
+ Mon, 09 Jan 2023 21:40:33 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=VQQkc4vP;
- spf=pass (domain: fujitsu.com, ip: 85.158.142.112, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=MLg8L/Lq;
+ spf=pass (domain: fujitsu.com, ip: 195.245.230.65, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1673329238; i=@fujitsu.com;
-	bh=QvTo8rrU5sKb36uGlylbYjHiM7ePQbnWPT3bbwvb0n4=;
-	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type;
-	b=VQQkc4vPZq8ispffKaEolWZg/mQX4ptLMlom/yGi9yHetDxvcO7TKayE/fq+qe4hO
-	 04GuLdHUa0fZPLQxEKocS2rAByHJ7j8MWCRGeIk7Fap+M82R+39mMxJxaBo3EGjLQP
-	 Q5JJEvExPdDALnbqLt9AjTyKLdY0u5CsaKh35Atz6moa3a9u0W/sz5pquBn13uDQbn
-	 5BewVM+bQycOek+1Hny/RDgIYwbEufkql8rQL1EFA0DvbIUUdV9/4f9SrUA9VzqM6A
-	 Kqp6qEXF/KTNPFYTgMNf+nuqWKb64BxeVW6MkVsooIXxkvS0qcDfX4gCqmGB2fLkqc
-	 WkVrucykbHCfQ==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrIIsWRWlGSWpSXmKPExsViZ8ORqBv6a0+
-  ywa81phYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8bbOckFj3grrr6cxtrAOIuni5GTQ0jgCaPE
-  j3PKXYxcQPYNJonGHeuZIJy9jBLbtr9hAqliE5CSuHH/PxuILSKgL7F09h5mEJtZQEXixe8ed
-  hBbWMBJYnL/Y7B6FgFVieZTT1lAbF4BR4lr/+4xgtgSAgoSUx6+B+vlBKrvnnCVBeIKR4mvn7
-  4wQtQLSpyc+YQFYr6ExMEXL5ghehUlZl9uZoGwKyVaP/yCstUkrp7bxDyBUXAWkvZZSNoXMDK
-  tYjQrTi0qSy3SNdJLKspMzyjJTczM0Uus0k3USy3VzcsvKsnQNdRLLC/WSy0u1iuuzE3OSdHL
-  Sy3ZxAgM3ZTi5LAdjL1L/+gdYpTkYFIS5S36tCdZiC8pP6UyI7E4I76oNCe1+BCjDAeHkgSvz
-  g+gnGBRanpqRVpmDjCOYNISHDxKIrzzrgOleYsLEnOLM9MhUqcYdTmuXrmyl1mIJS8/L1VKnH
-  fST6AiAZCijNI8uBGwmL7EKCslzMvIwMAgxFOQWpSbWYIq/4pRnINRSZjX+ivQFJ7MvBK4Ta+
-  AjmACOuLH1J0gR5QkIqSkGpg2LVm73H3jtC67DW6Wl/k2Xyi48O3Bg16DPyE7ZAWWRlWcfP15
-  6jPXEzk7jie/n6FgNONW6IYLWnsbH3v1rvDbtTti7fod/Bsesi3m7VTOSl9RdJ+runzdlAUlm
-  k1T706Z+qfozpVY6YaL5pq3bqo5dRx4qRoZPPcHs2SW7Um1t5fUt3kzZu5cP4cx0vusJB/LBe
-  l9TsKN8zyC9qzfHrP5ffFk/iXsvy03Bc6ptmHya4oPNu4VUfJaGxtlkWXMLbjb+/Q5E+MI7ju
-  u9zk+sspf0z7VsOBTec4fvk9brLwM+zfNMjReKnJc2MrDU9jEyTDtr1/6hv851/terXzj8/x5
-  UFMw37kLpVJhq3Y35SQqsRRnJBpqMRcVJwIAjJfpOWQDAAA=
+	s=170520fj; t=1673329231; i=@fujitsu.com;
+	bh=eRKB1tDeFDDLp4vnVj1DN8lVR+kD7deBfczAlnjCEsI=;
+	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
+	b=MLg8L/Lq0aKISDvF5CThh7aWmPoNwHeaseLjededp9BtcZDzLXgLlr7JaqX3Efzqo
+	 3tpsZBf/jZLbIASMX/veDyXWchDtTnw2AaIWFtmIGPRUhMkMkah278bBDgzOhhg4x6
+	 7CIFBG9/TH9oUuhlEeQ/59Ku5xZJT0jJeUaXDIrs8hAO2N8tYSQiuWNtsxNQcK4Hrk
+	 mbucZWdchXO1kWoyWTlyy4h+cebR/ZSAtWlO798gBbFB0zOVCbAtmNmpj694SbGNFU
+	 apvVBxC/8CEg75fjMJfwCm8wpDAAQLk7AAplJoHuWQxw9fGIeEvef6x/bXpVESsyr6
+	 Fbj3p2dUSB/Zw==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFlrDIsWRWlGSWpSXmKPExsViZ8OxWdfv155
+  kg3WPdS0uHl7K7MDocW7jCsYAxijWzLyk/IoE1oz9z2ewFLRwVmxftoC5gXE+RxcjF4eQwENG
+  id7XXxkhnCtMEluXL2LrYuQEcvYySty+qANiswlISdy4/x8sLiKgL7F09h5mEJtZQEXixe8e9
+  i5GDg5hAWeJU6vAwiwCqhLLn2xjBAnzCjhKPNhjABKWEFCQmPLwPVgJr4CgxMmZT1ggpkhIHH
+  zxghmiRlFi9uVmFgi7UqL1wy8oW03i6rlNzBMY+WchaZ+FpH0BI9MqRrPi1KKy1CJdQ0u9pKL
+  M9IyS3MTMHL3EKt1EvdRS3fLU4hJdQ73E8mK91OJiveLK3OScFL281JJNjMBATClmu76Dccay
+  P3qHGCU5mJREeYs+7UkW4kvKT6nMSCzOiC8qzUktPsQow8GhJMGr8wMoJ1iUmp5akZaZA4wKm
+  LQEB4+SCO+860Bp3uKCxNzizHSI1ClGRSlx3kk/gRICIImM0jy4NlgkXmKUlRLmZWRgYBDiKU
+  gtys0sQZV/xSjOwagkzGv9FWgKT2ZeCdz0V0CLmYAW/5i6E2RxSSJCSqqBaeHSVa3xK57aP74
+  meNDUMKEg5s/GEEel0zJP/04172ZVlFLukL/4sqNJbPJWj5Z2tjszi8N8mEzXfLAyF9ns3CAb
+  fMXliFIyU6We9LJ9CiUHOO9HTTKbMWXVH+nvW6TPSVlYq6SadS9o1/DMfKPEccFnGccSk6cc0
+  4+GPDJb2Olrvtvwr7Xl1giGBXKz7zR15cmJbGLUnm+/+v33OoG5Tid/n7brUJ5zfL/RjIInSv
+  Yn1nR8dAtaw7CyO9tlzWrLPac5i1TEuS06XZNylx48sHBXyjMt/mVpFj27TRxiHpjy9iSEeqZ
+  JvFOI0vbculXp2Tezixw5GcYBRkcTDrov72XZfit1T+vzHflPM94rsRRnJBpqMRcVJwIAvhZr
+  UT8DAAA=
 X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-10.tower-732.messagelabs.com!1673329237!319600!1
-X-Originating-IP: [62.60.8.97]
+X-Msg-Ref: server-11.tower-591.messagelabs.com!1673329230!415127!1
+X-Originating-IP: [62.60.8.179]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.101.2; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 31235 invoked from network); 10 Jan 2023 05:40:37 -0000
-Received: from unknown (HELO n03ukasimr01.n03.fujitsu.local) (62.60.8.97)
-  by server-10.tower-732.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 10 Jan 2023 05:40:37 -0000
-Received: from n03ukasimr01.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTP id 50CF2100182
-	for <openembedded-devel@lists.openembedded.org>; Tue, 10 Jan 2023 05:40:37 +0000 (GMT)
+Received: (qmail 31361 invoked from network); 10 Jan 2023 05:40:30 -0000
+Received: from unknown (HELO n03ukasimr04.n03.fujitsu.local) (62.60.8.179)
+  by server-11.tower-591.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 10 Jan 2023 05:40:30 -0000
+Received: from n03ukasimr04.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTP id 5E3A2150
+	for <openembedded-devel@lists.openembedded.org>; Tue, 10 Jan 2023 05:40:30 +0000 (GMT)
 Received: from R01UKEXCASM223.r01.fujitsu.local (R01UKEXCASM223 [10.182.185.121])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTPS id 4458F100043
-	for <openembedded-devel@lists.openembedded.org>; Tue, 10 Jan 2023 05:40:37 +0000 (GMT)
+	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTPS id 526977C
+	for <openembedded-devel@lists.openembedded.org>; Tue, 10 Jan 2023 05:40:30 +0000 (GMT)
 Received: from localhost.localdomain (10.167.225.33) by
  R01UKEXCASM223.r01.fujitsu.local (10.182.185.121) with Microsoft SMTP Server
- (TLS) id 15.0.1497.42; Tue, 10 Jan 2023 05:40:35 +0000
+ (TLS) id 15.0.1497.42; Tue, 10 Jan 2023 05:40:28 +0000
 From: <wangmy@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-oe] [PATCH] imapfilter: upgrade 2.7.6 -> 2.8.1
-Date: Tue, 10 Jan 2023 13:40:19 +0800
-Message-ID: <1673329220-5227-4-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-perl] [PATCH] libcgi-perl: upgrade 4.54 -> 4.55
+Date: Tue, 10 Jan 2023 13:40:16 +0800
+Message-ID: <1673329220-5227-1-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
-In-Reply-To: <1673329220-5227-1-git-send-email-wangmy@fujitsu.com>
-References: <1673329220-5227-1-git-send-email-wangmy@fujitsu.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-Originating-IP: [10.167.225.33]
@@ -77,46 +74,35 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 10 Jan 2023 05:40:43 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100507
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100504
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
 Changelog:
-===========
-- Add support for non-write actions on read-only mailboxes.
-- Add new parameter to write process ID (PID) to file.
-- New, more advanced, robust, and flexible recovery mechanism, replaces the
-  old automatic recovery functionality. Note that, the config must be updated
-  to use the new mechanism, otherwise no recovery will take place on errors.
-- Bug fix; potential failure when deleting mailbox while mailbox is selected.
-
-License-Update: Copyright updated to 2023.
+remove dependency on Test::Deep (GH #254)
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../imapfilter/{imapfilter_2.7.6.bb => imapfilter_2.8.1.bb}   | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-support/imapfilter/{imapfilter_2.7.6.bb => imapfilter_2.8.1.bb} (80%)
+ .../libcgi/{libcgi-perl_4.54.bb => libcgi-perl_4.55.bb}         | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-perl/recipes-perl/libcgi/{libcgi-perl_4.54.bb => libcgi-perl_4.55.bb} (93%)
 
-diff --git a/meta-oe/recipes-support/imapfilter/imapfilter_2.7.6.bb b/meta-oe/recipes-support/imapfilter/imapfilter_2.8.1.bb
-similarity index 80%
-rename from meta-oe/recipes-support/imapfilter/imapfilter_2.7.6.bb
-rename to meta-oe/recipes-support/imapfilter/imapfilter_2.8.1.bb
-index eb23816e8a..878d28f137 100644
---- a/meta-oe/recipes-support/imapfilter/imapfilter_2.7.6.bb
-+++ b/meta-oe/recipes-support/imapfilter/imapfilter_2.8.1.bb
-@@ -1,9 +1,9 @@
- SUMMARY = "IMAPFilter is a mail filtering utility that processes mailboxes based on IMAP queries"
- LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=c11d4fd926d3ce7aac13b0ed1e9b3a63"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=f8d2fc4954306888fd0e4b27bef83525"
+diff --git a/meta-perl/recipes-perl/libcgi/libcgi-perl_4.54.bb b/meta-perl/recipes-perl/libcgi/libcgi-perl_4.55.bb
+similarity index 93%
+rename from meta-perl/recipes-perl/libcgi/libcgi-perl_4.54.bb
+rename to meta-perl/recipes-perl/libcgi/libcgi-perl_4.55.bb
+index 4c9864094..2278d14f6 100644
+--- a/meta-perl/recipes-perl/libcgi/libcgi-perl_4.54.bb
++++ b/meta-perl/recipes-perl/libcgi/libcgi-perl_4.55.bb
+@@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=415fc49abed2728f9480cd32c8d67beb"
  
- # v2.7.6
--SRCREV = "b39d0430f29d7c953581186955c11b461e6c824f"
-+SRCREV = "e6372b88e09a4d1c573b57270de6b40846825a8b"
- SRC_URI = "git://github.com/lefcha/imapfilter;protocol=https;branch=master \
-            file://ldflags.patch \
- "
+ SRC_URI = "http://search.cpan.org/CPAN/authors/id/L/LE/LEEJO/CGI-${PV}.tar.gz"
+ 
+-SRC_URI[sha256sum] = "9608a044ae2e87cefae8e69b113e3828552ddaba0d596a02f9954c6ac17fa294"
++SRC_URI[sha256sum] = "67895e94b13fdf46a3893c9a17c2d0d4c3d4cd2550e1f41e26696c10cb8c64b2"
+ 
+ S = "${WORKDIR}/CGI-${PV}"
+ 
 -- 
 2.25.1
 
