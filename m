@@ -1,95 +1,100 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <chee.yang.lee@intel.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A6235C54EBE
-	for <webhook@archiver.kernel.org>; Tue, 10 Jan 2023 06:25:03 +0000 (UTC)
-Received: from mail-oa1-f52.google.com (mail-oa1-f52.google.com [209.85.160.52])
- by mx.groups.io with SMTP id smtpd.web11.97921.1673331894619962675
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 195D3C46467
+	for <webhook@archiver.kernel.org>; Tue, 10 Jan 2023 07:23:04 +0000 (UTC)
+Received: from mga02.intel.com (mga02.intel.com [134.134.136.20])
+ by mx.groups.io with SMTP id smtpd.web10.98124.1673335373719364285
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 09 Jan 2023 22:24:54 -0800
+ Mon, 09 Jan 2023 23:22:54 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=KjZF80X2;
- spf=pass (domain: gmail.com, ip: 209.85.160.52, mailfrom: raj.khem@gmail.com)
-Received: by mail-oa1-f52.google.com with SMTP id 586e51a60fabf-14455716674so11226695fac.7
-        for <openembedded-devel@lists.openembedded.org>; Mon, 09 Jan 2023 22:24:54 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=YIXewU2IXpQyluw+PUNmC54fqh/DlbbIV2Ynd+vkkxM=;
-        b=KjZF80X2RLoF+zu5RFZFLZ70d2yjD4JEs054DVulLBTn3E9gBRY9pkNz9AnA18No+i
-         jsbqDbHvacqhnYQwd9+8uTs096pay9xTvLZB0c/jnuA/px7Xh9iDoGaPa0pzJdr/wSdG
-         MidCJJsriDMxpEI/lhuZ73yr8kbGBWwWdmsFnEL11US1W6qnlgy4f12kKpWthLSLkuRZ
-         NYw1acKzin9u7WVzP/MNM8yAaufS+n7MGrA0ps39B1DSip5LtVdHFfbVfhixRkiAKxA1
-         RL/6M/8dYYtLbfvYtWYxUNdQK0X+ZLcZHg6iVywHfiXUHVJuQoIhTu3D5l0I1/RTKcRf
-         K3dw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=YIXewU2IXpQyluw+PUNmC54fqh/DlbbIV2Ynd+vkkxM=;
-        b=YDObKXRasdWEusnjDKn6nuLVMR63Ps8UjVN6Hl9hiS2BGZ6dtZWtqkouXyHsKv6WHr
-         Hqy2vJo2+8TZJC+9/Kcl3Yycs36jNZOhWtdaYalFrxAhLno0A0Vc+UolPzQNNq3jeAfu
-         0cMjI7RTMttduZ6Y3wHwORkbc2ikbhbmhhp1CylOKKpUX9oYh0IMZ59Uu9Lq6INf6M9R
-         oes6y8giDM9fiZJbxIWOPi6kIy7RCveosfdOZYmUcNQ6i/+mcZIWub6yv1o4NVl7nQ4a
-         EkAtpzdJz5WduwV/Ot/S6SbpNbDNuNI6Kank7NAoOAgbu5vL+M3hiTSA8y2xzDSa/zJO
-         2FgQ==
-X-Gm-Message-State: AFqh2kpFlZLB0UZcl6Sbl7bXNc2J/L3MFuiv/QIdlmX08Pd2425HdHGX
-	NbSgGcErIKpDKAcE2z7HKgA9Oe0RNH0IBvuYw4GnE5HzM7o=
-X-Google-Smtp-Source: AMrXdXu23y6jWBSKrRRZSPc6OqxRgqBovO9V8Xt10hVQL04jWb6jMV/JC3prfuy3Abh8tmTM+0CUxf9U9DieSm0ED48=
-X-Received: by 2002:a05:6870:b01d:b0:144:e1eb:419 with SMTP id
- y29-20020a056870b01d00b00144e1eb0419mr5036705oae.262.1673331893811; Mon, 09
- Jan 2023 22:24:53 -0800 (PST)
+ dkim=fail reason="unable to parse pub key" header.i=@intel.com header.s=intel header.b=BhfXIGxR;
+ spf=pass (domain: intel.com, ip: 134.134.136.20, mailfrom: chee.yang.lee@intel.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1673335373; x=1704871373;
+  h=from:to:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=tTNV+FvayzlOLINF6zM9ZnTlenlotbmrbTGAvtpI0E4=;
+  b=BhfXIGxRwEKK+owX9RmLfeyzC/1VWQ9ItCfpyWAPxEvBQF/CeO08mj8P
+   cgNUEzFMzSlTGcFzeWYcFfXmgTt7lzDucW0BEvwYcUu7WTbA2T0WJJD9c
+   6eFNRLXLac60O9MGfPaP+T0Wj5cf34sZCK2nyMvtADsof09jk23MoJKGm
+   5stO3IA8MyGv5PjysXKABAejuE2bexCYdHvpxwzxS1t1WSZ8tgY5urnA9
+   hrwJ3YPiqC0rqMJ++fIjenPDK7RwqzAYsadN/xEug+f/SR8STP2BmN2HJ
+   Kbah5CNu5pFD3KoHi2pJidzm3ZjAU7Yv/Bi9JWuP6p9W67VHvvlBzsY5j
+   w==;
+X-IronPort-AV: E=McAfee;i="6500,9779,10585"; a="310882542"
+X-IronPort-AV: E=Sophos;i="5.96,314,1665471600"; 
+   d="scan'208";a="310882542"
+Received: from fmsmga003.fm.intel.com ([10.253.24.29])
+  by orsmga101.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 09 Jan 2023 23:22:53 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=McAfee;i="6500,9779,10585"; a="745667309"
+X-IronPort-AV: E=Sophos;i="5.96,314,1665471600"; 
+   d="scan'208";a="745667309"
+Received: from andromeda02.png.intel.com ([10.221.253.198])
+  by FMSMGA003.fm.intel.com with ESMTP; 09 Jan 2023 23:22:52 -0800
+From: chee.yang.lee@intel.com
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-oe][PATCHc] xerces-c: upgrade to 3.2.4
+Date: Tue, 10 Jan 2023 15:22:45 +0800
+Message-Id: <20230110072245.2179070-1-chee.yang.lee@intel.com>
+X-Mailer: git-send-email 2.37.3
 MIME-Version: 1.0
-References: <1673329158-5189-1-git-send-email-wangmy@fujitsu.com> <1673329158-5189-2-git-send-email-wangmy@fujitsu.com>
-In-Reply-To: <1673329158-5189-2-git-send-email-wangmy@fujitsu.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 9 Jan 2023 22:24:28 -0800
-Message-ID: <CAMKF1sqYpa5b3fMJGRJST776-LprzrebvEfo=yJQikw4o0QR4w@mail.gmail.com>
-Subject: Re: [oe] [meta-oe] [PATCH] flatbuffers: upgrade 22.12.06 -> 23.1.4
-To: wangmy <wangmy@fujitsu.com>
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 10 Jan 2023 06:25:03 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100510
+ <openembedded-devel@lists.openembedded.org>; Tue, 10 Jan 2023 07:23:04 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100511
 
-On Mon, Jan 9, 2023 at 9:39 PM wangmy <wangmy@fujitsu.com> wrote:
->
-> From: Wang Mingyu <wangmy@fujitsu.com>
->
-> Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
-> ---
->  meta-oe/recipes-devtools/flatbuffers/flatbuffers.inc | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
->
-> diff --git a/meta-oe/recipes-devtools/flatbuffers/flatbuffers.inc b/meta-oe/recipes-devtools/flatbuffers/flatbuffers.inc
-> index c87a449f0..a85c74c12 100644
-> --- a/meta-oe/recipes-devtools/flatbuffers/flatbuffers.inc
-> +++ b/meta-oe/recipes-devtools/flatbuffers/flatbuffers.inc
-> @@ -1,3 +1,3 @@
-> -PV = "22.12.06"
-> -SRCREV = "acf39ff056df8c9e5bfa32cf6f7b5e6b87a90544"
-> +PV = "23.1.4"
+From: Chee Yang Lee <chee.yang.lee@intel.com>
 
-here also its good to rename the recipes to reflect PV.
+also fix reproducible build
 
-> +SRCREV = "af9ceabeef1a10c1004e2741f8c0c090ca59e5af"
->  SRC_URI = "git://github.com/google/flatbuffers.git;branch=master;protocol=https"
-> --
-> 2.25.1
->
->
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#100500): https://lists.openembedded.org/g/openembedded-devel/message/100500
-> Mute This Topic: https://lists.openembedded.org/mt/96171758/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [raj.khem@gmail.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
->
+Signed-off-by: Chee Yang Lee <chee.yang.lee@intel.com>
+---
+ .../xerces-c/{xerces-c_3.1.4.bb => xerces-c_3.2.4.bb}      | 7 +++----
+ 1 file changed, 3 insertions(+), 4 deletions(-)
+ rename meta-oe/recipes-devtools/xerces-c/{xerces-c_3.1.4.bb => xerces-c_3.2.4.bb} (83%)
+
+diff --git a/meta-oe/recipes-devtools/xerces-c/xerces-c_3.1.4.bb b/meta-oe/recipes-devtools/xerces-c/xerces-c_3.2.4.bb
+similarity index 83%
+rename from meta-oe/recipes-devtools/xerces-c/xerces-c_3.1.4.bb
+rename to meta-oe/recipes-devtools/xerces-c/xerces-c_3.2.4.bb
+index 22fd94b093..582c29379a 100644
+--- a/meta-oe/recipes-devtools/xerces-c/xerces-c_3.1.4.bb
++++ b/meta-oe/recipes-devtools/xerces-c/xerces-c_3.2.4.bb
+@@ -10,8 +10,7 @@ LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
+ 
+ SRC_URI = "http://archive.apache.org/dist/xerces/c/3/sources/${BP}.tar.bz2"
+-SRC_URI[md5sum] = "d04ae9d8b2dee2157c6db95fa908abfd"
+-SRC_URI[sha256sum] = "9408f12c1628ecf80730bedbe8b2caad810edd01bb4c66f77b60c873e8cc6891"
++SRC_URI[sha256sum] = "74aa626fc71e729ee227602870dd29a5a01cd8c9c1c7330837a51da2eb5722cc"
+ 
+ inherit autotools
+ 
+@@ -20,7 +19,7 @@ PACKAGECONFIG[curl] = "--with-curl=${STAGING_DIR_TARGET}${prefix},--with-curl=no
+ PACKAGECONFIG[icu] = "--with-icu=${STAGING_DIR_TARGET}${prefix},--with-icu=no,icu"
+ 
+ do_install:prepend () {
+-    sed -i -e 's:-L${STAGING_DIR}/lib:-L\$\{libdir\}:g' ${B}/xerces-c.pc
++    sed -i s:-L${STAGING_LIBDIR}::g ${B}/xerces-c.pc
+ }
+ 
+ PACKAGES = "libxerces-c \
+@@ -32,7 +31,7 @@ PACKAGES = "libxerces-c \
+ 
+ RPROVIDES:${PN}-dbg += "libxerces-c-dbg xerces-c-samples-dbg"
+ 
+-FILES:libxerces-c = "${libdir}/libxerces-c-3.1.so"
++FILES:libxerces-c = "${libdir}/libxerces-c-3.2.so"
+ FILES:libxerces-c-dev = "${libdir}/lib*.la \
+     ${libdir}/libxerces-c.so \
+     ${libdir}/pkgconfig/xerces-c.pc \
+-- 
+2.37.3
+
 
