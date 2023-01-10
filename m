@@ -1,107 +1,86 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CE44AC678D5
-	for <webhook@archiver.kernel.org>; Tue, 10 Jan 2023 10:25:44 +0000 (UTC)
-Received: from mail-pl1-f182.google.com (mail-pl1-f182.google.com [209.85.214.182])
- by mx.groups.io with SMTP id smtpd.web11.100812.1673346335862239112
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E98DBC46467
+	for <webhook@archiver.kernel.org>; Tue, 10 Jan 2023 10:56:24 +0000 (UTC)
+Received: from voyager.superhosting.bg (voyager.superhosting.bg [79.124.30.14])
+ by mx.groups.io with SMTP id smtpd.web10.100815.1673348181102539800
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 10 Jan 2023 02:25:35 -0800
+ Tue, 10 Jan 2023 02:56:21 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=jFTi5P2y;
- spf=pass (domain: gmail.com, ip: 209.85.214.182, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f182.google.com with SMTP id jl4so12696112plb.8
-        for <openembedded-devel@lists.openembedded.org>; Tue, 10 Jan 2023 02:25:35 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=reRy2y9dfbicFgvn0Pc+4X6v046OikZVf0qqEukz+uc=;
-        b=jFTi5P2yJkEpXG0UZb7iiEbou2KBXc/aJc7s4nJyqpH4tDGnG0YV/HrfmJ3IM2/WkH
-         Ekfw2Za/L9GTgmAUbG91NenjXg56evVgyaFPt4HTmQNp7z1iz2dFcOgGbBprVcI4n4NN
-         p1CneE14SyCD3MzrDptKkSTEZGeqI9kFRzQ1b6RKXVjuvzspOay/EiaM4aOKreKTvG+O
-         D54wN8w14PpLkFi9xjWsC1I/mlxPDwnyH/5Xe4s5SsP5WwY6avASjpjpj3zQ+5J4Fjh2
-         ibn7mXcqUkTkHIL2VqlRSZtqDAU1XHsYQgkfdTF5k9BZAN7xZ0LMg6KppvLsogMXc84Z
-         C1Mg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=reRy2y9dfbicFgvn0Pc+4X6v046OikZVf0qqEukz+uc=;
-        b=isZX35onWLmWLgU6YV7cRvtjBhLR0OZFYTb/tdSQmYgTN06+bEpWO/9qOnwS5Uk0HB
-         8KUxTvpZCaJ+sCk2KW16PMXXw44aHHehTsCRrGb+PZ1oOJtZJEh3gHHkoVcUjWqUFXz0
-         bbGlnad92D8o2FJ1qGM1AUHuTVrfDbfiJX/NMa+D0oUJVVRE+WeMEYwG/zNNICL7f5ul
-         OsKM6HCMjxxHPFsfe7ndWETY3JBq2OCZCPyOAIXmKIgxZNSY3xeufHOmxdlopmyAZ2/K
-         cTyni3cbeVlYGLLPC+kZzPTVSpABg0UucXyDL+WvVUndSvtQFqbYyomVmCNEASn6D/dB
-         YzCg==
-X-Gm-Message-State: AFqh2kq8GQmZB1XJqb2SvW+QVGS+OSqdxsnEKDNCr+SnGunyx5+y4cvG
-	CCl6UqaMfLkqtysddzbMjIGaXyhQsaNY+Q==
-X-Google-Smtp-Source: AMrXdXvGHOaT0utZ4uGSq03ANHtJzK+kx8flPDablMoN/gt6A66l4M+Oq65B7Q1VewNEQzzTMb2Mjg==
-X-Received: by 2002:a17:903:260f:b0:192:4b1b:6cdb with SMTP id jd15-20020a170903260f00b001924b1b6cdbmr68363525plb.7.1673346334935;
-        Tue, 10 Jan 2023 02:25:34 -0800 (PST)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9181:1cf0::ee35])
-        by smtp.gmail.com with ESMTPSA id t1-20020a170902e84100b0018975488514sm7747133plg.126.2023.01.10.02.25.33
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 10 Jan 2023 02:25:34 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
+ dkim=pass header.i=@anavi.org header.s=default header.b=W0Wc2KcI;
+ spf=softfail (domain: konsulko.com, ip: 79.124.30.14, mailfrom: leon.anavi@konsulko.com)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=anavi.org;
+	s=default; h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:
+	Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:Content-Description:
+	Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
+	In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+	List-Post:List-Owner:List-Archive;
+	bh=7kX9gSSTKpr0M489ZW/7v8PC51bh+pA6C/mxCOZUAhg=; b=W0Wc2KcI53g/uminOBCmNUHVnP
+	ANKqe60unvQcSL2lCrnP9Kaj0YNyyDmGcr1jj+eRc9nF8wuPX3cfinyHuqXlNci/dzE/8HzGFa6tQ
+	X/VWQVE/3PCH4jcIZ1ayp9AeV/4NBkkQjbQvPcnkN2Ety2iDOh+vRXggp7EHklYo8AMuQC3MQgZ+K
+	OA7ZrZHKwXjyj9Pqe8JsYN9elx2DNoIstedZ98eh88Vy/u4AcX7eObH/JLfJbt4Bn5xin1lUmsYKY
+	nMuaOL8st2te18w6Zr3PT4H9horL5u+2/yjfJh/PKNeYHy5hCFPZfmjp7L54q0FnhFgXPduGAGhtI
+	Ws5wNYEQ==;
+Received: from lan.nucleusys.com ([92.247.61.126]:53480 helo=tone.k.g)
+	by voyager.superhosting.bg with esmtpsa  (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
+	(Exim 4.95)
+	(envelope-from <leon.anavi@konsulko.com>)
+	id 1pFCIk-0009km-1N;
+	Tue, 10 Jan 2023 12:56:19 +0200
+From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH] freeglut: Add packageconfigs for x11/wayland/gles
-Date: Tue, 10 Jan 2023 02:25:31 -0800
-Message-Id: <20230110102531.619341-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.39.0
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 1/3] python3-traitlets: Upgrade 5.8.0 -> 5.8.1
+Date: Tue, 10 Jan 2023 12:56:07 +0200
+Message-Id: <20230110105609.56178-1-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.30.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
+X-AntiAbuse: Primary Hostname - voyager.superhosting.bg
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - konsulko.com
+X-Get-Message-Sender-Via: voyager.superhosting.bg: authenticated_id: leon@anavi.org
+X-Authenticated-Sender: voyager.superhosting.bg: leon@anavi.org
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 10 Jan 2023 10:25:44 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100516
+ <openembedded-devel@lists.openembedded.org>; Tue, 10 Jan 2023 10:56:24 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100517
 
-helps it compiling on on different openGL implementations which may not
-implement fulll openGL specs
+Upgrade to release 5.8.1:
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+- fix: mro_trait can be unbound when the class is not in mro
+
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../freeglut/freeglut_3.4.0.bb                 | 18 ++++++++++++++----
- 1 file changed, 14 insertions(+), 4 deletions(-)
+ .../{python3-traitlets_5.8.0.bb => python3-traitlets_5.8.1.bb}  | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-traitlets_5.8.0.bb => python3-traitlets_5.8.1.bb} (80%)
 
-diff --git a/meta-oe/recipes-graphics/freeglut/freeglut_3.4.0.bb b/meta-oe/recipes-graphics/freeglut/freeglut_3.4.0.bb
-index 627ce23544..86b94149bc 100644
---- a/meta-oe/recipes-graphics/freeglut/freeglut_3.4.0.bb
-+++ b/meta-oe/recipes-graphics/freeglut/freeglut_3.4.0.bb
-@@ -6,14 +6,24 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=89c0b58a3e01ce3d8254c9f59e78adfb"
- SRC_URI = "https://sourceforge.net/projects/${BPN}/files/${BPN}/${PV}/${BPN}-${PV}.tar.gz"
- SRC_URI[sha256sum] = "3c0bcb915d9b180a97edaebd011b7a1de54583a838644dcd42bb0ea0c6f3eaec"
+diff --git a/meta-python/recipes-devtools/python/python3-traitlets_5.8.0.bb b/meta-python/recipes-devtools/python/python3-traitlets_5.8.1.bb
+similarity index 80%
+rename from meta-python/recipes-devtools/python/python3-traitlets_5.8.0.bb
+rename to meta-python/recipes-devtools/python/python3-traitlets_5.8.1.bb
+index d7a78254e..3f75df6f1 100644
+--- a/meta-python/recipes-devtools/python/python3-traitlets_5.8.0.bb
++++ b/meta-python/recipes-devtools/python/python3-traitlets_5.8.1.bb
+@@ -4,7 +4,7 @@ AUTHOR = "IPython Development Team <ipython-dev@scipy.org>"
+ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://COPYING.md;md5=f17a3ba4cd59794dd6e005c8e150aef0"
  
--inherit cmake features_check
-+inherit cmake features_check pkgconfig
+-SRC_URI[sha256sum] = "6cc57d6dc28c85d5365961726ffd19b538739347749e13ebe34e03323a0e8f84"
++SRC_URI[sha256sum] = "32500888f5ff7bbf3b9267ea31748fa657aaf34d56d85e60f91dda7dc7f5785b"
  
--# depends on virtual/libx11, virtual/libgl
--REQUIRED_DISTRO_FEATURES = "x11 opengl"
-+# depends on virtual/libgl
-+REQUIRED_DISTRO_FEATURES = "opengl"
+ inherit pypi python_hatchling
  
-+PACKAGECONFIG ?= "${@bb.utils.filter('DISTRO_FEATURES', 'wayland x11', d)}"
-+PACKAGECONFIG[gles] = "-DFREEGLUT_GLES=ON,-DFREEGLUT_GLES=OFF,"
-+PACKAGECONFIG[wayland] = "-DFREEGLUT_WAYLAND=ON,-DFREEGLUT_WAYLAND=OFF,libxkbcommon"
-+PACKAGECONFIG[demos] = "-DFREEGLUT_BUILD_DEMOS=ON,-DFREEGLUT_BUILD_DEMOS=OFF,"
-+PACKAGECONFIG[x11] = ",,virtual/libx11 libice libxmu libglu libxrandr libxext"
- # Do not use -fno-common, check back when upgrading to new version it might not be needed
- CFLAGS += "-fcommon"
- 
- PROVIDES += "mesa-glut"
- 
--DEPENDS = "virtual/libx11 libxmu libxi virtual/libgl libglu libxrandr"
-+DEPENDS = "virtual/libgl libxi"
-+
-+do_install:append() {
-+    # Remove buildpaths
-+    sed -i "s#${RECIPE_SYSROOT}##g" ${D}${libdir}/cmake/FreeGLUT/FreeGLUTTargets.cmake
-+}
 -- 
-2.39.0
+2.30.2
 
 
