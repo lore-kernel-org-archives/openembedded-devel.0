@@ -1,119 +1,86 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9387CC46467
-	for <webhook@archiver.kernel.org>; Wed, 11 Jan 2023 16:34:11 +0000 (UTC)
-Received: from mail-oi1-f173.google.com (mail-oi1-f173.google.com [209.85.167.173])
- by mx.groups.io with SMTP id smtpd.web10.28709.1673454847506850254
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B7123C46467
+	for <webhook@archiver.kernel.org>; Wed, 11 Jan 2023 17:16:21 +0000 (UTC)
+Received: from mail-oa1-f52.google.com (mail-oa1-f52.google.com [209.85.160.52])
+ by mx.groups.io with SMTP id smtpd.web10.30057.1673457372329847221
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 11 Jan 2023 08:34:07 -0800
+ Wed, 11 Jan 2023 09:16:12 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=gTHjqR40;
- spf=pass (domain: gmail.com, ip: 209.85.167.173, mailfrom: raj.khem@gmail.com)
-Received: by mail-oi1-f173.google.com with SMTP id e205so13129362oif.11
-        for <openembedded-devel@lists.openembedded.org>; Wed, 11 Jan 2023 08:34:07 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=FXkZPfoR;
+ spf=pass (domain: gmail.com, ip: 209.85.160.52, mailfrom: akuster808@gmail.com)
+Received: by mail-oa1-f52.google.com with SMTP id 586e51a60fabf-15bb8ec196aso4451982fac.3
+        for <openembedded-devel@lists.openembedded.org>; Wed, 11 Jan 2023 09:16:12 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=eQMVWItIGgKWkN90bs8OoIZSy/AVsKt9iPbHdVoaa6s=;
-        b=gTHjqR40hDqi+RXro4mu5TTOy3f091BhT0Z//wntszTmihP92McKvvGNlQnKILWYqB
-         h7VGROyHKUzL7xEMSmj+If4VMSmTsPRNHJuXq5p9R5YvYpsYbRYlE0Uy4zRpLC62Y08O
-         5edD+keD6i4uPokb6hE0iAlt6UsLAsWqRf/yvWSqYuqUhduiBVGzuQ9u57fPALjqTK7j
-         cYnkjrUzz6XuKP3tqLciZHEEiwfADRbnkwV2J/rJLguorWd/yhA7rtxqRrI0QEq2MzRJ
-         fD9dAjnFTSl7SQ8hZCyZAGsAmIkJWgRHOByvRV0Y+fAO2lweCFY1rE8D5376xO3GK4pk
-         cDcA==
+        h=content-transfer-encoding:subject:from:to:content-language
+         :user-agent:mime-version:date:message-id:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=DRw0nqoSmcI6la7SHjmbx8d3/pIzdcPCOoHShH7DvTg=;
+        b=FXkZPfoR9OmP3b+2enRqzqkpdMKL/KVoAA+93XXzWHMOe3hFWyjO+touYDKtZ4MRy2
+         IFxqIE6MCNizfAWcyy1zqxau9qbEXvmYW/NITZDr20X1LVe688H+G7ksyiDWmLu2NEet
+         op+VamHQYbVySAqqG1YBI7SOwWcWuaMJGjHZGMFWa8eQPG/0od6MypGRxzcv/WKP6mSu
+         xOaFIYgfAcZRLESkPz3omfFaSFgTa+y96Nar8y2zOBuhXGAZz84ZeFk29NYewAdpYuDL
+         taPGkhvsiTuKddTeQslQa0f9eEy162MHzmRhmFzq5CnsNqSjiyDfOhTUkzMkcI7DcyXG
+         D+CA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=eQMVWItIGgKWkN90bs8OoIZSy/AVsKt9iPbHdVoaa6s=;
-        b=5YL2DmFBBhhvyuVSLFR93Gz9Hvkw/kZs/s+QYAu1vNA6EazzhrBlLhs1Ix4j2UUaCt
-         yJyZ0+LDWkIpHIv1dQowiQu9fr4VbkrATza6CbwKoVE1OHh5JPsJj6ha9iymCvDQegZw
-         7UqmSDOTFu60LJ1NihNfrovKqRnoxDF3ZGDsQOlerRDxyUVkv27OooiSClmWe5B0J8GL
-         JLqAc8nIh5AbcYTJoVKvlr24K7WUiCwWhPlWlX/smmIlkTls8KLq15dr3DafsyTI5K1/
-         F8q+qtcVHXA5qncEwkmtCbVXAwtFu/9gGgRCq5ncgVWHvC7VTuM7IIqd5RAjjHASo2UP
-         PTwQ==
-X-Gm-Message-State: AFqh2koOjhjJ/pPKMftsFSxb4B8hcPQnfGuW3xSRkkHOYT7JY8MvAWXq
-	y3ISiWef5h9y1yTzA2B6gfZ5+fT0vgX4NwKjr24=
-X-Google-Smtp-Source: AMrXdXvzrbVq0P9/yq6EeEiRAoF4QGhsUeG5MwJGnuOaWiy2omS2qPnMZn5acR6DDHcf8sisOawUpEFC3eY4S042Gm0=
-X-Received: by 2002:aca:3855:0:b0:35c:53a9:5513 with SMTP id
- f82-20020aca3855000000b0035c53a95513mr4474689oia.262.1673454846637; Wed, 11
- Jan 2023 08:34:06 -0800 (PST)
+        h=content-transfer-encoding:subject:from:to:content-language
+         :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=DRw0nqoSmcI6la7SHjmbx8d3/pIzdcPCOoHShH7DvTg=;
+        b=Z1z0rqRpzJYknxocf5z2vdPp818a9Mevczcn2AfNwojLh85hws5xREhG+I+ujiLz0d
+         eEJunlOhzEPH+GunagwmCko+T+KdhAbU/GEYYoEMIlFG2oOAjCTun50X1C5Oarqh8PFv
+         yF6j8/uwyKrF8eR1hD+qo5dYj8vItVwHNu7ALpceagSuP1YjWcmCjou7nzGIqjdVBVjK
+         TGUApYJL/xJHDNH71VN8xt+hVMjme6gBLltNRnL/hCb+PKABIKQZ418Vp+zoKprI7dbf
+         JBhMYH1Hw6dpd3yuFrHDdVQME4Qk3SpgoWU6+6tLxNqcQDR7FLrNJkHlYsd6MvIM3yEH
+         dEZg==
+X-Gm-Message-State: AFqh2kqY3f+JzzAVJNcWQnLkt6DWJ/tYW1Ly+1c62aIDTxBmBdovv6hs
+	Xsgw1/g/mPYp5McNhNyVKis=
+X-Google-Smtp-Source: AMrXdXud6NqgBFdoB588Gd7cajlRcN+72fySIdToMz6eqo7ROricPKt0/bX4jLZ6qgUf/7y3MnXtbw==
+X-Received: by 2002:a05:6870:9592:b0:148:2c02:5322 with SMTP id k18-20020a056870959200b001482c025322mr37121687oao.26.1673457371636;
+        Wed, 11 Jan 2023 09:16:11 -0800 (PST)
+Received: from ?IPV6:2600:1700:9190:ba10:826d:df1d:b0a7:6601? ([2600:1700:9190:ba10:826d:df1d:b0a7:6601])
+        by smtp.gmail.com with ESMTPSA id bc31-20020a056820169f00b0049f8b4b2095sm7295253oob.44.2023.01.11.09.16.10
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Wed, 11 Jan 2023 09:16:11 -0800 (PST)
+Message-ID: <ec4b606e-aa99-edab-0303-2525dee8339a@gmail.com>
+Date: Wed, 11 Jan 2023 12:16:10 -0500
 MIME-Version: 1.0
-References: <20230111122914.1175681-1-leon.anavi@konsulko.com> <20230111122914.1175681-2-leon.anavi@konsulko.com>
-In-Reply-To: <20230111122914.1175681-2-leon.anavi@konsulko.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 11 Jan 2023 08:33:40 -0800
-Message-ID: <CAMKF1spRSEwoWS8NeDeTfa_Grg-XG0WXz3_MyoJ0AMho81SJuw@mail.gmail.com>
-Subject: Re: [oe] [meta-python][PATCH 2/2] python3-astroid: Upgrade 2.12.13 -> 2.13.2
-To: Leon Anavi <leon.anavi@konsulko.com>
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.4.2
+Content-Language: en-US
+To: Khem Raj <raj.khem@gmail.com>,
+ OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+From: akuster808 <akuster808@gmail.com>
+Subject: kirkstone merge request: Jan 11th
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 11 Jan 2023 16:34:11 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100553
+ <openembedded-devel@lists.openembedded.org>; Wed, 11 Jan 2023 17:16:21 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100554
 
-On Wed, Jan 11, 2023 at 4:29 AM Leon Anavi <leon.anavi@konsulko.com> wrote:
->
-> Upgrade to release 2.13.2:
->
-> - Removed version conditions on typing_extensions dependency.
-> - Removed typing_extensions from our tests requirements as it was
->   preventing issues to appear in our continuous integration.
->
-> Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
-> ---
->  ...astroid_2.12.13.bb => python3-astroid_2.13.2.bb} | 13 ++++++++++---
->  1 file changed, 10 insertions(+), 3 deletions(-)
->  rename meta-python/recipes-devtools/python/{python3-astroid_2.12.13.bb => python3-astroid_2.13.2.bb} (71%)
->
-> diff --git a/meta-python/recipes-devtools/python/python3-astroid_2.12.13.bb b/meta-python/recipes-devtools/python/python3-astroid_2.13.2.bb
-> similarity index 71%
-> rename from meta-python/recipes-devtools/python/python3-astroid_2.12.13.bb
-> rename to meta-python/recipes-devtools/python/python3-astroid_2.13.2.bb
-> index ca87ff013..fa22080d3 100644
-> --- a/meta-python/recipes-devtools/python/python3-astroid_2.12.13.bb
-> +++ b/meta-python/recipes-devtools/python/python3-astroid_2.13.2.bb
-> @@ -4,11 +4,18 @@ SECTION = "devel/python"
->  LICENSE = "LGPL-2.1-only"
->  LIC_FILES_CHKSUM = "file://LICENSE;md5=a70cf540abf41acb644ac3b621b2fad1"
->
-> -SRC_URI[sha256sum] = "1493fe8bd3dfd73dc35bd53c9d5b6e49ead98497c47b2307662556a5692d29d7"
-> +SRC_URI[sha256sum] = "3bc7834720e1a24ca797fd785d77efb14f7a28ee8e635ef040b6e2d80ccb3303"
->
-> -inherit pypi setuptools3
-> +SRC_URI += " \
-> +    file://0001-pyproject.toml-Replace-with.patch \
+The following changes since commit a9c25bef8882a69fd35ea7dbac3d978ce440fe06:
 
-this patch seems to be missing. Did you forget to add it ?
+   mariadb: Upgrade to 10.7.7 (2023-01-04 11:46:45 -0500)
 
-> +"
-> +
-> +inherit pypi python_setuptools_build_meta
->
-> -DEPENDS += "${PYTHON_PN}-pytest-runner-native"
-> +DEPENDS += "\
-> +    ${PYTHON_PN}-pytest-runner-native \
-> +    ${PYTHON_PN}-wheel-native \
-> +"
->
->  PACKAGES =+ "${PN}-tests"
->
-> --
-> 2.30.2
->
->
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#100547): https://lists.openembedded.org/g/openembedded-devel/message/100547
-> Mute This Topic: https://lists.openembedded.org/mt/96198645/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [raj.khem@gmail.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
->
+are available in the Git repository at:
+
+   https://git.openembedded.org/meta-openembedded kirkstone-next
+
+for you to fetch changes up to 1f31570d0795da90083d1dbf28127c90908e30ee:
+
+   multipath-tools: fix QA "dev-so" regression (2023-01-10 09:26:26 -0500)
+
+----------------------------------------------------------------
+S. Lockwood-Childs (1):
+       multipath-tools: fix QA "dev-so" regression
+
+  meta-oe/recipes-support/multipath-tools/multipath-tools_0.8.4.bb | 2 +-
+  1 file changed, 1 insertion(+), 1 deletion(-)
+
 
