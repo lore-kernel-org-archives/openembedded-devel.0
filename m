@@ -1,109 +1,84 @@
-Return-Path: <wangmy@fujitsu.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1FE9BC54EBE
-	for <webhook@archiver.kernel.org>; Wed, 11 Jan 2023 05:26:48 +0000 (UTC)
-Received: from mail3.bemta32.messagelabs.com (mail3.bemta32.messagelabs.com [195.245.230.17])
- by mx.groups.io with SMTP id smtpd.web10.16691.1673414804793798695
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 238E2C5479D
+	for <webhook@archiver.kernel.org>; Wed, 11 Jan 2023 05:27:08 +0000 (UTC)
+Received: from mail-pl1-f178.google.com (mail-pl1-f178.google.com [209.85.214.178])
+ by mx.groups.io with SMTP id smtpd.web10.16694.1673414823899124650
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 10 Jan 2023 21:26:45 -0800
+ Tue, 10 Jan 2023 21:27:03 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=usOcaJi0;
- spf=pass (domain: fujitsu.com, ip: 195.245.230.17, mailfrom: wangmy@fujitsu.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1673414803; i=@fujitsu.com;
-	bh=5aq33WZ65dxcD3DhSFiYCP6vcJ4/aPlya0HOCnXiaDE=;
-	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type;
-	b=usOcaJi0oVmw9rzxGFxy3mWZQ/ciTtofn6NdhtQM3yQg+7T9U+ZVzlNhwPdZfXE6C
-	 JCD7mXCvDwt9xpkeQNKQXftgZgr9YOrIPhU0EH647tM4RVqZDNbeFTmJrHhBH1vrRf
-	 jqrcP5FovESoc1X5iUZgMFAYI4TZLzlalxeVjQiI2BPsYIslWtkSGIZdYB/v1GmLXo
-	 o+XRehOF9eH34Uk859A8XxS6TmKdayya9ZeiD6eHnJ1IdGxdgu9wVE70TVjdmhBsUs
-	 92DzqYc9rNKCTmygXZxFqkpkhoPJ2YRFy1UJ8k0RpNSlNPPF0rOJ2ONsQgRLO4e09x
-	 sw51Dcw7ggZ9w==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrGIsWRWlGSWpSXmKPExsViZ8ORqDvJY1+
-  yweL3fBYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8an2++ZCxo5KxZueMrUwLiGo4uRi0NI4Amj
-  xIMTbxghnBtMEkd3TGODcPYySjy9dpili5GTg01ASuLG/f9sILaIgL7E0tl7mEFsZgEViRe/e
-  9hBbGEBP4l9n16A2SwCqhIbFywEs3kFnCQe/NrBBGJLCChITHn4HqyXU8BZounkD7AaIaCaC0
-  u2M0LUC0qcnPmEBWK+hMTBFy+YIXoVJWZfbmaBsCslWj/8grLVJK6e28Q8gVFwFpL2WUjaFzA
-  yrWI0LU4tKkst0jXRSyrKTM8oyU3MzNFLrNJN1Est1S1PLS7RNdRLLC/WSy0u1iuuzE3OSdHL
-  Sy3ZxAgM3pRiNp8djP+W/tE7xCjJwaQkypsnsS9ZiC8pP6UyI7E4I76oNCe1+BCjDAeHkgSvi
-  itQTrAoNT21Ii0zBxhJMGkJDh4lEd5aR6A0b3FBYm5xZjpE6hSjopQ4r7M7UEIAJJFRmgfXBo
-  veS4yyUsK8jAwMDEI8BalFuZklqPKvGMU5GJWEeZmdgabwZOaVwE1/BbSYCWjx4a69IItLEhF
-  SUg1MhsXb/KrSc54ffm8ZvZitoeoh1+2ZG6ZW/mk1SXR/sX1baZC6hNSkGTu0un4LBFv9lvjn
-  920JB9+Jqym3D2tv4hF2E/zCnTRFKJ/3YPvEZ1fFo1fe/HRj21sbD9Wbs+ZcWJ3o4r3AafqPf
-  ftmXI3idlPzVlq1W2KGzJ6EqRrbXx9hZQxOk+/v2xs991aEptTjNdX3P6nMVhb8cG2vgYfBr0
-  ezIq/nrFH/tUdZTuJA+RkJJaPz+So6XNP9D226xT9xsscz1gOGF/omOqZ7ec1+vaj91NGNPof
-  sD+/eUv6WT45Dhdtmzuzj8iaunz4Gs2+vPpHK8q43TnamXr7eO5sbxkwKpcc3t5tsvNwkIlMw
-  TYmlOCPRUIu5qDgRAOA80xJZAwAA
-X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-11.tower-585.messagelabs.com!1673414801!503546!1
-X-Originating-IP: [62.60.8.97]
-X-SYMC-ESS-Client-Auth: outbound-route-from=pass
-X-StarScan-Received: 
-X-StarScan-Version: 9.101.2; banners=-,-,-
-X-VirusChecked: Checked
-Received: (qmail 1320 invoked from network); 11 Jan 2023 05:26:42 -0000
-Received: from unknown (HELO n03ukasimr01.n03.fujitsu.local) (62.60.8.97)
-  by server-11.tower-585.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 11 Jan 2023 05:26:42 -0000
-Received: from n03ukasimr01.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTP id C69F8100191
-	for <openembedded-devel@lists.openembedded.org>; Wed, 11 Jan 2023 05:26:41 +0000 (GMT)
-Received: from R01UKEXCASM223.r01.fujitsu.local (R01UKEXCASM223 [10.182.185.121])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTPS id B9EE2100182
-	for <openembedded-devel@lists.openembedded.org>; Wed, 11 Jan 2023 05:26:41 +0000 (GMT)
-Received: from localhost.localdomain (10.167.225.33) by
- R01UKEXCASM223.r01.fujitsu.local (10.182.185.121) with Microsoft SMTP Server
- (TLS) id 15.0.1497.42; Wed, 11 Jan 2023 05:26:40 +0000
-From: <wangmy@fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-python] [PATCH] python3-uefi-firmware: upgrade 1.9 -> 1.10
-Date: Wed, 11 Jan 2023 13:26:20 +0800
-Message-ID: <1673414780-13856-5-git-send-email-wangmy@fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
-In-Reply-To: <1673414780-13856-1-git-send-email-wangmy@fujitsu.com>
-References: <1673414780-13856-1-git-send-email-wangmy@fujitsu.com>
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=B2QGf1Sw;
+ spf=pass (domain: gmail.com, ip: 209.85.214.178, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f178.google.com with SMTP id jl4so15626350plb.8
+        for <openembedded-devel@lists.openembedded.org>; Tue, 10 Jan 2023 21:27:03 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=6uwzyaHRJwyE4OTH4UV7OBfcOST0Wwbzyl6Gm83FdU4=;
+        b=B2QGf1Swk/IVSAD6gmpiwhelGduxsN/TwTR5PubhVOaTg/93x5aCZOMXxeqmGekZdo
+         EYcDekOzz3GcI7OvppW40eT6qZ1ZVBwVhrmmFr1MGfCrNzu4ZgyDHSnw9n1DNzFvVrhN
+         M/GxRDqqMDRDF3f/8T3AuKrGxFqDS+8lly84PesFA3VJ6H+sKfw8PtTk69XYSz4p/kEK
+         ESfbEXDcDPDRZQkeLkA0MPaTktYDLNnE9fCdUIyOnKreDUBXZflOh0TtU13UpuhThfqR
+         4hWjalXERmB2DT1i6eYCDmAI0vY76wcJaFVqimp8F00gqQAaeP65NsPoYUAJ5lkmONZk
+         jkpQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=6uwzyaHRJwyE4OTH4UV7OBfcOST0Wwbzyl6Gm83FdU4=;
+        b=6EcOKi2DpYVBpUncs4wREt22kxo3ycld2rpi/PfaphpEoXYOpv6soUcJFx4i3gaHVZ
+         caiI0tTUxAKHJDImtMZCcQONTtzIT4WC7ZRSioBRG85aznqldTUOLrNzAutBzg/htj39
+         XwmsXKWbPEkPfqTMpv8Ea+FSWZW6GcKldQQ2YB111TqDFf3Kcjk8u/1N63JVD3lxGsIX
+         QNMq1dd5U6OHrs6MHbjoPfO5KYzXRAd+2+REzq+13CxkpgGaqac3YsEMBQH1Xzv2GkmU
+         NTe5UahvLF/aZWHCP69GfTV7BOCh6eRSh5apVj1RpJkAewWjdTj1Yklxhp6w/2V+kZKm
+         TnrA==
+X-Gm-Message-State: AFqh2krL3OPWmu+O27RCVpBdK3iTU8bS3w0zjOz4H4nUsuCs5K00zM6x
+	I4LtxBX5BkPYtzhK6waHPqCrCKlskxPQCQ==
+X-Google-Smtp-Source: AMrXdXvTiav4JIYriRm1VvavG1ZS9NQhQeN1+zoOUn7gtxNDEeiDewOBsHX8Z8TPs3Wbn/Lq8HLkJA==
+X-Received: by 2002:a17:902:b20d:b0:189:8016:9b4d with SMTP id t13-20020a170902b20d00b0018980169b4dmr69638118plr.33.1673414822949;
+        Tue, 10 Jan 2023 21:27:02 -0800 (PST)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9181:1cf0::ee35])
+        by smtp.gmail.com with ESMTPSA id l15-20020a170903120f00b00188fce6e8absm5929317plh.280.2023.01.10.21.27.02
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 10 Jan 2023 21:27:02 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-multimedia][PATCH] xdg-desktop-portal-wlr: Add wayland to REQUIRED_DISTRO_FEATURES
+Date: Tue, 10 Jan 2023 21:27:00 -0800
+Message-Id: <20230111052700.3399968-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.39.0
 MIME-Version: 1.0
-Content-Type: text/plain
-X-Originating-IP: [10.167.225.33]
-X-ClientProxiedBy: G08CNEXCHPEKD07.g08.fujitsu.local (10.167.33.80) To
- R01UKEXCASM223.r01.fujitsu.local (10.182.185.121)
-X-Virus-Scanned: ClamAV using ClamSMTP
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 11 Jan 2023 05:26:48 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100537
+ <openembedded-devel@lists.openembedded.org>; Wed, 11 Jan 2023 05:27:08 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100538
 
-From: Wang Mingyu <wangmy@fujitsu.com>
-
-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...thon3-uefi-firmware_1.9.bb => python3-uefi-firmware_1.10.bb} | 2 +-
+ .../xdg-desktop-portal-wlr/xdg-desktop-portal-wlr_0.6.0.bb      | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-uefi-firmware_1.9.bb => python3-uefi-firmware_1.10.bb} (93%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-uefi-firmware_1.9.bb b/meta-python/recipes-devtools/python/python3-uefi-firmware_1.10.bb
-similarity index 93%
-rename from meta-python/recipes-devtools/python/python3-uefi-firmware_1.9.bb
-rename to meta-python/recipes-devtools/python/python3-uefi-firmware_1.10.bb
-index 3837a1743..49955c97e 100644
---- a/meta-python/recipes-devtools/python/python3-uefi-firmware_1.9.bb
-+++ b/meta-python/recipes-devtools/python/python3-uefi-firmware_1.10.bb
-@@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = "file://setup.py;md5=90fa5bae1547550f1c1993f651eda955"
+diff --git a/meta-multimedia/recipes-support/xdg-desktop-portal-wlr/xdg-desktop-portal-wlr_0.6.0.bb b/meta-multimedia/recipes-support/xdg-desktop-portal-wlr/xdg-desktop-portal-wlr_0.6.0.bb
+index 7e1b7b9d26..a72116154c 100644
+--- a/meta-multimedia/recipes-support/xdg-desktop-portal-wlr/xdg-desktop-portal-wlr_0.6.0.bb
++++ b/meta-multimedia/recipes-support/xdg-desktop-portal-wlr/xdg-desktop-portal-wlr_0.6.0.bb
+@@ -14,7 +14,7 @@ DEPENDS = " \
+ "
  
- SRC_URI = "git://github.com/theopolis/uefi-firmware-parser;protocol=https;branch=master"
+ inherit meson pkgconfig features_check
+-REQUIRED_DISTRO_FEATURES = "opengl"
++REQUIRED_DISTRO_FEATURES = "opengl wayland"
  
--SRCREV = "502f1bada1ed11fdd1792646fda0bfafb8fa57fb"
-+SRCREV = "dfb15b068960b771e2e1536d34790dac9b5bfe32"
- 
- S = "${WORKDIR}/git"
+ SRC_URI = "git://github.com/emersion/xdg-desktop-portal-wlr.git;protocol=https;nobranch=1"
  
 -- 
-2.25.1
+2.39.0
 
 
