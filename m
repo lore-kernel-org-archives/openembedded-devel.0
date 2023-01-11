@@ -1,86 +1,87 @@
-Return-Path: <akuster808@gmail.com>
+Return-Path: <steve@sakoman.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B7123C46467
-	for <webhook@archiver.kernel.org>; Wed, 11 Jan 2023 17:16:21 +0000 (UTC)
-Received: from mail-oa1-f52.google.com (mail-oa1-f52.google.com [209.85.160.52])
- by mx.groups.io with SMTP id smtpd.web10.30057.1673457372329847221
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DD377C46467
+	for <webhook@archiver.kernel.org>; Wed, 11 Jan 2023 18:07:51 +0000 (UTC)
+Received: from mail-ed1-f50.google.com (mail-ed1-f50.google.com [209.85.208.50])
+ by mx.groups.io with SMTP id smtpd.web11.31679.1673460469736566164
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 11 Jan 2023 09:16:12 -0800
+ Wed, 11 Jan 2023 10:07:50 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=FXkZPfoR;
- spf=pass (domain: gmail.com, ip: 209.85.160.52, mailfrom: akuster808@gmail.com)
-Received: by mail-oa1-f52.google.com with SMTP id 586e51a60fabf-15bb8ec196aso4451982fac.3
-        for <openembedded-devel@lists.openembedded.org>; Wed, 11 Jan 2023 09:16:12 -0800 (PST)
+ dkim=pass header.i=@sakoman-com.20210112.gappssmtp.com header.s=20210112 header.b=zrOxwpyz;
+ spf=softfail (domain: sakoman.com, ip: 209.85.208.50, mailfrom: steve@sakoman.com)
+Received: by mail-ed1-f50.google.com with SMTP id b4so3987499edf.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 11 Jan 2023 10:07:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=content-transfer-encoding:subject:from:to:content-language
-         :user-agent:mime-version:date:message-id:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=DRw0nqoSmcI6la7SHjmbx8d3/pIzdcPCOoHShH7DvTg=;
-        b=FXkZPfoR9OmP3b+2enRqzqkpdMKL/KVoAA+93XXzWHMOe3hFWyjO+touYDKtZ4MRy2
-         IFxqIE6MCNizfAWcyy1zqxau9qbEXvmYW/NITZDr20X1LVe688H+G7ksyiDWmLu2NEet
-         op+VamHQYbVySAqqG1YBI7SOwWcWuaMJGjHZGMFWa8eQPG/0od6MypGRxzcv/WKP6mSu
-         xOaFIYgfAcZRLESkPz3omfFaSFgTa+y96Nar8y2zOBuhXGAZz84ZeFk29NYewAdpYuDL
-         taPGkhvsiTuKddTeQslQa0f9eEy162MHzmRhmFzq5CnsNqSjiyDfOhTUkzMkcI7DcyXG
-         D+CA==
+        d=sakoman-com.20210112.gappssmtp.com; s=20210112;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=C5xwcNeC+oocNwYXZ6Hc7Zhaj8nHOGHrvxCrQzQCF6Q=;
+        b=zrOxwpyzUgGxJn6x75gt/GUun7fJn67FehyQAU5MRzIu9axVlQJ7WdipNbvJop0ory
+         6UYMHpadxKSmTcvNEQ2XCI6mYZ6D3bA0g5mGUbEL8XUbJ/od8fyR7mKHe4fSJUg86MIr
+         SpKmTaR4IeQ8oG7wqDVx89FlvzPKyL5JXg4Em5TsnWSqkCkJ+RqQsToQeaKL3769q+Wz
+         2VPgVnQoHJW2NcNc6TzGKOAjDJ7LZz3khnJiU5SB1LZeyZOBpUtWkU+Z+kjwV9LXUkWl
+         F9VpJAEVPXTGacn19inmBfXU/mnUhPX6SUaYRH6SWZxKaF9zrcXueBmG/3nvceFUVka+
+         zfCA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=content-transfer-encoding:subject:from:to:content-language
-         :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=DRw0nqoSmcI6la7SHjmbx8d3/pIzdcPCOoHShH7DvTg=;
-        b=Z1z0rqRpzJYknxocf5z2vdPp818a9Mevczcn2AfNwojLh85hws5xREhG+I+ujiLz0d
-         eEJunlOhzEPH+GunagwmCko+T+KdhAbU/GEYYoEMIlFG2oOAjCTun50X1C5Oarqh8PFv
-         yF6j8/uwyKrF8eR1hD+qo5dYj8vItVwHNu7ALpceagSuP1YjWcmCjou7nzGIqjdVBVjK
-         TGUApYJL/xJHDNH71VN8xt+hVMjme6gBLltNRnL/hCb+PKABIKQZ418Vp+zoKprI7dbf
-         JBhMYH1Hw6dpd3yuFrHDdVQME4Qk3SpgoWU6+6tLxNqcQDR7FLrNJkHlYsd6MvIM3yEH
-         dEZg==
-X-Gm-Message-State: AFqh2kqY3f+JzzAVJNcWQnLkt6DWJ/tYW1Ly+1c62aIDTxBmBdovv6hs
-	Xsgw1/g/mPYp5McNhNyVKis=
-X-Google-Smtp-Source: AMrXdXud6NqgBFdoB588Gd7cajlRcN+72fySIdToMz6eqo7ROricPKt0/bX4jLZ6qgUf/7y3MnXtbw==
-X-Received: by 2002:a05:6870:9592:b0:148:2c02:5322 with SMTP id k18-20020a056870959200b001482c025322mr37121687oao.26.1673457371636;
-        Wed, 11 Jan 2023 09:16:11 -0800 (PST)
-Received: from ?IPV6:2600:1700:9190:ba10:826d:df1d:b0a7:6601? ([2600:1700:9190:ba10:826d:df1d:b0a7:6601])
-        by smtp.gmail.com with ESMTPSA id bc31-20020a056820169f00b0049f8b4b2095sm7295253oob.44.2023.01.11.09.16.10
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 11 Jan 2023 09:16:11 -0800 (PST)
-Message-ID: <ec4b606e-aa99-edab-0303-2525dee8339a@gmail.com>
-Date: Wed, 11 Jan 2023 12:16:10 -0500
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=C5xwcNeC+oocNwYXZ6Hc7Zhaj8nHOGHrvxCrQzQCF6Q=;
+        b=xvGr/td+/ku/IMmdijYVCnU7VR6s/e8zJJV+0DvmsbMo9NoAseaQGPyofDUP7dGGFM
+         L+zqP+XBDbNJtq+2xqYoV7MCIDY+R5YlhE4qy85xXgtoGQcpJM6pbxYt/wukbR2aLBKY
+         2oXXJr80GxiYjj84+CZnEVDGPuO/d3wh88jJ6F+Skr554EfXMx/ZCgTOGFYSUuZrMthm
+         oyINB9MZsGHGMyaieUOPvoFtJoD9ZlKpZ4Gbky6BhpUW7p5cxsbh0rJUctST0nlgNKLK
+         T8bkpBTNIbvqNhEMhsnpnuqvw4XFWTUuMSC2xRXbgENoNIU1ANuWFyKhIMj0F5QbNCzH
+         4U8Q==
+X-Gm-Message-State: AFqh2kpAZ294pgexkdsONrSVlVTJbQRTp3TVRcGukZTjQRxlVkKbPmeS
+	SupG0zd0UWZaGeEyY6lZnHjlpZk68e6eHAzpp4ELmA==
+X-Google-Smtp-Source: AMrXdXsZGDI6Z4YrQgAbuzj9LS2jQmjCHXVHA8Jnu/F84/cGi3Cm9N7fC9u80uY3FtYgDf9Kin5ULv5cIzonIPc9JCw=
+X-Received: by 2002:a05:6402:2208:b0:48a:7ada:b260 with SMTP id
+ cq8-20020a056402220800b0048a7adab260mr4051829edb.311.1673460467734; Wed, 11
+ Jan 2023 10:07:47 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.4.2
-Content-Language: en-US
-To: Khem Raj <raj.khem@gmail.com>,
- OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-From: akuster808 <akuster808@gmail.com>
-Subject: kirkstone merge request: Jan 11th
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+References: <7b00f80d33fc4d77eafcddb8ba46b992d713df25.camel@siemens.com>
+In-Reply-To: <7b00f80d33fc4d77eafcddb8ba46b992d713df25.camel@siemens.com>
+From: Steve Sakoman <steve@sakoman.com>
+Date: Wed, 11 Jan 2023 08:07:36 -1000
+Message-ID: <CAOSpxdapG_z_H0DrcRc=N6AczcPykLLBd+zfHbLCqTFGvOC0Lw@mail.gmail.com>
+Subject: Re: gRPC
+To: "Valek, Andrej" <andrej.valek@siemens.com>
+Cc: "openembedded-devel@lists.openembedded.org" <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 11 Jan 2023 17:16:21 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100554
+ <openembedded-devel@lists.openembedded.org>; Wed, 11 Jan 2023 18:07:51 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100555
 
-The following changes since commit a9c25bef8882a69fd35ea7dbac3d978ce440fe06:
+Hi Andrej,
 
-   mariadb: Upgrade to 10.7.7 (2023-01-04 11:46:45 -0500)
+I'm the maintainer for openembedded-core, and gRPC is in
+meta-openmebedded. So this isn't my call to make.
 
-are available in the Git repository at:
+However we typically only take version bumps if they are security/bug
+fix only releases.  So if this is the case, you can submit a patch.
+But please be sure to include either release notes or change log so
+the meta-openembedded maintainer can verify that it is suitable for a
+stable release.
 
-   https://git.openembedded.org/meta-openembedded kirkstone-next
+Thanks!
 
-for you to fetch changes up to 1f31570d0795da90083d1dbf28127c90908e30ee:
+Steve
 
-   multipath-tools: fix QA "dev-so" regression (2023-01-10 09:26:26 -0500)
-
-----------------------------------------------------------------
-S. Lockwood-Childs (1):
-       multipath-tools: fix QA "dev-so" regression
-
-  meta-oe/recipes-support/multipath-tools/multipath-tools_0.8.4.bb | 2 +-
-  1 file changed, 1 insertion(+), 1 deletion(-)
-
+On Tue, Jan 10, 2023 at 9:31 PM Valek, Andrej <andrej.valek@siemens.com> wrote:
+>
+> Hello Steve,
+>
+> I have a question about gRPC. Would it be possible to backport
+> gRPC(grpc_1.50.1.bb) from master to kirkstone branch? There are some
+> CVEs reported (for the current version) and going to newer version
+> would be better solution I guess.
+>
+> Thank you,
+> Andrej
 
