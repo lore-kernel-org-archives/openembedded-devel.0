@@ -2,68 +2,68 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1C414C54EBE
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2905CC63797
 	for <webhook@archiver.kernel.org>; Wed, 11 Jan 2023 05:25:38 +0000 (UTC)
-Received: from mail1.bemta37.messagelabs.com (mail1.bemta37.messagelabs.com [85.158.142.113])
- by mx.groups.io with SMTP id smtpd.web10.16672.1673414736446653214
+Received: from mail1.bemta34.messagelabs.com (mail1.bemta34.messagelabs.com [195.245.231.2])
+ by mx.groups.io with SMTP id smtpd.web11.16723.1673414733566846375
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 10 Jan 2023 21:25:36 -0800
+ Tue, 10 Jan 2023 21:25:33 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=EHRHuRtC;
- spf=pass (domain: fujitsu.com, ip: 85.158.142.113, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=u3jVwnuz;
+ spf=pass (domain: fujitsu.com, ip: 195.245.231.2, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1673414734; i=@fujitsu.com;
-	bh=bPAlRiR2CDiybFh1PCrgDCEb/cyJchzZPJerufl5Zjc=;
+	s=170520fj; t=1673414732; i=@fujitsu.com;
+	bh=JTq+FQAFWYoSetjhC1O/IHGFijrvvO7LwG/TEo+CyEE=;
 	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
 	 MIME-Version:Content-Type;
-	b=EHRHuRtCH+O3YoiZ0KZTcvZg5TJm0BGNFg+qMvSgjUvoDS+NTbFTAIAvGM7Tn2iQ+
-	 mom4lDOYCRMfAdwbb6/3adpieETS6muWoky/+X1mz4IxX0q6r+rpl8qHsvBZ/jS4ox
-	 ufy2e/qAhxLQrO0jOQrgSSL3SkJIA9brV1H3NkMtjcITKbaBmg0sBdA2sop2qPFZhe
-	 LTkpMSjDZWNCxrxW4zcuGx683pm+TUEzw4tP5bPdM2MMn2Ig9n8li36iAKCkw/fZLX
-	 ej714fqnWxEhjPyHZJn2UwPhdcNpKQgE/oP35EuMIQTvd/2AMeSBBbFT9s9gUwFr7r
-	 OmTGUKUfeA2fQ==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrBIsWRWlGSWpSXmKPExsViZ8OxWdfXY1+
-  ywbTThhYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa0bXr/msBRcVK3qvfWNqYHwi38XIxSEk8IBR
-  YvmxX+wQzhUmiXmdqxghnL2MEnN7LrB0MXJysAlISdy4/58NxBYR0JdYOnsPM4jNLKAi8eJ3D
-  zuILSwQJ7Hk5W0wm0VAVeL2th1g9bwCThI7/54Aq5cQUJCY8vA9mM0p4CzROOErK4gtBFSzav
-  paJoh6QYmTM5+wQMyXkDj44gVUr6LE7MvNLBB2pUTrh19QtprE1XObmCcwCs5C0j4LSfsCRqZ
-  VjObFqUVlqUW6hkZ6SUWZ6RkluYmZOXqJVbqJeqmlunn5RSUZuoZ6ieXFeqnFxXrFlbnJOSl6
-  eaklmxiBAZxSnHx3B2Pn8j96hxglOZiURHnzJPYlC/El5adUZiQWZ8QXleakFh9ilOHgUJLgV
-  XEFygkWpaanVqRl5gCjCSYtwcGjJMJb6wiU5i0uSMwtzkyHSJ1iVJQS53V2B0oIgCQySvPg2m
-  ARfIlRVkqYl5GBgUGIpyC1KDezBFX+FaM4B6OSMC+zM9AUnsy8Erjpr4AWMwEtPty1F2RxSSJ
-  CSqqBKcixgLmueGk2n/+fg4EctRebCp7MjP3X+Vkucc9nwdKv3keUZF62T43hP8Sw6ETqp3sO
-  apHs0exypt/Sdp3/1pSwo/K/0OfABzeP3loVdcu2Umqmm8Xf05blOTr7WOOEC988cT/4qUnyV
-  skmVxPjmSpF36bt9uir/aRl/qMudO72F0mOJVnpl2YlTFple2z5QuOb7DG7rBoyxKzXTZ69f6
-  JmzO0Xr+NjRatOB7G9u/Rk0StuZz63QD8rBWt+N6njRanWx7aedvr20eB0Wa5y2vLn7Klzq7V
-  ltaw+SdtViGmubN+eJrUwdzFDannEt5X7Uj2bSjb8iY4ViH/rvt7L7vPes4Y6HIcPl1w8nlGi
-  xFKckWioxVxUnAgAgaOx81sDAAA=
+	b=u3jVwnuzLMpF+nUSV7JreH69JEtqb87xzoUiCCccLx0RBM07265DoxKyWpknFMF6C
+	 13fPj9Xs2DQ8LjdcTL4O16nR+htaQIWX6VidsVNPJdWtfZASIcGpR/K+eWidCyLEq9
+	 wbCV6sBfbYXsmrC40MnELjFzZl1psD6sXNe0lS+6gmAcy5nXEsP/kN+ccXD3UQN8Ax
+	 PbrXTvbO4YH9QBB73rvFrEEa/iwPkMnJtnOZh/Yuk3ZXAb5UoKvNDTh0Z8Tokr6MRm
+	 X7Gv/N70fiY/UDsZKPRLNLXuGGf73wtrrUuvZSs5vUWHy978gl1SwrWd56TQm96lgT
+	 YHJB35KY4AB5g==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrKIsWRWlGSWpSXmKPExsViZ8ORqOvtsS/
+  ZoOGDqMXFw0uZHRg9zm1cwRjAGMWamZeUX5HAmrH6/BbGgjdcFTcff2VqYPzO2cXIxSEk8IRR
+  4sjexcwQzg0miUVd31ghnL2MEltW/mfsYuTkYBOQkrhx/z8biC0ioC+xdPYeZhCbWUBF4sXvH
+  nYQW1ggUOJD+2VWEJtFQFXiy7mTLF2MHBy8Ak4SXxbmgYQlBBQkpjx8D9bKKeAs0TjhK1i5EF
+  DJqulrmUBsXgFBiZMzn7BAjJeQOPjiBTNEr6LE7MvNLBB2pUTrh19QtprE1XObmCcwCs5C0j4
+  LSfsCRqZVjKbFqUVlqUW6RnpJRZnpGSW5iZk5eolVuol6qaW65anFJUCZxPJivdTiYr3iytzk
+  nBS9vNSSTYzA0E0pVvi+g7F76R+9Q4ySHExKorx5EvuShfiS8lMqMxKLM+KLSnNSiw8xynBwK
+  EnwqrgC5QSLUtNTK9Iyc4BxBJOW4OBREuGtdQRK8xYXJOYWZ6ZDpE4xKkqJ8zq7AyUEQBIZpX
+  lwbbDYvcQoKyXMy8jAwCDEU5BalJtZgir/ilGcg1FJmJfZGWgKT2ZeCdz0V0CLmYAWH+7aC7K
+  4JBEhJdXAxGAUxc5Q/0G61j33h6aaxGW3zHWCZTpSAlut1kVWa3V/9bho8F/x3iXr98+Cbv21
+  33fw2V8p6WjeLw4b3j9QVleYUMO1U4r1T1aDt/XurkczrnFELf3578cSr3+e1U0BPhfFpin9D
+  rIpEc7f8eZhtWOuWjPvhC0Xfk1/mbhij4aU3fvwzzUsdcKhz1IObXn2k3vGLVnGigrHfVc/X2
+  yQZ4tjvau9SHbOwelOicHCNXuNzs6fpvOQaX+mTbR86fItnu7pmoIZmemedwMdrXK2Ln/vrcr
+  ll8b2wn6W8Jcj7Ne8fz+fvVTPr+x2+6LXnN9+hF3OP7FTZg9XxbOUN+/LxSyc88JOrddaP9E2
+  1NlUiaU4I9FQi7moOBEAtkzKRFgDAAA=
 X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-14.tower-745.messagelabs.com!1673414733!501190!1
-X-Originating-IP: [62.60.8.179]
+X-Msg-Ref: server-15.tower-548.messagelabs.com!1673414731!39152!1
+X-Originating-IP: [62.60.8.97]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.101.2; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 10476 invoked from network); 11 Jan 2023 05:25:33 -0000
-Received: from unknown (HELO n03ukasimr04.n03.fujitsu.local) (62.60.8.179)
-  by server-14.tower-745.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 11 Jan 2023 05:25:33 -0000
-Received: from n03ukasimr04.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTP id 3D1B07B
-	for <openembedded-devel@lists.openembedded.org>; Wed, 11 Jan 2023 05:25:33 +0000 (GMT)
+Received: (qmail 23157 invoked from network); 11 Jan 2023 05:25:31 -0000
+Received: from unknown (HELO n03ukasimr01.n03.fujitsu.local) (62.60.8.97)
+  by server-15.tower-548.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 11 Jan 2023 05:25:31 -0000
+Received: from n03ukasimr01.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTP id 12F0F100191
+	for <openembedded-devel@lists.openembedded.org>; Wed, 11 Jan 2023 05:25:31 +0000 (GMT)
 Received: from R01UKEXCASM223.r01.fujitsu.local (R01UKEXCASM223 [10.182.185.121])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTPS id 3149173
-	for <openembedded-devel@lists.openembedded.org>; Wed, 11 Jan 2023 05:25:33 +0000 (GMT)
+	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTPS id 06176100182
+	for <openembedded-devel@lists.openembedded.org>; Wed, 11 Jan 2023 05:25:31 +0000 (GMT)
 Received: from localhost.localdomain (10.167.225.33) by
  R01UKEXCASM223.r01.fujitsu.local (10.182.185.121) with Microsoft SMTP Server
- (TLS) id 15.0.1497.42; Wed, 11 Jan 2023 05:25:31 +0000
+ (TLS) id 15.0.1497.42; Wed, 11 Jan 2023 05:25:29 +0000
 From: <wangmy@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-python] [PATCH] python3-google-api-python-client: upgrade 2.70.0 -> 2.71.0
-Date: Wed, 11 Jan 2023 13:25:14 +0800
-Message-ID: <1673414714-13796-5-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH] python3-flask-migrate: upgrade 4.0.0 -> 4.0.1
+Date: Wed, 11 Jan 2023 13:25:13 +0800
+Message-ID: <1673414714-13796-4-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 In-Reply-To: <1673414714-13796-1-git-send-email-wangmy@fujitsu.com>
 References: <1673414714-13796-1-git-send-email-wangmy@fujitsu.com>
@@ -77,56 +77,37 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 11 Jan 2023 05:25:38 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100532
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100531
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
 Changelog:
-==========
- accesscontextmanager: Update the api https://togithub.com/googleapis/google-api-python-client/commit/038fdb69dcb6ea01f6eb56901ff0e76e6bbaf3ab
- alertcenter: Update the api https://togithub.com/googleapis/google-api-python-client/commit/6057d89b613fb2a30ac2d26b90933ad0afa083d1
- androidenterprise: Update the api https://togithub.com/googleapis/google-api-python-client/commit/ec22103603074d33ad2a41bed36debc63b3bb528
- apigee: Update the api https://togithub.com/googleapis/google-api-python-client/commit/43f435c459205c8305f248efe78e6bd72a1b95c3
- batch: Update the api https://togithub.com/googleapis/google-api-python-client/commit/3dd983b5616c058887d38e9423388d236acc27dc
- clouddeploy: Update the api https://togithub.com/googleapis/google-api-python-client/commit/9a176a474cfd18a4b53d9b6b78bb432e6dd4cb0b
- compute: Update the api https://togithub.com/googleapis/google-api-python-client/commit/bba3627ef5ae35a101b223b3da2739224e1598aa
- container: Update the api https://togithub.com/googleapis/google-api-python-client/commit/98d6112970c5236cff5f36bf543a166ea27ca74c 
- contentwarehouse: Update the api https://togithub.com/googleapis/google-api-python-client/commit/00fa4bb30f92fdc325b23bd71b3ebd57fdcce4c7 
- datafusion: Update the api https://togithub.com/googleapis/google-api-python-client/commit/db1dddc7ca75258fde5cc59997599ce57ad8f01d 
- datamigration: Update the api https://togithub.com/googleapis/google-api-python-client/commit/12effe4a38299bb6f1fc61afeb1359200e9eff0b 
- datapipelines: Update the api https://togithub.com/googleapis/google-api-python-client/commit/91b60afaa437d7b29a96d83d3b89e3e855a81598 
- dataplex: Update the api https://togithub.com/googleapis/google-api-python-client/commit/04bafe3e118a1bbb2c75fc7f4e2e105f04bd4434 
- dataproc: Update the api https://togithub.com/googleapis/google-api-python-client/commit/1ad16fafbdfbf4d983112e5e811ea75f3727e67a 
- datastream: Update the api https://togithub.com/googleapis/google-api-python-client/commit/30f292141f98047d5acd526297f3f0e5bb79536e 
- firestore: Update the api https://togithub.com/googleapis/google-api-python-client/commit/89b34a91c7b56b03d59648bb582d3db1c5e06a4a 
- gmail: Update the api https://togithub.com/googleapis/google-api-python-client/commit/a4ca99c42e5c618e57071a800f49d784a0bb6eea 
- notebooks: Update the api https://togithub.com/googleapis/google-api-python-client/commit/f732fd307f07f53afc5344620456d0e662f81624 
- retail: Update the api https://togithub.com/googleapis/google-api-python-client/commit/d94dee346b3ae88d9d28bd97098bd2aba8093850 
- speech: Update the api https://togithub.com/googleapis/google-api-python-client/commit/339a5d6c9cf9ecdcfe6c1ac33ae2ede71973584e 
- texttospeech: Update the api https://togithub.com/googleapis/google-api-python-client/commit/ee942d9363c422443d9ec24c0dac8e373b37721f 
- workloadmanager: Update the api https://togithub.com/googleapis/google-api-python-client/commit/93f0e30afae73ea3ce888783de0a6bf53604e40d 
+=========
+ Do not use deprecated functions in Flask-SQLAlchemy 3.0
+ Stop building Python 3.6
+ Remove tests from pypi package
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- ...ent_2.70.0.bb => python3-google-api-python-client_2.71.0.bb} | 2 +-
+ ...n3-flask-migrate_4.0.0.bb => python3-flask-migrate_4.0.1.bb} | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-google-api-python-client_2.70.0.bb => python3-google-api-python-client_2.71.0.bb} (86%)
+ rename meta-python/recipes-devtools/python/{python3-flask-migrate_4.0.0.bb => python3-flask-migrate_4.0.1.bb} (80%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-google-api-python-client_2.70.0.bb b/meta-python/recipes-devtools/python/python3-google-api-python-client_2.71.0.bb
-similarity index 86%
-rename from meta-python/recipes-devtools/python/python3-google-api-python-client_2.70.0.bb
-rename to meta-python/recipes-devtools/python/python3-google-api-python-client_2.71.0.bb
-index 0e0a14ad0..6cfec6f71 100644
---- a/meta-python/recipes-devtools/python/python3-google-api-python-client_2.70.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-google-api-python-client_2.71.0.bb
-@@ -4,7 +4,7 @@ HOMEPAGE = "https://github.com/googleapis/google-api-python-client"
- LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=86d3f3a95c324c9479bd8986968f4327"
+diff --git a/meta-python/recipes-devtools/python/python3-flask-migrate_4.0.0.bb b/meta-python/recipes-devtools/python/python3-flask-migrate_4.0.1.bb
+similarity index 80%
+rename from meta-python/recipes-devtools/python/python3-flask-migrate_4.0.0.bb
+rename to meta-python/recipes-devtools/python/python3-flask-migrate_4.0.1.bb
+index 3656a6ebd..7d3ac9e32 100644
+--- a/meta-python/recipes-devtools/python/python3-flask-migrate_4.0.0.bb
++++ b/meta-python/recipes-devtools/python/python3-flask-migrate_4.0.1.bb
+@@ -2,7 +2,7 @@ DESCRIPTION = "SQLAlchemy database migrations for Flask applications using Alemb
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=3b69377f79f3f48c661701236d5a6a85"
  
--SRC_URI[sha256sum] = "262de094d5a30d337f59e66581019fed45b698c078397ac48dd323c0968236e7"
-+SRC_URI[sha256sum] = "9412ad3445518fa9d24d02c673a70b07c9d124990f44763cdf4f5304ca5b4d08"
+-SRC_URI[sha256sum] = "2a301c3040af6844f29d9149abe428a0f08ebc8fa149e72113bbb36fa341920a"
++SRC_URI[sha256sum] = "f62b51f9cd2c4f444deac111726a2335d0b846dcf51909a97e261d2098b816f7"
  
- inherit pypi setuptools3
+ PYPI_PACKAGE = "Flask-Migrate"
  
 -- 
 2.25.1
