@@ -1,126 +1,96 @@
-Return-Path: <kai.kang@eng.windriver.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AE655C54EBD
-	for <webhook@archiver.kernel.org>; Fri, 13 Jan 2023 16:15:26 +0000 (UTC)
-Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.web11.91771.1673626522281335937
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EABA8C54EBD
+	for <webhook@archiver.kernel.org>; Fri, 13 Jan 2023 17:01:46 +0000 (UTC)
+Received: from mail-ot1-f47.google.com (mail-ot1-f47.google.com [209.85.210.47])
+ by mx.groups.io with SMTP id smtpd.web10.93391.1673629302600142713
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 13 Jan 2023 08:15:22 -0800
+ Fri, 13 Jan 2023 09:01:42 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=pps06212021 header.b=qtv9JJBd;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=0377ab77e1=kai.kang@windriver.com)
-Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 30DDS3Ob029163
-	for <openembedded-devel@lists.openembedded.org>; Fri, 13 Jan 2023 08:15:22 -0800
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com; h=from : to :
- subject : date : message-id : mime-version : content-type; s=PPS06212021;
- bh=g4NmE6XLVWuVQejCCfjts9NmrEiXhGRV32gce6bv2HE=;
- b=qtv9JJBdQzMU7DWod4RAHu1Vlr0f1K0tCJkEb5GLqC5hHFdSIj/1jC25+WxPLqeyaSCH
- cyWqMQOW7omdShFVkPm/DtOfYpBPaqUJM01wgXdrPKrGu/7P48zFlTAoYioXD6jfdnHI
- RdvH46w4ZrB/oAnEMcLQsJvGG/KdIlil5HxyZuA9beZ76ASqDP7shFWzJ24DrQ9HSv6j
- BLuuJ82tyxV2WjJw/KCXzdnvgyUbUA31slRFU0eaAeZ2J46QzbMN4LG0yhIZdL6eA2Sa
- ALe5pj8NIeS2x1s4DMHOzJ9hr1DAUlBT1kjWoBcKrFTEbMW/1CxFfbYEjUCycCKIDxYb 6A== 
-Received: from ala-exchng01.corp.ad.wrs.com (unknown-82-252.windriver.com [147.11.82.252])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3n1k5s2u4j-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Fri, 13 Jan 2023 08:15:21 -0800
-Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.16; Fri, 13 Jan 2023 08:15:21 -0800
-Received: from pek-lpg-core3.wrs.com (128.224.153.232) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
- 15.1.2507.16 via Frontend Transport; Fri, 13 Jan 2023 08:15:20 -0800
-From: <kai.kang@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-oe][PATCH] mozjs: fix compile error for arm
-Date: Sat, 14 Jan 2023 00:15:18 +0800
-Message-ID: <20230113161518.1118-1-kai.kang@windriver.com>
-X-Mailer: git-send-email 2.17.1
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=o285BP5E;
+ spf=pass (domain: gmail.com, ip: 209.85.210.47, mailfrom: raj.khem@gmail.com)
+Received: by mail-ot1-f47.google.com with SMTP id x25-20020a056830115900b00670932eff32so12542122otq.3
+        for <openembedded-devel@lists.openembedded.org>; Fri, 13 Jan 2023 09:01:42 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=kVCJsW9Rq7rlZik9eKwIx0xq1aE0C1hE4j/IwEeuuiE=;
+        b=o285BP5EeDQK1gdshjb8zrKdf0DtiPGE1KYtXTzIbEXnUEEkQEkSaX4Zzc7it3Q1ao
+         lNh0a7JPW/uF8IIrGwWwMgT2kd00xPGhu/G+78W7kN9uAtBISDyINFN8fYnxD9YCjN1Y
+         Gj1oI7HU4GREPtv80xda44/I9xnFXWuHN253b15O5YgPTRhM9w+FzB1ECe0GG4htvyFV
+         ueIgNf2zbkBWas6zpGRcQx49YzlqlhJq+ptT1wcKYaAmaRBor9Cq90UN5qU0V0e1X8jA
+         wZD5bH0Ml90PMkblHqOb7q6S2OUvvzojoXH4BmNJcZbWHlr//fq8EmY19wlSZnSxdUIa
+         syDg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=kVCJsW9Rq7rlZik9eKwIx0xq1aE0C1hE4j/IwEeuuiE=;
+        b=Gw80Co2xiQNrhdk9AGNrUyqzIv1eCiEYeLKq+v2JYknRFKn4g1vl9kuQwk/EmWhli2
+         NypT9o8UUP/xfQM57UTwuDX5UHLzwW1wp5xVi0ruTemWCJ+VmMy8ZVbP9s4oJ/0IGtxo
+         toj297/fCsS3gDyi4ZzQGp93Z88zkzPfpQG2EYkcKUJFXUbEeF1XxpNrzsuiWPrD6Cbb
+         s9YT72prwUpYoW2ykIPqzM7glhgruiIBbrYJHuWd7U7v+n2W5bnFfvokmukJVS+Tj07E
+         MwUV597ssUk9hM1aORHeqJTVF5YeYxUnx4v2tBWyfJsvqYiVjl5T8IpfgbdMK0ZChK63
+         W+Qw==
+X-Gm-Message-State: AFqh2kqrUoL3lc89bcF9oAlwpZ7pSObH9z7NKQpOH56/MufdK+fOmPf+
+	Ufpa2gKxYzCsAsTMOtLkpCJQFCVhJKddznHbNNg=
+X-Google-Smtp-Source: AMrXdXuAtDAjNepxNN7eyr/Y7DAJGr/4IF7/bX1tlW0PrG7nKV+tVdHhf4M8qW7VMjdswl/zpUJDA2MfpUcMm1PDP+k=
+X-Received: by 2002:a9d:1984:0:b0:670:9d62:667f with SMTP id
+ k4-20020a9d1984000000b006709d62667fmr4924022otk.111.1673629301201; Fri, 13
+ Jan 2023 09:01:41 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain
-X-Proofpoint-ORIG-GUID: Ts4k2-vmjcEzb1fE1JUlBv8trgZorcTz
-X-Proofpoint-GUID: Ts4k2-vmjcEzb1fE1JUlBv8trgZorcTz
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.219,Aquarius:18.0.923,Hydra:6.0.562,FMLib:17.11.122.1
- definitions=2023-01-13_07,2023-01-13_02,2022-06-22_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 priorityscore=1501
- impostorscore=0 malwarescore=0 suspectscore=0 bulkscore=0 adultscore=0
- phishscore=0 mlxlogscore=999 clxscore=1015 spamscore=0 lowpriorityscore=0
- mlxscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2212070000 definitions=main-2301130108
+References: <20230113122629.1300116-1-ross.burton@arm.com>
+In-Reply-To: <20230113122629.1300116-1-ross.burton@arm.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Fri, 13 Jan 2023 09:01:15 -0800
+Message-ID: <CAMKF1sqqPAURqVn5wPcKkNzrNVLT2892X5rOkx1C_NRFRviu5g@mail.gmail.com>
+Subject: Re: [oe] [PATCH 1/2] python3-pytest-forked: update for move from
+ picobuild to build
+To: Ross Burton <ross.burton@arm.com>
+Cc: openembedded-devel@lists.openembedded.org, nd@arm.com
+Content-Type: text/plain; charset="UTF-8"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 13 Jan 2023 16:15:26 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100564
+ <openembedded-devel@lists.openembedded.org>; Fri, 13 Jan 2023 17:01:46 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100565
 
-From: Kai Kang <kai.kang@windriver.com>
+On Fri, Jan 13, 2023 at 4:26 AM Ross Burton <ross.burton@arm.com> wrote:
+>
+> Signed-off-by: Ross Burton <ross.burton@arm.com>
+> ---
+>  .../recipes-devtools/python/python3-pytest-forked_1.4.0.bb       | 1 +
+>  1 file changed, 1 insertion(+)
+>
+> diff --git a/meta-python/recipes-devtools/python/python3-pytest-forked_1.4.0.bb b/meta-python/recipes-devtools/python/python3-pytest-forked_1.4.0.bb
+> index 34dd9c407e..e6ef84d05c 100644
+> --- a/meta-python/recipes-devtools/python/python3-pytest-forked_1.4.0.bb
+> +++ b/meta-python/recipes-devtools/python/python3-pytest-forked_1.4.0.bb
+> @@ -8,6 +8,7 @@ SRC_URI[sha256sum] = "8b67587c8f98cbbadfdd804539ed5455b6ed03802203485dd2f53c1422
+>  inherit pypi python_setuptools_build_meta
+>
+>  PEP517_PICOBUILD_OPTS = "--loose-depends"
 
-Backport patch from firefox bugzilla to fix compile error for qemuarm
-with some armv7ve tunes such as 'armv7vethf' and 'armv7vet-vfpv3d16':
+Do we need this option after picobuild is dropped. ?
 
-| /path/to/build/tmp/work/armv7vet2hf-vfp-poky-linux-gnueabi/mozjs-102/102.5.0-r0/build/js/src/jit/AtomicOperationsGenerated.h:240:17:
-  error: 'asm' operand has impossible constraints
-|  240 |                 asm volatile (
-|      |                 ^~~
-
-Ref:
-* https://bugzilla.mozilla.org/show_bug.cgi?id=1761665
-
-Signed-off-by: Kai Kang <kai.kang@windriver.com>
----
- .../0001-add-arm-to-list-of-mozinline.patch   | 25 +++++++++++++++++++
- .../mozjs/mozjs-102_102.5.0.bb                |  1 +
- 2 files changed, 26 insertions(+)
- create mode 100644 meta-oe/recipes-extended/mozjs/mozjs-102/0001-add-arm-to-list-of-mozinline.patch
-
-diff --git a/meta-oe/recipes-extended/mozjs/mozjs-102/0001-add-arm-to-list-of-mozinline.patch b/meta-oe/recipes-extended/mozjs/mozjs-102/0001-add-arm-to-list-of-mozinline.patch
-new file mode 100644
-index 000000000..02f5e5c7e
---- /dev/null
-+++ b/meta-oe/recipes-extended/mozjs/mozjs-102/0001-add-arm-to-list-of-mozinline.patch
-@@ -0,0 +1,25 @@
-+Backport patch from firefox bugzilla to fix compile error for qemuarm with
-+some armv7ve tunes such as 'armv7vethf' and 'armv7vet-vfpv3d16':
-+
-+| /path/to/build/tmp/work/armv7vet2hf-vfp-poky-linux-gnueabi/mozjs-102/102.5.0-r0/build/js/src/jit/AtomicOperationsGenerated.h:240:17:
-+  error: 'asm' operand has impossible constraints
-+|  240 |                 asm volatile (
-+|      |                 ^~~
-+
-+Upstream-Status: Submitted [https://bugzilla.mozilla.org/show_bug.cgi?id=1761665]
-+
-+Signed-off-by: Kai Kang <kai.kang@windriver.com>
-+
-+diff --git a/js/src/jit/GenerateAtomicOperations.py b/js/src/jit/GenerateAtomicOperations.py
-+index d8a38a0..65f91ab 100644
-+--- a/js/src/jit/GenerateAtomicOperations.py
-++++ b/js/src/jit/GenerateAtomicOperations.py
-+@@ -856,7 +856,7 @@ def generate_atomics_header(c_out):
-+ 
-+         # Work around a GCC issue on 32-bit x86 by adding MOZ_NEVER_INLINE.
-+         # See bug 1756347.
-+-        if is_gcc and cpu_arch == "x86":
-++        if is_gcc and cpu_arch in ("x86", "arm"):
-+             contents = contents.replace("INLINE_ATTR", "MOZ_NEVER_INLINE inline")
-+         else:
-+             contents = contents.replace("INLINE_ATTR", "inline")
-diff --git a/meta-oe/recipes-extended/mozjs/mozjs-102_102.5.0.bb b/meta-oe/recipes-extended/mozjs/mozjs-102_102.5.0.bb
-index d38ae10b8..5e884b6f6 100644
---- a/meta-oe/recipes-extended/mozjs/mozjs-102_102.5.0.bb
-+++ b/meta-oe/recipes-extended/mozjs/mozjs-102_102.5.0.bb
-@@ -15,6 +15,7 @@ SRC_URI = "https://archive.mozilla.org/pub/firefox/releases/${PV}esr/source/fire
-            file://0001-rewrite-cargo-host-linker-in-python3.patch  \
-            file://py-3.11.patch \
-            file://musl-disable-stackwalk.patch \
-+           file://0001-add-arm-to-list-of-mozinline.patch \
-            "
- SRC_URI[sha256sum] = "017dd44b1285913f477074802707a4c76ed1a28270ec5a327bbb76574cc057d8"
- 
--- 
-2.17.1
-
+> +PEP517_BUILD_OPTS = "--skip-dependency-check"
+>
+>  DEPENDS += "python3-setuptools-scm-native"
+>
+> --
+> 2.34.1
+>
+>
+> -=-=-=-=-=-=-=-=-=-=-=-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#100562): https://lists.openembedded.org/g/openembedded-devel/message/100562
+> Mute This Topic: https://lists.openembedded.org/mt/96244596/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [raj.khem@gmail.com]
+> -=-=-=-=-=-=-=-=-=-=-=-
+>
 
