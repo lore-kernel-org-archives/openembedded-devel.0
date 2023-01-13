@@ -1,136 +1,93 @@
-Return-Path: <leon.anavi@konsulko.com>
+Return-Path: <liezhi.yang@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AB6B7C54EBC
-	for <webhook@archiver.kernel.org>; Thu, 12 Jan 2023 14:56:18 +0000 (UTC)
-Received: from voyager.superhosting.bg (voyager.superhosting.bg [79.124.30.14])
- by mx.groups.io with SMTP id smtpd.web11.57259.1673535373379732462
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2EAA4C54EBD
+	for <webhook@archiver.kernel.org>; Fri, 13 Jan 2023 08:39:04 +0000 (UTC)
+Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
+ by mx.groups.io with SMTP id smtpd.web11.81617.1673599137826580965
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 12 Jan 2023 06:56:14 -0800
+ Fri, 13 Jan 2023 00:38:57 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@anavi.org header.s=default header.b=f0gGzrS3;
- spf=softfail (domain: konsulko.com, ip: 79.124.30.14, mailfrom: leon.anavi@konsulko.com)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=anavi.org;
-	s=default; h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:
-	Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:Content-Description:
-	Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
-	In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
-	List-Post:List-Owner:List-Archive;
-	bh=0aKsGl9tBEhG/Rk6r4iWKe3Ywfj1mogu2YyF1lxsrco=; b=f0gGzrS3fhVT28J6BVHKnL1OfZ
-	TQYBZR9NNqMmCXb8oBd0GxV79y/aWvPSgocAIdwJC1ASRcFEu4JsnD8u4AwL6DDAN6KsGB8X5QXia
-	l86v0RLn/AXkWgVx+15iRZh6/y90FeyUEbspgy1b2hstdvlVbiY+S4e/F/x+MOAcmzYqG5CPAVYZX
-	DUk0Q/6FdO3hWb3x/y7JL4PARf1w6Vv06D8P4LK7zzl967ANyRxUmVSmsgCHLqP+KIDtI7SP3qbq3
-	IjRo4ZJObCmdNOAUUDRBjmq5KLYCQDweE64tn/6BvPV32P3OV+ZKeFBdKwfWdax/gTLY9dxWvsmQB
-	Yfsz8wpw==;
-Received: from lan.nucleusys.com ([92.247.61.126]:39574 helo=tone.k.g)
-	by voyager.superhosting.bg with esmtpsa  (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
-	(Exim 4.95)
-	(envelope-from <leon.anavi@konsulko.com>)
-	id 1pFz07-0000Eh-IY;
-	Thu, 12 Jan 2023 16:56:12 +0200
-From: Leon Anavi <leon.anavi@konsulko.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCHv2] python3-astroid: Upgrade 2.12.13 -> 2.13.2
-Date: Thu, 12 Jan 2023 16:55:57 +0200
-Message-Id: <20230112145557.1780277-1-leon.anavi@konsulko.com>
-X-Mailer: git-send-email 2.30.2
+ dkim=pass header.i=@windriver.com header.s=pps06212021 header.b=gqljMLqB;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=0377797581=liezhi.yang@windriver.com)
+Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 30D8PQIT006397;
+	Fri, 13 Jan 2023 00:38:56 -0800
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com; h=from : to :
+ subject : date : message-id : mime-version : content-type; s=PPS06212021;
+ bh=2RB3KoGImmJK5Igoilg8EvX9f7CxOinZ4y/JOV7DHLU=;
+ b=gqljMLqB6f9Nu51YQKUoeQ1VOLlH3XmbDwtSym/30xz2DIEUM2rBFfi7BQdz59WBAYJB
+ AdKJr3Ez769+1JUJYF4H/bLqJt+1zgo+7zkD95lAqJwIoN6kOons5rGZ1kJZWR882CEE
+ yL4OHQ7p9ZqtB5AuAqww8Fw8YVQEVUUH+hBb4HFZKgfXZFWliARngE984NIoG0NooJvF
+ BJY+wFq9OxSyz2nurBoBlfF0XIQOwDOnfwNTKOh9wasRiSmlsDFsG2KPbeRSsZhNvKmK
+ 3DN7sFxTs4kxTkT9G29gQ2xNW52D5oIpxD1n4dlgfyaF/MNXStB5T6Di+KOBvrnpuYe/ CQ== 
+Received: from ala-exchng01.corp.ad.wrs.com (unknown-82-252.windriver.com [147.11.82.252])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3n1k5tje0e-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT);
+	Fri, 13 Jan 2023 00:38:56 -0800
+Received: from ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.16; Fri, 13 Jan 2023 00:38:55 -0800
+Received: from pek-lpg-core1.wrs.com (147.11.136.210) by
+ ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server id
+ 15.1.2507.17 via Frontend Transport; Fri, 13 Jan 2023 00:38:54 -0800
+From: Robert Yang <liezhi.yang@windriver.com>
+To: <akuster808@gmail.com>, <openembedded-devel@lists.openembedded.org>
+Subject: [meta-python][PATCH] tftpy: Add it for python tftp server and client
+Date: Fri, 13 Jan 2023 16:48:56 +0800
+Message-ID: <20230113084856.37771-1-liezhi.yang@windriver.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
-X-AntiAbuse: Primary Hostname - voyager.superhosting.bg
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - konsulko.com
-X-Get-Message-Sender-Via: voyager.superhosting.bg: authenticated_id: leon@anavi.org
-X-Authenticated-Sender: voyager.superhosting.bg: leon@anavi.org
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
+Content-Type: text/plain
+X-Proofpoint-GUID: aCdgh0suljFnL0pneDMSfW_ez7Coj7qi
+X-Proofpoint-ORIG-GUID: aCdgh0suljFnL0pneDMSfW_ez7Coj7qi
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.219,Aquarius:18.0.923,Hydra:6.0.545,FMLib:17.11.122.1
+ definitions=2023-01-13_03,2023-01-12_01,2022-06-22_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 impostorscore=0
+ malwarescore=0 mlxscore=0 clxscore=1011 adultscore=0 priorityscore=1501
+ lowpriorityscore=0 spamscore=0 bulkscore=0 mlxlogscore=999 phishscore=0
+ suspectscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.12.0-2212070000 definitions=main-2301130060
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 12 Jan 2023 14:56:18 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100560
+ <openembedded-devel@lists.openembedded.org>; Fri, 13 Jan 2023 08:39:04 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100561
 
-Upgrade to release 2.13.2:
+Tftpy is a TFTP library for the Python programming language. It includes client
+and server classes, with sample implementations. Hooks are included for easy
+inclusion in a UI for populating progress indicators. It supports RFCs 1350,
+2347, 2348 and the tsize option from RFC 2349.
 
-- Removed version conditions on typing_extensions dependency.
-- Removed typing_extensions from our tests requirements as it was
-  preventing issues to appear in our continuous integration.
-
-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
 ---
- .../0001-pyproject.toml-Replace-with.patch    | 27 +++++++++++++++++++
- ...d_2.12.13.bb => python3-astroid_2.13.2.bb} | 13 ++++++---
- 2 files changed, 37 insertions(+), 3 deletions(-)
- create mode 100644 meta-python/recipes-devtools/python/python3-astroid/0001-pyproject.toml-Replace-with.patch
- rename meta-python/recipes-devtools/python/{python3-astroid_2.12.13.bb => python3-astroid_2.13.2.bb} (71%)
+ meta-python/recipes-devtools/python/tftpy_0.8.2.bb | 13 +++++++++++++
+ 1 file changed, 13 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/tftpy_0.8.2.bb
 
-diff --git a/meta-python/recipes-devtools/python/python3-astroid/0001-pyproject.toml-Replace-with.patch b/meta-python/recipes-devtools/python/python3-astroid/0001-pyproject.toml-Replace-with.patch
+diff --git a/meta-python/recipes-devtools/python/tftpy_0.8.2.bb b/meta-python/recipes-devtools/python/tftpy_0.8.2.bb
 new file mode 100644
-index 000000000..3e1a17be9
+index 000000000..c1b3234f7
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-astroid/0001-pyproject.toml-Replace-with.patch
-@@ -0,0 +1,27 @@
-+From 517f361ba4a6ae430acfe3b83986d32b4f811b58 Mon Sep 17 00:00:00 2001
-+From: Leon Anavi <leon.anavi@konsulko.com>
-+Date: Wed, 11 Jan 2023 13:56:24 +0200
-+Subject: [PATCH] pyproject.toml: Replace ~= with >=
++++ b/meta-python/recipes-devtools/python/tftpy_0.8.2.bb
+@@ -0,0 +1,13 @@
++SUMMARY = "Tftpy is a TFTP library for the Python programming language. It includes client and server classes, with sample implementations."
++DESCRIPTION = "Tftpy is a TFTP library for the Python programming language. It \
++includes client and server classes, with sample implementations. Hooks are \
++included for easy inclusion in a UI for populating progress indicators. It \
++supports RFCs 1350, 2347, 2348 and the tsize option from RFC 2349."
 +
-+Replace ~= with >= to avoid errors if the version is not exactly
-+the same.
++HOMEPAGE = "https://github.com/msoulier/tftpy"
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=22770e72ae03c61f5bcc4e333b61368d"
 +
-+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
-+---
-+ pyproject.toml | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
++SRC_URI[sha256sum] = "e1d1a680efd88eba176b351175844253067392a9b0f8b81588e3ff2b9e7bbb5b"
 +
-+diff --git a/pyproject.toml b/pyproject.toml
-+index 537bca9a..a01e0d45 100644
-+--- a/pyproject.toml
-++++ b/pyproject.toml
-+@@ -1,5 +1,5 @@
-+ [build-system]
-+-requires = ["setuptools~=62.6", "wheel~=0.37.1"]
-++requires = ["setuptools>=62.6", "wheel>=0.37.1"]
-+ build-backend = "setuptools.build_meta"
-+ 
-+ [project]
-+-- 
-+2.30.2
-+
-diff --git a/meta-python/recipes-devtools/python/python3-astroid_2.12.13.bb b/meta-python/recipes-devtools/python/python3-astroid_2.13.2.bb
-similarity index 71%
-rename from meta-python/recipes-devtools/python/python3-astroid_2.12.13.bb
-rename to meta-python/recipes-devtools/python/python3-astroid_2.13.2.bb
-index ca87ff013..fa22080d3 100644
---- a/meta-python/recipes-devtools/python/python3-astroid_2.12.13.bb
-+++ b/meta-python/recipes-devtools/python/python3-astroid_2.13.2.bb
-@@ -4,11 +4,18 @@ SECTION = "devel/python"
- LICENSE = "LGPL-2.1-only"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=a70cf540abf41acb644ac3b621b2fad1"
- 
--SRC_URI[sha256sum] = "1493fe8bd3dfd73dc35bd53c9d5b6e49ead98497c47b2307662556a5692d29d7"
-+SRC_URI[sha256sum] = "3bc7834720e1a24ca797fd785d77efb14f7a28ee8e635ef040b6e2d80ccb3303"
- 
--inherit pypi setuptools3
-+SRC_URI += " \
-+    file://0001-pyproject.toml-Replace-with.patch \
-+"
-+
-+inherit pypi python_setuptools_build_meta
- 
--DEPENDS += "${PYTHON_PN}-pytest-runner-native"
-+DEPENDS += "\
-+    ${PYTHON_PN}-pytest-runner-native \
-+    ${PYTHON_PN}-wheel-native \
-+"
- 
- PACKAGES =+ "${PN}-tests"
- 
++inherit pypi setuptools3
 -- 
-2.30.2
+2.17.1
 
 
