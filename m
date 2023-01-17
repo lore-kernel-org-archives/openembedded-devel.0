@@ -1,164 +1,106 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 58C29C63797
-	for <webhook@archiver.kernel.org>; Tue, 17 Jan 2023 05:22:52 +0000 (UTC)
-Received: from mail-pj1-f51.google.com (mail-pj1-f51.google.com [209.85.216.51])
- by mx.groups.io with SMTP id smtpd.web10.189986.1673932965972207190
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E9644C63797
+	for <webhook@archiver.kernel.org>; Tue, 17 Jan 2023 07:14:02 +0000 (UTC)
+Received: from mail1.bemta37.messagelabs.com (mail1.bemta37.messagelabs.com [85.158.142.112])
+ by mx.groups.io with SMTP id smtpd.web11.191217.1673939634574582891
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 16 Jan 2023 21:22:46 -0800
+ Mon, 16 Jan 2023 23:13:55 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=W53Ljns2;
- spf=pass (domain: gmail.com, ip: 209.85.216.51, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f51.google.com with SMTP id a14-20020a17090a70ce00b00229a2f73c56so906409pjm.3
-        for <openembedded-devel@lists.openembedded.org>; Mon, 16 Jan 2023 21:22:45 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=HCr6/biAeMqRiah1dKOJK3CpL82IjYPku3p+5XObmFE=;
-        b=W53Ljns2Wo3JfB/HISxpZr2dm+aWZvNm56HhAcuUXxKQxdgMnFs7MYOkZvq1X0AEyK
-         QPVDbSsAjVv2lul1v94lfK8/PbcU6IH6lbe/XKtGM5NXAD6BpFelmTxRh1GUY5+9kxrf
-         OVCT6zuMsSw04aKKgB9C0oJKw+qVy4NMPMSRRcGq2l1AeCTH62xrQvmaV1IYz/P2b3tR
-         HcyjmbrLQcXCGNiAulJgDatg/IjNlbaxOJlWa+t6DVnfFmmB1IYirQEM20Wc8nuTsuAp
-         7bgPMj3LEDlsbA2UfCL8kAPiKWCu7tKzCOu3hODm9u0wO6ExrwL07Qnn2NADP+Y+AA0p
-         MuFg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=HCr6/biAeMqRiah1dKOJK3CpL82IjYPku3p+5XObmFE=;
-        b=GpcX3WNKobe1e500wsj69psVD6Kkv+a4U8IjgtXKcMlMrKy/M/gI1QiPFzf0kI1blA
-         K4nn/mnzYLw6bVTFEwLN/ap2b4QamaROhr8FJY2XWH/dUjaGEmI3w9mlUExBHX2LazWi
-         q9HB7SpKebU1c6LEPZftefnfPK8I23tF6kKtRKmyU3HGBhldKe+BBjFniesjD2omAoJW
-         bRZ0DUENwGjZhJmDpOizOfmLdIu59NSZxt7bTvm3zaLuu2OdI4tcfbH7BIBjF3njxFbr
-         FzcRkvP7Uiehb8LTJkriP8l7L2z6j8/66Qy/b8RvVusXY9VJpIdpHLx+nKoBzkxsCt2W
-         0y4w==
-X-Gm-Message-State: AFqh2krRGzEt12yv0PWUGZ1Mpwd0/n/8Ue8GzD92/CXrw+B/vHmgiaJU
-	dfdkPr/NOTHCDsqisP0k9MzSkiJVk1ShNw==
-X-Google-Smtp-Source: AMrXdXu+HDs577/x6Am79CZSEzG7LOCO2ppIZmeoX6d6il1037X825a6WA1VIzthFyco5tNzN8vrgg==
-X-Received: by 2002:a05:6a20:6f06:b0:b5:9fd7:bb64 with SMTP id gt6-20020a056a206f0600b000b59fd7bb64mr939852pzb.39.1673932965105;
-        Mon, 16 Jan 2023 21:22:45 -0800 (PST)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9181:1cf0::b940])
-        by smtp.gmail.com with ESMTPSA id c22-20020a6566d6000000b0045dc85c4a5fsm12682692pgw.44.2023.01.16.21.22.44
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 16 Jan 2023 21:22:44 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-python][PATCH 7/7] python3-matplotlib: Fix build with c++17
-Date: Mon, 16 Jan 2023 21:22:37 -0800
-Message-Id: <20230117052237.3117521-7-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.39.0
-In-Reply-To: <20230117052237.3117521-1-raj.khem@gmail.com>
-References: <20230117052237.3117521-1-raj.khem@gmail.com>
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=LjMopea3;
+ spf=pass (domain: fujitsu.com, ip: 85.158.142.112, mailfrom: wangmy@fujitsu.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
+	s=170520fj; t=1673939632; i=@fujitsu.com;
+	bh=ozeAK5J9b2UfFffApmozjqgyGHgJDMqOlPcnj1z/Mzk=;
+	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
+	b=LjMopea3MWiyQEnJBAeajIE16+w5t5N9qmeOj5OPGnLT7hxRlM4pgQpuqNdVjA7fP
+	 YH+OPm2PGP+yUL/nxWrn+jh+ibRbJhJiWjz8jFdhP2KH75LW5ef02o25+l/s+MwaMG
+	 zGqPNMJN7SgGET0D/fkDVFD6bHilj5764BOg/kkqBu8A4cwmLkzneVRMN+kOo/TtOD
+	 x/KEqwp+vdSQHWEUvwQcdYn88j0K50AWbVIMO+/cy7ZP4IZEQdNHmSLfqWvuzLS+IK
+	 s3x98EaSLNF7CuFsMvkilUR1KxH9uSIGIHtf4tIxc8W2ZX43YfpkTeL3mqdxeFy102
+	 lgOCKKUNPITIw==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrNIsWRWlGSWpSXmKPExsViZ8OxWXe917F
+  kg53TdS0uHl7K7MDocW7jCsYAxijWzLyk/IoE1owDfz8xFVzjqNj7so+tgfEvexcjF4eQwANG
+  icnP9kI5V5gklv9+ywTh7GWUWLNjHpDDycEmICVx4/5/NhBbREBfYunsPcwgNrOAisSL3z3sI
+  LawgL/E8r57YDaLgKrEupc3WEBsXgEnifVzmhlBbAkBBYkpD98zQ8QFJU7OfMICMUdC4uCLF8
+  wQNYoSsy83s0DYlRKtH35B2WoSV89tYp7AyD8LSfssJO0LGJlWMZoVpxaVpRbpGuolFWWmZ5T
+  kJmbm6CVW6SbqpZbq5uUXlWQApRLLi/VSi4v1iitzk3NS9PJSSzYxAsMxpTiZfQfjmyV/9A4x
+  SnIwKYnynjQ9lizEl5SfUpmRWJwRX1Sak1p8iFGGg0NJgtfLHSgnWJSanlqRlpkDjA2YtAQHj
+  5IIb7glUJq3uCAxtzgzHSJ1ilGX4+qVK3uZhVjy8vNSpcR5V3sCFQmAFGWU5sGNgMXpJUZZKW
+  FeRgYGBiGegtSi3MwSVPlXjOIcjErCvE88gKbwZOaVwG16BXQEE9ARHiVHQY4oSURISTUwKbn
+  M5+AXZoz6VpfNzrFP6d3eVU4MVzfGicikbF4dLb3R8dHH5GNL3OaV7FCwdL7Cayvnf/Ft8InN
+  vVMbAyzcqwVXZjVezXpSt+LC3anyN5L5sh+u/L8qtT9gu/QH4fNysUmfzE9opV6sOiEivVv16
+  pruG87fJ1cZdDhND+Jj3TOBc3V/gmznWv4ZX99zLgs/uWxOZvfCvg/SOzf1qQXflGCdqissIs
+  GwOXUfu9qhp5wr3s+0+L6Fx9FOL74qu0KKT/yzeo6Vc1lBcGySJafhxWTnou66xTcWuf8RN5y
+  5KunzlWqec84XE5n4a19L79wf6b1UqPP67bRJu7feymW78tdcpfqalluICvvDB+eVWIozEg21
+  mIuKEwGkBH13TgMAAA==
+X-Env-Sender: wangmy@fujitsu.com
+X-Msg-Ref: server-5.tower-745.messagelabs.com!1673939631!378450!1
+X-Originating-IP: [62.60.8.179]
+X-SYMC-ESS-Client-Auth: outbound-route-from=pass
+X-StarScan-Received: 
+X-StarScan-Version: 9.102.1; banners=-,-,-
+X-VirusChecked: Checked
+Received: (qmail 10790 invoked from network); 17 Jan 2023 07:13:51 -0000
+Received: from unknown (HELO n03ukasimr04.n03.fujitsu.local) (62.60.8.179)
+  by server-5.tower-745.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 17 Jan 2023 07:13:51 -0000
+Received: from n03ukasimr04.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTP id 3256A7C
+	for <openembedded-devel@lists.openembedded.org>; Tue, 17 Jan 2023 07:13:51 +0000 (GMT)
+Received: from R01UKEXCASM223.r01.fujitsu.local (R01UKEXCASM223 [10.182.185.121])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTPS id 2646173
+	for <openembedded-devel@lists.openembedded.org>; Tue, 17 Jan 2023 07:13:51 +0000 (GMT)
+Received: from localhost.localdomain (10.167.225.33) by
+ R01UKEXCASM223.r01.fujitsu.local (10.182.185.121) with Microsoft SMTP Server
+ (TLS) id 15.0.1497.42; Tue, 17 Jan 2023 07:13:49 +0000
+From: <wangmy@fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: Wang Mingyu <wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH] ctags: upgrade 6.0.20230108.0 -> 6.0.20230115.0
+Date: Tue, 17 Jan 2023 15:13:33 +0800
+Message-ID: <1673939617-20032-1-git-send-email-wangmy@fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.167.225.33]
+X-ClientProxiedBy: G08CNEXCHPEKD07.g08.fujitsu.local (10.167.33.80) To
+ R01UKEXCASM223.r01.fujitsu.local (10.182.185.121)
+X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 17 Jan 2023 05:22:52 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100593
+ <openembedded-devel@lists.openembedded.org>; Tue, 17 Jan 2023 07:14:02 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100594
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+From: Wang Mingyu <wangmy@fujitsu.com>
+
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- ...mberGenerator-class-included-random-.patch | 59 +++++++++++++++++++
- .../python/python3-matplotlib_3.6.3.bb        |  5 +-
- 2 files changed, 63 insertions(+), 1 deletion(-)
- create mode 100644 meta-python/recipes-devtools/python/python3-matplotlib/0001-removed-RandomNumberGenerator-class-included-random-.patch
+ .../ctags/{ctags_6.0.20230108.0.bb => ctags_6.0.20230115.0.bb}  | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-devtools/ctags/{ctags_6.0.20230108.0.bb => ctags_6.0.20230115.0.bb} (95%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-matplotlib/0001-removed-RandomNumberGenerator-class-included-random-.patch b/meta-python/recipes-devtools/python/python3-matplotlib/0001-removed-RandomNumberGenerator-class-included-random-.patch
-new file mode 100644
-index 0000000000..1f9b8cdeaf
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-matplotlib/0001-removed-RandomNumberGenerator-class-included-random-.patch
-@@ -0,0 +1,59 @@
-+From 3eb9987b02cc10b93e09219ddc86aa6be5f10177 Mon Sep 17 00:00:00 2001
-+From: tybeller <ty.c.beller@gmail.com>
-+Date: Fri, 30 Sep 2022 16:13:41 -0400
-+Subject: [PATCH] removed RandomNumberGenerator class, included <random>,
-+ replaced random_shuffle with shuffle and used mersenne twister engine to
-+ generate uniform random bit generator for the shuffle.
-+
-+Upstream-Status: Backport [https://github.com/matplotlib/matplotlib/commit/601d92a8850]
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ src/tri/_tri.cpp | 20 ++++----------------
-+ 1 file changed, 4 insertions(+), 16 deletions(-)
-+
-+diff --git a/src/tri/_tri.cpp b/src/tri/_tri.cpp
-+index b7a87783de..6e639eea44 100644
-+--- a/src/tri/_tri.cpp
-++++ b/src/tri/_tri.cpp
-+@@ -12,6 +12,7 @@
-+ 
-+ #include <algorithm>
-+ #include <set>
-++#include <random>
-+ 
-+ 
-+ TriEdge::TriEdge()
-+@@ -1465,8 +1466,8 @@ TrapezoidMapTriFinder::initialize()
-+     _tree->assert_valid(false);
-+ 
-+     // Randomly shuffle all edges other than first 2.
-+-    RandomNumberGenerator rng(1234);
-+-    std::random_shuffle(_edges.begin()+2, _edges.end(), rng);
-++    std::mt19937 rng(1234);
-++    std::shuffle(_edges.begin()+2, _edges.end(), rng);
-+ 
-+     // Add edges, one at a time, to tree.
-+     size_t nedges = _edges.size();
-+@@ -2055,17 +2056,4 @@ TrapezoidMapTriFinder::Trapezoid::set_upper_right(Trapezoid* upper_right_)
-+     upper_right = upper_right_;
-+     if (upper_right != 0)
-+         upper_right->upper_left = this;
-+-}
-+-
-+-
-+-
-+-RandomNumberGenerator::RandomNumberGenerator(unsigned long seed)
-+-    : _m(21870), _a(1291), _c(4621), _seed(seed % _m)
-+-{}
-+-
-+-unsigned long
-+-RandomNumberGenerator::operator()(unsigned long max_value)
-+-{
-+-    _seed = (_seed*_a + _c) % _m;
-+-    return (_seed*max_value) / _m;
-+-}
-++}
-+\ No newline at end of file
-+-- 
-+2.39.0
-+
-diff --git a/meta-python/recipes-devtools/python/python3-matplotlib_3.6.3.bb b/meta-python/recipes-devtools/python/python3-matplotlib_3.6.3.bb
-index 809f9425ba..fa0a78d6a9 100644
---- a/meta-python/recipes-devtools/python/python3-matplotlib_3.6.3.bb
-+++ b/meta-python/recipes-devtools/python/python3-matplotlib_3.6.3.bb
-@@ -27,7 +27,8 @@ inherit pypi setuptools3 pkgconfig
+diff --git a/meta-oe/recipes-devtools/ctags/ctags_6.0.20230108.0.bb b/meta-oe/recipes-devtools/ctags/ctags_6.0.20230115.0.bb
+similarity index 95%
+rename from meta-oe/recipes-devtools/ctags/ctags_6.0.20230108.0.bb
+rename to meta-oe/recipes-devtools/ctags/ctags_6.0.20230115.0.bb
+index 60579ede0..adae87664 100644
+--- a/meta-oe/recipes-devtools/ctags/ctags_6.0.20230108.0.bb
++++ b/meta-oe/recipes-devtools/ctags/ctags_6.0.20230115.0.bb
+@@ -14,7 +14,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3"
  
- # Stop the component from attempting to download when it detects a missing
- # dependency
--SRC_URI += "file://matplotlib-disable-download.patch"
-+SRC_URI += "file://matplotlib-disable-download.patch \
-+            file://0001-removed-RandomNumberGenerator-class-included-random-.patch"
+ inherit autotools-brokensep pkgconfig manpages
  
- # This python module requires a full copy of freetype-2.6.1
- SRC_URI += "https://downloads.sourceforge.net/project/freetype/freetype2/2.6.1/freetype-2.6.1.tar.gz;name=freetype;subdir=matplotlib-${PV}/build"
-@@ -40,6 +41,8 @@ SRC_URI[qhull.sha256sum] = "b5c2d7eb833278881b952c8a52d20179eab87766b00b86500046
- # LTO with clang needs lld
- LDFLAGS:append:toolchain-clang = " -fuse-ld=lld"
- LDFLAGS:remove:toolchain-clang:mips = "-fuse-ld=lld"
-+LDFLAGS:remove:toolchain-clang:riscv64 = "-fuse-ld=lld"
-+LDFLAGS:remove:toolchain-clang:riscv32 = "-fuse-ld=lld"
- RDEPENDS:${PN} = "\
-     freetype \
-     libpng \
+-SRCREV = "dfdabb5ba13b3db2c278a732b4cc1d51f1d9bcf8"
++SRCREV = "c39ff7a753a286d9bd7460a1a1e092746d592fbd"
+ SRC_URI = "git://github.com/universal-ctags/ctags;branch=master;protocol=https"
+ 
+ S = "${WORKDIR}/git"
 -- 
-2.39.0
+2.25.1
 
 
