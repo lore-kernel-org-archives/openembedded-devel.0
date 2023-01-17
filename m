@@ -1,220 +1,339 @@
-Return-Path: <akuster808@gmail.com>
+Return-Path: <kai.kang@eng.windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 30A1EC46467
-	for <webhook@archiver.kernel.org>; Mon, 16 Jan 2023 14:26:48 +0000 (UTC)
-Received: from mail-vs1-f48.google.com (mail-vs1-f48.google.com [209.85.217.48])
- by mx.groups.io with SMTP id smtpd.web11.167670.1673879201416780525
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1ED7BC6379F
+	for <webhook@archiver.kernel.org>; Tue, 17 Jan 2023 04:22:32 +0000 (UTC)
+Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
+ by mx.groups.io with SMTP id smtpd.web11.189519.1673929347981232644
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 16 Jan 2023 06:26:41 -0800
+ Mon, 16 Jan 2023 20:22:28 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=aN5Bf/CO;
- spf=pass (domain: gmail.com, ip: 209.85.217.48, mailfrom: akuster808@gmail.com)
-Received: by mail-vs1-f48.google.com with SMTP id n190so25283872vsc.11
-        for <openembedded-devel@lists.openembedded.org>; Mon, 16 Jan 2023 06:26:41 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=PhawVpiRn3jcROpBTr3PrwNhVn0UAIg6I74sj6mF7PI=;
-        b=aN5Bf/CO5lrymg7sdKBIKZ+Qq16IS4JaIkrlbGywW3CZAgz4bOdiWGfn8bfzm5WA19
-         l79YH3lDRl2Cp2VlYGQBqv534Fdp8K7XYxQl3Acup4YL7VjfBGRG0kszuCZKOyVFnc73
-         /hi6x2E/0fPfvOY+fC408BRvi0GwIZSmO3UeEOMGm0JEV2wqMVhzORxcyXpqlfTvczfM
-         OKbgIVDEyV4HBW2XeZ+6+U4qMi8W/RPjwaCmnOeh8pvKcrAsWig+szjo//ET8LvqdnW5
-         BTuxVjTEL6lfS57tN59cIoGfpO5V9CA9Y4z3mwqJxfyrX7732pBDQk8tud5HIyOUWJYb
-         FMFg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=PhawVpiRn3jcROpBTr3PrwNhVn0UAIg6I74sj6mF7PI=;
-        b=3CPpWvi/8WFAbibG69Huyff/teifkezWNGgdVksiD+um9sKL35T811IKAq4M6bElGO
-         wjAk+urt8IUj6JuCd/asT2HUvFbol/IT6PHpmO+QtrWfKbVeXBE4LOKAzZmFSKz2tN0S
-         sXmeRj+D5cjM4dtwVfYFpL7nLcgO/4ModPBKl+BzEDtnNfiB00/nPdDU7+gIjbinyNYr
-         D8tf7o7FjZQJET0TvjKB6/t/v+oYvf06pH+XEvU4blA9c0RjzyfPjhODcwGrQ8avQPsj
-         pBOlXWtlbY5LT3fVPiUHPDMoIFOzkjBTYiWdVUi+BEpCbcvTCrrZ6UocXHDDIayExr36
-         1r4A==
-X-Gm-Message-State: AFqh2krAE41wi8Sv2pz4I2wuKh8Y9sqnjMZF9ICPLRhAxzdK5qRNnzEI
-	xeXUwSbLLaH9ANtfM3taa9s=
-X-Google-Smtp-Source: AMrXdXt5iHr6JabpOPXzYwAE6fFBVOhiiONHZaWZHn/xbzugIAt2hcJcjXj/4M0gc5PRGrpPHB9SrQ==
-X-Received: by 2002:a67:ead5:0:b0:3d3:f105:7f57 with SMTP id s21-20020a67ead5000000b003d3f1057f57mr175755vso.16.1673879200258;
-        Mon, 16 Jan 2023 06:26:40 -0800 (PST)
-Received: from ?IPV6:2600:1700:9190:ba10:2d5:b305:eab2:30c1? ([2600:1700:9190:ba10:2d5:b305:eab2:30c1])
-        by smtp.gmail.com with ESMTPSA id bj3-20020a05620a190300b00705975d0054sm18363407qkb.19.2023.01.16.06.26.39
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 16 Jan 2023 06:26:39 -0800 (PST)
-Message-ID: <5ca8dd73-289c-fed1-eb44-51d03c68a968@gmail.com>
-Date: Mon, 16 Jan 2023 09:26:38 -0500
+ dkim=fail reason="body hash did not verify" header.i=@windriver.com header.s=pps06212021 header.b=m/tMPj+a;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=03812cce2c=kai.kang@windriver.com)
+Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 30H4KYSX032041
+	for <openembedded-devel@lists.openembedded.org>; Mon, 16 Jan 2023 20:22:27 -0800
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com; h=from : to :
+ subject : date : message-id : mime-version : content-type :
+ content-transfer-encoding; s=PPS06212021;
+ bh=mHH6pdSokX8a72SCH5dZquLJmafc7gJk+vUVBPOchG0=;
+ b=m/tMPj+aOXllQmXESIjumayTwgbTPrj8WaCgW9l+xYl2bVn1IzQt6axMigBH0kaTyxll
+ BpXwVzWVjbQbj7ZIIFziSk42kg7AyqCC5Y6yMfFI5aoGKbSlx50g0uJSx2awpv20c5eU
+ tKDsrgU2SpAwOMRlNcUQMSJfRzREYZ4VYhzd8dKXsAasJ0X59aG60Lhk/M1S4+5Hu5/T
+ bX9paw/p24GACaXDf2m7EOIUVc4R+BU0kCq++pIU5UjgFcl7JfEXsG74jBBEzo1Qeuti
+ PtKzMi97qmimsoIsl7Kpv+QPazxKYraqjw6qz9oRrirE64064KrXNSKPK6bUA7X4C09u Kg== 
+Received: from ala-exchng01.corp.ad.wrs.com (unknown-82-252.windriver.com [147.11.82.252])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3n3rj6tcp6-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Mon, 16 Jan 2023 20:22:27 -0800
+Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.16; Mon, 16 Jan 2023 20:22:26 -0800
+Received: from pek-lpg-core3.wrs.com (128.224.153.232) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
+ 15.1.2507.16 via Frontend Transport; Mon, 16 Jan 2023 20:22:26 -0800
+From: <kai.kang@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [meta-networking][PATCH] crda: 3.18 -> 4.15
+Date: Tue, 17 Jan 2023 12:22:23 +0800
+Message-ID: <20230117042223.29411-1-kai.kang@windriver.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.4.2
-Subject: Re: [oe] gRPC
-To: "Valek, Andrej" <andrej.valek@siemens.com>,
- "raj.khem@gmail.com" <raj.khem@gmail.com>,
- "steve@sakoman.com" <steve@sakoman.com>,
- "randy.macleod@windriver.com" <randy.macleod@windriver.com>
-Cc: "openembedded-devel@lists.openembedded.org"
- <openembedded-devel@lists.openembedded.org>
-References: <7b00f80d33fc4d77eafcddb8ba46b992d713df25.camel@siemens.com>
- <CAOSpxdapG_z_H0DrcRc=N6AczcPykLLBd+zfHbLCqTFGvOC0Lw@mail.gmail.com>
- <CAMKF1so06NJLbWAY-XnCQSNoksGOHZ=3XhT+Mbqzz7tJ6FdA_Q@mail.gmail.com>
- <39bd49a5-910a-6f48-0bb9-d59424b2bb46@windriver.com>
- <355cb47d9174b4186a381fa04c957b6a4e46eb90.camel@siemens.com>
-Content-Language: en-US
-From: akuster808 <akuster808@gmail.com>
-In-Reply-To: <355cb47d9174b4186a381fa04c957b6a4e46eb90.camel@siemens.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="UTF-8"
+X-Proofpoint-GUID: rzU520wVz5ELzTavJPFDX4lw4xTvEQz4
+X-Proofpoint-ORIG-GUID: rzU520wVz5ELzTavJPFDX4lw4xTvEQz4
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.219,Aquarius:18.0.923,Hydra:6.0.562,FMLib:17.11.122.1
+ definitions=2023-01-17_01,2023-01-13_02,2022-06-22_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 priorityscore=1501
+ lowpriorityscore=0 mlxscore=0 malwarescore=0 adultscore=0 spamscore=0
+ impostorscore=0 clxscore=1015 mlxlogscore=999 suspectscore=0 phishscore=0
+ bulkscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.12.0-2212070000 definitions=main-2301170033
+Content-Transfer-Encoding: quoted-printable
+X-MIME-Autoconverted: from 8bit to quoted-printable by mx0a-0064b401.pphosted.com id 30H4KYSX032041
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 16 Jan 2023 14:26:48 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100585
+ <openembedded-devel@lists.openembedded.org>; Tue, 17 Jan 2023 04:22:32 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100586
 
+From: Kai Kang <kai.kang@windriver.com>
 
+Update crda from 3.18 to 4.15:
 
-On 1/16/23 6:53 AM, Valek, Andrej wrote:
-> Hi all,
->
-> The reason, why I'm asking especially like this, is that the problem is
-> inside the bundled zlib library. The "official" solution for fixing
-> (https://nvd.nist.gov/vuln/detail/CVE-2022-37434) is to update the
-> bundled zlib (https://github.com/grpc/grpc/pull/31595) library, which
-> shouldn't be done with easy patch, I guess.
->
-> So how to proceed with that?
+* use git repo in SRC_URI that no tar archive found for recent releases
+* drop fix-gcc-6-unused-variables.patch and make.patch
+* rebase patches
 
-The gRPC folks did backport the fix to 1.46.6.
-The zlib version in 1.45.2 appears to be 1.2.11 and the version updated 
-to fix the CVE is 1.2.13. But that would then be an untested configuration.
+Signed-off-by: Kai Kang <kai.kang@windriver.com>
+---
+ ...-Makefile-respect-LDFLAGS-for-libreg.patch | 12 ++++++---
+ .../crda/crda/crda-4.14-python-3.patch        | 11 +++++++-
+ ...o-not-run-ldconfig-if-destdir-is-set.patch | 13 ++++++++--
+ .../crda/fix-gcc-6-unused-variables.patch     | 11 --------
+ ...-linking-of-libraries-used-by-reglib.patch |  8 +++---
+ .../recipes-connectivity/crda/crda/make.patch | 25 -------------------
+ .../crda/{crda_3.18.bb =3D> crda_4.15.bb}       |  9 +++----
+ 7 files changed, 37 insertions(+), 52 deletions(-)
+ delete mode 100644 meta-networking/dynamic-layers/meta-python/recipes-co=
+nnectivity/crda/crda/fix-gcc-6-unused-variables.patch
+ delete mode 100644 meta-networking/dynamic-layers/meta-python/recipes-co=
+nnectivity/crda/crda/make.patch
+ rename meta-networking/dynamic-layers/meta-python/recipes-connectivity/c=
+rda/{crda_3.18.bb =3D> crda_4.15.bb} (80%)
 
-Giving this a bit more thought, I think the cleanest path forward it to 
-update to 1.46.6. It appears to have 257 changes and seems to be still 
-active.
-
-- armin
->
-> Regards,
-> Andrej
->
-> On Wed, 2023-01-11 at 21:24 -0500, Randy MacLeod via
-> lists.openembedded.org wrote:
->> On 2023-01-11 13:27, Khem Raj via lists.openembedded.org wrote:
->>> On Wed, Jan 11, 2023 at 10:07 AM Steve Sakoman <steve@sakoman.com>
->>> wrote:
->>>> Hi Andrej,
->>>>
->>>> I'm the maintainer for openembedded-core, and gRPC is in
->>>> meta-openmebedded. So this isn't my call to make.
->>>>
->>>> However we typically only take version bumps if they are
->>>> security/bug
->>>> fix only releases.  So if this is the case, you can submit a patch.6
->>>> But please be sure to include either release notes or change log so
->>>> the meta-openembedded maintainer can verify that it is suitable for
->>>> a
->>>> stable release.
->>> Thanks Steve, policy is same for all OE layers. I will wait for Armin
->>> ( Release Maintainer for meta-openembedded )
->>> take the final call.
->>
->> I vote for no update based on a quickish look.
->>
->> Armin,
->>
->> To save you some review, see the data below that indicates that there's
->> an appartly stable release maintenance scheme and
->> 1.50.x is > 1200 commits ahead and *likely* breaks ABI.
->>
->> Andrei,
->>
->> Is your CVE covered by any fixes on the stable release?
->> If not, best to get it merged upstream in addition to backporting
->> the fix as a patch in meta-oe.
->>
->> ../Randy
->>
->>
->> $ git clone https://github.com/grpc/grpc.git
->> $ cd gprc
->>
->> $ git log --oneline v1.45.2..v1.50.1 | wc -l
->> 1259
->>
->> $ git diff v1.45.2..v1.50.1 |  diffstat | tail -1
->>    3763 files changed, 198007 insertions(+), 213762 deletions(-)
->>
->> $ git checkout v1.45.x
->> ...
->>
->> # oh, I forgot to show the stable branches:
->> $ git branch -a | rg v1.[45][0-9]
->> * v1.45.x
->>     remotes/origin/v1.40.x
->>     remotes/origin/v1.41.x
->>     remotes/origin/v1.42.x
->>     remotes/origin/v1.43.x
->>     remotes/origin/v1.44.x
->>     remotes/origin/v1.45.x
->>     remotes/origin/v1.46.x
->>     remotes/origin/v1.47.x
->>     remotes/origin/v1.48.x
->>     remotes/origin/v1.49.x
->>     remotes/origin/v1.50.x
->>     remotes/origin/v1.51.x
->>
->>
->> # What's not included in our 1.45.2?
->> $ git log --oneline v1.45.2...
->> 4af1fe173d (HEAD -> v1.45.x, origin/v1.45.x) xDS interop: resume
->> circuit_breaking test (#32038) (#32056)
->> 60863b633e [CPP] xDS interop GCE framework: pin grpcio-tools to use
->> protobuf 3.x (#31214) (#31221)
->> 0a1c8d3c5c xDS interop GCE framework: pin grpcio-tools to use protobuf
->> 3.x (#31191) (#31201)
->> 129dd25c33 xDS interop: buildscripts: fix run_test return status
->> (#30768) (#30879)
->> (#30735) (#30860)
->> d19a439577 xDS interop: Python LB tests build and use the python server
->> (#30637) (#30658)
->> (#30520) (#30532)
->> 12df388e8b xds interop: choose correct cluster in
->> grpc_xds_k8s_lb_python.sh (#30309) (#30332)
->> ea0f9b29f7 xds-k8s jobs: standardize TESTING_VERSION (#30027) (#30050)
->> 14afb3a3ea Disable layering check for Objective-C (#29375)
->>
->>
->> # When were those commits made?
->> $ git log v1.45.2... | rg Date:
->> Date:   Tue Jan 10 13:35:42 2023
->> Date:   Mon Oct 3 15:23:06 2022
->> Date:   Mon Oct 3 13:35:02 2022
->> Date:   Thu Sep 8 16:57:24 2022
->> Date:   Tue Sep 6 20:47:18 2022
->> Date:   Fri Aug 19 17:22:21 2022
->> Date:   Mon Aug 8 21:33:59 2022
->> Date:   Tue Jul 19 17:31:09 2022
->> Date:   Fri Jun 17 18:37:56 2022
->> Date:   Tue Apr 19 14:45:30 2022
->>
->>
->> so it looks like there's a stable branching strategy.
->>
->>
->>
->> -=-=-=-=-=-=-=-=-=-=-=-
->> Links: You receive all messages sent to this group.
->> View/Reply Online (#100559):
->> https://lists.openembedded.org/g/openembedded-devel/message/100559
->> Mute This Topic: https://lists.openembedded.org/mt/96195679/3619876
->> Group Owner: openembedded-devel+owner@lists.openembedded.org
->> Unsubscribe:
->> https://lists.openembedded.org/g/openembedded-devel/unsub [
->> andrej.valek@siemens.com]
->> -=-=-=-=-=-=-=-=-=-=-=-
->>
+diff --git a/meta-networking/dynamic-layers/meta-python/recipes-connectiv=
+ity/crda/crda/0001-Makefile-respect-LDFLAGS-for-libreg.patch b/meta-netwo=
+rking/dynamic-layers/meta-python/recipes-connectivity/crda/crda/0001-Make=
+file-respect-LDFLAGS-for-libreg.patch
+index 16800d506..d61ea8069 100644
+--- a/meta-networking/dynamic-layers/meta-python/recipes-connectivity/crd=
+a/crda/0001-Makefile-respect-LDFLAGS-for-libreg.patch
++++ b/meta-networking/dynamic-layers/meta-python/recipes-connectivity/crd=
+a/crda/0001-Makefile-respect-LDFLAGS-for-libreg.patch
+@@ -7,20 +7,24 @@ Content-Type: text/plain; charset=3DUTF-8
+ Content-Transfer-Encoding: 8bit
+=20
+ Signed-off-by: Stefan M=C3=BCller-Klieser <s.mueller-klieser@phytec.de>
++
++Rebase for crda 4.15.
++
++Signed-off-by: Kai Kang <kai.kang@windriver.com>
+ ---
+  Makefile | 2 +-
+  1 file changed, 1 insertion(+), 1 deletion(-)
+=20
+ diff --git a/Makefile b/Makefile
+-index 2879896..1650db8 100644
++index 528a14e..31f1b5e 100644
+ --- a/Makefile
+ +++ b/Makefile
+ @@ -116,7 +116,7 @@ keys-%.c: utils/key2pub.py $(wildcard $(PUBKEY_DIR)/=
+*.pem)
+ =20
+- $(LIBREG): regdb.h reglib.h reglib.c
++ $(LIBREG): reglib.c regdb.h reglib.h
+  	$(NQ) '  CC  ' $@
+--	$(Q)$(CC) $(CFLAGS) $(CPPFLAGS) -o $@ -shared -Wl,-soname,$(LIBREG) $^=
+ $(LIBREGLDLIBS)
+-+	$(Q)$(CC) $(CFLAGS) $(CPPFLAGS) -o $@ -shared -Wl,-soname,$(LIBREG) $^=
+ $(LDFLAGS) $(LIBREGLDLIBS)
++-	$(Q)$(CC) $(CFLAGS) $(CPPFLAGS) -o $@ -shared -Wl,-soname,$(LIBREG) $<=
+ $(LIBREGLDLIBS)
+++	$(Q)$(CC) $(CFLAGS) $(CPPFLAGS) -o $@ -shared -Wl,-soname,$(LIBREG) $<=
+ $(LDFLAGS) $(LIBREGLDLIBS)
+ =20
+  install-libreg-headers:
+  	$(NQ) '  INSTALL  libreg-headers'
+diff --git a/meta-networking/dynamic-layers/meta-python/recipes-connectiv=
+ity/crda/crda/crda-4.14-python-3.patch b/meta-networking/dynamic-layers/m=
+eta-python/recipes-connectivity/crda/crda/crda-4.14-python-3.patch
+index 9125d0ab9..6c209dc37 100644
+--- a/meta-networking/dynamic-layers/meta-python/recipes-connectivity/crd=
+a/crda/crda-4.14-python-3.patch
++++ b/meta-networking/dynamic-layers/meta-python/recipes-connectivity/crd=
+a/crda/crda-4.14-python-3.patch
+@@ -3,6 +3,15 @@ https://gitweb.gentoo.org/repo/gentoo.git/commit/?id=3D9=
+c50acec16bc7c33d6dc122c007
+=20
+ Signed-off-by: Khem Raj <raj.khem@gmail.com>
+=20
++Rebase for crda 4.15.
++
++Signed-off-by: Kai Kang <kai.kang@windriver.com>
++
++ utils/key2pub.py | 28 +++++++++++++++-------------
++ 1 file changed, 15 insertions(+), 13 deletions(-)
++
++diff --git a/utils/key2pub.py b/utils/key2pub.py
++index 22fda55..2a4980b 100755
+ --- a/utils/key2pub.py
+ +++ b/utils/key2pub.py
+ @@ -1,22 +1,22 @@
+@@ -77,7 +86,7 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
+              idx =3D 0
+ @@ -118,7 +118,7 @@ struct key_params {
+ =20
+- static const struct key_params keys[] __attribute__((unused))=3D {
++ static const struct key_params __attribute__ ((unused)) keys[] =3D {
+  ''')
+ -    for n in xrange(n + 1):
+ +    for n in range(n + 1):
+diff --git a/meta-networking/dynamic-layers/meta-python/recipes-connectiv=
+ity/crda/crda/do-not-run-ldconfig-if-destdir-is-set.patch b/meta-networki=
+ng/dynamic-layers/meta-python/recipes-connectivity/crda/crda/do-not-run-l=
+dconfig-if-destdir-is-set.patch
+index 3ef35ee54..b5bce40a9 100644
+--- a/meta-networking/dynamic-layers/meta-python/recipes-connectivity/crd=
+a/crda/do-not-run-ldconfig-if-destdir-is-set.patch
++++ b/meta-networking/dynamic-layers/meta-python/recipes-connectivity/crd=
+a/crda/do-not-run-ldconfig-if-destdir-is-set.patch
+@@ -7,12 +7,21 @@ Upstream-Status: Backport [http://www.spinics.net/lists=
+/linux-wireless/msg126028
+ Signed-off-by: Ben Hutchings <ben@decadent.org.uk>
+ Signed-off-by: Joe MacDonald <joe_macdonald@mentor.com>
+=20
++Rebase patch for crda 4.15.
++
++Signed-off-by: Kai Kang <kai.kang@windriver.com>
++
++ Makefile | 2 ++
++ 1 file changed, 2 insertions(+)
++
++diff --git a/Makefile b/Makefile
++index 6ca26f3..528a14e 100644
+ --- a/Makefile
+ +++ b/Makefile
+-@@ -132,7 +132,9 @@ install-libreg:
++@@ -127,7 +127,9 @@ install-libreg:
+  	$(NQ) '  INSTALL  libreg'
+  	$(Q)mkdir -p $(DESTDIR)/$(LIBDIR)
+- 	$(Q)cp $(LIBREG) $(DESTDIR)/$(LIBDIR)/
++ 	$(Q)$(INSTALL) -m 644 $(LIBREG) $(DESTDIR)/$(LIBDIR)/
+ +ifndef DESTDIR
+  	$(Q)ldconfig
+ +endif
+diff --git a/meta-networking/dynamic-layers/meta-python/recipes-connectiv=
+ity/crda/crda/fix-gcc-6-unused-variables.patch b/meta-networking/dynamic-=
+layers/meta-python/recipes-connectivity/crda/crda/fix-gcc-6-unused-variab=
+les.patch
+deleted file mode 100644
+index 747804d34..000000000
+--- a/meta-networking/dynamic-layers/meta-python/recipes-connectivity/crd=
+a/crda/fix-gcc-6-unused-variables.patch
++++ /dev/null
+@@ -1,11 +0,0 @@
+---- crda-3.18/utils/key2pub.py.orig	2016-06-18 09:54:23.671326113 -0400
+-+++ crda-3.18/utils/key2pub.py	2016-06-18 09:54:34.387326300 -0400
+-@@ -115,7 +115,7 @@
+- 	.n =3D _n, .len_n =3D sizeof(_n),	\
+- }
+-=20
+--static const struct key_params keys[] =3D {
+-+static const struct key_params keys[] __attribute__((unused))=3D {
+- ''')
+-     for n in xrange(n + 1):
+-         output.write('	KEYS(e_%d, n_%d),\n' % (n, n))
+diff --git a/meta-networking/dynamic-layers/meta-python/recipes-connectiv=
+ity/crda/crda/fix-linking-of-libraries-used-by-reglib.patch b/meta-networ=
+king/dynamic-layers/meta-python/recipes-connectivity/crda/crda/fix-linkin=
+g-of-libraries-used-by-reglib.patch
+index 812e98379..a7fb22a72 100644
+--- a/meta-networking/dynamic-layers/meta-python/recipes-connectivity/crd=
+a/crda/fix-linking-of-libraries-used-by-reglib.patch
++++ b/meta-networking/dynamic-layers/meta-python/recipes-connectivity/crd=
+a/crda/fix-linking-of-libraries-used-by-reglib.patch
+@@ -15,7 +15,7 @@ Signed-off-by: Joe MacDonald <joe_macdonald@mentor.com>
+  1 file changed, 4 insertions(+), 4 deletions(-)
+=20
+ diff --git a/Makefile b/Makefile
+-index a3ead30..da2dcc3 100644
++index 528a14e..acd818b 100644
+ --- a/Makefile
+ +++ b/Makefile
+ @@ -30,7 +30,7 @@ CFLAGS +=3D -std=3Dgnu99 -Wall -Werror -pedantic
+@@ -45,10 +45,10 @@ index a3ead30..da2dcc3 100644
+ =20
+ @@ -116,7 +116,7 @@ keys-%.c: utils/key2pub.py $(wildcard $(PUBKEY_DIR)/=
+*.pem)
+ =20
+- $(LIBREG): regdb.h reglib.h reglib.c
++ $(LIBREG): reglib.c regdb.h reglib.h
+  	$(NQ) '  CC  ' $@
+--	$(Q)$(CC) $(CFLAGS) $(CPPFLAGS) -o $@ -shared -Wl,-soname,$(LIBREG) $^
+-+	$(Q)$(CC) $(CFLAGS) $(CPPFLAGS) -o $@ -shared -Wl,-soname,$(LIBREG) $^=
+ $(LIBREGLDLIBS)
++-	$(Q)$(CC) $(CFLAGS) $(CPPFLAGS) -o $@ -shared -Wl,-soname,$(LIBREG) $<
+++	$(Q)$(CC) $(CFLAGS) $(CPPFLAGS) -o $@ -shared -Wl,-soname,$(LIBREG) $<=
+ $(LIBREGLDLIBS)
+ =20
+  install-libreg-headers:
+  	$(NQ) '  INSTALL  libreg-headers'
+diff --git a/meta-networking/dynamic-layers/meta-python/recipes-connectiv=
+ity/crda/crda/make.patch b/meta-networking/dynamic-layers/meta-python/rec=
+ipes-connectivity/crda/crda/make.patch
+deleted file mode 100644
+index 0b737852c..000000000
+--- a/meta-networking/dynamic-layers/meta-python/recipes-connectivity/crd=
+a/crda/make.patch
++++ /dev/null
+@@ -1,25 +0,0 @@
+-These headers are not related to any Make rule but they do appear in
+-compiling of libreg.so, specifying .h files in compiler cmdline is flagg=
+ed
+-as error by clang
+-
+-| clang-4.0: error: cannot specify -o when generating multiple output fi=
+les
+-| make: *** [libreg.so] Error 1
+-
+-This is how we see headers in cmdline
+--O2 -fpic -std=3Dgnu
+-99 -Wall -Werror -pedantic -Wall -g -DUSE_GCRYPT -DCONFIG_LIBNL30 `pkg-c=
+onfig --cflags libnl-3.0`  -o libreg.so -shared -Wl,-soname,libreg.so
+-regdb.h reglib.h reglib.c keys-gcrypt.c -Wl,-O1 -Wl,--hash-style=3Dgnu -=
+Wl,--as-needed -L ./ -lm -lgcrypt
+-
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+-
+---- a/Makefile.kk	2016-11-15 04:54:53.338670000 +0000
+-+++ a/Makefile	2016-11-15 04:55:07.718670000 +0000
+-@@ -114,7 +114,7 @@ keys-%.c: utils/key2pub.py $(wildcard $(
+- 	$(NQ) '  Trusted pubkeys:' $(wildcard $(PUBKEY_DIR)/*.pem)
+- 	$(Q)./utils/key2pub.py --$* $(wildcard $(PUBKEY_DIR)/*.pem) $@
+-=20
+--$(LIBREG): regdb.h reglib.h reglib.c
+-+$(LIBREG): reglib.c
+- 	$(NQ) '  CC  ' $@
+- 	$(Q)$(CC) $(CFLAGS) $(CPPFLAGS) -o $@ -shared -Wl,-soname,$(LIBREG) $^=
+ $(LDFLAGS) $(LIBREGLDLIBS)
+-=20
+diff --git a/meta-networking/dynamic-layers/meta-python/recipes-connectiv=
+ity/crda/crda_3.18.bb b/meta-networking/dynamic-layers/meta-python/recipe=
+s-connectivity/crda/crda_4.15.bb
+similarity index 80%
+rename from meta-networking/dynamic-layers/meta-python/recipes-connectivi=
+ty/crda/crda_3.18.bb
+rename to meta-networking/dynamic-layers/meta-python/recipes-connectivity=
+/crda/crda_4.15.bb
+index 2f4d4dac9..dd2df3222 100644
+--- a/meta-networking/dynamic-layers/meta-python/recipes-connectivity/crd=
+a/crda_3.18.bb
++++ b/meta-networking/dynamic-layers/meta-python/recipes-connectivity/crd=
+a/crda_4.15.bb
+@@ -6,20 +6,19 @@ LIC_FILES_CHKSUM =3D "file://copyleft-next-0.3.0;md5=3D=
+8743a2c359037d4d329a31e79eabe
+=20
+ DEPENDS =3D "python3-m2crypto-native libnl libgcrypt"
+=20
+-SRC_URI =3D "https://www.kernel.org/pub/software/network/${BPN}/${BP}.ta=
+r.xz \
++SRC_URI =3D "git://git.kernel.org/pub/scm/linux/kernel/git/mcgrof/crda.g=
+it;branch=3Dmaster \
+            file://do-not-run-ldconfig-if-destdir-is-set.patch \
+            file://fix-linking-of-libraries-used-by-reglib.patch \
+-           file://fix-gcc-6-unused-variables.patch \
+            file://0001-Makefile-respect-LDFLAGS-for-libreg.patch \
+-           file://make.patch \
+            file://use-target-word-size-instead-of-host-s.patch \
+            file://fix-issues-when-USE_OPENSSL-1.patch \
+            file://crda-4.14-python-3.patch \
+            file://0001-Make-alpha2-to-be-3-characters-long.patch \
+            file://0001-reglib-Remove-unused-variables.patch \
+ "
+-SRC_URI[md5sum] =3D "0431fef3067bf503dfb464069f06163a"
+-SRC_URI[sha256sum] =3D "43fcb9679f8b75ed87ad10944a506292def13e4afb194afa=
+7aa921b01e8ecdbf"
++SRCREV =3D "6aeea99ceeec85dd7a9202ee39c7f3b2a8f5195d"
++
++S =3D "${WORKDIR}/git"
+=20
+ inherit pkgconfig python3-dir python3native siteinfo
+=20
+--=20
+2.17.1
 
 
