@@ -2,56 +2,56 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 720A5C63797
-	for <webhook@archiver.kernel.org>; Tue, 17 Jan 2023 05:22:42 +0000 (UTC)
-Received: from mail-pj1-f44.google.com (mail-pj1-f44.google.com [209.85.216.44])
- by mx.groups.io with SMTP id smtpd.web10.189982.1673932961110617406
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 58C77C6379F
+	for <webhook@archiver.kernel.org>; Tue, 17 Jan 2023 05:22:52 +0000 (UTC)
+Received: from mail-pj1-f52.google.com (mail-pj1-f52.google.com [209.85.216.52])
+ by mx.groups.io with SMTP id smtpd.web11.190222.1673932963011407599
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 16 Jan 2023 21:22:41 -0800
+ Mon, 16 Jan 2023 21:22:43 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=C/z0NRzK;
- spf=pass (domain: gmail.com, ip: 209.85.216.44, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f44.google.com with SMTP id o13so27720242pjg.2
-        for <openembedded-devel@lists.openembedded.org>; Mon, 16 Jan 2023 21:22:41 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=HS4FwpPm;
+ spf=pass (domain: gmail.com, ip: 209.85.216.52, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f52.google.com with SMTP id z9-20020a17090a468900b00226b6e7aeeaso33078834pjf.1
+        for <openembedded-devel@lists.openembedded.org>; Mon, 16 Jan 2023 21:22:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=IjwKGQmYPrx7uDZyGkW9utSPJwKzW7de1ZLfOIJeLtA=;
-        b=C/z0NRzK/f/IP0wA2JRpI3ubJVQ89imy0O+VUr6g4/iHYC+u+yPJnyKXyQvbqu0mSW
-         pv7qPZirL5OnHgkKlKI4diVC2cAaMOelHKETg0T6OQI0nWSrHSQ6tkGmZ1ziIA218cTX
-         Awq+dZj+tzXHMECWDJUSS4/qqlqKin13yuxdjRyF5wLpr6w4r9LKiP6aew2R6K21FnW/
-         lEVArSpbuWBXIvkNzVi06K6Xu1X8PokDeQWokvvnkDHjEcPw3UpJYFqNCCswLAfIBmKv
-         YjEoXcwqgddsnzxMSj/AD/V6kYdxRQMcqOyhAd0uXok7la5M5+QahzVd6sVeBzoJdIf2
-         WTHg==
+        bh=0HeCDoGrS50ppwj0lOfM49RP88eNimCKsDQGfGIl9xo=;
+        b=HS4FwpPm7pQg9/Ld5rSFnotNDVW0iXpGjEkIYJoyYftqc1I1e4v0JCs2xIEDxtVtgR
+         y8HPLOVWOo1ukDp+dQcdoNViFbjw+ThJhdi9sgZHLO0Np6dVrtWQqW/6yKww1PrHnngj
+         thxi2C+8huQDaGNLUV56/M73P8cw5Sg7GLTWqs+vM1Hh/EzLEuHdxhCSBjpfmYlKHulG
+         AqiKQEZ35qS7+EEEKRPPOMcdoD+MMXV9ndpSYUuLyaRxtZtBv0MTMbpcDXMWjQdVRocf
+         s0MkQOURo3cftB5VRpjs6P5TvYOKyLRVoFo6OMETlVFYJ3X3qRqIJpR2Fu8u9iZhDI+F
+         ldAg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=IjwKGQmYPrx7uDZyGkW9utSPJwKzW7de1ZLfOIJeLtA=;
-        b=IWaRHsMI1z65IY9uhwrg6xwfRFdgL1feM8KEp7l3Mf/QgAojXi4OMhQ20gUVx2Sqv2
-         ITxwohc2UffYmRrxXNfUY9qkwFY7Jk92j3ni4dZu9ykzgTvvEgae18PuLO0cqr+bFJVQ
-         VmICdf6zarHa32ifXB+jwe7TgHJ5XkJLUwNOm63RdznztNS9w/WBTKfQ4EgivcJfFM1q
-         vhdAfODid6T4+zJTRBqlJNl7iUL0HxI65VBE8CrXnorQr/EoYHm9iXTZEzRjARSoUcMo
-         DPJW/Pdr/oXYst61RwVTfxTSIPHZvWpkZ0Q0VSKM6tIMIv0p/6FViXb/zO11kYSXv1zk
-         DC/w==
-X-Gm-Message-State: AFqh2krGR9rJ0CG8vhlaZYDsGKSIkqipGvqS26JXv9eiN+YtGeu9r847
-	BBInjkj0TWnsLT6jkkla3f0YzNHnN8gr4A==
-X-Google-Smtp-Source: AMrXdXvilEWIFzhkXAJq3q94dQtEMFs8L1XkoPbYK3ExONuMWWKclP3Z5F5I1l2nzMUCM7Q8wo97QA==
-X-Received: by 2002:a17:903:2289:b0:189:6ab3:9e57 with SMTP id b9-20020a170903228900b001896ab39e57mr3047346plh.22.1673932960215;
-        Mon, 16 Jan 2023 21:22:40 -0800 (PST)
+        bh=0HeCDoGrS50ppwj0lOfM49RP88eNimCKsDQGfGIl9xo=;
+        b=K/M7rYv62LFBhbqF66TwbZZGO1BM19u5pQGJuZjWySHxRL84IzAotweJOEEHYfw7w9
+         UfL8g6dmSfLgB6bdJ2KOxO8dAMJ6pwldFySBllz//1X7i4pUCSG/P7PA83vC4FJwGbDS
+         TARB/ijdI+owXkWj19DhGNy3Vj6BawOBofT8y6vycC6PCesqbsaCsSNdECAXdvB5Nzgz
+         031xyDV+tDL7ePwXe7a/UE1LFNvFWB+J2R1/yuT1Zix2JbjAKy+w68DHQSJYvKFPqftl
+         StOjjb5r8qsCrLSD+fvz2HdP3XRrLSLkZvHK5u1BGBpnrmhpksWCz6vwELZslJHN7ypM
+         C4gA==
+X-Gm-Message-State: AFqh2krKzxxW2DpL8y8eCqHG2jZKl5jk2FR6gZtvewVJsthhkXgPl168
+	ddp9EwGq2Yo8vWeNNxACdOnSIAWmfKdpTw==
+X-Google-Smtp-Source: AMrXdXs0F85kvZc9Cj2Gp99wtr9631j8eY4wg9SwiLd3dLSFD/cRWCv7fx6CQmOg/TtKAqIBL5IcoQ==
+X-Received: by 2002:a05:6a20:a009:b0:b8:b0fe:cd40 with SMTP id p9-20020a056a20a00900b000b8b0fecd40mr2516485pzj.39.1673932962225;
+        Mon, 16 Jan 2023 21:22:42 -0800 (PST)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9181:1cf0::b940])
-        by smtp.gmail.com with ESMTPSA id c22-20020a6566d6000000b0045dc85c4a5fsm12682692pgw.44.2023.01.16.21.22.39
+        by smtp.gmail.com with ESMTPSA id c22-20020a6566d6000000b0045dc85c4a5fsm12682692pgw.44.2023.01.16.21.22.41
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 16 Jan 2023 21:22:39 -0800 (PST)
+        Mon, 16 Jan 2023 21:22:41 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-networking][PATCH 2/7] netkit-telnet: Drop using register storage class keyword
-Date: Mon, 16 Jan 2023 21:22:32 -0800
-Message-Id: <20230117052237.3117521-2-raj.khem@gmail.com>
+Subject: [meta-filesystems][PATCH 4/7] fatcat: Fix build with std=c++17
+Date: Mon, 16 Jan 2023 21:22:34 -0800
+Message-Id: <20230117052237.3117521-4-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.39.0
 In-Reply-To: <20230117052237.3117521-1-raj.khem@gmail.com>
 References: <20230117052237.3117521-1-raj.khem@gmail.com>
@@ -60,494 +60,82 @@ Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 17 Jan 2023 05:22:42 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100588
-
-Its dropped since c++17 and modern compilers have started to error on
-its use
+ <openembedded-devel@lists.openembedded.org>; Tue, 17 Jan 2023 05:22:52 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100590
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../0001-Drop-using-register-keyword.patch    | 457 ++++++++++++++++++
- .../netkit-telnet/netkit-telnet_0.17.bb       |   1 +
- 2 files changed, 458 insertions(+)
- create mode 100644 meta-networking/recipes-netkit/netkit-telnet/files/0001-Drop-using-register-keyword.patch
+ .../0001-Replace-std-ptr_fun-for-c-17.patch   | 48 +++++++++++++++++++
+ .../recipes-utils/fatcat/fatcat_1.1.1.bb      |  1 +
+ 2 files changed, 49 insertions(+)
+ create mode 100644 meta-filesystems/recipes-utils/fatcat/fatcat/0001-Replace-std-ptr_fun-for-c-17.patch
 
-diff --git a/meta-networking/recipes-netkit/netkit-telnet/files/0001-Drop-using-register-keyword.patch b/meta-networking/recipes-netkit/netkit-telnet/files/0001-Drop-using-register-keyword.patch
+diff --git a/meta-filesystems/recipes-utils/fatcat/fatcat/0001-Replace-std-ptr_fun-for-c-17.patch b/meta-filesystems/recipes-utils/fatcat/fatcat/0001-Replace-std-ptr_fun-for-c-17.patch
 new file mode 100644
-index 0000000000..f508711d34
+index 0000000000..277a368b67
 --- /dev/null
-+++ b/meta-networking/recipes-netkit/netkit-telnet/files/0001-Drop-using-register-keyword.patch
-@@ -0,0 +1,457 @@
-+From af89f36fbeb5f6a078b349eed8fc4ad6fbfdf5d1 Mon Sep 17 00:00:00 2001
++++ b/meta-filesystems/recipes-utils/fatcat/fatcat/0001-Replace-std-ptr_fun-for-c-17.patch
+@@ -0,0 +1,48 @@
++From 455001cb0112f7324ab50f555aa5ed5eae1bb93b Mon Sep 17 00:00:00 2001
 +From: Khem Raj <raj.khem@gmail.com>
-+Date: Mon, 16 Jan 2023 15:26:12 -0800
-+Subject: [PATCH] Drop using register keyword
++Date: Mon, 16 Jan 2023 19:23:18 -0800
++Subject: [PATCH] Replace std::ptr_fun for c++17
 +
-+Its gone since c++17
++std::ptr_fun was deprecated in C++11, and removed completely in C++17.
++Similarly, std::not1 is deprecated since C++17.
 +
-+Fixes
-+error: ISO C++17 does not allow 'register' storage class specifier [-Wregister]
-+|         register char c;
-+|         ^~~~~~~~~
++Modern compilers like clang >= 16 have started to notice it
 +
-+Upstream-Status: Pending
++src/FatUtils.h:41:46: error: use of undeclared identifier 'ptr_fun'
++|   s.erase(find_if(s.rbegin(), s.rend(), not1(ptr_fun<int, int>(isspace))).base(), s.end());
++
++Therefore replace ptr_fun with lambda
++
++Also use 'unsigned char' parameter to std::isspace, for reason see [1]
++
++[1] https://en.cppreference.com/w/cpp/string/byte/isspace#Notes
++
++Upstream-Status: Submitted [https://github.com/Gregwar/fatcat/pull/36]
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +---
-+ telnet/commands.cc     |  14 +++++++-------
-+ telnet/defines.h       |   1 +
-+ telnet/sys_bsd.cc      |   2 +-
-+ telnet/telnet.cc       |  18 +++++++++---------
-+ telnet/terminal.cc     |   4 ++--
-+ telnet/tn3270.cc       |   4 ++--
-+ telnet/tn3270.o        | Bin 4008 -> 4008 bytes
-+ telnet/utilities.cc    |   6 +++---
-+ telnetd/setproctitle.c |   6 +++---
-+ telnetd/slc.c          |   4 ++--
-+ telnetd/state.c        |  12 ++++++------
-+ telnetd/sys_term.c     |   4 ++--
-+ telnetd/telnetd.c      |   4 ++--
-+ telnetd/termstat.c     |   4 ++--
-+ telnetd/utility.c      |  16 ++++++++--------
-+ 15 files changed, 50 insertions(+), 49 deletions(-)
++ src/FatUtils.h | 4 ++--
++ 1 file changed, 2 insertions(+), 2 deletions(-)
 +
-+--- a/telnet/commands.cc
-++++ b/telnet/commands.cc
-+@@ -192,8 +192,8 @@ static int margc;
-+ static const char *margv[20];
++diff --git a/src/FatUtils.h b/src/FatUtils.h
++index 5080f2a..a8d69ee 100644
++--- a/src/FatUtils.h
+++++ b/src/FatUtils.h
++@@ -32,13 +32,13 @@ using namespace std;
 + 
-+ static void makeargv(void) {
-+-    register char *cp, *cp2, c;
-+-    register const char **argp = margv;
-++    char *cp, *cp2, c;
-++    const char **argp = margv;
-+ 
-+     margc = 0;
-+     cp = line;
-+@@ -204,7 +204,7 @@ static void makeargv(void) {
-+ 	cp++;
-+     }
-+     while ((c = *cp)!=0) {
-+-	register int inquote = 0;
-++	int inquote = 0;
-+ 	while (isspace(c))
-+ 	    c = *++cp;
-+ 	if (c == '\0')
-+@@ -281,7 +281,7 @@ static const char *control(cc_t c)
-+ 	 * was to assign "c" to an unsigned int variable...
-+ 	 * Arggg....
-+ 	 */
-+-	register unsigned int uic = (unsigned int)c;
-++	unsigned int uic = (unsigned int)c;
-+ 
-+ 	if (uic == 0x7f)
-+ 		return ("^?");
-+@@ -479,7 +479,7 @@ int send_tncmd(int (*func)(int, int), co
-+     long opt;
-+ 
-+     if (isprefix(name, "help") || isprefix(name, "?")) {
-+-	register int col, len;
-++	int col, len;
-+ 
-+ 	printf("Usage: send %s <option>\n", cmd);
-+ 	printf("Valid options are:\n\t");
-+@@ -2212,8 +2212,8 @@ static unsigned long sourceroute(char *a
-+ 	static char lsr[44];
-+ 	char *cp, *cp2, *lsrp, *lsrep;
-+ 	struct in_addr sin_addr;
-+-	register struct hostent *host = 0;
-+-	register char c;
-++	struct hostent *host = 0;
-++	char c;
-+ 
-+ 	/*
-+ 	 * Verify the arguments, and make sure we have
-+--- a/telnet/defines.h
-++++ b/telnet/defines.h
-+@@ -52,3 +52,4 @@
-+ #define	CONTROL(x)	((x)&0x1f)		/* CTRL(x) is not portable */
-+ 
-+ #define MODE_OUT8	0x8000			/* binary mode sans -opost */
-++
-+--- a/telnet/sys_bsd.cc
-++++ b/telnet/sys_bsd.cc
-+@@ -285,7 +285,7 @@ void sys_telnet_init(void) {
-+ int process_rings(int netin, int netout, int netex, int ttyin, int ttyout, 
-+ 		  int poll /* If 0, then block until something to do */)
-+ {
-+-    register int c, maxfd;
-++    int c, maxfd;
-+ 		/* One wants to be a bit careful about setting returnValue
-+ 		 * to one, since a one implies we did some useful work,
-+ 		 * and therefore probably won't be called to block next
-+--- a/telnet/telnet.cc
-++++ b/telnet/telnet.cc
-+@@ -864,7 +864,7 @@ struct spc {
-+ static int slc_mode = SLC_EXPORT;
-+ 
-+ void slc_init(void) {
-+-  register struct spc *spcp;
-++  struct spc *spcp;
-+   
-+   localchars = 1;
-+   for (spcp = spc_data; spcp < &spc_data[NSLC+1]; spcp++) {
-+@@ -944,7 +944,7 @@ void slc_import(int def) {
++ // trim from start
++ static inline string ltrim(string s) {
++-  s.erase(s.begin(), find_if(s.begin(), s.end(), not1(ptr_fun<int, int>(isspace))));
+++  s.erase(s.begin(), find_if(s.begin(), s.end(), [](unsigned char c) {return !isspace(c);}));
++   return s;
 + }
 + 
-+ void slc_export(void) {
-+-  register struct spc *spcp;
-++  struct spc *spcp;
-+   
-+   TerminalDefaultChars();
-+   
-+@@ -966,8 +966,8 @@ void slc_export(void) {
++ // trim from end
++ static inline string rtrim(string s) {
++-  s.erase(find_if(s.rbegin(), s.rend(), not1(ptr_fun<int, int>(isspace))).base(), s.end());
+++  s.erase(find_if(s.rbegin(), s.rend(), [](unsigned char c) {return !isspace(c);}).base(), s.end());
++   return s;
 + }
 + 
-+ void slc(unsigned char *cp, int len) {
-+-  register struct spc *spcp;
-+-  register int func,level;
-++  struct spc *spcp;
-++  int func,level;
-+   
-+   slc_start_reply();
-+   
-+@@ -1032,7 +1032,7 @@ void slc(unsigned char *cp, int len) {
-+ }
-+ 
-+ void slc_check(void) {
-+-  register struct spc *spcp;
-++  struct spc *spcp;
-+   
-+   slc_start_reply();
-+   for (spcp = &spc_data[1]; spcp < &spc_data[NSLC+1]; spcp++) {
-+@@ -1080,7 +1080,7 @@ void slc_add_reply(int func, int flags,
-+ }
-+ 
-+ void slc_end_reply(void) {
-+-  register int len;
-++  int len;
-+   
-+   *slc_replyp++ = IAC;
-+   *slc_replyp++ = SE;
-+@@ -1200,7 +1200,7 @@ void env_opt_add(const char *ep) {
-+   tp = opt_replyp + (vp ? strlen(vp) * 2 : 0) + strlen(ep) * 2 + 6;
-+   if (tp > opt_replyend)
-+     {
-+-      register int len;
-++      int len;
-+       len = ((tp - opt_reply) + OPT_REPLY_SIZE - 1) & ~(OPT_REPLY_SIZE - 1);
-+       opt_replyend = opt_reply + len;
-+       opt_reply = (unsigned char *)realloc(opt_reply, len);
-+@@ -1236,7 +1236,7 @@ void env_opt_add(const char *ep) {
-+ }
-+ 
-+ void env_opt_end(int emptyok) {
-+-  register int len;
-++  int len;
-+   
-+   len = opt_replyp - opt_reply + 2;
-+   if (emptyok || len > 6) {
-+@@ -1874,7 +1874,7 @@ static unsigned char *nextitem(unsigned
-+ 
-+ static void netclear(void) {
-+ #if	0	/* XXX */
-+-  register char *thisitem, *next;
-++  char *thisitem, *next;
-+   char *good;
-+ #define	wewant(p)	((nfrontp > p) && (*p == IAC) && \
-+ 			 (p[1] != EC) && (p[1] != EL))
-+--- a/telnet/terminal.cc
-++++ b/telnet/terminal.cc
-+@@ -569,8 +569,8 @@ struct termspeeds {
-+ };
-+ 
-+ void TerminalSpeeds(long *ispeed, long *ospeed) {
-+-    register struct termspeeds *tp;
-+-    register long in, out;
-++    struct termspeeds *tp;
-++    long in, out;
-+ 
-+     out = cfgetospeed(&old_tc);
-+     in = cfgetispeed(&old_tc);
-+--- a/telnet/tn3270.cc
-++++ b/telnet/tn3270.cc
-+@@ -103,7 +103,7 @@ void init_3270(void) {
-+  * done:	is this the last of a logical block
-+  */
-+ int DataToNetwork(char *buffer, int count, int done) {
-+-    register int loop, c;
-++    int loop, c;
-+     int origCount;
-+     
-+     origCount = count;
-+@@ -179,7 +179,7 @@ void outputPurge(void) {
-+  * count:	how much to send
-+  */
-+ int DataToTerminal(char *buffer, int count) {
-+-    register int c;
-++    int c;
-+     int origCount;
-+ 
-+     origCount = count;
-+--- a/telnet/utilities.cc
-++++ b/telnet/utilities.cc
-+@@ -252,7 +252,7 @@ void optionstatus(void) {
-+ /* pointer: where suboption data sits */
-+ /* length: length of suboption data */
-+ void printsub(int direction, unsigned char *pointer, int length) {
-+-    register int i = 0;
-++    int i = 0;
-+ 
-+     extern int want_status_response;
-+ 
-+@@ -262,7 +262,7 @@ void printsub(int direction, unsigned ch
-+ 	    fprintf(NetTrace, "%s IAC SB ",
-+ 				(direction == '<')? "RCVD":"SENT");
-+ 	    if (length >= 3) {
-+-		register int j;
-++		int j;
-+ 
-+ 		i = pointer[length-2];
-+ 		j = pointer[length-1];
-+@@ -577,7 +577,7 @@ void printsub(int direction, unsigned ch
-+ 		fprintf(NetTrace, "INFO ");
-+ 	    env_common:
-+ 		{
-+-		    register int noquote = 2;
-++		    int noquote = 2;
-+ 		    for (i = 2; i < length; i++ ) {
-+ 			switch (pointer[i]) {
-+ 			case ENV_VAR:
-+--- a/telnetd/setproctitle.c
-++++ b/telnetd/setproctitle.c
-+@@ -76,7 +76,7 @@ static char Argv0[128];			/* program nam
-+ void
-+ initsetproctitle(int argc, char **argv, char **envp)
-+ {
-+-	register int i;
-++	int i;
-+ 	char *tmp;
-+ 
-+ 	/*
-+@@ -111,8 +111,8 @@ initsetproctitle(int argc, char **argv,
-+ void
-+ setproctitle(const char *fmt, ...)
-+ {
-+-	register char *p;
-+-	register int i=0;
-++	char *p;
-++	int i=0;
-+ 	static char buf[2048];
-+ 	va_list ap;
-+ 
-+--- a/telnetd/slc.c
-++++ b/telnetd/slc.c
-+@@ -196,7 +196,7 @@ int end_slc(unsigned char **bufp) {
-+  * Figure out what to do about the client's slc
-+  */
-+ void process_slc(unsigned char func, unsigned char flag, cc_t val) {
-+-    register int hislevel, mylevel, ack;
-++    int hislevel, mylevel, ack;
-+ 
-+     /*
-+      * Ensure that we know something about this function
-+@@ -260,7 +260,7 @@ void process_slc(unsigned char func, uns
-+  * Compare client's request with what we are capable of supporting.
-+  */
-+ void change_slc(char func, char flag, cc_t val) {
-+-    register int hislevel, mylevel;
-++    int hislevel, mylevel;
-+     
-+     hislevel = flag & SLC_LEVELBITS;
-+     mylevel = slctab[func].defset.flag & SLC_LEVELBITS;
-+--- a/telnetd/state.c
-++++ b/telnetd/state.c
-+@@ -79,7 +79,7 @@ unsigned char subbuffer[512], *subpointe
-+ #define	TS_DONT		8	/* dont " */
-+ 
-+ void telrcv(void) {
-+-    register int c;
-++    int c;
-+     static int state = TS_DATA;
-+ 
-+     while (ncc > 0) {
-+@@ -1081,7 +1081,7 @@ void suboption(void) {
-+ 
-+ #ifdef	LINEMODE
-+     case TELOPT_LINEMODE: {
-+-	register int request;
-++	int request;
-+ 
-+ 	if (his_state_is_wont(TELOPT_LINEMODE))	/* Ignore if option disabled */
-+ 		break;
-+@@ -1158,8 +1158,8 @@ void suboption(void) {
-+     }  /* end of case TELOPT_XDISPLOC */
-+ 
-+     case TELOPT_ENVIRON: {
-+-	register int c;
-+-	register char *cp, *varp, *valp;
-++	int c;
-++	char *cp, *varp, *valp;
-+ 
-+ 	if (SB_EOF())
-+ 		return;
-+@@ -1299,8 +1299,8 @@ static void doclientstat(void) {
-+ 
-+ void send_status(void) {
-+     unsigned char statusbuf[256];
-+-    register unsigned char *ncp;
-+-    register unsigned char i;
-++    unsigned char *ncp;
-++    unsigned char i;
-+     
-+     ncp = statusbuf;
-+     
-+--- a/telnetd/sys_term.c
-++++ b/telnetd/sys_term.c
-+@@ -413,7 +413,7 @@ extern int def_tspeed, def_rspeed;
-+ 
-+ static int getptyslave(void) {
-+ #if 0
-+-    register int t = -1;
-++    int t = -1;
-+ 
-+ # ifdef	LINEMODE
-+     int waslm;
-+@@ -505,7 +505,7 @@ static int getptyslave(void) {
-+  * making sure that we have a clean tty.
-+  */
-+ static int cleanopen(char *lyne) {
-+-    register int t;
-++    int t;
-+ 
-+     /*
-+      * Make sure that other people can't open the
-+--- a/telnetd/telnetd.c
-++++ b/telnetd/telnetd.c
-+@@ -93,7 +93,7 @@ main(int argc, char *argv[], char *env[]
-+ 	struct sockaddr_in from;
-+ 	int on = 1;
-+ 	socklen_t fromlen;
-+-	register int ch;
-++	int ch;
-+ 
-+ #if	defined(HAS_IPPROTO_IP) && defined(IP_TOS)
-+ 	int tos = -1;
-+@@ -837,7 +837,7 @@ void telnet(int f, int p)
-+     
-+ #ifdef TIOCNOTTY
-+     {
-+-	register int t;
-++	int t;
-+ 	t = open(_PATH_TTY, O_RDWR);
-+ 	if (t >= 0) {
-+ 	    (void) ioctl(t, TIOCNOTTY, (char *)0);
-+--- a/telnetd/termstat.c
-++++ b/telnetd/termstat.c
-+@@ -347,7 +347,7 @@ done:
-+  * at a time, and if using kludge linemode, then only linemode may be
-+  * affected.
-+  */
-+-void clientstat(register int code, register int parm1, register int parm2)
-++void clientstat(int code, register int parm1, register int parm2)
-+ {
-+ 	/*
-+ 	 * Get a copy of terminal characteristics.
-+@@ -419,7 +419,7 @@ void clientstat(register int code, regis
-+ 	
-+ 	case LM_MODE:
-+ 	    {
-+-		register int ack, changed;
-++		int ack, changed;
-+ 
-+ 		/*
-+ 		 * Client has sent along a mode mask.  If it agrees with
-+--- a/telnetd/utility.c
-++++ b/telnetd/utility.c
-+@@ -189,7 +189,7 @@ nextitem(char *current, const char *endp
-+ 	return current+3 <= endp ? current+3 : NULL;
-+     case SB:		/* loop forever looking for the SE */
-+ 	{
-+-	    register char *look = current+2;
-++	    char *look = current+2;
-+ 
-+ 	    while (look < endp) {
-+ 		if ((*look++&0xff) == IAC) {
-+@@ -224,7 +224,7 @@ nextitem(char *current, const char *endp
-+  */
-+ void netclear(void)
-+ {
-+-    register char *thisitem, *next;
-++    char *thisitem, *next;
-+     char *good;
-+ #define	wewant(p)	((nfrontp > p) && ((*p&0xff) == IAC) && \
-+ 				(nfrontp > p+1 && (((*(p+1)&0xff) != EC) && ((*(p+1)&0xff) != EL))))
-+@@ -354,7 +354,7 @@ netflush(void)
-+  *    ptr - A pointer to a character string to write
-+  *    len - How many bytes to write
-+  */
-+-void writenet(register unsigned char *ptr, register int len)
-++void writenet(unsigned char *ptr, register int len)
-+ {
-+ 	/* flush buffer if no room for new data) */
-+ 	if ((&netobuf[BUFSIZ] - nfrontp) < len) {
-+@@ -589,7 +589,7 @@ printoption(const char *fmt, int option)
-+ void
-+ printsub(char direction, unsigned char *pointer, int length)
-+ {
-+-    register int i = -1;
-++    int i = -1;
-+ #ifdef AUTHENTICATE
-+     char buf[512];
-+ #endif
-+@@ -601,7 +601,7 @@ printsub(char direction, unsigned char *
-+ 	    netoprintf("td: %s suboption ",
-+ 		       direction == '<' ? "recv" : "send");
-+ 	    if (length >= 3) {
-+-		register int j;
-++		int j;
-+ 
-+ 		i = pointer[length-2];
-+ 		j = pointer[length-1];
-+@@ -817,7 +817,7 @@ printsub(char direction, unsigned char *
-+ 
-+ 	case TELOPT_STATUS: {
-+ 	    const char *cp;
-+-	    register int j, k;
-++	    int j, k;
-+ 
-+ 	    netoprintf("STATUS");
-+ 
-+@@ -914,7 +914,7 @@ printsub(char direction, unsigned char *
-+ 		netoprintf("INFO ");
-+ 	    env_common:
-+ 		{
-+-		    register int noquote = 2;
-++		    int noquote = 2;
-+ 		    for (i = 2; i < length; i++ ) {
-+ 			switch (pointer[i]) {
-+ 			case ENV_VAR:
-+@@ -1125,7 +1125,7 @@ printsub(char direction, unsigned char *
-+ void
-+ printdata(const char *tag, const char *ptr, int cnt)
-+ {
-+-	register int i;
-++	int i;
-+ 	char xbuf[30];
-+ 
-+ 	while (cnt) {
-diff --git a/meta-networking/recipes-netkit/netkit-telnet/netkit-telnet_0.17.bb b/meta-networking/recipes-netkit/netkit-telnet/netkit-telnet_0.17.bb
-index 6d60c6fbbe..e28eeae491 100644
---- a/meta-networking/recipes-netkit/netkit-telnet/netkit-telnet_0.17.bb
-+++ b/meta-networking/recipes-netkit/netkit-telnet/netkit-telnet_0.17.bb
-@@ -15,6 +15,7 @@ SRC_URI = "${DEBIAN_MIRROR}/main/n/netkit-telnet/netkit-telnet_${PV}.orig.tar.gz
-            file://CVE-2020-10188.patch \
-            file://0001-telnetd-utility.c-Fix-buffer-overflow-in-netoprintf.patch \
-            file://0001-utility-Include-time.h-form-time-and-strftime-protot.patch \
-+           file://0001-Drop-using-register-keyword.patch \
++-- 
++2.39.0
++
+diff --git a/meta-filesystems/recipes-utils/fatcat/fatcat_1.1.1.bb b/meta-filesystems/recipes-utils/fatcat/fatcat_1.1.1.bb
+index 982a52d62f..214b3f914c 100644
+--- a/meta-filesystems/recipes-utils/fatcat/fatcat_1.1.1.bb
++++ b/meta-filesystems/recipes-utils/fatcat/fatcat_1.1.1.bb
+@@ -10,6 +10,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=57fbbfebd0dd1d6ff21b8cecb552a03f"
+ SRC_URI = "git://github.com/Gregwar/fatcat.git;branch=master;protocol=https \
+            file://0001-Use-unistd.h-not-argp.h-for-all-POSIX-systems.patch \
+            file://0002-Enable-64bit-off_t.patch \
++           file://0001-Replace-std-ptr_fun-for-c-17.patch \
             "
  
- UPSTREAM_CHECK_URI = "${DEBIAN_MIRROR}/main/n/netkit-telnet/"
+ SRCREV = "99cb99fc86eb1601ac7ae27f5bba23add04d2543"
 -- 
 2.39.0
 
