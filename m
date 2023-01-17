@@ -2,56 +2,56 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 58C77C6379F
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 59B72C678D4
 	for <webhook@archiver.kernel.org>; Tue, 17 Jan 2023 05:22:52 +0000 (UTC)
-Received: from mail-pj1-f52.google.com (mail-pj1-f52.google.com [209.85.216.52])
- by mx.groups.io with SMTP id smtpd.web11.190222.1673932963011407599
+Received: from mail-pl1-f182.google.com (mail-pl1-f182.google.com [209.85.214.182])
+ by mx.groups.io with SMTP id smtpd.web10.189984.1673932964967845652
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 16 Jan 2023 21:22:43 -0800
+ Mon, 16 Jan 2023 21:22:45 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=HS4FwpPm;
- spf=pass (domain: gmail.com, ip: 209.85.216.52, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f52.google.com with SMTP id z9-20020a17090a468900b00226b6e7aeeaso33078834pjf.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 16 Jan 2023 21:22:42 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=A8ETshH6;
+ spf=pass (domain: gmail.com, ip: 209.85.214.182, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f182.google.com with SMTP id g23so16821410plq.12
+        for <openembedded-devel@lists.openembedded.org>; Mon, 16 Jan 2023 21:22:44 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=0HeCDoGrS50ppwj0lOfM49RP88eNimCKsDQGfGIl9xo=;
-        b=HS4FwpPm7pQg9/Ld5rSFnotNDVW0iXpGjEkIYJoyYftqc1I1e4v0JCs2xIEDxtVtgR
-         y8HPLOVWOo1ukDp+dQcdoNViFbjw+ThJhdi9sgZHLO0Np6dVrtWQqW/6yKww1PrHnngj
-         thxi2C+8huQDaGNLUV56/M73P8cw5Sg7GLTWqs+vM1Hh/EzLEuHdxhCSBjpfmYlKHulG
-         AqiKQEZ35qS7+EEEKRPPOMcdoD+MMXV9ndpSYUuLyaRxtZtBv0MTMbpcDXMWjQdVRocf
-         s0MkQOURo3cftB5VRpjs6P5TvYOKyLRVoFo6OMETlVFYJ3X3qRqIJpR2Fu8u9iZhDI+F
-         ldAg==
+        bh=z6aewbRUKvoj5ow6tq/OHmCpwd0LOwcIVBFRmWjbfpo=;
+        b=A8ETshH6H/twNrPKENV92MRPgLYj4RRHdCVtbRYASp3+6+OSxljRa0KmEJZdEf0r9c
+         OmyC8fHi4f/FyFCnkXfC9ZXGL09fGMpyB/P7FUgfB91mZw3fAaGYZbuBDbzwbIecn9jT
+         NvKyw1JYgsPj2qZg32wDaA1Q+84KgiHnAIr1KYgLtPyvqvF4VKAJHJfoTDu6a5SGHnNf
+         juAlUgTexw98GALvnt659jBLA9pXYU6FL6DHaZcGifYxwmSJV+edRkZB6KnrjWbMATFZ
+         XOfRoYa9tKg7Nsmq6SNooxznMQdvsAdwXHJ94KUEW/B6bg4b/XjeKUnwjf2E3fPTdtgU
+         qOPg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=0HeCDoGrS50ppwj0lOfM49RP88eNimCKsDQGfGIl9xo=;
-        b=K/M7rYv62LFBhbqF66TwbZZGO1BM19u5pQGJuZjWySHxRL84IzAotweJOEEHYfw7w9
-         UfL8g6dmSfLgB6bdJ2KOxO8dAMJ6pwldFySBllz//1X7i4pUCSG/P7PA83vC4FJwGbDS
-         TARB/ijdI+owXkWj19DhGNy3Vj6BawOBofT8y6vycC6PCesqbsaCsSNdECAXdvB5Nzgz
-         031xyDV+tDL7ePwXe7a/UE1LFNvFWB+J2R1/yuT1Zix2JbjAKy+w68DHQSJYvKFPqftl
-         StOjjb5r8qsCrLSD+fvz2HdP3XRrLSLkZvHK5u1BGBpnrmhpksWCz6vwELZslJHN7ypM
-         C4gA==
-X-Gm-Message-State: AFqh2krKzxxW2DpL8y8eCqHG2jZKl5jk2FR6gZtvewVJsthhkXgPl168
-	ddp9EwGq2Yo8vWeNNxACdOnSIAWmfKdpTw==
-X-Google-Smtp-Source: AMrXdXs0F85kvZc9Cj2Gp99wtr9631j8eY4wg9SwiLd3dLSFD/cRWCv7fx6CQmOg/TtKAqIBL5IcoQ==
-X-Received: by 2002:a05:6a20:a009:b0:b8:b0fe:cd40 with SMTP id p9-20020a056a20a00900b000b8b0fecd40mr2516485pzj.39.1673932962225;
-        Mon, 16 Jan 2023 21:22:42 -0800 (PST)
+        bh=z6aewbRUKvoj5ow6tq/OHmCpwd0LOwcIVBFRmWjbfpo=;
+        b=QaAFfzUmuGvs4AGqPzjTA7KlBXxr8mhfghBkDFcf47rk64Buk+bBn9tViMeT16g++4
+         plqMtEn8UzaS0Wo2lq01ix4QOgN44ZA9x3ZFTUZT+DbbTOIgja2Q0+HM0gR5vWkPU+Y7
+         4leSaHbNwciRXDo+cEP77/5st5cacq/cscN3Z2hpoSKS8K1p+glNsFE3cnpnN9bk+xaD
+         UnCYYaxVH8IBn/haaMyh+0C81WruNtIpBK/rEZxkDfHUYiaRCFsH6n19r8WWXdn0C7Dq
+         Ri5fKPszUDm8bVds215Ow9K87H1NOIG7OU3+ZwlTB3WUzKHmThoBpnMLCyYUJU8/rYER
+         S90A==
+X-Gm-Message-State: AFqh2kq2JmmVZYiQYOWlBU3PBj+5ws+4C29mmd98yM+iJtVwN8cEbd4P
+	S2jLwXj+rY7dydZBc0GxGN0jzslELFxeaw==
+X-Google-Smtp-Source: AMrXdXvLKG3KUlDQUtCPgH4EhjTzIeGtu53FkH4twc5DazAmB/P9Nkw1FMqNKvBl8eTOUZoDLG/Jiw==
+X-Received: by 2002:a05:6a20:3b05:b0:b0:1e9b:e932 with SMTP id c5-20020a056a203b0500b000b01e9be932mr1682716pzh.40.1673932964071;
+        Mon, 16 Jan 2023 21:22:44 -0800 (PST)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9181:1cf0::b940])
-        by smtp.gmail.com with ESMTPSA id c22-20020a6566d6000000b0045dc85c4a5fsm12682692pgw.44.2023.01.16.21.22.41
+        by smtp.gmail.com with ESMTPSA id c22-20020a6566d6000000b0045dc85c4a5fsm12682692pgw.44.2023.01.16.21.22.43
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 16 Jan 2023 21:22:41 -0800 (PST)
+        Mon, 16 Jan 2023 21:22:43 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-filesystems][PATCH 4/7] fatcat: Fix build with std=c++17
-Date: Mon, 16 Jan 2023 21:22:34 -0800
-Message-Id: <20230117052237.3117521-4-raj.khem@gmail.com>
+Subject: [meta-python][PATCH 6/7] python3-matplotlib: Upgrade to 3.6.3
+Date: Mon, 16 Jan 2023 21:22:36 -0800
+Message-Id: <20230117052237.3117521-6-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.39.0
 In-Reply-To: <20230117052237.3117521-1-raj.khem@gmail.com>
 References: <20230117052237.3117521-1-raj.khem@gmail.com>
@@ -61,81 +61,86 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 17 Jan 2023 05:22:52 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100590
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100592
+
+Forward port the disable download patch
+Location of license changed inside setup.py
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../0001-Replace-std-ptr_fun-for-c-17.patch   | 48 +++++++++++++++++++
- .../recipes-utils/fatcat/fatcat_1.1.1.bb      |  1 +
- 2 files changed, 49 insertions(+)
- create mode 100644 meta-filesystems/recipes-utils/fatcat/fatcat/0001-Replace-std-ptr_fun-for-c-17.patch
+ .../matplotlib-disable-download.patch         | 26 ++++++++++++++-----
+ ...b_3.5.3.bb => python3-matplotlib_3.6.3.bb} |  4 +--
+ 2 files changed, 22 insertions(+), 8 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-matplotlib_3.5.3.bb => python3-matplotlib_3.6.3.bb} (93%)
 
-diff --git a/meta-filesystems/recipes-utils/fatcat/fatcat/0001-Replace-std-ptr_fun-for-c-17.patch b/meta-filesystems/recipes-utils/fatcat/fatcat/0001-Replace-std-ptr_fun-for-c-17.patch
-new file mode 100644
-index 0000000000..277a368b67
---- /dev/null
-+++ b/meta-filesystems/recipes-utils/fatcat/fatcat/0001-Replace-std-ptr_fun-for-c-17.patch
-@@ -0,0 +1,48 @@
-+From 455001cb0112f7324ab50f555aa5ed5eae1bb93b Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Mon, 16 Jan 2023 19:23:18 -0800
-+Subject: [PATCH] Replace std::ptr_fun for c++17
-+
-+std::ptr_fun was deprecated in C++11, and removed completely in C++17.
-+Similarly, std::not1 is deprecated since C++17.
-+
-+Modern compilers like clang >= 16 have started to notice it
-+
-+src/FatUtils.h:41:46: error: use of undeclared identifier 'ptr_fun'
-+|   s.erase(find_if(s.rbegin(), s.rend(), not1(ptr_fun<int, int>(isspace))).base(), s.end());
-+
-+Therefore replace ptr_fun with lambda
-+
-+Also use 'unsigned char' parameter to std::isspace, for reason see [1]
-+
-+[1] https://en.cppreference.com/w/cpp/string/byte/isspace#Notes
-+
-+Upstream-Status: Submitted [https://github.com/Gregwar/fatcat/pull/36]
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ src/FatUtils.h | 4 ++--
-+ 1 file changed, 2 insertions(+), 2 deletions(-)
-+
-+diff --git a/src/FatUtils.h b/src/FatUtils.h
-+index 5080f2a..a8d69ee 100644
-+--- a/src/FatUtils.h
-++++ b/src/FatUtils.h
-+@@ -32,13 +32,13 @@ using namespace std;
-+ 
-+ // trim from start
-+ static inline string ltrim(string s) {
-+-  s.erase(s.begin(), find_if(s.begin(), s.end(), not1(ptr_fun<int, int>(isspace))));
-++  s.erase(s.begin(), find_if(s.begin(), s.end(), [](unsigned char c) {return !isspace(c);}));
-+   return s;
-+ }
-+ 
-+ // trim from end
-+ static inline string rtrim(string s) {
-+-  s.erase(find_if(s.rbegin(), s.rend(), not1(ptr_fun<int, int>(isspace))).base(), s.end());
-++  s.erase(find_if(s.rbegin(), s.rend(), [](unsigned char c) {return !isspace(c);}).base(), s.end());
-+   return s;
-+ }
-+ 
-+-- 
-+2.39.0
-+
-diff --git a/meta-filesystems/recipes-utils/fatcat/fatcat_1.1.1.bb b/meta-filesystems/recipes-utils/fatcat/fatcat_1.1.1.bb
-index 982a52d62f..214b3f914c 100644
---- a/meta-filesystems/recipes-utils/fatcat/fatcat_1.1.1.bb
-+++ b/meta-filesystems/recipes-utils/fatcat/fatcat_1.1.1.bb
-@@ -10,6 +10,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=57fbbfebd0dd1d6ff21b8cecb552a03f"
- SRC_URI = "git://github.com/Gregwar/fatcat.git;branch=master;protocol=https \
-            file://0001-Use-unistd.h-not-argp.h-for-all-POSIX-systems.patch \
-            file://0002-Enable-64bit-off_t.patch \
-+           file://0001-Replace-std-ptr_fun-for-c-17.patch \
-            "
+diff --git a/meta-python/recipes-devtools/python/python3-matplotlib/matplotlib-disable-download.patch b/meta-python/recipes-devtools/python/python3-matplotlib/matplotlib-disable-download.patch
+index 25c49afb97..899cac624a 100644
+--- a/meta-python/recipes-devtools/python/python3-matplotlib/matplotlib-disable-download.patch
++++ b/meta-python/recipes-devtools/python/python3-matplotlib/matplotlib-disable-download.patch
+@@ -6,18 +6,32 @@ Signed-off-by: Mark Hatle <mark.hatle@xilinx.com>
  
- SRCREV = "99cb99fc86eb1601ac7ae27f5bba23add04d2543"
+ --- a/setup.py
+ +++ b/setup.py
+-@@ -316,8 +316,6 @@ setup(  # Finally, pass this all along t
++@@ -303,7 +303,6 @@ setup(  # Finally, pass this all along t
+      setup_requires=[
+          "certifi>=2020.06.20",
+-         "numpy>=1.17",
+--        "setuptools_scm>=4,<7",
+--        "setuptools_scm_git_archive",
++         "numpy>=1.19",
++-        "setuptools_scm>=7",
+      ],
+      install_requires=[
+-         "cycler>=0.10",
++         "contourpy>=1.0.1",
++@@ -315,13 +314,7 @@ setup(  # Finally, pass this all along t
++         "pillow>=6.2.0",
++         "pyparsing>=2.2.1",
++         "python-dateutil>=2.7",
++-    ] + (
++-        # Installing from a git checkout that is not producing a wheel.
++-        ["setuptools_scm>=7"] if (
++-            Path(__file__).with_name(".git").exists() and
++-            os.environ.get("CIBUILDWHEEL", "0") != "1"
++-        ) else []
++-    ),
+++    ],
++     use_scm_version={
++         "version_scheme": "release-branch-semver",
++         "local_scheme": "node-and-date",
+ --- a/setupext.py
+ +++ b/setupext.py
+-@@ -64,40 +64,7 @@ def get_from_cache_or_download(url, sha)
++@@ -65,40 +65,7 @@ def get_from_cache_or_download(url, sha)
+      BytesIO
+          The file loaded into memory.
+      """
+diff --git a/meta-python/recipes-devtools/python/python3-matplotlib_3.5.3.bb b/meta-python/recipes-devtools/python/python3-matplotlib_3.6.3.bb
+similarity index 93%
+rename from meta-python/recipes-devtools/python/python3-matplotlib_3.5.3.bb
+rename to meta-python/recipes-devtools/python/python3-matplotlib_3.6.3.bb
+index 1a0b93b030..809f9425ba 100644
+--- a/meta-python/recipes-devtools/python/python3-matplotlib_3.5.3.bb
++++ b/meta-python/recipes-devtools/python/python3-matplotlib_3.6.3.bb
+@@ -7,7 +7,7 @@ HOMEPAGE = "https://github.com/matplotlib/matplotlib"
+ SECTION = "devel/python"
+ LICENSE = "PSF-2.0"
+ LIC_FILES_CHKSUM = "\
+-    file://setup.py;beginline=296;endline=296;md5=20e7ab4d2b2b1395a0e4ab800181eb96 \
++    file://setup.py;beginline=283;endline=283;md5=20e7ab4d2b2b1395a0e4ab800181eb96 \
+     file://LICENSE/LICENSE;md5=afec61498aa5f0c45936687da9a53d74 \
+ "
+ 
+@@ -21,7 +21,7 @@ DEPENDS = "\
+     python3-certifi-native \
+     python3-setuptools-scm-native \
+ "
+-SRC_URI[sha256sum] = "339cac48b80ddbc8bfd05daae0a3a73414651a8596904c2a881cfd1edb65f26c"
++SRC_URI[sha256sum] = "1f4d69707b1677560cd952544ee4962f68ff07952fb9069ff8c12b56353cb8c9"
+ 
+ inherit pypi setuptools3 pkgconfig
+ 
 -- 
 2.39.0
 
