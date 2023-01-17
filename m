@@ -2,68 +2,68 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 06A79C6379F
-	for <webhook@archiver.kernel.org>; Tue, 17 Jan 2023 07:26:43 +0000 (UTC)
-Received: from mail1.bemta37.messagelabs.com (mail1.bemta37.messagelabs.com [85.158.142.112])
- by mx.groups.io with SMTP id smtpd.web10.191120.1673940399128580342
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EADDBC3DA78
+	for <webhook@archiver.kernel.org>; Tue, 17 Jan 2023 07:26:52 +0000 (UTC)
+Received: from mail1.bemta32.messagelabs.com (mail1.bemta32.messagelabs.com [195.245.230.2])
+ by mx.groups.io with SMTP id smtpd.web11.191366.1673940411826513963
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 16 Jan 2023 23:26:39 -0800
+ Mon, 16 Jan 2023 23:26:52 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=nZTLyp+v;
- spf=pass (domain: fujitsu.com, ip: 85.158.142.112, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=AGytGLPG;
+ spf=pass (domain: fujitsu.com, ip: 195.245.230.2, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1673940397; i=@fujitsu.com;
-	bh=83ufGQcFaHOfHD3Wve7ucotChPhQwjvqCwm9IY8nJGk=;
+	s=170520fj; t=1673940410; i=@fujitsu.com;
+	bh=rjw1BqeVub7IMVex6AYkryGtHUttM2DfHdts0tLB1S0=;
 	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
 	 MIME-Version:Content-Type;
-	b=nZTLyp+vvw09/e+TN+YHYamJLw14k/NB2S1Nkb8GOEj0hJK9fU7iyKr2GLq1vcXPM
-	 K19lnhy73poxU/So6TMjgiZKXVYtXGVGlm7JMS60kRNbr6X0Ddzei2DH4AzVCbU0Cz
-	 mOU9ZByNsaoUE7vbRIU4njaKzp2/+TCFwTm/UTd2yIrwKhhdGCSpkIju8JeEm33N9n
-	 PII1vr3T/2MhaCjanoudm2IbJPl+nisFa8m+KoQXplo9zWomPNpiam6rcCy0hKQTs5
-	 Otzo5OBQSzB+1rtcumqOOx+tLWtajc8mg42/hsvRXXSr5qrcuh8+B4FiGVEeGQ9J4w
-	 QsgM72ubVs5Ng==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrOIsWRWlGSWpSXmKPExsViZ8OxWXeN77F
-  kg/0PFC0uHl7K7MDocW7jCsYAxijWzLyk/IoE1oxFM+ayF8znrJh2di1LA+Muji5GLg4hgYeM
-  Er8/XGXsYuQEcq4wSTQvsoNI7GWUuH92DViCTUBK4sb9/2wgtoiAvsTS2XuYQWxmARWJF7972
-  EFsYQFPib9T3zKB2CwCqhK7998Cs3kFnCT2Ne8CsyUEFCSmPHwP1ssp4CzRNPccM8RiJ4llU1
-  8zQ9QLSpyc+YQFYr6ExMEXL5ghehUlZl9uZoGwKyVaP/yCstUkrp7bxDyBUXAWkvZZSNoXMDK
-  tYjQvTi0qSy3SNTTTSyrKTM8oyU3MzNFLrNJN1Est1c3LLyrJ0DXUSywv1kstLtYrrsxNzknR
-  y0st2cQIDN+U4lTmHYyXl/3RO8QoycGkJMp70vRYshBfUn5KZUZicUZ8UWlOavEhRhkODiUJ3
-  lNeQDnBotT01Iq0zBxgLMGkJTh4lER4wy2B0rzFBYm5xZnpEKlTjIpS4ryOPkAJAZBERmkeXB
-  ssfi8xykoJ8zIyMDAI8RSkFuVmlqDKv2IU52BUEuZ19AaawpOZVwI3/RXQYiagxR4lR0EWlyQ
-  ipKQamATOXu/eJXfwPeOx7Vf/+JcJ7TLZcPhKwcVVS1yDGHLkyzYdE/tx8FvB/n8Pt3hky8zI
-  1o60ZJvgodNZFSP09aI7xwv9yA+MIVsP38meMKXC0b6NS6LdbgNj0QyhSQtmSwesbjtpVfl+P
-  uv35Y97Hs3u55rtWPH26XuTZJP/rAFrDtz5/9Bm5csa3bXXDrMeO3tnZZJ4BtsWeRMtdYf9nG
-  kZ7Baqq3xOzcvYtS94B/u1U1FFIQVTqhYnXk//c8Y41t17S3mKtOk5BtWpPpETVFr+Cnzgsr+
-  3pkY10P0Jd/bSTXlpLjVvVnn0C6o+OH7pQ4Dum7bO9k1Hq5ks9Pj/80vPlGh3lQjbMF0oQe/p
-  MSWW4oxEQy3mouJEAJSNhHNaAwAA
+	b=AGytGLPGBG07bBEzzfVpihk/oM0eHkbBbNCIUF6SJncRkrUvO/FEtpIETclrlJcYS
+	 6fp1nPlx3ShsY/ohqvvIxPuSdNQugEVy05DRLioSuTkmjg926hLp8WD+FpLu8r2jX5
+	 pgUHFVqx6FLDanHXim525YRL/6GRrC45WraK721shPAD91cYA8l0IQ+H4QJ/2WQFtn
+	 qm+D0NALdp3z23Xc6rsyIOkO8tbcLtrw8n1b4xLTF7sgWAhtwbP1y8SIUmS34/PlCl
+	 OOiA0UO22SIdlwlJGLLBe+i+EUq6MbkUJK16C15k0CEvEaKoaeKG8E1euLFpJ2rhBj
+	 ebWVgo+Gp2nuQ==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrKIsWRWlGSWpSXmKPExsViZ8ORqLvT91i
+  ywbQHghYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8bd/ytZCmZzVdx/6t/AuJyzi5GTQ0jgCaPE
+  9suOXYxcQPYNJomuNUuYIZy9jBLzr75jBqliE5CSuHH/PxuILSKgL7F09h6wOLOAisSL3z3sI
+  LawgJ/Erl+vWEFsFgFViYbmLhYQm1fASeLj32NgtoSAgsSUh+/BejkFnCWa5p5jhrjCSWLZ1N
+  fMEPWCEidnPmGBmC8hcfDFC2aIXkWJ2ZeboeZUSrR++AVlq0lcPbeJeQKj4Cwk7bOQtC9gZFr
+  FaFacWlSWWqRraKaXVJSZnlGSm5iZo5dYpZuol1qqW55aXKJrqJdYXqyXWlysV1yZm5yTopeX
+  WrKJERi6KcVMz3cwnl32R+8QoyQHk5Io70nTY8lCfEn5KZUZicUZ8UWlOanFhxhlODiUJHhPe
+  QHlBItS01Mr0jJzgHEEk5bg4FES4Q23BErzFhck5hZnpkOkTjEqSonzOvoAJQRAEhmleXBtsN
+  i9xCgrJczLyMDAIMRTkFqUm1mCKv+KUZyDUUmY19EbaApPZl4J3PRXQIuZgBZ7lBwFWVySiJC
+  SamBqP71P8FOsjPhHoYyjsv/Zb11RcDcX1dVhsXlkfT06aWZi+9ssqeM1q//xa+7UtY6YY+31
+  IHqG4SeblO4grgf+fs/XPVJREnJQ3REuJzHpgUnUgnSB+2WPGHadb/hT1TDNOuz+l5Zvk/32f
+  gyT8knz+77uZtB0npkaFpWp3KFB++1P7Re8oqpy71f6/I3HtzK8e5rJ/+Sr8NGyC5+n7Fa+pR
+  ElsHWeK6du3q1nTD/Ml2qfr7LYY7D6aXbA9n931HazT9r60pT/erqOQv7ZeKvqCRsdLxoGcD6
+  7z7BvpeE5nTRpW8vSTbN4jGcJneCYpsCSqsqePOPJsc/tUdz/EieW+brysj/4aHHhkN+jVQxK
+  LMUZiYZazEXFiQClZG/FWAMAAA==
 X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-14.tower-728.messagelabs.com!1673940396!379313!1
-X-Originating-IP: [62.60.8.179]
+X-Msg-Ref: server-22.tower-591.messagelabs.com!1673940409!383951!1
+X-Originating-IP: [62.60.8.97]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.102.1; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 26155 invoked from network); 17 Jan 2023 07:26:36 -0000
-Received: from unknown (HELO n03ukasimr04.n03.fujitsu.local) (62.60.8.179)
-  by server-14.tower-728.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 17 Jan 2023 07:26:36 -0000
-Received: from n03ukasimr04.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTP id 066D0150
-	for <openembedded-devel@lists.openembedded.org>; Tue, 17 Jan 2023 07:26:36 +0000 (GMT)
+Received: (qmail 19938 invoked from network); 17 Jan 2023 07:26:49 -0000
+Received: from unknown (HELO n03ukasimr01.n03.fujitsu.local) (62.60.8.97)
+  by server-22.tower-591.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 17 Jan 2023 07:26:49 -0000
+Received: from n03ukasimr01.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTP id DF63F10019A
+	for <openembedded-devel@lists.openembedded.org>; Tue, 17 Jan 2023 07:26:48 +0000 (GMT)
 Received: from R01UKEXCASM223.r01.fujitsu.local (R01UKEXCASM223 [10.182.185.121])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTPS id EEBAE73
-	for <openembedded-devel@lists.openembedded.org>; Tue, 17 Jan 2023 07:26:35 +0000 (GMT)
+	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTPS id CEB2F100195
+	for <openembedded-devel@lists.openembedded.org>; Tue, 17 Jan 2023 07:26:48 +0000 (GMT)
 Received: from localhost.localdomain (10.167.225.33) by
  R01UKEXCASM223.r01.fujitsu.local (10.182.185.121) with Microsoft SMTP Server
- (TLS) id 15.0.1497.42; Tue, 17 Jan 2023 07:26:34 +0000
+ (TLS) id 15.0.1497.42; Tue, 17 Jan 2023 07:26:47 +0000
 From: <wangmy@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-networking] [PATCH] unbound: upgrade 1.17.0 -> 1.17.1
-Date: Tue, 17 Jan 2023 15:26:15 +0800
-Message-ID: <1673940378-20528-2-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH] python3-xlsxwriter: upgrade 3.0.6 -> 3.0.7
+Date: Tue, 17 Jan 2023 15:26:18 +0800
+Message-ID: <1673940378-20528-5-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 In-Reply-To: <1673940378-20528-1-git-send-email-wangmy@fujitsu.com>
 References: <1673940378-20528-1-git-send-email-wangmy@fujitsu.com>
@@ -76,33 +76,39 @@ X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 17 Jan 2023 07:26:43 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100626
+ <openembedded-devel@lists.openembedded.org>; Tue, 17 Jan 2023 07:26:52 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100629
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
+Changelog:
+===========
+* Improved :func:'autofit' algorithm to account for the additional width of
+  autofilter and table dropdowns.
+
+* Improved :func:'autofit' take user defined column widths into account.
+
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../unbound/{unbound_1.17.0.bb => unbound_1.17.1.bb}            | 2 +-
+ ...{python3-xlsxwriter_3.0.6.bb => python3-xlsxwriter_3.0.7.bb} | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-networking/recipes-support/unbound/{unbound_1.17.0.bb => unbound_1.17.1.bb} (96%)
+ rename meta-python/recipes-devtools/python/{python3-xlsxwriter_3.0.6.bb => python3-xlsxwriter_3.0.7.bb} (82%)
 
-diff --git a/meta-networking/recipes-support/unbound/unbound_1.17.0.bb b/meta-networking/recipes-support/unbound/unbound_1.17.1.bb
-similarity index 96%
-rename from meta-networking/recipes-support/unbound/unbound_1.17.0.bb
-rename to meta-networking/recipes-support/unbound/unbound_1.17.1.bb
-index 0dd0ce882..caa1bb339 100644
---- a/meta-networking/recipes-support/unbound/unbound_1.17.0.bb
-+++ b/meta-networking/recipes-support/unbound/unbound_1.17.1.bb
-@@ -12,7 +12,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=5308494bc0590c0cb036afd781d78f06"
- SRC_URI = "git://github.com/NLnetLabs/unbound.git;protocol=http;branch=master;protocol=https \
- 	file://0001-contrib-add-yocto-compatible-init-script.patch \
+diff --git a/meta-python/recipes-devtools/python/python3-xlsxwriter_3.0.6.bb b/meta-python/recipes-devtools/python/python3-xlsxwriter_3.0.7.bb
+similarity index 82%
+rename from meta-python/recipes-devtools/python/python3-xlsxwriter_3.0.6.bb
+rename to meta-python/recipes-devtools/python/python3-xlsxwriter_3.0.7.bb
+index 2b32c0f59..e73e579e3 100644
+--- a/meta-python/recipes-devtools/python/python3-xlsxwriter_3.0.6.bb
++++ b/meta-python/recipes-devtools/python/python3-xlsxwriter_3.0.7.bb
+@@ -16,6 +16,6 @@ RDEPENDS:${PN} += " \
+ 	python3-io \
  "
--SRCREV = "d25e0cd9b0545ff13120430c94326ceaf14b074f"
-+SRCREV = "90831af981221bbce1cd7b15055562336760e484"
  
- inherit autotools pkgconfig systemd update-rc.d
+-SRC_URI[sha256sum] = "2f9e5ea13343fe85486e349d4e5fdf746bb69dc7bc1dedfa9b5fae2bb48c0795"
++SRC_URI[sha256sum] = "1239958b12da12be6abf05b32f64ff162eb75fff0fdf00d901ca0f46dc0557cf"
  
+ BBCLASSEXTEND = "native nativesdk"
 -- 
 2.25.1
 
