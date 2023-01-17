@@ -2,71 +2,71 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E05A3C3DA78
-	for <webhook@archiver.kernel.org>; Tue, 17 Jan 2023 07:18:42 +0000 (UTC)
-Received: from mail1.bemta34.messagelabs.com (mail1.bemta34.messagelabs.com [195.245.231.4])
- by mx.groups.io with SMTP id smtpd.web11.191276.1673939913513075140
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 054CDC3DA78
+	for <webhook@archiver.kernel.org>; Tue, 17 Jan 2023 07:19:53 +0000 (UTC)
+Received: from mail1.bemta37.messagelabs.com (mail1.bemta37.messagelabs.com [85.158.142.2])
+ by mx.groups.io with SMTP id smtpd.web11.191292.1673939986077552201
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 16 Jan 2023 23:18:33 -0800
+ Mon, 16 Jan 2023 23:19:46 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=RsIvAOEU;
- spf=pass (domain: fujitsu.com, ip: 195.245.231.4, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=jBowxM3d;
+ spf=pass (domain: fujitsu.com, ip: 85.158.142.2, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1673939911; i=@fujitsu.com;
-	bh=qyxoNmBW/5jgLcyN0SExdS04p2bsj6vsWLX/Yl4Ynao=;
+	s=170520fj; t=1673939984; i=@fujitsu.com;
+	bh=I6iuYUDcMp7oE2vBekj8/eZRpqyWcM01bm0ZHTCBtLA=;
 	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
 	 MIME-Version:Content-Type;
-	b=RsIvAOEUdGpRDZ2NYoo7D/tezB5cKaXxt1va7uhkoxy3X/BE79xVxo9nmxUFUcoEh
-	 HQ+4OwZ9CHI1ohUSt/35ioUZwTgRkLyYJ4HENPNYPWQvxN2d0qjuJh+iLUUUYIWQC4
-	 bb3EpQG3otunXWCh1j2axk+pV8mNYmJxitnW+XIUQ4hUYcsIIIJysH6+dJNxlm5qKf
-	 QFKxRK6HYHaRF4CRC+BUwZD/uSskX7ZZfyZ58LHjbMNq7jsXUGrWjMIqJfAXp2qR3W
-	 I6yQNT20SxrfnBPsDlWK7z9G8UWdGJTEdGjq8312IJfmnFoqPbhK459MN1X7OeSamZ
-	 9m/yXrgwDTX1A==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrKIsWRWlGSWpSXmKPExsViZ8ORpHvc+1i
-  ywfbd0hYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8bPvQdYCrbLVix/vI6pgXGpZBcjJ4eQwENG
-  iZ8H1bsYuYDsq0wSsy7vYYNw9jJKNM95wwhSxSYgJXHj/n82EFtEQF9i6ew9zCA2s4CKxIvfP
-  ewgtrBAoMTsd8/B6lkEVCV6N75gArF5BZwkbuw8wwpiSwgoSEx5+B6sl1PAWWLOy6XsEFc4Sf
-  y4sJIVol5Q4uTMJywQ8yUkDr54wQzRqygx+3IzC4RdKdH64ReUrSZx9dwm5gmMgrOQtM9C0r6
-  AkWkVo2lxalFZapGumV5SUWZ6RkluYmaOXmKVbqJeaqlueWpxia6RXmJ5sV5qcbFecWVuck6K
-  Xl5qySZGYOimFCvd28E4bdkfvUOMkhxMSqK8J02PJQvxJeWnVGYkFmfEF5XmpBYfYpTh4FCS4
-  D3lBZQTLEpNT61Iy8wBxhFMWoKDR0mEN9wSKM1bXJCYW5yZDpE6xagoJc57DaRPACSRUZoH1w
-  aL3UuMslLCvIwMDAxCPAWpRbmZJajyrxjFORiVhHmfeABN4cnMK4Gb/gpoMRPQYo+SoyCLSxI
-  RUlINTMu/ejufnr9yjlFVQS/jRRdlf0Mu958XlDt49XvmshQeTX03a/2pQiOD94LloVKujad2
-  G6l4vu32b486GfJz8f0qeyGFKEP/cO1Du2O7X54SePa4X72j4KXj67mfpT8vL/60uCOv4uLCK
-  XP/OOUGFjyazuqtsJt3Oqfz5vqnM07qiDN9fqIlV9E+Mfu0oe6Up0f2nlpj+uzWU5NbAf/NP7
-  u9K3AuXXfLXfFcda1qwf1txrx6Wn/jnZOSzjyY4nJC/FYo1/s5LrMX3ancc/isDetbve9TlHg
-  cvhyb/lrj0cezHfEP38+cJ9Mk8fq2hcb3VKlDBnJZIpU5m+YZ5y+R2mJ3bP11Hs//K+S1i2Q+
-  3lViKc5INNRiLipOBAAtr+/RWAMAAA==
+	b=jBowxM3dCFHZpu+4PIsNrY1aifF1A9pWc1PVOMdoXngPFzxYY3dCOMI3KP8BOpKES
+	 WJIXIxxhCNVbiutcYnFZM1Ow2EVHcxQhWKIjc6R8IYNCg92LSOL0Wpo1+RVVyG7s36
+	 eb44f+aAqJXfbtyt9zsfhjNCjYlIT/HwdB9S0RsWB4v+7NZuc1PtnwQPISQlNGQKR3
+	 Sv3+m0nT4LoM9SI3g0xkPJvmk4qBiG9U7aotAmj1chP/xKwlKvTEyfZ+JgYmS9MUxU
+	 j0Q/IOJsFqOo938vrPWcYRyW9aI0bh0Gk40Bue1vLgn+NVhDezno5ZOG4c3zC2kA1z
+	 MFPuNlt6P4YxQ==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrOIsWRWlGSWpSXmKPExsViZ8ORpMvvcyz
+  ZYOchDYuLh5cyOzB6nNu4gjGAMYo1My8pvyKBNePch7nsBVN4K+b/XMHawHiJu4uRi0NI4CGj
+  xMM3hxghnKtMEjvXzmeFcPYySlzac4Wti5GTg01ASuLG/f9gtoiAvsTS2XuYQWxmARWJF7972
+  EFsYQEPiRUH9gA1c3CwCKhKTH1TBhLmFXCSOHn2AFi5hICCxJSH78FsTgFniYe374ONFAKq+d
+  e+mBGiXlDi5MwnLBDjJSQOvngB1asoMftyMwuEXSnR+uEXlK0mcfXcJuYJjIKzkLTPQtK+gJF
+  pFaN5cWpRWWqRrqGFXlJRZnpGSW5iZo5eYpVuol5qqW5eflFJhq6hXmJ5sV5qcbFecWVuck6K
+  Xl5qySZGYPimFKcE7GDctOyP3iFGSQ4mJVHek6bHkoX4kvJTKjMSizPii0pzUosPMcpwcChJ8
+  J7yAsoJFqWmp1akZeYAYwkmLcHBoyTCG24JlOYtLkjMLc5Mh0idYlSUEue9BtInAJLIKM2Da4
+  PF7yVGWSlhXkYGBgYhnoLUotzMElT5V4ziHIxKwrxPPICm8GTmlcBNfwW0mAlosUfJUZDFJYk
+  IKakGpg0RmoJzbpz2nGNrfOlvy7HqPc3RkaefLLf6Nd+D16XW3ePzqugHWnv+iP861NpVwGUj
+  dbIwaWNpf8FZazvNhHeSvif9i+JrHQJPnWZ2UZbgW3T9032xw+scJfZ8+nRtQXThm1WvZiZv5
+  7tUt2GBNReP6vurU1YHHDin2JJ4Z45BuRWL6/dfky9m2T1eY9oSeOb07eLzWw5I5qe2dmlMlv
+  n25f+/Taw3/29OTX74S74yzcJJNPpieI9i89Sg1ZlLnZdOzlDI0lv9XjVf7+yFu2s+2Do/mTV
+  Z7+yurKUf7zX2tNokhBkLH+S+fPjRioU/505yWXXhW8HVrbsb5szTyOCeEPYhq/tY7X3fHTI3
+  /MqUWIozEg21mIuKEwHKYhdRWgMAAA==
 X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-14.tower-571.messagelabs.com!1673939911!382854!1
+X-Msg-Ref: server-11.tower-728.messagelabs.com!1673939983!378362!1
 X-Originating-IP: [62.60.8.98]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.102.1; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 22411 invoked from network); 17 Jan 2023 07:18:31 -0000
+Received: (qmail 32727 invoked from network); 17 Jan 2023 07:19:43 -0000
 Received: from unknown (HELO n03ukasimr03.n03.fujitsu.local) (62.60.8.98)
-  by server-14.tower-571.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 17 Jan 2023 07:18:31 -0000
+  by server-11.tower-728.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 17 Jan 2023 07:19:43 -0000
 Received: from n03ukasimr03.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr03.n03.fujitsu.local (Postfix) with ESMTP id 29C3C1AE
-	for <openembedded-devel@lists.openembedded.org>; Tue, 17 Jan 2023 07:18:31 +0000 (GMT)
+	by n03ukasimr03.n03.fujitsu.local (Postfix) with ESMTP id 261C21AE
+	for <openembedded-devel@lists.openembedded.org>; Tue, 17 Jan 2023 07:19:43 +0000 (GMT)
 Received: from R01UKEXCASM223.r01.fujitsu.local (R01UKEXCASM223 [10.182.185.121])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by n03ukasimr03.n03.fujitsu.local (Postfix) with ESMTPS id 1E2871AD
-	for <openembedded-devel@lists.openembedded.org>; Tue, 17 Jan 2023 07:18:31 +0000 (GMT)
+	by n03ukasimr03.n03.fujitsu.local (Postfix) with ESMTPS id 1AA021AD
+	for <openembedded-devel@lists.openembedded.org>; Tue, 17 Jan 2023 07:19:43 +0000 (GMT)
 Received: from localhost.localdomain (10.167.225.33) by
  R01UKEXCASM223.r01.fujitsu.local (10.182.185.121) with Microsoft SMTP Server
- (TLS) id 15.0.1497.42; Tue, 17 Jan 2023 07:18:29 +0000
+ (TLS) id 15.0.1497.42; Tue, 17 Jan 2023 07:19:41 +0000
 From: <wangmy@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-networking] [PATCH] networkmanager: upgrade 1.40.0 -> 1.40.10
-Date: Tue, 17 Jan 2023 15:18:14 +0800
-Message-ID: <1673939896-20171-3-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH] python3-absl: upgrade 1.3.0 -> 1.4.0
+Date: Tue, 17 Jan 2023 15:19:27 +0800
+Message-ID: <1673939970-20246-2-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
-In-Reply-To: <1673939896-20171-1-git-send-email-wangmy@fujitsu.com>
-References: <1673939896-20171-1-git-send-email-wangmy@fujitsu.com>
+In-Reply-To: <1673939970-20246-1-git-send-email-wangmy@fujitsu.com>
+References: <1673939970-20246-1-git-send-email-wangmy@fujitsu.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-Originating-IP: [10.167.225.33]
@@ -76,86 +76,50 @@ X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 17 Jan 2023 07:18:42 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100606
+ <openembedded-devel@lists.openembedded.org>; Tue, 17 Jan 2023 07:19:53 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100610
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
 Changelog:
-==========
-* Fix the evaluation of the autoconnect retries.
-* nm-cloud-setup now preserves addresses added externally.
-* Ensure that dnsmasq is stopped after changing the dns backend and
-  restarting the service.
-* Fix honoring an explicit DHCPv6 DUID with dhclient.
-* Other various fixes.
-* Fixed a bug that caused devices (MACsec in particular) to be stuck in
-  UNAVAILABLE state and not transition to DISCONNECTED if the carrier was
-  ready too early.
-* Improved interoperability of MACsec with some Aruba switches by allowing
-  CKN shorter than 64 characters.
-* Fixed an assertion failure when restarting NetworkManager with MACsec
-  links configured.
-* Fixed a possible DHCP helper crash when handling failure to connect to
-  D-Bus.
-* Corrected calculation of expiration time for items configured from IPv6
-  neighbor discovery messages.
-* Various fixes for platforms that don't allow unaligned memory access.
-* team: also set empty port configuration so teamd
-  knows about the port.
-* team: restore port configuration after teamd respawn.
-* dhcp: revert restarting DHCP when MAC address changes,
-  for example during a bond fail over.
-* various documentation fixes.
-* fix non-exported ABI in libnm which was wrongly present
-  in the header files but unusable so far.
-* ifcfg-rh: fix writing ethtool pause settings to file.
-* core: set "proto static" for manual routing rules configured
-  by NetworkManager.
-* Various minor bugfixes.
-* Ensure that resolv.conf gets updated when the configuration changes.
-* Fix setting as bond primary an interface that doesn't exist yet when the
-  bond is activated.
-* The number of autoconnect retries is now accounted independently for each
-  device when there are profiles with multi-connect=multiple.
-* Don't print duplicate entries in the output of "NetworkManager
-  --print-config"
-* Fix the ifcfg-rh plugin to properly read infiniband P-Key connection
-  profiles without an explicit interface name.
-* Allow the removal of a bond port connection profile from the bond via
-  nmcli.
-* Fix race condition during the activation of veth profiles when the peer
-  already exists.
-* Decline the DHCPv6 lease if all addresses fail IPv6 duplicate address
-  detection (DAD).
-* Wait that devices get carrier before trying to resolve the system hostname
-  on them via DNS.
-* Fix race condition during the initial activation of OVS interfaces.
-* Profiles generated by nm-initrd-generator now have lower than default
-  priority.
-* Fix error when adding many SR-IOV virtual functions (VFs).
+==============
+NEW
+---
+    (testing) Added @flagsaver.as_parsed: this allows saving/restoring flags
+    using string values as if parsed from the command line and will also reflect
+    other flag states after command line parsing, e.g. .present is set.
+
+Changed
+--------
+    (logging) If no log dir is specified logging.find_log_dir() now falls back
+    to tempfile.gettempdir() instead of /tmp/.
+
+Fixed
+-------
+    (flags) Additional kwargs (e.g. short_name=) to DEFINE_multi_enum_class
+    are now correctly passed to the underlying Flag object.
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../{networkmanager_1.40.0.bb => networkmanager_1.40.10.bb}     | 2 +-
+ .../python/{python3-absl_1.3.0.bb => python3-absl_1.4.0.bb}     | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-networking/recipes-connectivity/networkmanager/{networkmanager_1.40.0.bb => networkmanager_1.40.10.bb} (99%)
+ rename meta-python/recipes-devtools/python/{python3-absl_1.3.0.bb => python3-absl_1.4.0.bb} (76%)
 
-diff --git a/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.40.0.bb b/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.40.10.bb
-similarity index 99%
-rename from meta-networking/recipes-connectivity/networkmanager/networkmanager_1.40.0.bb
-rename to meta-networking/recipes-connectivity/networkmanager/networkmanager_1.40.10.bb
-index 801739170..0463bd487 100644
---- a/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.40.0.bb
-+++ b/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.40.10.bb
-@@ -30,7 +30,7 @@ SRC_URI = " \
-     file://enable-dhcpcd.conf \
-     file://enable-iwd.conf \
- "
--SRC_URI[sha256sum] = "aee7e057bc2cca5dab84e41f15f1da8b795eb290747b04cbeee822bad9e9fc03"
-+SRC_URI[sha256sum] = "fa251455df3c38e2bf1e1ff806b4bc4346938dd135a3568bd250e92caa85eaf7"
+diff --git a/meta-python/recipes-devtools/python/python3-absl_1.3.0.bb b/meta-python/recipes-devtools/python/python3-absl_1.4.0.bb
+similarity index 76%
+rename from meta-python/recipes-devtools/python/python3-absl_1.3.0.bb
+rename to meta-python/recipes-devtools/python/python3-absl_1.4.0.bb
+index b37627816..bbea9cacb 100644
+--- a/meta-python/recipes-devtools/python/python3-absl_1.3.0.bb
++++ b/meta-python/recipes-devtools/python/python3-absl_1.4.0.bb
+@@ -4,7 +4,7 @@ SECTION = "devel/python"
+ LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
  
- S = "${WORKDIR}/NetworkManager-${PV}"
+-SRC_URI[sha256sum] = "463c38a08d2e4cef6c498b76ba5bd4858e4c6ef51da1a5a1f27139a022e20248"
++SRC_URI[sha256sum] = "d2c244d01048ba476e7c080bd2c6df5e141d211de80223460d5b3b8a2a58433d"
+ 
+ PYPI_PACKAGE = "absl-py"
  
 -- 
 2.25.1
