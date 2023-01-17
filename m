@@ -2,68 +2,68 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D913CC63797
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D91AAC6379F
 	for <webhook@archiver.kernel.org>; Tue, 17 Jan 2023 07:18:42 +0000 (UTC)
-Received: from mail1.bemta34.messagelabs.com (mail1.bemta34.messagelabs.com [195.245.231.2])
- by mx.groups.io with SMTP id smtpd.web10.191039.1673939915545041752
+Received: from mail1.bemta32.messagelabs.com (mail1.bemta32.messagelabs.com [195.245.230.1])
+ by mx.groups.io with SMTP id smtpd.web11.191278.1673939918252921312
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 16 Jan 2023 23:18:35 -0800
+ Mon, 16 Jan 2023 23:18:38 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=RTvEzUdc;
- spf=pass (domain: fujitsu.com, ip: 195.245.231.2, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=SGP/FNFe;
+ spf=pass (domain: fujitsu.com, ip: 195.245.230.1, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1673939914; i=@fujitsu.com;
-	bh=RerCnWv7SmQR9sqlhPBMH4Kdu3TE/moBvEyvOu/P/Yg=;
+	s=170520fj; t=1673939916; i=@fujitsu.com;
+	bh=ito8w4Wns53HGCQ0OZ6EqppZRICpnmogk/q5B9DADbs=;
 	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
 	 MIME-Version:Content-Type;
-	b=RTvEzUdcrDExJxBokHtMk2NI09k6YsyUEBSkXxzEIPxX1/Irelr49Sw8S7NXpOA1t
-	 5TggpkLAx97OZQm81ONbNSuKD5kdI1dB+AZv4oKdv7m1mbzP2Jv9l+1pQAZeYxKomS
-	 vCQigsiEELu4cwIVOLRlHM2K4vCP46jbB13D7c33WW0/lSifHcmmNySLlj5ATg+R/6
-	 ky2OqFHLHGem1DO8jWF3fBr96/Ej2GUGehoi/PMQmfJPedlcQlz/sJPRg/S/VqqbJs
-	 1ttYDS6IIRleCKfr+pEWA9frCMEtPNWDEG2kgwU65+ZJ62BaiffplD1t3gPE2BqNqZ
-	 ExTIOwy5bvRBA==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrMIsWRWlGSWpSXmKPExsViZ8MxSfek97F
-  kgz9fZSwuHl7K7MDocW7jCsYAxijWzLyk/IoE1owvLz+xF5zkrOjcfJ6pgfEuRxcjF4eQwBNG
-  iaUf57NDODeYJC5tb2KGcPYySjzrfsjUxcjJwSYgJXHj/n82EFtEQF9i6ew9zCA2s4CKxIvfP
-  ewgtrBAsETr3d+sIDaLgKrEmWsdYDW8Ak4SXVffgtkSAgoSUx6+B7M5BZwl5rxcCtYrBFTz48
-  JKVoh6QYmTM5+wQMyXkDj44gVUr6LE7MvNLBB2pUTrh19QtprE1XObmCcwCs5C0j4LSfsCRqZ
-  VjGbFqUVlqUW6hgZ6SUWZ6RkluYmZOXqJVbqJeqmluuWpxSW6RnqJ5cV6qcXFesWVuck5KXp5
-  qSWbGIHhm1Ks0reD8e2yP3qHGCU5mJREeU+aHksW4kvKT6nMSCzOiC8qzUktPsQow8GhJMF7y
-  gsoJ1iUmp5akZaZA4wlmLQEB4+SCG+4JVCat7ggMbc4Mx0idYpRl2Ntw4G9zEIsefl5qVLivN
-  dAZgiAFGWU5sGNgMX1JUZZKWFeRgYGBiGegtSi3MwSVPlXjOIcjErCvE88gKbwZOaVwG16BXQ
-  EE9ARHiVHQY4oSURISTUwOR1dO3vt5Ofe02Z1usadu850ZE360oKMmz9Yj+ywOTrjwb8zeZ71
-  RQareZT/s9ruuHHTeZrjb6HT07fe4BPsepq2Noh9WSbvt7lTp11dMHtTBfe/UJW9b1VXz01nu
-  2T+lonz2+TvOZJ3o2ouzvnPf1blg5FLklfh2Y1BTRm+R2YxPrv8/cCU2T1u+nYHBT9vktjptP
-  qzV+bRnqM79V7IG/o27nlz//SSrM89EZW65qHeK/eU/Pp4+vSs8w0Wz0V/c/jl8K2K4Xt6ZfE
-  1Ffm1wWvqTL/HKUyxTCi2SZWddtzuxGL3BHuhRb7vPvV2cPUFbEtRcYgoPXvLfFflqcIlL08x
-  tz5+9i58tbxmaN8UtftKLMUZiYZazEXFiQBrgNe2ZgMAAA==
+	b=SGP/FNFemnBPqd3uqTswJnY6mds+DjYddGziuFvG2iUA9cT88wkE7cYhvLHESuit7
+	 ifJ+JP8gVvrI0JCdjiwYsigC71NPxmlk8wrI/fkozDKDBkZAn7GFjefG9buwDQw7c0
+	 4wxquPRN/iSLJahMgNL+xHj+lEV2o/eduAUkpNbwDChgwamS9znlDUUzRcG7pQHzvh
+	 Bv343vsSdxZSw1T7wsIBdiD1ikNJTU1Z6lYQvdsMLhqhFLttCIaEU0aqVMfjK7RQRD
+	 KqT0Op+4vIJZzub8UqGbCkHVmWauNOAhx5CVMW4qOIPU+LWdjTm4M3rW8WBC679SAC
+	 zJySDVOUh1mxw==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrIIsWRWlGSWpSXmKPExsViZ8ORqHvG+1i
+  ywasIi4uHlzI7MHqc27iCMYAxijUzLym/IoE1Y2rXIuaCBzwVVyauYG1gPMLdxcjFISTwhFFi
+  47sZjBDODSaJlpMdrBDOXkaJjy9WATmcHGwCUhI37v9nA7FFBPQlls7ewwxiMwuoSLz43cMOY
+  gsLWErcmbIcaBIHB4uAqsT8M8UgYV4BJ4lDZ86BlUgIKEhMefgerJVTwFlizsulYHEhoJofF1
+  ayQtQLSpyc+YQFYryExMEXL5ghehUlZl9uZoGwKyVaP/yCstUkrp7bxDyBUXAWkvZZSNoXMDK
+  tYjQrTi0qSy3SNTTVSyrKTM8oyU3MzNFLrNJN1Est1S1PLS7RNdRLLC/WSy0u1iuuzE3OSdHL
+  Sy3ZxAgM3ZRi9uIdjA+W/dE7xCjJwaQkynvS9FiyEF9SfkplRmJxRnxRaU5q8SFGGQ4OJQneU
+  15AOcGi1PTUirTMHGAcwaQlOHiURHjDLYHSvMUFibnFmekQqVOMuhxrGw7sZRZiycvPS5US57
+  0GMkMApCijNA9uBCymLzHKSgnzMjIwMAjxFKQW5WaWoMq/YhTnYFQS5n3iATSFJzOvBG7TK6A
+  jmICO8Cg5CnJESSJCSqqBqWtdQ6NHicn71Jw8TSfN0xc5LitW2j3XC9kd8EFqzXK7vj18fycd
+  /x8l/bokTXLKhOedkivMONZMvVR+73DXVWuZXFamm9pKOkq2pTKngxuTfsdufuK875Wg2P2Xh
+  o0PBPX+lRqzyXDN1NboO1YbV5DV15/7bdXHG0fij9Z6PA1avHW/5TpppjVW1zanHdub6r3pVu
+  rDOCH135sUylbNL+ZkdEqYsahST44lecWqLSePqNgmORnVHzTn0Q5IN/rRZj3/6QZno9dBF6T
+  MN/X/jTrh9uf8S+mf3KlHXmZPfX5J8lbs9+7XgR/7i+dqvp/vamW54sTpioq4+alGyuY79A8e
+  n2qdtUs9Yo+I0JIoJZbijERDLeai4kQA+RQGG2QDAAA=
 X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-17.tower-548.messagelabs.com!1673939913!86586!1
-X-Originating-IP: [62.60.8.146]
+X-Msg-Ref: server-16.tower-591.messagelabs.com!1673939915!383282!1
+X-Originating-IP: [62.60.8.97]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.102.1; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 32429 invoked from network); 17 Jan 2023 07:18:33 -0000
-Received: from unknown (HELO n03ukasimr02.n03.fujitsu.local) (62.60.8.146)
-  by server-17.tower-548.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 17 Jan 2023 07:18:33 -0000
-Received: from n03ukasimr02.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTP id 311391000F5
-	for <openembedded-devel@lists.openembedded.org>; Tue, 17 Jan 2023 07:18:33 +0000 (GMT)
+Received: (qmail 7473 invoked from network); 17 Jan 2023 07:18:35 -0000
+Received: from unknown (HELO n03ukasimr01.n03.fujitsu.local) (62.60.8.97)
+  by server-16.tower-591.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 17 Jan 2023 07:18:35 -0000
+Received: from n03ukasimr01.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTP id 98C9A100194
+	for <openembedded-devel@lists.openembedded.org>; Tue, 17 Jan 2023 07:18:35 +0000 (GMT)
 Received: from R01UKEXCASM223.r01.fujitsu.local (R01UKEXCASM223 [10.182.185.121])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTPS id 250511000D7
-	for <openembedded-devel@lists.openembedded.org>; Tue, 17 Jan 2023 07:18:33 +0000 (GMT)
+	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTPS id 8C1E8100182
+	for <openembedded-devel@lists.openembedded.org>; Tue, 17 Jan 2023 07:18:35 +0000 (GMT)
 Received: from localhost.localdomain (10.167.225.33) by
  R01UKEXCASM223.r01.fujitsu.local (10.182.185.121) with Microsoft SMTP Server
- (TLS) id 15.0.1497.42; Tue, 17 Jan 2023 07:18:31 +0000
+ (TLS) id 15.0.1497.42; Tue, 17 Jan 2023 07:18:33 +0000
 From: <wangmy@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-filesystems] [PATCH] xfstests: upgrade 2022.12.18 -> 2023.01.01
-Date: Tue, 17 Jan 2023 15:18:15 +0800
-Message-ID: <1673939896-20171-4-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH] xterm: upgrade 377 -> 378
+Date: Tue, 17 Jan 2023 15:18:16 +0800
+Message-ID: <1673939896-20171-5-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 In-Reply-To: <1673939896-20171-1-git-send-email-wangmy@fujitsu.com>
 References: <1673939896-20171-1-git-send-email-wangmy@fujitsu.com>
@@ -77,32 +77,41 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 17 Jan 2023 07:18:42 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100607
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100608
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
+License-Update: Copyright year updated to 378
+
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../xfstests/{xfstests_2022.12.18.bb => xfstests_2023.01.01.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-filesystems/recipes-utils/xfstests/{xfstests_2022.12.18.bb => xfstests_2023.01.01.bb} (97%)
+ .../recipes-graphics/xorg-app/{xterm_377.bb => xterm_378.bb}  | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-graphics/xorg-app/{xterm_377.bb => xterm_378.bb} (89%)
 
-diff --git a/meta-filesystems/recipes-utils/xfstests/xfstests_2022.12.18.bb b/meta-filesystems/recipes-utils/xfstests/xfstests_2023.01.01.bb
-similarity index 97%
-rename from meta-filesystems/recipes-utils/xfstests/xfstests_2022.12.18.bb
-rename to meta-filesystems/recipes-utils/xfstests/xfstests_2023.01.01.bb
-index b1cb9d0521..defa11c929 100644
---- a/meta-filesystems/recipes-utils/xfstests/xfstests_2022.12.18.bb
-+++ b/meta-filesystems/recipes-utils/xfstests/xfstests_2023.01.01.bb
-@@ -10,7 +10,7 @@ SRC_URI = "git://git.kernel.org/pub/scm/fs/xfs/xfstests-dev.git;branch=master;na
-            file://0002-Drop-detached_mounts_propagation-and-remove-sys-moun.patch \
-            "
+diff --git a/meta-oe/recipes-graphics/xorg-app/xterm_377.bb b/meta-oe/recipes-graphics/xorg-app/xterm_378.bb
+similarity index 89%
+rename from meta-oe/recipes-graphics/xorg-app/xterm_377.bb
+rename to meta-oe/recipes-graphics/xorg-app/xterm_378.bb
+index e96c014ab2..c82042b215 100644
+--- a/meta-oe/recipes-graphics/xorg-app/xterm_377.bb
++++ b/meta-oe/recipes-graphics/xorg-app/xterm_378.bb
+@@ -2,13 +2,13 @@ require recipes-graphics/xorg-app/xorg-app-common.inc
+ SUMMARY = "xterm is the standard terminal emulator for the X Window System"
+ DEPENDS = "libxaw xorgproto libxext libxau libxinerama libxpm ncurses desktop-file-utils-native"
  
--SRCREV_xfstests = "e263104046712af5fb5dcc7d289ac3fa5f14b764"
-+SRCREV_xfstests = "fbd489798b31e32f0eaefcd754326a06aa5b166f"
- SRCREV_unionmount = "e3825b16b46f4c4574a1a69909944c059835f914"
+-LIC_FILES_CHKSUM = "file://xterm.h;beginline=3;endline=31;md5=5ec6748ed90e588caa9318b780a0d498"
++LIC_FILES_CHKSUM = "file://xterm.h;beginline=3;endline=31;md5=9c96124b492c0c02356850c243aaeca2"
  
- S = "${WORKDIR}/git"
+ SRC_URI = "http://invisible-mirror.net/archives/${BPN}/${BP}.tgz \
+            file://0001-Add-configure-time-check-for-setsid.patch \
+           "
+ 
+-SRC_URI[sha256sum] = "db108fe7a45d8ed97e604721b58443b473649e61e263631bf8759f8618a990b2"
++SRC_URI[sha256sum] = "649dfbfd5edd0ed9e47cf8e4d953b4b0d3c30bc280166dfc4ffd14973fec3e92"
+ 
+ PACKAGECONFIG ?= ""
+ PACKAGECONFIG[xft] = "--enable-freetype,--disable-freetype,libxft fontconfig freetype-native"
 -- 
 2.25.1
 
