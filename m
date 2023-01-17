@@ -2,68 +2,71 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EC77DC3DA78
-	for <webhook@archiver.kernel.org>; Tue, 17 Jan 2023 07:16:42 +0000 (UTC)
-Received: from mail1.bemta37.messagelabs.com (mail1.bemta37.messagelabs.com [85.158.142.112])
- by mx.groups.io with SMTP id smtpd.web10.191023.1673939799926380076
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DCBE1C63797
+	for <webhook@archiver.kernel.org>; Tue, 17 Jan 2023 07:16:52 +0000 (UTC)
+Received: from mail1.bemta34.messagelabs.com (mail1.bemta34.messagelabs.com [195.245.231.4])
+ by mx.groups.io with SMTP id smtpd.web10.191024.1673939808356550912
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 16 Jan 2023 23:16:40 -0800
+ Mon, 16 Jan 2023 23:16:48 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=GoxPzZBe;
- spf=pass (domain: fujitsu.com, ip: 85.158.142.112, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=JQ0V2c8w;
+ spf=pass (domain: fujitsu.com, ip: 195.245.231.4, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1673939798; i=@fujitsu.com;
-	bh=1rrtLk2W/5SyLIqTCqGK1niJgtBH1AhZAEZuWuXO6Do=;
-	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=GoxPzZBe3pnaEuqqnuUj6LezXV60AesfaNMXhmmUbM+jGbGNJ23qrbdTxmi63+sEI
-	 Xhc+xlZFMxrjHanAi4A/YjOgb1waE78nELF0EtrCBMQj3Z3pteo3r4049mHiV28UJp
-	 YLtnjmCaeeByWXT1w6LGTm+/rimazPg0FCWc+5FDxHNSYHCPufxigl2KwCY9vdB0Eo
-	 uLRC1QUjMo00Fjlcd0KTueflWEn9m1reRtnimCGinn95os1IvFKAAmb9fZXA8MNJm5
-	 UraUiUCy+khqg1/aIE9tca3dV1I6WwNdrasioEoxskaLW0fT1H59yE6hUwvcPFbWvM
-	 FgHvR/Fpfwf5w==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrJIsWRWlGSWpSXmKPExsViZ8ORpBvqfSz
-  Z4PAOVYuLh5cyOzB6nNu4gjGAMYo1My8pvyKBNWP/1MVsBRs4Kib/4WlgPMTexcjFISTwkFHi
-  85w3bBDOVSaJ74vvQGX2MkqcfLoNyOHkYBOQkrhx/z8biC0ioC+xdPYeZhCbWUBF4sXvHrAaY
-  QEHidkfrzN1MXJwsAioSrQscQYJ8wo4STze+YUVxJYQUJCY8vA9M0RcUOLkzCcsEGMkJA6+eM
-  EMUaMoMftyMwuEXSnR+uEXlK0mcfXcJuYJjPyzkLTPQtK+gJFpFaNZcWpRWWqRroleUlFmekZ
-  JbmJmjl5ilW6iXmqpbl5+UUmGrqFeYnmxXmpxsV5xZW5yTopeXmrJJkZgKKYUJ9nsYPy79I/e
-  IUZJDiYlUd6TpseShfiS8lMqMxKLM+KLSnNSiw8xynBwKEnwnvICygkWpaanVqRl5gDjAiYtw
-  cGjJMIbbgmU5i0uSMwtzkyHSJ1i1OW4euXKXmYhlrz8vFQpcd5IkBkCIEUZpXlwI2AxeolRVk
-  qYl5GBgUGIpyC1KDezBFX+FaM4B6OSMO8TD6ApPJl5JXCbXgEdwQR0hEfJUZAjShIRUlINTP0
-  +z/J3h1gUTZ9+0dXs8jL1eY+k92lGJ8wpjZnU99XKd73Ngzul2UbBrWyRG9Ly/r8/WLsksOvm
-  lnWTvqvu6+k693hfrblj9tqnXmWfGnxf+0/Zo7aAVWrD+3NhErP+7vm4MzSrrmDFsxiN9q+z7
-  7DlzFhcn7bglu9z35vnGxXdU89w3Y+3i/I6EevAud2vXuTfLiFWoSlaIXMjzCan+rr+L3ZMz/
-  eottVpXHk99YRjA7/Mq+yVcssuvTczXiv6TX39bptEuS8L1Y15vR4nzNx/t3fvi/Vl3rqHTxx
-  5dNX6S6OAM4P0htPRF6e/rJmj57fpT2fzy1nKs66eEhB+d+OQ6BXhuo0LtPIkXul0LVViKc5I
-  NNRiLipOBACB2y00TAMAAA==
+	s=170520fj; t=1673939806; i=@fujitsu.com;
+	bh=/urQlbAw3efDsetHAqi1Rj4NW4FLILxCvIrLc5ripHQ=;
+	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type;
+	b=JQ0V2c8wnji6iCF+N04z6c5m0ajVYVhPktaOaIWNok9xhtnCLSOQrzYh9D6GrGjM+
+	 OVdvptqBq5pgbmxpb6N2dpIv3nSQ1Oi+Fbk735/6hDt7ucic2qGe9wyrkduzaI+pER
+	 UGa9sIXmM7p1EhC4EzZKsq95dawTXAeXMZgO5Wx7pqOqW1MRi1jLHubMVLIlNs2bKm
+	 H9bpFqVga7QbWghhg1Rby5M8g3MdaE+LKW5LMMmy8HAreMEpxUfXzMOMjbFS4ek5Fa
+	 ME3Hz/m4HGPLkXEsLe5m9Tai7LI3d/tw6UHApgUMTiCzuXyP9gFDXdNxv/gnF+qPrO
+	 Ub/C5DX/Yb2XQ==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrMIsWRWlGSWpSXmKPExsViZ8ORqBvnfSz
+  ZYPV3douLh5cyOzB6nNu4gjGAMYo1My8pvyKBNWPq5SOsBS94K779uM/WwLiKp4uRi0NI4Amj
+  xImTy9kgnBtMEpsazrJ2MXICOXsZJa4u1wCx2QSkJG7c/88GYosI6Essnb2HGcRmFlCRePG7h
+  x3EFhZwlljYfQTMZhFQldj9/AFTFyMHB6+Ak8TaQ4IgYQkBBYkpD98zg4Q5gcrb3ppBbHKSeD
+  KtD2wrr4CgxMmZT1ggpktIHHzxghmiVVFi9uVmFgi7UqL1wy8oW03i6rlNzBMYBWchaZ+FpH0
+  BI9MqRtPi1KKy1CJdS72kosz0jJLcxMwcvcQq3US91FLd8tTiEl0jvcTyYr3U4mK94src5JwU
+  vbzUkk2MwLBNKVZX3cF4btkfvUOMkhxMSqK8J02PJQvxJeWnVGYkFmfEF5XmpBYfYpTh4FCS4
+  D3lBZQTLEpNT61Iy8wBxhBMWoKDR0mEN9wSKM1bXJCYW5yZDpE6xagoJc4bCdInAJLIKM2Da4
+  PF7SVGWSlhXkYGBgYhnoLUotzMElT5V4ziHIxKwrxPPICm8GTmlcBNfwW0mAlosUfJUZDFJYk
+  IKakGpqVTfjKZSmyfq7fpuIHSFanXVVsbfG1iP30MMcm5sShThq1ob0aNcLIGx8aKi9vPLPhV
+  2VzcIroqi+2S2qJHM113LjDjXDF7u/TBigbxO0wqjYpStyVd6s5c+27MIRueyPjs6iHT5UcXb
+  DWJNt1+/qHVZfPDcyyc1wSv1V7Wkd2f92zKkyK/gD9eqsetluyTWpPNV7tTyPCaos3TLSfdOY
+  49L2g5wLG1SM+Of9LmAiutB3du3LHdt+j7l/iTAvHCrLr7Jsnb7t7+JT/70xWJRJ7PaqtXxe5
+  IkbwcwNY7+/b7Xb0am5m++cg2J+dXbPhvmPVwTsi5HZ736/iW/N2//ODjxerBl/Z8cQ9SWjaL
+  m0uJpTgj0VCLuag4EQDWCwlbVgMAAA==
 X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-8.tower-745.messagelabs.com!1673939797!380097!1
-X-Originating-IP: [62.60.8.98]
+X-Msg-Ref: server-22.tower-565.messagelabs.com!1673939805!404023!1
+X-Originating-IP: [62.60.8.97]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.102.1; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 24677 invoked from network); 17 Jan 2023 07:16:37 -0000
-Received: from unknown (HELO n03ukasimr03.n03.fujitsu.local) (62.60.8.98)
-  by server-8.tower-745.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 17 Jan 2023 07:16:37 -0000
-Received: from n03ukasimr03.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr03.n03.fujitsu.local (Postfix) with ESMTP id 1887F1AE
-	for <openembedded-devel@lists.openembedded.org>; Tue, 17 Jan 2023 07:16:37 +0000 (GMT)
+Received: (qmail 3714 invoked from network); 17 Jan 2023 07:16:46 -0000
+Received: from unknown (HELO n03ukasimr01.n03.fujitsu.local) (62.60.8.97)
+  by server-22.tower-565.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 17 Jan 2023 07:16:46 -0000
+Received: from n03ukasimr01.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTP id D0F80100194
+	for <openembedded-devel@lists.openembedded.org>; Tue, 17 Jan 2023 07:16:45 +0000 (GMT)
 Received: from R01UKEXCASM223.r01.fujitsu.local (R01UKEXCASM223 [10.182.185.121])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by n03ukasimr03.n03.fujitsu.local (Postfix) with ESMTPS id 0CF7D1AD
-	for <openembedded-devel@lists.openembedded.org>; Tue, 17 Jan 2023 07:16:37 +0000 (GMT)
+	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTPS id C43FB100182
+	for <openembedded-devel@lists.openembedded.org>; Tue, 17 Jan 2023 07:16:45 +0000 (GMT)
 Received: from localhost.localdomain (10.167.225.33) by
  R01UKEXCASM223.r01.fujitsu.local (10.182.185.121) with Microsoft SMTP Server
- (TLS) id 15.0.1497.42; Tue, 17 Jan 2023 07:16:35 +0000
+ (TLS) id 15.0.1497.42; Tue, 17 Jan 2023 07:16:43 +0000
 From: <wangmy@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-oe] [PATCH] hidapi: upgrade 0.13.0 -> 0.13.1
-Date: Tue, 17 Jan 2023 15:16:21 +0800
-Message-ID: <1673939785-20072-1-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-gnome] [PATCH] libnma: upgrade 1.10.4 -> 1.10.6
+Date: Tue, 17 Jan 2023 15:16:22 +0800
+Message-ID: <1673939785-20072-2-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
+In-Reply-To: <1673939785-20072-1-git-send-email-wangmy@fujitsu.com>
+References: <1673939785-20072-1-git-send-email-wangmy@fujitsu.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-Originating-IP: [10.167.225.33]
@@ -73,34 +76,46 @@ X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 17 Jan 2023 07:16:42 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100599
+ <openembedded-devel@lists.openembedded.org>; Tue, 17 Jan 2023 07:16:52 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100600
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
 Changelog:
-  hidraw: fix invalid read past the UDEV buffer;
+==========
+* Fix the path and translation domains of GSchema files.
+* Removed strings that don't match our conscious language standards from
+  the translation files.
+* Added autoptr support.
+* Fix translations of country and territory names in the mobile broadband
+  dialog.
+* Honor explicitly set APN if provider was not present in the mobile
+  broadband dialog.
+* Make sure Kosovar operators are ordered properly in the mobile broadband
+  dialog.
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../hidapi/{hidapi_0.13.0.bb => hidapi_0.13.1.bb}               | 2 +-
+ .../libnma/{libnma_1.10.4.bb => libnma_1.10.6.bb}               | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-support/hidapi/{hidapi_0.13.0.bb => hidapi_0.13.1.bb} (90%)
+ rename meta-gnome/recipes-connectivity/libnma/{libnma_1.10.4.bb => libnma_1.10.6.bb} (92%)
 
-diff --git a/meta-oe/recipes-support/hidapi/hidapi_0.13.0.bb b/meta-oe/recipes-support/hidapi/hidapi_0.13.1.bb
-similarity index 90%
-rename from meta-oe/recipes-support/hidapi/hidapi_0.13.0.bb
-rename to meta-oe/recipes-support/hidapi/hidapi_0.13.1.bb
-index 460eda527..2e62612e3 100644
---- a/meta-oe/recipes-support/hidapi/hidapi_0.13.0.bb
-+++ b/meta-oe/recipes-support/hidapi/hidapi_0.13.1.bb
-@@ -12,5 +12,5 @@ RDEPENDS:${PN}:append:libc-glibc = " glibc-gconv-utf-16"
- inherit autotools pkgconfig
+diff --git a/meta-gnome/recipes-connectivity/libnma/libnma_1.10.4.bb b/meta-gnome/recipes-connectivity/libnma/libnma_1.10.6.bb
+similarity index 92%
+rename from meta-gnome/recipes-connectivity/libnma/libnma_1.10.4.bb
+rename to meta-gnome/recipes-connectivity/libnma/libnma_1.10.6.bb
+index 6adb7ec29..bff9a3360 100644
+--- a/meta-gnome/recipes-connectivity/libnma/libnma_1.10.4.bb
++++ b/meta-gnome/recipes-connectivity/libnma/libnma_1.10.6.bb
+@@ -10,7 +10,7 @@ inherit gnomebase gobject-introspection gtk-doc gettext vala features_check
+ REQUIRED_DISTRO_FEATURES = "${@bb.utils.contains('PACKAGECONFIG','gcr','x11','',d)} opengl"
+ ANY_OF_DISTRO_FEATURES = "${GTK3DISTROFEATURES}"
  
- SRC_URI = "git://github.com/libusb/hidapi.git;protocol=https;branch=master"
--SRCREV = "c3a6150d8801f79a59034045275176e9738b13e4"
-+SRCREV = "4ebce6b5059b086d05ca7e091ce04a5fd08ac3ac"
- S = "${WORKDIR}/git"
+-SRC_URI[archive.sha256sum] = "79e730dda19f9b34886f4064aa170f1a2326b08329d655d80b67e906c7f78b7c"
++SRC_URI[archive.sha256sum] = "53a6fb2b190ad37c5986caed3e98bede7c3c602399ee4f93c8fc054303d76dab"
+ 
+ PACKAGECONFIG ?= "gcr iso_codes mobile_broadband_provider_info"
+ PACKAGECONFIG[gcr] = "-Dgcr=true,-Dgcr=false,gcr"
 -- 
 2.25.1
 
