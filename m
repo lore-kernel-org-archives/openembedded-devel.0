@@ -2,160 +2,65 @@ Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1DF92C63797
-	for <webhook@archiver.kernel.org>; Tue, 17 Jan 2023 07:49:43 +0000 (UTC)
-Received: from mailout02.t-online.de (mailout02.t-online.de [194.25.134.17])
- by mx.groups.io with SMTP id smtpd.web11.191526.1673941781887176110
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 22328C63797
+	for <webhook@archiver.kernel.org>; Tue, 17 Jan 2023 07:59:33 +0000 (UTC)
+Received: from mailout05.t-online.de (mailout05.t-online.de [194.25.134.82])
+ by mx.groups.io with SMTP id smtpd.web10.191369.1673942368796931713
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 16 Jan 2023 23:49:42 -0800
+ Mon, 16 Jan 2023 23:59:29 -0800
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=SPF record not found (domain: t-online.de, ip: 194.25.134.17, mailfrom: f_l_k@t-online.de)
-Received: from fwd73.dcpf.telekom.de (fwd73.aul.t-online.de [10.223.144.99])
-	by mailout02.t-online.de (Postfix) with SMTP id 2CBE9211E
-	for <openembedded-devel@lists.openembedded.org>; Tue, 17 Jan 2023 08:49:39 +0100 (CET)
-Received: from flk-MS-7C91.fritz.box ([79.219.226.203]) by fwd73.t-online.de
+ dkim=missing; spf=none, err=SPF record not found (domain: t-online.de, ip: 194.25.134.82, mailfrom: f_l_k@t-online.de)
+Received: from fwd82.dcpf.telekom.de (fwd82.aul.t-online.de [10.223.144.108])
+	by mailout05.t-online.de (Postfix) with SMTP id D4B2616261
+	for <openembedded-devel@lists.openembedded.org>; Tue, 17 Jan 2023 08:59:25 +0100 (CET)
+Received: from flk-MS-7C91.fritz.box ([79.219.226.203]) by fwd82.t-online.de
 	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1pHgiw-1GYDCL0; Tue, 17 Jan 2023 08:49:38 +0100
+	esmtp id 1pHgsN-4bRJa50; Tue, 17 Jan 2023 08:59:23 +0100
 From: Markus Volk <f_l_k@t-online.de>
 To: openembedded-devel@lists.openembedded.org
 Cc: Markus Volk <f_l_k@t-online.de>
-Subject: [meta-multimedia][PATCH] pipewire: update 0.3.63 -> 0.3.64
-Date: Tue, 17 Jan 2023 08:49:31 +0100
-Message-Id: <20230117074931.92069-1-f_l_k@t-online.de>
+Subject: [meta-gnome][PATCH] gnome-shell: update 43.1 -> 43.2
+Date: Tue, 17 Jan 2023 08:59:16 +0100
+Message-Id: <20230117075916.105020-1-f_l_k@t-online.de>
 X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1673941778-B5399DF7-1FC779E5/0/0 CLEAN NORMAL
-X-TOI-MSGID: 1207da35-0550-4b48-bf3b-ec0462a83f47
+X-TOI-EXPURGATEID: 150726::1673942363-12796992-BC276265/0/0 CLEAN NORMAL
+X-TOI-MSGID: 11c9aafa-a0ce-4323-a3b3-111c630fdb9a
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 17 Jan 2023 07:49:43 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100631
-
-This is a bugfix release that is API and ABI compatible with previous
-0.3.x releases.
-
-  - Clear old buffer memory on ports to fix some SIGBUS errors.
-  - It is now possible to assign custom port names to the ports from an
-    adapter. This feature is helpful to those who use a multichannel
-    interface with long-term connections. This way they can label each
-    port with its designation, such as an instrument name or anything els=
-e
-    to be displayed in a patchbay or DAW.
-  - Fix some issues with node suspend and quantum and rate calculations.
-  - Fix some regressions in pulse-tunnel and RTP-source adaptive resampli=
-ng
-    that could cause synchronization problems.
-  - UCM devices now also have a Pro Audio profile.
-  - NODE_TARGET (with the object.id) is now deprecated, use TARGET_OBJECT
-    (with the object.serial, which is not reused and can avoid races).
-
-  - Clear all peer input port buffers when suspending. This fixes some
-    SIGBUS errors when some plugins were using old memory. (#2914)
-  - Fix a case where nodes that were not supposed to be suspended, were
-    kept suspended on a rate change. (#2929)
-  - Fix an error in the quantum and rate calculations that could cause
-    nodes to run with wrong quantum and rates when multiple rates were
-    allowed. (#2925)
-
-  - pw-dump will now sort dictionaries to make it easier to compare
-    different outputs.
-  - Improve output of pw-reserve.
-  - pw-loopback uses TARGET_OBJECT so you will need to use the serial
-    id (or better the name) as the target instead of the object id.
-
-  - The filter-chain modules has seen some cleanups, refactoring and
-    optimizations in the various DSP functions.
-  - The ROC module now supports setting a custom samplerate.
-  - ROC 0.2.X is now required.
-  - The pulse tunnel and RTP source were not updating the rate field
-    correctly which could cause synchronization problems. (#2891)
-  - The filter-chain now supports an arbitrary number of control
-    properties. (#2933)
-  - It is now possible to assign custom port names to the ports from an
-    adapter with the PW_KEY_NODE_CHANNELNAMES.
-  - Support was added for capture and playback props in echo-cancel.
-    (#2939)
-
-  - The ACP code now has an option to set the probe samplerate. (#1599)
-  - UCM devices now also have a Pro Audio profile.
-  - Filtering of Step ranges is now implemented.
-
-  - The channel-map is now set correctly on the echo-cancel module.
-  - source_master and sink_master are now correctly handled in module
-    echo-cancel.
-  - Fix a regression in DRAIN where resuming after a DRAIN would fail.
-    This caused problems for espeak. (#2928)
-  - TARGET_OBJECT is now used to make it possible to use the indexes
-    as a target.
-  - ladspa-source and remap-source can now also link to monitors.
-
-  - The ALSA plugin now handles the target.object correctly when set to
-    -1. (#2893)
-
-  - The v4l2 replacement library now also follows symlinks.
-  - Support for getting and setting controls was added.
-  - Support for G_PARM was added.
-  - The environment variable PIPEWIRE_V4L2_TARGET can be used to force
-    an application onto a specific camera.
-
-  - Fix compilation without ldac_abr.
-  - Fix a missing brace in CIND reply. This could cause some devices to
-    fail.
-  - Fix configuration of the initial latency.
-
-  - The device provider now supports setting an fd so that it can connect
-    to PipeWire sessions from the portal.
-  - DMABuf support was re-enabled in gstpipewiresrc.
-
-Build with support for gsettings and libcamera
+ <openembedded-devel@lists.openembedded.org>; Tue, 17 Jan 2023 07:59:33 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100632
 
 Signed-off-by: Markus Volk <f_l_k@t-online.de>
 ---
- .../pipewire/{pipewire_0.3.63.bb =3D> pipewire_0.3.64.bb}     | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-multimedia/recipes-multimedia/pipewire/{pipewire_0.3.63.bb =3D=
-> pipewire_0.3.64.bb} (98%)
+ .../gnome-shell/{gnome-shell_43.1.bb =3D> gnome-shell_43.2.bb}    | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-gnome/recipes-gnome/gnome-shell/{gnome-shell_43.1.bb =3D> gn=
+ome-shell_43.2.bb} (95%)
 
-diff --git a/meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.63.=
-bb b/meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.64.bb
-similarity index 98%
-rename from meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.63.b=
-b
-rename to meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.64.bb
-index f7acb8db4..91945ca7d 100644
---- a/meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.63.bb
-+++ b/meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.64.bb
-@@ -13,12 +13,12 @@ LIC_FILES_CHKSUM =3D " \
+diff --git a/meta-gnome/recipes-gnome/gnome-shell/gnome-shell_43.1.bb b/m=
+eta-gnome/recipes-gnome/gnome-shell/gnome-shell_43.2.bb
+similarity index 95%
+rename from meta-gnome/recipes-gnome/gnome-shell/gnome-shell_43.1.bb
+rename to meta-gnome/recipes-gnome/gnome-shell/gnome-shell_43.2.bb
+index 14163a186..d3bd357d5 100644
+--- a/meta-gnome/recipes-gnome/gnome-shell/gnome-shell_43.1.bb
++++ b/meta-gnome/recipes-gnome/gnome-shell/gnome-shell_43.2.bb
+@@ -32,7 +32,7 @@ GIR_MESON_OPTION =3D ""
+ # gobject-introspection is mandatory and cannot be configured
+ REQUIRED_DISTRO_FEATURES +=3D "gobject-introspection-data"
 =20
- DEPENDS =3D "dbus ncurses"
+-SRC_URI[archive.sha256sum] =3D "df0444765def1bd0afee9617d2b5919bc79b4db8=
+6e7e757ac0e1f73748ec1bdc"
++SRC_URI[archive.sha256sum] =3D "e76fd4be9342410ee9fbdcdd6b2d81c6ff060e7c=
+8cc5a0f1cae6a7aba25d1860"
+ SRC_URI +=3D "file://0001-Introduce-options-gjs_path-to-optionally-set-p=
+ath-to.patch"
 =20
--SRCREV =3D "5ff00f40b9d3ecfc38305edc27e9c2b01629802c"
-+SRCREV =3D "bba452695eb673461c5cf626eec57728991eadf7"
- SRC_URI =3D "git://gitlab.freedesktop.org/pipewire/pipewire.git;branch=3D=
-master;protocol=3Dhttps"
-=20
- S =3D "${WORKDIR}/git"
-=20
--inherit meson pkgconfig systemd gettext useradd
-+inherit gsettings meson pkgconfig systemd gettext useradd
-=20
- USERADD_PACKAGES =3D "${PN}"
-=20
-@@ -88,7 +88,7 @@ PACKAGECONFIG:class-target ??=3D " \
-     ${@bb.utils.contains('DISTRO_FEATURES', 'pulseaudio gtk', 'gsettings=
-', '', d)} \
-     ${@bb.utils.filter('DISTRO_FEATURES', 'alsa vulkan pulseaudio', d)} =
-\
-     ${PIPEWIRE_SESSION_MANAGER} \
--    ${FFMPEG_AVAILABLE} avahi flatpak gstreamer jack libusb pw-cat raop =
-sndfile v4l2 udev volume webrtc-echo-cancelling \
-+    ${FFMPEG_AVAILABLE} avahi flatpak gstreamer gsettings jack libusb pw=
--cat raop sndfile v4l2 udev volume webrtc-echo-cancelling libcamera \
- "
-=20
- # "jack" and "pipewire-jack" packageconfigs cannot be both enabled,
+ PACKAGECONFIG ??=3D "bluetooth nm ${@bb.utils.filter('DISTRO_FEATURES', =
+'systemd', d)}"
 --=20
 2.34.1
 
