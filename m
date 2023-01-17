@@ -2,66 +2,239 @@ Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 22328C63797
-	for <webhook@archiver.kernel.org>; Tue, 17 Jan 2023 07:59:33 +0000 (UTC)
-Received: from mailout05.t-online.de (mailout05.t-online.de [194.25.134.82])
- by mx.groups.io with SMTP id smtpd.web10.191369.1673942368796931713
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3B2EBC63797
+	for <webhook@archiver.kernel.org>; Tue, 17 Jan 2023 08:07:33 +0000 (UTC)
+Received: from mailout03.t-online.de (mailout03.t-online.de [194.25.134.81])
+ by mx.groups.io with SMTP id smtpd.web11.191686.1673942846033191180
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 16 Jan 2023 23:59:29 -0800
+ Tue, 17 Jan 2023 00:07:26 -0800
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=SPF record not found (domain: t-online.de, ip: 194.25.134.82, mailfrom: f_l_k@t-online.de)
-Received: from fwd82.dcpf.telekom.de (fwd82.aul.t-online.de [10.223.144.108])
-	by mailout05.t-online.de (Postfix) with SMTP id D4B2616261
-	for <openembedded-devel@lists.openembedded.org>; Tue, 17 Jan 2023 08:59:25 +0100 (CET)
-Received: from flk-MS-7C91.fritz.box ([79.219.226.203]) by fwd82.t-online.de
+ dkim=missing; spf=none, err=SPF record not found (domain: t-online.de, ip: 194.25.134.81, mailfrom: f_l_k@t-online.de)
+Received: from fwd78.dcpf.telekom.de (fwd78.aul.t-online.de [10.223.144.104])
+	by mailout03.t-online.de (Postfix) with SMTP id 67E5ECC2F
+	for <openembedded-devel@lists.openembedded.org>; Tue, 17 Jan 2023 09:07:23 +0100 (CET)
+Received: from [192.168.178.83] ([79.219.226.203]) by fwd78.t-online.de
 	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1pHgsN-4bRJa50; Tue, 17 Jan 2023 08:59:23 +0100
+	esmtp id 1pHh07-3RU06i0; Tue, 17 Jan 2023 09:07:23 +0100
+Date: Tue, 17 Jan 2023 09:07:17 +0100
 From: Markus Volk <f_l_k@t-online.de>
+Subject: Re: [oe] [meta-gnome][PATCH] gnome-control-center: add recipe
 To: openembedded-devel@lists.openembedded.org
-Cc: Markus Volk <f_l_k@t-online.de>
-Subject: [meta-gnome][PATCH] gnome-shell: update 43.1 -> 43.2
-Date: Tue, 17 Jan 2023 08:59:16 +0100
-Message-Id: <20230117075916.105020-1-f_l_k@t-online.de>
-X-Mailer: git-send-email 2.34.1
+Message-Id: <5KEMOR.6WGJDFF79C763@t-online.de>
+In-Reply-To: <173B07F8C57D523F.23170@lists.openembedded.org>
+References: <173B07F8C57D523F.23170@lists.openembedded.org>
+X-Mailer: geary/40.0
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1673942363-12796992-BC276265/0/0 CLEAN NORMAL
-X-TOI-MSGID: 11c9aafa-a0ce-4323-a3b3-111c630fdb9a
-Content-Transfer-Encoding: quoted-printable
+Content-Type: multipart/alternative; boundary="=-ygmCIFwR+11pXDMGuS+7"
+X-TOI-EXPURGATEID: 150726::1673942843-DDB4A4E4-FEA01CC4/0/0 CLEAN NORMAL
+X-TOI-MSGID: e18d6aaf-1121-4b5b-8c0e-212114cfba84
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 17 Jan 2023 07:59:33 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100632
+ <openembedded-devel@lists.openembedded.org>; Tue, 17 Jan 2023 08:07:33 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100633
 
-Signed-off-by: Markus Volk <f_l_k@t-online.de>
+--=-ygmCIFwR+11pXDMGuS+7
+Content-Type: text/plain; charset=us-ascii; format=flowed
+
+I'll send a v2 for this patch. It has wrong name because of c&p
+
+Am Di, 17. Jan 2023 um 08:27:16 +0100 schrieb Markus Volk 
+<f_l_k@t-online.de>:
+> Add a recipe for gnome-remote-desktop and a corresponding 
+> PACKAGECONFIG for
+> gnome-control-center from where it can be enabled/disabled, if 
+> available.
+> 
+> It is not enabled by default because it has a dependency on tpm2-tss 
+> and thus
+> adds a layer dependency on meta-security/meta-tpm.
+> 
+> Signed-off-by: Markus Volk <f_l_k@t-online.de 
+> <mailto:f_l_k@t-online.de>>
+> ---
+>  .../gnome-control-center_43.2.bb              |  1 +
+>  .../gnome-remote-desktop_43.3.bb              | 38 
+> +++++++++++++++++++
+>  2 files changed, 39 insertions(+)
+>  create mode 100644 
+> meta-gnome/recipes-gnome/gnome-remote-desktop/gnome-remote-desktop_43.3.bb
+> 
+> diff --git 
+> a/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center_43.2.bb 
+> b/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center_43.2.bb
+> index 830f3ec68..16a400c5c 100644
+> --- 
+> a/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center_43.2.bb
+> +++ 
+> b/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center_43.2.bb
+> @@ -42,6 +42,7 @@ SRC_URI[archive.sha256sum] = 
+> "d7f256aba80a92c727b329fd01c8602da4b78f0fddaec93fcd
+>  PACKAGECONFIG ??= "ibus ${@bb.utils.filter 
+> <mailto:${@bb.utils.filter>('DISTRO_FEATURES', 'wayland', d)}"
+>  PACKAGECONFIG[ibus] = "-Dibus=true, -Dibus=false, ibus"
+>  PACKAGECONFIG[wayland] = "-Dwayland=true, -Dwayland=false, wayland"
+> +PACKAGECONFIG[remote-desktop] = ",,,gnome-remote-desktop"
+> 
+>  EXTRA_OEMESON = " \
+>      -Doe_sysroot=${STAGING_DIR_HOST} \
+> diff --git 
+> a/meta-gnome/recipes-gnome/gnome-remote-desktop/gnome-remote-desktop_43.3.bb 
+> b/meta-gnome/recipes-gnome/gnome-remote-desktop/gnome-remote-desktop_43.3.bb
+> new file mode 100644
+> index 000000000..5d1a85d5f
+> --- /dev/null
+> +++ 
+> b/meta-gnome/recipes-gnome/gnome-remote-desktop/gnome-remote-desktop_43.3.bb
+> @@ -0,0 +1,38 @@
+> +SUMMARY = "Remote desktop daemon for GNOME using pipewire."
+> +LICENSE = "GPL-2.0-only"
+> +LIC_FILES_CHKSUM = 
+> "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263" 
+> <file://copying;md5=b234ee4d69f5fce4486a80fdaf4a4263/>
+> +
+> +GNOMEBASEBUILDCLASS = "meson"
+> +
+> +inherit gnomebase gettext gsettings features_check
+> +
+> +REQUIRED_DISTRO_FEATURES = "opengl"
+> +
+> +SRC_URI[archive.sha256sum] = 
+> "11d451d1fde44f1809ebf61aff4bea5f9ef4fdc02359a89647f6e9e7d45429ac"
+> +
+> +DEPENDS = " \
+> +    asciidoc-native \
+> +    libdrm \
+> +    libepoxy \
+> +    cairo \
+> +    glib-2.0 \
+> +    pipewire \
+> +    libnotify \
+> +    libsecret \
+> +    nv-codec-headers \
+> +    tpm2-tss \
+> +"
+> +
+> +PACKAGECONFIG ??= " \
+> +    vnc \
+> +    rdp \
+> +    ${@bb.utils.contains 
+> <mailto:${@bb.utils.contains>('LICENSE_FLAGS_ACCEPTED', 'commercial', 
+> 'fdk_aac', '', d)} \
+> +    ${@bb.utils.filter 
+> <mailto:${@bb.utils.filter>('DISTRO_FEATURES', 'systemd', d)} \
+> +"
+> +
+> +PACKAGECONFIG[vnc] = "-Dvnc=true,-Dvnc=false,libvncserver"
+> +PACKAGECONFIG[rdp] = "-Drdp=true,-Drdp=false,freerdp fuse3 
+> libxkbcommon"
+> +PACKAGECONFIG[fdk_aac] = "-Dfdk_aac=true,-Dfdk_aac=false,fdk-aac"
+> +PACKAGECONFIG[systemd] = "-Dsystemd=true,-Dsystemd=false,systemd"
+> +
+> +FILES:${PN} += "${systemd_user_unitdir}"
+> --
+> 2.34.1
+> 
+> 
+> -=-=-=-=-=-=-=-=-=-=-=-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#100630): 
+> <https://lists.openembedded.org/g/openembedded-devel/message/100630>
+> Mute This Topic: <https://lists.openembedded.org/mt/96325846/3618223>
+> Group Owner: openembedded-devel+owner@lists.openembedded.org 
+> <mailto:openembedded-devel+owner@lists.openembedded.org>
+> Unsubscribe: 
+> <https://lists.openembedded.org/g/openembedded-devel/unsub> 
+> [f_l_k@t-online.de <mailto:f_l_k@t-online.de>]
+> -=-=-=-=-=-=-=-=-=-=-=-
+> 
+
+
+--=-ygmCIFwR+11pXDMGuS+7
+Content-Type: text/html; charset=us-ascii
+
+<div id="geary-body" dir="auto"><div>I'll send a v2 for this patch. It has wrong name because of c&amp;p&nbsp;</div></div><div id="geary-quote" dir="auto"><br>Am Di, 17. Jan 2023 um 08:27:16 +0100 schrieb Markus Volk &lt;f_l_k@t-online.de&gt;:<br><blockquote type="cite"><div class="plaintext" style="white-space: break-spaces;">Add a recipe for gnome-remote-desktop and a corresponding PACKAGECONFIG for
+gnome-control-center from where it can be enabled/disabled, if available.
+
+It is not enabled by default because it has a dependency on tpm2-tss and thus
+adds a layer dependency on meta-security/meta-tpm.
+
+Signed-off-by: Markus Volk &lt;<a href="mailto:f_l_k@t-online.de">f_l_k@t-online.de</a>&gt;
 ---
- .../gnome-shell/{gnome-shell_43.1.bb =3D> gnome-shell_43.2.bb}    | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-gnome/recipes-gnome/gnome-shell/{gnome-shell_43.1.bb =3D> gn=
-ome-shell_43.2.bb} (95%)
+ .../gnome-control-center_43.2.bb              |  1 +
+ .../gnome-remote-desktop_43.3.bb              | 38 +++++++++++++++++++
+ 2 files changed, 39 insertions(+)
+ create mode 100644 meta-gnome/recipes-gnome/gnome-remote-desktop/gnome-remote-desktop_43.3.bb
 
-diff --git a/meta-gnome/recipes-gnome/gnome-shell/gnome-shell_43.1.bb b/m=
-eta-gnome/recipes-gnome/gnome-shell/gnome-shell_43.2.bb
-similarity index 95%
-rename from meta-gnome/recipes-gnome/gnome-shell/gnome-shell_43.1.bb
-rename to meta-gnome/recipes-gnome/gnome-shell/gnome-shell_43.2.bb
-index 14163a186..d3bd357d5 100644
---- a/meta-gnome/recipes-gnome/gnome-shell/gnome-shell_43.1.bb
-+++ b/meta-gnome/recipes-gnome/gnome-shell/gnome-shell_43.2.bb
-@@ -32,7 +32,7 @@ GIR_MESON_OPTION =3D ""
- # gobject-introspection is mandatory and cannot be configured
- REQUIRED_DISTRO_FEATURES +=3D "gobject-introspection-data"
-=20
--SRC_URI[archive.sha256sum] =3D "df0444765def1bd0afee9617d2b5919bc79b4db8=
-6e7e757ac0e1f73748ec1bdc"
-+SRC_URI[archive.sha256sum] =3D "e76fd4be9342410ee9fbdcdd6b2d81c6ff060e7c=
-8cc5a0f1cae6a7aba25d1860"
- SRC_URI +=3D "file://0001-Introduce-options-gjs_path-to-optionally-set-p=
-ath-to.patch"
-=20
- PACKAGECONFIG ??=3D "bluetooth nm ${@bb.utils.filter('DISTRO_FEATURES', =
-'systemd', d)}"
---=20
-2.34.1
+diff --git a/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center_43.2.bb b/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center_43.2.bb
+index 830f3ec68..16a400c5c 100644
+--- a/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center_43.2.bb
++++ b/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center_43.2.bb
+@@ -42,6 +42,7 @@ SRC_URI[archive.sha256sum] = "d7f256aba80a92c727b329fd01c8602da4b78f0fddaec93fcd
+ PACKAGECONFIG ??= "ibus <a href="mailto:${@bb.utils.filter">${@bb.utils.filter</a>('DISTRO_FEATURES', 'wayland', d)}"
+ PACKAGECONFIG[ibus] = "-Dibus=true, -Dibus=false, ibus"
+ PACKAGECONFIG[wayland] = "-Dwayland=true, -Dwayland=false, wayland"
++PACKAGECONFIG[remote-desktop] = ",,,gnome-remote-desktop"
+ 
+ EXTRA_OEMESON = " \
+     -Doe_sysroot=${STAGING_DIR_HOST} \
+diff --git a/meta-gnome/recipes-gnome/gnome-remote-desktop/gnome-remote-desktop_43.3.bb b/meta-gnome/recipes-gnome/gnome-remote-desktop/gnome-remote-desktop_43.3.bb
+new file mode 100644
+index 000000000..5d1a85d5f
+--- /dev/null
++++ b/meta-gnome/recipes-gnome/gnome-remote-desktop/gnome-remote-desktop_43.3.bb
+@@ -0,0 +1,38 @@
++SUMMARY = "Remote desktop daemon for GNOME using pipewire."
++LICENSE = "GPL-2.0-only"
++LIC_FILES_CHKSUM = "<a href="file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263" "="">file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"</a>
++
++GNOMEBASEBUILDCLASS = "meson"
++
++inherit gnomebase gettext gsettings features_check
++
++REQUIRED_DISTRO_FEATURES = "opengl"
++
++SRC_URI[archive.sha256sum] = "11d451d1fde44f1809ebf61aff4bea5f9ef4fdc02359a89647f6e9e7d45429ac"
++
++DEPENDS = " \
++    asciidoc-native \
++    libdrm \
++    libepoxy \
++    cairo \
++    glib-2.0 \
++    pipewire \
++    libnotify \
++    libsecret \
++    nv-codec-headers \
++    tpm2-tss \
++"
++
++PACKAGECONFIG ??= " \
++    vnc \
++    rdp \
++    <a href="mailto:${@bb.utils.contains">${@bb.utils.contains</a>('LICENSE_FLAGS_ACCEPTED', 'commercial', 'fdk_aac', '', d)} \
++    <a href="mailto:${@bb.utils.filter">${@bb.utils.filter</a>('DISTRO_FEATURES', 'systemd', d)} \
++"
++
++PACKAGECONFIG[vnc] = "-Dvnc=true,-Dvnc=false,libvncserver"
++PACKAGECONFIG[rdp] = "-Drdp=true,-Drdp=false,freerdp fuse3 libxkbcommon"
++PACKAGECONFIG[fdk_aac] = "-Dfdk_aac=true,-Dfdk_aac=false,fdk-aac"
++PACKAGECONFIG[systemd] = "-Dsystemd=true,-Dsystemd=false,systemd"
++
++FILES:${PN} += "${systemd_user_unitdir}"
+<div>-- 
+</div>2.34.1
+
+</div><div class="plaintext" style="white-space: break-spaces;">
+-=-=-=-=-=-=-=-=-=-=-=-
+Links: You receive all messages sent to this group.
+View/Reply Online (#100630): <a href="https://lists.openembedded.org/g/openembedded-devel/message/100630">https://lists.openembedded.org/g/openembedded-devel/message/100630</a>
+Mute This Topic: <a href="https://lists.openembedded.org/mt/96325846/3618223">https://lists.openembedded.org/mt/96325846/3618223</a>
+Group Owner: <a href="mailto:openembedded-devel+owner@lists.openembedded.org">openembedded-devel+owner@lists.openembedded.org</a>
+Unsubscribe: <a href="https://lists.openembedded.org/g/openembedded-devel/unsub">https://lists.openembedded.org/g/openembedded-devel/unsub</a> [<a href="mailto:f_l_k@t-online.de">f_l_k@t-online.de</a>]
+-=-=-=-=-=-=-=-=-=-=-=-
+
+</div></blockquote></div>
+--=-ygmCIFwR+11pXDMGuS+7--
 
 
