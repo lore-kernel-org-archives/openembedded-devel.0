@@ -1,383 +1,115 @@
-Return-Path: <chee.yang.lee@intel.com>
+Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E1758C6379F
-	for <webhook@archiver.kernel.org>; Tue, 17 Jan 2023 07:23:52 +0000 (UTC)
-Received: from mga18.intel.com (mga18.intel.com [134.134.136.126])
- by mx.groups.io with SMTP id smtpd.web11.191344.1673940224427110478
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E2694C3DA78
+	for <webhook@archiver.kernel.org>; Tue, 17 Jan 2023 07:24:42 +0000 (UTC)
+Received: from mail1.bemta34.messagelabs.com (mail1.bemta34.messagelabs.com [195.245.231.3])
+ by mx.groups.io with SMTP id smtpd.web11.191349.1673940277344835101
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 16 Jan 2023 23:23:45 -0800
+ Mon, 16 Jan 2023 23:24:37 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="unable to parse pub key" header.i=@intel.com header.s=intel header.b=kCupQOiV;
- spf=pass (domain: intel.com, ip: 134.134.136.126, mailfrom: chee.yang.lee@intel.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1673940224; x=1705476224;
-  h=from:to:subject:date:message-id:mime-version:
-   content-transfer-encoding;
-  bh=SBrlC4w5qQ4lHrfRjstqsOA89mcKU9Y94F8kHxwltSQ=;
-  b=kCupQOiVp8HMUSxlpM8oHdD8HdcjQOQSCj7nZmd8l2JLM7itmPdNaGkr
-   49ZGjGp8q8eou2jTA+Ji1Be18z76kJqh/zWa48qyK2ufsoOJgmtD0AXzq
-   UePzwiHh7MJ5NnlecJNbZ0OpKXWjxCHQjpHSTmdMldnhCfjYa0lc5+ii7
-   qPxbijNCjtJxd0Z+Q61DyDg1NUb78PST1qFM3X3IHDX+98gjBwv3XEPrC
-   lqT+f8AUN9cnAp+i+orauxNJa9308Nhh/1/TfBeO5LCTMxlZLHZ1qxara
-   FS3w/cqSN/VvQK5F/2jjwR/FgddTQid8SK9saK1UN6iN4LzPUeP5tU2nh
-   w==;
-X-IronPort-AV: E=McAfee;i="6500,9779,10592"; a="308192534"
-X-IronPort-AV: E=Sophos;i="5.97,222,1669104000"; 
-   d="scan'208";a="308192534"
-Received: from orsmga006.jf.intel.com ([10.7.209.51])
-  by orsmga106.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 16 Jan 2023 23:23:33 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6500,9779,10592"; a="636767892"
-X-IronPort-AV: E=Sophos;i="5.97,222,1669104000"; 
-   d="scan'208";a="636767892"
-Received: from andromeda02.png.intel.com ([10.221.253.198])
-  by orsmga006.jf.intel.com with ESMTP; 16 Jan 2023 23:23:31 -0800
-From: chee.yang.lee@intel.com
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][master][langdale][kirkstone][PATCH] zsh: Fix CVE-2021-45444
-Date: Tue, 17 Jan 2023 15:23:24 +0800
-Message-Id: <20230117072324.90317-1-chee.yang.lee@intel.com>
-X-Mailer: git-send-email 2.37.3
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=qqzljG3t;
+ spf=pass (domain: fujitsu.com, ip: 195.245.231.3, mailfrom: wangmy@fujitsu.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
+	s=170520fj; t=1673940275; i=@fujitsu.com;
+	bh=zoRzXJ0gbP4dJS0Rfuw2WIMWRopSLNm2teZO6FQdFvw=;
+	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
+	b=qqzljG3to0Nz/fmZlfE30+yhIM6iK+Lnccdf3t7LjWjjOre7DaytTiWVXerw5Jt5U
+	 gl9pXNQGqrCDnEGRdvY+eeyqID8ORsRfHaid5DpbsTG9TTIQTYggg31a0b5W01cFGD
+	 a684mxazg1f6EpKFSrFkOnRkJPSjlY8Zb7EtcvDVzURDmcIuPy25D7HKq+YjXl6bHP
+	 n1c2F1w7aSFhF/mPJ82Xv/5tbY8597/ZSiFPSX9wFaxgVUBNGDQ9+N1azkQDRMW/GE
+	 OTS823MPQ6E63AucytRBSj3uIByhgGzZBcnqWy/SecdS7nWc4FCO22sifPI17Exa7R
+	 0iAtHa7Ca9Tjw==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFlrPIsWRWlGSWpSXmKPExsViZ8ORqGvkeyz
+  ZoP++pcXFw0uZHRg9zm1cwRjAGMWamZeUX5HAmrH+5CzWgiO8FQeP3GRsYPzC3cXIxSEk8IRR
+  ov/kA2YI5waTxOL5LewQzl5GiQn/VrF0MXJysAlISdy4/58NxBYR0JdYOnsPM4jNLKAi8eJ3D
+  zuILSzgIXFvxh5GEJtFQFXi3ek5YHFeASeJn5tug82REFCQmPLwPTNEXFDi5MwnLBBzJCQOvn
+  jBDFGjKDH7cjNUfaVE64dfULaaxNVzm5gnMPLPQtI+C0n7AkamVYxmxalFZalFuoaGeklFmek
+  ZJbmJmTl6iVW6iXqppbrlqcUlukZ6ieXFeqnFxXrFlbnJOSl6eaklmxiB4ZhSrBawg/Hjsj96
+  hxglOZiURHlPmh5LFuJLyk+pzEgszogvKs1JLT7EKMPBoSTBe8oLKCdYlJqeWpGWmQOMDZi0B
+  AePkghvuCVQmre4IDG3ODMdInWKUVFKnPewN1BCACSRUZoH1waLx0uMslLCvIwMDAxCPAWpRb
+  mZJajyrxjFORiVhHkdQabwZOaVwE1/BbSYCWixR8lRkMUliQgpqQYmnqVtiT9n2iZMPPv/Y7a
+  xbq3dscv8rR03rrVvYug9GcI548/7RZybirzv9+cetrnC62/Tk5XheuHZR1bRdDWb/MLXBw9F
+  SnXPep38i7f1yI+UFvnWA4r6aekBznEnJ176IPK+pVsu5rha7tFbBYd6dRKZ63fsOHxq4Z6pB
+  12v8m5YrvAx1i60s1My/6GYwY5T+4p/Rms2y720a5K5qa24VS95SlSz4tlDt63qHorvvaByeu
+  4BtqtTL1/5+X/H5zMP7rG0vNv1udxtOfO9r/0dUgv3Ch2TY9Oru7LOX8n7q7DMNYddL2NuG/0
+  IZRANnBGrbbSstXv+t1LpKb9mnOY2V5m/a/4rxn62vXmixnJsSizFGYmGWsxFxYkANzN5JEID
+  AAA=
+X-Env-Sender: wangmy@fujitsu.com
+X-Msg-Ref: server-17.tower-548.messagelabs.com!1673940274!87119!1
+X-Originating-IP: [62.60.8.97]
+X-SYMC-ESS-Client-Auth: outbound-route-from=pass
+X-StarScan-Received: 
+X-StarScan-Version: 9.102.1; banners=-,-,-
+X-VirusChecked: Checked
+Received: (qmail 10890 invoked from network); 17 Jan 2023 07:24:34 -0000
+Received: from unknown (HELO n03ukasimr01.n03.fujitsu.local) (62.60.8.97)
+  by server-17.tower-548.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 17 Jan 2023 07:24:34 -0000
+Received: from n03ukasimr01.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTP id A29AC10018D
+	for <openembedded-devel@lists.openembedded.org>; Tue, 17 Jan 2023 07:24:34 +0000 (GMT)
+Received: from R01UKEXCASM223.r01.fujitsu.local (R01UKEXCASM223 [10.182.185.121])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTPS id 95B06100182
+	for <openembedded-devel@lists.openembedded.org>; Tue, 17 Jan 2023 07:24:34 +0000 (GMT)
+Received: from localhost.localdomain (10.167.225.33) by
+ R01UKEXCASM223.r01.fujitsu.local (10.182.185.121) with Microsoft SMTP Server
+ (TLS) id 15.0.1497.42; Tue, 17 Jan 2023 07:24:32 +0000
+From: <wangmy@fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: Wang Mingyu <wangmy@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH] python3-mock: upgrade 5.0.0 -> 5.0.1
+Date: Tue, 17 Jan 2023 15:24:20 +0800
+Message-ID: <1673940264-20487-1-git-send-email-wangmy@fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.167.225.33]
+X-ClientProxiedBy: G08CNEXCHPEKD07.g08.fujitsu.local (10.167.33.80) To
+ R01UKEXCASM223.r01.fujitsu.local (10.182.185.121)
+X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 17 Jan 2023 07:23:52 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100619
+ <openembedded-devel@lists.openembedded.org>; Tue, 17 Jan 2023 07:24:42 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100620
 
-From: Chee Yang Lee <chee.yang.lee@intel.com>
+From: Wang Mingyu <wangmy@fujitsu.com>
 
-backport patch from debian
+Changelog:
+==========
+- gh-100740: Fix unittest.mock.Mock not respecting the spec for attribute names
+  prefixed with assert.
+- gh-100690: Mock objects which are not unsafe will now raise an AttributeError
+  when accessing an attribute that matches the name of an assertion but without
+  the prefix assert_, e.g. accessing called_once instead of assert_called_once.
+  This is in addition to this already happening for accessing attributes with
+  prefixes assert, assret, asert, aseert, and assrt.
+- gh-96127: inspect.signature was raising TypeError on call with mock objects.
+  Now it correctly returns (*args, **kwargs) as infered signature.
 
-Signed-off-by: Chee Yang Lee <chee.yang.lee@intel.com>
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../zsh/zsh/CVE-2021-45444_1.patch            |  60 ++++++++
- .../zsh/zsh/CVE-2021-45444_2.patch            | 140 ++++++++++++++++++
- .../zsh/zsh/CVE-2021-45444_3.patch            |  77 ++++++++++
- meta-oe/recipes-shells/zsh/zsh_5.8.bb         |   6 +-
- 4 files changed, 282 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-shells/zsh/zsh/CVE-2021-45444_1.patch
- create mode 100644 meta-oe/recipes-shells/zsh/zsh/CVE-2021-45444_2.patch
- create mode 100644 meta-oe/recipes-shells/zsh/zsh/CVE-2021-45444_3.patch
+ .../python/{python3-mock_5.0.0.bb => python3-mock_5.0.1.bb}     | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-mock_5.0.0.bb => python3-mock_5.0.1.bb} (84%)
 
-diff --git a/meta-oe/recipes-shells/zsh/zsh/CVE-2021-45444_1.patch b/meta-oe/recipes-shells/zsh/zsh/CVE-2021-45444_1.patch
-new file mode 100644
-index 0000000000..fb8fa3427f
---- /dev/null
-+++ b/meta-oe/recipes-shells/zsh/zsh/CVE-2021-45444_1.patch
-@@ -0,0 +1,60 @@
-+Origin: commit c187154f47697cdbf822c2f9d714d570ed4a0fd1
-+From: Oliver Kiddle <opk@zsh.org>
-+Date: Wed, 15 Dec 2021 01:56:40 +0100
-+Subject: [PATCH 1/9] security/41: Don't perform PROMPT_SUBST evaluation on
-+ %F/%K arguments
-+
-+Mitigates CVE-2021-45444
-+
-+https://salsa.debian.org/debian/zsh/-/raw/debian/5.8-6+deb11u1/debian/patches/cherry-pick-CVE-2021-45444_1.patch?inline=false
-+Upstream-Status: Backport
-+CVE: CVE-2021-45444
-+Signed-off-by: Chee Yang Lee <chee.yang.lee@intel.com>
-+---
-+ ChangeLog    |  5 +++++
-+ Src/prompt.c | 10 ++++++++++
-+ 2 files changed, 15 insertions(+)
-+
-+diff --git a/ChangeLog b/ChangeLog
-+index 8d7dfc169..eb248ec06 100644
-+--- a/ChangeLog
-++++ b/ChangeLog
-+@@ -1,3 +1,8 @@
-++2022-01-27  dana  <dana@dana.is>
-++
-++	* Oliver Kiddle: security/41: Src/prompt.c: Prevent recursive
-++	PROMPT_SUBST
-++
-+ 2020-02-14  dana  <dana@dana.is>
-+ 
-+ 	* unposted: Config/version.mk: Update for 5.8
-+diff --git a/Src/prompt.c b/Src/prompt.c
-+index b65bfb86b..91e21c8e9 100644
-+--- a/Src/prompt.c
-++++ b/Src/prompt.c
-+@@ -244,6 +244,12 @@ parsecolorchar(zattr arg, int is_fg)
-+ 	bv->fm += 2; /* skip over F{ */
-+ 	if ((ep = strchr(bv->fm, '}'))) {
-+ 	    char oc = *ep, *col, *coll;
-++	    int ops = opts[PROMPTSUBST], opb = opts[PROMPTBANG];
-++	    int opp = opts[PROMPTPERCENT];
-++
-++	    opts[PROMPTPERCENT] = 1;
-++	    opts[PROMPTSUBST] = opts[PROMPTBANG] = 0;
-++
-+ 	    *ep = '\0';
-+ 	    /* expand the contents of the argument so you can use
-+ 	     * %v for example */
-+@@ -252,6 +258,10 @@ parsecolorchar(zattr arg, int is_fg)
-+ 	    arg = match_colour((const char **)&coll, is_fg, 0);
-+ 	    free(col);
-+ 	    bv->fm = ep;
-++
-++	    opts[PROMPTSUBST] = ops;
-++	    opts[PROMPTBANG] = opb;
-++	    opts[PROMPTPERCENT] = opp;
-+ 	} else {
-+ 	    arg = match_colour((const char **)&bv->fm, is_fg, 0);
-+ 	    if (*bv->fm != '}')
-+-- 
-+2.34.1
-diff --git a/meta-oe/recipes-shells/zsh/zsh/CVE-2021-45444_2.patch b/meta-oe/recipes-shells/zsh/zsh/CVE-2021-45444_2.patch
-new file mode 100644
-index 0000000000..e5b6d7cdc9
---- /dev/null
-+++ b/meta-oe/recipes-shells/zsh/zsh/CVE-2021-45444_2.patch
-@@ -0,0 +1,140 @@
-+From 8a4d65ef6d0023ab9b238529410afb433553d2fa Mon Sep 17 00:00:00 2001
-+From: Marc Cornellà <hello@mcornella.com>
-+Date: Mon, 24 Jan 2022 09:43:28 +0100
-+Subject: [PATCH 2/9] security/89: Add patch which can optionally be used to
-+ work around CVE-2021-45444 in VCS_Info
-+Comment: Updated to use the same file name without blanks as actually
-+ used in the final 5.8.1 release.
-+
-+
-+https://salsa.debian.org/debian/zsh/-/blob/debian/5.8-6+deb11u1/debian/patches/cherry-pick-CVE-2021-45444_2.patch
-+Upstream-Status: Backport
-+CVE: CVE-2021-45444
-+Signed-off-by: Chee Yang Lee <chee.yang.lee@intel.com>
-+---
-+ ChangeLog                                    |  5 +
-+ Etc/CVE-2021-45444-VCS_Info-workaround.patch | 98 ++++++++++++++++++++
-+ 2 files changed, 103 insertions(+)
-+ create mode 100644 Etc/CVE-2021-45444-VCS_Info-workaround.patch
-+
-+diff --git a/ChangeLog b/ChangeLog
-+index eb248ec06..9a05a09e1 100644
-+--- a/ChangeLog
-++++ b/ChangeLog
-+@@ -1,5 +1,10 @@
-+ 2022-01-27  dana  <dana@dana.is>
-+ 
-++	* Marc Cornellà: security/89:
-++	Etc/CVE-2021-45444-VCS_Info-workaround.patch: Add patch which
-++	can optionally be used to work around recursive PROMPT_SUBST
-++	issue in VCS_Info
-++
-+ 	* Oliver Kiddle: security/41: Src/prompt.c: Prevent recursive
-+ 	PROMPT_SUBST
-+ 
-+diff --git a/Etc/CVE-2021-45444-VCS_Info-workaround.patch b/Etc/CVE-2021-45444-VCS_Info-workaround.patch
-+new file mode 100644
-+index 000000000..13e54be77
-+--- /dev/null
-++++ b/Etc/CVE-2021-45444-VCS_Info-workaround.patch
-+@@ -0,0 +1,98 @@
-++From 972887bbe5eb6a00e5f0e73781d6d73bfdcafb93 Mon Sep 17 00:00:00 2001
-++From: =?UTF-8?q?Marc=20Cornell=C3=A0?= <hello@mcornella.com>
-++Date: Mon, 24 Jan 2022 09:43:28 +0100
-++Subject: [PATCH] security/89: Partially work around CVE-2021-45444 in VCS_Info
-++MIME-Version: 1.0
-++Content-Type: text/plain; charset=UTF-8
-++Content-Transfer-Encoding: 8bit
-++
-++This patch is a partial, VCS_Info-specific work-around for CVE-2021-45444,
-++which is mitigated in the shell itself in 5.8.1 and later versions. It is
-++offered for users who are concerned about an exploit but are unable to update
-++their binaries to receive the complete fix.
-++
-++The patch works around the vulnerability by pre-escaping values substituted
-++into format strings in VCS_Info. Please note that this may break some user
-++configurations that rely on those values being un-escaped (which is why it was
-++not included directly in 5.8.1). It may be possible to limit this breakage by
-++adjusting exactly which ones are pre-escaped, but of course this may leave
-++them vulnerable again.
-++
-++If applying the patch to the file system is inconvenient or not possible, the
-++following script can be used to idempotently patch the relevant function
-++running in memory (and thus must be re-run when the shell is restarted):
-++
-++
-++# Impacted versions go from v5.0.3 to v5.8 (v5.8.1 is the first patched version)
-++autoload -Uz is-at-least
-++if is-at-least 5.8.1 || ! is-at-least 5.0.3; then
-++  return
-++fi
-++
-++# Quote necessary $hook_com[<field>] items just before they are used
-++# in the line "VCS_INFO_hook 'post-backend'" of the VCS_INFO_formats
-++# function, where <field> is:
-++#
-++#   base:       the full path of the repository's root directory.
-++#   base-name:  the name of the repository's root directory.
-++#   branch:     the name of the currently checked out branch.
-++#   revision:   an identifier of the currently checked out revision.
-++#   subdir:     the path of the current directory relative to the
-++#               repository's root directory.
-++#   misc:       a string that may contain anything the vcs_info backend wants.
-++#
-++# This patch %-quotes these fields previous to their use in vcs_info hooks and
-++# the zformat call and, eventually, when they get expanded in the prompt.
-++# It's important to quote these here, and not later after hooks have modified the
-++# fields, because then we could be quoting % characters from valid prompt sequences,
-++# like %F{color}, %B, etc.
-++#
-++#  32   │ hook_com[subdir]="$(VCS_INFO_reposub ${hook_com[base]})"
-++#  33   │ hook_com[subdir_orig]="${hook_com[subdir]}"
-++#  34   │
-++#  35 + │ for tmp in base base-name branch misc revision subdir; do
-++#  36 + │     hook_com[$tmp]="${hook_com[$tmp]//\%/%%}"
-++#  37 + │ done
-++#  38 + │
-++#  39   │ VCS_INFO_hook 'post-backend'
-++#
-++# This is especially important so that no command substitution is performed
-++# due to malicious input as a consequence of CVE-2021-45444, which affects
-++# zsh versions from 5.0.3 to 5.8.
-++#
-++autoload -Uz +X regexp-replace VCS_INFO_formats
-++
-++# We use $tmp here because it's already a local variable in VCS_INFO_formats
-++typeset PATCH='for tmp (base base-name branch misc revision subdir) hook_com[$tmp]="${hook_com[$tmp]//\%/%%}"'
-++# Unique string to avoid reapplying the patch if this code gets called twice
-++typeset PATCH_ID=vcs_info-patch-9b9840f2-91e5-4471-af84-9e9a0dc68c1b
-++# Only patch the VCS_INFO_formats function if not already patched
-++if [[ "$functions[VCS_INFO_formats]" != *$PATCH_ID* ]]; then
-++  regexp-replace 'functions[VCS_INFO_formats]' \
-++    "VCS_INFO_hook 'post-backend'" \
-++    ': ${PATCH_ID}; ${PATCH}; ${MATCH}'
-++fi
-++unset PATCH PATCH_ID
-++
-++
-++---
-++ Functions/VCS_Info/VCS_INFO_formats | 4 ++++
-++ 1 file changed, 4 insertions(+)
-++
-++diff --git a/Functions/VCS_Info/VCS_INFO_formats b/Functions/VCS_Info/VCS_INFO_formats
-++index e0e1dc738..4d88e28b6 100644
-++--- a/Functions/VCS_Info/VCS_INFO_formats
-+++++ b/Functions/VCS_Info/VCS_INFO_formats
-++@@ -32,6 +32,10 @@ hook_com[base-name_orig]="${hook_com[base_name]}"
-++ hook_com[subdir]="$(VCS_INFO_reposub ${hook_com[base]})"
-++ hook_com[subdir_orig]="${hook_com[subdir]}"
-++ 
-+++for tmp in base base-name branch misc revision subdir; do
-+++    hook_com[$tmp]="${hook_com[$tmp]//\%/%%}"
-+++done
-+++
-++ VCS_INFO_hook 'post-backend'
-++ 
-++ ## description (for backend authors):
-++-- 
-++2.34.1
-+-- 
-+2.34.1
-diff --git a/meta-oe/recipes-shells/zsh/zsh/CVE-2021-45444_3.patch b/meta-oe/recipes-shells/zsh/zsh/CVE-2021-45444_3.patch
-new file mode 100644
-index 0000000000..adfc00ae57
---- /dev/null
-+++ b/meta-oe/recipes-shells/zsh/zsh/CVE-2021-45444_3.patch
-@@ -0,0 +1,77 @@
-+From 4abf2fc193fc2f3e680deecbf81289a7b02e245b Mon Sep 17 00:00:00 2001
-+From: dana <dana@dana.is>
-+Date: Tue, 21 Dec 2021 13:13:33 -0600
-+Subject: [PATCH 3/9] CVE-2021-45444: Update NEWS/README
-+
-+https://salsa.debian.org/debian/zsh/-/blob/debian/5.8-6+deb11u1/debian/patches/cherry-pick-CVE-2021-45444_3.patch
-+Upstream-Status: Backport
-+CVE: CVE-2021-45444
-+Signed-off-by: Chee Yang Lee <chee.yang.lee@intel.com>
-+---
-+ ChangeLog |  2 ++
-+ NEWS      | 20 ++++++++++++++++++++
-+ README    |  6 ++++++
-+ 3 files changed, 28 insertions(+)
-+
-+diff --git a/ChangeLog b/ChangeLog
-+index 9a05a09e1..93b0bc337 100644
-+--- a/ChangeLog
-++++ b/ChangeLog
-+@@ -1,5 +1,7 @@
-+ 2022-01-27  dana  <dana@dana.is>
-+ 
-++	* CVE-2021-45444: NEWS, README: Document preceding two changes
-++
-+ 	* Marc Cornellà: security/89:
-+ 	Etc/CVE-2021-45444-VCS_Info-workaround.patch: Add patch which
-+ 	can optionally be used to work around recursive PROMPT_SUBST
-+diff --git a/NEWS b/NEWS
-+index 964e1633f..d34b3f79e 100644
-+--- a/NEWS
-++++ b/NEWS
-+@@ -4,6 +4,26 @@ CHANGES FROM PREVIOUS VERSIONS OF ZSH
-+ 
-+ Note also the list of incompatibilities in the README file.
-+ 
-++Changes since 5.8
-++-----------------
-++
-++CVE-2021-45444: Some prompt expansion sequences, such as %F, support
-++'arguments' which are themselves expanded in case they contain colour
-++values, etc. This additional expansion would trigger PROMPT_SUBST
-++evaluation, if enabled. This could be abused to execute code the user
-++didn't expect. e.g., given a certain prompt configuration, an attacker
-++could trick a user into executing arbitrary code by having them check
-++out a Git branch with a specially crafted name.
-++
-++This is fixed in the shell itself by no longer performing PROMPT_SUBST
-++evaluation on these prompt-expansion arguments.
-++
-++Users who are concerned about an exploit but unable to update their
-++binaries may apply the partial work-around described in the file
-++'Etc/CVE-2021-45444 VCS_Info workaround.patch' included with the shell
-++source. [ Reported by RyotaK <security@ryotak.me>. Additional thanks to
-++Marc Cornellà <hello@mcornella.com>. ]
-++
-+ Changes since 5.7.1-test-3
-+ --------------------------
-+ 
-+diff --git a/README b/README
-+index 7f1dd5f92..c9e994ab3 100644
-+--- a/README
-++++ b/README
-+@@ -31,6 +31,12 @@ Zsh is a shell with lots of features.  For a list of some of these, see the
-+ file FEATURES, and for the latest changes see NEWS.  For more
-+ details, see the documentation.
-+ 
-++Incompatibilities since 5.8
-++---------------------------
-++
-++PROMPT_SUBST expansion is no longer performed on arguments to prompt-
-++expansion sequences such as %F.
-++
-+ Incompatibilities since 5.7.1
-+ -----------------------------
-+ 
-+-- 
-+2.34.1
-diff --git a/meta-oe/recipes-shells/zsh/zsh_5.8.bb b/meta-oe/recipes-shells/zsh/zsh_5.8.bb
-index 0429cb9cc7..b023e8d297 100644
---- a/meta-oe/recipes-shells/zsh/zsh_5.8.bb
-+++ b/meta-oe/recipes-shells/zsh/zsh_5.8.bb
-@@ -10,7 +10,11 @@ LIC_FILES_CHKSUM = "file://LICENCE;md5=1a4c4cda3e8096d2fd483ff2f4514fec"
+diff --git a/meta-python/recipes-devtools/python/python3-mock_5.0.0.bb b/meta-python/recipes-devtools/python/python3-mock_5.0.1.bb
+similarity index 84%
+rename from meta-python/recipes-devtools/python/python3-mock_5.0.0.bb
+rename to meta-python/recipes-devtools/python/python3-mock_5.0.1.bb
+index dcc57c22b..b916a7b4e 100644
+--- a/meta-python/recipes-devtools/python/python3-mock_5.0.0.bb
++++ b/meta-python/recipes-devtools/python/python3-mock_5.0.1.bb
+@@ -13,4 +13,4 @@ RDEPENDS:${PN} += "${PYTHON_PN}-prettytable \
+             ${PYTHON_PN}-pep8 \
+             ${PYTHON_PN}-pyflakes"
  
- DEPENDS = "ncurses bison-native libcap libpcre gdbm groff-native"
- 
--SRC_URI = "${SOURCEFORGE_MIRROR}/project/${BPN}/${BPN}/5.8/${BP}.tar.xz"
-+SRC_URI = "${SOURCEFORGE_MIRROR}/project/${BPN}/${BPN}/5.8/${BP}.tar.xz \
-+	file://CVE-2021-45444_1.patch \
-+	file://CVE-2021-45444_2.patch \
-+	file://CVE-2021-45444_3.patch \
-+	"
- SRC_URI[sha256sum] = "dcc4b54cc5565670a65581760261c163d720991f0d06486da61f8d839b52de27"
- 
- inherit autotools-brokensep gettext update-alternatives manpages
+-SRC_URI[sha256sum] = "fd552787228eb2ab8352f270470fa93c9ad8b9cbc565c5558ee3faed8edb3853"
++SRC_URI[sha256sum] = "e3ea505c03babf7977fd21674a69ad328053d414f05e6433c30d8fa14a534a6b"
 -- 
-2.37.3
+2.25.1
 
 
