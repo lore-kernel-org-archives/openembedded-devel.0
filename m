@@ -2,68 +2,68 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E26C8C6379F
-	for <webhook@archiver.kernel.org>; Tue, 17 Jan 2023 07:24:42 +0000 (UTC)
-Received: from mail1.bemta34.messagelabs.com (mail1.bemta34.messagelabs.com [195.245.231.3])
- by mx.groups.io with SMTP id smtpd.web11.191349.1673940277344835101
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DFEC5C6379F
+	for <webhook@archiver.kernel.org>; Tue, 17 Jan 2023 07:24:52 +0000 (UTC)
+Received: from mail1.bemta34.messagelabs.com (mail1.bemta34.messagelabs.com [195.245.231.2])
+ by mx.groups.io with SMTP id smtpd.web10.191105.1673940285559517933
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 16 Jan 2023 23:24:40 -0800
+ Mon, 16 Jan 2023 23:24:45 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=Fne/08V3;
- spf=pass (domain: fujitsu.com, ip: 195.245.231.3, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=Vg1qWuB6;
+ spf=pass (domain: fujitsu.com, ip: 195.245.231.2, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1673940280; i=@fujitsu.com;
-	bh=um6n1dx72hMBQwyfwlqPKocTeV6LFyaLtVovbVZ++SM=;
+	s=170520fj; t=1673940283; i=@fujitsu.com;
+	bh=lzLxTZtyY6iQEAZ35Of9hZoTZz3O5QG/uDRPvA0kHqc=;
 	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
 	 MIME-Version:Content-Type;
-	b=Fne/08V3rdv51amAG3pwulgM5usVD1G3Z4Kkqa57SVwu1aA6nKTGHBEpX1Ry4im3R
-	 NmDlEN3bGGQfchi/zVaa7wkEhnkN1uTHg4b/BQL2SXK670F0Z4cAvcr1KBG/0Db/uo
-	 w+e84UXjJS0FjmylT+O3FdmD5G+WjfwUv0xzJgqPXUsZt6rFBrM7xWlTZfCyYWzJNo
-	 8ROuslSHQR3DggpmImxVJsCDyvvWMxnrWomT4D5mSv7M+bDstMSF0eKmnUmAsDQHJB
-	 uTAbdYIalParIM+qevt9ZxQ4pEz3VPi988ZUvaesryVgWHnoRmny7mKaa2+gXDHnbo
-	 L1n9b5qfKSfrg==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrKIsWRWlGSWpSXmKPExsViZ8OxWdfc91i
-  ywbWdBhYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8bXO3fZCj4IVDR9+snewHiCr4uRi0NI4AGj
-  xLXDLewQzhUmiUddlxm7GDmBnL2MEgsbVEBsNgEpiRv3/7OB2CIC+hJLZ+9hBrGZBVQkXvzuY
-  QexhQV8JDbPh4izCKhKLDiwlAXE5hVwkti48DhYXEJAQWLKw/dgNqeAs8TBXbuYIHY5Sfy5e5
-  oZol5Q4uTMJywQ8yUkDr54AdWrKDH7cjMLhF0p0frhF5StJnH13CbmCYyCs5C0z0LSvoCRaRW
-  jaXFqUVlqka6ZXlJRZnpGSW5iZo5eYpVuol5qqW55anGJrpFeYnmxXmpxsV5xZW5yTopeXmrJ
-  JkZg6KYUK93bwTht2R+9Q4ySHExKorwnTY8lC/El5adUZiQWZ8QXleakFh9ilOHgUJLgPeUFl
-  BMsSk1PrUjLzAHGEUxagoNHSYQ33BIozVtckJhbnJkOkTrFqCglznvYGyghAJLIKM2Da4PF7i
-  VGWSlhXkYGBgYhnoLUotzMElT5V4ziHIxKwryOIFN4MvNK4Ka/AlrMBLTYo+QoyOKSRISUVAO
-  T7DSFKSK2mjFubqWNd+/Mi3dr2q+ut+RBzfb7B0zVlHb/W7OwK+/pLf+1d1a/yf8q4dLI6qzN
-  t5DZ1f7Lkqyvvoc0ZRbn1d19d3wdu6zsomWXflx20W1Lmcy8rNy9YtXq0m6D59Xnw7Taq2xcL
-  X30Am7o5kUZhp+8e3Hm5r2rL04s+ZKf/1TugDjHY1nXH32sswVLrobVz4qX7fnura5tLdGxQD
-  bl4NfGjeeMtG/biGpEykZlv1fPMNS5/fTE8pPVt//mF774ceFFeH7Fz1uHDddubuzc4CyedvL
-  AxN137m5dm5bE2eo5p6RNoUY06kXOgouKk1PTj189X7+70v/UV3vOZEfD25XTV05z8X+mxFKc
-  kWioxVxUnAgAzTQHOlgDAAA=
+	b=Vg1qWuB6RKYineExpuBDNF8+58CqNoyExNwPTMyEYr9jLmy3P6vEYoC7faVq4h+aV
+	 sa9S1jKnN3I4f13x0y6VssWNaqZzU3vw6wDanhMyhHUcauZeHc+13o+ajgvrzRPAFL
+	 2BvCigUqy7cc3K9TLIo490OwVirmD3uhWVWi4A/xW3FPYerJp1DLttiv1Fa41rccjx
+	 VmA8fkPYYNrChQSk6Ie7HCUovzw55jZQAlD+0qsdXvRx8jOnMSuOjofooR4Bk2LA04
+	 ZKuTpfaT50APJcinot4GlA9I4XdxJFj4ZaI92a4Ytj6/XPWS7JDhdmE7y2itDlaag8
+	 1SRSuFBMMrFLQ==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrKIsWRWlGSWpSXmKPExsViZ8MxSdfa91i
+  ywcHpYhYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8bRs1kFK0Urvj1+ztrAeEyoi5GLQ0jgCaPE
+  z2tLmSCcG0wSj2edY4dw9jJK9H17xNrFyMnBJiAlceP+fzYQW0RAX2Lp7D3MIDazgIrEi9897
+  CC2sIC3xPnOJWA2i4CqxJTJx8HqeQWcJE7OmQNWLyGgIDHl4Xswm1PAWeLgrl1MILYQUM2fu6
+  eZIeoFJU7OfMICMV9C4uCLF1C9ihKzLzezQNiVEq0ffkHZahJXz21insAoOAtJ+ywk7QsYmVY
+  xmhanFpWlFuma6CUVZaZnlOQmZuboJVbpJuqlluqWpxaX6BrpJZYX66UWF+sVV+Ym56To5aWW
+  bGIEhm5KsarnDsY/S//oHWKU5GBSEuU9aXosWYgvKT+lMiOxOCO+qDQntfgQowwHh5IE7ykvo
+  JxgUWp6akVaZg4wjmDSEhw8SiK84ZZAad7igsTc4sx0iNQpRkUpcd7D3kAJAZBERmkeXBssdi
+  8xykoJ8zIyMDAI8RSkFuVmlqDKv2IU52BUEuZ1BJnCk5lXAjf9FdBiJqDFHiVHQRaXJCKkpBq
+  YKuu7a/2XzQ17yH3whNwM1+m/ZOz/+76TeHbw1Rzu/7unVUv82XFwesy1eRNb1s/zf5KXtv1J
+  qNKM4NzE9Pdqq5/3bazbKXtHf+6DH9vYZ1TeS31e+JlN2uvIxd9/s3jOv80vfRFpcMKque199
+  m+h3pXqtQ+dRL7GNXJeVkn4F2x38UK7EsPqJp/88xMLd11+fE2qw21b4oJtC3MlY3ytSue9nH
+  b5YFPOk8SydC+e6esk7yw5+dKuLmSe56/Dhg8mHu0vEJqxSzdF54DT6S/3pmsz3nBruzj5xcK
+  nQatKnH8ld5WLy/7imTd9Ufb1n2eFbzFfTNAXENm/dZL+Ny2hjARm98ki/43iFL+pHVh4+Z8S
+  S3FGoqEWc1FxIgBm2jflWAMAAA==
 X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-21.tower-565.messagelabs.com!1673940279!403841!1
-X-Originating-IP: [62.60.8.179]
+X-Msg-Ref: server-7.tower-548.messagelabs.com!1673940283!21662!1
+X-Originating-IP: [62.60.8.146]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.102.1; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 29502 invoked from network); 17 Jan 2023 07:24:39 -0000
-Received: from unknown (HELO n03ukasimr04.n03.fujitsu.local) (62.60.8.179)
-  by server-21.tower-565.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 17 Jan 2023 07:24:39 -0000
-Received: from n03ukasimr04.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTP id 7F2FF7C
-	for <openembedded-devel@lists.openembedded.org>; Tue, 17 Jan 2023 07:24:39 +0000 (GMT)
+Received: (qmail 27262 invoked from network); 17 Jan 2023 07:24:43 -0000
+Received: from unknown (HELO n03ukasimr02.n03.fujitsu.local) (62.60.8.146)
+  by server-7.tower-548.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 17 Jan 2023 07:24:43 -0000
+Received: from n03ukasimr02.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTP id 15D081000FE
+	for <openembedded-devel@lists.openembedded.org>; Tue, 17 Jan 2023 07:24:43 +0000 (GMT)
 Received: from R01UKEXCASM223.r01.fujitsu.local (R01UKEXCASM223 [10.182.185.121])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTPS id 7338073
-	for <openembedded-devel@lists.openembedded.org>; Tue, 17 Jan 2023 07:24:39 +0000 (GMT)
+	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTPS id 076321000FB
+	for <openembedded-devel@lists.openembedded.org>; Tue, 17 Jan 2023 07:24:43 +0000 (GMT)
 Received: from localhost.localdomain (10.167.225.33) by
  R01UKEXCASM223.r01.fujitsu.local (10.182.185.121) with Microsoft SMTP Server
- (TLS) id 15.0.1497.42; Tue, 17 Jan 2023 07:24:37 +0000
+ (TLS) id 15.0.1497.42; Tue, 17 Jan 2023 07:24:41 +0000
 From: <wangmy@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-python] [PATCH] python3-pymodbus: upgrade 3.0.2 -> 3.1.0
-Date: Tue, 17 Jan 2023 15:24:21 +0800
-Message-ID: <1673940264-20487-2-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH] python3-pyzmq: upgrade 24.0.1 -> 25.0.0
+Date: Tue, 17 Jan 2023 15:24:22 +0800
+Message-ID: <1673940264-20487-3-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 In-Reply-To: <1673940264-20487-1-git-send-email-wangmy@fujitsu.com>
 References: <1673940264-20487-1-git-send-email-wangmy@fujitsu.com>
@@ -76,57 +76,72 @@ X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 17 Jan 2023 07:24:42 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100621
+ <openembedded-devel@lists.openembedded.org>; Tue, 17 Jan 2023 07:24:52 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100622
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
 Changelog:
 ==========
-    Add xdist pr default. (#1253)
-    Create docker-publish.yml (#1250)
-    Parallelize pytest with pytest-xdist (#1247)
-    Support Python3.11 (#1246)
-    Fix reconnectDelay to be within (100ms, 5min) (#1244)
-    Fix typos in comments (#1233)
-    WEB simulator, first version. (#1226)
-    Clean async serial problem. (#1235)
-    terminate when using 'randomize' and 'change_rate' at the same time (#1231)
-    Used tooled python and OS (#1232)
-    add 'change_rate' randomization option (#1229)
-    add check_ci.sh (#1225)
-    Simplify CI and use cache. (#1217)
-    Solve issue 1210, update simulator (#1211)
-    Add missing client calls in mixin.py. (#1206)
-    Advanced simulator with cross memory. (#1195)
-    AsyncModbusTcp/UdpClient honors delay_ms == 0 (#1203) (#1205)
-    Fix #1188 and some pylint issues (#1189)
-    Serial receive incomplete bytes.issue #1183 (#1185)
-    Handle echo (#1186)
-    Add updating server example. (#1176)
+New:
+------
+- Added socket_class argument to zmq.Context.socket()
+- Support shadowing sockets with socket objects, not just via address,
+  e.g. zmq.asyncio.Socket(other_socket). Shadowing an object preserves a
+  reference to the original, unlike shadowing via address.
+- in zmq.auth, CredentialsProvider callbacks may now be async.
+- ZMQStream callbacks may now be async.
+- Add zmq.ReconnectStop draft constants.
+- Add manylinux_2_28 wheels for x86_64 CPython 3.10, 3.11, and PyPy 3.9
+  (these are in addition to not instead of the manylinux_2014 wheels).
+
+Fixed:
+-------
+- When ZMQStream is given an async socket, it now warns and hooks up events
+  correctly with the underlying socket, so the callback gets the received
+  message, instead of sending the callback the incorrect arguments.
+- Fixed toml parse error in pyproject.toml, when installing from source with
+  very old pip.
+- Removed expressed dependency on py when running with pypy, which hasn't
+  been used in some time.
+
+Deprecated:
+----------
+- zmq.auth.ioloop.IOLoopAuthenticator is deprecated in favor of
+  zmq.auth.asyncio.AsyncioAuthenticator
+- As part of migrating toward modern pytest, zmq.tests.BaseZMQTestCase
+  is deprecated and should not be used outside pyzmq.
+- python setup.py test is deprecated as a way to launch the tests.
+  Just use pytest.
+
+Removed:
+----------
+- Bundled subset of tornado's IOLoop (deprecated since pyzmq 17) is
+  removed, so ZMQStream cannot be used without an actual install of tornado.
+- Remove support for tornado 4, meaning tornado is always assumed to run on asyncio.
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../{python3-pymodbus_3.0.2.bb => python3-pymodbus_3.1.0.bb}    | 2 +-
+ .../python/{python3-pyzmq_24.0.1.bb => python3-pyzmq_25.0.0.bb} | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-pymodbus_3.0.2.bb => python3-pymodbus_3.1.0.bb} (91%)
+ rename meta-python/recipes-devtools/python/{python3-pyzmq_24.0.1.bb => python3-pyzmq_25.0.0.bb} (94%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-pymodbus_3.0.2.bb b/meta-python/recipes-devtools/python/python3-pymodbus_3.1.0.bb
-similarity index 91%
-rename from meta-python/recipes-devtools/python/python3-pymodbus_3.0.2.bb
-rename to meta-python/recipes-devtools/python/python3-pymodbus_3.1.0.bb
-index 95cc3e351..b58c62218 100644
---- a/meta-python/recipes-devtools/python/python3-pymodbus_3.0.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-pymodbus_3.1.0.bb
-@@ -4,7 +4,7 @@ LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=2c2223d66c7e674b40527b5a4c35bd76"
- DEPENDS += "python3-six-native"
+diff --git a/meta-python/recipes-devtools/python/python3-pyzmq_24.0.1.bb b/meta-python/recipes-devtools/python/python3-pyzmq_25.0.0.bb
+similarity index 94%
+rename from meta-python/recipes-devtools/python/python3-pyzmq_24.0.1.bb
+rename to meta-python/recipes-devtools/python/python3-pyzmq_25.0.0.bb
+index b3b0aefe1..39a7614fc 100644
+--- a/meta-python/recipes-devtools/python/python3-pyzmq_24.0.1.bb
++++ b/meta-python/recipes-devtools/python/python3-pyzmq_25.0.0.bb
+@@ -13,7 +13,7 @@ SRC_URI:append = " \
+     file://club-rpath-out.patch \
+     file://run-ptest \
+ "
+-SRC_URI[sha256sum] = "216f5d7dbb67166759e59b0479bca82b8acf9bed6015b526b8eb10143fb08e77"
++SRC_URI[sha256sum] = "f330a1a2c7f89fd4b0aa4dcb7bf50243bf1c8da9a2f1efc31daf57a2046b31f2"
  
--SRC_URI[sha256sum] = "704cb7fb90631c45f9c3a70b89d0c990fe0e208ac56f14a5c449e21bebd1e201"
-+SRC_URI[sha256sum] = "eeba02c86b13b1f885c0acc50adf4611df24ab85066ff54daa37c2d883c32525"
- S = "${WORKDIR}/pymodbus-${PV}"
+ inherit pypi pkgconfig python_setuptools_build_meta ptest
  
- inherit pypi setuptools3
 -- 
 2.25.1
 
