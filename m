@@ -2,100 +2,301 @@ Return-Path: <chee.yang.lee@intel.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4AA05C38159
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3C079C38142
 	for <webhook@archiver.kernel.org>; Wed, 18 Jan 2023 03:30:11 +0000 (UTC)
 Received: from mga02.intel.com (mga02.intel.com [134.134.136.20])
  by mx.groups.io with SMTP id smtpd.web11.7404.1674012594208151969
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 17 Jan 2023 19:30:03 -0800
+ Tue, 17 Jan 2023 19:30:02 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="unable to parse pub key" header.i=@intel.com header.s=intel header.b=MDIwOBG3;
+ dkim=fail reason="unable to parse pub key" header.i=@intel.com header.s=intel header.b=NkvwE0jT;
  spf=pass (domain: intel.com, ip: 134.134.136.20, mailfrom: chee.yang.lee@intel.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
   d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1674012603; x=1705548603;
-  h=from:to:subject:date:message-id:in-reply-to:references:
-   mime-version:content-transfer-encoding;
-  bh=fD3O9CR3IgtZLpeQL9pUtxueZRB6smrvC/qYzFk5054=;
-  b=MDIwOBG3+XJijXTnKvf4N7PR/rULra1m0XXs+X5bSuW+of4nqueL7EWo
-   xMf8LaikghEQkvQn3gyag1j+SZSP27NMyJhLN8Yl7kPHZPDfCtw2fHtuK
-   qtvXbbY0Vp1KMQ0zXAOUjC8x5Tb872KX8BdnEkJKmPaDDXxeR5DfkiIH0
-   mQRmQK5N8OO7SmT4x8skkvWjf2RQ937VcW59BGPu/NKCIYrTLGA0HUJF9
-   D5E5MoQmGOnE/h9n8k0kPvVaEkTwyVu5cq5AfP3aD6yYbNVCvQ1gPMrwB
-   mdYaSKyt1b4IzRvzDv5/NnHg0S9r+cb9L1or47zUt2oHRrnfeQUkyteGd
-   w==;
-X-IronPort-AV: E=McAfee;i="6500,9779,10593"; a="312764832"
+  t=1674012594; x=1705548594;
+  h=from:to:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=r1jvlVwctMpgQ0Awlp5gYa8K2/KgM69AJ4H/TkjGv1w=;
+  b=NkvwE0jTO7hV5L2YCzKhn3ju7/TqZH4o9GAkJJdBrnaQ4EbZXzyOEQcP
+   OdMR+GtHUjJM6nx3NG8kujfa+I7ApPqfKcpPLeU5hJjKcEJZ4PzqPMIvi
+   /1jo7JUDXgRrxPIAFy3ux64iSIBWTNcRZBvXJ28WouhHjAOYV5Zy5vx70
+   xaADW7yFIIb01dP3LeVWToGgn8zIFZDX+691pOaiHdPd+aetRh66RzndH
+   0dU/q2iIXEli7z0+AAJfaqSVS0NEEipc4WacLyat/pi8Ui2aA641djvJ+
+   EO01osEIErOPxrGEGSkIhyEgkb+3WpurwFlb0cJrU5URZFxOMfyNsUiKY
+   Q==;
+X-IronPort-AV: E=McAfee;i="6500,9779,10593"; a="312764829"
 X-IronPort-AV: E=Sophos;i="5.97,224,1669104000"; 
-   d="scan'208";a="312764832"
+   d="scan'208";a="312764829"
 Received: from orsmga005.jf.intel.com ([10.7.209.41])
-  by orsmga101.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 17 Jan 2023 19:29:45 -0800
+  by orsmga101.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 17 Jan 2023 19:29:42 -0800
 X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6500,9779,10593"; a="833397272"
+X-IronPort-AV: E=McAfee;i="6500,9779,10593"; a="833397266"
 X-IronPort-AV: E=Sophos;i="5.97,224,1669104000"; 
-   d="scan'208";a="833397272"
+   d="scan'208";a="833397266"
 Received: from andromeda02.png.intel.com ([10.221.253.198])
-  by orsmga005.jf.intel.com with ESMTP; 17 Jan 2023 19:29:44 -0800
+  by orsmga005.jf.intel.com with ESMTP; 17 Jan 2023 19:29:41 -0800
 From: chee.yang.lee@intel.com
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][langdale][PATCH 4/5] redis: Upgrade to 7.0.8
-Date: Wed, 18 Jan 2023 11:29:33 +0800
-Message-Id: <20230118032934.1556599-4-chee.yang.lee@intel.com>
+Subject: [meta-oe][langdale][PATCH 1/5] fwupd: Fix CVE-2022-3287
+Date: Wed, 18 Jan 2023 11:29:30 +0800
+Message-Id: <20230118032934.1556599-1-chee.yang.lee@intel.com>
 X-Mailer: git-send-email 2.37.3
-In-Reply-To: <20230118032934.1556599-1-chee.yang.lee@intel.com>
-References: <20230118032934.1556599-1-chee.yang.lee@intel.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 18 Jan 2023 03:30:11 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100647
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100645
 
 From: Chee Yang Lee <chee.yang.lee@intel.com>
 
-Upgrade urgency: SECURITY, contains fixes to security issues.
-
-Security Fixes:
-
-(CVE-2022-35977) Integer overflow in the Redis SETRANGE and SORT/SORT_RO
-commands can drive Redis to OOM panic
-(CVE-2023-22458) Integer overflow in the Redis HRANDFIELD and
-ZRANDMEMBER
-commands can lead to denial-of-service
-
-Bug Fixes
-
-Avoid possible hang when client issues long KEYS, SRANDMEMBER,
-HRANDFIELD,
-and ZRANDMEMBER commands and gets disconnected by client output buffer
-limit (#11676)
-Make sure that fork child doesn't do incremental rehashing (#11692)
-Fix a bug where blocking commands with a sub-second timeout would block
-forever (#11688)
-Fix sentinel issue if replica changes IP (#11590)
-
 Signed-off-by: Chee Yang Lee <chee.yang.lee@intel.com>
 ---
- .../recipes-extended/redis/{redis_7.0.7.bb => redis_7.0.8.bb}   | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-extended/redis/{redis_7.0.7.bb => redis_7.0.8.bb} (96%)
+ .../fwupd/fwupd/CVE-2022-3287.patch           | 218 ++++++++++++++++++
+ meta-oe/recipes-bsp/fwupd/fwupd_1.8.4.bb      |   4 +-
+ 2 files changed, 221 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-bsp/fwupd/fwupd/CVE-2022-3287.patch
 
-diff --git a/meta-oe/recipes-extended/redis/redis_7.0.7.bb b/meta-oe/recipes-extended/redis/redis_7.0.8.bb
-similarity index 96%
-rename from meta-oe/recipes-extended/redis/redis_7.0.7.bb
-rename to meta-oe/recipes-extended/redis/redis_7.0.8.bb
-index 58055166cc..fe1db9f986 100644
---- a/meta-oe/recipes-extended/redis/redis_7.0.7.bb
-+++ b/meta-oe/recipes-extended/redis/redis_7.0.8.bb
-@@ -19,7 +19,7 @@ SRC_URI = "http://download.redis.io/releases/${BP}.tar.gz \
-            file://GNU_SOURCE-7.patch \
-            file://0006-Define-correct-gregs-for-RISCV32.patch \
-            "
--SRC_URI[sha256sum] = "8d327d7e887d1bb308fc37aaf717a0bf79f58129e3739069aaeeae88955ac586"
-+SRC_URI[sha256sum] = "06a339e491306783dcf55b97f15a5dbcbdc01ccbde6dc23027c475cab735e914"
+diff --git a/meta-oe/recipes-bsp/fwupd/fwupd/CVE-2022-3287.patch b/meta-oe/recipes-bsp/fwupd/fwupd/CVE-2022-3287.patch
+new file mode 100644
+index 0000000000..5360e981ce
+--- /dev/null
++++ b/meta-oe/recipes-bsp/fwupd/fwupd/CVE-2022-3287.patch
+@@ -0,0 +1,218 @@
++From ea676855f2119e36d433fbd2ed604039f53b2091 Mon Sep 17 00:00:00 2001
++From: Richard Hughes <richard@hughsie.com>
++Date: Wed, 21 Sep 2022 14:56:10 +0100
++Subject: [PATCH] Never save the Redfish passwords to a file readable by users
++
++When the redfish plugin automatically creates an OPERATOR user account on the
++BMC we save the autogenerated password to /etc/fwupd/redfish.conf, ensuring it
++is chmod'ed to 0660 before writing the file with g_key_file_save_to_file().
++
++Under the covers, g_key_file_save_to_file() calls g_file_set_contents() with
++the keyfile string data.
++I was under the impression that G_FILE_CREATE_REPLACE_DESTINATION was being
++used to copy permissions, but alas not.
++
++GLib instead calls g_file_set_contents_full() with the mode hardcoded to 0666,
++which undoes the previous chmod().
++
++Use g_file_set_contents_full() with the correct mode for newer GLib versions,
++and provide a fallback with the same semantics for older versions.
++
++https://github.com/fwupd/fwupd/commit/ea676855f2119e36d433fbd2ed604039f53b2091
++Upstream-Status: Backport
++CVE: CVE-2022-3287
++Signed-off-by: Chee Yang Lee <chee.yang.lee@intel.com>
++
++---
++ contrib/fwupd.spec.in         |  3 ++
++ libfwupdplugin/fu-plugin.c    | 65 +++++++++++++++++++++++++++++------
++ libfwupdplugin/fu-self-test.c | 57 ++++++++++++++++++++++++++++++
++ 3 files changed, 114 insertions(+), 11 deletions(-)
++
++diff --git a/contrib/fwupd.spec.in b/contrib/fwupd.spec.in
++index b011292b1b..42ea2024a8 100644
++--- a/contrib/fwupd.spec.in
+++++ b/contrib/fwupd.spec.in
++@@ -326,6 +326,9 @@ for fn in /etc/fwupd/remotes.d/*.conf; do
++     fi
++ done
++ 
+++# ensure this is private
+++chmod 0660 /etc/fwupd/redfish.conf
+++
++ %preun
++ %systemd_preun fwupd.service
++ 
++diff --git a/libfwupdplugin/fu-plugin.c b/libfwupdplugin/fu-plugin.c
++index 9744af9d60..b431f6d418 100644
++--- a/libfwupdplugin/fu-plugin.c
+++++ b/libfwupdplugin/fu-plugin.c
++@@ -9,6 +9,7 @@
++ #include "config.h"
++ 
++ #include <errno.h>
+++#include <fcntl.h>
++ #include <fwupd.h>
++ #include <glib/gstdio.h>
++ #include <gmodule.h>
++@@ -2417,6 +2418,46 @@ fu_plugin_set_config_value(FuPlugin *self, const gchar *key, const gchar *value,
++ 	return g_key_file_save_to_file(keyfile, conf_path, error);
++ }
++ 
+++#if !GLIB_CHECK_VERSION(2, 66, 0)
+++
+++#define G_FILE_SET_CONTENTS_CONSISTENT 0
+++typedef guint GFileSetContentsFlags;
+++static gboolean
+++g_file_set_contents_full(const gchar *filename,
+++			 const gchar *contents,
+++			 gssize length,
+++			 GFileSetContentsFlags flags,
+++			 int mode,
+++			 GError **error)
+++{
+++	gint fd;
+++	gssize wrote;
+++
+++	if (length < 0)
+++		length = strlen(contents);
+++	fd = g_open(filename, O_CREAT, mode);
+++	if (fd <= 0) {
+++		g_set_error(error,
+++			    G_IO_ERROR,
+++			    G_IO_ERROR_FAILED,
+++			    "could not open %s file",
+++			    filename);
+++		return FALSE;
+++	}
+++	wrote = write(fd, contents, length);
+++	if (wrote != length) {
+++		g_set_error(error,
+++			    G_IO_ERROR,
+++			    G_IO_ERROR_FAILED,
+++			    "did not write %s file",
+++			    filename);
+++		g_close(fd, NULL);
+++		return FALSE;
+++	}
+++	return g_close(fd, error);
+++}
+++#endif
+++
++ /**
++  * fu_plugin_set_secure_config_value:
++  * @self: a #FuPlugin
++@@ -2438,7 +2479,8 @@ fu_plugin_set_secure_config_value(FuPlugin *self,
++ 				  GError **error)
++ {
++ 	g_autofree gchar *conf_path = fu_plugin_get_config_filename(self);
++-	gint ret;
+++	g_autofree gchar *data = NULL;
+++	g_autoptr(GKeyFile) keyfile = g_key_file_new();
++ 
++ 	g_return_val_if_fail(FU_IS_PLUGIN(self), FALSE);
++ 	g_return_val_if_fail(error == NULL || *error == NULL, FALSE);
++@@ -2447,17 +2489,18 @@ fu_plugin_set_secure_config_value(FuPlugin *self,
++ 		g_set_error(error, FWUPD_ERROR, FWUPD_ERROR_NOT_FOUND, "%s is missing", conf_path);
++ 		return FALSE;
++ 	}
++-	ret = g_chmod(conf_path, 0660);
++-	if (ret == -1) {
++-		g_set_error(error,
++-			    FWUPD_ERROR,
++-			    FWUPD_ERROR_INTERNAL,
++-			    "failed to set permissions on %s",
++-			    conf_path);
+++	if (!g_key_file_load_from_file(keyfile, conf_path, G_KEY_FILE_KEEP_COMMENTS, error))
++ 		return FALSE;
++-	}
++-
++-	return fu_plugin_set_config_value(self, key, value, error);
+++	g_key_file_set_string(keyfile, fu_plugin_get_name(self), key, value);
+++	data = g_key_file_to_data(keyfile, NULL, error);
+++	if (data == NULL)
+++		return FALSE;
+++	return g_file_set_contents_full(conf_path,
+++					data,
+++					-1,
+++					G_FILE_SET_CONTENTS_CONSISTENT,
+++					0660,
+++					error);
++ }
++ 
++ /**
++diff --git a/libfwupdplugin/fu-self-test.c b/libfwupdplugin/fu-self-test.c
++index 2dbc9c94ff..aaf49c172b 100644
++--- a/libfwupdplugin/fu-self-test.c
+++++ b/libfwupdplugin/fu-self-test.c
++@@ -674,6 +674,62 @@ _plugin_device_added_cb(FuPlugin *plugin, FuDevice *device, gpointer user_data)
++ 	fu_test_loop_quit();
++ }
++ 
+++static void
+++fu_plugin_config_func(void)
+++{
+++	GStatBuf statbuf = {0};
+++	gboolean ret;
+++	gint rc;
+++	g_autofree gchar *conf_dir = NULL;
+++	g_autofree gchar *conf_file = NULL;
+++	g_autofree gchar *fn = NULL;
+++	g_autofree gchar *testdatadir = NULL;
+++	g_autofree gchar *value = NULL;
+++	g_autoptr(FuPlugin) plugin = fu_plugin_new(NULL);
+++	g_autoptr(GError) error = NULL;
+++
+++	/* this is a build file */
+++	testdatadir = g_test_build_filename(G_TEST_BUILT, "tests", NULL);
+++	(void)g_setenv("FWUPD_SYSCONFDIR", testdatadir, TRUE);
+++	conf_dir = fu_path_from_kind(FU_PATH_KIND_SYSCONFDIR_PKG);
+++
+++	/* remove existing file */
+++	fu_plugin_set_name(plugin, "test");
+++	conf_file = g_strdup_printf("%s.conf", fu_plugin_get_name(plugin));
+++	fn = g_build_filename(conf_dir, conf_file, NULL);
+++	ret = fu_path_mkdir_parent(fn, &error);
+++	g_assert_no_error(error);
+++	g_assert_true(ret);
+++	g_remove(fn);
+++	ret = g_file_set_contents(fn, "", -1, &error);
+++	g_assert_no_error(error);
+++	g_assert_true(ret);
+++
+++	/* set a value */
+++	ret = fu_plugin_set_config_value(plugin, "Key", "True", &error);
+++	g_assert_no_error(error);
+++	g_assert_true(ret);
+++	g_assert_true(g_file_test(fn, G_FILE_TEST_EXISTS));
+++
+++	/* check it is world readable */
+++	rc = g_stat(fn, &statbuf);
+++	g_assert_cmpint(rc, ==, 0);
+++	g_assert_cmpint(statbuf.st_mode & 0777, ==, 0644);
+++
+++	/* read back the value */
+++	value = fu_plugin_get_config_value(plugin, "Key");
+++	g_assert_cmpstr(value, ==, "True");
+++	g_assert_true(fu_plugin_get_config_value_boolean(plugin, "Key"));
+++
+++	/* check it is private, i.e. only readable by the user/group */
+++	ret = fu_plugin_set_secure_config_value(plugin, "Key", "False", &error);
+++	g_assert_no_error(error);
+++	g_assert_true(ret);
+++	rc = g_stat(fn, &statbuf);
+++	g_assert_cmpint(rc, ==, 0);
+++	g_assert_cmpint(statbuf.st_mode & 0777, ==, 0640);
+++}
+++
++ static void
++ fu_plugin_devices_func(void)
++ {
++@@ -3598,6 +3654,7 @@ main(int argc, char **argv)
++ 	g_test_add_func("/fwupd/progress{finish}", fu_progress_finish_func);
++ 	g_test_add_func("/fwupd/bios-attrs{load}", fu_bios_settings_load_func);
++ 	g_test_add_func("/fwupd/security-attrs{hsi}", fu_security_attrs_hsi_func);
+++	g_test_add_func("/fwupd/plugin{config}", fu_plugin_config_func);
++ 	g_test_add_func("/fwupd/plugin{devices}", fu_plugin_devices_func);
++ 	g_test_add_func("/fwupd/plugin{device-inhibit-children}",
++ 			fu_plugin_device_inhibit_children_func);
+diff --git a/meta-oe/recipes-bsp/fwupd/fwupd_1.8.4.bb b/meta-oe/recipes-bsp/fwupd/fwupd_1.8.4.bb
+index 99077923dc..794a678833 100644
+--- a/meta-oe/recipes-bsp/fwupd/fwupd_1.8.4.bb
++++ b/meta-oe/recipes-bsp/fwupd/fwupd_1.8.4.bb
+@@ -6,7 +6,9 @@ DEPENDS = "glib-2.0 libxmlb json-glib libjcat gcab vala-native"
  
- inherit autotools-brokensep update-rc.d systemd useradd
+ SRC_URI = "https://github.com/${BPN}/${BPN}/releases/download/${PV}/${BP}.tar.xz \
+            file://c54ae9c524998e449b822feb465a0c90317cd735.patch \
+-           file://run-ptest"
++           file://run-ptest \
++           file://CVE-2022-3287.patch \
++           "
+ SRC_URI[sha256sum] = "adfa07434cdc29ec41c40fef460e8d970963fe0c7e849dec7f3932adb161f886"
  
+ UPSTREAM_CHECK_URI = "https://github.com/${BPN}/${BPN}/releases"
 -- 
 2.37.3
 
