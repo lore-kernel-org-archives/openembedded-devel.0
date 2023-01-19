@@ -1,119 +1,86 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 36146C004D4
-	for <webhook@archiver.kernel.org>; Thu, 19 Jan 2023 16:48:32 +0000 (UTC)
-Received: from mail-oo1-f52.google.com (mail-oo1-f52.google.com [209.85.161.52])
- by mx.groups.io with SMTP id smtpd.web10.50548.1674146907917514129
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 61CE7C004D4
+	for <webhook@archiver.kernel.org>; Thu, 19 Jan 2023 17:26:32 +0000 (UTC)
+Received: from voyager.superhosting.bg (voyager.superhosting.bg [79.124.30.14])
+ by mx.groups.io with SMTP id smtpd.web10.51576.1674149187047580826
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 19 Jan 2023 08:48:28 -0800
+ Thu, 19 Jan 2023 09:26:28 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=bQVOzoeD;
- spf=pass (domain: gmail.com, ip: 209.85.161.52, mailfrom: raj.khem@gmail.com)
-Received: by mail-oo1-f52.google.com with SMTP id h3-20020a4ac443000000b004fb2954e7c3so590323ooq.10
-        for <openembedded-devel@lists.openembedded.org>; Thu, 19 Jan 2023 08:48:27 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=6bkUp2Cf9R07IZJ3P69gmObM9y14vXCwlPnUDZA2rrE=;
-        b=bQVOzoeDXv6IZiYXpRlvvGzWWpwiwyxqML6EmevCqMfulx5f1Pm6TZnORV/ch73z6S
-         wXhj1jktf60RyylTksc4U8o97Uzg1zTpCblKoQ63H8PXhE+LS0sjijDgjUPHJwoYmAOi
-         t4Sv8uHm3wHBUDdjvWk1ubhMH8K7iytaMaeFjK0NvYdspZI+tGGrI0NBAMMwUmnQXNUi
-         gnwa9TACF5k64tU14jJmSjV8GZJP9xQ1fDScEFCWhlZgXVI21l+zqFEAzCN4s12CvVSM
-         rW33uR3WzA63T1MDhy9rvPPjZqLg0NWbMjDlnIAU+0LVrntmw+mD7QoTU01on6agO1vw
-         hfOA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=6bkUp2Cf9R07IZJ3P69gmObM9y14vXCwlPnUDZA2rrE=;
-        b=KO1TkjUUBWkmg3qcd+j5nP/dp591ciUkVdc0MAkaJIEQi9tDNErC+4us2CmHucuP5p
-         ixLnaSNd2FzWbs8QOxKdGCy9CeMSfu/I9xyFg5xS8S2xFYHD+QikbgPwY4R72BSEZn3Y
-         bII+GDCdymRokuTNct7GT/RdETeDvpIhD3pmPI8JfGK1RJ2t/P8c1O320PnLr1RtRlmX
-         qfyxJ0N2zgrnyq/R8Xyxykra3QfdW10vaH/zoKBC9WF1tvIaBbwBfNuw1IgT19oZiuq9
-         81Ch2OYYAGTJceek82gn6QD6cZDYBN3w/VX8H0lHHa3MlQx3HTObQg+1fNqyT1IpaeIq
-         ivUQ==
-X-Gm-Message-State: AFqh2krh9OV4cxNlAyX/SctnOCsFAeKKu+4TP38X+JI+W0adNxeB3IrP
-	LzY5Gu9nPXSoxGnjS/mjJ2NWHBxyMU36DaSgNyjKw8gtOngbQA==
-X-Google-Smtp-Source: AMrXdXsgheqIlhllyMRFdRAsPl+/2S4svN056cncK7//b0xfrvRTnm10WEN/TkK8SWk8f01ezA2SBVNXAG5n0WAW/44=
-X-Received: by 2002:a4a:d134:0:b0:4a6:8760:da3e with SMTP id
- n20-20020a4ad134000000b004a68760da3emr486795oor.9.1674146907076; Thu, 19 Jan
- 2023 08:48:27 -0800 (PST)
+ dkim=pass header.i=@anavi.org header.s=default header.b=pdYXjyW3;
+ spf=softfail (domain: konsulko.com, ip: 79.124.30.14, mailfrom: leon.anavi@konsulko.com)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=anavi.org;
+	s=default; h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:
+	Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:Content-Description:
+	Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
+	In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+	List-Post:List-Owner:List-Archive;
+	bh=zcwF+DXksdvzRbGYBynUOYcM4gDiNilQ+k3p3VcsvGE=; b=pdYXjyW3mCjC6pIVACLLE/u6z5
+	VK5uY+3hA5IZFbKqpX0tnxcqs9D8ilP/2FX5N3TiHbn8f0GKQTtsZ9ehhBhL01AefFU3O8FWyZopA
+	MHUCS5sfWb7qNTIi12q3xv5t7eZHBT5WAj7F80PllzjeYoCbHOX8GHNHRp7gck+GnvXdw3eimPcYJ
+	bKp79r7c1vtbHBXQbaXNM1RoYqetUHD5srmw0Dc65dQrAatD85XW50bM+oM/oeBvakgs5zHFgOrRz
+	HAy2rgFNFT11tewX940p1OoVrsvZ/TvGd63HfVYwI5iAmPT4XjIwLqRKMjr7Tb8h05eoO7dSjE39l
+	WmbnwaPw==;
+Received: from lan.nucleusys.com ([92.247.61.126]:54990 helo=tone.k.g)
+	by voyager.superhosting.bg with esmtpsa  (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
+	(Exim 4.95)
+	(envelope-from <leon.anavi@konsulko.com>)
+	id 1pIYgr-000AnE-FO;
+	Thu, 19 Jan 2023 19:26:25 +0200
+From: Leon Anavi <leon.anavi@konsulko.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 1/2] python3-eventlet: Upgrade 0.33.2 -> 0.33.3
+Date: Thu, 19 Jan 2023 19:26:14 +0200
+Message-Id: <20230119172615.1882394-1-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.30.2
 MIME-Version: 1.0
-References: <20230119151129.4351-1-kai.kang@windriver.com>
-In-Reply-To: <20230119151129.4351-1-kai.kang@windriver.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 19 Jan 2023 08:48:01 -0800
-Message-ID: <CAMKF1srPZN1daEm-jkFGwAPr-9ccS4xBLW1cXzowXst=uXTQ3g@mail.gmail.com>
-Subject: Re: [oe] [meta-gnome][PATCH] libnma: 1.10.4 -> 1.10.6
-To: Kai Kang <kai.kang@eng.windriver.com>
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
+X-AntiAbuse: Primary Hostname - voyager.superhosting.bg
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - konsulko.com
+X-Get-Message-Sender-Via: voyager.superhosting.bg: authenticated_id: leon@anavi.org
+X-Authenticated-Sender: voyager.superhosting.bg: leon@anavi.org
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 19 Jan 2023 16:48:32 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100663
+ <openembedded-devel@lists.openembedded.org>; Thu, 19 Jan 2023 17:26:32 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100664
 
-A different patch doing this upgrade it already in master-next
+Upgrade to release 0.33.3:
 
-https://patchwork.yoctoproject.org/project/oe/patch/1673939785-20072-2-git-send-email-wangmy@fujitsu.com/
+- Fix greendns for dnspython 2.3.0+
 
-On Thu, Jan 19, 2023 at 7:11 AM Kai Kang <kai.kang@eng.windriver.com> wrote:
->
-> From: Kai Kang <kai.kang@windriver.com>
->
-> =======================================
-> libnma-1.10.6
-> Overview of changes since libnma-1.10.4
-> =======================================
->
-> * Fix the path and translation domains of GSchema files.
-> * Removed strings that don't match our conscious language standards from
->   the translation files.
-> * Added autoptr support.
-> * Fix translations of country and territory names in the mobile broadband
->   dialog.
-> * Honor explicitly set APN if provider was not present in the mobile
->   broadband dialog.
-> * Make sure Kosovar operators are ordered properly in the mobile broadband
->   dialog.
->
-> Signed-off-by: Kai Kang <kai.kang@windriver.com>
-> ---
->  .../libnma/{libnma_1.10.4.bb => libnma_1.10.6.bb}               | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->  rename meta-gnome/recipes-connectivity/libnma/{libnma_1.10.4.bb => libnma_1.10.6.bb} (92%)
->
-> diff --git a/meta-gnome/recipes-connectivity/libnma/libnma_1.10.4.bb b/meta-gnome/recipes-connectivity/libnma/libnma_1.10.6.bb
-> similarity index 92%
-> rename from meta-gnome/recipes-connectivity/libnma/libnma_1.10.4.bb
-> rename to meta-gnome/recipes-connectivity/libnma/libnma_1.10.6.bb
-> index 6adb7ec29..bff9a3360 100644
-> --- a/meta-gnome/recipes-connectivity/libnma/libnma_1.10.4.bb
-> +++ b/meta-gnome/recipes-connectivity/libnma/libnma_1.10.6.bb
-> @@ -10,7 +10,7 @@ inherit gnomebase gobject-introspection gtk-doc gettext vala features_check
->  REQUIRED_DISTRO_FEATURES = "${@bb.utils.contains('PACKAGECONFIG','gcr','x11','',d)} opengl"
->  ANY_OF_DISTRO_FEATURES = "${GTK3DISTROFEATURES}"
->
-> -SRC_URI[archive.sha256sum] = "79e730dda19f9b34886f4064aa170f1a2326b08329d655d80b67e906c7f78b7c"
-> +SRC_URI[archive.sha256sum] = "53a6fb2b190ad37c5986caed3e98bede7c3c602399ee4f93c8fc054303d76dab"
->
->  PACKAGECONFIG ?= "gcr iso_codes mobile_broadband_provider_info"
->  PACKAGECONFIG[gcr] = "-Dgcr=true,-Dgcr=false,gcr"
-> --
-> 2.17.1
->
->
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#100659): https://lists.openembedded.org/g/openembedded-devel/message/100659
-> Mute This Topic: https://lists.openembedded.org/mt/96378895/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [raj.khem@gmail.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
->
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+---
+ .../{python3-eventlet_0.33.2.bb => python3-eventlet_0.33.3.bb}  | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-eventlet_0.33.2.bb => python3-eventlet_0.33.3.bb} (80%)
+
+diff --git a/meta-python/recipes-devtools/python/python3-eventlet_0.33.2.bb b/meta-python/recipes-devtools/python/python3-eventlet_0.33.3.bb
+similarity index 80%
+rename from meta-python/recipes-devtools/python/python3-eventlet_0.33.2.bb
+rename to meta-python/recipes-devtools/python/python3-eventlet_0.33.3.bb
+index 6348e9b76..c1256661b 100644
+--- a/meta-python/recipes-devtools/python/python3-eventlet_0.33.2.bb
++++ b/meta-python/recipes-devtools/python/python3-eventlet_0.33.3.bb
+@@ -4,7 +4,7 @@ SECTION = "devel/python"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=56472ad6de4caf50e05332a34b66e778"
+ 
+-SRC_URI[sha256sum] = "82c382c2a2c712f1a8320378a9120ac9589d9f1131c36a63780f0b8504afa5bc"
++SRC_URI[sha256sum] = "722803e7eadff295347539da363d68ae155b8b26ae6a634474d0a920be73cfda"
+ 
+ inherit pypi setuptools3
+ 
+-- 
+2.30.2
+
 
