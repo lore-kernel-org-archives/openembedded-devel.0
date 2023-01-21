@@ -2,56 +2,56 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1C95CC38142
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 33FD2C52D77
 	for <webhook@archiver.kernel.org>; Sat, 21 Jan 2023 18:01:37 +0000 (UTC)
-Received: from mail-pj1-f53.google.com (mail-pj1-f53.google.com [209.85.216.53])
- by mx.groups.io with SMTP id smtpd.web11.2059.1674324087091825361
+Received: from mail-pl1-f170.google.com (mail-pl1-f170.google.com [209.85.214.170])
+ by mx.groups.io with SMTP id smtpd.web10.2129.1674324095317219574
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 21 Jan 2023 10:01:27 -0800
+ Sat, 21 Jan 2023 10:01:35 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=WMLQg05g;
- spf=pass (domain: gmail.com, ip: 209.85.216.53, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f53.google.com with SMTP id b10so8403175pjo.1
-        for <openembedded-devel@lists.openembedded.org>; Sat, 21 Jan 2023 10:01:27 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=X5oAAF1s;
+ spf=pass (domain: gmail.com, ip: 209.85.214.170, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f170.google.com with SMTP id z13so7968652plg.6
+        for <openembedded-devel@lists.openembedded.org>; Sat, 21 Jan 2023 10:01:35 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=tMWUrQlJVWoll8Fiyc3ZC9IPj2hU5xdcLKOrJw0OvNk=;
-        b=WMLQg05gLA3YOpbORdRR4+80U0gqqUAAha3fNzWRrcSqw9bRx0U9LIX5We+t2ZzQD/
-         sh0ndIapphXdRiiP0iouzNnNsLghM/M38ivZQAyj+Pl4/Zeqr/ovWCttH2XlS/ZqgSw5
-         nC6XcJwaCTpCMbIWCJNEMbyqmTZWKCVnkzwqYDuW1gOTScTS8ascRsNqKarTRJyUD5y7
-         B7t2TEC0ghWCXAVZGQu7yVwkXm2MufBa3PLoZKN34hmufgreV+pTTmgTHjk5O+69qO/p
-         7iYmqnkDb7mCYkpq8p08Jubn5vRmmJyZSCcdrsgsV9OYQj+zSoiMMmmRTEBB9mAJSHKt
-         ZSlQ==
+        bh=fK8cZMmEO3MZJb6gFaEvYKQaXb1WZy8bkp8kVqmMFBw=;
+        b=X5oAAF1sPMsav7sHiQnt+xh6LFjHcWWoa6Ms0dooOfm+sR2o/gfV+/i8S6Ut8PqaHJ
+         k9jB4ZWTbIPJIB+byEfcaHwq1KPyWyza8zV0g42hRc3iv5ZxPr+qyvpKUEG1Q3DWz7HY
+         uLev93d2WWvnop7fJrnlzT+XvqTJtJ6/ilrax2LfWCJnCD/SggeW2fjt2eolZjcBOXtB
+         SDiXWD4VnqOgdrRN3yRSjZTl5ZvISOPWSgf9dMkXzgrQIN46gc9FAXa+T+mv+cstM7wM
+         Xp6TWwbBTF1jHYr0EO8qHDgP9yesSFCI6kHzArZdOo6uvk2lPdhnvUnJ5ZGk/Fx0xApI
+         /snA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=tMWUrQlJVWoll8Fiyc3ZC9IPj2hU5xdcLKOrJw0OvNk=;
-        b=MoQBAlwUuRoHxAmn5vJWCZdEUWf6091PQeFEBH9481U74zxlYrwAk4pTx/s+Dxg5tN
-         CmyV+88j2YKgX5oQPwEBp3kzmURURazrPmNebYh+Y8lYS4GyETgJZ7JSjm9ryu4SMlwX
-         d8f1j/iq13FQOgqIL/xrqjcAijqx6Hcme/jq07+o5/f4nic/0aVyGyihL2l8pMhAbtYF
-         +1zJJPFxLhOhWjpNOVmldli5RaAY+J782LcM7MSPD35STSMiLGEZ0fEoWfuO+2vgay+Q
-         Skvrp4LXQeMeinWj1LARPCMy9/upziSt66UL32GcGuGDXCcrOPudB50GZnPXDEQWLRy+
-         18sg==
-X-Gm-Message-State: AFqh2kpOqF6RuN6KAc0tokTIZDj9TctE4OmIDGcatMq/VD86oqNj5NHc
-	GWjOv4ZR4F50OC99pwkcOq5XZ7liT+DyyA==
-X-Google-Smtp-Source: AMrXdXvQLfgtul7tzn5rAAzyfZCma3074mAHnA2qKrsb5Fhbf9eodkoqxdk/KIvmKpdH17c69Ym8cg==
-X-Received: by 2002:a17:90b:208:b0:229:307f:8832 with SMTP id fy8-20020a17090b020800b00229307f8832mr19856437pjb.37.1674324086194;
-        Sat, 21 Jan 2023 10:01:26 -0800 (PST)
+        bh=fK8cZMmEO3MZJb6gFaEvYKQaXb1WZy8bkp8kVqmMFBw=;
+        b=sURBr27tcYAWYbi8DNgsR7xTZGzA2y4x+CHcOj/2BKVUlLpzxXIOVZLZVKsGoa1eXH
+         F8V5PHR8km/C/3BApqgB+GwgOzWQ1mcAiBfDI/VKz9EMkO8pemwNtCAZfr8t8xfpHqWo
+         s1ydQHmelMxFkeUcroKGZ1PaFJ2QmZw/piguG0IT6RTrmlL0m8U/q536YmtKQ6/jQn5v
+         sGDc1QxpoGne5Z3rHNmgvAXfAiBdv15T1dvMKmhZwlL7kG3rC6j1bEx81tL/PnAyi8xI
+         3yesejyaKjP9RrORPL65vAatUuWH7zyH1MuQNuwr+4tsxz19qHiU4v5B6CIQkZvOcdND
+         2T3w==
+X-Gm-Message-State: AFqh2kphVQ5yxGl+CXV+9edwtTRdEKiVvKA3uqfVuEV4aOIPwapQptgL
+	l2R9vkuZ0JHS5cgCIbjLThSgAOlmFrNMMA==
+X-Google-Smtp-Source: AMrXdXsAP5x+Jd/+cn5Kyro59EEUOr7qdSpTMU56H2+KyZM7TTcuHtliDDHMw4LYj4nsvciY7+q2CQ==
+X-Received: by 2002:a17:90a:300b:b0:227:db2:25fe with SMTP id g11-20020a17090a300b00b002270db225femr19889753pjb.35.1674324094460;
+        Sat, 21 Jan 2023 10:01:34 -0800 (PST)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9181:1cf0::aee3])
-        by smtp.gmail.com with ESMTPSA id d15-20020a17090a02cf00b00226c2d90c04sm3623583pjd.38.2023.01.21.10.01.25
+        by smtp.gmail.com with ESMTPSA id d15-20020a17090a02cf00b00226c2d90c04sm3623583pjd.38.2023.01.21.10.01.33
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 21 Jan 2023 10:01:25 -0800 (PST)
+        Sat, 21 Jan 2023 10:01:34 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 03/30] satyr: Fix build with musl
-Date: Sat, 21 Jan 2023 10:00:54 -0800
-Message-Id: <20230121180121.1229895-3-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 13/30] libmimetic: Pin to using -std=c++14
+Date: Sat, 21 Jan 2023 10:01:04 -0800
+Message-Id: <20230121180121.1229895-13-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.39.1
 In-Reply-To: <20230121180121.1229895-1-raj.khem@gmail.com>
 References: <20230121180121.1229895-1-raj.khem@gmail.com>
@@ -61,51 +61,31 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sat, 21 Jan 2023 18:01:37 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100670
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100680
 
-Add missing typedefs for __compar_fn_t and compare_fn_t for
-non __GLIBC__ case.
+It uses unary_function which is removed in c++17
+
+| ../../../git/mimetic/rfc822/header.h:37:21: error: no template named 'unary_function' in namespace 'std'; did you mean '__unary_function'?
+|         public std::unary_function<const Field, bool>
+|                ~~~~~^~~~~~~~~~~~~~
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...mpile-failure-against-musl-C-library.patch | 24 +++++++++----------
- 1 file changed, 11 insertions(+), 13 deletions(-)
+ meta-oe/recipes-support/libmimetic/libmimetic_0.9.8.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-support/satyr/files/0002-fix-compile-failure-against-musl-C-library.patch b/meta-oe/recipes-support/satyr/files/0002-fix-compile-failure-against-musl-C-library.patch
-index b6c32c4bd5..24efc13560 100644
---- a/meta-oe/recipes-support/satyr/files/0002-fix-compile-failure-against-musl-C-library.patch
-+++ b/meta-oe/recipes-support/satyr/files/0002-fix-compile-failure-against-musl-C-library.patch
-@@ -10,19 +10,17 @@ Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
-  lib/rpm.c | 2 +-
-  1 file changed, 1 insertion(+), 1 deletion(-)
+diff --git a/meta-oe/recipes-support/libmimetic/libmimetic_0.9.8.bb b/meta-oe/recipes-support/libmimetic/libmimetic_0.9.8.bb
+index fc0b1ee495..06536ca70f 100644
+--- a/meta-oe/recipes-support/libmimetic/libmimetic_0.9.8.bb
++++ b/meta-oe/recipes-support/libmimetic/libmimetic_0.9.8.bb
+@@ -19,6 +19,6 @@ UPSTREAM_CHECK_COMMITS = "1"
  
--diff --git a/lib/rpm.c b/lib/rpm.c
--index 920e145..58140bf 100644
- --- a/lib/rpm.c
- +++ b/lib/rpm.c
--@@ -191,7 +191,7 @@ sr_rpm_package_sort(struct sr_rpm_package *packages)
--     }
-+@@ -34,6 +34,11 @@
-+ #include <assert.h>
-+ #include <string.h>
-  
--     /* Sort the array. */
---    qsort(array, count, sizeof(struct sr_rpm_package*), (comparison_fn_t)cmp_nevra_qsort_wrapper);
--+    qsort(array, count, sizeof(struct sr_rpm_package*), cmp_nevra_qsort_wrapper);
-- 
--     /* Create a linked list from the sorted array. */
--     for (size_t loop = 0; loop < count; ++loop)
---- 
--2.8.1
--
-++#if !defined(__GLIBC__)
-++typedef int (*__compar_fn_t) (const void*, const void*);
-++typedef __compar_fn_t comparison_fn_t;
-++#endif
-++
-+ struct sr_rpm_package *
-+ sr_rpm_package_new()
-+ {
+ S = "${WORKDIR}/git"
+ 
+-CXXFLAGS += "-Wno-narrowing"
++CXXFLAGS += "-Wno-narrowing -std=c++14"
+ 
+ inherit autotools
 -- 
 2.39.1
 
