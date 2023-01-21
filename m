@@ -2,56 +2,56 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 49805C54737
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4B220C54E94
 	for <webhook@archiver.kernel.org>; Sat, 21 Jan 2023 18:01:37 +0000 (UTC)
-Received: from mail-pl1-f180.google.com (mail-pl1-f180.google.com [209.85.214.180])
- by mx.groups.io with SMTP id smtpd.web10.2130.1674324096164790802
+Received: from mail-pl1-f171.google.com (mail-pl1-f171.google.com [209.85.214.171])
+ by mx.groups.io with SMTP id smtpd.web10.2128.1674324091860425572
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 21 Jan 2023 10:01:36 -0800
+ Sat, 21 Jan 2023 10:01:31 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=QsfIlCaV;
- spf=pass (domain: gmail.com, ip: 209.85.214.180, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f180.google.com with SMTP id k18so7976908pll.5
-        for <openembedded-devel@lists.openembedded.org>; Sat, 21 Jan 2023 10:01:36 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=cRbtnNpK;
+ spf=pass (domain: gmail.com, ip: 209.85.214.171, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f171.google.com with SMTP id k13so8032898plg.0
+        for <openembedded-devel@lists.openembedded.org>; Sat, 21 Jan 2023 10:01:31 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=w6Mmq6W8+GK6gUr+dGQZZfJVge37nr9fsPuouuFbQsM=;
-        b=QsfIlCaV4NO5htQf8/hQU2iUFRgJ8H8ETLJmNL/p9zY+6ie9wYEPNHK/jFrl77S8px
-         6wUuK4bFHmN3QUtw8Y5sTyqvDBfXkntHRZADJTSCV+h488Vqj/r+bKRzy+QA78nyGFvO
-         IWKofOx+5d1/Q0661vIZfsD/z6JBuVumLFuyMMKZLzC/6GBj7LTxSUhjQDWFE/FDtXkO
-         YfC2llXTIOBc6YCPJs0/krVAz0/v3qYR2tzkKnith/0af3xzxIue9YAiihWBsSbmubvq
-         c6+lSeAe3Hkl2PDPgFNeIGMq9Mcj/BMPSRgJzyfUxf+B8tf/JTiDUTl8d35tpMHMf+UC
-         bp2A==
+        bh=sOhbP0B0u0BAGq7YyGBmk0vqRTHf1kQlf1jU6L6c67c=;
+        b=cRbtnNpKby8JfKApqBW52Z6CUTDOnphO/+5H7NPjE7dzWqZ1WqVb0UIxnPlxSJx2Yn
+         M0Oh8z8h2wJGc67I7S9in7h1M05ty6ROT6a5sQhumqbNbyeQ4xVYsz2NDAH5e8KEddPj
+         EPjNJzE+AaSvGqjHFisPPxRwh+KdDMK2Mh2RGAi9FsiCI7jXI87mm6Fiw71Y/zGpp5Kt
+         JFOhZspF8ewsfGlqRLKijlQz8cGztzbhzymA3U5xK2zspOaq6aEe+mQS0PvubdW0wulm
+         Q6aPd0P1rgsNO/fzCWg6XXKIkSQ9yw0KVfS9YJ2vpmvP/ASQ6/um2Hjm0Y/UmdlqJkLs
+         gl6w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=w6Mmq6W8+GK6gUr+dGQZZfJVge37nr9fsPuouuFbQsM=;
-        b=2zNLISi0nDxPhPYLbNKf63B71KTn8C/+9HXAGtOYHBwaICtDw5tFSC1uMh08J4xnPo
-         8IPSvgH2LDb86RynmiXsSLiBPWGEu1g5OXfFMyHrc+diOr5hSILvLeOr5qzMr0zWMwrv
-         c1GksoQiU3SHJ2vdFerCGdjMJsPEFygBusio2rlYwLvTEm+CkTae/roultaZkqImpUg6
-         hIbgmpAkX/42x9u5GSWB7W/YNOELevLhx+H5KS8xEDPtNK544ApRyHzEOqtrGtWDMQ3U
-         ezfvUv540eWRUZTRJawwVB1bzSIjmMk79yBk7Q0c8iJuUucRC4oWLKaxSu85TSY6N1Q+
-         IS1Q==
-X-Gm-Message-State: AFqh2kqdsIcd163l8wRXNTMKScN5ouFwPCj4JMxVYo+Ym01ubUTFHJEg
-	qh3FcX0cnLhrOJNoIjPR99w06cKgf4E5ng==
-X-Google-Smtp-Source: AMrXdXvngke1BcTC4jL14SXiPE6leSBMZItIDNSqe5cUHjVemHnSehsVt5NSu7toImJtibWuvknSaA==
-X-Received: by 2002:a17:90a:ba11:b0:223:de00:f5ab with SMTP id s17-20020a17090aba1100b00223de00f5abmr19569635pjr.28.1674324095302;
-        Sat, 21 Jan 2023 10:01:35 -0800 (PST)
+        bh=sOhbP0B0u0BAGq7YyGBmk0vqRTHf1kQlf1jU6L6c67c=;
+        b=7aCflIQ2TUts+IxwnTNH+fXkocrg8Tu2ir3n/wi8yXwbhu55yVynsALuwGC+twSR3q
+         Q4n5lMZsR56xntP2v6iHbHD7idmJT1I7zxL+Y6+TNWkrkWfQpIAXkL9CebaUjeXlaaq6
+         pzYCiBHsw6WmfN/9337gt1hCwMQELjF6kaV8VbBJUrfY3GamuxLx9dXWzVMxKJD8VSzw
+         VeWo/kCk3G+DIVbyNDQ+5BosSbKIfleIxiAXyxVDw1Ipdw76EZIV0QccIaZmJhS3I2XP
+         09UGcNJGvdqATuQgg8sT4cCYMREqm/VlsIKHdNzvTImXcaDVdmIfOieDlpuJBMvq7P6l
+         EEFg==
+X-Gm-Message-State: AFqh2kqo6gfS1EMZrJjAzn6jQqLQBf/0l+HvLadwEWwRkLB+nE/lWkOI
+	3jknau9QNK15i090G55fB1ncyGNyEuqUMw==
+X-Google-Smtp-Source: AMrXdXt1KJJJ+KlOR0yDLYsUszNBseb48KD0nF7Ws6WoDbPPwJVD4G8oRKWxHfX68CiQIXrcN1JmKg==
+X-Received: by 2002:a17:90a:be14:b0:229:8ada:ccb2 with SMTP id a20-20020a17090abe1400b002298adaccb2mr20653732pjs.27.1674324091154;
+        Sat, 21 Jan 2023 10:01:31 -0800 (PST)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9181:1cf0::aee3])
-        by smtp.gmail.com with ESMTPSA id d15-20020a17090a02cf00b00226c2d90c04sm3623583pjd.38.2023.01.21.10.01.34
+        by smtp.gmail.com with ESMTPSA id d15-20020a17090a02cf00b00226c2d90c04sm3623583pjd.38.2023.01.21.10.01.30
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 21 Jan 2023 10:01:34 -0800 (PST)
+        Sat, 21 Jan 2023 10:01:30 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 14/30] ace: Upgrade to 6.5.19
-Date: Sat, 21 Jan 2023 10:01:05 -0800
-Message-Id: <20230121180121.1229895-14-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 09/30] audiofile: Stick to c++14 std
+Date: Sat, 21 Jan 2023 10:01:00 -0800
+Message-Id: <20230121180121.1229895-9-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.39.1
 In-Reply-To: <20230121180121.1229895-1-raj.khem@gmail.com>
 References: <20230121180121.1229895-1-raj.khem@gmail.com>
@@ -61,45 +61,29 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sat, 21 Jan 2023 18:01:37 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100681
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100676
+
+It uses std::unary_function which is removed from c++17 onwards, until
+this is removed/replaced we can not move beyond c++14
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../ace/{ace_6.5.12.bb => ace_6.5.19.bb}                   | 7 +++----
- 1 file changed, 3 insertions(+), 4 deletions(-)
- rename meta-oe/recipes-connectivity/ace/{ace_6.5.12.bb => ace_6.5.19.bb} (83%)
+ meta-oe/recipes-multimedia/audiofile/audiofile_0.3.6.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-oe/recipes-connectivity/ace/ace_6.5.12.bb b/meta-oe/recipes-connectivity/ace/ace_6.5.19.bb
-similarity index 83%
-rename from meta-oe/recipes-connectivity/ace/ace_6.5.12.bb
-rename to meta-oe/recipes-connectivity/ace/ace_6.5.19.bb
-index 6c68aede03..af4f2c54bb 100644
---- a/meta-oe/recipes-connectivity/ace/ace_6.5.12.bb
-+++ b/meta-oe/recipes-connectivity/ace/ace_6.5.19.bb
-@@ -7,12 +7,11 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d2c090e9c730fd91677782d8e2091d77"
+diff --git a/meta-oe/recipes-multimedia/audiofile/audiofile_0.3.6.bb b/meta-oe/recipes-multimedia/audiofile/audiofile_0.3.6.bb
+index e91c81d703..a09f84381e 100644
+--- a/meta-oe/recipes-multimedia/audiofile/audiofile_0.3.6.bb
++++ b/meta-oe/recipes-multimedia/audiofile/audiofile_0.3.6.bb
+@@ -19,6 +19,8 @@ SRC_URI[sha256sum] = "ea2449ad3f201ec590d811db9da6d02ffc5e87a677d06b92ab15363d8c
  
- DEPENDS += "openssl gperf-native"
+ inherit autotools lib_package pkgconfig
  
--SRC_URI = "https://github.com/DOCGroup/ACE_TAO/releases/download/ACE%2BTAO-6_5_12/ACE-${PV}.tar.bz2 \
-+SRC_URI = "https://github.com/DOCGroup/ACE_TAO/releases/download/ACE%2BTAO-6_5_19/ACE-${PV}.tar.bz2 \
-            file://ace_config.patch \
-            file://no_sysctl.patch \
-           "
--
--SRC_URI[sha256sum] = "ccd94fa45df1e8bb1c901d02c0a64c1626497e5eeda2f057fcf0a1578dae2148"
-+SRC_URI[sha256sum] = "739be290a38229aaa5b5150e6ea55ce427e80970f0ace4c5040ac46644526f41"
- 
- COMPATIBLE_HOST:libc-musl = "null"
- 
-@@ -23,7 +22,7 @@ export ACE_ROOT="${WORKDIR}/ACE_wrappers"
- inherit pkgconfig
- 
- CXXFLAGS:append = " -fpermissive -Wnodeprecated-declarations"
--CXX:append = " -ffile-prefix-map=${WORKDIR}= -fdebug-prefix-map=${WORKDIR}= "
-+CXX:append = " -std=gnu++14 -ffile-prefix-map=${WORKDIR}= -fdebug-prefix-map=${WORKDIR}= "
- EXTRA_OEMAKE += "INSTALL_LIB=${baselib}"
- 
- do_install() {
++CXXFLAGS += "-std=c++14"
++
+ DEPENDS = " \
+     asciidoc-native \
+     alsa-lib \
 -- 
 2.39.1
 
