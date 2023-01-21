@@ -2,56 +2,56 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 62042C25B50
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 780AFC54737
 	for <webhook@archiver.kernel.org>; Sat, 21 Jan 2023 18:01:47 +0000 (UTC)
-Received: from mail-pj1-f53.google.com (mail-pj1-f53.google.com [209.85.216.53])
- by mx.groups.io with SMTP id smtpd.web11.2059.1674324087091825361
+Received: from mail-pl1-f180.google.com (mail-pl1-f180.google.com [209.85.214.180])
+ by mx.groups.io with SMTP id smtpd.web11.2057.1674324085724780259
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 21 Jan 2023 10:01:37 -0800
+ Sat, 21 Jan 2023 10:01:42 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=n+OiIIR9;
- spf=pass (domain: gmail.com, ip: 209.85.216.53, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f53.google.com with SMTP id b10so8403465pjo.1
-        for <openembedded-devel@lists.openembedded.org>; Sat, 21 Jan 2023 10:01:37 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=SsPb9zxJ;
+ spf=pass (domain: gmail.com, ip: 209.85.214.180, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f180.google.com with SMTP id z20so5993269plc.2
+        for <openembedded-devel@lists.openembedded.org>; Sat, 21 Jan 2023 10:01:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=msJRGgUQAOTVe5/aDUmfmhAepzeIs/VzdVmXe5J1u5g=;
-        b=n+OiIIR9q0eLzoQ7SUYE/wak+b54YbDHXot2ynFU0r4KdhIW/l0hUgSHH6OjF3ZTk5
-         LR8siHNpGEqQOg93cZlBp60t969rL3R/524mC06PXqX5rUlGNjDfSsaR950oG2ZE7ELu
-         oVL1r4ynzpLNI5wdTIHZQY8l31iAatuOaOltKw3Am7Ta9Gb9UOqwBgPx9lLDgYec6dDf
-         T6Uk6QVtwO55Ua+KZ1YI7hNSHeciDGCPH5d+49PiAVEvNDELoIa1oYWCcnkEMz1PzVe8
-         K0C1dGzLVN2q8gkJd3xJOCs2rJTjawPNDAwP2dLeVoIR7Rk2e6TkiJby3OEbAh7IpUJU
-         b62w==
+        bh=34nGtaPKs8By/umZcvzCM4+cizu4UgHT1CpJZi0rLjo=;
+        b=SsPb9zxJCm7NdWpO9LrQ7n8D5L4GbWsucco9waaCRypedrMkMJd6dbf+Os63UGjZ+W
+         yC5b6S8oScI3FsWmlucF6bmOqOdThqO3SKvDZooVdsNqgqC/hl3dxR5zUWQ2zTSq2ufq
+         b6IcWBQCfhWf+kxbLa+vZKXagCITuRCrbV4OzlyQz5Vndl+GxhM+J1z432h57a80Jijb
+         joPZnVpMktL7IkaX07wYm9QB6DqLcg23gDCe6XWQ5qwllc+/VFnlAqSHEzLV3k9IPVLT
+         OV/FQ6ftxqWSNvQOdPfWuhAiqgcfOYqfvoHemGx+pErHv0YF2G+q2KqdcFRM4CU591el
+         4YdA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=msJRGgUQAOTVe5/aDUmfmhAepzeIs/VzdVmXe5J1u5g=;
-        b=M8UgqUsxfSplLF2QupbGB636aXqK2SMCPOMySbH6iAAoRpHlMJKHgMb14fkBOoIKk1
-         cHCJLmrlIE+/sZWxhzwuhjhDjhr7flh3J4SwI3NnaTPqSy9yreNO5vzGz+rkIv0u5e3c
-         SpXQBsGa9dZH9bBihpbr/nFiQmGbJP2gZ7O5Gpvt7YdXXQvoq/GV4qe6nb27/Zz91NVC
-         okJ5rUYB90y4eI1Punhq5ZbnQemNgWVB9Foi8O9MXtd13REeFEyNU1Lzc3yhSNQAJjEP
-         r2CqgC0bIqkN074Bwjp0/cP1fiVE+AofyuUJ6fmEFgwhzlHwhIUSlRhPVyO0VS+zyqW4
-         Cygw==
-X-Gm-Message-State: AFqh2krMJZL1krEesWB59Wb4xb7eJSa+rzKly7ucxMp4mT7p64MO1+8S
-	3Uzvd7CbCPMdh7+cxI5rh2IonpDTlebbmg==
-X-Google-Smtp-Source: AMrXdXs9aCH0xECmRq8Vf90M9nKQjOlJbMVyye5IL08/e/osVT3JjPLRxL96onQGWmx7CGoS9FnQSQ==
-X-Received: by 2002:a17:90a:4291:b0:229:f363:4a71 with SMTP id p17-20020a17090a429100b00229f3634a71mr9901930pjg.0.1674324096890;
-        Sat, 21 Jan 2023 10:01:36 -0800 (PST)
+        bh=34nGtaPKs8By/umZcvzCM4+cizu4UgHT1CpJZi0rLjo=;
+        b=xftYF4cU32Kxu1VSpz8iVXX92YRwPjBp2uTwmZGPMvVFUFZP1NCi+N/tDGznLBJ8oF
+         ZUOSUBdRB2zP5298Awv+hl4jDYm0qPXEaWVqVY/OxI7VbdIQ6jgpvxwez9of2QQUFFOT
+         XKo+ikb/OervawYyw6nzc7kkd4122tPF0JrXKyGcnS5AMKo12Kz0O/KHOrEhoIkN5LtZ
+         Vcv6zS5bQosaz+xof2zXpTUIeSyjL5N8foqT4xfeGRq2Ijk2pnNlxqYfW4wghctP0lBq
+         Hfwrr4EIEPRGwImilr6JOOENrjrPD3AzcpitcZ0OFrUNCUXlMQL0qOAMUaj5vio7B55h
+         g73A==
+X-Gm-Message-State: AFqh2krN/LdYuaLfvUpBbGqfXArbfjUgjRGkO0QnpHN79UZfTY0ZT3ir
+	7E6LGegLiAYJaTMvaZaBMu1PPeQbjsuEyA==
+X-Google-Smtp-Source: AMrXdXtQVIbt+IZUyd1PGusiM2pjxNG3/XI4WCZV4knLhwWar3EKTjRhX5hZxPExTbDJ5GFge6wtAQ==
+X-Received: by 2002:a17:90a:1d6:b0:22b:b282:a9d7 with SMTP id 22-20020a17090a01d600b0022bb282a9d7mr6485667pjd.20.1674324101847;
+        Sat, 21 Jan 2023 10:01:41 -0800 (PST)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9181:1cf0::aee3])
-        by smtp.gmail.com with ESMTPSA id d15-20020a17090a02cf00b00226c2d90c04sm3623583pjd.38.2023.01.21.10.01.36
+        by smtp.gmail.com with ESMTPSA id d15-20020a17090a02cf00b00226c2d90c04sm3623583pjd.38.2023.01.21.10.01.41
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 21 Jan 2023 10:01:36 -0800 (PST)
+        Sat, 21 Jan 2023 10:01:41 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 16/30] rtorrent: Update to latest tip of trunk
-Date: Sat, 21 Jan 2023 10:01:07 -0800
-Message-Id: <20230121180121.1229895-16-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 22/30] espeak: Drop using 'register' keyword for storage classifier
+Date: Sat, 21 Jan 2023 10:01:13 -0800
+Message-Id: <20230121180121.1229895-22-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.39.1
 In-Reply-To: <20230121180121.1229895-1-raj.khem@gmail.com>
 References: <20230121180121.1229895-1-raj.khem@gmail.com>
@@ -61,172 +61,73 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sat, 21 Jan 2023 18:01:47 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100683
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100689
 
-This is needed to get it working with latest compilers
-always --enable-aligned so it does not have to perform runtime test
-Drop the patch for removing AC_RUN_IFELSE as this macro is no longer
-excercised in OE builds
-
-Pin to c++14 for now, since std::binary_function is in use which is gone
-in c++17 ( default with clang 16+ )
-
-License-Update: Use GPL-2.0 or later identifier correctly
+Fixes build with latest clang
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...t-run-code-while-configuring-package.patch | 104 ------------------
- .../rtorrent/rtorrent_git.bb                  |  19 ++--
- 2 files changed, 8 insertions(+), 115 deletions(-)
- delete mode 100644 meta-oe/recipes-connectivity/rtorrent/rtorrent/don-t-run-code-while-configuring-package.patch
+ .../recipes-support/espeak/espeak_1.48.04.bb  |  1 +
+ ...ister-keyword-for-storage-classifier.patch | 38 +++++++++++++++++++
+ 2 files changed, 39 insertions(+)
+ create mode 100644 meta-oe/recipes-support/espeak/files/0001-Drop-using-register-keyword-for-storage-classifier.patch
 
-diff --git a/meta-oe/recipes-connectivity/rtorrent/rtorrent/don-t-run-code-while-configuring-package.patch b/meta-oe/recipes-connectivity/rtorrent/rtorrent/don-t-run-code-while-configuring-package.patch
-deleted file mode 100644
-index 7d09f4382f..0000000000
---- a/meta-oe/recipes-connectivity/rtorrent/rtorrent/don-t-run-code-while-configuring-package.patch
-+++ /dev/null
-@@ -1,104 +0,0 @@
--Using AC_RUN_IFELSE prevent people from configuring package
-- for cross-compiling. Don't run code while configuring package.
--
--Upstream-Status: Pending
--Signed-off-by: Andrei Gherzan <andrei@gherzan.ro>
--
--Update for 0.9.8.
--Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
-----
-- scripts/checks.m4 | 34 ----------------------------------
-- scripts/common.m4 | 28 ----------------------------
-- 2 files changed, 62 deletions(-)
--
--diff --git a/scripts/checks.m4 b/scripts/checks.m4
--index 83be846..1af80f5 100644
----- a/scripts/checks.m4
--+++ b/scripts/checks.m4
--@@ -95,40 +95,6 @@ AC_DEFUN([TORRENT_CHECK_KQUEUE], [
-- 
-- AC_DEFUN([TORRENT_CHECK_KQUEUE_SOCKET_ONLY], [
--   AC_MSG_CHECKING(whether kqueue supports pipes and ptys)
---
---  AC_LINK_IFELSE([AC_LANG_SOURCE([
---      #include <fcntl.h>
---      #include <stdlib.h>
---      #include <unistd.h>
---      #include <sys/event.h>
---      #include <sys/time.h>
---      int main() {
---        struct kevent ev@<:@2@:>@, ev_out@<:@2@:>@;
---        struct timespec ts = { 0, 0 };
---        int pfd@<:@2@:>@, pty@<:@2@:>@, kfd, n;
---        char buffer@<:@9001@:>@;
---        if (pipe(pfd) == -1) return 1;
---        if (fcntl(pfd@<:@1@:>@, F_SETFL, O_NONBLOCK) == -1) return 2;
---        while ((n = write(pfd@<:@1@:>@, buffer, sizeof(buffer))) == sizeof(buffer));
---        if ((pty@<:@0@:>@=posix_openpt(O_RDWR | O_NOCTTY)) == -1) return 3;
---        if ((pty@<:@1@:>@=grantpt(pty@<:@0@:>@)) == -1) return 4;
---        EV_SET(ev+0, pfd@<:@1@:>@, EVFILT_WRITE, EV_ADD | EV_ENABLE, 0, 0, NULL);
---        EV_SET(ev+1, pty@<:@1@:>@, EVFILT_READ, EV_ADD | EV_ENABLE, 0, 0, NULL);
---        if ((kfd = kqueue()) == -1) return 5;
---        if ((n = kevent(kfd, ev, 2, NULL, 0, NULL)) == -1) return 6;
---        if (ev_out@<:@0@:>@.flags & EV_ERROR) return 7;
---        if (ev_out@<:@1@:>@.flags & EV_ERROR) return 8;
---        read(pfd@<:@0@:>@, buffer, sizeof(buffer));
---        if ((n = kevent(kfd, NULL, 0, ev_out, 2, &ts)) < 1) return 9;
---        return 0;
---      }
---      ])],
---    [
---      AC_MSG_RESULT(yes)
---    ], [
---      AC_DEFINE(KQUEUE_SOCKET_ONLY, 1, kqueue only supports sockets.)
---      AC_MSG_RESULT(no)
---    ])
-- ])
-- 
-- AC_DEFUN([TORRENT_WITH_KQUEUE], [
--diff --git a/scripts/common.m4 b/scripts/common.m4
--index aaf005e..42fb016 100644
----- a/scripts/common.m4
--+++ b/scripts/common.m4
--@@ -152,38 +152,10 @@ dnl   Need to fix this so that it uses the stuff defined by the system.
-- 
-- AC_DEFUN([TORRENT_CHECK_EXECINFO], [
--   AC_MSG_CHECKING(for execinfo.h)
---
---  AC_COMPILE_IFELSE([AC_LANG_SOURCE([
---      #include <execinfo.h>
---      int main() { backtrace((void**)0, 0); backtrace_symbols((char**)0, 0); return 0;}
---      ])],
---    [
---      AC_MSG_RESULT(yes)
---      AC_DEFINE(USE_EXECINFO, 1, Use execinfo.h)
---    ], [
---      AC_MSG_RESULT(no)
---  ])
-- ])
-- 
-- AC_DEFUN([TORRENT_CHECK_ALIGNED], [
--   AC_MSG_CHECKING(the byte alignment)
---
---  AC_LINK_IFELSE([AC_LANG_SOURCE([
---      #include <inttypes.h>
---      int main() {
---        char buf@<:@8@:>@ = { 0, 0, 0, 0, 1, 0, 0, 0 };
---	int i;
---        for (i = 1; i < 4; ++i)
---	  if (*(uint32_t*)(buf + i) == 0) return -1;
---	return 0;
---	}
---      ])],
---    [
---      AC_MSG_RESULT(none needed)
---    ], [
---      AC_DEFINE(USE_ALIGNED, 1, Require byte alignment)
---      AC_MSG_RESULT(required)
---  ])
-- ])
-- 
-- 
---- 
--2.7.4
--
-diff --git a/meta-oe/recipes-connectivity/rtorrent/rtorrent_git.bb b/meta-oe/recipes-connectivity/rtorrent/rtorrent_git.bb
-index 7879324cc6..b4fe10cb1c 100644
---- a/meta-oe/recipes-connectivity/rtorrent/rtorrent_git.bb
-+++ b/meta-oe/recipes-connectivity/rtorrent/rtorrent_git.bb
-@@ -1,17 +1,14 @@
- SUMMARY = "Torrent client"
- HOMEPAGE = "http://libtorrent.rakshasa.no/"
--LICENSE = "GPL-2.0-only"
-+LICENSE = "GPL-2.0-or-later"
- LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
- 
--DEPENDS = "libsigc++-2.0 curl cppunit libtorrent ncurses"
-+DEPENDS = "libsigc++-2.0 curl cppunit libtool libtorrent ncurses"
- 
--SRC_URI = "git://github.com/rakshasa/rtorrent;branch=master;protocol=https \
--    file://don-t-run-code-while-configuring-package.patch \
--"
--# v0.9.8
--SRCREV = "6154d1698756e0c4842b1c13a0e56db93f1aa947"
-+SRC_URI = "git://github.com/rakshasa/rtorrent;branch=master;protocol=https"
-+SRCREV = "d067bd802e44f0e6a747aabcc311ada2175fd550"
- 
--PV = "0.9.8"
-+PV = "0.9.8+git${SRCPV}"
- 
- S = "${WORKDIR}/git"
- 
-@@ -21,6 +18,6 @@ PACKAGECONFIG[ipv6] = "--enable-ipv6,--disable-ipv6,"
- 
- inherit autotools pkgconfig
- 
--do_configure:prepend() {
--    (cd ${S}; ./autogen.sh; cd -)
--}
-+EXTRA_AUTORECONF += "--exclude=aclocal"
+diff --git a/meta-oe/recipes-support/espeak/espeak_1.48.04.bb b/meta-oe/recipes-support/espeak/espeak_1.48.04.bb
+index 0dc61c1c30..147a8069fa 100644
+--- a/meta-oe/recipes-support/espeak/espeak_1.48.04.bb
++++ b/meta-oe/recipes-support/espeak/espeak_1.48.04.bb
+@@ -6,6 +6,7 @@ LIC_FILES_CHKSUM = "file://License.txt;md5=cb7a20edb4c9f5f478de6523dcd7362c"
+ SRC_URI = "http://downloads.sourceforge.net/espeak/espeak-1.48.04-source.zip \
+            file://0001-Fix-build-of-shared-library-on-architectures-needing.patch \
+            file://0002-tr_languages-cast-string_ordinal-init-values.patch \
++           file://0001-Drop-using-register-keyword-for-storage-classifier.patch \
+ "
+ SRC_URI[md5sum] = "cadd7482eaafe9239546bdc09fa244c3"
+ SRC_URI[sha256sum] = "bf9a17673adffcc28ff7ea18764f06136547e97bbd9edf2ec612f09b207f0659"
+diff --git a/meta-oe/recipes-support/espeak/files/0001-Drop-using-register-keyword-for-storage-classifier.patch b/meta-oe/recipes-support/espeak/files/0001-Drop-using-register-keyword-for-storage-classifier.patch
+new file mode 100644
+index 0000000000..d9c0d08ec9
+--- /dev/null
++++ b/meta-oe/recipes-support/espeak/files/0001-Drop-using-register-keyword-for-storage-classifier.patch
+@@ -0,0 +1,38 @@
++From bad6131463275bd8013a82c28fb0b27e882bc801 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Wed, 18 Jan 2023 16:07:35 -0800
++Subject: [PATCH] Drop using 'register' keyword for storage classifier
 +
-+CXXFLAGS += "-std=gnu++14"
++Its gone from C++17 and newer
++
++Upstream-Status: Pending
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ src/klatt.cpp | 4 ++--
++ 1 file changed, 2 insertions(+), 2 deletions(-)
++
++diff --git a/src/klatt.cpp b/src/klatt.cpp
++index b15f77c..9c51bc5 100755
++--- a/src/klatt.cpp
+++++ b/src/klatt.cpp
++@@ -167,7 +167,7 @@ Output = (rnz.a * input) + (rnz.b * oldin1) + (rnz.c * oldin2)
++ #ifdef deleted
++ static double antiresonator(resonator_ptr r, double input)
++ {
++-	register double x = (double)r->a * (double)input + (double)r->b * (double)r->p1 + (double)r->c * (double)r->p2;
+++	double x = (double)r->a * (double)input + (double)r->b * (double)r->p1 + (double)r->c * (double)r->p2;
++ 	r->p2 = (double)r->p1;
++ 	r->p1 = (double)input;
++ 	return (double)x;
++@@ -176,7 +176,7 @@ static double antiresonator(resonator_ptr r, double input)
++ 
++ static double antiresonator2(resonator_ptr r, double input)
++ {
++-	register double x = (double)r->a * (double)input + (double)r->b * (double)r->p1 + (double)r->c * (double)r->p2;
+++	double x = (double)r->a * (double)input + (double)r->b * (double)r->p1 + (double)r->c * (double)r->p2;
++ 	r->p2 = (double)r->p1;
++ 	r->p1 = (double)input;
++ 
++-- 
++2.39.1
++
 -- 
 2.39.1
 
