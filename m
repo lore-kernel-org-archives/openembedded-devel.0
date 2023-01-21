@@ -2,56 +2,56 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 780AFC54737
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 92E65C54E94
 	for <webhook@archiver.kernel.org>; Sat, 21 Jan 2023 18:01:47 +0000 (UTC)
-Received: from mail-pl1-f180.google.com (mail-pl1-f180.google.com [209.85.214.180])
- by mx.groups.io with SMTP id smtpd.web11.2057.1674324085724780259
+Received: from mail-pj1-f54.google.com (mail-pj1-f54.google.com [209.85.216.54])
+ by mx.groups.io with SMTP id smtpd.web11.2071.1674324099363399348
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 21 Jan 2023 10:01:42 -0800
+ Sat, 21 Jan 2023 10:01:39 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=SsPb9zxJ;
- spf=pass (domain: gmail.com, ip: 209.85.214.180, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f180.google.com with SMTP id z20so5993269plc.2
-        for <openembedded-devel@lists.openembedded.org>; Sat, 21 Jan 2023 10:01:42 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=MAQsrgs1;
+ spf=pass (domain: gmail.com, ip: 209.85.216.54, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f54.google.com with SMTP id n20-20020a17090aab9400b00229ca6a4636so11049302pjq.0
+        for <openembedded-devel@lists.openembedded.org>; Sat, 21 Jan 2023 10:01:39 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=34nGtaPKs8By/umZcvzCM4+cizu4UgHT1CpJZi0rLjo=;
-        b=SsPb9zxJCm7NdWpO9LrQ7n8D5L4GbWsucco9waaCRypedrMkMJd6dbf+Os63UGjZ+W
-         yC5b6S8oScI3FsWmlucF6bmOqOdThqO3SKvDZooVdsNqgqC/hl3dxR5zUWQ2zTSq2ufq
-         b6IcWBQCfhWf+kxbLa+vZKXagCITuRCrbV4OzlyQz5Vndl+GxhM+J1z432h57a80Jijb
-         joPZnVpMktL7IkaX07wYm9QB6DqLcg23gDCe6XWQ5qwllc+/VFnlAqSHEzLV3k9IPVLT
-         OV/FQ6ftxqWSNvQOdPfWuhAiqgcfOYqfvoHemGx+pErHv0YF2G+q2KqdcFRM4CU591el
-         4YdA==
+        bh=9/OoG2E/ViMfwlb/cwkls7blrjZeLpnE2kRoHSoBG8Y=;
+        b=MAQsrgs18dANFtymAwES0u1DNQaw8NMZmSgxGDEI/nKXfqpytxh2kmpUzAS4Xhhexh
+         LzFlRpq2vDvxkm89KSL0jMMInq0mLw0H1A7vq1a+bCFCYf04KQG8jlQeXX/ce4DdBaSk
+         6OBmtBihkly0IyTuqT1Xyl0uQVFyYB08cTLg4JLyTYg9t1SX8E7ZQA65vdPx/gJl2I6V
+         J/f7VvayMAy4i5qM/Z4tvofadUZDN+9RYgiRHmB3wYk7dSYy4jrDuB+pmfPLwhR7yU3S
+         P76GIYDntroI1hx4kCPiy97q8DVuhrn1Tl/hHH4I3A6PqGg1Kp4atjW41IthGQryE/yS
+         kUUg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=34nGtaPKs8By/umZcvzCM4+cizu4UgHT1CpJZi0rLjo=;
-        b=xftYF4cU32Kxu1VSpz8iVXX92YRwPjBp2uTwmZGPMvVFUFZP1NCi+N/tDGznLBJ8oF
-         ZUOSUBdRB2zP5298Awv+hl4jDYm0qPXEaWVqVY/OxI7VbdIQ6jgpvxwez9of2QQUFFOT
-         XKo+ikb/OervawYyw6nzc7kkd4122tPF0JrXKyGcnS5AMKo12Kz0O/KHOrEhoIkN5LtZ
-         Vcv6zS5bQosaz+xof2zXpTUIeSyjL5N8foqT4xfeGRq2Ijk2pnNlxqYfW4wghctP0lBq
-         Hfwrr4EIEPRGwImilr6JOOENrjrPD3AzcpitcZ0OFrUNCUXlMQL0qOAMUaj5vio7B55h
-         g73A==
-X-Gm-Message-State: AFqh2krN/LdYuaLfvUpBbGqfXArbfjUgjRGkO0QnpHN79UZfTY0ZT3ir
-	7E6LGegLiAYJaTMvaZaBMu1PPeQbjsuEyA==
-X-Google-Smtp-Source: AMrXdXtQVIbt+IZUyd1PGusiM2pjxNG3/XI4WCZV4knLhwWar3EKTjRhX5hZxPExTbDJ5GFge6wtAQ==
-X-Received: by 2002:a17:90a:1d6:b0:22b:b282:a9d7 with SMTP id 22-20020a17090a01d600b0022bb282a9d7mr6485667pjd.20.1674324101847;
-        Sat, 21 Jan 2023 10:01:41 -0800 (PST)
+        bh=9/OoG2E/ViMfwlb/cwkls7blrjZeLpnE2kRoHSoBG8Y=;
+        b=kBhpUFQxMbWlityhZw+YA798RQ7uTBoE6k5l2DLJO4TruOvjQkuMCCFBZ8bu29itvX
+         ZUNtQYJI8wu9nwWDdsUJqSNnofzdvu6HK44w2gYARtTx9B1fXIrTcu5gq7/jC8h3J67w
+         86qcZAkKZiIxggqkHZQNv8UDqIefoA4IHWj4/u1QDliuc5x6ZUQ0JLrjkzQ7e2j2fM4G
+         W8ofC3IT/iufXq3lszIPi+Os6j3Z/JKIdrVVKU22wNaKCir4OZYkrZyKXMzzQBiUsni3
+         aSoh1FyyTfJz1mglkqzSClWls7I2Sd9nKDhoMaYSMUQCbalG87WqYRjHUbQeAMesH2Zn
+         GGMw==
+X-Gm-Message-State: AFqh2kr4FM1eSa068ayxqs+TcGs3cyDLiv/XfZfxAyenupscgxz2b8Th
+	iCvTfvM1XtNc4+wkZM9GRtOSrZ5yVlzWew==
+X-Google-Smtp-Source: AMrXdXvSc8bIHLjK+W6gmYYn6l70Q24arsxi3vYyeOAZcWuNkpBQcFtIZirAHFzc7MGJ6T/0B8CrQg==
+X-Received: by 2002:a17:90a:41:b0:229:f580:e68a with SMTP id 1-20020a17090a004100b00229f580e68amr10277726pjb.17.1674324098562;
+        Sat, 21 Jan 2023 10:01:38 -0800 (PST)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9181:1cf0::aee3])
-        by smtp.gmail.com with ESMTPSA id d15-20020a17090a02cf00b00226c2d90c04sm3623583pjd.38.2023.01.21.10.01.41
+        by smtp.gmail.com with ESMTPSA id d15-20020a17090a02cf00b00226c2d90c04sm3623583pjd.38.2023.01.21.10.01.37
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 21 Jan 2023 10:01:41 -0800 (PST)
+        Sat, 21 Jan 2023 10:01:38 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 22/30] espeak: Drop using 'register' keyword for storage classifier
-Date: Sat, 21 Jan 2023 10:01:13 -0800
-Message-Id: <20230121180121.1229895-22-raj.khem@gmail.com>
+Subject: [meta-networking][PATCH 18/30] net-snmp: Fix build with clang16
+Date: Sat, 21 Jan 2023 10:01:09 -0800
+Message-Id: <20230121180121.1229895-18-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.39.1
 In-Reply-To: <20230121180121.1229895-1-raj.khem@gmail.com>
 References: <20230121180121.1229895-1-raj.khem@gmail.com>
@@ -61,73 +61,65 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sat, 21 Jan 2023 18:01:47 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100689
-
-Fixes build with latest clang
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100685
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../recipes-support/espeak/espeak_1.48.04.bb  |  1 +
- ...ister-keyword-for-storage-classifier.patch | 38 +++++++++++++++++++
- 2 files changed, 39 insertions(+)
- create mode 100644 meta-oe/recipes-support/espeak/files/0001-Drop-using-register-keyword-for-storage-classifier.patch
+ ...eturn-attribute-to-netsnmp_pci_error.patch | 32 +++++++++++++++++++
+ .../net-snmp/net-snmp_5.9.3.bb                |  1 +
+ 2 files changed, 33 insertions(+)
+ create mode 100644 meta-networking/recipes-protocols/net-snmp/net-snmp/0001-Add-noreturn-attribute-to-netsnmp_pci_error.patch
 
-diff --git a/meta-oe/recipes-support/espeak/espeak_1.48.04.bb b/meta-oe/recipes-support/espeak/espeak_1.48.04.bb
-index 0dc61c1c30..147a8069fa 100644
---- a/meta-oe/recipes-support/espeak/espeak_1.48.04.bb
-+++ b/meta-oe/recipes-support/espeak/espeak_1.48.04.bb
-@@ -6,6 +6,7 @@ LIC_FILES_CHKSUM = "file://License.txt;md5=cb7a20edb4c9f5f478de6523dcd7362c"
- SRC_URI = "http://downloads.sourceforge.net/espeak/espeak-1.48.04-source.zip \
-            file://0001-Fix-build-of-shared-library-on-architectures-needing.patch \
-            file://0002-tr_languages-cast-string_ordinal-init-values.patch \
-+           file://0001-Drop-using-register-keyword-for-storage-classifier.patch \
- "
- SRC_URI[md5sum] = "cadd7482eaafe9239546bdc09fa244c3"
- SRC_URI[sha256sum] = "bf9a17673adffcc28ff7ea18764f06136547e97bbd9edf2ec612f09b207f0659"
-diff --git a/meta-oe/recipes-support/espeak/files/0001-Drop-using-register-keyword-for-storage-classifier.patch b/meta-oe/recipes-support/espeak/files/0001-Drop-using-register-keyword-for-storage-classifier.patch
+diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp/0001-Add-noreturn-attribute-to-netsnmp_pci_error.patch b/meta-networking/recipes-protocols/net-snmp/net-snmp/0001-Add-noreturn-attribute-to-netsnmp_pci_error.patch
 new file mode 100644
-index 0000000000..d9c0d08ec9
+index 0000000000..6fbace75a5
 --- /dev/null
-+++ b/meta-oe/recipes-support/espeak/files/0001-Drop-using-register-keyword-for-storage-classifier.patch
-@@ -0,0 +1,38 @@
-+From bad6131463275bd8013a82c28fb0b27e882bc801 Mon Sep 17 00:00:00 2001
++++ b/meta-networking/recipes-protocols/net-snmp/net-snmp/0001-Add-noreturn-attribute-to-netsnmp_pci_error.patch
+@@ -0,0 +1,32 @@
++From 5719f40db65a72624a0b0f08e546d12bf823bd1e Mon Sep 17 00:00:00 2001
 +From: Khem Raj <raj.khem@gmail.com>
-+Date: Wed, 18 Jan 2023 16:07:35 -0800
-+Subject: [PATCH] Drop using 'register' keyword for storage classifier
++Date: Wed, 18 Jan 2023 14:38:44 -0800
++Subject: [PATCH] Add noreturn attribute to netsnmp_pci_error()
 +
-+Its gone from C++17 and newer
++Fixes build with clang16
++| mibgroup/if-mib/data_access/interface_linux.c:152:23: error: incompatible function pointer types assigning to 'void (*)(char *, ...) __attribute__((noreturn))' from 'void (char *, ...)' [-Wincompatible-function-pointer-types]
++|     pci_access->error = netsnmp_pci_error;
++|                       ^ ~~~~~~~~~~~~~~~~~
 +
 +Upstream-Status: Pending
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +---
-+ src/klatt.cpp | 4 ++--
-+ 1 file changed, 2 insertions(+), 2 deletions(-)
++ agent/mibgroup/if-mib/data_access/interface_linux.c | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
 +
-+diff --git a/src/klatt.cpp b/src/klatt.cpp
-+index b15f77c..9c51bc5 100755
-+--- a/src/klatt.cpp
-++++ b/src/klatt.cpp
-+@@ -167,7 +167,7 @@ Output = (rnz.a * input) + (rnz.b * oldin1) + (rnz.c * oldin2)
-+ #ifdef deleted
-+ static double antiresonator(resonator_ptr r, double input)
++diff --git a/agent/mibgroup/if-mib/data_access/interface_linux.c b/agent/mibgroup/if-mib/data_access/interface_linux.c
++index c6cc54e..12eb865 100644
++--- a/agent/mibgroup/if-mib/data_access/interface_linux.c
+++++ b/agent/mibgroup/if-mib/data_access/interface_linux.c
++@@ -31,7 +31,7 @@ static struct pci_access *pci_access;
++ /* Avoid letting libpci call exit(1) when no PCI bus is available. */
++ static int do_longjmp =0;
++ static jmp_buf err_buf;
++-static void
+++__attribute__((noreturn))  static void
++ netsnmp_pci_error(char *msg, ...)
 + {
-+-	register double x = (double)r->a * (double)input + (double)r->b * (double)r->p1 + (double)r->c * (double)r->p2;
-++	double x = (double)r->a * (double)input + (double)r->b * (double)r->p1 + (double)r->c * (double)r->p2;
-+ 	r->p2 = (double)r->p1;
-+ 	r->p1 = (double)input;
-+ 	return (double)x;
-+@@ -176,7 +176,7 @@ static double antiresonator(resonator_ptr r, double input)
-+ 
-+ static double antiresonator2(resonator_ptr r, double input)
-+ {
-+-	register double x = (double)r->a * (double)input + (double)r->b * (double)r->p1 + (double)r->c * (double)r->p2;
-++	double x = (double)r->a * (double)input + (double)r->b * (double)r->p1 + (double)r->c * (double)r->p2;
-+ 	r->p2 = (double)r->p1;
-+ 	r->p1 = (double)input;
-+ 
++     va_list args;
 +-- 
 +2.39.1
 +
+diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.9.3.bb b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.9.3.bb
+index 7af5147566..78d711fbfd 100644
+--- a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.9.3.bb
++++ b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.9.3.bb
+@@ -26,6 +26,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/net-snmp/net-snmp-${PV}.tar.gz \
+            file://net-snmp-fix-for-disable-des.patch \
+            file://reproducibility-have-printcap.patch \
+            file://0001-ac_add_search_path.m4-keep-consistent-between-32bit.patch \
++           file://0001-Add-noreturn-attribute-to-netsnmp_pci_error.patch \
+            "
+ SRC_URI[sha256sum] = "2097f29b7e1bf3f1300b4bae52fa2308d0bb8d5d3998dbe02f9462a413a2ef0a"
+ 
 -- 
 2.39.1
 
