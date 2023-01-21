@@ -2,56 +2,56 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1E20FC004D4
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5ECFDC54EB6
 	for <webhook@archiver.kernel.org>; Sat, 21 Jan 2023 18:01:37 +0000 (UTC)
-Received: from mail-pl1-f181.google.com (mail-pl1-f181.google.com [209.85.214.181])
- by mx.groups.io with SMTP id smtpd.web11.2061.1674324090384446993
+Received: from mail-pj1-f53.google.com (mail-pj1-f53.google.com [209.85.216.53])
+ by mx.groups.io with SMTP id smtpd.web10.2123.1674324088066323550
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 21 Jan 2023 10:01:30 -0800
+ Sat, 21 Jan 2023 10:01:28 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=ZcBfQc+Z;
- spf=pass (domain: gmail.com, ip: 209.85.214.181, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f181.google.com with SMTP id c6so7987718pls.4
-        for <openembedded-devel@lists.openembedded.org>; Sat, 21 Jan 2023 10:01:30 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=qnn4nKfX;
+ spf=pass (domain: gmail.com, ip: 209.85.216.53, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f53.google.com with SMTP id u1-20020a17090a450100b0022936a63a21so11896070pjg.4
+        for <openembedded-devel@lists.openembedded.org>; Sat, 21 Jan 2023 10:01:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=UOOOFIhoZzE0fXDVQCOKHF19mKSTZO60b3TrK95oqXs=;
-        b=ZcBfQc+Z5QEtyoRGcUTV5hrCqxXpLuQpYHI9WGWNbHBGyAM6tccNUHxcK2cMnJNVl1
-         g/7gkP0M0e9fwmz29byp6ctHrkcXIvb0Kse15J4hQ0IS1xPSaodxRiUsEsxzFAnXW9Sm
-         teomftf0WPqRhFgl3MYyOmnCzFaHxmloder5Ivk3ZLn9i2d4BZ0GupY2oeS5j1DnrAFW
-         eDxKyfce8LJJT9JVFWdc1VCUTnHsuE20IhkOZbhh4y0KNAs9ZaCmZlRMyWvBAGmChWgc
-         M1i9g3Nml8mqxazBlyoYOefRCsvKy/VxEArUI6t8gR47lZQ+pa1JkhlBLKGunup57wAF
-         9HJA==
+        bh=kemONC4zWzB5LfUGGhzGgvYbITs7ImRyCupBEftI+ng=;
+        b=qnn4nKfXHviM0IA6esOrBs3773ksoRPEb+MW2Z0raohI4I8mlJWp7wrsNJbVsCamk/
+         VSl6HX0zRwH+ADvlDKHRGX1uE6vm51wbGPjh9QZq9WwrHjx66UL28ZckNMXArYglWZ3u
+         zLV27LtSpRZhDeRA+nbuSv6azZcb86oOpm5FHwyLVND7BchiuOqh3Hj9p5ZmQMRyUX4h
+         sRex2BBIlZKgW9UWFvzL8CuXuN/0sezeKtdaekIXw3tXDa8Z4jv0eF+enYMQ59MMEb6t
+         kT1wleMiykL83VrYMShp9QnwW6eYnUpYy8zMjbxk4AxgmXjzA3b8d0qJXtBOMAmZ95+Q
+         i+yg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=UOOOFIhoZzE0fXDVQCOKHF19mKSTZO60b3TrK95oqXs=;
-        b=YoYISGW7Uqb1gpEtghhuQtkmhnJDPe2Kc1hWFA6ZRvX7yONuMbjZFnE1hUJRpeuugJ
-         eTMuX4VkeBL0XoE1Ogo+xbFN/YDlHsp9zk5xuwqq9h55FV4jiA7ldJ17gUtMfpxDkjIp
-         zrpio7Edu1jaWbj6yxQzyUaKbThmFm+oUuM79RaLr43bslLzywZtueasdbM3PjWgNK3M
-         pGWDeSWxgB1+6oeyFws9hJzCPDsm+5FmA0mSK5+Yz6itrTzJMoF9zTCrs4km7O5XQCXY
-         /vAjxT67Z4HxzmW9KkAgX2jyy+gDpRA3WNIXmI1J8Mq7959Qog3hlSutdUps2ElLeaiu
-         /uSw==
-X-Gm-Message-State: AFqh2kqQ8Qv/KjiDx0YEpxX+MJaGBuO8Xp7VEvD1DCzQNKX1Kdvy/GAT
-	zYslQDuDISk67YP+O0vh+1QaOcIZsQZekg==
-X-Google-Smtp-Source: AMrXdXtxz7wL37y+A8M6m1z9c2kVsbFZYvjf3NhV2ctnmRCtsV5xZ0x9jBtBIlAk88p167yRWLjQyg==
-X-Received: by 2002:a17:90a:aa8a:b0:227:ca8:4ec8 with SMTP id l10-20020a17090aaa8a00b002270ca84ec8mr21001557pjq.17.1674324089593;
-        Sat, 21 Jan 2023 10:01:29 -0800 (PST)
+        bh=kemONC4zWzB5LfUGGhzGgvYbITs7ImRyCupBEftI+ng=;
+        b=jlB2DEOiOI4WsdCVG3Zx4gCawlOdJpO5UZmya0emv85syj3jwNSAKzH8jmc3AgMOY7
+         4WS03TiF+eMnOYrQW5dCZMrh/1TCjm0f4raM/soj0WIXHsqfXSQyeuiDAiWbOQFkeu4w
+         oWZJOAr9xyhJsx6dQRhZdTxZT8cRmh3tkMj3ZTYy36b3ssyyjDFs1aiXO5gghrea+sUt
+         6mb8N7B2UklbhiAxYfoeihgixyqE2TmD0219437P0ABAmuSBhFug2JGsysVpqp9kb3Fr
+         +4A5J1fv9z8q6dIoyORqGhsWGy8K1670nrFbYyKuik51hCNjmMRRiZGeUBv45H9/wWj6
+         b3ow==
+X-Gm-Message-State: AFqh2ko1mtZdhcUxOrDUirX21F+Ddug2l42mPmuig4wJyUh7gGEHQgCK
+	By1CNMWiC/+xUjqwkvfkOptZBSMBmc5XJg==
+X-Google-Smtp-Source: AMrXdXsuQsDY5FRTkOZtr6f2lDkkcLPcHuBD9j0sYpIp7x4sxCaRpXtLVPVWEyozUALCW/mhskU/7A==
+X-Received: by 2002:a17:90a:9409:b0:229:1de8:3cfd with SMTP id r9-20020a17090a940900b002291de83cfdmr19595239pjo.29.1674324087187;
+        Sat, 21 Jan 2023 10:01:27 -0800 (PST)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9181:1cf0::aee3])
-        by smtp.gmail.com with ESMTPSA id d15-20020a17090a02cf00b00226c2d90c04sm3623583pjd.38.2023.01.21.10.01.29
+        by smtp.gmail.com with ESMTPSA id d15-20020a17090a02cf00b00226c2d90c04sm3623583pjd.38.2023.01.21.10.01.26
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 21 Jan 2023 10:01:29 -0800 (PST)
+        Sat, 21 Jan 2023 10:01:26 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-gnome][PATCH 07/30] gnuchess: Fix build with c++17
-Date: Sat, 21 Jan 2023 10:00:58 -0800
-Message-Id: <20230121180121.1229895-7-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 04/30] p8platform: Fix build with c++17 clang
+Date: Sat, 21 Jan 2023 10:00:55 -0800
+Message-Id: <20230121180121.1229895-4-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.39.1
 In-Reply-To: <20230121180121.1229895-1-raj.khem@gmail.com>
 References: <20230121180121.1229895-1-raj.khem@gmail.com>
@@ -61,184 +61,104 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sat, 21 Jan 2023 18:01:37 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100673
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100671
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...ve-register-storage-class-classifier.patch | 149 ++++++++++++++++++
- .../gnome-chess/gnuchess_6.2.9.bb             |   3 +-
- 2 files changed, 151 insertions(+), 1 deletion(-)
- create mode 100644 meta-gnome/recipes-gnome/gnome-chess/gnuchess/0001-Remove-register-storage-class-classifier.patch
+ ...e-resulting-cmake-config-relocatable.patch | 64 -------------------
+ .../p8platform/p8platform_git.bb              |  7 +-
+ 2 files changed, 3 insertions(+), 68 deletions(-)
+ delete mode 100644 meta-oe/recipes-extended/p8platform/files/0001-Make-resulting-cmake-config-relocatable.patch
 
-diff --git a/meta-gnome/recipes-gnome/gnome-chess/gnuchess/0001-Remove-register-storage-class-classifier.patch b/meta-gnome/recipes-gnome/gnome-chess/gnuchess/0001-Remove-register-storage-class-classifier.patch
-new file mode 100644
-index 0000000000..69237fd57a
---- /dev/null
-+++ b/meta-gnome/recipes-gnome/gnome-chess/gnuchess/0001-Remove-register-storage-class-classifier.patch
-@@ -0,0 +1,149 @@
-+From 321eb9b1ca1b230063259dc43be8a2ab2f3bfee9 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Tue, 17 Jan 2023 22:16:36 -0800
-+Subject: [PATCH] Remove 'register' storage class classifier
-+
-+This is gone with c++17
-+
-+Upstream-Status: Pending
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ src/frontend/atak.cc   |  4 ++--
-+ src/frontend/lexpgn.cc | 34 +++++++++++++++++-----------------
-+ src/frontend/util.cc   |  2 +-
-+ 3 files changed, 20 insertions(+), 20 deletions(-)
-+
-+diff --git a/src/frontend/atak.cc b/src/frontend/atak.cc
-+index ef19d87..640e150 100644
-+--- a/src/frontend/atak.cc
-++++ b/src/frontend/atak.cc
-+@@ -37,7 +37,7 @@ short SqAtakd (short sq, short side)
-+  *
-+  **************************************************************************/
-+ {
-+-   register BitBoard *a, b, *c, d, blocker;
-++   BitBoard *a, b, *c, d, blocker;
-+    int t;
-+ 
-+    a = board.b[side];
-+@@ -89,7 +89,7 @@ BitBoard AttackTo (int sq, int side)
-+  *
-+  ***************************************************************************/
-+ {
-+-   register BitBoard *a, b, *c, e, blocker;
-++   BitBoard *a, b, *c, e, blocker;
-+    int t;
-+ 
-+    a = board.b[side];
-+diff --git a/src/frontend/lexpgn.cc b/src/frontend/lexpgn.cc
-+index 475899d..971aa13 100644
-+--- a/src/frontend/lexpgn.cc
-++++ b/src/frontend/lexpgn.cc
-+@@ -2431,9 +2431,9 @@ extern int yylex (void);
-+  */
-+ YY_DECL
-+ {
-+-	register yy_state_type yy_current_state;
-+-	register char *yy_cp, *yy_bp;
-+-	register int yy_act;
-++	yy_state_type yy_current_state;
-++	char *yy_cp, *yy_bp;
-++	int yy_act;
-+     
-+ #line 153 "lexpgn.ll"
-+ 
-+@@ -3118,9 +3118,9 @@ case YY_STATE_EOF(RAV):
-+  */
-+ static int yy_get_next_buffer (void)
-+ {
-+-    	register char *dest = YY_CURRENT_BUFFER_LVALUE->yy_ch_buf;
-+-	register char *source = (yytext_ptr);
-+-	register int number_to_move, i;
-++    	char *dest = YY_CURRENT_BUFFER_LVALUE->yy_ch_buf;
-++	char *source = (yytext_ptr);
-++	int number_to_move, i;
-+ 	int ret_val;
-+ 
-+ 	if ( (yy_c_buf_p) > &YY_CURRENT_BUFFER_LVALUE->yy_ch_buf[(yy_n_chars) + 1] )
-+@@ -3252,8 +3252,8 @@ static int yy_get_next_buffer (void)
-+ 
-+     static yy_state_type yy_get_previous_state (void)
-+ {
-+-	register yy_state_type yy_current_state;
-+-	register char *yy_cp;
-++	yy_state_type yy_current_state;
-++	char *yy_cp;
-+     
-+ 	yy_current_state = (yy_start);
-+ 	yy_current_state += YY_AT_BOL();
-+@@ -3278,8 +3278,8 @@ static int yy_get_next_buffer (void)
-+  */
-+     static yy_state_type yy_try_NUL_trans  (yy_state_type yy_current_state )
-+ {
-+-	register int yy_is_jam;
-+-    	register char *yy_cp = (yy_c_buf_p);
-++	int yy_is_jam;
-++    	char *yy_cp = (yy_c_buf_p);
-+ 
-+ 	yy_current_state = yy_nxt[yy_current_state][1];
-+ 	yy_is_jam = (yy_current_state <= 0);
-+@@ -3296,9 +3296,9 @@ static int yy_get_next_buffer (void)
-+ 	return yy_is_jam ? 0 : yy_current_state;
-+ }
-+ 
-+-    static void yyunput (int c, register char * yy_bp )
-++    static void yyunput (int c, char * yy_bp )
-+ {
-+-	register char *yy_cp;
-++	char *yy_cp;
-+     
-+     yy_cp = (yy_c_buf_p);
-+ 
-+@@ -3308,10 +3308,10 @@ static int yy_get_next_buffer (void)
-+ 	if ( yy_cp < YY_CURRENT_BUFFER_LVALUE->yy_ch_buf + 2 )
-+ 		{ /* need to shift things up to make room */
-+ 		/* +2 for EOB chars. */
-+-		register yy_size_t number_to_move = (yy_n_chars) + 2;
-+-		register char *dest = &YY_CURRENT_BUFFER_LVALUE->yy_ch_buf[
-++		yy_size_t number_to_move = (yy_n_chars) + 2;
-++		char *dest = &YY_CURRENT_BUFFER_LVALUE->yy_ch_buf[
-+ 					YY_CURRENT_BUFFER_LVALUE->yy_buf_size + 2];
-+-		register char *source =
-++		char *source =
-+ 				&YY_CURRENT_BUFFER_LVALUE->yy_ch_buf[number_to_move];
-+ 
-+ 		while ( source > YY_CURRENT_BUFFER_LVALUE->yy_ch_buf )
-+@@ -3925,7 +3925,7 @@ int yylex_destroy  (void)
-+ #ifndef yytext_ptr
-+ static void yy_flex_strncpy (char* s1, yyconst char * s2, int n )
-+ {
-+-	register int i;
-++	int i;
-+ 	for ( i = 0; i < n; ++i )
-+ 		s1[i] = s2[i];
-+ }
-+@@ -3934,7 +3934,7 @@ static void yy_flex_strncpy (char* s1, yyconst char * s2, int n )
-+ #ifdef YY_NEED_STRLEN
-+ static int yy_flex_strlen (yyconst char * s )
-+ {
-+-	register int n;
-++	int n;
-+ 	for ( n = 0; s[n]; ++n )
-+ 		;
-+ 
-+diff --git a/src/frontend/util.cc b/src/frontend/util.cc
-+index 5d3efe2..f7f7f1d 100644
-+--- a/src/frontend/util.cc
-++++ b/src/frontend/util.cc
-+@@ -75,7 +75,7 @@ void UpdateFriends (void)
-+  *
-+  ***************************************************************************/
-+ {
-+-   register BitBoard *w, *b;
-++   BitBoard *w, *b;
-+ 
-+    w = board.b[white];
-+    b = board.b[black];
-+-- 
-+2.39.1
-+
-diff --git a/meta-gnome/recipes-gnome/gnome-chess/gnuchess_6.2.9.bb b/meta-gnome/recipes-gnome/gnome-chess/gnuchess_6.2.9.bb
-index 8ca40229ee..78606b8a2a 100644
---- a/meta-gnome/recipes-gnome/gnome-chess/gnuchess_6.2.9.bb
-+++ b/meta-gnome/recipes-gnome/gnome-chess/gnuchess_6.2.9.bb
-@@ -4,7 +4,8 @@ LICENSE = "GPL-3.0-only"
+diff --git a/meta-oe/recipes-extended/p8platform/files/0001-Make-resulting-cmake-config-relocatable.patch b/meta-oe/recipes-extended/p8platform/files/0001-Make-resulting-cmake-config-relocatable.patch
+deleted file mode 100644
+index 9ff85b12a3..0000000000
+--- a/meta-oe/recipes-extended/p8platform/files/0001-Make-resulting-cmake-config-relocatable.patch
++++ /dev/null
+@@ -1,64 +0,0 @@
+-From 2650bb3bd3644784359be373252b0436873ca8cb Mon Sep 17 00:00:00 2001
+-From: Pascal Bach <pascal.bach@siemens.com>
+-Date: Fri, 28 Sep 2018 16:44:37 +0200
+-Subject: [PATCH] Make resulting cmake config relocatable
+-
+-This change avoids hardcoded install prefix in the p8-platform-config.cmake.
+-Especially important when doing cross compilation with Yocto for example.
+-
+-Upstream-Status: Submitted [https://github.com/Pulse-Eight/platform/pull/38]
+-
+----
+- CMakeLists.txt              |  4 ----
+- p8-platform-config.cmake.in | 13 +++++++++----
+- 2 files changed, 9 insertions(+), 8 deletions(-)
+-
+-diff --git a/CMakeLists.txt b/CMakeLists.txt
+-index 7144b0b..f2db66e 100644
+---- a/CMakeLists.txt
+-+++ b/CMakeLists.txt
+-@@ -22,10 +22,6 @@ if(WIN32)
+-                    src/windows/os-threads.cpp)
+- endif()
+- 
+--set(p8-platform_INCLUDE_DIRS "${CMAKE_INSTALL_PREFIX}/include/p8-platform")
+--IF(WIN32)
+--  LIST(APPEND p8-platform_INCLUDE_DIRS "${CMAKE_INSTALL_PREFIX}/include/p8-platform/windows")
+--ENDIF(WIN32)
+- set(p8-platform_LIBRARIES ${CMAKE_THREAD_LIBS_INIT})
+- 
+- if(NOT ${CORE_SYSTEM_NAME} STREQUAL "")
+-diff --git a/p8-platform-config.cmake.in b/p8-platform-config.cmake.in
+-index 47f30f1..b08e96c 100644
+---- a/p8-platform-config.cmake.in
+-+++ b/p8-platform-config.cmake.in
+-@@ -9,17 +9,22 @@
+- #  p8-platform_LIBRARY_DIRS - directories in which the libraries are situated
+- #
+- # propagate these properties from one build system to the other
+-+get_filename_component(_p8-platform_rootdir ${CMAKE_CURRENT_LIST_DIR}/../ ABSOLUTE)
+-+
+- set (p8-platform_VERSION "@p8-platform_VERSION_MAJOR@.@p8-platform_VERSION_MINOR@")
+--set (p8-platform_INCLUDE_DIRS @p8-platform_INCLUDE_DIRS@ @CMAKE_INSTALL_PREFIX@/include)
+--set (p8-platform_LIBRARY_DIRS "@CMAKE_LIBRARY_OUTPUT_DIRECTORY@")
+-+set (p8-platform_INCLUDE_DIRS "${_p8-platform_rootdir}/include" "${_p8-platform_rootdir}/include/p8-platform")
+-+if(WIN32)
+-+  list(APPEND p8-platform_INCLUDE_DIRS "${_p8-platform_rootdir}/include/p8-platform/windows")
+-+endif(WIN32)
+-+set (p8-platform_LIBRARY_DIRS "${_p8-platform_rootdir}")
+- set (p8-platform_LINKER_FLAGS "@p8-platform_LINKER_FLAGS@")
+- set (p8-platform_CONFIG_VARS "@p8-platform_CONFIG_VARS@")
+- 
+- # libraries come from the build tree where this file was generated
+- if(WIN32)
+--  set (p8-platform_LIBRARY "@CMAKE_INSTALL_PREFIX@/@CMAKE_INSTALL_LIBDIR@/p8-platform.lib")
+-+  set (p8-platform_LIBRARY "${_p8-platform_rootdir}/p8-platform.lib")
+- else(WIN32)
+--  set (p8-platform_LIBRARY "-L@CMAKE_INSTALL_PREFIX@/@CMAKE_INSTALL_LIBDIR@ -lp8-platform")
+-+  set (p8-platform_LIBRARY "-L${_p8-platform_rootdir} -lp8-platform")
+- endif(WIN32)
+- set (p8-platform_LIBRARIES ${p8-platform_LIBRARY} "@p8-platform_LIBRARIES@")
+- mark_as_advanced (p8-platform_LIBRARY)
+--- 
+-2.11.0
+-
+diff --git a/meta-oe/recipes-extended/p8platform/p8platform_git.bb b/meta-oe/recipes-extended/p8platform/p8platform_git.bb
+index 1307f6dc4a..bb9574feb2 100644
+--- a/meta-oe/recipes-extended/p8platform/p8platform_git.bb
++++ b/meta-oe/recipes-extended/p8platform/p8platform_git.bb
+@@ -4,11 +4,10 @@ HOMEPAGE = "http://libcec.pulse-eight.com/"
+ LICENSE = "GPL-2.0-or-later"
+ LIC_FILES_CHKSUM = "file://src/os.h;md5=752555fa94e82005d45fd201fee5bd33"
  
- LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
+-PV = "2.1.0.1"
++PV = "2.1.0.1+git${SRCPV}"
  
--SRC_URI = "https://git.savannah.gnu.org/cgit/chess.git/snapshot/chess-${PV}.tar.gz"
-+SRC_URI = "https://git.savannah.gnu.org/cgit/chess.git/snapshot/chess-${PV}.tar.gz \
-+           file://0001-Remove-register-storage-class-classifier.patch"
- SRC_URI[sha256sum] = "03f9e844ccdd48d20ee49314174404f8b643d83bb8ce9ec9d2e6a21f1b6fb9f5"
+-SRC_URI = "git://github.com/Pulse-Eight/platform.git;branch=master;protocol=https \
+-           file://0001-Make-resulting-cmake-config-relocatable.patch"
+-SRCREV = "2d90f98620e25f47702c9e848380c0d93f29462b"
++SRC_URI = "git://github.com/Pulse-Eight/platform.git;branch=master;protocol=https"
++SRCREV = "a7cd0d5780ed80a4e70480d1650749f29e8a1fb2"
  
- S = "${WORKDIR}/chess-${PV}"
+ S = "${WORKDIR}/git"
+ 
 -- 
 2.39.1
 
