@@ -2,56 +2,56 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 93A39C38159
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8EFEAC004D4
 	for <webhook@archiver.kernel.org>; Sat, 21 Jan 2023 18:01:57 +0000 (UTC)
-Received: from mail-pl1-f173.google.com (mail-pl1-f173.google.com [209.85.214.173])
- by mx.groups.io with SMTP id smtpd.web10.2135.1674324107457591306
+Received: from mail-pj1-f42.google.com (mail-pj1-f42.google.com [209.85.216.42])
+ by mx.groups.io with SMTP id smtpd.web11.2064.1674324094311231906
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 21 Jan 2023 10:01:47 -0800
+ Sat, 21 Jan 2023 10:01:48 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=iNo/n22V;
- spf=pass (domain: gmail.com, ip: 209.85.214.173, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f173.google.com with SMTP id d3so7955449plr.10
-        for <openembedded-devel@lists.openembedded.org>; Sat, 21 Jan 2023 10:01:47 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=hqunF+Hv;
+ spf=pass (domain: gmail.com, ip: 209.85.216.42, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f42.google.com with SMTP id m3-20020a17090a414300b00229ef93c5b0so7072521pjg.2
+        for <openembedded-devel@lists.openembedded.org>; Sat, 21 Jan 2023 10:01:48 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=19E9+pORw/MT4AKwl6+zmyp5brZBB+5HQzpkeCoPXCQ=;
-        b=iNo/n22Vb/Jm7rDt341MtNY9xZ5y6d1/WHhSYneqTE6PvR7pAruZ8rXXl2PEazgSI4
-         SaX319Iz46aZxesV3YcECxe/Oisqsd8LLGhZu/EPXbmqoUt5Veo15wVPcsdaco5G+h+T
-         a0KRQyRvTJXrCSYe6XyFGMqSDP8tept1p2S3BNwMlC5P4oiETlDaHGdeLkqR3mnx+uG5
-         +rSysDX7zUzjJjXAmhuB0BKcJm47dws1w+hpkiJOhR3pKbg0+ZyOUg6hTgr3lFrKbI3t
-         iSahfB08YdrGD8H0FK95546+gaxCwlT6pzUvuXnkqrIxFkcTIJf2N/Rak6cXJtQmOaZ1
-         7gbQ==
+        bh=onEkt8ehE1cmwpU8sNmV6QqiWzqU5NoJT5ts0vVnNwM=;
+        b=hqunF+HvmKZEg/btVsXgpXyNgwuqlGhV6Zz8pV6Fpbw0MFeqd9DIL9zNEwMblQaExU
+         l0f8T52j4LRUJS7rWjNsKEe09bRUA3ZB1IVrOUFvSgPfLbv2OyUUZ/gAMe2cNPF30Nol
+         bgzOGU3NxEJxE6H700FeERHqMS/Nc9Ibe1rgt1Y4uwWL9aV7FPBbGSfhf7ntlBwN5W0B
+         dUS5IsoX2e0XuC+ud96hV8MsMRsL5woNFrzQwTsFs+910pZC6y+0+5AIO+6TKWZcEdm7
+         VPJAPqJpZbOuUB2Zf2toYOJ3ojBEI4aFDMdhjU4jMAKoqlF4lzXifXEH8WQaL7eQy0kq
+         ODLg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=19E9+pORw/MT4AKwl6+zmyp5brZBB+5HQzpkeCoPXCQ=;
-        b=VFbSczT8gVDzJEWJqDhfOzcTEnmH47VSwTjeme3pwvycyzefYo0k0RrhkgDvHwpZ24
-         ydIoJwIS24dhNl0hMHYdZiyhy1viVpIe8ayH6hIqLZriTRN/zyIfBDiAEOm3IGJMNqFM
-         ZkqPtXYrgoPS8x5z+OWxYyh78XuTlWsR2meMtC37nmICW6ondGhUz6k7ubCVIHD9j1Aj
-         HFdSLDLkmt7YlnKu1UQaPQdlsNJGu2ItppNxSg+DX2sZta55qwmFg9hOTrOMI4btHKEw
-         dg0sv3jggrERQnLTkf4s9x+dqU0FvMaTJ4x+57AIWQsOA06K816y5uYc8nUWVCrg82u3
-         bNYg==
-X-Gm-Message-State: AFqh2komS3tsBTzpxiQCZnFASslcBP4IRHaVT/Qpa4YGACGsKXBIxQcP
-	pbfGWX/IqVfop9KHNrZT//nu+Lyj7MF32A==
-X-Google-Smtp-Source: AMrXdXs4igfgRTvfjImZ8ndMGuI42Gxdi2ms4oOKByqlc6xgUubmBRIbgPGQ8aLmBbP4ty11PU6CKw==
-X-Received: by 2002:a17:90a:b792:b0:226:51ff:a8f8 with SMTP id m18-20020a17090ab79200b0022651ffa8f8mr20154414pjr.15.1674324106556;
-        Sat, 21 Jan 2023 10:01:46 -0800 (PST)
+        bh=onEkt8ehE1cmwpU8sNmV6QqiWzqU5NoJT5ts0vVnNwM=;
+        b=KSAe472ov50SaN++gj0nEPj1Pomq0Z5UzlxNsxT6waxxTbSoZEkYnfhD2z9HCK203l
+         7Go8z3fwQ+9fVDVjGi+HcuJD/mbtLYxOWhbSfYIOiKcXVTGd1xh+6UaObWmiLB2MlUD1
+         CgwUpKoxKjzgUP6QgDCATiH3IobffSWLmDD2UBbPGWNGNBR/1Bs4lqD9LY1DNGcmxHeK
+         wC20YmoQEGbyvpvDwXh7A9MblwLSuDgk51Y01F3yolKfO2sR0Ixqi21H/poZ/qz3eOQG
+         rwZb5Mp3vUor8NqA95SFwbp4ZuA2KfvmrW22G3JP3X0X/wx0ruDeIQkvCSPPaIo9ZAOy
+         r7pA==
+X-Gm-Message-State: AFqh2krKZl3fqJ6TkHB24saqmUAE+NzMNNFt6qllNMw0eePV9cvFKxg/
+	ZJunxcpD3DWhlWS5cubCiltW1rcKH5h4eQ==
+X-Google-Smtp-Source: AMrXdXugTPi+8sDRr6RTw5zun3Wdw39Q2dj2qKqlfq+AM13vL69m6UA4DkFetfO0U/SAe2/QENIafA==
+X-Received: by 2002:a17:90b:4f8b:b0:22b:b9d9:48e7 with SMTP id qe11-20020a17090b4f8b00b0022bb9d948e7mr5067830pjb.39.1674324108242;
+        Sat, 21 Jan 2023 10:01:48 -0800 (PST)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9181:1cf0::aee3])
-        by smtp.gmail.com with ESMTPSA id d15-20020a17090a02cf00b00226c2d90c04sm3623583pjd.38.2023.01.21.10.01.45
+        by smtp.gmail.com with ESMTPSA id d15-20020a17090a02cf00b00226c2d90c04sm3623583pjd.38.2023.01.21.10.01.47
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 21 Jan 2023 10:01:46 -0800 (PST)
+        Sat, 21 Jan 2023 10:01:47 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 28/30] thrift: Fix c++ and system header include order problem
-Date: Sat, 21 Jan 2023 10:01:19 -0800
-Message-Id: <20230121180121.1229895-28-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 30/30] poppler: cmake: Do not use -isystem
+Date: Sat, 21 Jan 2023 10:01:21 -0800
+Message-Id: <20230121180121.1229895-30-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.39.1
 In-Reply-To: <20230121180121.1229895-1-raj.khem@gmail.com>
 References: <20230121180121.1229895-1-raj.khem@gmail.com>
@@ -61,25 +61,25 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sat, 21 Jan 2023 18:01:57 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100695
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100697
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...ake-Use-idirafter-instead-of-isystem.patch | 180 ++++++++++++++++++
- .../thrift/thrift_0.17.0.bb                   |   1 +
- 2 files changed, 181 insertions(+)
- create mode 100644 meta-oe/recipes-connectivity/thrift/thrift/0001-cmake-Use-idirafter-instead-of-isystem.patch
+ .../0001-cmake-Do-not-use-isystem.patch       | 192 ++++++++++++++++++
+ .../poppler/poppler_23.01.0.bb                |   1 +
+ 2 files changed, 193 insertions(+)
+ create mode 100644 meta-oe/recipes-support/poppler/poppler/0001-cmake-Do-not-use-isystem.patch
 
-diff --git a/meta-oe/recipes-connectivity/thrift/thrift/0001-cmake-Use-idirafter-instead-of-isystem.patch b/meta-oe/recipes-connectivity/thrift/thrift/0001-cmake-Use-idirafter-instead-of-isystem.patch
+diff --git a/meta-oe/recipes-support/poppler/poppler/0001-cmake-Do-not-use-isystem.patch b/meta-oe/recipes-support/poppler/poppler/0001-cmake-Do-not-use-isystem.patch
 new file mode 100644
-index 0000000000..fd995153b3
+index 0000000000..44a22963af
 --- /dev/null
-+++ b/meta-oe/recipes-connectivity/thrift/thrift/0001-cmake-Use-idirafter-instead-of-isystem.patch
-@@ -0,0 +1,180 @@
-+From 0b9c6c4286a33961016839826e709a0e7394b28b Mon Sep 17 00:00:00 2001
++++ b/meta-oe/recipes-support/poppler/poppler/0001-cmake-Do-not-use-isystem.patch
+@@ -0,0 +1,192 @@
++From 51a2a1e4d8ca4040a6a7eac398cb704da35f39e5 Mon Sep 17 00:00:00 2001
 +From: Khem Raj <raj.khem@gmail.com>
-+Date: Sat, 21 Jan 2023 00:00:04 -0800
-+Subject: [PATCH] cmake: Use -idirafter instead of -isystem
++Date: Sat, 21 Jan 2023 03:09:08 -0800
++Subject: [PATCH] cmake: Do not use -isystem
 +
 +isystem dirs are searched before the regular system dirs
 +this exposes an interesting include ordering problem when using
@@ -105,168 +105,180 @@ index 0000000000..fd995153b3
 +but instead of prepending, it will append to system headers and the
 +issue is addressed
 +
-+Upstream-Status: Pending
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +---
-+ build/cmake/BoostMacros.cmake  | 2 +-
-+ lib/c_glib/CMakeLists.txt      | 4 ++--
-+ lib/c_glib/test/CMakeLists.txt | 2 +-
-+ lib/cpp/CMakeLists.txt         | 7 +++----
-+ lib/cpp/test/CMakeLists.txt    | 2 +-
-+ test/c_glib/CMakeLists.txt     | 6 +++---
-+ test/cpp/CMakeLists.txt        | 6 +++---
-+ 7 files changed, 14 insertions(+), 15 deletions(-)
++ CMakeLists.txt         |  4 ++--
++ glib/CMakeLists.txt    |  4 ++--
++ qt5/src/CMakeLists.txt |  4 ++--
++ qt6/src/CMakeLists.txt |  4 ++--
++ test/CMakeLists.txt    |  6 +++---
++ utils/CMakeLists.txt   | 10 +++++-----
++ 6 files changed, 16 insertions(+), 16 deletions(-)
 +
-+diff --git a/build/cmake/BoostMacros.cmake b/build/cmake/BoostMacros.cmake
-+index ffb85af..9f9d2dd 100644
-+--- a/build/cmake/BoostMacros.cmake
-++++ b/build/cmake/BoostMacros.cmake
-+@@ -26,7 +26,7 @@ macro(REQUIRE_BOOST_HEADERS)
-+   endif()
-+   if (DEFINED Boost_INCLUDE_DIRS)
-+     # pre-boost 1.70.0 aware cmake, otherwise it is using targets
-+-    include_directories(SYSTEM "${Boost_INCLUDE_DIRS}")
-++    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -idirafter ${Boost_INCLUDE_DIRS}")
-+   endif()
-+ endmacro()
-+ 
-+diff --git a/lib/c_glib/CMakeLists.txt b/lib/c_glib/CMakeLists.txt
-+index 218f7dd..d7a6161 100644
-+--- a/lib/c_glib/CMakeLists.txt
-++++ b/lib/c_glib/CMakeLists.txt
-+@@ -83,7 +83,7 @@ if(OPENSSL_FOUND AND WITH_OPENSSL)
-+             list(APPEND SYSLIBS OpenSSL::Crypto)
-+         endif()
-+     else()
-+-        include_directories(SYSTEM "${OPENSSL_INCLUDE_DIR}")
-++        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -idirafter ${OPENSSL_INCLUDE_DIR}")
-+         list(APPEND SYSLIBS "${OPENSSL_LIBRARIES}")
-+     endif()
++diff --git a/CMakeLists.txt b/CMakeLists.txt
++index 4768ac8..cdc014d 100644
++--- a/CMakeLists.txt
+++++ b/CMakeLists.txt
++@@ -603,10 +603,10 @@ add_library(poppler ${poppler_SRCS})
++ if (OpenJPEG_FOUND)
++   # check if we can remove this when we depend on newer openjpeg versions, 2.5 seems fixed
++   # target openjp2 may lack interface include directories
++-  target_include_directories(poppler SYSTEM PRIVATE ${OPENJPEG_INCLUDE_DIRS})
+++  target_include_directories(poppler  PRIVATE ${OPENJPEG_INCLUDE_DIRS})
 + endif()
-+@@ -97,7 +97,7 @@ target_link_libraries(thrift_c_glib PUBLIC ${SYSLIBS})
-+ 
-+ # If Zlib is not found just ignore the Zlib stuff
-+ if(WITH_ZLIB)
-+-    include_directories(SYSTEM ${ZLIB_INCLUDE_DIRS})
-++    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -idirafter ${ZLIB_INCLUDE_DIRS}")
-+     ADD_LIBRARY_THRIFT(thrift_c_glib_zlib ${thrift_c_glib_zlib_SOURCES})
-+     target_link_libraries(thrift_c_glib_zlib ${SYSLIBS} ${ZLIB_LIBRARIES})
-+     target_link_libraries(thrift_c_glib_zlib thrift_c_glib)
-+diff --git a/lib/c_glib/test/CMakeLists.txt b/lib/c_glib/test/CMakeLists.txt
-+index 85c6dd0..0c8d3d2 100644
-+--- a/lib/c_glib/test/CMakeLists.txt
-++++ b/lib/c_glib/test/CMakeLists.txt
-+@@ -129,7 +129,7 @@ target_link_libraries(testthriftmemorybufferreadcheck testgenc)
-+ add_test(NAME testthriftmemorybufferreadcheck COMMAND testthriftmemorybufferreadcheck)
-+ 
-+ if(WITH_ZLIB)
-+-  include_directories(SYSTEM "${ZLIB_INCLUDE_DIRS}")
-++  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -idirafter ${ZLIB_INCLUDE_DIRS}")
-+   add_executable(testzlibtransport testzlibtransport.c)
-+   target_link_libraries(testzlibtransport testgenc ${ZLIB_LIBRARIES})
-+   target_link_libraries(testzlibtransport thrift_c_glib_zlib)
-+diff --git a/lib/cpp/CMakeLists.txt b/lib/cpp/CMakeLists.txt
-+index 13b41c5..96bea53 100644
-+--- a/lib/cpp/CMakeLists.txt
-++++ b/lib/cpp/CMakeLists.txt
-+@@ -111,7 +111,7 @@ if(OPENSSL_FOUND AND WITH_OPENSSL)
-+             list(APPEND SYSLIBS OpenSSL::Crypto)
-+         endif()
-+     else()
-+-        include_directories(SYSTEM "${OPENSSL_INCLUDE_DIR}")
-++	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -idirafter ${OPENSSL_INCLUDE_DIR}")
-+         list(APPEND SYSLIBS "${OPENSSL_LIBRARIES}")
-+     endif()
++ if(USE_CMS)
++-  target_include_directories(poppler SYSTEM PRIVATE ${LCMS2_INCLUDE_DIR})
+++  target_include_directories(poppler  PRIVATE ${LCMS2_INCLUDE_DIR})
 + endif()
-+@@ -167,8 +167,7 @@ ADD_PKGCONFIG_THRIFT(thrift)
++ generate_export_header(poppler BASE_NAME poppler-private EXPORT_FILE_NAME "${CMAKE_CURRENT_BINARY_DIR}/poppler_private_export.h")
++ set_target_properties(poppler PROPERTIES VERSION 126.0.0 SOVERSION 126)
++diff --git a/glib/CMakeLists.txt b/glib/CMakeLists.txt
++index 52e8687..08ab39a 100644
++--- a/glib/CMakeLists.txt
+++++ b/glib/CMakeLists.txt
++@@ -4,7 +4,7 @@ include_directories(
++ )
 + 
-+ if(WITH_LIBEVENT)
-+     find_package(Libevent REQUIRED)  # Libevent comes with CMake support from upstream
-+-    include_directories(SYSTEM ${LIBEVENT_INCLUDE_DIRS})
-+-
-++    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -idirafter ${LIBEVENT_INCLUDE_DIRS}")
-+     ADD_LIBRARY_THRIFT(thriftnb ${thriftcppnb_SOURCES})
-+     target_link_libraries(thriftnb PUBLIC thrift)
-+     if(TARGET libevent::core AND TARGET libevent::extra)
-+@@ -182,7 +181,7 @@ endif()
++ include_directories(
++-  SYSTEM
+++  
++   ${GLIB2_INCLUDE_DIRS}
++   ${CAIRO_INCLUDE_DIRS}
++ )
++@@ -96,7 +96,7 @@ if(MINGW AND BUILD_SHARED_LIBS)
++     set_target_properties(poppler-glib PROPERTIES SUFFIX "-${POPPLER_GLIB_SOVERSION}${CMAKE_SHARED_LIBRARY_SUFFIX}")
++ endif()
++ target_link_libraries(poppler-glib poppler PkgConfig::GLIB2 ${CAIRO_LIBRARIES} Freetype::Freetype)
++-target_include_directories(poppler-glib SYSTEM PRIVATE ${CAIRO_INCLUDE_DIRS})
+++target_include_directories(poppler-glib  PRIVATE ${CAIRO_INCLUDE_DIRS})
++ install(TARGETS poppler-glib RUNTIME DESTINATION bin LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR} ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR})
 + 
-+ if(WITH_ZLIB)
-+     find_package(ZLIB REQUIRED)
-+-    include_directories(SYSTEM ${ZLIB_INCLUDE_DIRS})
-++    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -idirafter ${ZLIB_INCLUDE_DIRS}")
++ install(FILES
++diff --git a/qt5/src/CMakeLists.txt b/qt5/src/CMakeLists.txt
++index 5db3a6c..f242d29 100644
++--- a/qt5/src/CMakeLists.txt
+++++ b/qt5/src/CMakeLists.txt
++@@ -45,11 +45,11 @@ if(MINGW AND BUILD_SHARED_LIBS)
++ endif()
++ target_link_libraries(poppler-qt5 poppler Qt5::Core Qt5::Gui Qt5::Xml Freetype::Freetype)
++ if (ENABLE_NSS3)
++-    target_include_directories(poppler-qt5 SYSTEM PRIVATE ${NSS3_INCLUDE_DIRS})
+++    target_include_directories(poppler-qt5  PRIVATE ${NSS3_INCLUDE_DIRS})
++ endif()
++ if(USE_CMS)
++     target_link_libraries(poppler-qt5 poppler ${LCMS2_LIBRARIES})
++-    target_include_directories(poppler-qt5 SYSTEM PRIVATE ${LCMS2_INCLUDE_DIR})
+++    target_include_directories(poppler-qt5  PRIVATE ${LCMS2_INCLUDE_DIR})
++ endif()
++ install(TARGETS poppler-qt5 RUNTIME DESTINATION bin LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR} ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR})
 + 
-+     ADD_LIBRARY_THRIFT(thriftz ${thriftcppz_SOURCES})
-+     target_link_libraries(thriftz PUBLIC thrift)
-+diff --git a/lib/cpp/test/CMakeLists.txt b/lib/cpp/test/CMakeLists.txt
-+index 19854e1..1b36b47 100644
-+--- a/lib/cpp/test/CMakeLists.txt
-++++ b/lib/cpp/test/CMakeLists.txt
-+@@ -127,7 +127,7 @@ endif ()
-+ add_test(NAME TServerIntegrationTest COMMAND TServerIntegrationTest)
++diff --git a/qt6/src/CMakeLists.txt b/qt6/src/CMakeLists.txt
++index cd91975..6c42e12 100644
++--- a/qt6/src/CMakeLists.txt
+++++ b/qt6/src/CMakeLists.txt
++@@ -45,11 +45,11 @@ if(MINGW AND BUILD_SHARED_LIBS)
++ endif()
++ target_link_libraries(poppler-qt6 poppler Qt6::Core Qt6::Gui Freetype::Freetype)
++ if (ENABLE_NSS3)
++-    target_include_directories(poppler-qt6 SYSTEM PRIVATE ${NSS3_INCLUDE_DIRS})
+++    target_include_directories(poppler-qt6  PRIVATE ${NSS3_INCLUDE_DIRS})
++ endif()
++ if(USE_CMS)
++     target_link_libraries(poppler-qt6 poppler ${LCMS2_LIBRARIES})
++-    target_include_directories(poppler-qt6 SYSTEM PRIVATE ${LCMS2_INCLUDE_DIR})
+++    target_include_directories(poppler-qt6  PRIVATE ${LCMS2_INCLUDE_DIR})
++ endif()
++ install(TARGETS poppler-qt6 RUNTIME DESTINATION bin LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR} ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR})
 + 
-+ if(WITH_ZLIB)
-+-include_directories(SYSTEM "${ZLIB_INCLUDE_DIRS}")
-++set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -idirafter ${ZLIB_INCLUDE_DIRS}")
-+ add_executable(TransportTest TransportTest.cpp)
-+ target_link_libraries(TransportTest
-+     testgencpp
-+diff --git a/test/c_glib/CMakeLists.txt b/test/c_glib/CMakeLists.txt
-+index 410774d..cbda860 100644
-+--- a/test/c_glib/CMakeLists.txt
-++++ b/test/c_glib/CMakeLists.txt
-+@@ -21,14 +21,14 @@
-+ include(ThriftMacros)
++diff --git a/test/CMakeLists.txt b/test/CMakeLists.txt
++index afa1352..9bd3b9a 100644
++--- a/test/CMakeLists.txt
+++++ b/test/CMakeLists.txt
++@@ -23,7 +23,7 @@ if (GTK_FOUND)
++   )
++   poppler_add_test(gtk-test BUILD_GTK_TESTS ${gtk_splash_test_SRCS})
++   target_link_libraries(gtk-test ${CAIRO_LIBRARIES} poppler-glib PkgConfig::GTK3)
++-  target_include_directories(gtk-test SYSTEM PRIVATE ${CAIRO_INCLUDE_DIRS})
+++  target_include_directories(gtk-test  PRIVATE ${CAIRO_INCLUDE_DIRS})
 + 
-+ find_package(GLIB REQUIRED COMPONENTS gobject)
-+-include_directories(SYSTEM "${GLIB_INCLUDE_DIR}")
-+-include_directories(SYSTEM "${GLIBCONFIG_INCLUDE_DIR}")
-++set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -idirafter ${GLIB_INCLUDE_DIR}")
-++set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -idirafter ${GLIBCONFIG_INCLUDE_DIR}")
++   if (HAVE_CAIRO)
 + 
-+ #Make sure gen-c_glib files can be included
-+ include_directories("${CMAKE_CURRENT_BINARY_DIR}")
-+ include_directories("${CMAKE_CURRENT_BINARY_DIR}/gen-c_glib")
-+ include_directories("${PROJECT_SOURCE_DIR}/lib/c_glib/src")
-+-include_directories(SYSTEM "${OPENSSL_INCLUDE_DIR}")
-++set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -idirafter ${OPENSSL_INCLUDE_DIR}")
++@@ -35,7 +35,7 @@ if (GTK_FOUND)
++     )
++     poppler_add_test(pdf-inspector BUILD_GTK_TESTS ${pdf_inspector_SRCS})
++     target_link_libraries(pdf-inspector ${CAIRO_LIBRARIES} Freetype::Freetype ${common_libs} PkgConfig::GTK3 poppler)
++-    target_include_directories(pdf-inspector SYSTEM PRIVATE ${CAIRO_INCLUDE_DIRS})
+++    target_include_directories(pdf-inspector  PRIVATE ${CAIRO_INCLUDE_DIRS})
++     target_compile_definitions(pdf-inspector PRIVATE -DSRC_DIR="${CMAKE_CURRENT_SOURCE_DIR}")
++   endif ()
 + 
-+ set(crosstestgencglib_SOURCES
-+ 	gen-c_glib/t_test_second_service.c
-+diff --git a/test/cpp/CMakeLists.txt b/test/cpp/CMakeLists.txt
-+index a6c1fd5..160c67b 100644
-+--- a/test/cpp/CMakeLists.txt
-++++ b/test/cpp/CMakeLists.txt
-+@@ -27,13 +27,13 @@ REQUIRE_BOOST_LIBRARIES(BOOST_COMPONENTS)
-+ include(ThriftMacros)
++@@ -59,7 +59,7 @@ if (HAVE_CAIRO)
++       )
++     add_executable(cairo-thread-test ${cairo_thread_test_SRCS})
++     target_link_libraries(cairo-thread-test ${CAIRO_LIBRARIES} Freetype::Freetype Threads::Threads poppler)
++-    target_include_directories(cairo-thread-test SYSTEM PRIVATE ${CAIRO_INCLUDE_DIRS})
+++    target_include_directories(cairo-thread-test  PRIVATE ${CAIRO_INCLUDE_DIRS})
++   endif ()
++ endif ()
 + 
-+ find_package(OpenSSL REQUIRED)
-+-include_directories(SYSTEM "${OPENSSL_INCLUDE_DIR}")
-++set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -idirafter ${OPENSSL_INCLUDE_DIR}")
-+ 
-+ find_package(Libevent REQUIRED)  # Libevent comes with CMake support from upstream
-+-include_directories(SYSTEM ${LIBEVENT_INCLUDE_DIRS})
-++set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -idirafter ${LIBEVENT_INCLUDE_DIRS}")
-+ 
-+ find_package(ZLIB REQUIRED)
-+-include_directories(SYSTEM ${ZLIB_INCLUDE_DIRS})
-++set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -idirafter ${ZLIB_INCLUDE_DIRS}")
-+ 
-+ #Make sure gen-cpp files can be included
-+ include_directories("${CMAKE_CURRENT_BINARY_DIR}")
++diff --git a/utils/CMakeLists.txt b/utils/CMakeLists.txt
++index 1c3ebcb..bc1840a 100644
++--- a/utils/CMakeLists.txt
+++++ b/utils/CMakeLists.txt
++@@ -16,7 +16,7 @@ add_executable(pdftoppm ${pdftoppm_SOURCES})
++ target_link_libraries(pdftoppm ${common_libs})
++ if(LCMS2_FOUND)
++   target_link_libraries(pdftoppm ${LCMS2_LIBRARIES})
++-  target_include_directories(pdftoppm SYSTEM PRIVATE ${LCMS2_INCLUDE_DIR})
+++  target_include_directories(pdftoppm  PRIVATE ${LCMS2_INCLUDE_DIR})
++ endif()
++ install(TARGETS pdftoppm DESTINATION bin)
++ install(FILES pdftoppm.1 DESTINATION ${CMAKE_INSTALL_MANDIR}/man1)
++@@ -37,10 +37,10 @@ if (HAVE_CAIRO)
++   add_definitions(${CAIRO_CFLAGS})
++   add_executable(pdftocairo ${pdftocairo_SOURCES})
++   target_link_libraries(pdftocairo ${CAIRO_LIBRARIES} Freetype::Freetype ${common_libs})
++-  target_include_directories(pdftocairo SYSTEM PRIVATE ${CAIRO_INCLUDE_DIRS})
+++  target_include_directories(pdftocairo  PRIVATE ${CAIRO_INCLUDE_DIRS})
++   if(LCMS2_FOUND)
++     target_link_libraries(pdftocairo ${LCMS2_LIBRARIES})
++-    target_include_directories(pdftocairo SYSTEM PRIVATE ${LCMS2_INCLUDE_DIR})
+++    target_include_directories(pdftocairo  PRIVATE ${LCMS2_INCLUDE_DIR})
++   endif()
++   install(TARGETS pdftocairo DESTINATION bin)
++   install(FILES pdftocairo.1 DESTINATION ${CMAKE_INSTALL_MANDIR}/man1)
++@@ -99,7 +99,7 @@ if (ENABLE_NSS3)
++     pdfsig.cc
++   )
++   add_executable(pdfsig ${pdfsig_SOURCES})
++-  target_include_directories(pdfsig SYSTEM PRIVATE ${NSS3_INCLUDE_DIRS})
+++  target_include_directories(pdfsig  PRIVATE ${NSS3_INCLUDE_DIRS})
++   target_link_libraries(pdfsig ${common_libs})
++   install(TARGETS pdfsig DESTINATION bin)
++   install(FILES pdfsig.1 DESTINATION ${CMAKE_INSTALL_MANDIR}/man1)
++@@ -114,7 +114,7 @@ add_executable(pdftops ${pdftops_SOURCES})
++ target_link_libraries(pdftops ${common_libs})
++ if(LCMS2_FOUND)
++   target_link_libraries(pdftops ${LCMS2_LIBRARIES})
++-  target_include_directories(pdftops SYSTEM PRIVATE ${LCMS2_INCLUDE_DIR})
+++  target_include_directories(pdftops  PRIVATE ${LCMS2_INCLUDE_DIR})
++ endif()
++ install(TARGETS pdftops DESTINATION bin)
++ install(FILES pdftops.1 DESTINATION ${CMAKE_INSTALL_MANDIR}/man1)
 +-- 
 +2.39.1
 +
-diff --git a/meta-oe/recipes-connectivity/thrift/thrift_0.17.0.bb b/meta-oe/recipes-connectivity/thrift/thrift_0.17.0.bb
-index 24d07b8e52..216af02c42 100644
---- a/meta-oe/recipes-connectivity/thrift/thrift_0.17.0.bb
-+++ b/meta-oe/recipes-connectivity/thrift/thrift_0.17.0.bb
-@@ -10,6 +10,7 @@ DEPENDS = "thrift-native boost flex-native bison-native openssl zlib"
- 
- SRC_URI = "https://www-eu.apache.org/dist/thrift//${PV}/${BPN}-${PV}.tar.gz \
-            file://0001-DefineInstallationPaths.cmake-Define-libdir-in-terms.patch \
-+           file://0001-cmake-Use-idirafter-instead-of-isystem.patch \
-           "
- SRC_URI[sha256sum] = "b272c1788bb165d99521a2599b31b97fa69e5931d099015d91ae107a0b0cc58f"
+diff --git a/meta-oe/recipes-support/poppler/poppler_23.01.0.bb b/meta-oe/recipes-support/poppler/poppler_23.01.0.bb
+index 849c35812d..4d1a089d7b 100644
+--- a/meta-oe/recipes-support/poppler/poppler_23.01.0.bb
++++ b/meta-oe/recipes-support/poppler/poppler_23.01.0.bb
+@@ -6,6 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
+ SRC_URI = "http://poppler.freedesktop.org/${BP}.tar.xz \
+            file://0001-Do-not-overwrite-all-our-build-flags.patch \
+            file://basename-include.patch \
++           file://0001-cmake-Do-not-use-isystem.patch \
+            "
+ SRC_URI[sha256sum] = "fae9b88d3d5033117d38477b79220cfd0d8e252c278ec870ab1832501741fd94"
  
 -- 
 2.39.1
