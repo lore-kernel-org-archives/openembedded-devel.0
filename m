@@ -2,57 +2,57 @@ Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C626DC27C76
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B7CDAC25B4E
 	for <webhook@archiver.kernel.org>; Sun, 22 Jan 2023 15:34:53 +0000 (UTC)
-Received: from mail-oa1-f51.google.com (mail-oa1-f51.google.com [209.85.160.51])
- by mx.groups.io with SMTP id smtpd.web10.20002.1674401687565084367
+Received: from mail-oa1-f45.google.com (mail-oa1-f45.google.com [209.85.160.45])
+ by mx.groups.io with SMTP id smtpd.web11.20191.1674401688136954331
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 22 Jan 2023 07:34:47 -0800
+ Sun, 22 Jan 2023 07:34:48 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=RRXB7t4o;
- spf=pass (domain: gmail.com, ip: 209.85.160.51, mailfrom: akuster808@gmail.com)
-Received: by mail-oa1-f51.google.com with SMTP id 586e51a60fabf-12c8312131fso11537366fac.4
-        for <openembedded-devel@lists.openembedded.org>; Sun, 22 Jan 2023 07:34:47 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=oCrsI4Mt;
+ spf=pass (domain: gmail.com, ip: 209.85.160.45, mailfrom: akuster808@gmail.com)
+Received: by mail-oa1-f45.google.com with SMTP id 586e51a60fabf-15ff0a1f735so3307550fac.5
+        for <openembedded-devel@lists.openembedded.org>; Sun, 22 Jan 2023 07:34:48 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=K+25IteYx/sSJTCN7z7kHHnNrHRl+8Ib5prqZS/ecqI=;
-        b=RRXB7t4o/sObqpTSd8StmjuO3nr37B7WeqrWeFAyZB+lcs1o+jB8iVLqVsZYlaPY3J
-         YLB5B/AZtm6F194VrXnUz2ZpSDhivAfme3BR2dyNPHizxZvAv+rjhsfA1E5c3m4xFzxx
-         +s5GUtiq4jcmdiyMBQt5nZ/w3xK5DdY9sxWLHFLhffhJ4eQ006dWluyPTw26cI9mftW4
-         cLxK0S10KPkfLXlnddf/X5KeY2qfMFYqAbFbEpjebOlup4afcZMO/ZDcGDUoQmmJJdDS
-         tVICxWJNC6qUNAZpG+0RGpoB3+oRXKMFGtY4/Om3aF39s3UhpT7qUe2iBhtBpz3Fhqc5
-         rcgw==
+        bh=6a2pQBRHvKRArzjqqgMa/YO+bY6QhYnDRbNQjOgbWZA=;
+        b=oCrsI4Mte3r9LQEUt08osrXnLD36YyZlOE7NNI0ssUqT93cV9BdF7QzhRsHCFPeaWc
+         DaSgXQnHpMpKQqa/BVN79ozDgZ+090KXzu//8/6b5XOTBSQCkYWkKDpEPRCYu2mPyebh
+         3Ln52no/Xi8/xpnPRRSQeZotfqoD3MaFxmjE23Ac3A+JMs9jVQ6t9FWCRauIThGnbUXo
+         C+wJr4of3ASxtz2HzIu+Zkda50E7BEyJ2zpP62q2f1MP9q5RmXFYx7eNU8oYzlC+IPTp
+         rFE6d69U9FaLzdRP7TXxwV959Fea6xD5PUcMW2kPHQmhZEw0ydlPEm3OA+WayHcrdCeQ
+         DEEg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=K+25IteYx/sSJTCN7z7kHHnNrHRl+8Ib5prqZS/ecqI=;
-        b=kiiYagjY5rAPRNTOtOG8wkCZqmMo0xLhepEZ+ylJvEsMMsKT22tZPgDJlHJa/B0+H9
-         elFZk4J+WhWA8Y/v31R8/yORWQfFJloYHcr4N0poR9tjQ2b+KYvThOHyqGStzsGBIT++
-         FZcSyrs2Hi4l/PHhj+sKyZq2vRueDr1h1xCDVv3g+qBnrLdQjPNq5Mj+tyIRvnQoUeTG
-         VWid0GKVLy1ZU8IyZC8Noxrtf6hDY6d+AKY/JMo+merDdYKyexB/NmsUiIIFU2d9OFY9
-         6+0Fx91BHQpnjClJXsBM8aT0XXZck7GJyCEQcqz4E52JGcNHbuZTxdn4o63wGbz/jjjT
-         yFMA==
-X-Gm-Message-State: AFqh2kpik93ZZ8E5d4/X2v5jGQKIGV0FJf2XJELz9ZisdGMl8zjmCu2i
-	MPli9qQaqW8N+F+nEvyht4icnss3jJI=
-X-Google-Smtp-Source: AMrXdXtdjotBLJ9j+0sfUFqNrISkew35Jl3InrmCfGmfj1aiMnC1Zh1eM7l1wUa0ak1u9LEfTOmmCg==
-X-Received: by 2002:a05:6870:56ac:b0:15e:d2ac:31a0 with SMTP id p44-20020a05687056ac00b0015ed2ac31a0mr12617480oao.18.1674401686562;
-        Sun, 22 Jan 2023 07:34:46 -0800 (PST)
+        bh=6a2pQBRHvKRArzjqqgMa/YO+bY6QhYnDRbNQjOgbWZA=;
+        b=WY9i7iDr5lHIM6caYjqfmv1sYXoIXM6d3rchG+7Z8Ahg5wO7Ug+78yKP2dUSbU4ABw
+         BNmGVnt89s5aZIlOaruSRaNNjP2WcU8oxgVA7OL4YyBOH5jQ/oTG0E0gNknnzLa3/Gsj
+         EWKVo9keuNiQ0Z5o37avT+V7J3qaEfqbQDkcBjfc3DP/Lc65prlE9ar6S5MNN6MZZu9d
+         11cRsJm0DpeH2zfULZkU17N+rETbfWNySElaVGc9iLDYKucSlp0OWsWGhhf/yaVvdx56
+         zsE0jGxzTGexpLvpT5WlieCDC2JAX27wDEVrOz4ZtXjyhAZUR9Cpiq2a97I68Rzlkt5z
+         hPNQ==
+X-Gm-Message-State: AFqh2ko5VWHPjMa3NKTv51kz86KYW92VUv4swvg5vqsxgAh4PMYyHk40
+	Po3crjnD2jEhsh1CPn7tv0atx3l6tx4=
+X-Google-Smtp-Source: AMrXdXuJAA4I//SVdl6EQZUA5SEB2EaQP4yDHsyCQh2bZ1GVQEwr03w1GE91zAVYgh9O6fejHKMm/A==
+X-Received: by 2002:a05:6870:c1cb:b0:15f:1abc:290d with SMTP id i11-20020a056870c1cb00b0015f1abc290dmr13226844oad.41.1674401688320;
+        Sun, 22 Jan 2023 07:34:48 -0800 (PST)
 Received: from keaua.attlocal.net ([2600:1700:9190:ba10:97e4:131:65d9:88d9])
-        by smtp.gmail.com with ESMTPSA id fo42-20020a0568709a2a00b0014f9cc82421sm9228112oab.33.2023.01.22.07.34.45
+        by smtp.gmail.com with ESMTPSA id fo42-20020a0568709a2a00b0014f9cc82421sm9228112oab.33.2023.01.22.07.34.47
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 22 Jan 2023 07:34:46 -0800 (PST)
+        Sun, 22 Jan 2023 07:34:47 -0800 (PST)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Wang Mingyu <wangmy@fujitsu.com>,
+Cc: Yi Zhao <yi.zhao@windriver.com>,
 	Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][langdale][PATCH 4/6] openwsman: upgrade 2.7.1 -> 2.7.2
-Date: Sun, 22 Jan 2023 10:34:40 -0500
-Message-Id: <20230122153442.213094-4-akuster808@gmail.com>
+Subject: [meta-oe][langdale][PATCH 6/6] strongswan: upgrade 5.9.8 -> 5.9.9
+Date: Sun, 22 Jan 2023 10:34:42 -0500
+Message-Id: <20230122153442.213094-6-akuster808@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20230122153442.213094-1-akuster808@gmail.com>
 References: <20230122153442.213094-1-akuster808@gmail.com>
@@ -62,54 +62,38 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sun, 22 Jan 2023 15:34:53 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100705
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100707
 
-From: Wang Mingyu <wangmy@fujitsu.com>
+From: Yi Zhao <yi.zhao@windriver.com>
 
 Changelog:
-==========
-- Security
-  - call setgroups before setuid or setgid
-  - harden systemd service (https://en.opensuse.org/openSUSE:Security_Features#Systemd_hardening_effort)
-- Bugfixes
-  - wsman-win-client-transport: initialize certificate pointer
-  - iniparser: fix buffer size
-  - wsman-win-client-transport: plug leak in error path
-  - memory.c: fix memory cleanup
-  - Improve handling of HTTP 401 Unauthorized
-  - Fix serialization tests
-  - Fix Ruby bindings warnings
-  - Fix Ruby plugin loading test
-  - Fix rpm packaging
-  - Allow to run tests from 'build' directory
-  - Add Python XML test
-  - Enable CUNIT tests
+https://github.com/strongswan/strongswan/releases/tag/5.9.9
 
-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit bdbb3eeb2bfaf2a03dd6ab2a2024775ab28306a7)
+(cherry picked from commit 6cca42d726c333b5955c6f4e46395b9578efce2e)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../openwsman/{openwsman_2.7.1.bb => openwsman_2.7.2.bb}        | 2 +-
+ .../strongswan/{strongswan_5.9.8.bb => strongswan_5.9.9.bb}     | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-extended/openwsman/{openwsman_2.7.1.bb => openwsman_2.7.2.bb} (98%)
+ rename meta-networking/recipes-support/strongswan/{strongswan_5.9.8.bb => strongswan_5.9.9.bb} (99%)
 
-diff --git a/meta-oe/recipes-extended/openwsman/openwsman_2.7.1.bb b/meta-oe/recipes-extended/openwsman/openwsman_2.7.2.bb
-similarity index 98%
-rename from meta-oe/recipes-extended/openwsman/openwsman_2.7.1.bb
-rename to meta-oe/recipes-extended/openwsman/openwsman_2.7.2.bb
-index 7fc5d4218f..84a00df8e7 100644
---- a/meta-oe/recipes-extended/openwsman/openwsman_2.7.1.bb
-+++ b/meta-oe/recipes-extended/openwsman/openwsman_2.7.2.bb
-@@ -15,7 +15,7 @@ DEPENDS = "curl libxml2 openssl libpam"
- inherit features_check
- REQUIRED_DISTRO_FEATURES = "pam"
+diff --git a/meta-networking/recipes-support/strongswan/strongswan_5.9.8.bb b/meta-networking/recipes-support/strongswan/strongswan_5.9.9.bb
+similarity index 99%
+rename from meta-networking/recipes-support/strongswan/strongswan_5.9.8.bb
+rename to meta-networking/recipes-support/strongswan/strongswan_5.9.9.bb
+index 266d43aa6f..a11cd5a6cc 100644
+--- a/meta-networking/recipes-support/strongswan/strongswan_5.9.8.bb
++++ b/meta-networking/recipes-support/strongswan/strongswan_5.9.9.bb
+@@ -11,7 +11,7 @@ DEPENDS:append = "${@bb.utils.contains('DISTRO_FEATURES', 'tpm2', '  tpm2-tss',
+ SRC_URI = "http://download.strongswan.org/strongswan-${PV}.tar.bz2 \
+            "
  
--SRCREV = "6cdf3bee50388d8e5f70850322a4df57fd685a5e"
-+SRCREV = "0120e256faa255d997d9a49d5207662c0b73d430"
+-SRC_URI[sha256sum] = "d3303a43c0bd7b75a12b64855e8edcb53696f06190364f26d1533bde1f2e453c"
++SRC_URI[sha256sum] = "5e16580998834658c17cebfb31dd637e728669cf2fdd325460234a4643b8d81d"
  
- SRC_URI = "git://github.com/Openwsman/openwsman.git;branch=master;protocol=https \
-            file://libssl-is-required-if-eventint-supported.patch \
+ UPSTREAM_CHECK_REGEX = "strongswan-(?P<pver>\d+(\.\d+)+)\.tar"
+ 
 -- 
 2.25.1
 
