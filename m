@@ -1,95 +1,87 @@
-Return-Path: <randy.macleod@windriver.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C4D95C27C76
-	for <webhook@archiver.kernel.org>; Sun, 22 Jan 2023 01:03:59 +0000 (UTC)
-Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.web10.10286.1674349433607594233
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 869DAC54EAA
+	for <webhook@archiver.kernel.org>; Sun, 22 Jan 2023 07:29:41 +0000 (UTC)
+Received: from mail-pj1-f51.google.com (mail-pj1-f51.google.com [209.85.216.51])
+ by mx.groups.io with SMTP id smtpd.web10.14413.1674372575900773040
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 21 Jan 2023 17:03:53 -0800
+ Sat, 21 Jan 2023 23:29:35 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=pps06212021 header.b=AlDBU109;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=038692d17f=randy.macleod@windriver.com)
-Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 30M10ILD012553
-	for <openembedded-devel@lists.openembedded.org>; Sat, 21 Jan 2023 17:03:53 -0800
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com; h=from : to :
- subject : date : message-id : in-reply-to : references : mime-version :
- content-transfer-encoding : content-type; s=PPS06212021;
- bh=q+gJJLF14NuA9OczqTCDiFCRDZzvuqVvjRqmKStWtsg=;
- b=AlDBU109k8OaWcZ+7bY6BwOON0aRq2MVOHiIhyAJgZm/eeL63usLpvG5plYZrrQ1hAwy
- 9xf7Mb8cNuDXDF7JUOZT2BlcWr9M05B9l7VcYywgWb6xdi2GEVdMo3So/o+cHuEWEL8f
- 6gZtCEiF4IJcYXJcyYk6yZdMeThEZiQP9rG3ombzK/sownJEgJpp7aAGu8w5779lbdLT
- 86NBmjHr4tbX2XoHfL0GLEGn+QTRhYoMy6Of0MYztnDk+nP+1691UYLuGbTHuhX0BZW9
- uM2PslUV8DdnDdSebPvcjJgbmej7TqmD9/5/+9dfhLeelSfnvKo5rhOUsGojjx8km6nC rw== 
-Received: from ala-exchng01.corp.ad.wrs.com (unknown-82-252.windriver.com [147.11.82.252])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3n8geqrfpu-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Sat, 21 Jan 2023 17:03:53 -0800
-Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.17; Sat, 21 Jan 2023 17:03:51 -0800
-Received: from yow-fedora-builder1.wrs.com (128.224.56.212) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
- 15.1.2507.17 via Frontend Transport; Sat, 21 Jan 2023 17:03:51 -0800
-From: Randy MacLeod <randy.macleod@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-oe][PATCH 2/2] rsyslog: update to 8.2212.0
-Date: Sat, 21 Jan 2023 20:03:51 -0500
-Message-ID: <20230122010351.2741378-2-randy.macleod@windriver.com>
-X-Mailer: git-send-email 2.39.0
-In-Reply-To: <20230122010351.2741378-1-randy.macleod@windriver.com>
-References: <20230122010351.2741378-1-randy.macleod@windriver.com>
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=ZJ6PAfFL;
+ spf=pass (domain: gmail.com, ip: 209.85.216.51, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f51.google.com with SMTP id y3-20020a17090a390300b00229add7bb36so8569364pjb.4
+        for <openembedded-devel@lists.openembedded.org>; Sat, 21 Jan 2023 23:29:35 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=lhp3P25j7m9MeBFxGBKOPUkkXQyUjDD6pl2XAbMt/c4=;
+        b=ZJ6PAfFL2KmcZ8lHhZ6M1NDc7tO/I6JiXbmYt5LHvGkf4Ro601AqpSO9Q4+WwXwqnp
+         RUOW7mMIruJ2Hm8pF3xXMzmqpnv4Tuf97K2lSH0lZh4CpGu7EXnnGRKhoae0R8iFHq3U
+         H9rBdOpP6C9oJSnHuBOok5NQtnF0MlFRs8dVHlrv0LB/diaaBcaMAeRHmQZ6zAxHujKp
+         vrCvUWdpKzzMvyD2O9w+RXoEqCsY3YY6iF5Z/5UfMCEfTsa0eXRP6AODYotkwU6ZNPjo
+         dHdyEeODMYMoZvKwI7qnHA7KgJC0N/6TjpWTRKHq1PyeyWmgYchYnlS512hvTnIxj6US
+         67Ug==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=lhp3P25j7m9MeBFxGBKOPUkkXQyUjDD6pl2XAbMt/c4=;
+        b=pUzT4ktd/hsjhEejTRvaS6lsHLomBGaNdQu4r3ulameMWEzpHgqymFQxCvUrkGTfLf
+         OxX9lXzt09YAljsX4jjoIRg4ezeO1Xn73ON2bTjIrtITImXBsENHiKRYnJWTlNgg1fd/
+         cWTNAXCFIbQUCM9IRr29SuF9xGfVZJ0vFuXGSD2GjapAcM0iKId/Dun+ejZEfCKlKEfY
+         o2+lEUaFqJOhqAhCAMspG9xV+N0ozN/5VjOCXUdLFsa2mDrAYH20mT1llnAbytjsG1JL
+         JKjZf+i9kaUAFAL5aLQ1FaHa9cjl6+ea0qKPUFCSvoqfX0fDbIJZHinlf3r68zTAF/2M
+         alDA==
+X-Gm-Message-State: AFqh2krqt0PZF2hHwnHBW0tL8iaTDQ1GlpmY0lhP3jSPUPkfuISzCpis
+	3P5LPD7taMyHtULo2m0lc4s6GKwHtacVOQ==
+X-Google-Smtp-Source: AMrXdXuYy4HdCkcDVTe56FuekWfHT+gB1Hxx4iHH/0qg42gB1vku0rBf1L5nNVFFKWr80F8iHOQmxw==
+X-Received: by 2002:a17:902:cec7:b0:191:3993:801e with SMTP id d7-20020a170902cec700b001913993801emr27061871plg.56.1674372575164;
+        Sat, 21 Jan 2023 23:29:35 -0800 (PST)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9181:1cf0::aee3])
+        by smtp.gmail.com with ESMTPSA id u12-20020a17090341cc00b001888cadf8f6sm11084998ple.49.2023.01.21.23.29.34
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sat, 21 Jan 2023 23:29:34 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 2/2] sdbus-c++: Disable ccache
+Date: Sat, 21 Jan 2023 23:29:32 -0800
+Message-Id: <20230122072932.1721979-2-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.39.1
+In-Reply-To: <20230122072932.1721979-1-raj.khem@gmail.com>
+References: <20230122072932.1721979-1-raj.khem@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Proofpoint-ORIG-GUID: yVlDy_4hFDSq4RcfK18PyZb_jB5zidju
-X-Proofpoint-GUID: yVlDy_4hFDSq4RcfK18PyZb_jB5zidju
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.219,Aquarius:18.0.930,Hydra:6.0.562,FMLib:17.11.122.1
- definitions=2023-01-21_17,2023-01-20_01,2022-06-22_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 adultscore=0 malwarescore=0
- mlxscore=0 priorityscore=1501 spamscore=0 suspectscore=0
- lowpriorityscore=0 mlxlogscore=962 phishscore=0 impostorscore=0
- clxscore=1015 bulkscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2212070000 definitions=main-2301220007
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 22 Jan 2023 01:03:59 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100698
+ <openembedded-devel@lists.openembedded.org>; Sun, 22 Jan 2023 07:29:41 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100701
 
-ptest results for qemux86-64/kvm with extra FS space and 1 GB RAM:
+It adds spurious -isystem from somewhere else
 
-   Version | Passed | Failed | Skipped
-    8.2208 | 465    |      1 |       5
-    8.2212 | 470    |      0 |       5
-
-Signed-off-by: Randy MacLeod <randy.macleod@windriver.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../rsyslog/{rsyslog_8.2208.0.bb => rsyslog_8.2212.0.bb}        | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-extended/rsyslog/{rsyslog_8.2208.0.bb => rsyslog_8.2212.0.bb} (98%)
+ meta-oe/recipes-core/sdbus-c++/sdbus-c++_1.2.0.bb | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/meta-oe/recipes-extended/rsyslog/rsyslog_8.2208.0.bb b/meta-oe/recipes-extended/rsyslog/rsyslog_8.2212.0.bb
-similarity index 98%
-rename from meta-oe/recipes-extended/rsyslog/rsyslog_8.2208.0.bb
-rename to meta-oe/recipes-extended/rsyslog/rsyslog_8.2212.0.bb
-index 5b30ecabb..ed65bed0d 100644
---- a/meta-oe/recipes-extended/rsyslog/rsyslog_8.2208.0.bb
-+++ b/meta-oe/recipes-extended/rsyslog/rsyslog_8.2212.0.bb
-@@ -31,7 +31,7 @@ SRC_URI:append:libc-musl = " \
-     file://0001-Include-sys-time-h.patch \
- "
- 
--SRC_URI[sha256sum] = "14de68e7b8e5ab0c5d734f82e2dc9fff22cd7f4710ad690727eb10a7b9b3df5e"
-+SRC_URI[sha256sum] = "53b59a872e3dc7384cdc149abe9744916776f7057d905f3df6722d2eb1b04f35"
- 
- UPSTREAM_CHECK_URI = "https://github.com/rsyslog/rsyslog/releases"
- UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
+diff --git a/meta-oe/recipes-core/sdbus-c++/sdbus-c++_1.2.0.bb b/meta-oe/recipes-core/sdbus-c++/sdbus-c++_1.2.0.bb
+index 75cd815535..2fb975ced6 100644
+--- a/meta-oe/recipes-core/sdbus-c++/sdbus-c++_1.2.0.bb
++++ b/meta-oe/recipes-core/sdbus-c++/sdbus-c++_1.2.0.bb
+@@ -42,3 +42,6 @@ do_install:append() {
+ PTEST_PATH = "${libdir}/${BPN}/tests"
+ FILES:${PN}-ptest =+ "${sysconfdir}/dbus-1/system.d/"
+ FILES:${PN}-dev += "${bindir}/sdbus-c++-xml2cpp"
++
++# It adds -isystem which is spurious, no idea where it gets it from
++CCACHE_DISABLE = "1"
 -- 
-2.39.0
+2.39.1
 
 
