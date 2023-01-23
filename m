@@ -2,68 +2,68 @@ Return-Path: <hprajapati@mvista.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 52C10C05027
-	for <webhook@archiver.kernel.org>; Mon, 23 Jan 2023 04:34:37 +0000 (UTC)
-Received: from mail-pl1-f171.google.com (mail-pl1-f171.google.com [209.85.214.171])
- by mx.groups.io with SMTP id smtpd.web10.35586.1674448469873983068
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 72B7DC05027
+	for <webhook@archiver.kernel.org>; Mon, 23 Jan 2023 04:53:47 +0000 (UTC)
+Received: from mail-pl1-f172.google.com (mail-pl1-f172.google.com [209.85.214.172])
+ by mx.groups.io with SMTP id smtpd.web10.35802.1674449625434143616
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 22 Jan 2023 20:34:29 -0800
+ Sun, 22 Jan 2023 20:53:45 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@mvista.com header.s=google header.b=j3U62o1/;
- spf=pass (domain: mvista.com, ip: 209.85.214.171, mailfrom: hprajapati@mvista.com)
-Received: by mail-pl1-f171.google.com with SMTP id z13so10254428plg.6
-        for <openembedded-devel@lists.openembedded.org>; Sun, 22 Jan 2023 20:34:29 -0800 (PST)
+ dkim=pass header.i=@mvista.com header.s=google header.b=gI6baKIy;
+ spf=pass (domain: mvista.com, ip: 209.85.214.172, mailfrom: hprajapati@mvista.com)
+Received: by mail-pl1-f172.google.com with SMTP id jm10so10245832plb.13
+        for <openembedded-devel@lists.openembedded.org>; Sun, 22 Jan 2023 20:53:45 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=mvista.com; s=google;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=j/jhw7461iFx8vfE+DKiCcyuvZJH5OfULv47LwJ2cVU=;
-        b=j3U62o1/8v/kYbaMNYddwx7OOU1iYzQdbZGTFTGsXMs6o305ZJzEAE9N5gZ3IQW3tu
-         v95E3FtXupd8XOykb6yNY88guLC6xvbOQkqXTtPj5UOdheEUieL8juNAjzE3f27oMHbl
-         91cS49BimqfWtQY76cVlivKsEdp73+BLkCtjI=
+        bh=WQ+tCYZihp/H6qYmJsn0zFc5HWqNgW8Gb2G81oRloBY=;
+        b=gI6baKIyqjDLFhGanbiU6XsEB6+VnMiOoPzSHYnOaDL8igRCq1pvsTvBb+T59oiJPV
+         3ai8X2Ax5gFqumHyzq51oKP0Fgu3+8OW7P401XugkI0uXaIgwZzVKkCl1/Zs1w14pEI3
+         mF5IY6cKttPJ2K34kzN7VM4IxY3p5Co3LRATs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=j/jhw7461iFx8vfE+DKiCcyuvZJH5OfULv47LwJ2cVU=;
-        b=K/Xf7QWgoGqXUsljJZn5OB/Bny5Yn5G5yiS/7szX3fb/ER1e5vb/1sMg4IXHcmeHiF
-         W7fx9C28LvHvoiqVIgRLbWYlJ/RFXGiFfnEP8qjoGwCSC+0mDn1m0HziFJH1124TC+VK
-         hGdWksPG5Xtqe8zErucwI3GwaNCg480vgKEp3WqlVPgCnd6S81TE7AF4E8WJ+c8sB5aH
-         FnKZeu0o+P3CmRJHBtDZmI+/dfK2GCJhknFybuLC1levVdumsePlajwyxpqYgeNx4a6w
-         Nn4e8SSMpFdjhM8HeJQgnz8q9GmH+RoMro/o9yW/6n0pmdhwnP/MsN+dEeGtNz4MRp56
-         epXA==
-X-Gm-Message-State: AFqh2kqdO7UF2eKGAnAqTKGsrzogqchrQhP1LYeFgT8cIxKYE45DQLG6
-	HwRLGH5K/GcrwvUFL2z/148KUJwaTzMWVO9K
-X-Google-Smtp-Source: AMrXdXvELG/NBknq6+JucTR/o6hnXTF2tLm8PsGyHeJXXzNF0JLSgWQCCp6eIlw9Lu0iWubcRQo9sg==
-X-Received: by 2002:a17:903:182:b0:194:7532:fb10 with SMTP id z2-20020a170903018200b001947532fb10mr31412122plg.40.1674448469161;
-        Sun, 22 Jan 2023 20:34:29 -0800 (PST)
+        bh=WQ+tCYZihp/H6qYmJsn0zFc5HWqNgW8Gb2G81oRloBY=;
+        b=Wgql8qYgglR4A7iCmLSNkc+gJ2fck2aMz4Ne2V0PZ9p+jK2LtwMcgi+/p5OFtAzr+s
+         CCMDRHCH4sfwWOCuB6VQPAh1NslX1+yLMo8hlFfROGto4SS3BWX1Ms882b8RUY2wM3a6
+         WRR2/RmpMYnY3OM+s5BCoF74XRVhURpe4maG0ebxH9d6KN8EPOrdQZQPEu3LOEmiSmR4
+         XSuYv1DWB1iOLro7uzuf245soRMNZJjY3OFKYpwnxFwqN9iXcTgSwPj4/Q3QMJongYMH
+         nigo4/h0hqMNfIJUzShq9boBljwaAxDR/DUsqQXwjTDZR4adZd9ujtj1dr3Wjw1NHJDL
+         PY2A==
+X-Gm-Message-State: AFqh2kqd/kC7J7VHjS/t6LVcUjtDWccsniFNbsvTQPC0TCRCX2dpTX30
+	2S42ET1bcX6OXJNJpEKLOiLRqcm1GogPGpDv
+X-Google-Smtp-Source: AMrXdXsyhor6VnxeLJ1c1uNP7SQuSpX4riJtaPrg4XXt3bWyvBL2iFSR2zqOmrjBA19Yn0PkMHOpTg==
+X-Received: by 2002:a17:903:2306:b0:194:7b59:bfe4 with SMTP id d6-20020a170903230600b001947b59bfe4mr36433582plh.54.1674449624732;
+        Sun, 22 Jan 2023 20:53:44 -0800 (PST)
 Received: from MVIN00024 ([103.250.136.192])
-        by smtp.gmail.com with ESMTPSA id m7-20020a170902db0700b001947b3ec2d7sm16696036plx.307.2023.01.22.20.34.26
+        by smtp.gmail.com with ESMTPSA id t17-20020a170902e85100b0018f6900a183sm17773971plg.140.2023.01.22.20.53.42
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 22 Jan 2023 20:34:28 -0800 (PST)
-Received: by MVIN00024 (sSMTP sendmail emulation); Mon, 23 Jan 2023 10:04:23 +0530
+        Sun, 22 Jan 2023 20:53:44 -0800 (PST)
+Received: by MVIN00024 (sSMTP sendmail emulation); Mon, 23 Jan 2023 10:23:39 +0530
 From: Hitendra Prajapati <hprajapati@mvista.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Hitendra Prajapati <hprajapati@mvista.com>
-Subject: [meta-oe][kirkstone][PATCH] krb5: CVE-2022-42898 integer overflow vulnerabilities in PAC parsing
-Date: Mon, 23 Jan 2023 10:04:22 +0530
-Message-Id: <20230123043422.6120-1-hprajapati@mvista.com>
+Subject: [meta-oe][dunfell][PATCH] krb5: CVE-2022-42898 integer overflow vulnerabilities in PAC parsing
+Date: Mon, 23 Jan 2023 10:23:37 +0530
+Message-Id: <20230123045337.6914-1-hprajapati@mvista.com>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 23 Jan 2023 04:34:37 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100709
+ <openembedded-devel@lists.openembedded.org>; Mon, 23 Jan 2023 04:53:47 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100710
 
 Upstream-Status: Backport from https://github.com/krb5/krb5/commit/4e661f0085ec5f969c76c0896a34322c6c432de4
 
 Signed-off-by: Hitendra Prajapati <hprajapati@mvista.com>
 ---
  .../krb5/krb5/CVE-2022-42898.patch            | 110 ++++++++++++++++++
- .../recipes-connectivity/krb5/krb5_1.17.2.bb  |   1 +
+ .../recipes-connectivity/krb5/krb5_1.17.1.bb  |   1 +
  2 files changed, 111 insertions(+)
  create mode 100644 meta-oe/recipes-connectivity/krb5/krb5/CVE-2022-42898.patch
 
@@ -183,18 +183,18 @@ index 0000000000..6d04bf8980
 +-- 
 +2.25.1
 +
-diff --git a/meta-oe/recipes-connectivity/krb5/krb5_1.17.2.bb b/meta-oe/recipes-connectivity/krb5/krb5_1.17.2.bb
-index 6e0b2fdacb..cabae374e1 100644
---- a/meta-oe/recipes-connectivity/krb5/krb5_1.17.2.bb
-+++ b/meta-oe/recipes-connectivity/krb5/krb5_1.17.2.bb
-@@ -32,6 +32,7 @@ SRC_URI = "http://web.mit.edu/kerberos/dist/${BPN}/${SHRT_VER}/${BP}.tar.gz \
+diff --git a/meta-oe/recipes-connectivity/krb5/krb5_1.17.1.bb b/meta-oe/recipes-connectivity/krb5/krb5_1.17.1.bb
+index ae58e2df35..ebcfbc524c 100644
+--- a/meta-oe/recipes-connectivity/krb5/krb5_1.17.1.bb
++++ b/meta-oe/recipes-connectivity/krb5/krb5_1.17.1.bb
+@@ -31,6 +31,7 @@ SRC_URI = "http://web.mit.edu/kerberos/dist/${BPN}/${SHRT_VER}/${BP}.tar.gz \
+            file://krb5-kdc.service \
             file://krb5-admin-server.service \
-            file://CVE-2021-36222.patch;striplevel=2 \
-            file://CVE-2021-37750.patch;striplevel=2 \
+            file://CVE-2021-36222.patch \
 +           file://CVE-2022-42898.patch;striplevel=2 \
  "
- SRC_URI[md5sum] = "aa4337fffa3b61f22dbd0167f708818f"
- SRC_URI[sha256sum] = "1a4bba94df92f6d39a197a10687653e8bfbc9a2076e129f6eb92766974f86134"
+ SRC_URI[md5sum] = "417d654c72526ac51466e7fe84608878"
+ SRC_URI[sha256sum] = "3706d7ec2eaa773e0e32d3a87bf742ebaecae7d064e190443a3acddfd8afb181"
 -- 
 2.25.1
 
