@@ -1,144 +1,205 @@
-Return-Path: <akuster808@gmail.com>
+Return-Path: <hprajapati@mvista.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D1597C61D97
-	for <webhook@archiver.kernel.org>; Sun, 22 Jan 2023 15:34:53 +0000 (UTC)
-Received: from mail-oa1-f42.google.com (mail-oa1-f42.google.com [209.85.160.42])
- by mx.groups.io with SMTP id smtpd.web10.19999.1674401685723574769
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4EE82C05027
+	for <webhook@archiver.kernel.org>; Mon, 23 Jan 2023 04:25:17 +0000 (UTC)
+Received: from mail-pj1-f52.google.com (mail-pj1-f52.google.com [209.85.216.52])
+ by mx.groups.io with SMTP id smtpd.web11.35888.1674447912438296627
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 22 Jan 2023 07:34:45 -0800
+ Sun, 22 Jan 2023 20:25:12 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=YmP0hXOe;
- spf=pass (domain: gmail.com, ip: 209.85.160.42, mailfrom: akuster808@gmail.com)
-Received: by mail-oa1-f42.google.com with SMTP id 586e51a60fabf-1433ef3b61fso11494418fac.10
-        for <openembedded-devel@lists.openembedded.org>; Sun, 22 Jan 2023 07:34:45 -0800 (PST)
+ dkim=pass header.i=@mvista.com header.s=google header.b=XOfsS7vB;
+ spf=pass (domain: mvista.com, ip: 209.85.216.52, mailfrom: hprajapati@mvista.com)
+Received: by mail-pj1-f52.google.com with SMTP id v6-20020a17090ad58600b00229eec90a7fso5828548pju.0
+        for <openembedded-devel@lists.openembedded.org>; Sun, 22 Jan 2023 20:25:12 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=2QuA/D9Q3gXv7EIzg2b0nICPbXm6hohoJswmf+IEzlM=;
-        b=YmP0hXOeJ657mf30RTMqb2FxqFf3LbENJrmpAocN9n0uyCBnrmEvk7Iskn9nrh2EoU
-         GnDmPPGqwFe1Meie/coSQGuMSn/5Dl3iT71b2GyEXGzdHSsjJYhkbhP0hS9Ia+BCS1b7
-         N6Qw8TE+ODmCZUezvmlxDql0/zaiwwNAfI4seUi66po5IC2uWevOWkIrWLGv2Kr7Nub6
-         WRn8JxU74WA373cuY+5E+mEq88LCuvaGQUDfn2c7mKnj9LdMk9h8i8ZRMiLPapcWNEin
-         cbAtgqhqW2B+U2uY1kL+IW9UYhOXsEXvbFBe9eYnQxsQeGbBcp2K97wmEHuiewq9OmEK
-         CkhA==
+        d=mvista.com; s=google;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=ofMT21aokGxESoEQ7X1qKWxziu1rri5PhmxaFdLpELU=;
+        b=XOfsS7vB1qMOd2UXmggLSIMT/L1T59TDcQJ3NEEGOaCqPuP6Lqa8BJQ7s1Gt7XqD9s
+         CsVr42Iy6SQ1YZ6X4PPshjzZNIbYMuPPA9qSZl+WM4YYqEGevZieC7FMDznEVQf+qEIy
+         DlTg0l7yfRFPVvvgFJ3ZAcJZKb/UoMTklkkVI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=2QuA/D9Q3gXv7EIzg2b0nICPbXm6hohoJswmf+IEzlM=;
-        b=LSBnRoe4iZ5nhMWbHGvzLbMtNSr32HjROiFJGxsHrKCfiHhijlCEtArbkF6X0SW6s8
-         +qlbDzBrD/KY+Srlk1nT0wUY9iLBQOM1eqEPXhxArDyIgXRaFODZEsHW/r+79ynkLQBA
-         WYB3ZGsTuUSRcNDgcqdetGd2b92MH1ngMrLRsVqME9kZjPGJnQWVqyQtaWdeoELQrIUn
-         D3B2s0f4OOwZBamUWFFpEX2ww4BjyESLW820WQnGSMrdXu9sAiG7/trG71Ac89lw46tB
-         vfyvZUX9swhfhOXYSfIZD200e52oeD+hiPXCkpVburDRRt27MQxew4dnPg4HO73MQV1+
-         sGIQ==
-X-Gm-Message-State: AFqh2krAMJN/3s7XdBM4rvMsQPnbYrD9Mfr65sP0s3zaPnGG64gbD8N9
-	g9hRvVI8M/G2eB9qclpqxldBTo3Uc6E=
-X-Google-Smtp-Source: AMrXdXujK0DTZ7ifSe5bQZXDux0cHxY3urT1oK7qAhrIR1VKlGs5Yu2wBmW3BJRjLEV/htJN9BsmUQ==
-X-Received: by 2002:a05:6870:a919:b0:15f:c8d1:987 with SMTP id eq25-20020a056870a91900b0015fc8d10987mr4341873oab.21.1674401684939;
-        Sun, 22 Jan 2023 07:34:44 -0800 (PST)
-Received: from keaua.attlocal.net ([2600:1700:9190:ba10:97e4:131:65d9:88d9])
-        by smtp.gmail.com with ESMTPSA id fo42-20020a0568709a2a00b0014f9cc82421sm9228112oab.33.2023.01.22.07.34.44
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=ofMT21aokGxESoEQ7X1qKWxziu1rri5PhmxaFdLpELU=;
+        b=m0EmdYGt7YFxAXCZjt4xntAWNhpCAnBWp8Hg4QN0g6Tc+Yxjm4z+/JhTb+lTyGNbT2
+         IxS1KGrVtEEPPpqJhFEO95ejBWCDYEpvTE9aFWPHrJuMENAtW3k3VVkshfUnzLeyHDUX
+         Dy2a0umrqyItzgOBz3pQPEhlOkv3Dyf6qFjX65XIUSTqYbDKYK9zuHP0dDPfPnPjlmuE
+         S5m2egpNEztle4+9lOzwxOkQ5wCIOvmQru7g1+LE7x+wem4oLIo06UU8/wny7v2PldNR
+         staKjVwr+ByfbdTcJ5Tf8H6+bF8JjztIjVoBRy39QPEb+T96b0x6bZ1wizJPuQbXIGDa
+         RRcw==
+X-Gm-Message-State: AFqh2kq4TF+N2NcGjc6Emho+T40gANqmTf4GarTAGKMLvuTfhwsFD8S1
+	SJYo67N8QygnwzP2Lyja2WenOtNGjEZt1gXj
+X-Google-Smtp-Source: AMrXdXtOjc1dUM9JIsU/D8QaLRKXY1gBWaOIcUBz88qOq0DjYb+BSTcEalrbf+bi+261rFhlkmGhNw==
+X-Received: by 2002:a05:6300:818b:b0:af:e893:fa52 with SMTP id bt11-20020a056300818b00b000afe893fa52mr23309031pzc.22.1674447911428;
+        Sun, 22 Jan 2023 20:25:11 -0800 (PST)
+Received: from MVIN00024 ([103.250.136.192])
+        by smtp.gmail.com with ESMTPSA id j3-20020a170902690300b00193020e8a90sm1550578plk.294.2023.01.22.20.25.08
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 22 Jan 2023 07:34:44 -0800 (PST)
-From: Armin Kuster <akuster808@gmail.com>
+        Sun, 22 Jan 2023 20:25:11 -0800 (PST)
+Received: by MVIN00024 (sSMTP sendmail emulation); Mon, 23 Jan 2023 09:55:06 +0530
+From: Hitendra Prajapati <hprajapati@mvista.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Chen Qi <Qi.Chen@windriver.com>,
-	Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][langdale][PATCH 2/6] networkmanager: fix /etc/resolv.conf handling
-Date: Sun, 22 Jan 2023 10:34:38 -0500
-Message-Id: <20230122153442.213094-2-akuster808@gmail.com>
+Cc: Hitendra Prajapati <hprajapati@mvista.com>
+Subject: [meta-networking][kirkstone][PATCH] net-snmp: CVE-2022-44792 & CVE-2022-44793 Fix NULL Pointer Exception
+Date: Mon, 23 Jan 2023 09:55:04 +0530
+Message-Id: <20230123042504.5665-1-hprajapati@mvista.com>
 X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20230122153442.213094-1-akuster808@gmail.com>
-References: <20230122153442.213094-1-akuster808@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 22 Jan 2023 15:34:53 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100703
+ <openembedded-devel@lists.openembedded.org>; Mon, 23 Jan 2023 04:25:17 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100708
 
-From: Chen Qi <Qi.Chen@windriver.com>
+Upstream-Status: Backport from https://github.com/net-snmp/net-snmp/commit/be804106fd0771a7d05236cff36e199af077af57
 
-The current handling of /etc/resolv.conf by NM has some problems.
-When networkd is not configuring network, and there's 'ip=dhcp'
-in kernel command line, the /run/NetworkManager/resolv.conf file
-is not created, resulting in /etc/resolv.conf being a dead symlink.
-This is because NM is treating the network interface as externally
-configured and will not try to reconfigure it again.
-
-This means if we want NM to work properly with /etc/resolv.conf,
-we've got to either ensure there's no 'ip=dhcp' in kernel command
-line, or we've got to ensure networkd is configuring network. This
-is weird because normally we should not enable two network managers
-at the same time. Note that NM syncs part of its codes with networkd,
-which is the reason I think it happens to work when these two network
-configuration tools are configuring the same interface at the same
-time.
-
-In fact, NM now works well with resolved. It sends the DNS info it
-gets to resolved unconditionally by default (the behavior could be
-disabled in configuration file).
-
-Looking at the original commit that sets up the update-alternatives
-mechanism, it says:
-"""
-  This brings the networkmanager in sync with how systemd-resolved and connman
-  work. Additionally this allows it to function with a read-only rootFS.
-"""
-I guess the author was using systemd but disabling resolved, and the author
-wanted to use read-only rootFS. In order to keep such combination still works,
-change to use PACKAGECONFIG to handle things, and when 'man-resolv-conf' is
-enabled, the above combination could still work.
-
-Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit a8ebf23dde9c82dd9d1dcd0fa6de0b4467a0112b)
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
+Signed-off-by: Hitendra Prajapati <hprajapati@mvista.com>
 ---
- .../networkmanager/networkmanager_1.40.0.bb            | 10 ++++++----
- 1 file changed, 6 insertions(+), 4 deletions(-)
+ .../CVE-2022-44792-CVE-2022-44793.patch       | 116 ++++++++++++++++++
+ .../net-snmp/net-snmp_5.9.3.bb                |   1 +
+ 2 files changed, 117 insertions(+)
+ create mode 100644 meta-networking/recipes-protocols/net-snmp/net-snmp/CVE-2022-44792-CVE-2022-44793.patch
 
-diff --git a/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.40.0.bb b/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.40.0.bb
-index b9273ac89e..801739170b 100644
---- a/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.40.0.bb
-+++ b/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.40.0.bb
-@@ -107,6 +107,8 @@ PACKAGECONFIG[vala] = "-Dvapi=true,-Dvapi=false"
- PACKAGECONFIG[dhcpcd] = "-Ddhcpcd=${base_sbindir}/dhcpcd,-Ddhcpcd=no,,dhcpcd"
- PACKAGECONFIG[dhclient] = "-Ddhclient=yes,-Ddhclient=no,,dhcp"
- PACKAGECONFIG[concheck] = "-Dconcheck=true,-Dconcheck=false"
-+# The following PACKAGECONFIG is used to determine whether NM is managing /etc/resolv.conf itself or not
-+PACKAGECONFIG[man-resolv-conf] = ",,"
- 
- 
- PACKAGES =+ " \
-@@ -258,9 +260,9 @@ SYSTEMD_SERVICE:${PN}-daemon = "\
- "
- RCONFLICTS:${PN}-daemon += "connman"
- ALTERNATIVE_PRIORITY = "100"
--ALTERNATIVE:${PN}-daemon = "${@bb.utils.contains('DISTRO_FEATURES','systemd','resolv-conf','',d)}"
--ALTERNATIVE_TARGET[resolv-conf] = "${@bb.utils.contains('DISTRO_FEATURES','systemd','${sysconfdir}/resolv-conf.NetworkManager','',d)}"
--ALTERNATIVE_LINK_NAME[resolv-conf] = "${@bb.utils.contains('DISTRO_FEATURES','systemd','${sysconfdir}/resolv.conf','',d)}"
-+ALTERNATIVE:${PN}-daemon = "${@bb.utils.contains('PACKAGECONFIG','man-resolv-conf','resolv-conf','',d)}"
-+ALTERNATIVE_TARGET[resolv-conf] = "${@bb.utils.contains('PACKAGECONFIG','man-resolv-conf','${sysconfdir}/resolv-conf.NetworkManager','',d)}"
-+ALTERNATIVE_LINK_NAME[resolv-conf] = "${@bb.utils.contains('PACKAGECONFIG','man-resolv-conf','${sysconfdir}/resolv.conf','',d)}"
- 
- 
- # The networkmanager package is an empty meta package which weakly depends on all the compiled features.
-@@ -285,7 +287,7 @@ do_install:append() {
- 
-     rm -rf ${D}/run ${D}${localstatedir}/run
- 
--    if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
-+    if ${@bb.utils.contains('PACKAGECONFIG','man-resolv-conf','true','false',d)}; then
-         # For read-only filesystem, do not create links during bootup
-         ln -sf ../run/NetworkManager/resolv.conf ${D}${sysconfdir}/resolv-conf.NetworkManager
+diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp/CVE-2022-44792-CVE-2022-44793.patch b/meta-networking/recipes-protocols/net-snmp/net-snmp/CVE-2022-44792-CVE-2022-44793.patch
+new file mode 100644
+index 0000000000..ce7e3422ed
+--- /dev/null
++++ b/meta-networking/recipes-protocols/net-snmp/net-snmp/CVE-2022-44792-CVE-2022-44793.patch
+@@ -0,0 +1,116 @@
++From 4589352dac3ae111c7621298cf231742209efd9b Mon Sep 17 00:00:00 2001
++From: Bill Fenner <fenner@gmail.com>
++Date: Fri, 25 Nov 2022 08:41:24 -0800
++Subject: [PATCH ] snmp_agent: disallow SET with NULL varbind
++
++Upstream-Status: Backport [https://github.com/net-snmp/net-snmp/commit/be804106fd0771a7d05236cff36e199af077af57]
++CVE: CVE-2022-44792 & CVE-2022-44793
++Signed-off-by: Hitendra Prajapati <hprajapati@mvista.com>
++---
++ agent/snmp_agent.c                            | 32 +++++++++++++++++++
++ apps/snmpset.c                                |  1 +
++ .../default/T0142snmpv2csetnull_simple        | 31 ++++++++++++++++++
++ 3 files changed, 64 insertions(+)
++ create mode 100644 testing/fulltests/default/T0142snmpv2csetnull_simple
++
++diff --git a/agent/snmp_agent.c b/agent/snmp_agent.c
++index 3376357..f51c252 100644
++--- a/agent/snmp_agent.c
+++++ b/agent/snmp_agent.c
++@@ -3719,12 +3719,44 @@ netsnmp_handle_request(netsnmp_agent_session *asp, int status)
++     return 1;
++ }
++ 
+++static int
+++check_set_pdu_for_null_varbind(netsnmp_agent_session *asp)
+++{
+++    int i;
+++    netsnmp_variable_list *v = NULL;
+++
+++    for (i = 1, v = asp->pdu->variables; v != NULL; i++, v = v->next_variable) {
+++	if (v->type == ASN_NULL) {
+++	    /*
+++	     * Protect SET implementations that do not protect themselves
+++	     * against wrong type.
+++	     */
+++	    DEBUGMSGTL(("snmp_agent", "disallowing SET with NULL var for varbind %d\n", i));
+++	    asp->index = i;
+++	    return SNMP_ERR_WRONGTYPE;
+++	}
+++    }
+++    return SNMP_ERR_NOERROR;
+++}
+++
++ int
++ handle_pdu(netsnmp_agent_session *asp)
++ {
++     int             status, inclusives = 0;
++     netsnmp_variable_list *v = NULL;
++ 
+++#ifndef NETSNMP_NO_WRITE_SUPPORT
+++    /*
+++     * Check for ASN_NULL in SET request
+++     */
+++    if (asp->pdu->command == SNMP_MSG_SET) {
+++	status = check_set_pdu_for_null_varbind(asp);
+++	if (status != SNMP_ERR_NOERROR) {
+++	    return status;
+++	}
+++    }
+++#endif /* NETSNMP_NO_WRITE_SUPPORT */
+++
++     /*
++      * for illegal requests, mark all nodes as ASN_NULL 
++      */
++diff --git a/apps/snmpset.c b/apps/snmpset.c
++index 50f33db..387a51d 100644
++--- a/apps/snmpset.c
+++++ b/apps/snmpset.c
++@@ -182,6 +182,7 @@ main(int argc, char *argv[])
++             case 'x':
++             case 'd':
++             case 'b':
+++            case 'n': /* undocumented */
++ #ifdef NETSNMP_WITH_OPAQUE_SPECIAL_TYPES
++             case 'I':
++             case 'U':
++diff --git a/testing/fulltests/default/T0142snmpv2csetnull_simple b/testing/fulltests/default/T0142snmpv2csetnull_simple
++new file mode 100644
++index 0000000..0f1b8f3
++--- /dev/null
+++++ b/testing/fulltests/default/T0142snmpv2csetnull_simple
++@@ -0,0 +1,31 @@
+++#!/bin/sh
+++
+++. ../support/simple_eval_tools.sh
+++
+++HEADER SNMPv2c set of system.sysContact.0 with NULL varbind
+++
+++SKIPIF NETSNMP_DISABLE_SET_SUPPORT
+++SKIPIF NETSNMP_NO_WRITE_SUPPORT
+++SKIPIF NETSNMP_DISABLE_SNMPV2C
+++SKIPIFNOT USING_MIBII_SYSTEM_MIB_MODULE
+++
+++#
+++# Begin test
+++#
+++
+++# standard V2C configuration: testcomunnity
+++snmp_write_access='all'
+++. ./Sv2cconfig
+++STARTAGENT
+++
+++CAPTURE "snmpget -On $SNMP_FLAGS -c testcommunity -v 2c $SNMP_TRANSPORT_SPEC:$SNMP_TEST_DEST$SNMP_SNMPD_PORT .1.3.6.1.2.1.1.4.0"
+++
+++CHECK ".1.3.6.1.2.1.1.4.0 = STRING:"
+++
+++CAPTURE "snmpset -On $SNMP_FLAGS -c testcommunity -v 2c $SNMP_TRANSPORT_SPEC:$SNMP_TEST_DEST$SNMP_SNMPD_PORT .1.3.6.1.2.1.1.4.0 n x"
+++
+++CHECK "Reason: wrongType"
+++
+++STOPAGENT
+++
+++FINISHED
++-- 
++2.25.1
++
+diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.9.3.bb b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.9.3.bb
+index 7af5147566..eb8e1599fb 100644
+--- a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.9.3.bb
++++ b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.9.3.bb
+@@ -26,6 +26,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/net-snmp/net-snmp-${PV}.tar.gz \
+            file://net-snmp-fix-for-disable-des.patch \
+            file://reproducibility-have-printcap.patch \
+            file://0001-ac_add_search_path.m4-keep-consistent-between-32bit.patch \
++           file://CVE-2022-44792-CVE-2022-44793.patch \
+            "
+ SRC_URI[sha256sum] = "2097f29b7e1bf3f1300b4bae52fa2308d0bb8d5d3998dbe02f9462a413a2ef0a"
  
 -- 
 2.25.1
