@@ -1,315 +1,103 @@
-Return-Path: <archana.polampalli@windriver.com>
+Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8A85AC38142
-	for <webhook@archiver.kernel.org>; Tue, 24 Jan 2023 15:53:00 +0000 (UTC)
-Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
- by mx.groups.io with SMTP id smtpd.web11.18703.1674575575226064263
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8369BC38142
+	for <webhook@archiver.kernel.org>; Tue, 24 Jan 2023 16:01:40 +0000 (UTC)
+Received: from mail-ed1-f54.google.com (mail-ed1-f54.google.com [209.85.208.54])
+ by mx.groups.io with SMTP id smtpd.web10.18830.1674576092033703936
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 24 Jan 2023 07:52:55 -0800
+ Tue, 24 Jan 2023 08:01:32 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=pps06212021 header.b=fQGHvjhu;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=0388b930f9=archana.polampalli@windriver.com)
-Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 30OFUjIF018220
-	for <openembedded-devel@lists.openembedded.org>; Tue, 24 Jan 2023 15:52:54 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com; h=from : to : cc :
- subject : date : message-id : mime-version : content-transfer-encoding :
- content-type; s=PPS06212021;
- bh=N1TaypnWhx9xFXHYxGSS7Sn3sPX+FnkE47nH22ech50=;
- b=fQGHvjhuSBREen1oNUgfdxbFYVkcaxOTKXiQkdcSlhifrrHQXk8VS/Lp5/ZkoItknZDG
- pfaTTYLG1gJGqAREkk3ZYh2rd4M9BZrIWdBz1bl71SH291XClT/0i28PCAod1yr8cLMT
- tdl87QLAkAY4RUI8SsUrXs66ygckN0cSpiJIvLxui84rxrft3193GI0YAFSqvF41tLj1
- 7PIeQVJhoBurVi4OS6sNlE6vbNFYUONeasVFlz9nEXZxNifNMUWKxQMaRLGHJnJ5/mdH
- AgSdM/Yv7Eng+qHp4sHDKvPJb3GUB1M++yKEeRz9n7/dhVQmKasKJoxYiwV5Fypr3qMO OQ== 
-Received: from ala-exchng02.corp.ad.wrs.com (unknown-82-254.windriver.com [147.11.82.254])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3n871a3aha-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Tue, 24 Jan 2023 15:52:54 +0000
-Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
- ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.17; Tue, 24 Jan 2023 07:52:51 -0800
-Received: from blr-linux-engg1.wrs.com (147.11.136.210) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
- 15.1.2507.17 via Frontend Transport; Tue, 24 Jan 2023 07:52:48 -0800
-From: Archana Polampalli <archana.polampalli@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-CC: <Hari.GPillai@windriver.com>,
-        Archana Polampalli
-	<archana.polampalli@windriver.com>
-Subject: [oe][meta-oe][PATCH 1/1] Nodejs: Upgrade to 18.12.1
-Date: Tue, 24 Jan 2023 15:52:39 +0000
-Message-ID: <20230124155239.1124008-1-archana.polampalli@windriver.com>
-X-Mailer: git-send-email 2.34.1
+ dkim=pass header.i=@konsulko.com header.s=google header.b=RXXKACUl;
+ spf=pass (domain: konsulko.com, ip: 209.85.208.54, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-ed1-f54.google.com with SMTP id w14so18787597edi.5
+        for <openembedded-devel@lists.openembedded.org>; Tue, 24 Jan 2023 08:01:31 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=konsulko.com; s=google;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=wQ0AqdpmhVUS8eojwA659DCf1EkJS2wtHO//wuZ0IGo=;
+        b=RXXKACUlQh7ItR/aIwm4N6VOb42eeEHFahc7zMTLHOMSSvm1bfMxp/PUWSEeNuk03I
+         hyWGForHIkfQUxRxdlMAQbaVWvjUSPZ0O6hPyHYb7uTG8ZonHLGF79zbdVNL+za+91iK
+         vRjv1EltVmF0FD2oGJ5f1cC6ki7N6I6OBaXOQ=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=wQ0AqdpmhVUS8eojwA659DCf1EkJS2wtHO//wuZ0IGo=;
+        b=J5agQTLUE6XNbAyUIqUMdFBQm9odEn/tl3sFqSKd+W1NdKmdY3akELGMjCJinI6GKb
+         iWggCpfiU1M9jRVBsry9Ov57AVc3uno3Dlc7KciX07mLsYVGfGmTCJBtxUT1OAlvQD5t
+         Op+oEeFOv5igbg4Shb07pTsM3v5tfBF3+5LZbwWTNFQJQ16ZdA3cggw5O7E4Y5IikGfe
+         ufG6DMQnx5mxEDGJ8KD1i9PGjGhXF4/RB2gmUf6LsDX+zRZLAzAkqOew1JYrA88cxupG
+         3A65MPayULN2YGOzGZi6R+XQGyM841sOYYqs9Ri620QcQActJgDg8TEiKCEaBiaYC0jp
+         crGQ==
+X-Gm-Message-State: AFqh2krC/swiK6JpuVkfKMMfTv4+GW110mmzrHPGlw9MOHNbbTf7vRH3
+	5ppB/pWalVir6di38S7m1kftXQTEp3cbitRGyDk=
+X-Google-Smtp-Source: AMrXdXtzyMfUqeX8OjZdkHFa++7HfnogjHYzf7qeuSRplWhC4nsO9QiVp05wwfdfPvZ3wdKYjvOGJA==
+X-Received: by 2002:a05:6402:1946:b0:48b:c8de:9d20 with SMTP id f6-20020a056402194600b0048bc8de9d20mr32520951edz.32.1674576090242;
+        Tue, 24 Jan 2023 08:01:30 -0800 (PST)
+Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
+        by smtp.gmail.com with ESMTPSA id c3-20020a056402120300b0048ec121a52fsm1194750edw.46.2023.01.24.08.01.29
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 24 Jan 2023 08:01:29 -0800 (PST)
+From: Leon Anavi <leon.anavi@konsulko.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 2/2] python3-nocasedict: Upgrade 1.0.4 -> 1.1.0
+Date: Tue, 24 Jan 2023 18:01:19 +0200
+Message-Id: <20230124160119.377481-2-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.30.2
+In-Reply-To: <20230124160119.377481-1-leon.anavi@konsulko.com>
+References: <20230124160119.377481-1-leon.anavi@konsulko.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Proofpoint-ORIG-GUID: bbiQgh9KwZOo5ATV7sef4iQCrryvEhxz
-X-Proofpoint-GUID: bbiQgh9KwZOo5ATV7sef4iQCrryvEhxz
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.219,Aquarius:18.0.930,Hydra:6.0.562,FMLib:17.11.122.1
- definitions=2023-01-23_12,2023-01-24_01,2022-06-22_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 spamscore=0 malwarescore=0
- suspectscore=0 bulkscore=0 phishscore=0 adultscore=0 priorityscore=1501
- lowpriorityscore=0 clxscore=1011 mlxscore=0 mlxlogscore=999
- impostorscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2212070000 definitions=main-2301240144
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 24 Jan 2023 15:53:00 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100724
+ <openembedded-devel@lists.openembedded.org>; Tue, 24 Jan 2023 16:01:40 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100726
 
-Node-18 is the current LTS release, node-19 is a development release and
-node-20 is scheduled to be released until 2023-04-18 which is too late for YP-4.2
-https://github.com/nodejs/release
+Upgrade to release 1.1.0:
 
-* Refresh below two patches
-   - 0001-Using-native-binaries.patch
-   - 0001-liftoff-Correct-function-signatures.patch
+- The default casefolding method on Python 3 was changed from
+  str.lower() to str.casefold(). This changes the matching of the
+  case-insensitive keys. This shold normally be an improvement,
+  but in case you find that you are negatively affected by this
+  change, you can go back to the str.lower() method by overriding
+  the NocaseDict.__casefold__() method with a method that calls
+  str.lower().
+- Added support for Python 3.11.
+- Changed the default casefolding method on Python 3 to be
+  str.casefold() in order to improve Unicode support. On Python 2,
+  it remains str.lower(). Added support for user-defined
+  casefolding.
 
-* Copy openssl.cnf from sysroot_native to nodejs-openssl.cnf
-  otherwise do_compile failed:
-     make[1]: *** No rule to make target '../deps/openssl/nodejs-openssl.cnf',
-     needed by 'Release/obj.target/deps/openssl/openssl.cnf'.  Stop.
-
-* Add initial ptest support using ctest only, it covered 20% of the nodejs tests.
-  There are some more tests exist to add but will require additional work.
-
-Signed-off-by: Archana Polampalli <archana.polampalli@windriver.com>
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../oe-npm-cache                              |  0
- ....18.bb => nodejs-oe-cache-native_18.12.bb} |  0
- .../nodejs/0001-Using-native-binaries.patch   | 24 +++++---------
- ...-liftoff-Correct-function-signatures.patch | 32 +++++++++++++------
- .../{nodejs_16.18.1.bb => nodejs_18.12.1.bb}  | 15 ++++++---
- 5 files changed, 42 insertions(+), 29 deletions(-)
- rename meta-oe/recipes-devtools/nodejs/{nodejs-oe-cache-16.18 => nodejs-oe-cache-18.12}/oe-npm-cache (100%)
- rename meta-oe/recipes-devtools/nodejs/{nodejs-oe-cache-native_16.18.bb => nodejs-oe-cache-native_18.12.bb} (100%)
- rename meta-oe/recipes-devtools/nodejs/{nodejs_16.18.1.bb => nodejs_18.12.1.bb} (93%)
+ ...{python3-nocasedict_1.0.4.bb => python3-nocasedict_1.1.0.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-nocasedict_1.0.4.bb => python3-nocasedict_1.1.0.bb} (76%)
 
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-16.18/oe-npm-cache b/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-18.12/oe-npm-cache
-similarity index 100%
-rename from meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-16.18/oe-npm-cache
-rename to meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-18.12/oe-npm-cache
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-native_16.18.bb b/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-native_18.12.bb
-similarity index 100%
-rename from meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-native_16.18.bb
-rename to meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-native_18.12.bb
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs/0001-Using-native-binaries.patch b/meta-oe/recipes-devtools/nodejs/nodejs/0001-Using-native-binaries.patch
-index 445aaf839..feafe38fd 100644
---- a/meta-oe/recipes-devtools/nodejs/nodejs/0001-Using-native-binaries.patch
-+++ b/meta-oe/recipes-devtools/nodejs/nodejs/0001-Using-native-binaries.patch
-@@ -5,32 +5,24 @@ Subject: [PATCH] Using native binaries
+diff --git a/meta-python/recipes-devtools/python/python3-nocasedict_1.0.4.bb b/meta-python/recipes-devtools/python/python3-nocasedict_1.1.0.bb
+similarity index 76%
+rename from meta-python/recipes-devtools/python/python3-nocasedict_1.0.4.bb
+rename to meta-python/recipes-devtools/python/python3-nocasedict_1.1.0.bb
+index 006799c8b..319598e3b 100644
+--- a/meta-python/recipes-devtools/python/python3-nocasedict_1.0.4.bb
++++ b/meta-python/recipes-devtools/python/python3-nocasedict_1.1.0.bb
+@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/pywbem/nocasedict"
+ LICENSE = "LGPL-2.1-only"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=1803fa9c2c3ce8cb06b4861d75310742"
  
- Signed-off-by: Archana Polampalli <archana.polampalli@windriver.com>
- ---
-- node.gyp                 | 2 ++
-+ node.gyp                 | 1 +
-  tools/v8_gypfiles/v8.gyp | 5 +++++
-- 2 files changed, 7 insertions(+)
-+ 2 files changed, 6 insertions(+)
+-SRC_URI[sha256sum] = "7c111da4cefd244433cb63377aff081a40f84bddae9e6f376c67f086c0f806da"
++SRC_URI[sha256sum] = "ac551de692be6aea5b43ac3f2c33780df940013ac6dd0718fb552c8b560ba661"
  
- diff --git a/node.gyp b/node.gyp
--index 24505da7ba..7d41bd52db 100644
-+index e8e1d9f9..e60ccc10 100644
- --- a/node.gyp
- +++ b/node.gyp
--@@ -319,6 +319,7 @@
--               'action_name': 'run_mkcodecache',
--               'process_outputs_as_sources': 1,
--               'inputs': [
--+                '<(PRODUCT_DIR)/v8-qemu-wrapper.sh',
--                 '<(mkcodecache_exec)',
--               ],
--               'outputs': [
--@@ -366,6 +367,7 @@
-+@@ -320,6 +320,7 @@
-                    'action_name': 'node_mksnapshot',
-                    'process_outputs_as_sources': 1,
-                    'inputs': [
- +                    '<(PRODUCT_DIR)/v8-qemu-wrapper.sh',
-                      '<(node_mksnapshot_exec)',
-+                     '<(node_snapshot_main)',
-                    ],
--                   'outputs': [
- diff --git a/tools/v8_gypfiles/v8.gyp b/tools/v8_gypfiles/v8.gyp
--index ed042f8829..371b8e02c2 100644
-+index 42e26cd9..bc721991 100644
- --- a/tools/v8_gypfiles/v8.gyp
- +++ b/tools/v8_gypfiles/v8.gyp
- @@ -68,6 +68,7 @@
-@@ -57,7 +49,7 @@ index ed042f8829..371b8e02c2 100644
-              '<(PRODUCT_DIR)/<(EXECUTABLE_PREFIX)bytecode_builtins_list_generator<(EXECUTABLE_SUFFIX)',
-            ],
-            'outputs': [
--@@ -395,6 +398,7 @@
-+@@ -400,6 +403,7 @@
-              ],
-            },
-            'inputs': [
-@@ -65,7 +57,7 @@ index ed042f8829..371b8e02c2 100644
-              '<(mksnapshot_exec)',
-            ],
-            'outputs': [
--@@ -1513,6 +1517,7 @@
-+@@ -1539,6 +1543,7 @@
-          {
-            'action_name': 'run_gen-regexp-special-case_action',
-            'inputs': [
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs/0001-liftoff-Correct-function-signatures.patch b/meta-oe/recipes-devtools/nodejs/nodejs/0001-liftoff-Correct-function-signatures.patch
-index d7005ae97..c9a522d2e 100644
---- a/meta-oe/recipes-devtools/nodejs/nodejs/0001-liftoff-Correct-function-signatures.patch
-+++ b/meta-oe/recipes-devtools/nodejs/nodejs/0001-liftoff-Correct-function-signatures.patch
-@@ -9,14 +9,20 @@ Fixes builds on mips where clang reports an error
-     ^~~~
+ inherit pypi setuptools3
  
- Upstream-Status: Submitted [https://chromium-review.googlesource.com/c/v8/v8/+/3235674]
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+
-+Signed-off-by: Archana Polampalli <archana.polampalli@windriver.com>
- ---
-- src/wasm/baseline/liftoff-assembler.h | 6 +++---
-- 1 file changed, 3 insertions(+), 3 deletions(-)
-+ deps/v8/src/wasm/baseline/liftoff-assembler.h               | 6 +++---
-+ deps/v8/src/wasm/baseline/mips/liftoff-assembler-mips.h     | 2 +-
-+ deps/v8/src/wasm/baseline/mips64/liftoff-assembler-mips64.h | 2 +-
-+ .../src/wasm/baseline/riscv64/liftoff-assembler-riscv64.h   | 2 +-
-+ 4 files changed, 6 insertions(+), 6 deletions(-)
- 
-+diff --git a/deps/v8/src/wasm/baseline/liftoff-assembler.h b/deps/v8/src/wasm/baseline/liftoff-assembler.h
-+index 22c7f73a..db4cb168 100644
- --- a/deps/v8/src/wasm/baseline/liftoff-assembler.h
- +++ b/deps/v8/src/wasm/baseline/liftoff-assembler.h
--@@ -613,7 +613,7 @@ class LiftoffAssembler : public TurboAss
-+@@ -646,7 +646,7 @@ class LiftoffAssembler : public TurboAssembler {
-    void FinishCall(const ValueKindSig*, compiler::CallDescriptor*);
-  
-    // Move {src} into {dst}. {src} and {dst} must be different.
-@@ -25,7 +31,7 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
-  
-    // Parallel register move: For a list of tuples <dst, src, kind>, move the
-    // {src} register of kind {kind} into {dst}. If {src} equals {dst}, ignore
--@@ -759,8 +759,8 @@ class LiftoffAssembler : public TurboAss
-+@@ -795,8 +795,8 @@ class LiftoffAssembler : public TurboAssembler {
-    inline void MoveStackValue(uint32_t dst_offset, uint32_t src_offset,
-                               ValueKind);
-  
-@@ -36,10 +42,12 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
-  
-    inline void Spill(int offset, LiftoffRegister, ValueKind);
-    inline void Spill(int offset, WasmValue);
-+diff --git a/deps/v8/src/wasm/baseline/mips/liftoff-assembler-mips.h b/deps/v8/src/wasm/baseline/mips/liftoff-assembler-mips.h
-+index c76fd2f4..0fffe231 100644
- --- a/deps/v8/src/wasm/baseline/mips/liftoff-assembler-mips.h
- +++ b/deps/v8/src/wasm/baseline/mips/liftoff-assembler-mips.h
--@@ -658,7 +658,7 @@ void LiftoffAssembler::Store(Register ds
--     pinned = pinned | LiftoffRegList::ForRegs(dst_op.rm(), src);
-+@@ -661,7 +661,7 @@ void LiftoffAssembler::Store(Register dst_addr, Register offset_reg,
-+     pinned = pinned | LiftoffRegList{dst_op.rm(), src};
-      LiftoffRegister tmp = GetUnusedRegister(src.reg_class(), pinned);
-      // Save original value.
- -    Move(tmp, src, type.value_type());
-@@ -47,9 +55,11 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
-  
-      src = tmp;
-      pinned.set(tmp);
-+diff --git a/deps/v8/src/wasm/baseline/mips64/liftoff-assembler-mips64.h b/deps/v8/src/wasm/baseline/mips64/liftoff-assembler-mips64.h
-+index 36413545..48207337 100644
- --- a/deps/v8/src/wasm/baseline/mips64/liftoff-assembler-mips64.h
- +++ b/deps/v8/src/wasm/baseline/mips64/liftoff-assembler-mips64.h
--@@ -596,7 +596,7 @@ void LiftoffAssembler::Store(Register ds
-+@@ -593,7 +593,7 @@ void LiftoffAssembler::Store(Register dst_addr, Register offset_reg,
-      pinned.set(dst_op.rm());
-      LiftoffRegister tmp = GetUnusedRegister(src.reg_class(), pinned);
-      // Save original value.
-@@ -58,9 +68,11 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
-  
-      src = tmp;
-      pinned.set(tmp);
-+diff --git a/deps/v8/src/wasm/baseline/riscv64/liftoff-assembler-riscv64.h b/deps/v8/src/wasm/baseline/riscv64/liftoff-assembler-riscv64.h
-+index 642a7d2a..56ffcc2a 100644
- --- a/deps/v8/src/wasm/baseline/riscv64/liftoff-assembler-riscv64.h
- +++ b/deps/v8/src/wasm/baseline/riscv64/liftoff-assembler-riscv64.h
--@@ -580,7 +580,7 @@ void LiftoffAssembler::Store(Register ds
-+@@ -589,7 +589,7 @@ void LiftoffAssembler::Store(Register dst_addr, Register offset_reg,
-      pinned.set(dst_op.rm());
-      LiftoffRegister tmp = GetUnusedRegister(src.reg_class(), pinned);
-      // Save original value.
-@@ -69,3 +81,5 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
-  
-      src = tmp;
-      pinned.set(tmp);
-+--
-+2.34.1
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_16.18.1.bb b/meta-oe/recipes-devtools/nodejs/nodejs_18.12.1.bb
-similarity index 93%
-rename from meta-oe/recipes-devtools/nodejs/nodejs_16.18.1.bb
-rename to meta-oe/recipes-devtools/nodejs/nodejs_18.12.1.bb
-index a67948320..e96913e56 100644
---- a/meta-oe/recipes-devtools/nodejs/nodejs_16.18.1.bb
-+++ b/meta-oe/recipes-devtools/nodejs/nodejs_18.12.1.bb
-@@ -1,13 +1,13 @@
- DESCRIPTION = "nodeJS Evented I/O for V8 JavaScript"
- HOMEPAGE = "http://nodejs.org"
- LICENSE = "MIT & ISC & BSD-2-Clause & BSD-3-Clause & Artistic-2.0"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=6e54852cd826c41e80c6d80f6db00a85"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=dfd7ae796baf5326016a3865ee1dc632"
- 
- DEPENDS = "openssl"
- DEPENDS:append:class-target = " qemu-native"
- DEPENDS:append:class-native = " c-ares-native"
- 
--inherit pkgconfig python3native qemu
-+inherit pkgconfig python3native qemu ptest
- 
- COMPATIBLE_MACHINE:armv4 = "(!.*armv4).*"
- COMPATIBLE_MACHINE:armv5 = "(!.*armv5).*"
-@@ -26,6 +26,7 @@ SRC_URI = "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.xz \
-            file://0001-liftoff-Correct-function-signatures.patch \
-            file://0001-mips-Use-32bit-cast-for-operand-on-mips32.patch \
-            "
-+
- SRC_URI:append:class-target = " \
-            file://0001-Using-native-binaries.patch \
-            "
-@@ -35,7 +36,7 @@ SRC_URI:append:toolchain-clang:x86 = " \
- SRC_URI:append:toolchain-clang:powerpc64le = " \
-            file://0001-ppc64-Do-not-use-mminimal-toc-with-clang.patch \
-            "
--SRC_URI[sha256sum] = "1f8051a88f86f42064f4415fe7a980e59b0a502ecc8def583f6303bc4d445238"
-+SRC_URI[sha256sum] = "4fa406451bc52659a290e52cfdb2162a760bd549da4b8bbebe6a29f296d938df"
- 
- S = "${WORKDIR}/node-v${PV}"
- 
-@@ -151,6 +152,7 @@ do_configure () {
- 
- do_compile () {
-     export LD="${CXX}"
-+    install -D ${RECIPE_SYSROOT_NATIVE}/etc/ssl/openssl.cnf ${B}/deps/openssl/nodejs-openssl.cnf
-     install -D ${B}/v8-qemu-wrapper.sh ${B}/out/Release/v8-qemu-wrapper.sh
-     oe_runmake BUILDTYPE=Release
- }
-@@ -159,10 +161,15 @@ do_install () {
-     oe_runmake install DESTDIR=${D}
- }
- 
-+do_install_ptest () {
-+    cp -r  ${B}/out/Release/cctest ${D}${PTEST_PATH}/
-+    cp -r ${B}/test ${D}${PTEST_PATH}
-+    chown -R root:root ${D}${PTEST_PATH}
-+}
-+
- BINARIES = " \
-     bytecode_builtins_list_generator \
-     ${@bb.utils.contains('PACKAGECONFIG', 'icu', 'gen-regexp-special-case', '', d)} \
--    mkcodecache \
-     node_mksnapshot \
-     torque \
- "
 -- 
-2.34.1
+2.30.2
 
 
