@@ -1,467 +1,169 @@
-Return-Path: <alex.kiernan@gmail.com>
+Return-Path: <niko.mauno@vaisala.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3B744C25B50
-	for <webhook@archiver.kernel.org>; Tue, 24 Jan 2023 11:16:49 +0000 (UTC)
-Received: from mail-wr1-f45.google.com (mail-wr1-f45.google.com [209.85.221.45])
- by mx.groups.io with SMTP id smtpd.web10.12309.1674559002067308908
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8F345C25B50
+	for <webhook@archiver.kernel.org>; Tue, 24 Jan 2023 12:08:59 +0000 (UTC)
+Received: from EUR05-DB8-obe.outbound.protection.outlook.com (EUR05-DB8-obe.outbound.protection.outlook.com [40.107.20.67])
+ by mx.groups.io with SMTP id smtpd.web11.13197.1674562136038525506
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 24 Jan 2023 03:16:42 -0800
+ Tue, 24 Jan 2023 04:08:57 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=FCJojglN;
- spf=pass (domain: gmail.com, ip: 209.85.221.45, mailfrom: alex.kiernan@gmail.com)
-Received: by mail-wr1-f45.google.com with SMTP id r2so13511022wrv.7
-        for <openembedded-devel@lists.openembedded.org>; Tue, 24 Jan 2023 03:16:41 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=nxnZVUx1CS4E3pDxCsJcdrdlfpLkSZnXVoH6syGc2z4=;
-        b=FCJojglNlwRy4UaKpDv8yqNar9sb21LyyyBJUVTwf1GSvNrsU6ZPsW+atgaqrNLdRo
-         lvlZYMKV+zKuXjq7KUmrPaVGLAGIOuhwoEJkTDj9s8kLUrEpUZ/YgF/cW3yeOhIcPMbi
-         xbcdKM2u9a6kCyI9Cfx4u80lhAUPHk3TiSakP+hV90vuTwo92iMAEBI9mUjTUQ4eOUdK
-         ZiPJ6Ufn61StzjgWKWKhqbnQb1QgRyYrMY8wEyaFq14xxCD/EOVK7XTphSzTs4ETQdcU
-         /t3jkyQc0MCuKQ7QYiu5aJ92KC2fXzFGrDxZYyDTFO6P2X3QaKBC7b/YlMS3bo0T1Agh
-         Z1GA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=nxnZVUx1CS4E3pDxCsJcdrdlfpLkSZnXVoH6syGc2z4=;
-        b=OzOaZc+qkYRgfvN3RDCcu0W0zv5tySrDKCwgBKpKX+5nKkyU51YzoLntoZ2NhO+hTw
-         7GFQ3luvl/uEPHuCYM53t3iwqHjSp1u3wFadGuft4KgldHNFjPfkiXnTO8CeK6FICGsm
-         0q98tSTvQleAjH1EzkI4l9sfJmuOd9RYTcuy2Ai9o7qSsxTPfvDMnw73d8d2P2bhlJa7
-         1nYqKJdR3/V7RUcTp55wHwr2n44q5oF48XZq35+G/tEI6t0gMMewYHOGWnjAAttWKh+k
-         +8zjahaEn193ojYQ0upjSjGpe3hVavNFv1cEIBH6B/e/iwODYO5qOwLdSIwtIFJNZitr
-         B6+Q==
-X-Gm-Message-State: AFqh2kocYkrTYY8mS9uDWMI+VQWmK4Ka7oP8h3q4RUk5dUud2r2SVghA
-	EAr3ikONOg7+wDTcKpcmfXhJrBsAl/M=
-X-Google-Smtp-Source: AMrXdXsABDbKD43kNYSFo77VRqrvFZZrmIzprFlkwHPm4RC9Kp71DYGtanwqJFek8CDvgjWkZiWlHg==
-X-Received: by 2002:a5d:6346:0:b0:27d:a1ea:dcfa with SMTP id b6-20020a5d6346000000b0027da1eadcfamr24454347wrw.19.1674558999562;
-        Tue, 24 Jan 2023 03:16:39 -0800 (PST)
-Received: from localhost.localdomain (cust246-dsl91-135-6.idnet.net. [91.135.6.246])
-        by smtp.gmail.com with ESMTPSA id y3-20020adfdf03000000b002bbedd60a9asm1653462wrl.77.2023.01.24.03.16.38
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 24 Jan 2023 03:16:38 -0800 (PST)
-From: Alex Kiernan <alex.kiernan@gmail.com>
+ dkim=fail reason="body hash did not verify" header.i=@vaisala.com header.s=selector1 header.b=AV4oCNHd;
+ spf=pass (domain: vaisala.com, ip: 40.107.20.67, mailfrom: niko.mauno@vaisala.com)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=OoAT7ymspf7Zk98aLh2fsliXH1pU+gbNNs+KSYZClBoHa7uM9YW6+yNF32MCgEqEStIdxV/+In4TMLp9Eern4hctyP71OlVZE7EqEfdX67mjgHOyHrgpjL3nAVO8f7MGwwuiHx1X9fEbDI/Kxd1am9bsAu2NV50I/kEgHETKWHBwwHRc8rVlceN6PWpHar6MIaA9gjIJSMvX6rfFP5amwD3CZMYBFGUZs82V4Zb4gpm4ErJC6AeGMDXjO2LOJ5v+s6gonmZuAi/jo5SL1lX+xid7zJ86PMRAwrd5m4ZL4+UQBf961uMQH5FOnS+FPNALSb5j09hXW3WWFM308kD4rg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=HUAThUd1R5j+9sgImtlrXkbCzWptNHeozada2xCg2Gw=;
+ b=TO+phMS++HftMaAR5NCyG08Rh1YCvFXonkXc7vJsKpbUw6HsFH4Mzjfp/B38KSW0clSEAXfiEaSBeeioTeJbgAkXbXDHcQvuKjjB01jv2FFL1FU+1JtNoW4YJPylXFDAa+PhCbk9k80jNXmvbKs+OM8JdTmorEuxAzxR2vM1RRe2dLYnlqiryv0oD7KrKKFdzWW080qC45R4V45ruub1XN0xGXyHPQUxwr1BXBF0WpjgbDkIsJ5Ho89TYrBWxi/4566SpKHLE4aZRl4EKWmh8kJ8VOCmhJ5GvgljDDSNeNsRRP9bYen4/mfCFhWulFqMk/Fq/i5Iwbvq43psd32dIg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=vaisala.com; dmarc=pass action=none header.from=vaisala.com;
+ dkim=pass header.d=vaisala.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vaisala.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=HUAThUd1R5j+9sgImtlrXkbCzWptNHeozada2xCg2Gw=;
+ b=AV4oCNHdlJIu+VTaLuQwaYigYs0hbz64AdvU0e6RJJ6Z3lcuUIcodAqfHWjkKAv7sfBd7Whc10M5QO3NDASMYm2QaQSyN2pVack3f99wyYuGWSjDw79naM0qlC+WbDjBFmvsTFGAOyJgcEm2UwJPCWQHpygVA9MsmkfBXrEc5VxNWp/ZCFwC7ah3MMrBcb1o/KwnUWxCgaolOij081RcwbuVW6aZ6zkHt4RlgsJhCENYUxLvc2MJJagH++BsvKJqvDAQC6FNclyY4BXi2bEuMcVZd4DdFCBNyB0W2GFR6bsWTOrBDWjBT+9LYkjXjQwd3CLi4dhMtwnIYR0oYofZhg==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=vaisala.com;
+Received: from PAXPR06MB8579.eurprd06.prod.outlook.com (2603:10a6:102:2b3::22)
+ by VI1PR0602MB3405.eurprd06.prod.outlook.com (2603:10a6:803:9::18) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6002.33; Tue, 24 Jan
+ 2023 12:08:53 +0000
+Received: from PAXPR06MB8579.eurprd06.prod.outlook.com
+ ([fe80::ce6:3fa7:e565:c049]) by PAXPR06MB8579.eurprd06.prod.outlook.com
+ ([fe80::ce6:3fa7:e565:c049%3]) with mapi id 15.20.6002.028; Tue, 24 Jan 2023
+ 12:08:52 +0000
+From: Niko Mauno <niko.mauno@vaisala.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Alex Kiernan <alex.kiernan@gmail.com>
-Subject: [meta-networking][PATCH] ntpsec: Upgrade 1.2.1 -> 1.2.2
-Date: Tue, 24 Jan 2023 11:16:34 +0000
-Message-Id: <20230124111634.29099-1-alex.kiernan@gmail.com>
-X-Mailer: git-send-email 2.39.0
+CC: Niko Mauno <niko.mauno@vaisala.com>
+Subject: [meta-oe][PATCH] Fix missing leading whitespace with ':append'
+Date: Tue, 24 Jan 2023 12:08:13 +0000
+Message-ID: <20230124120813.3888580-1-niko.mauno@vaisala.com>
+X-Mailer: git-send-email 2.35.1
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain
+X-ClientProxiedBy: AM3PR07CA0124.eurprd07.prod.outlook.com
+ (2603:10a6:207:7::34) To PAXPR06MB8579.eurprd06.prod.outlook.com
+ (2603:10a6:102:2b3::22)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PAXPR06MB8579:EE_|VI1PR0602MB3405:EE_
+X-MS-Office365-Filtering-Correlation-Id: daa56c92-2f11-40b3-aa97-08dafe03c271
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 
+	t480dTlC/EY2hugdHfgpf6mkpLrhp8Qix5YEwOw6VfQHlm8G5bnB987MIHYFRiw3VkMfZJ0hzmF8TY8xr05+yngePPcujHnYMYx01e29OpNf5MXb05CIotxvHCNsXKGOjqyjGu3+parntTD9sm16sZAQIZm6YXVofhuAZWwKEvYFLHJ6lGw3GUrl1u7G9/N30Yu2KHH+Wb3OMJMWu0vQO/uTti2AG0GasgjVVeXi9+FIrr3yvv8s/KbPLFW5lZL4y8RudLmZI+92TFss3vDcexJxZDUL5Vk64XTsxuI6j2jsAt9fmpHmFJHbeIDKtcBg0AaKOPc2WUL+JGcTLRcv5rW9ep4e5G3Om65qyljDvk3CcYaBA7sHWMHbVgSjxTAvOwwz53OoNqi5aE+tfxUOAG6FkRXkM4j8QPB5cciyMovkn5ILMn0hbaRMNYqwE246/dn7/42VZhugy0HZyuU1ESGnf1CG7xY7mTk1nOSi5mZ89WDIy01/Yr4N6TK+M65kj+vUVV7ZbmHBwvKNbA58ipGzUFJacSLvjm4NeshJ4KIHOZSz+yvJePkIOUZl1tO0i7Vb8dqLoerp/xOXv6wUmSajytwUWCzIPUHetdpa5N2Xf6YtaRYwUjAXmOB05K8hwvsNsJq7ZhoK4UmK01j9lVtxCdO+qi1htQRv631IPcdLy1W06jeeJsE+c2eiCYcz86KBqng/TT7aTcw8jwHkRA==
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PAXPR06MB8579.eurprd06.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230022)(4636009)(39850400004)(396003)(136003)(346002)(366004)(376002)(451199015)(6666004)(86362001)(6506007)(26005)(107886003)(6512007)(478600001)(186003)(1076003)(6486002)(52116002)(83380400001)(2906002)(36756003)(316002)(2616005)(66476007)(38100700002)(66946007)(6916009)(4326008)(8676002)(38350700002)(66556008)(44832011)(41300700001)(5660300002)(8936002);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?us-ascii?Q?oVdLVTyPl34VIlTcSdHa6/dFVidak/0zIs4bcsEjn4KFNAfEovfSe+ROu+cS?=
+ =?us-ascii?Q?Q98W86zCOQWiZqhx/BTsEwZjL6i3nrjwsk8rsaa2ehwnH8jN6ULB5Ofza4Gv?=
+ =?us-ascii?Q?0XElDfkG6R+p9YgW6VkLqqxEyBiZw0OMHFZ8BmEYvPHGmMAtbOblXpjVnSE9?=
+ =?us-ascii?Q?zyUY7gZgcjZQ2G715wFhBqwn4DuMju247mt15Rr8xRTPPvKeBuzfhncMBKBp?=
+ =?us-ascii?Q?ntdOiCTVgGzY3p+q3ZoaL+Z4gp3OvDVGxXpscLJ+bYX5m7qvB2Urb8Z5jZ4n?=
+ =?us-ascii?Q?FittI+08hvwoJijq/cpezMNzP5fwm1uAUnQRgKvSqKChVSZzO9zpjnuiUHAK?=
+ =?us-ascii?Q?DHCSMDhmHAejFJqmML46GKF1k2u6hh4keQ41JnMqZfxnv4j5A8/hRh+38SNz?=
+ =?us-ascii?Q?+OXfgFQ+++2aNPT12RXweXgT0P2HXcvetx6xYkBamiTCa0Y77CRPrmKmzOEv?=
+ =?us-ascii?Q?K6rvspMeVvNVhoU9GSKyccXpTjLmqIP8CVLRCt48dAta9KfZc56sebbFvZ8I?=
+ =?us-ascii?Q?QTadlo625vC7jsKPO9TBH0mdLd9CRsvzhd9aTHhVqkjopLEFe7Ewyr6y3ZzS?=
+ =?us-ascii?Q?tJpfAdtaPn0f1I4vIWTL1Pz/3a21/4gmH/jtAD/Mhx/3d6yFRbaH1dQSRUOS?=
+ =?us-ascii?Q?K57Oz0rtMEufEaOwvlt+SAsbRRpQAc8A2y79ZmJxizuJ+6WlrUP5o7+vwLQE?=
+ =?us-ascii?Q?0z3hJQK2hwAh8UmNoSeKR29+HwuHRZIfsfs9InkHdjXuY5YQPj1IqE3VNm7+?=
+ =?us-ascii?Q?O+IAXsRKJ87FUCGubg0Mzlz/IBQyvvyebbfEteZNNobi+cwaa0V7jf/XRv6/?=
+ =?us-ascii?Q?Q2zwbiSWzT/9ulvBooYCPgnj4bkyjQDX+NVIaqJUoDac2btt2e5l1W+Pbsg0?=
+ =?us-ascii?Q?fbIFkepnjD1aap9UzeUHo5pc75ovxVtQyy1S70qB3lsgd5ANrTRlzCjiau4v?=
+ =?us-ascii?Q?0r9d4MB79DkBKBTPmUDDPX2TGbdmhLssI5CpQE4xNzDBIZB5FXKbKUS44x1s?=
+ =?us-ascii?Q?5Hq3Fgl6Dj3JvKmvrbLX9Knm1iiEplWpjwhDVsY1Pxhs5JCTjBSnzC3CErIQ?=
+ =?us-ascii?Q?7x7voTKfo0XHXHq2HyYe5XlWuJYufAR6oLbD5ncc1Z8cE14/whbdRwUm88m2?=
+ =?us-ascii?Q?lj6H9Dgm4XvbmusMNwRUF2O+iSUkT5YvO505z+eYyjp8TNIiCVUSKhJejm8y?=
+ =?us-ascii?Q?5jWy1n0SufoYwNUd2jvKDcJ4Dyrilr/l16dlSyT/qE+e7h6VN1VCQtpNQQ49?=
+ =?us-ascii?Q?ml8s4lkpZxloA7GMYEi5/Y9RWLV+HUqLlego4zDk3nnO3os0u/BPqSuyPjE1?=
+ =?us-ascii?Q?DHht0ZmEcv7tg+dudB+VjCmstmJRhrfPaP8XdOcGhlsQGiEZMK3IHv6rObbm?=
+ =?us-ascii?Q?qxDT/gfIXov6e7RaTWxGacxq5fnHhlLaQDdq42RwnHMvXPdvpSQ8SVdiCtF9?=
+ =?us-ascii?Q?4brHSlUpSFrmF9Po+PKAwNjvDo2gx1g7ffXe0z3NN4P3aaF+QCD+cuKrLlMy?=
+ =?us-ascii?Q?0HY/l9rFgqInYe9hONZaBIuGJjJfYGN7ETcHt33AwkYqy3Etgzc+EdfMR9sn?=
+ =?us-ascii?Q?f1kJo83bne3aaeupJ/IhFE/9IAuuYwTlE0zcnit/AXL+IfXYEUOaswT4yFEE?=
+ =?us-ascii?Q?vg=3D=3D?=
+X-OriginatorOrg: vaisala.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: daa56c92-2f11-40b3-aa97-08dafe03c271
+X-MS-Exchange-CrossTenant-AuthSource: PAXPR06MB8579.eurprd06.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Jan 2023 12:08:52.8338
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 6d7393e0-41f5-4c2e-9b12-4c2be5da5c57
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 8HeKk9yThhS7erwdLwLiraplTnU4jDsDo82bJCBecFzL6vPx4eY55cJ6AtKDJgx4WRvOJOMKukW1Y6zi3EetiA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR0602MB3405
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 24 Jan 2023 11:16:49 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100717
+ <openembedded-devel@lists.openembedded.org>; Tue, 24 Jan 2023 12:08:59 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100718
 
-Drop backported patches, drop `wscript: Widen the search for tags` as
-upstream has merged something similar which means devtool builds now
-work.
+Mitigate occurences where ':append' operator is used and leading
+whitespace character is obviously missing, risking inadvertent
+string concatenation.
 
-Add BISONFLAGS support to fix build reproducbility issue.
-
-Drop `--debug` which generates internal debug info.
-
-License-Update: License files moved to separate directory
-Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
+Signed-off-by: Niko Mauno <niko.mauno@vaisala.com>
 ---
+ meta-oe/recipes-core/dbus-cxx/dbus-cxx_2.1.0.bb             | 2 +-
+ meta-oe/recipes-crypto/fsverity-utils/fsverity-utils_1.5.bb | 2 +-
+ meta-oe/recipes-support/neon/neon_0.32.4.bb                 | 2 +-
+ 3 files changed, 3 insertions(+), 3 deletions(-)
 
- ...0001-Update-to-OpenSSL-3.0.0-alpha15.patch | 111 ------------------
- ....c-allow-clone3-for-glibc-2.34-in-se.patch |  31 -----
- ....c-allow-newfstatat-on-all-archs-for.patch |  42 -------
- .../0001-wscript-Add-BISONFLAGS-support.patch |  29 +++++
- ...01-wscript-Widen-the-search-for-tags.patch |  29 -----
- ....c-match-riscv-to-aarch-in-seccomp-f.patch |  34 ------
- .../{ntpsec_1.2.1.bb => ntpsec_1.2.2.bb}      |  24 ++--
- 7 files changed, 42 insertions(+), 258 deletions(-)
- delete mode 100644 meta-networking/recipes-support/ntpsec/ntpsec/0001-Update-to-OpenSSL-3.0.0-alpha15.patch
- delete mode 100644 meta-networking/recipes-support/ntpsec/ntpsec/0001-ntpd-ntp_sandbox.c-allow-clone3-for-glibc-2.34-in-se.patch
- delete mode 100644 meta-networking/recipes-support/ntpsec/ntpsec/0001-ntpd-ntp_sandbox.c-allow-newfstatat-on-all-archs-for.patch
- create mode 100644 meta-networking/recipes-support/ntpsec/ntpsec/0001-wscript-Add-BISONFLAGS-support.patch
- delete mode 100644 meta-networking/recipes-support/ntpsec/ntpsec/0001-wscript-Widen-the-search-for-tags.patch
- delete mode 100644 meta-networking/recipes-support/ntpsec/ntpsec/0002-ntpd-ntp_sandbox.c-match-riscv-to-aarch-in-seccomp-f.patch
- rename meta-networking/recipes-support/ntpsec/{ntpsec_1.2.1.bb => ntpsec_1.2.2.bb} (83%)
-
-diff --git a/meta-networking/recipes-support/ntpsec/ntpsec/0001-Update-to-OpenSSL-3.0.0-alpha15.patch b/meta-networking/recipes-support/ntpsec/ntpsec/0001-Update-to-OpenSSL-3.0.0-alpha15.patch
-deleted file mode 100644
-index 825f6c93c320..000000000000
---- a/meta-networking/recipes-support/ntpsec/ntpsec/0001-Update-to-OpenSSL-3.0.0-alpha15.patch
-+++ /dev/null
-@@ -1,111 +0,0 @@
--From ba368822d0a197cb84c46c911d40d0c52cf9c391 Mon Sep 17 00:00:00 2001
--From: Hal Murray <hmurray@megapathdsl.net>
--Date: Sun, 2 May 2021 22:24:26 -0700
--Subject: [PATCH] Update to OpenSSL 3.0.0-alpha15
--
--Upstream-Status: Backport [https://gitlab.com/NTPsec/ntpsec/-/commit/ba368822d0a197cb84c46c911d40d0c52cf9c391]
--Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
--Signed-off-by: Alex Kiernan <alexk@zuma.ai>
-----
-- attic/cmac-timing.c | 37 ++++++++++++++-----------------------
-- 1 file changed, 14 insertions(+), 23 deletions(-)
--
--diff --git a/attic/cmac-timing.c b/attic/cmac-timing.c
--index c2088db63a4c..464daa76b9e6 100644
----- a/attic/cmac-timing.c
--+++ b/attic/cmac-timing.c
--@@ -225,28 +225,14 @@ static void DoPKEY(
-- #if OPENSSL_VERSION_NUMBER > 0x20000000L
-- static size_t One_EVP_MAC(
--   EVP_MAC_CTX *ctx,         /* context  */
---  char *cipher,
--   uint8_t *key,             /* key pointer */
--   int     keylength,        /* key length */
--   uint8_t *pkt,             /* packet pointer */
--   int     pktlength         /* packet length */
-- ) {
---	OSSL_PARAM params[3];
-- 	size_t len = EVP_MAX_MD_SIZE;
-- 
---	params[0] =
---          OSSL_PARAM_construct_utf8_string("cipher", cipher, 0);
---	params[1] =
---          OSSL_PARAM_construct_octet_string("key", key, keylength);
---	params[2] = OSSL_PARAM_construct_end();
---	if (0 == EVP_MAC_CTX_set_params(ctx, params)) {
---		unsigned long err = ERR_get_error();
---		char * str = ERR_error_string(err, NULL);
---		printf("## Oops, EVP_MAC_CTX_set_params() failed: %s.\n", str);
---		return 0;
---	}
---
---	if (0 == EVP_MAC_init(ctx)) {
--+	if (0 == EVP_MAC_init(ctx, key, keylength, NULL)) {
-- 		unsigned long err = ERR_get_error();
-- 		char * str = ERR_error_string(err, NULL);
-- 		printf("## Oops, EVP_MAC_init() failed: %s.\n", str);
--@@ -255,13 +241,13 @@ static size_t One_EVP_MAC(
-- 	if (0 == EVP_MAC_update(ctx, pkt, pktlength)) {
-- 		unsigned long err = ERR_get_error();
-- 		char * str = ERR_error_string(err, NULL);
---		printf("## Oops, EVP_MAC_init() failed: %s.\n", str);
--+		printf("## Oops, EVP_MAC_update() failed: %s.\n", str);
-- 		return 0;
-- 	}
-- 	if (0 == EVP_MAC_final(ctx, answer, &len, sizeof(answer))) {
-- 		unsigned long err = ERR_get_error();
-- 		char * str = ERR_error_string(err, NULL);
---		printf("## Oops, EVP_MAC_init() failed: %s.\n", str);
--+		printf("## Oops, EVP_MAC_final() failed: %s.\n", str);
-- 		return 0;
-- 	}
-- 	return len;
--@@ -290,7 +276,7 @@ static void Do_EVP_MAC(
-- 
-- 	clock_gettime(CLOCK_MONOTONIC, &start);
-- 	for (int i = 0; i < SAMPLESIZE; i++) {
---		digestlength = One_EVP_MAC(evp, cbc, key, keylength, pkt, pktlength);
--+		digestlength = One_EVP_MAC(evp, key, keylength, pkt, pktlength);
-- if (0 == digestlength) break;
-- 	}
-- 	clock_gettime(CLOCK_MONOTONIC, &stop);
--@@ -305,26 +291,31 @@ static size_t One_EVP_MAC2(
--   uint8_t *pkt,             /* packet pointer */
--   int     pktlength         /* packet length */
-- ) {
--+	EVP_MAC_CTX *dup;
-- 	size_t len = EVP_MAX_MD_SIZE;
-- 
---	if (0 == EVP_MAC_init(ctx)) {
--+	// dup = ctx;
--+	dup = EVP_MAC_CTX_dup(ctx);
--+
--+	if (0 == EVP_MAC_init(dup, NULL, 0, NULL)) {
-- 		unsigned long err = ERR_get_error();
-- 		char * str = ERR_error_string(err, NULL);
-- 		printf("## Oops, EVP_MAC_init() failed: %s.\n", str);
-- 		return 0;
-- 	}
---	if (0 == EVP_MAC_update(ctx, pkt, pktlength)) {
--+	if (0 == EVP_MAC_update(dup, pkt, pktlength)) {
-- 		unsigned long err = ERR_get_error();
-- 		char * str = ERR_error_string(err, NULL);
---		printf("## Oops, EVP_MAC_init() failed: %s.\n", str);
--+		printf("## Oops, EVP_MAC_update() failed: %s.\n", str);
-- 		return 0;
-- 	}
---	if (0 == EVP_MAC_final(ctx, answer, &len, sizeof(answer))) {
--+	if (0 == EVP_MAC_final(dup, answer, &len, sizeof(answer))) {
-- 		unsigned long err = ERR_get_error();
-- 		char * str = ERR_error_string(err, NULL);
---		printf("## Oops, EVP_MAC_init() failed: %s.\n", str);
--+		printf("## Oops, EVP_MAC_final() failed: %s.\n", str);
-- 		return 0;
-- 	}
--+	EVP_MAC_CTX_free(dup);
-- 	return len;
-- }
-- 
---- 
--2.33.0
--
-diff --git a/meta-networking/recipes-support/ntpsec/ntpsec/0001-ntpd-ntp_sandbox.c-allow-clone3-for-glibc-2.34-in-se.patch b/meta-networking/recipes-support/ntpsec/ntpsec/0001-ntpd-ntp_sandbox.c-allow-clone3-for-glibc-2.34-in-se.patch
-deleted file mode 100644
-index 112aaa2a07d6..000000000000
---- a/meta-networking/recipes-support/ntpsec/ntpsec/0001-ntpd-ntp_sandbox.c-allow-clone3-for-glibc-2.34-in-se.patch
-+++ /dev/null
-@@ -1,31 +0,0 @@
--From d474682bb30b93d04b7b01c2dd09832e483265ed Mon Sep 17 00:00:00 2001
--From: Sam James <sam@gentoo.org>
--Date: Sun, 14 Nov 2021 08:54:58 +0000
--Subject: [PATCH] ntpd/ntp_sandbox.c: allow clone3 for glibc-2.34 in seccomp
-- filter
--
--Bug: https://bugs.gentoo.org/823692
--Fixes: https://gitlab.com/NTPsec/ntpsec/-/issues/713
--Signed-off-by: Sam James <sam@gentoo.org>
--Upstream-Status: Backport [https://gitlab.com/NTPsec/ntpsec/-/commit/d474682bb30b93d04b7b01c2dd09832e483265ed]
--Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
--Signed-off-by: Alex Kiernan <alexk@zuma.ai>
-----
-- ntpd/ntp_sandbox.c | 1 +
-- 1 file changed, 1 insertion(+)
--
--diff --git a/ntpd/ntp_sandbox.c b/ntpd/ntp_sandbox.c
--index e66faaa8cbb0..3d6bccdfcf77 100644
----- a/ntpd/ntp_sandbox.c
--+++ b/ntpd/ntp_sandbox.c
--@@ -401,6 +401,7 @@ int scmp_sc[] = {
--  * rather than generate a trap.
--  */
-- 	SCMP_SYS(clone),	/* threads */
--+	SCMP_SYS(clone3),
-- 	SCMP_SYS(kill),		/* generate signal */
-- 	SCMP_SYS(madvise),
-- 	SCMP_SYS(mprotect),
---- 
--2.34.1
--
-diff --git a/meta-networking/recipes-support/ntpsec/ntpsec/0001-ntpd-ntp_sandbox.c-allow-newfstatat-on-all-archs-for.patch b/meta-networking/recipes-support/ntpsec/ntpsec/0001-ntpd-ntp_sandbox.c-allow-newfstatat-on-all-archs-for.patch
-deleted file mode 100644
-index 3bec2cea7768..000000000000
---- a/meta-networking/recipes-support/ntpsec/ntpsec/0001-ntpd-ntp_sandbox.c-allow-newfstatat-on-all-archs-for.patch
-+++ /dev/null
-@@ -1,42 +0,0 @@
--From a6c0847582305aaab122d54b635954829812922f Mon Sep 17 00:00:00 2001
--From: Alex Kiernan <alexk@zuma.ai>
--Date: Thu, 30 Dec 2021 09:32:26 +0000
--Subject: [PATCH 1/2] ntpd/ntp_sandbox.c: allow newfstatat on all archs for
-- glibc-2.34 in seccomp filter
--
--On Yocto Poky, newfstatat is used on (at least) arm64, x86_64 and
--riscv64:
--
--  2021-12-30T09:32:04 ntpd[341]: ERR: SIGSYS: got a trap.
--  2021-12-30T09:32:04 ntpd[341]: ERR: SIGSYS/seccomp bad syscall 262/0xc000003e
--
--Upstream-Status: Backport [https://gitlab.com/NTPsec/ntpsec/-/commit/a6c0847582305aaab122d54b635954829812922f]
--Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
--Signed-off-by: Alex Kiernan <alexk@zuma.ai>
-----
-- ntpd/ntp_sandbox.c | 2 +-
-- 1 file changed, 1 insertion(+), 1 deletion(-)
--
--diff --git a/ntpd/ntp_sandbox.c b/ntpd/ntp_sandbox.c
--index 3d6bccdfcf77..1ae82a671344 100644
----- a/ntpd/ntp_sandbox.c
--+++ b/ntpd/ntp_sandbox.c
--@@ -349,6 +349,7 @@ int scmp_sc[] = {
-- 	SCMP_SYS(lseek),
-- 	SCMP_SYS(membarrier),	/* Needed on Alpine 3.11.3 */
-- 	SCMP_SYS(munmap),
--+	SCMP_SYS(newfstatat),
-- 	SCMP_SYS(open),
-- #ifdef __NR_openat
-- 	SCMP_SYS(openat),	/* SUSE */
--@@ -452,7 +453,6 @@ int scmp_sc[] = {
-- #endif
-- #if defined(__aarch64__)
-- 	SCMP_SYS(faccessat),
---	SCMP_SYS(newfstatat),
-- 	SCMP_SYS(renameat),
-- 	SCMP_SYS(linkat),
-- 	SCMP_SYS(unlinkat),
---- 
--2.34.1
--
-diff --git a/meta-networking/recipes-support/ntpsec/ntpsec/0001-wscript-Add-BISONFLAGS-support.patch b/meta-networking/recipes-support/ntpsec/ntpsec/0001-wscript-Add-BISONFLAGS-support.patch
-new file mode 100644
-index 000000000000..2e3730df4769
---- /dev/null
-+++ b/meta-networking/recipes-support/ntpsec/ntpsec/0001-wscript-Add-BISONFLAGS-support.patch
-@@ -0,0 +1,29 @@
-+From 792cb4f9d13450251c6344eed2b35f382c98df0d Mon Sep 17 00:00:00 2001
-+From: Alex Kiernan <alexk@zuma.ai>
-+Date: Thu, 19 Jan 2023 13:00:45 +0000
-+Subject: [PATCH] wscript: Add BISONFLAGS support
-+
-+---
-+ wscript | 2 ++
-+ 1 file changed, 2 insertions(+)
-+
-+diff --git a/wscript b/wscript
-+index 7329d6e46889..de51f1e9cdd9 100644
-+--- a/wscript
-++++ b/wscript
-+@@ -140,6 +140,7 @@ def configure(ctx):
-+     # Ensure m4 is present, or bison will fail with SIGPIPE
-+     ctx.find_program('m4')
-+     ctx.load('bison')
-++    ctx.add_os_flags('BISONFLAGS')
-+ 
-+     for opt in opt_map:
-+         ctx.env[opt] = opt_map[opt]
-+@@ -911,6 +912,7 @@ int main(int argc, char **argv) {
-+     msg_setting("CFLAGS", " ".join(ctx.env.CFLAGS))
-+     msg_setting("LDFLAGS", " ".join(ctx.env.LDFLAGS))
-+     msg_setting("LINKFLAGS_NTPD", " ".join(ctx.env.LINKFLAGS_NTPD))
-++    msg_setting("BISONFLAGS", ctx.env.BISONFLAGS)
-+     msg_setting("PREFIX", ctx.env.PREFIX)
-+     msg_setting("LIBDIR", ctx.env.LIBDIR)
-+     msg_setting("Droproot Support", droproot_type)
-diff --git a/meta-networking/recipes-support/ntpsec/ntpsec/0001-wscript-Widen-the-search-for-tags.patch b/meta-networking/recipes-support/ntpsec/ntpsec/0001-wscript-Widen-the-search-for-tags.patch
-deleted file mode 100644
-index 98c62eed4976..000000000000
---- a/meta-networking/recipes-support/ntpsec/ntpsec/0001-wscript-Widen-the-search-for-tags.patch
-+++ /dev/null
-@@ -1,29 +0,0 @@
--From 9a7dead72f41e79979625c9bdef2fb638427d3d6 Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Mon, 22 Aug 2022 20:54:17 -0700
--Subject: [PATCH] wscript: Widen the search for tags
--
--Default is to look for annotated tags, howveer when using devtool we
--create our own git tree from release tarballs which will have tags but
--they are not annotated, therefore broaden the search to include all tags
--
--Upstream-Status: Inappropriate [OE-specific]
--
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
-- wscript | 2 +-
-- 1 file changed, 1 insertion(+), 1 deletion(-)
--
--diff --git a/wscript b/wscript
--index 879ded1..dff835d 100644
----- a/wscript
--+++ b/wscript
--@@ -177,7 +177,7 @@ def configure(ctx):
--     if build_desc:
--         build_desc = ' ' + build_desc
--     if ctx.env.BIN_GIT:
---        cmd = ctx.env.BIN_GIT + shlex.split("describe --dirty")
--+        cmd = ctx.env.BIN_GIT + shlex.split("describe --tags --dirty")
--         git_short_hash = ctx.cmd_and_log(cmd).strip()
--         git_short_hash = '-'.join(git_short_hash.split('-')[1:])
-- 
-diff --git a/meta-networking/recipes-support/ntpsec/ntpsec/0002-ntpd-ntp_sandbox.c-match-riscv-to-aarch-in-seccomp-f.patch b/meta-networking/recipes-support/ntpsec/ntpsec/0002-ntpd-ntp_sandbox.c-match-riscv-to-aarch-in-seccomp-f.patch
-deleted file mode 100644
-index 705a87bdfaa4..000000000000
---- a/meta-networking/recipes-support/ntpsec/ntpsec/0002-ntpd-ntp_sandbox.c-match-riscv-to-aarch-in-seccomp-f.patch
-+++ /dev/null
-@@ -1,34 +0,0 @@
--From 0f94870b84e68448f16b1304058bde4628dafde5 Mon Sep 17 00:00:00 2001
--From: Alex Kiernan <alexk@zuma.ai>
--Date: Thu, 30 Dec 2021 10:41:20 +0000
--Subject: [PATCH 2/2] ntpd/ntp_sandbox.c: match riscv to aarch in seccomp
-- filter
--
--On Yocto Poky, faccessat (et al) are also used on riscv64:
--
--  2018-03-09T12:35:32 ntpd[341]: ERR: SIGSYS: got a trap.
--  2018-03-09T12:35:32 ntpd[341]: ERR: SIGSYS/seccomp bad syscall 48/0xc00000f3
--
--Upstream-Status: Backport [https://gitlab.com/NTPsec/ntpsec/-/commit/0f94870b84e68448f16b1304058bde4628dafde5]
--Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
--Signed-off-by: Alex Kiernan <alexk@zuma.ai>
-----
-- ntpd/ntp_sandbox.c | 2 +-
-- 1 file changed, 1 insertion(+), 1 deletion(-)
--
--diff --git a/ntpd/ntp_sandbox.c b/ntpd/ntp_sandbox.c
--index 1ae82a671344..4a14ae224dc6 100644
----- a/ntpd/ntp_sandbox.c
--+++ b/ntpd/ntp_sandbox.c
--@@ -451,7 +451,7 @@ int scmp_sc[] = {
-- 	/* gentoo 64-bit and 32-bit, Intel and Arm use mmap */
-- 	SCMP_SYS(mmap),
-- #endif
---#if defined(__aarch64__)
--+#if defined(__aarch64__) || defined(__riscv)
-- 	SCMP_SYS(faccessat),
-- 	SCMP_SYS(renameat),
-- 	SCMP_SYS(linkat),
---- 
--2.34.1
--
-diff --git a/meta-networking/recipes-support/ntpsec/ntpsec_1.2.1.bb b/meta-networking/recipes-support/ntpsec/ntpsec_1.2.2.bb
-similarity index 83%
-rename from meta-networking/recipes-support/ntpsec/ntpsec_1.2.1.bb
-rename to meta-networking/recipes-support/ntpsec/ntpsec_1.2.2.bb
-index e975f903f93f..d11ada67ee5c 100644
---- a/meta-networking/recipes-support/ntpsec/ntpsec_1.2.1.bb
-+++ b/meta-networking/recipes-support/ntpsec/ntpsec_1.2.2.bb
-@@ -2,25 +2,22 @@ SUMMARY = "The Network Time Protocol suite, refactored"
- HOMEPAGE = "https://www.ntpsec.org/"
- 
- LICENSE = "CC-BY-4.0 & BSD-2-Clause & NTP & BSD-3-Clause & MIT"
--LIC_FILES_CHKSUM = "file://LICENSE.adoc;md5=0520591566b6ed3a9ced8b15b4d4abf9 \
--                    file://libjsmn/LICENSE;md5=38118982429881235de8adf478a8e75d \
--                    file://docs/copyright.adoc;md5=9a1e3fce4b630078cb67ba2b619d2b13 \
--                    file://libaes_siv/COPYING;md5=3b83ef96387f14655fc854ddc3c6bd57"
-+LIC_FILES_CHKSUM = "file://LICENSES/BSD-2;md5=653830da7b770a32f6f50f6107e0b186 \
-+                    file://LICENSES/BSD-3;md5=55e9dcf6a625a2dcfcda4ef6a647fbfd \
-+                    file://LICENSES/CC-BY-4.0;md5=2ab724713fdaf49e4523c4503bfd068d \
-+                    file://LICENSES/MIT;md5=5a9dfc801af3eb49df2055c9b07918b2 \
-+                    file://LICENSES/NTP;md5=cb56b7747f86157c78ca81f224806694"
- 
- DEPENDS += "bison-native \
-             openssl \
-             python3"
- 
- SRC_URI = "https://ftp.ntpsec.org/pub/releases/ntpsec-${PV}.tar.gz \
--           file://0001-Update-to-OpenSSL-3.0.0-alpha15.patch \
--           file://0001-ntpd-ntp_sandbox.c-allow-clone3-for-glibc-2.34-in-se.patch \
--           file://0001-ntpd-ntp_sandbox.c-allow-newfstatat-on-all-archs-for.patch \
--           file://0002-ntpd-ntp_sandbox.c-match-riscv-to-aarch-in-seccomp-f.patch \
-            file://volatiles.ntpsec \
--           file://0001-wscript-Widen-the-search-for-tags.patch \
-+           file://0001-wscript-Add-BISONFLAGS-support.patch \
-            "
- 
--SRC_URI[sha256sum] = "f2684835116c80b8f21782a5959a805ba3c44e3a681dd6c17c7cb00cc242c27a"
-+SRC_URI[sha256sum] = "2f2848760b915dfe185b9217f777738b36ceeb78a7fc208b7e74e039dec22df5"
- 
- UPSTREAM_CHECK_URI = "ftp://ftp.ntpsec.org/pub/releases/"
- 
-@@ -66,7 +63,6 @@ EXTRA_OECONF = "--cross-compiler='${CC}' \
-                 --pyshebang=${bindir}/python3 \
-                 --pythondir=${PYTHON_SITEPACKAGES_DIR} \
-                 --pythonarchdir=${PYTHON_SITEPACKAGES_DIR} \
--                --enable-debug \
-                 --enable-debug-gdb \
-                 --enable-early-droproot"
- 
-@@ -74,6 +70,12 @@ EXTRA_OEWAF_BUILD ?= "-v"
- 
- NTP_USER_HOME ?= "/var/lib/ntp"
- 
-+BISONFLAGS = "--file-prefix-map=${WORKDIR}=/usr/src/debug/${PN}/${EXTENDPE}${PV}-${PR}"
-+
-+do_configure:prepend() {
-+	export BISONFLAGS="${BISONFLAGS}"
-+}
-+
- do_install:append() {
- 	install -d ${D}${sysconfdir}/init.d
- 	install -m 755 ${S}/etc/rc/ntpd ${D}${sysconfdir}/init.d
--- 
-2.39.0
+diff --git a/meta-oe/recipes-core/dbus-cxx/dbus-cxx_2.1.0.bb b/meta-oe/reci=
+pes-core/dbus-cxx/dbus-cxx_2.1.0.bb
+index c8dabc5ea..44804545d 100644
+--- a/meta-oe/recipes-core/dbus-cxx/dbus-cxx_2.1.0.bb
++++ b/meta-oe/recipes-core/dbus-cxx/dbus-cxx_2.1.0.bb
+@@ -9,7 +9,7 @@ SRC_URI =3D "git://github.com/dbus-cxx/dbus-cxx.git;branch=
+=3Dmaster;protocol=3Dhttps \
+            file://0001-Include-typeinfo-for-typeid.patch \
+            file://0001-include-utility-header.patch \
+ "
+-SRC_URI:append:libc-musl =3D "file://fix_build_musl.patch"
++SRC_URI:append:libc-musl =3D " file://fix_build_musl.patch"
+ SRCREV =3D "73532d6a5faae9c721c2cc9535b8ef32d4d18264"
+=20
+ DEPENDS =3D "\
+diff --git a/meta-oe/recipes-crypto/fsverity-utils/fsverity-utils_1.5.bb b/=
+meta-oe/recipes-crypto/fsverity-utils/fsverity-utils_1.5.bb
+index c95a5b2d3..1c2c6e21e 100644
+--- a/meta-oe/recipes-crypto/fsverity-utils/fsverity-utils_1.5.bb
++++ b/meta-oe/recipes-crypto/fsverity-utils/fsverity-utils_1.5.bb
+@@ -16,7 +16,7 @@ S =3D "${WORKDIR}/git"
+=20
+ DEPENDS =3D "openssl"
+=20
+-EXTRA_OEMAKE:append =3D "PREFIX=3D${prefix} LIBDIR=3D${libdir} USE_SHARED_=
+LIB=3D1"
++EXTRA_OEMAKE:append =3D " PREFIX=3D${prefix} LIBDIR=3D${libdir} USE_SHARED=
+_LIB=3D1"
+ # We want to statically link the binary to libfsverity on native Windows
+ EXTRA_OEMAKE:remove:mingw32:class-nativesdk =3D "USE_SHARED_LIB=3D1"
+ EXTRA_OEMAKE:remove:mingw32:class-native =3D "USE_SHARED_LIB=3D1"
+diff --git a/meta-oe/recipes-support/neon/neon_0.32.4.bb b/meta-oe/recipes-=
+support/neon/neon_0.32.4.bb
+index c16a2c10a..d281bfde6 100644
+--- a/meta-oe/recipes-support/neon/neon_0.32.4.bb
++++ b/meta-oe/recipes-support/neon/neon_0.32.4.bb
+@@ -33,7 +33,7 @@ PACKAGECONFIG[zlib] =3D "--with-zlib,--without-zlib,zlib"
+ EXTRA_OECONF +=3D "--enable-shared --enable-threadsafe-ssl=3Dposix"
+=20
+ # Do not install into /usr/local
+-EXTRA_OEMAKE:append:class-native =3D "prefix=3D${prefix_native}"
++EXTRA_OEMAKE:append:class-native =3D " prefix=3D${prefix_native}"
+=20
+ do_configure:prepend() {
+     echo "${PV}" > ${S}/.version
+--=20
+2.35.1
 
 
