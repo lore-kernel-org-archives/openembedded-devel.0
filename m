@@ -1,105 +1,97 @@
-Return-Path: <leon.anavi@konsulko.com>
+Return-Path: <dbaryshkov@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 84BBFC25B4E
-	for <webhook@archiver.kernel.org>; Tue, 24 Jan 2023 16:01:40 +0000 (UTC)
-Received: from mail-ed1-f44.google.com (mail-ed1-f44.google.com [209.85.208.44])
- by mx.groups.io with SMTP id smtpd.web10.18829.1674576090993865916
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CD3E7C38142
+	for <webhook@archiver.kernel.org>; Tue, 24 Jan 2023 16:54:00 +0000 (UTC)
+Received: from mail-ed1-f43.google.com (mail-ed1-f43.google.com [209.85.208.43])
+ by mx.groups.io with SMTP id smtpd.web11.20607.1674579231590842884
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 24 Jan 2023 08:01:31 -0800
+ Tue, 24 Jan 2023 08:53:51 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=snrpuAL7;
- spf=pass (domain: konsulko.com, ip: 209.85.208.44, mailfrom: leon.anavi@konsulko.com)
-Received: by mail-ed1-f44.google.com with SMTP id v10so18757459edi.8
-        for <openembedded-devel@lists.openembedded.org>; Tue, 24 Jan 2023 08:01:30 -0800 (PST)
+ dkim=pass header.i=@linaro.org header.s=google header.b=guFY7Jbs;
+ spf=pass (domain: linaro.org, ip: 209.85.208.43, mailfrom: dmitry.baryshkov@linaro.org)
+Received: by mail-ed1-f43.google.com with SMTP id x36so18899015ede.13
+        for <openembedded-devel@lists.openembedded.org>; Tue, 24 Jan 2023 08:53:51 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=SLNbd3I73CNNkMueXVvvKpkGkuXlwgRtZ8tEGxwivOs=;
-        b=snrpuAL7LlMSJkwKHLzYkCmJmpjKNT6McTysoKeOj+09p7YZe9zbfGDk0gO52XN8oG
-         LR5neVx2q/c8ATI3PXVUsp7X7d6QFWJ3vncV2LNTOqF8TanK9ob0KHSRLNLQwCo1YlZr
-         S4ML8vdso9MXk5siTrIW+90MDF9VJ6KylYXMc=
+        d=linaro.org; s=google;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=GayVrc9di85ShPfErbdt3vXxNaMcAkOblXvwDDe7qQo=;
+        b=guFY7JbsEUv5jYcaRT6ua1yu7H0GNZSP1QumtllG97UI2Vbgh7RA84wsi5iSE8CJFD
+         AZnQj3rZpmQPhWIn5ErHE76AHnZz5EtoEEonrHR787Eim8xmf+hbgrfSL9G0W5nv/aYH
+         RmLfYrBSVPJMguB3UJxpXU3iMiV0+VwdG/iDn1M/y6mf1VT/J438/6meKE9dM5Mz3dIb
+         0lb6S2IzfSFXwWpr4LVNTD3uMi3M31KrQhywactkfLg+e1Y3H84Vd/3yy7EUMiqP8bsm
+         P17r/+bOwCIoFkILazfCmoIxn7BMVha/+NL74Md1A7Wfrg3nYRl8cDJUQ3QEOYa/wo9F
+         74yQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=SLNbd3I73CNNkMueXVvvKpkGkuXlwgRtZ8tEGxwivOs=;
-        b=cuSAxyHR3pK4gKEJlCCVIrKKbINFnGKPcDXWsZT5/CDeLodzAu/ESS3JnjCKmNDvQh
-         I/C8ese48flPHa2+EUSiDv0cg7pWP/gnYJoBYyTAJQw/JkkkwvmiiY5BkjpV8cUsz3q5
-         xLzZ+oWKltVy5rzsdYmFewvJfil1khSICA0YqLmfIr707pK1657W/iJEJ8zkRNRofUcX
-         Zl47R6aW9p7+RjV/Q/eZALVSZ0+RqYeyFwCC+v0D6HMC0xMkPiTDu4e0Kc4vRR6W5kNz
-         MwyvrCT2Mv3EtPuAmM2Lwwl0/jcX5BQZ2+abxpDokaSsq4D5LKb0SD0WXo3wO91J+qd4
-         F9FQ==
-X-Gm-Message-State: AFqh2kr6DWUyxFbNREzqNqV7yyQBytrbjGEBL8BV1+YAqPFdg7P3dZg/
-	OhpK9ZAbi15AY3XdYEZfsEv7iWbvWiSKLShDIzQ=
-X-Google-Smtp-Source: AMrXdXtRbNolwBZtS14cOZQwTwSa663pzlaYiXjeyUuojTu94G/+wS2baL+um78JcPGDjGW4CNGUcg==
-X-Received: by 2002:aa7:dd44:0:b0:49e:689:f003 with SMTP id o4-20020aa7dd44000000b0049e0689f003mr27727513edw.10.1674576089043;
-        Tue, 24 Jan 2023 08:01:29 -0800 (PST)
-Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
-        by smtp.gmail.com with ESMTPSA id c3-20020a056402120300b0048ec121a52fsm1194750edw.46.2023.01.24.08.01.27
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=GayVrc9di85ShPfErbdt3vXxNaMcAkOblXvwDDe7qQo=;
+        b=0l3tniXc3lyh/ceLSmrajw8iutx9IAb1wNOlu5Zw3+ErX56HKyQswbJ+lz2n5Fa25U
+         V6WinOKtn3Fo99dcc6qc6EcnVJfA7s+7/1FoNNxDqZS/VZ+8OkktA+nUbzKYV4opOEST
+         219XRg8ErCVhr471u4jfNyWhqGNcpYKFlVst7HJkdGjOKO2ZwSU0M9mF4GAczgsyWUWu
+         vHROnZDOsiOE6iolymn2X7XIkCrLCFHp+3LlwbayxdTekGZ5q62Kab/N3SeEpLu4vcYs
+         AVmuR4nCNkdji6XEJ1cYCHmtgKKuVC9S9J0Fr505EhcMjJFzwNMqk3aouB61V1fxxJGP
+         Bq0w==
+X-Gm-Message-State: AFqh2kqaBYdzeQPcR1GoG6AH6uMhegoi+bngyt0//eeedc7nbwg9jylL
+	QMvGZhDNBjiOD5JKipmVsmiL48UZ2rUu/g3s
+X-Google-Smtp-Source: AMrXdXs/5Qs3YlLt1r2HXB+yxymQTrR4f0T1NZGEQ/LjKtnHIZqwdaJaRqulQAyUrvmjjTKfwkZU1Q==
+X-Received: by 2002:a05:6402:27d3:b0:499:b3db:6aa3 with SMTP id c19-20020a05640227d300b00499b3db6aa3mr38096701ede.1.1674579229583;
+        Tue, 24 Jan 2023 08:53:49 -0800 (PST)
+Received: from umbar.unikie.fi ([192.130.178.91])
+        by smtp.gmail.com with ESMTPSA id p21-20020aa7d315000000b0049b58744f93sm1243980edq.81.2023.01.24.08.53.48
+        for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 24 Jan 2023 08:01:28 -0800 (PST)
-From: Leon Anavi <leon.anavi@konsulko.com>
+        Tue, 24 Jan 2023 08:53:49 -0800 (PST)
+From: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
 To: openembedded-devel@lists.openembedded.org
-Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 1/2] python3-nocaselist: Upgrade 1.0.6 -> 1.1.0
-Date: Tue, 24 Jan 2023 18:01:18 +0200
-Message-Id: <20230124160119.377481-1-leon.anavi@konsulko.com>
+Subject: [meta-oe][PATCH] edid-decode: an utility to parse EDID information
+Date: Tue, 24 Jan 2023 19:53:48 +0300
+Message-Id: <20230124165348.739245-1-dmitry.baryshkov@linaro.org>
 X-Mailer: git-send-email 2.30.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 24 Jan 2023 16:01:40 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100725
+ <openembedded-devel@lists.openembedded.org>; Tue, 24 Jan 2023 16:54:00 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100727
 
-Upgrade to release 1.1.0:
+While parse-edid serves it's right to dump the xorg.conf style data, it
+lacks the ability to display most of the information found in the EDID.
+Add another utility to parse EDID information.
 
-- The default casefolding method on Python 3 was changed from
-  str.lower() to str.casefold(). This changes the matching of the
-  case-insensitive values. This shold normally be an improvement,
-  but in case you find that you are negatively affected by this
-  change, you can go back to the str.lower() method by overriding
-  the NocaseDict.__casefold__() method with a method that calls
-  str.lower().
-- Added support for Python 3.11.
-- Changed the default casefolding method on Python 3 to be
-  str.casefold() in order to improve Unicode support. On Python 2,
-  it remains str.lower(). Added support for user-defined
-  casefolding.
-- Added support for storing None as a value in a NocaseList.
-  Previously, that was rejected with AttributeError since the
-  casefold method was attempted to be called on the None value.
-
-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
 ---
- ...hon3-nocaselist_1.0.6.bb => python3-nocaselist_1.1.0.bb} | 6 +++++-
- 1 file changed, 5 insertions(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-nocaselist_1.0.6.bb => python3-nocaselist_1.1.0.bb} (63%)
+ .../edid-decode/edid-decode_git.bb              | 17 +++++++++++++++++
+ 1 file changed, 17 insertions(+)
+ create mode 100644 meta-oe/recipes-support/edid-decode/edid-decode_git.bb
 
-diff --git a/meta-python/recipes-devtools/python/python3-nocaselist_1.0.6.bb b/meta-python/recipes-devtools/python/python3-nocaselist_1.1.0.bb
-similarity index 63%
-rename from meta-python/recipes-devtools/python/python3-nocaselist_1.0.6.bb
-rename to meta-python/recipes-devtools/python/python3-nocaselist_1.1.0.bb
-index 9e6842961..4b93ca98f 100644
---- a/meta-python/recipes-devtools/python/python3-nocaselist_1.0.6.bb
-+++ b/meta-python/recipes-devtools/python/python3-nocaselist_1.1.0.bb
-@@ -3,6 +3,10 @@ HOMEPAGE = "https://nocaselist.readthedocs.io/en/latest/"
- LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=86d3f3a95c324c9479bd8986968f4327"
- 
--SRC_URI[sha256sum] = "48f067f8cb841245f34d03120bc1ba9900f13b19cb51bcc6c7bee017f7c874da"
-+SRC_URI[sha256sum] = "a99384abc700c409e9def7143763e18dfad332fdff7e30fae1f6d1a30b372772"
- 
- inherit pypi setuptools3
+diff --git a/meta-oe/recipes-support/edid-decode/edid-decode_git.bb b/meta-oe/recipes-support/edid-decode/edid-decode_git.bb
+new file mode 100644
+index 000000000000..91570b6f350a
+--- /dev/null
++++ b/meta-oe/recipes-support/edid-decode/edid-decode_git.bb
+@@ -0,0 +1,17 @@
++SUMMARY = "Decode EDID data in human-readable format"
++DESCRIPTION = "edid-decode decodes EDID monitor description data in human-readable format."
++AUTHOR = "Hans Verkuil <hverkuil-cisco@xs4all.nl>"
++HOMEPAGE = "https://hverkuil.home.xs4all.nl/edid-decode/edid-decode.html"
 +
-+RDEPENDS:${PN} += " \
-+	${PYTHON_PN}-six \
-+"
++SECTION = "console/utils"
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=2ef696d66c156139232201f223c22592"
++
++SRC_URI= "git://git.linuxtv.org/edid-decode.git;protocol=https;branch=master"
++SRCREV = "e052f5f9fdf74ca11aa1a8edfa62eff8d0aa3d0d"
++PV = "0.0+git${SRCPV}"
++S = "${WORKDIR}/git"
++
++do_install() {
++    oe_runmake 'DESTDIR=${D}' install
++}
 -- 
 2.30.2
 
