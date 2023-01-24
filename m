@@ -1,86 +1,72 @@
-Return-Path: <twoerner@gmail.com>
+Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 45755C05027
-	for <webhook@archiver.kernel.org>; Mon, 23 Jan 2023 15:02:00 +0000 (UTC)
-Received: from mail-qt1-f176.google.com (mail-qt1-f176.google.com [209.85.160.176])
- by mx.groups.io with SMTP id smtpd.web11.44671.1674486119084259932
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 96650C38142
+	for <webhook@archiver.kernel.org>; Tue, 24 Jan 2023 05:35:17 +0000 (UTC)
+Received: from mailout02.t-online.de (mailout02.t-online.de [194.25.134.17])
+ by mx.groups.io with SMTP id smtpd.web11.8847.1674538515553501838
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 23 Jan 2023 07:01:59 -0800
+ Mon, 23 Jan 2023 21:35:16 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=H8+wfguv;
- spf=pass (domain: gmail.com, ip: 209.85.160.176, mailfrom: twoerner@gmail.com)
-Received: by mail-qt1-f176.google.com with SMTP id z9so9833630qtv.5
-        for <openembedded-devel@lists.openembedded.org>; Mon, 23 Jan 2023 07:01:58 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=QS46n65Dqu8wLnE63kiXsZxece5IP5LLhIe/Egk+lpA=;
-        b=H8+wfguvAPA7hm3fiVSKb6UnYsXByFmxeTdTykVy1NaJvqAe/IqgQaYxE2JS8gsSLw
-         P+jy9AMzi2QHmFnArowxG/zmvqpbfTXP8PeN9uANUpLY+FgUpeB51YCiVa4/XBF8rtRc
-         EaWXh/0zivRSgXdlUcaLHA9f7qhmZSsVb9SlLl1/Oe/DvgnVRy42zbNBM8Ww5rEYfH3U
-         kONLdK0w5XvUBaHd2cZdQyIexVR8jVMp7dLnk9+T38AGwM1Qr0OC3K8iVXbRuEqNBtf7
-         j4IozzfIgftgiI6GEyjJG5PTmLVzB9SVbMTtcBDA8dSGEir5e7w2ix3HCyY2U20MBy95
-         fMrw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=QS46n65Dqu8wLnE63kiXsZxece5IP5LLhIe/Egk+lpA=;
-        b=f9yOpb/JsfC+2hLgv3BV6e3LUjPVZfjH36mPz+4FIMZmR4RvH3QYGRwsrwaOuJvOSI
-         3Y4pql7YBdawpizi2T+cN06qZStl/jM62UY3s+vaety4H0hKByoUqz5GuOXgwl+dldu3
-         lSi5kcyJ0n8CKyjCpbhIm2pw2DKcR9YGTDBlTzuNlSQY4Gte4D8zpxkTKwtiyYGfdCsA
-         o4VPNQcQA2w2DNyOvopgSe2HS6tbzh2dB3x1lcF0vOTRfPDcS65LCqfiMKT1wzlI5PsV
-         KaJZQjcjQVaxEFa00Wc6DqQMCmig5s+bU2t3IHQcIlolrzz2aWARLUTl5B+YgIkIQ8vE
-         8b+Q==
-X-Gm-Message-State: AFqh2krOgz2nvzMgn45uyli33UGORB9Frm1OKBhEa74PF6P+jafQp2CU
-	Bxp63JukORCeufTmMhIICXehTK7UgLc=
-X-Google-Smtp-Source: AMrXdXsQ9Ehg29BNTE32b0ic4p8z6Vws03x1W0WvQMUkgIi0RfybF8qK8hWGCj3GXmvNnUBU7t9LAA==
-X-Received: by 2002:ac8:4b50:0:b0:3b6:8b52:1358 with SMTP id e16-20020ac84b50000000b003b68b521358mr23218163qts.9.1674486117880;
-        Mon, 23 Jan 2023 07:01:57 -0800 (PST)
-Received: from localhost.localdomain (pppoe-209-91-167-254.vianet.ca. [209.91.167.254])
-        by smtp.gmail.com with ESMTPSA id z21-20020ac84315000000b003b7ea583c7csm241713qtm.58.2023.01.23.07.01.57
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 23 Jan 2023 07:01:57 -0800 (PST)
-From: Trevor Woerner <twoerner@gmail.com>
+ dkim=missing; spf=none, err=SPF record not found (domain: t-online.de, ip: 194.25.134.17, mailfrom: f_l_k@t-online.de)
+Received: from fwd88.dcpf.telekom.de (fwd88.aul.t-online.de [10.223.144.114])
+	by mailout02.t-online.de (Postfix) with SMTP id 7C8E42A6AF
+	for <openembedded-devel@lists.openembedded.org>; Tue, 24 Jan 2023 06:35:13 +0100 (CET)
+Received: from flk-MS-7C91.fritz.box ([79.219.227.201]) by fwd88.t-online.de
+	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
+	esmtp id 1pKBxe-0hYKGn0; Tue, 24 Jan 2023 06:35:10 +0100
+From: Markus Volk <f_l_k@t-online.de>
 To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH] psqlodbc: fix HOMEPAGE
-Date: Mon, 23 Jan 2023 10:01:36 -0500
-Message-Id: <20230123150136.26469-1-twoerner@gmail.com>
-X-Mailer: git-send-email 2.36.0.rc2.17.g4027e30c53
+Cc: Markus Volk <f_l_k@t-online.de>
+Subject: [meta-oe][PATCH] cups-pk-helper: add recipe
+Date: Tue, 24 Jan 2023 06:35:02 +0100
+Message-Id: <20230124053502.10992-1-f_l_k@t-online.de>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-TOI-EXPURGATEID: 150726::1674538510-726BD7D8-B1E5ABA0/0/0 CLEAN NORMAL
+X-TOI-MSGID: ea0503ab-1a8a-49b1-b4d2-8f1e4420e8a2
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 23 Jan 2023 15:02:00 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100711
+ <openembedded-devel@lists.openembedded.org>; Tue, 24 Jan 2023 05:35:17 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100712
 
-The HOMEPAGE URL is no longer valid, update it to point to the correct
-location.
+cups-pk-helper is a runtime dependency for gnome-control-center
+or system-config-printer.
 
-Signed-off-by: Trevor Woerner <twoerner@gmail.com>
+Signed-off-by: Markus Volk <f_l_k@t-online.de>
 ---
- meta-oe/recipes-dbs/psqlodbc/psqlodbc_13.02.0000.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ .../recipes-printing/cups/cups-pk-helper_0.2.7.bb   | 13 +++++++++++++
+ 1 file changed, 13 insertions(+)
+ create mode 100644 meta-oe/recipes-printing/cups/cups-pk-helper_0.2.7.bb
 
-diff --git a/meta-oe/recipes-dbs/psqlodbc/psqlodbc_13.02.0000.bb b/meta-oe/recipes-dbs/psqlodbc/psqlodbc_13.02.0000.bb
-index 299abee000c9..57ade6162b4d 100644
---- a/meta-oe/recipes-dbs/psqlodbc/psqlodbc_13.02.0000.bb
-+++ b/meta-oe/recipes-dbs/psqlodbc/psqlodbc_13.02.0000.bb
-@@ -14,7 +14,7 @@ DESCRIPTION = "\
-  software to accept ODBC clients. \
- "
- SECTION = "libs"
--HOMEPAGE = "http://psqlodbc.projects.postgresql.org/"
-+HOMEPAGE = "https://odbc.postgresql.org/"
- 
- LICENSE = "LGPL-2.0-only"
- LIC_FILES_CHKSUM = "file://license.txt;md5=6db3822fc7512e83087ba798da013692"
--- 
-2.36.0.rc2.17.g4027e30c53
+diff --git a/meta-oe/recipes-printing/cups/cups-pk-helper_0.2.7.bb b/meta=
+-oe/recipes-printing/cups/cups-pk-helper_0.2.7.bb
+new file mode 100644
+index 000000000..c1ac74e3a
+--- /dev/null
++++ b/meta-oe/recipes-printing/cups/cups-pk-helper_0.2.7.bb
+@@ -0,0 +1,13 @@
++DESCRIPTION =3D "CUPS polkit helper"
++HOMEPAGE =3D "https://www.freedesktop.org/software/cups-pk-helper/releas=
+es/"
++LICENSE =3D "GPL-2.0-only"
++LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Db234ee4d69f5fce4486a80fdaf4a4=
+263"
++
++DEPENDS =3D "cups polkit glib-2.0 xz intltool-native"
++
++SRC_URI =3D "https://www.freedesktop.org/software/cups-pk-helper/release=
+s/cups-pk-helper-${PV}.tar.xz"
++SRC_URI[sha256sum] =3D "66070ddb448fe9fcee76aa26be2ede5a80f85563e3a4afd5=
+9d2bfd79fbe2e831"
++
++inherit meson pkgconfig gettext
++
++FILES:${PN} +=3D "${datadir}"
+--=20
+2.34.1
 
 
