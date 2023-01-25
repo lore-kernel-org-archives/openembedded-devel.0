@@ -2,56 +2,56 @@ Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8DFFFC61DA3
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7F8EEC54EAA
 	for <webhook@archiver.kernel.org>; Wed, 25 Jan 2023 13:31:46 +0000 (UTC)
-Received: from mail-oo1-f50.google.com (mail-oo1-f50.google.com [209.85.161.50])
- by mx.groups.io with SMTP id smtpd.web11.44969.1674653491218567072
+Received: from mail-oa1-f47.google.com (mail-oa1-f47.google.com [209.85.160.47])
+ by mx.groups.io with SMTP id smtpd.web11.44975.1674653502896370890
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 25 Jan 2023 05:31:39 -0800
+ Wed, 25 Jan 2023 05:31:43 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=BMIc3Y73;
- spf=pass (domain: gmail.com, ip: 209.85.161.50, mailfrom: akuster808@gmail.com)
-Received: by mail-oo1-f50.google.com with SMTP id t14-20020a4ad0ae000000b004f51f61de9fso3133632oor.13
-        for <openembedded-devel@lists.openembedded.org>; Wed, 25 Jan 2023 05:31:39 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=hb1HKYqL;
+ spf=pass (domain: gmail.com, ip: 209.85.160.47, mailfrom: akuster808@gmail.com)
+Received: by mail-oa1-f47.google.com with SMTP id 586e51a60fabf-15eec491b40so21326134fac.12
+        for <openembedded-devel@lists.openembedded.org>; Wed, 25 Jan 2023 05:31:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=mNhUt+MkqmZ0PO3IIuF8CduZCOQSpcg9MHZEi2ripwI=;
-        b=BMIc3Y73JHr24t/FeXGvGrnnF54sX6f2mQ1zjtV29K3lsopjjm9CZE2SCIzSpfyt1q
-         Rqqldf8jyCUJ1LCcaqUkVjXq75jct4+o57HHLyKiJvz/CyVU9iLVRFEKGWKME20jTYsc
-         1zfoRqWv1+ycSClgMEsk1ZISy8pNFiQkh87bfO6Y4anYCENSRkbFkOMHHAE688AC7+ck
-         EnmHvfd/SYBQMoU7HYa03E9ou4UEPGyzAGMgLbWU25bt0cqJblLYImjSJSnJ6iLE8nKy
-         Vb3ImfMx7w01fo14niP4rzUn+dW3Pjh4iH7pPty4maEwFCk5C5U8lxogSK9cZ/lqmchI
-         E6sw==
+        bh=tPUmDJTPj/GD9NvyabU9xgxxLPktLuJ/HIfbiMWzC00=;
+        b=hb1HKYqLH6ZxTCQKhvpqorjeAzcTjs1Bz5YKELxY58bW2BkC3PlhLl8QwMCAg0TMJL
+         0YdhRUhQC9qcF68j5KB7kXDC1iUq7B2NOutWavyqztXfMjmiqzHwDM1yBGnehSeSlnwT
+         eIud1m9sizIyR49hfVnV7BLBK7IW745Rung529B4s0yj7QU4TWNhVXO8levNyiHOWQsw
+         zjGDSPGlx+vftsDzoppLXtco6YWErKkRAwqpAJ9kPR+xGIdriCxxDheMOk/jvwlk8rx5
+         mWgyAfCs3+e4ph6N0qKH/KSw2Ily0MWLHINTYZx5irooTk/kYGN4bHKkxupr9kcTPYUE
+         1QyA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=mNhUt+MkqmZ0PO3IIuF8CduZCOQSpcg9MHZEi2ripwI=;
-        b=mIjraBHG8k6soVwMRNldfR7WQ7fYW/hIdz0wqziZ4ZNc7d9qnbQA3dE10T4mKBt8Fu
-         uUDn6VS0j678brS3NRl3nOiywphHw1zINtI3KpjaKakkQ2sNNQ7mz4fj9dn5SHSHuV7W
-         /0n8z/f8hCO20GVEMedmckwedXAa4f617BEVDrHvWhqmswClSI041EaPkf03zi+U27dC
-         wf5cE233sqjtTtwLH0fzsg9PKCRXi6HpTSInUGG52gS1a7K3eqVklUDTKYoA8qjjISAR
-         +4RoGuZn5AIQi+z8/KqSmKFZsb8+SasDWugf6h61wuGPUIO2gGjvqWqlo2wN8+yy6bo2
-         fvBw==
-X-Gm-Message-State: AO0yUKW3R3EDRf2kuM8chFT/F+bfYBYgXGz6jEOgSV6QzZm9lvGLOgR/
-	WOj6bQTmz4CyJFCqIBDenuw7k7L2uMc=
-X-Google-Smtp-Source: AK7set9SFSaeMWooVrF49hzpuSU2nQOpDGxp8PCFKnlb+BrCGT9S5sZe8bG8uMaLNi5hO9g7znagHQ==
-X-Received: by 2002:a4a:d81a:0:b0:511:d15f:bfe1 with SMTP id f26-20020a4ad81a000000b00511d15fbfe1mr658780oov.1.1674653498799;
-        Wed, 25 Jan 2023 05:31:38 -0800 (PST)
+        bh=tPUmDJTPj/GD9NvyabU9xgxxLPktLuJ/HIfbiMWzC00=;
+        b=w072u49QA8gaiYTTyI2fU8ySn7nE5yiC7EKkftIpqE4zPpUdIxNDbkfnB5RakuhnzT
+         0qkeUWgWYBEspyrUpeGscyYl3q065SIawSzNwUbeO2fAuuCLkafG3cVibjL+WVfv9UP+
+         /FpbTNsaXbCvBxOf6RJ+KwtluRd4jOIXjL6yHR5ga+UFgCzS6EA4H5O6KJq4Qj4kzRvy
+         TUm6GdIhGIl8/S5+OdRwlCEEF8813hHrb77nSWNb2MsUNEHGaWJuDyluahjwcOhZc9Dn
+         VBV6jDviOYd7GYdb8d9VOlLHa2ITJs7u0K+HSuU1F/poNgB3PMpydz8ccM2vAyAa/i4W
+         2WfA==
+X-Gm-Message-State: AFqh2kpV2QYBVAoIPffSVtxeAxUX4cxNM8Y4c6kss+5T8LX8BQqxGhFo
+	Hbi1t7r51J1FtyaDsSpWH+bcJdwWnzg=
+X-Google-Smtp-Source: AMrXdXstbFBOHkQGzj17BDa/Z7+6nKZSatcOgS8+O88UNl7vlEaiKRj51QtZt69twGcu0lu1kYjM3w==
+X-Received: by 2002:a05:6870:15d5:b0:15e:ceb9:9b67 with SMTP id k21-20020a05687015d500b0015eceb99b67mr18400473oad.52.1674653502089;
+        Wed, 25 Jan 2023 05:31:42 -0800 (PST)
 Received: from keaua.attlocal.net ([2600:1700:9190:ba10:434e:23f3:d1f1:25c3])
-        by smtp.gmail.com with ESMTPSA id b43-20020a4a98ee000000b0051134f333d3sm914383ooj.16.2023.01.25.05.31.37
+        by smtp.gmail.com with ESMTPSA id b43-20020a4a98ee000000b0051134f333d3sm914383ooj.16.2023.01.25.05.31.41
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 25 Jan 2023 05:31:38 -0800 (PST)
+        Wed, 25 Jan 2023 05:31:41 -0800 (PST)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [langdale 13/41] audit: upgrade 3.0.8 -> 3.0.9
-Date: Wed, 25 Jan 2023 08:30:55 -0500
-Message-Id: <8dddba5045929496838336d3ad89925fcd2e19e0.1674653280.git.akuster808@gmail.com>
+Subject: [langdale 16/41] volume-key: Inherit python3targetconfig
+Date: Wed, 25 Jan 2023 08:30:58 -0500
+Message-Id: <6d89943abc78d7529ad756e8078aac695c0b38e4.1674653280.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <cover.1674653280.git.akuster808@gmail.com>
 References: <cover.1674653280.git.akuster808@gmail.com>
@@ -61,45 +61,43 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 25 Jan 2023 13:31:46 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100748
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100751
 
-From: Wang Mingyu <wangmy@fujitsu.com>
+From: Khem Raj <raj.khem@gmail.com>
 
-Changelog:
-===========
-    In auditd, release the async flush lock on stop
-    Don't allow auditd to log directly into /var/log when log_group is non-zero
-    Cleanup krb5 memory leaks on error paths
-    Update auditd.cron to use auditctl --signal
-    In auparse, if too many fields, realloc array bigger (Paul Wolneykien)
-    In auparse, special case kernel module name interpretation
-    If overflow_action is ignore, don't treat as an error
+It uses python3-config during build to grok the python specific
+includedirs, therefore its important to ensure that target specific
+python3-config is used, otherwise currently it defaults to native
+python3-config which ends up adding native python3 include paths
+which might work out ok but is exposed when target is 32bit + lfs
+enabled, the headers don't match between native and target python
+and compile fails e.g.
 
-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+| In file included from /mnt/b/yoe/master/build/tmp/work/cortexa15t2hf-neon-yoe-linux-gnueabi/volume-key/0.3.12-r0/recipe-sysroot-native/usr/include/python3.11/Python.h:38:
+| /mnt/b/yoe/master/build/tmp/work/cortexa15t2hf-neon-yoe-linux-gnueabi/volume-key/0.3.12-r0/recipe-sysroot-native/usr/include/python3.11/pyport.h:601:2: error: "LONG_BIT definition appears wrong for platform (bad gcc/glibc config?)."
+| #error "LONG_BIT definition appears wrong for platform (bad gcc/glibc config?)."
+|  ^
+
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 01eb5561da2823a8bb80e790bfbb6cdf320ce09e)
+(cherry picked from commit 44384179db0db8bbf489dbe0524a5e5aa2853603)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../recipes-security/audit/{audit_3.0.8.bb => audit_3.0.9.bb}   | 2 +-
+ meta-oe/recipes-extended/volume_key/volume-key_0.3.12.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-security/audit/{audit_3.0.8.bb => audit_3.0.9.bb} (98%)
 
-diff --git a/meta-oe/recipes-security/audit/audit_3.0.8.bb b/meta-oe/recipes-security/audit/audit_3.0.9.bb
-similarity index 98%
-rename from meta-oe/recipes-security/audit/audit_3.0.8.bb
-rename to meta-oe/recipes-security/audit/audit_3.0.9.bb
-index 78439f66fe..dcab7dcc88 100644
---- a/meta-oe/recipes-security/audit/audit_3.0.8.bb
-+++ b/meta-oe/recipes-security/audit/audit_3.0.9.bb
-@@ -16,7 +16,7 @@ SRC_URI = "git://github.com/linux-audit/${BPN}-userspace.git;branch=master;proto
- "
+diff --git a/meta-oe/recipes-extended/volume_key/volume-key_0.3.12.bb b/meta-oe/recipes-extended/volume_key/volume-key_0.3.12.bb
+index faf8dd362d..aff555ad54 100644
+--- a/meta-oe/recipes-extended/volume_key/volume-key_0.3.12.bb
++++ b/meta-oe/recipes-extended/volume_key/volume-key_0.3.12.bb
+@@ -16,7 +16,7 @@ SRC_URI[sha256sum] = "6ca3748fc1dad22c450bbf6601d4e706cb11c5e662d11bb4aeb473a9cd
+ SRCNAME = "volume_key"
+ S = "${WORKDIR}/${SRCNAME}-${PV}"
  
- S = "${WORKDIR}/git"
--SRCREV = "54a62e78792fe583267cf80da717ee480b8f42bc"
-+SRCREV = "81fa28e0e8b4be83ddba03de8b816a3df510c17e"
+-inherit autotools python3native gettext pkgconfig
++inherit autotools python3native python3targetconfig gettext pkgconfig
  
- inherit autotools python3native update-rc.d systemd
- 
+ DEPENDS += " \
+     util-linux \
 -- 
 2.25.1
 
