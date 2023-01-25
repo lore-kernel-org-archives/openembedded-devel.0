@@ -2,188 +2,101 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E2A59C54E94
-	for <webhook@archiver.kernel.org>; Wed, 25 Jan 2023 16:54:07 +0000 (UTC)
-Received: from mail-pl1-f178.google.com (mail-pl1-f178.google.com [209.85.214.178])
- by mx.groups.io with SMTP id smtpd.web10.50533.1674665645750636552
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 09283C27C76
+	for <webhook@archiver.kernel.org>; Wed, 25 Jan 2023 16:57:18 +0000 (UTC)
+Received: from mail-oa1-f42.google.com (mail-oa1-f42.google.com [209.85.160.42])
+ by mx.groups.io with SMTP id smtpd.web11.50679.1674665834683923600
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 25 Jan 2023 08:54:05 -0800
+ Wed, 25 Jan 2023 08:57:14 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=al9ImgSO;
- spf=pass (domain: gmail.com, ip: 209.85.214.178, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f178.google.com with SMTP id 5so13123426plo.3
-        for <openembedded-devel@lists.openembedded.org>; Wed, 25 Jan 2023 08:54:05 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=YIlCjRJu;
+ spf=pass (domain: gmail.com, ip: 209.85.160.42, mailfrom: raj.khem@gmail.com)
+Received: by mail-oa1-f42.google.com with SMTP id 586e51a60fabf-15f64f2791dso22074316fac.7
+        for <openembedded-devel@lists.openembedded.org>; Wed, 25 Jan 2023 08:57:14 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=1vd9m5MKKyjYjmo2GFDYBUtz3Kw5S7RnrTL84E/xGMg=;
-        b=al9ImgSO8clnYvp7vyxUXxIFeuTctSlrlFQVg7tfF1hiy/d7WhpwTeVqn9xxpPifyz
-         ke4A9nYleYFzr8PbxkhwXMx9s0BSs11WpSp+zrr+G/cLAX1tbEnGdKQWDVgGLP1ijrFF
-         rcnTPxWcZBCCSz4+x1POzz4fAhyMy34W/kUYvkgYHfW/MkQXfiHZF7Lts3mo4ncmkhGo
-         vkRGdYDQ8lZi7Gzadnl0odvZoYkza6lvTdePFuWyJD7HR+i1ihahlPENE3XU8Ko6Dm0O
-         UWvu9VYEn2VkqL8zXhVuFiTVkILBeS4pAQXagmcRtr/qFnSkJFkTnjd7vZ6Rd/ZNDVBx
-         iojA==
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=kwKOTeesXXNVdqx4WBchH4Ot6in1mt6m0S1Knv1k2ow=;
+        b=YIlCjRJuSrKJl6Bo3Ok9N0omx7Ne4TZgv69/Ku1H1mnuUEoUSFcHUfNLUnMxZiCheU
+         hcydH0tzXZ4PstFfQmLHF3v/DAvJH/aJF+KXMFbDl3Q70RA2R3Poi+18ga+PdcvFUDho
+         7/sbglH2Y8EBfAGsNlirSuL3lM3+w5ehsqDU4b9dlZUmfGHS8r9Cd78Vo/FZHTmNGWSH
+         7qtBqlwF8nyp99/vQv1BDuk56hARV9oSewi/qNX7MPSzL/DX+SpNT9XJ5eq7/9xWXRwF
+         uye7xWYcOjYgP4Gbdq9EN7ymJu/Buvh3KZmLnMvUxE03d2rYBimotl2Z3jhdQZurlalu
+         +Z4Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=1vd9m5MKKyjYjmo2GFDYBUtz3Kw5S7RnrTL84E/xGMg=;
-        b=YfAMefGEqZlYEUqdf2C7uTlMhlY38cF0IbWTmjipOvnjhLCuqnWj3QgLoluj2W4NKb
-         KpBpvOP9fiJJkJLPQ6WZSm0cQL766SGubK0Anz1GjauQD2K8tQBD041T6PgfWWGsMoMY
-         0aSusO5H7jGIa9NAwqvT5oB7TGpQYDVHQ1A/zGmtAcAPclkJ2qr/tThJhaXzDjB43KQA
-         rP3Mu/R5r6v66B63wXqfTTS+QM3r1aqVrnir153QiTbpGH0rcJCfv0KzIGS+/o4AQmd/
-         8lANAZmQEu/9e7uH0f6umNQ/jegscTqXvsX9gXmpGsXJttqSRsECeGfb640skrdMrY43
-         P/fw==
-X-Gm-Message-State: AO0yUKXW3xY+SY7sy73pL3nfm1vJ5cuyiRaz/UsDE/KDSI72do/Y9OQw
-	yM0kiw6ORaw6BlAZT3FusFyboO97JfEExw==
-X-Google-Smtp-Source: AK7set+pTbISmCiMGq7/OX26+Tqs7yuRg/A4Bk+HUpwj8YnwBU+tHHNNB0AZM3aTsKlY0GwiKfPfZg==
-X-Received: by 2002:a17:903:1208:b0:196:1425:740c with SMTP id l8-20020a170903120800b001961425740cmr8349299plh.62.1674665644865;
-        Wed, 25 Jan 2023 08:54:04 -0800 (PST)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9181:1cf0::aee3])
-        by smtp.gmail.com with ESMTPSA id x5-20020a1709029a4500b00192a04bc620sm3824023plv.295.2023.01.25.08.54.04
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 25 Jan 2023 08:54:04 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 2/2] mariadb: Fix build with gcc-13
-Date: Wed, 25 Jan 2023 08:54:01 -0800
-Message-Id: <20230125165401.1151126-2-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.39.1
-In-Reply-To: <20230125165401.1151126-1-raj.khem@gmail.com>
-References: <20230125165401.1151126-1-raj.khem@gmail.com>
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=kwKOTeesXXNVdqx4WBchH4Ot6in1mt6m0S1Knv1k2ow=;
+        b=4m9jP7UGbnbeEhZ+7lLaQMRK6oWxAE+efX4tLxSXgQY7gUgVjCX889zj4X4H10av20
+         Gs+t6QMRS0vKFNlqdqwn7Zx/QGeaJ26DWS9akej9Qppb5cLUT7o8mF3SbKzomPu1DLsh
+         WwQxPy1dubncmZ/2ImIokkZSfKN97hwSkuxb3ABCB54DYAkA26YFCK/q15bZmGpkZAmX
+         NBRu1pgbRrPmq230WZDmjFVIcMGvr6gGCwN0HamI3Zh3ly5U0jjF3UABM0QB9KyGfPak
+         HoON62iVrix9DIy6Vnw0eKiwtk3Uk/dnaTb7GumGOaEakrsQ01yZDswIenmzacz97Ev7
+         ZLXw==
+X-Gm-Message-State: AO0yUKU3BWHb8mMMsHgvQCUcSQa5ufQgbyAOblWMJ2bSWB5J/T3OOe4h
+	5oXadQWQIkkkxGtLAU2ZELtRnfFQ6RAyTDQBFnbXmMbLsPlU9g==
+X-Google-Smtp-Source: AK7set++Ksx6sVAqvrI+PP/gO0jrK4o3b04ovVHjyErUKN0zFvlpJ0++dG+F1KeqiS8naKt8+XkNKN2Sw8rwhF+m+c8=
+X-Received: by 2002:a05:6870:c34a:b0:161:d899:6ee0 with SMTP id
+ e10-20020a056870c34a00b00161d8996ee0mr606918oak.262.1674665833753; Wed, 25
+ Jan 2023 08:57:13 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20230124131336.3877979-1-jlu@pengutronix.de>
+In-Reply-To: <20230124131336.3877979-1-jlu@pengutronix.de>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 25 Jan 2023 08:56:47 -0800
+Message-ID: <CAMKF1spCW78kZiADbiurViZOyjA_Eyuv09XH050uimJc3kj3zg@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH] softhsm: enable objectstore backend
+To: Jan Luebbe <jlu@pengutronix.de>
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 25 Jan 2023 16:54:07 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100779
+ <openembedded-devel@lists.openembedded.org>; Wed, 25 Jan 2023 16:57:18 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100780
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- meta-oe/recipes-dbs/mysql/mariadb.inc         |  1 +
- ...-missing-includes-cstdint-and-cstdio.patch | 95 +++++++++++++++++++
- 2 files changed, 96 insertions(+)
- create mode 100644 meta-oe/recipes-dbs/mysql/mariadb/0001-Add-missing-includes-cstdint-and-cstdio.patch
+seeing a build failure
 
-diff --git a/meta-oe/recipes-dbs/mysql/mariadb.inc b/meta-oe/recipes-dbs/mysql/mariadb.inc
-index 4e285aea7e..1a47d91105 100644
---- a/meta-oe/recipes-dbs/mysql/mariadb.inc
-+++ b/meta-oe/recipes-dbs/mysql/mariadb.inc
-@@ -22,6 +22,7 @@ SRC_URI = "https://archive.mariadb.org/${BP}/source/${BP}.tar.gz \
-            file://cross-compiling.patch \
-            file://0001-sql-CMakeLists.txt-fix-gen_lex_hash-not-found.patch \
-            file://lfs64.patch \
-+           file://0001-Add-missing-includes-cstdint-and-cstdio.patch \
-           "
- SRC_URI:append:libc-musl = " file://ppc-remove-glibc-dep.patch"
- SRC_URI[sha256sum] = "ffacf84e74daf249ad64b9573d79a4e882f66b004614f8b33bfcb14a8e25da1d"
-diff --git a/meta-oe/recipes-dbs/mysql/mariadb/0001-Add-missing-includes-cstdint-and-cstdio.patch b/meta-oe/recipes-dbs/mysql/mariadb/0001-Add-missing-includes-cstdint-and-cstdio.patch
-new file mode 100644
-index 0000000000..7c37fef493
---- /dev/null
-+++ b/meta-oe/recipes-dbs/mysql/mariadb/0001-Add-missing-includes-cstdint-and-cstdio.patch
-@@ -0,0 +1,95 @@
-+From 6e376601c990abaa5e261d1311f92acb3b370b8f Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Tue, 24 Jan 2023 21:40:43 -0800
-+Subject: [PATCH] Add missing includes <cstdint> and <cstdio>
-+
-+This is needed with GCC 13 and newer [1]
-+
-+[1] https://www.gnu.org/software/gcc/gcc-13/porting_to.html
-+
-+Upstream-Status: Pending
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ .../rocksdb/rocksdb/db/compaction/compaction_iteration_stats.h   | 1 +
-+ storage/rocksdb/rocksdb/include/rocksdb/utilities/checkpoint.h   | 1 +
-+ .../rocksdb/rocksdb/table/block_based/data_block_hash_index.h    | 1 +
-+ storage/rocksdb/rocksdb/util/slice.cc                            | 1 +
-+ storage/rocksdb/rocksdb/util/string_util.h                       | 1 +
-+ tpool/aio_linux.cc                                               | 1 +
-+ 6 files changed, 6 insertions(+)
-+
-+diff --git a/storage/rocksdb/rocksdb/db/compaction/compaction_iteration_stats.h b/storage/rocksdb/rocksdb/db/compaction/compaction_iteration_stats.h
-+index 963c1d8eb49..73487edd96d 100644
-+--- a/storage/rocksdb/rocksdb/db/compaction/compaction_iteration_stats.h
-++++ b/storage/rocksdb/rocksdb/db/compaction/compaction_iteration_stats.h
-+@@ -5,6 +5,7 @@
-+ 
-+ #pragma once
-+ 
-++#include <cstdint>
-+ #include "rocksdb/rocksdb_namespace.h"
-+ 
-+ struct CompactionIterationStats {
-+diff --git a/storage/rocksdb/rocksdb/include/rocksdb/utilities/checkpoint.h b/storage/rocksdb/rocksdb/include/rocksdb/utilities/checkpoint.h
-+index c7f93b4cfcd..3c2ab80535a 100644
-+--- a/storage/rocksdb/rocksdb/include/rocksdb/utilities/checkpoint.h
-++++ b/storage/rocksdb/rocksdb/include/rocksdb/utilities/checkpoint.h
-+@@ -8,6 +8,7 @@
-+ #pragma once
-+ #ifndef ROCKSDB_LITE
-+ 
-++#include <cstdint>
-+ #include <string>
-+ #include <vector>
-+ #include "rocksdb/status.h"
-+diff --git a/storage/rocksdb/rocksdb/table/block_based/data_block_hash_index.h b/storage/rocksdb/rocksdb/table/block_based/data_block_hash_index.h
-+index f356395f329..3215221755d 100644
-+--- a/storage/rocksdb/rocksdb/table/block_based/data_block_hash_index.h
-++++ b/storage/rocksdb/rocksdb/table/block_based/data_block_hash_index.h
-+@@ -5,6 +5,7 @@
-+ 
-+ #pragma once
-+ 
-++#include <cstdint>
-+ #include <string>
-+ #include <vector>
-+ 
-+diff --git a/storage/rocksdb/rocksdb/util/slice.cc b/storage/rocksdb/rocksdb/util/slice.cc
-+index 6db11cc947a..c26b6a21a57 100644
-+--- a/storage/rocksdb/rocksdb/util/slice.cc
-++++ b/storage/rocksdb/rocksdb/util/slice.cc
-+@@ -8,6 +8,7 @@
-+ // found in the LICENSE file. See the AUTHORS file for names of contributors.
-+ 
-+ #include <algorithm>
-++#include <cstdint>
-+ #include "rocksdb/slice_transform.h"
-+ #include "rocksdb/slice.h"
-+ #include "util/string_util.h"
-+diff --git a/storage/rocksdb/rocksdb/util/string_util.h b/storage/rocksdb/rocksdb/util/string_util.h
-+index a761be66c52..064d059f08f 100644
-+--- a/storage/rocksdb/rocksdb/util/string_util.h
-++++ b/storage/rocksdb/rocksdb/util/string_util.h
-+@@ -6,6 +6,7 @@
-+ 
-+ #pragma once
-+ 
-++#include <cstdint>
-+ #include <sstream>
-+ #include <string>
-+ #include <unordered_map>
-+diff --git a/tpool/aio_linux.cc b/tpool/aio_linux.cc
-+index 10234e0e46a..a6adf1af257 100644
-+--- a/tpool/aio_linux.cc
-++++ b/tpool/aio_linux.cc
-+@@ -18,6 +18,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02111 - 1301 USA*/
-+ 
-+ # include <thread>
-+ # include <atomic>
-++# include <cstdio>
-+ # include <libaio.h>
-+ # include <sys/syscall.h>
-+ 
-+-- 
-+2.39.1
-+
--- 
-2.39.1
+https://autobuilder.yoctoproject.org/typhoon/#/builders/88/builds/2389/steps/15/logs/stdio
 
+On Tue, Jan 24, 2023 at 5:13 AM Jan Luebbe <jlu@pengutronix.de> wrote:
+>
+> We already depend on sqlite, but the objectstore backend using it is not
+> enabled by default. Add the necessary configure option.
+>
+> The db backend is more robust when accessing the objectstore from many
+> parallel processes (such as during kernel module signing).
+>
+> Signed-off-by: Jan Luebbe <jlu@pengutronix.de>
+> ---
+>  meta-oe/recipes-security/softhsm/softhsm_2.6.1.bb | 1 +
+>  1 file changed, 1 insertion(+)
+>
+> diff --git a/meta-oe/recipes-security/softhsm/softhsm_2.6.1.bb b/meta-oe/recipes-security/softhsm/softhsm_2.6.1.bb
+> index d7bcd4f03bb2..1fded8df3dbb 100644
+> --- a/meta-oe/recipes-security/softhsm/softhsm_2.6.1.bb
+> +++ b/meta-oe/recipes-security/softhsm/softhsm_2.6.1.bb
+> @@ -11,6 +11,7 @@ SRC_URI[sha256sum] = "61249473054bcd1811519ef9a989a880a7bdcc36d317c9c25457fc614d
+>  inherit autotools pkgconfig siteinfo
+>
+>  EXTRA_OECONF += " --with-sqlite3=${STAGING_DIR_HOST}/usr"
+> +EXTRA_OECONF += " --with-objectstore-backend-db"
+>  EXTRA_OECONF += "${@oe.utils.conditional('SITEINFO_BITS', '64', ' --enable-64bit', '', d)}"
+>
+>  PACKAGECONFIG ?= "ecc eddsa pk11 openssl"
+> --
+> 2.30.2
+>
+>
+> -=-=-=-=-=-=-=-=-=-=-=-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#100721): https://lists.openembedded.org/g/openembedded-devel/message/100721
+> Mute This Topic: https://lists.openembedded.org/mt/96496618/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [raj.khem@gmail.com]
+> -=-=-=-=-=-=-=-=-=-=-=-
+>
 
