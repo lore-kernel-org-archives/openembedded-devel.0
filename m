@@ -2,56 +2,56 @@ Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B205AC61DA4
-	for <webhook@archiver.kernel.org>; Wed, 25 Jan 2023 13:31:56 +0000 (UTC)
-Received: from mail-oo1-f42.google.com (mail-oo1-f42.google.com [209.85.161.42])
- by mx.groups.io with SMTP id smtpd.web10.44851.1674653492172135514
+	by smtp.lore.kernel.org (Postfix) with ESMTP id ABC1FC27C76
+	for <webhook@archiver.kernel.org>; Wed, 25 Jan 2023 13:32:06 +0000 (UTC)
+Received: from mail-oo1-f43.google.com (mail-oo1-f43.google.com [209.85.161.43])
+ by mx.groups.io with SMTP id smtpd.web11.44967.1674653489724429460
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 25 Jan 2023 05:31:49 -0800
+ Wed, 25 Jan 2023 05:31:56 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=CLkWVaVK;
- spf=pass (domain: gmail.com, ip: 209.85.161.42, mailfrom: akuster808@gmail.com)
-Received: by mail-oo1-f42.google.com with SMTP id 123-20020a4a0681000000b004faa9c6f6b9so3130122ooj.11
-        for <openembedded-devel@lists.openembedded.org>; Wed, 25 Jan 2023 05:31:48 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=AnuSJZ9Q;
+ spf=pass (domain: gmail.com, ip: 209.85.161.43, mailfrom: akuster808@gmail.com)
+Received: by mail-oo1-f43.google.com with SMTP id j10-20020a4aa64a000000b004f9b746ee29so3156792oom.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 25 Jan 2023 05:31:56 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=lpqDJ2APuZ1oCGAUdm4MUELLr54CPAGeppN3YgyMh6k=;
-        b=CLkWVaVKiO74OMXORHHJgpIBceO7/0cZ0Tui0cOdUuhNbA4UwhlddJTDCnmtLg3Iq1
-         N5Hvo+RgkMNIlHvQvEOpLA5l6xx7PqcUnVzVrLHEl2H6Aja+Gm2j3L1jwLupa/fBRm/V
-         Wmu6Uerf7bh7vVTUWl05olq5L7QHwEa+pIIRrh1MNOyZ0qZoFWE9isVNn9W3F/s39mDd
-         Y5UTJlHH9TWe8DpgOoMV7y19KPo6iXwy35IFq37c07T/9ALOCd81yeJwRch526NMjxV7
-         c3TCYdednkFBQm5aiecyjDOzyMCzTYXK/VWC7psUx3iJ5QeqWkF91IEaC+bBaR9j0LZ+
-         3/4A==
+        bh=dtHjm+fvj22IWeq33SMCw53s5uRHNpO2r1wvJsB328Q=;
+        b=AnuSJZ9QKFnSnGNQK/RCWtXtPAYl5+0N7Dw3Ec0v6SmEK17LjuOrAcnIXMUiEDkOOn
+         f8XNWSAyAezsfkG0tPfUR9flUYdqskN0EtGfBTpMW+WPPNFgyeCgPMB4/QKV4/4rRhCZ
+         LqL2P0YznJYh44hipBbkSWsRvrnFCRJ6v813WKKymOaUoC4KmKWRgu76T1Hopu9kk6PF
+         zHUaHsYY2h5sBC/NzqmG+jj16VNE/zX4YeratFTkZD8tLWitTSEgj8hVXG9AF9M/Zm8U
+         FgWKkkZfIFXx8pcjy3MtQ3OmzGdF4l1QYrkuKwr38JJmkQgGvdCbXmp0uNcn+QihZW5m
+         EjwA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=lpqDJ2APuZ1oCGAUdm4MUELLr54CPAGeppN3YgyMh6k=;
-        b=qnOmhSNmaI4uYF7VQFD0B2nOT4c1nrKGSEkWzMuOc+r9OADyR2qFoJUEIax8ZAM6Ej
-         yIs5F1ZIq/EMSo/vlse+m2ImbRsuANz11mieowBHLX8bqbYi0EA1wH+q60UqTi+y3hD6
-         fQ58H0ArMMY70NqqZqv/re7stBqKe14ApcWWsFRiTs9ua3/x8+kXZCNqX79EkwIuHlV+
-         x6cuvi6yu+nBdX1Ueh4tRQ2B8PQBaYVshf/yh1XHtEvycevoWVHCFKGZibhnadpQE3gS
-         snv8GO/ls/7EhsGsIheJQgI+3tCCRCUT/m7LJeLbTSFDkLMRAJH5ygHmsP4nqx8el6FG
-         Rumg==
-X-Gm-Message-State: AFqh2kponM2xxrcmehd7Xs1Qcey1RLpZRvtKGsr7sqs1vaeBUdngpIl1
-	tmIxr0Ocna0BQjiF9TZeEo9U+zmse7A=
-X-Google-Smtp-Source: AMrXdXsj/uwRQjH1mX5+DCKHGbbk9BgjbijCi2Uvyb3Pt/DSL5TB0fBulV9Lv1r4ucWnWt1X3vggtQ==
-X-Received: by 2002:a4a:d257:0:b0:4f2:99ac:efe3 with SMTP id e23-20020a4ad257000000b004f299acefe3mr16059624oos.1.1674653508214;
-        Wed, 25 Jan 2023 05:31:48 -0800 (PST)
+        bh=dtHjm+fvj22IWeq33SMCw53s5uRHNpO2r1wvJsB328Q=;
+        b=2eSPUTqSru7cPhyNHW14fn9Z/PrIAT38/tMD1TjCkUzimt1bIXM+6FVTebBmix3u6/
+         Fr82SSXlJ8c7/CLke9Ub7d0TqyhneipjUmjQ7iXrtS+5GC+JB2g18vpXKwD5QyktH4JM
+         BJIV5Wk/gE8sFBR4nO6dJiKZo5JXYFCaUZu+KIeVz7etIdFzCbIl+CBVG1XZaRyZ2pOE
+         6sFUMspPntxjGF1vod3k2rdmS+vV+PNBFRyb5w/gByLLn+5ZCRr/KAV9Ssech/tppoCD
+         4dFBg4nkUsCLpafmigrgymEG0xb1QxGMEQNd0r3EPKEQmHB/eN0XLAPxUAb5wfNp4WJL
+         D/Tw==
+X-Gm-Message-State: AFqh2koMPkn/0fEQZCSvz5coqLQQsrx+gw7sJOggkXNFplNNjs3k2U1J
+	csTSj8retv9js5bPfyOxYBUAw35d0WA=
+X-Google-Smtp-Source: AMrXdXscAKJjN0mi7hS/hgRtSltKLs2NjymqYqQBsBXs9V2ery2+laZKIX7ebcTKk5ycKroDLrKaxQ==
+X-Received: by 2002:a4a:dcce:0:b0:4f2:cf1:c3db with SMTP id h14-20020a4adcce000000b004f20cf1c3dbmr15362609oou.1.1674653516176;
+        Wed, 25 Jan 2023 05:31:56 -0800 (PST)
 Received: from keaua.attlocal.net ([2600:1700:9190:ba10:434e:23f3:d1f1:25c3])
-        by smtp.gmail.com with ESMTPSA id b43-20020a4a98ee000000b0051134f333d3sm914383ooj.16.2023.01.25.05.31.47
+        by smtp.gmail.com with ESMTPSA id b43-20020a4a98ee000000b0051134f333d3sm914383ooj.16.2023.01.25.05.31.55
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 25 Jan 2023 05:31:47 -0800 (PST)
+        Wed, 25 Jan 2023 05:31:55 -0800 (PST)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [langdale 22/41] dool: Add patch to fix rebuild
-Date: Wed, 25 Jan 2023 08:31:04 -0500
-Message-Id: <4f15bf4a46d04945f6640c08bb1589c17fb138b6.1674653280.git.akuster808@gmail.com>
+Subject: [langdale 29/41] redis: 7.0.5 -> 7.0.7
+Date: Wed, 25 Jan 2023 08:31:11 -0500
+Message-Id: <e32295911edf7be94f8b08214e9a210f2d7cb0b3.1674653280.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <cover.1674653280.git.akuster808@gmail.com>
 References: <cover.1674653280.git.akuster808@gmail.com>
@@ -60,304 +60,93 @@ Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 25 Jan 2023 13:31:56 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100757
+ <openembedded-devel@lists.openembedded.org>; Wed, 25 Jan 2023 13:32:06 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100764
 
-From: Alexander Stein <alexander.stein@ew.tq-group.com>
+From: Changqing Li <changqing.li@windriver.com>
 
-When cleaning the package during rebuild in base_do_configure()
-'make clean' deletes docs/dool.1. This files comes from source repository
-but can't be recreated using 'make docs'.
+This upgrade include fix for CVE-2022-3647
 
-Signed-off-by: Alexander Stein <alexander.stein@ew.tq-group.com>
+Signed-off-by: Changqing Li <changqing.li@windriver.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 19f28fb34e2fa15b30274b97d10b8ecbdafaaf19)
+Signed-off-by: Chee Yang Lee <chee.yang.lee@intel.com>
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../dool/dool/0001-Fix-rename-in-docs.patch   | 261 ++++++++++++++++++
- meta-oe/recipes-support/dool/dool_1.1.0.bb    |   1 +
- 2 files changed, 262 insertions(+)
- create mode 100644 meta-oe/recipes-support/dool/dool/0001-Fix-rename-in-docs.patch
+ ...006-Define-correct-gregs-for-RISCV32.patch | 20 ++++++++++---------
+ .../redis/{redis_7.0.5.bb => redis_7.0.7.bb}  |  2 +-
+ 2 files changed, 12 insertions(+), 10 deletions(-)
+ rename meta-oe/recipes-extended/redis/{redis_7.0.5.bb => redis_7.0.7.bb} (96%)
 
-diff --git a/meta-oe/recipes-support/dool/dool/0001-Fix-rename-in-docs.patch b/meta-oe/recipes-support/dool/dool/0001-Fix-rename-in-docs.patch
-new file mode 100644
-index 0000000000..8d576f5d58
---- /dev/null
-+++ b/meta-oe/recipes-support/dool/dool/0001-Fix-rename-in-docs.patch
-@@ -0,0 +1,261 @@
-+From 689c65fb050976d5a548a5b9a0f5d2c14eaa3301 Mon Sep 17 00:00:00 2001
-+From: Alexander Stein <alexander.stein@tq-group.com>
-+Date: Thu, 8 Dec 2022 14:11:46 +0100
-+Subject: [PATCH 1/1] Fix rename in docs
-+
-+The content of dool.1.adoc is completly unchanged from dstat.1.adoc.
-+Unfortunately the 'NAME' specifies the created file name. So
-+building/cleaning docs is currently broken
-+
-+Upstream-Status: Pending
-+https://github.com/scottchiefbaker/dool/pull/30
-+
-+Signed-off-by: Alexander Stein <alexander.stein@tq-group.com>
-+---
-+ docs/dool.1.adoc | 108 +++++++++++++++++++++++------------------------
-+ 1 file changed, 54 insertions(+), 54 deletions(-)
-+
-+diff --git a/docs/dool.1.adoc b/docs/dool.1.adoc
-+index 24c4a54..921df1f 100644
-+--- a/docs/dool.1.adoc
-++++ b/docs/dool.1.adoc
-+@@ -1,35 +1,35 @@
-+-= dstat(1)
-++= dool(1)
-+ Dag Wieers <dag@wieers.com>
-+ v0.7.3, August 2014
-+ 
-+ 
-+ == NAME
-+-dstat - versatile tool for generating system resource statistics
-++dool - versatile tool for generating system resource statistics
-+ 
-+ 
-+ == SYNOPSIS
-+-dstat [-afv] [options..] [delay [count]]
-++dool [-afv] [options..] [delay [count]]
-+ 
-+ 
-+ == DESCRIPTION
-+-Dstat is a versatile replacement for vmstat, iostat and ifstat. Dstat
-++Dool is a versatile replacement for vmstat, iostat and ifstat. Dool
-+ overcomes some of the limitations and adds some extra features.
-+ 
-+-Dstat allows you to view all of your system resources instantly, you
-++Dool allows you to view all of your system resources instantly, you
-+ can eg. compare disk usage in combination with interrupts from your
-+ IDE controller, or compare the network bandwidth numbers directly with
-+ the disk throughput (in the same interval).
-+ 
-+-Dstat also cleverly gives you the most detailed information in columns
-++Dool also cleverly gives you the most detailed information in columns
-+ and clearly indicates in what magnitude and unit the output is displayed.
-+ Less confusion, less mistakes, more efficient.
-+ 
-+-Dstat is unique in letting you aggregate block device throughput for a
-++Dool is unique in letting you aggregate block device throughput for a
-+ certain diskset or network bandwidth for a group of interfaces, ie. 
-+ you can see the throughput for all the block devices that make up a
-+ single filesystem or storage system.
-+ 
-+-Dstat allows its data to be directly written to a CSV file to be
-++Dool allows its data to be directly written to a CSV file to be
-+ imported and used by OpenOffice, Gnumeric or Excel to create graphs.
-+ 
-+ [NOTE]
-+@@ -187,13 +187,13 @@ Possible internal stats are::
-+     write CSV output to file
-+ 
-+ --profile::
-+-    show profiling statistics when exiting dstat
-++    show profiling statistics when exiting dool
-+ 
-+ 
-+ == PLUGINS
-+-While anyone can create their own dstat plugins (and contribute them) dstat
-++While anyone can create their own dool plugins (and contribute them) dool
-+ ships with a number of plugins already that extend its capabilities greatly.
-+-Here is an overview of the plugins dstat ships with:
-++Here is an overview of the plugins dool ships with:
-+ 
-+ --battery::
-+     battery in percentage (needs ACPI)
-+@@ -225,17 +225,17 @@ Here is an overview of the plugins dstat ships with:
-+ --disk-wait::
-+     average time (in milliseconds) for I/O requests issued to the device to be served
-+ 
-+---dstat::
-+-    show dstat cputime consumption and latency
-++--dool::
-++    show dool cputime consumption and latency
-+ 
-+---dstat-cpu::
-+-    show dstat advanced cpu usage
-++--dool-cpu::
-++    show dool advanced cpu usage
-+ 
-+---dstat-ctxt::
-+-    show dstat context switches
-++--dool-ctxt::
-++    show dool context switches
-+ 
-+---dstat-mem::
-+-    show dstat advanced memory usage
-++--dool-mem::
-++    show dool advanced memory usage
-+ 
-+ --fan::
-+     fan speed (needs ACPI)
-+@@ -250,7 +250,7 @@ Here is an overview of the plugins dstat ships with:
-+     GPFS filesystem operations (needs mmpmon)
-+ 
-+ --helloworld::
-+-    Hello world example dstat plugin
-++    Hello world example dool plugin
-+ 
-+ --innodb-buffer::
-+     show innodb buffer stats
-+@@ -340,22 +340,22 @@ Here is an overview of the plugins dstat ships with:
-+     show sendmail queue size (needs sendmail)
-+ 
-+ --snmp-cpu::
-+-    show CPU stats using SNMP from DSTAT_SNMPSERVER
-++    show CPU stats using SNMP from DOOL_SNMPSERVER
-+ 
-+ --snmp-load::
-+-    show load stats using SNMP from DSTAT_SNMPSERVER
-++    show load stats using SNMP from DOOL_SNMPSERVER
-+ 
-+ --snmp-mem::
-+-    show memory stats using SNMP from DSTAT_SNMPSERVER
-++    show memory stats using SNMP from DOOL_SNMPSERVER
-+ 
-+ --snmp-net::
-+-    show network stats using SNMP from DSTAT_SNMPSERVER
-++    show network stats using SNMP from DOOL_SNMPSERVER
-+ 
-+ --snmp-net-err:
-+-    show network errors using SNMP from DSTAT_SNMPSERVER
-++    show network errors using SNMP from DOOL_SNMPSERVER
-+ 
-+ --snmp-sys::
-+-    show system stats (interrupts and context switches) using SNMP from DSTAT_SNMPSERVER
-++    show system stats (interrupts and context switches) using SNMP from DOOL_SNMPSERVER
-+ 
-+ --snooze::
-+     show number of ticks per second
-+@@ -463,7 +463,7 @@ The default delay is 1 and count is unspecified (unlimited)
-+ 
-+ 
-+ == INTERMEDIATE UPDATES
-+-When invoking dstat with a *delay* greater than 1 and without the
-++When invoking dool with a *delay* greater than 1 and without the
-+ *--noupdate* option, it will show intermediate updates, ie. the first
-+ time a 1 sec average, the second update a 2 second average, etc. until
-+ the delay has been reached.
-+@@ -475,34 +475,34 @@ average on a new line, just like with vmstat.
-+ 
-+ 
-+ == EXAMPLES
-+-Using dstat to relate disk-throughput with network-usage (eth0), total CPU-usage and system counters:
-++Using dool to relate disk-throughput with network-usage (eth0), total CPU-usage and system counters:
-+ ----
-+-dstat -dnyc -N eth0 -C total -f 5
-++dool -dnyc -N eth0 -C total -f 5
-+ ----
-+ 
-+-Checking dstat's behaviour and the system impact of dstat:
-++Checking dool's behaviour and the system impact of dool:
-+ ----
-+-dstat -taf --debug
-++dool -taf --debug
-+ ----
-+ 
-+ Using the time plugin together with cpu, net, disk, system, load, proc and
-+ top_cpu plugins:
-+ ----
-+-dstat -tcndylp --top-cpu
-++dool -tcndylp --top-cpu
-+ ----
-+ this is identical to
-+ ----
-+-dstat --time --cpu --net --disk --sys --load --proc --top-cpu
-++dool --time --cpu --net --disk --sys --load --proc --top-cpu
-+ ----
-+ 
-+-Using dstat to relate advanced cpu stats with interrupts per device:
-++Using dool to relate advanced cpu stats with interrupts per device:
-+ ----
-+-dstat -t --cpu-adv -yif
-++dool -t --cpu-adv -yif
-+ ----
-+ 
-+ 
-+ == BUGS
-+-Since it is practically impossible to test dstat on every possible
-++Since it is practically impossible to test dool on every possible
-+ permutation of kernel, python or distribution version, I need your
-+ help and your feedback to fix the remaining problems. If you have
-+ improvements or bugreports, please send them to:
-+@@ -513,40 +513,40 @@ Please see the TODO file for known bugs and future plans.
-+ 
-+ 
-+ == FILES
-+-Paths that may contain external dstat_*.py plugins:
-++Paths that may contain external dool_*.py plugins:
-+ 
-+-    ~/.dstat/
-++    ~/.dool/
-+     (path of binary)/plugins/
-+-    /usr/share/dstat/
-+-    /usr/local/share/dstat/
-++    /usr/share/dool/
-++    /usr/local/share/dool/
-+ 
-+ == ENVIRONMENT VARIABLES
-+ 
-+-Dstat will read additional command line arguments from the environment
-+-variable *DSTAT_OPTS*. You can use this to configure Dstat's default
-++Dool will read additional command line arguments from the environment
-++variable *DOOL_OPTS*. You can use this to configure Dool's default
-+ behavior, e.g. if you have a black-on-white terminal:
-+ 
-+-    export DSTAT_OPTS="--bw --noupdate"
-++    export DOOL_OPTS="--bw --noupdate"
-+ 
-+ Other internal or external plugins have their own environment variables
-+ to influence their behavior, e.g.
-+ 
-+ 
-+-    DSTAT_NTPSERVER
-++    DOOL_NTPSERVER
-+ 
-+-    DSTAT_MYSQL
-+-    DSTAT_MYSQL_HOST
-+-    DSTAT_MYSQL_PORT
-+-    DSTAT_MYSQL_SOCKET
-+-    DSTAT_MYSQL_USER
-+-    DSTAT_MYSQL_PWD
-++    DOOL_MYSQL
-++    DOOL_MYSQL_HOST
-++    DOOL_MYSQL_PORT
-++    DOOL_MYSQL_SOCKET
-++    DOOL_MYSQL_USER
-++    DOOL_MYSQL_PWD
-+ 
-+-    DSTAT_SNMPSERVER
-+-    DSTAT_SNMPCOMMUNITY
-++    DOOL_SNMPSERVER
-++    DOOL_SNMPCOMMUNITY
-+ 
-+-    DSTAT_SQUID_OPTS
-++    DOOL_SQUID_OPTS
-+ 
-+-    DSTAT_TIMEFMT
-++    DOOL_TIMEFMT
-+ 
-+ == SEE ALSO
-+ 
+diff --git a/meta-oe/recipes-extended/redis/redis-7/0006-Define-correct-gregs-for-RISCV32.patch b/meta-oe/recipes-extended/redis/redis-7/0006-Define-correct-gregs-for-RISCV32.patch
+index 01f8421811..385b0aeed0 100644
+--- a/meta-oe/recipes-extended/redis/redis-7/0006-Define-correct-gregs-for-RISCV32.patch
++++ b/meta-oe/recipes-extended/redis/redis-7/0006-Define-correct-gregs-for-RISCV32.patch
+@@ -1,4 +1,4 @@
+-From f26a978c638bcbc621669dce0ab89e43af42af98 Mon Sep 17 00:00:00 2001
++From b6b2c652abfa98093401b232baca8719c50cadf4 Mon Sep 17 00:00:00 2001
+ From: Khem Raj <raj.khem@gmail.com>
+ Date: Mon, 26 Oct 2020 21:32:22 -0700
+ Subject: [PATCH] Define correct gregs for RISCV32
+@@ -6,18 +6,17 @@ Subject: [PATCH] Define correct gregs for RISCV32
+ Upstream-Status: Pending
+ Signed-off-by: Khem Raj <raj.khem@gmail.com>
+ 
+-Updated patch for 6.2.1
+-Signed-off-by: Yi Fan Yu <yifan.yu@windriver.com>
+-
++Updated patch for 6.2.8
++Signed-off-by: Changqing Li <changqing.li@windriver.com>
+ ---
+  src/debug.c | 26 ++++++++++++++++++++++++--
+  1 file changed, 24 insertions(+), 2 deletions(-)
+ 
+ diff --git a/src/debug.c b/src/debug.c
+-index 2da2c5d..1d778fa 100644
++index ebda858..90bc450 100644
+ --- a/src/debug.c
+ +++ b/src/debug.c
+-@@ -1116,7 +1116,9 @@ static void *getMcontextEip(ucontext_t *uc) {
++@@ -1168,7 +1168,9 @@ static void* getAndSetMcontextEip(ucontext_t *uc, void *eip) {
+      #endif
+  #elif defined(__linux__)
+      /* Linux */
+@@ -25,10 +24,10 @@ index 2da2c5d..1d778fa 100644
+ +    #if defined(__riscv) && __riscv_xlen == 32
+ +    return (void*) uc->uc_mcontext.__gregs[REG_PC];
+ +    #elif defined(__i386__) || ((defined(__X86_64__) || defined(__x86_64__)) && defined(__ILP32__))
+-     return (void*) uc->uc_mcontext.gregs[14]; /* Linux 32 */
++     GET_SET_RETURN(uc->uc_mcontext.gregs[14], eip);
+      #elif defined(__X86_64__) || defined(__x86_64__)
+-     return (void*) uc->uc_mcontext.gregs[16]; /* Linux 64 */
+-@@ -1298,8 +1300,28 @@ void logRegisters(ucontext_t *uc) {
++     GET_SET_RETURN(uc->uc_mcontext.gregs[16], eip);
++@@ -1350,8 +1352,28 @@ void logRegisters(ucontext_t *uc) {
+      #endif
+  /* Linux */
+  #elif defined(__linux__)
+@@ -58,3 +57,6 @@ index 2da2c5d..1d778fa 100644
+      serverLog(LL_WARNING,
+      "\n"
+      "EAX:%08lx EBX:%08lx ECX:%08lx EDX:%08lx\n"
 +-- 
-+2.34.1
++2.25.1
 +
-diff --git a/meta-oe/recipes-support/dool/dool_1.1.0.bb b/meta-oe/recipes-support/dool/dool_1.1.0.bb
-index dcb66c7fd4..211f3a2b11 100644
---- a/meta-oe/recipes-support/dool/dool_1.1.0.bb
-+++ b/meta-oe/recipes-support/dool/dool_1.1.0.bb
-@@ -11,6 +11,7 @@ DEPENDS += "asciidoc-native xmlto-native"
+diff --git a/meta-oe/recipes-extended/redis/redis_7.0.5.bb b/meta-oe/recipes-extended/redis/redis_7.0.7.bb
+similarity index 96%
+rename from meta-oe/recipes-extended/redis/redis_7.0.5.bb
+rename to meta-oe/recipes-extended/redis/redis_7.0.7.bb
+index 7ed1519224..58055166cc 100644
+--- a/meta-oe/recipes-extended/redis/redis_7.0.5.bb
++++ b/meta-oe/recipes-extended/redis/redis_7.0.7.bb
+@@ -19,7 +19,7 @@ SRC_URI = "http://download.redis.io/releases/${BP}.tar.gz \
+            file://GNU_SOURCE-7.patch \
+            file://0006-Define-correct-gregs-for-RISCV32.patch \
+            "
+-SRC_URI[sha256sum] = "67054cc37b58c125df93bd78000261ec0ef4436a26b40f38262c780e56315cc3"
++SRC_URI[sha256sum] = "8d327d7e887d1bb308fc37aaf717a0bf79f58129e3739069aaeeae88955ac586"
  
- SRC_URI = "git://github.com/scottchiefbaker/dool.git;branch=master;protocol=https \
- 	   file://0001-Fix-build-error-as-following.patch \
-+	   file://0001-Fix-rename-in-docs.patch \
-           "
+ inherit autotools-brokensep update-rc.d systemd useradd
  
- SRCREV = "41ec7b392b358dae29f0b587711d5c8f7f462805"
 -- 
 2.25.1
 
