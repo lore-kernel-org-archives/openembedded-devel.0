@@ -2,56 +2,56 @@ Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 81001C636CB
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 80EF5C61DA7
 	for <webhook@archiver.kernel.org>; Wed, 25 Jan 2023 13:31:36 +0000 (UTC)
-Received: from mail-oo1-f48.google.com (mail-oo1-f48.google.com [209.85.161.48])
- by mx.groups.io with SMTP id smtpd.web11.44966.1674653488668886893
+Received: from mail-oo1-f43.google.com (mail-oo1-f43.google.com [209.85.161.43])
+ by mx.groups.io with SMTP id smtpd.web11.44967.1674653489724429460
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 25 Jan 2023 05:31:28 -0800
+ Wed, 25 Jan 2023 05:31:29 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=KP2JkuKa;
- spf=pass (domain: gmail.com, ip: 209.85.161.48, mailfrom: akuster808@gmail.com)
-Received: by mail-oo1-f48.google.com with SMTP id c145-20020a4a4f97000000b004f505540a20so3146298oob.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 25 Jan 2023 05:31:28 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=KSiRMPKn;
+ spf=pass (domain: gmail.com, ip: 209.85.161.43, mailfrom: akuster808@gmail.com)
+Received: by mail-oo1-f43.google.com with SMTP id j10-20020a4aa64a000000b004f9b746ee29so3156608oom.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 25 Jan 2023 05:31:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=fZk6tN/i47xLOG3LY8hEtzAtQnW73ogVQ31Z+DMT6kU=;
-        b=KP2JkuKat93tSM2HbL49q6bNfcutNxD/F0wi4S15+0pYsBeYp/kk49Np35spyNb67F
-         GExnBS+YxueXjVIDxaUU/g0Cp73UgVQ9uBKZVjmbErzJWkCrBAD1ZLg+HCWeK3ycq4UX
-         Qdn2576BIgHA4tPuvf3fapJZPcRdI0j6QozujNwgKiv70y1ZsCRMeEFdX1+J9fHVxPh9
-         +1aEAEyNoH1Zksa/7ogpL2wdQkKWzAE85MShwWLQhZ3hQZdgBE1YhYen9/bVrehQV2B/
-         On6IOF8bTnVmDiNvWnHWExMZckLiqsRnWkl7I26+kmgH+sLYUuXrVxPYDol33Ekp7/IJ
-         DcOg==
+        bh=AW/8H+l+Nndz61G3jXQXx01s1WSdgvuAKdESOnjfWzM=;
+        b=KSiRMPKnstrid1GSnfr+OSi69ei3wTihfDAXeYmt+yRzsR33CVJSKWBew7glNI4wrO
+         jq+4HawpRwJLOX+de1hh6SolQY41jCQKNfMxwTf+ml85gXxFgiU0SM971QzvdQfEM5PU
+         5+RftWfb7uDtwl+azd9/FRaS1zCaFReFDi/C9vzafYsg0SEnTZ2mZ1l+Ui+Om05GZ2UI
+         rM0dWScS+IIaYuP6nC7XNXOpRnt2WU3FZD5F5eLZleBm+nRwiAT3Oc2P0JM/4w9Karkm
+         qARfyPHDc1NjnIbVV5Pd9spxHdtcVjfgPE7RPJFnW9hRf4Yhcy8na3Yy0LcMSoAcCYdG
+         Vv0w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=fZk6tN/i47xLOG3LY8hEtzAtQnW73ogVQ31Z+DMT6kU=;
-        b=gWlzQs9MF6bG7eHwVosuqGe5t7p9/W6+Y1f44Aop7W4Y/0hM9dyLrTi+zTIu2obmxK
-         bQh4xji3wrYTgDw0J4NpkxpJiMNy7bDYbVVeZvd1Bs4lPQdm69SMYUc1WM5g1mvctPmL
-         /3MFprpLj1Z1kwpWYYKrXmYcM3t6ZpWk/Tohn3XoXkYwiCJ9t1vlGryyRmvuyhD2Nf2o
-         4Zs7vzrJ3eSvzyPCdwZ7BaEWgb3iKKtdBW0PKF/32QlAwvYROnpryDNEcQ1kOlPgwGcH
-         08KJM27VS8WT3ocG9K0PTDMHygUlj/3w2tQrEI/TfS8GZPwl3Z+M6TeN/Oh/wlJPHH/I
-         n/kQ==
-X-Gm-Message-State: AO0yUKVDe013Rudo87O9SWWnYxBvMcMjrqZ9t5we+5W04B3v7Cy/7Wn/
-	A4Kw+ML6GBvTPYuR2/KGv5t38Syv2VU=
-X-Google-Smtp-Source: AK7set/avsRjrG+Bzx4mUstdukKkQeO5gzQw4pTr91RZhdTE7ioRar6YKuGHpgeqqBQG4tTvlTPhsw==
-X-Received: by 2002:a4a:e7cb:0:b0:511:56e5:2423 with SMTP id y11-20020a4ae7cb000000b0051156e52423mr1002827oov.3.1674653487894;
-        Wed, 25 Jan 2023 05:31:27 -0800 (PST)
+        bh=AW/8H+l+Nndz61G3jXQXx01s1WSdgvuAKdESOnjfWzM=;
+        b=bVujbXY1jPgV7L0EHFxdcUoXIwRAthwPra6RroKT75DrRZ3cxf5XVl3At8Mv0sc55X
+         B0A+eQQes2pEFFKQTMPS4R7FP0u4A5/2IAolafB8o/RL8ZTeRQJG6r+ldAkYeCYPy3SX
+         OqEQoQjTfEy6Eu+H76Zwe+iI+WIVL2blsvUKAzLYn4nPF9rLAi2C9PMyeq47T1/LhXUK
+         z+uWlobvxJX1GUzZ2B1v6l9De2A3w6zy4RX8y2xumjN75EMrHdd1Yv4d10ULkaFzeElx
+         E8p6RgDO4ZcH0VNWkL7VC1V78fEs+PBAQUVuEUHpSRWsAaeuOhWWO5CsVKyr8RZ+T68u
+         v+sw==
+X-Gm-Message-State: AO0yUKUFuUzUcX+klAEIZ+oAsvT0GTmaDwLAN6JfvVkAvEm2WHOuU+uM
+	h6vqYebOtqlJ0mP7/Lp6l6sKWG0APm4=
+X-Google-Smtp-Source: AK7set/Gn7UAwDEj49+4Sn8IeMQS1Rv3r6J2jjkoKnLyjU6c9VrN2aaICATWgVxbBNorgQH4ovb0bQ==
+X-Received: by 2002:a4a:dc49:0:b0:511:db0b:c453 with SMTP id q9-20020a4adc49000000b00511db0bc453mr512059oov.8.1674653488903;
+        Wed, 25 Jan 2023 05:31:28 -0800 (PST)
 Received: from keaua.attlocal.net ([2600:1700:9190:ba10:434e:23f3:d1f1:25c3])
-        by smtp.gmail.com with ESMTPSA id b43-20020a4a98ee000000b0051134f333d3sm914383ooj.16.2023.01.25.05.31.27
+        by smtp.gmail.com with ESMTPSA id b43-20020a4a98ee000000b0051134f333d3sm914383ooj.16.2023.01.25.05.31.28
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 25 Jan 2023 05:31:27 -0800 (PST)
+        Wed, 25 Jan 2023 05:31:28 -0800 (PST)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [langdale 01/41] blueman: add RDEPEND on python3-fcntl
-Date: Wed, 25 Jan 2023 08:30:43 -0500
-Message-Id: <d5645959de5e874ba877b770c28562645bf3d539.1674653280.git.akuster808@gmail.com>
+Subject: [langdale 02/41] nss: fix SRC_URI
+Date: Wed, 25 Jan 2023 08:30:44 -0500
+Message-Id: <ac9ad1d512ef49cf7195e08cf61d11e11b1080e9.1674653280.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <cover.1674653280.git.akuster808@gmail.com>
 References: <cover.1674653280.git.akuster808@gmail.com>
@@ -61,34 +61,34 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 25 Jan 2023 13:31:36 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100736
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100737
 
-From: Markus Volk <f_l_k@t-online.de>
+From: Martin Jansa <martin.jansa@gmail.com>
 
-After updating current poky master python3-fcntl is not installed
-into my image anymore. Blueman-applet fails to run with
-Error: No module named 'fcntl''Module fcntl not found'
+* http://ftp.mozilla.org/pub/mozilla.org now returns 404, but the SRC_URI still works without
+  "mozilla.org" directory
 
-Signed-off-by: Markus Volk <f_l_k@t-online.de>
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 25c38607014f2d325884ad003c96237906aefa48)
+(cherry picked from commit 74f131ffe8d33ac4fe8225d8102eddc31aef3e90)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-networking/recipes-connectivity/blueman/blueman_2.3.4.bb | 1 +
- 1 file changed, 1 insertion(+)
+ meta-oe/recipes-support/nss/nss_3.74.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-networking/recipes-connectivity/blueman/blueman_2.3.4.bb b/meta-networking/recipes-connectivity/blueman/blueman_2.3.4.bb
-index c3cde1f27a..2822e8713a 100644
---- a/meta-networking/recipes-connectivity/blueman/blueman_2.3.4.bb
-+++ b/meta-networking/recipes-connectivity/blueman/blueman_2.3.4.bb
-@@ -26,6 +26,7 @@ RDEPENDS:${PN} += " \
-     python3-dbus \
-     python3-pygobject \
-     python3-terminal \
-+    python3-fcntl \
-     packagegroup-tools-bluetooth \
- "
+diff --git a/meta-oe/recipes-support/nss/nss_3.74.bb b/meta-oe/recipes-support/nss/nss_3.74.bb
+index 333bbdfef0..591b12a917 100644
+--- a/meta-oe/recipes-support/nss/nss_3.74.bb
++++ b/meta-oe/recipes-support/nss/nss_3.74.bb
+@@ -20,7 +20,7 @@ LIC_FILES_CHKSUM = "file://nss/COPYING;md5=3b1e88e1b9c0b5a4b2881d46cce06a18 \
  
+ VERSION_DIR = "${@d.getVar('BP').upper().replace('-', '_').replace('.', '_') + '_RTM'}"
+ 
+-SRC_URI = "http://ftp.mozilla.org/pub/mozilla.org/security/nss/releases/${VERSION_DIR}/src/${BP}.tar.gz \
++SRC_URI = "http://ftp.mozilla.org/pub/security/nss/releases/${VERSION_DIR}/src/${BP}.tar.gz \
+            file://nss.pc.in \
+            file://0001-nss-fix-support-cross-compiling.patch \
+            file://nss-no-rpath-for-cross-compiling.patch \
 -- 
 2.25.1
 
