@@ -2,56 +2,56 @@ Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 51891C61D9D
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6B507C61DA2
 	for <webhook@archiver.kernel.org>; Wed, 25 Jan 2023 13:31:36 +0000 (UTC)
-Received: from mail-oo1-f54.google.com (mail-oo1-f54.google.com [209.85.161.54])
- by mx.groups.io with SMTP id smtpd.web10.44852.1674653493595751910
+Received: from mail-oo1-f42.google.com (mail-oo1-f42.google.com [209.85.161.42])
+ by mx.groups.io with SMTP id smtpd.web10.44851.1674653492172135514
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 25 Jan 2023 05:31:35 -0800
+ Wed, 25 Jan 2023 05:31:32 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=l7r2Khbe;
- spf=pass (domain: gmail.com, ip: 209.85.161.54, mailfrom: akuster808@gmail.com)
-Received: by mail-oo1-f54.google.com with SMTP id d16-20020a4a5210000000b004f23d1aea58so3139368oob.3
-        for <openembedded-devel@lists.openembedded.org>; Wed, 25 Jan 2023 05:31:35 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=eM9tR+0S;
+ spf=pass (domain: gmail.com, ip: 209.85.161.42, mailfrom: akuster808@gmail.com)
+Received: by mail-oo1-f42.google.com with SMTP id 123-20020a4a0681000000b004faa9c6f6b9so3130017ooj.11
+        for <openembedded-devel@lists.openembedded.org>; Wed, 25 Jan 2023 05:31:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=85gfWC0+v9s9SKcF1NDhVkZbXsFsbBnTrOuJXQDPdgg=;
-        b=l7r2KhbefDV/TJChgu5vtnVoUVQ8zdvWChcEohnxfkm5ZwgYZw8oRDbdVgQPdgDhZv
-         O07lyzFjXsu+9c6ev7NZE0kdWNP44xUId2JjQKgmoGqYJ8rrZ8KARojwy4Y/SW4tc7Oj
-         KNmNreWkJ+HhB9ae0sOYZIklDj9BOGgCD4wcpIgToK9PAEYT8Q9TtTfwtVHW7q7crq5B
-         GAgB2Jc0m7PTVRTELrqivRR5K5LXIwbIfPbJI/d5O3b/m5Rq5VhqM2bnwbffAPHT4xcs
-         7HT15GeQ6dgnw1tdbKC2pYVEkJvcoJwVe6dnGT9ahDkpMl3M6PbEAeTJrg+LX/7y80Sz
-         a3VQ==
+        bh=pcmnyskcS0IHwABudZQfQCmYgijx5SQw/jojumk6zZ0=;
+        b=eM9tR+0SsurZuI5XEdi3gUEgGQepPAyG4yRoTA+f9r1RmJ6f6O5X+0h0OvAhxUapxM
+         3MNkdWAY/KXR5v5eX7NPmdNcknIVDpzTAfOK6TzoSfc+3HpcgKNgJk0wggS0Y/R70kWf
+         Q7b1fa6hXzEpMtgU2OJSKAgM8alLJ/MJUgyEJlyF9lbEi850uAOgVbHVeUduM9aaWo6H
+         x8HwabevgbuB++G+oTzRfvY4EgxORY9PaqaXEzaM8KCkVPxN74GBZ5PltBPRoDxWznHS
+         Zwp7S7I+qUCTyQPzeLENvbSxx1bTSaAKA6+jvW+d384dhgiv1h3bOTcv2GNSC9MjPRcq
+         oyCQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=85gfWC0+v9s9SKcF1NDhVkZbXsFsbBnTrOuJXQDPdgg=;
-        b=aT9MDAUnqWJ5QSqMALMcP/XWGfrZFjB1V+f+bEx2VEtLOyip+hIDIeOvG78+slqsod
-         iAx/vcob6q6S816zKXTze7MKgUVIX6m/SH7Hx6f9zCyH3I2jKaWVFbkBeD1Dd6Qvnod1
-         G/u8oOLmYQgtIri8acKkkXzRc2QIzk+y3gRdbPhkIhZkNPez5NlQol18ghhOO0fHjUYP
-         7oNvOZ7gRYOMyBxfq8Kow3syAC90iZ7vxuQiQj/OHAbp4CZPIIo368+FgH7VHiYEaLN4
-         RTGoXetT24x6MdhQPDvvXJYsO5lvBKsFj3/1CLR0jqRHbCj8aXAx2O5GlMwfv05Dwumf
-         XjCQ==
-X-Gm-Message-State: AFqh2kopzbdfTAvKmMJNTtrE6kKH7kYZ3igU2QlNrMM14RMqljtd5x4U
-	Hf7D8neivJu+xjYrqkA2y9JwNioBTK0=
-X-Google-Smtp-Source: AMrXdXt9snmZtAC2lZ/B7scchOrD4Ih8Hbc5bs0GyuSL885VFua+kVz2w3z5J75eIpca7vwAzCeFnA==
-X-Received: by 2002:a4a:d38b:0:b0:50d:d797:f186 with SMTP id i11-20020a4ad38b000000b0050dd797f186mr2631889oos.0.1674653495084;
-        Wed, 25 Jan 2023 05:31:35 -0800 (PST)
+        bh=pcmnyskcS0IHwABudZQfQCmYgijx5SQw/jojumk6zZ0=;
+        b=HJuqeQ0PedCr7Yt1Bi4aqv5iL9KIJPYD8M1RuHJmlm1HAOOtuzCLCxuv2Sg//SsKQU
+         lCAC3xPB9rkOPWdmRQ36xuZf61TQes4fA9qNlbVEDLAAi2TEbUGICOx1oNLMYeKhzwhy
+         P2YPM33ALAAIl67zzCW4t/OMrj2FSrxSKEA0a1D20WsDxMzn7SAcgu+FMt0ab3NjhFoK
+         5y+6CIkmGB1boBJMNeGZxf+suSYk7cwCKnOk5YH8rP4sKPatFW+jVyrqwjYzlzToPin8
+         IVp3ooM1tpByS5nytWdums6u09/GjnT6Xy4JpF9PUxfL2I2IfJ+ifc6s/uiSInfSAETc
+         Q+Mw==
+X-Gm-Message-State: AFqh2krEA4O2y6Sk7uarBY5KJvuzZ68TbRwbW1s6ZkZx/wafWqSUEO9C
+	eUID1Jhfpoyva0uN8RaqG/OctmFVNMo=
+X-Google-Smtp-Source: AMrXdXvAqKn6kOb6X2J/FFbJUbVcKJjUB8tg5/S7JMA6jmPoSA+7M0qFIVLazt4EBKzTQlgIaLnXUQ==
+X-Received: by 2002:a4a:af4c:0:b0:4f2:cba3:8929 with SMTP id x12-20020a4aaf4c000000b004f2cba38929mr18061141oon.6.1674653491318;
+        Wed, 25 Jan 2023 05:31:31 -0800 (PST)
 Received: from keaua.attlocal.net ([2600:1700:9190:ba10:434e:23f3:d1f1:25c3])
-        by smtp.gmail.com with ESMTPSA id b43-20020a4a98ee000000b0051134f333d3sm914383ooj.16.2023.01.25.05.31.34
+        by smtp.gmail.com with ESMTPSA id b43-20020a4a98ee000000b0051134f333d3sm914383ooj.16.2023.01.25.05.31.30
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 25 Jan 2023 05:31:34 -0800 (PST)
+        Wed, 25 Jan 2023 05:31:30 -0800 (PST)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [langdale 09/41] protobuf: stage protoc binary to sysroot
-Date: Wed, 25 Jan 2023 08:30:51 -0500
-Message-Id: <a7212d75fcfe871d6a9c292df8620cc68ec5fb39.1674653280.git.akuster808@gmail.com>
+Subject: [langdale 05/41] ettercap: Add missing dependency on libpcre
+Date: Wed, 25 Jan 2023 08:30:47 -0500
+Message-Id: <91a4036f8d6a76632e35c42ccbc2ddf1926efb39.1674653280.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <cover.1674653280.git.akuster808@gmail.com>
 References: <cover.1674653280.git.akuster808@gmail.com>
@@ -61,52 +61,35 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 25 Jan 2023 13:31:36 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100744
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100740
 
-From: Samuli Piippo <samuli.piippo@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
 
-If protoc is enabled for the build, recipes using protobuf will
-fail when protoc is not available in the recipe sysroot:
+It depends on it, but it was being pulled in via glib-2.0
+which now uses libpcre2
 
-|   The imported target "protobuf::protoc" references the file
-|
-|      ".../recipe-sysroot/usr/local/oe-sdk-hardcoded-buildpath/sysroots/x86_64-pokysdk-linux/usr/bin/protoc-3.21.5.0"
-|
-|   but this file does not exist.  Possible reasons include:
-|
-|   * The file was deleted, renamed, or moved to another location.
-|
-|   * An install or uninstall procedure did not complete successfully.
-|
-|   * The installation package was faulty and contained
-|
-|      ".../recipe-sysroot/usr/local/oe-sdk-hardcoded-buildpath/sysroots/x86_64-pokysdk-linux/usr/lib/cmake/protobuf/protobuf-targets.cmake"
-|
-|   but not all the files it references.
+Fixes
+TOPDIR/build/tmp/work/cortexa15t2hf-neon-yoe-linux-gnueabi/ettercap/0.8.3.1-r0/recipe-sysroot-native/usr/lib/libpcre.so: file not recognized: file format not recognized
 
-Use SYSROOT_DIRS to stage the binary to sysroot so it's always
-available for other recipes.
-
-Signed-off-by: Samuli Piippo <samuli.piippo@qt.io>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit d7f46fa816964e30edb2ccfecc57a26251cc351c)
+(cherry picked from commit d8bc689ee73fa0f497294cc742660766c7ecd8c3)
+Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-oe/recipes-devtools/protobuf/protobuf_3.21.5.bb | 2 ++
- 1 file changed, 2 insertions(+)
+ meta-networking/recipes-support/ettercap/ettercap_0.8.3.1.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-oe/recipes-devtools/protobuf/protobuf_3.21.5.bb b/meta-oe/recipes-devtools/protobuf/protobuf_3.21.5.bb
-index c8b9158e6c..201908f3c9 100644
---- a/meta-oe/recipes-devtools/protobuf/protobuf_3.21.5.bb
-+++ b/meta-oe/recipes-devtools/protobuf/protobuf_3.21.5.bb
-@@ -92,6 +92,8 @@ PACKAGE_BEFORE_PN = "${PN}-compiler ${PN}-lite"
- FILES:${PN}-compiler = "${bindir} ${libdir}/libprotoc${SOLIBS}"
- FILES:${PN}-lite = "${libdir}/libprotobuf-lite${SOLIBS}"
- 
-+SYSROOT_DIRS += "${bindir}"
-+
- RDEPENDS:${PN}-compiler = "${PN}"
- RDEPENDS:${PN}-dev += "${PN}-compiler"
- RDEPENDS:${PN}-ptest = "bash ${@bb.utils.contains('PACKAGECONFIG', 'python', 'python3-protobuf', '', d)}"
+diff --git a/meta-networking/recipes-support/ettercap/ettercap_0.8.3.1.bb b/meta-networking/recipes-support/ettercap/ettercap_0.8.3.1.bb
+index 7d37f41096..b0958e6975 100644
+--- a/meta-networking/recipes-support/ettercap/ettercap_0.8.3.1.bb
++++ b/meta-networking/recipes-support/ettercap/ettercap_0.8.3.1.bb
+@@ -10,6 +10,7 @@ DEPENDS += "ethtool \
+             librepo \
+             libnet \
+             libpcap \
++            libpcre \
+             ncurses \
+             openssl \
+             zlib \
 -- 
 2.25.1
 
