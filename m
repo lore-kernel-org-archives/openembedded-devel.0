@@ -1,103 +1,99 @@
-Return-Path: <akuster808@gmail.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D8B17C27C76
-	for <webhook@archiver.kernel.org>; Wed, 25 Jan 2023 13:32:16 +0000 (UTC)
-Received: from mail-oo1-f41.google.com (mail-oo1-f41.google.com [209.85.161.41])
- by mx.groups.io with SMTP id smtpd.web11.44964.1674653488006792407
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DF7A3C54E94
+	for <webhook@archiver.kernel.org>; Wed, 25 Jan 2023 16:37:57 +0000 (UTC)
+Received: from mail-oa1-f42.google.com (mail-oa1-f42.google.com [209.85.160.42])
+ by mx.groups.io with SMTP id smtpd.web10.50012.1674664673432810045
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 25 Jan 2023 05:32:07 -0800
+ Wed, 25 Jan 2023 08:37:53 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=gPDD/off;
- spf=pass (domain: gmail.com, ip: 209.85.161.41, mailfrom: akuster808@gmail.com)
-Received: by mail-oo1-f41.google.com with SMTP id r1-20020a4a3701000000b004f2b4f8200eso3141814oor.7
-        for <openembedded-devel@lists.openembedded.org>; Wed, 25 Jan 2023 05:32:06 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=IO/V9ZaX;
+ spf=pass (domain: gmail.com, ip: 209.85.160.42, mailfrom: raj.khem@gmail.com)
+Received: by mail-oa1-f42.google.com with SMTP id 586e51a60fabf-15fe106c7c7so15929895fac.8
+        for <openembedded-devel@lists.openembedded.org>; Wed, 25 Jan 2023 08:37:53 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=3MxQJdBaMGxoJiXPUFc5thKtkVqYLQcqpIv8cqzIwbs=;
-        b=gPDD/offl84ScOSGQWJJFAzHfSpbjL+GoQTFJmFrvU/EeDIgdxhqKWwvleC1uEVB5b
-         fpsoyJBzAMaM6x00rhSf4Yg/6i5hu0wYSFZ3L7KKFKKyV9Qfm2EOxbZAO2hkAj+M1NWn
-         J2zbGFuYwUmoU9qRPq8xQT0gBkjMHUxyoX18yJeBZm07I6zsMxgu8DWwFU6zaqkg2bYN
-         7+1z64DeVRxQfNvg0dFS1jDajN3uPrIPDmrb2xGXbvGJ4czVOEb1D5egyNqQHI7a7p9l
-         wErbmtO1uXt4lYj9Omv/aO/GKbXfv8qH0r4GxzAckYIbOhoS8tFvREdYbiyJ2pHK0w3i
-         0PnA==
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=zE0gAu6QkEjuIMcTIHDwtvdDETFrUYn/Isd8LFDaxIw=;
+        b=IO/V9ZaXWIFOB40LhVzVPTWz8RNJOwGaPFWsADnGr1Gs592p1qJQtIHw/HDp3CACsT
+         15AF65pC41KWP2snEhYQW1CekChMIyxmPlgXqeU16ClldG0mnKbDVtUctPWJX5SgywbV
+         FA5U3rBANF08kPFO71FWnQm1ykprUyTxV/Fzo4lR1CHBhqPl3HDMnn9viRr5lO6HhkEf
+         LNZe+ecF7i4VklHHSg+zWHsLxpFxO32WMEEGntzct6k5bxtLzup1olO3UtWZ15QEcg1k
+         eYFv6paLt6y3bbTTx8Dhgzxwqfjv7NNGKdRc1b0f0WgGBmqtQINX24odkQzxMC5fSccO
+         TP2w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=3MxQJdBaMGxoJiXPUFc5thKtkVqYLQcqpIv8cqzIwbs=;
-        b=7JoiSUxk9jmqwxevLR0gu8C3iqLpm9CE0+k1cnIWC0Wn/gcu9TPzWFlLMH1g85dx+E
-         C6U0O44WZ2s2DeC3bgzY1gCUA3QiNRu09sP5QBvr2vC0XrW8WXNnbpp0p3/GohoRUo85
-         1VsAKl47VTAK2opYhjCiyPJ9JcCZg9iKMLMe5DJzq3xgn4sWYjtVIbJFR/bMHDARt9df
-         KDa9hfiAbC+CngpHfTXR+gUiotujW1ca/m2GKvTR2/6+C3vlSdu43LkaE+VaoNv9YDy5
-         vr2QMjVsBwQTgw9OTkiYl2VDVQ1IGqNyHLlGDeWd7NKwvfBoV7uQ66w4KGdnQ5wvJSwB
-         DA1g==
-X-Gm-Message-State: AFqh2kopJ+/sI5pdpAHYfRZesaVsU2FuaTR71Gu2T0vpfgTBXyaN2eRd
-	/wbd1SHLgBn/oxn5LE2s8GhCBNkoc9c=
-X-Google-Smtp-Source: AMrXdXsmLgsbeKfWCq5PzbNsb73TJdk2XF6LakQFjpMORV4ZtQDSi0AoVDI4tkI1jtcOWX8EYVFuDA==
-X-Received: by 2002:a4a:d38b:0:b0:50d:d797:f186 with SMTP id i11-20020a4ad38b000000b0050dd797f186mr2633076oos.0.1674653526112;
-        Wed, 25 Jan 2023 05:32:06 -0800 (PST)
-Received: from keaua.attlocal.net ([2600:1700:9190:ba10:434e:23f3:d1f1:25c3])
-        by smtp.gmail.com with ESMTPSA id b43-20020a4a98ee000000b0051134f333d3sm914383ooj.16.2023.01.25.05.32.05
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 25 Jan 2023 05:32:05 -0800 (PST)
-From: Armin Kuster <akuster808@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: [langdale 41/41] perfetto: Do not pass TUNE_CCARGS to native/host compiler
-Date: Wed, 25 Jan 2023 08:31:23 -0500
-Message-Id: <f8cb46d803190bb02085c8a7d20957a71d32f311.1674653280.git.akuster808@gmail.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <cover.1674653280.git.akuster808@gmail.com>
-References: <cover.1674653280.git.akuster808@gmail.com>
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=zE0gAu6QkEjuIMcTIHDwtvdDETFrUYn/Isd8LFDaxIw=;
+        b=AA1o/Whe9OOqNQpdHYMCsGwI2eX19ufZDz2VUUMoqeWxCpc/lYzNxIQKuNPMCnbBl+
+         b6wDiUZdFNcU9L0eaphbdKoKQmf8AAC9viIkAnYe6hb955hsegOeywOy5O4nzj2Z4BRp
+         dwBgOKyAtK5Z6+lDgLJVN/bL9iVbq01l+ohGjQSFl3iuvm/YHuYt5pUQOFVunmBBSbDJ
+         UK/lOxSk+br9b9OfGpo/+kUwFMNCYH3dlo2Afvn2RK9nePIX9VE2KoZWKwXkjtVJ2RJD
+         d/Ex8Xg73GkBK9NHr7QP/KYzpsJYJq/5Byw2UzXdXcOw7a+FGlnqlfzQnwjdqY/4isqx
+         NWpQ==
+X-Gm-Message-State: AO0yUKVwEc4kSJYFpNxrQhm32EScmP8Xzd7qCc/RxTxnHTvuxQ1B+wTJ
+	XgTC51tjSBEODVENdOBCXm1tOgMCV3Ju5kOnGxc=
+X-Google-Smtp-Source: AK7set8CKxvbXbppMYNsKJU7S6Q5TT04T9uNaIGqJ1kIfpU+C9ShrUaoo6J5gJ74ZjTuuzCBKBQ9SXvOn3NCb1/owCU=
+X-Received: by 2002:a05:6870:5253:b0:163:35c5:e085 with SMTP id
+ o19-20020a056870525300b0016335c5e085mr165091oai.55.1674664672525; Wed, 25 Jan
+ 2023 08:37:52 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <cover.1674653280.git.akuster808@gmail.com> <1d2e7a6b3d36e58ed28bafbb5bdf4536c54b419b.1674653280.git.akuster808@gmail.com>
+In-Reply-To: <1d2e7a6b3d36e58ed28bafbb5bdf4536c54b419b.1674653280.git.akuster808@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 25 Jan 2023 08:37:26 -0800
+Message-ID: <CAMKF1so=E6xsjTi2z+88YW37xAdp9Eg-Ed_e9qbKBNfwpWsohA@mail.gmail.com>
+Subject: Re: [oe] [langdale 34/41] Revert "waf-samba.bbclass: point
+ PYTHON_CONFIG to target python3-config"
+To: Armin Kuster <akuster808@gmail.com>
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 25 Jan 2023 13:32:16 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100776
+ <openembedded-devel@lists.openembedded.org>; Wed, 25 Jan 2023 16:37:57 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100777
 
-From: Khem Raj <raj.khem@gmail.com>
+maybe you can remove 18/34 patch and this revert completely from pull.
 
-TUNE_CCARGS are meant to be passed to target compilers only. This fixes
-build failures seen on qemux6
-
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-Cc: Markus Volk <f_l_k@t-online.de>
-(cherry picked from commit 90ea68fc11181a62741e4ca79dfef0fefe48cb41)
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
----
- meta-oe/recipes-devtools/perfetto/perfetto.bb | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
-
-diff --git a/meta-oe/recipes-devtools/perfetto/perfetto.bb b/meta-oe/recipes-devtools/perfetto/perfetto.bb
-index 86ab18cacf..d1980a0097 100644
---- a/meta-oe/recipes-devtools/perfetto/perfetto.bb
-+++ b/meta-oe/recipes-devtools/perfetto/perfetto.bb
-@@ -100,12 +100,12 @@ do_configure () {
- 
-     # If using the clang toolchain: use the clang host-side binaries built by Bitbake
-     if [ "${TOOLCHAIN}" = "clang" ]; then
--        BB_CLANGXX="${BUILD_CXX} ${BUILD_LDFLAGS} ${TUNE_CCARGS}"
--        BB_CLANG="${BUILD_CC} ${TUNE_CCARGS}"
-+        BB_CLANGXX="${BUILD_CXX} ${BUILD_LDFLAGS}"
-+        BB_CLANG="${BUILD_CC}"
-         BB_LLVM_OBJCOPY="${RECIPE_SYSROOT_NATIVE}/usr/bin/llvm-objcopy"
-         
--        HOST_CLANGXX="${STAGING_DIR_NATIVE}/usr/bin/clang++ -stdlib=libc++ -rtlib=libgcc -unwindlib=libgcc ${TUNE_CCARGS}"
--        HOST_CLANG="${STAGING_DIR_NATIVE}/usr/bin/clang ${TUNE_CCARGS}"
-+        HOST_CLANGXX="${STAGING_DIR_NATIVE}/usr/bin/clang++ -stdlib=libc++ -rtlib=libgcc -unwindlib=libgcc"
-+        HOST_CLANG="${STAGING_DIR_NATIVE}/usr/bin/clang"
-         HOST_LLVM_OBJCOPY="${STAGING_DIR_NATIVE}/usr/bin/llvm-objcopy"
- 
-         cd gcc_like_host
--- 
-2.25.1
-
+On Wed, Jan 25, 2023 at 5:32 AM Armin Kuster <akuster808@gmail.com> wrote:
+>
+> This reverts commit 4b063f93a731cd6cc486dfcbc2c2f403fd29e7f3.
+>
+> This is breaking builds.
+>
+> Signed-off-by: Armin Kuster <akuster808@gmail.com>
+> ---
+>  meta-networking/classes/waf-samba.bbclass | 1 -
+>  1 file changed, 1 deletion(-)
+>
+> diff --git a/meta-networking/classes/waf-samba.bbclass b/meta-networking/classes/waf-samba.bbclass
+> index 41909788f7..9c32952f6a 100644
+> --- a/meta-networking/classes/waf-samba.bbclass
+> +++ b/meta-networking/classes/waf-samba.bbclass
+> @@ -95,7 +95,6 @@ do_configure() {
+>      export STAGING_LIBDIR=${STAGING_LIBDIR}
+>      export STAGING_INCDIR=${STAGING_INCDIR}
+>      export PYTHONPATH=${STAGING_DIR_HOST}${PYTHON_SITEPACKAGES_DIR}
+> -    export PYTHON_CONFIG=${STAGING_EXECPREFIXDIR}/python-target-config/python3-config
+>
+>      CONFIG_CMD="./configure ${CONFIGUREOPTS} ${EXTRA_OECONF} --cross-compile"
+>      if [ "${CROSS_METHOD}" = "answer" ]; then
+> --
+> 2.25.1
+>
+>
+> -=-=-=-=-=-=-=-=-=-=-=-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#100769): https://lists.openembedded.org/g/openembedded-devel/message/100769
+> Mute This Topic: https://lists.openembedded.org/mt/96519901/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [raj.khem@gmail.com]
+> -=-=-=-=-=-=-=-=-=-=-=-
+>
 
