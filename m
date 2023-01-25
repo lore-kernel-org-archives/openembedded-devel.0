@@ -1,139 +1,91 @@
-Return-Path: <brgl@bgdev.pl>
+Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DD9EBC54E94
-	for <webhook@archiver.kernel.org>; Wed, 25 Jan 2023 08:17:44 +0000 (UTC)
-Received: from mail-wm1-f45.google.com (mail-wm1-f45.google.com [209.85.128.45])
- by mx.groups.io with SMTP id smtpd.web10.40651.1674634656394950463
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6CBC4C54EAA
+	for <webhook@archiver.kernel.org>; Wed, 25 Jan 2023 13:30:56 +0000 (UTC)
+Received: from mail-ej1-f42.google.com (mail-ej1-f42.google.com [209.85.218.42])
+ by mx.groups.io with SMTP id smtpd.web11.44947.1674653451225066561
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 25 Jan 2023 00:17:37 -0800
+ Wed, 25 Jan 2023 05:30:51 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@bgdev-pl.20210112.gappssmtp.com header.s=20210112 header.b=BjacX08l;
- spf=none, err=SPF record not found (domain: bgdev.pl, ip: 209.85.128.45, mailfrom: brgl@bgdev.pl)
-Received: by mail-wm1-f45.google.com with SMTP id c10-20020a05600c0a4a00b003db0636ff84so687842wmq.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 25 Jan 2023 00:17:35 -0800 (PST)
+ dkim=pass header.i=@konsulko.com header.s=google header.b=BDGIs7kJ;
+ spf=pass (domain: konsulko.com, ip: 209.85.218.42, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-ej1-f42.google.com with SMTP id kt14so47696223ejc.3
+        for <openembedded-devel@lists.openembedded.org>; Wed, 25 Jan 2023 05:30:50 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=bgdev-pl.20210112.gappssmtp.com; s=20210112;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=YJ8VfuleMtpx5OjG3Dahpo88KC2JF93kyQW4rKCYEKI=;
-        b=BjacX08ltvaq+72VhmkFhIs8fEQsxaOG1ctW/HpJipsdunG26oWUvB2xLVB1PP3arL
-         CXDva27ajMMtzBwrzuQGJsxZys/UqN8g+K87qqKFeus1DEFgta79PqJhbT8Xxh5zYN+o
-         ex8i7hWcwfPMntFIz0uXI6GSLNbf98YOvyML+5W7ZVzUMg68GNzdKmkMUExf3FBjpzZk
-         q3vI+k/QM4ow/F3uQA+3GThsiI1kxFyB0PaOVqY5FySCKmZk26eBBqteu5eJZlKMjcz2
-         /nqfb1b5yGpBbk/ZpCXPJELYz/15t+dfId4NAnTg8dLnGEOkHO+txxVJGQbctuwOwW/t
-         EjeQ==
+        d=konsulko.com; s=google;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=m58BTE7/Mkk1tCYvmASJX160rXxeH93e0Mmf0CEapJQ=;
+        b=BDGIs7kJEpClp4k5vTowzSz731TGzUzWNv2FXMw+EFYKcgSQF6rLSNyCYiu8XDfeZx
+         P7sTlzft9BFa5lSogoRCiBdurVRwwJRDrIxxaCtpNIjmL+cPNmsA/2fE9k0tSNqT662K
+         dDunGOwK3JDJvLqU3h2/4TCnM6eirjvg65TtE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=YJ8VfuleMtpx5OjG3Dahpo88KC2JF93kyQW4rKCYEKI=;
-        b=uMI7VJVGnaDX22XR5F8D0MMSb+scC58p+68dywQr20JJBFHEdxeoRMoh+Dd65rHUvp
-         u3u/YZSorUbVTkx0YUzoj6wUIAmW0FFALNNfTmelAfk4kICApqE8pJ7FmD9YYqWaQmvx
-         6H4Zwtmcl01qcbsTvWkR6wDvOHXc7SpO/eqLOkAi1GszsJ6inFpih9m1IL2wjjUZ+37j
-         fJ1NdcWSMQ6NHf5FEQSyvcAg2Ykyc8yTlcT2tREDu32k8pLO8H3K0s3rZ65tPMWhVmis
-         BlK2owYU0Zx6NHd+5tzJ30jffgwvhJMh8qQrB+s2TiqKdaYRrUJq+SqGNOHfNvmaSt90
-         IDog==
-X-Gm-Message-State: AO0yUKUT90HnDs7r9JpPPhLcm5abkYLI/zvj6EGRiLIXTMJQGiLPc400
-	vw7Y3a/dQczs8/hfLwCwg3DOpg==
-X-Google-Smtp-Source: AK7set+orbCUDFf3bwxjF4hWjKrlXl9Y961YIXdoMewLchV9uh+j9forZQ9zGi1xLgdRA9MbsxX3xg==
-X-Received: by 2002:a05:600c:46cb:b0:3dc:1da2:b2d6 with SMTP id q11-20020a05600c46cb00b003dc1da2b2d6mr955153wmo.1.1674634654481;
-        Wed, 25 Jan 2023 00:17:34 -0800 (PST)
-Received: from brgl-uxlite.home ([2a01:cb1d:334:ac00:c598:2394:efb3:feca])
-        by smtp.gmail.com with ESMTPSA id x26-20020a1c7c1a000000b003db01178b62sm1044413wmc.40.2023.01.25.00.17.33
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=m58BTE7/Mkk1tCYvmASJX160rXxeH93e0Mmf0CEapJQ=;
+        b=H0+CHwHEpSJvPX0FcdBRMTM6oiIJL4QeJrpBZooQrX2BJn9qkt9Rvrf0N4PGumZnyO
+         NyutObI88rCxiVlG3dMR/1bWNQ/wqKQwF8BBY1GCve2xiyvkRG2fc/p1BT3H4wmJgZsT
+         oIYl2EvSOG6oc6W1F/b2zOKo4enuRgUlZCnPa03YaUWSZF/6xg9nHrofJ7Vxd7t6GeiB
+         YH+IDF/so34+yMtPIz6D/31bpJqvRHMOY28PaeuHqPkZLjtgubBXTJfw+eaDJ8AzPzoz
+         00KmC30e1OZWaD9k//j5NLx0Pw/SAPt4ny7Je4R6BNDm8Y3tEey6Lz6qGjV6e2gUBE2X
+         Apaw==
+X-Gm-Message-State: AFqh2ko/+8a66dhHeLOCPpLy11WOZQmRps2MhTaKXzjqA35epPZ30Onu
+	JkdFXA5MPyIKUbK1ABUdOzl6b/sHCk99J96J
+X-Google-Smtp-Source: AMrXdXtrlwPWnI55OWl8iAs5vKvrDibEgFb3S5B3TMXBSZ2y5MrovQRnXNtP+xxiZaqG+9ue3qc19w==
+X-Received: by 2002:a17:907:7da0:b0:871:89ac:decb with SMTP id oz32-20020a1709077da000b0087189acdecbmr45000039ejc.76.1674653449536;
+        Wed, 25 Jan 2023 05:30:49 -0800 (PST)
+Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
+        by smtp.gmail.com with ESMTPSA id g23-20020a17090613d700b007ae32daf4b9sm2382648ejc.106.2023.01.25.05.30.48
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 25 Jan 2023 00:17:34 -0800 (PST)
-From: Bartosz Golaszewski <brgl@bgdev.pl>
-To: Khem Raj <raj.khem@gmail.com>,
-	Bruce Ashfield <bruce.ashfield@gmail.com>,
-	openembedded-devel@lists.openembedded.org
-Cc: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
-Subject: [meta-oe][PATCH] libgpiod: fix python bindings build
-Date: Wed, 25 Jan 2023 09:17:31 +0100
-Message-Id: <20230125081731.6157-1-brgl@bgdev.pl>
-X-Mailer: git-send-email 2.37.2
+        Wed, 25 Jan 2023 05:30:49 -0800 (PST)
+From: Leon Anavi <leon.anavi@konsulko.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 3/3] python3-cachetools: Upgrade 5.2.1 -> 5.3.0
+Date: Wed, 25 Jan 2023 15:30:44 +0200
+Message-Id: <20230125133044.2331059-3-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.30.2
+In-Reply-To: <20230125133044.2331059-1-leon.anavi@konsulko.com>
+References: <20230125133044.2331059-1-leon.anavi@konsulko.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 25 Jan 2023 08:17:44 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100731
+ <openembedded-devel@lists.openembedded.org>; Wed, 25 Jan 2023 13:30:56 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100734
 
-From: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
+Upgrade to release 5.3.0:
 
-It seems that automake's AM_PATH_PYTHON() macro no longer sets the
-$PYTHON variable. This means the python bindings build for libgpiod has
-been broken for some time. As we know which version we're using -
-python3 - let's hardcode it in configure.ac. For now add a patch that's
-been merged upstream and once a new bugfix release is out, we'll remove
-it.
+- Add cache_info() function to @cached decorator.
 
-Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- ...-don-t-expect-automake-to-set-PYTHON.patch | 37 +++++++++++++++++++
- .../libgpiod/libgpiod_1.6.3.bb                |  1 +
- 2 files changed, 38 insertions(+)
- create mode 100644 meta-oe/recipes-support/libgpiod/files/0001-build-don-t-expect-automake-to-set-PYTHON.patch
+ ...{python3-cachetools_5.2.1.bb => python3-cachetools_5.3.0.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-cachetools_5.2.1.bb => python3-cachetools_5.3.0.bb} (89%)
 
-diff --git a/meta-oe/recipes-support/libgpiod/files/0001-build-don-t-expect-automake-to-set-PYTHON.patch b/meta-oe/recipes-support/libgpiod/files/0001-build-don-t-expect-automake-to-set-PYTHON.patch
-new file mode 100644
-index 000000000..a3dc38188
---- /dev/null
-+++ b/meta-oe/recipes-support/libgpiod/files/0001-build-don-t-expect-automake-to-set-PYTHON.patch
-@@ -0,0 +1,37 @@
-+From 3c461786feb1d5aa1ed2a911942a5f9fbc8b8086 Mon Sep 17 00:00:00 2001
-+From: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
-+Date: Tue, 24 Jan 2023 17:38:43 +0100
-+Subject: [libgpiod v1.6.x][PATCH] build: don't expect automake to set $PYTHON
-+
-+It seems that the implementation of AM_PATH_PYTHON() changed in automake
-+recently and no longer sets $PYTHON variable which breaks the build on
-+some systems.
-+
-+We know we use python3 so use python3-config explicitly.
-+
-+Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
-+---
-+Upstream-Status: Accepted
-+
-+ configure.ac | 4 ++--
-+ 1 file changed, 2 insertions(+), 2 deletions(-)
-+
-+diff --git a/configure.ac b/configure.ac
-+index 3149384..0460810 100644
-+--- a/configure.ac
-++++ b/configure.ac
-+@@ -204,9 +204,9 @@ then
-+ 		AC_MSG_ERROR([python3-config not found - needed for python bindings])
-+ 	fi
-+ 	AS_IF([test -z "$PYTHON_CPPFLAGS"],
-+-		[AC_SUBST(PYTHON_CPPFLAGS, [`$PYTHON-config --includes`])])
-++		[AC_SUBST(PYTHON_CPPFLAGS, [`python3-config --includes`])])
-+ 	AS_IF([test -z "$PYTHON_LIBS"],
-+-		[AC_SUBST(PYTHON_LIBS, [`$PYTHON-config --libs`])])
-++		[AC_SUBST(PYTHON_LIBS, [`python3-config --libs`])])
-+ fi
-+ 
-+ AC_CHECK_PROG([has_doxygen], [doxygen], [true], [false])
-+-- 
-+2.37.2
-+
-diff --git a/meta-oe/recipes-support/libgpiod/libgpiod_1.6.3.bb b/meta-oe/recipes-support/libgpiod/libgpiod_1.6.3.bb
-index 3e6e5d567..5164e7e02 100644
---- a/meta-oe/recipes-support/libgpiod/libgpiod_1.6.3.bb
-+++ b/meta-oe/recipes-support/libgpiod/libgpiod_1.6.3.bb
-@@ -7,6 +7,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=2caced0b25dfefd4c601d92bd15116de"
- SRC_URI = " \
-     https://www.kernel.org/pub/software/libs/${BPN}/${BP}.tar.xz \
-     file://run-ptest \
-+    file://0001-build-don-t-expect-automake-to-set-PYTHON.patch \
- "
+diff --git a/meta-python/recipes-devtools/python/python3-cachetools_5.2.1.bb b/meta-python/recipes-devtools/python/python3-cachetools_5.3.0.bb
+similarity index 89%
+rename from meta-python/recipes-devtools/python/python3-cachetools_5.2.1.bb
+rename to meta-python/recipes-devtools/python/python3-cachetools_5.3.0.bb
+index 7cb4f35d8..21bb51871 100644
+--- a/meta-python/recipes-devtools/python/python3-cachetools_5.2.1.bb
++++ b/meta-python/recipes-devtools/python/python3-cachetools_5.3.0.bb
+@@ -27,6 +27,6 @@ do_install_ptest() {
+ 	cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
+ }
  
- SRC_URI[md5sum] = "28e79f6f70fee1da9079558d8b7b3736"
+-SRC_URI[sha256sum] = "5991bc0e08a1319bb618d3195ca5b6bc76646a49c21d55962977197b301cc1fe"
++SRC_URI[sha256sum] = "13dfddc7b8df938c21a940dfa6557ce6e94a2f1cdfa58eb90c805721d58f2c14"
+ 
+ BBCLASSEXTEND = "native nativesdk"
 -- 
-2.37.2
+2.30.2
 
 
