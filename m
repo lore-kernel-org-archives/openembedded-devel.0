@@ -2,56 +2,56 @@ Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 72BB4C54E94
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 80315C61DA2
 	for <webhook@archiver.kernel.org>; Wed, 25 Jan 2023 13:31:46 +0000 (UTC)
 Received: from mail-oo1-f50.google.com (mail-oo1-f50.google.com [209.85.161.50])
  by mx.groups.io with SMTP id smtpd.web11.44969.1674653491218567072
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 25 Jan 2023 05:31:36 -0800
+ Wed, 25 Jan 2023 05:31:43 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=eEdYUmi7;
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=H5ER8itP;
  spf=pass (domain: gmail.com, ip: 209.85.161.50, mailfrom: akuster808@gmail.com)
-Received: by mail-oo1-f50.google.com with SMTP id t14-20020a4ad0ae000000b004f51f61de9fso3133612oor.13
-        for <openembedded-devel@lists.openembedded.org>; Wed, 25 Jan 2023 05:31:36 -0800 (PST)
+Received: by mail-oo1-f50.google.com with SMTP id t14-20020a4ad0ae000000b004f51f61de9fso3133663oor.13
+        for <openembedded-devel@lists.openembedded.org>; Wed, 25 Jan 2023 05:31:43 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=wJbrKF+NAOyPWXcIhohzVQg3D4n1LmQ8pHj4o890gMs=;
-        b=eEdYUmi7u4cz0vV1ZZ5P7p+Mhb7YjLNn5BWKpCFseEAdav5NUceH49vHCHeupu8nGl
-         eVLHAlHR/gWGNvPEOri7XwTjsnq0YtegAl/92UwoJRRGcRXK8GCPXchHdHD8x45Qr8EG
-         AaMUf4jmmnIjYvVU0HCIZeSUiIjDbRifq+xcKoOtGEN0MB6nEmt4UTRSvzEW4rNP08/q
-         R4wM6ntRiBjcDESJ2uKtGaJ9U67v1OwVwtXt9VH/S++AY2gmy8dhBslSe+H3w7wUUgOl
-         9VWt7SjZLZHt9D7arQ6uT7hDhRKufunUJU/IUF2J+771PImY68xhfYBcpwKLdix8z/mP
-         ogpw==
+        bh=uPDXGKSmP4CAlvSoN4g7BjuFrv/2Q234NmQlSa4a1wU=;
+        b=H5ER8itPBl6jU44MYQU3xFwhcqkIvwk0iOeMyHgDjwVHST+bj/vDc5C6pEQtB2TMx8
+         DKrk0x1zEGt+XMNAXArwev4pRWNCn9Ywvcq8UZ5SrOCWcn/ocR5m9eDbJdTL3QePyOZr
+         oiV/fzQ+pAyy0KKM3Tmoazcy7+084eCAK/xWkH3wGKK/vwynNcMcpyVUX8hb+l/zGGMD
+         3jIBiKuvA+fiXPVvbJK72a6wUzzhpC7NE9TYnTOQqc/xhYxf6RbzoLd7KwHU7rDs2aoV
+         gEvwEpgXnoDnS+AmdRuwJAPYlDj14KSijJVp+2dhLZ2fRZqHewZot+/YjPWSys8A8V8T
+         +zLg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=wJbrKF+NAOyPWXcIhohzVQg3D4n1LmQ8pHj4o890gMs=;
-        b=UKWk3lRxN+2enOaRfkvQZuKGtZ9Xg6lKZamTARwWcFTW+rVA6aLVifJrbbCM2Ap+8K
-         y4S+vOX4wkKRdvNZChdGxmARC189tMG4sDNQcWnPOB+2z8TB49eFN4lyu5ZvxSp5FkQ0
-         3BBQgpoglMrFhDfpk2lo8re6GbWikzLodCKO1Ubpak7AvlilNsEqAF7a/9+BkZrN7MYP
-         IIaP3YNo1GNwaJiAHds/e/4pigMnOL3ulyRk8Z/mQocIHnmGrqLDXMNRHBlQiZbxHRS/
-         VVS01+ZiRLEmJDMo2zFLgZRJdOgglLJd7fxHhEbkPh56Iqf7FhsPNzWHyVpvXMKnPHcX
-         ijTA==
-X-Gm-Message-State: AFqh2kqCKUwQXQXorVI8xRLjid8i6i4166au3xU3tVFA7xU9+jZlYAXL
-	Ecvz2OhvThzuV3nUFmQljNM1JiyfML0=
-X-Google-Smtp-Source: AMrXdXupL5F55SrqcPazKjOJ5GPZTjdLuutmK+yhjn9EF3aKS4chITdV3/0salUqmjO+kbrDbccr9w==
-X-Received: by 2002:a05:6820:413:b0:49f:dba7:5e65 with SMTP id o19-20020a056820041300b0049fdba75e65mr13836584oou.3.1674653495982;
-        Wed, 25 Jan 2023 05:31:35 -0800 (PST)
+        bh=uPDXGKSmP4CAlvSoN4g7BjuFrv/2Q234NmQlSa4a1wU=;
+        b=djLD2BKZkubDggCMmMMmIfIpEmmYhyRzsObSDPEVmbMYAKZOTn6I4QuFiHC9xqk01S
+         Y80e+uCyaQN57cGo7Uu2BcueX4Mv0WK6cU6uV2cCWVbUFJVoI8kAjqSkU+2nxE+ftQ6X
+         7BvXd3tRtB30AWitKqwcFK540PThpISgS9UGtJ248nECpLYt7Bq1uXyFb/ChOJBunVdM
+         Wuyn0c9txGs9icxwBq/jjY1EhLG+AILKZj3TppkOy8b1a6wtB6qlLmK1U/iXTdtR1B26
+         R1XCA2YJV9DkfLykEyQ+ht+nJQeH4oEIYDrYFmgDWnejFvbZFE9Ntt1yyKcHLDZzJE3u
+         8x4w==
+X-Gm-Message-State: AFqh2kqPyPDsmDmFzwQ+MeCQONJYTcaBEsPdVetRFeimvzG6lTiOG3qH
+	+RrhyCoVbQJ/KMUH0EMIZku5ovSkrbU=
+X-Google-Smtp-Source: AMrXdXsTivbkfNd1cqIVvkaOYOGk4shleKpXbUP6Srt/ZioXv4jFPFqngkOuf+kA1isc9dgGh/fOZA==
+X-Received: by 2002:a05:6820:150a:b0:4f2:875:5252 with SMTP id ay10-20020a056820150a00b004f208755252mr26279211oob.3.1674653503002;
+        Wed, 25 Jan 2023 05:31:43 -0800 (PST)
 Received: from keaua.attlocal.net ([2600:1700:9190:ba10:434e:23f3:d1f1:25c3])
-        by smtp.gmail.com with ESMTPSA id b43-20020a4a98ee000000b0051134f333d3sm914383ooj.16.2023.01.25.05.31.35
+        by smtp.gmail.com with ESMTPSA id b43-20020a4a98ee000000b0051134f333d3sm914383ooj.16.2023.01.25.05.31.42
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 25 Jan 2023 05:31:35 -0800 (PST)
+        Wed, 25 Jan 2023 05:31:42 -0800 (PST)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [langdale 10/41] imapfilter: Upgrade to 2.7.6
-Date: Wed, 25 Jan 2023 08:30:52 -0500
-Message-Id: <112f75b77f6698395da8dc3d80f4536317144a65.1674653280.git.akuster808@gmail.com>
+Subject: [langdale 17/41] audit: Inherit python3targetconfig
+Date: Wed, 25 Jan 2023 08:30:59 -0500
+Message-Id: <627198a98fe5f8a2ec6f016e568fe91042e96783.1674653280.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <cover.1674653280.git.akuster808@gmail.com>
 References: <cover.1674653280.git.akuster808@gmail.com>
@@ -61,51 +61,37 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 25 Jan 2023 13:31:46 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100745
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100752
 
 From: Khem Raj <raj.khem@gmail.com>
 
-Use git fetcher to avoid src-uri-bad build QA error
-
-Changes in this release [1]
-
-License-Update: Update copyright years [2]
-
-[1] https://github.com/lefcha/imapfilter/compare/v2.7.5...v2.7.6
-[2] https://github.com/lefcha/imapfilter/commit/ce6b9050b284b9944ac52371a4a2254fc73bc219
+It uses python3-config during build to grok the python specific
+includedirs, therefore its important to ensure that target specific
+python3-config is used, otherwise currently it defaults to native
+python3-config which ends up adding native python3 include paths
+which might work out ok but is exposed when target is 32bit + lfs
+enabled, the headers don't match between native and target python
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 8299706b637b76d95716079455c276a825d6f0c9)
+(cherry picked from commit c7fcebd05d18c118eccbf6bc6c75ea91d0b89063)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../{imapfilter_2.7.5.bb => imapfilter_2.7.6.bb}          | 8 +++++---
- 1 file changed, 5 insertions(+), 3 deletions(-)
- rename meta-oe/recipes-support/imapfilter/{imapfilter_2.7.5.bb => imapfilter_2.7.6.bb} (60%)
+ meta-oe/recipes-security/audit/audit_3.0.9.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-support/imapfilter/imapfilter_2.7.5.bb b/meta-oe/recipes-support/imapfilter/imapfilter_2.7.6.bb
-similarity index 60%
-rename from meta-oe/recipes-support/imapfilter/imapfilter_2.7.5.bb
-rename to meta-oe/recipes-support/imapfilter/imapfilter_2.7.6.bb
-index 111a8208a9..eb23816e8a 100644
---- a/meta-oe/recipes-support/imapfilter/imapfilter_2.7.5.bb
-+++ b/meta-oe/recipes-support/imapfilter/imapfilter_2.7.6.bb
-@@ -1,11 +1,13 @@
- SUMMARY = "IMAPFilter is a mail filtering utility that processes mailboxes based on IMAP queries"
- LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=db3b99f230f9758fd77e4a0654e2266d"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=c11d4fd926d3ce7aac13b0ed1e9b3a63"
+diff --git a/meta-oe/recipes-security/audit/audit_3.0.9.bb b/meta-oe/recipes-security/audit/audit_3.0.9.bb
+index dcab7dcc88..9621d9e335 100644
+--- a/meta-oe/recipes-security/audit/audit_3.0.9.bb
++++ b/meta-oe/recipes-security/audit/audit_3.0.9.bb
+@@ -18,7 +18,7 @@ SRC_URI = "git://github.com/linux-audit/${BPN}-userspace.git;branch=master;proto
+ S = "${WORKDIR}/git"
+ SRCREV = "81fa28e0e8b4be83ddba03de8b816a3df510c17e"
  
--SRC_URI = "https://codeload.github.com/lefcha/${BPN}/tar.gz/v${PV};downloadfilename=${BP}.tar.gz \
-+# v2.7.6
-+SRCREV = "b39d0430f29d7c953581186955c11b461e6c824f"
-+SRC_URI = "git://github.com/lefcha/imapfilter;protocol=https;branch=master \
-            file://ldflags.patch \
- "
--SRC_URI[sha256sum] = "ab19f840712e6951e51c29e44c43b3b2fa42e93693f98f8969cc763a4fad56bf"
-+S = "${WORKDIR}/git"
+-inherit autotools python3native update-rc.d systemd
++inherit autotools python3native python3targetconfig update-rc.d systemd
  
- DEPENDS= "openssl lua libpcre2"
- 
+ UPDATERCPN = "auditd"
+ INITSCRIPT_NAME = "auditd"
 -- 
 2.25.1
 
