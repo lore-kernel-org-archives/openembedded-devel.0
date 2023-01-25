@@ -1,232 +1,139 @@
-Return-Path: <f_l_k@t-online.de>
+Return-Path: <brgl@bgdev.pl>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AA9DAC61D97
-	for <webhook@archiver.kernel.org>; Wed, 25 Jan 2023 07:51:44 +0000 (UTC)
-Received: from mailout10.t-online.de (mailout10.t-online.de [194.25.134.21])
- by mx.groups.io with SMTP id smtpd.web10.40324.1674633094118515586
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DD9EBC54E94
+	for <webhook@archiver.kernel.org>; Wed, 25 Jan 2023 08:17:44 +0000 (UTC)
+Received: from mail-wm1-f45.google.com (mail-wm1-f45.google.com [209.85.128.45])
+ by mx.groups.io with SMTP id smtpd.web10.40651.1674634656394950463
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 24 Jan 2023 23:51:34 -0800
+ Wed, 25 Jan 2023 00:17:37 -0800
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=SPF record not found (domain: t-online.de, ip: 194.25.134.21, mailfrom: f_l_k@t-online.de)
-Received: from fwd77.dcpf.telekom.de (fwd77.aul.t-online.de [10.223.144.103])
-	by mailout10.t-online.de (Postfix) with SMTP id D310F21894
-	for <openembedded-devel@lists.openembedded.org>; Wed, 25 Jan 2023 08:50:26 +0100 (CET)
-Received: from [192.168.178.83] ([79.219.226.209]) by fwd77.t-online.de
-	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1pKaY6-3VLmkq0; Wed, 25 Jan 2023 08:50:26 +0100
-Date: Wed, 25 Jan 2023 08:50:21 +0100
-From: Markus Volk <f_l_k@t-online.de>
-Subject: Re: [oe] [meta-oe][PATCHv2] cups-pk-helper: add recipe
-To: openembedded-devel@lists.openembedded.org
-Message-Id: <X371PR.D7FP8H9QR8CJ1@t-online.de>
-In-Reply-To: <173D2CBDA889ABF6.21537@lists.openembedded.org>
-References: <20230124054024.11634-1-f_l_k@t-online.de>
-	<173D283C72C80C46.686@lists.openembedded.org>
-	<173D2CBDA889ABF6.21537@lists.openembedded.org>
-X-Mailer: geary/40.0
+ dkim=pass header.i=@bgdev-pl.20210112.gappssmtp.com header.s=20210112 header.b=BjacX08l;
+ spf=none, err=SPF record not found (domain: bgdev.pl, ip: 209.85.128.45, mailfrom: brgl@bgdev.pl)
+Received: by mail-wm1-f45.google.com with SMTP id c10-20020a05600c0a4a00b003db0636ff84so687842wmq.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 25 Jan 2023 00:17:35 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=bgdev-pl.20210112.gappssmtp.com; s=20210112;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=YJ8VfuleMtpx5OjG3Dahpo88KC2JF93kyQW4rKCYEKI=;
+        b=BjacX08ltvaq+72VhmkFhIs8fEQsxaOG1ctW/HpJipsdunG26oWUvB2xLVB1PP3arL
+         CXDva27ajMMtzBwrzuQGJsxZys/UqN8g+K87qqKFeus1DEFgta79PqJhbT8Xxh5zYN+o
+         ex8i7hWcwfPMntFIz0uXI6GSLNbf98YOvyML+5W7ZVzUMg68GNzdKmkMUExf3FBjpzZk
+         q3vI+k/QM4ow/F3uQA+3GThsiI1kxFyB0PaOVqY5FySCKmZk26eBBqteu5eJZlKMjcz2
+         /nqfb1b5yGpBbk/ZpCXPJELYz/15t+dfId4NAnTg8dLnGEOkHO+txxVJGQbctuwOwW/t
+         EjeQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=YJ8VfuleMtpx5OjG3Dahpo88KC2JF93kyQW4rKCYEKI=;
+        b=uMI7VJVGnaDX22XR5F8D0MMSb+scC58p+68dywQr20JJBFHEdxeoRMoh+Dd65rHUvp
+         u3u/YZSorUbVTkx0YUzoj6wUIAmW0FFALNNfTmelAfk4kICApqE8pJ7FmD9YYqWaQmvx
+         6H4Zwtmcl01qcbsTvWkR6wDvOHXc7SpO/eqLOkAi1GszsJ6inFpih9m1IL2wjjUZ+37j
+         fJ1NdcWSMQ6NHf5FEQSyvcAg2Ykyc8yTlcT2tREDu32k8pLO8H3K0s3rZ65tPMWhVmis
+         BlK2owYU0Zx6NHd+5tzJ30jffgwvhJMh8qQrB+s2TiqKdaYRrUJq+SqGNOHfNvmaSt90
+         IDog==
+X-Gm-Message-State: AO0yUKUT90HnDs7r9JpPPhLcm5abkYLI/zvj6EGRiLIXTMJQGiLPc400
+	vw7Y3a/dQczs8/hfLwCwg3DOpg==
+X-Google-Smtp-Source: AK7set+orbCUDFf3bwxjF4hWjKrlXl9Y961YIXdoMewLchV9uh+j9forZQ9zGi1xLgdRA9MbsxX3xg==
+X-Received: by 2002:a05:600c:46cb:b0:3dc:1da2:b2d6 with SMTP id q11-20020a05600c46cb00b003dc1da2b2d6mr955153wmo.1.1674634654481;
+        Wed, 25 Jan 2023 00:17:34 -0800 (PST)
+Received: from brgl-uxlite.home ([2a01:cb1d:334:ac00:c598:2394:efb3:feca])
+        by smtp.gmail.com with ESMTPSA id x26-20020a1c7c1a000000b003db01178b62sm1044413wmc.40.2023.01.25.00.17.33
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 25 Jan 2023 00:17:34 -0800 (PST)
+From: Bartosz Golaszewski <brgl@bgdev.pl>
+To: Khem Raj <raj.khem@gmail.com>,
+	Bruce Ashfield <bruce.ashfield@gmail.com>,
+	openembedded-devel@lists.openembedded.org
+Cc: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
+Subject: [meta-oe][PATCH] libgpiod: fix python bindings build
+Date: Wed, 25 Jan 2023 09:17:31 +0100
+Message-Id: <20230125081731.6157-1-brgl@bgdev.pl>
+X-Mailer: git-send-email 2.37.2
 MIME-Version: 1.0
-Content-Type: multipart/alternative; boundary="=-cMiFIgOGx/t+TuJL5zWT"
-X-TOI-EXPURGATEID: 150726::1674633026-E9D5537F-62F4C42C/0/0 CLEAN NORMAL
-X-TOI-MSGID: e402bfd7-e5fd-41ac-8b52-5e0198666fa5
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 25 Jan 2023 07:51:44 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100729
+ <openembedded-devel@lists.openembedded.org>; Wed, 25 Jan 2023 08:17:44 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100731
 
---=-cMiFIgOGx/t+TuJL5zWT
-Content-Type: text/plain; charset=us-ascii; format=flowed
+From: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
 
-What seemed quite logical in theory did not pass the practical test. I 
-can't find the error in the localization so far. I still send a v3 for 
-the patch that disables localization for now. The recipe is still 
-pretty useful for being able to enable printers via the gui and grant 
-permissions via polkit.
+It seems that automake's AM_PATH_PYTHON() macro no longer sets the
+$PYTHON variable. This means the python bindings build for libgpiod has
+been broken for some time. As we know which version we're using -
+python3 - let's hardcode it in configure.ac. For now add a patch that's
+been merged upstream and once a new bugfix release is out, we'll remove
+it.
 
-Am Di, 24. Jan 2023 um 08:03:40 +0100 schrieb Markus Volk 
-<f_l_k@t-online.de>:
-> Another thing I've forgot since I created this recipe some time ago. 
-> There is an issue with gettext.
-> cups-pk-helper wants to created a localized 
-> 'org.opensuse.cupspkhelper.mechanism.policy' file from an according 
-> policy.in.
-> For that it would be required to build polkit-native and then there's 
-> still a problem, because polkit installes the polkit.its file in 
-> ${STAGING_DATADIR_NATIVE}/gettext while gettext creates a wrapper 
-> that uses ${STAGING_DATADIR_NATIVE}/gettext-${PV}and the needed 
-> its-rule still can't be found:
-> 
-> | 
-> /home/flk/poky/build-intel/tmp/work/corei7-64-poky-linux/cups-pk-helper/0.2.7-r0/recipe-sysroot-native/usr/bin/msgfmt: 
-> cannot locate ITS rules for 
-> ../cups-pk-helper-0.2.7/src/org.opensuse.cupspkhelper.mechanism.policy.in
-> | [45/59] 
-> /home/flk/poky/build-intel/tmp/work/corei7-64-poky-linux/cups-pk-helper/0.2.7-r0/recipe-sysroot-native/usr/bin/gdbus-codegen 
-> --c-generate-autocleanup all --interface-prefix 
-> org.opensuse.CupsPkHelper. --c-namespace CphIface 
-> --c-generate-object-manager --header --output 
-> src/cph-iface-mechanism.h 
-> ../cups-pk-helper-0.2.7/src/cups-pk-helper-mechanism.xml
-> | [46/59] 
-> /home/flk/poky/build-intel/tmp/work/corei7-64-poky-linux/cups-pk-helper/0.2.7-r0/recipe-sysroot-native/usr/bin/gdbus-codegen 
-> --c-generate-autocleanup all --interface-prefix 
-> org.opensuse.CupsPkHelper. --c-namespace CphIface 
-> --c-generate-object-manager --body --output src/cph-iface-mechanism.c 
-> ../cups-pk-helper-0.2.7/src/cups-pk-helper-mechanism.xml
-> | ninja: build stopped: subcommand failed
-> 
-> I'd like to fix this but am unsure, what would be the best way to to 
-> it. Any suggestions ? I instinctively tend to completely wipe that 
-> ${PV} from gettext directory because I really disslike dynamically 
-> changing directory names.
-> 
-> Another reasonable and simple fix for this is to patch meson not to 
-> try localization, just copy the policy.in file to policy and live 
-> with the fact, that its english only
-> 
-> Am Di, 24. Jan 2023 um 06:41:07 +0100 schrieb Markus Volk 
-> <f_l_k@t-online.de>:
->> v2 adds polkit to REQUIRED_DISTRO_FEATURES
->> 
->> Am Di, 24. Jan 2023 um 06:40:24 +0100 schrieb Markus Volk 
->> <f_l_k@t-online.de>:
->>> cups-pk-helper is a runtime dependency for gnome-control-center
->>> or system-config-printer.
->>> 
->>> Signed-off-by: Markus Volk <f_l_k@t-online.de 
->>> <mailto:f_l_k@t-online.de>>
->>> ---
->>>  .../recipes-printing/cups/cups-pk-helper_0.2.7.bb | 15 
->>> +++++++++++++++
->>>  1 file changed, 15 insertions(+)
->>>  create mode 100644 
->>> meta-oe/recipes-printing/cups/cups-pk-helper_0.2.7.bb
->>> 
->>> diff --git a/meta-oe/recipes-printing/cups/cups-pk-helper_0.2.7.bb 
->>> b/meta-oe/recipes-printing/cups/cups-pk-helper_0.2.7.bb
->>> new file mode 100644
->>> index 000000000..9639a123d
->>> --- /dev/null
->>> +++ b/meta-oe/recipes-printing/cups/cups-pk-helper_0.2.7.bb
->>> @@ -0,0 +1,15 @@
->>> +DESCRIPTION = "CUPS polkit helper"
->>> +HOMEPAGE = 
->>> "<https://www.freedesktop.org/software/cups-pk-helper/releases/>"
->>> +LICENSE = "GPL-2.0-only"
->>> +LIC_FILES_CHKSUM = 
->>> "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263" 
->>> <file://copying;md5=b234ee4d69f5fce4486a80fdaf4a4263/>
->>> +
->>> +DEPENDS = "cups polkit glib-2.0 xz intltool-native"
->>> +
->>> +inherit meson pkgconfig gettext features_check
->>> +
->>> +REQUIRED_DISTRO_FEATURES = "polkit"
->>> +
->>> +SRC_URI = 
->>> "https://www.freedesktop.org/software/cups-pk-helper/releases/cups-pk-helper-${PV}.tar.xz 
->>> <https://www.freedesktop.org/software/cups-pk-helper/releases/cups-pk-helper-$%7BPV%7D.tar.xz>"
->>> +SRC_URI[sha256sum] = 
->>> "66070ddb448fe9fcee76aa26be2ede5a80f85563e3a4afd59d2bfd79fbe2e831"
->>> +
->>> +FILES:${PN} += "${datadir}"
->>> --
->>> 2.34.1
->>> 
-
-
---=-cMiFIgOGx/t+TuJL5zWT
-Content-Type: text/html; charset=us-ascii
-Content-Transfer-Encoding: quoted-printable
-
-<div id=3D"geary-body" dir=3D"auto"><div>What seemed quite logical in theor=
-y did not pass the practical test. I can't find the error in the localizati=
-on so far. I still send a v3 for the patch that disables localization for n=
-ow. The recipe is still pretty useful for being able to enable printers via=
- the gui and grant permissions via polkit.</div></div><div id=3D"geary-quot=
-e" dir=3D"auto"><br>Am Di, 24. Jan 2023 um 08:03:40 +0100 schrieb Markus Vo=
-lk &lt;f_l_k@t-online.de&gt;:<br><blockquote type=3D"cite"><div id=3D"geary=
--body" dir=3D"auto"><div>Another thing I've forgot since I created this rec=
-ipe some time ago. There is an issue with gettext.</div><div>cups-pk-helper=
- wants to created a localized 'org.opensuse.cupspkhelper.mechanism.policy' =
-file from an according policy.in.</div><div>For that it would be required t=
-o build polkit-native and then there's still a problem, because polkit inst=
-alles the polkit.its file in ${STAGING_DATADIR_NATIVE}/gettext while gettex=
-t creates a wrapper that uses ${STAGING_DATADIR_NATIVE}/gettext-${PV}and th=
-e needed its-rule still can't be found:</div><div><br></div><div>| /home/fl=
-k/poky/build-intel/tmp/work/corei7-64-poky-linux/cups-pk-helper/0.2.7-r0/re=
-cipe-sysroot-native/usr/bin/msgfmt: cannot locate ITS rules for ../cups-pk-=
-helper-0.2.7/src/org.opensuse.cupspkhelper.mechanism.policy.in</div><div>| =
-[45/59] /home/flk/poky/build-intel/tmp/work/corei7-64-poky-linux/cups-pk-he=
-lper/0.2.7-r0/recipe-sysroot-native/usr/bin/gdbus-codegen --c-generate-auto=
-cleanup all --interface-prefix org.opensuse.CupsPkHelper. --c-namespace Cph=
-Iface --c-generate-object-manager --header --output src/cph-iface-mechanism=
-.h ../cups-pk-helper-0.2.7/src/cups-pk-helper-mechanism.xml</div><div>| [46=
-/59] /home/flk/poky/build-intel/tmp/work/corei7-64-poky-linux/cups-pk-helpe=
-r/0.2.7-r0/recipe-sysroot-native/usr/bin/gdbus-codegen --c-generate-autocle=
-anup all --interface-prefix org.opensuse.CupsPkHelper. --c-namespace CphIfa=
-ce --c-generate-object-manager --body --output src/cph-iface-mechanism.c ..=
-/cups-pk-helper-0.2.7/src/cups-pk-helper-mechanism.xml</div><div>| ninja: b=
-uild stopped: subcommand failed</div><div><br></div><div>I'd like to fix th=
-is but am unsure, what would be the best way to to it. Any suggestions ? I =
-instinctively tend to completely wipe that ${PV} from gettext directory bec=
-ause I really disslike dynamically changing directory names.&nbsp;</div><di=
-v><br></div><div>Another reasonable and simple fix for this is to patch mes=
-on not to try localization, just copy the policy.in file to policy and live=
- with the fact, that its english only</div></div><div id=3D"geary-quote" di=
-r=3D"auto"><br>Am Di, 24. Jan 2023 um 06:41:07 +0100 schrieb Markus Volk &l=
-t;f_l_k@t-online.de&gt;:<br><blockquote type=3D"cite"><div id=3D"geary-body=
-" dir=3D"auto"><div>v2 adds polkit to REQUIRED_DISTRO_FEATURES</div></div><=
-div id=3D"geary-quote" dir=3D"auto"><br>Am Di, 24. Jan 2023 um 06:40:24 +01=
-00 schrieb Markus Volk &lt;f_l_k@t-online.de&gt;:<br><blockquote type=3D"ci=
-te"><div class=3D"plaintext" style=3D"white-space: break-spaces;">cups-pk-h=
-elper is a runtime dependency for gnome-control-center
-or system-config-printer.
-
-Signed-off-by: Markus Volk &lt;<a href=3D"mailto:f_l_k@t-online.de">f_l_k@t=
--online.de</a>&gt;
+Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
 ---
- .../recipes-printing/cups/cups-pk-helper_0.2.7.bb | 15 +++++++++++++++
- 1 file changed, 15 insertions(+)
- create mode 100644 meta-oe/recipes-printing/cups/cups-pk-helper_0.2.7.bb
+ ...-don-t-expect-automake-to-set-PYTHON.patch | 37 +++++++++++++++++++
+ .../libgpiod/libgpiod_1.6.3.bb                |  1 +
+ 2 files changed, 38 insertions(+)
+ create mode 100644 meta-oe/recipes-support/libgpiod/files/0001-build-don-t-expect-automake-to-set-PYTHON.patch
 
-diff --git a/meta-oe/recipes-printing/cups/cups-pk-helper_0.2.7.bb b/meta-o=
-e/recipes-printing/cups/cups-pk-helper_0.2.7.bb
+diff --git a/meta-oe/recipes-support/libgpiod/files/0001-build-don-t-expect-automake-to-set-PYTHON.patch b/meta-oe/recipes-support/libgpiod/files/0001-build-don-t-expect-automake-to-set-PYTHON.patch
 new file mode 100644
-index 000000000..9639a123d
+index 000000000..a3dc38188
 --- /dev/null
-+++ b/meta-oe/recipes-printing/cups/cups-pk-helper_0.2.7.bb
-@@ -0,0 +1,15 @@
-+DESCRIPTION =3D "CUPS polkit helper"
-+HOMEPAGE =3D "<a href=3D"https://www.freedesktop.org/software/cups-pk-help=
-er/releases/">https://www.freedesktop.org/software/cups-pk-helper/releases/=
-</a>"
-+LICENSE =3D "GPL-2.0-only"
-+LIC_FILES_CHKSUM =3D "<a href=3D"file://COPYING;md5=3Db234ee4d69f5fce4486a=
-80fdaf4a4263" "=3D"">file://COPYING;md5=3Db234ee4d69f5fce4486a80fdaf4a4263"=
-</a>
++++ b/meta-oe/recipes-support/libgpiod/files/0001-build-don-t-expect-automake-to-set-PYTHON.patch
+@@ -0,0 +1,37 @@
++From 3c461786feb1d5aa1ed2a911942a5f9fbc8b8086 Mon Sep 17 00:00:00 2001
++From: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
++Date: Tue, 24 Jan 2023 17:38:43 +0100
++Subject: [libgpiod v1.6.x][PATCH] build: don't expect automake to set $PYTHON
 +
-+DEPENDS =3D "cups polkit glib-2.0 xz intltool-native"
++It seems that the implementation of AM_PATH_PYTHON() changed in automake
++recently and no longer sets $PYTHON variable which breaks the build on
++some systems.
 +
-+inherit meson pkgconfig gettext features_check
++We know we use python3 so use python3-config explicitly.
 +
-+REQUIRED_DISTRO_FEATURES =3D "polkit"
++Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
++---
++Upstream-Status: Accepted
 +
-+SRC_URI =3D "<a href=3D"https://www.freedesktop.org/software/cups-pk-helpe=
-r/releases/cups-pk-helper-${PV}.tar.xz">https://www.freedesktop.org/softwar=
-e/cups-pk-helper/releases/cups-pk-helper-${PV}.tar.xz</a>"
-+SRC_URI[sha256sum] =3D "66070ddb448fe9fcee76aa26be2ede5a80f85563e3a4afd59d=
-2bfd79fbe2e831"
++ configure.ac | 4 ++--
++ 1 file changed, 2 insertions(+), 2 deletions(-)
 +
-+FILES:${PN} +=3D "${datadir}"
-<div>--=20
-</div>2.34.1
-
-</div></blockquote></div>
-</blockquote></div>
-</blockquote></div>
---=-cMiFIgOGx/t+TuJL5zWT--
++diff --git a/configure.ac b/configure.ac
++index 3149384..0460810 100644
++--- a/configure.ac
+++++ b/configure.ac
++@@ -204,9 +204,9 @@ then
++ 		AC_MSG_ERROR([python3-config not found - needed for python bindings])
++ 	fi
++ 	AS_IF([test -z "$PYTHON_CPPFLAGS"],
++-		[AC_SUBST(PYTHON_CPPFLAGS, [`$PYTHON-config --includes`])])
+++		[AC_SUBST(PYTHON_CPPFLAGS, [`python3-config --includes`])])
++ 	AS_IF([test -z "$PYTHON_LIBS"],
++-		[AC_SUBST(PYTHON_LIBS, [`$PYTHON-config --libs`])])
+++		[AC_SUBST(PYTHON_LIBS, [`python3-config --libs`])])
++ fi
++ 
++ AC_CHECK_PROG([has_doxygen], [doxygen], [true], [false])
++-- 
++2.37.2
++
+diff --git a/meta-oe/recipes-support/libgpiod/libgpiod_1.6.3.bb b/meta-oe/recipes-support/libgpiod/libgpiod_1.6.3.bb
+index 3e6e5d567..5164e7e02 100644
+--- a/meta-oe/recipes-support/libgpiod/libgpiod_1.6.3.bb
++++ b/meta-oe/recipes-support/libgpiod/libgpiod_1.6.3.bb
+@@ -7,6 +7,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=2caced0b25dfefd4c601d92bd15116de"
+ SRC_URI = " \
+     https://www.kernel.org/pub/software/libs/${BPN}/${BP}.tar.xz \
+     file://run-ptest \
++    file://0001-build-don-t-expect-automake-to-set-PYTHON.patch \
+ "
+ 
+ SRC_URI[md5sum] = "28e79f6f70fee1da9079558d8b7b3736"
+-- 
+2.37.2
 
 
