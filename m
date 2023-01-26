@@ -2,89 +2,88 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E61BFC61DA7
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D3A40C54EAA
 	for <webhook@archiver.kernel.org>; Thu, 26 Jan 2023 21:05:35 +0000 (UTC)
-Received: from mail-pl1-f179.google.com (mail-pl1-f179.google.com [209.85.214.179])
- by mx.groups.io with SMTP id smtpd.web10.86297.1674767132037428959
+Received: from mail-pj1-f47.google.com (mail-pj1-f47.google.com [209.85.216.47])
+ by mx.groups.io with SMTP id smtpd.web10.86296.1674767131454815768
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 26 Jan 2023 13:05:32 -0800
+ Thu, 26 Jan 2023 13:05:31 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=HR1Y4+ZD;
- spf=pass (domain: gmail.com, ip: 209.85.214.179, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f179.google.com with SMTP id p24so2986128plw.11
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=HARCaDfT;
+ spf=pass (domain: gmail.com, ip: 209.85.216.47, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f47.google.com with SMTP id rm7-20020a17090b3ec700b0022c05558d22so2929539pjb.5
         for <openembedded-devel@lists.openembedded.org>; Thu, 26 Jan 2023 13:05:31 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=CudGvke5Reo7SgrWd+uTlHD4dbiI03zyBE9amGYrkwA=;
-        b=HR1Y4+ZDiCtQBvGfX9/UiVtgg15fERkg40h6u+ZZLYAMEmAAYtNO6VNFUdHZVan4bc
-         YSC/trvLWQ20Sho2d1GKDKJPhCZztM/dvYVhBweWM1gpxWUTSTf9wovEZpAMAr7DYKqC
-         FB070wKjngOAs3/TMvmAFE9zup0wuZqNeF6Ltz1sNVcFQCIRkwo6i9aA77XJGRN/uhL5
-         tVE4Go22tmAEXpnEzVRqcT9H6gpMJds9jG6VYzWXv3vo7fgophidKMmpPAgjIqPAUTZ3
-         mVYbEeRbUb11mHSvA/vVQlpULtZ2z7FmA57YNEfUvqYMcreCnGw0h7XjnFGioFCL6Zp2
-         d58Q==
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=Q9TqVYIAv8k8ZJTQsn1lflfD4ovmsOxVElP8c1+xR90=;
+        b=HARCaDfTlNxWZD8jOrM9Id0Hv8rlLKJxu5Ow9g17Ll2iZI4+h7F8XdOguT2A4O4/ga
+         mykISC9VwfFjK1C64dkoeLKextMeIyq7FB2uvkdJ1WA7YX61baZckIl5duLj4oqCdfh9
+         aoN506C2hqA/TyvOxM5PQkol6LkR0/MxzL1qjXoSxsuMp79BryM3EoYRSX/TZWeYY4qj
+         RbgXQXBWePhDM4Ix6xmkmpeVSJG0Wpdf6KunlZwK/CsLEraTFHnLwZXqsBPlw2/z7qSE
+         S4tiwMmVFPoD8iIDTT9Q6tUB3GkY24+UEONYbu/TIyzCmZD8/Eaf8aGptVX1Uqs6LNL4
+         uSsg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=CudGvke5Reo7SgrWd+uTlHD4dbiI03zyBE9amGYrkwA=;
-        b=loUID+Bjt217wQifXXu3Pebg64K3xdcdaSLM7xPdxN7zkT32lWalfFGlmOvsfLdB8C
-         Dk4DuXtvQCL19ruL/KpHbFTFLKyONEH5PwSACBhUAd5JD0Ha7InVlD78Jf0Bnanb2YAd
-         QUhlmuvYi54Kmliv0RYkbpV3w7gb/kfJW+zWxuFM1hpcrBr2zYLZ8rniwTfQ2KamPl7e
-         6HWI7z+Mki82zaPEJKwooeNmdtJzvZT88mFBlKIaG+Y/6956hXh/OKPS3pMEBF/CGd9i
-         8kUVSRX9yjyXwSJ0zMIJ1tyL1lKl55FCEBYYAaFxBXKtiBjmokqMWqTDhwmSTuJqkGR/
-         /4rA==
-X-Gm-Message-State: AFqh2kocWBO7f+TcptOYYDo9pRrnFxG8IPgRdoFYqBBho8zScMf7THSX
-	ccAzKlitrPmMAcDHS6RvUniANVM5H+MZRw==
-X-Google-Smtp-Source: AMrXdXvpUdbffBOxhOHDa8NbomOtUg1STqFEwCIcZDIyB+TY1GO+LVJCjtXM/YUA1KtxFppkYYFIiA==
-X-Received: by 2002:a17:90a:c57:b0:228:f13b:9649 with SMTP id u23-20020a17090a0c5700b00228f13b9649mr39341470pje.43.1674767131145;
-        Thu, 26 Jan 2023 13:05:31 -0800 (PST)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9181:1cf0::aee3])
-        by smtp.gmail.com with ESMTPSA id j8-20020a17090a94c800b0022bee398e09sm1503847pjw.4.2023.01.26.13.05.30
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=Q9TqVYIAv8k8ZJTQsn1lflfD4ovmsOxVElP8c1+xR90=;
+        b=m1otytyca2f0wNJyS6C8UWIhM36BM52whFXICPFuLMqOteFRxRaP7ca5cOjoOLS8hA
+         hA+a3mVbvRnVzSYEnbXk22lvlH2YoHRCeT+MQEyFoHpgh5s8Yw07rf7AwLi6P/TcWjh6
+         8qt4J3ei4n+u61CwT6tyx7TQ0ahDpeSnZ0c7XtdodR+dx7J+mawNoLHoJ8RCJ29zuD1k
+         idnv+4P71nF3HhaayJMCP58GvqOFVrYlDIFkHy6mhHY8KKPJgDYFJte5DVOSYPJycrkT
+         Xdpp+Xt1nBwlkF7kU4ZND7OUB7xnp4AdmiGvQHr1yd/XuQCjA89/vBjFtGhDsRuPE843
+         CNfQ==
+X-Gm-Message-State: AO0yUKVP1S2p0MRHm66h/rmIW6wxxdu3nAj9fQ/DiE/R1th7WojyB2Q5
+	JgO4aayrgLCmooZioWCPeVF1uiEjxjjXGQ==
+X-Google-Smtp-Source: AK7set9UBg6nhSTEfeweI7vyWbiPndHhEqd7IXm9DtGSxerWWvc+1TsyMsmwZ4xYsBpSP2kukr9l1w==
+X-Received: by 2002:a17:90b:388f:b0:22c:f1b:bdb1 with SMTP id mu15-20020a17090b388f00b0022c0f1bbdb1mr6680897pjb.3.1674767130396;
         Thu, 26 Jan 2023 13:05:30 -0800 (PST)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9181:1cf0::aee3])
+        by smtp.gmail.com with ESMTPSA id j8-20020a17090a94c800b0022bee398e09sm1503847pjw.4.2023.01.26.13.05.29
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 26 Jan 2023 13:05:29 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 2/4] redis-plus-plus: Enable SSL/TLS by default
-Date: Thu, 26 Jan 2023 13:05:25 -0800
-Message-Id: <20230126210527.2815542-2-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 1/4] hiredis: Enable SSL/TLS support by default
+Date: Thu, 26 Jan 2023 13:05:24 -0800
+Message-Id: <20230126210527.2815542-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.39.1
-In-Reply-To: <20230126210527.2815542-1-raj.khem@gmail.com>
-References: <20230126210527.2815542-1-raj.khem@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 26 Jan 2023 21:05:35 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100801
-
-Makes the build consistent and it does not look into native sysroot for ssl
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100800
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../recipes-extended/redis-plus-plus/redis-plus-plus_1.3.7.bb | 4 +++-
+ meta-oe/recipes-extended/hiredis/hiredis_1.0.2.bb | 4 +++-
  1 file changed, 3 insertions(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-extended/redis-plus-plus/redis-plus-plus_1.3.7.bb b/meta-oe/recipes-extended/redis-plus-plus/redis-plus-plus_1.3.7.bb
-index b127025a73..8e906a4483 100644
---- a/meta-oe/recipes-extended/redis-plus-plus/redis-plus-plus_1.3.7.bb
-+++ b/meta-oe/recipes-extended/redis-plus-plus/redis-plus-plus_1.3.7.bb
-@@ -12,7 +12,9 @@ S = "${WORKDIR}/git"
+diff --git a/meta-oe/recipes-extended/hiredis/hiredis_1.0.2.bb b/meta-oe/recipes-extended/hiredis/hiredis_1.0.2.bb
+index 2ff4946883..dabca322cc 100644
+--- a/meta-oe/recipes-extended/hiredis/hiredis_1.0.2.bb
++++ b/meta-oe/recipes-extended/hiredis/hiredis_1.0.2.bb
+@@ -3,7 +3,7 @@ HOMEPAGE = "http://github.com/redis/hiredis"
+ SECTION = "libs"
+ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=d84d659a35c666d23233e54503aaea51"
+-DEPENDS = "redis"
++DEPENDS = "redis openssl"
+ 
+ SRC_URI = "git://github.com/redis/hiredis;protocol=https;branch=master"
+ SRCREV = "b731283245f3183af527237166261ad0768ba7d4"
+@@ -11,3 +11,5 @@ SRCREV = "b731283245f3183af527237166261ad0768ba7d4"
+ S = "${WORKDIR}/git"
  
  inherit cmake
- 
--DEPENDS += "hiredis"
-+EXTRA_OECMAKE += "-DREDIS_PLUS_PLUS_USE_TLS=ON"
 +
-+DEPENDS += "hiredis openssl"
- 
- RDEPENDS:${PN} += "hiredis"
- 
++EXTRA_OECMAKE += "-DENABLE_SSL=ON"
 -- 
 2.39.1
 
