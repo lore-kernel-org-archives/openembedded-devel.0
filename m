@@ -2,56 +2,56 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C409CC54EED
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D0D9AC61DA0
 	for <webhook@archiver.kernel.org>; Thu, 26 Jan 2023 07:17:51 +0000 (UTC)
-Received: from mail-pj1-f46.google.com (mail-pj1-f46.google.com [209.85.216.46])
- by mx.groups.io with SMTP id smtpd.web10.68542.1674717470144099021
+Received: from mail-pj1-f54.google.com (mail-pj1-f54.google.com [209.85.216.54])
+ by mx.groups.io with SMTP id smtpd.web10.68540.1674717466733444619
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 25 Jan 2023 23:17:50 -0800
+ Wed, 25 Jan 2023 23:17:46 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=bs8186ln;
- spf=pass (domain: gmail.com, ip: 209.85.216.46, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f46.google.com with SMTP id z1-20020a17090a66c100b00226f05b9595so1006825pjl.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 25 Jan 2023 23:17:50 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=UzZCrFBL;
+ spf=pass (domain: gmail.com, ip: 209.85.216.54, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f54.google.com with SMTP id b24-20020a17090a551800b0022beefa7a23so4456190pji.5
+        for <openembedded-devel@lists.openembedded.org>; Wed, 25 Jan 2023 23:17:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=0NLdeqwGPUgTzQTGEWKQ526JB0d8IQ5UOOcmHgnEip0=;
-        b=bs8186lnX0Fw/KCixwmB7SoIZH+ZU6/8/XHyKRneisRqkv3yEKRoMEgKYjLn5njUzC
-         CS7n6GgzQG1/9+rM7Vs3UHFDpPTT+kENjnGvo7q+7ntE19SVkRbe4Z5XEBlwiV9jngd6
-         MXwBqMFA+QKYTq4aYPoufyfmyZyxXIbagTJKkDhRGZVb+ePCeaFwAZeofGFY6xGyOIWd
-         KsqQinfg/WWJOsZSatXWa9+OJMAbIY65Qkh4yMiA8iXuV7ae9xQoOxExWICIEelmeHBK
-         iFPP39XOv/32rBxuEGZR8ZeyW2Wl4zBwZ2MpZ+YtmtP3JLu6E/3Qh0Y4kiRQe2LkYqcF
-         MKvQ==
+        bh=VKLQgCf8oXFXwJXuko35PzRcB8IQCpcRQaPpz0jBmYU=;
+        b=UzZCrFBLXUc9p9lL5N9PJj4MZNd2J2qfefRiJEyjIF422jbH4WVyd63dq9Dso2is8V
+         1s1uS2nBWNxq3wsnQYhOKET2lYrdg2HSI7IhIeDLN+QA5G0+nGigdvZaYSJV1pnzO2RE
+         B2Hl1bHv7o3ZY/kPkmZmJFb/ppef5vjwQwbhu/N0QD/h3Bi2JojVmY7EGKG1HhIysUsF
+         G4rZw446yRI3kWoZPbhH+9CZ2j84+JDIqDouvD7E272UHHE/KGSlpTIOwrfictJK7frQ
+         CehET8akCjQwFhSydIkPITxVGtT7OXBzAqdebJdEIcuuytnKfmqKq2BynOHvfyERy3SR
+         oHzA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=0NLdeqwGPUgTzQTGEWKQ526JB0d8IQ5UOOcmHgnEip0=;
-        b=impqcuU0VsBLxHorOP2c5UCqCP8NTQKMAqQcNVRDGaBa+c4eGdIBXYrZQdYUfS4m3Q
-         yOWYoWCHXnW0GMFBVUQgdEPUfBw9PboaS1xZ5WffSWI+Iytws84VcDL2sbD/vrL3vulx
-         ZZ0RhIbtXtpv4fcXfuQLjeTCWw4tW2RQeSUU9iDo1mfwBhqgTploMey63WTJR5Seynld
-         yGFMC4IRpeww4E0z2/rTKR6MWHQ6wLWKVJvteNQvh9E4CEen49cTwVXigQc57kFJaSef
-         9x7HNict6wXLqVeZeRhKJwjpAIbh4b3GhDaXHCifuBHe67t7zNWr5rKg2PVA/Tayi7XZ
-         nsEA==
-X-Gm-Message-State: AO0yUKWqOBVHKBznAY3FDMzNs9q6wh9/JMJMFbR1BencigsTNbiSHf6i
-	caASqNU3VPyTBitwRblrIu/kaOiSji23ng==
-X-Google-Smtp-Source: AK7set+USZGRAyjdpis7fi6WVLr9+r9KOVk9xnZFyVRnRWqc1o+d2MJ4UYOfrovxVGgm+UwfBtcbEA==
-X-Received: by 2002:a17:902:e293:b0:196:39b2:4ada with SMTP id o19-20020a170902e29300b0019639b24adamr2026119plc.35.1674717469325;
-        Wed, 25 Jan 2023 23:17:49 -0800 (PST)
+        bh=VKLQgCf8oXFXwJXuko35PzRcB8IQCpcRQaPpz0jBmYU=;
+        b=jC+oq0xP002S7YHtwlHCQQ8XGiHIxGS49OxI1HTgJxfKO3p7z6TgvdTtLmHYbkyQ23
+         oPNV7rJjZuTdTZO5averHWygTUbY6VtAd0H/3gghj4atn93DTUkT9LLY3zTkFK6n4V2X
+         gQ3ZJEh2uppZ4SvoMwSvffo0XaU40Bj67SkphrXcsQtFkZt1ARtbvYNkixefrC1yHuNa
+         47HVI05pTfvrSmwO5VFVQKjMLL65rPOv7x4CQNtWyP7MoxNSCQGnGZVQMvQyt9wtmryq
+         gHjo1zFYnlD2kV7OHeMarPlR6AugmRiUYryO8Xm/gKNMPJT2gjcJFV2J3eXuF1A4pxOA
+         HW3w==
+X-Gm-Message-State: AFqh2koiFo1i4iDKx/+qJa07wG1M2cl8sopt3EqIcH9+uvqaRbbR/PxU
+	RbbqiJiG4jPJAWCp7B/OC25rmeLeSBoLAw==
+X-Google-Smtp-Source: AMrXdXs7Loy2lgY21rdwl+XSmyvBbwebExd3GlGGa+mw6Zuxdmk0vL36gDBNLZHPAY8qrhdFdFif3g==
+X-Received: by 2002:a17:902:e84b:b0:194:ddc2:60e8 with SMTP id t11-20020a170902e84b00b00194ddc260e8mr29572157plg.48.1674717465903;
+        Wed, 25 Jan 2023 23:17:45 -0800 (PST)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9181:1cf0::aee3])
-        by smtp.gmail.com with ESMTPSA id c17-20020a170902b69100b00196025a34b9sm458815pls.159.2023.01.25.23.17.48
+        by smtp.gmail.com with ESMTPSA id c17-20020a170902b69100b00196025a34b9sm458815pls.159.2023.01.25.23.17.45
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 25 Jan 2023 23:17:49 -0800 (PST)
+        Wed, 25 Jan 2023 23:17:45 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 13/13] msktutil: Upgrade to 1.2.1
-Date: Wed, 25 Jan 2023 23:17:35 -0800
-Message-Id: <20230126071735.2444745-13-raj.khem@gmail.com>
+Subject: [meta-networking][PATCH 09/13] opensaf: Fix build with gcc13
+Date: Wed, 25 Jan 2023 23:17:31 -0800
+Message-Id: <20230126071735.2444745-9-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.39.1
 In-Reply-To: <20230126071735.2444745-1-raj.khem@gmail.com>
 References: <20230126071735.2444745-1-raj.khem@gmail.com>
@@ -61,72 +61,144 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 26 Jan 2023 07:17:51 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100795
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100791
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../{msktutil_1.2.bb => msktutil_1.2.1.bb}    |  5 +--
- ...figure.ac-Remove-native-include-path.patch | 31 +++++++++++++++++++
- 2 files changed, 34 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-support/msktutil/{msktutil_1.2.bb => msktutil_1.2.1.bb} (75%)
- create mode 100644 meta-oe/recipes-support/msktutil/mskutil/0001-configure.ac-Remove-native-include-path.patch
+ ...1-include-cstdint-for-uintXX_t-types.patch | 43 ++++++++++++++
+ ...-Werror-enum-int-mismatch-with-gcc13.patch | 59 +++++++++++++++++++
+ .../opensaf/opensaf_5.22.01.bb                |  2 +
+ 3 files changed, 104 insertions(+)
+ create mode 100644 meta-networking/recipes-daemons/opensaf/opensaf/0001-include-cstdint-for-uintXX_t-types.patch
+ create mode 100644 meta-networking/recipes-daemons/opensaf/opensaf/0002-Fix-Werror-enum-int-mismatch-with-gcc13.patch
 
-diff --git a/meta-oe/recipes-support/msktutil/msktutil_1.2.bb b/meta-oe/recipes-support/msktutil/msktutil_1.2.1.bb
-similarity index 75%
-rename from meta-oe/recipes-support/msktutil/msktutil_1.2.bb
-rename to meta-oe/recipes-support/msktutil/msktutil_1.2.1.bb
-index 1b9a04ef29..b4f4651e37 100644
---- a/meta-oe/recipes-support/msktutil/msktutil_1.2.bb
-+++ b/meta-oe/recipes-support/msktutil/msktutil_1.2.1.bb
-@@ -7,8 +7,9 @@ DESCRIPTION = "Msktutil creates user or computer accounts in Active Directory, \
- LICENSE = "GPL-2.0-only"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=eb723b61539feef013de476e68b5c50a"
- 
--SRC_URI = "https://github.com/msktutil/msktutil/releases/download/v${PV}/msktutil-${PV}.tar.bz2"
--SRC_URI[sha256sum] = "27dc078cbac3186540d8ea845fc0ced6b1d9f844e586ccd9eaa2d9f4650c2ce6"
-+SRC_URI = "https://github.com/msktutil/msktutil/releases/download/${PV}/${BP}.tar.bz2 \
-+           file://0001-configure.ac-Remove-native-include-path.patch"
-+SRC_URI[sha256sum] = "f9686237c4e24414802415f4c8627c7343da365c5a3bcdef7a853fa3cd27b45d"
- 
- DEPENDS += "krb5 cyrus-sasl openldap"
- 
-diff --git a/meta-oe/recipes-support/msktutil/mskutil/0001-configure.ac-Remove-native-include-path.patch b/meta-oe/recipes-support/msktutil/mskutil/0001-configure.ac-Remove-native-include-path.patch
+diff --git a/meta-networking/recipes-daemons/opensaf/opensaf/0001-include-cstdint-for-uintXX_t-types.patch b/meta-networking/recipes-daemons/opensaf/opensaf/0001-include-cstdint-for-uintXX_t-types.patch
 new file mode 100644
-index 0000000000..1643c08566
+index 0000000000..e36d4e0cdc
 --- /dev/null
-+++ b/meta-oe/recipes-support/msktutil/mskutil/0001-configure.ac-Remove-native-include-path.patch
-@@ -0,0 +1,31 @@
-+From bf9795ffbda7bb241b708ff261976016efb943b1 Mon Sep 17 00:00:00 2001
++++ b/meta-networking/recipes-daemons/opensaf/opensaf/0001-include-cstdint-for-uintXX_t-types.patch
+@@ -0,0 +1,43 @@
++From 225891675b80beaa9d74ce56809e52c4451df72c Mon Sep 17 00:00:00 2001
 +From: Khem Raj <raj.khem@gmail.com>
-+Date: Wed, 25 Jan 2023 23:12:19 -0800
-+Subject: [PATCH] configure.ac: Remove native include path
++Date: Wed, 25 Jan 2023 21:46:22 -0800
++Subject: [PATCH 1/2] include cstdint for uintXX_t types
 +
-+On OE com_err.h is found in /usr/include too, therefore adding new path
-+to include search path is not needed. Moreover it fixed QA checks where
-+it warns about using build system paths.
++GCC-13 needs it [1]
 +
-+Upstream-Status: Inappropriate [Cross-compile specific]
++[1] https://www.gnu.org/software/gcc/gcc-13/porting_to.html
 +
++Upstream-Status: Pending
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +---
-+ configure.ac | 1 -
-+ 1 file changed, 1 deletion(-)
++ src/imm/immnd/ImmModel.h           | 1 +
++ src/osaf/consensus/consensus_env.h | 1 +
++ 2 files changed, 2 insertions(+)
 +
-+diff --git a/configure.ac b/configure.ac
-+index eaac16f..d23d0b0 100644
-+--- a/configure.ac
-++++ b/configure.ac
-+@@ -134,7 +134,6 @@ fi
-+ # Fedora, RHEL, Centos has com_err.h in /usr/include/et
-+ AC_CHECK_HEADERS([et/com_err.h])
-+ if test "$ac_cv_header_et_com_err_h" = "yes"; then
-+-   CPPFLAGS="-I/usr/include/et $CPPFLAGS"
-+    AC_DEFINE(HAVE_COM_ERR_H, 1)
-+ fi
++diff --git a/src/imm/immnd/ImmModel.h b/src/imm/immnd/ImmModel.h
++index 44da470..0660431 100644
++--- a/src/imm/immnd/ImmModel.h
+++++ b/src/imm/immnd/ImmModel.h
++@@ -22,6 +22,7 @@
++ #include <saImmOm.h>
++ #include <cstdarg>
++ #include <sys/types.h>
+++#include <cstdint>
++ #include <string>
++ #include <vector>
++ #include <map>
++diff --git a/src/osaf/consensus/consensus_env.h b/src/osaf/consensus/consensus_env.h
++index df4f93a..89ccf46 100644
++--- a/src/osaf/consensus/consensus_env.h
+++++ b/src/osaf/consensus/consensus_env.h
++@@ -15,6 +15,7 @@
++ #ifndef OSAF_CONSENSUS_CONSENSUS_ENV_H_
++ #define OSAF_CONSENSUS_CONSENSUS_ENV_H_
++ 
+++#include <cstdint>
++ #include <string>
++ #include "base/mutex.h"
 + 
 +-- 
 +2.39.1
 +
+diff --git a/meta-networking/recipes-daemons/opensaf/opensaf/0002-Fix-Werror-enum-int-mismatch-with-gcc13.patch b/meta-networking/recipes-daemons/opensaf/opensaf/0002-Fix-Werror-enum-int-mismatch-with-gcc13.patch
+new file mode 100644
+index 0000000000..e3288431eb
+--- /dev/null
++++ b/meta-networking/recipes-daemons/opensaf/opensaf/0002-Fix-Werror-enum-int-mismatch-with-gcc13.patch
+@@ -0,0 +1,59 @@
++From 5e5686de677c884d5d785254412ced3c9d2d1b08 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Wed, 25 Jan 2023 21:47:45 -0800
++Subject: [PATCH 2/2] Fix -Werror=enum-int-mismatch with gcc13
++
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ src/evt/agent/eda_hdl.h | 5 +++--
++ src/evt/evtd/eds_mds.h  | 3 +--
++ src/smf/smfnd/smfnd.h   | 8 ++++----
++ 3 files changed, 8 insertions(+), 8 deletions(-)
++
++--- a/src/evt/agent/eda_hdl.h
+++++ b/src/evt/agent/eda_hdl.h
++@@ -31,6 +31,7 @@
++ #define EVT_AGENT_EDA_HDL_H_
++ 
++ #include "evt/agent/eda.h"
+++#include "ais/include/saAis.h"
++ 
++ uint32_t eda_hdl_cbk_dispatch(EDA_CB *, EDA_CLIENT_HDL_REC *, SaDispatchFlagsT);
++ 
++@@ -68,11 +69,11 @@ EDA_CHANNEL_HDL_REC *eda_find_chan_hdl_r
++ 
++ void eda_msg_destroy(EDSV_MSG *msg);
++ 
++-uint32_t eda_extract_pattern_from_event(
+++SaAisErrorT eda_extract_pattern_from_event(
++     SaEvtEventPatternArrayT *from_pattern_array,
++     SaEvtEventPatternArrayT **to_pattern_array);
++ 
++-uint32_t eda_allocate_and_extract_pattern_from_event(
+++SaAisErrorT eda_allocate_and_extract_pattern_from_event(
++     SaEvtEventPatternArrayT *from_pattern_array,
++     SaEvtEventPatternArrayT **to_pattern_array);
++ 
++--- a/src/evt/evtd/eds_mds.h
+++++ b/src/evt/evtd/eds_mds.h
++@@ -49,8 +49,7 @@ uint32_t eds_mds_msg_send(EDS_CB *cb, ED
++                           MDS_SEND_PRIORITY_TYPE prio);
++ 
++ uint32_t eds_mds_ack_send(EDS_CB *cb, EDSV_MSG *msg, MDS_DEST dest,
++-                          SaTimeT timeout, MDS_SEND_PRIORITY_TYPE prio);
++-
+++                          SaTimeT timeout, uint32_t prio);
++ uint32_t eds_dec_subscribe_msg(NCS_UBAID *uba, long msg_hdl, uint8_t ckpt_flag);
++ 
++ uint32_t eds_dec_publish_msg(NCS_UBAID *uba, long msg_hdl, uint8_t ckpt_flag);
++--- a/src/smf/smfnd/smfnd.h
+++++ b/src/smf/smfnd/smfnd.h
++@@ -76,7 +76,7 @@ extern "C" {
++ #endif
++ 
++ /* smfnd_amf.c */
++-extern uint32_t smfnd_amf_init(smfnd_cb_t *cb);
+++extern SaAisErrorT smfnd_amf_init(smfnd_cb_t *cb);
++ 
++ /* smfnd_mds.c */
++ extern uint32_t smfnd_mds_init(smfnd_cb_t *cb);
+diff --git a/meta-networking/recipes-daemons/opensaf/opensaf_5.22.01.bb b/meta-networking/recipes-daemons/opensaf/opensaf_5.22.01.bb
+index 930755d624..3dd950c720 100644
+--- a/meta-networking/recipes-daemons/opensaf/opensaf_5.22.01.bb
++++ b/meta-networking/recipes-daemons/opensaf/opensaf_5.22.01.bb
+@@ -30,6 +30,8 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/releases/${BPN}-${PV}.tar.gz \
+            file://0001-Use-correct-printf-format-for-__fsblkcnt_t.patch \
+            file://0001-include-missing-array-header.patch \
+            file://0002-configure-Disable-selected-warnings.patch \
++           file://0001-include-cstdint-for-uintXX_t-types.patch \
++           file://0002-Fix-Werror-enum-int-mismatch-with-gcc13.patch \
+            "
+ SRC_URI[sha256sum] = "f008d53c83087ce2014c6089bc4ef08e14c1b4091298b943f4ceade1aa6bf61e"
+ 
 -- 
 2.39.1
 
