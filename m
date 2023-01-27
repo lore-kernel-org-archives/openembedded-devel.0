@@ -1,136 +1,152 @@
-Return-Path: <andrej.valek@siemens.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A7CF1C38142
-	for <webhook@archiver.kernel.org>; Fri, 27 Jan 2023 14:19:10 +0000 (UTC)
-Received: from EUR02-VI1-obe.outbound.protection.outlook.com (EUR02-VI1-obe.outbound.protection.outlook.com [40.107.241.58])
- by mx.groups.io with SMTP id smtpd.web11.102955.1674829143182195946
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AC962C61D97
+	for <webhook@archiver.kernel.org>; Fri, 27 Jan 2023 18:04:31 +0000 (UTC)
+Received: from mail-pj1-f50.google.com (mail-pj1-f50.google.com [209.85.216.50])
+ by mx.groups.io with SMTP id smtpd.web11.109244.1674842669370013876
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 27 Jan 2023 06:19:04 -0800
+ Fri, 27 Jan 2023 10:04:29 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="body hash did not verify" header.i=@siemens.com header.s=selector2 header.b=tAmK41H0;
- spf=pass (domain: siemens.com, ip: 40.107.241.58, mailfrom: andrej.valek@siemens.com)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=lkIRRooL46kdtNWENOXsr/hFdqH9Y4mVbbaCgIUjYGo8BVqOGRu+7q83m1lE7nz5p7TW6f8jyBvDpGGUFMCMlmTodDlF+LCUALLgOGiLtQrPS4J5XmQpbP8AW0I10R1AVo7iCeAuPAjmkz/V2/ZkiIyPzmmWZ1AIL7Yt/W2TUTsLvCvhAJ58LPU5jYwHp+mbWPiFpzBh+bnGtAkzjgFttQzahAuijxtbDccBGIptj5CKBNUMjAJsWg/QLeEHP1QYNIadmO3kHfkLTl8GPImlgjuvfJ+CnO7zNwIeipprIPswrdFg5zs7QliA1a9pq3BDou4lDGWTy+N1lD91vesgzg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=wz9rOouUTuJ+q7h8LdgKF7Ipiw/b0WQSJEK5e2ybfKg=;
- b=Bxpf7TI9HSmdCBHwJaxdSRs6ITJb9D5GZbd+DIFq19Z3fDUteb2L9EGhHXlnxrQFOMAM9I8P3tZM/7qO5DOPu1VU7I1HaIV7f6k64PBtWxhRthcsEDFQXVxJP8SQZDmLgXZceUVapE8riJFHhldE6pyTteKM9kfOVP8X6RtAnQ+BjK3yMWCmSOSb5mxNYmAjo+Jv9W96+WSb9Iy3PHZO8BK8G7+7G8cdClx7totoi/eZe9u1oqaxZ2QKoYck9LwZO7RabRI6imyZpWbcYIxxDf/mAHaPgpsYaGt7RQUSl6DCN82vS2MAHPuqJGiVGKJ3ivJWAmekPvMH2r9/BtP+cQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 194.138.21.75) smtp.rcpttodomain=lists.openembedded.org
- smtp.mailfrom=siemens.com; dmarc=pass (p=none sp=none pct=100) action=none
- header.from=siemens.com; dkim=none (message not signed); arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=siemens.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=wz9rOouUTuJ+q7h8LdgKF7Ipiw/b0WQSJEK5e2ybfKg=;
- b=tAmK41H022c9wsNqMF/UVWkzPtfQH/o91BnvTI9yS+DpnFEVgU7dYaGLiIcLGvycIHB23OgMsdNYwbX0rgX4Qbawi2E0HG3pPyWAVKgAowsDpoGsGw7noeiAhHo1ZPJSI31XE6XZ0dgzxwwfoFYzbq+MkHNRrbSBJmMyPfreRTERPMkqbd+S+eTt2doVtmU5GuOXKGgr7H8ClEs+uBcP5EuDfPylvP0JguCHTRifwEFBxbvgKtqPMQziCaj2YMp8wUys9ZbtLVIV/5cOhjjiUdqL711MJ/Qwvq/fuRfnjFFMjARxgo+Mdku3Ey1ICI5oxVOkDwyVgmycfljs+6sMOQ==
-Received: from DB6PR1001CA0047.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:4:55::33)
- by PAVPR10MB7235.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:102:31a::5) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6043.21; Fri, 27 Jan
- 2023 14:19:00 +0000
-Received: from DB5EUR01FT102.eop-EUR01.prod.protection.outlook.com
- (2603:10a6:4:55:cafe::c3) by DB6PR1001CA0047.outlook.office365.com
- (2603:10a6:4:55::33) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6043.21 via Frontend
- Transport; Fri, 27 Jan 2023 14:19:00 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 194.138.21.75)
- smtp.mailfrom=siemens.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=siemens.com;
-Received-SPF: Pass (protection.outlook.com: domain of siemens.com designates
- 194.138.21.75 as permitted sender) receiver=protection.outlook.com;
- client-ip=194.138.21.75; helo=hybrid.siemens.com; pr=C
-Received: from hybrid.siemens.com (194.138.21.75) by
- DB5EUR01FT102.mail.protection.outlook.com (10.152.5.35) with Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.6043.23 via Frontend Transport; Fri, 27 Jan 2023 14:18:59 +0000
-Received: from DEMCHDC8WBA.ad011.siemens.net (139.25.226.105) by
- DEMCHDC8VRA.ad011.siemens.net (194.138.21.75) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1118.20; Fri, 27 Jan 2023 15:18:59 +0100
-Received: from md3hr6tc.ad001.siemens.net (167.87.25.158) by
- DEMCHDC8WBA.ad011.siemens.net (139.25.226.105) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1118.20; Fri, 27 Jan 2023 15:18:59 +0100
-From: Andrej Valek <andrej.valek@siemens.com>
-To: <openembedded-devel@lists.openembedded.org>
-CC: <akuster808@gmail.com>, <randy.macleod@windriver.com>, Andrej Valek
-	<andrej.valek@siemens.com>
-Subject: [meta-oe][kirkstone][PATCH] grpc: upgrade 1.45.2 -> 1.46.6
-Date: Fri, 27 Jan 2023 15:13:19 +0100
-Message-ID: <20230127141319.102287-1-andrej.valek@siemens.com>
-X-Mailer: git-send-email 2.34.3
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=Ga1Yo/lB;
+ spf=pass (domain: gmail.com, ip: 209.85.216.50, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f50.google.com with SMTP id m11so5341507pji.0
+        for <openembedded-devel@lists.openembedded.org>; Fri, 27 Jan 2023 10:04:29 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=UEfF4cnC/ZlruXF0RlkL1Be8heZRn0AknCPATkZdQGE=;
+        b=Ga1Yo/lBAsxcNqWJ9505U2HHvkso/kKlfqIVeR3wo5HrRsPYVso24pkCLbbMJyo6wi
+         HLNYDDXHzr1aBcbhwa8e+ZMp+M5AcwRTusC9n5SH5bDFLcUxNcfOqVghnp7gq9rBPna7
+         6FI5NzJpLElOHN+Tjn4xldPvCZqBnkCeQfqmtnAGk4HtNo1IgIuR0waMFOp3b9lqrq41
+         ilp7SAK8dYEGKt/Rzdxusk/aMljp4YZ8M1BGUtxZY9zT4mC+tLV8pSbgPjve5zKhfKF+
+         hQU3AdK9xzTa9GuM8j+DwKBgoCm9jI8sPxURh1A3WKYeVvrP5lUEXJAF6koTdoDSrvb0
+         V2iw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=UEfF4cnC/ZlruXF0RlkL1Be8heZRn0AknCPATkZdQGE=;
+        b=8EF2GhglL58NFL2VApXxCuYtZKc5/PUIhWa61uOkaTcY7MPeewhMtyDKz1soT2QDSa
+         TfaOH4iTNiPllPDiR2lzLYA5SZG2sedrwQbbtyOpHLSpXX0+JoyBMczaEfmOMsXl0gzJ
+         dSI8A0MRXTDcbRlzV35ONkDwXxRWKqpXBBisIZ45kQ6liqOY/dLJNJNrcLgosfP2o3vL
+         wNaTR9rXNaH2PyW4X/qhDpqsUamIUh8CyoUJZeOPACG9NuD/x2S8CwnrMWGgHxBzAvsL
+         yZAtzZ+HV27jDEsDd25BN4NcPIa878pmHE9FKuPy9uAL41bd9Qz2Q0roc9TZNJC3DxLx
+         B8Pw==
+X-Gm-Message-State: AO0yUKWwM8wP6dafZHxtJcJPYRMvc0yowA5iMAR/nTEjl+zcXSK9lxdh
+	c0X56y9d9SvdyeqBUgVq76W9Vmpp0Kxj4w==
+X-Google-Smtp-Source: AK7set+hr3cK8a8+mpraJHurspu4ukJyJNlEoDkQGzssF8nstuDMXTr0CNyLziADmn/R+oE4Hztvyg==
+X-Received: by 2002:a17:903:228e:b0:194:7c28:3fa4 with SMTP id b14-20020a170903228e00b001947c283fa4mr7319038plh.19.1674842668327;
+        Fri, 27 Jan 2023 10:04:28 -0800 (PST)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9181:1cf0::aee3])
+        by smtp.gmail.com with ESMTPSA id iy15-20020a170903130f00b00186748fe6ccsm3163554plb.214.2023.01.27.10.04.27
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 27 Jan 2023 10:04:28 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 1/4] waylandpp: Fix build with gcc-13
+Date: Fri, 27 Jan 2023 10:04:23 -0800
+Message-Id: <20230127180426.754319-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.39.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain
-X-Originating-IP: [167.87.25.158]
-X-ClientProxiedBy: DEMCHDC8WBA.ad011.siemens.net (139.25.226.105) To
- DEMCHDC8WBA.ad011.siemens.net (139.25.226.105)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DB5EUR01FT102:EE_|PAVPR10MB7235:EE_
-X-MS-Office365-Filtering-Correlation-Id: 3ab577cb-9206-4147-c522-08db00716f23
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 
-	2M/FztmlN7O+qOTD0O6lqU+FWchj4syXDfY97b1y0++v8T3X1mGyMw7ksCKqLQLEr1EFmwAXyYJlw0x/4Kex983Pa3UaWtNRlvCC7pUqOzz0WKIcqxesaKqPkWhiLm4CfbMd00EOo4GcxWU/HW45PaEQr2093fXImjRvNulFmEDnJvWzGP0ID3JpuJetaCGf7vMdI/Eav2U9p0psW0qig7z2yhw/HWTKPY3FP0H8rAPMGq7PB7oCHthY10MfZc4/kJHBQN+ThMweAjH1XlmbatgDhb3msa6asmC22H/lOu/Rw2/OhhsyBDmn7C2cYpyCN0Ys6NTyKRGctaiyu48W3G6XVE5WDOe334gtOvcVV8LgFbLegXRornXrTLn1RtkZ/FKuD6wy8tR0l2mUhzwaDTALH/kmEmE8/E3UZyJTdrP84LLMITBWbc/Xm09YUziheXO4mZZ73Z0i1IhEOkxI8kpTsKi//O+Ne8aNuYLJw1f+XHzMLpz5uFhflck0y0GsPJtFPDcHVac4VtdqBVEozw3KPsXoO3t41/IJbmGqxVwf+JIDM/FN7s6hRRRa/NIqjJvPZTy8YqDCsWbI4XrnUPdZGSMptB1up2ExFJMYamrZBXfAssvaGQUx8cuyDiH9LBkylRpdELIwZgBP6sr9F5OgPaMRr34Txxr3G3Oqso+4P2TqdTKzuLhMbE/jJ8gcxLWZ6KTtG9v7v7UMdStw3zzKA6+AKi1Xcka8m0DLIjY=
-X-Forefront-Antispam-Report: 
-	CIP:194.138.21.75;CTRY:DE;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:hybrid.siemens.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230025)(4636009)(346002)(136003)(396003)(39860400002)(376002)(451199018)(46966006)(36840700001)(40470700004)(5660300002)(16526019)(4326008)(2906002)(70586007)(6916009)(186003)(8676002)(70206006)(8936002)(41300700001)(83380400001)(107886003)(478600001)(336012)(6666004)(1076003)(956004)(2616005)(26005)(316002)(44832011)(82310400005)(47076005)(82960400001)(82740400003)(54906003)(81166007)(356005)(86362001)(40460700003)(40480700001)(36860700001)(36756003)(36900700001);DIR:OUT;SFP:1101;
-X-OriginatorOrg: siemens.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Jan 2023 14:18:59.8258
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 3ab577cb-9206-4147-c522-08db00716f23
-X-MS-Exchange-CrossTenant-Id: 38ae3bcd-9579-4fd4-adda-b42e1495d55a
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=38ae3bcd-9579-4fd4-adda-b42e1495d55a;Ip=[194.138.21.75];Helo=[hybrid.siemens.com]
-X-MS-Exchange-CrossTenant-AuthSource: 
-	DB5EUR01FT102.eop-EUR01.prod.protection.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAVPR10MB7235
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 27 Jan 2023 14:19:10 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100822
+ <openembedded-devel@lists.openembedded.org>; Fri, 27 Jan 2023 18:04:31 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100823
 
-Backporting the version from master (1.50.1) would a big risk. So use the
-version 1.46.6 which also includes fixes of bundled z-lib library.
-
-Signed-off-by: Andrej Valek <andrej.valek@siemens.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../recipes-devtools/grpc/{grpc_1.45.2.bb =3D> grpc_1.46.6.bb}  | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-devtools/grpc/{grpc_1.45.2.bb =3D> grpc_1.46.6.bb} =
-(97%)
+ .../0001-include-missing-cstdint.patch        | 59 +++++++++++++++++++
+ .../wayland/waylandpp_1.0.0.bb                |  3 +-
+ 2 files changed, 61 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-graphics/wayland/waylandpp/0001-include-missing-cstdint.patch
 
-diff --git a/meta-oe/recipes-devtools/grpc/grpc_1.45.2.bb b/meta-oe/recipes=
--devtools/grpc/grpc_1.46.6.bb
-similarity index 97%
-rename from meta-oe/recipes-devtools/grpc/grpc_1.45.2.bb
-rename to meta-oe/recipes-devtools/grpc/grpc_1.46.6.bb
-index c2f952fc6..7cf27d1e0 100644
---- a/meta-oe/recipes-devtools/grpc/grpc_1.45.2.bb
-+++ b/meta-oe/recipes-devtools/grpc/grpc_1.46.6.bb
-@@ -20,8 +20,8 @@ RDEPENDS:${PN}-dev:append:class-native =3D " ${PN}-compil=
-er"
- # RDEPENDS:${PN}-dev +=3D "${PN}-compiler"
-=20
- S =3D "${WORKDIR}/git"
--SRCREV_grpc =3D "b39ffcc425ea990a537f98ec6fe6a1dcb90470d7"
--BRANCH =3D "v1.45.x"
-+SRCREV_grpc =3D "af855eb64eea02d2f7b68d49c3d4d7a263649104"
-+BRANCH =3D "v1.46.x"
- SRC_URI =3D "git://github.com/grpc/grpc.git;protocol=3Dhttps;name=3Dgrpc;b=
-ranch=3D${BRANCH} \
-            file://0001-Revert-Changed-GRPCPP_ABSEIL_SYNC-to-GPR_ABSEIL_SYN=
-C.patch \
-            file://0001-cmake-add-separate-export-for-plugin-targets.patch =
-\
---=20
-2.34.3
+diff --git a/meta-oe/recipes-graphics/wayland/waylandpp/0001-include-missing-cstdint.patch b/meta-oe/recipes-graphics/wayland/waylandpp/0001-include-missing-cstdint.patch
+new file mode 100644
+index 0000000000..f2169c43c9
+--- /dev/null
++++ b/meta-oe/recipes-graphics/wayland/waylandpp/0001-include-missing-cstdint.patch
+@@ -0,0 +1,59 @@
++From 5e3243b163aa5d50083b4036c21f84c1204f2023 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Thu, 26 Jan 2023 23:25:05 -0800
++Subject: [PATCH] include missing <cstdint>
++
++gcc 13 moved some includes around and as a result <cstdint> is no longer transitively included [1]. Explicitly include it for uint{32,64}_t.
++
++[1] https://gcc.gnu.org/gcc-13/porting_to.html#header-dep-changes
++
++Upstream-Status: Submitted [https://github.com/NilsBrause/waylandpp/pull/75]
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ include/wayland-client.hpp | 1 +
++ scanner/scanner.cpp        | 3 +++
++ 2 files changed, 4 insertions(+)
++
++diff --git a/include/wayland-client.hpp b/include/wayland-client.hpp
++index a3f782b..4598a0e 100644
++--- a/include/wayland-client.hpp
+++++ b/include/wayland-client.hpp
++@@ -29,6 +29,7 @@
++ /** \file */
++ 
++ #include <atomic>
+++#include <cstdint>
++ #include <functional>
++ #include <memory>
++ #include <string>
++diff --git a/scanner/scanner.cpp b/scanner/scanner.cpp
++index bebd71e..c25746a 100644
++--- a/scanner/scanner.cpp
+++++ b/scanner/scanner.cpp
++@@ -15,6 +15,7 @@
++  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
++  */
++ 
+++#include <cstdint>
++ #include <fstream>
++ #include <iostream>
++ #include <list>
++@@ -1106,6 +1107,7 @@ int main(int argc, char *argv[])
++   wayland_hpp << "#pragma once" << std::endl
++               << std::endl
++               << "#include <array>" << std::endl
+++              << "#include <cstdint>" << std::endl
++               << "#include <functional>" << std::endl
++               << "#include <memory>" << std::endl
++               << "#include <string>" << std::endl
++@@ -1125,6 +1127,7 @@ int main(int argc, char *argv[])
++     wayland_server_hpp << "#pragma once" << std::endl
++                        << std::endl
++                        << "#include <array>" << std::endl
+++                       << "#include <cstdint>" << std::endl
++                        << "#include <functional>" << std::endl
++                        << "#include <memory>" << std::endl
++                        << "#include <string>" << std::endl
++-- 
++2.39.1
++
+diff --git a/meta-oe/recipes-graphics/wayland/waylandpp_1.0.0.bb b/meta-oe/recipes-graphics/wayland/waylandpp_1.0.0.bb
+index 0deed332c6..5ba5aa7940 100644
+--- a/meta-oe/recipes-graphics/wayland/waylandpp_1.0.0.bb
++++ b/meta-oe/recipes-graphics/wayland/waylandpp_1.0.0.bb
+@@ -2,7 +2,8 @@ SUMMARY = " C++ binding for Wayland using the most modern C++ technology"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=3aae28cc66d61975114c2b14df215407"
+ 
+-SRC_URI = "git://github.com/NilsBrause/waylandpp.git;protocol=https;branch=master"
++SRC_URI = "git://github.com/NilsBrause/waylandpp.git;protocol=https;branch=master \
++           file://0001-include-missing-cstdint.patch"
+ 
+ DEPENDS = "pugixml"
+ DEPENDS:append:class-target = " waylandpp-native wayland virtual/egl virtual/libgles2"
+-- 
+2.39.1
 
 
