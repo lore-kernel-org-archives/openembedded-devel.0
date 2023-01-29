@@ -2,138 +2,156 @@ Return-Path: <niko.mauno@vaisala.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 521F8C61D97
-	for <webhook@archiver.kernel.org>; Sun, 29 Jan 2023 09:48:20 +0000 (UTC)
-Received: from EUR04-DB3-obe.outbound.protection.outlook.com (EUR04-DB3-obe.outbound.protection.outlook.com [40.107.6.62])
- by mx.groups.io with SMTP id smtpd.web10.13375.1674985694218392172
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4D529C05027
+	for <webhook@archiver.kernel.org>; Sun, 29 Jan 2023 09:50:10 +0000 (UTC)
+Received: from EUR05-DB8-obe.outbound.protection.outlook.com (EUR05-DB8-obe.outbound.protection.outlook.com [40.107.20.69])
+ by mx.groups.io with SMTP id smtpd.web11.13547.1674985801830501667
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 29 Jan 2023 01:48:14 -0800
+ Sun, 29 Jan 2023 01:50:02 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="body hash did not verify" header.i=@vaisala.com header.s=selector1 header.b=hLpekfHJ;
- spf=pass (domain: vaisala.com, ip: 40.107.6.62, mailfrom: niko.mauno@vaisala.com)
+ dkim=fail reason="body hash did not verify" header.i=@vaisala.com header.s=selector1 header.b=Bn22vNwa;
+ spf=pass (domain: vaisala.com, ip: 40.107.20.69, mailfrom: niko.mauno@vaisala.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=emY7d+KoCv9X+88ajnEHumQ47/8TrK19CcrN7PfFpu92dmADM/pbwYtAPeQHyQt1kJWoqxbJknqk2bI/9vbLYaBhLGRphKhXjbI4xhzF/LyNPRnFNxUIgX7jGhLBceLMktiijjvPtvlth0PG7yd7ePMNDI25ZbpUeG1Wgd0NVVDFxQgxReIcHCYKRDX8jEq684V2M6/YG11rmt23SuDwVMqjIYVxruwJxRC4w45ShWTq7gtMJIuCE4MuHafkHYKrZCpTqtacIfFzmRRqQ7eTdOTJtjgnWLtc50HMcFsStEa79/Q67QDhnzLWgeKc2D42EIUih3/6hyGy9dnRdc9w5g==
+ b=FP75Cwjddbh2PWfl/xRNH5rymgdEYwmtU2tD6b14sMmVq3gyEnZ5nmXDGw28mVcuNzJc1H141BL/EG/ryel88UK2SX8sX2yRVGUBxEEGKlK9ZgKDPzXvuoorHm9mBl9hStyGCdnrOLPMCAI9gGdxmYIo5iddZCs5d8tOBlxZY+cS7jacCUQkh5oJGLI8IMKXZZP3UQBIyQ6U2I1Ff8JuGFo8DuIkIKcIIpMutP5wqbQEfARUkEadKlulpw06tF6NYBvFJ+DugigJOtrwGaghVSD89+ibbjTO6jrgBdVg2deVgkBaFe9MFvhatNRsKlpY6hmb3qkQ0pPG8XeQ0ri1Fg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=wklZNSoE6YEZCgmriNwUmxcRD8tZetvg77vPNR3W8Mc=;
- b=n59g1lkNt4yPj6YgOmClyZhTqdaEVo7gVUAZk5kmh6VNCAfYjjXO73PfD9TydE3KTyrd2TKdVQuWIy0lOT36yl1MZ/0ZW5WC7CVrK1Fi2hWoziYvAIze8Uh1G6MwycbRWVTgUQrAcJYx9mH/I3DpK0/uh0GEoXNpjvFVd6akTgjRExTGhBNqbPKVHah8VolPIQqi304H+qH/0d5gCNXLPR2jQK2a6euLLROZ45CuEQt0drsJITC8cogi6/vX2V3zsJCZH/tiD8s+G7k4Amkz4xOgtVgiIAUGhDHV2tD+vYSkjJwYaaXUOljn2pAeDrECa46yQ1heQ3DoxnoDFrYVHw==
+ bh=qwEf4lNpsR0BpbjT17mH22ncReazkChPEyJWz1UaF1A=;
+ b=VAI5drFwZGyfusfmTQeng/A+Ohe6Ecw6+4vUe9aX6x9AVfBw8qzdgn0/jKy6ijc0gAmaUkUsmfPacTB1RB59HzHtlpgOYOOO0e4l4h15mYCx1TdWCeGIVNyUXAAeK8WBUVzeZy3BSwOT7eg7Ga3/j1hkwGEN935iUN2AFQ53m3b9EhqtI4JbBq8H7jJcZSeU79A2iTz01JEMsMUOcYhZyDY5C/MNnKh0XYml2FU3xzxqvj3RWGxIP/0Deltjka3Py+CCR4PnAAERIT3j+tu1TKCPbdiw92bMTvGXXqEeXkOESFGphtMw1Iwwx/EDbRIEyGsg2KVuOlzNaVF9Ras4Ag==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=vaisala.com; dmarc=pass action=none header.from=vaisala.com;
  dkim=pass header.d=vaisala.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vaisala.com;
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=wklZNSoE6YEZCgmriNwUmxcRD8tZetvg77vPNR3W8Mc=;
- b=hLpekfHJKFukVRb/S5ycTpkSUeyFlQrUma6tLWeiq6UHhTE4AFrELKFdB94T43qb5Bx9GFBk/SFGZj6rIw+0ft1ZRt4Ui9xwNT9/vhN+WZ7p6r7foogdTxk8MVk5G++smobJ5ezT9i5P8eJ7JG0tbhJsH3RFBUBVmYy80GSm5VueVDSQICfUVtuTc8rn/oRgBeu9YA2IuIyvRPQ4nzsZv/9Ee352O8cFuu7AcJEBOQxjERQpOxBIpdSoeXwApT/dpIlepzo0Ct+AZiFcLWXZrqfbvALxgwfliP6e8f3QOOuZb8PB3ZHJF7wxDI8aqAJEyjYqDv9HT3CjUik3NxsYjA==
+ bh=qwEf4lNpsR0BpbjT17mH22ncReazkChPEyJWz1UaF1A=;
+ b=Bn22vNwaOD1rZ9rGSU01hfh2mKfJ1NdWFTLBDd4GwFNA4c27bMdaTUIAtdSXzG2a3vHM/b5fVSddEmLCDEyIhYlYEMoBRNM6toUjLjHGgunc9izBF4d0fKBjoVcYlnFTdr+gcXfcg4JlwBDfeMu8bXnwvCAevycAbLLNWNucse/vgpTBSGWQQ/b4RJN0r9sWiY0PTyJq/Vg6RIq1mVk50IGHZLwPZzRuPwRz0gsj9nxmFJxkviJd3AkKIMEoInwULfzsprSRBQOmkygl1oAVMQbsZH+xHSHg39ikPkcVeJe4hMsw0XDfC2OYYyjtJ1OAmoYFZMtJ1FytsGLBZf6Fzg==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=vaisala.com;
 Received: from PAXPR06MB8579.eurprd06.prod.outlook.com (2603:10a6:102:2b3::22)
- by VE1PR06MB6848.eurprd06.prod.outlook.com (2603:10a6:800:1b1::7) with
+ by PR3PR06MB6889.eurprd06.prod.outlook.com (2603:10a6:102:87::9) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6043.33; Sun, 29 Jan
- 2023 09:48:11 +0000
+ 2023 09:49:59 +0000
 Received: from PAXPR06MB8579.eurprd06.prod.outlook.com
  ([fe80::ce6:3fa7:e565:c049]) by PAXPR06MB8579.eurprd06.prod.outlook.com
  ([fe80::ce6:3fa7:e565:c049%4]) with mapi id 15.20.6043.028; Sun, 29 Jan 2023
- 09:48:11 +0000
+ 09:49:59 +0000
 From: Niko Mauno <niko.mauno@vaisala.com>
 To: openembedded-devel@lists.openembedded.org
 CC: Niko Mauno <niko.mauno@vaisala.com>,
 	Khem Raj <raj.khem@gmail.com>
-Subject: [meta-networking][kirkstone][PATCH] nftables: Fix missing leading whitespace with ':append'
-Date: Sun, 29 Jan 2023 09:47:47 +0000
-Message-ID: <20230129094747.168437-1-niko.mauno@vaisala.com>
+Subject: [meta-oe][kirkstone][PATCH] Fix missing leading whitespace with ':append'
+Date: Sun, 29 Jan 2023 09:49:47 +0000
+Message-ID: <20230129094947.168489-1-niko.mauno@vaisala.com>
 X-Mailer: git-send-email 2.35.1
 Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain
-X-ClientProxiedBy: GV3P280CA0066.SWEP280.PROD.OUTLOOK.COM (2603:10a6:150:a::9)
- To PAXPR06MB8579.eurprd06.prod.outlook.com (2603:10a6:102:2b3::22)
+X-ClientProxiedBy: GV3P280CA0009.SWEP280.PROD.OUTLOOK.COM
+ (2603:10a6:150:b::25) To PAXPR06MB8579.eurprd06.prod.outlook.com
+ (2603:10a6:102:2b3::22)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PAXPR06MB8579:EE_|VE1PR06MB6848:EE_
-X-MS-Office365-Filtering-Correlation-Id: 4f8fd556-8c19-46e1-41e9-08db01ddef0e
+X-MS-TrafficTypeDiagnostic: PAXPR06MB8579:EE_|PR3PR06MB6889:EE_
+X-MS-Office365-Filtering-Correlation-Id: 65c23b47-c9da-4ceb-2068-08db01de2f51
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	cO2lflmkNwyw0+mEYY/PpMowMi8e11eCW6wMqsz1zvTG1D7GFJzNxrRXRP9tweQr+48kq4Hised3nhKF3LkZUjrPs16GHWa2EUEuKBWUITO6tfVZApWI8IEDysMd/+572FORmNGYlPivzOuui3sCnkUUs683Fk8hNQ22D2syaeNts6SLAC7PGDgw4/pGI2TXJz/QlKgRpsC9I1gI5+7t4hXRvJJ5cBDM/M5I5GhijlySo/jyClpPUcrpBJY10nc2QiRBYgRammp933YcbS18w79UitGe240XsGeEaleL01jMPf8V7cQRKi5A43DwUGSZ2lJJ8wcKwmBBoaViEtzvuksx++48GRb0LgXWKwswxrFNFig/bMuYECf82A9OG9WtTCFZZnEWYPNH7wgEwPrLc6VKBboSSrIlJbqdz4WK1YPbHoLu1LwDfmGfzmM4++uf+q6RgXB7H79u0ZPfhdmx4pEbXrQMRI4Ytaw1mGrnLFObC1SY5ruXVsa8XSvOSozyasqBv9BFn42QnqpMd5fIGfpECep816FvvBSt5u5bLgU3H5TaIhoRzesAhP9IkI9m0pp5GSapNZSeY64UdevB7YlJsjorpFWSLXUdhM0eTnIzZYHDREBR9fmk+9/zQX6RL5snz+E1SVABB6KhYLyAIVbQ0OTpcBY1mrE/x9r0FKAl77pgsELiDoK3qqlAuaugCahJ+RdvyPuHV+o7YGEa7Q==
+	kSoJbrnDBL+tM4e2/SjcDIg69SEJslJZ613IroztM7nGuoBVaQvMY96c5dZIcAL2tXqLZ6eS/H/GFCo72EQk3hjQGO8LzuuG7CcHmJGTks+UtcmgMu32VlAGT7CUZ5K7dDa/C0I0d2g/kesvKfSd+g65/+w9YHOEG2qMUpRuYcMWIr9CaJgmmnpiGXiksBfN+um2tuVG1yMuuvPPsWHeMMgboyz1laWxhUeJkLvyk4u5Gr+DCHRraS9CSxzjvlrnloDoL+EEDzvnZYeUpL9CD4UTKs7WODQa/o8KdCDL1XM3oF/xT4OF1gbp+6NH/jRbBP7EMISjF7TIw+T3skaOxUjfHE/LXR9UR6mi/iUBrGC/4D7NafrSQKmX7nW7+5j4ADn5lzqJYjm8maGtS0xKdU+bzioyX1eefvF4nZbdXOjoUA0GXktIAU5OLNpm+GtpNSKeZhZeFZPJtEA5HO+/CZUYEH56iSZYgbFgfShm3/k2LdLFJZANOSqvQp2+jyeAZVfL1beQlLNkk+Ec3BWd+lVHGjieZIWeGmdOrw04f0PpLBL1zAi7a4ygzGonblCDmZHAVOD677jqhAUY8EXHAnaa8s6Vv9FUXu7+FTyVSlQzLw5cUMgqm7Lg3LCuIW54YtQXPAGKQJWzFY4Biy34KF387MxQ8YS7K9MX7wmQXacqAgsqBTP08UbZV3YnvBlMLiir0bjc6kfH/0lVK7qYVQ==
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PAXPR06MB8579.eurprd06.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230025)(4636009)(366004)(396003)(346002)(136003)(39840400004)(376002)(451199018)(66946007)(66476007)(6916009)(66556008)(2616005)(4326008)(38100700002)(38350700002)(36756003)(86362001)(54906003)(316002)(5660300002)(44832011)(2906002)(83380400001)(8936002)(8676002)(41300700001)(6512007)(26005)(478600001)(186003)(6486002)(6506007)(1076003)(6666004)(52116002);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PAXPR06MB8579.eurprd06.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230025)(4636009)(376002)(366004)(39850400004)(136003)(396003)(346002)(451199018)(2616005)(36756003)(6506007)(1076003)(186003)(6512007)(26005)(44832011)(6486002)(52116002)(6666004)(478600001)(86362001)(2906002)(38100700002)(38350700002)(316002)(54906003)(5660300002)(66946007)(66556008)(66476007)(6916009)(41300700001)(4326008)(83380400001)(8676002)(8936002);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?us-ascii?Q?KjpaQzgi3QSP7nTvO5iIA/sYdJmqx9e2/zaSpoHxO47NH1a1XydR7e6xRtIE?=
- =?us-ascii?Q?Dq2ZOchx4mqHbPv7YFX3TiQUUKhGX4ikMbGHkMgDNP+pfscVm06kMwx6PP44?=
- =?us-ascii?Q?L+8J4n3TvffN1qDzSRJkuevrGBwpypkq7GRZM015I3UfrE6Aco9NwNw0rDne?=
- =?us-ascii?Q?OoNtnYeQjs9B+TNC+1ifPRdFZzbwF7u+gGtlGwHE/oAd3pHyOLKGWPnUug44?=
- =?us-ascii?Q?geSGlosVxgOOxMtmmFyvnqFz3aZ0Q2tfNGpNRfe9UpJJRdhhWX5Mlg1I7aZT?=
- =?us-ascii?Q?nOeAyBqxHAbJ3O4lUB4ApbrW++JqMw0zBuWu7qm1AVy4j0B+cT72RAFNnYM3?=
- =?us-ascii?Q?XDimMuHCtcsyVLE9/5JyHP3n93Gawx9B9UBP3Z/Xf3GasTJdXmSxSKCT3q93?=
- =?us-ascii?Q?UbnJrQD6AF6Z2c349MILhkQwKeBxpop1IJ8FF3c75Xumbfgj0VqgXXwur/eH?=
- =?us-ascii?Q?f9YAcR8/uiIkxYz171+xBDsx71p35VP2tJEBBzfPzBSwdqg6wHnXLjyY9gKq?=
- =?us-ascii?Q?w8ybSG8fnixXDN8wZpXzLcxz7psulVk01et/9IU/J6e1BXhSJRsio9drdOQu?=
- =?us-ascii?Q?HTfUDOhxMCPrAhONowHtTab4ZNvn1lMlL8KonBO2NcxXQXNFKYlmmSAfSZP9?=
- =?us-ascii?Q?765lj7s/s5UYJzTdIguM2/s7AeNI2KIxlmOuhjHd49ZRBnUMqxbv2nvHthnq?=
- =?us-ascii?Q?C+/YxNdhUhr7she4ez9pVLGlJ4x9espUJWQFEUDTMqDJ/PN+g1f0s+6PI0Vj?=
- =?us-ascii?Q?BekPxoX2C4vbBtxchKP7iBpd0EXE6SWUJq5ZtU5dKD515aAcD6LuNQ95Hw0d?=
- =?us-ascii?Q?/1YAn3kj7POZdcTNJ9u/06eY+QEePuy6PJVKkBUXBcxjSq6rzdSwZuGHSXmS?=
- =?us-ascii?Q?JDq/bRvGmgZshIxnft2k4J61j25IAq880sir1K3yIsdMUAYP0u0t//rx9d9o?=
- =?us-ascii?Q?4+YtjIt9x3P0VEM5cAFqgPqpbAdzgksswIwVORNSG7VuM1UnwD2N3xZUUYGE?=
- =?us-ascii?Q?+PXeB9wUXcfPTFspPgZK65FxRWJjQR4nMUb4gXLeaTUyHnsE/Id7CkcMWD61?=
- =?us-ascii?Q?GlG1c46RfiIevYWl218ZrYMYFkON9encZwyaESXTxo/3ruahiK+fFw1iacNX?=
- =?us-ascii?Q?wa3yGEnvOhowlxNCNBU5CvidU9HvO/ClCOVjQNPFF6hE/kxnienjmXYh3UaM?=
- =?us-ascii?Q?rXDVHJKkUVTitjtzunlAb5OBfx7szIEie6Z33AyQg7QNOeJhgkWL27k0iqWE?=
- =?us-ascii?Q?ojvk4XZXuwSFhLnwgZTQQPH/DUDZ6yZxCLmJt3REd6oIov1EQLDWsXK6RZ4a?=
- =?us-ascii?Q?x6NeT5DektClsjyiFjO8uBO+dveHfdtV/gmUqvPZ0l/xDtUBYg1aobeb0tLo?=
- =?us-ascii?Q?0FiApdJNeoYtr8iLfpTzoB1cpXFoA1lu0jRneP9MUbnrzCIE4hztTak6yDRp?=
- =?us-ascii?Q?FPPftMTtGEUmKAsqSOfh1VLi9NRER8iGKGpfvfhXN+QE4xQJIRHYVEPdPsrr?=
- =?us-ascii?Q?rIdrymCimTnXkWxy1lleYepY5lFqcWWW2vnkTGtRIMcSEmKEDXQSOfIH61Td?=
- =?us-ascii?Q?0BYI/eouZ7bjEhyIybJVJwVl3rAH3rpEc18YiJ0ntdLY23OTAjxMaV7FYHT2?=
- =?us-ascii?Q?gw=3D=3D?=
+	=?us-ascii?Q?95oeQ9sIGQKb/TRLg0wrC5RvQE29zpusijBVPUmQ1JLg8Oiy8JlAWFk3buJ1?=
+ =?us-ascii?Q?rkUqPAXJQTdtg0uhArM+3AWb7FPv5NTMVQ1WtZQLLE65QTzs2T980RWni+lO?=
+ =?us-ascii?Q?3suOQ4V6ANW3c4xrsMmSfOS1jb+1clRUHTvgM9NHnvDSe6C4D8hDySuXG0RU?=
+ =?us-ascii?Q?xcifDjbEylPsPCroMgi/WWVNcMfT4IgydCHsIqhpN0ofx82nzJBFg65ySHpz?=
+ =?us-ascii?Q?3En8mWHIoT0CgZWaa/9mPJKXTQ7StNNW/kU1VO3OXTDhyBg5BmZTWFxuU6W1?=
+ =?us-ascii?Q?wjnskOYvXDGiyJM2EXFUmxNyEl67s1CRipretG4nXM0COum6JHUWEvFOmTRZ?=
+ =?us-ascii?Q?1tirApI5iEQ48D+Z75Cy6mlhEUbGy6fOxK43t8IfpdQyqYfi8JH+9NvUKbjm?=
+ =?us-ascii?Q?YPFW1w/MBQY5Cjn3carnP8XBBY0SzdsQeJ4YE8yWSZpy8tlrZaq5CxRBYzEm?=
+ =?us-ascii?Q?osfgkceQ6/tcHVeNrbyPvt0sDqrcfM3mBtokHcDctENwLDWCJ2FNKQdJGvd3?=
+ =?us-ascii?Q?aL3JQldzpNlt2XnOnt5ctpuuehtFFmpRGUXzBDs0HrdewVYDpReng1+eZR2x?=
+ =?us-ascii?Q?gPJYavKhF1+65iyPIlhbC1G6uKwRTAkJvHO5+g6yPZduXFhG4QfdTvTISuj8?=
+ =?us-ascii?Q?1wdx9JtO09pVis51dPVnvDwhHl3bvKijso1pTiP0R6P4TYF8xKCI7smVduX8?=
+ =?us-ascii?Q?LMO5is2juJx/KueDaxH9AsGrpumtZ7WgpH1UNXg9jZFpNFaKhaVBad5DDt0U?=
+ =?us-ascii?Q?/rPNb8+NNQyvbh1BAi7Sv+5UEPgIu7Stfnh0069g6UGM2bGTjBiHM2dnOLq5?=
+ =?us-ascii?Q?Dn2zDbqbMCpXWlmEhPWHIk5XlM/Fd5Y5eyRKm7Sfbek8geCYsBFdzYu6MQ9R?=
+ =?us-ascii?Q?3abq2Ve/DJtCkkq/zza4Ji5RWgFYZilaCAm7A8BSa/XpuiYPNZUIE89yIcoz?=
+ =?us-ascii?Q?du++EvZer0v8uQI1q3REbbFcbV37pbbKQbkw2nvWqnH3jhziZS1obSlYyUO2?=
+ =?us-ascii?Q?SdkdqiAIfLfNKOC6oVluUUxyRBMAif/MrlfN/QtKEkZSZqUx9LgcL097rnui?=
+ =?us-ascii?Q?CPMFUqZv4a4sUOc9pMomt4KXmubhP/66UIfO7zRcQoYT25pnAD+F0wWymJ38?=
+ =?us-ascii?Q?o61EN9R9jfWTX4UzqRgm+kfrdBy8utrIJn6er5ivcTaTpyyrYP2r9AuAk6Gn?=
+ =?us-ascii?Q?1g87owjGeH4+K06yEH/2dsC3rF40EFwdNvcDCtvWqc9HT6Yeb3kbmJ4J202i?=
+ =?us-ascii?Q?LyI4zDYuDfhizvYJak1vfJdSwTTNyeeDQimjXK9lc+z05T6ytWhrXQ4zZ/dW?=
+ =?us-ascii?Q?llY2UUCBxG5QkuGp1yQa6hmXpEnbhboLzsnco5mG1p/NfBHtndM0LVh4XxMr?=
+ =?us-ascii?Q?fp8lewW7zERGlMeg8/1P7v29PifIp97G63I61GrZohrGLLCc6OMuyKmK0YR/?=
+ =?us-ascii?Q?vn6WyhsNmii2mVSNe+VUpR0hJEAjieHrLmzmeFwrC8/8caXphpT5PatWrB1M?=
+ =?us-ascii?Q?zlptvB0SCrlJgPvDyJBibYWOZvSvWhIemYrMCklDaPF6P1WMOhvbfzbWWO4o?=
+ =?us-ascii?Q?iPdsC2oLbI8Tx3r3xfdHjY6xlLxqCrFr705a+b4HGdDbmU3tEsvOQFVWp6iO?=
+ =?us-ascii?Q?qw=3D=3D?=
 X-OriginatorOrg: vaisala.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 4f8fd556-8c19-46e1-41e9-08db01ddef0e
+X-MS-Exchange-CrossTenant-Network-Message-Id: 65c23b47-c9da-4ceb-2068-08db01de2f51
 X-MS-Exchange-CrossTenant-AuthSource: PAXPR06MB8579.eurprd06.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Jan 2023 09:48:11.5021
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Jan 2023 09:49:59.2832
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 6d7393e0-41f5-4c2e-9b12-4c2be5da5c57
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 6ITKpOiGUM+rXT+5kv5aAvLO7wr3boPnsW26Gh6E5cJ4rNa1qpJ/E+vhTIyUlz1NuxW6cE98l7M8aZMuQjVwvg==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VE1PR06MB6848
+X-MS-Exchange-CrossTenant-UserPrincipalName: ShhWs5Hka3SiB3rO2YRVJAxheVCLyMw6hqHv8KK28TrzXCSd8+lZTm8oTg3ZdOOIMX1twsldGnNZSyUyaGeOHQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PR3PR06MB6889
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 29 Jan 2023 09:48:20 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100830
+ <openembedded-devel@lists.openembedded.org>; Sun, 29 Jan 2023 09:50:10 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100831
 
-Mitigate occurence where ':append' operator is used and leading
+Mitigate occurences where ':append' operator is used and leading
 whitespace character is obviously missing, risking inadvertent
 string concatenation.
 
 Signed-off-by: Niko Mauno <niko.mauno@vaisala.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit d25967208bc8c4b1e2099e34150a67508744e4b9)
+(cherry picked from commit 6a87f2ba9cdd4b9689b0d1c86b2e99071d1e069b)
 Signed-off-by: Niko Mauno <niko.mauno@vaisala.com>
 ---
- meta-networking/recipes-filter/nftables/nftables_1.0.2.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-oe/recipes-core/dbus-cxx/dbus-cxx_2.1.0.bb             | 2 +-
+ meta-oe/recipes-crypto/fsverity-utils/fsverity-utils_1.5.bb | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-networking/recipes-filter/nftables/nftables_1.0.2.bb b/me=
-ta-networking/recipes-filter/nftables/nftables_1.0.2.bb
-index e078be79a..080a0ed85 100644
---- a/meta-networking/recipes-filter/nftables/nftables_1.0.2.bb
-+++ b/meta-networking/recipes-filter/nftables/nftables_1.0.2.bb
-@@ -38,7 +38,7 @@ RDEPENDS:${PN}-ptest +=3D " make bash python3-core python=
-3-ctypes python3-json pyt
+diff --git a/meta-oe/recipes-core/dbus-cxx/dbus-cxx_2.1.0.bb b/meta-oe/reci=
+pes-core/dbus-cxx/dbus-cxx_2.1.0.bb
+index c8dabc5ea..44804545d 100644
+--- a/meta-oe/recipes-core/dbus-cxx/dbus-cxx_2.1.0.bb
++++ b/meta-oe/recipes-core/dbus-cxx/dbus-cxx_2.1.0.bb
+@@ -9,7 +9,7 @@ SRC_URI =3D "git://github.com/dbus-cxx/dbus-cxx.git;branch=
+=3Dmaster;protocol=3Dhttps \
+            file://0001-Include-typeinfo-for-typeid.patch \
+            file://0001-include-utility-header.patch \
+ "
+-SRC_URI:append:libc-musl =3D "file://fix_build_musl.patch"
++SRC_URI:append:libc-musl =3D " file://fix_build_musl.patch"
+ SRCREV =3D "73532d6a5faae9c721c2cc9535b8ef32d4d18264"
 =20
- TESTDIR =3D "tests"
+ DEPENDS =3D "\
+diff --git a/meta-oe/recipes-crypto/fsverity-utils/fsverity-utils_1.5.bb b/=
+meta-oe/recipes-crypto/fsverity-utils/fsverity-utils_1.5.bb
+index c95a5b2d3..1c2c6e21e 100644
+--- a/meta-oe/recipes-crypto/fsverity-utils/fsverity-utils_1.5.bb
++++ b/meta-oe/recipes-crypto/fsverity-utils/fsverity-utils_1.5.bb
+@@ -16,7 +16,7 @@ S =3D "${WORKDIR}/git"
 =20
--PRIVATE_LIBS:${PN}-ptest:append =3D "libnftables.so.1"
-+PRIVATE_LIBS:${PN}-ptest:append =3D " libnftables.so.1"
+ DEPENDS =3D "openssl"
 =20
- do_install_ptest() {
-     cp -rf ${S}/build-aux ${D}${PTEST_PATH}
+-EXTRA_OEMAKE:append =3D "PREFIX=3D${prefix} LIBDIR=3D${libdir} USE_SHARED_=
+LIB=3D1"
++EXTRA_OEMAKE:append =3D " PREFIX=3D${prefix} LIBDIR=3D${libdir} USE_SHARED=
+_LIB=3D1"
+ # We want to statically link the binary to libfsverity on native Windows
+ EXTRA_OEMAKE:remove:mingw32:class-nativesdk =3D "USE_SHARED_LIB=3D1"
+ EXTRA_OEMAKE:remove:mingw32:class-native =3D "USE_SHARED_LIB=3D1"
 --=20
 2.35.1
 
