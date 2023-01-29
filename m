@@ -1,158 +1,134 @@
-Return-Path: <niko.mauno@vaisala.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4D529C05027
-	for <webhook@archiver.kernel.org>; Sun, 29 Jan 2023 09:50:10 +0000 (UTC)
-Received: from EUR05-DB8-obe.outbound.protection.outlook.com (EUR05-DB8-obe.outbound.protection.outlook.com [40.107.20.69])
- by mx.groups.io with SMTP id smtpd.web11.13547.1674985801830501667
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7A4D5C61D97
+	for <webhook@archiver.kernel.org>; Sun, 29 Jan 2023 17:25:42 +0000 (UTC)
+Received: from mail-pg1-f182.google.com (mail-pg1-f182.google.com [209.85.215.182])
+ by mx.groups.io with SMTP id smtpd.web11.20591.1675013139864222506
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 29 Jan 2023 01:50:02 -0800
+ Sun, 29 Jan 2023 09:25:39 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="body hash did not verify" header.i=@vaisala.com header.s=selector1 header.b=Bn22vNwa;
- spf=pass (domain: vaisala.com, ip: 40.107.20.69, mailfrom: niko.mauno@vaisala.com)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=FP75Cwjddbh2PWfl/xRNH5rymgdEYwmtU2tD6b14sMmVq3gyEnZ5nmXDGw28mVcuNzJc1H141BL/EG/ryel88UK2SX8sX2yRVGUBxEEGKlK9ZgKDPzXvuoorHm9mBl9hStyGCdnrOLPMCAI9gGdxmYIo5iddZCs5d8tOBlxZY+cS7jacCUQkh5oJGLI8IMKXZZP3UQBIyQ6U2I1Ff8JuGFo8DuIkIKcIIpMutP5wqbQEfARUkEadKlulpw06tF6NYBvFJ+DugigJOtrwGaghVSD89+ibbjTO6jrgBdVg2deVgkBaFe9MFvhatNRsKlpY6hmb3qkQ0pPG8XeQ0ri1Fg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=qwEf4lNpsR0BpbjT17mH22ncReazkChPEyJWz1UaF1A=;
- b=VAI5drFwZGyfusfmTQeng/A+Ohe6Ecw6+4vUe9aX6x9AVfBw8qzdgn0/jKy6ijc0gAmaUkUsmfPacTB1RB59HzHtlpgOYOOO0e4l4h15mYCx1TdWCeGIVNyUXAAeK8WBUVzeZy3BSwOT7eg7Ga3/j1hkwGEN935iUN2AFQ53m3b9EhqtI4JbBq8H7jJcZSeU79A2iTz01JEMsMUOcYhZyDY5C/MNnKh0XYml2FU3xzxqvj3RWGxIP/0Deltjka3Py+CCR4PnAAERIT3j+tu1TKCPbdiw92bMTvGXXqEeXkOESFGphtMw1Iwwx/EDbRIEyGsg2KVuOlzNaVF9Ras4Ag==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=vaisala.com; dmarc=pass action=none header.from=vaisala.com;
- dkim=pass header.d=vaisala.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vaisala.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=qwEf4lNpsR0BpbjT17mH22ncReazkChPEyJWz1UaF1A=;
- b=Bn22vNwaOD1rZ9rGSU01hfh2mKfJ1NdWFTLBDd4GwFNA4c27bMdaTUIAtdSXzG2a3vHM/b5fVSddEmLCDEyIhYlYEMoBRNM6toUjLjHGgunc9izBF4d0fKBjoVcYlnFTdr+gcXfcg4JlwBDfeMu8bXnwvCAevycAbLLNWNucse/vgpTBSGWQQ/b4RJN0r9sWiY0PTyJq/Vg6RIq1mVk50IGHZLwPZzRuPwRz0gsj9nxmFJxkviJd3AkKIMEoInwULfzsprSRBQOmkygl1oAVMQbsZH+xHSHg39ikPkcVeJe4hMsw0XDfC2OYYyjtJ1OAmoYFZMtJ1FytsGLBZf6Fzg==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=vaisala.com;
-Received: from PAXPR06MB8579.eurprd06.prod.outlook.com (2603:10a6:102:2b3::22)
- by PR3PR06MB6889.eurprd06.prod.outlook.com (2603:10a6:102:87::9) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6043.33; Sun, 29 Jan
- 2023 09:49:59 +0000
-Received: from PAXPR06MB8579.eurprd06.prod.outlook.com
- ([fe80::ce6:3fa7:e565:c049]) by PAXPR06MB8579.eurprd06.prod.outlook.com
- ([fe80::ce6:3fa7:e565:c049%4]) with mapi id 15.20.6043.028; Sun, 29 Jan 2023
- 09:49:59 +0000
-From: Niko Mauno <niko.mauno@vaisala.com>
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=lim3mteb;
+ spf=pass (domain: gmail.com, ip: 209.85.215.182, mailfrom: raj.khem@gmail.com)
+Received: by mail-pg1-f182.google.com with SMTP id g68so6146298pgc.11
+        for <openembedded-devel@lists.openembedded.org>; Sun, 29 Jan 2023 09:25:39 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=daNWS86IPwGq2jCY/dfdXEky5FXq8NVLxrf4n1s4Oqg=;
+        b=lim3mteb6ma8m0xo4u1VGWmMxuAydzvFRQzS1CxxzyRppbcQ/Hj72YR2lNGQDaf15k
+         cvkmwVrPl3B64A5Upp3t0puagp2tUw+0u/EtG6G7oGnsO9/sQV2CLi0TU48NiJ3nPiD9
+         PmmTCtdIkocImeskWmr+ricZ/N6YB2tzrXM7rCkNHoCFTT8IxfWNONHSGlzcVZDSc0c0
+         aeRwqY94JynaeIeJhJyGyLm2nMVYk+1dAsdMJw8u2MA6rSmXt45mTtiRSTjrrfVoheOd
+         zqrKNnzXtCz/LWTwuaGXjgqfvZp0GpNkmA/BjJrYwVHxXwbwF8oNupffz7C9t9kdAvQv
+         j7FA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=daNWS86IPwGq2jCY/dfdXEky5FXq8NVLxrf4n1s4Oqg=;
+        b=HJ+J6dd/7xL85fFvbGj7S90EiyoXMZkYHYeotM+tYnktnS2r0d1g5wndvSDVNex4kx
+         8OLsinE6tMI9/Cd37IMmhHTV+SypV6BMzLl8KATWZjI/ciEdfXIyM03jXAOkgg86Oad4
+         9LQQZbN3cURh1ghOnXpUV2rHPFdPN4g7y5sZt2qZZY3Sv/mHw5E7+aRbWNauNIMlJeYM
+         loCvSNjQglFdmS+1+tOtp5wcV2kE1AltZP3vYHlv/ndNh+WfEs3TX9eo7EV5htds50sy
+         v8Z3xLppUdWP+/iePks2H5sI44Im+vYulxtHvcxSnGTV/oJHMy7QSsr48l0c4fz73DFH
+         1L/A==
+X-Gm-Message-State: AO0yUKUJ9VhtGFzBTVLLGcPHKn/WnT/3VABIKAc8Wme0fCnx2R8EAgUo
+	hMM7qMvGk7jWgSAkGTSr65UGsUvRefXa6A==
+X-Google-Smtp-Source: AK7set+BgWv3pmXFFl5gVHEJFddXoB26B6DyPti27niri2K4m9lpa/AypvOuzXhf0xKv7HMXyIVPvw==
+X-Received: by 2002:a05:6a00:23ca:b0:593:baec:27cc with SMTP id g10-20020a056a0023ca00b00593baec27ccmr1840801pfc.3.1675013138839;
+        Sun, 29 Jan 2023 09:25:38 -0800 (PST)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9181:1cf0::aee3])
+        by smtp.gmail.com with ESMTPSA id o3-20020a62cd03000000b0058a3d8eab6asm4972781pfg.134.2023.01.29.09.25.37
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sun, 29 Jan 2023 09:25:38 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-CC: Niko Mauno <niko.mauno@vaisala.com>,
-	Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][kirkstone][PATCH] Fix missing leading whitespace with ':append'
-Date: Sun, 29 Jan 2023 09:49:47 +0000
-Message-ID: <20230129094947.168489-1-niko.mauno@vaisala.com>
-X-Mailer: git-send-email 2.35.1
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain
-X-ClientProxiedBy: GV3P280CA0009.SWEP280.PROD.OUTLOOK.COM
- (2603:10a6:150:b::25) To PAXPR06MB8579.eurprd06.prod.outlook.com
- (2603:10a6:102:2b3::22)
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 1/2] upm: Fix build with gcc13
+Date: Sun, 29 Jan 2023 09:25:34 -0800
+Message-Id: <20230129172535.1185410-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.39.1
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PAXPR06MB8579:EE_|PR3PR06MB6889:EE_
-X-MS-Office365-Filtering-Correlation-Id: 65c23b47-c9da-4ceb-2068-08db01de2f51
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 
-	kSoJbrnDBL+tM4e2/SjcDIg69SEJslJZ613IroztM7nGuoBVaQvMY96c5dZIcAL2tXqLZ6eS/H/GFCo72EQk3hjQGO8LzuuG7CcHmJGTks+UtcmgMu32VlAGT7CUZ5K7dDa/C0I0d2g/kesvKfSd+g65/+w9YHOEG2qMUpRuYcMWIr9CaJgmmnpiGXiksBfN+um2tuVG1yMuuvPPsWHeMMgboyz1laWxhUeJkLvyk4u5Gr+DCHRraS9CSxzjvlrnloDoL+EEDzvnZYeUpL9CD4UTKs7WODQa/o8KdCDL1XM3oF/xT4OF1gbp+6NH/jRbBP7EMISjF7TIw+T3skaOxUjfHE/LXR9UR6mi/iUBrGC/4D7NafrSQKmX7nW7+5j4ADn5lzqJYjm8maGtS0xKdU+bzioyX1eefvF4nZbdXOjoUA0GXktIAU5OLNpm+GtpNSKeZhZeFZPJtEA5HO+/CZUYEH56iSZYgbFgfShm3/k2LdLFJZANOSqvQp2+jyeAZVfL1beQlLNkk+Ec3BWd+lVHGjieZIWeGmdOrw04f0PpLBL1zAi7a4ygzGonblCDmZHAVOD677jqhAUY8EXHAnaa8s6Vv9FUXu7+FTyVSlQzLw5cUMgqm7Lg3LCuIW54YtQXPAGKQJWzFY4Biy34KF387MxQ8YS7K9MX7wmQXacqAgsqBTP08UbZV3YnvBlMLiir0bjc6kfH/0lVK7qYVQ==
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PAXPR06MB8579.eurprd06.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230025)(4636009)(376002)(366004)(39850400004)(136003)(396003)(346002)(451199018)(2616005)(36756003)(6506007)(1076003)(186003)(6512007)(26005)(44832011)(6486002)(52116002)(6666004)(478600001)(86362001)(2906002)(38100700002)(38350700002)(316002)(54906003)(5660300002)(66946007)(66556008)(66476007)(6916009)(41300700001)(4326008)(83380400001)(8676002)(8936002);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?us-ascii?Q?95oeQ9sIGQKb/TRLg0wrC5RvQE29zpusijBVPUmQ1JLg8Oiy8JlAWFk3buJ1?=
- =?us-ascii?Q?rkUqPAXJQTdtg0uhArM+3AWb7FPv5NTMVQ1WtZQLLE65QTzs2T980RWni+lO?=
- =?us-ascii?Q?3suOQ4V6ANW3c4xrsMmSfOS1jb+1clRUHTvgM9NHnvDSe6C4D8hDySuXG0RU?=
- =?us-ascii?Q?xcifDjbEylPsPCroMgi/WWVNcMfT4IgydCHsIqhpN0ofx82nzJBFg65ySHpz?=
- =?us-ascii?Q?3En8mWHIoT0CgZWaa/9mPJKXTQ7StNNW/kU1VO3OXTDhyBg5BmZTWFxuU6W1?=
- =?us-ascii?Q?wjnskOYvXDGiyJM2EXFUmxNyEl67s1CRipretG4nXM0COum6JHUWEvFOmTRZ?=
- =?us-ascii?Q?1tirApI5iEQ48D+Z75Cy6mlhEUbGy6fOxK43t8IfpdQyqYfi8JH+9NvUKbjm?=
- =?us-ascii?Q?YPFW1w/MBQY5Cjn3carnP8XBBY0SzdsQeJ4YE8yWSZpy8tlrZaq5CxRBYzEm?=
- =?us-ascii?Q?osfgkceQ6/tcHVeNrbyPvt0sDqrcfM3mBtokHcDctENwLDWCJ2FNKQdJGvd3?=
- =?us-ascii?Q?aL3JQldzpNlt2XnOnt5ctpuuehtFFmpRGUXzBDs0HrdewVYDpReng1+eZR2x?=
- =?us-ascii?Q?gPJYavKhF1+65iyPIlhbC1G6uKwRTAkJvHO5+g6yPZduXFhG4QfdTvTISuj8?=
- =?us-ascii?Q?1wdx9JtO09pVis51dPVnvDwhHl3bvKijso1pTiP0R6P4TYF8xKCI7smVduX8?=
- =?us-ascii?Q?LMO5is2juJx/KueDaxH9AsGrpumtZ7WgpH1UNXg9jZFpNFaKhaVBad5DDt0U?=
- =?us-ascii?Q?/rPNb8+NNQyvbh1BAi7Sv+5UEPgIu7Stfnh0069g6UGM2bGTjBiHM2dnOLq5?=
- =?us-ascii?Q?Dn2zDbqbMCpXWlmEhPWHIk5XlM/Fd5Y5eyRKm7Sfbek8geCYsBFdzYu6MQ9R?=
- =?us-ascii?Q?3abq2Ve/DJtCkkq/zza4Ji5RWgFYZilaCAm7A8BSa/XpuiYPNZUIE89yIcoz?=
- =?us-ascii?Q?du++EvZer0v8uQI1q3REbbFcbV37pbbKQbkw2nvWqnH3jhziZS1obSlYyUO2?=
- =?us-ascii?Q?SdkdqiAIfLfNKOC6oVluUUxyRBMAif/MrlfN/QtKEkZSZqUx9LgcL097rnui?=
- =?us-ascii?Q?CPMFUqZv4a4sUOc9pMomt4KXmubhP/66UIfO7zRcQoYT25pnAD+F0wWymJ38?=
- =?us-ascii?Q?o61EN9R9jfWTX4UzqRgm+kfrdBy8utrIJn6er5ivcTaTpyyrYP2r9AuAk6Gn?=
- =?us-ascii?Q?1g87owjGeH4+K06yEH/2dsC3rF40EFwdNvcDCtvWqc9HT6Yeb3kbmJ4J202i?=
- =?us-ascii?Q?LyI4zDYuDfhizvYJak1vfJdSwTTNyeeDQimjXK9lc+z05T6ytWhrXQ4zZ/dW?=
- =?us-ascii?Q?llY2UUCBxG5QkuGp1yQa6hmXpEnbhboLzsnco5mG1p/NfBHtndM0LVh4XxMr?=
- =?us-ascii?Q?fp8lewW7zERGlMeg8/1P7v29PifIp97G63I61GrZohrGLLCc6OMuyKmK0YR/?=
- =?us-ascii?Q?vn6WyhsNmii2mVSNe+VUpR0hJEAjieHrLmzmeFwrC8/8caXphpT5PatWrB1M?=
- =?us-ascii?Q?zlptvB0SCrlJgPvDyJBibYWOZvSvWhIemYrMCklDaPF6P1WMOhvbfzbWWO4o?=
- =?us-ascii?Q?iPdsC2oLbI8Tx3r3xfdHjY6xlLxqCrFr705a+b4HGdDbmU3tEsvOQFVWp6iO?=
- =?us-ascii?Q?qw=3D=3D?=
-X-OriginatorOrg: vaisala.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 65c23b47-c9da-4ceb-2068-08db01de2f51
-X-MS-Exchange-CrossTenant-AuthSource: PAXPR06MB8579.eurprd06.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Jan 2023 09:49:59.2832
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 6d7393e0-41f5-4c2e-9b12-4c2be5da5c57
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: ShhWs5Hka3SiB3rO2YRVJAxheVCLyMw6hqHv8KK28TrzXCSd8+lZTm8oTg3ZdOOIMX1twsldGnNZSyUyaGeOHQ==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PR3PR06MB6889
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 29 Jan 2023 09:50:10 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100831
+ <openembedded-devel@lists.openembedded.org>; Sun, 29 Jan 2023 17:25:42 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100832
 
-Mitigate occurences where ':append' operator is used and leading
-whitespace character is obviously missing, risking inadvertent
-string concatenation.
-
-Signed-off-by: Niko Mauno <niko.mauno@vaisala.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 6a87f2ba9cdd4b9689b0d1c86b2e99071d1e069b)
-Signed-off-by: Niko Mauno <niko.mauno@vaisala.com>
 ---
- meta-oe/recipes-core/dbus-cxx/dbus-cxx_2.1.0.bb             | 2 +-
- meta-oe/recipes-crypto/fsverity-utils/fsverity-utils_1.5.bb | 2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
+ .../upm/0001-include-missing-cstdint.patch    | 43 +++++++++++++++++++
+ meta-oe/recipes-extended/upm/upm_git.bb       |  1 +
+ 2 files changed, 44 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/upm/upm/0001-include-missing-cstdint.patch
 
-diff --git a/meta-oe/recipes-core/dbus-cxx/dbus-cxx_2.1.0.bb b/meta-oe/reci=
-pes-core/dbus-cxx/dbus-cxx_2.1.0.bb
-index c8dabc5ea..44804545d 100644
---- a/meta-oe/recipes-core/dbus-cxx/dbus-cxx_2.1.0.bb
-+++ b/meta-oe/recipes-core/dbus-cxx/dbus-cxx_2.1.0.bb
-@@ -9,7 +9,7 @@ SRC_URI =3D "git://github.com/dbus-cxx/dbus-cxx.git;branch=
-=3Dmaster;protocol=3Dhttps \
-            file://0001-Include-typeinfo-for-typeid.patch \
-            file://0001-include-utility-header.patch \
- "
--SRC_URI:append:libc-musl =3D "file://fix_build_musl.patch"
-+SRC_URI:append:libc-musl =3D " file://fix_build_musl.patch"
- SRCREV =3D "73532d6a5faae9c721c2cc9535b8ef32d4d18264"
-=20
- DEPENDS =3D "\
-diff --git a/meta-oe/recipes-crypto/fsverity-utils/fsverity-utils_1.5.bb b/=
-meta-oe/recipes-crypto/fsverity-utils/fsverity-utils_1.5.bb
-index c95a5b2d3..1c2c6e21e 100644
---- a/meta-oe/recipes-crypto/fsverity-utils/fsverity-utils_1.5.bb
-+++ b/meta-oe/recipes-crypto/fsverity-utils/fsverity-utils_1.5.bb
-@@ -16,7 +16,7 @@ S =3D "${WORKDIR}/git"
-=20
- DEPENDS =3D "openssl"
-=20
--EXTRA_OEMAKE:append =3D "PREFIX=3D${prefix} LIBDIR=3D${libdir} USE_SHARED_=
-LIB=3D1"
-+EXTRA_OEMAKE:append =3D " PREFIX=3D${prefix} LIBDIR=3D${libdir} USE_SHARED=
-_LIB=3D1"
- # We want to statically link the binary to libfsverity on native Windows
- EXTRA_OEMAKE:remove:mingw32:class-nativesdk =3D "USE_SHARED_LIB=3D1"
- EXTRA_OEMAKE:remove:mingw32:class-native =3D "USE_SHARED_LIB=3D1"
---=20
-2.35.1
+diff --git a/meta-oe/recipes-extended/upm/upm/0001-include-missing-cstdint.patch b/meta-oe/recipes-extended/upm/upm/0001-include-missing-cstdint.patch
+new file mode 100644
+index 0000000000..59f81bf3a2
+--- /dev/null
++++ b/meta-oe/recipes-extended/upm/upm/0001-include-missing-cstdint.patch
+@@ -0,0 +1,43 @@
++From 64f75806c04c2ee819cf2f92cb564ad316354823 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Sun, 29 Jan 2023 00:27:47 -0800
++Subject: [PATCH] include missing <cstdint>
++
++gcc 13 moved some includes around and as a result <cstdint> is no longer transitively included [1]. Explicitly include it for uint{32,64}_t.
++
++[1] https://gcc.gnu.org/gcc-13/porting_to.html#header-dep-changes
++
++Upstream-Status: Submitted [https://github.com/eclipse/upm/pull/704]
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ src/mcp9808/mcp9808.hpp | 1 +
++ src/micsv89/micsv89.hpp | 1 +
++ 2 files changed, 2 insertions(+)
++
++diff --git a/src/mcp9808/mcp9808.hpp b/src/mcp9808/mcp9808.hpp
++index b9e138d7..2509cd30 100644
++--- a/src/mcp9808/mcp9808.hpp
+++++ b/src/mcp9808/mcp9808.hpp
++@@ -13,6 +13,7 @@
++ 
++ #pragma once
++ 
+++#include <cstdint>
++ #include <iostream>
++ #include <string>
++ #include <interfaces/iTemperature.hpp>
++diff --git a/src/micsv89/micsv89.hpp b/src/micsv89/micsv89.hpp
++index 2f97dbce..c6e22ad8 100644
++--- a/src/micsv89/micsv89.hpp
+++++ b/src/micsv89/micsv89.hpp
++@@ -11,6 +11,7 @@
++ 
++ #pragma once
++ 
+++#include <cstdint>
++ #include <iostream>
++ #include <string>
++ 
++-- 
++2.39.1
++
+diff --git a/meta-oe/recipes-extended/upm/upm_git.bb b/meta-oe/recipes-extended/upm/upm_git.bb
+index 61e2e38b05..0ae7760bd2 100644
+--- a/meta-oe/recipes-extended/upm/upm_git.bb
++++ b/meta-oe/recipes-extended/upm/upm_git.bb
+@@ -16,6 +16,7 @@ SRC_URI = "git://github.com/eclipse/${BPN}.git;protocol=http;branch=master;proto
+            file://0001-initialize-local-variables-before-use.patch \
+            file://0001-cmake-Disable-Wno-misleading-indentation-with-clang-.patch \
+            file://0001-cmake-Disable-using-Wno-maybe-uninitialized.patch \
++           file://0001-include-missing-cstdint.patch \
+            "
+ 
+ SRC_URI:append:toolchain-clang:x86 = " file://0001-nmea_gps-Link-with-latomic.patch "
+-- 
+2.39.1
 
 
