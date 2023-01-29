@@ -1,127 +1,125 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7AFB3C05027
-	for <webhook@archiver.kernel.org>; Sun, 29 Jan 2023 17:25:42 +0000 (UTC)
-Received: from mail-pg1-f182.google.com (mail-pg1-f182.google.com [209.85.215.182])
- by mx.groups.io with SMTP id smtpd.web11.20592.1675013140398666969
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6A782C61D97
+	for <webhook@archiver.kernel.org>; Sun, 29 Jan 2023 21:00:43 +0000 (UTC)
+Received: from mail-oi1-f182.google.com (mail-oi1-f182.google.com [209.85.167.182])
+ by mx.groups.io with SMTP id smtpd.web10.25477.1675026042996005470
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 29 Jan 2023 09:25:40 -0800
+ Sun, 29 Jan 2023 13:00:43 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=UmilGm/3;
- spf=pass (domain: gmail.com, ip: 209.85.215.182, mailfrom: raj.khem@gmail.com)
-Received: by mail-pg1-f182.google.com with SMTP id q9so6154934pgq.5
-        for <openembedded-devel@lists.openembedded.org>; Sun, 29 Jan 2023 09:25:40 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=kRTXVUU4;
+ spf=pass (domain: gmail.com, ip: 209.85.167.182, mailfrom: akuster808@gmail.com)
+Received: by mail-oi1-f182.google.com with SMTP id i9so8574434oif.4
+        for <openembedded-devel@lists.openembedded.org>; Sun, 29 Jan 2023 13:00:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=D+KMau2eIVPvAUZz87XmW5Td658HeOHA9GAVS75c+/A=;
-        b=UmilGm/3rqzmnH/5uGzi2C8mSkismwKasyO8AUrqE64ixcZ1aRVYyZCBJD4/lDeRrz
-         Ni1yymTt1+5cMokS3Uxf8/2Yc+FB3vFh6+/rYyd6TWp8GAnPVbXrnXqojIg6K8MGrdd/
-         IWOSLTOjKfGG7nlC5PI518cxGsbwV5JFHlXSwztb4+nFuAs9ityjdzU34FayDuyATNh8
-         a5pMIplVjntD2dr9pWVG4qaIu9owJhZvWQDqvFaFO4/vl/ECbftSNmdp5yAndJKi1Wio
-         2dGo9pUgEp0jBjv9B/xsp5Q3WWAcETmtVhazrSrvsyCp37lVfWYFj3J6dfqKd6zpbMIY
-         487g==
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=y0EhlGCGt3PDAP7bDoEMZi6PQ1irJi46vWSUEybSSOA=;
+        b=kRTXVUU4l9wciahhBgzpTVLDKHgaZecveXQgUXPikFTQgAZYNg6BTcnFQYVq/4OQzp
+         oSnvAJxzM+yaXn4GqYKV90cT+qhajeEHPe5auQmPTEDSAuqeOY7LZj3/jKJ/0NXp5Puq
+         UExOccQ1YOnK9ppV1xtWS2Z07u545Itv+iUahBkqL532Nm38XnRXmUIRTKRfWVaWOUJZ
+         pDKnwKPHfcMVBfybuM1MOIVbP+PbKoACok0AFzLeRIZRsNAwGk9wbM8qL6E8Ejb4BRdb
+         +0mIAkdwnrN7xGOc9LbBYFd7M9SC/ds5YuePsNA5jnJ7WTQ4hqePYTryC1cefznfzaxM
+         8lDg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=D+KMau2eIVPvAUZz87XmW5Td658HeOHA9GAVS75c+/A=;
-        b=mTPlsHSJXL8dndojQoksVZwcDTSq8aLC5D7g14SIMUAZlDU+J0fZ7TrPT1N4NbVjGJ
-         I0tqhbXEgBHVBqJeBaH9YLHv8VKinOd/DOqY5mM13q6DiSZn48di0uCwz5fo9ArOzeTH
-         hI5Kf+PeWfxteoJKuRUF0THEPew22BzrFhnJCD4FpOi3tWb7OTOj39TiyZQ9ewiEG4we
-         SUgxioljzPXsSUfn5ecxR+5buuf6Ky1h2FNTgsBuQIIxRyelyJXSnRIXIwJi1qjCxp+R
-         NZcDCaQNLM+8U/nQYWjHUl9SZyckjf+sPwsDkdeLCD0si4+gM4zIOjVwWilKfLo2hv6s
-         juhQ==
-X-Gm-Message-State: AO0yUKXpFwvhArz31t5VZ5RtLzaKuqnzDGsQUX5pKPHiZ6nlGvZSatFk
-	jN1UaKQEXR9ARSjflLZEnB8Kj0ReJGJ6qw==
-X-Google-Smtp-Source: AK7set9hQ1OeJEHqCFCMfQgEuoSWA7TtuACIIaDW86iTQPaq0d9QNo3Trz1SaXBvaawlJKFiyGpfQg==
-X-Received: by 2002:aa7:9183:0:b0:592:5dd5:7655 with SMTP id x3-20020aa79183000000b005925dd57655mr9769205pfa.28.1675013139538;
-        Sun, 29 Jan 2023 09:25:39 -0800 (PST)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9181:1cf0::aee3])
-        by smtp.gmail.com with ESMTPSA id o3-20020a62cd03000000b0058a3d8eab6asm4972781pfg.134.2023.01.29.09.25.38
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=y0EhlGCGt3PDAP7bDoEMZi6PQ1irJi46vWSUEybSSOA=;
+        b=wKDStFmu+mkLQt0h/8ZhbNlbxZBmye974pecMOEAMAlWx6GJ/WIeuxjxZKujpPQDjt
+         o3F3Fl7T7NBg+gFlrSX4fpHDqWyHLp5OQ50AACTkkYZNpniSVa1efyfuAk69VqslC1nq
+         UXrTHQFYSGzxe+JJL1Daps/AT4Ik7h98bZcgUtin5xWPFFI2CyS1/3fwBRHXMoQbL0lt
+         ppfPsh8xKXsnoqoaRLibhcs4e2oBcv1KnksyDa7ktivvumNBS5cwLGM0kQxHNLIccEB5
+         SOX4DG4O/7KxWVo7EbJ+11BQE8tyIhgA+t4wdIBU57EX7HX+SK5jfWJrFpSWqA982Mnt
+         nE6w==
+X-Gm-Message-State: AFqh2krBnUPTfCXRPgeqaeybfvdgKa8Lad9Nj9P4ZEimmaMaSpfayKa8
+	yiyuWqZwl9Wnarzst8HbYp7HSi46g2c=
+X-Google-Smtp-Source: AMrXdXus+dKg3Ll0zclXPVyQDHaB2T+hYyEoe7quQMQwBcjQ7mUdcMbdaEQz8FV8acfoSgIKZxxG9g==
+X-Received: by 2002:a05:6808:2084:b0:36e:f318:c401 with SMTP id s4-20020a056808208400b0036ef318c401mr14224476oiw.3.1675026041730;
+        Sun, 29 Jan 2023 13:00:41 -0800 (PST)
+Received: from keaua.attlocal.net ([2600:1700:9190:ba10:9bdc:8bb4:6dc0:aa04])
+        by smtp.gmail.com with ESMTPSA id m17-20020a0568080f1100b0035028730c90sm4024065oiw.1.2023.01.29.13.00.40
+        for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 29 Jan 2023 09:25:39 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
+        Sun, 29 Jan 2023 13:00:41 -0800 (PST)
+From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 2/2] openthread: Use __attribute__ ((unused)) instead of removing 't'
-Date: Sun, 29 Jan 2023 09:25:35 -0800
-Message-Id: <20230129172535.1185410-2-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.39.1
-In-Reply-To: <20230129172535.1185410-1-raj.khem@gmail.com>
-References: <20230129172535.1185410-1-raj.khem@gmail.com>
+Subject: [kirkstone 00/10] Patch review 
+Date: Sun, 29 Jan 2023 16:00:28 -0500
+Message-Id: <cover.1675025970.git.akuster808@gmail.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 29 Jan 2023 17:25:42 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100833
+ <openembedded-devel@lists.openembedded.org>; Sun, 29 Jan 2023 21:00:43 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100834
 
-This helps clang to not warn about this variable
+Please have comments back by Tuesday
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- .../openthread/ot-br-posix/mbedtls.patch              | 11 +----------
- .../openthread/ot-daemon/mbedtls.patch                | 11 +----------
- 2 files changed, 2 insertions(+), 20 deletions(-)
+The following changes since commit 29a2410f75a483bbaa5520aa2cdc24aba3b726b6:
 
-diff --git a/meta-networking/recipes-connectivity/openthread/ot-br-posix/mbedtls.patch b/meta-networking/recipes-connectivity/openthread/ot-br-posix/mbedtls.patch
-index 91b3046484..23e4368d27 100644
---- a/meta-networking/recipes-connectivity/openthread/ot-br-posix/mbedtls.patch
-+++ b/meta-networking/recipes-connectivity/openthread/ot-br-posix/mbedtls.patch
-@@ -17,19 +17,10 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
-  void mpi_mul_hlp( size_t i, mbedtls_mpi_uint *s, mbedtls_mpi_uint *d, mbedtls_mpi_uint b )
-  {
- -    mbedtls_mpi_uint c = 0, t = 0;
--+    mbedtls_mpi_uint c = 0;
-++    mbedtls_mpi_uint c = 0, t __attribute__ ((unused)) = 0;
-  
-  #if defined(MULADDC_HUIT)
-      for( ; i >= 8; i -= 8 )
--@@ -1595,8 +1595,6 @@ void mpi_mul_hlp( size_t i, mbedtls_mpi_
--     }
-- #endif /* MULADDC_HUIT */
-- 
---    t++;
---
--     do {
--         *d += c; c = ( *d < c ); d++;
--     }
- --- a/third_party/openthread/repo/third_party/mbedtls/repo/CMakeLists.txt
- +++ b/third_party/openthread/repo/third_party/mbedtls/repo/CMakeLists.txt
- @@ -192,7 +192,7 @@ if(CMAKE_COMPILER_IS_GNU)
-diff --git a/meta-networking/recipes-connectivity/openthread/ot-daemon/mbedtls.patch b/meta-networking/recipes-connectivity/openthread/ot-daemon/mbedtls.patch
-index be26a20dad..ffaff48dd4 100644
---- a/meta-networking/recipes-connectivity/openthread/ot-daemon/mbedtls.patch
-+++ b/meta-networking/recipes-connectivity/openthread/ot-daemon/mbedtls.patch
-@@ -17,19 +17,10 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
-  void mpi_mul_hlp( size_t i, mbedtls_mpi_uint *s, mbedtls_mpi_uint *d, mbedtls_mpi_uint b )
-  {
- -    mbedtls_mpi_uint c = 0, t = 0;
--+    mbedtls_mpi_uint c = 0;
-++    mbedtls_mpi_uint c = 0, t __attribute__ ((unused)) = 0;
-  
-  #if defined(MULADDC_HUIT)
-      for( ; i >= 8; i -= 8 )
--@@ -1595,8 +1595,6 @@ void mpi_mul_hlp( size_t i, mbedtls_mpi_
--     }
-- #endif /* MULADDC_HUIT */
-- 
---    t++;
---
--     do {
--         *d += c; c = ( *d < c ); d++;
--     }
- --- a/third_party/mbedtls/repo/CMakeLists.txt
- +++ b/third_party/mbedtls/repo/CMakeLists.txt
- @@ -192,7 +192,7 @@ if(CMAKE_COMPILER_IS_GNU)
+  postfix: upgrade 3.6.5 -> 3.6.7 (2023-01-12 11:06:02 -0500)
+
+are available in the Git repository at:
+
+  git://git.openembedded.org/meta-openembedded-contrib stable/kirkstone-nut
+  http://cgit.openembedded.org/meta-openembedded-contrib/log/?h=stable/kirkstone-nut
+
+Andrej Valek (1):
+  grpc: upgrade 1.45.2 -> 1.46.6
+
+Changqing Li (3):
+  redis: 6.2.7 -> 6.2.8
+  redis: upgrade 7.0.4 to 7.0.5
+  redis: 7.0.5 -> 7.0.7
+
+Chee Yang Lee (1):
+  zsh: Fix CVE-2021-45444
+
+Hermes Zhang (1):
+  kernel_add_regdb: Change the task order
+
+Hitendra Prajapati (2):
+  net-snmp: CVE-2022-44792 & CVE-2022-44793 Fix NULL Pointer Exception
+  krb5: CVE-2022-42898 integer overflow vulnerabilities in PAC parsing
+
+Niko Mauno (2):
+  nftables: Fix missing leading whitespace with ':append'
+  Fix missing leading whitespace with ':append'
+
+ .../classes/kernel_wireless_regdb.bbclass     |   2 +-
+ .../recipes-filter/nftables/nftables_1.0.2.bb |   2 +-
+ .../CVE-2022-44792-CVE-2022-44793.patch       | 116 +++++++++++++++
+ .../net-snmp/net-snmp_5.9.3.bb                |   1 +
+ .../krb5/krb5/CVE-2022-42898.patch            | 110 ++++++++++++++
+ .../recipes-connectivity/krb5/krb5_1.17.2.bb  |   1 +
+ .../recipes-core/dbus-cxx/dbus-cxx_2.1.0.bb   |   2 +-
+ .../fsverity-utils/fsverity-utils_1.5.bb      |   2 +-
+ .../grpc/{grpc_1.45.2.bb => grpc_1.46.6.bb}   |   4 +-
+ ...006-Define-correct-gregs-for-RISCV32.patch |  20 +--
+ ...006-Define-correct-gregs-for-RISCV32.patch |  15 +-
+ .../redis/{redis_6.2.7.bb => redis_6.2.8.bb}  |   2 +-
+ .../redis/{redis_7.0.4.bb => redis_7.0.7.bb}  |   2 +-
+ .../zsh/zsh/CVE-2021-45444_1.patch            |  60 ++++++++
+ .../zsh/zsh/CVE-2021-45444_2.patch            | 140 ++++++++++++++++++
+ .../zsh/zsh/CVE-2021-45444_3.patch            |  77 ++++++++++
+ meta-oe/recipes-shells/zsh/zsh_5.8.bb         |   6 +-
+ 17 files changed, 538 insertions(+), 24 deletions(-)
+ create mode 100644 meta-networking/recipes-protocols/net-snmp/net-snmp/CVE-2022-44792-CVE-2022-44793.patch
+ create mode 100644 meta-oe/recipes-connectivity/krb5/krb5/CVE-2022-42898.patch
+ rename meta-oe/recipes-devtools/grpc/{grpc_1.45.2.bb => grpc_1.46.6.bb} (97%)
+ rename meta-oe/recipes-extended/redis/{redis_6.2.7.bb => redis_6.2.8.bb} (96%)
+ rename meta-oe/recipes-extended/redis/{redis_7.0.4.bb => redis_7.0.7.bb} (96%)
+ create mode 100644 meta-oe/recipes-shells/zsh/zsh/CVE-2021-45444_1.patch
+ create mode 100644 meta-oe/recipes-shells/zsh/zsh/CVE-2021-45444_2.patch
+ create mode 100644 meta-oe/recipes-shells/zsh/zsh/CVE-2021-45444_3.patch
+
 -- 
-2.39.1
+2.25.1
 
 
