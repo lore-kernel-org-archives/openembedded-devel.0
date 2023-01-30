@@ -2,56 +2,56 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CAFDAC636CC
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E4271C636D7
 	for <webhook@archiver.kernel.org>; Mon, 30 Jan 2023 05:09:25 +0000 (UTC)
-Received: from mail-pl1-f169.google.com (mail-pl1-f169.google.com [209.85.214.169])
- by mx.groups.io with SMTP id smtpd.web10.34388.1675055360688786685
+Received: from mail-pj1-f50.google.com (mail-pj1-f50.google.com [209.85.216.50])
+ by mx.groups.io with SMTP id smtpd.web10.34385.1675055357364101877
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 29 Jan 2023 21:09:20 -0800
+ Sun, 29 Jan 2023 21:09:17 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=HOVInZZ9;
- spf=pass (domain: gmail.com, ip: 209.85.214.169, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f169.google.com with SMTP id h9so1790267plf.9
-        for <openembedded-devel@lists.openembedded.org>; Sun, 29 Jan 2023 21:09:20 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=dSk9yeie;
+ spf=pass (domain: gmail.com, ip: 209.85.216.50, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f50.google.com with SMTP id b10so10063148pjo.1
+        for <openembedded-devel@lists.openembedded.org>; Sun, 29 Jan 2023 21:09:17 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=NOke4UIfo5/YX9TCl2j9q4UYejo3Fe5mbc9vxlwh5F8=;
-        b=HOVInZZ9XqJ55MgVgdeyrfufPfCeZ97BzA2XWe+aGfh+KWg2W99a5c/mgZYkUYNXzs
-         Q7WbZins67dlSYxwhw3wYca6Ps2CKRzF9lcO6jY+C7+e0NaRmNJFezyZ/f+IHuyfC/2u
-         auj/W2oofKMTFAIxuKCGOHIj7SlW4ItB4fkm8I5OhBgnD7jh+yihxjJHmDBIALJaraEB
-         OvvYiSt8RrGphniaEUclLbEAQwSpbLwsi+nyd08pXt6npsB8F1ljVm4oH68r2tuyW+3I
-         LQhNRmluS3MubQz4wNzP2KuPJSrwfmVzN2BgxGN+VDXjRMaAitIRioDhHep8e0KNz67G
-         MH1Q==
+        bh=+WaV3p3R9HvCWX5c80HG9h4UcAa7jaoBQxbhWLte1mU=;
+        b=dSk9yeieOp9vpOKFdFmNJCfN1RFdl4iCp832/OF5UyZTErn//yYozX3Kke1s2ucBgX
+         FVpLAtXpPmgfz00MWFUVJGI/Q5Fj1uu4XARTIhn9/JsQwXPZ+Fif+W4voWG6siT9xj1S
+         u7znRQcTvffjmH0c0q/SJ25mThog6vr0V/ieFsaHcSIPUxIO/MoncZy7luCmNwnxI3dB
+         ckaxPicUWJMukkDf9SFlf98u33yMwEtV1HSZxo1EG8TcqPL4vtTlnFwP9KBvRXO8mMcS
+         qr7RM+IXLhHmawi06pm5fp0eASRz07dzYz3kzPMFtcIF8MTqKQMVWR+G3EJ3HylaUTl4
+         LqaQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=NOke4UIfo5/YX9TCl2j9q4UYejo3Fe5mbc9vxlwh5F8=;
-        b=PdUysZwdvYpAIfjtlkYY6RwrQedixMWVAzp3b4JhAPyzeH8rIejqZ/Yzjo6Z5MDYcO
-         jYL+oFpFTsAg/V4zdGTNBHaTjMCcefc78Me1vpvMYF8HghCkFQKuOVzQiwkJOYKOUIGb
-         wg54D/zHto2gOD1m3b1GKaEpMZKPR/lUd1qJVAPc66VVGuNx/16cG/pW1CTG5Adjj2M/
-         HXRBCE75KD9C6eVPaPcvghTZ8tWAryZwYrTsbGtzotScK4ZqOns6i28Axb0WzLmrtZ5w
-         tsKz+9H4Zts3189adjwR9D2DczZws6z2FYSZ/jNBIFXIt9C7GE7Td28Jra05Jefd6wof
-         bgLA==
-X-Gm-Message-State: AFqh2kojIwl70BPh7kmNOLX+/1S2FV8JNnOfAhBKxqqpk4iZLdt+EQds
-	/LpU6TdTloZzLkG3AcLyhikYRCRnANSaOQ==
-X-Google-Smtp-Source: AMrXdXtyxF4G2roXlviaQS+7a8VYKVmgeCTKJ/zN3DPRCQ0Nai45bncjE9M+UMv/Mx5bCdPy1PkwrQ==
-X-Received: by 2002:a17:902:f610:b0:192:7363:f6c7 with SMTP id n16-20020a170902f61000b001927363f6c7mr51965242plg.37.1675055359878;
-        Sun, 29 Jan 2023 21:09:19 -0800 (PST)
+        bh=+WaV3p3R9HvCWX5c80HG9h4UcAa7jaoBQxbhWLte1mU=;
+        b=Y5u2GIyHc6YTHyt8VVmdAqj0nnspBMisqNHLHSlqeE8alvm13f8u7Lfz1qYxsjrRZ8
+         jNNQNFahmgIlFz+3TNMKkovQlnMcXD3wYC80UPsBpfOS9yZVnUtQndzTC3+mdkQOqSD0
+         4xnVA7mbwBdYSVa5CZ44zSvb9Qd+z5D4QdNDnOrrdDzcPZWk5mQ5CyK+djCoYwhzJ1+5
+         LfIrnd+znVK2RVEcUAcChArToH3b6ExQsyKfU0e4ppppxZsgoqn4oW5pMNTOZ7XXRrWm
+         9HopJx4dxKDBMetlgKBqjznGM3e6m0J1/QWKeOHYzQT+OJtQ1AafqUZ3gTHkrK3MWQYb
+         FIWg==
+X-Gm-Message-State: AO0yUKWkn0i0ojCtiDvKPJaWAY0rVvK+GtYNf0OftGbPPONkeJr3ELNz
+	d57QYdrNGgKnIbpy+Hnx2Wnxu5eq1Edg6Q==
+X-Google-Smtp-Source: AK7set+aBmvDICCjFLNNO74D0l9TlYVAUS9s6NWN7ybvMiD7pN4yUOejHWw/OscwJrbUsJAuZMSymQ==
+X-Received: by 2002:a17:903:2093:b0:192:ef8e:4258 with SMTP id d19-20020a170903209300b00192ef8e4258mr4942664plc.14.1675055356487;
+        Sun, 29 Jan 2023 21:09:16 -0800 (PST)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9181:1cf0::aee3])
-        by smtp.gmail.com with ESMTPSA id ju20-20020a170903429400b0019493c84880sm6671467plb.188.2023.01.29.21.09.19
+        by smtp.gmail.com with ESMTPSA id ju20-20020a170903429400b0019493c84880sm6671467plb.188.2023.01.29.21.09.15
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 29 Jan 2023 21:09:19 -0800 (PST)
+        Sun, 29 Jan 2023 21:09:16 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 10/12] mongodb: Pass MAXLINELENGTH to scons invocation
-Date: Sun, 29 Jan 2023 21:09:07 -0800
-Message-Id: <20230130050909.133727-10-raj.khem@gmail.com>
+Subject: [meta-networking][PATCH 06/12] dante: Add -P to preprocessor flags
+Date: Sun, 29 Jan 2023 21:09:03 -0800
+Message-Id: <20230130050909.133727-6-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.39.1
 In-Reply-To: <20230130050909.133727-1-raj.khem@gmail.com>
 References: <20230130050909.133727-1-raj.khem@gmail.com>
@@ -61,40 +61,40 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 30 Jan 2023 05:09:25 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100854
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100850
 
-This helps in overcoming a problem when using scons with ccache enabled.
-When commands get longer, then it resorts to using response files to do
-the operations e.g. @/tmp/tmp96j6icra.lnk when this response file is
-inboked by compiler it works ok, however, this does not when ccache is
-used to invoke the complilation. We see errors e.g.
+configure uses AC_PREPROC_IFELSE to check for certain errors from getaddrinfo()
+it user search operation in a preprocessed file
 
- ccache @/tmp/tmppsyij_0v.lnk
- ccache: error: execute_noreturn of @/tmp/tmppsyij_0v.lnk failed: No such file or directory
+ UNIQUEVALS=`sort $ERRVALFILE | uniq | wc -l | awk '{ print $1 }'`
 
-Using MAXLINELENGTH setting ensures that we can use ARG_MAX to extend
-the length of commandline and hence avoid using response files. This
-issue is also reported in mongodb [1]
+However, line numbers are generated into the preprocesser files and they
+get sorted higher than numbers
 
-[1] https://jira.mongodb.org/browse/SERVER-38389
+ gaierrval:
+ # 130 "conftest.c" 3 4
+           -3
+
+-P ensures that line numbers are not generated into preprocessed files,
+so these checks can succeed.
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../meta-python/recipes-dbs/mongodb/mongodb_git.bb               | 1 +
+ meta-networking/recipes-protocols/dante/dante_1.4.3.bb | 1 +
  1 file changed, 1 insertion(+)
 
-diff --git a/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb_git.bb b/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb_git.bb
-index 524f0fc90c..56512a2e2e 100644
---- a/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb_git.bb
-+++ b/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb_git.bb
-@@ -76,6 +76,7 @@ WIREDTIGER:aarch64 = "on"
+diff --git a/meta-networking/recipes-protocols/dante/dante_1.4.3.bb b/meta-networking/recipes-protocols/dante/dante_1.4.3.bb
+index 746c08be6e..4badff8bbd 100644
+--- a/meta-networking/recipes-protocols/dante/dante_1.4.3.bb
++++ b/meta-networking/recipes-protocols/dante/dante_1.4.3.bb
+@@ -25,6 +25,7 @@ EXTRA_OECONF += "--without-gssapi --sbindir=${bindir}"
+ DEPENDS += "flex-native bison-native libpam libtirpc"
+ inherit autotools-brokensep features_check
  
- EXTRA_OESCONS = "PREFIX=${prefix} \
-                  DESTDIR=${D} \
-+                 MAXLINELENGTH='2097152' \
-                  LIBPATH=${STAGING_LIBDIR} \
-                  LINKFLAGS='${LDFLAGS}' \
-                  CXXFLAGS='${CXXFLAGS}' \
++CPPFLAGS += "-P"
+ CFLAGS += "-I${STAGING_INCDIR}/tirpc"
+ LIBS += "-ltirpc"
+ 
 -- 
 2.39.1
 
