@@ -1,108 +1,73 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <jlu@pengutronix.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 743A2C54EAA
-	for <webhook@archiver.kernel.org>; Mon, 30 Jan 2023 06:42:26 +0000 (UTC)
-Received: from mail-oi1-f176.google.com (mail-oi1-f176.google.com [209.85.167.176])
- by mx.groups.io with SMTP id smtpd.web10.35501.1675060941565117601
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EF05AC636D0
+	for <webhook@archiver.kernel.org>; Mon, 30 Jan 2023 12:34:27 +0000 (UTC)
+Received: from metis.ext.pengutronix.de (metis.ext.pengutronix.de [85.220.165.71])
+ by mx.groups.io with SMTP id smtpd.web10.39690.1675082061166183208
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 29 Jan 2023 22:42:21 -0800
+ Mon, 30 Jan 2023 04:34:21 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=hjRc1bI2;
- spf=pass (domain: gmail.com, ip: 209.85.167.176, mailfrom: raj.khem@gmail.com)
-Received: by mail-oi1-f176.google.com with SMTP id s124so9270073oif.1
-        for <openembedded-devel@lists.openembedded.org>; Sun, 29 Jan 2023 22:42:21 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=iKIG/it6Bo8jQa1XkPYvRfeDh3z23AnQ+J2IWCwdzlo=;
-        b=hjRc1bI2Mjd1Y9ZpHp0xAMlyZhWROLqW3UBj8k5bOmd6Fc6boHIbiyuu4g7qP7Q10G
-         kTIbhybUV1To81BKhQwPtQgnFDm6oOTADNf3O2lBK6MlZKf5jBVIqa7HDZtY+/o5hrzg
-         8sXiBtt77FgxiXlEfbfMla4gIZdIArg/HKLA9cEFtSjbTaS4uFPGB3yJi2yoFxVEGCRD
-         GVnK2kANZuW1nTHxlPijFXncJJQxBPhtnIc3qr+r/AY9ZkdOje48CnloVcHe3XE9CJ3R
-         YpqTbx+WxOmqjE+6HJWI3j8eZpRYvmeQ5sEjkNArGGAv86Hz6vFAl8EPnRzwK9KrKeqp
-         C3kQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=iKIG/it6Bo8jQa1XkPYvRfeDh3z23AnQ+J2IWCwdzlo=;
-        b=Cyj7+l8Ro43aPE9lvKbsyA7ARRcwvEbSkUeuglajLPu2bKcpE4kGEMdIAdn+qAIdVI
-         t0F8OFKDMYpS4TcV6JVHmG9rJzX7Cx+vj5Bt6tWxPNEImYx6m+MQr1thhVx++fPZkC9f
-         Sbx2sTFr2pdQgciJUO2Gq9aeerctO2QP5cQKF4fm4t3wobQ4OK9oNqsi+lRrTWnpDXDj
-         wL8KUER7tIKqt7fpMJhDpaQIPVkQkzA1OdBPnffMRcQKrQoB2W4TiXxmD1qra1p+lfmr
-         phGRXJLjVq+sQzwitsVCN3NZDXBYDamD04fsOTvdiUHzNOCLHK8u0sWCZUIbyfjyExOr
-         VJpA==
-X-Gm-Message-State: AFqh2koo1NjCRaFE4aVZOVV3aAYUwISD27A+zHgi9mNqKJ8MATUpRvJh
-	B87t3jnw74/inV4mUWNL7ZRI9spSmUDxGuJXaJY8AM3EsPk=
-X-Google-Smtp-Source: AMrXdXuuNXd/enprGlfvd4sZwTiIG3qpkIqnG1LRwwuaYoGH+gcjZRgYoFojfR8Y8mTlzDpjKdoLawESvXtUhN+k3tM=
-X-Received: by 2002:a05:6808:16:b0:36e:f5f8:ccd9 with SMTP id
- u22-20020a056808001600b0036ef5f8ccd9mr1232724oic.55.1675060940593; Sun, 29
- Jan 2023 22:42:20 -0800 (PST)
+ dkim=missing; spf=pass (domain: pengutronix.de, ip: 85.220.165.71, mailfrom: jlu@pengutronix.de)
+Received: from drehscheibe.grey.stw.pengutronix.de ([2a0a:edc0:0:c01:1d::a2])
+	by metis.ext.pengutronix.de with esmtps (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
+	(Exim 4.92)
+	(envelope-from <jlu@pengutronix.de>)
+	id 1pMTMZ-0006GW-Bx; Mon, 30 Jan 2023 13:34:19 +0100
+Received: from [2a0a:edc0:0:1101:1d::39] (helo=dude03.red.stw.pengutronix.de)
+	by drehscheibe.grey.stw.pengutronix.de with esmtp (Exim 4.94.2)
+	(envelope-from <jlu@pengutronix.de>)
+	id 1pMTMZ-001TC3-L8; Mon, 30 Jan 2023 13:34:18 +0100
+Received: from jlu by dude03.red.stw.pengutronix.de with local (Exim 4.94.2)
+	(envelope-from <jlu@pengutronix.de>)
+	id 1pMTMX-009Ksd-RG; Mon, 30 Jan 2023 13:34:17 +0100
+From: Jan Luebbe <jlu@pengutronix.de>
+To: openembedded-devel@lists.openembedded.org
+Cc: yocto@pengutronix.de,
+	Jan Luebbe <jlu@pengutronix.de>
+Subject: [meta-oe][PATCH 2/2] softhsm: enable objectstore backend
+Date: Mon, 30 Jan 2023 13:34:03 +0100
+Message-Id: <20230130123402.2218385-2-jlu@pengutronix.de>
+X-Mailer: git-send-email 2.30.2
+In-Reply-To: <20230130123402.2218385-1-jlu@pengutronix.de>
+References: <20230130123402.2218385-1-jlu@pengutronix.de>
 MIME-Version: 1.0
-References: <5hnD.1675059793281797659.30EI@lists.openembedded.org>
-In-Reply-To: <5hnD.1675059793281797659.30EI@lists.openembedded.org>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Sun, 29 Jan 2023 22:41:54 -0800
-Message-ID: <CAMKF1srLrzrnqEoQnX+m6t=1kePSsk=S0JQopdeb4i62NtXtpQ@mail.gmail.com>
-Subject: Re: [oe] Proposal to add recipe for varlink library
-To: adinath.mhatre@philips.com
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+X-SA-Exim-Connect-IP: 2a0a:edc0:0:c01:1d::a2
+X-SA-Exim-Mail-From: jlu@pengutronix.de
+X-SA-Exim-Scanned: No (on metis.ext.pengutronix.de); SAEximRunCond expanded to false
+X-PTX-Original-Recipient: openembedded-devel@lists.openembedded.org
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 30 Jan 2023 06:42:26 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100858
+ <openembedded-devel@lists.openembedded.org>; Mon, 30 Jan 2023 12:34:27 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100859
 
-On Sun, Jan 29, 2023 at 10:23 PM adinath.mhatre via
-lists.openembedded.org
-<adinath.mhatre=3Dphilips.com@lists.openembedded.org> wrote:
->
-> Hi,
->
-> We want to add recipe for varlink library to meta-oe.
-> varlink/libvarlink: C implementation of the Varlink protocol and command =
-line tool (github.com)
->
-> This recipe exists in meta-wayland
-> meta-wayland/libvarlink_git.bb at master =C2=B7 MarkusVolk/meta-wayland (=
-github.com)
->
-> But varlink is an IPC alternative to dbus and its doesn=E2=80=99t have de=
-pendency on wayland.
-> So, we don=E2=80=99t want to include meta-wayland as we don=E2=80=99t nee=
-d.
->
-> We have asked meta-wayland author regarding same and he is ok with moving=
- varlink outside of meta-wayland.
-> Upstream libvarlink recipe to poky/meta-oe =C2=B7 Issue #4 =C2=B7 MarkusV=
-olk/meta-wayland (github.com)
->
-> Also, we have asked openembedded-core, he suggests us to add it to meta-o=
-e.
-> openembedded-core@lists.openembedded.org | Proposal to add recipe for var=
-link library
->
-> Should we add this recipe to meta-oe/recipe-core?
+We already depend on sqlite, but the objectstore backend using it is not
+enabled by default. Add the necessary configure option.
 
-if it is an independent and common enough tool/library then it might be ok.
-someone has to signup to maintain this recipe and keep it uptodate.
+The db backend is more robust when accessing the objectstore from many
+parallel processes (such as during kernel module signing).
 
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#100857): https://lists.openembedded.org/g/openembedde=
-d-devel/message/100857
-> Mute This Topic: https://lists.openembedded.org/mt/96622996/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
-aj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
+Signed-off-by: Jan Luebbe <jlu@pengutronix.de>
+---
+ meta-oe/recipes-security/softhsm/softhsm_2.6.1.bb | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/meta-oe/recipes-security/softhsm/softhsm_2.6.1.bb b/meta-oe/recipes-security/softhsm/softhsm_2.6.1.bb
+index 44e51fda9181..2c68ba984fe3 100644
+--- a/meta-oe/recipes-security/softhsm/softhsm_2.6.1.bb
++++ b/meta-oe/recipes-security/softhsm/softhsm_2.6.1.bb
+@@ -13,6 +13,7 @@ SRC_URI[sha256sum] = "61249473054bcd1811519ef9a989a880a7bdcc36d317c9c25457fc614d
+ inherit autotools pkgconfig siteinfo
+ 
+ EXTRA_OECONF += " --with-sqlite3=${STAGING_DIR_HOST}/usr"
++EXTRA_OECONF += " --with-objectstore-backend-db"
+ EXTRA_OECONF += "${@oe.utils.conditional('SITEINFO_BITS', '64', ' --enable-64bit', '', d)}"
+ 
+ PACKAGECONFIG ?= "ecc eddsa pk11 openssl"
+-- 
+2.30.2
+
 
