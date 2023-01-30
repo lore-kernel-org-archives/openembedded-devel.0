@@ -1,91 +1,108 @@
-Return-Path: <adinath.mhatre@philips.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4FCAEC54EAA
-	for <webhook@archiver.kernel.org>; Mon, 30 Jan 2023 06:23:16 +0000 (UTC)
-Subject: Proposal to add recipe for varlink library
-To: openembedded-devel@lists.openembedded.org
-From: adinath.mhatre@philips.com
-X-Originating-Location: Melbourne, Victoria, AU (155.190.53.6)
-X-Originating-Platform: Windows Chrome 109
-User-Agent: GROUPS.IO Web Poster
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 743A2C54EAA
+	for <webhook@archiver.kernel.org>; Mon, 30 Jan 2023 06:42:26 +0000 (UTC)
+Received: from mail-oi1-f176.google.com (mail-oi1-f176.google.com [209.85.167.176])
+ by mx.groups.io with SMTP id smtpd.web10.35501.1675060941565117601
+ for <openembedded-devel@lists.openembedded.org>;
+ Sun, 29 Jan 2023 22:42:21 -0800
+Authentication-Results: mx.groups.io;
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=hjRc1bI2;
+ spf=pass (domain: gmail.com, ip: 209.85.167.176, mailfrom: raj.khem@gmail.com)
+Received: by mail-oi1-f176.google.com with SMTP id s124so9270073oif.1
+        for <openembedded-devel@lists.openembedded.org>; Sun, 29 Jan 2023 22:42:21 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=iKIG/it6Bo8jQa1XkPYvRfeDh3z23AnQ+J2IWCwdzlo=;
+        b=hjRc1bI2Mjd1Y9ZpHp0xAMlyZhWROLqW3UBj8k5bOmd6Fc6boHIbiyuu4g7qP7Q10G
+         kTIbhybUV1To81BKhQwPtQgnFDm6oOTADNf3O2lBK6MlZKf5jBVIqa7HDZtY+/o5hrzg
+         8sXiBtt77FgxiXlEfbfMla4gIZdIArg/HKLA9cEFtSjbTaS4uFPGB3yJi2yoFxVEGCRD
+         GVnK2kANZuW1nTHxlPijFXncJJQxBPhtnIc3qr+r/AY9ZkdOje48CnloVcHe3XE9CJ3R
+         YpqTbx+WxOmqjE+6HJWI3j8eZpRYvmeQ5sEjkNArGGAv86Hz6vFAl8EPnRzwK9KrKeqp
+         C3kQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=iKIG/it6Bo8jQa1XkPYvRfeDh3z23AnQ+J2IWCwdzlo=;
+        b=Cyj7+l8Ro43aPE9lvKbsyA7ARRcwvEbSkUeuglajLPu2bKcpE4kGEMdIAdn+qAIdVI
+         t0F8OFKDMYpS4TcV6JVHmG9rJzX7Cx+vj5Bt6tWxPNEImYx6m+MQr1thhVx++fPZkC9f
+         Sbx2sTFr2pdQgciJUO2Gq9aeerctO2QP5cQKF4fm4t3wobQ4OK9oNqsi+lRrTWnpDXDj
+         wL8KUER7tIKqt7fpMJhDpaQIPVkQkzA1OdBPnffMRcQKrQoB2W4TiXxmD1qra1p+lfmr
+         phGRXJLjVq+sQzwitsVCN3NZDXBYDamD04fsOTvdiUHzNOCLHK8u0sWCZUIbyfjyExOr
+         VJpA==
+X-Gm-Message-State: AFqh2koo1NjCRaFE4aVZOVV3aAYUwISD27A+zHgi9mNqKJ8MATUpRvJh
+	B87t3jnw74/inV4mUWNL7ZRI9spSmUDxGuJXaJY8AM3EsPk=
+X-Google-Smtp-Source: AMrXdXuuNXd/enprGlfvd4sZwTiIG3qpkIqnG1LRwwuaYoGH+gcjZRgYoFojfR8Y8mTlzDpjKdoLawESvXtUhN+k3tM=
+X-Received: by 2002:a05:6808:16:b0:36e:f5f8:ccd9 with SMTP id
+ u22-20020a056808001600b0036ef5f8ccd9mr1232724oic.55.1675060940593; Sun, 29
+ Jan 2023 22:42:20 -0800 (PST)
 MIME-Version: 1.0
-Date: Sun, 29 Jan 2023 22:23:13 -0800
-Message-ID: <5hnD.1675059793281797659.30EI@lists.openembedded.org>
-Content-Type: multipart/alternative; boundary="A8pdX1YSxPyh7m8VtZAE"
+References: <5hnD.1675059793281797659.30EI@lists.openembedded.org>
+In-Reply-To: <5hnD.1675059793281797659.30EI@lists.openembedded.org>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sun, 29 Jan 2023 22:41:54 -0800
+Message-ID: <CAMKF1srLrzrnqEoQnX+m6t=1kePSsk=S0JQopdeb4i62NtXtpQ@mail.gmail.com>
+Subject: Re: [oe] Proposal to add recipe for varlink library
+To: adinath.mhatre@philips.com
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 30 Jan 2023 06:23:16 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100857
+ <openembedded-devel@lists.openembedded.org>; Mon, 30 Jan 2023 06:42:26 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100858
 
---A8pdX1YSxPyh7m8VtZAE
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
+On Sun, Jan 29, 2023 at 10:23 PM adinath.mhatre via
+lists.openembedded.org
+<adinath.mhatre=3Dphilips.com@lists.openembedded.org> wrote:
+>
+> Hi,
+>
+> We want to add recipe for varlink library to meta-oe.
+> varlink/libvarlink: C implementation of the Varlink protocol and command =
+line tool (github.com)
+>
+> This recipe exists in meta-wayland
+> meta-wayland/libvarlink_git.bb at master =C2=B7 MarkusVolk/meta-wayland (=
+github.com)
+>
+> But varlink is an IPC alternative to dbus and its doesn=E2=80=99t have de=
+pendency on wayland.
+> So, we don=E2=80=99t want to include meta-wayland as we don=E2=80=99t nee=
+d.
+>
+> We have asked meta-wayland author regarding same and he is ok with moving=
+ varlink outside of meta-wayland.
+> Upstream libvarlink recipe to poky/meta-oe =C2=B7 Issue #4 =C2=B7 MarkusV=
+olk/meta-wayland (github.com)
+>
+> Also, we have asked openembedded-core, he suggests us to add it to meta-o=
+e.
+> openembedded-core@lists.openembedded.org | Proposal to add recipe for var=
+link library
+>
+> Should we add this recipe to meta-oe/recipe-core?
 
-Hi,
+if it is an independent and common enough tool/library then it might be ok.
+someone has to signup to maintain this recipe and keep it uptodate.
 
-We want to add recipe for varlink library to meta-oe.
-varlink/libvarlink: C implementation of the Varlink protocol and command li=
-ne tool (github.com) ( https://github.com/varlink/libvarlink )
-
-This recipe exists in meta-wayland
-meta-wayland/libvarlink_git.bb at master =C2=B7 MarkusVolk/meta-wayland (gi=
-thub.com) ( https://github.com/MarkusVolk/meta-wayland/blob/master/recipes-=
-extended/libvarlink/libvarlink_git.bb )
-
-But varlink is an IPC alternative to dbus and its doesn=E2=80=99t have depe=
-ndency on wayland.
-So, we don=E2=80=99t want to include meta-wayland as we don=E2=80=99t need.
-
-We have asked meta-wayland author regarding same and he is ok with moving v=
-arlink outside of meta-wayland.
-Upstream libvarlink recipe to poky/meta-oe =C2=B7 Issue #4 =C2=B7 MarkusVol=
-k/meta-wayland (github.com) ( https://github.com/MarkusVolk/meta-wayland/is=
-sues/4 )
-
-Also, we have asked openembedded-core, he suggests us to add it to meta-oe.
-openembedded-core@lists.openembedded.org | Proposal to add recipe for varli=
-nk library ( https://lists.openembedded.org/g/openembedded-core/topic/96563=
-314#176437 )
-
-Should we add this recipe to meta-oe/recipe-core?
-
---A8pdX1YSxPyh7m8VtZAE
-Content-Type: text/html; charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div>Hi,</div>
-<div>&nbsp;</div>
-<div>We want to add recipe for varlink library to meta-oe.</div>
-<div><a href=3D"https://github.com/varlink/libvarlink">varlink/libvarlink: =
-C implementation of the Varlink protocol and command line tool (github.com)=
-</a></div>
-<div>&nbsp;</div>
-<div>This recipe exists in meta-wayland</div>
-<div><a href=3D"https://github.com/MarkusVolk/meta-wayland/blob/master/reci=
-pes-extended/libvarlink/libvarlink_git.bb">meta-wayland/libvarlink_git.bb a=
-t master &middot; MarkusVolk/meta-wayland (github.com)</a></div>
-<div>&nbsp;</div>
-<div>But varlink is an IPC alternative to dbus and its doesn&rsquo;t have d=
-ependency on wayland.</div>
-<div>So, we don&rsquo;t want to include meta-wayland as we don&rsquo;t need=
-.</div>
-<div>&nbsp;</div>
-<div>We have asked meta-wayland author regarding same and he is ok with mov=
-ing varlink outside of meta-wayland.</div>
-<div><a href=3D"https://github.com/MarkusVolk/meta-wayland/issues/4">Upstre=
-am libvarlink recipe to poky/meta-oe &middot; Issue #4 &middot; MarkusVolk/=
-meta-wayland (github.com)</a></div>
-<div>&nbsp;</div>
-<div>Also, we have asked openembedded-core, he suggests us to add it to met=
-a-oe.</div>
-<div><a href=3D"https://lists.openembedded.org/g/openembedded-core/topic/96=
-563314#176437">openembedded-core@lists.openembedded.org | Proposal to add r=
-ecipe for varlink library</a></div>
-<div>&nbsp;</div>
-<div>Should we add this recipe to meta-oe/recipe-core?</div>
-
---A8pdX1YSxPyh7m8VtZAE--
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#100857): https://lists.openembedded.org/g/openembedde=
+d-devel/message/100857
+> Mute This Topic: https://lists.openembedded.org/mt/96622996/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
+aj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
 
