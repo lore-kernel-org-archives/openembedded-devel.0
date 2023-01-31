@@ -2,153 +2,124 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 99850C63797
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A480CC636D7
 	for <webhook@archiver.kernel.org>; Tue, 31 Jan 2023 01:52:10 +0000 (UTC)
 Received: from mail-pl1-f173.google.com (mail-pl1-f173.google.com [209.85.214.173])
- by mx.groups.io with SMTP id smtpd.web11.2805.1675129924315990764
+ by mx.groups.io with SMTP id smtpd.web11.2808.1675129928236320996
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 30 Jan 2023 17:52:04 -0800
+ Mon, 30 Jan 2023 17:52:08 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=jEd6hEuy;
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=J1G6Dkfi;
  spf=pass (domain: gmail.com, ip: 209.85.214.173, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f173.google.com with SMTP id v23so13597656plo.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 30 Jan 2023 17:52:04 -0800 (PST)
+Received: by mail-pl1-f173.google.com with SMTP id e6so5361139plg.12
+        for <openembedded-devel@lists.openembedded.org>; Mon, 30 Jan 2023 17:52:08 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=/d4U4hyYz3XRLqM47aLor6IgViFrFvo6TIiSckujmj4=;
-        b=jEd6hEuy1+D80GlkmO1jRkM/OIT0x4HuyH4BjEy69/gk6ISIZMbWsRyyBzPwsAqoAs
-         N2LqTw85W4sGKvjq00a39nRsLIfaeg7IOziizvMorB6UNnV95wQ+3p3ssw7pFEHQbTOV
-         wbYNbT9EDJRzYCiyvI6gqe+42N9yVRs8bAkYlA6dynDNdvhgcIbpi9Xhs4BdsHqMe3by
-         +jZv5hrmyoM//MgZQhaQAiwa4pxUqx9pvPKVSrDFJDZzVqUErIZ5XSpwbfZbPsjuuw04
-         LhiqkC/2pcPencb5mduQ4Add1MiwnI3O4eXj2RqHQ0zEj5xiIkMgHf9Lcraek9v8inf5
-         ixCw==
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=IEcMu8ITyjxj8wWvTNn5DDcydKE3Eu7dgnKbd03IPHE=;
+        b=J1G6DkfiEqEty4QI/w9YaZIhWCQVaLSeQ1TroT8XorKM89Zq1hFZDaEJK5wpNsDlkH
+         rj303Lb2FhdrZmv0Mcuxod7HeHPlxEgDPPWJYPeCVWjDe7OKVL7/VD/NIgTxDetSn0MD
+         IEQu2Yp73D0mwDvJBpgBkszhahlfSsDCSKjtGEKMWzhjL/40gaum+z71pDGd0UmbBfo6
+         xx7eQ1fUtghvYsveRXLmfxaKOvyJMPtmkDXHNKChVH0MYKeobQhr+HurrMQSmLlBPyAN
+         nfNhNsDOVdzwWLu86CBi2ayC2dzdRUZVpq0ZPeo1LA1D4SohY1vGxfCAlTzn7+QUhyfX
+         T+hQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=/d4U4hyYz3XRLqM47aLor6IgViFrFvo6TIiSckujmj4=;
-        b=lyu3+rOScgu5O8qiNSjSg55wXZOsMDHd87oqJDubDTGRZZFckkOKA5rBRSdFy5aqJA
-         +Ec2zvK3McJXPc1T09zkm16sbwwxWqn4fiZ/oaDUl4AMlvD+3yl/0yKD2da/hUu3W5X4
-         fQqLAzUU5/OUeRTmvGN+dbFOm3N6dnnIaQwn++7W7Mz/yUAgPrFV89YP0VN5WdGdzll2
-         qqx0XuWnniwWoomFvcV5porRu97t0tS/bYeA3mOln28ujgYTRrozMNgMi+UPwIsSIKJ9
-         cPeERczepDak1LYYnOzllOwhG0q3TtYw4+fAcYAfe4u/3iqL5r3/SqBkuDXr/9OT5Tvu
-         AHzQ==
-X-Gm-Message-State: AFqh2kryUATTAvme6dT/ZiXdsoexcWR1CwpZ8Ra6JkPCLHboO3f3Hw8I
-	ejfCRYDV7fOR8cSacZur9/YDrJT8DtcMzg==
-X-Google-Smtp-Source: AMrXdXtdTve6oai6yR8UcoahfH0dDoGh38NVRL99SSeG1HnopkMXJVTPD1eYgtSKb38atUiCrLh3TQ==
-X-Received: by 2002:a17:90a:4587:b0:229:bc1:7cd1 with SMTP id v7-20020a17090a458700b002290bc17cd1mr55623634pjg.33.1675129923069;
-        Mon, 30 Jan 2023 17:52:03 -0800 (PST)
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=IEcMu8ITyjxj8wWvTNn5DDcydKE3Eu7dgnKbd03IPHE=;
+        b=F8IjKGDxhDRZ1ZB/g8WBjjHG5jF2rhZcOj5k/k2Nr1uEsUkP/cG/aadlJwVDIUIP7j
+         GlD1RqdOd1wi2LF55sBzNuG4/GQgCXS5JIn0XeymVd4cziDi10Kfg1Jxb8vtkOSNSQqG
+         msk19guzUG8kxN9MOQZo53Sp4BkpY/QFVegtZhJiIsPcmfWtiNwOrK9EC+vVwno65h9d
+         uhfm3FkmUyEyDb7dNDGPBRjHxOUlQhh3sXwb3+nw/5O/QusaBGOlMjbArFDOQfNKaBVQ
+         D2+WeUCQCcc1Q/bRQiGpYAQ4HB9GDXdNAbctc9ys/8g3HTiMIh7GsVv0OIkehyYCaLYq
+         i+vw==
+X-Gm-Message-State: AO0yUKVshMDmW4I7SS8bzfMFwaRVXuOpLnipkAIgY0Fjdg8WLp9mqAqt
+	oe4WkMrP6yIcPM9F3dDSIZfNjW2elnkreQ==
+X-Google-Smtp-Source: AK7set+RP9kMWHADRR1HMtdVyx60/nSf7Uv1mHfie6Hx4V3HXruBXm/1QQN98CmF+nIvLYMj+LhvzQ==
+X-Received: by 2002:a17:90a:1a15:b0:22c:912:b80d with SMTP id 21-20020a17090a1a1500b0022c0912b80dmr23679310pjk.33.1675129927413;
+        Mon, 30 Jan 2023 17:52:07 -0800 (PST)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9181:1cf0::aee3])
-        by smtp.gmail.com with ESMTPSA id mj8-20020a17090b368800b0021900ba8eeesm10096859pjb.2.2023.01.30.17.52.02
+        by smtp.gmail.com with ESMTPSA id mj8-20020a17090b368800b0021900ba8eeesm10096859pjb.2.2023.01.30.17.52.06
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 30 Jan 2023 17:52:02 -0800 (PST)
+        Mon, 30 Jan 2023 17:52:07 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 1/8] zeromq: Fix build with gcc13
-Date: Mon, 30 Jan 2023 17:51:53 -0800
-Message-Id: <20230131015200.3862532-1-raj.khem@gmail.com>
+Subject: [meta-python][PATCH 6/8] python3-grpcio: Fix build with gcc13
+Date: Mon, 30 Jan 2023 17:51:58 -0800
+Message-Id: <20230131015200.3862532-6-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.39.1
+In-Reply-To: <20230131015200.3862532-1-raj.khem@gmail.com>
+References: <20230131015200.3862532-1-raj.khem@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 31 Jan 2023 01:52:10 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100862
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100867
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...cator.hpp-define-missing-rebind-type.patch | 64 +++++++++++++++++++
- .../zeromq/zeromq_4.3.4.bb                    |  1 +
- 2 files changed, 65 insertions(+)
- create mode 100644 meta-oe/recipes-connectivity/zeromq/files/0001-src-secure_allocator.hpp-define-missing-rebind-type.patch
+ .../0001-Include-missing-cstdint-header.patch | 32 +++++++++++++++++++
+ .../python/python3-grpcio_1.51.1.bb           |  1 +
+ 2 files changed, 33 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-grpcio/0001-Include-missing-cstdint-header.patch
 
-diff --git a/meta-oe/recipes-connectivity/zeromq/files/0001-src-secure_allocator.hpp-define-missing-rebind-type.patch b/meta-oe/recipes-connectivity/zeromq/files/0001-src-secure_allocator.hpp-define-missing-rebind-type.patch
+diff --git a/meta-python/recipes-devtools/python/python3-grpcio/0001-Include-missing-cstdint-header.patch b/meta-python/recipes-devtools/python/python3-grpcio/0001-Include-missing-cstdint-header.patch
 new file mode 100644
-index 0000000000..d32190818b
+index 0000000000..f970cf3c3c
 --- /dev/null
-+++ b/meta-oe/recipes-connectivity/zeromq/files/0001-src-secure_allocator.hpp-define-missing-rebind-type.patch
-@@ -0,0 +1,64 @@
-+From 66e72389cc90625ed74e8ba1ea3a65234bdb06b5 Mon Sep 17 00:00:00 2001
-+From: Sergei Trofimovich <slyich@gmail.com>
-+Date: Tue, 20 Dec 2022 21:45:16 +0000
-+Subject: [PATCH] src/secure_allocator.hpp: define missing 'rebind' type
++++ b/meta-python/recipes-devtools/python/python3-grpcio/0001-Include-missing-cstdint-header.patch
+@@ -0,0 +1,32 @@
++From 752e30eebe5b91c323bafcbea8d450dd5683701a Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Mon, 30 Jan 2023 10:31:10 -0800
++Subject: [PATCH] Include missing <cstdint> header
 +
-+`gcc-13` added an assert to standard headers to make sure custom
-+allocators have intended implementation of rebind type instead
-+of inherited rebind. gcc change:
-+    https://gcc.gnu.org/git/?p=gcc.git;a=commitdiff;h=64c986b49558a7
++gcc 13 moved some includes around and as a result <cstdint> is
++no longer transitively included [1]. Explicitly include it for
++int32_t.
 +
-+Without the fix build fails on this week's `gcc-13` as:
++[1] https://gcc.gnu.org/gcc-13/porting_to.html#header-dep-changes
 +
-+    [ 92%] Building CXX object tests/CMakeFiles/test_security_curve.dir/test_security_curve.cpp.o
-+    In file included from /<<NIX>>/gcc-13.0.0/include/c++/13.0.0/ext/alloc_traits.h:34,
-+                     from /<<NIX>>/gcc-13.0.0/include/c++/13.0.0/bits/stl_uninitialized.h:64,
-+                     from /<<NIX>>/gcc-13.0.0/include/c++/13.0.0/memory:69,
-+                     from tests/../src/secure_allocator.hpp:42,
-+                     from tests/../src/curve_client_tools.hpp:49,
-+                     from tests/test_security_curve.cpp:53:
-+    /<<NIX>>/gcc-13.0.0/include/c++/13.0.0/bits/alloc_traits.h: In instantiation of 'struct std::__allocator_traits_base::__rebind<zmq::secure_allocator_t<unsigned char>, unsigned char, void>':
-+    /<<NIX>>/gcc-13.0.0/include/c++/13.0.0/bits/alloc_traits.h:94:11:   required by substitution of 'template<class _Alloc, class _Up> using std::__alloc_rebind = typename std::__allocator_traits_base::__rebind<_Alloc, _Up>::type [with _Alloc = zmq::secure_allocator_t<unsigned char>; _Up = unsigned char]'
-+    /<<NIX>>/gcc-13.0.0/include/c++/13.0.0/bits/alloc_traits.h:228:8:   required by substitution of 'template<class _Alloc> template<class _Tp> using std::allocator_traits< <template-parameter-1-1> >::rebind_alloc = std::__alloc_rebind<_Alloc, _Tp> [with _Tp = unsigned char; _Alloc = zmq::secure_allocator_t<unsigned char>]'
-+    /<<NIX>>/gcc-13.0.0/include/c++/13.0.0/ext/alloc_traits.h:126:65:   required from 'struct __gnu_cxx::__alloc_traits<zmq::secure_allocator_t<unsigned char>, unsigned char>::rebind<unsigned char>'
-+    /<<NIX>>/gcc-13.0.0/include/c++/13.0.0/bits/stl_vector.h:88:21:   required from 'struct std::_Vector_base<unsigned char, zmq::secure_allocator_t<unsigned char> >'
-+    /<<NIX>>/gcc-13.0.0/include/c++/13.0.0/bits/stl_vector.h:423:11:   required from 'class std::vector<unsigned char, zmq::secure_allocator_t<unsigned char> >'
-+    tests/../src/curve_client_tools.hpp:64:76:   required from here
-+    /<<NIX>>/gcc-13.0.0/include/c++/13.0.0/bits/alloc_traits.h:70:31: error: static assertion failed: allocator_traits<A>::rebind_alloc<A::value_type> must be A
-+       70 |                         _Tp>::value,
-+          |                               ^~~~~
-+
-+The change adds trivial `rebind` definition with expected return type
-+and satisfies conversion requirements.
-+
-+Upstream-Status: Backport [https://github.com/zeromq/libzmq/commit/438d5d88]
++Upstream-Status: Submitted [https://code-review.googlesource.com/c/re2/+/60970]
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +---
-+ src/secure_allocator.hpp | 11 +++++++++++
-+ 1 file changed, 11 insertions(+)
++ third_party/re2/util/pcre.h | 1 +
++ 1 file changed, 1 insertion(+)
 +
-+diff --git a/src/secure_allocator.hpp b/src/secure_allocator.hpp
-+index 0d37e7ed..5b8de9e2 100644
-+--- a/src/secure_allocator.hpp
-++++ b/src/secure_allocator.hpp
-+@@ -95,6 +95,17 @@ bool operator!= (const secure_allocator_t<T> &, const secure_allocator_t<U> &)
-+ #else
-+ template <typename T> struct secure_allocator_t : std::allocator<T>
-+ {
-++    secure_allocator_t () ZMQ_DEFAULT;
-++
-++    template <class U>
-++    secure_allocator_t (const secure_allocator_t<U> &) ZMQ_NOEXCEPT
-++    {
-++    }
-++
-++    template <class U> struct rebind
-++    {
-++        typedef secure_allocator_t<U> other;
-++    };
-+ };
-+ #endif
-+ }
++diff --git a/third_party/re2/util/pcre.h b/third_party/re2/util/pcre.h
++index 896b0bd..271a005 100644
++--- a/third_party/re2/util/pcre.h
+++++ b/third_party/re2/util/pcre.h
++@@ -163,6 +163,7 @@
++ 
++ #include "util/util.h"
++ #include "re2/stringpiece.h"
+++#include <cstdint>
++ 
++ #ifdef USEPCRE
++ #include <pcre.h>
 +-- 
 +2.39.1
 +
-diff --git a/meta-oe/recipes-connectivity/zeromq/zeromq_4.3.4.bb b/meta-oe/recipes-connectivity/zeromq/zeromq_4.3.4.bb
-index 697bc47137..bf25d56ee9 100644
---- a/meta-oe/recipes-connectivity/zeromq/zeromq_4.3.4.bb
-+++ b/meta-oe/recipes-connectivity/zeromq/zeromq_4.3.4.bb
-@@ -8,6 +8,7 @@ PACKAGECONFIG[libsodium] = "-DWITH_LIBSODIUM=ON,-DWITH_LIBSODIUM=OFF, libsodium"
- 
- SRC_URI = "http://github.com/zeromq/libzmq/releases/download/v${PV}/zeromq-${PV}.tar.gz \
-     file://0001-CMakeLists-txt-Avoid-host-specific-path-to-libsodium.patch \
-+    file://0001-src-secure_allocator.hpp-define-missing-rebind-type.patch \
-     file://run-ptest \
+diff --git a/meta-python/recipes-devtools/python/python3-grpcio_1.51.1.bb b/meta-python/recipes-devtools/python/python3-grpcio_1.51.1.bb
+index b0971db1cc..3d45c56b0a 100644
+--- a/meta-python/recipes-devtools/python/python3-grpcio_1.51.1.bb
++++ b/meta-python/recipes-devtools/python/python3-grpcio_1.51.1.bb
+@@ -10,6 +10,7 @@ SRC_URI += "file://0001-setup.py-Do-not-mix-C-and-C-compiler-options.patch"
+ SRC_URI:append:class-target = " file://ppc-boringssl-support.patch \
+                                 file://boring_ssl.patch \
+                                 file://mips_bigendian.patch \
++                                file://0001-Include-missing-cstdint-header.patch \
+                                 file://abseil-ppc-fixes.patch;patchdir=third_party/abseil-cpp \
  "
- SRC_URI[md5sum] = "c897d4005a3f0b8276b00b7921412379"
+ SRC_URI[sha256sum] = "e6dfc2b6567b1c261739b43d9c59d201c1b89e017afd9e684d85aa7a186c9f7a"
 -- 
 2.39.1
 
