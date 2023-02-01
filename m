@@ -1,189 +1,146 @@
-Return-Path: <akuster808@gmail.com>
+Return-Path: <Martin.Jansa@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 61986C05027
-	for <webhook@archiver.kernel.org>; Wed,  1 Feb 2023 13:36:02 +0000 (UTC)
-Received: from mail-oi1-f177.google.com (mail-oi1-f177.google.com [209.85.167.177])
- by mx.groups.io with SMTP id smtpd.web10.23094.1675258558287170734
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EFC8DC636D3
+	for <webhook@archiver.kernel.org>; Wed,  1 Feb 2023 15:51:02 +0000 (UTC)
+Received: from mail-wm1-f48.google.com (mail-wm1-f48.google.com [209.85.128.48])
+ by mx.groups.io with SMTP id smtpd.web10.26875.1675266657841979489
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 01 Feb 2023 05:35:58 -0800
+ Wed, 01 Feb 2023 07:50:58 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=O1DEUaDs;
- spf=pass (domain: gmail.com, ip: 209.85.167.177, mailfrom: akuster808@gmail.com)
-Received: by mail-oi1-f177.google.com with SMTP id d188so15722617oia.3
-        for <openembedded-devel@lists.openembedded.org>; Wed, 01 Feb 2023 05:35:58 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=BfSuJ+lY;
+ spf=pass (domain: gmail.com, ip: 209.85.128.48, mailfrom: martin.jansa@gmail.com)
+Received: by mail-wm1-f48.google.com with SMTP id q10-20020a1cf30a000000b003db0edfdb74so2628240wmq.1
+        for <openembedded-devel@lists.openembedded.org>; Wed, 01 Feb 2023 07:50:57 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=content-transfer-encoding:in-reply-to:from:references:to
-         :content-language:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=yXXNOuzmKekRzg8okq/Nza7/z3fv06ZPDbBmZAlJveY=;
-        b=O1DEUaDsoQil8MTV5T2VsTqCrIluo3VMEh1qidnZ/V93xQ81husvksmr0CFVUuh7lM
-         RoBqMRyTAM9qmY1ii1WFxrigi/lOIFs1xphM8/RaG6N4mPvPHq/6BZlTuhRJg28ReIfB
-         DaoeVsdnKCxebButNgk11qXMd097b3B71owXOWiWJr2mnnd4NRpzTc7Yfs8E3DfTj1y3
-         xGzVBOCReu1waicEHP003g+K6+CDGaBWDBETTkYbP8UEEPv4VmDNSn5u05XfV9SZ92pr
-         tQaZXp/TaSECY4z8hCgljW7noJTxUtnpoQTfomIRK6qehEHUR+IkZH8/IvSCC2eblZDt
-         VEnw==
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=E5K3zYUV7s7PmNJyadGkOi/NM+E+IX/HOs7/dmZkMWk=;
+        b=BfSuJ+lYrW0PdrfV0M5IEO1fMrDwOXCBta34Gne8i1lua6WsBYsub2m6nY99aP4Cky
+         7z+v96Y6z/JEHL5ZCrbHtqXDZB2mSBX7pRZbrCgz0vh/z/5AIWqsFjOQEHxNWxcKMDV5
+         QW3ZMRWZmaCkg6LIhsktTAoK2AnzqVk09t5cTtgbIl0yu5FMNstsuK5q+AE99ROKlhiG
+         l6iPnQje/0AyzdyOI6moa9Eho0toa4c+uxQk6Ej3DRFT7xCvVGecPFTsVhnWstc46qxv
+         WU/hpjhnRavku2janUQ08lWKXLNF4g5/11sarveHyb5WJrG9MPYtE4xF5P/wDlCNTXho
+         ZBnQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=content-transfer-encoding:in-reply-to:from:references:to
-         :content-language:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=yXXNOuzmKekRzg8okq/Nza7/z3fv06ZPDbBmZAlJveY=;
-        b=0yhcwcWNFs6gJTDkld8g4hPrFR/hhDDOQXhJBjq9oMGzoXu6ZUGtVhtMgWLDeo7PRd
-         m4+FT6QxeQS9Pb41/oYEHoc7ksBvRaYwbINXew7nZztVsbmvh3NHqBu1nuQtEpsUTwpM
-         e7VfeU/q9F1X/OkilIQ7kYwQZ5aBkwJVm6f5ZpA2S2yVP9Rt0SlOVFoxEM07zGzX4qZK
-         xviSFTee/R8YcPwApOluTdfidbFaRWFkpbVRIi2sk2TIRV17PcJdoX7+A1Qu2VvUxbX+
-         20exRaZE/Yr+gC0DV3VrjGEXTsGIbJ8ByW1WG0sEnZ9uA1vM9p/jnCHI16HIexK+EgA2
-         L5Ew==
-X-Gm-Message-State: AO0yUKXl2SDrBy3F8flu2AzN3sOJaLYZm4UDNGauggDEO/SHV1LjMvtt
-	b+uvxbJowMFN8cUORHwIuiY=
-X-Google-Smtp-Source: AK7set8bPvXj2xLwkMO1WBZXvmNmxIs1J2DUH9CQVPOf/ELtmunmHMLlw/i6c2kfDWJbuFbd4GF8/w==
-X-Received: by 2002:aca:c044:0:b0:364:7d13:acf with SMTP id q65-20020acac044000000b003647d130acfmr973297oif.13.1675258557552;
-        Wed, 01 Feb 2023 05:35:57 -0800 (PST)
-Received: from ?IPV6:2600:1700:9190:ba10:47a4:b49a:4424:1351? ([2600:1700:9190:ba10:47a4:b49a:4424:1351])
-        by smtp.gmail.com with ESMTPSA id m24-20020a05680806d800b00377fae9d36csm5569255oih.52.2023.02.01.05.35.56
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 01 Feb 2023 05:35:56 -0800 (PST)
-Message-ID: <06197dd2-46e8-ffba-c703-681cee51b14c@gmail.com>
-Date: Wed, 1 Feb 2023 08:35:56 -0500
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=E5K3zYUV7s7PmNJyadGkOi/NM+E+IX/HOs7/dmZkMWk=;
+        b=wrIXeVPxyiMRx+mxYG3ma4LwQIkt5qe1Mu19BtGRLDMc3+BZAwrNO+cMQQ0WOD2dRZ
+         5E7xcC9oneaPIykpzb5HxHOZbB7LE2tDajnDX7kS0eL4NCHg/fLXk3NEwkqxnb5OvtoY
+         sj+RfqY6K6TXuES/1NJ8BL9+U5qSpxtjvZv89atRdqjpYEmr/3GtXvj/ADlAYq8G5lLT
+         UFxxXfvOYdCa2c0B+Tnslr0zexa9jxCYJ7ZuvxlQ3VkAXhsaFmXwULryEWm4kLiY6bfx
+         PgKt8tjLvAfUu3AFTp6V9hQIFhwRMhz4qFNyG21OweST6l35WluzEg19WzknlPSDIyic
+         fqVw==
+X-Gm-Message-State: AO0yUKVYYFDoUS5xLdy8LA5NoGllaMWTPnrUjXo80O7nYzQIMTojS5EP
+	KNX/iqOfAEoDenC+i5Z9k7oS8yCCBa8=
+X-Google-Smtp-Source: AK7set+OR1UBeo0K++IQVVzGku8ivnRM+qxxj4mM/MAsVZn/ELZOycsbOCgjJsOWZQWEy5tZFdkW4A==
+X-Received: by 2002:a05:600c:a297:b0:3dc:42e7:f626 with SMTP id hu23-20020a05600ca29700b003dc42e7f626mr2546848wmb.26.1675266656140;
+        Wed, 01 Feb 2023 07:50:56 -0800 (PST)
+Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
+        by smtp.gmail.com with ESMTPSA id o21-20020a05600c379500b003dc4a47605fsm2099633wmr.8.2023.02.01.07.50.55
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 01 Feb 2023 07:50:55 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Martin Jansa <Martin.Jansa@gmail.com>
+Subject: [meta-oe][PATCH] meta: remove True option to getVar calls (again)
+Date: Wed,  1 Feb 2023 16:50:53 +0100
+Message-Id: <20230201155053.555325-1-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.39.1
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.4.2
-Subject: Re: [oe] [meta-python][kirkstone][PATCH 3/6] python3-pillow: upgrade
- 9.2.0 -> 9.3.0
-Content-Language: en-US
-To: Randy MacLeod <randy.macleod@windriver.com>,
- openembedded-devel@lists.openembedded.org
-References: <20230131230851.2785067-1-Randy.MacLeod@windriver.com>
- <20230131230851.2785067-3-Randy.MacLeod@windriver.com>
-From: akuster808 <akuster808@gmail.com>
-In-Reply-To: <20230131230851.2785067-3-Randy.MacLeod@windriver.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 01 Feb 2023 13:36:02 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100904
+ <openembedded-devel@lists.openembedded.org>; Wed, 01 Feb 2023 15:51:02 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100905
 
-Hello Randy,
+* True is default since 2016 and most layers were already updated
+  not to pass this parameter where not necessary, e.g. oe-core was
+  updated couple times, first in:
+  https://git.openembedded.org/openembedded-core/commit/?id=7c552996597faaee2fbee185b250c0ee30ea3b5f
 
-On 1/31/23 6:08 PM, Randy MacLeod wrote:
-> From: Wang Mingyu <wangmy@fujitsu.com>
->
-> Changelog:
-> =========
->
->      Limit SAMPLESPERPIXEL to avoid runtime DOS #6700 [wiredfool]
->      Initialize libtiff buffer when saving #6699 [radarhere]
->      Inline fname2char to fix memory leak #6329 [nulano]
->      Fix memory leaks related to text features #6330 [nulano]
->      Use double quotes for version check on old CPython on Windows #6695 [hugovk]
->      Remove backup implementation of Round for Windows platforms #6693 [cgohlke]
->      Fixed set_variation_by_name offset #6445 [radarhere]
->      Fix malloc in _imagingft.c:font_setvaraxes #6690 [cgohlke]
->      Release Python GIL when converting images using matrix operations #6418 [hmaarrfk]
->      Added ExifTags enums #6630 [radarhere]
->      Do not modify previous frame when calculating delta in PNG #6683 [radarhere]
->      Added support for reading BMP images with RLE4 compression #6674 [npjg, radarhere]
->      Decode JPEG compressed BLP1 data in original mode #6678 [radarhere]
->      Added GPS TIFF tag info #6661 [radarhere]
->      Added conversion between RGB/RGBA/RGBX and LAB #6647 [radarhere]
->      Do not attempt normalization if mode is already normal #6644 [radarhere]
->      Fixed seeking to an L frame in a GIF #6576 [radarhere]
->      Consider all frames when selecting mode for PNG save_all #6610 [radarhere]
->      Don't reassign crc on ChunkStream close #6627 [wiredfool, radarhere]
->      Raise a warning if NumPy failed to raise an error during conversion #6594 [radarhere]
->      Show all frames in ImageShow #6611 [radarhere]
->      Allow FLI palette chunk to not be first #6626 [radarhere]
->      If first GIF frame has transparency for RGB_ALWAYS loading strategy, use RGBA mode #6592 [radarhere]
->      Round box position to integer when pasting embedded color #6517 [radarhere, nulano]
->      Removed EXIF prefix when saving WebP #6582 [radarhere]
->      Pad IM palette to 768 bytes when saving #6579 [radarhere]
->      Added DDS BC6H reading #6449 [ShadelessFox, REDxEYE, radarhere]
->      Added support for opening WhiteIsZero 16-bit integer TIFF images #6642 [JayWiz, radarhere]
->      Raise an error when allocating translucent color to RGB palette #6654 [jsbueno, radarhere]
->      Added reading of TIFF child images #6569 [radarhere]
->      Improved ImageOps palette handling #6596 [PososikTeam, radarhere]
->      Defer parsing of palette into colors #6567 [radarhere]
->      Apply transparency to P images in ImageTk.PhotoImage #6559 [radarhere]
->      Use rounding in ImageOps contain() and pad() #6522 [bibinhashley, radarhere]
->      Fixed GIF remapping to palette with duplicate entries #6548 [radarhere]
->      Allow remap_palette() to return an image with less than 256 palette entries #6543 [radarhere]
->      Corrected BMP and TGA palette size when saving #6500 [radarhere]
->      Do not call load() before draft() in Image.thumbnail #6539 [radarhere]
->      Copy palette when converting from P to PA #6497 [radarhere]
->      Allow RGB and RGBA values for PA image putpixel #6504 [radarhere]
->      Removed support for tkinter in PyPy before Python 3.6 #6551 [nulano]
->      Do not use CCITTFaxDecode filter if libtiff is not available #6518 [radarhere]
->      Fallback to not using mmap if buffer is not large enough #6510 [radarhere]
->      Fixed writing bytes as ASCII tag #6493 [radarhere]
->      Open 1 bit EPS in mode 1 #6499 [radarhere]
->      Removed support for tkinter before Python 1.5.2 #6549 [radarhere]
->      Allow default ImageDraw font to be set #6484 [radarhere, hugovk]
->      Save 1 mode PDF using CCITTFaxDecode filter #6470 [radarhere]
->      Added support for RGBA PSD images #6481 [radarhere]
->      Parse orientation from XMP tag contents #6463 [bigcat88, radarhere]
->      Added support for reading ATI1/ATI2 (BC4/BC5) DDS images #6457 [REDxEYE, radarhere]
->      Do not clear GIF tile when checking number of frames #6455 [radarhere]
->      Support saving multiple MPO frames #6444 [radarhere]
->      Do not double quote Pillow version for setuptools >= 60 #6450 [radarhere]
->      Added ABGR BMP mask mode #6436 [radarhere]
->      Fixed PSDraw rectangle #6429 [radarhere]
->      Raise ValueError if PNG sRGB chunk is truncated #6431 [radarhere]
->      Handle missing Python executable in ImageShow on macOS #6416 [bryant1410, radarhere]
->
-> Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+  Updated with the same regexp as later oe-core update:
+  https://git.openembedded.org/openembedded-core/commit/?id=9f551d588693328e4d99d33be94f26684eafcaba
 
-Whats missing here are the dependency needs for kirkstone:
-harfbuzz to 4.4.1
-libtiff to 4.4.0
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ meta-oe/recipes-devtools/nodejs/nodejs_18.12.1.bb    |  2 +-
+ .../suitesparse/suitesparse_5.10.1.bb                | 12 ++++++------
+ meta-oe/recipes-kernel/spidev-test/spidev-test.bb    |  2 +-
+ meta-oe/recipes-kernel/usbip-tools/usbip-tools.bb    |  2 +-
+ 4 files changed, 9 insertions(+), 9 deletions(-)
 
-neither version exits in kirkstone.
-
-and it appears to be adding a lot of new features.  Per our stable 
-branch process, this update does not qualify to be included.
-
-BR,
-Armin
-> ---
->   .../{python3-pillow_9.2.0.bb => python3-pillow_9.3.0.bb}      | 4 ++--
->   1 file changed, 2 insertions(+), 2 deletions(-)
->   rename meta-python/recipes-devtools/python/{python3-pillow_9.2.0.bb => python3-pillow_9.3.0.bb} (86%)
->
-> diff --git a/meta-python/recipes-devtools/python/python3-pillow_9.2.0.bb b/meta-python/recipes-devtools/python/python3-pillow_9.3.0.bb
-> similarity index 86%
-> rename from meta-python/recipes-devtools/python/python3-pillow_9.2.0.bb
-> rename to meta-python/recipes-devtools/python/python3-pillow_9.3.0.bb
-> index 454d61a48..11f545160 100644
-> --- a/meta-python/recipes-devtools/python/python3-pillow_9.2.0.bb
-> +++ b/meta-python/recipes-devtools/python/python3-pillow_9.3.0.bb
-> @@ -5,7 +5,7 @@ HOMEPAGE = "https://pillow.readthedocs.io"
->   LICENSE = "MIT"
->   LIC_FILES_CHKSUM = "file://LICENSE;md5=ad081a0aede51e89f8da13333a8fb849"
->   
-> -SRC_URI = "git://github.com/python-pillow/Pillow.git;branch=9.2.x;protocol=https \
-> +SRC_URI = "git://github.com/python-pillow/Pillow.git;branch=main;protocol=https \
->              file://0001-support-cross-compiling.patch \
->              file://0001-explicitly-set-compile-options.patch \
->              "
-> @@ -39,4 +39,4 @@ RPROVIDES:${PN} += "python3-imaging"
->   
->   BBCLASSEXTEND = "native"
->   
-> -SRCREV = "58acec3312fb8671c9d84829197e1c8150085589"
-> +SRCREV = "d594f4cb8dc47fb0c69ae58d9fff86faae4515bd"
->
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#100894): https://lists.openembedded.org/g/openembedded-devel/message/100894
-> Mute This Topic: https://lists.openembedded.org/mt/96664649/3616698
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [akuster808@gmail.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
->
+diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_18.12.1.bb b/meta-oe/recipes-devtools/nodejs/nodejs_18.12.1.bb
+index e96913e563..e39569bba1 100644
+--- a/meta-oe/recipes-devtools/nodejs/nodejs_18.12.1.bb
++++ b/meta-oe/recipes-devtools/nodejs/nodejs_18.12.1.bb
+@@ -114,7 +114,7 @@ python do_create_v8_qemu_wrapper () {
+     on the host."""
+     qemu_libdirs = [d.expand('${STAGING_DIR_HOST}${libdir}'),
+                     d.expand('${STAGING_DIR_HOST}${base_libdir}')]
+-    qemu_cmd = qemu_wrapper_cmdline(d, d.getVar('STAGING_DIR_HOST', True),
++    qemu_cmd = qemu_wrapper_cmdline(d, d.getVar('STAGING_DIR_HOST'),
+                                     qemu_libdirs)
+     wrapper_path = d.expand('${B}/v8-qemu-wrapper.sh')
+     with open(wrapper_path, 'w') as wrapper_file:
+diff --git a/meta-oe/recipes-devtools/suitesparse/suitesparse_5.10.1.bb b/meta-oe/recipes-devtools/suitesparse/suitesparse_5.10.1.bb
+index 56cbfce20e..13e6fd066c 100644
+--- a/meta-oe/recipes-devtools/suitesparse/suitesparse_5.10.1.bb
++++ b/meta-oe/recipes-devtools/suitesparse/suitesparse_5.10.1.bb
+@@ -19,14 +19,14 @@ RPROVIDES:${PN} = "mongoose graphblas"
+ # the command line. To get around this problem, set these variables to only the
+ # program name and prepend the rest of the value onto the corresponding FLAGS
+ # variable.
+-CFLAGS:prepend := "${@" ".join(d.getVar('CC', True).split()[1:])} "
+-export CC := "${@d.getVar('CC', True).split()[0]}"
++CFLAGS:prepend := "${@" ".join(d.getVar('CC').split()[1:])} "
++export CC := "${@d.getVar('CC').split()[0]}"
+ 
+-CXXFLAGS:prepend := "${@" ".join(d.getVar('CXX', True).split()[1:])} "
+-export CXX := "${@d.getVar('CXX', True).split()[0]}"
++CXXFLAGS:prepend := "${@" ".join(d.getVar('CXX').split()[1:])} "
++export CXX := "${@d.getVar('CXX').split()[0]}"
+ 
+-LDFLAGS:prepend := "${@" ".join(d.getVar('LD', True).split()[1:])} "
+-export LD := "${@d.getVar('LD', True).split()[0]}"
++LDFLAGS:prepend := "${@" ".join(d.getVar('LD').split()[1:])} "
++export LD := "${@d.getVar('LD').split()[0]}"
+ 
+ export CMAKE_OPTIONS = " \
+     -DCMAKE_INSTALL_PREFIX=${D}${prefix} \
+diff --git a/meta-oe/recipes-kernel/spidev-test/spidev-test.bb b/meta-oe/recipes-kernel/spidev-test/spidev-test.bb
+index 81e8327032..2e8c5cbb8d 100644
+--- a/meta-oe/recipes-kernel/spidev-test/spidev-test.bb
++++ b/meta-oe/recipes-kernel/spidev-test/spidev-test.bb
+@@ -23,7 +23,7 @@ do_install() {
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
+ 
+ python do_package:prepend() {
+-    d.setVar('PKGV', d.getVar("KERNEL_VERSION", True).split("-")[0])
++    d.setVar('PKGV', d.getVar("KERNEL_VERSION").split("-")[0])
+ }
+ 
+ B = "${WORKDIR}/${BPN}-${PV}"
+diff --git a/meta-oe/recipes-kernel/usbip-tools/usbip-tools.bb b/meta-oe/recipes-kernel/usbip-tools/usbip-tools.bb
+index 47938969bb..e7e4ca50af 100644
+--- a/meta-oe/recipes-kernel/usbip-tools/usbip-tools.bb
++++ b/meta-oe/recipes-kernel/usbip-tools/usbip-tools.bb
+@@ -65,5 +65,5 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
+ # Even though the libusbip is set to version 0.0.1, set the package version to match kernel
+ # e.g. usbip-tools-5.14.21-r0.qemux86_64.rpm for qemu package using kernel 5.14.21
+ python do_package:prepend() {
+-    d.setVar('PKGV', d.getVar("KERNEL_VERSION", True).split("-")[0])
++    d.setVar('PKGV', d.getVar("KERNEL_VERSION").split("-")[0])
+ }
+\ No newline at end of file
+-- 
+2.39.1
 
 
