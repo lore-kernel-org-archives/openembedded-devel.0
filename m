@@ -1,146 +1,88 @@
-Return-Path: <Martin.Jansa@gmail.com>
+Return-Path: <david.bagonyi@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EFC8DC636D3
-	for <webhook@archiver.kernel.org>; Wed,  1 Feb 2023 15:51:02 +0000 (UTC)
-Received: from mail-wm1-f48.google.com (mail-wm1-f48.google.com [209.85.128.48])
- by mx.groups.io with SMTP id smtpd.web10.26875.1675266657841979489
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 18B39C636CD
+	for <webhook@archiver.kernel.org>; Wed,  1 Feb 2023 15:57:33 +0000 (UTC)
+Received: from mail-wm1-f49.google.com (mail-wm1-f49.google.com [209.85.128.49])
+ by mx.groups.io with SMTP id smtpd.web11.27281.1675267050856311425
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 01 Feb 2023 07:50:58 -0800
+ Wed, 01 Feb 2023 07:57:31 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=BfSuJ+lY;
- spf=pass (domain: gmail.com, ip: 209.85.128.48, mailfrom: martin.jansa@gmail.com)
-Received: by mail-wm1-f48.google.com with SMTP id q10-20020a1cf30a000000b003db0edfdb74so2628240wmq.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 01 Feb 2023 07:50:57 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=H6Cpwvz/;
+ spf=pass (domain: gmail.com, ip: 209.85.128.49, mailfrom: david.bagonyi@gmail.com)
+Received: by mail-wm1-f49.google.com with SMTP id iv8-20020a05600c548800b003db04a0a46bso2767688wmb.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 01 Feb 2023 07:57:30 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=E5K3zYUV7s7PmNJyadGkOi/NM+E+IX/HOs7/dmZkMWk=;
-        b=BfSuJ+lYrW0PdrfV0M5IEO1fMrDwOXCBta34Gne8i1lua6WsBYsub2m6nY99aP4Cky
-         7z+v96Y6z/JEHL5ZCrbHtqXDZB2mSBX7pRZbrCgz0vh/z/5AIWqsFjOQEHxNWxcKMDV5
-         QW3ZMRWZmaCkg6LIhsktTAoK2AnzqVk09t5cTtgbIl0yu5FMNstsuK5q+AE99ROKlhiG
-         l6iPnQje/0AyzdyOI6moa9Eho0toa4c+uxQk6Ej3DRFT7xCvVGecPFTsVhnWstc46qxv
-         WU/hpjhnRavku2janUQ08lWKXLNF4g5/11sarveHyb5WJrG9MPYtE4xF5P/wDlCNTXho
-         ZBnQ==
+        h=message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=lvMEymFeAZnLmofDLExqw8pGa4uxffudWHrIg6DzBh4=;
+        b=H6Cpwvz/of0OjjTv6mWsma/90C2iDC5IhSiV6C0miF+TI0KnQXe29/iHQDnHsKRP1p
+         WueGX+jFhed7B7UxTrbAfAW61FPESfEWJCxO2xEERcA2TPqrZ7TyTEdUR56YlPkDQVE+
+         +eswYyw+s4n3jPekXDLovoDiLJZYVcX3aB35VFgP1x9TmHl0TqxOyaVSljCHEBzdJ2LX
+         9QAfcOCmKgkgmL/4ExOAy6gdkH0NtFYDd03LbqKgIPWxQFD1PF5s+6qiwsydG3MOgMTm
+         EIuoFRMD2yP28WEK91bJdI1x+elak/So/9spyGjm8QkSUWTvzDfaOieAoeuloO4Qrw/J
+         hPsw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=E5K3zYUV7s7PmNJyadGkOi/NM+E+IX/HOs7/dmZkMWk=;
-        b=wrIXeVPxyiMRx+mxYG3ma4LwQIkt5qe1Mu19BtGRLDMc3+BZAwrNO+cMQQ0WOD2dRZ
-         5E7xcC9oneaPIykpzb5HxHOZbB7LE2tDajnDX7kS0eL4NCHg/fLXk3NEwkqxnb5OvtoY
-         sj+RfqY6K6TXuES/1NJ8BL9+U5qSpxtjvZv89atRdqjpYEmr/3GtXvj/ADlAYq8G5lLT
-         UFxxXfvOYdCa2c0B+Tnslr0zexa9jxCYJ7ZuvxlQ3VkAXhsaFmXwULryEWm4kLiY6bfx
-         PgKt8tjLvAfUu3AFTp6V9hQIFhwRMhz4qFNyG21OweST6l35WluzEg19WzknlPSDIyic
-         fqVw==
-X-Gm-Message-State: AO0yUKVYYFDoUS5xLdy8LA5NoGllaMWTPnrUjXo80O7nYzQIMTojS5EP
-	KNX/iqOfAEoDenC+i5Z9k7oS8yCCBa8=
-X-Google-Smtp-Source: AK7set+OR1UBeo0K++IQVVzGku8ivnRM+qxxj4mM/MAsVZn/ELZOycsbOCgjJsOWZQWEy5tZFdkW4A==
-X-Received: by 2002:a05:600c:a297:b0:3dc:42e7:f626 with SMTP id hu23-20020a05600ca29700b003dc42e7f626mr2546848wmb.26.1675266656140;
-        Wed, 01 Feb 2023 07:50:56 -0800 (PST)
-Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
-        by smtp.gmail.com with ESMTPSA id o21-20020a05600c379500b003dc4a47605fsm2099633wmr.8.2023.02.01.07.50.55
+        h=message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=lvMEymFeAZnLmofDLExqw8pGa4uxffudWHrIg6DzBh4=;
+        b=n1KPF1jdWnVSr9V+5QhAvEdlyD40Kf0RXsTUpcJWiJ4z3L1CZ0GR8hlBBeYyqpYLtT
+         A36FnRCNgPdkUdbQPhOxGCArIX6UFnRW9ZPcbc0IFNeIu6b9tsG6TXrl62R/IUZj1g3D
+         uIh2D0oIOwcax4k5xmtxODGwqgMSYEBzp4H+iM3LcUl7NssOtWqwkAeZZJpBDkPe0f61
+         RL7rqc+4iSR+bsO8t2nN0H0/fCJvJ259zGvbqd6t32VjVPDaz+BkX3s0HpVkajtDgaQx
+         z8tINb0iq4VGq81gdGMq5zDMJ9gLUIxRJipdbkYwh82eJeW4rJvPx0H4w/T5RZlla65z
+         KsKg==
+X-Gm-Message-State: AO0yUKUJHlXdlYeCEDHyUN6lChxBOarbFzOSSaKGyeuPOPcfaei121wU
+	lsYwle3bnafVSzGEsxCRf9iH+H0BnC8pYSsq
+X-Google-Smtp-Source: AK7set/MB3zYECqZMXtNxEeE9Y8plOd/StJFw4DwlP1NYQ4iQ2lY1Uh1MekLHvqA8SBiN+0gcnurjQ==
+X-Received: by 2002:a7b:c8ce:0:b0:3d9:ebf9:7004 with SMTP id f14-20020a7bc8ce000000b003d9ebf97004mr2540470wml.29.1675267048850;
+        Wed, 01 Feb 2023 07:57:28 -0800 (PST)
+Received: from ip-172-31-10-113.eu-west-1.compute.internal (ec2-52-211-148-236.eu-west-1.compute.amazonaws.com. [52.211.148.236])
+        by smtp.gmail.com with ESMTPSA id 5-20020a05600c028500b003d9de0c39fasm2108755wmk.36.2023.02.01.07.57.28
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 01 Feb 2023 07:50:55 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+        Wed, 01 Feb 2023 07:57:28 -0800 (PST)
+From: David Bagonyi <david.bagonyi@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Martin Jansa <Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH] meta: remove True option to getVar calls (again)
-Date: Wed,  1 Feb 2023 16:50:53 +0100
-Message-Id: <20230201155053.555325-1-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.39.1
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Cc: David Bagonyi <david.bagonyi@hivehome.com>
+Subject: [meta-oe][PATCH] concurrencykit: Make patch compatible with Bourne shell
+Date: Wed,  1 Feb 2023 15:55:37 +0000
+Message-Id: <20230201155537.26746-1-david.bagonyi@gmail.com>
+X-Mailer: git-send-email 2.17.1
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 01 Feb 2023 15:51:02 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100905
+ <openembedded-devel@lists.openembedded.org>; Wed, 01 Feb 2023 15:57:33 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100906
 
-* True is default since 2016 and most layers were already updated
-  not to pass this parameter where not necessary, e.g. oe-core was
-  updated couple times, first in:
-  https://git.openembedded.org/openembedded-core/commit/?id=7c552996597faaee2fbee185b250c0ee30ea3b5f
+From: David Bagonyi <david.bagonyi@hivehome.com>
 
-  Updated with the same regexp as later oe-core update:
-  https://git.openembedded.org/openembedded-core/commit/?id=9f551d588693328e4d99d33be94f26684eafcaba
+The use of `>&` assumes we are using a shell that supports this syntax.
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+In case of running this through `sh`, we get "Syntax error: Bad fd number"
 ---
- meta-oe/recipes-devtools/nodejs/nodejs_18.12.1.bb    |  2 +-
- .../suitesparse/suitesparse_5.10.1.bb                | 12 ++++++------
- meta-oe/recipes-kernel/spidev-test/spidev-test.bb    |  2 +-
- meta-oe/recipes-kernel/usbip-tools/usbip-tools.bb    |  2 +-
- 4 files changed, 9 insertions(+), 9 deletions(-)
+ ...configure-Fix-compoiler-detection-logic-for-cross-co.patch | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_18.12.1.bb b/meta-oe/recipes-devtools/nodejs/nodejs_18.12.1.bb
-index e96913e563..e39569bba1 100644
---- a/meta-oe/recipes-devtools/nodejs/nodejs_18.12.1.bb
-+++ b/meta-oe/recipes-devtools/nodejs/nodejs_18.12.1.bb
-@@ -114,7 +114,7 @@ python do_create_v8_qemu_wrapper () {
-     on the host."""
-     qemu_libdirs = [d.expand('${STAGING_DIR_HOST}${libdir}'),
-                     d.expand('${STAGING_DIR_HOST}${base_libdir}')]
--    qemu_cmd = qemu_wrapper_cmdline(d, d.getVar('STAGING_DIR_HOST', True),
-+    qemu_cmd = qemu_wrapper_cmdline(d, d.getVar('STAGING_DIR_HOST'),
-                                     qemu_libdirs)
-     wrapper_path = d.expand('${B}/v8-qemu-wrapper.sh')
-     with open(wrapper_path, 'w') as wrapper_file:
-diff --git a/meta-oe/recipes-devtools/suitesparse/suitesparse_5.10.1.bb b/meta-oe/recipes-devtools/suitesparse/suitesparse_5.10.1.bb
-index 56cbfce20e..13e6fd066c 100644
---- a/meta-oe/recipes-devtools/suitesparse/suitesparse_5.10.1.bb
-+++ b/meta-oe/recipes-devtools/suitesparse/suitesparse_5.10.1.bb
-@@ -19,14 +19,14 @@ RPROVIDES:${PN} = "mongoose graphblas"
- # the command line. To get around this problem, set these variables to only the
- # program name and prepend the rest of the value onto the corresponding FLAGS
- # variable.
--CFLAGS:prepend := "${@" ".join(d.getVar('CC', True).split()[1:])} "
--export CC := "${@d.getVar('CC', True).split()[0]}"
-+CFLAGS:prepend := "${@" ".join(d.getVar('CC').split()[1:])} "
-+export CC := "${@d.getVar('CC').split()[0]}"
- 
--CXXFLAGS:prepend := "${@" ".join(d.getVar('CXX', True).split()[1:])} "
--export CXX := "${@d.getVar('CXX', True).split()[0]}"
-+CXXFLAGS:prepend := "${@" ".join(d.getVar('CXX').split()[1:])} "
-+export CXX := "${@d.getVar('CXX').split()[0]}"
- 
--LDFLAGS:prepend := "${@" ".join(d.getVar('LD', True).split()[1:])} "
--export LD := "${@d.getVar('LD', True).split()[0]}"
-+LDFLAGS:prepend := "${@" ".join(d.getVar('LD').split()[1:])} "
-+export LD := "${@d.getVar('LD').split()[0]}"
- 
- export CMAKE_OPTIONS = " \
-     -DCMAKE_INSTALL_PREFIX=${D}${prefix} \
-diff --git a/meta-oe/recipes-kernel/spidev-test/spidev-test.bb b/meta-oe/recipes-kernel/spidev-test/spidev-test.bb
-index 81e8327032..2e8c5cbb8d 100644
---- a/meta-oe/recipes-kernel/spidev-test/spidev-test.bb
-+++ b/meta-oe/recipes-kernel/spidev-test/spidev-test.bb
-@@ -23,7 +23,7 @@ do_install() {
- PACKAGE_ARCH = "${MACHINE_ARCH}"
- 
- python do_package:prepend() {
--    d.setVar('PKGV', d.getVar("KERNEL_VERSION", True).split("-")[0])
-+    d.setVar('PKGV', d.getVar("KERNEL_VERSION").split("-")[0])
- }
- 
- B = "${WORKDIR}/${BPN}-${PV}"
-diff --git a/meta-oe/recipes-kernel/usbip-tools/usbip-tools.bb b/meta-oe/recipes-kernel/usbip-tools/usbip-tools.bb
-index 47938969bb..e7e4ca50af 100644
---- a/meta-oe/recipes-kernel/usbip-tools/usbip-tools.bb
-+++ b/meta-oe/recipes-kernel/usbip-tools/usbip-tools.bb
-@@ -65,5 +65,5 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
- # Even though the libusbip is set to version 0.0.1, set the package version to match kernel
- # e.g. usbip-tools-5.14.21-r0.qemux86_64.rpm for qemu package using kernel 5.14.21
- python do_package:prepend() {
--    d.setVar('PKGV', d.getVar("KERNEL_VERSION", True).split("-")[0])
-+    d.setVar('PKGV', d.getVar("KERNEL_VERSION").split("-")[0])
- }
-\ No newline at end of file
+diff --git a/meta-oe/recipes-devtools/concurrencykit/concurrencykit/0001-configure-Fix-compoiler-detection-logic-for-cross-co.patch b/meta-oe/recipes-devtools/concurrencykit/concurrencykit/0001-configure-Fix-compoiler-detection-logic-for-cross-co.patch
+index 6be024662..718f8c19f 100644
+--- a/meta-oe/recipes-devtools/concurrencykit/concurrencykit/0001-configure-Fix-compoiler-detection-logic-for-cross-co.patch
++++ b/meta-oe/recipes-devtools/concurrencykit/concurrencykit/0001-configure-Fix-compoiler-detection-logic-for-cross-co.patch
+@@ -35,9 +35,9 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
+ +  fi
+ +  assert "$CC" "not found"
+ +fi
+-+if `$CC --version | grep gcc >& /dev/null`; then
+++if `$CC --version | grep gcc > /dev/null 2>&1`; then
+ +  COMPILER=gcc
+-+elif `$CC --version | grep clang >& /dev/null`; then
+++elif `$CC --version | grep clang > /dev/null 2>&1`; then
+ +  COMPILER=clang
+ +else
+ +  COMPILER="not-found"
 -- 
-2.39.1
+2.17.1
 
 
