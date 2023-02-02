@@ -2,98 +2,77 @@ Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 738E3C05027
-	for <webhook@archiver.kernel.org>; Thu,  2 Feb 2023 00:00:12 +0000 (UTC)
-Received: from mailout07.t-online.de (mailout07.t-online.de [194.25.134.83])
- by mx.groups.io with SMTP id smtpd.web11.2616.1675296010063450163
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 61F1DC61DA4
+	for <webhook@archiver.kernel.org>; Thu,  2 Feb 2023 07:07:44 +0000 (UTC)
+Received: from mailout01.t-online.de (mailout01.t-online.de [194.25.134.80])
+ by mx.groups.io with SMTP id smtpd.web10.9344.1675321654492325942
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 01 Feb 2023 16:00:10 -0800
+ Wed, 01 Feb 2023 23:07:34 -0800
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=SPF record not found (domain: t-online.de, ip: 194.25.134.83, mailfrom: f_l_k@t-online.de)
-Received: from fwd84.dcpf.telekom.de (fwd84.aul.t-online.de [10.223.144.110])
-	by mailout07.t-online.de (Postfix) with SMTP id 65AB91CDF4
-	for <openembedded-devel@lists.openembedded.org>; Thu,  2 Feb 2023 01:00:01 +0100 (CET)
-Received: from flk-MS-7C91.fritz.box ([84.163.46.155]) by fwd84.t-online.de
+ dkim=missing; spf=none, err=SPF record not found (domain: t-online.de, ip: 194.25.134.80, mailfrom: f_l_k@t-online.de)
+Received: from fwd88.dcpf.telekom.de (fwd88.aul.t-online.de [10.223.144.114])
+	by mailout01.t-online.de (Postfix) with SMTP id 40CBAF91F
+	for <openembedded-devel@lists.openembedded.org>; Thu,  2 Feb 2023 08:06:10 +0100 (CET)
+Received: from flk-MS-7C91.fritz.box ([84.163.46.179]) by fwd88.t-online.de
 	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1pNN1E-3JgJ4z0; Thu, 2 Feb 2023 01:00:00 +0100
+	esmtp id 1pNTfc-1tP3cv0; Thu, 2 Feb 2023 08:06:08 +0100
 From: Markus Volk <f_l_k@t-online.de>
 To: openembedded-devel@lists.openembedded.org
 Cc: Markus Volk <f_l_k@t-online.de>
-Subject: [meta-networking][PATCHv5] system-config-printer: add recipe
-Date: Thu,  2 Feb 2023 00:59:45 +0100
-Message-Id: <20230201235945.1955001-1-f_l_k@t-online.de>
+Subject: [meta-oe][PATCH] rtkit: add recipe
+Date: Thu,  2 Feb 2023 08:05:54 +0100
+Message-Id: <20230202070554.1287801-1-f_l_k@t-online.de>
 X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1675296000-521BFA0B-F4332C4E/0/0 CLEAN NORMAL
-X-TOI-MSGID: 973632c2-4a93-4af3-9afc-30c4d5c11000
+X-TOI-EXPURGATEID: 150726::1675321568-70EA07D8-5F28BC09/0/0 CLEAN NORMAL
+X-TOI-MSGID: 50aea74b-a60b-4c48-8d9c-79959dc7a401
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 02 Feb 2023 00:00:12 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100910
+ <openembedded-devel@lists.openembedded.org>; Thu, 02 Feb 2023 07:07:44 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100911
 
-The OpenPrinting gui for cups configuration
-
-Signed-off-by: Markus Volk <f_l_k@t-online.de>
+rtkit is a runtime dependency for xdg-desktop-portal
 ---
- .../system-config-printer_1.5.18.bb           | 36 +++++++++++++++++++
- 1 file changed, 36 insertions(+)
- create mode 100644 meta-networking/dynamic-layers/meta-python/recipes-pr=
-inting/system-config-printer/system-config-printer_1.5.18.bb
+ meta-oe/recipes-support/rtkit/rtkit_0.13.bb | 23 +++++++++++++++++++++
+ 1 file changed, 23 insertions(+)
+ create mode 100644 meta-oe/recipes-support/rtkit/rtkit_0.13.bb
 
-diff --git a/meta-networking/dynamic-layers/meta-python/recipes-printing/=
-system-config-printer/system-config-printer_1.5.18.bb b/meta-networking/d=
-ynamic-layers/meta-python/recipes-printing/system-config-printer/system-c=
-onfig-printer_1.5.18.bb
+diff --git a/meta-oe/recipes-support/rtkit/rtkit_0.13.bb b/meta-oe/recipe=
+s-support/rtkit/rtkit_0.13.bb
 new file mode 100644
-index 000000000..e70edef27
+index 000000000..7ae992503
 --- /dev/null
-+++ b/meta-networking/dynamic-layers/meta-python/recipes-printing/system-=
-config-printer/system-config-printer_1.5.18.bb
-@@ -0,0 +1,36 @@
-+DESCRIPTION =3D "a graphical user interface that allows the user to chan=
-ge print settings"
-+LICENSE =3D "GPL-2.0-only"
-+LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Db234ee4d69f5fce4486a80fdaf4a4=
-263"
++++ b/meta-oe/recipes-support/rtkit/rtkit_0.13.bb
+@@ -0,0 +1,23 @@
++DESCRIPTION =3D "REALTIMEKIT Realtime Policy and Watchdog Daemon"
++LICENSE =3D "GPL-3.0-only & BSD-3-Clause"
++LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Da8e768468b658b3ed44971b53d4a6=
+716"
 +
-+SRC_URI =3D "git://github.com/OpenPrinting/system-config-printer.git;pro=
-tocol=3Dhttps;branch=3Dmaster"
++SRC_URI =3D "git://github.com/heftig/rtkit.git;protocol=3Dhttps;branch=3D=
+master"
 +
-+SRCREV =3D "895d3dec50c93bfd4f142bac9bfcc13051bf84cb"
++SRCREV =3D "b9169402fe5e82d20efb754509eb0b191f214599"
 +S =3D "${WORKDIR}/git"
 +
-+inherit autotools gettext pkgconfig python3native features_check
++inherit meson pkgconfig features_check useradd
 +
-+REQUIRED_DISTRO_FEATURES =3D "gobject-introspection-data"
++REQUIRED_DISTRO_FEATURES =3D "polkit"
 +
-+DEPENDS =3D "cups glib-2.0 libusb xmlto-native intltool-native desktop-f=
-ile-utils-native"
++DEPENDS =3D "dbus libcap polkit xxd-native"
 +
 +PACKAGECONFIG ?=3D "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}=
 "
 +PACKAGECONFIG[systemd] =3D ",,systemd"
 +
-+do_configure:prepend() {
-+    # This file is not provided if fetching from git but required for co=
-nfigure
-+    touch ${S}/ChangeLog
-+}
++USERADD_PACKAGES =3D "${PN}"
++USERADD_PARAM:${PN} =3D "--system --no-create-home --user-group --shell =
+/bin/nologin rtkit"
 +
 +FILES:${PN} +=3D "${libdir} ${datadir}"
 +
-+RDEPENDS:${PN} =3D " \
-+    dbus-x11 \
-+    gtk+3 \
-+    libnotify \
-+    python3-core \
-+    python3-dbus \
-+    python3-firewall \
-+    python3-pycups \
-+    python3-pycurl \
-+    python3-pygobject \
-+"
 --=20
 2.34.1
 
