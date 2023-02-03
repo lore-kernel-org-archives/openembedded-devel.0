@@ -1,129 +1,177 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B3378C636CC
-	for <webhook@archiver.kernel.org>; Fri,  3 Feb 2023 04:29:07 +0000 (UTC)
-Received: from mail-pj1-f41.google.com (mail-pj1-f41.google.com [209.85.216.41])
- by mx.groups.io with SMTP id smtpd.web10.3774.1675398538516345614
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DCB18C61DA4
+	for <webhook@archiver.kernel.org>; Fri,  3 Feb 2023 05:18:37 +0000 (UTC)
+Received: from mailout10.t-online.de (mailout10.t-online.de [194.25.134.21])
+ by mx.groups.io with SMTP id smtpd.web10.4406.1675401509446194260
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 02 Feb 2023 20:28:58 -0800
+ Thu, 02 Feb 2023 21:18:29 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=OZPHQSrR;
- spf=pass (domain: gmail.com, ip: 209.85.216.41, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f41.google.com with SMTP id nm12-20020a17090b19cc00b0022c2155cc0bso3837948pjb.4
-        for <openembedded-devel@lists.openembedded.org>; Thu, 02 Feb 2023 20:28:58 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=jFR5Q38lg3H7/VaFwME4JkmBdyv70/uwyEYUcGdvfyc=;
-        b=OZPHQSrRQCrsrxpN8nzTilgbg+yH/fiVvc+no9ZPyzSXvrOXKWT7Gy6aHiTIo/uzxj
-         osYICzcSmQb5z4hD+tmt5Zb0VadVgz/XY205XGNIVtpdQvdlCwpZQ3EYHdpuEu52+8ex
-         BCGU+FkXo8MTzii6FuNdNLKFiqmxucSOcT3gXjEuKYu9WGq8C3rY+s5ckT60bGUkaGlG
-         MbdIAbXmuNIkYIZtotiX9DHAcca5fIWVbY5TgomBTXFM0oLlgT2DlxExah3Zq+iOjB11
-         u3m3y4my4+LAe8LOaOFz9VAymrVKX7LVa1Felrt9kiEnFfaNIP0edV1dyJ/paafo6DV2
-         KLig==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=jFR5Q38lg3H7/VaFwME4JkmBdyv70/uwyEYUcGdvfyc=;
-        b=AyASEPrqZFAkTOMgAhP6LceiiFopegomcejNT9nL0CyVBTnsoFtp6FCNWXJi41OP49
-         Ig7jhZK+sfb/jHFQ1+XC4+bU6krdWxUJnYxxtjGv2roD6djdwgq4+I8cvg1vZI+usEgp
-         EOvbGuPsrlR8HxQnZQ2cLmy5sbgrg3xqqfhJl6ZyrUly6GMS0Bx+4WmjrH2SIZhJCKRq
-         ynv5Nt6RUVYpZ5Zo8bQaaB8wIHhpl0DdcwS4K+isc6/TusxCwAlbNKtkhMZLmva/+pFQ
-         zEHGjm3qJ07Zh/GYo4xFkqw7X8aJJcpW10zNXOQyMq8WX5Sx+TJA5NgC/OGeufqsZadT
-         xJPg==
-X-Gm-Message-State: AO0yUKX+ERndn0/SFBBgz6RfNe0VchoRfusQsowP+URMUU/GGIM9zIvq
-	yWLzmLkuxyhJTf65Ia6lKDg473Kuu96s6A==
-X-Google-Smtp-Source: AK7set/+R4eHqxpLimD9Vya5YXjKc7SzorudWoXdcsu1yvTQPJW++bEKp5qPL/VfphYVeKfBAFHT+w==
-X-Received: by 2002:a05:6a20:3d15:b0:be:8c7e:4dfc with SMTP id y21-20020a056a203d1500b000be8c7e4dfcmr10649139pzi.20.1675398537478;
-        Thu, 02 Feb 2023 20:28:57 -0800 (PST)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9181:1cf0::868f])
-        by smtp.gmail.com with ESMTPSA id ju1-20020a170903428100b001888cadf8f6sm506060plb.49.2023.02.02.20.28.56
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 02 Feb 2023 20:28:57 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
+ dkim=missing; spf=none, err=SPF record not found (domain: t-online.de, ip: 194.25.134.21, mailfrom: f_l_k@t-online.de)
+Received: from fwd87.dcpf.telekom.de (fwd87.aul.t-online.de [10.223.144.113])
+	by mailout10.t-online.de (Postfix) with SMTP id 440631D488
+	for <openembedded-devel@lists.openembedded.org>; Fri,  3 Feb 2023 06:18:27 +0100 (CET)
+Received: from flk-MS-7C91.fritz.box ([84.163.46.80]) by fwd87.t-online.de
+	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
+	esmtp id 1pNoSk-3RV6Ir0; Fri, 3 Feb 2023 06:18:14 +0100
+From: Markus Volk <f_l_k@t-online.de>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH] sysdig: Fix build with gcc13
-Date: Thu,  2 Feb 2023 20:28:55 -0800
-Message-Id: <20230203042855.1495234-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.39.1
+Cc: Markus Volk <f_l_k@t-online.de>
+Subject: [meta-multimedia][PATCH] pipewire: update 0.3.64 -> 0.3.65
+Date: Fri,  3 Feb 2023 06:18:08 +0100
+Message-Id: <20230203051808.3330960-1-f_l_k@t-online.de>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-TOI-EXPURGATEID: 150726::1675401494-9DA9D0AF-FD919DEF/0/0 CLEAN NORMAL
+X-TOI-MSGID: f63a0621-2d97-4411-9f8d-5a30a6bc8312
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 03 Feb 2023 04:29:07 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100917
+ <openembedded-devel@lists.openembedded.org>; Fri, 03 Feb 2023 05:18:37 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100918
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+This is a bugfix release that is API and ABI compatible with previous
+0.3.x releases.
+
+  - Add back the deprecated symbols but make sure a deprecated warning is
+    emitted for them. This fixes compilation issues in bindings.
+  - Fix an error in the AVX code that could cause crackling in filter-cha=
+in
+    when using the mixer.
+  - The convolver in filter-chain can now select an IR from a list of IRs
+    that best matches the current samplerate. Also resampling of the IR
+    has been improved.
+  - A new native module-combine-stream was added. You can use this to cre=
+ate
+    a 5.1 device from 3 stereo soundcards, for example, or direct the out=
+put
+    to multiple sinks at once.
+  - Support for Bluetooth MIDI was added. This requires a wireplumber
+    addition as well.
+  - An ALSA plugin rule was added to tweak the buffer settings in Davinci
+    Resolve so that it now runs with acceptable latency. (#1697)
+  - Support for compress offload was added using tinycompress. This allow=
+s
+    compressed formats to be decoded in hardware using ALSA on some devic=
+es.
+  - Many more buffixes and improvements.
+
+  - Add back the deprecated symbols but make sure a deprecated warning is
+    emitted for them. (#2952)
+  - Fix a regression when running older servers and newer clients (such a=
+s
+    flatpaks on older server) where the server would run clients too soon=
+,
+    causing crashes. (#2964)
+  - Ensure that environment variables override any config values.
+
+  - pw-cli has received some improvements in the output.
+  - pw-cat can now use ffmpeg to demux streams for compress offload.
+
+  - The convolver IR volume is now preserved after resampling.
+  - Adapter ports can now have a custom prefix.
+  - module-rt now clamps the realtime priority to the user allowed one if
+    it is within an acceptable range. Before it would fall back to RTKit
+    immediately.
+  - The module-echo-cancel can now have per stream channel layouts which
+    makes it possible to link to specific audio ports on a device. (#2939=
+)
+  - Fix an error in the AVX code that could cause crackling in filter-cha=
+in
+    when using the mixer. (#2965)
+  - The convolver in filter-chain can now select an IR from a list of IRs
+    that best matches the current sample-rate.
+  - module-pipe-* now better matches the pulseaudio properties. (#2973)
+  - A new combine-stream module was added to combine multiple sinks into
+    one sink. It is also possible to merge multiple sources into one.
+  - module-rtp-source now has match rules to select what SAP sessions
+    to stream from. There were also improvements to the buffering and
+    latency handling.
+  - module-rtp-sink now handles multicast loopback correctly.
+  - module-rtp-sink implements min-ptime and max-ptime to control the
+    send packet latency.
+
+  - A new modifier flag was added to the video format parser helper to
+    allow 0 (linear) as a valid modifier. (#2943)
+  - Params includes were reorganized to make it more scalable. Many compr=
+essed
+    audio formats were added.
+  - The alsa pcm plugin now handles invalid values from the driver
+    gracefully. (#2953)
+  - Fix some potential stuttering cause by wrong scaling and overflow
+    of the output buffers in audioconvert. (#2680)
+  - Debug output is now also sent to the log instead of stdout. (#2923)
+  - A debug context was added to debug macros to implement custom debug
+    handling. This is used to redirect the debug of pods to the debug log
+    instead of using some custom duplicated code.
+  - Fix some warnings for potentially undefined shifts in format
+    conversion.
+  - Support for compress offload was added using tinycompress. This is mo=
+stly
+    used on some embedded hardware where decoding of audio formats can be
+    done in hardware.
+
+  - Some fixes for LE audio were added.
+  - Support for Bluetooth MIDI was added. This requires a wireplumber
+    addition as well.
+  - Reply OK to empty commands.
+  - Improve compatibility with some devices that send stray \n such as
+    the Sennheiser HD 350BT. (#2991)
+
+  - Devices with unsupported formats (by the pulseaudio API) are now also
+    listed in the pulseaudio API (with invalid formats).
+  - The native module-combine-stream is used for module-combine-sink.
+
+  - Make jack.merge-monitor default to true to better match the jack1/2
+    behaviour. Add an exception for mixxx, which is more usable with
+    unmerged monitors. (#1760)
+
+  - The property handling in the ALSA plugin was improved. alsa.propertie=
+s
+    and alsa.rules can now be added to the config file.
+  - A rule was added to tweak the buffer settings in Davinci Resolve so t=
+hat
+    it can run with acceptable latency. (#1697)
+  - ALSA volume will now also use cubic volumes, like pulseaudio.
+  - The ALSA ctl plugin now also uses the client-rt.conf file.
+  - A new alsa.volume-method was added to configure cubic or linear volum=
+e.
+    This can be set per application using the rules.
+
+  - pipewiresrc will now advertize DMABUF support if the pipeline suports
+    this.
+  - pipewiresrc will now always be a live source unless told otherwise.
+
+Signed-off-by: Markus Volk <f_l_k@t-online.de>
 ---
- .../0001-Add-cstdint-for-uintXX_t-types.patch | 38 +++++++++++++++++++
- .../recipes-extended/sysdig/sysdig_0.28.0.bb  |  1 +
- 2 files changed, 39 insertions(+)
- create mode 100644 meta-oe/recipes-extended/sysdig/sysdig/0001-Add-cstdint-for-uintXX_t-types.patch
+ .../pipewire/{pipewire_0.3.64.bb =3D> pipewire_0.3.65.bb}         | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-multimedia/recipes-multimedia/pipewire/{pipewire_0.3.64.bb =3D=
+> pipewire_0.3.65.bb} (99%)
 
-diff --git a/meta-oe/recipes-extended/sysdig/sysdig/0001-Add-cstdint-for-uintXX_t-types.patch b/meta-oe/recipes-extended/sysdig/sysdig/0001-Add-cstdint-for-uintXX_t-types.patch
-new file mode 100644
-index 0000000000..e564958dad
---- /dev/null
-+++ b/meta-oe/recipes-extended/sysdig/sysdig/0001-Add-cstdint-for-uintXX_t-types.patch
-@@ -0,0 +1,38 @@
-+From 3d076ea588eb3c7f334133b4c31172a14beadf5b Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Thu, 2 Feb 2023 20:18:27 -0800
-+Subject: [PATCH] Add <cstdint> for uintXX_t types
-+
-+gcc 13 moved some includes around and as a result <cstdint> is no
-+longer transitively included [1]. Explicitly include it
-+for uintXX_t.
-+
-+[1] https://gcc.gnu.org/gcc-13/porting_to.html#header-dep-changes
-+
-+Upstream-Status: Submitted [https://github.com/falcosecurity/libs/pull/862]
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ userspace/libsinsp/filter/parser.h | 1 +
-+ userspace/libsinsp/filter_value.h  | 1 +
-+ 2 files changed, 2 insertions(+)
-+
-+--- a/userspace/libsinsp/filter/parser.h
-++++ b/userspace/libsinsp/filter/parser.h
-+@@ -18,6 +18,7 @@ limitations under the License.
-+ #pragma once
-+ 
-+ #include "ast.h"
-++#include <cstdint>
-+ 
-+ //
-+ // Context-free Grammar for Sinsp Filters
-+--- a/userspace/libsinsp/filter_value.h
-++++ b/userspace/libsinsp/filter_value.h
-+@@ -18,6 +18,7 @@ limitations under the License.
-+ #pragma once
-+ 
-+ #include <string.h>
-++#include <cstdint>
-+ #include <utility>
-+ 
-+ // Used for CO_IN/CO_PMATCH filterchecks using PT_CHARBUFs to allow
-diff --git a/meta-oe/recipes-extended/sysdig/sysdig_0.28.0.bb b/meta-oe/recipes-extended/sysdig/sysdig_0.28.0.bb
-index 4181da732f..92897cd3fc 100644
---- a/meta-oe/recipes-extended/sysdig/sysdig_0.28.0.bb
-+++ b/meta-oe/recipes-extended/sysdig/sysdig_0.28.0.bb
-@@ -24,6 +24,7 @@ RDEPENDS:${PN} = "bash"
- 
- SRC_URI = "git://github.com/draios/sysdig.git;branch=dev;protocol=https;name=sysdig \
-            git://github.com/falcosecurity/libs;protocol=https;branch=master;name=falco;subdir=git/falcosecurity-libs \
-+           file://0001-Add-cstdint-for-uintXX_t-types.patch;patchdir=./falcosecurity-libs \
-            file://0001-cmake-Pass-PROBE_NAME-via-CFLAGS.patch \
-           "
- SRCREV_sysdig = "4fb6288275f567f63515df0ff0a6518043ecfa9b"
--- 
-2.39.1
+diff --git a/meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.64.=
+bb b/meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.65.bb
+similarity index 99%
+rename from meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.64.b=
+b
+rename to meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.65.bb
+index f10b47262..bb31c998d 100644
+--- a/meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.64.bb
++++ b/meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.65.bb
+@@ -13,7 +13,7 @@ LIC_FILES_CHKSUM =3D " \
+=20
+ DEPENDS =3D "dbus ncurses"
+=20
+-SRCREV =3D "bba452695eb673461c5cf626eec57728991eadf7"
++SRCREV =3D "9558a5d5e0360d8af822431c76ee858a8c7495ac"
+ SRC_URI =3D "git://gitlab.freedesktop.org/pipewire/pipewire.git;branch=3D=
+master;protocol=3Dhttps"
+=20
+ S =3D "${WORKDIR}/git"
+--=20
+2.34.1
 
 
