@@ -1,146 +1,89 @@
-Return-Path: <philip@balister.org>
+Return-Path: <alex.kiernan@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 90912C61DA4
-	for <webhook@archiver.kernel.org>; Fri,  3 Feb 2023 08:10:18 +0000 (UTC)
-Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
- by mx.groups.io with SMTP id smtpd.web11.7311.1675150772536881186
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 52E81C636CC
+	for <webhook@archiver.kernel.org>; Fri,  3 Feb 2023 10:10:19 +0000 (UTC)
+Received: from mail-wr1-f54.google.com (mail-wr1-f54.google.com [209.85.221.54])
+ by mx.groups.io with SMTP id smtpd.web11.7451.1675419010023725481
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 30 Jan 2023 23:39:32 -0800
+ Fri, 03 Feb 2023 02:10:10 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=pps06212021 header.b=CBMjS0Kj;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=1395c48469=manojsingh.saun@windriver.com)
-Received: from pps.filterd (m0250811.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 30V6d1Ae004859
-	for <openembedded-devel@lists.openembedded.org>; Tue, 31 Jan 2023 07:39:31 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com; h=from : to : cc :
- subject : date : message-id : mime-version : content-transfer-encoding :
- content-type; s=PPS06212021;
- bh=Se1WjwMtLZ2f/sDCubEQZQkoiAtfSN69UhlqaY/VIcE=;
- b=CBMjS0KjqAYwFwMqF4oZIzpvb0GsUia41umvpcMthZXkS9WLmpJTuVpF1ULDchv0e9Tl
- SganWjEpHMtHw+J1kI+tmn3Po54THnLsekWiHlxSLdVcPSyzAhoRvu+qAAQ5Kls/RV2e
- 0bpacMQMQ1wqQFbRMaQUXcG+F6ZB2SRQtZINN8s5Ms/u7rISNMoFzwYNKzeRopM3OcM6
- kgo361qIjstAeilS+lCWNTm+UfBV+tSpIHH1ViVeHomU+0y8iJWoviX9aCMSIsLOfhuT
- uElOE8/X+gQObS/06GARvaIBRda+qkSkpQIXZspiPn3LSCS33Xo9K4jDmPQYW5cR//h9 MA== 
-Received: from ala-exchng01.corp.ad.wrs.com (unknown-82-252.windriver.com [147.11.82.252])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3ncrx3b4p8-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Tue, 31 Jan 2023 07:39:31 +0000
-Received: from ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.17; Mon, 30 Jan 2023 23:39:30 -0800
-Received: from blr-linux-engg1.wrs.com (147.11.136.210) by
- ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server id
- 15.1.2507.17 via Frontend Transport; Mon, 30 Jan 2023 23:39:28 -0800
-From: "Manoj Saun" <manojsingh.saun@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-CC: <archana.polampalli@windriver.com>, <hari.gpillai@windriver.com>,
-        "Manoj
- Saun" <manojsingh.saun@windriver.com>
-Subject: [oe][meta-oe][PATCH 1/1] postresql: fix ptest failure about sysviews
-Date: Tue, 31 Jan 2023 07:39:24 +0000
-Message-ID: <20230131073924.1080567-1-manojsingh.saun@windriver.com>
-X-Mailer: git-send-email 2.34.1
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=RTwtPkXH;
+ spf=pass (domain: gmail.com, ip: 209.85.221.54, mailfrom: alex.kiernan@gmail.com)
+Received: by mail-wr1-f54.google.com with SMTP id m14so4129632wrg.13
+        for <openembedded-devel@lists.openembedded.org>; Fri, 03 Feb 2023 02:10:09 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=XhglzpBhu/61tfCGcZy/nD2R7znv21c/ouVbunKISI0=;
+        b=RTwtPkXHXJTJgHVpR6BfxW/cUsmrGTRNyTYSo0Gk1Pip1ouqeo5QkOyVk4MhkCZwIh
+         uGrOOd1T4R6WbVDGbSy4ESZ1vZtTmQd45v5utwh9CJcW+TzpFshWa6yl4g4v/Zb6YceZ
+         hzB8lPk7uqsnWSsTECydXMYMvvWA804EOcQksQd5HTVNauVVnDS6/Y7G19l8xBogbDOx
+         ucdXBWnURy5yOMZw0eDYaaZ3AngXOu0PGj71AMTQ3rYr1EwVYEpwwDOFLLpUrLeUq81w
+         oPbf1MJhKTJWngxR6PvV1IjaDkL+H5eiHmgJIgCnz1SLa8tPvEIU0w1go0wT3OEnBeqP
+         q2Iw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=XhglzpBhu/61tfCGcZy/nD2R7znv21c/ouVbunKISI0=;
+        b=pjUBc5z/kLkHalVHywFatxvjKGFpiPjM7mIkb6ibhnvGZoGG1D8Ll0pX8TUULVeKYn
+         VntK11adSWWi146qLsf1oEKtNtqD+NslSJg3YbZS5v4Ud2QbVJPW4SHBj3b0BH/pDpG7
+         GDPSvXb8GdYyb6TkoXd+caE5NIrdJeIgXCumlV2FESJzYePui4Q9elJMM1F0Kh1HY6PJ
+         4M2tPgn94FzpjvNyPoV0NC2ZWEZQywXgi6tnenN8yIc9iZLe83965q4HDKmJbtZIjUEA
+         yPjJDJ+Zl+oYV9lBj0mqK8OgbLSIYwojuFi4A8IP9qS4aBvfnThdLk7efrLPUPVILjao
+         hTYQ==
+X-Gm-Message-State: AO0yUKVikI6gg2AWbe5xIP8c8ooPbp51iZqsoB2WSu+HuCIyU7QhcPzV
+	Boge6ZduF1GlnDc6Bf2u0Ql4zJ/aOfQ=
+X-Google-Smtp-Source: AK7set+r2iBDRTbk/Iv4UD/ao/ACMywi6dQnn2ap0Aw22JGkiV/6ycaiU/3C9qbQrqOkyGG9nniC5g==
+X-Received: by 2002:a5d:6c6c:0:b0:2c3:bbf0:1ffc with SMTP id r12-20020a5d6c6c000000b002c3bbf01ffcmr7335172wrz.61.1675419008083;
+        Fri, 03 Feb 2023 02:10:08 -0800 (PST)
+Received: from localhost.localdomain (cust18-dsl93-89-130.idnet.net. [93.89.130.18])
+        by smtp.gmail.com with ESMTPSA id s14-20020adfa28e000000b002c3be49ef94sm1639833wra.52.2023.02.03.02.10.07
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 03 Feb 2023 02:10:07 -0800 (PST)
+From: Alex Kiernan <alex.kiernan@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Alex Kiernan <alex.kiernan@gmail.com>
+Subject: [meta-networking][PATCH] mdns: Upgrade 1790.60.25 -> 1790.80.10
+Date: Fri,  3 Feb 2023 10:10:02 +0000
+Message-Id: <20230203101002.25424-1-alex.kiernan@gmail.com>
+X-Mailer: git-send-email 2.39.0
 MIME-Version: 1.0
-X-Proofpoint-GUID: m6yjL57XJhO2CwUPTkqiCpESQHlGln6J
-X-Proofpoint-ORIG-GUID: m6yjL57XJhO2CwUPTkqiCpESQHlGln6J
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.219,Aquarius:18.0.930,Hydra:6.0.562,FMLib:17.11.122.1
- definitions=2023-01-31_02,2023-01-30_01,2022-06-22_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 priorityscore=1501 mlxscore=0
- lowpriorityscore=0 suspectscore=0 phishscore=0 impostorscore=0
- adultscore=0 malwarescore=0 clxscore=1011 mlxlogscore=789 spamscore=0
- bulkscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2212070000 definitions=main-2301310067
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 03 Feb 2023 08:10:18 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100921
+ <openembedded-devel@lists.openembedded.org>; Fri, 03 Feb 2023 10:10:19 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100923
 
-In postgresql sysview ptest are failing due to hidden debug info in pg_config table.
-The information is hidden due to existing patch 0001-config_info.c-not-expose-build-info.patch
-So for passing the test we need to reduce the row count in the sysviews test.
-
-Upstream-Status: Inappropriate [oe specific]
-
-Signed-off-by: Manoj Saun <manojsingh.saun@windriver.com>
+Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
 ---
- ...sql-fix-ptest-failure-about-sysviews.patch | 43 +++++++++++++++++++
- .../recipes-dbs/postgresql/postgresql_14.5.bb |  1 +
- 2 files changed, 44 insertions(+)
- create mode 100644 meta-oe/recipes-dbs/postgresql/files/0001-postresql-fix-ptest-failure-about-sysviews.patch
 
-diff --git a/meta-oe/recipes-dbs/postgresql/files/0001-postresql-fix-ptest-failure-about-sysviews.patch b/meta-oe/recipes-dbs/postgresql/files/0001-postresql-fix-ptest-failure-about-sysviews.patch
-new file mode 100644
-index 000000000..224732daf
---- /dev/null
-+++ b/meta-oe/recipes-dbs/postgresql/files/0001-postresql-fix-ptest-failure-about-sysviews.patch
-@@ -0,0 +1,43 @@
-+From c68f036b0f80812a806719dc218dc222eb24259f Mon Sep 17 00:00:00 2001
-+From: Manoj Saun <manojsingh.saun@windriver.com>
-+Date: Tue, 3 Jan 2023 05:45:35 +0000
-+Subject: [PATCH] postresql: fix ptest failure about sysviews
-+
-+The patch "0001-config_info.c-not-expose-build-info.patch" hides the debug info
-+in pg_config table which reduces the count of rows from pg_config and leads to
-+sysviews test failure.
-+To fix it we need to reduce the count of parameters in sysviews test.
-+
-+Upstream-Status: Inappropriate [oe specific]
-+
-+Signed-off-by: Manoj Saun <manojsingh.saun@windriver.com>
-+---
-+ src/test/regress/expected/sysviews.out | 2 +-
-+ src/test/regress/sql/sysviews.sql      | 2 +-
-+ 2 files changed, 2 insertions(+), 2 deletions(-)
-+
-+diff --git a/src/test/regress/expected/sysviews.out b/src/test/regress/expected/sysviews.out
-+index 001c6e7eb9..82568989d8 100644
-+--- a/src/test/regress/expected/sysviews.out
-++++ b/src/test/regress/expected/sysviews.out
-+@@ -29,7 +29,7 @@ select name, ident, parent, level, total_bytes >= free_bytes
-+ (1 row)
-+ 
-+ -- At introduction, pg_config had 23 entries; it may grow
-+-select count(*) > 20 as ok from pg_config;
-++select count(*) > 13 as ok from pg_config;
-+  ok 
-+ ----
-+  t
-+diff --git a/src/test/regress/sql/sysviews.sql b/src/test/regress/sql/sysviews.sql
-+index 351e469c77..84c113e572 100644
-+--- a/src/test/regress/sql/sysviews.sql
-++++ b/src/test/regress/sql/sysviews.sql
-+@@ -18,7 +18,7 @@ select name, ident, parent, level, total_bytes >= free_bytes
-+   from pg_backend_memory_contexts where level = 0;
-+ 
-+ -- At introduction, pg_config had 23 entries; it may grow
-+-select count(*) > 20 as ok from pg_config;
-++select count(*) > 13 as ok from pg_config;
-+ 
-+ -- We expect no cursors in this test; see also portals.sql
-+ select count(*) = 0 as ok from pg_cursors;
-+-- 
-+2.34.1
-+
-diff --git a/meta-oe/recipes-dbs/postgresql/postgresql_14.5.bb b/meta-oe/recipes-dbs/postgresql/postgresql_14.5.bb
-index 1551d3405..9c69b4656 100644
---- a/meta-oe/recipes-dbs/postgresql/postgresql_14.5.bb
-+++ b/meta-oe/recipes-dbs/postgresql/postgresql_14.5.bb
-@@ -9,6 +9,7 @@ SRC_URI += "\
-    file://0001-configure.ac-bypass-autoconf-2.69-version-check.patch \
-    file://remove_duplicate.patch \
-    file://0001-config_info.c-not-expose-build-info.patch \
-+   file://0001-postresql-fix-ptest-failure-about-sysviews.patch \
- "
+ .../mdns/{mdns_1790.60.25.bb => mdns_1790.80.10.bb}             | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-networking/recipes-protocols/mdns/{mdns_1790.60.25.bb => mdns_1790.80.10.bb} (99%)
+
+diff --git a/meta-networking/recipes-protocols/mdns/mdns_1790.60.25.bb b/meta-networking/recipes-protocols/mdns/mdns_1790.80.10.bb
+similarity index 99%
+rename from meta-networking/recipes-protocols/mdns/mdns_1790.60.25.bb
+rename to meta-networking/recipes-protocols/mdns/mdns_1790.80.10.bb
+index 96eb4e50c74d..612d343c88cf 100644
+--- a/meta-networking/recipes-protocols/mdns/mdns_1790.60.25.bb
++++ b/meta-networking/recipes-protocols/mdns/mdns_1790.80.10.bb
+@@ -23,7 +23,7 @@ SRC_URI = "git://github.com/apple-oss-distributions/mDNSResponder;protocol=https
+            file://0008-Handle-errors-from-socket-calls.patch \
+            file://mdns.service \
+            "
+-SRCREV = "e48e3a58b763a0d7b76a14f7f309e24d7502e796"
++SRCREV = "8769ab51605e465425d33d757f602ce5905ca639"
  
- SRC_URI[sha256sum] = "d4f72cb5fb857c9a9f75ec8cf091a1771272802f2178f0b2e65b7b6ff64f4a30"
+ # We install a stub Makefile in the top directory so that the various checks
+ # in base.bbclass pass their tests for a Makefile, this ensures (that amongst
 -- 
-2.34.1
+2.39.0
 
 
