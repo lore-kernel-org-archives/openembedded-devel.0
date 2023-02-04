@@ -2,257 +2,373 @@ Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 287EAC636CC
-	for <webhook@archiver.kernel.org>; Sat,  4 Feb 2023 17:03:32 +0000 (UTC)
-Received: from mail-oa1-f53.google.com (mail-oa1-f53.google.com [209.85.160.53])
- by mx.groups.io with SMTP id smtpd.web11.10464.1675530206191183590
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 59804C61DA4
+	for <webhook@archiver.kernel.org>; Sat,  4 Feb 2023 17:46:02 +0000 (UTC)
+Received: from mail-ot1-f41.google.com (mail-ot1-f41.google.com [209.85.210.41])
+ by mx.groups.io with SMTP id smtpd.web11.11424.1675532753040636432
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 04 Feb 2023 09:03:26 -0800
+ Sat, 04 Feb 2023 09:45:53 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=o6Oi8R5L;
- spf=pass (domain: gmail.com, ip: 209.85.160.53, mailfrom: akuster808@gmail.com)
-Received: by mail-oa1-f53.google.com with SMTP id 586e51a60fabf-1636eae256cso10411994fac.0
-        for <openembedded-devel@lists.openembedded.org>; Sat, 04 Feb 2023 09:03:26 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=BRPb4Faz;
+ spf=pass (domain: gmail.com, ip: 209.85.210.41, mailfrom: akuster808@gmail.com)
+Received: by mail-ot1-f41.google.com with SMTP id e12-20020a0568301e4c00b0068bc93e7e34so2238436otj.4
+        for <openembedded-devel@lists.openembedded.org>; Sat, 04 Feb 2023 09:45:52 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=content-transfer-encoding:in-reply-to:from:references:cc:to
+        h=content-transfer-encoding:in-reply-to:from:references:to
          :content-language:subject:user-agent:mime-version:date:message-id
          :from:to:cc:subject:date:message-id:reply-to;
-        bh=fQwh9lp5DR0IxrHfbJfbBzNA9lCmL6/TdgRSsps52X4=;
-        b=o6Oi8R5Lehfw0a4yaQMP0fUs1ZO8fA/iw5OfYt9fCfGGpg67Ifb25othcLCPKL/rXw
-         iiCvdl/ajxs2XxyG6QOUe5v4nhmksXJ0+p7y7MSogvmCuHrlCBNJQ8206xD97fUrAYXu
-         UZXNIl6E5WQd1lNte4/ojcS8mZ8PlesIwMxL85FyJxdo2ToujXBEe/CTlu3HfyW0ag5v
-         VfbWpnAAOAE8UcZG5o/Qr2xAZqLDUImFI6M+iUsKX0+hsMPd8SY28GDUBqarRDK7Wlic
-         5cAOvKhWnlwU7bumsPSo5lJBj6PpF1wKS0UsJcuT4g3CnB+55mA2sxzM3nLo/ZhnzKdX
-         /JIw==
+        bh=UM8r2zFqJiK1Q3EMzSb7ojWH3tUu/+OhvB8fR/TwrVw=;
+        b=BRPb4Faz9h2fcEWzcKGmtRy+Mcv2k5fHk0gUjj4Y9k+f2qxLANd5Q1y/3OQMIGHutX
+         0ACH61OAaMZojtf0VvL4KnXJYhKt0S6rFfMhWOFc5tErV6QXUbGwSf5oAGVQTKF7FgqG
+         VOhi0PqoFdLZiC6EZXGwjduTjfnGX77NpeaoStjgB6oaWACO/KhuDYWbF40EpFE5qLCT
+         RI38+90gCnZrH3zmF18O9ON8niwsiEkzJ4dOKFrnlMWpR3Ca80jhDyDwpy2LRIUh6RW3
+         3KiNrNxl4zx1oSB1nSgStI+mldiBsKRTfRdOllpOXr/xhF8dLQD/W8bum+/IQEVynqRO
+         AuwQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=content-transfer-encoding:in-reply-to:from:references:cc:to
+        h=content-transfer-encoding:in-reply-to:from:references:to
          :content-language:subject:user-agent:mime-version:date:message-id
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=fQwh9lp5DR0IxrHfbJfbBzNA9lCmL6/TdgRSsps52X4=;
-        b=CedJM8t/EpdBl4klO1RKi+Xc/EMTlE2p+LfugGMYlpEpIZZ9dAxGACoxUleSjYX5Gd
-         JzsmS8z+aNhQJKpBFPnWM9sZ6QEl1h0eV/mbZnXyMJLpkiCkoafNc2SD/YBt1kS2j5Os
-         6Ae2WxjCJbK02hOHw/9f4XPG+i2ilgulFr/xOab7DZc4CeQDUBYCErSu4coGLe0MruPj
-         6yJTFE/V0IfqphhHdt21E0O9LNw/vM84GPRsZfaDXLgLlbuCleCIqeif3fInaVpbkLt9
-         Ct+iapLyf/DV6q0VeZc0MZP36ZM6nDYUSFr0gYfUI3wwTaICRZgW52m1jYIoHogiMi5r
-         JEKA==
-X-Gm-Message-State: AO0yUKVrnT0ltZnAaqSujbpLPU5cXf8cdomg2xYPlIVNP3KSSTXsuLmt
-	yIECjglqqjndYdYVBqMG8Cc=
-X-Google-Smtp-Source: AK7set+EOt69N22m9VMUJh/02ThdLtfm5I/2SvkUFRF4z0q4VHJabSvGRq5phx1z5k7VM8WWADRLuw==
-X-Received: by 2002:a05:6871:b23:b0:163:4947:6a28 with SMTP id fq35-20020a0568710b2300b0016349476a28mr4174238oab.58.1675530205298;
-        Sat, 04 Feb 2023 09:03:25 -0800 (PST)
-Received: from ?IPV6:2600:1700:9190:ba10:f9c0:6c7:9951:7042? ([2600:1700:9190:ba10:f9c0:6c7:9951:7042])
-        by smtp.gmail.com with ESMTPSA id cy41-20020a056870b6a900b0010c727a3c79sm1988665oab.26.2023.02.04.09.03.23
+        bh=UM8r2zFqJiK1Q3EMzSb7ojWH3tUu/+OhvB8fR/TwrVw=;
+        b=rJQhe7t2fWjPCGgWaLnymdJES30WN8XJnKAq5M3hoDczTPOqg6pwT663Z7tM+moH0F
+         f1dcLdELtjj2J2/KB1scT4DHVd8ANykHoZbfHr0EmOulKEReEQvmeDwWLmveWlylS5AT
+         cKozKt2Fn6NrxDXJbHnotLJLIZQsAlrRHvHbQHRw8eZnoObnSBJ24gDygGv3qRF9bV59
+         G09vsrqJbq2okwb5b0Z2bvRUadg/Tslbd2QMKPY5/NyVvB7fwNt/JYB4DSRROmyjL91m
+         sS8ldKCet0UWWT7raUgwPMg6R4GaXKszzLUkhyhqEOzxD7QOdpLMSutKDs53TOnvi/1Y
+         ++Jg==
+X-Gm-Message-State: AO0yUKX0BYuo0HVtjExw7wpkIgvx7dRjgVl3mHrsRT8/d4Hldzn/iFZr
+	BwGgfKVDCnbtIv9JpGs+9EI=
+X-Google-Smtp-Source: AK7set/FWt8Fw/0b1uNN4giD8YcMeBWBbu8ZGYRWrQAfhgfeC2TTA8my0pH+hOT8c/u7LpMsosdMBA==
+X-Received: by 2002:a05:6830:4782:b0:68d:6a22:396c with SMTP id df2-20020a056830478200b0068d6a22396cmr2429941otb.3.1675532752140;
+        Sat, 04 Feb 2023 09:45:52 -0800 (PST)
+Received: from ?IPV6:2600:1700:9190:ba10:fd94:48a2:26c4:6f81? ([2600:1700:9190:ba10:fd94:48a2:26c4:6f81])
+        by smtp.gmail.com with ESMTPSA id y4-20020a056830208400b0068bd20cf07dsm2564561otq.48.2023.02.04.09.45.51
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Sat, 04 Feb 2023 09:03:24 -0800 (PST)
-Message-ID: <01c6c3a0-685f-4571-521e-082901cb7bc0@gmail.com>
-Date: Sat, 4 Feb 2023 12:03:23 -0500
+        Sat, 04 Feb 2023 09:45:51 -0800 (PST)
+Message-ID: <e7ca5239-44d6-1601-0b5a-805d50882173@gmail.com>
+Date: Sat, 4 Feb 2023 12:45:50 -0500
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.4.2
-Subject: Re: [oe] [meta-oe][kirkstone][PATCH] nodejs-oe-cache-native: initial
- checkin
+Subject: Re: [oe] [meta-python][kirkstone][PATCH 3/6] python3-pillow: upgrade
+ 9.2.0 -> 9.3.0
 Content-Language: en-US
-To: Martin Jansa <martin.jansa@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org,
- Enrico Scholz <enrico.scholz@sigma-chemnitz.de>,
- Khem Raj <raj.khem@gmail.com>
-References: <20230202125924.3771885-1-akuster808@gmail.com>
- <CA+chaQdFAQ8VH-FqcyKgTnoU4GJsXH+Ae_UM7eiibAcN7M3Vaw@mail.gmail.com>
+To: Randy MacLeod <randy.macleod@windriver.com>,
+ openembedded-devel@lists.openembedded.org
+References: <20230131230851.2785067-1-Randy.MacLeod@windriver.com>
+ <20230131230851.2785067-3-Randy.MacLeod@windriver.com>
+ <06197dd2-46e8-ffba-c703-681cee51b14c@gmail.com>
+ <c698b344-1b87-fa9a-59fc-692167fb6cd5@windriver.com>
 From: akuster808 <akuster808@gmail.com>
-In-Reply-To: <CA+chaQdFAQ8VH-FqcyKgTnoU4GJsXH+Ae_UM7eiibAcN7M3Vaw@mail.gmail.com>
+In-Reply-To: <c698b344-1b87-fa9a-59fc-692167fb6cd5@windriver.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 04 Feb 2023 17:03:32 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100929
+ <openembedded-devel@lists.openembedded.org>; Sat, 04 Feb 2023 17:46:02 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100930
 
 
 
-On 2/2/23 8:05 AM, Martin Jansa wrote:
-> How is this different from 
-> https://git.openembedded.org/meta-openembedded/commit/?h=kirkstone&id=035d9c61e81b32cb62706cfdbfae08b1bac7ae88 
-> <https://git.openembedded.org/meta-openembedded/commit/?h=kirkstone&id=035d9c61e81b32cb62706cfdbfae08b1bac7ae88> 
-> ?
+On 2/3/23 1:37 PM, Randy MacLeod wrote:
+> On 2023-02-01 08:35, akuster808 wrote:
+>> Hello Randy,
+>>
+>> On 1/31/23 6:08 PM, Randy MacLeod wrote:
+>>> From: Wang Mingyu <wangmy@fujitsu.com>
+>>>
+>>> Changelog:
+>>> =========
+>>>
+>>>      Limit SAMPLESPERPIXEL to avoid runtime DOS #6700 [wiredfool]
+>>>      Initialize libtiff buffer when saving #6699 [radarhere]
+>>>      Inline fname2char to fix memory leak #6329 [nulano]
+>>>      Fix memory leaks related to text features #6330 [nulano]
+>>>      Use double quotes for version check on old CPython on Windows 
+>>> #6695 [hugovk]
+>>>      Remove backup implementation of Round for Windows platforms 
+>>> #6693 [cgohlke]
+>>>      Fixed set_variation_by_name offset #6445 [radarhere]
+>>>      Fix malloc in _imagingft.c:font_setvaraxes #6690 [cgohlke]
+>>>      Release Python GIL when converting images using matrix 
+>>> operations #6418 [hmaarrfk]
+>>>      Added ExifTags enums #6630 [radarhere]
+>>>      Do not modify previous frame when calculating delta in PNG 
+>>> #6683 [radarhere]
+>>>      Added support for reading BMP images with RLE4 compression 
+>>> #6674 [npjg, radarhere]
+>>>      Decode JPEG compressed BLP1 data in original mode #6678 
+>>> [radarhere]
+>>>      Added GPS TIFF tag info #6661 [radarhere]
+>>>      Added conversion between RGB/RGBA/RGBX and LAB #6647 [radarhere]
+>>>      Do not attempt normalization if mode is already normal #6644 
+>>> [radarhere]
+>>>      Fixed seeking to an L frame in a GIF #6576 [radarhere]
+>>>      Consider all frames when selecting mode for PNG save_all #6610 
+>>> [radarhere]
+>>>      Don't reassign crc on ChunkStream close #6627 [wiredfool, 
+>>> radarhere]
+>>>      Raise a warning if NumPy failed to raise an error during 
+>>> conversion #6594 [radarhere]
+>>>      Show all frames in ImageShow #6611 [radarhere]
+>>>      Allow FLI palette chunk to not be first #6626 [radarhere]
+>>>      If first GIF frame has transparency for RGB_ALWAYS loading 
+>>> strategy, use RGBA mode #6592 [radarhere]
+>>>      Round box position to integer when pasting embedded color #6517 
+>>> [radarhere, nulano]
+>>>      Removed EXIF prefix when saving WebP #6582 [radarhere]
+>>>      Pad IM palette to 768 bytes when saving #6579 [radarhere]
+>>>      Added DDS BC6H reading #6449 [ShadelessFox, REDxEYE, radarhere]
+>>>      Added support for opening WhiteIsZero 16-bit integer TIFF 
+>>> images #6642 [JayWiz, radarhere]
+>>>      Raise an error when allocating translucent color to RGB palette 
+>>> #6654 [jsbueno, radarhere]
+>>>      Added reading of TIFF child images #6569 [radarhere]
+>>>      Improved ImageOps palette handling #6596 [PososikTeam, radarhere]
+>>>      Defer parsing of palette into colors #6567 [radarhere]
+>>>      Apply transparency to P images in ImageTk.PhotoImage #6559 
+>>> [radarhere]
+>>>      Use rounding in ImageOps contain() and pad() #6522 
+>>> [bibinhashley, radarhere]
+>>>      Fixed GIF remapping to palette with duplicate entries #6548 
+>>> [radarhere]
+>>>      Allow remap_palette() to return an image with less than 256 
+>>> palette entries #6543 [radarhere]
+>>>      Corrected BMP and TGA palette size when saving #6500 [radarhere]
+>>>      Do not call load() before draft() in Image.thumbnail #6539 
+>>> [radarhere]
+>>>      Copy palette when converting from P to PA #6497 [radarhere]
+>>>      Allow RGB and RGBA values for PA image putpixel #6504 [radarhere]
+>>>      Removed support for tkinter in PyPy before Python 3.6 #6551 
+>>> [nulano]
+>>>      Do not use CCITTFaxDecode filter if libtiff is not available 
+>>> #6518 [radarhere]
+>>>      Fallback to not using mmap if buffer is not large enough #6510 
+>>> [radarhere]
+>>>      Fixed writing bytes as ASCII tag #6493 [radarhere]
+>>>      Open 1 bit EPS in mode 1 #6499 [radarhere]
+>>>      Removed support for tkinter before Python 1.5.2 #6549 [radarhere]
+>>>      Allow default ImageDraw font to be set #6484 [radarhere, hugovk]
+>>>      Save 1 mode PDF using CCITTFaxDecode filter #6470 [radarhere]
+>>>      Added support for RGBA PSD images #6481 [radarhere]
+>>>      Parse orientation from XMP tag contents #6463 [bigcat88, 
+>>> radarhere]
+>>>      Added support for reading ATI1/ATI2 (BC4/BC5) DDS images #6457 
+>>> [REDxEYE, radarhere]
+>>>      Do not clear GIF tile when checking number of frames #6455 
+>>> [radarhere]
+>>>      Support saving multiple MPO frames #6444 [radarhere]
+>>>      Do not double quote Pillow version for setuptools >= 60 #6450 
+>>> [radarhere]
+>>>      Added ABGR BMP mask mode #6436 [radarhere]
+>>>      Fixed PSDraw rectangle #6429 [radarhere]
+>>>      Raise ValueError if PNG sRGB chunk is truncated #6431 [radarhere]
+>>>      Handle missing Python executable in ImageShow on macOS #6416 
+>>> [bryant1410, radarhere]
+>>>
+>>> Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+>>> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+>>
+>> Whats missing here are the dependency needs for kirkstone:
+>> harfbuzz to 4.4.1
+>> libtiff to 4.4.0
+>
+> Hi Armin,
+>
+> Thanks for the comments, I think an update could make sense but really 
+> I'm after CVE fixes so I won't argue.
+> A CVE patch  was posted for dunfell and it's a one-liner so I'll take 
+> that for kirkstone and send a patch.
+>
+>
+> If you'd like to help me understand your concerns, since I haven't 
+> worked with python modules much,
+> you could answer the questions below but they aren't relevant now.
+>
+>
+> Why do you think we need those versions? I don't see them called out 
+> in the logs above or
+>
+> in any release notes for pillow and the tests work...
+>
+> Harfbuzz is mentioned as being needed for libraqm
+>
 
-its not.. that is weird, git allowed it to apply.
+Looking at their git repo: 
+https://github.com/python-pillow/Pillow/releases, under 9.30 there is a 
+section on Dependencies:
 
-I drop it. Thanks,
+They noted this:
 
+
+    Dependencies
+
+  * Updated harfbuzz to 5.3.1 #6669
+    <https://github.com/python-pillow/Pillow/pull/6669> [@radarhere
+    <https://github.com/radarhere>]
+  * Updated zlib to 1.2.13 #6664
+    <https://github.com/python-pillow/Pillow/pull/6664> [@radarhere
+    <https://github.com/radarhere>]
+  * Updated harfbuzz to 5.3.0 #6651
+    <https://github.com/python-pillow/Pillow/pull/6651> [@radarhere
+    <https://github.com/radarhere>]
+  * Update github-actions #6616
+    <https://github.com/python-pillow/Pillow/pull/6616> [@renovate
+    <https://github.com/renovate>]
+  * Updated Ghostscript to 10.0.0 #6609
+    <https://github.com/python-pillow/Pillow/pull/6609> [@radarhere
+    <https://github.com/radarhere>]
+  * Fix Renovate config #6599
+    <https://github.com/python-pillow/Pillow/pull/6599> [@hugovk
+    <https://github.com/hugovk>]
+  * Configure Renovate #6564
+    <https://github.com/python-pillow/Pillow/pull/6564> [@renovate
+    <https://github.com/renovate>]
+  * Updated harfbuzz to 5.2.0 #6591
+    <https://github.com/python-pillow/Pillow/pull/6591> [@radarhere
+    <https://github.com/radarhere>]
+  * [pre-commit.ci] pre-commit autoupdate #6560
+    <https://github.com/python-pillow/Pillow/pull/6560> [@pre-commit-ci
+    <https://github.com/pre-commit-ci>]
+  * Updated libimagequant to 4.0.4 #6535
+    <https://github.com/python-pillow/Pillow/pull/6535> [@radarhere
+    <https://github.com/radarhere>]
+  * Updated libimagequant to 4.0.2 #6523
+    <https://github.com/python-pillow/Pillow/pull/6523> [@radarhere
+    <https://github.com/radarhere>]
+  * Updated libwebp to 1.2.4 #6483
+    <https://github.com/python-pillow/Pillow/pull/6483> [@radarhere
+    <https://github.com/radarhere>]
+  * [pre-commit.ci] pre-commit autoupdate #6472
+    <https://github.com/python-pillow/Pillow/pull/6472> [@pre-commit-ci
+    <https://github.com/pre-commit-ci>]
+  * Updated harfbuzz to 5.1.0 #6466
+    <https://github.com/python-pillow/Pillow/pull/6466> [@radarhere
+    <https://github.com/radarhere>]
+  * Updated libimagequant to 4.0.1 #6451
+    <https://github.com/python-pillow/Pillow/pull/6451> [@radarhere
+    <https://github.com/radarhere>]
+  * Updated libwebp to 1.2.3 #6442
+    <https://github.com/python-pillow/Pillow/pull/6442> [@radarhere
+    <https://github.com/radarhere>]
+
+
+I was just repeating what they said.
+
+Also based on 
+https://pillow.readthedocs.io/en/stable/releasenotes/9.3.0.html, there 
+are API additions.
+
+Those two bits of information does prompt me to question why and push back.
+
+
+
+
+> https://pillow.readthedocs.io/en/latest/installation.html#external-libraries
+>
+> but there's no recipe for libraqm yet and so it's not a requirement it 
+> seems:
+>
+> b/pillow$ grep Requiring 
+> tmp-glibc/work/core2-64-oe-linux/python3-pillow/9.4.0-r0/temp/log.do_compile
+> Requiring zlib
+> Requiring jpeg
+> Requiring tiff
+> Requiring freetype
+> Requiring lcms
+> Requiring jpeg2000
+>
+>>
+>> neither version exists in kirkstone.
+>>
+>> and it appears to be adding a lot of new features.
+>
+> Yeah, IMO it's a reasonable update because of the semantic versioning 
+> approach
+> followed by pillow, specifically:
+>
+> https://pillow.readthedocs.io/en/stable/releasenotes/versioning.html#versioning
+>
+>  - MINOR version when you add functionality in a backwards compatible 
+> manner,
+>
+
+Ah, so it is.
+>
+> but you're the maintainer so I'll send a patch next week.
+>
+
+I appreciate the additional information.  Thanks for your persistence.
+
+Where things get trick is "New Features" is under the "*Unacceptable:*". 
+New Features that break backward compatibility who be a no, but new 
+feature that are backward compatible should be fine and that is how I am 
+interpreting this.
+
+I plan on taking your patch series.
+
+BR,
 Armin
 >
-> On Thu, Feb 2, 2023 at 1:59 PM Armin Kuster <akuster808@gmail.com> wrote:
->
->     From: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
->
->     This implements an 'npm cache add' like functionality but allows to
->     specify the key of the data and sets metadata which are required to
->     find the data.
->
->     It is used to cache information as done during 'npm install'.
->
->     Keyformat and metadata are nodejs version specific.
->
->     Signed-off-by: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
->     Signed-off-by: Khem Raj <raj.khem@gmail.com>
->     (cherry picked from commit 035d9c61e81b32cb62706cfdbfae08b1bac7ae88)
->     Signed-off-by: Armin Kuster <akuster808@gmail.com>
->     ---
->      .../nodejs/nodejs-oe-cache-16.14/oe-npm-cache | 77
->     +++++++++++++++++++
->      .../nodejs/nodejs-oe-cache-native_16.14.bb
->     <http://nodejs-oe-cache-native_16.14.bb>   | 21 +++++
->      2 files changed, 98 insertions(+)
->      create mode 100755
->     meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-16.14/oe-npm-cache
->      create mode 100644
->     meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-native_16.14.bb
->     <http://nodejs-oe-cache-native_16.14.bb>
->
->     diff --git
->     a/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-16.14/oe-npm-cache
->     b/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-16.14/oe-npm-cache
->     new file mode 100755
->     index 0000000000..f596207648
->     --- /dev/null
->     +++
->     b/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-16.14/oe-npm-cache
->     @@ -0,0 +1,77 @@
->     +#!/usr/bin/env node
->     +
->     +/// Usage: oe-npm-cache <cache-dir> <type> <key> <file-name>
->     +///    <type> ... meta - metainformation about package
->     +///               tgz  - tarball
->     +
->     +const process = require("node:process");
->     +
->     +module.paths.unshift("@@libdir@@/node_modules/npm/node_modules");
->     +
->     +const cacache = require('cacache')
->     +const fs = require('fs')
->     +
->     +// argv[0] is 'node', argv[1] is this script
->     +const cache_dir = process.argv[2]
->     +const type      = process.argv[3]
->     +const key       = process.argv[4]
->     +const file      = process.argv[5]
->     +
->     +const data = fs.readFileSync(file)
->     +
->     +// metadata content is highly nodejs dependent; when cache
->     entries are not
->     +// found, place debug statements in
->     'make-fetch-happen/lib/cache/policy.js'
->     +// (CachePolicy::satisfies())
->     +const xlate = {
->     +    'meta': {
->     +       'key_prefix': 'make-fetch-happen:request-cache:',
->     +       'metadata': function() {
->     +           return {
->     +               time: Date.now(),
->     +               url:  key,
->     +               reqHeaders: {
->     +                   'accept':
->     'application/vnd.npm.install-v1+json; q=1.0, application/json;
->     q=0.8, */*',
->     +               },
->     +               resHeaders: {
->     +                   "content-type": "application/json",
->     +                   "status": 200,
->     +               },
->     +               options: {
->     +                   compress: true,
->     +               }
->     +           };
->     +       },
->     +    },
->     +
->     +    'tgz': {
->     +       'key_prefix': 'make-fetch-happen:request-cache:',
->     +       'metadata': function() {
->     +           return {
->     +               time: Date.now(),
->     +               url:  key,
->     +               reqHeaders: {
->     +                   'accept': '*/*',
->     +               },
->     +               resHeaders: {
->     +                   "content-type": "application/octet-stream",
->     +                   "status": 200,
->     +               },
->     +               options: {
->     +                   compress: true,
->     +               },
->     +           };
->     +       },
->     +    },
->     +};
->     +
->     +const info = xlate[type];
->     +let opts = {}
->     +
->     +if (info.metadata) {
->     +    opts['metadata'] = info.metadata();
->     +}
->     +
->     +cacache.put(cache_dir, info.key_prefix + key, data, opts)
->     +    .then(integrity => {
->     +       console.log(`Saved content of ${key} (${file}).`);
->     +})
->     diff --git
->     a/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-native_16.14.bb
->     <http://nodejs-oe-cache-native_16.14.bb>
->     b/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-native_16.14.bb
->     <http://nodejs-oe-cache-native_16.14.bb>
->     new file mode 100644
->     index 0000000000..a61dd5018f
->     --- /dev/null
->     +++
->     b/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-native_16.14.bb
->     <http://nodejs-oe-cache-native_16.14.bb>
->     @@ -0,0 +1,21 @@
->     +DESCRIPTION = "OE helper for manipulating npm cache"
->     +LICENSE = "Apache-2.0"
->     +LIC_FILES_CHKSUM =
->     "file://${COMMON_LICENSE_DIR}/Apache-2.0;md5=89aea4e17d99a7cacdbeed46a0096b10"
->     +
->     +SRC_URI = "\
->     +    file://oe-npm-cache \
->     +"
->     +
->     +inherit native
->     +
->     +B = "${WORKDIR}/build"
->     +
->     +do_configure() {
->     +    sed -e 's!@@libdir@@!${libdir}!g' < '${WORKDIR}/oe-npm-cache'
->     > '${B}/oe-npm-cache'
->     +}
->     +
->     +do_install() {
->     +    install -D -p -m 0755 ${B}/oe-npm-cache
->     ${D}${bindir}/oe-npm-cache
->     +}
->     +
->     +RDEPENDS:${PN} = "nodejs-native"
->     -- 
->     2.25.1
+> ../Randy
 >
 >
->     -=-=-=-=-=-=-=-=-=-=-=-
->     Links: You receive all messages sent to this group.
->     View/Reply Online (#100913):
->     https://lists.openembedded.org/g/openembedded-devel/message/100913
->     Mute This Topic: https://lists.openembedded.org/mt/96698965/3617156
->     Group Owner: openembedded-devel+owner@lists.openembedded.org
->     <mailto:openembedded-devel%2Bowner@lists.openembedded.org>
->     Unsubscribe:
->     https://lists.openembedded.org/g/openembedded-devel/unsub
->     [Martin.Jansa@gmail.com]
->     -=-=-=-=-=-=-=-=-=-=-=-
+>>   Per our stable branch process, this update does not qualify to be 
+>> included.
+>>
+>> BR,
+>> Armin
+>>> ---
+>>>   .../{python3-pillow_9.2.0.bb => python3-pillow_9.3.0.bb}      | 4 
+>>> ++--
+>>>   1 file changed, 2 insertions(+), 2 deletions(-)
+>>>   rename 
+>>> meta-python/recipes-devtools/python/{python3-pillow_9.2.0.bb => 
+>>> python3-pillow_9.3.0.bb} (86%)
+>>>
+>>> diff --git 
+>>> a/meta-python/recipes-devtools/python/python3-pillow_9.2.0.bb 
+>>> b/meta-python/recipes-devtools/python/python3-pillow_9.3.0.bb
+>>> similarity index 86%
+>>> rename from meta-python/recipes-devtools/python/python3-pillow_9.2.0.bb
+>>> rename to meta-python/recipes-devtools/python/python3-pillow_9.3.0.bb
+>>> index 454d61a48..11f545160 100644
+>>> --- a/meta-python/recipes-devtools/python/python3-pillow_9.2.0.bb
+>>> +++ b/meta-python/recipes-devtools/python/python3-pillow_9.3.0.bb
+>>> @@ -5,7 +5,7 @@ HOMEPAGE = "https://pillow.readthedocs.io"
+>>>   LICENSE = "MIT"
+>>>   LIC_FILES_CHKSUM = 
+>>> "file://LICENSE;md5=ad081a0aede51e89f8da13333a8fb849"
+>>>   -SRC_URI = 
+>>> "git://github.com/python-pillow/Pillow.git;branch=9.2.x;protocol=https 
+>>> \
+>>> +SRC_URI = 
+>>> "git://github.com/python-pillow/Pillow.git;branch=main;protocol=https \
+>>> file://0001-support-cross-compiling.patch \
+>>> file://0001-explicitly-set-compile-options.patch \
+>>>              "
+>>> @@ -39,4 +39,4 @@ RPROVIDES:${PN} += "python3-imaging"
+>>>     BBCLASSEXTEND = "native"
+>>>   -SRCREV = "58acec3312fb8671c9d84829197e1c8150085589"
+>>> +SRCREV = "d594f4cb8dc47fb0c69ae58d9fff86faae4515bd"
+>>>
+>>> -=-=-=-=-=-=-=-=-=-=-=-
+>>> Links: You receive all messages sent to this group.
+>>> View/Reply Online (#100894): 
+>>> https://lists.openembedded.org/g/openembedded-devel/message/100894
+>>> Mute This Topic: https://lists.openembedded.org/mt/96664649/3616698
+>>> Group Owner: openembedded-devel+owner@lists.openembedded.org
+>>> Unsubscribe: 
+>>> https://lists.openembedded.org/g/openembedded-devel/unsub 
+>>> [akuster808@gmail.com]
+>>> -=-=-=-=-=-=-=-=-=-=-=-
+>>>
+>>
 >
+> -- 
+> # Randy MacLeod
+> # Wind River Linux
 
 
