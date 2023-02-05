@@ -1,321 +1,186 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <robert.joslyn@redrectangle.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5BA51C636CC
-	for <webhook@archiver.kernel.org>; Sun,  5 Feb 2023 00:59:34 +0000 (UTC)
-Received: from mail-pl1-f171.google.com (mail-pl1-f171.google.com [209.85.214.171])
- by mx.groups.io with SMTP id smtpd.web10.20548.1675558766967969695
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 02835C636CC
+	for <webhook@archiver.kernel.org>; Sun,  5 Feb 2023 17:34:49 +0000 (UTC)
+Received: from relay10.mail.gandi.net (relay10.mail.gandi.net [217.70.178.230])
+ by mx.groups.io with SMTP id smtpd.web11.33780.1675618479365637020
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 04 Feb 2023 16:59:27 -0800
+ Sun, 05 Feb 2023 09:34:39 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=ZwPTmMUF;
- spf=pass (domain: gmail.com, ip: 209.85.214.171, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f171.google.com with SMTP id e19so939488plc.9
-        for <openembedded-devel@lists.openembedded.org>; Sat, 04 Feb 2023 16:59:26 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=5vJVQFhFJv33ojtyqUFe97Gvj23m6ihuNie+7LNis8A=;
-        b=ZwPTmMUFOlUEx5yDu5eflBw75K6/GB06PFAUDvsPraJOvpWCyl61yJpBN4ZCtEaGld
-         3ErS4ehn8PFMAE2qoWel6xBOXIpu2wgqQWv9aRiID6ilOZWu20YtYsFmQzFlB42CzMKv
-         YWZn6BgKscPlnhhrnzff8Pd7dhZjArHWCHoLMKRTEgiLgW+tjMw5GEawvh+xkeRgICbg
-         Cmes7qcclNCehYfRUvHfP8MOqXXRqmnrScK3xqvVRCghyMCwqJpLZh0tM8YNu+RM0h3M
-         58a+fd4A4oFI0iFRN93e5XNOAlg8aMRi3fSnzdR2VI1Dqs8weNpQeseHajxs9AAEoiMG
-         j8OA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=5vJVQFhFJv33ojtyqUFe97Gvj23m6ihuNie+7LNis8A=;
-        b=t0ekYy5iEfOpVFFUiwjJvJVhhMANXZCXVF24Pj04CoXNHhp16Fsd5YVWLj5QVXzpPI
-         YrXdGscczpN9ddRC7BB5ANRVv0wv9fH9P4F0nPoByjV6zl8Sz+DfMb+S6QU+e4fQaWa4
-         e9eKpxp4juIkbMTNZ2tU+v5byWrua8A1wakpoODo4LY8KVUuYZj2RueKyO/C25/40U0V
-         wI//rEcGMx8klpiTSh5fyvXu4islFbS1xbWjdbolp8QI660A3sXmW3gYwUxwk1ik9s8r
-         UufK8y9JT0QCE9rPHppxPJYrzzoykgmqtq+qNv64I0yjrCWutDVjnQrQjhzIqW9W9BTi
-         PLvg==
-X-Gm-Message-State: AO0yUKV47Jcv1cVa5jV2jxijODUaqr9x5UEr//aAHUFH5Ch6tcf9PD29
-	6LWkuXL3M2kbgSswMYm5xTGLYTyHddU=
-X-Google-Smtp-Source: AK7set9a7kU/bER0+AWuq5b4FpmpsMWkjoCu8KczuL26j+fkd+KoBPZWYNS0qT2K/snshxI1XKttBg==
-X-Received: by 2002:a17:902:c40f:b0:191:7d3:7fdd with SMTP id k15-20020a170902c40f00b0019107d37fddmr9292762plk.60.1675558765969;
-        Sat, 04 Feb 2023 16:59:25 -0800 (PST)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9181:1cf0::868f])
-        by smtp.gmail.com with ESMTPSA id k9-20020a170902ba8900b00198e4f48425sm3335842pls.6.2023.02.04.16.59.25
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 04 Feb 2023 16:59:25 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
+ dkim=pass header.i=@redrectangle.org header.s=gm1 header.b=HK3iD0yk;
+ spf=none, err=permanent DNS error (domain: redrectangle.org, ip: 217.70.178.230, mailfrom: robert.joslyn@redrectangle.org)
+Received: (Authenticated sender: robert.joslyn@redrectangle.org)
+	by mail.gandi.net (Postfix) with ESMTPSA id 85B32240002;
+	Sun,  5 Feb 2023 17:34:35 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redrectangle.org;
+	s=gm1; t=1675618477;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding;
+	bh=Z+So+nNDJ5CK8C3wFnW5cPlsCjxTis6GkoVUstubL+o=;
+	b=HK3iD0ykTNlqXcBB7mRbbmhBajYoE5hsu/PpTDMdzJmDW779Lk8qJ08Q/3nnZXckpu2gHq
+	RNNl71B4hHq9XznuYb1aK0UzYv97+whlrnaVhlTA07dwj2uOcC9+F15+r/z3rXUQooaIjP
+	gc3BCJxyeEZhEXV3MSomIfJ2s9pifrAdjbiWYKjKjXdVHb/rEJZZ3dP8x2AjRnrHrLgfTt
+	BqQcJAYgEPxjM6eWTrdOZhldodANeAbux3PKc5SNox7anDd0EdrJcIMCPkXGeheQcluRni
+	eUNsGHUlK/g3dwPQ0p5cbVZYqdylHq0Ii5vD5A5brY4aqmyyAGiqnsBQ4mi1ew==
+From: Robert Joslyn <robert.joslyn@redrectangle.org>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH] minicoredumper: Upgrade to 2.0.2 release
-Date: Sat,  4 Feb 2023 16:59:23 -0800
-Message-Id: <20230205005923.2559620-1-raj.khem@gmail.com>
+Cc: Robert Joslyn <robert.joslyn@redrectangle.org>
+Subject: [meta-java][PATCH] temurin-jdk-17-bin/temurin-jre-17-bin: Add recipes
+Date: Sun,  5 Feb 2023 09:34:10 -0800
+Message-Id: <20230205173410.2327109-1-robert.joslyn@redrectangle.org>
 X-Mailer: git-send-email 2.39.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 05 Feb 2023 00:59:34 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100933
+ <openembedded-devel@lists.openembedded.org>; Sun, 05 Feb 2023 17:34:48 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100934
 
-Drop patches already upstreamed.
-Add patch to fix tests with clang compiler
+Add recipes for the Adoptium Temurin JDK/JRE binaries. These recipes
+support arm, aarch64, ppc64le, and x86-64.
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Robert Joslyn <robert.joslyn@redrectangle.org>
 ---
- ...-retry-elf-parsing-as-long-as-needed.patch | 128 ------------------
- ...emo-Use-optnone-attribute-with-clang.patch |  37 +++++
- ...mutexattr_setrobust_np-with-pthread_.patch |  33 -----
- ...umper_2.0.1.bb => minicoredumper_2.0.2.bb} |   7 +-
- 4 files changed, 39 insertions(+), 166 deletions(-)
- delete mode 100644 meta-oe/recipes-kernel/minicoredumper/files/0001-minicoredumper-retry-elf-parsing-as-long-as-needed.patch
- create mode 100644 meta-oe/recipes-kernel/minicoredumper/files/0001-minicoredumper_demo-Use-optnone-attribute-with-clang.patch
- delete mode 100644 meta-oe/recipes-kernel/minicoredumper/files/0001-replace-pthread_mutexattr_setrobust_np-with-pthread_.patch
- rename meta-oe/recipes-kernel/minicoredumper/{minicoredumper_2.0.1.bb => minicoredumper_2.0.2.bb} (88%)
+ .../temurin/temurin-jdk-17-bin_17.0.6+10.bb   | 25 ++++++++
+ .../temurin/temurin-jre-17-bin_17.0.6+10.bb   | 23 +++++++
+ recipes-core/temurin/temurin.inc              | 62 +++++++++++++++++++
+ 3 files changed, 110 insertions(+)
+ create mode 100644 recipes-core/temurin/temurin-jdk-17-bin_17.0.6+10.bb
+ create mode 100644 recipes-core/temurin/temurin-jre-17-bin_17.0.6+10.bb
+ create mode 100644 recipes-core/temurin/temurin.inc
 
-diff --git a/meta-oe/recipes-kernel/minicoredumper/files/0001-minicoredumper-retry-elf-parsing-as-long-as-needed.patch b/meta-oe/recipes-kernel/minicoredumper/files/0001-minicoredumper-retry-elf-parsing-as-long-as-needed.patch
-deleted file mode 100644
-index 8d5b8b6cbb..0000000000
---- a/meta-oe/recipes-kernel/minicoredumper/files/0001-minicoredumper-retry-elf-parsing-as-long-as-needed.patch
-+++ /dev/null
-@@ -1,128 +0,0 @@
--From 7a8c6a06c86e133e4346b1dc66483bd8d0d3c716 Mon Sep 17 00:00:00 2001
--From: John Ogness <john.ogness@linutronix.de>
--Date: Tue, 24 Aug 2021 21:10:43 +0200
--Subject: [PATCH] minicoredumper: retry elf parsing as long as needed
--
--As was reported in github issue #2 ("maximum number of tries
--insufficient, in rare cases, for elf parse"), the number of retries
--for parsing a process may be insufficient. Rather than setting an
--upper limit on the maximum number of retries, track the number of
--headers seen. As long as the number of seen headers is greater than
--the previous try, try again.
--
--In order to avoid introducing any new issues, preserve the behavior
--of retrying at least 10 times, even if no new headers are seen.
--
--Reported-by: github.com/ssajal-wr
--Signed-off-by: John Ogness <john.ogness@linutronix.de>
--
--Upstream-Status: Backport [7a8c6a06c86e133e4346b1dc66483bd8d0d3c716]
--
--Signed-off-by: Sakib Sajal <sakib.sajal@windriver.com>
-----
-- src/minicoredumper/corestripper.c | 30 +++++++++++++++++++++++-------
-- 1 file changed, 23 insertions(+), 7 deletions(-)
--
--diff --git a/src/minicoredumper/corestripper.c b/src/minicoredumper/corestripper.c
--index d96d1df..c96b350 100644
----- a/src/minicoredumper/corestripper.c
--+++ b/src/minicoredumper/corestripper.c
--@@ -761,7 +761,7 @@ static int init_log(struct dump_info *di)
-- typedef int elf_parse_cb(struct dump_info *di, Elf *elf, GElf_Phdr *phdr);
-- 
-- static int do_elf_ph_parse(struct dump_info *di, GElf_Phdr *type,
---			   elf_parse_cb *callback)
--+			   elf_parse_cb *callback, size_t *phnum_found)
-- {
-- 	GElf_Ehdr ehdr_mem;
-- 	GElf_Ehdr *ehdr;
--@@ -770,6 +770,9 @@ static int do_elf_ph_parse(struct dump_info *di, GElf_Phdr *type,
-- 	size_t phnum;
-- 	size_t cnt;
-- 
--+	if (phnum_found)
--+		*phnum_found = 0;
--+
-- 	/* start from beginning of core */
-- 	if (lseek64(di->elf_fd, 0, SEEK_SET) == -1) {
-- 		info("lseek failed: %s", strerror(errno));
--@@ -809,6 +812,9 @@ static int do_elf_ph_parse(struct dump_info *di, GElf_Phdr *type,
-- 		goto out;
-- 	}
-- 
--+	if (phnum_found)
--+		*phnum_found = phnum;
--+
-- 	for (cnt = 0; cnt < phnum; cnt++) {
-- 		GElf_Phdr phdr_mem;
-- 		GElf_Phdr *phdr;
--@@ -891,7 +897,7 @@ static int vma_cb(struct dump_info *di, Elf *elf, GElf_Phdr *phdr)
-- /*
--  * Tries to parse the found ELF headers and reads all vmas from it.
--  */
---static int parse_vma_info(struct dump_info *di)
--+static int parse_vma_info(struct dump_info *di, size_t *phnum_found)
-- {
-- 	unsigned long min_off = ULONG_MAX;
-- 	unsigned long max_len = 0;
--@@ -911,7 +917,7 @@ static int parse_vma_info(struct dump_info *di)
-- 	memset(&type, 0, sizeof(type));
-- 	type.p_type = PT_LOAD;
-- 	type.p_flags = PF_R;
---	if (do_elf_ph_parse(di, &type, vma_cb) != 0)
--+	if (do_elf_ph_parse(di, &type, vma_cb, phnum_found) != 0)
-- 		return -1;
-- 
-- 	for (v = di->vma; v; v = v->next) {
--@@ -1614,8 +1620,10 @@ int add_core_data(struct dump_info *di, off64_t dest_offset, size_t len,
--  */
-- static int init_src_core(struct dump_info *di, int src)
-- {
--+	size_t last_phnum = 0;
-- 	int tries = 0;
-- 	int ret = -1;
--+	size_t phnum;
-- 	size_t len;
-- 	char *buf;
-- 	long pos;
--@@ -1642,7 +1650,7 @@ again:
-- 		goto out;
-- 
-- 	/* try to elf-parse the core to read vma info */
---	ret = parse_vma_info(di);
--+	ret = parse_vma_info(di, &phnum);
-- 
-- 	/* restore our position */
-- 	if (lseek64(di->elf_fd, pos, SEEK_SET) == -1)
--@@ -1653,9 +1661,17 @@ again:
-- 
-- 		tries++;
-- 
---		/* maybe try again */
---		if (tries < 10)
--+		if (phnum > last_phnum) {
--+			/* new headers found, keep trying */
--+			last_phnum = phnum;
-- 			goto again;
--+		} else if (tries < 10) {
--+			/*
--+			 * even if no new headers are found,
--+			 * retry at least 10 times
--+			 */
--+			goto again;
--+		}
-- 
-- 		goto out;
-- 	}
--@@ -2106,7 +2122,7 @@ static int dump_stacks(struct dump_info *di)
-- 		/* find and set the first task */
-- 		memset(&type, 0, sizeof(type));
-- 		type.p_type = PT_NOTE;
---		do_elf_ph_parse(di, &type, note_cb);
--+		do_elf_ph_parse(di, &type, note_cb, NULL);
-- 	}
-- 
-- 	if (di->first_pid)
---- 
--2.25.1
--
-diff --git a/meta-oe/recipes-kernel/minicoredumper/files/0001-minicoredumper_demo-Use-optnone-attribute-with-clang.patch b/meta-oe/recipes-kernel/minicoredumper/files/0001-minicoredumper_demo-Use-optnone-attribute-with-clang.patch
+diff --git a/recipes-core/temurin/temurin-jdk-17-bin_17.0.6+10.bb b/recipes-core/temurin/temurin-jdk-17-bin_17.0.6+10.bb
 new file mode 100644
-index 0000000000..05371e5cd6
+index 0000000..fe83df5
 --- /dev/null
-+++ b/meta-oe/recipes-kernel/minicoredumper/files/0001-minicoredumper_demo-Use-optnone-attribute-with-clang.patch
-@@ -0,0 +1,37 @@
-+From abaac31d1cb4d0ba0e8e9ef7f344e62de3b150de Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Sat, 4 Feb 2023 16:50:46 -0800
-+Subject: [PATCH] minicoredumper_demo: Use 'optnone' attribute with clang
++++ b/recipes-core/temurin/temurin-jdk-17-bin_17.0.6+10.bb
+@@ -0,0 +1,25 @@
++SUMMARY = "Temurin JDK Binaries"
 +
-+clang does not support optimize("On") yet, therefore use optnone which
-+should give intended results with clang compiler
++JAVA_TYPE = "jdk"
++JAVA_SHA256:aarch64 = "9e0e88bbd9fa662567d0c1e22d469268c68ac078e9e5fe5a7244f56fec71f55f"
++JAVA_SHA256:arm = "fe4d0c6d5bb8cf7f59f7ff82c0c1fd988bbe5cccf3bc7377dc8ae50740b46c82"
++JAVA_SHA256:powerpc64le = "cb772c3fdf3f9fed56f23a37472acf2b80de20a7113fe09933891c6ef0ecde95"
++JAVA_SHA256:x86-64 = "a0b1b9dd809d51a438f5fa08918f9aca7b2135721097f0858cf29f77a35d4289"
 +
-+Upstream-Status: Submitted [https://github.com/diamon/minicoredumper/pull/7]
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ src/minicoredumper_demo/main.c | 9 +++++++--
-+ 1 file changed, 7 insertions(+), 2 deletions(-)
++require temurin.inc
 +
-+diff --git a/src/minicoredumper_demo/main.c b/src/minicoredumper_demo/main.c
-+index 65aac46..e60eb82 100644
-+--- a/src/minicoredumper_demo/main.c
-++++ b/src/minicoredumper_demo/main.c
-+@@ -11,8 +11,13 @@
-+ #include <sys/types.h>
-+ 
-+ #include "minicoredumper.h"
-+-
-+-int __attribute__((optimize("O0"))) main(int argc, char *argv[])
-++int
-++#ifdef __clang__
-++__attribute__((optnone))
-++#else
-++__attribute__((optimize("O0")))
-++#endif
-++main(int argc, char *argv[])
-+ {
-+ 	char *str1 = "This is string 1.";
-+ 	unsigned long val1 = 0x1abc123f;
-+-- 
-+2.39.1
++S = "${WORKDIR}/jdk-${PV}"
 +
-diff --git a/meta-oe/recipes-kernel/minicoredumper/files/0001-replace-pthread_mutexattr_setrobust_np-with-pthread_.patch b/meta-oe/recipes-kernel/minicoredumper/files/0001-replace-pthread_mutexattr_setrobust_np-with-pthread_.patch
-deleted file mode 100644
-index 455e6f3181..0000000000
---- a/meta-oe/recipes-kernel/minicoredumper/files/0001-replace-pthread_mutexattr_setrobust_np-with-pthread_.patch
-+++ /dev/null
-@@ -1,33 +0,0 @@
--From 5895caba6573e84f73f159d9e84cd1aa7e969f18 Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Sun, 9 May 2021 14:37:00 -0700
--Subject: [PATCH] replace pthread_mutexattr_setrobust_np with
-- pthread_mutexattr_setrobust
--
--This is now part of standard POSIX function [1]
--
--Upstream-Status: Submitted [https://github.com/diamon/minicoredumper/pull/3]
--
--[1] https://man7.org/linux/man-pages/man3/pthread_mutexattr_setrobust_np.3.html
--
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
-- src/minicoredumper_regd/daemon.c | 2 +-
-- 1 file changed, 1 insertion(+), 1 deletion(-)
--
--diff --git a/src/minicoredumper_regd/daemon.c b/src/minicoredumper_regd/daemon.c
--index 115ec92..b9ad1ea 100644
----- a/src/minicoredumper_regd/daemon.c
--+++ b/src/minicoredumper_regd/daemon.c
--@@ -224,7 +224,7 @@ static int setup_shm(void)
-- 
-- 	pthread_mutexattr_init(&attr);
-- 	pthread_mutexattr_setprotocol(&attr, PTHREAD_PRIO_INHERIT);
---	pthread_mutexattr_setrobust_np(&attr, PTHREAD_MUTEX_ROBUST_NP);
--+	pthread_mutexattr_setrobust(&attr, PTHREAD_MUTEX_ROBUST);
-- 	pthread_mutexattr_setpshared(&attr, PTHREAD_PROCESS_SHARED);
-- 	pthread_mutex_init(&sh->m, &attr);
-- 
---- 
--2.31.1
--
-diff --git a/meta-oe/recipes-kernel/minicoredumper/minicoredumper_2.0.1.bb b/meta-oe/recipes-kernel/minicoredumper/minicoredumper_2.0.2.bb
-similarity index 88%
-rename from meta-oe/recipes-kernel/minicoredumper/minicoredumper_2.0.1.bb
-rename to meta-oe/recipes-kernel/minicoredumper/minicoredumper_2.0.2.bb
-index 992de014f4..5763f845a6 100644
---- a/meta-oe/recipes-kernel/minicoredumper/minicoredumper_2.0.1.bb
-+++ b/meta-oe/recipes-kernel/minicoredumper/minicoredumper_2.0.2.bb
-@@ -9,15 +9,12 @@ DEPENDS = "elfutils dbus dbus-glib-native glib-2.0 dbus-glib util-linux json-c"
- 
- inherit autotools pkgconfig ptest systemd update-rc.d
- 
--SRCREV = "16a0d44f1725eaa93096eaa0e086f42ef4c2712c"
--
--PR .= "+git${SRCPV}"
-+SRCREV = "0bed11b3d69877ce59b1a71359349af60f2009ff"
- 
- SRC_URI = "git://github.com/diamon/minicoredumper;protocol=https;branch=master \
--           file://0001-replace-pthread_mutexattr_setrobust_np-with-pthread_.patch \
-+           file://0001-minicoredumper_demo-Use-optnone-attribute-with-clang.patch \
-            file://minicoredumper.service \
-            file://minicoredumper.init \
--           file://0001-minicoredumper-retry-elf-parsing-as-long-as-needed.patch \
-            file://run-ptest \
-            "
- 
++inherit update-alternatives
++
++ALTERNATIVE_PRIORITY = "100"
++ALTERNATIVE:${PN} = "java javac keytool"
++
++ALTERNATIVE_LINK_NAME[java] = "${bindir}/java"
++ALTERNATIVE_TARGET[java] = "${JAVA_HOME}/bin/java"
++
++ALTERNATIVE_LINK_NAME[javac] = "${bindir}/javac"
++ALTERNATIVE_TARGET[javac] = "${JAVA_HOME}/bin/javac"
++
++ALTERNATIVE_LINK_NAME[keytool] = "${bindir}/keytool"
++ALTERNATIVE_TARGET[keytool] = "${JAVA_HOME}/bin/keytool"
+diff --git a/recipes-core/temurin/temurin-jre-17-bin_17.0.6+10.bb b/recipes-core/temurin/temurin-jre-17-bin_17.0.6+10.bb
+new file mode 100644
+index 0000000..2527437
+--- /dev/null
++++ b/recipes-core/temurin/temurin-jre-17-bin_17.0.6+10.bb
+@@ -0,0 +1,23 @@
++SUMMARY = "Temurin JRE Binaries"
++
++JAVA_TYPE = "jre"
++JAVA_SHA256:arm = "bf7ef7ba477dc278f913e64174e76be9ae7f014c767352eae83b3f9581494fce"
++JAVA_SHA256:aarch64 = "3797815cb853616b6415e1b8875cda4eaa004887561ea4ea2090d726b8d8582f"
++JAVA_SHA256:powerpc64le = "f11b86bfd7fa4d7a0d05040ea235102296f03eaf064253f76d7ab94baa0352e3"
++JAVA_SHA256:x86-64 = "fe669935609086e76cb0b829e92808766cbf8cb7bda57a76b47813b08584bfd2"
++
++require temurin.inc
++
++S = "${WORKDIR}/jdk-${PV}-jre"
++
++inherit update-alternatives
++
++# Lower than corresponding JDK
++ALTERNATIVE_PRIORITY = "90"
++
++ALTERNATIVE:${PN} = "java keytool"
++ALTERNATIVE_LINK_NAME[java] = "${bindir}/java"
++ALTERNATIVE_TARGET[java] = "${JAVA_HOME}/bin/java"
++
++ALTERNATIVE_LINK_NAME[keytool] = "${bindir}/keytool"
++ALTERNATIVE_TARGET[keytool] = "${JAVA_HOME}/bin/keytool"
+diff --git a/recipes-core/temurin/temurin.inc b/recipes-core/temurin/temurin.inc
+new file mode 100644
+index 0000000..a026598
+--- /dev/null
++++ b/recipes-core/temurin/temurin.inc
+@@ -0,0 +1,62 @@
++HOMEPAGE = "https://adoptium.net"
++LICENSE = "GPL-2.0-with-classpath-exception"
++LIC_FILES_CHKSUM = "file://NOTICE;md5=8fa9e85281110769de025562c085b3a4"
++
++COMPATIBLE_HOST = "(aarch64|arm|powerpc64le|x86_64).*-linux"
++# Binaries are linked with glibc
++COMPATIBLE_HOST:libc-musl = "null"
++
++JAVA_ARCH:aarch64 = "aarch64"
++JAVA_ARCH:arm = "arm"
++JAVA_ARCH:powerpc64le = "ppc64le"
++JAVA_ARCH:x86-64 = "x64"
++
++# Convert PV to forms needed to download the tarball
++PV_MAJOR = "${@d.getVar('PV').split('.')[0]}"
++PV_UNDER = "${@d.getVar('PV').replace('+', '_')}"
++
++SRC_URI = "https://github.com/adoptium/temurin${PV_MAJOR}-binaries/releases/download/jdk-${PV}/OpenJDK${PV_MAJOR}U-${JAVA_TYPE}_${JAVA_ARCH}_linux_hotspot_${PV_UNDER}.tar.gz"
++SRC_URI[sha256sum] = "${JAVA_SHA256}"
++
++# Disable stuff not needed for packaging binaries
++INHIBIT_DEFAULT_DEPS = "1"
++INHIBIT_PACKAGE_STRIP = "1"
++INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
++EXCLUDE_FROM_SHLIBS = "1"
++do_patch[noexec] = "1"
++do_configure[noexec] = "1"
++do_compile[noexec] = "1"
++
++JAVA_HOME = "${libdir}/jvm/${BPN}"
++
++do_install() {
++    install -d ${D}${JAVA_HOME}
++    cp -r ${S}/* ${D}${JAVA_HOME}
++}
++
++# The x86-64 binaries assume libraries are in /lib64, but a typical pure 64-bit
++# Yocto image puts them in /lib. If not building a multilib image, add a
++# symlink from /lib64 to /lib.
++do_install:append:x86-64() {
++    if [ -z "${MULTILIBS}" ]; then
++        ln -s /lib ${D}/lib64
++    fi
++}
++
++FILES:${PN} = "${JAVA_HOME}"
++FILES:${PN}:append:x86-64 = " /lib64"
++
++RDEPENDS:${PN} = " \
++    alsa-lib \
++    freetype \
++    glibc \
++    libx11 \
++    libxext \
++    libxi \
++    libxrender \
++    libxtst \
++    zlib \
++"
++
++# Ignore "doesn't have GNU_HASH (didn't pass LDFLAGS?)" errors
++INSANE_SKIP:${PN} += "ldflags"
 -- 
 2.39.1
 
