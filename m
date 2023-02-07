@@ -2,122 +2,129 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3B605C61DA4
-	for <webhook@archiver.kernel.org>; Tue,  7 Feb 2023 02:36:28 +0000 (UTC)
-Received: from mail-pl1-f170.google.com (mail-pl1-f170.google.com [209.85.214.170])
- by mx.groups.io with SMTP id smtpd.web10.74332.1675737384255873021
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4DE71C636D3
+	for <webhook@archiver.kernel.org>; Tue,  7 Feb 2023 02:38:28 +0000 (UTC)
+Received: from mail-pf1-f179.google.com (mail-pf1-f179.google.com [209.85.210.179])
+ by mx.groups.io with SMTP id smtpd.web10.74365.1675737503692671143
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 06 Feb 2023 18:36:24 -0800
+ Mon, 06 Feb 2023 18:38:23 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=o2WizpZH;
- spf=pass (domain: gmail.com, ip: 209.85.214.170, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f170.google.com with SMTP id e19so6317305plc.9
-        for <openembedded-devel@lists.openembedded.org>; Mon, 06 Feb 2023 18:36:24 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=N36N/ZpS;
+ spf=pass (domain: gmail.com, ip: 209.85.210.179, mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f179.google.com with SMTP id a5so6779787pfv.10
+        for <openembedded-devel@lists.openembedded.org>; Mon, 06 Feb 2023 18:38:23 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=/0XNhKtZbP75qZUV8rgsCy9ZSKNRD7kdPg6YIIn8je8=;
-        b=o2WizpZHAK0cChaOXPQ5NJJ/hB0U9aB1XFIrYRKsVriVp6YWzhtfwizXQxtUWElcmj
-         V9rBTBzXDqoD+tkPQGsZxnil1wYAmB9414Qz7RUDWfK/6ub5kT/eWhZ7xW3c+2gYTWXA
-         CMev6OBnwqvelAekaZvnWfhFQOyUPtbD15mWHpwrvHlHGx+C77g1UxRnE2I+/atTnGxu
-         vNij63dMhbrv3pCndv2Qoy3FPkBA0UpYgsadDIalniSpQnBKt2O0QLSlVc/jTvmP9rPM
-         0G6wHxdSWppbnvqJK4qMsNCONk3ZNS7m/MkNk2Ya0ODMuZx3J1LicCUK/CWaDDg44Lnu
-         5DGg==
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=kkz09ou83QS3oyuR5atOMQfkuOYK4dz1ILb9BnPI2h0=;
+        b=N36N/ZpSkq7qlgEFYw3T9y1Sa7d5ao0l+els3mCIhal+MWT3DuuIENjyFDANL+hx/3
+         ratL6HU63sPQcAFt9Hd3zUY3n8OEWjF9yWG15JNHozqHl8V437bE/G0MqiIoOWOkyJEs
+         R3L3xijWOMeqXstMHXUhguUCzv6YZF4cNIbuLHoeDC3cY2WQPYZjwtboCYsGHw6mXS3X
+         V69HKD1dyRbv2TqWM6Wkw1bDqykPwPVVqbhn6+YdxwHg2tXI3nJVIp3kSMtXTPRGSJ/a
+         tHOzcyjhTbMK7F18pxUvKAOpc1mYP0rmrineqylTuTSgZJFpviT1xlbwn0X6Sh20dYxC
+         HWrw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=/0XNhKtZbP75qZUV8rgsCy9ZSKNRD7kdPg6YIIn8je8=;
-        b=0whZWfNN5cXcwEmGrTqT3NI9kmdQRyF0YJ5I478a8cgjw0+FgSLRQq2pDJhZvsqmdT
-         yOnPcHr2klMXm7udLJH/djNrv8lzPkUd4yMz632OoSvY5TSfvjzi9AQrM7P3paBSnASc
-         czKq8HWf2mkQ3oJVdbHWAzeqCMWGA2GIhf08WkpbE3ZnVDuWSZWXc9Kd/F9cSnhMybVk
-         4/o2I/K7uMu9WPVkkjrFI/H796bPlUEKCbjHf4REMSiyIS6/VH6FifrJ47rU12E1TTqp
-         srW8NM4NI+/q/kcyl18foSRQHf9R4+kX58cFkq+qxWVo5/ue79w26kViMEPMhvUb1aZJ
-         4H8w==
-X-Gm-Message-State: AO0yUKUQsJtokvuPwmD49A4Ggq2nAHJiVat97GthpiUDahBaJG4+voFR
-	XUgXizqJiN5eHWvy+kBPKjQ6Kg4nYPs=
-X-Google-Smtp-Source: AK7set81ICVGPKGahVxhPkIOPzXqgikn7/sPbCwVIiAzVoE1Z+wNVXuSJrkpj14+SdPFL+mT+j3mHg==
-X-Received: by 2002:a17:902:e84f:b0:196:88e0:ea1a with SMTP id t15-20020a170902e84f00b0019688e0ea1amr1264810plg.47.1675737383139;
-        Mon, 06 Feb 2023 18:36:23 -0800 (PST)
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=kkz09ou83QS3oyuR5atOMQfkuOYK4dz1ILb9BnPI2h0=;
+        b=uOBFD8O4fiGQPrBgZqDcNFrp0l8h1oz+uDiu+MOoNF7l0kNrIWRnt/0iXioKWTd2ZT
+         r2KCyjEe/Ah8WJD3UDYzFOnJcgCY9EfsASVe2LwxObRpnhqBAExKOH/lVLnibtfSZCDo
+         fnaycpMG+X39r+0Op2h0WdpIA64CzbNrac2eo1U/QTJ78NAjTbrUDGJ/JfZBk7dp0sGC
+         Co7G15aXHsUn8mxhBF2UWy8P5mHGXA/31NoPLILTXE3Je9DAlgYTHYj2QpLe7npnqLzw
+         CMGDEfv1eaq0GDAeBeRR1p2Z4ffffEgfNTLeZZ3uqrPjqIKOkIveS2VE+4ElKV268tGp
+         GrIQ==
+X-Gm-Message-State: AO0yUKUosEJ/jJPjaItrpQJJB+C/jI9gaZLzMGEyX2SToB6Fyr+2quiJ
+	GMHZYeqfmGv4WZqLZ37ptEGkGE39OxA=
+X-Google-Smtp-Source: AK7set8GTZC+k+JZQCPHRxmf4bw1Eud98WgnUG6RSLO9avb/OReTEzAn4Ysykq/na2kSSgzXUIRqjw==
+X-Received: by 2002:a62:4eca:0:b0:580:ffa0:bfcf with SMTP id c193-20020a624eca000000b00580ffa0bfcfmr1783772pfb.6.1675737502876;
+        Mon, 06 Feb 2023 18:38:22 -0800 (PST)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9181:1cf0::868f])
-        by smtp.gmail.com with ESMTPSA id m12-20020a1709026bcc00b001931c37da2dsm7554959plt.20.2023.02.06.18.36.22
+        by smtp.gmail.com with ESMTPSA id c17-20020aa781d1000000b0058c8bf500bcsm7788311pfn.72.2023.02.06.18.38.22
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 06 Feb 2023 18:36:22 -0800 (PST)
+        Mon, 06 Feb 2023 18:38:22 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 1/2] cups-filters: Fix build with clang16/c++17
-Date: Mon,  6 Feb 2023 18:36:19 -0800
-Message-Id: <20230207023620.2243785-1-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 2/2] oprofile: Do not use std::bind2nd
+Date: Mon,  6 Feb 2023 18:38:19 -0800
+Message-Id: <20230207023819.2244963-2-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.39.1
+In-Reply-To: <20230207023819.2244963-1-raj.khem@gmail.com>
+References: <20230207023819.2244963-1-raj.khem@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 07 Feb 2023 02:36:28 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100949
+ <openembedded-devel@lists.openembedded.org>; Tue, 07 Feb 2023 02:38:28 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100952
+
+std::bind2nd is removed from c++17, therefore re-implement with generic
+lambda
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...se-instead-of-throw-from-c-17-onward.patch | 36 +++++++++++++++++++
- .../cups/cups-filters_1.28.11.bb              |  1 +
- 2 files changed, 37 insertions(+)
- create mode 100644 meta-oe/recipes-printing/cups/cups-filters/0001-use-noexcept-false-instead-of-throw-from-c-17-onward.patch
+ ...lace-std-bind2nd-with-generic-lambda.patch | 34 +++++++++++++++++++
+ .../recipes-kernel/oprofile/oprofile_1.4.0.bb |  1 +
+ 2 files changed, 35 insertions(+)
+ create mode 100644 meta-oe/recipes-kernel/oprofile/oprofile/0001-Replace-std-bind2nd-with-generic-lambda.patch
 
-diff --git a/meta-oe/recipes-printing/cups/cups-filters/0001-use-noexcept-false-instead-of-throw-from-c-17-onward.patch b/meta-oe/recipes-printing/cups/cups-filters/0001-use-noexcept-false-instead-of-throw-from-c-17-onward.patch
+diff --git a/meta-oe/recipes-kernel/oprofile/oprofile/0001-Replace-std-bind2nd-with-generic-lambda.patch b/meta-oe/recipes-kernel/oprofile/oprofile/0001-Replace-std-bind2nd-with-generic-lambda.patch
 new file mode 100644
-index 0000000000..5de8dae006
+index 0000000000..930b90e289
 --- /dev/null
-+++ b/meta-oe/recipes-printing/cups/cups-filters/0001-use-noexcept-false-instead-of-throw-from-c-17-onward.patch
-@@ -0,0 +1,36 @@
-+From 104fba23b1c0c67c92777b3165c6dca99558a656 Mon Sep 17 00:00:00 2001
++++ b/meta-oe/recipes-kernel/oprofile/oprofile/0001-Replace-std-bind2nd-with-generic-lambda.patch
+@@ -0,0 +1,34 @@
++From 5d879cb4f23c613e16b3f479ab09bbb5ff340201 Mon Sep 17 00:00:00 2001
 +From: Khem Raj <raj.khem@gmail.com>
-+Date: Mon, 6 Feb 2023 18:13:52 -0800
-+Subject: [PATCH] use noexcept(false) instead of throw() from c++17 onwards
++Date: Mon, 6 Feb 2023 17:02:41 -0800
++Subject: [PATCH] Replace std::bind2nd with generic lambda
 +
-+C++17 removed dynamic exception specifications [1]
-+they had been deprecated since C++11, replace
-+throw(whatever) with noexcept(false).
++std::bind2nd is gone in c++17, therefore stop using it and replace it
++with generic lambda from c++14 onwards
 +
-+[1] https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2016/p0003r5.html
-+
-+Upstream-Status: Submitted [https://github.com/OpenPrinting/cups-filters/pull/505]
++Upstream-Status: Pending
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +---
-+ filter/pdftoraster.cxx | 4 ++++
-+ 1 file changed, 4 insertions(+)
++ libutil++/growable_vector.h | 6 +++---
++ 1 file changed, 3 insertions(+), 3 deletions(-)
 +
-+diff --git a/filter/pdftoraster.cxx b/filter/pdftoraster.cxx
-+index e8af184fb..e91e22459 100755
-+--- a/filter/pdftoraster.cxx
-++++ b/filter/pdftoraster.cxx
-+@@ -2148,7 +2148,11 @@ int main(int argc, char *argv[]) {
-+ /* For compatibility with g++ >= 4.7 compilers _GLIBCXX_THROW
-+  *  should be used as a guard, otherwise use traditional definition */
-+ #ifndef _GLIBCXX_THROW
-++#if __cplusplus < 201703L
-+ #define _GLIBCXX_THROW throw
-++#else
-++#define _GLIBCXX_THROW(x) noexcept(false)
-++#endif
-+ #endif
++diff --git a/libutil++/growable_vector.h b/libutil++/growable_vector.h
++index 350246a..9846e1e 100644
++--- a/libutil++/growable_vector.h
+++++ b/libutil++/growable_vector.h
++@@ -93,9 +93,9 @@ public:
 + 
-+ void * operator new(size_t size) _GLIBCXX_THROW (std::bad_alloc)
++ 	/// return true if all elements have the default constructed value
++ 	bool zero() const {
++-		return std::find_if(container.begin(), container.end(),
++-	                            std::bind2nd(std::not_equal_to<T>(), T()))
++-					== container.end();
+++		return std::find_if(begin(container), end(container),
+++				[&](auto const& elem) {return elem != T();})
+++			== end(container);
++ 	}
++ 
++ private:
 +-- 
 +2.39.1
 +
-diff --git a/meta-oe/recipes-printing/cups/cups-filters_1.28.11.bb b/meta-oe/recipes-printing/cups/cups-filters_1.28.11.bb
-index bfe5375b28..9a0a23671b 100644
---- a/meta-oe/recipes-printing/cups/cups-filters_1.28.11.bb
-+++ b/meta-oe/recipes-printing/cups/cups-filters_1.28.11.bb
-@@ -1,3 +1,4 @@
- include cups-filters.inc
+diff --git a/meta-oe/recipes-kernel/oprofile/oprofile_1.4.0.bb b/meta-oe/recipes-kernel/oprofile/oprofile_1.4.0.bb
+index e6eec0ab05..335ab48bb2 100644
+--- a/meta-oe/recipes-kernel/oprofile/oprofile_1.4.0.bb
++++ b/meta-oe/recipes-kernel/oprofile/oprofile_1.4.0.bb
+@@ -31,6 +31,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BPN}-${PV}.tar.gz \
+            file://0009-Prevent-running-check-tests-on-host-if-cross-compili.patch \
+            file://0010-oprofile-Determine-the-root-home-directory-dynamical.patch \
+            file://0001-configure-Include-unistd.h-for-getpid-API.patch \
++           file://0001-Replace-std-bind2nd-with-generic-lambda.patch \
+ "
+ SRC_URI[sha256sum] = "7ba06f99d7c188389d20d1d5e53ee690c7733f87aa9af62bd664fa0ca235a412"
  
-+SRC_URI += "file://0001-use-noexcept-false-instead-of-throw-from-c-17-onward.patch"
- SRC_URI[sha256sum] = "472418f1a1e12c9ad91b01caa020eb668626776d85de9da488be38e6663102ca"
 -- 
 2.39.1
 
