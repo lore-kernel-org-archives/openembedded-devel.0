@@ -2,68 +2,68 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7FC9FC05027
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7FCD7C636D3
 	for <webhook@archiver.kernel.org>; Wed,  8 Feb 2023 08:11:45 +0000 (UTC)
-Received: from mail1.bemta37.messagelabs.com (mail1.bemta37.messagelabs.com [85.158.142.112])
- by mx.groups.io with SMTP id smtpd.web10.3794.1675843891983965051
+Received: from mail1.bemta37.messagelabs.com (mail1.bemta37.messagelabs.com [85.158.142.2])
+ by mx.groups.io with SMTP id smtpd.web11.3778.1675843895456712200
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 08 Feb 2023 00:11:36 -0800
+ Wed, 08 Feb 2023 00:11:35 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=ewZ0xLPi;
- spf=pass (domain: fujitsu.com, ip: 85.158.142.112, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=WZEXd7OI;
+ spf=pass (domain: fujitsu.com, ip: 85.158.142.2, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1675843896; i=@fujitsu.com;
-	bh=lqCYgNEqQUWWDwHzAyJZQpyy4g3n2qAW7YOsVoXA8vM=;
+	s=170520fj; t=1675843893; i=@fujitsu.com;
+	bh=z2gB7RFQIsyvYSdq0MrUNxXHCx4/4dnL4LTMtE4InYY=;
 	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
 	 MIME-Version:Content-Type;
-	b=ewZ0xLPiyNfVwMcXUmbj4nJDDFA+B7rbVAKSOQg0v5TV1yGkd+D5TDdSoO2gh+lnp
-	 I0Ofnn4SWMTsMp3ZUphWnsUugfEGzKHidGGC2y9nWm2SlKngrP2Hmo7SC1iOli96j9
-	 LZnbKR6LhJWKw/H8SsePNhwABd8q20DsOLrB4mstZCsUBlaB+3WKE7vcwsYYJzUXDu
-	 crKKym6MSJV0Z6/LvAOVSgEy3/RWCwavi9p7rvY4hZ/LaLLzx3mDj8k04Z4rkva97T
-	 uXjiXNL5TpogaSB18NOTfTFy+ZJJuQaQQ2p9Wah9vqoML4CtnLPUS+HJ4z+qUuVTQs
-	 tk/sUwlZ2aZrQ==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrOIsWRWlGSWpSXmKPExsViZ8ORqGse+Tj
-  Z4OcfQ4uLh5cyOzB6nNu4gjGAMYo1My8pvyKBNaNt0xrmgs+cFT962lgaGPs5uxi5OIQEnjBK
-  NG7tZYRwbjBJnJ99g6mLkRPI2cMoseZwAojNJiAlceP+fzYQW0RAX2Lp7D3MIDazgIrEi9897
-  CC2sICvxIvml2A1LEDx3b8Wgc3hFXCSeHq9GywuIaAgMeXhe7BeTgFnibZP01ghdjlJ7Nh1gB
-  miXlDi5MwnLBDzJSQOvnjBDNGrKDH7cjMLhF0p0frhF5StJnH13CbmCYyCs5C0z0LSvoCRaRW
-  jeXFqUVlqka6hqV5SUWZ6RkluYmaOXmKVbqJeaqluXn5RSYauoV5iebFeanGxXnFlbnJOil5e
-  askmRmD4phSnyO1gvNL3V+8QoyQHk5Ior6fY42QhvqT8lMqMxOKM+KLSnNTiQ4wyHBxKErwR4
-  UA5waLU9NSKtMwcYCzBpCU4eJREeCNDgdK8xQWJucWZ6RCpU4yKUuK8V0H6BEASGaV5cG2w+L
-  3EKCslzMvIwMAgxFOQWpSbWYIq/4pRnINRSZg3IAxoCk9mXgnc9FdAi5mAFoeoPgRZXJKIkJJ
-  qYOL+2tDMq2Dg0rl015wK9nVxW+56XpWZsMrP7b+nUM/siysTP4tc7ngWebdP8dMy3qmZetfO
-  J1QV6jRkGF6c19O+3O7fu6krl5qGGC5Ia781zWxn2B7BRbfqNRclJW619ln6wnnSHMOcywmr+
-  lwU3TPuZ6qyrZ72itX/8ocjU2/pbdDqzfk78ep1gRPGUgJThJaoCjccOdHv+/mRjMi31E8ZF0
-  SVP5UtWP5Xzmy+QEH8/rsxO05E/ft6aE25xEXL6bXK79ICMvyOZ3YW2H/1vSYzgc331Io7CwR
-  a3q4UtVY8Mdma893TRQqbbsbXaly51Ppi6pLWdSwnTnTYiDgtt3W5+Cjb4uEOr3ULvSeEM51U
-  YinOSDTUYi4qTgQA8ITU6loDAAA=
+	b=WZEXd7OI2YTeOzyzrbAD3sd6oODufloE9FM09wVh7dajSn13fkz/Wvquzig4g/+hv
+	 VUnUGm0LthRwPn8gYKtsyga9WFJ6Akr/dtmgdUkEiIDoRqzExugep365ARioAmnvEE
+	 6jSwk1vtBuWdEEOybGtJjf21pZcIMwW+/SD/wgObuAvBfoq2h/TZl5qWxrh0xdpe/Z
+	 OLlu132ohzLOAFve/RyFAPL6+nWNTxghF3XhBsR7VF1vkyOkWkGNEVsIWs8Bcp7xrY
+	 L+1HKQnbCL2iAPFD2Bvh5tZTML2HCjomlT/qz21hB/Gm7Kg2JuzDH9cNrz+uC9qtsp
+	 8J5uQfxxVlYFA==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrJIsWRWlGSWpSXmKPExsViZ8ORpGsc+Tj
+  Z4PBNM4uLh5cyOzB6nNu4gjGAMYo1My8pvyKBNePcijtsBRskK/5e/cLYwLhMrIuRi0NI4CGj
+  xKx5KxkhnKtMEs0Nm6GcPYwS6xt3snQxcnKwCUhJ3Lj/nw3EFhHQl1g6ew8ziM0soCLx4ncPO
+  4gtLOAv8eHdEbB6FqD4houzgGo4OHgFnCTWPAwACUsIKEhMefgerJVTwFmi7dM0VhBbCKhkx6
+  4DYHFeAUGJkzOfsECMl5A4+OIFM0SvosTsy80sEHalROuHX1C2msTVc5uYJzAKzkLSPgtJ+wJ
+  GplWM5sWpRWWpRbqGxnpJRZnpGSW5iZk5eolVuol6qaW6eflFJRm6hnqJ5cV6qcXFesWVuck5
+  KXp5qSWbGIHhm1KcMGMH46++v3qHGCU5mJREeT3FHicL8SXlp1RmJBZnxBeV5qQWH2KU4eBQk
+  uCNCAfKCRalpqdWpGXmAGMJJi3BwaMkwhsZCpTmLS5IzC3OTIdInWI05ti0r+sAM0fnfiApxJ
+  KXn5cqJc57FWSSAEhpRmke3CBYjF9ilJUS5mVkYGAQ4ilILcrNLEGVf8UozsGoJMwbEAY0hSc
+  zrwRu3yugU5iATglRfQhySkkiQkqqgclWL3P2Ar8vnHIGigu4eJffPxTDcPPWxmMif4O9JhmL
+  FV6N1jNJUTxnafaTL32W/OeT8/sWR3I/eVPffjrN44qu125peZ9bre2BE9JWNx5e575R9XFfI
+  K967hz9JsunS6JDTpRuXm3P6x/0hG/55gqxD4F7bgs7fe+pOTXz4bMz6zpSNvg/XSF2cck7fu
+  b0ZMVrYvKL5bKOypVO0E5vL8nqv6oUKDLzH/tkLZ/QL+W2CYue/4sPs1zJYrT+mZTN8SSHJcd
+  Wsl9ee8fT6czfZy9Zc7nFXm17nvtugo5JWHPghEruqZu/LL0Yz6U54XROwt0j55Xvehg5XTzv
+  8S6rKT1tI1PyqyUxVwQXtG/IUlViKc5INNRiLipOBABak62YbAMAAA==
 X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-2.tower-732.messagelabs.com!1675843895!393863!1
-X-Originating-IP: [62.60.8.97]
+X-Msg-Ref: server-7.tower-745.messagelabs.com!1675843891!313017!1
+X-Originating-IP: [62.60.8.98]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.102.2; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 30977 invoked from network); 8 Feb 2023 08:11:35 -0000
-Received: from unknown (HELO n03ukasimr01.n03.fujitsu.local) (62.60.8.97)
-  by server-2.tower-732.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 8 Feb 2023 08:11:35 -0000
-Received: from n03ukasimr01.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTP id 4683510018D
-	for <openembedded-devel@lists.openembedded.org>; Wed,  8 Feb 2023 08:11:35 +0000 (GMT)
+Received: (qmail 10323 invoked from network); 8 Feb 2023 08:11:31 -0000
+Received: from unknown (HELO n03ukasimr03.n03.fujitsu.local) (62.60.8.98)
+  by server-7.tower-745.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 8 Feb 2023 08:11:31 -0000
+Received: from n03ukasimr03.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr03.n03.fujitsu.local (Postfix) with ESMTP id 4B7991B0
+	for <openembedded-devel@lists.openembedded.org>; Wed,  8 Feb 2023 08:11:31 +0000 (GMT)
 Received: from R01UKEXCASM223.r01.fujitsu.local (R01UKEXCASM223 [10.182.185.121])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTPS id 39C3A100043
-	for <openembedded-devel@lists.openembedded.org>; Wed,  8 Feb 2023 08:11:35 +0000 (GMT)
+	by n03ukasimr03.n03.fujitsu.local (Postfix) with ESMTPS id 3F9AC1AE
+	for <openembedded-devel@lists.openembedded.org>; Wed,  8 Feb 2023 08:11:31 +0000 (GMT)
 Received: from localhost.localdomain (10.167.225.33) by
  R01UKEXCASM223.r01.fujitsu.local (10.182.185.121) with Microsoft SMTP Server
- (TLS) id 15.0.1497.42; Wed, 8 Feb 2023 08:11:33 +0000
+ (TLS) id 15.0.1497.42; Wed, 8 Feb 2023 08:11:29 +0000
 From: <wangmy@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-python] [PATCH] python3-flask-wtf: upgrade 1.1.0 -> 1.1.1
-Date: Wed, 8 Feb 2023 16:11:17 +0800
-Message-ID: <1675843877-11285-5-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH] python3-fastnumbers: upgrade 3.2.1 -> 4.0.1
+Date: Wed, 8 Feb 2023 16:11:15 +0800
+Message-ID: <1675843877-11285-3-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 In-Reply-To: <1675843877-11285-1-git-send-email-wangmy@fujitsu.com>
 References: <1675843877-11285-1-git-send-email-wangmy@fujitsu.com>
@@ -77,35 +77,81 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 08 Feb 2023 08:11:45 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100982
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/100981
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
+License-Update: Copyright year updated to 2021.
+
 Changelog:
-Fixed validate extra_validators parameter. :pr:548
+==========
+- Removed a nasty memory leak that would cause every number returned
+  from 'fastnumbers' to never get freed.
+- Added 'check_real', 'check_float', 'check_int', and 'check_intlike'
+ to provide a more flexible interface than 'isreal', 'isfloat', 'isint',
+ and 'isintlike', respectively
+- Added 'try_real', 'try_float', 'try_int', and 'try_forceint'
+ to provide a more flexible interface than 'fast_real', 'fast_float', 'fast_int',
+ and 'fast_forceint', respectively
+- Added Python 3.11 support
+- 'query_type' now sets 'allow_underscores' to 'False' by default
+- Complete rewrite into C++
+- All functions now use use 'METH_FASTCALL' to pass arguments from
+  Python to C
+- Always parse integers using 'int64_t' instead of using 'long' to ensure
+  we can always quickly parse at least 18 digits
+- Parsing floats now always uses the fast and robust parser
+  ['fast_float::from_chars()'](https://github.com/fastfloat/fast_float)
+- 'isreal', 'isfloat', 'isint', and 'isintlike' are deprecated in
+  favor of 'check_real', 'check_float', 'check_int', and 'check_intlike',
+  though they will never be removed from the API
+- 'fast_real', 'fast_float', 'fast_int', and 'fast_forceint' are deprecated in
+  favor of 'try_real', 'try_float', 'try_int', and 'try_forceint',
+  though they will never be removed from the API
+- Support for Python 3.6
+- Removed the undocumented 'dig', 'max_exp', 'min_exp', and 'max_int_len'
+  module-level constants, as they are now meaningless
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../{python3-flask-wtf_1.1.0.bb => python3-flask-wtf_1.1.1.bb}  | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-flask-wtf_1.1.0.bb => python3-flask-wtf_1.1.1.bb} (79%)
+ .../python/python3-fastnumbers_3.2.1.bb                | 10 ----------
+ .../python/python3-fastnumbers_4.0.1.bb                | 10 ++++++++++
+ 2 files changed, 10 insertions(+), 10 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python3-fastnumbers_3.2.1.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-fastnumbers_4.0.1.bb
 
-diff --git a/meta-python/recipes-devtools/python/python3-flask-wtf_1.1.0.bb b/meta-python/recipes-devtools/python/python3-flask-wtf_1.1.1.bb
-similarity index 79%
-rename from meta-python/recipes-devtools/python/python3-flask-wtf_1.1.0.bb
-rename to meta-python/recipes-devtools/python/python3-flask-wtf_1.1.1.bb
-index 92d78674e..ec47fcac2 100644
---- a/meta-python/recipes-devtools/python/python3-flask-wtf_1.1.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-flask-wtf_1.1.1.bb
-@@ -2,7 +2,7 @@ DESCRIPTION = "Simple integration of Flask and WTForms."
- LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=d98d089889e14b227732d45dac3aacc4"
- 
--SRC_URI[sha256sum] = "10fd267a41b6dee4f433ec8d6507d4cce4f1d71700280cf654a7cdbae6408d47"
-+SRC_URI[sha256sum] = "41c4244e9ae626d63bed42ae4785b90667b885b1535d5a4095e1f63060d12aa9"
- 
- PYPI_PACKAGE = "Flask-WTF"
- 
+diff --git a/meta-python/recipes-devtools/python/python3-fastnumbers_3.2.1.bb b/meta-python/recipes-devtools/python/python3-fastnumbers_3.2.1.bb
+deleted file mode 100644
+index 0db33052f..000000000
+--- a/meta-python/recipes-devtools/python/python3-fastnumbers_3.2.1.bb
++++ /dev/null
+@@ -1,10 +0,0 @@
+-SUMMARY = "Super-fast and clean conversions to numbers."
+-SECTION = "devel/python"
+-LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=6a96e5ad780a0eea866ecccec4463517"
+-
+-PYPI_PACKAGE = "fastnumbers"
+-
+-SRC_URI[sha256sum] = "44f92b42e7e9f2ed77ba5cb7d664f05c17e43d4586718ed6cd3b3fffa0e67f33"
+-
+-inherit pypi setuptools3
+diff --git a/meta-python/recipes-devtools/python/python3-fastnumbers_4.0.1.bb b/meta-python/recipes-devtools/python/python3-fastnumbers_4.0.1.bb
+new file mode 100644
+index 000000000..e3a0c6c0f
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-fastnumbers_4.0.1.bb
+@@ -0,0 +1,10 @@
++SUMMARY = "Super-fast and clean conversions to numbers."
++SECTION = "devel/python"
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=58db8ac9e152dd9b700f4d39ff40a31a"
++
++PYPI_PACKAGE = "fastnumbers"
++
++SRC_URI[sha256sum] = "3e7d74b1debb44c4803c0fea59a63d0785d6a26ebcb902e2262b3c3fba81b400"
++
++inherit pypi setuptools3
 -- 
 2.34.1
 
