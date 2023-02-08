@@ -1,218 +1,71 @@
-Return-Path: <narpat.mali@windriver.com>
+Return-Path: <u.oelmann@pengutronix.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 53D99C677F1
-	for <webhook@archiver.kernel.org>; Wed,  8 Feb 2023 17:35:19 +0000 (UTC)
-Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.web10.4603.1675877708165041442
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 48620C636D3
+	for <webhook@archiver.kernel.org>; Wed,  8 Feb 2023 18:17:46 +0000 (UTC)
+Received: from metis.ext.pengutronix.de (metis.ext.pengutronix.de [85.220.165.71])
+ by mx.groups.io with SMTP id smtpd.web10.5941.1675880255506940080
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 08 Feb 2023 09:35:08 -0800
+ Wed, 08 Feb 2023 10:17:36 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=pps06212021 header.b=NIG3lGbO;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=1403efaf90=narpat.mali@windriver.com)
-Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 318GJ81A021449
-	for <openembedded-devel@lists.openembedded.org>; Wed, 8 Feb 2023 09:35:07 -0800
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com; h=from : to : cc :
- subject : date : message-id : mime-version : content-transfer-encoding :
- content-type; s=PPS06212021;
- bh=EcelYU22UZI26+5uoR7BZX271dj8VjApcqoajDLjfas=;
- b=NIG3lGbOsg+29XISUxDA/L29Swt9XuR5c2j5krsX5yLx6JSB/4whO8ACWkVkFlWZfSOS
- bj2kkO8fMRMYL8RwHBDkqYd94OTQcCn8uGxocaRUlABBZ1OYlBLBKsPtqnbkdXiJFa7w
- Gefg6bk0eekHavgzYpD9YxDGRlDrNDzYKFPHfzssJ4HkibTI54dznMOyOljWDf7CD7yP
- We4mXJjBLx5JVWigTYD/rk9hXiX3AXSY5m1AjHTbC9NFYjPvRgAkcY+VcnnnVJN9Oj82
- Rw3OuMHLG04TOdYyjjYfSnjj7+AVP/QXV8G4sWCM5wtAEtvRFpBI1NxuQMKXq0ak+7VA Fg== 
-Received: from ala-exchng02.corp.ad.wrs.com (unknown-82-254.windriver.com [147.11.82.254])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3nhkh9c8wg-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Wed, 08 Feb 2023 09:35:07 -0800
-Received: from ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) by
- ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.17; Wed, 8 Feb 2023 09:35:06 -0800
-Received: from blr-linux-engg1.wrs.com (147.11.136.210) by
- ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server id
- 15.1.2507.17 via Frontend Transport; Wed, 8 Feb 2023 09:35:05 -0800
-From: Narpat Mali <narpat.mali@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-CC: <archana.polampalli@windriver.com>, <hari.gpillai@windriver.com>,
-        "Narpat
- Mali" <narpat.mali@windriver.com>
-Subject: [oe][meta-networking][PATCH 1/1] net-snmp: CVE-2022-44792 & CVE-2022-44793 Fix NULL Pointer Exception
-Date: Wed, 8 Feb 2023 17:34:24 +0000
-Message-ID: <20230208173424.3256064-1-narpat.mali@windriver.com>
-X-Mailer: git-send-email 2.34.1
+ dkim=missing; spf=pass (domain: pengutronix.de, ip: 85.220.165.71, mailfrom: uol@pengutronix.de)
+Received: from drehscheibe.grey.stw.pengutronix.de ([2a0a:edc0:0:c01:1d::a2])
+	by metis.ext.pengutronix.de with esmtps (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
+	(Exim 4.92)
+	(envelope-from <uol@pengutronix.de>)
+	id 1pPp0f-0007Ks-8T; Wed, 08 Feb 2023 19:17:33 +0100
+Received: from [2a0a:edc0:0:1101:1d::39] (helo=dude03.red.stw.pengutronix.de)
+	by drehscheibe.grey.stw.pengutronix.de with esmtp (Exim 4.94.2)
+	(envelope-from <uol@pengutronix.de>)
+	id 1pPp0c-003Zj1-Q5; Wed, 08 Feb 2023 19:17:32 +0100
+Received: from uol by dude03.red.stw.pengutronix.de with local (Exim 4.94.2)
+	(envelope-from <uol@pengutronix.de>)
+	id 1pPp0c-006vxm-Jn; Wed, 08 Feb 2023 19:17:30 +0100
+From: =?UTF-8?q?Ulrich=20=C3=96lmann?= <u.oelmann@pengutronix.de>
+To: openembedded-devel@lists.openembedded.org
+Cc: =?UTF-8?q?Ulrich=20=C3=96lmann?= <u.oelmann@pengutronix.de>
+Subject: [meta-networking][PATCH] tnftp: switch to using variable flags for alternatives
+Date: Wed,  8 Feb 2023 19:17:29 +0100
+Message-Id: <20230208181729.1652601-1-u.oelmann@pengutronix.de>
+X-Mailer: git-send-email 2.30.2
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Proofpoint-GUID: 8fuMXFJXVnCtDVDyX3YFHGrta8GEIU0g
-X-Proofpoint-ORIG-GUID: 8fuMXFJXVnCtDVDyX3YFHGrta8GEIU0g
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.219,Aquarius:18.0.930,Hydra:6.0.562,FMLib:17.11.122.1
- definitions=2023-02-08_08,2023-02-08_02,2022-06-22_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 malwarescore=0
- lowpriorityscore=0 priorityscore=1501 clxscore=1011 suspectscore=0
- phishscore=0 bulkscore=0 impostorscore=0 adultscore=0 mlxscore=0
- spamscore=0 mlxlogscore=999 classifier=spam adjust=0 reason=mlx
- scancount=1 engine=8.12.0-2212070000 definitions=main-2302080153
+X-SA-Exim-Connect-IP: 2a0a:edc0:0:c01:1d::a2
+X-SA-Exim-Mail-From: uol@pengutronix.de
+X-SA-Exim-Scanned: No (on metis.ext.pengutronix.de); SAEximRunCond expanded to false
+X-PTX-Original-Recipient: openembedded-devel@lists.openembedded.org
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 08 Feb 2023 17:35:19 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101001
+ <openembedded-devel@lists.openembedded.org>; Wed, 08 Feb 2023 18:17:46 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101002
 
-References:
-https://nvd.nist.gov/vuln/detail/CVE-2022-44792
-https://nvd.nist.gov/vuln/detail/CVE-2022-44793
+Up to now in this recipe the alternative mechanism only worked by accident, so
+do like all other recipes and utilize varflags.
 
-Signed-off-by: Narpat Mali <narpat.mali@windriver.com>
+Signed-off-by: Ulrich Ölmann <u.oelmann@pengutronix.de>
 ---
- .../CVE-2022-44792-CVE-2022-44793.patch       | 121 ++++++++++++++++++
- .../net-snmp/net-snmp_5.9.3.bb                |   1 +
- 2 files changed, 122 insertions(+)
- create mode 100644 meta-networking/recipes-protocols/net-snmp/net-snmp/CVE-2022-44792-CVE-2022-44793.patch
+ meta-networking/recipes-support/tnftp/tnftp_20210827.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp/CVE-2022-44792-CVE-2022-44793.patch b/meta-networking/recipes-protocols/net-snmp/net-snmp/CVE-2022-44792-CVE-2022-44793.patch
-new file mode 100644
-index 000000000..b18d4dc29
---- /dev/null
-+++ b/meta-networking/recipes-protocols/net-snmp/net-snmp/CVE-2022-44792-CVE-2022-44793.patch
-@@ -0,0 +1,121 @@
-+From d13302656d9ff0807c5defe18623adc947f43a2b Mon Sep 17 00:00:00 2001
-+From: Narpat Mali <narpat.mali@windriver.com>
-+Date: Wed, 8 Feb 2023 13:15:39 +0000
-+Subject: [PATCH] agent: Disallow SET requests with any NULL varbind Merge pull
-+ request #490 from fenner/set-null
-+
-+fixes: #474 and #475
-+
-+CVE: CVE-2022-44792, CVE-2022-44793
-+
-+Upstream-Status: Backport [https://github.com/net-snmp/net-snmp/commit/be804106fd0771a7d05236cff36e199af077af57]
-+
-+Signed-off-by: Narpat Mali <narpat.mali@windriver.com>
-+---
-+ agent/snmp_agent.c                            | 32 +++++++++++++++++++
-+ apps/snmpset.c                                |  1 +
-+ .../default/T0142snmpv2csetnull_simple        | 31 ++++++++++++++++++
-+ 3 files changed, 64 insertions(+)
-+ create mode 100644 testing/fulltests/default/T0142snmpv2csetnull_simple
-+
-+diff --git a/agent/snmp_agent.c b/agent/snmp_agent.c
-+index 867d0c1..3f678fe 100644
-+--- a/agent/snmp_agent.c
-++++ b/agent/snmp_agent.c
-+@@ -3719,12 +3719,44 @@ netsnmp_handle_request(netsnmp_agent_session *asp, int status)
-+     return 1;
-+ }
-+ 
-++static int
-++check_set_pdu_for_null_varbind(netsnmp_agent_session *asp)
-++{
-++    int i;
-++    netsnmp_variable_list *v = NULL;
-++
-++    for (i = 1, v = asp->pdu->variables; v != NULL; i++, v = v->next_variable) {
-++	if (v->type == ASN_NULL) {
-++	    /*
-++	     * Protect SET implementations that do not protect themselves
-++	     * against wrong type.
-++	     */
-++	    DEBUGMSGTL(("snmp_agent", "disallowing SET with NULL var for varbind %d\n", i));
-++	    asp->index = i;
-++	    return SNMP_ERR_WRONGTYPE;
-++	}
-++    }
-++    return SNMP_ERR_NOERROR;
-++}
-++
-+ int
-+ handle_pdu(netsnmp_agent_session *asp)
-+ {
-+     int             status, inclusives = 0;
-+     netsnmp_variable_list *v = NULL;
-+ 
-++#ifndef NETSNMP_NO_WRITE_SUPPORT
-++    /*
-++     * Check for ASN_NULL in SET request
-++     */
-++    if (asp->pdu->command == SNMP_MSG_SET) {
-++	status = check_set_pdu_for_null_varbind(asp);
-++	if (status != SNMP_ERR_NOERROR) {
-++	    return status;
-++	}
-++    }
-++#endif /* NETSNMP_NO_WRITE_SUPPORT */
-++
-+     /*
-+      * for illegal requests, mark all nodes as ASN_NULL 
-+      */
-+diff --git a/apps/snmpset.c b/apps/snmpset.c
-+index 48e14bd..d542713 100644
-+--- a/apps/snmpset.c
-++++ b/apps/snmpset.c
-+@@ -182,6 +182,7 @@ main(int argc, char *argv[])
-+             case 'x':
-+             case 'd':
-+             case 'b':
-++            case 'n': /* undocumented */
-+ #ifdef NETSNMP_WITH_OPAQUE_SPECIAL_TYPES
-+             case 'I':
-+             case 'U':
-+diff --git a/testing/fulltests/default/T0142snmpv2csetnull_simple b/testing/fulltests/default/T0142snmpv2csetnull_simple
-+new file mode 100644
-+index 0000000..0f1b8f3
-+--- /dev/null
-++++ b/testing/fulltests/default/T0142snmpv2csetnull_simple
-+@@ -0,0 +1,31 @@
-++#!/bin/sh
-++
-++. ../support/simple_eval_tools.sh
-++
-++HEADER SNMPv2c set of system.sysContact.0 with NULL varbind
-++
-++SKIPIF NETSNMP_DISABLE_SET_SUPPORT
-++SKIPIF NETSNMP_NO_WRITE_SUPPORT
-++SKIPIF NETSNMP_DISABLE_SNMPV2C
-++SKIPIFNOT USING_MIBII_SYSTEM_MIB_MODULE
-++
-++#
-++# Begin test
-++#
-++
-++# standard V2C configuration: testcomunnity
-++snmp_write_access='all'
-++. ./Sv2cconfig
-++STARTAGENT
-++
-++CAPTURE "snmpget -On $SNMP_FLAGS -c testcommunity -v 2c $SNMP_TRANSPORT_SPEC:$SNMP_TEST_DEST$SNMP_SNMPD_PORT .1.3.6.1.2.1.1.4.0"
-++
-++CHECK ".1.3.6.1.2.1.1.4.0 = STRING:"
-++
-++CAPTURE "snmpset -On $SNMP_FLAGS -c testcommunity -v 2c $SNMP_TRANSPORT_SPEC:$SNMP_TEST_DEST$SNMP_SNMPD_PORT .1.3.6.1.2.1.1.4.0 n x"
-++
-++CHECK "Reason: wrongType"
-++
-++STOPAGENT
-++
-++FINISHED
-+-- 
-+2.34.1
-+
-diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.9.3.bb b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.9.3.bb
-index 78d711fbf..f40fb8bbd 100644
---- a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.9.3.bb
-+++ b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.9.3.bb
-@@ -27,6 +27,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/net-snmp/net-snmp-${PV}.tar.gz \
-            file://reproducibility-have-printcap.patch \
-            file://0001-ac_add_search_path.m4-keep-consistent-between-32bit.patch \
-            file://0001-Add-noreturn-attribute-to-netsnmp_pci_error.patch \
-+           file://CVE-2022-44792-CVE-2022-44793.patch \
-            "
- SRC_URI[sha256sum] = "2097f29b7e1bf3f1300b4bae52fa2308d0bb8d5d3998dbe02f9462a413a2ef0a"
+diff --git a/meta-networking/recipes-support/tnftp/tnftp_20210827.bb b/meta-networking/recipes-support/tnftp/tnftp_20210827.bb
+index 8c5892668d44..a6ba671e703c 100644
+--- a/meta-networking/recipes-support/tnftp/tnftp_20210827.bb
++++ b/meta-networking/recipes-support/tnftp/tnftp_20210827.bb
+@@ -23,8 +23,8 @@ inherit autotools update-alternatives pkgconfig
+ ALTERNATIVE_PRIORITY = "100"
+ 
+ ALTERNATIVE:${PN} = "ftp"
+-ALTERNATIVE_LINK_NAME_${PN} = "${bindir}/ftp"
+-ALTERNATIVE_TARGET_${PN}  = "${bindir}/tnftp"
++ALTERNATIVE_LINK_NAME[ftp] = "${bindir}/ftp"
++ALTERNATIVE_TARGET[ftp] = "${bindir}/tnftp"
+ 
+ FILES:${PN} = "${bindir}/tnftp"
  
 -- 
-2.34.1
+2.30.2
 
 
