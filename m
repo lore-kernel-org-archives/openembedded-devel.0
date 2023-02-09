@@ -2,38 +2,38 @@ Return-Path: <yi.zhao@eng.windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 415C2C636D3
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3F383C05027
 	for <webhook@archiver.kernel.org>; Thu,  9 Feb 2023 04:02:39 +0000 (UTC)
 Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
- by mx.groups.io with SMTP id smtpd.web11.6424.1675915354242801309
+ by mx.groups.io with SMTP id smtpd.web10.6385.1675915353858980515
  for <openembedded-devel@lists.openembedded.org>;
  Wed, 08 Feb 2023 20:02:34 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=pps06212021 header.b=gLbwcedf;
+ dkim=pass header.i=@windriver.com header.s=pps06212021 header.b=ZuAvttMt;
  spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=140437523d=yi.zhao@windriver.com)
 Received: from pps.filterd (m0250811.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 31942XGU013397
+	by mx0a-0064b401.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 31942XGT013397
 	for <openembedded-devel@lists.openembedded.org>; Thu, 9 Feb 2023 04:02:33 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com; h=from : to :
- subject : date : message-id : in-reply-to : references :
- content-transfer-encoding : content-type : mime-version; s=PPS06212021;
- bh=P6kta/MnUAnQ3dIWsmEv4lw2Dvdd2B9U33vWqUN9ktE=;
- b=gLbwcedffSEMRWS6VCoEOxFgIkMnE4/u01dky5HyxQrRNHekt2FOxu8i3UrH8jfcQZ+Q
- gsP+agezqDfMzw2XYXf+eaEGxfoZQRWekBw3Cg/uYPg05cXq34LH4uHaxAebb/PBaBm6
- L3BpPw6fu3n2h4IyMjVSSiJKLgt4qSbRNJjO9sU2b5pfTwEZ1gSJ9KnUHRsv9M9gBPiQ
- ojRxIejMnpemZFQy0gvKL6mti3phLx3th9k8jtBmhsuKjEVYAwvJ+z8VWh2umxguAl77
- Bqs8EyzmmIi7ORIlcvhBsqaQN0FSf3NRnySZ3sx6SqLFqbboTxurVs2w2J4otVMDZ5mF 8w== 
+ subject : date : message-id : content-transfer-encoding : content-type :
+ mime-version; s=PPS06212021;
+ bh=IZvNkDQEDpFUSgOqI32vcUPMBzeSRm1h0vI6qwh5ySI=;
+ b=ZuAvttMttjVX+ZhlCsFr2v9XKlUps/cOA9XzsER09EAURsuwUKlOaY82N5Rv46yDr8ij
+ uPhmpk0glIBxNoUQ+Y7o3jsjPUopbmBIzGxBfU6ae0RS0Xkw8EPdTKp5nunQkWi5REU1
+ aK11eXkojiIzlHcijEwQRz/E8e5pUh/sawZuPSONFWrj4OxYajZXmSOMnoG5EMwNgbU0
+ ThE3IpcQxNbPkI3BAjt51DrvP6AE4Wwsx4kPS/D1AN9OE+HGPeUwJ+2cZhJzg/EbCIBF
+ SGi99TsjFKKvwvJHjbC8JDTBfGs486G5opZLF2ZJSdIN92WRR6NRDQ3Byk8k4gERXpmL jg== 
 Received: from nam11-bn8-obe.outbound.protection.outlook.com (mail-bn8nam11lp2169.outbound.protection.outlook.com [104.47.58.169])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3nhck34x6h-2
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3nhck34x6h-1
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Thu, 09 Feb 2023 04:02:33 +0000
+	for <openembedded-devel@lists.openembedded.org>; Thu, 09 Feb 2023 04:02:32 +0000
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=Zr/uwn04r0wvyTsVcMKkMDUQeknfO/bFMH/EEpNNoLYmA2hqJjzkpLAinf+QOXlGLLpR+Ep7K0atKQdk9VN5oIh3SCX/p8sekPtZZT7dClVkKgTBqY6KSwR/fJdqjoFTGARb3LF6xGKYEmDjg0Nz8CzCqDxVoqi5gIKPdtYc88fK/vxMH6/a+nBPDIrS+oBdec8PIZDpE6sWxD8e2m1PsgXdkhAc7Q2avOVMIpwWC3DIe+d4mnB6cdCCL+OhLup4+H7u8SUZYRPMgrdvvvhmly4Kz44iFMcQR7URPnycIbkM2TOkuU5guHcQjSPVV362da4eVm4CJ+nS/OY3786ZRQ==
+ b=hQNnEXYrvxD6ISK9719J+znutKdKsbmOS4t9v8CKgsxX32wM3mvVdYEh7kuBDij3bExDFbByynLh7hn/w6ysk/XLb0h6QA9wky8KeLNg2BFqqwl1+HnbZheL7e7UWhHVlvLiBPP6xxFGvduUURfEmYQLYRkIUAvHHZaXX46K40cp6VEJoVRgeH+nHg+D0PJx8YKwaX3O6rbZKbIvQCKM9CQ0ZJ6bZ7dX48jzgxbyCKrAgoBMCKCefznuibAsOX6k+YriM0SvUUMCZ8zZJOCk93lwOI+B5yovBh+AM4O2wNVjEhDPksMGx3ZamrbgL6xjGB50N5N7/P5iShfJw5JyNQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=P6kta/MnUAnQ3dIWsmEv4lw2Dvdd2B9U33vWqUN9ktE=;
- b=Oiwcw4GTFKxITwU/RLJRtcn/BWdI+TfgFAhDLN+R9B6Hp9A11g0Bd68IbQscvezQ5hpO5kCVxMVFKwtAuZg80Mo+jOlC9xnIYwxk2CtsienUQolunU6JRkG8WpQ7GBLGWdDoS/tMK+375eW3DPAV8Qkck1oB7eylicOT6/LZO7JdH6j1mbhddTwxLjGY3tjN6sQ0RDhphgbqArIKhJgX/R5XkjFg3MopzLFL2tCIj8iqEkCKIRm2ZEoPINeTcB9EPwyq2A02f2734r+wCafrKuJSzekdHjVEW7hOMjOzvIfFa4B2Uvxc57uxsoE+vlBkZ0abNmsDlcL3iYaeEsvLIA==
+ bh=IZvNkDQEDpFUSgOqI32vcUPMBzeSRm1h0vI6qwh5ySI=;
+ b=ZMu6W8dSEGHfXOhPtOwmAM/yS1CCg8/X8bjZywP9wAyjFKp/FGW2QEtQlabsjUYUEZAgKnvqWGjt+1gr0lEX9p5sP71/qa+I00RAkoLzu3j3sY6Jz+EG2StSC2WIjDx66T9qnuzeXAVO+ECfzNxvD8UE4ktjI4y24pj6vO34tDKM6SviRKWkXZs10yB7qvN3Roe3JkL1HV+k5lxqOgrRwFU4OkDIeDnyG21mQy3YqYwbRyBCKGdOCpPwX6crWStaHv7BrywL18yHzAr2qYgYhIemlotv00Sx7GrYyGC89p3PDKZv97RXxisyfU4yPvqyJzvhf3mc3AklKNdb6Vl+TA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
@@ -41,19 +41,17 @@ Received: from CO1PR11MB4867.namprd11.prod.outlook.com (2603:10b6:303:9a::13)
  by MW3PR11MB4764.namprd11.prod.outlook.com (2603:10b6:303:5a::16) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6086.17; Thu, 9 Feb
- 2023 04:02:32 +0000
+ 2023 04:02:31 +0000
 Received: from CO1PR11MB4867.namprd11.prod.outlook.com
  ([fe80::3cb7:edf3:7304:982e]) by CO1PR11MB4867.namprd11.prod.outlook.com
  ([fe80::3cb7:edf3:7304:982e%2]) with mapi id 15.20.6086.017; Thu, 9 Feb 2023
- 04:02:32 +0000
+ 04:02:31 +0000
 From: Yi Zhao <yi.zhao@windriver.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [kirkstone][meta-networking][PATCH 2/2] frr: Security fix for CVE-2022-42917
-Date: Thu,  9 Feb 2023 12:02:21 +0800
-Message-Id: <20230209040221.1682122-2-yi.zhao@windriver.com>
+Subject: [kirkstone][meta-networking][PATCH 1/2] freeradius: Security fixes for CVE-2022-41860 CVE-2022-41861
+Date: Thu,  9 Feb 2023 12:02:20 +0800
+Message-Id: <20230209040221.1682122-1-yi.zhao@windriver.com>
 X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20230209040221.1682122-1-yi.zhao@windriver.com>
-References: <20230209040221.1682122-1-yi.zhao@windriver.com>
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-ClientProxiedBy: SJ0PR03CA0300.namprd03.prod.outlook.com
@@ -62,57 +60,57 @@ X-ClientProxiedBy: SJ0PR03CA0300.namprd03.prod.outlook.com
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: CO1PR11MB4867:EE_|MW3PR11MB4764:EE_
-X-MS-Office365-Filtering-Correlation-Id: a73944fc-05d0-4ee0-7f54-08db0a5277ed
+X-MS-Office365-Filtering-Correlation-Id: 51671a50-1822-4ace-4a04-08db0a52773f
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	G6tYKER4RmKVTDoNIAiAbMHFzEAZFrZ3oSOyC3MxBfyBTm1JQdOtH96gxHk2XtVrWBtApgPvVbSolcw6uGaDoLMVoE3A3U292oA/pqkJOlnIoLOsQQjHLlE7m7YX5mA6DgzP1uB8uGffZZW2GmDuKjsxGcHXFaf3LF9lHZb5bHYPebzfn2W+Uz++WpVQotAbL0eIuWtMmUHjLXFrTEe892etSuWlMH0pxyquul/9puy10Y9lBXOOJmFet7EvZE3C2nnvIqUhIuxCKar0HxnhGPydY+bFnaQfKEZ869JkHY6FGdMOKhfR8VT7G2A8ZCxmfH3adDscjPuN8E0SHb6ruUkSkFcZsUaQcQ0/fqo6BO8Fl9KQXpnVv8qnITq4gWDw1x2pIiJ1RIdVt7nFdF8V/9pSh2zDzjcry3LmifyBWKf72w+rIg6kJEqaRWfsltgd9PXagleKKypeGJcXXS4huvcmLLTLkc94FrhRAB+NIhkmO1WyKF8DSrO5HKHpenVShE9RxMYvGp9AMHRVoN0dFYHDeCy99IWtdAh8iQniT5naANx3xPdDKhIaCWw8FrtGN42+8XfJb17IE8oarUbN1ADKCLFObgQ3z26YRuIa/ct58+V3rhhzFyr3GyQSuwaG4JUIMaJjJpDoNuYW30ArNXGejjIqlGqwwj1AntXvlcEpXhyLdN6gJLA+KQelbpGl1p+pubDoxM8tmYqcOewDhoLc2D4jKsCfYaNH1tqNBlLoYCGGWhC0FCIIWWykZ0cSiCToG/iQIl9Ll3pxBPbGqA==
+	K7dEtbDtpjrirVXMbdCVVUowtuiI8t6IK0hMN1nwDviP467y12V2vltUZ3VWnS8vUVSvpXpZmXQ8CCdONNcY9ELNbDAxRrAx+U9cyAmUsFXzKfVhv7zGU2cgRuAZpXr/ml5j+G/P3rxQgRXbLZVQw3I+XIDHboPjO2EkY6aQvtRY8zmE6HEzstTzEaG+ojXANV0ACP9ZGGMYF956vtIbEkfrXHzXbztBrZ8F54gDcHArbcwk/KZYxjhWMeza2G987pve+7CnHBue8KF/2bMkKKH+0jBfuzJ23nx9k2PuikBDtMeoggKxsNcojS/ZougiIxSqnYww+16Qs1Pe0N3cc0dY4NtArvn4ViXZZ1U8sUn6wv9CVQO86Q8AFvo+jofan0eu4SVEPicia7P2Fma2jLt4/IuJwEpfSh0gFbEY0dw9Nrmw0zUWulYqpPZEIQeTJV4n6W/SAepPRaxuiuIN2F4oh4i5IlRdoM8J3digs57LLg6H1prb/9C5JgjOZcQTdQsUFTyE8ETLW5FhxeU3p+byyQ6ELxO6/cH+AkOtzKWGbrMVMGDwkqaHqydFMbvlntrV4o3K85bk182gW/LUaRv9bUxf+eESKbT6cBBj8C2HFP1Bb78CWR4aMnOy7D5xmOI6blvYBdaNa1SKcjsdyma3S/FAS1Jt99vh7P1t2Siw5Z6GX7XrvgsImUnY85akg4B1jITpGjVXq0+kD6CCh/0ICfKPyZxGM776zHRqrQCV7ELe6N822H/gfwcp61H0oV0+oJqPOURLgG4r9LUBzQ==
 X-Forefront-Antispam-Report: 
 	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CO1PR11MB4867.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230025)(4636009)(366004)(39850400004)(136003)(376002)(346002)(396003)(451199018)(86362001)(36756003)(38350700002)(38100700002)(316002)(186003)(41300700001)(8936002)(5660300002)(66946007)(8676002)(66556008)(6916009)(66476007)(15650500001)(44832011)(2906002)(2616005)(83380400001)(478600001)(966005)(6486002)(52116002)(6666004)(6512007)(6506007)(1076003)(26005);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?us-ascii?Q?VO0Cp+Rs2R4xbMS5lQ66fs9y/CYQdKNNbbv4GuzQiRw7Gh/nINXdTvgD4x17?=
- =?us-ascii?Q?mFDUDrOVzPnPYycKov6Nwo+kx6/I0LsPTjo5ZPABCnZgjd+HvAzz5PY99FvI?=
- =?us-ascii?Q?bNLoTjaaDXNc4f4yyg/PRtF8UlQwSFP1eDVaH90v5UoQV1U62l4YxpoLalmn?=
- =?us-ascii?Q?aQgps6md1eiNdA1/HnAWk/zr88uu0TBQ61BHcN1bUI6zITKgAKiM6r9Gyrvk?=
- =?us-ascii?Q?L2BurGMkvnMfGUtCatwtYFM8mzcuVAtEO2KuQlxurnG1H7AugZzCJNCDztwn?=
- =?us-ascii?Q?jkv767buPTEJeRBnVDSTFiGkAgOg7NGx4kXH7AYalvPXeCy1fdZoN7ipqmMo?=
- =?us-ascii?Q?NDnsQ+Uiln5VE7UvlQffb7rpjLOgFc/UGcfaaVkMIrdcV6e2jZyPnCLxfHYU?=
- =?us-ascii?Q?cqeAqZ1DHaxO162TcyCbh9EbIYE/6PUgDmNI7YnqU2t32v+g8qREBFWHBHoa?=
- =?us-ascii?Q?eKrFZzud1XcasNN5GfJE2yC7mtsDzYmZPPGxu501TaPvtyKYozZWzSPbmo+W?=
- =?us-ascii?Q?FKaGqXKaNstdJO6oazg/wWHzwB2bhEJ5CpsjwaFvsV9rLcJRg4DEvT6gNJZw?=
- =?us-ascii?Q?GTlg7UBjVYoGW3wGvDabVIl2/OhkAA+7PSkcHuxIpy167yuVRLQsoiIQRfDt?=
- =?us-ascii?Q?RIQKwlAxsxpzauQFuKTMBvnJ9cX2SI+/utW67FvYleGdInmzyjJkue/G7JsJ?=
- =?us-ascii?Q?wVJQ+BXfR+JoG87t9jhPFco1qz6PHv6U247Pdyqi+5C6QAJb/ntvyBQgBXI8?=
- =?us-ascii?Q?qDTP2msIvs8sS5bXPTAPZ+Rhun/54kIDdnebHCz9L5J681LNiJtkI5uT6v6Q?=
- =?us-ascii?Q?gUnABKD3P/z58xSw6o/+pPf8/ZL+PQHsTsp7d82n1ov3ZYpiJWXhaatbiNdl?=
- =?us-ascii?Q?esMXj3gstmyFrJp5lqV69Cd0Bw2di3i7yAwujzypRmQ8x5vEheJzrpuoFRmP?=
- =?us-ascii?Q?6rSMrsks9wS9yvVMVTRHNSIDdsf2F7xV6CRxwny2vw3m2MWWefi1wNQa4lLV?=
- =?us-ascii?Q?qPtDtG6N3uGqHBnOI0+knxG3sgmjStBK4NS0A/xD4TL5vCL8K+khSC3Zj33r?=
- =?us-ascii?Q?te2i2noPa5vbLsAuVHimMZbJfHAulHWI06UyfnZPdwbAl9ddSWNDK20Aw4Pd?=
- =?us-ascii?Q?YgtQLiga7URPtdyF6DYBTuXzmK5Vj3t1HBTKdtWGUlC9FIakVyWTJ1qL/26L?=
- =?us-ascii?Q?UChgHheYKW1AhWPRAe75P3j2cy8nO++3XvDDi7DVKw5E4Dm2haP18T21RGOb?=
- =?us-ascii?Q?ELB63CoxY4Wew8rHGMbi5fe+QpDY2oPsVeelXYZeCJgIc0T3n6zqk+yY5a/g?=
- =?us-ascii?Q?Z6V7LSTNwNCX3EHRqxcjuuFBaxatoTCxUsOowBEEg9GGnEBF/ZITW7hk+svU?=
- =?us-ascii?Q?8u90xNA0vtti5KILFvJcX6FCwjub0Fdd+JNEgqQVpdjK62cHld8i6xsX83h/?=
- =?us-ascii?Q?l+LPxFOJ9JCUHKkIcYh5btQHwzqYV7SdT98ARj2aWEEYx8FaBsFUKiy9ynMN?=
- =?us-ascii?Q?2yURpOoEfd44dy3L1Phu+CQ64lzPggzABRdSTORDjcMfdpeWI5Ma28AqqS1Y?=
- =?us-ascii?Q?r9eD5P1PWGvWX6ZhhGoYukqoW3890e2bGR+dm2bbSLzCMkOX5XZrT+pMMWGo?=
- =?us-ascii?Q?mw=3D=3D?=
+	=?us-ascii?Q?Lto0U+XavHlLcwZN1XYMuYB1sNlJF2dyhm3Ay8mYo5F0PtMql+hLldd89Lo/?=
+ =?us-ascii?Q?NExg7dF0rqA36UCgQKX4O0Pxbe+8gI0yuWvRqJo7fiXsMyesWhneFtn1P9NW?=
+ =?us-ascii?Q?vylmf1nyKqUdEzY9W7kJHSIywVn7VPz60aoZepIXdcGIUaMDTs5iH+3HYHJ5?=
+ =?us-ascii?Q?W1Lo8rKTnRgxVT7OaepkFfxmwMrbIKfG4jyjGUwWnkjlrWOwNgMUZxcHl4SU?=
+ =?us-ascii?Q?RSIiGKunIUVRBpBe0jOXsryzdQWRUu5KtjKgYHSqRq8La+kB7LkjSycTi0QQ?=
+ =?us-ascii?Q?OyorgAhpjqGyIFOUi/5+iiB5gPgaY9AM53aacLrWsReJ2HNgjcg4I9vr0Vot?=
+ =?us-ascii?Q?B+oRY/U4r5BGh9fgAEnnJD7V50//0XissKQ6+odHj+Za/6gmLQJXEjeJ3Wfj?=
+ =?us-ascii?Q?sFsuhTHzqS8URByRXHp4EEolVlnYNoUnxUfBYcUDExl7E3YYVo4nfW9P3wgQ?=
+ =?us-ascii?Q?9YhUESwhepcDwBB7E7O3qEVS6jq4TJlvCuRC3eNfpV//u9OogGunrLRuaW5O?=
+ =?us-ascii?Q?VIwE8xxfgTYbdIvqv4/zU7xJYEv5p5HUyQMzR5JBV6LxHHQxJwdHXee4bhfI?=
+ =?us-ascii?Q?T4ODO7iQT3hlnb/uvCSUFq5bxzoR7SyZWT1cZcf6byqtyw8Zfdqvkq49qmSP?=
+ =?us-ascii?Q?BZMJXfWDxIpo9mOIZjop+C6aaxmltM83QvjnfR1lZhL/b2a63/LtEtrBGKc7?=
+ =?us-ascii?Q?X6RibjaMfHX5bHag5Y15hsS6+tWxQBLwc8N1pj/G2T23VTMZUSe0L8FfTLmt?=
+ =?us-ascii?Q?UTmHpcMioT4EN64XTmuRNG+vrWGTKcjZJRB6eRQzvxNcolebD5lnB4lgPCjD?=
+ =?us-ascii?Q?WdNlMOo93gtXIYyTZkUrY8KqrppMsFaJgqrZwAXym7UL9e6orA4S5HBP+9VR?=
+ =?us-ascii?Q?Tv8YvML9J+GNGBjI3c9azMkWJ579869AoGenrniKyAH1vD0N3PDCq5dh/KqP?=
+ =?us-ascii?Q?p1R9FheZAkf8KsREuSwgi14ko5FOPbkIYI2DgdWGauENVKewsPKi3Erscaoz?=
+ =?us-ascii?Q?QpGu9x2Dt5j8BVB3exv8IrGsRRDq2+YOe8aaBmNdl54cfPwEjcr3KZEdc+nq?=
+ =?us-ascii?Q?Wd5VDDbNybxsyAVD6BpRLnRcCl0jEIzRNtQxwC+YcWL9+NfAZjVy6y+XB8o/?=
+ =?us-ascii?Q?qAFMyF9C10o0U0mb5pbSOUoyorNfEEuodeIV7yxbAnWBUYWehMn1wZG+eVTi?=
+ =?us-ascii?Q?+bxBRdkACaTSW0SCAQQ+9uKQhEDgkwNKheQ5G1INhIVDx4/UDtpKVFL91W73?=
+ =?us-ascii?Q?Z/RFhfdfDAC/3eZw70OY+xbPjJd05rYs0RmK1bnsZ8qK6FD3G9JrCC+q54JF?=
+ =?us-ascii?Q?yLbGQXIg+98TTCNCbPByLG930TDEopOZfrQua/nhucwEj9XxxLEW41qKM9B9?=
+ =?us-ascii?Q?xEhXCbvxR5htR8Fk9PnCuZhGYBD+UGbqThjJ8b/Kt/VdpZj1gq0gCjc5osFf?=
+ =?us-ascii?Q?1xlXYxVSMJpkBv9FtJFrbFLAaSPzp6dAFNRRKEwAbEiV8qR3SX7fow+3Pj9j?=
+ =?us-ascii?Q?jmJoHhToY5yl54idT3ssmMLKSPYFJJOCK5R3IbIsRB0R5RG26ib6Eg83Pv1i?=
+ =?us-ascii?Q?58xzHr/qqSQrRlRSHZ7K/WRRKBiYa7wG/4SYPhZ3tm/4MJa3DeAn2R8/FEy/?=
+ =?us-ascii?Q?Ow=3D=3D?=
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: a73944fc-05d0-4ee0-7f54-08db0a5277ed
+X-MS-Exchange-CrossTenant-Network-Message-Id: 51671a50-1822-4ace-4a04-08db0a52773f
 X-MS-Exchange-CrossTenant-AuthSource: CO1PR11MB4867.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Feb 2023 04:02:32.1206
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Feb 2023 04:02:30.9789
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: kHbOHfyrvSOj9M3x3SnIS3IxWQ6mpDBsQBGrIyNiVM6NcpSi/qwqpLxbvBAs706daq2fGHup+d+wkKHnLiFhpg==
+X-MS-Exchange-CrossTenant-UserPrincipalName: /6elTONStMIM5uieRnI+B/xsizkZafeCFtwPrQOI25pfYCrZHziiAkD87scC9VUg8jcMdEyuNjhysf8XlCK5SQ==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW3PR11MB4764
-X-Proofpoint-ORIG-GUID: bPa5BFuPJWRZ7gHcJWNrcmorU6ibqpCm
-X-Proofpoint-GUID: bPa5BFuPJWRZ7gHcJWNrcmorU6ibqpCm
+X-Proofpoint-ORIG-GUID: J7XHuDE6uiQ49u3UfuoROgxQaLevaeHx
+X-Proofpoint-GUID: J7XHuDE6uiQ49u3UfuoROgxQaLevaeHx
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.219,Aquarius:18.0.930,Hydra:6.0.562,FMLib:17.11.122.1
  definitions=2023-02-09_01,2023-02-08_02,2022-06-22_01
@@ -125,100 +123,236 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 09 Feb 2023 04:02:39 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101005
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101004
 
-Reference:
-https://nvd.nist.gov/vuln/detail/CVE-2022-42917
-https://www.suse.com/de-de/security/cve/CVE-2022-42917.html
-https://bugzilla.suse.com/show_bug.cgi?id=1204124
+CVE-2022-41860:
+In freeradius, when an EAP-SIM supplicant sends an unknown SIM option,
+the server will try to look that option up in the internal dictionaries.
+This lookup will fail, but the SIM code will not check for that failure.
+Instead, it will dereference a NULL pointer, and cause the server to
+crash.
 
-Patch from:
-[1] https://github.com/FRRouting/frr/commit/5216a05b32390a64efeb598051411e1776042624
-[2] https://github.com/FRRouting/frr/commit/6031b8a3224cde14fd1df6e60855310f97942ff9
+CVE-2022-41861:
+A flaw was found in freeradius. A malicious RADIUS client or home server
+can send a malformed abinary attribute which can cause the server to
+crash.
 
-Per [2], update frr.pam to eliminate the warning issued by pam:
-vtysh[485]: pam_warn(frr:account): function=[pam_sm_acct_mgmt] flags=0
-service=[frr] terminal=[<unknown>] user=[root] ruser=[<unknown>] rhost=[<unknown>]
+References:
+https://nvd.nist.gov/vuln/detail/CVE-2022-41860
+https://nvd.nist.gov/vuln/detail/CVE-2022-41861
+
+Patches from:
+CVE-2022-41860:
+https://github.com/FreeRADIUS/freeradius-server/commit/f1cdbb33ec61c4a64a32e107d4d02f936051c708
+
+CVE-2022-41861:
+https://github.com/FreeRADIUS/freeradius-server/commit/0ec2b39d260e08e4c3464f6b95005821dc559c62
 
 Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
 ---
- .../frr/frr/CVE-2022-42917.patch              | 36 +++++++++++++++++++
- .../recipes-protocols/frr/frr/frr.pam         |  3 +-
- .../recipes-protocols/frr/frr_8.2.2.bb        |  1 +
- 3 files changed, 39 insertions(+), 1 deletion(-)
- create mode 100644 meta-networking/recipes-protocols/frr/frr/CVE-2022-42917.patch
+ .../freeradius/files/CVE-2022-41860.patch     | 118 ++++++++++++++++++
+ .../freeradius/files/CVE-2022-41861.patch     |  53 ++++++++
+ .../freeradius/freeradius_3.0.21.bb           |   2 +
+ 3 files changed, 173 insertions(+)
+ create mode 100644 meta-networking/recipes-connectivity/freeradius/files/CVE-2022-41860.patch
+ create mode 100644 meta-networking/recipes-connectivity/freeradius/files/CVE-2022-41861.patch
 
-diff --git a/meta-networking/recipes-protocols/frr/frr/CVE-2022-42917.patch b/meta-networking/recipes-protocols/frr/frr/CVE-2022-42917.patch
+diff --git a/meta-networking/recipes-connectivity/freeradius/files/CVE-2022-41860.patch b/meta-networking/recipes-connectivity/freeradius/files/CVE-2022-41860.patch
 new file mode 100644
-index 000000000..73493bb12
+index 000000000..4ea519c75
 --- /dev/null
-+++ b/meta-networking/recipes-protocols/frr/frr/CVE-2022-42917.patch
-@@ -0,0 +1,36 @@
-+From 5216a05b32390a64efeb598051411e1776042624 Mon Sep 17 00:00:00 2001
-+From: Marius Tomaschewski <mt@suse.com>
-+Date: Fri, 11 Nov 2022 12:26:04 +0100
-+Subject: [PATCH] tools: remove backslash from declare check regex
++++ b/meta-networking/recipes-connectivity/freeradius/files/CVE-2022-41860.patch
+@@ -0,0 +1,118 @@
++From f1cdbb33ec61c4a64a32e107d4d02f936051c708 Mon Sep 17 00:00:00 2001
++From: "Alan T. DeKok" <aland@freeradius.org>
++Date: Mon, 7 Feb 2022 22:26:05 -0500
++Subject: [PATCH] it's probably wrong to be completely retarded.  Let's fix
++ that.
 +
-+The backslash in `grep -q '^declare \-a'` is not needed and
-+causes `grep: warning: stray \ before -` warning in grep-3.8.
-+
-+Signed-off-by: Marius Tomaschewski <mt@suse.com>
-+
-+CVE: CVE-2022-42917
++CVE: CVE-2022-41860
 +
 +Upstream-Status: Backport
-+[https://github.com/FRRouting/frr/commit/5216a05b32390a64efeb598051411e1776042624]
++[https://github.com/FreeRADIUS/freeradius-server/commit/f1cdbb33ec61c4a64a32e107d4d02f936051c708]
 +
 +Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
 +---
-+ tools/frrcommon.sh.in | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
++ src/modules/rlm_eap/libeap/eapsimlib.c | 69 +++++++++++++++++++-------
++ 1 file changed, 52 insertions(+), 17 deletions(-)
 +
-+diff --git a/tools/frrcommon.sh.in b/tools/frrcommon.sh.in
-+index 61f1abb37..3c16c27c6 100755
-+--- a/tools/frrcommon.sh.in
-++++ b/tools/frrcommon.sh.in
-+@@ -335,7 +335,7 @@ if [ -z "$FRR_PATHSPACE" ]; then
-+ 	load_old_config "/etc/sysconfig/frr"
-+ fi
++diff --git a/src/modules/rlm_eap/libeap/eapsimlib.c b/src/modules/rlm_eap/libeap/eapsimlib.c
++index cf1e8a7dd9..e438a844ea 100644
++--- a/src/modules/rlm_eap/libeap/eapsimlib.c
+++++ b/src/modules/rlm_eap/libeap/eapsimlib.c
++@@ -307,42 +307,77 @@ int unmap_eapsim_basictypes(RADIUS_PACKET *r,
++ 	newvp->vp_length = 1;
++ 	fr_pair_add(&(r->vps), newvp);
 + 
-+-if { declare -p watchfrr_options 2>/dev/null || true; } | grep -q '^declare \-a'; then
-++if { declare -p watchfrr_options 2>/dev/null || true; } | grep -q '^declare -a'; then
-+ 	log_warning_msg "watchfrr_options contains a bash array value." \
-+ 		"The configured value is intentionally ignored since it is likely wrong." \
-+ 		"Please remove or fix the setting."
+++	/*
+++	 *	EAP-SIM has a 1 octet of subtype, and 2 octets
+++	 *	reserved.
+++	 */
++ 	attr     += 3;
++ 	attrlen  -= 3;
++ 
++-	/* now, loop processing each attribute that we find */
++-	while(attrlen > 0) {
+++	/*
+++	 *	Loop over each attribute.  The format is:
+++	 *
+++	 *	1 octet of type
+++	 *	1 octet of length (value 1..255)
+++	 *	((4 * length) - 2) octets of data.
+++	 */
+++	while (attrlen > 0) {
++ 		uint8_t *p;
++ 
++-		if(attrlen < 2) {
+++		if (attrlen < 2) {
++ 			fr_strerror_printf("EAP-Sim attribute %d too short: %d < 2", es_attribute_count, attrlen);
++ 			return 0;
++ 		}
++ 
+++		if (!attr[1]) {
+++			fr_strerror_printf("EAP-Sim attribute %d (no.%d) has no data", eapsim_attribute,
+++					   es_attribute_count);
+++			return 0;
+++		}
+++
++ 		eapsim_attribute = attr[0];
++ 		eapsim_len = attr[1] * 4;
++ 
+++		/*
+++		 *	The length includes the 2-byte header.
+++		 */
++ 		if (eapsim_len > attrlen) {
++ 			fr_strerror_printf("EAP-Sim attribute %d (no.%d) has length longer than data (%d > %d)",
++ 					   eapsim_attribute, es_attribute_count, eapsim_len, attrlen);
++ 			return 0;
++ 		}
++ 
++-		if(eapsim_len > MAX_STRING_LEN) {
++-			eapsim_len = MAX_STRING_LEN;
++-		}
++-		if (eapsim_len < 2) {
++-			fr_strerror_printf("EAP-Sim attribute %d (no.%d) has length too small", eapsim_attribute,
++-					   es_attribute_count);
++-			return 0;
++-		}
+++		newvp = fr_pair_afrom_num(r, eapsim_attribute + PW_EAP_SIM_BASE, 0);
+++		if (!newvp) {
+++			/*
+++			 *	RFC 4186 Section 8.1 says 0..127 are
+++			 *	"non-skippable".  If one such
+++			 *	attribute is found and we don't
+++			 *	understand it, the server has to send:
+++			 *
+++			 *	EAP-Request/SIM/Notification packet with an
+++			 *	(AT_NOTIFICATION code, which implies general failure ("General
+++			 *	failure after authentication" (0), or "General failure" (16384),
+++			 *	depending on the phase of the exchange), which terminates the
+++			 *	authentication exchange.
+++			 */
+++			if (eapsim_attribute <= 127) {
+++				fr_strerror_printf("Unknown mandatory attribute %d, failing",
+++						   eapsim_attribute);
+++				return 0;
+++			}
++ 
++-		newvp = fr_pair_afrom_num(r, eapsim_attribute+PW_EAP_SIM_BASE, 0);
++-		newvp->vp_length = eapsim_len-2;
++-		newvp->vp_octets = p = talloc_array(newvp, uint8_t, newvp->vp_length);
++-		memcpy(p, &attr[2], eapsim_len-2);
++-		fr_pair_add(&(r->vps), newvp);
++-		newvp = NULL;
+++		} else {
+++			/*
+++			 *	It's known, ccount for header, and
+++			 *	copy the value over.
+++			 */
+++			newvp->vp_length = eapsim_len - 2;
+++
+++			newvp->vp_octets = p = talloc_array(newvp, uint8_t, newvp->vp_length);
+++			memcpy(p, &attr[2], newvp->vp_length);
+++			fr_pair_add(&(r->vps), newvp);
+++		}
++ 
++ 		/* advance pointers, decrement length */
++ 		attr += eapsim_len;
 +-- 
 +2.25.1
 +
-diff --git a/meta-networking/recipes-protocols/frr/frr/frr.pam b/meta-networking/recipes-protocols/frr/frr/frr.pam
-index 3541a975a..a9ec35dd6 100644
---- a/meta-networking/recipes-protocols/frr/frr/frr.pam
-+++ b/meta-networking/recipes-protocols/frr/frr/frr.pam
-@@ -1,10 +1,11 @@
- #
--# The PAM configuration file for the quagga `vtysh' service
-+# The PAM configuration file for the frr `vtysh' service
- #
+diff --git a/meta-networking/recipes-connectivity/freeradius/files/CVE-2022-41861.patch b/meta-networking/recipes-connectivity/freeradius/files/CVE-2022-41861.patch
+new file mode 100644
+index 000000000..352c02137
+--- /dev/null
++++ b/meta-networking/recipes-connectivity/freeradius/files/CVE-2022-41861.patch
+@@ -0,0 +1,53 @@
++From 0ec2b39d260e08e4c3464f6b95005821dc559c62 Mon Sep 17 00:00:00 2001
++From: "Alan T. DeKok" <aland@freeradius.org>
++Date: Mon, 28 Feb 2022 10:34:15 -0500
++Subject: [PATCH] manual port of commit 5906bfa1
++
++CVE: CVE-2022-41861
++
++Upstream-Status: Backport
++[https://github.com/FreeRADIUS/freeradius-server/commit/0ec2b39d260e08e4c3464f6b95005821dc559c62]
++
++Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
++---
++ src/lib/filters.c | 12 +++++++++---
++ 1 file changed, 9 insertions(+), 3 deletions(-)
++
++diff --git a/src/lib/filters.c b/src/lib/filters.c
++index 4868cd385d..3f3b63daee 100644
++--- a/src/lib/filters.c
+++++ b/src/lib/filters.c
++@@ -1205,13 +1205,19 @@ void print_abinary(char *out, size_t outlen, uint8_t const *data, size_t len, in
++ 			}
++ 		}
++ 	} else if (filter->type == RAD_FILTER_GENERIC) {
++-		int count;
+++		size_t count, masklen;
+++
+++		masklen = ntohs(filter->u.generic.len);
+++		if (masklen >= sizeof(filter->u.generic.mask)) {
+++			*p = '\0';
+++			return;
+++		}
++ 
++ 		i = snprintf(p, outlen, " %u ", (unsigned int) ntohs(filter->u.generic.offset));
++ 		p += i;
++ 
++ 		/* show the mask */
++-		for (count = 0; count < ntohs(filter->u.generic.len); count++) {
+++		for (count = 0; count < masklen; count++) {
++ 			i = snprintf(p, outlen, "%02x", filter->u.generic.mask[count]);
++ 			p += i;
++ 			outlen -= i;
++@@ -1222,7 +1228,7 @@ void print_abinary(char *out, size_t outlen, uint8_t const *data, size_t len, in
++ 		outlen--;
++ 
++ 		/* show the value */
++-		for (count = 0; count < ntohs(filter->u.generic.len); count++) {
+++		for (count = 0; count < masklen; count++) {
++ 			i = snprintf(p, outlen, "%02x", filter->u.generic.value[count]);
++ 			p += i;
++ 			outlen -= i;
++-- 
++2.25.1
++
+diff --git a/meta-networking/recipes-connectivity/freeradius/freeradius_3.0.21.bb b/meta-networking/recipes-connectivity/freeradius/freeradius_3.0.21.bb
+index 1407b798b..db37f6591 100644
+--- a/meta-networking/recipes-connectivity/freeradius/freeradius_3.0.21.bb
++++ b/meta-networking/recipes-connectivity/freeradius/freeradius_3.0.21.bb
+@@ -33,6 +33,8 @@ SRC_URI = "git://github.com/FreeRADIUS/freeradius-server.git;branch=v3.0.x;lfs=0
+     file://radiusd-volatiles.conf \
+     file://check-openssl-cmds-in-script-bootstrap.patch \
+     file://0001-version.c-don-t-print-build-flags.patch \
++    file://CVE-2022-41860.patch \
++    file://CVE-2022-41861.patch \
+ "
  
- # This allows root to change user infomation without being
- # prompted for a password
- auth		sufficient	pam_rootok.so
-+account		sufficient	pam_rootok.so
- 
- # The standard Unix authentication modules, used with
- # NIS (man nsswitch) as well as normal /etc/passwd and
-diff --git a/meta-networking/recipes-protocols/frr/frr_8.2.2.bb b/meta-networking/recipes-protocols/frr/frr_8.2.2.bb
-index 658731567..80f4729e1 100644
---- a/meta-networking/recipes-protocols/frr/frr_8.2.2.bb
-+++ b/meta-networking/recipes-protocols/frr/frr_8.2.2.bb
-@@ -12,6 +12,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
- SRC_URI = "git://github.com/FRRouting/frr.git;protocol=https;branch=stable/8.2 \
-            file://CVE-2022-37035.patch \
-            file://CVE-2022-37032.patch \
-+           file://CVE-2022-42917.patch \
-            file://frr.pam \
- 	      "
- 
+ raddbdir="${sysconfdir}/${MLPREFIX}raddb"
 -- 
 2.25.1
 
