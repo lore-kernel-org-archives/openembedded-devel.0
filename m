@@ -2,63 +2,63 @@ Return-Path: <philip@balister.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E748AC636D3
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E3E7EC61DA4
 	for <webhook@archiver.kernel.org>; Thu,  9 Feb 2023 21:56:24 +0000 (UTC)
-Received: from mail-wr1-f53.google.com (mail-wr1-f53.google.com [209.85.221.53])
- by mx.groups.io with SMTP id smtpd.web10.125.1675970761428083445
+Received: from mail-ej1-f44.google.com (mail-ej1-f44.google.com [209.85.218.44])
+ by mx.groups.io with SMTP id smtpd.web11.3179.1675976996550491980
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 09 Feb 2023 11:26:01 -0800
+ Thu, 09 Feb 2023 13:09:56 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=RmDoGJie;
- spf=pass (domain: gmail.com, ip: 209.85.221.53, mailfrom: fntoth@gmail.com)
-Received: by mail-wr1-f53.google.com with SMTP id j25so2887209wrc.4
-        for <openembedded-devel@lists.openembedded.org>; Thu, 09 Feb 2023 11:26:01 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=WPQ2YvMx;
+ spf=pass (domain: gmail.com, ip: 209.85.218.44, mailfrom: fntoth@gmail.com)
+Received: by mail-ej1-f44.google.com with SMTP id m2so10353950ejb.8
+        for <openembedded-devel@lists.openembedded.org>; Thu, 09 Feb 2023 13:09:56 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=content-transfer-encoding:in-reply-to:from:content-language
          :references:cc:to:subject:user-agent:mime-version:date:message-id
          :from:to:cc:subject:date:message-id:reply-to;
-        bh=0NjjuwOeGaskuQGjqrHKUS82QA6DmSZK/v6m4eFwzHI=;
-        b=RmDoGJiefxV0fXQcOoqQEvKqR5DNp8YpCRFEGiNasDhsBu01eerMP2l9mPL7SufuyY
-         uB4IgdDX0TfY9S9pkaU5O+0iEwOh0YUyjCZcg+7AgNfq3JAIg4PsC/AMEX58wVkVhI5u
-         0GqvH2Y8Rpel39wi8dqmqWl/vlsxWYYSC3lbPI/xoMFtj3A3WbLQcipO5H0Vju/OHrLR
-         ubQINCd4jGFJBdFeVu524UCX+1cHdKQXArB5PzmYzC8BUrO4rpb4/Xlr/bXF1S6Q8vW5
-         UvtVQfNHPiDxAyAKtnEYJIh4zuF72ceA3wF2Knz/1/QmbUj1dKfG28BVTuPP8pE53GJC
-         6JkA==
+        bh=k/W4hrnIFLsp5d2IeYFqiJcT85Ffwd687BfeJM4ZB9s=;
+        b=WPQ2YvMxSwS7XZcxhO/gwhBuOLmOPXyDXCPN5/gtfMqyoztS0u+0SKr7r/sVnwbKcL
+         SMKFAK6ytZw8Lu3k6Ck4r/AtpvUJa0vJ8coT8L/VpDbzU/VXQR54XzgOXTKzOtQazGut
+         88hpp+8TtZdXIEpIw2aam8vfUfFobH2mWopNbDoEUzDuCd5h8MvYpAUHj94WeReVnW+J
+         pFT++nqyEJe4hxsNXHOI4z6Ik9iXtTkgspRtJN7NqJ56c0XtwQ/1WSec0MYVmvAC/vYv
+         4Xht9L43UUUqMRl/cxBhNIH2hVupjfRaEeRRlZHhs36iQ3B6kLfWg+G7ofm09kj9ZT7I
+         CmsQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=content-transfer-encoding:in-reply-to:from:content-language
          :references:cc:to:subject:user-agent:mime-version:date:message-id
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=0NjjuwOeGaskuQGjqrHKUS82QA6DmSZK/v6m4eFwzHI=;
-        b=3W8+R8Hioo3r3njq3HDp/v0gdDmW6grWWsNMjDlwrSuiJJ2XTyJlPgZSo41fKy4XJ/
-         8xoXX0BMCbUKxIUo/EVIbRcKtywK7F8wMhw6oRJ/t01J+fZnh3Tx92bjQbO4joGzoz4Y
-         PGwQRu4snAm5EduZbFZ4f/YQrKc0LG69bOd5WhitrVZulIVESsdPJHAGt19iZziv4vXi
-         FtAAuDmHBfXaPmrt6W83EqLthKNQBLPMNFGqQSiGqWeoE2O5cbCATlavkMH+beEfBIpo
-         jHVs5PP/tWA21b/xqvaZZ5T5DlrKrZxCybwo6D/En4OMyiShur4FJHU2pzIC7C1QIgmH
-         BEUA==
-X-Gm-Message-State: AO0yUKV8h+EsIo3cVTkcWgkuJh3M1Wc07v3Abs21EFCURM8yL6mzB/My
-	aM21Lev5zu+G2qIvHDvRim8=
-X-Google-Smtp-Source: AK7set+OOL8g3oovFSEs11Z2nDEUmWLc+rc2UtJIFvwNhsE0U6dZ+7z8HcNOcU1Ccoi6l4bUbLYsng==
-X-Received: by 2002:a5d:680e:0:b0:2c3:def6:3659 with SMTP id w14-20020a5d680e000000b002c3def63659mr11613979wru.35.1675970759620;
-        Thu, 09 Feb 2023 11:25:59 -0800 (PST)
-Received: from ?IPV6:2a02:a466:68ed:1:808b:d1fe:f63:1ce1? (2a02-a466-68ed-1-808b-d1fe-f63-1ce1.fixed6.kpn.net. [2a02:a466:68ed:1:808b:d1fe:f63:1ce1])
-        by smtp.gmail.com with ESMTPSA id l5-20020adfe9c5000000b002c3e7474b0fsm1954145wrn.13.2023.02.09.11.25.57
+        bh=k/W4hrnIFLsp5d2IeYFqiJcT85Ffwd687BfeJM4ZB9s=;
+        b=vEMdfGQ7pTjqFnjUSqQ2B7tHDq4a0kU5JNvvuRfZdENtr11TxIQqVon8BinMr3EEar
+         dI2I7hNQyoA2BqKAPmv96p4J69TRZyiqq7L59nIdjm3O990ZiuIZuQhjiPqOUqyi/NkB
+         bsqyzFX+Q6P35fndH0E22/rBiy0WY15L7Wwe3Q9UoNkQ4QGC9WgcdVbmpRzsZvSL1Bpg
+         lhkDM8ezsRbdN10KoYiLu4+YE/lPfz3FNy+yQGqXzAp17FeQAsF8hw50t771MViTyvag
+         wnEa+IPmAMHsIzuqU68ozj/PY3VRfxL5lcg08aeP7d2TBOKR5BaNK8S8BPNWi0Sdx3IG
+         Pu0g==
+X-Gm-Message-State: AO0yUKXTzIh0y3wdTYolGwiRNDW1Km+1SRb1tO/wVi55EyiYBiX2uIa9
+	rlaMsAPn4iPPaEtohkwvTfk=
+X-Google-Smtp-Source: AK7set+/KWZlCSFJzFNDuuv+JJGsjrwDzLne8jo/rARtPXyYshErZKVRv+KhoRB2ogs+u8TMZpjA3g==
+X-Received: by 2002:a17:907:7657:b0:88d:7823:458b with SMTP id kj23-20020a170907765700b0088d7823458bmr12886944ejc.48.1675976994992;
+        Thu, 09 Feb 2023 13:09:54 -0800 (PST)
+Received: from ?IPV6:2a02:a466:68ed:1:2b89:6fc5:741:25f9? (2a02-a466-68ed-1-2b89-6fc5-741-25f9.fixed6.kpn.net. [2a02:a466:68ed:1:2b89:6fc5:741:25f9])
+        by smtp.gmail.com with ESMTPSA id z22-20020a17090655d600b00871f66bf354sm1335930ejp.204.2023.02.09.13.09.54
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 09 Feb 2023 11:25:59 -0800 (PST)
-Message-ID: <b49ddb5c-3f15-2887-8f53-c6d73c93afa2@gmail.com>
-Date: Thu, 9 Feb 2023 20:25:56 +0100
+        Thu, 09 Feb 2023 13:09:54 -0800 (PST)
+Message-ID: <e1afbab4-9f99-a252-c596-9b865711ccf6@gmail.com>
+Date: Thu, 9 Feb 2023 22:09:53 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.7.1
-Subject: Re: [oe] [meta-oe][PATCH 0/3] libgpiod: add support for libgpiod v2
+Subject: Re: [oe] [meta-oe][PATCH] libgpiod: fix python bindings build
 To: Bartosz Golaszewski <brgl@bgdev.pl>, Khem Raj <raj.khem@gmail.com>,
  Bruce Ashfield <bruce.ashfield@gmail.com>,
  openembedded-devel@lists.openembedded.org
 Cc: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
-References: <20230208152541.136848-1-brgl@bgdev.pl>
+References: <20230125081731.6157-1-brgl@bgdev.pl>
 From: "Ferry Toth" <fntoth@gmail.com>
-In-Reply-To: <20230208152541.136848-1-brgl@bgdev.pl>
+In-Reply-To: <20230125081731.6157-1-brgl@bgdev.pl>
 Content-Language: en-US
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
@@ -66,73 +66,88 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 09 Feb 2023 21:56:24 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101012
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101013
 
-Hi,
-
-Op 08-02-2023 om 16:25 schreef Bartosz Golaszewski:
+Op 25-01-2023 om 09:17 schreef Bartosz Golaszewski:
 > From: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
 > 
-> We've just tagged the release candidate for libgpiod v2. This is a major
-> release entirely overhauling the API in a backward incompatible way.
+> It seems that automake's AM_PATH_PYTHON() macro no longer sets the
+> $PYTHON variable. This means the python bindings build for libgpiod has
+> been broken for some time. As we know which version we're using -
 
-Thanks for creating this!
+I have in my conf file:
+# Build python bindings for libgpiod
+PACKAGECONFIG:append:pn-libgpiod = " python3"
 
-> While this is not the final release yet, it's not likely to change much so
-> I'd like to make it available in meta-openembedded to give it exposure to
-> some testing. When we do release v2.0, it'll be just a matter of bumping the
-> version.
-> 
-> Currently no other package depends on libgpiod in meta-openembedded, so I'd
-> like to avoid having two packages (libgpiod and libgpiod2). Instead let's
-> provide recipes for both versions but keep them under the common libgpiod name
-> as it's unlikely anyone would need both versions in a single system. This is
-> after all a medium-sized project that shouldn't require too much work in order
-> to port a user to the new major release.
+and it work ok on Kirkstone which builds automake-native 1.16.5.
+Which version is causing you trouble?
 
-Nevertheless there may be packages in other layers using it (meta-acpi, 
-meta-intel-edison). I think there will be a period where both may need 
-to coexist.
-
-> The first patch contains an update of libgpiod v1.6.x to the most recent
-> bug-fix release.
+> python3 - let's hardcode it in configure.ac. For now add a patch that's
+> been merged upstream and once a new bugfix release is out, we'll remove
+> it.
 > 
-> The second contains the recipe for libgpiod v2.0-rc1 while also moving the
-> bitbake code around in order to factor out common elements.
+> Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
+> ---
+>   ...-don-t-expect-automake-to-set-PYTHON.patch | 37 +++++++++++++++++++
+>   .../libgpiod/libgpiod_1.6.3.bb                |  1 +
+>   2 files changed, 38 insertions(+)
+>   create mode 100644 meta-oe/recipes-support/libgpiod/files/0001-build-don-t-expect-automake-to-set-PYTHON.patch
 > 
-> The third contains a recipe for the python bindings that are now in their own
-> project in meta-python.
-> 
-> The new recipes provide the same functionality - including ptest for the C
-> library, tools and language bindings.
-> 
-> Bartosz Golaszewski (3):
->    libgpiod: update to v1.6.4
->    libgpiod: add a recipe for libgpiod v2.0-rc1
->    python3-gpiod: new package
-> 
->   ...-don-t-expect-automake-to-set-PYTHON.patch | 37 ---------
->   .../{files => libgpiod-1.6.4}/run-ptest       |  0
->   .../libgpiod/libgpiod-2.0-rc1/run-ptest       | 24 ++++++
->   .../recipes-support/libgpiod/libgpiod-src.inc |  1 +
->   meta-oe/recipes-support/libgpiod/libgpiod.inc | 61 ++++++++++++++
->   .../libgpiod/libgpiod_1.6.3.bb                | 82 -------------------
->   .../libgpiod/libgpiod_1.6.4.bb                | 37 +++++++++
->   .../libgpiod/libgpiod_2.0-rc1.bb              | 21 +++++
->   .../packagegroups/packagegroup-meta-python.bb |  1 +
->   .../python/python3-gpiod/run-ptest            | 15 ++++
->   .../python/python3-gpiod_2.0-rc1.bb           | 45 ++++++++++
->   11 files changed, 205 insertions(+), 119 deletions(-)
->   delete mode 100644 meta-oe/recipes-support/libgpiod/files/0001-build-don-t-expect-automake-to-set-PYTHON.patch
->   rename meta-oe/recipes-support/libgpiod/{files => libgpiod-1.6.4}/run-ptest (100%)
->   create mode 100644 meta-oe/recipes-support/libgpiod/libgpiod-2.0-rc1/run-ptest
->   create mode 100644 meta-oe/recipes-support/libgpiod/libgpiod-src.inc
->   create mode 100644 meta-oe/recipes-support/libgpiod/libgpiod.inc
->   delete mode 100644 meta-oe/recipes-support/libgpiod/libgpiod_1.6.3.bb
->   create mode 100644 meta-oe/recipes-support/libgpiod/libgpiod_1.6.4.bb
->   create mode 100644 meta-oe/recipes-support/libgpiod/libgpiod_2.0-rc1.bb
->   create mode 100644 meta-python/recipes-devtools/python/python3-gpiod/run-ptest
->   create mode 100644 meta-python/recipes-devtools/python/python3-gpiod_2.0-rc1.bb
+> diff --git a/meta-oe/recipes-support/libgpiod/files/0001-build-don-t-expect-automake-to-set-PYTHON.patch b/meta-oe/recipes-support/libgpiod/files/0001-build-don-t-expect-automake-to-set-PYTHON.patch
+> new file mode 100644
+> index 000000000..a3dc38188
+> --- /dev/null
+> +++ b/meta-oe/recipes-support/libgpiod/files/0001-build-don-t-expect-automake-to-set-PYTHON.patch
+> @@ -0,0 +1,37 @@
+> +From 3c461786feb1d5aa1ed2a911942a5f9fbc8b8086 Mon Sep 17 00:00:00 2001
+> +From: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
+> +Date: Tue, 24 Jan 2023 17:38:43 +0100
+> +Subject: [libgpiod v1.6.x][PATCH] build: don't expect automake to set $PYTHON
+> +
+> +It seems that the implementation of AM_PATH_PYTHON() changed in automake
+> +recently and no longer sets $PYTHON variable which breaks the build on
+> +some systems.
+> +
+> +We know we use python3 so use python3-config explicitly.
+> +
+> +Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
+> +---
+> +Upstream-Status: Accepted
+> +
+> + configure.ac | 4 ++--
+> + 1 file changed, 2 insertions(+), 2 deletions(-)
+> +
+> +diff --git a/configure.ac b/configure.ac
+> +index 3149384..0460810 100644
+> +--- a/configure.ac
+> ++++ b/configure.ac
+> +@@ -204,9 +204,9 @@ then
+> + 		AC_MSG_ERROR([python3-config not found - needed for python bindings])
+> + 	fi
+> + 	AS_IF([test -z "$PYTHON_CPPFLAGS"],
+> +-		[AC_SUBST(PYTHON_CPPFLAGS, [`$PYTHON-config --includes`])])
+> ++		[AC_SUBST(PYTHON_CPPFLAGS, [`python3-config --includes`])])
+> + 	AS_IF([test -z "$PYTHON_LIBS"],
+> +-		[AC_SUBST(PYTHON_LIBS, [`$PYTHON-config --libs`])])
+> ++		[AC_SUBST(PYTHON_LIBS, [`python3-config --libs`])])
+> + fi
+> +
+> + AC_CHECK_PROG([has_doxygen], [doxygen], [true], [false])
+> +--
+> +2.37.2
+> +
+> diff --git a/meta-oe/recipes-support/libgpiod/libgpiod_1.6.3.bb b/meta-oe/recipes-support/libgpiod/libgpiod_1.6.3.bb
+> index 3e6e5d567..5164e7e02 100644
+> --- a/meta-oe/recipes-support/libgpiod/libgpiod_1.6.3.bb
+> +++ b/meta-oe/recipes-support/libgpiod/libgpiod_1.6.3.bb
+> @@ -7,6 +7,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=2caced0b25dfefd4c601d92bd15116de"
+>   SRC_URI = " \
+>       https://www.kernel.org/pub/software/libs/${BPN}/${BP}.tar.xz \
+>       file://run-ptest \
+> +    file://0001-build-don-t-expect-automake-to-set-PYTHON.patch \
+>   "
+>   
+>   SRC_URI[md5sum] = "28e79f6f70fee1da9079558d8b7b3736"
 > 
 > 
 > 
