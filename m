@@ -2,57 +2,57 @@ Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D9ADEC636CC
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DA767C636D4
 	for <webhook@archiver.kernel.org>; Sat, 11 Feb 2023 15:51:15 +0000 (UTC)
 Received: from mail-qt1-f178.google.com (mail-qt1-f178.google.com [209.85.160.178])
  by mx.groups.io with SMTP id smtpd.web11.11641.1676130674524624498
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 11 Feb 2023 07:51:14 -0800
+ Sat, 11 Feb 2023 07:51:15 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=ch7Dr4e1;
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=RjFk731a;
  spf=pass (domain: gmail.com, ip: 209.85.160.178, mailfrom: akuster808@gmail.com)
-Received: by mail-qt1-f178.google.com with SMTP id g8so9099339qtq.13
+Received: by mail-qt1-f178.google.com with SMTP id g8so9099388qtq.13
         for <openembedded-devel@lists.openembedded.org>; Sat, 11 Feb 2023 07:51:14 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=TP9jAilICKS/Gtg2YRYoFUs6FszlcODKXAzYDS1PUGo=;
-        b=ch7Dr4e1NwIKG1uKzcAixehLXobzjqJDXHYVSr2nnEWcsAKV3NIPU9rTDQ1VUctFOF
-         pRp1WBP0IuiFDpD21/hdcQc12NhwRVTEQGROdw/XJGX8UqmSLQRhslncjhHB5LUCMBV+
-         EWEyACDGb1zRBhCa4L1Wln+Lw1lkUk8NYUHK8JP7Jvh8DfZPawmfT7Lda1Ql8CDJVd+P
-         FI0nv6q/0awX0yEcdihkyzNqdnz65vJwaVXVtLpGAvQOVtRXb+FOFobY/xUa1o29Ea2B
-         KOGqGnqxB1riEVBYjZbsqF7E5/R9jCsztMR5edZrAzPUwNoVt3NSf3kkQkJc6g4jLgoX
-         vKuA==
+        bh=QeaLbBPvL6W5BOoTMJHbAukYuTDe1JmgPnQXuz0Rc0Y=;
+        b=RjFk731aQ3y4NQFdY82EVQom9JjzQx4CRDLrQwTEeCyN1XClUuUaaRcMEIyQuwxJyH
+         QrO6mvdQXucOv3dGglN90qK3whTEbz7GZBsuJQ51XdSkgoM2zRadquKrpr+naTBuZP0i
+         cdixH/eMep06v5N9JnbmSJfz8U7yHTDjSukpBPx0mfsxXpIXiOqJcdUy/X/Ph3Dsqg4m
+         /KuZhgxd40TYT+xpsYklMeST1QynKniedS9kSgx63TZq+Ss16b4mOa/75Fknn1mz4z1c
+         oj9fMvXQowePPIhCYf1ZuFPXT2GTI5pp+GpBJwV7AUsQCT7a4hJIIwThpOvlJ7N8Rt6G
+         uM7Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=TP9jAilICKS/Gtg2YRYoFUs6FszlcODKXAzYDS1PUGo=;
-        b=KUVDzp0jx5F4BbA8uveNt+W+lTrwQcAlnh1dnXS4L61Upp6O+qWBMA7LlhPfWJzQLt
-         NEnO3oW9wbx5VkSKEie3cwX/BVcNRtFCOqaeM6auxZELpk6TxaHYyygufS5/j+v+gfux
-         Gyw0J+KYxmmnF/K67hVBT2MjzYgDqLNAW5l+g18SEA6XtTUvJ4BT6NB7DBH6XMiDNbBN
-         LY5dpQYcGtzlKITa5sAm4PbgPLFWU05KjNmkImB5gVrfawAXubDsENkjgG6Aq2hZ1WgW
-         71FE9c290G3XXgsHsGEUS8VK0FMgpYhH3imAHN6amuOympE+BMyCYzex65h+JHommjBF
-         tQUw==
-X-Gm-Message-State: AO0yUKXft0uV3tq3Ds+U/j+RVzQ915yZXcPtkYYKvPEje6wa5arizQQL
-	lEJW+IHYtvYhBWmartnzXAelAIn7aj4=
-X-Google-Smtp-Source: AK7set+BnMokjSiXxCOB703WH9uKCamQ5B/GQQU9gi0THOsf6fAcWlQDEE80cxF+eJTWiZiHlRQE0g==
-X-Received: by 2002:ac8:48cd:0:b0:3b9:bc8c:c213 with SMTP id l13-20020ac848cd000000b003b9bc8cc213mr12871986qtr.30.1676130673514;
-        Sat, 11 Feb 2023 07:51:13 -0800 (PST)
+        bh=QeaLbBPvL6W5BOoTMJHbAukYuTDe1JmgPnQXuz0Rc0Y=;
+        b=EouX6VOnMvpHblEQsQa1Hz2cinjD1k3YfADHRBtLNfxu6Z1y81aGldUSPlId98MsHm
+         f8LYYiA6bNDcqE0Dt8JOQFugEEE70Y/jp1+K/vAWk3qI8CddSsgW/23ddTq2gLJohFPC
+         ZlO5TEHCBTPxBKFcSqyaWc9E0gBlvItmzgwBe7deaGQFzAzCsER6qdS+Q5FaSTihVbaQ
+         OgjzonQdJTizAK6X30qewEkcMU20VpA64ckOg9aA1tf8hVw/ZPm6Rs6JpyOE0yjAvtCO
+         S/MoHnMm6dDtElPVZWAkfxLL45R2MAT+DQtogWczhkeizV1bW2K8bapDYFrkiABXKNdJ
+         A94g==
+X-Gm-Message-State: AO0yUKUzKo2Qn2XiWFvWT9E1zvwh3gChY4GKpCDsFJcigID9MF9npVCq
+	XWl6flrI9pd9UVdVhi2XkOVx9TxdYAM=
+X-Google-Smtp-Source: AK7set9J1Asz3IEpEYMF+0J7zmPXNjN9R8xsmovsgWuzBQN83mJFiiTHSINpMsU5Ala00wNoh/AtYA==
+X-Received: by 2002:a05:622a:188d:b0:3b9:a441:37f3 with SMTP id v13-20020a05622a188d00b003b9a44137f3mr26105491qtc.64.1676130674433;
+        Sat, 11 Feb 2023 07:51:14 -0800 (PST)
 Received: from keaua.attlocal.net ([2600:1700:9190:ba10:6c32:d739:9179:1de7])
-        by smtp.gmail.com with ESMTPSA id l67-20020a37bb46000000b0071d0f1d01easm5855481qkf.57.2023.02.11.07.51.12
+        by smtp.gmail.com with ESMTPSA id l67-20020a37bb46000000b0071d0f1d01easm5855481qkf.57.2023.02.11.07.51.13
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 11 Feb 2023 07:51:13 -0800 (PST)
+        Sat, 11 Feb 2023 07:51:14 -0800 (PST)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Wang Mingyu <wangmy@fujitsu.com>,
+Cc: Randy MacLeod <Randy.MacLeod@windriver.com>,
 	Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][langdale][PATCH 2/4] python3-pillow: upgrade 9.3.0 -> 9.4.0
-Date: Sat, 11 Feb 2023 10:51:09 -0500
-Message-Id: <20230211155111.3984602-2-akuster808@gmail.com>
+Subject: [meta-oe][langdale][PATCH 3/4] python3-pillow: add ptest support
+Date: Sat, 11 Feb 2023 10:51:10 -0500
+Message-Id: <20230211155111.3984602-3-akuster808@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20230211155111.3984602-1-akuster808@gmail.com>
 References: <20230211155111.3984602-1-akuster808@gmail.com>
@@ -62,80 +62,97 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sat, 11 Feb 2023 15:51:15 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101030
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101031
 
-From: Wang Mingyu <wangmy@fujitsu.com>
+From: Randy MacLeod <Randy.MacLeod@windriver.com>
 
-License-Updated: copyright year updated to 2023
+Add initial pillow ptest support.
 
-Changelog:
-==========
- Fixed null pointer dereference crash with malformed font #6846
- Return from ImagingFill early if image has a zero dimension #6842
- Reversed deprecations for Image constants, except for duplicate Resampling attributes #6830
- Improve exception traceback readability #6836
- Do not attempt to read IFD1 if absent #6840
- Fixed writing int as ASCII tag #6800
- If available, use wl-paste or xclip for grabclipboard() on Linux #6783
- Added signed option when saving JPEG2000 images #6709
- Patch OpenJPEG to include ARM64 fix #6718
- Added support for I;16 modes in putdata() #6825
- Added conversion from RGBa to RGB #6708
- Added DDS support for uncompressed L and LA images #6820
- Added LightSource tag values to ExifTags #6749
- Fixed PyAccess after changing ICO size #6821
- Do not use EXIF from info when saving PNG images #6819
- Fixed saving EXIF data to MPO #6817
- Added Exif hide_offsets() #6762
- Only compare to previous frame when checking for duplicate GIF frames while saving #6787
- Always initialize all plugins in registered_extensions() #6811
- Ignore non-opaque WebP background when saving as GIF #6792
- Only set tile in ImageFile __setstate__ #6793
- When reading BLP, do not trust JPEG decoder to determine image is CMYK #6767
- Added IFD enum to ExifTags #6748
- Fixed bug combining GIF frame durations #6779
- Support saving JPEG comments #6774
- Added getxmp() to WebPImagePlugin #6758
- Added "exact" option when saving WebP #6747
- Use fractional coordinates when drawing text #6722
- Fixed writing int as BYTE tag #6740
- Added MP Format Version when saving MPO #6735
- Added Interop to ExifTags #6724
- CVE-2007-4559 patch when building on Windows #6704
- Fix compiler warning: accessing 64 bytes in a region of size 48 #6714
- Use verbose flag for pip install #6713
+The ptest result is:
+   ====== 3600 passed  324 skipped, 2 xfailed, 1 xpassed in 62.41s (0:01:02) ======
+for qemux86-64 with 2 GB RAM.
 
-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+The skipped tests as summarized with:
+   # ptest-runner python3-pillow | tee log
+   # grep SKIPP log  | cut -d"(" -f2- | cut -d")" -f1 | cut -d" " -f1 | sort | uniq -c| sort -n | tail -4
+     12 webp
+     13 Tk
+     14 Qt
+     84 raqm
+Webp was explicityly disabled in 2018 in:
+   6cb4e90fc python3-pillow: add 5.4.1
+I didn't test Tk or Qt and there isn't yet a recipe for libraqm:
+   https://github.com/HOST-Oman/libraqm
+a library that encapsulates the logic for complex text layout.
+
+Signed-off-by: Randy MacLeod <Randy.MacLeod@windriver.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit b73867b9d77e8050c20dc28ec449572f2185cb2a)
+(cherry picked from commit 7b0e71e00ce1b003c96ef38ead72a9e02555afbe)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../{python3-pillow_9.3.0.bb => python3-pillow_9.4.0.bb}      | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-pillow_9.3.0.bb => python3-pillow_9.4.0.bb} (87%)
+ .../python/python3-pillow/run-ptest           |  3 +++
+ .../python/python3-pillow_9.4.0.bb            | 22 ++++++++++++++++++-
+ 2 files changed, 24 insertions(+), 1 deletion(-)
+ create mode 100644 meta-python/recipes-devtools/python/python3-pillow/run-ptest
 
-diff --git a/meta-python/recipes-devtools/python/python3-pillow_9.3.0.bb b/meta-python/recipes-devtools/python/python3-pillow_9.4.0.bb
-similarity index 87%
-rename from meta-python/recipes-devtools/python/python3-pillow_9.3.0.bb
-rename to meta-python/recipes-devtools/python/python3-pillow_9.4.0.bb
-index 11f5451609..403a987d1e 100644
---- a/meta-python/recipes-devtools/python/python3-pillow_9.3.0.bb
+diff --git a/meta-python/recipes-devtools/python/python3-pillow/run-ptest b/meta-python/recipes-devtools/python/python3-pillow/run-ptest
+new file mode 100644
+index 0000000000..3385d68939
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-pillow/run-ptest
+@@ -0,0 +1,3 @@
++#!/bin/sh
++
++pytest -o log_cli=true -o log_cli_level=INFO | sed -e 's/\[...%\]//g'| sed -e 's/PASSED/PASS/g'| sed -e 's/FAILED/FAIL/g'|sed -e 's/SKIPED/SKIP/g'| awk '{if ($NF=="PASS" || $NF=="FAIL" || $NF=="SKIP" || $NF=="XFAIL" || $NF=="XPASS"){printf "%s: %s\n", $NF, $0}else{print}}'| awk '{if ($NF=="PASS" || $NF=="FAIL" || $NF=="SKIP" || $NF=="XFAIL" || $NF=="XPASS") {$NF="";print $0}else{print}}'
+diff --git a/meta-python/recipes-devtools/python/python3-pillow_9.4.0.bb b/meta-python/recipes-devtools/python/python3-pillow_9.4.0.bb
+index 403a987d1e..68c81029c0 100644
+--- a/meta-python/recipes-devtools/python/python3-pillow_9.4.0.bb
 +++ b/meta-python/recipes-devtools/python/python3-pillow_9.4.0.bb
-@@ -3,7 +3,7 @@ Clark and Contributors. PIL is the Python Imaging Library by Fredrik Lundh and \
- Contributors."
- HOMEPAGE = "https://pillow.readthedocs.io"
- LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=ad081a0aede51e89f8da13333a8fb849"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=bc416d18f294943285560364be7cbec1"
- 
+@@ -8,10 +8,11 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=bc416d18f294943285560364be7cbec1"
  SRC_URI = "git://github.com/python-pillow/Pillow.git;branch=main;protocol=https \
             file://0001-support-cross-compiling.patch \
-@@ -39,4 +39,4 @@ RPROVIDES:${PN} += "python3-imaging"
+            file://0001-explicitly-set-compile-options.patch \
++           file://run-ptest \
+            "
+ SRCREV ?= "82541b6dec8452cb612067fcebba1c5a1a2bfdc8"
  
+-inherit setuptools3
++inherit setuptools3 ptest
+ 
+ PIP_INSTALL_PACKAGE = "Pillow"
+ PIP_INSTALL_DIST_PATH = "${S}/dist"
+@@ -31,12 +32,31 @@ RDEPENDS:${PN} += " \
+     ${PYTHON_PN}-numbers \
+ "
+ 
++RDEPENDS:${PN}-ptest += " \
++    bash \
++    ghostscript \
++    jpeg-tools \
++    libwebp \
++    ${PYTHON_PN}-core \
++    ${PYTHON_PN}-image \
++    ${PYTHON_PN}-mmap \
++    ${PYTHON_PN}-pytest \
++    ${PYTHON_PN}-pytest-timeout \
++    ${PYTHON_PN}-resource \
++    tk \
++"
++
+ CVE_PRODUCT = "pillow"
+ 
+ S = "${WORKDIR}/git"
+ 
+ RPROVIDES:${PN} += "python3-imaging"
+ 
++do_install_ptest() {
++        install -d ${D}${PTEST_PATH}/Tests
++        cp -rf ${S}/Tests ${D}${PTEST_PATH}/
++}
++
  BBCLASSEXTEND = "native"
  
--SRCREV = "d594f4cb8dc47fb0c69ae58d9fff86faae4515bd"
-+SRCREV = "a5bbab1c1e63b439de191ef2040173713b26d2da"
+ SRCREV = "a5bbab1c1e63b439de191ef2040173713b26d2da"
 -- 
 2.25.1
 
