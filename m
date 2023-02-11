@@ -2,68 +2,71 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 374C4C61DA4
-	for <webhook@archiver.kernel.org>; Sat, 11 Feb 2023 13:34:55 +0000 (UTC)
-Received: from mail3.bemta32.messagelabs.com (mail3.bemta32.messagelabs.com [195.245.230.17])
- by mx.groups.io with SMTP id smtpd.web10.8990.1676122492599871681
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 20B18C636CC
+	for <webhook@archiver.kernel.org>; Sat, 11 Feb 2023 13:35:05 +0000 (UTC)
+Received: from mail1.bemta37.messagelabs.com (mail1.bemta37.messagelabs.com [85.158.142.1])
+ by mx.groups.io with SMTP id smtpd.web10.8992.1676122495537472196
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 11 Feb 2023 05:34:52 -0800
+ Sat, 11 Feb 2023 05:34:55 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=Lf+IxQ6y;
- spf=pass (domain: fujitsu.com, ip: 195.245.230.17, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=fgXx6OTY;
+ spf=pass (domain: fujitsu.com, ip: 85.158.142.1, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1676122490; i=@fujitsu.com;
-	bh=Ni+ydDSy31kTaJaCBRjpSLqfpzZ38eV4hpdLA1Um6dY=;
-	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=Lf+IxQ6yPYF+rCxrsfebuGr1nZ1k4/t/fI7blq4muTooLUJZ4YQlKKzATtAAX57b7
-	 +w8opvG4JisTtg5WunZtyxD0zb4lAr3cZ6jR5+BGdtFAqSM28oFn4m6t4BWjU3hCOR
-	 rWY0QpmsuZcYL3D1wPIV0GAtKnxpK/ad0Vgs/+Vug2Hsz4VhxZ7lmGqqM8jqyeJo4X
-	 wXR/7CYOkzw8EhA3PHabPRFLEI+kAw5eCXghBSc5vOJ1c2IKBJO3qbusLUIJLBU4HF
-	 2TUeEp9m+U4RKZTSuBk5hBKLIzes7rWZVayCYtqmdVtecLlBnpZduGGDjwaF7b9vJO
-	 tb2/KRuCydadA==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFlrPIsWRWlGSWpSXmKPExsViZ8ORqFs583m
-  ywby/5hYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa0b3+2lsBbN5KtZ1T2dqYPzP1cXIxSEk8IRR
-  ov/TETYI5waTxOED05ghnL2MEh/7FrJ0MXJysAlISdy4/58NxBYR0JdYOnsPM4jNLKAi8eJ3D
-  zuILSzgI/Fgwz9GEJtFQFVi7rQ1YHFeAUeJY9vXMoHYEgIKElMevmeGiAtKnJz5hAVijoTEwR
-  cvmCFqFCVmX25mgbArJVo//IKy1SSuntvEPIGRfxaS9llI2hcwMq1iNCtOLSpLLdI1NNBLKsp
-  MzyjJTczM0Uus0k3USy3VLU8tLtE11EssL9ZLLS7WK67MTc5J0ctLLdnECAzHlGLG5B2MV/v+
-  6h1ilORgUhLlXbb5abIQX1J+SmVGYnFGfFFpTmrxIUYZDg4lCd5lE58nCwkWpaanVqRl5gBjA
-  yYtwcGjJMLbPR0ozVtckJhbnJkOkTrFqCglznsRpE8AJJFRmgfXBovHS4yyUsK8jAwMDEI8Ba
-  lFuZklqPKvGMU5GJWEeadOAZrCk5lXAjf9FdBiJqDFDFJPQRaXJCKkpBqY9szQbTnMNOfag1u
-  byz+tyBTVniP5VetHne03sRvbHj3f9MpNbfIaudUni57cNoh+ZNOsb5Ot1DVLI1l0ysJrln1l
-  enm3fV4H/1R84NAVJ/D50c/PetsZwqaaSc1fsMdxzolVR+J/HDlhPz1ylSkP18Lnx+1+rBcTm
-  y0pOJPnkenrSVL201XVbW4c8fl40qZi+a/C9dp3nszWvX0l3OiIRc3eG1WKD9v3qIpd/rX/3f
-  QUxt67H48pi0p+UW6UOGPVscLKfG/4PsVmZePpbGfKOOb5P5+R1qpw6PLny75/px1w7W+afYa
-  X9ZVY5qHmzitt/S+VL2/9mbSda98mx5R7B8OrnzwT669dck+TbdOGByuUWIozEg21mIuKEwEx
-  4uljQgMAAA==
+	s=170520fj; t=1676122493; i=@fujitsu.com;
+	bh=qRmsozBvcSjWDJEVtWaC6T+fCjPJ4TXBhlw7oT2VeKc=;
+	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type;
+	b=fgXx6OTYAHuMyBfXV9L0w4F16qLjrzQ9+wBLmPkDfF70WafqIltobKM+GF21MoIJ1
+	 WQLYJbbYi5tf6KAvDjU1sSSVbwaz34lMo5A12qWBFM+8ax2uqXvOdWhQOJZrKbzKVE
+	 oE9WXy2xf4B8M9sBxbSrGAXvs/1NbsIGUuzsixsxaWOPP1djtMYAmmfY8j2p+1RYB5
+	 uUMUIC1oqWkawBW4gQCSYlH+WzSmsAay041fI0IZD9S8pQwp/HM5mC+WwTZrKWsO70
+	 xDzaAqH3Km9ALakR9mNm+VuqoKRoe/v2fQiOcHpQM3agelXvflGfmtAcw9FwxZtQ+/
+	 nv9R4b0cYrzeQ==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrOIsWRWlGSWpSXmKPExsViZ8OxWbdm5vN
+  kg+PHxC0uHl7K7MDocW7jCsYAxijWzLyk/IoE1oyFvxuZC5ZzV0yfvZ+pgXELVxcjF4eQwENG
+  icl7lrNDOFeYJGZ+vcAG4exllDg04yBjFyMnB5uAlMSN+//ZQGwRAX2JpbP3MIPYzAIqEi9+9
+  7CD2MICIRLHnlxjAbFZBFQlmndcYwWxeQUcJf7ePgRmSwgoSEx5+B6sl1PASeJx90ywXiGgmr
+  n7NjND1AtKnJz5hAVivoTEwRcvmCF6FSVmX25mgbArJVo//IKy1SSuntvEPIFRcBaS9llI2hc
+  wMq1iNCtOLSpLLdK10EsqykzPKMlNzMzRS6zSTdRLLdXNyy8qydA11EssL9ZLLS7WK67MTc5J
+  0ctLLdnECAzflOLkHzsYd/X91TvEKMnBpCTKu2zz02QhvqT8lMqMxOKM+KLSnNTiQ4wyHBxKE
+  rzLJj5PFhIsSk1PrUjLzAHGEkxagoNHSYS3ezpQmre4IDG3ODMdInWKUVFKnPciSJ8ASCKjNA
+  +uDRa/lxhlpYR5GRkYGIR4ClKLcjNLUOVfMYpzMCoJ806dAjSFJzOvBG76K6DFTECLGaSegiw
+  uSURISTUwLV+xrzHeufP2C74NNo4C834xTtZ3MXsm6PLcM6tuV9ZsP8OpisGRTjlSM86VzbVO
+  vZjKKsn3fU7zrQUF/fb+xzYpHrhgythq9e3y7I27p/tMXfd+gRFb+vz3u14VpU6Zobay0i1u3
+  tpwg2Idfh8tx38rsp2Yjy+fKrCdi1Wl+nWu+4uXtRyTef9WCC8yqNsh8yeoxtNp/rEPZwKKlV
+  avXq6h909zYYqYQ+ipB/5GEX/6FkWVT1ZartBwhKnS1uznOQs3Gzn1xvjHnUH1Pbsj/p7cJKI
+  XuHSTapmtz+PQ4JQ9nLy5Tz9k8PWmFDHxVzK+s3cPvv1o4yGGXE3tSLUCuw17thZd/3DfiudU
+  4hslluKMREMt5qLiRACekA8pWgMAAA==
 X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-9.tower-585.messagelabs.com!1676122489!447475!1
-X-Originating-IP: [62.60.8.97]
+X-Msg-Ref: server-20.tower-728.messagelabs.com!1676122492!642731!1
+X-Originating-IP: [62.60.8.179]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.102.2; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 23156 invoked from network); 11 Feb 2023 13:34:49 -0000
-Received: from unknown (HELO n03ukasimr01.n03.fujitsu.local) (62.60.8.97)
-  by server-9.tower-585.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 11 Feb 2023 13:34:49 -0000
-Received: from n03ukasimr01.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTP id 8A204100197
-	for <openembedded-devel@lists.openembedded.org>; Sat, 11 Feb 2023 13:34:49 +0000 (GMT)
+Received: (qmail 20612 invoked from network); 11 Feb 2023 13:34:52 -0000
+Received: from unknown (HELO n03ukasimr04.n03.fujitsu.local) (62.60.8.179)
+  by server-20.tower-728.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 11 Feb 2023 13:34:52 -0000
+Received: from n03ukasimr04.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTP id D1705155
+	for <openembedded-devel@lists.openembedded.org>; Sat, 11 Feb 2023 13:34:51 +0000 (GMT)
 Received: from R01UKEXCASM223.r01.fujitsu.local (R01UKEXCASM223 [10.182.185.121])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTPS id 7DC4D100191
-	for <openembedded-devel@lists.openembedded.org>; Sat, 11 Feb 2023 13:34:49 +0000 (GMT)
+	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTPS id C50F473
+	for <openembedded-devel@lists.openembedded.org>; Sat, 11 Feb 2023 13:34:51 +0000 (GMT)
 Received: from localhost.localdomain (10.167.225.33) by
  R01UKEXCASM223.r01.fujitsu.local (10.182.185.121) with Microsoft SMTP Server
- (TLS) id 15.0.1497.42; Sat, 11 Feb 2023 13:34:48 +0000
+ (TLS) id 15.0.1497.42; Sat, 11 Feb 2023 13:34:50 +0000
 From: <wangmy@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-python] [PATCH] python3-pyscaffold: upgrade 4.3.1 -> 4.4
-Date: Sat, 11 Feb 2023 21:34:38 +0800
-Message-ID: <1676122479-6002-1-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH] python3-pytest-asyncio: upgrade 0.16.0 -> 0.20.3
+Date: Sat, 11 Feb 2023 21:34:39 +0800
+Message-ID: <1676122479-6002-2-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
+In-Reply-To: <1676122479-6002-1-git-send-email-wangmy@fujitsu.com>
+References: <1676122479-6002-1-git-send-email-wangmy@fujitsu.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-Originating-IP: [10.167.225.33]
@@ -73,44 +76,38 @@ X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 11 Feb 2023 13:34:55 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101027
+ <openembedded-devel@lists.openembedded.org>; Sat, 11 Feb 2023 13:35:05 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101028
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
-Changelog:
-=========
-  Add codespell to pre-commit config
-  Allow venv_install in config file
-  Avoid problematic tox 4.0 and 4.1
-  Update macos instances on Cirrus CI
-  Replace deprecated set-output
-  Update CI templates
-  Add comments about building sdist in tox.ini and FAQ
-  Update Python version in Read The Docs configuration
+License-Update: Delete redundant blank lines in the LICENSE.
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../{python3-pyscaffold_4.3.1.bb => python3-pyscaffold_4.4.bb}  | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-pyscaffold_4.3.1.bb => python3-pyscaffold_4.4.bb} (88%)
+ ...est-asyncio_0.16.0.bb => python3-pytest-asyncio_0.20.3.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-pytest-asyncio_0.16.0.bb => python3-pytest-asyncio_0.20.3.bb} (61%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-pyscaffold_4.3.1.bb b/meta-python/recipes-devtools/python/python3-pyscaffold_4.4.bb
-similarity index 88%
-rename from meta-python/recipes-devtools/python/python3-pyscaffold_4.3.1.bb
-rename to meta-python/recipes-devtools/python/python3-pyscaffold_4.4.bb
-index a19e38770..980b6d965 100644
---- a/meta-python/recipes-devtools/python/python3-pyscaffold_4.3.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-pyscaffold_4.4.bb
-@@ -9,7 +9,7 @@ LICENSE = "0BSD & MIT"
- LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=14a49c74a1d91829908ac756c07e6b91"
- DEPENDS += "python3-setuptools-scm-native"
+diff --git a/meta-python/recipes-devtools/python/python3-pytest-asyncio_0.16.0.bb b/meta-python/recipes-devtools/python/python3-pytest-asyncio_0.20.3.bb
+similarity index 61%
+rename from meta-python/recipes-devtools/python/python3-pytest-asyncio_0.16.0.bb
+rename to meta-python/recipes-devtools/python/python3-pytest-asyncio_0.20.3.bb
+index 1dfeab633..24b807822 100644
+--- a/meta-python/recipes-devtools/python/python3-pytest-asyncio_0.16.0.bb
++++ b/meta-python/recipes-devtools/python/python3-pytest-asyncio_0.20.3.bb
+@@ -1,9 +1,9 @@
+ DESCRIPTION = "pytest-asyncio is an Apache2 licensed library, written in Python, for testing asyncio code with pytest"
  
--SRC_URI[sha256sum] = "50cb1f910163204caec30c7c6bbe70f1a81c377538b8c8340d23abe31f5ca5b4"
-+SRC_URI[sha256sum] = "94088d129b61cd9b4b4607c6a466759b1bb2ada36206d5ac20aa319edcc5d701"
+ LICENSE = "Apache-2.0"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=d2794c0df5b907fdace235a619d80314"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=136e4f49dbf29942c572a3a8f6e88a77"
  
- inherit pypi python_setuptools_build_meta
- PYPI_PACKAGE = "PyScaffold"
+-SRC_URI[sha256sum] = "7496c5977ce88c34379df64a66459fe395cd05543f0a2f837016e7144391fcfb"
++SRC_URI[sha256sum] = "83cbf01169ce3e8eb71c6c278ccb0574d1a7a3bb8eaaf5e50e0ad342afb33b36"
+ 
+ inherit pypi setuptools3
+ 
 -- 
 2.34.1
 
