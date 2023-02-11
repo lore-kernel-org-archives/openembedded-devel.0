@@ -1,133 +1,109 @@
-Return-Path: <akuster808@gmail.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2E15CC636D4
-	for <webhook@archiver.kernel.org>; Sat, 11 Feb 2023 17:06:16 +0000 (UTC)
-Received: from mail-oi1-f176.google.com (mail-oi1-f176.google.com [209.85.167.176])
- by mx.groups.io with SMTP id smtpd.web11.13426.1676135165782082607
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 853D8C61DA4
+	for <webhook@archiver.kernel.org>; Sat, 11 Feb 2023 23:16:01 +0000 (UTC)
+Received: from mail-oa1-f43.google.com (mail-oa1-f43.google.com [209.85.160.43])
+ by mx.groups.io with SMTP id smtpd.web11.1031.1676157354321505448
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 11 Feb 2023 09:06:12 -0800
+ Sat, 11 Feb 2023 15:15:54 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=by+MpImL;
- spf=pass (domain: gmail.com, ip: 209.85.167.176, mailfrom: akuster808@gmail.com)
-Received: by mail-oi1-f176.google.com with SMTP id dt8so7080897oib.0
-        for <openembedded-devel@lists.openembedded.org>; Sat, 11 Feb 2023 09:06:12 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=WoXJQnKH;
+ spf=pass (domain: gmail.com, ip: 209.85.160.43, mailfrom: raj.khem@gmail.com)
+Received: by mail-oa1-f43.google.com with SMTP id 586e51a60fabf-16ab8581837so11132284fac.4
+        for <openembedded-devel@lists.openembedded.org>; Sat, 11 Feb 2023 15:15:54 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=OSjG0IBpi8FkDbjsaZsTZOf9Ezjg9OoSEXaxuT50RmI=;
-        b=by+MpImLPYtIIe2zUsZUmpo1VQMijDSM9V8gHbxxHNNDkX6FkBYzouk9DL1m32+p+k
-         udo5SOm6ZX77MO32n+FeZ5s2wr0q5luicIivtN70ED4u1rdTdR+3gBdIwi3dE4GLublK
-         iIwg8mG8NkCGINngRxvHSweomkKzYfkp8BdzVSwiXr6t0W4JIqPDbFQi+iotA5uiKSwV
-         JoRsWCGPZyfE/hc0fd4ZbSB3K5pnaKf66jevdiMkb5B6IRcCyfK1cNje7CZKx8DwuE/h
-         38GbyrHh4tmz0Iwivd2mN0N5088v4ETrMXLK3qD/QD3G9Te8tB9pxRUilyYmef+R3ZUu
-         oHzQ==
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=eU1t2MgAYNMsXfOgGxSN6hBdIfAgSBdF0sLYYyb+u9U=;
+        b=WoXJQnKHpORCx87nZl+dm4Oi2wYsdJzbk8qFsppgcPttY827BgYKCkn3TXZPjIuxFz
+         DX6SLaFnmnmggj4luj58ErXC33IZnLP5hOnmiOI6G+LTfUg8auVz0S1EtmlD41jvL+BX
+         ollmpcEi5A/SnGNtNg+E6gLxBJDU++kXUZk3r927rlOn7BDkdNiIOZyki+JC1skh7+iH
+         VwGdHdDzfLQnUctBySXotZJq6U/BhUJOwh3qGj8/+eV8hhJFAWPHV1XRUFqT6zFt7uRl
+         a3UhmGy1edeNr06zB3N00T+GXy8MGlqXC6sc46dT1E/9s0efK0di4Pu1BFy/X/A2/p0s
+         z4/A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=OSjG0IBpi8FkDbjsaZsTZOf9Ezjg9OoSEXaxuT50RmI=;
-        b=M7Qm/btAwTmAYi5y1BXfb9sCo/xK1/EE0VY1xUkXJJnpdEpuNgFCP91ACFuwQMW35O
-         S/UG/H6pC5Nh0STnUSJ541gNi2OVGSXB3jcpKb3upmOoewOO1eHajsifQ6HKQrw7DroB
-         1ROI7U1s1Pd8Hn3k71hTtKwveGbnesBSMahiF8HnXDGS4grjev4n9yRU4LCKGESiKyeh
-         93UrY/dBovCyqSXGyR5VYpf60fVP/vreLwlWQx30vm/ulgFkzilZdS6E7Z8ajYoB2jK+
-         iTmYQaXBn0HlDWMS88gQUGmw5sNHLUu8vYspGlwmBNM1fx0PejtJxt3yv+6MStzCeNSA
-         7aqw==
-X-Gm-Message-State: AO0yUKW4ipKqoAK5AwqAuAFULjg+N6A+ZnDTfeQIk6O6LXBQkMjbOlnu
-	VcUIwjFO4/Wz/6SkoCP4jUE2pUrbFS4=
-X-Google-Smtp-Source: AK7set8rWS8Tu++FK1RFYScw7WS3QiPaH811AoX9IlapbPWQkBnocDFKEdZorwUGducxJU8GjGhawA==
-X-Received: by 2002:a54:470a:0:b0:37a:fcd6:5c09 with SMTP id k10-20020a54470a000000b0037afcd65c09mr7770744oik.49.1676135171233;
-        Sat, 11 Feb 2023 09:06:11 -0800 (PST)
-Received: from keaua.attlocal.net ([2600:1700:9190:ba10:6c32:d739:9179:1de7])
-        by smtp.gmail.com with ESMTPSA id p203-20020aca5bd4000000b0037d8670526esm275932oib.52.2023.02.11.09.06.09
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 11 Feb 2023 09:06:10 -0800 (PST)
-From: Armin Kuster <akuster808@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Chee Yang Lee <chee.yang.lee@intel.com>,
-	Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][langdale][PATCH 6/6] tinyproxy: fix CVE-2022-40468
-Date: Sat, 11 Feb 2023 12:06:01 -0500
-Message-Id: <20230211170601.3988339-6-akuster808@gmail.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20230211170601.3988339-1-akuster808@gmail.com>
-References: <20230211170601.3988339-1-akuster808@gmail.com>
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=eU1t2MgAYNMsXfOgGxSN6hBdIfAgSBdF0sLYYyb+u9U=;
+        b=77KTYHZ57+FamDw4UMJGO42sJQ6z7pKDetEw6CweL9Sdb2y9CA8k2R6zXEyCY0gSi8
+         vgbiDnjC7LLHcrqpX7BTn1nehWLnjII7QaxG9GfdHskWyUrnYFNa/lPoi7pEKmDkA//e
+         vuRo+SGluAACo6Of0ithAIVnRsNBSypjV/9PXZtkTdUhAVBbW55J2NQqHeHvEmEJGWQv
+         cNyOtEh1v1Fjc0i6lb4NFhsKhjta9SN4g/nRQ00UNsV+HJhPUgNYXLcJqkByikdexNCP
+         NekUh1aypUij+oBqgeir0XkCC5Bxh88vm8US3h8wnKsroA2I/VX0cei2xZVVq1ErBWYK
+         Tjag==
+X-Gm-Message-State: AO0yUKU8xkU9BAhtYpmaB4CPU8B2EHVLlx7j0VBUWDbum9Gc8iHzmj4R
+	XSoMvXvkXMikhr1W2etunExnJZLJu5u7YcgWNCU=
+X-Google-Smtp-Source: AK7set/e97nUWMKDcHkFiL9KDOne2n9H+quyZL7vxaPhwxLRQkuqElpexrOi1RwsENGgdUmkcdwINTyYe/fi67B7WvY=
+X-Received: by 2002:a05:6870:96a3:b0:163:d288:863 with SMTP id
+ o35-20020a05687096a300b00163d2880863mr1786649oaq.55.1676157353440; Sat, 11
+ Feb 2023 15:15:53 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <1676122479-6002-1-git-send-email-wangmy@fujitsu.com> <1676122479-6002-2-git-send-email-wangmy@fujitsu.com>
+In-Reply-To: <1676122479-6002-2-git-send-email-wangmy@fujitsu.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sat, 11 Feb 2023 15:15:27 -0800
+Message-ID: <CAMKF1spgOjaqadzp-cPRn6jn6Z-8g6MTrAt2LQn+JJ-PQEar9A@mail.gmail.com>
+Subject: Re: [oe] [meta-python] [PATCH] python3-pytest-asyncio: upgrade 0.16.0
+ -> 0.20.3
+To: wangmy <wangmy@fujitsu.com>
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 11 Feb 2023 17:06:16 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101041
+ <openembedded-devel@lists.openembedded.org>; Sat, 11 Feb 2023 23:16:01 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101042
 
-From: Chee Yang Lee <chee.yang.lee@intel.com>
+This fails to build see
 
-Signed-off-by: Chee Yang Lee <chee.yang.lee@intel.com>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 795ccdd86cad05c425adae15af27797f42f33c56)
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
----
- .../tinyproxy/tinyproxy/CVE-2022-40468.patch  | 33 +++++++++++++++++++
- .../tinyproxy/tinyproxy_1.11.1.bb             |  1 +
- 2 files changed, 34 insertions(+)
- create mode 100644 meta-networking/recipes-support/tinyproxy/tinyproxy/CVE-2022-40468.patch
+https://errors.yoctoproject.org/Errors/Details/689684/
 
-diff --git a/meta-networking/recipes-support/tinyproxy/tinyproxy/CVE-2022-40468.patch b/meta-networking/recipes-support/tinyproxy/tinyproxy/CVE-2022-40468.patch
-new file mode 100644
-index 0000000000..4e2157ca75
---- /dev/null
-+++ b/meta-networking/recipes-support/tinyproxy/tinyproxy/CVE-2022-40468.patch
-@@ -0,0 +1,33 @@
-+From 3764b8551463b900b5b4e3ec0cd9bb9182191cb7 Mon Sep 17 00:00:00 2001
-+From: rofl0r <rofl0r@users.noreply.github.com>
-+Date: Thu, 8 Sep 2022 15:18:04 +0000
-+Subject: [PATCH] prevent junk from showing up in error page in invalid
-+ requests
-+
-+fixes #457
-+
-+https://github.com/tinyproxy/tinyproxy/commit/3764b8551463b900b5b4e3ec0cd9bb9182191cb7
-+Upstream-Status: Backport
-+CVE: CVE-2022-40468
-+Signed-off-by: Chee Yang Lee <chee.yang.lee@intel.com>
-+---
-+ src/reqs.c | 4 ++++
-+ 1 file changed, 4 insertions(+)
-+
-+diff --git a/src/reqs.c b/src/reqs.c
-+index bce69819..45db118d 100644
-+--- a/src/reqs.c
-++++ b/src/reqs.c
-+@@ -343,8 +343,12 @@ static struct request_s *process_request (struct conn_s *connptr,
-+                 goto fail;
-+         }
-+ 
-++        /* zero-terminate the strings so they don't contain junk in error page */
-++        request->method[0] = url[0] = request->protocol[0] = 0;
-++
-+         ret = sscanf (connptr->request_line, "%[^ ] %[^ ] %[^ ]",
-+                       request->method, url, request->protocol);
-++
-+         if (ret == 2 && !strcasecmp (request->method, "GET")) {
-+                 request->protocol[0] = 0;
-+ 
-diff --git a/meta-networking/recipes-support/tinyproxy/tinyproxy_1.11.1.bb b/meta-networking/recipes-support/tinyproxy/tinyproxy_1.11.1.bb
-index 86f57d88ff..999deff4de 100644
---- a/meta-networking/recipes-support/tinyproxy/tinyproxy_1.11.1.bb
-+++ b/meta-networking/recipes-support/tinyproxy/tinyproxy_1.11.1.bb
-@@ -7,6 +7,7 @@ SRC_URI = "https://github.com/${BPN}/${BPN}/releases/download/${PV}/${BP}.tar.gz
-            file://disable-documentation.patch \
-            file://tinyproxy.service \
-            file://tinyproxy.conf \
-+           file://CVE-2022-40468.patch \
-            "
- 
- SRC_URI[sha256sum] = "1574acf7ba83c703a89e98bb2758a4ed9fda456f092624b33cfcf0ce2d3b2047"
--- 
-2.25.1
-
+On Sat, Feb 11, 2023 at 5:34 AM wangmy <wangmy@fujitsu.com> wrote:
+>
+> From: Wang Mingyu <wangmy@fujitsu.com>
+>
+> License-Update: Delete redundant blank lines in the LICENSE.
+>
+> Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+> ---
+>  ...est-asyncio_0.16.0.bb => python3-pytest-asyncio_0.20.3.bb} | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+>  rename meta-python/recipes-devtools/python/{python3-pytest-asyncio_0.16.0.bb => python3-pytest-asyncio_0.20.3.bb} (61%)
+>
+> diff --git a/meta-python/recipes-devtools/python/python3-pytest-asyncio_0.16.0.bb b/meta-python/recipes-devtools/python/python3-pytest-asyncio_0.20.3.bb
+> similarity index 61%
+> rename from meta-python/recipes-devtools/python/python3-pytest-asyncio_0.16.0.bb
+> rename to meta-python/recipes-devtools/python/python3-pytest-asyncio_0.20.3.bb
+> index 1dfeab633..24b807822 100644
+> --- a/meta-python/recipes-devtools/python/python3-pytest-asyncio_0.16.0.bb
+> +++ b/meta-python/recipes-devtools/python/python3-pytest-asyncio_0.20.3.bb
+> @@ -1,9 +1,9 @@
+>  DESCRIPTION = "pytest-asyncio is an Apache2 licensed library, written in Python, for testing asyncio code with pytest"
+>
+>  LICENSE = "Apache-2.0"
+> -LIC_FILES_CHKSUM = "file://LICENSE;md5=d2794c0df5b907fdace235a619d80314"
+> +LIC_FILES_CHKSUM = "file://LICENSE;md5=136e4f49dbf29942c572a3a8f6e88a77"
+>
+> -SRC_URI[sha256sum] = "7496c5977ce88c34379df64a66459fe395cd05543f0a2f837016e7144391fcfb"
+> +SRC_URI[sha256sum] = "83cbf01169ce3e8eb71c6c278ccb0574d1a7a3bb8eaaf5e50e0ad342afb33b36"
+>
+>  inherit pypi setuptools3
+>
+> --
+> 2.34.1
+>
+>
+> -=-=-=-=-=-=-=-=-=-=-=-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#101028): https://lists.openembedded.org/g/openembedded-devel/message/101028
+> Mute This Topic: https://lists.openembedded.org/mt/96896337/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [raj.khem@gmail.com]
+> -=-=-=-=-=-=-=-=-=-=-=-
+>
 
