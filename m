@@ -2,57 +2,57 @@ Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2551CC6379F
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2E15CC636D4
 	for <webhook@archiver.kernel.org>; Sat, 11 Feb 2023 17:06:16 +0000 (UTC)
-Received: from mail-oi1-f173.google.com (mail-oi1-f173.google.com [209.85.167.173])
- by mx.groups.io with SMTP id smtpd.web11.13430.1676135168999540762
+Received: from mail-oi1-f176.google.com (mail-oi1-f176.google.com [209.85.167.176])
+ by mx.groups.io with SMTP id smtpd.web11.13426.1676135165782082607
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 11 Feb 2023 09:06:09 -0800
+ Sat, 11 Feb 2023 09:06:12 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=au+z7YKP;
- spf=pass (domain: gmail.com, ip: 209.85.167.173, mailfrom: akuster808@gmail.com)
-Received: by mail-oi1-f173.google.com with SMTP id bd6so7027566oib.6
-        for <openembedded-devel@lists.openembedded.org>; Sat, 11 Feb 2023 09:06:08 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=by+MpImL;
+ spf=pass (domain: gmail.com, ip: 209.85.167.176, mailfrom: akuster808@gmail.com)
+Received: by mail-oi1-f176.google.com with SMTP id dt8so7080897oib.0
+        for <openembedded-devel@lists.openembedded.org>; Sat, 11 Feb 2023 09:06:12 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=sgAry9Dv0qtGcWhKvpB1WKqrn2HKEL7/0jNeVa4Dv+k=;
-        b=au+z7YKPVlqi4dWci+uY1xY2FTejC1NcjTKV0dvNmH5A3j03teeHITX83e4NOFA1jB
-         FMq1geNkWZWihiSu+0OoJHBMYfWy2B+HbZ/Diyu0MnkecsrB+//hGe81jGlWJWfZ/Dfn
-         k+DV3tqlS13kn+nqbJJWqqoyhF1TUj6G+cnnQkqO0RvplYB4vuKZzDtT1N6dpaJ03Swo
-         JDOXjAWTmzlm7FDX2qdlMgEYAeqBG7Ay5vJJ0uxlIXPlucriCCsXsyLs4ssiRUst0SRM
-         gLtop9qo2zXU/iy+Efc/HYI2gNdQj4SbMLmTn5p3yZaX1Uzit7yQCLwNIRPaO8fJ+CFp
-         3N7w==
+        bh=OSjG0IBpi8FkDbjsaZsTZOf9Ezjg9OoSEXaxuT50RmI=;
+        b=by+MpImLPYtIIe2zUsZUmpo1VQMijDSM9V8gHbxxHNNDkX6FkBYzouk9DL1m32+p+k
+         udo5SOm6ZX77MO32n+FeZ5s2wr0q5luicIivtN70ED4u1rdTdR+3gBdIwi3dE4GLublK
+         iIwg8mG8NkCGINngRxvHSweomkKzYfkp8BdzVSwiXr6t0W4JIqPDbFQi+iotA5uiKSwV
+         JoRsWCGPZyfE/hc0fd4ZbSB3K5pnaKf66jevdiMkb5B6IRcCyfK1cNje7CZKx8DwuE/h
+         38GbyrHh4tmz0Iwivd2mN0N5088v4ETrMXLK3qD/QD3G9Te8tB9pxRUilyYmef+R3ZUu
+         oHzQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=sgAry9Dv0qtGcWhKvpB1WKqrn2HKEL7/0jNeVa4Dv+k=;
-        b=zqJZwyjp6c2Aw4Jh01ESQgeoBAVSRx7hELDeNC8wahimd7dsvIrtImMMkLUXMT4/85
-         lZMrHND0+QgndRaiHOnCoYvp6erj2Ljd2MLy3lY+fyXVXIO9YzerkAr/m2vm2Hf1Oyy5
-         hGp2Dgk13UTMjg8jLH8awrfAMo/OztbF7oD43K9+MgCztHcx+/ZMBwCoVzBuhmhnKTak
-         T1tr6SXNcaAg62Ko5UiZb9A0XjK+91huocM1HE+eNy/+3ytvbIwRKGgtRMcUFlJMGkUK
-         fs6wKpDRXKbi7Ur2Nv19LshbZDyCwBhxel69Uxmb9E0ydq7xZL1qkpviFKOWys6aS8I1
-         tsBQ==
-X-Gm-Message-State: AO0yUKVrzA4pYwZuBo9NgHfLthIoifkZL+MRSIJwzf2h3UTqL1Eho/Ha
-	jxdNPRE8TGn1VNlDR/kvY+0CdYRX0LY=
-X-Google-Smtp-Source: AK7set9Xxe5N9sjeKgHzQFqDp/UiEvFlmKJGn2rIhVoIf5ds9u5gDEhOio+MDMCCD+RNoiQRby/UTw==
-X-Received: by 2002:a05:6808:2105:b0:37a:2bf0:5018 with SMTP id r5-20020a056808210500b0037a2bf05018mr7537211oiw.6.1676135168067;
-        Sat, 11 Feb 2023 09:06:08 -0800 (PST)
+        bh=OSjG0IBpi8FkDbjsaZsTZOf9Ezjg9OoSEXaxuT50RmI=;
+        b=M7Qm/btAwTmAYi5y1BXfb9sCo/xK1/EE0VY1xUkXJJnpdEpuNgFCP91ACFuwQMW35O
+         S/UG/H6pC5Nh0STnUSJ541gNi2OVGSXB3jcpKb3upmOoewOO1eHajsifQ6HKQrw7DroB
+         1ROI7U1s1Pd8Hn3k71hTtKwveGbnesBSMahiF8HnXDGS4grjev4n9yRU4LCKGESiKyeh
+         93UrY/dBovCyqSXGyR5VYpf60fVP/vreLwlWQx30vm/ulgFkzilZdS6E7Z8ajYoB2jK+
+         iTmYQaXBn0HlDWMS88gQUGmw5sNHLUu8vYspGlwmBNM1fx0PejtJxt3yv+6MStzCeNSA
+         7aqw==
+X-Gm-Message-State: AO0yUKW4ipKqoAK5AwqAuAFULjg+N6A+ZnDTfeQIk6O6LXBQkMjbOlnu
+	VcUIwjFO4/Wz/6SkoCP4jUE2pUrbFS4=
+X-Google-Smtp-Source: AK7set8rWS8Tu++FK1RFYScw7WS3QiPaH811AoX9IlapbPWQkBnocDFKEdZorwUGducxJU8GjGhawA==
+X-Received: by 2002:a54:470a:0:b0:37a:fcd6:5c09 with SMTP id k10-20020a54470a000000b0037afcd65c09mr7770744oik.49.1676135171233;
+        Sat, 11 Feb 2023 09:06:11 -0800 (PST)
 Received: from keaua.attlocal.net ([2600:1700:9190:ba10:6c32:d739:9179:1de7])
-        by smtp.gmail.com with ESMTPSA id p203-20020aca5bd4000000b0037d8670526esm275932oib.52.2023.02.11.09.06.06
+        by smtp.gmail.com with ESMTPSA id p203-20020aca5bd4000000b0037d8670526esm275932oib.52.2023.02.11.09.06.09
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 11 Feb 2023 09:06:06 -0800 (PST)
+        Sat, 11 Feb 2023 09:06:10 -0800 (PST)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Narpat Mali <narpat.mali@windriver.com>,
+Cc: Chee Yang Lee <chee.yang.lee@intel.com>,
 	Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][langdale][PATCH 4/6] net-snmp: CVE-2022-44792 & CVE-2022-44793 Fix NULL Pointer Exception
-Date: Sat, 11 Feb 2023 12:05:59 -0500
-Message-Id: <20230211170601.3988339-4-akuster808@gmail.com>
+Subject: [meta-oe][langdale][PATCH 6/6] tinyproxy: fix CVE-2022-40468
+Date: Sat, 11 Feb 2023 12:06:01 -0500
+Message-Id: <20230211170601.3988339-6-akuster808@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20230211170601.3988339-1-akuster808@gmail.com>
 References: <20230211170601.3988339-1-akuster808@gmail.com>
@@ -62,163 +62,71 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sat, 11 Feb 2023 17:06:16 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101039
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101041
 
-From: Narpat Mali <narpat.mali@windriver.com>
+From: Chee Yang Lee <chee.yang.lee@intel.com>
 
-References:
-https://nvd.nist.gov/vuln/detail/CVE-2022-44792
-https://nvd.nist.gov/vuln/detail/CVE-2022-44793
-
-Signed-off-by: Narpat Mali <narpat.mali@windriver.com>
+Signed-off-by: Chee Yang Lee <chee.yang.lee@intel.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 5ae6f9434f44a57389a3f52dce17da6fe5928e1f)
+(cherry picked from commit 795ccdd86cad05c425adae15af27797f42f33c56)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../CVE-2022-44792-CVE-2022-44793.patch       | 121 ++++++++++++++++++
- .../net-snmp/net-snmp_5.9.3.bb                |   1 +
- 2 files changed, 122 insertions(+)
- create mode 100644 meta-networking/recipes-protocols/net-snmp/net-snmp/CVE-2022-44792-CVE-2022-44793.patch
+ .../tinyproxy/tinyproxy/CVE-2022-40468.patch  | 33 +++++++++++++++++++
+ .../tinyproxy/tinyproxy_1.11.1.bb             |  1 +
+ 2 files changed, 34 insertions(+)
+ create mode 100644 meta-networking/recipes-support/tinyproxy/tinyproxy/CVE-2022-40468.patch
 
-diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp/CVE-2022-44792-CVE-2022-44793.patch b/meta-networking/recipes-protocols/net-snmp/net-snmp/CVE-2022-44792-CVE-2022-44793.patch
+diff --git a/meta-networking/recipes-support/tinyproxy/tinyproxy/CVE-2022-40468.patch b/meta-networking/recipes-support/tinyproxy/tinyproxy/CVE-2022-40468.patch
 new file mode 100644
-index 0000000000..b18d4dc292
+index 0000000000..4e2157ca75
 --- /dev/null
-+++ b/meta-networking/recipes-protocols/net-snmp/net-snmp/CVE-2022-44792-CVE-2022-44793.patch
-@@ -0,0 +1,121 @@
-+From d13302656d9ff0807c5defe18623adc947f43a2b Mon Sep 17 00:00:00 2001
-+From: Narpat Mali <narpat.mali@windriver.com>
-+Date: Wed, 8 Feb 2023 13:15:39 +0000
-+Subject: [PATCH] agent: Disallow SET requests with any NULL varbind Merge pull
-+ request #490 from fenner/set-null
++++ b/meta-networking/recipes-support/tinyproxy/tinyproxy/CVE-2022-40468.patch
+@@ -0,0 +1,33 @@
++From 3764b8551463b900b5b4e3ec0cd9bb9182191cb7 Mon Sep 17 00:00:00 2001
++From: rofl0r <rofl0r@users.noreply.github.com>
++Date: Thu, 8 Sep 2022 15:18:04 +0000
++Subject: [PATCH] prevent junk from showing up in error page in invalid
++ requests
 +
-+fixes: #474 and #475
++fixes #457
 +
-+CVE: CVE-2022-44792, CVE-2022-44793
-+
-+Upstream-Status: Backport [https://github.com/net-snmp/net-snmp/commit/be804106fd0771a7d05236cff36e199af077af57]
-+
-+Signed-off-by: Narpat Mali <narpat.mali@windriver.com>
++https://github.com/tinyproxy/tinyproxy/commit/3764b8551463b900b5b4e3ec0cd9bb9182191cb7
++Upstream-Status: Backport
++CVE: CVE-2022-40468
++Signed-off-by: Chee Yang Lee <chee.yang.lee@intel.com>
 +---
-+ agent/snmp_agent.c                            | 32 +++++++++++++++++++
-+ apps/snmpset.c                                |  1 +
-+ .../default/T0142snmpv2csetnull_simple        | 31 ++++++++++++++++++
-+ 3 files changed, 64 insertions(+)
-+ create mode 100644 testing/fulltests/default/T0142snmpv2csetnull_simple
++ src/reqs.c | 4 ++++
++ 1 file changed, 4 insertions(+)
 +
-+diff --git a/agent/snmp_agent.c b/agent/snmp_agent.c
-+index 867d0c1..3f678fe 100644
-+--- a/agent/snmp_agent.c
-++++ b/agent/snmp_agent.c
-+@@ -3719,12 +3719,44 @@ netsnmp_handle_request(netsnmp_agent_session *asp, int status)
-+     return 1;
-+ }
++diff --git a/src/reqs.c b/src/reqs.c
++index bce69819..45db118d 100644
++--- a/src/reqs.c
+++++ b/src/reqs.c
++@@ -343,8 +343,12 @@ static struct request_s *process_request (struct conn_s *connptr,
++                 goto fail;
++         }
 + 
-++static int
-++check_set_pdu_for_null_varbind(netsnmp_agent_session *asp)
-++{
-++    int i;
-++    netsnmp_variable_list *v = NULL;
+++        /* zero-terminate the strings so they don't contain junk in error page */
+++        request->method[0] = url[0] = request->protocol[0] = 0;
 ++
-++    for (i = 1, v = asp->pdu->variables; v != NULL; i++, v = v->next_variable) {
-++	if (v->type == ASN_NULL) {
-++	    /*
-++	     * Protect SET implementations that do not protect themselves
-++	     * against wrong type.
-++	     */
-++	    DEBUGMSGTL(("snmp_agent", "disallowing SET with NULL var for varbind %d\n", i));
-++	    asp->index = i;
-++	    return SNMP_ERR_WRONGTYPE;
-++	}
-++    }
-++    return SNMP_ERR_NOERROR;
-++}
++         ret = sscanf (connptr->request_line, "%[^ ] %[^ ] %[^ ]",
++                       request->method, url, request->protocol);
 ++
-+ int
-+ handle_pdu(netsnmp_agent_session *asp)
-+ {
-+     int             status, inclusives = 0;
-+     netsnmp_variable_list *v = NULL;
++         if (ret == 2 && !strcasecmp (request->method, "GET")) {
++                 request->protocol[0] = 0;
 + 
-++#ifndef NETSNMP_NO_WRITE_SUPPORT
-++    /*
-++     * Check for ASN_NULL in SET request
-++     */
-++    if (asp->pdu->command == SNMP_MSG_SET) {
-++	status = check_set_pdu_for_null_varbind(asp);
-++	if (status != SNMP_ERR_NOERROR) {
-++	    return status;
-++	}
-++    }
-++#endif /* NETSNMP_NO_WRITE_SUPPORT */
-++
-+     /*
-+      * for illegal requests, mark all nodes as ASN_NULL 
-+      */
-+diff --git a/apps/snmpset.c b/apps/snmpset.c
-+index 48e14bd..d542713 100644
-+--- a/apps/snmpset.c
-++++ b/apps/snmpset.c
-+@@ -182,6 +182,7 @@ main(int argc, char *argv[])
-+             case 'x':
-+             case 'd':
-+             case 'b':
-++            case 'n': /* undocumented */
-+ #ifdef NETSNMP_WITH_OPAQUE_SPECIAL_TYPES
-+             case 'I':
-+             case 'U':
-+diff --git a/testing/fulltests/default/T0142snmpv2csetnull_simple b/testing/fulltests/default/T0142snmpv2csetnull_simple
-+new file mode 100644
-+index 0000000..0f1b8f3
-+--- /dev/null
-++++ b/testing/fulltests/default/T0142snmpv2csetnull_simple
-+@@ -0,0 +1,31 @@
-++#!/bin/sh
-++
-++. ../support/simple_eval_tools.sh
-++
-++HEADER SNMPv2c set of system.sysContact.0 with NULL varbind
-++
-++SKIPIF NETSNMP_DISABLE_SET_SUPPORT
-++SKIPIF NETSNMP_NO_WRITE_SUPPORT
-++SKIPIF NETSNMP_DISABLE_SNMPV2C
-++SKIPIFNOT USING_MIBII_SYSTEM_MIB_MODULE
-++
-++#
-++# Begin test
-++#
-++
-++# standard V2C configuration: testcomunnity
-++snmp_write_access='all'
-++. ./Sv2cconfig
-++STARTAGENT
-++
-++CAPTURE "snmpget -On $SNMP_FLAGS -c testcommunity -v 2c $SNMP_TRANSPORT_SPEC:$SNMP_TEST_DEST$SNMP_SNMPD_PORT .1.3.6.1.2.1.1.4.0"
-++
-++CHECK ".1.3.6.1.2.1.1.4.0 = STRING:"
-++
-++CAPTURE "snmpset -On $SNMP_FLAGS -c testcommunity -v 2c $SNMP_TRANSPORT_SPEC:$SNMP_TEST_DEST$SNMP_SNMPD_PORT .1.3.6.1.2.1.1.4.0 n x"
-++
-++CHECK "Reason: wrongType"
-++
-++STOPAGENT
-++
-++FINISHED
-+-- 
-+2.34.1
-+
-diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.9.3.bb b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.9.3.bb
-index 78d711fbfd..f40fb8bbd6 100644
---- a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.9.3.bb
-+++ b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.9.3.bb
-@@ -27,6 +27,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/net-snmp/net-snmp-${PV}.tar.gz \
-            file://reproducibility-have-printcap.patch \
-            file://0001-ac_add_search_path.m4-keep-consistent-between-32bit.patch \
-            file://0001-Add-noreturn-attribute-to-netsnmp_pci_error.patch \
-+           file://CVE-2022-44792-CVE-2022-44793.patch \
+diff --git a/meta-networking/recipes-support/tinyproxy/tinyproxy_1.11.1.bb b/meta-networking/recipes-support/tinyproxy/tinyproxy_1.11.1.bb
+index 86f57d88ff..999deff4de 100644
+--- a/meta-networking/recipes-support/tinyproxy/tinyproxy_1.11.1.bb
++++ b/meta-networking/recipes-support/tinyproxy/tinyproxy_1.11.1.bb
+@@ -7,6 +7,7 @@ SRC_URI = "https://github.com/${BPN}/${BPN}/releases/download/${PV}/${BP}.tar.gz
+            file://disable-documentation.patch \
+            file://tinyproxy.service \
+            file://tinyproxy.conf \
++           file://CVE-2022-40468.patch \
             "
- SRC_URI[sha256sum] = "2097f29b7e1bf3f1300b4bae52fa2308d0bb8d5d3998dbe02f9462a413a2ef0a"
  
+ SRC_URI[sha256sum] = "1574acf7ba83c703a89e98bb2758a4ed9fda456f092624b33cfcf0ce2d3b2047"
 -- 
 2.25.1
 
