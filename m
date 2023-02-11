@@ -1,151 +1,116 @@
-Return-Path: <f_l_k@t-online.de>
+Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E5F31C61DA4
-	for <webhook@archiver.kernel.org>; Sat, 11 Feb 2023 09:29:03 +0000 (UTC)
-Received: from mailout02.t-online.de (mailout02.t-online.de [194.25.134.17])
- by mx.groups.io with SMTP id smtpd.web11.6355.1676107738062454843
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 52274C61DA4
+	for <webhook@archiver.kernel.org>; Sat, 11 Feb 2023 13:33:45 +0000 (UTC)
+Received: from mail3.bemta32.messagelabs.com (mail3.bemta32.messagelabs.com [195.245.230.81])
+ by mx.groups.io with SMTP id smtpd.web10.8969.1676122422198452195
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 11 Feb 2023 01:28:58 -0800
+ Sat, 11 Feb 2023 05:33:42 -0800
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=SPF record not found (domain: t-online.de, ip: 194.25.134.17, mailfrom: f_l_k@t-online.de)
-Received: from fwd81.dcpf.telekom.de (fwd81.aul.t-online.de [10.223.144.107])
-	by mailout02.t-online.de (Postfix) with SMTP id 3553613C0E
-	for <openembedded-devel@lists.openembedded.org>; Sat, 11 Feb 2023 10:28:56 +0100 (CET)
-Received: from [192.168.178.83] ([84.163.42.158]) by fwd81.t-online.de
-	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1pQmBf-2IDaGO0; Sat, 11 Feb 2023 10:28:51 +0100
-Date: Sat, 11 Feb 2023 10:28:45 +0100
-From: Markus Volk <f_l_k@t-online.de>
-Subject: Re: [meta-multimedia][PATCH] pipewire-media-session: update 0.4.1 ->
- 0.4.2
-To: openembedded-devel@lists.openembedded.org
-Message-Id: <XZSWPR.BP8CATXQ124M1@t-online.de>
-In-Reply-To: <20230211092756.19039-1-f_l_k@t-online.de>
-References: <20230211092756.19039-1-f_l_k@t-online.de>
-X-Mailer: geary/40.0
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=vDFySH1u;
+ spf=pass (domain: fujitsu.com, ip: 195.245.230.81, mailfrom: wangmy@fujitsu.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
+	s=170520fj; t=1676122420; i=@fujitsu.com;
+	bh=eF3JrG1FkfBfKM45ax35tCPTJjwxQ53SDYDDsC6I8Ec=;
+	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
+	b=vDFySH1u3VVf/3K6u7pRffuTIAihHt9kiHieVCMd0VeZZ/7MBlzt3ASfs5rXd1ttm
+	 A/rZtgkteSVJnm573DCnqICtQfZM7eP6ulYgK2M9+k/e3ftr/bT3M64JXp4O7pwoyF
+	 ODvEposoNlynCdnI+uA3XYOYvV1IJbruzICZp8IZkILeerO3Se2p5SpBqVvEP3/XdC
+	 tS/q0msAlB4SX8r2ipp4f/90igAKscfqzckDJ+6ECMjoI+KwbMZnWwI/XnGIJmS7nj
+	 9IHMc8XCzT85qVu3X0DBEbLZXMyYxlyy46x9f2sKtj3CJ5GwVrEpIjJnn/yjLVfg9x
+	 u7PH8rm3ddFFw==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFlrDIsWRWlGSWpSXmKPExsViZ8MxSdd45vN
+  kg4nbRCwuHl7K7MDocW7jCsYAxijWzLyk/IoE1ox376cyFuzjrni25RZzA+NKri5GLg4hgSeM
+  Emu+PmWGcG4wSWztecgK4exllNh0dB9jFyMnB5uAlMSN+//ZQGwRAX2JpbP3MIPYzAIqEi9+9
+  7B3MXJwCAt4Sxw/wA9isgioSuxaIA9SwSvgKPHty2GwKRICChJTHr5nhogLSpyc+YQFYoqExM
+  EXL5ghahQlZl9uZoGwKyVaP/yCstUkrp7bxDyBkX8WkvZZSNoXMDKtYjQtTi0qSy3SNdNLKsp
+  MzyjJTczM0Uus0k3USy3VLU8tLtE11EssL9ZLLS7WK67MTc5J0ctLLdnECAzElGKGGzsY5/T9
+  1TvEKMnBpCTKu2zz02QhvqT8lMqMxOKM+KLSnNTiQ4wyHBxKErzLJj5PFhIsSk1PrUjLzAFGB
+  UxagoNHSYS3ezpQmre4IDG3ODMdInWKUVFKnPciSJ8ASCKjNA+uDRaJlxhlpYR5GRkYGIR4Cl
+  KLcjNLUOVfMYpzMCoJ806dAjSFJzOvBG76K6DFTECLGaSegiwuSURISTUwVZ/8urp1yr3+go/
+  LJVYYevNMCBbQ6fnI+O/0bfdtRtbBSzjnZaw1Z6uIPHjrW1mW8oKUH0G3f0TxLX/sWdT8ZMX5
+  Ey6FLS8dXupsjhVb6Z3CYvvf+a6ptMMhj453AZqTz3+93zG3yauP6+zZ+APH1CNleHNk5kWG5
+  OewR7/O/TVHwPXdvJS0PSLKotnrGG5fi9LYeMjM4R1jisn8EH/VYK8KYafZrGELv3avmvs4Jz
+  iPJaOxXsft8o7bGlfvCZUIVru+szo2o+WGuMm1J0HrouIivh2wzDnfL+1/6f4Vph83TZdWHW3
+  +w3JD8Zfa8sqihxnzmU7+1s1b0FpwyrNUJHLjxxWPHt+ZJ23Cey5YiaU4I9FQi7moOBEAuW22
+  iT8DAAA=
+X-Env-Sender: wangmy@fujitsu.com
+X-Msg-Ref: server-3.tower-585.messagelabs.com!1676122419!447711!1
+X-Originating-IP: [62.60.8.146]
+X-SYMC-ESS-Client-Auth: outbound-route-from=pass
+X-StarScan-Received: 
+X-StarScan-Version: 9.102.2; banners=-,-,-
+X-VirusChecked: Checked
+Received: (qmail 11504 invoked from network); 11 Feb 2023 13:33:39 -0000
+Received: from unknown (HELO n03ukasimr02.n03.fujitsu.local) (62.60.8.146)
+  by server-3.tower-585.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 11 Feb 2023 13:33:39 -0000
+Received: from n03ukasimr02.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTP id EF1C11000DC
+	for <openembedded-devel@lists.openembedded.org>; Sat, 11 Feb 2023 13:33:38 +0000 (GMT)
+Received: from R01UKEXCASM223.r01.fujitsu.local (R01UKEXCASM223 [10.182.185.121])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTPS id E33171000D2
+	for <openembedded-devel@lists.openembedded.org>; Sat, 11 Feb 2023 13:33:38 +0000 (GMT)
+Received: from localhost.localdomain (10.167.225.33) by
+ R01UKEXCASM223.r01.fujitsu.local (10.182.185.121) with Microsoft SMTP Server
+ (TLS) id 15.0.1497.42; Sat, 11 Feb 2023 13:33:37 +0000
+From: <wangmy@fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: Wang Mingyu <wangmy@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH] python3-portion: Upgrade 2.3.0 -> 2.3.1
+Date: Sat, 11 Feb 2023 21:33:21 +0800
+Message-ID: <1676122405-5945-1-git-send-email-wangmy@fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-Content-Type: multipart/alternative; boundary="=-5uoytKqlqPPs5L5NGWaw"
-X-TOI-EXPURGATEID: 150726::1676107731-1B7F0D98-3988B126/0/0 CLEAN NORMAL
-X-TOI-MSGID: 714c7d28-4883-4803-959a-a08020b8bb65
+Content-Type: text/plain
+X-Originating-IP: [10.167.225.33]
+X-ClientProxiedBy: G08CNEXCHPEKD07.g08.fujitsu.local (10.167.33.80) To
+ R01UKEXCASM223.r01.fujitsu.local (10.182.185.121)
+X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 11 Feb 2023 09:29:03 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101021
+ <openembedded-devel@lists.openembedded.org>; Sat, 11 Feb 2023 13:33:45 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101022
 
---=-5uoytKqlqPPs5L5NGWaw
-Content-Type: text/plain; charset=us-ascii; format=flowed
+From: Wang Mingyu <wangmy@fujitsu.com>
 
-media-session has been updated. Although it should no longer be used, 
-make this update because of the release message, which is not only 
-quite funny, but also clarifies that it should no longer be used except 
-for experimentation.
+Changed
+=======
+ Speed up lookups in IntervalDict for non-interval keys.
+ Speed up iterate by no longer creating singleton instances under the hood.
+ Drop official support for Python 3.6.
 
-Am Sa, 11. Feb 2023 um 10:27:56 +0100 schrieb Markus Volk 
-<f_l_k@t-online.de>:
-> Media Session 0.4.2 (2023-01-20)
-> 
-> This is a small release to keep the dead corpse walking... Repeated 
-> attempts to
-> shoot it in the head seem to have failed (We don't think it is 
-> running with a lot
-> of brains left). It does not look pretty and we don't know yet when 
-> it will finally
-> stay down. What we do know is that some creatures (humans?) have been 
-> secretly
-> feeding it with their brain cells and as such, here we are...
-> 
-> Anyway, it contains some minor patches for some organ (memory?) 
-> leaks. It also adds
-> some fixes to make things stumble on (compile?) and make disturbing 
-> slurping sounds
-> again (work?) with the latest PipeWire versions.
-> 
-> Seriously.. back off.. don't become a victim... use Wireplumber.
-> 
-> Signed-off-by: Markus Volk <f_l_k@t-online.de 
-> <mailto:f_l_k@t-online.de>>
-> ---
->  ...e-media-session_0.4.1.bb => pipewire-media-session_0.4.2.bb} | 2 
-> +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->  rename 
-> meta-multimedia/recipes-multimedia/pipewire/{pipewire-media-session_0.4.1.bb 
-> => pipewire-media-session_0.4.2.bb} (92%)
-> 
-> diff --git 
-> a/meta-multimedia/recipes-multimedia/pipewire/pipewire-media-session_0.4.1.bb 
-> b/meta-multimedia/recipes-multimedia/pipewire/pipewire-media-session_0.4.2.bb
-> similarity index 92%
-> rename from 
-> meta-multimedia/recipes-multimedia/pipewire/pipewire-media-session_0.4.1.bb
-> rename to 
-> meta-multimedia/recipes-multimedia/pipewire/pipewire-media-session_0.4.2.bb
-> index da8d1d7ad..8ae062413 100644
-> --- 
-> a/meta-multimedia/recipes-multimedia/pipewire/pipewire-media-session_0.4.1.bb
-> +++ 
-> b/meta-multimedia/recipes-multimedia/pipewire/pipewire-media-session_0.4.2.bb
-> @@ -13,7 +13,7 @@ DEPENDS = " \
->  SRC_URI = 
-> "git://gitlab.freedesktop.org/pipewire/media-session.git;protocol=https;branch=master"
-> 
->  S = "${WORKDIR}/git"
-> -SRCREV = "e5d5cf2404786af8bcc40bdb8a2962bef4ec18b6"
-> +SRCREV = "80dae7e24bec02b2befe09a72fbac6e2b38ccb5c"
-> 
->  inherit meson pkgconfig
->  # <https://gitlab.freedesktop.org/pipewire/pipewire/-/issues/2952>
-> --
-> 2.34.1
-> 
+Fixed
+=====
+ Infinite recursion when a subclass of an Interval is compared using > with an Interval instance (see #75).
 
-
---=-5uoytKqlqPPs5L5NGWaw
-Content-Type: text/html; charset=us-ascii
-
-<div id="geary-body" dir="auto"><div>media-session has been updated. Although it should no longer be used, make this update because of the release message, which is not only quite funny, but also clarifies that it should no longer be used except for experimentation.</div></div><div id="geary-quote" dir="auto"><br>Am Sa, 11. Feb 2023 um 10:27:56 +0100 schrieb Markus Volk &lt;f_l_k@t-online.de&gt;:<br><blockquote type="cite"><div class="plaintext" style="white-space: break-spaces;">Media Session 0.4.2 (2023-01-20)
-
-This is a small release to keep the dead corpse walking... Repeated attempts to
-shoot it in the head seem to have failed (We don't think it is running with a lot
-of brains left). It does not look pretty and we don't know yet when it will finally
-stay down. What we do know is that some creatures (humans?) have been secretly
-feeding it with their brain cells and as such, here we are...
-
-Anyway, it contains some minor patches for some organ (memory?) leaks. It also adds
-some fixes to make things stumble on (compile?) and make disturbing slurping sounds
-again (work?) with the latest PipeWire versions.
-
-Seriously.. back off.. don't become a victim... use Wireplumber.
-
-Signed-off-by: Markus Volk &lt;<a href="mailto:f_l_k@t-online.de">f_l_k@t-online.de</a>&gt;
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- ...e-media-session_0.4.1.bb =&gt; pipewire-media-session_0.4.2.bb} | 2 +-
+ .../{python3-portion_2.3.0.bb => python3-portion_2.3.1.bb}      | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-multimedia/recipes-multimedia/pipewire/{pipewire-media-session_0.4.1.bb =&gt; pipewire-media-session_0.4.2.bb} (92%)
+ rename meta-python/recipes-devtools/python/{python3-portion_2.3.0.bb => python3-portion_2.3.1.bb} (80%)
 
-diff --git a/meta-multimedia/recipes-multimedia/pipewire/pipewire-media-session_0.4.1.bb b/meta-multimedia/recipes-multimedia/pipewire/pipewire-media-session_0.4.2.bb
-similarity index 92%
-rename from meta-multimedia/recipes-multimedia/pipewire/pipewire-media-session_0.4.1.bb
-rename to meta-multimedia/recipes-multimedia/pipewire/pipewire-media-session_0.4.2.bb
-index da8d1d7ad..8ae062413 100644
---- a/meta-multimedia/recipes-multimedia/pipewire/pipewire-media-session_0.4.1.bb
-+++ b/meta-multimedia/recipes-multimedia/pipewire/pipewire-media-session_0.4.2.bb
-@@ -13,7 +13,7 @@ DEPENDS = " \
- SRC_URI = "git://gitlab.freedesktop.org/pipewire/media-session.git;protocol=https;branch=master"
+diff --git a/meta-python/recipes-devtools/python/python3-portion_2.3.0.bb b/meta-python/recipes-devtools/python/python3-portion_2.3.1.bb
+similarity index 80%
+rename from meta-python/recipes-devtools/python/python3-portion_2.3.0.bb
+rename to meta-python/recipes-devtools/python/python3-portion_2.3.1.bb
+index 1638d64c3..d998db01d 100644
+--- a/meta-python/recipes-devtools/python/python3-portion_2.3.0.bb
++++ b/meta-python/recipes-devtools/python/python3-portion_2.3.1.bb
+@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=05f1e16a8e59ce3e9a979e881816c2ab"
  
- S = "${WORKDIR}/git"
--SRCREV = "e5d5cf2404786af8bcc40bdb8a2962bef4ec18b6"
-+SRCREV = "80dae7e24bec02b2befe09a72fbac6e2b38ccb5c"
+ inherit pypi setuptools3
  
- inherit meson pkgconfig
- # <a href="https://gitlab.freedesktop.org/pipewire/pipewire/-/issues/2952">https://gitlab.freedesktop.org/pipewire/pipewire/-/issues/2952</a>
-<div>-- 
-</div>2.34.1
-
-</div></blockquote></div>
---=-5uoytKqlqPPs5L5NGWaw--
+-SRC_URI[sha256sum] = "0e9d42838099263201b25517e4c1bd57042b5fe44432d6df38cef72d84d1eb1f"
++SRC_URI[sha256sum] = "247471718131d41fb82137ab7b6466cdf4b785d047e38d309ebf34c84101a3a6"
+ 
+ RDEPENDS:${PN} = "\
+     ${PYTHON_PN}-sortedcontainers \
+-- 
+2.34.1
 
 
