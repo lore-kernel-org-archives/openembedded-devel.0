@@ -1,109 +1,106 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 853D8C61DA4
-	for <webhook@archiver.kernel.org>; Sat, 11 Feb 2023 23:16:01 +0000 (UTC)
-Received: from mail-oa1-f43.google.com (mail-oa1-f43.google.com [209.85.160.43])
- by mx.groups.io with SMTP id smtpd.web11.1031.1676157354321505448
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 60F61C05027
+	for <webhook@archiver.kernel.org>; Sun, 12 Feb 2023 09:07:44 +0000 (UTC)
+Received: from mail1.bemta34.messagelabs.com (mail1.bemta34.messagelabs.com [195.245.231.3])
+ by mx.groups.io with SMTP id smtpd.web11.7816.1676192854666867051
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 11 Feb 2023 15:15:54 -0800
+ Sun, 12 Feb 2023 01:07:35 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=WoXJQnKH;
- spf=pass (domain: gmail.com, ip: 209.85.160.43, mailfrom: raj.khem@gmail.com)
-Received: by mail-oa1-f43.google.com with SMTP id 586e51a60fabf-16ab8581837so11132284fac.4
-        for <openembedded-devel@lists.openembedded.org>; Sat, 11 Feb 2023 15:15:54 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=eU1t2MgAYNMsXfOgGxSN6hBdIfAgSBdF0sLYYyb+u9U=;
-        b=WoXJQnKHpORCx87nZl+dm4Oi2wYsdJzbk8qFsppgcPttY827BgYKCkn3TXZPjIuxFz
-         DX6SLaFnmnmggj4luj58ErXC33IZnLP5hOnmiOI6G+LTfUg8auVz0S1EtmlD41jvL+BX
-         ollmpcEi5A/SnGNtNg+E6gLxBJDU++kXUZk3r927rlOn7BDkdNiIOZyki+JC1skh7+iH
-         VwGdHdDzfLQnUctBySXotZJq6U/BhUJOwh3qGj8/+eV8hhJFAWPHV1XRUFqT6zFt7uRl
-         a3UhmGy1edeNr06zB3N00T+GXy8MGlqXC6sc46dT1E/9s0efK0di4Pu1BFy/X/A2/p0s
-         z4/A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=eU1t2MgAYNMsXfOgGxSN6hBdIfAgSBdF0sLYYyb+u9U=;
-        b=77KTYHZ57+FamDw4UMJGO42sJQ6z7pKDetEw6CweL9Sdb2y9CA8k2R6zXEyCY0gSi8
-         vgbiDnjC7LLHcrqpX7BTn1nehWLnjII7QaxG9GfdHskWyUrnYFNa/lPoi7pEKmDkA//e
-         vuRo+SGluAACo6Of0ithAIVnRsNBSypjV/9PXZtkTdUhAVBbW55J2NQqHeHvEmEJGWQv
-         cNyOtEh1v1Fjc0i6lb4NFhsKhjta9SN4g/nRQ00UNsV+HJhPUgNYXLcJqkByikdexNCP
-         NekUh1aypUij+oBqgeir0XkCC5Bxh88vm8US3h8wnKsroA2I/VX0cei2xZVVq1ErBWYK
-         Tjag==
-X-Gm-Message-State: AO0yUKU8xkU9BAhtYpmaB4CPU8B2EHVLlx7j0VBUWDbum9Gc8iHzmj4R
-	XSoMvXvkXMikhr1W2etunExnJZLJu5u7YcgWNCU=
-X-Google-Smtp-Source: AK7set/e97nUWMKDcHkFiL9KDOne2n9H+quyZL7vxaPhwxLRQkuqElpexrOi1RwsENGgdUmkcdwINTyYe/fi67B7WvY=
-X-Received: by 2002:a05:6870:96a3:b0:163:d288:863 with SMTP id
- o35-20020a05687096a300b00163d2880863mr1786649oaq.55.1676157353440; Sat, 11
- Feb 2023 15:15:53 -0800 (PST)
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=vro+TgHG;
+ spf=pass (domain: fujitsu.com, ip: 195.245.231.3, mailfrom: wangmy@fujitsu.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
+	s=170520fj; t=1676192853; i=@fujitsu.com;
+	bh=lvYvvzwTUwTPFsP0lzyuA6TbHOzIOyEqlZs04MW30Rc=;
+	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
+	b=vro+TgHGrZxAVsgXUgFHVixsGoNAG2MVPhut5jwQIUSJI3dhLRPDY9VkoFG5VZ3qb
+	 t9tsauwKquYtStYK5uUba9XGYjfqlZULC3gq9pPiyZop/6j5Z1w/7iJCQLQqT59puo
+	 2cs8rihfeVG/DX+bsg0lFgBJJcKM/8qtI1tp37wz+7RWCLrvxdsZhJ0uR2O05amIF3
+	 wlb+/bPOdxFtmb1rQ3ZFePwETTzDeHYiZS2e5/Y3Gt2PulEJ0oPrVAm/PxpF4iRxAr
+	 rQdQnsOHRbgmQVq498u7nnQ6ZuiJ13bOk7LozYaw1YFgCbDeACCWOM57BxAovI2pDv
+	 xZlLM7Z97PpSw==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFlrLIsWRWlGSWpSXmKPExsViZ8ORpBuy5kW
+  yQecncYuLh5cyOzB6nNu4gjGAMYo1My8pvyKBNWPWqWfsBXM5K5oWBTQwHuXoYuTiEBJ4yCgx
+  /dFqRgjnKpPE1SM72CCcvYwS7efPMHUxcnKwCUhJ3Lj/nw3EFhHQl1g6ew8ziM0soCLx4ncPO
+  4gtLOAlcWtJF1gNi4CqxIbL81hAbF4BJ4nX708xgtgSAgoSUx6+Z4aIC0qcnPmEBWKOhMTBFy
+  +YIWoUJWZfbmaBsCslWj/8grLVJK6e28Q8gZF/FpL2WUjaFzAyrWI0LU4tKkst0jXSSyrKTM8
+  oyU3MzNFLrNJN1Est1S1PLS4ByiSWF+ulFhfrFVfmJuek6OWllmxiBIZiSrFq/w7Gtb1/9Q4x
+  SnIwKYnyLtv8NFmILyk/pTIjsTgjvqg0J7X4EKMMB4eSBC/L6hfJQoJFqempFWmZOcC4gElLc
+  PAoifBWLQBK8xYXJOYWZ6ZDpE4xKkqJ85qD9AmAJDJK8+DaYLF4iVFWSpiXkYGBQYinILUoN7
+  MEVf4VozgHo5Iw79FVQFN4MvNK4Ka/AlrMBLSYQeopyOKSRISUVANT20M7thOH9HjzVV7OXN7
+  3Ys/HNKfGOzVakmebZfLOrNydezRRvcZtyevZBerTfpyfufquZyuHl4zT+h2NPYwqpzq7+Tc3
+  HgtPP3xVZi3L5Bmut1l2aujfqFTNk9x0sVrgj/5N52L+pLi91+Yu83K3tVHqnXR8Ym1nyt3M+
+  Qnh21yjn225UHl13bqJYrNjvDe91S7JPvvPyKSBr6t3XsWankntp5kc7noEbXh386uQ0+fGZQ
+  aad05LlKzbf8/LuPCYi0Q6Y8vdT79mas+J2cMb+8pN3+ic7Qmu+4tl1MWfWHif9NA1Us15tdl
+  I0ulq43GpVRG5IiwLyxr/H4hgPFESssSkZ98tq84nb4SFdxsrsRRnJBpqMRcVJwIAc4N7CkAD
+  AAA=
+X-Env-Sender: wangmy@fujitsu.com
+X-Msg-Ref: server-14.tower-571.messagelabs.com!1676192852!482285!1
+X-Originating-IP: [62.60.8.98]
+X-SYMC-ESS-Client-Auth: outbound-route-from=pass
+X-StarScan-Received: 
+X-StarScan-Version: 9.102.2; banners=-,-,-
+X-VirusChecked: Checked
+Received: (qmail 9328 invoked from network); 12 Feb 2023 09:07:32 -0000
+Received: from unknown (HELO n03ukasimr03.n03.fujitsu.local) (62.60.8.98)
+  by server-14.tower-571.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 12 Feb 2023 09:07:32 -0000
+Received: from n03ukasimr03.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr03.n03.fujitsu.local (Postfix) with ESMTP id 1F2B71B4
+	for <openembedded-devel@lists.openembedded.org>; Sun, 12 Feb 2023 09:07:32 +0000 (GMT)
+Received: from R01UKEXCASM223.r01.fujitsu.local (R01UKEXCASM223 [10.182.185.121])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by n03ukasimr03.n03.fujitsu.local (Postfix) with ESMTPS id 139981AE
+	for <openembedded-devel@lists.openembedded.org>; Sun, 12 Feb 2023 09:07:32 +0000 (GMT)
+Received: from localhost.localdomain (10.167.225.33) by
+ R01UKEXCASM223.r01.fujitsu.local (10.182.185.121) with Microsoft SMTP Server
+ (TLS) id 15.0.1497.42; Sun, 12 Feb 2023 09:07:30 +0000
+From: <wangmy@fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: Wang Mingyu <wangmy@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH] python3-pywbem: upgrade 1.5.0 -> 1.6.0
+Date: Sun, 12 Feb 2023 17:07:15 +0800
+Message-ID: <1676192839-13378-1-git-send-email-wangmy@fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-References: <1676122479-6002-1-git-send-email-wangmy@fujitsu.com> <1676122479-6002-2-git-send-email-wangmy@fujitsu.com>
-In-Reply-To: <1676122479-6002-2-git-send-email-wangmy@fujitsu.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Sat, 11 Feb 2023 15:15:27 -0800
-Message-ID: <CAMKF1spgOjaqadzp-cPRn6jn6Z-8g6MTrAt2LQn+JJ-PQEar9A@mail.gmail.com>
-Subject: Re: [oe] [meta-python] [PATCH] python3-pytest-asyncio: upgrade 0.16.0
- -> 0.20.3
-To: wangmy <wangmy@fujitsu.com>
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain
+X-Originating-IP: [10.167.225.33]
+X-ClientProxiedBy: G08CNEXCHPEKD07.g08.fujitsu.local (10.167.33.80) To
+ R01UKEXCASM223.r01.fujitsu.local (10.182.185.121)
+X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 11 Feb 2023 23:16:01 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101042
+ <openembedded-devel@lists.openembedded.org>; Sun, 12 Feb 2023 09:07:44 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101043
 
-This fails to build see
+From: Wang Mingyu <wangmy@fujitsu.com>
 
-https://errors.yoctoproject.org/Errors/Details/689684/
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+---
+ .../pywbem/{python3-pywbem_1.5.0.bb => python3-pywbem_1.6.0.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-extended/pywbem/{python3-pywbem_1.5.0.bb => python3-pywbem_1.6.0.bb} (94%)
 
-On Sat, Feb 11, 2023 at 5:34 AM wangmy <wangmy@fujitsu.com> wrote:
->
-> From: Wang Mingyu <wangmy@fujitsu.com>
->
-> License-Update: Delete redundant blank lines in the LICENSE.
->
-> Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
-> ---
->  ...est-asyncio_0.16.0.bb => python3-pytest-asyncio_0.20.3.bb} | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
->  rename meta-python/recipes-devtools/python/{python3-pytest-asyncio_0.16.0.bb => python3-pytest-asyncio_0.20.3.bb} (61%)
->
-> diff --git a/meta-python/recipes-devtools/python/python3-pytest-asyncio_0.16.0.bb b/meta-python/recipes-devtools/python/python3-pytest-asyncio_0.20.3.bb
-> similarity index 61%
-> rename from meta-python/recipes-devtools/python/python3-pytest-asyncio_0.16.0.bb
-> rename to meta-python/recipes-devtools/python/python3-pytest-asyncio_0.20.3.bb
-> index 1dfeab633..24b807822 100644
-> --- a/meta-python/recipes-devtools/python/python3-pytest-asyncio_0.16.0.bb
-> +++ b/meta-python/recipes-devtools/python/python3-pytest-asyncio_0.20.3.bb
-> @@ -1,9 +1,9 @@
->  DESCRIPTION = "pytest-asyncio is an Apache2 licensed library, written in Python, for testing asyncio code with pytest"
->
->  LICENSE = "Apache-2.0"
-> -LIC_FILES_CHKSUM = "file://LICENSE;md5=d2794c0df5b907fdace235a619d80314"
-> +LIC_FILES_CHKSUM = "file://LICENSE;md5=136e4f49dbf29942c572a3a8f6e88a77"
->
-> -SRC_URI[sha256sum] = "7496c5977ce88c34379df64a66459fe395cd05543f0a2f837016e7144391fcfb"
-> +SRC_URI[sha256sum] = "83cbf01169ce3e8eb71c6c278ccb0574d1a7a3bb8eaaf5e50e0ad342afb33b36"
->
->  inherit pypi setuptools3
->
-> --
-> 2.34.1
->
->
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#101028): https://lists.openembedded.org/g/openembedded-devel/message/101028
-> Mute This Topic: https://lists.openembedded.org/mt/96896337/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [raj.khem@gmail.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
->
+diff --git a/meta-python/recipes-extended/pywbem/python3-pywbem_1.5.0.bb b/meta-python/recipes-extended/pywbem/python3-pywbem_1.6.0.bb
+similarity index 94%
+rename from meta-python/recipes-extended/pywbem/python3-pywbem_1.5.0.bb
+rename to meta-python/recipes-extended/pywbem/python3-pywbem_1.6.0.bb
+index d109fa460..cbf2a7a33 100644
+--- a/meta-python/recipes-extended/pywbem/python3-pywbem_1.5.0.bb
++++ b/meta-python/recipes-extended/pywbem/python3-pywbem_1.6.0.bb
+@@ -16,7 +16,7 @@ HOMEPAGE = "http://pywbem.github.io"
+ LICENSE = "LGPL-2.1-only"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=fbc093901857fcd118f065f900982c24"
+ 
+-SRC_URI[sha256sum] = "c5f7e458c2530c61358fbc6333be74faf366aace78eae33741431267adf32610"
++SRC_URI[sha256sum] = "e26ab0324475ee5329d74971f942b4b315b6ac0edaf278e70e16b5603278ef98"
+ 
+ inherit pypi setuptools3 update-alternatives
+ 
+-- 
+2.34.1
+
 
