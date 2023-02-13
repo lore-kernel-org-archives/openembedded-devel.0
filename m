@@ -1,144 +1,115 @@
-Return-Path: <joe.slater@windriver.com>
+Return-Path: <philip@balister.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8DD9EC636D4
-	for <webhook@archiver.kernel.org>; Mon, 13 Feb 2023 18:28:19 +0000 (UTC)
-Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.web11.23072.1676312899147135770
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 04DFEC636D4
+	for <webhook@archiver.kernel.org>; Tue, 14 Feb 2023 02:35:02 +0000 (UTC)
+Received: from mail-ej1-f44.google.com (mail-ej1-f44.google.com [209.85.218.44])
+ by mx.groups.io with SMTP id smtpd.web10.29289.1676326506040605390
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 13 Feb 2023 10:28:19 -0800
+ Mon, 13 Feb 2023 14:15:06 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=pps06212021 header.b=Tyy/8VPB;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=140889c8a1=joe.slater@windriver.com)
-Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 31DBnlno025348
-	for <openembedded-devel@lists.openembedded.org>; Mon, 13 Feb 2023 10:28:18 -0800
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com; h=from : to : cc :
- subject : date : message-id : mime-version : content-transfer-encoding :
- content-type; s=PPS06212021;
- bh=+ChVMPjgLqMcxPbnbV1IKeESaN4tVQKdVAvF9eFFa5s=;
- b=Tyy/8VPBTWD0dzjOHWnJJNKUcdo+biafCtg4SQ2ILLywNroX7S7jGrGLvt+Wg/3vf1v9
- x01Bu0SH2yIScC0AAm1Lpzee0IG0+iJPRLblSrlaXZZAuqoHY88oU3RqUcYqu1/1BK2z
- WE79dN2MGtcFbNv/7JWD5czTxPI9kO7WhIkou0A0Mq2vJHmBJX570K2pRhCAMPDU+xvI
- XIdvfaNZy65t/u9F8wWg2cTKa3UnByEOoF3WgLLI2U1CReWNx46khl+ixBUA0v3AqMNA
- B7tR73ltGeiI2R7EkzsjDAZ9IIqSM5H/t3OoYwGPSpsxv1ZFG3sDTVhYX5fhAgKi2aU/ lA== 
-Received: from ala-exchng01.corp.ad.wrs.com (unknown-82-252.windriver.com [147.11.82.252])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3np7689rfe-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Mon, 13 Feb 2023 10:28:18 -0800
-Received: from ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.17; Mon, 13 Feb 2023 10:28:18 -0800
-Received: from ala-jslater-lx2.corp.ad.wrs.com (147.11.136.210) by
- ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server id
- 15.1.2507.17 via Frontend Transport; Mon, 13 Feb 2023 10:28:18 -0800
-From: Joe Slater <joe.slater@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-CC: <joe.slater@windriver.com>, <randy.macleod@windriver.com>
-Subject: [kirkstone][meta-oe][PATCH 1/1] phoronix-test-suite: Fix CVE-2022-40704
-Date: Mon, 13 Feb 2023 10:28:18 -0800
-Message-ID: <20230213182818.2995200-1-joe.slater@windriver.com>
-X-Mailer: git-send-email 2.25.1
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=HzsETaOv;
+ spf=pass (domain: gmail.com, ip: 209.85.218.44, mailfrom: fntoth@gmail.com)
+Received: by mail-ej1-f44.google.com with SMTP id dr8so35383656ejc.12
+        for <openembedded-devel@lists.openembedded.org>; Mon, 13 Feb 2023 14:15:05 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=Z/V8YB6PH0NMsqXrrImi/3rHBK/kd8vwJvIz0VdNyM8=;
+        b=HzsETaOvU1gnK+8/3yldk4UxR6ZSabFYMH9fPuk/MQOvoDWpDqzYGYp9iBiKQ5JHhW
+         T+BViVIkEYJFz3vAU0Qykyc8efCSn6+n3AVP4zF4COO4PDSDw2qf2i1whPOJnk5uSr9t
+         cCpMHTDcK/h6hQjO3D0Cq0UfSRtuDkBS8fGY6hLc6sAhj+Jakq9sBnTnY7M1hL3xw0iy
+         GaOjMKbNKZk1eX8AgFhvdZvYdOc1ELMAtspfFqYPEVxBt7csfJ+R8gj6JlyZvPWeUtuK
+         AA0g2t97VEX8nAan/HOxgdri5aldqKPCwDXlYsMZ6OObo86gSwe0twG5WkxZosl5tM84
+         05Og==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=Z/V8YB6PH0NMsqXrrImi/3rHBK/kd8vwJvIz0VdNyM8=;
+        b=aNTMx2FAHIiaKW6VN0s/AyUEda7BOvt6UAD6FGTeLlV4Bv6y5CCJfzG40+mRqbgV6p
+         gL1HzCAtxTItIVuVNkr1UgP3AD0f4hsY3Db4fRAUvMdbFwVApNwHpHJEUfse8+J3bQ11
+         GARVmqh8KOKZ9v8Oslq320N1QoCwYwvoC3lnUpYZmneCEn/6yA28YBovgOA7XSTaByZK
+         ALPCord33XwOX0cDhxjtYDYGBs7/MvwnH3Eqnf666TT9KELX1yzVp+zOIZet9kk5K2YH
+         B/uAWX1EwkatXKRwrUQ9eqnNUAyA3aCINr902o4kuANSz9Roi9IyU0ZrlUpAldKYQeCu
+         Vvaw==
+X-Gm-Message-State: AO0yUKUiE80hRSLI+c+B54iiJN9OMLPqZhqPO71RIeZSgqR0/Mw8LZBy
+	wzS79kJYD/3eWWjJOyBzcmg=
+X-Google-Smtp-Source: AK7set+bGx5UNDQDaFqnFHppQpwBDLsEnf+cYIdj+6XPW5ZkqiEsjEMxgnIWE04Vt4Vn/Df3128Crg==
+X-Received: by 2002:a17:907:76b6:b0:8b1:2c2d:3f09 with SMTP id jw22-20020a17090776b600b008b12c2d3f09mr255154ejc.47.1676326504470;
+        Mon, 13 Feb 2023 14:15:04 -0800 (PST)
+Received: from ?IPV6:2a02:a466:68ed:1:d4a4:86d5:dc4e:5fcf? (2a02-a466-68ed-1-d4a4-86d5-dc4e-5fcf.fixed6.kpn.net. [2a02:a466:68ed:1:d4a4:86d5:dc4e:5fcf])
+        by smtp.gmail.com with ESMTPSA id d26-20020a17090694da00b0088550a1ce74sm7280311ejy.120.2023.02.13.14.15.03
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Mon, 13 Feb 2023 14:15:03 -0800 (PST)
+Message-ID: <5e17e6d3-da7b-7222-bcf3-feef6c6fc776@gmail.com>
+Date: Mon, 13 Feb 2023 23:15:03 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Proofpoint-ORIG-GUID: DvzmgbUXTJsGzbPgfKHbj4hHivTrStq5
-X-Proofpoint-GUID: DvzmgbUXTJsGzbPgfKHbj4hHivTrStq5
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.219,Aquarius:18.0.930,Hydra:6.0.562,FMLib:17.11.170.22
- definitions=2023-02-13_12,2023-02-13_01,2023-02-09_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 adultscore=0 malwarescore=0
- phishscore=0 priorityscore=1501 mlxscore=0 suspectscore=0 bulkscore=0
- impostorscore=0 mlxlogscore=999 spamscore=0 lowpriorityscore=0
- clxscore=1015 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2212070000 definitions=main-2302130164
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.7.1
+Subject: Re: [oe] [meta-oe][PATCH 0/3] libgpiod: add support for libgpiod v2
+To: Bartosz Golaszewski <brgl@bgdev.pl>
+Cc: Khem Raj <raj.khem@gmail.com>, Bruce Ashfield <bruce.ashfield@gmail.com>,
+ openembedded-devel@lists.openembedded.org,
+ Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
+References: <20230208152541.136848-1-brgl@bgdev.pl>
+ <b49ddb5c-3f15-2887-8f53-c6d73c93afa2@gmail.com>
+ <CAMRc=McjbMaNk=DRYvq8deBUWtiHZQEs-8CTvGOSDSYQdBZojA@mail.gmail.com>
+From: "Ferry Toth" <fntoth@gmail.com>
+In-Reply-To: <CAMRc=McjbMaNk=DRYvq8deBUWtiHZQEs-8CTvGOSDSYQdBZojA@mail.gmail.com>
+Content-Language: en-US
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 13 Feb 2023 18:28:19 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101069
+ <openembedded-devel@lists.openembedded.org>; Tue, 14 Feb 2023 02:35:02 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101070
 
-Add fix created after latest release (10.8.4).
+Op 09-02-2023 om 20:57 schreef Bartosz Golaszewski:
+> On Thu, Feb 9, 2023 at 8:26 PM Ferry Toth <fntoth@gmail.com> wrote:
+>>
+>> Hi,
+>>
+>> Op 08-02-2023 om 16:25 schreef Bartosz Golaszewski:
+>>> From: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
+>>>
+>>> We've just tagged the release candidate for libgpiod v2. This is a major
+>>> release entirely overhauling the API in a backward incompatible way.
+>>
+>> Thanks for creating this!
+>>
+>>> While this is not the final release yet, it's not likely to change much so
+>>> I'd like to make it available in meta-openembedded to give it exposure to
+>>> some testing. When we do release v2.0, it'll be just a matter of bumping the
+>>> version.
+>>>
+>>> Currently no other package depends on libgpiod in meta-openembedded, so I'd
+>>> like to avoid having two packages (libgpiod and libgpiod2). Instead let's
+>>> provide recipes for both versions but keep them under the common libgpiod name
+>>> as it's unlikely anyone would need both versions in a single system. This is
+>>> after all a medium-sized project that shouldn't require too much work in order
+>>> to port a user to the new major release.
+>>
+>> Nevertheless there may be packages in other layers using it (meta-acpi,
+>> meta-intel-edison). I think there will be a period where both may need
+>> to coexist.
+>>
+> 
+> Can those layers just set the PREFERRED_VERSION?
 
-Signed-off-by: Joe Slater <joe.slater@windriver.com>
----
- .../files/CVE-2022-40704.patch                | 46 +++++++++++++++++++
- .../phoronix-test-suite_10.8.2.bb             |  6 ++-
- 2 files changed, 51 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-benchmark/phoronix-test-suite/files/CVE-2022-40704.patch
+Yes, but it doesn't the problem when one app needs v1 and the other 
+needs v2.
 
-diff --git a/meta-oe/recipes-benchmark/phoronix-test-suite/files/CVE-2022-40704.patch b/meta-oe/recipes-benchmark/phoronix-test-suite/files/CVE-2022-40704.patch
-new file mode 100644
-index 000000000..8b6405b4a
---- /dev/null
-+++ b/meta-oe/recipes-benchmark/phoronix-test-suite/files/CVE-2022-40704.patch
-@@ -0,0 +1,46 @@
-+From d3880d9d3ba795138444da83f1153c3c3ac27640 Mon Sep 17 00:00:00 2001
-+From: Michael Larabel <michael@phoronix.com>
-+Date: Sat, 23 Jul 2022 07:32:43 -0500
-+Subject: [PATCH] phoromatic: Explicitly check both $_GET abd $_POST in
-+ phoromatic_quit_if_invalid_input_found()
-+
-+Fixes: https://github.com/phoronix-test-suite/phoronix-test-suite/issues/650#issuecomment-1193116678
-+
-+Upstream-Status: Backport
-+CVE: CVE-2022-40704
-+
-+Reference to upstream patch:
-+https://github.com/phoronix-test-suite/phoronix-test-suite/commit/d3880d9d3ba795138444da83f1153c3c3ac27640
-+
-+Signed-off-by: Li Wang <li.wang@windriver.com>
-+---
-+ pts-core/phoromatic/phoromatic_functions.php | 15 +++++++++++++--
-+ 1 file changed, 13 insertions(+), 2 deletions(-)
-+
-+diff --git a/pts-core/phoromatic/phoromatic_functions.php b/pts-core/phoromatic/phoromatic_functions.php
-+index 74ccc5444c..c2313dcdea 100644
-+--- a/pts-core/phoromatic/phoromatic_functions.php
-++++ b/pts-core/phoromatic/phoromatic_functions.php
-+@@ -37,9 +37,20 @@ function phoromatic_quit_if_invalid_input_found($input_keys = null)
-+ 	{
-+ 		foreach($input_keys as $key)
-+ 		{
-+-			if(isset($_REQUEST[$key]) && !empty($_REQUEST[$key]))
-++			if(isset($_GET[$key]) && !empty($_GET[$key]))
-+ 			{
-+-				foreach(pts_arrays::to_array($_REQUEST[$key]) as $val_to_check)
-++				foreach(pts_arrays::to_array($_GET[$key]) as $val_to_check)
-++				{
-++					if(stripos($val_to_check, $invalid_string) !== false)
-++					{
-++						echo '<strong>Exited due to invalid input ( ' . $invalid_string . ') attempted:</strong> ' . htmlspecialchars($val_to_check);
-++						exit;
-++					}
-++				}
-++			}
-++			if(isset($_POST[$key]) && !empty($_POST[$key]))
-++			{
-++				foreach(pts_arrays::to_array($_POST[$key]) as $val_to_check)
-+ 				{
-+ 					if(stripos($val_to_check, $invalid_string) !== false)
-+ 					{
-diff --git a/meta-oe/recipes-benchmark/phoronix-test-suite/phoronix-test-suite_10.8.2.bb b/meta-oe/recipes-benchmark/phoronix-test-suite/phoronix-test-suite_10.8.2.bb
-index 825f7024e..44f2249bc 100644
---- a/meta-oe/recipes-benchmark/phoronix-test-suite/phoronix-test-suite_10.8.2.bb
-+++ b/meta-oe/recipes-benchmark/phoronix-test-suite/phoronix-test-suite_10.8.2.bb
-@@ -5,7 +5,11 @@ LICENSE = "GPL-3.0-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
- SECTION = "console/tests"
- 
--SRC_URI = "http://www.phoronix-test-suite.com/releases/${BP}.tar.gz"
-+SRC_URI = "http://www.phoronix-test-suite.com/releases/${BP}.tar.gz \
-+           file://CVE-2022-40704.patch \
-+          "
-+
-+
- SRC_URI[md5sum] = "459c3c45b39bb3d720ddc8ba5f944332"
- SRC_URI[sha256sum] = "86681343d20415831ab16ef6c3d1c317e2345e771925e0698ae920a03a9eaab6"
- 
--- 
-2.25.1
+> Bart
+> 
+> 
+> 
+> 
+> 
 
 
