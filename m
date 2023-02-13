@@ -1,384 +1,144 @@
-Return-Path: <jlu@pengutronix.de>
+Return-Path: <joe.slater@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 80782C636CC
-	for <webhook@archiver.kernel.org>; Mon, 13 Feb 2023 11:20:47 +0000 (UTC)
-Received: from metis.ext.pengutronix.de (metis.ext.pengutronix.de [85.220.165.71])
- by mx.groups.io with SMTP id smtpd.web11.12200.1676287245801653071
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8DD9EC636D4
+	for <webhook@archiver.kernel.org>; Mon, 13 Feb 2023 18:28:19 +0000 (UTC)
+Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
+ by mx.groups.io with SMTP id smtpd.web11.23072.1676312899147135770
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 13 Feb 2023 03:20:46 -0800
+ Mon, 13 Feb 2023 10:28:19 -0800
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: pengutronix.de, ip: 85.220.165.71, mailfrom: jlu@pengutronix.de)
-Received: from drehscheibe.grey.stw.pengutronix.de ([2a0a:edc0:0:c01:1d::a2])
-	by metis.ext.pengutronix.de with esmtps (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
-	(Exim 4.92)
-	(envelope-from <jlu@pengutronix.de>)
-	id 1pRWt1-0001g1-N0; Mon, 13 Feb 2023 12:20:43 +0100
-Received: from [2a0a:edc0:0:1101:1d::39] (helo=dude03.red.stw.pengutronix.de)
-	by drehscheibe.grey.stw.pengutronix.de with esmtp (Exim 4.94.2)
-	(envelope-from <jlu@pengutronix.de>)
-	id 1pRWsz-004doQ-Bl; Mon, 13 Feb 2023 12:20:42 +0100
-Received: from jlu by dude03.red.stw.pengutronix.de with local (Exim 4.94.2)
-	(envelope-from <jlu@pengutronix.de>)
-	id 1pRWsz-000YKd-R1; Mon, 13 Feb 2023 12:20:41 +0100
-From: Jan Luebbe <jlu@pengutronix.de>
-To: openembedded-devel@lists.openembedded.org
-Cc: yocto@pengutronix.de,
-	Jan Luebbe <jlu@pengutronix.de>
-Subject: [meta-oe][PATCH] add signing.bbclass as infrastructure for build artifact signing
-Date: Mon, 13 Feb 2023 12:20:37 +0100
-Message-Id: <20230213112037.131445-1-jlu@pengutronix.de>
-X-Mailer: git-send-email 2.30.2
+ dkim=pass header.i=@windriver.com header.s=pps06212021 header.b=Tyy/8VPB;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=140889c8a1=joe.slater@windriver.com)
+Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 31DBnlno025348
+	for <openembedded-devel@lists.openembedded.org>; Mon, 13 Feb 2023 10:28:18 -0800
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com; h=from : to : cc :
+ subject : date : message-id : mime-version : content-transfer-encoding :
+ content-type; s=PPS06212021;
+ bh=+ChVMPjgLqMcxPbnbV1IKeESaN4tVQKdVAvF9eFFa5s=;
+ b=Tyy/8VPBTWD0dzjOHWnJJNKUcdo+biafCtg4SQ2ILLywNroX7S7jGrGLvt+Wg/3vf1v9
+ x01Bu0SH2yIScC0AAm1Lpzee0IG0+iJPRLblSrlaXZZAuqoHY88oU3RqUcYqu1/1BK2z
+ WE79dN2MGtcFbNv/7JWD5czTxPI9kO7WhIkou0A0Mq2vJHmBJX570K2pRhCAMPDU+xvI
+ XIdvfaNZy65t/u9F8wWg2cTKa3UnByEOoF3WgLLI2U1CReWNx46khl+ixBUA0v3AqMNA
+ B7tR73ltGeiI2R7EkzsjDAZ9IIqSM5H/t3OoYwGPSpsxv1ZFG3sDTVhYX5fhAgKi2aU/ lA== 
+Received: from ala-exchng01.corp.ad.wrs.com (unknown-82-252.windriver.com [147.11.82.252])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3np7689rfe-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Mon, 13 Feb 2023 10:28:18 -0800
+Received: from ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.17; Mon, 13 Feb 2023 10:28:18 -0800
+Received: from ala-jslater-lx2.corp.ad.wrs.com (147.11.136.210) by
+ ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server id
+ 15.1.2507.17 via Frontend Transport; Mon, 13 Feb 2023 10:28:18 -0800
+From: Joe Slater <joe.slater@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: <joe.slater@windriver.com>, <randy.macleod@windriver.com>
+Subject: [kirkstone][meta-oe][PATCH 1/1] phoronix-test-suite: Fix CVE-2022-40704
+Date: Mon, 13 Feb 2023 10:28:18 -0800
+Message-ID: <20230213182818.2995200-1-joe.slater@windriver.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-SA-Exim-Connect-IP: 2a0a:edc0:0:c01:1d::a2
-X-SA-Exim-Mail-From: jlu@pengutronix.de
-X-SA-Exim-Scanned: No (on metis.ext.pengutronix.de); SAEximRunCond expanded to false
-X-PTX-Original-Recipient: openembedded-devel@lists.openembedded.org
+Content-Type: text/plain
+X-Proofpoint-ORIG-GUID: DvzmgbUXTJsGzbPgfKHbj4hHivTrStq5
+X-Proofpoint-GUID: DvzmgbUXTJsGzbPgfKHbj4hHivTrStq5
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.219,Aquarius:18.0.930,Hydra:6.0.562,FMLib:17.11.170.22
+ definitions=2023-02-13_12,2023-02-13_01,2023-02-09_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 adultscore=0 malwarescore=0
+ phishscore=0 priorityscore=1501 mlxscore=0 suspectscore=0 bulkscore=0
+ impostorscore=0 mlxlogscore=999 spamscore=0 lowpriorityscore=0
+ clxscore=1015 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.12.0-2212070000 definitions=main-2302130164
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 13 Feb 2023 11:20:47 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101068
+ <openembedded-devel@lists.openembedded.org>; Mon, 13 Feb 2023 18:28:19 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101069
 
-This adds common infrastructure to access and used asymmetric keys to
-sign build artifacts. The approach and implementation was presented at
-the recent OpenEmbedded Workshop:
-https://pretalx.com/openembedded-workshop-2023/talk/3C8MFF/
+Add fix created after latest release (10.8.4).
 
-A working demo setup for verified boot based on qemu is available at
-https://github.com/jluebbe/meta-code-signing.
-
-Signed-off-by: Jan Luebbe <jlu@pengutronix.de>
+Signed-off-by: Joe Slater <joe.slater@windriver.com>
 ---
- meta-oe/classes/signing.bbclass | 316 ++++++++++++++++++++++++++++++++
- 1 file changed, 316 insertions(+)
- create mode 100644 meta-oe/classes/signing.bbclass
+ .../files/CVE-2022-40704.patch                | 46 +++++++++++++++++++
+ .../phoronix-test-suite_10.8.2.bb             |  6 ++-
+ 2 files changed, 51 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-benchmark/phoronix-test-suite/files/CVE-2022-40704.patch
 
-diff --git a/meta-oe/classes/signing.bbclass b/meta-oe/classes/signing.bbclass
+diff --git a/meta-oe/recipes-benchmark/phoronix-test-suite/files/CVE-2022-40704.patch b/meta-oe/recipes-benchmark/phoronix-test-suite/files/CVE-2022-40704.patch
 new file mode 100644
-index 000000000000..5c74a319e4f9
+index 000000000..8b6405b4a
 --- /dev/null
-+++ b/meta-oe/classes/signing.bbclass
-@@ -0,0 +1,316 @@
-+#
-+# Copyright Jan Luebbe <jlu@pengutronix.de>
-+#
-+# SPDX-License-Identifier: MIT
-+#
++++ b/meta-oe/recipes-benchmark/phoronix-test-suite/files/CVE-2022-40704.patch
+@@ -0,0 +1,46 @@
++From d3880d9d3ba795138444da83f1153c3c3ac27640 Mon Sep 17 00:00:00 2001
++From: Michael Larabel <michael@phoronix.com>
++Date: Sat, 23 Jul 2022 07:32:43 -0500
++Subject: [PATCH] phoromatic: Explicitly check both $_GET abd $_POST in
++ phoromatic_quit_if_invalid_input_found()
 +
-+# This class provides a common workflow to use asymmetric (i.e. RSA) keys to
-+# sign artifacts. Usually, the keys are either stored as simple files in the
-+# file system or on a HSM (Hardware Security Module). While files are easy to
-+# use, it's hard to verify that no copies of the private have been made and
-+# only authorized persons are able to use the key. Use of an HSM addresses
-+# these risks by only allowing use of the key via an API (often PKCS #11). The
-+# standard way of referring to a specific key in an HSM are PKCS #11 URIs (RFC
-+# 7512).
-+#
-+# Many software projects support signing using PKCS #11 keys, but configuring
-+# this is very project specific. Furthermore, as physical HSMs are not very
-+# widespread, testing code signing in CI is not simple. To solve this at the
-+# build system level, this class takes the approach of always using PKCS #11 at
-+# the recipe level. For cases where the keys are available as files (i.e. test
-+# keys in CI), they are imported into SoftHSM (a HSM emulation library).
-+# 
-+# Recipes access the available keys via a specific role. So, depending on
-+# whether we're building during development or for release, a given role can
-+# refer to different keys.
-+# Each key recipe PROVIDES a virtual package corresponding to the role, allowing
-+# the user to select one of multiple keys for a role when needed.
-+#
-+# For use with a real HSM, a PKCS #11 URI can be set (i.e. in local.conf) to
-+# override the SoftHSM key with the real one:
-+#
-+#   SIGNING_PKCS11_URI[fit] = "pkcs11:serial=DENK0200554;object=ptx-dev-rauc&pin-value=123456"
-+#   SIGNING_PKCS11_MODULE[fit] = "/usr/lib/x86_64-linux-gnu/opensc-pkcs11.so"
-+#
-+# Examples for defining roles and importing keys:
-+# 
-+#   meta-code-signing/recipes-security/signing-keys/dummy-rsa-key-native.bb
-+#   meta-code-signing-demo/recipes-security/ptx-dev-keys/ptx-dev-keys-native_git.bb
-+#
-+# Examples for using keys for signing:
-+#
-+#   meta-code-signing-demo/recipes-security/fit-image/linux-fit-image.bb
-+#   meta-code-signing-demo/recipes-core/bundles/update-bundle.bb
-+#
-+# Examples for using keys for authentication:
-+#
-+#   meta-code-signing-demo/recipes-security/fit-image/barebox_%.bbappend
-+#   meta-code-signing-demo/recipes-core/rauc/rauc_%.bbappend
-+#
-+# Examples for using keys for both signing and authentication:
-+#
-+#   meta-code-signing-demo/recipes-kernel/linux/linux-yocto_6.1.bbappend
++Fixes: https://github.com/phoronix-test-suite/phoronix-test-suite/issues/650#issuecomment-1193116678
 +
-+SIGNING_PKCS11_URI ?= ""
-+SIGNING_PKCS11_MODULE ?= ""
++Upstream-Status: Backport
++CVE: CVE-2022-40704
 +
-+DEPENDS += "softhsm-native libp11-native opensc-native openssl-native"
++Reference to upstream patch:
++https://github.com/phoronix-test-suite/phoronix-test-suite/commit/d3880d9d3ba795138444da83f1153c3c3ac27640
 +
-+def signing_class_prepare(d):
-+    import os.path
++Signed-off-by: Li Wang <li.wang@windriver.com>
++---
++ pts-core/phoromatic/phoromatic_functions.php | 15 +++++++++++++--
++ 1 file changed, 13 insertions(+), 2 deletions(-)
 +
-+    def export(role, k, v):
-+        k = k % (role, )
-+        d.setVar(k, v)
-+        d.setVarFlag(k, "export", "1")
++diff --git a/pts-core/phoromatic/phoromatic_functions.php b/pts-core/phoromatic/phoromatic_functions.php
++index 74ccc5444c..c2313dcdea 100644
++--- a/pts-core/phoromatic/phoromatic_functions.php
+++++ b/pts-core/phoromatic/phoromatic_functions.php
++@@ -37,9 +37,20 @@ function phoromatic_quit_if_invalid_input_found($input_keys = null)
++ 	{
++ 		foreach($input_keys as $key)
++ 		{
++-			if(isset($_REQUEST[$key]) && !empty($_REQUEST[$key]))
+++			if(isset($_GET[$key]) && !empty($_GET[$key]))
++ 			{
++-				foreach(pts_arrays::to_array($_REQUEST[$key]) as $val_to_check)
+++				foreach(pts_arrays::to_array($_GET[$key]) as $val_to_check)
+++				{
+++					if(stripos($val_to_check, $invalid_string) !== false)
+++					{
+++						echo '<strong>Exited due to invalid input ( ' . $invalid_string . ') attempted:</strong> ' . htmlspecialchars($val_to_check);
+++						exit;
+++					}
+++				}
+++			}
+++			if(isset($_POST[$key]) && !empty($_POST[$key]))
+++			{
+++				foreach(pts_arrays::to_array($_POST[$key]) as $val_to_check)
++ 				{
++ 					if(stripos($val_to_check, $invalid_string) !== false)
++ 					{
+diff --git a/meta-oe/recipes-benchmark/phoronix-test-suite/phoronix-test-suite_10.8.2.bb b/meta-oe/recipes-benchmark/phoronix-test-suite/phoronix-test-suite_10.8.2.bb
+index 825f7024e..44f2249bc 100644
+--- a/meta-oe/recipes-benchmark/phoronix-test-suite/phoronix-test-suite_10.8.2.bb
++++ b/meta-oe/recipes-benchmark/phoronix-test-suite/phoronix-test-suite_10.8.2.bb
+@@ -5,7 +5,11 @@ LICENSE = "GPL-3.0-only"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
+ SECTION = "console/tests"
+ 
+-SRC_URI = "http://www.phoronix-test-suite.com/releases/${BP}.tar.gz"
++SRC_URI = "http://www.phoronix-test-suite.com/releases/${BP}.tar.gz \
++           file://CVE-2022-40704.patch \
++          "
 +
-+    roles = set()
-+    roles |= (d.getVarFlags("SIGNING_PKCS11_URI") or {}).keys()
-+    roles |= (d.getVarFlags("SIGNING_PKCS11_MODULE") or {}).keys()
-+    for role in roles:
-+        if not set(role).issubset("abcdefghijklmnopqrstuvwxyz0123456789_"):
-+            bb.fatal("key role name '%s' must consist of only [a-z0-9_]" % (role,))
 +
-+        pkcs11_uri = d.getVarFlag("SIGNING_PKCS11_URI", role) or d.getVar("SIGNING_PKCS11_URI")
-+        if not pkcs11_uri.startswith("pkcs11:"):
-+            bb.fatal("URI for key role '%s' must start with 'pkcs11:'" % (role,))
-+
-+        pkcs11_module = d.getVarFlag("SIGNING_PKCS11_MODULE", role) or d.getVar("SIGNING_PKCS11_MODULE")
-+        if not os.path.isfile(pkcs11_module):
-+            bb.fatal("module path for key role '%s' must be an existing file" % (role,))
-+
-+        if pkcs11_uri and not pkcs11_module:
-+            bb.warn("SIGNING_PKCS11_URI[%s] is set without SIGNING_PKCS11_MODULE[%s]" % (role, role))
-+        if pkcs11_module and not pkcs11_uri:
-+            bb.warn("SIGNING_PKCS11_MODULE[%s] is set without SIGNING_PKCS11_URI[%s]" % (role, role))
-+
-+        export(role, "SIGNING_PKCS11_URI_%s_", pkcs11_uri)
-+        export(role, "SIGNING_PKCS11_MODULE_%s_", pkcs11_module)
-+
-+signing_pkcs11_tool() {
-+    pkcs11-tool --module "${STAGING_LIBDIR_NATIVE}/softhsm/libsofthsm2.so" --login --pin 1111 $*
-+}
-+
-+signing_import_prepare() {
-+    export _SIGNING_ENV_FILE_="${B}/meta-signing.env"
-+    rm -f "$_SIGNING_ENV_FILE_"
-+
-+    export SOFTHSM2_CONF="${B}/softhsm2.conf"
-+    export SOFTHSM2_DIR="${B}/softhsm2.tokens"
-+    export SOFTHSM2_MOD="${STAGING_LIBDIR_NATIVE}/softhsm/libsofthsm2.so"
-+
-+    echo "directories.tokendir = $SOFTHSM2_DIR" > "$SOFTHSM2_CONF"
-+    echo "objectstore.backend = db" >> "$SOFTHSM2_CONF"
-+    rm -rf "$SOFTHSM2_DIR"
-+    mkdir -p "$SOFTHSM2_DIR"
-+
-+    softhsm2-util --module $SOFTHSM2_MOD --init-token --free --label ${PN} --pin 1111 --so-pin 222222
-+}
-+
-+signing_import_define_role() {
-+    local role="${1}"
-+    case "${1}" in
-+        (*[!a-z0-9_]*) false;;
-+        (*) true;;
-+    esac || bbfatal "invalid role name '${1}', must consist of [a-z0-9_]"
-+
-+    echo "_SIGNING_PKCS11_URI_${role}_=\"pkcs11:token=${PN};object=$role;pin-value=1111\"" >> $_SIGNING_ENV_FILE_
-+    echo "_SIGNING_PKCS11_MODULE_${role}_=\"softhsm\"" >> $_SIGNING_ENV_FILE_
-+}
-+
-+# signing_import_cert_from_der <role> <der>
-+#
-+# Import a certificate from DER file to a role. To be used
-+# with SoftHSM.
-+signing_import_cert_from_der() {
-+    local role="${1}"
-+    local der="${2}"
-+
-+    signing_pkcs11_tool --type cert --write-object "${der}" --label "${role}"
-+}
-+
-+# signing_import_cert_from_pem <role> <pem>
-+#
-+# Import a certificate from PEM file to a role. To be used
-+# with SoftHSM.
-+signing_import_cert_from_pem() {
-+    local role="${1}"
-+    local pem="${2}"
-+
-+    openssl x509 \
-+        -in "${pem}" -inform pem -outform der |
-+    signing_pkcs11_tool --type cert --write-object /proc/self/fd/0 --label "${role}"
-+}
-+
-+# signing_import_pubkey_from_der <role> <pem>
-+#
-+# Import a public key from DER file to a role. To be used with SoftHSM.
-+signing_import_pubkey_from_pem() {
-+    local role="${1}"
-+    local der="${2}"
-+
-+    signing_pkcs11_tool --type pubkey --write-object "${der}" --label "${role}"
-+}
-+
-+# signing_import_pubkey_from_pem <role> <pem>
-+#
-+# Import a public key from PEM file to a role. To be used with SoftHSM.
-+signing_import_pubkey_from_pem() {
-+    local openssl_keyopt
-+    local role="${1}"
-+    local pem="${2}"
-+
-+    if [ -n "${IMPORT_PASS_FILE}" ]; then
-+        openssl rsa \
-+            -passin "file:${IMPORT_PASS_FILE}" \
-+            -in "${pem}" -inform pem -pubout -outform der
-+    else
-+        openssl rsa \
-+            -in "${pem}" -inform pem -pubout -outform der
-+    fi |
-+    signing_pkcs11_tool --type pubkey --write-object /proc/self/fd/0 --label "${role}"
-+}
-+
-+# signing_import_privkey_from_der <role> <pem>
-+#
-+# Import a private key from DER file to a role. To be used with SoftHSM.
-+signing_import_privkey_from_der() {
-+    local role="${1}"
-+    local der="${2}"
-+    signing_pkcs11_tool --type privkey --write-object "${der}" --label "${role}"
-+}
-+
-+# signing_import_privkey_from_pem <role> <pem>
-+#
-+# Import a private key from PEM file to a role. To be used with SoftHSM.
-+signing_import_privkey_from_pem() {
-+    local openssl_keyopt
-+    local role="${1}"
-+    local pem="${2}"
-+
-+    if [ -n "${IMPORT_PASS_FILE}" ]; then
-+        openssl rsa \
-+            -passin "file:${IMPORT_PASS_FILE}" \
-+            -in "${pem}" -inform pem -outform der
-+    else
-+        openssl rsa \
-+            -in "${pem}" -inform pem -outform der
-+    fi |
-+    signing_pkcs11_tool --type privkey --write-object /proc/self/fd/0 --label "${role}"
-+}
-+
-+# signing_import_key_from_pem <role> <pem>
-+#
-+# Import a private and public key from PEM file to a role. To be used
-+# with SoftHSM.
-+signing_import_key_from_pem() {
-+    local role="${1}"
-+    local pem="${2}"
-+
-+    signing_import_pubkey_from_pem "${role}" "${pem}"
-+    signing_import_privkey_from_pem "${role}" "${pem}"
-+}
-+
-+signing_import_finish() {
-+    echo "loaded objects:"
-+    signing_pkcs11_tool --list-objects
-+}
-+
-+signing_import_install() {
-+    install -d ${D}${localstatedir}/lib/softhsm/tokens/${PN}
-+    install -m 600 -t ${D}${localstatedir}/lib/softhsm/tokens/${PN} ${B}/softhsm2.tokens/*/*
-+    install -d ${D}${localstatedir}/lib/meta-signing.env.d
-+    install -m 644 "${B}/meta-signing.env" ${D}${localstatedir}/lib/meta-signing.env.d/${PN}
-+}
-+
-+signing_prepare() {
-+    if [ -f ${OPENSSL_CONF} ]; then
-+        echo "Using '${OPENSSL_CONF}' for OpenSSL configuration"
-+    else
-+        echo "Missing 'openssl.cnf' at '${STAGING_ETCDIR_NATIVE}/ssl'"
-+        return 1
-+    fi
-+    if [ -d ${OPENSSL_MODULES} ]; then
-+        echo "Using '${OPENSSL_MODULES}' for OpenSSL run-time modules"
-+    else
-+        echo "Missing OpenSSL module directory at '${OPENSSL_MODULES}'"
-+        return 1
-+    fi
-+    if [ -d ${OPENSSL_ENGINES} ]; then
-+        echo "Using '${OPENSSL_ENGINES}' for OpenSSL run-time PKCS#11 modules"
-+    else
-+        echo "Missing OpenSSL PKCS11 engine directory at '${OPENSSL_ENGINES}'"
-+        return 1
-+    fi
-+
-+    export SOFTHSM2_CONF="${WORKDIR}/softhsm2.conf"
-+    export SOFTHSM2_DIR="${STAGING_DIR_NATIVE}/var/lib/softhsm/tokens"
-+
-+    echo "directories.tokendir = $SOFTHSM2_DIR" > "$SOFTHSM2_CONF"
-+    echo "objectstore.backend = db" >> "$SOFTHSM2_CONF"
-+
-+    for env in $(ls "${STAGING_DIR_NATIVE}/var/lib/meta-signing.env.d"); do
-+        . "${STAGING_DIR_NATIVE}/var/lib/meta-signing.env.d/$env"
-+    done
-+}
-+# make sure these functions are exported
-+signing_prepare[vardeps] += "signing_get_uri signing_get_module"
-+
-+signing_use_role() {
-+    local role="${1}"
-+
-+    export PKCS11_MODULE_PATH="$(signing_get_module $role)"
-+    export PKCS11_URI="$(signing_get_uri $role)"
-+
-+    if [ -z "$PKCS11_MODULE_PATH" ]; then
-+        echo "No PKCS11_MODULE_PATH found for role '${role}'"
-+        exit 1
-+    fi
-+    if [ -z "$PKCS11_URI" ]; then
-+        echo "No PKCS11_URI found for role '${role}'"
-+        exit 1
-+    fi
-+}
-+
-+signing_get_uri() {
-+    local role="${1}"
-+
-+    # prefer local configuration
-+    eval local uri="\$SIGNING_PKCS11_URI_${role}_"
-+    if [ -n "$uri" ]; then
-+        echo "$uri"
-+        return
-+    fi
-+
-+    # fall back to softhsm
-+    eval echo "\$_SIGNING_PKCS11_URI_${role}_"
-+}
-+
-+signing_get_module() {
-+    local role="${1}"
-+
-+    # prefer local configuration
-+    eval local module="\$SIGNING_PKCS11_MODULE_${role}_"
-+    if [ -n "$module" ]; then
-+        echo "$module"
-+        return
-+    fi
-+
-+    # fall back to softhsm
-+    eval local module="\$_SIGNING_PKCS11_MODULE_${role}_"
-+    if [ "$module" = "softhsm" ]; then
-+        echo "${STAGING_LIBDIR_NATIVE}/softhsm/libsofthsm2.so"
-+    else
-+        echo "$module"
-+    fi
-+}
-+
-+python () {
-+    signing_class_prepare(d)
-+}
-+
-+export OPENSSL_MODULES="${STAGING_LIBDIR_NATIVE}/ossl-modules"
-+export OPENSSL_ENGINES="${STAGING_LIBDIR_NATIVE}/engines-3"
-+export OPENSSL_CONF="${STAGING_LIBDIR_NATIVE}/ssl-3/openssl.cnf"
-+export SSL_CERT_DIR="${STAGING_LIBDIR_NATIVE}/ssl-3/certs"
-+export SSL_CERT_FILE="${STAGING_LIBDIR_NATIVE}/ssl-3/cert.pem"
+ SRC_URI[md5sum] = "459c3c45b39bb3d720ddc8ba5f944332"
+ SRC_URI[sha256sum] = "86681343d20415831ab16ef6c3d1c317e2345e771925e0698ae920a03a9eaab6"
+ 
 -- 
-2.30.2
+2.25.1
 
 
