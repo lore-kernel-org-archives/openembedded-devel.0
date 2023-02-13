@@ -1,119 +1,122 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EF2BDC636D4
-	for <webhook@archiver.kernel.org>; Mon, 13 Feb 2023 05:48:45 +0000 (UTC)
-Received: from mail-ot1-f42.google.com (mail-ot1-f42.google.com [209.85.210.42])
- by mx.groups.io with SMTP id smtpd.web10.8228.1676267317715849328
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 392B5C636D7
+	for <webhook@archiver.kernel.org>; Mon, 13 Feb 2023 06:56:46 +0000 (UTC)
+Received: from mail1.bemta37.messagelabs.com (mail1.bemta37.messagelabs.com [85.158.142.112])
+ by mx.groups.io with SMTP id smtpd.web11.9168.1676271403102345878
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 12 Feb 2023 21:48:37 -0800
+ Sun, 12 Feb 2023 22:56:43 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=GD0lkRbK;
- spf=pass (domain: gmail.com, ip: 209.85.210.42, mailfrom: raj.khem@gmail.com)
-Received: by mail-ot1-f42.google.com with SMTP id n25-20020a9d7119000000b0068bd8c1e836so3406055otj.3
-        for <openembedded-devel@lists.openembedded.org>; Sun, 12 Feb 2023 21:48:37 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=ayaIJ7/+sBZF66PUgSq65RCOu2DbLEiCaEDQpALo+YA=;
-        b=GD0lkRbK6ruOE1GuC2KSYPRBPSAl4I2f1BYBmPLDwt5BNRfoUgZYwM1sf6NJ0IfVyH
-         gDl6YMk986S/Mu3dRBE755kbBegCzISaKFKjhcuK/A8lIxKs5lndbMc5ACefKcQ7lI46
-         r74tO2rKep4J4qSsKGR5LttJ/e8CDSEvwt8AP4cIz4DOYxhiRoFxU3UM0HjYqevHr1ZT
-         DteXFrZQChx8JSNb1QXDI9xQO1ey8a+MXpep/oW4jLCj59IbpctksD3kS3wDBLBDKCez
-         VafZN8Doay4JjMkmIWDOUOzL94N99MrL5wNCZMkpS+IlXpd/b4ruR8AiulU7DhS7ECIn
-         aHQQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=ayaIJ7/+sBZF66PUgSq65RCOu2DbLEiCaEDQpALo+YA=;
-        b=ChrhO8AyPJlq3uwLi6zwHRZUOHkdacsLt5hv93NvJzDA+v/d4Vo+NzkuYF+8F/j2PB
-         o8ZddjwJzMO5D9e6oMrECXJQFZAM3wKvgaDMiwSe59lejD9RgWuza7Qcx9lKtg3kx65V
-         fEMLh0tno6iA4A35M+VAdKfREuHwoLz1xgUW7j/ZnJ7DXWEBio+yg9EtcwDiDNRxkkiX
-         cGpA9xtlu0r+8rqZq+LZAlG3YjHTxFylxoCC489RYmJrfMhC0uuS7NiF8kj9jhmZSpJr
-         Da6XBBUDSezCRbZLdPIK4iaGNxZWbyuTGR26Ot7dM8X7bRsvX1+oSgmM5+d5MTx0/L3s
-         iaSg==
-X-Gm-Message-State: AO0yUKU2qndiuyJZXEkSRom1hg3lGlE5xxa9zm8ZH7/Ndt3nqQFzYo8e
-	o+wyN5EhuQk2ke7fKbkMqrW0QszyS7rz9jV8MCs=
-X-Google-Smtp-Source: AK7set/dxII2+beXW38lIH/xmNMA0P9afvJhllSLZizpM0FzH6MU1KvlYNEYyyKOYLHUsW2aPGJJ9Sx3J1BYrhX/io4=
-X-Received: by 2002:a05:6830:314c:b0:68b:cd8e:70ee with SMTP id
- c12-20020a056830314c00b0068bcd8e70eemr2314909ots.21.1676267316863; Sun, 12
- Feb 2023 21:48:36 -0800 (PST)
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=jjX/atjl;
+ spf=pass (domain: fujitsu.com, ip: 85.158.142.112, mailfrom: wangmy@fujitsu.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
+	s=170520fj; t=1676271401; i=@fujitsu.com;
+	bh=2GqWl/ZJ8yTFurRC2gJMSTjTnu8Qn41AoMDdZllXiiE=;
+	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type;
+	b=jjX/atjloCIna6X9fBJoTAEBCtEZ090DGTimGsdisEakxGHv94n/7voN+KPqUVOm1
+	 SkEXs1YNVE7dAbrqDHxnY2hCfThjOnGiWOUFOgdoriL9/j5DDrP8f+WCfJ+TaXi3K9
+	 GpRzdkVbdvug7XXzYLTsCyrqC4R/xsdZvDUaZpQWCzz1dZVPpjUY3Wjtdrv7qIEsOh
+	 Rt33dg9gVIv9BOe1kBin6UnOH7JSDdTymFIlt9pse/8e1CFBO9gjdOLPNq/ckg3E1z
+	 NNt19innFynxM2k9Pb5SIune5vHfe+ARW9Snc6DTQVRTJl9EkcWqG8mGbdQcmSzFiS
+	 5uuIU4vmLAcjQ==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrGIsWRWlGSWpSXmKPExsViZ8OxWVfj/st
+  kgyM/NC0uHl7K7MDocW7jCsYAxijWzLyk/IoE1ozFn7oZC7p4K772uDQwHuXuYuTiEBJ4wCjR
+  /HklM4RzhUli968TrBDOXkaJ7c9OMHUxcnKwCUhJ3Lj/nw3EFhHQl1g6ew8ziM0soCLx4ncPO
+  4gtLGAncejjI6BmDg4WAVWJy4/KQMK8Ak4Sbx+sBxsjIaAgMeXhe7BWTgFniSvz/7GA2EJANQ
+  v2nWWCqBeUODnzCQvEeAmJgy9eMEP0KkrMvtzMAmFXSrR++AVlq0lcPbeJeQKj4Cwk7bOQtC9
+  gZFrFaF6cWlSWWqRraK6XVJSZnlGSm5iZo5dYpZuol1qqm5dfVJKha6iXWF6sl1pcrFdcmZuc
+  k6KXl1qyiREYvCnFSXd2MO7s+6t3iFGSg0lJlHfh6ZfJQnxJ+SmVGYnFGfFFpTmpxYcYZTg4l
+  CR4L90CygkWpaanVqRl5gAjCSYtwcGjJMKbBtLKW1yQmFucmQ6ROsWoKCXOe/IGUEIAJJFRmg
+  fXBoveS4yyUsK8jAwMDEI8BalFuZklqPKvGMU5GJWEeU3uAk3hycwrgZv+CmgxE9Dix3xgi0s
+  SEVJSDUyNJrtX8S1seHet5ILaSsO/X6x0f905elrauTDD5l/t40Y9HoFCyb31N27+n8SyKHnX
+  8dC8q4YJ7xdE25/c4R/zS3g3Q54ho+mzZ2tOe71PNV6yNu3YWrt24/xdD85bflgds687ON1de
+  5uP3mNJDvGd3iK1vuu/B2q+Sn3zi4fx9tq5TBunpHdJ7j1Vs97ScnbFSaMalfjKhUvPvlRU19
+  061bDv4fX5OpI3DrV//bok/bPatoeiBYoaBW0zz52Xvze/fHfuip039oe1vRO+8+dswKZEv2l
+  35ppM7Jz3/LST4LstN1Y4eSVcKvuxU/nX2SSOloQ9G3TLZFem2DxhXGJQ8XXCQ0YRrmTpF1XS
+  F3R+KrEUZyQaajEXFScCADsnw9NZAwAA
+X-Env-Sender: wangmy@fujitsu.com
+X-Msg-Ref: server-9.tower-745.messagelabs.com!1676271400!664705!1
+X-Originating-IP: [62.60.8.179]
+X-SYMC-ESS-Client-Auth: outbound-route-from=pass
+X-StarScan-Received: 
+X-StarScan-Version: 9.102.2; banners=-,-,-
+X-VirusChecked: Checked
+Received: (qmail 12753 invoked from network); 13 Feb 2023 06:56:40 -0000
+Received: from unknown (HELO n03ukasimr04.n03.fujitsu.local) (62.60.8.179)
+  by server-9.tower-745.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 13 Feb 2023 06:56:40 -0000
+Received: from n03ukasimr04.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTP id 269CC7C
+	for <openembedded-devel@lists.openembedded.org>; Mon, 13 Feb 2023 06:56:40 +0000 (GMT)
+Received: from R01UKEXCASM223.r01.fujitsu.local (R01UKEXCASM223 [10.182.185.121])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTPS id 1AEA973
+	for <openembedded-devel@lists.openembedded.org>; Mon, 13 Feb 2023 06:56:40 +0000 (GMT)
+Received: from localhost.localdomain (10.167.225.33) by
+ R01UKEXCASM223.r01.fujitsu.local (10.182.185.121) with Microsoft SMTP Server
+ (TLS) id 15.0.1497.42; Mon, 13 Feb 2023 06:56:38 +0000
+From: <wangmy@fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: Wang Mingyu <wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH] ddrescue: upgrade 1.26 -> 1.27
+Date: Mon, 13 Feb 2023 14:56:23 +0800
+Message-ID: <1676271384-21122-2-git-send-email-wangmy@fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
+In-Reply-To: <1676271384-21122-1-git-send-email-wangmy@fujitsu.com>
+References: <1676271384-21122-1-git-send-email-wangmy@fujitsu.com>
 MIME-Version: 1.0
-References: <20230212170320.284295-1-f_l_k@t-online.de>
-In-Reply-To: <20230212170320.284295-1-f_l_k@t-online.de>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Sun, 12 Feb 2023 21:48:10 -0800
-Message-ID: <CAMKF1so3nbre37cM3R0SNwmf5-DuYQjMrHeCnyJR3kDK=DK6qg@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH 1/2] fwupd: fix polkit rules.d permissions
-To: Markus Volk <f_l_k@t-online.de>
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain
+X-Originating-IP: [10.167.225.33]
+X-ClientProxiedBy: G08CNEXCHPEKD07.g08.fujitsu.local (10.167.33.80) To
+ R01UKEXCASM223.r01.fujitsu.local (10.182.185.121)
+X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 13 Feb 2023 05:48:45 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101062
+ <openembedded-devel@lists.openembedded.org>; Mon, 13 Feb 2023 06:56:46 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101064
 
-it seems to fail in do_install
+From: Wang Mingyu <wangmy@fujitsu.com>
 
-https://errors.yoctoproject.org/Errors/Details/689713/
+Changelog:
+==========
+* command_mode.cc (do_commands): Fix flush stdout after each command.
+  (Reported by Jeffrey Bosboom).
+* New option '-W, --compare-before-write'.
+ (Suggested by Kajetan Harald Hinner and Petr Slansky).
+* main_common.cc (show_option_error):
+  New function showing argument and option name.
+* main.cc: Remove synonym '--direct'.
+* Use 'long long' instead of 'long' for time variables.
+* loggers.cc: Missing '#include <cstdlib>'.
+* Fix two compiler warnings reported by Christian Franke.
 
-On Sun, Feb 12, 2023 at 9:03 AM Markus Volk <f_l_k@t-online.de> wrote:
->
-> This fixes:
->
-> Error: Transaction test error:
->   file /usr/share/polkit-1/rules.d conflicts between attempted installs of fwupd-1.8.9-r0.intel_corei7_64 and polkit-122-r0.corei7_64
->   file /usr/share/polkit-1/rules.d conflicts between attempted installs of flatpak-1.15.1-r0.corei7_64 and fwupd-1.8.9-r0.intel_corei7_64
->
-> Signed-off-by: Markus Volk <f_l_k@t-online.de>
-> ---
->  meta-oe/recipes-bsp/fwupd/fwupd_1.8.9.bb | 11 ++++++++++-
->  1 file changed, 10 insertions(+), 1 deletion(-)
->
-> diff --git a/meta-oe/recipes-bsp/fwupd/fwupd_1.8.9.bb b/meta-oe/recipes-bsp/fwupd/fwupd_1.8.9.bb
-> index 0f889ca8f..c0f695753 100644
-> --- a/meta-oe/recipes-bsp/fwupd/fwupd_1.8.9.bb
-> +++ b/meta-oe/recipes-bsp/fwupd/fwupd_1.8.9.bb
-> @@ -13,7 +13,7 @@ UPSTREAM_CHECK_URI = "https://github.com/${BPN}/${BPN}/releases"
->  # Machine-specific as we examine MACHINE_FEATURES to decide whether to build the UEFI plugins
->  PACKAGE_ARCH = "${MACHINE_ARCH}"
->
-> -inherit meson vala gobject-introspection systemd bash-completion pkgconfig gi-docgen ptest manpages
-> +inherit meson vala gobject-introspection systemd bash-completion pkgconfig gi-docgen ptest manpages useradd
->
->  GIDOCGEN_MESON_OPTION = 'docs'
->  GIDOCGEN_MESON_ENABLE_FLAG = 'docgen'
-> @@ -115,6 +115,15 @@ DISABLE_NON_X86:x86 = ""
->  DISABLE_NON_X86:x86-64 = ""
->  PACKAGECONFIG:remove = "${DISABLE_NON_X86}"
->
-> +USERADD_PACKAGES = "${PN}"
-> +USERADD_PARAM:${PN} = "--system --no-create-home --user-group --home-dir ${sysconfdir}/polkit-1 --shell /bin/nologin polkitd"
-> +
-> +do_install:append() {
-> +       #Fix up permissions on polkit rules.d to work with rpm4 constraints
-> +       chmod 700 ${D}/${datadir}/polkit-1/rules.d
-> +       chown polkitd:root ${D}/${datadir}/polkit-1/rules.d
-> +}
-> +
->  FILES:${PN} += "${libdir}/fwupd-plugins-* \
->                  ${libdir}/fwupd-${PV} \
->                  ${systemd_unitdir} \
-> --
-> 2.34.1
->
->
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#101054): https://lists.openembedded.org/g/openembedded-devel/message/101054
-> Mute This Topic: https://lists.openembedded.org/mt/96918159/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [raj.khem@gmail.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
->
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+---
+ .../ddrescue/{ddrescue_1.26.bb => ddrescue_1.27.bb}             | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-extended/ddrescue/{ddrescue_1.26.bb => ddrescue_1.27.bb} (93%)
+
+diff --git a/meta-oe/recipes-extended/ddrescue/ddrescue_1.26.bb b/meta-oe/recipes-extended/ddrescue/ddrescue_1.27.bb
+similarity index 93%
+rename from meta-oe/recipes-extended/ddrescue/ddrescue_1.26.bb
+rename to meta-oe/recipes-extended/ddrescue/ddrescue_1.27.bb
+index a31911b97..7a71d02dc 100644
+--- a/meta-oe/recipes-extended/ddrescue/ddrescue_1.26.bb
++++ b/meta-oe/recipes-extended/ddrescue/ddrescue_1.27.bb
+@@ -11,7 +11,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=76d6e300ffd8fb9d18bd9b136a9bba13 \
+                     "
+ 
+ SRC_URI = "${GNU_MIRROR}/${BPN}/${BP}.tar.lz"
+-SRC_URI[sha256sum] = "e513cd3a90d9810dfdd91197d40aa40f6df01597bfb5ecfdfb205de1127c551f"
++SRC_URI[sha256sum] = "38c80c98c5a44f15e53663e4510097fd68d6ec20758efdf3a925037c183232eb"
+ 
+ # This isn't already added by base.bbclass
+ do_unpack[depends] += "lzip-native:do_populate_sysroot"
+-- 
+2.34.1
+
 
