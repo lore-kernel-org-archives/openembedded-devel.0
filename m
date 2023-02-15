@@ -2,114 +2,125 @@ Return-Path: <Martin.Jansa@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0C9E9C636CC
-	for <webhook@archiver.kernel.org>; Wed, 15 Feb 2023 20:27:23 +0000 (UTC)
-Received: from mail-wr1-f51.google.com (mail-wr1-f51.google.com [209.85.221.51])
- by mx.groups.io with SMTP id smtpd.web10.4048.1676492837822223275
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 33B3AC636CC
+	for <webhook@archiver.kernel.org>; Wed, 15 Feb 2023 21:00:33 +0000 (UTC)
+Received: from mail-wr1-f44.google.com (mail-wr1-f44.google.com [209.85.221.44])
+ by mx.groups.io with SMTP id smtpd.web10.4950.1676494825692494827
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 15 Feb 2023 12:27:18 -0800
+ Wed, 15 Feb 2023 13:00:26 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=G9y7FB69;
- spf=pass (domain: gmail.com, ip: 209.85.221.51, mailfrom: martin.jansa@gmail.com)
-Received: by mail-wr1-f51.google.com with SMTP id l2so3785306wry.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 15 Feb 2023 12:27:17 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=XatyPGLr;
+ spf=pass (domain: gmail.com, ip: 209.85.221.44, mailfrom: martin.jansa@gmail.com)
+Received: by mail-wr1-f44.google.com with SMTP id o15so17200056wrc.9
+        for <openembedded-devel@lists.openembedded.org>; Wed, 15 Feb 2023 13:00:25 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=cc:to:subject:message-id:date:from:in-reply-to:references
          :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=Z1y7zTTqxAaCk6qNfywhAXf/kuunI9BILX66yw/DCGw=;
-        b=G9y7FB69xKzlYmKCirv5Snj/caOCtfKlg4woV+ASWgCGEmYJLdbw/v4oDh+uHCfZKF
-         OrNgfmTOnQ7pXMOdfisfn3/uH9Rj6gQzGtxwHkEq9RV0U1/v//wdUX1aWqf00k/UDdQ1
-         9grhv85MpbR5VunpcEIzYr1XtyfS8YWIaF20jR5dTHkheTcG03TL1FW6Tq5jk0tyrQKA
-         avCUJJjhaQiaNnL4RVfxZ6rN5thx/+bTGoF8kqGn9e7gmEPPj1L9u335nHQA7pYG+4XL
-         YppFIqpAuCNYPau+/U+1ZOukA4c6Mh1Q48mIVX6zfP0TarHUAf+NRAO0GOdCHcR0vcsH
-         YqLg==
+        bh=PwGvPEdbTWEmC+Prp73NK0nP9pC+vKaJh4yHLU+zZaw=;
+        b=XatyPGLrlvHHPUmzWjUkEtxlWFGB1a8JJid4C7exLr1vfIfJ0rNKEME4448lfhgNQL
+         hu3U9Sfl130+uiHNQRoqkhzAOh0khbKxoCidS9LEY0SNvi1ZqCvk/xg5A47lvmTo6tbW
+         +xPLIvD8HH/vcB0oN5qdssmyyGHXRLAKRsfMwiAI1LW9tiw3NKptThPkT6uDd7vMjuuw
+         XZhchTNu9RXKfNBOci74v67qX904x0il2X6a3zbgfdLg9qlVe4rUzaogMmOXSRUvg15V
+         v3MVjKPtrQiXHOdai8uPDS7eFCVXSvceAfrJOIcVOY7itMqB7l0Lq8torT+6LHfs71xS
+         DXEg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=cc:to:subject:message-id:date:from:in-reply-to:references
          :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=Z1y7zTTqxAaCk6qNfywhAXf/kuunI9BILX66yw/DCGw=;
-        b=URd5qQhcIjvgk/VJj7q3h3cU0PQPGU3ggsGKyaPphZAXleQE2eMvEH90o/HWVsOUOZ
-         FF1j8khQN+yb80HisT4HJy6jVHX+CJly5N3XR7lnWAaWyzS5AoIr92qOCqK7OZJdyas8
-         04D3dH7YM/oeefmA34expZyFrvAbNQBcE8VxoXyiwLzDA0vS/tMMKeNb/GdKFdap0BDK
-         wKfKeHLsbAM77y3SPb2PyYKUL438lIoWPecgBo//L2jUj1NfylNVijplomj/UE3S34EO
-         sQTnLNZtM8R6SxImVRQt2l+W6eeGEm7+LZBQoBGiDBzyuHwKqd/H+n5h796yfDrJereE
-         eDew==
-X-Gm-Message-State: AO0yUKUSlr5rHlK9xddZK8i16n2/QPTiAadjHQjSG88ZT25L/rHRMumG
-	gIFhZQ85WPAD3bh/lbp/RpIzBMcSB+3kxPMCQ2sR8bAF4UQ=
-X-Google-Smtp-Source: AK7set8rD+a4mRfdSzY3W3NYnpot2ddV6UHw0RqypcY8o76EYaCe+fIsTfws49mRJKzdsEEi0J3f/D92EnfuJGFc6Q0=
-X-Received: by 2002:a5d:484a:0:b0:2c5:5788:c516 with SMTP id
- n10-20020a5d484a000000b002c55788c516mr82601wrs.127.1676492836008; Wed, 15 Feb
- 2023 12:27:16 -0800 (PST)
+        bh=PwGvPEdbTWEmC+Prp73NK0nP9pC+vKaJh4yHLU+zZaw=;
+        b=tc0kxpE6L0xrb+rRDuGVYAJI9YX9z7PYlEgAQseaSEqOlaSQ0e9W8YpZ1yKFRlSnPT
+         NHSZApEr0o/T6VUoueYev7Ke33M+xE0J3BPbVy5krspekPcrpoerCbKG8yweh6TVMx1F
+         1KTWFvO3LFynnjGoWuFa8mlC0PXxqayEdSdiyvZAwh1/7Ars/1zlCyQERquV823CGwOF
+         RA5mD76OhWCAtQm8qvYiFDSInmJSyKw2V1yvSW5r1kE13Px5r+10Odfc4Tck3DNCn3I+
+         xUJo6eSXLxjgrQt6p8Q1nka6DJ3Z29lQsJDVlLu6SYj/zgL1cC8vMEUUAn44wiSd+ajV
+         9gLQ==
+X-Gm-Message-State: AO0yUKW5kswOMxl3NJacfQpfTF7C9e3rconPnZO1fuAxt7GQpqUB9Aua
+	QdgmLPZSHK+EZhh44hBG/j8gY+Rn8YjtZWh4PUk=
+X-Google-Smtp-Source: AK7set+J8urxFjH3VS3gWXeopcUwz4cgIfJvglt+KCBBlUo3zdeJftgNDXw43yNl9ph+Q4muLR78zycr00rWBsVDXwo=
+X-Received: by 2002:a5d:4a11:0:b0:2c4:24a:b51d with SMTP id
+ m17-20020a5d4a11000000b002c4024ab51dmr95572wrq.92.1676494823912; Wed, 15 Feb
+ 2023 13:00:23 -0800 (PST)
 MIME-Version: 1.0
-References: <20230208131157.2564692-1-archana.polampalli@windriver.com>
-In-Reply-To: <20230208131157.2564692-1-archana.polampalli@windriver.com>
+References: <20230208131157.2564692-1-archana.polampalli@windriver.com> <1744195A99711A03.22975@lists.openembedded.org>
+In-Reply-To: <1744195A99711A03.22975@lists.openembedded.org>
 From: Martin Jansa <martin.jansa@gmail.com>
-Date: Wed, 15 Feb 2023 21:27:02 +0100
-Message-ID: <CA+chaQcOOhCszggnTyR2fhsuwTGODcb1yZUFfcTyyur2C7Ze8w@mail.gmail.com>
+Date: Wed, 15 Feb 2023 22:00:09 +0100
+Message-ID: <CA+chaQcMqU=V4BoAoBP=vjGfhhyhVXXb2wBBsqGUBZfo6+5HnQ@mail.gmail.com>
 Subject: Re: [oe][meta-oe][PATCH 1/1] Nodejs: fix buildpaths warning
-To: "Polampalli, Archana" <archana.polampalli@windriver.com>
-Cc: openembedded-devel@lists.openembedded.org, Hari.GPillai@windriver.com
-Content-Type: multipart/alternative; boundary="000000000000f5769605f4c2e7ec"
+To: Martin.Jansa@gmail.com
+Cc: "Polampalli, Archana" <archana.polampalli@windriver.com>, 
+	openembedded-devel@lists.openembedded.org, Hari.GPillai@windriver.com
+Content-Type: multipart/alternative; boundary="0000000000007279b605f4c35e13"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 15 Feb 2023 20:27:23 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101084
+ <openembedded-devel@lists.openembedded.org>; Wed, 15 Feb 2023 21:00:33 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101085
 
---000000000000f5769605f4c2e7ec
+--0000000000007279b605f4c35e13
 Content-Type: text/plain; charset="UTF-8"
 
-This breaks the do_install when "shared" PACKAGECONFIG is enabled, see:
+On Wed, Feb 15, 2023 at 9:27 PM Martin Jansa via lists.openembedded.org
+<Martin.Jansa=gmail.com@lists.openembedded.org> wrote:
 
-http://errors.yoctoproject.org/Errors/Details/689959/
+> This breaks the do_install when "shared" PACKAGECONFIG is enabled, see:
+>
+> http://errors.yoctoproject.org/Errors/Details/689959/
+>
 
+Using baselib (just "lib") works and install respects prefix as well, so it
+ends in  image/usr/lib/libnode.so.108 as before and there are no TMPDIR
+warnings as well.
 
 On Wed, Feb 8, 2023 at 2:12 PM Polampalli, Archana <
-archana.polampalli@windriver.com> wrote:
-
-> Correct libdir used at configure time to avoid packaging warnings
-> WARNING: nodejs-18.12.1-r0 do_package_qa: QA Issue:
-> File /usr/bin/node in package nodejs contains reference to TMPDIR
-> [buildpaths]
-> File /usr/bin/.debug/node in package nodejs-dbg contains reference to
-> TMPDIR
-> File /usr/lib64/nodejs/ptest/.debug/cctest in package nodejs-dbg contains
-> reference to TMPDIR [buildpaths]
-> File /usr/lib64/nodejs/ptest/cctest in package nodejs-ptest contains
-> reference to TMPDIR [buildpaths]
-> File /usr/include/node/config.gypi in package nodejs-dev contains
-> reference to TMPDIR [buildpaths]
+> archana.polampalli@windriver.com> wrote:
 >
-> Signed-off-by: Archana Polampalli <archana.polampalli@windriver.com>
-> ---
->  meta-oe/recipes-devtools/nodejs/nodejs_18.12.1.bb | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_18.12.1.bb
-> b/meta-oe/recipes-devtools/nodejs/nodejs_18.12.1.bb
-> index e96913e56..04a80a6b8 100644
-> --- a/meta-oe/recipes-devtools/nodejs/nodejs_18.12.1.bb
-> +++ b/meta-oe/recipes-devtools/nodejs/nodejs_18.12.1.bb
-> @@ -145,7 +145,7 @@ do_configure () {
->                 --without-etw \
->                 --dest-cpu="${@map_nodejs_arch(d.getVar('TARGET_ARCH'),
-> d)}" \
->                 --dest-os=linux \
-> -               --libdir=${D}${libdir} \
-> +               --libdir=${libdir} \
->                 ${ARCHFLAGS} \
->                 ${PACKAGECONFIG_CONFARGS}
->  }
-> --
-> 2.34.1
->
->
+>> Correct libdir used at configure time to avoid packaging warnings
+>> WARNING: nodejs-18.12.1-r0 do_package_qa: QA Issue:
+>> File /usr/bin/node in package nodejs contains reference to TMPDIR
+>> [buildpaths]
+>> File /usr/bin/.debug/node in package nodejs-dbg contains reference to
+>> TMPDIR
+>> File /usr/lib64/nodejs/ptest/.debug/cctest in package nodejs-dbg contains
+>> reference to TMPDIR [buildpaths]
+>> File /usr/lib64/nodejs/ptest/cctest in package nodejs-ptest contains
+>> reference to TMPDIR [buildpaths]
+>> File /usr/include/node/config.gypi in package nodejs-dev contains
+>> reference to TMPDIR [buildpaths]
+>>
+>> Signed-off-by: Archana Polampalli <archana.polampalli@windriver.com>
+>> ---
+>>  meta-oe/recipes-devtools/nodejs/nodejs_18.12.1.bb | 2 +-
+>>  1 file changed, 1 insertion(+), 1 deletion(-)
+>>
+>> diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_18.12.1.bb
+>> b/meta-oe/recipes-devtools/nodejs/nodejs_18.12.1.bb
+>> index e96913e56..04a80a6b8 100644
+>> --- a/meta-oe/recipes-devtools/nodejs/nodejs_18.12.1.bb
+>> +++ b/meta-oe/recipes-devtools/nodejs/nodejs_18.12.1.bb
+>> @@ -145,7 +145,7 @@ do_configure () {
+>>                 --without-etw \
+>>                 --dest-cpu="${@map_nodejs_arch(d.getVar('TARGET_ARCH'),
+>> d)}" \
+>>                 --dest-os=linux \
+>> -               --libdir=${D}${libdir} \
+>> +               --libdir=${libdir} \
+>>                 ${ARCHFLAGS} \
+>>                 ${PACKAGECONFIG_CONFARGS}
+>>  }
+>> --
+>> 2.34.1
+>>
+>>
+>>
+>>
+>>
 > -=-=-=-=-=-=-=-=-=-=-=-
 > Links: You receive all messages sent to this group.
-> View/Reply Online (#100995):
-> https://lists.openembedded.org/g/openembedded-devel/message/100995
+> View/Reply Online (#101084):
+> https://lists.openembedded.org/g/openembedded-devel/message/101084
 > Mute This Topic: https://lists.openembedded.org/mt/96829436/3617156
 > Group Owner: openembedded-devel+owner@lists.openembedded.org
 > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
@@ -118,20 +129,31 @@ archana.polampalli@windriver.com> wrote:
 >
 >
 
---000000000000f5769605f4c2e7ec
+--0000000000007279b605f4c35e13
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-<div dir=3D"ltr">This breaks the do_install when &quot;shared&quot; PACKAGE=
-CONFIG is enabled, see:<div><br></div><div><a href=3D"http://errors.yoctopr=
-oject.org/Errors/Details/689959/">http://errors.yoctoproject.org/Errors/Det=
-ails/689959/</a><br><div><br></div></div></div><br><div class=3D"gmail_quot=
-e"><div dir=3D"ltr" class=3D"gmail_attr">On Wed, Feb 8, 2023 at 2:12 PM Pol=
-ampalli, Archana &lt;<a href=3D"mailto:archana.polampalli@windriver.com" ta=
-rget=3D"_blank">archana.polampalli@windriver.com</a>&gt; wrote:<br></div><b=
-lockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-le=
-ft:1px solid rgb(204,204,204);padding-left:1ex">Correct libdir used at conf=
-igure time to avoid packaging warnings<br>
+<div dir=3D"ltr"><div dir=3D"ltr">On Wed, Feb 15, 2023 at 9:27 PM Martin Ja=
+nsa via <a href=3D"http://lists.openembedded.org">lists.openembedded.org</a=
+> &lt;Martin.Jansa=3D<a href=3D"mailto:gmail.com@lists.openembedded.org">gm=
+ail.com@lists.openembedded.org</a>&gt; wrote:<br></div><div class=3D"gmail_=
+quote"><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;=
+border-left:1px solid rgb(204,204,204);padding-left:1ex"><div dir=3D"ltr">T=
+his breaks the do_install when &quot;shared&quot; PACKAGECONFIG is enabled,=
+ see:<div><br></div><div><a href=3D"http://errors.yoctoproject.org/Errors/D=
+etails/689959/" target=3D"_blank">http://errors.yoctoproject.org/Errors/Det=
+ails/689959/</a></div></div></blockquote><div><br></div><div>Using baselib =
+(just &quot;lib&quot;) works and install respects prefix as well, so it end=
+s in=C2=A0=C2=A0image/usr/lib/libnode.so.108 as before and there are no TMP=
+DIR warnings as well.</div><div><br></div><blockquote class=3D"gmail_quote"=
+ style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);p=
+adding-left:1ex"><div class=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail=
+_attr">On Wed, Feb 8, 2023 at 2:12 PM Polampalli, Archana &lt;<a href=3D"ma=
+ilto:archana.polampalli@windriver.com" target=3D"_blank">archana.polampalli=
+@windriver.com</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" st=
+yle=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padd=
+ing-left:1ex">Correct libdir used at configure time to avoid packaging warn=
+ings<br>
 WARNING: nodejs-18.12.1-r0 do_package_qa: QA Issue:<br>
 File /usr/bin/node in package nodejs contains reference to TMPDIR [buildpat=
 hs]<br>
@@ -179,11 +201,15 @@ FARGS}<br>
 2.34.1<br>
 <br>
 <br>
+<br>
+<br>
+</blockquote></div>
+<br>
 -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
 Links: You receive all messages sent to this group.<br>
-View/Reply Online (#100995): <a href=3D"https://lists.openembedded.org/g/op=
-enembedded-devel/message/100995" rel=3D"noreferrer" target=3D"_blank">https=
-://lists.openembedded.org/g/openembedded-devel/message/100995</a><br>
+View/Reply Online (#101084): <a href=3D"https://lists.openembedded.org/g/op=
+enembedded-devel/message/101084" rel=3D"noreferrer" target=3D"_blank">https=
+://lists.openembedded.org/g/openembedded-devel/message/101084</a><br>
 Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/96829436/3617=
 156" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/mt=
 /96829436/3617156</a><br>
@@ -196,7 +222,7 @@ Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
 target=3D"_blank">Martin.Jansa@gmail.com</a>]<br>
 -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
 <br>
-</blockquote></div>
+</blockquote></div></div>
 
---000000000000f5769605f4c2e7ec--
+--0000000000007279b605f4c35e13--
 
