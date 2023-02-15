@@ -1,118 +1,89 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <Martin.Jansa@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 363F7C636CC
-	for <webhook@archiver.kernel.org>; Wed, 15 Feb 2023 07:46:45 +0000 (UTC)
-Received: from mail-pf1-f170.google.com (mail-pf1-f170.google.com [209.85.210.170])
- by mx.groups.io with SMTP id smtpd.web10.10223.1676447197547011811
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B8DF9C636CC
+	for <webhook@archiver.kernel.org>; Wed, 15 Feb 2023 09:40:35 +0000 (UTC)
+Received: from mail-wm1-f47.google.com (mail-wm1-f47.google.com [209.85.128.47])
+ by mx.groups.io with SMTP id smtpd.web10.11525.1676454028047198049
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 14 Feb 2023 23:46:37 -0800
+ Wed, 15 Feb 2023 01:40:28 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=ogJG8/Qx;
- spf=pass (domain: gmail.com, ip: 209.85.210.170, mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f170.google.com with SMTP id r17so12014604pff.9
-        for <openembedded-devel@lists.openembedded.org>; Tue, 14 Feb 2023 23:46:37 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=Y3fcyZW7;
+ spf=pass (domain: gmail.com, ip: 209.85.128.47, mailfrom: martin.jansa@gmail.com)
+Received: by mail-wm1-f47.google.com with SMTP id f18-20020a7bcd12000000b003e206711347so57235wmj.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 15 Feb 2023 01:40:27 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=qAWI2n7LQn7NUKZAY11PbHy/a6+aNNqI3gNc23XyjKE=;
-        b=ogJG8/Qxy/oMhG/oZPLQx4v1C1cbEga+dV1z9HZ4pT9GEneYWAicMKQf6uztwdJJBA
-         1LMrB7dm9jDs4PeIy8Rvhi3iBY92mX8HPTVKmR8rzFjGhaKOGClC1MYLQBcJv92nToaL
-         n1+f5+LKvL9ALQqCOoIb+oiO3QAjVxNqAbJMBNldEtZbL5b2/uqgA9FODBfT8IualsRg
-         wwnfbCvlTxVHmTojm4hdUvh9r/2gj9j0MZP1YRl9H/syMaQ1TBQxohKw3iq0aMSwNegC
-         KGYu3LmBpyik+fEz1Snyln57MuKMv4w8QYdcYnonmoHxffsiFr6VL4mz6+NHZIsGYdhi
-         NLbw==
+        bh=y8p7mG2Ce4KMvMcWv77871cWtbF1ohNEvU10/ceIFY4=;
+        b=Y3fcyZW7QKQLqPTiVzI63AMpQxKLH3whRjTAzPNxGLbtqs7cm6L4TeFiP5S0wHIzOl
+         6k9onTDSYXMr0BctuwZQOvx3xYX2I223fkQkJIuiCVgdRC5MoFeO4+DE1p0t7V9pMgJO
+         68onY5fwztC6juRQMkwo1kHbVwESn1GHrFu1Jk7pWsW+01GLj6GTv7ozQC1z61nLAOJe
+         L2wplpa4rXErensd7ecDG0n2sJQXCdV+BSOA0TyPK49QL+f1C3bKTK3FMwD9YBa/mry6
+         lNY/TdSf0tLuxzk3r9EakN/zNowo1A3y6ubfDeWDQSe8CyDj6IK21cjqSV7kwCZIM4bL
+         7YDQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=qAWI2n7LQn7NUKZAY11PbHy/a6+aNNqI3gNc23XyjKE=;
-        b=wBuqLA3yinXBikeyPTrohUKdSs/7bV8XRUgsBkuUQweUjjz+iXsig2KZTbs3fN+qit
-         L9VmtoGo+vz9Aslg7MnumDDPtBRayAomM9lL87rzlXwshOIbJ9qHSUvZtf6g4tYGku8S
-         5URHMDbe1V11Bt2Tc5CHA3cvKyJB5b65yT/h7P1sdha6Hy8nkzkBLEiroIyabTW6bZhU
-         Q2K9c3nStFsfrJtYJG+nhlHlav25PwpzPH4jn0d53aovi9+onSDBiAtpLB9Hy+H+iKEQ
-         WYOn2rDg2yuell/fRmD4faIcSCelJ3RYf93Rv7vUoBXnxDrnAmHHVaOzGK26FrKuS4XI
-         lhgQ==
-X-Gm-Message-State: AO0yUKWWrDB3tZFiLBiF4PR84OoOWtqqschppOFz4cKnV3MHS65Duenr
-	TxDSTpFhgfRfN2Il19QWgPo3PfEZNk0=
-X-Google-Smtp-Source: AK7set/qq36oAnLkR/JWSanRgQMuTMb3xQGelT4+ksBIE3dLPrDikWQGG5G4wyRORo5a9WRyVT1NHw==
-X-Received: by 2002:a05:6a00:9b:b0:5a8:bc8a:e066 with SMTP id c27-20020a056a00009b00b005a8bc8ae066mr1125049pfj.26.1676447196698;
-        Tue, 14 Feb 2023 23:46:36 -0800 (PST)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9181:1cf0::789d])
-        by smtp.gmail.com with ESMTPSA id d22-20020aa78e56000000b005a8a61ca0bfsm6453093pfr.61.2023.02.14.23.46.36
+        bh=y8p7mG2Ce4KMvMcWv77871cWtbF1ohNEvU10/ceIFY4=;
+        b=AtBcSOjQBAKCdkuGuvnVYMy3DnYe+/j5678ShjDw9bttgmtT243eFrbhSg69riKC8M
+         ZdB7a8p3GlsHyAxLt01nxbris1ci+ON1+qOjrqcNuA68oGMEmpwXy/Hc64Ujbgrvkv8t
+         uVciipfqUCNtOw9lovqTKwZWonvXp3zIs2PIhqJSKYeE6oMsbFko7tEZOLQ4FtMoTn8J
+         i6+Y7xBVC3hVLUr6TOktZUBZ9PZvkr179bgSm/lszKfVIKOgKzmwNFOzEWVPHNuvE6z9
+         x6xEAUCr8WDDFC3S6eIIYPedASM3MOryWA9ji7iL5VG/k6L4wKXwwxQqF2wOVJvSsQZF
+         7Umg==
+X-Gm-Message-State: AO0yUKU/f7qtMYrLQV53LI31Y20DhIe13TUijpV42vdB1kuIZ39V3yCo
+	mLe4LFTV8eLqbC8lH8xjwv/69ukfbag=
+X-Google-Smtp-Source: AK7set+uTyPij8j1v2LG8CkKB1d9/GtpGOGciW7oQYdvHMLReZKfte6whGkCRu7kj7mvZPBrGp+2fA==
+X-Received: by 2002:a05:600c:4710:b0:3dc:59c3:9020 with SMTP id v16-20020a05600c471000b003dc59c39020mr1518260wmo.8.1676454026348;
+        Wed, 15 Feb 2023 01:40:26 -0800 (PST)
+Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
+        by smtp.gmail.com with ESMTPSA id e12-20020a05600c218c00b003de8a1b06c0sm1604220wme.7.2023.02.15.01.40.25
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 14 Feb 2023 23:46:36 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
+        Wed, 15 Feb 2023 01:40:26 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH] graphene: Delete recipe
-Date: Tue, 14 Feb 2023 23:46:34 -0800
-Message-Id: <20230215074634.3527059-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.39.2
+Cc: Martin Jansa <Martin.Jansa@gmail.com>
+Subject: [meta-oe][kirkstone][langdale][PATCH] exiv2: fix SRC_URI
+Date: Wed, 15 Feb 2023 10:40:21 +0100
+Message-Id: <20230215094021.819234-1-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.39.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 15 Feb 2023 07:46:45 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101081
+ <openembedded-devel@lists.openembedded.org>; Wed, 15 Feb 2023 09:40:35 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101082
 
-This has migrated to core layer
+* https://exiv2.org/releases returns 404 now, use github releases
+* it's already fixed in master with upgrade to 0.27.6 in:
+  https://git.openembedded.org/meta-openembedded/commit/?id=00a7d4b284c1afccfa26021111384d2184b82e5b
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- .../packagegroups/packagegroup-meta-oe.bb     |  1 -
- .../graphene/graphene_1.10.8.bb               | 25 -------------------
- 2 files changed, 26 deletions(-)
- delete mode 100644 meta-oe/recipes-graphics/graphene/graphene_1.10.8.bb
+ meta-oe/recipes-support/exiv2/exiv2_0.27.3.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-index d37383919a..73465def0d 100644
---- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-+++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-@@ -488,7 +488,6 @@ RDEPENDS:packagegroup-meta-oe-graphics ="\
-     gphoto2 \
-     imlib2 \
-     libgphoto2 \
--    graphene \
-     graphviz \
-     gtkwave \
-     jasper \
-diff --git a/meta-oe/recipes-graphics/graphene/graphene_1.10.8.bb b/meta-oe/recipes-graphics/graphene/graphene_1.10.8.bb
-deleted file mode 100644
-index 1bbe7ecca1..0000000000
---- a/meta-oe/recipes-graphics/graphene/graphene_1.10.8.bb
-+++ /dev/null
-@@ -1,25 +0,0 @@
--SUMMARY = "A thin layer of graphic data types"
--HOMEPAGE = "http://ebassi.github.io/graphene/"
--LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=a7d871d9e23c450c421a85bb2819f648"
--
--GNOMEBASEBUILDCLASS = "meson"
--
--inherit gnomebase gobject-introspection gtk-doc
--
--SRC_URI[archive.sha256sum] = "a37bb0e78a419dcbeaa9c7027bcff52f5ec2367c25ec859da31dfde2928f279a"
--
--# gtk4 & mutter 41.0 requires graphene build with introspection
--PACKAGECONFIG ?= "introspection"
--PACKAGECONFIG[introspection] = "-Dintrospection=enabled,-Dintrospection=disabled,"
--
--GTKDOC_MESON_OPTION = "gtk_doc"
--
--EXTRA_OEMESON = "-Dinstalled_tests=false"
--
--# Disable ARM NEON support
--EXTRA_OEMESON:append:arm = " -Darm_neon=false"
--
--FILES:${PN} += "${libdir}/graphene-1.0"
--
--BBCLASSEXTEND = "native nativesdk"
+diff --git a/meta-oe/recipes-support/exiv2/exiv2_0.27.3.bb b/meta-oe/recipes-support/exiv2/exiv2_0.27.3.bb
+index 31afe78e45..b210fa6340 100644
+--- a/meta-oe/recipes-support/exiv2/exiv2_0.27.3.bb
++++ b/meta-oe/recipes-support/exiv2/exiv2_0.27.3.bb
+@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=625f055f41728f84a8d7938acc35bdc2"
+ 
+ DEPENDS = "zlib expat"
+ 
+-SRC_URI = "https://exiv2.org/releases/${BPN}-${PV}-Source.tar.gz"
++SRC_URI = "https://github.com/Exiv2/${BPN}/releases/download/v${PV}/${BP}-Source.tar.gz"
+ SRC_URI[sha256sum] = "a79f5613812aa21755d578a297874fb59a85101e793edc64ec2c6bd994e3e778"
+ 
+ # Once patch is obsolete (project should be aware due to PRs), dos2unix can be removed either
 -- 
-2.39.2
+2.39.1
 
 
