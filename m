@@ -2,56 +2,56 @@ Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id F01B8C6FA9D
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D9BA4C678D5
 	for <webhook@archiver.kernel.org>; Thu, 16 Feb 2023 12:28:09 +0000 (UTC)
-Received: from mail-qt1-f169.google.com (mail-qt1-f169.google.com [209.85.160.169])
- by mx.groups.io with SMTP id smtpd.web10.8636.1676550488252169491
+Received: from mail-qt1-f176.google.com (mail-qt1-f176.google.com [209.85.160.176])
+ by mx.groups.io with SMTP id smtpd.web11.8791.1676550485246638688
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 16 Feb 2023 04:28:08 -0800
+ Thu, 16 Feb 2023 04:28:05 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=GbI/7QBf;
- spf=pass (domain: gmail.com, ip: 209.85.160.169, mailfrom: akuster808@gmail.com)
-Received: by mail-qt1-f169.google.com with SMTP id g18so1836422qtb.6
-        for <openembedded-devel@lists.openembedded.org>; Thu, 16 Feb 2023 04:28:08 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=W4/MCe1z;
+ spf=pass (domain: gmail.com, ip: 209.85.160.176, mailfrom: akuster808@gmail.com)
+Received: by mail-qt1-f176.google.com with SMTP id w3so1835620qts.7
+        for <openembedded-devel@lists.openembedded.org>; Thu, 16 Feb 2023 04:28:05 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=sgAry9Dv0qtGcWhKvpB1WKqrn2HKEL7/0jNeVa4Dv+k=;
-        b=GbI/7QBfvJo/zgHrGIjCZjVBAN6VkaJKyReXX0Mkli60fr281FXrm+mnND0knc6Q2w
-         Sy24asgc5x0yb8ICYDoU1VkPwWJnoLAf3oP7bxPgF4YUq8SODkNeTtLwpEdJkIdkQ6yO
-         2ocWv4MkPrj6A9tnMn5CTm91PqGx7jzY0W9unntG5hskPSP2xxoULRcdrm7S6r+vP2iY
-         9zG2183WHbzESXCAPJvPwL2iIdC29Gc0iiQolPe8cnNUyINWXb5RmGSwV4JdtcnZWP7q
-         CseHPpq2263dSUYSOhvQ5Byc/XeK/v1iGENbDs+Gk7rEOEezq5Kic26kGoS1nYm+R27l
-         xRRA==
+        bh=mk/0bs8IRzKdVTpeG3s1Gi0mcGIURVmysKTqbalAhyk=;
+        b=W4/MCe1zR+DojFoW2AYZuSsnsxLWm4KNCD2FMqWISXe+kuohHegFo6r8f7vcXnzpXU
+         kWoEOsy4tpM2vtZXQ63A487yXRDgQ2ZY8HMOCpAaL9ZfZFN7pxnQbZfjNlN5GpFHuAVa
+         X8Ohh/qBZ0GeuhGtCaDOrweAUEXEdEglA6gDwg/hJ6lGnyejsO68Y3qhtcXKaC2BwjwU
+         fuxR2qru1EyZH3ZhM3VCbmVJ8osEA9ocI1PcLlPL7vFr8Iaw9KccUrTwfxlsIbC79kse
+         3WbjiXt/MxO7NwyxcuJKr2wtv6G6zDfcLZM2MzUzqcR10lEh46Vj8E1YBGxieTwhwSFf
+         XYcQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=sgAry9Dv0qtGcWhKvpB1WKqrn2HKEL7/0jNeVa4Dv+k=;
-        b=6SYdEcXyYp3hFNJNLPtI67DARvJwjYb7QDoCqUJmgdYcNrEBtgse99saTgZkxRGfd8
-         6I6eXXRekfRgiaWf4BC7+PJqMJg3aY/E4KWTjCQyW+T7D4EFyH/oWN/IdqwHTACnJSmq
-         BvYVA9gof+OE+4BLmfagC9thBYs2q9JQIjhVIOfO9Zo9MukhwhJO2cPSQas5uZ6xR7DX
-         pTdwhJTyfl0fwp+mYmDOn0BxdPvlgHnedADdLGunLAP2FSUm6Rt3mgNtfaqSwWJaTYKE
-         zXY2ETH3by3bbHxXTetTmTWVL8p87f+als90KdfmcgPvQ40I069uHpkiNUoz5PV6sma8
-         KPFw==
-X-Gm-Message-State: AO0yUKVU8JCiSrtHYi46eWbQZadXNfEPeiAjiwtjKDgvllan5/w6WYs1
-	A9BpHqQ4tuQQQFzcfqS9VjsktSKh6VM=
-X-Google-Smtp-Source: AK7set/xqwRJ+sP5MThiccFo6cbZXtrV3F9+iwYPMcR3GAWJ0cm2UTV66oYQdbvCHKPAxmYJ0tq8Sg==
-X-Received: by 2002:a05:622a:11c4:b0:3b9:a441:37f4 with SMTP id n4-20020a05622a11c400b003b9a44137f4mr9759255qtk.52.1676550487184;
-        Thu, 16 Feb 2023 04:28:07 -0800 (PST)
+        bh=mk/0bs8IRzKdVTpeG3s1Gi0mcGIURVmysKTqbalAhyk=;
+        b=wNxd3FZB6o61GdNcDcksAiZzJ5DBN880YlPwc1XGWWEtIDW4+tPNkW1spUZwhifp6R
+         NeWY1SEpSzWe04lGGai93WuuE3bNUJGBRlBj8AoaTkVkRinb345hz1+6uojBJkfzoyVu
+         +0Wx99MqAh3bqQJu9XG31Fe2oMuqJjHv7/2VPmFrN87qUT1QMRGUVFEEivP5OcW46dhw
+         ZY65c5oAhWwEaChbM7F5/JutMMfGZV73hPQN+cTeYGl3w8OfdT4bXCxY29SleEGHObd8
+         cK91HLVEQg95gKtHAS0GjXn00a+MJsy2XoZwQ7oTv9rJQ6afT2/GbwI1wOpF/Kp4ptkv
+         VG+g==
+X-Gm-Message-State: AO0yUKWqB9/Pkl0JgoIk+2N7QCbxylYMNZd7u8zoGNgdizGYHpUdugx+
+	meiq1K92mbkNPG4flM0oOPSgSzkIBrg=
+X-Google-Smtp-Source: AK7set8zoHpHD4SIdj3aFQf1KIDzn+TMM9Gnj2lQiCXvQ5qj6eDhL+Ri5yvBjYcM6hsp+g1XTTEyYw==
+X-Received: by 2002:a05:622a:104b:b0:3b9:f076:26c7 with SMTP id f11-20020a05622a104b00b003b9f07626c7mr9093360qte.10.1676550483932;
+        Thu, 16 Feb 2023 04:28:03 -0800 (PST)
 Received: from keaua.attlocal.net ([2600:1700:9190:ba10:2ead:d6b6:b6e2:9e85])
-        by smtp.gmail.com with ESMTPSA id t127-20020a379185000000b0073b4d9e2e8dsm1102362qkd.43.2023.02.16.04.28.06
+        by smtp.gmail.com with ESMTPSA id t127-20020a379185000000b0073b4d9e2e8dsm1102362qkd.43.2023.02.16.04.28.03
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 16 Feb 2023 04:28:06 -0800 (PST)
+        Thu, 16 Feb 2023 04:28:03 -0800 (PST)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [langdale 11/15] net-snmp: CVE-2022-44792 & CVE-2022-44793 Fix NULL Pointer Exception
-Date: Thu, 16 Feb 2023 07:27:21 -0500
-Message-Id: <3c0581d3879212e97388bfb8531e9ae613733a48.1676550369.git.akuster808@gmail.com>
+Subject: [langdale 06/15] freeradius: Security fixes for CVE-2022-41860 CVE-2022-41861
+Date: Thu, 16 Feb 2023 07:27:16 -0500
+Message-Id: <cd15081a7c1b556bc97955d55689b25010cad965.1676550369.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <cover.1676550369.git.akuster808@gmail.com>
 References: <cover.1676550369.git.akuster808@gmail.com>
@@ -61,163 +61,239 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 16 Feb 2023 12:28:09 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101113
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101108
 
-From: Narpat Mali <narpat.mali@windriver.com>
+From: Yi Zhao <yi.zhao@eng.windriver.com>
+
+CVE-2022-41860:
+In freeradius, when an EAP-SIM supplicant sends an unknown SIM option,
+the server will try to look that option up in the internal dictionaries.
+This lookup will fail, but the SIM code will not check for that failure.
+Instead, it will dereference a NULL pointer, and cause the server to
+crash.
+
+CVE-2022-41861:
+A flaw was found in freeradius. A malicious RADIUS client or home server
+can send a malformed abinary attribute which can cause the server to
+crash.
 
 References:
-https://nvd.nist.gov/vuln/detail/CVE-2022-44792
-https://nvd.nist.gov/vuln/detail/CVE-2022-44793
+https://nvd.nist.gov/vuln/detail/CVE-2022-41860
+https://nvd.nist.gov/vuln/detail/CVE-2022-41861
 
-Signed-off-by: Narpat Mali <narpat.mali@windriver.com>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 5ae6f9434f44a57389a3f52dce17da6fe5928e1f)
+Patches from:
+CVE-2022-41860:
+https://github.com/FreeRADIUS/freeradius-server/commit/f1cdbb33ec61c4a64a32e107d4d02f936051c708
+
+CVE-2022-41861:
+https://github.com/FreeRADIUS/freeradius-server/commit/0ec2b39d260e08e4c3464f6b95005821dc559c62
+
+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../CVE-2022-44792-CVE-2022-44793.patch       | 121 ++++++++++++++++++
- .../net-snmp/net-snmp_5.9.3.bb                |   1 +
- 2 files changed, 122 insertions(+)
- create mode 100644 meta-networking/recipes-protocols/net-snmp/net-snmp/CVE-2022-44792-CVE-2022-44793.patch
+ .../freeradius/files/CVE-2022-41860.patch     | 118 ++++++++++++++++++
+ .../freeradius/files/CVE-2022-41861.patch     |  53 ++++++++
+ .../freeradius/freeradius_3.0.21.bb           |   2 +
+ 3 files changed, 173 insertions(+)
+ create mode 100644 meta-networking/recipes-connectivity/freeradius/files/CVE-2022-41860.patch
+ create mode 100644 meta-networking/recipes-connectivity/freeradius/files/CVE-2022-41861.patch
 
-diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp/CVE-2022-44792-CVE-2022-44793.patch b/meta-networking/recipes-protocols/net-snmp/net-snmp/CVE-2022-44792-CVE-2022-44793.patch
+diff --git a/meta-networking/recipes-connectivity/freeradius/files/CVE-2022-41860.patch b/meta-networking/recipes-connectivity/freeradius/files/CVE-2022-41860.patch
 new file mode 100644
-index 0000000000..b18d4dc292
+index 0000000000..4ea519c752
 --- /dev/null
-+++ b/meta-networking/recipes-protocols/net-snmp/net-snmp/CVE-2022-44792-CVE-2022-44793.patch
-@@ -0,0 +1,121 @@
-+From d13302656d9ff0807c5defe18623adc947f43a2b Mon Sep 17 00:00:00 2001
-+From: Narpat Mali <narpat.mali@windriver.com>
-+Date: Wed, 8 Feb 2023 13:15:39 +0000
-+Subject: [PATCH] agent: Disallow SET requests with any NULL varbind Merge pull
-+ request #490 from fenner/set-null
++++ b/meta-networking/recipes-connectivity/freeradius/files/CVE-2022-41860.patch
+@@ -0,0 +1,118 @@
++From f1cdbb33ec61c4a64a32e107d4d02f936051c708 Mon Sep 17 00:00:00 2001
++From: "Alan T. DeKok" <aland@freeradius.org>
++Date: Mon, 7 Feb 2022 22:26:05 -0500
++Subject: [PATCH] it's probably wrong to be completely retarded.  Let's fix
++ that.
 +
-+fixes: #474 and #475
++CVE: CVE-2022-41860
 +
-+CVE: CVE-2022-44792, CVE-2022-44793
++Upstream-Status: Backport
++[https://github.com/FreeRADIUS/freeradius-server/commit/f1cdbb33ec61c4a64a32e107d4d02f936051c708]
 +
-+Upstream-Status: Backport [https://github.com/net-snmp/net-snmp/commit/be804106fd0771a7d05236cff36e199af077af57]
-+
-+Signed-off-by: Narpat Mali <narpat.mali@windriver.com>
++Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
 +---
-+ agent/snmp_agent.c                            | 32 +++++++++++++++++++
-+ apps/snmpset.c                                |  1 +
-+ .../default/T0142snmpv2csetnull_simple        | 31 ++++++++++++++++++
-+ 3 files changed, 64 insertions(+)
-+ create mode 100644 testing/fulltests/default/T0142snmpv2csetnull_simple
++ src/modules/rlm_eap/libeap/eapsimlib.c | 69 +++++++++++++++++++-------
++ 1 file changed, 52 insertions(+), 17 deletions(-)
 +
-+diff --git a/agent/snmp_agent.c b/agent/snmp_agent.c
-+index 867d0c1..3f678fe 100644
-+--- a/agent/snmp_agent.c
-++++ b/agent/snmp_agent.c
-+@@ -3719,12 +3719,44 @@ netsnmp_handle_request(netsnmp_agent_session *asp, int status)
-+     return 1;
-+ }
++diff --git a/src/modules/rlm_eap/libeap/eapsimlib.c b/src/modules/rlm_eap/libeap/eapsimlib.c
++index cf1e8a7dd9..e438a844ea 100644
++--- a/src/modules/rlm_eap/libeap/eapsimlib.c
+++++ b/src/modules/rlm_eap/libeap/eapsimlib.c
++@@ -307,42 +307,77 @@ int unmap_eapsim_basictypes(RADIUS_PACKET *r,
++ 	newvp->vp_length = 1;
++ 	fr_pair_add(&(r->vps), newvp);
 + 
-++static int
-++check_set_pdu_for_null_varbind(netsnmp_agent_session *asp)
-++{
-++    int i;
-++    netsnmp_variable_list *v = NULL;
-++
-++    for (i = 1, v = asp->pdu->variables; v != NULL; i++, v = v->next_variable) {
-++	if (v->type == ASN_NULL) {
-++	    /*
-++	     * Protect SET implementations that do not protect themselves
-++	     * against wrong type.
-++	     */
-++	    DEBUGMSGTL(("snmp_agent", "disallowing SET with NULL var for varbind %d\n", i));
-++	    asp->index = i;
-++	    return SNMP_ERR_WRONGTYPE;
-++	}
-++    }
-++    return SNMP_ERR_NOERROR;
-++}
-++
-+ int
-+ handle_pdu(netsnmp_agent_session *asp)
-+ {
-+     int             status, inclusives = 0;
-+     netsnmp_variable_list *v = NULL;
+++	/*
+++	 *	EAP-SIM has a 1 octet of subtype, and 2 octets
+++	 *	reserved.
+++	 */
++ 	attr     += 3;
++ 	attrlen  -= 3;
 + 
-++#ifndef NETSNMP_NO_WRITE_SUPPORT
-++    /*
-++     * Check for ASN_NULL in SET request
-++     */
-++    if (asp->pdu->command == SNMP_MSG_SET) {
-++	status = check_set_pdu_for_null_varbind(asp);
-++	if (status != SNMP_ERR_NOERROR) {
-++	    return status;
-++	}
-++    }
-++#endif /* NETSNMP_NO_WRITE_SUPPORT */
++-	/* now, loop processing each attribute that we find */
++-	while(attrlen > 0) {
+++	/*
+++	 *	Loop over each attribute.  The format is:
+++	 *
+++	 *	1 octet of type
+++	 *	1 octet of length (value 1..255)
+++	 *	((4 * length) - 2) octets of data.
+++	 */
+++	while (attrlen > 0) {
++ 		uint8_t *p;
++ 
++-		if(attrlen < 2) {
+++		if (attrlen < 2) {
++ 			fr_strerror_printf("EAP-Sim attribute %d too short: %d < 2", es_attribute_count, attrlen);
++ 			return 0;
++ 		}
++ 
+++		if (!attr[1]) {
+++			fr_strerror_printf("EAP-Sim attribute %d (no.%d) has no data", eapsim_attribute,
+++					   es_attribute_count);
+++			return 0;
+++		}
 ++
-+     /*
-+      * for illegal requests, mark all nodes as ASN_NULL 
-+      */
-+diff --git a/apps/snmpset.c b/apps/snmpset.c
-+index 48e14bd..d542713 100644
-+--- a/apps/snmpset.c
-++++ b/apps/snmpset.c
-+@@ -182,6 +182,7 @@ main(int argc, char *argv[])
-+             case 'x':
-+             case 'd':
-+             case 'b':
-++            case 'n': /* undocumented */
-+ #ifdef NETSNMP_WITH_OPAQUE_SPECIAL_TYPES
-+             case 'I':
-+             case 'U':
-+diff --git a/testing/fulltests/default/T0142snmpv2csetnull_simple b/testing/fulltests/default/T0142snmpv2csetnull_simple
-+new file mode 100644
-+index 0000000..0f1b8f3
-+--- /dev/null
-++++ b/testing/fulltests/default/T0142snmpv2csetnull_simple
-+@@ -0,0 +1,31 @@
-++#!/bin/sh
++ 		eapsim_attribute = attr[0];
++ 		eapsim_len = attr[1] * 4;
++ 
+++		/*
+++		 *	The length includes the 2-byte header.
+++		 */
++ 		if (eapsim_len > attrlen) {
++ 			fr_strerror_printf("EAP-Sim attribute %d (no.%d) has length longer than data (%d > %d)",
++ 					   eapsim_attribute, es_attribute_count, eapsim_len, attrlen);
++ 			return 0;
++ 		}
++ 
++-		if(eapsim_len > MAX_STRING_LEN) {
++-			eapsim_len = MAX_STRING_LEN;
++-		}
++-		if (eapsim_len < 2) {
++-			fr_strerror_printf("EAP-Sim attribute %d (no.%d) has length too small", eapsim_attribute,
++-					   es_attribute_count);
++-			return 0;
++-		}
+++		newvp = fr_pair_afrom_num(r, eapsim_attribute + PW_EAP_SIM_BASE, 0);
+++		if (!newvp) {
+++			/*
+++			 *	RFC 4186 Section 8.1 says 0..127 are
+++			 *	"non-skippable".  If one such
+++			 *	attribute is found and we don't
+++			 *	understand it, the server has to send:
+++			 *
+++			 *	EAP-Request/SIM/Notification packet with an
+++			 *	(AT_NOTIFICATION code, which implies general failure ("General
+++			 *	failure after authentication" (0), or "General failure" (16384),
+++			 *	depending on the phase of the exchange), which terminates the
+++			 *	authentication exchange.
+++			 */
+++			if (eapsim_attribute <= 127) {
+++				fr_strerror_printf("Unknown mandatory attribute %d, failing",
+++						   eapsim_attribute);
+++				return 0;
+++			}
++ 
++-		newvp = fr_pair_afrom_num(r, eapsim_attribute+PW_EAP_SIM_BASE, 0);
++-		newvp->vp_length = eapsim_len-2;
++-		newvp->vp_octets = p = talloc_array(newvp, uint8_t, newvp->vp_length);
++-		memcpy(p, &attr[2], eapsim_len-2);
++-		fr_pair_add(&(r->vps), newvp);
++-		newvp = NULL;
+++		} else {
+++			/*
+++			 *	It's known, ccount for header, and
+++			 *	copy the value over.
+++			 */
+++			newvp->vp_length = eapsim_len - 2;
 ++
-++. ../support/simple_eval_tools.sh
-++
-++HEADER SNMPv2c set of system.sysContact.0 with NULL varbind
-++
-++SKIPIF NETSNMP_DISABLE_SET_SUPPORT
-++SKIPIF NETSNMP_NO_WRITE_SUPPORT
-++SKIPIF NETSNMP_DISABLE_SNMPV2C
-++SKIPIFNOT USING_MIBII_SYSTEM_MIB_MODULE
-++
-++#
-++# Begin test
-++#
-++
-++# standard V2C configuration: testcomunnity
-++snmp_write_access='all'
-++. ./Sv2cconfig
-++STARTAGENT
-++
-++CAPTURE "snmpget -On $SNMP_FLAGS -c testcommunity -v 2c $SNMP_TRANSPORT_SPEC:$SNMP_TEST_DEST$SNMP_SNMPD_PORT .1.3.6.1.2.1.1.4.0"
-++
-++CHECK ".1.3.6.1.2.1.1.4.0 = STRING:"
-++
-++CAPTURE "snmpset -On $SNMP_FLAGS -c testcommunity -v 2c $SNMP_TRANSPORT_SPEC:$SNMP_TEST_DEST$SNMP_SNMPD_PORT .1.3.6.1.2.1.1.4.0 n x"
-++
-++CHECK "Reason: wrongType"
-++
-++STOPAGENT
-++
-++FINISHED
+++			newvp->vp_octets = p = talloc_array(newvp, uint8_t, newvp->vp_length);
+++			memcpy(p, &attr[2], newvp->vp_length);
+++			fr_pair_add(&(r->vps), newvp);
+++		}
++ 
++ 		/* advance pointers, decrement length */
++ 		attr += eapsim_len;
 +-- 
-+2.34.1
++2.25.1
 +
-diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.9.3.bb b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.9.3.bb
-index 78d711fbfd..f40fb8bbd6 100644
---- a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.9.3.bb
-+++ b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.9.3.bb
-@@ -27,6 +27,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/net-snmp/net-snmp-${PV}.tar.gz \
-            file://reproducibility-have-printcap.patch \
-            file://0001-ac_add_search_path.m4-keep-consistent-between-32bit.patch \
-            file://0001-Add-noreturn-attribute-to-netsnmp_pci_error.patch \
-+           file://CVE-2022-44792-CVE-2022-44793.patch \
-            "
- SRC_URI[sha256sum] = "2097f29b7e1bf3f1300b4bae52fa2308d0bb8d5d3998dbe02f9462a413a2ef0a"
+diff --git a/meta-networking/recipes-connectivity/freeradius/files/CVE-2022-41861.patch b/meta-networking/recipes-connectivity/freeradius/files/CVE-2022-41861.patch
+new file mode 100644
+index 0000000000..352c02137a
+--- /dev/null
++++ b/meta-networking/recipes-connectivity/freeradius/files/CVE-2022-41861.patch
+@@ -0,0 +1,53 @@
++From 0ec2b39d260e08e4c3464f6b95005821dc559c62 Mon Sep 17 00:00:00 2001
++From: "Alan T. DeKok" <aland@freeradius.org>
++Date: Mon, 28 Feb 2022 10:34:15 -0500
++Subject: [PATCH] manual port of commit 5906bfa1
++
++CVE: CVE-2022-41861
++
++Upstream-Status: Backport
++[https://github.com/FreeRADIUS/freeradius-server/commit/0ec2b39d260e08e4c3464f6b95005821dc559c62]
++
++Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
++---
++ src/lib/filters.c | 12 +++++++++---
++ 1 file changed, 9 insertions(+), 3 deletions(-)
++
++diff --git a/src/lib/filters.c b/src/lib/filters.c
++index 4868cd385d..3f3b63daee 100644
++--- a/src/lib/filters.c
+++++ b/src/lib/filters.c
++@@ -1205,13 +1205,19 @@ void print_abinary(char *out, size_t outlen, uint8_t const *data, size_t len, in
++ 			}
++ 		}
++ 	} else if (filter->type == RAD_FILTER_GENERIC) {
++-		int count;
+++		size_t count, masklen;
+++
+++		masklen = ntohs(filter->u.generic.len);
+++		if (masklen >= sizeof(filter->u.generic.mask)) {
+++			*p = '\0';
+++			return;
+++		}
++ 
++ 		i = snprintf(p, outlen, " %u ", (unsigned int) ntohs(filter->u.generic.offset));
++ 		p += i;
++ 
++ 		/* show the mask */
++-		for (count = 0; count < ntohs(filter->u.generic.len); count++) {
+++		for (count = 0; count < masklen; count++) {
++ 			i = snprintf(p, outlen, "%02x", filter->u.generic.mask[count]);
++ 			p += i;
++ 			outlen -= i;
++@@ -1222,7 +1228,7 @@ void print_abinary(char *out, size_t outlen, uint8_t const *data, size_t len, in
++ 		outlen--;
++ 
++ 		/* show the value */
++-		for (count = 0; count < ntohs(filter->u.generic.len); count++) {
+++		for (count = 0; count < masklen; count++) {
++ 			i = snprintf(p, outlen, "%02x", filter->u.generic.value[count]);
++ 			p += i;
++ 			outlen -= i;
++-- 
++2.25.1
++
+diff --git a/meta-networking/recipes-connectivity/freeradius/freeradius_3.0.21.bb b/meta-networking/recipes-connectivity/freeradius/freeradius_3.0.21.bb
+index b459412e04..d18c387798 100644
+--- a/meta-networking/recipes-connectivity/freeradius/freeradius_3.0.21.bb
++++ b/meta-networking/recipes-connectivity/freeradius/freeradius_3.0.21.bb
+@@ -33,6 +33,8 @@ SRC_URI = "git://github.com/FreeRADIUS/freeradius-server.git;branch=v3.0.x;lfs=0
+     file://radiusd-volatiles.conf \
+     file://check-openssl-cmds-in-script-bootstrap.patch \
+     file://0001-version.c-don-t-print-build-flags.patch \
++    file://CVE-2022-41860.patch \
++    file://CVE-2022-41861.patch \
+ "
  
+ raddbdir="${sysconfdir}/${MLPREFIX}raddb"
 -- 
 2.25.1
 
