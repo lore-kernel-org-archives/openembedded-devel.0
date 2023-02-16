@@ -2,56 +2,56 @@ Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DB2ABC678DB
-	for <webhook@archiver.kernel.org>; Thu, 16 Feb 2023 12:28:09 +0000 (UTC)
-Received: from mail-qt1-f175.google.com (mail-qt1-f175.google.com [209.85.160.175])
- by mx.groups.io with SMTP id smtpd.web10.8632.1676550485411512169
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E2304C61DA4
+	for <webhook@archiver.kernel.org>; Thu, 16 Feb 2023 12:28:19 +0000 (UTC)
+Received: from mail-qt1-f180.google.com (mail-qt1-f180.google.com [209.85.160.180])
+ by mx.groups.io with SMTP id smtpd.web11.8797.1676550490640717436
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 16 Feb 2023 04:28:05 -0800
+ Thu, 16 Feb 2023 04:28:10 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=m05G3ucX;
- spf=pass (domain: gmail.com, ip: 209.85.160.175, mailfrom: akuster808@gmail.com)
-Received: by mail-qt1-f175.google.com with SMTP id 5so1825224qtp.9
-        for <openembedded-devel@lists.openembedded.org>; Thu, 16 Feb 2023 04:28:05 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=LAQi6Cqg;
+ spf=pass (domain: gmail.com, ip: 209.85.160.180, mailfrom: akuster808@gmail.com)
+Received: by mail-qt1-f180.google.com with SMTP id f10so1867413qtv.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 16 Feb 2023 04:28:10 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=10KJ+qCr8ThUJANza7UP0e+8nAPg9yLVTktRVHYalCQ=;
-        b=m05G3ucXVsq9u46BdUqIuJwTSj0za5DA2pXRDr0Kq3lnD7dcIMGhyVQVKoK9s2VkFn
-         z+AsbGB2weujrIzgUsLWloJDQgBxOHfAwsU4RMbQ/l7ufakwn++mk5XL4JY2UC3sA35q
-         Pm09cTYYTe9f4wVbA5PR9WWYvxAAwbzTkOHnPwn2sUFiImDEpJujy8nDtxiHRsctLrgx
-         dabOGVACeVtvMxumTFCYZzdhogfLpD10QeHFhAHC5eQlRkiON7bm1RigxJALiQCBhJ+K
-         4v8zk+6tQZzuPQL7MUFEpJKzQt+hBLRR4j3dzCRHdBN9JdvfZshhXU5ewvVmhwJbovpx
-         55Hg==
+        bh=c/bpihLZDGHEnMsnMRz95+cUTxCec6AbQk6nV5AQrYc=;
+        b=LAQi6Cqgp7dJ9eDK6M53BiodPRQkp0ZRbyTVta5tSxYC3r8JP6j2tHXuv2/o06vAYw
+         iKdQlF8mJK8HxldiipKwcuNIdIPdhYlwjfmS2hXU+U0JdzU8Vx33D6ViaOrUZfMvIEAu
+         a1H1464qtnkMpHAUT7Ko0Rc69bciqGukwAlTxOb80rvsBYjV9O70bsoFUdh6kw2RDUuh
+         F+Mo0V9MkD8QTtVn390S1iRXG6DWkGFYSsmLaQ1tOdtZVxGdrvQpP54hYTnXaq+thN5V
+         26A65fKKyEOzAVo/OLaJn53t8t6kTD/4wSxnKmt0N4I1kKr3KygoD5FEf3cgyRwSitKv
+         gbtw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=10KJ+qCr8ThUJANza7UP0e+8nAPg9yLVTktRVHYalCQ=;
-        b=slIqneuQl3zxRyODlfTnD4w0yUWZMJQF+bqGWSIf4PN7caE5fbFYXEfLA+UDKjVrbE
-         uQBa4ddkHXS3UGJYSP1RVeY0s4xDcs6a6srfoOcmjLS41Pve8GUNZG/BTTxKx73KxQ6z
-         1vdYHpMTRhHi/OAC1BVhBUbhYhxGi969/pqHfzjNNstn8s90KcPMlQcpgSQYRO6FL/ng
-         G1o4ZtOASfL0/uAfLckweY5RMC2uaptLkhWEzZQ8Nqz/GVl4LZqTUbVkl/Cz42ZwLhhV
-         IVnlAVQ5y1WMxRh4xn22ONmxU2dwtamFQlUd8/1n4TLPwF3OUgr6+dpJold4MjKV/Knf
-         2fcg==
-X-Gm-Message-State: AO0yUKUi67DHs5krqO/xj/0L7tuipGFrHcKyp5shfe358KutxduHkuRQ
-	I2S6tG8zyifwPboIWyvo/me+epkOdIE=
-X-Google-Smtp-Source: AK7set/BhqCokTTbtFzls1Q7QMxhvyItwVz3ngE1f6URnhyOwpDzdYWcibh1SAMicPmlZ12HhhWDxQ==
-X-Received: by 2002:a05:622a:2c7:b0:3bb:7702:97f5 with SMTP id a7-20020a05622a02c700b003bb770297f5mr9949172qtx.15.1676550484341;
-        Thu, 16 Feb 2023 04:28:04 -0800 (PST)
+        bh=c/bpihLZDGHEnMsnMRz95+cUTxCec6AbQk6nV5AQrYc=;
+        b=KfkFZ5ixgTz9GqGTMhgAsDDL5duWoUV9UVikqVgvDRI7KEw/a/v3oLvSnVhWdjllJg
+         4JJ4zEVwwrHL7cs2aZ1sQrooVtX5y0Rew1n1oZgFB6BaxiKLcLHmwQIwN1qbfRJ5rpSV
+         GNaVYRSS/FMgwgJ+zkG7re02QcB5tG67wGmjz+ZiLdQAcJP4vd6R5pHYQOfmyQ6yTKBV
+         +EnKpGCQ7a7WVzU+cuJ/F+LEBlRUJUfA3ynrY7FLjUuh2dghNWdco1djMCyY0pGivNwQ
+         6f3iBu3ZojSQin/yAdszN1GRS+ZOw/MWeX+YjL2PJAY/MY7qjLTbmEppDUhHoX9PnvbP
+         HJmA==
+X-Gm-Message-State: AO0yUKWEwSqW74wSnaIVqdNbv43xJ8xL/fCVOfXJZw45LtWRWmSKxrVf
+	r3JRvoHfCQ8oeGDmbfisZR02awZtUrc=
+X-Google-Smtp-Source: AK7set9halZi+Idur4jkFuwxQVui8O1MigRlM2M2rGV+GJZw6e/XN0nQXK9FbA7IqHZe1hHtBb9g9Q==
+X-Received: by 2002:ac8:5b86:0:b0:3b8:6763:c25f with SMTP id a6-20020ac85b86000000b003b86763c25fmr10133396qta.13.1676550489614;
+        Thu, 16 Feb 2023 04:28:09 -0800 (PST)
 Received: from keaua.attlocal.net ([2600:1700:9190:ba10:2ead:d6b6:b6e2:9e85])
-        by smtp.gmail.com with ESMTPSA id t127-20020a379185000000b0073b4d9e2e8dsm1102362qkd.43.2023.02.16.04.28.04
+        by smtp.gmail.com with ESMTPSA id t127-20020a379185000000b0073b4d9e2e8dsm1102362qkd.43.2023.02.16.04.28.09
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 16 Feb 2023 04:28:04 -0800 (PST)
+        Thu, 16 Feb 2023 04:28:09 -0800 (PST)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [langdale 07/15] apache2: upgrade 2.4.54 -> 2.4.55
-Date: Thu, 16 Feb 2023 07:27:17 -0500
-Message-Id: <02c53492ea4085ba13ff73063d6f9144dad5a627.1676550369.git.akuster808@gmail.com>
+Subject: [langdale 14/15] exiv2: fix SRC_URI
+Date: Thu, 16 Feb 2023 07:27:24 -0500
+Message-Id: <5785e5ddd86cc1ce8add5936c020a166f65d8c88.1676550369.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <cover.1676550369.git.akuster808@gmail.com>
 References: <cover.1676550369.git.akuster808@gmail.com>
@@ -60,39 +60,34 @@ Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 16 Feb 2023 12:28:09 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101109
+ <openembedded-devel@lists.openembedded.org>; Thu, 16 Feb 2023 12:28:19 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101116
 
-From: Wang Mingyu <wangmy@fujitsu.com>
+From: Martin Jansa <Martin.Jansa@gmail.com>
 
-Changelog:
-https://downloads.apache.org/httpd/CHANGES_2.4.55
+* https://exiv2.org/releases returns 404 now, use github releases
+* it's already fixed in master with upgrade to 0.27.6 in:
+  https://git.openembedded.org/meta-openembedded/commit/?id=00a7d4b284c1afccfa26021111384d2184b82e5b
 
-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit cba6df61c7cbc4446aab09eb11673bcb6c581307)
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../apache2/{apache2_2.4.54.bb => apache2_2.4.55.bb}            | 2 +-
+ meta-oe/recipes-support/exiv2/exiv2_0.27.3.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-webserver/recipes-httpd/apache2/{apache2_2.4.54.bb => apache2_2.4.55.bb} (99%)
 
-diff --git a/meta-webserver/recipes-httpd/apache2/apache2_2.4.54.bb b/meta-webserver/recipes-httpd/apache2/apache2_2.4.55.bb
-similarity index 99%
-rename from meta-webserver/recipes-httpd/apache2/apache2_2.4.54.bb
-rename to meta-webserver/recipes-httpd/apache2/apache2_2.4.55.bb
-index 4f30eca59e..88cef0ef83 100644
---- a/meta-webserver/recipes-httpd/apache2/apache2_2.4.54.bb
-+++ b/meta-webserver/recipes-httpd/apache2/apache2_2.4.55.bb
-@@ -27,7 +27,7 @@ SRC_URI:append:class-target = " \
-            "
+diff --git a/meta-oe/recipes-support/exiv2/exiv2_0.27.3.bb b/meta-oe/recipes-support/exiv2/exiv2_0.27.3.bb
+index 1380638ba7..64b132e006 100644
+--- a/meta-oe/recipes-support/exiv2/exiv2_0.27.3.bb
++++ b/meta-oe/recipes-support/exiv2/exiv2_0.27.3.bb
+@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=625f055f41728f84a8d7938acc35bdc2"
  
- LIC_FILES_CHKSUM = "file://LICENSE;md5=bddeddfac80b2c9a882241d008bb41c3"
--SRC_URI[sha256sum] = "eb397feeefccaf254f8d45de3768d9d68e8e73851c49afd5b7176d1ecf80c340"
-+SRC_URI[sha256sum] = "11d6ba19e36c0b93ca62e47e6ffc2d2f2884942694bce0f23f39c71bdc5f69ac"
+ DEPENDS = "zlib expat"
  
- S = "${WORKDIR}/httpd-${PV}"
+-SRC_URI = "https://exiv2.org/releases/${BPN}-${PV}-Source.tar.gz"
++SRC_URI = "https://github.com/Exiv2/${BPN}/releases/download/v${PV}/${BP}-Source.tar.gz"
+ SRC_URI[sha256sum] = "a79f5613812aa21755d578a297874fb59a85101e793edc64ec2c6bd994e3e778"
  
+ # Once patch is obsolete (project should be aware due to PRs), dos2unix can be removed either
 -- 
 2.25.1
 
