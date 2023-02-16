@@ -1,131 +1,220 @@
-Return-Path: <Martin.Jansa@gmail.com>
+Return-Path: <chee.yang.lee@intel.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3E29AC636CC
-	for <webhook@archiver.kernel.org>; Wed, 15 Feb 2023 21:12:53 +0000 (UTC)
-Received: from mail-wm1-f51.google.com (mail-wm1-f51.google.com [209.85.128.51])
- by mx.groups.io with SMTP id smtpd.web10.5278.1676495566900560817
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2096BC636D4
+	for <webhook@archiver.kernel.org>; Thu, 16 Feb 2023 02:18:16 +0000 (UTC)
+Received: from mga17.intel.com (mga17.intel.com [192.55.52.151])
+ by mx.groups.io with SMTP id smtpd.web11.1181.1676513887573049383
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 15 Feb 2023 13:12:47 -0800
+ Wed, 15 Feb 2023 18:18:08 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=ZLOl93y8;
- spf=pass (domain: gmail.com, ip: 209.85.128.51, mailfrom: martin.jansa@gmail.com)
-Received: by mail-wm1-f51.google.com with SMTP id f18-20020a7bcd12000000b003e206711347so112050wmj.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 15 Feb 2023 13:12:46 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=PDrqMrlwctDF8rqAvZHk4qMpVQX0jSK++hIDXov/8Ug=;
-        b=ZLOl93y8L7ESUZp8BM+OZP6fc1tLHhYL2cEOYen7KwVN7xHdTaoI3LeKVqKzqJ9top
-         yayfM2dUIS/ksJ9jxgaVJNYv7NSIF4VY5HeYssgfdMQaYH2D4cDnx+CI7uueoAsc8Q5C
-         wC6z1HLAGMNxhzIBvBRmycd/eb7qdhSuWH9SXDtiYu9KOGaUnioipoAl+Hfkh5SirXZ7
-         HR+d3KGxoxFAc4Ji+IUp+rh+EpNw/I5QBPoHOXo49RaNfGeBpmnknGowVE3PG779zimk
-         6ODOiqndUZT2g4W01OMf2S6zNzaPkUCKnUkeLNO/jw8wbOV5ag8/ee0Hb3u8otpJ7Fpg
-         VXNw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=PDrqMrlwctDF8rqAvZHk4qMpVQX0jSK++hIDXov/8Ug=;
-        b=mi74dG7Q6YJjAi9iwNUM4eEJ49zNo5+g44ACGh+1HDFfafqX++IuXuws4RcVt0HkBn
-         DnLjbwLtBbGwWYxkWPhyyA+gTqhEg2nZO/B7xcb7bBXT+qEuI1Y+3crMW2ke/mZKYCI3
-         r7BuWCJ6rHjC/0+VETRcSw+NjNnOnFvnVAE/5bNzMGMizYgYriijWX/1y1gGaziAA+hj
-         CPKe/LFg2Lv2VXdAg7Y3vplLtaQaSWgB8i0cXIkpPlOUQIPAieofy2JY7dH2Q+Z2XnQi
-         oeu8wjZhzLt8kc+yQxqdeVDdYJHnPdmbZL2AaEx3qFOwHGhDf5/WOu+Z0+V8WDWl4bNA
-         ovOQ==
-X-Gm-Message-State: AO0yUKXEILVWpRtpmCF4P/MbJjk9Xf44TJSMpBcqkBp5Ak83bP82zXqN
-	Eq9U7wlEPae0BqRMD4mj6tYLWg6/2H0=
-X-Google-Smtp-Source: AK7set/DYmmOByPmhrgXQ8+Lo0u6jH/5ghVsLH9i7es7bc5ad2ZpZeSU+KCnSG/OfQVlR9knThCLcA==
-X-Received: by 2002:a05:600c:3b05:b0:3e0:1ab:cf2a with SMTP id m5-20020a05600c3b0500b003e001abcf2amr2921187wms.39.1676495565256;
-        Wed, 15 Feb 2023 13:12:45 -0800 (PST)
-Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
-        by smtp.gmail.com with ESMTPSA id a4-20020a05600c348400b003df5be8987esm3218837wmq.20.2023.02.15.13.12.44
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 15 Feb 2023 13:12:44 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+ dkim=fail reason="unable to parse pub key" header.i=@intel.com header.s=intel header.b=JY+6R6F6;
+ spf=pass (domain: intel.com, ip: 192.55.52.151, mailfrom: chee.yang.lee@intel.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1676513888; x=1708049888;
+  h=from:to:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=4nSmtbFevBz41U59ZsCq2OwK0KlvdygTAqTDjs5729k=;
+  b=JY+6R6F6mv+cBc6ZM2L9zXyE909LAt9JyO3BG6o/GbVktE4/6/2wo2w5
+   Chzwvp5BK8w7iRHrCpgbOmY2c4er0QO+N0wSkITliyO9rZ1nPtAIqDHzN
+   EEOfPXSSD1f10TSNN5w7iw3S81taf389tPmZA3HgZMxt4KjWircAduw9Q
+   n5Z2YIKT7OcglN8ofigZVz/lnVLW9YmCnXBTC8viR4AJ2UDiuzZG9gJ1c
+   +2IidToMKB6DLrEQr/YD3tNdjEQQm7wurbH24l7wnDX7SZ2qamNBt1Lc6
+   jnCGnw4obSJdncX9oUisk8LHGa4dZKxq0/vaD2Luetk3cezUsRR0TOYRX
+   g==;
+X-IronPort-AV: E=McAfee;i="6500,9779,10622"; a="311969526"
+X-IronPort-AV: E=Sophos;i="5.97,301,1669104000"; 
+   d="scan'208";a="311969526"
+Received: from fmsmga006.fm.intel.com ([10.253.24.20])
+  by fmsmga107.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 15 Feb 2023 18:18:05 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=McAfee;i="6500,9779,10622"; a="915496221"
+X-IronPort-AV: E=Sophos;i="5.97,301,1669104000"; 
+   d="scan'208";a="915496221"
+Received: from andromeda02.png.intel.com ([10.221.253.198])
+  by fmsmga006.fm.intel.com with ESMTP; 15 Feb 2023 18:18:02 -0800
+From: chee.yang.lee@intel.com
 To: openembedded-devel@lists.openembedded.org
-Cc: archana.polampalli@windriver.com,
-	Martin Jansa <Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH] nodejs: fix do_install failure with 'shared' PACKAGECONFIG
-Date: Wed, 15 Feb 2023 22:12:39 +0100
-Message-Id: <20230215211239.3250814-1-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.39.2
-In-Reply-To: <17441B2974A57F44.22975@lists.openembedded.org>
-References: <17441B2974A57F44.22975@lists.openembedded.org>
+Subject: [langdale][meta-oe][PATCH] opencv: fix reproducible builds
+Date: Thu, 16 Feb 2023 10:17:54 +0800
+Message-Id: <20230216021754.997745-1-chee.yang.lee@intel.com>
+X-Mailer: git-send-email 2.37.3
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 15 Feb 2023 21:12:53 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101088
+ <openembedded-devel@lists.openembedded.org>; Thu, 16 Feb 2023 02:18:16 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101089
 
-* tools/install.py uses:
-  output_lib = 'libnode.' + variables.get('shlib_suffix')
-  action([output_prefix + output_lib], variables.get('libdir') + '/'+ output_lib)
+From: Chee Yang Lee <chee.yang.lee@intel.com>
 
-  and when libdir is absolute path (either ${D}${libdir} before:
-  https://git.openembedded.org/meta-openembedded/commit/?id=42c0f0120ad1caf25118d079314c988d4633a437
-  or just ${libdir} "/usr/lib") it doesn't respect prefix nor ${D}
-  and fails to write to host's directory when "shared" PACKAGECONFIG
-  is enabled:
-  http://errors.yoctoproject.org/Errors/Details/689959/
-
-if [ ! -r node ] || [ ! -L node ]; then \
-  ln -fs out/Release/node node; fi
-TOPDIR/tmp-glibc/work/core2-64-oe-linux/nodejs/18.12.1-r0/recipe-sysroot-native/usr/bin/python3-native/python3 tools/install.py install 'TOPDIR/tmp-glibc/work/core2-64-oe-linux/nodejs/18.12.1-r0/image' '/usr'
-installing TOPDIR/tmp-glibc/work/core2-64-oe-linux/nodejs/18.12.1-r0/image/usr/bin/node
-installing /usr/lib/libnode.so.108
-Traceback (most recent call last):
-  File "TOPDIR/tmp-glibc/work/core2-64-oe-linux/nodejs/18.12.1-r0/node-v18.12.1/tools/install.py", line 351, in <module>
-    run(sys.argv[:])
-  File "TOPDIR/tmp-glibc/work/core2-64-oe-linux/nodejs/18.12.1-r0/node-v18.12.1/tools/install.py", line 342, in run
-    files(install)
-  File "TOPDIR/tmp-glibc/work/core2-64-oe-linux/nodejs/18.12.1-r0/node-v18.12.1/tools/install.py", line 179, in files
-    action([output_prefix + output_lib], variables.get('libdir') + '/' + output_lib)
-  File "TOPDIR/tmp-glibc/work/core2-64-oe-linux/nodejs/18.12.1-r0/node-v18.12.1/tools/install.py", line 77, in install
-    try_copy(path, dst)
-  File "TOPDIR/tmp-glibc/work/core2-64-oe-linux/nodejs/18.12.1-r0/node-v18.12.1/tools/install.py", line 67, in try_copy
-    return shutil.copy2(source_path, target_path)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "TOPDIR/tmp-glibc/work/core2-64-oe-linux/nodejs/18.12.1-r0/recipe-sysroot-native/usr/lib/python3.11/shutil.py", line 436, in copy2
-    copyfile(src, dst, follow_symlinks=follow_symlinks)
-  File "TOPDIR/tmp-glibc/work/core2-64-oe-linux/nodejs/18.12.1-r0/recipe-sysroot-native/usr/lib/python3.11/shutil.py", line 258, in copyfile
-    with open(dst, 'wb') as fdst:
-         ^^^^^^^^^^^^^^^
-PermissionError: [Errno 13] Permission denied: '/usr/lib/libnode.so.108'
-make: *** [Makefile:189: install] Error 1
-
-* use just baselib "lib" so that it respects ${D} as well as ${prefix}
-  while using e.g. lib32 or lib64 when multilib is enabled
-
-* similarly as 'node' binary is installed to relative hardcoded path "bin" with:
-  action([output_prefix + output_file], 'bin/' + output_file)
-
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+Signed-off-by: Chee Yang Lee <chee.yang.lee@intel.com>
 ---
- meta-oe/recipes-devtools/nodejs/nodejs_18.12.1.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ ...ot-embed-build-directory-in-binaries.patch | 138 ++++++++++++++++++
+ .../recipes-support/opencv/opencv_4.6.0.bb    |   1 +
+ 2 files changed, 139 insertions(+)
+ create mode 100644 meta-oe/recipes-support/opencv/opencv/0008-Do-not-embed-build-directory-in-binaries.patch
 
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_18.12.1.bb b/meta-oe/recipes-devtools/nodejs/nodejs_18.12.1.bb
-index 6ff9ef083a..9e274c5a2d 100644
---- a/meta-oe/recipes-devtools/nodejs/nodejs_18.12.1.bb
-+++ b/meta-oe/recipes-devtools/nodejs/nodejs_18.12.1.bb
-@@ -148,7 +148,7 @@ do_configure () {
-                --without-etw \
-                --dest-cpu="${@map_nodejs_arch(d.getVar('TARGET_ARCH'), d)}" \
-                --dest-os=linux \
--               --libdir=${libdir} \
-+               --libdir=${baselib} \
-                ${ARCHFLAGS} \
-                ${PACKAGECONFIG_CONFARGS}
- }
+diff --git a/meta-oe/recipes-support/opencv/opencv/0008-Do-not-embed-build-directory-in-binaries.patch b/meta-oe/recipes-support/opencv/opencv/0008-Do-not-embed-build-directory-in-binaries.patch
+new file mode 100644
+index 0000000000..8fda857080
+--- /dev/null
++++ b/meta-oe/recipes-support/opencv/opencv/0008-Do-not-embed-build-directory-in-binaries.patch
+@@ -0,0 +1,138 @@
++From: Victor Westerhuis <victor@westerhu.is>
++Date: Sat, 19 Nov 2022 21:45:39 +0100
++Subject: Do not embed build directory in binaries
++
++This makes the opencv core module build reproducibly.
++
++https://salsa.debian.org/science-team/opencv/-/raw/master/debian/patches/0008-Do-not-embed-build-directory-in-binaries.patch
++Upstream-Status: Backport
++Signed-off-by: Chee Yang Lee <chee.yang.lee@intel.com>
++---
++ modules/core/CMakeLists.txt                   | 10 ------
++ modules/core/include/opencv2/core/private.hpp |  4 +--
++ modules/core/include/opencv2/core/utility.hpp |  4 +--
++ modules/core/src/utils/datafile.cpp           | 48 +--------------------------
++ 4 files changed, 5 insertions(+), 61 deletions(-)
++
++diff --git a/modules/core/CMakeLists.txt b/modules/core/CMakeLists.txt
++index b78bb98..d96b669 100644
++--- a/modules/core/CMakeLists.txt
+++++ b/modules/core/CMakeLists.txt
++@@ -188,16 +188,6 @@ if(OPENCV_OTHER_INSTALL_PATH)
++ ")
++ endif()
++ 
++-set(OPENCV_DATA_CONFIG_STR "${OPENCV_DATA_CONFIG_STR}
++-#define OPENCV_BUILD_DIR \"${CMAKE_BINARY_DIR}\"
++-")
++-
++-file(RELATIVE_PATH SOURCE_DIR_RELATIVE ${CMAKE_BINARY_DIR} ${CMAKE_SOURCE_DIR})
++-set(OPENCV_DATA_CONFIG_STR "${OPENCV_DATA_CONFIG_STR}
++-#define OPENCV_DATA_BUILD_DIR_SEARCH_PATHS \\
++-    \"${SOURCE_DIR_RELATIVE}/\"
++-")
++-
++ if(WIN32)
++   file(RELATIVE_PATH INSTALL_DATA_DIR_RELATIVE "${CMAKE_INSTALL_PREFIX}/${OPENCV_BIN_INSTALL_PATH}" "${CMAKE_INSTALL_PREFIX}/${OPENCV_OTHER_INSTALL_PATH}")
++ else()
++diff --git a/modules/core/include/opencv2/core/private.hpp b/modules/core/include/opencv2/core/private.hpp
++index 146d37f..dd675bc 100644
++--- a/modules/core/include/opencv2/core/private.hpp
+++++ b/modules/core/include/opencv2/core/private.hpp
++@@ -818,10 +818,10 @@ Search directories:
++ 2. Check path specified by configuration parameter with "_HINT" suffix (name of environment variable).
++ 3. Check path specified by configuration parameter (name of environment variable).
++    If parameter value is not empty and nothing is found then stop searching.
++-4. Detects build/install path based on:
+++4. Detects install path based on:
++    a. current working directory (CWD)
++    b. and/or binary module location (opencv_core/opencv_world, doesn't work with static linkage)
++-5. Scan `<source>/{,data}` directories if build directory is detected or the current directory is in source tree.
+++5. Scan `<source>/{,data}` directories if the current directory is in source tree.
++ 6. Scan `<install>/share/OpenCV` directory if install directory is detected.
++ 
++ @param relative_path Relative path to data file
++diff --git a/modules/core/include/opencv2/core/utility.hpp b/modules/core/include/opencv2/core/utility.hpp
++index 108c0d9..f15d9ea 100644
++--- a/modules/core/include/opencv2/core/utility.hpp
+++++ b/modules/core/include/opencv2/core/utility.hpp
++@@ -1163,10 +1163,10 @@ Search directories:
++ 2. OPENCV_SAMPLES_DATA_PATH_HINT environment variable
++ 3. OPENCV_SAMPLES_DATA_PATH environment variable
++    If parameter value is not empty and nothing is found then stop searching.
++-4. Detects build/install path based on:
+++4. Detects install path based on:
++    a. current working directory (CWD)
++    b. and/or binary module location (opencv_core/opencv_world, doesn't work with static linkage)
++-5. Scan `<source>/{,data,samples/data}` directories if build directory is detected or the current directory is in source tree.
+++5. Scan `<source>/{,data,samples/data}` directories if the current directory is in source tree.
++ 6. Scan `<install>/share/OpenCV` directory if install directory is detected.
++ 
++ @see cv::utils::findDataFile
++diff --git a/modules/core/src/utils/datafile.cpp b/modules/core/src/utils/datafile.cpp
++index 3af83a5..6bda857 100644
++--- a/modules/core/src/utils/datafile.cpp
+++++ b/modules/core/src/utils/datafile.cpp
++@@ -280,32 +280,8 @@ cv::String findDataFile(const cv::String& relative_path,
++ 
++ 
++     // Steps: 4, 5, 6
++-    cv::String cwd = utils::fs::getcwd();
++-    cv::String build_dir(OPENCV_BUILD_DIR);
++-    bool has_tested_build_directory = false;
++-    if (isSubDirectory(build_dir, cwd) || isSubDirectory(utils::fs::canonical(build_dir), utils::fs::canonical(cwd)))
++-    {
++-        CV_LOG_DEBUG(NULL, "utils::findDataFile(): the current directory is build sub-directory: " << cwd);
++-        const char* build_subdirs[] = { OPENCV_DATA_BUILD_DIR_SEARCH_PATHS };
++-        for (size_t k = 0; k < sizeof(build_subdirs)/sizeof(build_subdirs[0]); k++)
++-        {
++-            CV_LOG_DEBUG(NULL, "utils::findDataFile(): <build>/" << build_subdirs[k]);
++-            cv::String datapath = utils::fs::join(build_dir, build_subdirs[k]);
++-            if (utils::fs::isDirectory(datapath))
++-            {
++-                for(size_t i = search_subdir.size(); i > 0; i--)
++-                {
++-                    const cv::String& subdir = search_subdir[i - 1];
++-                    cv::String prefix = utils::fs::join(datapath, subdir);
++-                    TRY_FILE_WITH_PREFIX(prefix);
++-                }
++-            }
++-        }
++-        has_tested_build_directory = true;
++-    }
++-
++     cv::String source_dir;
++-    cv::String try_source_dir = cwd;
+++    cv::String try_source_dir = utils::fs::getcwd();
++     for (int levels = 0; levels < 3; ++levels)
++     {
++         if (utils::fs::exists(utils::fs::join(try_source_dir, "modules/core/include/opencv2/core/version.hpp")))
++@@ -341,28 +317,6 @@ cv::String findDataFile(const cv::String& relative_path,
++         CV_LOG_INFO(NULL, "Can't detect module binaries location");
++     }
++ 
++-    if (!has_tested_build_directory &&
++-        (isSubDirectory(build_dir, module_path) || isSubDirectory(utils::fs::canonical(build_dir), utils::fs::canonical(module_path)))
++-    )
++-    {
++-        CV_LOG_DEBUG(NULL, "utils::findDataFile(): the binary module directory is build sub-directory: " << module_path);
++-        const char* build_subdirs[] = { OPENCV_DATA_BUILD_DIR_SEARCH_PATHS };
++-        for (size_t k = 0; k < sizeof(build_subdirs)/sizeof(build_subdirs[0]); k++)
++-        {
++-            CV_LOG_DEBUG(NULL, "utils::findDataFile(): <build>/" << build_subdirs[k]);
++-            cv::String datapath = utils::fs::join(build_dir, build_subdirs[k]);
++-            if (utils::fs::isDirectory(datapath))
++-            {
++-                for(size_t i = search_subdir.size(); i > 0; i--)
++-                {
++-                    const cv::String& subdir = search_subdir[i - 1];
++-                    cv::String prefix = utils::fs::join(datapath, subdir);
++-                    TRY_FILE_WITH_PREFIX(prefix);
++-                }
++-            }
++-        }
++-    }
++-
++ #if defined OPENCV_INSTALL_DATA_DIR_RELATIVE
++     if (!module_path.empty())  // require module path
++     {
+diff --git a/meta-oe/recipes-support/opencv/opencv_4.6.0.bb b/meta-oe/recipes-support/opencv/opencv_4.6.0.bb
+index da1e659a4a..a60e711ce9 100644
+--- a/meta-oe/recipes-support/opencv/opencv_4.6.0.bb
++++ b/meta-oe/recipes-support/opencv/opencv_4.6.0.bb
+@@ -51,6 +51,7 @@ SRC_URI = "git://github.com/opencv/opencv.git;name=opencv;branch=master;protocol
+            file://0001-Dont-use-isystem.patch \
+            file://download.patch \
+            file://0001-Make-ts-module-external.patch \
++           file://0008-Do-not-embed-build-directory-in-binaries.patch \
+            "
+ SRC_URI:append:riscv64 = " file://0001-Use-Os-to-compile-tinyxml2.cpp.patch;patchdir=contrib"
+ 
 -- 
-2.39.2
+2.37.3
 
 
