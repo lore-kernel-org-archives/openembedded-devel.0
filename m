@@ -1,132 +1,106 @@
-Return-Path: <akuster808@gmail.com>
+Return-Path: <roger@norberthealth.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E2CFCC636D6
-	for <webhook@archiver.kernel.org>; Thu, 16 Feb 2023 12:28:19 +0000 (UTC)
-Received: from mail-qv1-f50.google.com (mail-qv1-f50.google.com [209.85.219.50])
- by mx.groups.io with SMTP id smtpd.web10.8627.1676550481338422081
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 56A67C64EC4
+	for <webhook@archiver.kernel.org>; Thu, 16 Feb 2023 16:35:21 +0000 (UTC)
+Received: from mail-io1-f42.google.com (mail-io1-f42.google.com [209.85.166.42])
+ by mx.groups.io with SMTP id smtpd.web10.14536.1676565312309605900
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 16 Feb 2023 04:28:09 -0800
+ Thu, 16 Feb 2023 08:35:12 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=c195yngT;
- spf=pass (domain: gmail.com, ip: 209.85.219.50, mailfrom: akuster808@gmail.com)
-Received: by mail-qv1-f50.google.com with SMTP id n9so1102696qvs.7
-        for <openembedded-devel@lists.openembedded.org>; Thu, 16 Feb 2023 04:28:09 -0800 (PST)
+ dkim=pass header.i=@norberthealth-com.20210112.gappssmtp.com header.s=20210112 header.b=1Wwj6lHE;
+ spf=pass (domain: norberthealth.com, ip: 209.85.166.42, mailfrom: roger@norberthealth.com)
+Received: by mail-io1-f42.google.com with SMTP id z5so863293iow.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 16 Feb 2023 08:35:12 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=OSjG0IBpi8FkDbjsaZsTZOf9Ezjg9OoSEXaxuT50RmI=;
-        b=c195yngTnNlN60TLn/1ZWgQFs1E2BI1aH5oqZwYNdW7xS6p+iJbEZs4Gq0xLp9PE2R
-         mtiZWlBUo1xvptVQsl9qyzDJkZjJ7zXDWAL6Mq2Em51Iczm5YY3FIFmbL5JwHK4E4voP
-         R9XmRpl5gxgwMP/CupUeHKCyVWYx5gEcjYni89L/HoNDuRgKwb/slHKR1fNvp8P5FsFG
-         tjJJeGO3uajw7Ng3y5pM1vAFyKw3bKAPq9Gk/nHYa88RcDBWE04z5xy6ItP0OBbj1OHt
-         Nh9YgE95GPg74/JCSaSxpORd7m86shz5mLrs5Z7UGnleGqV3ZZVXeNd0eesfptAY5TVH
-         rkcA==
+        d=norberthealth-com.20210112.gappssmtp.com; s=20210112;
+        h=message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=gwZpXhznRBZWBxd+QUc+iaf356lYvEQi5QGUTy7iIa8=;
+        b=1Wwj6lHEdWnrdUlEk8OwX4pUE/BKOxnZItd2acKUWOvbqg4Pyeos4dJx5SJqXMlTmO
+         h8voCBM68XYFJMFRYyISGQ5HXu6Ksa+CNYTz7jXNgSjNokVsx7pdbFQdLGCcSGkZY/+s
+         ebDvzYMXGSBnG4V6MshA13hQb3XbAl+9244NzNf/1OMucLIT1oal3VoTEEoLEpumDsN5
+         eBjA+kiUOfm30H/0c+quUDdgw3dfheKilqJAtXlYyoB+Q1OJyMAHKTmXMDitGrwiWdpp
+         FBXf2oT/m6VwbkadqZ0ezW07tsMZkTSDtxc0ZBXTHh/yPvXgKyicdi+k1J5nK6kLJwPZ
+         JrxA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
+        h=message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=OSjG0IBpi8FkDbjsaZsTZOf9Ezjg9OoSEXaxuT50RmI=;
-        b=hCXhVpQOvKdq1BONTwHz44v1276xcBunssW580AGJuMk+Ta/2jc3B2iplyeSB50fq9
-         W/0Zty3eYPImOgMNve40a1Iq/1oCYN/08XDA1RDi5yRlJ4C04ycuGZ6mAL5V3RkUB07a
-         QhxGiJLKchVnHvbWVlkAZEoI6yWQsUnmleCJCl1++YN9i5zHKivRp/FnAugIChA+psbm
-         Gl4XIM0JxDGddgDnvTrX9KJ7BNtj8/ShdtJF/b8k6woCDMlmnUk9Dqpv/ihINiUqEKX6
-         JyHfKESPrXlOXCxqWJg2jHu9RK5WLKnaOMa5KHl3vxPGWN1aM48ZjM3iwWQVSnEx76qT
-         sbYw==
-X-Gm-Message-State: AO0yUKW0Vbw05isXliLzumH9eM5j1VDTk+qOTzUeYwb9hhq3WFKLMrNg
-	4o+wsEekdxv0fqf1nF135CA0I2IA5l4=
-X-Google-Smtp-Source: AK7set9BFwdBnfkzsUzabPt/DA/s4qaRC7gR3bFelv1oU2JPWfY325+kUvYmzg2eAnH+08JrsE0PuQ==
-X-Received: by 2002:ad4:5949:0:b0:56a:b623:9b09 with SMTP id eo9-20020ad45949000000b0056ab6239b09mr10393244qvb.14.1676550489055;
-        Thu, 16 Feb 2023 04:28:09 -0800 (PST)
-Received: from keaua.attlocal.net ([2600:1700:9190:ba10:2ead:d6b6:b6e2:9e85])
-        by smtp.gmail.com with ESMTPSA id t127-20020a379185000000b0073b4d9e2e8dsm1102362qkd.43.2023.02.16.04.28.08
-        for <openembedded-devel@lists.openembedded.org>
+        bh=gwZpXhznRBZWBxd+QUc+iaf356lYvEQi5QGUTy7iIa8=;
+        b=jpW8eWaCt+OX+DAkGFk00shK0gcqFaD7NQddc4mVaB7aC7FX7uS9chK397mAId2E/0
+         gX99iYG+ybcLuQMP16ZM4LjVCIb6YweN9ZXzZSdqtiHrHjEyJj7bUGbOqAygdYrps9TC
+         F1cXIWtavFP71cP7XX8fZJ+ap+wBD3tBUf2XnRKGDgQgr4mKnXk+LrCXDghu2Unpwr9Y
+         Xay9HqJUUV+waucn0xODfwmxz4J/RsVRNZltAkCwkm4RrgvXJCyZsOqlLcII1T0Aimq2
+         h5s2FAAHR0f1zdoM8xEpy0trkM50ESq/xZhaNokC3YMvIJMpTUx3r3AZ9FERyEr4yjOG
+         mq9w==
+X-Gm-Message-State: AO0yUKXm0SgdxK+3GrEM83O72LJu1EjnNoqtdUQi2KByYkkWdn8oSlPj
+	jNtub2GiBbdymBIvj3P6UVDwcju6d29wYkXpCkJn5PVc
+X-Google-Smtp-Source: AK7set9bndsmuZyYOYeA728fcUqTiK8c3GPoGPDcMgt6FYCMuhfbtHxDiYpMw28vRR9ct8HNk1CwJw==
+X-Received: by 2002:a6b:4015:0:b0:722:40e5:d633 with SMTP id k21-20020a6b4015000000b0072240e5d633mr4521426ioa.1.1676565311247;
+        Thu, 16 Feb 2023 08:35:11 -0800 (PST)
+Received: from roger-build-machine.us-central1-a.c.qa-pipelines.internal (47.56.173.34.bc.googleusercontent.com. [34.173.56.47])
+        by smtp.gmail.com with ESMTPSA id m3-20020a056602018300b007192441e5e6sm629902ioo.45.2023.02.16.08.35.10
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 16 Feb 2023 04:28:08 -0800 (PST)
-From: Armin Kuster <akuster808@gmail.com>
+        Thu, 16 Feb 2023 08:35:10 -0800 (PST)
+From: Roger Knecht <roger@norberthealth.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [langdale 13/15] tinyproxy: fix CVE-2022-40468
-Date: Thu, 16 Feb 2023 07:27:23 -0500
-Message-Id: <9fa9d2e3734e49c3c33d706c312643e82ad6f8b4.1676550369.git.akuster808@gmail.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <cover.1676550369.git.akuster808@gmail.com>
-References: <cover.1676550369.git.akuster808@gmail.com>
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Cc: Khem Raj <raj.khem@gmail.com>,
+	Tim Orling <TicoTimo@gmail.com>,
+	Derek Straka <derek@asterius.io>,
+	Armin Kuster <akuster808@gmail.com>,
+	Roger Knecht <roger@norberthealth.com>
+Subject: [meta-python][dunfell][PATCH] python3-pillow: 6.2.1 -> 6.2.2
+Date: Thu, 16 Feb 2023 16:31:16 +0000
+Message-Id: <20230216163116.19190-1-roger@norberthealth.com>
+X-Mailer: git-send-email 2.17.1
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 16 Feb 2023 12:28:19 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101115
+ <openembedded-devel@lists.openembedded.org>; Thu, 16 Feb 2023 16:35:21 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101118
 
-From: Chee Yang Lee <chee.yang.lee@intel.com>
+Fixes:
+- CVE-2019-19911
+- CVE-2020-5310
+- CVE-2020-5311
+- CVE-2020-5312
+- CVE-2020-5313
 
-Signed-off-by: Chee Yang Lee <chee.yang.lee@intel.com>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 795ccdd86cad05c425adae15af27797f42f33c56)
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
+License change:
+- Updated copyright year
+
+Signed-off-by: Roger Knecht <roger@norberthealth.com>
 ---
- .../tinyproxy/tinyproxy/CVE-2022-40468.patch  | 33 +++++++++++++++++++
- .../tinyproxy/tinyproxy_1.11.1.bb             |  1 +
- 2 files changed, 34 insertions(+)
- create mode 100644 meta-networking/recipes-support/tinyproxy/tinyproxy/CVE-2022-40468.patch
+ .../{python3-pillow_6.2.1.bb => python3-pillow_6.2.2.bb}      | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-pillow_6.2.1.bb => python3-pillow_6.2.2.bb} (85%)
 
-diff --git a/meta-networking/recipes-support/tinyproxy/tinyproxy/CVE-2022-40468.patch b/meta-networking/recipes-support/tinyproxy/tinyproxy/CVE-2022-40468.patch
-new file mode 100644
-index 0000000000..4e2157ca75
---- /dev/null
-+++ b/meta-networking/recipes-support/tinyproxy/tinyproxy/CVE-2022-40468.patch
-@@ -0,0 +1,33 @@
-+From 3764b8551463b900b5b4e3ec0cd9bb9182191cb7 Mon Sep 17 00:00:00 2001
-+From: rofl0r <rofl0r@users.noreply.github.com>
-+Date: Thu, 8 Sep 2022 15:18:04 +0000
-+Subject: [PATCH] prevent junk from showing up in error page in invalid
-+ requests
-+
-+fixes #457
-+
-+https://github.com/tinyproxy/tinyproxy/commit/3764b8551463b900b5b4e3ec0cd9bb9182191cb7
-+Upstream-Status: Backport
-+CVE: CVE-2022-40468
-+Signed-off-by: Chee Yang Lee <chee.yang.lee@intel.com>
-+---
-+ src/reqs.c | 4 ++++
-+ 1 file changed, 4 insertions(+)
-+
-+diff --git a/src/reqs.c b/src/reqs.c
-+index bce69819..45db118d 100644
-+--- a/src/reqs.c
-++++ b/src/reqs.c
-+@@ -343,8 +343,12 @@ static struct request_s *process_request (struct conn_s *connptr,
-+                 goto fail;
-+         }
-+ 
-++        /* zero-terminate the strings so they don't contain junk in error page */
-++        request->method[0] = url[0] = request->protocol[0] = 0;
-++
-+         ret = sscanf (connptr->request_line, "%[^ ] %[^ ] %[^ ]",
-+                       request->method, url, request->protocol);
-++
-+         if (ret == 2 && !strcasecmp (request->method, "GET")) {
-+                 request->protocol[0] = 0;
-+ 
-diff --git a/meta-networking/recipes-support/tinyproxy/tinyproxy_1.11.1.bb b/meta-networking/recipes-support/tinyproxy/tinyproxy_1.11.1.bb
-index 86f57d88ff..999deff4de 100644
---- a/meta-networking/recipes-support/tinyproxy/tinyproxy_1.11.1.bb
-+++ b/meta-networking/recipes-support/tinyproxy/tinyproxy_1.11.1.bb
-@@ -7,6 +7,7 @@ SRC_URI = "https://github.com/${BPN}/${BPN}/releases/download/${PV}/${BP}.tar.gz
-            file://disable-documentation.patch \
-            file://tinyproxy.service \
-            file://tinyproxy.conf \
-+           file://CVE-2022-40468.patch \
-            "
+diff --git a/meta-python/recipes-devtools/python/python3-pillow_6.2.1.bb b/meta-python/recipes-devtools/python/python3-pillow_6.2.2.bb
+similarity index 85%
+rename from meta-python/recipes-devtools/python/python3-pillow_6.2.1.bb
+rename to meta-python/recipes-devtools/python/python3-pillow_6.2.2.bb
+index 80b7e941a..8bcc090f6 100644
+--- a/meta-python/recipes-devtools/python/python3-pillow_6.2.1.bb
++++ b/meta-python/recipes-devtools/python/python3-pillow_6.2.2.bb
+@@ -3,13 +3,13 @@ Clark and Contributors. PIL is the Python Imaging Library by Fredrik Lundh and \
+ Contributors."
+ HOMEPAGE = "https://pillow.readthedocs.io"
+ LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=55c0f320370091249c1755c0d2b48e89"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=4eddfd4333b69c754704db4bdceb5c11"
  
- SRC_URI[sha256sum] = "1574acf7ba83c703a89e98bb2758a4ed9fda456f092624b33cfcf0ce2d3b2047"
+ SRC_URI = "git://github.com/python-pillow/Pillow.git;branch=6.2.x;protocol=https \
+            file://0001-support-cross-compiling.patch \
+            file://0001-explicitly-set-compile-options.patch \
+ "
+-SRCREV ?= "6e0f07bbe38def22d36ee176b2efd9ea74b453a6"
++SRCREV ?= "a45c8583ff90312a2fddc38567ed736cef4af563"
+ 
+ 
+ inherit setuptools3
 -- 
-2.25.1
+2.17.1
 
 
