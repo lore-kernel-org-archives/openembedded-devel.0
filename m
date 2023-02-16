@@ -1,106 +1,124 @@
-Return-Path: <wangmy@fujitsu.com>
+Return-Path: <brgl@bgdev.pl>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 74B1DC636CC
-	for <webhook@archiver.kernel.org>; Thu, 16 Feb 2023 08:34:58 +0000 (UTC)
-Received: from mail1.bemta37.messagelabs.com (mail1.bemta37.messagelabs.com [85.158.142.2])
- by mx.groups.io with SMTP id smtpd.web11.5812.1676536491261488733
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 91776C6379F
+	for <webhook@archiver.kernel.org>; Thu, 16 Feb 2023 08:49:48 +0000 (UTC)
+Received: from mail-wr1-f52.google.com (mail-wr1-f52.google.com [209.85.221.52])
+ by mx.groups.io with SMTP id smtpd.web11.5977.1676537384808227518
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 16 Feb 2023 00:34:51 -0800
+ Thu, 16 Feb 2023 00:49:45 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=thpj8fbn;
- spf=pass (domain: fujitsu.com, ip: 85.158.142.2, mailfrom: wangmy@fujitsu.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1676536489; i=@fujitsu.com;
-	bh=T/h87sjJvO41uYvp75EKdVamOnRBQoqj31Bl9JElqqU=;
-	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=thpj8fbnILT4aufHLUv6/8zc5PkmrTVQgU6N9Cpu0jlNRZDMPXYDZlq/6EM0Fb+LP
-	 qQV7P2sBIandANcfSerTDvjqsP193OUCam17y6q8z5a773RwH5Z7Gq26B2rTJgDp3z
-	 sQpF7xu1WteQvOT1UCNXRbypMivnvwGZ+V6ynuR/KyOWtYftyo2VUlaJSTMK16Po2o
-	 llgmap9HvaLeP3spQAAvwEFHVDf2bjrzyegKUzk+++TryDMlWOdWHTfu/URBMA7X3a
-	 WkmwXJ8nvtoKMiaR5TgwjbTcLkr+0tmJYe2U3EzctHnHSvkehD7BpbuoxTotdnQ7K+
-	 X+3GmPYluw5oA==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrDIsWRWlGSWpSXmKPExsViZ8OxWXflq7f
-  JBovPMFtcPLyU2YHR49zGFYwBjFGsmXlJ+RUJrBkdV3eyFyzlqFjw6TFjA+Mp9i5GLg4hgQeM
-  EtvevWSBcK4wSdx90sYE4exllNhz+T1QhpODTUBK4sb9/2wgtoiAvsTS2XuYQWxmARWJF7972
-  EFsYQE7iQMr94DVsAioSmy8eIsJxOYVcJLounIWrEZCQEFiysP3zBBxQYmTM5+wQMyRkDj44g
-  UzRI2ixOzLzSwQdqVE64dfULaaxNVzm5gnMPLPQtI+C0n7AkamVYzmxalFZalFuobmeklFmek
-  ZJbmJmTl6iVW6iXqppbp5+UUlGbqGeonlxXqpxcV6xZW5yTkpenmpJZsYgQGZUpx0Zwfjzr6/
-  eocYJTmYlER5i3XfJgvxJeWnVGYkFmfEF5XmpBYfYpTh4FCS4N3wDCgnWJSanlqRlpkDjA6Yt
-  AQHj5IIr+AVoDRvcUFibnFmOkTqFKMux9UrV/YyC7Hk5eelSonzLn0BVCQAUpRRmgc3Ahaplx
-  hlpYR5GRkYGIR4ClKLcjNLUOVfMYpzMCoJ80aDTOHJzCuB2/QK6AgmoCMWMIMdUZKIkJJqYJr
-  z6+ibxS8fuMpLLlqb9enHhr8dqcmHFFRyiqZvW3T30zS524YBHDty2t9syuuu3OD7UuqE16M7
-  pzMCX81WDFA4YP7VX1XxicHCV5xaTpfWfbnGJ2mUd+etClutoFFK74Luf2aszYZ53zaVf2XN2
-  dUY8O3qskP/2t8t33BQb8/Brx8brBt/HS5hb03ek98mmxaayOkUuGr1VL2lL+Jneb434ij75X
-  TRc2uNauiqpnXT+PYYRb2x0Pp5detBxSnri7bz3l76Ql6KdU/novUGOZo9P4w/nNZx/zn7zda
-  v1b94Ptlei01tfOaY8qtCRO+Q5rYixdyWtqoyIe4j9tFKyV9v3tzmaqkakML8Y8lc20IlluKM
-  REMt5qLiRABgnGaDTwMAAA==
-X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-22.tower-732.messagelabs.com!1676536488!89389!1
-X-Originating-IP: [62.60.8.179]
-X-SYMC-ESS-Client-Auth: outbound-route-from=pass
-X-StarScan-Received: 
-X-StarScan-Version: 9.102.2; banners=-,-,-
-X-VirusChecked: Checked
-Received: (qmail 32108 invoked from network); 16 Feb 2023 08:34:49 -0000
-Received: from unknown (HELO n03ukasimr04.n03.fujitsu.local) (62.60.8.179)
-  by server-22.tower-732.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 16 Feb 2023 08:34:49 -0000
-Received: from n03ukasimr04.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTP id 877A57C
-	for <openembedded-devel@lists.openembedded.org>; Thu, 16 Feb 2023 08:34:48 +0000 (GMT)
-Received: from R01UKEXCASM223.r01.fujitsu.local (R01UKEXCASM223 [10.182.185.121])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTPS id 7B7B27B
-	for <openembedded-devel@lists.openembedded.org>; Thu, 16 Feb 2023 08:34:48 +0000 (GMT)
-Received: from localhost.localdomain (10.167.225.33) by
- R01UKEXCASM223.r01.fujitsu.local (10.182.185.121) with Microsoft SMTP Server
- (TLS) id 15.0.1497.42; Thu, 16 Feb 2023 08:34:46 +0000
-From: <wangmy@fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-oe] [PATCH] hwdata: upgrade 0.366 -> 0.367
-Date: Thu, 16 Feb 2023 16:34:36 +0800
-Message-ID: <1676536476-14487-1-git-send-email-wangmy@fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
+ dkim=pass header.i=@bgdev-pl.20210112.gappssmtp.com header.s=20210112 header.b=UX85KA0H;
+ spf=none, err=SPF record not found (domain: bgdev.pl, ip: 209.85.221.52, mailfrom: brgl@bgdev.pl)
+Received: by mail-wr1-f52.google.com with SMTP id m10so1094503wrn.4
+        for <openembedded-devel@lists.openembedded.org>; Thu, 16 Feb 2023 00:49:44 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=bgdev-pl.20210112.gappssmtp.com; s=20210112;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=bZY3BqUk+X5AkP+gU/CbEorrMCHSHBmgz6QRHqqZdSQ=;
+        b=UX85KA0HFiznRHA1jjaeTeOzedM2gg7MGorpOZf7EWG8nGnY6vVb2iR0ohOd1i4Dvw
+         UVfkCAoec3aOl5UaNN/XOW55CR9aZkhfQ3CgbkWNV6ECIqiLDUGyl7ORZkhb4azb6MRn
+         pPir/gok0O3c0nvnDkJBP4XBwzW83KG9BBCFFc7dda3Vphokp9S0ibN+Iu68gSZl2iPk
+         6av4+sv4hISbanGAMNlxEFskKkYRKnpSw4JJnf2j3rd1VFo+JFxLR2ZswYMuDvcCPRRQ
+         i0ezzz4iumc/xvhTVWP4wm6m5RovlS8v0vfGwM6C9UShYKxxZSPxBt+HJsKBlGq4LJne
+         5JCw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=bZY3BqUk+X5AkP+gU/CbEorrMCHSHBmgz6QRHqqZdSQ=;
+        b=zhx8NjWmjZ4Ad8K8qoqX9sWUoeMhkKHYdde2bhKUo0EjptW1nZWKjtpHqeVyarKA/7
+         Z4WWElMjwjHAiD49Y/1bHxIldUtJ4zhdSbCIJWuGhrOkEIqVoOOInxplHzqwCB6jYnyX
+         K0iz+ykgILgqPckfplBI+UZVFukFymwFj+LnkLl+AljBvtyaXF36ccELBE9BEWCTAtj9
+         P22EvDvWF8j3v2YWswNx1GUYxsCTygokd+UPz8sSwvYGYrmiLor8X61unZuZ2yMMhthS
+         3BxVM83L/kT3ZwOxlj0KihYRM9CCmbZg7VKwIbH9z38KgkTjXIclsDMHd1JOvpA2e5rH
+         KPHA==
+X-Gm-Message-State: AO0yUKWPEavtiqOGjnTTPH/lkagYdnkMbSv6cmCKmc0nalGPzeAwVLYt
+	ZjpJrlc9EWykslh65E6Gg16PVg==
+X-Google-Smtp-Source: AK7set+YM4c2WEfaMKHLgcPRagYFOuY3JCubCQZdxYyiFC93GQVBlREiVnQhY38W9C4bOBD7djErng==
+X-Received: by 2002:a5d:548e:0:b0:2c5:4aad:db7e with SMTP id h14-20020a5d548e000000b002c54aaddb7emr4109373wrv.58.1676537383207;
+        Thu, 16 Feb 2023 00:49:43 -0800 (PST)
+Received: from brgl-uxlite.home ([2a01:cb1d:334:ac00:7c5b:1160:db5d:72da])
+        by smtp.gmail.com with ESMTPSA id e4-20020a5d5004000000b002c5706f7c6dsm891326wrt.94.2023.02.16.00.49.42
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 16 Feb 2023 00:49:42 -0800 (PST)
+From: Bartosz Golaszewski <brgl@bgdev.pl>
+To: Khem Raj <raj.khem@gmail.com>,
+	Bruce Ashfield <bruce.ashfield@gmail.com>,
+	openembedded-devel@lists.openembedded.org
+Cc: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
+Subject: [meta-oe][PATCH v2 0/2] libgpiod: add support for libgpiod v2
+Date: Thu, 16 Feb 2023 09:49:35 +0100
+Message-Id: <20230216084937.7365-1-brgl@bgdev.pl>
+X-Mailer: git-send-email 2.37.2
 MIME-Version: 1.0
-Content-Type: text/plain
-X-Originating-IP: [10.167.225.33]
-X-ClientProxiedBy: G08CNEXCHPEKD07.g08.fujitsu.local (10.167.33.80) To
- R01UKEXCASM223.r01.fujitsu.local (10.182.185.121)
-X-Virus-Scanned: ClamAV using ClamSMTP
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 16 Feb 2023 08:34:58 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101095
+ <openembedded-devel@lists.openembedded.org>; Thu, 16 Feb 2023 08:49:48 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101096
 
-From: Wang Mingyu <wangmy@fujitsu.com>
+From: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
 
-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
----
- .../recipes-support/hwdata/{hwdata_0.366.bb => hwdata_0.367.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-support/hwdata/{hwdata_0.366.bb => hwdata_0.367.bb} (91%)
+We've just tagged the release candidate for libgpiod v2. This is a major
+release entirely overhauling the API in a backward incompatible way.
 
-diff --git a/meta-oe/recipes-support/hwdata/hwdata_0.366.bb b/meta-oe/recipes-support/hwdata/hwdata_0.367.bb
-similarity index 91%
-rename from meta-oe/recipes-support/hwdata/hwdata_0.366.bb
-rename to meta-oe/recipes-support/hwdata/hwdata_0.367.bb
-index 4cab9b0fb..9d2783363 100644
---- a/meta-oe/recipes-support/hwdata/hwdata_0.366.bb
-+++ b/meta-oe/recipes-support/hwdata/hwdata_0.367.bb
-@@ -5,7 +5,7 @@ SECTION = "System/Base"
- LICENSE = "GPL-2.0-or-later | XFree86-1.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=1556547711e8246992b999edd9445a57"
- 
--SRCREV = "2fa514ff86da425726dea8629bcf4ceac9d8e7ff"
-+SRCREV = "15c9d3bc939848e5f8b86cf9496f991de48c861f"
- SRC_URI = "git://github.com/vcrhonek/${BPN}.git;branch=master;protocol=https"
- 
- S = "${WORKDIR}/git"
+While this is not the final release yet, it's not likely to change much so
+I'd like to make it available in meta-openembedded to give it exposure to
+some testing. When we do release v2.0, it'll be just a matter of bumping the
+version.
+
+Currently no other package depends on libgpiod in meta-openembedded, so I'd
+like to avoid having two packages (libgpiod and libgpiod2). Instead let's
+provide recipes for both versions but keep them under the common libgpiod name
+as it's unlikely anyone would need both versions in a single system. This is
+after all a medium-sized project that shouldn't require too much work in order
+to port a user to the new major release.
+
+The first patch contains an update of libgpiod v1.6.x to the most recent
+bug-fix release.
+
+The second contains the recipe for libgpiod v2.0-rc1 while also moving the
+bitbake code around in order to factor out common elements.
+
+The third contains a recipe for the python bindings that are now in their own
+project in meta-python.
+
+The new recipes provide the same functionality - including ptest for the C
+library, tools and language bindings.
+
+v1 -> v2:
+- Several bugs detected in master-next were fixed and this recipe adds support
+  for libgpiod v2.0-c2. The package now builds with clang, musl as well as
+  clang & musl.
+
+Bartosz Golaszewski (2):
+  libgpiod: add a recipe for libgpiod v2.0-rc2
+  python3-gpiod: new package
+
+ .../{files => libgpiod-1.6.4}/run-ptest       |  0
+ .../libgpiod/libgpiod-2.0-rc2/run-ptest       | 24 ++++++++
+ .../recipes-support/libgpiod/libgpiod-src.inc |  1 +
+ meta-oe/recipes-support/libgpiod/libgpiod.inc | 61 +++++++++++++++++++
+ .../libgpiod/libgpiod_1.6.4.bb                | 56 ++---------------
+ .../libgpiod/libgpiod_2.0-rc2.bb              | 21 +++++++
+ .../packagegroups/packagegroup-meta-python.bb |  1 +
+ .../python/python3-gpiod/run-ptest            | 15 +++++
+ .../python/python3-gpiod_2.0-rc2.bb           | 45 ++++++++++++++
+ 9 files changed, 174 insertions(+), 50 deletions(-)
+ rename meta-oe/recipes-support/libgpiod/{files => libgpiod-1.6.4}/run-ptest (100%)
+ create mode 100644 meta-oe/recipes-support/libgpiod/libgpiod-2.0-rc2/run-ptest
+ create mode 100644 meta-oe/recipes-support/libgpiod/libgpiod-src.inc
+ create mode 100644 meta-oe/recipes-support/libgpiod/libgpiod.inc
+ create mode 100644 meta-oe/recipes-support/libgpiod/libgpiod_2.0-rc2.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-gpiod/run-ptest
+ create mode 100644 meta-python/recipes-devtools/python/python3-gpiod_2.0-rc2.bb
+
 -- 
-2.34.1
+2.37.2
 
 
