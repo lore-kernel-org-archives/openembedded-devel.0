@@ -1,122 +1,247 @@
-Return-Path: <roger@norberthealth.com>
+Return-Path: <craig@unreasonablefarm.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 33A7FC6379F
-	for <webhook@archiver.kernel.org>; Fri, 17 Feb 2023 11:05:23 +0000 (UTC)
-Received: from mail-ed1-f52.google.com (mail-ed1-f52.google.com [209.85.208.52])
- by mx.groups.io with SMTP id smtpd.web11.4156.1676631921281561330
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6B020C636D6
+	for <webhook@archiver.kernel.org>; Fri, 17 Feb 2023 17:17:44 +0000 (UTC)
+Received: from chi3.army.rockhost.com (chi3.army.rockhost.com [173.236.42.122])
+ by mx.groups.io with SMTP id smtpd.web10.20.1676654260311468243
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 17 Feb 2023 03:05:21 -0800
+ Fri, 17 Feb 2023 09:17:40 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@norberthealth-com.20210112.gappssmtp.com header.s=20210112 header.b=NE03UiIJ;
- spf=pass (domain: norberthealth.com, ip: 209.85.208.52, mailfrom: roger@norberthealth.com)
-Received: by mail-ed1-f52.google.com with SMTP id dn12so10577325edb.5
-        for <openembedded-devel@lists.openembedded.org>; Fri, 17 Feb 2023 03:05:21 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=norberthealth-com.20210112.gappssmtp.com; s=20210112;
-        h=message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=YIIxBMM26dHWcsXBlFfKKAYGdjrmu1XVKxjZlchdyL4=;
-        b=NE03UiIJx3usuu075SZhdfmd2DavsZidbpak/h+46du2rD7gn3Dpxlv56jzDk/8XeN
-         2CPRQijz/KUd0OAcxETpEcaBhS6zDOrB7NcdC+7hkhB6rV5YrFhJFXLpK4TQvxfqjOjK
-         eQ+ElTC+uxYH4imvfWKJtA7Zjr5aIGxLVGlRNl9Ofyk6zdI+ht5S0iTbNJ4/4jCoLluV
-         gu55NDdmKk5Gk9FQvnGeyWmN0nWiKEj1bYhCY4jLOTuxhy0+ZnoVrHq+sEXt7B15AmDz
-         VAzRLYGOQ2m3iGdkrOr3ux1IBaAOslhbI/s/Iwsr8gYJUWrrgkRzD5BZ96fcy2nAXCMp
-         fDKg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=YIIxBMM26dHWcsXBlFfKKAYGdjrmu1XVKxjZlchdyL4=;
-        b=ee19TBhxdNI7BsZaWPHM5OcU6ciFDcu1s1u4aOqvOZxOfeMjiMssRLxxMPXfRbVZg/
-         TJC17Wx0uK/1tszLx1xeT6+2dtB2jrR118loByhf01kagZ3y2Mm/tJrHs3xKX5QIpXUC
-         CyCUzCWQ0czp1GeNRIDhHjflN56oIQ7IfJc66PZPIzQhJ1RpKt3vFXlMtSuSrRlCZJpC
-         KynBkWUqQrQj9B4gPjxDzYg0fa7rDdHfockma1UkjZH7aD42NZMn2oyXFxyQ67jWdeRV
-         arTikoYUhJ5hiH2LzswPh5ilNXpg6dkLpHuvvA7ZRDzhc1tmpLzdRNuk0UyIM8oAci9B
-         rS1g==
-X-Gm-Message-State: AO0yUKUSArPfh3oJvF0fqXPJy46zjQGBLhxouCpBuGvX/Pr6Zmui3/TC
-	76fOqbz8Yw0AZzKim95f7fz367Hu99rEl0zqmnWmdg==
-X-Google-Smtp-Source: AK7set8QvWn7xli6P/lo0mu8JmjMyq43MKf2zyug8xHk1oTWIZrBJXc8m7M/B36p/ddnHvRiHYViOg==
-X-Received: by 2002:a17:906:4d81:b0:870:baa6:6762 with SMTP id s1-20020a1709064d8100b00870baa66762mr10137343eju.14.1676631918961;
-        Fri, 17 Feb 2023 03:05:18 -0800 (PST)
-Received: from localhost.localdomain (196.162.185.81.rev.sfr.net. [81.185.162.196])
-        by smtp.gmail.com with ESMTPSA id v6-20020a17090651c600b008b175c46867sm1502606ejk.116.2023.02.17.03.05.17
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 17 Feb 2023 03:05:18 -0800 (PST)
-From: Roger Knecht <roger@norberthealth.com>
+ dkim=pass header.i=@unreasonablefarm.org header.s=default header.b=d6K5Dnaa;
+ spf=pass (domain: unreasonablefarm.org, ip: 173.236.42.122, mailfrom: craig@unreasonablefarm.org)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=unreasonablefarm.org; s=default; h=Content-Transfer-Encoding:MIME-Version:
+	Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+	:Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+	List-Subscribe:List-Post:List-Owner:List-Archive;
+	bh=6AuqqpOL6sSzshWJ9IoK5OQnhdF82Xg53wETeb2AkFY=; b=d6K5DnaafTqL5jPRt3hb1dgIHL
+	rUAZHRjndaGZlrDs3vmxfQSD8+Nd1xLA2KonGBzCth5o0N6fP8n9/xjhyC+AaK8zp7hZVosVnYcI8
+	i3Eq03vWQG2oQhwSqswcj6qPNyFYt76PU4GyFdePGXxWIiHDNEmazoMVVFq+LvN55CxpH4t3mVBwC
+	NQpc6qC1QGsi9WLtbnpl2cm2AtV3kx0dZGX6ToirUfsyFa0lTVEQIlO+9XvmPhqBMYrBs5NlHgyDb
+	chS0TozqQXrEludlSg056qbr1Hzzz9t/PmmjplHIuJjjdyZwOlsC/ayhGtFdHuWXIIa8VW3RaPvDu
+	CdFtjlgw==;
+Received: from 24-56-146-54-static.midco.net ([24.56.146.54]:36678 helo=mbp.lan)
+	by chi3.army.rockhost.com with esmtpsa  (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+	(Exim 4.96)
+	(envelope-from <craig@unreasonablefarm.org>)
+	id 1pT4MX-004rdN-3B;
+	Fri, 17 Feb 2023 11:17:38 -0600
+From: craig@unreasonablefarm.org
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>,
-	Armin Kuster <akuster808@gmail.com>,
-	Roger Knecht <roger@norberthealth.com>
-Subject: [meta-oe][dunfell][PATCH] zeromq: 4.3.2 -> 4.3.4
-Date: Fri, 17 Feb 2023 12:04:52 +0100
-Message-Id: <20230217110452.22833-1-roger@norberthealth.com>
-X-Mailer: git-send-email 2.17.1
+Cc: Craig Comstock <craig@unreasonablefarm.org>
+Subject: [PATCH] cfengine: upgrade to 3.21.0
+Date: Fri, 17 Feb 2023 11:17:22 -0600
+Message-Id: <20230217171722.71333-1-craig@unreasonablefarm.org>
+X-Mailer: git-send-email 2.39.2
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
+X-AntiAbuse: Primary Hostname - chi3.army.rockhost.com
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - unreasonablefarm.org
+X-Get-Message-Sender-Via: chi3.army.rockhost.com: authenticated_id: craig@unreasonablefarm.org
+X-Authenticated-Sender: chi3.army.rockhost.com: craig@unreasonablefarm.org
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 17 Feb 2023 11:05:23 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101121
+ <openembedded-devel@lists.openembedded.org>; Fri, 17 Feb 2023 17:17:44 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101122
 
-Fixes:
-- CVE-2021-20236
+From: Craig Comstock <craig@unreasonablefarm.org>
 
-Patch changes:
-- Refreshed 0001-CMakeLists-txt-Avoid-host-specific-path-to-libsodium.patch
+Also fixed --with-libxml2=no case in configure.ac
+The CF3_WITH_LIBRARY and AC_CHECK_HEADERS were moved to outside of the check for with-libxml2=no
+This fix is already merged in cfengine master but will need some time to cherry-pick and arrive in a 3.21.x LTS release.
 
-Signed-off-by: Roger Knecht <roger@norberthealth.com>
+Ticket: CFE-4023
+Changelog: title
+
+Signed-off-by: Craig Comstock <craig@unreasonablefarm.org>
 ---
- ...eLists-txt-Avoid-host-specific-path-to-libsodium.patch | 8 ++++----
- .../zeromq/{zeromq_4.3.2.bb => zeromq_4.3.4.bb}           | 4 ++--
- 2 files changed, 6 insertions(+), 6 deletions(-)
- rename meta-oe/recipes-connectivity/zeromq/{zeromq_4.3.2.bb => zeromq_4.3.4.bb} (87%)
+ .../cfengine-masterfiles/python3.patch        | 16 ----
+ ...15.0.bb => cfengine-masterfiles_3.21.0.bb} |  7 +-
+ ...with-libxml2-no-case-in-configure.ac.patch | 87 +++++++++++++++++++
+ ...{cfengine_3.15.0.bb => cfengine_3.21.0.bb} | 10 ++-
+ 4 files changed, 96 insertions(+), 24 deletions(-)
+ delete mode 100644 meta-oe/recipes-extended/cfengine/cfengine-masterfiles/python3.patch
+ rename meta-oe/recipes-extended/cfengine/{cfengine-masterfiles_3.15.0.bb => cfengine-masterfiles_3.21.0.bb} (81%)
+ create mode 100644 meta-oe/recipes-extended/cfengine/cfengine/0001-Fixed-with-libxml2-no-case-in-configure.ac.patch
+ rename meta-oe/recipes-extended/cfengine/{cfengine_3.15.0.bb => cfengine_3.21.0.bb} (88%)
 
-diff --git a/meta-oe/recipes-connectivity/zeromq/files/0001-CMakeLists-txt-Avoid-host-specific-path-to-libsodium.patch b/meta-oe/recipes-connectivity/zeromq/files/0001-CMakeLists-txt-Avoid-host-specific-path-to-libsodium.patch
-index eb3dee4d3..31f652922 100644
---- a/meta-oe/recipes-connectivity/zeromq/files/0001-CMakeLists-txt-Avoid-host-specific-path-to-libsodium.patch
-+++ b/meta-oe/recipes-connectivity/zeromq/files/0001-CMakeLists-txt-Avoid-host-specific-path-to-libsodium.patch
-@@ -19,8 +19,8 @@ Signed-off-by: Niko Mauno <niko.mauno@vaisala.com>
+diff --git a/meta-oe/recipes-extended/cfengine/cfengine-masterfiles/python3.patch b/meta-oe/recipes-extended/cfengine/cfengine-masterfiles/python3.patch
+deleted file mode 100644
+index a6f670126..000000000
+--- a/meta-oe/recipes-extended/cfengine/cfengine-masterfiles/python3.patch
++++ /dev/null
+@@ -1,16 +0,0 @@
+---- a/modules/packages/apt_get
+-+++ b/modules/packages/apt_get
+-@@ -1,4 +1,4 @@
+--#!/var/cfengine/bin/python
+-+#!/var/cfengine/bin/python3
+- 
+- import sys
+- import os
+---- a/modules/packages/apt_get.in
+-+++ b/modules/packages/apt_get.in
+-@@ -1,4 +1,4 @@
+--#!@bindir@/python
+-+#!@bindir@/python3
+- 
+- import sys
+- import os
+diff --git a/meta-oe/recipes-extended/cfengine/cfengine-masterfiles_3.15.0.bb b/meta-oe/recipes-extended/cfengine/cfengine-masterfiles_3.21.0.bb
+similarity index 81%
+rename from meta-oe/recipes-extended/cfengine/cfengine-masterfiles_3.15.0.bb
+rename to meta-oe/recipes-extended/cfengine/cfengine-masterfiles_3.21.0.bb
+index 4ef3fc15a..68d404255 100644
+--- a/meta-oe/recipes-extended/cfengine/cfengine-masterfiles_3.15.0.bb
++++ b/meta-oe/recipes-extended/cfengine/cfengine-masterfiles_3.21.0.bb
+@@ -18,13 +18,12 @@ or wherever `$(sys.masterdir)` points. \
+ HOMEPAGE = "http://cfengine.com"
  
- --- a/CMakeLists.txt
- +++ b/CMakeLists.txt
--@@ -1210,7 +1210,7 @@
--   target_link_libraries(libzmq ${OPTIONAL_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT})
-+@@ -1440,7 +1440,7 @@ if(BUILD_SHARED)
-+   endif()
-  
-    if(SODIUM_FOUND)
- -    target_link_libraries(libzmq ${SODIUM_LIBRARIES})
-@@ -28,8 +28,8 @@ Signed-off-by: Niko Mauno <niko.mauno@vaisala.com>
-      # On Solaris, libsodium depends on libssp
-      if(${CMAKE_SYSTEM_NAME} MATCHES "SunOS")
-        target_link_libraries(libzmq ssp)
--@@ -1240,7 +1240,7 @@
--   target_link_libraries(libzmq-static ${OPTIONAL_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT})
-+@@ -1485,7 +1485,7 @@ if(BUILD_STATIC)
-+   endif()
-  
-    if(SODIUM_FOUND)
- -    target_link_libraries(libzmq-static ${SODIUM_LIBRARIES})
-diff --git a/meta-oe/recipes-connectivity/zeromq/zeromq_4.3.2.bb b/meta-oe/recipes-connectivity/zeromq/zeromq_4.3.4.bb
-similarity index 87%
-rename from meta-oe/recipes-connectivity/zeromq/zeromq_4.3.2.bb
-rename to meta-oe/recipes-connectivity/zeromq/zeromq_4.3.4.bb
-index 02a4c04fd..4381f2d6d 100644
---- a/meta-oe/recipes-connectivity/zeromq/zeromq_4.3.2.bb
-+++ b/meta-oe/recipes-connectivity/zeromq/zeromq_4.3.4.bb
-@@ -10,8 +10,8 @@ SRC_URI = "http://github.com/zeromq/libzmq/releases/download/v${PV}/zeromq-${PV}
-     file://0001-CMakeLists-txt-Avoid-host-specific-path-to-libsodium.patch \
-     file://run-ptest \
- "
--SRC_URI[md5sum] = "2047e917c2cc93505e2579bcba67a573"
--SRC_URI[sha256sum] = "ebd7b5c830d6428956b67a0454a7f8cbed1de74b3b01e5c33c5378e22740f763"
-+SRC_URI[md5sum] = "c897d4005a3f0b8276b00b7921412379"
-+SRC_URI[sha256sum] = "c593001a89f5a85dd2ddf564805deb860e02471171b3f204944857336295c3e5"
+ LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=9f76426f9ef8c6f6739fadd21d817a4f"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=bb843e794feb6890f7697637b461c36e"
  
- UPSTREAM_CHECK_URI = "https://github.com/${BPN}/libzmq/releases"
+ SRC_URI = "https://cfengine-package-repos.s3.amazonaws.com/tarballs/${BP}.tar.gz \
+-           file://python3.patch \
+            "
+-SRC_URI[md5sum] = "6d456fdd9bd24ff6617eeaa05efae602"
+-SRC_URI[sha256sum] = "4a071c0c4ba7df9bad93144cff5fbc0566e5172afd66201072e3193b76c55a38"
++#SRC_URI[md5sum] = "5df2f85c75efc351ffadebcc11046a98"
++SRC_URI[sha256sum] = "013ebe68599915cedb4bf753b471713d91901a991623358b9a967d9a779bcc16"
+ 
+ inherit autotools
+ 
+diff --git a/meta-oe/recipes-extended/cfengine/cfengine/0001-Fixed-with-libxml2-no-case-in-configure.ac.patch b/meta-oe/recipes-extended/cfengine/cfengine/0001-Fixed-with-libxml2-no-case-in-configure.ac.patch
+new file mode 100644
+index 000000000..01d470b83
+--- /dev/null
++++ b/meta-oe/recipes-extended/cfengine/cfengine/0001-Fixed-with-libxml2-no-case-in-configure.ac.patch
+@@ -0,0 +1,87 @@
++From a08acdfadb5eba2a3201209c6da3ad6f2ca4ae79 Mon Sep 17 00:00:00 2001
++From: Craig Comstock <craig.comstock@northern.tech>
++Date: Fri, 27 Jan 2023 15:19:48 -0600
++Subject: [PATCH] Fixed --with-libxml2=no case in configure.ac
++
++The CF3_WITH_LIBRARY and AC_CHECK_HEADERS were moved to outside of the check for with-libxml2=no
++
++Ticket: CFE-4023
++Changelog: title
++---
++ configure.ac          | 21 +++++++++++----------
++ libntech/configure.ac | 21 +++++++++++----------
++ 2 files changed, 22 insertions(+), 20 deletions(-)
++
++diff --git a/configure.ac b/configure.ac
++index e189b10..f6b8226 100644
++--- a/configure.ac
+++++ b/configure.ac
++@@ -659,19 +659,20 @@ if test "x$with_libxml2" != "xno"; then
++             LIBXML2_CPPFLAGS=-I$with_libxml2/include/libxml2
++         fi
++     fi
++-fi
++ 
++-CF3_WITH_LIBRARY(libxml2,
++-    [AC_CHECK_LIB(xml2, xmlFirstElementChild,
++-    [],
++-    [if test "x$with_libxml2" != xcheck; then
++-        AC_MSG_ERROR(Cannot find libxml2); fi]
++-    )
++-    AC_CHECK_HEADERS([libxml/xmlwriter.h], [break],
+++    CF3_WITH_LIBRARY(libxml2,
+++        [AC_CHECK_LIB(xml2, xmlFirstElementChild,
+++        [],
++         [if test "x$with_libxml2" != xcheck; then
++             AC_MSG_ERROR(Cannot find libxml2); fi]
++-    )]
++-)
+++        )
+++        AC_CHECK_HEADERS([libxml/xmlwriter.h], [break],
+++            [if test "x$with_libxml2" != xcheck; then
+++                AC_MSG_ERROR(Cannot find libxml2); fi]
+++        )]
+++    )
+++    
+++fi
++ 
++ AM_CONDITIONAL([HAVE_LIBXML2],
++     [test "x$with_libxml2" != xno &&
++diff --git a/libntech/configure.ac b/libntech/configure.ac
++index 7bb8787..28b3683 100644
++--- a/libntech/configure.ac
+++++ b/libntech/configure.ac
++@@ -571,19 +571,20 @@ if test "x$with_libxml2" != "xno"; then
++             LIBXML2_CPPFLAGS=-I$with_libxml2/include/libxml2
++         fi
++     fi
++-fi
++ 
++-CF3_WITH_LIBRARY(libxml2,
++-    [AC_CHECK_LIB(xml2, xmlFirstElementChild,
++-    [],
++-    [if test "x$with_libxml2" != xcheck; then
++-        AC_MSG_ERROR(Cannot find libxml2); fi]
++-    )
++-    AC_CHECK_HEADERS([libxml/xmlwriter.h], [break],
+++    CF3_WITH_LIBRARY(libxml2,
+++        [AC_CHECK_LIB(xml2, xmlFirstElementChild,
+++        [],
++         [if test "x$with_libxml2" != xcheck; then
++             AC_MSG_ERROR(Cannot find libxml2); fi]
++-    )]
++-)
+++        )
+++        AC_CHECK_HEADERS([libxml/xmlwriter.h], [break],
+++            [if test "x$with_libxml2" != xcheck; then
+++                AC_MSG_ERROR(Cannot find libxml2); fi]
+++        )]
+++    )
+++
+++fi
++ 
++ AM_CONDITIONAL([HAVE_LIBXML2],
++     [test "x$with_libxml2" != xno &&
++-- 
++2.39.1
++
+diff --git a/meta-oe/recipes-extended/cfengine/cfengine_3.15.0.bb b/meta-oe/recipes-extended/cfengine/cfengine_3.21.0.bb
+similarity index 88%
+rename from meta-oe/recipes-extended/cfengine/cfengine_3.15.0.bb
+rename to meta-oe/recipes-extended/cfengine/cfengine_3.21.0.bb
+index 1566f8a88..6fa5d2743 100644
+--- a/meta-oe/recipes-extended/cfengine/cfengine_3.15.0.bb
++++ b/meta-oe/recipes-extended/cfengine/cfengine_3.21.0.bb
+@@ -15,13 +15,15 @@ SKIP_RECIPE[cfengine] ?= "Needs porting to openssl 3.x"
+ LICENSE = "GPL-3.0-only"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=233aa25e53983237cf0bd4c238af255f"
+ 
+-DEPENDS = "attr tokyocabinet bison-native"
++DEPENDS += "attr tokyocabinet bison-native libxml2"
++#RDEPENDS:cfengine += "attr tokyocabinet bison-native libxml2"
+ 
+-SRC_URI = "https://cfengine-package-repos.s3.amazonaws.com/tarballs/${BP}.tar.gz \
++SRC_URI = "https://cfengine-package-repos.s3.amazonaws.com/tarballs/${BPN}-community-${PV}.tar.gz \
++           file://0001-Fixed-with-libxml2-no-case-in-configure.ac.patch \
+            file://set-path-of-default-config-file.patch \
+            "
+-SRC_URI[md5sum] = "d4dabfa46d8afa151be5610f184354e7"
+-SRC_URI[sha256sum] = "fa53e137f850eb268a8e7ae4578b5db5dc383656341f5053dc1a353ed0288265"
++#SRC_URI[md5sum] = "5318e40702bc66a3ece44ec4ad77712b"
++SRC_URI[sha256sum] = "911778ddb0a4e03a3ddfc8fc0f033136e1551849ea2dcbdb3f0f14359dfe3126"
+ 
+ inherit autotools-brokensep systemd
  
 -- 
-2.17.1
+2.39.2
 
 
