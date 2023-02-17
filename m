@@ -1,148 +1,157 @@
-Return-Path: <Martin.Jansa@gmail.com>
+Return-Path: <joe.slater@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 774B1C636D6
-	for <webhook@archiver.kernel.org>; Fri, 17 Feb 2023 20:42:15 +0000 (UTC)
-Received: from mail-ed1-f53.google.com (mail-ed1-f53.google.com [209.85.208.53])
- by mx.groups.io with SMTP id smtpd.web11.5661.1676666529031194498
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9954DC636D7
+	for <webhook@archiver.kernel.org>; Fri, 17 Feb 2023 22:31:17 +0000 (UTC)
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.web10.1114.1676673075280278084
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 17 Feb 2023 12:42:09 -0800
+ Fri, 17 Feb 2023 14:31:15 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=BzqgddO8;
- spf=pass (domain: gmail.com, ip: 209.85.208.53, mailfrom: martin.jansa@gmail.com)
-Received: by mail-ed1-f53.google.com with SMTP id l11so9321218edb.11
-        for <openembedded-devel@lists.openembedded.org>; Fri, 17 Feb 2023 12:42:08 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=3X1RN2HuWV2BYQFKk7r5PW33lvxWF0CakWg/Eho+x3k=;
-        b=BzqgddO8lTmI33pyhdaIWjnsrGQ0M5n75MLxqD0gVB35Rnrjx+yleVBPWDtlzA5Rus
-         6DroEe6bYpafOBbikWBragkhmwEoc/BRUTjrV7/5SxXkOYrp7AsRtkYe3k7t3GSRXpxM
-         J+Z6NE3+OpAtnKP3wY+iKkEr6mHwoD21oTosvynRR5DDGSCTcKk6p246gfN63yPoa6md
-         TceZPijjhBFFc7UWwsv2zRkR24sZ+N6vaPA3Fqjf0o3ZWqmYionTKqSqQWRIAO3pUH8x
-         wiViDOfJ4rjHqm4teNHm8qksO3G/QDoqcoNkkbMR3T3fltvYjfs9mtau7NIHIyqQ7xVL
-         laeQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=3X1RN2HuWV2BYQFKk7r5PW33lvxWF0CakWg/Eho+x3k=;
-        b=JBO1wpX1jzjq1IfU1oFR0A3K0q7ldQBXCKT8q86O90EGIt06sd+zYCWgpPQ8OrEyX9
-         v00i71CRRfsKrZlByxsLc/Lw7Cz2dvkW0LZPwHyKeFdKBmkXNNKPYfJ4JthlHXnsfWMc
-         5E4EqVGqjqDvTTeAZxjyN6YmiHUpbffHZud9TedT2SkLhEb/Z83fMOrpdue0DHs7JSVP
-         MGvqgFMrOFMK+A9nVnnaGlqGXhAx11uXCl35YXHivC8KIp+ZayzZ1Iy1tAC9LNhcgDbl
-         VVWU+7Zk143/JCCsmzgT1/jTfnYslO5bYld+50UUpDyLUnQx8yE4YU8yJznw/KA6yc6S
-         axRA==
-X-Gm-Message-State: AO0yUKV1RuuqeoBxqra3I3Edl5Rz4bAKW9pXsIQABGjIr8xM1yw7tse0
-	pkaWO6xbtHT/8dwKbFfRdeijoNhhRB4=
-X-Google-Smtp-Source: AK7set/uW7Z6gJsFbv1pJHXwuS1aUzSX1QjTBOzvL4dP+uzdonDBmNu2p3rzGyH8kdYOoAErJ6cnYA==
-X-Received: by 2002:a17:906:b84c:b0:878:7c18:8fd9 with SMTP id ga12-20020a170906b84c00b008787c188fd9mr1717139ejb.44.1676666527223;
-        Fri, 17 Feb 2023 12:42:07 -0800 (PST)
-Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
-        by smtp.gmail.com with ESMTPSA id p18-20020a17090635d200b0087fa83790d8sm2570963ejb.13.2023.02.17.12.42.06
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 17 Feb 2023 12:42:06 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Martin Jansa <Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH] nodejs: add Upstream-Status
-Date: Fri, 17 Feb 2023 21:41:51 +0100
-Message-Id: <20230217204152.3902725-1-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.39.2
+ dkim=pass header.i=@windriver.com header.s=pps06212021 header.b=sgLs8viI;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=1412f5127e=joe.slater@windriver.com)
+Received: from pps.filterd (m0250811.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 31HM8k53032753
+	for <openembedded-devel@lists.openembedded.org>; Fri, 17 Feb 2023 22:31:14 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com; h=from : to : cc :
+ subject : date : message-id : in-reply-to : references : mime-version :
+ content-transfer-encoding : content-type; s=PPS06212021;
+ bh=H4U8PbKXggIqfXKFbInDCKhn5VgfUAzq1vWoBLUYy6c=;
+ b=sgLs8viI3B68FrFtTXqPWIhXaJeYeuS88TYJ1RWPAQFmhaqU1mzFcae7m0rLOziGIoxt
+ ZTlKic91Umy1TCPgWmQSgr9X+oozm4+/VXM1N8COqbi5gsOIwrBVwJ8s17US2sO7OTnW
+ SyYc2H1xNXEIqdofFLXg+u8Aq0PKF9yQRGLcUoRM6diQdGGXeZG709semQPAXfkY2hOn
+ c/d6Ro2SUJhMlGsc6xYShaSidDItZILMaf90wu4TweKkD6kvXIkI+1ShqS8nfU3DlF6o
+ Jl3St7KaZSlHutoo4jMfvoz4en7G2tsMXkDYyE5GBtTQLGqT3lVCU3hZzhYiGDxjA3Vz KA== 
+Received: from ala-exchng02.corp.ad.wrs.com (unknown-82-254.windriver.com [147.11.82.254])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3nsc1ksybk-2
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Fri, 17 Feb 2023 22:31:14 +0000
+Received: from ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) by
+ ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.18; Fri, 17 Feb 2023 14:31:12 -0800
+Received: from ala-jslater-lx1.corp.ad.wrs.com (147.11.136.210) by
+ ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server id
+ 15.1.2507.18 via Frontend Transport; Fri, 17 Feb 2023 14:31:12 -0800
+From: Joe Slater <joe.slater@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: <joe.slater@windriver.com>, <randy.macleod@windriver.com>,
+        <rodolfo.zumbado@windriver.com>
+Subject: [oe-core][PATCH 2/2] tar: CVE-2022-48303
+Date: Fri, 17 Feb 2023 14:31:12 -0800
+Message-ID: <20230217223112.550946-2-joe.slater@windriver.com>
+X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20230217223112.550946-1-joe.slater@windriver.com>
+References: <20230217223112.550946-1-joe.slater@windriver.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Proofpoint-GUID: fiVRrNJoijjJVxAUJGcZrHWNP-GJAiga
+X-Proofpoint-ORIG-GUID: fiVRrNJoijjJVxAUJGcZrHWNP-GJAiga
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.219,Aquarius:18.0.930,Hydra:6.0.562,FMLib:17.11.170.22
+ definitions=2023-02-17_15,2023-02-17_01,2023-02-09_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 clxscore=1015
+ priorityscore=1501 mlxscore=0 bulkscore=0 mlxlogscore=999 adultscore=0
+ malwarescore=0 phishscore=0 spamscore=0 lowpriorityscore=0 impostorscore=0
+ suspectscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.12.0-2212070000 definitions=main-2302170195
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 17 Feb 2023 20:42:15 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101123
+ <openembedded-devel@lists.openembedded.org>; Fri, 17 Feb 2023 22:31:17 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101125
 
-* unfortunately all 3 have very long unclear history, I've tried to at least partially
-  document in commit message
+From: Rodolfo Quesada Zumbado <rodolfo.zumbado@windriver.com>
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+Fixes CVE-2022-48303 by checking Base-256 encoding is at least
+2 bytes long. GNU Tar through 1.34 has a one-byte out-of-bounds
+read that results in use of uninitialized memory for a conditional
+jump. Exploitation to change the flow of control has not been
+demonstrated. The issue occurs in from_header in list.c via a
+V7 archive in which mtime has approximately 11 whitespace characters.
+
+Reference:
+https://nvd.nist.gov/vuln/detail/CVE-2022-48303
+
+Upstream patch:
+https://savannah.gnu.org/bugs/?62387
+https://git.savannah.gnu.org/cgit/tar.git/patch/src/list.c?id=3da78400eafcccb97e2f2fd4b227ea40d794ede8
+
+Signed-off-by: Rodolfo Quesada Zumbado <rodolfo.zumbado@windriver.com>
+Signed-off-by: Joe Slater <joe.slater@windriver.com>
 ---
- ...e-running-gyp-files-for-bundled-deps.patch | 26 +++++++++++++++++++
- .../nodejs/0001-Using-native-binaries.patch   |  7 +++++
- .../nodejs/nodejs/mips-less-memory.patch      |  5 ++++
- 3 files changed, 38 insertions(+)
+ .../tar/tar/CVE-2022-48303.patch              | 43 +++++++++++++++++++
+ meta/recipes-extended/tar/tar_1.34.bb         |  4 +-
+ 2 files changed, 46 insertions(+), 1 deletion(-)
+ create mode 100644 meta/recipes-extended/tar/tar/CVE-2022-48303.patch
 
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs/0001-Disable-running-gyp-files-for-bundled-deps.patch b/meta-oe/recipes-devtools/nodejs/nodejs/0001-Disable-running-gyp-files-for-bundled-deps.patch
-index d6e439ba22..e949c635b0 100644
---- a/meta-oe/recipes-devtools/nodejs/nodejs/0001-Disable-running-gyp-files-for-bundled-deps.patch
-+++ b/meta-oe/recipes-devtools/nodejs/nodejs/0001-Disable-running-gyp-files-for-bundled-deps.patch
-@@ -3,6 +3,32 @@ From: Zuzana Svetlikova <zsvetlik@redhat.com>
- Date: Thu, 27 Apr 2017 14:25:42 +0200
- Subject: [PATCH] Disable running gyp on shared deps
+diff --git a/meta/recipes-extended/tar/tar/CVE-2022-48303.patch b/meta/recipes-extended/tar/tar/CVE-2022-48303.patch
+new file mode 100644
+index 0000000000..b2f40f3e64
+--- /dev/null
++++ b/meta/recipes-extended/tar/tar/CVE-2022-48303.patch
+@@ -0,0 +1,43 @@
++From 3da78400eafcccb97e2f2fd4b227ea40d794ede8 Mon Sep 17 00:00:00 2001
++From: Sergey Poznyakoff <gray@gnu.org>
++Date: Sat, 11 Feb 2023 11:57:39 +0200
++Subject: Fix boundary checking in base-256 decoder
++
++* src/list.c (from_header): Base-256 encoding is at least 2 bytes
++long.
++
++Upstream-Status: Backport [see reference below]
++CVE: CVE-2022-48303
++
++Reference to upstream patch:
++https://savannah.gnu.org/bugs/?62387
++https://git.savannah.gnu.org/cgit/tar.git/patch/src/list.c?id=3da78400eafcccb97e2f2fd4b227ea40d794ede8
++
++Signed-off-by: Rodolfo Quesada Zumbado <rodolfo.zumbado@windriver.com>
++Signed-off-by: Joe Slater <joe.slater@windriver.com>
++---
++ src/list.c | 5 +++--
++ 1 file changed, 3 insertions(+), 2 deletions(-)Signed-off-by: Rodolfo Quesada Zumbado <rodolfo.zumbado@windriver.com>
++
++
++(limited to 'src/list.c')
++
++diff --git a/src/list.c b/src/list.c
++index 9fafc42..86bcfdd 100644
++--- a/src/list.c
+++++ b/src/list.c
++@@ -881,8 +881,9 @@ from_header (char const *where0, size_t digs, char const *type,
++ 	  where++;
++ 	}
++     }
++-  else if (*where == '\200' /* positive base-256 */
++-	   || *where == '\377' /* negative base-256 */)
+++  else if (where <= lim - 2
+++	   && (*where == '\200' /* positive base-256 */
+++	       || *where == '\377' /* negative base-256 */))
++     {
++       /* Parse base-256 output.  A nonnegative number N is
++ 	 represented as (256**DIGS)/2 + N; a negative number -N is
++-- 
++cgit v1.1
++
+diff --git a/meta/recipes-extended/tar/tar_1.34.bb b/meta/recipes-extended/tar/tar_1.34.bb
+index 7307cd57a2..1ef5fe221e 100644
+--- a/meta/recipes-extended/tar/tar_1.34.bb
++++ b/meta/recipes-extended/tar/tar_1.34.bb
+@@ -6,7 +6,9 @@ SECTION = "base"
+ LICENSE = "GPL-3.0-only"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
  
-+Upstream-Status: Inappropriate [embedded specific]
-+
-+Probably imported from:
-+https://src.fedoraproject.org/rpms/nodejs/c/41af04f2a3c050fb44628e91ac65fd225b927acb?branch=22609d8c1bfeaa21fe0057645af20b3a2ccc7f53
-+which is probably based on dont-run-gyp-files-for-bundled-deps.patch added in:
-+https://github.com/alpinelinux/aports/commit/6662eb3199902e8451fb20dce82554ad96f796bb
-+
-+We also explicitly prune some dependencies from source in the bitbake recipe:
-+
-+python prune_sources() {
-+    import shutil
-+
-+    shutil.rmtree(d.getVar('S') + '/deps/openssl')
-+    if 'ares' in d.getVar('PACKAGECONFIG'):
-+        shutil.rmtree(d.getVar('S') + '/deps/cares')
-+    if 'brotli' in d.getVar('PACKAGECONFIG'):
-+        shutil.rmtree(d.getVar('S') + '/deps/brotli')
-+    if 'libuv' in d.getVar('PACKAGECONFIG'):
-+        shutil.rmtree(d.getVar('S') + '/deps/uv')
-+    if 'nghttp2' in d.getVar('PACKAGECONFIG'):
-+        shutil.rmtree(d.getVar('S') + '/deps/nghttp2')
-+    if 'zlib' in d.getVar('PACKAGECONFIG'):
-+        shutil.rmtree(d.getVar('S') + '/deps/zlib')
-+}
-+do_unpack[postfuncs] += "prune_sources"
-+
- ---
-  Makefile | 2 +-
-  1 file changed, 1 insertion(+), 1 deletion(-)
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs/0001-Using-native-binaries.patch b/meta-oe/recipes-devtools/nodejs/nodejs/0001-Using-native-binaries.patch
-index feafe38fdb..66e10a0d00 100644
---- a/meta-oe/recipes-devtools/nodejs/nodejs/0001-Using-native-binaries.patch
-+++ b/meta-oe/recipes-devtools/nodejs/nodejs/0001-Using-native-binaries.patch
-@@ -3,6 +3,13 @@ From: Guillaume Burel <guillaume.burel@stormshield.eu>
- Date: Fri, 3 Jan 2020 11:25:54 +0100
- Subject: [PATCH] Using native binaries
+-SRC_URI = "${GNU_MIRROR}/tar/tar-${PV}.tar.bz2"
++SRC_URI = "${GNU_MIRROR}/tar/tar-${PV}.tar.bz2 \
++           file://CVE-2022-48303.patch \
++"
  
-+Upstream-Status: Inappropriate [embedded specific]
-+
-+Originally added in:
-+https://git.openembedded.org/meta-openembedded/commit/?id=1c8e4a679ae382f953b2e5c7a4966a4646314f3e
-+later extended and renamed in:
-+https://git.openembedded.org/meta-openembedded/commit/?id=feeb172d1a8bf010490d22b8df9448b20d9d2aed
-+
- Signed-off-by: Archana Polampalli <archana.polampalli@windriver.com>
- ---
-  node.gyp                 | 1 +
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs/mips-less-memory.patch b/meta-oe/recipes-devtools/nodejs/nodejs/mips-less-memory.patch
-index 56e93c50cf..16776cb762 100644
---- a/meta-oe/recipes-devtools/nodejs/nodejs/mips-less-memory.patch
-+++ b/meta-oe/recipes-devtools/nodejs/nodejs/mips-less-memory.patch
-@@ -6,6 +6,11 @@ Forwarded: https://bugs.chromium.org/p/v8/issues/detail?id=10586
- This ensures that we reserve 500M instead of 2G range for codegen
- ensures that qemu-mips can allocate such large ranges
+ SRC_URI[sha256sum] = "b44cc67f8a1f6b0250b7c860e952b37e8ed932a90bd9b1862a511079255646ff"
  
-+Upstream-Status: Inappropriate [embedded specific]
-+
-+Imported from debian https://salsa.debian.org/js-team/nodejs/-/blob/master-12.x/debian/patches/mips-less-memory.patch
-+https://buildd.debian.org/status/fetch.php?pkg=nodejs&arch=mipsel&ver=12.17.0~dfsg-2&stamp=1591050388&raw=0
-+
- Signed-off-by: Khem Raj <raj.khem@gmail.com>
- 
- --- a/deps/v8/src/common/globals.h
 -- 
-2.39.2
+2.25.1
 
 
