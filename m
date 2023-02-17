@@ -1,106 +1,101 @@
-Return-Path: <roger@norberthealth.com>
+Return-Path: <leimaohui@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 56A67C64EC4
-	for <webhook@archiver.kernel.org>; Thu, 16 Feb 2023 16:35:21 +0000 (UTC)
-Received: from mail-io1-f42.google.com (mail-io1-f42.google.com [209.85.166.42])
- by mx.groups.io with SMTP id smtpd.web10.14536.1676565312309605900
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4C902C61DA4
+	for <webhook@archiver.kernel.org>; Fri, 17 Feb 2023 00:56:24 +0000 (UTC)
+Received: from mail1.bemta32.messagelabs.com (mail1.bemta32.messagelabs.com [195.245.230.2])
+ by mx.groups.io with SMTP id smtpd.web11.27933.1676595380879147827
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 16 Feb 2023 08:35:12 -0800
+ Thu, 16 Feb 2023 16:56:21 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@norberthealth-com.20210112.gappssmtp.com header.s=20210112 header.b=1Wwj6lHE;
- spf=pass (domain: norberthealth.com, ip: 209.85.166.42, mailfrom: roger@norberthealth.com)
-Received: by mail-io1-f42.google.com with SMTP id z5so863293iow.1
-        for <openembedded-devel@lists.openembedded.org>; Thu, 16 Feb 2023 08:35:12 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=norberthealth-com.20210112.gappssmtp.com; s=20210112;
-        h=message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=gwZpXhznRBZWBxd+QUc+iaf356lYvEQi5QGUTy7iIa8=;
-        b=1Wwj6lHEdWnrdUlEk8OwX4pUE/BKOxnZItd2acKUWOvbqg4Pyeos4dJx5SJqXMlTmO
-         h8voCBM68XYFJMFRYyISGQ5HXu6Ksa+CNYTz7jXNgSjNokVsx7pdbFQdLGCcSGkZY/+s
-         ebDvzYMXGSBnG4V6MshA13hQb3XbAl+9244NzNf/1OMucLIT1oal3VoTEEoLEpumDsN5
-         eBjA+kiUOfm30H/0c+quUDdgw3dfheKilqJAtXlYyoB+Q1OJyMAHKTmXMDitGrwiWdpp
-         FBXf2oT/m6VwbkadqZ0ezW07tsMZkTSDtxc0ZBXTHh/yPvXgKyicdi+k1J5nK6kLJwPZ
-         JrxA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=gwZpXhznRBZWBxd+QUc+iaf356lYvEQi5QGUTy7iIa8=;
-        b=jpW8eWaCt+OX+DAkGFk00shK0gcqFaD7NQddc4mVaB7aC7FX7uS9chK397mAId2E/0
-         gX99iYG+ybcLuQMP16ZM4LjVCIb6YweN9ZXzZSdqtiHrHjEyJj7bUGbOqAygdYrps9TC
-         F1cXIWtavFP71cP7XX8fZJ+ap+wBD3tBUf2XnRKGDgQgr4mKnXk+LrCXDghu2Unpwr9Y
-         Xay9HqJUUV+waucn0xODfwmxz4J/RsVRNZltAkCwkm4RrgvXJCyZsOqlLcII1T0Aimq2
-         h5s2FAAHR0f1zdoM8xEpy0trkM50ESq/xZhaNokC3YMvIJMpTUx3r3AZ9FERyEr4yjOG
-         mq9w==
-X-Gm-Message-State: AO0yUKXm0SgdxK+3GrEM83O72LJu1EjnNoqtdUQi2KByYkkWdn8oSlPj
-	jNtub2GiBbdymBIvj3P6UVDwcju6d29wYkXpCkJn5PVc
-X-Google-Smtp-Source: AK7set9bndsmuZyYOYeA728fcUqTiK8c3GPoGPDcMgt6FYCMuhfbtHxDiYpMw28vRR9ct8HNk1CwJw==
-X-Received: by 2002:a6b:4015:0:b0:722:40e5:d633 with SMTP id k21-20020a6b4015000000b0072240e5d633mr4521426ioa.1.1676565311247;
-        Thu, 16 Feb 2023 08:35:11 -0800 (PST)
-Received: from roger-build-machine.us-central1-a.c.qa-pipelines.internal (47.56.173.34.bc.googleusercontent.com. [34.173.56.47])
-        by smtp.gmail.com with ESMTPSA id m3-20020a056602018300b007192441e5e6sm629902ioo.45.2023.02.16.08.35.10
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 16 Feb 2023 08:35:10 -0800 (PST)
-From: Roger Knecht <roger@norberthealth.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>,
-	Tim Orling <TicoTimo@gmail.com>,
-	Derek Straka <derek@asterius.io>,
-	Armin Kuster <akuster808@gmail.com>,
-	Roger Knecht <roger@norberthealth.com>
-Subject: [meta-python][dunfell][PATCH] python3-pillow: 6.2.1 -> 6.2.2
-Date: Thu, 16 Feb 2023 16:31:16 +0000
-Message-Id: <20230216163116.19190-1-roger@norberthealth.com>
-X-Mailer: git-send-email 2.17.1
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=UkkmI5Nz;
+ spf=pass (domain: fujitsu.com, ip: 195.245.230.2, mailfrom: leimaohui@fujitsu.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
+	s=170520fj; t=1676595378; i=@fujitsu.com;
+	bh=zb0H9pqeAiFS+BRCsIHE1kfkohi+eUJRt1Vv7c5MZgI=;
+	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
+	b=UkkmI5NzqM6jJDoEl9F0DDvzgj9wA6PwX3s06B2rsQcq/KaqfZf2tHYEfYCrk7zRs
+	 lbiOK1X5DaUWrIgEKxk39zSinZG9O7fb4q7lbSRHf29m4aDNi1EBafoac3EIbL4lX3
+	 a1XZCQNJSE67SnWWXkRwjQSfmQFQAv0sEDVOYsnvmSL/RDeswezQvz0YicEeVw4aBn
+	 A2cn8RP3DHASon8mgobJxBcVNXS0RfEgN+pD3uGPhIpEX+4NPHn795Yxygo+CxjGV3
+	 xlyGuJSNFo3tvS2nbwLJhMRC6WKjxS8PSrfZOBQ+4JQbqxbKkLjR5WwMT74vJH8XX9
+	 7J6UTkFFfzl+Q==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFlrHIsWRWlGSWpSXmKPExsViZ8ORpLvxwrt
+  kg/aj1hYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8adF7OYC6azVax4f56pgfEkaxcjF4eQwENG
+  id5D66Gcq0wSyzafZIRw9jFKrL13h72LkZODTUBDYvfUy8wgtoiAvsTS2XvAbGYBNYmjL3+C2
+  cICwRKrzh1nA7FZBFQl/mzdARbnFXCVaFj/gBHElhBQkJjy8D1UXFDi5MwnLBBzJCQOvnjBDF
+  GjJPH20h6o+kqJ1g+/WCBsNYmr5zYxT2Dkn4WkfRaS9gWMTKsYTYtTi8pSi3SN9ZKKMtMzSnI
+  TM3P0Eqt0E/VSS3XLU4tLdA31EsuL9VKLi/WKK3OTc1L08lJLNjECgzGlmLlvB+PX3r96hxgl
+  OZiURHkLud4lC/El5adUZiQWZ8QXleakFh9ilOHgUJLgvXIGKCdYlJqeWpGWmQOMDJi0BAePk
+  ggv91mgNG9xQWJucWY6ROoUo6KUOG/nOaCEAEgiozQPrg0WjZcYZaWEeRkZGBiEeApSi3IzS1
+  DlXzGKczAqCfMuA9nOk5lXAjf9FdBiJqDFC5jfgiwuSURISTUwrcuXvufaJrmun9f78VdFnlN
+  aFw4Erz+q/r3hwoXXtcs3WejJ7p/jZ9//yXR5gcOPXYaXFXZ+bTyU0Lr46F6/xqtXHnAvrTk9
+  tf5kRuSOXZemTuNgLv0269oVvm9bVzuqnVLuWLWt9u3OZ/fq9Od7xJldvte2fhNbZOjLlS3HG
+  bOfaa92/M2tu8eUzWQd+4picf6nLzTYHX99ids41+GqU8YeRgEVtrWbuvvEGUqubVpxYfXD2t
+  Mzn0yKuHJadYnpgXmvvWezn70t6ePpfJ631OC9fOP1+XMTj526yqRWzKm60vs0a8ZaC551B1L
+  FS1wMc293/ZEU3jUpJ+z7dw///EU1GiL+3blWFVoJ915yblFiKc5INNRiLipOBABUw/RKQQMA
+  AA==
+X-Env-Sender: leimaohui@fujitsu.com
+X-Msg-Ref: server-12.tower-591.messagelabs.com!1676595377!67311!1
+X-Originating-IP: [62.60.8.98]
+X-SYMC-ESS-Client-Auth: outbound-route-from=pass
+X-StarScan-Received: 
+X-StarScan-Version: 9.102.2; banners=-,-,-
+X-VirusChecked: Checked
+Received: (qmail 22135 invoked from network); 17 Feb 2023 00:56:17 -0000
+Received: from unknown (HELO n03ukasimr03.n03.fujitsu.local) (62.60.8.98)
+  by server-12.tower-591.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 17 Feb 2023 00:56:17 -0000
+Received: from n03ukasimr03.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr03.n03.fujitsu.local (Postfix) with ESMTP id 949621B3
+	for <openembedded-devel@lists.openembedded.org>; Fri, 17 Feb 2023 00:56:17 +0000 (GMT)
+Received: from R01UKEXCASM223.r01.fujitsu.local (R01UKEXCASM223 [10.182.185.121])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by n03ukasimr03.n03.fujitsu.local (Postfix) with ESMTPS id 88A041AC
+	for <openembedded-devel@lists.openembedded.org>; Fri, 17 Feb 2023 00:56:17 +0000 (GMT)
+Received: from localhost.localdomain (10.167.225.227) by
+ R01UKEXCASM223.r01.fujitsu.local (10.182.185.121) with Microsoft SMTP Server
+ (TLS) id 15.0.1497.42; Fri, 17 Feb 2023 00:56:16 +0000
+From: Lei Maohui <leimaohui@fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: Lei Maohui <leimaohui@fujitsu.com>
+Subject: [oe] [meta-oe][PATCH] libiodbc: Fix install conflict when enable multilib.
+Date: Fri, 17 Feb 2023 08:56:09 +0800
+Message-ID: <1676595369-28147-1-git-send-email-leimaohui@fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
+MIME-Version: 1.0
+Content-Type: text/plain
+X-Originating-IP: [10.167.225.227]
+X-ClientProxiedBy: G08CNEXCHPEKD07.g08.fujitsu.local (10.167.33.80) To
+ R01UKEXCASM223.r01.fujitsu.local (10.182.185.121)
+X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 16 Feb 2023 16:35:21 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101118
+ <openembedded-devel@lists.openembedded.org>; Fri, 17 Feb 2023 00:56:24 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101119
 
-Fixes:
-- CVE-2019-19911
-- CVE-2020-5310
-- CVE-2020-5311
-- CVE-2020-5312
-- CVE-2020-5313
+Error: Transaction test error:
+  file /usr/bin/iodbc-config conflicts between attempted installs of libiodbc-3.52.15-r0.aarch64 and lib32-libiodbc-3.52.15-r0.armv7ahf_neon
 
-License change:
-- Updated copyright year
-
-Signed-off-by: Roger Knecht <roger@norberthealth.com>
+Signed-off-by: Lei Maohui <leimaohui@fujitsu.com>
 ---
- .../{python3-pillow_6.2.1.bb => python3-pillow_6.2.2.bb}      | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-pillow_6.2.1.bb => python3-pillow_6.2.2.bb} (85%)
+ meta-oe/recipes-support/libiodbc/libiodbc_3.52.15.bb | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/meta-python/recipes-devtools/python/python3-pillow_6.2.1.bb b/meta-python/recipes-devtools/python/python3-pillow_6.2.2.bb
-similarity index 85%
-rename from meta-python/recipes-devtools/python/python3-pillow_6.2.1.bb
-rename to meta-python/recipes-devtools/python/python3-pillow_6.2.2.bb
-index 80b7e941a..8bcc090f6 100644
---- a/meta-python/recipes-devtools/python/python3-pillow_6.2.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-pillow_6.2.2.bb
-@@ -3,13 +3,13 @@ Clark and Contributors. PIL is the Python Imaging Library by Fredrik Lundh and \
- Contributors."
- HOMEPAGE = "https://pillow.readthedocs.io"
- LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=55c0f320370091249c1755c0d2b48e89"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=4eddfd4333b69c754704db4bdceb5c11"
- 
- SRC_URI = "git://github.com/python-pillow/Pillow.git;branch=6.2.x;protocol=https \
-            file://0001-support-cross-compiling.patch \
-            file://0001-explicitly-set-compile-options.patch \
- "
--SRCREV ?= "6e0f07bbe38def22d36ee176b2efd9ea74b453a6"
-+SRCREV ?= "a45c8583ff90312a2fddc38567ed736cef4af563"
- 
- 
- inherit setuptools3
+diff --git a/meta-oe/recipes-support/libiodbc/libiodbc_3.52.15.bb b/meta-oe/recipes-support/libiodbc/libiodbc_3.52.15.bb
+index bc4bd53..ced16d9 100644
+--- a/meta-oe/recipes-support/libiodbc/libiodbc_3.52.15.bb
++++ b/meta-oe/recipes-support/libiodbc/libiodbc_3.52.15.bb
+@@ -24,3 +24,6 @@ EXTRA_OECONF += " --prefix=/usr/local \
+ 		--disable-libodbc \
+ 		--disable-static \
+ 		"
++
++inherit multilib_script
++MULTILIB_SCRIPTS = "${PN}:${bindir}/iodbc-config"
 -- 
-2.17.1
+1.8.3.1
 
 
