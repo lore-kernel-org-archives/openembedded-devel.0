@@ -1,98 +1,196 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AD5C2C05027
-	for <webhook@archiver.kernel.org>; Sat, 18 Feb 2023 02:13:18 +0000 (UTC)
-Received: from mail-pf1-f181.google.com (mail-pf1-f181.google.com [209.85.210.181])
- by mx.groups.io with SMTP id smtpd.web10.4869.1676686394183826059
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EE254C64EC4
+	for <webhook@archiver.kernel.org>; Sat, 18 Feb 2023 06:38:19 +0000 (UTC)
+Received: from mail1.bemta32.messagelabs.com (mail1.bemta32.messagelabs.com [195.245.230.66])
+ by mx.groups.io with SMTP id smtpd.web10.7864.1676702297856486101
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 17 Feb 2023 18:13:14 -0800
+ Fri, 17 Feb 2023 22:38:19 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=gtWkkQdh;
- spf=pass (domain: gmail.com, ip: 209.85.210.181, mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f181.google.com with SMTP id f11so1725620pfj.11
-        for <openembedded-devel@lists.openembedded.org>; Fri, 17 Feb 2023 18:13:14 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=1h+1QXDG/HN6+u20xH25n6KnXiL8FiVOe7PKdeQd2qw=;
-        b=gtWkkQdhJIKblXyo4ORR1A6OGqODILpJRc8eO8fmJlHRwlEOJNN681enSuTJIT1veH
-         cJH62Jprb5oVSsVWgy/7oILLxJuvRYDXpNr4fA4KNxGkgdPiCvPe0cNx1jU3WzMk+W5m
-         M/HGHDa34OU7J4EHxaI8XiB2szZEHid+wE9qhL5Vxf7fPw6a0xus6KTmXmD6g35xDB/Y
-         yLAyUuLPsC7kMoHQDBj/Mr9AUNSlaB9FRUHSUkXq94YjNQ9BfRpFrYPxraU/0d1WkimD
-         EtFULAmTnx29Y7osQRYVzqJHGfUpasA8pwxbg+NkqMOOrKJlXbUUipafkuASGDOnPY9f
-         S53w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=1h+1QXDG/HN6+u20xH25n6KnXiL8FiVOe7PKdeQd2qw=;
-        b=hGAMabLjV7GPDm0zHuCdoFxTYLskwect8F7qe+64WfFSlx9mp5iVIxbaPrDN3sAKgt
-         fAkgSh8bquRL2Xm1Tds2ZbyC/oO4Xwt+aUHqSAbOxg6TCO3Slwk5/X9ZqqTO3liAMIEw
-         r4Dr3hNqbqfxfrspjcjJCnvuNNpbPotDQHmmhEv1Apq96hqO6lFo9KnuuqLE92881QmV
-         DOdXWFJNNCoo7zL6Q232qAI0B1FAQnjbBl6ZqexPcfiNKEhdUDtmIxBqmBvTvYDJlbMJ
-         zYJKyggfdvi27VJImzaPqtaGOj6IlXLMs7tMsDeO5VuU1y1LIerH7qTvMQZYXtYpYSGC
-         oUkg==
-X-Gm-Message-State: AO0yUKVIyHWWxrJfGU43kAS/B8gCTSXV++4Uy8cK3AV59uTc7rJjmlhZ
-	J3yA7VU49uOJG3pIe8Zvie6QncGFG9s=
-X-Google-Smtp-Source: AK7set/oQtwtWry2oZg3LuIKGWqY0vlGJtEBtdZIeB51axH/LFwi9wG8I5+yYxAwY3ywqcbHB/SbRw==
-X-Received: by 2002:aa7:96ae:0:b0:5a8:380d:7822 with SMTP id g14-20020aa796ae000000b005a8380d7822mr1947856pfk.23.1676686393118;
-        Fri, 17 Feb 2023 18:13:13 -0800 (PST)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9181:1cf0::3020])
-        by smtp.gmail.com with ESMTPSA id j5-20020aa78005000000b005938bd2bfd3sm3649097pfi.120.2023.02.17.18.13.12
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 17 Feb 2023 18:13:12 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH] glog: Link with libatomics on mips.
-Date: Fri, 17 Feb 2023 18:13:10 -0800
-Message-Id: <20230218021310.2354303-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.39.2
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=wkucJtRw;
+ spf=pass (domain: fujitsu.com, ip: 195.245.230.66, mailfrom: wangmy@fujitsu.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
+	s=170520fj; t=1676702298; i=@fujitsu.com;
+	bh=v48wPEH74ZPSm0Y6HAKjGUDyS90TnOQG/pGPk+BUzfk=;
+	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type;
+	b=wkucJtRwgBNwmUpQbRE4uZP5pOTAIegiOVVrkIGc6bETbo8jea8NhbC/JtdJXVeGl
+	 TPe3uoKI9NNY1MTp6c0ZYPeADfq0Hhgh91nNjcClqJD0TTP4llSoa7tUmCUUyIyb/L
+	 UQ9RLNOpiBdrxMfMT5h7wTxZYCzxJGv/ckkyKEMEXsyrBciH0RcrrBzXJUGuB+s6Xa
+	 Cj6/YyAegEQ/yu8z/IbVEl9UQcAlc0n03KhrEicaKU/sC042eqwd26SSeppKcrA93P
+	 hOoPBMnBncALXtQTm5UexJwNO4Fp2VmpHEh1TlIwLo5moebKl8VoajNhy31puIn2SG
+	 Jm2pXCQUf4EvA==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrGIsWRWlGSWpSXmKPExsViZ8OxWTei6EO
+  yQeM3S4uLh5cyOzB6nNu4gjGAMYo1My8pvyKBNWPOzf/MBRPUK3r+32BtYNyl1MXIxSEk8JBR
+  om/eChYI5wqTxOap/5ghnL2MEhubz7F1MXJysAlISdy4/x/MFhHQl1g6ew8ziM0soCLx4ncPO
+  4gtLOAtcWXiD7A4i4CqxPLDu1lAbF4BJ4mND3YxgtgSAgoSUx6+B6vhFHCWmPLrCROILQRUc3
+  BuOzNEvaDEyZlPWCDmS0gcfPGCGaJXUWL25WYWCLtSovXDLyhbTeLquU3MExgFZyFpn4WkfQE
+  j0ypG0+LUorLUIl0zvaSizPSMktzEzBy9xCrdRL3UUt3y1OISXUO9xPJivdTiYr3iytzknBS9
+  vNSSTYzA4E0pZrixg3FO31+9Q4ySHExKoryft71PFuJLyk+pzEgszogvKs1JLT7EKMPBoSTB+
+  7PgQ7KQYFFqempFWmYOMJJg0hIcPEoivKfTgdK8xQWJucWZ6RCpU4yKUuK8DKlACQGQREZpHl
+  wbLHovMcpKCfMyMjAwCPEUpBblZpagyr9iFOdgVBLmXQqynSczrwRu+iugxUxAixcwvwVZXJK
+  IkJJqYLIuUg5oZVp+8K6+0qT1X1LcXBN4pjlFX2TKy7pSUd5nuHzP8uaMC9cnhWr8D5p2Y1/Z
+  97QbdodaI+ZoKdlt3XrkuSMH6zz1tefWnlyySYy1+dCux7vLs39FF3wxU9334TTDQrvfy9JFe
+  beqLXQt9ey2qdvX4sKyXnHqr3nNX9JrrCz2Oy/p2LlV4f8Fq+MyPFJpnLHzbkQmXMs+7zH/M/
+  8Bhw2XX6zxlMxMzleJNPndOKsgztvJ7bSyYe021kynqTzXGTUEjf7s2ntscfLHqwIa19b7sP7
+  ZuWiFd9+sqDj/Q1FBl16Vrva+x5a92llK0jumY8MFMb6efNUdnUlzH4i9ipr5/nrW/yrX6a/e
+  xSixFGckGmoxFxUnAgDq7yNCWQMAAA==
+X-Env-Sender: wangmy@fujitsu.com
+X-Msg-Ref: server-8.tower-587.messagelabs.com!1676702296!201512!1
+X-Originating-IP: [62.60.8.179]
+X-SYMC-ESS-Client-Auth: outbound-route-from=pass
+X-StarScan-Received: 
+X-StarScan-Version: 9.102.2; banners=-,-,-
+X-VirusChecked: Checked
+Received: (qmail 24590 invoked from network); 18 Feb 2023 06:38:16 -0000
+Received: from unknown (HELO n03ukasimr04.n03.fujitsu.local) (62.60.8.179)
+  by server-8.tower-587.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 18 Feb 2023 06:38:16 -0000
+Received: from n03ukasimr04.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTP id 8DE37142
+	for <openembedded-devel@lists.openembedded.org>; Sat, 18 Feb 2023 06:38:16 +0000 (GMT)
+Received: from R01UKEXCASM223.r01.fujitsu.local (R01UKEXCASM223 [10.182.185.121])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTPS id 81C1F7C
+	for <openembedded-devel@lists.openembedded.org>; Sat, 18 Feb 2023 06:38:16 +0000 (GMT)
+Received: from localhost.localdomain (10.167.225.33) by
+ R01UKEXCASM223.r01.fujitsu.local (10.182.185.121) with Microsoft SMTP Server
+ (TLS) id 15.0.1497.42; Sat, 18 Feb 2023 06:38:15 +0000
+From: <wangmy@fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: Wang Mingyu <wangmy@fujitsu.com>
+Subject: [oe] [meta-networking] [PATCH] libtevent: upgrade 0.13.0 -> 0.14.1
+Date: Sat, 18 Feb 2023 14:37:53 +0800
+Message-ID: <1676702273-30706-4-git-send-email-wangmy@fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
+In-Reply-To: <1676702273-30706-1-git-send-email-wangmy@fujitsu.com>
+References: <1676702273-30706-1-git-send-email-wangmy@fujitsu.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.167.225.33]
+X-ClientProxiedBy: G08CNEXCHPEKD07.g08.fujitsu.local (10.167.33.80) To
+ R01UKEXCASM223.r01.fujitsu.local (10.182.185.121)
+X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 18 Feb 2023 02:13:18 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101129
+ <openembedded-devel@lists.openembedded.org>; Sat, 18 Feb 2023 06:38:19 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101133
 
-Mips does not have 64bit atomic builtins therefore link with libatomic
-we might need same for armv5 and ppc32 too.
+From: Wang Mingyu <wangmy@fujitsu.com>
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+0001-Add-configure-options-for-packages.patch
+refreshed for new version.
+
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- meta-oe/recipes-support/glog/glog_0.6.0.bb | 5 ++++-
- 1 file changed, 4 insertions(+), 1 deletion(-)
+ ...1-Add-configure-options-for-packages.patch | 25 +++++++++++--------
+ ...ibtevent_0.13.0.bb => libtevent_0.14.1.bb} |  3 +--
+ 2 files changed, 15 insertions(+), 13 deletions(-)
+ rename meta-networking/recipes-support/libtevent/{libtevent_0.13.0.bb => libtevent_0.14.1.bb} (94%)
 
-diff --git a/meta-oe/recipes-support/glog/glog_0.6.0.bb b/meta-oe/recipes-support/glog/glog_0.6.0.bb
-index 18291600c5..067e914aa2 100644
---- a/meta-oe/recipes-support/glog/glog_0.6.0.bb
-+++ b/meta-oe/recipes-support/glog/glog_0.6.0.bb
-@@ -17,15 +17,18 @@ S = "${WORKDIR}/git"
+diff --git a/meta-networking/recipes-support/libtevent/libtevent/0001-Add-configure-options-for-packages.patch b/meta-networking/recipes-support/libtevent/libtevent/0001-Add-configure-options-for-packages.patch
+index d98559b4e..cb66adba9 100644
+--- a/meta-networking/recipes-support/libtevent/libtevent/0001-Add-configure-options-for-packages.patch
++++ b/meta-networking/recipes-support/libtevent/libtevent/0001-Add-configure-options-for-packages.patch
+@@ -21,13 +21,16 @@ Signed-off-by: Joe Slater <joe.slater@windriver.com>
  
- inherit cmake
- 
--PACKAGECONFIG ?= "shared unwind"
-+PACKAGECONFIG ?= "shared unwind 64bit-atomics"
- PACKAGECONFIG:remove:riscv64 = "unwind"
- PACKAGECONFIG:remove:riscv32 = "unwind"
-+PACKAGECONFIG:remove:mipsarch = "64bit-atomics"
+ Update patch to version 0.10.0
+ Signed-off-by: Changqing Li <changqing.li@windriver.com>
 +
- PACKAGECONFIG:append:libc-musl:riscv64 = " execinfo"
- PACKAGECONFIG:append:libc-musl:riscv32 = " execinfo"
++Update patch to version 0.14.1
++Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+ ---
+- lib/replace/wscript | 87 ++++++++++++++++++++++++++++++++++-----------
++ lib/replace/wscript | 85 +++++++++++++++++++++++++++++++++++----------
+  wscript             |  6 ++++
+- 2 files changed, 73 insertions(+), 20 deletions(-)
++ 2 files changed, 73 insertions(+), 18 deletions(-)
  
- PACKAGECONFIG[unwind] = "-DWITH_UNWIND=ON,-DWITH_UNWIND=OFF,libunwind,libunwind"
- PACKAGECONFIG[execinfo] = ",,libexecinfo"
- PACKAGECONFIG[shared] = "-DBUILD_SHARED_LIBS=ON,-DBUILD_SHARED_LIBS=OFF,,"
-+PACKAGECONFIG[64bit-atomics] = ",-DCMAKE_CXX_STANDARD_LIBRARIES='-latomic',,"
+ diff --git a/lib/replace/wscript b/lib/replace/wscript
+-index 4c774d9..21a746a 100644
++index 5c2b750..28835ac 100644
+ --- a/lib/replace/wscript
+ +++ b/lib/replace/wscript
+ @@ -25,6 +25,41 @@ def options(opt):
+@@ -72,7 +75,7 @@ index 4c774d9..21a746a 100644
+  @Utils.run_once
+  def configure(conf):
+      conf.RECURSE('buildtools/wafsamba')
+-@@ -35,12 +70,25 @@ def configure(conf):
++@@ -38,12 +73,27 @@ def configure(conf):
+      conf.DEFINE('HAVE_LIBREPLACE', 1)
+      conf.DEFINE('LIBREPLACE_NETWORK_CHECKS', 1)
+  
+@@ -82,8 +85,8 @@ index 4c774d9..21a746a 100644
+ +    conf.CHECK_HEADERS('compat.h ctype.h dustat.h')
+      conf.CHECK_HEADERS('fcntl.h fnmatch.h glob.h history.h krb5.h langinfo.h')
+      conf.CHECK_HEADERS('locale.h ndir.h pwd.h')
+--    conf.CHECK_HEADERS('shadow.h sys/acl.h')
+--    conf.CHECK_HEADERS('sys/attributes.h attr/attributes.h sys/capability.h sys/dir.h sys/epoll.h')
++     conf.CHECK_HEADERS('shadow.h sys/acl.h')
++     conf.CHECK_HEADERS('sys/attributes.h attr/attributes.h sys/capability.h sys/dir.h sys/epoll.h')
+ +    conf.CHECK_HEADERS('shadow.h')
+ +    conf.CHECK_HEADERS('sys/attributes.h sys/dir.h sys/epoll.h')
+ +
+@@ -99,10 +102,10 @@ index 4c774d9..21a746a 100644
+ +    if Options.options.enable_libcap:
+ +        conf.CHECK_HEADERS('sys/capability.h')
+ +
+-     conf.CHECK_HEADERS('port.h')
+      conf.CHECK_HEADERS('sys/fcntl.h sys/filio.h sys/filsys.h sys/fs/s5param.h')
+      conf.CHECK_HEADERS('sys/id.h sys/ioctl.h sys/ipc.h sys/mman.h sys/mode.h sys/ndir.h sys/priv.h')
+-@@ -110,8 +158,9 @@ def configure(conf):
++     conf.CHECK_HEADERS('sys/resource.h sys/security.h sys/shm.h sys/statfs.h sys/statvfs.h sys/termio.h')
++@@ -113,8 +163,9 @@ def configure(conf):
+      conf.CHECK_HEADERS('sys/fileio.h sys/filesys.h sys/dustat.h sys/sysmacros.h')
+      conf.CHECK_HEADERS('xfs/libxfs.h netgroup.h')
+  
+@@ -114,7 +117,7 @@ index 4c774d9..21a746a 100644
+      conf.CHECK_HEADERS('nss_common.h nsswitch.h ns_api.h')
+      conf.CHECK_HEADERS('sys/extattr.h sys/ea.h sys/proplist.h sys/cdefs.h')
+      conf.CHECK_HEADERS('utmp.h utmpx.h lastlog.h')
+-@@ -434,20 +483,18 @@ def configure(conf):
++@@ -436,20 +487,18 @@ def configure(conf):
+  
+      strlcpy_in_bsd = False
+  
+@@ -148,7 +151,7 @@ index 4c774d9..21a746a 100644
+      conf.CHECK_CODE('''
+                  struct ucred cred;
+ diff --git a/wscript b/wscript
+-index 5c6f02c..75eecd4 100644
++index 0f6e92f..5a54f3a 100644
+ --- a/wscript
+ +++ b/wscript
+ @@ -28,6 +28,12 @@ def options(opt):
+@@ -165,5 +168,5 @@ index 5c6f02c..75eecd4 100644
+  def configure(conf):
+      conf.RECURSE('lib/replace')
+ -- 
+-2.25.1
++2.34.1
  
- do_configure:append() {
-     # remove WORKDIR info to improve reproducibility
+diff --git a/meta-networking/recipes-support/libtevent/libtevent_0.13.0.bb b/meta-networking/recipes-support/libtevent/libtevent_0.14.1.bb
+similarity index 94%
+rename from meta-networking/recipes-support/libtevent/libtevent_0.13.0.bb
+rename to meta-networking/recipes-support/libtevent/libtevent_0.14.1.bb
+index 0d898be82..b34c186ca 100644
+--- a/meta-networking/recipes-support/libtevent/libtevent_0.13.0.bb
++++ b/meta-networking/recipes-support/libtevent/libtevent_0.14.1.bb
+@@ -17,8 +17,7 @@ SRC_URI:append:libc-musl = " file://cmocka-fix-musl-libc-conflicting-types-error
+ 
+ LIC_FILES_CHKSUM = "file://tevent.h;endline=26;md5=47386b7c539bf2706b7ce52dc9341681"
+ 
+-SRC_URI[md5sum] = "9f413f3184f79a4deecd9444242a5dca"
+-SRC_URI[sha256sum] = "b9437a917fa55344361beb64ec9e0042e99cae8879882a62dd38f6abe2371d0c"
++SRC_URI[sha256sum] = "ef85fcaa80ffd2351036ba4b347630fef2a1ac3da964a7f1820466bad03cd00d"
+ 
+ inherit pkgconfig ptest waf-samba
+ 
 -- 
-2.39.2
+2.34.1
 
 
