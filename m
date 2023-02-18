@@ -2,199 +2,199 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DF4FBC636CC
-	for <webhook@archiver.kernel.org>; Sat, 18 Feb 2023 20:21:23 +0000 (UTC)
-Received: from mail-oa1-f53.google.com (mail-oa1-f53.google.com [209.85.160.53])
- by mx.groups.io with SMTP id smtpd.web11.19701.1676751680623989889
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EEB58C61DA4
+	for <webhook@archiver.kernel.org>; Sat, 18 Feb 2023 20:27:03 +0000 (UTC)
+Received: from mail-ot1-f49.google.com (mail-ot1-f49.google.com [209.85.210.49])
+ by mx.groups.io with SMTP id smtpd.web10.19934.1676752019907188301
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 18 Feb 2023 12:21:20 -0800
+ Sat, 18 Feb 2023 12:27:00 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=qAnKOXzH;
- spf=pass (domain: gmail.com, ip: 209.85.160.53, mailfrom: raj.khem@gmail.com)
-Received: by mail-oa1-f53.google.com with SMTP id 586e51a60fabf-171a987211aso1791662fac.6
-        for <openembedded-devel@lists.openembedded.org>; Sat, 18 Feb 2023 12:21:20 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=g4OKP1kr;
+ spf=pass (domain: gmail.com, ip: 209.85.210.49, mailfrom: raj.khem@gmail.com)
+Received: by mail-ot1-f49.google.com with SMTP id k27-20020a0568301bfb00b0068dbf908574so258372otb.8
+        for <openembedded-devel@lists.openembedded.org>; Sat, 18 Feb 2023 12:26:59 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=cc:to:subject:message-id:date:from:in-reply-to:references
          :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=zJG3Wd8ggDwAkyokbZX3ACNFusEjQ8/fodQ8THtaCoc=;
-        b=qAnKOXzHh81lCj2ZDQ9RyEti68xxVcy2tUpWJyKvxoxWe7VYE1A7m985MjiR6zSrMN
-         VisTzxJ3X/OPFwScA/MWa+/6vTX7NWkVwDGA5AVEut2uucfzM0nz5bfp1oYxxUMRXNwe
-         qDXO66Um4ehvHHvRWTsdBzSbATmyVmBcl6Qz/yRR3TfgsLsEzcfApIMndv7mS6c6ubVQ
-         ioQqpzMww3A///8xe1nRT2sowBpgsUr+WJ5GQNWciATGoMqC5Fhb/hje6CxLn8NvSKzf
-         DKG4iB1va+Y1mqkfZ0zLmHFlp2nJBcBssAk93EzcpPwsnCh6ZJag2pj5LOOa3ZxhGUD6
-         xwYA==
+        bh=bGY6b5kXyzvyrRL/h8QMxdCykH5Dy2aGCve7WK2m0ss=;
+        b=g4OKP1krXVJMOOseZQZrWR3a0F9O3gPPsm/Fp3h8Bo+TavKhLJSq55vlsMkvB+TYpS
+         ZZYvWs4Nzeynmgpb1ikuTnAXtBudUj4IdYzE9Khw8uZmntRuMxwxg6lVayNpJqvA9pMz
+         JUez7GiNe5eHmfoLUb+SXcmo08dcmLOJn+P0Q6t2vFaH0HixC+ix6Z/G/No3ZcfoJ/lV
+         ClnmaskRmhwFl5ZyT2VwFCHHMuYNtTTjDoE+fX/Xi09/5jdVpAZGYD0JOrOcSme4PnPK
+         Notbjtyjs76vSfMNNQ2/3wQfLKC7utJpZPp51QORlFWxtIKkFD9iIZUR9uQEqdDF2YzR
+         H4Ig==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=cc:to:subject:message-id:date:from:in-reply-to:references
          :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=zJG3Wd8ggDwAkyokbZX3ACNFusEjQ8/fodQ8THtaCoc=;
-        b=wwi3ifuLcDoLLlp/xs+fMClvu7hr+rix99l+RSaS0ywePNpOXSnljPNtr49jon4v3u
-         SP9RxxRLQfGSALjJOfCVvpPvlrE7UGQrSRUIIaszNFLyUbSmvGJXOZARqPO7z4hr9EAZ
-         Z8m8DptZ9+MoqnDTaNTWRkNI0e/suziqJEj9d6L1GIE9NP4MlBIk3wBc0kD6IgjWWNR3
-         jxFp37LEllVg5+bQ6YLsDTcox/IWKhQUrGC5iyQLC+ga7SlB9U27nyV1vv3/wrHP3Q0G
-         kKnClKZJlVBmA3CLMUxE/ED+BXwciTy9R4NDmGoM+k+fYy4+Wx71PI2ocYkcPVJbhT2u
-         M2Fg==
-X-Gm-Message-State: AO0yUKUnvfLNPVsIlUPA1v2ZzFmCz6NBb/SSUGID3ZUbRltNhsSaAy8G
-	nUtiUfAEqeI7IhXqEvRHF+USYNxATwbfQkDvwidULNjfPkg=
-X-Google-Smtp-Source: AK7set/+m7o12JPgh2vW3SfSkOp2owkAqOl943a3s12zu4vmGtFGQW1ohKK6GY3IPmpEexjD5tDXQ7ChpFUAoSGSYwk=
-X-Received: by 2002:a05:6870:d1c9:b0:163:767b:82cb with SMTP id
- b9-20020a056870d1c900b00163767b82cbmr697680oac.277.1676751679415; Sat, 18 Feb
- 2023 12:21:19 -0800 (PST)
+        bh=bGY6b5kXyzvyrRL/h8QMxdCykH5Dy2aGCve7WK2m0ss=;
+        b=fXW2LgtDkPzYQrJyM6Rvg0s/cixi/JRbCrdDJMHrbkvDo2/v0yZBU0dDd90c3lTFfV
+         ujtmzqT/NqesqCekVJHsPuRMBJKRStDKxiy9wNPqDCGUdIdv5cFmIpFfCWVXRw2QGjqE
+         LQNkUgilhiBdEWm0NyM26GYtU0s0+HjNlExnUuwFRHLZA/5mLIy/j5pEOmIvNllx5VAZ
+         8IPT8JH9iqNmPMATmAZ8W5KvuXAxjQFquldEbCPFzlOBO1bAAJ2Gg9zmInU2sTsNmRI+
+         VJ6Rvz8+q9i9khSC4JSRWG1h5rPmlvdfUcd+Ci1vmE67LEQc8WEeQxC0tOmdP5DYtqNe
+         lYWw==
+X-Gm-Message-State: AO0yUKXq7RvpH0IVVH1cZiOnf8rmaT04qK+KpXBgZZoWObhEZoylKQp+
+	1zS1OupeAvzL3dmljyd6dFEeSpx+kIlRYJknD+w=
+X-Google-Smtp-Source: AK7set97neS2BA+5fmLoVysoPU5flzOuXkB5zqpj0RJuZVSD/V+ynbqd71YgV7XreWhFjhWIwYxbsvq3Pj0g5PSbVWA=
+X-Received: by 2002:a9d:4110:0:b0:68b:ccdb:3855 with SMTP id
+ o16-20020a9d4110000000b0068bccdb3855mr272236ote.2.1676752019116; Sat, 18 Feb
+ 2023 12:26:59 -0800 (PST)
 MIME-Version: 1.0
-References: <1676702273-30706-1-git-send-email-wangmy@fujitsu.com>
-In-Reply-To: <1676702273-30706-1-git-send-email-wangmy@fujitsu.com>
+References: <5dab99f6-266d-7c31-e226-98e6e24188bc@gmail.com>
+In-Reply-To: <5dab99f6-266d-7c31-e226-98e6e24188bc@gmail.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Sat, 18 Feb 2023 12:20:53 -0800
-Message-ID: <CAMKF1srib_29=6LTxU8CvuweDcF2O7xLU8huLbqfTmbQ2bzBmw@mail.gmail.com>
-Subject: Re: [oe] [meta-networking] [PATCH] libldb: upgrade 2.6.1 -> 2.7.1
-To: wangmy <wangmy@fujitsu.com>
-Cc: openembedded-devel@lists.openembedded.org
+Date: Sat, 18 Feb 2023 12:26:32 -0800
+Message-ID: <CAMKF1sq_FrYfuPHBKpHsALfjdBKtHvb1JORCj-M-F1ze5QvuBw@mail.gmail.com>
+Subject: Re: langdale merge request: Feb 18th
+To: akuster808 <akuster808@gmail.com>
+Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
 Content-Type: text/plain; charset="UTF-8"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 18 Feb 2023 20:21:23 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101146
+ <openembedded-devel@lists.openembedded.org>; Sat, 18 Feb 2023 20:27:03 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101147
 
-this upgrade also needs samba upgrade to 4.18 in lock step. Plesse
-submit both upgrades in one go. See
+applied thanks Armin
 
-https://errors.yoctoproject.org/Errors/Details/690068/
-https://github.com/openembedded/meta-openembedded/commit/a0fb09aa3a69ec695b80f71d689d1ee89378d674#commitcomment-101119598
-
-On Fri, Feb 17, 2023 at 10:38 PM wangmy <wangmy@fujitsu.com> wrote:
+On Sat, Feb 18, 2023 at 7:30 AM akuster808 <akuster808@gmail.com> wrote:
 >
-> From: Wang Mingyu <wangmy@fujitsu.com>
+> The following changes since commit e7c754778edb25f35896137c8b174669392c492a:
 >
-> 0002-ldb-Add-configure-options-for-packages.patch
-> refreshed for new version.
+>    nodejs: upgrade 16.18.1 -> 16.19.0 (2023-02-04 12:16:04 -0500)
 >
-> Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
-> ---
->  ...b-Add-configure-options-for-packages.patch | 26 ++++++++++---------
->  .../{libldb_2.6.1.bb => libldb_2.7.1.bb}      |  3 +--
->  2 files changed, 15 insertions(+), 14 deletions(-)
->  rename meta-networking/recipes-support/libldb/{libldb_2.6.1.bb => libldb_2.7.1.bb} (95%)
+> are available in the Git repository at:
 >
-> diff --git a/meta-networking/recipes-support/libldb/libldb/0002-ldb-Add-configure-options-for-packages.patch b/meta-networking/recipes-support/libldb/libldb/0002-ldb-Add-configure-options-for-packages.patch
-> index 988931c49..7a30bbedf 100644
-> --- a/meta-networking/recipes-support/libldb/libldb/0002-ldb-Add-configure-options-for-packages.patch
-> +++ b/meta-networking/recipes-support/libldb/libldb/0002-ldb-Add-configure-options-for-packages.patch
-> @@ -20,13 +20,16 @@ Signed-off-by: Changqing Li <changqing.li@windriver.com>
+>    https://git.openembedded.org/meta-openembedded langdale-next
 >
->  Rebase to 2.3.0
->  Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
-> +
-> +upgrade to 2.7.1
-> +Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
->  ---
->   lib/replace/wscript | 90 +++++++++++++++++++++++++++++++++++----------
-> - wscript             |  8 ++++
-> - 2 files changed, 78 insertions(+), 20 deletions(-)
-> + wscript             |  7 ++++
-> + 2 files changed, 77 insertions(+), 20 deletions(-)
+> for you to fetch changes up to 30f4c2b3ae182513b967185e06bc8409a0ee6092:
 >
->  diff --git a/lib/replace/wscript b/lib/replace/wscript
-> -index 4c774d9..63c9967 100644
-> +index 5c2b750..f86f863 100644
->  --- a/lib/replace/wscript
->  +++ b/lib/replace/wscript
->  @@ -25,6 +25,41 @@ def options(opt):
-> @@ -71,7 +74,7 @@ index 4c774d9..63c9967 100644
->   @Utils.run_once
->   def configure(conf):
->       conf.RECURSE('buildtools/wafsamba')
-> -@@ -35,12 +70,25 @@ def configure(conf):
-> +@@ -38,12 +73,25 @@ def configure(conf):
->       conf.DEFINE('HAVE_LIBREPLACE', 1)
->       conf.DEFINE('LIBREPLACE_NETWORK_CHECKS', 1)
+>    mdns: use git fetcher (2023-02-15 08:02:50 -0500)
 >
-> @@ -98,10 +101,10 @@ index 4c774d9..63c9967 100644
->  +    if Options.options.enable_libcap:
->  +        conf.CHECK_HEADERS('sys/capability.h')
->  +
-> -     conf.CHECK_HEADERS('port.h')
->       conf.CHECK_HEADERS('sys/fcntl.h sys/filio.h sys/filsys.h sys/fs/s5param.h')
->       conf.CHECK_HEADERS('sys/id.h sys/ioctl.h sys/ipc.h sys/mman.h sys/mode.h sys/ndir.h sys/priv.h')
-> -@@ -110,8 +158,9 @@ def configure(conf):
-> +     conf.CHECK_HEADERS('sys/resource.h sys/security.h sys/shm.h sys/statfs.h sys/statvfs.h sys/termio.h')
-> +@@ -113,8 +161,9 @@ def configure(conf):
->       conf.CHECK_HEADERS('sys/fileio.h sys/filesys.h sys/dustat.h sys/sysmacros.h')
->       conf.CHECK_HEADERS('xfs/libxfs.h netgroup.h')
+> ----------------------------------------------------------------
+> Chee Yang Lee (1):
+>        tinyproxy: fix CVE-2022-40468
 >
-> @@ -113,7 +116,7 @@ index 4c774d9..63c9967 100644
->       conf.CHECK_HEADERS('nss_common.h nsswitch.h ns_api.h')
->       conf.CHECK_HEADERS('sys/extattr.h sys/ea.h sys/proplist.h sys/cdefs.h')
->       conf.CHECK_HEADERS('utmp.h utmpx.h lastlog.h')
-> -@@ -434,20 +483,21 @@ def configure(conf):
-> +@@ -436,20 +485,21 @@ def configure(conf):
+> Dmitry Baryshkov (1):
+>        nss: fix cross-compilation error
 >
->       strlcpy_in_bsd = False
+> Joe Slater (1):
+>        phoronix-test-suite: fix CVE-2022-40704
 >
-> @@ -131,7 +134,7 @@ index 4c774d9..63c9967 100644
->  -
->  -    if not conf.CHECK_FUNCS('closefrom'):
->  -        conf.CHECK_FUNCS_IN('closefrom', 'bsd', headers='bsd/unistd.h')
-> -+    if Options.options.enable_libbsd:
-> ++    if Options.options.enable_libbsd:
->  +        # libbsd on some platforms provides strlcpy and strlcat
->  +        if not conf.CHECK_FUNCS('strlcpy strlcat'):
->  +            if conf.CHECK_FUNCS_IN('strlcpy strlcat', 'bsd', headers='bsd/string.h',
-> @@ -150,10 +153,10 @@ index 4c774d9..63c9967 100644
->       conf.CHECK_CODE('''
->                   struct ucred cred;
->  diff --git a/wscript b/wscript
-> -index 60bb7cf..7f14847 100644
-> +index 03076e6..ad40ac9 100644
->  --- a/wscript
->  +++ b/wscript
-> -@@ -40,6 +40,14 @@ def options(opt):
-> +@@ -40,6 +40,13 @@ def options(opt):
->                      help='disable new LMDB backend for LDB',
->                      action='store_true', dest='without_ldb_lmdb', default=False)
+> Khem Raj (1):
+>        net-snmp: Fix build with clang16
 >
-> @@ -163,11 +166,10 @@ index 60bb7cf..7f14847 100644
->  +    opt.add_option('--without-valgrind',
->  +                   help=("disable use of valgrind"),
->  +                   action="store_false", dest='enable_valgrind', default=False)
-> -+
->  +
+> Martin Jansa (2):
+>        exiv2: fix SRC_URI
+>        mdns: use git fetcher
 >
->   def configure(conf):
->       conf.RECURSE('lib/tdb')
->  --
-> -2.25.1
-> +2.34.1
+> Narpat Mali (1):
+>        net-snmp: CVE-2022-44792 & CVE-2022-44793 Fix NULL Pointer Exception
 >
-> diff --git a/meta-networking/recipes-support/libldb/libldb_2.6.1.bb b/meta-networking/recipes-support/libldb/libldb_2.7.1.bb
-> similarity index 95%
-> rename from meta-networking/recipes-support/libldb/libldb_2.6.1.bb
-> rename to meta-networking/recipes-support/libldb/libldb_2.7.1.bb
-> index 7c7701acc..473774b14 100644
-> --- a/meta-networking/recipes-support/libldb/libldb_2.6.1.bb
-> +++ b/meta-networking/recipes-support/libldb/libldb_2.7.1.bb
-> @@ -35,8 +35,7 @@ LIC_FILES_CHKSUM = "file://pyldb.h;endline=24;md5=dfbd238cecad76957f7f860fbe9ada
->                      file://man/ldb.3.xml;beginline=261;endline=262;md5=137f9fd61040c1505d1aa1019663fd08 \
->                      file://tools/ldbdump.c;endline=19;md5=a7d4fc5d1f75676b49df491575a86a42"
+> Randy MacLeod (2):
+>        python3-pillow: add ptest support
+>        python3-pillow: Add distutils, unixadmin for ptest
 >
-> -SRC_URI[md5sum] = "3a5f54f511fb237b83e1f34e2c7e25cd"
-> -SRC_URI[sha256sum] = "467403f77df86782c3965bb175440baa2ed751a9feb9560194bd8c06bf1736c9"
-> +SRC_URI[sha256sum] = "c4632c9a7f81f8a45ed46fc14d18eb507edf4e79f6e88d16977478ef95ed5b7f"
+> Wang Mingyu (5):
+>        python3-pillow: upgrade 9.2.0 -> 9.3.0
+>        python3-pillow: upgrade 9.3.0 -> 9.4.0
+>        apache2: upgrade 2.4.54 -> 2.4.55
+>        python3-django: upgrade 4.1 -> 4.1.3
+>        python3-django: upgrade 4.1.3 -> 4.1.6
 >
->  inherit pkgconfig waf-samba
+> Yi Zhao (1):
+>        freeradius: Security fixes for CVE-2022-41860 CVE-2022-41861
 >
-> --
-> 2.34.1
->
->
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#101130): https://lists.openembedded.org/g/openembedded-devel/message/101130
-> Mute This Topic: https://lists.openembedded.org/mt/97045080/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [raj.khem@gmail.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
+>   .../recipes-connectivity/freeradius/files/CVE-2022-41860.patch  | 118
+> +++++++++++++++++++
+>   .../recipes-connectivity/freeradius/files/CVE-2022-41861.patch  | 53
+> +++++++++
+>   .../recipes-connectivity/freeradius/freeradius_3.0.21.bb        | 2 +
+>   .../0001-Create-subroutine-for-cleaning-recent-interfaces.patch | 0
+>   .../{files => mdns}/0001-dns-sd-Include-missing-headers.patch |   0
+>   .../{files => mdns}/0001-mdns-include-stddef.h-for-NULL.patch |   0
+>   .../0002-Create-subroutine-for-tearing-down-an-interface.patch  | 0
+>   .../0002-mdns-cross-compilation-fixes-for-bitbake.patch         | 0
+>   .../{files => mdns}/0003-Track-interface-socket-family.patch |   0
+>   .../{files => mdns}/0004-Use-list-for-changed-interfaces.patch |   0
+>   .../mdns/{files => mdns}/0006-Remove-unneeded-function.patch |   0
+>   .../mdns/mdns/0006-make-Add-top-level-Makefile.patch            | 175
+> ++++++++++++++++++++++++++++
+>   .../0008-Mark-deleted-interfaces-as-being-changed.patch         | 0
+>   .../{files => mdns}/0009-Fix-possible-NULL-dereference.patch |   0
+>   .../{files => mdns}/0010-Handle-errors-from-socket-calls.patch |   0
+>   ...011-Change-a-dynamic-allocation-to-file-scope-variable.patch | 0
+>   .../recipes-protocols/mdns/{files => mdns}/mdns.service |   0
+>   meta-networking/recipes-protocols/mdns/mdns_1310.140.1.bb       | 44
+> ++++---
+>   .../0001-Add-noreturn-attribute-to-netsnmp_pci_error.patch      | 32 +++++
+>   .../net-snmp/net-snmp/CVE-2022-44792-CVE-2022-44793.patch       | 121
+> +++++++++++++++++++
+>   meta-networking/recipes-protocols/net-snmp/net-snmp_5.9.3.bb    | 2 +
+>   .../recipes-support/tinyproxy/tinyproxy/CVE-2022-40468.patch    | 33
+> ++++++
+>   meta-networking/recipes-support/tinyproxy/tinyproxy_1.11.1.bb   | 1 +
+>   .../phoronix-test-suite/files/CVE-2022-40704.patch              | 46
+> ++++++++
+>   .../phoronix-test-suite/phoronix-test-suite_10.8.4.bb           | 5 +-
+>   meta-oe/recipes-support/exiv2/exiv2_0.27.3.bb                   | 2 +-
+>   .../nss/nss/0001-nss-fix-support-cross-compiling.patch          | 7 +-
+>   .../python/{python3-django_4.1.bb => python3-django_4.1.6.bb} |   2 +-
+>   meta-python/recipes-devtools/python/python3-pillow/run-ptest    | 3 +
+>   .../python/{python3-pillow_9.2.0.bb => python3-pillow_9.4.0.bb} |  30
+> ++++-
+>   .../apache2/{apache2_2.4.54.bb => apache2_2.4.55.bb} |   2 +-
+>   31 files changed, 653 insertions(+), 25 deletions(-)
+>   create mode 100644
+> meta-networking/recipes-connectivity/freeradius/files/CVE-2022-41860.patch
+>   create mode 100644
+> meta-networking/recipes-connectivity/freeradius/files/CVE-2022-41861.patch
+>   rename meta-networking/recipes-protocols/mdns/{files =>
+> mdns}/0001-Create-subroutine-for-cleaning-recent-interfaces.patch (100%)
+>   rename meta-networking/recipes-protocols/mdns/{files =>
+> mdns}/0001-dns-sd-Include-missing-headers.patch (100%)
+>   rename meta-networking/recipes-protocols/mdns/{files =>
+> mdns}/0001-mdns-include-stddef.h-for-NULL.patch (100%)
+>   rename meta-networking/recipes-protocols/mdns/{files =>
+> mdns}/0002-Create-subroutine-for-tearing-down-an-interface.patch (100%)
+>   rename meta-networking/recipes-protocols/mdns/{files =>
+> mdns}/0002-mdns-cross-compilation-fixes-for-bitbake.patch (100%)
+>   rename meta-networking/recipes-protocols/mdns/{files =>
+> mdns}/0003-Track-interface-socket-family.patch (100%)
+>   rename meta-networking/recipes-protocols/mdns/{files =>
+> mdns}/0004-Use-list-for-changed-interfaces.patch (100%)
+>   rename meta-networking/recipes-protocols/mdns/{files =>
+> mdns}/0006-Remove-unneeded-function.patch (100%)
+>   create mode 100644
+> meta-networking/recipes-protocols/mdns/mdns/0006-make-Add-top-level-Makefile.patch
+>   rename meta-networking/recipes-protocols/mdns/{files =>
+> mdns}/0008-Mark-deleted-interfaces-as-being-changed.patch (100%)
+>   rename meta-networking/recipes-protocols/mdns/{files =>
+> mdns}/0009-Fix-possible-NULL-dereference.patch (100%)
+>   rename meta-networking/recipes-protocols/mdns/{files =>
+> mdns}/0010-Handle-errors-from-socket-calls.patch (100%)
+>   rename meta-networking/recipes-protocols/mdns/{files =>
+> mdns}/0011-Change-a-dynamic-allocation-to-file-scope-variable.patch (100%)
+>   rename meta-networking/recipes-protocols/mdns/{files =>
+> mdns}/mdns.service (100%)
+>   create mode 100644
+> meta-networking/recipes-protocols/net-snmp/net-snmp/0001-Add-noreturn-attribute-to-netsnmp_pci_error.patch
+>   create mode 100644
+> meta-networking/recipes-protocols/net-snmp/net-snmp/CVE-2022-44792-CVE-2022-44793.patch
+>   create mode 100644
+> meta-networking/recipes-support/tinyproxy/tinyproxy/CVE-2022-40468.patch
+>   create mode 100644
+> meta-oe/recipes-benchmark/phoronix-test-suite/files/CVE-2022-40704.patch
+>   rename meta-python/recipes-devtools/python/{python3-django_4.1.bb =>
+> python3-django_4.1.6.bb} (58%)
+>   create mode 100644
+> meta-python/recipes-devtools/python/python3-pillow/run-ptest
+>   rename meta-python/recipes-devtools/python/{python3-pillow_9.2.0.bb =>
+> python3-pillow_9.4.0.bb} (53%)
+>   rename meta-webserver/recipes-httpd/apache2/{apache2_2.4.54.bb =>
+> apache2_2.4.55.bb} (99%)
 >
 
