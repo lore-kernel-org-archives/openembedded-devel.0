@@ -2,149 +2,130 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C643AC636D7
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C539CC61DA4
 	for <webhook@archiver.kernel.org>; Sun, 19 Feb 2023 02:13:45 +0000 (UTC)
-Received: from mail-pj1-f52.google.com (mail-pj1-f52.google.com [209.85.216.52])
- by mx.groups.io with SMTP id smtpd.web11.25723.1676772822839869669
+Received: from mail-pj1-f48.google.com (mail-pj1-f48.google.com [209.85.216.48])
+ by mx.groups.io with SMTP id smtpd.web11.25722.1676772822388687679
  for <openembedded-devel@lists.openembedded.org>;
  Sat, 18 Feb 2023 18:13:42 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=Nx9gdlsk;
- spf=pass (domain: gmail.com, ip: 209.85.216.52, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f52.google.com with SMTP id gt5-20020a17090af2c500b00233d7314c1cso1716006pjb.5
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=Iif3N+s7;
+ spf=pass (domain: gmail.com, ip: 209.85.216.48, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f48.google.com with SMTP id nv10-20020a17090b1b4a00b00233ba727724so1494912pjb.1
         for <openembedded-devel@lists.openembedded.org>; Sat, 18 Feb 2023 18:13:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=BZZePvz2IRub1gk8NkWccZH6fyvLMPPEInujsZ9ymcw=;
-        b=Nx9gdlskP0dcCLwHHSI7Y1uYUsZyXmW58kp0rUZq/9Ckzd6mYPtYIDqguHQ6QS1qyi
-         YzYjbv7Qp/Nw8S8UKrHvyYgG+nGi+ENsdtsX+PF/TstjEXKeXp/M8npjJAEqXadS6dbS
-         kXBrkud3EUir5SI49XEWdplAQ6mG19ts+ETTNJQSlp0yspZP+09YGCbKPIvnVb1pV+HU
-         LiNf6BIVCGdW4H+g+xfHyLaCeWe6F48Tub9I1bTTyjh5NDcgRdW6I9pi4M/64dga0tpg
-         Px7pbLsWtQFDG1CLL6O9n84+wK/S0Wsra6t+Felw5fiEethob6uE62sQw2XYsGLQmlPW
-         eVaQ==
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=tbzEDjcDqX/V9156BBSVFxDPCyoYixdAWCh09x8hzsU=;
+        b=Iif3N+s7Ba/V3kBqwg/nAN0Bg8SYct60m6MgJg0fWvI1DJpOSl3RefsQqtBhlCHw+j
+         Hwsk1NpdNl0n6ylzeM+OEiRAliFc2h9yxuEhRHBJcjDlLWjSm0zkazxH+yXtlBE7ByR5
+         dwJ4zDetEsmg5V68ooyulYUinr9ESLURXtczA0X8//S85k5xUNdhBtpRuVKa1FgbSyyz
+         7V4/iD3vqLN+zP81c/JzjbIsIWE56TkQMQ5vIunX/eelBjW0NiDNmpTb4vJznEY5WrxY
+         eKywARR4PUXYJJRGNQbE73N8e7EmmxudaOaj8nUW/oKm4Os18T4XJf5OZTerGNdufYq1
+         8cqg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=BZZePvz2IRub1gk8NkWccZH6fyvLMPPEInujsZ9ymcw=;
-        b=sYt3/O5GqyKgyGpFNxdkABHrq0hXQJvv0Uxkqf9lP1Ekxf7ySxkKJXTOgJaUWz7KIM
-         PrtxKcMU6f5qvFT4a6vTRRfuGE5fS20KvEuzVMsqIwlz1AbE9AkU9o4x+4+GZ2trLQUq
-         FgZRq6FZQ1VdZmExL9A4ysyIhSn8CjvGn6DTcOaUZIy0BuBcIlx2qUzXEEOH4szJ25M2
-         qhL8GOviVwfGCGjqneQCd/3hoMOxOJplnNAb1YxE5AsaMkCIw3XR38XRt8XegMhSE42M
-         CWdJGl+kepKXba78eQM9ij3/GCLwBRme8HLcnDKT89DVgKYAx/CNfssV6P7q4qHFf+H7
-         H5/g==
-X-Gm-Message-State: AO0yUKVYSjkbBcGu1ViWzGA+aLkAvcCnL4LZGboQPU74l+otIqGXnx6h
-	ppk+fWUtt5a1JrJuo/w4M0RjFQU1zaw=
-X-Google-Smtp-Source: AK7set/drHzUFT6TjipxdEQ48ZEkSgoGmTFENTbnQre3sDDKNeRnZiYkn9njhj0KOOXlLhG+PwC9bg==
-X-Received: by 2002:a17:902:e5c4:b0:19a:b4f1:a847 with SMTP id u4-20020a170902e5c400b0019ab4f1a847mr2680883plf.8.1676772821897;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=tbzEDjcDqX/V9156BBSVFxDPCyoYixdAWCh09x8hzsU=;
+        b=lJ9xQmJ+ueLvcXqughLsmZ8MtAM2b3F9/lf06Aqgp7a5IJmRhCskBnou6/OuBiVa17
+         I7LjL/Fnmt9PG8imy8HwGWANsqKj7p/DVzQXLMbiw/8I37HsqqD62A2j/rJ8Gh/+JzWD
+         M38MGK8tqxBbU6jLRAz8Ub+OBKRCzM5+AwKc1vULFmEoUQ3WtZY8rH3R4NrO6EBlZSPQ
+         rAM5Y/OGTDCjPxyGiB8YJd0J8fYWY2f2QqJNrWs8/z9B5o2g/eVo1m0OcBSHv55Xx4Lt
+         KU5V/zE2pKjDxd23ly4I8CAeeAeQOPH3Z1HhWSyK8adeH8L9nQ5PrLUYaD8xxdWLNXJ5
+         WAhQ==
+X-Gm-Message-State: AO0yUKWzlQ58v6ewEViHMtBsFHdJXqoeVEBOG2O7X9sIYkEPsDxYzdC1
+	CwNQaQBQsQ6Bad+6FUMzsDFBTZHSurE=
+X-Google-Smtp-Source: AK7set8fLzLe7sjMU+LUW1ss+uD6dzZ9Perso6WORjWJ1g9FTE9Lfj4Or7MeqmHxqTolHAhPFmhlFg==
+X-Received: by 2002:a17:902:f98f:b0:196:790a:8bae with SMTP id ky15-20020a170902f98f00b00196790a8baemr24333plb.43.1676772821176;
         Sat, 18 Feb 2023 18:13:41 -0800 (PST)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9181:1cf0::112a])
-        by smtp.gmail.com with ESMTPSA id p22-20020a170902a41600b001966d94cb2esm701087plq.288.2023.02.18.18.13.41
+        by smtp.gmail.com with ESMTPSA id p22-20020a170902a41600b001966d94cb2esm701087plq.288.2023.02.18.18.13.40
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 18 Feb 2023 18:13:41 -0800 (PST)
+        Sat, 18 Feb 2023 18:13:40 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 2/2] liburing: Update to latest tip of tree
-Date: Sat, 18 Feb 2023 18:13:39 -0800
-Message-Id: <20230219021339.3157586-2-raj.khem@gmail.com>
+Subject: [meta-networking][PATCH 1/2] networkmanager: Fix build with musl
+Date: Sat, 18 Feb 2023 18:13:38 -0800
+Message-Id: <20230219021339.3157586-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.39.2
-In-Reply-To: <20230219021339.3157586-1-raj.khem@gmail.com>
-References: <20230219021339.3157586-1-raj.khem@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sun, 19 Feb 2023 02:13:45 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101150
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101149
 
-Add a patch to fix build on musl
+__assert_fail signature is assuming glibc which is fine for glibc
+systems but we have to consider musl case too.
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...-test-Remove-unused-linux-errqueue.h.patch | 47 +++++++++++++++++++
- .../recipes-support/liburing/liburing_2.3.bb  |  6 ++-
- 2 files changed, 51 insertions(+), 2 deletions(-)
- create mode 100644 meta-oe/recipes-support/liburing/liburing/0001-examples-test-Remove-unused-linux-errqueue.h.patch
+ ...just-signature-of-_nm_assert_fail_in.patch | 37 +++++++++++++++++++
+ .../networkmanager/networkmanager_1.42.0.bb   |  2 +
+ 2 files changed, 39 insertions(+)
+ create mode 100644 meta-networking/recipes-connectivity/networkmanager/networkmanager/0001-libnm-std-aux-Adjust-signature-of-_nm_assert_fail_in.patch
 
-diff --git a/meta-oe/recipes-support/liburing/liburing/0001-examples-test-Remove-unused-linux-errqueue.h.patch b/meta-oe/recipes-support/liburing/liburing/0001-examples-test-Remove-unused-linux-errqueue.h.patch
+diff --git a/meta-networking/recipes-connectivity/networkmanager/networkmanager/0001-libnm-std-aux-Adjust-signature-of-_nm_assert_fail_in.patch b/meta-networking/recipes-connectivity/networkmanager/networkmanager/0001-libnm-std-aux-Adjust-signature-of-_nm_assert_fail_in.patch
 new file mode 100644
-index 0000000000..21aaf8d991
+index 0000000000..6640bce173
 --- /dev/null
-+++ b/meta-oe/recipes-support/liburing/liburing/0001-examples-test-Remove-unused-linux-errqueue.h.patch
-@@ -0,0 +1,47 @@
-+From 0fbcc44fe1fb2dc6807660b2cff1c2995add095b Mon Sep 17 00:00:00 2001
++++ b/meta-networking/recipes-connectivity/networkmanager/networkmanager/0001-libnm-std-aux-Adjust-signature-of-_nm_assert_fail_in.patch
+@@ -0,0 +1,37 @@
++From 8c8b13768d22f39edfce38e123b740c43d7e31c4 Mon Sep 17 00:00:00 2001
 +From: Khem Raj <raj.khem@gmail.com>
-+Date: Sat, 18 Feb 2023 18:01:22 -0800
-+Subject: [PATCH] examples,test: Remove unused linux/errqueue.h
++Date: Sat, 18 Feb 2023 17:29:10 -0800
++Subject: [PATCH] libnm-std-aux: Adjust signature of _nm_assert_fail_internal
 +
-+This header is not needed therefore remove it, this cleanup also helps
-+compiling on musl/clang
++the LSB states __assert_fail is:
++const char*, const char*, unsigned int, const char*
++https://refspecs.linuxbase.org/LSB_5.0.0/LSB-Core-generic/LSB-Core-generic/baselib---assert-fail-1.html
 +
-+/usr/include/linux/errqueue.h:57:20: error: array has incomplete element typ
-+e 'struct timespec'
-+        struct timespec ts[3];
-+                          ^
++musl uses a signed int instead. however, this is ok:
++https://www.openwall.com/lists/musl/2019/03/04/6
 +
-+Upstream-Status: Submitted [https://github.com/axboe/liburing/pull/798]
++nevertheless, since the application redefines __assert_fail, we have to make
++the types match. (not upstreamable as the opposite breaks glibc)
++
++Upstream-Status: Inappropriate [musl specific]
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +---
-+ examples/send-zerocopy.c | 1 -
-+ test/send-zerocopy.c     | 1 -
-+ 2 files changed, 2 deletions(-)
++ src/libnm-std-aux/nm-std-aux.h | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
 +
-+diff --git a/examples/send-zerocopy.c b/examples/send-zerocopy.c
-+index 6092af9..cf1fa8b 100644
-+--- a/examples/send-zerocopy.c
-++++ b/examples/send-zerocopy.c
-+@@ -13,7 +13,6 @@
-+ #include <string.h>
-+ 
-+ #include <arpa/inet.h>
-+-#include <linux/errqueue.h>
-+ #include <linux/if_packet.h>
-+ #include <linux/ipv6.h>
-+ #include <linux/socket.h>
-+diff --git a/test/send-zerocopy.c b/test/send-zerocopy.c
-+index 86a31cd..5d578c6 100644
-+--- a/test/send-zerocopy.c
-++++ b/test/send-zerocopy.c
-+@@ -11,7 +11,6 @@
-+ #include <string.h>
-+ 
-+ #include <arpa/inet.h>
-+-#include <linux/errqueue.h>
-+ #include <linux/if_packet.h>
-+ #include <linux/ipv6.h>
-+ #include <linux/socket.h>
++diff --git a/src/libnm-std-aux/nm-std-aux.h b/src/libnm-std-aux/nm-std-aux.h
++index e556aa4..0756a7c 100644
++--- a/src/libnm-std-aux/nm-std-aux.h
+++++ b/src/libnm-std-aux/nm-std-aux.h
++@@ -230,7 +230,7 @@ typedef uint64_t _nm_bitwise nm_be64_t;
++ _nm_noreturn static inline void
++ _nm_assert_fail_internal(const char  *assertion,
++                          const char  *file,
++-                         unsigned int line,
+++                         int line,
++                          const char  *function)
++ {
++     __assert_fail("<dropped>", file, line, "<unknown-fcn>");
 +-- 
 +2.39.2
 +
-diff --git a/meta-oe/recipes-support/liburing/liburing_2.3.bb b/meta-oe/recipes-support/liburing/liburing_2.3.bb
-index b3da4d5e0e..ba9b7480ce 100644
---- a/meta-oe/recipes-support/liburing/liburing_2.3.bb
-+++ b/meta-oe/recipes-support/liburing/liburing_2.3.bb
-@@ -9,11 +9,13 @@ SECTION = "libs"
- LICENSE = "LGPL-2.1-only | MIT"
- LIC_FILES_CHKSUM = "file://README;beginline=41;endline=44;md5=2b0e9926530c269f5ae95560370195af"
+diff --git a/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.42.0.bb b/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.42.0.bb
+index 856afd7bc8..dabf9a1d36 100644
+--- a/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.42.0.bb
++++ b/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.42.0.bb
+@@ -30,6 +30,8 @@ SRC_URI = " \
+     file://enable-dhcpcd.conf \
+     file://enable-iwd.conf \
+ "
++SRC_URI:append:libc-musl = " file://0001-libnm-std-aux-Adjust-signature-of-_nm_assert_fail_in.patch"
++
+ SRC_URI[sha256sum] = "2f6756d507bb6b46716594b67e6fe7491891e1b5b167bbafc5157dfa7753d5b4"
  
--SRC_URI = "git://github.com/axboe/liburing.git;branch=master;protocol=https"
-+SRC_URI = "git://github.com/axboe/liburing.git;branch=master;protocol=https \
-+           file://0001-examples-test-Remove-unused-linux-errqueue.h.patch"
- SRC_URI:append:libc-musl:riscv64 = " file://0001-do-not-build-examples.patch "
- SRC_URI:append:libc-musl:riscv32 = " file://0001-do-not-build-examples.patch "
--SRCREV = "4915f2af869876d892a1f591ee2c21be21c6fc5c"
-+SRCREV = "f5cac78e621ab452d3035902085f66d2bf73243b"
- 
-+PV .= "+2.4+git${SRCPV}"
- S = "${WORKDIR}/git"
- 
- DEPENDS:append:libc-musl = " libucontext"
+ S = "${WORKDIR}/NetworkManager-${PV}"
 -- 
 2.39.2
 
