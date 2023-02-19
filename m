@@ -1,160 +1,192 @@
-Return-Path: <f_l_k@t-online.de>
+Return-Path: <marex@denx.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CDC12C05027
-	for <webhook@archiver.kernel.org>; Sun, 19 Feb 2023 05:46:06 +0000 (UTC)
-Received: from mailout05.t-online.de (mailout05.t-online.de [194.25.134.82])
- by mx.groups.io with SMTP id smtpd.web10.28235.1676785563878685719
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E8392C636CC
+	for <webhook@archiver.kernel.org>; Sun, 19 Feb 2023 20:11:10 +0000 (UTC)
+Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
+ by mx.groups.io with SMTP id smtpd.web10.4717.1676837462471598139
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 18 Feb 2023 21:46:04 -0800
+ Sun, 19 Feb 2023 12:11:04 -0800
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=SPF record not found (domain: t-online.de, ip: 194.25.134.82, mailfrom: f_l_k@t-online.de)
-Received: from fwd78.dcpf.telekom.de (fwd78.aul.t-online.de [10.223.144.104])
-	by mailout05.t-online.de (Postfix) with SMTP id E4BA5CE11
-	for <openembedded-devel@lists.openembedded.org>; Sun, 19 Feb 2023 06:46:01 +0100 (CET)
-Received: from flk-MS-7C91.fritz.box ([84.163.43.64]) by fwd78.t-online.de
-	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1pTcWP-0xSPeT0; Sun, 19 Feb 2023 06:46:01 +0100
-From: Markus Volk <f_l_k@t-online.de>
+ dkim=fail reason="body hash did not verify" header.i=@denx.de header.s=phobos-20191101 header.b=SaKgKcBU;
+ spf=pass (domain: denx.de, ip: 85.214.62.61, mailfrom: marex@denx.de)
+Received: from tr.lan (ip-86-49-120-218.bb.vodafone.cz [86.49.120.218])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+	(No client certificate requested)
+	(Authenticated sender: marex@denx.de)
+	by phobos.denx.de (Postfix) with ESMTPSA id 019BD81F59;
+	Sun, 19 Feb 2023 21:10:58 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1676837459;
+	bh=eSD0DthLiTeqG+Qf+zo7qW084BmEgsLuqTKQsJ6LrsY=;
+	h=From:To:Cc:Subject:Date:From;
+	b=SaKgKcBU6WkZgXukhSElva/JruyNY1EJuAg8D9KMWc7RP0rF1z9MCDjeyEqwo58t0
+	 jY0tFcG8IbTPYcpUVfu/Mget6HQKu7Pf1LoVD95Sh9AyVedG3BOB7ya8j/kdsNwDAm
+	 zvAtFcgfUeM7N5pxDtIGl06Iw9Dic1nVmICXZwTiDhOYNSI79TWEmvoP2kxwm0dhZY
+	 fKX2kjusaePQZX2drpk6C2g317oHbbphim+oTy32rFHcqYz9bayObilnxZ8lguebwX
+	 qOjqDRbfVBmil80bmJlrNEUmn5j3r/fngguyDPqM+9H+qkYAzf8fyqE1T/+7pdGP8+
+	 HytG51KV7sjCA==
+From: Marek Vasut <marex@denx.de>
 To: openembedded-devel@lists.openembedded.org
-Cc: Markus Volk <f_l_k@t-online.de>
-Subject: [meta-multimedia][PATCH] pipewire: update 0.3.65 -> 0.3.66
-Date: Sun, 19 Feb 2023 06:45:51 +0100
-Message-Id: <20230219054551.6765-1-f_l_k@t-online.de>
-X-Mailer: git-send-email 2.34.1
+Cc: Marek Vasut <marex@denx.de>,
+	Daniel Gomez <daniel@qtec.com>,
+	Khem Raj <raj.khem@gmail.com>,
+	Peter Kjellerstedt <pkj@axis.com>
+Subject: [meta-oe][PATCH] v4l-utils: Update 1.23.0+fd544473 -> 1.23.0+9431e4b2
+Date: Sun, 19 Feb 2023 21:10:53 +0100
+Message-Id: <20230219201053.86040-1-marex@denx.de>
+X-Mailer: git-send-email 2.39.1
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1676785561-DD34B4E4-28EE04DD/0/0 CLEAN NORMAL
-X-TOI-MSGID: 10e2a700-f814-433e-9083-e775fb6c14db
+X-Virus-Scanned: clamav-milter 0.103.6 at phobos.denx.de
+X-Virus-Status: Clean
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 19 Feb 2023 05:46:06 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101152
+ <openembedded-devel@lists.openembedded.org>; Sun, 19 Feb 2023 20:11:10 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101153
 
-This is a bugfix release that is API and ABI compatible with previous
-0.3.x releases.
+Update V4L2 utils to latest git HEAD and drop patches now upstream:
+575e0a9f ("media-info: Include missing <cstdint> for uintptr_t")
+96022d88 ("configure.ac, Makefile.am: Support building without NLS")
 
-  - Fix a regression in the pulseaudio module-combine-stream because the =
-new
-    module-combine-stream was not installed.
-  - PipeWire can now generate a limits.d config file with our recommended
-    settings for priorities and memlock.
-
-  - Avoid rate switches when the graph is idle.
-  - The rate selection algorithm was improved. This ensures minimal perfo=
-rmance
-    and quality loss when resampling.
-  - The default min.quantum was set to 32 again after it got erronously c=
-hanged
-    to (the too low) 16 in version 0.3.45.
-  - Fix compilation issues with rust bindings because of macros in define=
-s.
-    Work around it for now. (#2952)
-  - Invalid file mappings are now refused (#2617 #2914 #3007)
-  - Modules, exec and objects can now be loaded depending on conditions. =
-One
-    example is the X11-bell module that can now be disabled with a custom
-    property override.
-  - Filter now also supports _trigger_process() to drive the graph.
-  - TID is now added to the journald log.
-  - PipeWire generates and installs */etc/security/limits.d/25-pw-rlimits=
-.conf*
-    that by default contains project's recommended settings. Creation of =
-the
-    pipewire group is left to the distro or user ( `groupadd -r pipewire`=
- ).
-    See the rlimits-* Meson options for controlling this behavior.
-  - Additionally there is now by default disabled Meson option that will
-    install */etc/security/limits.d/20-pw-defaults.conf* with the current=
- Linux
-    default memlock value. Distros with only kernels >=3D5.16 or always u=
-sing
-    systemd v251 or newer do not need this. But all other builds should s=
-et the
-    `-Dpam-defaults-install=3Dtrue` Meson option to ensure that the memlo=
-ck value
-    is always large enough. Thanks to Rickie Schroeder for pointing out t=
-hat
-    the default Linux memlock value has been somewhat recently increased.
-
-  - Install module-combine-stream.
-  - RTP source now has support for custom channel names.
-  - RTP source will now stop when inactive.
-  - There is now
-  - Filter-chain has a new mysofa based spacializer plugin.
-  - The RTP modules can now use direct clock timestamps to send and recei=
-ve
-    packets. This makes it possible to synchronize sender and receiver wi=
-th
-    a PTP clock, for example.
-  - Filter-chain now has an invert plugin to invert the polarity of a
-    signal. (#3008)
-
-  - There is now an option to set the channels used for probing Pro Audio
-    devices. This could unlock more samplerates for some devices when the=
-y are
-    probed with fewer channels. (#2990)
-  - Support was added for other clocks than the MONOTONIC clock in the
-    driver nodes. This can be used to synchronize the graph to a PTP cloc=
-k,
-    for example.
-  - The ALSA source has some more headroom when rate matching to avoid
-    stuttering when following another driver.
-  - libcamera controls are now mapped to standard PipeWire property value=
-s.
-  - The channelmixer has seen some improvements. MONO and undefined chann=
-el
-    layouts are now upmixed and downmixed more correctly. (#3010)
-
-  - Many BAP support fixes.
-
-  - The gstreamer elements now support buffer video metadata so that stri=
-des
-    are correctly handled.
-  - pipewiresrc will now error out correctly in more cases. (#2935)
-
-  - The frame to/from time functions are improved to also work with negat=
-ive
-    time and frame offsets.
-
-Signed-off-by: Markus Volk <f_l_k@t-online.de>
+Signed-off-by: Marek Vasut <marex@denx.de>
 ---
- .../pipewire/{pipewire_0.3.65.bb =3D> pipewire_0.3.66.bb}       | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
- rename meta-multimedia/recipes-multimedia/pipewire/{pipewire_0.3.65.bb =3D=
-> pipewire_0.3.66.bb} (99%)
+Cc: Daniel Gomez <daniel@qtec.com>
+Cc: Khem Raj <raj.khem@gmail.com>
+Cc: Peter Kjellerstedt <pkj@axis.com>
+---
+ ...nclude-missing-cstdint-for-uintptr_t.patch | 31 -------------
+ ...efile.am-Support-building-without-NL.patch | 45 -------------------
+ .../v4l2apps/v4l-utils_1.23.0.bb              |  4 +-
+ 3 files changed, 1 insertion(+), 79 deletions(-)
+ delete mode 100644 meta-oe/recipes-multimedia/v4l2apps/v4l-utils/0001-me=
+dia-info-Include-missing-cstdint-for-uintptr_t.patch
+ delete mode 100644 meta-oe/recipes-multimedia/v4l2apps/v4l-utils/0005-co=
+nfigure.ac-Makefile.am-Support-building-without-NL.patch
 
-diff --git a/meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.65.=
-bb b/meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.66.bb
-similarity index 99%
-rename from meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.65.b=
-b
-rename to meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.66.bb
-index bb31c998d..a7c77463e 100644
---- a/meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.65.bb
-+++ b/meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.66.bb
-@@ -13,7 +13,7 @@ LIC_FILES_CHKSUM =3D " \
-=20
- DEPENDS =3D "dbus ncurses"
-=20
--SRCREV =3D "9558a5d5e0360d8af822431c76ee858a8c7495ac"
-+SRCREV =3D "08b0ed65765a1033424a5c0d897a392a61f8a2a3"
- SRC_URI =3D "git://gitlab.freedesktop.org/pipewire/pipewire.git;branch=3D=
-master;protocol=3Dhttps"
-=20
- S =3D "${WORKDIR}/git"
-@@ -256,6 +256,8 @@ FILES:${PN} =3D " \
-     ${systemd_user_unitdir} \
-     ${bindir}/pipewire \
-     ${bindir}/pipewire-avb \
-+    ${bindir}/pipewire-aes67 \
-+    ${sysconfdir}/security/limits.d \
+diff --git a/meta-oe/recipes-multimedia/v4l2apps/v4l-utils/0001-media-inf=
+o-Include-missing-cstdint-for-uintptr_t.patch b/meta-oe/recipes-multimedi=
+a/v4l2apps/v4l-utils/0001-media-info-Include-missing-cstdint-for-uintptr_=
+t.patch
+deleted file mode 100644
+index 032bf00c7..000000000
+--- a/meta-oe/recipes-multimedia/v4l2apps/v4l-utils/0001-media-info-Inclu=
+de-missing-cstdint-for-uintptr_t.patch
++++ /dev/null
+@@ -1,31 +0,0 @@
+-From 1d9ce7cd799770981043f656373cbd1bf7558b9a Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Thu, 26 Jan 2023 17:00:00 -0800
+-Subject: [PATCH] media-info: Include missing <cstdint> for uintptr_t
+-
+-gcc 13 moved some includes around and as a result <cstdint> is no longer
+-transitively included [1]. Explicitly include it.
+-
+-[1] https://gcc.gnu.org/gcc-13/porting_to.html#header-dep-changes
+-
+-Upstream-Status: Submitted [https://lore.kernel.org/linux-media/20230127=
+010741.3883339-1-raj.khem@gmail.com/]
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+- utils/common/media-info.cpp | 1 +
+- 1 file changed, 1 insertion(+)
+-
+-diff --git a/utils/common/media-info.cpp b/utils/common/media-info.cpp
+-index 53e132f5..1a25a4b6 100644
+---- a/utils/common/media-info.cpp
+-+++ b/utils/common/media-info.cpp
+-@@ -3,6 +3,7 @@
+-  * Copyright 2018 Cisco Systems, Inc. and/or its affiliates. All rights=
+ reserved.
+-  */
+-=20
+-+#include <cstdint>
+- #include <cstring>
+- #include <fstream>
+- #include <iostream>
+---=20
+-2.39.1
+-
+diff --git a/meta-oe/recipes-multimedia/v4l2apps/v4l-utils/0005-configure=
+.ac-Makefile.am-Support-building-without-NL.patch b/meta-oe/recipes-multi=
+media/v4l2apps/v4l-utils/0005-configure.ac-Makefile.am-Support-building-w=
+ithout-NL.patch
+deleted file mode 100644
+index 0548e4fba..000000000
+--- a/meta-oe/recipes-multimedia/v4l2apps/v4l-utils/0005-configure.ac-Mak=
+efile.am-Support-building-without-NL.patch
++++ /dev/null
+@@ -1,45 +0,0 @@
+-From 4fe9f6071cd24bcab157a9398adcca474f619f8d Mon Sep 17 00:00:00 2001
+-From: Peter Kjellerstedt <pkj@axis.com>
+-Date: Sat, 15 Oct 2022 02:45:26 +0200
+-Subject: [PATCH] configure.ac, Makefile.am: Support building without NLS
+-
+-Avoid entering the v4l-utils-po and libdvbv5-po directories if NLS
+-support is disabled, as the generated Makefiles in those directories are
+-empty then.
+-
+-Upstream-Status: Submitted [https://patchwork.linuxtv.org/project/linux-=
+media/patch/20221015010541.688322-1-pkj@axis.com/]
+-Signed-off-by: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
+----
+- Makefile.am  | 6 +++++-
+- configure.ac | 1 +
+- 2 files changed, 6 insertions(+), 1 deletion(-)
+-
+-diff --git a/Makefile.am b/Makefile.am
+-index 7fb443ab..8e924af8 100644
+---- a/Makefile.am
+-+++ b/Makefile.am
+-@@ -2,7 +2,11 @@ AUTOMAKE_OPTIONS =3D foreign
+- ACLOCAL_AMFLAGS =3D -I m4
+- AM_MAKEFLAGS =3D $(word 1, $(subst 1, -w, $(filter 1, $(V))) --no-print=
+-directory)
+-=20
+--SUBDIRS =3D v4l-utils-po libdvbv5-po lib
+-+SUBDIRS =3D lib
+-+
+-+if USE_NLS
+-+SUBDIRS +=3D v4l-utils-po libdvbv5-po
+-+endif
+-=20
+- if WITH_V4LUTILS
+- SUBDIRS +=3D utils contrib
+-diff --git a/configure.ac b/configure.ac
+-index 05298981..7c78467f 100644
+---- a/configure.ac
+-+++ b/configure.ac
+-@@ -99,6 +99,7 @@ DX_INIT_DOXYGEN($PACKAGE_NAME, doxygen_libdvbv5.cfg)
+- ALL_LINGUAS=3D""
+- m4_ifdef(AM_GNU_GETTEXT_REQUIRE_VERSION,[AM_GNU_GETTEXT_REQUIRE_VERSION=
+([0.19.8])],[AM_GNU_GETTEXT_VERSION([0.19.8])])
+- AM_GNU_GETTEXT([external])
+-+AM_CONDITIONAL([USE_NLS], [test "$USE_NLS" =3D "yes"])
+-=20
+- LIBDVBV5_DOMAIN=3D"libdvbv5"
+- AC_DEFINE([LIBDVBV5_DOMAIN], "libdvbv5", [libdvbv5 domain])
+diff --git a/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.23.0.bb b/me=
+ta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.23.0.bb
+index b42300f09..ad9ef2bab 100644
+--- a/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.23.0.bb
++++ b/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.23.0.bb
+@@ -31,11 +31,9 @@ SRC_URI =3D "\
+     file://0002-original-patch-mediactl-pkgconfig.patch \
+     file://0003-original-patch-export-mediactl-headers.patch \
+     file://0004-Do-not-use-getsubopt.patch \
+-    file://0005-configure.ac-Makefile.am-Support-building-without-NL.pat=
+ch \
+-    file://0001-media-info-Include-missing-cstdint-for-uintptr_t.patch \
  "
 =20
- RRECOMMENDS:${PN}:class-target +=3D " \
+-SRCREV =3D "fd544473800d02e90bc289434cc44e5aa8fadd0f"
++SRCREV =3D "9431e4b26b4842d1401e80ada9f14593dca3a94c"
+=20
+ S =3D "${WORKDIR}/git"
+ B =3D "${S}"
 --=20
-2.34.1
+2.39.1
 
 
