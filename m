@@ -1,249 +1,160 @@
-Return-Path: <alex.kiernan@gmail.com>
+Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9B8AEC05027
-	for <webhook@archiver.kernel.org>; Sun, 19 Feb 2023 05:20:36 +0000 (UTC)
-Received: from mail-wr1-f48.google.com (mail-wr1-f48.google.com [209.85.221.48])
- by mx.groups.io with SMTP id smtpd.web10.28058.1676784035778856167
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CDC12C05027
+	for <webhook@archiver.kernel.org>; Sun, 19 Feb 2023 05:46:06 +0000 (UTC)
+Received: from mailout05.t-online.de (mailout05.t-online.de [194.25.134.82])
+ by mx.groups.io with SMTP id smtpd.web10.28235.1676785563878685719
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 18 Feb 2023 21:20:36 -0800
+ Sat, 18 Feb 2023 21:46:04 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=jGTpD3lX;
- spf=pass (domain: gmail.com, ip: 209.85.221.48, mailfrom: alex.kiernan@gmail.com)
-Received: by mail-wr1-f48.google.com with SMTP id o5so1663084wri.6
-        for <openembedded-devel@lists.openembedded.org>; Sat, 18 Feb 2023 21:20:35 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=0UZfCOozkEWIt7vIKzla4QTuG0geW55nM4D3U9z2Vkk=;
-        b=jGTpD3lXYbpwkG/kjsU0hN5us+hb4HEoQDXabjIT/CvH+aAbq7ydqChVQcBXOLeiLT
-         Y+z0ZZ3p/EbhD32E8arPsKH5rf5mdQfmX3k5fKsN8EncOD8pcFJi9oNu7eZQKCBe+dxm
-         U87mfYpE0dBB8euCwwbih5wRatnoShaSc0KF9NViVS3FlfkpmBEIqkoqcr3co8r5UcOe
-         X1aOfzyoR5Y/vZcjGxrQ+U6HTD22gaJzLeXCaGUtUX/w2VTLmu8uk7k5MBs3ePHLUGDS
-         3SdDXBTERmlthNH+WWnUxkGocNgqckUzw+HWynWvEy7Cr3jSzAWsWIVIYIcJhjn/k/VT
-         fcWQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=0UZfCOozkEWIt7vIKzla4QTuG0geW55nM4D3U9z2Vkk=;
-        b=gJbkTsw/4HenNDaYfuDTz4OHTbX3lTs85k2SsLcdxmqA3MmYgqLtSRU6ORkklGKKgA
-         8csRI0z7nh+PsY4MCmqUJu7ShIVvs9kOsq5QcAE5v8ZQPq81CfzrzcGoLuzJSZEKkGNR
-         nNdR19Hc23mJo6g8M9SdcQ2Io8EJKvacqRdSsq6swXZF3hups2QJgi9oM5wcfjSqqQ+O
-         S/4xAYrnrXPRgQL0OdmZSGzRHQeAWOgAhWd8R/IrEl1wY490R9Z/f8dwmWtTetaUdX6s
-         i6B2wj5wpBIgV+yFP1QWQ/GGWbNjYvly34lp9GszilJFTV6rzMHMjKan2QJbA9AqeN3D
-         RaHQ==
-X-Gm-Message-State: AO0yUKXkQKOzJN4slXWC4f1ehAek5iLrMEc6/rOBO/NNOkc9xBqVR9EL
-	fHYmWyNP6/5pgMvYXRFZn7MlVYNz+68=
-X-Google-Smtp-Source: AK7set/U8euO50/vrJzJ8FP1xwv4qaFUUm0HGrBl3kM57ixUCqGoVhu6JjCn6dAS0AZnT4hZgI98Uw==
-X-Received: by 2002:a5d:6a42:0:b0:2c3:e5e6:f0d8 with SMTP id t2-20020a5d6a42000000b002c3e5e6f0d8mr666565wrw.11.1676784033669;
-        Sat, 18 Feb 2023 21:20:33 -0800 (PST)
-Received: from localhost.localdomain (cust18-dsl93-89-130.idnet.net. [93.89.130.18])
-        by smtp.gmail.com with ESMTPSA id a17-20020a056000101100b002c54911f50bsm2017252wrx.84.2023.02.18.21.20.32
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 18 Feb 2023 21:20:33 -0800 (PST)
-From: Alex Kiernan <alex.kiernan@gmail.com>
+ dkim=missing; spf=none, err=SPF record not found (domain: t-online.de, ip: 194.25.134.82, mailfrom: f_l_k@t-online.de)
+Received: from fwd78.dcpf.telekom.de (fwd78.aul.t-online.de [10.223.144.104])
+	by mailout05.t-online.de (Postfix) with SMTP id E4BA5CE11
+	for <openembedded-devel@lists.openembedded.org>; Sun, 19 Feb 2023 06:46:01 +0100 (CET)
+Received: from flk-MS-7C91.fritz.box ([84.163.43.64]) by fwd78.t-online.de
+	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
+	esmtp id 1pTcWP-0xSPeT0; Sun, 19 Feb 2023 06:46:01 +0100
+From: Markus Volk <f_l_k@t-online.de>
 To: openembedded-devel@lists.openembedded.org
-Cc: Alex Kiernan <alex.kiernan@gmail.com>
-Subject: [meta-oe][PATCH] ostree: Upgrade 2022.7 -> 2023.1
-Date: Sun, 19 Feb 2023 05:20:26 +0000
-Message-Id: <20230219052026.28589-1-alex.kiernan@gmail.com>
-X-Mailer: git-send-email 2.39.0
+Cc: Markus Volk <f_l_k@t-online.de>
+Subject: [meta-multimedia][PATCH] pipewire: update 0.3.65 -> 0.3.66
+Date: Sun, 19 Feb 2023 06:45:51 +0100
+Message-Id: <20230219054551.6765-1-f_l_k@t-online.de>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-TOI-EXPURGATEID: 150726::1676785561-DD34B4E4-28EE04DD/0/0 CLEAN NORMAL
+X-TOI-MSGID: 10e2a700-f814-433e-9083-e775fb6c14db
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 19 Feb 2023 05:20:36 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101151
+ <openembedded-devel@lists.openembedded.org>; Sun, 19 Feb 2023 05:46:06 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101152
 
-Drop upstreamed patches, switch to github-releases for upstream checks,
-update comments regarding making ptest pass as C.UTF-8 is default in
-glibc now.
+This is a bugfix release that is API and ABI compatible with previous
+0.3.x releases.
 
-Alex Kiernan (2):
-      lib/repo-checkout: Add ALLPERMS for musl
-      tests: Handle musl's ERANGE mapping
+  - Fix a regression in the pulseaudio module-combine-stream because the =
+new
+    module-combine-stream was not installed.
+  - PipeWire can now generate a limits.d config file with our recommended
+    settings for priorities and memlock.
 
-Benno Rice (1):
-      Replace the radix64 crate with base64
+  - Avoid rate switches when the graph is idle.
+  - The rate selection algorithm was improved. This ensures minimal perfo=
+rmance
+    and quality loss when resampling.
+  - The default min.quantum was set to 32 again after it got erronously c=
+hanged
+    to (the too low) 16 in version 0.3.45.
+  - Fix compilation issues with rust bindings because of macros in define=
+s.
+    Work around it for now. (#2952)
+  - Invalid file mappings are now refused (#2617 #2914 #3007)
+  - Modules, exec and objects can now be loaded depending on conditions. =
+One
+    example is the X11-bell module that can now be disabled with a custom
+    property override.
+  - Filter now also supports _trigger_process() to drive the graph.
+  - TID is now added to the journald log.
+  - PipeWire generates and installs */etc/security/limits.d/25-pw-rlimits=
+.conf*
+    that by default contains project's recommended settings. Creation of =
+the
+    pipewire group is left to the distro or user ( `groupadd -r pipewire`=
+ ).
+    See the rlimits-* Meson options for controlling this behavior.
+  - Additionally there is now by default disabled Meson option that will
+    install */etc/security/limits.d/20-pw-defaults.conf* with the current=
+ Linux
+    default memlock value. Distros with only kernels >=3D5.16 or always u=
+sing
+    systemd v251 or newer do not need this. But all other builds should s=
+et the
+    `-Dpam-defaults-install=3Dtrue` Meson option to ensure that the memlo=
+ck value
+    is always large enough. Thanks to Rickie Schroeder for pointing out t=
+hat
+    the default Linux memlock value has been somewhat recently increased.
 
-Colin Walters (5):
-      fetcher: Avoid too large queues for metadata processing
-      configure: post-release version bump
-      rust: Bump to 0.17
-      bindings: Consistently check for `dox` feature
-      Release 2023.1
+  - Install module-combine-stream.
+  - RTP source now has support for custom channel names.
+  - RTP source will now stop when inactive.
+  - There is now
+  - Filter-chain has a new mysofa based spacializer plugin.
+  - The RTP modules can now use direct clock timestamps to send and recei=
+ve
+    packets. This makes it possible to synchronize sender and receiver wi=
+th
+    a PTP clock, for example.
+  - Filter-chain now has an invert plugin to invert the polarity of a
+    signal. (#3008)
 
-Dan Nicholson (16):
-      tests/inst: Update hyper-staticfile to 0.9.4
-      Strip trailing whitespace on all C files
-      repo: Add API to regenerate and sign repo metadata
-      bin/summary: Use ostree_repo_regenerate_metadata
-      commit: Allow skipping automatic summary generation
-      repo: Create metadata commit in ostree_repo_regenerate_metadata
-      lib: Provide internal summary signing with separate directory
-      repo: Prevent publishing summary without matching signature
-      bin: Cleanup documentation of --cache-dir option
-      bin/refs: Sort listing
-      bin/refs: Add option to print revisions
-      bin/remote-refs: Add option to print revisions
-      bin/show: Add options to list metadata keys
-      ostree/dump: Add support for summary metadata keys
-      bin/summary: Add options to show metadata
-      bin/remote-summary: Add options to show metadata
+  - There is now an option to set the channels used for probing Pro Audio
+    devices. This could unlock more samplerates for some devices when the=
+y are
+    probed with fewer channels. (#2990)
+  - Support was added for other clocks than the MONOTONIC clock in the
+    driver nodes. This can be used to synchronize the graph to a PTP cloc=
+k,
+    for example.
+  - The ALSA source has some more headroom when rate matching to avoid
+    stuttering when following another driver.
+  - libcamera controls are now mapped to standard PipeWire property value=
+s.
+  - The channelmixer has seen some improvements. MONO and undefined chann=
+el
+    layouts are now upmixed and downmixed more correctly. (#3010)
 
-Eric Curtin (1):
-      bootloader: Add an aboot (Android) bootloader backend
+  - Many BAP support fixes.
 
-Jonathan Lebon (1):
-      ostree/prune: Calculate reachability under exclusive lock
+  - The gstreamer elements now support buffer video metadata so that stri=
+des
+    are correctly handled.
+  - pipewiresrc will now error out correctly in more cases. (#2935)
 
-Luca BRUNO (4):
-      lib: assert more invariants
-      configure: use pkg-config with newer gpgme and gpg-error
-      lib/repo: fix an 'unused-function' warning
-      lib/sysroot-upgrader: add some 'nullable' annotations
+  - The frame to/from time functions are improved to also work with negat=
+ive
+    time and frame offsets.
 
-Tareque Md Hanif (1):
-      docs: Fix link to ostree-rs
-
-Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
+Signed-off-by: Markus Volk <f_l_k@t-online.de>
 ---
+ .../pipewire/{pipewire_0.3.65.bb =3D> pipewire_0.3.66.bb}       | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+ rename meta-multimedia/recipes-multimedia/pipewire/{pipewire_0.3.65.bb =3D=
+> pipewire_0.3.66.bb} (99%)
 
- ...-repo-checkout-Add-ALLPERMS-for-musl.patch | 32 -------------------
- ...1-tests-Handle-musl-s-ERANGE-mapping.patch | 29 -----------------
- .../{ostree_2022.7.bb => ostree_2023.1.bb}    | 14 +++-----
- 3 files changed, 5 insertions(+), 70 deletions(-)
- delete mode 100644 meta-oe/recipes-extended/ostree/ostree/0001-lib-repo-checkout-Add-ALLPERMS-for-musl.patch
- delete mode 100644 meta-oe/recipes-extended/ostree/ostree/0001-tests-Handle-musl-s-ERANGE-mapping.patch
- rename meta-oe/recipes-extended/ostree/{ostree_2022.7.bb => ostree_2023.1.bb} (93%)
-
-diff --git a/meta-oe/recipes-extended/ostree/ostree/0001-lib-repo-checkout-Add-ALLPERMS-for-musl.patch b/meta-oe/recipes-extended/ostree/ostree/0001-lib-repo-checkout-Add-ALLPERMS-for-musl.patch
-deleted file mode 100644
-index 1502f1d4fd5e..000000000000
---- a/meta-oe/recipes-extended/ostree/ostree/0001-lib-repo-checkout-Add-ALLPERMS-for-musl.patch
-+++ /dev/null
-@@ -1,32 +0,0 @@
--From 6aef666a2911c15b31efeed08d89fe9997d89e04 Mon Sep 17 00:00:00 2001
--From: Alex Kiernan <alex.kiernan@gmail.com>
--Date: Sat, 31 Dec 2022 11:11:14 +0000
--Subject: [PATCH] lib/repo-checkout: Add ALLPERMS for musl
--
--ALLPERMS is glibc specific, add a definition for musl.
--
--Upstream-Status: Submitted [https://github.com/ostreedev/ostree/pull/2797]
--Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
-----
-- src/libostree/ostree-core-private.h | 5 +++++
-- 1 file changed, 5 insertions(+)
--
--diff --git a/src/libostree/ostree-core-private.h b/src/libostree/ostree-core-private.h
--index 2bd2f9848718..48b2b8ab307f 100644
----- a/src/libostree/ostree-core-private.h
--+++ b/src/libostree/ostree-core-private.h
--@@ -34,6 +34,11 @@ G_BEGIN_DECLS
-- #define DEFAULT_DIRECTORY_MODE 0775
-- #define DEFAULT_REGFILE_MODE 0660
-- 
--+/* This exists in glibc's sys/stat.h, but not on musl */
--+#ifndef ALLPERMS
--+#define ALLPERMS (S_ISUID|S_ISGID|S_ISVTX|S_IRWXU|S_IRWXG|S_IRWXO)
--+#endif
--+
-- /* This file contains private implementation data format definitions
--  * read by multiple implementation .c files.
--  */
---- 
--2.39.0
--
-diff --git a/meta-oe/recipes-extended/ostree/ostree/0001-tests-Handle-musl-s-ERANGE-mapping.patch b/meta-oe/recipes-extended/ostree/ostree/0001-tests-Handle-musl-s-ERANGE-mapping.patch
-deleted file mode 100644
-index d0a8447e3da4..000000000000
---- a/meta-oe/recipes-extended/ostree/ostree/0001-tests-Handle-musl-s-ERANGE-mapping.patch
-+++ /dev/null
-@@ -1,29 +0,0 @@
--From bd182584a1e2f820493d9db689598a20c5700ba5 Mon Sep 17 00:00:00 2001
--From: Alex Kiernan <alex.kiernan@gmail.com>
--Date: Mon, 2 Jan 2023 10:37:49 +0000
--Subject: [PATCH] tests: Handle musl's ERANGE mapping
--
--musl uses "Result not representable" for ERANGE, support this in
--addition to glibc's "Numerical result out of range".
--
--Upstream-Status: Backport [https://github.com/ostreedev/ostree/commit/2d4ee168d7eae0afcce356a3f8135294e6d7fe6f]
--Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
-----
-- tests/test-commit-timestamp.sh | 2 +-
-- 1 file changed, 1 insertion(+), 1 deletion(-)
--
--diff --git a/tests/test-commit-timestamp.sh b/tests/test-commit-timestamp.sh
--index 0688c63a4bdb..de105b768a9c 100755
----- a/tests/test-commit-timestamp.sh
--+++ b/tests/test-commit-timestamp.sh
--@@ -40,6 +40,6 @@ fi
-- ${CMD_PREFIX} ostree --repo=./testrepo show env > show-env.txt
-- rm -rf testrepo testrepo-files
-- assert_file_has_content_literal commit-invalid.txt 'Failed to convert SOURCE_DATE_EPOCH'
---assert_file_has_content_literal commit-overflowing.txt 'Parsing SOURCE_DATE_EPOCH: Numerical result out of range'
--+assert_file_has_content commit-overflowing.txt 'Parsing SOURCE_DATE_EPOCH: \(Numerical result out of range\|Result not representable\)'
-- assert_file_has_content_literal show-env.txt 'Date:  2009-02-13 23:31:30 +0000'
-- echo "ok commit with env timestamp"
---- 
--2.39.0
--
-diff --git a/meta-oe/recipes-extended/ostree/ostree_2022.7.bb b/meta-oe/recipes-extended/ostree/ostree_2023.1.bb
-similarity index 93%
-rename from meta-oe/recipes-extended/ostree/ostree_2022.7.bb
-rename to meta-oe/recipes-extended/ostree/ostree_2023.1.bb
-index 61e208b3b718..bd566e1c282a 100644
---- a/meta-oe/recipes-extended/ostree/ostree_2022.7.bb
-+++ b/meta-oe/recipes-extended/ostree/ostree_2023.1.bb
-@@ -17,19 +17,16 @@ DEPENDS = " \
-     bison-native \
+diff --git a/meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.65.=
+bb b/meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.66.bb
+similarity index 99%
+rename from meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.65.b=
+b
+rename to meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.66.bb
+index bb31c998d..a7c77463e 100644
+--- a/meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.65.bb
++++ b/meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.66.bb
+@@ -13,7 +13,7 @@ LIC_FILES_CHKSUM =3D " \
+=20
+ DEPENDS =3D "dbus ncurses"
+=20
+-SRCREV =3D "9558a5d5e0360d8af822431c76ee858a8c7495ac"
++SRCREV =3D "08b0ed65765a1033424a5c0d897a392a61f8a2a3"
+ SRC_URI =3D "git://gitlab.freedesktop.org/pipewire/pipewire.git;branch=3D=
+master;protocol=3Dhttps"
+=20
+ S =3D "${WORKDIR}/git"
+@@ -256,6 +256,8 @@ FILES:${PN} =3D " \
+     ${systemd_user_unitdir} \
+     ${bindir}/pipewire \
+     ${bindir}/pipewire-avb \
++    ${bindir}/pipewire-aes67 \
++    ${sysconfdir}/security/limits.d \
  "
- 
-+GITHUB_BASE_URI = "https://github.com/ostreedev/ostree/releases"
- SRC_URI = " \
--    https://github.com/ostreedev/ostree/releases/download/v${PV}/libostree-${PV}.tar.xz \
--    file://0001-lib-repo-checkout-Add-ALLPERMS-for-musl.patch \
--    file://0001-tests-Handle-musl-s-ERANGE-mapping.patch \
-+    ${GITHUB_BASE_URI}/download/v${PV}/libostree-${PV}.tar.xz \
-     file://run-ptest \
- "
--SRC_URI[sha256sum] = "8be2a9261c94e8b9ec4113380ffc480f8598245fb321a009bad4fae4b822411f"
--
--UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+\.\d+)"
-+SRC_URI[sha256sum] = "dd792b167693a1971c9f6e3168013d906ac035100ff6c719a3b322eb44b96f55"
- 
- S = "${WORKDIR}/libostree-${PV}"
- 
--inherit autotools bash-completion gobject-introspection gtk-doc manpages pkgconfig ptest-gnome systemd
-+inherit autotools bash-completion gobject-introspection github-releases gtk-doc manpages pkgconfig ptest-gnome systemd
- 
- # Workaround compile failure:
- # |../git/src/libotutil/zbase32.c:37:1: error: function returns an aggregate [-Werror=aggregate-return]
-@@ -183,7 +180,7 @@ RDEPENDS:${PN}:class-target = " \
- #   ostree-trivial-httpd (requires soup - note soup and curl can coexist)
- #   overlayfs in your kernel
- #   busybox built statically
--#   C.UTF-8 locale available
-+#   C.UTF-8 locale available (default)
- #   Sufficient disk space/RAM (e.g. core-image-sato-sdk)
- #
- # Something like this in your local.conf:
-@@ -191,7 +188,6 @@ RDEPENDS:${PN}:class-target = " \
- # PACKAGECONFIG:append:pn-ostree = " static soup"
- # KERNEL_EXTRA_FEATURES:append = " features/overlayfs/overlayfs.scc"
- # TARGET_CFLAGS:append:pn-busybox = " -static"
--# IMAGE_LINGUAS:append:libc-glibc = " c"
- #
- RDEPENDS:${PN}-ptest += " \
-     attr \
--- 
-2.39.0
+=20
+ RRECOMMENDS:${PN}:class-target +=3D " \
+--=20
+2.34.1
 
 
