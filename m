@@ -1,162 +1,164 @@
-Return-Path: <wangmy@fujitsu.com>
+Return-Path: <mingli.yu@eng.windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 485CFC636D6
-	for <webhook@archiver.kernel.org>; Mon, 20 Feb 2023 07:44:18 +0000 (UTC)
-Received: from mail1.bemta34.messagelabs.com (mail1.bemta34.messagelabs.com [195.245.231.2])
- by mx.groups.io with SMTP id smtpd.web10.7949.1676879048060531602
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DA11EC636CC
+	for <webhook@archiver.kernel.org>; Mon, 20 Feb 2023 09:01:28 +0000 (UTC)
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.web10.8714.1676883680129045610
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 19 Feb 2023 23:44:08 -0800
+ Mon, 20 Feb 2023 01:01:20 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=CdwUisSU;
- spf=pass (domain: fujitsu.com, ip: 195.245.231.2, mailfrom: wangmy@fujitsu.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1676879046; i=@fujitsu.com;
-	bh=/2iDv/srT3r3KVbkw2jPgG6l8gu7da5+NNtxNE63E5Y=;
-	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type;
-	b=CdwUisSUv8iOWFalm50PhLQoLdSTMtGFYluBgFzaBL7VLOYtDSqYTpW/q/h/iCXS4
-	 XToWkoiVRKElIcsfcMhCtjFLAh1Z3L1NsRV1trsEXA1mmEVyZJlCCOJPaIKIVhO0dg
-	 fLbJETbTQt+27l/zAtL69bj6mpEHdeH1lwHPOrfRBx5ldpe1G6Ou7MdCBgieDJjrV4
-	 fxdXlIC2velSsgTMbUeV8viGomhMsQxwA1SEPPG65TeHueK+xD2e1e8WEjPHANpmTk
-	 ruNjaguT3OW97PaxsV+AHgqfl84tBc+a2aS8+dQw/3zzJAArueXRg/j+vIOMwixx89
-	 ++voH/uv05jOw==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrOIsWRWlGSWpSXmKPExsViZ8ORqHtM5XO
-  ywdW9TBYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8alcz/YClbKVCxftZelgfGaZBcjJ4eQwBNG
-  if6p6l2MXED2DSaJE8taWSGcvYwSR77sYAOpYhOQkrhx/z+YLSKgL7F09h5mEJtZQEXixe8e9
-  i5GDg5hAXuJg0ctQcIsAqoSz7p/sILYvAJOEtsOtjCC2BICChJTHr4Ha+UUcJaYs+QZC8QRTh
-  KHm+9B1QtKnJz5hAVivITEwRcvmCF6FSVmX25mgbArJVo//IKy1SSuntvEPIFRcBaS9llI2hc
-  wMq1iNCtOLSpLLdI1NNNLKspMzyjJTczM0Uus0k3USy3VLU8tLtE10kssL9ZLLS7WK67MTc5J
-  0ctLLdnECAzdlGJ19x2MR/r+6h1ilORgUhLl3ST8OVmILyk/pTIjsTgjvqg0J7X4EKMMB4eSB
-  G+VIlBOsCg1PbUiLTMHGEcwaQkOHiURXmlpoDRvcUFibnFmOkTqFKMxx9UrV/Yyc2za13WAWY
-  glLz8vVUqcV0EZqFQApDSjNA9uECy+LzHKSgnzMjIwMAjxFKQW5WaWoMq/YhTnYFQS5j0Ocg9
-  PZl4J3L5XQKcwAZ3i/uMDyCkliQgpqQamwKt/v2zr0by7pHTDHsPpe5evyfaY8ujV6z23Avb5
-  q26qMZdTeewgftZsp2fo/JUxm8tOPHokVPm3nMXi0cxpTN+3+U1+38l8N1F0Unz/zhNBBdoay
-  19mS+xp1VtyIK7N9Eu0R5dTcYd7aumlMr6ziqcunOrOtv145mVeidi90q835k5QLJpoo7CKq8
-  yQdbuB+KEch0RB+/2/DJdGTtkt8OikYM9GafXnq1d/vK4ot3GB6ddZ25tlskXvzZ9hfLmH+dd
-  38bnmrywqGGdWace9ixLeuSBL6WnhfI51J766uS9/y6J79d+mN0yZ56oin/vuSWPVnv1I2VBA
-  dmnvCT9TVd1pu8VO7xBSdXLOWJFkrcRSnJFoqMVcVJwIACUCEFFqAwAA
-X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-9.tower-548.messagelabs.com!1676879045!187806!1
-X-Originating-IP: [62.60.8.97]
-X-SYMC-ESS-Client-Auth: outbound-route-from=pass
-X-StarScan-Received: 
-X-StarScan-Version: 9.102.2; banners=-,-,-
-X-VirusChecked: Checked
-Received: (qmail 31491 invoked from network); 20 Feb 2023 07:44:06 -0000
-Received: from unknown (HELO n03ukasimr01.n03.fujitsu.local) (62.60.8.97)
-  by server-9.tower-548.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 20 Feb 2023 07:44:06 -0000
-Received: from n03ukasimr01.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTP id BAA2E100182
-	for <openembedded-devel@lists.openembedded.org>; Mon, 20 Feb 2023 07:44:05 +0000 (GMT)
-Received: from R01UKEXCASM223.r01.fujitsu.local (R01UKEXCASM223 [10.182.185.121])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTPS id AE4D7100043
-	for <openembedded-devel@lists.openembedded.org>; Mon, 20 Feb 2023 07:44:05 +0000 (GMT)
-Received: from localhost.localdomain (10.167.225.33) by
- R01UKEXCASM223.r01.fujitsu.local (10.182.185.121) with Microsoft SMTP Server
- (TLS) id 15.0.1497.42; Mon, 20 Feb 2023 07:44:04 +0000
-From: <wangmy@fujitsu.com>
+ dkim=missing; spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=1415283ec8=mingli.yu@windriver.com)
+Received: from pps.filterd (m0250811.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 31K8OjYj002438
+	for <openembedded-devel@lists.openembedded.org>; Mon, 20 Feb 2023 09:01:19 GMT
+Received: from ala-exchng02.corp.ad.wrs.com (unknown-82-254.windriver.com [147.11.82.254])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3ntpd3sj96-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Mon, 20 Feb 2023 09:01:19 +0000
+Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
+ ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.18; Mon, 20 Feb 2023 01:01:15 -0800
+Received: from pek-lpg-core2.wrs.com (128.224.153.41) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
+ 15.1.2507.17 via Frontend Transport; Mon, 20 Feb 2023 01:01:15 -0800
+From: <mingli.yu@eng.windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-oe] [PATCH] uftrace: upgrade 0.13 -> 0.13.1
-Date: Mon, 20 Feb 2023 15:43:49 +0800
-Message-ID: <1676879030-15591-2-git-send-email-wangmy@fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
-In-Reply-To: <1676879030-15591-1-git-send-email-wangmy@fujitsu.com>
-References: <1676879030-15591-1-git-send-email-wangmy@fujitsu.com>
+Subject: [meta-oe][PATCH] opencv: disable intel IPP
+Date: Mon, 20 Feb 2023 17:01:14 +0800
+Message-ID: <20230220090114.575687-1-mingli.yu@eng.windriver.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-Originating-IP: [10.167.225.33]
-X-ClientProxiedBy: G08CNEXCHPEKD07.g08.fujitsu.local (10.167.33.80) To
- R01UKEXCASM223.r01.fujitsu.local (10.182.185.121)
-X-Virus-Scanned: ClamAV using ClamSMTP
+X-Proofpoint-GUID: 56Ri0wXD-tB2bifzASpN5Uf2-_EGhXHa
+X-Proofpoint-ORIG-GUID: 56Ri0wXD-tB2bifzASpN5Uf2-_EGhXHa
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.219,Aquarius:18.0.930,Hydra:6.0.562,FMLib:17.11.170.22
+ definitions=2023-02-20_05,2023-02-17_01,2023-02-09_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 suspectscore=0
+ impostorscore=0 priorityscore=1501 bulkscore=0 spamscore=0 malwarescore=0
+ mlxlogscore=999 clxscore=1011 lowpriorityscore=0 phishscore=0 adultscore=0
+ mlxscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.12.0-2212070000 definitions=main-2302200081
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 20 Feb 2023 07:44:18 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101165
+ <openembedded-devel@lists.openembedded.org>; Mon, 20 Feb 2023 09:01:28 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101167
 
-From: Wang Mingyu <wangmy@fujitsu.com>
+From: Mingli Yu <mingli.yu@windriver.com>
 
-0001-build-Fix-a-build-race-related-to-utils-mermaid.html.patch
-removed since it's included in 0.13.1
+The ipp related code has IP issue as below.
 
-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+=====================================================================
+ $ cat  tmp/work/corei7-64-wrs-linux/opencv/4.6.0-r0/git/ippicv_lnx/icv/include/ippicv.h | head -n 30
+ /*
+ // Copyright 2014-2019 Intel Corporation All Rights Reserved.
+ //
+ // The source code, information and material ("Material") contained herein is
+ // owned by Intel Corporation or its suppliers or licensors, and title
+ // to such Material remains with Intel Corporation or its suppliers or
+ // licensors. The Material contains proprietary information of Intel
+ // or its suppliers and licensors. The Material is protected by worldwide
+ // copyright laws and treaty provisions. No part of the Material may be used,
+ // copied, reproduced, modified, published, uploaded, posted, transmitted,
+ // distributed or disclosed in any way without Intel's prior express written
+ // permission. No license under any patent, copyright or other intellectual
+ // property rights in the Material is granted to or conferred upon you,
+ // either expressly, by implication, inducement, estoppel or otherwise.
+ // Any license under such intellectual property rights must be express and
+ // approved by Intel in writing.
+ //
+ // Unless otherwise agreed by Intel in writing,
+ // you may not remove or alter this notice or any other notice embedded in
+ // Materials by Intel or Intel's suppliers or licensors in any way.
+ //
+ */
+
+ #if !defined( __IPPICV_H__ )
+ #define __IPPICV_H__
+
+ #ifdef __cplusplus
+ extern "C" {
+ #endif
+=====================================================================
+
+So disable intel IPP [1] to avoid IP issue.
+
+[1] https://www.intel.com/content/www/us/en/developer/articles/troubleshooting/intel-integrated-performance-primitives-intel-ipp-open-source-computer-vision-library-opencv-faq.html
+
+Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
 ---
- ...d-race-related-to-utils-mermaid.html.patch | 38 -------------------
- .../{uftrace_0.13.bb => uftrace_0.13.1.bb}    |  6 +--
- 2 files changed, 2 insertions(+), 42 deletions(-)
- delete mode 100644 meta-oe/recipes-devtools/uftrace/uftrace/0001-build-Fix-a-build-race-related-to-utils-mermaid.html.patch
- rename meta-oe/recipes-devtools/uftrace/{uftrace_0.13.bb => uftrace_0.13.1.bb} (87%)
+ .../recipes-support/opencv/opencv_4.6.0.bb    | 25 +------------------
+ 1 file changed, 1 insertion(+), 24 deletions(-)
 
-diff --git a/meta-oe/recipes-devtools/uftrace/uftrace/0001-build-Fix-a-build-race-related-to-utils-mermaid.html.patch b/meta-oe/recipes-devtools/uftrace/uftrace/0001-build-Fix-a-build-race-related-to-utils-mermaid.html.patch
-deleted file mode 100644
-index 2cb4f26fb..000000000
---- a/meta-oe/recipes-devtools/uftrace/uftrace/0001-build-Fix-a-build-race-related-to-utils-mermaid.html.patch
-+++ /dev/null
-@@ -1,38 +0,0 @@
--From 1fa61d77fa7173744dd6dc9d3c4bb0aa783f5222 Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Sat, 21 Jan 2023 10:35:46 -0800
--Subject: [PATCH] build: Fix a build race related to utils/mermaid.html.cstr
--
--Sometimes build fails like below
--
--| /home/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/core2-64-poky-linux/uftrace/0.13-r0/git/cmds/dump.c: In function 'dump_mermaid_footer':
--| /home/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/core2-64-poky-linux/uftrace/0.13-r0/git/cmds/dump.c:1347:10: fatal error: utils/mermaid.html.cstr: No such file or directory
--|  1347 | #include "utils/mermaid.html.cstr" /* This file is a converted of mermaid.html to one string literal in build-time */
--|       |          ^~~~~~~~~~~~~~~~~~~~~~~~~
--| compilation terminated.
--| make[1]: *** [Makefile:310: /home/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/core2-64-poky-linux/uftrace/0.13-r0/build/cmds/dump.o] Error 1
--
--Create a dependency on c-str-conversion for dump.o
--
--Upstream-Status: Submitted [https://github.com/namhyung/uftrace/pull/1622]
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
-- Makefile | 2 ++
-- 1 file changed, 2 insertions(+)
--
--diff --git a/Makefile b/Makefile
--index 70dc12f0..bb2ac669 100644
----- a/Makefile
--+++ b/Makefile
--@@ -304,6 +304,8 @@ $(objdir)/misc/dbginfo.o: $(srcdir)/misc/dbginfo.c $(objdir)/version.h $(COMMON_
-- $(objdir)/misc/bench.o: $(srcdir)/misc/bench.c
-- 	$(QUIET_CC)$(CC) $(BENCH_CFLAGS) -c -o $@ $<
-- 
--+$(objdir)/cmds/dump.o: c-str-conversion
--+
-- $(UFTRACE_OBJS_VERSION): $(objdir)/version.h
-- 
-- $(filter-out $(objdir)/uftrace.o, $(UFTRACE_OBJS)): $(objdir)/%.o: $(srcdir)/%.c $(COMMON_DEPS)
---- 
--2.39.1
--
-diff --git a/meta-oe/recipes-devtools/uftrace/uftrace_0.13.bb b/meta-oe/recipes-devtools/uftrace/uftrace_0.13.1.bb
-similarity index 87%
-rename from meta-oe/recipes-devtools/uftrace/uftrace_0.13.bb
-rename to meta-oe/recipes-devtools/uftrace/uftrace_0.13.1.bb
-index 130242098..4e1edc6ce 100644
---- a/meta-oe/recipes-devtools/uftrace/uftrace_0.13.bb
-+++ b/meta-oe/recipes-devtools/uftrace/uftrace_0.13.1.bb
-@@ -10,10 +10,8 @@ DEPENDS:append:libc-musl = " argp-standalone"
+diff --git a/meta-oe/recipes-support/opencv/opencv_4.6.0.bb b/meta-oe/recipes-support/opencv/opencv_4.6.0.bb
+index fcbafd78a..1e4c3545b 100644
+--- a/meta-oe/recipes-support/opencv/opencv_4.6.0.bb
++++ b/meta-oe/recipes-support/opencv/opencv_4.6.0.bb
+@@ -12,40 +12,19 @@ DEPENDS = "libtool swig-native bzip2 zlib glib-2.0 libwebp"
  
- inherit autotools
+ SRCREV_opencv = "b0dc474160e389b9c9045da5db49d03ae17c6a6b"
+ SRCREV_contrib = "7b77c355a8fdc97667b3fa1e7a0d37e4973fc868"
+-SRCREV_ipp = "a56b6ac6f030c312b2dce17430eef13aed9af274"
+ SRCREV_boostdesc = "34e4206aef44d50e6bbcd0ab06354b52e7466d26"
+ SRCREV_vgg = "fccf7cd6a4b12079f73bbfb21745f9babcd4eb1d"
+ SRCREV_face = "8afa57abc8229d611c4937165d20e2a2d9fc5a12"
+ SRCREV_wechat-qrcode = "a8b69ccc738421293254aec5ddb38bd523503252"
  
--SRCREV = "53ec12d40701cf73ddcf5db8cff63b54736d0eda"
--SRC_URI = "git://github.com/namhyung/${BPN};branch=master;protocol=https \
--           file://0001-build-Fix-a-build-race-related-to-utils-mermaid.html.patch \
--           "
-+SRCREV = "be3f46f7656bd9243b1835337b5350247b030b02"
-+SRC_URI = "git://github.com/namhyung/${BPN};branch=master;protocol=https"
- S = "${WORKDIR}/git"
+-def ipp_filename(d):
+-    import re
+-    arch = d.getVar('TARGET_ARCH')
+-    if re.match("i.86$", arch):
+-        return "ippicv_2020_lnx_ia32_20191018_general.tgz"
+-    else:
+-        return "ippicv_2020_lnx_intel64_20191018_general.tgz"
+-
+-def ipp_md5sum(d):
+-    import re
+-    arch = d.getVar('TARGET_ARCH')
+-    if re.match("i.86$", arch):
+-        return "ad189a940fb60eb71f291321322fe3e8"
+-    else:
+-        return "7421de0095c7a39162ae13a6098782f9"
+-
+-IPP_FILENAME = "${@ipp_filename(d)}"
+-IPP_MD5 = "${@ipp_md5sum(d)}"
  
- LDFLAGS:append:libc-musl = " -largp"
+ SRCREV_FORMAT = "opencv_contrib_ipp_boostdesc_vgg"
+ SRC_URI = "git://github.com/opencv/opencv.git;name=opencv;branch=master;protocol=https \
+            git://github.com/opencv/opencv_contrib.git;destsuffix=git/contrib;name=contrib;branch=master;protocol=https \
+-           git://github.com/opencv/opencv_3rdparty.git;branch=ippicv/master_20191018;destsuffix=git/ipp;name=ipp;protocol=https \
+            git://github.com/opencv/opencv_3rdparty.git;branch=contrib_xfeatures2d_boostdesc_20161012;destsuffix=git/boostdesc;name=boostdesc;protocol=https \
+            git://github.com/opencv/opencv_3rdparty.git;branch=contrib_xfeatures2d_vgg_20160317;destsuffix=git/vgg;name=vgg;protocol=https \
+            git://github.com/opencv/opencv_3rdparty.git;branch=contrib_face_alignment_20170818;destsuffix=git/face;name=face;protocol=https \
+            git://github.com/WeChatCV/opencv_3rdparty.git;branch=wechat_qrcode;destsuffix=git/wechat_qrcode;name=wechat-qrcode;protocol=https \
+-           file://0001-3rdparty-ippicv-Use-pre-downloaded-ipp.patch \
+            file://0003-To-fix-errors-as-following.patch \
+            file://0001-Temporarliy-work-around-deprecated-ffmpeg-RAW-functi.patch \
+            file://0001-Dont-use-isystem.patch \
+@@ -63,7 +42,6 @@ S = "${WORKDIR}/git"
+ OPENCV_DLDIR = "${WORKDIR}/downloads"
+ 
+ do_unpack_extra() {
+-    tar xzf ${S}/ipp/ippicv/${IPP_FILENAME} -C ${S}
+ 
+     md5() {
+         # Return the MD5 of $1
+@@ -92,8 +70,7 @@ EXTRA_OECMAKE = "-DOPENCV_EXTRA_MODULES_PATH=${S}/contrib/modules \
+     -DWITH_1394=OFF \
+     -DENABLE_PRECOMPILED_HEADERS=OFF \
+     -DCMAKE_SKIP_RPATH=ON \
+-    -DOPENCV_ICV_HASH=${IPP_MD5} \
+-    -DIPPROOT=${S}/ippicv_lnx \
++    -DWITH_IPP=OFF \
+     -DOPENCV_GENERATE_PKGCONFIG=ON \
+     -DOPENCV_DOWNLOAD_PATH=${OPENCV_DLDIR} \
+     -DOPENCV_ALLOW_DOWNLOADS=OFF \
 -- 
-2.34.1
+2.25.1
 
 
