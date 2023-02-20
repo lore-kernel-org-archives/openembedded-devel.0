@@ -2,67 +2,71 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 60C63C05027
-	for <webhook@archiver.kernel.org>; Mon, 20 Feb 2023 07:44:08 +0000 (UTC)
-Received: from mail1.bemta32.messagelabs.com (mail1.bemta32.messagelabs.com [195.245.230.1])
- by mx.groups.io with SMTP id smtpd.web11.8133.1676879045643029986
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4859DC05027
+	for <webhook@archiver.kernel.org>; Mon, 20 Feb 2023 07:44:18 +0000 (UTC)
+Received: from mail3.bemta32.messagelabs.com (mail3.bemta32.messagelabs.com [195.245.230.82])
+ by mx.groups.io with SMTP id smtpd.web10.7950.1676879051034512239
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 19 Feb 2023 23:44:06 -0800
+ Sun, 19 Feb 2023 23:44:11 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=dWvCRfLb;
- spf=pass (domain: fujitsu.com, ip: 195.245.230.1, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=jdABw9PP;
+ spf=pass (domain: fujitsu.com, ip: 195.245.230.82, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1676879044; i=@fujitsu.com;
-	bh=3Hcq6/0O3x2gZkGN7tMYwSAYiiITiU6Qdvp2v6huM0E=;
-	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=dWvCRfLbiINwyul97Nqum4qGRyIb+D7xuoWkq8odC0B0JvnPNmwkvmeV0uLZ0vRlI
-	 uq37Kgv94n+Kuitfkx8TB49MDx8f5NkunKTwrg1bQ1qo3VxzatIfnHfqg3AtWXd3Ka
-	 pD9vgyLlslclCduA69utSS1v+2U3xp9emxt5kOtCle8bG4woEpDTNqR6pJZS+cMedz
-	 mpIB5Zcy3RQgDTZiMJrxyqmws3rkwGtmWrD8Cu5gWNfVnNf9m+xCshJ4YUsIwnrGn2
-	 oDUQuBzrarz7Wy7FgPssz4ymkbm6cqX4pORbx42PCUFSWLyzeLwhvJfDsmeH/0qMSw
-	 qJDPBhyGOcoYg==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFlrHIsWRWlGSWpSXmKPExsViZ8MxSfewyud
-  kgycrdCwuHl7K7MDocW7jCsYAxijWzLyk/IoE1oyNPSeZC+5wVnR0nWNtYGzg7GLk4hASeMIo
-  cejzYjYI5waTRM+v16wQzl6gTOtPpi5GTg42ASmJG/f/s4HYIgL6Ektn72EGsZkFVCRe/O5hB
-  7GFBRwkbvUeAbNZBFQlPs/7C2bzCjhJrJ46FcyWEFCQmPLwPTNEXFDi5MwnLBBzJCQOvnjBDF
-  GjKDH7cjMLhF0p0frhF5StJnH13CbmCYz8s5C0z0LSvoCRaRWjaXFqUVlqka6lXlJRZnpGSW5
-  iZo5eYpVuol5qqW55anGJrqFeYnmxXmpxsV5xZW5yTopeXmrJJkZgMKYUszrtYDze91fvEKMk
-  B5OSKO8m4c/JQnxJ+SmVGYnFGfFFpTmpxYcYZTg4lCR4qxSBcoJFqempFWmZOcDIgElLcPAoi
-  fBKSwOleYsLEnOLM9MhUqcYFaXEeRWUgRICIImM0jy4Nlg0XmKUlRLmZWRgYBDiKUgtys0sQZ
-  V/xSjOwagkzHscZDtPZl4J3PRXQIuZgBa7//gAsrgkESEl1cBUNHmp25t/Qjc/CCTKs82vuG4
-  t+77i/WnrmuginXO5JdJRKqvfPv73rmSy5fx1jf97D/VyZgt/nBN7ft1b6XWCkjtWv/7IfVle
-  0fbcRgdZnhlecm3mXy37jphcPzWlqzr/svCD0hifyueKLQplnsu+MuludnyWOetm45Olx9pbx
-  ZbMUPtz8sj2FUmeHHzW/T576qdKWvXVmOnsOPnvs79Vsgn3zVsH9x3iyGM8XJx+dd4FhxnHZx
-  3fUPpioXlH2Knqhsf97RlODhVbT124tIrhx02ZPbLTZKflyjyV3FjCY6zyTfWGFPeeKsNMvdL
-  XRXJdu2KX/j58zN6eXzTers6qQpPR5mez+f2UnTNsCx8rsRRnJBpqMRcVJwIAhQ78G0EDAAA=
+	s=170520fj; t=1676879049; i=@fujitsu.com;
+	bh=S3n766YUUnhPsn9Llf9Wzv6XqxLyPRjED0TC26CfHCM=;
+	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type;
+	b=jdABw9PPCaCjCKk7wHKB3g6YdYKjZjWQR0HYo6hueIabxsp6ud0d4m4cr8BCOaJZe
+	 1l/GYJ+KXPBWI+d5KWtjusq+Ev6PZ56dWU8Ki554e7zTXZsQCeu32MBIXEJlZluU+7
+	 zlYkEI3whSfsLdQKW+JuJpSfOQ2DbAeXSUHmfzJX6P5CRjzawh+F5P5+hfloQPJzMx
+	 BEhhHV0ElNJINIsFfryC4+8IPX1n2VvuCS4k2SWBqvEhm4yFlnhldq444FBVAT8Iei
+	 +4+h9f02r6vSQzZxQyPF1jSsXSTl34aYJl+IT5OQDmkFM6uqw3UVyov/K7bCzeYwvW
+	 JTaO58YlQW/SQ==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrGIsWRWlGSWpSXmKPExsViZ8OxWfeEyud
+  kg+52eYuLh5cyOzB6nNu4gjGAMYo1My8pvyKBNePX7162gkmcFZ131jI1MC7i6GLk5BASeMgo
+  Ma29rouRC8i+wiRxafZdFghnL6PEz7VH2UCq2ASkJG7c/w9miwjoSyydvYcZxGYWUJF48buHH
+  cQWFrCT+PrnBCOIzSKgKrHm1XoWEJtXwEni+61/YL0SAgoSUx6+B+vlFHCWmLPkGQvEFU4Sh5
+  vvsULUC0qcnPmEBWK+hMTBFy+YIXoVJWZfbmaBsCslWj/8grLVJK6e28Q8gVFwFpL2WUjaFzA
+  yrWI0K04tKkst0jU00EsqykzPKMlNzMzRS6zSTdRLLdUtTy0u0TXUSywv1kstLtYrrsxNzknR
+  y0st2cQIDN6UYsbkHYxX+/7qHWKU5GBSEuXdJPw5WYgvKT+lMiOxOCO+qDQntfgQowwHh5IEb
+  5UiUE6wKDU9tSItMwcYSTBpCQ4eJRFeaWmgNG9xQWJucWY6ROoUo6KUOK+CMlBCACSRUZoH1w
+  aL3kuMslLCvIwMDAxCPAWpRbmZJajyrxjFORiVhHmPg2znycwrgZv+CmgxE9Bi9x8fQBaXJCK
+  kpBqY5B8ftZ6Q8OzUpCjzm1vDltyU/F4qbDdrwbLAD97z/pidC2u72NU41/bqRIGC/bXXOH0l
+  yqp//177iTMm8N2zaZpbuWOLNvN3Tr2V+a9h0cE7moEyzEtZt1dqPgs4E1d6YoYOT+QUvvdz1
+  789/tLnmWniQ2fNi0tPLPB+I3bkkLTpfPvL3zlPzAs7qlC8JWShbALzfLsDOu1SL/pnz+Ut8j
+  qc/duwxTF5SbF3xsXyZy4Myf1fli4/uJvBmUVj1Y4Hkvv6rCecUlwcP2HWLK8rPHKv+5Z6WIm
+  xLNyw7bpjuf+y421ZWoxfHlwq39+Q+PH8k83PfKN7LRc4rWlZoZhm5T9fTdHBZcXjwJNsIUcq
+  2ZVYijMSDbWYi4oTAftnDMlZAwAA
 X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-11.tower-591.messagelabs.com!1676879043!324712!1
-X-Originating-IP: [62.60.8.146]
+X-Msg-Ref: server-8.tower-585.messagelabs.com!1676879048!163597!1
+X-Originating-IP: [62.60.8.179]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.102.2; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 18902 invoked from network); 20 Feb 2023 07:44:03 -0000
-Received: from unknown (HELO n03ukasimr02.n03.fujitsu.local) (62.60.8.146)
-  by server-11.tower-591.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 20 Feb 2023 07:44:03 -0000
-Received: from n03ukasimr02.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTP id 591071000D2
-	for <openembedded-devel@lists.openembedded.org>; Mon, 20 Feb 2023 07:44:03 +0000 (GMT)
+Received: (qmail 18624 invoked from network); 20 Feb 2023 07:44:08 -0000
+Received: from unknown (HELO n03ukasimr04.n03.fujitsu.local) (62.60.8.179)
+  by server-8.tower-585.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 20 Feb 2023 07:44:08 -0000
+Received: from n03ukasimr04.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTP id 2C758154
+	for <openembedded-devel@lists.openembedded.org>; Mon, 20 Feb 2023 07:44:08 +0000 (GMT)
 Received: from R01UKEXCASM223.r01.fujitsu.local (R01UKEXCASM223 [10.182.185.121])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTPS id 4DA3F1000C1
-	for <openembedded-devel@lists.openembedded.org>; Mon, 20 Feb 2023 07:44:03 +0000 (GMT)
+	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTPS id 137EA7B
+	for <openembedded-devel@lists.openembedded.org>; Mon, 20 Feb 2023 07:44:08 +0000 (GMT)
 Received: from localhost.localdomain (10.167.225.33) by
  R01UKEXCASM223.r01.fujitsu.local (10.182.185.121) with Microsoft SMTP Server
- (TLS) id 15.0.1497.42; Mon, 20 Feb 2023 07:44:01 +0000
+ (TLS) id 15.0.1497.42; Mon, 20 Feb 2023 07:44:06 +0000
 From: <wangmy@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-oe] [PATCH] uchardet: upgrade 0.0.7 -> 0.0.8
-Date: Mon, 20 Feb 2023 15:43:48 +0800
-Message-ID: <1676879030-15591-1-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH] zabbix: upgrade 6.2.6 -> 6.2.7
+Date: Mon, 20 Feb 2023 15:43:50 +0800
+Message-ID: <1676879030-15591-3-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
+In-Reply-To: <1676879030-15591-1-git-send-email-wangmy@fujitsu.com>
+References: <1676879030-15591-1-git-send-email-wangmy@fujitsu.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-Originating-IP: [10.167.225.33]
@@ -72,33 +76,33 @@ X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 20 Feb 2023 07:44:08 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101164
+ <openembedded-devel@lists.openembedded.org>; Mon, 20 Feb 2023 07:44:18 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101166
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../uchardet/{uchardet_0.0.7.bb => uchardet_0.0.8.bb}        | 5 ++---
- 1 file changed, 2 insertions(+), 3 deletions(-)
- rename meta-oe/recipes-support/uchardet/{uchardet_0.0.7.bb => uchardet_0.0.8.bb} (57%)
+ .../zabbix/{zabbix_6.2.6.bb => zabbix_6.2.7.bb}                 | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-connectivity/zabbix/{zabbix_6.2.6.bb => zabbix_6.2.7.bb} (96%)
 
-diff --git a/meta-oe/recipes-support/uchardet/uchardet_0.0.7.bb b/meta-oe/recipes-support/uchardet/uchardet_0.0.8.bb
-similarity index 57%
-rename from meta-oe/recipes-support/uchardet/uchardet_0.0.7.bb
-rename to meta-oe/recipes-support/uchardet/uchardet_0.0.8.bb
-index 9087c8b29..3e164cc26 100644
---- a/meta-oe/recipes-support/uchardet/uchardet_0.0.7.bb
-+++ b/meta-oe/recipes-support/uchardet/uchardet_0.0.8.bb
-@@ -4,6 +4,5 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=6ecda54f6f525388d71d6b3cd92f7474"
+diff --git a/meta-oe/recipes-connectivity/zabbix/zabbix_6.2.6.bb b/meta-oe/recipes-connectivity/zabbix/zabbix_6.2.7.bb
+similarity index 96%
+rename from meta-oe/recipes-connectivity/zabbix/zabbix_6.2.6.bb
+rename to meta-oe/recipes-connectivity/zabbix/zabbix_6.2.7.bb
+index bafde3134..8708852ce 100644
+--- a/meta-oe/recipes-connectivity/zabbix/zabbix_6.2.6.bb
++++ b/meta-oe/recipes-connectivity/zabbix/zabbix_6.2.7.bb
+@@ -28,7 +28,7 @@ SRC_URI = "https://cdn.zabbix.com/zabbix/sources/stable/6.2/${BPN}-${PV}.tar.gz
+     file://0001-initialize-msghdr-portably.patch \
+     file://zabbix-agent.service \
+ "
+-SRC_URI[sha256sum] = "ae40c8cd4b24159466a7483e65f85836a8c963a0bc394a3dd890142aaf30ac17"
++SRC_URI[sha256sum] = "6d423810667b948ed22052d9aa84a035e2d4b92cbe8efdb669cac529806b722d"
  
- inherit cmake
+ inherit autotools-brokensep linux-kernel-base pkgconfig systemd useradd
  
--SRC_URI = "https://www.freedesktop.org/software/uchardet/releases/uchardet-0.0.7.tar.xz"
--SRC_URI[md5sum] = "623406dac5c5ad89e40eedd7f279efae"
--SRC_URI[sha256sum] = "3fc79408ae1d84b406922fa9319ce005631c95ca0f34b205fad867e8b30e45b1"
-+SRC_URI = "https://www.freedesktop.org/software/uchardet/releases/uchardet-0.0.8.tar.xz"
-+SRC_URI[sha256sum] = "e97a60cfc00a1c147a674b097bb1422abd9fa78a2d9ce3f3fdcc2e78a34ac5f0"
 -- 
 2.34.1
 
