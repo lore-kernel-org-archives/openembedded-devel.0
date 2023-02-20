@@ -2,99 +2,90 @@ Return-Path: <Martin.Jansa@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0EE8EC64ED9
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0FD49C677F1
 	for <webhook@archiver.kernel.org>; Mon, 20 Feb 2023 16:24:41 +0000 (UTC)
-Received: from mail-ed1-f41.google.com (mail-ed1-f41.google.com [209.85.208.41])
- by mx.groups.io with SMTP id smtpd.web10.17426.1676910274259805162
+Received: from mail-ed1-f51.google.com (mail-ed1-f51.google.com [209.85.208.51])
+ by mx.groups.io with SMTP id smtpd.web10.17427.1676910274821995874
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 20 Feb 2023 08:24:34 -0800
+ Mon, 20 Feb 2023 08:24:35 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=iZPiZKY/;
- spf=pass (domain: gmail.com, ip: 209.85.208.41, mailfrom: martin.jansa@gmail.com)
-Received: by mail-ed1-f41.google.com with SMTP id s26so6761428edw.11
-        for <openembedded-devel@lists.openembedded.org>; Mon, 20 Feb 2023 08:24:33 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=oQiDZ5LV;
+ spf=pass (domain: gmail.com, ip: 209.85.208.51, mailfrom: martin.jansa@gmail.com)
+Received: by mail-ed1-f51.google.com with SMTP id h16so6975710edz.10
+        for <openembedded-devel@lists.openembedded.org>; Mon, 20 Feb 2023 08:24:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=5rPaCIt2tjbMCWABAZfhgyitpfuSjF4HWRUaFBP1UIQ=;
-        b=iZPiZKY/11dF0ctks8jsy/Xfpln9dMWuOjIR++qXBGgCqJ3hN9RxqTnJ0gsNlMTUfv
-         b0VNrS2jDj7scaJ5v2kHf0N0CJkESfBMgBpj9L0CjjcNf4RVkQ6awN/I8WrHorK7xmkM
-         /l3VhRDFH8UOdCxO9K2+s1zPuAWfPkYN/5pwPc0G3/2Sm9DnYp9vajR/7vFdU3PBFM7+
-         orf/pNDgWsCPpJYVbxEw++65xpAd+E9c8QR97RDuR39y7MkmRM5K6D94IFyjvmQ53mXh
-         xT8SmczmklP08j3iuNDxRiXBJe1IIEfFagsK1uQ/hNEjIl2wv/dsdbTjgxt4tgtsMNJy
-         V8Iw==
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=g3Zy3BztJ5FHLpPr5NXvdY5kLc2IFJCXD+FUJM84yMY=;
+        b=oQiDZ5LVnjq/QlrFfVQ75fG+hTux0/cI7iTNzli9NGnQiYXtRnw9XeQdvDdQ0RUXhL
+         USysOBFNqdw9rD81kx58ixY83vd3t/JHiQ5CoTchMAp4w0vc1DXC7HOKcngNg7EXrDdt
+         4jpS/PKHPVoLZoj6PdRV6ekjJUh4DFDdMLLTTn/Jxd2b+7F/6pykQ9Cr5m8gQcuQSTvL
+         hP2I/YeR0oRlzw+O3BaLJoavETbH2TRrDJjModqz8OXJjfSaIikPKRIPM65DZCs+IyNc
+         QyhwGLWVP1detj3MKj1iRVArgZKhAjKUDlBWAMjH2K62tHqx3NnOScKestEtbQrVTFQk
+         hVfA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=5rPaCIt2tjbMCWABAZfhgyitpfuSjF4HWRUaFBP1UIQ=;
-        b=wNc0JJsyR9F/V3YPc/0S6Q4tYl2WnCuTp1Tpf4/jl3ZZg2Pgj9FfR/600WBMRndtgL
-         U231k8FH0lfZpMD6AeddHY3R4P4BNImfl62eMD93kgHO+nA9QkEgPOM1D/2oAL5vkwzS
-         DTcp5gY0nJ8QeiPjnczPoG4j3M0gqKmoe6qarUQ4Euv9mQJM/VaGxuXUEgkJxdU/EJtZ
-         muPpa43Mb/PVpbbV2rvU83ogIdtsRG2LEelNY23ha//Yt3itAyNqsh1QyrEwKDsll4m4
-         yEl+HQVK8qfIwXyAvWtJ7pYof1uMa08wqpnVV7drOCdYgxun6LAThM3SL7W4MJ4GG/Qy
-         XDXg==
-X-Gm-Message-State: AO0yUKVrbrjj5OCrTF1Km+awsXlHcvJ67KP/18Gmi7RuDgOeOqlWWjS9
-	yOkMCYy5ONdJYnTsU445Nw2cmZkeDLA=
-X-Google-Smtp-Source: AK7set+6UFPFdgvLpsacs8AZAV4OHrGhOTo7EI6ax7i/oukuq9OkJz9bGZjLd1FnKQ2Rr4TLr5WWjw==
-X-Received: by 2002:a05:6402:b04:b0:4ae:f496:10ac with SMTP id bm4-20020a0564020b0400b004aef49610acmr1767110edb.0.1676910272351;
-        Mon, 20 Feb 2023 08:24:32 -0800 (PST)
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=g3Zy3BztJ5FHLpPr5NXvdY5kLc2IFJCXD+FUJM84yMY=;
+        b=z35amsDN/2JEANYyH52bylw243UcUmVLHWw9TcLpCcGTdhP6hbxsyL+AUhFWD9v47a
+         AyIXRsf3+cjct6Hmrq2DR+r3wSMlHg3D9GkQGIbkMChNc5bhTqmiX3+BcwCbzEI4kfrt
+         vnxyWNJrJ3tk173IMyqtgJYIwsmYGsPVKK/bgLFu3Oheh8xyfQ2NznDac1ntsfoyP00Y
+         PoPut2+E67kRsUQt+Glbfs6HyvjgJPxQMvysb8SqoApQ5Fkvv1iewjhpvBMLBXI3FJe8
+         yMHdWVjhjOecU59N9y9/ID6QVlZHIOFAWHQ6Hrffsp3G3MRF5anBivqX0Bal4sFHAYkV
+         qyMw==
+X-Gm-Message-State: AO0yUKVRnf/uGAppp4q+vnV7b35FNCWak8hNybbN02At5UhuI+lkDJsu
+	08msl8YVW8DUL3RqcoHi3DC8X/xNzNU=
+X-Google-Smtp-Source: AK7set99OZKE/3hNyELnvx8PJ3NNL5/lLRfvNZQkE7ks5FjpB+X7Um6Typ22qNqOh6+hs9PzcWVJ/Q==
+X-Received: by 2002:a17:906:f755:b0:87a:ee05:f7b with SMTP id jp21-20020a170906f75500b0087aee050f7bmr7883675ejb.24.1676910273166;
+        Mon, 20 Feb 2023 08:24:33 -0800 (PST)
 Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
-        by smtp.gmail.com with ESMTPSA id u13-20020aa7d88d000000b004ab4c28a967sm765024edq.44.2023.02.20.08.24.31
+        by smtp.gmail.com with ESMTPSA id k12-20020a170906578c00b008b9b4ab6ad1sm3849669ejq.102.2023.02.20.08.24.32
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 20 Feb 2023 08:24:31 -0800 (PST)
+        Mon, 20 Feb 2023 08:24:32 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>,
-	Khem Raj <raj.khem@gmail.com>
-Subject: [PATCH][kirkstone 1/3] nss: fix cross-compilation error
-Date: Mon, 20 Feb 2023 17:24:28 +0100
-Message-Id: <20230220162430.30368-1-Martin.Jansa@gmail.com>
+Cc: Martin Jansa <Martin.Jansa@gmail.com>
+Subject: [PATCH][kirkstone 2/3] exiv2: fix SRC_URI
+Date: Mon, 20 Feb 2023 17:24:29 +0100
+Message-Id: <20230220162430.30368-2-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.39.2
+In-Reply-To: <20230220162430.30368-1-Martin.Jansa@gmail.com>
+References: <20230220162430.30368-1-Martin.Jansa@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 20 Feb 2023 16:24:41 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101177
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101178
 
-From: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
+* https://exiv2.org/releases returns 404 now, use github releases
+* it's already fixed in master with upgrade to 0.27.6 in:
+  https://git.openembedded.org/meta-openembedded/commit/?id=00a7d4b284c1afccfa26021111384d2184b82e5b
 
-Change OS_TEST to be soft assignment so that the cross-compilation
-doens't fail with the errors like (note the difference in CPU tags):
-
-| make[4]: *** No rule to make target
-'../certhigh/Linux3.4_x86_64_glibc_PTH_64_OPT.OBJ/certhtml.o', needed by
-'Linux3.4_aarch64_glibc_PTH_64_OPT.OBJ/libnss3.so'.  Stop.
-
-Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- .../nss/nss/0001-nss-fix-support-cross-compiling.patch     | 7 ++++++-
- 1 file changed, 6 insertions(+), 1 deletion(-)
+ meta-oe/recipes-support/exiv2/exiv2_0.27.3.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-support/nss/nss/0001-nss-fix-support-cross-compiling.patch b/meta-oe/recipes-support/nss/nss/0001-nss-fix-support-cross-compiling.patch
-index eb6174a7b0..950fae667a 100644
---- a/meta-oe/recipes-support/nss/nss/0001-nss-fix-support-cross-compiling.patch
-+++ b/meta-oe/recipes-support/nss/nss/0001-nss-fix-support-cross-compiling.patch
-@@ -18,7 +18,12 @@ diff --git a/nss/coreconf/arch.mk b/nss/coreconf/arch.mk
- index 2012d18..78fca62 100644
- --- a/nss/coreconf/arch.mk
- +++ b/nss/coreconf/arch.mk
--@@ -30,7 +30,7 @@ OS_TEST := $(shell uname -m)
-+@@ -26,11 +26,11 @@ OS_ARCH := $(subst /,_,$(shell uname -s)
-+ # Attempt to differentiate between sparc and x86 Solaris
-+ #
-+ 
-+-OS_TEST := $(shell uname -m)
-++OS_TEST ?= $(shell uname -m)
-  ifeq ($(OS_TEST),i86pc)
-      OS_RELEASE := $(shell uname -r)_$(OS_TEST)
-  else
+diff --git a/meta-oe/recipes-support/exiv2/exiv2_0.27.3.bb b/meta-oe/recipes-support/exiv2/exiv2_0.27.3.bb
+index 31afe78e45..b210fa6340 100644
+--- a/meta-oe/recipes-support/exiv2/exiv2_0.27.3.bb
++++ b/meta-oe/recipes-support/exiv2/exiv2_0.27.3.bb
+@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=625f055f41728f84a8d7938acc35bdc2"
+ 
+ DEPENDS = "zlib expat"
+ 
+-SRC_URI = "https://exiv2.org/releases/${BPN}-${PV}-Source.tar.gz"
++SRC_URI = "https://github.com/Exiv2/${BPN}/releases/download/v${PV}/${BP}-Source.tar.gz"
+ SRC_URI[sha256sum] = "a79f5613812aa21755d578a297874fb59a85101e793edc64ec2c6bd994e3e778"
+ 
+ # Once patch is obsolete (project should be aware due to PRs), dos2unix can be removed either
 -- 
 2.39.2
 
