@@ -2,41 +2,41 @@ Return-Path: <Yogita.Urade@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1A14CC636D7
-	for <webhook@archiver.kernel.org>; Tue, 21 Feb 2023 05:51:55 +0000 (UTC)
-Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
- by mx.groups.io with SMTP id smtpd.web11.36475.1676958710985347001
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3CA45C636D7
+	for <webhook@archiver.kernel.org>; Tue, 21 Feb 2023 05:54:45 +0000 (UTC)
+Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
+ by mx.groups.io with SMTP id smtpd.web10.35976.1676958880359124490
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 20 Feb 2023 21:51:51 -0800
+ Mon, 20 Feb 2023 21:54:40 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=pps06212021 header.b=EQcwwIpP;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=1416eb0443=yogita.urade@windriver.com)
-Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 31L5YaRD030923
-	for <openembedded-devel@lists.openembedded.org>; Tue, 21 Feb 2023 05:51:50 GMT
+ dkim=pass header.i=@windriver.com header.s=pps06212021 header.b=OGd7JfC/;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=1416eb0443=yogita.urade@windriver.com)
+Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 31L5r00o013123
+	for <openembedded-devel@lists.openembedded.org>; Mon, 20 Feb 2023 21:54:40 -0800
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com; h=from : to : cc :
  subject : date : message-id : mime-version : content-transfer-encoding :
  content-type; s=PPS06212021;
- bh=zHS5rqTyw/oxE7ibpqfaaxzRcIAT8N40i7mRuNeECWI=;
- b=EQcwwIpPgJ0C5l1ufsZVZ6Mo/cN4QtrdF+m6vwbzaWCBxgxUw9F+Gb7rteGHo/cfX5Gk
- IrbZHqyZtY61OuRW1CiBPiajCESb2iIjZXmngk5Q/0VLvElaHyeJwk4kImIdaDYcNvCK
- ylnziAgC3yOE7byRZ8SbokmQsoxVYaEFjRZo2TaCuHUKHzA4ye3w3/mSOOBG8D/Gna/g
- /oRO+pIyg1zSNqfFL8u3TLo8kem6SWbHkzL4KLhhIvBRisQZUMFgfdHEhlcMpjS6gyzk
- eivgpaHjMmNhGMDssa3jFaGJ3ZHuLL4bWdsNE1eEt753WFzkf5li/JFdFnNEsYlJklsY +g== 
+ bh=x7mq8of/5cROoA1q2+mqtS+IpbakL1rWoa6R5xbUbrA=;
+ b=OGd7JfC/+QZr0XdH2kQw/SNyiTkYeH0bjgh91zCGwcqw/HS7s+EKh+vVpzzqegoyYVwp
+ y1WY3ZwZpBaL8OWwREL+k9fybr54EtnkUN/WZf0rDkeBKqTl1oleMQNTJ+4ekjS0j1p3
+ viZ3yub2Nc2aFC9nGBJU16Y59Q0lLO+itQkUafUoD642kbJp057UejQjV+fhoLjPpTkA
+ ryViyclGpAbtscjx6nebO7WmPTdXT048iyO3120P/dM2pC12N3gwqXXTiOdRHy4hBWVA
+ YR7Hv884/5nQ6KZBUbGp1RXjdYMtl7owFwDImmp9Eove3TYKbJyzON17RpMXrHANW5s7 vw== 
 Received: from ala-exchng01.corp.ad.wrs.com (unknown-82-252.windriver.com [147.11.82.252])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3ntpem2bx4-1
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3nttu6t9cg-1
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Tue, 21 Feb 2023 05:51:49 +0000
+	for <openembedded-devel@lists.openembedded.org>; Mon, 20 Feb 2023 21:54:39 -0800
 Received: from blr-linux-engg1.wrs.com (147.11.136.210) by
  ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.17; Mon, 20 Feb 2023 21:51:47 -0800
+ 15.1.2507.17; Mon, 20 Feb 2023 21:54:37 -0800
 From: Yogita Urade <yogita.urade@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-CC: <hari.gpillai@windriver.com>
-Subject: [oe][meta-oe][kirkstone][PATCH 1/1] multipath-tools: fix CVE-2022-41974
-Date: Tue, 21 Feb 2023 05:51:23 +0000
-Message-ID: <20230221055123.2730580-1-yogita.urade@windriver.com>
+CC: <hari.gpillai@windriver.com>, <yogita.urade@windriver.com>
+Subject: [oe][meta-oe][langdale][PATCH 1/1] multipath-tools: fix CVE-2022-41974
+Date: Tue, 21 Feb 2023 05:54:18 +0000
+Message-ID: <20230221055418.2734630-1-yogita.urade@windriver.com>
 X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -44,21 +44,21 @@ Content-Type: text/plain
 X-Originating-IP: [147.11.136.210]
 X-ClientProxiedBy: ala-exchng01.corp.ad.wrs.com (147.11.82.252) To
  ala-exchng01.corp.ad.wrs.com (147.11.82.252)
-X-Proofpoint-ORIG-GUID: WI8ZbTDOjPb0XewCRpBgz7oY-MZcedq_
-X-Proofpoint-GUID: WI8ZbTDOjPb0XewCRpBgz7oY-MZcedq_
+X-Proofpoint-ORIG-GUID: SxeIR6v2pJljFhAvYWrg-l8fmeiJUNG0
+X-Proofpoint-GUID: SxeIR6v2pJljFhAvYWrg-l8fmeiJUNG0
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.219,Aquarius:18.0.930,Hydra:6.0.562,FMLib:17.11.170.22
  definitions=2023-02-21_02,2023-02-20_02,2023-02-09_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 clxscore=1015 mlxscore=0
- lowpriorityscore=0 priorityscore=1501 suspectscore=0 mlxlogscore=999
- bulkscore=0 spamscore=0 malwarescore=0 impostorscore=0 adultscore=0
- phishscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2212070000 definitions=main-2302210052
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 suspectscore=0
+ impostorscore=0 clxscore=1011 mlxlogscore=999 mlxscore=0
+ lowpriorityscore=0 priorityscore=1501 spamscore=0 malwarescore=0
+ adultscore=0 phishscore=0 bulkscore=0 classifier=spam adjust=0 reason=mlx
+ scancount=1 engine=8.12.0-2212070000 definitions=main-2302210052
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 21 Feb 2023 05:51:55 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101183
+ <openembedded-devel@lists.openembedded.org>; Tue, 21 Feb 2023 05:54:45 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101184
 
 Reference:
 https://nvd.nist.gov/vuln/detail/CVE-2022-41974
@@ -74,7 +74,7 @@ Ubuntu, Debian and Suse applied this patch to their 0.7.xx and
 [2] https://github.com/opensvc/multipath-tools/commit/d139bcf0842bc0a16beab86e1349ed65b150bf0c
 [3] https://github.com/opensvc/multipath-tools/issues/59
 [4] https://github.com/openSUSE/multipath-tools/commit/fbbf280a0e26026c19879d938ebb2a8200b6357c
-[5] http://launchpadlibrarian.net/634132876/multipath-tools_0.7.4-2ubuntu3.1_0.7.4-2ubuntu3.2.diff.gz
+[5] http://launchpadlibrarian.net/634132876/multipath-tools_0.7.4-2ubuntu3.1_0.7.4-2ubuntu3.2.diff.gzwq
 
 Signed-off-by: Yogita Urade <yogita.urade@windriver.com>
 ---
@@ -254,14 +254,14 @@ index 000000000..7cdb5f9bd
 +--
 +2.31.1
 diff --git a/meta-oe/recipes-support/multipath-tools/multipath-tools_0.8.4.bb b/meta-oe/recipes-support/multipath-tools/multipath-tools_0.8.4.bb
-index 43dced707..0d51263f6 100644
+index 5a8db0877..feb8a069d 100644
 --- a/meta-oe/recipes-support/multipath-tools/multipath-tools_0.8.4.bb
 +++ b/meta-oe/recipes-support/multipath-tools/multipath-tools_0.8.4.bb
-@@ -49,6 +49,7 @@ SRC_URI = "git://github.com/opensvc/multipath-tools.git;protocol=http;branch=mas
+@@ -48,6 +48,7 @@ SRC_URI = "git://github.com/opensvc/multipath-tools.git;protocol=http;branch=mas
+            file://0001-add-explicit-dependency-on-libraries.patch \
             file://0001-fix-boolean-value-with-json-c-0.14.patch \
             file://0001-libmultipath-uevent.c-fix-error-handling-for-udev_mo.patch \
-            file://0001-multipath-tools-use-run-instead-of-dev-shm.patch \
-+	   file://CVE-2022-41974.patch \
++           file://CVE-2022-41974.patch \
             "
  
  LIC_FILES_CHKSUM = "file://COPYING;md5=5f30f0716dfdd0d91eb439ebec522ec2"
