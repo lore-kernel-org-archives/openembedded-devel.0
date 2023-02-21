@@ -1,324 +1,304 @@
-Return-Path: <f_l_k@t-online.de>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 593DBC636D7
-	for <webhook@archiver.kernel.org>; Tue, 21 Feb 2023 20:08:09 +0000 (UTC)
-Received: from mailout09.t-online.de (mailout09.t-online.de [194.25.134.84])
- by mx.groups.io with SMTP id smtpd.web10.52738.1677010081000813382
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4C774C636D7
+	for <webhook@archiver.kernel.org>; Tue, 21 Feb 2023 20:10:59 +0000 (UTC)
+Received: from mail-oa1-f48.google.com (mail-oa1-f48.google.com [209.85.160.48])
+ by mx.groups.io with SMTP id smtpd.web10.52823.1677010255910522726
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 21 Feb 2023 12:08:01 -0800
+ Tue, 21 Feb 2023 12:10:56 -0800
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=SPF record not found (domain: t-online.de, ip: 194.25.134.84, mailfrom: f_l_k@t-online.de)
-Received: from fwd79.dcpf.telekom.de (fwd79.aul.t-online.de [10.223.144.105])
-	by mailout09.t-online.de (Postfix) with SMTP id 8B948115C8
-	for <openembedded-devel@lists.openembedded.org>; Tue, 21 Feb 2023 21:07:58 +0100 (CET)
-Received: from [192.168.178.83] ([84.154.165.85]) by fwd79.t-online.de
-	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1pUYvd-3fy5q40; Tue, 21 Feb 2023 21:07:58 +0100
-Date: Tue, 21 Feb 2023 21:07:52 +0100
-From: Markus Volk <f_l_k@t-online.de>
-Subject: Re: [meta-gnome][PATCH] gparted: update 1.4.0 -> 1.5.0
-To: openembedded-devel@lists.openembedded.org
-Message-Id: <495GQR.QDJEIFZLC9252@t-online.de>
-In-Reply-To: <20230221200625.494020-1-f_l_k@t-online.de>
-References: <20230221200625.494020-1-f_l_k@t-online.de>
-X-Mailer: geary/40.0
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=ijmmgCL7;
+ spf=pass (domain: gmail.com, ip: 209.85.160.48, mailfrom: raj.khem@gmail.com)
+Received: by mail-oa1-f48.google.com with SMTP id 586e51a60fabf-1720ea61e29so6651309fac.12
+        for <openembedded-devel@lists.openembedded.org>; Tue, 21 Feb 2023 12:10:55 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=sallGy0LeXNLNenmGf6C5MV0lLbhA2LeRAJ4cNujDA0=;
+        b=ijmmgCL7ysggvWz+inUdeH5yhgECy08Qgjqcl/0eiRXjfRWwsKZHxUwUemrLgL+au+
+         fPb9XLeH5kHFV3ntM/Il15PR31rJGWVP9v+/+lvD2+mXWaEHRpWm9LPdQHOOwqNpVXqZ
+         WjzfTTNTWByuzrVFOGS0uGYWwqvjTn57aLoqYoc4AZSpO2MEQrkUGKULAND2TIgn+71p
+         OyF2vluKQ35v86Xk8KqEKS1Fl4oQEhC67MnEG4hXZmoUyGxGwKehsRATaVh2us1VShvT
+         ud2P5/Ygw8VvStwRviiFqo209mbhwdggeAy5x6Ri/XuLJULH7W+o7PmGFvuuK+mXsDxo
+         iYkw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=sallGy0LeXNLNenmGf6C5MV0lLbhA2LeRAJ4cNujDA0=;
+        b=aCCeqy5xuKmViXGDAbha48YUHqWKuoGQ/MWCdGcoRZ98lam6pO2M8e11Rpz/paDpBc
+         x6dhJbmrd92n1fzbcqTKrH8aWUToj8VCPxaFXYK/3FAta+mXxyoCqIkfrL4qZtSCAW17
+         4Bxqtp5qrGOiQy0orRtxgN69EdSkO36KhxVDWXmY96RExsrW91iDykJ5RLYnNkQehQ5q
+         P0T3Vh/MWghpxlf8/6Rl99IlqqaanhOUOI3Fwjbv4tY5VNrLF7LNxepITEFxhdniybtz
+         umbJ/2HFfNgXSoJVYYGiU+hY2GdLu5vVWyviLa1UdvCbvnvXTGzjKyhKvXfdN4hnKsp8
+         +qwQ==
+X-Gm-Message-State: AO0yUKVeU497NP9llHZOzKGfGurs1M4Nvaec/Zy7bswZttx493z79U0p
+	8Re7MMVnA5SxUFPl8x4Z0Ec50iaJmvKVMqbgADnAAsPq+pw=
+X-Google-Smtp-Source: AK7set8c+7Mv0KSk3C7oFltO/8VypCHpEVA+yrCYYMXX+m7R8V7JfemUpsGNxODMmwrzlCtmdQv1RbjIlSv+cP1GaeE=
+X-Received: by 2002:a05:6870:d188:b0:163:b85e:f1ca with SMTP id
+ a8-20020a056870d18800b00163b85ef1camr936034oac.262.1677010254817; Tue, 21 Feb
+ 2023 12:10:54 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: multipart/alternative; boundary="=-m3XESdz4RUhYqHa//Lxk"
-X-TOI-EXPURGATEID: 150726::1677010078-D53B29DF-4B5996E1/0/0 CLEAN NORMAL
-X-TOI-MSGID: 1262c367-a02d-4e18-abe2-2a9370bff15c
+References: <DM6PR01MB5129158BB0A2A117BD35F94F9EA59@DM6PR01MB5129.prod.exchangelabs.com>
+In-Reply-To: <DM6PR01MB5129158BB0A2A117BD35F94F9EA59@DM6PR01MB5129.prod.exchangelabs.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 21 Feb 2023 12:10:28 -0800
+Message-ID: <CAMKF1sp7vs2=zBXJz5jwDys_d7xT=QPgnwCzh9Gf5hbpK28N1w@mail.gmail.com>
+Subject: Re: [oe] [meta-python][PATCH] python-systemd: update from v234 to v235
+To: "Cook, Samuel" <samuel.cook@cornelisnetworks.com>
+Cc: "openembedded-devel@lists.openembedded.org" <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 21 Feb 2023 20:08:09 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101197
+ <openembedded-devel@lists.openembedded.org>; Tue, 21 Feb 2023 20:10:59 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101198
 
---=-m3XESdz4RUhYqHa//Lxk
-Content-Type: text/plain; charset=us-ascii; format=flowed
+I have to rework it a bit, on top of master-next, please take a look
+at https://git.openembedded.org/meta-openembedded/log/?h=3Dmaster-next
 
-sent again because of an error message during mail delivery
-
-Am Di, 21. Feb 2023 um 21:06:25 +0100 schrieb Markus Volk 
-<f_l_k@t-online.de>:
-> - Remove unneeded patches
-> 
-> Signed-off-by: Markus Volk <f_l_k@t-online.de 
-> <mailto:f_l_k@t-online.de>>
+On Tue, Feb 21, 2023 at 6:51 AM Cook, Samuel
+<samuel.cook@cornelisnetworks.com> wrote:
+>
+> Includes bugfix from v234 which won=E2=80=99t run on python3.10
+>
+> See: https://github.com/systemd/python-systemd/issues/107
+>
+>
+>
+> Removes patches now no longer required as they are implemented in v235
+>
+>
+>
+> V235 released to PyPI on 11 Feb 23
+>
+> https://pypi.org/project/systemd-python/235/
+>
+>
+>
+> Signed-off-by: Samuel Cook <samuel.cook@cornelisnetworks.com>
+>
 > ---
->  ...t-use-NULL-where-boolean-is-expected.patch | 33 
-> -------------------
->  .../files/0001-use-posix-basename.patch       | 30 -----------------
->  .../{gparted_1.4.0.bb => gparted_1.5.0.bb}    |  6 ++--
->  3 files changed, 2 insertions(+), 67 deletions(-)
->  delete mode 100644 
-> meta-gnome/recipes-extended/gparted/files/0001-Do-not-use-NULL-where-boolean-is-expected.patch
->  delete mode 100644 
-> meta-gnome/recipes-extended/gparted/files/0001-use-posix-basename.patch
->  rename meta-gnome/recipes-extended/gparted/{gparted_1.4.0.bb => 
-> gparted_1.5.0.bb} (78%)
-> 
-> diff --git 
-> a/meta-gnome/recipes-extended/gparted/files/0001-Do-not-use-NULL-where-boolean-is-expected.patch 
-> b/meta-gnome/recipes-extended/gparted/files/0001-Do-not-use-NULL-where-boolean-is-expected.patch
+>
+>  ...-switch-from-distutils-to-setuptools.patch | 30 -------------------
+>
+>  .../python/python-systemd/endian.patch        | 14 ---------
+>
+>  .../python/python3-systemd_234.bb             | 11 ++-----
+>
+>  3 files changed, 3 insertions(+), 52 deletions(-)
+>
+>  delete mode 100644 meta-python/recipes-devtools/python/python-systemd/00=
+02-setup.py-switch-from-distutils-to-setuptools.patch
+>
+>  delete mode 100644 meta-python/recipes-devtools/python/python-systemd/en=
+dian.patch
+>
+>
+>
+> diff --git a/meta-python/recipes-devtools/python/python-systemd/0002-setu=
+p.py-switch-from-distutils-to-setuptools.patch b/meta-python/recipes-devtoo=
+ls/python/python-systemd/0002-setup.py-switch-from-distutils-to-setuptools.=
+patch
+>
 > deleted file mode 100644
-> index 1b0d24024..000000000
-> --- 
-> a/meta-gnome/recipes-extended/gparted/files/0001-Do-not-use-NULL-where-boolean-is-expected.patch
+>
+> index b3180f29f..000000000
+>
+> --- a/meta-python/recipes-devtools/python/python-systemd/0002-setup.py-sw=
+itch-from-distutils-to-setuptools.patch
+>
 > +++ /dev/null
-> @@ -1,33 +0,0 @@
-> -From 9af84e1c08a2159c10baf13244e2c8a7d7e837e9 Mon Sep 17 00:00:00 
-> 2001
-> -From: Khem Raj <raj.khem@gmail.com <mailto:raj.khem@gmail.com>>
-> -Date: Thu, 27 Jan 2022 23:02:20 -0800
-> -Subject: [PATCH] Do not use NULL where boolean is expected
-> -
-> -Fixes
-> -src/GParted_Core.cc:73:57: error: static_cast from 'nullptr_t' to 
-> 'PedPartitionFlag' (aka '_PedPartitionFlag') is not allowed
-> -|         for ( PedPartitionFlag flag = ped_partition_flag_next( 
-> static_cast<PedPartitionFlag>( NULL ) ) ;
-> -|                                                                
-> ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-> -| 1 error generated.
-> -
-> -Upstream-Status: Pending
-> -Signed-off-by: Khem Raj <raj.khem@gmail.com 
-> <mailto:raj.khem@gmail.com>>
-> ----
-> - src/GParted_Core.cc | 2 +-
-> - 1 file changed, 1 insertion(+), 1 deletion(-)
-> -
-> -diff --git a/src/GParted_Core.cc b/src/GParted_Core.cc
-> -index f7ac970..3290c66 100644
-> ---- a/src/GParted_Core.cc
-> -+++ b/src/GParted_Core.cc
-> -@@ -70,7 +70,7 @@ GParted_Core::GParted_Core()
-> - 	ped_exception_set_handler( ped_exception_handler ) ;
-> -
-> - 	//get valid flags ...
-> --	for ( PedPartitionFlag flag = ped_partition_flag_next( 
-> static_cast<PedPartitionFlag>( NULL ) ) ;
-> -+	for ( PedPartitionFlag flag = ped_partition_flag_next( 
-> static_cast<PedPartitionFlag>( false ) ) ;
-> - 	      flag ;
-> - 	      flag = ped_partition_flag_next( flag ) )
-> - 		flags .push_back( flag ) ;
-> ---
-> -2.35.0
-> -
-> diff --git 
-> a/meta-gnome/recipes-extended/gparted/files/0001-use-posix-basename.patch 
-> b/meta-gnome/recipes-extended/gparted/files/0001-use-posix-basename.patch
-> deleted file mode 100644
-> index aae200e27..000000000
-> --- 
-> a/meta-gnome/recipes-extended/gparted/files/0001-use-posix-basename.patch
-> +++ /dev/null
+>
 > @@ -1,30 +0,0 @@
-> -Subject: [PATCH] BCache_Info.cc: use posix basename
+>
+> -From a681a79472df85cdc8c052bc61fb8b9e7b9a6495 Mon Sep 17 00:00:00 2001
+>
+> -From: Tim Orling <tim.orling@konsulko.com>
+>
+> -Date: Sun, 27 Feb 2022 11:50:36 -0800
+>
+> -Subject: [PATCH] setup.py: switch from distutils to setuptools
+>
 > -
-> -gnu 'basename' is undeclared for cplusplus if using musl. Use posix 
-> basename instead.
+>
+> -In Python 3.10, distutils is deprecated and slated for removal in Python
+>
+> -3.12. It also prevents 'setup.py bdist_wheel' from building a wheel.
+>
 > -
-> -fdebug-prefix-map=TOPDIR/build/tmp/work/cortexa57-yoe-linux-musl/gparted/1.4.0-r0/
-> -recipe-sysroot-native=-fvisibility-inlines-hidden  -c -o 
-> Dialog_Disklabel.o ../../
-> -gparted-1.4.0/src/Dialog_Disklabel.cc 
-> ../../gparted-1.4.0/src/BCache_Info.cc:52:33:
-> -
-> -error: use of undeclared identifier 'basename'; did you mean 
-> 'g_basename'?
-> -        return "/dev/" + Glib::ustring(basename(buf));
-> -                                       ^~~~~~~~
-> -                                       g_basename
-> -
-> -Signed-off-by: Markus Volk <f_l_k@t-online.de 
-> <mailto:f_l_k@t-online.de>>
-> -
+>
 > -Upstream-Status: Submitted
+>
+> -[https://github.com/systemd/python-systemd/pull/103]
+>
 > -
-> -<https://gitlab.gnome.org/GNOME/gparted/-/merge_requests/99>
+>
+> -Signed-off-by: Tim Orling <tim.orling@konsulko.com>
+>
+> ----
+>
+> - setup.py | 2 +-
+>
+> - 1 file changed, 1 insertion(+), 1 deletion(-)
+>
 > -
-> ---- a/src/BCache_Info.cc	2022-03-02 22:04:17.000000000 +0100
-> -+++ b/src/BCache_Info.cc	2022-04-09 15:02:56.932218665 +0200
-> -@@ -17,7 +17,7 @@
+>
+> -diff --git a/setup.py b/setup.py
+>
+> -index 099819b..fe9c03a 100644
+>
+> ---- a/setup.py
+>
+> -+++ b/setup.py
+>
+> -@@ -1,5 +1,5 @@
+>
+> - import sys, os
+>
+> --from distutils.core import setup, Extension
+>
+> -+from setuptools import setup, Extension
+>
+> - from subprocess import Popen, PIPE, check_output
+>
 > -
-> - #include "BCache_Info.h"
+>
+> - def call(*cmd):
+>
+> ---
+>
+> -2.30.2
+>
 > -
-> --#include <string.h>  // GNU version of basename()
-> -+#include <libgen.h>  // POSIX version of basename()
+>
+> diff --git a/meta-python/recipes-devtools/python/python-systemd/endian.pa=
+tch b/meta-python/recipes-devtools/python/python-systemd/endian.patch
+>
+> deleted file mode 100644
+>
+> index e09aea733..000000000
+>
+> --- a/meta-python/recipes-devtools/python/python-systemd/endian.patch
+>
+> +++ /dev/null
+>
+> @@ -1,14 +0,0 @@
+>
+> -Include endian.h for missing definitions of htobe16
+>
+> -
+>
+> -Upstream-Status: Pending
+>
+> -Signed-off-by: Khem Raj <raj.khem@gmail.com>
+>
+> ---- a/systemd/util.c
+>
+> -+++ b/systemd/util.c
+>
+> -@@ -28,6 +28,7 @@
+>
+> - #include <stdbool.h>
+>
+> - #include <assert.h>
+>
+> - #include <errno.h>
+>
+> -+#include <endian.h>
+>
+> - #include <fcntl.h>
+>
 > - #include <unistd.h>
-> - #include <glibmm/ustring.h>
-> - #include <glibmm/fileutils.h>
-> diff --git a/meta-gnome/recipes-extended/gparted/gparted_1.4.0.bb 
-> b/meta-gnome/recipes-extended/gparted/gparted_1.5.0.bb
-> similarity index 78%
-> rename from meta-gnome/recipes-extended/gparted/gparted_1.4.0.bb
-> rename to meta-gnome/recipes-extended/gparted/gparted_1.5.0.bb
-> index dde5a02ab..be7a96ea8 100644
-> --- a/meta-gnome/recipes-extended/gparted/gparted_1.4.0.bb
-> +++ b/meta-gnome/recipes-extended/gparted/gparted_1.5.0.bb
-> @@ -3,17 +3,15 @@ HOMEPAGE = "http://gparted.org/index.php"
->  LICENSE = "GPL-2.0-only"
->  LIC_FILES_CHKSUM = 
-> "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f" 
-> <file://copying;md5=94d55d512a9ba36caa9b7df079bae19f/>
-> 
-> -inherit autotools pkgconfig python3native gnome-help gtk-icon-cache 
-> features_check
-> +inherit autotools pkgconfig python3native gettext gnome-help 
-> gtk-icon-cache features_check
-> 
->  ANY_OF_DISTRO_FEATURES = "${GTK3DISTROFEATURES}"
-> 
->  SRC_URI = " \
->      
-> ${SOURCEFORGE_MIRROR}/project/${BPN}/${BPN}/${BPN}-${PV}/${BPN}-${PV}.tar.gz 
-> \
->      
-> file://0001-Install-polkit-action-unconditionally-executable-pke.patch 
-> <file://0001-install-polkit-action-unconditionally-executable-pke.patch/> 
-> \
-> -    file://0001-Do-not-use-NULL-where-boolean-is-expected.patch 
-> <file://0001-do-not-use-null-where-boolean-is-expected.patch/> \
-> -    file://0001-use-posix-basename.patch 
-> <file://0001-use-posix-basename.patch/> \
->  "
-> -SRC_URI[sha256sum] = 
-> "e5293a792e53fdbeba29c4a834113cd9603d0d639330da931a468bf3687887be"
-> +SRC_URI[sha256sum] = 
-> "3c95ea26a944083ff1d9b17639b1e2ad9758df225dc751ff407b2a6aa092a8de"
-> 
->  UPSTREAM_CHECK_URI = 
-> "<https://sourceforge.net/projects/gparted/files/gparted/>"
->  UPSTREAM_CHECK_REGEX = "gparted-(?P<pver>\d+\.(\d+)+(\.\d+)+)"
+>
+> - #include <net/if.h>
+>
+> diff --git a/meta-python/recipes-devtools/python/python3-systemd_234.bb b=
+/meta-python/recipes-devtools/python/python3-systemd_234.bb
+>
+> index 10614fe37..411f80881 100644
+>
+> --- a/meta-python/recipes-devtools/python/python3-systemd_234.bb
+>
+> +++ b/meta-python/recipes-devtools/python/python3-systemd_234.bb
+>
+> @@ -4,20 +4,15 @@ LICENSE =3D "LGPL-2.1-or-later"
+>
+>  LIC_FILES_CHKSUM =3D "file://LICENSE.txt;md5=3D4fbd65380cdd255951079008b=
+364516c"
+>
+>
+>
+>  PYPI_PACKAGE =3D "systemd-python"
+>
+> -DEPENDS +=3D "systemd (<=3D234)"
+>
+> +DEPENDS +=3D "systemd (<=3D235)"
+>
+>  RDEPENDS:${PN} +=3D "systemd ${PYTHON_PN}-syslog ${PYTHON_PN}-logging py=
+thon3-syslog"
+>
+>  REQUIRED_DISTRO_FEATURES =3D "systemd"
+>
+>  inherit pypi features_check pkgconfig setuptools3
+>
+>
+>
+> -SRC_URI[md5sum] =3D "5071ea5bcb976186e92a3f5e75df221d"
+>
+> -SRC_URI[sha256sum] =3D "fd0e44bf70eadae45aadc292cb0a7eb5b0b6372cd1b39122=
+8047d33895db83e7"
+>
+> +SRC_URI[md5sum] =3D "93f3ca09f35719ca6a4edd1d62d38dd4"
+>
+> +SRC_URI[sha256sum] =3D "4e57f39797fd5d9e2d22b8806a252d7c0106c936039d1e71=
+c8c6b8008e695c0a"
+>
+>
+>
+>  # allow for common patches for python- and python3-systemd
+>
+>  FILESEXTRAPATHS:prepend :=3D "${THISDIR}/python-systemd:"
+>
+>
+>
+> -SRC_URI +=3D " \
+>
+> -    file://endian.patch \
+>
+> -    file://0002-setup.py-switch-from-distutils-to-setuptools.patch \
+>
+> -"
+>
+> -
+>
+>  SRC_URI:append:libc-musl =3D " file://0001-Provide-implementation-of-str=
+ndupa-for-musl.patch"
+>
 > --
-> 2.34.1
-> 
-
-
---=-m3XESdz4RUhYqHa//Lxk
-Content-Type: text/html; charset=us-ascii
-
-<div id="geary-body" dir="auto"><div>sent again because of an error message during mail delivery</div></div><div id="geary-quote" dir="auto"><br>Am Di, 21. Feb 2023 um 21:06:25 +0100 schrieb Markus Volk &lt;f_l_k@t-online.de&gt;:<br><blockquote type="cite"><div class="plaintext" style="white-space: break-spaces;">- Remove unneeded patches
-
-Signed-off-by: Markus Volk &lt;<a href="mailto:f_l_k@t-online.de">f_l_k@t-online.de</a>&gt;
----
- ...t-use-NULL-where-boolean-is-expected.patch | 33 -------------------
- .../files/0001-use-posix-basename.patch       | 30 -----------------
- .../{gparted_1.4.0.bb =&gt; gparted_1.5.0.bb}    |  6 ++--
- 3 files changed, 2 insertions(+), 67 deletions(-)
- delete mode 100644 meta-gnome/recipes-extended/gparted/files/0001-Do-not-use-NULL-where-boolean-is-expected.patch
- delete mode 100644 meta-gnome/recipes-extended/gparted/files/0001-use-posix-basename.patch
- rename meta-gnome/recipes-extended/gparted/{gparted_1.4.0.bb =&gt; gparted_1.5.0.bb} (78%)
-
-diff --git a/meta-gnome/recipes-extended/gparted/files/0001-Do-not-use-NULL-where-boolean-is-expected.patch b/meta-gnome/recipes-extended/gparted/files/0001-Do-not-use-NULL-where-boolean-is-expected.patch
-deleted file mode 100644
-index 1b0d24024..000000000
---- a/meta-gnome/recipes-extended/gparted/files/0001-Do-not-use-NULL-where-boolean-is-expected.patch
-+++ /dev/null
-@@ -1,33 +0,0 @@
--From 9af84e1c08a2159c10baf13244e2c8a7d7e837e9 Mon Sep 17 00:00:00 2001
--From: Khem Raj &lt;<a href="mailto:raj.khem@gmail.com">raj.khem@gmail.com</a>&gt;
--Date: Thu, 27 Jan 2022 23:02:20 -0800
--Subject: [PATCH] Do not use NULL where boolean is expected
--
--Fixes
--src/GParted_Core.cc:73:57: error: static_cast from 'nullptr_t' to 'PedPartitionFlag' (aka '_PedPartitionFlag') is not allowed
--|         for ( PedPartitionFlag flag = ped_partition_flag_next( static_cast&lt;PedPartitionFlag&gt;( NULL ) ) ;
--|                                                                ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
--| 1 error generated.
--
--Upstream-Status: Pending
--Signed-off-by: Khem Raj &lt;<a href="mailto:raj.khem@gmail.com">raj.khem@gmail.com</a>&gt;
-----
-- src/GParted_Core.cc | 2 +-
-- 1 file changed, 1 insertion(+), 1 deletion(-)
--
--diff --git a/src/GParted_Core.cc b/src/GParted_Core.cc
--index f7ac970..3290c66 100644
----- a/src/GParted_Core.cc
--+++ b/src/GParted_Core.cc
--@@ -70,7 +70,7 @@ GParted_Core::GParted_Core()
-- 	ped_exception_set_handler( ped_exception_handler ) ; 
-- 
-- 	//get valid flags ...
---	for ( PedPartitionFlag flag = ped_partition_flag_next( static_cast&lt;PedPartitionFlag&gt;( NULL ) ) ;
--+	for ( PedPartitionFlag flag = ped_partition_flag_next( static_cast&lt;PedPartitionFlag&gt;( false ) ) ;
-- 	      flag ;
-- 	      flag = ped_partition_flag_next( flag ) )
-- 		flags .push_back( flag ) ;
---- 
--2.35.0
--
-diff --git a/meta-gnome/recipes-extended/gparted/files/0001-use-posix-basename.patch b/meta-gnome/recipes-extended/gparted/files/0001-use-posix-basename.patch
-deleted file mode 100644
-index aae200e27..000000000
---- a/meta-gnome/recipes-extended/gparted/files/0001-use-posix-basename.patch
-+++ /dev/null
-@@ -1,30 +0,0 @@
--Subject: [PATCH] BCache_Info.cc: use posix basename
--
--gnu 'basename' is undeclared for cplusplus if using musl. Use posix basename instead.
--
--fdebug-prefix-map=TOPDIR/build/tmp/work/cortexa57-yoe-linux-musl/gparted/1.4.0-r0/
--recipe-sysroot-native=-fvisibility-inlines-hidden  -c -o Dialog_Disklabel.o ../../
--gparted-1.4.0/src/Dialog_Disklabel.cc ../../gparted-1.4.0/src/BCache_Info.cc:52:33:
--
--error: use of undeclared identifier 'basename'; did you mean 'g_basename'?
--        return "/dev/" + Glib::ustring(basename(buf));
--                                       ^~~~~~~~
--                                       g_basename
--
--Signed-off-by: Markus Volk &lt;<a href="mailto:f_l_k@t-online.de">f_l_k@t-online.de</a>&gt;
--
--Upstream-Status: Submitted
--
--<a href="https://gitlab.gnome.org/GNOME/gparted/-/merge_requests/99">https://gitlab.gnome.org/GNOME/gparted/-/merge_requests/99</a>
--
----- a/src/BCache_Info.cc	2022-03-02 22:04:17.000000000 +0100
--+++ b/src/BCache_Info.cc	2022-04-09 15:02:56.932218665 +0200
--@@ -17,7 +17,7 @@
-- 
-- #include "BCache_Info.h"
-- 
---#include &lt;string.h&gt;  // GNU version of basename()
--+#include &lt;libgen.h&gt;  // POSIX version of basename()
-- #include &lt;unistd.h&gt;
-- #include &lt;glibmm/ustring.h&gt;
-- #include &lt;glibmm/fileutils.h&gt;
-diff --git a/meta-gnome/recipes-extended/gparted/gparted_1.4.0.bb b/meta-gnome/recipes-extended/gparted/gparted_1.5.0.bb
-similarity index 78%
-rename from meta-gnome/recipes-extended/gparted/gparted_1.4.0.bb
-rename to meta-gnome/recipes-extended/gparted/gparted_1.5.0.bb
-index dde5a02ab..be7a96ea8 100644
---- a/meta-gnome/recipes-extended/gparted/gparted_1.4.0.bb
-+++ b/meta-gnome/recipes-extended/gparted/gparted_1.5.0.bb
-@@ -3,17 +3,15 @@ HOMEPAGE = "http://gparted.org/index.php"
- LICENSE = "GPL-2.0-only"
- LIC_FILES_CHKSUM = "<a href="file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f" "="">file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"</a>
- 
--inherit autotools pkgconfig python3native gnome-help gtk-icon-cache features_check
-+inherit autotools pkgconfig python3native gettext gnome-help gtk-icon-cache features_check
- 
- ANY_OF_DISTRO_FEATURES = "${GTK3DISTROFEATURES}"
- 
- SRC_URI = " \
-     ${SOURCEFORGE_MIRROR}/project/${BPN}/${BPN}/${BPN}-${PV}/${BPN}-${PV}.tar.gz \
-     <a href="file://0001-Install-polkit-action-unconditionally-executable-pke.patch">file://0001-Install-polkit-action-unconditionally-executable-pke.patch</a> \
--    <a href="file://0001-Do-not-use-NULL-where-boolean-is-expected.patch">file://0001-Do-not-use-NULL-where-boolean-is-expected.patch</a> \
--    <a href="file://0001-use-posix-basename.patch">file://0001-use-posix-basename.patch</a> \
- "
--SRC_URI[sha256sum] = "e5293a792e53fdbeba29c4a834113cd9603d0d639330da931a468bf3687887be"
-+SRC_URI[sha256sum] = "3c95ea26a944083ff1d9b17639b1e2ad9758df225dc751ff407b2a6aa092a8de"
- 
- UPSTREAM_CHECK_URI = "<a href="https://sourceforge.net/projects/gparted/files/gparted/">https://sourceforge.net/projects/gparted/files/gparted/</a>"
- UPSTREAM_CHECK_REGEX = "gparted-(?P&lt;pver&gt;\d+\.(\d+)+(\.\d+)+)"
-<div>-- 
-</div>2.34.1
-
-</div></blockquote></div>
---=-m3XESdz4RUhYqHa//Lxk--
-
+>
+> 2.25.1
+>
+>
+>
+>
+>
+> External recipient
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#101188): https://lists.openembedded.org/g/openembedde=
+d-devel/message/101188
+> Mute This Topic: https://lists.openembedded.org/mt/97109929/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
+aj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
 
