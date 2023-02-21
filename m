@@ -1,201 +1,113 @@
-Return-Path: <f_l_k@t-online.de>
+Return-Path: <peron.clem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D9C27C6379F
-	for <webhook@archiver.kernel.org>; Tue, 21 Feb 2023 15:26:47 +0000 (UTC)
-Received: from mailout01.t-online.de (mailout01.t-online.de [194.25.134.80])
- by mx.groups.io with SMTP id smtpd.web11.45431.1676993202052935974
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 691F4C61DA3
+	for <webhook@archiver.kernel.org>; Tue, 21 Feb 2023 17:21:18 +0000 (UTC)
+Received: from mail-qt1-f180.google.com (mail-qt1-f180.google.com [209.85.160.180])
+ by mx.groups.io with SMTP id smtpd.web10.47949.1677000073268924365
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 21 Feb 2023 07:26:42 -0800
+ Tue, 21 Feb 2023 09:21:13 -0800
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=SPF record not found (domain: t-online.de, ip: 194.25.134.80, mailfrom: f_l_k@t-online.de)
-Received: from fwd78.dcpf.telekom.de (fwd78.aul.t-online.de [10.223.144.104])
-	by mailout01.t-online.de (Postfix) with SMTP id C8BC516197
-	for <openembedded-devel@lists.openembedded.org>; Tue, 21 Feb 2023 16:26:39 +0100 (CET)
-Received: from flk-MS-7C91.fritz.box ([84.154.165.85]) by fwd78.t-online.de
-	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1pUUXP-2pTOyH0; Tue, 21 Feb 2023 16:26:39 +0100
-From: Markus Volk <f_l_k@t-online.de>
-To: openembedded-devel@lists.openembedded.org
-Cc: Markus Volk <f_l_k@t-online.de>
-Subject: [meta-oe][PATCH 1/2] appstream: update 0.15.5 -> 0.16.1
-Date: Tue, 21 Feb 2023 16:26:29 +0100
-Message-Id: <20230221152630.51167-1-f_l_k@t-online.de>
-X-Mailer: git-send-email 2.34.1
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=AP9p+P2Z;
+ spf=pass (domain: gmail.com, ip: 209.85.160.180, mailfrom: peron.clem@gmail.com)
+Received: by mail-qt1-f180.google.com with SMTP id l12so4947237qtr.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 21 Feb 2023 09:21:13 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=vZQLPgJ0RSKQ2dpk0UpqaFEcowPs72QOQnc8tmJo6sw=;
+        b=AP9p+P2Zl5K9RPpxXicGeZ+dUA81I7qnq9CDQ8I5nbB0bkFGC3Z4WHlwvLtMIlyIaC
+         tATqhcR+HuJQdB0cIFrLjXWFfU81raSC7huKnd/j0g6loLwxlr2FGh8j5wyZr1Q6iVhP
+         FApHMzGTIo+omi0kYRE35IWSBIPVFhJRzgeOMgOyAiD9mSoKz/19fz/96vUj3ffLAnwz
+         YXGeVUfZeC31YubiSrYtUtw+UzwOnmKHdIFNFudPF5ydIJucv0iQfh2V5aienCPdx0Sa
+         OMvO2R6FwvUCviNHW7LbRqCUet4HhwkPttId9+LAxkQDGFM2I5q02szJZiJfvDLWQi77
+         yqGQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=vZQLPgJ0RSKQ2dpk0UpqaFEcowPs72QOQnc8tmJo6sw=;
+        b=G0nYqP0FnQ2d7NcXHSg54JdZsU4Xj2cq1r1b3/zLnpx78SRoIkd+0jLZNZ6e52ljb0
+         GspHVi+Ck0MrE4SJUws2LySLBcVK9hJhRTv/vDUuyEcepmxS1IvcPKSPzHLb5J7z2OQc
+         5Q48iwqPM+r7HYPRZ73mZKIyCMFvRkdrt5PbwtB/kQ3eY9UiHP0m7DgxRUq+hbrpxX9M
+         Z8hzeofxIzWzRt4njHmA813CrNorK3FlaBhBmqv+E5rWMGHlI9ILu/Y8H8doGztXwJVb
+         GyTqBkEtFE55sz9DiwqBhZfQk0iw6NamXiDx/eTY2bhQkagUSmpLzRjrdQvzb60iH2AZ
+         +OBg==
+X-Gm-Message-State: AO0yUKWqQOBm6eOQ4MrbeGCkHfMWZu8fJmDsm2De/WEBqdI40jKrhUXf
+	jihG13MyW4AtfqHk4Oqyxsf3kTMaOJmtU0SiQFI=
+X-Google-Smtp-Source: AK7set/LaPb3ZM9H7ugCO5DDlYOUshiLM3c3K86bWLD5WFZ19C3OebUCvmg9hZticIAM787pDU68qAY5Ku68d3Ab8/I=
+X-Received: by 2002:ac8:611d:0:b0:3b7:fda5:2632 with SMTP id
+ a29-20020ac8611d000000b003b7fda52632mr670127qtm.13.1677000072225; Tue, 21 Feb
+ 2023 09:21:12 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-X-TOI-EXPURGATEID: 150726::1676993199-DCB4C4E4-7BFD1172/0/0 CLEAN NORMAL
-X-TOI-MSGID: 10ee1a69-801a-4864-a126-8398bf85c7c1
-Content-Transfer-Encoding: quoted-printable
+References: <cover.1675025970.git.akuster808@gmail.com> <06fb36d33cb35e48c07532a868ddc5ffc2244743.1675025970.git.akuster808@gmail.com>
+In-Reply-To: <06fb36d33cb35e48c07532a868ddc5ffc2244743.1675025970.git.akuster808@gmail.com>
+From: =?UTF-8?B?Q2zDqW1lbnQgUMOpcm9u?= <peron.clem@gmail.com>
+Date: Tue, 21 Feb 2023 18:21:01 +0100
+Message-ID: <CAJiuCccfTeMrbYYwd6sueTD=X6Usi4eS_y5UhQ+8U03MraAJwA@mail.gmail.com>
+Subject: Re: [oe] [kirkstone 08/10] grpc: upgrade 1.45.2 -> 1.46.6
+To: Armin Kuster <akuster808@gmail.com>
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 21 Feb 2023 15:26:47 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101189
+ <openembedded-devel@lists.openembedded.org>; Tue, 21 Feb 2023 17:21:18 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101191
 
-Version 0.16.1
-~~~~~~~~~~~~~~
-Released: 2023-02-10
+Hi,
 
-Notes:
- * This is a bugfix-only release to primarily address an issue introduced
-   in v0.15.6 that caused any clients using GIR bindings to crash after a=
- while.
 
-Specification:
- * docs: Clarify the locations where catalog icons should be placed
- * spec: Expand documentation for <issue> elements
- * spec: Mention that <issues> is not part of the description
- * spec: Give some guidance about tone in release descriptions
+On Sun, 29 Jan 2023 at 22:00, Armin Kuster <akuster808@gmail.com> wrote:
+>
+> From: Andrej Valek <andrej.valek@siemens.com>
+>
+> Backporting the version from master (1.50.1) would a big risk. So use the
+> version 1.46.6 which also includes fixes of bundled z-lib library.
+>
+> Signed-off-by: Andrej Valek <andrej.valek@siemens.com>
+> Signed-off-by: Armin Kuster <akuster808@gmail.com>
+> ---
+>  .../recipes-devtools/grpc/{grpc_1.45.2.bb => grpc_1.46.6.bb}  | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+>  rename meta-oe/recipes-devtools/grpc/{grpc_1.45.2.bb => grpc_1.46.6.bb} (97%)
 
-Bugfixes:
- * Fix binding helper macro to behave correctly if a function is passed d=
-irectly
- * Override-merge icons and provided items correctly
- * tests: Ensure locale is C.UTF-8 in pool tests
+Should we not also bump the python-grpcio and python-grpcio-tools to 1.46.5 ?
 
-Miscellaneous:
- * release: Add sanity checks at beginning of each function
+Regards
 
-Contributors:
- Corentin No=C3=ABl, Matthias Klumpp, Pablo Correa G=C3=B3mez, Philip Wit=
-hnall
-
-Version 0.16.0
-~~~~~~~~~~~~~~
-Released: 2023-01-26
-
-Features:
- * pool: Offer API to look up components by bundles
- * Bump format version to 0.16
- * Add new AsSystemInfo to read information about the current OS and devi=
-ce
- * Add helper to get device names from a modalias
- * Implement support for external release metadata
- * Add validation support for external release metadata
- * compose: Validate external release metadata used for the catalog as we=
-ll
- * its: Add rule for standalone release metadata
- * Add function to test if an AsRelation is satisfied on the current syst=
-em
- * cli: Add command to list category contents
- * cli: Display colored checkmarks if possible
- * cli: Add new is-satisfied check to test relations from the command-lin=
-e
- * cli: Add Markdown export support for metainfo-to-news
- * qt: Add support for SystemInfo & relation satisfication checks
-
-Specification:
- * spec: Specify a metadata format for external release descriptions
-
-Bugfixes:
- * Fix build with Clang 15
- * Give a better error message if trying to list too many categories
- * Adjust documentation of AsPool.get_components_by_categories to reflect=
- reality
- * validator: Validate merge component catalog data properly again
-
-Miscellaneous:
- * Consistently name catalog metadata as such everywhere
-
-Contributors:
- Aleix Pol, Matthias Klumpp, Rafael Fontenelle
-
-Version 0.15.6
-~~~~~~~~~~~~~~
-Released: 2022-12-22
-
-Features:
- * qt: Add API for ContentRating descriptions and ratingIds
- * Add some coccinelle semantic patches for common style issues
- * compose: Allow building without SVG support (for bootstrap only)
- * validator: Check for nodes that are text nodes even though they should=
-n't be
- * validator: Extend validation for custom tag
- * validator: Improve Screenshot validation
-
-Specification:
- * docs: Fix typos in <extends> documentation
-
-Bugfixes:
- * validator: internat: Don't allow bandwidth_mbitps when value is offlin=
-e-only
- * validator: Fix timestamp validation
- * validator: Allow release descriptions to start with punctuation
- * compose: Only add no-metainfo tag if component isn't already ignored
- * compose: Show better error in AscImage if compose was build without rs=
-vg
- * Add a hack to clarify proper PtrArray element ownership for language b=
-indings
- * qt: Port away from deprecated QDateTime API
- * qt: Deprecate Component::requires
- * qt: Fix warning
- * qt: Fix stringListToCharArray and Pool::componentsByCategories
- * qt: Port away from deprecated foreach
- * as-review: Add a typedef for property enums
- * as-review: Install properties at once rather than individually
- * as-review: Specify G_PARAM_STATIC_STRINGS for properties
- * as-review: Emit GObject::notify on property value changes
- * as-review: Add missing property for as_review_{get,set}_priority()
- * ascli: fix NULL pointer dereference
-
-Miscellaneous:
- * docs: Split releases specification into its own section
- * style: Make code easier to read by using helper macros in all places
- * Make some compiler warnings fatal unconditionally
-
-Contributors:
- Aleix Pol, JakobDev, Matthias Klumpp, Nicolas Fella, Philip Withnall,
- r-ricci, Will Thompson
-
-Signed-off-by: Markus Volk <f_l_k@t-online.de>
----
- .../{appstream_0.15.5.bb =3D> appstream_0.16.1.bb}          | 8 ++++++--
- 1 file changed, 6 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-support/appstream/{appstream_0.15.5.bb =3D> appst=
-ream_0.16.1.bb} (78%)
-
-diff --git a/meta-oe/recipes-support/appstream/appstream_0.15.5.bb b/meta=
--oe/recipes-support/appstream/appstream_0.16.1.bb
-similarity index 78%
-rename from meta-oe/recipes-support/appstream/appstream_0.15.5.bb
-rename to meta-oe/recipes-support/appstream/appstream_0.16.1.bb
-index e8637b5ee..50d8cdb4c 100644
---- a/meta-oe/recipes-support/appstream/appstream_0.15.5.bb
-+++ b/meta-oe/recipes-support/appstream/appstream_0.16.1.bb
-@@ -11,7 +11,6 @@ DEPENDS =3D " \
-     gperf-native \
-     glib-2.0 \
-     libyaml \
--    libstemmer \
-     libxml2 \
-     libxmlb \
-     libxslt-native \
-@@ -26,10 +25,15 @@ GIR_MESON_OPTION =3D ""
-=20
- SRC_URI =3D "https://www.freedesktop.org/software/appstream/releases/App=
-Stream-${PV}.tar.xz"
- SRC_URI:append:class-target =3D " file://0001-fix-crosscompile.patch"
--SRC_URI[sha256sum] =3D "cb15ed62cc2729683879a2dbf98c0a3267ea2b4d57bba6bc=
-55e70a25500e04c2"
-+SRC_URI[sha256sum] =3D "77e274e163db1f0a1bec8f4134b1d0f31e9c0a8c54cd37f7=
-24a7d30a71cf41d2"
-=20
- S =3D "${WORKDIR}/AppStream-${PV}"
-=20
-+PACKAGECONFIG ?=3D "stemming ${@bb.utils.filter('DISTRO_FEATURES', 'syst=
-emd', d)}"
-+
-+PACKAGECONFIG[systemd] =3D "-Dsystemd=3Dtrue,-Dsystemd=3Dfalse,systemd"
-+PACKAGECONFIG[stemming] =3D "-Dstemming=3Dtrue,-Dstemming=3Dfalse,libste=
-mmer"
-+
- FILES:${PN} +=3D "${datadir}"
-=20
- EXTRA_OEMESON:class-target +=3D "--cross-file=3D${WORKDIR}/meson-${PN}.c=
-ross"
---=20
-2.34.1
-
+>
+> diff --git a/meta-oe/recipes-devtools/grpc/grpc_1.45.2.bb b/meta-oe/recipes-devtools/grpc/grpc_1.46.6.bb
+> similarity index 97%
+> rename from meta-oe/recipes-devtools/grpc/grpc_1.45.2.bb
+> rename to meta-oe/recipes-devtools/grpc/grpc_1.46.6.bb
+> index c2f952fc64..7cf27d1e05 100644
+> --- a/meta-oe/recipes-devtools/grpc/grpc_1.45.2.bb
+> +++ b/meta-oe/recipes-devtools/grpc/grpc_1.46.6.bb
+> @@ -20,8 +20,8 @@ RDEPENDS:${PN}-dev:append:class-native = " ${PN}-compiler"
+>  # RDEPENDS:${PN}-dev += "${PN}-compiler"
+>
+>  S = "${WORKDIR}/git"
+> -SRCREV_grpc = "b39ffcc425ea990a537f98ec6fe6a1dcb90470d7"
+> -BRANCH = "v1.45.x"
+> +SRCREV_grpc = "af855eb64eea02d2f7b68d49c3d4d7a263649104"
+> +BRANCH = "v1.46.x"
+>  SRC_URI = "git://github.com/grpc/grpc.git;protocol=https;name=grpc;branch=${BRANCH} \
+>             file://0001-Revert-Changed-GRPCPP_ABSEIL_SYNC-to-GPR_ABSEIL_SYNC.patch \
+>             file://0001-cmake-add-separate-export-for-plugin-targets.patch \
+> --
+> 2.25.1
+>
+>
+> -=-=-=-=-=-=-=-=-=-=-=-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#100842): https://lists.openembedded.org/g/openembedded-devel/message/100842
+> Mute This Topic: https://lists.openembedded.org/mt/96613957/4240582
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [peron.clem@gmail.com]
+> -=-=-=-=-=-=-=-=-=-=-=-
+>
 
