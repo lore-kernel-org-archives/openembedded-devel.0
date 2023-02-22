@@ -1,58 +1,64 @@
-Return-Path: <denis@denix.org>
+Return-Path: <hsimeliere.opensource@witekio.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 506CAC61DA4
-	for <webhook@archiver.kernel.org>; Wed, 22 Feb 2023 16:48:18 +0000 (UTC)
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web10.14237.1677084496392636975
- for <openembedded-devel@lists.openembedded.org>;
- Wed, 22 Feb 2023 08:48:16 -0800
-Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 56D2B40C2E;
-	Wed, 22 Feb 2023 16:48:15 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id xkwzyfmw5CQS; Wed, 22 Feb 2023 16:48:15 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-88-116.washdc.fios.verizon.net [100.15.88.116])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 355E5406B7;
-	Wed, 22 Feb 2023 16:48:12 +0000 (UTC)
-Received: by mail.denix.org (Postfix, from userid 1000)
-	id 05267163763; Wed, 22 Feb 2023 11:47:47 -0500 (EST)
-Date: Wed, 22 Feb 2023 11:47:46 -0500
-From: Denys Dmytriyenko <denis@denix.org>
-To: "openembedded-devel@lists.openembedded.org" <openembedded-devel@lists.openembedded.org>,
-	openembedded-core <openembedded-core@lists.openembedded.org>,
-	Yocto Project <yocto@lists.yoctoproject.org>,
-	openembedded-members@lists.openembedded.org
-Subject: OpenEmbedded Happy Hour February 22 9pm/2100 UTC
-Message-ID: <20230222164746.GR22689@denix.org>
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5294BC64EC4
+	for <webhook@archiver.kernel.org>; Wed, 22 Feb 2023 16:50:28 +0000 (UTC)
+Subject: Re: [meta-networking][dunfell][PATCH 2/2] openvpn: upgrade 2.4.9 -> 2.4.12
+To: openembedded-devel@lists.openembedded.org
+From: "Hugo Simeliere" <hsimeliere.opensource@witekio.com>
+X-Originating-Location: Manchester, England, GB (165.225.198.108)
+X-Originating-Platform: Linux Firefox 109
+User-Agent: GROUPS.IO Web Poster
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-User-Agent: Mutt/1.5.20 (2009-06-14)
+Date: Wed, 22 Feb 2023 08:50:21 -0800
+References: <2affee6c-e89e-98d9-30c4-a79c20e2a6af@gmail.com>
+In-Reply-To: <2affee6c-e89e-98d9-30c4-a79c20e2a6af@gmail.com>
+Message-ID: <24955.1677084621800207695@lists.openembedded.org>
+Content-Type: multipart/alternative; boundary="FeTiJryYF86paOjrmCgZ"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 22 Feb 2023 16:48:18 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101215
+ <openembedded-devel@lists.openembedded.org>; Wed, 22 Feb 2023 16:50:28 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101216
 
-All,
+--FeTiJryYF86paOjrmCgZ
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 
-You are cordially invited to the next OpenEmbedded Happy Hour on February 22 
-for Asia/Pacific timezones @ 2100/9pm UTC (4pm ET / 1pm PT):
+Hi,
 
-https://www.openembedded.org/wiki/Calendar
-https://www.openembedded.org/wiki/Happy_Hours
-https://www.timeanddate.com/worldclock/fixedtime.html?msg=OpenEmbedded+Happy+Hour+February+22&iso=20230222T21
+No these CVE's affect only the version in Dunfell.
+Best regards,
+Hugo Simeliere
 
--- 
-Regards,
-Denys Dmytriyenko <denis@denix.org>
-PGP: 0x420902729A92C964 - https://denix.org/0x420902729A92C964
-Fingerprint: 25FC E4A5 8A72 2F69 1186  6D76 4209 0272 9A92 C964
+On Wed, Feb 22, 2023 at 05:21 PM, Armin Kuster wrote:
+
+>=20
+> Hugo,
+>=20
+> On 2/22/23 4:39 AM, Hugo Simeliere via lists.openembedded.org wrote:
+>=20
+>> Fixes below CVEs:
+>> * CVE-2022-0547
+>> * CVE-2020-15078
+>=20
+> Do these CVE's affect the version in Master?
+>=20
+> -armin
+
+--FeTiJryYF86paOjrmCgZ
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+
+Hi,<br /><br />No these CVE's affect only the version in Dunfell.<br />Best=
+ regards,<br />Hugo Simeliere<br /><br />On Wed, Feb 22, 2023 at 05:21 PM, =
+Armin Kuster wrote:<br />
+<blockquote>Hugo,<br /><br />On 2/22/23 4:39 AM, Hugo Simeliere via lists.o=
+penembedded.org wrote:<br />
+<blockquote>Fixes below CVEs:<br />* CVE-2022-0547<br />* CVE-2020-15078</b=
+lockquote>
+Do these CVE's affect the version in Master?<br /><br />-armin</blockquote>
+
+--FeTiJryYF86paOjrmCgZ--
 
