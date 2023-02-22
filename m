@@ -1,99 +1,91 @@
-Return-Path: <marex@denx.de>
+Return-Path: <mingli.yu@eng.windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 54CB5C636D7
-	for <webhook@archiver.kernel.org>; Tue, 21 Feb 2023 20:21:49 +0000 (UTC)
-Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
- by mx.groups.io with SMTP id smtpd.web11.53832.1677010907828715513
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 51BB5C61DA4
+	for <webhook@archiver.kernel.org>; Wed, 22 Feb 2023 07:50:05 +0000 (UTC)
+Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
+ by mx.groups.io with SMTP id smtpd.web11.3550.1677052199215330036
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 21 Feb 2023 12:21:49 -0800
+ Tue, 21 Feb 2023 23:49:59 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="body hash did not verify" header.i=@denx.de header.s=phobos-20191101 header.b=GMM4dumF;
- spf=pass (domain: denx.de, ip: 85.214.62.61, mailfrom: marex@denx.de)
-Received: from tr.lan (ip-86-49-120-218.bb.vodafone.cz [86.49.120.218])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
-	(No client certificate requested)
-	(Authenticated sender: marex@denx.de)
-	by phobos.denx.de (Postfix) with ESMTPSA id 7ACA8857F9;
-	Tue, 21 Feb 2023 21:21:45 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1677010905;
-	bh=5OWTmZQsIcYzhaMeUd7qbbRoDwxXYIhOr/LbgnJwdq4=;
-	h=From:To:Cc:Subject:Date:From;
-	b=GMM4dumFaOP8xJj6wo56YAnIwZ8mJVMAjgcVb78yrirCQVd8JBSeqiitPyjGpusKm
-	 OdZ2wTfDWoIp+NTbYSJE2f18x9iIOHunjpfPb9UKw8d74dJGVvlRjwK4ZiV8bhn7xh
-	 UETYnoTfWE7RTwcA/hOCaZv1F2QGt74QUlqUZklgt+3/tgpcNznoYMb9A3D6CR5t/Y
-	 yJmCxh4dnxXfDpmblae4D7Ube+mppLe+ifjSg7QXqgGkCK7b4LglwK6JxLmYl+M5SQ
-	 4oXUJ+g0nvp27yZwoAgFUDEoUzrx6PsZN8nG2QPT33lCATR0XJ8jG6CEE3mS9on8Gl
-	 UXxxgKI5tZciw==
-From: Marek Vasut <marex@denx.de>
-To: openembedded-devel@lists.openembedded.org
-Cc: Geoff Parker <geoffrey.parker@arthrex.com>,
-	Khem Raj <raj.khem@gmail.com>,
-	Armin Kuster <akuster808@gmail.com>
-Subject: [meta-python][langdale][PATCH] python3-pillow: add tk to RDEPENDS ptest pkg only if x11 in DISTRO_FEATURES
-Date: Tue, 21 Feb 2023 21:21:29 +0100
-Message-Id: <20230221202129.17282-1-marex@denx.de>
-X-Mailer: git-send-email 2.39.1
+ dkim=missing; spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=14178debc1=mingli.yu@windriver.com)
+Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 31M70JkB021544
+	for <openembedded-devel@lists.openembedded.org>; Tue, 21 Feb 2023 23:49:58 -0800
+Received: from ala-exchng02.corp.ad.wrs.com (unknown-82-254.windriver.com [147.11.82.254])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3nttu6ueeu-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Tue, 21 Feb 2023 23:49:58 -0800
+Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
+ ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.18; Tue, 21 Feb 2023 23:49:57 -0800
+Received: from pek-lpg-core2.wrs.com (128.224.153.41) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
+ 15.1.2507.17 via Frontend Transport; Tue, 21 Feb 2023 23:49:57 -0800
+From: <mingli.yu@eng.windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [meta-oe][PATCH] mariadb: Upgrade to 10.11.2
+Date: Wed, 22 Feb 2023 15:49:56 +0800
+Message-ID: <20230222074956.1594928-1-mingli.yu@eng.windriver.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-X-Virus-Scanned: clamav-milter 0.103.6 at phobos.denx.de
-X-Virus-Status: Clean
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Proofpoint-ORIG-GUID: w_fiuou7jloCV3-O1LpGQJBOEYUL1rjI
+X-Proofpoint-GUID: w_fiuou7jloCV3-O1LpGQJBOEYUL1rjI
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.219,Aquarius:18.0.930,Hydra:6.0.562,FMLib:17.11.170.22
+ definitions=2023-02-22_04,2023-02-20_02,2023-02-09_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 suspectscore=0
+ impostorscore=0 clxscore=1015 mlxlogscore=975 mlxscore=0
+ lowpriorityscore=0 priorityscore=1501 spamscore=0 malwarescore=0
+ adultscore=0 phishscore=0 bulkscore=0 classifier=spam adjust=0 reason=mlx
+ scancount=1 engine=8.12.0-2212070000 definitions=main-2302220066
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 21 Feb 2023 20:21:49 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101199
+ <openembedded-devel@lists.openembedded.org>; Wed, 22 Feb 2023 07:50:05 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101200
 
-From: Geoff Parker <geoffrey.parker@arthrex.com>
+From: Mingli Yu <mingli.yu@windriver.com>
 
-commit 7b0e71e00 ("python3-pillow: add ptest support", 2023-01-31)
-added tk to RDEPENDS:${PN}-ptest. Which cause this error on non x11
-builds:
+Upgrade mariadb to 10.11.2 [1].
 
-    ERROR: Nothing RPROVIDES 'tk' (but meta-openembedded/meta-python/reci=
-pes-devtools/python/python3-pillow_9.4.0.bb
-           RDEPENDS on or otherwise requires it) tk was skipped: missing =
-required
-           distro feature 'x11' (not in DISTRO_FEATURES)
-    NOTE: Runtime target 'tk' is unbuildable, removing...
-          Missing or unbuildable dependency chain was: ['tk']
-    NOTE: Runtime target 'iotmanager' is unbuildable, removing...
-          Missing or unbuildable dependency chain was: ['iotmanager', 'py=
-thon3-pillow', 'tk']
-    ERROR: Required build target 'update-runtime' has no buildable provid=
-ers.
-           Missing or unbuildable dependency chain was:
-           ['update-runtime', 'runtime-image', 'iotmanager', 'python3-pil=
-low', 'tk']
+[1] https://mariadb.com/kb/en/mariadb-10-11-2-release-notes
 
-Add tk dependency only if DISTRO_FEATURES includes x11
-
-(cherry picked from commit 6e8c90560e0aa8fe2ebfb791985cb75fd7490527)
-Signed-off-by: Geoff Parker <geoffrey.parker@arthrex.com>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
 ---
-Cc: Armin Kuster <akuster808@gmail.com>
----
- meta-python/recipes-devtools/python/python3-pillow_9.4.0.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ .../{mariadb-native_10.11.1.bb => mariadb-native_10.11.2.bb}    | 0
+ meta-oe/recipes-dbs/mysql/mariadb.inc                           | 2 +-
+ .../mysql/{mariadb_10.11.1.bb => mariadb_10.11.2.bb}            | 0
+ 3 files changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-dbs/mysql/{mariadb-native_10.11.1.bb => mariadb-native_10.11.2.bb} (100%)
+ rename meta-oe/recipes-dbs/mysql/{mariadb_10.11.1.bb => mariadb_10.11.2.bb} (100%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-pillow_9.4.0.bb =
-b/meta-python/recipes-devtools/python/python3-pillow_9.4.0.bb
-index 5a466778c..86705d2d8 100644
---- a/meta-python/recipes-devtools/python/python3-pillow_9.4.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-pillow_9.4.0.bb
-@@ -45,7 +45,7 @@ RDEPENDS:${PN}-ptest +=3D " \
-     ${PYTHON_PN}-pytest-timeout \
-     ${PYTHON_PN}-resource \
-     ${PYTHON_PN}-unixadmin\
--    tk \
-+    ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'tk', '', d)} \
- "
-=20
- CVE_PRODUCT =3D "pillow"
---=20
-2.39.1
+diff --git a/meta-oe/recipes-dbs/mysql/mariadb-native_10.11.1.bb b/meta-oe/recipes-dbs/mysql/mariadb-native_10.11.2.bb
+similarity index 100%
+rename from meta-oe/recipes-dbs/mysql/mariadb-native_10.11.1.bb
+rename to meta-oe/recipes-dbs/mysql/mariadb-native_10.11.2.bb
+diff --git a/meta-oe/recipes-dbs/mysql/mariadb.inc b/meta-oe/recipes-dbs/mysql/mariadb.inc
+index 1a47d9110..57930dae3 100644
+--- a/meta-oe/recipes-dbs/mysql/mariadb.inc
++++ b/meta-oe/recipes-dbs/mysql/mariadb.inc
+@@ -25,7 +25,7 @@ SRC_URI = "https://archive.mariadb.org/${BP}/source/${BP}.tar.gz \
+            file://0001-Add-missing-includes-cstdint-and-cstdio.patch \
+           "
+ SRC_URI:append:libc-musl = " file://ppc-remove-glibc-dep.patch"
+-SRC_URI[sha256sum] = "ffacf84e74daf249ad64b9573d79a4e882f66b004614f8b33bfcb14a8e25da1d"
++SRC_URI[sha256sum] = "1c89dee0caed0f68bc2a1d203eb98a123150e6a179f6ee0f1fc0ba3f08dc71dc"
+ 
+ UPSTREAM_CHECK_URI = "https://github.com/MariaDB/server/releases"
+ 
+diff --git a/meta-oe/recipes-dbs/mysql/mariadb_10.11.1.bb b/meta-oe/recipes-dbs/mysql/mariadb_10.11.2.bb
+similarity index 100%
+rename from meta-oe/recipes-dbs/mysql/mariadb_10.11.1.bb
+rename to meta-oe/recipes-dbs/mysql/mariadb_10.11.2.bb
+-- 
+2.25.1
 
 
