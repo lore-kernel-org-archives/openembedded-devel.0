@@ -1,129 +1,84 @@
-Return-Path: <philip@balister.org>
+Return-Path: <denis@denix.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7E6EDC64EC7
-	for <webhook@archiver.kernel.org>; Sat, 25 Feb 2023 21:00:50 +0000 (UTC)
-Received: from mail-pj1-f44.google.com (mail-pj1-f44.google.com [209.85.216.44])
- by mx.groups.io with SMTP id smtpd.web11.51963.1677355056526027569
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 255DFC7EE2D
+	for <webhook@archiver.kernel.org>; Sat, 25 Feb 2023 23:17:41 +0000 (UTC)
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
+ by mx.groups.io with SMTP id smtpd.web11.55996.1677367056447515003
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 25 Feb 2023 11:57:36 -0800
+ Sat, 25 Feb 2023 15:17:36 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=ECYVs82l;
- spf=pass (domain: gmail.com, ip: 209.85.216.44, mailfrom: kekiefer@gmail.com)
-Received: by mail-pj1-f44.google.com with SMTP id y15-20020a17090aa40f00b00237ad8ee3a0so2537829pjp.2
-        for <openembedded-devel@lists.openembedded.org>; Sat, 25 Feb 2023 11:57:36 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=h4iTepo50Ib4SIy4KdFTse+drc8zTdqBsvOpTFpA9bc=;
-        b=ECYVs82lkCqRjW6DEaO14ekD/prem+nAgufnQjWzC5HD0S8PeVjIdo7Fw27cLxZjUj
-         M/8aNN6ehotlNxHSC8OrDF0+W2fHgZJDlTmGqZGSHCCKh3QE0GQh4KhGRZA8YYs23BLR
-         d1Yps/B1ZYaU9TG4VDeF64/V0/2r73IFeA9IXAlaG3UISlkuT1IraNtNsALxHx9084VT
-         KpjCVEr0oUpovqbuxp8ILH4OBkcL1Fk+FxBRxumCNOzX5FcVZ7viLcxM+G26t+XgPmhB
-         wBbi6H8Qbaz8J7Mvq/soEsMCxnPj1xkiCG+OgOlcdT1zoa46q/DUD/b7ro2yn+KhhEc+
-         Vj/Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=h4iTepo50Ib4SIy4KdFTse+drc8zTdqBsvOpTFpA9bc=;
-        b=7w2284cRkgDEYMI0YsGTmTNsT+qnnAA2Md7pXTjgYSGH3KZHbTuisBmqDfGnKRGGvS
-         ugtRo/bnU94qr2CzSnmeTIYCLzRakeRPD4W6xDTje6qfJDTpM3lYNwWi5KvTP6eI4pFf
-         CWy9yvTwddZmPKsAX41wIwsRG+V0rQ+pWrL/QvCkOIKmn4tUTvwe9BZZbg6tnysazwHE
-         Kllf6sQnzbq1z7+MqmfOChs5ncyimhZqedK1gGYvTcxdWPh7fU32eqZ91hbnU8S46TQb
-         U3gSE/C5YMPQVUGdjmD5xNt+/4mTYo+VA1XoO0ibtB2WKHwc814KDEAd0lV1NOjmV3MD
-         hGjA==
-X-Gm-Message-State: AO0yUKXsCp551tHVXJ857yh/SRZBJEQmws1d/BPyDfB6geRm3RkUHf77
-	694w2c2ZKkTzB++R/PrhukzCVYnVLus=
-X-Google-Smtp-Source: AK7set+XRgG/2A3iDKJLpr1139SOrCGoIleBVZVO4fSM5m0VPglG8xbXWgbxztHbI/Rhhd2h7XlZxw==
-X-Received: by 2002:a17:903:1103:b0:19c:bcda:ac72 with SMTP id n3-20020a170903110300b0019cbcdaac72mr9876657plh.56.1677355055603;
-        Sat, 25 Feb 2023 11:57:35 -0800 (PST)
-Received: from localhost.localdomain (ip68-108-250-132.sb.sd.cox.net. [68.108.250.132])
-        by smtp.gmail.com with ESMTPSA id b20-20020a656694000000b00503006d9b50sm1379938pgw.92.2023.02.25.11.57.34
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 25 Feb 2023 11:57:35 -0800 (PST)
-From: "Kurt Kiefer" <kekiefer@gmail.com>
+ dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 3F6A340C8F
+	for <openembedded-devel@lists.openembedded.org>; Sat, 25 Feb 2023 23:17:35 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id zGiCCIobfNUo
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 25 Feb 2023 23:17:35 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-88-116.washdc.fios.verizon.net [100.15.88.116])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 2DF0240BA9
+	for <openembedded-devel@lists.openembedded.org>; Sat, 25 Feb 2023 23:17:35 +0000 (UTC)
+Received: from thorin.denix (thorin.denix [192.168.30.9])
+	by mail.denix.org (Postfix) with ESMTP id 6E602163765;
+	Sat, 25 Feb 2023 18:17:08 -0500 (EST)
+From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>,
-	Kurt Kiefer <kekiefer@gmail.com>
-Subject: [meta-python][landgale][PATCH] python3-pybind11: Upgrade to 2.10.3
-Date: Sat, 25 Feb 2023 11:56:55 -0800
-Message-Id: <20230225195655.3682899-1-kekiefer@gmail.com>
+Cc: Denys Dmytriyenko <denis@denix.org>
+Subject: [PATCH 2/2] mbedtls: set up /usr/bin/hello as alternative
+Date: Sat, 25 Feb 2023 23:17:17 +0000
+Message-Id: <20230225231717.3887902-3-denis@denix.org>
 X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20230225231717.3887902-1-denis@denix.org>
+References: <20230225231717.3887902-1-denis@denix.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 25 Feb 2023 21:00:50 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101253
+ <openembedded-devel@lists.openembedded.org>; Sat, 25 Feb 2023 23:17:41 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101254
 
-From: Khem Raj <raj.khem@gmail.com>
+As mbedtls installs this rather generically-named /usr/bin/hello binary,
+it conflicts with the one provided by lmbench, hence set it up as an
+alternative to avoid conflicts when both are installed to rootfs or SDK.
 
-It gets pkgconfig support which is required by some dependent packages
-like rwmem
-
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 5c455804aede17e0ea0cbb7ab55f8580f912e664)
-Signed-off-by: Kurt Kiefer <kekiefer@gmail.com>
+Signed-off-by: Denys Dmytriyenko <denis@denix.org>
 ---
- ...11_2.10.0.bb => python3-pybind11_2.10.3.bb} | 18 +++++++-----------
- 1 file changed, 7 insertions(+), 11 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-pybind11_2.10.0.bb => python3-pybind11_2.10.3.bb} (68%)
+ .../recipes-connectivity/mbedtls/mbedtls_2.28.2.bb           | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
 
-diff --git a/meta-python/recipes-devtools/python/python3-pybind11_2.10.0.bb b/meta-python/recipes-devtools/python/python3-pybind11_2.10.3.bb
-similarity index 68%
-rename from meta-python/recipes-devtools/python/python3-pybind11_2.10.0.bb
-rename to meta-python/recipes-devtools/python/python3-pybind11_2.10.3.bb
-index 66aefac3d..bb604982d 100644
---- a/meta-python/recipes-devtools/python/python3-pybind11_2.10.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-pybind11_2.10.3.bb
-@@ -5,16 +5,12 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=774f65abd8a7fe3124be2cdf766cd06f"
- 
- DEPENDS = "boost"
- 
--SRC_URI = "git://github.com/pybind/pybind11.git;branch=stable;protocol=https \
--           file://0001-Do-not-strip-binaries.patch \
--"
-+SRC_URI = "git://github.com/pybind/pybind11.git;branch=stable;protocol=https"
- 
--SRCREV = "aa304c9c7d725ffb9d10af08a3b34cb372307020"
-+SRCREV = "0bd8896a4010f2d91b2340570c24fa08606ec406"
- 
- S = "${WORKDIR}/git"
- 
--BBCLASSEXTEND = "native"
--
- EXTRA_OECMAKE =  "-DPYBIND11_TEST=OFF"
- 
- inherit cmake setuptools3 python3native
-@@ -23,17 +19,17 @@ PIP_INSTALL_DIST_PATH = "${S}/dist"
- PIP_INSTALL_PACKAGE = "pybind11"
- 
- do_configure() {
--	cmake_do_configure
-+   cmake_do_configure
- }
- 
- do_compile() {
--	setuptools3_do_compile
--	cmake_do_compile
-+   setuptools3_do_compile
-+   cmake_do_compile
- }
- 
- do_install() {
--	setuptools3_do_install
--	cmake_do_install
-+   setuptools3_do_install
-+   cmake_do_install
- }
- 
- BBCLASSEXTEND = "native nativesdk"
--- 
+diff --git a/meta-networking/recipes-connectivity/mbedtls/mbedtls_2.28.2.=
+bb b/meta-networking/recipes-connectivity/mbedtls/mbedtls_2.28.2.bb
+index f5f1236f1..e19587ca0 100644
+--- a/meta-networking/recipes-connectivity/mbedtls/mbedtls_2.28.2.bb
++++ b/meta-networking/recipes-connectivity/mbedtls/mbedtls_2.28.2.bb
+@@ -26,7 +26,7 @@ S =3D "${WORKDIR}/git"
+ SRCREV =3D "89f040a5c938985c5f30728baed21e49d0846a53"
+ SRC_URI =3D "git://github.com/ARMmbed/mbedtls.git;protocol=3Dhttps;branc=
+h=3Dmbedtls-2.28"
+=20
+-inherit cmake
++inherit cmake update-alternatives
+=20
+ PACKAGECONFIG ??=3D "shared-libs programs"
+ PACKAGECONFIG[shared-libs] =3D "-DUSE_SHARED_MBEDTLS_LIBRARY=3DON,-DUSE_=
+SHARED_MBEDTLS_LIBRARY=3DOFF"
+@@ -47,6 +47,9 @@ RPROVIDES:${PN} =3D "polarssl"
+ PACKAGES =3D+ "${PN}-programs"
+ FILES:${PN}-programs =3D "${bindir}/"
+=20
++ALTERNATIVE:${PN}-programs =3D "hello"
++ALTERNATIVE_LINK_NAME[hello] =3D "${bindir}/hello"
++
+ BBCLASSEXTEND =3D "native nativesdk"
+=20
+ CVE_PRODUCT =3D "mbed_tls"
+--=20
 2.25.1
 
 
