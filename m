@@ -2,53 +2,53 @@ Return-Path: <scott.murray@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 12D6AC7EE2E
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 11E31C64ED6
 	for <webhook@archiver.kernel.org>; Mon, 27 Feb 2023 21:51:24 +0000 (UTC)
-Received: from mail-qt1-f169.google.com (mail-qt1-f169.google.com [209.85.160.169])
- by mx.groups.io with SMTP id smtpd.web11.8183.1677534674421314751
+Received: from mail-qt1-f173.google.com (mail-qt1-f173.google.com [209.85.160.173])
+ by mx.groups.io with SMTP id smtpd.web11.8186.1677534675447695572
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 27 Feb 2023 13:51:14 -0800
+ Mon, 27 Feb 2023 13:51:16 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=rSaNAz03;
- spf=pass (domain: konsulko.com, ip: 209.85.160.169, mailfrom: scott.murray@konsulko.com)
-Received: by mail-qt1-f169.google.com with SMTP id l18so7341693qtp.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 27 Feb 2023 13:51:14 -0800 (PST)
+ dkim=pass header.i=@konsulko.com header.s=google header.b=IvQLmGRZ;
+ spf=pass (domain: konsulko.com, ip: 209.85.160.173, mailfrom: scott.murray@konsulko.com)
+Received: by mail-qt1-f173.google.com with SMTP id w23so8412551qtn.6
+        for <openembedded-devel@lists.openembedded.org>; Mon, 27 Feb 2023 13:51:16 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=konsulko.com; s=google;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=XAkZ/W5K7j2Q/d+CgD+6UcdvIMxBX6zH3l+i+qPuWo4=;
-        b=rSaNAz03KC7AfF1+x7ok+9GeuyslCPGqSNB9r6JRAzWZzfreCUZ63eVsh2ZfPg99Iu
-         ok6pei3BhDHa8bCy5dv1aynu+ziIa9QDr8TULhU4TLBsYaDMg5Z4clt7GmSlsZY00cIV
-         TaNlx4u6SBijR6g5lSFGd2b1KdVeQEW5aDleI=
+        bh=RvagVBtEqujzAEyYWDqpNb/lkys1HgUbI9rQOEDzVfE=;
+        b=IvQLmGRZjfJAiAZX627l/kEz+Aah3v0Bqr59sq+5uYpcMuUhlmg0K8YjNSznS/JSwP
+         p762yHD8A1u7TgIr5ydDcnhRJDJzT7QTQP+xW/Qv7C+dmw/4Qe6/AMLA+vHHCp8OdZJ4
+         gx2Hi6rcxZQvXEpYrTa4mTrYl7pSRNd1pA208=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=XAkZ/W5K7j2Q/d+CgD+6UcdvIMxBX6zH3l+i+qPuWo4=;
-        b=qdkdIYKc4Lv4nvCDtj+xzbVm5QA9oAALORrL1QMe0BGpmtkX4iTqlbB0WW8A7oJca6
-         w9Z5A09yt1DqAqL5vrQFKZsgq2eX2hflgtNm32AF7893VbXA+ifA1QIxEqVk7GSmfV4f
-         aPC1hGBJx3tZ5/sHOOtinYfIl0KrPqIVI808yGO2Yx0I4HQkz7q4ub7LtpVFOTrjYfmj
-         UqIO2llLqyU3jgkiO98ktFeJW/3ZsS5PZckun8c5HOse5GrA4b6KQ2J3I593lRzjvzwG
-         v3jI0VdtXAvsaGlzactoZTwf4ENezhtuEGtS1aB17wIfwCxzVPp2YI5YrzkAn8g1OfrB
-         /wmA==
-X-Gm-Message-State: AO0yUKWNqO0JNSTZVoH7V9UNaJWohpkHL2KQ5AbXpc2nIyAkfN08KIwE
-	Bv3veGc7rVpiubFvINuPvCHL55meXKFHSvFu
-X-Google-Smtp-Source: AK7set/z5v1fxaQ7e7WRXVRvP66IuSfnc7aLrftRSz2OM66lclnKN2goVP8H5UkwSudOjAz0rJ5z4A==
-X-Received: by 2002:a05:622a:50:b0:3bf:ce27:e1fc with SMTP id y16-20020a05622a005000b003bfce27e1fcmr1782214qtw.7.1677534673121;
-        Mon, 27 Feb 2023 13:51:13 -0800 (PST)
+        bh=RvagVBtEqujzAEyYWDqpNb/lkys1HgUbI9rQOEDzVfE=;
+        b=smwgZ3oJi9mk0nBZWBn87YtjsNJ4eU0+pxroc3vqIgvUN6pwVHck2LJvd0u+Agravo
+         hgEpVzxTsaHunwmwmSJUiJS9mjjS1UmI5amdKUw79SUkGI8WI3UcV1hxb2V4zkS3ushh
+         gXVIACMha4kpdK/2mLzBh4/j5FdQceiUr4MVAhuD5W8Bc4PynSOZi/Cq6cTTbzRW8RTZ
+         bVs7c7Qhn8I8LjbGiJ9cyAllNADmltOoXJQYa+C4EWwxHKSDQR5MJpeoK4cyP4n7NPZD
+         kme76jrdDr+bCfAScsC31Yu98Rcgs5Uooo6JZKzgURe6zRCWxiFbyEDTpuaFYuvcDQ7K
+         lgLg==
+X-Gm-Message-State: AO0yUKWaLyQYhdUtM2OQnaxGRYS0UlVx8Oy5sgCtL3c9r74ChFoqjWyu
+	i8/M34apnV1fkKRu9LxE46yst+TzdAM4CeyC
+X-Google-Smtp-Source: AK7set8pbbhL73FL0X38bjaFjjJRiqhyQLrPCeXCzrRdXRT2nJq1TxOY6G4MYHwS03p55WItYZ121A==
+X-Received: by 2002:a05:622a:1391:b0:3b9:bca3:d93d with SMTP id o17-20020a05622a139100b003b9bca3d93dmr1555582qtk.22.1677534675656;
+        Mon, 27 Feb 2023 13:51:15 -0800 (PST)
 Received: from ghidorah.spiteful.org (192-0-174-82.cpe.teksavvy.com. [192.0.174.82])
-        by smtp.gmail.com with ESMTPSA id a186-20020a3798c3000000b007423c122457sm5650370qke.63.2023.02.27.13.51.12
+        by smtp.gmail.com with ESMTPSA id a186-20020a3798c3000000b007423c122457sm5650370qke.63.2023.02.27.13.51.14
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 27 Feb 2023 13:51:12 -0800 (PST)
+        Mon, 27 Feb 2023 13:51:15 -0800 (PST)
 From: Scott Murray <scott.murray@konsulko.com>
 To: openembedded-devel@lists.openembedded.org,
 	Armin Kuster <akuster808@gmail.com>
-Subject: [meta-oe][kirkstone][PATCH 3/5] ncmpc: Upgrade to 0.47
-Date: Mon, 27 Feb 2023 16:51:01 -0500
-Message-Id: <20230227215103.795230-4-scott.murray@konsulko.com>
+Subject: [meta-oe][kirkstone][PATCH 5/5] fluidsynth: update SRC_URI to remove non-existing 2.2.x branch
+Date: Mon, 27 Feb 2023 16:51:03 -0500
+Message-Id: <20230227215103.795230-6-scott.murray@konsulko.com>
 X-Mailer: git-send-email 2.39.0
 In-Reply-To: <20230227215103.795230-1-scott.murray@konsulko.com>
 References: <20230227215103.795230-1-scott.murray@konsulko.com>
@@ -58,81 +58,34 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 27 Feb 2023 21:51:24 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101305
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101307
 
-From: Khem Raj <raj.khem@gmail.com>
+From: Preeti Sachan <preeti.sachan@intel.com>
 
-Backport a patch to fix c++17 build with clang
+Remove branch 2.2.x from SRC_URI as fluidsynth github removed the branch.
+The SRCREV is on master branch.
 
+Signed-off-by: Preeti Sachan <preeti.sachan@intel.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 9b6baed24d5efe0820266ccf3567bcff42701a01)
+(cherry picked from commit 534d04af483d5f3d4fc73162c110449f169677a5)
 Signed-off-by: Scott Murray <scott.murray@konsulko.com>
 ---
- ...egular-integer-to-fix-Wenum-constexp.patch | 37 +++++++++++++++++++
- .../musicpd/{ncmpc_0.46.bb => ncmpc_0.47.bb}  |  3 +-
- 2 files changed, 39 insertions(+), 1 deletion(-)
- create mode 100644 meta-multimedia/recipes-multimedia/musicpd/ncmpc/0001-SearchPage-use-regular-integer-to-fix-Wenum-constexp.patch
- rename meta-multimedia/recipes-multimedia/musicpd/{ncmpc_0.46.bb => ncmpc_0.47.bb} (92%)
+ meta-multimedia/recipes-multimedia/fluidsynth/fluidsynth.inc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-multimedia/recipes-multimedia/musicpd/ncmpc/0001-SearchPage-use-regular-integer-to-fix-Wenum-constexp.patch b/meta-multimedia/recipes-multimedia/musicpd/ncmpc/0001-SearchPage-use-regular-integer-to-fix-Wenum-constexp.patch
-new file mode 100644
-index 000000000..92094af1f
---- /dev/null
-+++ b/meta-multimedia/recipes-multimedia/musicpd/ncmpc/0001-SearchPage-use-regular-integer-to-fix-Wenum-constexp.patch
-@@ -0,0 +1,37 @@
-+From 2e8dc2c28c0938dbbb85ebbac2b9a60be9ccd9f3 Mon Sep 17 00:00:00 2001
-+From: Max Kellermann <max@musicpd.org>
-+Date: Wed, 23 Nov 2022 12:25:50 +0100
-+Subject: [PATCH] SearchPage: use regular integer to fix -Wenum-constexpr-conversion
-+
-+Upstream-Status: Backport [https://github.com/MusicPlayerDaemon/ncmpc/commit/ddd1757907f0376b5843f707bf182b7827ff6591]
-+---
-+ src/SearchPage.cxx | 6 +++---
-+ 1 file changed, 3 insertions(+), 3 deletions(-)
-+
-+diff --git a/src/SearchPage.cxx b/src/SearchPage.cxx
-+index 2fa5edbc..3f91c4fe 100644
-+--- a/src/SearchPage.cxx
-++++ b/src/SearchPage.cxx
-+@@ -81,7 +81,7 @@ search_get_tag_id(const char *name)
-+ }
-+ 
-+ struct SearchMode {
-+-	enum mpd_tag_type table;
-++	int table;
-+ 	const char *label;
-+ };
-+ 
-+@@ -89,8 +89,8 @@ static constexpr SearchMode mode[] = {
-+ 	{ MPD_TAG_TITLE, N_("Title") },
-+ 	{ MPD_TAG_ARTIST, N_("Artist") },
-+ 	{ MPD_TAG_ALBUM, N_("Album") },
-+-	{ (enum mpd_tag_type)SEARCH_URI, N_("Filename") },
-+-	{ (enum mpd_tag_type)SEARCH_ARTIST_TITLE, N_("Artist + Title") },
-++	{ SEARCH_URI, N_("Filename") },
-++	{ SEARCH_ARTIST_TITLE, N_("Artist + Title") },
-+ 	{ MPD_TAG_COUNT, nullptr }
-+ };
-+ 
-+-- 
-+2.39.0
-+
-diff --git a/meta-multimedia/recipes-multimedia/musicpd/ncmpc_0.46.bb b/meta-multimedia/recipes-multimedia/musicpd/ncmpc_0.47.bb
-similarity index 92%
-rename from meta-multimedia/recipes-multimedia/musicpd/ncmpc_0.46.bb
-rename to meta-multimedia/recipes-multimedia/musicpd/ncmpc_0.47.bb
-index a77d4f978..44046912e 100644
---- a/meta-multimedia/recipes-multimedia/musicpd/ncmpc_0.46.bb
-+++ b/meta-multimedia/recipes-multimedia/musicpd/ncmpc_0.47.bb
-@@ -34,6 +34,7 @@ PACKAGECONFIG[chat_screen] = "-Dchat_screen=true,-Dchat_screen=false"
+diff --git a/meta-multimedia/recipes-multimedia/fluidsynth/fluidsynth.inc b/meta-multimedia/recipes-multimedia/fluidsynth/fluidsynth.inc
+index 14d09e5f0..a4590d61a 100644
+--- a/meta-multimedia/recipes-multimedia/fluidsynth/fluidsynth.inc
++++ b/meta-multimedia/recipes-multimedia/fluidsynth/fluidsynth.inc
+@@ -4,7 +4,7 @@ SECTION = "libs/multimedia"
+ LICENSE = "LGPL-2.1-only"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=fc178bcd425090939a8b634d1d6a9594"
  
- SRC_URI = " \
-     git://github.com/MusicPlayerDaemon/ncmpc;branch=master;protocol=https \
-+    file://0001-SearchPage-use-regular-integer-to-fix-Wenum-constexp.patch \
- "
--SRCREV = "b9b5e11e10d8f66cd672ffb51728aa447f78ecd4"
-+SRCREV = "fc8de01c71acdf10ad07c7aae756dc522b848124"
+-SRC_URI = "git://github.com/FluidSynth/fluidsynth.git;branch=2.2.x;protocol=https"
++SRC_URI = "git://github.com/FluidSynth/fluidsynth.git;branch=master;protocol=https"
+ SRCREV = "8b00644751578ba67b709a827cbe5133d849d339"
  S = "${WORKDIR}/git"
+ PV = "2.2.6"
 -- 
 2.39.0
 
