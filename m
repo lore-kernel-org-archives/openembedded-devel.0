@@ -1,174 +1,76 @@
-Return-Path: <festevam@gmail.com>
+Return-Path: <scott.murray@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7FDFDC64ED6
-	for <webhook@archiver.kernel.org>; Mon, 27 Feb 2023 19:27:33 +0000 (UTC)
-Received: from mail-oo1-f49.google.com (mail-oo1-f49.google.com [209.85.161.49])
- by mx.groups.io with SMTP id smtpd.web10.4116.1677526046640836672
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2974FC64ED8
+	for <webhook@archiver.kernel.org>; Mon, 27 Feb 2023 21:42:24 +0000 (UTC)
+Received: from mail-il1-f178.google.com (mail-il1-f178.google.com [209.85.166.178])
+ by mx.groups.io with SMTP id smtpd.web10.7895.1677534138523698396
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 27 Feb 2023 11:27:26 -0800
+ Mon, 27 Feb 2023 13:42:18 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=X2Qadj4G;
- spf=pass (domain: gmail.com, ip: 209.85.161.49, mailfrom: festevam@gmail.com)
-Received: by mail-oo1-f49.google.com with SMTP id l16-20020a4ad9d0000000b005254905810aso1168444oou.9
-        for <openembedded-devel@lists.openembedded.org>; Mon, 27 Feb 2023 11:27:26 -0800 (PST)
+ dkim=pass header.i=@konsulko.com header.s=google header.b=h/BeIG/9;
+ spf=pass (domain: konsulko.com, ip: 209.85.166.178, mailfrom: scott.murray@konsulko.com)
+Received: by mail-il1-f178.google.com with SMTP id i12so4969681ila.5
+        for <openembedded-devel@lists.openembedded.org>; Mon, 27 Feb 2023 13:42:18 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112; t=1677526045;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=SaUJlEa1BA4ft/NDi32+/n6QjmkZu1pMLmOvymWkg50=;
-        b=X2Qadj4G3UPDdfS3PCk4dFG8dFKfnc9DpvCAE7nIB5RWkgGeRV5vvn+Y2cmpBeN4Az
-         QWt66UCyeKGUE8caLaI+DA4G9uLTdNd5yOhlHqPxVJhtBSHhvIr6EeaRmbpAwma+NMCH
-         msCj+zumRgiaOrU0L3cqMawcjrb5RK3wJb4Z00kdW2caY6t1KL/tKaQ3Mrgn/ao4y1/W
-         HzWRLLvAS1JU83iX9sQK8S3BWvJaPUnZ7rtCGldhCK1awOdN8I7Y3uT3A4bRF0rQrfJq
-         d4og61wKUeeJbOzkZWFH5FBP3zwCjyENrvDjde9EC3QbVYcj2NvYQ1qispIcyfSRoYgQ
-         ZVWg==
+        d=konsulko.com; s=google;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=zQnNPmZXvN/qNsI25NH3KllRo418YKv+1oCX5lePJTE=;
+        b=h/BeIG/9SJaBeYANNDfCSup09TrgXpKHjk6WJiOpbWihVSORD0CbugEqEDaCM9yu3y
+         mnheXpKXa7NC7wurtHrcaDQklGlTY7/I8VJmqNUpX567c7x+NrfNMOee7flebRELuwKe
+         awOOnZekfrUA94HADsVhgkRiPMqUb8KSz4wDE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112; t=1677526045;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=SaUJlEa1BA4ft/NDi32+/n6QjmkZu1pMLmOvymWkg50=;
-        b=E6MrdJH4qPFuZtSkizRLUV9VqmbHxXTjXf1yrnLx53ShQlyijSPdUTHdafBGIwEMMd
-         fqRnQ8ppf+f1oJddtTJxd2PSqS9fhPQIHL0HgOvDkbZfySWkzfOthm7eNfVg0x/rx6gf
-         oNhMfWT79v0wmN915CiBM4kBHm1hDiYt6Ya+70RpHHQL9ZJAyK8D1s9Q9xshyA29sLz5
-         EP6Qf5AUEF6u9o+3X5x8hu4vOMdCqJIMiHGzJNrj5mXWTftiKDIvzHDFySjRKwVK+Iv+
-         MkK1iSPWQQqcgjhxBbG3d8i9U7De+XOuP6RarVejfN6OVuJwuc8qk6wa2F3w1GZch/qo
-         31PQ==
-X-Gm-Message-State: AO0yUKVN1nHwsfK5nMOkbepYA+iUaZkKE+mmY/kuy4MFsVPkHJNvAVDp
-	LCRJpLbUKAZ3VtSuczlfWpXvcF7u7h0=
-X-Google-Smtp-Source: AK7set9i0RXRvrYEw8objeN98Q7htNEH2NFiPUXN872a/JvFnERNbs139JuxcAu/R5I1hCckP+NiBw==
-X-Received: by 2002:a4a:4907:0:b0:525:224c:a896 with SMTP id z7-20020a4a4907000000b00525224ca896mr7326170ooa.0.1677526045387;
-        Mon, 27 Feb 2023 11:27:25 -0800 (PST)
-Received: from localhost.localdomain ([2804:14c:485:4b69:ba74:1ef9:1d36:2bb6])
-        by smtp.gmail.com with ESMTPSA id m55-20020a05683026f700b00693d8a315eesm2945003otu.31.2023.02.27.11.27.23
+        d=1e100.net; s=20210112;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=zQnNPmZXvN/qNsI25NH3KllRo418YKv+1oCX5lePJTE=;
+        b=HPM/eTakCL3hcYQO4ZDAeDYrJIsDlJBI7YfJeZw4C1xerBhglRYq8wekhfGU2sJO0x
+         7aqjfexc55TMJfZLsXfqauKxsVdV4b0XtmGAJPjSEMCD/vFS774YhFyqueQ4Y/cPKc0Q
+         5C+RacYe5OIOZdfKCYXhhsgzDG0ViTDKemWRkPCVMs9zttBQznplY1fyzyQ2PHoRz3NC
+         35LTXiJG+gDpC02rqbul2yCChEyohvR8RL+lOPgzDu9moY45zzJUnPkq1C6zaMH2Y98p
+         4SD3At4x9qKy29Chh0AWYRTdMWsf4UkbwD7jSKs3EfjVShJESssFp+/Wps1bYE/iQxmD
+         55hA==
+X-Gm-Message-State: AO0yUKW0BBwzXM+zZOxs6RLk1PUa5jMHxXvbK9Kke/jOeowyvG67PLXV
+	Tm8W6nrQBe46E1EpsEM0E/W1X6Y+QuVhFrkW
+X-Google-Smtp-Source: AK7set8IbGwtnl61wS7URYhu3Ii0tFGutE8lQ5JPZX+Dqp+ksEqg//Cpbv0IptZQBQhz9FO2h5iT+Q==
+X-Received: by 2002:a05:6e02:b43:b0:313:cb9e:8026 with SMTP id f3-20020a056e020b4300b00313cb9e8026mr920969ilu.11.1677534137419;
+        Mon, 27 Feb 2023 13:42:17 -0800 (PST)
+Received: from ghidorah.spiteful.org (192-0-174-82.cpe.teksavvy.com. [192.0.174.82])
+        by smtp.gmail.com with ESMTPSA id a17-20020a02ac11000000b003c4f35c21absm2264516jao.137.2023.02.27.13.42.16
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 27 Feb 2023 11:27:24 -0800 (PST)
-From: Fabio Estevam <festevam@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Fabio Estevam <festevam@denx.de>
-Subject: [PATCH] glmark2: Update to 2023.01
-Date: Mon, 27 Feb 2023 16:27:16 -0300
-Message-Id: <20230227192716.77091-1-festevam@gmail.com>
-X-Mailer: git-send-email 2.25.1
+        Mon, 27 Feb 2023 13:42:16 -0800 (PST)
+From: Scott Murray <scott.murray@konsulko.com>
+To: openembedded-devel@lists.openembedded.org,
+	Armin Kuster <akuster808@gmail.com>
+Subject: [meta-oe][langdale][PATCH 0/2] Backport mpd and ncmpc upgrades
+Date: Mon, 27 Feb 2023 16:42:06 -0500
+Message-Id: <cover.1677531249.git.scott.murray@konsulko.com>
+X-Mailer: git-send-email 2.39.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 27 Feb 2023 19:27:33 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101298
+ <openembedded-devel@lists.openembedded.org>; Mon, 27 Feb 2023 21:42:24 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101299
 
-From: Fabio Estevam <festevam@denx.de>
+Backport mpd and ncmpc client upgrades to keep current with fixes.
 
-Update to the 2023.01 version:
+Khem Raj (2):
+  ncmpc: Upgrade to 0.47
+  mpd: Upgrade to 0.23.12 release
 
-glmark2 2023.01 (20230119)
-==========================
+ .../musicpd/{mpd_0.23.9.bb => mpd_0.23.12.bb} |  2 +-
+ ...egular-integer-to-fix-Wenum-constexp.patch | 37 +++++++++++++++++++
+ .../musicpd/{ncmpc_0.46.bb => ncmpc_0.47.bb}  |  3 +-
+ 3 files changed, 40 insertions(+), 2 deletions(-)
+ rename meta-multimedia/recipes-multimedia/musicpd/{mpd_0.23.9.bb => mpd_0.23.12.bb} (98%)
+ create mode 100644 meta-multimedia/recipes-multimedia/musicpd/ncmpc/0001-SearchPage-use-regular-integer-to-fix-Wenum-constexp.patch
+ rename meta-multimedia/recipes-multimedia/musicpd/{ncmpc_0.46.bb => ncmpc_0.47.bb} (92%)
 
-* Add gbm-gl/glesv2 flavors for GBM offscreen rendering.
-* Add x11-gl-egl flavor that uses EGL under X11.
-* Implement SwapInterval 0 for the DRM backend.
-* Support multisampled configs in --visual-config.
-* Support explicitly specifying the config id in --visual-config.
-* Add CPU time and shader compilation time to available results.
-* Add --results to specify which kind of results to report.
-* Add --results-file to export results to XML or CSV.
-* Add --version command-line option.
-
-Remove 0001-libmatrix-Include-missing-utility-header.patch, which has been
-upstreamed and refresh 0002-run-dispmanx-fullscreen.patch to avoid
-fuzz warnings.
-
-Signed-off-by: Fabio Estevam <festevam@denx.de>
----
- ...atrix-Include-missing-utility-header.patch | 24 -------------------
- .../files/0002-run-dispmanx-fullscreen.patch  | 10 ++++----
- .../recipes-benchmark/glmark2/glmark2_git.bb  |  5 ++--
- 3 files changed, 8 insertions(+), 31 deletions(-)
- delete mode 100644 meta-oe/recipes-benchmark/glmark2/files/0001-libmatrix-Include-missing-utility-header.patch
-
-diff --git a/meta-oe/recipes-benchmark/glmark2/files/0001-libmatrix-Include-missing-utility-header.patch b/meta-oe/recipes-benchmark/glmark2/files/0001-libmatrix-Include-missing-utility-header.patch
-deleted file mode 100644
-index 959a18e5e..000000000
---- a/meta-oe/recipes-benchmark/glmark2/files/0001-libmatrix-Include-missing-utility-header.patch
-+++ /dev/null
-@@ -1,24 +0,0 @@
--From 45cb02332b38b2059e7e44369c3d8684492a7def Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Tue, 12 Apr 2022 11:41:41 -0700
--Subject: [PATCH] libmatrix: Include missing <utility> header
--
--Fixes build with gcc12
--| ../git/src/libmatrix/program.h:43:21: error: 'exchange' is not a member of 'std'                                                   |    43 |         ready_(std::exchange(shader.ready_, false)),                                                                       |       |                     ^~~~~~~~
--
--Upstream-Status: Submitted [https://github.com/glmark2/glmark2/pull/174]
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
-- src/libmatrix/program.h | 1 +
-- 1 file changed, 1 insertion(+)
--
----- a/src/libmatrix/program.h
--+++ b/src/libmatrix/program.h
--@@ -13,6 +13,7 @@
-- #define PROGRAM_H_
-- 
-- #include <string>
--+#include <utility>
-- #include <vector>
-- #include <map>
-- #include "mat.h"
-diff --git a/meta-oe/recipes-benchmark/glmark2/files/0002-run-dispmanx-fullscreen.patch b/meta-oe/recipes-benchmark/glmark2/files/0002-run-dispmanx-fullscreen.patch
-index 0cb22fd56..05a074cf5 100644
---- a/meta-oe/recipes-benchmark/glmark2/files/0002-run-dispmanx-fullscreen.patch
-+++ b/meta-oe/recipes-benchmark/glmark2/files/0002-run-dispmanx-fullscreen.patch
-@@ -13,10 +13,10 @@ Signed-off-by: Trevor Woerner <twoerner@gmail.com>
-  1 file changed, 5 insertions(+)
- 
- diff --git a/src/main.cpp b/src/main.cpp
--index 677962e..273a217 100644
-+index d1077fe..d717cd4 100644
- --- a/src/main.cpp
- +++ b/src/main.cpp
--@@ -164,6 +164,11 @@ main(int argc, char *argv[])
-+@@ -202,6 +202,11 @@ main(int argc, char *argv[])
-          Options::size = std::pair<int,int>(800, 600);
-      }
-  
-@@ -26,5 +26,7 @@ index 677962e..273a217 100644
- +#endif
- +
-      // Create the canvas
-- #if GLMARK2_USE_X11
--     NativeStateX11 native_state;
-+ #if GLMARK2_USE_EGL
-+     GLStateEGL gl_state;
-+--
-+2.25.1
-diff --git a/meta-oe/recipes-benchmark/glmark2/glmark2_git.bb b/meta-oe/recipes-benchmark/glmark2/glmark2_git.bb
-index 2a3e74f02..a2d5b152f 100644
---- a/meta-oe/recipes-benchmark/glmark2/glmark2_git.bb
-+++ b/meta-oe/recipes-benchmark/glmark2/glmark2_git.bb
-@@ -11,15 +11,14 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504 \
- DEPENDS = "libpng jpeg udev"
- DEPENDS:append = " ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'wayland-native wayland-protocols', '', d)}"
- 
--PV = "2021.12"
-+PV = "2023.01"
- 
- SRC_URI = " \
-     git://github.com/glmark2/glmark2.git;protocol=https;branch=master \
-     file://0001-fix-dispmanx-build.patch \
-     file://0002-run-dispmanx-fullscreen.patch \
--    file://0001-libmatrix-Include-missing-utility-header.patch \
- "
--SRCREV = "0858b450cd88c84a15b99dda9698d44e7f7e8c70"
-+SRCREV = "42e3d8fe3aa88743ef90348138f643f7b04a9237"
- 
- S = "${WORKDIR}/git"
- 
 -- 
-2.25.1
+2.39.0
 
 
