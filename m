@@ -1,141 +1,154 @@
-Return-Path: <Yogita.Urade@windriver.com>
+Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 79999C64EC7
-	for <webhook@archiver.kernel.org>; Tue, 28 Feb 2023 05:20:06 +0000 (UTC)
-Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.web11.16934.1677561603678341495
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A6E44C64ED6
+	for <webhook@archiver.kernel.org>; Tue, 28 Feb 2023 15:48:29 +0000 (UTC)
+Received: from mailout04.t-online.de (mailout04.t-online.de [194.25.134.18])
+ by mx.groups.io with SMTP id smtpd.web10.26951.1677599301402118872
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 27 Feb 2023 21:20:03 -0800
+ Tue, 28 Feb 2023 07:48:21 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=pps06212021 header.b=U96rwhCM;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=1423f9b672=yogita.urade@windriver.com)
-Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 31S5K3xp023106
-	for <openembedded-devel@lists.openembedded.org>; Mon, 27 Feb 2023 21:20:03 -0800
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com; h=from : to : cc :
- subject : date : message-id : mime-version : content-transfer-encoding :
- content-type; s=PPS06212021;
- bh=/6E+MpR9d/DB8QFPjp3MbhdxSxBOLHoeEf4wPu0IoTw=;
- b=U96rwhCML1GgKLSbpGyz5ZwWHipxyw0k6pP8Atidj+XwgZGC5VmPvPMb33pA+CodOqy2
- 1kBWADMLOcgUy7Fhdu4wRDAVWpRsIKwwmGhs6FZiCT2WOzFdRyYfRpOFk3BswE64xW/n
- aLK2NBmcIGGFgfmriH7wHDfnC7WTXcOylHZdYewWbMTgm4CLSTRfxNuis9h9Swtq6Bu6
- LKhLAQmzOnRNmDRJOyomB/X6BSKcwm3q5jkAVIWqbYrmvJ9l3aH4BPCgP+wRQRkphLHn
- Gb0LFQJR7tq7UkO/MCq+BN0xdG5F56gpMalyuXVHAOSfqCE9MvErBbnfhfupEe6kZD75 vQ== 
-Received: from ala-exchng01.corp.ad.wrs.com (unknown-82-252.windriver.com [147.11.82.252])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3nyjqrac9d-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Mon, 27 Feb 2023 21:20:02 -0800
-Received: from blr-linux-engg1.wrs.com (147.11.136.210) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.17; Mon, 27 Feb 2023 21:20:00 -0800
-From: Yogita Urade <yogita.urade@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-CC: <hari.gpillai@windriver.com>, <yogita.urade@windriver.com>
-Subject: [oe][meta-oe][kirkstone][PATCH 1/1] poppler: fix CVE-2021-30860
-Date: Tue, 28 Feb 2023 05:19:43 +0000
-Message-ID: <20230228051943.817330-1-yogita.urade@windriver.com>
+ dkim=missing; spf=none, err=SPF record not found (domain: t-online.de, ip: 194.25.134.18, mailfrom: f_l_k@t-online.de)
+Received: from fwd80.dcpf.telekom.de (fwd80.aul.t-online.de [10.223.144.106])
+	by mailout04.t-online.de (Postfix) with SMTP id 9214F23EC5
+	for <openembedded-devel@lists.openembedded.org>; Tue, 28 Feb 2023 16:48:19 +0100 (CET)
+Received: from flk-MS-7C91.fritz.box ([84.163.42.35]) by fwd80.t-online.de
+	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
+	esmtp id 1pX2DD-2nsxSj0; Tue, 28 Feb 2023 16:48:19 +0100
+From: Markus Volk <f_l_k@t-online.de>
+To: openembedded-devel@lists.openembedded.org
+Cc: Markus Volk <f_l_k@t-online.de>
+Subject: [RFC][meta-oe][PATCH] libdecor: update 1.1.0 -> 1.1.99
+Date: Tue, 28 Feb 2023 16:48:06 +0100
+Message-Id: <20230228154806.881483-1-f_l_k@t-online.de>
 X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [147.11.136.210]
-X-ClientProxiedBy: ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) To
- ala-exchng01.corp.ad.wrs.com (147.11.82.252)
-X-Proofpoint-GUID: _ixheEVECLdYdSgHaUH7zinpBPhntLhM
-X-Proofpoint-ORIG-GUID: _ixheEVECLdYdSgHaUH7zinpBPhntLhM
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.219,Aquarius:18.0.930,Hydra:6.0.562,FMLib:17.11.170.22
- definitions=2023-02-28_02,2023-02-27_01,2023-02-09_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 priorityscore=1501
- suspectscore=0 spamscore=0 bulkscore=0 phishscore=0 clxscore=1015
- malwarescore=0 impostorscore=0 mlxlogscore=659 mlxscore=0
- lowpriorityscore=0 adultscore=0 classifier=spam adjust=0 reason=mlx
- scancount=1 engine=8.12.0-2212070000 definitions=main-2302280037
+X-TOI-EXPURGATEID: 150726::1677599299-AA7F5A74-7EB6B0D9/0/0 CLEAN NORMAL
+X-TOI-MSGID: 4dd147fd-88fa-49b3-ab17-4ba78a6e75cc
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 28 Feb 2023 05:20:06 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101308
+ <openembedded-devel@lists.openembedded.org>; Tue, 28 Feb 2023 15:48:29 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101309
 
-An integer overflow was addressed with improved input validation. This
-issue is fixed in Security Update 2021-005 Catalina, iOS 14.8 and iPadOS
-14.8, macOS Big Sur 11.6, watchOS 7.6.2. Processing a maliciously crafted
-PDF may lead to arbitrary code execution. Apple is aware of a report that
-this issue may have been actively exploited.
+libdecor is needed under wayland for compositors that require client-side=
+ decoration (gnome/weston).
+Its consumers at the moment are at least libsdl2 and blender. Upstream ha=
+s added a plugin for gtk.
+This is quite a useful feature, since programs that use libdecor don't fi=
+t well into gtk otherwise.
 
-Reference:
-https://nvd.nist.gov/vuln/detail/CVE-2021-30860
-
-Signed-off-by: Yogita Urade <yogita.urade@windriver.com>
+Signed-off-by: Markus Volk <f_l_k@t-online.de>
 ---
- ...JBIG2Stream-Fix-crash-on-broken-file.patch | 41 +++++++++++++++++++
- .../poppler/poppler_22.04.0.bb                |  1 +
- 2 files changed, 42 insertions(+)
- create mode 100644 meta-oe/recipes-support/poppler/poppler/0001-JBIG2Stream-Fix-crash-on-broken-file.patch
+ ....c-dont-skip-for-conflicting-symbols.patch | 31 +++++++++++++++++++
+ .../{libdecor_0.1.1.bb =3D> libdecor_0.1.99.bb} | 23 ++++++++------
+ 2 files changed, 44 insertions(+), 10 deletions(-)
+ create mode 100644 meta-oe/recipes-graphics/libdecor/libdecor/0001-libde=
+cor-gtk.c-dont-skip-for-conflicting-symbols.patch
+ rename meta-oe/recipes-graphics/libdecor/{libdecor_0.1.1.bb =3D> libdeco=
+r_0.1.99.bb} (52%)
 
-diff --git a/meta-oe/recipes-support/poppler/poppler/0001-JBIG2Stream-Fix-crash-on-broken-file.patch b/meta-oe/recipes-support/poppler/poppler/0001-JBIG2Stream-Fix-crash-on-broken-file.patch
+diff --git a/meta-oe/recipes-graphics/libdecor/libdecor/0001-libdecor-gtk=
+.c-dont-skip-for-conflicting-symbols.patch b/meta-oe/recipes-graphics/lib=
+decor/libdecor/0001-libdecor-gtk.c-dont-skip-for-conflicting-symbols.patc=
+h
 new file mode 100644
-index 000000000..4a8ea233c
+index 000000000..c9d63c907
 --- /dev/null
-+++ b/meta-oe/recipes-support/poppler/poppler/0001-JBIG2Stream-Fix-crash-on-broken-file.patch
-@@ -0,0 +1,41 @@
-+From 27354e9d9696ee2bc063910a6c9a6b27c5184a52 Mon Sep 17 00:00:00 2001
-+From: Albert Astals Cid <aacid@kde.org>
-+Date: Thu, 25 Aug 2022 00:14:22 +0200
-+Subject: [PATCH] JBIG2Stream: Fix crash on broken file
++++ b/meta-oe/recipes-graphics/libdecor/libdecor/0001-libdecor-gtk.c-dont=
+-skip-for-conflicting-symbols.patch
+@@ -0,0 +1,31 @@
++From fb6eb15b34b5b07a431bb4c3585341411a3e088f Mon Sep 17 00:00:00 2001
++From: Markus Volk <f_l_k@t-online.de>
++Date: Tue, 28 Feb 2023 13:42:18 +0100
++Subject: [PATCH] libdecor-gtk.c: dont skip for conflicting_symbols
 +
-+https://github.com/jeffssh/CVE-2021-30860
++This is a hack that should be removed, once the underlying bug in glibc =
+was fixed and
++libdecor was updated to use dlmopen() instead of dlopen()
 +
-+Thanks to David Warren for the heads up
++https://gitlab.freedesktop.org/libdecor/libdecor/-/issues/47
++https://gitlab.freedesktop.org/libdecor/libdecor/-/issues/44
 +
-+CVE: CVE-2021-30860
-+
-+References:
-+https://nvd.nist.gov/vuln/detail/CVE-2021-30860
-+
-+Upstream-Status: Backport
-+[https://gitlab.freedesktop.org/poppler/poppler/-/commit/27354e9d9696ee2bc063910a6c9a6b27c5184a52]
-+
-+Signed-off-by: Yogita Urade <yogita.urade@windriver.com>
 +---
-+ poppler/JBIG2Stream.cc | 6 +++++-
-+ 1 file changed, 5 insertions(+), 1 deletion(-)
++ src/plugins/gtk/libdecor-gtk.c | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
 +
-+diff --git a/poppler/JBIG2Stream.cc b/poppler/JBIG2Stream.cc
-+index 662276e5..9f70431d 100644
-+--- a/poppler/JBIG2Stream.cc
-++++ b/poppler/JBIG2Stream.cc
-+@@ -1976,7 +1976,11 @@ void JBIG2Stream::readTextRegionSeg(unsigned int segNum, bool imm, bool lossless
-+     for (i = 0; i < nRefSegs; ++i) {
-+         if ((seg = findSegment(refSegs[i]))) {
-+             if (seg->getType() == jbig2SegSymbolDict) {
-+-                numSyms += ((JBIG2SymbolDict *)seg)->getSize();
-++                const unsigned int segSize = ((JBIG2SymbolDict *)seg)->getSize();
-++                if (unlikely(checkedAdd(numSyms, segSize, &numSyms))) {
-++                    error(errSyntaxError, getPos(), "Too many symbols in JBIG2 text region");
-++                    return;
-++                }
-+             } else if (seg->getType() == jbig2SegCodeTable) {
-+                 codeTables.push_back(seg);
-+             }
-+--
-+2.25.1
-diff --git a/meta-oe/recipes-support/poppler/poppler_22.04.0.bb b/meta-oe/recipes-support/poppler/poppler_22.04.0.bb
-index b7cdb4f1b..816c9f160 100644
---- a/meta-oe/recipes-support/poppler/poppler_22.04.0.bb
-+++ b/meta-oe/recipes-support/poppler/poppler_22.04.0.bb
-@@ -6,6 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
- SRC_URI = "http://poppler.freedesktop.org/${BP}.tar.xz \
-            file://0001-Do-not-overwrite-all-our-build-flags.patch \
-            file://basename-include.patch \
-+           file://0001-JBIG2Stream-Fix-crash-on-broken-file.patch \
-            "
- SRC_URI[sha256sum] = "813fb4b90e7bda63df53205c548602bae728887a60f4048aae4dbd9b1927deff"
- 
--- 
-2.25.1
++diff --git a/src/plugins/gtk/libdecor-gtk.c b/src/plugins/gtk/libdecor-g=
+tk.c
++index 228161e..fd91afb 100644
++--- a/src/plugins/gtk/libdecor-gtk.c
+++++ b/src/plugins/gtk/libdecor-gtk.c
++@@ -2606,7 +2606,7 @@ libdecor_plugin_description =3D {
++ 	.priorities =3D priorities,
++ 	.constructor =3D libdecor_plugin_new,
++ 	.conflicting_symbols =3D {
++-		"png_free",
+++		//"png_free",
++ 		NULL,
++ 	},
++ };
++--=20
++2.34.1
++
+diff --git a/meta-oe/recipes-graphics/libdecor/libdecor_0.1.1.bb b/meta-o=
+e/recipes-graphics/libdecor/libdecor_0.1.99.bb
+similarity index 52%
+rename from meta-oe/recipes-graphics/libdecor/libdecor_0.1.1.bb
+rename to meta-oe/recipes-graphics/libdecor/libdecor_0.1.99.bb
+index 4e396d83e..ed0b05f41 100644
+--- a/meta-oe/recipes-graphics/libdecor/libdecor_0.1.1.bb
++++ b/meta-oe/recipes-graphics/libdecor/libdecor_0.1.99.bb
+@@ -2,25 +2,28 @@ SUMMARY =3D "libdecor - A client-side decorations libra=
+ry for Wayland clients"
+ LICENSE =3D "MIT"
+ LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D7ae2be7fb1637141840314b51970a=
+9f7"
+=20
+-SRC_URI =3D "git://gitlab.gnome.org/jadahl/libdecor.git;protocol=3Dhttps=
+;branch=3Dmaster"
++SRC_URI =3D " \
++    git://gitlab.freedesktop.org/libdecor/libdecor.git;protocol=3Dhttps;=
+branch=3Dmaster \
++    file://0001-libdecor-gtk.c-dont-skip-for-conflicting-symbols.patch \
++"
+=20
+ DEPENDS =3D " \
+-	cairo \
+-	pango \
+-	wayland \
+-	wayland-native \
+-	wayland-protocols \
++    cairo \
++    pango \
++    wayland \
++    wayland-native \
++    wayland-protocols \
+ "
+=20
+ S =3D "${WORKDIR}/git"
+-SRCREV =3D "e87dcfdaf83f332fa83b43c804fcf93c151ff0f5"
++SRCREV =3D "a254d0c2ff0cbfcf0bbf14cc67cc403640880c01"
+=20
+-PACKAGECONFIG ?=3D "dbus ${@bb.utils.filter('DISTRO_FEATURES', 'gtk3 ope=
+ngl', d)}"
++PACKAGECONFIG ?=3D "dbus ${@bb.utils.filter('DISTRO_FEATURES', 'gtk+3', =
+d)}"
+=20
+ PACKAGECONFIG[dbus] =3D "-Ddbus=3Denabled,-Ddbus=3Ddisabled,dbus"
+ PACKAGECONFIG[demo] =3D "-Ddemo=3Dtrue,-Ddemo=3Dfalse,virtual/libegl lib=
+xkbcommon"
+-PACKAGECONFIG[gtk3] =3D "-Dgtk=3Denabled,-Dgtk=3Ddisabled,gtk+3"
+-PACKAGECONFIG[opengl] =3D ",,virtual/libgl"
++PACKAGECONFIG[install_demo] =3D "-Dinstall_demo=3Dtrue,-Dinstall_demo=3D=
+false"
++PACKAGECONFIG[gtk+3] =3D "-Dgtk=3Denabled,-Dgtk=3Ddisabled,gtk+3"
+=20
+ inherit meson pkgconfig
+=20
+--=20
+2.34.1
 
 
