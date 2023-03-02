@@ -2,56 +2,56 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 556F5C6FA8E
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 54959C678D4
 	for <webhook@archiver.kernel.org>; Thu,  2 Mar 2023 04:22:07 +0000 (UTC)
 Received: from mail-pl1-f173.google.com (mail-pl1-f173.google.com [209.85.214.173])
  by mx.groups.io with SMTP id smtpd.web10.7562.1677730920898613255
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 01 Mar 2023 20:22:01 -0800
+ Wed, 01 Mar 2023 20:22:00 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=bPR4yKia;
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=KM9CJdu2;
  spf=pass (domain: gmail.com, ip: 209.85.214.173, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f173.google.com with SMTP id u5so12900652plq.7
-        for <openembedded-devel@lists.openembedded.org>; Wed, 01 Mar 2023 20:22:01 -0800 (PST)
+Received: by mail-pl1-f173.google.com with SMTP id u5so12900629plq.7
+        for <openembedded-devel@lists.openembedded.org>; Wed, 01 Mar 2023 20:22:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=K5HBCGj+CYtmxoJfqOQMjkbefX+eGb5N00rsaP/aa4M=;
-        b=bPR4yKiaBJgEMS/4LWfH/PocZe0Uj3g6aBO1yXhXozYlGJKkdaMlhHczwtIhfLYRT6
-         3yymtRSDYKnsO87uj+k5ecU2ane7wead8/A1YxhHmwK0HwZ1uKdeTY33Ww8cigYhCJb/
-         XC7EPILL/mvB9vLyLn6KXCYurJshTYRVPVRUJFcTmNU0duQsGXI/Ach5j/4sh1nUFvK1
-         wME+tpRH9ImkoyVNmlRo0fQYjTQauMdJaOz94x+6UIer+/wA5jXSdIjlN7303nHrZzLA
-         cC9G3dQ0q1mfliGEtJojl+obZbKuTiFFWt5Pl8R14fDJQNpEZFWXa9CPoynDEgTBhZYi
-         bAGw==
+        bh=3DfSFbM+qH/bWzrVXYeho5s5mcEsfeJJ7zjXGkJKdNE=;
+        b=KM9CJdu2UX7PBWiVoljlR1H+V7t7DQ/ohZjOQXCyGs+qL5NFRcmtnsxKg87N+Uemjz
+         vsvCQqyqPexL/RQwqqPDQJGuKZm1u9WYt/kl7BCY9EfvdM7OzbLBqvw7mSl5UAoroa63
+         SQq4qXGtYx8X/D9Ja/EYsL7ePPLZXY5pmBZRHJUsUZ0SZyRy2S5Q6nyh2fzebYPby/jr
+         +ZWlXLiTmd0sTnviK/GSrUPm5g7P2tX2/Ehj9ABarC6yS7SiLZheUD+bozCWmtL6nG4q
+         Ps2nM6S0XrHtRMbLSCEv6D0U+adArnXLBTBdidB6RrU18SRkcJibyEowzCyLlZZ09j1E
+         nU3Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=K5HBCGj+CYtmxoJfqOQMjkbefX+eGb5N00rsaP/aa4M=;
-        b=tqrFJjJHDr9iACRB3kD20ZoMwJiVGu7mFnxNk2zfPXZWAwKKuaR0EJeKv0mlFXIc51
-         Ru0hu+3Jo3z+ToVeyf5Vzc21CfCS+qooR0V07yXVZzaj6dZI/AjGg9J9E71/F0Rf6Mg8
-         HYFOLgn2b2n0d7C0IObzqiVCfNPse5wI97TJUGyd1b+ikqN7+WQkQZknH+iNE3CFjhs6
-         EiUqpC0cIHd5XSoEv3MoCSXbBGa5LfjH2piv/JkRzGOUDDYN6WSdGVW0IfbNbYTsIqb/
-         yrZ54JGcQYrbFNiGEBLHZ1XgpWtYA7zWGpFyjjs7BjQS19kA8VlVSoTgMWzp6+XAPsof
-         +7hA==
-X-Gm-Message-State: AO0yUKXoNDK0MT3FH7Z+U0O7SyCj8ArVPv8ddt0oxHUM5IEnrVykBdvj
-	F/AxIhuEaD7SLpYwr2mn2s5HN/8tViM=
-X-Google-Smtp-Source: AK7set/6927qiJdADIDxSg5C2bKPzydNpbzAxYwRyyTmrAEyRw0Xcomv2PaumUwLlVL+pMA2q5V4LA==
-X-Received: by 2002:a17:902:e5cc:b0:19a:9864:2887 with SMTP id u12-20020a170902e5cc00b0019a98642887mr1167594plf.7.1677730920918;
-        Wed, 01 Mar 2023 20:22:00 -0800 (PST)
+        bh=3DfSFbM+qH/bWzrVXYeho5s5mcEsfeJJ7zjXGkJKdNE=;
+        b=G545HWJtMt5E+x9KaWuk47CbUtTe5lX4AtifdfTPFpxh/kiTdjoYjHKO5E5BXEi7rr
+         yc3bPWh07k2sxyZCCLP6OmsqR1fG0BROzkGBPtpw1S8bWoVDAo6RWgF/BoT8Gjg6Pb0s
+         qDHkpLEVDNziByH49tC3ZoJVRVy5CgKFNfdTTXggVrFd8MeS2Mt27eygeomRMvCZadDP
+         DLVd7Ex5s8Hg4+edWedjCtDpOQlhE0eWuUh4w/bievsv+x1hRt4AQfKUlLXKIqc9hWeA
+         jZl2bHYZyHwvuKNgfO0w+hxRdpabOrnbepEdTHU2hrUBpgn8hqyWV79rpSlrZR97F6V9
+         cSXQ==
+X-Gm-Message-State: AO0yUKUfmzC1cX1vNkhEVQbzfvD0zYV24CmKMfQFjdifsa5IfAOInxR1
+	i41n1+IK4xEtkRqthwx44TrFWJqkfVk=
+X-Google-Smtp-Source: AK7set+NBFlGw1A3c4BC4WG1B7K0dr8aeIPQ4f8bU92kfev4aUiXC5GgLnZSTNSBi/kUY4xMWYqd6Q==
+X-Received: by 2002:a17:902:b48f:b0:19e:2631:7c01 with SMTP id y15-20020a170902b48f00b0019e26317c01mr7071230plr.37.1677730919988;
+        Wed, 01 Mar 2023 20:21:59 -0800 (PST)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9181:1cf0::1ac4])
-        by smtp.gmail.com with ESMTPSA id g3-20020a1709026b4300b00198e346c35dsm9223782plt.9.2023.03.01.20.22.00
+        by smtp.gmail.com with ESMTPSA id g3-20020a1709026b4300b00198e346c35dsm9223782plt.9.2023.03.01.20.21.59
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 01 Mar 2023 20:22:00 -0800 (PST)
+        Wed, 01 Mar 2023 20:21:59 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-python][PATCH 3/3] python3-h5py: Upgrade to 3.8.0
-Date: Wed,  1 Mar 2023 20:21:56 -0800
-Message-Id: <20230302042156.1107335-3-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 2/3] hdf5: Upgrade to 1.14.0
+Date: Wed,  1 Mar 2023 20:21:55 -0800
+Message-Id: <20230302042156.1107335-2-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20230302042156.1107335-1-raj.khem@gmail.com>
 References: <20230302042156.1107335-1-raj.khem@gmail.com>
@@ -61,141 +61,74 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 02 Mar 2023 04:22:07 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101323
-
-Drop unused patches
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101322
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../0001-fix-wrong-file-driver-version.patch  | 53 -------------------
- .../0001-setup.py-Fix-numpy-version.patch     | 28 ----------
- ...n3-h5py_3.7.0.bb => python3-h5py_3.8.0.bb} |  9 ++--
- 3 files changed, 3 insertions(+), 87 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python3-h5py/0001-fix-wrong-file-driver-version.patch
- delete mode 100644 meta-python/recipes-devtools/python/python3-h5py/0001-setup.py-Fix-numpy-version.patch
- rename meta-python/recipes-devtools/python/{python3-h5py_3.7.0.bb => python3-h5py_3.8.0.bb} (70%)
+ .../hdf5/files/0001-cmake-remove-build-flags.patch          | 6 +++---
+ ...0002-Remove-suffix-shared-from-shared-library-name.patch | 2 +-
+ .../recipes-support/hdf5/{hdf5_1.13.2.bb => hdf5_1.14.0.bb} | 4 ++--
+ 3 files changed, 6 insertions(+), 6 deletions(-)
+ rename meta-oe/recipes-support/hdf5/{hdf5_1.13.2.bb => hdf5_1.14.0.bb} (91%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-h5py/0001-fix-wrong-file-driver-version.patch b/meta-python/recipes-devtools/python/python3-h5py/0001-fix-wrong-file-driver-version.patch
-deleted file mode 100644
-index 2692acde75..0000000000
---- a/meta-python/recipes-devtools/python/python3-h5py/0001-fix-wrong-file-driver-version.patch
-+++ /dev/null
-@@ -1,53 +0,0 @@
--From 5b0b1d0b941ba338d449f9261bdf4cb2b679d048 Mon Sep 17 00:00:00 2001
--From: Hongxu Jia <hongxu.jia@windriver.com>
--Date: Tue, 20 Sep 2022 02:53:11 -0700
--Subject: [PATCH] fix wrong file driver version
--
--Due to commit [1] applied in hdf5 (1.13.2), import hdf5 failed
--
--|>>> import h5py
--|Traceback (most recent call last):
--|  File "<stdin>", line 1, in <module>
--|  File "/usr/lib/python3.10/site-packages/h5py/__init__.py", line 56, in <module>
--|    from . import h5a, h5d, h5ds, h5f, h5fd, h5g, h5r, h5s, h5t, h5p, h5z, h5pl
--|  File "h5py/h5fd.pyx", line 220, in init h5py.h5fd
--|RuntimeError: Wrong file driver version # (wrong file driver version #)
--
--Initial driver version to fix the error
--
--[1] https://github.com/HDFGroup/hdf5/commit/42b767fc67ad1e13735e3cee2077f2e108f9463e
--
--Upstream-Status: Submitted  [https://github.com/h5py/h5py/pull/2153]
--Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
-----
-- h5py/api_types_hdf5.pxd | 1 +
-- h5py/h5fd.pyx           | 1 +
-- 2 files changed, 2 insertions(+)
--
--diff --git a/h5py/api_types_hdf5.pxd b/h5py/api_types_hdf5.pxd
--index 6977f1a7..312fdaa0 100644
----- a/h5py/api_types_hdf5.pxd
--+++ b/h5py/api_types_hdf5.pxd
--@@ -237,6 +237,7 @@ cdef extern from "hdf5.h":
-- 
--   # Class information for each file driver
--   ctypedef struct H5FD_class_t:
--+    unsigned version;
--     const char *name
--     haddr_t maxaddr
--     H5F_close_degree_t fc_degree
--diff --git a/h5py/h5fd.pyx b/h5py/h5fd.pyx
--index 04aff077..d41953d0 100644
----- a/h5py/h5fd.pyx
--+++ b/h5py/h5fd.pyx
--@@ -191,6 +191,7 @@ cdef herr_t H5FD_fileobj_flush(H5FD_fileobj_t *f, hid_t dxpl, hbool_t closing) e
-- cdef H5FD_class_t info
-- memset(&info, 0, sizeof(info))
-- 
--+info.version = 0x01
-- info.name = 'fileobj'
-- info.maxaddr = libc.stdint.SIZE_MAX - 1
-- info.fc_degree = H5F_CLOSE_WEAK
---- 
--2.37.1
--
-diff --git a/meta-python/recipes-devtools/python/python3-h5py/0001-setup.py-Fix-numpy-version.patch b/meta-python/recipes-devtools/python/python3-h5py/0001-setup.py-Fix-numpy-version.patch
-deleted file mode 100644
-index 9b79cc5395..0000000000
---- a/meta-python/recipes-devtools/python/python3-h5py/0001-setup.py-Fix-numpy-version.patch
-+++ /dev/null
-@@ -1,28 +0,0 @@
--From b1d4d171fd13624f3d8bb917f716b62494066501 Mon Sep 17 00:00:00 2001
--From: Leon Anavi <leon.anavi@konsulko.com>
--Date: Mon, 22 Feb 2021 18:42:43 +0200
--Subject: [PATCH] setup.py: Fix numpy version
--
--Fix numpy version to ensure bitbake will find the pip package.
--
--Upstream-Status: Inappropriate [oe specific]
--
--Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
--
-----
-- setup.py | 2 +-
-- 1 file changed, 1 insertion(+), 1 deletion(-)
--
--diff --git a/setup.py b/setup.py
--index 4b2890c..42ba21b 100755
----- a/setup.py
--+++ b/setup.py
--@@ -49,7 +49,7 @@ SETUP_REQUIRES = [
--     "Cython >=0.29.14; python_version=='3.8'",
--     "Cython >=0.29.15; python_version>='3.9'",
-- ] + [
---    f"numpy =={np_min}; python_version{py_condition}"
--+    f"numpy >={np_min}; python_version{py_condition}"
--     for np_min, py_condition in NUMPY_MIN_VERSIONS
-- ]
-- 
-diff --git a/meta-python/recipes-devtools/python/python3-h5py_3.7.0.bb b/meta-python/recipes-devtools/python/python3-h5py_3.8.0.bb
-similarity index 70%
-rename from meta-python/recipes-devtools/python/python3-h5py_3.7.0.bb
-rename to meta-python/recipes-devtools/python/python3-h5py_3.8.0.bb
-index ce4f05dbed..75a41e29dc 100644
---- a/meta-python/recipes-devtools/python/python3-h5py_3.7.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-h5py_3.8.0.bb
-@@ -4,12 +4,9 @@ SECTION = "devel/python"
- LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=113251d71fb0384712c719b567261c5c"
+diff --git a/meta-oe/recipes-support/hdf5/files/0001-cmake-remove-build-flags.patch b/meta-oe/recipes-support/hdf5/files/0001-cmake-remove-build-flags.patch
+index 642d7d1662..a8050cc55b 100644
+--- a/meta-oe/recipes-support/hdf5/files/0001-cmake-remove-build-flags.patch
++++ b/meta-oe/recipes-support/hdf5/files/0001-cmake-remove-build-flags.patch
+@@ -15,7 +15,7 @@ Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
  
--SRC_URI[sha256sum] = "3fcf37884383c5da64846ab510190720027dca0768def34dd8dcb659dbe5cbf3"
-+SRC_URI[sha256sum] = "6fead82f0c4000cf38d53f9c030780d81bfa0220218aee13b90b7701c937d95f"
+ --- a/config/cmake/libh5cc.in
+ +++ b/config/cmake/libh5cc.in
+-@@ -45,7 +45,7 @@ for arg in $@ ; do
++@@ -44,7 +44,7 @@ for arg in $@ ; do
+        exit $status
+        ;;
+      *)
+@@ -45,8 +45,8 @@ Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+                      H5_CPPFLAGS: @H5_CPPFLAGS@
+                      AM_CPPFLAGS: @AM_CPPFLAGS@
+                           CFLAGS: @CMAKE_C_FLAGS@
+-@@ -52,8 +52,8 @@ Languages:
+- @BUILD_FORTRAN_CONDITIONAL_TRUE@         Static Fortran Library: @H5_ENABLE_STATIC_LIB@
++@@ -53,8 +53,8 @@ Languages:
++ @BUILD_FORTRAN_CONDITIONAL_TRUE@               Module Directory: @CMAKE_Fortran_MODULE_DIRECTORY@
+  
+                              C++: @HDF5_BUILD_CPP_LIB@
+ -@BUILD_CXX_CONDITIONAL_TRUE@                   C++ Compiler: @CMAKE_CXX_COMPILER@ @CMAKE_CXX_COMPILER_VERSION@
+diff --git a/meta-oe/recipes-support/hdf5/files/0002-Remove-suffix-shared-from-shared-library-name.patch b/meta-oe/recipes-support/hdf5/files/0002-Remove-suffix-shared-from-shared-library-name.patch
+index de052451bd..f0eb05a1e7 100644
+--- a/meta-oe/recipes-support/hdf5/files/0002-Remove-suffix-shared-from-shared-library-name.patch
++++ b/meta-oe/recipes-support/hdf5/files/0002-Remove-suffix-shared-from-shared-library-name.patch
+@@ -12,7 +12,7 @@ Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
  
--SRC_URI:append = " \
--           file://0001-setup_build.py-avoid-absolute-path.patch \
--           file://0001-fix-wrong-file-driver-version.patch \
--          "
-+SRC_URI += "file://0001-setup_build.py-avoid-absolute-path.patch"
+ --- a/CMakeLists.txt
+ +++ b/CMakeLists.txt
+-@@ -196,19 +196,19 @@ set (HDF5_HL_F90_C_LIB_TARGET     "${HDF
++@@ -191,19 +191,19 @@ set (HDF5_HL_F90_C_LIB_TARGET     "${HDF
+  set (HDF5_JAVA_JNI_LIB_TARGET     "${HDF5_JAVA_JNI_LIB_CORENAME}")
+  set (HDF5_JAVA_HDF5_LIB_TARGET    "${HDF5_JAVA_HDF5_LIB_CORENAME}")
+  set (HDF5_JAVA_TEST_LIB_TARGET    "${HDF5_JAVA_TEST_LIB_CORENAME}")
+diff --git a/meta-oe/recipes-support/hdf5/hdf5_1.13.2.bb b/meta-oe/recipes-support/hdf5/hdf5_1.14.0.bb
+similarity index 91%
+rename from meta-oe/recipes-support/hdf5/hdf5_1.13.2.bb
+rename to meta-oe/recipes-support/hdf5/hdf5_1.14.0.bb
+index 80611c6714..4feec61afd 100644
+--- a/meta-oe/recipes-support/hdf5/hdf5_1.13.2.bb
++++ b/meta-oe/recipes-support/hdf5/hdf5_1.14.0.bb
+@@ -12,11 +12,11 @@ inherit cmake siteinfo qemu
+ DEPENDS += "qemu-native"
  
- inherit pkgconfig pypi setuptools3
+ SRC_URI = " \
+-    https://support.hdfgroup.org/ftp/HDF5/releases/hdf5-1.13/hdf5-${PV}/src/${BPN}-${PV}.tar.bz2 \
++    https://support.hdfgroup.org/ftp/HDF5/releases/hdf5-1.14/hdf5-${PV}/src/${BPN}-${PV}.tar.bz2 \
+     file://0002-Remove-suffix-shared-from-shared-library-name.patch \
+     file://0001-cmake-remove-build-flags.patch \
+ "
+-SRC_URI[sha256sum] = "9c51b3da426977ec622a43dca8adaf4e81eabf838c1ff80c6225ad1d3ed54b5c"
++SRC_URI[sha256sum] = "e4e79433450edae2865a4c6328188bb45391b29d74f8c538ee699f0b116c2ba0"
  
-@@ -29,4 +26,4 @@ RDEPENDS:${PN} = "python3-numpy \
-                   python3-json \
-                  "
+ FILES:${PN} += "${libdir}/libhdf5.settings ${datadir}/*"
  
--export HDF5_VERSION="1.13.2"
-+export HDF5_VERSION="1.14.0"
 -- 
 2.39.2
 
