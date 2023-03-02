@@ -2,145 +2,124 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A258CC678D4
-	for <webhook@archiver.kernel.org>; Thu,  2 Mar 2023 02:09:16 +0000 (UTC)
-Received: from mail-pj1-f48.google.com (mail-pj1-f48.google.com [209.85.216.48])
- by mx.groups.io with SMTP id smtpd.web11.5348.1677722953188409354
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 57D4FC7EE32
+	for <webhook@archiver.kernel.org>; Thu,  2 Mar 2023 04:22:07 +0000 (UTC)
+Received: from mail-pj1-f44.google.com (mail-pj1-f44.google.com [209.85.216.44])
+ by mx.groups.io with SMTP id smtpd.web10.7561.1677730920429052731
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 01 Mar 2023 18:09:13 -0800
+ Wed, 01 Mar 2023 20:22:00 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=UzFgdBHW;
- spf=pass (domain: gmail.com, ip: 209.85.216.48, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f48.google.com with SMTP id qa18-20020a17090b4fd200b0023750b675f5so1299644pjb.3
-        for <openembedded-devel@lists.openembedded.org>; Wed, 01 Mar 2023 18:09:13 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=aEs0XYOf;
+ spf=pass (domain: gmail.com, ip: 209.85.216.44, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f44.google.com with SMTP id 6-20020a17090a190600b00237c5b6ecd7so1545995pjg.4
+        for <openembedded-devel@lists.openembedded.org>; Wed, 01 Mar 2023 20:22:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=0nX06sgWID/ct89q+2TmSjsmn/7snbws+7ZcVEEUMgI=;
-        b=UzFgdBHWV85lQafoF1qE8+ec3mYO/gtAyVGl98yb0SceoWsVgF5i14w+773TE6lztA
-         Lw/XW4TA7XlRy2NpQcHh5W+DOW3IpVJcpSGTYs1qtwiZ+wlUtfRVxmv/gzaC9ahm2PS0
-         q38jMn6wAZUPjCQzJktPDKXpGSCwLOl88S9wFA00z/Ak9vUxF3rPV3PXrAXvb7vlz1aC
-         rUVXbomUpJanSJHvaEzfKbbyWIarriTagh6OFAXL6KqzpQ/AQbw8cvmFrQ1euRw//HM6
-         lhLLvuQvdbwXXRfDmVgUm1MBhOmZrUQKTSsFVTtA7E6rKrPbS37IZhojygeGBtezV2A8
-         cHKw==
+        bh=dxeLT+UJkLBqN/hlmc8PclJ6qZkbJCF+Tnbel5pK0hk=;
+        b=aEs0XYOfTq5dfYLQuM7p3rOYqX+7MSJCwCOsJqPbW3YPJjcIIO6xP8kZoxzFTimVBw
+         SGc/0F3YJADIDO1mGC17ZrnF4eWb797XIwVG8yZW4o7rQOttjfxZDlKx2JiDsnJq7DUR
+         /rzAg87IhMYLmxosYLJbDEC8zwalQ5rEnT0uB301dDQqLgp1lp+gnbg8LW0RKQ09RUNU
+         /nihhKinQzRalCR4LnmNPLP/CgQc6WoGm1T3/JSqIqQL81aCGWV4MfqD243oYXK+eir/
+         SlmERlc96jeqN+b1keX4eGjkWP40iju+Oj7Yc3CrnyWpCJPD1HiVIjEQGSXqNRlGcALp
+         JMww==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=0nX06sgWID/ct89q+2TmSjsmn/7snbws+7ZcVEEUMgI=;
-        b=Rcuu0VV5VyIb38PflZ0RFPbCqw4RXNMQFnxtI+Pwm8qeDtLT1ytWfzOYFWtNnoFO6A
-         63GQ2iVAkbnW5EybPuGEKTQc4C3UcdH+toIM10t5NYUqemi6PpSVsIPv3gmWsUsnWDrB
-         wj8ChCM20JteuZYyiTbiCYV6ethA0mB0FDtL7GoWsRO/NxmbrrsTMul5AfT9qJ4XFoVW
-         efoN9hJwcnzgRmBQAgaj/RxwKZz/TLa+dslwiP5Mje/NnUqAxxg0Rl56kayIPxjalRfu
-         m6KLA41HGTa+Go4yBZq9eK2AuC2jIO1te644ylcjWeK8Pu62PrpJXIqXnzf1F1YR9gHk
-         Z9MQ==
-X-Gm-Message-State: AO0yUKXnty9E3yYfKX51RlMn+zlxA1kKd5/B1N7dpXKmApG0j30O+tH2
-	k+WojmFUGakb4/QUnqHBDr/oMYbtL0c=
-X-Google-Smtp-Source: AK7set/JsEtiGoK91fhs0Wc6M470+bHwLitY73gwfRkbTVeyWcKWgjGTIGqo+/um9jR2+0J8+4Jxig==
-X-Received: by 2002:a17:90a:341:b0:237:ae7c:1591 with SMTP id 1-20020a17090a034100b00237ae7c1591mr9654296pjf.26.1677722952128;
-        Wed, 01 Mar 2023 18:09:12 -0800 (PST)
+        bh=dxeLT+UJkLBqN/hlmc8PclJ6qZkbJCF+Tnbel5pK0hk=;
+        b=LwAzepgrik/aywsY+NCPXDcRdTSclERlC5ZN2rimmnkKmCxLcQgoGaTtVph7Gg1jlh
+         dm04aVF8O/+SPJAKTZ2oLZBd6M2ToArsKXjyvpiF4l1oTUj8L9UfE9P2cnACkPzKN43M
+         vB3SWZJHIoaeUHdJIrPXp5bjqrHeCmFFjFciCvRu5EJ7C9BzBwLYlJVoHvB/ShCgrfcs
+         9IU9aUR1R3fu8qO+UmFZzw5ggA55JsEbkeGtwK7mnW51sSKNS2N3mhUbTB9pscO7/AKY
+         vVC783Y1HCRvElIk642Dv2+JKqSkqblPrIXW7llqRF3zsXm3kYuBlptS8bzBXjXPxRd2
+         NTnw==
+X-Gm-Message-State: AO0yUKWX6Nb3Prp+x/Unjd79m8FRFeh0QCId1XdLNIKTx8FjI+Q20sGN
+	5s9QxYOI+BOixLwkcIVMRujPjIG+hZo=
+X-Google-Smtp-Source: AK7set+Te1K8bUw74YOyFN636bE48txaD+pGEmmQw6oVuoMpjnS6o4WMoV0D+AbUrHKmw/4LN9cG4g==
+X-Received: by 2002:a17:902:e842:b0:19a:8ce1:2c55 with SMTP id t2-20020a170902e84200b0019a8ce12c55mr11945630plg.8.1677730919255;
+        Wed, 01 Mar 2023 20:21:59 -0800 (PST)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9181:1cf0::1ac4])
-        by smtp.gmail.com with ESMTPSA id q9-20020a17090ad38900b00233ebcb52a6sm402497pju.36.2023.03.01.18.09.11
+        by smtp.gmail.com with ESMTPSA id g3-20020a1709026b4300b00198e346c35dsm9223782plt.9.2023.03.01.20.21.58
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 01 Mar 2023 18:09:11 -0800 (PST)
+        Wed, 01 Mar 2023 20:21:58 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-gnome][PATCH] gnome-commander: Upgrade to 1.16.0 release
-Date: Wed,  1 Mar 2023 18:09:09 -0800
-Message-Id: <20230302020909.511403-1-raj.khem@gmail.com>
+Subject: [meta-python][PATCH 1/3] python3-lru-dict: Fix function pointer mismatch
+Date: Wed,  1 Mar 2023 20:21:54 -0800
+Message-Id: <20230302042156.1107335-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 02 Mar 2023 02:09:16 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101320
-
-- Switch to using meson for build system
-- Add -D_LIBCPP_ENABLE_CXX17_REMOVED_AUTO_PTR to continue using std::auto_ptr
-  from exiv2
-
-- The changes are here [1]
-
-[1] https://gcmd.github.io/2023/01/22/Release-v1-16-0.html
+ <openembedded-devel@lists.openembedded.org>; Thu, 02 Mar 2023 04:22:07 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101321
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../gnome-commander/gnome-commander_1.14.3.bb | 22 -------------
- .../gnome-commander/gnome-commander_1.16.0.bb | 31 +++++++++++++++++++
- 2 files changed, 31 insertions(+), 22 deletions(-)
- delete mode 100644 meta-gnome/recipes-gnome/gnome-commander/gnome-commander_1.14.3.bb
- create mode 100644 meta-gnome/recipes-gnome/gnome-commander/gnome-commander_1.16.0.bb
+ ...ion-instead-of-PyCFunctionWithKeywor.patch | 37 +++++++++++++++++++
+ .../python/python3-lru-dict_1.1.8.bb          |  2 +
+ 2 files changed, 39 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-lru-dict/0001-lru-Use-PyCFunction-instead-of-PyCFunctionWithKeywor.patch
 
-diff --git a/meta-gnome/recipes-gnome/gnome-commander/gnome-commander_1.14.3.bb b/meta-gnome/recipes-gnome/gnome-commander/gnome-commander_1.14.3.bb
-deleted file mode 100644
-index b16400cf38..0000000000
---- a/meta-gnome/recipes-gnome/gnome-commander/gnome-commander_1.14.3.bb
-+++ /dev/null
-@@ -1,22 +0,0 @@
--SUMMARY = "A light and fast file manager"
--LICENSE = "GPL-2.0-only"
--LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
--
--DEPENDS = " \
--    glib-2.0-native \
--    gtk+ \
--"
--
--inherit gnomebase itstool gettext gnome-help features_check
--ANY_OF_DISTRO_FEATURES = "${GTK2DISTROFEATURES}"
--
--SRC_URI[archive.sha256sum] = "78d8dce70fb922b2909cf767783053b0811213a4d6a49b3875510cf3a84efd7b"
--
--PACKAGECONFIG ??= "exiv2 taglib libgsf poppler"
--PACKAGECONFIG[exiv2] = "--with-exiv2,--without-exiv2,exiv2"
--PACKAGECONFIG[taglib] = "--with-taglib,--without-taglib,taglib"
--PACKAGECONFIG[libgsf] = "--with-libgsf,--without-libgsf,libgsf"
--PACKAGECONFIG[poppler] = "--with-poppler,--without-poppler,poppler"
--
--FILES:${PN} += "${datadir}/metainfo"
--FILES:${PN}-dev += "${libdir}/${BPN}/lib*${SOLIBSDEV}"
-diff --git a/meta-gnome/recipes-gnome/gnome-commander/gnome-commander_1.16.0.bb b/meta-gnome/recipes-gnome/gnome-commander/gnome-commander_1.16.0.bb
+diff --git a/meta-python/recipes-devtools/python/python3-lru-dict/0001-lru-Use-PyCFunction-instead-of-PyCFunctionWithKeywor.patch b/meta-python/recipes-devtools/python/python3-lru-dict/0001-lru-Use-PyCFunction-instead-of-PyCFunctionWithKeywor.patch
 new file mode 100644
-index 0000000000..8c4b79160a
+index 0000000000..b93d1594da
 --- /dev/null
-+++ b/meta-gnome/recipes-gnome/gnome-commander/gnome-commander_1.16.0.bb
-@@ -0,0 +1,31 @@
-+SUMMARY = "A light and fast file manager"
-+LICENSE = "GPL-2.0-only"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
++++ b/meta-python/recipes-devtools/python/python3-lru-dict/0001-lru-Use-PyCFunction-instead-of-PyCFunctionWithKeywor.patch
+@@ -0,0 +1,37 @@
++From 5013406c409a0a143a315146df388281bfb2172d Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Wed, 1 Mar 2023 19:53:36 -0800
++Subject: [PATCH] lru: Use PyCFunction instead of PyCFunctionWithKeywords
 +
-+DEPENDS += " \
-+    desktop-file-utils-native \
-+    glib-2.0-native \
-+    gtk+ \
-+"
++PyMethodDef uses PyMethodDef and not PyCFunctionWithKeywords and when
++callback is specified as PyCFunctionWithKeywords, clang 16+ is able to
++detect function signature mismatch in function pointers now.
 +
-+CXXFLAGS += "-D_LIBCPP_ENABLE_CXX17_REMOVED_AUTO_PTR"
++Fixes
++lru.c:629:17: error: incompatible function pointer types initializing 'PyCFunction' (aka 'struct _object *(*)(struct _object *, struct _object *)') with an expression of type 'PyCFunctionWithKeywords' (aka 'struct _object *(*)(struct _object *, struct _object *, struct _object *)') [-Wincompatible-function-pointer-types]
++    {"popitem", (PyCFunctionWithKeywords)LRU_popitem, METH_VARARGS | METH_KEYWORDS,
++                ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
++1 error generated.
 +
-+inherit gnomebase itstool gettext gnome-help features_check meson gtk-icon-cache mime-xdg
-+ANY_OF_DISTRO_FEATURES = "${GTK2DISTROFEATURES}"
++Upstream-Status: Submitted [https://github.com/amitdev/lru-dict/pull/45]
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ lru.c | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
 +
-+GNOMEBASEBUILDCLASS = "meson"
-+GIR_MESON_ENABLE_FLAG = 'enabled'
-+GIR_MESON_DISABLE_FLAG = 'disabled'
++diff --git a/lru.c b/lru.c
++index 8adcb4b..33c18ab 100644
++--- a/lru.c
+++++ b/lru.c
++@@ -626,7 +626,7 @@ static PyMethodDef LRU_methods[] = {
++                     PyDoc_STR("L.setdefault(key, default=None) -> If L has key return its value, otherwise insert key with a value of default and return default")},
++     {"pop", (PyCFunction)LRU_pop, METH_VARARGS,
++                     PyDoc_STR("L.pop(key[, default]) -> If L has key return its value and remove it from L, otherwise return default. If default is not given and key is not in L, a KeyError is raised.")},
++-    {"popitem", (PyCFunctionWithKeywords)LRU_popitem, METH_VARARGS | METH_KEYWORDS,
+++    {"popitem", (PyCFunction)LRU_popitem, METH_VARARGS | METH_KEYWORDS,
++                     PyDoc_STR("L.popitem([least_recent=True]) -> Returns and removes a (key, value) pair. The pair returned is the least-recently used if least_recent is true, or the most-recently used if false.")},
++     {"set_size", (PyCFunction)LRU_set_size, METH_VARARGS,
++                     PyDoc_STR("L.set_size() -> set size of LRU")},
++-- 
++2.39.2
 +
-+SRC_URI[archive.sha256sum] = "d80ac70b99a7059c8f28ca0bf37305f09daeaecfceb1528d68a435ace9e8ec5d"
+diff --git a/meta-python/recipes-devtools/python/python3-lru-dict_1.1.8.bb b/meta-python/recipes-devtools/python/python3-lru-dict_1.1.8.bb
+index b870bc0889..e825e43dfe 100644
+--- a/meta-python/recipes-devtools/python/python3-lru-dict_1.1.8.bb
++++ b/meta-python/recipes-devtools/python/python3-lru-dict_1.1.8.bb
+@@ -7,3 +7,5 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=9d10a486ee04034fdef5162fd791f153"
+ SRC_URI[sha256sum] = "878bc8ef4073e5cfb953dfc1cf4585db41e8b814c0106abde34d00ee0d0b3115"
+ 
+ inherit pypi setuptools3
 +
-+PACKAGECONFIG ??= "exiv2 taglib libgsf poppler"
-+PACKAGECONFIG[exiv2] = "-Dexiv2=enabled,-Dexiv2=disabled,exiv2"
-+PACKAGECONFIG[taglib] = "-Dtaglib=enabled,-Dtaglib=disabled,taglib"
-+PACKAGECONFIG[libgsf] = "-Dlibgsf=enabled,-Dlibgsf=disabled,libgsf"
-+PACKAGECONFIG[poppler] = "-Dpoppler=enabled,-Dpoppler=disabled,poppler"
-+PACKAGECONFIG[samba] = "-Dsamba=enabled,-Dsamba=disabled,samba"
-+PACKAGECONFIG[tests] = "-Dtests=enabled,-Dtests=disabled,"
-+
-+FILES:${PN} += "${datadir}/metainfo"
-+FILES:${PN}-dev += "${libdir}/${BPN}/lib*${SOLIBSDEV}"
++SRC_URI += "file://0001-lru-Use-PyCFunction-instead-of-PyCFunctionWithKeywor.patch"
 -- 
 2.39.2
 
