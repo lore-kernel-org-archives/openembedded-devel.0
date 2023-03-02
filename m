@@ -2,56 +2,56 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6D7E9C6FA8E
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7B22CC7EE3A
 	for <webhook@archiver.kernel.org>; Thu,  2 Mar 2023 08:31:28 +0000 (UTC)
-Received: from mail-pl1-f170.google.com (mail-pl1-f170.google.com [209.85.214.170])
- by mx.groups.io with SMTP id smtpd.web10.10288.1677745883655719010
+Received: from mail-pl1-f176.google.com (mail-pl1-f176.google.com [209.85.214.176])
+ by mx.groups.io with SMTP id smtpd.web10.10285.1677745880488950054
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 02 Mar 2023 00:31:23 -0800
+ Thu, 02 Mar 2023 00:31:21 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=WnKcGDEV;
- spf=pass (domain: gmail.com, ip: 209.85.214.170, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f170.google.com with SMTP id a2so6340815plm.4
-        for <openembedded-devel@lists.openembedded.org>; Thu, 02 Mar 2023 00:31:23 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=jixvZGAD;
+ spf=pass (domain: gmail.com, ip: 209.85.214.176, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f176.google.com with SMTP id n6so15396368plf.5
+        for <openembedded-devel@lists.openembedded.org>; Thu, 02 Mar 2023 00:31:21 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=27RFUtQVc+vtd2x38KWxDEqG26YgwS60vD5ZpAKc3kQ=;
-        b=WnKcGDEVIEt49TpIgNghHrEn8BL2vFmNssmlPNxfYNmZXatetcNpkgrpOML1ZafF31
-         VJGENc/Hf8m62YrAWY5sQpyd7JlqKnbwkZ2bCst2NoHh2/YWXH8jPJ6hnwJ0+GABVxux
-         kGCht1SDaseCvo1k0jNDbyla5sjyNexExTcbDSSTWdqkjf5fesGd7QILuweIsHvKZrKx
-         yBQAvldWDTaSxwhfftcD3s53NtHFN1ZCnOKMgPDe6gWXH+dyjXZ0+UwY82L9qoq6WVBV
-         Ng2ASd8Q3eYqJSNBAzpdx3Qa6uFnm/bDK4hQKxc6UrltSgrKxMQp/uWAhYddtkj/K4V2
-         DiCw==
+        bh=JnaMcl/RFIlQYZSu/6LHqRtVJgWZZ5ypRMlXTgEC894=;
+        b=jixvZGADx6JGJ7dpokqyAmmDPyJaT8ka6H+jMlhIp6N2STqgAsWCEJ9k1u0i1vHOEz
+         5ZfO3bPwnabi3rbqyYtTMuIn+CpsCZuqk5//zbw4s7oQ1RYXj8tEW/rmrgs9G/xWgkUe
+         EtI1fuqpCPFAEqjrKdz0hNmmVuWuXG8pvCciXLt3hEiqhGFqovmCaXrMSTOBM9sd4BNJ
+         LO0+Pw8whMXSudZ8c+hTXvIIGgQjs41+b7ySHRorqu3G5D9WBF3kwG/EWdCkV/Dlfmkr
+         Y93B8QYNHq9k/ppwT+z95vqY4kZtH86Hw3iOE3TDK2wKIoWyqfqnoLGC7f/D6vzbXCuK
+         1S9w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=27RFUtQVc+vtd2x38KWxDEqG26YgwS60vD5ZpAKc3kQ=;
-        b=tGDH25JwdELpkwUxfxfSGU7ptWeNJP/mPcultGBLWVio3AhrVkLdt3kWRA/6h9EU3Z
-         9b3hT8ihtIx8O+aVLixQScBpYCQx3ISCac+A5MxmG1FxFuL5eb3a97F+FxnR8MaNt5Xm
-         1HdNyr0x6MjPd7lMGsvvXXRrqUchyeT9c6oWiK5a4OyUNYiE4eCC9iNlq5BUE2Y2N49m
-         oJ5r8Eebjme9Bsv5m2ONcRqzxeB9q9zmq5Bhg/1ekqs2cbarrSCBTNX5dUHSQx3RZ+KP
-         zStB5J0I1ej0Jgho84fMOo8sv5BWqeXnv9Qhy3/a0FK6cCEakcYRzBoeeqoFqddmTtnA
-         GYmQ==
-X-Gm-Message-State: AO0yUKUEsnSda3bjiIz/OAxwZ6n6A8rMhhK6WNEC2td3/d8fkcX4rn9L
-	yPHeWrQdjeLcSrySsKZ0pEmbbQWLIV4=
-X-Google-Smtp-Source: AK7set9kKZI+FCEdmQWm7slwJqQFiYYr6qjsZ29+P/qU5QIGtNIIE8XzxntivNQr+QWmxW51nJAgtg==
-X-Received: by 2002:a17:902:cf0a:b0:19d:244:a3a4 with SMTP id i10-20020a170902cf0a00b0019d0244a3a4mr9506460plg.47.1677745882846;
-        Thu, 02 Mar 2023 00:31:22 -0800 (PST)
+        bh=JnaMcl/RFIlQYZSu/6LHqRtVJgWZZ5ypRMlXTgEC894=;
+        b=SCCQUffP0sLzZJ0/Z9Rlei6+aTYquaKZDClubLOsfB74cy08pVwfhOa4+B95xjGdTX
+         wqHm9MGw9HroVhPplak7lZH9SS241QcaemVVmxlitoLAPxAzft64YKJpQtOdH9UMAUCT
+         eJwNCMg6P3ptOH/z4UMm+Ghin1bkLyBwzknaSoIq6BIDAkawr8+ncQ7yTK6lDuIf6p7d
+         7q6+QIpJY8HpL0nbCYBcHEZmuuQNnXf5UtGyjbO42E6ZFd7G67Bj1Har9P3F1ToFxe6B
+         OOxyD3+vZIFLpLyOhLrOg855iJ7HhO2gbxATHEGWhRa15ybFrZ2Y8TKfQL0L8IeHovwX
+         uIJw==
+X-Gm-Message-State: AO0yUKXgxLj8n7d8a5FRm6bvPEIVIrFz7H6h3GbgT2B5qVhMZpC3Y9nt
+	oscNBQV1LIGoyKsJe33Vm1A220tbIfU=
+X-Google-Smtp-Source: AK7set/v7tHvhKCJHPaHPyKbDGwaVC3a7WHTKEuyOSUP31mhjUpJSRdrorXrzGXwblYOM1elwQP1qA==
+X-Received: by 2002:a17:903:1d2:b0:19d:1f42:b018 with SMTP id e18-20020a17090301d200b0019d1f42b018mr1549114plh.27.1677745880982;
+        Thu, 02 Mar 2023 00:31:20 -0800 (PST)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9181:1cf0::1ac4])
-        by smtp.gmail.com with ESMTPSA id w13-20020a170902d70d00b0019aeddce6casm9670994ply.205.2023.03.02.00.31.22
+        by smtp.gmail.com with ESMTPSA id w13-20020a170902d70d00b0019aeddce6casm9670994ply.205.2023.03.02.00.31.20
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 02 Mar 2023 00:31:22 -0800 (PST)
+        Thu, 02 Mar 2023 00:31:20 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 5/5] gphoto2: Fix build with clang16 + musl
-Date: Thu,  2 Mar 2023 00:31:16 -0800
-Message-Id: <20230302083116.1332448-5-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 3/5] libsdl2-ttf: Upgrade to 2.20.2
+Date: Thu,  2 Mar 2023 00:31:14 -0800
+Message-Id: <20230302083116.1332448-3-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20230302083116.1332448-1-raj.khem@gmail.com>
 References: <20230302083116.1332448-1-raj.khem@gmail.com>
@@ -61,82 +61,121 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 02 Mar 2023 08:31:28 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101331
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101329
+
+Fix build with clang16 while here
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...ototypes-of-callbacks-with-libgphoto.patch | 50 +++++++++++++++++++
- .../gphoto2/gphoto2_2.5.28.bb                 |  1 +
- 2 files changed, 51 insertions(+)
- create mode 100644 meta-oe/recipes-graphics/gphoto2/gphoto2/0001-Match-prototypes-of-callbacks-with-libgphoto.patch
+ ...ction-signatures-to-match-without-ca.patch | 69 +++++++++++++++++++
+ ...l2-ttf_2.20.1.bb => libsdl2-ttf_2.20.2.bb} |  7 +-
+ 2 files changed, 73 insertions(+), 3 deletions(-)
+ create mode 100644 meta-oe/recipes-graphics/libsdl/libsdl2-ttf/0001-freetype-Fix-function-signatures-to-match-without-ca.patch
+ rename meta-oe/recipes-graphics/libsdl/{libsdl2-ttf_2.20.1.bb => libsdl2-ttf_2.20.2.bb} (76%)
 
-diff --git a/meta-oe/recipes-graphics/gphoto2/gphoto2/0001-Match-prototypes-of-callbacks-with-libgphoto.patch b/meta-oe/recipes-graphics/gphoto2/gphoto2/0001-Match-prototypes-of-callbacks-with-libgphoto.patch
+diff --git a/meta-oe/recipes-graphics/libsdl/libsdl2-ttf/0001-freetype-Fix-function-signatures-to-match-without-ca.patch b/meta-oe/recipes-graphics/libsdl/libsdl2-ttf/0001-freetype-Fix-function-signatures-to-match-without-ca.patch
 new file mode 100644
-index 0000000000..abe38e12ce
+index 0000000000..8cb76c35d6
 --- /dev/null
-+++ b/meta-oe/recipes-graphics/gphoto2/gphoto2/0001-Match-prototypes-of-callbacks-with-libgphoto.patch
-@@ -0,0 +1,50 @@
-+From 366930ccc1a261c3eb883da2bf3c655162ccd75f Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Wed, 1 Mar 2023 22:58:37 -0800
-+Subject: [PATCH] Match prototypes of callbacks with libgphoto
++++ b/meta-oe/recipes-graphics/libsdl/libsdl2-ttf/0001-freetype-Fix-function-signatures-to-match-without-ca.patch
+@@ -0,0 +1,69 @@
++From 6c52693d264ca3dc8e15a92f56cf3a636639bb6c Mon Sep 17 00:00:00 2001
++From: =?UTF-8?q?Martin=20Storsj=C3=B6?= <martin@martin.st>
++Date: Fri, 28 Oct 2022 22:17:15 +0300
++Subject: [PATCH] freetype: Fix function signatures to match without casts
 +
-+In https://github.com/gphoto/gphoto2/pull/535/commits/ccc4c1f092bd21ebc713f4d7b9be85be49f92f1e
-+we tried to fix by using pthread_t but it also needs to make changes in
-+libgphoto and these changes can be invasive, therefore lets revert to
-+older types and to fix musl problem fix it via type casts
++Clang 16 has got a new stricter warning for casts of function types
++(see https://github.com/llvm/llvm-project/commit/1aad641c793090b4d036c03e737df2ebe2c32c57).
 +
-+Upstream-Status: Submitted [https://github.com/gphoto/gphoto2/pull/569]
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
++This new warning gets included as part of the existing error
++diagnostic setting of -Wcast-function-type.
++
++This fixes errors like these:
++
++../src/hb-ft.cc:1011:34: error: cast from 'void (*)(FT_Face)' (aka 'void (*)(FT_FaceRec_ *)') to 'FT_Generic_Finalizer' (aka 'void (*)(void *)') converts to incompatible function type [-Werror,-Wcast-function-type-strict]
++    ft_face->generic.finalizer = (FT_Generic_Finalizer) hb_ft_face_finalize;
++                                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
++
++Upstream-Status: Backport [https://github.com/harfbuzz/harfbuzz/commit/d88269c827895b38f99f7cf741fa60210d4d5169]
 +---
-+ gphoto2/main.c | 8 ++++----
-+ 1 file changed, 4 insertions(+), 4 deletions(-)
++ src/hb-ft.cc | 10 ++++++----
++ 1 file changed, 6 insertions(+), 4 deletions(-)
 +
-+diff --git a/gphoto2/main.c b/gphoto2/main.c
-+index 0dac947..cd3c990 100644
-+--- a/gphoto2/main.c
-++++ b/gphoto2/main.c
-+@@ -1198,7 +1198,7 @@ thread_func (void *data)
-+ 	pthread_cleanup_pop (1);
-+ }
-+ 
-+-static pthread_t
-++static unsigned int
-+ start_timeout_func (Camera *camera, unsigned int timeout,
-+ 		    CameraTimeoutFunc func, void __unused__ *data)
-+ {
-+@@ -1215,14 +1215,14 @@ start_timeout_func (Camera *camera, unsigned int timeout,
-+ 
-+ 	pthread_create (&tid, NULL, thread_func, td);
-+ 
-+-	return (tid);
-++	return (unsigned int)tid;
++diff --git a/src/hb-ft.cc b/src/hb-ft.cc
++index a6beb9f0f..a35e75b18 100644
++--- a/src/hb-ft.cc
+++++ b/src/hb-ft.cc
++@@ -729,8 +729,9 @@ hb_ft_face_create_referenced (FT_Face ft_face)
 + }
 + 
 + static void
-+-stop_timeout_func (Camera __unused__ *camera, pthread_t id,
-++stop_timeout_func (Camera __unused__ *camera, unsigned int id,
-+ 		   void __unused__ *data)
++-hb_ft_face_finalize (FT_Face ft_face)
+++hb_ft_face_finalize (void *arg)
 + {
-+-	pthread_t tid = id;
-++	pthread_t tid = (pthread_t)id;
+++  FT_Face ft_face = (FT_Face) arg;
++   hb_face_destroy ((hb_face_t *) ft_face->generic.data);
++ }
 + 
-+ 	pthread_cancel (tid);
-+ 	pthread_join (tid, NULL);
++@@ -762,7 +763,7 @@ hb_ft_face_create_cached (FT_Face ft_face)
++       ft_face->generic.finalizer (ft_face);
++ 
++     ft_face->generic.data = hb_ft_face_create (ft_face, nullptr);
++-    ft_face->generic.finalizer = (FT_Generic_Finalizer) hb_ft_face_finalize;
+++    ft_face->generic.finalizer = hb_ft_face_finalize;
++   }
++ 
++   return hb_face_reference ((hb_face_t *) ft_face->generic.data);
++@@ -949,8 +950,9 @@ get_ft_library ()
++ }
++ 
++ static void
++-_release_blob (FT_Face ft_face)
+++_release_blob (void *arg)
++ {
+++  FT_Face ft_face = (FT_Face) arg;
++   hb_blob_destroy ((hb_blob_t *) ft_face->generic.data);
++ }
++ 
++@@ -1032,7 +1034,7 @@ hb_ft_font_set_funcs (hb_font_t *font)
++ #endif
++ 
++   ft_face->generic.data = blob;
++-  ft_face->generic.finalizer = (FT_Generic_Finalizer) _release_blob;
+++  ft_face->generic.finalizer = _release_blob;
++ 
++   _hb_ft_font_set_funcs (font, ft_face, true);
++   hb_ft_font_set_load_flags (font, FT_LOAD_DEFAULT | FT_LOAD_NO_HINTING);
 +-- 
 +2.39.2
 +
-diff --git a/meta-oe/recipes-graphics/gphoto2/gphoto2_2.5.28.bb b/meta-oe/recipes-graphics/gphoto2/gphoto2_2.5.28.bb
-index fe33940475..513845194d 100644
---- a/meta-oe/recipes-graphics/gphoto2/gphoto2_2.5.28.bb
-+++ b/meta-oe/recipes-graphics/gphoto2/gphoto2_2.5.28.bb
-@@ -9,6 +9,7 @@ RDEPENDS:gphoto2 = "libgphoto2"
- SRC_URI = "${SOURCEFORGE_MIRROR}/gphoto/gphoto2-${PV}.tar.bz2;name=gphoto2 \
-            file://0001-configure.ac-remove-AM_PO_SUBDIRS.patch \
-            file://0001-gphoto2-Use-pthread_t-abstract-type-for-thead-IDs.patch \
-+           file://0001-Match-prototypes-of-callbacks-with-libgphoto.patch \
+diff --git a/meta-oe/recipes-graphics/libsdl/libsdl2-ttf_2.20.1.bb b/meta-oe/recipes-graphics/libsdl/libsdl2-ttf_2.20.2.bb
+similarity index 76%
+rename from meta-oe/recipes-graphics/libsdl/libsdl2-ttf_2.20.1.bb
+rename to meta-oe/recipes-graphics/libsdl/libsdl2-ttf_2.20.2.bb
+index b8732b4c86..7d352f4218 100644
+--- a/meta-oe/recipes-graphics/libsdl/libsdl2-ttf_2.20.1.bb
++++ b/meta-oe/recipes-graphics/libsdl/libsdl2-ttf_2.20.2.bb
+@@ -2,17 +2,18 @@ SUMMARY = "Simple DirectMedia Layer truetype font library"
+ SECTION = "libs"
+ DEPENDS = "libsdl2 freetype virtual/egl"
+ LICENSE = "Zlib"
+-LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=771dca8728b18d39b130e19b36514371"
++LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=a41cbf59bdea749fe34c1af6d3615f68"
+ 
+ SRC_URI = " \
+     git://github.com/libsdl-org/SDL_ttf.git;branch=release-2.20.x;protocol=https \
+     git://github.com/libsdl-org/freetype.git;branch=VER-2-12-1-SDL;destsuffix=git/external/freetype;name=freetype;protocol=https \
+     git://github.com/libsdl-org/harfbuzz.git;branch=2.9.1-SDL;destsuffix=git/external/harfbuzz;name=harfbuzz;protocol=https \
++    file://0001-freetype-Fix-function-signatures-to-match-without-ca.patch;patchdir=external/harfbuzz \
+     file://automake_foreign.patch \
  "
- SRC_URI[gphoto2.sha256sum] = "2a648dcdf12da19e208255df4ebed3e7d2a02f905be4165f2443c984cf887375"
+-SRCREV = "0a652b598625d16ea7016665095cb1e9bce9ef4f"
++SRCREV = "89d1692fd8fe91a679bb943d377bfbd709b52c23"
+ SRCREV_freetype = "6fc77cee03e078e97afcee0c0e06a2d3274b9a29"
+-SRCREV_harfbuzz = "6022fe2f68d028ee178284f297b3902ffdf65b03"
++SRCREV_harfbuzz = "43931e3e596c04044861770b831c8f9452e2d3b0"
+ 
+ S = "${WORKDIR}/git"
  
 -- 
 2.39.2
