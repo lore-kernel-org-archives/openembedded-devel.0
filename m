@@ -1,158 +1,105 @@
-Return-Path: <changqing.li@eng.windriver.com>
+Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 73BAEC678D4
-	for <webhook@archiver.kernel.org>; Thu,  2 Mar 2023 05:01:07 +0000 (UTC)
-Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
- by mx.groups.io with SMTP id smtpd.web11.8050.1677733262645831968
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A3C36C678D4
+	for <webhook@archiver.kernel.org>; Thu,  2 Mar 2023 05:35:57 +0000 (UTC)
+Received: from mail1.bemta34.messagelabs.com (mail1.bemta34.messagelabs.com [195.245.231.1])
+ by mx.groups.io with SMTP id smtpd.web10.8376.1677735348122240490
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 01 Mar 2023 21:01:02 -0800
+ Wed, 01 Mar 2023 21:35:49 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=pps06212021 header.b=SC56iEDe;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=2425b97132=changqing.li@windriver.com)
-Received: from pps.filterd (m0250811.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 32250lio025763
-	for <openembedded-devel@lists.openembedded.org>; Thu, 2 Mar 2023 05:01:01 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com; h=from : to :
- subject : date : message-id : mime-version : content-transfer-encoding :
- content-type; s=PPS06212021;
- bh=M8T9MmJobafACr0Cxdqb0hvJ/NIzGOSsRDvJlxhuoUk=;
- b=SC56iEDeVBYeVeSE/vz7qCEN84Z9DT5FoVy1r2TKli5dGFMcwiDPq34nr9G6gK6oiMdf
- aCfZEBNb8mjS7Xti6CDCugzH+QCSmio4kRLz1OZPpuST7YyeA2AWozNZGw5pg8CbEQ8n
- Zq4U8kmW7+6PWmefqcjJKTxON/gxXXnhD1IiGIynJUpQs45lRU0vYeuNdGbzDqnci5Nf
- 4v3LXPl4nMI/Y5v0oc5BUeH1VXkmRXUKikoQY2a59Jk2st5TGUX7twKbzeZwhsyd3+oa
- 9JbzSnMt2Tf8FzE8K+ZdocaVHacKHmzKZYCEkplPkGtGUS2lSoCawsEVnUW8Wj9ADbd8 bg== 
-Received: from ala-exchng01.corp.ad.wrs.com (unknown-82-252.windriver.com [147.11.82.252])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3nybmkd2qw-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Thu, 02 Mar 2023 05:01:01 +0000
-Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.17; Wed, 1 Mar 2023 21:01:00 -0800
-Received: from pek-lpg-core2.wrs.com (128.224.153.41) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
- 15.1.2507.17 via Frontend Transport; Wed, 1 Mar 2023 21:00:59 -0800
-From: <changqing.li@windriver.com>
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=Hs+8a9O3;
+ spf=pass (domain: fujitsu.com, ip: 195.245.231.1, mailfrom: wangmy@fujitsu.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
+	s=170520fj; t=1677735346; i=@fujitsu.com;
+	bh=R5lrgG9fqWxK47B/ZZEQWFejtkBsizW/ZlwNUo9ypPw=;
+	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
+	b=Hs+8a9O3o74HeEbYEuRRVDL79rf0LRYz/KScq1fUU7Kx3jRhkJgvP7ujtwSyDWfZY
+	 9gfm5MPR0x97fL37VyLyPV8iC27nSr6+kwOsZ/W/u4WZCuhEEVAZyaFZQf+gsExhz2
+	 8uwVMxkReRaVcxYYXxQdRgfQNQU2grHh5wB+km5iJpK+Qb348sZlNZFDVLw113nqPE
+	 NL1yKPFb9RNsgbU8L0JuleTFKKAZjxCZZagYyzoy/tgkPMQzGLmEt6pUHlL9jmgeoX
+	 iAd5CoNUUNK+Qkxds6cL/iPYNm1+P7OO/Ig8bm9SC2Ok6r12UG1uq76FJKprXG8sqb
+	 MgD4Aj+QEYP6A==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFlrHIsWRWlGSWpSXmKPExsViZ8ORpLvRlCH
+  F4O47I4uLh5cyOzB6nNu4gjGAMYo1My8pvyKBNWPvh262gg8cFWe6VjE3MLZydDFycggJPGSU
+  OPTcoYuRC8i+yiTxZPpxZghnD6PE9fbt7CBVbAJSEjfu/2cDsUUE9CWWzt7DDGIzC6hIvPjdA
+  1YjLOAkcXJnKwuIzQIUb9i7F8zmFXCUWLr9K1i9hICCxJSH75kh4oISJ2c+YYGYIyFx8MULqB
+  pFidmXm1kg7EqJ1g+/oGw1iavnNjFPYOSfhaR9FpL2BYxMqxjNilOLylKLdA3N9JKKMtMzSnI
+  TM3P0Eqt0E/VSS3XLU4tLdI30EsuL9VKLi/WKK3OTc1L08lJLNjECgzGlWN19B+ORvr96hxgl
+  OZiURHknsTKkCPEl5adUZiQWZ8QXleakFh9ilOHgUJLg1TMCygkWpaanVqRl5gAjAyYtwcGjJ
+  MKroweU5i0uSMwtzkyHSJ1iVJQS500yBkoIgCQySvPg2mDReIlRVkqYl5GBgUGIpyC1KDezBF
+  X+FaM4B6OSMK+XCdAUnsy8Erjpr4AWMwEtbrj2JxlocUkiQkqqganJIrz99XNFw4mHd7L+CV/
+  Bvp9DerrO+16LsEPb8wpnXjmd9iNCw988LDPr1f+igGTrXL77yj6KLr4Fa+yuiUgGCwrmmcdU
+  XA18FXt67VUndYXjVtIvf719WM33VvDdqSdWxnOEwljlTI+K1FWJBEXOsrmy5sK3JsHcU1adh
+  470av9UYcjXe51+oMvhSX1t378Uub4At0la3MaP6piWb9n8wdLFu/fE2xscjTO/7762cKvIL/
+  krHQVbAv98TVGyMtnz4NfPW5PFFdv37W/VOGYgEsBd1fnuIlPkuZimO7H8fU05B+/MWuMc13T
+  tV1zs3X/3tr65FZ0jvWqa6rHmk+taFM/92rkn78vx5Nzkg0osxRmJhlrMRcWJAAG2c65BAwAA
+X-Env-Sender: wangmy@fujitsu.com
+X-Msg-Ref: server-22.tower-548.messagelabs.com!1677735345!356411!1
+X-Originating-IP: [62.60.8.98]
+X-SYMC-ESS-Client-Auth: outbound-route-from=pass
+X-StarScan-Received: 
+X-StarScan-Version: 9.103.1; banners=-,-,-
+X-VirusChecked: Checked
+Received: (qmail 12767 invoked from network); 2 Mar 2023 05:35:45 -0000
+Received: from unknown (HELO n03ukasimr03.n03.fujitsu.local) (62.60.8.98)
+  by server-22.tower-548.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 2 Mar 2023 05:35:45 -0000
+Received: from n03ukasimr03.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr03.n03.fujitsu.local (Postfix) with ESMTP id 87B051B4
+	for <openembedded-devel@lists.openembedded.org>; Thu,  2 Mar 2023 05:35:45 +0000 (GMT)
+Received: from R01UKEXCASM223.r01.fujitsu.local (R01UKEXCASM223 [10.182.185.121])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by n03ukasimr03.n03.fujitsu.local (Postfix) with ESMTPS id 7C13B1AE
+	for <openembedded-devel@lists.openembedded.org>; Thu,  2 Mar 2023 05:35:45 +0000 (GMT)
+Received: from localhost.localdomain (10.167.225.33) by
+ R01UKEXCASM223.r01.fujitsu.local (10.182.185.121) with Microsoft SMTP Server
+ (TLS) id 15.0.1497.42; Thu, 2 Mar 2023 05:35:44 +0000
+From: <wangmy@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [kirkstone][meta-oe][PATCH V3] liblockfile: fix do_install failure when ldconfig is not installed
-Date: Thu, 2 Mar 2023 13:00:59 +0800
-Message-ID: <20230302050059.1545118-1-changqing.li@windriver.com>
-X-Mailer: git-send-email 2.25.1
+CC: Wang Mingyu <wangmy@fujitsu.com>
+Subject: [oe] [meta-perl] [PATCH] logcheck: upgrade 1.4.0 -> 1.4.2
+Date: Thu, 2 Mar 2023 13:35:33 +0800
+Message-ID: <1677735333-3823-1-git-send-email-wangmy@fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-Proofpoint-GUID: ryoRbukO8q_ezU0b9BH9LXH0SArmw8TO
-X-Proofpoint-ORIG-GUID: ryoRbukO8q_ezU0b9BH9LXH0SArmw8TO
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.219,Aquarius:18.0.942,Hydra:6.0.573,FMLib:17.11.170.22
- definitions=2023-03-02_01,2023-03-01_03,2023-02-09_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 adultscore=0 spamscore=0
- suspectscore=0 phishscore=0 mlxscore=0 malwarescore=0 priorityscore=1501
- lowpriorityscore=0 mlxlogscore=999 clxscore=1015 bulkscore=0
- impostorscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2212070000 definitions=main-2303020035
+X-Originating-IP: [10.167.225.33]
+X-ClientProxiedBy: G08CNEXCHPEKD07.g08.fujitsu.local (10.167.33.80) To
+ R01UKEXCASM223.r01.fujitsu.local (10.182.185.121)
+X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 02 Mar 2023 05:01:07 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101324
+ <openembedded-devel@lists.openembedded.org>; Thu, 02 Mar 2023 05:35:57 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101325
 
-From: Changqing Li <changqing.li@windriver.com>
+From: Wang Mingyu <wangmy@fujitsu.com>
 
-liblockfile do_install task will fail since syntax error when ldconfig
-is not installed on the host.
-
-Signed-off-by: Changqing Li <changqing.li@windriver.com>
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- ...install-failure-on-host-without-ldco.patch | 63 +++++++++++++++++++
- .../liblockfile/liblockfile_1.14.bb           |  1 +
- 2 files changed, 64 insertions(+)
- create mode 100644 meta-oe/recipes-extended/liblockfile/liblockfile/0001-Makefile.in-fix-install-failure-on-host-without-ldco.patch
+ .../logcheck/{logcheck_1.4.0.bb => logcheck_1.4.2.bb}           | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-perl/recipes-extended/logcheck/{logcheck_1.4.0.bb => logcheck_1.4.2.bb} (96%)
 
-diff --git a/meta-oe/recipes-extended/liblockfile/liblockfile/0001-Makefile.in-fix-install-failure-on-host-without-ldco.patch b/meta-oe/recipes-extended/liblockfile/liblockfile/0001-Makefile.in-fix-install-failure-on-host-without-ldco.patch
-new file mode 100644
-index 000000000..8ac61aa55
---- /dev/null
-+++ b/meta-oe/recipes-extended/liblockfile/liblockfile/0001-Makefile.in-fix-install-failure-on-host-without-ldco.patch
-@@ -0,0 +1,63 @@
-+From db9b4be854bb9a84319b81ce0afecd98f4f84ff7 Mon Sep 17 00:00:00 2001
-+From: Changqing Li <changqing.li@windriver.com>
-+Date: Mon, 27 Feb 2023 08:28:21 +0000
-+Subject: [PATCH] Makefile.in: fix install failure on host without ldconfig
-+
-+fix syntax error when ldconfig is not installed on host
-+
-+when ldconfig is not installed on the build host, install will failed with
-+error:
-+ln -sf nfslock.so.0.1 /mnt/tmp-glibc/work/core2-64-wrs-linux/liblockfile/1.14-r0/image/usr/lib64/nfslock.so.0
-+install -m 644 lockfile.h maillock.h /mnt/tmp-glibc/work/core2-64-wrs-linux/liblockfile/1.14-r0/image/usr/include
-+if test "/mnt/tmp-glibc/work/core2-64-wrs-linux/liblockfile/1.14-r0/image" = ""; then ; fi
-+if [ "mail" != "" ]; then\
-+          install -g mail -m 2755 dotlockfile /mnt/tmp-glibc/work/core2-64-wrs-linux/liblockfile/1.14-r0/image/usr/bin;\
-+        else \
-+          install -g root -m 755 dotlockfile /mnt/tmp-glibc/work/core2-64-wrs-linux/liblockfile/1.14-r0/image/usr/bin; \
-+        fi
-+/bin/sh: -c: line 1: syntax error near unexpected token `;'
-+/bin/sh: -c: line 1: `if test "/mnt/tmp-glibc/work/core2-64-wrs-linux/liblockfile/1.14-r0/image" = ""; then ; fi'
-+
-+Upstream-Status: Submitted [https://github.com/miquels/liblockfile/pull/21]
-+
-+Signed-off-by: Changqing Li <changqing.li@windriver.com>
-+---
-+ Makefile.in | 8 ++++++--
-+ 1 file changed, 6 insertions(+), 2 deletions(-)
-+
-+diff --git a/Makefile.in b/Makefile.in
-+index 6e53179..d003899 100644
-+--- a/Makefile.in
-++++ b/Makefile.in
-+@@ -9,6 +9,10 @@ NFSVER		= 0.1
-+ CFLAGS		= @CFLAGS@ -I.
-+ LDFLAGS		= @LDFLAGS@
-+ CC		= @CC@
-++LDCONFIG       = @LDCONFIG@
-++ifeq ($(LDCONFIG),)
-++    LDCONFIG = ":"
-++endif
-+ 
-+ prefix		= $(DESTDIR)@prefix@
-+ exec_prefix	= @exec_prefix@
-+@@ -58,7 +62,7 @@ install_shared:	shared install_static install_common
-+ 			$(libdir)/liblockfile.so.$(SOVER)
-+ 		ln -s liblockfile.so.$(SOVER) $(libdir)/liblockfile.so.$(MAJOR)
-+ 		ln -s liblockfile.so.$(SOVER) $(libdir)/liblockfile.so
-+-		if test "$(DESTDIR)" = ""; then @LDCONFIG@; fi
-++		if test "$(DESTDIR)" = ""; then $(LDCONFIG); fi
-+ 
-+ install_common:
-+ 		install -d -m 755 -g root -p $(includedir)
-+@@ -79,7 +83,7 @@ install_nfslib:	nfslib
-+ 		install -m 755 nfslock.so.$(NFSVER) $(nfslockdir)
-+ 		ln -sf nfslock.so.$(NFSVER) $(libdir)/nfslock.so
-+ 		ln -sf nfslock.so.$(NFSVER) $(libdir)/nfslock.so.0
-+-		if test "$(DESTDIR)" = ""; then @LDCONFIG@; fi
-++		if test "$(DESTDIR)" = ""; then $(LDCONFIG); fi
-+ 
-+ clean:
-+ 		rm -f *.a *.o *.so *.so.* dotlockfile
-+-- 
-+2.25.1
-+
-diff --git a/meta-oe/recipes-extended/liblockfile/liblockfile_1.14.bb b/meta-oe/recipes-extended/liblockfile/liblockfile_1.14.bb
-index bac3a2c0b..eefc25dc4 100644
---- a/meta-oe/recipes-extended/liblockfile/liblockfile_1.14.bb
-+++ b/meta-oe/recipes-extended/liblockfile/liblockfile_1.14.bb
-@@ -10,6 +10,7 @@ SRC_URI = "${DEBIAN_MIRROR}/main/libl/liblockfile/liblockfile_1.14.orig.tar.gz \
-     file://0001-Makefile.in-add-DESTDIR.patch \
-     file://0001-Makefile.in-install-nfslock-libs.patch \
-     file://liblockfile-fix-install-so-to-man-dir.patch \
-+    file://0001-Makefile.in-fix-install-failure-on-host-without-ldco.patch \
+diff --git a/meta-perl/recipes-extended/logcheck/logcheck_1.4.0.bb b/meta-perl/recipes-extended/logcheck/logcheck_1.4.2.bb
+similarity index 96%
+rename from meta-perl/recipes-extended/logcheck/logcheck_1.4.0.bb
+rename to meta-perl/recipes-extended/logcheck/logcheck_1.4.2.bb
+index 7436b9c7eb..1ad32b2dbb 100644
+--- a/meta-perl/recipes-extended/logcheck/logcheck_1.4.0.bb
++++ b/meta-perl/recipes-extended/logcheck/logcheck_1.4.2.bb
+@@ -14,7 +14,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=c93c0550bd3173f4504b2cbd8991e50b"
+ SRC_URI = "${DEBIAN_MIRROR}/main/l/${BPN}/${BPN}_${PV}.tar.xz \
+            file://99_logcheck \
  "
+-SRC_URI[sha256sum] = "dfd95c980727108cc9b8921736af9388dea0f6157688c03e8e39de378107b3dc"
++SRC_URI[sha256sum] = "0c651deb31dc201f1584ecea292b259932bae6e3e8cef846db3109e89a7f217e"
  
- SRC_URI[md5sum] = "420c056ba0cc4d1477e402f70ba2f5eb"
+ inherit useradd
+ 
 -- 
-2.25.1
+2.34.1
 
 
