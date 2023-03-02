@@ -1,135 +1,158 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <changqing.li@eng.windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 54959C678D4
-	for <webhook@archiver.kernel.org>; Thu,  2 Mar 2023 04:22:07 +0000 (UTC)
-Received: from mail-pl1-f173.google.com (mail-pl1-f173.google.com [209.85.214.173])
- by mx.groups.io with SMTP id smtpd.web10.7562.1677730920898613255
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 73BAEC678D4
+	for <webhook@archiver.kernel.org>; Thu,  2 Mar 2023 05:01:07 +0000 (UTC)
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.web11.8050.1677733262645831968
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 01 Mar 2023 20:22:00 -0800
+ Wed, 01 Mar 2023 21:01:02 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=KM9CJdu2;
- spf=pass (domain: gmail.com, ip: 209.85.214.173, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f173.google.com with SMTP id u5so12900629plq.7
-        for <openembedded-devel@lists.openembedded.org>; Wed, 01 Mar 2023 20:22:00 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=3DfSFbM+qH/bWzrVXYeho5s5mcEsfeJJ7zjXGkJKdNE=;
-        b=KM9CJdu2UX7PBWiVoljlR1H+V7t7DQ/ohZjOQXCyGs+qL5NFRcmtnsxKg87N+Uemjz
-         vsvCQqyqPexL/RQwqqPDQJGuKZm1u9WYt/kl7BCY9EfvdM7OzbLBqvw7mSl5UAoroa63
-         SQq4qXGtYx8X/D9Ja/EYsL7ePPLZXY5pmBZRHJUsUZ0SZyRy2S5Q6nyh2fzebYPby/jr
-         +ZWlXLiTmd0sTnviK/GSrUPm5g7P2tX2/Ehj9ABarC6yS7SiLZheUD+bozCWmtL6nG4q
-         Ps2nM6S0XrHtRMbLSCEv6D0U+adArnXLBTBdidB6RrU18SRkcJibyEowzCyLlZZ09j1E
-         nU3Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=3DfSFbM+qH/bWzrVXYeho5s5mcEsfeJJ7zjXGkJKdNE=;
-        b=G545HWJtMt5E+x9KaWuk47CbUtTe5lX4AtifdfTPFpxh/kiTdjoYjHKO5E5BXEi7rr
-         yc3bPWh07k2sxyZCCLP6OmsqR1fG0BROzkGBPtpw1S8bWoVDAo6RWgF/BoT8Gjg6Pb0s
-         qDHkpLEVDNziByH49tC3ZoJVRVy5CgKFNfdTTXggVrFd8MeS2Mt27eygeomRMvCZadDP
-         DLVd7Ex5s8Hg4+edWedjCtDpOQlhE0eWuUh4w/bievsv+x1hRt4AQfKUlLXKIqc9hWeA
-         jZl2bHYZyHwvuKNgfO0w+hxRdpabOrnbepEdTHU2hrUBpgn8hqyWV79rpSlrZR97F6V9
-         cSXQ==
-X-Gm-Message-State: AO0yUKUfmzC1cX1vNkhEVQbzfvD0zYV24CmKMfQFjdifsa5IfAOInxR1
-	i41n1+IK4xEtkRqthwx44TrFWJqkfVk=
-X-Google-Smtp-Source: AK7set+NBFlGw1A3c4BC4WG1B7K0dr8aeIPQ4f8bU92kfev4aUiXC5GgLnZSTNSBi/kUY4xMWYqd6Q==
-X-Received: by 2002:a17:902:b48f:b0:19e:2631:7c01 with SMTP id y15-20020a170902b48f00b0019e26317c01mr7071230plr.37.1677730919988;
-        Wed, 01 Mar 2023 20:21:59 -0800 (PST)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9181:1cf0::1ac4])
-        by smtp.gmail.com with ESMTPSA id g3-20020a1709026b4300b00198e346c35dsm9223782plt.9.2023.03.01.20.21.59
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 01 Mar 2023 20:21:59 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 2/3] hdf5: Upgrade to 1.14.0
-Date: Wed,  1 Mar 2023 20:21:55 -0800
-Message-Id: <20230302042156.1107335-2-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.39.2
-In-Reply-To: <20230302042156.1107335-1-raj.khem@gmail.com>
-References: <20230302042156.1107335-1-raj.khem@gmail.com>
+ dkim=pass header.i=@windriver.com header.s=pps06212021 header.b=SC56iEDe;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=2425b97132=changqing.li@windriver.com)
+Received: from pps.filterd (m0250811.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 32250lio025763
+	for <openembedded-devel@lists.openembedded.org>; Thu, 2 Mar 2023 05:01:01 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com; h=from : to :
+ subject : date : message-id : mime-version : content-transfer-encoding :
+ content-type; s=PPS06212021;
+ bh=M8T9MmJobafACr0Cxdqb0hvJ/NIzGOSsRDvJlxhuoUk=;
+ b=SC56iEDeVBYeVeSE/vz7qCEN84Z9DT5FoVy1r2TKli5dGFMcwiDPq34nr9G6gK6oiMdf
+ aCfZEBNb8mjS7Xti6CDCugzH+QCSmio4kRLz1OZPpuST7YyeA2AWozNZGw5pg8CbEQ8n
+ Zq4U8kmW7+6PWmefqcjJKTxON/gxXXnhD1IiGIynJUpQs45lRU0vYeuNdGbzDqnci5Nf
+ 4v3LXPl4nMI/Y5v0oc5BUeH1VXkmRXUKikoQY2a59Jk2st5TGUX7twKbzeZwhsyd3+oa
+ 9JbzSnMt2Tf8FzE8K+ZdocaVHacKHmzKZYCEkplPkGtGUS2lSoCawsEVnUW8Wj9ADbd8 bg== 
+Received: from ala-exchng01.corp.ad.wrs.com (unknown-82-252.windriver.com [147.11.82.252])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3nybmkd2qw-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Thu, 02 Mar 2023 05:01:01 +0000
+Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.17; Wed, 1 Mar 2023 21:01:00 -0800
+Received: from pek-lpg-core2.wrs.com (128.224.153.41) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
+ 15.1.2507.17 via Frontend Transport; Wed, 1 Mar 2023 21:00:59 -0800
+From: <changqing.li@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [kirkstone][meta-oe][PATCH V3] liblockfile: fix do_install failure when ldconfig is not installed
+Date: Thu, 2 Mar 2023 13:00:59 +0800
+Message-ID: <20230302050059.1545118-1-changqing.li@windriver.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Proofpoint-GUID: ryoRbukO8q_ezU0b9BH9LXH0SArmw8TO
+X-Proofpoint-ORIG-GUID: ryoRbukO8q_ezU0b9BH9LXH0SArmw8TO
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.219,Aquarius:18.0.942,Hydra:6.0.573,FMLib:17.11.170.22
+ definitions=2023-03-02_01,2023-03-01_03,2023-02-09_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 adultscore=0 spamscore=0
+ suspectscore=0 phishscore=0 mlxscore=0 malwarescore=0 priorityscore=1501
+ lowpriorityscore=0 mlxlogscore=999 clxscore=1015 bulkscore=0
+ impostorscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.12.0-2212070000 definitions=main-2303020035
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 02 Mar 2023 04:22:07 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101322
+ <openembedded-devel@lists.openembedded.org>; Thu, 02 Mar 2023 05:01:07 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101324
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+From: Changqing Li <changqing.li@windriver.com>
+
+liblockfile do_install task will fail since syntax error when ldconfig
+is not installed on the host.
+
+Signed-off-by: Changqing Li <changqing.li@windriver.com>
 ---
- .../hdf5/files/0001-cmake-remove-build-flags.patch          | 6 +++---
- ...0002-Remove-suffix-shared-from-shared-library-name.patch | 2 +-
- .../recipes-support/hdf5/{hdf5_1.13.2.bb => hdf5_1.14.0.bb} | 4 ++--
- 3 files changed, 6 insertions(+), 6 deletions(-)
- rename meta-oe/recipes-support/hdf5/{hdf5_1.13.2.bb => hdf5_1.14.0.bb} (91%)
+ ...install-failure-on-host-without-ldco.patch | 63 +++++++++++++++++++
+ .../liblockfile/liblockfile_1.14.bb           |  1 +
+ 2 files changed, 64 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/liblockfile/liblockfile/0001-Makefile.in-fix-install-failure-on-host-without-ldco.patch
 
-diff --git a/meta-oe/recipes-support/hdf5/files/0001-cmake-remove-build-flags.patch b/meta-oe/recipes-support/hdf5/files/0001-cmake-remove-build-flags.patch
-index 642d7d1662..a8050cc55b 100644
---- a/meta-oe/recipes-support/hdf5/files/0001-cmake-remove-build-flags.patch
-+++ b/meta-oe/recipes-support/hdf5/files/0001-cmake-remove-build-flags.patch
-@@ -15,7 +15,7 @@ Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
- 
- --- a/config/cmake/libh5cc.in
- +++ b/config/cmake/libh5cc.in
--@@ -45,7 +45,7 @@ for arg in $@ ; do
-+@@ -44,7 +44,7 @@ for arg in $@ ; do
-        exit $status
-        ;;
-      *)
-@@ -45,8 +45,8 @@ Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
-                      H5_CPPFLAGS: @H5_CPPFLAGS@
-                      AM_CPPFLAGS: @AM_CPPFLAGS@
-                           CFLAGS: @CMAKE_C_FLAGS@
--@@ -52,8 +52,8 @@ Languages:
-- @BUILD_FORTRAN_CONDITIONAL_TRUE@         Static Fortran Library: @H5_ENABLE_STATIC_LIB@
-+@@ -53,8 +53,8 @@ Languages:
-+ @BUILD_FORTRAN_CONDITIONAL_TRUE@               Module Directory: @CMAKE_Fortran_MODULE_DIRECTORY@
-  
-                              C++: @HDF5_BUILD_CPP_LIB@
- -@BUILD_CXX_CONDITIONAL_TRUE@                   C++ Compiler: @CMAKE_CXX_COMPILER@ @CMAKE_CXX_COMPILER_VERSION@
-diff --git a/meta-oe/recipes-support/hdf5/files/0002-Remove-suffix-shared-from-shared-library-name.patch b/meta-oe/recipes-support/hdf5/files/0002-Remove-suffix-shared-from-shared-library-name.patch
-index de052451bd..f0eb05a1e7 100644
---- a/meta-oe/recipes-support/hdf5/files/0002-Remove-suffix-shared-from-shared-library-name.patch
-+++ b/meta-oe/recipes-support/hdf5/files/0002-Remove-suffix-shared-from-shared-library-name.patch
-@@ -12,7 +12,7 @@ Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
- 
- --- a/CMakeLists.txt
- +++ b/CMakeLists.txt
--@@ -196,19 +196,19 @@ set (HDF5_HL_F90_C_LIB_TARGET     "${HDF
-+@@ -191,19 +191,19 @@ set (HDF5_HL_F90_C_LIB_TARGET     "${HDF
-  set (HDF5_JAVA_JNI_LIB_TARGET     "${HDF5_JAVA_JNI_LIB_CORENAME}")
-  set (HDF5_JAVA_HDF5_LIB_TARGET    "${HDF5_JAVA_HDF5_LIB_CORENAME}")
-  set (HDF5_JAVA_TEST_LIB_TARGET    "${HDF5_JAVA_TEST_LIB_CORENAME}")
-diff --git a/meta-oe/recipes-support/hdf5/hdf5_1.13.2.bb b/meta-oe/recipes-support/hdf5/hdf5_1.14.0.bb
-similarity index 91%
-rename from meta-oe/recipes-support/hdf5/hdf5_1.13.2.bb
-rename to meta-oe/recipes-support/hdf5/hdf5_1.14.0.bb
-index 80611c6714..4feec61afd 100644
---- a/meta-oe/recipes-support/hdf5/hdf5_1.13.2.bb
-+++ b/meta-oe/recipes-support/hdf5/hdf5_1.14.0.bb
-@@ -12,11 +12,11 @@ inherit cmake siteinfo qemu
- DEPENDS += "qemu-native"
- 
- SRC_URI = " \
--    https://support.hdfgroup.org/ftp/HDF5/releases/hdf5-1.13/hdf5-${PV}/src/${BPN}-${PV}.tar.bz2 \
-+    https://support.hdfgroup.org/ftp/HDF5/releases/hdf5-1.14/hdf5-${PV}/src/${BPN}-${PV}.tar.bz2 \
-     file://0002-Remove-suffix-shared-from-shared-library-name.patch \
-     file://0001-cmake-remove-build-flags.patch \
+diff --git a/meta-oe/recipes-extended/liblockfile/liblockfile/0001-Makefile.in-fix-install-failure-on-host-without-ldco.patch b/meta-oe/recipes-extended/liblockfile/liblockfile/0001-Makefile.in-fix-install-failure-on-host-without-ldco.patch
+new file mode 100644
+index 000000000..8ac61aa55
+--- /dev/null
++++ b/meta-oe/recipes-extended/liblockfile/liblockfile/0001-Makefile.in-fix-install-failure-on-host-without-ldco.patch
+@@ -0,0 +1,63 @@
++From db9b4be854bb9a84319b81ce0afecd98f4f84ff7 Mon Sep 17 00:00:00 2001
++From: Changqing Li <changqing.li@windriver.com>
++Date: Mon, 27 Feb 2023 08:28:21 +0000
++Subject: [PATCH] Makefile.in: fix install failure on host without ldconfig
++
++fix syntax error when ldconfig is not installed on host
++
++when ldconfig is not installed on the build host, install will failed with
++error:
++ln -sf nfslock.so.0.1 /mnt/tmp-glibc/work/core2-64-wrs-linux/liblockfile/1.14-r0/image/usr/lib64/nfslock.so.0
++install -m 644 lockfile.h maillock.h /mnt/tmp-glibc/work/core2-64-wrs-linux/liblockfile/1.14-r0/image/usr/include
++if test "/mnt/tmp-glibc/work/core2-64-wrs-linux/liblockfile/1.14-r0/image" = ""; then ; fi
++if [ "mail" != "" ]; then\
++          install -g mail -m 2755 dotlockfile /mnt/tmp-glibc/work/core2-64-wrs-linux/liblockfile/1.14-r0/image/usr/bin;\
++        else \
++          install -g root -m 755 dotlockfile /mnt/tmp-glibc/work/core2-64-wrs-linux/liblockfile/1.14-r0/image/usr/bin; \
++        fi
++/bin/sh: -c: line 1: syntax error near unexpected token `;'
++/bin/sh: -c: line 1: `if test "/mnt/tmp-glibc/work/core2-64-wrs-linux/liblockfile/1.14-r0/image" = ""; then ; fi'
++
++Upstream-Status: Submitted [https://github.com/miquels/liblockfile/pull/21]
++
++Signed-off-by: Changqing Li <changqing.li@windriver.com>
++---
++ Makefile.in | 8 ++++++--
++ 1 file changed, 6 insertions(+), 2 deletions(-)
++
++diff --git a/Makefile.in b/Makefile.in
++index 6e53179..d003899 100644
++--- a/Makefile.in
+++++ b/Makefile.in
++@@ -9,6 +9,10 @@ NFSVER		= 0.1
++ CFLAGS		= @CFLAGS@ -I.
++ LDFLAGS		= @LDFLAGS@
++ CC		= @CC@
+++LDCONFIG       = @LDCONFIG@
+++ifeq ($(LDCONFIG),)
+++    LDCONFIG = ":"
+++endif
++ 
++ prefix		= $(DESTDIR)@prefix@
++ exec_prefix	= @exec_prefix@
++@@ -58,7 +62,7 @@ install_shared:	shared install_static install_common
++ 			$(libdir)/liblockfile.so.$(SOVER)
++ 		ln -s liblockfile.so.$(SOVER) $(libdir)/liblockfile.so.$(MAJOR)
++ 		ln -s liblockfile.so.$(SOVER) $(libdir)/liblockfile.so
++-		if test "$(DESTDIR)" = ""; then @LDCONFIG@; fi
+++		if test "$(DESTDIR)" = ""; then $(LDCONFIG); fi
++ 
++ install_common:
++ 		install -d -m 755 -g root -p $(includedir)
++@@ -79,7 +83,7 @@ install_nfslib:	nfslib
++ 		install -m 755 nfslock.so.$(NFSVER) $(nfslockdir)
++ 		ln -sf nfslock.so.$(NFSVER) $(libdir)/nfslock.so
++ 		ln -sf nfslock.so.$(NFSVER) $(libdir)/nfslock.so.0
++-		if test "$(DESTDIR)" = ""; then @LDCONFIG@; fi
+++		if test "$(DESTDIR)" = ""; then $(LDCONFIG); fi
++ 
++ clean:
++ 		rm -f *.a *.o *.so *.so.* dotlockfile
++-- 
++2.25.1
++
+diff --git a/meta-oe/recipes-extended/liblockfile/liblockfile_1.14.bb b/meta-oe/recipes-extended/liblockfile/liblockfile_1.14.bb
+index bac3a2c0b..eefc25dc4 100644
+--- a/meta-oe/recipes-extended/liblockfile/liblockfile_1.14.bb
++++ b/meta-oe/recipes-extended/liblockfile/liblockfile_1.14.bb
+@@ -10,6 +10,7 @@ SRC_URI = "${DEBIAN_MIRROR}/main/libl/liblockfile/liblockfile_1.14.orig.tar.gz \
+     file://0001-Makefile.in-add-DESTDIR.patch \
+     file://0001-Makefile.in-install-nfslock-libs.patch \
+     file://liblockfile-fix-install-so-to-man-dir.patch \
++    file://0001-Makefile.in-fix-install-failure-on-host-without-ldco.patch \
  "
--SRC_URI[sha256sum] = "9c51b3da426977ec622a43dca8adaf4e81eabf838c1ff80c6225ad1d3ed54b5c"
-+SRC_URI[sha256sum] = "e4e79433450edae2865a4c6328188bb45391b29d74f8c538ee699f0b116c2ba0"
  
- FILES:${PN} += "${libdir}/libhdf5.settings ${datadir}/*"
- 
+ SRC_URI[md5sum] = "420c056ba0cc4d1477e402f70ba2f5eb"
 -- 
-2.39.2
+2.25.1
 
 
