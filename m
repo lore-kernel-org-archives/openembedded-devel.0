@@ -2,59 +2,59 @@ Return-Path: <omkarpatil10.93@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1DCB2C7EE2F
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1CA55C678D4
 	for <webhook@archiver.kernel.org>; Fri,  3 Mar 2023 12:32:46 +0000 (UTC)
-Received: from mail-pl1-f176.google.com (mail-pl1-f176.google.com [209.85.214.176])
- by mx.groups.io with SMTP id smtpd.web11.21698.1677846759058469396
+Received: from mail-pj1-f45.google.com (mail-pj1-f45.google.com [209.85.216.45])
+ by mx.groups.io with SMTP id smtpd.web11.21697.1677846755789687699
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 03 Mar 2023 04:32:39 -0800
+ Fri, 03 Mar 2023 04:32:35 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=HK48O02z;
- spf=pass (domain: gmail.com, ip: 209.85.214.176, mailfrom: omkarpatil10.93@gmail.com)
-Received: by mail-pl1-f176.google.com with SMTP id h8so2471199plf.10
-        for <openembedded-devel@lists.openembedded.org>; Fri, 03 Mar 2023 04:32:39 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=kdzhgseu;
+ spf=pass (domain: gmail.com, ip: 209.85.216.45, mailfrom: omkarpatil10.93@gmail.com)
+Received: by mail-pj1-f45.google.com with SMTP id m20-20020a17090ab79400b00239d8e182efso5953101pjr.5
+        for <openembedded-devel@lists.openembedded.org>; Fri, 03 Mar 2023 04:32:35 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112; t=1677846758;
+        d=gmail.com; s=20210112; t=1677846755;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=bD6o0QRmL2CQqxYakxO0O5br16Vx0sdO/dJxaSagQpk=;
-        b=HK48O02zTm6Y2NxC6DkfFp+IukheIHQhRh5WFjnxJMdGVuWDpGWkE61WlbcQAIpIh3
-         C/KCNW4VEdJyirgZzRX71RrQV0n0MkK53Mvr8SZNuMzAq/3VUctZam7c2RnNSCgsbA4D
-         ahThiaS1U3K6zcoixFbM/WRLaxmBuH4jDUfkCDnfTtwGPRF/JHZztYWKlOmk36n6G3qa
-         O7ofrYSA1HU/D5HNpqG2K3D1UrXtaGNz6HEOYveJ33RZ8hJyzPk9bD5bUG+1dutU7yu7
-         HihWivhGlZryVNIy0XKrX0OPY1hbZRk3OgRo4fKZbq1JV8JmXIfw5e6IaVsUjt0Mvs/3
-         cx+A==
+        bh=y1u6sa1Ka0HSF8n5xCZMnBJ9bRRrmfTra4RB8cuhRWs=;
+        b=kdzhgseuIwO6QhHH2K8UM64NhBTGg9oYKldVDi1NQdA33EgL+pR3A9sm6gz/qOssKS
+         mqfGI/xVR6owIV8rVZ3Z8MumJo1vF7SZDbTDk4awDdJol3Nz1Pnv85V4qRHJMiCxAtzr
+         cHMsykk51dxHbCdG3lUhOfFPuH6xAe6WC4/4bLbhjUqE63klaZGWkgCC5+x1IR9Lk2bV
+         Jf9C1YXxwteBbB7pu7goAm0fDd4N7897W05aRGaCjkPjrn0G2WA5sJqxk80uyhMHkqdi
+         bRoWCxW0XsJbtPzAt4GQZZe3AV1QIPsieCEdj1RqLMw7JmFc1JMfqcAWfBs1NPyA+49D
+         pxbg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112; t=1677846758;
+        d=1e100.net; s=20210112; t=1677846755;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=bD6o0QRmL2CQqxYakxO0O5br16Vx0sdO/dJxaSagQpk=;
-        b=x0uNYDGSNY9ivrCYCIF6ewcGFXVPxoTiJfpPENLncrUjEIcD8PBLFqYWrblBY9bTKP
-         CQ3yjELtJ1sOQXVF7ULXxxR1Ipx2Y6QwnNRLGHSosclhcx2ppqRmUlgimMZyIMrljhJ9
-         jVPwa2gjYJNQhFTsxw0/5T2a+HpwfKkmb4tqs01Lj0n/98cO+OjQ3fY1j+1sECH/boQd
-         egA7It51XluWBILnr50Pdc4Ek3+Ka3ZuyvXWcmHmZRsPsEgyJMogmAOqhfKWXdiR4mxt
-         rHERCkkgQJE3GybUlQdRlcGyrFlP/tbaBubCZjFt0WMLHFPXe4g3ZQB1ZLozfLeyxHrv
-         vYwQ==
-X-Gm-Message-State: AO0yUKUWhjsbk/cJ6jCjvil6TsPGaNDjqgczmcPlBFblS9A+Q9gpErgm
-	GrMVnUwYrdLnlMw7ennoYMd2AgKUTnbBHw==
-X-Google-Smtp-Source: AK7set/5lGjhkyjCHe+vF+HIZQ9F0PUMQ7dJT9xemyhjyQqc7aOM88LobvUrlQXVPMwG/sfClNS+PA==
-X-Received: by 2002:a17:902:d4c9:b0:19d:90f:6c30 with SMTP id o9-20020a170902d4c900b0019d090f6c30mr1717925plg.49.1677846758163;
-        Fri, 03 Mar 2023 04:32:38 -0800 (PST)
+        bh=y1u6sa1Ka0HSF8n5xCZMnBJ9bRRrmfTra4RB8cuhRWs=;
+        b=WFL9dUCxYbIoHUgIOQKvquYzVbS6CfOdJR31KP2Y2IasKBh2y20lY3czLhxdxN8aGV
+         +xctHc97531e2JXp9XSeeGeI4S53T1CUdretFhm+ecyX3gV98KKO6auEoeC4oQ5hP5Cw
+         ER37bw0r+UNDNx4WCBgVbZovs4UhLaBNL3053pyEi6MjKrLeLpk58vizcRBbRyYWYOQ9
+         E4XO0+aEywcBw0OyTuHtgG0R55Z8RCd6C0FYXesn113sKZirM7e1oGvq43uSCquYItf3
+         iOIsft1e9po/crOO1d1PYNLNL/PYZy9z1VTh7ECsbFhCXNYTckz2dFdqswysyKTZPZz6
+         kI5g==
+X-Gm-Message-State: AO0yUKUIKvezIP/MMJPY/Swlayan84N+WAs3OTn4otOsENRc+mjfVsgD
+	naWxuJfriy+tiiBkL7bmbAP/lZGeLIBIHg==
+X-Google-Smtp-Source: AK7set+l+CTocBK7SjyoHJtuvR0l8NM+ANbCAjVAypXIaqZmZvL7IUYNoIaHB8Pio2whm6xKXJLDng==
+X-Received: by 2002:a05:6a20:8407:b0:cc:eb3b:56e9 with SMTP id c7-20020a056a20840700b000cceb3b56e9mr2694484pzd.1.1677846754769;
+        Fri, 03 Mar 2023 04:32:34 -0800 (PST)
 Received: from localhost.localdomain ([27.58.236.238])
-        by smtp.gmail.com with ESMTPSA id j37-20020a63fc25000000b00478c48cf73csm1449881pgi.82.2023.03.03.04.32.36
+        by smtp.gmail.com with ESMTPSA id j37-20020a63fc25000000b00478c48cf73csm1449881pgi.82.2023.03.03.04.32.32
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 03 Mar 2023 04:32:37 -0800 (PST)
+        Fri, 03 Mar 2023 04:32:34 -0800 (PST)
 From: Omkar Patil <omkarpatil10.93@gmail.com>
 To: openembedded-devel@lists.openembedded.org,
 	ppjadhav456@gmail.com
 Cc: ranjitsinh.rathod@kpit.com,
 	Poonam Jadhav <Poonam.Jadhav@kpit.com>,
 	Omkar Patil <omkarpatil10.93@gmail.com>
-Subject: [oe][meta-filesystems][dunfell][PATCH 3/4] nodejs: Fix CVE-2022-43548
-Date: Fri,  3 Mar 2023 18:02:14 +0530
-Message-Id: <20230303123215.296036-3-omkarpatil10.93@gmail.com>
+Subject: [oe][meta-filesystems][dunfell][PATCH 2/4] nodejs: Fix CVE-2022-35255
+Date: Fri,  3 Mar 2023 18:02:13 +0530
+Message-Id: <20230303123215.296036-2-omkarpatil10.93@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20230303123215.296036-1-omkarpatil10.93@gmail.com>
 References: <20230303123215.296036-1-omkarpatil10.93@gmail.com>
@@ -65,251 +65,274 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Fri, 03 Mar 2023 12:32:46 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101349
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101348
 
 From: Poonam Jadhav <Poonam.Jadhav@kpit.com>
 
-Add patch to fix CVE-2022-43548
+Add patch to fix CVE-2022-35255
 
-Link: https://sources.debian.org/src/nodejs/12.22.12~dfsg-1~deb11u3/debian/patches/cve-2022-43548.patch
+Link: https://sources.debian.org/src/nodejs/12.22.12~dfsg-1~deb11u3/debian/patches/cve-2022-35255.patch
 
 Signed-off-by: Poonam Jadhav <Poonam.Jadhav@kpit.com>
 Signed-off-by: Omkar Patil <omkarpatil10.93@gmail.com>
 ---
- .../nodejs/nodejs/CVE-2022-43548.patch        | 214 ++++++++++++++++++
+ .../nodejs/nodejs/CVE-2022-35255.patch        | 237 ++++++++++++++++++
  .../nodejs/nodejs_12.22.12.bb                 |   1 +
- 2 files changed, 215 insertions(+)
- create mode 100644 meta-oe/recipes-devtools/nodejs/nodejs/CVE-2022-43548.patch
+ 2 files changed, 238 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/nodejs/nodejs/CVE-2022-35255.patch
 
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs/CVE-2022-43548.patch b/meta-oe/recipes-devtools/nodejs/nodejs/CVE-2022-43548.patch
+diff --git a/meta-oe/recipes-devtools/nodejs/nodejs/CVE-2022-35255.patch b/meta-oe/recipes-devtools/nodejs/nodejs/CVE-2022-35255.patch
 new file mode 100644
-index 000000000..54da1fba9
+index 000000000..e9c2e7404
 --- /dev/null
-+++ b/meta-oe/recipes-devtools/nodejs/nodejs/CVE-2022-43548.patch
-@@ -0,0 +1,214 @@
-+commit 2b433af094fb79cf80f086038b7f36342cb6826f
-+Author: Tobias Nießen <tniessen@tnie.de>
-+Date:   Sun Sep 25 12:34:05 2022 +0000
++++ b/meta-oe/recipes-devtools/nodejs/nodejs/CVE-2022-35255.patch
+@@ -0,0 +1,237 @@
++Origin: https://github.com/nodejs/node/commit/0c2a5723beff39d1f62daec96b5389da3d427e79
++Reviewed-by: Aron Xu <aron@debian.org>
++Last-Update: 2022-01-05
++Comment:
++  Although WebCrypto is not implemented in 12.x series, this fix is introducing
++  enhancment to the crypto setup of V8:EntropySource().
 +
-+    inspector: harden IP address validation again
-+    
-+    Use inet_pton() to parse IP addresses, which restricts IP addresses
-+    to a small number of well-defined formats. In particular, octal and
-+    hexadecimal number formats are not allowed, and neither are leading
-+    zeros. Also explicitly reject 0.0.0.0/8 and ::/128 as non-routable.
-+    
-+    Refs: https://hackerone.com/reports/1710652
-+    CVE-ID: CVE-2022-43548
-+    PR-URL: https://github.com/nodejs-private/node-private/pull/354
-+    Reviewed-by: Michael Dawson <midawson@redhat.com>
-+    Reviewed-by: Rafael Gonzaga <rafael.nunu@hotmail.com>
-+    Reviewed-by: Rich Trott <rtrott@gmail.com>
++commit 0c2a5723beff39d1f62daec96b5389da3d427e79
++Author: Ben Noordhuis <info@bnoordhuis.nl>
++Date:   Sun Sep 11 10:48:34 2022 +0200
 +
-+CVE: CVE-2022-43548
-+Upstream-Status: Backport [https://sources.debian.org/src/nodejs/12.22.12~dfsg-1~deb11u3/debian/patches/cve-2022-43548.patch]
++    crypto: fix weak randomness in WebCrypto keygen
++    
++    Commit dae283d96f from August 2020 introduced a call to EntropySource()
++    in SecretKeyGenTraits::DoKeyGen() in src/crypto/crypto_keygen.cc. There
++    are two problems with that:
++    
++    1. It does not check the return value, it assumes EntropySource() always
++       succeeds, but it can (and sometimes will) fail.
++    
++    2. The random data returned byEntropySource() may not be
++       cryptographically strong and therefore not suitable as keying
++       material.
++    
++    An example is a freshly booted system or a system without /dev/random or
++    getrandom(2).
++    
++    EntropySource() calls out to openssl's RAND_poll() and RAND_bytes() in a
++    best-effort attempt to obtain random data. OpenSSL has a built-in CSPRNG
++    but that can fail to initialize, in which case it's possible either:
++    
++    1. No random data gets written to the output buffer, i.e., the output is
++       unmodified, or
++    
++    2. Weak random data is written. It's theoretically possible for the
++       output to be fully predictable because the CSPRNG starts from a
++       predictable state.
++    
++    Replace EntropySource() and CheckEntropy() with new function CSPRNG()
++    that enforces checking of the return value. Abort on startup when the
++    entropy pool fails to initialize because that makes it too easy to
++    compromise the security of the process.
++    
++    Refs: https://hackerone.com/bugs?report_id=1690000
++    Refs: https://github.com/nodejs/node/pull/35093
++    
++    Reviewed-By: Rafael Gonzaga <rafael.nunu@hotmail.com>
++    Reviewed-By: Tobias Nießen <tniessen@tnie.de>
++    PR-URL: #346
++    Backport-PR-URL: #351
++    CVE-ID: CVE-2022-35255
++
++CVE: CVE-2022-35255
++Upstream-Status: Backport [https://sources.debian.org/src/nodejs/12.22.12~dfsg-1~deb11u3/debian/patches/cve-2022-35255.patch]
 +Comment: No hunks refreshed
 +Signed-off-by: Poonam Jadhav <Poonam.Jadhav@kpit.com>
 +
-+Index: nodejs-12.22.12~dfsg/src/inspector_socket.cc
++Index: nodejs-12.22.12~dfsg/node.gyp
 +===================================================================
-+--- nodejs-12.22.12~dfsg.orig/src/inspector_socket.cc
-++++ nodejs-12.22.12~dfsg/src/inspector_socket.cc
-+@@ -10,6 +10,7 @@
++--- nodejs-12.22.12~dfsg.orig/node.gyp
+++++ nodejs-12.22.12~dfsg/node.gyp
++@@ -743,6 +743,8 @@
++         'openssl_default_cipher_list%': '',
++       },
 + 
-+ #include "openssl/sha.h"  // Sha-1 hash
-+ 
-++#include <algorithm>
-+ #include <cstring>
-+ #include <map>
-+ 
-+@@ -166,25 +167,71 @@ static std::string TrimPort(const std::s
+++      'cflags': ['-Werror=unused-result'],
+++
++       'defines': [
++         'NODE_ARCH="<(target_arch)"',
++         'NODE_PLATFORM="<(OS)"',
++Index: nodejs-12.22.12~dfsg/src/node_crypto.cc
++===================================================================
++--- nodejs-12.22.12~dfsg.orig/src/node_crypto.cc
+++++ nodejs-12.22.12~dfsg/src/node_crypto.cc
++@@ -386,48 +386,14 @@ void ThrowCryptoError(Environment* env,
++   env->isolate()->ThrowException(exception);
 + }
 + 
-+ static bool IsIPAddress(const std::string& host) {
-+-  if (host.length() >= 4 && host.front() == '[' && host.back() == ']')
-++  // TODO(tniessen): add CVEs to the following bullet points
-++  // To avoid DNS rebinding attacks, we are aware of the following requirements:
-++  // * the host name must be an IP address,
-++  // * the IP address must be routable, and
-++  // * the IP address must be formatted unambiguously.
-++
-++  // The logic below assumes that the string is null-terminated, so ensure that
-++  // we did not somehow end up with null characters within the string.
-++  if (host.find('\0') != std::string::npos) return false;
-++
-++  // All IPv6 addresses must be enclosed in square brackets, and anything
-++  // enclosed in square brackets must be an IPv6 address.
-++  if (host.length() >= 4 && host.front() == '[' && host.back() == ']') {
-++    // INET6_ADDRSTRLEN is the maximum length of the dual format (including the
-++    // terminating null character), which is the longest possible representation
-++    // of an IPv6 address: xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:ddd.ddd.ddd.ddd
-++    if (host.length() - 2 >= INET6_ADDRSTRLEN) return false;
-++
-++    // Annoyingly, libuv's implementation of inet_pton() deviates from other
-++    // implementations of the function in that it allows '%' in IPv6 addresses.
-++    if (host.find('%') != std::string::npos) return false;
-++
-++    // Parse the IPv6 address to ensure it is syntactically valid.
-++    char ipv6_str[INET6_ADDRSTRLEN];
-++    std::copy(host.begin() + 1, host.end() - 1, ipv6_str);
-++    ipv6_str[host.length()] = '\0';
-++    unsigned char ipv6[sizeof(struct in6_addr)];
-++    if (uv_inet_pton(AF_INET6, ipv6_str, ipv6) != 0) return false;
-++
-++    // The only non-routable IPv6 address is ::/128. It should not be necessary
-++    // to explicitly reject it because it will still be enclosed in square
-++    // brackets and not even macOS should make DNS requests in that case, but
-++    // history has taught us that we cannot be careful enough.
-++    // Note that RFC 4291 defines both "IPv4-Compatible IPv6 Addresses" and
-++    // "IPv4-Mapped IPv6 Addresses", which means that there are IPv6 addresses
-++    // (other than ::/128) that represent non-routable IPv4 addresses. However,
-++    // this translation assumes that the host is interpreted as an IPv6 address
-++    // in the first place, at which point DNS rebinding should not be an issue.
-++    if (std::all_of(ipv6, ipv6 + sizeof(ipv6), [](auto b) { return b == 0; })) {
-++       return false;
-++     }
-++
-++    // It is a syntactically valid and routable IPv6 address enclosed in square
-++    // brackets. No client should be able to misinterpret this.
-+     return true;
-+-  uint_fast16_t accum = 0;
-+-  uint_fast8_t quads = 0;
-+-  bool empty = true;
-+-  auto endOctet = [&accum, &quads, &empty](bool final = false) {
-+-    return !empty && accum <= 0xff && ++quads <= 4 && final == (quads == 4) &&
-+-           (empty = true) && !(accum = 0);
-+-  };
-+-  for (char c : host) {
-+-    if (isdigit(c)) {
-+-      if ((accum = (accum * 10) + (c - '0')) > 0xff) return false;
-+-      empty = false;
-+-    } else if (c != '.' || !endOctet()) {
-+-      return false;
-+-    }
+++MUST_USE_RESULT CSPRNGResult CSPRNG(void* buffer, size_t length) {
+++  do {
+++    if (1 == RAND_status())
+++      if (1 == RAND_bytes(static_cast<unsigned char*>(buffer), length))
+++        return {true};
+++  } while (1 == RAND_poll());
++ 
++-// Ensure that OpenSSL has enough entropy (at least 256 bits) for its PRNG.
++-// The entropy pool starts out empty and needs to fill up before the PRNG
++-// can be used securely.  Once the pool is filled, it never dries up again;
++-// its contents is stirred and reused when necessary.
++-//
++-// OpenSSL normally fills the pool automatically but not when someone starts
++-// generating random numbers before the pool is full: in that case OpenSSL
++-// keeps lowering the entropy estimate to thwart attackers trying to guess
++-// the initial state of the PRNG.
++-//
++-// When that happens, we will have to wait until enough entropy is available.
++-// That should normally never take longer than a few milliseconds.
++-//
++-// OpenSSL draws from /dev/random and /dev/urandom.  While /dev/random may
++-// block pending "true" randomness, /dev/urandom is a CSPRNG that doesn't
++-// block under normal circumstances.
++-//
++-// The only time when /dev/urandom may conceivably block is right after boot,
++-// when the whole system is still low on entropy.  That's not something we can
++-// do anything about.
++-inline void CheckEntropy() {
++-  for (;;) {
++-    int status = RAND_status();
++-    CHECK_GE(status, 0);  // Cannot fail.
++-    if (status != 0)
++-      break;
++-
++-    // Give up, RAND_poll() not supported.
++-    if (RAND_poll() == 0)
++-      break;
 +-  }
-+-  return endOctet(true);
 +-}
-++   }
-++
-++  // Anything not enclosed in square brackets must be an IPv4 address. It is
-++  // important here that inet_pton() accepts only the so-called dotted-decimal
-++  // notation, which is a strict subset of the so-called numbers-and-dots
-++  // notation that is allowed by inet_aton() and inet_addr(). This subset does
-++  // not allow hexadecimal or octal number formats.
-++  unsigned char ipv4[sizeof(struct in_addr)];
-++  if (uv_inet_pton(AF_INET, host.c_str(), ipv4) != 0) return false;
-++
-++  // The only strictly non-routable IPv4 address is 0.0.0.0, and macOS will make
-++  // DNS requests for this IP address, so we need to explicitly reject it. In
-++  // fact, we can safely reject all of 0.0.0.0/8 (see Section 3.2 of RFC 791 and
-++  // Section 3.2.1.3 of RFC 1122).
-++  // Note that inet_pton() stores the IPv4 address in network byte order.
-++  if (ipv4[0] == 0) return false;
-++
-++  // It is a routable IPv4 address in dotted-decimal notation.
-++  return true;
-++ }
-+ 
-+ // Constants for hybi-10 frame format.
-+ 
-+Index: nodejs-12.22.12~dfsg/test/cctest/test_inspector_socket.cc
-+===================================================================
-+--- nodejs-12.22.12~dfsg.orig/test/cctest/test_inspector_socket.cc
-++++ nodejs-12.22.12~dfsg/test/cctest/test_inspector_socket.cc
-+@@ -925,4 +925,84 @@ TEST_F(InspectorSocketTest, HostIpTooMan
-+   expect_handshake_failure();
++-
++-
++-bool EntropySource(unsigned char* buffer, size_t length) {
++-  // Ensure that OpenSSL's PRNG is properly seeded.
++-  CheckEntropy();
++-  // RAND_bytes() can return 0 to indicate that the entropy data is not truly
++-  // random. That's okay, it's still better than V8's stock source of entropy,
++-  // which is /dev/urandom on UNIX platforms and the current time on Windows.
++-  return RAND_bytes(buffer, length) != -1;
+++  return {false};
 + }
 + 
-++TEST_F(InspectorSocketTest, HostIpInvalidOctalOctetStartChecked) {
-++  const std::string INVALID_HOST_IP_REQUEST = "GET /json HTTP/1.1\r\n"
-++                                              "Host: 08.1.1.1:9229\r\n\r\n";
-++  send_in_chunks(INVALID_HOST_IP_REQUEST.c_str(),
-++                 INVALID_HOST_IP_REQUEST.length());
-++  expect_handshake_failure();
-++}
++ void SecureContext::Initialize(Environment* env, Local<Object> target) {
++@@ -649,9 +615,9 @@ void SecureContext::Init(const FunctionC
++   // OpenSSL 1.1.0 changed the ticket key size, but the OpenSSL 1.0.x size was
++   // exposed in the public API. To retain compatibility, install a callback
++   // which restores the old algorithm.
++-  if (RAND_bytes(sc->ticket_key_name_, sizeof(sc->ticket_key_name_)) <= 0 ||
++-      RAND_bytes(sc->ticket_key_hmac_, sizeof(sc->ticket_key_hmac_)) <= 0 ||
++-      RAND_bytes(sc->ticket_key_aes_, sizeof(sc->ticket_key_aes_)) <= 0) {
+++  if (CSPRNG(sc->ticket_key_name_, sizeof(sc->ticket_key_name_)).is_err() ||
+++      CSPRNG(sc->ticket_key_hmac_, sizeof(sc->ticket_key_hmac_)).is_err() ||
+++      CSPRNG(sc->ticket_key_aes_, sizeof(sc->ticket_key_aes_)).is_err()) {
++     return env->ThrowError("Error generating ticket keys");
++   }
++   SSL_CTX_set_tlsext_ticket_key_cb(sc->ctx_.get(), TicketCompatibilityCallback);
++@@ -1643,7 +1609,7 @@ int SecureContext::TicketCompatibilityCa
++ 
++   if (enc) {
++     memcpy(name, sc->ticket_key_name_, sizeof(sc->ticket_key_name_));
++-    if (RAND_bytes(iv, 16) <= 0 ||
+++    if (CSPRNG(iv, 16).is_err() ||
++         EVP_EncryptInit_ex(ectx, EVP_aes_128_cbc(), nullptr,
++                            sc->ticket_key_aes_, iv) <= 0 ||
++         HMAC_Init_ex(hctx, sc->ticket_key_hmac_, sizeof(sc->ticket_key_hmac_),
++@@ -5867,8 +5833,7 @@ struct RandomBytesJob : public CryptoJob
++       : CryptoJob(env), rc(Nothing<int>()) {}
++ 
++   inline void DoThreadPoolWork() override {
++-    CheckEntropy();  // Ensure that OpenSSL's PRNG is properly seeded.
++-    rc = Just(RAND_bytes(data, size));
+++    rc = Just(int(CSPRNG(data, size).is_ok()));
++     if (0 == rc.FromJust()) errors.Capture();
++   }
++ 
++@@ -6318,8 +6283,8 @@ class GenerateKeyPairJob : public Crypto
++   }
++ 
++   inline bool GenerateKey() {
++-    // Make sure that the CSPRNG is properly seeded so the results are secure.
++-    CheckEntropy();
+++    // Make sure that the CSPRNG is properly seeded.
+++    CHECK(CSPRNG(nullptr, 0).is_ok());
++ 
++     // Create the key generation context.
++     EVPKeyCtxPointer ctx = config_->Setup();
++Index: nodejs-12.22.12~dfsg/src/node_crypto.h
++===================================================================
++--- nodejs-12.22.12~dfsg.orig/src/node_crypto.h
+++++ nodejs-12.22.12~dfsg/src/node_crypto.h
++@@ -840,7 +840,19 @@ class ECDH final : public BaseObject {
++   const EC_GROUP* group_;
++ };
++ 
++-bool EntropySource(unsigned char* buffer, size_t length);
+++struct CSPRNGResult {
+++  const bool ok;
+++  MUST_USE_RESULT bool is_ok() const { return ok; }
+++  MUST_USE_RESULT bool is_err() const { return !ok; }
+++};
 ++
-++TEST_F(InspectorSocketTest, HostIpInvalidOctalOctetMidChecked) {
-++  const std::string INVALID_HOST_IP_REQUEST = "GET /json HTTP/1.1\r\n"
-++                                              "Host: 1.09.1.1:9229\r\n\r\n";
-++  send_in_chunks(INVALID_HOST_IP_REQUEST.c_str(),
-++                 INVALID_HOST_IP_REQUEST.length());
-++  expect_handshake_failure();
-++}
+++// Either succeeds with exactly |length| bytes of cryptographically
+++// strong pseudo-random data, or fails. This function may block.
+++// Don't assume anything about the contents of |buffer| on error.
+++// As a special case, |length == 0| can be used to check if the CSPRNG
+++// is properly seeded without consuming entropy.
+++MUST_USE_RESULT CSPRNGResult CSPRNG(void* buffer, size_t length);
 ++
-++TEST_F(InspectorSocketTest, HostIpInvalidOctalOctetEndChecked) {
-++  const std::string INVALID_HOST_IP_REQUEST = "GET /json HTTP/1.1\r\n"
-++                                              "Host: 1.1.1.009:9229\r\n\r\n";
-++  send_in_chunks(INVALID_HOST_IP_REQUEST.c_str(),
-++                 INVALID_HOST_IP_REQUEST.length());
-++  expect_handshake_failure();
-++}
++ #ifndef OPENSSL_NO_ENGINE
++ void SetEngine(const v8::FunctionCallbackInfo<v8::Value>& args);
++ #endif  // !OPENSSL_NO_ENGINE
++Index: nodejs-12.22.12~dfsg/src/inspector_io.cc
++===================================================================
++--- nodejs-12.22.12~dfsg.orig/src/inspector_io.cc
+++++ nodejs-12.22.12~dfsg/src/inspector_io.cc
++@@ -46,8 +46,7 @@ std::string ScriptPath(uv_loop_t* loop,
++ // Used ver 4 - with numbers
++ std::string GenerateID() {
++   uint16_t buffer[8];
++-  CHECK(crypto::EntropySource(reinterpret_cast<unsigned char*>(buffer),
++-                              sizeof(buffer)));
+++  CHECK(crypto::CSPRNG(buffer, sizeof(buffer)).is_ok());
++ 
++   char uuid[256];
++   snprintf(uuid, sizeof(uuid), "%04x%04x-%04x-%04x-%04x-%04x%04x%04x",
++Index: nodejs-12.22.12~dfsg/src/node.cc
++===================================================================
++--- nodejs-12.22.12~dfsg.orig/src/node.cc
+++++ nodejs-12.22.12~dfsg/src/node.cc
++@@ -969,9 +969,17 @@ InitializationResult InitializeOncePerPr
++   // the random source is properly initialized first.
++   OPENSSL_init();
++ #endif  // NODE_FIPS_MODE
++-  // V8 on Windows doesn't have a good source of entropy. Seed it from
++-  // OpenSSL's pool.
++-  V8::SetEntropySource(crypto::EntropySource);
+++  // Ensure CSPRNG is properly seeded.
+++  CHECK(crypto::CSPRNG(nullptr, 0).is_ok());
 ++
-++TEST_F(InspectorSocketTest, HostIpLeadingZeroStartChecked) {
-++  const std::string INVALID_HOST_IP_REQUEST = "GET /json HTTP/1.1\r\n"
-++                                              "Host: 01.1.1.1:9229\r\n\r\n";
-++  send_in_chunks(INVALID_HOST_IP_REQUEST.c_str(),
-++                 INVALID_HOST_IP_REQUEST.length());
-++  expect_handshake_failure();
-++}
-++
-++TEST_F(InspectorSocketTest, HostIpLeadingZeroMidChecked) {
-++  const std::string INVALID_HOST_IP_REQUEST = "GET /json HTTP/1.1\r\n"
-++                                              "Host: 1.1.001.1:9229\r\n\r\n";
-++  send_in_chunks(INVALID_HOST_IP_REQUEST.c_str(),
-++                 INVALID_HOST_IP_REQUEST.length());
-++  expect_handshake_failure();
-++}
-++
-++TEST_F(InspectorSocketTest, HostIpLeadingZeroEndChecked) {
-++  const std::string INVALID_HOST_IP_REQUEST = "GET /json HTTP/1.1\r\n"
-++                                              "Host: 1.1.1.01:9229\r\n\r\n";
-++  send_in_chunks(INVALID_HOST_IP_REQUEST.c_str(),
-++                 INVALID_HOST_IP_REQUEST.length());
-++  expect_handshake_failure();
-++}
-++
-++TEST_F(InspectorSocketTest, HostIPv6NonRoutable) {
-++  const std::string INVALID_HOST_IP_REQUEST = "GET /json HTTP/1.1\r\n"
-++                                              "Host: [::]:9229\r\n\r\n";
-++  send_in_chunks(INVALID_HOST_IP_REQUEST.c_str(),
-++                 INVALID_HOST_IP_REQUEST.length());
-++  expect_handshake_failure();
-++}
-++
-++TEST_F(InspectorSocketTest, HostIPv6NonRoutableDual) {
-++  const std::string INVALID_HOST_IP_REQUEST = "GET /json HTTP/1.1\r\n"
-++                                              "Host: [::0.0.0.0]:9229\r\n\r\n";
-++  send_in_chunks(INVALID_HOST_IP_REQUEST.c_str(),
-++                 INVALID_HOST_IP_REQUEST.length());
-++  expect_handshake_failure();
-++}
-++
-++TEST_F(InspectorSocketTest, HostIPv4InSquareBrackets) {
-++  const std::string INVALID_HOST_IP_REQUEST = "GET /json HTTP/1.1\r\n"
-++                                              "Host: [127.0.0.1]:9229\r\n\r\n";
-++  send_in_chunks(INVALID_HOST_IP_REQUEST.c_str(),
-++                 INVALID_HOST_IP_REQUEST.length());
-++  expect_handshake_failure();
-++}
-++
-++TEST_F(InspectorSocketTest, HostIPv6InvalidAbbreviation) {
-++  const std::string INVALID_HOST_IP_REQUEST = "GET /json HTTP/1.1\r\n"
-++                                              "Host: [:::1]:9229\r\n\r\n";
-++  send_in_chunks(INVALID_HOST_IP_REQUEST.c_str(),
-++                 INVALID_HOST_IP_REQUEST.length());
-++  expect_handshake_failure();
-++}
-++
-+ }  // anonymous namespace
+++  V8::SetEntropySource([](unsigned char* buffer, size_t length) {
+++    // V8 falls back to very weak entropy when this function fails
+++    // and /dev/urandom isn't available. That wouldn't be so bad if
+++    // the entropy was only used for Math.random() but it's also used for
+++    // hash table and address space layout randomization. Better to abort.
+++    CHECK(crypto::CSPRNG(buffer, length).is_ok());
+++    return true;
+++    });
++ #endif  // HAVE_OPENSSL
++ 
++   per_process::v8_platform.Initialize(
 diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_12.22.12.bb b/meta-oe/recipes-devtools/nodejs/nodejs_12.22.12.bb
-index df9c6010e..70f23de7b 100644
+index 2258cb108..df9c6010e 100644
 --- a/meta-oe/recipes-devtools/nodejs/nodejs_12.22.12.bb
 +++ b/meta-oe/recipes-devtools/nodejs/nodejs_12.22.12.bb
-@@ -24,6 +24,7 @@ SRC_URI = "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.xz \
+@@ -23,6 +23,7 @@ SRC_URI = "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.xz \
+            file://mips-warnings.patch \
             file://0001-Remove-use-of-register-r7-because-llvm-now-issues-an.patch \
             file://CVE-2022-32212.patch \
-            file://CVE-2022-35255.patch \
-+           file://CVE-2022-43548.patch \
++           file://CVE-2022-35255.patch \
             "
  SRC_URI_append_class-target = " \
             file://0002-Using-native-binaries.patch \
