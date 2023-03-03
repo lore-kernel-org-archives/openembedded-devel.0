@@ -1,82 +1,234 @@
-Return-Path: <mingli.yu@eng.windriver.com>
+Return-Path: <omkarpatil10.93@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 99CA6C678D4
-	for <webhook@archiver.kernel.org>; Fri,  3 Mar 2023 10:54:55 +0000 (UTC)
-Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
- by mx.groups.io with SMTP id smtpd.web10.20350.1677840892267938854
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 356E4C64EC4
+	for <webhook@archiver.kernel.org>; Fri,  3 Mar 2023 12:32:36 +0000 (UTC)
+Received: from mail-pl1-f177.google.com (mail-pl1-f177.google.com [209.85.214.177])
+ by mx.groups.io with SMTP id smtpd.web10.21695.1677846750733156529
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 03 Mar 2023 02:54:52 -0800
+ Fri, 03 Mar 2023 04:32:30 -0800
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=2426ea97ab=mingli.yu@windriver.com)
-Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 3239E692023029
-	for <openembedded-devel@lists.openembedded.org>; Fri, 3 Mar 2023 10:54:51 GMT
-Received: from ala-exchng02.corp.ad.wrs.com (unknown-82-254.windriver.com [147.11.82.254])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3nybnwpvhx-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Fri, 03 Mar 2023 10:54:51 +0000
-Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
- ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.18; Fri, 3 Mar 2023 02:54:49 -0800
-Received: from pek-lpg-core2.wrs.com (128.224.153.41) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
- 15.1.2507.17 via Frontend Transport; Fri, 3 Mar 2023 02:54:49 -0800
-From: <mingli.yu@eng.windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [kirkstone][meta-oe][PATCH] php: Upgrade to 8.1.16
-Date: Fri, 3 Mar 2023 18:54:48 +0800
-Message-ID: <20230303105448.2452690-1-mingli.yu@eng.windriver.com>
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=Do7159N7;
+ spf=pass (domain: gmail.com, ip: 209.85.214.177, mailfrom: omkarpatil10.93@gmail.com)
+Received: by mail-pl1-f177.google.com with SMTP id ky4so2517424plb.3
+        for <openembedded-devel@lists.openembedded.org>; Fri, 03 Mar 2023 04:32:30 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112; t=1677846750;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=5ihAvuAAcxLDVf0jxvYO98rj95sfrp0Q0pcprssuMD0=;
+        b=Do7159N7fSWTEEInkmW6Nkz5F+scs7C4z6k8J+Axmy7MrlLBrzUdRJr41RlrFvJTYF
+         gSncDpGkWHCe5LCBrBYZpW6E76CFLtFWc+vWJYjoLZQHq8jbP+qG3l3r5GBS2lx/7TsG
+         e9Q/9/syddRoVZjGqzLvx36dc/NdRf1i4/hGM1UOSrSV2+JGT8ps2/1qpDTAa+GA/qMb
+         qIjBrnxtXmXLRx5wCXFrsqWAFO0y1TjSZWeotLMZABtsB6r3giBeeIYlBTrhojJ0+yBf
+         teLzal0TBwl/F11/ZYGB+bVJCSuU+E9sVg1xPBxeLF+84b4czsN8aWy6zWpEq64q7rPK
+         trrg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112; t=1677846750;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=5ihAvuAAcxLDVf0jxvYO98rj95sfrp0Q0pcprssuMD0=;
+        b=vUSOrCvt9cRU+7K1ww7A/+FpacU4bh9Ow+UqIWT9vedvtWM7vc1lDRokI4mtx4UXa7
+         /AyXX8Pp/NZ1sijkBE/h7JHl2ijZJnrKtBk2gpnIGiRSSlxX8DJQO5KD/x/J4M/elXJC
+         QPY74Kwhf4fOQC8gRNf3LtcqClQmCP1u0lIgS957j951hv0tOxxMs863CzgbDJUvXZer
+         xqozxbSauFAhtSdo6PPARE+tXvkAMS3sOD/t8ZgI5fmbO/MLrr+uUP91MOwy489Jjsyn
+         ydQsEdiYcjYc69++NvzOFJ8NMYeW4FL6JBY4pnpdzsl/QntauSicpT/A6yrH7DHpPaiH
+         5fTg==
+X-Gm-Message-State: AO0yUKXMreahwKAZUbHK/eFX58iuWDmhcObO4IIo0weDzYI6kpVzMy65
+	wsh1CZjrlIfDIbuQqVWVanrerL9HlD4u/Q==
+X-Google-Smtp-Source: AK7set/fA9pWZui13T7nLHA/CcBpsdmRN4TsH/IWQlZYEHDHafVvG7XDIP4ZvwKfgFDfSw9fdzNqOw==
+X-Received: by 2002:a05:6a20:8417:b0:c7:1fff:fab7 with SMTP id c23-20020a056a20841700b000c71ffffab7mr2625910pzd.54.1677846749793;
+        Fri, 03 Mar 2023 04:32:29 -0800 (PST)
+Received: from localhost.localdomain ([27.58.236.238])
+        by smtp.gmail.com with ESMTPSA id j37-20020a63fc25000000b00478c48cf73csm1449881pgi.82.2023.03.03.04.32.27
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 03 Mar 2023 04:32:29 -0800 (PST)
+From: Omkar Patil <omkarpatil10.93@gmail.com>
+To: openembedded-devel@lists.openembedded.org,
+	ppjadhav456@gmail.com
+Cc: ranjitsinh.rathod@kpit.com,
+	Poonam Jadhav <Poonam.Jadhav@kpit.com>,
+	Omkar Patil <omkarpatil10.93@gmail.com>
+Subject: [oe][meta-filesystems][dunfell][PATCH 1/4] nodejs: Fix CVE-2022-32212
+Date: Fri,  3 Mar 2023 18:02:12 +0530
+Message-Id: <20230303123215.296036-1-omkarpatil10.93@gmail.com>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Proofpoint-ORIG-GUID: 43SwMV-W52aW9fQ-EaAKGs4Q8k4Drw_L
-X-Proofpoint-GUID: 43SwMV-W52aW9fQ-EaAKGs4Q8k4Drw_L
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.219,Aquarius:18.0.942,Hydra:6.0.573,FMLib:17.11.170.22
- definitions=2023-03-03_01,2023-03-03_01,2023-02-09_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 malwarescore=0 clxscore=1015
- bulkscore=0 impostorscore=0 priorityscore=1501 spamscore=0
- lowpriorityscore=0 mlxlogscore=992 mlxscore=0 phishscore=0 adultscore=0
- suspectscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2212070000 definitions=main-2303030096
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 03 Mar 2023 10:54:55 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101346
+ <openembedded-devel@lists.openembedded.org>; Fri, 03 Mar 2023 12:32:36 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101347
 
-From: Mingli Yu <mingli.yu@windriver.com>
+From: Poonam Jadhav <Poonam.Jadhav@kpit.com>
 
-Upgrade php to 8.1.16 [1].
+Add patch to fix CVE-2022-32212
 
-[1] https://www.php.net/ChangeLog-8.php#8.1.16
+Link: https://sources.debian.org/src/nodejs/12.22.12~dfsg-1~deb11u3/debian/patches/cve-2022-32212.patch
 
-Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+Signed-off-by: Poonam Jadhav <Poonam.Jadhav@kpit.com>
+Signed-off-by: Omkar Patil <omkarpatil10.93@gmail.com>
 ---
- meta-oe/recipes-devtools/php/{php_8.1.12.bb => php_8.1.16.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-devtools/php/{php_8.1.12.bb => php_8.1.16.bb} (99%)
+ .../nodejs/nodejs/CVE-2022-32212.patch        | 133 ++++++++++++++++++
+ .../nodejs/nodejs_12.22.12.bb                 |   1 +
+ 2 files changed, 134 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/nodejs/nodejs/CVE-2022-32212.patch
 
-diff --git a/meta-oe/recipes-devtools/php/php_8.1.12.bb b/meta-oe/recipes-devtools/php/php_8.1.16.bb
-similarity index 99%
-rename from meta-oe/recipes-devtools/php/php_8.1.12.bb
-rename to meta-oe/recipes-devtools/php/php_8.1.16.bb
-index 794330dcb..db8a65544 100644
---- a/meta-oe/recipes-devtools/php/php_8.1.12.bb
-+++ b/meta-oe/recipes-devtools/php/php_8.1.16.bb
-@@ -33,7 +33,7 @@ SRC_URI:append:class-target = " \
-           "
- 
- S = "${WORKDIR}/php-${PV}"
--SRC_URI[sha256sum] = "f87d73e917facf78de7bcde53fc2faa4d4dbe0487a9406e1ab68c8ae8f33eb03"
-+SRC_URI[sha256sum] = "cd9f0ea14d82d9455587a49a0b6c802a7b8d8ff79703f9f48b17db010fb633ce"
- 
- CVE_CHECK_IGNORE += "\
-     CVE-2007-2728 \
+diff --git a/meta-oe/recipes-devtools/nodejs/nodejs/CVE-2022-32212.patch b/meta-oe/recipes-devtools/nodejs/nodejs/CVE-2022-32212.patch
+new file mode 100644
+index 000000000..f7b4b61f4
+--- /dev/null
++++ b/meta-oe/recipes-devtools/nodejs/nodejs/CVE-2022-32212.patch
+@@ -0,0 +1,133 @@
++commit 48c5aa5cab718d04473fa2761d532657c84b8131
++Author: Tobias Nießen <tniessen@tnie.de>
++Date:   Fri May 27 21:18:49 2022 +0000
++
++    src: fix IPv4 validation in inspector_socket
++
++    Co-authored-by: RafaelGSS <rafael.nunu@hotmail.com>
++    PR-URL: https://github.com/nodejs-private/node-private/pull/320
++    Backport-PR-URL: https://github.com/nodejs-private/node-private/pull/325
++    Reviewed-By: Matteo Collina <matteo.collina@gmail.com>
++    Reviewed-By: RafaelGSS <rafael.nunu@hotmail.com>
++    CVE-ID: CVE-2022-32212
++
++CVE: CVE-2022-32212
++Upstream-Status: Backport [https://sources.debian.org/src/nodejs/12.22.12~dfsg-1~deb11u3/debian/patches/cve-2022-32212.patch]
++Comment: No hunks refreshed
++Signed-off-by: Poonam Jadhav <Poonam.Jadhav@kpit.com>
++
++Index: nodejs-12.22.12~dfsg/src/inspector_socket.cc
++===================================================================
++--- nodejs-12.22.12~dfsg.orig/src/inspector_socket.cc
+++++ nodejs-12.22.12~dfsg/src/inspector_socket.cc
++@@ -168,14 +168,22 @@ static std::string TrimPort(const std::s
++ static bool IsIPAddress(const std::string& host) {
++   if (host.length() >= 4 && host.front() == '[' && host.back() == ']')
++     return true;
++-  int quads = 0;
+++  uint_fast16_t accum = 0;
+++  uint_fast8_t quads = 0;
+++  bool empty = true;
+++  auto endOctet = [&accum, &quads, &empty](bool final = false) {
+++    return !empty && accum <= 0xff && ++quads <= 4 && final == (quads == 4) &&
+++           (empty = true) && !(accum = 0);
+++  };
++   for (char c : host) {
++-    if (c == '.')
++-      quads++;
++-    else if (!isdigit(c))
+++    if (isdigit(c)) {
+++      if ((accum = (accum * 10) + (c - '0')) > 0xff) return false;
+++      empty = false;
+++    } else if (c != '.' || !endOctet()) {
++       return false;
+++    }
++   }
++-  return quads == 3;
+++  return endOctet(true);
++ }
++ 
++ // Constants for hybi-10 frame format.
++Index: nodejs-12.22.12~dfsg/test/cctest/test_inspector_socket.cc
++===================================================================
++--- nodejs-12.22.12~dfsg.orig/test/cctest/test_inspector_socket.cc
+++++ nodejs-12.22.12~dfsg/test/cctest/test_inspector_socket.cc
++@@ -851,4 +851,78 @@ TEST_F(InspectorSocketTest, HostCheckedF
++   expect_failure_no_delegate(UPGRADE_REQUEST);
++ }
++ 
+++TEST_F(InspectorSocketTest, HostIPChecked) {
+++  const std::string INVALID_HOST_IP_REQUEST = "GET /json HTTP/1.1\r\n"
+++                                              "Host: 10.0.2.555:9229\r\n\r\n";
+++  send_in_chunks(INVALID_HOST_IP_REQUEST.c_str(),
+++                 INVALID_HOST_IP_REQUEST.length());
+++  expect_handshake_failure();
+++}
+++
+++TEST_F(InspectorSocketTest, HostNegativeIPChecked) {
+++  const std::string INVALID_HOST_IP_REQUEST = "GET /json HTTP/1.1\r\n"
+++                                              "Host: 10.0.-23.255:9229\r\n\r\n";
+++  send_in_chunks(INVALID_HOST_IP_REQUEST.c_str(),
+++                 INVALID_HOST_IP_REQUEST.length());
+++  expect_handshake_failure();
+++}
+++
+++TEST_F(InspectorSocketTest, HostIpOctetOutOfIntRangeChecked) {
+++  const std::string INVALID_HOST_IP_REQUEST =
+++      "GET /json HTTP/1.1\r\n"
+++      "Host: 127.0.0.4294967296:9229\r\n\r\n";
+++  send_in_chunks(INVALID_HOST_IP_REQUEST.c_str(),
+++                 INVALID_HOST_IP_REQUEST.length());
+++  expect_handshake_failure();
+++}
+++
+++TEST_F(InspectorSocketTest, HostIpOctetFarOutOfIntRangeChecked) {
+++  const std::string INVALID_HOST_IP_REQUEST =
+++      "GET /json HTTP/1.1\r\n"
+++      "Host: 127.0.0.18446744073709552000:9229\r\n\r\n";
+++  send_in_chunks(INVALID_HOST_IP_REQUEST.c_str(),
+++                 INVALID_HOST_IP_REQUEST.length());
+++  expect_handshake_failure();
+++}
+++
+++TEST_F(InspectorSocketTest, HostIpEmptyOctetStartChecked) {
+++  const std::string INVALID_HOST_IP_REQUEST = "GET /json HTTP/1.1\r\n"
+++                                              "Host: .0.0.1:9229\r\n\r\n";
+++  send_in_chunks(INVALID_HOST_IP_REQUEST.c_str(),
+++                 INVALID_HOST_IP_REQUEST.length());
+++  expect_handshake_failure();
+++}
+++
+++TEST_F(InspectorSocketTest, HostIpEmptyOctetMidChecked) {
+++  const std::string INVALID_HOST_IP_REQUEST = "GET /json HTTP/1.1\r\n"
+++                                              "Host: 127..0.1:9229\r\n\r\n";
+++  send_in_chunks(INVALID_HOST_IP_REQUEST.c_str(),
+++                 INVALID_HOST_IP_REQUEST.length());
+++  expect_handshake_failure();
+++}
+++
+++TEST_F(InspectorSocketTest, HostIpEmptyOctetEndChecked) {
+++  const std::string INVALID_HOST_IP_REQUEST = "GET /json HTTP/1.1\r\n"
+++                                              "Host: 127.0.0.:9229\r\n\r\n";
+++  send_in_chunks(INVALID_HOST_IP_REQUEST.c_str(),
+++                 INVALID_HOST_IP_REQUEST.length());
+++  expect_handshake_failure();
+++}
+++
+++TEST_F(InspectorSocketTest, HostIpTooFewOctetsChecked) {
+++  const std::string INVALID_HOST_IP_REQUEST = "GET /json HTTP/1.1\r\n"
+++                                              "Host: 127.0.1:9229\r\n\r\n";
+++  send_in_chunks(INVALID_HOST_IP_REQUEST.c_str(),
+++                 INVALID_HOST_IP_REQUEST.length());
+++  expect_handshake_failure();
+++}
+++
+++TEST_F(InspectorSocketTest, HostIpTooManyOctetsChecked) {
+++  const std::string INVALID_HOST_IP_REQUEST = "GET /json HTTP/1.1\r\n"
+++                                              "Host: 127.0.0.0.1:9229\r\n\r\n";
+++  send_in_chunks(INVALID_HOST_IP_REQUEST.c_str(),
+++                 INVALID_HOST_IP_REQUEST.length());
+++  expect_handshake_failure();
+++}
+++
++ }  // anonymous namespace
+diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_12.22.12.bb b/meta-oe/recipes-devtools/nodejs/nodejs_12.22.12.bb
+index 8dbdd088e..2258cb108 100644
+--- a/meta-oe/recipes-devtools/nodejs/nodejs_12.22.12.bb
++++ b/meta-oe/recipes-devtools/nodejs/nodejs_12.22.12.bb
+@@ -22,6 +22,7 @@ SRC_URI = "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.xz \
+            file://big-endian.patch \
+            file://mips-warnings.patch \
+            file://0001-Remove-use-of-register-r7-because-llvm-now-issues-an.patch \
++           file://CVE-2022-32212.patch \
+            "
+ SRC_URI_append_class-target = " \
+            file://0002-Using-native-binaries.patch \
 -- 
 2.25.1
 
