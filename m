@@ -2,111 +2,112 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B2B5EC61DA4
-	for <webhook@archiver.kernel.org>; Sun,  5 Mar 2023 17:35:28 +0000 (UTC)
-Received: from mail-oa1-f46.google.com (mail-oa1-f46.google.com [209.85.160.46])
- by mx.groups.io with SMTP id smtpd.web10.13617.1678037724077109718
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 01BA7C678DB
+	for <webhook@archiver.kernel.org>; Sun,  5 Mar 2023 22:34:30 +0000 (UTC)
+Received: from mail-pj1-f41.google.com (mail-pj1-f41.google.com [209.85.216.41])
+ by mx.groups.io with SMTP id smtpd.web10.19967.1678055664239086541
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 05 Mar 2023 09:35:24 -0800
+ Sun, 05 Mar 2023 14:34:24 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=qDNPexF5;
- spf=pass (domain: gmail.com, ip: 209.85.160.46, mailfrom: raj.khem@gmail.com)
-Received: by mail-oa1-f46.google.com with SMTP id 586e51a60fabf-1755e639b65so9061025fac.3
-        for <openembedded-devel@lists.openembedded.org>; Sun, 05 Mar 2023 09:35:23 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=PDw3Q8Oo;
+ spf=pass (domain: gmail.com, ip: 209.85.216.41, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f41.google.com with SMTP id x34so8033119pjj.0
+        for <openembedded-devel@lists.openembedded.org>; Sun, 05 Mar 2023 14:34:24 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112; t=1678037723;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=C0BLjtlchCTkIghlFE6yf60PGa6eaZrWYM3oUGjoRN0=;
-        b=qDNPexF5JmiHFKdu01uDcPCtZRXUjsHRXDOl1yeOVtFtoD6zN3FUhXttfS0jBEb8eH
-         oOxeAwoJjxPPekjzI1PiXHj8f2WtSPUaBB1HQWiSfBhICjWvAv4WXAcO6+/6dg5x1Osj
-         hjgAKZonkf2RreRYj7b1uTzpcsSAC8x+VOy9jgM5p4/KUEisHsrlFtzOEkkNF5ZcG7gg
-         vY+PansVa+gs0pASPRsdjGrDuqtwx8nVd8a7+ZbefE3HV0xq4OH01BkT0s0Va2J2DsRM
-         KBSxrM/B5CLTiL5I7iisyEXsdaYeLLvgpaSPqJkmQcNgMt6s3Y5N+2xyhL+h9Fezb5TR
-         ul2w==
+        d=gmail.com; s=20210112; t=1678055663;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=Ee1WuYHA3vvvZ8725wa64JWCQNQ1f4ROjPD1wx2tvdg=;
+        b=PDw3Q8OoyWXact/B+bTlMbYQd6H5JqTYHKmM58xE3416fmjbdFGtolO0PyLCuxP3U5
+         LK3Ksl6bMkVtfwYvKAUyh7QDMODnFrjucHrp38xgEgv3TFs2vTe5mt1730jm5GApN2BC
+         UgBsLdOdpEH59prylk+TnMykHdlfI8a7DDOxhfkOvmA9LOSyk8hspsEq+V8UOP3jCyRJ
+         ff1t9YQIOHQy0oFXAQHIzhQlHEJzqT48ufcSSZuV4lKaRfE5F2oZ9HFSbIL/AQlkOliE
+         XGvTCsow4Z71Bk+4EEgTL5lTi7ey6r0W3MNGEkp89gko/NB8J+4WRhqhbwtz6KOVhCs3
+         E+cw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112; t=1678037723;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=C0BLjtlchCTkIghlFE6yf60PGa6eaZrWYM3oUGjoRN0=;
-        b=qolAweIhBfc57I/1YRXNSwd3+mEJJAH/h1f0TbDIrDWQtSKBOy5pxnWLrMwlQSrhJI
-         IgtfIMx93jlFqx9TBmVpv/jSFduNnuPTW6IAdgPQtDrdW85ovqIeyhi9zraxY07KeT2p
-         iuRhO+OO4NFqcfh/TQwCZqTbUe7dk6Pqm0U7dgTygp2bx1/9sts+rB2QqBuLXm5TDhSJ
-         d05rGwjrrgf+5goV0ngyJyoADuri8/QdLkeIxijPpRfQK6j3/g13oVRulOpu/73WAVls
-         Xq573HutBrcv535yXR+G96p/PRmARfgOP5DPx4Gvx77b9nrdrXqIngkcRysdROQrpLKt
-         P2Iw==
-X-Gm-Message-State: AO0yUKWprVSvfcXztdJULBB97v10sEGWeCHnvuPcGb6H2MBp3g5NVRPy
-	ChyhqbAK5OL/2TIvMmMvQlZwGaamXcMRtlA/KAQ=
-X-Google-Smtp-Source: AK7set/MTwjjPxPbEupMzYphro6uCGjAqLjbWgdme7HHRvBeILwo3CJLq8zK2wkRXAoRbBXq4mFekCZganUqZEoo7R4=
-X-Received: by 2002:a05:6870:d346:b0:176:42a5:a544 with SMTP id
- h6-20020a056870d34600b0017642a5a544mr2223806oag.2.1678037723293; Sun, 05 Mar
- 2023 09:35:23 -0800 (PST)
-MIME-Version: 1.0
-References: <4fa9e7b0-618f-ce8f-dae2-ab075d0d7217@gmail.com>
-In-Reply-To: <4fa9e7b0-618f-ce8f-dae2-ab075d0d7217@gmail.com>
+        d=1e100.net; s=20210112; t=1678055663;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=Ee1WuYHA3vvvZ8725wa64JWCQNQ1f4ROjPD1wx2tvdg=;
+        b=G7x7un1pKaPo+IxeQgpeeCQpA9IrAhXZ4Hs2Nba+OLkFVBbxVOFy6qPRrdiPD2phKY
+         tLKT38+vks2GnsdYH1DqsjO9cuj9LsZyf3uup87s3QJhoIO+gtF68T/EL76jraNQnpi/
+         EYOUHhVCdlz3JaAUYxgqxeM/B4G1qaC00N+2sYcaiXJC2l+VhLqs4bMQxd+lU5x16olv
+         4t+kTVcGEW8Is35ioygw47liEX9NTfexLK84EL7Qwei7FRAF+br+/4cpnmnbEpyrfnFQ
+         IMoFnNBguxjX6m3tjvXts+h5Yo4T9xmPubsMzGnsJEr/n5LWcJOFspVZJMkv31VADAFZ
+         9X+w==
+X-Gm-Message-State: AO0yUKXQra8RZbo2HqYJveT3dRnlTDimGYjpJHuu7q8MzFXXXpmoaXUs
+	xo2MFXxVIZixwWh4EIShPVfn21JJ+Qw=
+X-Google-Smtp-Source: AK7set9Hp9dhs8/b7ahpw+8geFUc1RVsZ4iKmtE1puLbf2IU67vca0VvQWrOUgtPhxddanqjJ6Bv9A==
+X-Received: by 2002:a17:902:8683:b0:19b:107b:698e with SMTP id g3-20020a170902868300b0019b107b698emr7730833plo.14.1678055663238;
+        Sun, 05 Mar 2023 14:34:23 -0800 (PST)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9181:1cf0::c80d])
+        by smtp.gmail.com with ESMTPSA id ks3-20020a170903084300b0019c901c207dsm5207269plb.177.2023.03.05.14.34.22
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sun, 05 Mar 2023 14:34:22 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
-Date: Sun, 5 Mar 2023 09:34:57 -0800
-Message-ID: <CAMKF1sqF6Pim9bJG9wPyJOBEMvFa+Yjkw2V=Xc=gtor14bUbDA@mail.gmail.com>
-Subject: Re: langdale merge request March 5th
-To: akuster808 <akuster808@gmail.com>
-Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 1/2] libx86-1: Fix build on 32bit x86
+Date: Sun,  5 Mar 2023 14:34:19 -0800
+Message-Id: <20230305223420.2324783-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.39.2
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 05 Mar 2023 17:35:28 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101387
+ <openembedded-devel@lists.openembedded.org>; Sun, 05 Mar 2023 22:34:29 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101388
 
-merged thx Armin
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ ...efine-CARD32-as-uint-as-it-is-32-bit.patch | 20 +++++++++++++------
+ 1 file changed, 14 insertions(+), 6 deletions(-)
 
-On Sun, Mar 5, 2023 at 4:32=E2=80=AFAM akuster808 <akuster808@gmail.com> wr=
-ote:
->
-> The following changes since commit 30f4c2b3ae182513b967185e06bc8409a0ee60=
-92:
->
->    mdns: use git fetcher (2023-02-15 08:02:50 -0500)
->
-> are available in the Git repository at:
->
->    https://git.openembedded.org/meta-openembedded langdale-next
->
-> for you to fetch changes up to b5b732876da1885ecbab2aa45f80d7a3086c5262:
->
->    mpd: Upgrade to 0.23.12 release (2023-03-04 07:24:09 -0500)
->
-> ----------------------------------------------------------------
-> Geoff Parker (1):
->        python3-pillow: add tk to RDEPENDS ptest pkg only if x11 in
-> DISTRO_FEATURES
->
-> Khem Raj (2):
->        ncmpc: Upgrade to 0.47
->        mpd: Upgrade to 0.23.12 release
->
-> Yogita Urade (1):
->        multipath-tools: fix CVE-2022-41974
->
->   .../musicpd/{mpd_0.23.9.bb =3D> mpd_0.23.12.bb} |   2 +-
->   ...1-SearchPage-use-regular-integer-to-fix-Wenum-constexp.patch | 37
-> +++++++
->   .../recipes-multimedia/musicpd/{ncmpc_0.46.bb =3D> ncmpc_0.47.bb} |   3=
- +-
->   .../recipes-support/multipath-tools/files/CVE-2022-41974.patch  | 164
-> ++++++++++++++++++++++++++++
->   .../recipes-support/multipath-tools/multipath-tools_0.8.4.bb    | 1 +
->   meta-python/recipes-devtools/python/python3-pillow_9.4.0.bb     | 2 +-
->   6 files changed, 206 insertions(+), 3 deletions(-)
->   rename meta-multimedia/recipes-multimedia/musicpd/{mpd_0.23.9.bb =3D>
-> mpd_0.23.12.bb} (98%)
->   create mode 100644
-> meta-multimedia/recipes-multimedia/musicpd/ncmpc/0001-SearchPage-use-regu=
-lar-integer-to-fix-Wenum-constexp.patch
->   rename meta-multimedia/recipes-multimedia/musicpd/{ncmpc_0.46.bb =3D>
-> ncmpc_0.47.bb} (92%)
->   create mode 100644
-> meta-oe/recipes-support/multipath-tools/files/CVE-2022-41974.patch
+diff --git a/meta-oe/recipes-extended/libx86-1/libx86-1.1/0001-Define-CARD32-as-uint-as-it-is-32-bit.patch b/meta-oe/recipes-extended/libx86-1/libx86-1.1/0001-Define-CARD32-as-uint-as-it-is-32-bit.patch
+index cc4ee7eefb..aef521bc5d 100644
+--- a/meta-oe/recipes-extended/libx86-1/libx86-1.1/0001-Define-CARD32-as-uint-as-it-is-32-bit.patch
++++ b/meta-oe/recipes-extended/libx86-1/libx86-1.1/0001-Define-CARD32-as-uint-as-it-is-32-bit.patch
+@@ -3,7 +3,8 @@ From: Khem Raj <raj.khem@gmail.com>
+ Date: Thu, 2 Mar 2023 18:47:40 -0800
+ Subject: [PATCH] Define CARD32 as uint as it is 32-bit
+ 
+-long can be 64bit on LP64 systems
++long can be 64bit on LP64 systems and none of systems we support need int < 32-bits
++therefore use NUM32 to be int always if the system is linux
+ 
+ Fixes build with clang-16
+ thunk.c:147:3: error: incompatible function pointer types initializing 'x86emuu32 (*)(X86EMU_pioAddr)' (aka 'unsigned int (*)(unsigned short)') with an expression of type 'unsigned long (*)(unsigned short)' [-Wincompatible-function-pointer-types]
+@@ -16,8 +17,6 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
+  x86emu/include/xf86int10.h | 2 +-
+  1 file changed, 1 insertion(+), 1 deletion(-)
+ 
+-diff --git a/x86emu/include/xf86int10.h b/x86emu/include/xf86int10.h
+-index 9c131dd..acd5114 100644
+ --- a/x86emu/include/xf86int10.h
+ +++ b/x86emu/include/xf86int10.h
+ @@ -18,7 +18,7 @@
+@@ -29,6 +28,15 @@ index 9c131dd..acd5114 100644
+  #define pointer void *
+  #define IOADDRESS void *
+  #define Bool int
+--- 
+-2.39.2
+-
++--- a/x86emu/include/types.h
+++++ b/x86emu/include/types.h
++@@ -77,7 +77,8 @@
++     defined(__s390x__) || \
++     (defined(__hppa__) && defined(__LP64)) || \
++     defined(__amd64__) || defined(amd64) || \
++-    (defined(__sgi) && (_MIPS_SZLONG == 64))
+++    (defined(__sgi) && (_MIPS_SZLONG == 64)) || \
+++    defined(__linux__)
++ #define NUM32 int
++ #else
++ #define NUM32 long
+-- 
+2.39.2
+
 
