@@ -2,68 +2,68 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0D1AAC74A44
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 12EDEC678D5
 	for <webhook@archiver.kernel.org>; Wed,  8 Mar 2023 13:21:11 +0000 (UTC)
-Received: from mail1.bemta34.messagelabs.com (mail1.bemta34.messagelabs.com [195.245.231.1])
- by mx.groups.io with SMTP id smtpd.web10.6592.1678281661550948992
+Received: from mail1.bemta32.messagelabs.com (mail1.bemta32.messagelabs.com [195.245.230.2])
+ by mx.groups.io with SMTP id smtpd.web10.6596.1678281666032285174
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 08 Mar 2023 05:21:01 -0800
+ Wed, 08 Mar 2023 05:21:06 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=IwAxrNvM;
- spf=pass (domain: fujitsu.com, ip: 195.245.231.1, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=qLpTSLj0;
+ spf=pass (domain: fujitsu.com, ip: 195.245.230.2, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1678281659; i=@fujitsu.com;
-	bh=X22/53avAihkvqqtLuTTrYjqOh4HfENld49VZHGx6bA=;
+	s=170520fj; t=1678281664; i=@fujitsu.com;
+	bh=edgCguhXnJBdheLMtZk17HjfvTeK5bMLiYI68O0Oz+k=;
 	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
 	 MIME-Version:Content-Type;
-	b=IwAxrNvMhmFEiOaFxCe8nlt0hKzG586CSlmsUAvHju+8Itte975/Oo2QoonNteKBx
-	 PiofNB1YPiCxJCyfCdUt37OPyldPLqL5DEy50JMWulhs/vLCeoZJUHaoCG7KcA0MX1
-	 QnfWUDjsBvag8o/iO/1aaxCeDLKXohY5JzjM1nZFoTAe+DWKVOCD4SIWBqcfMbIxHU
-	 14jtIKzLyVYYpH9r5XtZ3pJCQZcA6nF6sFgaVHbPQE6dZbS3LJ1O1DMlEnOuFWYYr0
-	 s7xK26s5ZFIa6TSCp9SYOIEMXtXD1SFMK43cRq9JbQIyM+gFw10nSrVCTfOBBWp7+A
-	 jIDEQ2o0xKDnw==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrKIsWRWlGSWpSXmKPExsViZ8OxWXd3N0e
-  KwYet4hYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8aePdPYCmbwVjy5tI+9gfEydxcjF4eQwENG
-  iUcbjjBDOFeYJCZP6GODcPYwSlw9e4uli5GTg01ASuLG/f9sILaIgL7E0tl7mEFsZgEViRe/e
-  9hBbGEBR4kLrx8ygtgsQPH1jyDivAJOEtc2LwOLSwgoSEx5+B6sl1PAWeLi+rVMXYwcQMucJI
-  41eEGUC0qcnPmEBWK8hMTBFy+YIVoVJWZfbmaBsCslWj/8grLVJK6e28Q8gVFwFpL2WUjaFzA
-  yrWI0LU4tKkst0jXWSyrKTM8oyU3MzNFLrNJN1Est1S1PLS7RNdJLLC/WSy0u1iuuzE3OSdHL
-  Sy3ZxAgM3ZRiNeEdjF96/+odYpTkYFIS5WWN4UgR4kvKT6nMSCzOiC8qzUktPsQow8GhJMH7q
-  QsoJ1iUmp5akZaZA4wjmLQEB4+SCO/deqA0b3FBYm5xZjpE6hSjopQ47waQPgGQREZpHlwbLH
-  YvMcpKCfMyMjAwCPEUpBblZpagyr9iFOdgVBLm3Q4yhSczrwRu+iugxUxAiy/sZwFZXJKIkJJ
-  qYBLPVpowS3rj5uN3Jh4q+LE6xv9wyMUP/yr2Xu0ONl6+KNs78khI1PpIhzVfa/9YztLV237O
-  eoOOnqhF+0leDzmtP/6X1jcKLThr05LrZjav/5v/XW0ZT70l3ccmtlp/vet25mDTHLvzB7U57
-  GfP3nFGY9fn7bP/aJpd0n4Rqjt9xmuplczzOmcpPZYq2dq1dEnbXMfINZ455+ZJ1h61zLrTv0
-  zgQamV0uFpcVy+C4KCdxQf3br3zqfryhZteu/YbsXnHJMM6T34SaIka49d+ZnjRwUFLMwMH95
-  /GtrX8iXdMqlgZxzvsZkSMv2uEr9/hOb+12fVC3jxP+HV/ycRaxW/W6xIVX4R5nDX1uvQ9elK
-  LMUZiYZazEXFiQDNLga4WAMAAA==
+	b=qLpTSLj0Kj0buDr3TLj5iqF5yQJv0qDnJBttqGzQVz5zhJKwaJi64ccQ2jOg7xx7J
+	 Z3Q/xGKyfCH4XiY//aUuALIUKwnZs0478y5xpM6Kk1E7DHbTKufrxaWjKFgRVYDVnO
+	 k92BCQTtPehD6dsLigqfJNUqUh22OVvU1N27LC3SkyxA58NWomIz8LtDAS5iRHjj34
+	 esqpizPlmOJxh526vEpjk1n0YnZAKSVN6fio1OApGYp92Lva7lpab0DERXAiQtkDoD
+	 0vRA4bnyRySluJdPIYtok8RcjDPXXlDviH8iKMnYap79pdZkW/sWWcg5WgtuiSiXHU
+	 Q/w8C6pyNtf/g==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrKIsWRWlGSWpSXmKPExsViZ8MxSXd/N0e
+  KwfqT2hYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8a3t8eYC36yV5y7PZG9gXERexcjF4eQwBNG
+  ib2/e6CcG0wS81rPM0E4exglFu/5ApTh5GATkJK4cf8/G4gtIqAvsXT2HmYQm1lAReIFWDcnh
+  7CAlcTEKx9ZQWwWkPjuqSwgNq+Ak8TFJ9PBaiQEFCSmPHwP1ssp4Cxxcf1aoGUcQMucJI41eE
+  GUC0qcnPmEBWK8hMTBFy+YIVoVJWZfbmaBsCslWj/8grLVJK6e28Q8gVFwFpL2WUjaFzAyrWI
+  0LU4tKkst0jXUSyrKTM8oyU3MzNFLrNJN1Est1S1PLS4ByiSWF+ulFhfrFVfmJuek6OWllmxi
+  BIZuSjEL8w7Gwz1/9Q4xSnIwKYnyssZwpAjxJeWnVGYkFmfEF5XmpBYfYpTh4FCS4P3UBZQTL
+  EpNT61Iy8wBxhFMWoKDR0mE9249UJq3uCAxtzgzHSJ1ilFRSpx3A0ifAEgiozQPrg0Wu5cYZa
+  WEeRkZGBiEeApSi3IzS1DlXzGKczAqCfNuB5nCk5lXAjf9FdBiJqDFF/azgCwuSURISTUwlT7
+  RNwmY9LZizVLGnRsnfH2XvfbxCW6uiVu/vd5i/sFVtufZEp5Pfc/Ml784NiH0sCNbTaZDisHC
+  KQw/ZT80sH2dcfi1UBSzj6sNk6F6X89e43u7+RRi/XvFZFdPn+Pp+Cjw4A0bWcfS0KVJX7rvu
+  l/db8LQVbCzR9rr2LtvyvWrGudc/JB4rCJry848tTPqu/92nn+W+WgRy92mh635H41Uk9+cYv
+  8l7DbBY1mp+dfUHgl+5suz2xauDwg/6aHALd1V8t+Ek2Oj0eHpkpvlrymaB75cGSb5eZaenpy
+  ise+hPIfgLBeFopqXno63ClfNfsQx0fajzD9tsbtB6qZmc/qOM7FJdK8tOx90bv8VJZbijERD
+  Leai4kQALz7CWFgDAAA=
 X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-4.tower-565.messagelabs.com!1678281659!96778!1
-X-Originating-IP: [62.60.8.179]
+X-Msg-Ref: server-22.tower-591.messagelabs.com!1678281663!459288!1
+X-Originating-IP: [62.60.8.146]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.103.1; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 6196 invoked from network); 8 Mar 2023 13:20:59 -0000
-Received: from unknown (HELO n03ukasimr04.n03.fujitsu.local) (62.60.8.179)
-  by server-4.tower-565.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 8 Mar 2023 13:20:59 -0000
-Received: from n03ukasimr04.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTP id 1BB56142
-	for <openembedded-devel@lists.openembedded.org>; Wed,  8 Mar 2023 13:20:59 +0000 (GMT)
+Received: (qmail 14388 invoked from network); 8 Mar 2023 13:21:03 -0000
+Received: from unknown (HELO n03ukasimr02.n03.fujitsu.local) (62.60.8.146)
+  by server-22.tower-591.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 8 Mar 2023 13:21:03 -0000
+Received: from n03ukasimr02.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTP id 567971000DB
+	for <openembedded-devel@lists.openembedded.org>; Wed,  8 Mar 2023 13:21:03 +0000 (GMT)
 Received: from R01UKEXCASM223.r01.fujitsu.local (R01UKEXCASM223 [10.182.185.121])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTPS id 0FA2173
-	for <openembedded-devel@lists.openembedded.org>; Wed,  8 Mar 2023 13:20:59 +0000 (GMT)
+	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTPS id 4AE761000D2
+	for <openembedded-devel@lists.openembedded.org>; Wed,  8 Mar 2023 13:21:03 +0000 (GMT)
 Received: from localhost.localdomain (10.167.225.33) by
  R01UKEXCASM223.r01.fujitsu.local (10.182.185.121) with Microsoft SMTP Server
- (TLS) id 15.0.1497.42; Wed, 8 Mar 2023 13:20:57 +0000
+ (TLS) id 15.0.1497.42; Wed, 8 Mar 2023 13:21:01 +0000
 From: <wangmy@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-oe] [PATCH] gsoap: upgrade 2.0.106 -> 2.0.124
-Date: Wed, 8 Mar 2023 21:20:40 +0800
-Message-ID: <1678281642-25317-3-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH] lcms: upgrade 2.14 -> 2.15
+Date: Wed, 8 Mar 2023 21:20:42 +0800
+Message-ID: <1678281642-25317-5-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 In-Reply-To: <1678281642-25317-1-git-send-email-wangmy@fujitsu.com>
 References: <1678281642-25317-1-git-send-email-wangmy@fujitsu.com>
@@ -77,43 +77,31 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 08 Mar 2023 13:21:11 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101413
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101415
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
-Changelog:
-==========
-- Added C++17 'std::optional' member variable serialization.
-- Updated wsdl2h to automatically generates 'std::optional' member variables for
-  optional schemas when typedef.dat defines '$OPTIONAL = std::optional'.
-  Only primitive type member variables are made 'std::optional', not classes,
-  because optional types must be defined before referenced when in fact cyclic
-  data structure relationships may exist among classes.
-- Added missing 'std::vector<xsd__anyType>' deep copy of vector of DOM trees
-  generated with soapcpp2 option '-Ec'.
-
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../gsoap/{gsoap_2.8.106.bb => gsoap_2.8.124.bb}               | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
- rename meta-oe/recipes-support/gsoap/{gsoap_2.8.106.bb => gsoap_2.8.124.bb} (89%)
+ meta-oe/recipes-support/lcms/{lcms_2.14.bb => lcms_2.15.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-support/lcms/{lcms_2.14.bb => lcms_2.15.bb} (79%)
 
-diff --git a/meta-oe/recipes-support/gsoap/gsoap_2.8.106.bb b/meta-oe/recipes-support/gsoap/gsoap_2.8.124.bb
-similarity index 89%
-rename from meta-oe/recipes-support/gsoap/gsoap_2.8.106.bb
-rename to meta-oe/recipes-support/gsoap/gsoap_2.8.124.bb
-index 15c0f6faf..22e011979 100644
---- a/meta-oe/recipes-support/gsoap/gsoap_2.8.106.bb
-+++ b/meta-oe/recipes-support/gsoap/gsoap_2.8.124.bb
-@@ -7,8 +7,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=4f40a941379143186f9602242c3fb729 \
+diff --git a/meta-oe/recipes-support/lcms/lcms_2.14.bb b/meta-oe/recipes-support/lcms/lcms_2.15.bb
+similarity index 79%
+rename from meta-oe/recipes-support/lcms/lcms_2.14.bb
+rename to meta-oe/recipes-support/lcms/lcms_2.15.bb
+index eb671449f..3656e1cfd 100644
+--- a/meta-oe/recipes-support/lcms/lcms_2.14.bb
++++ b/meta-oe/recipes-support/lcms/lcms_2.15.bb
+@@ -4,7 +4,7 @@ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=ac638b4bc6b67582a11379cfbaeb93dd"
  
- SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}2/${BPN}_${PV}.zip \
-            "
--SRC_URI[md5sum] = "0925d25bc455047b01d4fe9814d30173"
--SRC_URI[sha256sum] = "4e74838baf5437e95ae17aa3efb48bd0621f483bff4424f6255fcf327ff80765"
-+SRC_URI[sha256sum] = "4b798780989338f665ef8e171bbcc422a271004d62d5852666d5eeca33a6a636"
+ SRC_URI = "${SOURCEFORGE_MIRROR}/lcms/lcms2-${PV}.tar.gz"
+-SRC_URI[sha256sum] = "28474ea6f6591c4d4cee972123587001a4e6e353412a41b3e9e82219818d5740"
++SRC_URI[sha256sum] = "b20cbcbd0f503433be2a4e81462106fa61050a35074dc24a4e356792d971ab39"
  
- inherit autotools
+ DEPENDS = "tiff"
  
 -- 
 2.34.1
