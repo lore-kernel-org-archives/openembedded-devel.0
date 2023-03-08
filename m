@@ -2,68 +2,68 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3A6DEC6FD20
-	for <webhook@archiver.kernel.org>; Wed,  8 Mar 2023 13:24:01 +0000 (UTC)
-Received: from mail1.bemta34.messagelabs.com (mail1.bemta34.messagelabs.com [195.245.231.1])
- by mx.groups.io with SMTP id smtpd.web11.6808.1678281839800915339
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0F9C5C678D5
+	for <webhook@archiver.kernel.org>; Wed,  8 Mar 2023 13:24:11 +0000 (UTC)
+Received: from mail1.bemta32.messagelabs.com (mail1.bemta32.messagelabs.com [195.245.230.66])
+ by mx.groups.io with SMTP id smtpd.web10.6688.1678281842266278201
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 08 Mar 2023 05:24:00 -0800
+ Wed, 08 Mar 2023 05:24:02 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=FmWZGG+g;
- spf=pass (domain: fujitsu.com, ip: 195.245.231.1, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=SYS3Gj4q;
+ spf=pass (domain: fujitsu.com, ip: 195.245.230.66, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1678281838; i=@fujitsu.com;
-	bh=qXpDE6H2+zWydcPvE5r9DR9DPtJhadITCpvIie+Tz+Q=;
+	s=170520fj; t=1678281840; i=@fujitsu.com;
+	bh=Tp/PD+UR6dThscteH0W9Rd5QinPdWfe7q2nFyIqtUc0=;
 	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
 	 MIME-Version:Content-Type;
-	b=FmWZGG+gqOSq9Awm+L6nCU5HcDMRMacJCsIGN19yPzb9eBwkOcYYt1hsfTf5fhVGy
-	 yZKe82lX0A/QyTxpq8mCrqso7LcRDd4G/6Pu1VhwcOziJqh+0etDQ40gspyPaKVqjC
-	 nzcns427JGisl2soI1fxlsrTZu3UScm9nC45p1wmqnJXOsIprUoJ49IJdU2HbN1sVs
-	 q/vXIamNTy5F4O/XGLkvlyOzmr8g5tEpusutZbLHMMq0hmET0E8fp3eOX+t5iEWtRA
-	 VUDDCgdUXt1UBdvMJbbuOASR5lPQRLioNL/5DuSlHx5n1syhai04rQvo9jnPBR3ovY
-	 OEO1SLBKgmGzQ==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrKIsWRWlGSWpSXmKPExsViZ8ORpJvbw5F
-  i8PCSscXFw0uZHRg9zm1cwRjAGMWamZeUX5HAmvHzzybWgl7OirkL37A2MC7k6GLk4hASeMgo
-  MfPiejYI5yqTxP1/h5ggnD2MEiueL2LtYuTkYBOQkrhx/z8biC0ioC+xdPYeZhCbWUBF4sXvH
-  vYuRg4OYQEbic+/pUDCLEDhnb+vMYLYvAJOEh2df8HKJQQUJKY8fA9mcwo4S8xcepoFxBYCqr
-  nZdJIVol5Q4uTMJywQ4yUkDr54AdWrKDH7cjMLhF0p0frhF5StJnH13CbmCYyCs5C0z0LSvoC
-  RaRWjaXFqUVlqka6xXlJRZnpGSW5iZo5eYpVuol5qqW55anGJrpFeYnmxXmpxsV5xZW5yTope
-  XmrJJkZg6KYUqwnvYPzS+1fvEKMkB5OSKC9rDEeKEF9SfkplRmJxRnxRaU5q8SFGGQ4OJQneT
-  11AOcGi1PTUirTMHGAcwaQlOHiURHjv1gOleYsLEnOLM9MhUqcYFaXEeTeA9AmAJDJK8+DaYL
-  F7iVFWSpiXkYGBQYinILUoN7MEVf4VozgHo5Iw73aQKTyZeSVw018BLWYCWnxhPwvI4pJEhJR
-  UA1PxRY++I79nOqsuWltReSOk/+DFLlV+npyaOXZHZ5n/6lzRPftYQoZWfdKThpN3bjjxTm//
-  EndHbOuipDdcwlqxp0LZ71fYGehxuPwvN1cXedIqtW+VdNKE0kl2PfMtxb5w/Xn0dH7O6faNJ
-  6TXyJo5ff+6d5/xCwXmpMzvi0LyJ0Y3u5hcvtWm5rd32e6j174JRYTv2r1NsXMbK9PvO8VruN
-  9JLI/6fuzvsrleNxvP5GqJyt7usNVeycDnulGi9PRDtnXXvVW3Xd8648n85m9h1w/crPh2pS2
-  kKO/j+X0BE87M7Z9UeGznvr9e/cvbRRINmbL2fblx/+6ER8vbr0qq6obFSCsLrd1SKV6y4co+
-  JZbijERDLeai4kQAR/cUtVgDAAA=
+	b=SYS3Gj4qsn1cagtudqDf3Rg7CDS/xAKiZiLv/I2brLcWRZTEsubxYgloXn9zvkhEq
+	 8uJKN0hfca9Xwb9gCtR7oeDy6mBobBdGyJs4CDplFr+5DIyhqMkZDdn4l7gyfS7dgl
+	 AqD+xVhn8Gv8o3DQQlQA8cXFqI+AkY+CIUFv23QL/o+TBYCVE3/GMKcNSAerHxKb2x
+	 Jkm3NglTrN2TqbsxxOwHk++iT69YUeqahNjeeSPeD5NtKJmGGQZ6TpOT4UB4I2hFIN
+	 6LkkTTCPDeXjTRDVaNNNBV5SvrhfryqAZDHECM/BK64zof7DMczefJAjwnbkpnCBLT
+	 EXvbqSxejtJiA==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrGIsWRWlGSWpSXmKPExsViZ8MxSbeghyP
+  FYMpLFouLh5cyOzB6nNu4gjGAMYo1My8pvyKBNePBuk72gvsCFd9uvGBqYFzF18XIxSEk8IRR
+  YtaiWewQzg0micNLD7JBOHsYJfZefM7YxcjJwSYgJXHj/n82EFtEQF9i6ew9zCA2s4CKxIvfP
+  ewgtrCAh8SK13fBaliA4svOX2ECsXkFnCQWHjkDNkdCQEFiysP3YL2cAs4SM5eeZgGxhYBqbj
+  adZIWoF5Q4OfMJC8R8CYmDL14wQ/QqSsy+3MwCYVdKtH74BWWrSVw9t4l5AqPgLCTts5C0L2B
+  kWsVoWpxaVJZapGuml1SUmZ5RkpuYmaOXWKWbqJdaqlueWlyia6iXWF6sl1pcrFdcmZuck6KX
+  l1qyiREYvCnFDDd2MM7p+6t3iFGSg0lJlJc1hiNFiC8pP6UyI7E4I76oNCe1+BCjDAeHkgTvp
+  y6gnGBRanpqRVpmDjCSYNISHDxKIrx364HSvMUFibnFmekQqVOMilLivBtA+gRAEhmleXBtsO
+  i9xCgrJczLyMDAIMRTkFqUm1mCKv+KUZyDUUmYdzvIFJ7MvBK46a+AFjMBLb6wnwVkcUkiQkq
+  qgSlgW7deO//LKM6YTX5Ln92ebLrJ6a+VgYBl43OdVZqR3k+T79i+bnv/dI/56amK97KNP5p9
+  uxK+dFqqm8ymTvXa4AiO6LKOiZ7LuJuOeM/h9X697OjZ4OXrP0rcvLv7wSSWwzqPvAJtk3fIb
+  cx7/LZwwfydqlfE3/j3a08IU1fu+HOqu+Nq7t1nn12m86xh0Z+594vW37ku7V68Ym72ddf/zs
+  o9zx6X+/SEqcbChNnPxU4LzJzaVXy9LeDFjPAm/UYL26P/mNYK7uD7FXl+O3NwYVFagkXWO61
+  /Lrc/fjq6cGuHfjeLMH9F2B1h08pna1ljdHfMX6Lbnpk4Y4VJwNO1F4++jj4vOXt2opkkm6gS
+  S3FGoqEWc1FxIgCJeLtOWQMAAA==
 X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-6.tower-571.messagelabs.com!1678281837!457716!1
-X-Originating-IP: [62.60.8.98]
+X-Msg-Ref: server-12.tower-591.messagelabs.com!1678281839!460491!1
+X-Originating-IP: [62.60.8.146]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.103.1; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 8433 invoked from network); 8 Mar 2023 13:23:57 -0000
-Received: from unknown (HELO n03ukasimr03.n03.fujitsu.local) (62.60.8.98)
-  by server-6.tower-571.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 8 Mar 2023 13:23:57 -0000
-Received: from n03ukasimr03.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr03.n03.fujitsu.local (Postfix) with ESMTP id 8C35C1B2
-	for <openembedded-devel@lists.openembedded.org>; Wed,  8 Mar 2023 13:23:57 +0000 (GMT)
+Received: (qmail 15334 invoked from network); 8 Mar 2023 13:24:00 -0000
+Received: from unknown (HELO n03ukasimr02.n03.fujitsu.local) (62.60.8.146)
+  by server-12.tower-591.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 8 Mar 2023 13:24:00 -0000
+Received: from n03ukasimr02.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTP id AE1A61000D7
+	for <openembedded-devel@lists.openembedded.org>; Wed,  8 Mar 2023 13:23:59 +0000 (GMT)
 Received: from R01UKEXCASM223.r01.fujitsu.local (R01UKEXCASM223 [10.182.185.121])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by n03ukasimr03.n03.fujitsu.local (Postfix) with ESMTPS id 80ABB1B4
-	for <openembedded-devel@lists.openembedded.org>; Wed,  8 Mar 2023 13:23:57 +0000 (GMT)
+	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTPS id A232E1000D2
+	for <openembedded-devel@lists.openembedded.org>; Wed,  8 Mar 2023 13:23:59 +0000 (GMT)
 Received: from localhost.localdomain (10.167.225.33) by
  R01UKEXCASM223.r01.fujitsu.local (10.182.185.121) with Microsoft SMTP Server
- (TLS) id 15.0.1497.42; Wed, 8 Mar 2023 13:23:56 +0000
+ (TLS) id 15.0.1497.42; Wed, 8 Mar 2023 13:23:58 +0000
 From: <wangmy@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-oe] [PATCH] logwatch: upgrade 7.7 -> 7.8
-Date: Wed, 8 Mar 2023 21:23:39 +0800
-Message-ID: <1678281820-25489-4-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-webserver] [PATCH] apache2: upgrade 2.4.55 -> 2.4.56
+Date: Wed, 8 Mar 2023 21:23:40 +0800
+Message-ID: <1678281820-25489-5-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 In-Reply-To: <1678281820-25489-1-git-send-email-wangmy@fujitsu.com>
 References: <1678281820-25489-1-git-send-email-wangmy@fujitsu.com>
@@ -76,33 +76,58 @@ X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 08 Mar 2023 13:24:01 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101419
+ <openembedded-devel@lists.openembedded.org>; Wed, 08 Mar 2023 13:24:11 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101420
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
+Changelog:
+==========
+-  rotatelogs: Add -T flag to allow subsequent rotated logfiles to be
+   truncated without the initial logfile being truncated.
+
+-  mod_ldap: LDAPConnectionPoolTTL should accept negative values in order to
+   allow connections of any age to be reused. Up to now, a negative value
+   was handled as an error when parsing the configuration file.  PR 66421.
+
+-  mod_proxy_ajp: Report an error if the AJP backend sends an invalid number
+   of headers.
+
+-  mod_md:
+   - Enabling ED25519 support and certificate transparency information when
+     building with libressl v3.5.0 and newer.
+   - MDChallengeDns01 can now be configured for individual domains.
+   - Fixed a bug that caused the challenge
+     teardown not being invoked as it should.
+
+-  mod_http2: client resets of HTTP/2 streams led to unwanted 500 errors
+   reported in access logs and error documents. The processing of the
+   reset was correct, only unneccesary reporting was caused.
+
+-  mod_proxy_uwsgi: Stricter backend HTTP response parsing/validation.
+
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../logwatch/{logwatch_7.7.bb => logwatch_7.8.bb}               | 2 +-
+ .../apache2/{apache2_2.4.55.bb => apache2_2.4.56.bb}            | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-extended/logwatch/{logwatch_7.7.bb => logwatch_7.8.bb} (96%)
+ rename meta-webserver/recipes-httpd/apache2/{apache2_2.4.55.bb => apache2_2.4.56.bb} (99%)
 
-diff --git a/meta-oe/recipes-extended/logwatch/logwatch_7.7.bb b/meta-oe/recipes-extended/logwatch/logwatch_7.8.bb
-similarity index 96%
-rename from meta-oe/recipes-extended/logwatch/logwatch_7.7.bb
-rename to meta-oe/recipes-extended/logwatch/logwatch_7.8.bb
-index 37a94661a..187e794b3 100644
---- a/meta-oe/recipes-extended/logwatch/logwatch_7.7.bb
-+++ b/meta-oe/recipes-extended/logwatch/logwatch_7.8.bb
-@@ -12,7 +12,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=ba882fa9b4b6b217a51780be3f4db9c8"
- RDEPENDS:${PN} = "perl"
+diff --git a/meta-webserver/recipes-httpd/apache2/apache2_2.4.55.bb b/meta-webserver/recipes-httpd/apache2/apache2_2.4.56.bb
+similarity index 99%
+rename from meta-webserver/recipes-httpd/apache2/apache2_2.4.55.bb
+rename to meta-webserver/recipes-httpd/apache2/apache2_2.4.56.bb
+index 88cef0ef8..1ad222ace 100644
+--- a/meta-webserver/recipes-httpd/apache2/apache2_2.4.55.bb
++++ b/meta-webserver/recipes-httpd/apache2/apache2_2.4.56.bb
+@@ -27,7 +27,7 @@ SRC_URI:append:class-target = " \
+            "
  
- SRC_URI = "http://jaist.dl.sourceforge.net/project/${BPN}/${BP}/${BP}.tar.gz"
--SRC_URI[sha256sum] = "2a10c2c73f85d2ec9d8e9be3f553b7b5849cf795b89a1c1379c99cc36a06adbd"
-+SRC_URI[sha256sum] = "b1df31779306c2c87d595816305c89c19c382edf9ebbfce03143f567e580be42"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=bddeddfac80b2c9a882241d008bb41c3"
+-SRC_URI[sha256sum] = "11d6ba19e36c0b93ca62e47e6ffc2d2f2884942694bce0f23f39c71bdc5f69ac"
++SRC_URI[sha256sum] = "d8d45f1398ba84edd05bb33ca7593ac2989b17cb9c7a0cafe5442d41afdb2d7c"
  
- do_install() {
-     install -m 0755 -d ${D}${sysconfdir}/logwatch/scripts
+ S = "${WORKDIR}/httpd-${PV}"
+ 
 -- 
 2.34.1
 
