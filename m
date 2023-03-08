@@ -1,215 +1,160 @@
-Return-Path: <ticotimo@gmail.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A5B15C64EC4
-	for <webhook@archiver.kernel.org>; Wed,  8 Mar 2023 18:59:18 +0000 (UTC)
-Received: from mail-yb1-f175.google.com (mail-yb1-f175.google.com [209.85.219.175])
- by mx.groups.io with SMTP id smtpd.web10.1653.1678301955687111394
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CBE47C742A7
+	for <webhook@archiver.kernel.org>; Wed,  8 Mar 2023 21:59:09 +0000 (UTC)
+Received: from mail-oa1-f45.google.com (mail-oa1-f45.google.com [209.85.160.45])
+ by mx.groups.io with SMTP id smtpd.web10.6621.1678312741410807192
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 08 Mar 2023 10:59:15 -0800
+ Wed, 08 Mar 2023 13:59:01 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=G8+8bAYM;
- spf=pass (domain: gmail.com, ip: 209.85.219.175, mailfrom: ticotimo@gmail.com)
-Received: by mail-yb1-f175.google.com with SMTP id x12so15617127ybt.7
-        for <openembedded-devel@lists.openembedded.org>; Wed, 08 Mar 2023 10:59:15 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=HuyEB5cv;
+ spf=pass (domain: gmail.com, ip: 209.85.160.45, mailfrom: raj.khem@gmail.com)
+Received: by mail-oa1-f45.google.com with SMTP id 586e51a60fabf-17671fb717cso273373fac.8
+        for <openembedded-devel@lists.openembedded.org>; Wed, 08 Mar 2023 13:59:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112; t=1678301955;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=vzGSkDwPNTFJnGcKW8fTK/Eb0BP2g/F3UqsXA2z0xwg=;
-        b=G8+8bAYM4Hnd/o7Iam+jwSh63/fSZHlHmrY5ImaMnRJ0jFAE/mSg3xR1Le+wj67xBi
-         +rqgCzN3Q4mgqpsOyiENNDBRWrhsyMSEA6IBd4ekMDQ7rKtmobk5VmY4BI/weq2wctIF
-         LN2Y606LnpLb86kGuyZVlcuDe9KLc/yH2Nq3oLfQJR/N8kF6Jr1tUSCdu9HZePH/R2w+
-         uDzmsDTcV2xQZoSu3GGjoLJnyUV4uC3VvmcDvf0FWi3/146h5GWTgOwaatxkUu4HHNoz
-         oHxrVpOKcOPMYr02O2VoxNOraq3WtYRAB4nsYSU12dmtiuthV24jM4XkY+cbDkHCng4q
-         u1Tg==
+        d=gmail.com; s=20210112; t=1678312740;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=0GXoQpPuyVb/lpR7KNMzF2D7uVmy9+2pfktbtxwYRLo=;
+        b=HuyEB5cvkmwadk/ufesv+AukYoUkQzx0fMj47iJ+oaFh3EY5B4nwqfab8zCoaQSSR4
+         cPiecG1aro92+/Q/8Usick1HL4/I/wzZQNfl4Tp0e4oZMvV40bqspjj5UfVtNYyMDdCY
+         oIegEsnksg0/47hsDu4gHlPLts1LnLPzOtatlmtzriKJktaRaEqKD59uqyy9S6aSTZBV
+         4x4qbyTdROUubrEa9UXzIK8I16VwOJ+hKu5bkUrrzuiHjyglBEXT48gn5i8gVlLR8vPb
+         7oyekDJyEfK2nbKk6oWqVvps+eoybXTlRMNEcsRwiV5cgaByB8qh8OqPolOnLt7FQoek
+         CXXA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112; t=1678301955;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=vzGSkDwPNTFJnGcKW8fTK/Eb0BP2g/F3UqsXA2z0xwg=;
-        b=h53h+b47qyoiAqa9ke142aw8G+XP8IP8qkBYE4gyD6IOvbiMq0CcGzgbHBkI/MtAAu
-         cQ5IN/eCI8JB/q3cQ4JqCdp/9uxHtp8SiJC697vk6sbn8EwsQwoawEV+X350F6nZGLlv
-         Re27Uwl3i/NKzJ7y+jg30dWIt4do9iPq/HWLLgkZhRjRvBbKm511seesItjcewRJijbh
-         OuTp5pFaY3q4+z1PeSJ/tXHMYRou+nmWW61s+bGtkWBkGcudYiwJOeWjRWV8X3ZX7u6B
-         S8LnKOmuz8SoiZLQsRmBmS2lzu3CO3l78pSZIh2ZAglAWLS/iLoPcyH39zM4bG1vw8Og
-         w+VQ==
-X-Gm-Message-State: AO0yUKVn4Of3QO1ErX7j8Fq5FUBX/iHXwBuByLMYvmUjtLEOY9KzygjI
-	7QRKEJZjcJmTaaJCEtKWqXzFdOrXgudIQvAlPF+Om8+uzJAv4A==
-X-Google-Smtp-Source: AK7set9uexgqxbYA8vlP4EIrasWBs23laOg9UWdW2l6IvyappDPhOvVVHIQRyJfSoyFt3kYDdfNQHM/3+PwhlnqhVkM=
-X-Received: by 2002:a5b:b91:0:b0:a6f:b653:9f21 with SMTP id
- l17-20020a5b0b91000000b00a6fb6539f21mr11725350ybq.12.1678301954555; Wed, 08
- Mar 2023 10:59:14 -0800 (PST)
+        d=1e100.net; s=20210112; t=1678312740;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=0GXoQpPuyVb/lpR7KNMzF2D7uVmy9+2pfktbtxwYRLo=;
+        b=ZWkzsDymN96J2+AK1KqXQkvEZzhvCRci5hakGML0GtmTgbc8qjy8gP7sSqA00rdpnI
+         Uz36jUXBidmJVfMny5wJxTKMdzqagol6S6wCmIrRstB70FgBKqxKgIaBBYdbTN32EOpG
+         f7j7juwnVmUSDY6A8Z0o8QENeAkLxVDo07762SFSs/BBPZ9SBzCfU0mCGci3TgSYyRDI
+         mRxZJa9+k/B7d+3pEiqSlnXI1l/5L8zlf6bW87SfJDMc2gfmksfO9J7uX721DxauNE+g
+         D383ZBsQmdRO2lWgDqQQjh8w9cyuhLLi5mJUyJQRWfLSiOe8CmkxLS32+pkuebM+N8SE
+         XO5w==
+X-Gm-Message-State: AO0yUKVrXf1GEMl8nd+Uw1eW/1vPqDo6LNv6wXndjFXaFAgOkmut000K
+	sibQImNBdpL/kPF3r3TxzjtTDkJ5EkFEB4F5AnU=
+X-Google-Smtp-Source: AK7set/1YmkLOEV2nUJsKuEKgVhwbhDLS+7ZvU0KNDmL4YzO2B+L8jjVIGhcMKZYmfj+KoaKIEK2ZLLK/ElHvBbwB6Q=
+X-Received: by 2002:a05:6870:c793:b0:176:2903:95d8 with SMTP id
+ dy19-20020a056870c79300b00176290395d8mr6770745oab.4.1678312740537; Wed, 08
+ Mar 2023 13:59:00 -0800 (PST)
 MIME-Version: 1.0
-References: <20230308135705.796596-1-yi.zhao@windriver.com>
-In-Reply-To: <20230308135705.796596-1-yi.zhao@windriver.com>
-From: Tim Orling <ticotimo@gmail.com>
-Date: Wed, 8 Mar 2023 10:59:03 -0800
-Message-ID: <CANx9H-Az_jD58M4ntQO8DGXfYq3qQJJtNX9g2TawQenAHmeSbg@mail.gmail.com>
-Subject: Re: [oe] [meta-python][PATCH 1/2] python3-rich: add recipe
-To: Yi Zhao <yi.zhao@eng.windriver.com>
+References: <20230308105719.1360985-1-zboszor@gmail.com>
+In-Reply-To: <20230308105719.1360985-1-zboszor@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 8 Mar 2023 13:58:34 -0800
+Message-ID: <CAMKF1spdVSO46cCcP6vhtkZ3qQu0+Grj=Q1Oqi16oxSvXw_oJw@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH] opencv: 4.7.0
+To: Zoltan Boszormenyi <zboszor@gmail.com>
 Cc: openembedded-devel@lists.openembedded.org
-Content-Type: multipart/alternative; boundary="000000000000d3c22b05f6681f58"
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 08 Mar 2023 18:59:18 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101426
+ <openembedded-devel@lists.openembedded.org>; Wed, 08 Mar 2023 21:59:09 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101427
 
---000000000000d3c22b05f6681f58
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+I have a version already staged in master-next
 
-On Wed, Mar 8, 2023 at 5:57=E2=80=AFAM Yi Zhao <yi.zhao@eng.windriver.com> =
-wrote:
-
-> Rich is a Python library for rich text and beautiful formatting in the
-> terminal.
+On Wed, Mar 8, 2023 at 2:57=E2=80=AFAM Zoltan Boszormenyi <zboszor@gmail.co=
+m> wrote:
 >
-> Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+> Removed an upstream patch.
+>
+> Signed-off-by: Zolt=C3=A1n B=C3=B6sz=C3=B6rm=C3=A9nyi <zboszor@gmail.com>
 > ---
->  .../python-rich/python3-rich_13.3.2.bb              | 13 +++++++++++++
->  1 file changed, 13 insertions(+)
->  create mode 100644 meta-python/recipes-extended/python-rich/
-> python3-rich_13.3.2.bb
+>  ...ng-header-for-LIBAVCODEC_VERSION_INT.patch | 26 -------------------
+>  .../{opencv_4.6.0.bb =3D> opencv_4.7.0.bb}      |  5 ++--
+>  2 files changed, 2 insertions(+), 29 deletions(-)
+>  delete mode 100644 meta-oe/recipes-support/opencv/opencv/0001-Add-missin=
+g-header-for-LIBAVCODEC_VERSION_INT.patch
+>  rename meta-oe/recipes-support/opencv/{opencv_4.6.0.bb =3D> opencv_4.7.0=
+.bb} (98%)
 >
-> diff --git a/meta-python/recipes-extended/python-rich/
-> python3-rich_13.3.2.bb b/meta-python/recipes-extended/python-rich/
-> python3-rich_13.3.2.bb
-> new file mode 100644
-> index 000000000..b3a458ab8
-> --- /dev/null
-> +++ b/meta-python/recipes-extended/python-rich/python3-rich_13.3.2.bb
-> @@ -0,0 +1,13 @@
-> +SUMMARY =3D "Rich is a Python library for rich text and beautiful
-> formatting in the terminal"
-> +DESCRIPTION =3D "The Rich API makes it easy to add color and style to
-> terminal output. \
-> +Rich can also render pretty tables, progress bars, markdown, syntax
-> highlighted source code, \
-> +tracebacks, and more."
-> +HOMEPAGE=3D"https://github.com/Textualize/rich"
-> +SECTION =3D "devel/python"
-> +LICENSE =3D "MIT"
-> +
-> +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Db5f0b94fbc94f5ad9ae4efcf8a778=
-303"
-> +
-> +SRC_URI[sha256sum] =3D
-> "91954fe80cfb7985727a467ca98a7618e5dd15178cc2da10f553b36a93859001"
-> +
-> +inherit pypi setuptools3
+> diff --git a/meta-oe/recipes-support/opencv/opencv/0001-Add-missing-heade=
+r-for-LIBAVCODEC_VERSION_INT.patch b/meta-oe/recipes-support/opencv/opencv/=
+0001-Add-missing-header-for-LIBAVCODEC_VERSION_INT.patch
+> deleted file mode 100644
+> index 59da6ab32..000000000
+> --- a/meta-oe/recipes-support/opencv/opencv/0001-Add-missing-header-for-L=
+IBAVCODEC_VERSION_INT.patch
+> +++ /dev/null
+> @@ -1,26 +0,0 @@
+> -From d6bdd0a91eb0ed57688c0af5ba5088cf0afdc0a0 Mon Sep 17 00:00:00 2001
+> -From: Jochen Sprickerhof <jspricke@debian.org>
+> -Date: Mon, 8 Aug 2022 21:10:13 +0200
+> -Subject: [PATCH] Add missing header for LIBAVCODEC_VERSION_INT
+> -
+> -Upstream-Status: Backport [https://github.com/opencv/opencv/pull/22357]
+> -Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> ----
+> - modules/videoio/src/ffmpeg_codecs.hpp | 1 +
+> - 1 file changed, 1 insertion(+)
+> -
+> -diff --git a/modules/videoio/src/ffmpeg_codecs.hpp b/modules/videoio/src=
+/ffmpeg_codecs.hpp
+> -index 61788e0345..faad2596ed 100644
+> ---- a/modules/videoio/src/ffmpeg_codecs.hpp
+> -+++ b/modules/videoio/src/ffmpeg_codecs.hpp
+> -@@ -60,6 +60,7 @@ extern "C" {
+> - #include <errno.h>
+> - #endif
+> -
+> -+#include <libavcodec/version.h>
+> - #include <libavformat/avformat.h>
+> -
+> - #ifdef __cplusplus
+> ---
+> -2.38.1
+> -
+> diff --git a/meta-oe/recipes-support/opencv/opencv_4.6.0.bb b/meta-oe/rec=
+ipes-support/opencv/opencv_4.7.0.bb
+> similarity index 98%
+> rename from meta-oe/recipes-support/opencv/opencv_4.6.0.bb
+> rename to meta-oe/recipes-support/opencv/opencv_4.7.0.bb
+> index 1e4c3545b..eef2e66ca 100644
+> --- a/meta-oe/recipes-support/opencv/opencv_4.6.0.bb
+> +++ b/meta-oe/recipes-support/opencv/opencv_4.7.0.bb
+> @@ -10,8 +10,8 @@ ARM_INSTRUCTION_SET:armv5 =3D "arm"
 >
-
-This should instead inherit python_poetry_core, since it has a proper
-pyproject.toml
-https://github.com/Textualize/rich/blob/master/pyproject.toml#L49
-
-Also, please double check whether it needs any RDEPENDS.
-
-
+>  DEPENDS =3D "libtool swig-native bzip2 zlib glib-2.0 libwebp"
+>
+> -SRCREV_opencv =3D "b0dc474160e389b9c9045da5db49d03ae17c6a6b"
+> -SRCREV_contrib =3D "7b77c355a8fdc97667b3fa1e7a0d37e4973fc868"
+> +SRCREV_opencv =3D "725e440d278aca07d35a5e8963ef990572b07316"
+> +SRCREV_contrib =3D "e247b680a6bd396f110274b6c214406a93171350"
+>  SRCREV_boostdesc =3D "34e4206aef44d50e6bbcd0ab06354b52e7466d26"
+>  SRCREV_vgg =3D "fccf7cd6a4b12079f73bbfb21745f9babcd4eb1d"
+>  SRCREV_face =3D "8afa57abc8229d611c4937165d20e2a2d9fc5a12"
+> @@ -30,7 +30,6 @@ SRC_URI =3D "git://github.com/opencv/opencv.git;name=3D=
+opencv;branch=3Dmaster;protocol
+>             file://0001-Dont-use-isystem.patch \
+>             file://download.patch \
+>             file://0001-Make-ts-module-external.patch \
+> -           file://0001-Add-missing-header-for-LIBAVCODEC_VERSION_INT.pat=
+ch \
+>             file://0008-Do-not-embed-build-directory-in-binaries.patch \
+>             "
+>  SRC_URI:append:riscv64 =3D " file://0001-Use-Os-to-compile-tinyxml2.cpp.=
+patch;patchdir=3Dcontrib"
 > --
-> 2.25.1
+> 2.39.2
 >
 >
 > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
 > Links: You receive all messages sent to this group.
-> View/Reply Online (#101424):
-> https://lists.openembedded.org/g/openembedded-devel/message/101424
-> Mute This Topic: https://lists.openembedded.org/mt/97472578/924729
+> View/Reply Online (#101410): https://lists.openembedded.org/g/openembedde=
+d-devel/message/101410
+> Mute This Topic: https://lists.openembedded.org/mt/97469941/1997914
 > Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
-> ticotimo@gmail.com]
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
+aj.khem@gmail.com]
 > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
 >
->
-
---000000000000d3c22b05f6681f58
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=3D"gmail_quote">=
-<div dir=3D"ltr" class=3D"gmail_attr">On Wed, Mar 8, 2023 at 5:57=E2=80=AFA=
-M Yi Zhao &lt;<a href=3D"mailto:yi.zhao@eng.windriver.com">yi.zhao@eng.wind=
-river.com</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=
-=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding=
--left:1ex">Rich is a Python library for rich text and beautiful formatting =
-in the<br>
-terminal.<br>
-<br>
-Signed-off-by: Yi Zhao &lt;<a href=3D"mailto:yi.zhao@windriver.com" target=
-=3D"_blank">yi.zhao@windriver.com</a>&gt;<br>
----<br>
-=C2=A0.../python-rich/<a href=3D"http://python3-rich_13.3.2.bb" rel=3D"nore=
-ferrer" target=3D"_blank">python3-rich_13.3.2.bb</a>=C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 | 13 +++++++++++++<br>
-=C2=A01 file changed, 13 insertions(+)<br>
-=C2=A0create mode 100644 meta-python/recipes-extended/python-rich/<a href=
-=3D"http://python3-rich_13.3.2.bb" rel=3D"noreferrer" target=3D"_blank">pyt=
-hon3-rich_13.3.2.bb</a><br>
-<br>
-diff --git a/meta-python/recipes-extended/python-rich/<a href=3D"http://pyt=
-hon3-rich_13.3.2.bb" rel=3D"noreferrer" target=3D"_blank">python3-rich_13.3=
-.2.bb</a> b/meta-python/recipes-extended/python-rich/<a href=3D"http://pyth=
-on3-rich_13.3.2.bb" rel=3D"noreferrer" target=3D"_blank">python3-rich_13.3.=
-2.bb</a><br>
-new file mode 100644<br>
-index 000000000..b3a458ab8<br>
---- /dev/null<br>
-+++ b/meta-python/recipes-extended/python-rich/<a href=3D"http://python3-ri=
-ch_13.3.2.bb" rel=3D"noreferrer" target=3D"_blank">python3-rich_13.3.2.bb</=
-a><br>
-@@ -0,0 +1,13 @@<br>
-+SUMMARY =3D &quot;Rich is a Python library for rich text and beautiful for=
-matting in the terminal&quot;<br>
-+DESCRIPTION =3D &quot;The Rich API makes it easy to add color and style to=
- terminal output. \<br>
-+Rich can also render pretty tables, progress bars, markdown, syntax highli=
-ghted source code, \<br>
-+tracebacks, and more.&quot;<br>
-+HOMEPAGE=3D&quot;<a href=3D"https://github.com/Textualize/rich" rel=3D"nor=
-eferrer" target=3D"_blank">https://github.com/Textualize/rich</a>&quot;<br>
-+SECTION =3D &quot;devel/python&quot;<br>
-+LICENSE =3D &quot;MIT&quot;<br>
-+<br>
-+LIC_FILES_CHKSUM =3D &quot;file://LICENSE;md5=3Db5f0b94fbc94f5ad9ae4efcf8a=
-778303&quot;<br>
-+<br>
-+SRC_URI[sha256sum] =3D &quot;91954fe80cfb7985727a467ca98a7618e5dd15178cc2d=
-a10f553b36a93859001&quot;<br>
-+<br>
-+inherit pypi setuptools3<br></blockquote><div><br></div><div>This should i=
-nstead inherit python_poetry_core, since it has a proper pyproject.toml</di=
-v><div><a href=3D"https://github.com/Textualize/rich/blob/master/pyproject.=
-toml#L49">https://github.com/Textualize/rich/blob/master/pyproject.toml#L49=
-</a></div><div><br></div><div>Also, please double check whether it needs an=
-y RDEPENDS.</div><div>=C2=A0</div><blockquote class=3D"gmail_quote" style=
-=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding=
--left:1ex">
--- <br>
-2.25.1<br>
-<br>
-<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-Links: You receive all messages sent to this group.<br>
-View/Reply Online (#101424): <a href=3D"https://lists.openembedded.org/g/op=
-enembedded-devel/message/101424" rel=3D"noreferrer" target=3D"_blank">https=
-://lists.openembedded.org/g/openembedded-devel/message/101424</a><br>
-Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/97472578/9247=
-29" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/mt/=
-97472578/924729</a><br>
-Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
-d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
-><br>
-Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
-/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
-/g/openembedded-devel/unsub</a> [<a href=3D"mailto:ticotimo@gmail.com" targ=
-et=3D"_blank">ticotimo@gmail.com</a>]<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-<br>
-</blockquote></div></div>
-
---000000000000d3c22b05f6681f58--
 
