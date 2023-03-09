@@ -2,407 +2,268 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 30D62C64EC4
-	for <webhook@archiver.kernel.org>; Thu,  9 Mar 2023 17:51:13 +0000 (UTC)
-Received: from mail-oi1-f172.google.com (mail-oi1-f172.google.com [209.85.167.172])
- by mx.groups.io with SMTP id smtpd.web10.21099.1678384266262574736
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 192ECC64EC4
+	for <webhook@archiver.kernel.org>; Thu,  9 Mar 2023 17:51:43 +0000 (UTC)
+Received: from mail-oi1-f180.google.com (mail-oi1-f180.google.com [209.85.167.180])
+ by mx.groups.io with SMTP id smtpd.web10.21114.1678384294019091372
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 09 Mar 2023 09:51:06 -0800
+ Thu, 09 Mar 2023 09:51:34 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=Ffuldl/c;
- spf=pass (domain: gmail.com, ip: 209.85.167.172, mailfrom: raj.khem@gmail.com)
-Received: by mail-oi1-f172.google.com with SMTP id bj30so2267749oib.6
-        for <openembedded-devel@lists.openembedded.org>; Thu, 09 Mar 2023 09:51:06 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=LkT/GHhq;
+ spf=pass (domain: gmail.com, ip: 209.85.167.180, mailfrom: raj.khem@gmail.com)
+Received: by mail-oi1-f180.google.com with SMTP id y184so2261608oiy.8
+        for <openembedded-devel@lists.openembedded.org>; Thu, 09 Mar 2023 09:51:33 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112; t=1678384265;
+        d=gmail.com; s=20210112; t=1678384293;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=WbE3/CQefq3OFGeLwhMZ4xlroGvfUgBxdvV306Brk7w=;
-        b=Ffuldl/c2ioqCry+2naWWuRZwCVH/OLomiSLcqUugNfU6440Kzp0wiLZG6f79dzfKn
-         c+6k1XfE7dWhGtk5k6KzqAuiyhwN5PoxFVeenV7huhf+Og6l+Ke9NnQXCSJ6SS8bJgAG
-         aYmJ1zLJiC+Fty31A3P1I/lpPuNvkJuixDx2ndKRPEgiAhHKG7uTN0ZXp4B77gEnB8Kh
-         y0ReS4U5eYKClt8B1aMv0ffHSbOlWv1SJgLE8dCdjMkQ+mdPOwSl6BwLqB3PkOwq/vwt
-         2inD2QXefKWD5eFRKgP9o4LW6zJc39poLgOmCFe/TyFKWaM5exO2nW2q/bMHJGI9035H
-         b+dg==
+        bh=Ev6dqHQAaJUkTFNF72BukDei0sgNn07Y3r59mi3E5CQ=;
+        b=LkT/GHhqRxUl+Iv28Z6WsinF1w3u5Qw8oo2BwZmaWho73ql9Pav6KVd9Q07aUaYcVM
+         JsNpqQlbm/keN9QYdrvvezdP2dL4zjjkkOqzJr5Y4Q9yxyjmzsVKdCBTGpQwBOnoLA5U
+         FeQ3evQjXwKYSNmSdTiisoGaLAXkzSyI3cgftk5AWfrDnAaKB09eg5FMwuvhXGto8ur8
+         s1iiz/vAG/XGe63GHDs7KSAGx9KayOsdGP4lw8Wcvvp/ATdpjckvPK4rfXiqPEvehdlk
+         bFLcuPdIVr0R+X+inW8+/6v4Ctg6H9W8NwcFhorfhbZRDNVXRV30rt0s+6wKxtvi8Qjv
+         wevQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112; t=1678384265;
+        d=1e100.net; s=20210112; t=1678384293;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=WbE3/CQefq3OFGeLwhMZ4xlroGvfUgBxdvV306Brk7w=;
-        b=EfAWKGcvNKuuNNoqiP/I9AB8KDH4Y1Vbvbkr5W2nYwewFLGMv7mFQn8uLlt7b96E4N
-         YFHcdAr3vUa+EtPQgb9kP3JLtB8xExv09KjNVBs5jK6m+CTslcuAT5jiDT5pUW6QJGgw
-         abuc2+Z0amTP1a3XZjsc8Bjop1xRGOqz1mWMMk5QIc78fFTPfAyundjwmRt347J78vVX
-         LHlZnXMw3XXAjaJxwNpLGQhZjmld32vGOI06XI1NISZN8QMe65dc6kq+6ckZv2yA2Erd
-         Hr1I8I97tGLNuiqr8c6leNy37+F+VB1Gy6jtIr6HUHJezoVv0KCaLazS8/6GveL/zX3k
-         QSGA==
-X-Gm-Message-State: AO0yUKUWm340pPzR630u1suwtgWbG8+HddqZNzW7FqmWQlMuTyLGKDfm
-	i8Q1Q254GoZ01HEbXRF2cl1NDgXAPacoaPNxsnq9eyYj
-X-Google-Smtp-Source: AK7set9W7RrpGoGmCpF0b76jdp9wVPttmjwSbcmCICGCwf7fYF331hOaNtee1+pnSDdV2YRYzzT68d1nsDmNZu3Wzm4=
-X-Received: by 2002:a05:6808:8ed:b0:384:371a:a413 with SMTP id
- d13-20020a05680808ed00b00384371aa413mr6834060oic.4.1678384264026; Thu, 09 Mar
- 2023 09:51:04 -0800 (PST)
+        bh=Ev6dqHQAaJUkTFNF72BukDei0sgNn07Y3r59mi3E5CQ=;
+        b=6+95jzHAS2M8/moT/7jXdDxvhuJLEHWaJ7p09N+SM0IqIhAD4qeYEtvreUIZOPySE6
+         FcN4njwAVHKddqm1BjI4Q40tDNz/xIfG8DQcqBmue3PXvwfoz0yM8Zj6rvVwBGPSOm3G
+         /zinL08C778X6QrxadnTlcmuOteO6R3lbmHmW0Z2SLmXWvteH5a6xeJP0shiz4rzW+vo
+         oXwUqG9jAoehhsv2e8kuxI7/huqTKaH5B406ek+bsLj2cxtItPlsuUgExz684e75yDOD
+         3AIpVbSFrJ+vQPTdEkOcNfP8Kkis5U7r+1axxJ6g6P44TyOQ/z2SjHDVHnpCtA/6fpHH
+         Dstw==
+X-Gm-Message-State: AO0yUKU+kEhugmJ/S2ZtuB8NnpvTAsk9m5arEeUtccCwzFBwrf+c4VgL
+	NlGV67wfvDWB0iK+6S/rmw1M259p39FGs1MPCXI7drt2
+X-Google-Smtp-Source: AK7set957zvaKGkabUd/u5ON2faSfbB/mYvhSIR0VNOHZ9R7PH/PU9Y/cs7xUcAM+lzGSOkuxaPhrxH0he0BS6GU5RA=
+X-Received: by 2002:aca:2311:0:b0:384:3129:f59e with SMTP id
+ e17-20020aca2311000000b003843129f59emr7683218oie.4.1678384292688; Thu, 09 Mar
+ 2023 09:51:32 -0800 (PST)
 MIME-Version: 1.0
-References: <20230309084038.1182832-1-changqing.li@windriver.com>
-In-Reply-To: <20230309084038.1182832-1-changqing.li@windriver.com>
+References: <1678352824-32428-1-git-send-email-wangmy@fujitsu.com>
+In-Reply-To: <1678352824-32428-1-git-send-email-wangmy@fujitsu.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 9 Mar 2023 09:50:38 -0800
-Message-ID: <CAMKF1sqFz9vpd1atHDmT5pFxxDVtasLOAF7COYLH09jH-kw6tw@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH] liblockfile: upgrade 1.14 -> 1.17
-To: Changqing Li <changqing.li@eng.windriver.com>
+Date: Thu, 9 Mar 2023 09:51:06 -0800
+Message-ID: <CAMKF1sqePddpk9FW=O-NLW4wxCw4iEyHEs2BCRro31rfHXuoTA@mail.gmail.com>
+Subject: Re: [oe] [meta-oe] [PATCH] postgresql: Fix install conflict when
+ enable multilib.
+To: wangmy <wangmy@fujitsu.com>
 Cc: openembedded-devel@lists.openembedded.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 09 Mar 2023 17:51:13 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101463
+ <openembedded-devel@lists.openembedded.org>; Thu, 09 Mar 2023 17:51:43 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101464
 
-please rebase on master and resend
+please rebase on master and resend.
 
-On Thu, Mar 9, 2023 at 12:40=E2=80=AFAM Changqing Li
-<changqing.li@eng.windriver.com> wrote:
+On Thu, Mar 9, 2023 at 1:07=E2=80=AFAM wangmy <wangmy@fujitsu.com> wrote:
 >
-> From: Changqing Li <changqing.li@windriver.com>
+> From: Wang Mingyu <wangmy@fujitsu.com>
 >
-> Updated patches:
-> configure.patch
-> 0001-Makefile.in-redefine-LOCKPROG.patch
+> Error: Transaction test error:
+> file /usr/include/pg_config.h conflicts between attempted installs of lib=
+32-libpq-dev-15.2-r0.armv7ahf_neon and libpq-dev-15.2-r0.aarch64
+> file /usr/include/pg_config_ext.h conflicts between attempted installs of=
+ lib32-libpq-dev-15.2-r0.armv7ahf_neon and libpq-dev-15.2-r0.aarch64
 >
-> Signed-off-by: Changqing Li <changqing.li@windriver.com>
+> The differences of pg_config_ext.h are as follows:
+> @@ -5,4 +5,4 @@
+>   */
+>
+>  /* Define to the name of a signed 64-bit integer type. */
+> -#define PG_INT64_TYPE long int
+> +#define PG_INT64_TYPE long long int
+>
+> The differences of pg_config.h are as follows:
+> @@ -11,13 +11,13 @@
+>  #define ALIGNOF_INT 4
+>
+>  /* The normal alignment of `long', in bytes. */
+> -#define ALIGNOF_LONG 8
+> +#define ALIGNOF_LONG 4
+>
+>  /* The normal alignment of `long long int', in bytes. */
+> -/* #undef ALIGNOF_LONG_LONG_INT */
+> +#define ALIGNOF_LONG_LONG_INT 8
+>
+>  /* The normal alignment of `PG_INT128_TYPE', in bytes. */
+> -#define ALIGNOF_PG_INT128_TYPE 16
+> +/* #undef ALIGNOF_PG_INT128_TYPE */
+>
+>  /* The normal alignment of `short', in bytes. */
+>  #define ALIGNOF_SHORT 2
+> @@ -369,10 +369,10 @@
+>  #define HAVE_LOCALE_T 1
+>
+>  /* Define to 1 if `long int' works and is 64 bits. */
+> -#define HAVE_LONG_INT_64 1
+> +/* #undef HAVE_LONG_INT_64 */
+>
+>  /* Define to 1 if `long long int' works and is 64 bits. */
+> -/* #undef HAVE_LONG_LONG_INT_64 */
+> +#define HAVE_LONG_LONG_INT_64 1
+>
+>  /* Define to 1 if you have the <mbarrier.h> header file. */
+>  /* #undef HAVE_MBARRIER_H */
+> @@ -780,7 +780,7 @@
+>  /* #undef HAVE___STRTOULL */
+>
+>  /* Define to the appropriate printf length modifier for 64-bit ints. */
+> -#define INT64_MODIFIER "l"
+> +#define INT64_MODIFIER "ll"
+>
+>  /* Define to 1 if `locale_t' requires <xlocale.h>. */
+>  /* #undef LOCALE_T_IN_XLOCALE */
+> @@ -814,10 +814,10 @@
+>  #define PACKAGE_VERSION "15.2"
+>
+>  /* Define to the name of a signed 128-bit integer type. */
+> -#define PG_INT128_TYPE __int128
+> +/* #undef PG_INT128_TYPE */
+>
+>  /* Define to the name of a signed 64-bit integer type. */
+> -#define PG_INT64_TYPE long int
+> +#define PG_INT64_TYPE long long int
+>
+>  /* Define to the name of the default PostgreSQL service principal in Ker=
+beros
+>     (GSSAPI). (--with-krb-srvnam=3DNAME) */
+> @@ -845,7 +845,7 @@
+>  #define PG_VERSION_NUM 150002
+>
+>  /* A string containing the version number, platform, and C compiler */
+> -#define PG_VERSION_STR "PostgreSQL 15.2 on aarch64-poky-linux-gnu, compi=
+led by aarch64-poky-linux-gcc (GCC) 12.2.0, 64-bit"
+> +#define PG_VERSION_STR "PostgreSQL 15.2 on arm-pokymllib32-linux-gnueabi=
+, compiled by arm-pokymllib32-linux-gnueabi-gcc (GCC) 12.2.0, 32-bit"
+>
+>  /* Define to 1 to allow profiling output to be saved separately for each
+>     process. */
+> @@ -872,16 +872,16 @@
+>  #define SIZEOF_BOOL 1
+>
+>  /* The size of `long', as computed by sizeof. */
+> -#define SIZEOF_LONG 8
+> +#define SIZEOF_LONG 4
+>
+>  /* The size of `off_t', as computed by sizeof. */
+>  #define SIZEOF_OFF_T 8
+>
+>  /* The size of `size_t', as computed by sizeof. */
+> -#define SIZEOF_SIZE_T 8
+> +#define SIZEOF_SIZE_T 4
+>
+>  /* The size of `void *', as computed by sizeof. */
+> -#define SIZEOF_VOID_P 8
+> +#define SIZEOF_VOID_P 4
+>
+>  /* Define to 1 if all of the C90 standard headers exist (not just the on=
+es
+>     required in a freestanding environment). This macro is provided for
+> @@ -892,10 +892,10 @@
+>  /* #undef STRERROR_R_INT */
+>
+>  /* Define to 1 to use ARMv8 CRC Extension. */
+> -#define USE_ARMV8_CRC32C 1
+> +/* #undef USE_ARMV8_CRC32C */
+>
+>  /* Define to 1 to use ARMv8 CRC Extension with a runtime check. */
+> -/* #undef USE_ARMV8_CRC32C_WITH_RUNTIME_CHECK */
+> +#define USE_ARMV8_CRC32C_WITH_RUNTIME_CHECK 1
+>
+>  /* Define to 1 to build with assertion checks. (--enable-cassert) */
+>  /* #undef USE_ASSERT_CHECKING */
+> @@ -989,7 +989,7 @@
+>
+>  /* Number of bits in a file offset, on hosts where this is settable. */
+> -/* #undef _FILE_OFFSET_BITS */
+> +#define _FILE_OFFSET_BITS 64
+>
+>  /* Define to 1 to make fseeko visible on some hosts (e.g. glibc 2.2). */
+>  /* #undef _LARGEFILE_SOURCE */
+>
+> Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 > ---
->  ...akefile.in-Don-t-try-to-run-ldconfig.patch | 12 +++----
->  .../0001-Makefile.in-add-DESTDIR.patch        |  6 ++--
->  ...001-Makefile.in-install-nfslock-libs.patch | 10 +++---
->  .../0001-Makefile.in-redefine-LOCKPROG.patch  | 34 ++++++++++++++-----
->  .../liblockfile/liblockfile/configure.patch   | 22 ++++++++----
->  ...iblockfile-fix-install-so-to-man-dir.patch |  8 ++---
->  ...iblockfile_1.14.bb =3D> liblockfile_1.17.bb} | 14 ++++----
->  7 files changed, 67 insertions(+), 39 deletions(-)
->  rename meta-oe/recipes-extended/liblockfile/{liblockfile_1.14.bb =3D> li=
-blockfile_1.17.bb} (72%)
+>  meta-oe/recipes-dbs/postgresql/postgresql.inc | 3 ++-
+>  1 file changed, 2 insertions(+), 1 deletion(-)
 >
-> diff --git a/meta-oe/recipes-extended/liblockfile/liblockfile/0001-Makefi=
-le.in-Don-t-try-to-run-ldconfig.patch b/meta-oe/recipes-extended/liblockfil=
-e/liblockfile/0001-Makefile.in-Don-t-try-to-run-ldconfig.patch
-> index 5a1d9a995..0e814d4f5 100644
-> --- a/meta-oe/recipes-extended/liblockfile/liblockfile/0001-Makefile.in-D=
-on-t-try-to-run-ldconfig.patch
-> +++ b/meta-oe/recipes-extended/liblockfile/liblockfile/0001-Makefile.in-D=
-on-t-try-to-run-ldconfig.patch
-> @@ -1,4 +1,4 @@
-> -From 5876bd17caac96df70ef400bfeebb155c0bd7359 Mon Sep 17 00:00:00 2001
-> +From 4d07cbaddeed8fe283d77336a6432c4074450722 Mon Sep 17 00:00:00 2001
->  From: Changqing Li <changqing.li@windriver.com>
->  Date: Wed, 8 Feb 2023 10:34:45 +0800
->  Subject: [PATCH] Makefile.in: Don't try to run ldconfig
-> @@ -27,10 +27,10 @@ Signed-off-by: Changqing Li <changqing.li@windriver.c=
-om>
->   1 file changed, 2 deletions(-)
+> diff --git a/meta-oe/recipes-dbs/postgresql/postgresql.inc b/meta-oe/reci=
+pes-dbs/postgresql/postgresql.inc
+> index 60d44ce979..f7f35fe348 100644
+> --- a/meta-oe/recipes-dbs/postgresql/postgresql.inc
+> +++ b/meta-oe/recipes-dbs/postgresql/postgresql.inc
+> @@ -36,7 +36,7 @@ LEAD_SONAME =3D "libpq.so"
+>  # LDFLAGS for shared libraries
+>  export LDFLAGS_SL =3D "${LDFLAGS}"
 >
->  diff --git a/Makefile.in b/Makefile.in
-> -index bfa0acb..ae5be56 100644
-> +index 232f1b6..5754ca5 100644
->  --- a/Makefile.in
->  +++ b/Makefile.in
-> -@@ -58,7 +58,6 @@ install_shared:      shared install_static install_com=
-mon
-> +@@ -69,7 +69,6 @@ install_shared:      shared install_static install_com=
-mon
->                         $(libdir)/liblockfile.so.$(SOVER)
->                 ln -s liblockfile.so.$(SOVER) $(libdir)/liblockfile.so.$(=
-MAJOR)
->                 ln -s liblockfile.so.$(SOVER) $(libdir)/liblockfile.so
-> @@ -38,14 +38,14 @@ index bfa0acb..ae5be56 100644
+> -inherit autotools pkgconfig perlnative python3native python3targetconfig=
+ useradd update-rc.d systemd gettext cpan-base
+> +inherit autotools pkgconfig perlnative python3native python3targetconfig=
+ useradd update-rc.d systemd gettext cpan-base multilib_header
 >
->   install_common:
->                 install -d -m 755 -g root -p $(includedir)
-> -@@ -79,7 +78,6 @@ install_nfslib:      nfslib
-> +@@ -90,7 +89,6 @@ install_nfslib:      nfslib
->                 install -m 755 nfslock.so.$(NFSVER) $(nfslockdir)
->                 ln -sf nfslock.so.$(NFSVER) $(libdir)/nfslock.so
->                 ln -sf nfslock.so.$(NFSVER) $(libdir)/nfslock.so.0
->  -              if test "$(DESTDIR)" =3D ""; then @LDCONFIG@; fi
+>  CFLAGS +=3D "-I${STAGING_INCDIR}/${PYTHON_DIR} -I${STAGING_INCDIR}/tcl8.=
+6"
 >
-> - clean:
-> -               rm -f *.a *.o *.so *.so.* dotlockfile
-> + test:         test-stamp
-> +               @:
->  --
->  2.25.1
->
-> diff --git a/meta-oe/recipes-extended/liblockfile/liblockfile/0001-Makefi=
-le.in-add-DESTDIR.patch b/meta-oe/recipes-extended/liblockfile/liblockfile/=
-0001-Makefile.in-add-DESTDIR.patch
-> index ea415dd8b..2533b3a00 100644
-> --- a/meta-oe/recipes-extended/liblockfile/liblockfile/0001-Makefile.in-a=
-dd-DESTDIR.patch
-> +++ b/meta-oe/recipes-extended/liblockfile/liblockfile/0001-Makefile.in-a=
-dd-DESTDIR.patch
-> @@ -1,4 +1,4 @@
-> -From 67843dabe1177840697839b916fd899218893ec7 Mon Sep 17 00:00:00 2001
-> +From 8e370a2f35d0c3472ddc9068fab19d0077434c61 Mon Sep 17 00:00:00 2001
->  From: Mingli Yu <mingli.yu@windriver.com>
->  Date: Thu, 19 Jul 2018 00:25:23 -0700
->  Subject: [PATCH] Makefile.in: add DESTDIR
-> @@ -29,7 +29,7 @@ Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
->   1 file changed, 5 insertions(+), 5 deletions(-)
->
->  diff --git a/Makefile.in b/Makefile.in
-> -index 36a6d23..1e4130e 100644
-> +index 9c74b35..8cbda1d 100644
->  --- a/Makefile.in
->  +++ b/Makefile.in
->  @@ -12,11 +12,11 @@ CC         =3D @CC@
-> @@ -50,5 +50,5 @@ index 36a6d23..1e4130e 100644
->   MAILGROUP     =3D @MAILGROUP@
->
->  --
-> -2.17.1
-> +2.25.1
->
-> diff --git a/meta-oe/recipes-extended/liblockfile/liblockfile/0001-Makefi=
-le.in-install-nfslock-libs.patch b/meta-oe/recipes-extended/liblockfile/lib=
-lockfile/0001-Makefile.in-install-nfslock-libs.patch
-> index a6b297b59..f99ac2bf7 100644
-> --- a/meta-oe/recipes-extended/liblockfile/liblockfile/0001-Makefile.in-i=
-nstall-nfslock-libs.patch
-> +++ b/meta-oe/recipes-extended/liblockfile/liblockfile/0001-Makefile.in-i=
-nstall-nfslock-libs.patch
-> @@ -1,4 +1,4 @@
-> -From 631d46efff2a6d8970e202ba5422ebedd17a8d2f Mon Sep 17 00:00:00 2001
-> +From 0f34d1d91d641c3d5c5bb2eb11bd6eec7cfaf738 Mon Sep 17 00:00:00 2001
->  From: Mingli Yu <mingli.yu@windriver.com>
->  Date: Thu, 19 Jul 2018 01:00:10 -0700
->  Subject: [PATCH] Makefile.in: install nfslock.so and nfslock.so.0
-> @@ -14,10 +14,10 @@ Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
->   1 file changed, 2 insertions(+)
->
->  diff --git a/Makefile.in b/Makefile.in
-> -index 1e4130e..0f1b506 100644
-> +index 8cbda1d..3a74811 100644
->  --- a/Makefile.in
->  +++ b/Makefile.in
-> -@@ -77,6 +77,8 @@ install_common:
-> +@@ -88,6 +88,8 @@ install_common:
->   install_nfslib:       nfslib
->                 install -d -m 755 -g root -p $(nfslockdir)
->                 install -m 755 nfslock.so.$(NFSVER) $(nfslockdir)
-> @@ -25,7 +25,7 @@ index 1e4130e..0f1b506 100644
->  +              ln -sf nfslock.so.$(NFSVER) $(libdir)/nfslock.so.0
->                 if test "$(DESTDIR)" =3D ""; then @LDCONFIG@; fi
->
-> - clean:
-> + test:         test-stamp
->  --
-> -2.17.1
-> +2.25.1
->
-> diff --git a/meta-oe/recipes-extended/liblockfile/liblockfile/0001-Makefi=
-le.in-redefine-LOCKPROG.patch b/meta-oe/recipes-extended/liblockfile/libloc=
-kfile/0001-Makefile.in-redefine-LOCKPROG.patch
-> index 35549ff2d..c387db123 100644
-> --- a/meta-oe/recipes-extended/liblockfile/liblockfile/0001-Makefile.in-r=
-edefine-LOCKPROG.patch
-> +++ b/meta-oe/recipes-extended/liblockfile/liblockfile/0001-Makefile.in-r=
-edefine-LOCKPROG.patch
-> @@ -1,4 +1,4 @@
-> -From 9beb650712d448ad9c0899de9d98e9b623f9c249 Mon Sep 17 00:00:00 2001
-> +From 05227e74b732f13ed5a2a98232676f98bba028e6 Mon Sep 17 00:00:00 2001
->  From: Mingli Yu <mingli.yu@windriver.com>
->  Date: Fri, 12 Aug 2022 11:18:15 +0800
->  Subject: [PATCH] Makefile.in: redefine LOCKPROG
-> @@ -11,23 +11,41 @@ And it should be "/usr/bin/dotlockfile" on the target=
-.
->  Upstream-Status: Inappropriate [oe specific]
->
->  Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
-> +
-> +Update patch for 1.17, also redefine LOCKPROG in other lines
-> +Signed-off-by: Changqing Li <changqing.li@windriver.com>
->  ---
-> - Makefile.in | 2 +-
-> - 1 file changed, 1 insertion(+), 1 deletion(-)
-> + Makefile.in | 8 ++++----
-> + 1 file changed, 4 insertions(+), 4 deletions(-)
->
->  diff --git a/Makefile.in b/Makefile.in
-> -index 6e53179..bfa0acb 100644
-> +index e447cb2..e02d75e 100644
->  --- a/Makefile.in
->  +++ b/Makefile.in
-> -@@ -42,7 +42,7 @@ dotlockfile: dotlockfile.o xlockfile.o
-> -               $(CC) $(LDFLAGS) -o dotlockfile dotlockfile.o xlockfile.o
-> +@@ -44,19 +44,19 @@ dotlockfile:       dotlockfile.o dlockfile.o
-> +               $(CC) $(LDFLAGS) -o dotlockfile dotlockfile.o dlockfile.o
-> +
-> + dotlockfile.o:        dotlockfile.c
-> +-              $(CC) $(CFLAGS) -DLOCKPROG=3D\"$(bindir)/dotlockfile\" \
-> ++              $(CC) $(CFLAGS) -DLOCKPROG=3D\"/usr/bin/dotlockfile\" \
-> +                       -c dotlockfile.c
->
->   lockfile.o:   lockfile.c
->  -              $(CC) $(CFLAGS) -DLIB -DLOCKPROG=3D\"$(bindir)/dotlockfil=
-e\" \
->  +              $(CC) $(CFLAGS) -DLIB -DLOCKPROG=3D\"/usr/bin/dotlockfile=
-\" \
-> -                       -c lockfile.c
-> +                       -DSTATIC -c lockfile.c
-> +
-> + solockfile.o: lockfile.c
-> +-              $(CC) $(CFLAGS) -DLIB -DLOCKPROG=3D\"$(bindir)/dotlockfil=
-e\" \
-> ++              $(CC) $(CFLAGS) -DLIB -DLOCKPROG=3D\"/usr/bin/dotlockfile=
-\" \
-> +                       -c lockfile.c -o solockfile.o
-> +
-> + dlockfile.o:  lockfile.c
-> +-              $(CC) $(CFLAGS) -DLOCKPROG=3D\"$(bindir)/dotlockfile\" \
-> ++              $(CC) $(CFLAGS) -DLOCKPROG=3D\"/usr/bin/dotlockfile\" \
-> +                       -c lockfile.c -o dlockfile.o
->
-> - xlockfile.o:  lockfile.c
-> + install_static:       static install_common
->  --
->  2.25.1
->
-> diff --git a/meta-oe/recipes-extended/liblockfile/liblockfile/configure.p=
-atch b/meta-oe/recipes-extended/liblockfile/liblockfile/configure.patch
-> index ea13e11d2..56f2d05eb 100644
-> --- a/meta-oe/recipes-extended/liblockfile/liblockfile/configure.patch
-> +++ b/meta-oe/recipes-extended/liblockfile/liblockfile/configure.patch
-> @@ -1,10 +1,17 @@
-> +From fd3fce8c1a3d0c70a0ffd461fbbe7e2ef71dd3a7 Mon Sep 17 00:00:00 2001
-> +From: Changqing Li <changqing.li@windriver.com>
-> +Date: Tue, 7 Mar 2023 11:05:45 +0800
-> +Subject: [PATCH] Update patch for 1.17
->
-> -#
-> -# Patch managed by http://www.mn-logistik.de/unsupported/pxa250/patcher
-> -#
-> +Signed-off-by: Changqing Li <changqing.li@windriver.com>
-> +---
-> + configure.ac | 8 +++++---
-> + 1 file changed, 5 insertions(+), 3 deletions(-)
->
-> ---- liblockfile-1.05/./configure.in~configure
-> -+++ liblockfile-1.05/./configure.in
-> +diff --git a/configure.ac b/configure.ac
-> +index df26cee..76e9165 100644
-> +--- a/configure.ac
-> ++++ b/configure.ac
->  @@ -1,4 +1,5 @@
->  -AC_INIT(lockfile.c)
->  +AC_INIT
-> @@ -12,7 +19,7 @@
->   AC_CONFIG_HEADER(autoconf.h)
->   AC_REVISION($Revision: 1.0 $)dnl
->
-> -@@ -111,7 +112,8 @@
-> +@@ -111,7 +112,8 @@ AC_SUBST(TARGETS)
->   AC_SUBST(INSTALL_TARGETS)
->   AC_SUBST(nfslockdir)
->
-> @@ -23,3 +30,6 @@
->  -)
->  +])
->  +AC_OUTPUT
-> +--
-> +2.25.1
-> +
-> diff --git a/meta-oe/recipes-extended/liblockfile/liblockfile/liblockfile=
--fix-install-so-to-man-dir.patch b/meta-oe/recipes-extended/liblockfile/lib=
-lockfile/liblockfile-fix-install-so-to-man-dir.patch
-> index da2503339..046cd8e69 100644
-> --- a/meta-oe/recipes-extended/liblockfile/liblockfile/liblockfile-fix-in=
-stall-so-to-man-dir.patch
-> +++ b/meta-oe/recipes-extended/liblockfile/liblockfile/liblockfile-fix-in=
-stall-so-to-man-dir.patch
-> @@ -1,4 +1,4 @@
-> -From 363eb1aaeca914c7d36a2cdaf1417e4f87af4c22 Mon Sep 17 00:00:00 2001
-> +From 079d04c187800e22f18723c74e41c4e46eef67f8 Mon Sep 17 00:00:00 2001
->  From: Mingli Yu <mingli.yu@windriver.com>
->  Date: Thu, 19 Jul 2018 01:12:47 -0700
->  Subject: [PATCH] Makefile.in: define dotlockfile.1 installed to man
-> @@ -16,10 +16,10 @@ Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
->   1 file changed, 1 insertion(+), 1 deletion(-)
->
->  diff --git a/Makefile.in b/Makefile.in
-> -index 0f1b506..6e53179 100644
-> +index 3a74811..e447cb2 100644
->  --- a/Makefile.in
->  +++ b/Makefile.in
-> -@@ -71,7 +71,7 @@ install_common:
-> +@@ -82,7 +82,7 @@ install_common:
->                 else \
->                   install -g root -m 755 dotlockfile $(bindir); \
->                 fi
-> @@ -29,5 +29,5 @@ index 0f1b506..6e53179 100644
->
->   install_nfslib:       nfslib
->  --
-> -2.17.1
-> +2.25.1
->
-> diff --git a/meta-oe/recipes-extended/liblockfile/liblockfile_1.14.bb b/m=
-eta-oe/recipes-extended/liblockfile/liblockfile_1.17.bb
-> similarity index 72%
-> rename from meta-oe/recipes-extended/liblockfile/liblockfile_1.14.bb
-> rename to meta-oe/recipes-extended/liblockfile/liblockfile_1.17.bb
-> index e07dab3c7..68123e35a 100644
-> --- a/meta-oe/recipes-extended/liblockfile/liblockfile_1.14.bb
-> +++ b/meta-oe/recipes-extended/liblockfile/liblockfile_1.17.bb
-> @@ -4,8 +4,8 @@ SECTION =3D "libs"
->  LICENSE =3D "LGPL-2.0-or-later & GPL-2.0-or-later"
->  LIC_FILES_CHKSUM =3D "file://COPYRIGHT;md5=3Df4ba6ad04fcb05cc30a4cfa5062=
-c55a3"
->
-> -SRC_URI =3D "${DEBIAN_MIRROR}/main/libl/liblockfile/liblockfile_1.14.ori=
-g.tar.gz \
-> -    ${DEBIAN_MIRROR}/main/libl/liblockfile/liblockfile_1.14-1.debian.tar=
-.bz2;name=3D1.14-1 \
-> +SRC_URI =3D "${DEBIAN_MIRROR}/main/libl/liblockfile/liblockfile_1.17.ori=
-g.tar.gz \
-> +    ${DEBIAN_MIRROR}/main/libl/liblockfile/liblockfile_1.17-1.debian.tar=
-.bz2;name=3D1.17-1 \
->      file://configure.patch \
->      file://0001-Makefile.in-add-DESTDIR.patch \
->      file://0001-Makefile.in-install-nfslock-libs.patch \
-> @@ -14,13 +14,13 @@ SRC_URI =3D "${DEBIAN_MIRROR}/main/libl/liblockfile/l=
-iblockfile_1.14.orig.tar.gz \
->      file://0001-Makefile.in-Don-t-try-to-run-ldconfig.patch \
->  "
->
-> -SRC_URI[md5sum] =3D "420c056ba0cc4d1477e402f70ba2f5eb"
-> -SRC_URI[sha256sum] =3D "ab40d4a3e8cbc204f7e87fea637a4e4ddf9a1149aaa0a723=
-a4267febd0b1d060"
-> +SRC_URI[md5sum] =3D "918c4c07f7b99fc327db8bf39d3a1804"
-> +SRC_URI[sha256sum] =3D "6e937f3650afab4aac198f348b89b1ca42edceb17fb6bb09=
-18f642143ccfd15e"
->
-> -SRC_URI[1.14-1.md5sum] =3D "f9a44928c3477d218c56252712ebc479"
-> -SRC_URI[1.14-1.sha256sum] =3D "73f9be769e602149391588c28f0f4f5cda131e30f=
-b94c0777dbb23d811ac21ff"
-> +SRC_URI[1.17-1.md5sum] =3D "40415c5702f82681d9811e4e9e182813"
-> +SRC_URI[1.17-1.sha256sum] =3D "e3657c0e3facfeccb58900c0b48d56cd68ad5f9f2=
-4d1b4c6eaa69c26490fb673"
->
-> -S =3D "${WORKDIR}/${BPN}"
-> +S =3D "${WORKDIR}/${BP}"
->
->  inherit autotools-brokensep
->
+> @@ -183,6 +183,7 @@ INITSCRIPT_PARAMS =3D "start 64 . stop 36 0 1 2 3 4 5=
+ 6 ."
+>  do_install:append() {
+>      # install contrib
+>      oe_runmake DESTDIR=3D${D} -C contrib install
+> +    oe_multilib_header pg_config.h pg_config_ext.h
+>      # install tutorial
+>      install -d -m 0755 ${D}${libdir}/${BPN}/tutorial
+>      install ${B}/src/tutorial/* ${D}${libdir}/${BPN}/tutorial
 > --
-> 2.25.1
+> 2.34.1
+>
+> Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+> ---
+>  meta-oe/recipes-dbs/postgresql/postgresql.inc | 3 ++-
+>  1 file changed, 2 insertions(+), 1 deletion(-)
+>
+> diff --git a/meta-oe/recipes-dbs/postgresql/postgresql.inc b/meta-oe/reci=
+pes-dbs/postgresql/postgresql.inc
+> index 60d44ce979..15ecdeeb2e 100644
+> --- a/meta-oe/recipes-dbs/postgresql/postgresql.inc
+> +++ b/meta-oe/recipes-dbs/postgresql/postgresql.inc
+> @@ -36,7 +36,7 @@ LEAD_SONAME =3D "libpq.so"
+>  # LDFLAGS for shared libraries
+>  export LDFLAGS_SL =3D "${LDFLAGS}"
+>
+> -inherit autotools pkgconfig perlnative python3native python3targetconfig=
+ useradd update-rc.d systemd gettext cpan-base
+> +inherit autotools pkgconfig perlnative python3native python3targetconfig=
+ useradd update-rc.d systemd gettext cpan-base multilib_header
+>
+>  CFLAGS +=3D "-I${STAGING_INCDIR}/${PYTHON_DIR} -I${STAGING_INCDIR}/tcl8.=
+6"
+>
+> @@ -183,6 +183,7 @@ INITSCRIPT_PARAMS =3D "start 64 . stop 36 0 1 2 3 4 5=
+ 6 ."
+>  do_install:append() {
+>      # install contrib
+>      oe_runmake DESTDIR=3D${D} -C contrib install
+> +    oe_multilib_header pg_config.h pg_config_ext.h ecpg_config.h postgre=
+sql/server/pg_config.h postgresql/server/pg_config_ext.h
+>      # install tutorial
+>      install -d -m 0755 ${D}${libdir}/${BPN}/tutorial
+>      install ${B}/src/tutorial/* ${D}${libdir}/${BPN}/tutorial
+> --
+> 2.34.1
 >
 >
 > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
 > Links: You receive all messages sent to this group.
-> View/Reply Online (#101442): https://lists.openembedded.org/g/openembedde=
-d-devel/message/101442
-> Mute This Topic: https://lists.openembedded.org/mt/97492257/1997914
+> View/Reply Online (#101444): https://lists.openembedded.org/g/openembedde=
+d-devel/message/101444
+> Mute This Topic: https://lists.openembedded.org/mt/97492429/1997914
 > Group Owner: openembedded-devel+owner@lists.openembedded.org
 > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
 aj.khem@gmail.com]
