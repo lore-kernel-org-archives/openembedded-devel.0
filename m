@@ -1,100 +1,236 @@
-Return-Path: <changqing.li@eng.windriver.com>
+Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 86DDAC64EC4
-	for <webhook@archiver.kernel.org>; Thu,  9 Mar 2023 08:43:19 +0000 (UTC)
-Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
- by mx.groups.io with SMTP id smtpd.web10.8660.1678351397644259784
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B8494C6FD1F
+	for <webhook@archiver.kernel.org>; Thu,  9 Mar 2023 09:07:29 +0000 (UTC)
+Received: from mail1.bemta37.messagelabs.com (mail1.bemta37.messagelabs.com [85.158.142.2])
+ by mx.groups.io with SMTP id smtpd.web10.8956.1678352843675466434
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 09 Mar 2023 00:43:17 -0800
+ Thu, 09 Mar 2023 01:07:24 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=pps06212021 header.b=na4Zbkas;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=2432b52167=changqing.li@windriver.com)
-Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 3297mUEI002619
-	for <openembedded-devel@lists.openembedded.org>; Thu, 9 Mar 2023 08:43:17 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com; h=from : to :
- subject : date : message-id : mime-version : content-transfer-encoding :
- content-type; s=PPS06212021;
- bh=vFAd2/xA3YmBHkkSmUaTsA0pgnXE1lzXbpMDSN0YR8A=;
- b=na4ZbkasxGJx2+keZ7D/YydkGqXmHsfZpqiKD/M7D8vvFDWRjNDg+qu0ZQD0540f9tDW
- QkzGHm+BQV1oH/QuGvaMLsSxC/bLLeHYDjwEu/OcG6M3GltsJ2p5XcdantN3m/3xWl4X
- 3Vm1oj5wWuiK5K5isrT+m/G15BRs1c9MKHv+LztsntFBRr9HCkX9DDDTk43YQkSySlVu
- nG0t1WCTNTD4B3rB29S8bdx5x1Lq1775xIMhipR4OO7EfAqvoeU5E/dVrw+6tOTVcM79
- mNSTZBi9kPTH1sm5QLuOgShUYdvLYjsW7Low2Nc0aaGRpo4YU5sCf6ID+aSR8uDbBkCS gQ== 
-Received: from ala-exchng02.corp.ad.wrs.com (unknown-82-254.windriver.com [147.11.82.254])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3p6fg6hdqv-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Thu, 09 Mar 2023 08:43:16 +0000
-Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
- ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.18; Thu, 9 Mar 2023 00:43:15 -0800
-Received: from pek-lpg-core2.wrs.com (128.224.153.41) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
- 15.1.2507.17 via Frontend Transport; Thu, 9 Mar 2023 00:43:14 -0800
-From: <changqing.li@windriver.com>
+ dkim=fail reason="body hash did not verify" header.i=@fujitsu.com header.s=170520fj header.b=HsD7e4fl;
+ spf=pass (domain: fujitsu.com, ip: 85.158.142.2, mailfrom: wangmy@fujitsu.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
+	s=170520fj; t=1678352841; i=@fujitsu.com;
+	bh=RVh4YfhqJ34CbjankF0X8HWF3FBchxSV/M6lhqOiI6c=;
+	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type:Content-Transfer-Encoding;
+	b=HsD7e4flC7FodBSCA13W/NNLvNFnr22WXMFlyeoiq6dd2cGq9lQEqTXepx3+8ZcnQ
+	 Etj33YbMaifppelzAk9mixDz7ABDKclqxc4uzxBoS0WE8fPD0TOhkEFK4kpmFBjruX
+	 KwMA2JtQkiic5q/cVgY31Qk8QjR/89LxM2PBpFkuDpTV9Chu+4kVZKqr6FFicI9jYY
+	 7LfuxFwfrSotdRr52IXP50kjQ9Mn3vqXYc6yVuHd4/CFaTHKOHfIZsfeflYFiSzw3H
+	 2QHKBuT9MzPziSdlTlnYuN/WDel+DcFxCu/gPdc0q4k2Xqzgv2ebyRL0ZDqT8IH8QR
+	 3Wx8XnbZUiVUA==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrPIsWRWlGSWpSXmKPExsViZ8ORpHtyIWe
+  KwdJedouLh5cyOzB6nNu4gjGAMYo1My8pvyKBNWPK5F/MBR+VKl6e+sjUwHhetouRi0NI4CGj
+  RNPRmywQzlUmib4nF6CcPYwSXf/uMnUxcnKwCUhJ3Lj/nw3EFhHQl1g6ew8ziM0soCLx4ncPO
+  4gtLBAq0XCqiRXEZgGK98zbzghi8wo4SRze2Q3WKyGgIDHl4XuwXk4BZ4l3X7+CzRcCqvm39R
+  1UvaDEyZlPWCDma0q0bv/NDmHLSzRvnc0MMUdRYvblZhYIu1Ki9cMvKFtN4uq5TcwTGIVmIRk
+  1C8moWUhGLWBkXsVoVpxaVJZapGuol1SUmZ5RkpuYmaOXWKWbqJdaqpuXX1SSAZRKLC/WSy0u
+  1iuuzE3OSdHLSy3ZxAgM95TixNs7GJf3/tU7xCjJwaQkytvNxpkixJeUn1KZkVicEV9UmpNaf
+  IhRhoNDSYJ36XygnGBRanpqRVpmDjD2YNISHDxKIrz9s4HSvMUFibnFmekQqVOMilLivKUgfQ
+  IgiYzSPLg2WLxfYpSVEuZlZGBgEOIpSC3KzSxBlX/FKM7BqCTM6zwHaApPZl4J3PRXQIuZgBb
+  v2sIBsrgkESEl1cCUf7fhRf3R9bEFR1473Je5ckbq5YcrvT29iW7WFx67xFX+9Pilp6JeIan/
+  4snUDm377/kPxaa0Tjhlfroxgt1XRJm9M4+ROYe1Vugej+hxs4PfTt5cdTrBODf87KIZ7Fp95
+  sJrZgfOzlEX7NJhkqjMvRl8r2GyYPcGAUZNE3GpExbFvw4r7F/7a6daZuY9y10VEVYxKo98T7
+  UffNjX6Hpki5/lCl2FdXZbzuWuZJdbk+GetX7HmY99BREx2tuX7+x4c8rVitvtE6/Ca+2c6lj
+  DBa92sAlaPjBiNjnmZLhmh6bMzOXuUz9GXAoVmFqonSekMuvb/xLuuUlHBTfs5M16nLm6y5gh
+  1k0n5MR/TyWW4oxEQy3mouJEANKtrOtyAwAA
+X-Env-Sender: wangmy@fujitsu.com
+X-Msg-Ref: server-15.tower-728.messagelabs.com!1678352840!515062!1
+X-Originating-IP: [62.60.8.98]
+X-SYMC-ESS-Client-Auth: outbound-route-from=pass
+X-StarScan-Received: 
+X-StarScan-Version: 9.103.1; banners=-,-,-
+X-VirusChecked: Checked
+Received: (qmail 19637 invoked from network); 9 Mar 2023 09:07:21 -0000
+Received: from unknown (HELO n03ukasimr03.n03.fujitsu.local) (62.60.8.98)
+  by server-15.tower-728.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 9 Mar 2023 09:07:21 -0000
+Received: from n03ukasimr03.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr03.n03.fujitsu.local (Postfix) with ESMTP id 73EA91B4
+	for <openembedded-devel@lists.openembedded.org>; Thu,  9 Mar 2023 09:07:20 +0000 (GMT)
+Received: from R01UKEXCASM223.r01.fujitsu.local (R01UKEXCASM223 [10.182.185.121])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by n03ukasimr03.n03.fujitsu.local (Postfix) with ESMTPS id 67E891AE
+	for <openembedded-devel@lists.openembedded.org>; Thu,  9 Mar 2023 09:07:20 +0000 (GMT)
+Received: from localhost.localdomain (10.167.225.33) by
+ R01UKEXCASM223.r01.fujitsu.local (10.182.185.121) with Microsoft SMTP Server
+ (TLS) id 15.0.1497.42; Thu, 9 Mar 2023 09:07:18 +0000
+From: <wangmy@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-oe][PATCH] sg3-utils: upgrade 1.45 -> 1.47
-Date: Thu, 9 Mar 2023 16:43:14 +0800
-Message-ID: <20230309084314.1187137-1-changqing.li@windriver.com>
-X-Mailer: git-send-email 2.25.1
+CC: Wang Mingyu <wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH] unixodbc: Fix install conflict when  enable multilib.
+Date: Thu, 9 Mar 2023 17:07:04 +0800
+Message-ID: <1678352824-32428-2-git-send-email-wangmy@fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
+In-Reply-To: <1678352824-32428-1-git-send-email-wangmy@fujitsu.com>
+References: <1678352824-32428-1-git-send-email-wangmy@fujitsu.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Proofpoint-ORIG-GUID: r476X-logUCfqmqav6n1XIrJSGGxLRCK
-X-Proofpoint-GUID: r476X-logUCfqmqav6n1XIrJSGGxLRCK
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.254,Aquarius:18.0.942,Hydra:6.0.573,FMLib:17.11.170.22
- definitions=2023-03-09_04,2023-03-08_03,2023-02-09_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 mlxscore=0 malwarescore=0
- mlxlogscore=999 clxscore=1015 lowpriorityscore=0 adultscore=0
- impostorscore=0 suspectscore=0 phishscore=0 spamscore=0 priorityscore=1501
- bulkscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2212070000 definitions=main-2303090067
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Originating-IP: [10.167.225.33]
+X-ClientProxiedBy: G08CNEXCHPEKD07.g08.fujitsu.local (10.167.33.80) To
+ R01UKEXCASM223.r01.fujitsu.local (10.182.185.121)
+X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 09 Mar 2023 08:43:19 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101443
+ <openembedded-devel@lists.openembedded.org>; Thu, 09 Mar 2023 09:07:29 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101445
 
-From: Changqing Li <changqing.li@windriver.com>
+From: Wang Mingyu <wangmy@fujitsu.com>
 
-Signed-off-by: Changqing Li <changqing.li@windriver.com>
+Error: Transaction test error:
+  file /usr/include/unixODBC/config.h conflicts between attempted installs of unixodbc-dev-2.3.11-r0.aarch64 and lib32-unixodbc-dev-2.3.11-r0.armv7ahf_neon
+=C2=A0 file /usr/include/unixODBC/unixodbc_conf.h conflicts between attempted installs of unixodbc-dev-2.3.11-r0.aarch64 and lib32-unixodbc-dev-2.3.11-r0.armv7ahf_neon
+=C2=A0 file /usr/include/unixodbc.h conflicts between attempted installs of unixodbc-dev-2.3.11-r0.aarch64 and lib32-unixodbc-dev-2.3.11-r0.armv7ahf_neon
+
+The differences of config.h are as follows:
+@@ -14,7 +14,7 @@
+ /* #undef C_ALLOCA */
+
+ /* Lib directory */
+-#define DEFLIB_PATH "/usr/lib64"
++#define DEFLIB_PATH "/usr/lib"
+
+ /* Using perdriver iconv */
+ /* #undef ENABLE_DRIVER_ICONV */
+@@ -275,7 +275,7 @@
+ #define INCLUDE_PREFIX "/usr/include"
+
+ /* Lib directory */
+-#define LIB_PREFIX "/usr/lib64"
++#define LIB_PREFIX "/usr/lib"
+
+ /* Define to the sub-directory where libtool stores uninstalled libraries. */
+ #define LT_OBJDIR ".libs/"
+@@ -311,7 +311,7 @@
+ #define PACKAGE_VERSION "2.3.11"
+
+ /* Platform is 64 bit */
+-#define PLATFORM64 /**/
++/* #undef PLATFORM64 */
+
+ /* Install prefix */
+ #define PREFIX "/usr"
+@@ -323,10 +323,10 @@
+ #define SHLIBEXT ".so"
+
+ /* The size of `long', as computed by sizeof. */
+-#define SIZEOF_LONG 8
++#define SIZEOF_LONG 4
+
+ /* The size of `long int', as computed by sizeof. */
+-#define SIZEOF_LONG_INT 8
++#define SIZEOF_LONG_INT 4
+
+ /* If using the C implementation of alloca, define if you know the
+    direction of stack growth for your system; otherwise it will be
+@@ -351,7 +351,7 @@
+ #define SYSTEM_FILE_PATH "/etc"
+
+ /* Lib path */
+-#define SYSTEM_LIB_PATH "/usr/lib64"
++#define SYSTEM_LIB_PATH "/usr/lib"
+
+ /* Define to 1 if you can safely include both <sys/time.h> and <time.h>. This
+    macro is obsolete. */
+@@ -383,7 +383,7 @@
+ /* #undef _ALL_SOURCE */
+
+ /* Number of bits in a file offset, on hosts where this is settable. */
+-/* #undef _FILE_OFFSET_BITS */
++#define _FILE_OFFSET_BITS 64
+
+ /* Define to 1 to make fseeko visible on some hosts (e.g. glibc 2.2). */
+ /* #undef _LARGEFILE_SOURCE */
+
+
+The differences of unixodbc_conf.h are as follows:
+@@ -19,7 +19,7 @@
+ /* #undef C_ALLOCA */
+
+ /* Lib directory */
+-#define DEFLIB_PATH "/usr/lib64"
++#define DEFLIB_PATH "/usr/lib"
+
+ /* Using perdriver iconv */
+ /* #undef ENABLE_DRIVER_ICONV */
+@@ -342,7 +342,7 @@
+ #define INCLUDE_PREFIX "/usr/include"
+
+ /* Lib directory */
+-#define LIB_PREFIX "/usr/lib64"
++#define LIB_PREFIX "/usr/lib"
+
+ /* Define if the OS needs help to load dependent libraries for dlopen(). */
+ /* #undef LTDL_DLOPEN_DEPLIBS */
+@@ -396,7 +396,7 @@
+ /* Define to the version of this package. */
+
+ /* Platform is 64 bit */
+-#define PLATFORM64 /**/
++/* #undef PLATFORM64 */
+
+ /* Install prefix */
+ #define PREFIX "/usr"
+@@ -408,7 +408,7 @@
+ #define SHLIBEXT ".so"
+
+ /* The size of `long', as computed by sizeof. */
+-#define SIZEOF_LONG 8
++#define SIZEOF_LONG 4
+
+ /* If using the C implementation of alloca, define if you know the
+    direction of stack growth for your system; otherwise it will be
+@@ -431,7 +431,7 @@
+ #define SYSTEM_FILE_PATH "/etc"
+
+ /* Lib path */
+-#define SYSTEM_LIB_PATH "/usr/lib64"
++#define SYSTEM_LIB_PATH "/usr/lib"
+
+ /* Define to 1 if you can safely include both <sys/time.h> and <time.h>. */
+ #define TIME_WITH_SYS_TIME 1
+
+The differences of unixodbc.h are as follows:
+@@ -14,4 +14,4 @@
+ #define HAVE_UNISTD_H 1
+
+ /* Define to the value of sizeof(long) */
+-#define SIZEOF_LONG_INT 8
++#define SIZEOF_LONG_INT 4
+
+
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../sg3-utils/{sg3-utils_1.45.bb => sg3-utils_1.47.bb}      | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-oe/recipes-support/sg3-utils/{sg3-utils_1.45.bb => sg3-utils_1.47.bb} (72%)
+ meta-oe/recipes-support/unixodbc/unixodbc_2.3.11.bb | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-support/sg3-utils/sg3-utils_1.45.bb b/meta-oe/recipes-support/sg3-utils/sg3-utils_1.47.bb
-similarity index 72%
-rename from meta-oe/recipes-support/sg3-utils/sg3-utils_1.45.bb
-rename to meta-oe/recipes-support/sg3-utils/sg3-utils_1.47.bb
-index ac12f9561..713c9f27d 100644
---- a/meta-oe/recipes-support/sg3-utils/sg3-utils_1.45.bb
-+++ b/meta-oe/recipes-support/sg3-utils/sg3-utils_1.47.bb
-@@ -6,7 +6,7 @@ HOMEPAGE = "http://sg.danny.cz/sg/sg3_utils.html"
- SECTION = "console/admin"
+diff --git a/meta-oe/recipes-support/unixodbc/unixodbc_2.3.11.bb b/meta-oe/recipes-support/unixodbc/unixodbc_2.3.11.bb
+index c7d23d1202..9c461d6be0 100644
+--- a/meta-oe/recipes-support/unixodbc/unixodbc_2.3.11.bb
++++ b/meta-oe/recipes-support/unixodbc/unixodbc_2.3.11.bb
+@@ -15,7 +15,7 @@ SRC_URI[sha256sum] =3D "d9e55c8e7118347e3c66c87338856dad1516b490fb7c756c1562a2c267
  
- LICENSE = "GPL-2.0-or-later & BSD-2-Clause"
--LIC_FILES_CHKSUM = "file://COPYING;md5=f90da7fc52172599dbf082d7620f18ca"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=f685699d3ac82f108aa880043fa3feb7"
+ UPSTREAM_CHECK_REGEX =3D "unixODBC-(=3FP<pver>\d+(\.\d+)+)\.tar"
  
- SRC_URI = "http://sg.danny.cz/sg/p/sg3_utils-${PV}.tgz \
- "
-@@ -14,8 +14,8 @@ MIRRORS += "http://sg.danny.cz/sg/p https://fossies.org/linux/misc"
+-inherit autotools-brokensep
++inherit autotools-brokensep multilib_header
  
- UPSTREAM_CHECK_REGEX = "sg3_utils-(?P<pver>\d+(\.\d+)+)\.tgz"
+ S =3D "${WORKDIR}/unixODBC-${PV}"
  
--SRC_URI[md5sum] = "2e71d7cd925dcc48acb24afaaaac7990"
--SRC_URI[sha256sum] = "0b87c971af52af7cebebcce343eac6bd3d73febb3c72af9ce41a4552f1605a61"
-+SRC_URI[md5sum] = "5c6f6315f36ecf3499e49b1b6dbdc034"
-+SRC_URI[sha256sum] = "8673c7faca849b6b34764332d2aa91f72db05bff7382bb836d0688795199c3e1"
- 
- inherit autotools-brokensep
- 
+@@ -26,3 +26,7 @@ do_configure:prepend() {
+     rm -rf m4/*
+     rm -fr libltdl
+ }
++
++do_install(){
++=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 oe_multilib_header unixodbc.h unixODBC/config.h unixODBC/unixodbc_conf.h
++}
 -- 
-2.25.1
+2.34.1
 
 
