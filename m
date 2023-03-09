@@ -1,150 +1,159 @@
-Return-Path: <yi.zhao@eng.windriver.com>
+Return-Path: <zboszor@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C70CEC742A7
-	for <webhook@archiver.kernel.org>; Thu,  9 Mar 2023 06:03:48 +0000 (UTC)
-Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
- by mx.groups.io with SMTP id smtpd.web10.7087.1678341825134080944
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 02786C64EC4
+	for <webhook@archiver.kernel.org>; Thu,  9 Mar 2023 06:39:09 +0000 (UTC)
+Received: from mail-ed1-f51.google.com (mail-ed1-f51.google.com [209.85.208.51])
+ by mx.groups.io with SMTP id smtpd.web11.7441.1678343943763846486
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 08 Mar 2023 22:03:45 -0800
+ Wed, 08 Mar 2023 22:39:04 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=pps06212021 header.b=OzLPhy7m;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=2432b735dc=yi.zhao@windriver.com)
-Received: from pps.filterd (m0250811.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 3294RJbI021654
-	for <openembedded-devel@lists.openembedded.org>; Thu, 9 Mar 2023 06:03:44 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com; h=from : to :
- subject : date : message-id : content-transfer-encoding : content-type :
- mime-version; s=PPS06212021;
- bh=idocP7Eh84FhptHd9KYHJp+QJVxb2ZuWZwbuf3UUO6I=;
- b=OzLPhy7mMLa3mo6ZZUx+OcuaQ2KtucL8df7OLTzoExk1h7txtjlm4Kx2S7aclsKjZ1aY
- T4bh0WVzWyblk2UtOxc+Y2INPdc6YmGab9eno2yDwNmUuLCR5TmXs1RhDDW2SFvzcqNF
- ki3gWigzrvPOLWJmDw0uJg0cd1BeJS65U5ZTzE3QnrpGd/X86+hI4pKEhae9oDt/wubt
- QkT1BOvqJRh4lcKqJ4nNeP68xxdgDRYt+NeVfZxp155CR11KG5sJ++XSYzvutNcBZCbJ
- QFsgIGAQHk8Bs89iv1xK0DI/jH2p/UPNsGkd1fIQnfsKa8/X5hSg/2k9cQ0nJ94rTi3a 4w== 
-Received: from nam12-dm6-obe.outbound.protection.outlook.com (mail-dm6nam12lp2173.outbound.protection.outlook.com [104.47.59.173])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3p76amr48c-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Thu, 09 Mar 2023 06:03:44 +0000
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=WcUofkP/0l5qYI8dsyd2Vlc2sv5XKOKimx9CL7gPhcdZ6amiIlmXBMpikiz/+lcUCpQ2KlABtRG+vubCpK3xv8MicWxePPi+rov1UsP19GQ8wwpMHtT3C6x6gY/bnN6vCj0ZPRKEcdEReROApe/P2dVuKCFdWKmN9fe+X4hJ4A9za0Jc4FwXhfKx8otezkZz8MVHY1cwJM9Ks4TbaQxEDCxvfCabAmlX4KgMBTgBn0IH6+tyMtO3Q0OfinRIenr7QRx7izFsDFjids8ZI2eB71PxiXYNMDa8oRFpg8Un5v+/MCcZFqiIGz+88WbkUOy0ZMk4k3jaeNe6JHbvaqUpKA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=idocP7Eh84FhptHd9KYHJp+QJVxb2ZuWZwbuf3UUO6I=;
- b=oQxlng48xgpNNUcyhJrB7obBDQcnlTa67bdBkgbL9FlSBk3mHJy/O4PpjNBrNoiNqIcDJqOYdJ05seRgzDdqEmd9SI6wWLuNNoG0OY5LMe2KCZKolyLbYKIkeLk/QqwYWCtcUOWG+P8JBGaIryOHlbeLVPGgEx+Zu3qSmHFMhkqjSuBLIiM1UJz/m4y8cJRkwXRdQftQgtQLHP76aujAHqm/JvJ+Ra3U18bhclZbzfw2JHeLiIwcMvsayhVW8ndqG99nK0+hfTH9Dlcb+Ml4au+kJdNx/0LfH441c3B1fnicya/v7Y3fztdRebU01ge/ITxj69rUs0MGZ8Brd69sbg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=windriver.com; dmarc=pass action=none
- header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
-Received: from CO1PR11MB4867.namprd11.prod.outlook.com (2603:10b6:303:9a::13)
- by IA0PR11MB7863.namprd11.prod.outlook.com (2603:10b6:208:40c::12) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6178.17; Thu, 9 Mar
- 2023 06:03:38 +0000
-Received: from CO1PR11MB4867.namprd11.prod.outlook.com
- ([fe80::42a3:f515:f89b:4eb3]) by CO1PR11MB4867.namprd11.prod.outlook.com
- ([fe80::42a3:f515:f89b:4eb3%5]) with mapi id 15.20.6178.019; Thu, 9 Mar 2023
- 06:03:38 +0000
-From: Yi Zhao <yi.zhao@windriver.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH] packagegroup-meta-oe: enable build libyang on riscv32/64
-Date: Thu,  9 Mar 2023 14:03:23 +0800
-Message-Id: <20230309060324.1860660-1-yi.zhao@windriver.com>
-X-Mailer: git-send-email 2.25.1
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: SGXP274CA0009.SGPP274.PROD.OUTLOOK.COM (2603:1096:4:b8::21)
- To CO1PR11MB4867.namprd11.prod.outlook.com (2603:10b6:303:9a::13)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=FxXGphDs;
+ spf=pass (domain: gmail.com, ip: 209.85.208.51, mailfrom: zboszor@gmail.com)
+Received: by mail-ed1-f51.google.com with SMTP id a25so3115035edb.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 08 Mar 2023 22:39:03 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112; t=1678343942;
+        h=content-transfer-encoding:in-reply-to:from:references:cc:to
+         :content-language:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=qrz5Qe1DNIDt272iN1cWghnfWN1LD1e4N3ZgsnGM5DE=;
+        b=FxXGphDsQ8p9aXmqpC1OeOAw9RyV+QVGAGzdEktUq7m2jGfqC/caxW5NxBUWj1/aDd
+         Xb88kr/DvluJuhFjVebxa1oZw1u932jl8UpbBR+qdZFjcajP49ZXb+eiid9x3nl/1++7
+         djaUKJ0HVe1to7L1xjCMemjxMLNzXYeRuR4FFFDNfI7n8OxROzJZWTZvSiGl11TH0PGa
+         tG2bm4pjJZ6hPk0p4GUaoAfyScJ3SmtBpiOwN0l+zrIJZcJMwEw4/DIOLjxoishe1RcT
+         X4YTe7mhSC9Of+s3QHemsqyrPUeRG9hj46rcKP4nSyBtDcKIMfNRbnZML2jI3fDC2jqY
+         b3JA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112; t=1678343942;
+        h=content-transfer-encoding:in-reply-to:from:references:cc:to
+         :content-language:subject:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=qrz5Qe1DNIDt272iN1cWghnfWN1LD1e4N3ZgsnGM5DE=;
+        b=rsNlwk6BtHuMTtPGcLfaEP8zGD0taT3Bem//2sGmsPBq8PG2TDkYuxPmKyMmRwan2M
+         9OW3fjheC+sOkTDUX4kfQ9g1G0TzR9yY7KUIcC+DLIP3LGCToRfPf6VJwwxhuBR+dw/P
+         thBc+UR0UCV9bNC97T9Qq0QCIH0rAdki6y/9gfuEiHAicrY51x5zgXCYLTXpKsDnGCs6
+         wykehyErSVLYOolSW5PIHbkTN7TBKLg3KivYE2qm+PEqkH6cfifqrQtMZ5PtYsms5Qxv
+         wRK4jv80ELwinmnzCeS8N6xlJHC9GUgsouROf6qY1Q95nm7Kxig021ab8wjpPGt8WUre
+         iKRQ==
+X-Gm-Message-State: AO0yUKX2YZsRO6xZO4GgNq1ERy4pWYUSETtDKC1iQGwxM5159lHxxsnY
+	aPX7j905VBiIMx3KL5qwMrY=
+X-Google-Smtp-Source: AK7set9X5ytvRNciv4myZipdNdQfwKfYoKJeRGGCMBNfkd/Upx8sNtPOni8OpsAAPAhQ7BKY3UmDUA==
+X-Received: by 2002:a17:907:9713:b0:8b1:a3c7:a9c9 with SMTP id jg19-20020a170907971300b008b1a3c7a9c9mr25447864ejc.70.1678343942099;
+        Wed, 08 Mar 2023 22:39:02 -0800 (PST)
+Received: from [192.168.1.143] (BC244571.dsl.pool.telekom.hu. [188.36.69.113])
+        by smtp.gmail.com with ESMTPSA id q18-20020a170906771200b008cc920469b5sm8540522ejm.18.2023.03.08.22.39.01
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Wed, 08 Mar 2023 22:39:01 -0800 (PST)
+Message-ID: <d718385d-7e4e-5750-99fd-5d4984efb025@gmail.com>
+Date: Thu, 9 Mar 2023 07:38:59 +0100
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CO1PR11MB4867:EE_|IA0PR11MB7863:EE_
-X-MS-Office365-Filtering-Correlation-Id: 32bf6f37-be00-4fb3-2e8f-08db2064068c
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 
-	bEzYH+rsHYavHWUalhYzHceizMmim2tG55wFwga8Zrp8eAg5R1piN7na3XyEfPf+dUV4ZenVzMRthsR5AUYcsBvwJ398bnN6Q8oXfUlJe1/RhxvJMUEQe3s07iUGV+wt48AlYW+e8YJ1fonHteV3vgpFp503LeN3uvdJM1eN5F2/GvH0PFsdwPvXPFV0AwGa8gyaAGzUR4QpLU2mhEz92qixoDQhOIGNKQwwdTpMtycIKb7hCK0734SKxi1bNH+nt2F8shxcesiMwzgQIhrzsajV4X/r918QVs7IVC6DQIG8RmCyrDwDVXogpT6a8A50/1srtxsbFk+iRRjscpS/QiindRQjLeiOYyN8NS2+ESC4GBoaApM/upvvl5k8TUWjV42eHghK2WyOQug1PdBHxmTSlnxAhi3J+aLP1giscYqLALt9dQs2ilXtLZ9TPFBSlxz/Yt31Zqlvunt1HrikjjoG221klmdUe+/Z0NQxO0Eh2MN1r+lCFI7uGpxHfGSe7l9g+jcGoMlNvQzE3CbxCyTPCBDJLvD65SUbIvIDuXSfRg+FxZrb2aWA9d/usVUndB8RSrR/tu4pqTl1HDL7tSnO8If6h19CyR9EkrOtBHcs3P1Hxes1/Hlpczhfld2qBQadLoAtv8Ip5aOMOoA0ShMKO4+iZGv1kkXXj6seiwb4NUh378f7n+2fmqyMvAQ3Qh039tesDHzEdy54YUlfaQ==
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CO1PR11MB4867.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230025)(4636009)(376002)(346002)(366004)(39850400004)(136003)(396003)(451199018)(36756003)(83380400001)(6506007)(186003)(6666004)(52116002)(2616005)(26005)(6486002)(6512007)(66946007)(8936002)(41300700001)(66476007)(86362001)(66556008)(8676002)(6916009)(2906002)(5660300002)(44832011)(478600001)(1076003)(38100700002)(38350700002)(316002);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?us-ascii?Q?JcEBxX5J8uIFHZZ4MzX7qe8hWeFwDv9mWOOB4ZmcJV+kpUg0oNAsBlummxGo?=
- =?us-ascii?Q?FD8nkEUgt0MNimZmIucGd1/79GAOoybhhMlfdrv/JxquyRjrx6uJlMFRtnsF?=
- =?us-ascii?Q?4J22g7OD1snKr8Y7GED9UL41jAf98KyqqkBebUKWsPsOMBzY+xxrb7Bwbglh?=
- =?us-ascii?Q?eutyhsyGXU4Hb+Rc70AQ1unkAcSkyCGjiuczWx2ZMVdhLqnES6nMmdAQ2ZKW?=
- =?us-ascii?Q?zFTO1eq8UrX3BSd2LbPPdkSw3Taff5NCxA7ByZVvramPFbRfiOOTVLtttXQk?=
- =?us-ascii?Q?ZbwaDVkwGhAa/JFbphOMuf2r08B9PzJbbBUmTMp+tlakLojk5w907T051Qdr?=
- =?us-ascii?Q?hvfMwwMYrY7iN1sBNDX8b4WWzqwjgbQTxGjtbvMUP1itGwxNOUh7U9/IXZUn?=
- =?us-ascii?Q?VhS6gWUSkOLqzbOcS88afgeGlwm2srIwViLXf2dtAlm6MNyhssa+SmIZuYtD?=
- =?us-ascii?Q?/7w61GnD2zIv9Zk4BtfyK27NnSpW/tKAMxPfPEbR4/VktATGz1ROVhQfLHyR?=
- =?us-ascii?Q?j9gjUTbpWEZFjcImBUf7kUL/ERu6R4Y333gEnABJ8xcCZ3zPQWfJRXtGq78j?=
- =?us-ascii?Q?CnKObd1ykCmWvko6L9pMGywQ6r97JnbTeUZQuOOiP8VFGWHlJ8Atvdn0FVAl?=
- =?us-ascii?Q?70DL0oMx/Qqv8fUwlFIiXo456ZSrCLy25wxvM5I/lE0QvFescMZlcjHGy9p4?=
- =?us-ascii?Q?t3tn2LoDZUog6hzl0ZsVvQlWXTkwg9Vzy2TSd1MipKuq5eUENdEQNsAsGcpw?=
- =?us-ascii?Q?nQ47x9OAxFZi76JSn3fxhM6VsYs5Y6O4fTSaUdZ5AMC9/vpYAN1hdsteCBPT?=
- =?us-ascii?Q?bBkAGbaSBDEbraveEzT4oS4N1QwuDvpGjErdcHfONGqheDH8qO+VdrtzUSUa?=
- =?us-ascii?Q?medvw1SM24kbtrfoqzBzZ2BPU6qlgWbJgmkV2R57ddVEpTPazpFL7rpkCIJl?=
- =?us-ascii?Q?pRnEB97cJKHoBeDtow3SnTwqo2kEscyUkPbDUV/cdyWbBXrleNnPD03tE/O+?=
- =?us-ascii?Q?UkqbygVbUdmFJZraE3BR2J83v6OV/NpLbYySU8BBVk6SqHAG0NDVElP9gIlL?=
- =?us-ascii?Q?0iFbqfI5PKVWSdcnDA3o9vvkvKtNCnQVQ0crO/j6rzZzM7+u4WuuP8aUCWFd?=
- =?us-ascii?Q?U38HoWV4Xe8mA6xQ+RFOfdHaPKpES7SBurC5Z3WlZnbx3JgnabBkC7+ZmUP2?=
- =?us-ascii?Q?PB4mZcvTm8MMuwL3fdb3bw7BXqiCTuS/45EBMES8LVE2nblXa+vZoLK1zj02?=
- =?us-ascii?Q?AgbVCU2te/J425Qd5qzlfunuEBeDVXV9FGIKqTjGT8kr1fOirEePIEotAnnm?=
- =?us-ascii?Q?ONBKrxiqcPYQQfcy1/i/02Jh6qnzanWQKL3Qq8qblyNPw0WFaYcHZe59xmOR?=
- =?us-ascii?Q?K6h5zr1evYBmKa98oOLJy3exSDS+HJleGjvO9hZD3IlT8Lo4AVWu2p7JUXCl?=
- =?us-ascii?Q?EkaTAuE1QNTd0zl8laTvFH0SeOTYOB77ZTnfipKHGjsmMlVHga+y4k1/hpW5?=
- =?us-ascii?Q?yOvaL0tUN5YccCbr4z8hxd9EeaJzPEYxtIEcHF9QlkKm0EYSQzVhzHqXBJHN?=
- =?us-ascii?Q?LvwpDVQlfSQ/5xDLxC0eQZG7X9rHGKyyZJWLdXG5ckrHHlH7iGXEM90BUaBe?=
- =?us-ascii?Q?rQ=3D=3D?=
-X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 32bf6f37-be00-4fb3-2e8f-08db2064068c
-X-MS-Exchange-CrossTenant-AuthSource: CO1PR11MB4867.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Mar 2023 06:03:38.3757
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 9kWXonijyyh2rjYEMu1/u1jhsvOXGTVi+K9o3ByWEcnXQ04UPmHiJpjYBVMyXIOLi5gAvQ4YL/B0jwlU0Uc2Gw==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA0PR11MB7863
-X-Proofpoint-GUID: KSp0HGnu1bUjpjhF_BXJC-xylevrMWHO
-X-Proofpoint-ORIG-GUID: KSp0HGnu1bUjpjhF_BXJC-xylevrMWHO
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.254,Aquarius:18.0.942,Hydra:6.0.573,FMLib:17.11.170.22
- definitions=2023-03-09_02,2023-03-08_03,2023-02-09_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 mlxscore=0 bulkscore=0
- mlxlogscore=462 clxscore=1015 lowpriorityscore=0 malwarescore=0
- adultscore=0 phishscore=0 impostorscore=0 spamscore=0 suspectscore=0
- priorityscore=1501 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2212070000 definitions=main-2303090047
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.8.0
+Subject: Re: [oe] [meta-oe][PATCH] opencv: 4.7.0
+Content-Language: en-US
+To: Khem Raj <raj.khem@gmail.com>
+Cc: openembedded-devel@lists.openembedded.org
+References: <20230308105719.1360985-1-zboszor@gmail.com>
+ <CAMKF1spdVSO46cCcP6vhtkZ3qQu0+Grj=Q1Oqi16oxSvXw_oJw@mail.gmail.com>
+From: =?UTF-8?B?QsO2c3rDtnJtw6lueWkgWm9sdMOhbg==?= <zboszor@gmail.com>
+In-Reply-To: <CAMKF1spdVSO46cCcP6vhtkZ3qQu0+Grj=Q1Oqi16oxSvXw_oJw@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 09 Mar 2023 06:03:48 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101432
+ <openembedded-devel@lists.openembedded.org>; Thu, 09 Mar 2023 06:39:09 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101433
 
-Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
----
- meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+I have seen the previously sent patch only after I sent mine.
+Both are identical changes, so just ignore my patch.
+Thanks.
 
-diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-index 73465def0..318872512 100644
---- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-+++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-@@ -448,8 +448,8 @@ RDEPENDS:packagegroup-meta-oe-extended:remove:mips = "sysdig"
- RDEPENDS:packagegroup-meta-oe-extended:remove:powerpc = "upm mraa minifi-cpp"
- RDEPENDS:packagegroup-meta-oe-extended:remove:powerpc64 = "upm mraa minifi-cpp"
- RDEPENDS:packagegroup-meta-oe-extended:remove:powerpc64le = "upm mraa sysdig"
--RDEPENDS:packagegroup-meta-oe-extended:remove:riscv64 = "upm libleak libyang mraa sysdig tiptop"
--RDEPENDS:packagegroup-meta-oe-extended:remove:riscv32 = "upm libleak libyang mraa sysdig tiptop"
-+RDEPENDS:packagegroup-meta-oe-extended:remove:riscv64 = "upm libleak mraa sysdig tiptop"
-+RDEPENDS:packagegroup-meta-oe-extended:remove:riscv32 = "upm libleak mraa sysdig tiptop"
- 
- RDEPENDS:packagegroup-meta-oe-extended-python2 ="\
-     ${@bb.utils.contains("BBFILE_COLLECTIONS", "meta-python2", bb.utils.contains('I_SWEAR_TO_MIGRATE_TO_PYTHON3', 'yes', 'openlmi-tools', '', d), "", d)} \
--- 
-2.25.1
+2023. 03. 08. 22:58 keltezéssel, Khem Raj írta:
+> I have a version already staged in master-next
+>
+> On Wed, Mar 8, 2023 at 2:57 AM Zoltan Boszormenyi <zboszor@gmail.com> wrote:
+>> Removed an upstream patch.
+>>
+>> Signed-off-by: Zoltán Böszörményi <zboszor@gmail.com>
+>> ---
+>>   ...ng-header-for-LIBAVCODEC_VERSION_INT.patch | 26 -------------------
+>>   .../{opencv_4.6.0.bb => opencv_4.7.0.bb}      |  5 ++--
+>>   2 files changed, 2 insertions(+), 29 deletions(-)
+>>   delete mode 100644 meta-oe/recipes-support/opencv/opencv/0001-Add-missing-header-for-LIBAVCODEC_VERSION_INT.patch
+>>   rename meta-oe/recipes-support/opencv/{opencv_4.6.0.bb => opencv_4.7.0.bb} (98%)
+>>
+>> diff --git a/meta-oe/recipes-support/opencv/opencv/0001-Add-missing-header-for-LIBAVCODEC_VERSION_INT.patch b/meta-oe/recipes-support/opencv/opencv/0001-Add-missing-header-for-LIBAVCODEC_VERSION_INT.patch
+>> deleted file mode 100644
+>> index 59da6ab32..000000000
+>> --- a/meta-oe/recipes-support/opencv/opencv/0001-Add-missing-header-for-LIBAVCODEC_VERSION_INT.patch
+>> +++ /dev/null
+>> @@ -1,26 +0,0 @@
+>> -From d6bdd0a91eb0ed57688c0af5ba5088cf0afdc0a0 Mon Sep 17 00:00:00 2001
+>> -From: Jochen Sprickerhof <jspricke@debian.org>
+>> -Date: Mon, 8 Aug 2022 21:10:13 +0200
+>> -Subject: [PATCH] Add missing header for LIBAVCODEC_VERSION_INT
+>> -
+>> -Upstream-Status: Backport [https://github.com/opencv/opencv/pull/22357]
+>> -Signed-off-by: Khem Raj <raj.khem@gmail.com>
+>> ----
+>> - modules/videoio/src/ffmpeg_codecs.hpp | 1 +
+>> - 1 file changed, 1 insertion(+)
+>> -
+>> -diff --git a/modules/videoio/src/ffmpeg_codecs.hpp b/modules/videoio/src/ffmpeg_codecs.hpp
+>> -index 61788e0345..faad2596ed 100644
+>> ---- a/modules/videoio/src/ffmpeg_codecs.hpp
+>> -+++ b/modules/videoio/src/ffmpeg_codecs.hpp
+>> -@@ -60,6 +60,7 @@ extern "C" {
+>> - #include <errno.h>
+>> - #endif
+>> -
+>> -+#include <libavcodec/version.h>
+>> - #include <libavformat/avformat.h>
+>> -
+>> - #ifdef __cplusplus
+>> ---
+>> -2.38.1
+>> -
+>> diff --git a/meta-oe/recipes-support/opencv/opencv_4.6.0.bb b/meta-oe/recipes-support/opencv/opencv_4.7.0.bb
+>> similarity index 98%
+>> rename from meta-oe/recipes-support/opencv/opencv_4.6.0.bb
+>> rename to meta-oe/recipes-support/opencv/opencv_4.7.0.bb
+>> index 1e4c3545b..eef2e66ca 100644
+>> --- a/meta-oe/recipes-support/opencv/opencv_4.6.0.bb
+>> +++ b/meta-oe/recipes-support/opencv/opencv_4.7.0.bb
+>> @@ -10,8 +10,8 @@ ARM_INSTRUCTION_SET:armv5 = "arm"
+>>
+>>   DEPENDS = "libtool swig-native bzip2 zlib glib-2.0 libwebp"
+>>
+>> -SRCREV_opencv = "b0dc474160e389b9c9045da5db49d03ae17c6a6b"
+>> -SRCREV_contrib = "7b77c355a8fdc97667b3fa1e7a0d37e4973fc868"
+>> +SRCREV_opencv = "725e440d278aca07d35a5e8963ef990572b07316"
+>> +SRCREV_contrib = "e247b680a6bd396f110274b6c214406a93171350"
+>>   SRCREV_boostdesc = "34e4206aef44d50e6bbcd0ab06354b52e7466d26"
+>>   SRCREV_vgg = "fccf7cd6a4b12079f73bbfb21745f9babcd4eb1d"
+>>   SRCREV_face = "8afa57abc8229d611c4937165d20e2a2d9fc5a12"
+>> @@ -30,7 +30,6 @@ SRC_URI = "git://github.com/opencv/opencv.git;name=opencv;branch=master;protocol
+>>              file://0001-Dont-use-isystem.patch \
+>>              file://download.patch \
+>>              file://0001-Make-ts-module-external.patch \
+>> -           file://0001-Add-missing-header-for-LIBAVCODEC_VERSION_INT.patch \
+>>              file://0008-Do-not-embed-build-directory-in-binaries.patch \
+>>              "
+>>   SRC_URI:append:riscv64 = " file://0001-Use-Os-to-compile-tinyxml2.cpp.patch;patchdir=contrib"
+>> --
+>> 2.39.2
+>>
+>>
+>> -=-=-=-=-=-=-=-=-=-=-=-
+>> Links: You receive all messages sent to this group.
+>> View/Reply Online (#101410): https://lists.openembedded.org/g/openembedded-devel/message/101410
+>> Mute This Topic: https://lists.openembedded.org/mt/97469941/1997914
+>> Group Owner: openembedded-devel+owner@lists.openembedded.org
+>> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [raj.khem@gmail.com]
+>> -=-=-=-=-=-=-=-=-=-=-=-
+>>
 
 
