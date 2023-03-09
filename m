@@ -1,91 +1,125 @@
-Return-Path: <twoerner@gmail.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B06A7C64EC4
-	for <webhook@archiver.kernel.org>; Thu,  9 Mar 2023 18:33:24 +0000 (UTC)
-Received: from mail-qt1-f180.google.com (mail-qt1-f180.google.com [209.85.160.180])
- by mx.groups.io with SMTP id smtpd.web10.407.1678386796776950703
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9C607C74A44
+	for <webhook@archiver.kernel.org>; Thu,  9 Mar 2023 19:29:24 +0000 (UTC)
+Received: from mail-oa1-f51.google.com (mail-oa1-f51.google.com [209.85.160.51])
+ by mx.groups.io with SMTP id smtpd.web11.96.1678390163480779669
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 09 Mar 2023 10:33:16 -0800
+ Thu, 09 Mar 2023 11:29:23 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=SHokTXBH;
- spf=pass (domain: gmail.com, ip: 209.85.160.180, mailfrom: twoerner@gmail.com)
-Received: by mail-qt1-f180.google.com with SMTP id y10so3075524qtj.2
-        for <openembedded-devel@lists.openembedded.org>; Thu, 09 Mar 2023 10:33:16 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=Fy6m641H;
+ spf=pass (domain: gmail.com, ip: 209.85.160.51, mailfrom: raj.khem@gmail.com)
+Received: by mail-oa1-f51.google.com with SMTP id 586e51a60fabf-176261d7f45so3388164fac.11
+        for <openembedded-devel@lists.openembedded.org>; Thu, 09 Mar 2023 11:29:23 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112; t=1678386795;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=PH/WSjtXTajsxq6avaVcKADNJALwMhVj1z6WtK7PPB8=;
-        b=SHokTXBHr8flu+qzmvM7w5ryvZ8e4lIMxKVHWn5zXt1M3njUfg0LhdIcIaAw/aGCI7
-         6YPh3B34zqewAcQAfschC6ZTKBmRNHLM+g9vreREmuwGHdIimQ1/lCoqvpAXHONqSxmR
-         83/9ApWIDZtOTGYZQ08FGZ37+A/FpO+YKk1IDIYfalKtR9ghZl+Hrt1UMp3NZ1rYQ5zc
-         UKJ76UaITiHxMKiz30C6blGAXzjlnua0A2TH5VM9p6tZWA3TSLWQcbBiSc7FLzpImB7P
-         qT+Bp/s7cXHa68NCNpC3DOI00s7QBIZfjuR5R2B2eCLa6aNM9+ijp7I3IiOe/eW5C50V
-         7gug==
+        d=gmail.com; s=20210112; t=1678390162;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=AHMyi1nlftJxuBvVgjo2cKBOJGyIU073zCWN6SfQycw=;
+        b=Fy6m641HkuZ4J98Xyul+2WkZ1a3CWspQQVyvBFZZwJeSS0hw2rwZwlJXE9ieVP9nXo
+         por58QbVS8Pzm2tfZzzoLOauiWepZV8LR1H1RqopIq2zwJwZnVr3fzUu1JSU/SMfiRfH
+         jnP6QVF5ukMXw13w889sd3zmIV8nvjqNLzaoAg3j4b0U5GTgmYoxV2P3kL9YqDEaWZtG
+         hQmEa2sWsAnQL2gnmfTdx8bGA9Ok+p5/gbTJuVNhQgTEEnFrYO5jaRoUJ5WqoKNY6U3P
+         DNwtG0/2dTe8LgsAxNnDXqLQyH+CG4AvjfQOb7hBJbxlGO5GKS9Gg5toP7otmmXLxNIZ
+         R10Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112; t=1678386795;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=PH/WSjtXTajsxq6avaVcKADNJALwMhVj1z6WtK7PPB8=;
-        b=S8jlU/KfNrq5qXYLBsDtVhn4tem0WX2AwwG8rQ6Q2jDQsMKKSxjV6sjzlEfq8Xd6Yi
-         KH1KgLkUgOhxTvb94vuVqmJUmOr+IpvGo3BJcXmxzbkHbJ/WsQCTvplnhGNBCLD/MWlw
-         MDGAvBdWfzeyrKs++l0LkOi3slHohiZMP0ZSPe+BpYqRw3moB0oZiF2qrQjYuegZP1fe
-         niV1xuiF8aMa2H3Pipfmp7GtzA0JxY1iq5es9p5nUoHvLUBz32dVNrPxZOvE/Jo1DRYD
-         HoJkGig7IGLbKkm+ZyztrYumrVzw0Dv/e5y3teVUVcTjtEtzAN2bxFv/K6T3ZAHw6BTg
-         zvxw==
-X-Gm-Message-State: AO0yUKVXhB/bGbq0NkB3dZbGE/0x5RZ/93vaKvZH0myTnTSh7Hhb+wKB
-	OuvQWAWqCqx5XyEm3KbPZgjVJ6ByktQ=
-X-Google-Smtp-Source: AK7set/y2kEu7xu20GbY0RM7jhy+Aak8326ghJ3T3UT4gXrg5IybCfhzK082qhSDH+tqzGY933bz0Q==
-X-Received: by 2002:a05:622a:174b:b0:3bf:d9d2:4866 with SMTP id l11-20020a05622a174b00b003bfd9d24866mr31731733qtk.24.1678386795561;
-        Thu, 09 Mar 2023 10:33:15 -0800 (PST)
-Received: from localhost.localdomain (pppoe-209-91-167-254.vianet.ca. [209.91.167.254])
-        by smtp.gmail.com with ESMTPSA id e8-20020ac85988000000b003b9bca1e093sm14339564qte.27.2023.03.09.10.33.14
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 09 Mar 2023 10:33:14 -0800 (PST)
-From: Trevor Woerner <twoerner@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH] hplip: add runtime dependency on ghostscript
-Date: Thu,  9 Mar 2023 13:33:10 -0500
-Message-Id: <20230309183310.35074-1-twoerner@gmail.com>
-X-Mailer: git-send-email 2.36.0.rc2.17.g4027e30c53
+        d=1e100.net; s=20210112; t=1678390162;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=AHMyi1nlftJxuBvVgjo2cKBOJGyIU073zCWN6SfQycw=;
+        b=vk/Of5eEmI5AYriVu+ldLOb7ApukiF7GeI94tkiS4eWadd09bQsvWncJdDnFbAPF/u
+         84SPbscaBEFKiHgZ54k3vs+3GOyPtENOZrZs09UdrK7BMbHCQ+AcDP0CMKdTbwSk5g7W
+         fBVvm7QXdlTt5EfD1vG6GUe0XPqeOr/8fmdNgJmnN0tSkYDFg729no906+G5LxyM5bab
+         TexX/pZdvwJbgVPhibS0E3LpcpLkh0iw4XgFz4NjoiFhh/DUzJdbfDVi9qo82kzxsBFb
+         O2VGYlCuLzzeJD/gAC5aN4m2N7tMISFNfpo+udZtJI6mhF8hK7hW3/NZUQvd3NjMmr3h
+         3lkA==
+X-Gm-Message-State: AO0yUKVW+uuUZC2cvEPgvAz2bPeh/e/sipOSqjpdKqvSBROLAuAH+Ni7
+	kz6mQILLTzKCsn6PM8ZICIhAhqAqz/NswUv2na8=
+X-Google-Smtp-Source: AK7set9hIbL+TT/UfsBkV2GmXNN4jcysP07Kz0Vz9ngfYkoeNKe6siFhKx5iHFtXd4tEVJqIEEvdBDbVh6LD6r4WLMY=
+X-Received: by 2002:a05:6870:8c34:b0:176:68fb:88a6 with SMTP id
+ ec52-20020a0568708c3400b0017668fb88a6mr6666973oab.4.1678390162538; Thu, 09
+ Mar 2023 11:29:22 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20230309084314.1187137-1-changqing.li@windriver.com>
+In-Reply-To: <20230309084314.1187137-1-changqing.li@windriver.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 9 Mar 2023 11:28:56 -0800
+Message-ID: <CAMKF1srUNaowx9zqOak2e3DnHu=WSRJBPhP-XZ=0LwM33TV8GA@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH] sg3-utils: upgrade 1.45 -> 1.47
+To: Changqing Li <changqing.li@eng.windriver.com>
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 09 Mar 2023 18:33:24 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101465
+ <openembedded-devel@lists.openembedded.org>; Thu, 09 Mar 2023 19:29:24 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101466
 
-The fax/filters/pstotiff program invokes /usr/bin/gs and therefore has a
-runtime dependency on ghostscript:
+On Thu, Mar 9, 2023 at 12:43=E2=80=AFAM Changqing Li
+<changqing.li@eng.windriver.com> wrote:
+>
+> From: Changqing Li <changqing.li@windriver.com>
+>
+> Signed-off-by: Changqing Li <changqing.li@windriver.com>
+> ---
+>  .../sg3-utils/{sg3-utils_1.45.bb =3D> sg3-utils_1.47.bb}      | 6 +++---
+>  1 file changed, 3 insertions(+), 3 deletions(-)
+>  rename meta-oe/recipes-support/sg3-utils/{sg3-utils_1.45.bb =3D> sg3-uti=
+ls_1.47.bb} (72%)
+>
+> diff --git a/meta-oe/recipes-support/sg3-utils/sg3-utils_1.45.bb b/meta-o=
+e/recipes-support/sg3-utils/sg3-utils_1.47.bb
+> similarity index 72%
+> rename from meta-oe/recipes-support/sg3-utils/sg3-utils_1.45.bb
+> rename to meta-oe/recipes-support/sg3-utils/sg3-utils_1.47.bb
+> index ac12f9561..713c9f27d 100644
+> --- a/meta-oe/recipes-support/sg3-utils/sg3-utils_1.45.bb
+> +++ b/meta-oe/recipes-support/sg3-utils/sg3-utils_1.47.bb
+> @@ -6,7 +6,7 @@ HOMEPAGE =3D "http://sg.danny.cz/sg/sg3_utils.html"
+>  SECTION =3D "console/admin"
+>
+>  LICENSE =3D "GPL-2.0-or-later & BSD-2-Clause"
+> -LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Df90da7fc52172599dbf082d7620f1=
+8ca"
+> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Df685699d3ac82f108aa880043fa3f=
+eb7"
+>
+>  SRC_URI =3D "http://sg.danny.cz/sg/p/sg3_utils-${PV}.tgz \
+>  "
+> @@ -14,8 +14,8 @@ MIRRORS +=3D "http://sg.danny.cz/sg/p https://fossies.o=
+rg/linux/misc"
+>
+>  UPSTREAM_CHECK_REGEX =3D "sg3_utils-(?P<pver>\d+(\.\d+)+)\.tgz"
+>
+> -SRC_URI[md5sum] =3D "2e71d7cd925dcc48acb24afaaaac7990"
+> -SRC_URI[sha256sum] =3D "0b87c971af52af7cebebcce343eac6bd3d73febb3c72af9c=
+e41a4552f1605a61"
+> +SRC_URI[md5sum] =3D "5c6f6315f36ecf3499e49b1b6dbdc034"
 
-	fax/filters/pstotiff
-	 24 gs_command = "/usr/bin/gs" + " " + font + " " + device
-	 25
-	 26 exit_code = os.system(gs_command)
+md5sum can be dropped.
 
-Signed-off-by: Trevor Woerner <twoerner@gmail.com>
----
- meta-oe/recipes-extended/hplip/hplip_3.22.10.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/meta-oe/recipes-extended/hplip/hplip_3.22.10.bb b/meta-oe/recipes-extended/hplip/hplip_3.22.10.bb
-index d8e249f04796..23cc5197fa51 100644
---- a/meta-oe/recipes-extended/hplip/hplip_3.22.10.bb
-+++ b/meta-oe/recipes-extended/hplip/hplip_3.22.10.bb
-@@ -72,7 +72,7 @@ RDEPENDS:${PN} += " \
-         python3-resource \
-         python3-terminal \
- "
--RDEPENDS:${PN}-filter += "perl"
-+RDEPENDS:${PN}-filter += "perl ghostscript"
- 
- # need to snag the debug file or OE will fail on backend package
- FILES:${PN}-dbg += "\
--- 
-2.36.0.rc2.17.g4027e30c53
-
+> +SRC_URI[sha256sum] =3D "8673c7faca849b6b34764332d2aa91f72db05bff7382bb83=
+6d0688795199c3e1"
+>
+>  inherit autotools-brokensep
+>
+> --
+> 2.25.1
+>
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#101443): https://lists.openembedded.org/g/openembedde=
+d-devel/message/101443
+> Mute This Topic: https://lists.openembedded.org/mt/97492283/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
+aj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
 
