@@ -2,62 +2,62 @@ Return-Path: <changqing.li@eng.windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 652ADC64EC4
-	for <webhook@archiver.kernel.org>; Thu,  9 Mar 2023 08:40:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 64C9DC61DA4
+	for <webhook@archiver.kernel.org>; Thu,  9 Mar 2023 08:40:49 +0000 (UTC)
 Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
- by mx.groups.io with SMTP id smtpd.web10.8635.1678351223143159718
+ by mx.groups.io with SMTP id smtpd.web10.8637.1678351242672699912
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 09 Mar 2023 00:40:23 -0800
+ Thu, 09 Mar 2023 00:40:42 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=pps06212021 header.b=oRdlfVSb;
+ dkim=pass header.i=@windriver.com header.s=pps06212021 header.b=pTG51eLR;
  spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=2432b52167=changqing.li@windriver.com)
-Received: from pps.filterd (m0250811.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 3298ASQ8022413
-	for <openembedded-devel@lists.openembedded.org>; Thu, 9 Mar 2023 08:40:22 GMT
+Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 3297mUE9002619
+	for <openembedded-devel@lists.openembedded.org>; Thu, 9 Mar 2023 08:40:42 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com; h=from : to :
  subject : date : message-id : mime-version : content-transfer-encoding :
  content-type; s=PPS06212021;
  bh=p38yZQEn/w2JyDaE9jRlhUjH0vc529fdG4Kj4wOPJfY=;
- b=oRdlfVSb86c8iMcp1w3dKb9crhv/sFkKDxiiPC9ZVNwrgIW9dqgVGLDIKug6OTUdLv/I
- txQMaiScrMeZRIvGgVk7xy4dFZinZ+2cVIc+5cEL9JDmppm5VkKQyzCO0ojqT2Bevq5K
- iRUqpAG3QqaRaom+qlDgGbbGltG1+nLXqwL7V9HBnOhYm6ak0C2KVkXdPDCAU2/n2dt3
- Lrw09/gcpB5mOfUP9h9Hw7nS4k3pIZXO9LKDc3lUKDKD6PIxv6kzn2MoZM3SeSDlXswh
- ++zYvEiZIgpfE0qkrCFX0/5BCkjedy6UbtMbPfxTpThlF7B6PXIsnaCsL+GgN5jbBAOL dw== 
-Received: from ala-exchng01.corp.ad.wrs.com (unknown-82-252.windriver.com [147.11.82.252])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3p76amr7n2-1
+ b=pTG51eLRAdcBbB6QZWqZgwtq3hdlyZmf4MpC3TqkAoVLOq1bApJnhZt2iEe5urtsH/Qs
+ AQ3xbZLhEla/enQGvksWgEUAe01dfab5CVV8kHVPKI5T2ZExYLdNHr+7yYSSIzzXoWz8
+ p2Ur4mLLQeVQFHuNFkDHjmXWGyVhfRYjQ/LPtuxIDNj+mBbRXQ5J9+wurZ59tImv1ufV
+ j1G/WRvSWuMSfe6UqiEPhK37mI+aT9GTSK6nxBZ9p9NfKOu8JRnX3fEiJiEHPntBvbz4
+ uTTQtnKwjkgDoIPmcFYbPLCtMMmqcqIYBFdja8edv7Mq+pkPBMThf1xMpA6OSNxzVbPs uQ== 
+Received: from ala-exchng02.corp.ad.wrs.com (unknown-82-254.windriver.com [147.11.82.254])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3p6fg6hdn7-1
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Thu, 09 Mar 2023 08:40:22 +0000
+	for <openembedded-devel@lists.openembedded.org>; Thu, 09 Mar 2023 08:40:41 +0000
 Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.17; Thu, 9 Mar 2023 00:40:21 -0800
+ 15.1.2507.18; Thu, 9 Mar 2023 00:40:40 -0800
 Received: from pek-lpg-core2.wrs.com (128.224.153.41) by
  ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
- 15.1.2507.17 via Frontend Transport; Thu, 9 Mar 2023 00:40:20 -0800
+ 15.1.2507.17 via Frontend Transport; Thu, 9 Mar 2023 00:40:39 -0800
 From: <changqing.li@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [PATCH] liblockfile: upgrade 1.14 -> 1.17
-Date: Thu, 9 Mar 2023 16:40:19 +0800
-Message-ID: <20230309084019.1182401-1-changqing.li@windriver.com>
+Subject: [meta-oe][PATCH] liblockfile: upgrade 1.14 -> 1.17
+Date: Thu, 9 Mar 2023 16:40:38 +0800
+Message-ID: <20230309084038.1182832-1-changqing.li@windriver.com>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-Proofpoint-GUID: FptWktLBmpanvwSLEe_I6H9A_mywFpCU
-X-Proofpoint-ORIG-GUID: FptWktLBmpanvwSLEe_I6H9A_mywFpCU
+X-Proofpoint-ORIG-GUID: y7BRm6JfSYfb8UdcWVbStSGWOiegpCcc
+X-Proofpoint-GUID: y7BRm6JfSYfb8UdcWVbStSGWOiegpCcc
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.254,Aquarius:18.0.942,Hydra:6.0.573,FMLib:17.11.170.22
  definitions=2023-03-09_04,2023-03-08_03,2023-02-09_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 mlxscore=0 bulkscore=0
- mlxlogscore=999 clxscore=1015 lowpriorityscore=0 malwarescore=0
- adultscore=0 phishscore=0 impostorscore=0 spamscore=0 suspectscore=0
- priorityscore=1501 classifier=spam adjust=0 reason=mlx scancount=1
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 mlxscore=0 malwarescore=0
+ mlxlogscore=999 clxscore=1015 lowpriorityscore=0 adultscore=0
+ impostorscore=0 suspectscore=0 phishscore=0 spamscore=0 priorityscore=1501
+ bulkscore=0 classifier=spam adjust=0 reason=mlx scancount=1
  engine=8.12.0-2212070000 definitions=main-2303090067
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 09 Mar 2023 08:40:29 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101441
+ <openembedded-devel@lists.openembedded.org>; Thu, 09 Mar 2023 08:40:49 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101442
 
 From: Changqing Li <changqing.li@windriver.com>
 
