@@ -2,75 +2,70 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5B8C8C74A44
-	for <webhook@archiver.kernel.org>; Fri, 10 Mar 2023 06:16:07 +0000 (UTC)
-Received: from mail1.bemta37.messagelabs.com (mail1.bemta37.messagelabs.com [85.158.142.2])
- by mx.groups.io with SMTP id smtpd.web10.13476.1678428954048998512
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7842DC6FA99
+	for <webhook@archiver.kernel.org>; Fri, 10 Mar 2023 06:17:47 +0000 (UTC)
+Received: from mail1.bemta34.messagelabs.com (mail1.bemta34.messagelabs.com [195.245.231.2])
+ by mx.groups.io with SMTP id smtpd.web10.13494.1678429059539201338
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 09 Mar 2023 22:15:58 -0800
+ Thu, 09 Mar 2023 22:17:39 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="body hash did not verify" header.i=@fujitsu.com header.s=170520fj header.b=fX2ag1pT;
- spf=pass (domain: fujitsu.com, ip: 85.158.142.2, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=hlw0xg7E;
+ spf=pass (domain: fujitsu.com, ip: 195.245.231.2, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1678428957; i=@fujitsu.com;
-	bh=+yMdKE5P+TrhphBgKVn9Iz7pTMsyqVRZwM9kHcrgq+Y=;
-	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type:Content-Transfer-Encoding;
-	b=fX2ag1pT0M+FIdwzaS25ifAM5ITmyBZhxjWqJBVqnoBsCxvUmzRItNixJizrfLRRx
-	 VcRPPeL53Whep10uHKikuOAnhlnnVI4INAhOqPIUj12BODwDndWI3Omc6BCNdx8q4M
-	 1pmlyaR9j0o+IMBnELHpwfveH4pt+HXgUs6LGRp6FjfQHDIpaI7wGfIExGdlDX8hMK
-	 b7c2uho569g+Q4mxlACYC/aMpoG6fX6xQ7poz5Rhlb0XdXaNsojyCyyT8Vtq09hYKp
-	 6+uhPmOW4qCUIF4uE0/CcPomxfhLNkYOEEPwMK9N0W1URZcdxZ6Nakkrug3KoeNSFc
-	 Y5aFeAY2FMWuA==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFvrGIsWRWlGSWpSXmKPExsViZ8OxWVfmNFe
-  Kwau7KhYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8b8IzvZClqMK/rfSjcwHtTtYuTiEBJ4wCix
-  vn0KO4RzmUliYet+ZghnD6PE6lf7GLsYOTnYBKQkbtz/zwZiiwjoSyydvYcZxGYWUJF48buHH
-  cQWFnCX2Pn7G1icRUBVonvmNVYQm1fAUeJd63WwGgkBBYkpD9+D1XAKOEncfdvHAmILAdX8fr
-  KYHaJeUOLkzCcsEPM1JVq3/2aHsOUlmrfOZoaYoygx+3IzC4RdIdE4/RAThK0mcfXcJuYJjEK
-  zkIyahWTULCSjFjAyr2I0K04tKkst0jXVSyrKTM8oyU3MzNFLrNJN1Est1c3LLyrJ0DXUSywv
-  1kstLtYrrsxNzknRy0st2cQIDPaU4mSGHYydfX/1DjFKcjApifIqp3KlCPEl5adUZiQWZ8QXl
-  eakFh9ilOHgUJLg3XsCKCdYlJqeWpGWmQOMPJi0BAePkggv6w6gNG9xQWJucWY6ROoUoyXH/m
-  tX9jJzbNrXdYCZ4/Sf6QeYhVjy8vNSpcR5WY8DNQiANGSU5sGNgyWHS4yyUsK8jAwMDEI8Bal
-  FuZklqPKvGMU5GJWEeSVAruLJzCuB2/oK6CAmoIN2beEAOagkESEl1cAk5vDM9/O7WPOPUTfc
-  Reu/lnuf0KqpvW1Z6xWh3/Ut5Xfrtf27Uk4F/0838yqqZYoI+BYzJfSO3iuLbda1flVWh8/p3
-  ozofsP56P2i/CkGToqivBYCn6MPtMRZNV955OjdNqXt0Umu04FvOl+7L6w3NY/Q+cOt3Kp8SX
-  DlBIHJy/h+LX7q8oi598oqOZbPs+4cmrTWZ1XC4aOT2XsUyhNqCtdeTpLKiLDb5SYhuljZp8f
-  3UcnlhY/7Jl+/9sd40pE0Ia4lp6a771/qvHZzh+Lc1ZZsYcomagVMW1SfFj/J2PK0+VeDRqhY
-  uQhz4yFevbaKu+9f8JVNiZinNfPx039PfoR+KWDUFO364xc6v1mJpTgj0VCLuag4EQAdI9UXi
-  QMAAA==
+	s=170520fj; t=1678429057; i=@fujitsu.com;
+	bh=BqQ9g6Bec0lkaMdMGGIGj5gIDVqrQW4rrh0jK2hASUk=;
+	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
+	b=hlw0xg7EDBUyptuY9zohxPF2tOaYJ28Rejii+5Sv5QsnsUADJySysGEoyRxFMBmDM
+	 2hw2VrNs9hGVMhOlBR4Z31FFjBLr81biTc4BvDEpXB3vN7OAOcgru7OA/ww/IjmZAt
+	 2LmDdNbvECVcObw2z5NKdhxaNfGYlTVcvVyBbcWU2jSOkRqW8KEta1tff5L857HhKh
+	 LCAs1Abx7CdKWaWO/AgZY8TI/E0sjP2z/o5hxpFn9hnb69zmJgaZtlueqCmD223k3l
+	 sOYEOO5OqhyHFcOrQbWjNsMne8Gd32XEyKryw7kDZ9JFhb2OmdLhUWMchPwUUpDaYd
+	 dHD+KUsZoyTaw==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFlrPIsWRWlGSWpSXmKPExsViZ8ORpNt4miv
+  F4OAbFouLh5cyOzB6nNu4gjGAMYo1My8pvyKBNaNp0lX2gvXSFe8vb2FsYNwj0cXIxSEk8JBR
+  4srhFawQzhUmic3dLxghnD2MEj13XzB3MXJysAlISdy4/58NxBYR0JdYOnsPWJxZQEXixe8ed
+  hBbWCBA4uPWZjCbRUBVYsHpfawgNq+Ao8S/dV/AbAkBBYkpD98zQ8QFJU7OfMICMUdC4uALiF
+  0SAooSsy83s0DYFRKN0w8xQdhqElfPbWKewMg/C0n7LCTtCxiZVjGaFacWlaUW6Roa6CUVZaZ
+  nlOQmZuboJVbpJuqlluqWpxaX6BrpJZYX66UWF+sVV+Ym56To5aWWbGIEhmNKsSLrDsZLfX/1
+  DjFKcjApifIqp3KlCPEl5adUZiQWZ8QXleakFh9ilOHgUJLglQQGuJBgUWp6akVaZg4wNmDSE
+  hw8SiK8rDuA0rzFBYm5xZnpEKlTjIpS4rysx4ESAiCJjNI8uDZYPF5ilJUS5mVkYGAQ4ilILc
+  rNLEGVf8UozsGoJMwrcQJoCk9mXgnc9FdAi5mAFu/awgGyuCQRISXVwLR506m11YV7fVLVrxy
+  sWZKWJfTl27bq/Uw7Hea31WyWXrstjVus5mOUj4PVNt2+BTFRfe7flzcaFEiqPYltuyN895mg
+  weVlMtuNXOyjy+15A9lOWPF17jsiWvT4R+nHPS8FQ6Uyz+runPYr8la4wGkPkbMc608zzIrL/
+  +3et6XCc3/jJgt/46ZX1hsjRJk+iHNLy9aUijU+ywzdfWKmf2bNd+6XLR82OPDXJdUXJfNX+j
+  19e+78cUb9NuVOg7+Vmzx8CnN55/geuSwYMP/v7L76DlszNn6WeXoOT5dvOqe57V5+jXTVC91
+  uU49jyte+PgmRCwyf8XVCp9jRcsl23kdaZufiD/HrHOHycOlRYinOSDTUYi4qTgQAEe+j5EID
+  AAA=
 X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-19.tower-732.messagelabs.com!1678428956!1123123!1
-X-Originating-IP: [62.60.8.179]
+X-Msg-Ref: server-11.tower-571.messagelabs.com!1678429056!51404!1
+X-Originating-IP: [62.60.8.98]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.103.1; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 21275 invoked from network); 10 Mar 2023 06:15:56 -0000
-Received: from unknown (HELO n03ukasimr04.n03.fujitsu.local) (62.60.8.179)
-  by server-19.tower-732.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 10 Mar 2023 06:15:56 -0000
-Received: from n03ukasimr04.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTP id ED1BD7C
-	for <openembedded-devel@lists.openembedded.org>; Fri, 10 Mar 2023 06:15:55 +0000 (GMT)
+Received: (qmail 28661 invoked from network); 10 Mar 2023 06:17:37 -0000
+Received: from unknown (HELO n03ukasimr03.n03.fujitsu.local) (62.60.8.98)
+  by server-11.tower-571.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 10 Mar 2023 06:17:37 -0000
+Received: from n03ukasimr03.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr03.n03.fujitsu.local (Postfix) with ESMTP id C0BD51B1
+	for <openembedded-devel@lists.openembedded.org>; Fri, 10 Mar 2023 06:17:36 +0000 (GMT)
 Received: from R01UKEXCASM121.r01.fujitsu.local (R01UKEXCASM121 [10.183.43.173])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTPS id E05077B
-	for <openembedded-devel@lists.openembedded.org>; Fri, 10 Mar 2023 06:15:55 +0000 (GMT)
+	by n03ukasimr03.n03.fujitsu.local (Postfix) with ESMTPS id B5DBA1AE
+	for <openembedded-devel@lists.openembedded.org>; Fri, 10 Mar 2023 06:17:36 +0000 (GMT)
 Received: from localhost.localdomain (10.167.225.33) by
  R01UKEXCASM121.r01.fujitsu.local (10.183.43.173) with Microsoft SMTP Server
- (TLS) id 15.0.1497.42; Fri, 10 Mar 2023 06:15:54 +0000
+ (TLS) id 15.0.1497.42; Fri, 10 Mar 2023 06:17:35 +0000
 From: <wangmy@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-oe] [PATCH 08/11] raptor2: upgrade 2.0.15 -> 2.0.16
-Date: Fri, 10 Mar 2023 14:15:35 +0800
-Message-ID: <1678428937-7700-3-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-webserver] [PATCH 11/11] spawn-fcgi: upgrade 1.6.4  -> 1.6.5
+Date: Fri, 10 Mar 2023 14:17:25 +0800
+Message-ID: <1678429045-7797-1-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
-In-Reply-To: <1678428937-7700-1-git-send-email-wangmy@fujitsu.com>
-References: <1678428937-7700-1-git-send-email-wangmy@fujitsu.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain
 X-Originating-IP: [10.167.225.33]
 X-ClientProxiedBy: G08CNEXCHPEKD07.g08.fujitsu.local (10.167.33.80) To
  R01UKEXCASM121.r01.fujitsu.local (10.183.43.173)
@@ -78,159 +73,88 @@ X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 10 Mar 2023 06:16:07 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101480
+ <openembedded-devel@lists.openembedded.org>; Fri, 10 Mar 2023 06:17:47 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101483
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
-0001-Match-reutrn-type-from-RAPTOR_ASSERT_OBJECT_POINTER_.patch
-0001-configure.ac-do-additional-checks-on-libxml2-also-wh.patch
-removed since they're included in 2.0.16
-
-License-Update:
- Copyright year updatd to 2023.
- "David Beckett" changed to "Dave Beckett"
- URL from http changed to https
+fix_configure_ipv6_test.patch
+removed since it's included in 1.6.5
 
 Changelog:
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
--  Fixes CVE-2017-18926 and CVE-2020-25713
--  Multiple Appveyor Windows and CMake build fixes by 0u812. (Note: the
-   resulting binaries and libraries were not tested on Windows)
--  Turtle parser now reads input in chunks so can handle huge files. Patch
--  Added a serializer for the mKR language. 
--  Rapper utility now counts triples using longs
--  Several smaller portability fixes for OpenBSD and cross building
+==========
+  * Configure script cleanups (fixing detection of IPv6)
+  * Update links and email addresses
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- ...e-from-RAPTOR_ASSERT_OBJECT_POINTER_.patch | 47 -------------------
- ...additional-checks-on-libxml2-also-wh.patch | 32 -------------
- .../{raptor2_2.0.15.bb =3D> raptor2_2.0.16.bb}  |  7 +--
- 3 files changed, 2 insertions(+), 84 deletions(-)
- delete mode 100644 meta-oe/recipes-support/raptor2/files/0001-Match-reutrn-type-from-RAPTOR_ASSERT_OBJECT_POINTER_.patch
- delete mode 100644 meta-oe/recipes-support/raptor2/files/0001-configure.ac-do-additional-checks-on-libxml2-also-wh.patch
- rename meta-oe/recipes-support/raptor2/{raptor2_2.0.15.bb =3D> raptor2_2.0.16.bb} (61%)
+ .../fix_configure_ipv6_test.patch             | 35 -------------------
+ ...pawn-fcgi_1.6.4.bb => spawn-fcgi_1.6.5.bb} |  6 ++--
+ 2 files changed, 2 insertions(+), 39 deletions(-)
+ delete mode 100644 meta-webserver/recipes-support/spawn-fcgi/spawn-fcgi-1.6.4/fix_configure_ipv6_test.patch
+ rename meta-webserver/recipes-support/spawn-fcgi/{spawn-fcgi_1.6.4.bb => spawn-fcgi_1.6.5.bb} (66%)
 
-diff --git a/meta-oe/recipes-support/raptor2/files/0001-Match-reutrn-type-from-RAPTOR_ASSERT_OBJECT_POINTER_.patch b/meta-oe/recipes-support/raptor2/files/0001-Match-reutrn-type-from-RAPTOR_ASSERT_OBJECT_POINTER_.patch
+diff --git a/meta-webserver/recipes-support/spawn-fcgi/spawn-fcgi-1.6.4/fix_configure_ipv6_test.patch b/meta-webserver/recipes-support/spawn-fcgi/spawn-fcgi-1.6.4/fix_configure_ipv6_test.patch
 deleted file mode 100644
-index 4c1afb46e..000000000
---- a/meta-oe/recipes-support/raptor2/files/0001-Match-reutrn-type-from-RAPTOR_ASSERT_OBJECT_POINTER_.patch
+index 9409dd2b1..000000000
+--- a/meta-webserver/recipes-support/spawn-fcgi/spawn-fcgi-1.6.4/fix_configure_ipv6_test.patch
 +++ /dev/null
-@@ -1,47 +0,0 @@
--From 97b5dcaa6b221eb403cc92e953225d38aee18f70 Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Thu, 1 Sep 2022 14:48:39 -0700
--Subject: [PATCH] Match reutrn type from
-- RAPTOR_ASSERT_OBJECT_POINTER_RETURN_VALUE
+@@ -1,35 +0,0 @@
+-Testing for IPv6 support got broken by configure.ac changes in 1.6.4
+-As a temp workaround, revert back to the 1.6.3 version.
 -
--This ensures that integer type 0 is returned and not NULL
--Fixes
--raptor_serialize.c:243:66: error: incompatible pointer to integer conversion returning 'void *' from a function with result type 'int' [-Wint-conversion]
--  RAPTOR_ASSERT_OBJECT_POINTER_RETURN_VALUE(world, raptor_world, NULL);
--                                                                 ^~~~
 -Upstream-Status: Pending
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
-- src/raptor_parse.c     | 2 +-
-- src/raptor_serialize.c | 2 +-
-- 2 files changed, 2 insertions(+), 2 deletions(-)
 -
--diff --git a/src/raptor_parse.c b/src/raptor_parse.c
--index 26911f4..0091e1e 100644
----- a/src/raptor_parse.c
--+++ b/src/raptor_parse.c
--@@ -257,7 +257,7 @@ raptor_world_get_parser_factory(raptor_world *world, const char *name)
-- int
-- raptor_world_get_parsers_count(raptor_world* world)
-- {
---  RAPTOR_ASSERT_OBJECT_POINTER_RETURN_VALUE(world, raptor_world, NULL);
--+  RAPTOR_ASSERT_OBJECT_POINTER_RETURN_VALUE(world, raptor_world, 0);
+---- spawn-fcgi-1.6.4/configure.ac
+-+++ spawn-fcgi-1.6.3/configure.ac
+-@@ -66,8 +47,8 @@
+- # Check for IPv6 support
 - 
--   raptor_world_open(world);
+- AC_ARG_ENABLE(ipv6,
+--  AC_HELP_STRING([--disable-ipv6],[disable IPv6 support]),
+--  [case "${enableval}" in
+-+ AC_HELP_STRING([--disable-ipv6],[disable IPv6 support]),
+-+ [case "${enableval}" in
+-    yes) ipv6=true ;;
+-     no) ipv6=false ;;
+-      *) AC_MSG_ERROR(bad value ${enableval} for --enable-ipv6) ;;
+-@@ -75,13 +56,10 @@
 - 
--diff --git a/src/raptor_serialize.c b/src/raptor_serialize.c
--index a1f29d7..2bf4ab2 100644
----- a/src/raptor_serialize.c
--+++ b/src/raptor_serialize.c
--@@ -240,7 +240,7 @@ raptor_get_serializer_factory(raptor_world* world, const char *name)
-- int
-- raptor_world_get_serializers_count(raptor_world* world)
-- {
---  RAPTOR_ASSERT_OBJECT_POINTER_RETURN_VALUE(world, raptor_world, NULL);
--+  RAPTOR_ASSERT_OBJECT_POINTER_RETURN_VALUE(world, raptor_world, 0);
+- if test x$ipv6 = xtrue; then
+-   AC_CACHE_CHECK([for IPv6 support], ac_cv_ipv6_support,
+--    [AC_TRY_LINK([[
+--#include <sys/types.h>
+-+  [AC_TRY_LINK([ #include <sys/types.h>
+- #include <sys/socket.h>
+--#include <netinet/in.h>
+--    ]], [[
+--struct sockaddr_in6 s; struct in6_addr t=in6addr_any; int i=AF_INET6; s; t.s6_addr[0] = 0;
+--    ]], [ac_cv_ipv6_support=yes], [ac_cv_ipv6_support=no])])
+-+#include <netinet/in.h>], [struct sockaddr_in6 s; struct in6_addr t=in6addr_any; int i=AF_INET6; s; t.s6_addr[0] = 0; ],
+-+  [ac_cv_ipv6_support=yes], [ac_cv_ipv6_support=no])])
 - 
--   raptor_world_open(world);
-- 
---- 
--2.37.3
--
-diff --git a/meta-oe/recipes-support/raptor2/files/0001-configure.ac-do-additional-checks-on-libxml2-also-wh.patch b/meta-oe/recipes-support/raptor2/files/0001-configure.ac-do-additional-checks-on-libxml2-also-wh.patch
-deleted file mode 100644
-index 490b61f1f..000000000
---- a/meta-oe/recipes-support/raptor2/files/0001-configure.ac-do-additional-checks-on-libxml2-also-wh.patch
-+++ /dev/null
-@@ -1,32 +0,0 @@
--From 3f97aac5a1f43ef57b02fb9ccdcadd41a6b69fa9 Mon Sep 17 00:00:00 2001
--From: =3D=3FUTF-8=3Fq=3FAndreas=3D20M=3DC3=3DBCller=3F=3D <schnitzeltony@googlemail.com>
--Date: Tue, 27 Oct 2015 10:21:24 +0100
--Subject: [PATCH] configure.ac: do additional checks on libxml2 also when
-- detected by pkg-config
--MIME-Version: 1.0
--Content-Type: text/plain; charset=3DUTF-8
--Content-Transfer-Encoding: 8bit
--
--Upstream-Status: Backport [https://github.com/dajobe/raptor/commit/e75b1dbb7f2a6514b8d391b200c45a2bec6268bf]
--
--Signed-off-by: Andreas M=C3=BCller <schnitzeltony@googlemail.com>
-----
-- configure.ac | 2 +-
-- 1 file changed, 1 insertion(+), 1 deletion(-)
--
--diff --git a/configure.ac b/configure.ac
--index 10ff870..35fa08e 100644
----- a/configure.ac
--+++ b/configure.ac
--@@ -601,7 +601,7 @@ have_libxml=3D0
-- need_libxml=3D0
-- 
-- oCPPFLAGS=3D"$CPPFLAGS"
---if test "X$XML_CONFIG" !=3D X; then
--+if test "X$libxml_source" !=3D X; then
--   CPPFLAGS=3D"$LIBXML_CFLAGS $CPPFLAGS"
--   LIBS=3D"$LIBS $LIBXML_LIBS"
--   AC_CHECK_FUNC(xmlCreatePushParserCtxt, have_xmlCreatePushParserCtxt=3Dyes, have_xmlCreatePushParserCtxt=3Dno)
---- 
--2.1.0
--
-diff --git a/meta-oe/recipes-support/raptor2/raptor2_2.0.15.bb b/meta-oe/recipes-support/raptor2/raptor2_2.0.16.bb
-similarity index 61%
-rename from meta-oe/recipes-support/raptor2/raptor2_2.0.15.bb
-rename to meta-oe/recipes-support/raptor2/raptor2_2.0.16.bb
-index 22306a5c1..169911276 100644
---- a/meta-oe/recipes-support/raptor2/raptor2_2.0.15.bb
-+++ b/meta-oe/recipes-support/raptor2/raptor2_2.0.16.bb
-@@ -1,7 +1,7 @@
- SUMMARY =3D "Library for parsing and serializing RDF syntaxes"
- LICENSE =3D "GPL-2.0-only | LGPL-2.1-only | Apache-2.0"
- LIC_FILES_CHKSUM =3D " \
--    file://LICENSE.txt;md5=3Db840e5ae3aeb897f45b473341348cd9c \
-+    file://LICENSE.txt;md5=3Df7fed8b6ab9289b77f5c14f3f79572cc \
-     file://COPYING;md5=3D751419260aa954499f7abaabaa882bbe \
-     file://COPYING.LIB;md5=3D2d5025d4aa3495befef8f17206a5b0a1 \
-     file://LICENSE-2.0.txt;md5=3D3b83ef96387f14655fc854ddc3c6bd57 \
-@@ -11,11 +11,8 @@ DEPENDS =3D "libxml2 libxslt curl yajl"
+-   if test "$ac_cv_ipv6_support" = yes; then
+-     AC_DEFINE(HAVE_IPV6,1,[Whether to enable IPv6 support])
+diff --git a/meta-webserver/recipes-support/spawn-fcgi/spawn-fcgi_1.6.4.bb b/meta-webserver/recipes-support/spawn-fcgi/spawn-fcgi_1.6.5.bb
+similarity index 66%
+rename from meta-webserver/recipes-support/spawn-fcgi/spawn-fcgi_1.6.4.bb
+rename to meta-webserver/recipes-support/spawn-fcgi/spawn-fcgi_1.6.5.bb
+index 808d4528c..307919f77 100644
+--- a/meta-webserver/recipes-support/spawn-fcgi/spawn-fcgi_1.6.4.bb
++++ b/meta-webserver/recipes-support/spawn-fcgi/spawn-fcgi_1.6.5.bb
+@@ -4,11 +4,9 @@ HOMEPAGE = "http://redmine.lighttpd.net/projects/spawn-fcgi"
+ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=e4dac5c6ab169aa212feb5028853a579"
  
- SRC_URI =3D " \
-     http://download.librdf.org/source/${BPN}-${PV}.tar.gz \
--    file://0001-configure.ac-do-additional-checks-on-libxml2-also-wh.patch \
--    file://0001-Match-reutrn-type-from-RAPTOR_ASSERT_OBJECT_POINTER_.patch \
- "
--SRC_URI[md5sum] =3D "a39f6c07ddb20d7dd2ff1f95fa21e2cd"
--SRC_URI[sha256sum] =3D "ada7f0ba54787b33485d090d3d2680533520cd4426d2f7fb4782dd4a6a1480ed"
-+SRC_URI[sha256sum] =3D "089db78d7ac982354bdbf39d973baf09581e6904ac4c92a98c5caadb3de44680"
+-SRC_URI = "http://download.lighttpd.net/spawn-fcgi/releases-1.6.x/spawn-fcgi-${PV}.tar.gz \
+-           file://fix_configure_ipv6_test.patch"
++SRC_URI = "http://download.lighttpd.net/spawn-fcgi/releases-1.6.x/spawn-fcgi-${PV}.tar.gz"
  
- inherit autotools pkgconfig
+-SRC_URI[md5sum] = "e970de4efe8045c01dd76280f39901aa"
+-SRC_URI[sha256sum] = "ab327462cb99894a3699f874425a421d934f957cb24221f00bb888108d9dd09e"
++SRC_URI[sha256sum] = "a72d7bf7fb6d1a0acda89c93d4f060bf77a2dba97ddcfecd00f11e708f592c40"
+ 
+ inherit autotools
  
 -- 
 2.34.1
