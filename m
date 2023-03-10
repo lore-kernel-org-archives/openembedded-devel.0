@@ -2,69 +2,69 @@ Return-Path: <zboszor@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6C80BC6FD1E
-	for <webhook@archiver.kernel.org>; Fri, 10 Mar 2023 13:39:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 97931C6FA99
+	for <webhook@archiver.kernel.org>; Fri, 10 Mar 2023 13:46:49 +0000 (UTC)
 Received: from mail-ed1-f53.google.com (mail-ed1-f53.google.com [209.85.208.53])
- by mx.groups.io with SMTP id smtpd.web11.19124.1678455553029406723
+ by mx.groups.io with SMTP id smtpd.web10.19291.1678456002981983929
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 10 Mar 2023 05:39:13 -0800
+ Fri, 10 Mar 2023 05:46:43 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=K+JILTjM;
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=mj5B+jzw;
  spf=pass (domain: gmail.com, ip: 209.85.208.53, mailfrom: zboszor@gmail.com)
-Received: by mail-ed1-f53.google.com with SMTP id a25so20727732edb.0
-        for <openembedded-devel@lists.openembedded.org>; Fri, 10 Mar 2023 05:39:12 -0800 (PST)
+Received: by mail-ed1-f53.google.com with SMTP id a25so20817558edb.0
+        for <openembedded-devel@lists.openembedded.org>; Fri, 10 Mar 2023 05:46:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112; t=1678455551;
+        d=gmail.com; s=20210112; t=1678456001;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
         bh=892xQiXIHyGl7fnt1P6uNmJqdGQ9J+piZbcxNFOh/Hw=;
-        b=K+JILTjMpVdDAfifrh+IWDIIOk9+ChvQ9atrDDED/wxnzv0zHlVolIsBTXRHcG2+eU
-         oZ2PgZgE+POIEu1EnIfEU94UlcIso4DhuZ5rZ6i5ZKtWKrerEEkH+hNjKvQ6VKeYxeEa
-         M+onL3JO8EiT85hbX9qfGv4TfntrRcop82y/wv/ir+sPBHRmfdCbfmqqAPftajUd8bZP
-         4rt5Fs+30NqxXgPULhcjuPFOfr2moymUBQM+4nRRK+TT0VVPrmYQZwtcLWwuykfontfY
-         I9amSp61z3/mp8wEKwIW2HGaraFo68PS2S8PlPM2L6kfRHKRBQjMvVmot53QlGf8cBPg
-         UhIw==
+        b=mj5B+jzwRoMPsYhKW03ZOjvp2YlREFqCVYsXGuikvxQTQcJ3sV533UQG3r1a9Iphur
+         H106HnfZYaFp4kIFHtt0jieVMHh+EobQV19q+bTyAHuzg89wGMV1Qu+BvtESIYQczV4U
+         l/k6WKR0pxRsc7CCG0D+m5RT3JEJ+M9BiYmzErRmpixsZm0FUW4OBvNBgJjY6yHcY+7+
+         GMpk/Dd8TKiKn6FTKFg0jvlDvreTyLJ7qhu0XTXelsVEZE1qxzEoFJa37RY541zB3LNm
+         kwg5+192g+NyvwSLZn5Y4LcAZfikpxtQ6K0i9mpRFSwb7zHExbHvDm8UklehV8jMf7yo
+         DY9g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112; t=1678455551;
+        d=1e100.net; s=20210112; t=1678456001;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
         bh=892xQiXIHyGl7fnt1P6uNmJqdGQ9J+piZbcxNFOh/Hw=;
-        b=E9ncm6YgvBK73vtnWbb1EUiaEq/L1kO7nYYlt9fvR35NLajPFIErGQPskcPGnttTEy
-         2mvolKPJYzO7PtzdHiOuQLB6/49nn+5cXKXSE8+7whYZ1JJqtkigd05ExXa/my4P+D3Z
-         My+++LbSokSEajo7DyUAkUbGHPP6+42LqRE0eWRSbQ/xr/ObqN0ws10dJY+xrntc5Hz0
-         HFMR3W6UCSirj7sA7yqfawRiYdn0oPsMaPPQt7b6IDHeaF5T9uy2182dhExOQYdKc2ki
-         jG0ZbV1wfsVWYIPftfwGvz4/H4O+po1cKS4ONtbJo1qAbksl/GXtOyvu/kCZl/ORtVdW
-         mASg==
-X-Gm-Message-State: AO0yUKVzAsZY5iarHrLlw08qsbgCI391nR4ihPD2fw1BDd/zeRxPsZ4N
-	E1b4kLUFz8W3eXlJZBZ+ClUX3vOInwe82w==
-X-Google-Smtp-Source: AK7set+fGiDWVRQFlpG0GT4/dSyybgqidZCG7pyCiU/ysK85Y0pWM9A6W3yHMTKOOoyM1Zn33FaxvQ==
-X-Received: by 2002:a17:906:b10d:b0:89f:1a76:e2dc with SMTP id u13-20020a170906b10d00b0089f1a76e2dcmr24165932ejy.0.1678455549497;
-        Fri, 10 Mar 2023 05:39:09 -0800 (PST)
+        b=E3hjMjT+NWNTHYXkatuFbFnjTzGcpoE0MZJf4ae3ygzsOX4pN9WH/oZcOTqN2EviGx
+         KAfUFpMfx+Zv+C27XD/XKX7sYMRvhKAho25D6XLBvn0VwD4hEiMfEBcDL5AcpKD3Fv36
+         TST8ftpHpqlasEh2wXNEVuAxtNMqqxPHeLByGFybgHq/Dp3y4+PUTVyKkF0MhHYGCEc8
+         a4qHmLfAl6hIudy3RIwI6JvusX6CReYsx4o+7zLO8w4y7mZNu0W1koaEg8R2vXV2ltaS
+         93zLlyobx+/6Y1DMCp/d9Wr8BEeP7pECkTVzmIZN9ybETXOoVpaDMflsaNHZ1A+aR0gz
+         CqTA==
+X-Gm-Message-State: AO0yUKV6cbcWmu3tCuGuWKlTqlcDp4PYFr30269SUfzzPu3Ky8+t9ZP7
+	T99mezUkGHqZdlB8CFMeYSxZofy2OUckNg==
+X-Google-Smtp-Source: AK7set+LiImulcavHa6BCvhkvIC2zXkV/TzRG7fafwoBgg/BCI5EMnCALAuofsQ6+6dZPo5VhRGZqA==
+X-Received: by 2002:a17:907:7216:b0:86a:316:d107 with SMTP id dr22-20020a170907721600b0086a0316d107mr33166560ejc.72.1678456001253;
+        Fri, 10 Mar 2023 05:46:41 -0800 (PST)
 Received: from localhost.lan (BC244571.dsl.pool.telekom.hu. [188.36.69.113])
-        by smtp.gmail.com with ESMTPSA id p25-20020a50cd99000000b004c041723816sm20562edi.89.2023.03.10.05.39.08
+        by smtp.gmail.com with ESMTPSA id o26-20020a1709062e9a00b008b17fe9ac6csm980198eji.178.2023.03.10.05.46.40
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 10 Mar 2023 05:39:09 -0800 (PST)
+        Fri, 10 Mar 2023 05:46:40 -0800 (PST)
 From: =?UTF-8?q?Zolt=C3=A1n=20B=C3=B6sz=C3=B6rm=C3=A9nyi?= <zboszor@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Tim moto-timo Orling <TicoTimo@gmail.com>,
 	Derek Straka <derek@asterius.io>,
 	=?UTF-8?q?Zolt=C3=A1n=20B=C3=B6sz=C3=B6rm=C3=A9nyi?= <zboszor@gmail.com>
-Subject: [meta-python][PATCH 3/3] python3-ninja: New recipe
-Date: Fri, 10 Mar 2023 14:39:01 +0100
-Message-Id: <20230310133901.4144306-3-zboszor@gmail.com>
+Subject: [meta-python][PATCH v2 3/3] python3-ninja: New recipe
+Date: Fri, 10 Mar 2023 14:46:37 +0100
+Message-Id: <20230310134637.108312-3-zboszor@gmail.com>
 X-Mailer: git-send-email 2.39.2
-In-Reply-To: <20230310133901.4144306-1-zboszor@gmail.com>
-References: <20230310133901.4144306-1-zboszor@gmail.com>
+In-Reply-To: <20230310134637.108312-1-zboszor@gmail.com>
+References: <20230310134637.108312-1-zboszor@gmail.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 10 Mar 2023 13:39:19 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101488
+ <openembedded-devel@lists.openembedded.org>; Fri, 10 Mar 2023 13:46:49 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101491
 
 Some python modules rely on "import ninja".
 
