@@ -1,398 +1,351 @@
-Return-Path: <changqing.li@eng.windriver.com>
+Return-Path: <leimaohui@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0F7D7C64EC4
-	for <webhook@archiver.kernel.org>; Fri, 10 Mar 2023 01:15:06 +0000 (UTC)
-Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.web10.8578.1678410902005557747
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9009BC64EC4
+	for <webhook@archiver.kernel.org>; Fri, 10 Mar 2023 02:56:06 +0000 (UTC)
+Received: from esa15.fujitsucc.c3s2.iphmx.com (esa15.fujitsucc.c3s2.iphmx.com [68.232.156.107])
+ by mx.groups.io with SMTP id smtpd.web11.10461.1678416960907099369
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 09 Mar 2023 17:15:02 -0800
+ Thu, 09 Mar 2023 18:56:01 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=pps06212021 header.b=Ggvx0Y2t;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=24331f10aa=changqing.li@windriver.com)
-Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 32A0TsSu025951
-	for <openembedded-devel@lists.openembedded.org>; Thu, 9 Mar 2023 17:15:01 -0800
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com; h=from : to :
- subject : date : message-id : mime-version : content-transfer-encoding :
- content-type; s=PPS06212021;
- bh=XpLNLnletZI7l7UQfEm/mPuW+4clqt14aMM9zr7UtU0=;
- b=Ggvx0Y2tT6j9okH5SjFWrRpF0XZIyhnpTJIQ1N/ilZO/HZOG5mV/nBoc6xMkr8mW1ZBT
- ekkLL+/LRrxMf9Nyw4IUYq1kQgDt2T5POt3wp12axrTSeUCmzMlCyb837y4j6liF+YaG
- c32wkBmYsgTyDf7ZzlqnHLkASFqgVPTeOIT/dQ3oTQzmm74zmXAD2D7YMxLe7KtA2jwa
- TTyUX/G4djP/GVrCzmhs+UTXB+wLYkgKuH8LTvuD2Rvp0RkPynahrm9jMwieiUm9M0Ss
- 4F64z+ZuK1lZUw0W3D0n+s7ldkL/mWza0fzVBC00vgvLmuZa3JMVYEUhPgH1NZ2ieIaT Dw== 
-Received: from ala-exchng02.corp.ad.wrs.com (unknown-82-254.windriver.com [147.11.82.254])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3p6ffd2awv-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Thu, 09 Mar 2023 17:15:01 -0800
-Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
- ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.18; Thu, 9 Mar 2023 17:15:00 -0800
-Received: from pek-lpg-core2.wrs.com (128.224.153.41) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
- 15.1.2507.17 via Frontend Transport; Thu, 9 Mar 2023 17:15:00 -0800
-From: <changqing.li@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-oe][PATCH V2] liblockfile: upgrade 1.14 -> 1.17
-Date: Fri, 10 Mar 2023 09:14:59 +0800
-Message-ID: <20230310011459.2779071-1-changqing.li@windriver.com>
-X-Mailer: git-send-email 2.25.1
+ dkim=pass header.i=@fujitsu.com header.s=fj1 header.b=tWf/TIhQ;
+ spf=neutral (domain: fujitsu.com, ip: 68.232.156.107, mailfrom: leimaohui@fujitsu.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj1;
+  t=1678416961; x=1709952961;
+  h=from:to:cc:subject:date:message-id:references:
+   in-reply-to:content-transfer-encoding:mime-version;
+  bh=rC/LhQpYCIMu+LvoyVuRw+Bd/G6DiqJqLCLroWfcLio=;
+  b=tWf/TIhQkLSbv440vB4WbBoZA8JisjtyVMhqxGefQInaOnWvR87uCg1y
+   HEZfBGovBgGKI6XFE8CQB1TDDDp008hLC0jEOj0fPLWRuoBQr96Tc7D+I
+   TahSR/SybSFW6BtdXuK+UihWkYomf0Outb+Gfum+Z+CZnY1ceNMuTSbyR
+   fQYKd+qAgiQsTRI2+Cm+WXEL37kyT8icUloOMUdnAF7zZnKkWsV1piGpg
+   sT0x1su1v37htXr6kHzIFt8obwoZqO0XibtbD7WFNUQAif7fx6oGB2xcu
+   cRNFd0LmUVQEiKWwgL8oxXz68AsaHORR0jFQ/f0Xylt52Ubg89sKhnNIl
+   A==;
+X-IronPort-AV: E=McAfee;i="6500,9779,10644"; a="78978808"
+X-IronPort-AV: E=Sophos;i="5.98,248,1673881200"; 
+   d="scan'208";a="78978808"
+Received: from mail-os0jpn01lp2104.outbound.protection.outlook.com (HELO JPN01-OS0-obe.outbound.protection.outlook.com) ([104.47.23.104])
+  by ob1.fujitsucc.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 10 Mar 2023 11:55:58 +0900
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=nfV8EqZc6JZSaf+lwpTuYGgicrBcabLq9J1EX/fJ6a9SOlt0rG0JbeCIiA7AMNe6/CiUoQoaO0pH/bXSHapiYEoSoKzPv9Q1eVfpzCCPdECj99NHMVML4/O+Gyv3DLlTXA2/uEM4bNdKgloEO4/szeEr92MIZaFhpexIgxuX2BXeY8Fa5wwdySnje0UmPLS5z2rLs+VyARY/0HEpFZC37GNmUGdoAUYwVkaF/Ny2YRr5vwUWDZAUcVDGmig6zpvI8wmi4ly2EQBhR/IFYFNVRZX3rCPutpWMKc4B0TZEbfVRY2ykWMhXWcu6m3vgbnz7gUj2OySej+uiULRzNpZdXA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=rC/LhQpYCIMu+LvoyVuRw+Bd/G6DiqJqLCLroWfcLio=;
+ b=CNF6NirYRvDQygft52vwQICBudf9ZeN25cmc8rAs6iIaKt3bekOAmak/fMB2Df4pbbJVQaE+KQg7t1QsE1wMFdO361BS1Lj0N9/6qstV4nQk8N4H0P6AvvMZ6X4AMm239N0Ci+r6TMy0iLuRrvs7PApsgmp2iUivpKwUKrSrZoPYx89rkgIOoIH02jkPKkSjWZ5EAGi8KoOLPWfee+0sx18kFcWXMJuiEnhuly3Azn46C7l9z+FekOlYh0CsUQGycRiALqDaEKypspU7ixZOrrmioiZDLznVOBH+95SDxqkEVisPGzKlUaOjaOSsw81evF1DgJYcytLdJ9seFW12YA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=fujitsu.com; dmarc=pass action=none header.from=fujitsu.com;
+ dkim=pass header.d=fujitsu.com; arc=none
+Received: from OS0PR01MB6178.jpnprd01.prod.outlook.com (2603:1096:604:cd::13)
+ by TYAPR01MB6044.jpnprd01.prod.outlook.com (2603:1096:402:33::12) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6178.19; Fri, 10 Mar
+ 2023 02:55:54 +0000
+Received: from OS0PR01MB6178.jpnprd01.prod.outlook.com
+ ([fe80::5517:58b6:8c62:d968]) by OS0PR01MB6178.jpnprd01.prod.outlook.com
+ ([fe80::5517:58b6:8c62:d968%8]) with mapi id 15.20.6178.019; Fri, 10 Mar 2023
+ 02:55:54 +0000
+From: "leimaohui@fujitsu.com" <leimaohui@fujitsu.com>
+To: Khem Raj <raj.khem@gmail.com>
+CC: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: RE: [oe] [meta-oe][PATCHi v2] pgpool2: Added a new recipe.
+Thread-Topic: [oe] [meta-oe][PATCHi v2] pgpool2: Added a new recipe.
+Thread-Index: AQHZTBxmCSdL7cFV4EaR4IbxkGPSzK7mKeWAgAoPsXA=
+Date: Fri, 10 Mar 2023 02:55:54 +0000
+Message-ID: 
+ <OS0PR01MB6178648FC32EB1A4A38D2D48A0BA9@OS0PR01MB6178.jpnprd01.prod.outlook.com>
+References: <1677661243-20004-1-git-send-email-leimaohui@fujitsu.com>
+ <CAMKF1sqZ_nnTcc7C+iTeuMk1Wig7sBFZaW+DDZsHyeqXjXUJYA@mail.gmail.com>
+In-Reply-To: 
+ <CAMKF1sqZ_nnTcc7C+iTeuMk1Wig7sBFZaW+DDZsHyeqXjXUJYA@mail.gmail.com>
+Accept-Language: zh-CN, en-US
+Content-Language: zh-CN
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+msip_labels: 
+ =?utf-8?B?TVNJUF9MYWJlbF9hNzI5NWNjMS1kMjc5LTQyYWMtYWI0ZC0zYjBmNGZlY2Uw?=
+ =?utf-8?B?NTBfQWN0aW9uSWQ9MmUzYjdmNzAtYTFjZC00NzQ1LWJlZmYtNGJiYTAxMmJm?=
+ =?utf-8?B?ZDg4O01TSVBfTGFiZWxfYTcyOTVjYzEtZDI3OS00MmFjLWFiNGQtM2IwZjRm?=
+ =?utf-8?B?ZWNlMDUwX0NvbnRlbnRCaXRzPTA7TVNJUF9MYWJlbF9hNzI5NWNjMS1kMjc5?=
+ =?utf-8?B?LTQyYWMtYWI0ZC0zYjBmNGZlY2UwNTBfRW5hYmxlZD10cnVlO01TSVBfTGFi?=
+ =?utf-8?B?ZWxfYTcyOTVjYzEtZDI3OS00MmFjLWFiNGQtM2IwZjRmZWNlMDUwX01ldGhv?=
+ =?utf-8?B?ZD1TdGFuZGFyZDtNU0lQX0xhYmVsX2E3Mjk1Y2MxLWQyNzktNDJhYy1hYjRk?=
+ =?utf-8?B?LTNiMGY0ZmVjZTA1MF9OYW1lPUZVSklUU1UtUkVTVFJJQ1RFRO+/ou++gA==?=
+ =?utf-8?B?776LO01TSVBfTGFiZWxfYTcyOTVjYzEtZDI3OS00MmFjLWFiNGQtM2IwZjRm?=
+ =?utf-8?B?ZWNlMDUwX1NldERhdGU9MjAyMy0wMy0wOFQwMjo1MTozOVo7TVNJUF9MYWJl?=
+ =?utf-8?B?bF9hNzI5NWNjMS1kMjc5LTQyYWMtYWI0ZC0zYjBmNGZlY2UwNTBfU2l0ZUlk?=
+ =?utf-8?Q?=3Da19f121d-81e1-4858-a9d8-736e267fd4c7;?=
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=fujitsu.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: OS0PR01MB6178:EE_|TYAPR01MB6044:EE_
+x-ms-office365-filtering-correlation-id: 33409054-91d9-4dac-0688-08db2112f73e
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: 
+ uYE2mu/1hGeJfhKcKRDSSrp1A4pkUtRxGD1eDA+ImPJ/HEpwazZ9+keQV7brGGqwQ5WROgjt2JmthG0tsCmPjmuIGOWXkuf8Ky6wEw+/dl7Hi8lUq+dAwqBfvepwF7NRFTu5ppEVR7hzplnLzV+LX+63hh8JBUiLjONTcicWnxLbIAMGuxD7Ax19Ax0OgoBFLdk/yJ9vIGRxAHijSoY5WmdE2uR6jx5B8ypUbXxjatqAdS/GSuJTz9CPgAbSrgPQjtuxUzMm7RhDGri+XT/KPRbh3XtKwKeO7bRZqXnCn2/Dj0VVxc8oq6ec8HbXmqwNPA7IH/9UY+FXkK44m2bjwxcDw/fBMH79U5XDG5QhGPTuMCiJxcXIAVtxoJqHCxHnCgmFZj2ggcY9grMyLI/fjMp8Emgr262RR3Abo8PYWXhu1NDdm6bEz6SdAA570/KmMzo5xWYltGECMK2rDyeX0uPwl58fRhVKZloWynTimDVTXf6ZGxO+BvobudPeQbc05gDK6bY04i30732+n4VujdJ2Sd1k2Q2wTCFIMTEVEofGElApx7506cx3VHyXy4WSIo0dnQvadGjccpbzhYUJahWtScRGmfWNXToFhDM1K3PoZMK99FZ/0OWWmpjex7LTNhxxgQEgPX0N5+u31NnyF43slMgtYoW7jxnBC4uRRa64Urdzx4lPFiCUrz8tpH+71iDegB/hkBPuCbcH8I9hT8uT5e9+l/z/0fCBm1pa1sUy1wCSWOnGU6wWTXD0dWTR
+x-forefront-antispam-report: 
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:OS0PR01MB6178.jpnprd01.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230025)(4636009)(39860400002)(346002)(136003)(366004)(396003)(376002)(1590799015)(451199018)(5660300002)(26005)(9686003)(66556008)(186003)(66946007)(41300700001)(71200400001)(30864003)(64756008)(7696005)(76116006)(8676002)(66446008)(66476007)(4326008)(6916009)(8936002)(316002)(478600001)(86362001)(966005)(55016003)(33656002)(38070700005)(53546011)(122000001)(38100700002)(52536014)(6506007)(82960400001)(85182001)(2906002)(83380400001)(1580799012)(66899018);DIR:OUT;SFP:1101;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: 
+ =?utf-8?B?QzczbElPR0RCNERWRHRpVk9EZWVhdGtZV0ZSYmV6eDBia1VBcFJXa09ZWm05?=
+ =?utf-8?B?U1pOMVFCR2FNbThBU2RUYWVkNkYvV245eUtLU21xWko2VHJ1OGN3ZmlQcTFG?=
+ =?utf-8?B?bFpaaDR1bDEweHN3QVNZSU9VT3BHeE9TdW4zZVNsS2NBVlNQaVNpeTRpMWlJ?=
+ =?utf-8?B?YnlLREpRYzZranFSWXNzbUZPVVN2OElDOW9mVkxBZGcxeUswV3lESGJjRFRj?=
+ =?utf-8?B?TjlMcnIwNGV4bjZGYlJxMHhXRUp2aW9wNVN4dFdlVHlmYmt6RVFEVC9kWXBP?=
+ =?utf-8?B?Y2ZVVTdMU0lXOC9wSWN2eUhTNTU1WkIydzVoUGY2SThKSVJGOXVJSFhuNXFo?=
+ =?utf-8?B?T3lPVXJiNmV3ZzdGc29Ma1JmczBFV1JCdXZZbm9QOEFZdURPUUFQY1M2Nmoy?=
+ =?utf-8?B?T2NQaldMWm81U0R3K3h6ZlFENndxaGFrbzEzTUVhZ2FrMGdOaVlyTFdQOTR4?=
+ =?utf-8?B?b2t5SkZYQUo0UVIzUzhleUR3aDlMeVd6T0REaFdoWXBGSUUxYmUxYXUySGs2?=
+ =?utf-8?B?Z0p3VGhTRGp2SkpCWkNDRFpVZTh2WWY0K051OWsveE1vVTNuS3VvRVNDR2Vw?=
+ =?utf-8?B?Rll0VzJ2dERmejlEVFJhVllxaUl4TGY2TnhHU0tLMGJLU2k2OFhJVnBSZW45?=
+ =?utf-8?B?R3lHVGdPcXhCM3pBWmRHbytHTmJsTzZqbkJuWG1yMjZQMjRkTjdDOEF6eC8r?=
+ =?utf-8?B?QkZjK3krNnVzS2hmZ25WakJQeExuR25EZnIwWmxSY3Z5ZEN3ejBwcWkzZi9z?=
+ =?utf-8?B?NlVocHNOS1VzenhzbG5rblpLSW9Ta214N3NxUzl2bUJybS9nYmJaSDkvbTdX?=
+ =?utf-8?B?TzJJREtveUV5RUhDanZkZFI5d3V5SFpieTNsaUN2RDR3a1FaZzV2dmEwbUd6?=
+ =?utf-8?B?K1Y0VU1ZVm1wYzhRWkVwbnBTbU90VTAwYkcvY1ZqS1pyUkhUTk9LUFArdFdX?=
+ =?utf-8?B?K1dkNVRTZDYzQ1oxcVBvSjJ1UEp2Uzl1VTQxcWVvOW15b21UM2NLblZqT3Mv?=
+ =?utf-8?B?N3BYNDNLQW9wL1RZV1lVZTg2YTk2bHBpRTVsRklhWjdQaktVR0xSWjlTN2dS?=
+ =?utf-8?B?U29QWjMvU2pNYlJSK0tyUXRVam50VUpsVGVPUDIvY0xVbGY1ZUo5Q1RGZ3VY?=
+ =?utf-8?B?MXRLamh0QU5xUjlJZDV6d2ltenBIVE5jdS9wWE5HNDlxTzBudlVxa0l1NkZ4?=
+ =?utf-8?B?UDFjZ3BOYlpuN0U2cFdxNEgyK1dvSndKejN5SXBRWmxBV2FBUWdleWZFbExv?=
+ =?utf-8?B?Tmk1Snh0dHlUd3IvbGI0YkNGeGp5Q09TY1FLNGplWDRJVkp6MGZqQjZYMWo2?=
+ =?utf-8?B?aEhWMXEwUmhlUS84U0g1aUVGMnpDUmZsV0FaQTN5K09LWjgwZ3BXMTJja2pN?=
+ =?utf-8?B?SEY0TDlzYXpQK2NvbGFmZDIxdjBFQk5BWEUxL2F2MlRnV2l0UEtCL1hSQkM5?=
+ =?utf-8?B?Z2dNN2dScFFkaURjaG13VHd4RkRyV09aUThGUzZSUU4wTFptSmRFSnpXZVJC?=
+ =?utf-8?B?dndJRTVKVHJYTW1mQUM3eHp6RjRrQVdwQ0FSRzhoMWx0bm5kdXJ0SUVxR0hR?=
+ =?utf-8?B?UHV1SlpRemhGT29PVkwxaWtDSDU0KzBEaENTRlRQeUNIdWkxaGhxOFR2Yk5u?=
+ =?utf-8?B?MElmaUNIVVFmcnMwclZNZVl1MjhKRis5bVowVDRKTExyV1dwTldBMW9Icjg3?=
+ =?utf-8?B?czBkV2hycWdFeDRJL0RwVFJsWnhONlFUZytCMHY2WmQwd0VqT1NGeGlaTkdq?=
+ =?utf-8?B?eFBtQ3hER1RyYUxuMmVwS2FJS09KS1gvV0dFQ2dKa2N5enlWM0Q1TlhvQTdr?=
+ =?utf-8?B?RVlCQWE3VWQ0Snl4b2pRY2h4blBWY2Y4ck1INHpFdFdNNjRMYXcrcU9hbWRZ?=
+ =?utf-8?B?bWpFbTNIRmk3aTU3WE52NzBVcWRrVXhBVnVjMWpFUXVuQWttc0lWbmRDdmJi?=
+ =?utf-8?B?ZmhqYVN4YUhmK2JKRmNvRytvYjJFSG5tVDlXUWtlK2tOMTFvQkNXbWtrREE3?=
+ =?utf-8?B?WDd5NGRnT1VVWEloamxoU2U4ekdXY0tJR2QvRXFRekdEV2s1eGJNam43b2xI?=
+ =?utf-8?B?M01SdGl6aHNSVVBqQTBTbnhOanBQNVZvbGh3TnE4MlhwY0hsdmYxdUNwdlF1?=
+ =?utf-8?Q?HXJp/TebQKcaF0pCyW2inkoyL?=
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Proofpoint-GUID: pIj9tuycVtL4uuWKAqZlqnBDNcvMHBy2
-X-Proofpoint-ORIG-GUID: pIj9tuycVtL4uuWKAqZlqnBDNcvMHBy2
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.254,Aquarius:18.0.942,Hydra:6.0.573,FMLib:17.11.170.22
- definitions=2023-03-09_14,2023-03-09_01,2023-02-09_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 bulkscore=0
- lowpriorityscore=0 suspectscore=0 adultscore=0 malwarescore=0
- clxscore=1015 phishscore=0 priorityscore=1501 spamscore=0 mlxlogscore=999
- mlxscore=0 impostorscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2212070000 definitions=main-2303100005
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-0: 
+	MMavSo76zkdBn4FXMYt9ttLU4mG8avPNv3spUQh7qvfoLC08NEU00BxUHbDw0Er4sN+ATF99uHpVKUQhM+DERFH5iLCe/GMSjFyNS0/024UU/JxypAb7298QXsuW/sfw+Ayvnp01sqmKA71MEmInK8U7mf/nlxyU1X+7kVIw4fAjiiQULt6SfXie/IyAMGyCPO2MkNQyN7tqtBByNVI+wbi1qlYdXdm6YhidLeqVYcbXiqmHSACCkXufCbjLoqoCHSJV+2J/2Khlt+C3aZ7KTEj7ZOqNSlVaCe7xdrEBhwCXbR/QUEvUlKn2XDz7rddPXepGEDEpkKo17PhwywmmyGF9513ZeDLixZ8GsMMFqgu7KWA9krGAshGcds+ytFGsynHzyvYhLpWF4KH+s0wEBRSWSB2bG95hZ4wsADt1uSXu1CQU7kJWDifbnWnIhsrFWm2xpI3PkEKmRHLHkFdT/b1PdVbwUFm/QPTU2ploSxBWIofUnrcQ0BNPUVSi2zPIzbUJsLmJqrKmevI7SUT1FztSrW1o59/gLmX7LIntq95gA8KkAWcDOGgzroxoy8X43x2anXNlEtDu6ZoDa7SJiUwZJ+1uzKAfLk7YVazyxt2+8RoKywhcbbuaquI1XKGx2BnaV6zo2J5KTr5OKHJAGtRnc17vkWVsn7sUKEvnkWcoEG+IExGDjT95bKBSaij6V8Ib+/vkPyokA+3g6CO3Y9kXvx/4Cmymb4P0mroNJV+WZ4R6NN/2RE8m10BYW7xddima7aYSitdR0Rg3v2oRNCehSSt1kdZxqOL971rU/it4qv4zIqLiIGXzwwChmRK8
+X-OriginatorOrg: fujitsu.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: OS0PR01MB6178.jpnprd01.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 33409054-91d9-4dac-0688-08db2112f73e
+X-MS-Exchange-CrossTenant-originalarrivaltime: 10 Mar 2023 02:55:54.3597
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: a19f121d-81e1-4858-a9d8-736e267fd4c7
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: 3MOXOn0K7HxA/yh44/Hzx2c9Km4ihvVvhTK+NfgWR+jPlaosqSaR8rT4SQprKWGOBO7Ea4co0WO5YVsHKJ0ztg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: TYAPR01MB6044
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 10 Mar 2023 01:15:06 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101470
+ <openembedded-devel@lists.openembedded.org>; Fri, 10 Mar 2023 02:56:06 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101471
 
-From: Changqing Li <changqing.li@windriver.com>
-
-Updated patches:
-configure.patch
-0001-Makefile.in-redefine-LOCKPROG.patch
-
-Rename and update patch:
-0001-Makefile.in-Don-t-try-to-run-ldconfig.patch
-
-Signed-off-by: Changqing Li <changqing.li@windriver.com>
----
- .../0001-Makefile.in-add-DESTDIR.patch        |  6 +--
- ...nstall-failure-on-host-without-ldco.patch} | 44 ++++++++++++-------
- ...001-Makefile.in-install-nfslock-libs.patch | 10 ++---
- .../0001-Makefile.in-redefine-LOCKPROG.patch  | 34 ++++++++++----
- .../liblockfile/liblockfile/configure.patch   | 22 +++++++---
- ...iblockfile-fix-install-so-to-man-dir.patch |  8 ++--
- ...iblockfile_1.14.bb => liblockfile_1.17.bb} | 15 +++----
- 7 files changed, 88 insertions(+), 51 deletions(-)
- rename meta-oe/recipes-extended/liblockfile/liblockfile/{0001-Makefile.in-Don-t-try-to-run-ldconfig.patch => 0001-Makefile.in-fix-install-failure-on-host-without-ldco.patch} (60%)
- rename meta-oe/recipes-extended/liblockfile/{liblockfile_1.14.bb => liblockfile_1.17.bb} (68%)
-
-diff --git a/meta-oe/recipes-extended/liblockfile/liblockfile/0001-Makefile.in-add-DESTDIR.patch b/meta-oe/recipes-extended/liblockfile/liblockfile/0001-Makefile.in-add-DESTDIR.patch
-index ea415dd8b..2533b3a00 100644
---- a/meta-oe/recipes-extended/liblockfile/liblockfile/0001-Makefile.in-add-DESTDIR.patch
-+++ b/meta-oe/recipes-extended/liblockfile/liblockfile/0001-Makefile.in-add-DESTDIR.patch
-@@ -1,4 +1,4 @@
--From 67843dabe1177840697839b916fd899218893ec7 Mon Sep 17 00:00:00 2001
-+From 8e370a2f35d0c3472ddc9068fab19d0077434c61 Mon Sep 17 00:00:00 2001
- From: Mingli Yu <mingli.yu@windriver.com>
- Date: Thu, 19 Jul 2018 00:25:23 -0700
- Subject: [PATCH] Makefile.in: add DESTDIR
-@@ -29,7 +29,7 @@ Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
-  1 file changed, 5 insertions(+), 5 deletions(-)
- 
- diff --git a/Makefile.in b/Makefile.in
--index 36a6d23..1e4130e 100644
-+index 9c74b35..8cbda1d 100644
- --- a/Makefile.in
- +++ b/Makefile.in
- @@ -12,11 +12,11 @@ CC		= @CC@
-@@ -50,5 +50,5 @@ index 36a6d23..1e4130e 100644
-  MAILGROUP	= @MAILGROUP@
-  
- -- 
--2.17.1
-+2.25.1
- 
-diff --git a/meta-oe/recipes-extended/liblockfile/liblockfile/0001-Makefile.in-Don-t-try-to-run-ldconfig.patch b/meta-oe/recipes-extended/liblockfile/liblockfile/0001-Makefile.in-fix-install-failure-on-host-without-ldco.patch
-similarity index 60%
-rename from meta-oe/recipes-extended/liblockfile/liblockfile/0001-Makefile.in-Don-t-try-to-run-ldconfig.patch
-rename to meta-oe/recipes-extended/liblockfile/liblockfile/0001-Makefile.in-fix-install-failure-on-host-without-ldco.patch
-index 5a1d9a995..1fd5c827b 100644
---- a/meta-oe/recipes-extended/liblockfile/liblockfile/0001-Makefile.in-Don-t-try-to-run-ldconfig.patch
-+++ b/meta-oe/recipes-extended/liblockfile/liblockfile/0001-Makefile.in-fix-install-failure-on-host-without-ldco.patch
-@@ -1,10 +1,12 @@
--From 5876bd17caac96df70ef400bfeebb155c0bd7359 Mon Sep 17 00:00:00 2001
-+From 8b3a5916fff4004b5b2f1e8a1d3a051346ba3901 Mon Sep 17 00:00:00 2001
- From: Changqing Li <changqing.li@windriver.com>
--Date: Wed, 8 Feb 2023 10:34:45 +0800
--Subject: [PATCH] Makefile.in: Don't try to run ldconfig
-+Date: Fri, 10 Mar 2023 08:59:39 +0800
-+Subject: [PATCH] Makefile.in: fix install failure on host without ldconfig
- 
--when ldconfig is not installed on the build host, do_install
--will failed with error:
-+fix syntax error when ldconfig is not installed on host
-+
-+when ldconfig is not installed on the build host, install will failed with
-+error:
- ln -sf nfslock.so.0.1 /mnt/tmp-glibc/work/core2-64-wrs-linux/liblockfile/1.14-r0/image/usr/lib64/nfslock.so.0
- install -m 644 lockfile.h maillock.h /mnt/tmp-glibc/work/core2-64-wrs-linux/liblockfile/1.14-r0/image/usr/include
- if test "/mnt/tmp-glibc/work/core2-64-wrs-linux/liblockfile/1.14-r0/image" = ""; then ; fi
-@@ -16,36 +18,46 @@ if [ "mail" != "" ]; then\
- /bin/sh: -c: line 1: syntax error near unexpected token `;'
- /bin/sh: -c: line 1: `if test "/mnt/tmp-glibc/work/core2-64-wrs-linux/liblockfile/1.14-r0/image" = ""; then ; fi'
- 
--Deleted line is not needed for OE, as it is cross-compile. And
--it can also fix above error
--
--Upstream-Status: Inappropriate [oe specific]
-+Upstream-Status: Submitted [https://github.com/miquels/liblockfile/pull/20]
- 
- Signed-off-by: Changqing Li <changqing.li@windriver.com>
- ---
-- Makefile.in | 2 --
-- 1 file changed, 2 deletions(-)
-+ Makefile.in | 8 ++++++--
-+ 1 file changed, 6 insertions(+), 2 deletions(-)
- 
- diff --git a/Makefile.in b/Makefile.in
--index bfa0acb..ae5be56 100644
-+index e02d75e..5fc5b5a 100644
- --- a/Makefile.in
- +++ b/Makefile.in
--@@ -58,7 +58,6 @@ install_shared:	shared install_static install_common
-+@@ -9,6 +9,10 @@ NFSVER		= 0.1
-+ CFLAGS		= @CFLAGS@ -I.
-+ LDFLAGS		= @LDFLAGS@
-+ CC		= @CC@
-++LDCONFIG       = @LDCONFIG@
-++ifeq ($(LDCONFIG),)
-++    LDCONFIG = ":"
-++endif
-+ 
-+ prefix		= $(DESTDIR)@prefix@
-+ exec_prefix	= @exec_prefix@
-+@@ -69,7 +73,7 @@ install_shared:	shared install_static install_common
-  			$(libdir)/liblockfile.so.$(SOVER)
-  		ln -s liblockfile.so.$(SOVER) $(libdir)/liblockfile.so.$(MAJOR)
-  		ln -s liblockfile.so.$(SOVER) $(libdir)/liblockfile.so
- -		if test "$(DESTDIR)" = ""; then @LDCONFIG@; fi
-++		if test "$(DESTDIR)" = ""; then $(LDCONFIG); fi
-  
-  install_common:
-  		install -d -m 755 -g root -p $(includedir)
--@@ -79,7 +78,6 @@ install_nfslib:	nfslib
-+@@ -90,7 +94,7 @@ install_nfslib:	nfslib
-  		install -m 755 nfslock.so.$(NFSVER) $(nfslockdir)
-  		ln -sf nfslock.so.$(NFSVER) $(libdir)/nfslock.so
-  		ln -sf nfslock.so.$(NFSVER) $(libdir)/nfslock.so.0
- -		if test "$(DESTDIR)" = ""; then @LDCONFIG@; fi
-++		if test "$(DESTDIR)" = ""; then $(LDCONFIG); fi
-  
-- clean:
-- 		rm -f *.a *.o *.so *.so.* dotlockfile
-+ test:		test-stamp
-+ 		@:
- -- 
- 2.25.1
- 
-diff --git a/meta-oe/recipes-extended/liblockfile/liblockfile/0001-Makefile.in-install-nfslock-libs.patch b/meta-oe/recipes-extended/liblockfile/liblockfile/0001-Makefile.in-install-nfslock-libs.patch
-index a6b297b59..f99ac2bf7 100644
---- a/meta-oe/recipes-extended/liblockfile/liblockfile/0001-Makefile.in-install-nfslock-libs.patch
-+++ b/meta-oe/recipes-extended/liblockfile/liblockfile/0001-Makefile.in-install-nfslock-libs.patch
-@@ -1,4 +1,4 @@
--From 631d46efff2a6d8970e202ba5422ebedd17a8d2f Mon Sep 17 00:00:00 2001
-+From 0f34d1d91d641c3d5c5bb2eb11bd6eec7cfaf738 Mon Sep 17 00:00:00 2001
- From: Mingli Yu <mingli.yu@windriver.com>
- Date: Thu, 19 Jul 2018 01:00:10 -0700
- Subject: [PATCH] Makefile.in: install nfslock.so and nfslock.so.0
-@@ -14,10 +14,10 @@ Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
-  1 file changed, 2 insertions(+)
- 
- diff --git a/Makefile.in b/Makefile.in
--index 1e4130e..0f1b506 100644
-+index 8cbda1d..3a74811 100644
- --- a/Makefile.in
- +++ b/Makefile.in
--@@ -77,6 +77,8 @@ install_common:
-+@@ -88,6 +88,8 @@ install_common:
-  install_nfslib:	nfslib
-  		install -d -m 755 -g root -p $(nfslockdir)
-  		install -m 755 nfslock.so.$(NFSVER) $(nfslockdir)
-@@ -25,7 +25,7 @@ index 1e4130e..0f1b506 100644
- +		ln -sf nfslock.so.$(NFSVER) $(libdir)/nfslock.so.0
-  		if test "$(DESTDIR)" = ""; then @LDCONFIG@; fi
-  
-- clean:
-+ test:		test-stamp
- -- 
--2.17.1
-+2.25.1
- 
-diff --git a/meta-oe/recipes-extended/liblockfile/liblockfile/0001-Makefile.in-redefine-LOCKPROG.patch b/meta-oe/recipes-extended/liblockfile/liblockfile/0001-Makefile.in-redefine-LOCKPROG.patch
-index 35549ff2d..c387db123 100644
---- a/meta-oe/recipes-extended/liblockfile/liblockfile/0001-Makefile.in-redefine-LOCKPROG.patch
-+++ b/meta-oe/recipes-extended/liblockfile/liblockfile/0001-Makefile.in-redefine-LOCKPROG.patch
-@@ -1,4 +1,4 @@
--From 9beb650712d448ad9c0899de9d98e9b623f9c249 Mon Sep 17 00:00:00 2001
-+From 05227e74b732f13ed5a2a98232676f98bba028e6 Mon Sep 17 00:00:00 2001
- From: Mingli Yu <mingli.yu@windriver.com>
- Date: Fri, 12 Aug 2022 11:18:15 +0800
- Subject: [PATCH] Makefile.in: redefine LOCKPROG
-@@ -11,23 +11,41 @@ And it should be "/usr/bin/dotlockfile" on the target.
- Upstream-Status: Inappropriate [oe specific]
- 
- Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
-+
-+Update patch for 1.17, also redefine LOCKPROG in other lines
-+Signed-off-by: Changqing Li <changqing.li@windriver.com>
- ---
-- Makefile.in | 2 +-
-- 1 file changed, 1 insertion(+), 1 deletion(-)
-+ Makefile.in | 8 ++++----
-+ 1 file changed, 4 insertions(+), 4 deletions(-)
- 
- diff --git a/Makefile.in b/Makefile.in
--index 6e53179..bfa0acb 100644
-+index e447cb2..e02d75e 100644
- --- a/Makefile.in
- +++ b/Makefile.in
--@@ -42,7 +42,7 @@ dotlockfile:	dotlockfile.o xlockfile.o
-- 		$(CC) $(LDFLAGS) -o dotlockfile dotlockfile.o xlockfile.o
-+@@ -44,19 +44,19 @@ dotlockfile:	dotlockfile.o dlockfile.o
-+ 		$(CC) $(LDFLAGS) -o dotlockfile dotlockfile.o dlockfile.o
-+ 
-+ dotlockfile.o:	dotlockfile.c
-+-		$(CC) $(CFLAGS) -DLOCKPROG=\"$(bindir)/dotlockfile\" \
-++		$(CC) $(CFLAGS) -DLOCKPROG=\"/usr/bin/dotlockfile\" \
-+ 			-c dotlockfile.c
-  
-  lockfile.o:	lockfile.c
- -		$(CC) $(CFLAGS) -DLIB -DLOCKPROG=\"$(bindir)/dotlockfile\" \
- +		$(CC) $(CFLAGS) -DLIB -DLOCKPROG=\"/usr/bin/dotlockfile\" \
-- 			-c lockfile.c
-+ 			-DSTATIC -c lockfile.c
-+ 
-+ solockfile.o:	lockfile.c
-+-		$(CC) $(CFLAGS) -DLIB -DLOCKPROG=\"$(bindir)/dotlockfile\" \
-++		$(CC) $(CFLAGS) -DLIB -DLOCKPROG=\"/usr/bin/dotlockfile\" \
-+ 			-c lockfile.c -o solockfile.o
-+ 
-+ dlockfile.o:	lockfile.c
-+-		$(CC) $(CFLAGS) -DLOCKPROG=\"$(bindir)/dotlockfile\" \
-++		$(CC) $(CFLAGS) -DLOCKPROG=\"/usr/bin/dotlockfile\" \
-+ 			-c lockfile.c -o dlockfile.o
-  
-- xlockfile.o:	lockfile.c
-+ install_static:	static install_common
- -- 
- 2.25.1
- 
-diff --git a/meta-oe/recipes-extended/liblockfile/liblockfile/configure.patch b/meta-oe/recipes-extended/liblockfile/liblockfile/configure.patch
-index ea13e11d2..56f2d05eb 100644
---- a/meta-oe/recipes-extended/liblockfile/liblockfile/configure.patch
-+++ b/meta-oe/recipes-extended/liblockfile/liblockfile/configure.patch
-@@ -1,10 +1,17 @@
-+From fd3fce8c1a3d0c70a0ffd461fbbe7e2ef71dd3a7 Mon Sep 17 00:00:00 2001
-+From: Changqing Li <changqing.li@windriver.com>
-+Date: Tue, 7 Mar 2023 11:05:45 +0800
-+Subject: [PATCH] Update patch for 1.17
- 
--#
--# Patch managed by http://www.mn-logistik.de/unsupported/pxa250/patcher
--#
-+Signed-off-by: Changqing Li <changqing.li@windriver.com>
-+---
-+ configure.ac | 8 +++++---
-+ 1 file changed, 5 insertions(+), 3 deletions(-)
- 
----- liblockfile-1.05/./configure.in~configure
--+++ liblockfile-1.05/./configure.in
-+diff --git a/configure.ac b/configure.ac
-+index df26cee..76e9165 100644
-+--- a/configure.ac
-++++ b/configure.ac
- @@ -1,4 +1,5 @@
- -AC_INIT(lockfile.c)
- +AC_INIT
-@@ -12,7 +19,7 @@
-  AC_CONFIG_HEADER(autoconf.h)
-  AC_REVISION($Revision: 1.0 $)dnl
-  
--@@ -111,7 +112,8 @@
-+@@ -111,7 +112,8 @@ AC_SUBST(TARGETS)
-  AC_SUBST(INSTALL_TARGETS)
-  AC_SUBST(nfslockdir)
-  
-@@ -23,3 +30,6 @@
- -)
- +])
- +AC_OUTPUT
-+-- 
-+2.25.1
-+
-diff --git a/meta-oe/recipes-extended/liblockfile/liblockfile/liblockfile-fix-install-so-to-man-dir.patch b/meta-oe/recipes-extended/liblockfile/liblockfile/liblockfile-fix-install-so-to-man-dir.patch
-index da2503339..046cd8e69 100644
---- a/meta-oe/recipes-extended/liblockfile/liblockfile/liblockfile-fix-install-so-to-man-dir.patch
-+++ b/meta-oe/recipes-extended/liblockfile/liblockfile/liblockfile-fix-install-so-to-man-dir.patch
-@@ -1,4 +1,4 @@
--From 363eb1aaeca914c7d36a2cdaf1417e4f87af4c22 Mon Sep 17 00:00:00 2001
-+From 079d04c187800e22f18723c74e41c4e46eef67f8 Mon Sep 17 00:00:00 2001
- From: Mingli Yu <mingli.yu@windriver.com>
- Date: Thu, 19 Jul 2018 01:12:47 -0700
- Subject: [PATCH] Makefile.in: define dotlockfile.1 installed to man
-@@ -16,10 +16,10 @@ Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
-  1 file changed, 1 insertion(+), 1 deletion(-)
- 
- diff --git a/Makefile.in b/Makefile.in
--index 0f1b506..6e53179 100644
-+index 3a74811..e447cb2 100644
- --- a/Makefile.in
- +++ b/Makefile.in
--@@ -71,7 +71,7 @@ install_common:
-+@@ -82,7 +82,7 @@ install_common:
-  		else \
-  		  install -g root -m 755 dotlockfile $(bindir); \
-  		fi
-@@ -29,5 +29,5 @@ index 0f1b506..6e53179 100644
-  
-  install_nfslib:	nfslib
- -- 
--2.17.1
-+2.25.1
- 
-diff --git a/meta-oe/recipes-extended/liblockfile/liblockfile_1.14.bb b/meta-oe/recipes-extended/liblockfile/liblockfile_1.17.bb
-similarity index 68%
-rename from meta-oe/recipes-extended/liblockfile/liblockfile_1.14.bb
-rename to meta-oe/recipes-extended/liblockfile/liblockfile_1.17.bb
-index e07dab3c7..b094337e9 100644
---- a/meta-oe/recipes-extended/liblockfile/liblockfile_1.14.bb
-+++ b/meta-oe/recipes-extended/liblockfile/liblockfile_1.17.bb
-@@ -4,23 +4,20 @@ SECTION = "libs"
- LICENSE = "LGPL-2.0-or-later & GPL-2.0-or-later"
- LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=f4ba6ad04fcb05cc30a4cfa5062c55a3"
- 
--SRC_URI = "${DEBIAN_MIRROR}/main/libl/liblockfile/liblockfile_1.14.orig.tar.gz \
--    ${DEBIAN_MIRROR}/main/libl/liblockfile/liblockfile_1.14-1.debian.tar.bz2;name=1.14-1 \
-+SRC_URI = "${DEBIAN_MIRROR}/main/libl/liblockfile/liblockfile_1.17.orig.tar.gz \
-+    ${DEBIAN_MIRROR}/main/libl/liblockfile/liblockfile_1.17-1.debian.tar.bz2;name=1.17-1 \
-     file://configure.patch \
-     file://0001-Makefile.in-add-DESTDIR.patch \
-     file://0001-Makefile.in-install-nfslock-libs.patch \
-     file://liblockfile-fix-install-so-to-man-dir.patch \
-     file://0001-Makefile.in-redefine-LOCKPROG.patch \
--    file://0001-Makefile.in-Don-t-try-to-run-ldconfig.patch \
-+    file://0001-Makefile.in-fix-install-failure-on-host-without-ldco.patch \
- "
- 
--SRC_URI[md5sum] = "420c056ba0cc4d1477e402f70ba2f5eb"
--SRC_URI[sha256sum] = "ab40d4a3e8cbc204f7e87fea637a4e4ddf9a1149aaa0a723a4267febd0b1d060"
-+SRC_URI[sha256sum] = "6e937f3650afab4aac198f348b89b1ca42edceb17fb6bb0918f642143ccfd15e"
-+SRC_URI[1.17-1.sha256sum] = "e3657c0e3facfeccb58900c0b48d56cd68ad5f9f24d1b4c6eaa69c26490fb673"
- 
--SRC_URI[1.14-1.md5sum] = "f9a44928c3477d218c56252712ebc479"
--SRC_URI[1.14-1.sha256sum] = "73f9be769e602149391588c28f0f4f5cda131e30fb94c0777dbb23d811ac21ff"
--
--S = "${WORKDIR}/${BPN}"
-+S = "${WORKDIR}/${BP}"
- 
- inherit autotools-brokensep
- 
--- 
-2.25.1
-
+PiBpdCBmYWlscyBpbiBjb21wYXQgY2hlY2tzIHNlZQ0KPiANCj4gaHR0cHM6Ly9hdXRvYnVpbGRl
+ci55b2N0b3Byb2plY3Qub3JnL3R5cGhvb24vIy9idWlsZGVycy84OC9idWlsZHMvMjUwNA0KDQpT
+b3JyeSwgSSBjYW4ndCByZXByb2R1Y2UgdGhlIGJ1aWxkIGVycm9yLiBMaWJtZW1jYWNoZWQgaXMg
+aW4gbWV0YS1vZS9tZXRhLW5ldHdvcmtpbmcsIHdoeSBtZXRhLXdvcmxkLXBrZ2RhdGEgY2FuJ3Qg
+ZmluZCBpdD8NCldoZXJlIGNhbiBJIHNlZSB0aGUgY29udGV4dCBvZiBjb25mL2JibGF5ZXJzLmNv
+bmY/IEkgd2FudCB0byBtYWtlIHN1ZXIgdGhhdCBtZXRhLW5ldHdvcmtpbmcgaXMgYWRkZWQgaW50
+byBjb25mL2JibGF5ZXJzLmNvbmYuDQoNCnN0ZGlvOiBFUlJPUjogTm90aGluZyBQUk9WSURFUyAn
+bGlibWVtY2FjaGVkJyAoYnV0IC9ob21lL3Bva3lidWlsZC95b2N0by13b3JrZXIvbWV0YS1vZS9i
+dWlsZC9tZXRhLW9wZW5lbWJlZGRlZC9tZXRhLW9lL3JlY2lwZXMtc3VwcG9ydC9wZ3Bvb2wyL3Bn
+cG9vbDJfNC40LjEuYmIgREVQRU5EUyBvbiBvciBvdGhlcndpc2UgcmVxdWlyZXMgaXQpDQpzdGRp
+bzogRVJST1I6IFJlcXVpcmVkIGJ1aWxkIHRhcmdldCAnbWV0YS13b3JsZC1wa2dkYXRhJyBoYXMg
+bm8gYnVpbGRhYmxlIHByb3ZpZGVycy4NCnN0ZGlvOiBFUlJPUjogTm90aGluZyBQUk9WSURFUyAn
+bGlibWVtY2FjaGVkJyAoYnV0IC9ob21lL3Bva3lidWlsZC95b2N0by13b3JrZXIvbWV0YS1vZS9i
+dWlsZC9tZXRhLW9wZW5lbWJlZGRlZC9tZXRhLW9lL3JlY2lwZXMtc3VwcG9ydC9wZ3Bvb2wyL3Bn
+cG9vbDJfNC40LjEuYmIgREVQRU5EUyBvbiBvciBvdGhlcndpc2UgcmVxdWlyZXMgaXQpDQpzdGRp
+bzogRVJST1I6IFJlcXVpcmVkIGJ1aWxkIHRhcmdldCAnbWV0YS13b3JsZC1wa2dkYXRhJyBoYXMg
+bm8gYnVpbGRhYmxlIHByb3ZpZGVycy4NCnN0ZGlvOiBFUlJPUjogTm90aGluZyBQUk9WSURFUyAn
+bGlibWVtY2FjaGVkJyAoYnV0IC9ob21lL3Bva3lidWlsZC95b2N0by13b3JrZXIvbWV0YS1vZS9i
+dWlsZC9tZXRhLW9wZW5lbWJlZGRlZC9tZXRhLW9lL3JlY2lwZXMtc3VwcG9ydC9wZ3Bvb2wyL3Bn
+cG9vbDJfNC40LjEuYmIgREVQRU5EUyBvbiBvciBvdGhlcndpc2UgcmVxdWlyZXMgaXQpDQpzdGRp
+bzogRVJST1I6IFJlcXVpcmVkIGJ1aWxkIHRhcmdldCAnbWV0YS13b3JsZC1wa2dkYXRhJyBoYXMg
+bm8gYnVpbGRhYmxlIHByb3ZpZGVycy4NCnN0ZGlvOiBFUlJPUjogTm90aGluZyBQUk9WSURFUyAn
+bGlibWVtY2FjaGVkJyAoYnV0IC9ob21lL3Bva3lidWlsZC95b2N0by13b3JrZXIvbWV0YS1vZS9i
+dWlsZC9tZXRhLW9wZW5lbWJlZGRlZC9tZXRhLW9lL3JlY2lwZXMtc3VwcG9ydC9wZ3Bvb2wyL3Bn
+cG9vbDJfNC40LjEuYmIgREVQRU5EUyBvbiBvciBvdGhlcndpc2UgcmVxdWlyZXMgaXQpDQpzdGRp
+bzogRVJST1I6IFJlcXVpcmVkIGJ1aWxkIHRhcmdldCAnbWV0YS13b3JsZC1wa2dkYXRhJyBoYXMg
+bm8gYnVpbGRhYmxlIHByb3ZpZGVycy4NCnN0ZGlvOiBFUlJPUjogTm90aGluZyBQUk9WSURFUyAn
+bGlibWVtY2FjaGVkJyAoYnV0IC9ob21lL3Bva3lidWlsZC95b2N0by13b3JrZXIvbWV0YS1vZS9i
+dWlsZC9tZXRhLW9wZW5lbWJlZGRlZC9tZXRhLW9lL3JlY2lwZXMtc3VwcG9ydC9wZ3Bvb2wyL3Bn
+cG9vbDJfNC40LjEuYmIgREVQRU5EUyBvbiBvciBvdGhlcndpc2UgcmVxdWlyZXMgaXQpDQpzdGRp
+bzogRVJST1I6IFJlcXVpcmVkIGJ1aWxkIHRhcmdldCAnbWV0YS13b3JsZC1wa2dkYXRhJyBoYXMg
+bm8gYnVpbGRhYmxlIHByb3ZpZGVycy4NCnN0ZGlvOiBFUlJPUjogTm90aGluZyBQUk9WSURFUyAn
+bGlibWVtY2FjaGVkJyAoYnV0IC9ob21lL3Bva3lidWlsZC95b2N0by13b3JrZXIvbWV0YS1vZS9i
+dWlsZC9tZXRhLW9wZW5lbWJlZGRlZC9tZXRhLW9lL3JlY2lwZXMtc3VwcG9ydC9wZ3Bvb2wyL3Bn
+cG9vbDJfNC40LjEuYmIgREVQRU5EUyBvbiBvciBvdGhlcndpc2UgcmVxdWlyZXMgaXQpDQpzdGRp
+bzogRVJST1I6IFJlcXVpcmVkIGJ1aWxkIHRhcmdldCAnbWV0YS13b3JsZC1wa2dkYXRhJyBoYXMg
+bm8gYnVpbGRhYmxlIHByb3ZpZGVycy4NCnN0ZGlvOiBFUlJPUjogTm90aGluZyBQUk9WSURFUyAn
+bGlibWVtY2FjaGVkJyAoYnV0IC9ob21lL3Bva3lidWlsZC95b2N0by13b3JrZXIvbWV0YS1vZS9i
+dWlsZC9tZXRhLW9wZW5lbWJlZGRlZC9tZXRhLW9lL3JlY2lwZXMtc3VwcG9ydC9wZ3Bvb2wyL3Bn
+cG9vbDJfNC40LjEuYmIgREVQRU5EUyBvbiBvciBvdGhlcndpc2UgcmVxdWlyZXMgaXQpDQpzdGRp
+bzogRVJST1I6IFJlcXVpcmVkIGJ1aWxkIHRhcmdldCAnbWV0YS13b3JsZC1wa2dkYXRhJyBoYXMg
+bm8gYnVpbGRhYmxlIHByb3ZpZGVycy4NCnN0ZGlvOiBFUlJPUjogTm90aGluZyBQUk9WSURFUyAn
+bGlibWVtY2FjaGVkJyAoYnV0IC9ob21lL3Bva3lidWlsZC95b2N0by13b3JrZXIvbWV0YS1vZS9i
+dWlsZC9tZXRhLW9wZW5lbWJlZGRlZC9tZXRhLW9lL3JlY2lwZXMtc3VwcG9ydC9wZ3Bvb2wyL3Bn
+cG9vbDJfNC40LjEuYmIgREVQRU5EUyBvbiBvciBvdGhlcndpc2UgcmVxdWlyZXMgaXQpDQpzdGRp
+bzogRVJST1I6IFJlcXVpcmVkIGJ1aWxkIHRhcmdldCAnbWV0YS13b3JsZC1wa2dkYXRhJyBoYXMg
+bm8gYnVpbGRhYmxlIHByb3ZpZGVycy4NCnN0ZGlvOiBFUlJPUjogTm90aGluZyBQUk9WSURFUyAn
+bGlibWVtY2FjaGVkJyAoYnV0IC9ob21lL3Bva3lidWlsZC95b2N0by13b3JrZXIvbWV0YS1vZS9i
+dWlsZC9tZXRhLW9wZW5lbWJlZGRlZC9tZXRhLW9lL3JlY2lwZXMtc3VwcG9ydC9wZ3Bvb2wyL3Bn
+cG9vbDJfNC40LjEuYmIgREVQRU5EUyBvbiBvciBvdGhlcndpc2UgcmVxdWlyZXMgaXQpDQpzdGRp
+bzogRVJST1I6IFJlcXVpcmVkIGJ1aWxkIHRhcmdldCAnbWV0YS13b3JsZC1wa2dkYXRhJyBoYXMg
+bm8gYnVpbGRhYmxlIHByb3ZpZGVycy4NCnN0ZGlvOiBFUlJPUjogTm90aGluZyBQUk9WSURFUyAn
+bGlibWVtY2FjaGVkJyAoYnV0IC9ob21lL3Bva3lidWlsZC95b2N0by13b3JrZXIvbWV0YS1vZS9i
+dWlsZC9tZXRhLW9wZW5lbWJlZGRlZC9tZXRhLW9lL3JlY2lwZXMtc3VwcG9ydC9wZ3Bvb2wyL3Bn
+cG9vbDJfNC40LjEuYmIgREVQRU5EUyBvbiBvciBvdGhlcndpc2UgcmVxdWlyZXMgaXQpDQpzdGRp
+bzogRVJST1I6IFJlcXVpcmVkIGJ1aWxkIHRhcmdldCAnbWV0YS13b3JsZC1wa2dkYXRhJyBoYXMg
+bm8gYnVpbGRhYmxlIHByb3ZpZGVycy4NCnN0ZGlvOiBFUlJPUjogQ29tbWFuZCAuIC4vb2UtaW5p
+dC1idWlsZC1lbnY7IHlvY3RvLWNoZWNrLWxheWVyLXdyYXBwZXIgLi4vbWV0YS1vcGVuZW1iZWRk
+ZWQgZmFpbGVkIHdpdGggZXhpdCBjb2RlIDIsIHNlZSBlcnJvcnMgYWJvdmUuICgxNjc3NjcyNjI2
+LjM6IDc4NS44KQ0KDQoNCkJlc3QgcmVnYXJkcw0KTGVpDQoNCg0KDQo+IC0tLS0tT3JpZ2luYWwg
+TWVzc2FnZS0tLS0tDQo+IEZyb206IEtoZW0gUmFqIDxyYWoua2hlbUBnbWFpbC5jb20+DQo+IFNl
+bnQ6IFRodXJzZGF5LCBNYXJjaCAyLCAyMDIzIDE6MTMgQU0NCj4gVG86IExlaSwgTWFvaHVpIDxs
+ZWltYW9odWlAZnVqaXRzdS5jb20+DQo+IENjOiBvcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3Bl
+bmVtYmVkZGVkLm9yZw0KPiBTdWJqZWN0OiBSZTogW29lXSBbbWV0YS1vZV1bUEFUQ0hpIHYyXSBw
+Z3Bvb2wyOiBBZGRlZCBhIG5ldyByZWNpcGUuDQo+IA0KPiBpdCBmYWlscyBpbiBjb21wYXQgY2hl
+Y2tzIHNlZQ0KPiANCj4gaHR0cHM6Ly9hdXRvYnVpbGRlci55b2N0b3Byb2plY3Qub3JnL3R5cGhv
+b24vIy9idWlsZGVycy84OC9idWlsZHMvMjUwNA0KPiANCj4gT24gV2VkLCBNYXIgMSwgMjAyMyBh
+dCAxOjAx4oCvQU0gbGVpbWFvaHVpIDxsZWltYW9odWlAZnVqaXRzdS5jb20+IHdyb3RlOg0KPiA+
+DQo+ID4gUGdwb29sLUlJIGlzIGEgbWlkZGxld2FyZSB0aGF0IHdvcmtzIGJldHdlZW4gUG9zdGdy
+ZVNRTCBzZXJ2ZXJzIGFuZCBhDQo+IFBvc3RncmVTUUwgZGF0YWJhc2UgY2xpZW50LiBJdCBpcyBk
+aXN0cmlidXRlZCB1bmRlciBhIGxpY2Vuc2Ugc2ltaWxhciB0byBCU0QgYW5kDQo+IE1JVC4gSXQg
+cHJvdmlkZXMgdGhlICBmb2xsb3dpbmcgZmVhdHVyZXMuDQo+ID4NCj4gPiBTaWduZWQtb2ZmLWJ5
+OiBMZWkgTWFvaHVpIDxsZWltYW9odWlAZnVqaXRzdS5jb20+DQo+ID4gLS0tDQo+ID4gIC4uLjAw
+MDEtRml4LWJ1aWxkLWVycm9yLXdoZW4tYnVpbGQtdGhpcy1maWxlLnBhdGNoIHwgMzIgKysrKysr
+KysrKysrKw0KPiA+IC4uLi9yZWNpcGVzLXN1cHBvcnQvcGdwb29sMi9wZ3Bvb2wyL3BncG9vbC5z
+ZXJ2aWNlIHwgMTcgKysrKysrKw0KPiA+ICAuLi4vcGdwb29sMi9wZ3Bvb2wyL3BncG9vbC5zeXNj
+b25maWcgICAgICAgICAgICAgICB8ICA3ICsrKw0KPiA+ICBtZXRhLW9lL3JlY2lwZXMtc3VwcG9y
+dC9wZ3Bvb2wyL3BncG9vbDJfNC40LjEuYmIgICB8IDUzDQo+ICsrKysrKysrKysrKysrKysrKysr
+KysNCj4gPiAgNCBmaWxlcyBjaGFuZ2VkLCAxMDkgaW5zZXJ0aW9ucygrKQ0KPiA+ICBjcmVhdGUg
+bW9kZSAxMDA2NDQNCj4gPiBtZXRhLW9lL3JlY2lwZXMtc3VwcG9ydC9wZ3Bvb2wyL3BncG9vbDIv
+MDAwMS1GaXgtYnVpbGQtZXJyb3Itd2hlbi1idWlsDQo+ID4gZC10aGlzLWZpbGUucGF0Y2ggIGNy
+ZWF0ZSBtb2RlIDEwMDY0NA0KPiA+IG1ldGEtb2UvcmVjaXBlcy1zdXBwb3J0L3BncG9vbDIvcGdw
+b29sMi9wZ3Bvb2wuc2VydmljZQ0KPiA+ICBjcmVhdGUgbW9kZSAxMDA2NDQNCj4gPiBtZXRhLW9l
+L3JlY2lwZXMtc3VwcG9ydC9wZ3Bvb2wyL3BncG9vbDIvcGdwb29sLnN5c2NvbmZpZw0KPiA+ICBj
+cmVhdGUgbW9kZSAxMDA2NDQgbWV0YS1vZS9yZWNpcGVzLXN1cHBvcnQvcGdwb29sMi9wZ3Bvb2wy
+XzQuNC4xLmJiDQo+ID4NCj4gPiBkaWZmIC0tZ2l0DQo+ID4gYS9tZXRhLW9lL3JlY2lwZXMtc3Vw
+cG9ydC9wZ3Bvb2wyL3BncG9vbDIvMDAwMS1GaXgtYnVpbGQtZXJyb3Itd2hlbi1idQ0KPiA+IGls
+ZC10aGlzLWZpbGUucGF0Y2gNCj4gPiBiL21ldGEtb2UvcmVjaXBlcy1zdXBwb3J0L3BncG9vbDIv
+cGdwb29sMi8wMDAxLUZpeC1idWlsZC1lcnJvci13aGVuLWJ1DQo+ID4gaWxkLXRoaXMtZmlsZS5w
+YXRjaA0KPiA+IG5ldyBmaWxlIG1vZGUgMTAwNjQ0DQo+ID4gaW5kZXggMDAwMDAwMC4uNTJiY2Mz
+Yg0KPiA+IC0tLSAvZGV2L251bGwNCj4gPiArKysgYi9tZXRhLW9lL3JlY2lwZXMtc3VwcG9ydC9w
+Z3Bvb2wyL3BncG9vbDIvMDAwMS1GaXgtYnVpbGQtZXJyb3Itd2hlDQo+ID4gKysrIG4tYnVpbGQt
+dGhpcy1maWxlLnBhdGNoDQo+ID4gQEAgLTAsMCArMSwzMiBAQA0KPiA+ICtGcm9tIGY4YWI3NGE3
+NjA0OWY2OWFkZWViZTkyYzYyNTkzNTQ3ZTA1YTA3NWQgTW9uIFNlcCAxNyAwMDowMDowMA0KPiA+
+ICsyMDAxDQo+ID4gK0Zyb206IExlaSBNYW9odWkgPGxlaW1hb2h1aUBmdWppdHN1LmNvbT4NCj4g
+PiArRGF0ZTogV2VkLCAxMSBKYW4gMjAyMyAxNzoyMjo0MSArMDkwMA0KPiA+ICtTdWJqZWN0OiBb
+UEFUQ0hdIEZpeCBidWlsZCBlcnJvciB3aGVuIGJ1aWxkIHRoaXMgZmlsZS4NCj4gPiArDQo+ID4g
+K3wgc25wcmludGYuYzo3NzA6NjQ6IGVycm9yOiAnUEdfU1RSRVJST1JfUl9CVUZMRU4nIHVuZGVj
+bGFyZWQgKGZpcnN0IHVzZSBpbg0KPiB0aGlzIGZ1bmN0aW9uKQ0KPiA+ICt8ICAgNzcwIHwgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGNoYXINCj4gZXJyYnVmW1BHX1NU
+UkVSUk9SX1JfQlVGTEVOXTsNCj4gPiArfCAgICAgICB8DQo+IF5+fn5+fn5+fn5+fn5+fn5+fn5+
+DQo+ID4gKw0KPiA+ICtQR19TVFJFUlJPUl9SX0JVRkxFTiBpcyBkZWZpbmVkIGluIHBvc3RncmVz
+cWwsIGJ1dCBwZ3Bvb2wgZG9lc24ndA0KPiA+ICtpbmNsdWRlIHRoZSBoZWFkZXIgb2YgcG9zdGdy
+ZXNxbC4NCj4gPiArDQo+ID4gK1Vwc3RyZWFtLVN0YXR1czogSW5hcHByb3ByaWF0ZSBbT0UtU3Bl
+Y2lmaWNdDQo+ID4gK1NpZ25lZC1vZmYtYnk6IExlaSBNYW9odWkgPGxlaW1hb2h1aUBmdWppdHN1
+LmNvbT4NCj4gPiArLS0tDQo+ID4gKyBzcmMvcGFyc2VyL3NucHJpbnRmLmMgfCAxICsNCj4gPiAr
+IDEgZmlsZSBjaGFuZ2VkLCAxIGluc2VydGlvbigrKQ0KPiA+ICsNCj4gPiArZGlmZiAtLWdpdCBh
+L3NyYy9wYXJzZXIvc25wcmludGYuYyBiL3NyYy9wYXJzZXIvc25wcmludGYuYyBpbmRleA0KPiA+
+ICs4NGViZGIyLi4zMzg3ODk3IDEwMDY0NA0KPiA+ICstLS0gYS9zcmMvcGFyc2VyL3NucHJpbnRm
+LmMNCj4gPiArKysrIGIvc3JjL3BhcnNlci9zbnByaW50Zi5jDQo+ID4gK0BAIC00Niw2ICs0Niw3
+IEBADQo+ID4gKyAjaW5jbHVkZSAicG9vbF9wYXJzZXIuaCINCj4gPiArICNpbmNsdWRlICJzdHJp
+bmdpbmZvLmgiDQo+ID4gKyAjaW5jbHVkZSAidXRpbHMvcGFsbG9jLmgiDQo+ID4gKysjaW5jbHVk
+ZSAicG9zdGdyZXNxbC9zZXJ2ZXIvcG9ydC5oIg0KPiA+ICsNCj4gPiArIC8qDQo+ID4gKyAgKiBX
+ZSB1c2VkIHRvIHVzZSB0aGUgcGxhdGZvcm0ncyBOTF9BUkdNQVggaGVyZSwgYnV0IHRoYXQncyBh
+IGJhZA0KPiA+ICtpZGVhLA0KPiA+ICstLQ0KPiA+ICsyLjI1LjENCj4gPiBkaWZmIC0tZ2l0IGEv
+bWV0YS1vZS9yZWNpcGVzLXN1cHBvcnQvcGdwb29sMi9wZ3Bvb2wyL3BncG9vbC5zZXJ2aWNlDQo+
+ID4gYi9tZXRhLW9lL3JlY2lwZXMtc3VwcG9ydC9wZ3Bvb2wyL3BncG9vbDIvcGdwb29sLnNlcnZp
+Y2UNCj4gPiBuZXcgZmlsZSBtb2RlIDEwMDY0NA0KPiA+IGluZGV4IDAwMDAwMDAuLmJmMmQzMjMN
+Cj4gPiAtLS0gL2Rldi9udWxsDQo+ID4gKysrIGIvbWV0YS1vZS9yZWNpcGVzLXN1cHBvcnQvcGdw
+b29sMi9wZ3Bvb2wyL3BncG9vbC5zZXJ2aWNlDQo+ID4gQEAgLTAsMCArMSwxNyBAQA0KPiA+ICtb
+VW5pdF0NCj4gPiArRGVzY3JpcHRpb249UGdwb29sLUlJDQo+ID4gK0FmdGVyPXN5c2xvZy50YXJn
+ZXQgbmV0d29yay50YXJnZXQNCj4gPiArDQo+ID4gK1tTZXJ2aWNlXQ0KPiA+ICsNCj4gPiArVXNl
+cj1wb3N0Z3Jlcw0KPiA+ICtHcm91cD1wb3N0Z3Jlcw0KPiA+ICsNCj4gPiArRW52aXJvbm1lbnRG
+aWxlPS0vZXRjL3N5c2NvbmZpZy9wZ3Bvb2wNCj4gPiArDQo+ID4gK0V4ZWNTdGFydD0vdXNyL2Jp
+bi9wZ3Bvb2wgLWYgL2V0Yy9wZ3Bvb2wtSUkvcGdwb29sLmNvbmYgJE9QVFMNCj4gPiArRXhlY1N0
+b3A9L3Vzci9iaW4vcGdwb29sIC1mIC9ldGMvcGdwb29sLUlJL3BncG9vbC5jb25mICRTVE9QX09Q
+VFMNCj4gPiArc3RvcCBFeGVjUmVsb2FkPS91c3IvYmluL3BncG9vbCAtZiAvZXRjL3BncG9vbC1J
+SS9wZ3Bvb2wuY29uZiByZWxvYWQNCj4gPiArDQo+ID4gK1tJbnN0YWxsXQ0KPiA+ICtXYW50ZWRC
+eT1tdWx0aS11c2VyLnRhcmdldA0KPiA+IGRpZmYgLS1naXQgYS9tZXRhLW9lL3JlY2lwZXMtc3Vw
+cG9ydC9wZ3Bvb2wyL3BncG9vbDIvcGdwb29sLnN5c2NvbmZpZw0KPiA+IGIvbWV0YS1vZS9yZWNp
+cGVzLXN1cHBvcnQvcGdwb29sMi9wZ3Bvb2wyL3BncG9vbC5zeXNjb25maWcNCj4gPiBuZXcgZmls
+ZSBtb2RlIDEwMDY0NA0KPiA+IGluZGV4IDAwMDAwMDAuLmVhMTMwODkNCj4gPiAtLS0gL2Rldi9u
+dWxsDQo+ID4gKysrIGIvbWV0YS1vZS9yZWNpcGVzLXN1cHBvcnQvcGdwb29sMi9wZ3Bvb2wyL3Bn
+cG9vbC5zeXNjb25maWcNCj4gPiBAQCAtMCwwICsxLDcgQEANCj4gPiArIyBPcHRpb25zIGZvciBw
+Z3Bvb2wNCj4gPiArDQo+ID4gKyMgLW46IGRvbid0IHJ1biBpbiBkYWVtb24gbW9kZS4gZG9lcyBu
+b3QgZGV0YWNoIGNvbnRyb2wgdHR5ICMgLWQ6DQo+ID4gK2RlYnVnIG1vZGUuIGxvdHMgb2YgZGVi
+dWcgaW5mb3JtYXRpb24gd2lsbCBiZSBwcmludGVkDQo+ID4gKw0KPiA+ICsjT1BUUz0iIC1kIC1u
+Ig0KPiA+ICtPUFRTPSIgLW4iDQo+ID4gZGlmZiAtLWdpdCBhL21ldGEtb2UvcmVjaXBlcy1zdXBw
+b3J0L3BncG9vbDIvcGdwb29sMl80LjQuMS5iYg0KPiA+IGIvbWV0YS1vZS9yZWNpcGVzLXN1cHBv
+cnQvcGdwb29sMi9wZ3Bvb2wyXzQuNC4xLmJiDQo+ID4gbmV3IGZpbGUgbW9kZSAxMDA2NDQNCj4g
+PiBpbmRleCAwMDAwMDAwLi41NzI4MGU0DQo+ID4gLS0tIC9kZXYvbnVsbA0KPiA+ICsrKyBiL21l
+dGEtb2UvcmVjaXBlcy1zdXBwb3J0L3BncG9vbDIvcGdwb29sMl80LjQuMS5iYg0KPiA+IEBAIC0w
+LDAgKzEsNTMgQEANCj4gPiArU1VNTUFSWSA9ICJhIGxhbmd1YWdlIGluZGVwZW5kZW50IGNvbm5l
+Y3Rpb24gcG9vbCBzZXJ2ZXIgZm9yDQo+IFBvc3RncmVTUUwuIg0KPiA+ICsNCj4gPiArREVTQ1JJ
+UFRJT04gPSAiUGdwb29sLUlJIGlzIGEgbWlkZGxld2FyZSB0aGF0IHdvcmtzIGJldHdlZW4gUG9z
+dGdyZVNRTCBcDQo+ID4gKyAgICAgICAgICAgICAgIHNlcnZlcnMgYW5kIGEgUG9zdGdyZVNRTCBk
+YXRhYmFzZSBjbGllbnQuIEl0IGlzIGRpc3RyaWJ1dGVkIFwNCj4gPiArICAgICAgICAgICAgICAg
+dW5kZXIgYSBsaWNlbnNlIHNpbWlsYXIgdG8gQlNEIGFuZCBNSVQuIEl0IHByb3ZpZGVzIHRoZSBc
+DQo+ID4gKyAgICAgICAgICAgICAgIGZvbGxvd2luZyBmZWF0dXJlcy4iDQo+ID4gKw0KPiA+ICtI
+T01FUEFHRSA9ICJodHRwOi8vcGdwb29sLm5ldCINCj4gPiArDQo+ID4gK0xJQ0VOU0UgPSAiQlNE
+LTItQ2xhdXNlIg0KPiA+ICtMSUNfRklMRVNfQ0hLU1VNID0NCj4gImZpbGU6Ly9DT1BZSU5HO21k
+NT1lNGIzOGRlMDg2ZDczZTA1MjFkZTBiYmRiYWE0YTFhOSINCj4gPiArDQo+ID4gK1NSQ19VUkkg
+PSAiaHR0cDovL3d3dy5wZ3Bvb2wubmV0L21lZGlhd2lraS9pbWFnZXMvcGdwb29sLUlJLSR7UFZ9
+LnRhci5neg0KPiBcDQo+ID4gKyAgICAgICAgICBmaWxlOi8vMDAwMS1GaXgtYnVpbGQtZXJyb3It
+d2hlbi1idWlsZC10aGlzLWZpbGUucGF0Y2ggXA0KPiA+ICsgICAgICAgICAgZmlsZTovL3BncG9v
+bC5zeXNjb25maWcgXA0KPiA+ICsgICAgICAgICAgZmlsZTovL3BncG9vbC5zZXJ2aWNlIFwNCj4g
+PiArICAgICAgICAgICAiDQo+ID4gK1NSQ19VUklbc2hhMjU2c3VtXSA9DQo+ICI0YjM3OWJiYmE4
+ZTE3ODEyOGExY2VlNGE1YmQxYWUxMTZkZWRiM2RhNjEyMWI3MjhjMThmMGY1NGM4ODFmMzI4Ig0K
+PiA+ICsNCj4gPiArUyA9ICIke1dPUktESVJ9L3BncG9vbC1JSS0ke1BWfSINCj4gPiArDQo+ID4g
+K2luaGVyaXQgYXV0b3Rvb2xzIHN5c3RlbWQgcGtnY29uZmlnDQo+ID4gKw0KPiA+ICtTWVNURU1E
+X1NFUlZJQ0U6JHtQTn0gPSAicGdwb29sLnNlcnZpY2UiDQo+ID4gKw0KPiA+ICtQQUNLQUdFQ09O
+RklHID8/PSAiIG9wZW5zc2wgbGlibWVtY2FjaGVkIHBvc3RncmVzcWwgXA0KPiA+ICsgICAgJHtA
+YmIudXRpbHMuZmlsdGVyKCdESVNUUk9fRkVBVFVSRVMnLCAncGFtJywgZCl9IFwNCj4gPiArICAg
+ICINCj4gPiArUEFDS0FHRUNPTkZJR1twYW1dID0gIi0td2l0aC1wYW0sLS13aXRob3V0LXBhbSxs
+aWJwYW0sIg0KPiA+ICtQQUNLQUdFQ09ORklHW29wZW5zc2xdID0gIi0td2l0aC1vcGVuc3NsLC0t
+d2l0aG91dC1vcGVuc3NsLG9wZW5zc2wiDQo+ID4gK1BBQ0tBR0VDT05GSUdbbGlibWVtY2FjaGVk
+XSA9DQo+ICItLXdpdGgtbWVtY2FjaGVkPSR7U1RBR0lOR19JTkNESVJ9L2xpYm1lbWNhY2hlZHV0
+aWwtMS4wLC0td2l0aG91dC1tZW0NCj4gY2FjaGVkLGxpYm1lbWNhY2hlZCINCj4gPiArUEFDS0FH
+RUNPTkZJR1twb3N0Z3Jlc3FsXSA9DQo+ICItLXdpdGgtcGdzcWwtaW5jbHVkZWRpcj0ke1NUQUdJ
+TkdfSU5DRElSfS9wb3N0Z3Jlc3FsDQo+IC0td2l0aC1wZ3NxbD0ke1NUQUdJTkdfTElCRElSfS8u
+Li8gLCxwb3N0Z3Jlc3FsIg0KPiA+ICsNCj4gPiArRVhUUkFfT0VDT05GICs9ICItLWRpc2FibGUt
+c3RhdGljIFwNCj4gPiArICAgICAgICAgICAgICAgIC0tZGlzYWJsZS1ycGF0aCBcDQo+ID4gKyAg
+ICAgICAgICAgICAgICINCj4gPiArQiA9ICIke1N9Ig0KPiA+ICtDRkxBR1M6YXBwZW5kID0gIiAt
+ZmNvbW1vbiAiDQo+ID4gKw0KPiA+ICtGSUxFUzoke1BOfSArPSAiJHtkYXRhZGlyfS9wZ3Bvb2wt
+SUkvICINCj4gPiArDQo+ID4gK2RvX2NvbmZpZ3VyZTphcHBlbmQoKSB7DQo+ID4gKyAgICBlY2hv
+ICIjZGVmaW5lIEhBVkVfU1RSQ0hSTlVMIDEiID4+ICR7U30vc3JjL2luY2x1ZGUvY29uZmlnLmgN
+Cj4gPiArICAgIHNlZCAtaSAicywjZGVmaW5lIFVTRV9SRVBMX1NOUFJJTlRGIDEsLyogI3VuZGVm
+DQo+ID4gK1VTRV9SRVBMX1NOUFJJTlRGKi8sZyIgJHtTfS9zcmMvaW5jbHVkZS9jb25maWcuaCB9
+DQo+ID4gKw0KPiA+ICtkb19pbnN0YWxsOmFwcGVuZCgpIHsNCj4gPiArICAgIGluc3RhbGwgLWQg
+JHtEfSR7c3lzY29uZmRpcn0vcGdwb29sLUlJDQo+ID4gKyAgICBpbnN0YWxsIC1EIC1tIDA2NDQg
+JHtXT1JLRElSfS9wZ3Bvb2wuc3lzY29uZmlnDQo+ICR7RH0ke3N5c2NvbmZkaXJ9L3BncG9vbC1J
+SS9wZ3Bvb2wuY29uZg0KPiA+ICsgICAgaW5zdGFsbCAtRCAtbSAwNjQ0ICR7U30vc3JjL3NhbXBs
+ZS9wY3AuY29uZi5zYW1wbGUNCj4gJHtEfSR7c3lzY29uZmRpcn0vcGdwb29sLUlJL3BjcC5jb25m
+DQo+ID4gKyAgICBpbnN0YWxsIC1EIC1tIDA2NDQgJHtTfS9zcmMvc2FtcGxlL3Bvb2xfaGJhLmNv
+bmYuc2FtcGxlDQo+ICR7RH0ke3N5c2NvbmZkaXJ9L3BncG9vbC1JSS9wb29sX2hiYS5jb25mDQo+
+ID4gKyAgICBpbnN0YWxsIC1EbSAwNjQ0ICR7V09SS0RJUn0vcGdwb29sLnNlcnZpY2UNCj4gPiAr
+JHtEfSR7c3lzdGVtZF9zeXN0ZW1fdW5pdGRpcn0vcGdwb29sLnNlcnZpY2UNCj4gPiArfQ0KPiA+
+IC0tDQo+ID4gMS44LjMuMQ0KPiA+DQo+ID4NCj4gPiAtPS09LT0tPS09LT0tPS09LT0tPS09LQ0K
+PiA+IExpbmtzOiBZb3UgcmVjZWl2ZSBhbGwgbWVzc2FnZXMgc2VudCB0byB0aGlzIGdyb3VwLg0K
+PiA+IFZpZXcvUmVwbHkgT25saW5lICgjMTAxMzE0KToNCj4gPiBodHRwczovL2xpc3RzLm9wZW5l
+bWJlZGRlZC5vcmcvZy9vcGVuZW1iZWRkZWQtZGV2ZWwvbWVzc2FnZS8xMDEzMTQNCj4gPiBNdXRl
+IFRoaXMgVG9waWM6IGh0dHBzOi8vbGlzdHMub3BlbmVtYmVkZGVkLm9yZy9tdC85NzMxMDUxNy8x
+OTk3OTE0DQo+ID4gR3JvdXAgT3duZXI6IG9wZW5lbWJlZGRlZC1kZXZlbCtvd25lckBsaXN0cy5v
+cGVuZW1iZWRkZWQub3JnDQo+ID4gVW5zdWJzY3JpYmU6IGh0dHBzOi8vbGlzdHMub3BlbmVtYmVk
+ZGVkLm9yZy9nL29wZW5lbWJlZGRlZC1kZXZlbC91bnN1Yg0KPiA+IFtyYWoua2hlbUBnbWFpbC5j
+b21dDQo+ID4gLT0tPS09LT0tPS09LT0tPS09LT0tPS0NCj4gPg0K
 
