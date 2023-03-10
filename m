@@ -1,107 +1,148 @@
-Return-Path: <zboszor@gmail.com>
+Return-Path: <crogers122@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 89D0CC64EC4
-	for <webhook@archiver.kernel.org>; Fri, 10 Mar 2023 13:46:49 +0000 (UTC)
-Received: from mail-ed1-f43.google.com (mail-ed1-f43.google.com [209.85.208.43])
- by mx.groups.io with SMTP id smtpd.web10.19289.1678456001642684665
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 229E3C6FD1F
+	for <webhook@archiver.kernel.org>; Fri, 10 Mar 2023 15:37:00 +0000 (UTC)
+Received: from mail-qt1-f181.google.com (mail-qt1-f181.google.com [209.85.160.181])
+ by mx.groups.io with SMTP id smtpd.web11.22352.1678462615516233109
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 10 Mar 2023 05:46:41 -0800
+ Fri, 10 Mar 2023 07:36:55 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=YVbSU/i/;
- spf=pass (domain: gmail.com, ip: 209.85.208.43, mailfrom: zboszor@gmail.com)
-Received: by mail-ed1-f43.google.com with SMTP id a25so20817318edb.0
-        for <openembedded-devel@lists.openembedded.org>; Fri, 10 Mar 2023 05:46:41 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=OHlfAUVs;
+ spf=pass (domain: gmail.com, ip: 209.85.160.181, mailfrom: crogers122@gmail.com)
+Received: by mail-qt1-f181.google.com with SMTP id c3so6057807qtc.8
+        for <openembedded-devel@lists.openembedded.org>; Fri, 10 Mar 2023 07:36:55 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112; t=1678456000;
+        d=gmail.com; s=20210112; t=1678462614;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=PFB4XGcxdqdLUF66XOU3Ms3ebhv8FF8WJ3PmXey7L3Q=;
-        b=YVbSU/i/omGBf4CrkL1T8cdo7u7rkKg5k3skLKB80cnmmc0688Rp+E/wd+7s7eZoQn
-         hpGFnHaEnJag7vINUQniAOxepLDvA1V0Pt3KYGhc0AkazVe48TGGAYCoXUvI1oP4t4YR
-         SCl8L68QLD+H8YypFb8FD0+LjMDISYeYp1qnWXG19MdiTYT8ep30EJn7fp6FmkFYyHRN
-         zhSUl0rmbFtWJgs8n34aHmFsAavxILXPS+shHZwgXvjBqaF/uxziqnxywFJdA5PjK1uW
-         e/t1Fe+4Fi9vasi43Shic9IQ+vSntSZh5Q3lAshrFkgE5Ngif55nQu9LOK9qSNAZAbCh
-         7T5Q==
+        bh=4GruZb74edD6cxsc0SGu0a+XdIojOx0l3II7nNX65Eo=;
+        b=OHlfAUVstn/DfSxsxuN8Qy0iHmkBcTO5+YSKTZ68j5xhotuitS513pLoO3FwAQl6WI
+         oNkbQhyM6iKRcygdx6SB4VWNxjLczshQjVhfUhxPS4saXLfMzxuGF5Ar2CV8/bTZzdtf
+         /uCsAwqCCC41icMCDIHYcSclunx0qZLi6TDjdNZGKO3G9o2FClKm7oT8TtILoBfHgHYX
+         tRv/USi1H1tOz2ei50q+MN0vPAgOLF9WtmuqOI9GH6AaFh+4cPUZijkgnp99WRsTfGfI
+         kD7xCt07DasYmk6QHtmqNjMAsxFG81z/sAgEAtQg1GOKZGjGUXHcLo5+QJVXcjOzJm3H
+         qkJA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112; t=1678456000;
+        d=1e100.net; s=20210112; t=1678462614;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=PFB4XGcxdqdLUF66XOU3Ms3ebhv8FF8WJ3PmXey7L3Q=;
-        b=UqWfvY6Zu41M1YszztEWeeCuB1+EXfIIpnE90m8I6EoWiubqZ9MIjl+i+2oMWU7ELb
-         usrhoPuyuLU4e1HxDI4KtowneYzh0kX/r5rr8UrsPCR6DifNSKrxvxr7Mi1F4LLMl3dx
-         It36RWhfZkecMjWnpu7cwyTxDhW1++VY7wRGlUXGtIUZ/OkBLcdI+xWv4D33X6xzeEfD
-         wXqXk/CDaMTujrJvtIXpY0NSLS4AbHeATbtoAXHBSFBoSDucEeZ80fIkOhWI68cxzM0u
-         8qjZgtUY5xVRh//Q1+1vGfefQApgC4LX1de7QN1b+0quPOAhKGY7dAWRHf2uSMdVID9I
-         yPTg==
-X-Gm-Message-State: AO0yUKX9rF3XmeEH+QB3e1RjTq14D0NNDr8yiXxaGSzT2khzLfNE2sod
-	fydVjf7goxZm0cSI91yFHWo7jOzPXTaeqQ==
-X-Google-Smtp-Source: AK7set+j6e/KojujKjhAyXMZwKuG2CXARzEGKVLe8Buv1tYICBUjn6dkYqB2dk/ZmiQgyUU/dXRWcg==
-X-Received: by 2002:a17:906:49c1:b0:878:5524:e932 with SMTP id w1-20020a17090649c100b008785524e932mr27067157ejv.5.1678455999936;
-        Fri, 10 Mar 2023 05:46:39 -0800 (PST)
-Received: from localhost.lan (BC244571.dsl.pool.telekom.hu. [188.36.69.113])
-        by smtp.gmail.com with ESMTPSA id o26-20020a1709062e9a00b008b17fe9ac6csm980198eji.178.2023.03.10.05.46.39
+        bh=4GruZb74edD6cxsc0SGu0a+XdIojOx0l3II7nNX65Eo=;
+        b=dlmixIzhwjCunLn96JAI4TBNTH9iZiJV7BJ5VQWaM3K/BNDvQqWOM5Td5CXyueqHh/
+         Q3+rgcA5kL8jeW66WB4kbR3sAz1NXRDNsfQhOcKFsvesL+tXIoLsCYSBwzbrzo+DTVyR
+         rMStESOfB0+CLodyo2OERPBYE7hJnzjaeoo13leNi5B9h8y5jRZY3g+d3t0ovA+sM9ml
+         TEjAGSpOSGHDVaj7zGRqSuvw6KJMV2fsJLs/aeYW6PA/Afszn8P+cs4U/NFYhIrdYgTA
+         JO5NGugW+9lvkt9LamsHQEozwHL9Rx4nCa9Q2jxvqxBCkvTcDmvQVBA2BLT5zXHHTFfl
+         hijQ==
+X-Gm-Message-State: AO0yUKXYT9ZLSDg1XU1etVgF5Y0aF9VSrPaJv2PTiduQJ04n+PueMNy5
+	Laz8diazU+4zEG1ZKnlxTtrEwX9GGVnoSm1b
+X-Google-Smtp-Source: AK7set/69ldE5c7auzsWJcPZ834tMM6yMdL1drPGwP68FZjVT4YpR4TmHmEBWAY+NvRYHG3QvE75QQ==
+X-Received: by 2002:a05:622a:180f:b0:3bd:d8f:2da9 with SMTP id t15-20020a05622a180f00b003bd0d8f2da9mr5605265qtc.2.1678462613959;
+        Fri, 10 Mar 2023 07:36:53 -0800 (PST)
+Received: from UBU-rogers-L.fios-router.home (pool-74-111-44-222.syrcny.fios.verizon.net. [74.111.44.222])
+        by smtp.gmail.com with ESMTPSA id c4-20020ac81e84000000b003b9a573aec6sm5048qtm.70.2023.03.10.07.36.53
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 10 Mar 2023 05:46:39 -0800 (PST)
-From: =?UTF-8?q?Zolt=C3=A1n=20B=C3=B6sz=C3=B6rm=C3=A9nyi?= <zboszor@gmail.com>
+        Fri, 10 Mar 2023 07:36:53 -0800 (PST)
+From: Chris Rogers <crogers122@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Tim moto-timo Orling <TicoTimo@gmail.com>,
-	Derek Straka <derek@asterius.io>,
-	=?UTF-8?q?Zolt=C3=A1n=20B=C3=B6sz=C3=B6rm=C3=A9nyi?= <zboszor@gmail.com>
-Subject: [meta-python][PATCH v2 1/3] python3-scikit-build: New recipe
-Date: Fri, 10 Mar 2023 14:46:35 +0100
-Message-Id: <20230310134637.108312-1-zboszor@gmail.com>
-X-Mailer: git-send-email 2.39.2
+Cc: akuster808@gmail.com,
+	Chris Rogers <crogers122@gmail.com>
+Subject: [meta-oe][dunfell][PATCH] xterm: Remove undeclared variables introduced by backport
+Date: Fri, 10 Mar 2023 10:36:34 -0500
+Message-Id: <20230310153634.3376415-1-crogers122@gmail.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 10 Mar 2023 13:46:49 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101489
+ <openembedded-devel@lists.openembedded.org>; Fri, 10 Mar 2023 15:37:00 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101492
 
-Used by python3-cmake and python3-ninja.
+CVE-2022-45063 ported onto the dunfell baseline introduces two
+variables that cause xterm to fail compilation with the error
 
-Signed-off-by: Zoltán Böszörményi <zboszor@gmail.com>
+./fontutils.c:4143:13: error: 'added' undeclared (first use in this function)
+
+These two variables don't appear to be defined at all in findXftGlyph for
+xterm_353, so they should be removed.
+
+Fixes: 10148c538ebc("xterm : Fix CVE-2022-45063 code execution via OSC 50 input sequences] CVE-2022-45063")
+Signed-off-by: Chris Rogers <crogers122@gmail.com>
 ---
+ .../xorg-app/xterm/CVE-2022-45063.patch       | 21 ++++++-------------
+ 1 file changed, 6 insertions(+), 15 deletions(-)
 
-v2: Fixed BBCLASSEXTEND
-
- .../python/python3-scikit-build_0.16.7.bb     | 21 +++++++++++++++++++
- 1 file changed, 21 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-scikit-build_0.16.7.bb
-
-diff --git a/meta-python/recipes-devtools/python/python3-scikit-build_0.16.7.bb b/meta-python/recipes-devtools/python/python3-scikit-build_0.16.7.bb
-new file mode 100644
-index 000000000..c033c56ba
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-scikit-build_0.16.7.bb
-@@ -0,0 +1,21 @@
-+SUMMARY = "Improved build system generator for Python C/C++/Fortran/Cython extensions"
-+LICENSE = "MIT & BSD-2-Clause"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=7c96d2b08b3cec6d3c67fb864d1fd8cc"
-+
-+DEPENDS = "python3-setuptools-scm-native"
-+
-+PYPI_PACKAGE = "scikit-build"
-+
-+inherit pypi python_setuptools_build_meta
-+SRC_URI[sha256sum] = "a9b9cc7479b71e6c8d434596dfade025253aae23adb22a9a2d85850fd51cecfd"
-+
-+RDEPENDS:${PN} = " \
-+	python3-distro \
-+	python3-packaging \
-+	python3-setuptools \
-+	python3-typing-extensions \
-+	python3-wheel \
-+	cmake \
-+"
-+
-+BBCLASSEXTEND = "native nativesdk"
+diff --git a/meta-oe/recipes-graphics/xorg-app/xterm/CVE-2022-45063.patch b/meta-oe/recipes-graphics/xorg-app/xterm/CVE-2022-45063.patch
+index 8d1be3210..e63169a20 100644
+--- a/meta-oe/recipes-graphics/xorg-app/xterm/CVE-2022-45063.patch
++++ b/meta-oe/recipes-graphics/xorg-app/xterm/CVE-2022-45063.patch
+@@ -574,16 +574,7 @@ index 4b0ef85..d9bfaf8 100644
+  			}
+  		    }
+  		}
+-@@ -4119,6 +4140,8 @@ findXftGlyph(XtermWidget xw, XftFont *given, unsigned wc)
+- 		    }
+- #endif
+- 		    if (foundXftGlyph(xw, check, wc)) {
+-+	    (void) added;
+-+	    (void) actual;
+- 			markXftOpened(xw, which, n, wc);
+- 			reportXftFonts(xw, check, "fallback", tag, myReport);
+- 			result = check;
+-@@ -4317,7 +4340,7 @@ lookupOneFontSize(XtermWidget xw, int fontnum)
++@@ -4317,7 +4338,7 @@ lookupOneFontSize(XtermWidget xw, int fontnum)
+  
+  	memset(&fnt, 0, sizeof(fnt));
+  	screen->menu_font_sizes[fontnum] = -1;
+@@ -592,7 +583,7 @@ index 4b0ef85..d9bfaf8 100644
+  	    if (fontnum <= fontMenu_lastBuiltin
+  		|| strcmp(fnt.fn, DEFFONT)) {
+  		screen->menu_font_sizes[fontnum] = FontSize(fnt.fs);
+-@@ -4722,13 +4745,14 @@ HandleSetFont(Widget w GCC_UNUSED,
++@@ -4722,13 +4743,14 @@ HandleSetFont(Widget w GCC_UNUSED,
+      }
+  }
+  
+@@ -608,7 +599,7 @@ index 4b0ef85..d9bfaf8 100644
+  
+      TRACE(("SetVTFont(which=%d, f_n=%s, f_b=%s)\n", which,
+  	   (fonts && fonts->f_n) ? fonts->f_n : "<null>",
+-@@ -4737,34 +4761,31 @@ SetVTFont(XtermWidget xw,
++@@ -4737,34 +4759,31 @@ SetVTFont(XtermWidget xw,
+      if (IsIcon(screen)) {
+  	Bell(xw, XkbBI_MinorError, 0);
+      } else if (which >= 0 && which < NMENUFONTS) {
+@@ -659,7 +650,7 @@ index 4b0ef85..d9bfaf8 100644
+  	    }
+  
+  	    USE_CACHED(f_n, fNorm);
+-@@ -4774,7 +4795,7 @@ SetVTFont(XtermWidget xw,
++@@ -4774,7 +4793,7 @@ SetVTFont(XtermWidget xw,
+  	    USE_CACHED(f_wb, fWBold);
+  #endif
+  	    if (xtermLoadFont(xw,
+@@ -668,7 +659,7 @@ index 4b0ef85..d9bfaf8 100644
+  			      doresize, which)) {
+  		/*
+  		 * If successful, save the data so that a subsequent query via
+-@@ -4786,10 +4807,8 @@ SetVTFont(XtermWidget xw,
++@@ -4786,10 +4805,8 @@ SetVTFont(XtermWidget xw,
+  		SAVE_FNAME(f_w, fWide);
+  		SAVE_FNAME(f_wb, fWBold);
+  #endif
+@@ -680,7 +671,7 @@ index 4b0ef85..d9bfaf8 100644
+  		Bell(xw, XkbBI_MinorError, 0);
+  	    }
+  	    FREE_FNAME(f_n);
+-@@ -4802,7 +4821,8 @@ SetVTFont(XtermWidget xw,
++@@ -4802,7 +4819,8 @@ SetVTFont(XtermWidget xw,
+      } else {
+  	Bell(xw, XkbBI_MinorError, 0);
+      }
 -- 
-2.39.2
+2.25.1
 
 
