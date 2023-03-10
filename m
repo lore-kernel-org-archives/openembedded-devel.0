@@ -2,68 +2,71 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 76239C64EC4
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 76BF2C6FD19
 	for <webhook@archiver.kernel.org>; Fri, 10 Mar 2023 06:15:57 +0000 (UTC)
-Received: from mail1.bemta37.messagelabs.com (mail1.bemta37.messagelabs.com [85.158.142.2])
- by mx.groups.io with SMTP id smtpd.web10.13476.1678428954048998512
+Received: from mail1.bemta34.messagelabs.com (mail1.bemta34.messagelabs.com [195.245.231.2])
+ by mx.groups.io with SMTP id smtpd.web10.13477.1678428955508293535
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 09 Mar 2023 22:15:54 -0800
+ Thu, 09 Mar 2023 22:15:55 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=i4wn5jx2;
- spf=pass (domain: fujitsu.com, ip: 85.158.142.2, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=YGZyNYd+;
+ spf=pass (domain: fujitsu.com, ip: 195.245.231.2, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1678428952; i=@fujitsu.com;
-	bh=hDXcxzzT1wScjXeSPlD/q0+vCcRs3QZsZQI+ejMkGEY=;
-	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=i4wn5jx2IgCof5AUlHKVxr7C5O0SUAF7CYDkBbPknCX/who0wyd60gyP0qASSmmI1
-	 AIoTtOHePIBtJhKdBZehNPDWJQkVO4/YM4mroRtHZvMnCMa7mmaugkJ9ewB4IKNrAf
-	 xeIuUcdWErmGqvUdJDOJkBeUfp7FXpQnTu7rjBkpDtYU8jIrubrqbQ9gTLxcHevwls
-	 fcyzki4MYvXzQBOvJVPT4NcoDT2g54q4RvGzCtUHLDcXuxDMWQ8PY1excE2jGMeoX/
-	 r48ZPWLKLrwdGnupaZnhoNGJSWjss16HvBb3Lw3lFSXnBD5JkfnTjQnFJa2gf/SU00
-	 7H+yTT9NLpqpQ==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFlrHIsWRWlGSWpSXmKPExsViZ8ORpCt+miv
-  FYOpeaYuLh5cyOzB6nNu4gjGAMYo1My8pvyKBNWNJzwG2gs08FRPuTmdvYLzG1cXIxSEk8JBR
-  Yu7vXSwQzhUmiS8tC9i6GDmBnD2MEjuuyYDYbAJSEjfu/weLiwjoSyydvYcZxGYWUJF48buHH
-  cQWFnCV+Hy2DcxmEVCV2HVpMSuIzSvgKLF95zRGEFtCQEFiysP3zBBxQYmTM5+wQMyRkDj44g
-  UzRI2ixOzLzSwQdoVE4/RDTBC2msTVc5uYJzDyz0LSPgtJ+wJGplWMZsWpRWWpRbpmeklFmek
-  ZJbmJmTl6iVW6iXqppbp5+UUlGbqGeonlxXqpxcV6xZW5yTkpenmpJZsYgcGYUpzweAfjvL6/
-  eocYJTmYlER5lVO5UoT4kvJTKjMSizPii0pzUosPMcpwcChJ8O49AZQTLEpNT61Iy8wBRgZMW
-  oKDR0mEl3UHUJq3uCAxtzgzHSJ1ilFRSpyX9ThQQgAkkVGaB9cGi8ZLjLJSwryMDAwMQjwFqU
-  W5mSWo8q8YxTkYlYR5JUC282TmlcBNfwW0mAlo8a4tHCCLSxIRUlINTHO/cdQf0Vsk+k/uaE2
-  ZTuJGUbG2HOm5izYGeejunLl2RoDlpZ8rfuuuM+xJX9Tfw1Wq+fN60JJTVbeza9eYTF2lq/I1
-  Yi/LVKYTZ7hbJuotWNZyeu9m+/ce8xb8YeP6FNbor6Ad4Lb0st2q739sjQq+bYs3LOd+3G5i+
-  O2k5QLlqf3rDN9HfTs0J0/1Txb/HfeVU45ofDO5m2y9yyuR4YLe8SeczA95TedfFBa1FvHqEP
-  zU65OyK+9WpczT3lK/3tyjzFt0mj5fm3ToFdN3241T0v9and4zKzpX094nv4nvpnTp4YfTGdi
-  570o6HP+oXrxr5pLQgtXP95Vq/Zx7R+ZjvlfJZMa9R1edXG8pxKnEUpyRaKjFXFScCADO7HgK
-  QQMAAA==
+	s=170520fj; t=1678428953; i=@fujitsu.com;
+	bh=YztXBfrtGKux10jkbCGxOLqoGtjLbyNeRbzqil6XGtU=;
+	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type;
+	b=YGZyNYd+i4E0texbSvkr8mIjpnJFctOBE+UQbNbOgA9YFnb1ypJEqSE4PqD4VI+s+
+	 WA8onSN8L8ajThdRNu97tsI+VvTal9khB1T2+gQj3B4TQlAVRpj8RVKQmXz21zh9V9
+	 LojZ289zJcmR8LgV6Hs3Z2lwEsUhRmqM8yJnMowm4OvcWMN+kqF6ULfj9aTs+QqRQ8
+	 sLAH8Ea33cPlBANpBcMfz6s+muaJcGUuK+btVNP4Rvs3MjOWt3WAiwRJFgHGlAwyDr
+	 c22gL4M6h6+C2NR8BNV3Ks1r9zWCQ3JuImzkfN9PqzE/k5IM1hB9LfNo5d3bTPymlB
+	 6TJG1PhC969kg==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrGIsWRWlGSWpSXmKPExsViZ8MxSVfyNFe
+  KwaIbrBYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa0bL7cnsBds4K56sv83awLiSo4uRi0NI4Amj
+  RO/rK6wQznUmiSfnVzJDOHsYJX7++cDexcjJwSYgJXHj/n82EFtEQF9i6ew9zCA2s4CKxIvfP
+  WA1wgKeEqeaT4PFWQRUJZovTQSL8wo4SnxY+48VxJYQUJCY8vA9WA2ngJPE3bd9LCC2EFDN7y
+  eLoeoFJU7OfMICMV9C4uCLF8wQvYoSsy83s0DYFRKN0w8xQdhqElfPbWKewCg4C0n7LCTtCxi
+  ZVjGaFqcWlaUW6VroJRVlpmeU5CZm5uglVukm6qWW6panFpfoGukllhfrpRYX6xVX5ibnpOjl
+  pZZsYgQGb0qx2uMdjFv7/uodYpTkYFIS5VVO5UoR4kvKT6nMSCzOiC8qzUktPsQow8GhJMG79
+  wRQTrAoNT21Ii0zBxhJMGkJDh4lEV7WHUBp3uKCxNzizHSI1ClGRSlxXtbjQAkBkERGaR5cGy
+  x6LzHKSgnzMjIwMAjxFKQW5WaWoMq/YhTnYFQS5pUA2c6TmVcCN/0V0GImoMW7tnCALC5JREh
+  JNTBVZoTLy005de1xRnn3pE+75j5VT4pw23lDzPH3vqqFb8XVOxN4r/MclJF7+cwlxfVVyZVJ
+  DQsz1xWubj2z0ntSf8bdX/tmpK8ulYr+8r0vfLWk2b6uHUkGzlXr/gk5JG3/ME1Zf/KTW5dZg
+  j41GC5Tq2rcGH/6wyz+lsCHwhPKPv967OjhcrNhZn+p2cc9CaabszrqE9dzKS2+an1FtcK0af
+  uxoBcXP+4/Ffjz/tHTnw+UZnT67k08dDrodgSzranhhfD/x0RD6oSVXnOvnnnY4bqV24/Tijd
+  +LA6xuRmds2/6orX78zucjjtyXtok2zLn7dnoyW5mHWb6FkWK67XOPzOaKLXc0WkG66sZV12v
+  KrEUZyQaajEXFScCAH8UVGVZAwAA
 X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-4.tower-728.messagelabs.com!1678428951!68603!1
-X-Originating-IP: [62.60.8.98]
+X-Msg-Ref: server-18.tower-565.messagelabs.com!1678428952!647075!1
+X-Originating-IP: [62.60.8.146]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.103.1; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 31892 invoked from network); 10 Mar 2023 06:15:51 -0000
-Received: from unknown (HELO n03ukasimr03.n03.fujitsu.local) (62.60.8.98)
-  by server-4.tower-728.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 10 Mar 2023 06:15:51 -0000
-Received: from n03ukasimr03.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr03.n03.fujitsu.local (Postfix) with ESMTP id 9AC131AE
-	for <openembedded-devel@lists.openembedded.org>; Fri, 10 Mar 2023 06:15:50 +0000 (GMT)
+Received: (qmail 6036 invoked from network); 10 Mar 2023 06:15:53 -0000
+Received: from unknown (HELO n03ukasimr02.n03.fujitsu.local) (62.60.8.146)
+  by server-18.tower-565.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 10 Mar 2023 06:15:53 -0000
+Received: from n03ukasimr02.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTP id C937B10033F
+	for <openembedded-devel@lists.openembedded.org>; Fri, 10 Mar 2023 06:15:52 +0000 (GMT)
 Received: from R01UKEXCASM121.r01.fujitsu.local (R01UKEXCASM121 [10.183.43.173])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by n03ukasimr03.n03.fujitsu.local (Postfix) with ESMTPS id 8BD431B2
-	for <openembedded-devel@lists.openembedded.org>; Fri, 10 Mar 2023 06:15:50 +0000 (GMT)
+	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTPS id BCABA1000FB
+	for <openembedded-devel@lists.openembedded.org>; Fri, 10 Mar 2023 06:15:52 +0000 (GMT)
 Received: from localhost.localdomain (10.167.225.33) by
  R01UKEXCASM121.r01.fujitsu.local (10.183.43.173) with Microsoft SMTP Server
- (TLS) id 15.0.1497.42; Fri, 10 Mar 2023 06:15:49 +0000
+ (TLS) id 15.0.1497.42; Fri, 10 Mar 2023 06:15:51 +0000
 From: <wangmy@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-oe] [PATCH 06/11] monit: upgrade 5.32.0 -> 5.33.0
-Date: Fri, 10 Mar 2023 14:15:33 +0800
-Message-ID: <1678428937-7700-1-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH 07/11] poppler: upgrade 23.02.0 -> 23.03.0
+Date: Fri, 10 Mar 2023 14:15:34 +0800
+Message-ID: <1678428937-7700-2-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
+In-Reply-To: <1678428937-7700-1-git-send-email-wangmy@fujitsu.com>
+References: <1678428937-7700-1-git-send-email-wangmy@fujitsu.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-Originating-IP: [10.167.225.33]
@@ -74,43 +77,34 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Fri, 10 Mar 2023 06:15:57 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101478
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101479
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
 Changelog:
-==========
- New: Added click-jacking protection headers to Monit HTTP GUI (the SAMEORIGIN
-      iframe is allowed).
- Fixed: Issue #1035: If the start, stop or restart program statement contains
-        the equal sign, which is not followed by a space character, the
-        configuration is not parsed correctly.
- Fixed: Issue #1047: If the MariaDB server doesn't allow access to the host,
-        from which Monit test is running, Monit reported: Invalid handshake
-         packet sequence id -- not MySQL protocol.
- Fixed: Add the missing responsetime option to the ping test.
+* PngWriter: Fix potential uninitialized memory use
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../recipes-support/monit/{monit_5.32.0.bb => monit_5.33.0.bb}  | 2 +-
+ .../poppler/{poppler_23.02.0.bb => poppler_23.03.0.bb}          | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-support/monit/{monit_5.32.0.bb => monit_5.33.0.bb} (94%)
+ rename meta-oe/recipes-support/poppler/{poppler_23.02.0.bb => poppler_23.03.0.bb} (96%)
 
-diff --git a/meta-oe/recipes-support/monit/monit_5.32.0.bb b/meta-oe/recipes-support/monit/monit_5.33.0.bb
-similarity index 94%
-rename from meta-oe/recipes-support/monit/monit_5.32.0.bb
-rename to meta-oe/recipes-support/monit/monit_5.33.0.bb
-index e4ec9d526..66d4079a9 100644
---- a/meta-oe/recipes-support/monit/monit_5.32.0.bb
-+++ b/meta-oe/recipes-support/monit/monit_5.33.0.bb
-@@ -15,7 +15,7 @@ SRC_URI = " \
- 	file://monitrc \
- "
+diff --git a/meta-oe/recipes-support/poppler/poppler_23.02.0.bb b/meta-oe/recipes-support/poppler/poppler_23.03.0.bb
+similarity index 96%
+rename from meta-oe/recipes-support/poppler/poppler_23.02.0.bb
+rename to meta-oe/recipes-support/poppler/poppler_23.03.0.bb
+index 3752c901a..165e155ec 100644
+--- a/meta-oe/recipes-support/poppler/poppler_23.02.0.bb
++++ b/meta-oe/recipes-support/poppler/poppler_23.03.0.bb
+@@ -8,7 +8,7 @@ SRC_URI = "http://poppler.freedesktop.org/${BP}.tar.xz \
+            file://basename-include.patch \
+            file://0001-cmake-Do-not-use-isystem.patch \
+            "
+-SRC_URI[sha256sum] = "3315dda270fe2b35cf1f41d275948c39652fa863b90de0766f6b293d9a558fc9"
++SRC_URI[sha256sum] = "b04148bf849c1965ada7eff6be4685130e3a18a84e0cce73bf9bc472ec32f2b4"
  
--SRC_URI[sha256sum] = "1077052d4c4e848ac47d14f9b37754d46419aecbe8c9a07e1f869c914faf3216"
-+SRC_URI[sha256sum] = "1ace889c0183473a9d70160df6533bb6e1338dc1354f5928507803e1e2a863b5"
- 
- DEPENDS = "zlib bison-native libnsl2 flex-native openssl virtual/crypt"
+ DEPENDS = "fontconfig zlib cairo lcms glib-2.0"
  
 -- 
 2.34.1
