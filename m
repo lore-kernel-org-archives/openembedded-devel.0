@@ -1,162 +1,191 @@
-Return-Path: <wangmy@fujitsu.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7842DC6FA99
-	for <webhook@archiver.kernel.org>; Fri, 10 Mar 2023 06:17:47 +0000 (UTC)
-Received: from mail1.bemta34.messagelabs.com (mail1.bemta34.messagelabs.com [195.245.231.2])
- by mx.groups.io with SMTP id smtpd.web10.13494.1678429059539201338
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E5D04C6FD19
+	for <webhook@archiver.kernel.org>; Fri, 10 Mar 2023 07:43:17 +0000 (UTC)
+Received: from mail-pl1-f180.google.com (mail-pl1-f180.google.com [209.85.214.180])
+ by mx.groups.io with SMTP id smtpd.web10.14157.1678434188500153327
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 09 Mar 2023 22:17:39 -0800
+ Thu, 09 Mar 2023 23:43:08 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=hlw0xg7E;
- spf=pass (domain: fujitsu.com, ip: 195.245.231.2, mailfrom: wangmy@fujitsu.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1678429057; i=@fujitsu.com;
-	bh=BqQ9g6Bec0lkaMdMGGIGj5gIDVqrQW4rrh0jK2hASUk=;
-	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=hlw0xg7EDBUyptuY9zohxPF2tOaYJ28Rejii+5Sv5QsnsUADJySysGEoyRxFMBmDM
-	 2hw2VrNs9hGVMhOlBR4Z31FFjBLr81biTc4BvDEpXB3vN7OAOcgru7OA/ww/IjmZAt
-	 2LmDdNbvECVcObw2z5NKdhxaNfGYlTVcvVyBbcWU2jSOkRqW8KEta1tff5L857HhKh
-	 LCAs1Abx7CdKWaWO/AgZY8TI/E0sjP2z/o5hxpFn9hnb69zmJgaZtlueqCmD223k3l
-	 sOYEOO5OqhyHFcOrQbWjNsMne8Gd32XEyKryw7kDZ9JFhb2OmdLhUWMchPwUUpDaYd
-	 dHD+KUsZoyTaw==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFlrPIsWRWlGSWpSXmKPExsViZ8ORpNt4miv
-  F4OAbFouLh5cyOzB6nNu4gjGAMYo1My8pvyKBNaNp0lX2gvXSFe8vb2FsYNwj0cXIxSEk8JBR
-  4srhFawQzhUmic3dLxghnD2MEj13XzB3MXJysAlISdy4/58NxBYR0JdYOnsPWJxZQEXixe8ed
-  hBbWCBA4uPWZjCbRUBVYsHpfawgNq+Ao8S/dV/AbAkBBYkpD98zQ8QFJU7OfMICMUdC4uALiF
-  0SAooSsy83s0DYFRKN0w8xQdhqElfPbWKewMg/C0n7LCTtCxiZVjGaFacWlaUW6Roa6CUVZaZ
-  nlOQmZuboJVbpJuqlluqWpxaX6BrpJZYX66UWF+sVV+Ym56To5aWWbGIEhmNKsSLrDsZLfX/1
-  DjFKcjApifIqp3KlCPEl5adUZiQWZ8QXleakFh9ilOHgUJLglQQGuJBgUWp6akVaZg4wNmDSE
-  hw8SiK8rDuA0rzFBYm5xZnpEKlTjIpS4rysx4ESAiCJjNI8uDZYPF5ilJUS5mVkYGAQ4ilILc
-  rNLEGVf8UozsGoJMwrcQJoCk9mXgnc9FdAi5mAFu/awgGyuCQRISXVwLR506m11YV7fVLVrxy
-  sWZKWJfTl27bq/Uw7Hea31WyWXrstjVus5mOUj4PVNt2+BTFRfe7flzcaFEiqPYltuyN895mg
-  weVlMtuNXOyjy+15A9lOWPF17jsiWvT4R+nHPS8FQ6Uyz+runPYr8la4wGkPkbMc608zzIrL/
-  +3et6XCc3/jJgt/46ZX1hsjRJk+iHNLy9aUijU+ywzdfWKmf2bNd+6XLR82OPDXJdUXJfNX+j
-  19e+78cUb9NuVOg7+Vmzx8CnN55/geuSwYMP/v7L76DlszNn6WeXoOT5dvOqe57V5+jXTVC91
-  uU49jyte+PgmRCwyf8XVCp9jRcsl23kdaZufiD/HrHOHycOlRYinOSDTUYi4qTgQAEe+j5EID
-  AAA=
-X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-11.tower-571.messagelabs.com!1678429056!51404!1
-X-Originating-IP: [62.60.8.98]
-X-SYMC-ESS-Client-Auth: outbound-route-from=pass
-X-StarScan-Received: 
-X-StarScan-Version: 9.103.1; banners=-,-,-
-X-VirusChecked: Checked
-Received: (qmail 28661 invoked from network); 10 Mar 2023 06:17:37 -0000
-Received: from unknown (HELO n03ukasimr03.n03.fujitsu.local) (62.60.8.98)
-  by server-11.tower-571.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 10 Mar 2023 06:17:37 -0000
-Received: from n03ukasimr03.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr03.n03.fujitsu.local (Postfix) with ESMTP id C0BD51B1
-	for <openembedded-devel@lists.openembedded.org>; Fri, 10 Mar 2023 06:17:36 +0000 (GMT)
-Received: from R01UKEXCASM121.r01.fujitsu.local (R01UKEXCASM121 [10.183.43.173])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by n03ukasimr03.n03.fujitsu.local (Postfix) with ESMTPS id B5DBA1AE
-	for <openembedded-devel@lists.openembedded.org>; Fri, 10 Mar 2023 06:17:36 +0000 (GMT)
-Received: from localhost.localdomain (10.167.225.33) by
- R01UKEXCASM121.r01.fujitsu.local (10.183.43.173) with Microsoft SMTP Server
- (TLS) id 15.0.1497.42; Fri, 10 Mar 2023 06:17:35 +0000
-From: <wangmy@fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-webserver] [PATCH 11/11] spawn-fcgi: upgrade 1.6.4  -> 1.6.5
-Date: Fri, 10 Mar 2023 14:17:25 +0800
-Message-ID: <1678429045-7797-1-git-send-email-wangmy@fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=kZaUDtSC;
+ spf=pass (domain: gmail.com, ip: 209.85.214.180, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f180.google.com with SMTP id y11so4732015plg.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 09 Mar 2023 23:43:08 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112; t=1678434187;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=lV6/NlKloFnpOHCtxCiH7nzLymTKalaLJ1fK7GsQwLI=;
+        b=kZaUDtSCu1W4f2xk0tc0kbDvGm7dXe67zP8sHLExbUKSEIjjaDm4Y7vvrHgrebrOO5
+         QjyOGjNBNxUSnai/4qtwTHWCMNUlPah1Y3Ab8w035Az55dm3fLRrnD8bnP4AlfLLOyvd
+         b++3LDq80nBbtsWLuJevdXZuQ6rVyNyJ4bPYsdW+oMPRN3IsmmaSXSKkxIcIIDiT9kq5
+         MmUIkQAtSsmU+r79yEL7eKdXyYI955FbFPKTfrjEY1c8LXAk1pbpv5j7MemnXl7BgWhg
+         4EP+3dAdQjUjjjA6QisX3pXG29EOPP7jLw0ahhz8eOS2jOwC21SyekY6DOVPOhVrYlLf
+         8hCQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112; t=1678434187;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=lV6/NlKloFnpOHCtxCiH7nzLymTKalaLJ1fK7GsQwLI=;
+        b=EnyqBRyb6hCCyrCLwBmT9iV1Vi7LdCREZSWpSv8R6VUitQdaCAgzLXoJQitUvBmagU
+         zyB1isNx4QE+dYGArewInJfVZrwf9dEdKcRScEU8Gctw35wx2oR1jM6p4cJR2SSCMA6S
+         HBf2bsjc43ynXYEwZ25IzzXoyB+N+3qVLZonqOZE+pE1UhHMVZbiLfTZc6uMGCwIc+jM
+         ZuIQ6N3dE2wV7iSGVYPAqF4mr5a9XQc7bTUiU5elDePUE9QhhobTAuF1anenOPKsU/Ev
+         YMRhdbAI4UrgFpjxssXgtAhYIWjnp2dmRw9n7dO81afQazpYrcRX0e/U+Zx64Z4dqrHD
+         RdPg==
+X-Gm-Message-State: AO0yUKVSPrhVm+vTRqDNs/yvbe86eb0WIUw1r4EXsEL0GxJX4byTfiLE
+	EH0mcawyEjC+/lJtgxK69LVQwZ6p7rk=
+X-Google-Smtp-Source: AK7set9E1Bes0H5I81Kt0NImIBus1EsCGZ7mFawvNSESBb3VVP9wBmXHdvCJDYDLr9+SXZaN/1KqLQ==
+X-Received: by 2002:a17:902:e54f:b0:19c:b4e3:c65b with SMTP id n15-20020a170902e54f00b0019cb4e3c65bmr28474856plf.8.1678434187306;
+        Thu, 09 Mar 2023 23:43:07 -0800 (PST)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9181:1cf0::8cdc])
+        by smtp.gmail.com with ESMTPSA id w21-20020a170902d71500b0019c901b35ecsm809674ply.106.2023.03.09.23.43.05
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 09 Mar 2023 23:43:06 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][PATCH] pahole: Upgrade to tip of trunk
+Date: Thu,  9 Mar 2023 23:43:03 -0800
+Message-Id: <20230310074303.2948796-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
-Content-Type: text/plain
-X-Originating-IP: [10.167.225.33]
-X-ClientProxiedBy: G08CNEXCHPEKD07.g08.fujitsu.local (10.167.33.80) To
- R01UKEXCASM121.r01.fujitsu.local (10.183.43.173)
-X-Virus-Scanned: ClamAV using ClamSMTP
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 10 Mar 2023 06:17:47 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101483
+ <openembedded-devel@lists.openembedded.org>; Fri, 10 Mar 2023 07:43:17 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101484
 
-From: Wang Mingyu <wangmy@fujitsu.com>
+Drop patches already present in 1.24+
+Needed to get fixes to build with latest libbpf APIs
 
-fix_configure_ipv6_test.patch
-removed since it's included in 1.6.5
-
-Changelog:
-==========
-  * Configure script cleanups (fixing detection of IPv6)
-  * Update links and email addresses
-
-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../fix_configure_ipv6_test.patch             | 35 -------------------
- ...pawn-fcgi_1.6.4.bb => spawn-fcgi_1.6.5.bb} |  6 ++--
- 2 files changed, 2 insertions(+), 39 deletions(-)
- delete mode 100644 meta-webserver/recipes-support/spawn-fcgi/spawn-fcgi-1.6.4/fix_configure_ipv6_test.patch
- rename meta-webserver/recipes-support/spawn-fcgi/{spawn-fcgi_1.6.4.bb => spawn-fcgi_1.6.5.bb} (66%)
+ ...1-CMakeList.txt-make-python-optional.patch | 44 -------------------
+ ...n-t-download-libbpf-source-when-syst.patch | 34 --------------
+ .../pahole/{pahole_1.22.bb => pahole_1.24.bb} |  7 ++-
+ 3 files changed, 3 insertions(+), 82 deletions(-)
+ delete mode 100644 meta-oe/recipes-devtools/pahole/files/0001-CMakeList.txt-make-python-optional.patch
+ delete mode 100644 meta-oe/recipes-devtools/pahole/files/0003-CMakeList.txt-don-t-download-libbpf-source-when-syst.patch
+ rename meta-oe/recipes-devtools/pahole/{pahole_1.22.bb => pahole_1.24.bb} (80%)
 
-diff --git a/meta-webserver/recipes-support/spawn-fcgi/spawn-fcgi-1.6.4/fix_configure_ipv6_test.patch b/meta-webserver/recipes-support/spawn-fcgi/spawn-fcgi-1.6.4/fix_configure_ipv6_test.patch
+diff --git a/meta-oe/recipes-devtools/pahole/files/0001-CMakeList.txt-make-python-optional.patch b/meta-oe/recipes-devtools/pahole/files/0001-CMakeList.txt-make-python-optional.patch
 deleted file mode 100644
-index 9409dd2b1..000000000
---- a/meta-webserver/recipes-support/spawn-fcgi/spawn-fcgi-1.6.4/fix_configure_ipv6_test.patch
+index d64cba109f..0000000000
+--- a/meta-oe/recipes-devtools/pahole/files/0001-CMakeList.txt-make-python-optional.patch
 +++ /dev/null
-@@ -1,35 +0,0 @@
--Testing for IPv6 support got broken by configure.ac changes in 1.6.4
--As a temp workaround, revert back to the 1.6.3 version.
+@@ -1,44 +0,0 @@
+-From f6ca8c930d0fbd2491b3cc77169e32806a14e5e9 Mon Sep 17 00:00:00 2001
+-From: Matteo Croce <mcroce@microsoft.com>
+-Date: Mon, 30 Aug 2021 16:25:56 +0200
+-Subject: [PATCH] CMakeList.txt: make python optional
 -
--Upstream-Status: Pending
+-Upstream-Status: Backport [https://git.kernel.org/pub/scm/devel/pahole/pahole.git/commit/?id=88431099950ab3e8bc1645353508d7978a6cad35]
 -
----- spawn-fcgi-1.6.4/configure.ac
--+++ spawn-fcgi-1.6.3/configure.ac
--@@ -66,8 +47,8 @@
-- # Check for IPv6 support
+-ostra-cg, which requires python, is installed in the destination dir.
+-Make it optional for embedded distributions which doesn't have the
+-python interpreter available.
+-
+-Signed-off-by: Matteo Croce <mcroce@microsoft.com>
+----
+- CMakeLists.txt | 7 +++++--
+- 1 file changed, 5 insertions(+), 2 deletions(-)
+-
+-diff --git a/CMakeLists.txt b/CMakeLists.txt
+-index 4140574..8523bce 100644
+---- a/CMakeLists.txt
+-+++ b/CMakeLists.txt
+-@@ -61,6 +61,7 @@ find_package(DWARF REQUIRED)
+- find_package(ZLIB REQUIRED)
+- find_package(argp REQUIRED)
+- find_package(obstack REQUIRED)
+-+find_package(Python3 QUIET)
 - 
-- AC_ARG_ENABLE(ipv6,
---  AC_HELP_STRING([--disable-ipv6],[disable IPv6 support]),
---  [case "${enableval}" in
--+ AC_HELP_STRING([--disable-ipv6],[disable IPv6 support]),
--+ [case "${enableval}" in
--    yes) ipv6=true ;;
--     no) ipv6=false ;;
--      *) AC_MSG_ERROR(bad value ${enableval} for --enable-ipv6) ;;
--@@ -75,13 +56,10 @@
+- # make sure git submodule(s) are checked out
+- find_package(Git QUIET)
+-@@ -185,8 +186,10 @@ install(FILES dwarves.h dwarves_emit.h dwarves_reorganize.h
+- 	      elfcreator.h elf_symtab.h hash.h libctf.h
+- 	DESTINATION ${CMAKE_INSTALL_PREFIX}/include/dwarves/)
+- install(FILES man-pages/pahole.1 DESTINATION ${CMAKE_INSTALL_PREFIX}/share/man/man1/)
+--install(PROGRAMS ostra/ostra-cg DESTINATION ${CMAKE_INSTALL_PREFIX}/bin)
+-+if(Python3_FOUND)
+-+	install(PROGRAMS ostra/ostra-cg DESTINATION ${CMAKE_INSTALL_PREFIX}/bin)
+-+	install(FILES ostra/python/ostra.py DESTINATION ${CMAKE_INSTALL_PREFIX}/share/dwarves/runtime/python)
+-+endif()
+- install(PROGRAMS btfdiff fullcircle DESTINATION ${CMAKE_INSTALL_PREFIX}/bin)
+--install(FILES ostra/python/ostra.py DESTINATION ${CMAKE_INSTALL_PREFIX}/share/dwarves/runtime/python)
+- install(FILES lib/Makefile lib/ctracer_relay.c lib/ctracer_relay.h lib/linux.blacklist.cu
+- 	DESTINATION ${CMAKE_INSTALL_PREFIX}/share/dwarves/runtime)
+--- 
+-2.31.1
+-
+diff --git a/meta-oe/recipes-devtools/pahole/files/0003-CMakeList.txt-don-t-download-libbpf-source-when-syst.patch b/meta-oe/recipes-devtools/pahole/files/0003-CMakeList.txt-don-t-download-libbpf-source-when-syst.patch
+deleted file mode 100644
+index 3d491e2ef2..0000000000
+--- a/meta-oe/recipes-devtools/pahole/files/0003-CMakeList.txt-don-t-download-libbpf-source-when-syst.patch
++++ /dev/null
+@@ -1,34 +0,0 @@
+-From 3d20210d84f61ee2189927e2d9de9ce3e5a0a9c5 Mon Sep 17 00:00:00 2001
+-From: Matteo Croce <mcroce@microsoft.com>
+-Date: Mon, 20 Sep 2021 18:44:52 +0200
+-Subject: [PATCH] CMakeList.txt: Don't download libbpf source when system
+- library is used
+-
+-Upstream-Status: Backport [https://git.kernel.org/pub/scm/devel/pahole/pahole.git/commit/?id=3d20210d84f61ee2189927e2d9de9ce3e5a0a9c5]
+-
+-The build system always download the libbpf submodule, regardless if
+-we're using the embedded or the system version.
+-Download the libbpf source only if we're using the embedded one.
+-
+-Signed-off-by: Matteo Croce <mcroce@microsoft.com>
+-Signed-off-by: Arnaldo Carvalho de Melo <acme@redhat.com>
+----
+- CMakeLists.txt | 2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
+-
+-diff --git a/CMakeLists.txt b/CMakeLists.txt
+-index 8523bce..2ab66e4 100644
+---- a/CMakeLists.txt
+-+++ b/CMakeLists.txt
+-@@ -65,7 +65,7 @@ find_package(Python3 QUIET)
 - 
-- if test x$ipv6 = xtrue; then
--   AC_CACHE_CHECK([for IPv6 support], ac_cv_ipv6_support,
---    [AC_TRY_LINK([[
---#include <sys/types.h>
--+  [AC_TRY_LINK([ #include <sys/types.h>
-- #include <sys/socket.h>
---#include <netinet/in.h>
---    ]], [[
---struct sockaddr_in6 s; struct in6_addr t=in6addr_any; int i=AF_INET6; s; t.s6_addr[0] = 0;
---    ]], [ac_cv_ipv6_support=yes], [ac_cv_ipv6_support=no])])
--+#include <netinet/in.h>], [struct sockaddr_in6 s; struct in6_addr t=in6addr_any; int i=AF_INET6; s; t.s6_addr[0] = 0; ],
--+  [ac_cv_ipv6_support=yes], [ac_cv_ipv6_support=no])])
-- 
--   if test "$ac_cv_ipv6_support" = yes; then
--     AC_DEFINE(HAVE_IPV6,1,[Whether to enable IPv6 support])
-diff --git a/meta-webserver/recipes-support/spawn-fcgi/spawn-fcgi_1.6.4.bb b/meta-webserver/recipes-support/spawn-fcgi/spawn-fcgi_1.6.5.bb
-similarity index 66%
-rename from meta-webserver/recipes-support/spawn-fcgi/spawn-fcgi_1.6.4.bb
-rename to meta-webserver/recipes-support/spawn-fcgi/spawn-fcgi_1.6.5.bb
-index 808d4528c..307919f77 100644
---- a/meta-webserver/recipes-support/spawn-fcgi/spawn-fcgi_1.6.4.bb
-+++ b/meta-webserver/recipes-support/spawn-fcgi/spawn-fcgi_1.6.5.bb
-@@ -4,11 +4,9 @@ HOMEPAGE = "http://redmine.lighttpd.net/projects/spawn-fcgi"
- LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://COPYING;md5=e4dac5c6ab169aa212feb5028853a579"
+- # make sure git submodule(s) are checked out
+- find_package(Git QUIET)
+--if(GIT_FOUND AND EXISTS "${PROJECT_SOURCE_DIR}/.git")
+-+if(LIBBPF_EMBEDDED AND GIT_FOUND AND EXISTS "${PROJECT_SOURCE_DIR}/.git")
+- 	# Update submodules as needed
+- 	option(GIT_SUBMODULE "Check submodules during build" ON)
+- 	if(GIT_SUBMODULE)
+--- 
+-2.31.1
+-
+diff --git a/meta-oe/recipes-devtools/pahole/pahole_1.22.bb b/meta-oe/recipes-devtools/pahole/pahole_1.24.bb
+similarity index 80%
+rename from meta-oe/recipes-devtools/pahole/pahole_1.22.bb
+rename to meta-oe/recipes-devtools/pahole/pahole_1.24.bb
+index 449508a5d5..b7f1f8bb28 100644
+--- a/meta-oe/recipes-devtools/pahole/pahole_1.22.bb
++++ b/meta-oe/recipes-devtools/pahole/pahole_1.24.bb
+@@ -9,11 +9,10 @@ DEPENDS = "elfutils zlib libbpf"
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
+ COMPATIBLE_HOST = "(x86_64|i.86|aarch64).*-linux"
  
--SRC_URI = "http://download.lighttpd.net/spawn-fcgi/releases-1.6.x/spawn-fcgi-${PV}.tar.gz \
--           file://fix_configure_ipv6_test.patch"
-+SRC_URI = "http://download.lighttpd.net/spawn-fcgi/releases-1.6.x/spawn-fcgi-${PV}.tar.gz"
+-SRCREV = "f02af2553ea58ae1186226af0d0ec835a248358f"
++PV .= "+1.25+git${SRCPV}"
++SRCREV = "a9498899109d3be14f17abbc322a8f55a1067bee"
+ SRC_URI = "git://git.kernel.org/pub/scm/devel/pahole/pahole.git;branch=master \
+-           file://0001-CMakeList.txt-make-python-optional.patch \
+-           file://0002-Use-usr-bin-env-python3-instead-of-just-usr-bin-pyth.patch \
+-           file://0003-CMakeList.txt-don-t-download-libbpf-source-when-syst.patch"
++           file://0002-Use-usr-bin-env-python3-instead-of-just-usr-bin-pyth.patch"
  
--SRC_URI[md5sum] = "e970de4efe8045c01dd76280f39901aa"
--SRC_URI[sha256sum] = "ab327462cb99894a3699f874425a421d934f957cb24221f00bb888108d9dd09e"
-+SRC_URI[sha256sum] = "a72d7bf7fb6d1a0acda89c93d4f060bf77a2dba97ddcfecd00f11e708f592c40"
- 
- inherit autotools
+ S = "${WORKDIR}/git"
  
 -- 
-2.34.1
+2.39.2
 
 
