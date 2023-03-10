@@ -2,45 +2,45 @@ Return-Path: <changqing.li@eng.windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 27B13C64EC4
-	for <webhook@archiver.kernel.org>; Fri, 10 Mar 2023 01:07:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0AC7FC64EC4
+	for <webhook@archiver.kernel.org>; Fri, 10 Mar 2023 01:07:36 +0000 (UTC)
 Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.web11.8404.1678410433693699280
+ by mx.groups.io with SMTP id smtpd.web11.8410.1678410454733661203
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 09 Mar 2023 17:07:13 -0800
+ Thu, 09 Mar 2023 17:07:34 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="body hash did not verify" header.i=@windriver.com header.s=pps06212021 header.b=nMI4nace;
+ dkim=fail reason="body hash did not verify" header.i=@windriver.com header.s=pps06212021 header.b=r5sDlO9K;
  spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=24331f10aa=changqing.li@windriver.com)
-Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 32A0kXO1029337
-	for <openembedded-devel@lists.openembedded.org>; Thu, 9 Mar 2023 17:07:13 -0800
+Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 32A16iRN001666
+	for <openembedded-devel@lists.openembedded.org>; Thu, 9 Mar 2023 17:07:34 -0800
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com; h=message-id : date
  : subject : to : cc : references : from : in-reply-to : content-type :
  content-transfer-encoding : mime-version; s=PPS06212021;
- bh=12/v6f2ZbAkVZv/is981zTRdiQom+M2x+bzf+opaAq0=;
- b=nMI4naceClcGnulv/jAk+4LrBdgt552356hVA1gx7CMoNzHLJ9mfO3Pf72dPFz6WwnGX
- akMUGUOs7IQUuWsvj1vvoD4XTXlNREGnFheK0JBfOYky+4iNYuBmF7ckKdfj3dopiVhj
- a5Gqfjqd692+sWPULX33A3S0BsQN7YUMTequ+ThHrf+ddXKTCjjMuvX8xro31JGkQUmX
- 6OHCzdzd7RM2moGgIfCoKwM40oK/RVv2kb4vPiMgazn+93rxU7u6YYQKrP6+K7KJla56
- k53yWdFEEmyS1JyWQPZeClxhfWEIiHBsWW4W/SZ4K2WoVYWbosKE0ShHCsQnNzWvBR46 YQ== 
+ bh=tR2FBLCNGWeqXDS0Nta2t9+TcMKxbwkI8eFDyo9k3/8=;
+ b=r5sDlO9KSLGx4Y4wKJvJn+6LUonlvvCA0puTDlB11oHfL+11XKkSUkIzZIOxuT3mF95R
+ n7gXIPBuEEqn07EOFy5I1so2u+xvFfCnW8Wx2ul18iv8Lvw8nFYAP4rdjf8NojTO1OBl
+ S+q+Ji7tps3CAST5ag3NzSxkErFGwv3/6X9/+VnhGAkydkKFRxdTKE6a9yfnAu8msgFY
+ FotAHYTobmXWEzthz1YUrPO4dC7xxoFLr2x27edZFWiujCIhQUajqxBg5JlYX/FjASDE
+ es5WsxRbqeG9gIXH5MHSbLvUfi4xW10ndj5hPbuh/VGx1s+Zzxn1BkCcdyDjRI9Swg0Y WA== 
 Received: from pps.reinject (localhost [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3p6fffaanj-1
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3p6ffd2ap9-1
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Thu, 09 Mar 2023 17:07:13 -0800
-Received: from m0250810.ppops.net (m0250810.ppops.net [127.0.0.1])
-	by pps.reinject (8.17.1.5/8.17.1.5) with ESMTP id 32A17Cid004735
-	for <openembedded-devel@lists.openembedded.org>; Thu, 9 Mar 2023 17:07:12 -0800
-Received: from nam04-bn8-obe.outbound.protection.outlook.com (mail-bn8nam04lp2046.outbound.protection.outlook.com [104.47.74.46])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3p6fffaanh-1
+	for <openembedded-devel@lists.openembedded.org>; Thu, 09 Mar 2023 17:07:34 -0800
+Received: from m0250809.ppops.net (m0250809.ppops.net [127.0.0.1])
+	by pps.reinject (8.17.1.5/8.17.1.5) with ESMTP id 32A17Xa5003501
+	for <openembedded-devel@lists.openembedded.org>; Thu, 9 Mar 2023 17:07:33 -0800
+Received: from nam04-bn8-obe.outbound.protection.outlook.com (mail-bn8nam04lp2045.outbound.protection.outlook.com [104.47.74.45])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3p6ffd2ap8-1
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Thu, 09 Mar 2023 17:07:12 -0800
+	Thu, 09 Mar 2023 17:07:33 -0800
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=LmwWdjl1lTmCFEkBiWEzhzvht4jFCNk7cIb16oR5gi9boW/zlr9H71wwutYw4Fe7MmnpYTcJ+OYtuBNJH6L+E4gUjZjIaUoPLPaEkv6joBOFDaLZA0BVcKNhTYlzLW/pid40OwNuojYlR6157Hz2wQ5U+lHHlzarNNTUv3puLOCv8rmS4YrTD4CRKUVowLNd6yAR+joWHxxg6OjGy0cJw8x4cqTTJvcVOCnyT7aaSsEhIVnbFgU9zhx/eEy7NqaEj/DkRw4+8UtRki/K7aExNIkcTKrYgtkZUtyqIPeCLOBzqz3nUClQgx2XFHw3Smzj9tFtnwTU6PWsimwuijqVgw==
+ b=AvYHaFwkDkQq88WpauKgM3T+llGz378Xo1l7LJmh46lkVdZYZbxixfz54Qa+uaWyuOPBMrT3LLRaYtCqX/MuAnoyXMx4NqoTAviQikcQ/FBEEhquIccmptpdP5eQcqUduXgZLGtS8SRIrm8G+N8eUHo2PVcgGqWVeH0ntqXq1V/6OoSKGSfqGuT5Th6beSwPg65ZaBmcNOIzo3wPDXabJHhJU0Y/LtafDbL+iccyBYytL7anBjWSUqhOW/YIkD9LfRE2wWusU1JGC5zaCyTjhdPXydPnUZOEcm7ca5oN7jwFolBsgWYc8Wz72Rnkfx1L0usIYIJxNzjzRwMJY201Vg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=12/v6f2ZbAkVZv/is981zTRdiQom+M2x+bzf+opaAq0=;
- b=XiPt7EDmH2QQxU/IxP/ZGJwm4KMRM/PneeaZMHqcTzVltVOEk6SjXEOOUSYFA/UIF3rv5ogUPznUdGPEmjiYYWBsvWNbKyYAPIKak1rTjaUNmKF4PuF023ksbhXEQYzp3VDt/90IvKsRgiGj+/3gCUXShpDg0phi8eThIXd7H+uw9xzxcoVZX1EEmVgkujv4m9FWl/5v43Wj2pc7KARwSJGls39AwTNUus8xwuhK64x8PRiVqpvJzf7aHGhXLAsqdocpo18IQnPHrNzPEQV+Tx3oxM5UskxNYR6foJIQ4mL48V/Unn7hwn0neeYQXFp3u4noP/JIP4MqacPk7BMTEw==
+ bh=tR2FBLCNGWeqXDS0Nta2t9+TcMKxbwkI8eFDyo9k3/8=;
+ b=ZzZpaXF7nbiFYQ4akAOxALxQpPXHLVgGIYW32dWo88n2Ng5or8R2c7ACQoT8H19O2CRZRKGMjWzvg9MAl7xjtbZTudvtD5gOv+Cmi7XYsLmEjzXPS3G5knuqHXgRp3wXilyHeKER7BH530p+Ka901/N4LxL3YxPay1101truNGh8pWE3YT8jLzN6ahoOxTvMgd8hZdxh2zyRHyKhsu4nvOLcfarkQlLUUA+zxMXCYBr8TXXrSRHwzWP2gDMMfBJEosOy3G447Bb6/B+ydJnCjk5CqEnNo+qtPcwDOtvC86YZRRtTS9a/5ORpaWv7dj99m9aRw8SR7QXiWG0NI3WhHg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
@@ -48,161 +48,468 @@ Received: from SN6PR11MB2557.namprd11.prod.outlook.com (2603:10b6:805:56::33)
  by SA1PR11MB5873.namprd11.prod.outlook.com (2603:10b6:806:228::11) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6178.19; Fri, 10 Mar
- 2023 01:07:09 +0000
+ 2023 01:07:31 +0000
 Received: from SN6PR11MB2557.namprd11.prod.outlook.com
  ([fe80::524d:df89:5eb3:f545]) by SN6PR11MB2557.namprd11.prod.outlook.com
  ([fe80::524d:df89:5eb3:f545%7]) with mapi id 15.20.6178.019; Fri, 10 Mar 2023
- 01:07:08 +0000
-Message-ID: <3987b603-6ce7-77da-82c8-21c754e0e08b@windriver.com>
-Date: Fri, 10 Mar 2023 09:07:00 +0800
+ 01:07:31 +0000
+Message-ID: <9cb1be68-fb16-d0ea-2848-7f98cad2951f@windriver.com>
+Date: Fri, 10 Mar 2023 09:07:24 +0800
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.4.2
-Subject: Re: [oe] [meta-oe][PATCH] sg3-utils: upgrade 1.45 -> 1.47
+Subject: Re: [oe] [meta-oe][PATCH] liblockfile: upgrade 1.14 -> 1.17
 Content-Language: en-US
 To: Khem Raj <raj.khem@gmail.com>,
         Changqing Li <changqing.li@eng.windriver.com>
 Cc: openembedded-devel@lists.openembedded.org
-References: <20230309084314.1187137-1-changqing.li@windriver.com>
- <CAMKF1srUNaowx9zqOak2e3DnHu=WSRJBPhP-XZ=0LwM33TV8GA@mail.gmail.com>
+References: <20230309084038.1182832-1-changqing.li@windriver.com>
+ <CAMKF1sqFz9vpd1atHDmT5pFxxDVtasLOAF7COYLH09jH-kw6tw@mail.gmail.com>
 From: Changqing Li <changqing.li@windriver.com>
-In-Reply-To: <CAMKF1srUNaowx9zqOak2e3DnHu=WSRJBPhP-XZ=0LwM33TV8GA@mail.gmail.com>
+In-Reply-To: <CAMKF1sqFz9vpd1atHDmT5pFxxDVtasLOAF7COYLH09jH-kw6tw@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-X-ClientProxiedBy: TYWPR01CA0009.jpnprd01.prod.outlook.com
- (2603:1096:400:a9::14) To SN6PR11MB2557.namprd11.prod.outlook.com
+X-ClientProxiedBy: TYWPR01CA0018.jpnprd01.prod.outlook.com
+ (2603:1096:400:a9::23) To SN6PR11MB2557.namprd11.prod.outlook.com
  (2603:10b6:805:56::33)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: SN6PR11MB2557:EE_|SA1PR11MB5873:EE_
-X-MS-Office365-Filtering-Correlation-Id: bb18ece1-6083-4d13-0867-08db2103c535
+X-MS-Office365-Filtering-Correlation-Id: 03300e29-3528-4a1a-8a06-08db2103d304
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	zqrZNzkT6b17MbRiRSkpygcjy2okDu1qvOwR/N+tQuU+/9Zd4ldZpeA4oIM2d/GVWV09TUxhmxxOcOQYuv95D5viZCfDpb70E3g/p0qAZVVoyoYhKiGkYJ2Jy6EJPd2qw8KmmAHdH+d3PPYIRBQPj94kL3tG3KwNzymetFZXuM80mkUFSpiNwaBCDk/TvdYPg110fqBL2Bts+PcWHtMPgFxoSk6MUsrz6dx6DMh8MMzwOIQVvqWA3LCr457cMCr/3+sUhK6dObZs8Tk9Edpj5MecYcTiANLWeD73+6WzCtutG+PCqFK2YbaVjKwV/CDZUSAcoNSm3QX3HOY4kz3dOGs4UtZf/Mh+2SLkQInA4DMl/nxf7U/dGFsOWjXAVEIWd3WQC5DBzfdsR5g9QfwL3kpa1MSqGGDg6UvKNOR5PLEuexkk6TlLKjHb7UKtCPvtk7KuK9M9NMDDRZ6/lIToiZQjnogteh8dIPvjxCIixr21vrJPSgiQnFiIqvkZGNl3+TPR86COXRJ33UHnwYEa6HeGAYf5g1nzX3+OtbitvAsPYMW/W/VGuh4ICeX//jVtX+MJnHpOCXh51LNsBmgnCNppVQ7I2mZM2IKYszGg3FrpIXkIhcpTw7C3Zz9QXgpahYr5rNPkmvn11ZUk4wjnhkbbzMg4fXSwEJWr506Z2/HXqaWOmzM8BgIkYYRxhM34ubnIhsl/NDccyfDj2yWxaLfuL5dg9Xc2rSKKFsxK4KgPJmWGqaiYBMLF+HIdX0ajAnUv8fOB1WHSvAQLM0WQwj8pg2eEpBkciyMr9OzcDls=
+	2cLC47xwKQ068tXT8GnbmI9U4J3EsByrdYxQS3drdUQ+43x8O22cdeFr7C7xQ5cs4Klieo7wstrFW1CUZGVHC5yFS93l/amM/DEQasPG1m2MMt/cI2ZHFY/sSCz9ZLr5grIjHgcrAXJLBZNUKXWbuIVuZGXClCg0MOVjPU45dPSTiCc2t+qPNin++FeXp4WgFYIN+xdLdGrLUxwSr139pa7cOJznF5kB9J6kQtwevMVk8BlnRYzU/HpQ7Ejh/+OelLeNNsmjTEqcUXwdNiZs3p/DO69kFeH1M1qRB/oO3HgDiYsP6Rk1DvTQC7D1v4wQFvWDzbpV9rYgZvfPd/3FOIIkuch57O+C3tga6KkzIPkz2BiZYcDpN/tX62KxwjlRcSvyfH5qXvZqwdHwtcj22GowerVDEAdE3le8vzW0yqCWHP8zynlqFFnDZL0W26xHiwAbV4lv7aMES4FRav+tzqVa6fYCvM+eBqOAfNFKv3BXhjQdRQpzuWiasJf4Kq8pTcuxAV2ILiPT0CeCO1q8z9m1YCEtIcdH4asW7AiWY0aPkijuLAW3znVfq+0g8qX/k3nR5J2wE7eKfUEdrvm3bPVHuuRlTmNTIsML265HeidTBJlLx+lBkveeAex1fMabLgn+gGtVKftMMegigPiL5tbkw/sQdfJaVU5h7aSX4sT2AZ0zHJTQdZZ3ovynCW4unDRKvG5uprwGaXEgcNLhI29uDIQT5enhIqjlZ01OXuc9kyAspuNIW3Nx0N0dGA+glwNXbaqBcVsDlaEyg/4u4w==
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:SN6PR11MB2557.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230025)(4636009)(366004)(39850400004)(346002)(136003)(396003)(376002)(451199018)(66899018)(31686004)(38100700002)(36756003)(110136005)(19273905006)(86362001)(31696002)(186003)(26005)(6506007)(478600001)(53546011)(6512007)(83380400001)(6666004)(2616005)(316002)(5660300002)(6486002)(966005)(4326008)(41300700001)(44832011)(8936002)(66476007)(2906002)(66556008)(8676002)(66946007)(45980500001)(43740500002)(563064011);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:SN6PR11MB2557.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230025)(4636009)(366004)(39850400004)(346002)(136003)(396003)(376002)(451199018)(66899018)(31686004)(38100700002)(36756003)(110136005)(86362001)(31696002)(186003)(26005)(6506007)(478600001)(53546011)(6512007)(83380400001)(6666004)(2616005)(316002)(5660300002)(6486002)(966005)(4326008)(41300700001)(44832011)(8936002)(66476007)(2906002)(30864003)(66556008)(8676002)(66946007)(45980500001)(43740500002);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?utf-8?B?MnFVYVNMbHQ3a2dpaWhpMkdURjVCVjBNRUtjQnhpM3MwMC9vQk1odURxODIr?=
- =?utf-8?B?V0xjVHZBcFhPcnVQdzg5S2swQ1k5TmppZHZ2cVE4MW54ODJvSjlTamltbjlX?=
- =?utf-8?B?NDBKTmZhaE9raS96K0NxR1p5d1pEdHl1MmVVTFZMeHFhOWRwZ3pVYXREd0ho?=
- =?utf-8?B?SXNORmw3azY3UWFGRmZwNmZkRXovZjBYaWVIcEpPUGt5UUR1a2lzaS8wRE45?=
- =?utf-8?B?b2JwRmZ2VUZBYzdCYzVRV2JjVk16RmN0UjdkNHQ3L1ljbE1IOXo2V3FTTHhJ?=
- =?utf-8?B?U0JWWFV4WWgwRUh6cFFGVmNEZkRlTlFxRWRWYmdNREZNQTN2dVNhL0RqZGJk?=
- =?utf-8?B?blhSTC9senc3dngvNG81dlltOXJucG1lTGNwMk9nb291MWZVanFDV3BRRmh3?=
- =?utf-8?B?MzR1ZHh3UFVuSEUxbXRNSERGWFpjbnBvODFxa0hpUm1YLzNiZ0VOa1liMXJL?=
- =?utf-8?B?NXQ0VEpXc0YvRG9QUzdpMlVXdDhkMXJVV1hwYS80VWFSV2drcDVCc0w2RlZr?=
- =?utf-8?B?czAvclN2dEZFOEFEUlhJV1hGOURjQWhjb0ZOa2FpVDBEODNaMHZ4dkUyLzhn?=
- =?utf-8?B?YVBDM3VaZHZZa0lGaGRXcjZ2dWdyWUtBM2lOMjBWclZxVm1vTEZQM2laQURW?=
- =?utf-8?B?UW5FZG5laVpKVmYyVzh6WG5xdndQMXJHR0tBR0NlczMyTWMxZ3BKQ0FpcER2?=
- =?utf-8?B?SFloSklWZ2psbUZEOWhSaFVmMDF0QWhHMVplM0JVaDd4OEE3M0dkUHhjczhG?=
- =?utf-8?B?Q2tBQmFZck9PSlFVdm9vZ1k2WUdiSHVKQ2xhSk5zTzdIQVdIemZMOGRFbW9I?=
- =?utf-8?B?TWNFWnFiUzMyZk9QcGkrSTVKU2tRTUx0WE9lMGpRWll0TWgvQ0xFZFhoZTBr?=
- =?utf-8?B?NU1vRDNOdDEzYktyc2hKVjlsN3pnNnAvK2ZrWHBxcEE5VGNOMTEvVkRMT1o2?=
- =?utf-8?B?UnUzQWlpN1V5OGVEQkZEWm9SaHlMMHdTRXFPVEMyNDdqVHQxbnZndnlNZjZi?=
- =?utf-8?B?YkxBTjJ3MVF6UW9WeGJCdVA5dGxSVUtIbmU4c0VsMnZ5NVRISTNJT3loaUZE?=
- =?utf-8?B?OUsvam52YVVqbExSK2lvbG9CRGVwOGE3MERHYUN0SmZtMWE5YUMrRUhFR0hT?=
- =?utf-8?B?ZWQ4MmcxY2dLNFQrT1hXRU1QTERRVER3MUNySDlnWTdvQi92enBqVDI5SG94?=
- =?utf-8?B?TkJLQkxpbzB5djVQOVVOTzdoS3FBVVJBQVNjM2dLRFdacDFrVnhyZW5wNmFx?=
- =?utf-8?B?MkpVRHhyZGM4YlI5WHp3MTJtZ29SRldNNFdVbnVYK0FLVU8vMmpqVE5HdEF3?=
- =?utf-8?B?R3pLMWU1cnJiWUs5b01jNjFMYXMrUzBUNlBwMjBRaUNkN2ZNYW5XTGxIWThn?=
- =?utf-8?B?dzJqblpDRHk4YUp2d1hpaFRvekFTZldOMUFUbXJ4b2U5S1QydGF5eXlQSE9T?=
- =?utf-8?B?UW9TYW01SmNGRGduMkx5c053SmtsRGJud3FWZ2RlanliVlgvaUdkRjNuaXRq?=
- =?utf-8?B?SGM2NTZSSHI5aHpZVjRsUkEzMnlkTUJRU25OdWhsN0Mra1lOdTBudno1eUdR?=
- =?utf-8?B?dWJYTW9WWXUvRXRTK1JFUXpYeTNqUDQyUTducFBaLytlVE1lQTYvdUNMQ2xG?=
- =?utf-8?B?UmxzdThCMXBsQkdJRUplcEtYcUp6ZGVkb0dnaEkzeTM5K1FyOUVJdU5Wb05a?=
- =?utf-8?B?SXl4YjZrTGFrTENXMDJkS29lVis5Q2drZFBhQUE1b3hnUlp1WVMvak4va2t6?=
- =?utf-8?B?d25FZkdDcGpiMWh6K0w0ZitEd0JKRTFRMy9UMW5kVEg5S25ySU5BWXNlREU1?=
- =?utf-8?B?Q3huZ2d1cDl6L3lvcEhSZ2lWTVdKa0FDc3phc3lFcW5BbGNrTW1BdXpaMmFS?=
- =?utf-8?B?b1FRR2gxL2w2T2haSmg4UW9PT21vT1pFV25Sd2dwcU9sOUNHRkNBQVlEZitK?=
- =?utf-8?B?NGlIcXB5VVZFdnFwNHBIWW1KeUZ5TjJBTGdXMDVrRU93UkRhSVB0aXpRN2J3?=
- =?utf-8?B?R3VKcHNlQjFVeFVRZURLWktFWFUzYkd5RWhSaERrSEJGQ0JLVDNmZnpoNFJH?=
- =?utf-8?B?KzZyNzBhcnpwSDNLSEFXNml5VkhHV3EyOG9OaDlkRkt0QWZYcGl4YjAzZzA5?=
- =?utf-8?B?ZHBEckU4OXJjVDRHVitSYVQzNGJBV2RrMTcrL29CcXppdXZLalZncDhuRHF2?=
- =?utf-8?B?N0E9PQ==?=
+	=?utf-8?B?b1RWRkpBS0JHdHBubTBlNU1mMTVDTFhzNFQzWjFPdzB0VWJyV3g0eno2NUtU?=
+ =?utf-8?B?bGhBdisrdnBPZHh3YUhPTG9jYWFVandrSU9CRGIyM2loWjNkUHJXeHEwbkhI?=
+ =?utf-8?B?TCtnRmJoSHdURVRpUnRBUmRwamdBUWQ4enAwSGVqcDEvSGhJSGVHOTlES3lO?=
+ =?utf-8?B?UXV2M0hmUGlLQnpTOTNqdXJ6M0I4dW0xeWg4TS9ESjlWTmdkOWJ0L0VtOFNm?=
+ =?utf-8?B?V29FMTRkS3JPSUREWHRTWEJNTmxQWi9sRG1NRjBTRGY2dlhuMTE0UFdZZGho?=
+ =?utf-8?B?Y1c3cFAzaHJxaUFmK0p4cXBLMXBaemlZalYwc2tobjFMVnBRLzlMUmtIcU92?=
+ =?utf-8?B?N1dLSzdnVkpQaURKVDhYY0lmYkc4UndSUlplcllPakVBZjhITG1WTzVVU1Ba?=
+ =?utf-8?B?cHNiaHhkZkt5bTN0ZW9BQzRUbGZCWnBleldWTjdFQ0JZL3RPSWQ5Ry9oQXR5?=
+ =?utf-8?B?UU1jQnZyc3dYMHQya2hXT2duV3l6S21KRFBVUjBKSmZJR1pyV0RoNzczSlRG?=
+ =?utf-8?B?U0FmR2hpRWhMMjBEVjRycDdGaklpYzJ1MnJXazh6Qll5SjFydDdBVnpsUWQ4?=
+ =?utf-8?B?cFpQeHRDRUpYb3RnL3NDMGxSNjFiY2ZpVDVXeVVhSDdnaUpOUzVwWHp4UkYy?=
+ =?utf-8?B?RnY3R0lVTFpadVMyM1I4d1JOZDlUQ0VXNG1NMFZMWkd1Z25pQ1h1VWY3VUp5?=
+ =?utf-8?B?MDJBVWhkTEFINk1NVG5ZQWZqTW5mQnJqcW9RWE5jektNWHF1bmc2Y1lIdk5P?=
+ =?utf-8?B?TXdGRGxXMDNXbklIMERJUGNzbGo3NG5BSWh4SENoOHZPNDFnejE1SXJyS2Uv?=
+ =?utf-8?B?TlQrNmNyL3oxRUZ1ZUN5bnlRRWJvL1ZQRGh4WmtPcDVvdUZpMlFoZDd2YkFu?=
+ =?utf-8?B?K0M3dXc2OU9iWHB1cFhQUkxua0RRL3JGKy9KejFhamRGWjhVWjc0UWFkRDVM?=
+ =?utf-8?B?bFh3SE5JSVU3ai9DczBvQWp3NjJsSVJXNkF5aTgvR0FWR2t6c0R2cWJWbis1?=
+ =?utf-8?B?RFZPbU9RUmhXSU1BTUhCU0l0c3hYeUUxemNpZXdIK3BaMWJhSWNTOTdMY1hG?=
+ =?utf-8?B?MHBPMzJ1MEtPY0hiamZBTW5qSG9TR3cyVG85VlVJbnpIdlNuYXE0SHdaaUpw?=
+ =?utf-8?B?ZWFiTGwrZGVkeTk5T1puWHp4VEJhQ1Z0QzdQUTBPVFRvRW1Ya2x4RktqRzJK?=
+ =?utf-8?B?aC9rVEV0b1NWRUFaL2pUYXF5anBZZWFDazIxVFZsVUJONVk2R2UyaUVWS1Fs?=
+ =?utf-8?B?VEtZbHhDOGFzcllnb1FBQWxpRGxLTDNwdFZLbnhVbnFqRkJDQjhhNWpERGI5?=
+ =?utf-8?B?QUJDeUs0RGhuYVU5V2lCNElKMFNudTlDMEJSVloxR2JKa3VVbGdhRXZVRkw5?=
+ =?utf-8?B?eWQwdGFTaTV3SmZVR01yV3M5N0FWQ2xWWnhkeXZZMENyVlRON0p6K1JhVzZu?=
+ =?utf-8?B?VVJLUlBlZzlINC9RSDdIckl3UVAyblF5dzlVcTZpd1ZRSGhJejBIMVZKajlj?=
+ =?utf-8?B?OFQxcVJPNWtUUThnMG1Iei80MHRUdytCU1FqT1pqbUpZaFM5aTMxVnhOb1Ji?=
+ =?utf-8?B?UFJCQk1EMTh2enRMVGlvQk00QUZMYVpHQzVGa3BTOUt2elpsck5odzJsOUhj?=
+ =?utf-8?B?QVYzN0RNRS9Pd3ZxYk51cXFpTGx3YTQvaGNFcG50cHNoVE5XbGRVMGJIdkdk?=
+ =?utf-8?B?eVpzUDNPRjhvRWZpaitySDFaNldmUTRCQ0t6MzZYYmFvdE9nM0cxejdGNHRL?=
+ =?utf-8?B?aU1vRmQ0ZU9RWWgxcWNUSWZoQ04xZnVEc2s4QmYvUHFzNXU0V2JwYkhwRUx0?=
+ =?utf-8?B?aUZ2SVQwbTB1aDZkYzZmM1RaUGJ1T3Qvei92WDk1Z2xEbW1mMXVWeXdCWGkx?=
+ =?utf-8?B?UUJoQ2E5bWtJVHYrOTk5Rm5TRmpsOTdQOUFNSWtKQThtd1gyMUpNNDl4Ym9I?=
+ =?utf-8?B?dklWRlRhbGVScXI2eFprWTA5Tytyd3BHc21WWW5vTUtzcktPbkFNSEUxeVla?=
+ =?utf-8?B?NHF2eFJYRlhmR0RlanNHcUhLcGwwOWRyU0tlTDRiNU9rQzcxTHREV3lwcE1F?=
+ =?utf-8?B?RVBLcnN2YjRmYVRvT1BndStsTld2a01Ud3JsTXJFcTJ0aXNqeWRFVHQraDNu?=
+ =?utf-8?B?TERLTFQwRjlPRGdUOFhQSHNWSDRTeFJQSXhHV2o4dzltYU9hZFNyaUZvNzY0?=
+ =?utf-8?B?VWc9PQ==?=
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: bb18ece1-6083-4d13-0867-08db2103c535
+X-MS-Exchange-CrossTenant-Network-Message-Id: 03300e29-3528-4a1a-8a06-08db2103d304
 X-MS-Exchange-CrossTenant-AuthSource: SN6PR11MB2557.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Mar 2023 01:07:08.6512
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Mar 2023 01:07:31.6965
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: Wg2mFbPBJWlq8Dy8iDwF4i2e2UOquppTpwcKpeJFVzBAnsb/b3YM3WvjawEKAAqGJWr2P6lhlw9BWU0Rj/pcbqPcoWjcayTwIaFXKaRsoW4=
+X-MS-Exchange-CrossTenant-UserPrincipalName: frJ1MvVrpgJvtf4lZiwUQ3QmD/V+69GF+sJYGMWBQAZ1iK6Aj+hhZiDoqI2nP0DtSGLiayZXSiukdBMS/iIIrPMvuygPPDbl0ZY2z+0NMH4=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR11MB5873
-X-Proofpoint-GUID: Rh-e6SX44_GXH4Wzu4Gmpez2ium41Z5f
-X-Proofpoint-ORIG-GUID: Cn-HuyFZJMlscjqJ-EIqCQmOC9kc-RXL
+X-Proofpoint-GUID: 0fTbM8JhzSZ9HL35L6aoqTMahaD-kYlO
+X-Proofpoint-ORIG-GUID: 97stN40C5dLG58WZl2JdZajn42ggpfXd
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.254,Aquarius:18.0.942,Hydra:6.0.573,FMLib:17.11.170.22
  definitions=2023-03-09_14,2023-03-09_01,2023-02-09_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 mlxscore=0 lowpriorityscore=0
- malwarescore=0 mlxlogscore=999 impostorscore=0 suspectscore=0 spamscore=0
- priorityscore=1501 phishscore=0 bulkscore=0 clxscore=1015 adultscore=0
- classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2212070000
- definitions=main-2303100004
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 bulkscore=0
+ lowpriorityscore=0 suspectscore=0 adultscore=0 malwarescore=0
+ clxscore=1015 phishscore=0 priorityscore=1501 spamscore=0 mlxlogscore=999
+ mlxscore=0 impostorscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.12.0-2212070000 definitions=main-2303100004
 Content-Transfer-Encoding: quoted-printable
-X-MIME-Autoconverted: from 8bit to quoted-printable by mx0a-0064b401.pphosted.com id 32A0kXO1029337
+X-MIME-Autoconverted: from 8bit to quoted-printable by mx0a-0064b401.pphosted.com id 32A16iRN001666
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 10 Mar 2023 01:07:16 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101467
+ <openembedded-devel@lists.openembedded.org>; Fri, 10 Mar 2023 01:07:36 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101468
 
 
-On 3/10/23 03:28, Khem Raj wrote:
+On 3/10/23 01:50, Khem Raj wrote:
 > CAUTION: This email comes from a non Wind River email account!
 > Do not click links or open attachments unless you recognize the sender =
 and know the content is safe.
 >
-> On Thu, Mar 9, 2023 at 12:43=E2=80=AFAM Changqing Li
-> <changqing.li@eng.windriver.com> wrote:
->> From: Changqing Li <changqing.li@windriver.com>
->>
->> Signed-off-by: Changqing Li <changqing.li@windriver.com>
->> ---
->>   .../sg3-utils/{sg3-utils_1.45.bb =3D> sg3-utils_1.47.bb}      | 6 ++=
-+---
->>   1 file changed, 3 insertions(+), 3 deletions(-)
->>   rename meta-oe/recipes-support/sg3-utils/{sg3-utils_1.45.bb =3D> sg3=
--utils_1.47.bb} (72%)
->>
->> diff --git a/meta-oe/recipes-support/sg3-utils/sg3-utils_1.45.bb b/met=
-a-oe/recipes-support/sg3-utils/sg3-utils_1.47.bb
->> similarity index 72%
->> rename from meta-oe/recipes-support/sg3-utils/sg3-utils_1.45.bb
->> rename to meta-oe/recipes-support/sg3-utils/sg3-utils_1.47.bb
->> index ac12f9561..713c9f27d 100644
->> --- a/meta-oe/recipes-support/sg3-utils/sg3-utils_1.45.bb
->> +++ b/meta-oe/recipes-support/sg3-utils/sg3-utils_1.47.bb
->> @@ -6,7 +6,7 @@ HOMEPAGE =3D "http://sg.danny.cz/sg/sg3_utils.html"
->>   SECTION =3D "console/admin"
->>
->>   LICENSE =3D "GPL-2.0-or-later & BSD-2-Clause"
->> -LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Df90da7fc52172599dbf082d762=
-0f18ca"
->> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Df685699d3ac82f108aa880043f=
-a3feb7"
->>
->>   SRC_URI =3D "http://sg.danny.cz/sg/p/sg3_utils-${PV}.tgz \
->>   "
->> @@ -14,8 +14,8 @@ MIRRORS +=3D "http://sg.danny.cz/sg/p https://fossie=
-s.org/linux/misc"
->>
->>   UPSTREAM_CHECK_REGEX =3D "sg3_utils-(?P<pver>\d+(\.\d+)+)\.tgz"
->>
->> -SRC_URI[md5sum] =3D "2e71d7cd925dcc48acb24afaaaac7990"
->> -SRC_URI[sha256sum] =3D "0b87c971af52af7cebebcce343eac6bd3d73febb3c72a=
-f9ce41a4552f1605a61"
->> +SRC_URI[md5sum] =3D "5c6f6315f36ecf3499e49b1b6dbdc034"
-> md5sum can be dropped.
+> please rebase on master and resend
 
-Thanks,=C2=A0 I will send an V2 patch.
+Thanks, V2 is coming.
 
 //Changqing
 >
->> +SRC_URI[sha256sum] =3D "8673c7faca849b6b34764332d2aa91f72db05bff7382b=
-b836d0688795199c3e1"
+> On Thu, Mar 9, 2023 at 12:40=E2=80=AFAM Changqing Li
+> <changqing.li@eng.windriver.com> wrote:
+>> From: Changqing Li <changqing.li@windriver.com>
+>>
+>> Updated patches:
+>> configure.patch
+>> 0001-Makefile.in-redefine-LOCKPROG.patch
+>>
+>> Signed-off-by: Changqing Li <changqing.li@windriver.com>
+>> ---
+>>   ...akefile.in-Don-t-try-to-run-ldconfig.patch | 12 +++----
+>>   .../0001-Makefile.in-add-DESTDIR.patch        |  6 ++--
+>>   ...001-Makefile.in-install-nfslock-libs.patch | 10 +++---
+>>   .../0001-Makefile.in-redefine-LOCKPROG.patch  | 34 ++++++++++++++---=
+--
+>>   .../liblockfile/liblockfile/configure.patch   | 22 ++++++++----
+>>   ...iblockfile-fix-install-so-to-man-dir.patch |  8 ++---
+>>   ...iblockfile_1.14.bb =3D> liblockfile_1.17.bb} | 14 ++++----
+>>   7 files changed, 67 insertions(+), 39 deletions(-)
+>>   rename meta-oe/recipes-extended/liblockfile/{liblockfile_1.14.bb =3D=
+> liblockfile_1.17.bb} (72%)
+>>
+>> diff --git a/meta-oe/recipes-extended/liblockfile/liblockfile/0001-Mak=
+efile.in-Don-t-try-to-run-ldconfig.patch b/meta-oe/recipes-extended/liblo=
+ckfile/liblockfile/0001-Makefile.in-Don-t-try-to-run-ldconfig.patch
+>> index 5a1d9a995..0e814d4f5 100644
+>> --- a/meta-oe/recipes-extended/liblockfile/liblockfile/0001-Makefile.i=
+n-Don-t-try-to-run-ldconfig.patch
+>> +++ b/meta-oe/recipes-extended/liblockfile/liblockfile/0001-Makefile.i=
+n-Don-t-try-to-run-ldconfig.patch
+>> @@ -1,4 +1,4 @@
+>> -From 5876bd17caac96df70ef400bfeebb155c0bd7359 Mon Sep 17 00:00:00 200=
+1
+>> +From 4d07cbaddeed8fe283d77336a6432c4074450722 Mon Sep 17 00:00:00 200=
+1
+>>   From: Changqing Li <changqing.li@windriver.com>
+>>   Date: Wed, 8 Feb 2023 10:34:45 +0800
+>>   Subject: [PATCH] Makefile.in: Don't try to run ldconfig
+>> @@ -27,10 +27,10 @@ Signed-off-by: Changqing Li <changqing.li@windrive=
+r.com>
+>>    1 file changed, 2 deletions(-)
+>>
+>>   diff --git a/Makefile.in b/Makefile.in
+>> -index bfa0acb..ae5be56 100644
+>> +index 232f1b6..5754ca5 100644
+>>   --- a/Makefile.in
+>>   +++ b/Makefile.in
+>> -@@ -58,7 +58,6 @@ install_shared:      shared install_static install_=
+common
+>> +@@ -69,7 +69,6 @@ install_shared:      shared install_static install_=
+common
+>>                          $(libdir)/liblockfile.so.$(SOVER)
+>>                  ln -s liblockfile.so.$(SOVER) $(libdir)/liblockfile.s=
+o.$(MAJOR)
+>>                  ln -s liblockfile.so.$(SOVER) $(libdir)/liblockfile.s=
+o
+>> @@ -38,14 +38,14 @@ index bfa0acb..ae5be56 100644
+>>
+>>    install_common:
+>>                  install -d -m 755 -g root -p $(includedir)
+>> -@@ -79,7 +78,6 @@ install_nfslib:      nfslib
+>> +@@ -90,7 +89,6 @@ install_nfslib:      nfslib
+>>                  install -m 755 nfslock.so.$(NFSVER) $(nfslockdir)
+>>                  ln -sf nfslock.so.$(NFSVER) $(libdir)/nfslock.so
+>>                  ln -sf nfslock.so.$(NFSVER) $(libdir)/nfslock.so.0
+>>   -              if test "$(DESTDIR)" =3D ""; then @LDCONFIG@; fi
+>>
+>> - clean:
+>> -               rm -f *.a *.o *.so *.so.* dotlockfile
+>> + test:         test-stamp
+>> +               @:
+>>   --
+>>   2.25.1
+>>
+>> diff --git a/meta-oe/recipes-extended/liblockfile/liblockfile/0001-Mak=
+efile.in-add-DESTDIR.patch b/meta-oe/recipes-extended/liblockfile/liblock=
+file/0001-Makefile.in-add-DESTDIR.patch
+>> index ea415dd8b..2533b3a00 100644
+>> --- a/meta-oe/recipes-extended/liblockfile/liblockfile/0001-Makefile.i=
+n-add-DESTDIR.patch
+>> +++ b/meta-oe/recipes-extended/liblockfile/liblockfile/0001-Makefile.i=
+n-add-DESTDIR.patch
+>> @@ -1,4 +1,4 @@
+>> -From 67843dabe1177840697839b916fd899218893ec7 Mon Sep 17 00:00:00 200=
+1
+>> +From 8e370a2f35d0c3472ddc9068fab19d0077434c61 Mon Sep 17 00:00:00 200=
+1
+>>   From: Mingli Yu <mingli.yu@windriver.com>
+>>   Date: Thu, 19 Jul 2018 00:25:23 -0700
+>>   Subject: [PATCH] Makefile.in: add DESTDIR
+>> @@ -29,7 +29,7 @@ Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+>>    1 file changed, 5 insertions(+), 5 deletions(-)
+>>
+>>   diff --git a/Makefile.in b/Makefile.in
+>> -index 36a6d23..1e4130e 100644
+>> +index 9c74b35..8cbda1d 100644
+>>   --- a/Makefile.in
+>>   +++ b/Makefile.in
+>>   @@ -12,11 +12,11 @@ CC         =3D @CC@
+>> @@ -50,5 +50,5 @@ index 36a6d23..1e4130e 100644
+>>    MAILGROUP     =3D @MAILGROUP@
+>>
+>>   --
+>> -2.17.1
+>> +2.25.1
+>>
+>> diff --git a/meta-oe/recipes-extended/liblockfile/liblockfile/0001-Mak=
+efile.in-install-nfslock-libs.patch b/meta-oe/recipes-extended/liblockfil=
+e/liblockfile/0001-Makefile.in-install-nfslock-libs.patch
+>> index a6b297b59..f99ac2bf7 100644
+>> --- a/meta-oe/recipes-extended/liblockfile/liblockfile/0001-Makefile.i=
+n-install-nfslock-libs.patch
+>> +++ b/meta-oe/recipes-extended/liblockfile/liblockfile/0001-Makefile.i=
+n-install-nfslock-libs.patch
+>> @@ -1,4 +1,4 @@
+>> -From 631d46efff2a6d8970e202ba5422ebedd17a8d2f Mon Sep 17 00:00:00 200=
+1
+>> +From 0f34d1d91d641c3d5c5bb2eb11bd6eec7cfaf738 Mon Sep 17 00:00:00 200=
+1
+>>   From: Mingli Yu <mingli.yu@windriver.com>
+>>   Date: Thu, 19 Jul 2018 01:00:10 -0700
+>>   Subject: [PATCH] Makefile.in: install nfslock.so and nfslock.so.0
+>> @@ -14,10 +14,10 @@ Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+>>    1 file changed, 2 insertions(+)
+>>
+>>   diff --git a/Makefile.in b/Makefile.in
+>> -index 1e4130e..0f1b506 100644
+>> +index 8cbda1d..3a74811 100644
+>>   --- a/Makefile.in
+>>   +++ b/Makefile.in
+>> -@@ -77,6 +77,8 @@ install_common:
+>> +@@ -88,6 +88,8 @@ install_common:
+>>    install_nfslib:       nfslib
+>>                  install -d -m 755 -g root -p $(nfslockdir)
+>>                  install -m 755 nfslock.so.$(NFSVER) $(nfslockdir)
+>> @@ -25,7 +25,7 @@ index 1e4130e..0f1b506 100644
+>>   +              ln -sf nfslock.so.$(NFSVER) $(libdir)/nfslock.so.0
+>>                  if test "$(DESTDIR)" =3D ""; then @LDCONFIG@; fi
+>>
+>> - clean:
+>> + test:         test-stamp
+>>   --
+>> -2.17.1
+>> +2.25.1
+>>
+>> diff --git a/meta-oe/recipes-extended/liblockfile/liblockfile/0001-Mak=
+efile.in-redefine-LOCKPROG.patch b/meta-oe/recipes-extended/liblockfile/l=
+iblockfile/0001-Makefile.in-redefine-LOCKPROG.patch
+>> index 35549ff2d..c387db123 100644
+>> --- a/meta-oe/recipes-extended/liblockfile/liblockfile/0001-Makefile.i=
+n-redefine-LOCKPROG.patch
+>> +++ b/meta-oe/recipes-extended/liblockfile/liblockfile/0001-Makefile.i=
+n-redefine-LOCKPROG.patch
+>> @@ -1,4 +1,4 @@
+>> -From 9beb650712d448ad9c0899de9d98e9b623f9c249 Mon Sep 17 00:00:00 200=
+1
+>> +From 05227e74b732f13ed5a2a98232676f98bba028e6 Mon Sep 17 00:00:00 200=
+1
+>>   From: Mingli Yu <mingli.yu@windriver.com>
+>>   Date: Fri, 12 Aug 2022 11:18:15 +0800
+>>   Subject: [PATCH] Makefile.in: redefine LOCKPROG
+>> @@ -11,23 +11,41 @@ And it should be "/usr/bin/dotlockfile" on the tar=
+get.
+>>   Upstream-Status: Inappropriate [oe specific]
+>>
+>>   Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+>> +
+>> +Update patch for 1.17, also redefine LOCKPROG in other lines
+>> +Signed-off-by: Changqing Li <changqing.li@windriver.com>
+>>   ---
+>> - Makefile.in | 2 +-
+>> - 1 file changed, 1 insertion(+), 1 deletion(-)
+>> + Makefile.in | 8 ++++----
+>> + 1 file changed, 4 insertions(+), 4 deletions(-)
+>>
+>>   diff --git a/Makefile.in b/Makefile.in
+>> -index 6e53179..bfa0acb 100644
+>> +index e447cb2..e02d75e 100644
+>>   --- a/Makefile.in
+>>   +++ b/Makefile.in
+>> -@@ -42,7 +42,7 @@ dotlockfile: dotlockfile.o xlockfile.o
+>> -               $(CC) $(LDFLAGS) -o dotlockfile dotlockfile.o xlockfil=
+e.o
+>> +@@ -44,19 +44,19 @@ dotlockfile:       dotlockfile.o dlockfile.o
+>> +               $(CC) $(LDFLAGS) -o dotlockfile dotlockfile.o dlockfil=
+e.o
+>> +
+>> + dotlockfile.o:        dotlockfile.c
+>> +-              $(CC) $(CFLAGS) -DLOCKPROG=3D\"$(bindir)/dotlockfile\"=
+ \
+>> ++              $(CC) $(CFLAGS) -DLOCKPROG=3D\"/usr/bin/dotlockfile\" =
+\
+>> +                       -c dotlockfile.c
+>>
+>>    lockfile.o:   lockfile.c
+>>   -              $(CC) $(CFLAGS) -DLIB -DLOCKPROG=3D\"$(bindir)/dotloc=
+kfile\" \
+>>   +              $(CC) $(CFLAGS) -DLIB -DLOCKPROG=3D\"/usr/bin/dotlock=
+file\" \
+>> -                       -c lockfile.c
+>> +                       -DSTATIC -c lockfile.c
+>> +
+>> + solockfile.o: lockfile.c
+>> +-              $(CC) $(CFLAGS) -DLIB -DLOCKPROG=3D\"$(bindir)/dotlock=
+file\" \
+>> ++              $(CC) $(CFLAGS) -DLIB -DLOCKPROG=3D\"/usr/bin/dotlockf=
+ile\" \
+>> +                       -c lockfile.c -o solockfile.o
+>> +
+>> + dlockfile.o:  lockfile.c
+>> +-              $(CC) $(CFLAGS) -DLOCKPROG=3D\"$(bindir)/dotlockfile\"=
+ \
+>> ++              $(CC) $(CFLAGS) -DLOCKPROG=3D\"/usr/bin/dotlockfile\" =
+\
+>> +                       -c lockfile.c -o dlockfile.o
+>>
+>> - xlockfile.o:  lockfile.c
+>> + install_static:       static install_common
+>>   --
+>>   2.25.1
+>>
+>> diff --git a/meta-oe/recipes-extended/liblockfile/liblockfile/configur=
+e.patch b/meta-oe/recipes-extended/liblockfile/liblockfile/configure.patc=
+h
+>> index ea13e11d2..56f2d05eb 100644
+>> --- a/meta-oe/recipes-extended/liblockfile/liblockfile/configure.patch
+>> +++ b/meta-oe/recipes-extended/liblockfile/liblockfile/configure.patch
+>> @@ -1,10 +1,17 @@
+>> +From fd3fce8c1a3d0c70a0ffd461fbbe7e2ef71dd3a7 Mon Sep 17 00:00:00 200=
+1
+>> +From: Changqing Li <changqing.li@windriver.com>
+>> +Date: Tue, 7 Mar 2023 11:05:45 +0800
+>> +Subject: [PATCH] Update patch for 1.17
+>>
+>> -#
+>> -# Patch managed by http://www.mn-logistik.de/unsupported/pxa250/patch=
+er
+>> -#
+>> +Signed-off-by: Changqing Li <changqing.li@windriver.com>
+>> +---
+>> + configure.ac | 8 +++++---
+>> + 1 file changed, 5 insertions(+), 3 deletions(-)
+>>
+>> ---- liblockfile-1.05/./configure.in~configure
+>> -+++ liblockfile-1.05/./configure.in
+>> +diff --git a/configure.ac b/configure.ac
+>> +index df26cee..76e9165 100644
+>> +--- a/configure.ac
+>> ++++ b/configure.ac
+>>   @@ -1,4 +1,5 @@
+>>   -AC_INIT(lockfile.c)
+>>   +AC_INIT
+>> @@ -12,7 +19,7 @@
+>>    AC_CONFIG_HEADER(autoconf.h)
+>>    AC_REVISION($Revision: 1.0 $)dnl
+>>
+>> -@@ -111,7 +112,8 @@
+>> +@@ -111,7 +112,8 @@ AC_SUBST(TARGETS)
+>>    AC_SUBST(INSTALL_TARGETS)
+>>    AC_SUBST(nfslockdir)
+>>
+>> @@ -23,3 +30,6 @@
+>>   -)
+>>   +])
+>>   +AC_OUTPUT
+>> +--
+>> +2.25.1
+>> +
+>> diff --git a/meta-oe/recipes-extended/liblockfile/liblockfile/liblockf=
+ile-fix-install-so-to-man-dir.patch b/meta-oe/recipes-extended/liblockfil=
+e/liblockfile/liblockfile-fix-install-so-to-man-dir.patch
+>> index da2503339..046cd8e69 100644
+>> --- a/meta-oe/recipes-extended/liblockfile/liblockfile/liblockfile-fix=
+-install-so-to-man-dir.patch
+>> +++ b/meta-oe/recipes-extended/liblockfile/liblockfile/liblockfile-fix=
+-install-so-to-man-dir.patch
+>> @@ -1,4 +1,4 @@
+>> -From 363eb1aaeca914c7d36a2cdaf1417e4f87af4c22 Mon Sep 17 00:00:00 200=
+1
+>> +From 079d04c187800e22f18723c74e41c4e46eef67f8 Mon Sep 17 00:00:00 200=
+1
+>>   From: Mingli Yu <mingli.yu@windriver.com>
+>>   Date: Thu, 19 Jul 2018 01:12:47 -0700
+>>   Subject: [PATCH] Makefile.in: define dotlockfile.1 installed to man
+>> @@ -16,10 +16,10 @@ Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+>>    1 file changed, 1 insertion(+), 1 deletion(-)
+>>
+>>   diff --git a/Makefile.in b/Makefile.in
+>> -index 0f1b506..6e53179 100644
+>> +index 3a74811..e447cb2 100644
+>>   --- a/Makefile.in
+>>   +++ b/Makefile.in
+>> -@@ -71,7 +71,7 @@ install_common:
+>> +@@ -82,7 +82,7 @@ install_common:
+>>                  else \
+>>                    install -g root -m 755 dotlockfile $(bindir); \
+>>                  fi
+>> @@ -29,5 +29,5 @@ index 0f1b506..6e53179 100644
+>>
+>>    install_nfslib:       nfslib
+>>   --
+>> -2.17.1
+>> +2.25.1
+>>
+>> diff --git a/meta-oe/recipes-extended/liblockfile/liblockfile_1.14.bb =
+b/meta-oe/recipes-extended/liblockfile/liblockfile_1.17.bb
+>> similarity index 72%
+>> rename from meta-oe/recipes-extended/liblockfile/liblockfile_1.14.bb
+>> rename to meta-oe/recipes-extended/liblockfile/liblockfile_1.17.bb
+>> index e07dab3c7..68123e35a 100644
+>> --- a/meta-oe/recipes-extended/liblockfile/liblockfile_1.14.bb
+>> +++ b/meta-oe/recipes-extended/liblockfile/liblockfile_1.17.bb
+>> @@ -4,8 +4,8 @@ SECTION =3D "libs"
+>>   LICENSE =3D "LGPL-2.0-or-later & GPL-2.0-or-later"
+>>   LIC_FILES_CHKSUM =3D "file://COPYRIGHT;md5=3Df4ba6ad04fcb05cc30a4cfa=
+5062c55a3"
+>>
+>> -SRC_URI =3D "${DEBIAN_MIRROR}/main/libl/liblockfile/liblockfile_1.14.=
+orig.tar.gz \
+>> -    ${DEBIAN_MIRROR}/main/libl/liblockfile/liblockfile_1.14-1.debian.=
+tar.bz2;name=3D1.14-1 \
+>> +SRC_URI =3D "${DEBIAN_MIRROR}/main/libl/liblockfile/liblockfile_1.17.=
+orig.tar.gz \
+>> +    ${DEBIAN_MIRROR}/main/libl/liblockfile/liblockfile_1.17-1.debian.=
+tar.bz2;name=3D1.17-1 \
+>>       file://configure.patch \
+>>       file://0001-Makefile.in-add-DESTDIR.patch \
+>>       file://0001-Makefile.in-install-nfslock-libs.patch \
+>> @@ -14,13 +14,13 @@ SRC_URI =3D "${DEBIAN_MIRROR}/main/libl/liblockfil=
+e/liblockfile_1.14.orig.tar.gz \
+>>       file://0001-Makefile.in-Don-t-try-to-run-ldconfig.patch \
+>>   "
+>>
+>> -SRC_URI[md5sum] =3D "420c056ba0cc4d1477e402f70ba2f5eb"
+>> -SRC_URI[sha256sum] =3D "ab40d4a3e8cbc204f7e87fea637a4e4ddf9a1149aaa0a=
+723a4267febd0b1d060"
+>> +SRC_URI[md5sum] =3D "918c4c07f7b99fc327db8bf39d3a1804"
+>> +SRC_URI[sha256sum] =3D "6e937f3650afab4aac198f348b89b1ca42edceb17fb6b=
+b0918f642143ccfd15e"
+>>
+>> -SRC_URI[1.14-1.md5sum] =3D "f9a44928c3477d218c56252712ebc479"
+>> -SRC_URI[1.14-1.sha256sum] =3D "73f9be769e602149391588c28f0f4f5cda131e=
+30fb94c0777dbb23d811ac21ff"
+>> +SRC_URI[1.17-1.md5sum] =3D "40415c5702f82681d9811e4e9e182813"
+>> +SRC_URI[1.17-1.sha256sum] =3D "e3657c0e3facfeccb58900c0b48d56cd68ad5f=
+9f24d1b4c6eaa69c26490fb673"
+>>
+>> -S =3D "${WORKDIR}/${BPN}"
+>> +S =3D "${WORKDIR}/${BP}"
 >>
 >>   inherit autotools-brokensep
 >>
@@ -212,9 +519,9 @@ b836d0688795199c3e1"
 >>
 >> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
 >> Links: You receive all messages sent to this group.
->> View/Reply Online (#101443): https://lists.openembedded.org/g/openembe=
-dded-devel/message/101443
->> Mute This Topic: https://lists.openembedded.org/mt/97492283/1997914
+>> View/Reply Online (#101442): https://lists.openembedded.org/g/openembe=
+dded-devel/message/101442
+>> Mute This Topic: https://lists.openembedded.org/mt/97492257/1997914
 >> Group Owner: openembedded-devel+owner@lists.openembedded.org
 >> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub=
  [raj.khem@gmail.com]
