@@ -1,142 +1,205 @@
-Return-Path: <alex.kanavin@gmail.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9140CC6FA99
-	for <webhook@archiver.kernel.org>; Sun, 12 Mar 2023 07:24:01 +0000 (UTC)
-Received: from mail-lj1-f176.google.com (mail-lj1-f176.google.com [209.85.208.176])
- by mx.groups.io with SMTP id smtpd.web10.62552.1678605833567986264
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1EE0DC6FD19
+	for <webhook@archiver.kernel.org>; Sun, 12 Mar 2023 20:39:00 +0000 (UTC)
+Received: from mail-pl1-f172.google.com (mail-pl1-f172.google.com [209.85.214.172])
+ by mx.groups.io with SMTP id smtpd.web11.4374.1678653537558868457
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 11 Mar 2023 23:23:53 -0800
+ Sun, 12 Mar 2023 13:38:57 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=drKYdf2q;
- spf=pass (domain: gmail.com, ip: 209.85.208.176, mailfrom: alex.kanavin@gmail.com)
-Received: by mail-lj1-f176.google.com with SMTP id by8so9563542ljb.7
-        for <openembedded-devel@lists.openembedded.org>; Sat, 11 Mar 2023 23:23:53 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=o384BfDx;
+ spf=pass (domain: gmail.com, ip: 209.85.214.172, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f172.google.com with SMTP id k2so2952948pll.8
+        for <openembedded-devel@lists.openembedded.org>; Sun, 12 Mar 2023 13:38:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112; t=1678605832;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=f8PTwTtlBquGH+1ZjsTLqlLgwThSyZD7tEHM86F/euU=;
-        b=drKYdf2qiM6iFCEvhC3wRUtReLLaasSFh7JcnJb/AJZsApkAxEWzUuBUqo/zFPLZuK
-         AoUr8bRUGsd6une5Y++0WnYxD8bRAptAYiFE0jRyawMoeuA4UjaiNsS+YPxSQ1snMVe/
-         jQ8dKpGXcXFznN9job6UuAUUyJdEDCzvhW9wPEUJ7PYQGcR+DD8qzU3qRNBu4WuWDJFm
-         m7Ku3dbmLId9h+JEyhAVqLquifUeyqWx83HrmCdYaQ+JT6OdDlsRmHVw9ZhTvwirXkfx
-         Vnxs+tQnpZ7QuBTWhJbKSxFS2//RqwMRMrrOQIZ2dKspQFNJ8RTM3EVsjOtuHKp0WSve
-         xWoA==
+        d=gmail.com; s=20210112; t=1678653537;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=7aHTzpqHJkN8gg5oDeYqstEd3gFRAilWN3KTFKzNAqA=;
+        b=o384BfDxVN08Qsd98dzkxx5VPl5TCy/huBthJPZICHuoSaOGxlGcU9zFHzwju22On6
+         w0tsmgUnGhkEtcMe5LuS/Kt5WH7AdsqGoD80thUYw70RCDbufUpp7/bhSbte7WLzBeNw
+         PunBgvdsbYV2WwrWeH7i6/+nf0JuFSXIJ8Wzzl21SXnsxEvIclv8sy7J50xVUTE1ZLEF
+         inKGn0cAQgVCkPwaj9dfBa6rQtJK5oCXDrL7oXjJQgQf9tbQv/bjt/TfYKTEwc/iltJw
+         14jSEIbviwJyOfQXYS7re/87ZSI0rWRKdqRXfXzcPa/RduBIXR2qiI5Iq9FinMouIrvX
+         M+5Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112; t=1678605832;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=f8PTwTtlBquGH+1ZjsTLqlLgwThSyZD7tEHM86F/euU=;
-        b=5/GQbLNzArY3i3G6yjwZhP4tDKCAmY1EGeOMYCJp0MlU9VjFi0hOVFwmFkYZrPFbv3
-         mtpxwIlV5ey0+KquCL3IJS8vYY/t4/kMC8kthNdx4zx/e4f8H5CGxr0Co6EXsU+FDA6x
-         gG9F/5WkB7lykSxsSrrjQDoOBI1nY7zVwPahn+q5iFxw5hj0EVw72irWLRBC03y1IqGN
-         3bJjiMdiqzZ7kxb8IWdUz1BEPdCR2I1u4T3s28JPsC7si6TrJG1vU9oBWJ5zlTjATwtu
-         GQAUVCsaxRpKa1H0lZ7TyoUeI2RbIutvEL1kLJOUmBl00NLUoLN7D8Pq84IzusYi/kzN
-         zoUQ==
-X-Gm-Message-State: AO0yUKUYoFhn5W+xPcVUHBdmnBN8FFesS3UcaxBIM7HGLPnaMP/sFCOc
-	IMXBjvt9j7QbLoZxmJIf+7OS6+j5M050nHNWoSE=
-X-Google-Smtp-Source: AK7set+QkBwr6pjMAtvPbIIZqfyAZ4JnpRKPxm6r6UqBC7EVGy064L6g/z+20P24OnJZPn0HEBkly286tFjk6DB2mds=
-X-Received: by 2002:a2e:b5a5:0:b0:295:93eb:e790 with SMTP id
- f5-20020a2eb5a5000000b0029593ebe790mr9357717ljn.5.1678605831629; Sat, 11 Mar
- 2023 23:23:51 -0800 (PST)
+        d=1e100.net; s=20210112; t=1678653537;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=7aHTzpqHJkN8gg5oDeYqstEd3gFRAilWN3KTFKzNAqA=;
+        b=qjP8V5ngjYtd51SZ8GtWrTijgVTZbYG81oook7TfCEYQjK/xYsQeCGLV5/aYx+IAnY
+         B7l5oCmWv82SkNFRy9EST09g9F03gbOpRo0zWKSfqgzUNWCQwz9E6HVy6vhuGhqKR3iR
+         O12kEfkEnDd8Jlfe1osPw1EgDVglXkR3n+PQS/jmOnaiwf4rlMKrNmQaqhyDmocEuz+D
+         04NDjKx61jyJyEc1Qjmvnbacp7wGe3O4RvmsszU0OlaBMhR587LqrJyX4jihm3FLsljK
+         w4SWKdFOaXGex2mc7EhlE3MpS4zbDP63fg9/tb3TIzQ9F3IEGyOLYWskJ1NvytUgLuoC
+         ogXQ==
+X-Gm-Message-State: AO0yUKUMLxOsn1+wXMHbV42cTMu4+nJGPikQEGmpWmLnb5ZwbqV10rTo
+	Rdpf6XsQkqIlP/RLvVHyvlTjGYVHuLA=
+X-Google-Smtp-Source: AK7set+Yp/S6G4iEg6gRN/aJ5AkE2vkAhdtu+SOHud3QjtCJ6KOLWsScEXQ0ERAt63+aW/GGvYWPvQ==
+X-Received: by 2002:a17:903:32cf:b0:19d:1d32:fbe with SMTP id i15-20020a17090332cf00b0019d1d320fbemr38284729plr.20.1678653536635;
+        Sun, 12 Mar 2023 13:38:56 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9181:d380::f857])
+        by smtp.gmail.com with ESMTPSA id ik23-20020a170902ab1700b001a0432ca99csm979962plb.269.2023.03.12.13.38.54
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sun, 12 Mar 2023 13:38:55 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][PATCH] gsoap: Upgrade to 2.8.126
+Date: Sun, 12 Mar 2023 13:38:51 -0700
+Message-Id: <20230312203851.3252240-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
-References: <20230310134637.108312-1-zboszor@gmail.com> <174B12D7752D1CA7.27660@lists.openembedded.org>
- <49c7d26c-91f1-0873-46b9-112809d2f5d9@gmail.com>
-In-Reply-To: <49c7d26c-91f1-0873-46b9-112809d2f5d9@gmail.com>
-From: Alexander Kanavin <alex.kanavin@gmail.com>
-Date: Sun, 12 Mar 2023 08:23:40 +0100
-Message-ID: <CANNYZj_Zd9GLfYzbS7W_4dziMGVGY-wTTpKjhHA8ww9aBq5JUQ@mail.gmail.com>
-Subject: Re: [oe] [meta-python][PATCH v2 2/3] python3-cmake: New recipe
-To: Zoltan Boszormenyi <zboszor@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org, Khem Raj <raj.khem@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 12 Mar 2023 07:24:01 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101507
+ <openembedded-devel@lists.openembedded.org>; Sun, 12 Mar 2023 20:39:00 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101508
 
-There are several 'master-next' branches, each integrator maintains their o=
-wn.
+Fix build with musl while here
+Enable IPv6 and C locales at least
 
-The pypi patch did make it into
-https://git.yoctoproject.org/poky-contrib/log/?h=3Dabelloni/master-next
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ ...1-Simplify-check-for-gethostbyname_r.patch | 94 +++++++++++++++++++
+ .../{gsoap_2.8.124.bb => gsoap_2.8.126.bb}    |  7 +-
+ 2 files changed, 98 insertions(+), 3 deletions(-)
+ create mode 100644 meta-oe/recipes-support/gsoap/gsoap/0001-Simplify-check-for-gethostbyname_r.patch
+ rename meta-oe/recipes-support/gsoap/{gsoap_2.8.124.bb => gsoap_2.8.126.bb} (80%)
 
-Alex
-
-On Sat, 11 Mar 2023 at 06:59, Zoltan Boszormenyi <zboszor@gmail.com> wrote:
->
-> 2023. 03. 10. 14:46 keltez=C3=A9ssel, Zoltan Boszormenyi via lists.openem=
-bedded.org =C3=ADrta:
-> > Some python modules rely on "import cmake".
-> >
-> > Only build and ship the python parts, and don't download and
-> > build cmake from sources. Use the already built cmake instead.
-> >
-> > The CMakeLists.txt file is a crippled copy from this cmake
-> > python module's sources, removing almost everything, and
-> > adding a dummy install target, so do_install() doesn't fail.
-> >
-> > The python code is patched so cmake is used from PATH.
-> >
-> > Signed-off-by: Zolt=C3=A1n B=C3=B6sz=C3=B6rm=C3=A9nyi <zboszor@gmail.co=
-m>
-> > ---
-> >   .../python/python3-cmake/CMakeLists.txt       | 11 ++++++
-> >   .../python3-cmake/run-cmake-from-path.patch   | 11 ++++++
-> >   .../python/python3-cmake_3.25.2.bb            | 37 ++++++++++++++++++=
+diff --git a/meta-oe/recipes-support/gsoap/gsoap/0001-Simplify-check-for-gethostbyname_r.patch b/meta-oe/recipes-support/gsoap/gsoap/0001-Simplify-check-for-gethostbyname_r.patch
+new file mode 100644
+index 0000000000..3d12f733f0
+--- /dev/null
++++ b/meta-oe/recipes-support/gsoap/gsoap/0001-Simplify-check-for-gethostbyname_r.patch
+@@ -0,0 +1,94 @@
++From fa923a50790c907725c822b2fc7d63b2da62b4ad Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Sun, 12 Mar 2023 13:34:55 -0700
++Subject: [PATCH] Simplify check for gethostbyname_r()
 +
-> >   3 files changed, 59 insertions(+)
-> >   create mode 100644 meta-python/recipes-devtools/python/python3-cmake/=
-CMakeLists.txt
-> >   create mode 100644 meta-python/recipes-devtools/python/python3-cmake/=
-run-cmake-from-path.patch
-> >   create mode 100644 meta-python/recipes-devtools/python/python3-cmake_=
-3.25.2.bb
-> >
-> > ...
-> >
-> > diff --git a/meta-python/recipes-devtools/python/python3-cmake_3.25.2.b=
-b b/meta-python/recipes-devtools/python/python3-cmake_3.25.2.bb
-> > new file mode 100644
-> > index 000000000..d0e11f9a6
-> > --- /dev/null
-> > +++ b/meta-python/recipes-devtools/python/python3-cmake_3.25.2.bb
-> > @@ -0,0 +1,37 @@
-> > +SUMMARY =3D "CMake is an open-source, cross-platform family of tools d=
-esigned to build, test and package software"
-> > +LICENSE =3D "BSD-3-Clause & Apache-2.0"
-> > +LIC_FILES_CHKSUM =3D " \
-> > +     file://LICENSE_BSD_3;md5=3D9134cb61aebbdd79dd826ccb9ae6afcd \
-> > +     file://LICENSE_Apache_20;md5=3D19cbd64715b51267a47bf3750cc6a8a5 \
-> > +"
-> > +
-> > +DEPENDS =3D "ninja-native cmake-native python3-scikit-build-native"
-> > +
-> > +PYPI_PACKAGE =3D "cmake"
-> > +PYPI_ARCHIVE_NAME_PREFIX =3D "pypi-"
->
-> This line needs the pypi.bbclass change in OE-Core.
-> As far as I can see it not even reached master-next there,
-> while this series was merged into meta-openembedded
-> master-next.
->
-> As is, it will cause bad checksum warnings when building
-> python3-cmake.
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#101504): https://lists.openembedded.org/g/openembedde=
-d-devel/message/101504
-> Mute This Topic: https://lists.openembedded.org/mt/97536763/1686489
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [a=
-lex.kanavin@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
++This helps build fix with musl.
++
++Imported from Alpine: https://git.alpinelinux.org/aports/tree/community/gsoap/musl-fixes.patch
++
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ gsoap/stdsoap2.c   |  6 ++----
++ gsoap/stdsoap2.cpp | 10 ++--------
++ 2 files changed, 4 insertions(+), 12 deletions(-)
++
++diff --git a/gsoap/stdsoap2.c b/gsoap/stdsoap2.c
++index 654a1e1..fa31d02 100644
++--- a/gsoap/stdsoap2.c
+++++ b/gsoap/stdsoap2.c
++@@ -5463,7 +5463,7 @@ tcp_gethostbyname(struct soap *soap, const char *addr, struct hostent *hostent,
++     hostent = NULL;
++     soap->errnum = h_errno;
++   }
++-#elif (!defined(_GNU_SOURCE) || (!(~_GNU_SOURCE+1) && !defined(_POSIX_C_SOURCE) && !defined(_XOPEN_SOURCE)) || _POSIX_C_SOURCE >= 200112L || _XOPEN_SOURCE >= 600 || defined(__ANDROID__) || defined(FREEBSD) || defined(__FreeBSD__)) && !defined(SUN_OS) && defined(HAVE_GETHOSTBYNAME_R)
+++#elif defined(HAVE_GETHOSTBYNAME_R)
++   while ((r = gethostbyname_r(addr, hostent, tmpbuf, tmplen, &hostent, &soap->errnum)) < 0)
++   {
++     if (tmpbuf != soap->tmpbuf)
++@@ -5478,8 +5478,6 @@ tcp_gethostbyname(struct soap *soap, const char *addr, struct hostent *hostent,
++     if (!tmpbuf)
++       break;
++   }
++-#elif defined(HAVE_GETHOSTBYNAME_R)
++-  hostent = gethostbyname_r(addr, hostent, tmpbuf, tmplen, &soap->errnum);
++ #elif defined(VXWORKS)
++   /* vxWorks compatible */
++   /* If the DNS resolver library resolvLib has been configured in the vxWorks
++@@ -23112,7 +23110,7 @@ soap_strerror(struct soap *soap)
++   {
++ #ifndef WIN32
++ # ifdef HAVE_STRERROR_R
++-#  if !defined(_GNU_SOURCE) || (!(~_GNU_SOURCE+1) && ((!defined(_POSIX_C_SOURCE) && !defined(_XOPEN_SOURCE)) || (_POSIX_C_SOURCE >= 200112L || _XOPEN_SOURCE >= 600)))
+++#  if 1
++     err = strerror_r(err, soap->msgbuf, sizeof(soap->msgbuf)); /* XSI-compliant */
++     if (err != 0)
++       soap_strcpy(soap->msgbuf, sizeof(soap->msgbuf), "unknown error");
++diff --git a/gsoap/stdsoap2.cpp b/gsoap/stdsoap2.cpp
++index 654a1e1..5fd5fd6 100644
++--- a/gsoap/stdsoap2.cpp
+++++ b/gsoap/stdsoap2.cpp
++@@ -5430,7 +5430,7 @@ tcp_gethostbyname(struct soap *soap, const char *addr, struct hostent *hostent,
++ {
++ #if (defined(_AIX43) || defined(TRU64) || defined(HP_UX)) && defined(HAVE_GETHOSTBYNAME_R)
++   struct hostent_data ht_data;
++-#elif (!defined(_GNU_SOURCE) || (!(~_GNU_SOURCE+1) && !defined(_POSIX_C_SOURCE) && !defined(_XOPEN_SOURCE)) || _POSIX_C_SOURCE >= 200112L || _XOPEN_SOURCE >= 600 || defined(__ANDROID__) || defined(FREEBSD) || defined(__FreeBSD__)) && defined(HAVE_GETHOSTBYNAME_R)
+++#elif defined(HAVE_GETHOSTBYNAME_R)
++   int r;
++   char *tmpbuf = soap->tmpbuf;
++   size_t tmplen = sizeof(soap->tmpbuf);
++@@ -5463,7 +5463,7 @@ tcp_gethostbyname(struct soap *soap, const char *addr, struct hostent *hostent,
++     hostent = NULL;
++     soap->errnum = h_errno;
++   }
++-#elif (!defined(_GNU_SOURCE) || (!(~_GNU_SOURCE+1) && !defined(_POSIX_C_SOURCE) && !defined(_XOPEN_SOURCE)) || _POSIX_C_SOURCE >= 200112L || _XOPEN_SOURCE >= 600 || defined(__ANDROID__) || defined(FREEBSD) || defined(__FreeBSD__)) && !defined(SUN_OS) && defined(HAVE_GETHOSTBYNAME_R)
+++#elif defined(HAVE_GETHOSTBYNAME_R)
++   while ((r = gethostbyname_r(addr, hostent, tmpbuf, tmplen, &hostent, &soap->errnum)) < 0)
++   {
++     if (tmpbuf != soap->tmpbuf)
++@@ -5478,8 +5478,6 @@ tcp_gethostbyname(struct soap *soap, const char *addr, struct hostent *hostent,
++     if (!tmpbuf)
++       break;
++   }
++-#elif defined(HAVE_GETHOSTBYNAME_R)
++-  hostent = gethostbyname_r(addr, hostent, tmpbuf, tmplen, &soap->errnum);
++ #elif defined(VXWORKS)
++   /* vxWorks compatible */
++   /* If the DNS resolver library resolvLib has been configured in the vxWorks
++@@ -23112,13 +23110,9 @@ soap_strerror(struct soap *soap)
++   {
++ #ifndef WIN32
++ # ifdef HAVE_STRERROR_R
++-#  if !defined(_GNU_SOURCE) || (!(~_GNU_SOURCE+1) && ((!defined(_POSIX_C_SOURCE) && !defined(_XOPEN_SOURCE)) || (_POSIX_C_SOURCE >= 200112L || _XOPEN_SOURCE >= 600)))
++     err = strerror_r(err, soap->msgbuf, sizeof(soap->msgbuf)); /* XSI-compliant */
++     if (err != 0)
++       soap_strcpy(soap->msgbuf, sizeof(soap->msgbuf), "unknown error");
++-#  else
++-    return strerror_r(err, soap->msgbuf, sizeof(soap->msgbuf)); /* GNU-specific */
++-#  endif
++ # else
++     return strerror(err);
++ # endif
++-- 
++2.39.2
++
+diff --git a/meta-oe/recipes-support/gsoap/gsoap_2.8.124.bb b/meta-oe/recipes-support/gsoap/gsoap_2.8.126.bb
+similarity index 80%
+rename from meta-oe/recipes-support/gsoap/gsoap_2.8.124.bb
+rename to meta-oe/recipes-support/gsoap/gsoap_2.8.126.bb
+index 22e0119798..10c2c3350d 100644
+--- a/meta-oe/recipes-support/gsoap/gsoap_2.8.124.bb
++++ b/meta-oe/recipes-support/gsoap/gsoap_2.8.126.bb
+@@ -5,9 +5,9 @@ LICENSE = "GPL-2.0-with-OpenSSL-exception"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=4f40a941379143186f9602242c3fb729 \
+                     file://GPLv2_license.txt;md5=a33672dbe491b6517750a0389063508b"
+ 
+-SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}2/${BPN}_${PV}.zip \
+-           "
+-SRC_URI[sha256sum] = "4b798780989338f665ef8e171bbcc422a271004d62d5852666d5eeca33a6a636"
++SRC_URI = "https://prdownloads.sourceforge.net/${BPN}2/${BPN}_${PV}.zip \
++           file://0001-Simplify-check-for-gethostbyname_r.patch"
++SRC_URI[sha256sum] = "b65190ebf8c2517d6fafbdc2000bc7bc650d921a02f4aa53eb1e3df267592c4a"
+ 
+ inherit autotools
+ 
+@@ -15,6 +15,7 @@ BBCLASSEXTEND = "native"
+ 
+ S = "${WORKDIR}/${BPN}-2.8"
+ 
++EXTRA_OECONF += "--enable-ipv6 --enable-c-locale"
+ PARALLEL_MAKE = ""
+ 
+ EXTRA_OEMAKE:class-target = "SOAP=${STAGING_BINDIR_NATIVE}/soapcpp2"
+-- 
+2.39.2
+
 
