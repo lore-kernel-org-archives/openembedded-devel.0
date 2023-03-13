@@ -1,159 +1,163 @@
-Return-Path: <changqing.li@eng.windriver.com>
+Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 68B90C61DA4
-	for <webhook@archiver.kernel.org>; Mon, 13 Mar 2023 05:34:12 +0000 (UTC)
-Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
- by mx.groups.io with SMTP id smtpd.web11.13412.1678685644922393701
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4C4F4C6FD19
+	for <webhook@archiver.kernel.org>; Mon, 13 Mar 2023 11:41:44 +0000 (UTC)
+Received: from mailout09.t-online.de (mailout09.t-online.de [194.25.134.84])
+ by mx.groups.io with SMTP id smtpd.web10.17158.1678707701584974955
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 12 Mar 2023 22:34:05 -0700
+ Mon, 13 Mar 2023 04:41:41 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=pps06212021 header.b=To/dUOqd;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=2436428b6b=changqing.li@windriver.com)
-Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 32D5BS8x016625
-	for <openembedded-devel@lists.openembedded.org>; Mon, 13 Mar 2023 05:34:04 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com; h=from : to :
- subject : date : message-id : mime-version : content-transfer-encoding :
- content-type; s=PPS06212021;
- bh=MMPqLBajVS0h6AbyEdBg/A/Jp+UhWr5ryXwedIr22fw=;
- b=To/dUOqdPcfhtCCfR3MzqGgl2Kpskv3v+1RK7CHqMRDgTpGY5TDKOKhwJtdfNxLnzz5T
- s2GFZiLbgnK8NQnj/1Qqt9joogExjS4sIqnzu2F+82OqdgaF2JJtsiWRAFanq9DphwVG
- nhXJCl74ZHdDF74y4nkDlau/0P6EgcaK2YIuHjgd//NJ7Hu0djNgu2miu2EbjtvhODvs
- 9pVsltUWup0Gazxcr8PAvM6zv8XvE34e+KzdYlo/i7BwBH3r1m0h2EkiVU7tntIre3mh
- Fd/kvYCRWGqm3GApLJ+y6Ew90mLU87InGH1A+JJ+jExkNNJwpOGbcNrzkmw+P4tygE41 iA== 
-Received: from ala-exchng02.corp.ad.wrs.com (unknown-82-254.windriver.com [147.11.82.254])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3p8gma1fhk-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Mon, 13 Mar 2023 05:34:03 +0000
-Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
- ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.18; Sun, 12 Mar 2023 22:34:02 -0700
-Received: from pek-lpg-core2.wrs.com (128.224.153.41) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
- 15.1.2507.17 via Frontend Transport; Sun, 12 Mar 2023 22:34:02 -0700
-From: <changqing.li@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-oe][PATCH] syslog-ng: upgrade 3.38.1 -> 4.0.1
-Date: Mon, 13 Mar 2023 13:34:01 +0800
-Message-ID: <20230313053401.477835-1-changqing.li@windriver.com>
-X-Mailer: git-send-email 2.25.1
+ dkim=missing; spf=none, err=SPF record not found (domain: t-online.de, ip: 194.25.134.84, mailfrom: f_l_k@t-online.de)
+Received: from fwd83.dcpf.telekom.de (fwd83.aul.t-online.de [10.223.144.109])
+	by mailout09.t-online.de (Postfix) with SMTP id 5CF0D1D7E6
+	for <openembedded-devel@lists.openembedded.org>; Mon, 13 Mar 2023 12:41:39 +0100 (CET)
+Received: from flk-MS-7C91.fritz.box ([79.219.224.185]) by fwd83.t-online.de
+	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
+	esmtp id 1pbgYd-2PoLzd0; Mon, 13 Mar 2023 12:41:39 +0100
+From: Markus Volk <f_l_k@t-online.de>
+To: openembedded-devel@lists.openembedded.org
+Cc: Markus Volk <f_l_k@t-online.de>
+Subject: [meta-multimedia][PATCH 1/2] pipewire: update 0.3.66 -> 0.3.67
+Date: Mon, 13 Mar 2023 12:41:29 +0100
+Message-Id: <20230313114130.144008-1-f_l_k@t-online.de>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Proofpoint-GUID: 6x2vot4B6hg4ZbaUO1sgVNCbGvLiqzMJ
-X-Proofpoint-ORIG-GUID: 6x2vot4B6hg4ZbaUO1sgVNCbGvLiqzMJ
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.254,Aquarius:18.0.942,Hydra:6.0.573,FMLib:17.11.170.22
- definitions=2023-03-12_10,2023-03-10_01,2023-02-09_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 malwarescore=0 suspectscore=0
- bulkscore=0 mlxscore=0 priorityscore=1501 impostorscore=0 mlxlogscore=999
- lowpriorityscore=0 adultscore=0 spamscore=0 clxscore=1015 phishscore=0
- classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2212070000
- definitions=main-2303130044
+X-TOI-EXPURGATEID: 150726::1678707699-432C3378-D9CC4B3F/0/0 CLEAN NORMAL
+X-TOI-MSGID: 025b3a44-d82b-48c5-a122-959c9d2ae6bc
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 13 Mar 2023 05:34:12 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101510
+ <openembedded-devel@lists.openembedded.org>; Mon, 13 Mar 2023 11:41:44 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101511
 
-From: Changqing Li <changqing.li@windriver.com>
+This is a bugfix release that is API and ABI compatible with previous
+0.3.x releases.
 
-* upgrade 3.38.1 to 4.0.1
-* fix buildpath warning
+  - The loopback module and other couples streams will now not randomly
+    fail in some cases. (#3028)
+  - The RTP module now has support for sending and receiving MIDI as
+    well.
+  - The compress offload sink has seen many improvements. It now uses
+    ioctls directly to bypass limitations of tinycompress (to be able
+    to detect the available codecs, for example).
+  - Pulse server compatibility was improved for some apps by improving
+    the format parsing and FIX_ stream flag handling.
+  - The min quantum in the pulse server was changed from 256/48000 to
+    128/48000 to fix some issues with games that expect 5ms or less of
+    latency.
+  - The Bluetooth plugin has seen many improvements in packet scheduling
+    to attempt to reduce stuttering on some devices.
+  - The ALSA plugin now handles some impossible cases better. This fixes
+    recording in QEMU again. (#2971)
 
-Signed-off-by: Changqing Li <changqing.li@windriver.com>
+  - SPDX tags were added to the code for copyright information.
+  - The random number functions were made more usable.
+  - The port property code was moved from the adapter to the port
+    implementation itself to make it more useful and unified for the
+    cases where no adapter is used (midi and video).
+  - Fix a potential overflow in mixer areas.
+  - Improve runnable state calculations of nodes. This is part of
+    ongoing work to avoid running nodes that should not need to run.
+  - The stream will now always call the process function when using
+    trigger, even if there are no buffers. This avoids stalls of the
+    processing graph in some cases. (#3028)
+  - Links are now marked as passive by PipeWire itself so that
+    the right thing happens in all cases.
+  - Implement the in/out/true values for the node.passive property.
+    Place a passive state on ports to make passive links on a port
+    by port basis.
+
+  - pw-cat has seen improvements in the encoded file playback case.
+
+  - The rtp module has support for MIDI now.
+  - DSCP is now configurable in the RTP module.
+  - The loopback module doesn't randomly fail to work anymore. (#3028)
+
+  - The null-audio sink can now be given a format and it will return this
+    instead of the default float ones. This makes it possible to make a
+    null-sink that has a given format.
+  - The compress offload sink has seen many improvements. It now no longe=
+r
+    uses tinycompress to be able to detect the available codecs.
+  - The ALSA plugin now handles some impossible cases better. (#2971)
+  - Fix compilation on older compilers. (#3050)
+
+  - The FIX_ flags are now implemented more correctly by fixating the
+    stream to the format of the sink/source they ask to be connected to.
+    There is now also an option to override the fixation based on rules.
+  - Format parsing was improved and should now support all format strings
+    supported by pulseaudio including upper and lower case variants
+    and shortcuts.
+  - Channelmap parsing was improved and should now reject invalid
+    channelmaps as well as support the shortcuts supported by pulseaudio.
+  - Escape codes in module arguments now work as it does in pulseaudio. (=
+#3071)
+  - The min quantum was changed from 256/48000 to 128/48000 to fix some
+    issues with games that expect 5ms or less of latency.
+
+  - jack.passive-links can now be used to have a JACK client make passive
+    links and the node.passive property is no longer used for this becaus=
+e
+    it has a different function.
+  - The qsynth rule was updated to the new node.passive features. It is n=
+ow
+    only passive on the output side.
+
+  - BAP delay and transport latency are handled now.
+  - A2DP and SCO can now use bigger buffers to improve quality when the
+    reception is jittery.
+  - The AT+BCC command is now implemented.
+  - Packet encoding now happens ahead of time when possible to avoid dela=
+ys
+    before sending it.
+  - Source should now always produce complete (padded) buffers to avoid s=
+ync
+    problems.
+  - Don't set unnecessary socket options.
+
+  - The pipewiresrc now has an autoconnect argument.
+  - The metadata plane count is now handled correctly in more cases.
+  - Stream errors are now handled correctly to stop the GStreamer element=
+s.
+
+Signed-off-by: Markus Volk <f_l_k@t-online.de>
 ---
- .../files/0001-Fix-buildpaths-warning.patch   | 55 +++++++++++++++++++
- ...syslog-ng_3.38.1.bb => syslog-ng_4.0.1.bb} |  3 +-
- 2 files changed, 57 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-support/syslog-ng/files/0001-Fix-buildpaths-warning.patch
- rename meta-oe/recipes-support/syslog-ng/{syslog-ng_3.38.1.bb => syslog-ng_4.0.1.bb} (97%)
+ .../pipewire/{pipewire_0.3.66.bb =3D> pipewire_0.3.67.bb}        | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+ rename meta-multimedia/recipes-multimedia/pipewire/{pipewire_0.3.66.bb =3D=
+> pipewire_0.3.67.bb} (99%)
 
-diff --git a/meta-oe/recipes-support/syslog-ng/files/0001-Fix-buildpaths-warning.patch b/meta-oe/recipes-support/syslog-ng/files/0001-Fix-buildpaths-warning.patch
-new file mode 100644
-index 000000000..c7bb4a64d
---- /dev/null
-+++ b/meta-oe/recipes-support/syslog-ng/files/0001-Fix-buildpaths-warning.patch
-@@ -0,0 +1,55 @@
-+From d85a7a3ae2bb9f5267b2af43784633ae8f011f21 Mon Sep 17 00:00:00 2001
-+From: Changqing Li <changqing.li@windriver.com>
-+Date: Mon, 13 Mar 2023 09:50:15 +0800
-+Subject: [PATCH] Fix buildpaths warning
-+
-+Fix buildpath warning:
-+WARNING: syslog-ng-4.0.1-r0 do_package_qa: QA Issue: File /usr/include/syslog-ng/syslog-ng-config-64.h in package syslog-ng-dev contains reference to TMPDIR [buildpaths]
-+WARNING: syslog-ng-4.0.1-r0 do_package_qa: QA Issue: File /usr/bin/syslog-ng-update-virtualenv in package syslog-ng contains reference to TMPDIR
-+File /usr/bin/pdbtool in package syslog-ng contains reference to TMPDIR [buildpaths]
-+WARNING: syslog-ng-4.0.1-r0 do_package_qa: QA Issue: File /usr/lib/syslog-ng/libdbparser.so in package syslog-ng-libs contains reference to TMPDIR [buildpaths]
-+
-+* SYSLOG_NG_PATH_TOPSRC_DIR is /yocto/build/tmp/work/core2-64-poky-linux/syslog-ng/4.0.1-r0,
-+  which is used to get xsd dir in build SYSLOG_NG_PATH_TOPSRC_DIR/doc/xsd, 
-+  which is not suitable for target, set it to "/source" for fixing this buildpath warning
-+
-+* SYSTEM_PYTHON is /yocto/build/tmp/hosttools/python3, set to python3
-+  for target.
-+
-+Upstream-Status: Inappropriate [oe specific]
-+
-+Signed-off-by: Changqing Li <changqing.li@windriver.com>
-+---
-+ configure.ac                           | 2 +-
-+ scripts/syslog-ng-update-virtualenv.in | 2 +-
-+ 2 files changed, 2 insertions(+), 2 deletions(-)
-+
-+diff --git a/configure.ac b/configure.ac
-+index 79a1502..1ad6508 100644
-+--- a/configure.ac
-++++ b/configure.ac
-+@@ -1930,7 +1930,7 @@ AC_DEFINE_UNQUOTED(PYTHON_SYSCONF_MODULE_DIR, "$python_sysconf_moduledir", [Pyth
-+ AC_DEFINE_UNQUOTED(PATH_LOGGENPLUGINDIR, "$loggenplugindir", [loggenplugin installation directory])
-+ AC_DEFINE_UNQUOTED(MODULE_PATH, "$module_path", [module search path])
-+ AC_DEFINE_UNQUOTED(JAVA_MODULE_PATH, "$java_module_path", [java module search path])
-+-AC_DEFINE_UNQUOTED(PATH_TOPSRC_DIR, "$abs_topsrcdir", [self-defined top_srcdir path])
-++AC_DEFINE_UNQUOTED(PATH_TOPSRC_DIR, "/source", [self-defined top_srcdir path])
-+ AC_DEFINE_UNQUOTED(PACKAGE_NAME, "$PACKAGE_NAME", [package name])
-+ 
-+ 
-+diff --git a/scripts/syslog-ng-update-virtualenv.in b/scripts/syslog-ng-update-virtualenv.in
-+index ed85baf..b1a9e34 100755
-+--- a/scripts/syslog-ng-update-virtualenv.in
-++++ b/scripts/syslog-ng-update-virtualenv.in
-+@@ -62,7 +62,7 @@ done
-+ set -e
-+ 
-+ REQUIREMENTS_FILE=${python_moduledir}/requirements.txt
-+-SYSTEM_PYTHON=@PYTHON@
-++SYSTEM_PYTHON=python3
-+ VENV_PYTHON=${python_venvdir}/bin/python
-+ 
-+ if [ "$display_prompt" -ne 0 ]; then
-+-- 
-+2.25.1
-+
-diff --git a/meta-oe/recipes-support/syslog-ng/syslog-ng_3.38.1.bb b/meta-oe/recipes-support/syslog-ng/syslog-ng_4.0.1.bb
-similarity index 97%
-rename from meta-oe/recipes-support/syslog-ng/syslog-ng_3.38.1.bb
-rename to meta-oe/recipes-support/syslog-ng/syslog-ng_4.0.1.bb
-index 182a253d3..4521593ed 100644
---- a/meta-oe/recipes-support/syslog-ng/syslog-ng_3.38.1.bb
-+++ b/meta-oe/recipes-support/syslog-ng/syslog-ng_4.0.1.bb
-@@ -22,10 +22,11 @@ SRC_URI = "https://github.com/balabit/syslog-ng/releases/download/${BP}/${BP}.ta
-            file://volatiles.03_syslog-ng \
-            file://syslog-ng-tmp.conf \
-            file://syslog-ng.service-the-syslog-ng-service.patch \
-+           file://0001-Fix-buildpaths-warning.patch \
- "
- SRC_URI:append:powerpc64le = " file://0001-plugin.c-workaround-powerpc64le-segfaults-error.patch"
- 
--SRC_URI[sha256sum] = "5491f686d0b829b69b2e0fc0d66a62f51991aafaee005475bfa38fab399441f7"
-+SRC_URI[sha256sum] = "c16eafe447191c079f471846182876b7919d3d789af8c1f9fe55ab14521ceb2c"
- 
- UPSTREAM_CHECK_URI = "https://github.com/balabit/syslog-ng/releases"
- 
--- 
-2.25.1
+diff --git a/meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.66.=
+bb b/meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.67.bb
+similarity index 99%
+rename from meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.66.b=
+b
+rename to meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.67.bb
+index a7c77463e..0d4dd63f9 100644
+--- a/meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.66.bb
++++ b/meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.67.bb
+@@ -13,7 +13,7 @@ LIC_FILES_CHKSUM =3D " \
+=20
+ DEPENDS =3D "dbus ncurses"
+=20
+-SRCREV =3D "08b0ed65765a1033424a5c0d897a392a61f8a2a3"
++SRCREV =3D "26623ff8cb3c9ba774537379a1835c5efb0d5159"
+ SRC_URI =3D "git://gitlab.freedesktop.org/pipewire/pipewire.git;branch=3D=
+master;protocol=3Dhttps"
+=20
+ S =3D "${WORKDIR}/git"
+@@ -288,6 +288,7 @@ FILES:${PN}-tools =3D " \
+     ${bindir}/pw-dot \
+     ${bindir}/pw-dsdplay \
+     ${bindir}/pw-dump \
++    ${bindir}/pw-encplay \
+     ${bindir}/pw-link \
+     ${bindir}/pw-loopback \
+     ${bindir}/pw-metadata \
+--=20
+2.34.1
 
 
