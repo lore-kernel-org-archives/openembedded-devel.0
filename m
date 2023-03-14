@@ -1,171 +1,277 @@
-Return-Path: <philip@balister.org>
+Return-Path: <joe.slater@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C9026C74A5B
-	for <webhook@archiver.kernel.org>; Tue, 14 Mar 2023 13:06:21 +0000 (UTC)
-Received: from CHE01-GV0-obe.outbound.protection.outlook.com (CHE01-GV0-obe.outbound.protection.outlook.com [40.107.23.81])
- by mx.groups.io with SMTP id smtpd.web10.6302.1678793381185644508
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8DB32C74A4B
+	for <webhook@archiver.kernel.org>; Tue, 14 Mar 2023 16:15:12 +0000 (UTC)
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.web10.1125.1678810505468718731
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 14 Mar 2023 04:29:41 -0700
+ Tue, 14 Mar 2023 09:15:05 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="body hash did not verify" header.i=@spinetix.com header.s=selector2 header.b=fEYXUcyL;
- spf=pass (domain: spinetix.com, ip: 40.107.23.81, mailfrom: valeria.petrov@spinetix.com)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=IXmO/aR8jK6gSbK+Pt19LjqDEaSX5IZ1ZOncVazafGmQQqtfidu6ef30DhIVjL7uKcK4Pa+vKe55cn1L5ejYFWFFBVFctgLWz6T51OpvQQ4jPcOj1qCDGNY0Z1DowLZ7pFEvf6NGk1e0BmOrbb9GOiWNJTFWcOQz3z6Lwt0wCXmB6DzwRk3P03751w3QpeEVTWEwV+EgKVcnPh/K6DM7Pxrz/6g9tsmRpksDpHoQnYXXA/Y+Q7cGxk07l0FmUpN+6emS3IeJPHmH2dX9sY4b4OAUHGMxhW7pueU6x98/j4+6iEa74NlQ356fcE9/ECVkdGYzc0ysMTEkMWclfy3qKQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=DoeuaYl/e7mPsisMUOA/PaUxLQanrsE48Ai/N89Jk28=;
- b=d/3Jrzvp8gZvtkcvewHAu+w1X4roSmxjgLI/6P4d7VV0lwp1/EJzgHNVcM6Aw3cOK5FNiRPTImB8Qo+F97fzZSFQLf3dFRhJGTozEjpQYuRbgbQSXMRrNXp5yar7DbXdfg/ZzEx8lgjuZnX6DRPiyTo+YRYGT+l4/nqOLMk+jrLdYeXDDDEgRV9al3Z/4voJE2kFHvnazHIp+vDlwPmss4j+gJjn3JiT0HkpYxeOB2BsCFiLkQus+IAnggaeWPvBTcOIMuuIRap2TBS5n4iwpbgFix0dIksPgWJqxwK9eKz4L+f3RAk9z4nI2ajr+BcJc2935FpcX4iDYTOHzG/VXQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=spinetix.com; dmarc=pass action=none header.from=spinetix.com;
- dkim=pass header.d=spinetix.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=spinetix.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=DoeuaYl/e7mPsisMUOA/PaUxLQanrsE48Ai/N89Jk28=;
- b=fEYXUcyLPDa6bNdrL3AmhHDwqnN0yIOHjMOjzpQIYhGnfDJ6ZmXZs7uHiYz27Ebad7CJxwLXKdatrsrfPjndM3g30kjD78rhEauWtaSapebYfaBHLFE6PIxxiowSxKKpvpa/bRo5k2YDWwJ/ptlFvM9ZNiSFof6tJeTC3i0918U=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=spinetix.com;
-Received: from ZR0P278MB0379.CHEP278.PROD.OUTLOOK.COM (2603:10a6:910:30::12)
- by ZR0P278MB0123.CHEP278.PROD.OUTLOOK.COM (2603:10a6:910:19::9) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6178.26; Tue, 14 Mar
- 2023 11:29:38 +0000
-Received: from ZR0P278MB0379.CHEP278.PROD.OUTLOOK.COM
- ([fe80::2353:2e57:6e90:ab36]) by ZR0P278MB0379.CHEP278.PROD.OUTLOOK.COM
- ([fe80::2353:2e57:6e90:ab36%4]) with mapi id 15.20.6178.024; Tue, 14 Mar 2023
- 11:29:37 +0000
-From: "Valeria Petrov" <valeria.petrov@spinetix.com>
-To: openembedded-devel@lists.openembedded.org
-CC: Wang Mingyu <wangmy@fujitsu.com>,
-	Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][dunfell][PATCH] apache2: upgrade 2.4.55 -> 2.4.56
-Date: Tue, 14 Mar 2023 12:28:19 +0100
-Message-ID: <20230314112819.24301-1-valeria.petrov@spinetix.com>
+ dkim=pass header.i=@windriver.com header.s=pps06212021 header.b=UG1O1IS+;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=2437f4244a=joe.slater@windriver.com)
+Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 32E8GZsT003041
+	for <openembedded-devel@lists.openembedded.org>; Tue, 14 Mar 2023 16:15:04 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com; h=from : to : cc :
+ subject : date : message-id : mime-version : content-transfer-encoding :
+ content-type; s=PPS06212021;
+ bh=uS+zuS9oNjdSIekNT+uVNHpMTl0F+bCZlJxjo07GpaY=;
+ b=UG1O1IS+Ex2daCweLgb10L3iPGOoJRZ0H2DjdjR7YvmJh/xUOSMAS1fH9X89S6/ep9At
+ gIoC0FBSnUGUF8+HBXW+3v82dujsIBQCKjaed5iG0rLOM3KPrzUxk5rFh6ie2XFkCe87
+ zRAjqRZ4/nV1jsa/6/2QOvu9oFVRZR+0jcQ6QJLK6bU3RSzokcM2CIySMXgyaPSCbI49
+ Bv77XykS9vUOJlR/qBhZoZTvodK7e+gLmTz2teTI7/vLpiaC62MYuPWQx5lFE3jveOHi
+ qatnZdxSD9V7efBiklRglLakIGNsrWTdWDS224iKgObRwick5UNjNsl+0WkFv//v/fPq QQ== 
+Received: from ala-exchng01.corp.ad.wrs.com (unknown-82-252.windriver.com [147.11.82.252])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3p8gma31nd-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Tue, 14 Mar 2023 16:15:04 +0000
+Received: from ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.17; Tue, 14 Mar 2023 09:15:03 -0700
+Received: from ala-jslater-lx1.corp.ad.wrs.com (147.11.136.210) by
+ ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server id
+ 15.1.2507.18 via Frontend Transport; Tue, 14 Mar 2023 09:15:03 -0700
+From: Joe Slater <joe.slater@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: <joe.slater@windriver.com>, <randy.macleod@windriver.com>
+Subject: [meta-oe][PATCH 1/1] libreport: update to version 2.17.8
+Date: Tue, 14 Mar 2023 09:15:02 -0700
+Message-ID: <20230314161503.2900370-1-joe.slater@windriver.com>
 X-Mailer: git-send-email 2.25.1
-X-ClientProxiedBy: ZR0P278CA0172.CHEP278.PROD.OUTLOOK.COM
- (2603:10a6:910:45::6) To ZR0P278MB0379.CHEP278.PROD.OUTLOOK.COM
- (2603:10a6:910:30::12)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: ZR0P278MB0379:EE_|ZR0P278MB0123:EE_
-X-MS-Office365-Filtering-Correlation-Id: a8f2c79a-80ae-44b8-4488-08db247f650f
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 
-	uJjgnlIFSgr3Pelyd8WVDxNEzp389yc43sBJzr8/9jhf3v4bRnkZBSNObdi3+rszkBR6zt1C69l2P8oDr99IzPIvQBZUmP5+gC16OpcqfZyy6roHQAata9m5NykpKM3bWRMHEVsruy4p5hFajPhTjA+sCQPIWExlZH6R/CPUwjMz6Bzdh3m21qWtVztpZPa8TIZq8FlII5uNVaVNxnDdndv2WX37M1zdLxFgk1k9GCLpmtXTjBx1CJMdXGtzbGdDnRQ2YCicdz5Q9x9TXzkegdhyGlWRK9wfz1NmNWEjxfDHPd6vID3ul3+eZ2PW0fll87fVYIljTTfZ5ycR+eKNn0HFeM6kjmgwdl0axwQhwdgS5tVJ/hRggZny2OE+aRf4CQBpjV6Uq+hPav+amzMVvZkPwxK5mHZR1P+xCMPzzet9L4TdKdTMcPn7ZiCjEfh4nw0yenY+fpnpZehOFzRv18Z/zTStUaIBJHtwU0OW/KWTl4gzAQkG615+XEIv9xkJkjYyyAKu8PWwfCdT0BED7VCkP/HkW6YmXSHbfRmsQnZhCQDr9f6gklDAIJIj2a1qjQjMycpOLJUoAXttGQ742IRkH5J/bOjKmoMhUjfmqwTcHPhuvkxwC1k7eoGEOpk0juDjUBtj0tQzrosHUpifkZmdeOL7RUXFEypyb86of7Qifa3vtjWpV9sAUdX4qSmc
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:ZR0P278MB0379.CHEP278.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230025)(4636009)(366004)(396003)(376002)(346002)(39830400003)(136003)(451199018)(38100700002)(38350700002)(6916009)(4326008)(41300700001)(316002)(83380400001)(66476007)(54906003)(66556008)(8676002)(66946007)(8936002)(5660300002)(2616005)(52116002)(478600001)(86362001)(44832011)(1076003)(26005)(6506007)(6512007)(2906002)(186003)(6666004)(6486002)(36756003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?us-ascii?Q?3wL8+luDK5Ajudqh0nNpHNu5wMAuYiAFBnftsTl4beq0v4HDbwmaFAgqT50T?=
- =?us-ascii?Q?6HXmln/eqAdRVuxp4KHrEIAEayLkYZht8KjbBihDAEMfw4b7V6x5P5zqR9JT?=
- =?us-ascii?Q?vj5qZVxtf1ZWfl3xkcYdA7TQR42qm8tIwl+9t1epO1aY7DQVtlCwuaSSioJP?=
- =?us-ascii?Q?7xQp1Y7GIbXdamdHoYnXjan2HimbM7kGphWrTdAG2OUGb1piJc3rCsjsdMwl?=
- =?us-ascii?Q?GKYjVhZAD+laN8OxL48CqADqP/Jr0PMRoAw3kfqbgHz+HGHf6XmB7truVkex?=
- =?us-ascii?Q?pVm9Q1bKoY0U99xm6YHb7FVOg0UH5l28envqPzxa7+Aa4cQHAzlyjA5EbXAo?=
- =?us-ascii?Q?Y1NrTe7/wKeME+BtnqLlI+xz2M352ML6lJ5PP+bgOo+99gBsmLg1wndgUPFB?=
- =?us-ascii?Q?H5ms0vMfwja3QhBvdYHxjhAkoNwKYSII2xCShs7DqmWC8lUcZ0NLMbUKliO2?=
- =?us-ascii?Q?ziw+ljxK1GCsGknKhw3k03CADpl+SLOx/M/3pLDjDwMn52ztkFziq62Huh3T?=
- =?us-ascii?Q?VMPmW9kL6bFam2biMM2je2TPcyfAo2S4yC939ukKvJQwmcWrL3Hq0O/ssPwC?=
- =?us-ascii?Q?s3iBdrCWWsImyGEJQuw0idWhaEyqZppsX7LXtcwzUkmPl6lHR5Tr7b51j5IP?=
- =?us-ascii?Q?ZJPyy/NxKozOMBlzW8KgqsycIrM6vI5zW6WnR/YXb7e/+tA4kol3UG0i1aGW?=
- =?us-ascii?Q?+N0G+Pcrh2ll53auMRiiSXoiB0yEahX5AQeOX6uWUKZS9R9n8BjbLnfM+/Me?=
- =?us-ascii?Q?d5keUugJsu5k8Sex2jzdUmwLkQpmAeU2Q/dCDoOMeEkDZaQiDRAgTELK5bl6?=
- =?us-ascii?Q?daQNkMLSoHRoCEoP4TOlcIU625/KIML0r4CCDG0ae/Ak2ULQ0go1XA0dkZcx?=
- =?us-ascii?Q?wqxGeoa1/+nn63H+g+zvyNFOae5Vd8ouSR4f1LvQsMyLuPZOonQy+HxM3BPn?=
- =?us-ascii?Q?8bdO4H/0OKmSVC9ATwTjqgqpWZ/smGrAikr/zXbRe+SEG5eRrQjpmu3bEx+l?=
- =?us-ascii?Q?hnAn7NUELcSmXzDCrVcFBDQsYaZLUCSUN5wWwN6h9TRbCF7s+MrClrO/gGCP?=
- =?us-ascii?Q?SZ/OIhBrvt5wNx0rEAQh5usQFSHXOFCzrKEbBqaB+YJAKL8fdw9i3KwCMatX?=
- =?us-ascii?Q?fYdhJhzbdAupNZPMq1KpSOF0BCY/XLYtV+RK+IEU9FPubljQfhh0ch/j4Z7Z?=
- =?us-ascii?Q?eeYc3ly+Eom8LIvbIIvFq/zbaG697jyC4MFQkzwpG9APOGlvH0oQ8n4oMK0m?=
- =?us-ascii?Q?RiByvKgBb6pQGXSc26pwBw2R1uYhCCnbcGq3ua/lDzRzF47HeUSpOl6/sqYx?=
- =?us-ascii?Q?rIVm+8Qrz/jAav3UEn+SEpjiselKiT8JxuCoePs0Db/YJaEoNJYzyYU8EhBH?=
- =?us-ascii?Q?7BcRb8exNkCptmIb/3Z0kRkzon64DR2v5Bxu+ySVyqvUCXaJcJbNGJjJSE/z?=
- =?us-ascii?Q?yNxBoO37yMeSjLXT+ZfSeSwcabU95pMCUxpTPgbVtaJxtj5lp4qXWpIbHIE6?=
- =?us-ascii?Q?LnZnJBfDhmSJNxzPyzBSL4GoNiDRVDxzvFH5BTTrKIpNEd8IqV+JZYx2M4i0?=
- =?us-ascii?Q?CzyB8Qsp52jMGpoJt3WaG2JNcCJlt+NIr4f1nzmxneSouqpotQ5e60Doof59?=
- =?us-ascii?Q?pQ=3D=3D?=
-X-OriginatorOrg: spinetix.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: a8f2c79a-80ae-44b8-4488-08db247f650f
-X-MS-Exchange-CrossTenant-AuthSource: ZR0P278MB0379.CHEP278.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Mar 2023 11:29:37.9110
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5f4034fa-ed2d-4840-a93f-acb1e9633b93
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: NCM2PKRxkBPa1o2u65AqRLFuA9kmLtODXj1vm8s0xX2JKbX3MhwxaQglJJz8bmvYfCBhG/1xXmoN5C1FWfDBiY+3uM4W7tsVRZScEFXtQ5M=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: ZR0P278MB0123
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
+X-Proofpoint-GUID: jSGOTcS6kX2rDOaGCZU27FJs7FXgaG5Y
+X-Proofpoint-ORIG-GUID: jSGOTcS6kX2rDOaGCZU27FJs7FXgaG5Y
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.254,Aquarius:18.0.942,Hydra:6.0.573,FMLib:17.11.170.22
+ definitions=2023-03-14_09,2023-03-14_02,2023-02-09_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 malwarescore=0 suspectscore=0
+ bulkscore=0 mlxscore=0 priorityscore=1501 impostorscore=0 mlxlogscore=999
+ lowpriorityscore=0 adultscore=0 spamscore=0 clxscore=1015 phishscore=0
+ classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2212070000
+ definitions=main-2303140134
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 14 Mar 2023 13:06:21 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101520
+ <openembedded-devel@lists.openembedded.org>; Tue, 14 Mar 2023 16:15:12 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101521
 
-From: Wang Mingyu <wangmy@fujitsu.com>
+Modify patches to apply and remove unrecognized configure
+option --without-python2.  Retain --with-python3 even
+though it is the default.
 
-Changelog:
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
--  rotatelogs: Add -T flag to allow subsequent rotated logfiles to be
-   truncated without the initial logfile being truncated.
-
--  mod_ldap: LDAPConnectionPoolTTL should accept negative values in order t=
-o
-   allow connections of any age to be reused. Up to now, a negative value
-   was handled as an error when parsing the configuration file.  PR 66421.
-
--  mod_proxy_ajp: Report an error if the AJP backend sends an invalid numbe=
-r
-   of headers.
-
--  mod_md:
-   - Enabling ED25519 support and certificate transparency information when
-     building with libressl v3.5.0 and newer.
-   - MDChallengeDns01 can now be configured for individual domains.
-   - Fixed a bug that caused the challenge
-     teardown not being invoked as it should.
-
--  mod_http2: client resets of HTTP/2 streams led to unwanted 500 errors
-   reported in access logs and error documents. The processing of the
-   reset was correct, only unneccesary reporting was caused.
-
--  mod_proxy_uwsgi: Stricter backend HTTP response parsing/validation.
-
-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Joe Slater <joe.slater@windriver.com>
 ---
- .../apache2/{apache2_2.4.55.bb =3D> apache2_2.4.56.bb}            | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-webserver/recipes-httpd/apache2/{apache2_2.4.55.bb =3D> apache=
-2_2.4.56.bb} (99%)
+ ...01-Makefile.am-remove-doc-and-apidoc.patch | 16 ++++++-----
+ ...move-prog-test-of-xmlto-and-asciidoc.patch | 16 ++++++-----
+ .../files/0003-without-build-plugins.patch    | 14 ++++++----
+ ...gure.ac-remove-prog-test-of-augparse.patch | 27 +++++++++++--------
+ .../libreport/libreport_2.17.8.bb             |  2 +-
+ 5 files changed, 46 insertions(+), 29 deletions(-)
 
-diff --git a/meta-webserver/recipes-httpd/apache2/apache2_2.4.55.bb b/meta-=
-webserver/recipes-httpd/apache2/apache2_2.4.56.bb
-similarity index 99%
-rename from meta-webserver/recipes-httpd/apache2/apache2_2.4.55.bb
-rename to meta-webserver/recipes-httpd/apache2/apache2_2.4.56.bb
-index 88cef0ef83..1ad222ace4 100644
---- a/meta-webserver/recipes-httpd/apache2/apache2_2.4.55.bb
-+++ b/meta-webserver/recipes-httpd/apache2/apache2_2.4.56.bb
-@@ -27,7 +27,7 @@ SRC_URI:append:class-target =3D " \
-            "
-=20
- LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Dbddeddfac80b2c9a882241d008bb41c=
-3"
--SRC_URI[sha256sum] =3D "11d6ba19e36c0b93ca62e47e6ffc2d2f2884942694bce0f23f=
-39c71bdc5f69ac"
-+SRC_URI[sha256sum] =3D "d8d45f1398ba84edd05bb33ca7593ac2989b17cb9c7a0cafe5=
-442d41afdb2d7c"
-=20
- S =3D "${WORKDIR}/httpd-${PV}"
-=20
---=20
+diff --git a/meta-oe/recipes-extended/libreport/files/0001-Makefile.am-remove-doc-and-apidoc.patch b/meta-oe/recipes-extended/libreport/files/0001-Makefile.am-remove-doc-and-apidoc.patch
+index 1ee0dd2f5..934dd1778 100644
+--- a/meta-oe/recipes-extended/libreport/files/0001-Makefile.am-remove-doc-and-apidoc.patch
++++ b/meta-oe/recipes-extended/libreport/files/0001-Makefile.am-remove-doc-and-apidoc.patch
+@@ -1,28 +1,32 @@
+-From 1f7d106c7d982fe055addc8d883b161202233175 Mon Sep 17 00:00:00 2001
++From 73dc0c2cd942e30f5f7cb40cb5828895b96f0fb1 Mon Sep 17 00:00:00 2001
+ From: Hongxu Jia <hongxu.jia@windriver.com>
+ Date: Wed, 26 Apr 2017 03:47:58 -0400
+-Subject: [PATCH 1/4] Makefile.am: remove doc and apidoc
++Subject: [PATCH] Makefile.am: remove doc and apidoc
+ 
+ There was a failure at do_install time, so remove doc to workaround.
+ 
+ Upstream-Status: Inappropriate [workaround]
+ 
+ Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
++
++Context modified to apply to v2.17.8.
++
++Signed-off-by: Joe Slater <joe.slater@windriver.com>
+ ---
+  Makefile.am | 2 +-
+  1 file changed, 1 insertion(+), 1 deletion(-)
+ 
+ diff --git a/Makefile.am b/Makefile.am
+-index 9ad827c..34364a8 100644
++index 4ff2f5c5..d4e30bc2 100644
+ --- a/Makefile.am
+ +++ b/Makefile.am
+ @@ -1,5 +1,5 @@
+  ACLOCAL_AMFLAGS = -I m4
+--SUBDIRS = po src tests doc apidoc
+-+SUBDIRS = po src tests
++-SUBDIRS = data po src tests doc apidoc
+++SUBDIRS = data po src tests
+  
+  EXTRA_DIST = \
+      libreport.pc.in \
+ -- 
+-2.7.4
++2.25.1
+ 
+diff --git a/meta-oe/recipes-extended/libreport/files/0002-configure.ac-remove-prog-test-of-xmlto-and-asciidoc.patch b/meta-oe/recipes-extended/libreport/files/0002-configure.ac-remove-prog-test-of-xmlto-and-asciidoc.patch
+index 2e691e95f..4fdf69c73 100644
+--- a/meta-oe/recipes-extended/libreport/files/0002-configure.ac-remove-prog-test-of-xmlto-and-asciidoc.patch
++++ b/meta-oe/recipes-extended/libreport/files/0002-configure.ac-remove-prog-test-of-xmlto-and-asciidoc.patch
+@@ -1,7 +1,7 @@
+-From 9beadcdfca9198548f06bf18f3f26e1d11542e53 Mon Sep 17 00:00:00 2001
++From 276c45d0663124c9ccab0ddc8b97fb5cdc8b3867 Mon Sep 17 00:00:00 2001
+ From: Hongxu Jia <hongxu.jia@windriver.com>
+ Date: Tue, 31 Jul 2018 16:53:04 +0800
+-Subject: [PATCH 2/4] configure.ac: remove prog test of xmlto and asciidoc
++Subject: [PATCH] configure.ac: remove prog test of xmlto and asciidoc
+ 
+ The prog of xmlto and asciidoc were used to generate documents,
+ and since the doc module has already been disabled, so we should
+@@ -10,15 +10,19 @@ remove the prog test.
+ Upstream-Status: Inappropriate [workaround]
+ 
+ Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
++
++Modify to apply to v 2.17.8.
++
++Signed-off-by: Joe Slater <joe.slater@windriver.com>
+ ---
+  configure.ac | 18 ------------------
+  1 file changed, 18 deletions(-)
+ 
+ diff --git a/configure.ac b/configure.ac
+-index feafc28..aceccf4 100644
++index da8cf898..17ece200 100644
+ --- a/configure.ac
+ +++ b/configure.ac
+-@@ -56,24 +56,6 @@ IT_PROG_INTLTOOL([0.35.0])
++@@ -57,24 +57,6 @@ IT_PROG_INTLTOOL([0.35.0])
+  
+  dnl ****** END ****************************************
+  
+@@ -42,7 +46,7 @@ index feafc28..aceccf4 100644
+ -
+  AC_ARG_WITH(bugzilla,
+  AS_HELP_STRING([--with-bugzilla],[use Bugzilla plugin (default is YES)]),
+- LIBREPORT_PARSE_WITH([bugzilla]))
++ LIBREPORT_PARSE_WITH([bugzilla]),
+ -- 
+-2.7.4
++2.25.1
+ 
+diff --git a/meta-oe/recipes-extended/libreport/files/0003-without-build-plugins.patch b/meta-oe/recipes-extended/libreport/files/0003-without-build-plugins.patch
+index c331677d8..f6ff86040 100644
+--- a/meta-oe/recipes-extended/libreport/files/0003-without-build-plugins.patch
++++ b/meta-oe/recipes-extended/libreport/files/0003-without-build-plugins.patch
+@@ -1,26 +1,30 @@
+-From 41bce1de2fd2a0f79c266f245ae3e3720ccaf46a Mon Sep 17 00:00:00 2001
++From f46610901dbac56d9631df012374c600db08453e Mon Sep 17 00:00:00 2001
+ From: Hongxu Jia <hongxu.jia@windriver.com>
+ Date: Wed, 26 Apr 2017 03:51:03 -0400
+-Subject: [PATCH 3/4] without build plugins
++Subject: [PATCH] without build plugins
+ 
+ Upstream-Status: Inappropriate [workaround]
+ 
+ Rebase to 2.9.1
+ Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
++
++Modify to apply to v2.17.8.
++
++Signed-off-by: Joe Slater <joe.slater@windriver.com>
+ ---
+  src/Makefile.am | 2 +-
+  1 file changed, 1 insertion(+), 1 deletion(-)
+ 
+ diff --git a/src/Makefile.am b/src/Makefile.am
+-index c15928c..bac02b1 100644
++index 410bfcb0..bac02b16 100644
+ --- a/src/Makefile.am
+ +++ b/src/Makefile.am
+ @@ -8,4 +8,4 @@ if BUILD_NEWT
+  sub_dirs += report-newt
+  endif
+  
+--SUBDIRS = include lib plugins report-python cli client-python workflows $(sub_dirs)
++-SUBDIRS = include lib report-python cli client-python plugins workflows $(sub_dirs)
+ +SUBDIRS = include lib report-python cli client-python workflows $(sub_dirs)
+ -- 
+-2.7.4
++2.25.1
+ 
+diff --git a/meta-oe/recipes-extended/libreport/files/0004-configure.ac-remove-prog-test-of-augparse.patch b/meta-oe/recipes-extended/libreport/files/0004-configure.ac-remove-prog-test-of-augparse.patch
+index 986e7ec41..998ae6b50 100644
+--- a/meta-oe/recipes-extended/libreport/files/0004-configure.ac-remove-prog-test-of-augparse.patch
++++ b/meta-oe/recipes-extended/libreport/files/0004-configure.ac-remove-prog-test-of-augparse.patch
+@@ -1,25 +1,29 @@
+-From c1c301502a8f69b9889197744b301a136082f09d Mon Sep 17 00:00:00 2001
++From 62c922f43b54585d25ba89be36c10612b479270b Mon Sep 17 00:00:00 2001
+ From: Hongxu Jia <hongxu.jia@windriver.com>
+ Date: Thu, 27 Apr 2017 02:15:02 -0400
+-Subject: [PATCH 4/4] configure.ac: remove prog test of augparse
++Subject: [PATCH] configure.ac: remove prog test of augparse
+ 
+ The build time does not require it.
+ 
+ Upstream-Status: Inappropriate [workaround]
+ 
+ Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
++
++Modify to apply to v2.17.8.
++
++Signed-off-by: Joe Slater <joe.slater@windriver.com>
+ ---
+- configure.ac | 8 --------
+- 1 file changed, 8 deletions(-)
++ configure.ac | 9 ---------
++ 1 file changed, 9 deletions(-)
+ 
+ diff --git a/configure.ac b/configure.ac
+-index aceccf4..83c101b 100644
++index 17ece200..89b463a4 100644
+ --- a/configure.ac
+ +++ b/configure.ac
+-@@ -350,14 +350,6 @@ AC_ARG_WITH(augeaslenslibdir,
+-                            [Directory for librepor lens (default: /usr/share/augeas/lenses)])],
+-             [], [with_augeaslenslibdir="/usr/share/augeas/lenses"])
+- AC_SUBST([AUGEAS_LENS_LIB_DIR], [$with_augeaslenslibdir])
++@@ -287,15 +287,6 @@ AC_ARG_WITH(largedatatmpdir,
++             [], [with_largedatatmpdir="/var/tmp"])
++ AC_SUBST([LARGE_DATA_TMP_DIR], [$with_largedatatmpdir])
++ 
+ -AC_PATH_PROG(AUGPARSE, augparse, no)
+ -[if test "$AUGPARSE" = "no"]
+ -[then]
+@@ -28,9 +32,10 @@ index aceccf4..83c101b 100644
+ -    [echo "Then run configure again before attempting to build libreport."]
+ -    [exit 1]
+ -[fi]
+- 
++-
+  AC_ARG_WITH([defaultdumpdirmode],
+              AS_HELP_STRING([--with-defaultdumpdirmode=OCTAL-MODE],
++                            [Default dump dir mode (default: 0x1A0 (0640))]),
+ -- 
+-2.7.4
++2.25.1
+ 
+diff --git a/meta-oe/recipes-extended/libreport/libreport_2.17.8.bb b/meta-oe/recipes-extended/libreport/libreport_2.17.8.bb
+index e21161943..a8d1db65b 100644
+--- a/meta-oe/recipes-extended/libreport/libreport_2.17.8.bb
++++ b/meta-oe/recipes-extended/libreport/libreport_2.17.8.bb
+@@ -33,7 +33,7 @@ inherit gettext autotools python3native python3targetconfig pkgconfig
+ PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES','x11','gtk','',d)}"
+ PACKAGECONFIG[gtk] = "--with-gtk, --without-gtk, gtk+3,"
+ 
+-EXTRA_OECONF += "--without-python2 --with-python3"
++EXTRA_OECONF += "--with-python3"
+ 
+ RDEPENDS:python3-libreport += "${PN}"
+ 
+-- 
 2.25.1
 
 
