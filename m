@@ -1,107 +1,97 @@
-Return-Path: <zboszor@gmail.com>
+Return-Path: <jsbronder@cold-front.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B751AC6FD1D
-	for <webhook@archiver.kernel.org>; Wed, 15 Mar 2023 14:18:30 +0000 (UTC)
-Received: from mail-ed1-f46.google.com (mail-ed1-f46.google.com [209.85.208.46])
- by mx.groups.io with SMTP id smtpd.web10.9323.1678889908099344993
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C9F0DC61DA4
+	for <webhook@archiver.kernel.org>; Wed, 15 Mar 2023 14:33:10 +0000 (UTC)
+Received: from wout3-smtp.messagingengine.com (wout3-smtp.messagingengine.com [64.147.123.19])
+ by mx.groups.io with SMTP id smtpd.web10.9733.1678890781546846935
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 15 Mar 2023 07:18:28 -0700
+ Wed, 15 Mar 2023 07:33:01 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=e0ZhP6/k;
- spf=pass (domain: gmail.com, ip: 209.85.208.46, mailfrom: zboszor@gmail.com)
-Received: by mail-ed1-f46.google.com with SMTP id fd5so42302018edb.7
-        for <openembedded-devel@lists.openembedded.org>; Wed, 15 Mar 2023 07:18:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112; t=1678889906;
-        h=content-transfer-encoding:in-reply-to:from:references:cc:to
-         :content-language:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=hHmAJqjGwOrvmzqyCdbn9AI/nwRDsF9+iVvnznSXJtE=;
-        b=e0ZhP6/kex8JfIAWeqTbzqUHUquUdHNcyhqK1RJI+avaTtbP3h+X3sSLqz8LAH+0zf
-         SUgPAbAJKiOrrky6/V/wJ+7ENkm1Hv9CcwN4ipGQJnqA1sNrGhQtjr8a4eSPzHHdp2Iy
-         0tvJbmJHVPXb5Dm0Sujf+lqpEQ13fnvOelKxBQcO8bgheduPSqS9/SdoRaiKTJfv7rPd
-         k+whrB7nZiMtFtVk91PomZJaarGwiqTX1Juain1wauc8LeME9+gEc0vuS9NbUTycs3Kp
-         vb5nl1YeqMsSR3Kuhews8LkiyADpD3KW3TqeEWcrjGAHw7rENpmIoWpcNmxEFuxfEH0j
-         VqeA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112; t=1678889906;
-        h=content-transfer-encoding:in-reply-to:from:references:cc:to
-         :content-language:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=hHmAJqjGwOrvmzqyCdbn9AI/nwRDsF9+iVvnznSXJtE=;
-        b=Zc105I2OfaIwBGT3FlYUm57hmmC/zV6dY+beoJ6C53pCVjqxXQonFHQAVxc7GywdlK
-         6fTW6jKCobWinu56zfBfyJx1YVw3g9YLMbMebJvBqdt3lidRPUiC+b2Wi1yWgy8tR2Sp
-         yKGaqDNHR4fV7GSzzU4IXD1Cp5aHVRpPG6TgV/PRoJX2ivLKT/FSY/SvgLglvtSfWnSM
-         rgJq0fZaN1z2fWLRL/RyRVzyzahgj7JLYsj7I4zK51OR+F9CWQvexFJo+rL7hphuEEm5
-         S71RAipwmgGgYmvtgWb6SMy0hMdBYcQDxTwikKiueNTt2feLcSVMG20i06c9KmTfIvAe
-         O8uQ==
-X-Gm-Message-State: AO0yUKWCQiM9e/dAGJmDYI1BYMsQq+H+Q9P7s/eFClFVEg1ANKhT2G9j
-	R8tioZnTzTQbzPULbOII/npxwNnYUqY=
-X-Google-Smtp-Source: AK7set9UT3PEXeGPor8Rfv+tsAfJ5ZKZ6gAJOeFrMpE8lxgZZh4TeCz7NKWqYyCWsS+xjAoF1P2uGw==
-X-Received: by 2002:a17:906:6552:b0:886:7eae:26c4 with SMTP id u18-20020a170906655200b008867eae26c4mr6400498ejn.5.1678889906628;
-        Wed, 15 Mar 2023 07:18:26 -0700 (PDT)
-Received: from [192.168.1.143] (BC2440CC.dsl.pool.telekom.hu. [188.36.64.204])
-        by smtp.gmail.com with ESMTPSA id z92-20020a509e65000000b004bf5981ef3dsm2526856ede.94.2023.03.15.07.18.26
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 15 Mar 2023 07:18:26 -0700 (PDT)
-Message-ID: <55bf6202-445d-51d9-9502-34a2180fbe42@gmail.com>
-Date: Wed, 15 Mar 2023 15:18:25 +0100
+ dkim=fail reason="signature has expired" header.i=@cold-front.org header.s=mesmtp header.b=yDC/8bVf;
+ spf=pass (domain: cold-front.org, ip: 64.147.123.19, mailfrom: jsbronder@cold-front.org)
+Received: from compute3.internal (compute3.nyi.internal [10.202.2.43])
+	by mailout.west.internal (Postfix) with ESMTP id 7EAEC320094A;
+	Wed, 15 Mar 2023 10:33:00 -0400 (EDT)
+Received: from mailfrontend2 ([10.202.2.163])
+  by compute3.internal (MEProxy); Wed, 15 Mar 2023 10:33:00 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cold-front.org;
+	 h=cc:cc:content-transfer-encoding:content-type:date:date:from
+	:from:in-reply-to:message-id:mime-version:reply-to:sender
+	:subject:subject:to:to; s=mesmtp; t=1678890780; x=1678977180;
+	 bh=h46kGxVND9YRxHThHvlHVk8fPcpLp4zRozBtwNHvkMg=; b=yDC/8bVfW1e7
+	GeCckm5HECTfDa6ALeWVLjXrznXwEipJGBVTJiIJPPwhkMpd1nX/yhh/1BOjIByo
+	5cMoRfH7dg+41KLwkojJgI3/rjIc7PuyCVvQEm2VGWPdmrVP6odocj1oxxt2EeU7
+	Gn9Ze5lnuA0vCP6lUZ3c0avGPHTjOIE=
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	messagingengine.com; h=cc:cc:content-transfer-encoding
+	:content-type:date:date:feedback-id:feedback-id:from:from
+	:in-reply-to:message-id:mime-version:reply-to:sender:subject
+	:subject:to:to:x-me-proxy:x-me-proxy:x-me-sender:x-me-sender
+	:x-sasl-enc; s=fm2; t=1678890780; x=1678977180; bh=h46kGxVND9YRx
+	HThHvlHVk8fPcpLp4zRozBtwNHvkMg=; b=phsquebR/nPlTJV5Vav3bE/bzYnRm
+	4zFcZuh/NrBZ7JTxlstI6p97VHyyxz70mLVfINU4zc6M4mX6UTVnYPE8ihXZsKNI
+	g8JwCjxkyMObSAYgyUx3iWFRm8p5zJ6eTthYbu0OswR5JSTFlsBsGrv+vHIoMLX7
+	cQsdw50AndS/ptaKqACy6gIrj92byJbl1NIowTT9oGfuuxj25i279f5Ab1YRLBQo
+	weXJyn0tjiNkfXos0XH4hG31f6FSO+9+3n39wV1lyPUEzjE3dxadeGdAnZNQiZxJ
+	HWDkVv7H9WAn/H6sqEtcviZZedDlFp54pBMUKjgcP9zPCkI99R2O64+NQ==
+X-ME-Sender: <xms:G9cRZN8p6Y-RoxGLZ4irysWLTvuAzR-4yGkvXcIOnqLYnrNEdnmc0w>
+    <xme:G9cRZBtKbwWaukXsMZM2OZTsfDoRs5bqUqj-tmpfRpL_33wXcENr3rKSZx5IYhyjw
+    dogA8Fod4LJ1IDUSQ>
+X-ME-Received: <xmr:G9cRZLAnO_8KHnlUvt-NAuqA0Q-RWFzqz56PCgRXcTTjc0Y8PT2Wj6k8mrEeh6rZHYZCgwO1fRGHMFI0PIH-1DSY0VoYdtJ0Zwe_ixcagA>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvhedrvddvkedgieehucetufdoteggodetrfdotf
+    fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
+    uceurghilhhouhhtmecufedttdenucenucfjughrpefhvfevufffkffoggfgsedtkeertd
+    ertddtnecuhfhrohhmpefluhhsthhinhcuuehrohhnuggvrhcuoehjshgsrhhonhguvghr
+    segtohhlugdqfhhrohhnthdrohhrgheqnecuggftrfgrthhtvghrnhepudfghfdvkeeuhe
+    duudduhfeuieeikeegfeelhffgfeejgeelheejhfeftdelheegnecuvehluhhsthgvrhfu
+    ihiivgeptdenucfrrghrrghmpehmrghilhhfrhhomhepjhhssghrohhnuggvrhestgholh
+    guqdhfrhhonhhtrdhorhhg
+X-ME-Proxy: <xmx:G9cRZBdy-0x8LYLietu6dl0e3_6qvXZtjGNAeloaA77H7sg3CkrOhQ>
+    <xmx:G9cRZCMCCAvLGZmvQsMoAAir63Bnk1_ccPMu9fWfGjxc-NVXDXsHqg>
+    <xmx:G9cRZDn3freAR6leR886xKuj-rA5eqy2IQZkJcvbAczzSgUR-eDcSg>
+    <xmx:HNcRZMWKA9mg23it03EJ6fcfy6gtRIELb6GdvuKMHrRSMxUTgN_Z4g>
+Feedback-ID: iea0042cb:Fastmail
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Wed,
+ 15 Mar 2023 10:32:59 -0400 (EDT)
+From: Justin Bronder <jsbronder@cold-front.org>
+To: openembedded-devel@lists.openembedded.org
+Cc: Justin Bronder <jsbronder@cold-front.org>
+Subject: [meta-oe][PATCH] tk: inherit pkgconfig
+Date: Wed, 15 Mar 2023 10:32:42 -0400
+Message-Id: <20230315143242.30243-1-jsbronder@cold-front.org>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.8.0
-Subject: Re: [oe] [meta-python][PATCH 2/4] python3-patchelf: New recipe
-Content-Language: en-US
-To: Ross Burton <Ross.Burton@arm.com>
-Cc: "openembedded-devel@lists.openembedded.org"
- <openembedded-devel@lists.openembedded.org>
-References: <20230315080429.2722555-1-zboszor@gmail.com>
- <20230315080429.2722555-2-zboszor@gmail.com>
- <D47E7172-2A7E-4B2A-9F1B-CFEE77D06563@arm.com>
-From: =?UTF-8?B?QsO2c3rDtnJtw6lueWkgWm9sdMOhbg==?= <zboszor@gmail.com>
-In-Reply-To: <D47E7172-2A7E-4B2A-9F1B-CFEE77D06563@arm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 15 Mar 2023 14:18:30 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101562
+ <openembedded-devel@lists.openembedded.org>; Wed, 15 Mar 2023 14:33:10 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101563
 
-2023. 03. 15. 13:42 keltezéssel, Ross Burton írta:
-> On 15 Mar 2023, at 08:04, Zoltan Boszormenyi via lists.openembedded.org <zboszor=gmail.com@lists.openembedded.org> wrote:
->> +++ b/meta-python/recipes-devtools/python/python3-patchelf_0.17.2.1.bb
->> @@ -0,0 +1,31 @@
->> +# This is a dummy package needed by python3-meson-python
-> I note the words “dummy package”
+I noticed that xft was not getting enabled as expected because the
+recipe was using pkg-config from the host.
 
-See the sources of https://pypi.org/project/patchelf/
-There is none, only the build system.
+Signed-off-by: Justin Bronder <jsbronder@cold-front.org>
+---
+ meta-oe/recipes-devtools/tcltk/tk_8.6.10.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-The build system would have just built patchelf, and
-installed into ${bindir} which would conflict with the
-existing patchelf recipe.
-
->> +DEPENDS = "python3-scikit-build-native"
-> Where is this dependency from?
-
- From its build system. The meta build complains.
-The scikit-build recipe I previously sent was already merged,
-so it may be used.
-
->> +PYPI_PACKAGE = "patchelf"
->> +PYPI_ARCHIVE_NAME_PREFIX = "pypi-"
->> +
->> +inherit pypi python_setuptools_build_meta
-> Why is it downloading stuff?
->
-> Why is any of this needed?  Can’t we just comment out the requirement for patchelf, or write a proper stub package?
-
-It means less patching in modules depending on this
-particular module, like meson-python.
-
-Do you prefer patching out this dependency from meson-python
-and any other that may depend on it?
+diff --git a/meta-oe/recipes-devtools/tcltk/tk_8.6.10.bb b/meta-oe/recipes-devtools/tcltk/tk_8.6.10.bb
+index efab9618ec..f3cab4e610 100644
+--- a/meta-oe/recipes-devtools/tcltk/tk_8.6.10.bb
++++ b/meta-oe/recipes-devtools/tcltk/tk_8.6.10.bb
+@@ -34,7 +34,7 @@ PSEUDO_IGNORE_PATHS .= ",${WORKDIR}/${BPN}${PV}"
+ VER = "${@os.path.splitext(d.getVar('PV'))[0]}"
+ 
+ LDFLAGS += "-Wl,-rpath,${libdir}/tcltk/${PV}/lib"
+-inherit autotools features_check
++inherit autotools features_check pkgconfig
+ # depends on virtual/libx11
+ REQUIRED_DISTRO_FEATURES = "x11"
+ 
+-- 
+2.39.2
 
 
