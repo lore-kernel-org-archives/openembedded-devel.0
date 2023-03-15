@@ -2,118 +2,106 @@ Return-Path: <zboszor@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B7F08C7618B
-	for <webhook@archiver.kernel.org>; Wed, 15 Mar 2023 14:17:10 +0000 (UTC)
-Received: from mail-ed1-f41.google.com (mail-ed1-f41.google.com [209.85.208.41])
- by mx.groups.io with SMTP id smtpd.web11.9248.1678889822686202297
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B751AC6FD1D
+	for <webhook@archiver.kernel.org>; Wed, 15 Mar 2023 14:18:30 +0000 (UTC)
+Received: from mail-ed1-f46.google.com (mail-ed1-f46.google.com [209.85.208.46])
+ by mx.groups.io with SMTP id smtpd.web10.9323.1678889908099344993
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 15 Mar 2023 07:17:03 -0700
+ Wed, 15 Mar 2023 07:18:28 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=FxK7WpFT;
- spf=pass (domain: gmail.com, ip: 209.85.208.41, mailfrom: zboszor@gmail.com)
-Received: by mail-ed1-f41.google.com with SMTP id cn21so45991851edb.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 15 Mar 2023 07:17:02 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=e0ZhP6/k;
+ spf=pass (domain: gmail.com, ip: 209.85.208.46, mailfrom: zboszor@gmail.com)
+Received: by mail-ed1-f46.google.com with SMTP id fd5so42302018edb.7
+        for <openembedded-devel@lists.openembedded.org>; Wed, 15 Mar 2023 07:18:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112; t=1678889821;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
+        d=gmail.com; s=20210112; t=1678889906;
+        h=content-transfer-encoding:in-reply-to:from:references:cc:to
+         :content-language:subject:user-agent:mime-version:date:message-id
          :from:to:cc:subject:date:message-id:reply-to;
-        bh=GGzzySlGygxcxcwn7kqvvnuNxK84Fnjg8NR+fDRy7nM=;
-        b=FxK7WpFTMw2oBBTB1N+5F+UDR9zFtszqiChIJGrh+8fgapLHaCIbP6iVoghYG0cOlt
-         3kwkVfaLzui/QAIczltz/WQIxPQLksRI5Cx1GBvXcGw7aVoW5eDS1cx63hrZijuBZCaa
-         /Bw20IJ+1JzloEFLNUCGD75H4qic/Kud/9dDoeJQTU+ghWfacuJ0h/3ff7PE91r4rCJv
-         VGW11z3OdfcHc8tpc97MlNGRwtPL6CR62v4bRySTIB+7JPJnS7ugbO2m9Oj35BVef96T
-         vsQ4JJVXHe+YjXQgC9mYrNT6dYRpbqEB5kyt24YFJu+oKKXohmVeLrYm/d/fH1c2YYGR
-         DtTQ==
+        bh=hHmAJqjGwOrvmzqyCdbn9AI/nwRDsF9+iVvnznSXJtE=;
+        b=e0ZhP6/kex8JfIAWeqTbzqUHUquUdHNcyhqK1RJI+avaTtbP3h+X3sSLqz8LAH+0zf
+         SUgPAbAJKiOrrky6/V/wJ+7ENkm1Hv9CcwN4ipGQJnqA1sNrGhQtjr8a4eSPzHHdp2Iy
+         0tvJbmJHVPXb5Dm0Sujf+lqpEQ13fnvOelKxBQcO8bgheduPSqS9/SdoRaiKTJfv7rPd
+         k+whrB7nZiMtFtVk91PomZJaarGwiqTX1Juain1wauc8LeME9+gEc0vuS9NbUTycs3Kp
+         vb5nl1YeqMsSR3Kuhews8LkiyADpD3KW3TqeEWcrjGAHw7rENpmIoWpcNmxEFuxfEH0j
+         VqeA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112; t=1678889821;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
+        d=1e100.net; s=20210112; t=1678889906;
+        h=content-transfer-encoding:in-reply-to:from:references:cc:to
+         :content-language:subject:user-agent:mime-version:date:message-id
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=GGzzySlGygxcxcwn7kqvvnuNxK84Fnjg8NR+fDRy7nM=;
-        b=ahIAKQzosa1QIxlZqCzczpFeS8d2CMRSijlIys6scz38dYcZ576In5URlL1tuiRkdL
-         xkGAgzWoQ483To1mLiJE3YAuYruOcsi6yo0PJnmxFpkN+xbmdmohksbOuyfgVaSqe1ls
-         2IWl/z8+ecvlSoNbr4EAVD1gtlG9k6xLPmcAAlOHh9jm+nw9ETIK0l4yfP6HojeEmJts
-         Zv0LsBFAo4moOM2cHG215YFFX2gd9uIWk/I77EtdoEleQLckyhpWUa2M0IGJY9C8HH55
-         EGe2Y4SAfx3EmgzEZAAuzhOKRA2NcW+X1ejAsiXcDrG2cvgJ9cJVVkpNMJq95nT8XvOq
-         cqjA==
-X-Gm-Message-State: AO0yUKWDP3lFdFXV0sQCQbEXbCmOSNPTC/b9ur05jLu7BM0fuCvjIVmi
-	4VCD9QilSYtjff05U1++5atnFA0Fk5A=
-X-Google-Smtp-Source: AK7set/ZZpUb20LEv2Fs8X/sGZpmSIR2paLGFrTfkwAV20Kmb+JZEwjkrEp2IPKvxn7Q0tGY1WZN4Q==
-X-Received: by 2002:a17:906:7745:b0:924:64f9:f8dd with SMTP id o5-20020a170906774500b0092464f9f8ddmr6158797ejn.28.1678889821021;
-        Wed, 15 Mar 2023 07:17:01 -0700 (PDT)
-Received: from [192.168.1.143] ([188.36.64.204])
-        by smtp.gmail.com with ESMTPSA id qb8-20020a1709077e8800b0092ed6b8cd5bsm961966ejc.158.2023.03.15.07.17.00
+        bh=hHmAJqjGwOrvmzqyCdbn9AI/nwRDsF9+iVvnznSXJtE=;
+        b=Zc105I2OfaIwBGT3FlYUm57hmmC/zV6dY+beoJ6C53pCVjqxXQonFHQAVxc7GywdlK
+         6fTW6jKCobWinu56zfBfyJx1YVw3g9YLMbMebJvBqdt3lidRPUiC+b2Wi1yWgy8tR2Sp
+         yKGaqDNHR4fV7GSzzU4IXD1Cp5aHVRpPG6TgV/PRoJX2ivLKT/FSY/SvgLglvtSfWnSM
+         rgJq0fZaN1z2fWLRL/RyRVzyzahgj7JLYsj7I4zK51OR+F9CWQvexFJo+rL7hphuEEm5
+         S71RAipwmgGgYmvtgWb6SMy0hMdBYcQDxTwikKiueNTt2feLcSVMG20i06c9KmTfIvAe
+         O8uQ==
+X-Gm-Message-State: AO0yUKWCQiM9e/dAGJmDYI1BYMsQq+H+Q9P7s/eFClFVEg1ANKhT2G9j
+	R8tioZnTzTQbzPULbOII/npxwNnYUqY=
+X-Google-Smtp-Source: AK7set9UT3PEXeGPor8Rfv+tsAfJ5ZKZ6gAJOeFrMpE8lxgZZh4TeCz7NKWqYyCWsS+xjAoF1P2uGw==
+X-Received: by 2002:a17:906:6552:b0:886:7eae:26c4 with SMTP id u18-20020a170906655200b008867eae26c4mr6400498ejn.5.1678889906628;
+        Wed, 15 Mar 2023 07:18:26 -0700 (PDT)
+Received: from [192.168.1.143] (BC2440CC.dsl.pool.telekom.hu. [188.36.64.204])
+        by smtp.gmail.com with ESMTPSA id z92-20020a509e65000000b004bf5981ef3dsm2526856ede.94.2023.03.15.07.18.26
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 15 Mar 2023 07:17:00 -0700 (PDT)
-Message-ID: <ef5796b4-41a9-1eb4-fa5b-8a30d12c509e@gmail.com>
-Date: Wed, 15 Mar 2023 15:16:58 +0100
+        Wed, 15 Mar 2023 07:18:26 -0700 (PDT)
+Message-ID: <55bf6202-445d-51d9-9502-34a2180fbe42@gmail.com>
+Date: Wed, 15 Mar 2023 15:18:25 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.8.0
-Subject: Re: [oe] [meta-python][PATCH 1/4]
- python_setuptools_build_meta_mesonpy.bbclass: New class
+Subject: Re: [oe] [meta-python][PATCH 2/4] python3-patchelf: New recipe
+Content-Language: en-US
 To: Ross Burton <Ross.Burton@arm.com>
 Cc: "openembedded-devel@lists.openembedded.org"
  <openembedded-devel@lists.openembedded.org>
 References: <20230315080429.2722555-1-zboszor@gmail.com>
- <25DB9C8C-6830-4DBB-9B27-4FB04C393F38@arm.com>
-Content-Language: en-US
+ <20230315080429.2722555-2-zboszor@gmail.com>
+ <D47E7172-2A7E-4B2A-9F1B-CFEE77D06563@arm.com>
 From: =?UTF-8?B?QsO2c3rDtnJtw6lueWkgWm9sdMOhbg==?= <zboszor@gmail.com>
-In-Reply-To: <25DB9C8C-6830-4DBB-9B27-4FB04C393F38@arm.com>
+In-Reply-To: <D47E7172-2A7E-4B2A-9F1B-CFEE77D06563@arm.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 15 Mar 2023 14:17:10 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101561
+ <openembedded-devel@lists.openembedded.org>; Wed, 15 Mar 2023 14:18:30 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101562
 
-2023. 03. 15. 13:46 keltezéssel, Ross Burton írta:
+2023. 03. 15. 13:42 keltezéssel, Ross Burton írta:
 > On 15 Mar 2023, at 08:04, Zoltan Boszormenyi via lists.openembedded.org <zboszor=gmail.com@lists.openembedded.org> wrote:
->> Some python modules (e.g. SciPy, scikit-image) use meson-python
->> (a.k.a. mesonpy) in pyproject.toml:
->>
->>     [build-system]
->>     build-backend = 'mesonpy'
->>
->> This class, together with python3-meson-python and its dependencies
->> will allow building such modules.
-> So the pep517 build thing provides dependencies (which we ignore),
+>> +++ b/meta-python/recipes-devtools/python/python3-patchelf_0.17.2.1.bb
+>> @@ -0,0 +1,31 @@
+>> +# This is a dummy package needed by python3-meson-python
+> I note the words “dummy package”
 
-Does this mean recipes using this class would specify the
-build dependencies themselves instead of having them
-brought in via the class?
+See the sources of https://pypi.org/project/patchelf/
+There is none, only the build system.
 
-> build isolation (which we disable), and automatic use of the right tooling (which we have to specify manually).
+The build system would have just built patchelf, and
+installed into ${bindir} which would conflict with the
+existing patchelf recipe.
 
-Not sure what this means, please elaborate.
-Please instruct me what clean up in this class to get this acceptible.
+>> +DEPENDS = "python3-scikit-build-native"
+> Where is this dependency from?
 
-meta-scipy has a quite old SciPy version and the latest version uses this thing.
-I have a working scikit-image 0.20.0 recipe also using this.
+ From its build system. The meta build complains.
+The scikit-build recipe I previously sent was already merged,
+so it may be used.
 
-> So what does the meson-python integration bring?  Can we just run meson directly?
+>> +PYPI_PACKAGE = "patchelf"
+>> +PYPI_ARCHIVE_NAME_PREFIX = "pypi-"
+>> +
+>> +inherit pypi python_setuptools_build_meta
+> Why is it downloading stuff?
+>
+> Why is any of this needed?  Can’t we just comment out the requirement for patchelf, or write a proper stub package?
 
-Unfortunately, no.
+It means less patching in modules depending on this
+particular module, like meson-python.
 
-meson itself does not provide a PEP517 compliant build backend.
-meson-python (mesonpy, https://pypi.org/project/meson-python/) does that as a wrapper over 
-meson.
-
-I tried just using meson, but while it the .so parts were built,
-none of the .py files were properly owned and no egg metadata
-was generated. While the first issue is fixable in the recipe,
-the second isn't.
-
-This resulted in that the presence of the mesonpy and its version
-were not detected by a dependee module's build system e.g.
-scikit-image. I would expect any project using build-backend = 'mesonpy'
-would fail without the detecting the meson-python module.
-
->> +DEPENDS += "python3-setuptools-native python3-wheel-native ${@'' if d.getVar('PN') == 'python3-meson-python-native' else 'python3-meson-python-native’}"
-> FWIW, all the other pep517 classes have a “neat” depends without logic and expect the recipe (python3-meson-python-native in this case) to remove itself from the DEPENDS.
-
-Thanks for the pointer, I will make this change.
+Do you prefer patching out this dependency from meson-python
+and any other that may depend on it?
 
 
