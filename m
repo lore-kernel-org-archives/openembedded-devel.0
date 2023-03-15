@@ -2,71 +2,68 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AB0D7C7618B
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AB09DC6FD1D
 	for <webhook@archiver.kernel.org>; Wed, 15 Mar 2023 14:05:10 +0000 (UTC)
-Received: from mail1.bemta37.messagelabs.com (mail1.bemta37.messagelabs.com [85.158.142.113])
- by mx.groups.io with SMTP id smtpd.web11.8884.1678889104014474132
+Received: from mail1.bemta34.messagelabs.com (mail1.bemta34.messagelabs.com [195.245.231.2])
+ by mx.groups.io with SMTP id smtpd.web11.8881.1678889100551173454
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 15 Mar 2023 07:05:04 -0700
+ Wed, 15 Mar 2023 07:05:01 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=l5TcfDCK;
- spf=pass (domain: fujitsu.com, ip: 85.158.142.113, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=ZPRBqJih;
+ spf=pass (domain: fujitsu.com, ip: 195.245.231.2, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1678889102; i=@fujitsu.com;
-	bh=sLmbCKHT1pSYq6WcSFWh5XqlejBdTLL0zJeieClg8lE=;
-	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type;
-	b=l5TcfDCKSCFWwGZ0iXSmTMXu7aAEf/M/pYvCXboDlfhMM9TT8r8DJTQUs/ICUlyT+
-	 dflGm1FUzUPASmJf/Pulw8z5VYjZNVC0D3ueNOZcHTLIUc/NnZh5gPDpx8U0Ovqhck
-	 wXpxHnmbwEjPypLAI2zzuUDd1T8hsXV8C8s5+5rPz8eS+Cip+4owPDHQkSOMw9aGyo
-	 d/rTlh7qezmxaHMflRp5R5nr3JT31234u78tRLWsw4p0zn7DEl6vaLzFJgFBZjbZVN
-	 3fObmlf3FC3rYXBAdOO9JHkeb/t427LU4ZntOsRLGX06xsUK1i2wwXTDZJgPLfFLcX
-	 cHJzjXS46QAgQ==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrEIsWRWlGSWpSXmKPExsViZ8OxWbf3gmC
-  KwbffchYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8b0iRuYCm5pVpx+/Z+9gbFFpYuRi0NI4AGj
-  xJUVUxghnMtMEl03DrN3MXICOXsYJR4ulgOx2QSkJG7c/88GYosI6Essnb2HGcRmFlCRePG7B
-  6xeWMBO4vf3y2A2i4CqxP01s8BsXgEniQMLvjOC2BICChJTHr4H6+UUcJb4/LYXKM4BtMtJ4u
-  NGa4hyQYmTM5+wQIyXkDj44gUzRKuixOzLzSwQdoVE4/RDTBC2msTVc5uYJzAKzkLSPgtJ+wJ
-  GplWM5sWpRWWpRbqGhnpJRZnpGSW5iZk5eolVuol6qaW6eflFJRm6hnqJ5cV6qcXFesWVuck5
-  KXp5qSWbGIHBm1KcdnwH48u+v3qHGCU5mJREef+sEUgR4kvKT6nMSCzOiC8qzUktPsQow8GhJ
-  MH774xgipBgUWp6akVaZg4wkmDSEhw8SiK8qeeB0rzFBYm5xZnpEKlTjLocm/Z1HWAWYsnLz0
-  uVEudtASkSACnKKM2DGwGL6kuMslLCvIwMDAxCPAWpRbmZJajyrxjFORiVhHmXgVzCk5lXArf
-  pFdARTEBH8M4TADmiJBEhJdXANIdNIfAet0N5oFjEGTX5Wzm91YVclZvf7Jzy7LjsxoXp09Y0
-  RwoyzBdIe3/UfXdZX2vdSjNrtx/vp0bOEZX7f1F+pcqrKwE8C9f7+pkwy7R6bHTxfPLnT/lza
-  dfsAuninAcTk54Kr7rQIDG/mb3gWNXaUl2JXKO/71+ozs1sSj54ziPfSy1zOXOXxJaqX0a+7J
-  Olg1l12TcEXau0sIvI0XqafOzsuqRXHE92JR6f5ePQsOtwZ2IlW+mLZpvCH0dmfYtbOGGh769
-  wrz/bwmICF8jb+tWJrko5EXdl/5k3wvvCl7zS5xcT/Psynv2In8PL+HbvYzmHG/7O4TA+dbJn
-  x5KylrcaGed2vJvY0CChxFKckWioxVxUnAgAG/QrzmUDAAA=
+	s=170520fj; t=1678889098; i=@fujitsu.com;
+	bh=xdjVQ8PgkAWXE+nPpO88lLa19JLf4NSLG4uZABJPvw0=;
+	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
+	b=ZPRBqJihLsWpID5GnAi4mVnkw2pBh+BXJU0KBiar3QYX75eelcWx4WzzKgVG1aToc
+	 6KPSWdsiAr0zsAVUBZRqS1J4ZB8AQ32NyYnfBuyJcsTgSW/zJw848s9EVIiCLIqAAr
+	 2/fqbwtu+5qTRRLrIpRylFHg6o03Sd9HiWyNGITpFJxd8O6Cy0DQKaK5nww6bLNdts
+	 hHKySNe5fOuHi6v0xLGlDkXU1JxBa3K7/ihhA5TDyVZea1mvNES21FcZah5LNvnF4/
+	 +8jrpNYSz8knR34HrSOa7SVb6gqBwQCWt/SVUGGcpeilRHpzH/ppM1Kw5DOr/6ZwWh
+	 iypdCMolbFfiQ==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrJIsWRWlGSWpSXmKPExsViZ8MxSbfrgmC
+  KwZxLIhYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8aps4cYC/YpVSzb/5itgXGNXBcjF4eQwBNG
+  iVf99xm7GDmBnOtMElv/ykAk9jBK7D+5jAkkwSYgJXHj/n82EFtEQF9i6ew9zCA2s4CKxIvfP
+  ewgtrBApMTpWVtZQWwWAVWJ5w9+gdXwCjhJzDi5BsyWEFCQmPLwPVRcUOLkzCcsEHMkJA6+eA
+  FVoygx+3IzC4RdIdE4/RAThK0mcfXcJuYJjPyzkLTPQtK+gJFpFaNpcWpRWWqRrrleUlFmekZ
+  JbmJmjl5ilW6iXmqpbnlqcYmukV5iebFeanGxXnFlbnJOil5easkmRmAophQrz9zBuKzvr94h
+  RkkOJiVR3j9rBFKE+JLyUyozEosz4otKc1KLDzHKcHAoSfD+OyOYIiRYlJqeWpGWmQOMC5i0B
+  AePkghv6nmgNG9xQWJucWY6ROoUoy7Hpn1dB5iFWPLy81KlxHn/ghQJgBRllObBjYDF6CVGWS
+  lhXkYGBgYhnoLUotzMElT5V4ziHIxKwrzLQC7hycwrgdv0CugIJqAjeOcJgBxRkoiQkmpgMtu
+  R+9ltRYrHtu6yxFThiDNlizf9Fbj9QKVPnLOis2zXFes/h/YJpp1I6bPTe32op36F+wqG6OwD
+  CovFpI4cZLtz6BLD76Qf3SeOBLrMbZypvyH2W/icqzda7oixf9b+8enwDJumC5ZtJZMMz4tab
+  zE4+jSiU/fWerWK+baHrPxytgqxVs+8+ayt5fyrgBe3bI4J5K5a9FBP4u+1N3I13epru3s28E
+  ivYF011d6V57G++SIbb2UZw2N/nW0vpRbHbvK83r3T7Wb27Gl37ykcf2QwkcmPcf2io1denwv
+  iE5N1LK6eOP3p7RsFwl3abZt8w1dbeqrfqsoqmv95RazEyvLC6gPzshkjVOw8cqefUmIpzkg0
+  1GIuKk4EAB0D/LVMAwAA
 X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-23.tower-728.messagelabs.com!1678889101!50664!1
-X-Originating-IP: [62.60.8.179]
+X-Msg-Ref: server-10.tower-571.messagelabs.com!1678889098!164901!1
+X-Originating-IP: [62.60.8.146]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.104.1; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 1386 invoked from network); 15 Mar 2023 14:05:01 -0000
-Received: from unknown (HELO n03ukasimr04.n03.fujitsu.local) (62.60.8.179)
-  by server-23.tower-728.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 15 Mar 2023 14:05:01 -0000
-Received: from n03ukasimr04.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTP id D4F1D73
-	for <openembedded-devel@lists.openembedded.org>; Wed, 15 Mar 2023 14:05:00 +0000 (GMT)
+Received: (qmail 24647 invoked from network); 15 Mar 2023 14:04:58 -0000
+Received: from unknown (HELO n03ukasimr02.n03.fujitsu.local) (62.60.8.146)
+  by server-10.tower-571.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 15 Mar 2023 14:04:58 -0000
+Received: from n03ukasimr02.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTP id 0BCE01000D2
+	for <openembedded-devel@lists.openembedded.org>; Wed, 15 Mar 2023 14:04:58 +0000 (GMT)
 Received: from R01UKEXCASM121.r01.fujitsu.local (R01UKEXCASM121 [10.183.43.173])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTPS id C62597C
-	for <openembedded-devel@lists.openembedded.org>; Wed, 15 Mar 2023 14:05:00 +0000 (GMT)
+	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTPS id F310B1000C1
+	for <openembedded-devel@lists.openembedded.org>; Wed, 15 Mar 2023 14:04:57 +0000 (GMT)
 Received: from localhost.localdomain (10.167.225.33) by
  R01UKEXCASM121.r01.fujitsu.local (10.183.43.173) with Microsoft SMTP Server
- (TLS) id 15.0.1497.42; Wed, 15 Mar 2023 14:04:59 +0000
+ (TLS) id 15.0.1497.42; Wed, 15 Mar 2023 14:04:56 +0000
 From: <wangmy@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-oe] [PATCH] snappy upgrade 1.1.9 -> 1.1.10
-Date: Wed, 15 Mar 2023 22:04:39 +0800
-Message-ID: <1678889082-20604-2-git-send-email-wangmy@fujitsu.com>
+Subject: [PATCH] [oe] [meta-networking] [PATCH] networkmanager: upgrade  1.42.0 -> 1.42.4
+Date: Wed, 15 Mar 2023 22:04:38 +0800
+Message-ID: <1678889082-20604-1-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
-In-Reply-To: <1678889082-20604-1-git-send-email-wangmy@fujitsu.com>
-References: <1678889082-20604-1-git-send-email-wangmy@fujitsu.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-Originating-IP: [10.167.225.33]
@@ -77,122 +74,100 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 15 Mar 2023 14:05:10 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101539
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101538
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
-0001-Add-inline-with-SNAPPY_ATTRIBUTE_ALWAYS_INLINE.patch
-removed since it's not available in 1.1.10.
+0001-libnm-std-aux-Adjust-signature-of-_nm_assert_fail_in.patch
+removed since it's not available in 1.42.4
 
 Changelog:
 ==========
-* Performance improvements
-* Compilation fixes for various environments
+* Fix a possible crash when [global-dns] is used and improve the
+  documentation.
+* Documentation improvements.
+* Add build option to set the mobile-broadband-provider-info database
+  path.
+* Add new "ipv[46].replace-local-rule" setting to control whether to
+  remove the local route rule that is automatically generated.
+* Add the DHCPv6 IAID to the lease information exposed in /run and on
+  D-Bus.
+* Fix assuming team connections at boot.
+* Fix race condition when setting the MAC address of an OVS interface.
+* Fix constructing the IPv4 name servers variable passed to dispatcher
+  scripts.
+* Don't use tentative IPv6 address to resolve the system hostname via DNS.
+* Deprecate the "Master" property of the NMActiveConnection D-Bus object
+  in favor of the new "Controller" property.
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- ...-with-SNAPPY_ATTRIBUTE_ALWAYS_INLINE.patch | 71 -------------------
- .../{snappy_1.1.9.bb => snappy_1.1.10.bb}     |  6 +-
- 2 files changed, 2 insertions(+), 75 deletions(-)
- delete mode 100644 meta-oe/recipes-extended/snappy/snappy/0001-Add-inline-with-SNAPPY_ATTRIBUTE_ALWAYS_INLINE.patch
- rename meta-oe/recipes-extended/snappy/{snappy_1.1.9.bb => snappy_1.1.10.bb} (84%)
+ ...just-signature-of-_nm_assert_fail_in.patch | 37 -------------------
+ ...ger_1.42.0.bb => networkmanager_1.42.4.bb} |  3 +-
+ 2 files changed, 1 insertion(+), 39 deletions(-)
+ delete mode 100644 meta-networking/recipes-connectivity/networkmanager/networkmanager/0001-libnm-std-aux-Adjust-signature-of-_nm_assert_fail_in.patch
+ rename meta-networking/recipes-connectivity/networkmanager/{networkmanager_1.42.0.bb => networkmanager_1.42.4.bb} (98%)
 
-diff --git a/meta-oe/recipes-extended/snappy/snappy/0001-Add-inline-with-SNAPPY_ATTRIBUTE_ALWAYS_INLINE.patch b/meta-oe/recipes-extended/snappy/snappy/0001-Add-inline-with-SNAPPY_ATTRIBUTE_ALWAYS_INLINE.patch
+diff --git a/meta-networking/recipes-connectivity/networkmanager/networkmanager/0001-libnm-std-aux-Adjust-signature-of-_nm_assert_fail_in.patch b/meta-networking/recipes-connectivity/networkmanager/networkmanager/0001-libnm-std-aux-Adjust-signature-of-_nm_assert_fail_in.patch
 deleted file mode 100644
-index 27357d88a..000000000
---- a/meta-oe/recipes-extended/snappy/snappy/0001-Add-inline-with-SNAPPY_ATTRIBUTE_ALWAYS_INLINE.patch
+index 6640bce17..000000000
+--- a/meta-networking/recipes-connectivity/networkmanager/networkmanager/0001-libnm-std-aux-Adjust-signature-of-_nm_assert_fail_in.patch
 +++ /dev/null
-@@ -1,71 +0,0 @@
--From 4728803cc8687431449c8c9fbfabb1da04943400 Mon Sep 17 00:00:00 2001
--From: "Georgi D. Sotirov" <gdsotirov@gmail.com>
--Date: Wed, 5 May 2021 14:16:46 +0300
--Subject: [PATCH] Add inline with SNAPPY_ATTRIBUTE_ALWAYS_INLINE
+@@ -1,37 +0,0 @@
+-From 8c8b13768d22f39edfce38e123b740c43d7e31c4 Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Sat, 18 Feb 2023 17:29:10 -0800
+-Subject: [PATCH] libnm-std-aux: Adjust signature of _nm_assert_fail_internal
 -
--Add inline with SNAPPY_ATTRIBUTE_ALWAYS_INLINE on AdvanceToNextTag to
--fix the following compilation errors and a warning with GCC:
+-the LSB states __assert_fail is:
+-const char*, const char*, unsigned int, const char*
+-https://refspecs.linuxbase.org/LSB_5.0.0/LSB-Core-generic/LSB-Core-generic/baselib---assert-fail-1.html
 -
--[  2%] Building CXX object CMakeFiles/snappy.dir/snappy.cc.o
--/usr/bin/c++   -DHAVE_CONFIG_H -Dsnappy_EXPORTS
---I/tmp/snappy-1.1.9/build -I/tmp/snappy-1.1.9  -O3
---march=i586 -mtune=i686 -Wall -Wextra -fno-exceptions -fno-rtti -O3
---DNDEBUG -fPIC   -std=c++11 -o CMakeFiles/snappy.dir/snappy.cc.o -c
--/tmp/snappy-1.1.9/snappy.cc
--/tmp/snappy-1.1.9/snappy.cc:1017:8: warning: always_inline
--function might not be inlinable [-Wattributes]
-- size_t AdvanceToNextTag(const uint8_t** ip_p, size_t* tag) {
--        ^
--/tmp/snappy-1.1.9/snappy.cc: In function 'std::pair<const
--unsigned char*, int> snappy::DecompressBranchless(const uint8_t*, const
--uint8_t*, ptrdiff_t, T, ptrdiff_t) [with T = char*; uint8_t = unsigned
--char; ptrdiff_t = int]':
--/tmp/snappy-1.1.9/snappy.cc:1017:8: error: inlining failed in
--call to always_inline 'size_t snappy::AdvanceToNextTag(const uint8_t**,
--size_t*)': function body can be overwritten at link time
--/tmp/snappy-1.1.9/snappy.cc:1097:53: error: called from here
--         size_t tag_type = AdvanceToNextTag(&ip, &tag);
--                                                     ^
--/tmp/snappy-1.1.9/snappy.cc:1017:8: error: inlining failed in
--call to always_inline 'size_t snappy::AdvanceToNextTag(const uint8_t**,
--size_t*)': function body can be overwritten at link time
-- size_t AdvanceToNextTag(const uint8_t** ip_p, size_t* tag) {
--        ^
--/tmp/snappy-1.1.9/snappy.cc:1097:53: error: called from here
--         size_t tag_type = AdvanceToNextTag(&ip, &tag);
--                                                     ^
--/tmp/snappy-1.1.9/snappy.cc:1017:8: error: inlining failed in
--call to always_inline 'size_t snappy::AdvanceToNextTag(const uint8_t**,
--size_t*)': function body can be overwritten at link time
-- size_t AdvanceToNextTag(const uint8_t** ip_p, size_t* tag) {
--        ^
--/tmp/snappy-1.1.9/snappy.cc:1097:53: error: called from here
--         size_t tag_type = AdvanceToNextTag(&ip, &tag);
--                                                     ^
--CMakeFiles/snappy.dir/build.make:137: recipe for target
--'CMakeFiles/snappy.dir/snappy.cc.o' failed
+-musl uses a signed int instead. however, this is ok:
+-https://www.openwall.com/lists/musl/2019/03/04/6
 -
--Just like with other functions using SNAPPY_ATTRIBUTE_ALWAYS_INLINE
--macro (i.e. __attribute__((always_inline)) ) it is necessary to use C++
--inline specifier.
+-nevertheless, since the application redefines __assert_fail, we have to make
+-the types match. (not upstreamable as the opposite breaks glibc)
 -
--Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
--
--Upstream-Status: Submitted [https://github.com/google/snappy/pull/128]
+-Upstream-Status: Inappropriate [musl specific]
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ----
-- snappy.cc | 2 +-
+- src/libnm-std-aux/nm-std-aux.h | 2 +-
 - 1 file changed, 1 insertion(+), 1 deletion(-)
 -
--diff --git a/snappy.cc b/snappy.cc
--index 79dc0e8..51157be 100644
----- a/snappy.cc
--+++ b/snappy.cc
--@@ -1014,7 +1014,7 @@ void MemMove(ptrdiff_t dst, const void* src, size_t size) {
-- }
-- 
-- SNAPPY_ATTRIBUTE_ALWAYS_INLINE
---size_t AdvanceToNextTag(const uint8_t** ip_p, size_t* tag) {
--+inline size_t AdvanceToNextTag(const uint8_t** ip_p, size_t* tag) {
--   const uint8_t*& ip = *ip_p;
--   // This section is crucial for the throughput of the decompression loop.
--   // The latency of an iteration is fundamentally constrained by the
-diff --git a/meta-oe/recipes-extended/snappy/snappy_1.1.9.bb b/meta-oe/recipes-extended/snappy/snappy_1.1.10.bb
-similarity index 84%
-rename from meta-oe/recipes-extended/snappy/snappy_1.1.9.bb
-rename to meta-oe/recipes-extended/snappy/snappy_1.1.10.bb
-index 0d58345d7..08e4357d8 100644
---- a/meta-oe/recipes-extended/snappy/snappy_1.1.9.bb
-+++ b/meta-oe/recipes-extended/snappy/snappy_1.1.10.bb
-@@ -10,10 +10,8 @@ compression ratio."
- LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://COPYING;md5=f62f3080324a97b3159a7a7e61812d0c"
+-diff --git a/src/libnm-std-aux/nm-std-aux.h b/src/libnm-std-aux/nm-std-aux.h
+-index e556aa4..0756a7c 100644
+---- a/src/libnm-std-aux/nm-std-aux.h
+-+++ b/src/libnm-std-aux/nm-std-aux.h
+-@@ -230,7 +230,7 @@ typedef uint64_t _nm_bitwise nm_be64_t;
+- _nm_noreturn static inline void
+- _nm_assert_fail_internal(const char  *assertion,
+-                          const char  *file,
+--                         unsigned int line,
+-+                         int line,
+-                          const char  *function)
+- {
+-     __assert_fail("<dropped>", file, line, "<unknown-fcn>");
+--- 
+-2.39.2
+-
+diff --git a/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.42.0.bb b/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.42.4.bb
+similarity index 98%
+rename from meta-networking/recipes-connectivity/networkmanager/networkmanager_1.42.0.bb
+rename to meta-networking/recipes-connectivity/networkmanager/networkmanager_1.42.4.bb
+index dabf9a1d3..5ff90be22 100644
+--- a/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.42.0.bb
++++ b/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.42.4.bb
+@@ -30,9 +30,8 @@ SRC_URI = " \
+     file://enable-dhcpcd.conf \
+     file://enable-iwd.conf \
+ "
+-SRC_URI:append:libc-musl = " file://0001-libnm-std-aux-Adjust-signature-of-_nm_assert_fail_in.patch"
  
--SRC_URI = "gitsm://github.com/google/snappy.git;protocol=https;branch=main \
--    file://0001-Add-inline-with-SNAPPY_ATTRIBUTE_ALWAYS_INLINE.patch \
--"
--SRCREV = "2b63814b15a2aaae54b7943f0cd935892fae628f"
-+SRC_URI = "gitsm://github.com/google/snappy.git;protocol=https;branch=main"
-+SRCREV = "dc05e026488865bc69313a68bcc03ef2e4ea8e83"
- S = "${WORKDIR}/git"
+-SRC_URI[sha256sum] = "2f6756d507bb6b46716594b67e6fe7491891e1b5b167bbafc5157dfa7753d5b4"
++SRC_URI[sha256sum] = "86ee16a2f7f525629133fa0c3dc060caf96ae4f34084eda1c24551951abe5a3c"
  
+ S = "${WORKDIR}/NetworkManager-${PV}"
  
 -- 
 2.34.1
