@@ -1,160 +1,181 @@
-Return-Path: <ross.burton@arm.com>
+Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 55C88C61DA4
-	for <webhook@archiver.kernel.org>; Wed, 15 Mar 2023 12:46:20 +0000 (UTC)
-Received: from EUR05-DB8-obe.outbound.protection.outlook.com (EUR05-DB8-obe.outbound.protection.outlook.com [40.107.20.69])
- by mx.groups.io with SMTP id smtpd.web11.6864.1678884377876872420
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B14A9C61DA4
+	for <webhook@archiver.kernel.org>; Wed, 15 Mar 2023 14:05:10 +0000 (UTC)
+Received: from mail1.bemta37.messagelabs.com (mail1.bemta37.messagelabs.com [85.158.142.112])
+ by mx.groups.io with SMTP id smtpd.web10.8907.1678889108527287704
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 15 Mar 2023 05:46:18 -0700
+ Wed, 15 Mar 2023 07:05:09 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@armh.onmicrosoft.com header.s=selector2-armh-onmicrosoft-com header.b=DQo0lDU8;
- spf=pass (domain: arm.com, ip: 40.107.20.69, mailfrom: ross.burton@arm.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
- s=selector2-armh-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=gQO8BYTWTBLnQ0vakTrSuh+JyVfiDdjwCxfBzjvBnrc=;
- b=DQo0lDU8RUGyAnwh8nKX+9shmkvHE7Eg1X/8OLNXKkSEmIRM7Rc6Ke12QExUWKMwbBMvk9UuQDAoUQ5ngUikgBHCjBI46sJlPm7FsRDU6i54bpdTDiy2qZf5hfcz9JvzZCh5Rl22rbVzZQcSUihSRQklWFWueXETTuyO7+5kvp0=
-Received: from AM5PR0402CA0010.eurprd04.prod.outlook.com
- (2603:10a6:203:90::20) by AS8PR08MB7321.eurprd08.prod.outlook.com
- (2603:10a6:20b:440::11) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6178.26; Wed, 15 Mar
- 2023 12:46:12 +0000
-Received: from AM7EUR03FT003.eop-EUR03.prod.protection.outlook.com
- (2603:10a6:203:90:cafe::5a) by AM5PR0402CA0010.outlook.office365.com
- (2603:10a6:203:90::20) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6178.25 via Frontend
- Transport; Wed, 15 Mar 2023 12:46:12 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 63.35.35.123)
- smtp.mailfrom=arm.com; dkim=pass (signature was verified)
- header.d=armh.onmicrosoft.com;dmarc=pass action=none header.from=arm.com;
-Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
- 63.35.35.123 as permitted sender) receiver=protection.outlook.com;
- client-ip=63.35.35.123; helo=64aa7808-outbound-1.mta.getcheckrecipient.com;
- pr=C
-Received: from 64aa7808-outbound-1.mta.getcheckrecipient.com (63.35.35.123) by
- AM7EUR03FT003.mail.protection.outlook.com (100.127.140.227) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.6199.11 via Frontend Transport; Wed, 15 Mar 2023 12:46:11 +0000
-Received: ("Tessian outbound cfb430c87a1e:v135"); Wed, 15 Mar 2023 12:46:11 +0000
-X-CheckRecipientChecked: true
-X-CR-MTA-CID: 88b144d54b5fa400
-X-CR-MTA-TID: 64aa7808
-Received: from c8b0ae4a3133.1
-	by 64aa7808-outbound-1.mta.getcheckrecipient.com id 05DE1DEA-EDBF-404F-9075-76146192AEA5.1;
-	Wed, 15 Mar 2023 12:46:05 +0000
-Received: from EUR03-DBA-obe.outbound.protection.outlook.com
-    by 64aa7808-outbound-1.mta.getcheckrecipient.com with ESMTPS id c8b0ae4a3133.1
-    (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384);
-    Wed, 15 Mar 2023 12:46:05 +0000
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=j8g6tNaJRdrRZHLqz5HdmIBM3cJkARPyOUZ0gKLmhaIBLcJdXzSQyfG7DP/8AEgQs9MnBumoDD2gquad3LlPghv/08xD2TPZj/z1wrRwDCSokjkP9a1aGX+WQZ9OvZ4Qq5WXTJc6CaUNm0SkZNkgKR5b+6IoPXHS3GrYUDVVngIrY1RGn6Mm+PK76fR8cE3uji9S0UWRiKqsqWFTvgosbCnHy2KRc6oTveiud/n7HwOsnchXJMy/+KQS6W1PnTCx0tP7BT2XqyiFZ5weK0HRiUJfqhg8R6UZwE6Gha9aHHlhWUpyjheRXJV4aiUio1J76mZ4H4CwBJjtaCpOeH3u5w==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=gQO8BYTWTBLnQ0vakTrSuh+JyVfiDdjwCxfBzjvBnrc=;
- b=YYW550EHNYUeJTeCWS7zYWA47tO4omeGEifxkqm2w8ChFYxN5nQgowvMw4D+fGcg+yNq7BuBa1ZI4q166ERoYvnC2Ku5A9NxqtFUBgqqr+r156noilVIf9mRnRbHgicgN18nPVvaLh0aGNTHdEug2wvDNSYsguCNvNkyCY9Mh/qvWpciG4QpS9g+BRatmYOJWC27GFQpJfRY87BuCJrlXd2ZgVDZXYVNpCgUL6PgS9tze1UUFF893tJSQvYMcycX9MGrz15sgzIfpQ3+q2gJU/Znz+XDUmQs4tUDwrSchosX4yXnfGVcI2IBJqIGqK85ekyKUoL0dRlnP+dWkVjUyg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=arm.com; dmarc=pass action=none header.from=arm.com; dkim=pass
- header.d=arm.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
- s=selector2-armh-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=gQO8BYTWTBLnQ0vakTrSuh+JyVfiDdjwCxfBzjvBnrc=;
- b=DQo0lDU8RUGyAnwh8nKX+9shmkvHE7Eg1X/8OLNXKkSEmIRM7Rc6Ke12QExUWKMwbBMvk9UuQDAoUQ5ngUikgBHCjBI46sJlPm7FsRDU6i54bpdTDiy2qZf5hfcz9JvzZCh5Rl22rbVzZQcSUihSRQklWFWueXETTuyO7+5kvp0=
-Received: from PA4PR08MB7411.eurprd08.prod.outlook.com (2603:10a6:102:2a3::12)
- by AS1PR08MB7451.eurprd08.prod.outlook.com (2603:10a6:20b:4dd::16) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6178.29; Wed, 15 Mar
- 2023 12:46:04 +0000
-Received: from PA4PR08MB7411.eurprd08.prod.outlook.com
- ([fe80::e305:742e:e10b:1093]) by PA4PR08MB7411.eurprd08.prod.outlook.com
- ([fe80::e305:742e:e10b:1093%2]) with mapi id 15.20.6178.024; Wed, 15 Mar 2023
- 12:46:04 +0000
-From: Ross Burton <Ross.Burton@arm.com>
-To: "zboszor@gmail.com" <zboszor@gmail.com>
-CC: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [oe] [meta-python][PATCH 1/4]
- python_setuptools_build_meta_mesonpy.bbclass: New class
-Thread-Topic: [oe] [meta-python][PATCH 1/4]
- python_setuptools_build_meta_mesonpy.bbclass: New class
-Thread-Index: AQHZVxTO7h3lJuGPbki1zHmLmrgMya77yf6A
-Date: Wed, 15 Mar 2023 12:46:04 +0000
-Message-ID: <25DB9C8C-6830-4DBB-9B27-4FB04C393F38@arm.com>
-References: <20230315080429.2722555-1-zboszor@gmail.com>
-In-Reply-To: <20230315080429.2722555-1-zboszor@gmail.com>
-Accept-Language: en-GB, en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-mailer: Apple Mail (2.3731.400.51.1.1)
-Authentication-Results-Original: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=arm.com;
-x-ms-traffictypediagnostic: 
-	PA4PR08MB7411:EE_|AS1PR08MB7451:EE_|AM7EUR03FT003:EE_|AS8PR08MB7321:EE_
-X-MS-Office365-Filtering-Correlation-Id: d4c2eb5a-6b9c-4cb1-9490-08db255341c0
-x-checkrecipientrouted: true
-nodisclaimer: true
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam-Untrusted: BCL:0;
-X-Microsoft-Antispam-Message-Info-Original: 
- NBqIIagWN+FnZ/Wt7c+t/Axq8LHrhHOOPmRo4w/rVfaPxn+tOpkRs2T9kRaJR+G+cnTjlfZiHjdCegD5+F81iyxQn+Nn8r2Qyy9T5RLxgnGYYcMf4QIXZz01e7yhZt2Leim7WNrrta+KQSbxWCfwYIM5JTctZVssDNykTSnyECjhGCPawMFo35SO39wlFbs2Cmy6ruGQOjkDY+VJnYKD+HXpxl6D8JxdGPpCsdKTwLbreuTIBPGODikvZDovzirxpUiusoDi/ZRcLaGCsyn1kbB4ZNOW+NCd77WFMdYBjn0A0JaPmFNDJyoTfeXN27ErrlW+Kwv4yFck96nO7yzvD0CWhUJeDByIqp7EPYAstYQ6NZIIYgtMtAF9YvehIP6Nbh18EXpkx18CImORjLQ8Jg2Yq7zVDuEmqbW7iSO75+6fAaSjcU+WQrWNBUuoG/3gz51dL5lfUXWEwCQSc5ivcF2BcS3nolcwNRpPxiGi0748jXNCZqr2pueVvwx/JQx9qyF8i+Xwi+s8TCCCMpDygvmvba48GBdck6PE+aQCpzN1I8F1PJH5h3VCo9JTRty9JMb2qeY0cQhWGJPNcHoOyta7DmBzcD8qoQpNhkNC/tNT5btj3TszIv7SuRM72WoH7fqjJ6fwuF9XM5CtCgPr3qjG8YXjI9N+/v8FMrGtKRwAXtbw1sYgVyjX4hz4Ozd3Ca2fbBy+g3lZVaBVdTMUoTsLXfrfmXfkreFSxByg9sE=
-X-Forefront-Antispam-Report-Untrusted: 
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PA4PR08MB7411.eurprd08.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230025)(4636009)(39860400002)(366004)(396003)(136003)(376002)(346002)(451199018)(38100700002)(33656002)(122000001)(316002)(86362001)(4326008)(38070700005)(8936002)(6916009)(41300700001)(8676002)(66476007)(66446008)(76116006)(64756008)(66946007)(91956017)(66556008)(2616005)(36756003)(478600001)(5660300002)(4744005)(71200400001)(6486002)(2906002)(26005)(186003)(6506007)(6512007)(53546011)(45980500001);DIR:OUT;SFP:1101;
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <172501A11B97E9488AB65AD10BE8CACA@eurprd08.prod.outlook.com>
-Content-Transfer-Encoding: base64
+ dkim=fail reason="body hash did not verify" header.i=@fujitsu.com header.s=170520fj header.b=KiQDrhD3;
+ spf=pass (domain: fujitsu.com, ip: 85.158.142.112, mailfrom: wangmy@fujitsu.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
+	s=170520fj; t=1678889106; i=@fujitsu.com;
+	bh=/yL71xFBNAoVHTJnY45RSi8t4+eHx5nWnu9KGBGutls=;
+	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type:Content-Transfer-Encoding;
+	b=KiQDrhD3aAjHD4Ustqs70x9h7JmIwGdDxpkelHIQ73AQWO4JJgGfMYV2WTjtKcoDT
+	 lDJKlcAuiQUGh2rGXj+9ExUGLFwXVeWqoFP0qQzpFVuQkQSuVJRtRggp4Ej0nntSAg
+	 GKkoKgOICv19nfaxK6a/bmIBvcVN+7itiWT01UEi/098aEg+FgLHlBqAOI7rC+GGHx
+	 H3gpUSczCXqvi3XbwmEDSMMjGt7ETjYLkc8GB6cLT8GACEFiXsV9AYaOGFUGZiDi2+
+	 jl4olUdLOugxBrrs7citGDMrEqlpIpU1XOCv3dALOPve+ejsA30vrEcqIuylaFOtOi
+	 PicseOv1LAq3w==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFnrNIsWRWlGSWpSXmKPExsViZ8ORpDvpgmC
+  Kwf01ohYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8bvizdYCppVKmZ23WdtYFwi28XIxSEk8JBR
+  Yvr1k4wQzhUmib4rZ9khnD2MEp/vrmftYuTkYBOQkrhx/z8biC0ioC+xdPYeZhCbWUBF4sXvH
+  nYQW1jAS+L1vkcsIDaLgKrExVezwWp4BZwkbp2dxAhiSwgoSEx5+B4szingLPH5bS9QnANomZ
+  PEx43WEOWCEidnPmGBGK8p0br9NzuELS/RvBVipISAosTsy80sEHaFROP0Q0wQtprE1XObmCc
+  wCs1CMmoWklGzkIxawMi8itG8OLWoLLVI19BML6koMz2jJDcxM0cvsUo3US+1VDcvv6gkQ9dQ
+  L7G8WC+1uFivuDI3OSdFLy+1ZBMjMNxTitPMdzAe6/urd4hRkoNJSZT3zxqBFCG+pPyUyozE4
+  oz4otKc1OJDjDIcHEoSvP/OCKYICRalpqdWpGXmAGMPJi3BwaMkwpt6HijNW1yQmFucmQ6ROs
+  Woy7H46pW9zEIsefl5qVLivH9BigRAijJK8+BGwNLAJUZZKWFeRgYGBiGegtSi3MwSVPlXjOI
+  cjErCvMtALuHJzCuB2/QK6AgmoCN45wmAHFGSiJCSamCqD4k+0LGmivNM780a3dbXr7hm5DVu
+  muoam7dkmg3ri7gPG39Iqm+LeLSXwblxHcvpEL2IFWyOF44s/f7hsTD7NK0JnLbdNjW3ZvBO/
+  xNs83Gy4f33e2p7Fhx42fPlW5uDTtIU66Oz78c9tf3/m2vSqWt5JXZ3NtgWXy7Kejg56oCEfd
+  DnPdZrzolohgtVh7gJz/pvZvxdRuJDSOlCn7MZux8wL1qz0aLbkGFvuRbvx0cG27euTWSO8jE
+  +aBjx4dbHRbKPsuWXX3mTEm5VEddz9I3JEv/J12ap2Ja1F+St+sW37UbQpAn6PBcvG94y2TQl
+  paehJNv3l6Tp9xjPb+E/jn88EWu+lL30xt/jWlsZlFiKMxINtZiLihMB5o8jTn4DAAA=
+X-Env-Sender: wangmy@fujitsu.com
+X-Msg-Ref: server-7.tower-732.messagelabs.com!1678889105!66855!1
+X-Originating-IP: [62.60.8.98]
+X-SYMC-ESS-Client-Auth: outbound-route-from=pass
+X-StarScan-Received: 
+X-StarScan-Version: 9.104.1; banners=-,-,-
+X-VirusChecked: Checked
+Received: (qmail 7460 invoked from network); 15 Mar 2023 14:05:06 -0000
+Received: from unknown (HELO n03ukasimr03.n03.fujitsu.local) (62.60.8.98)
+  by server-7.tower-732.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 15 Mar 2023 14:05:06 -0000
+Received: from n03ukasimr03.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr03.n03.fujitsu.local (Postfix) with ESMTP id AC66F1B1
+	for <openembedded-devel@lists.openembedded.org>; Wed, 15 Mar 2023 14:05:05 +0000 (GMT)
+Received: from R01UKEXCASM121.r01.fujitsu.local (R01UKEXCASM121 [10.183.43.173])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by n03ukasimr03.n03.fujitsu.local (Postfix) with ESMTPS id 9EB281AD
+	for <openembedded-devel@lists.openembedded.org>; Wed, 15 Mar 2023 14:05:05 +0000 (GMT)
+Received: from localhost.localdomain (10.167.225.33) by
+ R01UKEXCASM121.r01.fujitsu.local (10.183.43.173) with Microsoft SMTP Server
+ (TLS) id 15.0.1497.42; Wed, 15 Mar 2023 14:05:03 +0000
+From: <wangmy@fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: Wang Mingyu <wangmy@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH] python3-bandit: upgrade 1.7.4 -> 1.7.5
+Date: Wed, 15 Mar 2023 22:04:40 +0800
+Message-ID: <1678889082-20604-3-git-send-email-wangmy@fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
+In-Reply-To: <1678889082-20604-1-git-send-email-wangmy@fujitsu.com>
+References: <1678889082-20604-1-git-send-email-wangmy@fujitsu.com>
 MIME-Version: 1.0
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS1PR08MB7451
-Original-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=arm.com;
-X-EOPAttributedMessage: 0
-X-MS-Exchange-Transport-CrossTenantHeadersStripped: 
- AM7EUR03FT003.eop-EUR03.prod.protection.outlook.com
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id-Prvs: 
-	781aa679-89a5-4982-5fe9-08db25533d35
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 
-	VsirNkNX3dEFVIW1K5h4CBzHcvpw8HjLqWb5DQ9kHoGStjtr82S5CWdwGrMtBor3LTLqPUP/uF8wkXKVP2KzLApK0prhdBd23v+IIwVLTG7MRvN/vEzIV+0lwpIuME6QaSkD8MJN8BzND1JCwxMuR7nHbqz6akUXUV1MUANaOQu0Pes9cLkSfZIVKz6FHs4RrilTqri1qudN3aZxNspWQJVSIDBBa/+1VCBQIrZIbuOHHEYRcfo94pdUy2eZLnRM4Siqv6/6wfaEKumrq36DwZeQrubsyGcciVYLh2vF56tnwygVbDZlWD95VHQ7KouZV2q5OEEVGsqW3AS/vpOyw+W8vWNo3h5KhHs8b6zOHlMgltB/Sa+Qdz1mGkmp/EHyVzVSuRugazvuNq7wHj6TKF/0B5q2AMu1gHXxp+eocekIh111sS99LjNFW2cahn6e9x3kec2MSGi9LPANPvTr68FpMfqdcpkOJ77AB6fOelXxQU93FxsymvKWPpYSURi08kXeaYDCdnMEoRFDUjz0RuGLDzWAF3cT2bXuhPgx50d3Cw1fZnULUSjZoir42zFMbAH4nlkw5YyqNQL3wrtTqGn73iiludNgnjS+FEk/u+9HmsZA4K/BBvzzdgdf8tpqCDXDCALZ70pB0zJbKcphADe+slPtzCbIJwYy4gdtGd5RkoegueW8ry7qUk5zKsXpvP4/FWjUFYzuOZWfpfkOzA==
-X-Forefront-Antispam-Report: 
-	CIP:63.35.35.123;CTRY:IE;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:64aa7808-outbound-1.mta.getcheckrecipient.com;PTR:ec2-63-35-35-123.eu-west-1.compute.amazonaws.com;CAT:NONE;SFS:(13230025)(4636009)(39860400002)(136003)(346002)(376002)(396003)(451199018)(40470700004)(36840700001)(46966006)(82740400003)(81166007)(4326008)(41300700001)(82310400005)(36860700001)(316002)(356005)(70586007)(70206006)(8676002)(8936002)(6862004)(5660300002)(2616005)(40460700003)(478600001)(4744005)(336012)(47076005)(53546011)(26005)(6506007)(6512007)(2906002)(86362001)(186003)(6486002)(33656002)(40480700001)(36756003);DIR:OUT;SFP:1101;
-X-OriginatorOrg: arm.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Mar 2023 12:46:11.8085
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: d4c2eb5a-6b9c-4cb1-9490-08db255341c0
-X-MS-Exchange-CrossTenant-Id: f34e5979-57d9-4aaa-ad4d-b122a662184d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=f34e5979-57d9-4aaa-ad4d-b122a662184d;Ip=[63.35.35.123];Helo=[64aa7808-outbound-1.mta.getcheckrecipient.com]
-X-MS-Exchange-CrossTenant-AuthSource: 
-	AM7EUR03FT003.eop-EUR03.prod.protection.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR08MB7321
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Originating-IP: [10.167.225.33]
+X-ClientProxiedBy: G08CNEXCHPEKD07.g08.fujitsu.local (10.167.33.80) To
+ R01UKEXCASM121.r01.fujitsu.local (10.183.43.173)
+X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 15 Mar 2023 12:46:20 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101537
+ <openembedded-devel@lists.openembedded.org>; Wed, 15 Mar 2023 14:05:10 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101540
 
-T24gMTUgTWFyIDIwMjMsIGF0IDA4OjA0LCBab2x0YW4gQm9zem9ybWVueWkgdmlhIGxpc3RzLm9w
-ZW5lbWJlZGRlZC5vcmcgPHpib3N6b3I9Z21haWwuY29tQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmc+
-IHdyb3RlOg0KPiANCj4gU29tZSBweXRob24gbW9kdWxlcyAoZS5nLiBTY2lQeSwgc2Npa2l0LWlt
-YWdlKSB1c2UgbWVzb24tcHl0aG9uDQo+IChhLmsuYS4gbWVzb25weSkgaW4gcHlwcm9qZWN0LnRv
-bWw6DQo+IA0KPiAgICBbYnVpbGQtc3lzdGVtXQ0KPiAgICBidWlsZC1iYWNrZW5kID0gJ21lc29u
-cHknDQo+IA0KPiBUaGlzIGNsYXNzLCB0b2dldGhlciB3aXRoIHB5dGhvbjMtbWVzb24tcHl0aG9u
-IGFuZCBpdHMgZGVwZW5kZW5jaWVzDQo+IHdpbGwgYWxsb3cgYnVpbGRpbmcgc3VjaCBtb2R1bGVz
-Lg0KDQpTbyB0aGUgcGVwNTE3IGJ1aWxkIHRoaW5nIHByb3ZpZGVzIGRlcGVuZGVuY2llcyAod2hp
-Y2ggd2UgaWdub3JlKSwgYnVpbGQgaXNvbGF0aW9uICh3aGljaCB3ZSBkaXNhYmxlKSwgYW5kIGF1
-dG9tYXRpYyB1c2Ugb2YgdGhlIHJpZ2h0IHRvb2xpbmcgKHdoaWNoIHdlIGhhdmUgdG8gc3BlY2lm
-eSBtYW51YWxseSkuDQoNClNvIHdoYXQgZG9lcyB0aGUgbWVzb24tcHl0aG9uIGludGVncmF0aW9u
-IGJyaW5nPyAgQ2FuIHdlIGp1c3QgcnVuIG1lc29uIGRpcmVjdGx5Pw0KDQo+ICtERVBFTkRTICs9
-ICJweXRob24zLXNldHVwdG9vbHMtbmF0aXZlIHB5dGhvbjMtd2hlZWwtbmF0aXZlICR7QCcnIGlm
-IGQuZ2V0VmFyKCdQTicpID09ICdweXRob24zLW1lc29uLXB5dGhvbi1uYXRpdmUnIGVsc2UgJ3B5
-dGhvbjMtbWVzb24tcHl0aG9uLW5hdGl2ZeKAmX0iDQoNCkZXSVcsIGFsbCB0aGUgb3RoZXIgcGVw
-NTE3IGNsYXNzZXMgaGF2ZSBhIOKAnG5lYXTigJ0gZGVwZW5kcyB3aXRob3V0IGxvZ2ljIGFuZCBl
-eHBlY3QgdGhlIHJlY2lwZSAocHl0aG9uMy1tZXNvbi1weXRob24tbmF0aXZlIGluIHRoaXMgY2Fz
-ZSkgdG8gcmVtb3ZlIGl0c2VsZiBmcm9tIHRoZSBERVBFTkRTLg0KDQpSb3Nz
+From: Wang Mingyu <wangmy@fujitsu.com>
+
+Changelog:
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+    Add an example screen shot of Bandit to README #847
+    Bad link to screen shot #848
+    Use a constant for weak hashes #850
+    Group location line with code output #822
+    Fix line range using Python 3.8 end_lineno #821
+    Add classifier to indicate Py3 only #853
+    Removal of blacklist call B309 httpsconnection #858
+    Remove blacklist call check for os.tempnam #859
+    Indiciate hash type in message #860
+    Add the httpx module check for verify #861
+    Add doc for hashlib plugin #862
+    Make use of rich for progress bar #863
+    Replace toml with tomli #829
+    Fix up B109 and B111 removed plugins docs #864
+    add check for "requests" calls without timeout #743
+    Fix for build breaks in format job #869
+    Add license and contributing links to docs #867
+    Remove redundant word Bandit in titles of sections #873
+    Add request for feedback via =F0=9F=91=8D #871
+    Add a Discord link to the docs #870
+    Adding logging.config.listen() plugin with examples #874
+    Removal of ghugo #881
+    Remove redundant pip line #884
+    Corrected documentation on configuration #868
+    Start testing against Python 3.11 #887
+    Add myself to sponsor list #885
+    Add Discord link to README #875
+    Update action versions in Actions workflows (#890) #893
+    Add dependency review action #891
+    Fix an unclosed tag in HTML formatter #896
+    'Test plugin listing' in docs incorrectly pointing B612 to plugin ref of B102 #897
+    Make small fixes in docs #899
+    Specify semver range for Python 3.11 #901
+    Add another bad example of yaml load #905
+    Add releases link in "Version control integration" #909
+    Update version of dependency-review-action #911
+    Avoid redundant message if debug on #913
+    Remove invalid checking on hashlib #914
+    Add some missing curve types #920
+    add jsonpickle deserialization blacklist #707
+    Fix reading the number argument from config file #923
+    Add end_col_offset if available #851
+    Enhancement Proposal: Plugin "assert_used" config-skip snippet #695
+    Blacklist pandas read_pickle and add functional test for it #710
+    Docs for request without timeout has dead link #925
+    Add case for global exec #570
+    Fix a false positive condition yaml_load #927
+    Fix issue #453 jinja2 template select_autoescape when using jinja2.select_autoescape #454
+    Adding tarfile.extractall() plugin with examples #549
+    Check for deprecated TLS 1.1 #928
+    weak_cryptographic_key assumes positional arg #930
+    Fix filename of B202 in docs #932
+    Remove python 2 reference in docs #933
+    Pass correct number of arguments to match the %s placeholders. #934
+    Fixup some invalid pickle testing #924
+    Fix json and yaml formatters to respect num lines #929
+    Fix AttributeError on detect of tuple assign condition #931
+    [docs] Mention exclude_dirs option available in TOML and YAML #876
+    Typo fix #945
+    remove py2 exec example in docs #947
+    Add official Python 3.11 support #964
+    DOC: Add explanation on how to use pre-commit with config file #968
+    Fix breaking build due to new tox #983
+    Correct build status badge in README #980
+    Improve detecting SQL injections in f-strings #917
+    Improve handling nosec for multi-line strings #915
+    Check for github action updates monthly #989
+    Added a bit more project_urls #985
+
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+---
+ .../python/{python3-bandit_1.7.4.bb =3D> python3-bandit_1.7.5.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-bandit_1.7.4.bb =3D> python3-bandit_1.7.5.bb} (82%)
+
+diff --git a/meta-python/recipes-devtools/python/python3-bandit_1.7.4.bb b/meta-python/recipes-devtools/python/python3-bandit_1.7.5.bb
+similarity index 82%
+rename from meta-python/recipes-devtools/python/python3-bandit_1.7.4.bb
+rename to meta-python/recipes-devtools/python/python3-bandit_1.7.5.bb
+index cfdbde968..5e2a7e8bc 100644
+--- a/meta-python/recipes-devtools/python/python3-bandit_1.7.4.bb
++++ b/meta-python/recipes-devtools/python/python3-bandit_1.7.5.bb
+@@ -2,7 +2,7 @@ SUMMARY =3D "Security oriented static analyser for python code."
+ LICENSE =3D "Apache-2.0"
+ LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D34400b68072d710fecd0a2940a0d1658"
+ 
+-SRC_URI[sha256sum] =3D "2d63a8c573417bae338962d4b9b06fbc6080f74ecd955a092849e1e65c717bd2"
++SRC_URI[sha256sum] =3D "bdfc739baa03b880c2d15d0431b31c658ffc348e907fe197e54e0389dd59e11e"
+ 
+ DEPENDS =3D "python3-pbr-native python3-git python3-pbr python3-pyyaml python3-six python3-stevedore"
+ 
+-- 
+2.34.1
+
 
