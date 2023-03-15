@@ -1,112 +1,105 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <zboszor@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 12F65C61DA4
-	for <webhook@archiver.kernel.org>; Wed, 15 Mar 2023 04:04:08 +0000 (UTC)
-Received: from mail-pl1-f170.google.com (mail-pl1-f170.google.com [209.85.214.170])
- by mx.groups.io with SMTP id smtpd.web10.367.1678853042658139919
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0DD49C7618E
+	for <webhook@archiver.kernel.org>; Wed, 15 Mar 2023 08:04:39 +0000 (UTC)
+Received: from mail-ed1-f47.google.com (mail-ed1-f47.google.com [209.85.208.47])
+ by mx.groups.io with SMTP id smtpd.web11.2647.1678867476145916789
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 14 Mar 2023 21:04:02 -0700
+ Wed, 15 Mar 2023 01:04:36 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=AVB0CP8T;
- spf=pass (domain: gmail.com, ip: 209.85.214.170, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f170.google.com with SMTP id p20so18703870plw.13
-        for <openembedded-devel@lists.openembedded.org>; Tue, 14 Mar 2023 21:04:02 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=TlRFXGBG;
+ spf=pass (domain: gmail.com, ip: 209.85.208.47, mailfrom: zboszor@gmail.com)
+Received: by mail-ed1-f47.google.com with SMTP id eh3so16137829edb.11
+        for <openembedded-devel@lists.openembedded.org>; Wed, 15 Mar 2023 01:04:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112; t=1678853042;
+        d=gmail.com; s=20210112; t=1678867474;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=qXGNYsLOE8YM+9t5ot7OFX+nRkqxi/uyOxKynxOWy1o=;
-        b=AVB0CP8Tc8/ESr7Ygzcz5WF3agWg21o4GxlkeIvsp5qn9T14Z7oT3+482UXWzX3f8z
-         Vox1t7QK6OTbBbnojAqvWofdxFs8ENhefEuI9lJWTmtW3Ab5b2XE7tWOWADPDWb6kRw3
-         bES1Fjn/VC77cm2Z4I2V+1Fv3Ev31161VGDp0P3/+EoZ0DN4GdygA3PoJkiCLsuZmF3c
-         gayXnvJ9H53kyerbXdQECCV0AP0uOiL0mMSRRWaRhYsV0zl+boMKwTMVd1TF0yEL7l/6
-         En0y83cXRjYnTgLtzRjFzPPK6eG+2uoVap5wpt5+NEE/fXyQLSeYjcEIgQDunkPdohrX
-         5bZw==
+        bh=lmdODGND32SJDnFw2bRi43lDjib49LFcgl6k5oDZeRU=;
+        b=TlRFXGBGYBlcOgxpjkDO6nBBhSLcaYVsN1zofjU9Lt29qWYOvs6UCOXuBDlJT+zp4S
+         jDHMYVaw5fn10I4NBc/39pd5Ww+wCSYck79jXBUjLAnQ8HjLkZhLbBqIcnBNzzEzGw5O
+         bHeqDz2d1czqZZoydqEck+JA1+ZnyZB1U+MEZfRq/UqnvUJd69+brxz8j37WGJ8blIAH
+         SlKdSIyQrv07FQPhBz6KS/ySC/Ja03bnYzauu1cD2I4b6/5+z5rerALqPRnE0YJ9ecfg
+         mTqbo9R+sNaLzynEIBdI5SSmmugGFBLFlWLOkyQw1hSXOnUKCxIHwf0BiQbIUTl+iXZM
+         60Bg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112; t=1678853042;
+        d=1e100.net; s=20210112; t=1678867474;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=qXGNYsLOE8YM+9t5ot7OFX+nRkqxi/uyOxKynxOWy1o=;
-        b=29W7WH9G/XX8Bu3tL4bcHQ4t1B0STJhA6KfMwVXgJU5podQuIlGLa7I5oYJCq9X6G4
-         4QhA1nb2jBYAOcoXxsD4a65uFGf471MF/5Wxw7vNssnpxU4VisSctLuP1VZCls9J+NaN
-         GiyB6jwPHZEcwkdMmO4xLJBH1FZLMDKIpDVVlJVx5ZU/Rv+cK9+hPF5lwPq0oVrXIFTb
-         pmtGIYvu8pCSKQ2Tm8brGVB4JTYZRdY5urWJv6xnKtQqvu4asDPuoPKKO+L30kmWDu3c
-         s6bnuG9EZ2iMFWLl9ON58IBshomvN3fGnwIIeYroZiWdFtOIDM9ar7oVAURbXiOF32Ax
-         MdoA==
-X-Gm-Message-State: AO0yUKXFe3d5b8AfTtCUWLf3XknclZC3z0kK8OTX2lz0m+zKE2PYb5J4
-	aWh8Uh2mFByEQ+JGMe4B6+HSqCBhFlCKqw==
-X-Google-Smtp-Source: AK7set8cEQnzg4C910h2dx7fooL2QlOyBo6SoTYVnLIqjH+2t4FyRmpi3q56Y25RJye0vFmTSgexLg==
-X-Received: by 2002:a05:6a20:6d19:b0:d3:626b:976b with SMTP id fv25-20020a056a206d1900b000d3626b976bmr13058858pzb.26.1678853041651;
-        Tue, 14 Mar 2023 21:04:01 -0700 (PDT)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9181:d380::513a])
-        by smtp.gmail.com with ESMTPSA id b16-20020aa78710000000b006259c00d7b9sm297507pfo.101.2023.03.14.21.04.01
+        bh=lmdODGND32SJDnFw2bRi43lDjib49LFcgl6k5oDZeRU=;
+        b=KVfml1Wi0VoQ84ehDWTFUTA5RbScOXTsBmfw4rjY/UMKcuOPCOd3ncwI5ITXcyiOcq
+         ilp5BXH+HQ2jR4Q9Gt+8vMC01Q8YH44/e5GPsZBREn5jl6HGmMrUmvtvy/Ndbt4T+i3l
+         XoX980hgZFuFOs9CxtmCuJkc6YhkgZqvBivFxblbayT939iSr06paafTfMs9uvYGavqO
+         xuuMOm3PZ2+vf+7LUrupb9WDb2uASC6CxA+mLRse3IJ4VRBBlk6ext4LxqBK5Il62IIs
+         tmZuWSmM76JnG65xUtVDBoqPERZs3g8Mv7F63uoHemfkodZZPzqmQ5QadnuCP7goYx12
+         p53Q==
+X-Gm-Message-State: AO0yUKV93ljNZr8lgYGwbNzKLDh98XIsqAEmtcp7v3cc+B7K5XazrtFX
+	EunM3I8XUvECwvmdOfeBwQP5/BP/EGw=
+X-Google-Smtp-Source: AK7set9v0z68JjunLm7Aijz/4BkR+wjSP90bUyCOK0YYRJpfIQXzHOugtbFpTggk/TDalXUN9e4LRw==
+X-Received: by 2002:a17:906:dfda:b0:878:78bc:975c with SMTP id jt26-20020a170906dfda00b0087878bc975cmr4820267ejc.36.1678867474153;
+        Wed, 15 Mar 2023 01:04:34 -0700 (PDT)
+Received: from localhost.lan (BC2440CC.dsl.pool.telekom.hu. [188.36.64.204])
+        by smtp.gmail.com with ESMTPSA id g11-20020a170906348b00b0092b4602f506sm2136382ejb.73.2023.03.15.01.04.33
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 14 Mar 2023 21:04:01 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
+        Wed, 15 Mar 2023 01:04:33 -0700 (PDT)
+From: =?UTF-8?q?Zolt=C3=A1n=20B=C3=B6sz=C3=B6rm=C3=A9nyi?= <zboszor@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH] nodejs: Depend on file-native
-Date: Tue, 14 Mar 2023 21:03:59 -0700
-Message-Id: <20230315040359.3160300-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.40.0
+Cc: =?UTF-8?q?Zolt=C3=A1n=20B=C3=B6sz=C3=B6rm=C3=A9nyi?= <zboszor@gmail.com>
+Subject: [meta-python][PATCH 1/4]  python_setuptools_build_meta_mesonpy.bbclass: New class
+Date: Wed, 15 Mar 2023 09:04:26 +0100
+Message-Id: <20230315080429.2722555-1-zboszor@gmail.com>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 15 Mar 2023 04:04:08 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101528
+ <openembedded-devel@lists.openembedded.org>; Wed, 15 Mar 2023 08:04:39 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101529
 
-Some older distribution e.g. alma8 has a version of file utility which
-is version 5.33 but more importantly missing this patch [1] from version
-5.40 which causes package failures in wasm files e.g.
+Some python modules (e.g. SciPy, scikit-image) use meson-python
+(a.k.a. mesonpy) in pyproject.toml:
 
-ERROR: nodejs-18.14.2-r0 do_package: Fatal errors occurred in subprocesses:
-Command '['file', '-b', '/home/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/core2-64-poky-linux/nodejs/18.14.2-r0/package/usr/lib/nodejs/ptest/test/wasi/wasm/write_file.wasm']' returned non-zero exit status 1.
-Subprocess output:ERROR: Bad magic format `version %#x (MVP)' (bad format char: #)
-Command '['file', '-b', '/home/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/core2-64-poky-linux/nodejs/18.14.2-r0/package/usr/lib/nodejs/ptest/test/wasi/wasm/symlink_loop.wasm']' returned non-zero exit status 1.
-Subprocess output:ERROR: Bad magic format `version %#x (MVP)' (bad format char: #)
-Command '['file', '-b', '/home/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/core2-64-poky-linux/nodejs/18.14.2-r0/package/usr/lib/nodejs/ptest/test/wasi/wasm/notdir.wasm']' returned non-zero exit status 1.
-Subprocess output:ERROR: Bad magic format `version %#x (MVP)' (bad format char: #)
-Command '['file', '-b', '/home/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/core2-64-poky-linux/nodejs/18.14.2-r0/package/usr/lib/nodejs/ptest/test/wasi/wasm/preopen_populates.wasm']' returned non-zero exit status 1.
-Subprocess output:ERROR: Bad magic format `version %#x (MVP)' (bad format char: #)
-Command '['file', '-b', '/home/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/core2-64-poky-linux/nodejs/18.14.2-r0/package/usr/lib/nodejs/ptest/test/wasi/wasm/clock_getres.wasm']' returned non-zero exit status 1.
-Subprocess output:ERROR: Bad magic format `version %#x (MVP)' (bad format char: #)
-Command '['file', '-b', '/home/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/core2-64-poky-linux/nodejs/18.14.2-r0/package/usr/lib/nodejs/ptest/test/wasi/wasm/main_args.wasm']' returned non-zero exit status 1.
+    [build-system]
+    build-backend = 'mesonpy'
 
-[1] https://github.com/file/file/commit/85b7ab83257b3191a1a7ca044589a092bcef2bb3
+This class, together with python3-meson-python and its dependencies
+will allow building such modules.
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Zoltán Böszörményi <zboszor@gmail.com>
 ---
- meta-oe/recipes-devtools/nodejs/nodejs_18.14.2.bb | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+ ...python_setuptools_build_meta_mesonpy.bbclass | 17 +++++++++++++++++
+ 1 file changed, 17 insertions(+)
+ create mode 100644 meta-python/classes/python_setuptools_build_meta_mesonpy.bbclass
 
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_18.14.2.bb b/meta-oe/recipes-devtools/nodejs/nodejs_18.14.2.bb
-index c92c373746..7361f4039a 100644
---- a/meta-oe/recipes-devtools/nodejs/nodejs_18.14.2.bb
-+++ b/meta-oe/recipes-devtools/nodejs/nodejs_18.14.2.bb
-@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=2dff1ccca11e333f1388e34f7e2d1de3"
- 
- CVE_PRODUCT = "nodejs node.js"
- 
--DEPENDS = "openssl"
-+DEPENDS = "openssl file-replacement-native"
- DEPENDS:append:class-target = " qemu-native"
- DEPENDS:append:class-native = " c-ares-native"
- 
-@@ -88,6 +88,8 @@ EXTRA_OEMAKE = "\
-     builddir_name=./ \
- "
- 
-+EXTRANATIVEPATH += "file-native"
+diff --git a/meta-python/classes/python_setuptools_build_meta_mesonpy.bbclass b/meta-python/classes/python_setuptools_build_meta_mesonpy.bbclass
+new file mode 100644
+index 000000000..1d3fdbd7c
+--- /dev/null
++++ b/meta-python/classes/python_setuptools_build_meta_mesonpy.bbclass
+@@ -0,0 +1,17 @@
++#
++# Copyright OpenEmbedded Contributors
++#
++# SPDX-License-Identifier: MIT
++#
 +
- python prune_sources() {
-     import shutil
- 
++inherit setuptools3-base pkgconfig meson-common python3targetconfig python_pep517
++
++DEPENDS += "python3-setuptools-native python3-wheel-native ${@'' if d.getVar('PN') == 'python3-meson-python-native' else 'python3-meson-python-native'}"
++
++PEP517_BUILD_OPTS = '--config-setting=setup-args="${MESONOPTS} ${MESON_SOURCEPATH} ${B} ${MESON_CROSS_FILE} ${EXTRA_OEMESON}"'
++
++export MESONPY_BUILD = "${B}"
++
++# Python pyx -> c -> so build leaves absolute build paths in the code
++INSANE_SKIP:${PN} += "buildpaths"
++INSANE_SKIP:${PN}-src += "buildpaths"
 -- 
-2.40.0
+2.39.2
 
 
