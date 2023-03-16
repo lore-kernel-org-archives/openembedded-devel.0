@@ -1,86 +1,129 @@
-Return-Path: <peron.clem@gmail.com>
+Return-Path: <Martin.Jansa@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 66278C6FD1F
-	for <webhook@archiver.kernel.org>; Thu, 16 Mar 2023 13:18:37 +0000 (UTC)
-Received: from mail-wm1-f51.google.com (mail-wm1-f51.google.com [209.85.128.51])
- by mx.groups.io with SMTP id smtpd.web11.11828.1678972707493667932
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D2BB5C6FD19
+	for <webhook@archiver.kernel.org>; Thu, 16 Mar 2023 14:56:17 +0000 (UTC)
+Received: from mail-wr1-f47.google.com (mail-wr1-f47.google.com [209.85.221.47])
+ by mx.groups.io with SMTP id smtpd.web11.14331.1678978574310998418
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 16 Mar 2023 06:18:27 -0700
+ Thu, 16 Mar 2023 07:56:14 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=mYihtU2U;
- spf=pass (domain: gmail.com, ip: 209.85.128.51, mailfrom: peron.clem@gmail.com)
-Received: by mail-wm1-f51.google.com with SMTP id m18-20020a05600c3b1200b003ed2a3d635eso1109979wms.4
-        for <openembedded-devel@lists.openembedded.org>; Thu, 16 Mar 2023 06:18:27 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=WCVEER1s;
+ spf=pass (domain: gmail.com, ip: 209.85.221.47, mailfrom: martin.jansa@gmail.com)
+Received: by mail-wr1-f47.google.com with SMTP id p4so1799295wre.11
+        for <openembedded-devel@lists.openembedded.org>; Thu, 16 Mar 2023 07:56:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112; t=1678972706;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=S7m0R1MDyRz8CHohxZ/Wbv23jzkTCvVRlNlrNu8mpJo=;
-        b=mYihtU2UJy4H7p6t3RnQXFQoTlnV0BqP86/RIEeOzvPsfY66lfFr4iYmPB8F/R6/2I
-         wdQfiidrax22nqYOIUJ18izAybuJM0tvwmHv2alXrfn4o4BqJmgCVObpg7D3FJln/gge
-         a2zyZY+mxkfpCEfWdE2/NFLKEq2K3fTW4yz96LfSD4cWOysJFYIwv64Du9PKpVdWi4TQ
-         FWHIC6Z8+k+NYhc6HnQ1+MdI90CRpLihsgMuHNzeAfJBkXQ9U2XFaYSEXfoT6Z4XbmPp
-         tqZPGTndzrJs6Vzoc6c4U/tuxu+7TJyvNyWnpHjdafPUUhVZb5mVDOtH5OFYCaQw7i3c
-         IGeA==
+        d=gmail.com; s=20210112; t=1678978572;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=ckQ/gNgPHjVqlrZg1+Nhh73vnMpjrefY1DoTDlzpWx8=;
+        b=WCVEER1s+sX2+mPV/JKmcoR9E/L3/afNCwmiBuWQ8i9CKp/WTpNzDRC7lawjKSmwp/
+         CZwZTlOwUtXOca8IMbKtm9ZGGHQ1hMCPo3CA6DaWpR1Z9iZD8apeYF7z3sThETYVwkcs
+         q8Q9fahLr88/sbTOiJVEGvdC+44qfEqvyBJ3xkN8XYdcH+oZQUAKv7essiuUAsh3kVn0
+         5/pr+0oLwv6qCIl/I7vuiWxLt/xYe0RLjD/WhPuA16rURUfIt8iZEXo6jD9Y47tjlH08
+         Kxn14DHpq0UFcjNygBBnSp2EvCW68YS4hg3NrCwBOasMh43jNeYrEKfPlwxbZovSBC/Y
+         IW3w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112; t=1678972706;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+        d=1e100.net; s=20210112; t=1678978572;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=S7m0R1MDyRz8CHohxZ/Wbv23jzkTCvVRlNlrNu8mpJo=;
-        b=TqSTD7XUW9rq41tnPhm+axsdEFw1nx1+LMmsLjDul+QPn04Oe/YWc5ptPYuIaQz2RL
-         6qnFlHoNlrOTbe3E+CemohGy7+DxX1cHhLdPot/9MFOj/S6EvMKI8kSLm/efGeEPN0dK
-         /07yMb5xC8RqzND+w1kCoAuJcoVfFj3iP1k8r/Ee9wiZAv1M8xtT78BjCCL7CP+vxBO6
-         T+n4jXcB+65feWT9qarpik0RJDZBIdzQWQJnI1Oyhct9CCNnG54Y2xn4EybQL8HhR1/l
-         809zhSqxqmu3d2FrAK68GO4d3DIwzl9O8RZCKyW9KXYFja/1e6IfMonhpaXM8+v+v5er
-         rjlg==
-X-Gm-Message-State: AO0yUKW+YHZ+5ArIxfm6hMSDgAkTTqQQQ0LgDYauMH7OrGDGKyTvbhVC
-	I6uAD8vpA0aCc6z3yM1yE2aqPKAY4bA=
-X-Google-Smtp-Source: AK7set+6Ql5dJHiI9z+M7vjuTbAPVFQerWRVQKVGL+N2eXZ2F8uRfkO6PdkFzktOq0IQEfGGzEvS6Q==
-X-Received: by 2002:a05:600c:1548:b0:3ed:252e:869f with SMTP id f8-20020a05600c154800b003ed252e869fmr13179328wmg.13.1678972705625;
-        Thu, 16 Mar 2023 06:18:25 -0700 (PDT)
-Received: from Clement-Blade14.outsight.local (lputeaux-656-1-11-33.w82-127.abo.wanadoo.fr. [82.127.142.33])
-        by smtp.gmail.com with ESMTPSA id p15-20020a7bcdef000000b003dc4480df80sm4853877wmj.34.2023.03.16.06.18.25
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 16 Mar 2023 06:18:25 -0700 (PDT)
-From: =?UTF-8?q?Cl=C3=A9ment=20P=C3=A9ron?= <peron.clem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: =?UTF-8?q?Cl=C3=A9ment=20P=C3=A9ron?= <peron.clem@gmail.com>
-Subject: [meta-python][PATCH] python3-click-repl: add mising prompt-toolkit runtime dependency
-Date: Thu, 16 Mar 2023 14:18:23 +0100
-Message-Id: <20230316131823.132874-1-peron.clem@gmail.com>
-X-Mailer: git-send-email 2.34.1
+        bh=ckQ/gNgPHjVqlrZg1+Nhh73vnMpjrefY1DoTDlzpWx8=;
+        b=lMYpwEoHAwpeRcoCa3zfqtqc0+nL2hikpbE9Kw6MJt6P8fMzPvp5jpeYUJeCbgux8E
+         5rsyUyj/7zZ9HpDqTROrUfxYjRLsc9dUIsKfys142fkyLNad1VeIEJkRPg2Sj+qUNnXM
+         jwZlrDmDehCyjknXoaLb3Ls6sY/SG/F7GSXqRnq/yKPvKShsgBsN9yfe2OqxmbPVYRJQ
+         0fz43J4lCez+CaZMWnvihBPHhpkO8A+AjS+5XoLN0kuWeaqyI9LN5UvSYKfhUPtwY8k4
+         AEU3Oq5J1OCqkd54mlG2prBoAxlTB7OwZT09JCoFL2aGUuTCrYbEnWG6VrPFhQZm1rsA
+         SW7A==
+X-Gm-Message-State: AO0yUKUYoH6bIu+/dPtGuxT3zHWNR9vsKtn/goN7iRSJqElZjXwamJMN
+	UST5/Fn7JongFKWEZKv+a4PGFIF8hrRfSzYlP2g=
+X-Google-Smtp-Source: AK7set/bMrr3qbuERQ7qeTcy6j0kwOcMiyv4QaRlWDMTCpt0JfPyii5V2k6CDMn19Q+8C+6qvCOSr/wcErEjTpHReqA=
+X-Received: by 2002:adf:ee45:0:b0:2cf:e6e0:70a6 with SMTP id
+ w5-20020adfee45000000b002cfe6e070a6mr1389359wro.1.1678978572431; Thu, 16 Mar
+ 2023 07:56:12 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+References: <20230313114130.144008-1-f_l_k@t-online.de>
+In-Reply-To: <20230313114130.144008-1-f_l_k@t-online.de>
+From: Martin Jansa <martin.jansa@gmail.com>
+Date: Thu, 16 Mar 2023 15:55:54 +0100
+Message-ID: <CA+chaQdB=DO7NRErQXJqiO9oDvyGjh8HJTJoYh7enfsci1-Cfg@mail.gmail.com>
+Subject: Re: [oe] [meta-multimedia][PATCH 1/2] pipewire: update 0.3.66 -> 0.3.67
+To: Markus Volk <f_l_k@t-online.de>
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: multipart/alternative; boundary="0000000000006536e405f705a94b"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 16 Mar 2023 13:18:37 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101576
+ <openembedded-devel@lists.openembedded.org>; Thu, 16 Mar 2023 14:56:17 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101577
 
-Python3 click-repl package requires prompt-toolkit to be installed.
+--0000000000006536e405f705a94b
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Add the missing RDEPENDS to the recipe.
+On Mon, Mar 13, 2023 at 12:41=E2=80=AFPM Markus Volk <f_l_k@t-online.de> wr=
+ote:
 
-Signed-off-by: Clément Péron <peron.clem@gmail.com>
----
- meta-python/recipes-devtools/python/python3-click-repl_0.2.0.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+> This is a bugfix release that is API and ABI compatible with previous
+> 0.3.x releases.
+>
 
-diff --git a/meta-python/recipes-devtools/python/python3-click-repl_0.2.0.bb b/meta-python/recipes-devtools/python/python3-click-repl_0.2.0.bb
-index cf5ba988b..c8798c5e3 100644
---- a/meta-python/recipes-devtools/python/python3-click-repl_0.2.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-click-repl_0.2.0.bb
-@@ -7,4 +7,4 @@ SRC_URI[sha256sum] = "cd12f68d745bf6151210790540b4cb064c7b13e571bc64b6957d98d120
- 
- inherit pypi setuptools3
- 
--RDEPENDS:${PN} = "${PYTHON_PN}-click"
-+RDEPENDS:${PN} = "${PYTHON_PN}-click ${PYTHON_PN}-prompt-toolkit"
--- 
-2.34.1
 
+I didn't investigate further yet, but today's qemux86-64 build failed in
+pipewire with:
+
+| Dependency vulkan skipped: feature vulkan disabled
+| Run-time dependency libcamera found: NO (tried pkgconfig and cmake)
+| Looking for a fallback subproject for the dependency libcamera
+|
+| ../git/spa/meson.build:92:2: ERROR: Automatic wrap-based subproject
+downloading is disabled
+
+It's reproducible with 0.3.66 as well, 0.2 is fine.
+
+In 0.3.64 the error message is different:
+| ../git/spa/meson.build:81:2: ERROR: Dependency "libcamera" not found,
+tried pkgconfig
+
+I normally don't use pipewire, I was building it today just because I was
+looking into webrtc-audio-processing upgrade and this is one of few users
+of it.
+
+Will investigate further, but if it rings any bells to you right away, let
+me know.
+
+Regards,
+
+--0000000000006536e405f705a94b
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div dir=3D"ltr">On Mon, Mar 13, 2023 at 12:41=E2=80=AFPM =
+Markus Volk &lt;<a href=3D"mailto:f_l_k@t-online.de" target=3D"_blank">f_l_=
+k@t-online.de</a>&gt; wrote:<br></div><div class=3D"gmail_quote"><blockquot=
+e class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px s=
+olid rgb(204,204,204);padding-left:1ex">This is a bugfix release that is AP=
+I and ABI compatible with previous<br>
+0.3.x releases.<br></blockquote><div><br></div><div><br></div><div>I didn&#=
+39;t investigate further yet, but today&#39;s qemux86-64 build failed in pi=
+pewire with:</div><div><br></div><div>| Dependency vulkan skipped: feature =
+vulkan disabled</div>| Run-time dependency libcamera found: NO (tried pkgco=
+nfig and cmake)<br>| Looking for a fallback subproject for the dependency l=
+ibcamera<br>|<br>| ../git/spa/meson.build:92:2: ERROR: Automatic wrap-based=
+ subproject downloading is disabled</div><div class=3D"gmail_quote"><br></d=
+iv><div class=3D"gmail_quote">It&#39;s reproducible with=C2=A00.3.66 as wel=
+l, 0.2 is fine.</div><div class=3D"gmail_quote"><br></div><div class=3D"gma=
+il_quote">In=C2=A00.3.64 the error message is different:</div><div class=3D=
+"gmail_quote">| ../git/spa/meson.build:81:2: ERROR: Dependency &quot;libcam=
+era&quot; not found, tried pkgconfig<br></div><div class=3D"gmail_quote"><b=
+r></div><div class=3D"gmail_quote">I normally don&#39;t use pipewire, I was=
+ building it today just because I was looking into=C2=A0webrtc-audio-proces=
+sing upgrade and this is one of few users of it.</div><div class=3D"gmail_q=
+uote"><br></div><div class=3D"gmail_quote">Will investigate further, but if=
+ it rings any bells to you right away, let me know.</div><div class=3D"gmai=
+l_quote"><br></div><div class=3D"gmail_quote">Regards,</div><div class=3D"g=
+mail_quote"><br></div></div>
+
+--0000000000006536e405f705a94b--
 
