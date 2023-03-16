@@ -2,88 +2,120 @@ Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 211D6C6FD1F
-	for <webhook@archiver.kernel.org>; Thu, 16 Mar 2023 12:05:47 +0000 (UTC)
-Received: from mail-qt1-f171.google.com (mail-qt1-f171.google.com [209.85.160.171])
- by mx.groups.io with SMTP id smtpd.web11.10298.1678968346554300687
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 008BCC6FD19
+	for <webhook@archiver.kernel.org>; Thu, 16 Mar 2023 12:05:57 +0000 (UTC)
+Received: from mail-qt1-f175.google.com (mail-qt1-f175.google.com [209.85.160.175])
+ by mx.groups.io with SMTP id smtpd.web10.10389.1678968348166951753
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 16 Mar 2023 05:05:46 -0700
+ Thu, 16 Mar 2023 05:05:48 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=fwJA3XAh;
- spf=pass (domain: gmail.com, ip: 209.85.160.171, mailfrom: akuster808@gmail.com)
-Received: by mail-qt1-f171.google.com with SMTP id c19so1323979qtn.13
-        for <openembedded-devel@lists.openembedded.org>; Thu, 16 Mar 2023 05:05:46 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=S14K+HZo;
+ spf=pass (domain: gmail.com, ip: 209.85.160.175, mailfrom: akuster808@gmail.com)
+Received: by mail-qt1-f175.google.com with SMTP id y10so1368403qtj.2
+        for <openembedded-devel@lists.openembedded.org>; Thu, 16 Mar 2023 05:05:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112; t=1678968345;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=+tsopzg6qEMwkUtgoNlRRDYOJpgaJEI8O8T0S35mLGw=;
-        b=fwJA3XAhM5Yzq71VdKA+HBFzfyq4/xDRz4zRLQY9NGu3ux4AUkUpUSL651+9cB8luV
-         n2fFppiv7ypGtJFjd4tO8sE5UIzXQIhwAdU5XTICG9NqiBaS8YXV6KBy+BPOQFHX5A8u
-         0i5TdY/E+AFmcfryDc3+tGNE95aRr0YJytyaRBJkDSIc+PSiSXugFt+GFD2HPef0p0J0
-         Ruq9s+oOlHan28UM+swYgy6dC9Mc7siUupb9DcjyuqctuQLQkxURgcUSH9QIisUeMtef
-         CbFiT9v3WGEmtAgUPnz6wk1t/gJDNtBSJnXWzvF31hqFJpbEwxYdKxjiPNJ0IInryF2/
-         0ZJA==
+        d=gmail.com; s=20210112; t=1678968347;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=0+z2pMN0Y/Lwv2LkEz7QkLv4nKlcBT/h7UrVw0Nnrb8=;
+        b=S14K+HZo0pmnyGPHreZyyNbwVSQpJYww4+rxV0UQrCBaeKsb0RVWiCCoYXIZcbEq43
+         Absdk94q0uO6lphPJLgZn18n8xzk5OpCnvWC+kYAeM2AoIZinKcoQ179PT6bVcFpzVTM
+         KevPJLr0CsVZdpYVDxBq8vcvPC3Yj1HcXJq3YzOGrc0xlnyNuNOcIPVo1mXqjcxdCT8C
+         89jZEJ1iJaMPLIF3CtY7BGXIqkQjJQTpQK611151pCM59RqDOlDRftplU4mp82euoHTo
+         HfnxttQVjRjUV3O/hZmDVptLYGd/bi6W4VH3gtqR3kW1MqeHtUdEVXLu1BM5nkNc4G6v
+         N6RA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112; t=1678968345;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=+tsopzg6qEMwkUtgoNlRRDYOJpgaJEI8O8T0S35mLGw=;
-        b=7pph8SUPQzvUgGTY68/0VKgjyOUnQI5J9V0XU1jiAQXYj/56an5S7+FI/lD0agzw2j
-         ylM87EFDJ/1VT5NjkMgGmvyES6Jx24DmNaoye+bIbUel2Qr6dG151hqEeinB9BhIknou
-         oGPMpOK9dzgfXnimd6Asd979zOR1t92GfotOtE0EFb/kFiARXNTYP3jNZNGmIqHxkimk
-         E0s1r38B52Tt3Ocaab1pvg7Rsfvll94v+k4MuT4Jeap7s21KIpagWbnAG9z5iU6Clrw5
-         mSyIZv+QtPovvyqGr0twkjXLP85TXqV2ZjCqYjCNxL13mKNrT8UoivaIpxymIBDdFhqQ
-         0cOQ==
-X-Gm-Message-State: AO0yUKW5FxntKvbIkNJCx7bAH7i7k97pHQfbDWJd+z3BaPNboSLPNxMN
-	VlidlERaRiuSvVgEvkqW0cD9SqMGF7I=
-X-Google-Smtp-Source: AK7set/vJLy6Xw8nSD4aJbCKSAJt/dYczIqJo/tc9OK0Kp+Sdju/xt5+sJ2nLHss44FzvPRhPncEwQ==
-X-Received: by 2002:a05:622a:170c:b0:3a8:a84:7ffa with SMTP id h12-20020a05622a170c00b003a80a847ffamr5954722qtk.57.1678968345324;
+        d=1e100.net; s=20210112; t=1678968347;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=0+z2pMN0Y/Lwv2LkEz7QkLv4nKlcBT/h7UrVw0Nnrb8=;
+        b=H64/6NEBFB0USxCrI5/OktLudMtd0iKdtmHI4D71rIxoIbg2tsSoSvRL+Qg3ylr/aH
+         VUoCGIvCyrULjmQ5MiuK6Q9ymMNr31awzWkS6LzmQ7QjB+WV4W7kvKHw3+wMufR0LzEN
+         sfSMLyFUmlg5NtIuGnSkE3OuRdqRqJ4L3oPTMon3ydp3DDptmpqWpcxG69PUtSxwXVlo
+         fjsvSs51ofbJE9axLOz5ZCFPEHgPK+5XuWgA31cVQ1HbyQWTSMr0Mn+V1R0+ZkSB9j/j
+         KY5ApK2DC+scF0JnUlhw/zT/V/ZnAf+p1nD8jDou7Ne+ViSYRIcYy6idjaYI34+sGnM4
+         fhmA==
+X-Gm-Message-State: AO0yUKVVTXLXBbcm/4MQMIzcAPzdQQikVo+nJSzcXzmCWv4n68hsUmsO
+	FS0q4vV48ITloSDq03WWqOXTlSoGDxM=
+X-Google-Smtp-Source: AK7set+biMj6WbxFKQ0c/elFGm08cKF1nrLwnDnarL/pGHnmsow+zgKQYzUNEBphi8QhrolA8P4mvA==
+X-Received: by 2002:ac8:5bcb:0:b0:3bf:d161:79a1 with SMTP id b11-20020ac85bcb000000b003bfd16179a1mr5431397qtb.29.1678968345708;
         Thu, 16 Mar 2023 05:05:45 -0700 (PDT)
 Received: from keaua.attlocal.net ([2600:1700:9190:ba10:6d77:5b42:4248:f526])
-        by smtp.gmail.com with ESMTPSA id o6-20020a375a06000000b006fa16fe93bbsm5731677qkb.15.2023.03.16.05.05.44
+        by smtp.gmail.com with ESMTPSA id o6-20020a375a06000000b006fa16fe93bbsm5731677qkb.15.2023.03.16.05.05.45
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 16 Mar 2023 05:05:44 -0700 (PDT)
+        Thu, 16 Mar 2023 05:05:45 -0700 (PDT)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Yi Zhao <yi.zhao@windriver.com>,
+Cc: Wang Mingyu <wangmy@fujitsu.com>,
 	Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][langdale][kirkstone][PATCH 1/2] apache2: use /run instead of /var/run for systemd volatile config
-Date: Thu, 16 Mar 2023 08:05:43 -0400
-Message-Id: <20230316120544.271353-1-akuster808@gmail.com>
+Subject: [meta-oe][langdale][kirkstone][PATCH 2/2] apache2: upgrade 2.4.55 -> 2.4.56
+Date: Thu, 16 Mar 2023 08:05:44 -0400
+Message-Id: <20230316120544.271353-2-akuster808@gmail.com>
 X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20230316120544.271353-1-akuster808@gmail.com>
+References: <20230316120544.271353-1-akuster808@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 16 Mar 2023 12:05:47 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101572
+ <openembedded-devel@lists.openembedded.org>; Thu, 16 Mar 2023 12:05:56 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101573
 
-From: Yi Zhao <yi.zhao@windriver.com>
+From: Wang Mingyu <wangmy@fujitsu.com>
 
-Fixes:
-systemd-tmpfiles[181]: /etc/tmpfiles.d/apache2-volatile.conf:1:
-Line references path below legacy directory /var/run/, updating /var/run/apache2 -> /run/apache2;
-please update the tmpfiles.d/ drop-in file accordingly.
+Changelog:
+==========
+-  rotatelogs: Add -T flag to allow subsequent rotated logfiles to be
+   truncated without the initial logfile being truncated.
 
-Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+-  mod_ldap: LDAPConnectionPoolTTL should accept negative values in order to
+   allow connections of any age to be reused. Up to now, a negative value
+   was handled as an error when parsing the configuration file.  PR 66421.
+
+-  mod_proxy_ajp: Report an error if the AJP backend sends an invalid number
+   of headers.
+
+-  mod_md:
+   - Enabling ED25519 support and certificate transparency information when
+     building with libressl v3.5.0 and newer.
+   - MDChallengeDns01 can now be configured for individual domains.
+   - Fixed a bug that caused the challenge
+     teardown not being invoked as it should.
+
+-  mod_http2: client resets of HTTP/2 streams led to unwanted 500 errors
+   reported in access logs and error documents. The processing of the
+   reset was correct, only unneccesary reporting was caused.
+
+-  mod_proxy_uwsgi: Stricter backend HTTP response parsing/validation.
+
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit f018a6bb3b8400a19cd35b76809edcd545975465)
+(cherry picked from commit f8b54b5243c9effb66d5685463b87767e753b843)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../recipes-httpd/apache2/files/apache2-volatile.conf           | 2 +-
+ .../apache2/{apache2_2.4.55.bb => apache2_2.4.56.bb}            | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-webserver/recipes-httpd/apache2/{apache2_2.4.55.bb => apache2_2.4.56.bb} (99%)
 
-diff --git a/meta-webserver/recipes-httpd/apache2/files/apache2-volatile.conf b/meta-webserver/recipes-httpd/apache2/files/apache2-volatile.conf
-index ff2c587046..0852a8859a 100644
---- a/meta-webserver/recipes-httpd/apache2/files/apache2-volatile.conf
-+++ b/meta-webserver/recipes-httpd/apache2/files/apache2-volatile.conf
-@@ -1,2 +1,2 @@
--d  /var/run/apache2 0755 root root -
-+d  /run/apache2 0755 root root -
- d  /var/log/apache2 0755 root root -
+diff --git a/meta-webserver/recipes-httpd/apache2/apache2_2.4.55.bb b/meta-webserver/recipes-httpd/apache2/apache2_2.4.56.bb
+similarity index 99%
+rename from meta-webserver/recipes-httpd/apache2/apache2_2.4.55.bb
+rename to meta-webserver/recipes-httpd/apache2/apache2_2.4.56.bb
+index 88cef0ef83..1ad222ace4 100644
+--- a/meta-webserver/recipes-httpd/apache2/apache2_2.4.55.bb
++++ b/meta-webserver/recipes-httpd/apache2/apache2_2.4.56.bb
+@@ -27,7 +27,7 @@ SRC_URI:append:class-target = " \
+            "
+ 
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=bddeddfac80b2c9a882241d008bb41c3"
+-SRC_URI[sha256sum] = "11d6ba19e36c0b93ca62e47e6ffc2d2f2884942694bce0f23f39c71bdc5f69ac"
++SRC_URI[sha256sum] = "d8d45f1398ba84edd05bb33ca7593ac2989b17cb9c7a0cafe5442d41afdb2d7c"
+ 
+ S = "${WORKDIR}/httpd-${PV}"
+ 
 -- 
 2.25.1
 
