@@ -2,63 +2,63 @@ Return-Path: <frederic.martinsons@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 178D5C6FD19
-	for <webhook@archiver.kernel.org>; Thu, 16 Mar 2023 12:24:37 +0000 (UTC)
-Received: from mail-wm1-f48.google.com (mail-wm1-f48.google.com [209.85.128.48])
- by mx.groups.io with SMTP id smtpd.web10.10701.1678969475945559728
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 39625C6FD1F
+	for <webhook@archiver.kernel.org>; Thu, 16 Mar 2023 12:25:57 +0000 (UTC)
+Received: from mail-wm1-f50.google.com (mail-wm1-f50.google.com [209.85.128.50])
+ by mx.groups.io with SMTP id smtpd.web11.10675.1678969555712784552
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 16 Mar 2023 05:24:36 -0700
+ Thu, 16 Mar 2023 05:25:56 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=E7kcEqgF;
- spf=pass (domain: gmail.com, ip: 209.85.128.48, mailfrom: frederic.martinsons@gmail.com)
-Received: by mail-wm1-f48.google.com with SMTP id r19-20020a05600c459300b003eb3e2a5e7bso1007785wmo.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 16 Mar 2023 05:24:35 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=df65nsOV;
+ spf=pass (domain: gmail.com, ip: 209.85.128.50, mailfrom: frederic.martinsons@gmail.com)
+Received: by mail-wm1-f50.google.com with SMTP id g18so1143637wmk.0
+        for <openembedded-devel@lists.openembedded.org>; Thu, 16 Mar 2023 05:25:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112; t=1678969474;
+        d=gmail.com; s=20210112; t=1678969554;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=o72mdKk1ssvR0X88BU/wGi0c2C99v2AG2t1BuhQPI0E=;
-        b=E7kcEqgFqVP2a8VnLzcVbppfT07/g02Ze20j1WtwGnvjyYLRiOl3xv/1X/b7p2cNWI
-         9G614fPKcFMFSoZ6HeDJsCBmjQdSYiZIFVvBTSY3pQzIaEH/6JNjBvI+i659/XXpF+mU
-         3Ae0qFIW/Xihhq5CGuXtOA5cutN3oo1BsDgx/5MhCCWCckqPQZuk2m99Or9if5nZyU2W
-         Ujl30d+SsTCFj41x+oW7P7PyzlEa8HNFEPa+2Ulg9x99Jd93f480QTf6UhdC4gP1Kuiq
-         UZdSti5lpaqgoGaz6LcSUpAmTaSUWiPETbyJngdE6K8t40scfMhWVPxxOpgkHRZoAkQA
-         PHJg==
+        bh=SRkvjRoLkwy1lB17OiEuUJGDyCZrUKP8z+uu9yNd9JQ=;
+        b=df65nsOVoXTxiwgn+UFt2yngrRRV9o1xgDry8XG8hLDXaGOXiPgzoJ9eVa0zUWLOut
+         ei88hkVdBRMh4Y+ZfVssP9HYzpA8qq966i2e//3EBi2aTxDA9q0c9W5pamx4iPOJEN88
+         bb+p5Z6fJXZCEcwaiZKFsW0r13PEwqU24vWDF2S7rjMU/rcdwj6c/D2ORCJQ1nrAELml
+         JQvuHFkTRId6aZZLZ46HJKB0n/8B0zBdUlwiGn9v6vAblWnVJ6sQ7/vQCoKFmCz0etQ2
+         m1MpOeb9H8rwXqNERY4ndxMo9g/iMLAZCm6cXMY9+NBa00scKbjyeCRDOa2ow3gdvh1g
+         VGMw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112; t=1678969474;
+        d=1e100.net; s=20210112; t=1678969554;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=o72mdKk1ssvR0X88BU/wGi0c2C99v2AG2t1BuhQPI0E=;
-        b=X6ptsMEsO9dOZRnooNZKVRo3CTZQwcvMZol735YH3RHxqgv+9Vq2/bhINdslNpYMkP
-         r3bWS2oRtUBmMELZoyUMX30XCR4lnISkD8ByV/xFKJgprRE5tmnjfaci6cYan40gu8iJ
-         yYmT3VELSmlInsaeDvs66Dee+qH9VS3Tau9M0kqDHxRARodfZkoLqlMEbaKJcOKuIkrn
-         z6mQet5ErvPE7pqRL+oZ4tzuf5szPV6yCpqJLlcNH0uprOA54n0osmaaYB2aJ9ZAmZXy
-         38e+Zda5YH0n++I95IqnJbiLWL783YYGH01cI1ksvLiPFdlrvM+CsG3e0Rt505U55F7A
-         AYgw==
-X-Gm-Message-State: AO0yUKWkfTNFK+4Rd3ktyBI8OnY3XAUsJKe0dlA3IvuKUHQl+npIC5z4
-	d9tw9mEcdUyhL8bv8LKGEQvSaP3Izzs=
-X-Google-Smtp-Source: AK7set8O8yteuPSrjlIYqC+bz5uI48zCLlYt6XJWBcVKo3O7g08uS4PmTe4/tPmIXlEYBm4T8oS1CQ==
-X-Received: by 2002:a05:600c:19ca:b0:3ed:290b:dc76 with SMTP id u10-20020a05600c19ca00b003ed290bdc76mr12008337wmq.1.1678969473695;
-        Thu, 16 Mar 2023 05:24:33 -0700 (PDT)
+        bh=SRkvjRoLkwy1lB17OiEuUJGDyCZrUKP8z+uu9yNd9JQ=;
+        b=5Xow82mDjPpnuLV6TJv8D7FFYZcJruW+cIeyS8Q5Zqsdna6xeygzHOkG8Ei0Jz89Xc
+         rY/J7mZHrq7pji+YlGvZVE3OrdrLzTOPY0bKEfLly/Bi0dw660b3Xc4jLolMgWDzOLMQ
+         knNeZL/TveHjpEp1ueGN+WOsBG7g4AK5ILsyUF0EunqnGOqcpzx5mL/qdFlDdePcHBVb
+         5CMsNphQYgubyrz/mk0Dnj7SBUVd9wS/zCwFRC4OXX5joGEGTAuM/B0kLe4wFpb6RcTx
+         bmlr2xjU5IAqDJbYFkJTtcBm9IGaSKRdAo+djqrGdrN0aVR/6BCE67U9dWK0+hBPgWO3
+         aFhA==
+X-Gm-Message-State: AO0yUKXZjteCu6mrJJbUgfpOBXPPtRQL7pSCuaAB24mlr+1dDamj4aE/
+	ZTQ4USzkbGyhi7I/W0QK6seCdBUikr0=
+X-Google-Smtp-Source: AK7set/rSbjxWmWfD3Bma/Gko3mC/a1KNUd6bgd57TxNC7MAi37qwaPk5YjDZqRmJdBk6tKpLTrTyQ==
+X-Received: by 2002:a05:600c:1552:b0:3ed:1449:cdca with SMTP id f18-20020a05600c155200b003ed1449cdcamr17493887wmg.2.1678969553556;
+        Thu, 16 Mar 2023 05:25:53 -0700 (PDT)
 Received: from work-pc.core.sigfox.net ([2a01:e0a:8d5:c6c0:65ad:993a:17fa:6608])
-        by smtp.gmail.com with ESMTPSA id t9-20020a7bc3c9000000b003eb3933ef10sm4739864wmj.46.2023.03.16.05.24.32
+        by smtp.gmail.com with ESMTPSA id s11-20020a05600c45cb00b003e206cc7237sm5289916wmo.24.2023.03.16.05.25.52
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 16 Mar 2023 05:24:33 -0700 (PDT)
+        Thu, 16 Mar 2023 05:25:53 -0700 (PDT)
 From: frederic.martinsons@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Frederic Martinsons <frederic.martinsons@gmail.com>
-Subject: [meta-oe][PATCH] uutils-coreutils: Add crates checksum and use cargo-update-recipes-crates
-Date: Thu, 16 Mar 2023 13:24:19 +0100
-Message-Id: <20230316122419.29717-1-frederic.martinsons@gmail.com>
+Subject: [meta-python][PATCH] python3-pyruvate: Add crates checksum and use cargo-update-recipes-crates
+Date: Thu, 16 Mar 2023 13:25:44 +0100
+Message-Id: <20230316122544.29943-1-frederic.martinsons@gmail.com>
 X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 16 Mar 2023 12:24:37 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101574
+ <openembedded-devel@lists.openembedded.org>; Thu, 16 Mar 2023 12:25:57 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101575
 
 From: Frederic Martinsons <frederic.martinsons@gmail.com>
 
@@ -66,629 +66,1183 @@ This is related to checksum verification introduction in bitbake
 crate fetcher:
 https://patchwork.yoctoproject.org/project/bitbake/patch/20230315131513.50635-1-frederic.martinsons@gmail.com/
 
+Moreover, the Cargo.lock file that is needed to update these
+checksum is not present in pypi repo but is inside the git repo.
+So install the Cargo.lock by ourself, the file was downloaded
+at https://gitlab.com/tschorr/pyruvate/-/tree/1.1.2
+
 Signed-off-by: Frederic Martinsons <frederic.martinsons@gmail.com>
 ---
- .../recipes-core/uutils-coreutils/README.txt  |  19 --
- .../uutils-coreutils-crates.inc               | 269 ++++++++++++++++
- .../uutils-coreutils_0.0.17.bb                | 301 +-----------------
- 3 files changed, 275 insertions(+), 314 deletions(-)
- delete mode 100644 meta-oe/recipes-core/uutils-coreutils/README.txt
- create mode 100644 meta-oe/recipes-core/uutils-coreutils/uutils-coreutils-crates.inc
+ .../python/python3-pyruvate-crates.inc        | 184 ++++
+ .../python/python3-pyruvate/Cargo.lock        | 841 ++++++++++++++++++
+ .../python/python3-pyruvate_1.1.2.bb          | 105 +--
+ 3 files changed, 1036 insertions(+), 94 deletions(-)
+ create mode 100644 meta-python/recipes-devtools/python/python3-pyruvate-crates.inc
+ create mode 100644 meta-python/recipes-devtools/python/python3-pyruvate/Cargo.lock
 
-diff --git a/meta-oe/recipes-core/uutils-coreutils/README.txt b/meta-oe/recipes-core/uutils-coreutils/README.txt
-deleted file mode 100644
-index cfd7b051b..000000000
---- a/meta-oe/recipes-core/uutils-coreutils/README.txt
-+++ /dev/null
-@@ -1,19 +0,0 @@
--How to generate/update the file uutils-coreutils_XXX.bb:
--
--cargo with version > 1.60 is needed so cargo from Ubuntu's apt will not work
--(because of https://github.com/rust-lang/cargo/issues/10623):
--This package is needed (tested on Ubuntu 22.04):
--sudo apt-get -y install librust-cargo+openssl-dev
--
--Then install cargo-bitbake with:
--$ cargo install --locked cargo-bitbake
--
--You can now update coreutils:
--$ git clone https://github.com/uutils/coreutils.git
--$ cd coreutils
--$ git tag
--$ git checkout 0.0.XXX
--$ cargo-bitbake bitbake
--Wrote: coreutils_0.0.15.bb
--
--Verify manual changes in the bb file (rename coreutils.inc to uutils-coreutils.inc)
-diff --git a/meta-oe/recipes-core/uutils-coreutils/uutils-coreutils-crates.inc b/meta-oe/recipes-core/uutils-coreutils/uutils-coreutils-crates.inc
+diff --git a/meta-python/recipes-devtools/python/python3-pyruvate-crates.inc b/meta-python/recipes-devtools/python/python3-pyruvate-crates.inc
 new file mode 100644
-index 000000000..4bdb7b2ec
+index 000000000..52fb9d457
 --- /dev/null
-+++ b/meta-oe/recipes-core/uutils-coreutils/uutils-coreutils-crates.inc
-@@ -0,0 +1,269 @@
++++ b/meta-python/recipes-devtools/python/python3-pyruvate-crates.inc
+@@ -0,0 +1,184 @@
++# Autogenerated with 'bitbake -c update_crates python3-pyruvate'
++
++# from Cargo.lock
 +SRC_URI += " \
-+    crate://crates.io/Inflector/0.11.4 \
-+    crate://crates.io/adler/1.0.2 \
-+    crate://crates.io/ahash/0.7.6 \
-+    crate://crates.io/aho-corasick/0.7.19 \
-+    crate://crates.io/aliasable/0.1.3 \
-+    crate://crates.io/android_system_properties/0.1.5 \
-+    crate://crates.io/arrayref/0.3.6 \
-+    crate://crates.io/arrayvec/0.7.2 \
++    crate://crates.io/aho-corasick/0.7.18 \
 +    crate://crates.io/atty/0.2.14 \
-+    crate://crates.io/autocfg/1.1.0 \
-+    crate://crates.io/bigdecimal/0.3.0 \
-+    crate://crates.io/binary-heap-plus/0.5.0 \
-+    crate://crates.io/bindgen/0.62.0 \
++    crate://crates.io/autocfg/1.0.1 \
 +    crate://crates.io/bitflags/1.3.2 \
-+    crate://crates.io/blake2b_simd/1.0.0 \
-+    crate://crates.io/blake3/1.3.2 \
-+    crate://crates.io/block-buffer/0.10.3 \
-+    crate://crates.io/bstr/1.0.1 \
-+    crate://crates.io/bumpalo/3.11.1 \
-+    crate://crates.io/bytecount/0.6.3 \
-+    crate://crates.io/byteorder/1.4.3 \
-+    crate://crates.io/cc/1.0.77 \
-+    crate://crates.io/cexpr/0.6.0 \
++    crate://crates.io/block-buffer/0.9.0 \
++    crate://crates.io/cc/1.0.72 \
 +    crate://crates.io/cfg-if/1.0.0 \
-+    crate://crates.io/chrono/0.4.23 \
-+    crate://crates.io/clang-sys/1.4.0 \
-+    crate://crates.io/clap/4.0.26 \
-+    crate://crates.io/clap_complete/4.0.6 \
-+    crate://crates.io/clap_lex/0.3.0 \
-+    crate://crates.io/codespan-reporting/0.11.1 \
-+    crate://crates.io/compare/0.1.0 \
-+    crate://crates.io/console/0.15.2 \
-+    crate://crates.io/constant_time_eq/0.1.5 \
-+    crate://crates.io/constant_time_eq/0.2.4 \
-+    crate://crates.io/conv/0.3.3 \
-+    crate://crates.io/core-foundation-sys/0.8.3 \
-+    crate://crates.io/coz/0.1.3 \
-+    crate://crates.io/cpp/0.5.7 \
-+    crate://crates.io/cpp_build/0.5.7 \
-+    crate://crates.io/cpp_common/0.5.7 \
-+    crate://crates.io/cpp_macros/0.5.7 \
-+    crate://crates.io/cpufeatures/0.2.5 \
-+    crate://crates.io/crc32fast/1.3.2 \
-+    crate://crates.io/crossbeam-channel/0.5.6 \
-+    crate://crates.io/crossbeam-deque/0.8.2 \
-+    crate://crates.io/crossbeam-epoch/0.9.12 \
-+    crate://crates.io/crossbeam-utils/0.8.13 \
-+    crate://crates.io/crossterm/0.25.0 \
-+    crate://crates.io/crossterm_winapi/0.9.0 \
-+    crate://crates.io/crunchy/0.2.2 \
-+    crate://crates.io/crypto-common/0.1.6 \
-+    crate://crates.io/ctor/0.1.26 \
-+    crate://crates.io/ctrlc/3.2.3 \
-+    crate://crates.io/custom_derive/0.1.7 \
-+    crate://crates.io/cxx-build/1.0.82 \
-+    crate://crates.io/cxx/1.0.82 \
-+    crate://crates.io/cxxbridge-flags/1.0.82 \
-+    crate://crates.io/cxxbridge-macro/1.0.82 \
-+    crate://crates.io/data-encoding-macro-internal/0.1.10 \
-+    crate://crates.io/data-encoding-macro/0.1.12 \
-+    crate://crates.io/data-encoding/2.3.2 \
-+    crate://crates.io/diff/0.1.13 \
-+    crate://crates.io/digest/0.10.6 \
-+    crate://crates.io/dlv-list/0.3.0 \
-+    crate://crates.io/dns-lookup/1.0.8 \
-+    crate://crates.io/dunce/1.0.3 \
-+    crate://crates.io/either/1.8.0 \
-+    crate://crates.io/encode_unicode/0.3.6 \
-+    crate://crates.io/env_logger/0.8.4 \
-+    crate://crates.io/errno-dragonfly/0.1.2 \
++    crate://crates.io/chrono/0.4.19 \
++    crate://crates.io/cpufeatures/0.2.1 \
++    crate://crates.io/cpython/0.7.0 \
++    crate://crates.io/crossbeam/0.8.1 \
++    crate://crates.io/crossbeam-channel/0.5.2 \
++    crate://crates.io/crossbeam-deque/0.8.1 \
++    crate://crates.io/crossbeam-epoch/0.9.6 \
++    crate://crates.io/crossbeam-queue/0.3.3 \
++    crate://crates.io/crossbeam-utils/0.8.6 \
++    crate://crates.io/crypto-mac/0.11.1 \
++    crate://crates.io/ctrlc/3.2.1 \
++    crate://crates.io/digest/0.9.0 \
++    crate://crates.io/encoding/0.2.33 \
++    crate://crates.io/encoding-index-japanese/1.20141219.5 \
++    crate://crates.io/encoding-index-korean/1.20141219.5 \
++    crate://crates.io/encoding-index-simpchinese/1.20141219.5 \
++    crate://crates.io/encoding-index-singlebyte/1.20141219.5 \
++    crate://crates.io/encoding-index-tradchinese/1.20141219.5 \
++    crate://crates.io/encoding_index_tests/0.1.4 \
++    crate://crates.io/env_logger/0.9.0 \
 +    crate://crates.io/errno/0.2.8 \
-+    crate://crates.io/exacl/0.9.0 \
-+    crate://crates.io/fastrand/1.8.0 \
-+    crate://crates.io/file_diff/1.0.0 \
-+    crate://crates.io/filetime/0.2.18 \
-+    crate://crates.io/flate2/1.0.24 \
-+    crate://crates.io/fnv/1.0.7 \
-+    crate://crates.io/fs_extra/1.2.0 \
-+    crate://crates.io/fsevent-sys/4.1.0 \
-+    crate://crates.io/fts-sys/0.2.3 \
-+    crate://crates.io/futures-channel/0.3.25 \
-+    crate://crates.io/futures-core/0.3.25 \
-+    crate://crates.io/futures-executor/0.3.25 \
-+    crate://crates.io/futures-io/0.3.25 \
-+    crate://crates.io/futures-macro/0.3.25 \
-+    crate://crates.io/futures-sink/0.3.25 \
-+    crate://crates.io/futures-task/0.3.25 \
-+    crate://crates.io/futures-timer/3.0.2 \
-+    crate://crates.io/futures-util/0.3.25 \
-+    crate://crates.io/futures/0.3.25 \
-+    crate://crates.io/gcd/2.1.0 \
-+    crate://crates.io/generic-array/0.14.6 \
-+    crate://crates.io/getrandom/0.2.8 \
-+    crate://crates.io/glob/0.3.0 \
-+    crate://crates.io/half/2.1.0 \
-+    crate://crates.io/hashbrown/0.12.3 \
-+    crate://crates.io/heck/0.4.0 \
++    crate://crates.io/errno-dragonfly/0.1.2 \
++    crate://crates.io/fastrand/1.6.0 \
++    crate://crates.io/generic-array/0.14.5 \
++    crate://crates.io/getrandom/0.2.3 \
 +    crate://crates.io/hermit-abi/0.1.19 \
-+    crate://crates.io/hex-literal/0.3.4 \
-+    crate://crates.io/hex/0.4.3 \
-+    crate://crates.io/hostname/0.3.1 \
-+    crate://crates.io/iana-time-zone-haiku/0.1.1 \
-+    crate://crates.io/iana-time-zone/0.1.53 \
-+    crate://crates.io/indicatif/0.17.2 \
-+    crate://crates.io/inotify-sys/0.1.5 \
-+    crate://crates.io/inotify/0.9.6 \
++    crate://crates.io/hmac/0.11.0 \
++    crate://crates.io/httparse/1.5.1 \
++    crate://crates.io/humantime/2.1.0 \
 +    crate://crates.io/instant/0.1.12 \
-+    crate://crates.io/io-lifetimes/0.7.5 \
-+    crate://crates.io/itertools/0.10.5 \
-+    crate://crates.io/itoa/1.0.4 \
-+    crate://crates.io/js-sys/0.3.60 \
-+    crate://crates.io/keccak/0.1.3 \
-+    crate://crates.io/kqueue-sys/1.0.3 \
-+    crate://crates.io/kqueue/1.0.7 \
 +    crate://crates.io/lazy_static/1.4.0 \
-+    crate://crates.io/lazycell/1.3.0 \
-+    crate://crates.io/libc/0.2.137 \
-+    crate://crates.io/libloading/0.7.4 \
-+    crate://crates.io/link-cplusplus/1.0.7 \
-+    crate://crates.io/linux-raw-sys/0.0.46 \
-+    crate://crates.io/lock_api/0.4.9 \
-+    crate://crates.io/log/0.4.17 \
-+    crate://crates.io/lscolors/0.13.0 \
-+    crate://crates.io/match_cfg/0.1.0 \
-+    crate://crates.io/md-5/0.10.5 \
-+    crate://crates.io/memchr/2.5.0 \
-+    crate://crates.io/memmap2/0.5.8 \
++    crate://crates.io/libc/0.2.112 \
++    crate://crates.io/libsystemd/0.4.1 \
++    crate://crates.io/log/0.4.14 \
++    crate://crates.io/memchr/2.4.1 \
 +    crate://crates.io/memoffset/0.6.5 \
-+    crate://crates.io/memoffset/0.7.1 \
-+    crate://crates.io/minimal-lexical/0.2.1 \
-+    crate://crates.io/miniz_oxide/0.5.4 \
-+    crate://crates.io/mio/0.8.5 \
-+    crate://crates.io/nix/0.25.0 \
-+    crate://crates.io/nom/7.1.1 \
-+    crate://crates.io/notify/5.0.0 \
-+    crate://crates.io/nu-ansi-term/0.46.0 \
-+    crate://crates.io/num-bigint/0.4.3 \
-+    crate://crates.io/num-integer/0.1.45 \
-+    crate://crates.io/num-traits/0.2.15 \
-+    crate://crates.io/num_cpus/1.14.0 \
-+    crate://crates.io/num_threads/0.1.6 \
-+    crate://crates.io/number_prefix/0.4.0 \
-+    crate://crates.io/once_cell/1.16.0 \
-+    crate://crates.io/onig/6.4.0 \
-+    crate://crates.io/onig_sys/69.8.1 \
-+    crate://crates.io/ordered-multimap/0.4.3 \
-+    crate://crates.io/os_display/0.1.3 \
-+    crate://crates.io/os_str_bytes/6.4.1 \
-+    crate://crates.io/ouroboros/0.15.5 \
-+    crate://crates.io/ouroboros_macro/0.15.5 \
-+    crate://crates.io/output_vt100/0.1.3 \
-+    crate://crates.io/overload/0.1.1 \
-+    crate://crates.io/parking_lot/0.12.1 \
-+    crate://crates.io/parking_lot_core/0.9.4 \
-+    crate://crates.io/paste/1.0.9 \
-+    crate://crates.io/peeking_take_while/0.1.2 \
-+    crate://crates.io/phf/0.11.1 \
-+    crate://crates.io/phf_codegen/0.11.1 \
-+    crate://crates.io/phf_generator/0.11.1 \
-+    crate://crates.io/phf_shared/0.11.1 \
-+    crate://crates.io/pin-project-lite/0.2.9 \
-+    crate://crates.io/pin-utils/0.1.0 \
-+    crate://crates.io/pkg-config/0.3.26 \
-+    crate://crates.io/platform-info/1.0.2 \
-+    crate://crates.io/portable-atomic/0.3.15 \
-+    crate://crates.io/ppv-lite86/0.2.17 \
-+    crate://crates.io/pretty_assertions/1.3.0 \
-+    crate://crates.io/proc-macro-error-attr/1.0.4 \
-+    crate://crates.io/proc-macro-error/1.0.4 \
-+    crate://crates.io/proc-macro2/1.0.47 \
-+    crate://crates.io/procfs/0.14.1 \
-+    crate://crates.io/quick-error/2.0.1 \
-+    crate://crates.io/quickcheck/1.0.3 \
-+    crate://crates.io/quote/1.0.21 \
-+    crate://crates.io/rand/0.8.5 \
++    crate://crates.io/mio/0.8.0 \
++    crate://crates.io/miow/0.3.7 \
++    crate://crates.io/nix/0.23.1 \
++    crate://crates.io/ntapi/0.3.6 \
++    crate://crates.io/num-integer/0.1.44 \
++    crate://crates.io/num-traits/0.2.14 \
++    crate://crates.io/num_cpus/1.13.1 \
++    crate://crates.io/once_cell/1.9.0 \
++    crate://crates.io/opaque-debug/0.3.0 \
++    crate://crates.io/paste/1.0.6 \
++    crate://crates.io/ppv-lite86/0.2.16 \
++    crate://crates.io/proc-macro2/1.0.36 \
++    crate://crates.io/python3-sys/0.7.0 \
++    crate://crates.io/quote/1.0.14 \
++    crate://crates.io/rand/0.8.4 \
 +    crate://crates.io/rand_chacha/0.3.1 \
-+    crate://crates.io/rand_core/0.6.4 \
-+    crate://crates.io/rand_pcg/0.3.1 \
-+    crate://crates.io/rayon-core/1.10.1 \
-+    crate://crates.io/rayon/1.6.0 \
-+    crate://crates.io/redox_syscall/0.2.16 \
-+    crate://crates.io/reference-counted-singleton/0.1.2 \
-+    crate://crates.io/regex-automata/0.1.10 \
-+    crate://crates.io/regex-syntax/0.6.28 \
-+    crate://crates.io/regex/1.7.0 \
++    crate://crates.io/rand_core/0.6.3 \
++    crate://crates.io/rand_hc/0.3.1 \
++    crate://crates.io/redox_syscall/0.2.10 \
++    crate://crates.io/regex/1.5.4 \
++    crate://crates.io/regex-syntax/0.6.25 \
 +    crate://crates.io/remove_dir_all/0.5.3 \
-+    crate://crates.io/remove_dir_all/0.7.0 \
-+    crate://crates.io/retain_mut/0.1.7 \
-+    crate://crates.io/rlimit/0.8.3 \
-+    crate://crates.io/rstest/0.16.0 \
-+    crate://crates.io/rstest_macros/0.16.0 \
-+    crate://crates.io/rust-ini/0.18.0 \
-+    crate://crates.io/rustc-hash/1.1.0 \
-+    crate://crates.io/rustc_version/0.4.0 \
-+    crate://crates.io/rustix/0.35.13 \
-+    crate://crates.io/rustversion/1.0.9 \
-+    crate://crates.io/same-file/1.0.6 \
 +    crate://crates.io/scopeguard/1.1.0 \
-+    crate://crates.io/scratch/1.0.2 \
-+    crate://crates.io/selinux-sys/0.6.1 \
-+    crate://crates.io/selinux/0.3.1 \
-+    crate://crates.io/semver/1.0.14 \
-+    crate://crates.io/serde/1.0.147 \
-+    crate://crates.io/sha1/0.10.5 \
-+    crate://crates.io/sha2/0.10.6 \
-+    crate://crates.io/sha3/0.10.6 \
-+    crate://crates.io/shlex/1.1.0 \
-+    crate://crates.io/signal-hook-mio/0.2.3 \
-+    crate://crates.io/signal-hook-registry/1.4.0 \
-+    crate://crates.io/signal-hook/0.3.14 \
-+    crate://crates.io/siphasher/0.3.10 \
-+    crate://crates.io/slab/0.4.7 \
-+    crate://crates.io/smallvec/1.10.0 \
-+    crate://crates.io/smawk/0.3.1 \
-+    crate://crates.io/socket2/0.4.7 \
-+    crate://crates.io/strsim/0.10.0 \
-+    crate://crates.io/strum/0.24.1 \
-+    crate://crates.io/strum_macros/0.24.3 \
++    crate://crates.io/serde/1.0.133 \
++    crate://crates.io/serde_derive/1.0.133 \
++    crate://crates.io/sha2/0.9.9 \
++    crate://crates.io/simplelog/0.11.1 \
++    crate://crates.io/spmc/0.3.0 \
 +    crate://crates.io/subtle/2.4.1 \
-+    crate://crates.io/syn/1.0.103 \
++    crate://crates.io/syn/1.0.85 \
 +    crate://crates.io/tempfile/3.3.0 \
-+    crate://crates.io/term_grid/0.1.7 \
-+    crate://crates.io/termcolor/1.1.3 \
-+    crate://crates.io/terminal_size/0.1.17 \
-+    crate://crates.io/terminal_size/0.2.2 \
-+    crate://crates.io/textwrap/0.16.0 \
-+    crate://crates.io/thiserror-impl/1.0.37 \
-+    crate://crates.io/thiserror/1.0.37 \
-+    crate://crates.io/time-core/0.1.0 \
-+    crate://crates.io/time-macros/0.2.6 \
-+    crate://crates.io/time/0.3.17 \
++    crate://crates.io/termcolor/1.1.2 \
++    crate://crates.io/thiserror/1.0.30 \
++    crate://crates.io/thiserror-impl/1.0.30 \
++    crate://crates.io/threadpool/1.8.1 \
++    crate://crates.io/time/0.1.44 \
 +    crate://crates.io/typenum/1.15.0 \
-+    crate://crates.io/unicode-ident/1.0.5 \
-+    crate://crates.io/unicode-linebreak/0.1.4 \
-+    crate://crates.io/unicode-segmentation/1.10.0 \
-+    crate://crates.io/unicode-width/0.1.10 \
-+    crate://crates.io/unicode-xid/0.2.4 \
-+    crate://crates.io/unindent/0.1.10 \
-+    crate://crates.io/users/0.11.0 \
-+    crate://crates.io/utf-8/0.7.6 \
-+    crate://crates.io/uuid/1.2.2 \
++    crate://crates.io/unicode-xid/0.2.2 \
++    crate://crates.io/urlencoding/2.1.0 \
++    crate://crates.io/uuid/0.8.2 \
 +    crate://crates.io/version_check/0.9.4 \
-+    crate://crates.io/walkdir/2.3.2 \
-+    crate://crates.io/wasi/0.11.0+wasi-snapshot-preview1 \
-+    crate://crates.io/wasm-bindgen-backend/0.2.83 \
-+    crate://crates.io/wasm-bindgen-macro-support/0.2.83 \
-+    crate://crates.io/wasm-bindgen-macro/0.2.83 \
-+    crate://crates.io/wasm-bindgen-shared/0.2.83 \
-+    crate://crates.io/wasm-bindgen/0.2.83 \
-+    crate://crates.io/which/4.3.0 \
-+    crate://crates.io/wild/2.1.0 \
++    crate://crates.io/wasi/0.10.0+wasi-snapshot-preview1 \
++    crate://crates.io/winapi/0.3.9 \
 +    crate://crates.io/winapi-i686-pc-windows-gnu/0.4.0 \
 +    crate://crates.io/winapi-util/0.1.5 \
 +    crate://crates.io/winapi-x86_64-pc-windows-gnu/0.4.0 \
-+    crate://crates.io/winapi/0.3.9 \
-+    crate://crates.io/windows-sys/0.42.0 \
-+    crate://crates.io/windows_aarch64_gnullvm/0.42.0 \
-+    crate://crates.io/windows_aarch64_msvc/0.42.0 \
-+    crate://crates.io/windows_i686_gnu/0.42.0 \
-+    crate://crates.io/windows_i686_msvc/0.42.0 \
-+    crate://crates.io/windows_x86_64_gnu/0.42.0 \
-+    crate://crates.io/windows_x86_64_gnullvm/0.42.0 \
-+    crate://crates.io/windows_x86_64_msvc/0.42.0 \
-+    crate://crates.io/xattr/0.2.3 \
-+    crate://crates.io/yansi/0.5.1 \
-+    crate://crates.io/z85/3.0.5 \
-+    crate://crates.io/zip/0.6.3 \
 +"
-diff --git a/meta-oe/recipes-core/uutils-coreutils/uutils-coreutils_0.0.17.bb b/meta-oe/recipes-core/uutils-coreutils/uutils-coreutils_0.0.17.bb
-index 61d7c8c06..4d3c2f7fe 100644
---- a/meta-oe/recipes-core/uutils-coreutils/uutils-coreutils_0.0.17.bb
-+++ b/meta-oe/recipes-core/uutils-coreutils/uutils-coreutils_0.0.17.bb
-@@ -1,303 +1,14 @@
--# Auto-Generated by cargo-bitbake 0.3.16
--#
--inherit cargo
-+SUMMARY = "coreutils ~ GNU coreutils (updated); implemented as universal (cross-platform) utils, written in Rust"
-+HOMEPAGE = "https://github.com/uutils/coreutils"
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=41f7469eaacac62c67d5664fff2c062d"
++
++SRC_URI[aho-corasick.sha256sum] = "1e37cfd5e7657ada45f742d6e99ca5788580b5c529dc78faf11ece6dc702656f"
++SRC_URI[atty.sha256sum] = "d9b39be18770d11421cdb1b9947a45dd3f37e93092cbf377614828a319d5fee8"
++SRC_URI[autocfg.sha256sum] = "cdb031dd78e28731d87d56cc8ffef4a8f36ca26c38fe2de700543e627f8a464a"
++SRC_URI[bitflags.sha256sum] = "bef38d45163c2f1dde094a7dfd33ccf595c92905c8f8f4fdc18d06fb1037718a"
++SRC_URI[block-buffer.sha256sum] = "4152116fd6e9dadb291ae18fc1ec3575ed6d84c29642d97890f4b4a3417297e4"
++SRC_URI[cc.sha256sum] = "22a9137b95ea06864e018375b72adfb7db6e6f68cfc8df5a04d00288050485ee"
++SRC_URI[cfg-if.sha256sum] = "baf1de4339761588bc0619e3cbc0120ee582ebb74b53b4efbf79117bd2da40fd"
++SRC_URI[chrono.sha256sum] = "670ad68c9088c2a963aaa298cb369688cf3f9465ce5e2d4ca10e6e0098a1ce73"
++SRC_URI[cpufeatures.sha256sum] = "95059428f66df56b63431fdb4e1947ed2190586af5c5a8a8b71122bdf5a7f469"
++SRC_URI[cpython.sha256sum] = "b7d46ba8ace7f3a1d204ac5060a706d0a68de6b42eafb6a586cc08bebcffe664"
++SRC_URI[crossbeam.sha256sum] = "4ae5588f6b3c3cb05239e90bd110f257254aecd01e4635400391aeae07497845"
++SRC_URI[crossbeam-channel.sha256sum] = "e54ea8bc3fb1ee042f5aace6e3c6e025d3874866da222930f70ce62aceba0bfa"
++SRC_URI[crossbeam-deque.sha256sum] = "6455c0ca19f0d2fbf751b908d5c55c1f5cbc65e03c4225427254b46890bdde1e"
++SRC_URI[crossbeam-epoch.sha256sum] = "97242a70df9b89a65d0b6df3c4bf5b9ce03c5b7309019777fbde37e7537f8762"
++SRC_URI[crossbeam-queue.sha256sum] = "b979d76c9fcb84dffc80a73f7290da0f83e4c95773494674cb44b76d13a7a110"
++SRC_URI[crossbeam-utils.sha256sum] = "cfcae03edb34f947e64acdb1c33ec169824e20657e9ecb61cef6c8c74dcb8120"
++SRC_URI[crypto-mac.sha256sum] = "b1d1a86f49236c215f271d40892d5fc950490551400b02ef360692c29815c714"
++SRC_URI[ctrlc.sha256sum] = "a19c6cedffdc8c03a3346d723eb20bd85a13362bb96dc2ac000842c6381ec7bf"
++SRC_URI[digest.sha256sum] = "d3dd60d1080a57a05ab032377049e0591415d2b31afd7028356dbf3cc6dcb066"
++SRC_URI[encoding.sha256sum] = "6b0d943856b990d12d3b55b359144ff341533e516d94098b1d3fc1ac666d36ec"
++SRC_URI[encoding-index-japanese.sha256sum] = "04e8b2ff42e9a05335dbf8b5c6f7567e5591d0d916ccef4e0b1710d32a0d0c91"
++SRC_URI[encoding-index-korean.sha256sum] = "4dc33fb8e6bcba213fe2f14275f0963fd16f0a02c878e3095ecfdf5bee529d81"
++SRC_URI[encoding-index-simpchinese.sha256sum] = "d87a7194909b9118fc707194baa434a4e3b0fb6a5a757c73c3adb07aa25031f7"
++SRC_URI[encoding-index-singlebyte.sha256sum] = "3351d5acffb224af9ca265f435b859c7c01537c0849754d3db3fdf2bfe2ae84a"
++SRC_URI[encoding-index-tradchinese.sha256sum] = "fd0e20d5688ce3cab59eb3ef3a2083a5c77bf496cb798dc6fcdb75f323890c18"
++SRC_URI[encoding_index_tests.sha256sum] = "a246d82be1c9d791c5dfde9a2bd045fc3cbba3fa2b11ad558f27d01712f00569"
++SRC_URI[env_logger.sha256sum] = "0b2cf0344971ee6c64c31be0d530793fba457d322dfec2810c453d0ef228f9c3"
++SRC_URI[errno.sha256sum] = "f639046355ee4f37944e44f60642c6f3a7efa3cf6b78c78a0d989a8ce6c396a1"
++SRC_URI[errno-dragonfly.sha256sum] = "aa68f1b12764fab894d2755d2518754e71b4fd80ecfb822714a1206c2aab39bf"
++SRC_URI[fastrand.sha256sum] = "779d043b6a0b90cc4c0ed7ee380a6504394cee7efd7db050e3774eee387324b2"
++SRC_URI[generic-array.sha256sum] = "fd48d33ec7f05fbfa152300fdad764757cbded343c1aa1cff2fbaf4134851803"
++SRC_URI[getrandom.sha256sum] = "7fcd999463524c52659517fe2cea98493cfe485d10565e7b0fb07dbba7ad2753"
++SRC_URI[hermit-abi.sha256sum] = "62b467343b94ba476dcb2500d242dadbb39557df889310ac77c5d99100aaac33"
++SRC_URI[hmac.sha256sum] = "2a2a2320eb7ec0ebe8da8f744d7812d9fc4cb4d09344ac01898dbcb6a20ae69b"
++SRC_URI[httparse.sha256sum] = "acd94fdbe1d4ff688b67b04eee2e17bd50995534a61539e45adfefb45e5e5503"
++SRC_URI[humantime.sha256sum] = "9a3a5bfb195931eeb336b2a7b4d761daec841b97f947d34394601737a7bba5e4"
++SRC_URI[instant.sha256sum] = "7a5bbe824c507c5da5956355e86a746d82e0e1464f65d862cc5e71da70e94b2c"
++SRC_URI[lazy_static.sha256sum] = "e2abad23fbc42b3700f2f279844dc832adb2b2eb069b2df918f455c4e18cc646"
++SRC_URI[libc.sha256sum] = "1b03d17f364a3a042d5e5d46b053bbbf82c92c9430c592dd4c064dc6ee997125"
++SRC_URI[libsystemd.sha256sum] = "6f4f0b5b062ba67aa075e331de778082c09e66b5ef32970ea5a1e9c37c9555d1"
++SRC_URI[log.sha256sum] = "51b9bbe6c47d51fc3e1a9b945965946b4c44142ab8792c50835a980d362c2710"
++SRC_URI[memchr.sha256sum] = "308cc39be01b73d0d18f82a0e7b2a3df85245f84af96fdddc5d202d27e47b86a"
++SRC_URI[memoffset.sha256sum] = "5aa361d4faea93603064a027415f07bd8e1d5c88c9fbf68bf56a285428fd79ce"
++SRC_URI[mio.sha256sum] = "ba272f85fa0b41fc91872be579b3bbe0f56b792aa361a380eb669469f68dafb2"
++SRC_URI[miow.sha256sum] = "b9f1c5b025cda876f66ef43a113f91ebc9f4ccef34843000e0adf6ebbab84e21"
++SRC_URI[nix.sha256sum] = "9f866317acbd3a240710c63f065ffb1e4fd466259045ccb504130b7f668f35c6"
++SRC_URI[ntapi.sha256sum] = "3f6bb902e437b6d86e03cce10a7e2af662292c5dfef23b65899ea3ac9354ad44"
++SRC_URI[num-integer.sha256sum] = "d2cc698a63b549a70bc047073d2949cce27cd1c7b0a4a862d08a8031bc2801db"
++SRC_URI[num-traits.sha256sum] = "9a64b1ec5cda2586e284722486d802acf1f7dbdc623e2bfc57e65ca1cd099290"
++SRC_URI[num_cpus.sha256sum] = "19e64526ebdee182341572e50e9ad03965aa510cd94427a4549448f285e957a1"
++SRC_URI[once_cell.sha256sum] = "da32515d9f6e6e489d7bc9d84c71b060db7247dc035bbe44eac88cf87486d8d5"
++SRC_URI[opaque-debug.sha256sum] = "624a8340c38c1b80fd549087862da4ba43e08858af025b236e509b6649fc13d5"
++SRC_URI[paste.sha256sum] = "0744126afe1a6dd7f394cb50a716dbe086cb06e255e53d8d0185d82828358fb5"
++SRC_URI[ppv-lite86.sha256sum] = "eb9f9e6e233e5c4a35559a617bf40a4ec447db2e84c20b55a6f83167b7e57872"
++SRC_URI[proc-macro2.sha256sum] = "c7342d5883fbccae1cc37a2353b09c87c9b0f3afd73f5fb9bba687a1f733b029"
++SRC_URI[python3-sys.sha256sum] = "b18b32e64c103d5045f44644d7ddddd65336f7a0521f6fde673240a9ecceb77e"
++SRC_URI[quote.sha256sum] = "47aa80447ce4daf1717500037052af176af5d38cc3e571d9ec1c7353fc10c87d"
++SRC_URI[rand.sha256sum] = "2e7573632e6454cf6b99d7aac4ccca54be06da05aca2ef7423d22d27d4d4bcd8"
++SRC_URI[rand_chacha.sha256sum] = "e6c10a63a0fa32252be49d21e7709d4d4baf8d231c2dbce1eaa8141b9b127d88"
++SRC_URI[rand_core.sha256sum] = "d34f1408f55294453790c48b2f1ebbb1c5b4b7563eb1f418bcfcfdbb06ebb4e7"
++SRC_URI[rand_hc.sha256sum] = "d51e9f596de227fda2ea6c84607f5558e196eeaf43c986b724ba4fb8fdf497e7"
++SRC_URI[redox_syscall.sha256sum] = "8383f39639269cde97d255a32bdb68c047337295414940c68bdd30c2e13203ff"
++SRC_URI[regex.sha256sum] = "d07a8629359eb56f1e2fb1652bb04212c072a87ba68546a04065d525673ac461"
++SRC_URI[regex-syntax.sha256sum] = "f497285884f3fcff424ffc933e56d7cbca511def0c9831a7f9b5f6153e3cc89b"
++SRC_URI[remove_dir_all.sha256sum] = "3acd125665422973a33ac9d3dd2df85edad0f4ae9b00dafb1a05e43a9f5ef8e7"
++SRC_URI[scopeguard.sha256sum] = "d29ab0c6d3fc0ee92fe66e2d99f700eab17a8d57d1c1d3b748380fb20baa78cd"
++SRC_URI[serde.sha256sum] = "97565067517b60e2d1ea8b268e59ce036de907ac523ad83a0475da04e818989a"
++SRC_URI[serde_derive.sha256sum] = "ed201699328568d8d08208fdd080e3ff594e6c422e438b6705905da01005d537"
++SRC_URI[sha2.sha256sum] = "4d58a1e1bf39749807d89cf2d98ac2dfa0ff1cb3faa38fbb64dd88ac8013d800"
++SRC_URI[simplelog.sha256sum] = "ecabc0118918611790b8615670ab79296272cbe09496b6884b02b1e929c20886"
++SRC_URI[spmc.sha256sum] = "02a8428da277a8e3a15271d79943e80ccc2ef254e78813a166a08d65e4c3ece5"
++SRC_URI[subtle.sha256sum] = "6bdef32e8150c2a081110b42772ffe7d7c9032b606bc226c8260fd97e0976601"
++SRC_URI[syn.sha256sum] = "a684ac3dcd8913827e18cd09a68384ee66c1de24157e3c556c9ab16d85695fb7"
++SRC_URI[tempfile.sha256sum] = "5cdb1ef4eaeeaddc8fbd371e5017057064af0911902ef36b39801f67cc6d79e4"
++SRC_URI[termcolor.sha256sum] = "2dfed899f0eb03f32ee8c6a0aabdb8a7949659e3466561fc0adf54e26d88c5f4"
++SRC_URI[thiserror.sha256sum] = "854babe52e4df1653706b98fcfc05843010039b406875930a70e4d9644e5c417"
++SRC_URI[thiserror-impl.sha256sum] = "aa32fd3f627f367fe16f893e2597ae3c05020f8bba2666a4e6ea73d377e5714b"
++SRC_URI[threadpool.sha256sum] = "d050e60b33d41c19108b32cea32164033a9013fe3b46cbd4457559bfbf77afaa"
++SRC_URI[time.sha256sum] = "6db9e6914ab8b1ae1c260a4ae7a49b6c5611b40328a735b21862567685e73255"
++SRC_URI[typenum.sha256sum] = "dcf81ac59edc17cc8697ff311e8f5ef2d99fcbd9817b34cec66f90b6c3dfd987"
++SRC_URI[unicode-xid.sha256sum] = "8ccb82d61f80a663efe1f787a51b16b5a51e3314d6ac365b08639f52387b33f3"
++SRC_URI[urlencoding.sha256sum] = "68b90931029ab9b034b300b797048cf23723400aa757e8a2bfb9d748102f9821"
++SRC_URI[uuid.sha256sum] = "bc5cf98d8186244414c848017f0e2676b3fcb46807f6668a97dfe67359a3c4b7"
++SRC_URI[version_check.sha256sum] = "49874b5167b65d7193b8aba1567f5c7d93d001cafc34600cee003eda787e483f"
++SRC_URI[wasi.sha256sum] = "1a143597ca7c7793eff794def352d41792a93c481eb1042423ff7ff72ba2c31f"
++SRC_URI[winapi.sha256sum] = "5c839a674fcd7a98952e593242ea400abe93992746761e38641405d28b00f419"
++SRC_URI[winapi-i686-pc-windows-gnu.sha256sum] = "ac3b87c63620426dd9b991e5ce0329eff545bccbbb34f3be09ff6fb6ab51b7b6"
++SRC_URI[winapi-util.sha256sum] = "70ec6ce85bb158151cae5e5c87f95a8e97d2c0c4b001223f33a334e3ce5de178"
++SRC_URI[winapi-x86_64-pc-windows-gnu.sha256sum] = "712e227841d057c1ee1cd2fb22fa7e5a5461ae8e48fa2ca79ec42cfc1931183f"
+diff --git a/meta-python/recipes-devtools/python/python3-pyruvate/Cargo.lock b/meta-python/recipes-devtools/python/python3-pyruvate/Cargo.lock
+new file mode 100644
+index 000000000..82631c744
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-pyruvate/Cargo.lock
+@@ -0,0 +1,841 @@
++# This file is automatically @generated by Cargo.
++# It is not intended for manual editing.
++version = 3
++
++[[package]]
++name = "aho-corasick"
++version = "0.7.18"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "1e37cfd5e7657ada45f742d6e99ca5788580b5c529dc78faf11ece6dc702656f"
++dependencies = [
++ "memchr",
++]
++
++[[package]]
++name = "atty"
++version = "0.2.14"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "d9b39be18770d11421cdb1b9947a45dd3f37e93092cbf377614828a319d5fee8"
++dependencies = [
++ "hermit-abi",
++ "libc",
++ "winapi",
++]
++
++[[package]]
++name = "autocfg"
++version = "1.0.1"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "cdb031dd78e28731d87d56cc8ffef4a8f36ca26c38fe2de700543e627f8a464a"
++
++[[package]]
++name = "bitflags"
++version = "1.3.2"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "bef38d45163c2f1dde094a7dfd33ccf595c92905c8f8f4fdc18d06fb1037718a"
++
++[[package]]
++name = "block-buffer"
++version = "0.9.0"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "4152116fd6e9dadb291ae18fc1ec3575ed6d84c29642d97890f4b4a3417297e4"
++dependencies = [
++ "generic-array",
++]
++
++[[package]]
++name = "cc"
++version = "1.0.72"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "22a9137b95ea06864e018375b72adfb7db6e6f68cfc8df5a04d00288050485ee"
++
++[[package]]
++name = "cfg-if"
++version = "1.0.0"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "baf1de4339761588bc0619e3cbc0120ee582ebb74b53b4efbf79117bd2da40fd"
++
++[[package]]
++name = "chrono"
++version = "0.4.19"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "670ad68c9088c2a963aaa298cb369688cf3f9465ce5e2d4ca10e6e0098a1ce73"
++dependencies = [
++ "libc",
++ "num-integer",
++ "num-traits",
++ "time",
++ "winapi",
++]
++
++[[package]]
++name = "cpufeatures"
++version = "0.2.1"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "95059428f66df56b63431fdb4e1947ed2190586af5c5a8a8b71122bdf5a7f469"
++dependencies = [
++ "libc",
++]
++
++[[package]]
++name = "cpython"
++version = "0.7.0"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "b7d46ba8ace7f3a1d204ac5060a706d0a68de6b42eafb6a586cc08bebcffe664"
++dependencies = [
++ "libc",
++ "num-traits",
++ "paste",
++ "python3-sys",
++]
++
++[[package]]
++name = "crossbeam"
++version = "0.8.1"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "4ae5588f6b3c3cb05239e90bd110f257254aecd01e4635400391aeae07497845"
++dependencies = [
++ "cfg-if",
++ "crossbeam-channel",
++ "crossbeam-deque",
++ "crossbeam-epoch",
++ "crossbeam-queue",
++ "crossbeam-utils",
++]
++
++[[package]]
++name = "crossbeam-channel"
++version = "0.5.2"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "e54ea8bc3fb1ee042f5aace6e3c6e025d3874866da222930f70ce62aceba0bfa"
++dependencies = [
++ "cfg-if",
++ "crossbeam-utils",
++]
++
++[[package]]
++name = "crossbeam-deque"
++version = "0.8.1"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "6455c0ca19f0d2fbf751b908d5c55c1f5cbc65e03c4225427254b46890bdde1e"
++dependencies = [
++ "cfg-if",
++ "crossbeam-epoch",
++ "crossbeam-utils",
++]
++
++[[package]]
++name = "crossbeam-epoch"
++version = "0.9.6"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "97242a70df9b89a65d0b6df3c4bf5b9ce03c5b7309019777fbde37e7537f8762"
++dependencies = [
++ "cfg-if",
++ "crossbeam-utils",
++ "lazy_static",
++ "memoffset",
++ "scopeguard",
++]
++
++[[package]]
++name = "crossbeam-queue"
++version = "0.3.3"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "b979d76c9fcb84dffc80a73f7290da0f83e4c95773494674cb44b76d13a7a110"
++dependencies = [
++ "cfg-if",
++ "crossbeam-utils",
++]
++
++[[package]]
++name = "crossbeam-utils"
++version = "0.8.6"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "cfcae03edb34f947e64acdb1c33ec169824e20657e9ecb61cef6c8c74dcb8120"
++dependencies = [
++ "cfg-if",
++ "lazy_static",
++]
++
++[[package]]
++name = "crypto-mac"
++version = "0.11.1"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "b1d1a86f49236c215f271d40892d5fc950490551400b02ef360692c29815c714"
++dependencies = [
++ "generic-array",
++ "subtle",
++]
++
++[[package]]
++name = "ctrlc"
++version = "3.2.1"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "a19c6cedffdc8c03a3346d723eb20bd85a13362bb96dc2ac000842c6381ec7bf"
++dependencies = [
++ "nix",
++ "winapi",
++]
++
++[[package]]
++name = "digest"
++version = "0.9.0"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "d3dd60d1080a57a05ab032377049e0591415d2b31afd7028356dbf3cc6dcb066"
++dependencies = [
++ "generic-array",
++]
++
++[[package]]
++name = "encoding"
++version = "0.2.33"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "6b0d943856b990d12d3b55b359144ff341533e516d94098b1d3fc1ac666d36ec"
++dependencies = [
++ "encoding-index-japanese",
++ "encoding-index-korean",
++ "encoding-index-simpchinese",
++ "encoding-index-singlebyte",
++ "encoding-index-tradchinese",
++]
++
++[[package]]
++name = "encoding-index-japanese"
++version = "1.20141219.5"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "04e8b2ff42e9a05335dbf8b5c6f7567e5591d0d916ccef4e0b1710d32a0d0c91"
++dependencies = [
++ "encoding_index_tests",
++]
++
++[[package]]
++name = "encoding-index-korean"
++version = "1.20141219.5"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "4dc33fb8e6bcba213fe2f14275f0963fd16f0a02c878e3095ecfdf5bee529d81"
++dependencies = [
++ "encoding_index_tests",
++]
++
++[[package]]
++name = "encoding-index-simpchinese"
++version = "1.20141219.5"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "d87a7194909b9118fc707194baa434a4e3b0fb6a5a757c73c3adb07aa25031f7"
++dependencies = [
++ "encoding_index_tests",
++]
++
++[[package]]
++name = "encoding-index-singlebyte"
++version = "1.20141219.5"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "3351d5acffb224af9ca265f435b859c7c01537c0849754d3db3fdf2bfe2ae84a"
++dependencies = [
++ "encoding_index_tests",
++]
++
++[[package]]
++name = "encoding-index-tradchinese"
++version = "1.20141219.5"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "fd0e20d5688ce3cab59eb3ef3a2083a5c77bf496cb798dc6fcdb75f323890c18"
++dependencies = [
++ "encoding_index_tests",
++]
++
++[[package]]
++name = "encoding_index_tests"
++version = "0.1.4"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "a246d82be1c9d791c5dfde9a2bd045fc3cbba3fa2b11ad558f27d01712f00569"
++
++[[package]]
++name = "env_logger"
++version = "0.9.0"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "0b2cf0344971ee6c64c31be0d530793fba457d322dfec2810c453d0ef228f9c3"
++dependencies = [
++ "atty",
++ "humantime",
++ "log",
++ "regex",
++ "termcolor",
++]
++
++[[package]]
++name = "errno"
++version = "0.2.8"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "f639046355ee4f37944e44f60642c6f3a7efa3cf6b78c78a0d989a8ce6c396a1"
++dependencies = [
++ "errno-dragonfly",
++ "libc",
++ "winapi",
++]
++
++[[package]]
++name = "errno-dragonfly"
++version = "0.1.2"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "aa68f1b12764fab894d2755d2518754e71b4fd80ecfb822714a1206c2aab39bf"
++dependencies = [
++ "cc",
++ "libc",
++]
++
++[[package]]
++name = "fastrand"
++version = "1.6.0"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "779d043b6a0b90cc4c0ed7ee380a6504394cee7efd7db050e3774eee387324b2"
++dependencies = [
++ "instant",
++]
++
++[[package]]
++name = "generic-array"
++version = "0.14.5"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "fd48d33ec7f05fbfa152300fdad764757cbded343c1aa1cff2fbaf4134851803"
++dependencies = [
++ "typenum",
++ "version_check",
++]
++
++[[package]]
++name = "getrandom"
++version = "0.2.3"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "7fcd999463524c52659517fe2cea98493cfe485d10565e7b0fb07dbba7ad2753"
++dependencies = [
++ "cfg-if",
++ "libc",
++ "wasi",
++]
++
++[[package]]
++name = "hermit-abi"
++version = "0.1.19"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "62b467343b94ba476dcb2500d242dadbb39557df889310ac77c5d99100aaac33"
++dependencies = [
++ "libc",
++]
++
++[[package]]
++name = "hmac"
++version = "0.11.0"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "2a2a2320eb7ec0ebe8da8f744d7812d9fc4cb4d09344ac01898dbcb6a20ae69b"
++dependencies = [
++ "crypto-mac",
++ "digest",
++]
++
++[[package]]
++name = "httparse"
++version = "1.5.1"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "acd94fdbe1d4ff688b67b04eee2e17bd50995534a61539e45adfefb45e5e5503"
++
++[[package]]
++name = "humantime"
++version = "2.1.0"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "9a3a5bfb195931eeb336b2a7b4d761daec841b97f947d34394601737a7bba5e4"
++
++[[package]]
++name = "instant"
++version = "0.1.12"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "7a5bbe824c507c5da5956355e86a746d82e0e1464f65d862cc5e71da70e94b2c"
++dependencies = [
++ "cfg-if",
++]
++
++[[package]]
++name = "lazy_static"
++version = "1.4.0"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "e2abad23fbc42b3700f2f279844dc832adb2b2eb069b2df918f455c4e18cc646"
++
++[[package]]
++name = "libc"
++version = "0.2.112"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "1b03d17f364a3a042d5e5d46b053bbbf82c92c9430c592dd4c064dc6ee997125"
++
++[[package]]
++name = "libsystemd"
++version = "0.4.1"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "6f4f0b5b062ba67aa075e331de778082c09e66b5ef32970ea5a1e9c37c9555d1"
++dependencies = [
++ "hmac",
++ "libc",
++ "log",
++ "nix",
++ "once_cell",
++ "serde",
++ "sha2",
++ "thiserror",
++ "uuid",
++]
++
++[[package]]
++name = "log"
++version = "0.4.14"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "51b9bbe6c47d51fc3e1a9b945965946b4c44142ab8792c50835a980d362c2710"
++dependencies = [
++ "cfg-if",
++]
++
++[[package]]
++name = "memchr"
++version = "2.4.1"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "308cc39be01b73d0d18f82a0e7b2a3df85245f84af96fdddc5d202d27e47b86a"
++
++[[package]]
++name = "memoffset"
++version = "0.6.5"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "5aa361d4faea93603064a027415f07bd8e1d5c88c9fbf68bf56a285428fd79ce"
++dependencies = [
++ "autocfg",
++]
++
++[[package]]
++name = "mio"
++version = "0.8.0"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "ba272f85fa0b41fc91872be579b3bbe0f56b792aa361a380eb669469f68dafb2"
++dependencies = [
++ "libc",
++ "log",
++ "miow",
++ "ntapi",
++ "winapi",
++]
++
++[[package]]
++name = "miow"
++version = "0.3.7"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "b9f1c5b025cda876f66ef43a113f91ebc9f4ccef34843000e0adf6ebbab84e21"
++dependencies = [
++ "winapi",
++]
++
++[[package]]
++name = "nix"
++version = "0.23.1"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "9f866317acbd3a240710c63f065ffb1e4fd466259045ccb504130b7f668f35c6"
++dependencies = [
++ "bitflags",
++ "cc",
++ "cfg-if",
++ "libc",
++ "memoffset",
++]
++
++[[package]]
++name = "ntapi"
++version = "0.3.6"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "3f6bb902e437b6d86e03cce10a7e2af662292c5dfef23b65899ea3ac9354ad44"
++dependencies = [
++ "winapi",
++]
++
++[[package]]
++name = "num-integer"
++version = "0.1.44"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "d2cc698a63b549a70bc047073d2949cce27cd1c7b0a4a862d08a8031bc2801db"
++dependencies = [
++ "autocfg",
++ "num-traits",
++]
++
++[[package]]
++name = "num-traits"
++version = "0.2.14"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "9a64b1ec5cda2586e284722486d802acf1f7dbdc623e2bfc57e65ca1cd099290"
++dependencies = [
++ "autocfg",
++]
++
++[[package]]
++name = "num_cpus"
++version = "1.13.1"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "19e64526ebdee182341572e50e9ad03965aa510cd94427a4549448f285e957a1"
++dependencies = [
++ "hermit-abi",
++ "libc",
++]
++
++[[package]]
++name = "once_cell"
++version = "1.9.0"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "da32515d9f6e6e489d7bc9d84c71b060db7247dc035bbe44eac88cf87486d8d5"
++
++[[package]]
++name = "opaque-debug"
++version = "0.3.0"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "624a8340c38c1b80fd549087862da4ba43e08858af025b236e509b6649fc13d5"
++
++[[package]]
++name = "paste"
++version = "1.0.6"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "0744126afe1a6dd7f394cb50a716dbe086cb06e255e53d8d0185d82828358fb5"
++
++[[package]]
++name = "ppv-lite86"
++version = "0.2.16"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "eb9f9e6e233e5c4a35559a617bf40a4ec447db2e84c20b55a6f83167b7e57872"
++
++[[package]]
++name = "proc-macro2"
++version = "1.0.36"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "c7342d5883fbccae1cc37a2353b09c87c9b0f3afd73f5fb9bba687a1f733b029"
++dependencies = [
++ "unicode-xid",
++]
++
++[[package]]
++name = "pyruvate"
++version = "1.1.2"
++dependencies = [
++ "cfg-if",
++ "cpython",
++ "crossbeam",
++ "crossbeam-channel",
++ "ctrlc",
++ "encoding",
++ "env_logger",
++ "errno",
++ "httparse",
++ "libc",
++ "libsystemd",
++ "log",
++ "mio",
++ "nix",
++ "python3-sys",
++ "rand",
++ "simplelog",
++ "spmc",
++ "tempfile",
++ "threadpool",
++ "urlencoding",
++]
++
++[[package]]
++name = "python3-sys"
++version = "0.7.0"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "b18b32e64c103d5045f44644d7ddddd65336f7a0521f6fde673240a9ecceb77e"
++dependencies = [
++ "libc",
++ "regex",
++]
++
++[[package]]
++name = "quote"
++version = "1.0.14"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "47aa80447ce4daf1717500037052af176af5d38cc3e571d9ec1c7353fc10c87d"
++dependencies = [
++ "proc-macro2",
++]
++
++[[package]]
++name = "rand"
++version = "0.8.4"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "2e7573632e6454cf6b99d7aac4ccca54be06da05aca2ef7423d22d27d4d4bcd8"
++dependencies = [
++ "libc",
++ "rand_chacha",
++ "rand_core",
++ "rand_hc",
++]
++
++[[package]]
++name = "rand_chacha"
++version = "0.3.1"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "e6c10a63a0fa32252be49d21e7709d4d4baf8d231c2dbce1eaa8141b9b127d88"
++dependencies = [
++ "ppv-lite86",
++ "rand_core",
++]
++
++[[package]]
++name = "rand_core"
++version = "0.6.3"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "d34f1408f55294453790c48b2f1ebbb1c5b4b7563eb1f418bcfcfdbb06ebb4e7"
++dependencies = [
++ "getrandom",
++]
++
++[[package]]
++name = "rand_hc"
++version = "0.3.1"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "d51e9f596de227fda2ea6c84607f5558e196eeaf43c986b724ba4fb8fdf497e7"
++dependencies = [
++ "rand_core",
++]
++
++[[package]]
++name = "redox_syscall"
++version = "0.2.10"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "8383f39639269cde97d255a32bdb68c047337295414940c68bdd30c2e13203ff"
++dependencies = [
++ "bitflags",
++]
++
++[[package]]
++name = "regex"
++version = "1.5.4"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "d07a8629359eb56f1e2fb1652bb04212c072a87ba68546a04065d525673ac461"
++dependencies = [
++ "aho-corasick",
++ "memchr",
++ "regex-syntax",
++]
++
++[[package]]
++name = "regex-syntax"
++version = "0.6.25"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "f497285884f3fcff424ffc933e56d7cbca511def0c9831a7f9b5f6153e3cc89b"
++
++[[package]]
++name = "remove_dir_all"
++version = "0.5.3"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "3acd125665422973a33ac9d3dd2df85edad0f4ae9b00dafb1a05e43a9f5ef8e7"
++dependencies = [
++ "winapi",
++]
++
++[[package]]
++name = "scopeguard"
++version = "1.1.0"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "d29ab0c6d3fc0ee92fe66e2d99f700eab17a8d57d1c1d3b748380fb20baa78cd"
++
++[[package]]
++name = "serde"
++version = "1.0.133"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "97565067517b60e2d1ea8b268e59ce036de907ac523ad83a0475da04e818989a"
++dependencies = [
++ "serde_derive",
++]
++
++[[package]]
++name = "serde_derive"
++version = "1.0.133"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "ed201699328568d8d08208fdd080e3ff594e6c422e438b6705905da01005d537"
++dependencies = [
++ "proc-macro2",
++ "quote",
++ "syn",
++]
++
++[[package]]
++name = "sha2"
++version = "0.9.9"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "4d58a1e1bf39749807d89cf2d98ac2dfa0ff1cb3faa38fbb64dd88ac8013d800"
++dependencies = [
++ "block-buffer",
++ "cfg-if",
++ "cpufeatures",
++ "digest",
++ "opaque-debug",
++]
++
++[[package]]
++name = "simplelog"
++version = "0.11.1"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "ecabc0118918611790b8615670ab79296272cbe09496b6884b02b1e929c20886"
++dependencies = [
++ "chrono",
++ "log",
++ "termcolor",
++]
++
++[[package]]
++name = "spmc"
++version = "0.3.0"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "02a8428da277a8e3a15271d79943e80ccc2ef254e78813a166a08d65e4c3ece5"
++
++[[package]]
++name = "subtle"
++version = "2.4.1"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "6bdef32e8150c2a081110b42772ffe7d7c9032b606bc226c8260fd97e0976601"
++
++[[package]]
++name = "syn"
++version = "1.0.85"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "a684ac3dcd8913827e18cd09a68384ee66c1de24157e3c556c9ab16d85695fb7"
++dependencies = [
++ "proc-macro2",
++ "quote",
++ "unicode-xid",
++]
++
++[[package]]
++name = "tempfile"
++version = "3.3.0"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "5cdb1ef4eaeeaddc8fbd371e5017057064af0911902ef36b39801f67cc6d79e4"
++dependencies = [
++ "cfg-if",
++ "fastrand",
++ "libc",
++ "redox_syscall",
++ "remove_dir_all",
++ "winapi",
++]
++
++[[package]]
++name = "termcolor"
++version = "1.1.2"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "2dfed899f0eb03f32ee8c6a0aabdb8a7949659e3466561fc0adf54e26d88c5f4"
++dependencies = [
++ "winapi-util",
++]
++
++[[package]]
++name = "thiserror"
++version = "1.0.30"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "854babe52e4df1653706b98fcfc05843010039b406875930a70e4d9644e5c417"
++dependencies = [
++ "thiserror-impl",
++]
++
++[[package]]
++name = "thiserror-impl"
++version = "1.0.30"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "aa32fd3f627f367fe16f893e2597ae3c05020f8bba2666a4e6ea73d377e5714b"
++dependencies = [
++ "proc-macro2",
++ "quote",
++ "syn",
++]
++
++[[package]]
++name = "threadpool"
++version = "1.8.1"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "d050e60b33d41c19108b32cea32164033a9013fe3b46cbd4457559bfbf77afaa"
++dependencies = [
++ "num_cpus",
++]
++
++[[package]]
++name = "time"
++version = "0.1.44"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "6db9e6914ab8b1ae1c260a4ae7a49b6c5611b40328a735b21862567685e73255"
++dependencies = [
++ "libc",
++ "wasi",
++ "winapi",
++]
++
++[[package]]
++name = "typenum"
++version = "1.15.0"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "dcf81ac59edc17cc8697ff311e8f5ef2d99fcbd9817b34cec66f90b6c3dfd987"
++
++[[package]]
++name = "unicode-xid"
++version = "0.2.2"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "8ccb82d61f80a663efe1f787a51b16b5a51e3314d6ac365b08639f52387b33f3"
++
++[[package]]
++name = "urlencoding"
++version = "2.1.0"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "68b90931029ab9b034b300b797048cf23723400aa757e8a2bfb9d748102f9821"
++
++[[package]]
++name = "uuid"
++version = "0.8.2"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "bc5cf98d8186244414c848017f0e2676b3fcb46807f6668a97dfe67359a3c4b7"
++dependencies = [
++ "serde",
++]
++
++[[package]]
++name = "version_check"
++version = "0.9.4"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "49874b5167b65d7193b8aba1567f5c7d93d001cafc34600cee003eda787e483f"
++
++[[package]]
++name = "wasi"
++version = "0.10.0+wasi-snapshot-preview1"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "1a143597ca7c7793eff794def352d41792a93c481eb1042423ff7ff72ba2c31f"
++
++[[package]]
++name = "winapi"
++version = "0.3.9"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "5c839a674fcd7a98952e593242ea400abe93992746761e38641405d28b00f419"
++dependencies = [
++ "winapi-i686-pc-windows-gnu",
++ "winapi-x86_64-pc-windows-gnu",
++]
++
++[[package]]
++name = "winapi-i686-pc-windows-gnu"
++version = "0.4.0"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "ac3b87c63620426dd9b991e5ce0329eff545bccbbb34f3be09ff6fb6ab51b7b6"
++
++[[package]]
++name = "winapi-util"
++version = "0.1.5"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "70ec6ce85bb158151cae5e5c87f95a8e97d2c0c4b001223f33a334e3ce5de178"
++dependencies = [
++ "winapi",
++]
++
++[[package]]
++name = "winapi-x86_64-pc-windows-gnu"
++version = "0.4.0"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "712e227841d057c1ee1cd2fb22fa7e5a5461ae8e48fa2ca79ec42cfc1931183f"
+diff --git a/meta-python/recipes-devtools/python/python3-pyruvate_1.1.2.bb b/meta-python/recipes-devtools/python/python3-pyruvate_1.1.2.bb
+index 1f1c186d3..296f4fdb8 100644
+--- a/meta-python/recipes-devtools/python/python3-pyruvate_1.1.2.bb
++++ b/meta-python/recipes-devtools/python/python3-pyruvate_1.1.2.bb
+@@ -12,7 +12,7 @@ SRC_URI[sha256sum] = "10befedd97e73fc18b902d02aa3b24e8978aa162242c1b664849c886c0
  
--# If this is git based prefer versioned ones if they exist
--# DEFAULT_PREFERENCE = "-1"
-+inherit cargo cargo-update-recipe-crates
+ S = "${WORKDIR}/pyruvate-${PV}"
  
--# how to get coreutils could be as easy as but default to a git checkout:
--# SRC_URI += "crate://crates.io/coreutils/0.0.17"
- SRC_URI += "git://github.com/uutils/coreutils.git;protocol=https;nobranch=1"
- SRCREV = "7e127005afbd6c3632d74ad8082340ccb8329d67"
- S = "${WORKDIR}/git"
--CARGO_SRC_DIR = ""
--
--
--# please note if you have entries that do not begin with crate://
--# you must change them to how that package can be fetched
+-inherit pypi python_setuptools3_rust
++inherit pypi python_setuptools3_rust cargo-update-recipe-crates
+ 
+ PIP_INSTALL_DIST_PATH = "${S}/dist"
+ 
+@@ -24,102 +24,19 @@ RUSTFLAGS:append:mipsel = " --cfg crossbeam_no_atomic_64"
+ RUSTFLAGS:append:powerpc = " --cfg crossbeam_no_atomic_64"
+ RUSTFLAGS:append:riscv32 = " --cfg crossbeam_no_atomic_64"
+ 
 -SRC_URI += " \
--    crate://crates.io/Inflector/0.11.4 \
--    crate://crates.io/adler/1.0.2 \
--    crate://crates.io/ahash/0.7.6 \
--    crate://crates.io/aho-corasick/0.7.19 \
--    crate://crates.io/aliasable/0.1.3 \
--    crate://crates.io/android_system_properties/0.1.5 \
--    crate://crates.io/arrayref/0.3.6 \
--    crate://crates.io/arrayvec/0.7.2 \
+-    crate://crates.io/aho-corasick/0.7.18 \
 -    crate://crates.io/atty/0.2.14 \
--    crate://crates.io/autocfg/1.1.0 \
--    crate://crates.io/bigdecimal/0.3.0 \
--    crate://crates.io/binary-heap-plus/0.5.0 \
--    crate://crates.io/bindgen/0.62.0 \
+-    crate://crates.io/autocfg/1.0.1 \
 -    crate://crates.io/bitflags/1.3.2 \
--    crate://crates.io/blake2b_simd/1.0.0 \
--    crate://crates.io/blake3/1.3.2 \
--    crate://crates.io/block-buffer/0.10.3 \
--    crate://crates.io/bstr/1.0.1 \
--    crate://crates.io/bumpalo/3.11.1 \
--    crate://crates.io/bytecount/0.6.3 \
--    crate://crates.io/byteorder/1.4.3 \
--    crate://crates.io/cc/1.0.77 \
--    crate://crates.io/cexpr/0.6.0 \
+-    crate://crates.io/block-buffer/0.9.0 \
+-    crate://crates.io/cc/1.0.72 \
 -    crate://crates.io/cfg-if/1.0.0 \
--    crate://crates.io/chrono/0.4.23 \
--    crate://crates.io/clang-sys/1.4.0 \
--    crate://crates.io/clap/4.0.26 \
--    crate://crates.io/clap_complete/4.0.6 \
--    crate://crates.io/clap_lex/0.3.0 \
--    crate://crates.io/codespan-reporting/0.11.1 \
--    crate://crates.io/compare/0.1.0 \
--    crate://crates.io/console/0.15.2 \
--    crate://crates.io/constant_time_eq/0.1.5 \
--    crate://crates.io/constant_time_eq/0.2.4 \
--    crate://crates.io/conv/0.3.3 \
--    crate://crates.io/core-foundation-sys/0.8.3 \
--    crate://crates.io/coz/0.1.3 \
--    crate://crates.io/cpp/0.5.7 \
--    crate://crates.io/cpp_build/0.5.7 \
--    crate://crates.io/cpp_common/0.5.7 \
--    crate://crates.io/cpp_macros/0.5.7 \
--    crate://crates.io/cpufeatures/0.2.5 \
--    crate://crates.io/crc32fast/1.3.2 \
--    crate://crates.io/crossbeam-channel/0.5.6 \
--    crate://crates.io/crossbeam-deque/0.8.2 \
--    crate://crates.io/crossbeam-epoch/0.9.12 \
--    crate://crates.io/crossbeam-utils/0.8.13 \
--    crate://crates.io/crossterm/0.25.0 \
--    crate://crates.io/crossterm_winapi/0.9.0 \
--    crate://crates.io/crunchy/0.2.2 \
--    crate://crates.io/crypto-common/0.1.6 \
--    crate://crates.io/ctor/0.1.26 \
--    crate://crates.io/ctrlc/3.2.3 \
--    crate://crates.io/custom_derive/0.1.7 \
--    crate://crates.io/cxx-build/1.0.82 \
--    crate://crates.io/cxx/1.0.82 \
--    crate://crates.io/cxxbridge-flags/1.0.82 \
--    crate://crates.io/cxxbridge-macro/1.0.82 \
--    crate://crates.io/data-encoding-macro-internal/0.1.10 \
--    crate://crates.io/data-encoding-macro/0.1.12 \
--    crate://crates.io/data-encoding/2.3.2 \
--    crate://crates.io/diff/0.1.13 \
--    crate://crates.io/digest/0.10.6 \
--    crate://crates.io/dlv-list/0.3.0 \
--    crate://crates.io/dns-lookup/1.0.8 \
--    crate://crates.io/dunce/1.0.3 \
--    crate://crates.io/either/1.8.0 \
--    crate://crates.io/encode_unicode/0.3.6 \
--    crate://crates.io/env_logger/0.8.4 \
+-    crate://crates.io/chrono/0.4.19 \
+-    crate://crates.io/cpufeatures/0.2.1 \
+-    crate://crates.io/cpython/0.7.0 \
+-    crate://crates.io/crossbeam-channel/0.5.2 \
+-    crate://crates.io/crossbeam-deque/0.8.1 \
+-    crate://crates.io/crossbeam-epoch/0.9.6 \
+-    crate://crates.io/crossbeam-queue/0.3.3 \
+-    crate://crates.io/crossbeam-utils/0.8.6 \
+-    crate://crates.io/crossbeam/0.8.1 \
+-    crate://crates.io/crypto-mac/0.11.1 \
+-    crate://crates.io/ctrlc/3.2.1 \
+-    crate://crates.io/digest/0.9.0 \
+-    crate://crates.io/encoding-index-japanese/1.20141219.5 \
+-    crate://crates.io/encoding-index-korean/1.20141219.5 \
+-    crate://crates.io/encoding-index-simpchinese/1.20141219.5 \
+-    crate://crates.io/encoding-index-singlebyte/1.20141219.5 \
+-    crate://crates.io/encoding-index-tradchinese/1.20141219.5 \
+-    crate://crates.io/encoding/0.2.33 \
+-    crate://crates.io/encoding_index_tests/0.1.4 \
+-    crate://crates.io/env_logger/0.9.0 \
 -    crate://crates.io/errno-dragonfly/0.1.2 \
 -    crate://crates.io/errno/0.2.8 \
--    crate://crates.io/exacl/0.9.0 \
--    crate://crates.io/fastrand/1.8.0 \
--    crate://crates.io/file_diff/1.0.0 \
--    crate://crates.io/filetime/0.2.18 \
--    crate://crates.io/flate2/1.0.24 \
--    crate://crates.io/fnv/1.0.7 \
--    crate://crates.io/fs_extra/1.2.0 \
--    crate://crates.io/fsevent-sys/4.1.0 \
--    crate://crates.io/fts-sys/0.2.3 \
--    crate://crates.io/futures-channel/0.3.25 \
--    crate://crates.io/futures-core/0.3.25 \
--    crate://crates.io/futures-executor/0.3.25 \
--    crate://crates.io/futures-io/0.3.25 \
--    crate://crates.io/futures-macro/0.3.25 \
--    crate://crates.io/futures-sink/0.3.25 \
--    crate://crates.io/futures-task/0.3.25 \
--    crate://crates.io/futures-timer/3.0.2 \
--    crate://crates.io/futures-util/0.3.25 \
--    crate://crates.io/futures/0.3.25 \
--    crate://crates.io/gcd/2.1.0 \
--    crate://crates.io/generic-array/0.14.6 \
--    crate://crates.io/getrandom/0.2.8 \
--    crate://crates.io/glob/0.3.0 \
--    crate://crates.io/half/2.1.0 \
--    crate://crates.io/hashbrown/0.12.3 \
--    crate://crates.io/heck/0.4.0 \
+-    crate://crates.io/fastrand/1.6.0 \
+-    crate://crates.io/generic-array/0.14.5 \
+-    crate://crates.io/getrandom/0.2.3 \
 -    crate://crates.io/hermit-abi/0.1.19 \
--    crate://crates.io/hex-literal/0.3.4 \
--    crate://crates.io/hex/0.4.3 \
--    crate://crates.io/hostname/0.3.1 \
--    crate://crates.io/iana-time-zone-haiku/0.1.1 \
--    crate://crates.io/iana-time-zone/0.1.53 \
--    crate://crates.io/indicatif/0.17.2 \
--    crate://crates.io/inotify-sys/0.1.5 \
--    crate://crates.io/inotify/0.9.6 \
+-    crate://crates.io/hmac/0.11.0 \
+-    crate://crates.io/httparse/1.5.1 \
+-    crate://crates.io/humantime/2.1.0 \
 -    crate://crates.io/instant/0.1.12 \
--    crate://crates.io/io-lifetimes/0.7.5 \
--    crate://crates.io/itertools/0.10.5 \
--    crate://crates.io/itoa/1.0.4 \
--    crate://crates.io/js-sys/0.3.60 \
--    crate://crates.io/keccak/0.1.3 \
--    crate://crates.io/kqueue-sys/1.0.3 \
--    crate://crates.io/kqueue/1.0.7 \
 -    crate://crates.io/lazy_static/1.4.0 \
--    crate://crates.io/lazycell/1.3.0 \
--    crate://crates.io/libc/0.2.137 \
--    crate://crates.io/libloading/0.7.4 \
--    crate://crates.io/link-cplusplus/1.0.7 \
--    crate://crates.io/linux-raw-sys/0.0.46 \
--    crate://crates.io/lock_api/0.4.9 \
--    crate://crates.io/log/0.4.17 \
--    crate://crates.io/lscolors/0.13.0 \
--    crate://crates.io/match_cfg/0.1.0 \
--    crate://crates.io/md-5/0.10.5 \
--    crate://crates.io/memchr/2.5.0 \
--    crate://crates.io/memmap2/0.5.8 \
+-    crate://crates.io/libc/0.2.120 \
+-    crate://crates.io/libsystemd/0.4.1 \
+-    crate://crates.io/log/0.4.14 \
+-    crate://crates.io/memchr/2.4.1 \
 -    crate://crates.io/memoffset/0.6.5 \
--    crate://crates.io/memoffset/0.7.1 \
--    crate://crates.io/minimal-lexical/0.2.1 \
--    crate://crates.io/miniz_oxide/0.5.4 \
--    crate://crates.io/mio/0.8.5 \
--    crate://crates.io/nix/0.25.0 \
--    crate://crates.io/nom/7.1.1 \
--    crate://crates.io/notify/5.0.0 \
--    crate://crates.io/nu-ansi-term/0.46.0 \
--    crate://crates.io/num-bigint/0.4.3 \
--    crate://crates.io/num-integer/0.1.45 \
--    crate://crates.io/num-traits/0.2.15 \
--    crate://crates.io/num_cpus/1.14.0 \
--    crate://crates.io/num_threads/0.1.6 \
--    crate://crates.io/number_prefix/0.4.0 \
--    crate://crates.io/once_cell/1.16.0 \
--    crate://crates.io/onig/6.4.0 \
--    crate://crates.io/onig_sys/69.8.1 \
--    crate://crates.io/ordered-multimap/0.4.3 \
--    crate://crates.io/os_display/0.1.3 \
--    crate://crates.io/os_str_bytes/6.4.1 \
--    crate://crates.io/ouroboros/0.15.5 \
--    crate://crates.io/ouroboros_macro/0.15.5 \
--    crate://crates.io/output_vt100/0.1.3 \
--    crate://crates.io/overload/0.1.1 \
--    crate://crates.io/parking_lot/0.12.1 \
--    crate://crates.io/parking_lot_core/0.9.4 \
--    crate://crates.io/paste/1.0.9 \
--    crate://crates.io/peeking_take_while/0.1.2 \
--    crate://crates.io/phf/0.11.1 \
--    crate://crates.io/phf_codegen/0.11.1 \
--    crate://crates.io/phf_generator/0.11.1 \
--    crate://crates.io/phf_shared/0.11.1 \
--    crate://crates.io/pin-project-lite/0.2.9 \
--    crate://crates.io/pin-utils/0.1.0 \
--    crate://crates.io/pkg-config/0.3.26 \
--    crate://crates.io/platform-info/1.0.2 \
--    crate://crates.io/portable-atomic/0.3.15 \
--    crate://crates.io/ppv-lite86/0.2.17 \
--    crate://crates.io/pretty_assertions/1.3.0 \
--    crate://crates.io/proc-macro-error-attr/1.0.4 \
--    crate://crates.io/proc-macro-error/1.0.4 \
--    crate://crates.io/proc-macro2/1.0.47 \
--    crate://crates.io/procfs/0.14.1 \
--    crate://crates.io/quick-error/2.0.1 \
--    crate://crates.io/quickcheck/1.0.3 \
--    crate://crates.io/quote/1.0.21 \
--    crate://crates.io/rand/0.8.5 \
+-    crate://crates.io/mio/0.8.0 \
+-    crate://crates.io/miow/0.3.7 \
+-    crate://crates.io/nix/0.23.1 \
+-    crate://crates.io/ntapi/0.3.6 \
+-    crate://crates.io/num-integer/0.1.44 \
+-    crate://crates.io/num-traits/0.2.14 \
+-    crate://crates.io/num_cpus/1.13.1 \
+-    crate://crates.io/once_cell/1.9.0 \
+-    crate://crates.io/opaque-debug/0.3.0 \
+-    crate://crates.io/paste/1.0.6 \
+-    crate://crates.io/ppv-lite86/0.2.16 \
+-    crate://crates.io/proc-macro2/1.0.36 \
+-    crate://crates.io/python3-sys/0.7.0 \
+-    crate://crates.io/quote/1.0.14 \
+-    crate://crates.io/rand/0.8.4 \
 -    crate://crates.io/rand_chacha/0.3.1 \
--    crate://crates.io/rand_core/0.6.4 \
--    crate://crates.io/rand_pcg/0.3.1 \
--    crate://crates.io/rayon-core/1.10.1 \
--    crate://crates.io/rayon/1.6.0 \
--    crate://crates.io/redox_syscall/0.2.16 \
--    crate://crates.io/reference-counted-singleton/0.1.2 \
--    crate://crates.io/regex-automata/0.1.10 \
--    crate://crates.io/regex-syntax/0.6.28 \
--    crate://crates.io/regex/1.7.0 \
+-    crate://crates.io/rand_core/0.6.3 \
+-    crate://crates.io/rand_hc/0.3.1 \
+-    crate://crates.io/redox_syscall/0.2.10 \
+-    crate://crates.io/regex-syntax/0.6.25 \
+-    crate://crates.io/regex/1.5.4 \
 -    crate://crates.io/remove_dir_all/0.5.3 \
--    crate://crates.io/remove_dir_all/0.7.0 \
--    crate://crates.io/retain_mut/0.1.7 \
--    crate://crates.io/rlimit/0.8.3 \
--    crate://crates.io/rstest/0.16.0 \
--    crate://crates.io/rstest_macros/0.16.0 \
--    crate://crates.io/rust-ini/0.18.0 \
--    crate://crates.io/rustc-hash/1.1.0 \
--    crate://crates.io/rustc_version/0.4.0 \
--    crate://crates.io/rustix/0.35.13 \
--    crate://crates.io/rustversion/1.0.9 \
--    crate://crates.io/same-file/1.0.6 \
 -    crate://crates.io/scopeguard/1.1.0 \
--    crate://crates.io/scratch/1.0.2 \
--    crate://crates.io/selinux-sys/0.6.1 \
--    crate://crates.io/selinux/0.3.1 \
--    crate://crates.io/semver/1.0.14 \
--    crate://crates.io/serde/1.0.147 \
--    crate://crates.io/sha1/0.10.5 \
--    crate://crates.io/sha2/0.10.6 \
--    crate://crates.io/sha3/0.10.6 \
--    crate://crates.io/shlex/1.1.0 \
--    crate://crates.io/signal-hook-mio/0.2.3 \
--    crate://crates.io/signal-hook-registry/1.4.0 \
--    crate://crates.io/signal-hook/0.3.14 \
--    crate://crates.io/siphasher/0.3.10 \
--    crate://crates.io/slab/0.4.7 \
--    crate://crates.io/smallvec/1.10.0 \
--    crate://crates.io/smawk/0.3.1 \
--    crate://crates.io/socket2/0.4.7 \
--    crate://crates.io/strsim/0.10.0 \
--    crate://crates.io/strum/0.24.1 \
--    crate://crates.io/strum_macros/0.24.3 \
+-    crate://crates.io/serde/1.0.133 \
+-    crate://crates.io/serde_derive/1.0.133 \
+-    crate://crates.io/sha2/0.9.9 \
+-    crate://crates.io/simplelog/0.11.1 \
+-    crate://crates.io/spmc/0.3.0 \
 -    crate://crates.io/subtle/2.4.1 \
--    crate://crates.io/syn/1.0.103 \
+-    crate://crates.io/syn/1.0.85 \
 -    crate://crates.io/tempfile/3.3.0 \
--    crate://crates.io/term_grid/0.1.7 \
--    crate://crates.io/termcolor/1.1.3 \
--    crate://crates.io/terminal_size/0.1.17 \
--    crate://crates.io/terminal_size/0.2.2 \
--    crate://crates.io/textwrap/0.16.0 \
--    crate://crates.io/thiserror-impl/1.0.37 \
--    crate://crates.io/thiserror/1.0.37 \
--    crate://crates.io/time-core/0.1.0 \
--    crate://crates.io/time-macros/0.2.6 \
--    crate://crates.io/time/0.3.17 \
+-    crate://crates.io/termcolor/1.1.2 \
+-    crate://crates.io/thiserror-impl/1.0.30 \
+-    crate://crates.io/thiserror/1.0.30 \
+-    crate://crates.io/threadpool/1.8.1 \
+-    crate://crates.io/time/0.1.44 \
 -    crate://crates.io/typenum/1.15.0 \
--    crate://crates.io/unicode-ident/1.0.5 \
--    crate://crates.io/unicode-linebreak/0.1.4 \
--    crate://crates.io/unicode-segmentation/1.10.0 \
--    crate://crates.io/unicode-width/0.1.10 \
--    crate://crates.io/unicode-xid/0.2.4 \
--    crate://crates.io/unindent/0.1.10 \
--    crate://crates.io/users/0.11.0 \
--    crate://crates.io/utf-8/0.7.6 \
--    crate://crates.io/uuid/1.2.2 \
+-    crate://crates.io/unicode-xid/0.2.2 \
+-    crate://crates.io/urlencoding/2.1.0 \
+-    crate://crates.io/uuid/0.8.2 \
 -    crate://crates.io/version_check/0.9.4 \
--    crate://crates.io/walkdir/2.3.2 \
--    crate://crates.io/wasi/0.11.0+wasi-snapshot-preview1 \
--    crate://crates.io/wasm-bindgen-backend/0.2.83 \
--    crate://crates.io/wasm-bindgen-macro-support/0.2.83 \
--    crate://crates.io/wasm-bindgen-macro/0.2.83 \
--    crate://crates.io/wasm-bindgen-shared/0.2.83 \
--    crate://crates.io/wasm-bindgen/0.2.83 \
--    crate://crates.io/which/4.3.0 \
--    crate://crates.io/wild/2.1.0 \
+-    crate://crates.io/wasi/0.10.0+wasi-snapshot-preview1 \
 -    crate://crates.io/winapi-i686-pc-windows-gnu/0.4.0 \
 -    crate://crates.io/winapi-util/0.1.5 \
 -    crate://crates.io/winapi-x86_64-pc-windows-gnu/0.4.0 \
 -    crate://crates.io/winapi/0.3.9 \
--    crate://crates.io/windows-sys/0.42.0 \
--    crate://crates.io/windows_aarch64_gnullvm/0.42.0 \
--    crate://crates.io/windows_aarch64_msvc/0.42.0 \
--    crate://crates.io/windows_i686_gnu/0.42.0 \
--    crate://crates.io/windows_i686_msvc/0.42.0 \
--    crate://crates.io/windows_x86_64_gnu/0.42.0 \
--    crate://crates.io/windows_x86_64_gnullvm/0.42.0 \
--    crate://crates.io/windows_x86_64_msvc/0.42.0 \
--    crate://crates.io/xattr/0.2.3 \
--    crate://crates.io/yansi/0.5.1 \
--    crate://crates.io/z85/3.0.5 \
--    crate://crates.io/zip/0.6.3 \
 -"
--
- 
 +require ${BPN}-crates.inc
++
+ SRC_URI += "\
+-            file://0001-linux.rs-Define-consts-for-rv32-architecture.patch;patchdir=../cargo_home/bitbake/nix-0.23.1/ \
+-            "
++    file://0001-linux.rs-Define-consts-for-rv32-architecture.patch;patchdir=../cargo_home/bitbake/nix-0.23.1/ \
++    file://Cargo.lock \
++"
+ SRC_URI:append:mips = " file://0001-check-for-mips-targets-for-stat.st_dev-definitions.patch;patchdir=../cargo_home/bitbake/libsystemd-0.4.1/"
  
--# FIXME: update generateme with the real MD5 of the license file
--LIC_FILES_CHKSUM = " \
--    file://LICENSE;md5=41f7469eaacac62c67d5664fff2c062d \
--"
--
--SUMMARY = "coreutils ~ GNU coreutils (updated); implemented as universal (cross-platform) utils, written in Rust"
--HOMEPAGE = "https://github.com/uutils/coreutils"
--LICENSE = "MIT"
--
--# includes this file if it exists but does not fail
--# this is useful for anything you may want to override from
--# what cargo-bitbake generates.
--include uutils-coreutils-${PV}.inc
- include uutils-coreutils.inc
++do_update_crates:prepend() {
++    # The Cargo.lock file is not present in the current version downloaded frop pypi
++    install -m 0644 ${WORKDIR}/Cargo.lock ${S}/Cargo.lock
++}
++
+ # The following configs & dependencies are from setuptools extras_require.
+ # These dependencies are optional, hence can be controlled via PACKAGECONFIG.
+ # The upstream names may not correspond exactly to bitbake package names.
 -- 
 2.34.1
 
