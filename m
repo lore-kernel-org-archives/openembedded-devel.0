@@ -1,260 +1,401 @@
-Return-Path: <zboszor@gmail.com>
+Return-Path: <frederic.martinsons@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 09731C6FD1D
-	for <webhook@archiver.kernel.org>; Fri, 17 Mar 2023 07:25:57 +0000 (UTC)
-Received: from mail-ed1-f46.google.com (mail-ed1-f46.google.com [209.85.208.46])
- by mx.groups.io with SMTP id smtpd.web10.13882.1679037954770921077
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 023C8C74A5B
+	for <webhook@archiver.kernel.org>; Fri, 17 Mar 2023 07:26:17 +0000 (UTC)
+Received: from mail-wm1-f48.google.com (mail-wm1-f48.google.com [209.85.128.48])
+ by mx.groups.io with SMTP id smtpd.web11.13823.1679037973258340931
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 17 Mar 2023 00:25:55 -0700
+ Fri, 17 Mar 2023 00:26:13 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=Z4CD4tBn;
- spf=pass (domain: gmail.com, ip: 209.85.208.46, mailfrom: zboszor@gmail.com)
-Received: by mail-ed1-f46.google.com with SMTP id o12so16791253edb.9
-        for <openembedded-devel@lists.openembedded.org>; Fri, 17 Mar 2023 00:25:54 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=Buhe0907;
+ spf=pass (domain: gmail.com, ip: 209.85.128.48, mailfrom: frederic.martinsons@gmail.com)
+Received: by mail-wm1-f48.google.com with SMTP id r19-20020a05600c459300b003eb3e2a5e7bso2672890wmo.0
+        for <openembedded-devel@lists.openembedded.org>; Fri, 17 Mar 2023 00:26:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112; t=1679037953;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=K6Pzt6SfbNdSiPD0i+OSBDQEefTdoyTC4FtImzSJtho=;
-        b=Z4CD4tBnRvEObpQ6SvuDD4qelKknvpZ0v0tGpIUY79YHHPD4hWuPxjO4J8Y9VETqou
-         r3XzAECeU3aZwt3hsvz/KEd7F4GZ6EiUt8G5xgWCSYxz77g5EujnshHyqP9tKzPrpiDV
-         lFe7h5UEgThn32JMrXAdRFMUW7BQpeZWNnO+f5q2/xUY8LyNBCDkaLUCmWiDsx+DyMsB
-         Fe9RuFtSgm5qOi1s9sACJG73PinMIGNTYNzHeZu1gPNLotKl7e6E/W+OCg3QI5njww+f
-         jFfyQZaOz0vzsklD+2edbRdDrq7ci6sOpmytpa3itGSSjDqUe7Ho9vKdhGVGJijLGncQ
-         ng3g==
+        d=gmail.com; s=20210112; t=1679037971;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=XTJneCUUpkMxmb/TtKwDmLa1HBz54xspF/0bbKqQMm0=;
+        b=Buhe0907Slg9n80krxi8Wex8uwmn8vQf4I9E8fciOSoCum995oQdlfvxjwpSfq7LcO
+         h0pIQaXayx7ZjL9NXZHZ3ItokSKSdX+jyHIK4Uw0lGq89bfdS4W5veFjsIZu0+6jeK91
+         orwzp3sSjN8Bshq2DuYk1+G0VnJJC9L/KqS9ddRUsOMJ28rBJpIfr1Hk4VYubQWxAKhG
+         zYXXLGyrrHEaH4w2b8uXrzWCwNtgEkj36y4antCfQm/HiLVktyL/aU+hrVFjAIXzGaDn
+         C9WRMblfLr1CYCEnd+f93lTi0XwcAMOba3XSO6oA7+vZes8OjxwJpQef5PD4W2eWD0/D
+         5RFw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112; t=1679037953;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=K6Pzt6SfbNdSiPD0i+OSBDQEefTdoyTC4FtImzSJtho=;
-        b=F/uzXMkUY1YsJkj0iysA8xVZWLl21D7+rTXmNtsgP7GJk7642j7vbXjVf/jmrbEqJj
-         /9K9iG6WnY4L8bPCP1blJrtmw2hK5WgwmlY3+E1eOLZARGfD0oKutULG1QftuwGn0vzC
-         UEhnmVU3fNYRgJ3KA2kxV4KEHQkxowt8BAmQscCawHK1rZxZ50YE7PibLgJtUyrJBJmu
-         MWoERY+AbFWcsbdOsp8rswLiV56W9uUaHuqCaAWSK6RXnPZaLc2o/+C/pFdI9B/uQ93a
-         dp0hDYlNHUAMZrNitVIDoczCrabVPVOr/lDXp5KAChsyZjmpYnBxN/nnPfZVpqHBzcMy
-         3Niw==
-X-Gm-Message-State: AO0yUKUkaYdLYsYxcD5K3MCAbWYeJ977l5t10KVmOKfGagOAKEY04XyU
-	KHDW16DlbaSzeVleJxxHq1cLFA+DVOYlxQ==
-X-Google-Smtp-Source: AK7set88bln0JU34Wq97GlGmL2PjYHzkPjR340vk/UAgRPDdJgymujm40C6xUR+82/oS3NNsDmoNFw==
-X-Received: by 2002:a17:906:da85:b0:931:1ccb:7360 with SMTP id xh5-20020a170906da8500b009311ccb7360mr4459569ejb.39.1679037952992;
-        Fri, 17 Mar 2023 00:25:52 -0700 (PDT)
-Received: from localhost.lan (dsl51B7D2F9.fixip.t-online.hu. [81.183.210.249])
-        by smtp.gmail.com with ESMTPSA id zc14-20020a170906988e00b00927f6c799e6sm621864ejb.132.2023.03.17.00.25.52
+        d=1e100.net; s=20210112; t=1679037971;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=XTJneCUUpkMxmb/TtKwDmLa1HBz54xspF/0bbKqQMm0=;
+        b=4T2JJ1Oyei/Ele4oNU16iOYcd3SMmKZnKRW+IQqmi/h/wAYT1ZNFYrRMGhNObHciuj
+         M4IF1aJl6yGpE0044F/BAXgdyFvVPnzWKz0qlNJ4DEskJ9YelxMHGrc6Ukd2N0uK538y
+         S5LsENkR3gtA+AHOxjFoeKvbxgt4hsjeh3YbMOtXiBn35uGC3yT1lFbbxsJ8+ZjDt2Va
+         qYe1PZnUg4mFyUiil0G4kYBgpM48WREVU71PsowKyc9Boip6NUJXLLM0F2XG+zRLmIn9
+         3L9/jpGk34+cvr62AipwJkFeRTZhauSqmfGr2rMHrST/8lqGlDEt7Ky0R51+LX7P7cBO
+         mfQg==
+X-Gm-Message-State: AO0yUKWbSLMv+8xLuOj3dQyjwrDZsVzOgBPB/1f1UDP6pPJNeAYP6T/j
+	IoKDo0rwPwvalZbRgGPmAL4HR/5JJQU=
+X-Google-Smtp-Source: AK7set84yXbFy3vs9YZT4MtugI1NQQWTul1iqQKI8fic4htTIWCspqVLTYx2k72oLMOPODJRFxO8pQ==
+X-Received: by 2002:a05:600c:4f4d:b0:3e2:19b0:887d with SMTP id m13-20020a05600c4f4d00b003e219b0887dmr27030044wmq.25.1679037970920;
+        Fri, 17 Mar 2023 00:26:10 -0700 (PDT)
+Received: from work-pc.. ([2a01:e0a:8d5:c6c0:7a1:ff32:1d50:1429])
+        by smtp.gmail.com with ESMTPSA id fk4-20020a05600c0cc400b003e0015c8618sm7046029wmb.6.2023.03.17.00.26.10
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 17 Mar 2023 00:25:52 -0700 (PDT)
-From: =?UTF-8?q?Zolt=C3=A1n=20B=C3=B6sz=C3=B6rm=C3=A9nyi?= <zboszor@gmail.com>
+        Fri, 17 Mar 2023 00:26:10 -0700 (PDT)
+From: frederic.martinsons@gmail.com
 To: openembedded-devel@lists.openembedded.org
-Cc: =?UTF-8?q?Zolt=C3=A1n=20B=C3=B6sz=C3=B6rm=C3=A9nyi?= <zboszor@gmail.com>
-Subject: [meta-python][PATCH v2 4/4] python3-meson-python: New recipe
-Date: Fri, 17 Mar 2023 08:25:47 +0100
-Message-Id: <20230317072547.1031123-4-zboszor@gmail.com>
-X-Mailer: git-send-email 2.39.2
-In-Reply-To: <20230317072547.1031123-1-zboszor@gmail.com>
-References: <20230317072547.1031123-1-zboszor@gmail.com>
+Cc: Frederic Martinsons <frederic.martinsons@gmail.com>
+Subject: [meta-python][PATCHV2] python3-pyruvate: Add crates checksum and use cargo-update-recipes-crates
+Date: Fri, 17 Mar 2023 08:24:29 +0100
+Message-Id: <20230317072429.1840185-1-frederic.martinsons@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 17 Mar 2023 07:25:57 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101589
+ <openembedded-devel@lists.openembedded.org>; Fri, 17 Mar 2023 07:26:16 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101590
 
-Used by inherit python_mesonpy.
+From: Frederic Martinsons <frederic.martinsons@gmail.com>
 
-Signed-off-by: Zoltán Böszörményi <zboszor@gmail.com>
+This is related to checksum verification introduction in bitbake
+crate fetcher:
+https://patchwork.yoctoproject.org/project/bitbake/patch/20230315131513.50635-1-frederic.martinsons@gmail.com/
+
+Moreover, drop the usage of pypi to use git fetcher
+(the Cargo.lock file is not present in the package
+uploaded on pypi)
+
+Signed-off-by: Frederic Martinsons <frederic.martinsons@gmail.com>
 ---
- .../remove-hardcoded-setup-args.patch         | 123 ++++++++++++++++++
- .../use-installed-mesonpy.patch               |   9 ++
- .../python3-meson-python_0.13.0.pre0.bb       |  28 ++++
- 3 files changed, 160 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-meson-python/remove-hardcoded-setup-args.patch
- create mode 100644 meta-python/recipes-devtools/python/python3-meson-python/use-installed-mesonpy.patch
- create mode 100644 meta-python/recipes-devtools/python/python3-meson-python_0.13.0.pre0.bb
+ .../python/python3-pyruvate-crates.inc        | 184 ++++++++++++++++++
+ .../python/python3-pyruvate_1.1.2.bb          | 107 +---------
+ 2 files changed, 194 insertions(+), 97 deletions(-)
+ create mode 100644 meta-python/recipes-devtools/python/python3-pyruvate-crates.inc
 
-diff --git a/meta-python/recipes-devtools/python/python3-meson-python/remove-hardcoded-setup-args.patch b/meta-python/recipes-devtools/python/python3-meson-python/remove-hardcoded-setup-args.patch
+diff --git a/meta-python/recipes-devtools/python/python3-pyruvate-crates.inc b/meta-python/recipes-devtools/python/python3-pyruvate-crates.inc
 new file mode 100644
-index 000000000..3edda85dc
+index 000000000..52fb9d457
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-meson-python/remove-hardcoded-setup-args.patch
-@@ -0,0 +1,123 @@
-+--- meson_python-0.13.0.pre0/mesonpy/__init__.py.old	1970-01-01 01:00:00.000000000 +0100
-++++ meson_python-0.13.0.pre0/mesonpy/__init__.py	2023-03-13 21:26:52.263117416 +0100
-+@@ -669,8 +669,6 @@
-+         self._build_dir = pathlib.Path(build_dir).absolute() if build_dir else (self._working_dir / 'build')
-+         self._editable_verbose = editable_verbose
-+         self._install_dir = self._working_dir / 'install'
-+-        self._meson_native_file = self._source_dir / '.mesonpy-native-file.ini'
-+-        self._meson_cross_file = self._source_dir / '.mesonpy-cross-file.ini'
-+         self._meson_args: MesonArgs = collections.defaultdict(list)
-+         self._env = os.environ.copy()
-+ 
-+@@ -679,32 +677,6 @@
-+         if ninja_path is not None:
-+             self._env.setdefault('NINJA', str(ninja_path))
-+ 
-+-        # setuptools-like ARCHFLAGS environment variable support
-+-        if sysconfig.get_platform().startswith('macosx-'):
-+-            archflags = self._env.get('ARCHFLAGS')
-+-            if archflags is not None:
-+-                arch, *other = filter(None, (x.strip() for x in archflags.split('-arch')))
-+-                if other:
-+-                    raise ConfigError(f'Multi-architecture builds are not supported but $ARCHFLAGS={archflags!r}')
-+-                macver, _, nativearch = platform.mac_ver()
-+-                if arch != nativearch:
-+-                    x = self._env.setdefault('_PYTHON_HOST_PLATFORM', f'macosx-{macver}-{arch}')
-+-                    if not x.endswith(arch):
-+-                        raise ConfigError(f'$ARCHFLAGS={archflags!r} and $_PYTHON_HOST_PLATFORM={x!r} do not agree')
-+-                    family = 'aarch64' if arch == 'arm64' else arch
-+-                    cross_file_data = textwrap.dedent(f'''
-+-                        [binaries]
-+-                        c = ['cc', '-arch', {arch!r}]
-+-                        cpp = ['c++', '-arch', {arch!r}]
-+-                        [host_machine]
-+-                        system = 'Darwin'
-+-                        cpu = {arch!r}
-+-                        cpu_family = {family!r}
-+-                        endian = 'little'
-+-                    ''')
-+-                    self._meson_cross_file.write_text(cross_file_data)
-+-                    self._meson_args['setup'].extend(('--cross-file', os.fspath(self._meson_cross_file)))
-+-
-+         # load config -- PEP 621 support is optional
-+         self._config = tomllib.loads(self._source_dir.joinpath('pyproject.toml').read_text())
-+         self._pep621 = 'project' in self._config
-+@@ -749,19 +721,6 @@
-+             [binaries]
-+             python = '{sys.executable}'
-+         ''')
-+-        native_file_mismatch = (
-+-            not self._meson_native_file.exists()
-+-            or self._meson_native_file.read_text() != native_file_data
-+-        )
-+-        if native_file_mismatch:
-+-            try:
-+-                self._meson_native_file.write_text(native_file_data)
-+-            except OSError:
-+-                # if there are permission errors or something else in the source
-+-                # directory, put the native file in the working directory instead
-+-                # (this won't survive multiple calls -- Meson will have to be reconfigured)
-+-                self._meson_native_file = self._working_dir / '.mesonpy-native-file.ini'
-+-                self._meson_native_file.write_text(native_file_data)
-+ 
-+         # Don't reconfigure if build directory doesn't have meson-private/coredata.data
-+         # (means something went wrong)
-+@@ -784,7 +743,7 @@
-+     def _proc(self, *args: str) -> None:
-+         """Invoke a subprocess."""
-+         print('{cyan}{bold}+ {}{reset}'.format(' '.join(args), **_STYLES))
-+-        r = subprocess.run(list(args), env=self._env, cwd=self._build_dir)
-++        r = subprocess.run(' '.join(list(args)).split(), env=self._env, cwd=self._build_dir)
-+         if r.returncode != 0:
-+             raise SystemExit(r.returncode)
-+ 
-+@@ -800,22 +759,6 @@
-+         """
-+         sys_paths = mesonpy._introspection.SYSCONFIG_PATHS
-+         setup_args = [
-+-            f'--prefix={sys.base_prefix}',
-+-            os.fspath(self._source_dir),
-+-            os.fspath(self._build_dir),
-+-            f'--native-file={os.fspath(self._meson_native_file)}',
-+-            # TODO: Allow configuring these arguments
-+-            '-Ddebug=false',
-+-            '-Doptimization=2',
-+-
-+-            # XXX: This should not be needed, but Meson is using the wrong paths
-+-            #      in some scenarios, like on macOS.
-+-            #      https://github.com/mesonbuild/meson-python/pull/87#discussion_r1047041306
-+-            '--python.purelibdir',
-+-            sys_paths['purelib'],
-+-            '--python.platlibdir',
-+-            sys_paths['platlib'],
-+-
-+             # user args
-+             *self._meson_args['setup'],
-+         ]
-+@@ -905,8 +848,7 @@
-+         editable_verbose: bool = False,
-+     ) -> Iterator[Project]:
-+         """Creates a project instance pointing to a temporary working directory."""
-+-        with tempfile.TemporaryDirectory(prefix='.mesonpy-', dir=os.fspath(source_dir)) as tmpdir:
-+-            yield cls(source_dir, tmpdir, build_dir, meson_args, editable_verbose)
-++        yield cls(source_dir, build_dir, build_dir, meson_args, editable_verbose)
-+ 
-+     @functools.lru_cache()
-+     def _info(self, name: str) -> Dict[str, Any]:
-+@@ -1105,15 +1047,7 @@
-+         for key, value in config_settings.items()
-+     }
-+ 
-+-    builddir_value = config_settings.get('builddir', {})
-+-    if len(builddir_value) > 0:
-+-        if len(builddir_value) != 1:
-+-            raise ConfigError('Only one value for configuration entry "builddir" can be specified')
-+-        builddir = builddir_value[0]
-+-        if not isinstance(builddir, str):
-+-            raise ConfigError(f'Configuration entry "builddir" should be a string not {type(builddir)}')
-+-    else:
-+-        builddir = None
-++    builddir = os.environ.get('MESONPY_BUILD')
-+ 
-+     def _validate_string_collection(key: str) -> None:
-+         assert isinstance(config_settings, Mapping)
-diff --git a/meta-python/recipes-devtools/python/python3-meson-python/use-installed-mesonpy.patch b/meta-python/recipes-devtools/python/python3-meson-python/use-installed-mesonpy.patch
-new file mode 100644
-index 000000000..64c2c304c
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-meson-python/use-installed-mesonpy.patch
-@@ -0,0 +1,9 @@
-+--- meson_python-0.13.0.pre0/pyproject.toml.old	2023-03-14 08:55:19.092987968 +0100
-++++ meson_python-0.13.0.pre0/pyproject.toml	2023-03-14 08:55:40.108672980 +0100
-+@@ -1,6 +1,5 @@
-+ [build-system]
-+ build-backend = 'mesonpy'
-+-backend-path = ['.']
-+ requires = [
-+   'meson>=0.63.3',
-+   'pyproject-metadata>=0.7.1',
-diff --git a/meta-python/recipes-devtools/python/python3-meson-python_0.13.0.pre0.bb b/meta-python/recipes-devtools/python/python3-meson-python_0.13.0.pre0.bb
-new file mode 100644
-index 000000000..a113408d7
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-meson-python_0.13.0.pre0.bb
-@@ -0,0 +1,28 @@
-+SUMMARY = "Meson Python build backend (PEP 517)"
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=d580b27e67cc0892a5b005b0be114b60"
++++ b/meta-python/recipes-devtools/python/python3-pyruvate-crates.inc
+@@ -0,0 +1,184 @@
++# Autogenerated with 'bitbake -c update_crates python3-pyruvate'
 +
-+DEPENDS = " \
-+	meson-native ninja-native python3-ninja-native \
-+	python3-pyproject-metadata-native \
-+	python3-patchelf-native \
++# from Cargo.lock
++SRC_URI += " \
++    crate://crates.io/aho-corasick/0.7.18 \
++    crate://crates.io/atty/0.2.14 \
++    crate://crates.io/autocfg/1.0.1 \
++    crate://crates.io/bitflags/1.3.2 \
++    crate://crates.io/block-buffer/0.9.0 \
++    crate://crates.io/cc/1.0.72 \
++    crate://crates.io/cfg-if/1.0.0 \
++    crate://crates.io/chrono/0.4.19 \
++    crate://crates.io/cpufeatures/0.2.1 \
++    crate://crates.io/cpython/0.7.0 \
++    crate://crates.io/crossbeam/0.8.1 \
++    crate://crates.io/crossbeam-channel/0.5.2 \
++    crate://crates.io/crossbeam-deque/0.8.1 \
++    crate://crates.io/crossbeam-epoch/0.9.6 \
++    crate://crates.io/crossbeam-queue/0.3.3 \
++    crate://crates.io/crossbeam-utils/0.8.6 \
++    crate://crates.io/crypto-mac/0.11.1 \
++    crate://crates.io/ctrlc/3.2.1 \
++    crate://crates.io/digest/0.9.0 \
++    crate://crates.io/encoding/0.2.33 \
++    crate://crates.io/encoding-index-japanese/1.20141219.5 \
++    crate://crates.io/encoding-index-korean/1.20141219.5 \
++    crate://crates.io/encoding-index-simpchinese/1.20141219.5 \
++    crate://crates.io/encoding-index-singlebyte/1.20141219.5 \
++    crate://crates.io/encoding-index-tradchinese/1.20141219.5 \
++    crate://crates.io/encoding_index_tests/0.1.4 \
++    crate://crates.io/env_logger/0.9.0 \
++    crate://crates.io/errno/0.2.8 \
++    crate://crates.io/errno-dragonfly/0.1.2 \
++    crate://crates.io/fastrand/1.6.0 \
++    crate://crates.io/generic-array/0.14.5 \
++    crate://crates.io/getrandom/0.2.3 \
++    crate://crates.io/hermit-abi/0.1.19 \
++    crate://crates.io/hmac/0.11.0 \
++    crate://crates.io/httparse/1.5.1 \
++    crate://crates.io/humantime/2.1.0 \
++    crate://crates.io/instant/0.1.12 \
++    crate://crates.io/lazy_static/1.4.0 \
++    crate://crates.io/libc/0.2.112 \
++    crate://crates.io/libsystemd/0.4.1 \
++    crate://crates.io/log/0.4.14 \
++    crate://crates.io/memchr/2.4.1 \
++    crate://crates.io/memoffset/0.6.5 \
++    crate://crates.io/mio/0.8.0 \
++    crate://crates.io/miow/0.3.7 \
++    crate://crates.io/nix/0.23.1 \
++    crate://crates.io/ntapi/0.3.6 \
++    crate://crates.io/num-integer/0.1.44 \
++    crate://crates.io/num-traits/0.2.14 \
++    crate://crates.io/num_cpus/1.13.1 \
++    crate://crates.io/once_cell/1.9.0 \
++    crate://crates.io/opaque-debug/0.3.0 \
++    crate://crates.io/paste/1.0.6 \
++    crate://crates.io/ppv-lite86/0.2.16 \
++    crate://crates.io/proc-macro2/1.0.36 \
++    crate://crates.io/python3-sys/0.7.0 \
++    crate://crates.io/quote/1.0.14 \
++    crate://crates.io/rand/0.8.4 \
++    crate://crates.io/rand_chacha/0.3.1 \
++    crate://crates.io/rand_core/0.6.3 \
++    crate://crates.io/rand_hc/0.3.1 \
++    crate://crates.io/redox_syscall/0.2.10 \
++    crate://crates.io/regex/1.5.4 \
++    crate://crates.io/regex-syntax/0.6.25 \
++    crate://crates.io/remove_dir_all/0.5.3 \
++    crate://crates.io/scopeguard/1.1.0 \
++    crate://crates.io/serde/1.0.133 \
++    crate://crates.io/serde_derive/1.0.133 \
++    crate://crates.io/sha2/0.9.9 \
++    crate://crates.io/simplelog/0.11.1 \
++    crate://crates.io/spmc/0.3.0 \
++    crate://crates.io/subtle/2.4.1 \
++    crate://crates.io/syn/1.0.85 \
++    crate://crates.io/tempfile/3.3.0 \
++    crate://crates.io/termcolor/1.1.2 \
++    crate://crates.io/thiserror/1.0.30 \
++    crate://crates.io/thiserror-impl/1.0.30 \
++    crate://crates.io/threadpool/1.8.1 \
++    crate://crates.io/time/0.1.44 \
++    crate://crates.io/typenum/1.15.0 \
++    crate://crates.io/unicode-xid/0.2.2 \
++    crate://crates.io/urlencoding/2.1.0 \
++    crate://crates.io/uuid/0.8.2 \
++    crate://crates.io/version_check/0.9.4 \
++    crate://crates.io/wasi/0.10.0+wasi-snapshot-preview1 \
++    crate://crates.io/winapi/0.3.9 \
++    crate://crates.io/winapi-i686-pc-windows-gnu/0.4.0 \
++    crate://crates.io/winapi-util/0.1.5 \
++    crate://crates.io/winapi-x86_64-pc-windows-gnu/0.4.0 \
 +"
 +
-+PYPI_PACKAGE = "meson_python"
-+
-+inherit pypi python_mesonpy
-+SRC_URI[sha256sum] = "8d537a0304709c31c11ffa34872a62a4c06a6a6c24fc862b7fb4306f3e881b95"
-+
-+DEPENDS:remove:class-native = "python3-meson-python-native"
-+
-+SRC_URI:append:class-native = "file://remove-hardcoded-setup-args.patch"
-+SRC_URI:append:class-nativesdk = "file://use-installed-mesonpy.patch"
-+SRC_URI:append:class-target = "file://use-installed-mesonpy.patch"
-+
-+RDEPENDS:${PN} = " \
-+	meson ninja python3-ninja \
-+	python3-pyproject-metadata \
-+	python3-patchelf \
++SRC_URI[aho-corasick.sha256sum] = "1e37cfd5e7657ada45f742d6e99ca5788580b5c529dc78faf11ece6dc702656f"
++SRC_URI[atty.sha256sum] = "d9b39be18770d11421cdb1b9947a45dd3f37e93092cbf377614828a319d5fee8"
++SRC_URI[autocfg.sha256sum] = "cdb031dd78e28731d87d56cc8ffef4a8f36ca26c38fe2de700543e627f8a464a"
++SRC_URI[bitflags.sha256sum] = "bef38d45163c2f1dde094a7dfd33ccf595c92905c8f8f4fdc18d06fb1037718a"
++SRC_URI[block-buffer.sha256sum] = "4152116fd6e9dadb291ae18fc1ec3575ed6d84c29642d97890f4b4a3417297e4"
++SRC_URI[cc.sha256sum] = "22a9137b95ea06864e018375b72adfb7db6e6f68cfc8df5a04d00288050485ee"
++SRC_URI[cfg-if.sha256sum] = "baf1de4339761588bc0619e3cbc0120ee582ebb74b53b4efbf79117bd2da40fd"
++SRC_URI[chrono.sha256sum] = "670ad68c9088c2a963aaa298cb369688cf3f9465ce5e2d4ca10e6e0098a1ce73"
++SRC_URI[cpufeatures.sha256sum] = "95059428f66df56b63431fdb4e1947ed2190586af5c5a8a8b71122bdf5a7f469"
++SRC_URI[cpython.sha256sum] = "b7d46ba8ace7f3a1d204ac5060a706d0a68de6b42eafb6a586cc08bebcffe664"
++SRC_URI[crossbeam.sha256sum] = "4ae5588f6b3c3cb05239e90bd110f257254aecd01e4635400391aeae07497845"
++SRC_URI[crossbeam-channel.sha256sum] = "e54ea8bc3fb1ee042f5aace6e3c6e025d3874866da222930f70ce62aceba0bfa"
++SRC_URI[crossbeam-deque.sha256sum] = "6455c0ca19f0d2fbf751b908d5c55c1f5cbc65e03c4225427254b46890bdde1e"
++SRC_URI[crossbeam-epoch.sha256sum] = "97242a70df9b89a65d0b6df3c4bf5b9ce03c5b7309019777fbde37e7537f8762"
++SRC_URI[crossbeam-queue.sha256sum] = "b979d76c9fcb84dffc80a73f7290da0f83e4c95773494674cb44b76d13a7a110"
++SRC_URI[crossbeam-utils.sha256sum] = "cfcae03edb34f947e64acdb1c33ec169824e20657e9ecb61cef6c8c74dcb8120"
++SRC_URI[crypto-mac.sha256sum] = "b1d1a86f49236c215f271d40892d5fc950490551400b02ef360692c29815c714"
++SRC_URI[ctrlc.sha256sum] = "a19c6cedffdc8c03a3346d723eb20bd85a13362bb96dc2ac000842c6381ec7bf"
++SRC_URI[digest.sha256sum] = "d3dd60d1080a57a05ab032377049e0591415d2b31afd7028356dbf3cc6dcb066"
++SRC_URI[encoding.sha256sum] = "6b0d943856b990d12d3b55b359144ff341533e516d94098b1d3fc1ac666d36ec"
++SRC_URI[encoding-index-japanese.sha256sum] = "04e8b2ff42e9a05335dbf8b5c6f7567e5591d0d916ccef4e0b1710d32a0d0c91"
++SRC_URI[encoding-index-korean.sha256sum] = "4dc33fb8e6bcba213fe2f14275f0963fd16f0a02c878e3095ecfdf5bee529d81"
++SRC_URI[encoding-index-simpchinese.sha256sum] = "d87a7194909b9118fc707194baa434a4e3b0fb6a5a757c73c3adb07aa25031f7"
++SRC_URI[encoding-index-singlebyte.sha256sum] = "3351d5acffb224af9ca265f435b859c7c01537c0849754d3db3fdf2bfe2ae84a"
++SRC_URI[encoding-index-tradchinese.sha256sum] = "fd0e20d5688ce3cab59eb3ef3a2083a5c77bf496cb798dc6fcdb75f323890c18"
++SRC_URI[encoding_index_tests.sha256sum] = "a246d82be1c9d791c5dfde9a2bd045fc3cbba3fa2b11ad558f27d01712f00569"
++SRC_URI[env_logger.sha256sum] = "0b2cf0344971ee6c64c31be0d530793fba457d322dfec2810c453d0ef228f9c3"
++SRC_URI[errno.sha256sum] = "f639046355ee4f37944e44f60642c6f3a7efa3cf6b78c78a0d989a8ce6c396a1"
++SRC_URI[errno-dragonfly.sha256sum] = "aa68f1b12764fab894d2755d2518754e71b4fd80ecfb822714a1206c2aab39bf"
++SRC_URI[fastrand.sha256sum] = "779d043b6a0b90cc4c0ed7ee380a6504394cee7efd7db050e3774eee387324b2"
++SRC_URI[generic-array.sha256sum] = "fd48d33ec7f05fbfa152300fdad764757cbded343c1aa1cff2fbaf4134851803"
++SRC_URI[getrandom.sha256sum] = "7fcd999463524c52659517fe2cea98493cfe485d10565e7b0fb07dbba7ad2753"
++SRC_URI[hermit-abi.sha256sum] = "62b467343b94ba476dcb2500d242dadbb39557df889310ac77c5d99100aaac33"
++SRC_URI[hmac.sha256sum] = "2a2a2320eb7ec0ebe8da8f744d7812d9fc4cb4d09344ac01898dbcb6a20ae69b"
++SRC_URI[httparse.sha256sum] = "acd94fdbe1d4ff688b67b04eee2e17bd50995534a61539e45adfefb45e5e5503"
++SRC_URI[humantime.sha256sum] = "9a3a5bfb195931eeb336b2a7b4d761daec841b97f947d34394601737a7bba5e4"
++SRC_URI[instant.sha256sum] = "7a5bbe824c507c5da5956355e86a746d82e0e1464f65d862cc5e71da70e94b2c"
++SRC_URI[lazy_static.sha256sum] = "e2abad23fbc42b3700f2f279844dc832adb2b2eb069b2df918f455c4e18cc646"
++SRC_URI[libc.sha256sum] = "1b03d17f364a3a042d5e5d46b053bbbf82c92c9430c592dd4c064dc6ee997125"
++SRC_URI[libsystemd.sha256sum] = "6f4f0b5b062ba67aa075e331de778082c09e66b5ef32970ea5a1e9c37c9555d1"
++SRC_URI[log.sha256sum] = "51b9bbe6c47d51fc3e1a9b945965946b4c44142ab8792c50835a980d362c2710"
++SRC_URI[memchr.sha256sum] = "308cc39be01b73d0d18f82a0e7b2a3df85245f84af96fdddc5d202d27e47b86a"
++SRC_URI[memoffset.sha256sum] = "5aa361d4faea93603064a027415f07bd8e1d5c88c9fbf68bf56a285428fd79ce"
++SRC_URI[mio.sha256sum] = "ba272f85fa0b41fc91872be579b3bbe0f56b792aa361a380eb669469f68dafb2"
++SRC_URI[miow.sha256sum] = "b9f1c5b025cda876f66ef43a113f91ebc9f4ccef34843000e0adf6ebbab84e21"
++SRC_URI[nix.sha256sum] = "9f866317acbd3a240710c63f065ffb1e4fd466259045ccb504130b7f668f35c6"
++SRC_URI[ntapi.sha256sum] = "3f6bb902e437b6d86e03cce10a7e2af662292c5dfef23b65899ea3ac9354ad44"
++SRC_URI[num-integer.sha256sum] = "d2cc698a63b549a70bc047073d2949cce27cd1c7b0a4a862d08a8031bc2801db"
++SRC_URI[num-traits.sha256sum] = "9a64b1ec5cda2586e284722486d802acf1f7dbdc623e2bfc57e65ca1cd099290"
++SRC_URI[num_cpus.sha256sum] = "19e64526ebdee182341572e50e9ad03965aa510cd94427a4549448f285e957a1"
++SRC_URI[once_cell.sha256sum] = "da32515d9f6e6e489d7bc9d84c71b060db7247dc035bbe44eac88cf87486d8d5"
++SRC_URI[opaque-debug.sha256sum] = "624a8340c38c1b80fd549087862da4ba43e08858af025b236e509b6649fc13d5"
++SRC_URI[paste.sha256sum] = "0744126afe1a6dd7f394cb50a716dbe086cb06e255e53d8d0185d82828358fb5"
++SRC_URI[ppv-lite86.sha256sum] = "eb9f9e6e233e5c4a35559a617bf40a4ec447db2e84c20b55a6f83167b7e57872"
++SRC_URI[proc-macro2.sha256sum] = "c7342d5883fbccae1cc37a2353b09c87c9b0f3afd73f5fb9bba687a1f733b029"
++SRC_URI[python3-sys.sha256sum] = "b18b32e64c103d5045f44644d7ddddd65336f7a0521f6fde673240a9ecceb77e"
++SRC_URI[quote.sha256sum] = "47aa80447ce4daf1717500037052af176af5d38cc3e571d9ec1c7353fc10c87d"
++SRC_URI[rand.sha256sum] = "2e7573632e6454cf6b99d7aac4ccca54be06da05aca2ef7423d22d27d4d4bcd8"
++SRC_URI[rand_chacha.sha256sum] = "e6c10a63a0fa32252be49d21e7709d4d4baf8d231c2dbce1eaa8141b9b127d88"
++SRC_URI[rand_core.sha256sum] = "d34f1408f55294453790c48b2f1ebbb1c5b4b7563eb1f418bcfcfdbb06ebb4e7"
++SRC_URI[rand_hc.sha256sum] = "d51e9f596de227fda2ea6c84607f5558e196eeaf43c986b724ba4fb8fdf497e7"
++SRC_URI[redox_syscall.sha256sum] = "8383f39639269cde97d255a32bdb68c047337295414940c68bdd30c2e13203ff"
++SRC_URI[regex.sha256sum] = "d07a8629359eb56f1e2fb1652bb04212c072a87ba68546a04065d525673ac461"
++SRC_URI[regex-syntax.sha256sum] = "f497285884f3fcff424ffc933e56d7cbca511def0c9831a7f9b5f6153e3cc89b"
++SRC_URI[remove_dir_all.sha256sum] = "3acd125665422973a33ac9d3dd2df85edad0f4ae9b00dafb1a05e43a9f5ef8e7"
++SRC_URI[scopeguard.sha256sum] = "d29ab0c6d3fc0ee92fe66e2d99f700eab17a8d57d1c1d3b748380fb20baa78cd"
++SRC_URI[serde.sha256sum] = "97565067517b60e2d1ea8b268e59ce036de907ac523ad83a0475da04e818989a"
++SRC_URI[serde_derive.sha256sum] = "ed201699328568d8d08208fdd080e3ff594e6c422e438b6705905da01005d537"
++SRC_URI[sha2.sha256sum] = "4d58a1e1bf39749807d89cf2d98ac2dfa0ff1cb3faa38fbb64dd88ac8013d800"
++SRC_URI[simplelog.sha256sum] = "ecabc0118918611790b8615670ab79296272cbe09496b6884b02b1e929c20886"
++SRC_URI[spmc.sha256sum] = "02a8428da277a8e3a15271d79943e80ccc2ef254e78813a166a08d65e4c3ece5"
++SRC_URI[subtle.sha256sum] = "6bdef32e8150c2a081110b42772ffe7d7c9032b606bc226c8260fd97e0976601"
++SRC_URI[syn.sha256sum] = "a684ac3dcd8913827e18cd09a68384ee66c1de24157e3c556c9ab16d85695fb7"
++SRC_URI[tempfile.sha256sum] = "5cdb1ef4eaeeaddc8fbd371e5017057064af0911902ef36b39801f67cc6d79e4"
++SRC_URI[termcolor.sha256sum] = "2dfed899f0eb03f32ee8c6a0aabdb8a7949659e3466561fc0adf54e26d88c5f4"
++SRC_URI[thiserror.sha256sum] = "854babe52e4df1653706b98fcfc05843010039b406875930a70e4d9644e5c417"
++SRC_URI[thiserror-impl.sha256sum] = "aa32fd3f627f367fe16f893e2597ae3c05020f8bba2666a4e6ea73d377e5714b"
++SRC_URI[threadpool.sha256sum] = "d050e60b33d41c19108b32cea32164033a9013fe3b46cbd4457559bfbf77afaa"
++SRC_URI[time.sha256sum] = "6db9e6914ab8b1ae1c260a4ae7a49b6c5611b40328a735b21862567685e73255"
++SRC_URI[typenum.sha256sum] = "dcf81ac59edc17cc8697ff311e8f5ef2d99fcbd9817b34cec66f90b6c3dfd987"
++SRC_URI[unicode-xid.sha256sum] = "8ccb82d61f80a663efe1f787a51b16b5a51e3314d6ac365b08639f52387b33f3"
++SRC_URI[urlencoding.sha256sum] = "68b90931029ab9b034b300b797048cf23723400aa757e8a2bfb9d748102f9821"
++SRC_URI[uuid.sha256sum] = "bc5cf98d8186244414c848017f0e2676b3fcb46807f6668a97dfe67359a3c4b7"
++SRC_URI[version_check.sha256sum] = "49874b5167b65d7193b8aba1567f5c7d93d001cafc34600cee003eda787e483f"
++SRC_URI[wasi.sha256sum] = "1a143597ca7c7793eff794def352d41792a93c481eb1042423ff7ff72ba2c31f"
++SRC_URI[winapi.sha256sum] = "5c839a674fcd7a98952e593242ea400abe93992746761e38641405d28b00f419"
++SRC_URI[winapi-i686-pc-windows-gnu.sha256sum] = "ac3b87c63620426dd9b991e5ce0329eff545bccbbb34f3be09ff6fb6ab51b7b6"
++SRC_URI[winapi-util.sha256sum] = "70ec6ce85bb158151cae5e5c87f95a8e97d2c0c4b001223f33a334e3ce5de178"
++SRC_URI[winapi-x86_64-pc-windows-gnu.sha256sum] = "712e227841d057c1ee1cd2fb22fa7e5a5461ae8e48fa2ca79ec42cfc1931183f"
+diff --git a/meta-python/recipes-devtools/python/python3-pyruvate_1.1.2.bb b/meta-python/recipes-devtools/python/python3-pyruvate_1.1.2.bb
+index 1f1c186d3..db9a4cd51 100644
+--- a/meta-python/recipes-devtools/python/python3-pyruvate_1.1.2.bb
++++ b/meta-python/recipes-devtools/python/python3-pyruvate_1.1.2.bb
+@@ -8,11 +8,18 @@ LICENSE = "GPL-2.0-only"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=051b48e640a6e2d795eac75542d9417c \
+                     file://LICENSE.GPL;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+ 
++SRC_URI += "\
++    git://gitlab.com/tschorr/pyruvate.git;protocol=https;branch=main \
++    file://0001-linux.rs-Define-consts-for-rv32-architecture.patch;patchdir=../cargo_home/bitbake/nix-0.23.1/ \
 +"
+ SRC_URI[sha256sum] = "10befedd97e73fc18b902d02aa3b24e8978aa162242c1b664849c886c0675899"
++SRCREV = "fcbe49cc1a06290e28a211022df759605bce980d"
 +
-+BBCLASSEXTEND = "native nativesdk"
++SRC_URI:append:mips = " file://0001-check-for-mips-targets-for-stat.st_dev-definitions.patch;patchdir=../cargo_home/bitbake/libsystemd-0.4.1/"
+ 
+-S = "${WORKDIR}/pyruvate-${PV}"
++S = "${WORKDIR}/git"
+ 
+-inherit pypi python_setuptools3_rust
++inherit python_setuptools3_rust cargo-update-recipe-crates
+ 
+ PIP_INSTALL_DIST_PATH = "${S}/dist"
+ 
+@@ -24,101 +31,7 @@ RUSTFLAGS:append:mipsel = " --cfg crossbeam_no_atomic_64"
+ RUSTFLAGS:append:powerpc = " --cfg crossbeam_no_atomic_64"
+ RUSTFLAGS:append:riscv32 = " --cfg crossbeam_no_atomic_64"
+ 
+-SRC_URI += " \
+-    crate://crates.io/aho-corasick/0.7.18 \
+-    crate://crates.io/atty/0.2.14 \
+-    crate://crates.io/autocfg/1.0.1 \
+-    crate://crates.io/bitflags/1.3.2 \
+-    crate://crates.io/block-buffer/0.9.0 \
+-    crate://crates.io/cc/1.0.72 \
+-    crate://crates.io/cfg-if/1.0.0 \
+-    crate://crates.io/chrono/0.4.19 \
+-    crate://crates.io/cpufeatures/0.2.1 \
+-    crate://crates.io/cpython/0.7.0 \
+-    crate://crates.io/crossbeam-channel/0.5.2 \
+-    crate://crates.io/crossbeam-deque/0.8.1 \
+-    crate://crates.io/crossbeam-epoch/0.9.6 \
+-    crate://crates.io/crossbeam-queue/0.3.3 \
+-    crate://crates.io/crossbeam-utils/0.8.6 \
+-    crate://crates.io/crossbeam/0.8.1 \
+-    crate://crates.io/crypto-mac/0.11.1 \
+-    crate://crates.io/ctrlc/3.2.1 \
+-    crate://crates.io/digest/0.9.0 \
+-    crate://crates.io/encoding-index-japanese/1.20141219.5 \
+-    crate://crates.io/encoding-index-korean/1.20141219.5 \
+-    crate://crates.io/encoding-index-simpchinese/1.20141219.5 \
+-    crate://crates.io/encoding-index-singlebyte/1.20141219.5 \
+-    crate://crates.io/encoding-index-tradchinese/1.20141219.5 \
+-    crate://crates.io/encoding/0.2.33 \
+-    crate://crates.io/encoding_index_tests/0.1.4 \
+-    crate://crates.io/env_logger/0.9.0 \
+-    crate://crates.io/errno-dragonfly/0.1.2 \
+-    crate://crates.io/errno/0.2.8 \
+-    crate://crates.io/fastrand/1.6.0 \
+-    crate://crates.io/generic-array/0.14.5 \
+-    crate://crates.io/getrandom/0.2.3 \
+-    crate://crates.io/hermit-abi/0.1.19 \
+-    crate://crates.io/hmac/0.11.0 \
+-    crate://crates.io/httparse/1.5.1 \
+-    crate://crates.io/humantime/2.1.0 \
+-    crate://crates.io/instant/0.1.12 \
+-    crate://crates.io/lazy_static/1.4.0 \
+-    crate://crates.io/libc/0.2.120 \
+-    crate://crates.io/libsystemd/0.4.1 \
+-    crate://crates.io/log/0.4.14 \
+-    crate://crates.io/memchr/2.4.1 \
+-    crate://crates.io/memoffset/0.6.5 \
+-    crate://crates.io/mio/0.8.0 \
+-    crate://crates.io/miow/0.3.7 \
+-    crate://crates.io/nix/0.23.1 \
+-    crate://crates.io/ntapi/0.3.6 \
+-    crate://crates.io/num-integer/0.1.44 \
+-    crate://crates.io/num-traits/0.2.14 \
+-    crate://crates.io/num_cpus/1.13.1 \
+-    crate://crates.io/once_cell/1.9.0 \
+-    crate://crates.io/opaque-debug/0.3.0 \
+-    crate://crates.io/paste/1.0.6 \
+-    crate://crates.io/ppv-lite86/0.2.16 \
+-    crate://crates.io/proc-macro2/1.0.36 \
+-    crate://crates.io/python3-sys/0.7.0 \
+-    crate://crates.io/quote/1.0.14 \
+-    crate://crates.io/rand/0.8.4 \
+-    crate://crates.io/rand_chacha/0.3.1 \
+-    crate://crates.io/rand_core/0.6.3 \
+-    crate://crates.io/rand_hc/0.3.1 \
+-    crate://crates.io/redox_syscall/0.2.10 \
+-    crate://crates.io/regex-syntax/0.6.25 \
+-    crate://crates.io/regex/1.5.4 \
+-    crate://crates.io/remove_dir_all/0.5.3 \
+-    crate://crates.io/scopeguard/1.1.0 \
+-    crate://crates.io/serde/1.0.133 \
+-    crate://crates.io/serde_derive/1.0.133 \
+-    crate://crates.io/sha2/0.9.9 \
+-    crate://crates.io/simplelog/0.11.1 \
+-    crate://crates.io/spmc/0.3.0 \
+-    crate://crates.io/subtle/2.4.1 \
+-    crate://crates.io/syn/1.0.85 \
+-    crate://crates.io/tempfile/3.3.0 \
+-    crate://crates.io/termcolor/1.1.2 \
+-    crate://crates.io/thiserror-impl/1.0.30 \
+-    crate://crates.io/thiserror/1.0.30 \
+-    crate://crates.io/threadpool/1.8.1 \
+-    crate://crates.io/time/0.1.44 \
+-    crate://crates.io/typenum/1.15.0 \
+-    crate://crates.io/unicode-xid/0.2.2 \
+-    crate://crates.io/urlencoding/2.1.0 \
+-    crate://crates.io/uuid/0.8.2 \
+-    crate://crates.io/version_check/0.9.4 \
+-    crate://crates.io/wasi/0.10.0+wasi-snapshot-preview1 \
+-    crate://crates.io/winapi-i686-pc-windows-gnu/0.4.0 \
+-    crate://crates.io/winapi-util/0.1.5 \
+-    crate://crates.io/winapi-x86_64-pc-windows-gnu/0.4.0 \
+-    crate://crates.io/winapi/0.3.9 \
+-"
+-SRC_URI += "\
+-            file://0001-linux.rs-Define-consts-for-rv32-architecture.patch;patchdir=../cargo_home/bitbake/nix-0.23.1/ \
+-            "
+-SRC_URI:append:mips = " file://0001-check-for-mips-targets-for-stat.st_dev-definitions.patch;patchdir=../cargo_home/bitbake/libsystemd-0.4.1/"
++require ${BPN}-crates.inc
+ 
+ # The following configs & dependencies are from setuptools extras_require.
+ # These dependencies are optional, hence can be controlled via PACKAGECONFIG.
 -- 
-2.39.2
+2.34.1
 
 
