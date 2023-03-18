@@ -1,259 +1,170 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <philip@balister.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D1CE6C61DA4
-	for <webhook@archiver.kernel.org>; Sat, 18 Mar 2023 16:21:55 +0000 (UTC)
-Received: from mail-oo1-f41.google.com (mail-oo1-f41.google.com [209.85.161.41])
- by mx.groups.io with SMTP id smtpd.web11.9943.1679156509054115403
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 68BD2C74A5B
+	for <webhook@archiver.kernel.org>; Sat, 18 Mar 2023 18:23:36 +0000 (UTC)
+Received: from CHE01-ZR0-obe.outbound.protection.outlook.com (CHE01-ZR0-obe.outbound.protection.outlook.com [40.107.24.89])
+ by mx.groups.io with SMTP id smtpd.web10.1895.1679163732274085560
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 18 Mar 2023 09:21:49 -0700
+ Sat, 18 Mar 2023 11:22:12 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=WmJgPeL3;
- spf=pass (domain: gmail.com, ip: 209.85.161.41, mailfrom: raj.khem@gmail.com)
-Received: by mail-oo1-f41.google.com with SMTP id q79-20020a4a3352000000b0052fe885deddso1258094ooq.0
-        for <openembedded-devel@lists.openembedded.org>; Sat, 18 Mar 2023 09:21:48 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112; t=1679156508;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=7nmgxplvg8UwrWtGBEKQd8TXu5/fVV2RpjCW9Xht25k=;
-        b=WmJgPeL33J7iwlAKpDsAN2EKI1/qhHjfxtkC5yJjYwmk6eS0iUj0m8r5MjQcJU6RRR
-         kgTCORhetUkdjuFnZtdnnJYLr4xquaq836iLVr6vyqvfOTBZWL30kunMopbOaoX9RgOm
-         3Uls4PB6t0041ESpzVb5hVTqq4fWfcA3JReOraje/nnv9MDek9oACq3KLmzYK6uidbOa
-         VoJb6SNpC1KUXAV+zK0AJDUq0hhqdffq44blwGPOFxigZgHk7DB2l8oAL+//Dke283PV
-         Yi5S7/UHfWw6WxElrGx0BR5mg+OSCAW3zyWopvfPJlg7UbqjxmGNSKE4ANG6eBjLbYOC
-         Oezw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112; t=1679156508;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=7nmgxplvg8UwrWtGBEKQd8TXu5/fVV2RpjCW9Xht25k=;
-        b=p1uUdsh1opsUFds9jV1csahfkF1llClfFmebQISXWWtl45bPQTKMb0wHAhwQ2q8fbe
-         Pyxj5NMQN/Ougau6P7mqNavTc6JCMLXh5gwHh08HRWb6Ej4Y/6SN81EPDMr/nDPI5N0S
-         ZwCjn3/V1ghdbkdO/XwWnydVmqYUw07PX449Me5ghlbtD1H+yrmf8u9sZc9Vuvv3DNIr
-         q0umPGJjC+bRuq9EhglnRG4ry0WwZa8+9fUC/bs2+88V/7ws5UEK8n0xBOfcJtmzUG/L
-         IBqeQi3j42IeDnQ9/3zU/kl0jEK3r5JoVQIrrrFivI6eBIchiVS8DhlUB0eAswo4kt8e
-         +WKw==
-X-Gm-Message-State: AO0yUKWweD8FwajmdENVJHHjcFNL8GgeCVO4xzMLOjDTthNJTWsrUZNa
-	yhsMPomlvecmJs6fW94M4h+OpbZahIEEb355lA0=
-X-Google-Smtp-Source: AK7set+j2ijfyta+7nDwRHIvncrA3Q6+52J5Z3H4phro7PUpRQMo01o9z+ssVmXM1l0MiikjVFbPFpxn9wnvmUt7MLk=
-X-Received: by 2002:a4a:d0ac:0:b0:539:7cb5:7a0e with SMTP id
- t12-20020a4ad0ac000000b005397cb57a0emr860643oor.0.1679156508128; Sat, 18 Mar
- 2023 09:21:48 -0700 (PDT)
+ dkim=pass header.i=@spinetix.com header.s=selector2 header.b=JNCSLnI3;
+ spf=pass (domain: spinetix.com, ip: 40.107.24.89, mailfrom: valeria.petrov@spinetix.com)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=Nzh3zqT0y6olMXThN9Q1NCdA84pyrv3E3qjI0ZpFeK2B3TFaDAKL3/Sk7NNzW8G7HGXltXAdud5J/a25Aav2nTv+iazkcaZjwR9AEmTaBI+OuufpLM/SsgKJ2VasxZSq/Jo1xviktTa6AdCDERZA8IgH6DHe1LraM6aS/h4aN2fuKi+W9Yny+ZnEu4IyZ0unMroLHbiQYFCbs7Qt+nvxnqscAXHtDOvDg3rIzD/R2sheLFZGSBDCA4uO9jA7otUNBUQz+jGX6YQPjtCHi6/azT6r7xrjzq9KKF7vow9j4jCDuSBbqq6uQQFDwpeijOnJv2Ggb134XM0jD2P01wV2mQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=S/LfD4Ndrs3yOlyAawF3QaicVWzjopGYmuyvEJlGjC4=;
+ b=TEjxe0CmRHBBmEAN+dbAeghZBOXkMFM4NMjQfMMPMU4Q63hMV2PKhCq0IhdsDLC5Vf3GZbiiuk0XL/PbD3tjHQ3BLtdCklmZcgCtoI2g2rgN31lpn7zE3WaMpbx5RQcwn5XMpgaSYqOt0nuPC0iSjpmF04qRAHDkwdIELbn8XKvGSxdWh4YRXMWG6xR/3IYRWdErCI5kENfBSStJK3yWU+D/woMU0VOzXoaRjSFVPJnjSg9jWHMhyQVbf6jhsVdvtEyKIvKUqVoBl8Bb0z1lD2pr43ef4ioFW7U4vFU3llHZ70wIDnQSkN7qr/a1PtaaScKeSxrnqXfJr1HX4+ixig==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=spinetix.com; dmarc=pass action=none header.from=spinetix.com;
+ dkim=pass header.d=spinetix.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=spinetix.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=S/LfD4Ndrs3yOlyAawF3QaicVWzjopGYmuyvEJlGjC4=;
+ b=JNCSLnI3042ile3RSyQW0B39Ff3Wnowr5mNeNVZor0WEQ+fGC/FOtp+PxrfOePFWQGTUwbwXyzR/qNxwzBJLQPmf8vNV8OymrlfwG/qgTxqHxCBcV/waG0UqE5g/5x9scbZW+Tamu/43VCRlPsqs5E9NX+8kRfrB68dw55OOH+A=
+Received: from ZR0P278MB0379.CHEP278.PROD.OUTLOOK.COM (2603:10a6:910:30::12)
+ by ZRAP278MB0128.CHEP278.PROD.OUTLOOK.COM (2603:10a6:910:13::14) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6178.37; Sat, 18 Mar
+ 2023 18:22:08 +0000
+Received: from ZR0P278MB0379.CHEP278.PROD.OUTLOOK.COM
+ ([fe80::2353:2e57:6e90:ab36]) by ZR0P278MB0379.CHEP278.PROD.OUTLOOK.COM
+ ([fe80::2353:2e57:6e90:ab36%5]) with mapi id 15.20.6178.036; Sat, 18 Mar 2023
+ 18:22:08 +0000
+From: "Valeria Petrov" <valeria.petrov@spinetix.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+CC: Wang Mingyu <wangmy@fujitsu.com>, Khem Raj <raj.khem@gmail.com>
+Subject: Re: [meta-oe][dunfell][PATCH] apache2: upgrade 2.4.55 -> 2.4.56
+Thread-Topic: [meta-oe][dunfell][PATCH] apache2: upgrade 2.4.55 -> 2.4.56
+Thread-Index: AQHZVmhC+Diq88hUhEezvpnF1s5mJK8A4ENg
+Date: Sat, 18 Mar 2023 18:22:08 +0000
+Message-ID: 
+ <ZR0P278MB0379DBFD903B4461D7CE40F8F1829@ZR0P278MB0379.CHEP278.PROD.OUTLOOK.COM>
+References: <20230314112819.24301-1-valeria.petrov@spinetix.com>
+In-Reply-To: <20230314112819.24301-1-valeria.petrov@spinetix.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=spinetix.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: ZR0P278MB0379:EE_|ZRAP278MB0128:EE_
+x-ms-office365-filtering-correlation-id: d0065437-f01d-46de-3a4f-08db27ddaf61
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: 
+ ntq+jmD7yeXSRBVHrZWJ0p7ycqwfv5BXOt65xmNI/mICazJRJMKZBNF8BkDsP9mZ3SinuD9Y7S2N42lce1X/CtWdduw9NjWfabmpA1B2nxyxZcgtEoAlmSdRLagdAD2E1MP6V5iRw6I2tkqueOxhdLIDilhk3FwDfHhVyI3GFKnJ4yaJjUulcz+XVJVV1nv1x91xGqTeEU2lKP3bBzQAmTtk2cQysVszKySmxN1BumoCVhUlQtDvSD9Zx5YGuczZE0LVXQYdViU+iiFUGvflv7Wl9YQaLuHk8Z30p7FhiEOKnB73ScAJLOQkO1KCpXZPcdBpFZXXp4Sd0IzuHAkxU5PKGL4KGnY30X4MTZNYfkVYBc3EibnhGxDheukW4AchQW9Shg+9Y2sKAcucapa2rCuNX1Grfyw/n5SQgI/HARbvWMt4TDHWpQgzKsSEEXOHIA3A7T5+4rW1Pvqcnxmnaqt81YQKfKx6OCIt68CHudXzwtNwPTBvf909re33dcF38FdCPpncTVwIoRn/WRzQhnkijXRmiqzn0jIQtA96DcXOcAHSFPNdYeY4cjqgZlk/1gVPwWRKa9b/RXB/Wb2pK1pDxphozMNFRCjSCm2YEsboy2MY8mWU6699C5ARyjBzN/7v3KGaJEkjeyBiEhGVeK6y2RH7ztwmgqu1caKIBuQQAdpooZoj4QkPPPi1J0ygkvBK0UiCS2Xr7gCII33aow==
+x-forefront-antispam-report: 
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:ZR0P278MB0379.CHEP278.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230025)(4636009)(396003)(136003)(346002)(366004)(39830400003)(376002)(451199018)(26005)(186003)(9686003)(6506007)(316002)(7696005)(71200400001)(53546011)(8676002)(6916009)(4326008)(66446008)(64756008)(76116006)(66946007)(66556008)(66476007)(478600001)(54906003)(83380400001)(8936002)(52536014)(41300700001)(38070700005)(2906002)(5660300002)(122000001)(38100700002)(86362001)(33656002)(55016003);DIR:OUT;SFP:1101;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: 
+ =?utf-8?B?eHdJUzFNa3hJbU56TUlIeDA0Nm1oTXVTcEtJeVdSWUxlNkU5bmdkVDR1L2hH?=
+ =?utf-8?B?L1pFbFVJZTc1bEhNU1V2RTA4NTNFUVZRSVdwdXNjSWszZFhnQWIyR001cFNl?=
+ =?utf-8?B?byswbEZTSVErQ3ZrL24rVEQ2Uno2eS9WNy94YzlmUy82VVFJSS93UFFyQi92?=
+ =?utf-8?B?MytIZUZCcVR4cWUxVVJqVmR1VHBFSTlIaTZNWXJkTVVuR212czFyRDU4VVhy?=
+ =?utf-8?B?dldmTHpCUGFFeG53aTIrZmFxUndBMlJLcVNybmtnQ2J2QS8waGJrYTRzL2Jl?=
+ =?utf-8?B?WVlPT2ZLUGxjUU96YjE5TDEzd3A3a2VSM1BUMjhNcVRrQTFIZmJIa0pMSUdp?=
+ =?utf-8?B?ZmFIVFFkSm9WSUJWb2ZWQWl2MXU3c0hJZ0dHeU11b0hnMXdYS0ZneXdjTGF4?=
+ =?utf-8?B?ZUFHLzJ1dG9QOGVCbE1PNDlDZXVFQWM2Wkx5VFlyTzU5L3BNam53MzFjVVpR?=
+ =?utf-8?B?WXhOMnJ6S3FRQldRSUtYbWNxb3hlNzVFUGFhM3pqblBEcGIrRVMxVzI4UThM?=
+ =?utf-8?B?YnkvazJuS3NrbjUvTFo2ZkNVN2hTaG9hdTVaZ2doaEtVb0RQTm9aQThvckZH?=
+ =?utf-8?B?bDFrREhDbTIvemhtODNIUEN4YnZDUEl5WDdyQnVaY1RRTCtiSlhEUzNJMEVF?=
+ =?utf-8?B?d2laUWtDQTIyQ0xodlBaYjhEL0E4cmpHV05JMlJ2MnB0VU9WajVYYjRLL1Zz?=
+ =?utf-8?B?cHh5dUFMWGRGWERwUzVpZzZoc1dmWkFrU1NvSUk4VjFnK0RYZ05UcTdaeDZQ?=
+ =?utf-8?B?NVhWSUJrMHYyZHJDaGFiZjJDaGxlMWZrNzB2SklxZmU2NGlzUWZoVUFNUVBE?=
+ =?utf-8?B?aktONXFmUzdVWHVyQU53YWVudG51bHBIaDhEejM3K09tSFFiWWE4ZWhmc05t?=
+ =?utf-8?B?TkdFUnluUHYwM3JMKytwb2RhVjl6dmFpYlF3QWdBRy9uM0ZmQTRtTzNpN3J6?=
+ =?utf-8?B?WndCSVR0aVRZRzVCVS9ua1NIRzA5T2d4UGlic3RSbnIzYTZuZDVJaTZOMnVI?=
+ =?utf-8?B?ZFVLTHJIdktLRnNnVWFtS3Rpb0VadmM3emtBMGd6N3FqdnpwbHRLSTk0VU5F?=
+ =?utf-8?B?OXR0ZVNoUUgxLzNnVVE2U1BOVXFpd0ZxU0pESkdleUdCK0s5b01PYjRQUFZR?=
+ =?utf-8?B?aDcyVmhaQ2R0Mi96Qk1CN1JJdWpuZFNOMFg5U0dOeE93UWxQOFA2Uy9IbUpu?=
+ =?utf-8?B?T3V1N0pla00wMXNpeGZuL1djZTdBTXNKSk1qUmE1UzFYSFU4TkNVTW1LUXMy?=
+ =?utf-8?B?d1l4SWZMTWtVaGs4QnBKWlRjNFJOSFYzTFhZM1MrV3NHdDlqeFlNdFIzRDJ0?=
+ =?utf-8?B?SzRHSVkrVmk1T3U0T0xzZElycXpFTmhSZVRnbTVJVjJPSjE3a3NTRVRCazly?=
+ =?utf-8?B?R29SeEZ2RnY2WWlzNy9lZnZjOU1OOGE2RGN2UU9ZYUxWZGNTSnVFRlN0Q1pa?=
+ =?utf-8?B?MzZPVHRjem8zQlJ4Q1ROZDR3d0R4S3NqWWhzNVMzbkQ1c0o1MmVMWm1CLzZP?=
+ =?utf-8?B?QXdDK2VMYkU5aU1tK2E0Sktpdm5XYnJRWVh5NHArY0krMWFweTNSdXV1dzJH?=
+ =?utf-8?B?azhTWFovQ1NhZ1VPNWprdGxqTWdraHRaNFV1UnNXVFpTUEdQS3l4OFNCanRQ?=
+ =?utf-8?B?V1l2NXZXUEZ3ZEp1ZGhUbFg3dW5tK2RmSEtBWEJONlRNUEhnaklqd3oydUlV?=
+ =?utf-8?B?UU1NN2t5bVB2LzNiVlI5Y3Vmc0VHMTcxRFJKVlc0OWJPVHJlUzlONEZXTXJw?=
+ =?utf-8?B?M1JCYWxWbmorZ1lyWW1lOTdqaUNUSXVCMTVwOHZ3cEtnTm1xN2psWnhDQzlr?=
+ =?utf-8?B?bGpnYUZLcHh2RlRsK1pMUWJjQjlaVUdjYUs4UlowZXdnbjJjeC9yam03elEv?=
+ =?utf-8?B?aEVMYWV1cVd6OWVhQit4ci9BZ2duZE1pcXNOcjRwVWsyWWEwZWJGeUk1bGc3?=
+ =?utf-8?B?SE1lTEFYZCt4emYzWm56aE43WkRaaFBvMjliTUxJQUtqTys1a1dVSUFjN2dP?=
+ =?utf-8?B?cWlubHVpR3k2WnNUYUswY1VUenF4Y01uckowaG4xTmo2L0dBcDRYZVQvSStl?=
+ =?utf-8?B?aFZlUE9HVFRrcXl6WEpqZHU3ckNRMXFEbnJick5iRXhldThpY0t5c1FQUnZO?=
+ =?utf-8?B?bk9EMnA2a1RQc3YxMXVobk1QYWdQVDM0bjlaSW52V2tKb293ZWMydk5KK2p3?=
+ =?utf-8?B?Z3c9PQ==?=
 MIME-Version: 1.0
-References: <1679019355-12162-1-git-send-email-leimaohui@fujitsu.com>
-In-Reply-To: <1679019355-12162-1-git-send-email-leimaohui@fujitsu.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Sat, 18 Mar 2023 09:21:21 -0700
-Message-ID: <CAMKF1spU07KJFpVCyF8Rbriic-6Zom7iwMcU2ZyzDHVrU-okog@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH v4] pgpool2: Added a new recipe.
-To: leimaohui <leimaohui@fujitsu.com>
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-OriginatorOrg: spinetix.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: ZR0P278MB0379.CHEP278.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-Network-Message-Id: d0065437-f01d-46de-3a4f-08db27ddaf61
+X-MS-Exchange-CrossTenant-originalarrivaltime: 18 Mar 2023 18:22:08.6541
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 5f4034fa-ed2d-4840-a93f-acb1e9633b93
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: 7NVsdYssxKsQ4aRZN/Gr0KguVNRGk3D7NVoXM9qbrQdnKjTRL+Y6r+1rJLMEkZDlXZllxxzdcgmExdmq+ip3bkBLBGVqfl9KlTX9Wsq8uDI=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: ZRAP278MB0128
+Content-Language: en-US
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 18 Mar 2023 16:21:55 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101595
+ <openembedded-devel@lists.openembedded.org>; Sat, 18 Mar 2023 18:23:36 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101596
 
-fails to build with musl see
-
-https://errors.yoctoproject.org/Errors/Details/698151/
-
-On Thu, Mar 16, 2023 at 7:16=E2=80=AFPM leimaohui <leimaohui@fujitsu.com> w=
-rote:
->
-> Pgpool-II is a middleware that works between PostgreSQL servers and a Pos=
-tgreSQL database client. It is distributed under a license similar to BSD a=
-nd MIT. It provides the  following features.
->
-> Signed-off-by: Lei Maohui <leimaohui@fujitsu.com>
-> ---
->  ...0001-Fix-build-error-when-build-this-file.patch | 32 +++++++++++++
->  .../recipes-support/pgpool2/pgpool2/pgpool.service | 17 +++++++
->  .../pgpool2/pgpool2/pgpool.sysconfig               |  7 +++
->  .../recipes-support/pgpool2/pgpool2_4.4.1.bb       | 52 ++++++++++++++++=
-++++++
->  4 files changed, 108 insertions(+)
->  create mode 100644 meta-networking/recipes-support/pgpool2/pgpool2/0001-=
-Fix-build-error-when-build-this-file.patch
->  create mode 100644 meta-networking/recipes-support/pgpool2/pgpool2/pgpoo=
-l.service
->  create mode 100644 meta-networking/recipes-support/pgpool2/pgpool2/pgpoo=
-l.sysconfig
->  create mode 100644 meta-networking/recipes-support/pgpool2/pgpool2_4.4.1=
-.bb
->
-> diff --git a/meta-networking/recipes-support/pgpool2/pgpool2/0001-Fix-bui=
-ld-error-when-build-this-file.patch b/meta-networking/recipes-support/pgpoo=
-l2/pgpool2/0001-Fix-build-error-when-build-this-file.patch
-> new file mode 100644
-> index 0000000..52bcc3b
-> --- /dev/null
-> +++ b/meta-networking/recipes-support/pgpool2/pgpool2/0001-Fix-build-erro=
-r-when-build-this-file.patch
-> @@ -0,0 +1,32 @@
-> +From f8ab74a76049f69adeebe92c62593547e05a075d Mon Sep 17 00:00:00 2001
-> +From: Lei Maohui <leimaohui@fujitsu.com>
-> +Date: Wed, 11 Jan 2023 17:22:41 +0900
-> +Subject: [PATCH] Fix build error when build this file.
-> +
-> +| snprintf.c:770:64: error: 'PG_STRERROR_R_BUFLEN' undeclared (first use=
- in this function)
-> +|   770 |                                         char            errbuf=
-[PG_STRERROR_R_BUFLEN];
-> +|       |                                                               =
- ^~~~~~~~~~~~~~~~~~~~
-> +
-> +PG_STRERROR_R_BUFLEN is defined in postgresql, but pgpool doesn't
-> +include the header of postgresql.
-> +
-> +Upstream-Status: Inappropriate [OE-Specific]
-> +Signed-off-by: Lei Maohui <leimaohui@fujitsu.com>
-> +---
-> + src/parser/snprintf.c | 1 +
-> + 1 file changed, 1 insertion(+)
-> +
-> +diff --git a/src/parser/snprintf.c b/src/parser/snprintf.c
-> +index 84ebdb2..3387897 100644
-> +--- a/src/parser/snprintf.c
-> ++++ b/src/parser/snprintf.c
-> +@@ -46,6 +46,7 @@
-> + #include "pool_parser.h"
-> + #include "stringinfo.h"
-> + #include "utils/palloc.h"
-> ++#include "postgresql/server/port.h"
-> +
-> + /*
-> +  * We used to use the platform's NL_ARGMAX here, but that's a bad idea,
-> +--
-> +2.25.1
-> diff --git a/meta-networking/recipes-support/pgpool2/pgpool2/pgpool.servi=
-ce b/meta-networking/recipes-support/pgpool2/pgpool2/pgpool.service
-> new file mode 100644
-> index 0000000..bf2d323
-> --- /dev/null
-> +++ b/meta-networking/recipes-support/pgpool2/pgpool2/pgpool.service
-> @@ -0,0 +1,17 @@
-> +[Unit]
-> +Description=3DPgpool-II
-> +After=3Dsyslog.target network.target
-> +
-> +[Service]
-> +
-> +User=3Dpostgres
-> +Group=3Dpostgres
-> +
-> +EnvironmentFile=3D-/etc/sysconfig/pgpool
-> +
-> +ExecStart=3D/usr/bin/pgpool -f /etc/pgpool-II/pgpool.conf $OPTS
-> +ExecStop=3D/usr/bin/pgpool -f /etc/pgpool-II/pgpool.conf $STOP_OPTS stop
-> +ExecReload=3D/usr/bin/pgpool -f /etc/pgpool-II/pgpool.conf reload
-> +
-> +[Install]
-> +WantedBy=3Dmulti-user.target
-> diff --git a/meta-networking/recipes-support/pgpool2/pgpool2/pgpool.sysco=
-nfig b/meta-networking/recipes-support/pgpool2/pgpool2/pgpool.sysconfig
-> new file mode 100644
-> index 0000000..ea13089
-> --- /dev/null
-> +++ b/meta-networking/recipes-support/pgpool2/pgpool2/pgpool.sysconfig
-> @@ -0,0 +1,7 @@
-> +# Options for pgpool
-> +
-> +# -n: don't run in daemon mode. does not detach control tty
-> +# -d: debug mode. lots of debug information will be printed
-> +
-> +#OPTS=3D" -d -n"
-> +OPTS=3D" -n"
-> diff --git a/meta-networking/recipes-support/pgpool2/pgpool2_4.4.1.bb b/m=
-eta-networking/recipes-support/pgpool2/pgpool2_4.4.1.bb
-> new file mode 100644
-> index 0000000..9220c87
-> --- /dev/null
-> +++ b/meta-networking/recipes-support/pgpool2/pgpool2_4.4.1.bb
-> @@ -0,0 +1,52 @@
-> +SUMMARY =3D "a language independent connection pool server for PostgreSQ=
-L."
-> +
-> +DESCRIPTION =3D "Pgpool-II is a middleware that works between PostgreSQL=
- \
-> +               servers and a PostgreSQL database client. It is distribut=
-ed \
-> +               under a license similar to BSD and MIT. It provides the \
-> +               following features."
-> +
-> +HOMEPAGE =3D "http://pgpool.net"
-> +
-> +LICENSE =3D "BSD-2-Clause"
-> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3De4b38de086d73e0521de0bbdbaa4a=
-1a9"
-> +
-> +SRC_URI =3D "http://www.pgpool.net/mediawiki/images/pgpool-II-${PV}.tar.=
-gz \
-> +          file://0001-Fix-build-error-when-build-this-file.patch \
-> +          file://pgpool.sysconfig \
-> +          file://pgpool.service \
-> +           "
-> +SRC_URI[sha256sum] =3D "4b379bbba8e178128a1cee4a5bd1ae116dedb3da6121b728=
-c18f0f54c881f328"
-> +
-> +S =3D "${WORKDIR}/pgpool-II-${PV}"
-> +
-> +inherit autotools systemd
-> +
-> +SYSTEMD_SERVICE:${PN} =3D "pgpool.service"
-> +
-> +PACKAGECONFIG ??=3D " openssl libmemcached postgresql \
-> +"
-> +PACKAGECONFIG[pam] =3D "--with-pam,,libpam"
-> +PACKAGECONFIG[openssl] =3D "--with-openssl,,openssl"
-> +PACKAGECONFIG[libmemcached] =3D "--with-memcached=3D${STAGING_INCDIR}/li=
-bmemcachedutil-1.0,,libmemcached"
-> +PACKAGECONFIG[postgresql] =3D "--with-pgsql-includedir=3D${STAGING_INCDI=
-R}/postgresql,, postgresql"
-> +
-> +EXTRA_OECONF +=3D "--disable-static \
-> +                --disable-rpath \
-> +               "
-> +B =3D "${S}"
-> +CFLAGS:append =3D " -fcommon "
-> +
-> +FILES:${PN} +=3D "${datadir}/pgpool-II/ "
-> +
-> +do_configure:append() {
-> +    echo "#define HAVE_STRCHRNUL 1" >> ${S}/src/include/config.h
-> +    sed -i "s,#define USE_REPL_SNPRINTF 1,/* #undef USE_REPL_SNPRINTF*/,=
-g" ${S}/src/include/config.h
-> +}
-> +
-> +do_install:append() {
-> +    install -d ${D}${sysconfdir}/pgpool-II
-> +    install -D -m 0644 ${WORKDIR}/pgpool.sysconfig  ${D}${sysconfdir}/pg=
-pool-II/pgpool.conf
-> +    install -D -m 0644 ${S}/src/sample/pcp.conf.sample ${D}${sysconfdir}=
-/pgpool-II/pcp.conf
-> +    install -D -m 0644 ${S}/src/sample/pool_hba.conf.sample ${D}${syscon=
-fdir}/pgpool-II/pool_hba.conf
-> +    install -Dm 0644 ${WORKDIR}/pgpool.service ${D}${systemd_system_unit=
-dir}/pgpool.service
-> +}
-> --
-> 1.8.3.1
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#101585): https://lists.openembedded.org/g/openembedde=
-d-devel/message/101585
-> Mute This Topic: https://lists.openembedded.org/mt/97665441/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
-aj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
+UGluZy4NCg0KVGhhbmtzLA0KDQotLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQ0KRnJvbTogVmFs
+ZXJpYSBQZXRyb3YgDQpTZW50OiBUdWVzZGF5LCAxNCBNYXJjaCAyMDIzIDEyOjMwDQpUbzogb3Bl
+bmVtYmVkZGVkLWRldmVsQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmcNCkNjOiBXYW5nIE1pbmd5dSA8
+d2FuZ215QGZ1aml0c3UuY29tPjsgS2hlbSBSYWogPHJhai5raGVtQGdtYWlsLmNvbT4NClN1Ympl
+Y3Q6IFttZXRhLW9lXVtkdW5mZWxsXVtQQVRDSF0gYXBhY2hlMjogdXBncmFkZSAyLjQuNTUgLT4g
+Mi40LjU2DQoNCkZyb206IFdhbmcgTWluZ3l1IDx3YW5nbXlAZnVqaXRzdS5jb20+DQoNCkNoYW5n
+ZWxvZzoNCj09PT09PT09PT0NCi0gIHJvdGF0ZWxvZ3M6IEFkZCAtVCBmbGFnIHRvIGFsbG93IHN1
+YnNlcXVlbnQgcm90YXRlZCBsb2dmaWxlcyB0byBiZQ0KICAgdHJ1bmNhdGVkIHdpdGhvdXQgdGhl
+IGluaXRpYWwgbG9nZmlsZSBiZWluZyB0cnVuY2F0ZWQuDQoNCi0gIG1vZF9sZGFwOiBMREFQQ29u
+bmVjdGlvblBvb2xUVEwgc2hvdWxkIGFjY2VwdCBuZWdhdGl2ZSB2YWx1ZXMgaW4gb3JkZXIgdG8N
+CiAgIGFsbG93IGNvbm5lY3Rpb25zIG9mIGFueSBhZ2UgdG8gYmUgcmV1c2VkLiBVcCB0byBub3cs
+IGEgbmVnYXRpdmUgdmFsdWUNCiAgIHdhcyBoYW5kbGVkIGFzIGFuIGVycm9yIHdoZW4gcGFyc2lu
+ZyB0aGUgY29uZmlndXJhdGlvbiBmaWxlLiAgUFIgNjY0MjEuDQoNCi0gIG1vZF9wcm94eV9hanA6
+IFJlcG9ydCBhbiBlcnJvciBpZiB0aGUgQUpQIGJhY2tlbmQgc2VuZHMgYW4gaW52YWxpZCBudW1i
+ZXINCiAgIG9mIGhlYWRlcnMuDQoNCi0gIG1vZF9tZDoNCiAgIC0gRW5hYmxpbmcgRUQyNTUxOSBz
+dXBwb3J0IGFuZCBjZXJ0aWZpY2F0ZSB0cmFuc3BhcmVuY3kgaW5mb3JtYXRpb24gd2hlbg0KICAg
+ICBidWlsZGluZyB3aXRoIGxpYnJlc3NsIHYzLjUuMCBhbmQgbmV3ZXIuDQogICAtIE1EQ2hhbGxl
+bmdlRG5zMDEgY2FuIG5vdyBiZSBjb25maWd1cmVkIGZvciBpbmRpdmlkdWFsIGRvbWFpbnMuDQog
+ICAtIEZpeGVkIGEgYnVnIHRoYXQgY2F1c2VkIHRoZSBjaGFsbGVuZ2UNCiAgICAgdGVhcmRvd24g
+bm90IGJlaW5nIGludm9rZWQgYXMgaXQgc2hvdWxkLg0KDQotICBtb2RfaHR0cDI6IGNsaWVudCBy
+ZXNldHMgb2YgSFRUUC8yIHN0cmVhbXMgbGVkIHRvIHVud2FudGVkIDUwMCBlcnJvcnMNCiAgIHJl
+cG9ydGVkIGluIGFjY2VzcyBsb2dzIGFuZCBlcnJvciBkb2N1bWVudHMuIFRoZSBwcm9jZXNzaW5n
+IG9mIHRoZQ0KICAgcmVzZXQgd2FzIGNvcnJlY3QsIG9ubHkgdW5uZWNjZXNhcnkgcmVwb3J0aW5n
+IHdhcyBjYXVzZWQuDQoNCi0gIG1vZF9wcm94eV91d3NnaTogU3RyaWN0ZXIgYmFja2VuZCBIVFRQ
+IHJlc3BvbnNlIHBhcnNpbmcvdmFsaWRhdGlvbi4NCg0KU2lnbmVkLW9mZi1ieTogV2FuZyBNaW5n
+eXUgPHdhbmdteUBmdWppdHN1LmNvbT4NClNpZ25lZC1vZmYtYnk6IEtoZW0gUmFqIDxyYWoua2hl
+bUBnbWFpbC5jb20+DQotLS0NCiAuLi4vYXBhY2hlMi97YXBhY2hlMl8yLjQuNTUuYmIgPT4gYXBh
+Y2hlMl8yLjQuNTYuYmJ9ICAgICAgICAgICAgfCAyICstDQogMSBmaWxlIGNoYW5nZWQsIDEgaW5z
+ZXJ0aW9uKCspLCAxIGRlbGV0aW9uKC0pICByZW5hbWUgbWV0YS13ZWJzZXJ2ZXIvcmVjaXBlcy1o
+dHRwZC9hcGFjaGUyL3thcGFjaGUyXzIuNC41NS5iYiA9PiBhcGFjaGUyXzIuNC41Ni5iYn0gKDk5
+JSkNCg0KZGlmZiAtLWdpdCBhL21ldGEtd2Vic2VydmVyL3JlY2lwZXMtaHR0cGQvYXBhY2hlMi9h
+cGFjaGUyXzIuNC41NS5iYiBiL21ldGEtd2Vic2VydmVyL3JlY2lwZXMtaHR0cGQvYXBhY2hlMi9h
+cGFjaGUyXzIuNC41Ni5iYg0Kc2ltaWxhcml0eSBpbmRleCA5OSUNCnJlbmFtZSBmcm9tIG1ldGEt
+d2Vic2VydmVyL3JlY2lwZXMtaHR0cGQvYXBhY2hlMi9hcGFjaGUyXzIuNC41NS5iYg0KcmVuYW1l
+IHRvIG1ldGEtd2Vic2VydmVyL3JlY2lwZXMtaHR0cGQvYXBhY2hlMi9hcGFjaGUyXzIuNC41Ni5i
+Yg0KaW5kZXggODhjZWYwZWY4My4uMWFkMjIyYWNlNCAxMDA2NDQNCi0tLSBhL21ldGEtd2Vic2Vy
+dmVyL3JlY2lwZXMtaHR0cGQvYXBhY2hlMi9hcGFjaGUyXzIuNC41NS5iYg0KKysrIGIvbWV0YS13
+ZWJzZXJ2ZXIvcmVjaXBlcy1odHRwZC9hcGFjaGUyL2FwYWNoZTJfMi40LjU2LmJiDQpAQCAtMjcs
+NyArMjcsNyBAQCBTUkNfVVJJOmFwcGVuZDpjbGFzcy10YXJnZXQgPSAiIFwNCiAgICAgICAgICAg
+ICINCiANCiBMSUNfRklMRVNfQ0hLU1VNID0gImZpbGU6Ly9MSUNFTlNFO21kNT1iZGRlZGRmYWM4
+MGIyYzlhODgyMjQxZDAwOGJiNDFjMyINCi1TUkNfVVJJW3NoYTI1NnN1bV0gPSAiMTFkNmJhMTll
+MzZjMGI5M2NhNjJlNDdlNmZmYzJkMmYyODg0OTQyNjk0YmNlMGYyM2YzOWM3MWJkYzVmNjlhYyIN
+CitTUkNfVVJJW3NoYTI1NnN1bV0gPSAiZDhkNDVmMTM5OGJhODRlZGQwNWJiMzNjYTc1OTNhYzI5
+ODliMTdjYjljN2EwY2FmZTU0NDJkNDFhZmRiMmQ3YyINCiANCiBTID0gIiR7V09SS0RJUn0vaHR0
+cGQtJHtQVn0iDQogDQotLQ0KMi4yNS4xDQoNCg==
 
