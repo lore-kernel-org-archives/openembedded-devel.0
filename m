@@ -1,113 +1,119 @@
-Return-Path: <akuster808@gmail.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 611B3C7618A
-	for <webhook@archiver.kernel.org>; Sun, 19 Mar 2023 12:09:01 +0000 (UTC)
-Received: from mail-qv1-f42.google.com (mail-qv1-f42.google.com [209.85.219.42])
- by mx.groups.io with SMTP id smtpd.web11.15414.1679227731654780081
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 92FA6C7618A
+	for <webhook@archiver.kernel.org>; Sun, 19 Mar 2023 16:20:22 +0000 (UTC)
+Received: from mail-oa1-f52.google.com (mail-oa1-f52.google.com [209.85.160.52])
+ by mx.groups.io with SMTP id smtpd.web11.20083.1679242817691108285
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 19 Mar 2023 05:08:51 -0700
+ Sun, 19 Mar 2023 09:20:17 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=XbAd/wmJ;
- spf=pass (domain: gmail.com, ip: 209.85.219.42, mailfrom: akuster808@gmail.com)
-Received: by mail-qv1-f42.google.com with SMTP id m6so6181826qvq.0
-        for <openembedded-devel@lists.openembedded.org>; Sun, 19 Mar 2023 05:08:51 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=RFNWRnJ2;
+ spf=pass (domain: gmail.com, ip: 209.85.160.52, mailfrom: raj.khem@gmail.com)
+Received: by mail-oa1-f52.google.com with SMTP id 586e51a60fabf-17997ccf711so10885406fac.0
+        for <openembedded-devel@lists.openembedded.org>; Sun, 19 Mar 2023 09:20:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112; t=1679227730;
-        h=content-transfer-encoding:subject:from:to:content-language
-         :user-agent:mime-version:date:message-id:from:to:cc:subject:date
+        d=gmail.com; s=20210112; t=1679242817;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=Ag+Rgogy8Lys7GzMb99d8GwiSab/s7VyAfft5pxQA1M=;
-        b=XbAd/wmJc1bAAJH/vRiP2kscZzVtRw86ALtLN49gcaXq4XrL8nEVTJYGq5/Qx0zXUy
-         Jv7+ewvkealZ4+7F/9Ctfk8ddSGPeNZ+mETxrWBMqvHi/N7G5/lz/mOTvbz6HISL7K80
-         aC6t4fBfN2ZTAzfUlhDxLnJbR1UCKHyJVO+cjJAySqr5l1EsbqJM4YtDU70dpimC1CZ2
-         qUlQ0s6StX07FCvdVAgU1tuFfZy+JSDlpg8gmAVES9G5IY7Jk4Ji1TjqZunQXrIxyX64
-         ORvJemMdIolXX18Eun22Q0F0+Mf1YRmd2FYQQe5v62Lz2ffJLpjJ5xOqOTngMrGVfs/1
-         99zQ==
+        bh=v3zmBbWLh7v7HgjJGc7JPq8sk99V+WPWUmTa7qcTp98=;
+        b=RFNWRnJ2bsAhGxk5RUJ14lxjrx9NqYoR2bfsR2CSQ5NA8nwlsM3VctdcuEiD8jJNba
+         f2y54LVjlZSaDiZiCkAIy5xJQMn374wDYpTOo9qJFRJ66aKqzPHXEEsvYnlRSVLO7tGa
+         oiG4g2Z2OqKNn5G8Dh7mwNCjX1DpPCAbKbWNGXugobAlNNkwaVzVKTJ0z78nEzbx0Mzd
+         eB0rFly40adwKLaiXqxCmonfqAXWYU4LaKrASJU9tI0N4a34lXKNG2rWBMEipZ+SXNXR
+         E7wfz7oKRKGwru0KS52eqoQkG28/hHuZJCIciNuQxqjVy7mF9Yx7aImnYNj/8f99jMcG
+         4MsA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112; t=1679227730;
-        h=content-transfer-encoding:subject:from:to:content-language
-         :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=Ag+Rgogy8Lys7GzMb99d8GwiSab/s7VyAfft5pxQA1M=;
-        b=ym+fnUa5u2fneoqlc3JflcY6JtGhBrHy0WrKr9En7+ax2/F/H27LYarGmGQQwVDCz9
-         9FHsTPbQyMOE40Q3Jt8l4rrL7i184Hxcec3Nop6aFVlYGcg04PN5HNbiFI+Ar1pyquwr
-         Gt4DxJRl3eP+rlmxTiZKgiLcnhSOWyDkOE4Tyg3qIz3DJ7CC8IxOEmif2/DBiGL0YpuT
-         150m0e97SOFHuzXXX1D8hoKlO6JN3BSLuM7FWCIfaFHbCtY4NKnuMN2VGrbiWQVvaEkv
-         KYmAjIBOFobTkbmhDxJDWtDJGFf23qtBR8+16mmn1CToPLBczMSbBzOsxYo+EnZSP2Xk
-         Hmpw==
-X-Gm-Message-State: AO0yUKVARQrCZkhkg1bfHlPK1qrS+fX71gndnVxmJ9BkmwdsRBsAo+cx
-	9cf7a6wMOai1wIlTq7hLOCg=
-X-Google-Smtp-Source: AK7set99pThP2l7Y88LMa/Z9LMeN9YEqAfMWoFgBsucGLcenkyOifyUnIqxVamWViFla5FfmPYFXWA==
-X-Received: by 2002:a05:6214:2681:b0:5ad:5698:848e with SMTP id gm1-20020a056214268100b005ad5698848emr31591440qvb.48.1679227730460;
-        Sun, 19 Mar 2023 05:08:50 -0700 (PDT)
-Received: from ?IPV6:2600:1700:9190:ba10:46a:12ba:e74a:14c9? ([2600:1700:9190:ba10:46a:12ba:e74a:14c9])
-        by smtp.gmail.com with ESMTPSA id q16-20020a05620a025000b007429d1f6176sm5310113qkn.94.2023.03.19.05.08.50
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Sun, 19 Mar 2023 05:08:50 -0700 (PDT)
-Message-ID: <dcbbd8eb-4864-7514-563b-a79f722e820e@gmail.com>
-Date: Sun, 19 Mar 2023 08:08:49 -0400
+        d=1e100.net; s=20210112; t=1679242817;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=v3zmBbWLh7v7HgjJGc7JPq8sk99V+WPWUmTa7qcTp98=;
+        b=EMb0yDA3rk2Sqq0kPiX1tsJjpb2AbnHrDzwbaHha70CZEL45TmiRGVOdSPV8LE0Y06
+         d/en3Ck2SQHnh8JvAHa4Ydtk3LWojzb85yZqwHWvJCOfXNve5+BCcKuffMqAuqGa8lcW
+         MuPJaXsfIImu7+ApkcBCUEnZCRrdxlXmyYMr8VAbaSoTn3k4fMjXl5AjLtWtn2V/F7im
+         swXD76K7D33cixsxgiwAGaCvwxMcJxtjOFyifSa6Z5jmcr/4cicI2msDhkrpBEeiuWLQ
+         +lqRnSnTiELjHIKDuhCRMH1sSwK4jQhrrBUAE57Jmv6I/vOKMn0WL5YVNzqCEJ4aUcXt
+         COPQ==
+X-Gm-Message-State: AO0yUKVEIEyaZWEh0lLnfqyCj6hHs7JzuJMo6xfjaeAlCi9MCGGVuL5w
+	56yxmWK1YcJHWJv/1WnP/HGAzJZmAdd95EyNLpQ=
+X-Google-Smtp-Source: AK7set/X4DUbWEgDcakP/31vmRJdETAPjl9kR6R5pYX7oRshgZQ+ASHA6uy7NOS0osHSrtosIN2dnbxfuKqQnbp45QI=
+X-Received: by 2002:a05:6870:ab85:b0:17a:b1f4:860b with SMTP id
+ gs5-20020a056870ab8500b0017ab1f4860bmr1886040oab.2.1679242816844; Sun, 19 Mar
+ 2023 09:20:16 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.7.1
-Content-Language: en-US
-To: Khem Raj <raj.khem@gmail.com>,
- OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-From: akuster808 <akuster808@gmail.com>
-Subject: dunfell merge request: March 19th
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+References: <dcbbd8eb-4864-7514-563b-a79f722e820e@gmail.com>
+In-Reply-To: <dcbbd8eb-4864-7514-563b-a79f722e820e@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sun, 19 Mar 2023 09:19:50 -0700
+Message-ID: <CAMKF1spQsAAR1bHA=LQpY9STjHo=o4fZ7YWPxdVAjVseRS=SXw@mail.gmail.com>
+Subject: Re: dunfell merge request: March 19th
+To: akuster808 <akuster808@gmail.com>
+Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 19 Mar 2023 12:09:01 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101597
+ <openembedded-devel@lists.openembedded.org>; Sun, 19 Mar 2023 16:20:22 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101598
 
-The following changes since commit 87571345059f82fb7599e3aa82e6fdcfbd361098:
+applied thanks.
 
-   zeromq: 4.3.2 -> 4.3.4 (2023-02-22 11:24:23 -0500)
-
-are available in the Git repository at:
-
-   https://git.openembedded.org/meta-openembedded dunfell-next
-
-for you to fetch changes up to 7ae42df58f2bcc730153715c3339a6875b0b2497:
-
-   xterm: Remove undeclared variables introduced by backport (2023-03-18 
-16:16:42 -0400)
-
-----------------------------------------------------------------
-Chris Rogers (1):
-       xterm: Remove undeclared variables introduced by backport
-
-Poonam Jadhav (4):
-       nodejs: Fix CVE-2022-32212
-       nodejs: Fix CVE-2022-35255
-       nodejs: Fix CVE-2022-43548
-       nodejs: Fix CVEs for nodejs
-
-Priyal Doshi (1):
-       open-vm-tools: Security fix for CVE-2022-31676
-
-  meta-oe/recipes-devtools/nodejs/nodejs/CVE-2022-32212.patch     | 133 +
-  meta-oe/recipes-devtools/nodejs/nodejs/CVE-2022-35255.patch     | 237 ++
-  meta-oe/recipes-devtools/nodejs/nodejs/CVE-2022-43548.patch     | 214 ++
-  meta-oe/recipes-devtools/nodejs/nodejs/CVE-llhttp.patch         | 4348 
-+++++++++++++++++++++++++++
-  meta-oe/recipes-devtools/nodejs/nodejs_12.22.12.bb |    4 +
-  meta-oe/recipes-graphics/xorg-app/xterm/CVE-2022-45063.patch    | 21 +-
-  ...1-Properly-check-authorization-on-incoming-guestOps-re.patch | 39 +
-  meta-oe/recipes-support/open-vm-tools/open-vm-tools_11.0.1.bb |    1 +
-  8 files changed, 4982 insertions(+), 15 deletions(-)
-  create mode 100644 
-meta-oe/recipes-devtools/nodejs/nodejs/CVE-2022-32212.patch
-  create mode 100644 
-meta-oe/recipes-devtools/nodejs/nodejs/CVE-2022-35255.patch
-  create mode 100644 
-meta-oe/recipes-devtools/nodejs/nodejs/CVE-2022-43548.patch
-  create mode 100644 meta-oe/recipes-devtools/nodejs/nodejs/CVE-llhttp.patch
-  create mode 100644 
-meta-oe/recipes-support/open-vm-tools/open-vm-tools/0001-Properly-check-authorization-on-incoming-guestOps-re.patch
-
+On Sun, Mar 19, 2023 at 5:08=E2=80=AFAM akuster808 <akuster808@gmail.com> w=
+rote:
+>
+> The following changes since commit 87571345059f82fb7599e3aa82e6fdcfbd3610=
+98:
+>
+>    zeromq: 4.3.2 -> 4.3.4 (2023-02-22 11:24:23 -0500)
+>
+> are available in the Git repository at:
+>
+>    https://git.openembedded.org/meta-openembedded dunfell-next
+>
+> for you to fetch changes up to 7ae42df58f2bcc730153715c3339a6875b0b2497:
+>
+>    xterm: Remove undeclared variables introduced by backport (2023-03-18
+> 16:16:42 -0400)
+>
+> ----------------------------------------------------------------
+> Chris Rogers (1):
+>        xterm: Remove undeclared variables introduced by backport
+>
+> Poonam Jadhav (4):
+>        nodejs: Fix CVE-2022-32212
+>        nodejs: Fix CVE-2022-35255
+>        nodejs: Fix CVE-2022-43548
+>        nodejs: Fix CVEs for nodejs
+>
+> Priyal Doshi (1):
+>        open-vm-tools: Security fix for CVE-2022-31676
+>
+>   meta-oe/recipes-devtools/nodejs/nodejs/CVE-2022-32212.patch     | 133 +
+>   meta-oe/recipes-devtools/nodejs/nodejs/CVE-2022-35255.patch     | 237 +=
++
+>   meta-oe/recipes-devtools/nodejs/nodejs/CVE-2022-43548.patch     | 214 +=
++
+>   meta-oe/recipes-devtools/nodejs/nodejs/CVE-llhttp.patch         | 4348
+> +++++++++++++++++++++++++++
+>   meta-oe/recipes-devtools/nodejs/nodejs_12.22.12.bb |    4 +
+>   meta-oe/recipes-graphics/xorg-app/xterm/CVE-2022-45063.patch    | 21 +-
+>   ...1-Properly-check-authorization-on-incoming-guestOps-re.patch | 39 +
+>   meta-oe/recipes-support/open-vm-tools/open-vm-tools_11.0.1.bb |    1 +
+>   8 files changed, 4982 insertions(+), 15 deletions(-)
+>   create mode 100644
+> meta-oe/recipes-devtools/nodejs/nodejs/CVE-2022-32212.patch
+>   create mode 100644
+> meta-oe/recipes-devtools/nodejs/nodejs/CVE-2022-35255.patch
+>   create mode 100644
+> meta-oe/recipes-devtools/nodejs/nodejs/CVE-2022-43548.patch
+>   create mode 100644 meta-oe/recipes-devtools/nodejs/nodejs/CVE-llhttp.pa=
+tch
+>   create mode 100644
+> meta-oe/recipes-support/open-vm-tools/open-vm-tools/0001-Properly-check-a=
+uthorization-on-incoming-guestOps-re.patch
+>
 
