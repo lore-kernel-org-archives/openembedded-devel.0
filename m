@@ -1,423 +1,1133 @@
-Return-Path: <yi.zhao@eng.windriver.com>
+Return-Path: <philip@balister.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 61A78C6FD1D
-	for <webhook@archiver.kernel.org>; Mon, 20 Mar 2023 08:56:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3AADEC7618A
+	for <webhook@archiver.kernel.org>; Mon, 20 Mar 2023 14:27:15 +0000 (UTC)
 Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
- by mx.groups.io with SMTP id smtpd.web11.9276.1679302590971983239
+ by mx.groups.io with SMTP id smtpd.web10.11412.1679312026758684415
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 20 Mar 2023 01:56:31 -0700
+ Mon, 20 Mar 2023 04:33:47 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=pps06212021 header.b=UMDcTSZ5;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=24432e4bc3=yi.zhao@windriver.com)
+ dkim=pass header.i=@windriver.com header.s=pps06212021 header.b=cU0mWJWp;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=24432b7103=manojsingh.saun@windriver.com)
 Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 32K7p2Gx019809
-	for <openembedded-devel@lists.openembedded.org>; Mon, 20 Mar 2023 08:56:30 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com; h=from : to :
- subject : date : message-id : content-transfer-encoding : content-type :
+	by mx0a-0064b401.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 32KBDv2T027150
+	for <openembedded-devel@lists.openembedded.org>; Mon, 20 Mar 2023 11:33:45 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com; h=from : to : cc :
+ subject : date : message-id : references : in-reply-to : content-type :
  mime-version; s=PPS06212021;
- bh=FTOQS/SAKuN6s9tZqTsLqNTKvej7K1CfwsLzJeH6NCw=;
- b=UMDcTSZ5Bf7sD2fEFJPL2fBS/X/fm+gangsJg6Z7/au5fKiNI0QPjo06y1F/64dueY9f
- bFoPGrMEJkQeCDcta3nMefm6LOi7vkeojdVm8Nyth9im43Xs25Y6InjePUwjQ8OOXIWQ
- 27WJNz8Vf7BviGgYRGP/OO51ewkeHiblsF6x6GjKZ+YP+4n4YI4tmD6gxoeT5qah4wAH
- swDym0RgCTnCR0ddMSY5w+bApibWCjINkUKlJP8lMaR5TaTQtqf0BF7UXmB9N1uQVw+3
- ClcpC07Efb1V+0ZjWPxYCYbm7kaqcWHbJybfcBNol8wHgJoR3T9pQl/w+iMA75fm3CQq RQ== 
-Received: from nam10-bn7-obe.outbound.protection.outlook.com (mail-bn7nam10lp2106.outbound.protection.outlook.com [104.47.70.106])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3pd49asnqe-1
+ bh=A6uREsMRD7y3KdVM1zAipfC6gDHkS17Jq1fVPPZmAIY=;
+ b=cU0mWJWpikPu+745jbsUc3U0KU7PZyr1AeTaTR20Cz4GQ5DbkZnKI+Y/4gWhN7tp1dR7
+ Rki6dZj8w4cF0LZTHNQukJHX9Cjigr9SQv3u/zIXxf27dlbNDwAJpjDNFzXUefBKmyii
+ zyMBafR9MKw9NahRyNK4YffbY6kxAPzWdaEYAxv8e6/ACjOpaTn+AcAqlWClwUFcKXbF
+ tApdh0gE3lur4WrOgQWd4iUuWG4pArgsjU/fjZ7qvC67Z8I5HmTCe/HGxmfdbxRFoEV8
+ 1JbquMMGDsRSssipatloDpGTpsYmB1SK6XR3Vai3sK5YKszsDI8j4cFlaN70MfEP1RYS RA== 
+Received: from nam02-sn1-obe.outbound.protection.outlook.com (mail-sn1nam02lp2043.outbound.protection.outlook.com [104.47.57.43])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3pd49asryk-1
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Mon, 20 Mar 2023 08:56:29 +0000
+	for <openembedded-devel@lists.openembedded.org>; Mon, 20 Mar 2023 11:33:45 +0000
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=EOo3oiQfnTvaLz/eD7kuDvr6dZu/6r378aZePnFwU30uNRlH9adKEDZp6iAFgLh0/ENKQur9gfan4Uj9JMocKYdQ9A+wGVWqDY8DvQNxdbKhQLA+rxNNNovGqNyetZZWcn7ehsbDiRCB/LYLyLaJO4o7R0YGcg6httUFKJuSDlT0InuSXFzLrbXZA2ver9rbsB2NAHQFcF6XjBaoarptJ+//9lEpJqH+BQUMGZ8MYVTWA8bxNUIrmJsQ/V4aP/Y1cPf71IBAVW0z986phYb/Iqwae2G0rRj/z4VZwpgrXw7tbHZkYAbtvp9Jg9WC+ielmsE2kTUKj82lowuDbiNPHw==
+ b=Y/ISi4kxWnXJ+PD7wECPqf906hTzFsZrtF3ac/UtXPHSc3fYcQrE1tHgcQNUralXZojkvMB8I+Q0V5CWxNYdQGKwLKnZU0n2FyVudRO+1nyr2pgdhzXcqa49EjGSqIGP8fCuCcYrMPpdmBEwKtnjpFnCKM+xl/UJGU5LS40byAfjHWaP87yXh3rN3G4e+GdphKxNErhcB7Okh27QlFFvBZ36pADtPQEwpxWqW9026ezCXa/d6xeROEA85bcEmaR1rozg5mldM4c3yqpcOlwoIXcTa7tejeZJ3rGLOehFzKU/PsPy+ZgtdVVU5EElkgCXxprzQ9Vq9vd6eRz0rIdpZQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=FTOQS/SAKuN6s9tZqTsLqNTKvej7K1CfwsLzJeH6NCw=;
- b=d7r5JbtKJe8hMPO4oenzQkko8wagQ7yPmXdMuI5gsehbaNLl5aw8YHtQaOjrwFogZgr4upQTkbOtaw1uTRciSS/pc7CaelYXuegz2it0cveuVb7BF/rFCtPrGd2YkswAp1Stuwd5kspw6ofBGlPki0ed78uES8Swap3aLrZxwTGf91IwyV5GmyR8EOsY5wngcjytLbun0JA36BR24E57lXL9X9Q7iPfVbJVXXoRYLoglfIoIj7CZYFK0FKsfZOYibkq8PJ54HPDDF9aa2DrWW9mliYi0zWHoJKH7LIieNVnxj73z2XhvwY/5vvTuFlfs5gNOi9Mh32WMt41g30UChw==
+ bh=A6uREsMRD7y3KdVM1zAipfC6gDHkS17Jq1fVPPZmAIY=;
+ b=M0E0KtR3aoUlfN7Mlkmx19FgsXMCid+41RdkkHLqwB9p3yLUAr3HysL03PMWD7EZntGBf2LLfWTMiQ4VFTaqez1OXGzv+8aic7D9+mBhjB25bjePT94wCPmFvM5nQG8chLefccn9jUXu8Im1dDHFIc3U1iQrlytHF8xhrL8tfJxDuVOn7Wzw7q7VdOEIamo5dnMNYzLDRRAWXJjBv8Rxu+Aj4wpjhckhvjSWQKNh+GK5XvUlDxb0NlJOrLomIMqn2t5zkSNQPV8J3pnb6RuKmyAL87yuQjKUQZ+o71eBWxBxpAyA0eIL8JXIIeEz1pOGUvGGJTQceZN177dfhDrcTA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
-Received: from CO1PR11MB4867.namprd11.prod.outlook.com (2603:10b6:303:9a::13)
- by SA3PR11MB7553.namprd11.prod.outlook.com (2603:10b6:806:316::8) with
+Received: from BN6PR11MB1924.namprd11.prod.outlook.com (2603:10b6:404:105::9)
+ by BL1PR11MB5479.namprd11.prod.outlook.com (2603:10b6:208:317::18) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6178.37; Mon, 20 Mar
- 2023 08:56:22 +0000
-Received: from CO1PR11MB4867.namprd11.prod.outlook.com
- ([fe80::42a3:f515:f89b:4eb3]) by CO1PR11MB4867.namprd11.prod.outlook.com
- ([fe80::42a3:f515:f89b:4eb3%5]) with mapi id 15.20.6178.037; Mon, 20 Mar 2023
- 08:56:26 +0000
-From: Yi Zhao <yi.zhao@windriver.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-networking][PATCH] mbedtls: add ptest
-Date: Mon, 20 Mar 2023 16:56:15 +0800
-Message-Id: <20230320085615.535596-1-yi.zhao@windriver.com>
-X-Mailer: git-send-email 2.25.1
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: SG2PR01CA0161.apcprd01.prod.exchangelabs.com
- (2603:1096:4:28::17) To CO1PR11MB4867.namprd11.prod.outlook.com
- (2603:10b6:303:9a::13)
+ 2023 11:33:41 +0000
+Received: from BN6PR11MB1924.namprd11.prod.outlook.com
+ ([fe80::2e88:b038:f38e:40ea]) by BN6PR11MB1924.namprd11.prod.outlook.com
+ ([fe80::2e88:b038:f38e:40ea%7]) with mapi id 15.20.6178.037; Mon, 20 Mar 2023
+ 11:33:37 +0000
+From: "Manoj Saun" <manojsingh.saun@windriver.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+CC: "Mali, Narpat" <Narpat.Mali@windriver.com>,
+        "G Pillai, Hari"
+	<Hari.GPillai@windriver.com>,
+        "Kang, Kai" <Kai.Kang@windriver.com>
+Subject: Re: [oe][meta-webserver][PATCH 1/1] nginx: fix-CVE-2022-41741, CVE-2022-41742
+Thread-Topic: [oe][meta-webserver][PATCH 1/1] nginx: fix-CVE-2022-41741,
+ CVE-2022-41742
+Thread-Index: AQHZTPJOEJXNeFlKiEq74zP1hjYR3K8DpaQD
+Date: Mon, 20 Mar 2023 11:33:36 +0000
+Message-ID: 
+ <BN6PR11MB1924DF0751010B40365B5BEFE0809@BN6PR11MB1924.namprd11.prod.outlook.com>
+References: <20230302103226.1888266-1-manojsingh.saun@windriver.com>
+In-Reply-To: <20230302103226.1888266-1-manojsingh.saun@windriver.com>
+Accept-Language: en-GB, en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+msip_labels: 
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: BN6PR11MB1924:EE_|BL1PR11MB5479:EE_
+x-ms-office365-filtering-correlation-id: eb83b72a-a94c-46c5-9d54-08db2936f217
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: 
+ L+YjYjHs+22CRIkvYNQHUCVuvP03uHqLdsPxiZ4QA0KqXCuA+18EhCJc1CYm3SHDj2y53IYuDjiNTMUpPJBCzyR4sibK9QlyzOm+Jdldzm5redIU5TeV4/j/lMXjkN0HjgXY70oOK4n5pnriOn4/Yw4To/6y0SLX9gYfkiIF60A+TIqlb5TF0MXgIQEhSvq5I4zj17FNj6Mwm/P0eQKUzGFcyxWasYcgE2qF96858Vqik6UZLxtxv/9ZdVZWaDxo8T8UxtckCqbtO/4xvV55Cz3viYUp050MHnS4ge6A7wShCPBzYL0DIGsohewsmyqfbV0QDGJDxA7w8rExY8D/DivgeWQdxMCGxwNdq4pbe9laP6kfa7LCle+YU0ycuX37SWlNddtAHIvYADcJ2IMXVa4UFbSeXPRUOJX3QXMsXyIK9XPy3GqZm3ZWALWFopFrWLrMlTJneQdfe6Je5IANYKwRrVtMx9EXsvITIWplS2xObbGW/WB8OYR97oSgV8j5N2bIItcE9nEQ77X15INoomtw0UcB5cjpaoc3shuCmjTTA37tX6tI5+f5rmNzRmElciEa0pp2s72VLJueWXoiNKQTrSFdesHK3B+hrye8Mta4Q0mQ9w7r9CaU7/VWy9QnijClVMc6yH6wxVOvldPe4M0YnTTKC9+6Uo2w+06sv2QXF/XsqmKGfVpAcVGrHVpbthh5JvRJAd8gPG25ViHKmyKwr4iUJ9cOs1QPx+Zc0BdCjMPOezf4ib3qT8m2rRNF
+x-forefront-antispam-report: 
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BN6PR11MB1924.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230025)(4636009)(396003)(39850400004)(366004)(346002)(376002)(136003)(451199018)(33656002)(26005)(53546011)(6506007)(9686003)(107886003)(19627405001)(966005)(316002)(83380400001)(6916009)(4326008)(64756008)(8676002)(66446008)(7696005)(186003)(66556008)(54906003)(478600001)(66946007)(66476007)(91956017)(8936002)(52536014)(5660300002)(30864003)(2906002)(41300700001)(122000001)(166002)(76116006)(38070700005)(71200400001)(38100700002)(18265965005)(86362001)(55016003);DIR:OUT;SFP:1101;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: 
+ =?us-ascii?Q?LTamn4stfXLoWkWXwxE/ZjRKNDRruXSHFjFBZGtTqk3jKGvYWontjAdTzeBq?=
+ =?us-ascii?Q?nlb1RA/P9SDuZ27y1JChzhVmjTbp/ZPP49DjP0CBE2auwZQRv88kUy9Fr7MZ?=
+ =?us-ascii?Q?mpKhY7pMlKCTolqgfbclk/hWI3VwUO/9DOwxKopo+Pciek3YxbAA9rdxj9Xq?=
+ =?us-ascii?Q?LUptV7MteYYgKwF2lgxEG5OPZStMxNJ50rbGqUGs5dNJjTv+F15YVUAnL6vA?=
+ =?us-ascii?Q?SBWVV9e0uGwePxhipmHCWQEBI1cY8Bdb6Qt1ZDnAT17ig+2CjFnat+bo08nu?=
+ =?us-ascii?Q?y9c5uoybbS9UgSIXT/glz4LLDCltVjsqg0dp54NI+fT/BYyd+s9outoQKW2N?=
+ =?us-ascii?Q?pH/n73zAcHG+wwgg/9iTNpNcWh3oOVY7Gm43a3fd4SLo5DgSQ4+SAauLmN7Y?=
+ =?us-ascii?Q?wvm/evyPtZxBj3vBzuKv9WD2RQUXAZg8c1cJHd1cMc+/2oLzgjXr0bplXwJP?=
+ =?us-ascii?Q?VRtAyt/k4N4Pd2w8Bw9QLVTru3IIbGr911tfQ1VukaJ7WACkdmq5GcOOd7O7?=
+ =?us-ascii?Q?IJALGeQkA3jvKHJuuxMh9gZCjgCbLMsNGXcbQxekRHMj0STFF1p7EUKVVuIk?=
+ =?us-ascii?Q?sj8w/XLuG5hM/ulcULjnmD/3gK+IEtj/lZiSNbYKUSgmKz7mLnXLLmIA7MvK?=
+ =?us-ascii?Q?AtMJKN9xFlx+B/aunxlwIaLoCaf2azs2CfoXILMnFUn6PXES0wJnckQXO3jz?=
+ =?us-ascii?Q?qaGlzGJa3wKCBtrzwlubEA8RB2Kup/3M3zWuSr+q7HEZSnJmP2AnPCy+yOMc?=
+ =?us-ascii?Q?VZb6+y9iK00F+BVBHCDzCJC+DxndX0CESOOs55uFSoIdxwebL0QQNlOew4PF?=
+ =?us-ascii?Q?gBM5a5/7Ccaj4LLlShTkdva8VwyHABJ3SIevjb1zKrDV9jgfff7oRxhhGhmj?=
+ =?us-ascii?Q?WIoDfF0yAM8FuEnc40Sn7fHneZ5Wc93lNvmsuEVyPvEVT3kWjRMOohuEdY59?=
+ =?us-ascii?Q?l501nIbp7pn0heUJef2neCiTqoreHc8Pnthqxk11Yu+ATkbQEEIdrzLQzvi4?=
+ =?us-ascii?Q?Em2YWJK2gUcTQj+La+x3k9+SyxJCgdOivIfl1woRhaRouR4CVq5vDu6HJZne?=
+ =?us-ascii?Q?uOZdxkuw5PLaloSm1Yx7HNVJlu+xeCQSbAkaCja5yzjn0qO6d12AQIXmwQGu?=
+ =?us-ascii?Q?nx6BbkSwUG3J13n+7QuujHXJcLfiia5+KgttqKljuhdLCjffQLvuTARu2BuB?=
+ =?us-ascii?Q?DmMNBMB0DKoXhkZz8vS5F+rtv3qTKjXOvR1WtzYund2Ou6k3rCyLq/30+fn/?=
+ =?us-ascii?Q?pmwguAVs8F2EfBiFpBweSjOA1JXGMaaNXZqo4UOrUeVNbqNBsex1inhe51NE?=
+ =?us-ascii?Q?g7Gybp/HjQ5S0ddrTpm7dEptn+rM99SasKn/tIgtfWVTNwtU9LamkBz/K7BP?=
+ =?us-ascii?Q?8wTMd34g+91eL7ljSOePx3aPxL3QASgaT3QLsHJ3L5yidDNvJF2OKXhL2wmV?=
+ =?us-ascii?Q?xg4GN/A8yIr7Z/PMNJq0qRe2WRptUOynvUkI5GKjl81Lju5zrNQxEx8Z4Ghx?=
+ =?us-ascii?Q?BTdrzfVt0yJpf+hqhvbNbH2qBAeZ3k5lRH7GKKRtUixVfGegPYOoiIxNHdt+?=
+ =?us-ascii?Q?GCcNVmZZyTcLHszGQNznZhhR8ViiKHa5n3mmEv6H/EAxqO2qMfAug9oMFNSx?=
+ =?us-ascii?Q?aA=3D=3D?=
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CO1PR11MB4867:EE_|SA3PR11MB7553:EE_
-X-MS-Office365-Filtering-Correlation-Id: 12cf0bf5-702b-4ab0-b7f9-08db2920fce9
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 
-	D0gErC6lGWff/qJ6EOAqFV0NikYhGpaAyQ10h5nr7FPtJvaQaob89+Jy1VZ+oKD3VRiBXgu+KbFguRGp2yBLKhCiZx5DU6Pe+GLJyNW2IQJbp/Un4WDnkKJ+XAiiqAxQAICWU4Wg+WjHIZ7yI9jZXJT7wR26IarKUQaRKoNFWUOQ8X1gALOtfU2gq7JrpQ07wc2rTWb0ZskxxEi1K8l+daANvYIpKWtgoWGlAtLwbL0pLrQoB9gd+bNyxkQR+zmkOJx7W5UXtOYhsP6XpFsp/+wBeroIpPN0jQfzlfrCVnFv2BjPp0dOTNTOrjkyc2ImleSLvLVR9nh9KC11smvhQCRddw1H3kkIdDOayLyVbCCnUzjiPc57Yu/uaajw/9BMXArwCvuIeGXFiM4munvfWV/yJcrCEvNGc9905imrPXPyGLjINtw145XhMmbyI8TZvIVs9FYU8GlsCASryOoHcip81WScIXi9uvhTifEfqL6b9U7Nd1SZo9VM3hti00EhM8ua7iytZ2jKJemyGs3YJH2DGA2QWL3Z4dCXDUK+94ZHYuFwv5iuZnCv7kwDU8rJTG7hIDxwcV0JX9PYyfvXmxizkiKf72L2a/sLbaL/j8VOITf+/fdl9g+xUuV1HOpn3kkvBPhGNccdAFBz1QmEH+M0yekebvMowSMUDfYRPCKo0rfkFV3oCwZLVg1wd70i
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CO1PR11MB4867.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230025)(4636009)(396003)(136003)(39850400004)(346002)(366004)(376002)(451199018)(2616005)(52116002)(186003)(6486002)(966005)(478600001)(6666004)(83380400001)(316002)(66476007)(6916009)(66556008)(66946007)(8676002)(6512007)(6506007)(1076003)(26005)(41300700001)(5660300002)(8936002)(44832011)(38100700002)(38350700002)(2906002)(86362001)(36756003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?us-ascii?Q?Bh9iy1ijqMadAOGvyUohq82ovUlziEyXuDSrgcj2uUlgQhckhrdxdUB9iC6e?=
- =?us-ascii?Q?DR47ynG/9M5EHajce6YOZuatc17O0G19Jos2KDx4hNhfuJFcdfSbEVVTCiqP?=
- =?us-ascii?Q?0YbYI+FO7UpBXK4xAYb37fdwX97fTc8jLOjttxayPFzDyw0HqCe/4SzRLIDG?=
- =?us-ascii?Q?lDJ6uiSfhRPUQF6eRtOVSjrZjZDscRpHKUmLd0+9xrHXhzOUodPnDhI3mKIm?=
- =?us-ascii?Q?5Tn2o8Xztt2wbPASfDVu060rSv9BzTYPhgqzfZckt6Zxa78TBPdts7mmFDyG?=
- =?us-ascii?Q?YSomcXB/h5zbiDOQeZI18bjBiSr5b6/8YpKF/XH+IMSQe6abEPcnMohHXeuP?=
- =?us-ascii?Q?uA2rHOqmhy/y0nSswzqxPkYoqudzb1GJ8m3ns4WnjvdGV0ryMPHWxdPAPH9s?=
- =?us-ascii?Q?HULc9HboImAVkbgGnKoKperF4bAIjFQcr8FSxI5GhEK2D80GCzlmMyI2jTOG?=
- =?us-ascii?Q?P+T7aUVBsQF8YJa9b/No5PLg/6stvR8ea4c8y7SoLPs85KMzt48o5ICASI3W?=
- =?us-ascii?Q?5R/DwGoB6Rw1wx/HV/oAuF5XuIluNYrWM9cdA7n30nFuEpnl7i/wPSQAxkaN?=
- =?us-ascii?Q?ybil34ysHHToHLkczMp8IGF2PJoJpfDS8ruw8MA7b7Gw9cQKZSM4ax4Ajqaq?=
- =?us-ascii?Q?Jo5k4o/AEFoRAAnG85VEHt+gTlCb3BCuk50W5aIbguqAL0gZt6vI0D7Ra1OY?=
- =?us-ascii?Q?OsCwzqfl38VjYiZe6XDPa4RrIuRGITxt3WFdJ5PSh4Aha0tIssfreQik2sd7?=
- =?us-ascii?Q?JMvO6RK9GE8l9vnYYvPM3pF85QLb12xY2RTNVOgwfREM8GIKAracz+WRZGIA?=
- =?us-ascii?Q?kGpRD9/nNoNG454RsMBy5LZaC4ALSx6xujyi9WdFqja1DWXqyIszPW7X+awR?=
- =?us-ascii?Q?jSdmCEmOC4TY0E24/HK6+/d2aVy/N/bxBJzQeYd++ySpCGUmuNoClWabLwz0?=
- =?us-ascii?Q?RLdHCSmfWEavXqqhx15ukCGiOQTgpYu2UAaquZSDW6Nqzg+G0RYrHxBKqFpL?=
- =?us-ascii?Q?bk9+dVyOXQ6TApCKETX46YXZ3N9DAuWmxSYnP9q4zX9B65ZerivjJHqosYNh?=
- =?us-ascii?Q?72SDS5+/I2zk1nWopZgiF9bFJBSYX3veJDn86wszkBGGEzoM6ZJ71qnLWtNU?=
- =?us-ascii?Q?KcW0pffhkgpYcuN5tBxg+DMxgh9yrpiWnmOJ/etAMsHOpXacsEzysdN58LpR?=
- =?us-ascii?Q?tFy3Asm1CHF7uLf0bj3y66U0y7EYsY5FcmLlsIfD+sO4q2BOKf71SiQ/JW5Y?=
- =?us-ascii?Q?i57/xN6OA5Cs9vayqUoqj87RZQIaSYonNIatvaZM2Moza5rU6Qis+BFOKoni?=
- =?us-ascii?Q?KJENejh8Vpv9ncKoOHywqaJW/k6kVnxr2ZIhAt2MxPTXSWAupUzdtnWYkwzL?=
- =?us-ascii?Q?n8s9nQHjiSym8KMMh3/2x2IkKaCyXeYGn6xjZI8zybTWz0jPuEl7O+/IqcRU?=
- =?us-ascii?Q?npxHu5Tbk0BXEZazKzfaccu+q0FDeQeT6U06u23RO8prChaYcZWOgMpOIx+e?=
- =?us-ascii?Q?rcxupiFPs6gRCLL2DPwpW83QIUbvWnUObnW6ES+X3B4RjLB41xZEXIEGM3J4?=
- =?us-ascii?Q?6chymStYyShytfaZiGOt/yIAnS+Q1sDklNzbOwLP?=
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 12cf0bf5-702b-4ab0-b7f9-08db2920fce9
-X-MS-Exchange-CrossTenant-AuthSource: CO1PR11MB4867.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Mar 2023 08:56:26.4893
+X-MS-Exchange-CrossTenant-AuthSource: BN6PR11MB1924.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: eb83b72a-a94c-46c5-9d54-08db2936f217
+X-MS-Exchange-CrossTenant-originalarrivaltime: 20 Mar 2023 11:33:36.9351
  (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: akNTGUIaEKwOT50AZSH0ledhK/7K0u10Am5JGOz9Uo72yP3/BcCmQ42AEK3ri4CpU91XwUXpM81b7IVgQOxtQA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA3PR11MB7553
-X-Proofpoint-ORIG-GUID: P1AYjMPNz6JHW5YMEqfr5Kjx8NWIf67Y
-X-Proofpoint-GUID: P1AYjMPNz6JHW5YMEqfr5Kjx8NWIf67Y
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: KMEy3n9Cbh4fw29yqGJ9aD2h4h5x7mPHBhKE7cxR8UM33IGcyGQy9h9OEvqQAgrEO5K8GBusOF/Urut2QdGjaEZSzjniMl5eGeS9cI4Y8Os=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BL1PR11MB5479
+X-Proofpoint-ORIG-GUID: vyYtW7ErvVya7kDqV4DTilmAFzxVdRhF
+X-Proofpoint-GUID: vyYtW7ErvVya7kDqV4DTilmAFzxVdRhF
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.254,Aquarius:18.0.942,Hydra:6.0.573,FMLib:17.11.170.22
- definitions=2023-03-20_04,2023-03-16_02,2023-02-09_01
+ definitions=2023-03-20_08,2023-03-20_01,2023-02-09_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 phishscore=0 bulkscore=0
  clxscore=1015 priorityscore=1501 lowpriorityscore=0 malwarescore=0
  suspectscore=0 adultscore=0 mlxlogscore=999 mlxscore=0 impostorscore=0
  spamscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2303150002 definitions=main-2303200075
+ engine=8.12.0-2303150002 definitions=main-2303200098
+Content-Language: en-GB
+Content-Type: multipart/alternative;
+	boundary="_000_BN6PR11MB1924DF0751010B40365B5BEFE0809BN6PR11MB1924namp_"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 20 Mar 2023 08:56:32 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101605
+ <openembedded-devel@lists.openembedded.org>; Mon, 20 Mar 2023 14:27:15 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101606
 
-Results:
-$ ptest-runner mbedtls
-START: ptest-runner
-2023-03-20T08:11
-BEGIN: /usr/lib/mbedtls/ptest
-PASS: test_suite_aes.cbc
-PASS: test_suite_aes.cfb
-PASS: test_suite_aes.ecb
-PASS: test_suite_aes.ofb
-PASS: test_suite_aes.rest
-PASS: test_suite_aes.xts
-PASS: test_suite_arc4
-PASS: test_suite_aria
-PASS: test_suite_asn1parse
-PASS: test_suite_asn1write
-PASS: test_suite_base64
-PASS: test_suite_bignum.generated
-PASS: test_suite_bignum.misc
-PASS: test_suite_blowfish
-PASS: test_suite_camellia
-PASS: test_suite_ccm
-PASS: test_suite_chacha20
-PASS: test_suite_chachapoly
-PASS: test_suite_cipher.aes
-PASS: test_suite_cipher.arc4
-PASS: test_suite_cipher.aria
-PASS: test_suite_cipher.blowfish
-PASS: test_suite_cipher.camellia
-PASS: test_suite_cipher.ccm
-PASS: test_suite_cipher.chacha20
-PASS: test_suite_cipher.chachapoly
-PASS: test_suite_cipher.des
-PASS: test_suite_cipher.gcm
-PASS: test_suite_cipher.misc
-PASS: test_suite_cipher.nist_kw
-PASS: test_suite_cipher.null
-PASS: test_suite_cipher.padding
-PASS: test_suite_cmac
-PASS: test_suite_constant_time
-PASS: test_suite_constant_time_hmac
-PASS: test_suite_ctr_drbg
-PASS: test_suite_debug
-PASS: test_suite_des
-PASS: test_suite_dhm
-PASS: test_suite_ecdh
-PASS: test_suite_ecdsa
-PASS: test_suite_ecjpake
-PASS: test_suite_ecp
-PASS: test_suite_entropy
-PASS: test_suite_error
-PASS: test_suite_gcm.aes128_de
-PASS: test_suite_gcm.aes128_en
-PASS: test_suite_gcm.aes192_de
-PASS: test_suite_gcm.aes192_en
-PASS: test_suite_gcm.aes256_de
-PASS: test_suite_gcm.aes256_en
-PASS: test_suite_gcm.camellia
-PASS: test_suite_gcm.misc
-PASS: test_suite_hkdf
-PASS: test_suite_hmac_drbg.misc
-PASS: test_suite_hmac_drbg.nopr
-PASS: test_suite_hmac_drbg.no_reseed
-PASS: test_suite_hmac_drbg.pr
-PASS: test_suite_md
-PASS: test_suite_mdx
-PASS: test_suite_memory_buffer_alloc
-PASS: test_suite_mps
-PASS: test_suite_net
-PASS: test_suite_nist_kw
-PASS: test_suite_oid
-PASS: test_suite_pem
-PASS: test_suite_pk
-PASS: test_suite_pkcs12
-PASS: test_suite_pkcs1_v15
-PASS: test_suite_pkcs1_v21
-PASS: test_suite_pkcs5
-PASS: test_suite_pkparse
-PASS: test_suite_pkwrite
-PASS: test_suite_poly1305
-PASS: test_suite_psa_crypto
-PASS: test_suite_psa_crypto_attributes
-PASS: test_suite_psa_crypto_driver_wrappers
-PASS: test_suite_psa_crypto_entropy
-PASS: test_suite_psa_crypto_generate_key.generated
-PASS: test_suite_psa_crypto_hash
-PASS: test_suite_psa_crypto_init
-PASS: test_suite_psa_crypto_metadata
-PASS: test_suite_psa_crypto_not_supported.generated
-PASS: test_suite_psa_crypto_not_supported.misc
-PASS: test_suite_psa_crypto_op_fail.generated
-PASS: test_suite_psa_crypto_op_fail.misc
-PASS: test_suite_psa_crypto_persistent_key
-PASS: test_suite_psa_crypto_se_driver_hal
-PASS: test_suite_psa_crypto_se_driver_hal_mocks
-PASS: test_suite_psa_crypto_slot_management
-PASS: test_suite_psa_crypto_storage_format.current
-PASS: test_suite_psa_crypto_storage_format.misc
-PASS: test_suite_psa_crypto_storage_format.v0
-PASS: test_suite_psa_its
-PASS: test_suite_random
-PASS: test_suite_rsa
-PASS: test_suite_shax
-PASS: test_suite_ssl
-PASS: test_suite_timing
-PASS: test_suite_version
-PASS: test_suite_x509parse
-PASS: test_suite_x509write
-PASS: test_suite_xtea
-DURATION: 83
-END: /usr/lib/mbedtls/ptest
-2023-03-20T08:13
-STOP: ptest-runner
-TOTAL: 1 FAIL: 0
+--_000_BN6PR11MB1924DF0751010B40365B5BEFE0809BN6PR11MB1924namp_
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+Hi All,
+
+A gentle reminder.
+
+Thanks
+Manoj Saun
+________________________________
+From: Manoj Saun <manojsingh.saun@windriver.com>
+Sent: 02 March 2023 16:02
+To: openembedded-devel@lists.openembedded.org <openembedded-devel@lists.ope=
+nembedded.org>
+Cc: Mali, Narpat <Narpat.Mali@windriver.com>; G Pillai, Hari <Hari.GPillai@=
+windriver.com>; Kang, Kai <Kai.Kang@windriver.com>; Saun, Manoj Singh <Mano=
+jSingh.Saun@windriver.com>
+Subject: [oe][meta-webserver][PATCH 1/1] nginx: fix-CVE-2022-41741, CVE-202=
+2-41742
+
+nginx: Memory corruption in the ngx_http_mp4_module
+
+References:
+https://nvd.nist.gov/vuln/detail/CVE-2022-41741
+https://nvd.nist.gov/vuln/detail/CVE-2022-41742
+
+Signed-off-by: Manoj Saun <manojsingh.saun@windriver.com>
 ---
- .../mbedtls/mbedtls/run-ptest                 | 124 ++++++++++++++++++
- .../mbedtls/mbedtls_2.28.2.bb                 |  18 ++-
- 2 files changed, 138 insertions(+), 4 deletions(-)
- create mode 100644 meta-networking/recipes-connectivity/mbedtls/mbedtls/run-ptest
+ .../files/CVE-2022-41741-CVE-2022-41742.patch | 319 ++++++++++++++++++
+ .../recipes-httpd/nginx/nginx_1.20.1.bb       |   4 +-
+ 2 files changed, 322 insertions(+), 1 deletion(-)
+ create mode 100644 meta-webserver/recipes-httpd/nginx/files/CVE-2022-41741=
+-CVE-2022-41742.patch
 
-diff --git a/meta-networking/recipes-connectivity/mbedtls/mbedtls/run-ptest b/meta-networking/recipes-connectivity/mbedtls/mbedtls/run-ptest
+diff --git a/meta-webserver/recipes-httpd/nginx/files/CVE-2022-41741-CVE-20=
+22-41742.patch b/meta-webserver/recipes-httpd/nginx/files/CVE-2022-41741-CV=
+E-2022-41742.patch
 new file mode 100644
-index 000000000..9d815fcd0
+index 000000000..d151256b3
 --- /dev/null
-+++ b/meta-networking/recipes-connectivity/mbedtls/mbedtls/run-ptest
-@@ -0,0 +1,124 @@
-+#!/bin/sh
++++ b/meta-webserver/recipes-httpd/nginx/files/CVE-2022-41741-CVE-2022-4174=
+2.patch
+@@ -0,0 +1,319 @@
++From 91a3b5302d6a2467df70d3b43450991a53f9946b Mon Sep 17 00:00:00 2001
++From: Hitendra Prajapati <hprajapati@mvista.com>
++Date: Wed, 16 Nov 2022 11:24:25 +0530
++Subject: [PATCH] CVE-2022-41741, CVE-2022-41742
 +
-+# Valid tests to run
-+tests="test_suite_aes.cbc \
-+       test_suite_aes.cfb \
-+       test_suite_aes.ecb \
-+       test_suite_aes.ofb \
-+       test_suite_aes.rest \
-+       test_suite_aes.xts \
-+       test_suite_arc4 \
-+       test_suite_aria \
-+       test_suite_asn1parse \
-+       test_suite_asn1write \
-+       test_suite_base64 \
-+       test_suite_bignum.generated \
-+       test_suite_bignum.misc \
-+       test_suite_blowfish \
-+       test_suite_camellia \
-+       test_suite_ccm \
-+       test_suite_chacha20 \
-+       test_suite_chachapoly \
-+       test_suite_cipher.aes \
-+       test_suite_cipher.arc4 \
-+       test_suite_cipher.aria \
-+       test_suite_cipher.blowfish \
-+       test_suite_cipher.camellia \
-+       test_suite_cipher.ccm \
-+       test_suite_cipher.chacha20 \
-+       test_suite_cipher.chachapoly \
-+       test_suite_cipher.des \
-+       test_suite_cipher.gcm \
-+       test_suite_cipher.misc \
-+       test_suite_cipher.nist_kw \
-+       test_suite_cipher.null \
-+       test_suite_cipher.padding \
-+       test_suite_cmac \
-+       test_suite_constant_time \
-+       test_suite_constant_time_hmac \
-+       test_suite_ctr_drbg \
-+       test_suite_debug \
-+       test_suite_des \
-+       test_suite_dhm \
-+       test_suite_ecdh \
-+       test_suite_ecdsa \
-+       test_suite_ecjpake \
-+       test_suite_ecp \
-+       test_suite_entropy \
-+       test_suite_error \
-+       test_suite_gcm.aes128_de \
-+       test_suite_gcm.aes128_en \
-+       test_suite_gcm.aes192_de \
-+       test_suite_gcm.aes192_en \
-+       test_suite_gcm.aes256_de \
-+       test_suite_gcm.aes256_en \
-+       test_suite_gcm.camellia \
-+       test_suite_gcm.misc \
-+       test_suite_hkdf \
-+       test_suite_hmac_drbg.misc \
-+       test_suite_hmac_drbg.nopr \
-+       test_suite_hmac_drbg.no_reseed \
-+       test_suite_hmac_drbg.pr \
-+       test_suite_md \
-+       test_suite_mdx \
-+       test_suite_memory_buffer_alloc \
-+       test_suite_mps \
-+       test_suite_net \
-+       test_suite_nist_kw \
-+       test_suite_oid \
-+       test_suite_pem \
-+       test_suite_pk \
-+       test_suite_pkcs12 \
-+       test_suite_pkcs1_v15 \
-+       test_suite_pkcs1_v21 \
-+       test_suite_pkcs5 \
-+       test_suite_pkparse \
-+       test_suite_pkwrite \
-+       test_suite_poly1305 \
-+       test_suite_psa_crypto \
-+       test_suite_psa_crypto_attributes \
-+       test_suite_psa_crypto_driver_wrappers \
-+       test_suite_psa_crypto_entropy \
-+       test_suite_psa_crypto_generate_key.generated \
-+       test_suite_psa_crypto_hash \
-+       test_suite_psa_crypto_init \
-+       test_suite_psa_crypto_metadata \
-+       test_suite_psa_crypto_not_supported.generated \
-+       test_suite_psa_crypto_not_supported.misc \
-+       test_suite_psa_crypto_op_fail.generated \
-+       test_suite_psa_crypto_op_fail.misc \
-+       test_suite_psa_crypto_persistent_key \
-+       test_suite_psa_crypto_se_driver_hal \
-+       test_suite_psa_crypto_se_driver_hal_mocks \
-+       test_suite_psa_crypto_slot_management \
-+       test_suite_psa_crypto_storage_format.current \
-+       test_suite_psa_crypto_storage_format.misc \
-+       test_suite_psa_crypto_storage_format.v0 \
-+       test_suite_psa_its \
-+       test_suite_random \
-+       test_suite_rsa \
-+       test_suite_shax \
-+       test_suite_ssl \
-+       test_suite_timing \
-+       test_suite_version \
-+       test_suite_x509parse \
-+       test_suite_x509write \
-+       test_suite_xtea \
-+      "
++Mp4: disabled duplicate atoms.
 +
-+ptestdir=$(dirname "$(readlink -f "$0")")
-+cd "$ptestdir"/tests || exit
++Most atoms should not appear more than once in a container.  Previously,
++this was not enforced by the module, which could result in worker process
++crash, memory corruption and disclosure.
 +
-+# Run specified tests
-+for f in $tests
-+do
-+    if test -e ./"$f"; then
-+        if ./"$f" > ./"$f".out 2> ./"$f".err; then
-+            echo "PASS: $f"
-+        else
-+            echo "FAIL: $f"
-+        fi
-+    else
-+        echo "SKIP: $f"
-+    fi
-+done
-diff --git a/meta-networking/recipes-connectivity/mbedtls/mbedtls_2.28.2.bb b/meta-networking/recipes-connectivity/mbedtls/mbedtls_2.28.2.bb
-index e19587ca0..dc77ba0bf 100644
---- a/meta-networking/recipes-connectivity/mbedtls/mbedtls_2.28.2.bb
-+++ b/meta-networking/recipes-connectivity/mbedtls/mbedtls_2.28.2.bb
-@@ -24,19 +24,22 @@ SECTION = "libs"
- 
- S = "${WORKDIR}/git"
- SRCREV = "89f040a5c938985c5f30728baed21e49d0846a53"
--SRC_URI = "git://github.com/ARMmbed/mbedtls.git;protocol=https;branch=mbedtls-2.28"
-+SRC_URI = "git://github.com/ARMmbed/mbedtls.git;protocol=https;branch=mbedtls-2.28 \
-+           file://run-ptest \
-+          "
- 
--inherit cmake update-alternatives
-+inherit cmake update-alternatives ptest
- 
--PACKAGECONFIG ??= "shared-libs programs"
-+PACKAGECONFIG ??= "shared-libs programs ${@bb.utils.contains('PTEST_ENABLED', '1', 'tests', '', d)}"
- PACKAGECONFIG[shared-libs] = "-DUSE_SHARED_MBEDTLS_LIBRARY=ON,-DUSE_SHARED_MBEDTLS_LIBRARY=OFF"
- PACKAGECONFIG[programs] = "-DENABLE_PROGRAMS=ON,-DENABLE_PROGRAMS=OFF"
- PACKAGECONFIG[werror] = "-DMBEDTLS_FATAL_WARNINGS=ON,-DMBEDTLS_FATAL_WARNINGS=OFF"
- # Make X.509 and TLS calls use PSA
- # https://github.com/Mbed-TLS/mbedtls/blob/development/docs/use-psa-crypto.md
- PACKAGECONFIG[psa] = ""
-+PACKAGECONFIG[tests] = "-DENABLE_TESTING=ON,-DENABLE_TESTING=OFF"
- 
--EXTRA_OECMAKE = "-DENABLE_TESTING=OFF -DLIB_INSTALL_DIR:STRING=${libdir}"
-+EXTRA_OECMAKE = "-DLIB_INSTALL_DIR:STRING=${libdir}"
- 
- # For now the only way to enable PSA is to explicitly pass a -D via CFLAGS
- CFLAGS:append = "${@bb.utils.contains('PACKAGECONFIG', 'psa', ' -DMBEDTLS_USE_PSA_CRYPTO', '', d)}"
-@@ -64,3 +67,10 @@ sysroot_stage_all:append() {
- 	sysroot_stage_dir "${S}/library" "${SYSROOT_DESTDIR}/usr/share/mbedtls-source/library"
- 	sysroot_stage_dir "${S}/include" "${SYSROOT_DESTDIR}/usr/share/mbedtls-source/include"
- }
++Upstream-Status: Backport [https://github.com/nginx/nginx/commit/6b022a555=
+6af22b6e18532e547a6ae46b0d8c6ea]
 +
-+do_install_ptest () {
-+	install -d ${D}${PTEST_PATH}/tests
-+	install ${B}/tests/test_suite_* ${D}${PTEST_PATH}/tests/
-+	find ${D}${PTEST_PATH}/tests/ -type f -name "*.c" -delete
-+	cp -fR ${S}/tests/data_files ${D}${PTEST_PATH}/tests/
-+}
--- 
-2.25.1
++CVE: CVE-2022-41741 CVE-2022-41742
++
++Signed-off-by: Manoj Saun <manojsingh.saun@windriver.com>
++---
++ src/http/modules/ngx_http_mp4_module.c | 147 +++++++++++++++++++++++++
++ 1 file changed, 147 insertions(+)
++
++diff --git a/src/http/modules/ngx_http_mp4_module.c b/src/http/modules/ngx=
+_http_mp4_module.c
++index 0e93fbd..4f4d89d 100644
++--- a/src/http/modules/ngx_http_mp4_module.c
+++++ b/src/http/modules/ngx_http_mp4_module.c
++@@ -1070,6 +1070,12 @@ ngx_http_mp4_read_ftyp_atom(ngx_http_mp4_file_t *mp=
+4, uint64_t atom_data_size)
++         return NGX_ERROR;
++     }
++
+++    if (mp4->ftyp_atom.buf) {
+++        ngx_log_error(NGX_LOG_ERR, mp4->file.log, 0,
+++                      "duplicate mp4 ftyp atom in \"%s\"", mp4->file.name=
+.data);
+++        return NGX_ERROR;
+++    }
+++
++     atom_size =3D sizeof(ngx_mp4_atom_header_t) + (size_t) atom_data_size=
+;
++
++     ftyp_atom =3D ngx_palloc(mp4->request->pool, atom_size);
++@@ -1128,6 +1134,12 @@ ngx_http_mp4_read_moov_atom(ngx_http_mp4_file_t *mp=
+4, uint64_t atom_data_size)
++         return NGX_DECLINED;
++     }
++
+++    if (mp4->moov_atom.buf) {
+++        ngx_log_error(NGX_LOG_ERR, mp4->file.log, 0,
+++                      "duplicate mp4 moov atom in \"%s\"", mp4->file.name=
+.data);
+++        return NGX_ERROR;
+++    }
+++
++     conf =3D ngx_http_get_module_loc_conf(mp4->request, ngx_http_mp4_modu=
+le);
++
++     if (atom_data_size > mp4->buffer_size) {
++@@ -1195,6 +1207,12 @@ ngx_http_mp4_read_mdat_atom(ngx_http_mp4_file_t *mp=
+4, uint64_t atom_data_size)
++
++     ngx_log_debug0(NGX_LOG_DEBUG_HTTP, mp4->file.log, 0, "mp4 mdat atom")=
+;
++
+++    if (mp4->mdat_atom.buf) {
+++        ngx_log_error(NGX_LOG_ERR, mp4->file.log, 0,
+++                      "duplicate mp4 mdat atom in \"%s\"", mp4->file.name=
+.data);
+++        return NGX_ERROR;
+++    }
+++
++     data =3D &mp4->mdat_data_buf;
++     data->file =3D &mp4->file;
++     data->in_file =3D 1;
++@@ -1321,6 +1339,12 @@ ngx_http_mp4_read_mvhd_atom(ngx_http_mp4_file_t *mp=
+4, uint64_t atom_data_size)
++
++     ngx_log_debug0(NGX_LOG_DEBUG_HTTP, mp4->file.log, 0, "mp4 mvhd atom")=
+;
++
+++    if (mp4->mvhd_atom.buf) {
+++        ngx_log_error(NGX_LOG_ERR, mp4->file.log, 0,
+++                      "duplicate mp4 mvhd atom in \"%s\"", mp4->file.name=
+.data);
+++        return NGX_ERROR;
+++    }
+++
++     atom_header =3D ngx_mp4_atom_header(mp4);
++     mvhd_atom =3D (ngx_mp4_mvhd_atom_t *) atom_header;
++     mvhd64_atom =3D (ngx_mp4_mvhd64_atom_t *) atom_header;
++@@ -1586,6 +1610,13 @@ ngx_http_mp4_read_tkhd_atom(ngx_http_mp4_file_t *mp=
+4, uint64_t atom_data_size)
++     atom_size =3D sizeof(ngx_mp4_atom_header_t) + (size_t) atom_data_size=
+;
++
++     trak =3D ngx_mp4_last_trak(mp4);
+++
+++    if (trak->out[NGX_HTTP_MP4_TKHD_ATOM].buf) {
+++        ngx_log_error(NGX_LOG_ERR, mp4->file.log, 0,
+++                      "duplicate mp4 tkhd atom in \"%s\"", mp4->file.name=
+.data);
+++        return NGX_ERROR;
+++    }
+++
++     trak->tkhd_size =3D atom_size;
++
++     ngx_mp4_set_32value(tkhd_atom->size, atom_size);
++@@ -1624,6 +1655,12 @@ ngx_http_mp4_read_mdia_atom(ngx_http_mp4_file_t *mp=
+4, uint64_t atom_data_size)
++
++     trak =3D ngx_mp4_last_trak(mp4);
++
+++    if (trak->out[NGX_HTTP_MP4_MDIA_ATOM].buf) {
+++        ngx_log_error(NGX_LOG_ERR, mp4->file.log, 0,
+++                      "duplicate mp4 mdia atom in \"%s\"", mp4->file.name=
+.data);
+++        return NGX_ERROR;
+++    }
+++
++     atom =3D &trak->mdia_atom_buf;
++     atom->temporary =3D 1;
++     atom->pos =3D atom_header;
++@@ -1747,6 +1784,13 @@ ngx_http_mp4_read_mdhd_atom(ngx_http_mp4_file_t *mp=
+4, uint64_t atom_data_size)
++     atom_size =3D sizeof(ngx_mp4_atom_header_t) + (size_t) atom_data_size=
+;
++
++     trak =3D ngx_mp4_last_trak(mp4);
+++
+++    if (trak->out[NGX_HTTP_MP4_MDHD_ATOM].buf) {
+++        ngx_log_error(NGX_LOG_ERR, mp4->file.log, 0,
+++                      "duplicate mp4 mdhd atom in \"%s\"", mp4->file.name=
+.data);
+++        return NGX_ERROR;
+++    }
+++
++     trak->mdhd_size =3D atom_size;
++     trak->timescale =3D timescale;
++
++@@ -1789,6 +1833,12 @@ ngx_http_mp4_read_hdlr_atom(ngx_http_mp4_file_t *mp=
+4, uint64_t atom_data_size)
++
++     trak =3D ngx_mp4_last_trak(mp4);
++
+++    if (trak->out[NGX_HTTP_MP4_HDLR_ATOM].buf) {
+++        ngx_log_error(NGX_LOG_ERR, mp4->file.log, 0,
+++                      "duplicate mp4 hdlr atom in \"%s\"", mp4->file.name=
+.data);
+++        return NGX_ERROR;
+++    }
+++
++     atom =3D &trak->hdlr_atom_buf;
++     atom->temporary =3D 1;
++     atom->pos =3D atom_header;
++@@ -1817,6 +1867,12 @@ ngx_http_mp4_read_minf_atom(ngx_http_mp4_file_t *mp=
+4, uint64_t atom_data_size)
++
++     trak =3D ngx_mp4_last_trak(mp4);
++
+++    if (trak->out[NGX_HTTP_MP4_MINF_ATOM].buf) {
+++        ngx_log_error(NGX_LOG_ERR, mp4->file.log, 0,
+++                      "duplicate mp4 minf atom in \"%s\"", mp4->file.name=
+.data);
+++        return NGX_ERROR;
+++    }
+++
++     atom =3D &trak->minf_atom_buf;
++     atom->temporary =3D 1;
++     atom->pos =3D atom_header;
++@@ -1860,6 +1916,15 @@ ngx_http_mp4_read_vmhd_atom(ngx_http_mp4_file_t *mp=
+4, uint64_t atom_data_size)
++
++     trak =3D ngx_mp4_last_trak(mp4);
++
+++    if (trak->out[NGX_HTTP_MP4_VMHD_ATOM].buf
+++        || trak->out[NGX_HTTP_MP4_SMHD_ATOM].buf)
+++    {
+++        ngx_log_error(NGX_LOG_ERR, mp4->file.log, 0,
+++                      "duplicate mp4 vmhd/smhd atom in \"%s\"",
+++                      mp4->file.name.data);
+++        return NGX_ERROR;
+++    }
+++
++     atom =3D &trak->vmhd_atom_buf;
++     atom->temporary =3D 1;
++     atom->pos =3D atom_header;
++@@ -1891,6 +1956,15 @@ ngx_http_mp4_read_smhd_atom(ngx_http_mp4_file_t *mp=
+4, uint64_t atom_data_size)
++
++     trak =3D ngx_mp4_last_trak(mp4);
++
+++    if (trak->out[NGX_HTTP_MP4_VMHD_ATOM].buf
+++        || trak->out[NGX_HTTP_MP4_SMHD_ATOM].buf)
+++    {
+++        ngx_log_error(NGX_LOG_ERR, mp4->file.log, 0,
+++                      "duplicate mp4 vmhd/smhd atom in \"%s\"",
+++                      mp4->file.name.data);
+++        return NGX_ERROR;
+++    }
+++
++     atom =3D &trak->smhd_atom_buf;
++     atom->temporary =3D 1;
++     atom->pos =3D atom_header;
++@@ -1922,6 +1996,12 @@ ngx_http_mp4_read_dinf_atom(ngx_http_mp4_file_t *mp=
+4, uint64_t atom_data_size)
++
++     trak =3D ngx_mp4_last_trak(mp4);
++
+++    if (trak->out[NGX_HTTP_MP4_DINF_ATOM].buf) {
+++        ngx_log_error(NGX_LOG_ERR, mp4->file.log, 0,
+++                      "duplicate mp4 dinf atom in \"%s\"", mp4->file.name=
+.data);
+++        return NGX_ERROR;
+++    }
+++
++     atom =3D &trak->dinf_atom_buf;
++     atom->temporary =3D 1;
++     atom->pos =3D atom_header;
++@@ -1950,6 +2030,12 @@ ngx_http_mp4_read_stbl_atom(ngx_http_mp4_file_t *mp=
+4, uint64_t atom_data_size)
++
++     trak =3D ngx_mp4_last_trak(mp4);
++
+++    if (trak->out[NGX_HTTP_MP4_STBL_ATOM].buf) {
+++        ngx_log_error(NGX_LOG_ERR, mp4->file.log, 0,
+++                      "duplicate mp4 stbl atom in \"%s\"", mp4->file.name=
+.data);
+++        return NGX_ERROR;
+++    }
+++
++     atom =3D &trak->stbl_atom_buf;
++     atom->temporary =3D 1;
++     atom->pos =3D atom_header;
++@@ -2018,6 +2104,12 @@ ngx_http_mp4_read_stsd_atom(ngx_http_mp4_file_t *mp=
+4, uint64_t atom_data_size)
++
++     trak =3D ngx_mp4_last_trak(mp4);
++
+++    if (trak->out[NGX_HTTP_MP4_STSD_ATOM].buf) {
+++        ngx_log_error(NGX_LOG_ERR, mp4->file.log, 0,
+++                      "duplicate mp4 stsd atom in \"%s\"", mp4->file.name=
+.data);
+++        return NGX_ERROR;
+++    }
+++
++     atom =3D &trak->stsd_atom_buf;
++     atom->temporary =3D 1;
++     atom->pos =3D atom_header;
++@@ -2086,6 +2178,13 @@ ngx_http_mp4_read_stts_atom(ngx_http_mp4_file_t *mp=
+4, uint64_t atom_data_size)
++     atom_end =3D atom_table + entries * sizeof(ngx_mp4_stts_entry_t);
++
++     trak =3D ngx_mp4_last_trak(mp4);
+++
+++    if (trak->out[NGX_HTTP_MP4_STTS_ATOM].buf) {
+++        ngx_log_error(NGX_LOG_ERR, mp4->file.log, 0,
+++                      "duplicate mp4 stts atom in \"%s\"", mp4->file.name=
+.data);
+++        return NGX_ERROR;
+++    }
+++
++     trak->time_to_sample_entries =3D entries;
++
++     atom =3D &trak->stts_atom_buf;
++@@ -2291,6 +2390,13 @@ ngx_http_mp4_read_stss_atom(ngx_http_mp4_file_t *mp=
+4, uint64_t atom_data_size)
++                    "sync sample entries:%uD", entries);
++
++     trak =3D ngx_mp4_last_trak(mp4);
+++
+++    if (trak->out[NGX_HTTP_MP4_STSS_ATOM].buf) {
+++        ngx_log_error(NGX_LOG_ERR, mp4->file.log, 0,
+++                      "duplicate mp4 stss atom in \"%s\"", mp4->file.name=
+.data);
+++        return NGX_ERROR;
+++    }
+++
++     trak->sync_samples_entries =3D entries;
++
++     atom_table =3D atom_header + sizeof(ngx_http_mp4_stss_atom_t);
++@@ -2489,6 +2595,13 @@ ngx_http_mp4_read_ctts_atom(ngx_http_mp4_file_t *mp=
+4, uint64_t atom_data_size)
++                    "composition offset entries:%uD", entries);
++
++     trak =3D ngx_mp4_last_trak(mp4);
+++
+++    if (trak->out[NGX_HTTP_MP4_CTTS_ATOM].buf) {
+++        ngx_log_error(NGX_LOG_ERR, mp4->file.log, 0,
+++                      "duplicate mp4 ctts atom in \"%s\"", mp4->file.name=
+.data);
+++        return NGX_ERROR;
+++    }
+++
++     trak->composition_offset_entries =3D entries;
++
++     atom_table =3D atom_header + sizeof(ngx_mp4_ctts_atom_t);
++@@ -2692,6 +2805,13 @@ ngx_http_mp4_read_stsc_atom(ngx_http_mp4_file_t *mp=
+4, uint64_t atom_data_size)
++     atom_end =3D atom_table + entries * sizeof(ngx_mp4_stsc_entry_t);
++
++     trak =3D ngx_mp4_last_trak(mp4);
+++
+++    if (trak->out[NGX_HTTP_MP4_STSC_ATOM].buf) {
+++        ngx_log_error(NGX_LOG_ERR, mp4->file.log, 0,
+++                      "duplicate mp4 stsc atom in \"%s\"", mp4->file.name=
+.data);
+++        return NGX_ERROR;
+++    }
+++
++     trak->sample_to_chunk_entries =3D entries;
++
++     atom =3D &trak->stsc_atom_buf;
++@@ -3024,6 +3144,13 @@ ngx_http_mp4_read_stsz_atom(ngx_http_mp4_file_t *mp=
+4, uint64_t atom_data_size)
++                    "sample uniform size:%uD, entries:%uD", size, entries)=
+;
++
++     trak =3D ngx_mp4_last_trak(mp4);
+++
+++    if (trak->out[NGX_HTTP_MP4_STSZ_ATOM].buf) {
+++        ngx_log_error(NGX_LOG_ERR, mp4->file.log, 0,
+++                      "duplicate mp4 stsz atom in \"%s\"", mp4->file.name=
+.data);
+++        return NGX_ERROR;
+++    }
+++
++     trak->sample_sizes_entries =3D entries;
++
++     atom_table =3D atom_header + sizeof(ngx_mp4_stsz_atom_t);
++@@ -3207,6 +3334,16 @@ ngx_http_mp4_read_stco_atom(ngx_http_mp4_file_t *mp=
+4, uint64_t atom_data_size)
++     atom_end =3D atom_table + entries * sizeof(uint32_t);
++
++     trak =3D ngx_mp4_last_trak(mp4);
+++
+++    if (trak->out[NGX_HTTP_MP4_STCO_ATOM].buf
+++        || trak->out[NGX_HTTP_MP4_CO64_ATOM].buf)
+++    {
+++        ngx_log_error(NGX_LOG_ERR, mp4->file.log, 0,
+++                      "duplicate mp4 stco/co64 atom in \"%s\"",
+++                      mp4->file.name.data);
+++        return NGX_ERROR;
+++    }
+++
++     trak->chunks =3D entries;
++
++     atom =3D &trak->stco_atom_buf;
++@@ -3413,6 +3550,16 @@ ngx_http_mp4_read_co64_atom(ngx_http_mp4_file_t *mp=
+4, uint64_t atom_data_size)
++     atom_end =3D atom_table + entries * sizeof(uint64_t);
++
++     trak =3D ngx_mp4_last_trak(mp4);
+++
+++    if (trak->out[NGX_HTTP_MP4_STCO_ATOM].buf
+++        || trak->out[NGX_HTTP_MP4_CO64_ATOM].buf)
+++    {
+++        ngx_log_error(NGX_LOG_ERR, mp4->file.log, 0,
+++                      "duplicate mp4 stco/co64 atom in \"%s\"",
+++                      mp4->file.name.data);
+++        return NGX_ERROR;
+++    }
+++
++     trak->chunks =3D entries;
++
++     atom =3D &trak->co64_atom_buf;
++--
++2.25.1
++
+diff --git a/meta-webserver/recipes-httpd/nginx/nginx_1.20.1.bb b/meta-webs=
+erver/recipes-httpd/nginx/nginx_1.20.1.bb
+index d686c627f..e2d0443c6 100644
+--- a/meta-webserver/recipes-httpd/nginx/nginx_1.20.1.bb
++++ b/meta-webserver/recipes-httpd/nginx/nginx_1.20.1.bb
+@@ -1,6 +1,8 @@
+ require nginx.inc
 
+-SRC_URI +=3D "file://CVE-2021-3618.patch"
++SRC_URI +=3D "file://CVE-2021-3618.patch \
++            file://CVE-2022-41741-CVE-2022-41742.patch \
++           "
+
+ LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D206629dc7c7b3e87acb31162363ae50=
+5"
+
+--
+2.34.1
+
+
+--_000_BN6PR11MB1924DF0751010B40365B5BEFE0809BN6PR11MB1924namp_
+Content-Type: text/html; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
+
+<html>
+<head>
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dus-ascii"=
+>
+<style type=3D"text/css" style=3D"display:none;"> P {margin-top:0;margin-bo=
+ttom:0;} </style>
+</head>
+<body dir=3D"ltr">
+<div style=3D"font-family: Calibri, Arial, Helvetica, sans-serif; font-size=
+: 12pt; color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);" class=
+=3D"elementToProof">
+Hi All,</div>
+<div style=3D"font-family: Calibri, Arial, Helvetica, sans-serif; font-size=
+: 12pt; color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);" class=
+=3D"elementToProof">
+<br>
+</div>
+<div style=3D"font-family: Calibri, Arial, Helvetica, sans-serif; font-size=
+: 12pt; color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);" class=
+=3D"elementToProof">
+A gentle reminder.</div>
+<div style=3D"font-family: Calibri, Arial, Helvetica, sans-serif; font-size=
+: 12pt; color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);" class=
+=3D"elementToProof">
+<br>
+</div>
+<div style=3D"font-family: Calibri, Arial, Helvetica, sans-serif; font-size=
+: 12pt; color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);" class=
+=3D"elementToProof">
+Thanks</div>
+<div style=3D"font-family: Calibri, Arial, Helvetica, sans-serif; font-size=
+: 12pt; color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);" class=
+=3D"elementToProof">
+Manoj Saun</div>
+<div id=3D"appendonsend"></div>
+<hr style=3D"display:inline-block;width:98%" tabindex=3D"-1">
+<div id=3D"divRplyFwdMsg" dir=3D"ltr"><font face=3D"Calibri, sans-serif" st=
+yle=3D"font-size:11pt" color=3D"#000000"><b>From:</b> Manoj Saun &lt;manojs=
+ingh.saun@windriver.com&gt;<br>
+<b>Sent:</b> 02 March 2023 16:02<br>
+<b>To:</b> openembedded-devel@lists.openembedded.org &lt;openembedded-devel=
+@lists.openembedded.org&gt;<br>
+<b>Cc:</b> Mali, Narpat &lt;Narpat.Mali@windriver.com&gt;; G Pillai, Hari &=
+lt;Hari.GPillai@windriver.com&gt;; Kang, Kai &lt;Kai.Kang@windriver.com&gt;=
+; Saun, Manoj Singh &lt;ManojSingh.Saun@windriver.com&gt;<br>
+<b>Subject:</b> [oe][meta-webserver][PATCH 1/1] nginx: fix-CVE-2022-41741, =
+CVE-2022-41742</font>
+<div>&nbsp;</div>
+</div>
+<div class=3D"BodyFragment"><font size=3D"2"><span style=3D"font-size:11pt;=
+">
+<div class=3D"PlainText">nginx: Memory corruption in the ngx_http_mp4_modul=
+e<br>
+<br>
+References: <br>
+<a href=3D"https://nvd.nist.gov/vuln/detail/CVE-2022-41741">https://nvd.nis=
+t.gov/vuln/detail/CVE-2022-41741</a><br>
+<a href=3D"https://nvd.nist.gov/vuln/detail/CVE-2022-41742">https://nvd.nis=
+t.gov/vuln/detail/CVE-2022-41742</a><br>
+<br>
+Signed-off-by: Manoj Saun &lt;manojsingh.saun@windriver.com&gt;<br>
+---<br>
+&nbsp;.../files/CVE-2022-41741-CVE-2022-41742.patch | 319 +++++++++++++++++=
++<br>
+&nbsp;.../recipes-httpd/nginx/nginx_1.20.1.bb&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=
+&nbsp; |&nbsp;&nbsp; 4 +-<br>
+&nbsp;2 files changed, 322 insertions(+), 1 deletion(-)<br>
+&nbsp;create mode 100644 meta-webserver/recipes-httpd/nginx/files/CVE-2022-=
+41741-CVE-2022-41742.patch<br>
+<br>
+diff --git a/meta-webserver/recipes-httpd/nginx/files/CVE-2022-41741-CVE-20=
+22-41742.patch b/meta-webserver/recipes-httpd/nginx/files/CVE-2022-41741-CV=
+E-2022-41742.patch<br>
+new file mode 100644<br>
+index 000000000..d151256b3<br>
+--- /dev/null<br>
++++ b/meta-webserver/recipes-httpd/nginx/files/CVE-2022-41741-CVE-2022-4174=
+2.patch<br>
+@@ -0,0 +1,319 @@<br>
++From 91a3b5302d6a2467df70d3b43450991a53f9946b Mon Sep 17 00:00:00 2001<br>
++From: Hitendra Prajapati &lt;hprajapati@mvista.com&gt;<br>
++Date: Wed, 16 Nov 2022 11:24:25 +0530<br>
++Subject: [PATCH] CVE-2022-41741, CVE-2022-41742<br>
++<br>
++Mp4: disabled duplicate atoms.<br>
++<br>
++Most atoms should not appear more than once in a container.&nbsp; Previous=
+ly,<br>
++this was not enforced by the module, which could result in worker process<=
+br>
++crash, memory corruption and disclosure.<br>
++<br>
++Upstream-Status: Backport [<a href=3D"https://github.com/nginx/nginx/commi=
+t/6b022a5556af22b6e18532e547a6ae46b0d8c6ea">https://github.com/nginx/nginx/=
+commit/6b022a5556af22b6e18532e547a6ae46b0d8c6ea</a>]<br>
++<br>
++CVE: CVE-2022-41741 CVE-2022-41742<br>
++<br>
++Signed-off-by: Manoj Saun &lt;manojsingh.saun@windriver.com&gt;<br>
++---<br>
++ src/http/modules/ngx_http_mp4_module.c | 147 +++++++++++++++++++++++++<br=
+>
++ 1 file changed, 147 insertions(+)<br>
++<br>
++diff --git a/src/http/modules/ngx_http_mp4_module.c b/src/http/modules/ngx=
+_http_mp4_module.c<br>
++index 0e93fbd..4f4d89d 100644<br>
++--- a/src/http/modules/ngx_http_mp4_module.c<br>
+++++ b/src/http/modules/ngx_http_mp4_module.c<br>
++@@ -1070,6 +1070,12 @@ ngx_http_mp4_read_ftyp_atom(ngx_http_mp4_file_t *mp=
+4, uint64_t atom_data_size)<br>
++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return NGX_ERROR;<br>
++&nbsp;&nbsp;&nbsp;&nbsp; }<br>
++ <br>
+++&nbsp;&nbsp;&nbsp; if (mp4-&gt;ftyp_atom.buf) {<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ngx_log_error(NGX_LOG_ERR, mp4=
+-&gt;file.log, 0,<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &quot;duplicate mp4 f=
+typ atom in \&quot;%s\&quot;&quot;, mp4-&gt;file.name.data);<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return NGX_ERROR;<br>
+++&nbsp;&nbsp;&nbsp; }<br>
+++<br>
++&nbsp;&nbsp;&nbsp;&nbsp; atom_size =3D sizeof(ngx_mp4_atom_header_t) + (si=
+ze_t) atom_data_size;<br>
++ <br>
++&nbsp;&nbsp;&nbsp;&nbsp; ftyp_atom =3D ngx_palloc(mp4-&gt;request-&gt;pool=
+, atom_size);<br>
++@@ -1128,6 +1134,12 @@ ngx_http_mp4_read_moov_atom(ngx_http_mp4_file_t *mp=
+4, uint64_t atom_data_size)<br>
++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return NGX_DECLINED;<br>
++&nbsp;&nbsp;&nbsp;&nbsp; }<br>
++ <br>
+++&nbsp;&nbsp;&nbsp; if (mp4-&gt;moov_atom.buf) {<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ngx_log_error(NGX_LOG_ERR, mp4=
+-&gt;file.log, 0,<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &quot;duplicate mp4 m=
+oov atom in \&quot;%s\&quot;&quot;, mp4-&gt;file.name.data);<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return NGX_ERROR;<br>
+++&nbsp;&nbsp;&nbsp; }<br>
+++<br>
++&nbsp;&nbsp;&nbsp;&nbsp; conf =3D ngx_http_get_module_loc_conf(mp4-&gt;req=
+uest, ngx_http_mp4_module);<br>
++ <br>
++&nbsp;&nbsp;&nbsp;&nbsp; if (atom_data_size &gt; mp4-&gt;buffer_size) {<br=
+>
++@@ -1195,6 +1207,12 @@ ngx_http_mp4_read_mdat_atom(ngx_http_mp4_file_t *mp=
+4, uint64_t atom_data_size)<br>
++ <br>
++&nbsp;&nbsp;&nbsp;&nbsp; ngx_log_debug0(NGX_LOG_DEBUG_HTTP, mp4-&gt;file.l=
+og, 0, &quot;mp4 mdat atom&quot;);<br>
++ <br>
+++&nbsp;&nbsp;&nbsp; if (mp4-&gt;mdat_atom.buf) {<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ngx_log_error(NGX_LOG_ERR, mp4=
+-&gt;file.log, 0,<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &quot;duplicate mp4 m=
+dat atom in \&quot;%s\&quot;&quot;, mp4-&gt;file.name.data);<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return NGX_ERROR;<br>
+++&nbsp;&nbsp;&nbsp; }<br>
+++<br>
++&nbsp;&nbsp;&nbsp;&nbsp; data =3D &amp;mp4-&gt;mdat_data_buf;<br>
++&nbsp;&nbsp;&nbsp;&nbsp; data-&gt;file =3D &amp;mp4-&gt;file;<br>
++&nbsp;&nbsp;&nbsp;&nbsp; data-&gt;in_file =3D 1;<br>
++@@ -1321,6 +1339,12 @@ ngx_http_mp4_read_mvhd_atom(ngx_http_mp4_file_t *mp=
+4, uint64_t atom_data_size)<br>
++ <br>
++&nbsp;&nbsp;&nbsp;&nbsp; ngx_log_debug0(NGX_LOG_DEBUG_HTTP, mp4-&gt;file.l=
+og, 0, &quot;mp4 mvhd atom&quot;);<br>
++ <br>
+++&nbsp;&nbsp;&nbsp; if (mp4-&gt;mvhd_atom.buf) {<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ngx_log_error(NGX_LOG_ERR, mp4=
+-&gt;file.log, 0,<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &quot;duplicate mp4 m=
+vhd atom in \&quot;%s\&quot;&quot;, mp4-&gt;file.name.data);<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return NGX_ERROR;<br>
+++&nbsp;&nbsp;&nbsp; }<br>
+++<br>
++&nbsp;&nbsp;&nbsp;&nbsp; atom_header =3D ngx_mp4_atom_header(mp4);<br>
++&nbsp;&nbsp;&nbsp;&nbsp; mvhd_atom =3D (ngx_mp4_mvhd_atom_t *) atom_header=
+;<br>
++&nbsp;&nbsp;&nbsp;&nbsp; mvhd64_atom =3D (ngx_mp4_mvhd64_atom_t *) atom_he=
+ader;<br>
++@@ -1586,6 +1610,13 @@ ngx_http_mp4_read_tkhd_atom(ngx_http_mp4_file_t *mp=
+4, uint64_t atom_data_size)<br>
++&nbsp;&nbsp;&nbsp;&nbsp; atom_size =3D sizeof(ngx_mp4_atom_header_t) + (si=
+ze_t) atom_data_size;<br>
++ <br>
++&nbsp;&nbsp;&nbsp;&nbsp; trak =3D ngx_mp4_last_trak(mp4);<br>
+++<br>
+++&nbsp;&nbsp;&nbsp; if (trak-&gt;out[NGX_HTTP_MP4_TKHD_ATOM].buf) {<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ngx_log_error(NGX_LOG_ERR, mp4=
+-&gt;file.log, 0,<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &quot;duplicate mp4 t=
+khd atom in \&quot;%s\&quot;&quot;, mp4-&gt;file.name.data);<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return NGX_ERROR;<br>
+++&nbsp;&nbsp;&nbsp; }<br>
+++<br>
++&nbsp;&nbsp;&nbsp;&nbsp; trak-&gt;tkhd_size =3D atom_size;<br>
++ <br>
++&nbsp;&nbsp;&nbsp;&nbsp; ngx_mp4_set_32value(tkhd_atom-&gt;size, atom_size=
+);<br>
++@@ -1624,6 +1655,12 @@ ngx_http_mp4_read_mdia_atom(ngx_http_mp4_file_t *mp=
+4, uint64_t atom_data_size)<br>
++ <br>
++&nbsp;&nbsp;&nbsp;&nbsp; trak =3D ngx_mp4_last_trak(mp4);<br>
++ <br>
+++&nbsp;&nbsp;&nbsp; if (trak-&gt;out[NGX_HTTP_MP4_MDIA_ATOM].buf) {<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ngx_log_error(NGX_LOG_ERR, mp4=
+-&gt;file.log, 0,<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &quot;duplicate mp4 m=
+dia atom in \&quot;%s\&quot;&quot;, mp4-&gt;file.name.data);<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return NGX_ERROR;<br>
+++&nbsp;&nbsp;&nbsp; }<br>
+++<br>
++&nbsp;&nbsp;&nbsp;&nbsp; atom =3D &amp;trak-&gt;mdia_atom_buf;<br>
++&nbsp;&nbsp;&nbsp;&nbsp; atom-&gt;temporary =3D 1;<br>
++&nbsp;&nbsp;&nbsp;&nbsp; atom-&gt;pos =3D atom_header;<br>
++@@ -1747,6 +1784,13 @@ ngx_http_mp4_read_mdhd_atom(ngx_http_mp4_file_t *mp=
+4, uint64_t atom_data_size)<br>
++&nbsp;&nbsp;&nbsp;&nbsp; atom_size =3D sizeof(ngx_mp4_atom_header_t) + (si=
+ze_t) atom_data_size;<br>
++ <br>
++&nbsp;&nbsp;&nbsp;&nbsp; trak =3D ngx_mp4_last_trak(mp4);<br>
+++<br>
+++&nbsp;&nbsp;&nbsp; if (trak-&gt;out[NGX_HTTP_MP4_MDHD_ATOM].buf) {<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ngx_log_error(NGX_LOG_ERR, mp4=
+-&gt;file.log, 0,<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &quot;duplicate mp4 m=
+dhd atom in \&quot;%s\&quot;&quot;, mp4-&gt;file.name.data);<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return NGX_ERROR;<br>
+++&nbsp;&nbsp;&nbsp; }<br>
+++<br>
++&nbsp;&nbsp;&nbsp;&nbsp; trak-&gt;mdhd_size =3D atom_size;<br>
++&nbsp;&nbsp;&nbsp;&nbsp; trak-&gt;timescale =3D timescale;<br>
++ <br>
++@@ -1789,6 +1833,12 @@ ngx_http_mp4_read_hdlr_atom(ngx_http_mp4_file_t *mp=
+4, uint64_t atom_data_size)<br>
++ <br>
++&nbsp;&nbsp;&nbsp;&nbsp; trak =3D ngx_mp4_last_trak(mp4);<br>
++ <br>
+++&nbsp;&nbsp;&nbsp; if (trak-&gt;out[NGX_HTTP_MP4_HDLR_ATOM].buf) {<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ngx_log_error(NGX_LOG_ERR, mp4=
+-&gt;file.log, 0,<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &quot;duplicate mp4 h=
+dlr atom in \&quot;%s\&quot;&quot;, mp4-&gt;file.name.data);<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return NGX_ERROR;<br>
+++&nbsp;&nbsp;&nbsp; }<br>
+++<br>
++&nbsp;&nbsp;&nbsp;&nbsp; atom =3D &amp;trak-&gt;hdlr_atom_buf;<br>
++&nbsp;&nbsp;&nbsp;&nbsp; atom-&gt;temporary =3D 1;<br>
++&nbsp;&nbsp;&nbsp;&nbsp; atom-&gt;pos =3D atom_header;<br>
++@@ -1817,6 +1867,12 @@ ngx_http_mp4_read_minf_atom(ngx_http_mp4_file_t *mp=
+4, uint64_t atom_data_size)<br>
++ <br>
++&nbsp;&nbsp;&nbsp;&nbsp; trak =3D ngx_mp4_last_trak(mp4);<br>
++ <br>
+++&nbsp;&nbsp;&nbsp; if (trak-&gt;out[NGX_HTTP_MP4_MINF_ATOM].buf) {<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ngx_log_error(NGX_LOG_ERR, mp4=
+-&gt;file.log, 0,<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &quot;duplicate mp4 m=
+inf atom in \&quot;%s\&quot;&quot;, mp4-&gt;file.name.data);<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return NGX_ERROR;<br>
+++&nbsp;&nbsp;&nbsp; }<br>
+++<br>
++&nbsp;&nbsp;&nbsp;&nbsp; atom =3D &amp;trak-&gt;minf_atom_buf;<br>
++&nbsp;&nbsp;&nbsp;&nbsp; atom-&gt;temporary =3D 1;<br>
++&nbsp;&nbsp;&nbsp;&nbsp; atom-&gt;pos =3D atom_header;<br>
++@@ -1860,6 +1916,15 @@ ngx_http_mp4_read_vmhd_atom(ngx_http_mp4_file_t *mp=
+4, uint64_t atom_data_size)<br>
++ <br>
++&nbsp;&nbsp;&nbsp;&nbsp; trak =3D ngx_mp4_last_trak(mp4);<br>
++ <br>
+++&nbsp;&nbsp;&nbsp; if (trak-&gt;out[NGX_HTTP_MP4_VMHD_ATOM].buf<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; || trak-&gt;out[NGX_HTTP_MP4_S=
+MHD_ATOM].buf)<br>
+++&nbsp;&nbsp;&nbsp; {<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ngx_log_error(NGX_LOG_ERR, mp4=
+-&gt;file.log, 0,<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &quot;duplicate mp4 v=
+mhd/smhd atom in \&quot;%s\&quot;&quot;,<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mp4-&gt;file.name.dat=
+a);<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return NGX_ERROR;<br>
+++&nbsp;&nbsp;&nbsp; }<br>
+++<br>
++&nbsp;&nbsp;&nbsp;&nbsp; atom =3D &amp;trak-&gt;vmhd_atom_buf;<br>
++&nbsp;&nbsp;&nbsp;&nbsp; atom-&gt;temporary =3D 1;<br>
++&nbsp;&nbsp;&nbsp;&nbsp; atom-&gt;pos =3D atom_header;<br>
++@@ -1891,6 +1956,15 @@ ngx_http_mp4_read_smhd_atom(ngx_http_mp4_file_t *mp=
+4, uint64_t atom_data_size)<br>
++ <br>
++&nbsp;&nbsp;&nbsp;&nbsp; trak =3D ngx_mp4_last_trak(mp4);<br>
++ <br>
+++&nbsp;&nbsp;&nbsp; if (trak-&gt;out[NGX_HTTP_MP4_VMHD_ATOM].buf<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; || trak-&gt;out[NGX_HTTP_MP4_S=
+MHD_ATOM].buf)<br>
+++&nbsp;&nbsp;&nbsp; {<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ngx_log_error(NGX_LOG_ERR, mp4=
+-&gt;file.log, 0,<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &quot;duplicate mp4 v=
+mhd/smhd atom in \&quot;%s\&quot;&quot;,<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mp4-&gt;file.name.dat=
+a);<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return NGX_ERROR;<br>
+++&nbsp;&nbsp;&nbsp; }<br>
+++<br>
++&nbsp;&nbsp;&nbsp;&nbsp; atom =3D &amp;trak-&gt;smhd_atom_buf;<br>
++&nbsp;&nbsp;&nbsp;&nbsp; atom-&gt;temporary =3D 1;<br>
++&nbsp;&nbsp;&nbsp;&nbsp; atom-&gt;pos =3D atom_header;<br>
++@@ -1922,6 +1996,12 @@ ngx_http_mp4_read_dinf_atom(ngx_http_mp4_file_t *mp=
+4, uint64_t atom_data_size)<br>
++ <br>
++&nbsp;&nbsp;&nbsp;&nbsp; trak =3D ngx_mp4_last_trak(mp4);<br>
++ <br>
+++&nbsp;&nbsp;&nbsp; if (trak-&gt;out[NGX_HTTP_MP4_DINF_ATOM].buf) {<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ngx_log_error(NGX_LOG_ERR, mp4=
+-&gt;file.log, 0,<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &quot;duplicate mp4 d=
+inf atom in \&quot;%s\&quot;&quot;, mp4-&gt;file.name.data);<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return NGX_ERROR;<br>
+++&nbsp;&nbsp;&nbsp; }<br>
+++<br>
++&nbsp;&nbsp;&nbsp;&nbsp; atom =3D &amp;trak-&gt;dinf_atom_buf;<br>
++&nbsp;&nbsp;&nbsp;&nbsp; atom-&gt;temporary =3D 1;<br>
++&nbsp;&nbsp;&nbsp;&nbsp; atom-&gt;pos =3D atom_header;<br>
++@@ -1950,6 +2030,12 @@ ngx_http_mp4_read_stbl_atom(ngx_http_mp4_file_t *mp=
+4, uint64_t atom_data_size)<br>
++ <br>
++&nbsp;&nbsp;&nbsp;&nbsp; trak =3D ngx_mp4_last_trak(mp4);<br>
++ <br>
+++&nbsp;&nbsp;&nbsp; if (trak-&gt;out[NGX_HTTP_MP4_STBL_ATOM].buf) {<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ngx_log_error(NGX_LOG_ERR, mp4=
+-&gt;file.log, 0,<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &quot;duplicate mp4 s=
+tbl atom in \&quot;%s\&quot;&quot;, mp4-&gt;file.name.data);<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return NGX_ERROR;<br>
+++&nbsp;&nbsp;&nbsp; }<br>
+++<br>
++&nbsp;&nbsp;&nbsp;&nbsp; atom =3D &amp;trak-&gt;stbl_atom_buf;<br>
++&nbsp;&nbsp;&nbsp;&nbsp; atom-&gt;temporary =3D 1;<br>
++&nbsp;&nbsp;&nbsp;&nbsp; atom-&gt;pos =3D atom_header;<br>
++@@ -2018,6 +2104,12 @@ ngx_http_mp4_read_stsd_atom(ngx_http_mp4_file_t *mp=
+4, uint64_t atom_data_size)<br>
++ <br>
++&nbsp;&nbsp;&nbsp;&nbsp; trak =3D ngx_mp4_last_trak(mp4);<br>
++ <br>
+++&nbsp;&nbsp;&nbsp; if (trak-&gt;out[NGX_HTTP_MP4_STSD_ATOM].buf) {<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ngx_log_error(NGX_LOG_ERR, mp4=
+-&gt;file.log, 0,<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &quot;duplicate mp4 s=
+tsd atom in \&quot;%s\&quot;&quot;, mp4-&gt;file.name.data);<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return NGX_ERROR;<br>
+++&nbsp;&nbsp;&nbsp; }<br>
+++<br>
++&nbsp;&nbsp;&nbsp;&nbsp; atom =3D &amp;trak-&gt;stsd_atom_buf;<br>
++&nbsp;&nbsp;&nbsp;&nbsp; atom-&gt;temporary =3D 1;<br>
++&nbsp;&nbsp;&nbsp;&nbsp; atom-&gt;pos =3D atom_header;<br>
++@@ -2086,6 +2178,13 @@ ngx_http_mp4_read_stts_atom(ngx_http_mp4_file_t *mp=
+4, uint64_t atom_data_size)<br>
++&nbsp;&nbsp;&nbsp;&nbsp; atom_end =3D atom_table + entries * sizeof(ngx_mp=
+4_stts_entry_t);<br>
++ <br>
++&nbsp;&nbsp;&nbsp;&nbsp; trak =3D ngx_mp4_last_trak(mp4);<br>
+++<br>
+++&nbsp;&nbsp;&nbsp; if (trak-&gt;out[NGX_HTTP_MP4_STTS_ATOM].buf) {<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ngx_log_error(NGX_LOG_ERR, mp4=
+-&gt;file.log, 0,<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &quot;duplicate mp4 s=
+tts atom in \&quot;%s\&quot;&quot;, mp4-&gt;file.name.data);<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return NGX_ERROR;<br>
+++&nbsp;&nbsp;&nbsp; }<br>
+++<br>
++&nbsp;&nbsp;&nbsp;&nbsp; trak-&gt;time_to_sample_entries =3D entries;<br>
++ <br>
++&nbsp;&nbsp;&nbsp;&nbsp; atom =3D &amp;trak-&gt;stts_atom_buf;<br>
++@@ -2291,6 +2390,13 @@ ngx_http_mp4_read_stss_atom(ngx_http_mp4_file_t *mp=
+4, uint64_t atom_data_size)<br>
++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
+bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &quot;sync sample entries:%uD&quot=
+;, entries);<br>
++ <br>
++&nbsp;&nbsp;&nbsp;&nbsp; trak =3D ngx_mp4_last_trak(mp4);<br>
+++<br>
+++&nbsp;&nbsp;&nbsp; if (trak-&gt;out[NGX_HTTP_MP4_STSS_ATOM].buf) {<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ngx_log_error(NGX_LOG_ERR, mp4=
+-&gt;file.log, 0,<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &quot;duplicate mp4 s=
+tss atom in \&quot;%s\&quot;&quot;, mp4-&gt;file.name.data);<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return NGX_ERROR;<br>
+++&nbsp;&nbsp;&nbsp; }<br>
+++<br>
++&nbsp;&nbsp;&nbsp;&nbsp; trak-&gt;sync_samples_entries =3D entries;<br>
++ <br>
++&nbsp;&nbsp;&nbsp;&nbsp; atom_table =3D atom_header + sizeof(ngx_http_mp4_=
+stss_atom_t);<br>
++@@ -2489,6 +2595,13 @@ ngx_http_mp4_read_ctts_atom(ngx_http_mp4_file_t *mp=
+4, uint64_t atom_data_size)<br>
++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
+bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &quot;composition offset entries:%=
+uD&quot;, entries);<br>
++ <br>
++&nbsp;&nbsp;&nbsp;&nbsp; trak =3D ngx_mp4_last_trak(mp4);<br>
+++<br>
+++&nbsp;&nbsp;&nbsp; if (trak-&gt;out[NGX_HTTP_MP4_CTTS_ATOM].buf) {<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ngx_log_error(NGX_LOG_ERR, mp4=
+-&gt;file.log, 0,<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &quot;duplicate mp4 c=
+tts atom in \&quot;%s\&quot;&quot;, mp4-&gt;file.name.data);<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return NGX_ERROR;<br>
+++&nbsp;&nbsp;&nbsp; }<br>
+++<br>
++&nbsp;&nbsp;&nbsp;&nbsp; trak-&gt;composition_offset_entries =3D entries;<=
+br>
++ <br>
++&nbsp;&nbsp;&nbsp;&nbsp; atom_table =3D atom_header + sizeof(ngx_mp4_ctts_=
+atom_t);<br>
++@@ -2692,6 +2805,13 @@ ngx_http_mp4_read_stsc_atom(ngx_http_mp4_file_t *mp=
+4, uint64_t atom_data_size)<br>
++&nbsp;&nbsp;&nbsp;&nbsp; atom_end =3D atom_table + entries * sizeof(ngx_mp=
+4_stsc_entry_t);<br>
++ <br>
++&nbsp;&nbsp;&nbsp;&nbsp; trak =3D ngx_mp4_last_trak(mp4);<br>
+++<br>
+++&nbsp;&nbsp;&nbsp; if (trak-&gt;out[NGX_HTTP_MP4_STSC_ATOM].buf) {<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ngx_log_error(NGX_LOG_ERR, mp4=
+-&gt;file.log, 0,<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &quot;duplicate mp4 s=
+tsc atom in \&quot;%s\&quot;&quot;, mp4-&gt;file.name.data);<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return NGX_ERROR;<br>
+++&nbsp;&nbsp;&nbsp; }<br>
+++<br>
++&nbsp;&nbsp;&nbsp;&nbsp; trak-&gt;sample_to_chunk_entries =3D entries;<br>
++ <br>
++&nbsp;&nbsp;&nbsp;&nbsp; atom =3D &amp;trak-&gt;stsc_atom_buf;<br>
++@@ -3024,6 +3144,13 @@ ngx_http_mp4_read_stsz_atom(ngx_http_mp4_file_t *mp=
+4, uint64_t atom_data_size)<br>
++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
+bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &quot;sample uniform size:%uD, ent=
+ries:%uD&quot;, size, entries);<br>
++ <br>
++&nbsp;&nbsp;&nbsp;&nbsp; trak =3D ngx_mp4_last_trak(mp4);<br>
+++<br>
+++&nbsp;&nbsp;&nbsp; if (trak-&gt;out[NGX_HTTP_MP4_STSZ_ATOM].buf) {<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ngx_log_error(NGX_LOG_ERR, mp4=
+-&gt;file.log, 0,<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &quot;duplicate mp4 s=
+tsz atom in \&quot;%s\&quot;&quot;, mp4-&gt;file.name.data);<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return NGX_ERROR;<br>
+++&nbsp;&nbsp;&nbsp; }<br>
+++<br>
++&nbsp;&nbsp;&nbsp;&nbsp; trak-&gt;sample_sizes_entries =3D entries;<br>
++ <br>
++&nbsp;&nbsp;&nbsp;&nbsp; atom_table =3D atom_header + sizeof(ngx_mp4_stsz_=
+atom_t);<br>
++@@ -3207,6 +3334,16 @@ ngx_http_mp4_read_stco_atom(ngx_http_mp4_file_t *mp=
+4, uint64_t atom_data_size)<br>
++&nbsp;&nbsp;&nbsp;&nbsp; atom_end =3D atom_table + entries * sizeof(uint32=
+_t);<br>
++ <br>
++&nbsp;&nbsp;&nbsp;&nbsp; trak =3D ngx_mp4_last_trak(mp4);<br>
+++<br>
+++&nbsp;&nbsp;&nbsp; if (trak-&gt;out[NGX_HTTP_MP4_STCO_ATOM].buf<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; || trak-&gt;out[NGX_HTTP_MP4_C=
+O64_ATOM].buf)<br>
+++&nbsp;&nbsp;&nbsp; {<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ngx_log_error(NGX_LOG_ERR, mp4=
+-&gt;file.log, 0,<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &quot;duplicate mp4 s=
+tco/co64 atom in \&quot;%s\&quot;&quot;,<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mp4-&gt;file.name.dat=
+a);<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return NGX_ERROR;<br>
+++&nbsp;&nbsp;&nbsp; }<br>
+++<br>
++&nbsp;&nbsp;&nbsp;&nbsp; trak-&gt;chunks =3D entries;<br>
++ <br>
++&nbsp;&nbsp;&nbsp;&nbsp; atom =3D &amp;trak-&gt;stco_atom_buf;<br>
++@@ -3413,6 +3550,16 @@ ngx_http_mp4_read_co64_atom(ngx_http_mp4_file_t *mp=
+4, uint64_t atom_data_size)<br>
++&nbsp;&nbsp;&nbsp;&nbsp; atom_end =3D atom_table + entries * sizeof(uint64=
+_t);<br>
++ <br>
++&nbsp;&nbsp;&nbsp;&nbsp; trak =3D ngx_mp4_last_trak(mp4);<br>
+++<br>
+++&nbsp;&nbsp;&nbsp; if (trak-&gt;out[NGX_HTTP_MP4_STCO_ATOM].buf<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; || trak-&gt;out[NGX_HTTP_MP4_C=
+O64_ATOM].buf)<br>
+++&nbsp;&nbsp;&nbsp; {<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ngx_log_error(NGX_LOG_ERR, mp4=
+-&gt;file.log, 0,<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &quot;duplicate mp4 s=
+tco/co64 atom in \&quot;%s\&quot;&quot;,<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mp4-&gt;file.name.dat=
+a);<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return NGX_ERROR;<br>
+++&nbsp;&nbsp;&nbsp; }<br>
+++<br>
++&nbsp;&nbsp;&nbsp;&nbsp; trak-&gt;chunks =3D entries;<br>
++ <br>
++&nbsp;&nbsp;&nbsp;&nbsp; atom =3D &amp;trak-&gt;co64_atom_buf;<br>
++-- <br>
++2.25.1<br>
++<br>
+diff --git a/meta-webserver/recipes-httpd/nginx/nginx_1.20.1.bb b/meta-webs=
+erver/recipes-httpd/nginx/nginx_1.20.1.bb<br>
+index d686c627f..e2d0443c6 100644<br>
+--- a/meta-webserver/recipes-httpd/nginx/nginx_1.20.1.bb<br>
++++ b/meta-webserver/recipes-httpd/nginx/nginx_1.20.1.bb<br>
+@@ -1,6 +1,8 @@<br>
+&nbsp;require nginx.inc<br>
+&nbsp;<br>
+-SRC_URI +=3D &quot;<a href=3D"file://CVE-2021-3618.patch">file://CVE-2021-=
+3618.patch</a>&quot;<br>
++SRC_URI +=3D &quot;<a href=3D""></a>file://CVE-2021-3618.patch \<br>
++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href=
+=3D"file://CVE-2022-41741-CVE-2022-41742.patch">file://CVE-2022-41741-CVE-2=
+022-41742.patch</a> \
+<br>
++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &quot;<br>
+&nbsp;<br>
+&nbsp;LIC_FILES_CHKSUM =3D &quot;<a href=3D"file://LICENSE;md5=3D206629dc7c=
+7b3e87acb31162363ae505">file://LICENSE;md5=3D206629dc7c7b3e87acb31162363ae5=
+05</a>&quot;<br>
+&nbsp;<br>
+-- <br>
+2.34.1<br>
+<br>
+</div>
+</span></font></div>
+</body>
+</html>
+
+--_000_BN6PR11MB1924DF0751010B40365B5BEFE0809BN6PR11MB1924namp_--
 
