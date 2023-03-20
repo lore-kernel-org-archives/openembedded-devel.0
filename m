@@ -1,393 +1,171 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <ross.burton@arm.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 91CC2C6FD1D
-	for <webhook@archiver.kernel.org>; Mon, 20 Mar 2023 15:18:25 +0000 (UTC)
-Received: from mail-oi1-f173.google.com (mail-oi1-f173.google.com [209.85.167.173])
- by mx.groups.io with SMTP id smtpd.web11.17147.1679325496235245241
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B4353C6FD1D
+	for <webhook@archiver.kernel.org>; Mon, 20 Mar 2023 16:04:05 +0000 (UTC)
+Received: from EUR05-AM6-obe.outbound.protection.outlook.com (EUR05-AM6-obe.outbound.protection.outlook.com [40.107.22.75])
+ by mx.groups.io with SMTP id smtpd.web10.18559.1679328240662662826
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 20 Mar 2023 08:18:16 -0700
+ Mon, 20 Mar 2023 09:04:01 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=fV3n8pKK;
- spf=pass (domain: gmail.com, ip: 209.85.167.173, mailfrom: raj.khem@gmail.com)
-Received: by mail-oi1-f173.google.com with SMTP id q30so1815498oiw.13
-        for <openembedded-devel@lists.openembedded.org>; Mon, 20 Mar 2023 08:18:16 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112; t=1679325495;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=celFIQCFfYBYQpTU2kisKpB/6dtHiEnLO/3QJfM7Q84=;
-        b=fV3n8pKKmfWj5nfiB9V5hDSgojuA0BvWOacyWua+YGevfYnlOX3KeSuQuYZEov1F3q
-         G/Gq4ShIKXvdK9PRNNRMHePWx9FWLOUfkrWUeBBXuX0S3IbLTPFcb55gsYYHtmT2BNls
-         Q2QdziI1zOUks3MnHu3j8kV0D8ouY6FjBNHm8MiME/vTx4xrUTUbw0GRgnGPbBLbt7b1
-         aL4qze1Ws7coVYv3rH0FtXVTUgiWPc+LDlGFEaTnLK6eTzIkvIO6qBPf7C+3LhvNQiLL
-         kCsZLk4wpZqNBxn3tPY11A72qREtP1MoGk/3siHzFBoWUg3uQjk0XWQYQFKTur/XRkjK
-         yHJw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112; t=1679325495;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=celFIQCFfYBYQpTU2kisKpB/6dtHiEnLO/3QJfM7Q84=;
-        b=ZBXT3nLiq7hT7Ty2g6lLno4V++gSFWop6RFJIvEMkGVQNAXy4auCGqwOG4BzovXrPd
-         Pd5T0AHngdS62K23XFikuZ/z+QKZzW5ld/yN3KIYU28GgArz/kRYMEWbh6/cn8vbtzaQ
-         uXRxS0YKy8CIPp3gh5VyOSeP9PCYAZBsuUa7Za692w0omMXkhxBf+NQICFlI2hClCox7
-         n/SZBwGZ4ReYu8dgLjf0LCLTBPyTfQE2oMXHpJEGN+ESLPd+HTK2Owlje8dvHWhL3+4V
-         yXgNUCCJTegmfh4QX6bBkjbFBE6IRV3xf5BvQU+eFeKeKdetJHaV5y1fdKic78PdqelP
-         8BpQ==
-X-Gm-Message-State: AO0yUKX+XM7qbHaBTNgKcGDVLWb/+l38yQK3Eml86IeVcwhpo+jVlOQs
-	sne4X63GXn57ficwnTgSWxsisNFBLN7oNfX5MjTu6mkG
-X-Google-Smtp-Source: AK7set+d8xz95WL12thwum36QYPN7+r3bib/NH+MQuZqx/0TEcIOTK0tUChBgeRTLAZR20ZJzUpTxFfz4WMXZIpb6xg=
-X-Received: by 2002:aca:281a:0:b0:383:f5df:9e85 with SMTP id
- 26-20020aca281a000000b00383f5df9e85mr59478oix.4.1679325494718; Mon, 20 Mar
- 2023 08:18:14 -0700 (PDT)
+ dkim=pass header.i=@armh.onmicrosoft.com header.s=selector2-armh-onmicrosoft-com header.b=z2DvTwmf;
+ spf=pass (domain: arm.com, ip: 40.107.22.75, mailfrom: ross.burton@arm.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
+ s=selector2-armh-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=KyCmRz1S3/1DG9DZ1TREvRIo7K5b6CRPlfq7AWNt8BU=;
+ b=z2DvTwmf4H/cHeqARFV0qiO6w1048Xx3FoPkaOFrDprtUK1i+WMFQWiG3596gX9/ccKtYZvlOFvP0KLcFzx/CPCBcl7Wu1SV+oJHcuYtPRrbNOZ4nVJRUSf0O1MBsBmYG5hujPdixdmf+QN4PV1AvV2zDkyRqqDIaDDb+vbPq0Q=
+Received: from DUZPR01CA0220.eurprd01.prod.exchangelabs.com
+ (2603:10a6:10:4b4::8) by AS4PR08MB8168.eurprd08.prod.outlook.com
+ (2603:10a6:20b:58f::13) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6178.37; Mon, 20 Mar
+ 2023 16:03:54 +0000
+Received: from DBAEUR03FT065.eop-EUR03.prod.protection.outlook.com
+ (2603:10a6:10:4b4:cafe::7a) by DUZPR01CA0220.outlook.office365.com
+ (2603:10a6:10:4b4::8) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6178.37 via Frontend
+ Transport; Mon, 20 Mar 2023 16:03:54 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 63.35.35.123)
+ smtp.mailfrom=arm.com; dkim=pass (signature was verified)
+ header.d=armh.onmicrosoft.com;dmarc=pass action=none header.from=arm.com;
+Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
+ 63.35.35.123 as permitted sender) receiver=protection.outlook.com;
+ client-ip=63.35.35.123; helo=64aa7808-outbound-1.mta.getcheckrecipient.com;
+ pr=C
+Received: from 64aa7808-outbound-1.mta.getcheckrecipient.com (63.35.35.123) by
+ DBAEUR03FT065.mail.protection.outlook.com (100.127.142.147) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.6222.11 via Frontend Transport; Mon, 20 Mar 2023 16:03:54 +0000
+Received: ("Tessian outbound f2a8d6d66d12:v135"); Mon, 20 Mar 2023 16:03:54 +0000
+X-CheckRecipientChecked: true
+X-CR-MTA-CID: c0a6058c1fcfaf21
+X-CR-MTA-TID: 64aa7808
+Received: from ce69c8f17513.1
+	by 64aa7808-outbound-1.mta.getcheckrecipient.com id 1CADBF7F-C438-4294-8613-C6840CFD091E.1;
+	Mon, 20 Mar 2023 16:03:47 +0000
+Received: from EUR05-DB8-obe.outbound.protection.outlook.com
+    by 64aa7808-outbound-1.mta.getcheckrecipient.com with ESMTPS id ce69c8f17513.1
+    (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384);
+    Mon, 20 Mar 2023 16:03:47 +0000
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=FjenhgcpBTUUOXew9rmKTd9EkLsuTkAda1wK9XEGMrWev12wceUWpP6pJDsTcqARO9w5Q5aYFmLHDNEGCdZiJd+gUka9A86jq4TNu3efLZvAetQ4YcpkzsmC4EhVggGABZe4a2OkWFcxv7TeiCtImV+GEO2K2ZTaWNoGVBp1b3RMn/gjGF7K5O+ghqPtBko2SwQTElOFcqlFH+4IjIjSHr/1XKxzjxgrb7DZPtAEjvzgqX6L8hf0pusRDamOmibrR1HYVwomBIDcx7kMptr2GISn7EjuWy3yJy+Lv/VmUEERfCeSDzcpreP8fIXLHNevlMf4W72rhz8aBemilJihlQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=KyCmRz1S3/1DG9DZ1TREvRIo7K5b6CRPlfq7AWNt8BU=;
+ b=jh4ncjVdnCo+5QK4+KF5wHqQynOb3NZwyOB4L0ALCXy+vy6Dnq3TMdpVVY7DCDnE+OlfArufB8W6Hmp5+IL/Wy3uXDyIEDKjcgCnfSTOCAbXg3n+Viw4m6YTXHtnNQ+xo3jg5/nN4aaVm/ygtcnxgFsAC2iK9PY+Emz6cVz6w/t6UQTjOFfHFaPoNqBZSPkkrt0BHUSpJz4gQeE1/iMACiv11Ier6BavjbdO3tYBMrU5kH3GjNHTlrDzpF0QnR0Hm9/EAvLwlf46NyV25dDBRkkThksqH0ho17yU3IR5qVJZghv6GViPnXIlOPuWAkdqBs5iV5A+RXWpBjD4VLDwRw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=arm.com; dmarc=pass action=none header.from=arm.com; dkim=pass
+ header.d=arm.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
+ s=selector2-armh-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=KyCmRz1S3/1DG9DZ1TREvRIo7K5b6CRPlfq7AWNt8BU=;
+ b=z2DvTwmf4H/cHeqARFV0qiO6w1048Xx3FoPkaOFrDprtUK1i+WMFQWiG3596gX9/ccKtYZvlOFvP0KLcFzx/CPCBcl7Wu1SV+oJHcuYtPRrbNOZ4nVJRUSf0O1MBsBmYG5hujPdixdmf+QN4PV1AvV2zDkyRqqDIaDDb+vbPq0Q=
+Received: from PA4PR08MB7411.eurprd08.prod.outlook.com (2603:10a6:102:2a3::12)
+ by AS4PR08MB7759.eurprd08.prod.outlook.com (2603:10a6:20b:516::9) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6178.37; Mon, 20 Mar
+ 2023 16:03:44 +0000
+Received: from PA4PR08MB7411.eurprd08.prod.outlook.com
+ ([fe80::e305:742e:e10b:1093]) by PA4PR08MB7411.eurprd08.prod.outlook.com
+ ([fe80::e305:742e:e10b:1093%2]) with mapi id 15.20.6178.024; Mon, 20 Mar 2023
+ 16:03:39 +0000
+From: Ross Burton <Ross.Burton@arm.com>
+To: =?utf-8?B?QsO2c3rDtnJtw6lueWkgWm9sdMOhbg==?= <zboszor@gmail.com>
+CC: "TicoTimo@gmail.com" <TicoTimo@gmail.com>, "derek@asterius.io"
+	<derek@asterius.io>, "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-python][PATCH v2 3/3] python3-ninja: New recipe
+Thread-Topic: [meta-python][PATCH v2 3/3] python3-ninja: New recipe
+Thread-Index: AQHZW0WIWnMd6oshakinM9vmBnRv8w==
+Date: Mon, 20 Mar 2023 16:03:39 +0000
+Message-ID: <96BC65E9-C22F-4F1F-AC6E-C719ADFD17E5@arm.com>
+Accept-Language: en-GB, en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-mailer: Apple Mail (2.3731.400.51.1.1)
+Authentication-Results-Original: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=arm.com;
+x-ms-traffictypediagnostic: 
+	PA4PR08MB7411:EE_|AS4PR08MB7759:EE_|DBAEUR03FT065:EE_|AS4PR08MB8168:EE_
+X-MS-Office365-Filtering-Correlation-Id: 99bac657-a70a-41ad-e015-08db295cb44e
+x-checkrecipientrouted: true
+nodisclaimer: true
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam-Untrusted: BCL:0;
+X-Microsoft-Antispam-Message-Info-Original: 
+ GmlKP8YyVuQCQUi0K5wbUUR8OPB9SWyO8L3nkncL8JZYr/EHeAlCn0v99Dxr38CeCykFEBmz8XslAbPL6UWRGuBXEFkCsYenQngmPtGmVx5Xq3xr1QtokK4p30FoFHldTgRmSCaxapZULPwPwme/6DP5fAcbF6pteFSvfLVBJnnXUnHlCUxrXhiDWYNYoahoSo7U37cbgMOJkQE6ZpSe16TX3ItuZC1ZBynLYH42VB+AKLbgmJXquKtRvF82LhTPGg0Y8i3jdOjQaZ1VwuqMyV3uDxPv8nyDYKIg31GI50L9pSIfAAjusjHNPwimriJaQMiRJnhM7s7gfDOD6q2bUJE3YR3fXdFz5BK9ngtkzWWmo8pPXsTgQw5SLdQbiIba4kVEuuOvSlY1JAPBo7TBHrtrBTkKmt5+GBoWe3A7P4+wePRK7NCu2+8CtHi3GXULmOWVTbCXh+xyF6/AXZaeoD1fDKqF0nbE0fWC84cQVaAk1cw3WFw2EdVkYpDOnIxTeyewtv7zp4BxvM0509Z5jBb+gzlgjclUg26JTedp4z1Z2Fn42/Q+5cLIC2FB1MmTp3kuh4zbN3hBiiOuyqeXuYoD3FK5GYiZB7BVb7Wn4ilPJDntSQs1lN80fxZsu30xoW0tbSoZKhOhJ7qS5o2biuoReQU4YTm49UPRo7TxCGPRUq2K+HBEUe+UbjLXeyTihRGvesI3rxyTHdBWGXlnnCqzc5/egDak5snq+Kk/OkU=
+X-Forefront-Antispam-Report-Untrusted: 
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PA4PR08MB7411.eurprd08.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230025)(4636009)(39860400002)(136003)(376002)(366004)(396003)(346002)(451199018)(71200400001)(2616005)(186003)(6486002)(4326008)(83380400001)(478600001)(316002)(91956017)(66476007)(6916009)(66446008)(76116006)(8676002)(66946007)(64756008)(66556008)(6512007)(26005)(6506007)(54906003)(41300700001)(5660300002)(8936002)(38100700002)(122000001)(2906002)(86362001)(38070700005)(36756003)(33656002)(45980500001);DIR:OUT;SFP:1101;
+Content-Type: text/plain; charset="utf-8"
+Content-ID: <18BEEA4261F7244D903395ACEEAD1AD5@eurprd08.prod.outlook.com>
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-References: <20230320085615.535596-1-yi.zhao@windriver.com>
-In-Reply-To: <20230320085615.535596-1-yi.zhao@windriver.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 20 Mar 2023 08:17:48 -0700
-Message-ID: <CAMKF1spjJSfYG8eAeKaAG-2C1My7ub7i2Z12=1Tq9CMVA6KDXA@mail.gmail.com>
-Subject: Re: [oe] [meta-networking][PATCH] mbedtls: add ptest
-To: Yi Zhao <yi.zhao@eng.windriver.com>
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS4PR08MB7759
+Original-Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=arm.com;
+X-EOPAttributedMessage: 0
+X-MS-Exchange-Transport-CrossTenantHeadersStripped: 
+ DBAEUR03FT065.eop-EUR03.prod.protection.outlook.com
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id-Prvs: 
+	7836c1b3-f426-43dc-bcde-08db295cab7a
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 
+	6e8FJthSGiNXuDHPbFtOztnuKvaBKYeY2Fas0y4gGKWgVHY+0E3S4xUcjekpKNUFdokioQNW01kfAVjm3euKe7fGpo1b0OI08LbTuYmzTKvMnvGFnxzyMePmStdX4YviJhTAY9tHeAhN1qNZHYhSBQq7ptSfzzUFBVEMTRrkgSVZzkxTRMdy/NFz9Op4a9J9c7/UwdKnOiBYlg5AA1tw6v33vsp5fXMFxsnkNBz7OVfj3p1Mfu8QcDSdnAtpt4GyysYLFpw0MjaW2RGXBp2jDYGbmLkhBk2KesVWNk7p67BhElligCjrcCO0vophQmy0uhgF//afgjUhFmr8YOnYHSB1wxHGn0OQ2y7rgHbQP35CbvS571GhFNwLN4EUvsrYijDtDQ7NCJryf9bzwS1CaVco6GkjKE5KhGQZr5+2MCchGScDEBzzOSxC4Jh1OfSp5ZuQ+ZI1sHXfbT01NcwR4Cj+6s72iRDgH4TXDkvRIRxd9T8VqIYoghtDS6kNYSnvADpI4X2f7MIF76JX9ZrtZgM2abVr++Y/OfVqIoL+8GT26zPRt2pnDZeMI7SVbJ5pLlwSdBveH2I0zSXw4nIhWnEjF7ZAAe8AqZVrJ8FUAd994WTI6E9/qj1PGaCRtNMilv4Bareqn2FQVwgVNRdPGUn0S1ATZRkkHdtE6QFrvPmn+w89+C0kUQQ09Vz2BCS7aI0in08eZGKm4nobaa1kFw==
+X-Forefront-Antispam-Report: 
+	CIP:63.35.35.123;CTRY:IE;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:64aa7808-outbound-1.mta.getcheckrecipient.com;PTR:ec2-63-35-35-123.eu-west-1.compute.amazonaws.com;CAT:NONE;SFS:(13230025)(4636009)(136003)(346002)(396003)(376002)(39860400002)(451199018)(46966006)(36840700001)(40470700004)(82740400003)(316002)(478600001)(26005)(6512007)(6506007)(81166007)(47076005)(54906003)(2906002)(8676002)(6486002)(70586007)(70206006)(4326008)(36756003)(5660300002)(336012)(86362001)(356005)(36860700001)(41300700001)(6862004)(8936002)(2616005)(40460700003)(82310400005)(40480700001)(33656002)(186003)(83380400001);DIR:OUT;SFP:1101;
+X-OriginatorOrg: arm.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Mar 2023 16:03:54.1699
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 99bac657-a70a-41ad-e015-08db295cb44e
+X-MS-Exchange-CrossTenant-Id: f34e5979-57d9-4aaa-ad4d-b122a662184d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=f34e5979-57d9-4aaa-ad4d-b122a662184d;Ip=[63.35.35.123];Helo=[64aa7808-outbound-1.mta.getcheckrecipient.com]
+X-MS-Exchange-CrossTenant-AuthSource: 
+	DBAEUR03FT065.eop-EUR03.prod.protection.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS4PR08MB8168
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 20 Mar 2023 15:18:25 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101611
+ <openembedded-devel@lists.openembedded.org>; Mon, 20 Mar 2023 16:04:05 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101612
 
-On Mon, Mar 20, 2023 at 1:56=E2=80=AFAM Yi Zhao <yi.zhao@eng.windriver.com>=
- wrote:
->
-> Results:
-> $ ptest-runner mbedtls
-> START: ptest-runner
-> 2023-03-20T08:11
-> BEGIN: /usr/lib/mbedtls/ptest
-> PASS: test_suite_aes.cbc
-> PASS: test_suite_aes.cfb
-> PASS: test_suite_aes.ecb
-> PASS: test_suite_aes.ofb
-> PASS: test_suite_aes.rest
-> PASS: test_suite_aes.xts
-> PASS: test_suite_arc4
-> PASS: test_suite_aria
-> PASS: test_suite_asn1parse
-> PASS: test_suite_asn1write
-> PASS: test_suite_base64
-> PASS: test_suite_bignum.generated
-> PASS: test_suite_bignum.misc
-> PASS: test_suite_blowfish
-> PASS: test_suite_camellia
-> PASS: test_suite_ccm
-> PASS: test_suite_chacha20
-> PASS: test_suite_chachapoly
-> PASS: test_suite_cipher.aes
-> PASS: test_suite_cipher.arc4
-> PASS: test_suite_cipher.aria
-> PASS: test_suite_cipher.blowfish
-> PASS: test_suite_cipher.camellia
-> PASS: test_suite_cipher.ccm
-> PASS: test_suite_cipher.chacha20
-> PASS: test_suite_cipher.chachapoly
-> PASS: test_suite_cipher.des
-> PASS: test_suite_cipher.gcm
-> PASS: test_suite_cipher.misc
-> PASS: test_suite_cipher.nist_kw
-> PASS: test_suite_cipher.null
-> PASS: test_suite_cipher.padding
-> PASS: test_suite_cmac
-> PASS: test_suite_constant_time
-> PASS: test_suite_constant_time_hmac
-> PASS: test_suite_ctr_drbg
-> PASS: test_suite_debug
-> PASS: test_suite_des
-> PASS: test_suite_dhm
-> PASS: test_suite_ecdh
-> PASS: test_suite_ecdsa
-> PASS: test_suite_ecjpake
-> PASS: test_suite_ecp
-> PASS: test_suite_entropy
-> PASS: test_suite_error
-> PASS: test_suite_gcm.aes128_de
-> PASS: test_suite_gcm.aes128_en
-> PASS: test_suite_gcm.aes192_de
-> PASS: test_suite_gcm.aes192_en
-> PASS: test_suite_gcm.aes256_de
-> PASS: test_suite_gcm.aes256_en
-> PASS: test_suite_gcm.camellia
-> PASS: test_suite_gcm.misc
-> PASS: test_suite_hkdf
-> PASS: test_suite_hmac_drbg.misc
-> PASS: test_suite_hmac_drbg.nopr
-> PASS: test_suite_hmac_drbg.no_reseed
-> PASS: test_suite_hmac_drbg.pr
-> PASS: test_suite_md
-> PASS: test_suite_mdx
-> PASS: test_suite_memory_buffer_alloc
-> PASS: test_suite_mps
-> PASS: test_suite_net
-> PASS: test_suite_nist_kw
-> PASS: test_suite_oid
-> PASS: test_suite_pem
-> PASS: test_suite_pk
-> PASS: test_suite_pkcs12
-> PASS: test_suite_pkcs1_v15
-> PASS: test_suite_pkcs1_v21
-> PASS: test_suite_pkcs5
-> PASS: test_suite_pkparse
-> PASS: test_suite_pkwrite
-> PASS: test_suite_poly1305
-> PASS: test_suite_psa_crypto
-> PASS: test_suite_psa_crypto_attributes
-> PASS: test_suite_psa_crypto_driver_wrappers
-> PASS: test_suite_psa_crypto_entropy
-> PASS: test_suite_psa_crypto_generate_key.generated
-> PASS: test_suite_psa_crypto_hash
-> PASS: test_suite_psa_crypto_init
-> PASS: test_suite_psa_crypto_metadata
-> PASS: test_suite_psa_crypto_not_supported.generated
-> PASS: test_suite_psa_crypto_not_supported.misc
-> PASS: test_suite_psa_crypto_op_fail.generated
-> PASS: test_suite_psa_crypto_op_fail.misc
-> PASS: test_suite_psa_crypto_persistent_key
-> PASS: test_suite_psa_crypto_se_driver_hal
-> PASS: test_suite_psa_crypto_se_driver_hal_mocks
-> PASS: test_suite_psa_crypto_slot_management
-> PASS: test_suite_psa_crypto_storage_format.current
-> PASS: test_suite_psa_crypto_storage_format.misc
-> PASS: test_suite_psa_crypto_storage_format.v0
-> PASS: test_suite_psa_its
-> PASS: test_suite_random
-> PASS: test_suite_rsa
-> PASS: test_suite_shax
-> PASS: test_suite_ssl
-> PASS: test_suite_timing
-> PASS: test_suite_version
-> PASS: test_suite_x509parse
-> PASS: test_suite_x509write
-> PASS: test_suite_xtea
-> DURATION: 83
-> END: /usr/lib/mbedtls/ptest
-> 2023-03-20T08:13
-> STOP: ptest-runner
-> TOTAL: 1 FAIL: 0
->
-> Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
-> ---
->  .../mbedtls/mbedtls/run-ptest                 | 124 ++++++++++++++++++
->  .../mbedtls/mbedtls_2.28.2.bb                 |  18 ++-
->  2 files changed, 138 insertions(+), 4 deletions(-)
->  create mode 100644 meta-networking/recipes-connectivity/mbedtls/mbedtls/=
-run-ptest
->
-> diff --git a/meta-networking/recipes-connectivity/mbedtls/mbedtls/run-pte=
-st b/meta-networking/recipes-connectivity/mbedtls/mbedtls/run-ptest
-> new file mode 100644
-> index 000000000..9d815fcd0
-> --- /dev/null
-> +++ b/meta-networking/recipes-connectivity/mbedtls/mbedtls/run-ptest
-> @@ -0,0 +1,124 @@
-> +#!/bin/sh
-> +
-> +# Valid tests to run
-> +tests=3D"test_suite_aes.cbc \
-> +       test_suite_aes.cfb \
-> +       test_suite_aes.ecb \
-> +       test_suite_aes.ofb \
-> +       test_suite_aes.rest \
-> +       test_suite_aes.xts \
-> +       test_suite_arc4 \
-> +       test_suite_aria \
-> +       test_suite_asn1parse \
-> +       test_suite_asn1write \
-> +       test_suite_base64 \
-> +       test_suite_bignum.generated \
-> +       test_suite_bignum.misc \
-> +       test_suite_blowfish \
-> +       test_suite_camellia \
-> +       test_suite_ccm \
-> +       test_suite_chacha20 \
-> +       test_suite_chachapoly \
-> +       test_suite_cipher.aes \
-> +       test_suite_cipher.arc4 \
-> +       test_suite_cipher.aria \
-> +       test_suite_cipher.blowfish \
-> +       test_suite_cipher.camellia \
-> +       test_suite_cipher.ccm \
-> +       test_suite_cipher.chacha20 \
-> +       test_suite_cipher.chachapoly \
-> +       test_suite_cipher.des \
-> +       test_suite_cipher.gcm \
-> +       test_suite_cipher.misc \
-> +       test_suite_cipher.nist_kw \
-> +       test_suite_cipher.null \
-> +       test_suite_cipher.padding \
-> +       test_suite_cmac \
-> +       test_suite_constant_time \
-> +       test_suite_constant_time_hmac \
-> +       test_suite_ctr_drbg \
-> +       test_suite_debug \
-> +       test_suite_des \
-> +       test_suite_dhm \
-> +       test_suite_ecdh \
-> +       test_suite_ecdsa \
-> +       test_suite_ecjpake \
-> +       test_suite_ecp \
-> +       test_suite_entropy \
-> +       test_suite_error \
-> +       test_suite_gcm.aes128_de \
-> +       test_suite_gcm.aes128_en \
-> +       test_suite_gcm.aes192_de \
-> +       test_suite_gcm.aes192_en \
-> +       test_suite_gcm.aes256_de \
-> +       test_suite_gcm.aes256_en \
-> +       test_suite_gcm.camellia \
-> +       test_suite_gcm.misc \
-> +       test_suite_hkdf \
-> +       test_suite_hmac_drbg.misc \
-> +       test_suite_hmac_drbg.nopr \
-> +       test_suite_hmac_drbg.no_reseed \
-> +       test_suite_hmac_drbg.pr \
-> +       test_suite_md \
-> +       test_suite_mdx \
-> +       test_suite_memory_buffer_alloc \
-> +       test_suite_mps \
-> +       test_suite_net \
-> +       test_suite_nist_kw \
-> +       test_suite_oid \
-> +       test_suite_pem \
-> +       test_suite_pk \
-> +       test_suite_pkcs12 \
-> +       test_suite_pkcs1_v15 \
-> +       test_suite_pkcs1_v21 \
-> +       test_suite_pkcs5 \
-> +       test_suite_pkparse \
-> +       test_suite_pkwrite \
-> +       test_suite_poly1305 \
-> +       test_suite_psa_crypto \
-> +       test_suite_psa_crypto_attributes \
-> +       test_suite_psa_crypto_driver_wrappers \
-> +       test_suite_psa_crypto_entropy \
-> +       test_suite_psa_crypto_generate_key.generated \
-> +       test_suite_psa_crypto_hash \
-> +       test_suite_psa_crypto_init \
-> +       test_suite_psa_crypto_metadata \
-> +       test_suite_psa_crypto_not_supported.generated \
-> +       test_suite_psa_crypto_not_supported.misc \
-> +       test_suite_psa_crypto_op_fail.generated \
-> +       test_suite_psa_crypto_op_fail.misc \
-> +       test_suite_psa_crypto_persistent_key \
-> +       test_suite_psa_crypto_se_driver_hal \
-> +       test_suite_psa_crypto_se_driver_hal_mocks \
-> +       test_suite_psa_crypto_slot_management \
-> +       test_suite_psa_crypto_storage_format.current \
-> +       test_suite_psa_crypto_storage_format.misc \
-> +       test_suite_psa_crypto_storage_format.v0 \
-> +       test_suite_psa_its \
-> +       test_suite_random \
-> +       test_suite_rsa \
-> +       test_suite_shax \
-> +       test_suite_ssl \
-> +       test_suite_timing \
-> +       test_suite_version \
-> +       test_suite_x509parse \
-> +       test_suite_x509write \
-> +       test_suite_xtea \
-> +      "
-> +
-
-Can this list be generated dynamically ? that will avoid this going
-out of sync when a test is added/deleted
-which might happen often.
-
-> +ptestdir=3D$(dirname "$(readlink -f "$0")")
-> +cd "$ptestdir"/tests || exit
-> +
-> +# Run specified tests
-> +for f in $tests
-> +do
-> +    if test -e ./"$f"; then
-> +        if ./"$f" > ./"$f".out 2> ./"$f".err; then
-> +            echo "PASS: $f"
-> +        else
-> +            echo "FAIL: $f"
-> +        fi
-> +    else
-> +        echo "SKIP: $f"
-> +    fi
-> +done
-> diff --git a/meta-networking/recipes-connectivity/mbedtls/mbedtls_2.28.2.=
-bb b/meta-networking/recipes-connectivity/mbedtls/mbedtls_2.28.2.bb
-> index e19587ca0..dc77ba0bf 100644
-> --- a/meta-networking/recipes-connectivity/mbedtls/mbedtls_2.28.2.bb
-> +++ b/meta-networking/recipes-connectivity/mbedtls/mbedtls_2.28.2.bb
-> @@ -24,19 +24,22 @@ SECTION =3D "libs"
->
->  S =3D "${WORKDIR}/git"
->  SRCREV =3D "89f040a5c938985c5f30728baed21e49d0846a53"
-> -SRC_URI =3D "git://github.com/ARMmbed/mbedtls.git;protocol=3Dhttps;branc=
-h=3Dmbedtls-2.28"
-> +SRC_URI =3D "git://github.com/ARMmbed/mbedtls.git;protocol=3Dhttps;branc=
-h=3Dmbedtls-2.28 \
-> +           file://run-ptest \
-> +          "
->
-> -inherit cmake update-alternatives
-> +inherit cmake update-alternatives ptest
->
-> -PACKAGECONFIG ??=3D "shared-libs programs"
-> +PACKAGECONFIG ??=3D "shared-libs programs ${@bb.utils.contains('PTEST_EN=
-ABLED', '1', 'tests', '', d)}"
->  PACKAGECONFIG[shared-libs] =3D "-DUSE_SHARED_MBEDTLS_LIBRARY=3DON,-DUSE_=
-SHARED_MBEDTLS_LIBRARY=3DOFF"
->  PACKAGECONFIG[programs] =3D "-DENABLE_PROGRAMS=3DON,-DENABLE_PROGRAMS=3D=
-OFF"
->  PACKAGECONFIG[werror] =3D "-DMBEDTLS_FATAL_WARNINGS=3DON,-DMBEDTLS_FATAL=
-_WARNINGS=3DOFF"
->  # Make X.509 and TLS calls use PSA
->  # https://github.com/Mbed-TLS/mbedtls/blob/development/docs/use-psa-cryp=
-to.md
->  PACKAGECONFIG[psa] =3D ""
-> +PACKAGECONFIG[tests] =3D "-DENABLE_TESTING=3DON,-DENABLE_TESTING=3DOFF"
->
-> -EXTRA_OECMAKE =3D "-DENABLE_TESTING=3DOFF -DLIB_INSTALL_DIR:STRING=3D${l=
-ibdir}"
-> +EXTRA_OECMAKE =3D "-DLIB_INSTALL_DIR:STRING=3D${libdir}"
->
->  # For now the only way to enable PSA is to explicitly pass a -D via CFLA=
-GS
->  CFLAGS:append =3D "${@bb.utils.contains('PACKAGECONFIG', 'psa', ' -DMBED=
-TLS_USE_PSA_CRYPTO', '', d)}"
-> @@ -64,3 +67,10 @@ sysroot_stage_all:append() {
->         sysroot_stage_dir "${S}/library" "${SYSROOT_DESTDIR}/usr/share/mb=
-edtls-source/library"
->         sysroot_stage_dir "${S}/include" "${SYSROOT_DESTDIR}/usr/share/mb=
-edtls-source/include"
->  }
-> +
-> +do_install_ptest () {
-> +       install -d ${D}${PTEST_PATH}/tests
-> +       install ${B}/tests/test_suite_* ${D}${PTEST_PATH}/tests/
-> +       find ${D}${PTEST_PATH}/tests/ -type f -name "*.c" -delete
-> +       cp -fR ${S}/tests/data_files ${D}${PTEST_PATH}/tests/
-> +}
-> --
-> 2.25.1
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#101605): https://lists.openembedded.org/g/openembedde=
-d-devel/message/101605
-> Mute This Topic: https://lists.openembedded.org/mt/97727127/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
-aj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
+VGhlIHBhdGNoIGlzIG1pc3NpbmcgYW4gZXhwbGFuYXRpb24sIGFuIFVwc3RyZWFtLVN0YXR1cywg
+YW5kIHlvdXIgU2lnbmVkLW9mZi1ieS4NCg0KPiArU1VNTUFSWSA9ICJOaW5qYSBpcyBhIHNtYWxs
+IGJ1aWxkIHN5c3RlbSB3aXRoIGEgZm9jdXMgb24gc3BlZWQiDQo+ICtMSUNFTlNFID0gIkFwYWNo
+ZS0yLjAiDQo+ICtMSUNfRklMRVNfQ0hLU1VNID0gImZpbGU6Ly9MSUNFTlNFX0FwYWNoZV8yMDtt
+ZDU9MTljYmQ2NDcxNWI1MTI2N2E0N2JmMzc1MGNjNmE4YTUiDQo+ICsNCj4gK0RFUEVORFMgPSAi
+bmluamEtbmF0aXZlIGNtYWtlLW5hdGl2ZSBweXRob24zLXNjaWtpdC1idWlsZC1uYXRpdmXigJ0N
+Cg0KQWxsIG9mIHRoZXNlIGRlcGVuZHMgYXJlIHRvIGJ1aWxkIGEgYmluYXJ5IHRoYXQgd2UgaW1t
+ZWRpYXRlbHkgZGVsZXRlIHdoaWNoIGlzIHZlcnkgc2FkLg0KDQo+ICtTUkNfVVJJICs9ICIgXA0K
+PiArIGZpbGU6Ly9DTWFrZUxpc3RzLnR4dCBcDQo+ICsgZmlsZTovL3J1bi1uaW5qYS1mcm9tLXBh
+dGgucGF0Y2ggXA0KPiArIg0KPiArDQo+ICthZGR0YXNrIGRvX3BhdGNoYnVpbGQgYWZ0ZXIgZG9f
+cGF0Y2ggYmVmb3JlIGRvX2NvbmZpZ3VyZQ0KPiArDQo+ICtkb19wYXRjaGJ1aWxkICgpIHsNCj4g
+KyBybSAtZiAke1N9L0NNYWtlTGlzdHMudHh0DQo+ICsgY3AgJHtXT1JLRElSfS9DTWFrZUxpc3Rz
+LnR4dCAke1N9Lw0KPiArfQ0KDQpZb3UgY2FuIGRvIHRoaXMgYnkgc2V0dGluZyBzdWJkaXIgaW4g
+U1JDX1VSSTogZmlsZTovL0NNYWtlTGlzdHMudHh0O3N1YmRpcj0ke1N9IHdpbGwgcHV0IHRoZSBm
+aWxlIGRpcmVjdGx5IGludG8gJHtTfSBmb3IgeW91Lg0KDQo+ICtSREVQRU5EUzoke1BOfSA9ICIg
+XA0KPiArIG5pbmphIFwNCj4gKyBweXRob24zLXNjaWtpdC1idWlsZCBcDQo+ICvigJ0NCg0KVGhp
+cyBkZXBlbmRlbmN5IG9uIHNjaWtpdC1idWlsZCBtZWFucyB0aGF0IGFueXRoaW5nIHRoYXQgd2Fu
+dHMgdG8gdXNlIG5pbmphIG9uIHRhcmdldCBwdWxscyBjbWFrZSBpbnRvIHRoZSBpbWFnZSB0b28u
+DQoNClRoaXMgZGVwZW5kZW5jeSBpc27igJl0IG5lZWRlZCBhdCBhbGwgYmVjYXVzZSBpdCBvbmx5
+IGhhcHBlbnMgd2hlbiB0aGUgY29kZSBpcyBiZWluZyByYW4gaW4gdGhlIGJ1aWxkIHRyZWUsIHdo
+aWNoIG9idmlvdXNseSBhIHBhY2thZ2Ugd29u4oCZdCBldmVyIGRvLg0KDQpEaWQgeW91IHRlc3Qg
+dGhpcyByZWNpcGU/ICBJIGJlbGlldmUgdGhhdCBub3RoaW5nIHlvdeKAmXZlIHRlc3RlZCBhY3R1
+YWxseSB1c2VzIHRoZSDigJhpbXBvcnQgbmluamHigJkgZnVuY3Rpb25hbGl0eToNCg0Kcm9vdEBx
+ZW11YXJtNjQ6fiMgcHl0aG9uMyAtbW5pbmphDQpUcmFjZWJhY2sgKG1vc3QgcmVjZW50IGNhbGwg
+bGFzdCk6DQogIEZpbGUgIi91c3IvbGliL3B5dGhvbjMuMTEvc2l0ZS1wYWNrYWdlcy9uaW5qYS9f
+X2luaXRfXy5weSIsIGxpbmUgMTMsIGluIDxtb2R1bGU+DQogICAgZnJvbSAubmluamFfc3ludGF4
+IGltcG9ydCBXcml0ZXIsIGVzY2FwZSwgZXhwYW5kICAjIG5vcWE6IEY0MDENCiAgICBeXl5eXl5e
+Xl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl4NCk1vZHVsZU5vdEZvdW5k
+RXJyb3I6IE5vIG1vZHVsZSBuYW1lZCAnbmluamEubmluamFfc3ludGF4Jw0KDQoNCklmIG5vdGhp
+bmcgYWN0dWFsbHkgdXNlcyB0aGUgbmluamEgbW9kdWxlLCB0aGVuIGEgc2ltcGxlIHJlY2lwZSB0
+aGF0IHNpbXBseSBSREVQRU5EUyBvbiBuaW5qYSBhbmQgY2xhaW1zIHRoZSBuYW1lIHdvdWxkIHdv
+cmsgYmV0dGVyLg0KDQpSb3Nz
 
