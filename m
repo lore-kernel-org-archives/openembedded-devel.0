@@ -1,172 +1,270 @@
-Return-Path: <yue.tao@windriver.com>
+Return-Path: <leimaohui@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D3548C6FD1F
-	for <webhook@archiver.kernel.org>; Mon, 20 Mar 2023 03:00:57 +0000 (UTC)
-Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
- by mx.groups.io with SMTP id smtpd.web10.5960.1679281250010976942
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C319CC6FD1F
+	for <webhook@archiver.kernel.org>; Mon, 20 Mar 2023 03:02:57 +0000 (UTC)
+Received: from mail1.bemta34.messagelabs.com (mail1.bemta34.messagelabs.com [195.245.231.1])
+ by mx.groups.io with SMTP id smtpd.web10.5985.1679281368618394604
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 19 Mar 2023 20:00:50 -0700
+ Sun, 19 Mar 2023 20:02:49 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=pps06212021 header.b=kwcJbtCC;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=244390f4a0=yue.tao@windriver.com)
-Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 32K2uSh0023904
-	for <openembedded-devel@lists.openembedded.org>; Mon, 20 Mar 2023 03:00:49 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com; h=message-id : date
- : subject : to : references : from : in-reply-to : content-type :
- content-transfer-encoding : mime-version; s=PPS06212021;
- bh=HhMcsTkqQGupTnKUeVHJzC3w038LUh3EwauL/Wfiz60=;
- b=kwcJbtCC/HNRcAMVvnBRwvnnaBDADeLxBgx9R0exQQ9/GYWX5HKCZHkletEQrncvdgRn
- ZDNWPA/S9KmT6hSp9yGA147PW8kpV7+kkkn3lkNdX25kC9BN9w0oSvfmHzQUWf0MpFx9
- K1Rj67I/VotanQZ33N+gNqjKkznpWwBrMwC8M9eS70JnzGKncOT8AONVosOBHvFWVj7M
- OznnL0QBKuh5xOgOuHNjPZ4fwr/n3ejvGP1vdkv4NOJuup6MzNBTZWWGJAXjXIRGcWvr
- sFjTo+6NSaCOsT1RMhxalDzDNLq84KOzNtlBrsK/FJHqXB1GqpgXJcZYm3g2UomeXdQB 1g== 
-Received: from nam10-bn7-obe.outbound.protection.outlook.com (mail-bn7nam10lp2107.outbound.protection.outlook.com [104.47.70.107])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3pd49asehg-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Mon, 20 Mar 2023 03:00:48 +0000
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=C1SkJ6H3QZPOy2HmBPprfWdoH8MjOjAT9O4R6v54TAN7uaaGqo0aTKGWKZLlIryG0ng4TCfxldXsK8y2dX0b2J74WLOO4D9oZxd/fmte1BOUuyU0YSSVcBfUj1wU4u2PU936jIiqKYkJKWTCb7UIc+l5dP3jm0z99mbcH67m/vJrp31/fsH0FmGcx/BlCTh6ygfVSHWP/JEPn0dTs8+sjZCJrq/Xdw0NWAKoO5w1jVMsNB8kOVoXWP/ZaXNXUugv0iktUfLVHRBAm/AFRM0vC+V/xeMMm19jw7KXU8E7idVUcCLJSkK7h0duZOtN8siM9ORfLlTvBQPUzgfPzH8PEQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=HhMcsTkqQGupTnKUeVHJzC3w038LUh3EwauL/Wfiz60=;
- b=f5De/S/LEnyENy2Td1P3nZFn3UdCQ3dSLHsltKnu33d9Dpe926ip0xvgWW41FaFK3Lv79bBBstg9Sy1TmcZ6Movm0rCdjIuzaLbwcjKwrjdYJlh/c0JQKj5FSwQAHSA4JzM2qQh+BIra37cAiDaCKZLNohlBfu3dJWKf52KQZzjzLF8c++Ww6eRTg1GmGlIy03X4YXekccJc8QoFj5ChAUgpyTX7peKpu5BY8IYehc7ZlQLJG8yuUAOXfpak89W5H6TGf48kStVYIE3wGX75T5FBUzYTF17U+xt0n63uO7FfTjGFkzsc//5vgu6UjbKt3i3beFRIJ53yDSd7r2QncQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=windriver.com; dmarc=pass action=none
- header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
-Received: from DM6PR11MB4753.namprd11.prod.outlook.com (2603:10b6:5:2ac::21)
- by SA2PR11MB5100.namprd11.prod.outlook.com (2603:10b6:806:119::11) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6178.37; Mon, 20 Mar
- 2023 03:00:46 +0000
-Received: from DM6PR11MB4753.namprd11.prod.outlook.com
- ([fe80::1769:ee8e:1e34:cf13]) by DM6PR11MB4753.namprd11.prod.outlook.com
- ([fe80::1769:ee8e:1e34:cf13%8]) with mapi id 15.20.6178.037; Mon, 20 Mar 2023
- 03:00:45 +0000
-Message-ID: <dab92222-abc6-0849-e01f-dee0ad6df229@windriver.com>
-Date: Mon, 20 Mar 2023 11:00:39 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.11.0
-Subject: Re: [meta-python][PATCH] nghttp2: never build python bindings
-Content-Language: en-US
-To: openembedded-devel@lists.openembedded.org
-References: <20230320025906.421-1-yue.tao@windriver.com>
-From: ytao <yue.tao@windriver.com>
-In-Reply-To: <20230320025906.421-1-yue.tao@windriver.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: BYAPR04CA0033.namprd04.prod.outlook.com
- (2603:10b6:a03:40::46) To DM6PR11MB4753.namprd11.prod.outlook.com
- (2603:10b6:5:2ac::21)
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=msYkBr+B;
+ spf=pass (domain: fujitsu.com, ip: 195.245.231.1, mailfrom: leimaohui@fujitsu.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
+	s=170520fj; t=1679281366; i=@fujitsu.com;
+	bh=G1ogx2eY4BqfwocPGR62UokI2RJe+I3dq0B4ObqKSPA=;
+	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
+	b=msYkBr+BXzZCdmZT4A7KZaIHFY5uuWHl89pJ9atnWiCPY5dQf9CFeVUhv+J4s3T6p
+	 LLNL1vkVUBSIig62T/7pwJ09l07qGH14F4jugM13C4NHWLixuPOZfSD1wrSvpw8+wn
+	 twB7ecgWFHYSk2LjaoQjD+ZPoVEZpGAO32EJHvjLAdKQHTFURLIj9d6DjLR/+prb+S
+	 AZgLSDG66DLKZubVAJFBuwSxXAr152G7DKSosyzR2xSit7SK41e87pm56zLiWc2SpN
+	 itYy9766Piz/KGBt+8PpcxbWZ4WPSzEneQ+5cVO+e22DCNN8EdwbPdYkPQdnoz0fdf
+	 P2Vv1V/ds20SA==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrJIsWRWlGSWpSXmKPExsViZ8OxWffaGfE
+  Ug0MbWC0uHl7K7MDocW7jCsYAxijWzLyk/IoE1ox7e3pZC27YVNx/n9/AeNeki5GLQ0jgIaPE
+  nC9T2CCcy0wSe98dZIVw9jJK9C0+ytjFyMnBJqAhsXvqZWYQW0RAX2Lp7D1gNrOAmsTRlz/Bb
+  GEBO4mZz66wgNgsAqoSM84cZgKxeQVcJW5N6GYHsSUEFCSmPHzPDBEXlDg58wkLxBwJiYMvXj
+  BD1ChJvL20hxHCrpBonH6ICcJWk7h6bhPzBEb+WUjaZyFpX8DItIrRtDi1qCy1SNdML6koMz2
+  jJDcxM0cvsUo3US+1VLc8tbhE10gvsbxYL7W4WK+4Mjc5J0UvL7VkEyMwFFOK1X/tYJzZ91fv
+  EKMkB5OSKC/rMvEUIb6k/JTKjMTijPii0pzU4kOMMhwcShK8/PuBcoJFqempFWmZOcC4gElLc
+  PAoifBazgRK8xYXJOYWZ6ZDpE4x6nJ8/HNxL7MQS15+XqqUOG//KaAiAZCijNI8uBGwGL3EKC
+  slzMvIwMAgxFOQWpSbWYIq/4pRnINRSZjX6zTQFJ7MvBK4Ta+AjmACOuL+JBGQI0oSEVJSDUz
+  LFW/3iCWISVU/st1xdr701Ntn3/x95r2pYmGMZ83JKP7tQjdvVc6/YnCTxUjPqJTlfvml42kb
+  3HkMf3R83je7WM/ZjU+xuIbz8r4v6Rzp5y+Wc/i4frI19Tqz82OG74GCOU0uG+7u2FPvcr12X
+  3mYiefi+cpHP9wpdNA9oKyldfjZ9IBbK4T7NTfs7Gc87i6lkSsj/+hAJPvfYiXx+YnXmPlfX5
+  qp4ZLXs+zI1MMRvbfP+TNtXGFgbvW/fdoHzbBvD3fb3hVXan66+Kl5LM9qXu+9vPdklqw+cWN
+  +crD93jsNvMu/2elOdMoy1w78MG1ldsyt3wvcDx+Z+DtzQoLh3wUrzRZPT/z2xejZtPnXlFiK
+  MxINtZiLihMB4qm6vEwDAAA=
+X-Env-Sender: leimaohui@fujitsu.com
+X-Msg-Ref: server-13.tower-571.messagelabs.com!1679281365!480776!1
+X-Originating-IP: [62.60.8.179]
+X-SYMC-ESS-Client-Auth: outbound-route-from=pass
+X-StarScan-Received: 
+X-StarScan-Version: 9.104.1; banners=-,-,-
+X-VirusChecked: Checked
+Received: (qmail 2638 invoked from network); 20 Mar 2023 03:02:46 -0000
+Received: from unknown (HELO n03ukasimr04.n03.fujitsu.local) (62.60.8.179)
+  by server-13.tower-571.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 20 Mar 2023 03:02:46 -0000
+Received: from n03ukasimr04.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTP id C5448158
+	for <openembedded-devel@lists.openembedded.org>; Mon, 20 Mar 2023 03:02:45 +0000 (GMT)
+Received: from R01UKEXCASM121.r01.fujitsu.local (R01UKEXCASM121 [10.183.43.173])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTPS id B84C173
+	for <openembedded-devel@lists.openembedded.org>; Mon, 20 Mar 2023 03:02:45 +0000 (GMT)
+Received: from localhost.localdomain (10.167.225.227) by
+ R01UKEXCASM121.r01.fujitsu.local (10.183.43.173) with Microsoft SMTP Server
+ (TLS) id 15.0.1497.42; Mon, 20 Mar 2023 03:02:43 +0000
+From: Lei Maohui <leimaohui@fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: Lei Maohui <leimaohui@fujitsu.com>
+Subject: [oe] [meta-oe][PATCH v5] pgpool2: Added a new recipe.
+Date: Mon, 20 Mar 2023 11:02:35 +0800
+Message-ID: <1679281355-18266-1-git-send-email-leimaohui@fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DM6PR11MB4753:EE_|SA2PR11MB5100:EE_
-X-MS-Office365-Filtering-Correlation-Id: 0de0f173-27a7-4e9d-50ae-08db28ef4cd6
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 
-	CF3XisJl57M8M91OONFyex6BwXZvsfGw0SD4EKR4rbK/wAIjutZTtt+DzPYzAK20Q0YzE8ByvaF9E9naYnUriyFVFvrohf4qkiVatB/FbFPQF/SY3iwMDw154851lngNwMJT7TuVnzXIfdNcyFVT9Vc2OV4vX/fvL9kxCRKuS/tuyLwguOxqIaU5iBmhEX8eYeeYg86IVEt1i59EqlLaoiBJ8r5hfYlpROZ7veqjI7GJRV23I7lCGmr905Ii4npNIt6fssUXu+zHvyg+DYa0BeCJhvVMxkc4YYZlmW74DO1s3hAzg/b2OkYeKkgkqMuJ49ZZlS789hY1mgrd750pS+YUgvXJ7cDykVBdfbP1EsCVaoiXRXCXzZvfHlURx0Pj2MBBGC2rnrtVvcYQxdYWP8Q4tIi1Bm6fCzgKZh2WybxKcT9iPFMQ43ZzlkghEN3iNs9UDxTtnX4+zK7hmpevwlMUF83baY28jeTqGbjB9+IfSnnNSPspHpWV8tRY0yccGS9w317aTqHzR8NPA9iurI5AILak5qiagMScqXqrCrY4mp+xVlbOMbF8QEleSin9gmSnvRC3bmtGI+Go+Dg9wnEvwo0/46ypoCreoog+w503SvzxkcFnanGS9hZSBYICNUwt1adOoDER78+UWRFsfiAUqSC/i/oJJCt/HHHA3dTUkqkBhO0qjSlJJwuUDBgfzwvuchMZr02S8iRS2L10FN1D72WM3+BnHCitzD52SCNiFgdDnbS1qakO/yKhpDj/
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM6PR11MB4753.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230025)(4636009)(366004)(376002)(39840400004)(136003)(396003)(346002)(451199018)(2616005)(26005)(6506007)(6512007)(53546011)(6666004)(6486002)(31686004)(8676002)(6916009)(316002)(66556008)(66476007)(186003)(66946007)(478600001)(5660300002)(8936002)(2906002)(41300700001)(38100700002)(31696002)(86362001)(36756003)(43062005)(43740500002)(45980500001);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?utf-8?B?VVJabjJEUi8rNjdwTWY1S0dwYnY0V1dISnFtanIwbXg1ME1RQ3lIbFFpdytH?=
- =?utf-8?B?WlFSUDRZUTUrYUJKVlVoWDVHQVMxcXhRbDAvRnNyNCtsUU14V0VxK29kWlpE?=
- =?utf-8?B?dDBZR0VDNE9jY1pxb2V5amVLekhQTGR5aEFFOWYyNzVmbEptV0NsOFl2UEFp?=
- =?utf-8?B?UHd1R2tPbHJObFhJcGEwWTBtS2tqRHFsQWRuWTBmWHB4SFZqVkFwRTBXaW9K?=
- =?utf-8?B?dHl4eGxCK1FhTXNLY1phcXEyMnJKcmx6b0NlNnBBbGlZa1J5cnZCR3RPUm01?=
- =?utf-8?B?UGtIRitVQk9tOTYxdlc2UXhjSFFTeE1UZ0VEb3Vha3pHTzNUbkFBKy9LMXdG?=
- =?utf-8?B?Yyt3SlZVV0FEeEJoeUlEa3RaUmZsajhid1o2MkZpdUNYUlJ3aDNsTk9iRTdn?=
- =?utf-8?B?azJYcC9RZU0wcGdxeEtOU1BNcktBZlo3dEh3bURORVRsSGcxL0lsUGRwTUVJ?=
- =?utf-8?B?anJ5QytoNnd3YklTbU4rSGFoT3VhaHRVdUlMQ0prdDR5MnB3NHVPVDNzSnht?=
- =?utf-8?B?SmJnc3RUem40Mk5YcmZkdVJ3Vi9xc2lpYlVCWmRRM25sN29Ibk5IYW44dUl1?=
- =?utf-8?B?bUdMOVF6Nk1NVElsQjBVSHp6UzZob3lqRFJoZm1yVHVUNmszVjRJUzFCYUw5?=
- =?utf-8?B?WSt4V1hqdnRtTXQ4WWxlVTR1ZDFoWG1yOEc4dmlaL2lucCtkTHVTYTA1TE5E?=
- =?utf-8?B?K2JMbWlsWi92U3FLYWlXbExWVTh1ZEtPTSs5WHBVVUNDd0l6UXl1OVZsV2t0?=
- =?utf-8?B?K251N2UvVG5VV2xmQTNCOEJvMVJNa2dHZUg0N1JVMWdwZVhxQjNUVXAzZk9V?=
- =?utf-8?B?cFpvY2FmZjEwVm5QOHBTeEx2ODZoQS93RXNvc2k5MEc1TmR4UGJ1SDFHTytR?=
- =?utf-8?B?NWFZNUZpNm9vMjFmY20xc3NveE4rT05FSGovV1ZuMFRMU0ZCOUc3WEVrcmhO?=
- =?utf-8?B?MUJQcW5JT0h5dWJYSkw2RlE1RjdpUlRrSFl0VVA5N2U3dklGbGp4d1QwTHcy?=
- =?utf-8?B?bEtTSlpOV3NtbytXakJCWVA3Q0dPbWZ4TE9qQVE5ZDZpTGVwbXh4aHBCWk5N?=
- =?utf-8?B?K2FwSERLTzB1bkkzZ1RyZ1UwenhFOEV6Z0dHbkhxZ3FMRjdEdW9LUURVOWVz?=
- =?utf-8?B?T1FrcTFadjc5b0RZZG15UU1nZ0VJeUNQdFEzR2pUZXR5RDk4V09RN0ZUMTFy?=
- =?utf-8?B?UWJTMlg4UEFQYXJ2dktUTkxBSDZxRVdlUnozZm1JZ0lWQzMvWDBUY0MrUWVK?=
- =?utf-8?B?UUcxUVV1S054bXlWdUZNQVdzT0phRitacXNVZ1d3aTFFaGhUV0lJWTZhTWR5?=
- =?utf-8?B?ZDVrd1ZZYW5OYjBsU1NRYlg2YXIyeERYUnE3cE9CVnVyallGL3RzbzVKWUF0?=
- =?utf-8?B?UVFOYXA0MTFvNERRME82QnNzaEcxSVV5Vmt0bDFWbmxBOFpacjA0WGx4MHZF?=
- =?utf-8?B?R0RoVmV3enZDTkFycWI4NUhhZWdjcFRwL3FvRXloNnJBenVXc2tqYll4b1V4?=
- =?utf-8?B?TUFlWUg5OFVUSzJQYlIrakRsbE9QQ09LTks1UjBlYkR1MlBPSVZYb0dSWnpH?=
- =?utf-8?B?SFVLM1NOWERDRXA1VGNzMGtCcVZJR2VKSnZCeFgzR2JhYk1WVzB6WUhJcU9N?=
- =?utf-8?B?WWZhcmxoR29SbkhHc1dEclJjTU1HTnR5Z25wV1dXdytYWXVjUldicGxLOEJG?=
- =?utf-8?B?clh4UEJWVzhjR041NzZCWmNyVFFWdWxqODVOQnp0eUlMckk1QmVGVXVVT1kw?=
- =?utf-8?B?N3RXbnpBS052U3RIb21vellOaEZCT1RjU3BQcmRyV1BpMm50WFhCQi9LNy8y?=
- =?utf-8?B?Zk0zdStMZHlOd2JLcWtBS0FlVjJldHJWc05pUGlXS3BLa3pOUnZpYS9ZK1Yw?=
- =?utf-8?B?d09DOUNVa09Jd203dnVsaWxwb0xkK0szbVUvNVpiWVVCWUZHdUNVMDlmVGlR?=
- =?utf-8?B?VnRINnNyNEJ1d0tCbm1kK0oyY09GU3VOdTMxTHdvVVk4ZGsxUmtQUHkxa3Rw?=
- =?utf-8?B?SCtBRENLcitGcnNxVVVqd3ZSemZMMmFobll4RXh4Qy9HanZKRGU5dUNESzZr?=
- =?utf-8?B?YWNlKzZXdHIzOFNudUNZc2NIZmpqNHNldUhIazh4OW9RYVZUM28wWitHTEoy?=
- =?utf-8?B?dDBGcThYRnAxM2FkUytKQmwwTVhlQjhab0tBT0Q1VGNUZ0tETU1DS0NYdVdx?=
- =?utf-8?B?VGc9PQ==?=
-X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 0de0f173-27a7-4e9d-50ae-08db28ef4cd6
-X-MS-Exchange-CrossTenant-AuthSource: DM6PR11MB4753.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Mar 2023 03:00:45.5559
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: QNq+UOo3CWJ8JbSzfy+4jqPULt/C4d9fIuRV9l05ByA2hpMYUyy3kvtO13R7jA+CXcB2/0tuDnxqqxHk0QyKJQ==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA2PR11MB5100
-X-Proofpoint-ORIG-GUID: 2ARlqFuvDrA2JXM-4VPY6xDfq74X7IoB
-X-Proofpoint-GUID: 2ARlqFuvDrA2JXM-4VPY6xDfq74X7IoB
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.254,Aquarius:18.0.942,Hydra:6.0.573,FMLib:17.11.170.22
- definitions=2023-03-19_14,2023-03-16_02,2023-02-09_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 phishscore=0 bulkscore=0
- clxscore=1015 priorityscore=1501 lowpriorityscore=0 malwarescore=0
- suspectscore=0 adultscore=0 mlxlogscore=848 mlxscore=0 impostorscore=0
- spamscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2303150002 definitions=main-2303200025
+Content-Type: text/plain
+X-Originating-IP: [10.167.225.227]
+X-ClientProxiedBy: G08CNEXCHPEKD07.g08.fujitsu.local (10.167.33.80) To
+ R01UKEXCASM121.r01.fujitsu.local (10.183.43.173)
+X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 20 Mar 2023 03:00:57 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101601
+ <openembedded-devel@lists.openembedded.org>; Mon, 20 Mar 2023 03:02:57 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101602
 
-Sorry, please ignore this review.
+Pgpool-II is a middleware that works between PostgreSQL servers and a PostgreSQL database client. It is distributed under a license similar to BSD and MIT. It provides the  following features.
 
+Signed-off-by: Lei Maohui <leimaohui@fujitsu.com>
+---
+ ...0001-Fix-build-error-when-build-this-file.patch | 32 +++++++++++++
+ ...-unknown-type-name-fd_set-error-with-musl.patch | 33 ++++++++++++++
+ .../recipes-support/pgpool2/pgpool2/pgpool.service | 17 +++++++
+ .../pgpool2/pgpool2/pgpool.sysconfig               |  7 +++
+ .../recipes-support/pgpool2/pgpool2_4.4.1.bb       | 53 ++++++++++++++++++++++
+ 5 files changed, 142 insertions(+)
+ create mode 100644 meta-networking/recipes-support/pgpool2/pgpool2/0001-Fix-build-error-when-build-this-file.patch
+ create mode 100644 meta-networking/recipes-support/pgpool2/pgpool2/0001-pgpool2-Fix-unknown-type-name-fd_set-error-with-musl.patch
+ create mode 100644 meta-networking/recipes-support/pgpool2/pgpool2/pgpool.service
+ create mode 100644 meta-networking/recipes-support/pgpool2/pgpool2/pgpool.sysconfig
+ create mode 100644 meta-networking/recipes-support/pgpool2/pgpool2_4.4.1.bb
 
-ytao
+diff --git a/meta-networking/recipes-support/pgpool2/pgpool2/0001-Fix-build-error-when-build-this-file.patch b/meta-networking/recipes-support/pgpool2/pgpool2/0001-Fix-build-error-when-build-this-file.patch
+new file mode 100644
+index 0000000..52bcc3b
+--- /dev/null
++++ b/meta-networking/recipes-support/pgpool2/pgpool2/0001-Fix-build-error-when-build-this-file.patch
+@@ -0,0 +1,32 @@
++From f8ab74a76049f69adeebe92c62593547e05a075d Mon Sep 17 00:00:00 2001
++From: Lei Maohui <leimaohui@fujitsu.com>
++Date: Wed, 11 Jan 2023 17:22:41 +0900
++Subject: [PATCH] Fix build error when build this file.
++
++| snprintf.c:770:64: error: 'PG_STRERROR_R_BUFLEN' undeclared (first use in this function)
++|   770 |                                         char            errbuf[PG_STRERROR_R_BUFLEN];
++|       |                                                                ^~~~~~~~~~~~~~~~~~~~
++
++PG_STRERROR_R_BUFLEN is defined in postgresql, but pgpool doesn't
++include the header of postgresql.
++
++Upstream-Status: Inappropriate [OE-Specific]
++Signed-off-by: Lei Maohui <leimaohui@fujitsu.com>
++---
++ src/parser/snprintf.c | 1 +
++ 1 file changed, 1 insertion(+)
++
++diff --git a/src/parser/snprintf.c b/src/parser/snprintf.c
++index 84ebdb2..3387897 100644
++--- a/src/parser/snprintf.c
+++++ b/src/parser/snprintf.c
++@@ -46,6 +46,7 @@
++ #include "pool_parser.h"
++ #include "stringinfo.h"
++ #include "utils/palloc.h"
+++#include "postgresql/server/port.h"
++
++ /*
++  * We used to use the platform's NL_ARGMAX here, but that's a bad idea,
++--
++2.25.1
+diff --git a/meta-networking/recipes-support/pgpool2/pgpool2/0001-pgpool2-Fix-unknown-type-name-fd_set-error-with-musl.patch b/meta-networking/recipes-support/pgpool2/pgpool2/0001-pgpool2-Fix-unknown-type-name-fd_set-error-with-musl.patch
+new file mode 100644
+index 0000000..26f8afe
+--- /dev/null
++++ b/meta-networking/recipes-support/pgpool2/pgpool2/0001-pgpool2-Fix-unknown-type-name-fd_set-error-with-musl.patch
+@@ -0,0 +1,33 @@
++From 5d335b5ddd052f047759cae0e9b94ec49f9f3884 Mon Sep 17 00:00:00 2001
++From: Lei Maohui <leimaohui@fujitsu.com>
++Date: Mon, 20 Mar 2023 02:03:04 +0000
++Subject: [PATCH] pgpool2: Fix unknown type name 'fd_set' error with musl.
++
++| read.c: In function 'read_until_ready_for_query':
++| read.c:53:24: error: storage size of 'timeoutval' isn't known
++|    53 |         struct timeval timeoutval;
++|       |                        ^~~~~~~~~~
++| read.c:54:9: error: unknown type name 'fd_set'
++|    54 |         fd_set          readmask;
++|       |         ^~~~~~
++
++Upstream-Status: Inappropriate [embedded specific]
++Signed-off-by: Lei Maohui <leimaohui@fujitsu.com>
++---
++ src/tools/pgproto/read.c | 1 +
++ 1 file changed, 1 insertion(+)
++
++diff --git a/src/tools/pgproto/read.c b/src/tools/pgproto/read.c
++index c7fb548..4efe641 100644
++--- a/src/tools/pgproto/read.c
+++++ b/src/tools/pgproto/read.c
++@@ -19,6 +19,7 @@
++ #include "../../include/config.h"
++ #include "pgproto/pgproto.h"
++ #include <unistd.h>
+++#include <sys/select.h>
++ #include <stdlib.h>
++ #include <stdio.h>
++ #include <string.h>
++--
++2.34.1
+diff --git a/meta-networking/recipes-support/pgpool2/pgpool2/pgpool.service b/meta-networking/recipes-support/pgpool2/pgpool2/pgpool.service
+new file mode 100644
+index 0000000..bf2d323
+--- /dev/null
++++ b/meta-networking/recipes-support/pgpool2/pgpool2/pgpool.service
+@@ -0,0 +1,17 @@
++[Unit]
++Description=Pgpool-II
++After=syslog.target network.target
++
++[Service]
++
++User=postgres
++Group=postgres
++
++EnvironmentFile=-/etc/sysconfig/pgpool
++
++ExecStart=/usr/bin/pgpool -f /etc/pgpool-II/pgpool.conf $OPTS
++ExecStop=/usr/bin/pgpool -f /etc/pgpool-II/pgpool.conf $STOP_OPTS stop
++ExecReload=/usr/bin/pgpool -f /etc/pgpool-II/pgpool.conf reload
++
++[Install]
++WantedBy=multi-user.target
+diff --git a/meta-networking/recipes-support/pgpool2/pgpool2/pgpool.sysconfig b/meta-networking/recipes-support/pgpool2/pgpool2/pgpool.sysconfig
+new file mode 100644
+index 0000000..ea13089
+--- /dev/null
++++ b/meta-networking/recipes-support/pgpool2/pgpool2/pgpool.sysconfig
+@@ -0,0 +1,7 @@
++# Options for pgpool
++
++# -n: don't run in daemon mode. does not detach control tty
++# -d: debug mode. lots of debug information will be printed
++
++#OPTS=" -d -n"
++OPTS=" -n"
+diff --git a/meta-networking/recipes-support/pgpool2/pgpool2_4.4.1.bb b/meta-networking/recipes-support/pgpool2/pgpool2_4.4.1.bb
+new file mode 100644
+index 0000000..efb563b
+--- /dev/null
++++ b/meta-networking/recipes-support/pgpool2/pgpool2_4.4.1.bb
+@@ -0,0 +1,53 @@
++SUMMARY = "a language independent connection pool server for PostgreSQL."
++
++DESCRIPTION = "Pgpool-II is a middleware that works between PostgreSQL \
++               servers and a PostgreSQL database client. It is distributed \
++               under a license similar to BSD and MIT. It provides the \
++               following features."
++
++HOMEPAGE = "http://pgpool.net"
++
++LICENSE = "BSD-2-Clause"
++LIC_FILES_CHKSUM = "file://COPYING;md5=e4b38de086d73e0521de0bbdbaa4a1a9"
++
++SRC_URI = "http://www.pgpool.net/mediawiki/images/pgpool-II-${PV}.tar.gz \
++	   file://0001-Fix-build-error-when-build-this-file.patch \
++	   file://0001-pgpool2-Fix-unknown-type-name-fd_set-error-with-musl.patch \
++	   file://pgpool.sysconfig \
++	   file://pgpool.service \
++           "
++SRC_URI[sha256sum] = "4b379bbba8e178128a1cee4a5bd1ae116dedb3da6121b728c18f0f54c881f328"
++
++S = "${WORKDIR}/pgpool-II-${PV}"
++
++inherit autotools systemd
++
++SYSTEMD_SERVICE:${PN} = "pgpool.service"
++
++PACKAGECONFIG ??= " openssl libmemcached postgresql \
++"
++PACKAGECONFIG[pam] = "--with-pam,,libpam"
++PACKAGECONFIG[openssl] = "--with-openssl,,openssl"
++PACKAGECONFIG[libmemcached] = "--with-memcached=${STAGING_INCDIR}/libmemcachedutil-1.0,,libmemcached"
++PACKAGECONFIG[postgresql] = "--with-pgsql-includedir=${STAGING_INCDIR}/postgresql,, postgresql"
++
++EXTRA_OECONF += "--disable-static \
++	         --disable-rpath \
++	        "
++B = "${S}"
++CFLAGS:append = " -fcommon "
++
++FILES:${PN} += "${datadir}/pgpool-II/ "
++
++do_configure:append() {
++    echo "#define HAVE_STRCHRNUL 1" >> ${S}/src/include/config.h
++    sed -i "s,#define USE_REPL_SNPRINTF 1,/* #undef USE_REPL_SNPRINTF*/,g" ${S}/src/include/config.h
++}
++
++do_install:append() {
++    install -d ${D}${sysconfdir}/pgpool-II
++    install -D -m 0644 ${WORKDIR}/pgpool.sysconfig  ${D}${sysconfdir}/pgpool-II/pgpool.conf
++    install -D -m 0644 ${S}/src/sample/pcp.conf.sample ${D}${sysconfdir}/pgpool-II/pcp.conf
++    install -D -m 0644 ${S}/src/sample/pool_hba.conf.sample ${D}${sysconfdir}/pgpool-II/pool_hba.conf
++    install -Dm 0644 ${WORKDIR}/pgpool.service ${D}${systemd_system_unitdir}/pgpool.service
++}
+-- 
+1.8.3.1
 
-On 3/20/23 10:59, Yue Tao wrote:
-> From: Joe Slater <joe.slater@windriver.com>
->
-> This has already been done for oe-core/master.
->
-> Signed-off-by: Joe Slater <joe.slater@windriver.com>
-> Signed-off-by: Steve Sakoman <steve@sakoman.com>
-> ---
->   meta/recipes-support/nghttp2/nghttp2_1.47.0.bb | 4 ++++
->   1 file changed, 4 insertions(+)
->
-> diff --git a/meta/recipes-support/nghttp2/nghttp2_1.47.0.bb b/meta/recipes-support/nghttp2/nghttp2_1.47.0.bb
-> index 58ce08084d..becacd4502 100644
-> --- a/meta/recipes-support/nghttp2/nghttp2_1.47.0.bb
-> +++ b/meta/recipes-support/nghttp2/nghttp2_1.47.0.bb
-> @@ -19,6 +19,10 @@ PACKAGECONFIG[manpages] = ""
->   # first place
->   EXTRA_OECMAKE = "-DENABLE_EXAMPLES=OFF -DENABLE_APP=OFF -DENABLE_HPACK_TOOLS=OFF"
->   
-> +# Do not let configure try to decide this.
-> +#
-> +EXTRA_OECMAKE += "-DENABLE_PYTHON_BINDINGS=OFF"
-> +
->   PACKAGES =+ "lib${BPN} ${PN}-client ${PN}-proxy ${PN}-server"
->   
->   RDEPENDS:${PN} = "${PN}-client (>= ${PV}) ${PN}-proxy (>= ${PV}) ${PN}-server (>= ${PV})"
 
