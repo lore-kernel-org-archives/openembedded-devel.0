@@ -2,166 +2,93 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 59A7DC74A5B
-	for <webhook@archiver.kernel.org>; Tue, 21 Mar 2023 17:24:18 +0000 (UTC)
-Received: from mail-pl1-f181.google.com (mail-pl1-f181.google.com [209.85.214.181])
- by mx.groups.io with SMTP id smtpd.web11.19811.1679419455849418684
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B7E31C74A5B
+	for <webhook@archiver.kernel.org>; Tue, 21 Mar 2023 19:27:38 +0000 (UTC)
+Received: from mail-pl1-f173.google.com (mail-pl1-f173.google.com [209.85.214.173])
+ by mx.groups.io with SMTP id smtpd.web10.23802.1679426849355282028
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 21 Mar 2023 10:24:15 -0700
+ Tue, 21 Mar 2023 12:27:29 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=K7lvJI4/;
- spf=pass (domain: gmail.com, ip: 209.85.214.181, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f181.google.com with SMTP id bc12so16177547plb.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 21 Mar 2023 10:24:15 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=Ri8m1RNR;
+ spf=pass (domain: gmail.com, ip: 209.85.214.173, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f173.google.com with SMTP id o11so17162449ple.1
+        for <openembedded-devel@lists.openembedded.org>; Tue, 21 Mar 2023 12:27:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112; t=1679419455;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=La72aLYAsjGxgTZmI580hAOba0w5qXmvsdcnzFN8/N0=;
-        b=K7lvJI4/PufPTclXxwMi6pz/ReVo7+aoUf50V+difhfOX37GnlRtXOrhesBkwQLNvi
-         GpNy/zfAAPAIP/8QqLxDhHpgzzOlFEFCla8SFBMgRvCBm4ZnES/W+2t9zMz4TMwsWQJQ
-         XuraLXI5eAdv51Ah9ZsxlN6AaUnjDahQu1+yp/Qxl4ghaCu/zk5e5DezQTFGuKSyLKEc
-         C+CXb951cj4SntsHFiifcbM/XUcr7IV+MJcEu2gvtFY7iUd2kuR6ZHqIXgVsfrxQNYZe
-         gaYYEcPhWeM16xaFkp3tfuXPc40CcrbtwmYwaOoigAJ3DXxCCUM6rPvnljlCACH2l3JW
-         6E+A==
+        d=gmail.com; s=20210112; t=1679426848;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=vXNCXFmXTidQ/IKNid8c7W5onn1+YIOutY9L6qDj5Uc=;
+        b=Ri8m1RNRnjAgPT6VYxFCSpO4zhoOdHi3D91Zc/CrHp49IcZrugjdEFKOHWh8WAoi63
+         6bw1coaz2K70lPj92Z8U6h+f4cE8tgmD0tCBHovnAUYkSd7FQ59dBQ5+JaQ9Dg5T0uT8
+         wTrQAvIXzBBbmF2j8esrRX3cjjp+JrubGMrWJMuxwLohSZQ/QJS69Rnf6adTl83/ZeAc
+         MGhYN1disviqZo8g/HRPO1vziNV4S1Qie82+J/CS4wNLbM9gkvbPUQao09ZnuDn4bf19
+         ivxEUR68C3fasUjvQI7SmlejI8hcjcp1hGAwBI5BtKZEazbuErl8492Xxo0FR6G/8GxO
+         HVjw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112; t=1679419455;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=La72aLYAsjGxgTZmI580hAOba0w5qXmvsdcnzFN8/N0=;
-        b=Ys9TSDgeeDbuqP1l7jjtp/gn6vxGGKE8vPXwshRR6GlXiJD/uhjV5X7A10oiJNMXrl
-         +DKLGEuEbnFpB3jcl88hJcpE0NEAF7WocMEY4Fhrgniz/A5a5V5cusFc7uyY4YHXv8x8
-         0oUn1A/brY9RYnC/0eIcukFvkTdgIUeRaWbqAcGSM0vlAl7EBoz1NmJ4DctM0uk8HDx7
-         hCbDmKpsHb4jWzy38Gf17YGyWSsLJy+MJ69yk5s8gw+db7Cvhs41q6Ji6SWTXB4FdRlf
-         nwLXLYNarKgOqSmRdmLhMTzN8j7rfX6exgR17PmaiirbwxZZ4a8YpHfl1NipZ3R/gxIn
-         7ytw==
-X-Gm-Message-State: AO0yUKXF5djJUvB1/10Q2IScWD6iSSLb8eUDGNS2unfxEh+0QJCCMfeQ
-	ZAmJdfwHFKHrL9iBGqf0PeCnMfdabSVnSQ==
-X-Google-Smtp-Source: AK7set9GsRHFIUdxf88X0d2uM7LLIZykbhYet9HWKzAJcX2VhZQhCJFqfRcXsH+vZVx2PAPLHGZrlw==
-X-Received: by 2002:a17:90a:1a01:b0:23f:1159:c0c8 with SMTP id 1-20020a17090a1a0100b0023f1159c0c8mr470241pjk.35.1679419454683;
-        Tue, 21 Mar 2023 10:24:14 -0700 (PDT)
+        d=1e100.net; s=20210112; t=1679426848;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=vXNCXFmXTidQ/IKNid8c7W5onn1+YIOutY9L6qDj5Uc=;
+        b=eoPfTCVmCt+WN13h+88FrP6U9DxbU5tIYUDA1TARFRKOPWffIcTsisN8/CWWzJBVDp
+         czY4hUjB7qj1B3oMuNH6a4Ig1RcEiOf+LlO9anjk1HveqeW0JP+H/JTd2LSvVdq3R+zm
+         ctAZcKNerRzeI2/0aXDiwsOb90Vdxlzw2k4y0h6fFHApvubp8SZZbXdc+ccGNc2NDJlG
+         yWbDg5BfSe2Q+zIC25IE6I9UCXjZdMe22uEpaxlIJwlm4iSVBuDv/+X91dWv9d0CjZeS
+         jfzUMf5ImuQEhRvICVl/1zU4uJ0R42kTbVSswC9U/wHcDu4JlfhpDPXCuQFxXLbqApg8
+         94Iw==
+X-Gm-Message-State: AO0yUKUgKocL2tYY0z35om8+G5OsMgeAkpIlgRMhXM+LXuMU35RLRSwS
+	wrMWDKRXKeAeIFNECCKDXdCJ8y6v5ABkzA==
+X-Google-Smtp-Source: AK7set+wb783/f41gfYhNxOwfeBUDHWP7KalqTUHhnp7B7IEhAQOk3YeUP3ubgcjRTM0Ir4y+OTZ0w==
+X-Received: by 2002:a17:902:e545:b0:1a0:57df:864f with SMTP id n5-20020a170902e54500b001a057df864fmr66112plf.16.1679426848399;
+        Tue, 21 Mar 2023 12:27:28 -0700 (PDT)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9181:d380::86bb])
-        by smtp.gmail.com with ESMTPSA id s29-20020a63525d000000b0050fb618800dsm967426pgl.67.2023.03.21.10.24.14
+        by smtp.gmail.com with ESMTPSA id a7-20020a170902b58700b001992e74d058sm9114924pls.7.2023.03.21.12.27.27
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 21 Mar 2023 10:24:14 -0700 (PDT)
+        Tue, 21 Mar 2023 12:27:28 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-multimedia][PATCH] packagegroup-meta-multimedia: Remove library only packages from rdeps
-Date: Tue, 21 Mar 2023 10:24:11 -0700
-Message-Id: <20230321172411.2055216-1-raj.khem@gmail.com>
+Subject: [meta-networking][PATCH 2/2] packagegroup-meta-networking: Set PACKAGE_ARCH = "${MACHINE_ARCH}"
+Date: Tue, 21 Mar 2023 12:27:21 -0700
+Message-Id: <20230321192721.2290695-2-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.40.0
+In-Reply-To: <20230321192721.2290695-1-raj.khem@gmail.com>
+References: <20230321192721.2290695-1-raj.khem@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 21 Mar 2023 17:24:18 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101622
+ <openembedded-devel@lists.openembedded.org>; Tue, 21 Mar 2023 19:27:38 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101624
 
-Because they get renamed, it is better to ignore them and let a
-dependency build them
-
-Fixes errors like
-ERROR: packagegroup-meta-multimedia-1.0-r0 do_package_write_ipk: An allarch packagegroup shouldn't depend on packages which are dynamically renamed (gssdp to libgssdp-1.2-0)
+Remove memcached from rv64, its not buildable yet
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../packagegroup-meta-multimedia.bb           | 34 ++-----------------
- 1 file changed, 3 insertions(+), 31 deletions(-)
+ .../recipes-core/packagegroups/packagegroup-meta-networking.bb  | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-multimedia/recipes-multimedia/packagegroups/packagegroup-meta-multimedia.bb b/meta-multimedia/recipes-multimedia/packagegroups/packagegroup-meta-multimedia.bb
-index 6f5c244519..589794ebfe 100644
---- a/meta-multimedia/recipes-multimedia/packagegroups/packagegroup-meta-multimedia.bb
-+++ b/meta-multimedia/recipes-multimedia/packagegroups/packagegroup-meta-multimedia.bb
-@@ -25,65 +25,45 @@ RDEPENDS:packagegroup-meta-multimedia = "\
-     bluealsa \
-     caps \
-     cdparanoia \
--    dcadec \
-     dleyna-connector-dbus \
--    dleyna-core \
-     dleyna-renderer \
-     dleyna-server \
-     dvb-apps \
--    ${@bb.utils.contains("LICENSE_FLAGS_ACCEPTED", "commercial", "faac fdk-aac mpd", "", d)} \
-+    ${@bb.utils.contains("LICENSE_FLAGS_ACCEPTED", "commercial", "faac mpd", "", d)} \
-     gerbera \
--    libao \
-     libavc1394 \
--    libdc1394 \
--    libdvbpsi \
--    libdvdnav \
-     libiec61883 \
--    fluidsynth \
-+    fluidsynth-bin \
-     libmusicbrainz \
--    libmpdclient \
-     mpc \
-     ncmpc \
--    libmpd \
--    ${@bb.utils.contains("LICENSE_FLAGS_ACCEPTED", "commercial", "opencore-amr vo-aacenc vo-amrwbenc", "", d)} \
--    gst-shark \
-+    ${@bb.utils.contains("LICENSE_FLAGS_ACCEPTED", "commercial", "opencore-amr", "", d)} \
-     gstd \
-     rtmpdump \
-     bigbuckbunny-1080p \
-     bigbuckbunny-480p \
-     bigbuckbunny-720p \
-     tearsofsteel-1080p \
--    schroedinger \
-     pipewire \
-     ${@bb.utils.contains("LICENSE_FLAGS_ACCEPTED", "commercial", "projucer", "", d)} \
-     libcamera \
--    ${@bb.utils.contains("LICENSE_FLAGS_ACCEPTED", "commercial", "libde265 openh264", "", d)} \
-     vorbis-tools \
--    libdvbcsa \
-     libopenmpt \
--    libuvc \
-     mimic \
-     ${@bb.utils.contains("LICENSE_FLAGS_ACCEPTED", "commercial", "minidlna", "", d)} \
-     ${@bb.utils.contains("DISTRO_FEATURES", "pulseaudio", "mycroft", "", d)} \
-     openal-soft \
-     opusfile \
-     opus-tools \
--    libdvdcss \
-     ${@bb.utils.contains("LICENSE_FLAGS_ACCEPTED", "commercial", bb.utils.contains("DISTRO_FEATURES", "x11", "vlc", "", d), "", d)} \
-     ${@bb.utils.contains("LICENSE_FLAGS_ACCEPTED", "commercial", "sox streamripper", "", d)} \
-     tinyalsa \
--    tremor \
--    webrtc-audio-processing \
-     ${@bb.utils.contains("LICENSE_FLAGS_ACCEPTED", "commercial", bb.utils.contains_any("TRANSLATED_TARGET_ARCH", "i586 i686 x86-64", "x265", "", d), "", d)} \
- "
- RDEPENDS:packagegroup-meta-multimedia:remove:libc-musl = "projucer"
--RDEPENDS:packagegroup-meta-multimedia:remove:powerpc64le = "openh264"
+diff --git a/meta-networking/recipes-core/packagegroups/packagegroup-meta-networking.bb b/meta-networking/recipes-core/packagegroups/packagegroup-meta-networking.bb
+index c588b8640a..7be8261164 100644
+--- a/meta-networking/recipes-core/packagegroups/packagegroup-meta-networking.bb
++++ b/meta-networking/recipes-core/packagegroups/packagegroup-meta-networking.bb
+@@ -1,5 +1,6 @@
+ SUMMARY = "Meta-networking packagegroups"
  
- RDEPENDS:packagegroup-meta-multimedia-connectivity = "\
--    gssdp \
--    gupnp-av \
-     gupnp-dlna \
--    gupnp-igd \
-     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "gupnp-tools", "", d)} \
-     gupnp \
-     libupnp \
-@@ -94,17 +74,9 @@ RDEPENDS:packagegroup-meta-multimedia-dvb = "\
-     tvheadend \
- "
++PACKAGE_ARCH = "${MACHINE_ARCH}"
+ inherit packagegroup
  
--RDEPENDS:packagegroup-meta-multimedia-mkv = "\
--    libebml \
--    libmatroska \
--"
--
- RDEPENDS:packagegroup-meta-multimedia-support = "\
-     crossguid \
--    ${@bb.utils.contains("DISTRO_FEATURES", "gobject-introspection-data", "libmediaart-2.0", "", d)} \
-     gst-instruments \
--    libsrtp \
--    srt \
+ PROVIDES = "${PACKAGES}"
+@@ -259,6 +260,7 @@ RDEPENDS:packagegroup-meta-networking-support = "\
+     ettercap \
  "
- # devel headers/libraries only packages
- # libsquish
+ RDEPENDS:packagegroup-meta-networking-support:remove:mipsarch = "memcached"
++RDEPENDS:packagegroup-meta-networking-support:remove:riscv64 = "memcached"
+ RDEPENDS:packagegroup-meta-networking-support:remove:libc-musl = "ypbind-mt"
+ 
+ EXCLUDE_FROM_WORLD = "1"
 -- 
 2.40.0
 
