@@ -1,279 +1,136 @@
-Return-Path: <yi.zhao@eng.windriver.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 13306C6FD1C
-	for <webhook@archiver.kernel.org>; Wed, 22 Mar 2023 14:03:54 +0000 (UTC)
-Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.web10.43828.1679493832213911324
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B1FB2C6FD1F
+	for <webhook@archiver.kernel.org>; Wed, 22 Mar 2023 16:12:14 +0000 (UTC)
+Received: from mail-pl1-f172.google.com (mail-pl1-f172.google.com [209.85.214.172])
+ by mx.groups.io with SMTP id smtpd.web10.47751.1679501532709884451
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 22 Mar 2023 07:03:52 -0700
+ Wed, 22 Mar 2023 09:12:12 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=pps06212021 header.b=clg2/pgC;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=244517f328=yi.zhao@windriver.com)
-Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 32MD9TeV000955
-	for <openembedded-devel@lists.openembedded.org>; Wed, 22 Mar 2023 07:03:52 -0700
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com; h=from : to :
- subject : date : message-id : content-transfer-encoding : content-type :
- mime-version; s=PPS06212021;
- bh=fZ7hfJG5c3WTbeXALWKb1UAuC+QPkU21OtdbaZW93WU=;
- b=clg2/pgCrzKRnfP5IyxtPV2BxBQLXv7FmsjoQtoJ5cvjZITEnrxsxyipJ7rhARAcvrSA
- n/Gon2ktH9MiSIySYHko6KxbD/waZLEtnl5mVLc2iPWvQWTOzHUQYaXaiciJ3CDyAOqh
- kxIberqH5c9Gt1f/7NEs0pRNY6AsAdme4LjYQAJczKnrr45VnYmyBzWDTk+j3W2tcEv9
- kGhGAEHuVkmNhmZoWkwrvAxvtymkrVIawPyO/j5/VI3lJmdiJm8zlX5uUkifX983yDJP
- jQZsRXJXLhbIM9vtljkfIl9hRvM+dlnV213vPfNZ+59KW6PSyW1TtgflRJFLb5Rtojwq EA== 
-Received: from nam10-bn7-obe.outbound.protection.outlook.com (mail-bn7nam10lp2102.outbound.protection.outlook.com [104.47.70.102])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3pfqsb8jpu-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Wed, 22 Mar 2023 07:03:51 -0700
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=dhHZTQ5DqXutFCLi13D0IrffYnhybHlnbi/VGSrAAuTVZyWUKXYgndj4EWWKVY6k5dDBvbDovl7Ybc5DJ6kjag6VzL4jUSAS9INuSR8UiJgnpUGhY3y1/cHzpyYkwm6Pto/1ZZOR/RwKnz2VTu+Gc6E+g8sa6Iy/b8n8q2VUcbRUVZN0v1UFtsMu87AvI8iqbMEzjfsRkzKz/WqfsakJ4NzWBWNmWELpjcyEGLj5j4tQmOCPX3pc2hawFr6p9dkbK8uTM55ZkOPiI2fvhFkau1yy9LqGt4WIpD5uLJcCeBESwEUwF7xfUNxpjgDP9MY8a/P/gwqZnKIIvdfYPZcH2A==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=fZ7hfJG5c3WTbeXALWKb1UAuC+QPkU21OtdbaZW93WU=;
- b=JS/N6BTIKolQzvLeU79xhKXkXBFcao594RdYJ5AXNv3c8O5JZsx++dsxS15B266QIt3VamhR/565NBxkJYjVxaAnqh6tXy5MGefkcoa0sMo9mkucjXbxs2mJ6HqTL0VgAlANBftGLI4daCK7FWK+lJ+R9xjum6MFQ8WXrB/KsX0aRIONYAc0HwH2YiXyHmfuc5LMGoCvN6iTCqe+NUzamNw2CQGgaDbyrNigJKYozLFrpCTC62X43WVyLfpJ/DVSts1Uy/Sqxp2jAB+AtuzTiv/EZL+9tZIf0okHImWiFiXyUAH0D6Lq0WvXkohoNzgwGAHqMHYzmANKIArHpuVrRQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=windriver.com; dmarc=pass action=none
- header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
-Received: from CO1PR11MB4867.namprd11.prod.outlook.com (2603:10b6:303:9a::13)
- by MW5PR11MB5787.namprd11.prod.outlook.com (2603:10b6:303:192::7) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6178.37; Wed, 22 Mar
- 2023 14:03:48 +0000
-Received: from CO1PR11MB4867.namprd11.prod.outlook.com
- ([fe80::42a3:f515:f89b:4eb3]) by CO1PR11MB4867.namprd11.prod.outlook.com
- ([fe80::42a3:f515:f89b:4eb3%5]) with mapi id 15.20.6178.037; Wed, 22 Mar 2023
- 14:03:48 +0000
-From: Yi Zhao <yi.zhao@windriver.com>
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=fthrHuKC;
+ spf=pass (domain: gmail.com, ip: 209.85.214.172, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f172.google.com with SMTP id le6so19708422plb.12
+        for <openembedded-devel@lists.openembedded.org>; Wed, 22 Mar 2023 09:12:12 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112; t=1679501532;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=ViLr4IzIAgxiT5wr8UGIE2FWxMSl47hLWIDp3p2iGNs=;
+        b=fthrHuKCuZCoernOSf+Oveu/C7PfUprQd0c0PP/rwrdqBeAdVgY5cvX8nC9X3cA92P
+         01Hi6gRK6ZHYAXOo26njDRG5Uhhw4v8n1QQCU+Sw+nC+6FZ/GUdOcQTJ0NF1I2tDGB0v
+         mC9sY2CBgSgnm+xbdlMZjz+PU0qddKjAQJf4BYLSZn5U3DjaNdj2rDI0QDekD3IFGqrR
+         aAW667nwS/lZ8QTcxYHo9u4LXEJz69bFvHyxMIQMBsAfWkoyW8q2qvmDnOFTmd2vK3e1
+         mf64nVeYbCDr6BXd5jUg93uwmKfKQL0+mYL0y4J8cUN8OTZ1lUkiOUpW/pNc15PjZapA
+         MrJQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112; t=1679501532;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=ViLr4IzIAgxiT5wr8UGIE2FWxMSl47hLWIDp3p2iGNs=;
+        b=jIMUjuokr6WJ71dQWZn9x6DEzq6bpQHHCxasncRKUDTogvas6qBm/o9H6j7vC21DlW
+         qNF5lrNDYErVMW6N1IvyeqKDaOW5HsTiRuJo7OH0PxHqTV0iFhEUBrGu7mmUXB8UDDhR
+         LFSRUGDdlqmRBMrcZq/ycAzBqbr+WWhNybDcP2sepBCG2lR6u6hBTHQQqHh93OlEhm4F
+         AXAubCntGlz7gZfYOiDHRmkB4VbYEhfH/2KSL2kpBGfltlFT7aeBj75qVxvFkMg5VHw0
+         4AXvZUa2bjMkzoiSG9ZqyyQqjJDE/alcIELw4K3IFg2A6LD8adnjAxiC0VwJ7nCqXL0i
+         MNkw==
+X-Gm-Message-State: AO0yUKV8WLHx/uRMu724Ct/GmnCh+GvX3bLrhGirVlN592SG2LkRVewm
+	hGN1hUbAGfi4BcRHyv3mSaiJ27rjigDeMQ==
+X-Google-Smtp-Source: AK7set8fFKYeFvOP5XiDK2TLr0v2EENlG8kN8TkibcJJwtHbeDwJnSSguOqgrkmbto9OI2fF40rUKw==
+X-Received: by 2002:a17:902:eccb:b0:19c:da68:337a with SMTP id a11-20020a170902eccb00b0019cda68337amr3675002plh.31.1679501531021;
+        Wed, 22 Mar 2023 09:12:11 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9181:d380::86bb])
+        by smtp.gmail.com with ESMTPSA id 12-20020a170902c24c00b0019e5fc3c7e6sm10769459plg.101.2023.03.22.09.12.10
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 22 Mar 2023 09:12:10 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH] libyang: upgrade 2.1.30 -> 2.1.55
-Date: Wed, 22 Mar 2023 22:03:37 +0800
-Message-Id: <20230322140337.4103357-1-yi.zhao@windriver.com>
-X-Mailer: git-send-email 2.25.1
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: SG3P274CA0001.SGPP274.PROD.OUTLOOK.COM (2603:1096:4:be::13)
- To CO1PR11MB4867.namprd11.prod.outlook.com (2603:10b6:303:9a::13)
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][PATCH] cmocka: Check for previous declaration of uintptr_t
+Date: Wed, 22 Mar 2023 09:12:05 -0700
+Message-Id: <20230322161205.277029-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.40.0
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CO1PR11MB4867:EE_|MW5PR11MB5787:EE_
-X-MS-Office365-Filtering-Correlation-Id: 77d4533f-de26-4741-61cf-08db2ade4217
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 
-	Eof0x65i/48g5iNKlGXEsfABvdYbp1llbUc0PLmOQ/Yi5Llqz+9Yaiy6AJo0ZEyQzGUmL/AKTHFb0k1UcN/mZ+tkRxwaBecdvDVQbFYrbtUkI2nMK29bP/rvX5Ox2KkSLf5NUKQ5c0tawbRzcJ/Uf6mQ77h+z5yoqu1KMd4Xvi6X2Uad+Jg6vevksHU/4BVvQcMP3eFgZ8vFLPvA/S/BQiF5l2xIWihXYHQNS3+Ao4bXSZgYuXOQay+e0Zup0WebpjVQS4uaEddg2ZzMZKbCtz0xb6zGKbKVGkMiNS4xGon6FQ4zMp/2O3mxfxYVODxHTZtHy3db1tc426buspkJMQiZjRDKpOwUfQQLOb2qJDVuwT9U9pqz/omIIewkhI2sXvUASyrFCiAj6eAqrXrGqSxniO++x8Z1yR7vsBKXhoha6dze8fbHKGBaWs0QwOwTTpCSL+OoWIsNpjlHG9akvgQy5SAZnZ6LmWrY73kkE6j08gQE14W0OygUhxwnzsn8jjw+OgpjM8F4xZI5Lex0/SYph5cf9+PvkW7C7nKIe5AlHcx98YejPQqC94ADUnYjuNnUCo5TRf2BmTUS2KPWu4gw1Hy16rDPi1lKXXP0qduncN4D+6C0yUP2069k75OLAgxV11m0zENWTCtiKX8Ywhds9FFSYZddYnmXhXCy1Onb7dW1GhXfXiQrE7dN98VO
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CO1PR11MB4867.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230025)(4636009)(396003)(136003)(39850400004)(376002)(366004)(346002)(451199018)(38350700002)(86362001)(36756003)(52116002)(83380400001)(186003)(66476007)(8676002)(316002)(6916009)(66946007)(478600001)(2616005)(1076003)(6506007)(26005)(6512007)(6486002)(966005)(6666004)(66556008)(38100700002)(5660300002)(44832011)(41300700001)(8936002)(2906002);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?us-ascii?Q?ipVtuHgF0HGGBfeqCRXepCbWwFJQzou/a7Y8W9FeyOUGJC6tOCgNzRU5GHRR?=
- =?us-ascii?Q?iabQMWqhPoMJvVPjHU+u8tOE2yx6yRtp/KbAwPfB5DwWpBtj29czpungcLfk?=
- =?us-ascii?Q?Lltw7Qyv5JYiirarSGpaHP64G5/zsOYXxIGnNo3guQCuEonQxyC9cjwASqxP?=
- =?us-ascii?Q?WuXWSdDo9J2V9yd2VhOkqYviDfkPpndiV8DSfUJj8omJz1jCrBkqmR4b7PBc?=
- =?us-ascii?Q?O6aliLvgrmWhi9Zc5XjhwU5YLTuR9dxL5KjMigfmYr5h8e2AEIxnyEG6zsLl?=
- =?us-ascii?Q?1GDlyCCX3MHmAieiTd7B55QfxetwkVIPXty4ayd2mu3I7v4qlHyJFkXObfUu?=
- =?us-ascii?Q?Q+S/2xff0C0gdvv3b0VQu/LjgwkJ0gfuJaB0tQelAZmkBUKymfNOkdFVx36o?=
- =?us-ascii?Q?q/oLNDnNpAD6Yq6VDkEAo37nGpsObIVx9S61M401d4OS2DPDWfQ43n3mHpnL?=
- =?us-ascii?Q?iXp8WP9kIv2f8RnEmPAeB48vzz5K3W2Taa4AQ6BPHiMk+IRFqgOYWoDUeuzg?=
- =?us-ascii?Q?8XMA6fedEiGtLpiIY2zccua0MUtxDkzN8jjUKLE4ocWnoQX2WKvIVAdkUKii?=
- =?us-ascii?Q?4IJwurGmHa7un13EoiOo6sxuK1RB8pQfw/GxeIKV1PPSp7Jox+cPAhWg1Llm?=
- =?us-ascii?Q?kBycAdDGVmgd6GAX45eYhKalVsye/ArD833hOdcGswqrw4tRHOfUMArrqOd1?=
- =?us-ascii?Q?4hkhuiVK1M1bqiBchq2xnw6VCFb4IvgYX96GD9+NwsH5i07MMjeU/BMbZkw6?=
- =?us-ascii?Q?VpFkzMa3eWuwhfPxwec7079LzVtTRutKLQCtBJFLV+OMd0Q6J/HP995Vh0F6?=
- =?us-ascii?Q?ozF2qUaeHceh2KWQoccrOaM+WXcGxVBa8U4SL+8iXl+Miuj0c6zyGngVMZZ/?=
- =?us-ascii?Q?qgkrm4jZbm29d6vzoJ66owiPKtq3+nmlgCcaLOqDypH2F2JVLc99dCWZL8AC?=
- =?us-ascii?Q?X/+96HahG4dCuxwUgtaV8KscsNCTYlT74N7xPa1Jm/mmppuf4SitDei4U8uN?=
- =?us-ascii?Q?zPQf+vC+q502+MaYR28RHjey+WVv1JywoN5WCq0BFYvZwjWs9d654l+bMjKm?=
- =?us-ascii?Q?bGHRh6qUcDTiE3h+KymrrPk9lQcO6bOCugPE0DgjkPIxnvdOBS9RxwWDVD6R?=
- =?us-ascii?Q?QKTgejiDtVJnkoDmw746Po6KlcB/u83tHaOSQFQvbKyEviojoIkY9AKtter6?=
- =?us-ascii?Q?Owg0JfM1tTf0GwKuZNUHTcBhYR/m1WMUvx/eRUnthulnIjqtqi5mU2sxuKLK?=
- =?us-ascii?Q?wi6BOEhMSAfw6y8duz79bpjWPYMWmO3r3VLNbFJeYUaEkX3DHJjI+N9OmmIW?=
- =?us-ascii?Q?AFjvTr7GqOXoodXYO0PaR7QUEMZrhfy1g5+u8rTaQ5acbXlsUudYXCukRbMh?=
- =?us-ascii?Q?+mrcJ99zyAAqDEdWHjQC8d77GH01gGfiqKyQCWVM16qu8CmHkISYYcEQPm0i?=
- =?us-ascii?Q?ptHvlCAmlFSwtFTMZbWV9X2Nkr9BQGatAqEPVxmQ1508NgCbgExf17aIEHfE?=
- =?us-ascii?Q?xKVkFf2onNEHpN3UOafgeGCBGu26WsAQ2TDBB58NVGjNythEDF/o4gO9dKUX?=
- =?us-ascii?Q?vgnFpeicO6DvpYzQ1wgMOQqLd1Jx1TCZciZw3bCi?=
-X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 77d4533f-de26-4741-61cf-08db2ade4217
-X-MS-Exchange-CrossTenant-AuthSource: CO1PR11MB4867.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Mar 2023 14:03:48.5022
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: A6OUn+1iK5n114pq2mg18LkwO7L8Nlz1NvJyesp+BbnC7RWLGPTNcZKdmIYVjBtnA9LN84MKk9j10txyRZejLA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW5PR11MB5787
-X-Proofpoint-ORIG-GUID: 6YfBkdwq6gVt2RetyW-saE53WDH7TbZb
-X-Proofpoint-GUID: 6YfBkdwq6gVt2RetyW-saE53WDH7TbZb
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.254,Aquarius:18.0.942,Hydra:6.0.573,FMLib:17.11.170.22
- definitions=2023-03-22_11,2023-03-22_01,2023-02-09_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 spamscore=0
- lowpriorityscore=0 bulkscore=0 phishscore=0 priorityscore=1501
- clxscore=1015 mlxlogscore=928 impostorscore=0 mlxscore=0 suspectscore=0
- adultscore=0 malwarescore=0 classifier=spam adjust=0 reason=mlx
- scancount=1 engine=8.12.0-2303150002 definitions=main-2303220103
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 22 Mar 2023 14:03:54 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101637
+ <openembedded-devel@lists.openembedded.org>; Wed, 22 Mar 2023 16:12:14 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101638
 
-ChangeLog:
-https://github.com/CESNET/libyang/releases/tag/v2.1.55
+Fix build with musl/aarch64
 
-* Generate cases list dynamically in run-ptest.
-* Add a patch to fix ptest.
-
-Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...ntext-skip-test-case-test_searchdirs.patch | 29 +++++++++
- .../libyang/libyang/run-ptest                 | 61 +------------------
- .../{libyang_2.1.30.bb => libyang_2.1.55.bb}  |  3 +-
- 3 files changed, 34 insertions(+), 59 deletions(-)
- create mode 100644 meta-oe/recipes-extended/libyang/libyang/0001-test_context-skip-test-case-test_searchdirs.patch
- rename meta-oe/recipes-extended/libyang/{libyang_2.1.30.bb => libyang_2.1.55.bb} (91%)
+ meta-oe/recipes-test/cmocka/cmocka_1.1.7.bb   |  1 +
+ ...or-previous-declaration-of-uintptr_t.patch | 43 +++++++++++++++++++
+ 2 files changed, 44 insertions(+)
+ create mode 100644 meta-oe/recipes-test/cmocka/files/0001-include-Check-for-previous-declaration-of-uintptr_t.patch
 
-diff --git a/meta-oe/recipes-extended/libyang/libyang/0001-test_context-skip-test-case-test_searchdirs.patch b/meta-oe/recipes-extended/libyang/libyang/0001-test_context-skip-test-case-test_searchdirs.patch
-new file mode 100644
-index 000000000..3c6aee924
---- /dev/null
-+++ b/meta-oe/recipes-extended/libyang/libyang/0001-test_context-skip-test-case-test_searchdirs.patch
-@@ -0,0 +1,29 @@
-+From 5de24e1b39c09adb0c5bf4bb4228bd1bb935542a Mon Sep 17 00:00:00 2001
-+From: Yi Zhao <yi.zhao@windriver.com>
-+Date: Wed, 22 Mar 2023 16:03:56 +0800
-+Subject: [PATCH] test_context: skip test case test_searchdirs
-+
-+Skip test case test_searchdirs as it searchs the source code directory.
-+
-+Upstream-Status: Inappropriate [embedded specific]
-+
-+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
-+---
-+ tests/utests/basic/test_context.c | 1 -
-+ 1 file changed, 1 deletion(-)
-+
-+diff --git a/tests/utests/basic/test_context.c b/tests/utests/basic/test_context.c
-+index cfba1d30f..8c3bb7ad6 100644
-+--- a/tests/utests/basic/test_context.c
-++++ b/tests/utests/basic/test_context.c
-+@@ -1061,7 +1061,6 @@ int
-+ main(void)
-+ {
-+     const struct CMUnitTest tests[] = {
-+-        UTEST(test_searchdirs),
-+         UTEST(test_options),
-+         UTEST(test_models),
-+         UTEST(test_imports),
-+-- 
-+2.25.1
-+
-diff --git a/meta-oe/recipes-extended/libyang/libyang/run-ptest b/meta-oe/recipes-extended/libyang/libyang/run-ptest
-index 9682540e2..c507afb2f 100644
---- a/meta-oe/recipes-extended/libyang/libyang/run-ptest
-+++ b/meta-oe/recipes-extended/libyang/libyang/run-ptest
-@@ -1,73 +1,18 @@
- #!/bin/sh
--# Valid tests to run
--tests="utest_binary \
--       utest_bits \
--       utest_boolean \
--       utest_common \
--       utest_decimal64 \
--       utest_diff \
--       utest_empty \
--       utest_enumeration \
--       utest_hash_table \
--       utest_identityref \
--       utest_inet_types \
--       utest_inout \
--       utest_instanceid \
--       utest_instanceid_keys \
--       utest_int16 \
--       utest_int32 \
--       utest_int64 \
--       utest_int8 \
--       utest_json \
--       utest_leafref \
--       utest_list \
--       utest_lyb \
--       utest_merge \
--       utest_metadata \
--       utest_nacm \
--       utest_new \
--       utest_parser_json \
--       utest_parser_xml \
--       utest_pattern \
--       utest_printer_tree \
--       utest_printer_xml \
--       utest_plugins \
--       utest_range \
--       utest_schema \
--       utest_schema_mount \
--       utest_set \
--       utest_string \
--       utest_structure \
--       utest_tree_data \
--       utest_tree_schema_compile \
--       utest_uint16 \
--       utest_uint32 \
--       utest_uint64 \
--       utest_uint8 \
--       utest_union \
--       utest_validation \
--       utest_xml \
--       utest_xpath \
--       utest_yang \
--       utest_yangdata \
--       utest_yang_types \
--       utest_yanglib \
--       utest_yin"
- 
- # cd into right directory
- ptestdir=$(dirname "$(readlink -f "$0")")
- cd "$ptestdir"/tests || exit
- 
--# Run specified tests
-+tests=$(find * -type f -name 'utest_*')
-+
- for f in $tests
- do
--    if test -e ./"$f"; then
-+    if test -x ./"$f"; then
-         if ./"$f" > ./"$f".out 2> ./"$f".err; then
-             echo "PASS: $f"
-         else
-             echo "FAIL: $f"
-         fi
--    else
--        echo "SKIP: $f"
-     fi
- done
-diff --git a/meta-oe/recipes-extended/libyang/libyang_2.1.30.bb b/meta-oe/recipes-extended/libyang/libyang_2.1.55.bb
-similarity index 91%
-rename from meta-oe/recipes-extended/libyang/libyang_2.1.30.bb
-rename to meta-oe/recipes-extended/libyang/libyang_2.1.55.bb
-index 5adfc1d80..b1438c3b2 100644
---- a/meta-oe/recipes-extended/libyang/libyang_2.1.30.bb
-+++ b/meta-oe/recipes-extended/libyang/libyang_2.1.55.bb
-@@ -6,9 +6,10 @@ LICENSE = "BSD-3-Clause"
- 
- LIC_FILES_CHKSUM = "file://LICENSE;md5=f3916d7d8d42a6508d0ea418cfff10ad"
- 
--SRCREV = "35131b9396a965e01f899127763fb4e0871b845a"
-+SRCREV = "9a4e5b2ce30b9696116d6e654ee55caab5aafed8"
- 
- SRC_URI = "git://github.com/CESNET/libyang.git;branch=master;protocol=https \
-+           file://0001-test_context-skip-test-case-test_searchdirs.patch \
+diff --git a/meta-oe/recipes-test/cmocka/cmocka_1.1.7.bb b/meta-oe/recipes-test/cmocka/cmocka_1.1.7.bb
+index 308d5ca1fb..44077a0d35 100644
+--- a/meta-oe/recipes-test/cmocka/cmocka_1.1.7.bb
++++ b/meta-oe/recipes-test/cmocka/cmocka_1.1.7.bb
+@@ -9,6 +9,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=3b83ef96387f14655fc854ddc3c6bd57"
+ SRCREV = "a01cc69ee9536f90e57c61a198f2d1944d3d4313"
+ PV .= "+git${SRCPV}"
+ SRC_URI = "git://git.cryptomilk.org/projects/cmocka.git;protocol=https;branch=stable-1.1 \
++           file://0001-include-Check-for-previous-declaration-of-uintptr_t.patch \
             file://run-ptest \
-            "
+           "
  
+diff --git a/meta-oe/recipes-test/cmocka/files/0001-include-Check-for-previous-declaration-of-uintptr_t.patch b/meta-oe/recipes-test/cmocka/files/0001-include-Check-for-previous-declaration-of-uintptr_t.patch
+new file mode 100644
+index 0000000000..65d30ea993
+--- /dev/null
++++ b/meta-oe/recipes-test/cmocka/files/0001-include-Check-for-previous-declaration-of-uintptr_t.patch
+@@ -0,0 +1,43 @@
++From a54e035f802e79e3292d8ad39a14bd7c060eb7b1 Mon Sep 17 00:00:00 2001
++From: Breno Leitao <breno.leitao@gmail.com>
++Date: Tue, 21 Mar 2023 21:58:28 -0700
++Subject: [PATCH] include: Check for previous declaration of uintptr_t
++
++Adding a extra check before declaring uintptr_t. Currently musl uses
++macro __DEFINED_uintptr_t once it defines uintptr_t type. Checking
++this macro before defining it, and, defining it when uintptr_t is
++defined.
++
++Taken from Alpine
++
++Upstream-Status: Pending
++Signed-off-by: Breno Leitao <breno.leitao@gmail.com>
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ include/cmocka.h | 3 ++-
++ 1 file changed, 2 insertions(+), 1 deletion(-)
++
++diff --git a/include/cmocka.h b/include/cmocka.h
++index a21d965..f540793 100644
++--- a/include/cmocka.h
+++++ b/include/cmocka.h
++@@ -121,7 +121,7 @@ typedef uintmax_t LargestIntegralType;
++     ((LargestIntegralType)(value))
++ 
++ /* Smallest integral type capable of holding a pointer. */
++-#if !defined(_UINTPTR_T) && !defined(_UINTPTR_T_DEFINED) && !defined(HAVE_UINTPTR_T)
+++#if !defined(_UINTPTR_T) && !defined(_UINTPTR_T_DEFINED) && !defined(HAVE_UINTPTR_T) && !defined(__DEFINED_uintptr_t)
++ # if defined(_WIN32)
++     /* WIN32 is an ILP32 platform */
++     typedef unsigned int uintptr_t;
++@@ -147,6 +147,7 @@ typedef uintmax_t LargestIntegralType;
++ 
++ # define _UINTPTR_T
++ # define _UINTPTR_T_DEFINED
+++# define __DEFINED_uintptr_t
++ #endif /* !defined(_UINTPTR_T) || !defined(_UINTPTR_T_DEFINED) */
++ 
++ /* Perform an unsigned cast to uintptr_t. */
++-- 
++2.40.0
++
 -- 
-2.25.1
+2.40.0
 
 
