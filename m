@@ -2,52 +2,52 @@ Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 38D3CC6FD1C
-	for <webhook@archiver.kernel.org>; Wed, 22 Mar 2023 11:20:23 +0000 (UTC)
-Received: from mail-oi1-f175.google.com (mail-oi1-f175.google.com [209.85.167.175])
- by mx.groups.io with SMTP id smtpd.web10.40083.1679484021244717452
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5CB00C6FD1C
+	for <webhook@archiver.kernel.org>; Wed, 22 Mar 2023 11:23:33 +0000 (UTC)
+Received: from mail-qt1-f169.google.com (mail-qt1-f169.google.com [209.85.160.169])
+ by mx.groups.io with SMTP id smtpd.web11.39851.1679484204608316257
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 22 Mar 2023 04:20:21 -0700
+ Wed, 22 Mar 2023 04:23:24 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=UiMhfDeV;
- spf=pass (domain: gmail.com, ip: 209.85.167.175, mailfrom: akuster808@gmail.com)
-Received: by mail-oi1-f175.google.com with SMTP id b19so414465oib.7
-        for <openembedded-devel@lists.openembedded.org>; Wed, 22 Mar 2023 04:20:21 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=g+wixqX/;
+ spf=pass (domain: gmail.com, ip: 209.85.160.169, mailfrom: akuster808@gmail.com)
+Received: by mail-qt1-f169.google.com with SMTP id r5so22098156qtp.4
+        for <openembedded-devel@lists.openembedded.org>; Wed, 22 Mar 2023 04:23:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112; t=1679484020;
+        d=gmail.com; s=20210112; t=1679484203;
         h=content-transfer-encoding:in-reply-to:from:references:to
          :content-language:subject:user-agent:mime-version:date:message-id
          :from:to:cc:subject:date:message-id:reply-to;
-        bh=yhR2tGJh0wn1qxjgaV1Qkvi11/Fc34wogVZ+/y3W/Ck=;
-        b=UiMhfDeVkoToic+bZfLFS0rVbAdUMvTbeWMDtQYEdHKoZ8bgIE14RYMwv+eU+oo5lc
-         eAJeWGHdBPK+nuqhxDkPtFYsGEK4AW1Bvju2+Kau1QNGVkdESx94mUAv6C9v89t4WDPC
-         CAKZbI3mpaUA9SAOzj82SDhmpMHTEjSyK1HkR+oXE9AO4FY/eyQ31c+1D6Rd73coH1FJ
-         GdYDlVQxO5EfSVln+JqgxHPhQOumAZwqHvwLHRLZRfPJnEpkgTAnvwLY/Z0hWRyGKTre
-         9EmfnvajDeaiaZUcCx1r8ExearifQrb7BEC5Yr+wNjLYQMnUp3lKFd8wOK5Uz/FJO9ok
-         jmFg==
+        bh=ei/EKOhF7yt/M0ZQ5dq5EnNOyE5EjmBWF01jlGhr9uQ=;
+        b=g+wixqX/zEwPEHs2Sby93j12btLgwrWze1E0IFgd3WiBMrW2Nh3OTAZq/DY3XNv+BG
+         3B8S2KYCJXb0KGwnszgQofTjoXPdpJslrWY0tdgeK7ig6aIaVeAiICFvLoulpPCmjxpQ
+         qjUHr/KwiawCXBKUr5G77AL6htTq3W8YCamMSqJlrTyXZ5tFhx3O/iJtS8g2n5Qfjzve
+         8Ex8CsKfTf0+3ys1H5UEcSoSFp74+Gr2XskR3CXa8lS3fHivyekIqz04s/92FEHDbMPf
+         zzwxXf2JI3a55OqIKK3rkYub3wfbSmnZPyj2sw7MpQNT7MO6DwWo4N1gXzwcdK7p/Bl1
+         /CYg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112; t=1679484020;
+        d=1e100.net; s=20210112; t=1679484203;
         h=content-transfer-encoding:in-reply-to:from:references:to
          :content-language:subject:user-agent:mime-version:date:message-id
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=yhR2tGJh0wn1qxjgaV1Qkvi11/Fc34wogVZ+/y3W/Ck=;
-        b=Z5q1IUyDZkrO8hhbUD6MEaFRTntfs6HGE6DP9EyzVKotxt3k4OhDoumkze8zwGRiAZ
-         WrHT1nCRKa5638m+Z5Oj/Kimf/v/NylbESJc4NqL4ExUzCuXGQEsyx6qh15QIYCq7dHM
-         ai+scV+b2w2Y+CQQIi8mKmRerz6cBj4WFczfU3VdBM3pd7NVAeKM0bEvDljyX3HKWh/V
-         8LfxtIFL8PBrAGmvyRjVE/GOaeU/as8M8FnOAc2wQFnNME6L9D9Xbk7dpSjtTO1xHqsD
-         QHW87t4CCznTF8spF6ShKaLK2z0EopYLuKlrxmUY+FCL+Afvzx/pszQkfbQQqkB+7k8D
-         9LlA==
-X-Gm-Message-State: AO0yUKUSa6gOt2NTnEK55AHtrKPJpoVElMpe9VLBwg1h4txM7oUonRUU
-	SjQoWRSl0x2kpKzPiIfsLXZZLWAfa4jeQg==
-X-Google-Smtp-Source: AK7set9pG1zGW8FJSlpGHdUAQJJgOciMTyOZCSKtKdmjl+Y+xFCRkYWivk0oPAAH24NCm9Ym9A2zHg==
-X-Received: by 2002:a05:6808:2995:b0:384:80:1467 with SMTP id ex21-20020a056808299500b0038400801467mr911878oib.26.1679484020414;
-        Wed, 22 Mar 2023 04:20:20 -0700 (PDT)
+        bh=ei/EKOhF7yt/M0ZQ5dq5EnNOyE5EjmBWF01jlGhr9uQ=;
+        b=MpWvNA4hhr49U0k2i9tw/eSN1FNLKeERzsQKtilZORLtHz1ENXOBh5gLUwJMHUeiM6
+         AxqgbkQaqJfchP/0fN0gkCpRbhmxHUJjp0iPO5wYtSq4GAslvMrnZazp0ErIiz3abwT2
+         Pkg9byibC/395aygSjkH8mfchKVYtWAnA6TbEcTOlIxMk1MAvn5PQLgkxVPaGMzpr7sn
+         uWbBuBhEpZhVzhWEkVH+siatar+YXFFpQ9lpWLUToF4b1epSbcwEuT+8C4rJM92vcltJ
+         33sxb76QF0sFkRnoU27FeC3vjtx7oUYOlneZ/Z3vOA5uqWvFUaB+R+z2iWvQFDqgA3Qs
+         NQJQ==
+X-Gm-Message-State: AO0yUKXSmnnu0LO+o7fzQ9mGf4LRu41zQT6PBzHGXd+1rq//EKxea1Dm
+	x8YsHrdbrGzZq+4hwu4ICkM=
+X-Google-Smtp-Source: AK7set/HyuLuM7DTGywUtlRidDfKvHY//qrCRplFT203VL9cmb7WnwTxUWmrdiQcM0aDYdchH8ertw==
+X-Received: by 2002:a05:622a:199b:b0:3bf:ba1b:3615 with SMTP id u27-20020a05622a199b00b003bfba1b3615mr5187670qtc.55.1679484203626;
+        Wed, 22 Mar 2023 04:23:23 -0700 (PDT)
 Received: from ?IPV6:2600:1700:9190:ba10:3ea:5110:ed2a:eb0c? ([2600:1700:9190:ba10:3ea:5110:ed2a:eb0c])
-        by smtp.gmail.com with ESMTPSA id bi13-20020a056808188d00b0037834b1a20bsm5830852oib.0.2023.03.22.04.20.19
+        by smtp.gmail.com with ESMTPSA id e1-20020ac84901000000b003d460ec242esm9934738qtq.81.2023.03.22.04.23.23
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 22 Mar 2023 04:20:20 -0700 (PDT)
-Message-ID: <70dc120e-cb84-de8d-bf96-f57d8eecb938@gmail.com>
-Date: Wed, 22 Mar 2023 07:20:19 -0400
+        Wed, 22 Mar 2023 04:23:23 -0700 (PDT)
+Message-ID: <ad2ad401-b01c-ad73-7a93-a699af8a9fd3@gmail.com>
+Date: Wed, 22 Mar 2023 07:23:22 -0400
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.8.0
@@ -63,8 +63,8 @@ Content-Transfer-Encoding: 7bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 22 Mar 2023 11:20:23 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101635
+ <openembedded-devel@lists.openembedded.org>; Wed, 22 Mar 2023 11:23:33 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101636
 
 
 
@@ -77,9 +77,7 @@ On 3/22/23 4:29 AM, Changqing Li wrote:
 >
 > (CVE-2023-28425) Specially crafted MSETNX command can lead to assertion and denial-of-service
 
-I am applying this to langdale then kirkstone
-
--armin
+Was this sent to master?
 >
 > Bug Fixes
 > Large blocks of replica client output buffer may lead to PSYNC loops and unnecessary memory usage (#11666)
