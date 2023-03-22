@@ -1,102 +1,105 @@
-Return-Path: <changqing.li@eng.windriver.com>
+Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EFCF7C6FD1C
-	for <webhook@archiver.kernel.org>; Wed, 22 Mar 2023 09:54:02 +0000 (UTC)
-Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
- by mx.groups.io with SMTP id smtpd.web11.38495.1679478838830553706
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 52DEEC6FD1C
+	for <webhook@archiver.kernel.org>; Wed, 22 Mar 2023 11:14:53 +0000 (UTC)
+Received: from mail-qt1-f174.google.com (mail-qt1-f174.google.com [209.85.160.174])
+ by mx.groups.io with SMTP id smtpd.web10.39990.1679483689318084375
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 22 Mar 2023 02:53:59 -0700
+ Wed, 22 Mar 2023 04:14:49 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=pps06212021 header.b=sekbYNHK;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=2445ee82b3=changqing.li@windriver.com)
-Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 32M8SYwk026592
-	for <openembedded-devel@lists.openembedded.org>; Wed, 22 Mar 2023 09:53:57 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com; h=from : to :
- subject : date : message-id : mime-version : content-transfer-encoding :
- content-type; s=PPS06212021;
- bh=mmsJ1tw4aS8UqmM2ZBRYYj+4vRE4cC8VA7nPSdM4n2w=;
- b=sekbYNHKgbos3ZWp2LwYfPM0t1usUbh48woIDZoOqjoGAsaPO9adXpZhMLKJmrDoxNZm
- C1mkjWL3W3K9vaxKo1/K1EzVUd4EOGl08iTqe2d3SO1YAGXuLuXYaZNqVKLFSmkvDiLi
- xICLXeZgWNEPY2lZHuMI1Kp28nXdFpj+IFRK2KPC/lO37fsiRCihZxo1sktRMqA5rNJl
- F5RG2uipvcP1XlfVCUo09Eo82ZPGyjDexhGhb49qBAQRugZxmZbpaYLz43hn3tKDlkv9
- py9Qrc7kVBBQRBK3zTGSsSc15nHF8IimMb2qnrH3v0VXtSFTeRiS9ppiNGQdPDTWLfwj Zg== 
-Received: from ala-exchng01.corp.ad.wrs.com (unknown-82-252.windriver.com [147.11.82.252])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3pfqu4gbxu-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Wed, 22 Mar 2023 09:53:57 +0000
-Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.17; Wed, 22 Mar 2023 02:53:56 -0700
-Received: from pek-lpg-core2.wrs.com (128.224.153.41) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
- 15.1.2507.17 via Frontend Transport; Wed, 22 Mar 2023 02:53:55 -0700
-From: <changqing.li@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [master][meta-oe][PATCH] redis: upgrade 7.0.9 -> 7.0.10
-Date: Wed, 22 Mar 2023 17:53:55 +0800
-Message-ID: <20230322095355.2576898-1-changqing.li@windriver.com>
-X-Mailer: git-send-email 2.25.1
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=ks61nO8/;
+ spf=pass (domain: gmail.com, ip: 209.85.160.174, mailfrom: akuster808@gmail.com)
+Received: by mail-qt1-f174.google.com with SMTP id s12so22029934qtq.11
+        for <openembedded-devel@lists.openembedded.org>; Wed, 22 Mar 2023 04:14:49 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112; t=1679483688;
+        h=content-transfer-encoding:subject:from:to:content-language
+         :user-agent:mime-version:date:message-id:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=zESVxHO4u41tQvxQbzGYq+tLcfm9ZFt/eVMu49jY2IU=;
+        b=ks61nO8/QPN+RyZyuNQvJy1ss5JNIgc+LBlJoA6brGRuGrPNbofEzQ6GMjjyNWyf7Y
+         fsH9s5eQpxUyKRSHd3RQR+5qgra8Z+tgIojrMhnvaTzZn05GlEV90lTt7fSTs4e/i4AQ
+         Y/XebAeTu2F7/MbMYZInEtDPGRF/CdbB7Ct98AV9VEBO6BYph5JDvv+Vl4inH0MkdP6r
+         aULc2Ykdh7O7zljK6q4CY+xB6huSUJiBwqLgu0STKfgpSbU+jZzDwtKSy4rtayRsB3Aw
+         kIeW7pucyoQLlxGoLeNtGBFvU7zoL6c8nKPt6SY+DgtclQ6cP9uLFesfO9+sNBgM4ITd
+         I/pQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112; t=1679483688;
+        h=content-transfer-encoding:subject:from:to:content-language
+         :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=zESVxHO4u41tQvxQbzGYq+tLcfm9ZFt/eVMu49jY2IU=;
+        b=R8PUbUEtZisyXdXQfYZry/xRb5wGxJ4Hxn297DencyXHkaRqd3JPkQX4a1SXD+b/sH
+         KxulzaafiYJx4gsUIAtE5SXEW17SFcvuz2o/0o3qmx9psvscFvv9ou54TH91yaFKQIZ4
+         ZZu5YARSfjjy+Z0COJiUxcIp91O6ZUYCf1N3G+o9fe6Wt2UyNX0xngKG2WWs6Gm95dzj
+         Pv+fnQHZwFAM6Ngb6pZrYdP3+iWuMW1o8FYDqzhD0NrO0OcJNQcmThsIv+LlmsSSeEOe
+         YkvxO9ONzg5TFrEx48b6ylyw7fzAh5HB6Fe6yhbXMpUj4RK5qo46xAQ+nFVb/mIYql7k
+         tO0w==
+X-Gm-Message-State: AO0yUKXcFTH5agg0cCGfYORW5ZF3LWYrkEQJz8lom7Q3E+1sAb+QdMa/
+	ZH1Sx0XUo2+LyWirTzn9HtE=
+X-Google-Smtp-Source: AK7set9n9ioNjFVvXpPwvp69K464+yNNVsTLCMlVYlVWEzNFC29e6XMebqxxIc05lEk3UEJfqcTylw==
+X-Received: by 2002:ac8:5906:0:b0:3d9:cb72:3655 with SMTP id 6-20020ac85906000000b003d9cb723655mr5628958qty.42.1679483688332;
+        Wed, 22 Mar 2023 04:14:48 -0700 (PDT)
+Received: from ?IPV6:2600:1700:9190:ba10:3ea:5110:ed2a:eb0c? ([2600:1700:9190:ba10:3ea:5110:ed2a:eb0c])
+        by smtp.gmail.com with ESMTPSA id y5-20020ac87085000000b003e014845d9esm6177214qto.74.2023.03.22.04.14.47
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Wed, 22 Mar 2023 04:14:48 -0700 (PDT)
+Message-ID: <2a450f6e-42df-91ad-b69a-314473817ee0@gmail.com>
+Date: Wed, 22 Mar 2023 07:14:47 -0400
 MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.8.0
+Content-Language: en-US
+To: Khem Raj <raj.khem@gmail.com>,
+ OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+From: akuster808 <akuster808@gmail.com>
+Subject: langdale merge request: March 22nd
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Proofpoint-GUID: CirIkGtR_1ERFLzkAYt6I_W8jI8XPtYh
-X-Proofpoint-ORIG-GUID: CirIkGtR_1ERFLzkAYt6I_W8jI8XPtYh
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.254,Aquarius:18.0.942,Hydra:6.0.573,FMLib:17.11.170.22
- definitions=2023-03-22_06,2023-03-21_01,2023-02-09_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 phishscore=0 spamscore=0
- impostorscore=0 malwarescore=0 priorityscore=1501 mlxscore=0
- mlxlogscore=583 adultscore=0 lowpriorityscore=0 bulkscore=0 suspectscore=0
- clxscore=1015 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2303150002 definitions=main-2303220071
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 22 Mar 2023 09:54:02 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101632
+ <openembedded-devel@lists.openembedded.org>; Wed, 22 Mar 2023 11:14:53 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101633
 
-From: Changqing Li <changqing.li@windriver.com>
+The following changes since commit 613dc6e1076efcb8c0aadf7728433e5841e6a6aa:
 
-Upgrade urgency: SECURITY, contains fixes to security issues.
+   nodejs: Upgrade 16.19.0 -> 16.19.1 (2023-03-12 11:51:57 -0400)
 
-Security Fixes:
-* (CVE-2023-28425) Specially crafted MSETNX command can lead to assertion and denial-of-service
+are available in the Git repository at:
 
-Bug Fixes
-=========
+   https://git.openembedded.org/meta-openembedded langdale-next
 
-* Large blocks of replica client output buffer may lead to psync loops and unnecessary memory usage (#11666)
-* Fix CLIENT REPLY OFF|SKIP to not silence push notifications (#11875)
-* Trim excessive memory usage in stream nodes when exceeding `stream-node-max-bytes` (#11885)
-* Fix module RM_Call commands failing with OOM when maxmemory is changed to zero (#11319)
+for you to fetch changes up to 3f9340a9241d497753b330d90d6a3d8332c1ba7f:
 
-Signed-off-by: Changqing Li <changqing.li@windriver.com>
----
- .../recipes-extended/redis/{redis_7.0.9.bb => redis_7.0.10.bb}  | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-extended/redis/{redis_7.0.9.bb => redis_7.0.10.bb} (96%)
+   mbedtls: upgrade to 2.28.2 to fix CVE-2022-46392, CVE-2022-46393 
+(2023-03-21 14:37:51 -0400)
 
-diff --git a/meta-oe/recipes-extended/redis/redis_7.0.9.bb b/meta-oe/recipes-extended/redis/redis_7.0.10.bb
-similarity index 96%
-rename from meta-oe/recipes-extended/redis/redis_7.0.9.bb
-rename to meta-oe/recipes-extended/redis/redis_7.0.10.bb
-index 423bc2199..5d21f7e87 100644
---- a/meta-oe/recipes-extended/redis/redis_7.0.9.bb
-+++ b/meta-oe/recipes-extended/redis/redis_7.0.10.bb
-@@ -19,7 +19,7 @@ SRC_URI = "http://download.redis.io/releases/${BP}.tar.gz \
-            file://GNU_SOURCE-7.patch \
-            file://0006-Define-correct-gregs-for-RISCV32.patch \
-            "
--SRC_URI[sha256sum] = "f77135c2a47c9151d4028bfea3b34470ab4d324d1484f79a84c6f32a3cfb9f65"
-+SRC_URI[sha256sum] = "1dee4c6487341cae7bd6432ff7590906522215a061fdef87c7d040a0cb600131"
- 
- inherit autotools-brokensep update-rc.d systemd useradd
- 
--- 
-2.25.1
+----------------------------------------------------------------
+Peter Marko (1):
+       ntp: whitelist CVE-2019-11331
+
+Stefan Ghinea (1):
+       mbedtls: upgrade to 2.28.2 to fix CVE-2022-46392, CVE-2022-46393
+
+Wang Mingyu (1):
+       apache2: upgrade 2.4.55 -> 2.4.56
+
+Yi Zhao (1):
+       apache2: use /run instead of /var/run for systemd volatile config
+
+  meta-networking/recipes-connectivity/mbedtls/{mbedtls_2.28.1.bb => 
+mbedtls_2.28.2.bb} | 2 +-
+  meta-networking/recipes-support/ntp/ntp_4.2.8p15.bb | 2 ++
+  meta-webserver/recipes-httpd/apache2/{apache2_2.4.55.bb => 
+apache2_2.4.56.bb}         | 2 +-
+  meta-webserver/recipes-httpd/apache2/files/apache2-volatile.conf | 2 +-
+  4 files changed, 5 insertions(+), 3 deletions(-)
+  rename meta-networking/recipes-connectivity/mbedtls/{mbedtls_2.28.1.bb 
+=> mbedtls_2.28.2.bb} (97%)
+  rename meta-webserver/recipes-httpd/apache2/{apache2_2.4.55.bb => 
+apache2_2.4.56.bb} (99%)
 
 
