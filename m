@@ -1,107 +1,131 @@
-Return-Path: <zboszor@gmail.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D55D1C6FD1D
-	for <webhook@archiver.kernel.org>; Thu, 23 Mar 2023 11:18:19 +0000 (UTC)
-Received: from mail-ed1-f53.google.com (mail-ed1-f53.google.com [209.85.208.53])
- by mx.groups.io with SMTP id smtpd.web11.69554.1679570296211333395
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B652BC74A5B
+	for <webhook@archiver.kernel.org>; Thu, 23 Mar 2023 18:07:51 +0000 (UTC)
+Received: from mail-pj1-f54.google.com (mail-pj1-f54.google.com [209.85.216.54])
+ by mx.groups.io with SMTP id smtpd.web10.81104.1679594868992903385
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 23 Mar 2023 04:18:16 -0700
+ Thu, 23 Mar 2023 11:07:49 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=LiU0VPGD;
- spf=pass (domain: gmail.com, ip: 209.85.208.53, mailfrom: zboszor@gmail.com)
-Received: by mail-ed1-f53.google.com with SMTP id i5so37939103eda.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 23 Mar 2023 04:18:15 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=bhLGzOVt;
+ spf=pass (domain: gmail.com, ip: 209.85.216.54, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f54.google.com with SMTP id qe8-20020a17090b4f8800b0023f07253a2cso2886187pjb.3
+        for <openembedded-devel@lists.openembedded.org>; Thu, 23 Mar 2023 11:07:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112; t=1679570294;
-        h=content-transfer-encoding:in-reply-to:from:references:cc:to
-         :content-language:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=ToOQmg1jhS7bINYclkkMJqHfNQsaSXfAuIXt2Va9L3s=;
-        b=LiU0VPGDzSKW/bwnXdAhiKfYdZKwcTEagOKsKsPYLS4eNh15us8wBCQiD/CzzGBFpW
-         xQBDupoF4Yuow7F6Y1bwSpyNBabJjgjN7oJnhmZN/X++obJ9ncL7+p5HSB9nHlowONWh
-         RZ2x0IVjOW1VQyLaePep4pGVZXtKPLN59+XAXbtembG42Aqc/4Ox1RlFIpY7ev6MHWu+
-         u9TqMCfJ0wf9uanhJSV5XmbsVW7njLI2brLn2yqWkLiiIE1B7zUKdunpvXScDM0BEXSo
-         fk5StwGurzjwfoV8hQ88fjSrult10jIKOvagxFylL3SACU6/qdXeUFgJnCVfmZkg+/TA
-         SlVw==
+        d=gmail.com; s=20210112; t=1679594868;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=aeL6637wyVYDkM+kflYnRhRFzl1sa4x1JLOOQ+GW638=;
+        b=bhLGzOVtp1yihlpllCdLtjIi/kUytF2TU1yP3oymW2AewLsWCkYTYwA6dufqqmFHT2
+         lgUhP1RiIbbZqg4hU+ed7o4u6d7aj+Z4k6iaHHJSR2+KJOeQJC/9ZJcTO5cyMS4ho8ly
+         KRU19HN46MFhZgA8/vYG8VGpZ/HJNysImznBkNjnBDfOrwJvl/AHrsa1RL02d9GVUqRl
+         iaKRmqMYRDG8gxk98aDbgTK/l/srA2YBtL8yzVVkQSEQcdhpFQFlc5HXp1pPwha5Snq5
+         RbfyDQtrpBGrrzzUMSw4NcS9EnySOlX6YOdL9aL4bUu/s5kJqjnnccBhVFdYLPlMpVmT
+         B6Mg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112; t=1679570294;
-        h=content-transfer-encoding:in-reply-to:from:references:cc:to
-         :content-language:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=ToOQmg1jhS7bINYclkkMJqHfNQsaSXfAuIXt2Va9L3s=;
-        b=1eSGeTG2s6mXt7dB6uVVZxS8B/At5xPKQurdjrGVD2Ba27TcjcEmB/xqOFW2ywuBem
-         FaYBbLzO4Qg/GANnM2To41pBmwNfwWMkutfrWSvoKvhUXWVIeitDAQujbvZ1QMx5Uyyh
-         4bvdJZ8YtyRSMn+EvZC3uqbxmrtSdidEltkId2PEfqxBuV1QSHa866Rrx9YGYpDi1lOU
-         HVew0NTV3I1U95eUtbifSO+0CS24Jig1Mui9ORBt5iTHxPX2NRUxNJkcLKQit4TJkZFD
-         33GbUfn53dRhL62JuAVx08/Ouqn1XIFq4hq9Dk2MNPHd5TfpFmrwPFEfaX8bY4LRDIkD
-         4rqA==
-X-Gm-Message-State: AO0yUKUhvMlOvOL1Ctzz553UiU5vCFuQUifntN3sarH3cxKBrPQnqV1d
-	LDSiYXUU0g469+5BjJ3Qn40=
-X-Google-Smtp-Source: AK7set+uazUl14BedyXB1KI18XskouWamhhl+vIoE6gXerY7iAcP2Iv6PcYnVUMD0pbDZ4QrzOQQ6Q==
-X-Received: by 2002:a05:6402:54a:b0:500:58d8:b339 with SMTP id i10-20020a056402054a00b0050058d8b339mr9376076edx.20.1679570294560;
-        Thu, 23 Mar 2023 04:18:14 -0700 (PDT)
-Received: from [192.168.2.2] (dsl51B7D2F9.fixip.t-online.hu. [81.183.210.249])
-        by smtp.gmail.com with ESMTPSA id b22-20020a50ccd6000000b00501dac14d7asm2141188edj.3.2023.03.23.04.18.13
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 23 Mar 2023 04:18:14 -0700 (PDT)
-Message-ID: <eee42b19-4c3a-e252-5590-42cc1506ea97@gmail.com>
-Date: Thu, 23 Mar 2023 12:18:13 +0100
+        d=1e100.net; s=20210112; t=1679594868;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=aeL6637wyVYDkM+kflYnRhRFzl1sa4x1JLOOQ+GW638=;
+        b=thvL92u7xydC35S5l6Rav/+h3xftTC5qMYUnEn+BMC69MKT3AcHUvtXtk2DC7hUsdN
+         qboFhG1aSa9qfU+RRjTHEcy6i8K7DHTdqPgObzCOJhuoC+AQGNOl+O/+xUidhNPcxuD+
+         vRsLejvdZK8xesRDGm9v11RJTLw6saIEbYHmBeo7Rbhxsc212HIolUsi9KTHuXefSOZC
+         WekWg2/oUBt1TXKpbBkcpX35Rilhqb85Gk1hd8T2uIDC/KdqCQQbbnxnTXjWQnhW7H7z
+         i6oJBNesQ9q14uhh2yneicOOUhN5jtL/eHQChs6BbQkzC0CTVQA3MjzP83jxGu3+25gT
+         NifA==
+X-Gm-Message-State: AO0yUKVGDkZqP24NOvq6Iwz0MNLkfwl6TU0f4i5qwdTNzqezZoqLzcep
+	RhVj+5mx65RoLmbk/8r1UUzSFsEpps12/Q==
+X-Google-Smtp-Source: AK7set+YYAsky+OnaWsapCN7ZdvNDjdUn9dNkQ9fOOSLx5SYlGSDb0Z/Q/U2cMLgCtT87SdfNZom/A==
+X-Received: by 2002:a05:6a20:47e2:b0:da:adbf:7b96 with SMTP id ey34-20020a056a2047e200b000daadbf7b96mr390724pzb.21.1679594868038;
+        Thu, 23 Mar 2023 11:07:48 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9181:d380::bed3])
+        by smtp.gmail.com with ESMTPSA id k16-20020aa78210000000b0062614daa92esm12262149pfi.213.2023.03.23.11.07.47
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 23 Mar 2023 11:07:47 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-networking][PATCH] ettercap: Fix build with libcurl >= 8
+Date: Thu, 23 Mar 2023 11:07:45 -0700
+Message-Id: <20230323180745.1344761-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.40.0
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.9.0
-Subject: Re: [oe] [meta-python][PATCH v2 1/4] python_mesonpy.bbclass: New
- class
-Content-Language: en-US
-To: Ross Burton <Ross.Burton@arm.com>
-Cc: "openembedded-devel@lists.openembedded.org"
- <openembedded-devel@lists.openembedded.org>
-References: <20230317072547.1031123-1-zboszor@gmail.com>
- <6646B534-8948-4706-9E8A-DAEA4111B694@arm.com>
- <14fa0c81-90ec-18c0-9bbf-a1769cfb743f@gmail.com>
- <39A18BD0-B6AD-4EF0-806B-578EDB2D3DC4@arm.com>
- <174EAFE93556A78F.19937@lists.openembedded.org>
-From: =?UTF-8?B?QsO2c3rDtnJtw6lueWkgWm9sdMOhbg==?= <zboszor@gmail.com>
-In-Reply-To: <174EAFE93556A78F.19937@lists.openembedded.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 23 Mar 2023 11:18:19 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101669
+ <openembedded-devel@lists.openembedded.org>; Thu, 23 Mar 2023 18:07:51 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101670
 
-2023. 03. 22. 9:18 keltezéssel, Zoltan Boszormenyi via lists.openembedded.org írta:
-> 2023. 03. 20. 17:26 keltezéssel, Ross Burton írta:
->> On 20 Mar 2023, at 15:01, Böszörményi Zoltán <zboszor@gmail.com> wrote:
->>> 2023. 03. 20. 15:46 keltezéssel, Ross Burton írta:
->>>> On 17 Mar 2023, at 07:25, Zoltan Boszormenyi via lists.openembedded.org 
->>>> <zboszor=gmail.com@lists.openembedded.org> wrote:
->>>>> +inherit setuptools3-base python3targetconfig python_pep517 meson-common
->>>> I still don’t see why you need to split the meson class up.
->>> See the other thread. For some reason, meson always wins
->>> regardless of the inheritance order, so do_configure has
->>> meson_do_configure instead of pep517_do_configure, etc.
->> Add a new do_configure to your class which simply calls the right one.
->
-> It still doesn't work. meson_do_qa_configure fails with this: [...]
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ ...-the-libcurl-version-check-to-consid.patch | 38 +++++++++++++++++++
+ .../ettercap/ettercap_0.8.3.1.bb              |  3 +-
+ 2 files changed, 40 insertions(+), 1 deletion(-)
+ create mode 100644 meta-networking/recipes-support/ettercap/ettercap/0001-sslstrip-Enhance-the-libcurl-version-check-to-consid.patch
 
-This construct also doesn't work
-===================================
-inherit meson
-do_configure[postfuncs]:remove = "meson_do_qa_configure"
-===================================
-
-It results in an "unparsed line" error. So, I have to re-iterate this:
-
-> Sorry, there seems to be no way around it but splitting out the
-> environment setup from meson.bbclass into meson-common class.
-> If you don't like the "-common" naming, I can rename it to
-> meson-env.bbclass or something like that.
->
-> I will still rework python3-meson-python to not require
-> the dummy patchelf python module and review other
-> comments and make necessary changes.
+diff --git a/meta-networking/recipes-support/ettercap/ettercap/0001-sslstrip-Enhance-the-libcurl-version-check-to-consid.patch b/meta-networking/recipes-support/ettercap/ettercap/0001-sslstrip-Enhance-the-libcurl-version-check-to-consid.patch
+new file mode 100644
+index 0000000000..82456c2f96
+--- /dev/null
++++ b/meta-networking/recipes-support/ettercap/ettercap/0001-sslstrip-Enhance-the-libcurl-version-check-to-consid.patch
+@@ -0,0 +1,38 @@
++From 40534662043b7d831d1f6c70448afa9d374a9b63 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Thu, 23 Mar 2023 10:23:14 -0700
++Subject: [PATCH] sslstrip: Enhance the libcurl version check to consider
++ version 8+
++
++Lately curl has released version 8 and hence LIBCURL_VERSION_MAJOR is
++reset to 0, current check assumes major version to be 7 at max and hence
++on systems with libcurl 8+ this check breaks and build fails
++
++Fixes
++
++TOPDIR/build/tmp/work/cortexa15t2hf-neon-yoe-linux-gnueabi/ettercap/0.8.3.1-r0/git/plug-ins/sslstrip/sslstrip.c:57:2: error: libcurl 7.26.0 or up is needed
++ ^
++1 error generated.
++
++Upstream-Status: Submitted [https://github.com/Ettercap/ettercap/pull/1221]
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ plug-ins/sslstrip/sslstrip.c | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/plug-ins/sslstrip/sslstrip.c b/plug-ins/sslstrip/sslstrip.c
++index 327bf58a..d9b67c8b 100644
++--- a/plug-ins/sslstrip/sslstrip.c
+++++ b/plug-ins/sslstrip/sslstrip.c
++@@ -51,7 +51,7 @@
++ 
++ #include <curl/curl.h>
++ 
++-#if (LIBCURL_VERSION_MAJOR < 7) || (LIBCURL_VERSION_MINOR < 26)
+++#if (LIBCURL_VERSION_MAJOR < 7) || (LIBCURL_VERSION_MAJOR == 7 && LIBCURL_VERSION_MINOR < 26)
++ #error libcurl 7.26.0 or up is needed
++ #endif
++ 
++-- 
++2.40.0
++
+diff --git a/meta-networking/recipes-support/ettercap/ettercap_0.8.3.1.bb b/meta-networking/recipes-support/ettercap/ettercap_0.8.3.1.bb
+index b0958e6975..6c07223b31 100644
+--- a/meta-networking/recipes-support/ettercap/ettercap_0.8.3.1.bb
++++ b/meta-networking/recipes-support/ettercap/ettercap_0.8.3.1.bb
+@@ -20,7 +20,8 @@ DEPENDS += "ethtool \
+ 
+ RDEPENDS:${PN} += "bash ethtool libgcc"
+ 
+-SRC_URI = "gitsm://github.com/Ettercap/ettercap;branch=master;protocol=https"
++SRC_URI = "gitsm://github.com/Ettercap/ettercap;branch=master;protocol=https \
++           file://0001-sslstrip-Enhance-the-libcurl-version-check-to-consid.patch"
+ 
+ SRCREV = "7281fbddb7da7478beb1d21e3cb105fff3778b31"
+ 
+-- 
+2.40.0
 
 
