@@ -2,67 +2,71 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DEA21C6FD1D
-	for <webhook@archiver.kernel.org>; Thu, 23 Mar 2023 04:15:07 +0000 (UTC)
-Received: from mail1.bemta32.messagelabs.com (mail1.bemta32.messagelabs.com [195.245.230.2])
- by mx.groups.io with SMTP id smtpd.web10.65217.1679544900610001869
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C3BCFC6FD1C
+	for <webhook@archiver.kernel.org>; Thu, 23 Mar 2023 04:15:17 +0000 (UTC)
+Received: from mail1.bemta34.messagelabs.com (mail1.bemta34.messagelabs.com [195.245.231.4])
+ by mx.groups.io with SMTP id smtpd.web11.64819.1679544912377195694
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 22 Mar 2023 21:15:01 -0700
+ Wed, 22 Mar 2023 21:15:12 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=ENjW1DV6;
- spf=pass (domain: fujitsu.com, ip: 195.245.230.2, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=wbUYckLV;
+ spf=pass (domain: fujitsu.com, ip: 195.245.231.4, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1679544898; i=@fujitsu.com;
-	bh=brI2mZaQKYGd3cyVHIccurbHcKRTSTHH7NCdclx2CAs=;
-	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=ENjW1DV6LWpL+FfiT/xTsbIiO8g/8OKMX2Ir86V7JNwlVmpcPnyqp2Pmj7qBdFqM1
-	 o8XZ+C110SRfJOs8hmoOeLrmSWp3F9XbPqYciUAEAhIzEu1KvQedwccUBssigzFvn8
-	 mDd8ISsHYE5G1BhHQqYhiwwQjvzoizvmkL5ZF3JWV+TtTLey0joV2d3CL30aGZKYjO
-	 V5PauGKt7YGJoCEchiTh06BxhFfzcgcN/0W8f7g1sTXWS5OUCmqSXSAxq+DLCzFg31
-	 tsTJO+U/7pmx8FzlrlMzCv0Ze+uONh2tCSM0/aPoKxboF8xsg00B9fW0XGaqkI8nU5
-	 vS1XvSBZhPnxQ==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFlrLIsWRWlGSWpSXmKPExsViZ8ORpOt4STr
-  F4GCbqMXFw0uZHRg9zm1cwRjAGMWamZeUX5HAmvH9SBt7wWG+iluX3zM3MM7k7WLk4hASeMgo
-  cWPFFkYI5wqTxPIH59i7GDmBnD2MEhueuIPYbAJSEjfu/2cDsUUE9CWWzt7DDGIzC6hIvPjdA
-  1YvLOAt8a/7LwuIzSKgKrHj41mwGl4BJ4mvB24zgtgSAgoSUx6+h4oLSpyc+YQFYo6ExMEXL5
-  ghahQlZl9uZoGwKyQapx9igrDVJK6e28Q8gZF/FpL2WUjaFzAyrWI0LU4tKkst0jXVSyrKTM8
-  oyU3MzNFLrNJN1Est1S1PLS7RNdRLLC/WSy0u1iuuzE3OSdHLSy3ZxAgMxZRiFrMdjO19f/UO
-  MUpyMCmJ8kqESqcI8SXlp1RmJBZnxBeV5qQWH2KU4eBQkuDVuQiUEyxKTU+tSMvMAcYFTFqCg
-  0dJhHfuQaA0b3FBYm5xZjpE6hSjopQ4byxInwBIIqM0D64NFouXGGWlhHkZGRgYhHgKUotyM0
-  tQ5V8xinMwKgnzzjgPNIUnM68EbvoroMVMQIvjZkiALC5JREhJNTDt/qHEUbhH4PMz9wlFWjd
-  F4iPOPTp5MaXsLPdP93ULKySW8HhmS0ZZ1kstcGE7tfHvYs33kc9iNky8tdbio0h497STSvJf
-  jZgPZm1cxCt4WlPR5ftE7l8PeOV9vNT7XW1PKB+54881W36D3/W1nF7m6boptv4acbGy+0q/h
-  WxZZ1FZENxzY3WJr/LW2a37kioVfFOmTwjVlU3W5jj591/gnRcetns635i/rawMbT36X8XjZr
-  lF2SqDOn02ceeHhmKNjpo7lrDZ2C8subSPI6T7tPtrtV1PAjUlfvwOnvpeNI9vbq1qQprL6bW
-  //scKZt5JE2biV4kqlWOf/K1N3mNi9dvGY/ofPC9kfOEsUGIpzkg01GIuKk4EAJf1uy5AAwAA
+	s=170520fj; t=1679544910; i=@fujitsu.com;
+	bh=Oe89+eeSGH4EkafJ4bRYjfU6Tfr+3FLmVUjkd+vf5YI=;
+	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type;
+	b=wbUYckLVG43+KU98i4JP4K54e+g4w4vxSMCw7+nwsPzbyqDkX0vMZUaqxk+KZoMRL
+	 w4SwiWda1D8x4Oyz2f4hlRqT4LzxLGFNuUUdGIq7jedQxwnd86pHgiv2wGDzHZYMTx
+	 VN7Cx70hpKWRf2Cv5MxL0kY/WHYjdgSswbQg77P/TJbxOCbsnvogdqn6jIyoJMsaNw
+	 Dgi9xmJ8yMoIK2H5w+z8wdjwzCfAo9JDKyWIILHot/M7vz92FPp0nKUe/88WxL0lvc
+	 jTOBfk7+DCsOomsOkhC82lR6tPb6F4FVMeRAuAENvECh1uvFDbpG3HMXqM5fOm/mgW
+	 wK1g+DFivYVWg==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrGIsWRWlGSWpSXmKPExsViZ8ORpOt3STr
+  F4PBGDouLh5cyOzB6nNu4gjGAMYo1My8pvyKBNePnshuMBRt4KzYfesPewDiFp4uRi0NI4CGj
+  xM+d3WwQzhUmiY9vzzNBOHsYJV5v7WXsYuTkYBOQkrhx/z8biC0ioC+xdPYeZhCbWUBF4sXvH
+  nYQW1ggQKL77HSwehYBVYlrE7eD1fMKOEk8e3GACcSWEFCQmPLwPVgvp4CzxNxJ3WC2EFBNy5
+  peZoh6QYmTM5+wQMyXkDj44gUzRK+ixOzLzSwQdoVE4/RDUDPVJK6e28Q8gVFwFpL2WUjaFzA
+  yrWI0LU4tKkst0rXQSyrKTM8oyU3MzNFLrNJN1Est1S1PLS7RNdJLLC/WSy0u1iuuzE3OSdHL
+  Sy3ZxAgM3pRitcc7GLf2/dU7xCjJwaQkyisRKp0ixJeUn1KZkVicEV9UmpNafIhRhoNDSYJX5
+  yJQTrAoNT21Ii0zBxhJMGkJDh4lEd65B4HSvMUFibnFmekQqVOMilLivLEgfQIgiYzSPLg2WP
+  ReYpSVEuZlZGBgEOIpSC3KzSxBlX/FKM7BqCTMO+M80BSezLwSuOmvgBYzAS2OmyEBsrgkESE
+  l1cDEfVng+iPjRi2HXe3a90P0fJ6t/xmSIfileu/TDfckDm8XWnD7RELVjw8ubgnsMyzf3TJ/
+  2/r/W8wnljiD9fcdCn5Es25YLRu+PJF5s6d4tDlbR9fkqd8f7nq/a//OsP2mB2//0c5X64mbJ
+  ecxZ/vj/GX/T+gdV7JM/Mabs4VBW/fJZO49B/16Fd4YsHhuu1mxb3KKzjP/VU9mXZ1R8vGQXo
+  PQjY59XyV2S3s1MlZ8V9v5UcgsY7mm7Pu8qQtyVA3vdfb9fDkldl/dSec77KKl16vzbnTe0WB
+  gfcLSbCbafXclW/201l2OXx45aKacLmW8nDhLYsb0oDcvZp+IYHr0Rv6U0x3zM2bXZT5deKsx
+  W4mlOCPRUIu5qDgRAFIkcJhZAwAA
 X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-6.tower-587.messagelabs.com!1679544897!169100!1
+X-Msg-Ref: server-20.tower-565.messagelabs.com!1679544910!49877!1
 X-Originating-IP: [62.60.8.98]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.104.1; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 8527 invoked from network); 23 Mar 2023 04:14:57 -0000
+Received: (qmail 26884 invoked from network); 23 Mar 2023 04:15:10 -0000
 Received: from unknown (HELO n03ukasimr03.n03.fujitsu.local) (62.60.8.98)
-  by server-6.tower-587.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 23 Mar 2023 04:14:57 -0000
+  by server-20.tower-565.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 23 Mar 2023 04:15:10 -0000
 Received: from n03ukasimr03.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr03.n03.fujitsu.local (Postfix) with ESMTP id E15F01B4
-	for <openembedded-devel@lists.openembedded.org>; Thu, 23 Mar 2023 04:14:56 +0000 (GMT)
+	by n03ukasimr03.n03.fujitsu.local (Postfix) with ESMTP id D2DD81B4
+	for <openembedded-devel@lists.openembedded.org>; Thu, 23 Mar 2023 04:15:09 +0000 (GMT)
 Received: from R01UKEXCASM121.r01.fujitsu.local (R01UKEXCASM121 [10.183.43.173])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by n03ukasimr03.n03.fujitsu.local (Postfix) with ESMTPS id D62461B0
-	for <openembedded-devel@lists.openembedded.org>; Thu, 23 Mar 2023 04:14:56 +0000 (GMT)
+	by n03ukasimr03.n03.fujitsu.local (Postfix) with ESMTPS id C78D61AF
+	for <openembedded-devel@lists.openembedded.org>; Thu, 23 Mar 2023 04:15:09 +0000 (GMT)
 Received: from localhost.localdomain (10.167.225.33) by
  R01UKEXCASM121.r01.fujitsu.local (10.183.43.173) with Microsoft SMTP Server
- (TLS) id 15.0.1497.42; Thu, 23 Mar 2023 04:14:55 +0000
+ (TLS) id 15.0.1497.42; Thu, 23 Mar 2023 04:15:08 +0000
 From: <wangmy@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-python] [PATCH] python3-geojson: upgrade 2.5.0 -> 3.0.1
-Date: Thu, 23 Mar 2023 12:14:37 +0800
-Message-ID: <1679544881-19951-1-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH] python3-sentry-sdk: upgrade 1.15.0 -> 1.17.0
+Date: Thu, 23 Mar 2023 12:14:39 +0800
+Message-ID: <1679544881-19951-3-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
+In-Reply-To: <1679544881-19951-1-git-send-email-wangmy@fujitsu.com>
+References: <1679544881-19951-1-git-send-email-wangmy@fujitsu.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-Originating-IP: [10.167.225.33]
@@ -72,51 +76,48 @@ X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 23 Mar 2023 04:15:07 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101642
+ <openembedded-devel@lists.openembedded.org>; Thu, 23 Mar 2023 04:15:17 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101644
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
-License-Update: Update library name in license
+License-Update: Switch to MIT license
 
 Changelog:
-==========
-Add Support for Python 3.11.x minor revisions
-Support for Python versions 3.7-3.11 (Python 2 no longer supported)
-Primary development branch renamed from master to main
-Handle all real numbers as coordinates
-Default precision improvements
-CI improvements
-utf-8 support added to geojson.dumps()
-Polygons now constrained to bounding box
-Better GeometryCollection handling in util.coords()
-Improved point validation
+https://github.com/getsentry/sentry-python/blob/master/CHANGELOG.md
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../{python3-geojson_2.5.0.bb => python3-geojson_3.0.1.bb}   | 5 ++---
- 1 file changed, 2 insertions(+), 3 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-geojson_2.5.0.bb => python3-geojson_3.0.1.bb} (67%)
+ ...n3-sentry-sdk_1.15.0.bb => python3-sentry-sdk_1.17.0.bb} | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-sentry-sdk_1.15.0.bb => python3-sentry-sdk_1.17.0.bb} (71%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-geojson_2.5.0.bb b/meta-python/recipes-devtools/python/python3-geojson_3.0.1.bb
-similarity index 67%
-rename from meta-python/recipes-devtools/python/python3-geojson_2.5.0.bb
-rename to meta-python/recipes-devtools/python/python3-geojson_3.0.1.bb
-index 40cf8bda76..671fe4f23a 100644
---- a/meta-python/recipes-devtools/python/python3-geojson_2.5.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-geojson_3.0.1.bb
-@@ -1,10 +1,9 @@
- SUMMARY = "Python bindings and utilities for GeoJSON"
- HOMEPAGE = "https://pypi.org/project/geojson/"
- LICENSE = "BSD-3-Clause"
--LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=f48972abe5cddee79e301574742ed745"
-+LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=f77f2ed49768c8d4c79ba874c0f94d8a"
+diff --git a/meta-python/recipes-devtools/python/python3-sentry-sdk_1.15.0.bb b/meta-python/recipes-devtools/python/python3-sentry-sdk_1.17.0.bb
+similarity index 71%
+rename from meta-python/recipes-devtools/python/python3-sentry-sdk_1.15.0.bb
+rename to meta-python/recipes-devtools/python/python3-sentry-sdk_1.17.0.bb
+index b3ce17451c..c0a180ad11 100644
+--- a/meta-python/recipes-devtools/python/python3-sentry-sdk_1.15.0.bb
++++ b/meta-python/recipes-devtools/python/python3-sentry-sdk_1.17.0.bb
+@@ -2,8 +2,8 @@ SUMMARY = "The new Python SDK for Sentry.io"
+ DESCRIPTION = "This is the next line of the Python SDK \
+ for Sentry, intended to replace the raven package on PyPI."
+ HOMEPAGE = "https://github.com/getsentry/sentry-python"
+-LICENSE = "BSD-2-Clause"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=0c79f8d3c91fc847350efd28bfe0a341"
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=7fcb29c83dd48cb7b112d0dd81111a89"
  
--SRC_URI[md5sum] = "14753ed28678828b1de73f68b04e2324"
--SRC_URI[sha256sum] = "6e4bb7ace4226a45d9c8c8b1348b3fc43540658359f93c3f7e03efa9f15f658a"
-+SRC_URI[sha256sum] = "ff3d75acab60b1e66504a11f7ea12c104bad32ff3c410a807788663b966dee4a"
+ RDEPENDS:${PN} += "\
+ 	${PYTHON_PN}-urllib3 \
+@@ -15,7 +15,7 @@ RDEPENDS:${PN} += "\
+ 	${PYTHON_PN}-datetime \
+ "
  
- inherit pypi setuptools3 ptest
+-SRC_URI[sha256sum] = "69ecbb2e1ff4db02a06c4f20f6f69cb5dfe3ebfbc06d023e40d77cf78e9c37e7"
++SRC_URI[sha256sum] = "ad40860325c94d1a656da70fba5a7c4dbb2f6809d3cc2d00f74ca0b608330f14"
+ 
+ PYPI_PACKAGE = "sentry-sdk"
  
 -- 
 2.34.1
