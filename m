@@ -2,71 +2,71 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3EFEEC6FD1C
-	for <webhook@archiver.kernel.org>; Fri, 24 Mar 2023 00:30:03 +0000 (UTC)
-Received: from mail1.bemta32.messagelabs.com (mail1.bemta32.messagelabs.com [195.245.230.65])
- by mx.groups.io with SMTP id smtpd.web11.89928.1679617792918118964
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5D9ADC74A5B
+	for <webhook@archiver.kernel.org>; Fri, 24 Mar 2023 00:31:53 +0000 (UTC)
+Received: from mail1.bemta37.messagelabs.com (mail1.bemta37.messagelabs.com [85.158.142.2])
+ by mx.groups.io with SMTP id smtpd.web10.90542.1679617908976905704
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 23 Mar 2023 17:29:53 -0700
+ Thu, 23 Mar 2023 17:31:49 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=mo+Ael4c;
- spf=pass (domain: fujitsu.com, ip: 195.245.230.65, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=e/jK5Dmm;
+ spf=pass (domain: fujitsu.com, ip: 85.158.142.2, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1679617791; i=@fujitsu.com;
-	bh=uIc3VeYN9lRNGPYLRCX5FiOb+oBuusqLyVcQQD/l5RQ=;
+	s=170520fj; t=1679617907; i=@fujitsu.com;
+	bh=0HlUXPLK+hGnf/eA+4i5MwAOPfClIOWvdp/UhYueEOw=;
 	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
 	 MIME-Version:Content-Type;
-	b=mo+Ael4cOsCUy+oRdL2PelFVuU18UE0/P/E4G5GKvMoMk9cfEdduo4WIU13M2VXUg
-	 Tk/HnCyi/hx9LLx9aNaD6TIyIT7nlwuEFjf33fm9D63AQBp7KQ4SIc+PgFtcUcJ0v1
-	 lOhOENPDTKMjfKoUcPn5pxDAZRsxE1NGkjgny+EfTM/0utz+MocALUMnqY3S+B8BTH
-	 U7XIUG5y1KoycmdoyB2+75ce/zeoYZW3fxCKjUWhx+00RdYiZDasakukiBDvv4AVei
-	 e70gAw3Mv7iR4BJWA8o+4D/zvJbOIBHvWJth9rNd06abrkvchwFPSNj9/P5jtNBdBY
-	 OpqdffQGFwMGA==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrKIsWRWlGSWpSXmKPExsViZ8ORqPvvnUy
-  KwdwfqhYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8addb9ZCpo5K64cmM7YwDiDo4uRi0NI4Amj
-  xIWnh1i6GDmBnOtMEp93Z0Ak9jBKzOp+ywySYBOQkrhx/z8biC0ioC+xdPYesDizgIrEi9897
-  CC2sICLxMulmxlBbBYBVYnLM2eC1fAKOEmsXH2WCcSWEFCQmPLwPVicU8BZYsOdJmaIxU4S+x
-  /OZYOoF5Q4OfMJC8R8CYmDL14wQ/QqSsy+3MwCYVdINE4/BDVTTeLquU3MExgFZyFpn4WkfQE
-  j0ypG0+LUorLUIl1TvaSizPSMktzEzBy9xCrdRL3UUt3y1OISXUO9xPJivdTiYr3iytzknBS9
-  vNSSTYzA0E0pZjHbwdje91fvEKMkB5OSKK9EqHSKEF9SfkplRmJxRnxRaU5q8SFGGQ4OJQnez
-  29kUoQEi1LTUyvSMnOAcQSTluDgURLhPXQWKM1bXJCYW5yZDpE6xagoJc6b+BYoIQCSyCjNg2
-  uDxe4lRlkpYV5GBgYGIZ6C1KLczBJU+VeM4hyMSsK8wsBEIMSTmVcCN/0V0GImoMXONWCLSxI
-  RUlINTBN/XG899OLhIpPzGT/SHk1tqi7fOsn+zOGb30Xn3sr53PvdNE6tPi/xaMEyzcXLpsX9
-  OD4jfWrgf6uICfmJq//P+7Vs1aMC2fynTnMval4sSPc4dNAiZHLvj0Jx7jqH4B52pzeSrEfu/
-  4lgXVa4eUvuw4yNF3l7p3DMN3nX2HNsx5c7dq/178vkTMh9eifHb+mC5nfPRWouTWNQDDWz07
-  7c4mL8WDi3Ld9fs3jzDHetdReviLkflTk+tbxy0pcwu65gZjNX5nj3/9kfxU1LAkxP+k57sur
-  +5MMH85oFw6Y/T1956GPc3yMHAmv4Cl6vjzeyZ16yKm+CWeY7Ay1tmSg5+d9sjEbCYkoFry4/
-  YFdiKc5INNRiLipOBAA9IDBaWAMAAA==
+	b=e/jK5DmmW1hNt5x0xei1HPZFGYmMHXmuCSY8bv+cZKMToHyAwt8DBLRZ5hn2fTkO9
+	 j+u3+Pqx0WS+YslUsun8ZLx7GjdSKwOl31y/cEMhLG8+ft3VlH+te0hAeawnjV0SuO
+	 zdqQkZ+wz5b+MsQUDzvX6IJSNNZlV08l+hDLwIKvihcFpbtcC5nRSA5dg5lI2DU/oR
+	 cYYOsFeWSTJJRRzb028ng9Ts/kUAZWhcTxYt2DetgpvNNzXhIXNe2DxmidyfTVZyBN
+	 +44e3idUBy/9zxaL/4wDX6bcLqtViTjfJcEeNuCyjc/GPp0h6rt63dmEVpOBJQSKrS
+	 ibDl0Cn1Q2J7Q==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrIIsWRWlGSWpSXmKPExsViZ8ORpFv0Xib
+  FYMppGYuLh5cyOzB6nNu4gjGAMYo1My8pvyKBNeP89e2MBSc5K84tPczYwHiXo4uRi0NI4CGj
+  xKUNJ1m7GDmBnCtMEusPSkIk9jBKHOnazgSSYBOQkrhx/z8biC0ioC+xdPYeZhCbWUBF4sXvH
+  nYQW1ggWOLEjt0sIDaLgKrEr+dfwGp4BZwkHn6dATZHQkBBYsrD92BxTgFnibmPOoBmcgAtc5
+  JYco4FolxQ4uTMJywQ4yUkDr54wQzRqigx+3IzC4RdIdE4/RDUSDWJq+c2MU9gFJyFpH0WkvY
+  FjEyrGM2KU4vKUot0TfSSijLTM0pyEzNz9BKrdBP1Ukt18/KLSjJ0DfUSy4v1UouL9Yorc5Nz
+  UvTyUks2MQJDN6U4IW0HY2vfX71DjJIcTEqivBKh0ilCfEn5KZUZicUZ8UWlOanFhxhlODiUJ
+  Hg/v5FJERIsSk1PrUjLzAHGEUxagoNHSYT30FmgNG9xQWJucWY6ROoUoy7H2oYDe5mFWPLy81
+  KlxHkT3wIVCYAUZZTmwY2AxfQlRlkpYV5GBgYGIZ6C1KLczBJU+VeM4hyMSsK8wu+ApvBk5pX
+  AbXoFdAQT0BHONWBHlCQipKQamGIcX4tVFe7Jn1g5K+XpwUDHW7NcO7W+cholKKy87e77PCU2
+  3OOSyL+cNWHiWYb80WwnzmzV/G/etceDWWrr3yuBp7J42B9PKO39Xar444276J7wf7emPDOSV
+  /jeYxJ7ofvWzldKzFJxfu98zXdZHauZFxzl6vjyd92W7w4/FRXtTebWudTdKWarOig74fq/1i
+  jPm2tX2TQxu5eymF6cYTers2Tr/lMpy1h/LXnFtMvRsqZ8tmD2nGesQs19WWsm263foKpv+OD
+  CEsulf2bWeVxVKRbQzpru8GLHEYcVP47WWO6evuLTZKMjW1tfCHG3zT4drj/3zpX/t1TfJW02
+  1DZfXPz5RV9Eu+GOu9n9lUosxRmJhlrMRcWJAHl59WlkAwAA
 X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-6.tower-591.messagelabs.com!1679617790!254847!1
-X-Originating-IP: [62.60.8.97]
+X-Msg-Ref: server-8.tower-732.messagelabs.com!1679617906!253179!1
+X-Originating-IP: [62.60.8.98]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.104.1; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 15444 invoked from network); 24 Mar 2023 00:29:50 -0000
-Received: from unknown (HELO n03ukasimr01.n03.fujitsu.local) (62.60.8.97)
-  by server-6.tower-591.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 24 Mar 2023 00:29:50 -0000
-Received: from n03ukasimr01.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTP id 3E1BE10019F
-	for <openembedded-devel@lists.openembedded.org>; Fri, 24 Mar 2023 00:29:50 +0000 (GMT)
+Received: (qmail 18611 invoked from network); 24 Mar 2023 00:31:46 -0000
+Received: from unknown (HELO n03ukasimr03.n03.fujitsu.local) (62.60.8.98)
+  by server-8.tower-732.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 24 Mar 2023 00:31:46 -0000
+Received: from n03ukasimr03.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr03.n03.fujitsu.local (Postfix) with ESMTP id D5B801B5
+	for <openembedded-devel@lists.openembedded.org>; Fri, 24 Mar 2023 00:31:45 +0000 (GMT)
 Received: from R01UKEXCASM121.r01.fujitsu.local (R01UKEXCASM121 [10.183.43.173])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTPS id 2FDF610019E
-	for <openembedded-devel@lists.openembedded.org>; Fri, 24 Mar 2023 00:29:50 +0000 (GMT)
+	by n03ukasimr03.n03.fujitsu.local (Postfix) with ESMTPS id CAB031B0
+	for <openembedded-devel@lists.openembedded.org>; Fri, 24 Mar 2023 00:31:45 +0000 (GMT)
 Received: from localhost.localdomain (10.167.225.33) by
  R01UKEXCASM121.r01.fujitsu.local (10.183.43.173) with Microsoft SMTP Server
- (TLS) id 15.0.1497.42; Fri, 24 Mar 2023 00:29:48 +0000
+ (TLS) id 15.0.1497.42; Fri, 24 Mar 2023 00:31:44 +0000
 From: <wangmy@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-gnome] [PATCH] gnome-chess: upgrade 43.1 -> 43.2
-Date: Fri, 24 Mar 2023 08:29:24 +0800
-Message-ID: <1679617764-27268-5-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-filesystems] [PATCH] xfstests: upgrade 2023.01.01 -> 2023.03.05
+Date: Fri, 24 Mar 2023 08:31:22 +0800
+Message-ID: <1679617885-27327-2-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
-In-Reply-To: <1679617764-27268-1-git-send-email-wangmy@fujitsu.com>
-References: <1679617764-27268-1-git-send-email-wangmy@fujitsu.com>
+In-Reply-To: <1679617885-27327-1-git-send-email-wangmy@fujitsu.com>
+References: <1679617885-27327-1-git-send-email-wangmy@fujitsu.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-Originating-IP: [10.167.225.33]
@@ -76,38 +76,33 @@ X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 24 Mar 2023 00:30:03 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101687
+ <openembedded-devel@lists.openembedded.org>; Fri, 24 Mar 2023 00:31:53 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101689
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
-Changelog:
-===========
-- help: remove references to mailing lists
-- Updated translations
-
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../gnome-chess/{gnome-chess_43.1.bb => gnome-chess_43.2.bb}   | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
- rename meta-gnome/recipes-gnome/gnome-chess/{gnome-chess_43.1.bb => gnome-chess_43.2.bb} (92%)
+ .../xfstests/{xfstests_2023.01.01.bb => xfstests_2023.03.05.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-filesystems/recipes-utils/xfstests/{xfstests_2023.01.01.bb => xfstests_2023.03.05.bb} (97%)
 
-diff --git a/meta-gnome/recipes-gnome/gnome-chess/gnome-chess_43.1.bb b/meta-gnome/recipes-gnome/gnome-chess/gnome-chess_43.2.bb
-similarity index 92%
-rename from meta-gnome/recipes-gnome/gnome-chess/gnome-chess_43.1.bb
-rename to meta-gnome/recipes-gnome/gnome-chess/gnome-chess_43.2.bb
-index 643e6befeb..343135bfa8 100644
---- a/meta-gnome/recipes-gnome/gnome-chess/gnome-chess_43.1.bb
-+++ b/meta-gnome/recipes-gnome/gnome-chess/gnome-chess_43.2.bb
-@@ -29,7 +29,6 @@ inherit meson pkgconfig gobject-introspection gtk-icon-cache vala features_check
- GIR_MESON_OPTION = ""
+diff --git a/meta-filesystems/recipes-utils/xfstests/xfstests_2023.01.01.bb b/meta-filesystems/recipes-utils/xfstests/xfstests_2023.03.05.bb
+similarity index 97%
+rename from meta-filesystems/recipes-utils/xfstests/xfstests_2023.01.01.bb
+rename to meta-filesystems/recipes-utils/xfstests/xfstests_2023.03.05.bb
+index defa11c929..9baa31f712 100644
+--- a/meta-filesystems/recipes-utils/xfstests/xfstests_2023.01.01.bb
++++ b/meta-filesystems/recipes-utils/xfstests/xfstests_2023.03.05.bb
+@@ -10,7 +10,7 @@ SRC_URI = "git://git.kernel.org/pub/scm/fs/xfs/xfstests-dev.git;branch=master;na
+            file://0002-Drop-detached_mounts_propagation-and-remove-sys-moun.patch \
+            "
+ 
+-SRCREV_xfstests = "fbd489798b31e32f0eaefcd754326a06aa5b166f"
++SRCREV_xfstests = "f7765774a1b5cb98c2f21a892e82b3421f40e791"
+ SRCREV_unionmount = "e3825b16b46f4c4574a1a69909944c059835f914"
  
  S = "${WORKDIR}/git"
--PV = "43.1"
--SRCREV = "95c7fb91daf36014fc1c2a7ec20b7400a21cd316"
-+SRCREV = "de47d07ec6fc828b2668ca6ee59fe9bdfa9dc1d6"
- 
- FILES:${PN} += "${datadir}"
 -- 
 2.34.1
 
