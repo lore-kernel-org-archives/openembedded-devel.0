@@ -2,68 +2,68 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3EAEDC7619A
-	for <webhook@archiver.kernel.org>; Fri, 24 Mar 2023 00:32:03 +0000 (UTC)
-Received: from mail1.bemta32.messagelabs.com (mail1.bemta32.messagelabs.com [195.245.230.2])
- by mx.groups.io with SMTP id smtpd.web10.90548.1679617921107001795
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 40611C74A5B
+	for <webhook@archiver.kernel.org>; Fri, 24 Mar 2023 00:32:13 +0000 (UTC)
+Received: from mail1.bemta34.messagelabs.com (mail1.bemta34.messagelabs.com [195.245.231.3])
+ by mx.groups.io with SMTP id smtpd.web11.89974.1679617925914806549
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 23 Mar 2023 17:32:01 -0700
+ Thu, 23 Mar 2023 17:32:06 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=wsF1ZHyL;
- spf=pass (domain: fujitsu.com, ip: 195.245.230.2, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=lJ4o4x8v;
+ spf=pass (domain: fujitsu.com, ip: 195.245.231.3, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1679617919; i=@fujitsu.com;
-	bh=9mB4QFEKbwkrNAKU/scsO5WO3Vp11e5P4fE7T4h1Mmc=;
+	s=170520fj; t=1679617924; i=@fujitsu.com;
+	bh=AYu5YEuCNhtcL1Mu5y8dlZGPPbWBti5cPLHGMyNomlU=;
 	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
 	 MIME-Version:Content-Type;
-	b=wsF1ZHyLToKa4pSK7oLOr8OG4V+47CLUDAHpt44C+SzZbiZLUEc1Dy1VlO+gjOene
-	 LqCajcmCp3Nk2qkdU51s0Abq5Ec2g+d/iljQJ1F0oWeSIvF+ZjTpWGRhFcx6u1qJ5w
-	 21P/m1ctKXs5dA08qdpvRfmVwFO4iUol3X6tav4QPQRK59TTBjqgd3Xjutuj8bXoig
-	 kdMS1bAiyFWCOl0VIK1n6jJqnq3e2TR+Vdh5PE6BU1cz9ZfmrBV86NtMwWZ85IU9Lb
-	 SZvvah2G5UQOH3TIFhNFnpo9OPcGMevdRzMEaWDZhdY0e8erJp1HUAxxQdukDNXtmU
-	 N7vv70H6IgjwA==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrGIsWRWlGSWpSXmKPExsViZ8ORqFv3Xib
-  F4E6bqsXFw0uZHRg9zm1cwRjAGMWamZeUX5HAmrG27S1LwWPOipWbDzE2MD7g6GLk4hASeMIo
-  sfrHajYI5zqTxOOXM5m7GDmBnD2MEsumi4LYbAJSEjfu/2cDsUUE9CWWzt4DVsMsoCLx4ncPO
-  4gtLOAoMe3BFrAaFgFViav357KC2LwCThL9a1rA4hICChJTHr4H6+UUcJaY+6gDKM4BtMtJYs
-  k5FohyQYmTM5+wQIyXkDj44gUzRKuixOzLzSwQdoVE4/RDTBC2msTVc5uYJzAKzkLSPgtJ+wJ
-  GplWMpsWpRWWpRbqWeklFmekZJbmJmTl6iVW6iXqppbrlqcUluoZ6ieXFeqnFxXrFlbnJOSl6
-  eaklmxiBgZtSzOq0g/F431+9Q4ySHExKorwSodIpQnxJ+SmVGYnFGfFFpTmpxYcYZTg4lCR4P
-  7+RSRESLEpNT61Iy8wBRhFMWoKDR0mE99BZoDRvcUFibnFmOkTqFKMxx82rV/Yyc9wBkUIsef
-  l5qVLivH7vgEoFQEozSvPgBsGi+xKjrJQwLyMDA4MQT0FqUW5mCar8K0ZxDkYlYV5hkCk8mXk
-  lcPteAZ3CBHSKcw3YKSWJCCmpBqaSxz9KJNqlGIXfr1p6xWG2lWqaelDB2QOrP07cIhef8uXk
-  vc3bc2PnCU3Yc1zUpJLx/pqXFs8fmAq3pKdsun9NXqEwwfjV6pjPZ4OZvuTwLf2WIqwVHNmcW
-  HaTJ9hS58M33RCrk83H+r07Q7JmLn7FWLqjPj/rX23VfJYSV8UznlVZDZ7PlxR1161Ldj7p5s
-  hza3eQtpDo00c9jzxP59znebxA2UNZdU/qnxd3PkhN22uzfuPJ/5WMMx3Z4mdry09fdFxYK0h
-  K6O48NRXTVJequqtPzPI1soPM+xWmp1hVznzutHHWiqVZWz0s380r+zbVsX3uVNUztefLxC6e
-  WczW+O7l3d0yaj1vihe926XEUpyRaKjFXFScCABXP+IJaQMAAA==
+	b=lJ4o4x8vaFIWzrCnqpjLAFwg+eGTM1Ta3IVJnmfkIwNPXIzr41CEV5E/25sSfKeJF
+	 fkjTq9DrIxi4sXwNVOxR6qhpXTOKZu8i/l0Pdvnn25gJ6ef30lccOzk7uTdLb68okr
+	 n3qkyEGwkTFyga1R/g4VfBTA9ghzede8FxmCh7tIeanVMqx0oH6tcVKNoXMltq4DsT
+	 sDA3HWZBe1NhVHocyFLzWn6mshBWXXUrGkx7przvoGAv7h4Kky/Vm+4JdEmDBFQtzS
+	 uwgNk+BG7ITv5A6gaaTZUxZ3Ut9SnN55+bCbFTPDXbqmP2t0bmC4zzv+aHsgPmzsh+
+	 fXFuYMYEFXSsw==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrIIsWRWlGSWpSXmKPExsViZ8OxWbf5vUy
+  KwY/PChYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8az65+ZCg5zVvw7fY69gXEbRxcjF4eQwENG
+  iSk3ZzFBOJeZJFaefcEK4exhlPj0eCdbFyMnB5uAlMSN+//BbBEBfYmls/cwg9jMAioSL373s
+  IPYwgLOEu+3bAGrYRFQlfh/vQPM5hVwkujp2gtWLyGgIDHl4XswmxOofu4jkBoOoGVOEkvOsU
+  CUC0qcnPmEBWK8hMTBFy+gWhUlZl9uZoGwKyQapx9igrDVJK6e28Q8gVFwFpL2WUjaFzAyrWI
+  0LU4tKkst0jXTSyrKTM8oyU3MzNFLrNJN1Est1S1PLS7RNdJLLC/WSy0u1iuuzE3OSdHLSy3Z
+  xAgM3ZRi9V87GGf2/dU7xCjJwaQkyisRKp0ixJeUn1KZkVicEV9UmpNafIhRhoNDSYL38xuZF
+  CHBotT01Iq0zBxgHMGkJTh4lER4D50FSvMWFyTmFmemQ6ROMepyXL1yZS+zEEtefl6qlDhv4l
+  ugIgGQoozSPLgRsJi+xCgrJczLyMDAIMRTkFqUm1mCKv+KUZyDUUmYV/gd0BSezLwSuE2vgI5
+  gAjrCuQbsiJJEhJRUA1OnyKYlTErtgtqPGaomL3566bjcbl69dfwHZdLVuGYomzY9Orzv3tsT
+  Tge1Y6vrOJ+VWSqGXb0Zeq14ycRUz/5lx2U50zde73hzTSVZgfnGqabP+5+cfNzsYNUg+yBmo
+  /6u0Oz+vidR361XceRsmW0udFn7dU12cKKynaZizhuTcLXw1+n7Luy4zRMRND/vm3TWDO+Ujj
+  eJEo97POb94n3iffHfOsMEjqhTi2zff7YLXfpfecnLn0xbdGI9VCdvud9/bdLavMPLF27x/Z+
+  jvvNjVk/0znc3mkt6qjQK1qjUBkZPf++md3J5fG6Z3f3Vx7KuBeZ1Vi2e1c6XZ/GL4UW40Ec7
+  saKl232ut2VJeiqxFGckGmoxFxUnAgC5OLfcZAMAAA==
 X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-18.tower-591.messagelabs.com!1679617918!678338!1
-X-Originating-IP: [62.60.8.97]
+X-Msg-Ref: server-12.tower-571.messagelabs.com!1679617923!849258!1
+X-Originating-IP: [62.60.8.179]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.104.1; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 32309 invoked from network); 24 Mar 2023 00:31:58 -0000
-Received: from unknown (HELO n03ukasimr01.n03.fujitsu.local) (62.60.8.97)
-  by server-18.tower-591.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 24 Mar 2023 00:31:58 -0000
-Received: from n03ukasimr01.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTP id 3417D1001A0
-	for <openembedded-devel@lists.openembedded.org>; Fri, 24 Mar 2023 00:31:58 +0000 (GMT)
+Received: (qmail 28300 invoked from network); 24 Mar 2023 00:32:03 -0000
+Received: from unknown (HELO n03ukasimr04.n03.fujitsu.local) (62.60.8.179)
+  by server-12.tower-571.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 24 Mar 2023 00:32:03 -0000
+Received: from n03ukasimr04.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTP id 386EC150
+	for <openembedded-devel@lists.openembedded.org>; Fri, 24 Mar 2023 00:32:03 +0000 (GMT)
 Received: from R01UKEXCASM121.r01.fujitsu.local (R01UKEXCASM121 [10.183.43.173])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTPS id 268DF10019F
-	for <openembedded-devel@lists.openembedded.org>; Fri, 24 Mar 2023 00:31:58 +0000 (GMT)
+	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTPS id 2188273
+	for <openembedded-devel@lists.openembedded.org>; Fri, 24 Mar 2023 00:32:03 +0000 (GMT)
 Received: from localhost.localdomain (10.167.225.33) by
  R01UKEXCASM121.r01.fujitsu.local (10.183.43.173) with Microsoft SMTP Server
- (TLS) id 15.0.1497.42; Fri, 24 Mar 2023 00:31:56 +0000
+ (TLS) id 15.0.1497.42; Fri, 24 Mar 2023 00:32:01 +0000
 From: <wangmy@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-oe] [PATCH] libyang: upgrade 2.1.30 -> 2.1.55
-Date: Fri, 24 Mar 2023 08:31:24 +0800
-Message-ID: <1679617885-27327-4-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-gnome] [PATCH] libwacom: upgrade 2.5.0 -> 2.6.0
+Date: Fri, 24 Mar 2023 08:31:25 +0800
+Message-ID: <1679617885-27327-5-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 In-Reply-To: <1679617885-27327-1-git-send-email-wangmy@fujitsu.com>
 References: <1679617885-27327-1-git-send-email-wangmy@fujitsu.com>
@@ -76,43 +76,42 @@ X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 24 Mar 2023 00:32:03 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101691
+ <openembedded-devel@lists.openembedded.org>; Fri, 24 Mar 2023 00:32:13 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101692
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
 Changelog:
 ==========
-type compilation fixes
-multi-error validation support
-JSON parser fixes
-portability improvements
-schema-mount support improvements
-minor optimizations
-other minor fixes
+- New Devices
+  - ASUS ROG Flow X16
+  - XP-Pen Deco01 v2
+  - Huion Kamvas 13
+  - Wacom HID 52FA Pen
+  - Ugee M708 v1
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../libyang/{libyang_2.1.30.bb => libyang_2.1.55.bb}            | 2 +-
+ .../libwacom/{libwacom_2.5.0.bb => libwacom_2.6.0.bb}           | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-extended/libyang/{libyang_2.1.30.bb => libyang_2.1.55.bb} (96%)
+ rename meta-gnome/recipes-support/libwacom/{libwacom_2.5.0.bb => libwacom_2.6.0.bb} (93%)
 
-diff --git a/meta-oe/recipes-extended/libyang/libyang_2.1.30.bb b/meta-oe/recipes-extended/libyang/libyang_2.1.55.bb
-similarity index 96%
-rename from meta-oe/recipes-extended/libyang/libyang_2.1.30.bb
-rename to meta-oe/recipes-extended/libyang/libyang_2.1.55.bb
-index 5adfc1d80..7bc8d5f29 100644
---- a/meta-oe/recipes-extended/libyang/libyang_2.1.30.bb
-+++ b/meta-oe/recipes-extended/libyang/libyang_2.1.55.bb
-@@ -6,7 +6,7 @@ LICENSE = "BSD-3-Clause"
+diff --git a/meta-gnome/recipes-support/libwacom/libwacom_2.5.0.bb b/meta-gnome/recipes-support/libwacom/libwacom_2.6.0.bb
+similarity index 93%
+rename from meta-gnome/recipes-support/libwacom/libwacom_2.5.0.bb
+rename to meta-gnome/recipes-support/libwacom/libwacom_2.6.0.bb
+index a290d95b7..d96026241 100644
+--- a/meta-gnome/recipes-support/libwacom/libwacom_2.5.0.bb
++++ b/meta-gnome/recipes-support/libwacom/libwacom_2.6.0.bb
+@@ -8,7 +8,7 @@ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=40a21fffb367c82f39fd91a3b137c36e"
  
- LIC_FILES_CHKSUM = "file://LICENSE;md5=f3916d7d8d42a6508d0ea418cfff10ad"
+ SRC_URI = "git://github.com/linuxwacom/libwacom.git;branch=master;protocol=https"
+-SRCREV = "c6c1b26ad149a88b22ff790dae377fcc935b7e08"
++SRCREV = "cb36c462763a321454d5c08fe974a3d7dec4ed1a"
  
--SRCREV = "35131b9396a965e01f899127763fb4e0871b845a"
-+SRCREV = "9a4e5b2ce30b9696116d6e654ee55caab5aafed8"
- 
- SRC_URI = "git://github.com/CESNET/libyang.git;branch=master;protocol=https \
-            file://run-ptest \
+ DEPENDS = " \
+     libxml2-native \
 -- 
 2.34.1
 
