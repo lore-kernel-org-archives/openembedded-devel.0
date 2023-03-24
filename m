@@ -2,71 +2,71 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 40611C74A5B
-	for <webhook@archiver.kernel.org>; Fri, 24 Mar 2023 00:32:13 +0000 (UTC)
-Received: from mail1.bemta34.messagelabs.com (mail1.bemta34.messagelabs.com [195.245.231.3])
- by mx.groups.io with SMTP id smtpd.web11.89974.1679617925914806549
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7ED15C761AF
+	for <webhook@archiver.kernel.org>; Fri, 24 Mar 2023 00:36:33 +0000 (UTC)
+Received: from mail1.bemta34.messagelabs.com (mail1.bemta34.messagelabs.com [195.245.231.1])
+ by mx.groups.io with SMTP id smtpd.web10.90634.1679618187011123745
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 23 Mar 2023 17:32:06 -0700
+ Thu, 23 Mar 2023 17:36:27 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=lJ4o4x8v;
- spf=pass (domain: fujitsu.com, ip: 195.245.231.3, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=mdqk0yIs;
+ spf=pass (domain: fujitsu.com, ip: 195.245.231.1, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1679617924; i=@fujitsu.com;
-	bh=AYu5YEuCNhtcL1Mu5y8dlZGPPbWBti5cPLHGMyNomlU=;
+	s=170520fj; t=1679618185; i=@fujitsu.com;
+	bh=8aMhpBw2EBdoQuSjAPDrHnLPBcQJNsF0yJIP5xFO31E=;
 	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
 	 MIME-Version:Content-Type;
-	b=lJ4o4x8vaFIWzrCnqpjLAFwg+eGTM1Ta3IVJnmfkIwNPXIzr41CEV5E/25sSfKeJF
-	 fkjTq9DrIxi4sXwNVOxR6qhpXTOKZu8i/l0Pdvnn25gJ6ef30lccOzk7uTdLb68okr
-	 n3qkyEGwkTFyga1R/g4VfBTA9ghzede8FxmCh7tIeanVMqx0oH6tcVKNoXMltq4DsT
-	 sDA3HWZBe1NhVHocyFLzWn6mshBWXXUrGkx7przvoGAv7h4Kky/Vm+4JdEmDBFQtzS
-	 uwgNk+BG7ITv5A6gaaTZUxZ3Ut9SnN55+bCbFTPDXbqmP2t0bmC4zzv+aHsgPmzsh+
-	 fXFuYMYEFXSsw==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrIIsWRWlGSWpSXmKPExsViZ8OxWbf5vUy
-  KwY/PChYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8az65+ZCg5zVvw7fY69gXEbRxcjF4eQwENG
-  iSk3ZzFBOJeZJFaefcEK4exhlPj0eCdbFyMnB5uAlMSN+//BbBEBfYmls/cwg9jMAioSL373s
-  IPYwgLOEu+3bAGrYRFQlfh/vQPM5hVwkujp2gtWLyGgIDHl4XswmxOofu4jkBoOoGVOEkvOsU
-  CUC0qcnPmEBWK8hMTBFy+gWhUlZl9uZoGwKyQapx9igrDVJK6e28Q8gVFwFpL2WUjaFzAyrWI
-  0LU4tKkst0jXTSyrKTM8oyU3MzNFLrNJN1Est1S1PLS7RNdJLLC/WSy0u1iuuzE3OSdHLSy3Z
-  xAgM3ZRi9V87GGf2/dU7xCjJwaQkyisRKp0ixJeUn1KZkVicEV9UmpNafIhRhoNDSYL38xuZF
-  CHBotT01Iq0zBxgHMGkJTh4lER4D50FSvMWFyTmFmemQ6ROMepyXL1yZS+zEEtefl6qlDhv4l
-  ugIgGQoozSPLgRsJi+xCgrJczLyMDAIMRTkFqUm1mCKv+KUZyDUUmYV/gd0BSezLwSuE2vgI5
-  gAjrCuQbsiJJEhJRUA1OnyKYlTErtgtqPGaomL3566bjcbl69dfwHZdLVuGYomzY9Orzv3tsT
-  Tge1Y6vrOJ+VWSqGXb0Zeq14ycRUz/5lx2U50zde73hzTSVZgfnGqabP+5+cfNzsYNUg+yBmo
-  /6u0Oz+vidR361XceRsmW0udFn7dU12cKKynaZizhuTcLXw1+n7Luy4zRMRND/vm3TWDO+Ujj
-  eJEo97POb94n3iffHfOsMEjqhTi2zff7YLXfpfecnLn0xbdGI9VCdvud9/bdLavMPLF27x/Z+
-  jvvNjVk/0znc3mkt6qjQK1qjUBkZPf++md3J5fG6Z3f3Vx7KuBeZ1Vi2e1c6XZ/GL4UW40Ec7
-  saKl232ut2VJeiqxFGckGmoxFxUnAgC5OLfcZAMAAA==
+	b=mdqk0yIs8tu+Y9WAi0u1SZPqjoUksxcmSSWZBt+VXRDj6EOV5QUEibMpvCJT4pinM
+	 KAosviaol+m8UdMyYIrKcvVs3xpT0BRIRMG5UXESnCNaKGkq2BI+iV3ySDzUKW/Z1Z
+	 UwCwG6N/qijEKd1PzKaj3NoLGWmNP+qcn2d7zy36hnFpYKgxR+GnKW9pjgJLjug1IV
+	 z2WDOBkMTiCnzji84wR0IjauiPd13N8LiUIh+kVBqBL5rPKGtSdXHSro2PT1+GJy2p
+	 DEtz9CG9LErMJdVTjQ6jESK50NGyvmBRkEznS3mfLeopQfqOT3G6T4oWRmkr8/PaKJ
+	 5HpSDhUvPOkOQ==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrEIsWRWlGSWpSXmKPExsViZ8ORpNvxQSb
+  FYMYhaYuLh5cyOzB6nNu4gjGAMYo1My8pvyKBNWPm6nXsBS3cFS82v2NqYPzB2cXIxSEk8JBR
+  4s619+wQzhUmifev9zBDOHsYJWZ/ncraxcjJwSYgJXHj/n82EFtEQF9i6WyQIk4OZgEViRe/e
+  9hBbGEBB4mph9qYQGwWAVWJ/m8tYHFeASeJAwfeM4LYEgIKElMevgfr5RRwlli4cRoLiC0EVH
+  O/eR4bRL2gxMmZT1gg5ktIHHzxghmiV1Fi9uVmFgi7QqJx+iEmCFtN4uq5TcwTGAVnIWmfhaR
+  9ASPTKkbT4tSistQiXTO9pKLM9IyS3MTMHL3EKt1EvdRS3fLU4hJdI73E8mK91OJiveLK3OSc
+  FL281JJNjMDgTSlW/7WDcWbfX71DjJIcTEqivBKh0ilCfEn5KZUZicUZ8UWlOanFhxhlODiUJ
+  Hg/v5FJERIsSk1PrUjLzAFGEkxagoNHSYT30FmgNG9xQWJucWY6ROoUoy7H1StX9jILseTl56
+  VKifP6vQMqEgApyijNgxsBi+pLjLJSwryMDAwMQjwFqUW5mSWo8q8YxTkYlYQhpvBk5pXAbXo
+  FdAQT0BHONWBHlCQipKQamFYtl69L7Uhl+3jpaYfWoYbfZhNC7P7++Jdg+f3plgD5NzYZmmdn
+  xmvkXv2pH7pPWc9dg+WdGlPOn9sCP87+rri150oXxwvDvA0fTv78eejOuZIZe6x76n58s2o4U
+  T/l+TkvH70F3W/OhJco3L3ye9tedrFv95qkcnzaeys+f1j7oOVyTApTS8PkpuwOqVvr4sNnSP
+  HV2/iXe72Mu50RKfNE1cN42cTWp9m3dBZZXH41R8jdwOvC/qafj223HD0Sybn59NIJuQF700p
+  nVCZ4nfh5W9lw5a6VyZbmOepTyowkPH26a2Y+O5t3ZXXD5nhW5rAQ57j0jb/qbCPd2lIjLHq+
+  KJvE7U7cxN047znjGiWW4oxEQy3mouJEAEI1hNhlAwAA
 X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-12.tower-571.messagelabs.com!1679617923!849258!1
-X-Originating-IP: [62.60.8.179]
+X-Msg-Ref: server-13.tower-565.messagelabs.com!1679618184!141677!1
+X-Originating-IP: [62.60.8.98]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.104.1; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 28300 invoked from network); 24 Mar 2023 00:32:03 -0000
-Received: from unknown (HELO n03ukasimr04.n03.fujitsu.local) (62.60.8.179)
-  by server-12.tower-571.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 24 Mar 2023 00:32:03 -0000
-Received: from n03ukasimr04.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTP id 386EC150
-	for <openembedded-devel@lists.openembedded.org>; Fri, 24 Mar 2023 00:32:03 +0000 (GMT)
+Received: (qmail 27891 invoked from network); 24 Mar 2023 00:36:24 -0000
+Received: from unknown (HELO n03ukasimr03.n03.fujitsu.local) (62.60.8.98)
+  by server-13.tower-565.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 24 Mar 2023 00:36:24 -0000
+Received: from n03ukasimr03.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr03.n03.fujitsu.local (Postfix) with ESMTP id 2C4AF1B5
+	for <openembedded-devel@lists.openembedded.org>; Fri, 24 Mar 2023 00:36:24 +0000 (GMT)
 Received: from R01UKEXCASM121.r01.fujitsu.local (R01UKEXCASM121 [10.183.43.173])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTPS id 2188273
-	for <openembedded-devel@lists.openembedded.org>; Fri, 24 Mar 2023 00:32:03 +0000 (GMT)
+	by n03ukasimr03.n03.fujitsu.local (Postfix) with ESMTPS id 214671AF
+	for <openembedded-devel@lists.openembedded.org>; Fri, 24 Mar 2023 00:36:24 +0000 (GMT)
 Received: from localhost.localdomain (10.167.225.33) by
  R01UKEXCASM121.r01.fujitsu.local (10.183.43.173) with Microsoft SMTP Server
- (TLS) id 15.0.1497.42; Fri, 24 Mar 2023 00:32:01 +0000
+ (TLS) id 15.0.1497.42; Fri, 24 Mar 2023 00:36:22 +0000
 From: <wangmy@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-gnome] [PATCH] libwacom: upgrade 2.5.0 -> 2.6.0
-Date: Fri, 24 Mar 2023 08:31:25 +0800
-Message-ID: <1679617885-27327-5-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH] libass: upgrade 0.17.0 -> 0.17.1
+Date: Fri, 24 Mar 2023 08:36:04 +0800
+Message-ID: <1679618167-27390-2-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
-In-Reply-To: <1679617885-27327-1-git-send-email-wangmy@fujitsu.com>
-References: <1679617885-27327-1-git-send-email-wangmy@fujitsu.com>
+In-Reply-To: <1679618167-27390-1-git-send-email-wangmy@fujitsu.com>
+References: <1679618167-27390-1-git-send-email-wangmy@fujitsu.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-Originating-IP: [10.167.225.33]
@@ -76,42 +76,40 @@ X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 24 Mar 2023 00:32:13 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101692
+ <openembedded-devel@lists.openembedded.org>; Fri, 24 Mar 2023 00:36:33 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101694
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
 Changelog:
 ==========
-- New Devices
-  - ASUS ROG Flow X16
-  - XP-Pen Deco01 v2
-  - Huion Kamvas 13
-  - Wacom HID 52FA Pen
-  - Ugee M708 v1
+Fix buffer overread if soft-wrapping occurred and ASS_FEATURE_WHOLE_TEXT_LAYOUT was enabled via API or due to Encoding -1 (bug introduced in 0.16.0)
+x86: detect GNU Hurd and configure NASM appropriately
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../libwacom/{libwacom_2.5.0.bb => libwacom_2.6.0.bb}           | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-gnome/recipes-support/libwacom/{libwacom_2.5.0.bb => libwacom_2.6.0.bb} (93%)
+ .../libass/{libass_0.17.0.bb => libass_0.17.1.bb}             | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-multimedia/libass/{libass_0.17.0.bb => libass_0.17.1.bb} (92%)
 
-diff --git a/meta-gnome/recipes-support/libwacom/libwacom_2.5.0.bb b/meta-gnome/recipes-support/libwacom/libwacom_2.6.0.bb
-similarity index 93%
-rename from meta-gnome/recipes-support/libwacom/libwacom_2.5.0.bb
-rename to meta-gnome/recipes-support/libwacom/libwacom_2.6.0.bb
-index a290d95b7..d96026241 100644
---- a/meta-gnome/recipes-support/libwacom/libwacom_2.5.0.bb
-+++ b/meta-gnome/recipes-support/libwacom/libwacom_2.6.0.bb
-@@ -8,7 +8,7 @@ LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://COPYING;md5=40a21fffb367c82f39fd91a3b137c36e"
+diff --git a/meta-oe/recipes-multimedia/libass/libass_0.17.0.bb b/meta-oe/recipes-multimedia/libass/libass_0.17.1.bb
+similarity index 92%
+rename from meta-oe/recipes-multimedia/libass/libass_0.17.0.bb
+rename to meta-oe/recipes-multimedia/libass/libass_0.17.1.bb
+index c052239cb..800ad1b15 100644
+--- a/meta-oe/recipes-multimedia/libass/libass_0.17.0.bb
++++ b/meta-oe/recipes-multimedia/libass/libass_0.17.1.bb
+@@ -7,8 +7,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=a42532a0684420bdb15556c3cdd49a75"
  
- SRC_URI = "git://github.com/linuxwacom/libwacom.git;branch=master;protocol=https"
--SRCREV = "c6c1b26ad149a88b22ff790dae377fcc935b7e08"
-+SRCREV = "cb36c462763a321454d5c08fe974a3d7dec4ed1a"
+ DEPENDS = "fontconfig freetype fribidi harfbuzz"
  
- DEPENDS = " \
-     libxml2-native \
+-SRC_URI = "git://github.com/libass/libass.git;protocol=https;branch=master"
+-SRCREV = "bef4b43ef1882b77f789f611d9cd24271ccdd65b"
++SRC_URI = "git://github.com/libass/libass.git;protocol=https;branch=0.17.1-branch"
++SRCREV = "e8ad72accd3a84268275a9385beb701c9284e5b3"
+ S = "${WORKDIR}/git"
+ 
+ inherit autotools pkgconfig
 -- 
 2.34.1
 
