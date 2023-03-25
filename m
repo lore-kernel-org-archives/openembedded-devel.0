@@ -1,84 +1,69 @@
-Return-Path: <f_l_k@t-online.de>
+Return-Path: <festevam@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 95F54C6FD1C
-	for <webhook@archiver.kernel.org>; Sat, 25 Mar 2023 10:30:11 +0000 (UTC)
-Received: from mailout07.t-online.de (mailout07.t-online.de [194.25.134.83])
- by mx.groups.io with SMTP id smtpd.web10.18880.1679740204571890618
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1D0EAC6FD1F
+	for <webhook@archiver.kernel.org>; Sat, 25 Mar 2023 12:30:32 +0000 (UTC)
+Received: from mail-pg1-f182.google.com (mail-pg1-f182.google.com [209.85.215.182])
+ by mx.groups.io with SMTP id smtpd.web10.20550.1679747425672235551
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 25 Mar 2023 03:30:05 -0700
+ Sat, 25 Mar 2023 05:30:25 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=SPF record not found (domain: t-online.de, ip: 194.25.134.83, mailfrom: f_l_k@t-online.de)
-Received: from fwd80.dcpf.telekom.de (fwd80.aul.t-online.de [10.223.144.106])
-	by mailout07.t-online.de (Postfix) with SMTP id 4746122249
-	for <openembedded-devel@lists.openembedded.org>; Sat, 25 Mar 2023 11:30:02 +0100 (CET)
-Received: from [192.168.178.83] ([84.154.174.49]) by fwd80.t-online.de
-	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1pg19t-4OLZCq0; Sat, 25 Mar 2023 11:30:01 +0100
-Message-ID: <6397c1d1-acd7-6713-bb2c-60a94f42c427@t-online.de>
-Date: Sat, 25 Mar 2023 11:29:55 +0100
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=LRvMxz09;
+ spf=pass (domain: gmail.com, ip: 209.85.215.182, mailfrom: festevam@gmail.com)
+Received: by mail-pg1-f182.google.com with SMTP id d10so2568029pgt.12
+        for <openembedded-devel@lists.openembedded.org>; Sat, 25 Mar 2023 05:30:25 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112; t=1679747425;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=fwqUsvj/w6MUX309UTS0w2I+sEnPJLOvgD0cAPY0SaA=;
+        b=LRvMxz09hi5N1mqy+zJekh1lWZuhX2m+xIZO5VCl1anp95o36aVpc/j3t3L7cjBxeR
+         uGjS2hTMO5flpUd75KK185s4LsZSXtzyNYsxFX1QbNcxppuOt9DMZuqZK2U26k3aCQyV
+         v4eMxN/iiY6CGuzAEV+lpt0YVXhJQt7tvCEbHSQTjCWk3mvaIkSOpX5jf8uecuFvl+gS
+         6oXjUU7QqlFpBVfY/eOrIaq2X1pWF6WlK3Fnx2R2DgAGDyVoQuBYVH4Qo26CiAV+uL1O
+         UBH0ztCtDJV0KmgISvxDVCLwI8P7ZDo9RNDCkB83nsc/IM1cQtLjcz+Y5MUfL12r36/j
+         5wYQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112; t=1679747425;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=fwqUsvj/w6MUX309UTS0w2I+sEnPJLOvgD0cAPY0SaA=;
+        b=KUXzeUl6h/m20jfO4fy058v7Lt88rjF2HbnTetzzF+LUmw3MabYxv4sN4XvWvwDiax
+         tYrhnyCQZQpAimETsJdo4ovyxSv59+YGaOfZU+uA3yaE/Y27OGvhWuH0ZctJVH/2JVZa
+         T5GJmcfS+hCcaFOXOWbdtpUjpii5OUwhh1Vs7ZQLXj8sE3fJ3hN5x7hoCmIt7BgZpbkV
+         sw65W5Rdcob6ZX0R2B09GN/CPx3LF3YnEC7XsG3dzW3qyBKxJT9HqwY7+ox4iBfm4XW6
+         VVmD7+3cKjqZpf0NwArFJ0hRb+BJ1B09UQZVFDqiqbURRdlyQGRRRF2kZJSDot+4onWp
+         6Muw==
+X-Gm-Message-State: AO0yUKWjTuK0KDYJaA4AMoGNUBrE0tgZ9vxBvqxF6VEdIrpbCN+sYuyt
+	gk77FHh4Y1M8q/S51eU/idz9aB9U4SBX0SzdmFU=
+X-Google-Smtp-Source: AK7set/g0BBnDk2EF89ESrLKzwoSiYlE7QvlOyN4POpt6rhEWYkeoXu8BbdchOeIsS74o5at4t+wFwpzBY9oL2cmK7s=
+X-Received: by 2002:a05:6a00:4510:b0:626:1710:9b7d with SMTP id
+ cw16-20020a056a00451000b0062617109b7dmr5537334pfb.0.1679747424953; Sat, 25
+ Mar 2023 05:30:24 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.8.0
-Subject: Re: [oe] [meta-gnome][PATCH 09/32] gnome-chess: update 43.2 -> 44.0
-Content-Language: en-US
-To: openembedded-devel@lists.openembedded.org
-References: <20230325080256.923752-1-f_l_k@t-online.de>
- <174F9ACDC80FD1FC.7603@lists.openembedded.org>
-From: Markus Volk <f_l_k@t-online.de>
-In-Reply-To: <174F9ACDC80FD1FC.7603@lists.openembedded.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-TOI-EXPURGATEID: 150726::1679740201-AE6BCCC3-EDF77A83/0/0 CLEAN NORMAL
-X-TOI-MSGID: 7d280420-5e46-4a1d-bd90-b6323ff1f442
+References: <20230325080256.923752-1-f_l_k@t-online.de> <20230325080256.923752-6-f_l_k@t-online.de>
+In-Reply-To: <20230325080256.923752-6-f_l_k@t-online.de>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Sat, 25 Mar 2023 09:30:13 -0300
+Message-ID: <CAOMZO5AQ1KY3rFGLTBiciQzgvan-wXCf0NKNyc9Dmg5BQLpsCQ@mail.gmail.com>
+Subject: Re: [oe] [meta-gnome][PATCH 06/32] gedit: update 43.2 -> 44.2
+To: Markus Volk <f_l_k@t-online.de>
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 25 Mar 2023 10:30:11 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101747
+ <openembedded-devel@lists.openembedded.org>; Sat, 25 Mar 2023 12:30:32 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101748
 
-This one was sent accidentially and can be dropped.
-
-Am 25.03.23 um 09:02 schrieb Markus Volk:
-> Signed-off-by: Markus Volk <f_l_k@t-online.de>
+On Sat, Mar 25, 2023 at 5:03=E2=80=AFAM Markus Volk <f_l_k@t-online.de> wro=
+te:
+>
 > ---
->   .../{gnome-chess_43.2.bb => gnome-chess_44.0.bb}         | 9 ++++-----
->   1 file changed, 4 insertions(+), 5 deletions(-)
->   rename meta-gnome/recipes-gnome/gnome-chess/{gnome-chess_43.2.bb => gnome-chess_44.0.bb} (70%)
->
-> diff --git a/meta-gnome/recipes-gnome/gnome-chess/gnome-chess_43.2.bb b/meta-gnome/recipes-gnome/gnome-chess/gnome-chess_44.0.bb
-> similarity index 70%
-> rename from meta-gnome/recipes-gnome/gnome-chess/gnome-chess_43.2.bb
-> rename to meta-gnome/recipes-gnome/gnome-chess/gnome-chess_44.0.bb
-> index 343135bfa..d9727ec1c 100644
-> --- a/meta-gnome/recipes-gnome/gnome-chess/gnome-chess_43.2.bb
-> +++ b/meta-gnome/recipes-gnome/gnome-chess/gnome-chess_44.0.bb
-> @@ -22,13 +22,12 @@ DEPENDS = " \
->   
->   RRECOMMENDS:${PN}  = "gnuchess"
->   
-> -SRC_URI = "git://github.com/GNOME/gnome-chess.git;protocol=https;nobranch=1"
-> +SRC_URI[archive.sha256sum] = "734f092d95fc60409eeaca3427b5a48cb9b599da11995119d85baa99653e0292"
->   
-> -inherit meson pkgconfig gobject-introspection gtk-icon-cache vala features_check mime-xdg gsettings
-> +inherit gnomebase meson pkgconfig gobject-introspection gtk-icon-cache vala features_check mime-xdg gsettings
->   
-> +GNOMEBASEBUILDCLASS = "meson"
-> +GTKIC_VERSION = '4'
->   GIR_MESON_OPTION = ""
->   
-> -S = "${WORKDIR}/git"
-> -SRCREV = "de47d07ec6fc828b2668ca6ee59fe9bdfa9dc1d6"
-> -
->   FILES:${PN} += "${datadir}"
->
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#101722): https://lists.openembedded.org/g/openembedded-devel/message/101722
-> Mute This Topic: https://lists.openembedded.org/mt/97840032/3618223
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [f_l_k@t-online.de]
-> -=-=-=-=-=-=-=-=-=-=-=-
->
+
+You missed your Signed-off-by tag.
 
