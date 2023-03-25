@@ -2,73 +2,76 @@ Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7C4D3C77B75
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B8856C77B7A
 	for <webhook@archiver.kernel.org>; Sat, 25 Mar 2023 08:03:20 +0000 (UTC)
 Received: from mailout04.t-online.de (mailout04.t-online.de [194.25.134.18])
- by mx.groups.io with SMTP id smtpd.web11.17404.1679731394334810396
+ by mx.groups.io with SMTP id smtpd.web10.17457.1679731394230868032
  for <openembedded-devel@lists.openembedded.org>;
  Sat, 25 Mar 2023 01:03:14 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=none, err=SPF record not found (domain: t-online.de, ip: 194.25.134.18, mailfrom: f_l_k@t-online.de)
 Received: from fwd74.dcpf.telekom.de (fwd74.aul.t-online.de [10.223.144.100])
-	by mailout04.t-online.de (Postfix) with SMTP id 487FF1BA09
+	by mailout04.t-online.de (Postfix) with SMTP id 4289D1BA05
 	for <openembedded-devel@lists.openembedded.org>; Sat, 25 Mar 2023 09:03:12 +0100 (CET)
 Received: from flk-MS-7C91.fritz.box ([84.154.174.49]) by fwd74.t-online.de
 	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1pfyrn-0RoPhU0; Sat, 25 Mar 2023 09:03:11 +0100
+	esmtp id 1pfyrm-0RoPhR0; Sat, 25 Mar 2023 09:03:10 +0100
 From: Markus Volk <f_l_k@t-online.de>
 To: openembedded-devel@lists.openembedded.org
 Cc: Markus Volk <f_l_k@t-online.de>
-Subject: [meta-gnome][PATCH 12/32] gnome-disk-utility: update 43.0 -> 44.0
-Date: Sat, 25 Mar 2023 09:02:36 +0100
-Message-Id: <20230325080256.923752-12-f_l_k@t-online.de>
+Subject: [meta-gnome][PATCH 09/32] gnome-chess: update 43.2 -> 44.0
+Date: Sat, 25 Mar 2023 09:02:33 +0100
+Message-Id: <20230325080256.923752-9-f_l_k@t-online.de>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230325080256.923752-1-f_l_k@t-online.de>
 References: <20230325080256.923752-1-f_l_k@t-online.de>
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1679731391-85D6DC08-28A8C9FA/0/0 CLEAN NORMAL
-X-TOI-MSGID: 2bcf7ea3-e0aa-4ef6-b050-924bef582781
+X-TOI-EXPURGATEID: 150726::1679731390-8556AC08-A4791BAF/0/0 CLEAN NORMAL
+X-TOI-MSGID: b37ceb37-08e4-4306-a327-979d019a7b7b
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sat, 25 Mar 2023 08:03:20 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101724
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101722
 
 Signed-off-by: Markus Volk <f_l_k@t-online.de>
 ---
- .../{gnome-disk-utility_43.0.bb =3D> gnome-disk-utility_44.0.bb}  | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-gnome/recipes-gnome/gnome-disk-utility/{gnome-disk-utility_4=
-3.0.bb =3D> gnome-disk-utility_44.0.bb} (91%)
+ .../{gnome-chess_43.2.bb =3D> gnome-chess_44.0.bb}         | 9 ++++-----
+ 1 file changed, 4 insertions(+), 5 deletions(-)
+ rename meta-gnome/recipes-gnome/gnome-chess/{gnome-chess_43.2.bb =3D> gn=
+ome-chess_44.0.bb} (70%)
 
-diff --git a/meta-gnome/recipes-gnome/gnome-disk-utility/gnome-disk-utili=
-ty_43.0.bb b/meta-gnome/recipes-gnome/gnome-disk-utility/gnome-disk-utili=
-ty_44.0.bb
-similarity index 91%
-rename from meta-gnome/recipes-gnome/gnome-disk-utility/gnome-disk-utilit=
-y_43.0.bb
-rename to meta-gnome/recipes-gnome/gnome-disk-utility/gnome-disk-utility_=
-44.0.bb
-index 247bf141c..d8674fca2 100644
---- a/meta-gnome/recipes-gnome/gnome-disk-utility/gnome-disk-utility_43.0=
-.bb
-+++ b/meta-gnome/recipes-gnome/gnome-disk-utility/gnome-disk-utility_44.0=
-.bb
-@@ -30,7 +30,7 @@ PACKAGECONFIG[systemd] =3D "-Dlogind=3Dlibsystemd,-Dlog=
-ind=3Dnone,systemd"
- PACKAGECONFIG[x11] =3D ",,libcanberra"
+diff --git a/meta-gnome/recipes-gnome/gnome-chess/gnome-chess_43.2.bb b/m=
+eta-gnome/recipes-gnome/gnome-chess/gnome-chess_44.0.bb
+similarity index 70%
+rename from meta-gnome/recipes-gnome/gnome-chess/gnome-chess_43.2.bb
+rename to meta-gnome/recipes-gnome/gnome-chess/gnome-chess_44.0.bb
+index 343135bfa..d9727ec1c 100644
+--- a/meta-gnome/recipes-gnome/gnome-chess/gnome-chess_43.2.bb
++++ b/meta-gnome/recipes-gnome/gnome-chess/gnome-chess_44.0.bb
+@@ -22,13 +22,12 @@ DEPENDS =3D " \
 =20
- SRC_URI:append =3D " ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', =
-'file://0001-gnome-disk-utility-remove-libcanberra-dependency.patch', '',=
- d)}"
--SRC_URI[archive.sha256sum] =3D "7afca9805a6b92db6933dd7efcec4af8386c01bb=
-c1f871e2dae4def7e192a2c5"
-+SRC_URI[archive.sha256sum] =3D "02031097896cdb37d8717a5823f93e3723d4dfce=
-7fdc4002c9dfcb16b7e7a3ef"
+ RRECOMMENDS:${PN}  =3D "gnuchess"
 =20
- EXTRA_OEMESON =3D "-Dman=3Dfalse"
+-SRC_URI =3D "git://github.com/GNOME/gnome-chess.git;protocol=3Dhttps;nob=
+ranch=3D1"
++SRC_URI[archive.sha256sum] =3D "734f092d95fc60409eeaca3427b5a48cb9b599da=
+11995119d85baa99653e0292"
 =20
+-inherit meson pkgconfig gobject-introspection gtk-icon-cache vala featur=
+es_check mime-xdg gsettings
++inherit gnomebase meson pkgconfig gobject-introspection gtk-icon-cache v=
+ala features_check mime-xdg gsettings
+=20
++GNOMEBASEBUILDCLASS =3D "meson"
++GTKIC_VERSION =3D '4'
+ GIR_MESON_OPTION =3D ""
+=20
+-S =3D "${WORKDIR}/git"
+-SRCREV =3D "de47d07ec6fc828b2668ca6ee59fe9bdfa9dc1d6"
+-
+ FILES:${PN} +=3D "${datadir}"
 --=20
 2.34.1
 
