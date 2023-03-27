@@ -1,181 +1,153 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <vkumbhar@mvista.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 011AAC7619A
-	for <webhook@archiver.kernel.org>; Mon, 27 Mar 2023 03:20:07 +0000 (UTC)
-Received: from mail-oi1-f175.google.com (mail-oi1-f175.google.com [209.85.167.175])
- by mx.groups.io with SMTP id smtpd.web11.26700.1679887204617160101
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 26606C7619A
+	for <webhook@archiver.kernel.org>; Mon, 27 Mar 2023 03:54:37 +0000 (UTC)
+Received: from mail-pj1-f48.google.com (mail-pj1-f48.google.com [209.85.216.48])
+ by mx.groups.io with SMTP id smtpd.web11.27110.1679889273287373540
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 26 Mar 2023 20:20:04 -0700
+ Sun, 26 Mar 2023 20:54:33 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=a+4lvhBr;
- spf=pass (domain: gmail.com, ip: 209.85.167.175, mailfrom: raj.khem@gmail.com)
-Received: by mail-oi1-f175.google.com with SMTP id q27so4586147oiw.0
-        for <openembedded-devel@lists.openembedded.org>; Sun, 26 Mar 2023 20:20:04 -0700 (PDT)
+ dkim=pass header.i=@mvista.com header.s=google header.b=McnRiS+G;
+ spf=pass (domain: mvista.com, ip: 209.85.216.48, mailfrom: vkumbhar@mvista.com)
+Received: by mail-pj1-f48.google.com with SMTP id p3-20020a17090a74c300b0023f69bc7a68so7258548pjl.4
+        for <openembedded-devel@lists.openembedded.org>; Sun, 26 Mar 2023 20:54:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112; t=1679887204;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=CJEh1fnJh3P7WSR5jv8JfvL+TnjRFKnmFY0LOlYMyxU=;
-        b=a+4lvhBr/RA3v2Ty10NSqQvY/3uJn3TKYOhaCN97lOcgxqkAdO8eAw5tvRO8FVQmeQ
-         tOBIopuD5isYpVPuR+aQ743B3hrqT5ntmQoctpuoSsJ9zH66licuzr6K99gH29585ZJU
-         aERKdrTnTUCqB0oaOzPPv+xwlS808MiT5XpVU+JWmz0GMoCcL1mOZlSUqd0A+j1Q5xYj
-         dyH7pj85UL7KgeAZOzxATe5PIE35oE87O9HLI7vymlBWDHukbuSCWkg072VZZLN9alBv
-         cdEFnjPC/lhk1eUjk6oCkCV2QC2aoRKg17BBBR6aY5engrbzhP6n4PQnJ2foT0PLvXD8
-         /rjw==
+        d=mvista.com; s=google; t=1679889272;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=LxcYL3UQWg6Iugl+iSyDR1F6ip3MVFVEVdAKS4yctDs=;
+        b=McnRiS+Gyol29fcyMB95tPYKmoGTmaCtEJQJD8H9dBQq3ZU0vEOSUZ6bcqDsGCg8q3
+         u5euWiPkiKmx22Tpv4M0D1LDx4FmUPCfHB3+GMGNzzQjqFIqaeeN4XvQiLAHv8akfqXA
+         UvxgJ0NnRnHEM9pch0HlklPQai7depaso6iaA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112; t=1679887204;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=CJEh1fnJh3P7WSR5jv8JfvL+TnjRFKnmFY0LOlYMyxU=;
-        b=ZHJrPBDH+on5B9gMpQ6Fof9J57l+hx/GS/ZhVUmb+G0VTCXlggvx2YIUUbZPyOafIw
-         XAmAwoSemu7WhdrqmhIqrioayOgeUAMOu4sUm6v8uM+qjdPpm0ZN1Dqo9z17Ry0wr47o
-         3zNssTaqX07+QXZnmboe4vjb5erNBLXc8rhpyzvqpRDhXXxHd/kGq+9iDI/JcF2v0QwO
-         7Y2R1DlHdXz29zEIQgsECvfJkFVKCINLt1lOMzizlobQKyMj+eciMTqCiaRtQMgB+8VY
-         hpiNAcJI+b5k0ws4pNTcuhnruaVGR3JIEufrF3UY0VShS+62rivzoInpUmO5BSoWqDZT
-         7VpQ==
-X-Gm-Message-State: AAQBX9eEBNv4kR39lroImB2Vwh5sJcubqvmw2G2hI6HD7BJCvvTtUqbB
-	sUct+toDKNW1DWDs24Al8/nG56NuuA6YYT3LSU7M15Fu1VU=
-X-Google-Smtp-Source: AKy350bpGV5ByCvKt16ZBqSiMYeqAik3yWDbWktmJefuUKPFLNoiNC3dUiO5uO8oWHLJWz/KfJ6h2WejOzTky0gPAqQ=
-X-Received: by 2002:aca:240d:0:b0:388:c626:a331 with SMTP id
- n13-20020aca240d000000b00388c626a331mr1889940oic.4.1679887203814; Sun, 26 Mar
- 2023 20:20:03 -0700 (PDT)
+        d=1e100.net; s=20210112; t=1679889272;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=LxcYL3UQWg6Iugl+iSyDR1F6ip3MVFVEVdAKS4yctDs=;
+        b=ccyLZGYFiqr/ctGgOWeH2c38h5bVivnzPc/WErTaNWgv6XuP4/D59itU2t0L1I3PqO
+         y9nLkd4uNL+wy5qn4tUNqtiIpi0xs5bXHXgS5Tsr7KgA7WFutmvpv4CuZIf5IriQsSOe
+         up5am6IkEkTkD90bEFnzfJJ5/GYUmFbND2F+LpiDkU4LezQlWkjMit0V2jU+dYXEX3at
+         apb8bXknV98i7LCbHgkXWM6ahsiYvQbNWmotlyMr58rR5eKYEzC1a28NaYwFW+yQ3mq5
+         GNKzuaH+PgnaFZAhPi4ImXQR2Fz9NjywbbrRT5r7fB+mityalaC/7q/kBNVglkvb8AG4
+         4L2w==
+X-Gm-Message-State: AAQBX9cfQWXKqsK8lZkP5a04rfFp8S2RrTZGUgc0QwLQ3ds8G3jgMzg8
+	z9xTFyPj2RhMf8OL2x7hQqI6mLJ4exWfMKLDSrs=
+X-Google-Smtp-Source: AKy350aD6htO6QUCji4FBz8+NcJxSGefmKTrdYQCQGYRSwEDgWrmHdpgMF4fiEUsV96Eurfjtkj/ZA==
+X-Received: by 2002:a17:90b:1e4f:b0:240:1014:a1b3 with SMTP id pi15-20020a17090b1e4f00b002401014a1b3mr10495635pjb.35.1679889272202;
+        Sun, 26 Mar 2023 20:54:32 -0700 (PDT)
+Received: from vkumbhar-Latitude-3400.mvista.com ([203.212.220.124])
+        by smtp.gmail.com with ESMTPSA id ck18-20020a17090afe1200b00233acae2ce6sm3321563pjb.23.2023.03.26.20.54.30
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sun, 26 Mar 2023 20:54:31 -0700 (PDT)
+From: Vivek Kumbhar <vkumbhar@mvista.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Vivek Kumbhar <vkumbhar@mvista.com>
+Subject: [meta-oe][dunfell][PATCH] dnsmasq: fix CVE-2023-28450 default maximum EDNS.0 UDP packet size was set to 4096 but should be 1232
+Date: Mon, 27 Mar 2023 09:24:19 +0530
+Message-Id: <20230327035419.9695-1-vkumbhar@mvista.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-References: <1679886322-20954-1-git-send-email-wangmy@fujitsu.com> <1679886322-20954-5-git-send-email-wangmy@fujitsu.com>
-In-Reply-To: <1679886322-20954-5-git-send-email-wangmy@fujitsu.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Sun, 26 Mar 2023 20:19:37 -0700
-Message-ID: <CAMKF1sqt6EWwHp5=tcLraRWqBzSryxA=4Dkg_azN3=S2Tbs-LA@mail.gmail.com>
-Subject: Re: [oe] [meta-gnome] [PATCH] gnome-online-accounts: upgrade 3.46.0
- -> 3.48.0
-To: wangmy <wangmy@fujitsu.com>
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 27 Mar 2023 03:20:06 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101767
+ <openembedded-devel@lists.openembedded.org>; Mon, 27 Mar 2023 03:54:37 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101768
 
-please rebase on master-next and see if its still needed then resend.
+Set the default maximum DNS UDP packet size to 1232.
 
-On Sun, Mar 26, 2023 at 8:05=E2=80=AFPM wangmy <wangmy@fujitsu.com> wrote:
->
-> From: Wang Mingyu <wangmy@fujitsu.com>
->
-> 0001-build-Use-the-appropriate-dependency-object.patch
-> removed since it's included in 3.48.0.
->
-> Changelog:
-> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> * Build fixes [#226]
-> * Expired Kerberos tickets not re-acquired on resume from suspend [#160]
-> * Update CalDAV/CardDAV OwnCloud endpoints [#67]
-> * Attempt to cope with multiple credential caches per identity [#79]
-> * Error in solving Nextcloud account address [#243]
-> * Translation updates
->
-> Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
-> ---
->  ...se-the-appropriate-dependency-object.patch | 35 -------------------
->  ...6.0.bb =3D> gnome-online-accounts_3.48.0.bb} |  3 +-
->  2 files changed, 1 insertion(+), 37 deletions(-)
->  delete mode 100644 meta-gnome/recipes-gnome/gnome-online-accounts/gnome-=
-online-accounts/0001-build-Use-the-appropriate-dependency-object.patch
->  rename meta-gnome/recipes-gnome/gnome-online-accounts/{gnome-online-acco=
-unts_3.46.0.bb =3D> gnome-online-accounts_3.48.0.bb} (92%)
->
-> diff --git a/meta-gnome/recipes-gnome/gnome-online-accounts/gnome-online-=
-accounts/0001-build-Use-the-appropriate-dependency-object.patch b/meta-gnom=
-e/recipes-gnome/gnome-online-accounts/gnome-online-accounts/0001-build-Use-=
-the-appropriate-dependency-object.patch
-> deleted file mode 100644
-> index 838ca1a7d..000000000
-> --- a/meta-gnome/recipes-gnome/gnome-online-accounts/gnome-online-account=
-s/0001-build-Use-the-appropriate-dependency-object.patch
-> +++ /dev/null
-> @@ -1,35 +0,0 @@
-> -From 06240574626eb21af37cf7dde5bf81e892dff467 Mon Sep 17 00:00:00 2001
-> -From: Emmanuele Bassi <ebassi@gnome.org>
-> -Date: Wed, 5 Oct 2022 22:15:37 +0100
-> -Subject: [PATCH] build: Use the appropriate dependency object
-> -
-> -Just using `link_with` will not ensure that the GOA web extension shared
-> -module is properly built against libgoa-backend and libgoa; the
-> -generated headers must be transitively available by the time we build
-> -the shared module.
-> -
-> -Fixes: #226
-> -Upstream-Status: Backport [https://gitlab.gnome.org/GNOME/gnome-online-a=
-ccounts/-/commit/fe86bfb0271735c8130367c46536b08dad5c20d8]
-> -Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> ----
-> - src/goabackend/meson.build | 3 +--
-> - 1 file changed, 1 insertion(+), 2 deletions(-)
-> -
-> -diff --git a/src/goabackend/meson.build b/src/goabackend/meson.build
-> -index f5382b3..865b2d2 100644
-> ---- a/src/goabackend/meson.build
-> -+++ b/src/goabackend/meson.build
-> -@@ -157,9 +157,8 @@ libgoa_web_extension =3D shared_module(
-> -   'goawebextension',
-> -   libgoawebextension_sources,
-> -   include_directories: common_incs + [goa_inc],
-> --  dependencies: deps,
-> -+  dependencies: [deps, libgoa_backend_dep],
-> -   c_args: cflags,
-> --  link_with: libgoa_backend,
-> -   install: true,
-> -   install_dir: join_paths(goa_pkglibdir, 'web-extensions')
-> - )
-> ---
-> -2.39.0
-> -
-> diff --git a/meta-gnome/recipes-gnome/gnome-online-accounts/gnome-online-=
-accounts_3.46.0.bb b/meta-gnome/recipes-gnome/gnome-online-accounts/gnome-o=
-nline-accounts_3.48.0.bb
-> similarity index 92%
-> rename from meta-gnome/recipes-gnome/gnome-online-accounts/gnome-online-a=
-ccounts_3.46.0.bb
-> rename to meta-gnome/recipes-gnome/gnome-online-accounts/gnome-online-acc=
-ounts_3.48.0.bb
-> index ce02a507d..e059500ab 100644
-> --- a/meta-gnome/recipes-gnome/gnome-online-accounts/gnome-online-account=
-s_3.46.0.bb
-> +++ b/meta-gnome/recipes-gnome/gnome-online-accounts/gnome-online-account=
-s_3.48.0.bb
-> @@ -8,8 +8,7 @@ inherit gnomebase gsettings gobject-introspection gtk-ico=
-n-cache vala features_c
->
->  DEPENDS =3D "gtk+3 gtk+3-native gdk-pixbuf dbus json-glib libxml2 webkit=
-gtk glib-2.0 rest libsecret"
->
-> -SRC_URI +=3D "file://0001-build-Use-the-appropriate-dependency-object.pa=
-tch"
-> -SRC_URI[archive.sha256sum] =3D "5e7859ce4858a6b99d3995ed70527d66e297bb90=
-bbf75ec8780fe9da22c1fcaa"
-> +SRC_URI[archive.sha256sum] =3D "418bb9fcffdbd72a98205ad365137617fc1e3551=
-a54de74f6a98d45d266175bf"
->
->  PACKAGECONFIG_SOUP ?=3D "soup3"
->  PACKAGECONFIG ?=3D "kerberos owncloud lastfm google windows_live ${PACKA=
-GECONFIG_SOUP}"
-> --
-> 2.34.1
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#101763): https://lists.openembedded.org/g/openembedde=
-d-devel/message/101763
-> Mute This Topic: https://lists.openembedded.org/mt/97874735/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
-aj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
+http://www.dnsflagday.net/2020/ refers.
+
+Signed-off-by: Vivek Kumbhar <vkumbhar@mvista.com>
+---
+ .../dnsmasq/dnsmasq/CVE-2023-28450.patch      | 63 +++++++++++++++++++
+ .../recipes-support/dnsmasq/dnsmasq_2.81.bb   |  1 +
+ 2 files changed, 64 insertions(+)
+ create mode 100644 meta-networking/recipes-support/dnsmasq/dnsmasq/CVE-2023-28450.patch
+
+diff --git a/meta-networking/recipes-support/dnsmasq/dnsmasq/CVE-2023-28450.patch b/meta-networking/recipes-support/dnsmasq/dnsmasq/CVE-2023-28450.patch
+new file mode 100644
+index 0000000000..dd3bd27408
+--- /dev/null
++++ b/meta-networking/recipes-support/dnsmasq/dnsmasq/CVE-2023-28450.patch
+@@ -0,0 +1,63 @@
++From eb92fb32b746f2104b0f370b5b295bb8dd4bd5e5 Mon Sep 17 00:00:00 2001
++From: Simon Kelley <simon@thekelleys.org.uk>
++Date: Tue, 7 Mar 2023 22:07:46 +0000
++Subject: [PATCH] Set the default maximum DNS UDP packet size to 1232.
++
++Upstream-Status: Backport [https://thekelleys.org.uk/gitweb/?p=dnsmasq.git;a=commit;h=eb92fb32b746f2104b0f370b5b295bb8dd4bd5e5]
++CVE: CVE-2023-28450
++Signed-off-by: Vivek Kumbhar <vkumbhar@mvista.com>
++---
++ CHANGELOG     | 8 ++++++++
++ man/dnsmasq.8 | 3 ++-
++ src/config.h  | 2 +-
++ 3 files changed, 11 insertions(+), 2 deletions(-)
++
++diff --git a/CHANGELOG b/CHANGELOG
++index d1d7e41..7a560d3 100644
++--- a/CHANGELOG
+++++ b/CHANGELOG
++@@ -91,6 +91,14 @@ version 2.81
++ 	Fix write-after-free error in DHCPv6 server code.
++ 	CVE-2022-0934 refers.
++ 	
+++	Set the default maximum DNS UDP packet sice to 1232. This
+++	has been the recommended value since 2020 because it's the
+++	largest value that avoid fragmentation, and fragmentation
+++	is just not reliable on the modern internet, especially
+++	for IPv6. It's still possible to override this with
+++	--edns-packet-max for special circumstances.
+++
+++	
++ version 2.80
++ 	Add support for RFC 4039 DHCP rapid commit. Thanks to Ashram Method
++ 	for the initial patch and motivation.
++diff --git a/man/dnsmasq.8 b/man/dnsmasq.8
++index f2803f9..3cca4bc 100644
++--- a/man/dnsmasq.8
+++++ b/man/dnsmasq.8
++@@ -168,7 +168,8 @@ to zero completely disables DNS function, leaving only DHCP and/or TFTP.
++ .TP
++ .B \-P, --edns-packet-max=<size>
++ Specify the largest EDNS.0 UDP packet which is supported by the DNS
++-forwarder. Defaults to 4096, which is the RFC5625-recommended size.
+++forwarder. Defaults to 1232, which is the recommended size following the
+++DNS flag day in 2020. Only increase if you know what you are doing.
++ .TP
++ .B \-Q, --query-port=<query_port>
++ Send outbound DNS queries from, and listen for their replies on, the
++diff --git a/src/config.h b/src/config.h
++index 54f6f48..29ac3e7 100644
++--- a/src/config.h
+++++ b/src/config.h
++@@ -19,7 +19,7 @@
++ #define CHILD_LIFETIME 150 /* secs 'till terminated (RFC1035 suggests > 120s) */
++ #define TCP_MAX_QUERIES 100 /* Maximum number of queries per incoming TCP connection */
++ #define TCP_BACKLOG 32  /* kernel backlog limit for TCP connections */
++-#define EDNS_PKTSZ 4096 /* default max EDNS.0 UDP packet from RFC5625 */
+++#define EDNS_PKTSZ 1232 /* default max EDNS.0 UDP packet from from  /dnsflagday.net/2020 */
++ #define SAFE_PKTSZ 1280 /* "go anywhere" UDP packet size */
++ #define KEYBLOCK_LEN 40 /* choose to minimise fragmentation when storing DNSSEC keys */
++ #define DNSSEC_WORK 50 /* Max number of queries to validate one question */
++-- 
++2.18.2
++
+diff --git a/meta-networking/recipes-support/dnsmasq/dnsmasq_2.81.bb b/meta-networking/recipes-support/dnsmasq/dnsmasq_2.81.bb
+index 8db57edb79..f2b8feac56 100644
+--- a/meta-networking/recipes-support/dnsmasq/dnsmasq_2.81.bb
++++ b/meta-networking/recipes-support/dnsmasq/dnsmasq_2.81.bb
+@@ -12,4 +12,5 @@ SRC_URI += "\
+     file://CVE-2020-25686-2.patch \
+     file://CVE-2021-3448.patch \
+     file://CVE-2022-0934.patch \
++    file://CVE-2023-28450.patch \
+ "
+-- 
+2.25.1
+
 
