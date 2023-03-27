@@ -1,146 +1,95 @@
-Return-Path: <philip@balister.org>
+Return-Path: <zboszor@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2B7C7C7619A
-	for <webhook@archiver.kernel.org>; Mon, 27 Mar 2023 10:31:09 +0000 (UTC)
-Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.web11.29303.1679902190371133946
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9BC47C76195
+	for <webhook@archiver.kernel.org>; Mon, 27 Mar 2023 12:50:09 +0000 (UTC)
+Received: from mail-ed1-f48.google.com (mail-ed1-f48.google.com [209.85.208.48])
+ by mx.groups.io with SMTP id smtpd.web10.33855.1679921408351330886
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 27 Mar 2023 00:29:50 -0700
+ Mon, 27 Mar 2023 05:50:08 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=pps06212021 header.b=LUbznhw2;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=245006d2cd=manojsingh.saun@windriver.com)
-Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 32R7QpVq020053
-	for <openembedded-devel@lists.openembedded.org>; Mon, 27 Mar 2023 00:29:50 -0700
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com; h=from : to : cc :
- subject : date : message-id : mime-version : content-transfer-encoding :
- content-type; s=PPS06212021;
- bh=yieFw9pSgwnZMT9L5H4lz9qIAOozWlOlqC4wlgF8T7Q=;
- b=LUbznhw2IRwB6qGrDl+9/80wpK3bv3y4VDqJS9CUR1RY4T/sLijQurut0cSFg0SS9/6j
- oZJ5necDeQufwEbAJHDyOmfZQxBGEMi0scZ/F/+cOa0RNxRaJP+JpZ1W7hYNi6PW5kuG
- 0B1d5RxUxYeUi4dGaFZGdb4dTSrgJnmUKQwrq9Y5G9O1vOLswBHRgIus/GRpPeWom8I+
- OSjmcRs92Y7Wejx1h5gphWq0kqwSANVhL0SEakHNbrcl0gZoH+k81+IO6h9BamyGZ0s4
- Byhnkr7LQS7sLy6cYYjyqqYkQznOnwVL5lr5VzuMPOfYuhUb/FzByHi8pB2Tk05MXcTW gw== 
-Received: from ala-exchng01.corp.ad.wrs.com (unknown-82-252.windriver.com [147.11.82.252])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3pj0fn1bh3-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Mon, 27 Mar 2023 00:29:49 -0700
-Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.17; Mon, 27 Mar 2023 00:29:47 -0700
-Received: from blr-linux-engg1.wrs.com (147.11.136.210) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
- 15.1.2507.17 via Frontend Transport; Mon, 27 Mar 2023 00:29:46 -0700
-From: "Manoj Saun" <manojsingh.saun@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-CC: <narpat.mali@windriver.com>, Manoj Saun <manojsingh.saun@windriver.com>
-Subject: [oe][meta-oe][PATCH V2 1/1] postgresql: fix ptest failure of sysviews test
-Date: Mon, 27 Mar 2023 07:29:39 +0000
-Message-ID: <20230327072939.2419804-1-manojsingh.saun@windriver.com>
-X-Mailer: git-send-email 2.32.0
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=PxCmJsLf;
+ spf=pass (domain: gmail.com, ip: 209.85.208.48, mailfrom: zboszor@gmail.com)
+Received: by mail-ed1-f48.google.com with SMTP id ek18so35704928edb.6
+        for <openembedded-devel@lists.openembedded.org>; Mon, 27 Mar 2023 05:50:08 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112; t=1679921406;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=P69xbDcroW32KgBKNtehHCJ+T5rkDxnt3EPxtEEVfUQ=;
+        b=PxCmJsLfwbFRH+Ta/ZuWshNVJDL6M1LT4SyTH2yPbFcF3cUis85bD8qN4Tc1lhNeDw
+         eu67EEuTA96WMCq+ljG5BD4fTcIUtwCSu0KeetTuH8+T80OFrmhs7NLl9789YBkNrXYi
+         k0dtnMm1RkqDO8Ds8tnXHDBw2u6iu1johscM1Jp+4TxAXvoCWi3ipPLItxvo+AXZuH9T
+         fABy+PqDs7F++S+jqBrK4nL00wKufPReogPzIAb426jdd84kdBFJ4RhDnZcb5uMELW19
+         FFid4YokaGT70JwJzLn2MuKir6xpAVe773Fg1rwvE1uA+pKS9fi3ytV2HAZSoNrNEMGe
+         hWnA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112; t=1679921406;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=P69xbDcroW32KgBKNtehHCJ+T5rkDxnt3EPxtEEVfUQ=;
+        b=VJ0/DZN1VpNh9nbxPruIwbe3ERErjUqocHenw2GUk+P3nSdNunIhtlyTtTBCxvFuOB
+         4ulXeqvVNDjiJj/KpkYOvfNDRId4GcP5XRlft7gdGRgbbI123w4lbGysgJrsRIc4nvLY
+         dk5SxY52gfzxEMW4clY/1+XXK3Ba2BUZ0f9erzA2iuWOH6BVgslVjojLxmmjBgpd4bCl
+         zqa/YlIDzQTbAtw8K77VpMBTfwDwYZIpQ09V2qbFu8y4FCKYwCvtUzfUCD1oQRkk68R+
+         LjM0uhjiIyrGaEHb9BpCPNhCT6bFwso2TOXZWrXY0TO539dyUrj0VQad+zbqMoG8hlBu
+         alDg==
+X-Gm-Message-State: AAQBX9dO4hsytnXpwQY5Ybw82lk2q1QgEDhv4vKrUFgxS8xjc8dfiRLK
+	iLzy6vggDONchwOGMo+G6e7bF5mP0+c=
+X-Google-Smtp-Source: AKy350bkxMwb0er9T4AUo6NnbNAfDbK1PEpbJUPjF7vbWXwuvzGtlauWf27Rc1oBI+W1Y/+zLDLjlA==
+X-Received: by 2002:a17:907:2c46:b0:879:ab3:93d1 with SMTP id hf6-20020a1709072c4600b008790ab393d1mr13305515ejc.4.1679921406540;
+        Mon, 27 Mar 2023 05:50:06 -0700 (PDT)
+Received: from localhost.lan (dsl51B7D2F9.fixip.t-online.hu. [81.183.210.249])
+        by smtp.gmail.com with ESMTPSA id z21-20020a50cd15000000b004acbda55f6bsm14657722edi.27.2023.03.27.05.50.06
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 27 Mar 2023 05:50:06 -0700 (PDT)
+From: =?UTF-8?q?Zolt=C3=A1n=20B=C3=B6sz=C3=B6rm=C3=A9nyi?= <zboszor@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: =?UTF-8?q?Zolt=C3=A1n=20B=C3=B6sz=C3=B6rm=C3=A9nyi?= <zboszor@gmail.com>
+Subject: [meta-python][PATCH 2/4] python3-pure-eval: New recipe
+Date: Mon, 27 Mar 2023 14:50:00 +0200
+Message-Id: <20230327125002.90472-2-zboszor@gmail.com>
+X-Mailer: git-send-email 2.39.2
+In-Reply-To: <20230327125002.90472-1-zboszor@gmail.com>
+References: <20230327125002.90472-1-zboszor@gmail.com>
 MIME-Version: 1.0
-X-Proofpoint-ORIG-GUID: BEwV33Qr8E8MiAPdG_ASxQqF47VaRH_c
-X-Proofpoint-GUID: BEwV33Qr8E8MiAPdG_ASxQqF47VaRH_c
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.254,Aquarius:18.0.942,Hydra:6.0.573,FMLib:17.11.170.22
- definitions=2023-03-24_11,2023-03-24_01,2023-02-09_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 suspectscore=0 clxscore=1015
- mlxscore=0 lowpriorityscore=0 priorityscore=1501 spamscore=0
- malwarescore=0 bulkscore=0 mlxlogscore=856 adultscore=0 phishscore=0
- impostorscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2303200000 definitions=main-2303270060
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 27 Mar 2023 10:31:09 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101778
+ <openembedded-devel@lists.openembedded.org>; Mon, 27 Mar 2023 12:50:09 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101779
 
-In postgresql sysview ptest are failing due to hidden build info in pg_config table.
-The information is hidden due to existing patch 0001-config_info.c-not-expose-build-info.patch
-So for passing the test we need to reduce the row count in the sysviews test.
-Also for test results to be shown as pass we need to reduce the row count for
-the expected count in the sysviews.out file.
+Dependency of python3-stack-data.
 
-Signed-off-by: Manoj Saun <manojsingh.saun@windriver.com>
+Signed-off-by: Zoltán Böszörményi <zboszor@gmail.com>
 ---
- ...gresql-fix-ptest-failure-of-sysviews.patch | 45 +++++++++++++++++++
- .../recipes-dbs/postgresql/postgresql_15.2.bb |  1 +
- 2 files changed, 46 insertions(+)
- create mode 100644 meta-oe/recipes-dbs/postgresql/files/0001-postgresql-fix-ptest-failure-of-sysviews.patch
+ .../python/python3-pure-eval_0.2.2.bb                 | 11 +++++++++++
+ 1 file changed, 11 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-pure-eval_0.2.2.bb
 
-diff --git a/meta-oe/recipes-dbs/postgresql/files/0001-postgresql-fix-ptest-failure-of-sysviews.patch b/meta-oe/recipes-dbs/postgresql/files/0001-postgresql-fix-ptest-failure-of-sysviews.patch
+diff --git a/meta-python/recipes-devtools/python/python3-pure-eval_0.2.2.bb b/meta-python/recipes-devtools/python/python3-pure-eval_0.2.2.bb
 new file mode 100644
-index 000000000..8abea7ff4
+index 000000000..d2aaa3db4
 --- /dev/null
-+++ b/meta-oe/recipes-dbs/postgresql/files/0001-postgresql-fix-ptest-failure-of-sysviews.patch
-@@ -0,0 +1,45 @@
-+From 9f81377dddfe32d950844d7053020a36b40fce08 Mon Sep 17 00:00:00 2001
-+From: Manoj Saun <manojsingh.saun@windriver.com>
-+Date: Wed, 22 Mar 2023 08:07:26 +0000
-+Subject: [PATCH] postgresql: fix ptest failure of sysviews
++++ b/meta-python/recipes-devtools/python/python3-pure-eval_0.2.2.bb
+@@ -0,0 +1,11 @@
++SUMMARY = "Safely evaluate AST nodes without side effects"
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=a3d6c15f7859ae235a78f2758e5a48cf"
 +
-+The patch "0001-config_info.c-not-expose-build-info.patch" hides the debug info
-+in pg_config table which reduces the count of rows from pg_config and leads to
-+sysviews test failure.
-+To fix it we need to reduce the count of parameters in sysviews test.
-+Also we need to reduce the row count in expected result of sysview test
-+to make the test output shown as pass.
++DEPENDS = "python3-setuptools-scm-native"
 +
-+Upstream-Status: Inappropriate [oe specific]
++PYPI_PACKAGE = "pure_eval"
 +
-+Signed-off-by: Manoj Saun <manojsingh.saun@windriver.com>
-+---
-+ src/test/regress/expected/sysviews.out | 2 +-
-+ src/test/regress/sql/sysviews.sql      | 2 +-
-+ 2 files changed, 2 insertions(+), 2 deletions(-)
++inherit pypi python_setuptools_build_meta
 +
-+diff --git a/src/test/regress/expected/sysviews.out b/src/test/regress/expected/sysviews.out
-+index 579b861..3bfc31f 100644
-+--- a/src/test/regress/expected/sysviews.out
-++++ b/src/test/regress/expected/sysviews.out
-+@@ -29,7 +29,7 @@ select name, ident, parent, level, total_bytes >= free_bytes
-+ (1 row)
-+ 
-+ -- At introduction, pg_config had 23 entries; it may grow
-+-select count(*) > 20 as ok from pg_config;
-++select count(*) > 13 as ok from pg_config;
-+  ok 
-+ ----
-+  t
-+diff --git a/src/test/regress/sql/sysviews.sql b/src/test/regress/sql/sysviews.sql
-+index 351e469..84c113e 100644
-+--- a/src/test/regress/sql/sysviews.sql
-++++ b/src/test/regress/sql/sysviews.sql
-+@@ -18,7 +18,7 @@ select name, ident, parent, level, total_bytes >= free_bytes
-+   from pg_backend_memory_contexts where level = 0;
-+ 
-+ -- At introduction, pg_config had 23 entries; it may grow
-+-select count(*) > 20 as ok from pg_config;
-++select count(*) > 13 as ok from pg_config;
-+ 
-+ -- We expect no cursors in this test; see also portals.sql
-+ select count(*) = 0 as ok from pg_cursors;
-+-- 
-+2.34.1
-+
-diff --git a/meta-oe/recipes-dbs/postgresql/postgresql_15.2.bb b/meta-oe/recipes-dbs/postgresql/postgresql_15.2.bb
-index befb0caec..5c95e4da3 100644
---- a/meta-oe/recipes-dbs/postgresql/postgresql_15.2.bb
-+++ b/meta-oe/recipes-dbs/postgresql/postgresql_15.2.bb
-@@ -8,6 +8,7 @@ SRC_URI += "\
-    file://0001-Improve-reproducibility.patch \
-    file://0001-configure.ac-bypass-autoconf-2.69-version-check.patch \
-    file://0001-config_info.c-not-expose-build-info.patch \
-+   file://0001-postgresql-fix-ptest-failure-of-sysviews.patch \
- "
- 
- SRC_URI[sha256sum] = "99a2171fc3d6b5b5f56b757a7a3cb85d509a38e4273805def23941ed2b8468c7"
++SRC_URI[sha256sum] = "2b45320af6dfaa1750f543d714b6d1c520a1688dec6fd24d339063ce0aaa9ac3"
 -- 
-2.32.0
+2.39.2
 
 
