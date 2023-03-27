@@ -1,115 +1,113 @@
-Return-Path: <wangmy@fujitsu.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EAFA4C7619A
-	for <webhook@archiver.kernel.org>; Mon, 27 Mar 2023 03:05:56 +0000 (UTC)
-Received: from mail1.bemta32.messagelabs.com (mail1.bemta32.messagelabs.com [195.245.230.66])
- by mx.groups.io with SMTP id smtpd.web10.26486.1679886348054183992
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 19895C7619A
+	for <webhook@archiver.kernel.org>; Mon, 27 Mar 2023 03:19:27 +0000 (UTC)
+Received: from mail-oa1-f53.google.com (mail-oa1-f53.google.com [209.85.160.53])
+ by mx.groups.io with SMTP id smtpd.web10.26644.1679887165775521679
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 26 Mar 2023 20:05:48 -0700
+ Sun, 26 Mar 2023 20:19:25 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=WzgCsweK;
- spf=pass (domain: fujitsu.com, ip: 195.245.230.66, mailfrom: wangmy@fujitsu.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1679886346; i=@fujitsu.com;
-	bh=KCW03FmMKwNlKxyFrKWpVQEcNUBLFwFgLKq/mCJsKaw=;
-	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type;
-	b=WzgCsweKIWs7N+owN+uy6sRNckmTShxwtgk+wnYeH3iURaNixbVeGckUy3OH5ecAe
-	 byqfV0BwDVKXZuFzwBI8LqrS/6R8S6y+TgBBLzF/jZoztbPmiZzHNP1+nVKhGr3agA
-	 2u1xUcfjKOmCO4jMT0TNC41KTQjQz4CSwp4LUDUJHoGRN98hPBIe9yR0UXVqFVS/5t
-	 rJglG5nnPHO8jO+WQSG6xSZ7s4OTNai8qHlqRD93hgK/D3jC9kR/X5HkK5RvYe2VdY
-	 r6PMdCeNpGgbgrbWzD5ymsh0+tEGfkiERqTp5OGGvXnNE39ZWQtR2wAopqK0paELEM
-	 wt9+mOCQUzwJw==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrCIsWRWlGSWpSXmKPExsViZ8OxWZeTQzH
-  FoP2ajMXFw0uZHRg9zm1cwRjAGMWamZeUX5HAmvH0g17BPq6Ks8vvsDQwHuLsYuTkEBJ4yCix
-  d6VoFyMXkH2ZSWLxn8esEM4eRonGNX1sIFVsAlISN+7/B7NFBPQlls7ewwxiMwuoSLz43cMOY
-  gsLuEs0zb4OVsMioCpx+uoEsDivgJNE7527rCC2hICCxJSH78F6OQWcJT5/eMoMcYWTxLWdK6
-  DqBSVOznzCAjFfQuLgixfMEL2KErMvN7NA2BUSjdMPMUHYahJXz21insAoOAtJ+ywk7QsYmVY
-  xmhanFpWlFuka6SUVZaZnlOQmZuboJVbpJuqlluqWpxaX6BrqJZYX66UWF+sVV+Ym56To5aWW
-  bGIEBm5KMVv3Dsb1vX/1DjFKcjApifJGu8mnCPEl5adUZiQWZ8QXleakFh9ilOHgUJLgdWFTT
-  BESLEpNT61Iy8wBRhFMWoKDR0mEd80vhRQh3uKCxNzizHSI1ClGRSlx3k8gfQIgiYzSPLg2WO
-  ReYpSVEuZlZGBgEOIpSC3KzSxBlX/FKM7BqCTM2woyhSczrwRu+iugxUxAi78VgC0uSURISTU
-  whUusP7BVLfDn9O9zBPJca4Lsv++S6pOwntZoa3Cya8bLx8vzo82ffVc92r36d48EV8V3z+DX
-  p66L+d1bL8LQmpU3fUZFlcxm1seLO3W/KalH9B60njTHv3vH6ju/y7w274/YrsBcvP92XcqcF
-  05src8nGWTOClYQfd0slJOqH73bS1zmwjlry4sO5Te9PdyyxdnyP2teuSX3TNBYxC5v8rqdPO
-  tTAyKav6mdDj0ZJVMUbCuSp9B95z4n24GZM6dbiwhNscnW3RJgMDnbbN531Z+2kWl1Dp7cRjK
-  uPNOtla2mH3iygDdgWpHqvrSN7mc5e2pu3PjDvPjWyviCcpX0SbUH9HRZX747uC83Y5ISS3FG
-  oqEWc1FxIgBdwgW8VwMAAA==
-X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-14.tower-587.messagelabs.com!1679886345!418684!1
-X-Originating-IP: [62.60.8.179]
-X-SYMC-ESS-Client-Auth: outbound-route-from=pass
-X-StarScan-Received: 
-X-StarScan-Version: 9.104.1; banners=-,-,-
-X-VirusChecked: Checked
-Received: (qmail 9257 invoked from network); 27 Mar 2023 03:05:45 -0000
-Received: from unknown (HELO n03ukasimr04.n03.fujitsu.local) (62.60.8.179)
-  by server-14.tower-587.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 27 Mar 2023 03:05:45 -0000
-Received: from n03ukasimr04.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTP id 1BC98142
-	for <openembedded-devel@lists.openembedded.org>; Mon, 27 Mar 2023 04:05:45 +0100 (BST)
-Received: from R01UKEXCASM121.r01.fujitsu.local (R01UKEXCASM121 [10.183.43.173])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTPS id 078B87B
-	for <openembedded-devel@lists.openembedded.org>; Mon, 27 Mar 2023 04:05:45 +0100 (BST)
-Received: from localhost.localdomain (10.167.225.33) by
- R01UKEXCASM121.r01.fujitsu.local (10.183.43.173) with Microsoft SMTP Server
- (TLS) id 15.0.1497.42; Mon, 27 Mar 2023 04:05:43 +0100
-From: <wangmy@fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-gnome] [PATCH] gnome-autoar: upgrade 0.4.3 -> 0.4.4
-Date: Mon, 27 Mar 2023 11:05:20 +0800
-Message-ID: <1679886322-20954-3-git-send-email-wangmy@fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
-In-Reply-To: <1679886322-20954-1-git-send-email-wangmy@fujitsu.com>
-References: <1679886322-20954-1-git-send-email-wangmy@fujitsu.com>
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=aMV9d79f;
+ spf=pass (domain: gmail.com, ip: 209.85.160.53, mailfrom: raj.khem@gmail.com)
+Received: by mail-oa1-f53.google.com with SMTP id 586e51a60fabf-17aeb49429eso7875415fac.6
+        for <openembedded-devel@lists.openembedded.org>; Sun, 26 Mar 2023 20:19:25 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112; t=1679887165;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=1lA0VKgM+Zqrfs/b4OiA84BMS68rySH6La0Q773cVE8=;
+        b=aMV9d79f8cXuQTfTjOsmOWZ7qUVb4rqx3iJ/gvh9kuQKZig7j384uYm5PQWfYHG2Bt
+         MckLcQrsk3CBbwbMBR9lISUhZEdEaMyIrk7Bxdt32QObUx/F8qAz6BfZYyMaJlADhw6t
+         4Qhccjb62U8JIRvBHiirO7ULCD1lGoTynl0RwKX/NAf77CP1gZc6LmG1Ypl8HBhnNLqZ
+         HBe4Iww76+jjFiUxDLBUQ+78OcJObmoMhqFX9PGa8oXGEi+8zpX89/W2LhnAmroc2wYK
+         gu9BeEtEfgjE5v226CjzTWcVzLYibvnPzeFgESNW7+fDz1hd7U0STUHpbLcrgU1dukgh
+         kiwQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112; t=1679887165;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=1lA0VKgM+Zqrfs/b4OiA84BMS68rySH6La0Q773cVE8=;
+        b=J557BYWMPtzjALnuG3Uf0pXNfQhxgPLjKTR5x9PMd4ULq64KjKQenKG1T/Y5wHDpDG
+         qwbqy8XH59tH+y2wYePiMSvzdZsEov9eHLydIqeYgYzsnZ1brt205EZwlnY8XOyDvVWb
+         P3OjBId9ZVxNpZ4o94P1ewNURfhKUI7Akdz9/XrCIZtZYQ0xTXBxsBIyXsD25l2TkxRK
+         0aQ5pQSIx3Ywd8YA8srODlQ8fUF3vPvU2yBHb7wTnfvuzl8Ijefgy4p5UCyjA5yKDk+5
+         ZNJIsVdpAwHOJAqa+C9naqt8CKBQnkB1+uwaiajy/MT7kJpsxrBmTGGcCOj/3ooJZwRm
+         DxAg==
+X-Gm-Message-State: AAQBX9eamk6P2tBAjVNgUL3hwppybj1kIRxh+g1z5a1Mhqmi76I/2iDa
+	GDuD4mI5yKsPZq1MAMwALJT3dXqXFWUiAo+QCkOT2uV5
+X-Google-Smtp-Source: AK7set8khatAeWfHL6dc8fY6Sa6rj35G+QxQ0IRhLDTqmMz9yt/6RB2QG5Y/wg8j3/riyLj9Bia1qdxEbI3HlRQ/jLU=
+X-Received: by 2002:a05:6871:e09:b0:17a:b713:63e9 with SMTP id
+ vj9-20020a0568710e0900b0017ab71363e9mr3394364oab.4.1679887164881; Sun, 26 Mar
+ 2023 20:19:24 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain
-X-Originating-IP: [10.167.225.33]
-X-ClientProxiedBy: G08CNEXCHPEKD07.g08.fujitsu.local (10.167.33.80) To
- R01UKEXCASM121.r01.fujitsu.local (10.183.43.173)
-X-Virus-Scanned: ClamAV using ClamSMTP
+References: <1679886213-20913-1-git-send-email-wangmy@fujitsu.com> <1679886213-20913-3-git-send-email-wangmy@fujitsu.com>
+In-Reply-To: <1679886213-20913-3-git-send-email-wangmy@fujitsu.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sun, 26 Mar 2023 20:18:59 -0700
+Message-ID: <CAMKF1srUadzhaFz8N1y6YzkWnnFR6vkQ-_xQizdfyfTia+9GNQ@mail.gmail.com>
+Subject: Re: [oe] [meta-gnome] [PATCH] eog: upgrade 43.2 -> 44.0
+To: wangmy <wangmy@fujitsu.com>
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 27 Mar 2023 03:05:56 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101761
+ <openembedded-devel@lists.openembedded.org>; Mon, 27 Mar 2023 03:19:27 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101764
 
-From: Wang Mingyu <wangmy@fujitsu.com>
+please rebase on master-next and see if its still needed then resend.
 
-Changelog:
-==========
-* Add application/zstd to supported mime-types
-* Fix test suite failure with recent GLib version
-* Add autoar_extractor_set_passphrase function
-
-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
----
- .../{gnome-autoar_0.4.3.bb => gnome-autoar_0.4.4.bb}            | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-gnome/recipes-gnome/gnome-autoar/{gnome-autoar_0.4.3.bb => gnome-autoar_0.4.4.bb} (82%)
-
-diff --git a/meta-gnome/recipes-gnome/gnome-autoar/gnome-autoar_0.4.3.bb b/meta-gnome/recipes-gnome/gnome-autoar/gnome-autoar_0.4.4.bb
-similarity index 82%
-rename from meta-gnome/recipes-gnome/gnome-autoar/gnome-autoar_0.4.3.bb
-rename to meta-gnome/recipes-gnome/gnome-autoar/gnome-autoar_0.4.4.bb
-index 017d67b5a..29aeef1ad 100644
---- a/meta-gnome/recipes-gnome/gnome-autoar/gnome-autoar_0.4.3.bb
-+++ b/meta-gnome/recipes-gnome/gnome-autoar/gnome-autoar_0.4.4.bb
-@@ -14,7 +14,7 @@ GTKDOC_MESON_OPTION = "gtk_doc"
- 
- inherit gnomebase gobject-introspection gtk-doc vala
- 
--SRC_URI[archive.sha256sum] = "7bdf0789553496abddc3c963b0ce7363805c0c02c025feddebcaacc787249e88"
-+SRC_URI[archive.sha256sum] = "c0afbe333bcf3cb1441a1f574cc8ec7b1b8197779145d4edeee2896fdacfc3c2"
- 
- do_compile:prepend() {
-     export GIR_EXTRA_LIBS_PATH="${B}/gnome-autoar/.libs"
--- 
-2.34.1
-
+On Sun, Mar 26, 2023 at 8:04=E2=80=AFPM wangmy <wangmy@fujitsu.com> wrote:
+>
+> From: Wang Mingyu <wangmy@fujitsu.com>
+>
+> Bug fixes and improvements:
+> ----------------------------
+>  * help: Switch mailing list URLs over to GNOME Discourse
+>
+> Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+> ---
+>  meta-gnome/recipes-gnome/eog/{eog_43.2.bb =3D> eog_44.0.bb} | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>  rename meta-gnome/recipes-gnome/eog/{eog_43.2.bb =3D> eog_44.0.bb} (86%)
+>
+> diff --git a/meta-gnome/recipes-gnome/eog/eog_43.2.bb b/meta-gnome/recipe=
+s-gnome/eog/eog_44.0.bb
+> similarity index 86%
+> rename from meta-gnome/recipes-gnome/eog/eog_43.2.bb
+> rename to meta-gnome/recipes-gnome/eog/eog_44.0.bb
+> index 7dbc0ecf2..c95d0e653 100644
+> --- a/meta-gnome/recipes-gnome/eog/eog_43.2.bb
+> +++ b/meta-gnome/recipes-gnome/eog/eog_44.0.bb
+> @@ -21,7 +21,7 @@ inherit gnomebase pkgconfig gsettings gobject-introspec=
+tion gettext mime-xdg fea
+>
+>  REQUIRED_DISTRO_FEATURES =3D "opengl"
+>
+> -SRC_URI[archive.sha256sum] =3D "9dcfdce5585a90e2bb1cf57e377cb1eb12d41bd9=
+bcb9bbacdf506bc1b1354ef9"
+> +SRC_URI[archive.sha256sum] =3D "41d85fab05c430898dbfd847e48e1f5b4935dc3c=
+bcee546e759a907eda671054"
+>
+>  GTKDOC_MESON_OPTION =3D "gtk_doc"
+>
+> --
+> 2.34.1
+>
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#101756): https://lists.openembedded.org/g/openembedde=
+d-devel/message/101756
+> Mute This Topic: https://lists.openembedded.org/mt/97874713/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
+aj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
 
