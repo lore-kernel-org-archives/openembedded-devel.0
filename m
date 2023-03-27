@@ -2,118 +2,88 @@ Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A7A66C7619A
-	for <webhook@archiver.kernel.org>; Mon, 27 Mar 2023 05:09:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B7CE8C7619A
+	for <webhook@archiver.kernel.org>; Mon, 27 Mar 2023 05:23:47 +0000 (UTC)
 Received: from mailout01.t-online.de (mailout01.t-online.de [194.25.134.80])
- by mx.groups.io with SMTP id smtpd.web11.28071.1679893745169084611
+ by mx.groups.io with SMTP id smtpd.web10.28082.1679894621275697505
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 26 Mar 2023 22:09:05 -0700
+ Sun, 26 Mar 2023 22:23:41 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=none, err=SPF record not found (domain: t-online.de, ip: 194.25.134.80, mailfrom: f_l_k@t-online.de)
-Received: from fwd87.dcpf.telekom.de (fwd87.aul.t-online.de [10.223.144.113])
-	by mailout01.t-online.de (Postfix) with SMTP id 6344BD670;
-	Mon, 27 Mar 2023 07:09:02 +0200 (CEST)
-Received: from [192.168.178.83] ([84.163.42.31]) by fwd87.t-online.de
+Received: from fwd85.dcpf.telekom.de (fwd85.aul.t-online.de [10.223.144.111])
+	by mailout01.t-online.de (Postfix) with SMTP id 182A113422
+	for <openembedded-devel@lists.openembedded.org>; Mon, 27 Mar 2023 07:23:39 +0200 (CEST)
+Received: from flk-MS-7C91.fritz.box ([84.163.42.31]) by fwd85.t-online.de
 	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1pgf6L-2gJq1g0; Mon, 27 Mar 2023 07:09:01 +0200
-Message-ID: <c44bceba-2618-81de-c6d6-d3017f3be7a0@t-online.de>
-Date: Mon, 27 Mar 2023 07:09:01 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.8.0
-Subject: Re: [oe] [meta-gnome][PATCH 21/32] gnome-terminal: update 3.46.7 ->
- 3.48.0
-Content-Language: en-US
-To: Khem Raj <raj.khem@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org
-References: <20230325080256.923752-1-f_l_k@t-online.de>
- <20230325080256.923752-21-f_l_k@t-online.de>
- <CAMKF1sr9-1O5dykVWq_iXdKF0eNZbrXz-ftWMv7+9yejkX7tGw@mail.gmail.com>
- <CAMKF1soLh_HUhFts+y2-A=-=o+KFcTSWMbRp_7CDE1JJPMhEdw@mail.gmail.com>
+	esmtp id 1pgfKS-1kH8yX0; Mon, 27 Mar 2023 07:23:36 +0200
 From: Markus Volk <f_l_k@t-online.de>
-In-Reply-To: <CAMKF1soLh_HUhFts+y2-A=-=o+KFcTSWMbRp_7CDE1JJPMhEdw@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-X-TOI-EXPURGATEID: 150726::1679893741-EEFFAC53-21D49BB8/0/0 CLEAN NORMAL
-X-TOI-MSGID: 48929240-77c1-461b-9079-78c02e2338ac
+To: openembedded-devel@lists.openembedded.org
+Cc: Markus Volk <f_l_k@t-online.de>
+Subject: [meta-gnome][PATCHv2] evolution-data-server: update 3.46.3 -> 3.48.0
+Date: Mon, 27 Mar 2023 07:23:27 +0200
+Message-Id: <20230327052327.8422-1-f_l_k@t-online.de>
+X-Mailer: git-send-email 2.34.1
+MIME-Version: 1.0
+X-TOI-EXPURGATEID: 150726::1679894616-77FFCC52-5624F85D/0/0 CLEAN NORMAL
+X-TOI-MSGID: ac948669-68fc-4bf5-b0f3-d6045a6b8231
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 27 Mar 2023 05:09:07 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101775
+ <openembedded-devel@lists.openembedded.org>; Mon, 27 Mar 2023 05:23:47 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101776
 
-yes. I already sent this to oe-core but it was rejected so far because=20
-there was still an issue with multilib installation that I wasn't able=20
-to reproduce yet. This is how I currently build vte. (Enabled vala=20
-support because it would be needed for building blackbox terminal)
+Signed-off-by: Markus Volk <f_l_k@t-online.de>
+---
+ .../evolution-data-server/evolution-data-server.bb            | 3 +--
+ .../evolution-data-server/evolution-data-server.inc           | 4 ++--
+ 2 files changed, 3 insertions(+), 4 deletions(-)
 
-SUMMARY =3D "Virtual terminal emulator GTK+ widget library"
-DESCRIPTION =3D "VTE provides a virtual terminal widget for GTK applicati=
-ons."
-HOMEPAGE =3D "https://wiki.gnome.org/Apps/Terminal/VTE"
-BUGTRACKER =3D "https://bugzilla.gnome.org/buglist.cgi?product=3Dvte"
-LICENSE =3D "GPL-3.0-only & LGPL-3.0-or-later & MIT"
-LICENSE:libvte =3D "LGPL-3.0-or-later"
+diff --git a/meta-gnome/recipes-gnome/evolution-data-server/evolution-dat=
+a-server.bb b/meta-gnome/recipes-gnome/evolution-data-server/evolution-da=
+ta-server.bb
+index a27115267..e1360af06 100644
+--- a/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-serve=
+r.bb
++++ b/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-serve=
+r.bb
+@@ -37,8 +37,7 @@ EXTRA_OECMAKE:append:class-target =3D " -DG_IR_SCANNER=3D=
+${STAGING_BINDIR}/g-ir-scan
+ PACKAGECONFIG ?=3D "oauth"
+=20
+ PACKAGECONFIG[canberra] =3D "-DENABLE_CANBERRA=3DON,-DENABLE_CANBERRA=3D=
+OFF,libcanberra"
+-# ENABLE_OAUTH2_WEBKITGTK4 would require webkit to be built with gtk4
+-PACKAGECONFIG[oauth]    =3D "-DENABLE_OAUTH2_WEBKITGTK=3DON -DENABLE_OAU=
+TH2_WEBKITGTK4=3DOFF,-DENABLE_OAUTH2_WEBKITGTK=3DOFF,webkitgtk json-glib"
++PACKAGECONFIG[oauth]    =3D "-DENABLE_OAUTH2_WEBKITGTK4=3DON -DENABLE_OA=
+UTH2_WEBKITGTK=3DOFF,-DENABLE_OAUTH2_WEBKITGTK4=3DOFF -DENABLE_OAUTH2_WEB=
+KITGTK=3DOFF,webkitgtk json-glib"
+ PACKAGECONFIG[goa]    =3D "-DENABLE_GOA=3DON,-DENABLE_GOA=3DOFF,gnome-on=
+line-accounts"
+ PACKAGECONFIG[kerberos]    =3D "-DWITH_KRB5=3DON,-DWITH_KRB5=3DOFF,krb5"
+ # BROKEN: due missing pkg-config in openldap eds' cmake finds host-libs =
+when
+diff --git a/meta-gnome/recipes-gnome/evolution-data-server/evolution-dat=
+a-server.inc b/meta-gnome/recipes-gnome/evolution-data-server/evolution-d=
+ata-server.inc
+index 2b74b2e60..9db5e9011 100644
+--- a/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-serve=
+r.inc
++++ b/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-serve=
+r.inc
+@@ -9,5 +9,5 @@ LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D6a6e689d19255c=
+f0557f3fe7d7068212 \
+=20
+ inherit gnomebase upstream-version-is-even
+=20
+-SRC_URI[archive.sha256sum] =3D "0938e2279e5cfbc2204766ca9d3fea570911699b=
+07c10cbe01aca62a7e8b2bee"
+-PV =3D "3.46.3"
++SRC_URI[archive.sha256sum] =3D "0f25f73331edf53909be40f412b2a86939270327=
+517616303f322de157083c35"
++PV =3D "3.48.0"
+--=20
+2.34.1
 
-LIC_FILES_CHKSUM =3D " \
- =C2=A0=C2=A0=C2=A0 file://COPYING.GPL3;md5=3Dcc702cf3444d1f19680c794cc61=
-948f9 \
- =C2=A0=C2=A0=C2=A0 file://COPYING.LGPL3;md5=3Db52f2d57d10c4f7ee67a7eb961=
-5d5d24 \
- =C2=A0=C2=A0=C2=A0 file://COPYING.XTERM;md5=3Dd7fc3a23c16c039afafe2e0420=
-30f057 \
-"
-
-DEPENDS =3D "fribidi glib-2.0 gtk+3 libpcre2 libxml2-native gperf-native=20
-icu pango zlib"
-
-GNOMEBASEBUILDCLASS =3D "meson"
-GIR_MESON_OPTION =3D 'gir'
-GIDOCGEN_MESON_OPTION =3D "docs"
-
-inherit gnomebase gi-docgen features_check upstream-version-is-even=20
-gobject-introspection vala
-
-# vapigen.m4 is required when vala is not present (but the one from vala=20
-should be used normally)
-SRC_URI +=3D "file://0001-Add-W_EXITCODE-macro-for-non-glibc-systems.patc=
-h"
-SRC_URI[archive.sha256sum] =3D=20
-"40fe914d6c70db34176c922725b6c6ea15d5f3cb2a9b44c57e200a5f950a6736"
-
-ANY_OF_DISTRO_FEATURES =3D "${GTK3DISTROFEATURES}"
-
-# Package additional files
-FILES:${PN}-dev +=3D "${datadir}/vala/vapi/*"
-
-PACKAGECONFIG:class-target ??=3D " \
- =C2=A0=C2=A0=C2=A0 gnutls \
- =C2=A0=C2=A0=C2=A0 ${@bb.utils.contains('GI_DATA_ENABLED', 'True', 'gir =
-vala', '', d)} \
- =C2=A0=C2=A0=C2=A0 ${@bb.utils.contains('DISTRO_FEATURES', 'opengl', 'gt=
-k4', '', d)} \
-"
-PACKAGECONFIG[gtk4] =3D "-Dgtk4=3Dtrue,-Dgtk4=3Dfalse,gtk4"
-PACKAGECONFIG[gir] =3D "-Dgir=3Dtrue,-Dgir=3Dfalse"
-PACKAGECONFIG[vala] =3D "-Dvapi=3Dtrue,-Dvapi=3Dfalse"
-PACKAGECONFIG[gnutls] =3D "-Dgnutls=3Dtrue,-Dgnutls=3Dfalse,gnutls"
-PACKAGECONFIG[systemd] =3D "-D_systemd=3Dtrue,-D_systemd=3Dfalse,systemd"
-
-CFLAGS +=3D "-D_GNU_SOURCE"
-
-PACKAGES =3D+ "libvte ${PN}-prompt"
-FILES:libvte =3D "${libdir}/*.so.* ${libdir}/girepository-1.0/*"
-FILES:${PN}-prompt =3D " \
- =C2=A0=C2=A0=C2=A0 ${sysconfdir}/profile.d \
- =C2=A0=C2=A0=C2=A0 ${libexecdir}/vte-urlencode-cwd \
-"
-
-FILES:${PN}-dev +=3D "${datadir}/glade/"
-
-BBCLASSEXTEND =3D "native nativesdk"
-
-
-Am 27.03.23 um 07:04 schrieb Khem Raj:
-> it needs latest vte 0.72.0+ I sent a recipe upgrade for oe-core for tha=
-t
 
