@@ -2,68 +2,68 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E8987C77B61
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EAFA4C7619A
 	for <webhook@archiver.kernel.org>; Mon, 27 Mar 2023 03:05:56 +0000 (UTC)
-Received: from mail1.bemta37.messagelabs.com (mail1.bemta37.messagelabs.com [85.158.142.1])
- by mx.groups.io with SMTP id smtpd.web10.26491.1679886354467807938
+Received: from mail1.bemta32.messagelabs.com (mail1.bemta32.messagelabs.com [195.245.230.66])
+ by mx.groups.io with SMTP id smtpd.web10.26486.1679886348054183992
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 26 Mar 2023 20:05:54 -0700
+ Sun, 26 Mar 2023 20:05:48 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=XiIm4MUa;
- spf=pass (domain: fujitsu.com, ip: 85.158.142.1, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=WzgCsweK;
+ spf=pass (domain: fujitsu.com, ip: 195.245.230.66, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1679886352; i=@fujitsu.com;
-	bh=h2RG9ehB7HWoCOg/C/ChTn7isu1PmRKxWNcUbpITebA=;
+	s=170520fj; t=1679886346; i=@fujitsu.com;
+	bh=KCW03FmMKwNlKxyFrKWpVQEcNUBLFwFgLKq/mCJsKaw=;
 	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
 	 MIME-Version:Content-Type;
-	b=XiIm4MUaMnUIPVv2f2opLve1UJBxLsSb4XS5Fex6eKO9RSu09tOWm97hFrl65MbV8
-	 hw0kGkiM2IfRRk2+JTEIDTb6rMiE7dcfo51yYpwuc8LPhKGH3d15shQDgYNlZQjvRP
-	 2Mk5nW64iy+4QxwstKFswPv7cy3DRAd/9HV/chBqIp8P+YFPFtuDSO2DvkdLg21WVG
-	 hggSQrZOy/QhJGBhPzn/XHdZFuxBOXmaTLa7luTWxKRZiB5O5IevIvc3xgtFBEXIoC
-	 C/OaDee248XJsDAxpBw4wyks7pcTr3dxOeozoKjA+ZHU/FbWSrbG8o9kulpMhXiXpo
-	 BIzYq8XH2e1qg==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrEIsWRWlGSWpSXmKPExsViZ8MxSZePQzH
-  F4NhVeYuLh5cyOzB6nNu4gjGAMYo1My8pvyKBNeP6/tCCzXIVtxcvY2lgvCndxcjFISTwhFFi
-  f/cNNgjnOpPE18MNjBDOHkaJZ/e+sncxcnKwCUhJ3Lj/nw3EFhHQl1g6ew8ziM0soCLx4ncPW
-  I2wQJDE/7e3wGpYBFQl1i+9xApi8wo4Scx7dosRxJYQUJCY8vA9WC+ngLPE5w9PwWwhoJprO1
-  ewQ9QLSpyc+YQFYr6ExMEXL5ghehUlZl9uZoGwKyQapx9igrDVJK6e28Q8gVFwFpL2WUjaFzA
-  yrWI0K04tKkst0jXTSyrKTM8oyU3MzNFLrNJN1Est1c3LLyrJ0DXUSywv1kstLtYrrsxNzknR
-  y0st2cQIDN6U4oTHOxjn9f3VO8QoycGkJMob7SafIsSXlJ9SmZFYnBFfVJqTWnyIUYaDQ0mC1
-  4VNMUVIsCg1PbUiLTMHGEkwaQkOHiUR3jW/FFKEeIsLEnOLM9MhUqcYdTk27es6wCzEkpefly
-  olzvsJZIYASFFGaR7cCFhUX2KUlRLmZWRgYBDiKUgtys0sQZV/xSjOwagkzNsKMoUnM68EbtM
-  roCOYgI74VgB2REkiQkqqgSmwdHog04tXVwr4l5wNYLP73LOOvc1eeKNo9PUIT4GY9pz/D7MM
-  fhQubzdy2Z9/vk3xsEDPq62T65/u3diZ2DepJXlpsO67i4cXX+tgO5F8SOdIWK1P+98v5qERj
-  yqZ05Y1Vh1UmxpgZRFTLP+6TzTs+JFlQRXWgevWd61h7XX4KqM+gS1hyrqnXw93ZSXWNn/8qr
-  ov/FxCp8nbjvrDKeWS2xiblv0189hUovb5rt7SX1/euPjPNV60eXnLxPLcJ1+U6hawml1Xq5x
-  Uu676pdnf4/NKIgsv75t+87TjJBlVxizTzcKOnxd6pxn7Gq7mKVYLUF66X2enbARLxZTXb+4n
-  rZG+3F542XLB5JkREUosxRmJhlrMRcWJAL7TOUFlAwAA
+	b=WzgCsweKIWs7N+owN+uy6sRNckmTShxwtgk+wnYeH3iURaNixbVeGckUy3OH5ecAe
+	 byqfV0BwDVKXZuFzwBI8LqrS/6R8S6y+TgBBLzF/jZoztbPmiZzHNP1+nVKhGr3agA
+	 2u1xUcfjKOmCO4jMT0TNC41KTQjQz4CSwp4LUDUJHoGRN98hPBIe9yR0UXVqFVS/5t
+	 rJglG5nnPHO8jO+WQSG6xSZ7s4OTNai8qHlqRD93hgK/D3jC9kR/X5HkK5RvYe2VdY
+	 r6PMdCeNpGgbgrbWzD5ymsh0+tEGfkiERqTp5OGGvXnNE39ZWQtR2wAopqK0paELEM
+	 wt9+mOCQUzwJw==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrCIsWRWlGSWpSXmKPExsViZ8OxWZeTQzH
+  FoP2ajMXFw0uZHRg9zm1cwRjAGMWamZeUX5HAmvH0g17BPq6Ks8vvsDQwHuLsYuTkEBJ4yCix
+  d6VoFyMXkH2ZSWLxn8esEM4eRonGNX1sIFVsAlISN+7/B7NFBPQlls7ewwxiMwuoSLz43cMOY
+  gsLuEs0zb4OVsMioCpx+uoEsDivgJNE7527rCC2hICCxJSH78F6OQWcJT5/eMoMcYWTxLWdK6
+  DqBSVOznzCAjFfQuLgixfMEL2KErMvN7NA2BUSjdMPMUHYahJXz21insAoOAtJ+ywk7QsYmVY
+  xmhanFpWlFuka6SUVZaZnlOQmZuboJVbpJuqlluqWpxaX6BrqJZYX66UWF+sVV+Ym56To5aWW
+  bGIEBm5KMVv3Dsb1vX/1DjFKcjApifJGu8mnCPEl5adUZiQWZ8QXleakFh9ilOHgUJLgdWFTT
+  BESLEpNT61Iy8wBRhFMWoKDR0mEd80vhRQh3uKCxNzizHSI1ClGRSlx3k8gfQIgiYzSPLg2WO
+  ReYpSVEuZlZGBgEOIpSC3KzSxBlX/FKM7BqCTM2woyhSczrwRu+iugxUxAi78VgC0uSURISTU
+  whUusP7BVLfDn9O9zBPJca4Lsv++S6pOwntZoa3Cya8bLx8vzo82ffVc92r36d48EV8V3z+DX
+  p66L+d1bL8LQmpU3fUZFlcxm1seLO3W/KalH9B60njTHv3vH6ju/y7w274/YrsBcvP92XcqcF
+  05src8nGWTOClYQfd0slJOqH73bS1zmwjlry4sO5Te9PdyyxdnyP2teuSX3TNBYxC5v8rqdPO
+  tTAyKav6mdDj0ZJVMUbCuSp9B95z4n24GZM6dbiwhNscnW3RJgMDnbbN531Z+2kWl1Dp7cRjK
+  uPNOtla2mH3iygDdgWpHqvrSN7mc5e2pu3PjDvPjWyviCcpX0SbUH9HRZX747uC83Y5ISS3FG
+  oqEWc1FxIgBdwgW8VwMAAA==
 X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-9.tower-732.messagelabs.com!1679886350!447215!1
-X-Originating-IP: [62.60.8.146]
+X-Msg-Ref: server-14.tower-587.messagelabs.com!1679886345!418684!1
+X-Originating-IP: [62.60.8.179]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.104.1; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 2975 invoked from network); 27 Mar 2023 03:05:50 -0000
-Received: from unknown (HELO n03ukasimr02.n03.fujitsu.local) (62.60.8.146)
-  by server-9.tower-732.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 27 Mar 2023 03:05:50 -0000
-Received: from n03ukasimr02.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTP id E38F21000D5
-	for <openembedded-devel@lists.openembedded.org>; Mon, 27 Mar 2023 04:05:49 +0100 (BST)
+Received: (qmail 9257 invoked from network); 27 Mar 2023 03:05:45 -0000
+Received: from unknown (HELO n03ukasimr04.n03.fujitsu.local) (62.60.8.179)
+  by server-14.tower-587.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 27 Mar 2023 03:05:45 -0000
+Received: from n03ukasimr04.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTP id 1BC98142
+	for <openembedded-devel@lists.openembedded.org>; Mon, 27 Mar 2023 04:05:45 +0100 (BST)
 Received: from R01UKEXCASM121.r01.fujitsu.local (R01UKEXCASM121 [10.183.43.173])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTPS id D6CA11000EE
-	for <openembedded-devel@lists.openembedded.org>; Mon, 27 Mar 2023 04:05:49 +0100 (BST)
+	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTPS id 078B87B
+	for <openembedded-devel@lists.openembedded.org>; Mon, 27 Mar 2023 04:05:45 +0100 (BST)
 Received: from localhost.localdomain (10.167.225.33) by
  R01UKEXCASM121.r01.fujitsu.local (10.183.43.173) with Microsoft SMTP Server
- (TLS) id 15.0.1497.42; Mon, 27 Mar 2023 04:05:48 +0100
+ (TLS) id 15.0.1497.42; Mon, 27 Mar 2023 04:05:43 +0100
 From: <wangmy@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-gnome] [PATCH] gnome-online-accounts: upgrade 3.46.0 -> 3.48.0
-Date: Mon, 27 Mar 2023 11:05:22 +0800
-Message-ID: <1679886322-20954-5-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-gnome] [PATCH] gnome-autoar: upgrade 0.4.3 -> 0.4.4
+Date: Mon, 27 Mar 2023 11:05:20 +0800
+Message-ID: <1679886322-20954-3-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 In-Reply-To: <1679886322-20954-1-git-send-email-wangmy@fujitsu.com>
 References: <1679886322-20954-1-git-send-email-wangmy@fujitsu.com>
@@ -77,88 +77,38 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 27 Mar 2023 03:05:56 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101763
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101761
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
-0001-build-Use-the-appropriate-dependency-object.patch
-removed since it's included in 3.48.0.
-
 Changelog:
 ==========
-* Build fixes [#226]
-* Expired Kerberos tickets not re-acquired on resume from suspend [#160]
-* Update CalDAV/CardDAV OwnCloud endpoints [#67]
-* Attempt to cope with multiple credential caches per identity [#79]
-* Error in solving Nextcloud account address [#243]
-* Translation updates
+* Add application/zstd to supported mime-types
+* Fix test suite failure with recent GLib version
+* Add autoar_extractor_set_passphrase function
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- ...se-the-appropriate-dependency-object.patch | 35 -------------------
- ...6.0.bb => gnome-online-accounts_3.48.0.bb} |  3 +-
- 2 files changed, 1 insertion(+), 37 deletions(-)
- delete mode 100644 meta-gnome/recipes-gnome/gnome-online-accounts/gnome-online-accounts/0001-build-Use-the-appropriate-dependency-object.patch
- rename meta-gnome/recipes-gnome/gnome-online-accounts/{gnome-online-accounts_3.46.0.bb => gnome-online-accounts_3.48.0.bb} (92%)
+ .../{gnome-autoar_0.4.3.bb => gnome-autoar_0.4.4.bb}            | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-gnome/recipes-gnome/gnome-autoar/{gnome-autoar_0.4.3.bb => gnome-autoar_0.4.4.bb} (82%)
 
-diff --git a/meta-gnome/recipes-gnome/gnome-online-accounts/gnome-online-accounts/0001-build-Use-the-appropriate-dependency-object.patch b/meta-gnome/recipes-gnome/gnome-online-accounts/gnome-online-accounts/0001-build-Use-the-appropriate-dependency-object.patch
-deleted file mode 100644
-index 838ca1a7d..000000000
---- a/meta-gnome/recipes-gnome/gnome-online-accounts/gnome-online-accounts/0001-build-Use-the-appropriate-dependency-object.patch
-+++ /dev/null
-@@ -1,35 +0,0 @@
--From 06240574626eb21af37cf7dde5bf81e892dff467 Mon Sep 17 00:00:00 2001
--From: Emmanuele Bassi <ebassi@gnome.org>
--Date: Wed, 5 Oct 2022 22:15:37 +0100
--Subject: [PATCH] build: Use the appropriate dependency object
--
--Just using `link_with` will not ensure that the GOA web extension shared
--module is properly built against libgoa-backend and libgoa; the
--generated headers must be transitively available by the time we build
--the shared module.
--
--Fixes: #226
--Upstream-Status: Backport [https://gitlab.gnome.org/GNOME/gnome-online-accounts/-/commit/fe86bfb0271735c8130367c46536b08dad5c20d8]
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
-- src/goabackend/meson.build | 3 +--
-- 1 file changed, 1 insertion(+), 2 deletions(-)
--
--diff --git a/src/goabackend/meson.build b/src/goabackend/meson.build
--index f5382b3..865b2d2 100644
----- a/src/goabackend/meson.build
--+++ b/src/goabackend/meson.build
--@@ -157,9 +157,8 @@ libgoa_web_extension = shared_module(
--   'goawebextension',
--   libgoawebextension_sources,
--   include_directories: common_incs + [goa_inc],
---  dependencies: deps,
--+  dependencies: [deps, libgoa_backend_dep],
--   c_args: cflags,
---  link_with: libgoa_backend,
--   install: true,
--   install_dir: join_paths(goa_pkglibdir, 'web-extensions')
-- )
---- 
--2.39.0
--
-diff --git a/meta-gnome/recipes-gnome/gnome-online-accounts/gnome-online-accounts_3.46.0.bb b/meta-gnome/recipes-gnome/gnome-online-accounts/gnome-online-accounts_3.48.0.bb
-similarity index 92%
-rename from meta-gnome/recipes-gnome/gnome-online-accounts/gnome-online-accounts_3.46.0.bb
-rename to meta-gnome/recipes-gnome/gnome-online-accounts/gnome-online-accounts_3.48.0.bb
-index ce02a507d..e059500ab 100644
---- a/meta-gnome/recipes-gnome/gnome-online-accounts/gnome-online-accounts_3.46.0.bb
-+++ b/meta-gnome/recipes-gnome/gnome-online-accounts/gnome-online-accounts_3.48.0.bb
-@@ -8,8 +8,7 @@ inherit gnomebase gsettings gobject-introspection gtk-icon-cache vala features_c
+diff --git a/meta-gnome/recipes-gnome/gnome-autoar/gnome-autoar_0.4.3.bb b/meta-gnome/recipes-gnome/gnome-autoar/gnome-autoar_0.4.4.bb
+similarity index 82%
+rename from meta-gnome/recipes-gnome/gnome-autoar/gnome-autoar_0.4.3.bb
+rename to meta-gnome/recipes-gnome/gnome-autoar/gnome-autoar_0.4.4.bb
+index 017d67b5a..29aeef1ad 100644
+--- a/meta-gnome/recipes-gnome/gnome-autoar/gnome-autoar_0.4.3.bb
++++ b/meta-gnome/recipes-gnome/gnome-autoar/gnome-autoar_0.4.4.bb
+@@ -14,7 +14,7 @@ GTKDOC_MESON_OPTION = "gtk_doc"
  
- DEPENDS = "gtk+3 gtk+3-native gdk-pixbuf dbus json-glib libxml2 webkitgtk glib-2.0 rest libsecret"
+ inherit gnomebase gobject-introspection gtk-doc vala
  
--SRC_URI += "file://0001-build-Use-the-appropriate-dependency-object.patch"
--SRC_URI[archive.sha256sum] = "5e7859ce4858a6b99d3995ed70527d66e297bb90bbf75ec8780fe9da22c1fcaa"
-+SRC_URI[archive.sha256sum] = "418bb9fcffdbd72a98205ad365137617fc1e3551a54de74f6a98d45d266175bf"
+-SRC_URI[archive.sha256sum] = "7bdf0789553496abddc3c963b0ce7363805c0c02c025feddebcaacc787249e88"
++SRC_URI[archive.sha256sum] = "c0afbe333bcf3cb1441a1f574cc8ec7b1b8197779145d4edeee2896fdacfc3c2"
  
- PACKAGECONFIG_SOUP ?= "soup3"
- PACKAGECONFIG ?= "kerberos owncloud lastfm google windows_live ${PACKAGECONFIG_SOUP}"
+ do_compile:prepend() {
+     export GIR_EXTRA_LIBS_PATH="${B}/gnome-autoar/.libs"
 -- 
 2.34.1
 
