@@ -2,142 +2,178 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5B007C76195
-	for <webhook@archiver.kernel.org>; Mon, 27 Mar 2023 19:05:11 +0000 (UTC)
-Received: from mail-oa1-f44.google.com (mail-oa1-f44.google.com [209.85.160.44])
- by mx.groups.io with SMTP id smtpd.web11.45140.1679943910548447947
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C2DFAC76195
+	for <webhook@archiver.kernel.org>; Mon, 27 Mar 2023 23:56:52 +0000 (UTC)
+Received: from mail-oa1-f43.google.com (mail-oa1-f43.google.com [209.85.160.43])
+ by mx.groups.io with SMTP id smtpd.web10.53199.1679961409716808843
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 27 Mar 2023 12:05:10 -0700
+ Mon, 27 Mar 2023 16:56:49 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=Z5PgDRQE;
- spf=pass (domain: gmail.com, ip: 209.85.160.44, mailfrom: raj.khem@gmail.com)
-Received: by mail-oa1-f44.google.com with SMTP id 586e51a60fabf-17aeb49429eso10358590fac.6
-        for <openembedded-devel@lists.openembedded.org>; Mon, 27 Mar 2023 12:05:10 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=cQ8Qmpu5;
+ spf=pass (domain: gmail.com, ip: 209.85.160.43, mailfrom: raj.khem@gmail.com)
+Received: by mail-oa1-f43.google.com with SMTP id 586e51a60fabf-17aeb49429eso11086735fac.6
+        for <openembedded-devel@lists.openembedded.org>; Mon, 27 Mar 2023 16:56:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112; t=1679943910;
+        d=gmail.com; s=20210112; t=1679961409;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=K2ZpiTTbOyXN9os9bqUetx7r6q3d+TFajcf/BXFO+HU=;
-        b=Z5PgDRQE5ndJ4MT86t7OvY1EuotMalLqL0IQVzgcYt7YL5CsUue/ztu/AWRPgeAxv7
-         A477mg1gK2u2Q3wL3BWUACqM3ZtwtNds9g9ocMRblx3Aa1Nuf30WlrWSn5ubYjHgK5rY
-         WQUzbK6UOLP0rt8WiiU9iOHLJTQbmnCrbWltJdFAEzJbXPRS3P/OVKfJUBeb8evQvyre
-         wvcw8MPEI4uJp9QK+fsakcbek3Ho02EF2PWic2TJLFxJMuXVv+ljghPWLFrJb9wLEQWC
-         wATnuGdHA3dRYsjY9rCr/ayDZog2Uu9VEiHZczwOH5NP1/JUuM66rtYp1mcGRkmsrg9B
-         LBBA==
+        bh=L/V6D0prwgimBRVZAXDKaCHGpqbhWf7rpGqRXll8IUI=;
+        b=cQ8Qmpu5GiBsk+NVZVH7gcK9A4wvz4SSELRgCU1QTvPC2VHKZYGM4UmzkapoWWFbnC
+         LmK+ysoMqkbQUU1hBUtrSq4/E8xda0p63sxqsz7PSLHkzxDABpFDxrhUOCT2jT3oPCcx
+         uwWZkFfLHhBlyQBBEm6hSge/74IEMne/oMngMRTYjjQspL+dE+lC0Zr1RM0fAqFfWzzY
+         Z1DIgrrnRAXskWRey6V1TyfNs+pyD0DHS/NYQW9TTDlkbYPtEaSRBO9AaV3/5QfkRQjb
+         6C6Dp2DZi21lUizx45RwBxL9BzG3BoLaBMNVMs5ADoG7/drZkk9o6MBTW/Oms4uF4pGF
+         oklg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112; t=1679943910;
+        d=1e100.net; s=20210112; t=1679961409;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=K2ZpiTTbOyXN9os9bqUetx7r6q3d+TFajcf/BXFO+HU=;
-        b=VbzS9w1nSfqsetwQIZcfxdDiGZ3s0yrD/Q3lR/16w5Ozrh30XiGLA48Bu36bn7WFNe
-         6+AgoSAf1jPm7NZmsJHVqekdAGiLRtwK3WQn9rEbKB6INv13+OV+aQx7cffjfQtQ7Mpf
-         gOshMP9IYlVAA1efnR9XKvEbyPT/aLr1xpDh5kfoIcRsWVQuaQiJTPl7mfQcs8m79nM2
-         5KbHNrkWguDVrJAgQPChcYsnUd/WhhGn/gaiWewgnjKqQtD8NT9KGDUSPxd11Un9MQV2
-         cay8zQCqaXiJ7fpnIOs3LM8eKugqZlBala3BGFxAjK6zANNInZlTfUnTNIY15nukkKDa
-         nhUA==
-X-Gm-Message-State: AAQBX9f5Ih2IERHnpFguOVciBW9yFeRgibadxhKmMfTxyjFTrOIFBI4r
-	9GsQ98RU3mQ1N2o2CEihFPBtGYy6HWDc8Jo05wE=
-X-Google-Smtp-Source: AKy350bOxqpOgaQG/8IlTsFOXgfxnUYMMhL1Asqv+lK/lbu4dRn8zIYZAepM1jIPuCWS42EIJAzuSdZqTt/9WBTmPaw=
-X-Received: by 2002:a05:6870:1017:b0:17e:3fe:6711 with SMTP id
- 23-20020a056870101700b0017e03fe6711mr3637676oai.2.1679943909602; Mon, 27 Mar
- 2023 12:05:09 -0700 (PDT)
+        bh=L/V6D0prwgimBRVZAXDKaCHGpqbhWf7rpGqRXll8IUI=;
+        b=uRI+w0W2z2ls5tQdXXnIfQi1taJScaTdawSDR48RtOBMAFST+1xa0RwvYr0rJCHy2k
+         kBpHF/g7TeFIRjnuuOl1lT4ro0yRAsMKKkK6GWYJu8AknbjibbXlo3mMTlXQR7D5gvNu
+         iCmWfewXM+yxK4p2d17GlcEjm6YhddbgzOdp9QNS7YJg5MPBphLsSXMOAtNOe6XJFoAX
+         DbvCfIlxxBOANMOqXi9CBkZC5m82yDZjQooWgkqVa1o4jWqoxXJW4cK8UjohAnuxIdbM
+         NQN3+h+l2xtOmwfKXLQwVHGYnDreXnoD2TM/N0KTI9XxdrK+3yA0kuEshTcvjNh7dnmI
+         SHlQ==
+X-Gm-Message-State: AAQBX9ew11rIvyqnWnMuuV3aD9QOiTEzseKkeN3hG5H9xSIHYexNgV1M
+	KB3jAXOLHwnYSPyGgCPA6HSP7nZrXhnYarvVy/yOc+n5
+X-Google-Smtp-Source: AKy350Yei600ASGike2lMuz1z7bPmJUptXhLXUhv20UwKg8bH1RrvHMmVxei1p7H08z18VTBhtBGRKuobBHikAuzfbI=
+X-Received: by 2002:a05:6870:1215:b0:17e:915c:84a2 with SMTP id
+ 21-20020a056870121500b0017e915c84a2mr4575081oan.4.1679961408792; Mon, 27 Mar
+ 2023 16:56:48 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230327125002.90472-1-zboszor@gmail.com> <20230327125002.90472-4-zboszor@gmail.com>
- <CANx9H-AJ59GB+NY4KBigGHBGKAzMry2YUCcifdEe44KjA3iJJA@mail.gmail.com>
-In-Reply-To: <CANx9H-AJ59GB+NY4KBigGHBGKAzMry2YUCcifdEe44KjA3iJJA@mail.gmail.com>
+References: <20230327072939.2419804-1-manojsingh.saun@windriver.com>
+In-Reply-To: <20230327072939.2419804-1-manojsingh.saun@windriver.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 27 Mar 2023 12:04:43 -0700
-Message-ID: <CAMKF1someMdY8ayGDSBQ0LPgrXw1NPCSxrUC-6DwgRBAQB37DA@mail.gmail.com>
-Subject: Re: [oe] [meta-python][PATCH 4/4] python3-ipython: Add missing dependency
-To: Tim Orling <ticotimo@gmail.com>
-Cc: Zoltan Boszormenyi <zboszor@gmail.com>, openembedded-devel@lists.openembedded.org
+Date: Mon, 27 Mar 2023 16:56:22 -0700
+Message-ID: <CAMKF1sqjGdBVnL6nBAxjCb982zuxNA4Z214WR1n6Xbek4Sdd9g@mail.gmail.com>
+Subject: Re: [oe][meta-oe][PATCH V2 1/1] postgresql: fix ptest failure of
+ sysviews test
+To: Manoj Saun <manojsingh.saun@windriver.com>
+Cc: openembedded-devel@lists.openembedded.org, narpat.mali@windriver.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 27 Mar 2023 19:05:11 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101792
+ <openembedded-devel@lists.openembedded.org>; Mon, 27 Mar 2023 23:56:52 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101793
 
-On Mon, Mar 27, 2023 at 9:39=E2=80=AFAM Tim Orling <ticotimo@gmail.com> wro=
-te:
->
->
->
-> On Mon, Mar 27, 2023 at 5:50=E2=80=AFAM Zoltan Boszormenyi <zboszor@gmail=
-.com> wrote:
->>
->> This fixes the error:
->>
->> Python 3.11.2 (main, Feb  7 2023, 13:52:42) [GCC 12.2.0] on linux
->> Type "help", "copyright", "credits" or "license" for more information.
->> >>> import IPython
->> Traceback (most recent call last):
->>   File "<stdin>", line 1, in <module>
->>   File "/usr/lib/python3.11/site-packages/IPython/__init__.py", line 52,=
- in <module>
->>     from .core.application import Application
->>   File "/usr/lib/python3.11/site-packages/IPython/core/application.py", =
-line 26, in <module>
->>     from IPython.core import release, crashhandler
->>   File "/usr/lib/python3.11/site-packages/IPython/core/crashhandler.py",=
- line 27, in <module>
->>     from IPython.core import ultratb
->>   File "/usr/lib/python3.11/site-packages/IPython/core/ultratb.py", line=
- 101, in <module>
->>     import stack_data
->> ModuleNotFoundError: No module named 'stack_data'
->>
-> It appears `stack_data` was added in 8.0.0
-> https://github.com/ipython/ipython/commit/77651b7a7331b1b030f1c2c03310bf7=
-ebb242488
->
-> So we've been missing it for quite some time. This highlights the need fo=
-r runtime testing vs. just "it builds".
->
+There was a patch fuzz detected in this patch, I have fixed it this
+time and pushed a refreshed patch to master-next, please check and
+also make sure
+to check this next time around.
 
-Tim you are listed as one of meta-python maintainers, do you have
-plans to implement runtime testing? or for that matter
-anyone else in the community wants to volunteer to do this?
-I am happy to insert that into upstreaming process and wait for
-relevant ACK on meta-python submissions
-
-> Thank you for the contribution.
+On Mon, Mar 27, 2023 at 3:31=E2=80=AFAM Manoj Saun
+<manojsingh.saun@windriver.com> wrote:
 >
->>
->> Signed-off-by: Zolt=C3=A1n B=C3=B6sz=C3=B6rm=C3=A9nyi <zboszor@gmail.com=
+> In postgresql sysview ptest are failing due to hidden build info in pg_co=
+nfig table.
+> The information is hidden due to existing patch 0001-config_info.c-not-ex=
+pose-build-info.patch
+> So for passing the test we need to reduce the row count in the sysviews t=
+est.
+> Also for test results to be shown as pass we need to reduce the row count=
+ for
+> the expected count in the sysviews.out file.
 >
->> ---
->>  meta-python/recipes-devtools/python/python3-ipython_8.11.0.bb | 1 +
->>  1 file changed, 1 insertion(+)
->>
->> diff --git a/meta-python/recipes-devtools/python/python3-ipython_8.11.0.=
-bb b/meta-python/recipes-devtools/python/python3-ipython_8.11.0.bb
->> index 4d21afd6f..875e89abe 100644
->> --- a/meta-python/recipes-devtools/python/python3-ipython_8.11.0.bb
->> +++ b/meta-python/recipes-devtools/python/python3-ipython_8.11.0.bb
->> @@ -23,6 +23,7 @@ RDEPENDS:${PN} =3D "\
->>      ${PYTHON_PN}-unixadmin \
->>      ${PYTHON_PN}-misc \
->>      ${PYTHON_PN}-sqlite3 \
->> +    ${PYTHON_PN}-stack-data \
->>  "
->>
->>  inherit setuptools3 pypi
->> --
->> 2.39.2
->>
->>
->>
->>
+> Signed-off-by: Manoj Saun <manojsingh.saun@windriver.com>
+> ---
+>  ...gresql-fix-ptest-failure-of-sysviews.patch | 45 +++++++++++++++++++
+>  .../recipes-dbs/postgresql/postgresql_15.2.bb |  1 +
+>  2 files changed, 46 insertions(+)
+>  create mode 100644 meta-oe/recipes-dbs/postgresql/files/0001-postgresql-=
+fix-ptest-failure-of-sysviews.patch
+>
+> diff --git a/meta-oe/recipes-dbs/postgresql/files/0001-postgresql-fix-pte=
+st-failure-of-sysviews.patch b/meta-oe/recipes-dbs/postgresql/files/0001-po=
+stgresql-fix-ptest-failure-of-sysviews.patch
+> new file mode 100644
+> index 000000000..8abea7ff4
+> --- /dev/null
+> +++ b/meta-oe/recipes-dbs/postgresql/files/0001-postgresql-fix-ptest-fail=
+ure-of-sysviews.patch
+> @@ -0,0 +1,45 @@
+> +From 9f81377dddfe32d950844d7053020a36b40fce08 Mon Sep 17 00:00:00 2001
+> +From: Manoj Saun <manojsingh.saun@windriver.com>
+> +Date: Wed, 22 Mar 2023 08:07:26 +0000
+> +Subject: [PATCH] postgresql: fix ptest failure of sysviews
+> +
+> +The patch "0001-config_info.c-not-expose-build-info.patch" hides the deb=
+ug info
+> +in pg_config table which reduces the count of rows from pg_config and le=
+ads to
+> +sysviews test failure.
+> +To fix it we need to reduce the count of parameters in sysviews test.
+> +Also we need to reduce the row count in expected result of sysview test
+> +to make the test output shown as pass.
+> +
+> +Upstream-Status: Inappropriate [oe specific]
+> +
+> +Signed-off-by: Manoj Saun <manojsingh.saun@windriver.com>
+> +---
+> + src/test/regress/expected/sysviews.out | 2 +-
+> + src/test/regress/sql/sysviews.sql      | 2 +-
+> + 2 files changed, 2 insertions(+), 2 deletions(-)
+> +
+> +diff --git a/src/test/regress/expected/sysviews.out b/src/test/regress/e=
+xpected/sysviews.out
+> +index 579b861..3bfc31f 100644
+> +--- a/src/test/regress/expected/sysviews.out
+> ++++ b/src/test/regress/expected/sysviews.out
+> +@@ -29,7 +29,7 @@ select name, ident, parent, level, total_bytes >=3D fr=
+ee_bytes
+> + (1 row)
+> +
+> + -- At introduction, pg_config had 23 entries; it may grow
+> +-select count(*) > 20 as ok from pg_config;
+> ++select count(*) > 13 as ok from pg_config;
+> +  ok
+> + ----
+> +  t
+> +diff --git a/src/test/regress/sql/sysviews.sql b/src/test/regress/sql/sy=
+sviews.sql
+> +index 351e469..84c113e 100644
+> +--- a/src/test/regress/sql/sysviews.sql
+> ++++ b/src/test/regress/sql/sysviews.sql
+> +@@ -18,7 +18,7 @@ select name, ident, parent, level, total_bytes >=3D fr=
+ee_bytes
+> +   from pg_backend_memory_contexts where level =3D 0;
+> +
+> + -- At introduction, pg_config had 23 entries; it may grow
+> +-select count(*) > 20 as ok from pg_config;
+> ++select count(*) > 13 as ok from pg_config;
+> +
+> + -- We expect no cursors in this test; see also portals.sql
+> + select count(*) =3D 0 as ok from pg_cursors;
+> +--
+> +2.34.1
+> +
+> diff --git a/meta-oe/recipes-dbs/postgresql/postgresql_15.2.bb b/meta-oe/=
+recipes-dbs/postgresql/postgresql_15.2.bb
+> index befb0caec..5c95e4da3 100644
+> --- a/meta-oe/recipes-dbs/postgresql/postgresql_15.2.bb
+> +++ b/meta-oe/recipes-dbs/postgresql/postgresql_15.2.bb
+> @@ -8,6 +8,7 @@ SRC_URI +=3D "\
+>     file://0001-Improve-reproducibility.patch \
+>     file://0001-configure.ac-bypass-autoconf-2.69-version-check.patch \
+>     file://0001-config_info.c-not-expose-build-info.patch \
+> +   file://0001-postgresql-fix-ptest-failure-of-sysviews.patch \
+>  "
+>
+>  SRC_URI[sha256sum] =3D "99a2171fc3d6b5b5f56b757a7a3cb85d509a38e4273805de=
+f23941ed2b8468c7"
+> --
+> 2.32.0
+>
 >
 > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
 > Links: You receive all messages sent to this group.
-> View/Reply Online (#101789): https://lists.openembedded.org/g/openembedde=
-d-devel/message/101789
-> Mute This Topic: https://lists.openembedded.org/mt/97881025/1997914
+> View/Reply Online (#101778): https://lists.openembedded.org/g/openembedde=
+d-devel/message/101778
+> Mute This Topic: https://lists.openembedded.org/mt/97878908/1997914
 > Group Owner: openembedded-devel+owner@lists.openembedded.org
 > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
 aj.khem@gmail.com]
