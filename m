@@ -1,56 +1,56 @@
-Return-Path: <yashinde145@gmail.com>
+Return-Path: <philip@balister.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 68BD2C74A5B
-	for <webhook@archiver.kernel.org>; Wed, 29 Mar 2023 12:36:45 +0000 (UTC)
-Received: from mail-pg1-f181.google.com (mail-pg1-f181.google.com [209.85.215.181])
- by mx.groups.io with SMTP id smtpd.web11.23248.1680093403562931308
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A988EC6FD18
+	for <webhook@archiver.kernel.org>; Wed, 29 Mar 2023 13:12:55 +0000 (UTC)
+Received: from mail-pl1-f177.google.com (mail-pl1-f177.google.com [209.85.214.177])
+ by mx.groups.io with SMTP id smtpd.web10.23156.1680093152198387619
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 29 Mar 2023 05:36:43 -0700
+ Wed, 29 Mar 2023 05:32:32 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=h1EbK8Ob;
- spf=pass (domain: gmail.com, ip: 209.85.215.181, mailfrom: yashinde145@gmail.com)
-Received: by mail-pg1-f181.google.com with SMTP id l184so61098pgd.11
-        for <openembedded-devel@lists.openembedded.org>; Wed, 29 Mar 2023 05:36:43 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=nw0brbIZ;
+ spf=pass (domain: gmail.com, ip: 209.85.214.177, mailfrom: yashinde145@gmail.com)
+Received: by mail-pl1-f177.google.com with SMTP id o2so14751672plg.4
+        for <openembedded-devel@lists.openembedded.org>; Wed, 29 Mar 2023 05:32:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112; t=1680093403;
+        d=gmail.com; s=20210112; t=1680093151;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
         bh=wWTvJrLtgS5wdN+hRhA4VqIxk4qY/ku5OoCAn08ghYA=;
-        b=h1EbK8Obg5+ClvBYLwo9Hpel8n6WVG/4gFN+qVw0V1oI0ldmcD2K0+7EGIT/qh7Mgv
-         gif951u/aGIf8hC8pCBSty9XCUgvkWuHpLM6FZa5X/H3orojkOsWEEz1pg6waUbJi9eu
-         gG5o1H3SxxDd3h6cvP92six51sPHE3RWOvGnoR9RoZW7jw8mQs+EhuIk8e9Tu7r3yggS
-         RQMn0gLLzUJvsNRrt82wM1THuQcLC1vijSDMtp7uxkwl+BTSeBUajrNm7qAZFsJOa8sF
-         mZU9GOcoYNdgAJ9RqqTknzrY82qHhcvUAZ9uC/crfrpuNXfIcxoaGijjREOAB/mj9G3Q
-         gi3w==
+        b=nw0brbIZl7mxVcaBZMIDI0n42ZXk4u2UQSYsorYpIbLr6bBFOpk6ghTgV+Xuk467VV
+         F+QG6m6k6S8YEBBdtDpp5syJT5w60Yw6Hy07XNq6it3DU5W+3fvCODOrMLvirJkzqskF
+         LaQDn6maA9RTHWJg2Ml9fVpG9DLqXPglDTtjF8aXI/EpkfL42O5v8kJUkSJZQbbS0oiW
+         Fu893HzYx0Al55+TtCWydikp7a6UynjMtDbQia66Es+mJn7sG2BgVYPrJtzV8B3W/aem
+         unfOcxSJfb+rFMwPb3iYj0KM4r+GdDr3AaJ2zr0isBSOy5XM53zcYA8niY0f3aPAhHre
+         I6Yg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112; t=1680093403;
+        d=1e100.net; s=20210112; t=1680093151;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
         bh=wWTvJrLtgS5wdN+hRhA4VqIxk4qY/ku5OoCAn08ghYA=;
-        b=09RrhQ6wqq9/9yx2bsShqLdWYFgO/s+HudOI5jw7HXmLYpaNhLV3rNl+CcTr4KlvIZ
-         M/ahyF4rbZYpQnXfL2fiFg+wvprJXV7t5xqDeHzhCFNhSQm87RkXnj7NdYIg0pn9HVyb
-         lF6Jhn8egoNoomea1UB9IWg3H2qvDh0NY4F3QELSR6vY2oym6aKnxlHb/Qh8K1CchAir
-         rptotBi+XYe2upCdO1pVOV9E5XB6foVdLAvox3UgIdR7Tgk3ThgexoXQfPrMgMbhmrvA
-         SWa9B2QtQJ/c0Zp8YG0M1ZjQ6oiEE8YJJWnsblQPwUhLTVSwV/FC26iRbWKHPQdcB48j
-         OBBA==
-X-Gm-Message-State: AAQBX9dNdBeru9MZiv7IseX6H/uQSXlB3hJO0RHXdCCwJHsARsa5Ku7Z
-	fTkeB9fnjP5XYmDOg0e/egDqde8powmM7g==
-X-Google-Smtp-Source: AKy350ZQH9jrorZ/R6KnCYaPTOdH1hzPUoWOTwqDi0LXRdV1R8i6vGPb2jTO0tR6Vl0uWi4TPOMe9w==
-X-Received: by 2002:a62:1c57:0:b0:624:f46:7256 with SMTP id c84-20020a621c57000000b006240f467256mr19358651pfc.21.1680093402749;
-        Wed, 29 Mar 2023 05:36:42 -0700 (PDT)
+        b=mTWQckrQLY1BP/4MUvsQOZGSiIDOkqQVFeaPx7SpJ15ZYwEY17+QsleJ1U5St5gZk/
+         BuzosYVe9rhNgrz3HtPQv/I1or07QsfvFHhenwLzfkxi32KmrB0LsVCIXgGD3P6t5orv
+         W2WgsQPhx3qymGl3BZQa9DKbWJ5uGnX75I7EYDpm5mNvbQd5HmrpSBme5uOzexqbnAId
+         d5XMIed0Yabd0GqZrt2ib4gGGN1L+xUJUraaYbKXpb6o3EGfXi4o2Er+VKarc6W3biaG
+         NWTGNQ1Fyc8iyx/AMnwFQM2uJKSzHEfc76sA/HNB85mit91eNT5eqDu5OXh4spS1Cj+i
+         uxzw==
+X-Gm-Message-State: AAQBX9fQw67/y8qoTQ5/T6tiLPfAYFhOZ9ehtbn5ehtzLcXfw7T5xlq4
+	z9rZ216MV9UTQHPRuBhyuZo6UyTYz0FZsA==
+X-Google-Smtp-Source: AKy350aK64vsl4kbHDdJNZpBKViPlgL/TZuhva/v9uGDD/QF+hKBRa/HsIU3imf5GOaijw3jedN+Tg==
+X-Received: by 2002:a17:902:f08c:b0:19f:31c5:1848 with SMTP id p12-20020a170902f08c00b0019f31c51848mr15720664pla.27.1680093151407;
+        Wed, 29 Mar 2023 05:32:31 -0700 (PDT)
 Received: from bft-PowerEdge-R620.. ([49.204.85.206])
-        by smtp.gmail.com with ESMTPSA id 5-20020a630205000000b0050fa6546a45sm15226997pgc.6.2023.03.29.05.36.41
+        by smtp.gmail.com with ESMTPSA id ja13-20020a170902efcd00b001a1a31953a8sm22954691plb.130.2023.03.29.05.32.30
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 29 Mar 2023 05:36:42 -0700 (PDT)
-From: Yash Shinde <yashinde145@gmail.com>
+        Wed, 29 Mar 2023 05:32:31 -0700 (PDT)
+From: "Yash Shinde" <yashinde145@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Yash.Shinde@windriver.com
 Subject: [meta-oe][PATCH] librelp: fix function inline errors in debug build
-Date: Wed, 29 Mar 2023 18:06:31 +0530
-Message-Id: <20230329123631.2190425-1-yashinde145@gmail.com>
+Date: Wed, 29 Mar 2023 18:02:25 +0530
+Message-Id: <20230329123225.2048688-1-yashinde145@gmail.com>
 X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
@@ -58,8 +58,8 @@ Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 29 Mar 2023 12:36:45 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101818
+ <openembedded-devel@lists.openembedded.org>; Wed, 29 Mar 2023 13:12:55 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101819
 
 With DEBUG_BUILD = "1", the following errors occur:
 
