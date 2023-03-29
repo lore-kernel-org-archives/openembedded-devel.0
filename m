@@ -2,8 +2,8 @@ Return-Path: <yashinde145@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C74FAC6FD18
-	for <webhook@archiver.kernel.org>; Wed, 29 Mar 2023 15:10:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C12BEC6FD18
+	for <webhook@archiver.kernel.org>; Wed, 29 Mar 2023 15:12:16 +0000 (UTC)
 Subject: Re: [meta-oe][PATCH] librelp: fix function inline errors in debug build
 To: openembedded-devel@lists.openembedded.org
 From: "Yash Shinde" <yashinde145@gmail.com>
@@ -11,19 +11,21 @@ X-Originating-Location: Mumbai, Maharashtra, IN (103.51.138.249)
 X-Originating-Platform: Windows Chrome 111
 User-Agent: GROUPS.IO Web Poster
 MIME-Version: 1.0
-Date: Wed, 29 Mar 2023 08:10:37 -0700
+Date: Wed, 29 Mar 2023 08:12:12 -0700
 References: <f6a4a396-84a6-9787-ad8a-d4e283a6442d@windriver.com>
 In-Reply-To: <f6a4a396-84a6-9787-ad8a-d4e283a6442d@windriver.com>
 Message-ID: <28476.1680102637231692864@lists.openembedded.org>
+X-Old-Date: Wed, 29 Mar 2023 08:10:37 -0700
 Content-Type: multipart/alternative; boundary="bLkbgkmRuErDNBgbA1GC"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 29 Mar 2023 15:10:46 -0000
+ <openembedded-devel@lists.openembedded.org>; Wed, 29 Mar 2023 15:12:16 -0000
 X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101821
+Message-ID: <20230329151212.nr6OxBTg4xTE03zv2X3UZEqXz8VcdCkkfnM4jNKeN0I@z>
 
 --bLkbgkmRuErDNBgbA1GC
-Content-Type: text/plain; charset="utf-8"
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
 >=20
@@ -136,7 +138,7 @@ Regards,
 Yash
 
 --bLkbgkmRuErDNBgbA1GC
-Content-Type: text/html; charset="utf-8"
+Content-Type: text/html; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
 <blockquote>
@@ -145,11 +147,11 @@ Content-Transfer-Encoding: quoted-printable
 <p>First, if we're going to take this approach, you should revert my work-a=
 round as part of this commit:</p>
 <p>commit ca10312c4c7e88d67f4b487ae9afcbfdf92898d6<br />Author:&nbsp;&nbsp;=
-&nbsp;&nbsp; Randy MacLeod&nbsp;<a class=3D"moz-txt-link-rfc2396E" style=3D=
-"cursor: pointer;" href=3D"mailto:Randy.MacLeod@..." target=3D"_blank" rel=
-=3D"nofollow noopener">&lt;Randy.MacLeod@...&gt;</a><br />Date: Wed Mar 1 1=
-9:24:27 2023<br /><br />&nbsp;&nbsp;&nbsp; librelp: make inline errors be w=
-arnings in debug build<br />&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ...</p>
+&nbsp;&nbsp; Randy MacLeod&nbsp;<a class=3D"moz-txt-link-rfc2396E" href=3D"=
+mailto:Randy.MacLeod@..." target=3D"_blank" rel=3D"nofollow noopener">&lt;R=
+andy.MacLeod@...&gt;</a><br />Date: Wed Mar 1 19:24:27 2023<br /><br />&nbs=
+p;&nbsp;&nbsp; librelp: make inline errors be warnings in debug build<br />=
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ...</p>
 </blockquote>
 Will send a v2 if needed.<br />
 <blockquote>
@@ -168,8 +170,7 @@ I tested the changes in LINCD sources which have GCC 12.2. I didn&rsquo;t c=
 heck the above mentioned version.<br />
 <blockquote>
 <p><br />Is there documentation that states that</p>
-<pre class=3D"moz-quote-pre" style=3D"line-height: 1.42857;">static inline =
-void
+<pre class=3D"moz-quote-pre">static inline void
 
 is not as portable as:
 
@@ -177,15 +178,15 @@ __attribute__((always_inline)) static inline void</pre>
 <p>&nbsp;</p>
 <p>I suspect there is not but I'm not a compiler geek!</p>
 </blockquote>
-<div>As you mentioned in<a href=3D"https://github.com/rsyslog/librelp/issue=
-s/256#:~:text=3DOh%20and%20it%20only%20happens%20when%20using%20%2DOg%20not=
-%20%2DO%5B0%2D3%5D" target=3D"_blank" rel=3D"noopener"> https://github.com/=
+<div>As you mentioned in <a href=3D"https://github.com/rsyslog/librelp/issu=
+es/256#:~:text=3DOh%20and%20it%20only%20happens%20when%20using%20%2DOg%20no=
+t%20%2DO%5B0%2D3%5D" target=3D"_blank" rel=3D"noopener">https://github.com/=
 rsyslog/librelp/issues/256#issue-1605905115</a>, it happens only when compl=
 ied without any optimization and as per <a href=3D"https://gcc.gnu.org/onli=
 nedocs/gcc/Inline.html#:~:text=3DGCC%20does%20not%20inline,const%20char)%20=
-__attribute__((always_inline))%3B" target=3D"_blank" rel=3D"noopener">https=
-://gcc.gnu.org/onlinedocs/gcc/Inline.html</a> it&rsquo;s mentioned that:</d=
-iv>
+__attribute__((always_inline))%3B" target=3D"_blank" rel=3D"nofollow noopen=
+er">https://gcc.gnu.org/onlinedocs/gcc/Inline.html</a> it&rsquo;s mentioned=
+ that:</div>
 <div>&nbsp;</div>
 <blockquote>
 <div>GCC does not inline any functions when not optimizing unless you speci=
