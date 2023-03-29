@@ -2,72 +2,67 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CBB0FC6FD18
-	for <webhook@archiver.kernel.org>; Wed, 29 Mar 2023 15:49:36 +0000 (UTC)
-Received: from mail-ot1-f51.google.com (mail-ot1-f51.google.com [209.85.210.51])
- by mx.groups.io with SMTP id smtpd.web10.1523.1680104972293008297
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 21BD1C74A5B
+	for <webhook@archiver.kernel.org>; Wed, 29 Mar 2023 19:35:57 +0000 (UTC)
+Received: from mail-oi1-f175.google.com (mail-oi1-f175.google.com [209.85.167.175])
+ by mx.groups.io with SMTP id smtpd.web10.6881.1680118555367074769
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 29 Mar 2023 08:49:32 -0700
+ Wed, 29 Mar 2023 12:35:55 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=F0f+fAdO;
- spf=pass (domain: gmail.com, ip: 209.85.210.51, mailfrom: raj.khem@gmail.com)
-Received: by mail-ot1-f51.google.com with SMTP id k14-20020a9d700e000000b0069faa923e7eso8417230otj.10
-        for <openembedded-devel@lists.openembedded.org>; Wed, 29 Mar 2023 08:49:32 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=jrP6wVgh;
+ spf=pass (domain: gmail.com, ip: 209.85.167.175, mailfrom: raj.khem@gmail.com)
+Received: by mail-oi1-f175.google.com with SMTP id f17so12443361oiw.10
+        for <openembedded-devel@lists.openembedded.org>; Wed, 29 Mar 2023 12:35:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112; t=1680104971;
+        d=gmail.com; s=20210112; t=1680118554;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=4If8ZvN7TnOSFz+SJiqA1KkAvtgHzJKTzGQ0Scs6LyI=;
-        b=F0f+fAdOwk2yIyacehFOc2/dZPcnkS8hQtIz5qee0fwutSAp1b3tIRtMIU6a5tDCWJ
-         88BvlZFjFR1GFEyuMTIIMlLkKN254SLC4w65via62mgUHlNqxb5VDIRGOLogjIZ2I8gi
-         8aMghTYea7M8SO08F77VpvmgwBOwjwqoL7QokgDclsfr8moRyuyb9otyUPhEUiOi54aE
-         6Aeu50gYTnQfs1WG++a/Hrffc7Wgg0P7qcVS7EDrtBH/pBWWn+ENTuyQUsK5LMsustk5
-         xw7Z+H8lMK7bbg3XgKmWZ59twPAz99slL7kkL2bmDuNaBqE10qTsSLJwkZu+nJ8OKlAC
-         S5nw==
+        bh=d+c5CMEUExxwrueUZzEHBe26mWWPbn/JVW9IcP8ug6w=;
+        b=jrP6wVghgNTjSKh4UWADtP9zT6lNtKVMuvetH5xXzL/yYSSrgwgzG+UUmCpVGECNAb
+         glOdZ8Sq9w84Ej/UF0yyaUOgqzf0Y74CSu3rUsoV+tIovYN+s0qgPaFQqQj4giM8TpfP
+         Gs9OKGEWs17wQyK5IkArTrZpGJCASesD4vploK3EyQ/+zf6eFeqwOU+wWb8PSH/3A75o
+         sbA827Jw25WwxMVWE4h8v22jHy+cRnz8ww6SxFhpZJ3jV9Nzi5IQdzb8A1ic0KsoegIH
+         0dgs3qAukW2JC/IpfDEo0OHcjEf+kE+ROScrllbnsNputY/QZtp5t228F9HuFNhxk00g
+         EaYA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112; t=1680104971;
+        d=1e100.net; s=20210112; t=1680118554;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=4If8ZvN7TnOSFz+SJiqA1KkAvtgHzJKTzGQ0Scs6LyI=;
-        b=pHNVSvx+waFOJIWQE+XvJDk0Zfho55c7uv5B+pfWBa6OfCYSYXsVUpBxjTThTZAQ8c
-         cCC97/1A2xnhNkQf+8FE3+Mn8NV051Ift9mKMzkaUNhIsaFOUur409PANSITktD76QlY
-         qPGG3S9XFSFcRce2nKoXbKMLY0enA13f9tTGhEJjgRlEVgVmJbfQ3RCaC5fqihE8+pa/
-         c99mi4EGPhVa3Pom0ipjUmy+OgrPaWS+YEzomKwf3CFR+ymHlwkSqsWnLjokUcHRJQlA
-         PTRNQeAy5f8PKaPS6H+stM6KULv3/LZCXfAeS8bqnTDyWXX3F1/7f5zkpVRYObhuUnYj
-         bKJg==
-X-Gm-Message-State: AO0yUKV+Uqk/51UVC3l9Y4flOF7jRQiiqVFQPYwdGpuEzkVRuFCi2Sdl
-	3Q+IXWtKcWgBBQT0wtXa5nRvYgPfbMuu0n5C0UE=
-X-Google-Smtp-Source: AK7set/XQcIRmwj6Tnsawf6Ikmj033NYkulI2bqRsaAhynxpIiUF5ThnOWPxTZinsPQZrP+mpNMH0H3V7uObpXsx2vE=
-X-Received: by 2002:a9d:67d8:0:b0:69f:229:ce72 with SMTP id
- c24-20020a9d67d8000000b0069f0229ce72mr6581802otn.2.1680104971396; Wed, 29 Mar
- 2023 08:49:31 -0700 (PDT)
+        bh=d+c5CMEUExxwrueUZzEHBe26mWWPbn/JVW9IcP8ug6w=;
+        b=Q2w42lnkGb+bfx9ddjlwouhqjHE/D80aLLZFZ78JSOswpracXT+jHZA03/cveudM/M
+         YzywuoxjNIcjRWnRLYnIC4Z6VNCtq6w2mvdDVefZHhe0fgPsKZ86eZIkxqNYJlbByIzq
+         CsNWQNjAnIc1Xs+q0JSzuvuShlCRx3XbImeG9Upv3ji2rSApM4g+o3uZtwhTTXOrAeW+
+         RiYZLIW41FXPPFUNIbPlE7nwjShL6Elyb48y/wv1gXPRExKaz0wY2bdQNS2dITzYQMcb
+         3shIqQ4fAZK/ds+mPktPCodN7qqaAtSipfN1r+lYbI8gLxW4M8Q5Hpwzel1kxYUv7EYR
+         rTxw==
+X-Gm-Message-State: AO0yUKXLYm5587kFZxPA9/4UJUT9jqm+A2NzrqXmf3USE0aFXASbgsc0
+	DUFQjoOUPM+/+d0rYTRxg5s6vKrzkfvG6jGS4EAA2p9y
+X-Google-Smtp-Source: AK7set92uzy2yx5j1Qn0il29CzxpMi4oYw8LOhMKkVropVJ1+UEGBk/fnVF2jBVrgXuVDkH1RAI/AuuRMeFaGodmoG0=
+X-Received: by 2002:aca:d7c1:0:b0:387:13ea:721a with SMTP id
+ o184-20020acad7c1000000b0038713ea721amr5968884oig.4.1680118554445; Wed, 29
+ Mar 2023 12:35:54 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230329075827.437650-1-yashinde145@gmail.com> <f6a4a396-84a6-9787-ad8a-d4e283a6442d@windriver.com>
-In-Reply-To: <f6a4a396-84a6-9787-ad8a-d4e283a6442d@windriver.com>
+References: <20230329123225.2048688-1-yashinde145@gmail.com>
+In-Reply-To: <20230329123225.2048688-1-yashinde145@gmail.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 29 Mar 2023 08:49:05 -0700
-Message-ID: <CAMKF1srqFnJmAf6Gwx4hgjY+FiHvnsOym5T-5kvUz=8DWbPX0A@mail.gmail.com>
+Date: Wed, 29 Mar 2023 12:35:28 -0700
+Message-ID: <CAMKF1soNfkuZguRXKtCzHS1AaJW-1KgqwCVLVh2CKy0juk67gw@mail.gmail.com>
 Subject: Re: [oe] [meta-oe][PATCH] librelp: fix function inline errors in
  debug build
-To: Randy MacLeod <randy.macleod@windriver.com>
-Cc: Yash Shinde <yashinde145@gmail.com>, openembedded-devel@lists.openembedded.org, 
-	Umesh.Kallapa@windriver.com, Naveen.Gowda@windriver.com, 
-	Sundeep.Kokkonda@windriver.com, Shivaprasad.Moodalappa@windriver.com, 
-	Yash.Shinde@windriver.com
+To: Yash Shinde <yashinde145@gmail.com>
+Cc: openembedded-devel@lists.openembedded.org, Yash.Shinde@windriver.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 29 Mar 2023 15:49:36 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101822
+ <openembedded-devel@lists.openembedded.org>; Wed, 29 Mar 2023 19:35:57 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101823
 
-On Wed, Mar 29, 2023 at 6:36=E2=80=AFAM Randy MacLeod
-<randy.macleod@windriver.com> wrote:
->
-> On 2023-03-29 03:58, Yash Shinde wrote:
+On Wed, Mar 29, 2023 at 6:12=E2=80=AFAM Yash Shinde <yashinde145@gmail.com>=
+ wrote:
 >
 > With DEBUG_BUILD =3D "1", the following errors occur:
 >
@@ -84,61 +79,7 @@ t considered for inlining [-Werror=3Dinline]
  for inlining [-Werror=3Dinline]
 >
 > Compiler does not inline any functions when not optimizing unless you spe=
-cify the =E2=80=98always_inline=E2=80=99 attribute for the function. Add "_=
-_attribute__((always_inline))" to avoid these function inline errors.
->
-> Hi Yash,
->
->
-> First, if we're going to take this approach, you should revert my work-ar=
-ound as part of this commit:
->
-> commit ca10312c4c7e88d67f4b487ae9afcbfdf92898d6
-> Author:     Randy MacLeod <Randy.MacLeod@windriver.com>
-> Date: Wed Mar 1 19:24:27 2023
->
->     librelp: make inline errors be warnings in debug build
->         ...
->
->
-> BUT...
->
-> The problem isn't so much that the code doesn't get in-lined when doing a=
- debug build but
-> that it fails to compile.  I think this is a compiler regressions since
-> I was not able to reproduce the error when compiling natively using Ubunt=
-u-22.04 (gcc-11.3) but
-> was able to reproduce it using Fedora-37, gcc --version : gcc (GCC) 12.2.=
-1 20221121 (Red Hat 12.2.1-4)
->
->
-> Does the change you made actually build with the two compiler versions ab=
-ove?
-> Is there documentation that states that
->
-> static inline void
->
-> is not as portable as:
->
-> __attribute__((always_inline)) static inline void
->
-
-they both are portable and in fact 'inline' is in ISO C99 and
-always_inline is a an compiler-specific hint which communicates more
-to compiler of user's intention and compiler may choose to inline it
-in more situations if compiler optimizer chooses it to inline, the
-behavior
-also depends on which compiler is in use.  'inline' is a hint
-which compiler could use if the optimizer chose inlining and weightage
-assigned to this function makes the cutoff.
-
-> I suspect there is not but I'm not a compiler geek!
->
-> ../Randy
->
->
->
->
+cify the =E2=80=98always_inline=E2=80=99 attribute for the function. Add ">
 >
 > Upstream-Status: Tracked by upstream bug: https://github.com/rsyslog/libr=
 elp/issues/256
@@ -150,6 +91,9 @@ elp/issues/256
 >  create mode 100644 meta-oe/recipes-extended/rsyslog/rsyslog/0002-librelp=
 -fix-function-inline-error.patch
 >
+
+This patch is missing from SRC_URI, so it won't be applied unless done so.
+
 > diff --git a/meta-oe/recipes-extended/rsyslog/rsyslog/0002-librelp-fix-fu=
 nction-inline-error.patch b/meta-oe/recipes-extended/rsyslog/rsyslog/0002-l=
 ibrelp-fix-function-inline-error.patch
@@ -227,17 +171,14 @@ relp/issues/256
 > +        pThis->pEngine->dbgprint((char*)"librelp: auth error: authdata:'=
 %s', ecode %d, "
 > +
->
->
 > --
-> # Randy MacLeod
-> # Wind River Linux
+> 2.34.1
 >
 >
 > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
 > Links: You receive all messages sent to this group.
-> View/Reply Online (#101820): https://lists.openembedded.org/g/openembedde=
-d-devel/message/101820
+> View/Reply Online (#101819): https://lists.openembedded.org/g/openembedde=
+d-devel/message/101819
 > Mute This Topic: https://lists.openembedded.org/mt/97927015/1997914
 > Group Owner: openembedded-devel+owner@lists.openembedded.org
 > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
