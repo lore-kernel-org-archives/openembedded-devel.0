@@ -1,281 +1,156 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <xiangyu.chen@eng.windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A1642C6FD18
-	for <webhook@archiver.kernel.org>; Wed, 29 Mar 2023 02:12:42 +0000 (UTC)
-Received: from mail-oo1-f49.google.com (mail-oo1-f49.google.com [209.85.161.49])
- by mx.groups.io with SMTP id smtpd.web11.14982.1680055959596245029
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C60F7C74A5B
+	for <webhook@archiver.kernel.org>; Wed, 29 Mar 2023 10:08:34 +0000 (UTC)
+Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
+ by mx.groups.io with SMTP id smtpd.web10.20728.1680084511903888590
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 28 Mar 2023 19:12:39 -0700
+ Wed, 29 Mar 2023 03:08:31 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=eki7q2ab;
- spf=pass (domain: gmail.com, ip: 209.85.161.49, mailfrom: raj.khem@gmail.com)
-Received: by mail-oo1-f49.google.com with SMTP id h22-20020a4ad756000000b0053e4ab58fb5so1167366oot.4
-        for <openembedded-devel@lists.openembedded.org>; Tue, 28 Mar 2023 19:12:39 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112; t=1680055959;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=Umlc5qv/qLXT8zcij4lHlZyw+6tQVVCWRbfRQZBIl04=;
-        b=eki7q2abS8uibOfNMJF9QG1EOtH9kxojFE9mY91OAvjS6ewm4pFIL/1kloNP4OjL4L
-         FBTwKsMY89xhN2LJHN/keUDOMb/GIaJ2wS6LmmrMt+QFzJMf0KiJ5WqjOwCrQaLRmErs
-         FApYmL+1aNG4bWHde3r5tHrZ7dd5Auib+6LgOUmi8S36mVb8U82pXAd7xyO8BQHS+0/H
-         hFjN4O+TcQR5VaXo7g/tQxnmsMxR4/x/jX1FxFt5OVCZrxGaSq2cd+T/MdRgtw56uiHb
-         pu+4nO3JM7AxiwBkzi9bg29a2ebD0fICb0e+MzozjenkENwDowUwfPiNpzMV7q7YoIkR
-         ICKQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112; t=1680055959;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=Umlc5qv/qLXT8zcij4lHlZyw+6tQVVCWRbfRQZBIl04=;
-        b=LirUA1Tvba2kCeGO9nn3QEEoAUhlKxXO8ZqppGZbOUxsKSi5ANWYpLFvgzrvgmVr8Z
-         a2ClI9EZGHatmaY5XzgjwrQzwMoKO13hfHbOnc2B58ulj1LyRqaghE0IQzA3rTmSqKiW
-         RcoSWH0UTsGwaoCuM4gK3Qn31nVygXQ+vWHB7XRijqacdLOo+7wTOTQ76AJ+Aryra7R5
-         lYAZ5BVhZMq5Z2nvpeto1BC91sq64bSzk0R/Gl7DnH48tjAtsG5rNYzz63hekIHynNGD
-         jZFZ+nbkDU85U8NLIC4mHKRGddhBAxc3uP9Xb1zcBfo0pTsrL6O3C8NHqhThW/Ox3Wfi
-         LFuA==
-X-Gm-Message-State: AO0yUKVrL9uFKz7QBa4QB6ZQpOUjoA6RrsKlDEP1WWXZpdEsZ6IPZ+aM
-	kT8MWvSWf1cY3jAf/4kERIEyYE+Zcn0b9muxLtK7gt4N
-X-Google-Smtp-Source: AK7set83l5tr1dabdVaazuvY4fVgB3R+6Pe5rcNe0ERFJsmG++ybHxwmrdm83PvA6IL55pKHg8fgTLU5XC+yhSIBoRA=
-X-Received: by 2002:a4a:d197:0:b0:53b:d027:81a with SMTP id
- j23-20020a4ad197000000b0053bd027081amr5903274oor.0.1680055958506; Tue, 28 Mar
- 2023 19:12:38 -0700 (PDT)
+ dkim=missing; spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=34523aef51=xiangyu.chen@windriver.com)
+Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 32T9UNaA014946
+	for <openembedded-devel@lists.openembedded.org>; Wed, 29 Mar 2023 03:08:31 -0700
+Received: from pps.reinject (localhost [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3phv85ve69-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Wed, 29 Mar 2023 03:08:31 -0700
+Received: from m0250810.ppops.net (m0250810.ppops.net [127.0.0.1])
+	by pps.reinject (8.17.1.5/8.17.1.5) with ESMTP id 32TA8VYE003042
+	for <openembedded-devel@lists.openembedded.org>; Wed, 29 Mar 2023 03:08:31 -0700
+Received: from nam11-bn8-obe.outbound.protection.outlook.com (mail-bn8nam11lp2169.outbound.protection.outlook.com [104.47.58.169])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3phv85ve68-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+	Wed, 29 Mar 2023 03:08:31 -0700
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=FNFPGSo0tM4WSLoYMDtFvm62ys9XW6GRiA/fdNxuh7fBB/01r/94AUfW/QSVDqT/R9ox0E8Tx+9cax8pdrtq0+t593XtIBZcsrvy5IMur6zoGNggylGf1tAri0NgKEK1uokJQPQfj/VvCjGM8B7adhFRj2vgdGadqlhukK6yDF+nyQXH2FFeiGbkdTKmoJjr/HimJiU1jBybHYzCnrwu/2a0ls7O3VgASROXVoPC/9+bb/CuoFfnCP1zEd7HkYSTSOFiiyDn306MVaqR3u0Qav/U8+R4B7cPeQ5JeI38VgDYKNaxzBQv8GvcKRDnD1v/wbJ22pqv05g4GsZL//lHuA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=0dpMZ3oDiBNSMziY4Ft9363P8ZKv9eLVi8NyaqLctus=;
+ b=kqiC/hFShBX2stElEuqRtmnTm79Kb87E0V5ncOfJd5zNwNlli6lu/rehf6C4caV3ZmREwiNCh1Ss9TXBCKNu/502m2MO2dFpAibjtPr7UshiTXvB2DhhIU6JezFRTJ36WAUHn9GbHVGsaevdXJZq1WBTMm5wViK71EMdHazr6wxW+qc0PHZAnr4fvf25IfKQlXowlf4DVKOsdzeNt/EC9Epga5NXk/kP8EdfOijXmSLhQlfmS2kzFDa+mSN0dh681WuJR32+JFZJJ9i/genckBtFnoHEVLFHDJ3p1bwfrAZ66PGt47MowFC6flG0a/CHRpepfX7phfOiy6b3rLPl4w==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=windriver.com; dmarc=pass action=none
+ header.from=eng.windriver.com; dkim=pass header.d=eng.windriver.com; arc=none
+Received: from MW4PR11MB5824.namprd11.prod.outlook.com (2603:10b6:303:187::19)
+ by PH7PR11MB8036.namprd11.prod.outlook.com (2603:10b6:510:248::11) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6222.30; Wed, 29 Mar
+ 2023 10:08:27 +0000
+Received: from MW4PR11MB5824.namprd11.prod.outlook.com
+ ([fe80::2ece:f831:c97b:dd8e]) by MW4PR11MB5824.namprd11.prod.outlook.com
+ ([fe80::2ece:f831:c97b:dd8e%6]) with mapi id 15.20.6222.028; Wed, 29 Mar 2023
+ 10:08:26 +0000
+From: Xiangyu Chen <xiangyu.chen@eng.windriver.com>
+To: raj.khem@gmail.com, openembedded-devel@lists.openembedded.org
+Subject: [oe][meta-oe][PATCH v3 0/3] protobuf: upgrade 3.21.12 -> 4.22.2
+Date: Wed, 29 Mar 2023 18:08:07 +0800
+Message-Id: <20230329100810.705855-1-xiangyu.chen@eng.windriver.com>
+X-Mailer: git-send-email 2.34.1
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: TYCP301CA0007.JPNP301.PROD.OUTLOOK.COM
+ (2603:1096:400:386::18) To MW4PR11MB5824.namprd11.prod.outlook.com
+ (2603:10b6:303:187::19)
 MIME-Version: 1.0
-References: <20230328064248.4049456-1-xiangyu.chen@eng.windriver.com>
- <20230328064248.4049456-2-xiangyu.chen@eng.windriver.com> <CAMKF1spGf+sSjwSoHRYr6c1XGEsWAHkww+Ew9G87iPu8+NyP7A@mail.gmail.com>
- <175085C237DCAF2E.28404@lists.openembedded.org> <1346bc03-e810-9a2d-95fe-360ccdb2d10b@windriver.com>
-In-Reply-To: <1346bc03-e810-9a2d-95fe-360ccdb2d10b@windriver.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 28 Mar 2023 19:12:12 -0700
-Message-ID: <CAMKF1soXibfCmBqCQTNi2ypereVYSdaMnXUdh9SiU4L4Xw+ndg@mail.gmail.com>
-Subject: Re: [oe][meta-oe][PATCH v2 1/2] protobuf: upgrade 3.21.12 -> 4.22.2
-To: Xiangyu Chen <xiangyu.chen@eng.windriver.com>
-Cc: "openembedded-devel@lists.openembedded.org" <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: MW4PR11MB5824:EE_|PH7PR11MB8036:EE_
+X-MS-Office365-Filtering-Correlation-Id: 88dc8b14-a4e3-4d4a-58df-08db303d89d1
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 
+	JahBWVA1Sy+PJtCSIObxOVRyjCC8DYrSDFD5HRCtU84JmVx04941pBuF81iUOBG5+tQNg/n+KLDtPexgxWwvIVdgpHaDrIrTUk/myTIqF6txugiOBBbAH7cvVCfb4lO4pSyQMwMTuz/h1ade2Ceo0MTi1rOP4TEZQ1oxhfUwBHqzS2U0Gse6S1wFuvgkcxg4sWlUUs3DjQBg1u1C2QjEhnjAvwzpbN/SU4ws0jrOQnWGaR02aHYMU4R+NMCwu9zU8JszxCaVBfUGlV0Me5+AgrcwrTYF6sFB8Wtt7fH9+g4tpdBcNieFWfda0upUJSFsGBZj1LerCFDZHrswR/H0jf+0r4vMliBUJxtryPU/OKjqwu2poTETF6uCedbExpFeHd7xdqm2txdIzXExcLmViXzxYpTbrcsMV8E1nrPPTw8hX9oNnVdpOfoceI9JXlIlrIqtE0C265uU6JDnkV0pK+ZXeNbmeJiz803e9++bXtC9t5WFRelcEDVaV+/sSN/IX3EwNiUV7Qs8907RA6TvR/7SR8B7ZxrkfDfC7hWt6MoGRwsec9RyJcmORNF3p00sIQTmF7KMpqZfJxx2+VN3F1qIVI5nP6AHht/Ai+6A5JQ=
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:MW4PR11MB5824.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230028)(4636009)(136003)(366004)(396003)(346002)(376002)(39850400004)(451199021)(6512007)(26005)(41300700001)(6506007)(1076003)(6666004)(186003)(6486002)(966005)(52116002)(83380400001)(2616005)(478600001)(316002)(38350700002)(44832011)(66476007)(38100700002)(66556008)(4744005)(2906002)(8676002)(66946007)(83170400001)(5660300002)(8936002);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?us-ascii?Q?u5z1buAfx+muKmFkYvrO7R9ZZI/z2DsYChGNoazK1e+E2AMHbZXx8HGV0vyi?=
+ =?us-ascii?Q?mGdhqTwP+vIAmgXenzYwBdyiWp+Rg9OT2BlHCSfuRlNd+WK1ImaDQNkCe06D?=
+ =?us-ascii?Q?46FlwkjBbChbVW3W3f4xhQDf8MLzAtlNqdcxov1DuvUkHOOsEJAr5DMBSnin?=
+ =?us-ascii?Q?P4ICDYRRepp18Nk8PEQZWtk0HX03kVTGHRaoPvfpsd+NhrrZwqsd8U5BGwyY?=
+ =?us-ascii?Q?0oHlEsgbGiddD/VO4x6gGCkEQjJWRtwf3ZBtRt4BH6k6JCmrr3EyRYQF0/+Y?=
+ =?us-ascii?Q?PK8Vedph8aqo1JSkIvKnGmU4uC5obwh9THBo4mvsLtR02QSQi5BFeqM+F/Jg?=
+ =?us-ascii?Q?8POvqZG65PUwgsAv2Njc4wrg4r5FCXRENO0bJc7cN34ssOa26I9s/XI1yTw9?=
+ =?us-ascii?Q?QYtMUcx/zoMzKovrtHbglG5w/KjScRKPkQ5SAGaznUyemQDxrFDBCFB9JbCB?=
+ =?us-ascii?Q?TVPd0XcX4SZlYH3QtT7YvBYl0XGChKiudXI5M/mgDSreFQVsjyR1VAUICbXz?=
+ =?us-ascii?Q?hNCgcgiHlhY4QiPGSso9nHKfbJ2nAHkD+uXM5SbxEbNzxWT188L7yC9nDV+C?=
+ =?us-ascii?Q?3e1rK5PLp6zFkfjn4fIJhmyV4W7xTlj6VZpynJXzs1oF2x97t+CTe6bedhBZ?=
+ =?us-ascii?Q?jT3IZyEMcad61iobD8Z7JvTOm2uEBZoAIRk9h6WxFTvljZdvr/89+vbkE8ez?=
+ =?us-ascii?Q?T6bFG6QWhlBH3AhOJAPuSTOlrd2Xhi28DxXcO7O4OTTscaLfbf3CuSCSsdYo?=
+ =?us-ascii?Q?dUkfoqU/6cENtpREygI8Fp5d2VuOawGd5mlt7Q/rG0HWRDHQwgDgyX2VJPhl?=
+ =?us-ascii?Q?hQpPAF3f9D/IiVdjZIAjHV4MAykeWSKXJ23vJu+YdcOxZeOLCFTnD+2LNHTR?=
+ =?us-ascii?Q?GCvPSCLmrasanQKy7tCw21oJ0dOi8gE6picpjIlmfUUigcKx5ewBXzfGePDg?=
+ =?us-ascii?Q?y0Nr6PW/vxUYJ+8of/GPjTER9SLpVgWimhNqkdydSbj6TbIut/gx+hlw/+0Y?=
+ =?us-ascii?Q?OXkF7jBZ9GbJ0YK3ZwgfDWmeb6ilLbdeRN/ezFKy7+cgwiqszR60dFiOYTVy?=
+ =?us-ascii?Q?/hz2BoufStdZypECZt4mt5+hLtVjpBW3+zJYs2NUVovYnGEStfXiWPyV8e+u?=
+ =?us-ascii?Q?MbxatuCupRn4daStwxmJZyAPdh+WPJSl+zZ3mkdMs7lo/XTU2SIrsXb1w820?=
+ =?us-ascii?Q?llOqlHG8YOASHKIlwMUMiLfZymAkpGxvN3bMw1UEvmhgbj2xQY01HcIEn1FZ?=
+ =?us-ascii?Q?czpUffT7hUGGINjJOkHyLcYU8c3FnEm1jNnC+Dgrt/vZWyvr7RCcj++2oH3O?=
+ =?us-ascii?Q?FUp4kXajAsEWsRaf50c1+7mGlBPssiz41UUh+AXcoV36JY/WSsQ0uTsKhak2?=
+ =?us-ascii?Q?az6M5jQWSxTQnhC/weZIYR+kEue4/qjONectbfWUGpzgCFKczjmPhBIbUE4e?=
+ =?us-ascii?Q?PyajOxqoL68bEubVvL49CI/MNzYjIh12K5PNIVf9EBu9XF+6OBzjWpp1Q9Ny?=
+ =?us-ascii?Q?+laW6xNOsaJvKncM0t1CgolNBMQp3ZQ5mcNa6O4U/ZsHs04izdgPn7Met1Fp?=
+ =?us-ascii?Q?rmvRz/xf7Hm3GzlAClmkcDU6fwFUE0qkNg5afq7KqheaMBZLTpsZSrhAR1fm?=
+ =?us-ascii?Q?4Q=3D=3D?=
+X-OriginatorOrg: eng.windriver.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 88dc8b14-a4e3-4d4a-58df-08db303d89d1
+X-MS-Exchange-CrossTenant-AuthSource: MW4PR11MB5824.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Mar 2023 10:08:26.8837
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: czC7SQaOEUaMhBFlBxRs9flTqO6L+ocKkrzR678/j/YjaVdhhrS3STwd2ygQUucFYsweOKCoo2Alr1aGuyyeJBpE6pYYhM0LD5TzZG50yPM=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR11MB8036
+X-Proofpoint-GUID: kZuFZFtu5nCwZh_mUHjqwHrTCc6CEBRw
+X-Proofpoint-ORIG-GUID: 0PcU2BOWBzL956j9YwAL3hOGMsik4l_P
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.254,Aquarius:18.0.942,Hydra:6.0.573,FMLib:17.11.170.22
+ definitions=2023-03-29_04,2023-03-28_02,2023-02-09_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 suspectscore=0 malwarescore=0
+ adultscore=0 clxscore=1015 mlxlogscore=694 bulkscore=0 spamscore=0
+ impostorscore=0 phishscore=0 mlxscore=0 priorityscore=1501
+ lowpriorityscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.12.0-2303200000 definitions=main-2303290084
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 29 Mar 2023 02:12:42 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101811
+ <openembedded-devel@lists.openembedded.org>; Wed, 29 Mar 2023 10:08:34 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101812
 
-On Tue, Mar 28, 2023 at 6:57=E2=80=AFPM Xiangyu Chen
-<xiangyu.chen@eng.windriver.com> wrote:
->
-> Hi,
->
->
-> On 3/28/23 15:48, Xiangyu Chen wrote:
-> > Hello,
-> >
-> >
-> > On 3/28/23 15:22, Khem Raj wrote:
-> >> CAUTION: This email comes from a non Wind River email account!
-> >> Do not click links or open attachments unless you recognize the
-> >> sender and know the content is safe.
-> >>
-> >> it stil fails
-> >>
-> >> Summary: 2 tasks failed:
-> >> virtual:native:/mnt/b/yoe/master/sources/meta-openembedded/meta-oe/rec=
-ipes-devtools/protobuf/protobuf-c_1.4.1.bb:do_compile
-> >> /mnt/b/yoe/master/sources/meta-openembedded/meta-oe/recipes-connectivi=
-ty/mosh/mosh_1.4.0.bb:do_configure
-> >> Summary: There were 4 ERROR messages, returning a non-zero exit code.
-> >
-> > Could you please help to share the error log with me? thanks.
-> >
-> > I applied the protobuf-c related patch cannot reproduce in my local
-> > setup with "bitbake protobuf-c -c cleanall;bitbake protobuf-c" .
-> >
-> Upgrading protobuf caused the mosh compile error has already fixed and
-> sent a patch to mosh upstream[1], this commit will contain in V3 patch,
->
-> but regarding protobuf-c, after applying the patch that was sent to
-> oe-dev list[2] yesterday is building normal in my local setup. could you
-> help to
->
-> share the error log which happens on build server? thanks!
+From: Xiangyu Chen <xiangyu.chen@windriver.com>
 
-Try building with clang perhaps thats is whats failing.
+Changes:
+v2->v3:
+1. fix mosh compile failure
+2. fix protobuf-c compile failure under clang
 
->
->
-> [1] https://github.com/mobile-shell/mosh/pull/1266
->
-> [2] https://lists.openembedded.org/g/openembedded-devel/message/101797
->
->
-> Thanks!
->
->
-> >
-> > Br,
-> >
-> > Xiangyu
-> >
-> >>
-> >> On Mon, Mar 27, 2023 at 11:43=E2=80=AFPM Xiangyu Chen
-> >> <xiangyu.chen@eng.windriver.com> wrote:
-> >>> From: Xiangyu Chen <xiangyu.chen@windriver.com>
-> >>>
-> >>> Signed-off-by: Xiangyu Chen <xiangyu.chen@windriver.com>
-> >>> ---
-> >>>   ...efile-respect-CXX-LDFLAGS-variables-fix-.patch | 15
-> >>> +++++++++------
-> >>>   .../{protobuf_3.21.12.bb =3D> protobuf_4.22.2.bb}   | 11 ++++++++--=
--
-> >>>   2 files changed, 17 insertions(+), 9 deletions(-)
-> >>>   rename meta-oe/recipes-devtools/protobuf/{protobuf_3.21.12.bb =3D>
-> >>> protobuf_4.22.2.bb} (86%)
-> >>>
-> >>> diff --git
-> >>> a/meta-oe/recipes-devtools/protobuf/protobuf/0001-examples-Makefile-r=
-espect-CXX-LDFLAGS-variables-fix-.patch
-> >>> b/meta-oe/recipes-devtools/protobuf/protobuf/0001-examples-Makefile-r=
-espect-CXX-LDFLAGS-variables-fix-.patch
-> >>>
-> >>> index 36c3c597a..7c4bf260e 100644
-> >>> ---
-> >>> a/meta-oe/recipes-devtools/protobuf/protobuf/0001-examples-Makefile-r=
-espect-CXX-LDFLAGS-variables-fix-.patch
-> >>> +++
-> >>> b/meta-oe/recipes-devtools/protobuf/protobuf/0001-examples-Makefile-r=
-espect-CXX-LDFLAGS-variables-fix-.patch
-> >>> @@ -30,7 +30,7 @@ Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
-> >>>    1 file changed, 4 insertions(+), 2 deletions(-)
-> >>>
-> >>>   diff --git a/examples/Makefile b/examples/Makefile
-> >>> -index 1c7ec8d63..85f591231 100644
-> >>> +index ef7a4ef58..7206e14e1 100644
-> >>>   --- a/examples/Makefile
-> >>>   +++ b/examples/Makefile
-> >>>   @@ -2,6 +2,8 @@
-> >>> @@ -42,17 +42,20 @@ index 1c7ec8d63..85f591231 100644
-> >>>    all: cpp java python
-> >>>
-> >>>    cpp:    add_person_cpp    list_people_cpp
-> >>> -@@ -40,11 +42,11 @@ protoc_middleman_dart: addressbook.proto
-> >>> +@@ -41,11 +43,11 @@ protoc_middleman_dart: addressbook.proto
-> >>>
-> >>>    add_person_cpp: add_person.cc protoc_middleman
-> >>>          pkg-config --cflags protobuf  # fails if protobuf is not
-> >>> installed
-> >>> --      c++ -std=3Dc++11 add_person.cc addressbook.pb.cc -o
-> >>> add_person_cpp `pkg-config --cflags --libs protobuf`
-> >>> -+      $(CXX) $(CXXFLAGS) $(LDFLAGS)
-> >>> ../src/google/protobuf/.libs/timestamp.pb.o $(PROTOBUF)
-> >>> add_person.cc addressbook.pb.cc -o add_person_cpp
-> >>> +-      c++ -std=3Dc++14 add_person.cc addressbook.pb.cc -o
-> >>> add_person_cpp `pkg-config --cflags --libs protobuf`
-> >>> ++      $(CXX) $(CXXFLAGS) $(LDFLAGS)
-> >>> ../src/google/protobuf/.libs/timestamp.pb.o $(PROTOBUF)
-> >>> add_person.cc addressbook.pb.cc -o add_person_cpp #$(CXX) -std=3Dc++1=
-7
-> >>> $(PROTOBUF) add_person.cc addressbook.pb.cc -o add_person_cpp
-> >>>
-> >>>    list_people_cpp: list_people.cc protoc_middleman
-> >>>          pkg-config --cflags protobuf  # fails if protobuf is not
-> >>> installed
-> >>> --      c++ -std=3Dc++11 list_people.cc addressbook.pb.cc -o
-> >>> list_people_cpp `pkg-config --cflags --libs protobuf`
-> >>> -+      $(CXX) $(CXXFLAGS) $(LDFLAGS)
-> >>> ../src/google/protobuf/.libs/timestamp.pb.o $(PROTOBUF)
-> >>> list_people.cc addressbook.pb.cc -o list_people_cpp
-> >>> +-      c++ -std=3Dc++14 list_people.cc addressbook.pb.cc -o
-> >>> list_people_cpp `pkg-config --cflags --libs protobuf`
-> >>> ++      $(CXX) $(CXXFLAGS) $(LDFLAGS)
-> >>> ../src/google/protobuf/.libs/timestamp.pb.o $(PROTOBUF)
-> >>> list_people.cc addressbook.pb.cc -o list_people_cpp #$(CXX)
-> >>> -std=3Dc++17 $(PROTOBUF) list_people.cc addressbook.pb.cc -o
-> >>> list_people_cpp
-> >>>
-> >>>    add_person_dart: add_person.dart protoc_middleman_dart
-> >>>
-> >>> +--
-> >>> +2.34.1
-> >>> +
-> >>> diff --git a/meta-oe/recipes-devtools/protobuf/protobuf_3.21.12.bb
-> >>> b/meta-oe/recipes-devtools/protobuf/protobuf_4.22.2.bb
-> >>> similarity index 86%
-> >>> rename from meta-oe/recipes-devtools/protobuf/protobuf_3.21.12.bb
-> >>> rename to meta-oe/recipes-devtools/protobuf/protobuf_4.22.2.bb
-> >>> index 343933033..0c6b446dc 100644
-> >>> --- a/meta-oe/recipes-devtools/protobuf/protobuf_3.21.12.bb
-> >>> +++ b/meta-oe/recipes-devtools/protobuf/protobuf_4.22.2.bb
-> >>> @@ -7,12 +7,12 @@ SECTION =3D "console/tools"
-> >>>   LICENSE =3D "BSD-3-Clause"
-> >>>   LIC_FILES_CHKSUM =3D
-> >>> "file://LICENSE;md5=3D37b5762e07f0af8c74ce80a8bda4266b"
-> >>>
-> >>> -DEPENDS =3D "zlib"
-> >>> +DEPENDS =3D "zlib abseil-cpp"
-> >>>   DEPENDS:append:class-target =3D " protobuf-native"
-> >>>
-> >>> -SRCREV =3D "f0dc78d7e6e331b8c6bb2d5283e06aa26883ca7c"
-> >>> +SRCREV =3D "81f89d509d6771dcccb619cbe26ac86cec472582"
-> >>>
-> >>> -SRC_URI =3D
-> >>> "git://github.com/protocolbuffers/protobuf.git;branch=3D21.x;protocol=
-=3Dhttps
-> >>> \
-> >>> +SRC_URI =3D
-> >>> "gitsm://github.com/protocolbuffers/protobuf.git;branch=3D22.x;protoc=
-ol=3Dhttps
-> >>> \
-> >>>              file://run-ptest \
-> >>> file://0001-examples-Makefile-respect-CXX-LDFLAGS-variables-fix-.patc=
-h
-> >>> \
-> >>>              file://0001-Fix-linking-error-with-ld-gold.patch \
-> >>> @@ -35,6 +35,7 @@ EXTRA_OECMAKE +=3D "\
-> >>>       -Dprotobuf_BUILD_LIBPROTOC=3DON \
-> >>>       -Dprotobuf_BUILD_TESTS=3DOFF \
-> >>>       -Dprotobuf_BUILD_EXAMPLES=3DOFF \
-> >>> +    -Dprotobuf_ABSL_PROVIDER=3D"package" \
-> >>>   "
-> >>>
-> >>>   TEST_SRC_DIR =3D "examples"
-> >>> @@ -52,7 +53,11 @@ do_compile_ptest() {
-> >>>          cp ${S}/${TEST_SRC_DIR}/Makefile "${B}/${TEST_SRC_DIR}/"
-> >>>          sed -e 's|libdir=3D|libdir=3D${PKG_CONFIG_SYSROOT_DIR}|' -i
-> >>> "${B}/${TEST_SRC_DIR}/protobuf.pc"
-> >>>          sed -e 's|Cflags:|Cflags: -I${S}/src|' -i
-> >>> "${B}/${TEST_SRC_DIR}/protobuf.pc"
-> >>> +       sed -e 's|Cflags:|Cflags:
-> >>> -I${WORKDIR}/recipe-sysroot-native${includedir} |' -i
-> >>> "${B}/${TEST_SRC_DIR}/protobuf.pc"
-> >>>          sed -e 's|Libs:|Libs: -L${B}|' -i
-> >>> "${B}/${TEST_SRC_DIR}/protobuf.pc"
-> >>> +       sed -e 's|Libs:|Libs:
-> >>> -L${WORKDIR}/recipe-sysroot-native/usr/lib|' -i
-> >>> "${B}/${TEST_SRC_DIR}/protobuf.pc"
-> >>> +       sed -e 's|Libs:|Libs: -labsl_log_internal_check_op |' -i
-> >>> "${B}/${TEST_SRC_DIR}/protobuf.pc"
-> >>> +       sed -e 's|Libs:|Libs: -labsl_log_internal_message |' -i
-> >>> "${B}/${TEST_SRC_DIR}/protobuf.pc"
-> >>>          # Until out-of-tree build of examples is supported, we have
-> >>> to use this approach
-> >>>          sed -e
-> >>> 's|../src/google/protobuf/.libs/timestamp.pb.o|${B}/CMakeFiles/libpro=
-tobuf.dir/src/google/protobuf/timestamp.pb.cc.o|'
-> >>> -i "${B}/${TEST_SRC_DIR}/Makefile"
-> >>>          export PKG_CONFIG_PATH=3D"${B}/${TEST_SRC_DIR}"
-> >>> --
-> >>> 2.34.1
-> >>>
-> >
-> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> > Links: You receive all messages sent to this group.
-> > View/Reply Online (#101802): https://lists.openembedded.org/g/openembed=
-ded-devel/message/101802
-> > Mute This Topic: https://lists.openembedded.org/mt/97900181/7175143
-> > Group Owner: openembedded-devel+owner@lists.openembedded.org
-> > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub =
-[xiangyu.chen@eng.windriver.com]
-> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> >
+protobuf,protobuf-c and mosh tested under both clang and gcc mode.
+
+
+v1->v2:
+The v2[1] patch for upgrading protobuf from 3.21.12 to 4.22.2.
+After upgrading the protobuf, the package protobuf-c cannot compile anymore[2] due to the latest version
+protobuf is using c++14 and some of API name has been changed, so use another patch to add support of
+protobuf latest version in protobuf-c.
+
+
+Ref:
+[1] v1 thread please refer to https://lists.openembedded.org/g/openembedded-devel/message/101784
+[2] https://errors.yoctoproject.org/Errors/Details/698756/
+
+
+Xiangyu Chen (3):
+  protobuf: upgrade 3.21.12 -> 4.22.2
+  protobuf-c: add support of protobuf 4.22.x
+  mosh: add support of protobuf 4.22.x
+
+
+-- 
+2.34.1
+
 
