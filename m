@@ -1,177 +1,87 @@
-Return-Path: <yashinde145@gmail.com>
+Return-Path: <mingli.yu@eng.windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C74DDC6FD1D
-	for <webhook@archiver.kernel.org>; Thu, 30 Mar 2023 05:44:49 +0000 (UTC)
-Received: from mail-pj1-f53.google.com (mail-pj1-f53.google.com [209.85.216.53])
- by mx.groups.io with SMTP id smtpd.web10.18310.1680155079611239603
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E03C1C74A5B
+	for <webhook@archiver.kernel.org>; Thu, 30 Mar 2023 06:05:19 +0000 (UTC)
+Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
+ by mx.groups.io with SMTP id smtpd.web10.18493.1680156317719860655
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 29 Mar 2023 22:44:39 -0700
+ Wed, 29 Mar 2023 23:05:17 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=IMG73MXh;
- spf=pass (domain: gmail.com, ip: 209.85.216.53, mailfrom: yashinde145@gmail.com)
-Received: by mail-pj1-f53.google.com with SMTP id p3-20020a17090a74c300b0023f69bc7a68so18489972pjl.4
-        for <openembedded-devel@lists.openembedded.org>; Wed, 29 Mar 2023 22:44:39 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112; t=1680155079;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=J/KI+22mxlLgDrHfx1tr1chLnxtEwyNUxoXYYl99+OE=;
-        b=IMG73MXhhPt+nxc7AMyJ9g4zo2WdabtGRuZMWtbW00e4siPZLQeiDaEDfKoI0bOogM
-         HSyZM7BZRvGgppQ8ofhbx6FEQtFJSjimy7bfGDxyFBltO1NTkeh5UoktTPP0NmjkGt1l
-         x2G0IZLuBUJu7UCGneROU2ADdX8QOaaLaVSA6DX5Alor+QpK6i28jAmsLhp0kD2bG8nq
-         D3bCEwiszalILjHAcAtbjifJXKJu75AcmabKdYg2rHqgVQa2t8+pxX78NU5pntKG57UK
-         w5vYi5qgu/LPprNsXWUj+X/iVBL9mIp3lKYglEw9QPTooYy5XXIfM0Q29GZHik89Psf7
-         lBew==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112; t=1680155079;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=J/KI+22mxlLgDrHfx1tr1chLnxtEwyNUxoXYYl99+OE=;
-        b=28Q547QlgpANIKUHd0sIPrexNJENcYr/miHZ/PmGPtnti0eY8kXqWvHDsHMC13s/Ax
-         jUcq0Sr6KoQYa80vvsjjSPMSAlG4SdPEqDx9iNX1PkSVPF6SYql5Pwfx09do8AEGmR0d
-         Lb4gBc5qNK2+Zh98cJOPXHBPmwewC3I2Wtiif5YmdptWtvsKDOH8apAo4XJPEUzNIiTr
-         +A2EpCeVJsdXA5yAQi+U9NqrmTd/SB5ZP79xZ384pDpE7wxbqCl3QWLSXfTROP4p0KLd
-         wRkIjmXA2pZqL68L6fs40HCN1sUeRj1eRdNjQqUkkylI9lt6ZqZuoX/zqENuqkBrrOQj
-         QtBw==
-X-Gm-Message-State: AAQBX9dvVpZxFDyzG0g1jwNeyBOAFTdytvhWtl/MDLEuUNGre2TWpi65
-	79k/cmKSL5q4E7DrScfj2X6dLMvb2MlaVA==
-X-Google-Smtp-Source: AKy350Zu371i4DyTeCKkSnXEWzH2lr/vQlIelNEy2sUGQAh0CsfumB7n9p+2JzfuLyVXZmlRX90m6w==
-X-Received: by 2002:a17:90b:4d11:b0:23f:e32:7e62 with SMTP id mw17-20020a17090b4d1100b0023f0e327e62mr26261429pjb.12.1680155078490;
-        Wed, 29 Mar 2023 22:44:38 -0700 (PDT)
-Received: from bft-PowerEdge-R620.. ([49.204.85.206])
-        by smtp.gmail.com with ESMTPSA id cc10-20020a17090af10a00b0023d1976cd34sm2422980pjb.17.2023.03.29.22.44.32
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 29 Mar 2023 22:44:34 -0700 (PDT)
-From: Yash Shinde <yashinde145@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Randy.MacLeod@windriver.com,
-	Sundeep.Kokkonda@windriver.com,
-	Yash.Shinde@windriver.com
-Subject: [meta-oe][PATCH v2] librelp: fix function inline errors in debug build
-Date: Thu, 30 Mar 2023 11:14:14 +0530
-Message-Id: <20230330054414.15931-1-yashinde145@gmail.com>
-X-Mailer: git-send-email 2.34.1
+ dkim=missing; spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=34538e5162=mingli.yu@windriver.com)
+Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 32U5bvMp000473
+	for <openembedded-devel@lists.openembedded.org>; Wed, 29 Mar 2023 23:05:17 -0700
+Received: from ala-exchng02.corp.ad.wrs.com (unknown-82-254.windriver.com [147.11.82.254])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3phv85wppn-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Wed, 29 Mar 2023 23:05:17 -0700
+Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
+ ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.18; Wed, 29 Mar 2023 23:05:16 -0700
+Received: from pek-lpg-core2.wrs.com (128.224.153.41) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
+ 15.1.2507.17 via Frontend Transport; Wed, 29 Mar 2023 23:05:16 -0700
+From: <mingli.yu@eng.windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [meta-oe][PATCH] mcelog: improve the ptest output
+Date: Thu, 30 Mar 2023 14:05:15 +0800
+Message-ID: <20230330060515.3968306-1-mingli.yu@eng.windriver.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Proofpoint-GUID: 9F9JjZ3L9XH1rlDmDps2K2Roti_TEC7g
+X-Proofpoint-ORIG-GUID: 9F9JjZ3L9XH1rlDmDps2K2Roti_TEC7g
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.254,Aquarius:18.0.942,Hydra:6.0.573,FMLib:17.11.170.22
+ definitions=2023-03-30_02,2023-03-30_01,2023-02-09_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 suspectscore=0 malwarescore=0
+ adultscore=0 clxscore=1015 mlxlogscore=882 bulkscore=0 spamscore=0
+ impostorscore=0 phishscore=0 mlxscore=0 priorityscore=1501
+ lowpriorityscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.12.0-2303200000 definitions=main-2303300047
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 30 Mar 2023 05:44:49 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101828
+ <openembedded-devel@lists.openembedded.org>; Thu, 30 Mar 2023 06:05:19 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101829
 
-With DEBUG_BUILD = "1", the following errors occur:
+From: Mingli Yu <mingli.yu@windriver.com>
 
-   src/relpsess.c:95:1: error:
-      inlining failed in call to 'relpSessFreePermittedPeers': function not considered for inlining [-Werror=inline]
+Before:
+ # ./run-ptest
+ [snip]
+ code 0xd2d: [PASS]
 
-   src/tcp.c:146:1: error:
-      inlining failed in call to 'relpTcpFreePermittedPeers': function not considered for inlining [-Werror=inline]
+ After:
+ # ./run-ptest
+  [snip]
+  PASS: code 0xd2d
 
-   src/tcp.c:158:1: error:
-      inlining failed in call to 'callOnAuthErr': function not considered for inlining [-Werror=inline]
-
-Compiler does not inline any functions when not optimizing unless you specify the ‘always_inline’ attribute for the function.
-Add "__attribute__((always_inline))" to avoid these function inline errors.
-
-Also revert the work-around made earlier in librelp_1.11.0.bb.
-
-Upstream-Status: Tracked by upstream bug: https://github.com/rsyslog/librelp/issues/256
-
-Signed-off-by: Yash Shinde <Yash.Shinde@windriver.com>
+Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
 ---
- ...01-librelp-fix-function-inline-error.patch | 58 +++++++++++++++++++
- .../rsyslog/librelp_1.11.0.bb                 |  2 +-
- 2 files changed, 59 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-extended/rsyslog/librelp/0001-librelp-fix-function-inline-error.patch
+ meta-oe/recipes-support/mcelog/mcelog/run-ptest | 8 +++++++-
+ 1 file changed, 7 insertions(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-extended/rsyslog/librelp/0001-librelp-fix-function-inline-error.patch b/meta-oe/recipes-extended/rsyslog/librelp/0001-librelp-fix-function-inline-error.patch
-new file mode 100644
-index 000000000..523a8991f
---- /dev/null
-+++ b/meta-oe/recipes-extended/rsyslog/librelp/0001-librelp-fix-function-inline-error.patch
-@@ -0,0 +1,58 @@
-+From dc841f01fb6167ec9a80e373c5f4d2f5e3222ed6 Mon Sep 17 00:00:00 2001
-+From: Yash Shinde <Yash.Shinde@...>
-+Date: Tue, 28 Mar 2023 04:06:58 +0000
-+Subject: librelp: fix function inline errors in debug build
-+
-+With DEBUG_BUILD = "1", the following errors occur:
-+
-+   src/relpsess.c:95:1: error:
-+      inlining failed in call to 'relpSessFreePermittedPeers': function not considered for inlining [-Werror=inline]
-+
-+   src/tcp.c:146:1: error:
-+      inlining failed in call to 'relpTcpFreePermittedPeers': function not considered for inlining [-Werror=inline]
-+
-+   src/tcp.c:158:1: error:
-+      inlining failed in call to 'callOnAuthErr': function not considered for inlining [-Werror=inline]
-+
-+Compiler does not inline any functions when not optimizing unless you specify the ‘always_inline’ attribute for the function. Add "__attribute__((always_inline))" to avoid these function inline errors.
-+
-+Upstream-Status: Tracked by upstream bug: https://github.com/rsyslog/librelp/issues/256
-+
-+Signed-off-by: Yash Shinde <Yash.Shinde@...>
-+---
-+
-+diff --git a/src/relpsess.c b/src/relpsess.c
-+index ee7b595..aa52b71 100644
-+--- a/src/relpsess.c
-++++ b/src/relpsess.c
-+@@ -91,7 +91,7 @@ callOnErr(const relpSess_t *__restrict__ const pThis,
-+
-+
-+ /* helper to free permittedPeer structure */
-+-static inline void
-++__attribute__((always_inline)) static inline void
-+ relpSessFreePermittedPeers(relpSess_t *const pThis)
-+ {
-+        int i;
-+diff --git a/src/tcp.c b/src/tcp.c
-+index 7a75cc4..f4088c0 100644
-+--- a/src/tcp.c
-++++ b/src/tcp.c
-+@@ -142,7 +142,7 @@ static int relpTcpChkPeerName(relpTcp_t *const pThis, void* cert);
-+
-+
-+ /* helper to free permittedPeer structure */
-+-static inline void
-++__attribute__((always_inline)) static inline void
-+ relpTcpFreePermittedPeers(relpTcp_t *const pThis)
-+ {
-+        int i;
-+@@ -154,7 +154,7 @@ relpTcpFreePermittedPeers(relpTcp_t *const pThis)
-+ }
-+
-+ /* helper to call onAuthErr if set */
-+-static inline void
-++__attribute__((always_inline)) static inline void
-+ callOnAuthErr(relpTcp_t *const pThis, const char *authdata, const char *emsg, relpRetVal ecode)
-+ {
-+        pThis->pEngine->dbgprint((char*)"librelp: auth error: authdata:'%s', ecode %d, "
-diff --git a/meta-oe/recipes-extended/rsyslog/librelp_1.11.0.bb b/meta-oe/recipes-extended/rsyslog/librelp_1.11.0.bb
-index e7b79ad03..a41b05a35 100644
---- a/meta-oe/recipes-extended/rsyslog/librelp_1.11.0.bb
-+++ b/meta-oe/recipes-extended/rsyslog/librelp_1.11.0.bb
-@@ -7,6 +7,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=1fb9c10ed9fd6826757615455ca893a9"
- DEPENDS = "gmp nettle libidn zlib gnutls openssl"
+diff --git a/meta-oe/recipes-support/mcelog/mcelog/run-ptest b/meta-oe/recipes-support/mcelog/mcelog/run-ptest
+index ba7a2c768..320240f27 100644
+--- a/meta-oe/recipes-support/mcelog/mcelog/run-ptest
++++ b/meta-oe/recipes-support/mcelog/mcelog/run-ptest
+@@ -1,3 +1,9 @@
+ #!/bin/sh
  
- SRC_URI = "git://github.com/rsyslog/librelp.git;protocol=https;branch=stable \
-+           file://0001-librelp-fix-function-inline-error.patch \
- "
- 
- SRCREV = "b421f56d9ee31a966058d23bd23c966221c91396"
-@@ -15,6 +16,5 @@ S = "${WORKDIR}/git"
- 
- inherit autotools pkgconfig
- 
--DEBUG_OPTIMIZATION:append = " -Wno-error=inline"
- 
- 
+-make -C tests test
++make -C tests test | sed -e '/\[PASS\]/ s/^/PASS: /g' \
++                         -e '/\[FAIL\]/ s/^/FAIL: /g' \
++                         -e '/\[IGNORE\]/ s/^/SKIP: /g' \
++                         -e 's/IGNORE:/SKIP:/' \
++                         -e 's/: \[PASS\]//' \
++                         -e 's/: \[FAIL\]//' \
++                         -e 's/: \[IGNORE\]//'
 -- 
-2.34.1
+2.25.1
 
 
