@@ -1,895 +1,177 @@
-Return-Path: <Yash.Shinde@windriver.com>
+Return-Path: <yashinde145@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 432DAC6FD1D
-	for <webhook@archiver.kernel.org>; Thu, 30 Mar 2023 04:10:19 +0000 (UTC)
-Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
- by mx.groups.io with SMTP id smtpd.web11.17454.1680149409044603576
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C74DDC6FD1D
+	for <webhook@archiver.kernel.org>; Thu, 30 Mar 2023 05:44:49 +0000 (UTC)
+Received: from mail-pj1-f53.google.com (mail-pj1-f53.google.com [209.85.216.53])
+ by mx.groups.io with SMTP id smtpd.web10.18310.1680155079611239603
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 29 Mar 2023 21:10:09 -0700
+ Wed, 29 Mar 2023 22:44:39 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=pps06212021 header.b=L1qWpttS;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=3453186718=yash.shinde@windriver.com)
-Received: from pps.filterd (m0250811.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 32U3fjeF000726
-	for <openembedded-devel@lists.openembedded.org>; Thu, 30 Mar 2023 04:10:08 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com; h=from : to : cc :
- subject : date : message-id : references : in-reply-to : content-type :
- mime-version; s=PPS06212021;
- bh=5KHazSuaor2VCnLtF6x72h80yUhy7NOroLT6voTcU4Q=;
- b=L1qWpttSnxaldN/iW1OpHBe2JGxymEjK6X91ZcP4vHhK96uvCoioddBHjwK1ayMiawPr
- PcecM6ccNtsPUOK4GBtbjUoUSeChE1v83GoVOSnXwp41yuY86DGbp+Y8ZFHOabRObh4i
- EWoWf3Ha1x5p6eCdKxARhA+eG1jPFeSOe9Y4IL8Wa1Jk2F/6Rn1jImMmmfZaOhRMz2de
- D7xLeComtihnxfJ3F88MpAh558cxz4h+kwrJkBlV9DgbXLvqoqbkhwidiX8c6XHDIia8
- yuUXyw8s46gnQAFBZhuWoyFwLUTfMWZuTi2CtyllLTIAXkYiuOuopGXAocgNDPUEEj1t Tg== 
-Received: from pps.reinject (localhost [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3php645u8v-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Thu, 30 Mar 2023 04:10:08 +0000
-Received: from m0250811.ppops.net (m0250811.ppops.net [127.0.0.1])
-	by pps.reinject (8.17.1.5/8.17.1.5) with ESMTP id 32U4A7OS021549
-	for <openembedded-devel@lists.openembedded.org>; Thu, 30 Mar 2023 04:10:07 GMT
-Received: from nam02-bn1-obe.outbound.protection.outlook.com (mail-bn1nam02lp2047.outbound.protection.outlook.com [104.47.51.47])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3php645u8t-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Thu, 30 Mar 2023 04:10:07 +0000
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=jbW7WqZaAwxaPiP48q8vZzV4sgKgbiturOaObf5wBmt5jCRHETLcN8yNnkhcttPVtHHBRQRIZePEnZp0Y0O0uMDCNd95OxPGveyfnGpfwUODSCXMBv+H+65lp/TVeuErEEzX8qxW38AnuQeTGr/kKpavU7xCP0WhDX2tZX40o186st3tWFlLG4WLeMSL66TiVyQfoIMNewTp7Vyb5Cu9AyH4U6ZGMvECpnv4cC//S6tS9mHa+cIuAddfRtn9soAACrzdv4kNW+IkhOXgz/Bi8BIpqFh6z4l3u2n7myz/D2Pm1BFeAqqef9pJ42jurc9++cr5XhfvDcvp5kcQjqBy+g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=5KHazSuaor2VCnLtF6x72h80yUhy7NOroLT6voTcU4Q=;
- b=gCad4h3tWXBJNGEtyRZenMrmV1oV7a4t1rlH8QQ+Skf0RZ8WSdlIpzL2l8qF/UgS6Qpzls/q4J5pwRj15Z9czgaX/Lk8F/7S0TZcC63KljPQQ8sHluGLQt8mIEPvgIpSPXbFmZu8D4a3aRdzZfRwk+gr4+NGFZJCXAvBbgcSbyk8blVgt0tU8wRGMdHgRwdEXVHuq9BFs5zrkTxukJzdgNNAkN/LtfEeVIWK/S5iXw14lCkjRqPK/adyWaSgdl+c5iqa7PNXeAHS4kzf5CCcRSooDTWiE+wm0iNc5d5NsLBT5LRMiDHkbvZlmMXAbdbRnn5g1gwluLqo6VSx7dBBww==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=windriver.com; dmarc=pass action=none
- header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
-Received: from SJ1PR11MB6129.namprd11.prod.outlook.com (2603:10b6:a03:488::12)
- by DS0PR11MB6471.namprd11.prod.outlook.com (2603:10b6:8:c1::13) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6222.32; Thu, 30 Mar
- 2023 04:10:05 +0000
-Received: from SJ1PR11MB6129.namprd11.prod.outlook.com
- ([fe80::da21:2571:f1ba:7f5b]) by SJ1PR11MB6129.namprd11.prod.outlook.com
- ([fe80::da21:2571:f1ba:7f5b%6]) with mapi id 15.20.6254.022; Thu, 30 Mar 2023
- 04:10:05 +0000
-From: "Shinde, Yash" <Yash.Shinde@windriver.com>
-To: "MacLeod, Randy" <Randy.MacLeod@windriver.com>,
-        Yash Shinde
-	<yashinde145@gmail.com>,
-        "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-CC: "Kallapa, Umesh" <Umesh.Kallapa@windriver.com>,
-        "Gowda, Naveen"
-	<Naveen.Gowda@windriver.com>,
-        "Kokkonda, Sundeep"
-	<Sundeep.Kokkonda@windriver.com>,
-        "Moodalappa, Shivaprasad"
-	<Shivaprasad.Moodalappa@windriver.com>
-Subject: RE: [meta-oe][PATCH] librelp: fix function inline errors in debug
- build
-Thread-Topic: [meta-oe][PATCH] librelp: fix function inline errors in debug
- build
-Thread-Index: AQHZYhRxkf9mYtuiKkWq5/5aJlZbLK8RwrEAgAD0KJs=
-Date: Thu, 30 Mar 2023 04:10:05 +0000
-Message-ID: 
- <SJ1PR11MB61296D638CFEA89A753C29ABEB8E9@SJ1PR11MB6129.namprd11.prod.outlook.com>
-References: <20230329075827.437650-1-yashinde145@gmail.com>
- <f6a4a396-84a6-9787-ad8a-d4e283a6442d@windriver.com>
-In-Reply-To: <f6a4a396-84a6-9787-ad8a-d4e283a6442d@windriver.com>
-Accept-Language: en-US
-Content-Language: en-IN
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: SJ1PR11MB6129:EE_|DS0PR11MB6471:EE_
-x-ms-office365-filtering-correlation-id: e5d1a670-b6aa-4028-092e-08db30d4a4be
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: 
- gZ8YAJ0OnAjO4S4zEM2uQoBiE3/N5rs6fUgg/hFGMgZALVXVx+JsAH2iV/U0tTXVAvzLwC//FD1Biai5VXvjsKCeJbxg9/ixVaSNHL0MLPQ/8/pQe2t4rJOtQCQJycHMc37sh/AxG4D1jDYNdppGu09DHs/ry0Tv7dRK3RnZkH8K9UAvSO7m8+jAGxf9j4sF6ufLA9ALVPZrkVetbDDaBBYXTygPpNpUZyL1flfrNoKgOf4qRfzYMZ/FJ3hgayHYzG8kgSaIUbHjTmeREHH0sV2fRL2G9YfRsHBZFXknfv/GwqyGhUHhm+sGpjRb9y7nk72C6lU4zSJt9tT1OgOk5ucKjucHkbGplslf3WVhA2PgPNoKE1rXIHbBashjLtvznH+zG4ooxoVb2lwZ8CyDiHSenF2P6uwsjTLmH7dlGmnR6mGriH8E26Un4tZCJZ6GOPaPuP8X9SnBHbM2JM1YVPZ17+OoptThq+gIXBeAJeLiJAK9FXjCLWlHAwhYQLDikr0BHwML2X/3abxgpryYN6B0yKfA3FW8JPOaY876pHyu5ww2/iJned50HcmZzqOMPMwVntbs/0tNVV47d9/earO0Sw0fNDOFaqLTGGSkpjAvJniChUjWcl/O8dt5iQNANUSp3W2roRZxKVe1FRXRUg==
-x-forefront-antispam-report: 
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:SJ1PR11MB6129.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230028)(4636009)(39850400004)(136003)(396003)(346002)(366004)(376002)(451199021)(86362001)(33656002)(38070700005)(166002)(2906002)(966005)(478600001)(71200400001)(55016003)(83380400001)(7696005)(107886003)(38100700002)(53546011)(110136005)(9686003)(316002)(66446008)(91956017)(8676002)(66476007)(64756008)(66946007)(122000001)(66556008)(41300700001)(186003)(26005)(52536014)(54906003)(76116006)(6506007)(5660300002)(8936002)(4326008);DIR:OUT;SFP:1101;
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: 
- =?Windows-1252?Q?svw0+eArpQY0J25ZUbpO5tX3sj/M9JiSv4tq3qnt/jmPFzcshWVTzr3w?=
- =?Windows-1252?Q?QNCnm8EbFmlS6QuKUEHTWSNYpQy1Yn3nXvmoyqzPX4sJ+yMerVxApFLw?=
- =?Windows-1252?Q?Ss70maIDp2pskRAuzdIN4xZtUEJyWkrnWTDpmauG1HqgkzxH/ym0Ns7S?=
- =?Windows-1252?Q?RS2zieAqoHxI/148A/NMLg0IDvIbniSRjYz2leIp2lMn4W4fnp08mk6Q?=
- =?Windows-1252?Q?/ZJ7ZFwcild2FjM2gNdC1DkXD1HydK8zxNhTMIvYNEXxdL2IanvekitD?=
- =?Windows-1252?Q?YbkEQ99H2HUQThiYewb8ggqmR8aVKt1BWoB/qasHzxtQDWVVWv7vx4UC?=
- =?Windows-1252?Q?CDTGMhewaJQQl79zUOXAU32LRW8qjInwL3OiXAGIU+FSxOKtK8cDIgTm?=
- =?Windows-1252?Q?+xJXgTjtSVpZNLtqOdf5qhPtJGwF7Jgk7huFlFgKAytyLLaJKO+qc32K?=
- =?Windows-1252?Q?5GT5hsF0+o0bqGsWJy6iCNd1Z+Mq9fK3fwvFefSKYwqHeSerxcYQ+AMB?=
- =?Windows-1252?Q?7VnytqZe2kLACB1XDgBqZXwAqg/koO8vO534P41cVOAx1f9+GOQt2ary?=
- =?Windows-1252?Q?xpRq5cDvLRaKTZRnE3BvSVnDPAn06v0DxOh64NO1LmVYz8WCy9atkS9m?=
- =?Windows-1252?Q?X8BxjkXk2X+HzF8sqGjpZIcYSPhcMe+sdWDSOtpVGTJ3AvSuYoOiKhT8?=
- =?Windows-1252?Q?LDB9YzV0oqmQDCyb96jDvgTSebCzDkhM81QaktuJMse257hWtT1W7eHU?=
- =?Windows-1252?Q?b5Iu11atY3Vdo7JfD/odJLOnYBximvDgDZFklDYV3d5FCJ9yvBhQ3Art?=
- =?Windows-1252?Q?n9pA3vb15aWa1N2f0FhHLq6UwbgE2HKrIjA1ycsU8OLZdIcinKw1tmTd?=
- =?Windows-1252?Q?cuqAsN89gFbTQiHft6kDO5RPgrZ4a246xqPW68dkr5i05uqOjRgnTibL?=
- =?Windows-1252?Q?vt6b5oc2bkgbsakPXRlt6IXkFEkgmmHKr7U82EMnnaW8IFw6P9g1ihqK?=
- =?Windows-1252?Q?gSM6+r32F6LLfB1XkyO9acpaPVI2SyR7FhWPohrU3jpTj/PG67oqH1m+?=
- =?Windows-1252?Q?KSb5PmvYr5kdBez70VAHkYglXObe/q62b93phH6bKfXcEb+1Kd1GfM22?=
- =?Windows-1252?Q?GVZwEbc9wDIiajIv01qtlvrVw4AfNQ+cJw82L1IfdUMfqy7M+C73DBGK?=
- =?Windows-1252?Q?/ZwFrXMAspndsTfjUpkcisnjyJGt1v3knSrYYfqtzOHqNJuMj0coe1Od?=
- =?Windows-1252?Q?xT9XtrEYmXyqW73wI6mQiBIR0hdf9mAI3ADu22PmJsZQ38lyjz7akJ+S?=
- =?Windows-1252?Q?8FKAqxxua8GppwN655JPfuR2WmfZhiTictOViElJJemvh8OY81GArjjL?=
- =?Windows-1252?Q?5xeCRG9Zfsxrskf6AG9hv4rtxXTvYboE7xkYjpYW2ijdhoqElgk52kqz?=
- =?Windows-1252?Q?rkHVirtJgOmd1J8J5tCspsPKMDl4M2mdwfHYNSUoqaStcbFDpMrIKDQx?=
- =?Windows-1252?Q?aqbCeViDQqPQrkv46tm5H8jp/VNt3W1jKRvhdcJOrNlkaL7WfocCL8Vo?=
- =?Windows-1252?Q?q/ITYNjg3IMpGBuMqreVNRoXRpvLu4eNZrPwUG2Cwl9Hf7BXQQI4mWjR?=
- =?Windows-1252?Q?lJFlY8L5Cqe93Gv2lDya9j80hTYl0LdAZpgUgh5qUBSgU0ovO7jf6tTI?=
- =?Windows-1252?Q?NkHGT/CChCJtPDbOK4QRd7cSAAiRIdOsNifjZza/UO366weZeQjQ6lCb?=
- =?Windows-1252?Q?Z/s/N8P71XLanZlCBWc=3D?=
-Content-Type: multipart/alternative;
-	boundary="_000_SJ1PR11MB61296D638CFEA89A753C29ABEB8E9SJ1PR11MB6129namp_"
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=IMG73MXh;
+ spf=pass (domain: gmail.com, ip: 209.85.216.53, mailfrom: yashinde145@gmail.com)
+Received: by mail-pj1-f53.google.com with SMTP id p3-20020a17090a74c300b0023f69bc7a68so18489972pjl.4
+        for <openembedded-devel@lists.openembedded.org>; Wed, 29 Mar 2023 22:44:39 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112; t=1680155079;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=J/KI+22mxlLgDrHfx1tr1chLnxtEwyNUxoXYYl99+OE=;
+        b=IMG73MXhhPt+nxc7AMyJ9g4zo2WdabtGRuZMWtbW00e4siPZLQeiDaEDfKoI0bOogM
+         HSyZM7BZRvGgppQ8ofhbx6FEQtFJSjimy7bfGDxyFBltO1NTkeh5UoktTPP0NmjkGt1l
+         x2G0IZLuBUJu7UCGneROU2ADdX8QOaaLaVSA6DX5Alor+QpK6i28jAmsLhp0kD2bG8nq
+         D3bCEwiszalILjHAcAtbjifJXKJu75AcmabKdYg2rHqgVQa2t8+pxX78NU5pntKG57UK
+         w5vYi5qgu/LPprNsXWUj+X/iVBL9mIp3lKYglEw9QPTooYy5XXIfM0Q29GZHik89Psf7
+         lBew==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112; t=1680155079;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=J/KI+22mxlLgDrHfx1tr1chLnxtEwyNUxoXYYl99+OE=;
+        b=28Q547QlgpANIKUHd0sIPrexNJENcYr/miHZ/PmGPtnti0eY8kXqWvHDsHMC13s/Ax
+         jUcq0Sr6KoQYa80vvsjjSPMSAlG4SdPEqDx9iNX1PkSVPF6SYql5Pwfx09do8AEGmR0d
+         Lb4gBc5qNK2+Zh98cJOPXHBPmwewC3I2Wtiif5YmdptWtvsKDOH8apAo4XJPEUzNIiTr
+         +A2EpCeVJsdXA5yAQi+U9NqrmTd/SB5ZP79xZ384pDpE7wxbqCl3QWLSXfTROP4p0KLd
+         wRkIjmXA2pZqL68L6fs40HCN1sUeRj1eRdNjQqUkkylI9lt6ZqZuoX/zqENuqkBrrOQj
+         QtBw==
+X-Gm-Message-State: AAQBX9dvVpZxFDyzG0g1jwNeyBOAFTdytvhWtl/MDLEuUNGre2TWpi65
+	79k/cmKSL5q4E7DrScfj2X6dLMvb2MlaVA==
+X-Google-Smtp-Source: AKy350Zu371i4DyTeCKkSnXEWzH2lr/vQlIelNEy2sUGQAh0CsfumB7n9p+2JzfuLyVXZmlRX90m6w==
+X-Received: by 2002:a17:90b:4d11:b0:23f:e32:7e62 with SMTP id mw17-20020a17090b4d1100b0023f0e327e62mr26261429pjb.12.1680155078490;
+        Wed, 29 Mar 2023 22:44:38 -0700 (PDT)
+Received: from bft-PowerEdge-R620.. ([49.204.85.206])
+        by smtp.gmail.com with ESMTPSA id cc10-20020a17090af10a00b0023d1976cd34sm2422980pjb.17.2023.03.29.22.44.32
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 29 Mar 2023 22:44:34 -0700 (PDT)
+From: Yash Shinde <yashinde145@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Randy.MacLeod@windriver.com,
+	Sundeep.Kokkonda@windriver.com,
+	Yash.Shinde@windriver.com
+Subject: [meta-oe][PATCH v2] librelp: fix function inline errors in debug build
+Date: Thu, 30 Mar 2023 11:14:14 +0530
+Message-Id: <20230330054414.15931-1-yashinde145@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: SJ1PR11MB6129.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: e5d1a670-b6aa-4028-092e-08db30d4a4be
-X-MS-Exchange-CrossTenant-originalarrivaltime: 30 Mar 2023 04:10:05.8060
- (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: QV/p180/EXPaDXoYdp5mCasxV34rv91rm1qvCIJpEHqWEjnOB43gPHxb8NuasMUJmPoHOdHbyPrzGpvO4Rw6ZRgW9xMp8JDPgoGCnz7PTNw=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS0PR11MB6471
-X-Proofpoint-ORIG-GUID: GnymDG5WYuhTcId7h_ngjgFOE4_CU9wm
-X-Proofpoint-GUID: qPdAVYboczAaC3Wuv_L67KX-6euwZhBw
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.254,Aquarius:18.0.942,Hydra:6.0.573,FMLib:17.11.170.22
- definitions=2023-03-29_16,2023-03-28_02,2023-02-09_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 malwarescore=0 suspectscore=0
- phishscore=0 spamscore=0 bulkscore=0 mlxlogscore=999 priorityscore=1501
- lowpriorityscore=0 clxscore=1015 mlxscore=0 adultscore=0 impostorscore=0
- classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2303200000
- definitions=main-2303300032
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 30 Mar 2023 04:10:19 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101827
+ <openembedded-devel@lists.openembedded.org>; Thu, 30 Mar 2023 05:44:49 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101828
 
---_000_SJ1PR11MB61296D638CFEA89A753C29ABEB8E9SJ1PR11MB6129namp_
-Content-Type: text/plain; charset="Windows-1252"
-Content-Transfer-Encoding: quoted-printable
-
-On 2023-03-29 19:06, Randy MacLeod wrote:
-
-First, if we're going to take this approach, you should revert my work-arou=
-nd as part of this commit:
-
-commit ca10312c4c7e88d67f4b487ae9afcbfdf92898d6
-Author:     Randy MacLeod <Randy.MacLeod@...><mailto:Randy.MacLeod@...>
-Date: Wed Mar 1 19:24:27 2023
-
-    librelp: make inline errors be warnings in debug build
-        ...
-
-         >Will send a v2 if needed.
-
-BUT...
-
-The problem isn't so much that the code doesn't get in-lined when doing a d=
-ebug build but
-that it fails to compile.  I think this is a compiler regressions since
-I was not able to reproduce the error when compiling natively using Ubuntu-=
-22.04 (gcc-11.3) but
-was able to reproduce it using Fedora-37, gcc --version : gcc (GCC) 12.2.1 =
-20221121 (Red Hat 12.2.1-4)
-
-
-
-Does the change you made actually build with the two compiler versions abov=
-e?
->I tested the changes in LINCD sources which have GCC 12.2. I didn=92t chec=
-k the above mentioned version.
-
-Is there documentation that states that
-
-static inline void
-
-
-
-is not as portable as:
-
-
-
-__attribute__((always_inline)) static inline void
-
-I suspect there is not but I'm not a compiler geek!
-
->As you mentioned in https://github.com/rsyslog/librelp/issues/256#issue-16=
-05905115<https://github.com/rsyslog/librelp/issues/256#:~:text=3DOh%20and%2=
-0it%20only%20happens%20when%20using%20%2DOg%20not%20%2DO%5B0%2D3%5D>, it ha=
-ppens only when complied without any optimization and as per https://gcc.gn=
-u.org/onlinedocs/gcc/Inline.html<https://gcc.gnu.org/onlinedocs/gcc/Inline.=
-html#:~:text=3DGCC%20does%20not%20inline%20any%20functions%20when%20not%20o=
-ptimizing%20unless%20you%20specify%20the%20%E2%80%98always_inline%E2%80%99%=
-20attribute%20for%20the%20function%2C%20like%20this%3A> it=92s mentioned th=
-at:
-
-GCC does not inline any functions when not optimizing unless you specify th=
-e =91always_inline=92 attribute for the function, like this:
-/* Prototype.  */ inline void foo (const char) __attribute__((always_inline=
-));
-
-Please let me know if we are on the same page.
-
-../Randy
-
-
-Regards,
-Yash
-
-From: MacLeod, Randy<mailto:Randy.MacLeod@windriver.com>
-Sent: 29 March 2023 19:06
-To: Yash Shinde<mailto:yashinde145@gmail.com>; openembedded-devel@lists.ope=
-nembedded.org<mailto:openembedded-devel@lists.openembedded.org>
-Cc: Kallapa, Umesh<mailto:Umesh.Kallapa@windriver.com>; Gowda, Naveen<mailt=
-o:Naveen.Gowda@windriver.com>; Kokkonda, Sundeep<mailto:Sundeep.Kokkonda@wi=
-ndriver.com>; Moodalappa, Shivaprasad<mailto:Shivaprasad.Moodalappa@windriv=
-er.com>; Shinde, Yash<mailto:Yash.Shinde@windriver.com>
-Subject: Re: [meta-oe][PATCH] librelp: fix function inline errors in debug =
-build
-
-On 2023-03-29 03:58, Yash Shinde wrote:
-
-With DEBUG_BUILD =3D "1", the following errors occur:
-
-
+With DEBUG_BUILD = "1", the following errors occur:
 
    src/relpsess.c:95:1: error:
-
-      inlining failed in call to 'relpSessFreePermittedPeers': function not=
- considered for inlining [-Werror=3Dinline]
-
-
+      inlining failed in call to 'relpSessFreePermittedPeers': function not considered for inlining [-Werror=inline]
 
    src/tcp.c:146:1: error:
-
-      inlining failed in call to 'relpTcpFreePermittedPeers': function not =
-considered for inlining [-Werror=3Dinline]
-
-
+      inlining failed in call to 'relpTcpFreePermittedPeers': function not considered for inlining [-Werror=inline]
 
    src/tcp.c:158:1: error:
+      inlining failed in call to 'callOnAuthErr': function not considered for inlining [-Werror=inline]
 
-      inlining failed in call to 'callOnAuthErr': function not considered f=
-or inlining [-Werror=3Dinline]
+Compiler does not inline any functions when not optimizing unless you specify the ‘always_inline’ attribute for the function.
+Add "__attribute__((always_inline))" to avoid these function inline errors.
 
+Also revert the work-around made earlier in librelp_1.11.0.bb.
 
+Upstream-Status: Tracked by upstream bug: https://github.com/rsyslog/librelp/issues/256
 
-Compiler does not inline any functions when not optimizing unless you speci=
-fy the =91always_inline=92 attribute for the function. Add "__attribute__((=
-always_inline))" to avoid these function inline errors.
-
-Hi Yash,
-
-
-
-First, if we're going to take this approach, you should revert my work-arou=
-nd as part of this commit:
-
-commit ca10312c4c7e88d67f4b487ae9afcbfdf92898d6
-Author:     Randy MacLeod <Randy.MacLeod@windriver.com><mailto:Randy.MacLeo=
-d@windriver.com>
-Date: Wed Mar 1 19:24:27 2023
-
-    librelp: make inline errors be warnings in debug build
-        ...
-
-
-
-BUT...
-
-The problem isn't so much that the code doesn't get in-lined when doing a d=
-ebug build but
-that it fails to compile.  I think this is a compiler regressions since
-I was not able to reproduce the error when compiling natively using Ubuntu-=
-22.04 (gcc-11.3) but
-was able to reproduce it using Fedora-37, gcc --version : gcc (GCC) 12.2.1 =
-20221121 (Red Hat 12.2.1-4)
-
-
-
-Does the change you made actually build with the two compiler versions abov=
-e?
-Is there documentation that states that
-
-static inline void
-
-
-
-is not as portable as:
-
-
-
-__attribute__((always_inline)) static inline void
-
-I suspect there is not but I'm not a compiler geek!
-
-../Randy
-
-
-
-
-
-
-
-
-
-
-
-Upstream-Status: Tracked by upstream bug: https://github.com/rsyslog/librel=
-p/issues/256
-
-
-
-Signed-off-by: Yash Shinde <Yash.Shinde@windriver.com><mailto:Yash.Shinde@w=
-indriver.com>
-
+Signed-off-by: Yash Shinde <Yash.Shinde@windriver.com>
 ---
+ ...01-librelp-fix-function-inline-error.patch | 58 +++++++++++++++++++
+ .../rsyslog/librelp_1.11.0.bb                 |  2 +-
+ 2 files changed, 59 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-extended/rsyslog/librelp/0001-librelp-fix-function-inline-error.patch
 
- ...02-librelp-fix-function-inline-error.patch | 59 +++++++++++++++++++
-
- 1 file changed, 59 insertions(+)
-
- create mode 100644 meta-oe/recipes-extended/rsyslog/rsyslog/0002-librelp-f=
-ix-function-inline-error.patch
-
-
-
-diff --git a/meta-oe/recipes-extended/rsyslog/rsyslog/0002-librelp-fix-func=
-tion-inline-error.patch b/meta-oe/recipes-extended/rsyslog/rsyslog/0002-lib=
-relp-fix-function-inline-error.patch
-
+diff --git a/meta-oe/recipes-extended/rsyslog/librelp/0001-librelp-fix-function-inline-error.patch b/meta-oe/recipes-extended/rsyslog/librelp/0001-librelp-fix-function-inline-error.patch
 new file mode 100644
-
-index 000000000..60cf1b632
-
+index 000000000..523a8991f
 --- /dev/null
-
-+++ b/meta-oe/recipes-extended/rsyslog/rsyslog/0002-librelp-fix-function-in=
-line-error.patch
-
-@@ -0,0 +1,59 @@
-
++++ b/meta-oe/recipes-extended/rsyslog/librelp/0001-librelp-fix-function-inline-error.patch
+@@ -0,0 +1,58 @@
 +From dc841f01fb6167ec9a80e373c5f4d2f5e3222ed6 Mon Sep 17 00:00:00 2001
-
-+From: Yash Shinde <Yash.Shinde@windriver.com><mailto:Yash.Shinde@windriver=
-.com>
-
++From: Yash Shinde <Yash.Shinde@...>
 +Date: Tue, 28 Mar 2023 04:06:58 +0000
-
 +Subject: librelp: fix function inline errors in debug build
-
 +
-
-+With DEBUG_BUILD =3D "1", the following errors occur:
-
++With DEBUG_BUILD = "1", the following errors occur:
 +
-
 +   src/relpsess.c:95:1: error:
-
-+      inlining failed in call to 'relpSessFreePermittedPeers': function no=
-t considered for inlining [-Werror=3Dinline]
-
++      inlining failed in call to 'relpSessFreePermittedPeers': function not considered for inlining [-Werror=inline]
 +
-
 +   src/tcp.c:146:1: error:
-
-+      inlining failed in call to 'relpTcpFreePermittedPeers': function not=
- considered for inlining [-Werror=3Dinline]
-
++      inlining failed in call to 'relpTcpFreePermittedPeers': function not considered for inlining [-Werror=inline]
 +
-
 +   src/tcp.c:158:1: error:
-
-+      inlining failed in call to 'callOnAuthErr': function not considered =
-for inlining [-Werror=3Dinline]
-
++      inlining failed in call to 'callOnAuthErr': function not considered for inlining [-Werror=inline]
 +
-
-+Compiler does not inline any functions when not optimizing unless you spec=
-ify the =91always_inline=92 attribute for the function. Add "__attribute__(=
-(always_inline))" to avoid these function inline errors.
-
++Compiler does not inline any functions when not optimizing unless you specify the ‘always_inline’ attribute for the function. Add "__attribute__((always_inline))" to avoid these function inline errors.
 +
-
-+Upstream-Status: Tracked by upstream bug: https://github.com/rsyslog/libre=
-lp/issues/256
-
++Upstream-Status: Tracked by upstream bug: https://github.com/rsyslog/librelp/issues/256
 +
-
-+Signed-off-by: Yash Shinde <Yash.Shinde@windriver.com><mailto:Yash.Shinde@=
-windriver.com>
-
++Signed-off-by: Yash Shinde <Yash.Shinde@...>
 +---
-
 +
-
 +diff --git a/src/relpsess.c b/src/relpsess.c
-
 +index ee7b595..aa52b71 100644
-
 +--- a/src/relpsess.c
-
 ++++ b/src/relpsess.c
-
 +@@ -91,7 +91,7 @@ callOnErr(const relpSess_t *__restrict__ const pThis,
-
 +
-
 +
-
 + /* helper to free permittedPeer structure */
-
 +-static inline void
-
 ++__attribute__((always_inline)) static inline void
-
 + relpSessFreePermittedPeers(relpSess_t *const pThis)
-
 + {
-
 +        int i;
-
 +diff --git a/src/tcp.c b/src/tcp.c
-
 +index 7a75cc4..f4088c0 100644
-
 +--- a/src/tcp.c
-
 ++++ b/src/tcp.c
-
-+@@ -142,7 +142,7 @@ static int relpTcpChkPeerName(relpTcp_t *const pThis, =
-void* cert);
-
++@@ -142,7 +142,7 @@ static int relpTcpChkPeerName(relpTcp_t *const pThis, void* cert);
 +
-
 +
-
 + /* helper to free permittedPeer structure */
-
 +-static inline void
-
 ++__attribute__((always_inline)) static inline void
-
 + relpTcpFreePermittedPeers(relpTcp_t *const pThis)
-
 + {
-
 +        int i;
-
 +@@ -154,7 +154,7 @@ relpTcpFreePermittedPeers(relpTcp_t *const pThis)
-
 + }
-
 +
-
 + /* helper to call onAuthErr if set */
-
 +-static inline void
-
 ++__attribute__((always_inline)) static inline void
-
-+ callOnAuthErr(relpTcp_t *const pThis, const char *authdata, const char *e=
-msg, relpRetVal ecode)
-
++ callOnAuthErr(relpTcp_t *const pThis, const char *authdata, const char *emsg, relpRetVal ecode)
 + {
++        pThis->pEngine->dbgprint((char*)"librelp: auth error: authdata:'%s', ecode %d, "
+diff --git a/meta-oe/recipes-extended/rsyslog/librelp_1.11.0.bb b/meta-oe/recipes-extended/rsyslog/librelp_1.11.0.bb
+index e7b79ad03..a41b05a35 100644
+--- a/meta-oe/recipes-extended/rsyslog/librelp_1.11.0.bb
++++ b/meta-oe/recipes-extended/rsyslog/librelp_1.11.0.bb
+@@ -7,6 +7,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=1fb9c10ed9fd6826757615455ca893a9"
+ DEPENDS = "gmp nettle libidn zlib gnutls openssl"
+ 
+ SRC_URI = "git://github.com/rsyslog/librelp.git;protocol=https;branch=stable \
++           file://0001-librelp-fix-function-inline-error.patch \
+ "
+ 
+ SRCREV = "b421f56d9ee31a966058d23bd23c966221c91396"
+@@ -15,6 +16,5 @@ S = "${WORKDIR}/git"
+ 
+ inherit autotools pkgconfig
+ 
+-DEBUG_OPTIMIZATION:append = " -Wno-error=inline"
+ 
+ 
+-- 
+2.34.1
 
-+        pThis->pEngine->dbgprint((char*)"librelp: auth error: authdata:'%s=
-', ecode %d, "
-
-+
-
-
-
---
-
-# Randy MacLeod
-
-# Wind River Linux
-
-
---_000_SJ1PR11MB61296D638CFEA89A753C29ABEB8E9SJ1PR11MB6129namp_
-Content-Type: text/html; charset="Windows-1252"
-Content-Transfer-Encoding: quoted-printable
-
-<html xmlns:o=3D"urn:schemas-microsoft-com:office:office" xmlns:w=3D"urn:sc=
-hemas-microsoft-com:office:word" xmlns:m=3D"http://schemas.microsoft.com/of=
-fice/2004/12/omml" xmlns=3D"http://www.w3.org/TR/REC-html40">
-<head>
-<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3DWindows-1=
-252">
-<meta name=3D"Generator" content=3D"Microsoft Word 15 (filtered medium)">
-<style><!--
-/* Font Definitions */
-@font-face
-	{font-family:Helvetica;
-	panose-1:2 11 5 4 2 2 2 2 2 4;}
-@font-face
-	{font-family:Mangal;
-	panose-1:2 4 5 3 5 2 3 3 2 2;}
-@font-face
-	{font-family:"Cambria Math";
-	panose-1:2 4 5 3 5 4 6 3 2 4;}
-@font-face
-	{font-family:Calibri;
-	panose-1:2 15 5 2 2 2 4 3 2 4;}
-@font-face
-	{font-family:Consolas;
-	panose-1:2 11 6 9 2 2 4 3 2 4;}
-/* Style Definitions */
-p.MsoNormal, li.MsoNormal, div.MsoNormal
-	{margin:0cm;
-	font-size:11.0pt;
-	font-family:"Calibri",sans-serif;}
-a:link, span.MsoHyperlink
-	{mso-style-priority:99;
-	color:blue;
-	text-decoration:underline;}
-pre
-	{mso-style-priority:99;
-	mso-style-link:"HTML Preformatted Char";
-	margin:0cm;
-	font-size:10.0pt;
-	font-family:"Courier New";}
-span.HTMLPreformattedChar
-	{mso-style-name:"HTML Preformatted Char";
-	mso-style-priority:99;
-	mso-style-link:"HTML Preformatted";
-	font-family:"Courier New";}
-.MsoChpDefault
-	{mso-style-type:export-only;}
-@page WordSection1
-	{size:612.0pt 792.0pt;
-	margin:72.0pt 72.0pt 72.0pt 72.0pt;}
-div.WordSection1
-	{page:WordSection1;}
---></style>
-</head>
-<body lang=3D"EN-IN" link=3D"blue" vlink=3D"#954F72" style=3D"word-wrap:bre=
-ak-word">
-<div class=3D"WordSection1">
-<p class=3D"MsoNormal">On 2023-03-29 19:06, Randy <span style=3D"font-size:=
-10.5pt;font-family:&quot;Helvetica&quot;,sans-serif;color:#333333">
-MacLeod&nbsp;</span>wrote:<o:p></o:p></p>
-<div>
-<p style=3D"mso-margin-top-alt:0cm;margin-right:0cm;margin-bottom:7.5pt;mar=
-gin-left:0cm;background:white">
-<span style=3D"color:black"><br>
-</span><span style=3D"font-size:10.5pt;font-family:&quot;Helvetica&quot;,sa=
-ns-serif;color:#333333">First, if we're going to take this approach, you sh=
-ould revert my work-around as part of this commit:<o:p></o:p></span></p>
-<p style=3D"mso-margin-top-alt:0cm;margin-right:0cm;margin-bottom:7.5pt;mar=
-gin-left:0cm;background:white;box-sizing: border-box;font-variant-ligatures=
-: normal;font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-w=
-ebkit-text-stroke-width: 0px;text-decoration-thickness: initial;text-decora=
-tion-style: initial;text-decoration-color: initial;word-spacing:0px">
-<span style=3D"font-size:10.5pt;font-family:&quot;Helvetica&quot;,sans-seri=
-f;color:#333333">commit ca10312c4c7e88d67f4b487ae9afcbfdf92898d6<br>
-Author:&nbsp;&nbsp;&nbsp;&nbsp; Randy MacLeod&nbsp;<a href=3D"mailto:Randy.=
-MacLeod@..." target=3D"_blank"><span style=3D"color:#337AB7">&lt;Randy.MacL=
-eod@...&gt;</span></a><br>
-Date: Wed Mar 1 19:24:27 2023<br>
-<br>
-&nbsp;&nbsp;&nbsp; librelp: make inline errors be warnings in debug build<b=
-r>
-&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ...<o:p></o:p></span></p>
-<p style=3D"mso-margin-top-alt:0cm;margin-right:0cm;margin-bottom:7.5pt;mar=
-gin-left:0cm;background:white;box-sizing: border-box;font-variant-ligatures=
-: normal;font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-w=
-ebkit-text-stroke-width: 0px;text-decoration-thickness: initial;text-decora=
-tion-style: initial;text-decoration-color: initial;word-spacing:0px">
-<span style=3D"font-size:10.5pt;font-family:&quot;Helvetica&quot;,sans-seri=
-f;color:#333333">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &gt;Will =
-send a v2 if needed.<o:p></o:p></span></p>
-<p style=3D"mso-margin-top-alt:0cm;margin-right:0cm;margin-bottom:7.5pt;mar=
-gin-left:0cm;background:white;box-sizing: border-box;font-variant-ligatures=
-: normal;font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-w=
-ebkit-text-stroke-width: 0px;text-decoration-thickness: initial;text-decora=
-tion-style: initial;text-decoration-color: initial;word-spacing:0px">
-<span style=3D"font-size:10.5pt;font-family:&quot;Helvetica&quot;,sans-seri=
-f;color:#333333">BUT...<o:p></o:p></span></p>
-<p style=3D"mso-margin-top-alt:0cm;margin-right:0cm;margin-bottom:7.5pt;mar=
-gin-left:0cm;background:white;box-sizing: border-box;font-variant-ligatures=
-: normal;font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-w=
-ebkit-text-stroke-width: 0px;text-decoration-thickness: initial;text-decora=
-tion-style: initial;text-decoration-color: initial;word-spacing:0px">
-<span style=3D"font-size:10.5pt;font-family:&quot;Helvetica&quot;,sans-seri=
-f;color:#333333">The problem isn't so much that the code doesn't get in-lin=
-ed when doing a debug build but<br>
-that it fails to compile.&nbsp; I think this is a compiler regressions sinc=
-e<br>
-I was&nbsp;<em><span style=3D"font-family:&quot;Helvetica&quot;,sans-serif"=
->not</span></em>&nbsp;able to reproduce the error when compiling natively u=
-sing Ubuntu-22.04 (gcc-11.3) but<br>
-<em><span style=3D"font-family:&quot;Helvetica&quot;,sans-serif">was</span>=
-</em>&nbsp;able to reproduce it using Fedora-37, gcc --version : gcc (GCC) =
-12.2.1 20221121 (Red Hat 12.2.1-4)<o:p></o:p></span></p>
-<p style=3D"mso-margin-top-alt:0cm;margin-right:0cm;margin-bottom:7.5pt;mar=
-gin-left:0cm;background:white;box-sizing: border-box;font-variant-ligatures=
-: normal;font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-w=
-ebkit-text-stroke-width: 0px;text-decoration-thickness: initial;text-decora=
-tion-style: initial;text-decoration-color: initial;word-spacing:0px">
-<span style=3D"font-size:10.5pt;font-family:&quot;Helvetica&quot;,sans-seri=
-f;color:#333333"><o:p>&nbsp;</o:p></span></p>
-<p style=3D"mso-margin-top-alt:0cm;margin-right:0cm;margin-bottom:7.5pt;mar=
-gin-left:36.0pt;background:white;box-sizing: border-box;font-variant-ligatu=
-res: normal;font-variant-caps: normal;orphans: 2;text-align:start;widows: 2=
-;-webkit-text-stroke-width: 0px;text-decoration-thickness: initial;text-dec=
-oration-style: initial;text-decoration-color: initial;word-spacing:0px">
-<span style=3D"font-size:10.5pt;font-family:&quot;Helvetica&quot;,sans-seri=
-f;color:#333333">Does the change you made actually build with the two compi=
-ler versions above?<br>
-&gt;I tested the changes in LINCD sources which have GCC 12.2. I didn=92t c=
-heck the above mentioned version.<br>
-<br>
-Is there documentation that states that<o:p></o:p></span></p>
-<div style=3D"mso-element:para-border-div;border:solid #CCCCCC 1.0pt;paddin=
-g:7.0pt 7.0pt 7.0pt 7.0pt;background:whitesmoke">
-<pre style=3D"margin-bottom:7.5pt;background:whitesmoke;word-break:break-al=
-l;border:none;padding:0cm;box-sizing: border-box;overflow-wrap: break-word;=
-border-radius: 4px;font-variant-ligatures: normal;font-variant-caps: normal=
-;orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;text-=
-decoration-thickness: initial;text-decoration-style: initial;text-decoratio=
-n-color: initial;overflow:auto;word-spacing:0px"><span style=3D"font-family=
-:Consolas;color:#333333">static inline void<o:p></o:p></span></pre>
-<pre style=3D"margin-bottom:7.5pt;background:whitesmoke;word-break:break-al=
-l;border:none;padding:0cm"><span style=3D"font-family:Consolas;color:#33333=
-3"><o:p>&nbsp;</o:p></span></pre>
-<pre style=3D"margin-bottom:7.5pt;background:whitesmoke;word-break:break-al=
-l;border:none;padding:0cm"><span style=3D"font-family:Consolas;color:#33333=
-3">is not as portable as:<o:p></o:p></span></pre>
-<pre style=3D"margin-bottom:7.5pt;background:whitesmoke;word-break:break-al=
-l;border:none;padding:0cm"><span style=3D"font-family:Consolas;color:#33333=
-3"><o:p>&nbsp;</o:p></span></pre>
-<pre style=3D"margin-bottom:7.5pt;background:whitesmoke;word-break:break-al=
-l;border:none;padding:0cm"><span style=3D"font-family:Consolas;color:#33333=
-3">__attribute__((always_inline)) static inline void<o:p></o:p></span></pre=
->
-</div>
-<p style=3D"mso-margin-top-alt:0cm;margin-right:0cm;margin-bottom:7.5pt;mar=
-gin-left:0cm;background:white;box-sizing: border-box;font-variant-ligatures=
-: normal;font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-w=
-ebkit-text-stroke-width: 0px;text-decoration-thickness: initial;text-decora=
-tion-style: initial;text-decoration-color: initial;word-spacing:0px">
-<span style=3D"font-size:10.5pt;font-family:&quot;Helvetica&quot;,sans-seri=
-f;color:#333333">I suspect there is not but I'm not a compiler geek!<br>
-<br>
-&gt;As you mentioned in <a href=3D"https://github.com/rsyslog/librelp/issue=
-s/256#:~:text=3DOh%20and%20it%20only%20happens%20when%20using%20%2DOg%20not=
-%20%2DO%5B0%2D3%5D">
-https://github.com/rsyslog/librelp/issues/256#issue-1605905115</a>, it happ=
-ens only when complied without any optimization and as per
-<a href=3D"https://gcc.gnu.org/onlinedocs/gcc/Inline.html#:~:text=3DGCC%20d=
-oes%20not%20inline%20any%20functions%20when%20not%20optimizing%20unless%20y=
-ou%20specify%20the%20%E2%80%98always_inline%E2%80%99%20attribute%20for%20th=
-e%20function%2C%20like%20this%3A">
-https://gcc.gnu.org/onlinedocs/gcc/Inline.html</a> it=92s mentioned that:<b=
-r>
-<br>
-GCC does not inline any functions when not optimizing unless you specify th=
-e =91always_inline=92 attribute for the function, like this:
-<br>
-/* Prototype.&nbsp; */ inline void foo (const char) __attribute__((always_i=
-nline)); <br>
-<br>
-Please let me know if we are on the same page.<o:p></o:p></span></p>
-<p style=3D"mso-margin-top-alt:0cm;margin-right:0cm;margin-bottom:7.5pt;mar=
-gin-left:0cm;background:white;box-sizing: border-box;font-variant-ligatures=
-: normal;font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-w=
-ebkit-text-stroke-width: 0px;text-decoration-thickness: initial;text-decora=
-tion-style: initial;text-decoration-color: initial;word-spacing:0px">
-<span style=3D"font-size:10.5pt;font-family:&quot;Helvetica&quot;,sans-seri=
-f;color:#333333">../Randy<o:p></o:p></span></p>
-</div>
-<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
-<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
-<p class=3D"MsoNormal">Regards,<br>
-Yash<o:p></o:p></p>
-<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
-<div style=3D"mso-element:para-border-div;border:none;border-top:solid #E1E=
-1E1 1.0pt;padding:3.0pt 0cm 0cm 0cm">
-<p class=3D"MsoNormal" style=3D"border:none;padding:0cm"><b>From: </b><a hr=
-ef=3D"mailto:Randy.MacLeod@windriver.com">MacLeod, Randy</a><br>
-<b>Sent: </b>29 March 2023 19:06<br>
-<b>To: </b><a href=3D"mailto:yashinde145@gmail.com">Yash Shinde</a>; <a hre=
-f=3D"mailto:openembedded-devel@lists.openembedded.org">
-openembedded-devel@lists.openembedded.org</a><br>
-<b>Cc: </b><a href=3D"mailto:Umesh.Kallapa@windriver.com">Kallapa, Umesh</a=
->; <a href=3D"mailto:Naveen.Gowda@windriver.com">
-Gowda, Naveen</a>; <a href=3D"mailto:Sundeep.Kokkonda@windriver.com">Kokkon=
-da, Sundeep</a>;
-<a href=3D"mailto:Shivaprasad.Moodalappa@windriver.com">Moodalappa, Shivapr=
-asad</a>;
-<a href=3D"mailto:Yash.Shinde@windriver.com">Shinde, Yash</a><br>
-<b>Subject: </b>Re: [meta-oe][PATCH] librelp: fix function inline errors in=
- debug build</p>
-</div>
-<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
-<div>
-<p class=3D"MsoNormal">On 2023-03-29 03:58, Yash Shinde wrote:<o:p></o:p></=
-p>
-</div>
-<blockquote style=3D"margin-top:5.0pt;margin-bottom:5.0pt">
-<pre>With DEBUG_BUILD =3D &quot;1&quot;, the following errors occur:</pre>
-<pre><o:p>&nbsp;</o:p></pre>
-<pre>&nbsp;&nbsp; src/relpsess.c:95:1: error:</pre>
-<pre>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; inlining failed in call to 'relpSessFre=
-ePermittedPeers': function not considered for inlining [-Werror=3Dinline]</=
-pre>
-<pre><o:p>&nbsp;</o:p></pre>
-<pre>&nbsp;&nbsp; src/tcp.c:146:1: error:</pre>
-<pre>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; inlining failed in call to 'relpTcpFree=
-PermittedPeers': function not considered for inlining [-Werror=3Dinline]</p=
-re>
-<pre><o:p>&nbsp;</o:p></pre>
-<pre>&nbsp;&nbsp; src/tcp.c:158:1: error:</pre>
-<pre>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; inlining failed in call to 'callOnAuthE=
-rr': function not considered for inlining [-Werror=3Dinline]</pre>
-<pre><o:p>&nbsp;</o:p></pre>
-<pre>Compiler does not inline any functions when not optimizing unless you =
-specify the =91always_inline=92 attribute for the function. Add &quot;__att=
-ribute__((always_inline))&quot; to avoid these function inline errors.</pre=
->
-</blockquote>
-<p>Hi Yash,</p>
-<p><o:p>&nbsp;</o:p></p>
-<p>First, if we're going to take this approach, you should revert my work-a=
-round as part of this commit:</p>
-<p>commit ca10312c4c7e88d67f4b487ae9afcbfdf92898d6<br>
-Author:&nbsp;&nbsp;&nbsp;&nbsp; Randy MacLeod <a href=3D"mailto:Randy.MacLe=
-od@windriver.com">&lt;Randy.MacLeod@windriver.com&gt;</a><br>
-Date: Wed Mar 1 19:24:27 2023<br>
-<br>
-&nbsp;&nbsp;&nbsp; librelp: make inline errors be warnings in debug build<b=
-r>
-&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ...</p>
-<p><o:p>&nbsp;</o:p></p>
-<p>BUT...</p>
-<p>The problem isn't so much that the code doesn't get in-lined when doing =
-a debug build but<br>
-that it fails to compile.&nbsp; I think this is a compiler regressions sinc=
-e <br>
-I was <em><span style=3D"font-family:&quot;Calibri&quot;,sans-serif">not</s=
-pan></em> able to reproduce the error when compiling natively using Ubuntu-=
-22.04 (gcc-11.3) but<br>
-<em><span style=3D"font-family:&quot;Calibri&quot;,sans-serif">was</span></=
-em> able to reproduce it using Fedora-37, gcc --version : gcc (GCC) 12.2.1 =
-20221121 (Red Hat 12.2.1-4)</p>
-<p><o:p>&nbsp;</o:p></p>
-<p>Does the change you made actually build with the two compiler versions a=
-bove?<br>
-Is there documentation that states that <o:p></o:p></p>
-<pre>static inline void</pre>
-<pre><o:p>&nbsp;</o:p></pre>
-<pre>is not as portable as:</pre>
-<pre><o:p>&nbsp;</o:p></pre>
-<pre>__attribute__((always_inline)) static inline void</pre>
-<p>I suspect there is not but I'm not a compiler geek!</p>
-<p>../Randy</p>
-<p><o:p>&nbsp;</o:p></p>
-<p><o:p>&nbsp;</o:p></p>
-<p><o:p>&nbsp;</o:p></p>
-<blockquote style=3D"margin-top:5.0pt;margin-bottom:5.0pt">
-<pre><o:p>&nbsp;</o:p></pre>
-<pre><o:p>&nbsp;</o:p></pre>
-<pre>Upstream-Status: Tracked by upstream bug: <a href=3D"https://github.co=
-m/rsyslog/librelp/issues/256">https://github.com/rsyslog/librelp/issues/256=
-</a></pre>
-<pre><o:p>&nbsp;</o:p></pre>
-<pre>Signed-off-by: Yash Shinde <a href=3D"mailto:Yash.Shinde@windriver.com=
-">&lt;Yash.Shinde@windriver.com&gt;</a></pre>
-<pre>---</pre>
-<pre> ...02-librelp-fix-function-inline-error.patch | 59 ++++++++++++++++++=
-+</pre>
-<pre> 1 file changed, 59 insertions(+)</pre>
-<pre> create mode 100644 meta-oe/recipes-extended/rsyslog/rsyslog/0002-libr=
-elp-fix-function-inline-error.patch</pre>
-<pre><o:p>&nbsp;</o:p></pre>
-<pre>diff --git a/meta-oe/recipes-extended/rsyslog/rsyslog/0002-librelp-fix=
--function-inline-error.patch b/meta-oe/recipes-extended/rsyslog/rsyslog/000=
-2-librelp-fix-function-inline-error.patch</pre>
-<pre>new file mode 100644</pre>
-<pre>index 000000000..60cf1b632</pre>
-<pre>--- /dev/null</pre>
-<pre>+++ b/meta-oe/recipes-extended/rsyslog/rsyslog/0002-librelp-fix-functi=
-on-inline-error.patch</pre>
-<pre>@@ -0,0 +1,59 @@</pre>
-<pre>+From dc841f01fb6167ec9a80e373c5f4d2f5e3222ed6 Mon Sep 17 00:00:00 200=
-1</pre>
-<pre>+From: Yash Shinde <a href=3D"mailto:Yash.Shinde@windriver.com">&lt;Ya=
-sh.Shinde@windriver.com&gt;</a></pre>
-<pre>+Date: Tue, 28 Mar 2023 04:06:58 +0000</pre>
-<pre>+Subject: librelp: fix function inline errors in debug build</pre>
-<pre>+</pre>
-<pre>+With DEBUG_BUILD =3D &quot;1&quot;, the following errors occur:</pre>
-<pre>+</pre>
-<pre>+&nbsp;&nbsp; src/relpsess.c:95:1: error:</pre>
-<pre>+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; inlining failed in call to 'relpSessFr=
-eePermittedPeers': function not considered for inlining [-Werror=3Dinline]<=
-/pre>
-<pre>+</pre>
-<pre>+&nbsp;&nbsp; src/tcp.c:146:1: error:</pre>
-<pre>+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; inlining failed in call to 'relpTcpFre=
-ePermittedPeers': function not considered for inlining [-Werror=3Dinline]</=
-pre>
-<pre>+</pre>
-<pre>+&nbsp;&nbsp; src/tcp.c:158:1: error:</pre>
-<pre>+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; inlining failed in call to 'callOnAuth=
-Err': function not considered for inlining [-Werror=3Dinline]</pre>
-<pre>+</pre>
-<pre>+Compiler does not inline any functions when not optimizing unless you=
- specify the =91always_inline=92 attribute for the function. Add &quot;__at=
-tribute__((always_inline))&quot; to avoid these function inline errors.</pr=
-e>
-<pre>+</pre>
-<pre>+Upstream-Status: Tracked by upstream bug: <a href=3D"https://github.c=
-om/rsyslog/librelp/issues/256">https://github.com/rsyslog/librelp/issues/25=
-6</a></pre>
-<pre>+</pre>
-<pre>+Signed-off-by: Yash Shinde <a href=3D"mailto:Yash.Shinde@windriver.co=
-m">&lt;Yash.Shinde@windriver.com&gt;</a></pre>
-<pre>+---</pre>
-<pre>+</pre>
-<pre>+diff --git a/src/relpsess.c b/src/relpsess.c</pre>
-<pre>+index ee7b595..aa52b71 100644</pre>
-<pre>+--- a/src/relpsess.c</pre>
-<pre>++++ b/src/relpsess.c</pre>
-<pre>+@@ -91,7 +91,7 @@ callOnErr(const relpSess_t *__restrict__ const pThi=
-s,</pre>
-<pre>+</pre>
-<pre>+</pre>
-<pre>+ /* helper to free permittedPeer structure */</pre>
-<pre>+-static inline void</pre>
-<pre>++__attribute__((always_inline)) static inline void</pre>
-<pre>+ relpSessFreePermittedPeers(relpSess_t *const pThis)</pre>
-<pre>+ {</pre>
-<pre>+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; int i;</pre>
-<pre>+diff --git a/src/tcp.c b/src/tcp.c</pre>
-<pre>+index 7a75cc4..f4088c0 100644</pre>
-<pre>+--- a/src/tcp.c</pre>
-<pre>++++ b/src/tcp.c</pre>
-<pre>+@@ -142,7 +142,7 @@ static int relpTcpChkPeerName(relpTcp_t *const pT=
-his, void* cert);</pre>
-<pre>+</pre>
-<pre>+</pre>
-<pre>+ /* helper to free permittedPeer structure */</pre>
-<pre>+-static inline void</pre>
-<pre>++__attribute__((always_inline)) static inline void</pre>
-<pre>+ relpTcpFreePermittedPeers(relpTcp_t *const pThis)</pre>
-<pre>+ {</pre>
-<pre>+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; int i;</pre>
-<pre>+@@ -154,7 +154,7 @@ relpTcpFreePermittedPeers(relpTcp_t *const pThis)=
-</pre>
-<pre>+ }</pre>
-<pre>+</pre>
-<pre>+ /* helper to call onAuthErr if set */</pre>
-<pre>+-static inline void</pre>
-<pre>++__attribute__((always_inline)) static inline void</pre>
-<pre>+ callOnAuthErr(relpTcp_t *const pThis, const char *authdata, const ch=
-ar *emsg, relpRetVal ecode)</pre>
-<pre>+ {</pre>
-<pre>+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pThis-&gt;pEngine-&gt;dbgp=
-rint((char*)&quot;librelp: auth error: authdata:'%s', ecode %d, &quot;</pre=
->
-<pre>+</pre>
-</blockquote>
-<p><o:p>&nbsp;</o:p></p>
-<pre>-- </pre>
-<pre># Randy MacLeod</pre>
-<pre># Wind River Linux</pre>
-<p class=3D"MsoNormal"><span style=3D"font-size:10.0pt;font-family:&quot;Co=
-urier New&quot;"><o:p>&nbsp;</o:p></span></p>
-</div>
-</body>
-</html>
-
---_000_SJ1PR11MB61296D638CFEA89A753C29ABEB8E9SJ1PR11MB6129namp_--
 
