@@ -2,52 +2,52 @@ Return-Path: <zboszor@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2A123C6FD1D
-	for <webhook@archiver.kernel.org>; Thu, 30 Mar 2023 14:22:32 +0000 (UTC)
-Received: from mail-ed1-f43.google.com (mail-ed1-f43.google.com [209.85.208.43])
- by mx.groups.io with SMTP id smtpd.web10.26419.1680186142944369341
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7DD5BC77B60
+	for <webhook@archiver.kernel.org>; Thu, 30 Mar 2023 15:24:52 +0000 (UTC)
+Received: from mail-ed1-f52.google.com (mail-ed1-f52.google.com [209.85.208.52])
+ by mx.groups.io with SMTP id smtpd.web10.28321.1680189888561597730
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 30 Mar 2023 07:22:23 -0700
+ Thu, 30 Mar 2023 08:24:48 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=kQhh7s7M;
- spf=pass (domain: gmail.com, ip: 209.85.208.43, mailfrom: zboszor@gmail.com)
-Received: by mail-ed1-f43.google.com with SMTP id y4so77257063edo.2
-        for <openembedded-devel@lists.openembedded.org>; Thu, 30 Mar 2023 07:22:22 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=DjJ/l49h;
+ spf=pass (domain: gmail.com, ip: 209.85.208.52, mailfrom: zboszor@gmail.com)
+Received: by mail-ed1-f52.google.com with SMTP id er13so36969826edb.9
+        for <openembedded-devel@lists.openembedded.org>; Thu, 30 Mar 2023 08:24:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112; t=1680186141;
+        d=gmail.com; s=20210112; t=1680189887;
         h=content-transfer-encoding:in-reply-to:from:references:cc:to
          :content-language:subject:user-agent:mime-version:date:message-id
          :from:to:cc:subject:date:message-id:reply-to;
-        bh=isZWzADjY3YVfeC3phCDbG2iysLswX8shYa3Eqm9WYw=;
-        b=kQhh7s7MPUZ+ypx5YR60HQbDZ3FB4b0pQJKkxsnfB4wY2qGado0fo3mThfCoq06CEI
-         +BjXshSnLcaaXRvnZu4cbMVQoJDLsVjRZWJUmBK89QhfWChS/tSpBIPKLblWnES2lD9+
-         mD1fG0c1xKIYPn9PEOfcWaztSZReH5H/Mt9PHA9ddRgCagcjedl86+Tg9TPNW7MYbhtg
-         tHDDhztNtv7u/u0fVdN4YCha6Z1YmkrulvHFWMf/UeGgXsmEbgy2msB/q+tOzZyqGh4E
-         7t9QjIUu+Euz0QJ+SAT0RLmWSj3WzcDihs2Wosl7SKHlRokyJSJBPCiMUksVA4Ed5Mmn
-         a2Kw==
+        bh=OLzpmdyo7jBmh5/nNLAr2CDeKPK3IX/zOvn/UZhLxdY=;
+        b=DjJ/l49h9m+mwP7ItC20qrHZ43E3mmIWGUjJqeNLvQa5IpUji/4gEtfzjECvpIIF7z
+         8L4IEp+MC3NB1K6UthX4DDteUmqoVwZwxGMqO/pmdYz4xZ1kq/EeoCX6nUmfbRMYQIXJ
+         HADYarIwHobI5Qc8qTiFhIQlMbzRGLqto+B6Pn1O61WBMpGAacTBSOJWoI4yi20HvweB
+         Jo8y2q/MP1j9p8Qvg+FKTz32FvQgBvnZEHxqP4s8QT89iGwBXbgbtCyviDf5SVnXJaNH
+         /vxO3ge/64FlW3lSaXp3vtBqlX3Nv+I5l8qAW4TAE1u0LVEQW1b/tThr5NulSuq+Fnat
+         7ecQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112; t=1680186141;
+        d=1e100.net; s=20210112; t=1680189887;
         h=content-transfer-encoding:in-reply-to:from:references:cc:to
          :content-language:subject:user-agent:mime-version:date:message-id
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=isZWzADjY3YVfeC3phCDbG2iysLswX8shYa3Eqm9WYw=;
-        b=Q9JmNX+eaJBsXcICh2adMp0DNihQvLV5OqJTk2d2Gybd4rz/DL1g4cO8l9Nw2mBGVL
-         owSAgrfRMCaVwoipsCVtR/7BmRPMPi1k8ugm8CrK1+NP9/rbKuFeZvdaFAZP/GeNWb69
-         1N4BjNoR/rXEEXYDnCQSm3MK0ytoVDb8gJn0VVTSBiMHjG6DKjx4R2n399U2MRnwssqQ
-         Jpj/Po5o+Hd8LOwyPJgwvMX/8eHwD+7mCW2qGM3KkClkGYpKGQXvUJWUj7bHLYZnCVM6
-         bouW0Mknc4Xl/Wmip/9ylVxsd58FrO+gbjH9Fdd7i3Ku441mxKB3CFMfvaWxmx0BqTLk
-         SC0g==
-X-Gm-Message-State: AAQBX9f8ut1WUYB6vMwg8ckcQMpU5ZkRB1kg6MRIN1z6y2Q7G8sG8ZHb
-	fQQcSspC7koK48Jmc6j3E0Q=
-X-Google-Smtp-Source: AKy350Yy2+wou9a0z7x0mmzgFqdLF9IQ4q8pR4aDfIkSiAIQV46FzkM9cwH+c6JBXyq7SD6q6XVsDQ==
-X-Received: by 2002:a17:906:3786:b0:8dd:76d5:a82 with SMTP id n6-20020a170906378600b008dd76d50a82mr22609394ejc.47.1680186141315;
-        Thu, 30 Mar 2023 07:22:21 -0700 (PDT)
+        bh=OLzpmdyo7jBmh5/nNLAr2CDeKPK3IX/zOvn/UZhLxdY=;
+        b=IzCx2pA9O88vxnm06kbGzWoGnwwPGbP9XLgsgSYPRY1wwuCsrTXvBOMCDDYWrj9qUV
+         K+gtOPluR6XIU34pWsMlIyxfbBYtwAfiFFF77FlbuEGrQzy+waYxSvEBPg3zK798tqhe
+         sEGsfGxmX4FVllHrS6qF2S/W5Gx1LHWwz7Cl1p4XaWzaZD5h/tjpPDHnM9NL41LVVx32
+         xj2TB4Sf47jkjxzo6gUQuQd/qDy7wnNVLY1eQK3H2luGY7JIh4Q98iGgpZii1AYZ0Zyb
+         R1VlE9fuDQTmP4M5dVUFmURqoQ6kNaHDRtKGh10uriA9r0mDhbL5QNlT8r8jo7sAT9MA
+         UhrQ==
+X-Gm-Message-State: AAQBX9coXSBa+cnWI3vMqAFdBU+vrXSMMXjhzuwcTFNI43Mkm/wQnjOD
+	AaiJP7CfzdkgEki3piKy/iU=
+X-Google-Smtp-Source: AKy350bKeiLBQ5WnAk+dpIc81h0LWOaKSbob0nfCbJL3KaO6PLRHo2QHPow359p472MhLB5gNbFzLg==
+X-Received: by 2002:a05:6402:5213:b0:502:50b0:a879 with SMTP id s19-20020a056402521300b0050250b0a879mr6657153edd.5.1680189886706;
+        Thu, 30 Mar 2023 08:24:46 -0700 (PDT)
 Received: from [192.168.2.2] (dsl51B7D2F9.fixip.t-online.hu. [81.183.210.249])
-        by smtp.gmail.com with ESMTPSA id qb16-20020a1709077e9000b0093f3d41b9ebsm6838873ejc.220.2023.03.30.07.22.20
+        by smtp.gmail.com with ESMTPSA id t20-20020a50d714000000b005021d17d896sm39801edi.21.2023.03.30.08.24.46
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 30 Mar 2023 07:22:21 -0700 (PDT)
-Message-ID: <31833c0a-a00f-5966-3625-bb7ddc37c55d@gmail.com>
-Date: Thu, 30 Mar 2023 16:22:20 +0200
+        Thu, 30 Mar 2023 08:24:46 -0700 (PDT)
+Message-ID: <09b3c1e8-50fc-dbed-45a4-b78699a1ea3d@gmail.com>
+Date: Thu, 30 Mar 2023 17:24:45 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.9.0
@@ -65,8 +65,8 @@ Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 30 Mar 2023 14:22:32 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101839
+ <openembedded-devel@lists.openembedded.org>; Thu, 30 Mar 2023 15:24:52 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101840
 
 2023. 03. 30. 15:50 keltezéssel, Alexander Kanavin írta:
 > Meson is specifically configured in yocto to user qemu usermode as the
@@ -74,13 +74,69 @@ X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/1018
 > tweaked to use that? This would avoid all the nasty -native extensions
 > and modifications.
 
-Wasn't the mariadb change I made about 2 years ago
-to use cmake's CROSSCOMPILING_EMULATOR that saved
-building the whole mariadb-native just for one small binary
-reverted recently because qemu doesn't emulate certain
-parts of the instruction set and caused crashes?
+How would I do that? This is the error if I not use the
+externally built executables:
 
-The same principle applies to meson running binaries via qemu, too.
+| [122/124] 
+/home/zozo/dtd-yocto-4.2/tmp-sicom-glibc/work/corei7-64-oe-linux/libfprint/1.94.5-r0/recipe-sysroot-native/usr/bin/meson.real 
+--internal exe --capture libfprint/70-libfprint-2.rules -- 
+/home/zozo/dtd-yocto-4.2/tmp-sicom-glibc/work/corei7-64-oe-linux/libfprint/1.94.5-r0/build/libfprint/fprint-list-udev-rules
+| FAILED: libfprint/70-libfprint-2.rules
+| 
+/home/zozo/dtd-yocto-4.2/tmp-sicom-glibc/work/corei7-64-oe-linux/libfprint/1.94.5-r0/recipe-sysroot-native/usr/bin/meson.real 
+--internal exe --capture libfprint/70-libfprint-2.rules -- 
+/home/zozo/dtd-yocto-4.2/tmp-sicom-glibc/work/corei7-64-oe-linux/libfprint/1.94.5-r0/build/libfprint/fprint-list-udev-rules
+| Traceback (most recent call last):
+|   File 
+"/home/zozo/dtd-yocto-4.2/tmp-sicom-glibc/work/corei7-64-oe-linux/libfprint/1.94.5-r0/recipe-sysroot-native/usr/bin/meson.real", 
+line 8, in <module>
+|     sys.exit(main())
+|              ^^^^^^
+|   File 
+"/home/zozo/dtd-yocto-4.2/tmp-sicom-glibc/work/corei7-64-oe-linux/libfprint/1.94.5-r0/recipe-sysroot-native/usr/lib/python3.11/site-packages/mesonbuild/mesonmain.py", 
+line 287, in main
+|     return run(sys.argv[1:], launcher)
+|            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+|   File 
+"/home/zozo/dtd-yocto-4.2/tmp-sicom-glibc/work/corei7-64-oe-linux/libfprint/1.94.5-r0/recipe-sysroot-native/usr/lib/python3.11/site-packages/mesonbuild/mesonmain.py", 
+line 275, in run
+|     return run_script_command(args[1], args[2:])
+|            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+|   File 
+"/home/zozo/dtd-yocto-4.2/tmp-sicom-glibc/work/corei7-64-oe-linux/libfprint/1.94.5-r0/recipe-sysroot-native/usr/lib/python3.11/site-packages/mesonbuild/mesonmain.py", 
+line 223, in run_script_command
+|     return module.run(script_args)
+|            ^^^^^^^^^^^^^^^^^^^^^^^
+|   File 
+"/home/zozo/dtd-yocto-4.2/tmp-sicom-glibc/work/corei7-64-oe-linux/libfprint/1.94.5-r0/recipe-sysroot-native/usr/lib/python3.11/site-packages/mesonbuild/scripts/meson_exe.py", 
+line 121, in run
+|     return run_exe(exe)
+|            ^^^^^^^^^^^^
+|   File 
+"/home/zozo/dtd-yocto-4.2/tmp-sicom-glibc/work/corei7-64-oe-linux/libfprint/1.94.5-r0/recipe-sysroot-native/usr/lib/python3.11/site-packages/mesonbuild/scripts/meson_exe.py", 
+line 66, in run_exe
+|     p = subprocess.Popen(cmd_args, env=child_env, cwd=exe.workdir,
+|         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+|   File 
+"/home/zozo/dtd-yocto-4.2/tmp-sicom-glibc/work/corei7-64-oe-linux/libfprint/1.94.5-r0/recipe-sysroot-native/usr/lib/python3.11/subprocess.py", 
+line 1024, in __init__
+|     self._execute_child(args, executable, preexec_fn, close_fds,
+|   File 
+"/home/zozo/dtd-yocto-4.2/tmp-sicom-glibc/work/corei7-64-oe-linux/libfprint/1.94.5-r0/recipe-sysroot-native/usr/lib/python3.11/subprocess.py", 
+line 1789, in _execute_child
+|     self._posix_spawn(args, executable, env, restore_signals,
+|   File 
+"/home/zozo/dtd-yocto-4.2/tmp-sicom-glibc/work/corei7-64-oe-linux/libfprint/1.94.5-r0/recipe-sysroot-native/usr/lib/python3.11/subprocess.py", 
+line 1733, in _posix_spawn
+|     self.pid = os.posix_spawn(executable, args, env, **kwargs)
+|                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+| FileNotFoundError: [Errno 2] No such file or directory: 
+'/home/zozo/dtd-yocto-4.2/tmp-sicom-glibc/work/corei7-64-oe-linux/libfprint/1.94.5-r0/build/libfprint/fprint-list-udev-rules'
+
+The executable is built, it is there, and it's using the target system's
+runtime linker path.
+
+Obviously, meson doesn't run it through the exe_wrapper.
 
 >
 > Alex
