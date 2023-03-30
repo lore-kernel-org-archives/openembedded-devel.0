@@ -1,161 +1,235 @@
-Return-Path: <akuster808@gmail.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 849D7C6FD1D
-	for <webhook@archiver.kernel.org>; Thu, 30 Mar 2023 12:04:41 +0000 (UTC)
-Received: from mail-yb1-f180.google.com (mail-yb1-f180.google.com [209.85.219.180])
- by mx.groups.io with SMTP id smtpd.web11.23214.1680177879089869611
+	by smtp.lore.kernel.org (Postfix) with ESMTP id F304BC6FD1D
+	for <webhook@archiver.kernel.org>; Thu, 30 Mar 2023 13:22:51 +0000 (UTC)
+Received: from mail-oi1-f180.google.com (mail-oi1-f180.google.com [209.85.167.180])
+ by mx.groups.io with SMTP id smtpd.web10.24906.1680182564413948662
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 30 Mar 2023 05:04:39 -0700
+ Thu, 30 Mar 2023 06:22:44 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20210112 header.b=nXqHLpg2;
- spf=pass (domain: gmail.com, ip: 209.85.219.180, mailfrom: akuster808@gmail.com)
-Received: by mail-yb1-f180.google.com with SMTP id e65so23066915ybh.10
-        for <openembedded-devel@lists.openembedded.org>; Thu, 30 Mar 2023 05:04:38 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=fo/tOaG5;
+ spf=pass (domain: gmail.com, ip: 209.85.167.180, mailfrom: raj.khem@gmail.com)
+Received: by mail-oi1-f180.google.com with SMTP id f14so566558oiw.10
+        for <openembedded-devel@lists.openembedded.org>; Thu, 30 Mar 2023 06:22:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112; t=1680177878; x=1682769878;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+        d=gmail.com; s=20210112; t=1680182563;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=coIj0arjS9ssCtAFr5qOryTlhYqyJOA6uJVrAA0WxzU=;
-        b=nXqHLpg2hLf0UwWWQfgZav8v0yorP8amx8/FjSirMWWfCoCCkcv9ROvnO3t5uKz1RU
-         XWv4HXuWg/hwXJJdWHJeYM+0sdEbB2xUJKgWThBiASlTkgQYZ+Bp6PVU2eXcO1alLAI7
-         onvi0QytiR+LM0NTS/F5tLrpAsgTB+Q4deQAr2vW4tamYutIJxueTgKSiaxC4/DRl5ES
-         POr+N8d9cZhL3AErYL+50gkUsw8fl9ZWYFD6SzZQS5zsoyqMHQ0NNsd23KqdDkfTJQ+d
-         a/zdtiNcKoPof4oK+zjG85iDyPMJsVyySegyYSWbOAcGPGqCDqOvEk5z8uMQGNdKugUn
-         r8LQ==
+        bh=70OQLnSP/8ba/ErEwrVpibtysR3uRjnrj5d7068Oo1A=;
+        b=fo/tOaG53HXFQKd3/eEcEXhTTEdMHc34Uij+7lyk7RDbyTfIN8dH0GiAT1lx5XcFKn
+         XRV9assdfno3DT7NHv8CXEzJejMOt/tMNIP0zn8CdTisfz8YKO3LZSou26Oo0l+WMTpz
+         UlSg1Ig21HNMn/IxQ2/oSORJ7GpooKc3M+oR54H5jnUd5/1zYjVSX2uaw7Mew/zgvIm9
+         la7+EjdIGZ/oXCY+hETr5piP/KBy2Yd19F1n0jj5/fqqWojzsUNX0DTMLZP8aXCPwzib
+         NpqPVduyTMtkJKgQJGoGZaP+ZjzWvF6KA0I62PVjIM1iOSizkirCH//CP+o5JBNEJC4T
+         O4tg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112; t=1680177878; x=1682769878;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+        d=1e100.net; s=20210112; t=1680182563;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=coIj0arjS9ssCtAFr5qOryTlhYqyJOA6uJVrAA0WxzU=;
-        b=gugvNdTVng3zJvcssd5yTivzyG797h0MqrRG+Osdhl98+sfEywXkUzcHA0xrikRd+5
-         kVrtJ/UQVXN5XSSkNt7Awts641pFny6Duum2eB5EIbFJLwgv+GJf0S+2GjLV+KTGd2pP
-         q1sLoLg3BXOieKWUlyuCdjUWULP25f5e3JSRM/gYtT/E22x9qB+7EZWYtiXy3VYuf5c2
-         5nPpTcyCp1D9mjIMWhktOsMdw7NY+U12lSQ9RKnMvSEO3qeIm1mhhGTDorQV/FFIxIx6
-         uk5W8vWb2S1HRXgXOjHN3V10IF2sCI5BZPNirC+ZMpendMDvjRtKxCkCduaQckslV8wA
-         SSCw==
-X-Gm-Message-State: AAQBX9cQdvV9UZIPW91I2wkN7zr8PzpjIRw4k1b1SkbkSkWNhUeaNdj4
-	vaWtzdEMYZZXGoNNZaUswBRsW+KldBL50g==
-X-Google-Smtp-Source: AKy350YzSrhJzf2s6qdu8H+qiItp3cI4brCYACFEFQVpM1mxkNkOfP0Cn5NhL7wg5RfPffK+BmxOTw==
-X-Received: by 2002:a25:b30d:0:b0:b6d:80ab:8b0f with SMTP id l13-20020a25b30d000000b00b6d80ab8b0fmr22253906ybj.62.1680177877984;
-        Thu, 30 Mar 2023 05:04:37 -0700 (PDT)
-Received: from keaua.caveonetworks.com ([2600:1700:9190:ba10:4171:fd90:b516:41ed])
-        by smtp.gmail.com with ESMTPSA id eh17-20020a05690c299100b00545a0818491sm1435286ywb.33.2023.03.30.05.04.37
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 30 Mar 2023 05:04:37 -0700 (PDT)
-From: Armin Kuster <akuster808@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: wangmy <wangmy@fujitsu.com>,
-	Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][kirkstone][PATCH 2/2] libcrypt-openssl-rsa-perl: upgrade 0.32 -> 0.33
-Date: Thu, 30 Mar 2023 08:04:36 -0400
-Message-Id: <20230330120436.2884051-2-akuster808@gmail.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20230330120436.2884051-1-akuster808@gmail.com>
-References: <20230330120436.2884051-1-akuster808@gmail.com>
+        bh=70OQLnSP/8ba/ErEwrVpibtysR3uRjnrj5d7068Oo1A=;
+        b=iVDhWG1WUHFyat8dD77ZFGyrMJGhpu5UVD0/aNZTUNKDQIHR/jrc/zL3s2vSsaB3aW
+         nWk/qOs6cqxpXrs6AznJjiA+4ySTciEn7ej9oN4A2giFbP5Si/+jyYyXGTRgJF0fUaZs
+         lzvKQ14Sy8lzPvvwHTJqjWx7/m8EG4PZoQQsJwIugsFe0Gk6ByaZ8XrZviC6AHvIfn2G
+         mhGIpIe6Hx2fGJ9jQZjPPEEIdWsTP8/z1+kc79dVWz2139xAUoZva/5BeZlvwAAkhqCe
+         rHdlNCnOUYXnYAqD8i+QAlrK/18TJQaF3ASyklfEtDLS/Iif1MyJDNWYSN5uM40kAgrz
+         3H2Q==
+X-Gm-Message-State: AO0yUKXerClVjXFvaTvEf+QDted3xQQGKcPv5TVayMTwHI9toG2EvqZf
+	GLrwwhT9S80i1rHvLwzooIQpNOzs4pynsvoiwE4=
+X-Google-Smtp-Source: AK7set8KAi/PUW/B1Kqk8xV38tNP+QoXe1BRC8J21JUJuMNEFF+3wjMbqNLHCUp8OVPXi7pv4GsFCLM7Oie9RwUAbGg=
+X-Received: by 2002:aca:916:0:b0:386:d8a5:d80b with SMTP id
+ 22-20020aca0916000000b00386d8a5d80bmr6046213oij.4.1680182563521; Thu, 30 Mar
+ 2023 06:22:43 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20230330054414.15931-1-yashinde145@gmail.com> <45e8c265-6907-df73-70a1-a21052f2fe80@windriver.com>
+In-Reply-To: <45e8c265-6907-df73-70a1-a21052f2fe80@windriver.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 30 Mar 2023 06:22:17 -0700
+Message-ID: <CAMKF1sq7XT3ZP9WgRyn3eBAeuCi=39seQnH8Xye79Rmk0PUo4A@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH v2] librelp: fix function inline errors in
+ debug build
+To: Randy MacLeod <randy.macleod@windriver.com>
+Cc: Yash Shinde <yashinde145@gmail.com>, openembedded-devel@lists.openembedded.org, 
+	Sundeep.Kokkonda@windriver.com, Yash.Shinde@windriver.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 30 Mar 2023 12:04:41 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101833
+ <openembedded-devel@lists.openembedded.org>; Thu, 30 Mar 2023 13:22:51 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101834
 
-From: wangmy <wangmy@fujitsu.com>
+also patch does not apply cleanly
 
-0001-Fix-for-Issue-31.patch
-removed since it's included in 0.33
+   27772 Applying patch 0001-librelp-fix-function-inline-error.patch
+   27773 patching file src/relpsess.c
+   27774 Hunk #1 succeeded at 91 with fuzz 1.
+   27775 patching file src/tcp.c
+   27776 Hunk #1 succeeded at 142 with fuzz 1.
+   27777 Hunk #2 succeeded at 154 with fuzz 1.
 
-Changelog:
-=========
-- Update for windows github CI
-- Remove duplicit 'LICENSE' key
-- Remove EUMM Remove version check
-- #31 by removing reference to RSA_SSLV23_PADDING (removed from OpenSSL starting from v3.0.0)
-- support passphase protected private key load
-- fix 'unsupported encryption' error on old library versions
-- Clarify croak message for missing passphrase on older cyphers
-- More structs opaqued in LibreSSL 3.5
-- Use a macro for dealing with older SSL lacking macros
-- more CI fixups. Drop testing for 5.10 and 5.8. Something is broken upstream.
-
-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit a97f771d35d85dfa0a428fbeea7405ad9754a5f8)
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
----
- .../files/0001-Fix-for-Issue-31.patch         | 37 -------------------
- ...2.bb => libcrypt-openssl-rsa-perl_0.33.bb} |  3 +-
- 2 files changed, 1 insertion(+), 39 deletions(-)
- delete mode 100644 meta-perl/recipes-perl/libcrypt/files/0001-Fix-for-Issue-31.patch
- rename meta-perl/recipes-perl/libcrypt/{libcrypt-openssl-rsa-perl_0.32.bb => libcrypt-openssl-rsa-perl_0.33.bb} (86%)
-
-diff --git a/meta-perl/recipes-perl/libcrypt/files/0001-Fix-for-Issue-31.patch b/meta-perl/recipes-perl/libcrypt/files/0001-Fix-for-Issue-31.patch
-deleted file mode 100644
-index a5ea43f88b..0000000000
---- a/meta-perl/recipes-perl/libcrypt/files/0001-Fix-for-Issue-31.patch
-+++ /dev/null
-@@ -1,37 +0,0 @@
--From 5e8202458e41ba1f7801746c503fe7c60ae340d5 Mon Sep 17 00:00:00 2001
--From: kambe-mikb <77083885+kambe-mikb@users.noreply.github.com>
--Date: Tue, 28 Sep 2021 17:40:18 +1000
--Subject: [PATCH] Fix for Issue 31
--
--Fix Issue 31 by removing reference to RSA_SSLV23_PADDING (removed from OpenSSL starting from v3.0.0)
--
--Upstream-Status: Submitted [https://github.com/toddr/Crypt-OpenSSL-RSA/pull/32]
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
-- RSA.xs | 4 ++++
-- 1 file changed, 4 insertions(+)
--
--diff --git a/RSA.xs b/RSA.xs
--index 46cb199..4f65dfc 100644
----- a/RSA.xs
--+++ b/RSA.xs
--@@ -640,12 +640,16 @@ use_pkcs1_oaep_padding(p_rsa)
--   CODE:
--     p_rsa->padding = RSA_PKCS1_OAEP_PADDING;
-- 
--+#if OPENSSL_VERSION_NUMBER < 0x30000000L
--+
-- void
-- use_sslv23_padding(p_rsa)
--     rsaData* p_rsa;
--   CODE:
--     p_rsa->padding = RSA_SSLV23_PADDING;
-- 
--+#endif
--+
-- # Sign text. Returns the signature.
-- 
-- SV*
---- 
--2.33.1
--
-diff --git a/meta-perl/recipes-perl/libcrypt/libcrypt-openssl-rsa-perl_0.32.bb b/meta-perl/recipes-perl/libcrypt/libcrypt-openssl-rsa-perl_0.33.bb
-similarity index 86%
-rename from meta-perl/recipes-perl/libcrypt/libcrypt-openssl-rsa-perl_0.32.bb
-rename to meta-perl/recipes-perl/libcrypt/libcrypt-openssl-rsa-perl_0.33.bb
-index fd92c8a8db..aa8d138f2c 100644
---- a/meta-perl/recipes-perl/libcrypt/libcrypt-openssl-rsa-perl_0.32.bb
-+++ b/meta-perl/recipes-perl/libcrypt/libcrypt-openssl-rsa-perl_0.33.bb
-@@ -4,10 +4,9 @@ LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=a67ceecc5d9a91a5a0d003ba50c26346"
- 
- SRC_URI = "http://www.cpan.org/modules/by-module/Crypt/Crypt-OpenSSL-RSA-${PV}.tar.gz \
--           file://0001-Fix-for-Issue-31.patch \
- "
- 
--SRC_URI[sha256sum] = "adc74f0ae125c77f65d5dd32abb9c3429300a79543bf263494f333f9c0b62a61"
-+SRC_URI[sha256sum] = "bdbe630f6d6f540325746ad99977272ac8664ff81bd19f0adaba6d6f45efd864"
- 
- DEPENDS += "libcrypt-openssl-guess-perl-native openssl"
- 
--- 
-2.25.1
-
+On Thu, Mar 30, 2023 at 4:29=E2=80=AFAM Randy MacLeod
+<randy.macleod@windriver.com> wrote:
+>
+> On 2023-03-30 01:44, Yash Shinde wrote:
+>
+> With DEBUG_BUILD =3D "1", the following errors occur:
+>
+>    src/relpsess.c:95:1: error:
+>       inlining failed in call to 'relpSessFreePermittedPeers': function n=
+ot considered for inlining [-Werror=3Dinline]
+>
+>    src/tcp.c:146:1: error:
+>       inlining failed in call to 'relpTcpFreePermittedPeers': function no=
+t considered for inlining [-Werror=3Dinline]
+>
+>    src/tcp.c:158:1: error:
+>       inlining failed in call to 'callOnAuthErr': function not considered=
+ for inlining [-Werror=3Dinline]
+>
+> Compiler does not inline any functions when not optimizing unless you spe=
+cify the =E2=80=98always_inline=E2=80=99 attribute for the function.
+> Add "__attribute__((always_inline))" to avoid these function inline error=
+s.
+>
+> Also revert the work-around made earlier in librelp_1.11.0.bb.
+>
+> Upstream-Status: Tracked by upstream bug: https://github.com/rsyslog/libr=
+elp/issues/256
+>
+> This is a less instrusive work-around.
+>
+> Please create a gcc bug to track the compiler regression and reply here
+> with the ID. As well, note the gcc bug id in the librelp issue. Once the
+> compiler is fixed, we can close the librelp bug.
+>
+>
+> ../Randy
+>
+> Signed-off-by: Yash Shinde <Yash.Shinde@windriver.com>
+> ---
+>  ...01-librelp-fix-function-inline-error.patch | 58 +++++++++++++++++++
+>  .../rsyslog/librelp_1.11.0.bb                 |  2 +-
+>  2 files changed, 59 insertions(+), 1 deletion(-)
+>  create mode 100644 meta-oe/recipes-extended/rsyslog/librelp/0001-librelp=
+-fix-function-inline-error.patch
+>
+> diff --git a/meta-oe/recipes-extended/rsyslog/librelp/0001-librelp-fix-fu=
+nction-inline-error.patch b/meta-oe/recipes-extended/rsyslog/librelp/0001-l=
+ibrelp-fix-function-inline-error.patch
+> new file mode 100644
+> index 000000000..523a8991f
+> --- /dev/null
+> +++ b/meta-oe/recipes-extended/rsyslog/librelp/0001-librelp-fix-function-=
+inline-error.patch
+> @@ -0,0 +1,58 @@
+> +From dc841f01fb6167ec9a80e373c5f4d2f5e3222ed6 Mon Sep 17 00:00:00 2001
+> +From: Yash Shinde <Yash.Shinde@...>
+> +Date: Tue, 28 Mar 2023 04:06:58 +0000
+> +Subject: librelp: fix function inline errors in debug build
+> +
+> +With DEBUG_BUILD =3D "1", the following errors occur:
+> +
+> +   src/relpsess.c:95:1: error:
+> +      inlining failed in call to 'relpSessFreePermittedPeers': function =
+not considered for inlining [-Werror=3Dinline]
+> +
+> +   src/tcp.c:146:1: error:
+> +      inlining failed in call to 'relpTcpFreePermittedPeers': function n=
+ot considered for inlining [-Werror=3Dinline]
+> +
+> +   src/tcp.c:158:1: error:
+> +      inlining failed in call to 'callOnAuthErr': function not considere=
+d for inlining [-Werror=3Dinline]
+> +
+> +Compiler does not inline any functions when not optimizing unless you sp=
+ecify the =E2=80=98always_inline=E2=80=99 attribute for the function. Add "=
+__attribute__((always_inline))" to avoid these function inline errors.
+> +
+> +Upstream-Status: Tracked by upstream bug: https://github.com/rsyslog/lib=
+relp/issues/256
+> +
+> +Signed-off-by: Yash Shinde <Yash.Shinde@...>
+> +---
+> +
+> +diff --git a/src/relpsess.c b/src/relpsess.c
+> +index ee7b595..aa52b71 100644
+> +--- a/src/relpsess.c
+> ++++ b/src/relpsess.c
+> +@@ -91,7 +91,7 @@ callOnErr(const relpSess_t *__restrict__ const pThis,
+> +
+> +
+> + /* helper to free permittedPeer structure */
+> +-static inline void
+> ++__attribute__((always_inline)) static inline void
+> + relpSessFreePermittedPeers(relpSess_t *const pThis)
+> + {
+> +        int i;
+> +diff --git a/src/tcp.c b/src/tcp.c
+> +index 7a75cc4..f4088c0 100644
+> +--- a/src/tcp.c
+> ++++ b/src/tcp.c
+> +@@ -142,7 +142,7 @@ static int relpTcpChkPeerName(relpTcp_t *const pThis=
+, void* cert);
+> +
+> +
+> + /* helper to free permittedPeer structure */
+> +-static inline void
+> ++__attribute__((always_inline)) static inline void
+> + relpTcpFreePermittedPeers(relpTcp_t *const pThis)
+> + {
+> +        int i;
+> +@@ -154,7 +154,7 @@ relpTcpFreePermittedPeers(relpTcp_t *const pThis)
+> + }
+> +
+> + /* helper to call onAuthErr if set */
+> +-static inline void
+> ++__attribute__((always_inline)) static inline void
+> + callOnAuthErr(relpTcp_t *const pThis, const char *authdata, const char =
+*emsg, relpRetVal ecode)
+> + {
+> +        pThis->pEngine->dbgprint((char*)"librelp: auth error: authdata:'=
+%s', ecode %d, "
+> diff --git a/meta-oe/recipes-extended/rsyslog/librelp_1.11.0.bb b/meta-oe=
+/recipes-extended/rsyslog/librelp_1.11.0.bb
+> index e7b79ad03..a41b05a35 100644
+> --- a/meta-oe/recipes-extended/rsyslog/librelp_1.11.0.bb
+> +++ b/meta-oe/recipes-extended/rsyslog/librelp_1.11.0.bb
+> @@ -7,6 +7,7 @@ LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D1fb9c10ed9fd68=
+26757615455ca893a9"
+>  DEPENDS =3D "gmp nettle libidn zlib gnutls openssl"
+>
+>  SRC_URI =3D "git://github.com/rsyslog/librelp.git;protocol=3Dhttps;branc=
+h=3Dstable \
+> +           file://0001-librelp-fix-function-inline-error.patch \
+>  "
+>
+>  SRCREV =3D "b421f56d9ee31a966058d23bd23c966221c91396"
+> @@ -15,6 +16,5 @@ S =3D "${WORKDIR}/git"
+>
+>  inherit autotools pkgconfig
+>
+> -DEBUG_OPTIMIZATION:append =3D " -Wno-error=3Dinline"
+>
+>
+>
+>
+> --
+> # Randy MacLeod
+> # Wind River Linux
+>
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#101831): https://lists.openembedded.org/g/openembedde=
+d-devel/message/101831
+> Mute This Topic: https://lists.openembedded.org/mt/97944957/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
+aj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
 
