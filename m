@@ -1,721 +1,220 @@
-Return-Path: <hprajapati@mvista.com>
+Return-Path: <xiangyu.chen@eng.windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 32882C6FD18
-	for <webhook@archiver.kernel.org>; Fri, 31 Mar 2023 04:47:46 +0000 (UTC)
-Received: from mail-pj1-f48.google.com (mail-pj1-f48.google.com [209.85.216.48])
- by mx.groups.io with SMTP id smtpd.web11.47489.1680238062439492414
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 588EEC76196
+	for <webhook@archiver.kernel.org>; Fri, 31 Mar 2023 09:42:07 +0000 (UTC)
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.web10.50662.1680255726686586395
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 30 Mar 2023 21:47:42 -0700
+ Fri, 31 Mar 2023 02:42:06 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@mvista.com header.s=google header.b=D4T+gbmU;
- spf=pass (domain: mvista.com, ip: 209.85.216.48, mailfrom: hprajapati@mvista.com)
-Received: by mail-pj1-f48.google.com with SMTP id p3-20020a17090a74c300b0023f69bc7a68so22125744pjl.4
-        for <openembedded-devel@lists.openembedded.org>; Thu, 30 Mar 2023 21:47:42 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=mvista.com; s=google; t=1680238061;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=NgJv+XNPLAJ3weXr8VvH0FvWitWn4ZZcdXU6HAeZk1s=;
-        b=D4T+gbmUOAZWOzzR8l8HFdMbcQn9bycAYwvUhuf6bS46Ct8TAMtjlM1SgcV6OOlnBm
-         GSHqqR8Iqrd7mgLfUJJlXKN/ak3IvGghmVrZOSiDyBtAyo6v9qaDxBAQDXka8BvsbsIm
-         U6UhfpiUYgaUxFVZpKd+SQdtD92B+Hf06Ph90=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112; t=1680238061;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=NgJv+XNPLAJ3weXr8VvH0FvWitWn4ZZcdXU6HAeZk1s=;
-        b=kDpTOMU6s0jCukJGDg3sndlRieWiFwF8/RM9Xb3AaX0g+6D+HdXrVeDuUD+FWXGfC0
-         kGkNa1C2cAWes0BWeM81Ev373DQO9LmknoTEF7/n+WB3AyGAJR4hEpY6LLHV7a6kctmt
-         gFIAcnXBaq/DeuWXHaPIZxHsGOOdBOR5oXzU7beyTlWbvkzwJV/HjX/beMaQdq3+F7T7
-         +2WewK1ex3XBhkxXXTwGcUyN/lDeUTXzK4caxGzgNAKL5A4sos5KR5tFIG6aWD7ohLXk
-         SOBeBr6mgMy78tmdQx39j6g/uQ39x4oZknlTVdNjLE30lwl8V2bYTzE4HpjTp+QJXHWS
-         l9DQ==
-X-Gm-Message-State: AAQBX9eGF1y6xDmZOnNsjdFd3qvrO64Y9fNVHPbF7doxD1Y6VIIgdZKP
-	sQY3t6JrRVL/7ymWHxg61wTANtxliHOgxu8fiF8=
-X-Google-Smtp-Source: AKy350akRiYZbiyvqqF74NsoStW7Y7145qom6kNoC/ZrSLbylMb7oIRp62kt7kJARpCQM4C8CCEThQ==
-X-Received: by 2002:a17:902:ecc2:b0:19a:b754:4053 with SMTP id a2-20020a170902ecc200b0019ab7544053mr34205658plh.26.1680238061116;
-        Thu, 30 Mar 2023 21:47:41 -0700 (PDT)
-Received: from MVIN00024 ([103.250.136.233])
-        by smtp.gmail.com with ESMTPSA id g24-20020a1709029f9800b00198f256a192sm539375plq.171.2023.03.30.21.47.38
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 30 Mar 2023 21:47:40 -0700 (PDT)
-Received: by MVIN00024 (sSMTP sendmail emulation); Fri, 31 Mar 2023 10:17:35 +0530
-From: Hitendra Prajapati <hprajapati@mvista.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Hitendra Prajapati <hprajapati@mvista.com>
-Subject: [meta-oe][dunfell][PATCH] syslog-ng: CVE-2022-38725 An integer overflow in the RFC3164 parser
-Date: Fri, 31 Mar 2023 10:17:32 +0530
-Message-Id: <20230331044732.6682-1-hprajapati@mvista.com>
-X-Mailer: git-send-email 2.25.1
-MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
+ dkim=missing; spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=345418c051=xiangyu.chen@windriver.com)
+Received: from pps.filterd (m0250811.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 32V9dTMk022998
+	for <openembedded-devel@lists.openembedded.org>; Fri, 31 Mar 2023 09:42:06 GMT
+Received: from pps.reinject (localhost [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3php647qp1-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Fri, 31 Mar 2023 09:42:05 +0000
+Received: from m0250811.ppops.net (m0250811.ppops.net [127.0.0.1])
+	by pps.reinject (8.17.1.5/8.17.1.5) with ESMTP id 32V9g5CO028210
+	for <openembedded-devel@lists.openembedded.org>; Fri, 31 Mar 2023 09:42:05 GMT
+Received: from nam11-dm6-obe.outbound.protection.outlook.com (mail-dm6nam11lp2175.outbound.protection.outlook.com [104.47.57.175])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3php647qnw-2
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+	Fri, 31 Mar 2023 09:42:05 +0000
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=dpql81gWepHBlJXMjzKQU8r1CtGGN1LIvJZlWwje6PAuUWZ0rq33bkoNOQKiX5OI9ffkA1vOzTLkTenegpNJoxT8TJgFEFq3w6u4Zz4ums3NhYbvvBdOZrHGLCS07IuJWzVkhCYPRNrk5Z1eHadp76TKk1AbMOKqSeYYCE4d/4OCmOs3lPfbm/JKz8RLWhp8Gtm5Y+kHsmuX7OLcib2H73Mu+Wo0tAuE4u2Ruk7KN4GP5qv64m3RREGJxsstAyhM8nDxUd39HBvkkFRq42kqNY+MB2fk+YMktt5/fkn+xMo8y4vuZ649aCbfEcqkL9Wb21k4IVVoyhxA7LUHHOB+nw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=IZUrgn9HbixK6GiTTJSvT4kYtDKvLhYuMGVv0yL2yJo=;
+ b=Pxe3MjE5zx80d5ThQzPuul22coY7P1XMks4DDHhOL345fPVlJEC8Hb1oit8ILdwA3CIhIvXJTtpprvsHm66dPNpZwXUAdZeoeoF/a4xAQlO/+TobJq5aIL0MALGE5AYNZbBQfGj29yFxqI7mNO6SXeF6viNIp/soc3CD3Qw/m6KYoVDTP05LZd9mPDHck1c1yB0Jlp3UI+PqHgJLYWJ/rnXVXUUfB0ex1RCWZW3gHUh1hESxeO3STIBj52Zd5dMkDATNwwXJYqNX85qkdFgZWI5ULN+EHHpEj4OkmihtHSRJ7mIkbBS+/sxPvz83O8dLMHO4ZJpkQ343uEUxCQCqWw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=windriver.com; dmarc=pass action=none
+ header.from=eng.windriver.com; dkim=pass header.d=eng.windriver.com; arc=none
+Received: from PH7PR11MB5820.namprd11.prod.outlook.com (2603:10b6:510:133::17)
+ by CY5PR11MB6510.namprd11.prod.outlook.com (2603:10b6:930:42::7) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6254.23; Fri, 31 Mar
+ 2023 09:42:03 +0000
+Received: from PH7PR11MB5820.namprd11.prod.outlook.com
+ ([fe80::e7a3:6c1:4c52:897a]) by PH7PR11MB5820.namprd11.prod.outlook.com
+ ([fe80::e7a3:6c1:4c52:897a%6]) with mapi id 15.20.6254.021; Fri, 31 Mar 2023
+ 09:42:03 +0000
+From: Xiangyu Chen <xiangyu.chen@eng.windriver.com>
+To: openembedded-devel@lists.openembedded.org, raj.khem@gmail.com
+Subject: [oe][meta-oe][PATCH v4 1/3] protobuf: upgrade 3.21.12 -> 4.22.2
+Date: Fri, 31 Mar 2023 17:41:43 +0800
+Message-Id: <20230331094145.2362159-2-xiangyu.chen@eng.windriver.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20230331094145.2362159-1-xiangyu.chen@eng.windriver.com>
+References: <20230331094145.2362159-1-xiangyu.chen@eng.windriver.com>
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: SG2P153CA0044.APCP153.PROD.OUTLOOK.COM (2603:1096:4:c6::13)
+ To PH7PR11MB5820.namprd11.prod.outlook.com (2603:10b6:510:133::17)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PH7PR11MB5820:EE_|CY5PR11MB6510:EE_
+X-MS-Office365-Filtering-Correlation-Id: 896c4f01-4e71-41d4-5e4f-08db31cc2f00
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 
+	MoRxoNe6Stz+q1efa5ps3w1VgudtyPxqSGgKbSkapDV6WK5OUwb3Xm7CYeeRR9/Fou2WNAkV8d1zKc6Zq1g7Mvfvldgws+zltYfVPt6ONco7aN67KEWyn87wnUaS5PXjcvnc0M2qsEvLmFsjOsUDgJ9BVrJFL447l4/1tTY2MTai8UEgZnmkh13aQK1bNz1QR32W2zXTtxR+KFjnuUzPqXcWEclP1D82sD2yYIcA4FpBbO+4gOp2eHIQLS9aFvGachBiM5/JSWco7iFNd3a8amDrKu59qiDwrP7Tr69ZXtbkKn9OBJLUcLUHMMC+l+6GleE4GjB6+LuwNNw19MuPOBISocVa4uZ71hdKPiAHGPVGRzGfiBNqBHEU80HtqZt8hDSr7CS3ABGOEFg/8lx5A66+R9GqhwI5TF6CyX+Fd9XrtP8/JoRB2DPzUIsjtL1iuZXYy7ilkJwo3X0nOqu9fbcnMePjhtPwgpvAh/ST0xZjucqWC/+ANVoDVjku2Ws+t2vIxmXzo0S9KKU8W2o4GyTio3ydsvzf2mrmKpfTvGpy5eziJmxuvprIlTMnoewxO8AU3QiHvIuNGfZriAfHW2bWKL8rW8YMbgs/WovYH1ebmRPm08KQxLIsNg16eBGZ
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PH7PR11MB5820.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230028)(4636009)(136003)(376002)(366004)(39850400004)(346002)(396003)(451199021)(83380400001)(2616005)(26005)(6486002)(6512007)(6506007)(1076003)(52116002)(6666004)(478600001)(66476007)(316002)(186003)(83170400001)(66946007)(66556008)(8936002)(8676002)(5660300002)(41300700001)(38350700002)(38100700002)(44832011)(2906002);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?us-ascii?Q?M0s8tBneBfbdT61FT2fPOBGZsGxnh7LuMEcDhoFxo+FSW8wXOG31SAP7B32/?=
+ =?us-ascii?Q?yJ6YSQwAYrgT68+jo6t96gSghdF1v869X+nbjlb+yiSU0tI2DSppIi5prA4F?=
+ =?us-ascii?Q?PT9iowFe6GOy1gEicN4OPUOi/LsskwgmSwL1TH6HbBgiWeSp5aPZ/VbusyJH?=
+ =?us-ascii?Q?uX50FafX4MoGqRtPPFxn4isJi+dW1k2ilvw/ngqnmEfTwlak4dkbJ/Qfrl5a?=
+ =?us-ascii?Q?iwMfMCMfV6oBo0ax/c0VxKV7LBFqGzxVfePawwirDbwU64X2eTwJRlewtfh+?=
+ =?us-ascii?Q?u4NZdHjkTB+5ayHs2+G9aZlcWyRCd6y419V8sJWNSV5/bQPUSlm9aoe3vXDh?=
+ =?us-ascii?Q?3IRT/bFw+pZso5Vhf9i8BHV7jsuSn4GW7BKnqTEImM8ZmR1G6TZo2ET5NT5o?=
+ =?us-ascii?Q?QF35dVkXr7ppQoYxRcJ0F959DmlZBcrY0b9/bzXWRph9P6s72qhjFne4GI9w?=
+ =?us-ascii?Q?8KcSp/eq5WqfJJTlO4dqF+Q4mkiQt3amuPP28YQ44opv1yJmG9FsfAbttjYr?=
+ =?us-ascii?Q?g4WzwJv1J5UXUD9bX2PnR7n+j4ZgifPzj6dTOAzaGt3BG77Zd/OLYf9A46vZ?=
+ =?us-ascii?Q?5r8BJDxXQPRIAbHNB4yYwzhSeifSwXH5NwJ5mOmFnjYrOUiCAJP+nOtl6r7T?=
+ =?us-ascii?Q?hBrTjntJMQ2+O+mpN+H67tQX7TyWzd/fZp2i4Qlh0WvBfqugOcwT/RR9UNht?=
+ =?us-ascii?Q?Iz8JL3j/W1vQ9pAR2e15TvHO4ulNdPVIQwkiC8HTWEhXYWWpM7Z+tBGNKD3U?=
+ =?us-ascii?Q?Ndw7T291SkvII7J5Z9HScOKWISVxvDVAB8MFxkPHPdov69Ks+9EYeNZdDKb1?=
+ =?us-ascii?Q?pCwXJ7+iKzM2Wu3M97nd8m4m0nCagIgNREmPpi2FYVb5+Stm2IzKjXF5a/3B?=
+ =?us-ascii?Q?Riz8woFRS8zIHrFOnkqy6AP56m/8jegaUDdNmeb9TWqvpu//mc9CVtc/5gbO?=
+ =?us-ascii?Q?YuqDFI+vbQP8ECsL136iPb69dtQzNvkNDOXbJ/nMTeE+ZXIJmEFQZx2CuB2w?=
+ =?us-ascii?Q?tNS2jBRefczxhIrtLl4z4jwI1E+ys6NOWNXin5PpW46IwDyo+D2np8vxFGfJ?=
+ =?us-ascii?Q?jToVfVhltlm4abqMHmJKxBeNpmm91ecSEJd8aebVgzROdsG2pbsbG0joU/vp?=
+ =?us-ascii?Q?dHlJ54YTq1vuNMPpYKlWGrtZC1VozatQu8FXmu1ab/N9mnXfeYvDEpV/bIFW?=
+ =?us-ascii?Q?Hoh4uxvEvG37sidX5h1L8IxZZjqFSCsHb92sBLto969qUxY5VWgnVDmC+cgm?=
+ =?us-ascii?Q?RjzZGjZN7DG/VDv8skE+WILDCj/t3BAcXCUf6sBTaXjM+EsB2ejzXXniB9Zb?=
+ =?us-ascii?Q?MWxMyuz+EFStKlRLuWQTwoZkkzRi2V5Q8UaMog3eAeQETd3yrzAvxbQZ53wM?=
+ =?us-ascii?Q?sQI2oSoXi0n2xtgw08jsss9+0wYIji+swe1AoX40QJCAva/5ZLHTeSzVFVP3?=
+ =?us-ascii?Q?el0sM5grB/QBAgpmOaGRuPEas2KCYdfkBg0Rno3F9Q+F4aBWojdMttwnHkyO?=
+ =?us-ascii?Q?/fyHuo23lEhvMYdN4jCE9wEYoajd0wlW8mZ+SBykMq9gjjxiGGkJPF1hb4Vb?=
+ =?us-ascii?Q?5bhvFzwBxlZv+2U6mvU2cBUDWCXsq4HzYOeIBQWccKgSQ+QREGooB8PartUP?=
+ =?us-ascii?Q?Ug=3D=3D?=
+X-OriginatorOrg: eng.windriver.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 896c4f01-4e71-41d4-5e4f-08db31cc2f00
+X-MS-Exchange-CrossTenant-AuthSource: PH7PR11MB5820.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 31 Mar 2023 09:42:03.7692
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: v1B37YuedsF0Un71IrdpFXXmHT9T+W4So2loSRKT/YHOhktuvWFobX5gnN4MpWrLbOoVL5bt3sdllzUIUDKk9NPi91iq2gtRFEFx4NIDTOg=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY5PR11MB6510
+X-Proofpoint-ORIG-GUID: k_KT7NPlSQ_EmOoYAXVQsa8KUrZqXnBg
+X-Proofpoint-GUID: qxixGxh8RMNRRE2iJgnWE5R_HgY0CoCh
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.254,Aquarius:18.0.942,Hydra:6.0.573,FMLib:17.11.170.22
+ definitions=2023-03-31_04,2023-03-30_04,2023-02-09_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 malwarescore=0 suspectscore=0
+ phishscore=0 spamscore=0 bulkscore=0 mlxlogscore=999 priorityscore=1501
+ lowpriorityscore=0 clxscore=1015 mlxscore=0 adultscore=0 impostorscore=0
+ classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2303200000
+ definitions=main-2303310078
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 31 Mar 2023 04:47:46 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101847
+ <openembedded-devel@lists.openembedded.org>; Fri, 31 Mar 2023 09:42:07 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101849
 
-Upstream-Status: Backport from https://github.com/syslog-ng/syslog-ng/commit/b5a060f2ebb8d794f508436a12e4d4163f94b1b8 && https://github.com/syslog-ng/syslog-ng/commit/81a07263f1e522a376d3a30f96f51df3f2879f8a && https://github.com/syslog-ng/syslog-ng/commit/4b8dc56ca8eaeac4c8751a305eb7eeefab8dc89d && https://github.com/syslog-ng/syslog-ng/commit/73b5c300b8fde5e7a4824baa83a04931279abb37 && https://github.com/syslog-ng/syslog-ng/commit/45f051239312e43bd4f92b9339fe67c6798a0321 && https://github.com/syslog-ng/syslog-ng/commit/09f489c89c826293ff8cbd282cfc866ab56054c4 && https://github.com/syslog-ng/syslog-ng/commit/8c6e2c1c41b0fcc5fbd464c35f4dac7102235396 && https://github.com/syslog-ng/syslog-ng/commit/56f881c5eaa3d8c02c96607c4b9e4eaf959a044d
+From: Xiangyu Chen <xiangyu.chen@windriver.com>
 
-Signed-off-by: Hitendra Prajapati <hprajapati@mvista.com>
+Signed-off-by: Xiangyu Chen <xiangyu.chen@windriver.com>
 ---
- .../syslog-ng/files/CVE-2022-38725.patch      | 629 ++++++++++++++++++
- .../syslog-ng/syslog-ng_3.24.1.bb             |   1 +
- 2 files changed, 630 insertions(+)
- create mode 100644 meta-oe/recipes-support/syslog-ng/files/CVE-2022-38725.patch
+ ...efile-respect-CXX-LDFLAGS-variables-fix-.patch | 15 +++++++++------
+ .../{protobuf_3.21.12.bb => protobuf_4.22.2.bb}   | 11 ++++++++---
+ 2 files changed, 17 insertions(+), 9 deletions(-)
+ rename meta-oe/recipes-devtools/protobuf/{protobuf_3.21.12.bb => protobuf_4.22.2.bb} (86%)
 
-diff --git a/meta-oe/recipes-support/syslog-ng/files/CVE-2022-38725.patch b/meta-oe/recipes-support/syslog-ng/files/CVE-2022-38725.patch
-new file mode 100644
-index 0000000000..4a09c8c7fa
---- /dev/null
-+++ b/meta-oe/recipes-support/syslog-ng/files/CVE-2022-38725.patch
-@@ -0,0 +1,629 @@
-+From 73b5c300b8fde5e7a4824baa83a04931279abb37 Mon Sep 17 00:00:00 2001
-+From: =?UTF-8?q?L=C3=A1szl=C3=B3=20V=C3=A1rady?=
-+ <laszlo.varady@protonmail.com>
-+Date: Sat, 20 Aug 2022 12:42:38 +0200
-+Subject: [PATCH] CVE-2022-38725
-+MIME-Version: 1.0
-+Content-Type: text/plain; charset=UTF-8
-+Content-Transfer-Encoding: 8bit
-+
-+Signed-off-by: László Várady <laszlo.varady@protonmail.com>
-+Signed-off-by: Balazs Scheidler <bazsi77@gmail.com>
-+
-+Upstream-Status: Backport from [https://github.com/syslog-ng/syslog-ng/commit/b5a060f2ebb8d794f508436a12e4d4163f94b1b8 && https://github.com/syslog-ng/syslog-ng/commit/81a07263f1e522a376d3a30f96f51df3f2879f8a && https://github.com/syslog-ng/syslog-ng/commit/4b8dc56ca8eaeac4c8751a305eb7eeefab8dc89d && https://github.com/syslog-ng/syslog-ng/commit/73b5c300b8fde5e7a4824baa83a04931279abb37 && https://github.com/syslog-ng/syslog-ng/commit/45f051239312e43bd4f92b9339fe67c6798a0321 && https://github.com/syslog-ng/syslog-ng/commit/09f489c89c826293ff8cbd282cfc866ab56054c4 && https://github.com/syslog-ng/syslog-ng/commit/8c6e2c1c41b0fcc5fbd464c35f4dac7102235396 && https://github.com/syslog-ng/syslog-ng/commit/56f881c5eaa3d8c02c96607c4b9e4eaf959a044d]
-+CVE: CVE-2022-38725
-+Signed-off-by: Hitendra Prajapati <hprajapati@mvista.com>
-+---
-+ lib/timeutils/scan-timestamp.c                |  68 +++++----
-+ lib/timeutils/tests/test_scan-timestamp.c     | 133 ++++++++++++++++--
-+ modules/syslogformat/CMakeLists.txt           |   2 +
-+ modules/syslogformat/Makefile.am              |   2 +
-+ modules/syslogformat/syslog-format.c          |  12 +-
-+ modules/syslogformat/tests/CMakeLists.txt     |   1 +
-+ modules/syslogformat/tests/Makefile.am        |   9 ++
-+ .../syslogformat/tests/test_syslog_format.c   | 104 ++++++++++++++
-+ 8 files changed, 284 insertions(+), 47 deletions(-)
-+ create mode 100644 modules/syslogformat/tests/CMakeLists.txt
-+ create mode 100644 modules/syslogformat/tests/Makefile.am
-+ create mode 100644 modules/syslogformat/tests/test_syslog_format.c
-+
-+diff --git a/lib/timeutils/scan-timestamp.c b/lib/timeutils/scan-timestamp.c
-+index 41ead1a..ec9746b 100644
-+--- a/lib/timeutils/scan-timestamp.c
-++++ b/lib/timeutils/scan-timestamp.c
-+@@ -34,41 +34,43 @@ scan_day_abbrev(const gchar **buf, gint *left, gint *wday)
-+ {
-+   *wday = -1;
-+ 
-+-  if (*left < 3)
-++  const gsize abbrev_length = 3;
-++
-++  if (*left < abbrev_length)
-+     return FALSE;
-+ 
-+   switch (**buf)
-+     {
-+     case 'S':
-+-      if (strncasecmp(*buf, "Sun", 3) == 0)
-++      if (strncasecmp(*buf, "Sun", abbrev_length) == 0)
-+         *wday = 0;
-+-      else if (strncasecmp(*buf, "Sat", 3) == 0)
-++      else if (strncasecmp(*buf, "Sat", abbrev_length) == 0)
-+         *wday = 6;
-+       break;
-+     case 'M':
-+-      if (strncasecmp(*buf, "Mon", 3) == 0)
-++      if (strncasecmp(*buf, "Mon", abbrev_length) == 0)
-+         *wday = 1;
-+       break;
-+     case 'T':
-+-      if (strncasecmp(*buf, "Tue", 3) == 0)
-++      if (strncasecmp(*buf, "Tue", abbrev_length) == 0)
-+         *wday = 2;
-+-      else if (strncasecmp(*buf, "Thu", 3) == 0)
-++      else if (strncasecmp(*buf, "Thu", abbrev_length) == 0)
-+         *wday = 4;
-+       break;
-+     case 'W':
-+-      if (strncasecmp(*buf, "Wed", 3) == 0)
-++      if (strncasecmp(*buf, "Wed", abbrev_length) == 0)
-+         *wday = 3;
-+       break;
-+     case 'F':
-+-      if (strncasecmp(*buf, "Fri", 3) == 0)
-++      if (strncasecmp(*buf, "Fri", abbrev_length) == 0)
-+         *wday = 5;
-+       break;
-+     default:
-+       return FALSE;
-+     }
-+ 
-+-  (*buf) += 3;
-+-  (*left) -= 3;
-++  (*buf) += abbrev_length;
-++  (*left) -= abbrev_length;
-+   return TRUE;
-+ }
-+ 
-+@@ -77,57 +79,59 @@ scan_month_abbrev(const gchar **buf, gint *left, gint *mon)
-+ {
-+   *mon = -1;
-+ 
-+-  if (*left < 3)
-++  const gsize abbrev_length = 3;
-++
-++  if (*left < abbrev_length)
-+     return FALSE;
-+ 
-+   switch (**buf)
-+     {
-+     case 'J':
-+-      if (strncasecmp(*buf, "Jan", 3) == 0)
-++      if (strncasecmp(*buf, "Jan", abbrev_length) == 0)
-+         *mon = 0;
-+-      else if (strncasecmp(*buf, "Jun", 3) == 0)
-++      else if (strncasecmp(*buf, "Jun", abbrev_length) == 0)
-+         *mon = 5;
-+-      else if (strncasecmp(*buf, "Jul", 3) == 0)
-++      else if (strncasecmp(*buf, "Jul", abbrev_length) == 0)
-+         *mon = 6;
-+       break;
-+     case 'F':
-+-      if (strncasecmp(*buf, "Feb", 3) == 0)
-++      if (strncasecmp(*buf, "Feb", abbrev_length) == 0)
-+         *mon = 1;
-+       break;
-+     case 'M':
-+-      if (strncasecmp(*buf, "Mar", 3) == 0)
-++      if (strncasecmp(*buf, "Mar", abbrev_length) == 0)
-+         *mon = 2;
-+-      else if (strncasecmp(*buf, "May", 3) == 0)
-++      else if (strncasecmp(*buf, "May", abbrev_length) == 0)
-+         *mon = 4;
-+       break;
-+     case 'A':
-+-      if (strncasecmp(*buf, "Apr", 3) == 0)
-++      if (strncasecmp(*buf, "Apr", abbrev_length) == 0)
-+         *mon = 3;
-+-      else if (strncasecmp(*buf, "Aug", 3) == 0)
-++      else if (strncasecmp(*buf, "Aug", abbrev_length) == 0)
-+         *mon = 7;
-+       break;
-+     case 'S':
-+-      if (strncasecmp(*buf, "Sep", 3) == 0)
-++      if (strncasecmp(*buf, "Sep", abbrev_length) == 0)
-+         *mon = 8;
-+       break;
-+     case 'O':
-+-      if (strncasecmp(*buf, "Oct", 3) == 0)
-++      if (strncasecmp(*buf, "Oct", abbrev_length) == 0)
-+         *mon = 9;
-+       break;
-+     case 'N':
-+-      if (strncasecmp(*buf, "Nov", 3) == 0)
-++      if (strncasecmp(*buf, "Nov", abbrev_length) == 0)
-+         *mon = 10;
-+       break;
-+     case 'D':
-+-      if (strncasecmp(*buf, "Dec", 3) == 0)
-++      if (strncasecmp(*buf, "Dec", abbrev_length) == 0)
-+         *mon = 11;
-+       break;
-+     default:
-+       return FALSE;
-+     }
-+ 
-+-  (*buf) += 3;
-+-  (*left) -= 3;
-++  (*buf) += abbrev_length;
-++  (*left) -= abbrev_length;
-+   return TRUE;
-+ }
-+ 
-+@@ -302,7 +306,7 @@ __parse_usec(const guchar **data, gint *length)
-+           src++;
-+           (*length)--;
-+         }
-+-      while (isdigit(*src))
-++      while (*length > 0 && isdigit(*src))
-+         {
-+           src++;
-+           (*length)--;
-+@@ -316,19 +320,21 @@ __parse_usec(const guchar **data, gint *length)
-+ static gboolean
-+ __has_iso_timezone(const guchar *src, gint length)
-+ {
-+-  return (length >= 5) &&
-++  return (length >= 6) &&
-+          (*src == '+' || *src == '-') &&
-+          isdigit(*(src+1)) &&
-+          isdigit(*(src+2)) &&
-+          *(src+3) == ':' &&
-+          isdigit(*(src+4)) &&
-+          isdigit(*(src+5)) &&
-+-         !isdigit(*(src+6));
-++         (length < 7 || !isdigit(*(src+6)));
-+ }
-+ 
-+ static guint32
-+ __parse_iso_timezone(const guchar **data, gint *length)
-+ {
-++  g_assert(*length >= 6);
-++
-+   gint hours, mins;
-+   const guchar *src = *data;
-+   guint32 tz = 0;
-+@@ -338,8 +344,10 @@ __parse_iso_timezone(const guchar **data, gint *length)
-+   hours = (*(src + 1) - '0') * 10 + *(src + 2) - '0';
-+   mins = (*(src + 4) - '0') * 10 + *(src + 5) - '0';
-+   tz = sign * (hours * 3600 + mins * 60);
-++
-+   src += 6;
-+   (*length) -= 6;
-++
-+   *data = src;
-+   return tz;
-+ }
-+@@ -393,7 +401,7 @@ __parse_bsd_timestamp(const guchar **data, gint *length, WallClockTime *wct)
-+       if (!scan_pix_timestamp((const gchar **) &src, &left, wct))
-+         return FALSE;
-+ 
-+-      if (*src == ':')
-++      if (left && *src == ':')
-+         {
-+           src++;
-+           left--;
-+@@ -444,7 +452,7 @@ scan_rfc3164_timestamp(const guchar **data, gint *length, WallClockTime *wct)
-+    * looking at you, skip that as well, so we can reliably detect IPv6
-+    * addresses as hostnames, which would be using ":" as well. */
-+ 
-+-  if (*src == ':')
-++  if (left && *src == ':')
-+     {
-+       ++src;
-+       --left;
-+diff --git a/lib/timeutils/tests/test_scan-timestamp.c b/lib/timeutils/tests/test_scan-timestamp.c
-+index 4508139..ad657c6 100644
-+--- a/lib/timeutils/tests/test_scan-timestamp.c
-++++ b/lib/timeutils/tests/test_scan-timestamp.c
-+@@ -49,17 +49,21 @@ fake_time_add(time_t diff)
-+ }
-+ 
-+ static gboolean
-+-_parse_rfc3164(const gchar *ts, gchar isotimestamp[32])
-++_parse_rfc3164(const gchar *ts, gint len, gchar isotimestamp[32])
-+ {
-+   UnixTime stamp;
-+-  const guchar *data = (const guchar *) ts;
-+-  gint length = strlen(ts);
-++  const guchar *tsu = (const guchar *) ts;
-++  gint tsu_len = len < 0 ? strlen(ts) : len;
-+   GString *result = g_string_new("");
-+   WallClockTime wct = WALL_CLOCK_TIME_INIT;
-+ 
-+-
-++  const guchar *data = tsu;
-++  gint length = tsu_len;
-+   gboolean success = scan_rfc3164_timestamp(&data, &length, &wct);
-+ 
-++  cr_assert(length >= 0);
-++  cr_assert(data == &tsu[tsu_len - length]);
-++
-+   unix_time_unset(&stamp);
-+   convert_wall_clock_time_to_unix_time(&wct, &stamp);
-+ 
-+@@ -70,16 +74,21 @@ _parse_rfc3164(const gchar *ts, gchar isotimestamp[32])
-+ }
-+ 
-+ static gboolean
-+-_parse_rfc5424(const gchar *ts, gchar isotimestamp[32])
-++_parse_rfc5424(const gchar *ts, gint len, gchar isotimestamp[32])
-+ {
-+   UnixTime stamp;
-+-  const guchar *data = (const guchar *) ts;
-+-  gint length = strlen(ts);
-++  const guchar *tsu = (const guchar *) ts;
-++  gint tsu_len = len < 0 ? strlen(ts) : len;
-+   GString *result = g_string_new("");
-+   WallClockTime wct = WALL_CLOCK_TIME_INIT;
-+ 
-++  const guchar *data = tsu;
-++  gint length = tsu_len;
-+   gboolean success = scan_rfc5424_timestamp(&data, &length, &wct);
-+ 
-++  cr_assert(length >= 0);
-++  cr_assert(data == &tsu[tsu_len - length]);
-++
-+   unix_time_unset(&stamp);
-+   convert_wall_clock_time_to_unix_time(&wct, &stamp);
-+ 
-+@@ -90,31 +99,60 @@ _parse_rfc5424(const gchar *ts, gchar isotimestamp[32])
-+ }
-+ 
-+ static gboolean
-+-_rfc3164_timestamp_eq(const gchar *ts, const gchar *expected, gchar converted[32])
-++_rfc3164_timestamp_eq(const gchar *ts, gint len, const gchar *expected, gchar converted[32])
-+ {
-+-  cr_assert(_parse_rfc3164(ts, converted));
-++  cr_assert(_parse_rfc3164(ts, len, converted));
-+   return strcmp(converted, expected) == 0;
-+ }
-+ 
-+ static gboolean
-+-_rfc5424_timestamp_eq(const gchar *ts, const gchar *expected, gchar converted[32])
-++_rfc5424_timestamp_eq(const gchar *ts, gint len, const gchar *expected, gchar converted[32])
-+ {
-+-  cr_assert(_parse_rfc5424(ts, converted));
-++  cr_assert(_parse_rfc5424(ts, len, converted));
-+   return strcmp(converted, expected) == 0;
-+ }
-+ 
-+ #define _expect_rfc3164_timestamp_eq(ts, expected) \
-+   ({ \
-+     gchar converted[32]; \
-+-    cr_expect(_rfc3164_timestamp_eq(ts, expected, converted), "Parsed RFC3164 timestamp does not equal expected, ts=%s, converted=%s, expected=%s", ts, converted, expected); \
-++    cr_expect(_rfc3164_timestamp_eq(ts, -1, expected, converted), "Parsed RFC3164 timestamp does not equal expected, ts=%s, converted=%s, expected=%s", ts, converted, expected); \
-++  })
-++
-++#define _expect_rfc3164_timestamp_len_eq(ts, len, expected) \
-++  ({ \
-++    gchar converted[32]; \
-++    cr_expect(_rfc3164_timestamp_eq(ts, len, expected, converted), "Parsed RFC3164 timestamp does not equal expected, ts=%s, converted=%s, expected=%s", ts, converted, expected); \
-++  })
-++
-++#define _expect_rfc3164_fails(ts, len) \
-++  ({  \
-++    WallClockTime wct = WALL_CLOCK_TIME_INIT; \
-++    const guchar *data = (guchar *) ts; \
-++    gint length = len < 0 ? strlen(ts) : len; \
-++    cr_assert_not(scan_rfc3164_timestamp(&data, &length, &wct)); \
-+   })
-+ 
-+ #define _expect_rfc5424_timestamp_eq(ts, expected) \
-+   ({ \
-+     gchar converted[32]; \
-+-    cr_expect(_rfc5424_timestamp_eq(ts, expected, converted), "Parsed RFC5424 timestamp does not equal expected, ts=%s, converted=%s, expected=%s", ts, converted, expected); \
-++    cr_expect(_rfc5424_timestamp_eq(ts, -1, expected, converted), "Parsed RFC5424 timestamp does not equal expected, ts=%s, converted=%s, expected=%s", ts, converted, expected); \
-++  })
-++
-++#define _expect_rfc5424_timestamp_len_eq(ts, len, expected) \
-++  ({ \
-++    gchar converted[32]; \
-++    cr_expect(_rfc5424_timestamp_eq(ts, len, expected, converted), "Parsed RFC5424 timestamp does not equal expected, ts=%s, converted=%s, expected=%s", ts, converted, expected); \
-+   })
-+ 
-++#define _expect_rfc5424_fails(ts, len) \
-++  ({  \
-++    WallClockTime wct = WALL_CLOCK_TIME_INIT; \
-++    const guchar *data = (guchar *) ts; \
-++    gint length = len < 0 ? strlen(ts) : len; \
-++    cr_assert_not(scan_rfc5424_timestamp(&data, &length, &wct)); \
-++  })
-++
-++
-+ Test(parse_timestamp, standard_bsd_format)
-+ {
-+   _expect_rfc3164_timestamp_eq("Oct  1 17:46:12", "2017-10-01T17:46:12.000+02:00");
-+@@ -148,6 +186,75 @@ Test(parse_timestamp, standard_bsd_format_year_in_the_past)
-+   _expect_rfc3164_timestamp_eq("Dec 31 17:46:12", "2017-12-31T17:46:12.000+01:00");
-+ }
-+ 
-++Test(parse_timestamp, non_zero_terminated_rfc3164_iso_input_is_handled_properly)
-++{
-++  gchar *ts = "2022-08-17T05:02:28.417Z whatever";
-++  gint ts_len = 24;
-++
-++  _expect_rfc3164_timestamp_len_eq(ts, strlen(ts), "2022-08-17T05:02:28.417+00:00");
-++  _expect_rfc3164_timestamp_len_eq(ts, ts_len + 5, "2022-08-17T05:02:28.417+00:00");
-++  _expect_rfc3164_timestamp_len_eq(ts, ts_len, "2022-08-17T05:02:28.417+00:00");
-++
-++  /* no "Z" parsed, timezone defaults to local, forced CET */
-++  _expect_rfc3164_timestamp_len_eq(ts, ts_len - 1, "2022-08-17T05:02:28.417+02:00");
-++
-++  /* msec is partially parsed as we trim the string from the right */
-++  _expect_rfc3164_timestamp_len_eq(ts, ts_len - 2, "2022-08-17T05:02:28.410+02:00");
-++  _expect_rfc3164_timestamp_len_eq(ts, ts_len - 3, "2022-08-17T05:02:28.400+02:00");
-++  _expect_rfc3164_timestamp_len_eq(ts, ts_len - 4, "2022-08-17T05:02:28.000+02:00");
-++  _expect_rfc3164_timestamp_len_eq(ts, ts_len - 5, "2022-08-17T05:02:28.000+02:00");
-++
-++  for (gint i = 6; i < ts_len; i++)
-++    _expect_rfc3164_fails(ts, ts_len - i);
-++
-++}
-++
-++Test(parse_timestamp, non_zero_terminated_rfc3164_bsd_pix_or_asa_input_is_handled_properly)
-++{
-++  gchar *ts = "Aug 17 2022 05:02:28: whatever";
-++  gint ts_len = 21;
-++
-++  _expect_rfc3164_timestamp_len_eq(ts, strlen(ts), "2022-08-17T05:02:28.000+02:00");
-++  _expect_rfc3164_timestamp_len_eq(ts, ts_len + 5, "2022-08-17T05:02:28.000+02:00");
-++  _expect_rfc3164_timestamp_len_eq(ts, ts_len, "2022-08-17T05:02:28.000+02:00");
-++
-++  /* no ":" at the end, that's a problem, unrecognized */
-++  _expect_rfc3164_fails(ts, ts_len - 1);
-++
-++  for (gint i = 1; i < ts_len; i++)
-++    _expect_rfc3164_fails(ts, ts_len - i);
-++}
-++
-++Test(parse_timestamp, non_zero_terminated_rfc5424_input_is_handled_properly)
-++{
-++  gchar *ts = "2022-08-17T05:02:28.417Z whatever";
-++  gint ts_len = 24;
-++
-++  _expect_rfc5424_timestamp_len_eq(ts, strlen(ts), "2022-08-17T05:02:28.417+00:00");
-++  _expect_rfc5424_timestamp_len_eq(ts, ts_len + 5, "2022-08-17T05:02:28.417+00:00");
-++  _expect_rfc5424_timestamp_len_eq(ts, ts_len, "2022-08-17T05:02:28.417+00:00");
-++
-++  /* no "Z" parsed, timezone defaults to local, forced CET */
-++  _expect_rfc5424_timestamp_len_eq(ts, ts_len - 1, "2022-08-17T05:02:28.417+02:00");
-++
-++  /* msec is partially parsed as we trim the string from the right */
-++  _expect_rfc5424_timestamp_len_eq(ts, ts_len - 2, "2022-08-17T05:02:28.410+02:00");
-++  _expect_rfc5424_timestamp_len_eq(ts, ts_len - 3, "2022-08-17T05:02:28.400+02:00");
-++  _expect_rfc5424_timestamp_len_eq(ts, ts_len - 4, "2022-08-17T05:02:28.000+02:00");
-++  _expect_rfc5424_timestamp_len_eq(ts, ts_len - 5, "2022-08-17T05:02:28.000+02:00");
-++
-++  for (gint i = 6; i < ts_len; i++)
-++    _expect_rfc5424_fails(ts, ts_len - i);
-++
-++}
-++
-++Test(parse_timestamp, non_zero_terminated_rfc5424_timestamp_only)
-++{
-++  const gchar *ts = "2022-08-17T05:02:28.417+03:00";
-++  gint ts_len = strlen(ts);
-++  _expect_rfc5424_timestamp_len_eq(ts, ts_len, ts);
-++}
-++
-+ 
-+ Test(parse_timestamp, daylight_saving_behavior_at_spring_with_explicit_timezones)
-+ {
-+diff --git a/modules/syslogformat/CMakeLists.txt b/modules/syslogformat/CMakeLists.txt
-+index fb55ea4..a2a92bb 100644
-+--- a/modules/syslogformat/CMakeLists.txt
-++++ b/modules/syslogformat/CMakeLists.txt
-+@@ -24,4 +24,6 @@ target_include_directories(syslogformat
-+ )
-+ target_link_libraries(syslogformat PRIVATE syslog-ng)
-+ 
-++add_test_subdirectory(tests)
-++
-+ install(TARGETS syslogformat LIBRARY DESTINATION lib/syslog-ng/)
-+diff --git a/modules/syslogformat/Makefile.am b/modules/syslogformat/Makefile.am
-+index f13f88c..14cdf58 100644
-+--- a/modules/syslogformat/Makefile.am
-++++ b/modules/syslogformat/Makefile.am
-+@@ -31,3 +31,5 @@ modules_syslogformat_libsyslogformat_la_DEPENDENCIES =	\
-+ modules/syslogformat modules/syslogformat/ mod-syslogformat: \
-+ 	modules/syslogformat/libsyslogformat.la
-+ .PHONY: modules/syslogformat/ mod-syslogformat
-++
-++include modules/syslogformat/tests/Makefile.am
-+diff --git a/modules/syslogformat/syslog-format.c b/modules/syslogformat/syslog-format.c
-+index 6d53a32..a69f39f 100644
-+--- a/modules/syslogformat/syslog-format.c
-++++ b/modules/syslogformat/syslog-format.c
-+@@ -200,7 +200,7 @@ log_msg_parse_cisco_sequence_id(LogMessage *self, const guchar **data, gint *len
-+ 
-+   /* if the next char is not space, then we may try to read a date */
-+ 
-+-  if (*src != ' ')
-++  if (!left || *src != ' ')
-+     return;
-+ 
-+   log_msg_set_value(self, handles.cisco_seqid, (gchar *) *data, *length - left - 1);
-+@@ -216,6 +216,9 @@ log_msg_parse_cisco_timestamp_attributes(LogMessage *self, const guchar **data,
-+   const guchar *src = *data;
-+   gint left = *length;
-+ 
-++  if (!left)
-++    return;
-++
-+   /* Cisco timestamp extensions, the first '*' indicates that the clock is
-+    * unsynced, '.' if it is known to be synced */
-+   if (G_UNLIKELY(src[0] == '*'))
-+@@ -564,7 +567,7 @@ log_msg_parse_sd(LogMessage *self, const guchar **data, gint *length, const MsgF
-+       open_sd++;
-+       do
-+         {
-+-          if (!isascii(*src) || *src == '=' || *src == ' ' || *src == ']' || *src == '"')
-++          if (!left || !isascii(*src) || *src == '=' || *src == ' ' || *src == ']' || *src == '"')
-+             goto error;
-+           /* read sd_id */
-+           pos = 0;
-+@@ -598,7 +601,8 @@ log_msg_parse_sd(LogMessage *self, const guchar **data, gint *length, const MsgF
-+           strcpy(sd_value_name, logmsg_sd_prefix);
-+           /* this strcat is safe, as sd_id_name is at most 32 chars */
-+           strncpy(sd_value_name + logmsg_sd_prefix_len, sd_id_name, sizeof(sd_value_name) - logmsg_sd_prefix_len);
-+-          if (*src == ']')
-++
-++          if (left && *src == ']')
-+             {
-+               log_msg_set_value_by_name(self, sd_value_name, "", 0);
-+             }
-+@@ -615,7 +619,7 @@ log_msg_parse_sd(LogMessage *self, const guchar **data, gint *length, const MsgF
-+               else
-+                 goto error;
-+ 
-+-              if (!isascii(*src) || *src == '=' || *src == ' ' || *src == ']' || *src == '"')
-++              if (!left || !isascii(*src) || *src == '=' || *src == ' ' || *src == ']' || *src == '"')
-+                 goto error;
-+ 
-+               /* read sd-param */
-+diff --git a/modules/syslogformat/tests/CMakeLists.txt b/modules/syslogformat/tests/CMakeLists.txt
-+new file mode 100644
-+index 0000000..2e45b71
-+--- /dev/null
-++++ b/modules/syslogformat/tests/CMakeLists.txt
-+@@ -0,0 +1 @@
-++add_unit_test(CRITERION TARGET test_syslog_format DEPENDS syslogformat)
-+diff --git a/modules/syslogformat/tests/Makefile.am b/modules/syslogformat/tests/Makefile.am
-+new file mode 100644
-+index 0000000..7ee66a5
-+--- /dev/null
-++++ b/modules/syslogformat/tests/Makefile.am
-+@@ -0,0 +1,9 @@
-++modules_syslogformat_tests_TESTS = \
-++    modules/syslogformat/tests/test_syslog_format
-++
-++check_PROGRAMS += ${modules_syslogformat_tests_TESTS}
-++
-++EXTRA_DIST += modules/syslogformat/tests/CMakeLists.txt
-++
-++modules_syslogformat_tests_test_syslog_format_CFLAGS = $(TEST_CFLAGS) -I$(top_srcdir)/modules/syslogformat
-++modules_syslogformat_tests_test_syslog_format_LDADD = $(TEST_LDADD) $(PREOPEN_SYSLOGFORMAT)
-+diff --git a/modules/syslogformat/tests/test_syslog_format.c b/modules/syslogformat/tests/test_syslog_format.c
-+new file mode 100644
-+index 0000000..d0f5b40
-+--- /dev/null
-++++ b/modules/syslogformat/tests/test_syslog_format.c
-+@@ -0,0 +1,104 @@
-++/*
-++ * Copyright (c) 2022 One Identity
-++ * Copyright (c) 2022 László Várady
-++ *
-++ * This program is free software; you can redistribute it and/or modify it
-++ * under the terms of the GNU General Public License version 2 as published
-++ * by the Free Software Foundation, or (at your option) any later version.
-++ *
-++ * This program is distributed in the hope that it will be useful,
-++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
-++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-++ * GNU General Public License for more details.
-++ *
-++ * You should have received a copy of the GNU General Public License
-++ * along with this program; if not, write to the Free Software
-++ * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-++ *
-++ * As an additional exemption you are allowed to compile & link against the
-++ * OpenSSL libraries as published by the OpenSSL project. See the file
-++ * COPYING for details.
-++ *
-++ */
-++
-++#include <criterion/criterion.h>
-++
-++#include "apphook.h"
-++#include "cfg.h"
-++#include "syslog-format.h"
-++#include "logmsg/logmsg.h"
-++#include "msg-format.h"
-++#include "scratch-buffers.h"
-++
-++#include <string.h>
-++
-++GlobalConfig *cfg;
-++MsgFormatOptions parse_options;
-++
-++static void
-++setup(void)
-++{
-++  app_startup();
-++  syslog_format_init();
-++
-++  cfg = cfg_new_snippet();
-++  msg_format_options_defaults(&parse_options);
-++}
-++
-++static void
-++teardown(void)
-++{
-++  scratch_buffers_explicit_gc();
-++  app_shutdown();
-++  cfg_free(cfg);
-++}
-++
-++TestSuite(syslog_format, .init = setup, .fini = teardown);
-++
-++Test(syslog_format, parser_should_not_spin_on_non_zero_terminated_input, .timeout = 10)
-++{
-++  const gchar *data = "<182>2022-08-17T05:02:28.217 mymachine su: 'su root' failed for lonvick on /dev/pts/8";
-++  /* chosen carefully to reproduce a bug */
-++  gsize data_length = 27;
-++
-++  msg_format_options_init(&parse_options, cfg);
-++  LogMessage *msg = msg_format_construct_message(&parse_options, (const guchar *) data, data_length);
-++
-++  gsize problem_position;
-++  cr_assert(syslog_format_handler(&parse_options, msg, (const guchar *) data, data_length, &problem_position));
-++
-++  msg_format_options_destroy(&parse_options);
-++  log_msg_unref(msg);
-++}
-++
-++Test(syslog_format, cisco_sequence_id_non_zero_termination)
-++{
-++  const gchar *data = "<189>65536: ";
-++  gsize data_length = strlen(data);
-++
-++  msg_format_options_init(&parse_options, cfg);
-++  LogMessage *msg = msg_format_construct_message(&parse_options, (const guchar *) data, data_length);
-++
-++  gsize problem_position;
-++  cr_assert(syslog_format_handler(&parse_options, msg, (const guchar *) data, data_length, &problem_position));
-++  cr_assert_str_eq(log_msg_get_value_by_name(msg, ".SDATA.meta.sequenceId", NULL), "65536");
-++
-++  msg_format_options_destroy(&parse_options);
-++  log_msg_unref(msg);
-++}
-++
-++Test(syslog_format, minimal_non_zero_terminated_numeric_message_is_parsed_as_program_name)
-++{
-++  const gchar *data = "<189>65536";
-++  gsize data_length = strlen(data);
-++
-++  msg_format_options_init(&parse_options, cfg);
-++  LogMessage *msg = msg_format_construct_message(&parse_options, (const guchar *) data, data_length);
-++
-++  gsize problem_position;
-++  cr_assert(syslog_format_handler(&parse_options, msg, (const guchar *) data, data_length, &problem_position));
-++  cr_assert_str_eq(log_msg_get_value_by_name(msg, "PROGRAM", NULL), "65536");
-++
-++  msg_format_options_destroy(&parse_options);
-++  log_msg_unref(msg);
-++}
-+-- 
-+2.25.1
-+
-diff --git a/meta-oe/recipes-support/syslog-ng/syslog-ng_3.24.1.bb b/meta-oe/recipes-support/syslog-ng/syslog-ng_3.24.1.bb
-index 10bf00fdce..6e90dabd14 100644
---- a/meta-oe/recipes-support/syslog-ng/syslog-ng_3.24.1.bb
-+++ b/meta-oe/recipes-support/syslog-ng/syslog-ng_3.24.1.bb
-@@ -9,6 +9,7 @@ SRC_URI += " \
-            file://0001-syslog-ng-fix-segment-fault-during-service-start.patch \
-            file://shebang.patch \
-            file://syslog-ng-tmp.conf \
-+           file://CVE-2022-38725.patch \
-            "
+diff --git a/meta-oe/recipes-devtools/protobuf/protobuf/0001-examples-Makefile-respect-CXX-LDFLAGS-variables-fix-.patch b/meta-oe/recipes-devtools/protobuf/protobuf/0001-examples-Makefile-respect-CXX-LDFLAGS-variables-fix-.patch
+index 36c3c597a..7c4bf260e 100644
+--- a/meta-oe/recipes-devtools/protobuf/protobuf/0001-examples-Makefile-respect-CXX-LDFLAGS-variables-fix-.patch
++++ b/meta-oe/recipes-devtools/protobuf/protobuf/0001-examples-Makefile-respect-CXX-LDFLAGS-variables-fix-.patch
+@@ -30,7 +30,7 @@ Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+  1 file changed, 4 insertions(+), 2 deletions(-)
  
- SRC_URI[md5sum] = "ef9de066793f7358af7312b964ac0450"
+ diff --git a/examples/Makefile b/examples/Makefile
+-index 1c7ec8d63..85f591231 100644
++index ef7a4ef58..7206e14e1 100644
+ --- a/examples/Makefile
+ +++ b/examples/Makefile
+ @@ -2,6 +2,8 @@
+@@ -42,17 +42,20 @@ index 1c7ec8d63..85f591231 100644
+  all: cpp java python
+  
+  cpp:    add_person_cpp    list_people_cpp
+-@@ -40,11 +42,11 @@ protoc_middleman_dart: addressbook.proto
++@@ -41,11 +43,11 @@ protoc_middleman_dart: addressbook.proto
+  
+  add_person_cpp: add_person.cc protoc_middleman
+  	pkg-config --cflags protobuf  # fails if protobuf is not installed
+--	c++ -std=c++11 add_person.cc addressbook.pb.cc -o add_person_cpp `pkg-config --cflags --libs protobuf`
+-+	$(CXX) $(CXXFLAGS) $(LDFLAGS) ../src/google/protobuf/.libs/timestamp.pb.o $(PROTOBUF) add_person.cc addressbook.pb.cc -o add_person_cpp
++-	c++ -std=c++14 add_person.cc addressbook.pb.cc -o add_person_cpp `pkg-config --cflags --libs protobuf`
+++	$(CXX) $(CXXFLAGS) $(LDFLAGS) ../src/google/protobuf/.libs/timestamp.pb.o $(PROTOBUF) add_person.cc addressbook.pb.cc -o add_person_cpp #$(CXX) -std=c++17 $(PROTOBUF) add_person.cc addressbook.pb.cc -o add_person_cpp
+  
+  list_people_cpp: list_people.cc protoc_middleman
+  	pkg-config --cflags protobuf  # fails if protobuf is not installed
+--	c++ -std=c++11 list_people.cc addressbook.pb.cc -o list_people_cpp `pkg-config --cflags --libs protobuf`
+-+	$(CXX) $(CXXFLAGS) $(LDFLAGS) ../src/google/protobuf/.libs/timestamp.pb.o $(PROTOBUF) list_people.cc addressbook.pb.cc -o list_people_cpp
++-	c++ -std=c++14 list_people.cc addressbook.pb.cc -o list_people_cpp `pkg-config --cflags --libs protobuf`
+++	$(CXX) $(CXXFLAGS) $(LDFLAGS) ../src/google/protobuf/.libs/timestamp.pb.o $(PROTOBUF) list_people.cc addressbook.pb.cc -o list_people_cpp #$(CXX) -std=c++17 $(PROTOBUF) list_people.cc addressbook.pb.cc -o list_people_cpp
+  
+  add_person_dart: add_person.dart protoc_middleman_dart
+  
++--
++2.34.1
++
+diff --git a/meta-oe/recipes-devtools/protobuf/protobuf_3.21.12.bb b/meta-oe/recipes-devtools/protobuf/protobuf_4.22.2.bb
+similarity index 86%
+rename from meta-oe/recipes-devtools/protobuf/protobuf_3.21.12.bb
+rename to meta-oe/recipes-devtools/protobuf/protobuf_4.22.2.bb
+index 343933033..f99081b01 100644
+--- a/meta-oe/recipes-devtools/protobuf/protobuf_3.21.12.bb
++++ b/meta-oe/recipes-devtools/protobuf/protobuf_4.22.2.bb
+@@ -7,12 +7,12 @@ SECTION = "console/tools"
+ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=37b5762e07f0af8c74ce80a8bda4266b"
+ 
+-DEPENDS = "zlib"
++DEPENDS = "zlib abseil-cpp"
+ DEPENDS:append:class-target = " protobuf-native"
+ 
+-SRCREV = "f0dc78d7e6e331b8c6bb2d5283e06aa26883ca7c"
++SRCREV = "81f89d509d6771dcccb619cbe26ac86cec472582"
+ 
+-SRC_URI = "git://github.com/protocolbuffers/protobuf.git;branch=21.x;protocol=https \
++SRC_URI = "gitsm://github.com/protocolbuffers/protobuf.git;branch=22.x;protocol=https \
+            file://run-ptest \
+            file://0001-examples-Makefile-respect-CXX-LDFLAGS-variables-fix-.patch \
+            file://0001-Fix-linking-error-with-ld-gold.patch \
+@@ -35,6 +35,7 @@ EXTRA_OECMAKE += "\
+     -Dprotobuf_BUILD_LIBPROTOC=ON \
+     -Dprotobuf_BUILD_TESTS=OFF \
+     -Dprotobuf_BUILD_EXAMPLES=OFF \
++    -Dprotobuf_ABSL_PROVIDER="package" \
+ "
+ 
+ TEST_SRC_DIR = "examples"
+@@ -52,7 +53,11 @@ do_compile_ptest() {
+ 	cp ${S}/${TEST_SRC_DIR}/Makefile "${B}/${TEST_SRC_DIR}/"
+ 	sed -e 's|libdir=|libdir=${PKG_CONFIG_SYSROOT_DIR}|' -i "${B}/${TEST_SRC_DIR}/protobuf.pc"
+ 	sed -e 's|Cflags:|Cflags: -I${S}/src|' -i "${B}/${TEST_SRC_DIR}/protobuf.pc"
++	sed -e 's|Cflags:|Cflags: -I${WORKDIR}/recipe-sysroot{includedir} |' -i "${B}/${TEST_SRC_DIR}/protobuf.pc"
+ 	sed -e 's|Libs:|Libs: -L${B}|' -i "${B}/${TEST_SRC_DIR}/protobuf.pc"
++	sed -e 's|Libs:|Libs: -L${WORKDIR}/recipe-sysroot/usr/lib|' -i "${B}/${TEST_SRC_DIR}/protobuf.pc"
++	sed -e 's|Libs:|Libs: -labsl_log_internal_check_op |' -i "${B}/${TEST_SRC_DIR}/protobuf.pc"
++	sed -e 's|Libs:|Libs: -labsl_log_internal_message |' -i "${B}/${TEST_SRC_DIR}/protobuf.pc"
+ 	# Until out-of-tree build of examples is supported, we have to use this approach
+ 	sed -e 's|../src/google/protobuf/.libs/timestamp.pb.o|${B}/CMakeFiles/libprotobuf.dir/src/google/protobuf/timestamp.pb.cc.o|' -i "${B}/${TEST_SRC_DIR}/Makefile"
+ 	export PKG_CONFIG_PATH="${B}/${TEST_SRC_DIR}"
 -- 
-2.25.1
+2.34.1
 
 
