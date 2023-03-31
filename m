@@ -2,56 +2,56 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BE791C761A6
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A6EE3C761AF
 	for <webhook@archiver.kernel.org>; Fri, 31 Mar 2023 15:47:29 +0000 (UTC)
-Received: from mail-pj1-f49.google.com (mail-pj1-f49.google.com [209.85.216.49])
- by mx.groups.io with SMTP id smtpd.web11.58627.1680277649014955079
+Received: from mail-pl1-f169.google.com (mail-pl1-f169.google.com [209.85.214.169])
+ by mx.groups.io with SMTP id smtpd.web11.58626.1680277648471471086
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 31 Mar 2023 08:47:29 -0700
+ Fri, 31 Mar 2023 08:47:28 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=gC8PGNRS;
- spf=pass (domain: gmail.com, ip: 209.85.216.49, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f49.google.com with SMTP id l9-20020a17090a3f0900b0023d32684e7fso8663365pjc.1
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=Qa2wYJy5;
+ spf=pass (domain: gmail.com, ip: 209.85.214.169, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f169.google.com with SMTP id le6so21586999plb.12
         for <openembedded-devel@lists.openembedded.org>; Fri, 31 Mar 2023 08:47:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112; t=1680277648;
+        d=gmail.com; s=20210112; t=1680277647;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=/2jFMBE6Tzlqj2chkRJZhoHiojsV58Z5t28vSJ8Lp/4=;
-        b=gC8PGNRSjA8InVzC5MFNCqB22BbHazTKWIvXgTOiz4w84CsAqwjD6vb7ozEFeiqO8q
-         ONP2q0hSr2rlH5yriDBIT/iRqdNdDCxha79mFGuMA/sUVz6AdYRx0PSFnwx+O5V/L4AM
-         CSDv3dRFPifLaG1SFmX5Blrk9Mv6/l5M0SLBhiU2JaW11bSGvnU+5D3FOHUa5grGyWWB
-         ys33OI95m+IxlfNuQPAkvG5oU3q7b+HU98MD5f7Uw/9nXSWCx1VSJ54/nzHOn78gbtvr
-         B8+SYnm5Yl6nOWRrkGt8lBMg98q/bPswGKg0VC80RsLX7CwLq7T9soSgda9WczG0l3BW
-         5dFQ==
+        bh=38kr+Ytsc6Fze/dP6FHbo5xFbaT07rQKUslgOapSXZE=;
+        b=Qa2wYJy5Z4iiUsb/ZwzI+y/ZtKdeWbF1yCwBxnTtmHfCvqE/SCnd53RG0JI6yOj9k6
+         9bGXcKxNs8X580UXVC9IoBQ1UyXnrGhYwtmTk8Drpj1bmb4cDpuxCTUD3h470IX8cqK8
+         Ehy7Hwn9Pvq7TuieoqQJQWDvzqCTAl2zMs9G9cxvQGChHEE3hqBGjyMXgCoIbEBr93gV
+         2L91+FWPdypeKcdi5hH/lrutcdSa8j7Col7YIx15kWnPk35xWuvMWrkeJidVTPquyEip
+         6stppZbxrcILUv/gKp7/4MCyNkP2rkfzkrEFqnL7ywlR0MWfW/H662CvIh/xi+9580wD
+         97mw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112; t=1680277648;
+        d=1e100.net; s=20210112; t=1680277647;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=/2jFMBE6Tzlqj2chkRJZhoHiojsV58Z5t28vSJ8Lp/4=;
-        b=Mo2wVZUQrN+3lXB9hEos25MCZ93GgUqFW/nEt485uxxEntpztbMfDt+rnCxesNE+1U
-         q97rznTa97b30TlZcxVFGNebpZWbeJOtvrLE6TB9KXky5/z/tm7mB2eKzHJ/15UjOiRw
-         g/iGCDfdvjCMXFKQnDp9wMi0XixmGSN26DX/IhOPsI+PefWGOuuAuoLTJmFjUiEBdnC+
-         rEPkSmIkmHePAWnjSvDzxMiBs1U+ZY5+k322NGbXytkLkZXE/HL6sl4HW6ECSWKcI8O5
-         hrB4sUuAggkYwRfUdvHsHZ6Lc3z0EksoHjnhbe1zPYsBglKDEHUyK9lGRu7vOyIsB4hh
-         DZqA==
-X-Gm-Message-State: AAQBX9fWKTvMYt94Jx4E4iuB1NaUa19NJeXd3YALJt0h1CJtvUbwNl/R
-	NX4eIjxnF8ZsmQ1+zMQrO9vsy+oQ24EUWw==
-X-Google-Smtp-Source: AKy350YN1prz7e9DQQXtVfh6EGhI7gzq12cWJqR/UUiQeErTtvyYqoO3OEwfoFQXV3b1tatIbe/1yQ==
-X-Received: by 2002:a17:90b:4d12:b0:23d:c49:3875 with SMTP id mw18-20020a17090b4d1200b0023d0c493875mr32671944pjb.33.1680277648157;
-        Fri, 31 Mar 2023 08:47:28 -0700 (PDT)
+        bh=38kr+Ytsc6Fze/dP6FHbo5xFbaT07rQKUslgOapSXZE=;
+        b=fmykHtJ+gIcIPxmehFI7Gfe76XSnenVvsj7qgK40QeTeSVA5wwW3/Q0pWgAzX/JKd+
+         UKcGkIwbs41ta0j62VEwpWhkUxSgwn6fnpVkZEs8n2PKVKvIwk9d7Bf0eUawWIXbvSEi
+         XHSVsGbWKVeui0t+2srJ5UmupxaDZ1Y/vaWzgp6QptN2PDkkk6QgNVArIkQ7iR6vIv4z
+         HAyKkWlc+/QvbCAJhm+GCm05zbjz6TcNzaPziBwLELvkFM6QDfT1wYxyLT74GPlDsi/h
+         LZLBm9gK9V27LlW13zv6S7YO/JkQi6p1mw6HDji0Hd6NT9KfsV4ouFb/r4qtDJyQmYQt
+         OnEg==
+X-Gm-Message-State: AO0yUKUwqnze0TkSi6LX5Jn+cMgn4b0GxqEuNT9zW6ODyBYHOr884zS6
+	xrOpzxop3XiXRaparMZGhBicGf9RSZbaDw==
+X-Google-Smtp-Source: AK7set+c1MMg/6r2/RQxESmmgtqIlhJcr1RTpB705pqhXSnawCgU8I8pEXOOPVETKXsnEWs2xBYVMQ==
+X-Received: by 2002:a17:90a:9485:b0:23c:feb9:2cea with SMTP id s5-20020a17090a948500b0023cfeb92ceamr31277039pjo.42.1680277647425;
+        Fri, 31 Mar 2023 08:47:27 -0700 (PDT)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9181:d380::bed3])
-        by smtp.gmail.com with ESMTPSA id u18-20020a17090adb5200b00233d6547000sm1624567pjx.54.2023.03.31.08.47.27
+        by smtp.gmail.com with ESMTPSA id u18-20020a17090adb5200b00233d6547000sm1624567pjx.54.2023.03.31.08.47.26
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
         Fri, 31 Mar 2023 08:47:27 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 3/4] gmime: Update to 3.2.13
-Date: Fri, 31 Mar 2023 08:47:23 -0700
-Message-Id: <20230331154724.1302078-3-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 2/4] cyrus-sasl: Fix autoconf patch to work with new autoconf 2.72
+Date: Fri, 31 Mar 2023 08:47:22 -0700
+Message-Id: <20230331154724.1302078-2-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.40.0
 In-Reply-To: <20230331154724.1302078-1-raj.khem@gmail.com>
 References: <20230331154724.1302078-1-raj.khem@gmail.com>
@@ -61,61 +61,133 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Fri, 31 Mar 2023 15:47:29 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101860
-
-- Drop nodolt.patch patch its applied upstream
-- Enable largefile and set ac_cv_sys_file_offset_bits=64
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101859
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-oe/recipes-gnome/gmime/gmime/nodolt.patch         | 10 ----------
- .../gmime/{gmime_3.2.7.bb => gmime_3.2.13.bb}          | 10 +++++++---
- 2 files changed, 7 insertions(+), 13 deletions(-)
- delete mode 100644 meta-oe/recipes-gnome/gmime/gmime/nodolt.patch
- rename meta-oe/recipes-gnome/gmime/{gmime_3.2.7.bb => gmime_3.2.13.bb} (56%)
+ .../cyrus-sasl/0001-Fix-time.h-check.patch    |  9 +--
+ .../cyrus-sasl/avoid-to-call-AC_TRY_RUN.patch | 73 ++++++++-----------
+ 2 files changed, 32 insertions(+), 50 deletions(-)
 
-diff --git a/meta-oe/recipes-gnome/gmime/gmime/nodolt.patch b/meta-oe/recipes-gnome/gmime/gmime/nodolt.patch
-deleted file mode 100644
-index 1f9bdd3041..0000000000
---- a/meta-oe/recipes-gnome/gmime/gmime/nodolt.patch
-+++ /dev/null
-@@ -1,10 +0,0 @@
----- a/configure.ac
--+++ b/configure.ac
--@@ -150,7 +150,6 @@ AC_EXEEXT
-- AC_PROG_LIBTOOL
-- dnl when using libtool 2.x create libtool early, because it's used in configure
-- m4_ifdef([LT_OUTPUT], [LT_OUTPUT])
---DOLT
-- 
-- dnl Checks for header files.
-- AC_CHECK_HEADERS(sys/mman.h)
-diff --git a/meta-oe/recipes-gnome/gmime/gmime_3.2.7.bb b/meta-oe/recipes-gnome/gmime/gmime_3.2.13.bb
-similarity index 56%
-rename from meta-oe/recipes-gnome/gmime/gmime_3.2.7.bb
-rename to meta-oe/recipes-gnome/gmime/gmime_3.2.13.bb
-index 2677f5c615..c4738b25bc 100644
---- a/meta-oe/recipes-gnome/gmime/gmime_3.2.7.bb
-+++ b/meta-oe/recipes-gnome/gmime/gmime_3.2.13.bb
-@@ -7,11 +7,15 @@ DEPENDS = "glib-2.0 zlib"
+diff --git a/meta-oe/recipes-networking/cyrus-sasl/cyrus-sasl/0001-Fix-time.h-check.patch b/meta-oe/recipes-networking/cyrus-sasl/cyrus-sasl/0001-Fix-time.h-check.patch
+index a6df213fee..3b7054a799 100644
+--- a/meta-oe/recipes-networking/cyrus-sasl/cyrus-sasl/0001-Fix-time.h-check.patch
++++ b/meta-oe/recipes-networking/cyrus-sasl/cyrus-sasl/0001-Fix-time.h-check.patch
+@@ -28,11 +28,9 @@ Signed-off-by: Sam James <sam@gentoo.org>
+  plugins/cram.c | 4 ++++
+  2 files changed, 5 insertions(+), 1 deletion(-)
  
- inherit gnomebase gobject-introspection vala
+-diff --git a/configure.ac b/configure.ac
+-index e1bf53b6..ad781830 100644
+ --- a/configure.ac
+ +++ b/configure.ac
+-@@ -1290,7 +1290,7 @@ AC_CHECK_HEADERS_ONCE([sys/time.h])
++@@ -1231,7 +1231,7 @@ AC_CHECK_HEADERS_ONCE([sys/time.h])
+  
+  AC_HEADER_DIRENT
+  AC_HEADER_SYS_WAIT
+@@ -41,8 +39,6 @@ index e1bf53b6..ad781830 100644
+  
+  IPv6_CHECK_SS_FAMILY()
+  IPv6_CHECK_SA_LEN()
+-diff --git a/plugins/cram.c b/plugins/cram.c
+-index d02e9baa..695aaa91 100644
+ --- a/plugins/cram.c
+ +++ b/plugins/cram.c
+ @@ -53,6 +53,10 @@
+@@ -56,6 +52,3 @@ index d02e9baa..695aaa91 100644
+  #include <sasl.h>
+  #include <saslplug.h>
+  #include <saslutil.h>
+--- 
+-2.37.3
+-
+diff --git a/meta-oe/recipes-networking/cyrus-sasl/cyrus-sasl/avoid-to-call-AC_TRY_RUN.patch b/meta-oe/recipes-networking/cyrus-sasl/cyrus-sasl/avoid-to-call-AC_TRY_RUN.patch
+index 1e6f99603c..308d88204f 100644
+--- a/meta-oe/recipes-networking/cyrus-sasl/cyrus-sasl/avoid-to-call-AC_TRY_RUN.patch
++++ b/meta-oe/recipes-networking/cyrus-sasl/cyrus-sasl/avoid-to-call-AC_TRY_RUN.patch
+@@ -1,50 +1,39 @@
+-From 288430d3c2d3f36a4c9d40c4fffa85288f44549a Mon Sep 17 00:00:00 2001
+-From: "Roy.Li" <rongqing.li@windriver.com>
+-Date: Tue, 25 Jun 2013 09:22:59 +0800
+-Subject: [PATCH] Avoid to call AC_TRY_RUN
++Remove AC_TRY_RUN
  
--SRC_URI += "file://iconv-detect.h \
--            file://nodolt.patch"
--SRC_URI[archive.sha256sum] = "2aea96647a468ba2160a64e17c6dc6afe674ed9ac86070624a3f584c10737d44"
-+SRC_URI = "https://github.com/jstedfast/${BPN}/releases/download/${PV}/${BP}.tar.xz \
-+    file://iconv-detect.h \
-+"
-+SRC_URI[sha256sum] = "2e10a54d4821daf8b16c019ad5d567e0fb8e766f8ffe5fec3d4c6a37373d6406"
-+
-+EXTRA_OECONF += "--enable-largefile"
+-Upstream-Status: Inappropriate [configuration]
++It can not be run during cross compile
  
- export ac_cv_have_iconv_detect_h="yes"
-+export ac_cv_sys_file_offset_bits="64"
- 
- do_configure:append () {
-     cp ${WORKDIR}/iconv-detect.h ${S}
+-Avoid to call AC_TRY_RUN to check if GSSAPI libraries support SPNEGO
+-on cross-compile environment by definition AC_ARG_ENABLE enable-spnego
+-
+-Signed-off-by: Roy.Li <rongqing.li@windriver.com>
+----
+- m4/sasl2.m4 | 14 +++++++++++++-
+- 1 file changed, 13 insertions(+), 1 deletion(-)
+-
+-diff --git a/m4/sasl2.m4 b/m4/sasl2.m4
+-index 80371ef..ff70083 100644
++Upstream-Status: Inappropriate [Cross-compile specific]
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
+ --- a/m4/sasl2.m4
+ +++ b/m4/sasl2.m4
+-@@ -316,6 +316,18 @@ if test "$gssapi" != no; then
++@@ -316,28 +316,8 @@ if test "$gssapi" != no; then
+    AC_CACHE_CHECK([for SPNEGO support in GSSAPI libraries],[ac_cv_gssapi_supports_spnego],[
+      cmu_save_LIBS="$LIBS"
+      LIBS="$LIBS $GSSAPIBASE_LIBS"
+-+    AC_ARG_ENABLE([spnego],
+-+                [AC_HELP_STRING([--enable-spnego=<DIR>],
+-+                                [enable SPNEGO support in GSSAPI libraries [no]])],
+-+                [spnego=$enableval],
+-+                [spnego=no])
+-+  
+-+    if test "$spnego" = no; then
+-+         echo "no"
+-+    elif test "$spnego" = yes; then
+-+         AC_DEFINE(HAVE_GSS_SPNEGO,,[Define if your GSSAPI implementation supports SPNEGO])
+-+    else
+-+         AC_MSG_CHECKING([for SPNEGO support in GSSAPI libraries])
+-     AC_TRY_RUN([
+- #ifdef HAVE_GSSAPI_H
+- #include <gssapi.h>
+-@@ -343,7 +355,7 @@ int main(void)
+-   AS_IF([test "$ac_cv_gssapi_supports_spnego" = yes],[
+-     AC_DEFINE(HAVE_GSS_SPNEGO,,[Define if your GSSAPI implementation supports SPNEGO])
+-   ])
++-    AC_TRY_RUN([
++-#ifdef HAVE_GSSAPI_H
++-#include <gssapi.h>
++-#else
++-#include <gssapi/gssapi.h>
++-#endif
+ -
+-+   fi
+- else
+-   AC_MSG_RESULT([disabled])
+- fi
+--- 
+-2.25.1
+-
++-int main(void)
++-{
++-    gss_OID_desc spnego_oid = { 6, (void *) "\x2b\x06\x01\x05\x05\x02" };
++-    gss_OID_set mech_set;
++-    OM_uint32 min_stat;
++-    int have_spnego = 0;
++-                                                                               
++-    if (gss_indicate_mechs(&min_stat, &mech_set) == GSS_S_COMPLETE) {
++-	gss_test_oid_set_member(&min_stat, &spnego_oid, mech_set, &have_spnego);
++-	gss_release_oid_set(&min_stat, &mech_set);
++-    }
++-
++-    return (!have_spnego);  // 0 = success, 1 = failure
++-}
++-],[ac_cv_gssapi_supports_spnego=yes],[ac_cv_gssapi_supports_spnego=no])
+++    AC_DEFINE(HAVE_GSS_SPNEGO,,[Define if your GSSAPI implementation supports SPNEGO])
+++    AC_MSG_RESULT(yes)
++     LIBS="$cmu_save_LIBS"
++   ])
++   AS_IF([test "$ac_cv_gssapi_supports_spnego" = yes],[
 -- 
 2.40.0
 
