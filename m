@@ -2,132 +2,120 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A6E9FC76196
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BE791C761A6
 	for <webhook@archiver.kernel.org>; Fri, 31 Mar 2023 15:47:29 +0000 (UTC)
-Received: from mail-pj1-f42.google.com (mail-pj1-f42.google.com [209.85.216.42])
- by mx.groups.io with SMTP id smtpd.web10.58725.1680277647729919659
+Received: from mail-pj1-f49.google.com (mail-pj1-f49.google.com [209.85.216.49])
+ by mx.groups.io with SMTP id smtpd.web11.58627.1680277649014955079
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 31 Mar 2023 08:47:27 -0700
+ Fri, 31 Mar 2023 08:47:29 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=CLtfiZ4+;
- spf=pass (domain: gmail.com, ip: 209.85.216.42, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f42.google.com with SMTP id e15-20020a17090ac20f00b0023d1b009f52so25823360pjt.2
-        for <openembedded-devel@lists.openembedded.org>; Fri, 31 Mar 2023 08:47:27 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=gC8PGNRS;
+ spf=pass (domain: gmail.com, ip: 209.85.216.49, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f49.google.com with SMTP id l9-20020a17090a3f0900b0023d32684e7fso8663365pjc.1
+        for <openembedded-devel@lists.openembedded.org>; Fri, 31 Mar 2023 08:47:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112; t=1680277647;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=0FLRefZgeD/75TJbLnwRMDXgUYVbsM+X1WiV8iUvu9o=;
-        b=CLtfiZ4+DCXw2Q3AGloHUVEFXoqmS0cBEMUMEZ8PoVgpc+KN9e6oD2AcEjGF7Lj897
-         EKe1rhBXybrNkZMddAhXveCLfaslb8QphzgBhbOOLbvYU/O8yLVB1YMgbkmXQEMRYtxg
-         Ci3jjjb7ynRIU/blAU1rIRQiMqDdVAjzw8SU6VSmTi/APYrdHBmfXN327CXCI/+L1hGq
-         EwRDsFxza/vCXUJZG3+y1i+uccyq3lhXk2EbZRAnLZ2Bgy6GktTyHKlAlSTA/KujxB5Q
-         tBXC4Nrp9B8V63m1+7694ZfowSAdBhpsUirlesLshUfT8reaupAch3DPYSd0aWycwFpm
-         2ErQ==
+        d=gmail.com; s=20210112; t=1680277648;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=/2jFMBE6Tzlqj2chkRJZhoHiojsV58Z5t28vSJ8Lp/4=;
+        b=gC8PGNRSjA8InVzC5MFNCqB22BbHazTKWIvXgTOiz4w84CsAqwjD6vb7ozEFeiqO8q
+         ONP2q0hSr2rlH5yriDBIT/iRqdNdDCxha79mFGuMA/sUVz6AdYRx0PSFnwx+O5V/L4AM
+         CSDv3dRFPifLaG1SFmX5Blrk9Mv6/l5M0SLBhiU2JaW11bSGvnU+5D3FOHUa5grGyWWB
+         ys33OI95m+IxlfNuQPAkvG5oU3q7b+HU98MD5f7Uw/9nXSWCx1VSJ54/nzHOn78gbtvr
+         B8+SYnm5Yl6nOWRrkGt8lBMg98q/bPswGKg0VC80RsLX7CwLq7T9soSgda9WczG0l3BW
+         5dFQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112; t=1680277647;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=0FLRefZgeD/75TJbLnwRMDXgUYVbsM+X1WiV8iUvu9o=;
-        b=FYqQUFnyrcgIeojFb2vFjWCezdhN3gk94Il6xe9p5FzWrBpggZMfci62nbcscwHqhd
-         rWQ2biE5cPquzfFl14tuJ/B9I4P8EMO633LncKw+BPXO9TnW71GtAT+EqhodNYg+vrtA
-         UgXbRa75+FpN/AjbgVBI91YpSs8FvJW0lzrmPnIk70flbfDkgkO/TgsCMSlVXuhH6mIG
-         u3ir7m0w/xL62fF7BWfdcsJ2f7PMx5p30HR9H3+KTlOpu6SZ4v2mJpUIoB21b0TviA39
-         RhRV84/z5vjPVCktMCC6DdYNVmsqggl4W1LILWa3Cidylr2e0I1A94QQn7qKTkh5Okvh
-         l5uA==
-X-Gm-Message-State: AAQBX9fNLX56cSOJ4HLHcOG9qHqwjJ/uWA3E1HVPRbL16hKzPJh2EiY0
-	wI9FZRSrxBmnJNnHoeup8SEHHjsIr797IQ==
-X-Google-Smtp-Source: AKy350YLOgROFGJ1qvqXyGCWhhVCEiPDwLXiWveJA+GjUTK2xv5GvpzqxMvNMhOVx5Gq9XHoWLxZMA==
-X-Received: by 2002:a17:90b:4c45:b0:23d:35d9:d065 with SMTP id np5-20020a17090b4c4500b0023d35d9d065mr27851146pjb.48.1680277646750;
-        Fri, 31 Mar 2023 08:47:26 -0700 (PDT)
+        d=1e100.net; s=20210112; t=1680277648;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=/2jFMBE6Tzlqj2chkRJZhoHiojsV58Z5t28vSJ8Lp/4=;
+        b=Mo2wVZUQrN+3lXB9hEos25MCZ93GgUqFW/nEt485uxxEntpztbMfDt+rnCxesNE+1U
+         q97rznTa97b30TlZcxVFGNebpZWbeJOtvrLE6TB9KXky5/z/tm7mB2eKzHJ/15UjOiRw
+         g/iGCDfdvjCMXFKQnDp9wMi0XixmGSN26DX/IhOPsI+PefWGOuuAuoLTJmFjUiEBdnC+
+         rEPkSmIkmHePAWnjSvDzxMiBs1U+ZY5+k322NGbXytkLkZXE/HL6sl4HW6ECSWKcI8O5
+         hrB4sUuAggkYwRfUdvHsHZ6Lc3z0EksoHjnhbe1zPYsBglKDEHUyK9lGRu7vOyIsB4hh
+         DZqA==
+X-Gm-Message-State: AAQBX9fWKTvMYt94Jx4E4iuB1NaUa19NJeXd3YALJt0h1CJtvUbwNl/R
+	NX4eIjxnF8ZsmQ1+zMQrO9vsy+oQ24EUWw==
+X-Google-Smtp-Source: AKy350YN1prz7e9DQQXtVfh6EGhI7gzq12cWJqR/UUiQeErTtvyYqoO3OEwfoFQXV3b1tatIbe/1yQ==
+X-Received: by 2002:a17:90b:4d12:b0:23d:c49:3875 with SMTP id mw18-20020a17090b4d1200b0023d0c493875mr32671944pjb.33.1680277648157;
+        Fri, 31 Mar 2023 08:47:28 -0700 (PDT)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9181:d380::bed3])
-        by smtp.gmail.com with ESMTPSA id u18-20020a17090adb5200b00233d6547000sm1624567pjx.54.2023.03.31.08.47.25
+        by smtp.gmail.com with ESMTPSA id u18-20020a17090adb5200b00233d6547000sm1624567pjx.54.2023.03.31.08.47.27
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 31 Mar 2023 08:47:26 -0700 (PDT)
+        Fri, 31 Mar 2023 08:47:27 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 1/4] krb5: Fix build with autoconf 2.72
-Date: Fri, 31 Mar 2023 08:47:21 -0700
-Message-Id: <20230331154724.1302078-1-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 3/4] gmime: Update to 3.2.13
+Date: Fri, 31 Mar 2023 08:47:23 -0700
+Message-Id: <20230331154724.1302078-3-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.40.0
+In-Reply-To: <20230331154724.1302078-1-raj.khem@gmail.com>
+References: <20230331154724.1302078-1-raj.khem@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Fri, 31 Mar 2023 15:47:29 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101858
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101860
 
-Fixes
-checking for IPv6 compile-time support without -DINET6... ./configure: line 10004: syntax error near unexpected token `;;'
+- Drop nodolt.patch patch its applied upstream
+- Enable largefile and set ac_cv_sys_file_offset_bits=64
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...al.m4-syntax-error-for-autoconf-2.72.patch | 40 +++++++++++++++++++
- .../recipes-connectivity/krb5/krb5_1.20.1.bb  |  1 +
- 2 files changed, 41 insertions(+)
- create mode 100644 meta-oe/recipes-connectivity/krb5/krb5/0001-Fix-aclocal.m4-syntax-error-for-autoconf-2.72.patch
+ meta-oe/recipes-gnome/gmime/gmime/nodolt.patch         | 10 ----------
+ .../gmime/{gmime_3.2.7.bb => gmime_3.2.13.bb}          | 10 +++++++---
+ 2 files changed, 7 insertions(+), 13 deletions(-)
+ delete mode 100644 meta-oe/recipes-gnome/gmime/gmime/nodolt.patch
+ rename meta-oe/recipes-gnome/gmime/{gmime_3.2.7.bb => gmime_3.2.13.bb} (56%)
 
-diff --git a/meta-oe/recipes-connectivity/krb5/krb5/0001-Fix-aclocal.m4-syntax-error-for-autoconf-2.72.patch b/meta-oe/recipes-connectivity/krb5/krb5/0001-Fix-aclocal.m4-syntax-error-for-autoconf-2.72.patch
-new file mode 100644
-index 0000000000..9d0b066b10
---- /dev/null
-+++ b/meta-oe/recipes-connectivity/krb5/krb5/0001-Fix-aclocal.m4-syntax-error-for-autoconf-2.72.patch
-@@ -0,0 +1,40 @@
-+From 0aa127afa52fd265a4f1bbded1623201390ae96a Mon Sep 17 00:00:00 2001
-+From: Julien Rische <jrische@redhat.com>
-+Date: Thu, 17 Nov 2022 15:01:24 +0100
-+Subject: [PATCH] Fix aclocal.m4 syntax error for autoconf 2.72
+diff --git a/meta-oe/recipes-gnome/gmime/gmime/nodolt.patch b/meta-oe/recipes-gnome/gmime/gmime/nodolt.patch
+deleted file mode 100644
+index 1f9bdd3041..0000000000
+--- a/meta-oe/recipes-gnome/gmime/gmime/nodolt.patch
++++ /dev/null
+@@ -1,10 +0,0 @@
+---- a/configure.ac
+-+++ b/configure.ac
+-@@ -150,7 +150,6 @@ AC_EXEEXT
+- AC_PROG_LIBTOOL
+- dnl when using libtool 2.x create libtool early, because it's used in configure
+- m4_ifdef([LT_OUTPUT], [LT_OUTPUT])
+--DOLT
+- 
+- dnl Checks for header files.
+- AC_CHECK_HEADERS(sys/mman.h)
+diff --git a/meta-oe/recipes-gnome/gmime/gmime_3.2.7.bb b/meta-oe/recipes-gnome/gmime/gmime_3.2.13.bb
+similarity index 56%
+rename from meta-oe/recipes-gnome/gmime/gmime_3.2.7.bb
+rename to meta-oe/recipes-gnome/gmime/gmime_3.2.13.bb
+index 2677f5c615..c4738b25bc 100644
+--- a/meta-oe/recipes-gnome/gmime/gmime_3.2.7.bb
++++ b/meta-oe/recipes-gnome/gmime/gmime_3.2.13.bb
+@@ -7,11 +7,15 @@ DEPENDS = "glib-2.0 zlib"
+ 
+ inherit gnomebase gobject-introspection vala
+ 
+-SRC_URI += "file://iconv-detect.h \
+-            file://nodolt.patch"
+-SRC_URI[archive.sha256sum] = "2aea96647a468ba2160a64e17c6dc6afe674ed9ac86070624a3f584c10737d44"
++SRC_URI = "https://github.com/jstedfast/${BPN}/releases/download/${PV}/${BP}.tar.xz \
++    file://iconv-detect.h \
++"
++SRC_URI[sha256sum] = "2e10a54d4821daf8b16c019ad5d567e0fb8e766f8ffe5fec3d4c6a37373d6406"
 +
-+An incorrect closure inside KRB5_AC_INET6 is innocuous with autoconf
-+versions up to 2.71, but will cause an error at configure time with
-+the forthcoming autoconf 2.72.
-+
-+[ghudson@mit.edu: added more context to commit message]
-+
-+ticket: 9077 (new)
-+tags: pullup
-+target_version: 1.20-next
-+target_version: 1.19-next
-+
-+Upstream-Status: Backport [https://github.com/krb5/krb5/commit/d864d740d019fdf2c640460f2aa2760c7fa4d5e9]
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ src/aclocal.m4 | 4 ++--
-+ 1 file changed, 2 insertions(+), 2 deletions(-)
-+
-+diff --git a/src/aclocal.m4 b/src/aclocal.m4
-+index 9920476..3d66a87 100644
-+--- a/src/aclocal.m4
-++++ b/src/aclocal.m4
-+@@ -409,8 +409,8 @@ else
-+       [[struct sockaddr_in6 in;
-+         AF_INET6;
-+         IN6_IS_ADDR_LINKLOCAL(&in.sin6_addr);]])],
-+-    [krb5_cv_inet6=yes], [krb5_cv_inet6=no])])
-+-fi
-++    [krb5_cv_inet6=yes], [krb5_cv_inet6=no])
-++fi])
-+ AC_MSG_RESULT($krb5_cv_inet6)
-+ if test "$krb5_cv_inet6" = no && test "$ac_cv_func_inet_ntop" = yes; then
-+ AC_MSG_CHECKING(for IPv6 compile-time support with -DINET6)
-+-- 
-+2.40.0
-+
-diff --git a/meta-oe/recipes-connectivity/krb5/krb5_1.20.1.bb b/meta-oe/recipes-connectivity/krb5/krb5_1.20.1.bb
-index 6fc630d99a..10fff11c25 100644
---- a/meta-oe/recipes-connectivity/krb5/krb5_1.20.1.bb
-+++ b/meta-oe/recipes-connectivity/krb5/krb5_1.20.1.bb
-@@ -22,6 +22,7 @@ SHRT_VER = "${@oe.utils.trim_version("${PV}", 2)}"
- SRC_URI = "http://web.mit.edu/kerberos/dist/${BPN}/${SHRT_VER}/${BP}.tar.gz \
-            file://debian-suppress-usr-lib-in-krb5-config.patch;striplevel=2 \
-            file://crosscompile_nm.patch \
-+           file://0001-Fix-aclocal.m4-syntax-error-for-autoconf-2.72.patch;striplevel=2 \
-            file://etc/init.d/krb5-kdc \
-            file://etc/init.d/krb5-admin-server \
-            file://etc/default/krb5-kdc \
++EXTRA_OECONF += "--enable-largefile"
+ 
+ export ac_cv_have_iconv_detect_h="yes"
++export ac_cv_sys_file_offset_bits="64"
+ 
+ do_configure:append () {
+     cp ${WORKDIR}/iconv-detect.h ${S}
 -- 
 2.40.0
 
