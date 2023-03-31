@@ -2,56 +2,56 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A6EE3C761AF
-	for <webhook@archiver.kernel.org>; Fri, 31 Mar 2023 15:47:29 +0000 (UTC)
-Received: from mail-pl1-f169.google.com (mail-pl1-f169.google.com [209.85.214.169])
- by mx.groups.io with SMTP id smtpd.web11.58626.1680277648471471086
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8B7BEC761A6
+	for <webhook@archiver.kernel.org>; Fri, 31 Mar 2023 15:47:39 +0000 (UTC)
+Received: from mail-pl1-f175.google.com (mail-pl1-f175.google.com [209.85.214.175])
+ by mx.groups.io with SMTP id smtpd.web10.58727.1680277649923317494
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 31 Mar 2023 08:47:28 -0700
+ Fri, 31 Mar 2023 08:47:29 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=Qa2wYJy5;
- spf=pass (domain: gmail.com, ip: 209.85.214.169, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f169.google.com with SMTP id le6so21586999plb.12
-        for <openembedded-devel@lists.openembedded.org>; Fri, 31 Mar 2023 08:47:28 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=eblemYQn;
+ spf=pass (domain: gmail.com, ip: 209.85.214.175, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f175.google.com with SMTP id iw3so21610369plb.6
+        for <openembedded-devel@lists.openembedded.org>; Fri, 31 Mar 2023 08:47:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112; t=1680277647;
+        d=gmail.com; s=20210112; t=1680277649;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=38kr+Ytsc6Fze/dP6FHbo5xFbaT07rQKUslgOapSXZE=;
-        b=Qa2wYJy5Z4iiUsb/ZwzI+y/ZtKdeWbF1yCwBxnTtmHfCvqE/SCnd53RG0JI6yOj9k6
-         9bGXcKxNs8X580UXVC9IoBQ1UyXnrGhYwtmTk8Drpj1bmb4cDpuxCTUD3h470IX8cqK8
-         Ehy7Hwn9Pvq7TuieoqQJQWDvzqCTAl2zMs9G9cxvQGChHEE3hqBGjyMXgCoIbEBr93gV
-         2L91+FWPdypeKcdi5hH/lrutcdSa8j7Col7YIx15kWnPk35xWuvMWrkeJidVTPquyEip
-         6stppZbxrcILUv/gKp7/4MCyNkP2rkfzkrEFqnL7ywlR0MWfW/H662CvIh/xi+9580wD
-         97mw==
+        bh=btqRW0724c9ZpDYvQ6R981LgDsaecxhw4W2S/Pm8zTU=;
+        b=eblemYQnl/eS4YOoCvAy50NjsPMIf8KFpkgyDV2XUGSLkLETPIrhhvXu/l0+sY5ztY
+         jooYdybuDDnewD4UkBiwCei93TmitS+GpzuXKCJg0aEa1LlWJ/lK0FmyXVsojwcuQI8q
+         r6Yoc6v0MXL3dBxf1I0zKM8t+D7+5dpP4tHcWiOSrB+fwX1ZdAMJOvN6DCwrf8VaAZwt
+         TK83hsQNHFoOre+dVYQo57Jd4GBer3520C467VaRCADZXFVpRdhboP3ExfnFwG8Dboql
+         mjl5ev1K1s+yvilv69SoJ0dfWt0BslEBCOTWSK43v4gzlIwJ/Na4PXKd/BvXQbI0jpAF
+         7F4Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112; t=1680277647;
+        d=1e100.net; s=20210112; t=1680277649;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=38kr+Ytsc6Fze/dP6FHbo5xFbaT07rQKUslgOapSXZE=;
-        b=fmykHtJ+gIcIPxmehFI7Gfe76XSnenVvsj7qgK40QeTeSVA5wwW3/Q0pWgAzX/JKd+
-         UKcGkIwbs41ta0j62VEwpWhkUxSgwn6fnpVkZEs8n2PKVKvIwk9d7Bf0eUawWIXbvSEi
-         XHSVsGbWKVeui0t+2srJ5UmupxaDZ1Y/vaWzgp6QptN2PDkkk6QgNVArIkQ7iR6vIv4z
-         HAyKkWlc+/QvbCAJhm+GCm05zbjz6TcNzaPziBwLELvkFM6QDfT1wYxyLT74GPlDsi/h
-         LZLBm9gK9V27LlW13zv6S7YO/JkQi6p1mw6HDji0Hd6NT9KfsV4ouFb/r4qtDJyQmYQt
-         OnEg==
-X-Gm-Message-State: AO0yUKUwqnze0TkSi6LX5Jn+cMgn4b0GxqEuNT9zW6ODyBYHOr884zS6
-	xrOpzxop3XiXRaparMZGhBicGf9RSZbaDw==
-X-Google-Smtp-Source: AK7set+c1MMg/6r2/RQxESmmgtqIlhJcr1RTpB705pqhXSnawCgU8I8pEXOOPVETKXsnEWs2xBYVMQ==
-X-Received: by 2002:a17:90a:9485:b0:23c:feb9:2cea with SMTP id s5-20020a17090a948500b0023cfeb92ceamr31277039pjo.42.1680277647425;
-        Fri, 31 Mar 2023 08:47:27 -0700 (PDT)
+        bh=btqRW0724c9ZpDYvQ6R981LgDsaecxhw4W2S/Pm8zTU=;
+        b=HEbDXTBLJJ9dPVgE1tzN/IZCSD21aihlJ8Fwedjcxp6y8yDJCw8qioI+IaEtqkCNt0
+         HOIBVzbMGtuTCZMgwmilDQNrLRcVDERthCqqdBSlwoyO9NJN6I53GhLQN+XnFE97vgPB
+         FR/Zwx2AXIBxxm+gpaKehDSEM27xF73UgDsiVjEu+weatPqFW6I4rx5YMW0Qn8vh4UM+
+         ILrgJLgp+JJ4rc7Aah8HKErDAm4OAgyn86sZZl8Q+5DTwTipPpnQ4IZokMWvwymZ6AH1
+         XfHNhXtSLv1KMNlvZ+62CNG8ckvwMrAxOF+D6krZKnQ8w3PYXhb2PlyWlZB5TXdbKO7B
+         ubPw==
+X-Gm-Message-State: AAQBX9cFfm0oxtxOLaT3OVAuIJndFHUCLZNQyGgjREX/zwndOE52bgdp
+	gnp74Kh3rs3yk9+16Af04j3cg+RMQdMoAQ==
+X-Google-Smtp-Source: AK7set9epMZ5ABUrt5gi9VaYJyyDvHYZkiXrvIU5triXPGkpVlh/R/R/dZ3m7bhXDN4tp6qtbcCadw==
+X-Received: by 2002:a17:90a:31c:b0:23f:ec0f:aab8 with SMTP id 28-20020a17090a031c00b0023fec0faab8mr30527753pje.40.1680277649030;
+        Fri, 31 Mar 2023 08:47:29 -0700 (PDT)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9181:d380::bed3])
-        by smtp.gmail.com with ESMTPSA id u18-20020a17090adb5200b00233d6547000sm1624567pjx.54.2023.03.31.08.47.26
+        by smtp.gmail.com with ESMTPSA id u18-20020a17090adb5200b00233d6547000sm1624567pjx.54.2023.03.31.08.47.28
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 31 Mar 2023 08:47:27 -0700 (PDT)
+        Fri, 31 Mar 2023 08:47:28 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 2/4] cyrus-sasl: Fix autoconf patch to work with new autoconf 2.72
-Date: Fri, 31 Mar 2023 08:47:22 -0700
-Message-Id: <20230331154724.1302078-2-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 4/4] imagemagick: Update to 7.1.1
+Date: Fri, 31 Mar 2023 08:47:24 -0700
+Message-Id: <20230331154724.1302078-4-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.40.0
 In-Reply-To: <20230331154724.1302078-1-raj.khem@gmail.com>
 References: <20230331154724.1302078-1-raj.khem@gmail.com>
@@ -60,134 +60,108 @@ Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 31 Mar 2023 15:47:29 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101859
+ <openembedded-devel@lists.openembedded.org>; Fri, 31 Mar 2023 15:47:39 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101861
+
+Add a patch to fix build with upcoming autoconf 2.72
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../cyrus-sasl/0001-Fix-time.h-check.patch    |  9 +--
- .../cyrus-sasl/avoid-to-call-AC_TRY_RUN.patch | 73 ++++++++-----------
- 2 files changed, 32 insertions(+), 50 deletions(-)
+ ...-Use-autconf-provided-AC_FUNC_FSEEKO.patch | 42 +++++++++++++++++++
+ ...emagick_7.0.10.bb => imagemagick_7.1.1.bb} | 16 ++++---
+ 2 files changed, 52 insertions(+), 6 deletions(-)
+ create mode 100644 meta-oe/recipes-support/imagemagick/imagemagick/0001-m4-Use-autconf-provided-AC_FUNC_FSEEKO.patch
+ rename meta-oe/recipes-support/imagemagick/{imagemagick_7.0.10.bb => imagemagick_7.1.1.bb} (90%)
 
-diff --git a/meta-oe/recipes-networking/cyrus-sasl/cyrus-sasl/0001-Fix-time.h-check.patch b/meta-oe/recipes-networking/cyrus-sasl/cyrus-sasl/0001-Fix-time.h-check.patch
-index a6df213fee..3b7054a799 100644
---- a/meta-oe/recipes-networking/cyrus-sasl/cyrus-sasl/0001-Fix-time.h-check.patch
-+++ b/meta-oe/recipes-networking/cyrus-sasl/cyrus-sasl/0001-Fix-time.h-check.patch
-@@ -28,11 +28,9 @@ Signed-off-by: Sam James <sam@gentoo.org>
-  plugins/cram.c | 4 ++++
-  2 files changed, 5 insertions(+), 1 deletion(-)
- 
--diff --git a/configure.ac b/configure.ac
--index e1bf53b6..ad781830 100644
- --- a/configure.ac
- +++ b/configure.ac
--@@ -1290,7 +1290,7 @@ AC_CHECK_HEADERS_ONCE([sys/time.h])
-+@@ -1231,7 +1231,7 @@ AC_CHECK_HEADERS_ONCE([sys/time.h])
-  
-  AC_HEADER_DIRENT
-  AC_HEADER_SYS_WAIT
-@@ -41,8 +39,6 @@ index e1bf53b6..ad781830 100644
-  
-  IPv6_CHECK_SS_FAMILY()
-  IPv6_CHECK_SA_LEN()
--diff --git a/plugins/cram.c b/plugins/cram.c
--index d02e9baa..695aaa91 100644
- --- a/plugins/cram.c
- +++ b/plugins/cram.c
- @@ -53,6 +53,10 @@
-@@ -56,6 +52,3 @@ index d02e9baa..695aaa91 100644
-  #include <sasl.h>
-  #include <saslplug.h>
-  #include <saslutil.h>
---- 
--2.37.3
--
-diff --git a/meta-oe/recipes-networking/cyrus-sasl/cyrus-sasl/avoid-to-call-AC_TRY_RUN.patch b/meta-oe/recipes-networking/cyrus-sasl/cyrus-sasl/avoid-to-call-AC_TRY_RUN.patch
-index 1e6f99603c..308d88204f 100644
---- a/meta-oe/recipes-networking/cyrus-sasl/cyrus-sasl/avoid-to-call-AC_TRY_RUN.patch
-+++ b/meta-oe/recipes-networking/cyrus-sasl/cyrus-sasl/avoid-to-call-AC_TRY_RUN.patch
-@@ -1,50 +1,39 @@
--From 288430d3c2d3f36a4c9d40c4fffa85288f44549a Mon Sep 17 00:00:00 2001
--From: "Roy.Li" <rongqing.li@windriver.com>
--Date: Tue, 25 Jun 2013 09:22:59 +0800
--Subject: [PATCH] Avoid to call AC_TRY_RUN
-+Remove AC_TRY_RUN
- 
--Upstream-Status: Inappropriate [configuration]
-+It can not be run during cross compile
- 
--Avoid to call AC_TRY_RUN to check if GSSAPI libraries support SPNEGO
--on cross-compile environment by definition AC_ARG_ENABLE enable-spnego
--
--Signed-off-by: Roy.Li <rongqing.li@windriver.com>
-----
-- m4/sasl2.m4 | 14 +++++++++++++-
-- 1 file changed, 13 insertions(+), 1 deletion(-)
--
--diff --git a/m4/sasl2.m4 b/m4/sasl2.m4
--index 80371ef..ff70083 100644
-+Upstream-Status: Inappropriate [Cross-compile specific]
+diff --git a/meta-oe/recipes-support/imagemagick/imagemagick/0001-m4-Use-autconf-provided-AC_FUNC_FSEEKO.patch b/meta-oe/recipes-support/imagemagick/imagemagick/0001-m4-Use-autconf-provided-AC_FUNC_FSEEKO.patch
+new file mode 100644
+index 0000000000..6b225a10cf
+--- /dev/null
++++ b/meta-oe/recipes-support/imagemagick/imagemagick/0001-m4-Use-autconf-provided-AC_FUNC_FSEEKO.patch
+@@ -0,0 +1,42 @@
++From 0912e49d58c2a5f455fabf76ab7dc61cfc44cfb9 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Thu, 30 Mar 2023 20:50:26 -0700
++Subject: [PATCH] m4: Use autconf provided AC_FUNC_FSEEKO
++
++This helps in building with autoconf 2.72
++
++Upstream-Status: Pending
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
- --- a/m4/sasl2.m4
- +++ b/m4/sasl2.m4
--@@ -316,6 +316,18 @@ if test "$gssapi" != no; then
-+@@ -316,28 +316,8 @@ if test "$gssapi" != no; then
-    AC_CACHE_CHECK([for SPNEGO support in GSSAPI libraries],[ac_cv_gssapi_supports_spnego],[
-      cmu_save_LIBS="$LIBS"
-      LIBS="$LIBS $GSSAPIBASE_LIBS"
--+    AC_ARG_ENABLE([spnego],
--+                [AC_HELP_STRING([--enable-spnego=<DIR>],
--+                                [enable SPNEGO support in GSSAPI libraries [no]])],
--+                [spnego=$enableval],
--+                [spnego=no])
--+  
--+    if test "$spnego" = no; then
--+         echo "no"
--+    elif test "$spnego" = yes; then
--+         AC_DEFINE(HAVE_GSS_SPNEGO,,[Define if your GSSAPI implementation supports SPNEGO])
--+    else
--+         AC_MSG_CHECKING([for SPNEGO support in GSSAPI libraries])
--     AC_TRY_RUN([
-- #ifdef HAVE_GSSAPI_H
-- #include <gssapi.h>
--@@ -343,7 +355,7 @@ int main(void)
--   AS_IF([test "$ac_cv_gssapi_supports_spnego" = yes],[
--     AC_DEFINE(HAVE_GSS_SPNEGO,,[Define if your GSSAPI implementation supports SPNEGO])
--   ])
-+-    AC_TRY_RUN([
-+-#ifdef HAVE_GSSAPI_H
-+-#include <gssapi.h>
-+-#else
-+-#include <gssapi/gssapi.h>
-+-#endif
- -
--+   fi
-- else
--   AC_MSG_RESULT([disabled])
-- fi
---- 
--2.25.1
--
-+-int main(void)
-+-{
-+-    gss_OID_desc spnego_oid = { 6, (void *) "\x2b\x06\x01\x05\x05\x02" };
-+-    gss_OID_set mech_set;
-+-    OM_uint32 min_stat;
-+-    int have_spnego = 0;
-+-                                                                               
-+-    if (gss_indicate_mechs(&min_stat, &mech_set) == GSS_S_COMPLETE) {
-+-	gss_test_oid_set_member(&min_stat, &spnego_oid, mech_set, &have_spnego);
-+-	gss_release_oid_set(&min_stat, &mech_set);
-+-    }
++---
++ m4/ac_func_fseeko.m4 | 18 +-----------------
++ 1 file changed, 1 insertion(+), 17 deletions(-)
++
++diff --git a/m4/ac_func_fseeko.m4 b/m4/ac_func_fseeko.m4
++index eaeabb978..f9b8859cf 100644
++--- a/m4/ac_func_fseeko.m4
+++++ b/m4/ac_func_fseeko.m4
++@@ -53,20 +53,4 @@
++ # --------------
++ AN_FUNCTION([ftello], [AC_FUNC_FSEEKO])
++ AN_FUNCTION([fseeko], [AC_FUNC_FSEEKO])
++-AC_DEFUN([AC_FUNC_FSEEKO],
++-[_AC_SYS_LARGEFILE_MACRO_VALUE(_LARGEFILE_SOURCE, 1,
++-   [ac_cv_sys_largefile_source],
++-   [Define to 1 to make fseeko visible on some hosts (e.g. glibc 2.2).],
++-   [[#include <sys/types.h> /* for off_t */
++-     #include <stdio.h>]],
++-   [[int (*fp) (FILE *, off_t, int) = fseeko;
++-     return fseeko (stdin, 0, 0) && fp (stdin, 0, 0);]])
 +-
-+-    return (!have_spnego);  // 0 = success, 1 = failure
-+-}
-+-],[ac_cv_gssapi_supports_spnego=yes],[ac_cv_gssapi_supports_spnego=no])
-++    AC_DEFINE(HAVE_GSS_SPNEGO,,[Define if your GSSAPI implementation supports SPNEGO])
-++    AC_MSG_RESULT(yes)
-+     LIBS="$cmu_save_LIBS"
-+   ])
-+   AS_IF([test "$ac_cv_gssapi_supports_spnego" = yes],[
++-# We used to try defining _XOPEN_SOURCE=500 too, to work around a bug
++-# in glibc 2.1.3, but that breaks too many other things.
++-# If you want fseeko and ftello with glibc, upgrade to a fixed glibc.
++-if test $ac_cv_sys_largefile_source != unknown; then
++-  AC_DEFINE(HAVE_FSEEKO, 1,
++-    [Define to 1 if fseeko (and presumably ftello) exists and is declared.])
++-fi
++-])# AC_FUNC_FSEEKO
+++AC_FUNC_FSEEKO
++-- 
++2.40.0
++
+diff --git a/meta-oe/recipes-support/imagemagick/imagemagick_7.0.10.bb b/meta-oe/recipes-support/imagemagick/imagemagick_7.1.1.bb
+similarity index 90%
+rename from meta-oe/recipes-support/imagemagick/imagemagick_7.0.10.bb
+rename to meta-oe/recipes-support/imagemagick/imagemagick_7.1.1.bb
+index b6344a381f..07434c0564 100644
+--- a/meta-oe/recipes-support/imagemagick/imagemagick_7.0.10.bb
++++ b/meta-oe/recipes-support/imagemagick/imagemagick_7.1.1.bb
+@@ -4,23 +4,27 @@ HOMEPAGE = "https://www.imagemagick.org/"
+ DESCRIPTION = "ImageMagick is a collection of tools for displaying, converting, and \
+ editing raster and vector image files. It can read and write over 200 image file formats."
+ LICENSE = "ImageMagick"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=b97c12a9213df1499565d69b92c73dd7 \
+-                    file://NOTICE;md5=d8b9d2ccf273687ad12ebd06e5d8478f"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=ac58ac14f9d9d02cafd2d81ef38fb2cc \
++                    file://NOTICE;md5=bcbf1f1897b40ec8df39700cb560e9ed"
+ # FIXME: There are many more checked libraries. All should be added or explicitly disabled to get consistent results.
+ DEPENDS = "lcms bzip2 jpeg libpng tiff zlib fftw freetype libtool"
+ 
+ BASE_PV := "${PV}"
+-PV .= "-62"
+-SRC_URI = "git://github.com/ImageMagick/ImageMagick.git;branch=main;protocol=https"
+-SRCREV = "35b4991eb0939a327f3489988c366e21068b0178"
++PV .= "-5"
++SRC_URI = "git://github.com/ImageMagick/ImageMagick.git;branch=main;protocol=https \
++           file://0001-m4-Use-autconf-provided-AC_FUNC_FSEEKO.patch"
++SRCREV = "2d24be538f286962c355cf422bb525375ac77998"
+ 
+ S = "${WORKDIR}/git"
+ 
+ inherit autotools pkgconfig update-alternatives
++export ac_cv_sys_file_offset_bits="64"
+ 
+ # xml disabled because it's using xml2-config --prefix to determine prefix which returns just /usr with our libxml2
+ # if someone needs xml support then fix it first
+-EXTRA_OECONF = "--program-prefix= --program-suffix=.im7 --without-perl --disable-openmp --without-xml --disable-opencl"
++EXTRA_OECONF = "--program-prefix= --program-suffix=.im7 --without-perl \
++                --disable-openmp --without-xml --disable-opencl \
++                --enable-largefile"
+ 
+ PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'x11', d)}"
+ PACKAGECONFIG[cxx] = "--with-magick-plus-plus,--without-magick-plus-plus"
 -- 
 2.40.0
 
