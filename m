@@ -2,146 +2,126 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2E22AC6FD1D
-	for <webhook@archiver.kernel.org>; Sat,  1 Apr 2023 18:35:10 +0000 (UTC)
-Received: from mail-ot1-f41.google.com (mail-ot1-f41.google.com [209.85.210.41])
- by mx.groups.io with SMTP id smtpd.web11.28290.1680374109636445004
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 32C59C7619A
+	for <webhook@archiver.kernel.org>; Sun,  2 Apr 2023 04:57:16 +0000 (UTC)
+Received: from mail-pj1-f54.google.com (mail-pj1-f54.google.com [209.85.216.54])
+ by mx.groups.io with SMTP id smtpd.web11.39056.1680411433777351579
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 01 Apr 2023 11:35:09 -0700
+ Sat, 01 Apr 2023 21:57:13 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=Xe+cZoW1;
- spf=pass (domain: gmail.com, ip: 209.85.210.41, mailfrom: raj.khem@gmail.com)
-Received: by mail-ot1-f41.google.com with SMTP id o25-20020a9d4119000000b006a11eb19f8eso12424889ote.5
-        for <openembedded-devel@lists.openembedded.org>; Sat, 01 Apr 2023 11:35:09 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=X6JLSgUr;
+ spf=pass (domain: gmail.com, ip: 209.85.216.54, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f54.google.com with SMTP id mp3-20020a17090b190300b0023fcc8ce113so29472591pjb.4
+        for <openembedded-devel@lists.openembedded.org>; Sat, 01 Apr 2023 21:57:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112; t=1680374109;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=NXGpMH7keRrNoQ6xsUrlxY8co+VHWtinF0ZhnY7xmrk=;
-        b=Xe+cZoW1f53hWwE5/+ieuv8jh73wlEH5pldyy4sD+4HXSul8p1bmvg6bAXkHF7AWPu
-         5hBZ1oRiQ5qIfC4iLNLnoWlsWu16HMk+suMxeWXjBWTD2I7ccUeCKxjZ21CoqfTiDkaW
-         xfDYG5NmCea1qqPygMSZyxvtPsPBMbSLwTK9XVBWszCCElQMoxXpLPWSLnlo/m01daw/
-         5DJTd9hrFkn7a+Nf7JkEakC9rxJ+4dRTq8vXbRMO2gT2IFq4dstmeYDf73LVAEEvFl40
-         vgjFgmoLaNeMBlxXMSGjg1yNLER7YrkrfuiB2iXKcRgKdcsH7CPXJdvjhFkh+4tzki8P
-         vgnw==
+        d=gmail.com; s=20210112; t=1680411433;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=i6V348kPZZ1cmelnrajvgJefC6uhpJSVxQd9XPSoFuY=;
+        b=X6JLSgUrdHr/hrYMQCfT8w6lrCoPM0/4IxzdsZNqIhbdlfjwUPIy44mPgA8NVtoE1i
+         SJEucGMOk4sJLQY+oc0Kg8oI1AAF1tIjfHowMLp0dThHrmQgLt295Z/r5ZXZ5zddUA/A
+         dSRq5pApb8RaNTsmC60hqkVfXDblsRo2nbXFvAcKnYAV+Jpl0uSBphkKhMCYYZHy30q4
+         DzW1nJuwXIWmlmrR9O4zs+2ZCxbnjm4Bqdk5e38fR7eS8xHu48+soRAECpbxJU22WbJk
+         KfiG18qXG4n9k/ZTJ0vHEc9Ke3Aeg0bkcz4c4HHHr6bGs5ECj1lWYDtxfyWBHJPwBxO8
+         8Neg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112; t=1680374109;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=NXGpMH7keRrNoQ6xsUrlxY8co+VHWtinF0ZhnY7xmrk=;
-        b=X7yyM33QUrvCItQrCfhw4TM1d+5o6s7eITnPj9rAOfRQe8Eq61cxvVc9jxZWhAKzX6
-         I57QW/xRxmTH8Axm6FVqV9oi6Vje1PqeZJZOEe2Gz7Ai4q+wqszWKJ8tGj2+gn43/p6H
-         6alNeq9VbqqGT0slO8q4jBsCZkq1JsNFAJ5WiKzWI30ZeQ2i2lIyDcCQlWcnLiOoi+wB
-         2Ufq3HvRKvZIUKs1zKREvmcowsvzdJK86BF36akC7g74JOtcuFgnTGgE887OOrhBGca9
-         UM+j9mQjNccifLOKypdlmtpq3Br7jeH5md1fHgoZQ/UWBQvXMH7OOsSoVMU8Cz2m/7Nk
-         2t/A==
-X-Gm-Message-State: AO0yUKWpAacERMGjwyuB1gOduTzTBAPgdUwRShVYcy383LP22utewf8n
-	mCBWAAuILLhL5vTb+UygV+x87TKAtEgo8dxXGQo=
-X-Google-Smtp-Source: AK7set+iB0w8c7tUIKsCYV+SUlU3+4EwhmTlsiVKD3nV5caVsVCL8lN0zc8pz78HuMFOaZnhoAPdoi4EoIcAwYzQlsw=
-X-Received: by 2002:a9d:63c5:0:b0:698:f988:7c30 with SMTP id
- e5-20020a9d63c5000000b00698f9887c30mr10109673otl.2.1680374108800; Sat, 01 Apr
- 2023 11:35:08 -0700 (PDT)
-MIME-Version: 1.0
-References: <20230110102531.619341-1-raj.khem@gmail.com> <CA+chaQdo=psqULY_RQfTb052T=LtbMu_o2R3hkPBryXXeb_63Q@mail.gmail.com>
-In-Reply-To: <CA+chaQdo=psqULY_RQfTb052T=LtbMu_o2R3hkPBryXXeb_63Q@mail.gmail.com>
+        d=1e100.net; s=20210112; t=1680411433;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=i6V348kPZZ1cmelnrajvgJefC6uhpJSVxQd9XPSoFuY=;
+        b=qdZ9rP+j0IjkveuAbez53JBygdAIfexupIvL0d2dJUfiRv9ggqCB/DWDu8HwjK5xwo
+         XJBv+AUgRAGkH92X/Eyl5R6QAOFovnFohvDp177XLdpB/Gfp8HNnt+pnNVRFHsBRSwr4
+         n3iglN0akRrJUhCctWOncs404pki3y/Pj2mJUkZvphy2JiumhWoYCSPwJKg8lj2eyQs8
+         uL2J4v0xz8Px0L2rJqFNR2PckiHxLHHNqR2qY+GSztKZ5Dp9l2cA7K0/gK5iENI+dsuv
+         UGVXiNSwrirAMkqnu5BmRiaDlO95RvngSEXJuFHyDX1O5JEyOlS15YIVZIGemIypxVdC
+         InIA==
+X-Gm-Message-State: AAQBX9d5g0NnV9RbjbbsQWA+W0XaKV8yw7+ofqnK5LEJZ0RU7DNiufMU
+	jEa0y74YCiLCoVKEs0/0ALn+QPQm7U8Glw==
+X-Google-Smtp-Source: AKy350bkQdu9bfzEgC5LA+e3iynA8Y9OsFS72xv6D/ptUBPM9nqy2rvhUWjHLw16Ipr457UQK/VaWA==
+X-Received: by 2002:a17:902:db03:b0:1a1:b15a:d916 with SMTP id m3-20020a170902db0300b001a1b15ad916mr41413235plx.3.1680411432603;
+        Sat, 01 Apr 2023 21:57:12 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9181:d380::17e4])
+        by smtp.gmail.com with ESMTPSA id u6-20020a17090282c600b001a1abc93eabsm4097772plz.226.2023.04.01.21.57.11
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sat, 01 Apr 2023 21:57:12 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
-Date: Sat, 1 Apr 2023 11:34:42 -0700
-Message-ID: <CAMKF1soWfv0v7-y8SJnKi3iUs3iXmsHXgrGV9OCVEq_8nLogTQ@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH] freeglut: Add packageconfigs for x11/wayland/gles
-To: Martin Jansa <martin.jansa@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][PATCH] mpv: Upgrade to 0.35.1
+Date: Sat,  1 Apr 2023 21:57:10 -0700
+Message-Id: <20230402045710.319530-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.40.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 01 Apr 2023 18:35:10 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101872
+ <openembedded-devel@lists.openembedded.org>; Sun, 02 Apr 2023 04:57:16 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101873
 
-On Sat, Apr 1, 2023 at 9:18=E2=80=AFAM Martin Jansa <martin.jansa@gmail.com=
-> wrote:
->
-> On Tue, Jan 10, 2023 at 11:25=E2=80=AFAM Khem Raj <raj.khem@gmail.com> wr=
-ote:
->>
->> helps it compiling on on different openGL implementations which may not
->> implement fulll openGL specs
->>
->> Signed-off-by: Khem Raj <raj.khem@gmail.com>
->> ---
->>  .../freeglut/freeglut_3.4.0.bb                 | 18 ++++++++++++++----
->>  1 file changed, 14 insertions(+), 4 deletions(-)
->>
->> diff --git a/meta-oe/recipes-graphics/freeglut/freeglut_3.4.0.bb b/meta-=
-oe/recipes-graphics/freeglut/freeglut_3.4.0.bb
->> index 627ce23544..86b94149bc 100644
->> --- a/meta-oe/recipes-graphics/freeglut/freeglut_3.4.0.bb
->> +++ b/meta-oe/recipes-graphics/freeglut/freeglut_3.4.0.bb
->> @@ -6,14 +6,24 @@ LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D89c0b58a3e0=
-1ce3d8254c9f59e78adfb"
->>  SRC_URI =3D "https://sourceforge.net/projects/${BPN}/files/${BPN}/${PV}=
-/${BPN}-${PV}.tar.gz"
->>  SRC_URI[sha256sum] =3D "3c0bcb915d9b180a97edaebd011b7a1de54583a838644dc=
-d42bb0ea0c6f3eaec"
->>
->> -inherit cmake features_check
->> +inherit cmake features_check pkgconfig
->>
->> -# depends on virtual/libx11, virtual/libgl
->> -REQUIRED_DISTRO_FEATURES =3D "x11 opengl"
->> +# depends on virtual/libgl
->> +REQUIRED_DISTRO_FEATURES =3D "opengl"
->
->
-> This doesn't seem correct as there is still libxi dependency which requir=
-es x11 in DISTRO_FEATURES.
->
-> Are you building freeglut without x11 (and want to support this) or shoul=
-d I just return x11 to REQUIRED_DISTRO_FEATURES ?
->
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ .../mplayer/{mpv_0.34.1.bb => mpv_0.35.1.bb}    | 17 +++++++----------
+ 1 file changed, 7 insertions(+), 10 deletions(-)
+ rename meta-oe/recipes-multimedia/mplayer/{mpv_0.34.1.bb => mpv_0.35.1.bb} (88%)
 
-yes for some meta-ti machines ( e.g. beaglebone ), I build without
-x11, I wonder if libxi depenendency can be made optional.
+diff --git a/meta-oe/recipes-multimedia/mplayer/mpv_0.34.1.bb b/meta-oe/recipes-multimedia/mplayer/mpv_0.35.1.bb
+similarity index 88%
+rename from meta-oe/recipes-multimedia/mplayer/mpv_0.34.1.bb
+rename to meta-oe/recipes-multimedia/mplayer/mpv_0.35.1.bb
+index c600e88f88..cfb461a4c3 100644
+--- a/meta-oe/recipes-multimedia/mplayer/mpv_0.34.1.bb
++++ b/meta-oe/recipes-multimedia/mplayer/mpv_0.35.1.bb
+@@ -11,18 +11,14 @@ DEPENDS = " \
+     libass \
+ "
+ 
+-DEPENDS += " \
+-    ${@bb.utils.contains('DISTRO_FEATURES', 'x11', ' virtual/libx11 xsp libxv libxscrnsaver libxinerama', '', d)} \
+-"
+-
+ LICENSE = "GPL-2.0-or-later"
+ LIC_FILES_CHKSUM = "file://LICENSE.GPL;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+ 
+-SRCREV_mpv = "349e437466163cb52f7d0aa227d4606edd9db501"
+-SRC_URI = "git://github.com/mpv-player/mpv;name=mpv;branch=release/0.34;protocol=https \
+-           https://waf.io/waf-2.0.20;name=waf;subdir=git \
++SRCREV_mpv = "140ec21c89d671d392877a7f3b91d67e7d7b9239"
++SRC_URI = "git://github.com/mpv-player/mpv;name=mpv;branch=release/0.35;protocol=https \
++           https://waf.io/waf-2.0.25;name=waf;subdir=git \
+            "
+-SRC_URI[waf.sha256sum] = "bf971e98edc2414968a262c6aa6b88541a26c3cd248689c89f4c57370955ee7f"
++SRC_URI[waf.sha256sum] = "21199cd220ccf60434133e1fd2ab8c8e5217c3799199c82722543970dc8e38d5"
+ 
+ S = "${WORKDIR}/git"
+ 
+@@ -46,7 +42,7 @@ PACKAGECONFIG ??= " \
+     ${@bb.utils.filter('DISTRO_FEATURES', 'opengl', d)} \
+ "
+ 
+-PACKAGECONFIG[x11] = "--enable-x11,--disable-x11,virtual/libx11"
++PACKAGECONFIG[x11] = "--enable-x11,--disable-x11,virtual/libx11 xsp libxv libxscrnsaver libxinerama libxpresent libxext"
+ PACKAGECONFIG[xv] = "--enable-xv,--disable-xv,libxv"
+ PACKAGECONFIG[opengl] = "--enable-gl,--disable-gl,virtual/libgl"
+ PACKAGECONFIG[egl] = "--enable-egl,--disable-egl,virtual/egl"
+@@ -103,7 +99,7 @@ EXTRA_OECONF = " \
+ "
+ 
+ link_waf() {
+-    ln -s waf-2.0.20 ${S}/waf
++    ln -s waf-2.0.25 ${S}/waf
+ }
+ do_unpack[postfuncs] += "link_waf"
+ 
+@@ -111,5 +107,6 @@ FILES:${PN} += " \
+     ${datadir}/icons \
+     ${datadir}/zsh \
+     ${datadir}/bash-completion \
++    ${datadir}/metainfo \
+     "
+ EXCLUDE_FROM_WORLD = "${@bb.utils.contains("LICENSE_FLAGS_ACCEPTED", "commercial", "0", "1", d)}"
+-- 
+2.40.0
 
-
->> +PACKAGECONFIG ?=3D "${@bb.utils.filter('DISTRO_FEATURES', 'wayland x11'=
-, d)}"
->> +PACKAGECONFIG[gles] =3D "-DFREEGLUT_GLES=3DON,-DFREEGLUT_GLES=3DOFF,"
->> +PACKAGECONFIG[wayland] =3D "-DFREEGLUT_WAYLAND=3DON,-DFREEGLUT_WAYLAND=
-=3DOFF,libxkbcommon"
->> +PACKAGECONFIG[demos] =3D "-DFREEGLUT_BUILD_DEMOS=3DON,-DFREEGLUT_BUILD_=
-DEMOS=3DOFF,"
->> +PACKAGECONFIG[x11] =3D ",,virtual/libx11 libice libxmu libglu libxrandr=
- libxext"
->>  # Do not use -fno-common, check back when upgrading to new version it m=
-ight not be needed
->>  CFLAGS +=3D "-fcommon"
->>
->>  PROVIDES +=3D "mesa-glut"
->>
->> -DEPENDS =3D "virtual/libx11 libxmu libxi virtual/libgl libglu libxrandr=
-"
->> +DEPENDS =3D "virtual/libgl libxi"
->> +
->> +do_install:append() {
->> +    # Remove buildpaths
->> +    sed -i "s#${RECIPE_SYSROOT}##g" ${D}${libdir}/cmake/FreeGLUT/FreeGL=
-UTTargets.cmake
->> +}
->> --
->> 2.39.0
->>
->>
->> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->> Links: You receive all messages sent to this group.
->> View/Reply Online (#100516): https://lists.openembedded.org/g/openembedd=
-ed-devel/message/100516
->> Mute This Topic: https://lists.openembedded.org/mt/96174302/3617156
->> Group Owner: openembedded-devel+owner@lists.openembedded.org
->> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [=
-Martin.Jansa@gmail.com]
->> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->>
 
