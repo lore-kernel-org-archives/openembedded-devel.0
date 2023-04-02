@@ -2,97 +2,106 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id ABFDEC761AF
-	for <webhook@archiver.kernel.org>; Sun,  2 Apr 2023 17:40:59 +0000 (UTC)
-Received: from mail-pj1-f54.google.com (mail-pj1-f54.google.com [209.85.216.54])
- by mx.groups.io with SMTP id smtpd.web11.50124.1680457250352462663
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B172FC76196
+	for <webhook@archiver.kernel.org>; Sun,  2 Apr 2023 17:46:09 +0000 (UTC)
+Received: from mail-pj1-f50.google.com (mail-pj1-f50.google.com [209.85.216.50])
+ by mx.groups.io with SMTP id smtpd.web11.50262.1680457561614014914
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 02 Apr 2023 10:40:50 -0700
+ Sun, 02 Apr 2023 10:46:01 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=mPdnTA8b;
- spf=pass (domain: gmail.com, ip: 209.85.216.54, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f54.google.com with SMTP id d13so25157690pjh.0
-        for <openembedded-devel@lists.openembedded.org>; Sun, 02 Apr 2023 10:40:50 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=iRiM3CAZ;
+ spf=pass (domain: gmail.com, ip: 209.85.216.50, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f50.google.com with SMTP id e15-20020a17090ac20f00b0023d1b009f52so30319012pjt.2
+        for <openembedded-devel@lists.openembedded.org>; Sun, 02 Apr 2023 10:46:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112; t=1680457249;
+        d=gmail.com; s=20210112; t=1680457561;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=ZJIPeuVXtenD8vWmF8ylYDho1g99eXnp+h6j5U9tslM=;
-        b=mPdnTA8brlMZPUEZvL2pnZ9cVB2TsJzFtWqZ8V3X7nh2bTDlGWuApA6qI6PJciFN6V
-         OyPt5I2Yyg+zU33GO8XaQ9DPfxq4j7TS72c5WAa4IbDulOhh12QHhmZU3T9oo/RnZ3Wl
-         EQ1WZicklDMugDQbrw8sP8kS3+yZsPKLYgfwpl0ifPsWlEtM51KGomtt4EF0HKeYeewu
-         s0lETybRSJ8411UgWDvpC/hGznHa3+3Rk11iysegsE0uzWni71PGxOvOdl64zwZMFkJL
-         j77KVLEQAM/pP2wnhp+Q++c6S01m2IpSTMdOArrX26JIJBwgIISCvD5cq1BaP1BUx6v/
-         d+VA==
+        bh=oFDB9LhVbwvi+GFuJU7TlQL47vvccvecXu0iQDtacqw=;
+        b=iRiM3CAZjfcFo21JJ/HhJTyUXsvRYzrpOkW6SjSWTIYwVIOIrVQRF7MjUPfoEdQV18
+         a2rOH9T3kLXYWhKwA8OXyyzuoLZoBF2cHYyCjJoL9/8nO8+RjRQK5gfi7znr3BglSypB
+         4w4Ni4GtnPi3sEbyaYruClNajJ/6XHlyOOKts3DJwS6JJNrBPBQOhoRhs8XZjpfI8GBg
+         /2vlKRD9N9zts7N7j7vs68VnoPvWtzODsHSiwGglQfXDxLaJ8Urqo9BwDJHGx6NiL6T3
+         Kxco7lRd34uma5xPjsmSbA1DJDqf0utOl33MN3sXy19ThBaIaWSMv01xYEC0pW+dLbSP
+         J6jw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112; t=1680457249;
+        d=1e100.net; s=20210112; t=1680457561;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=ZJIPeuVXtenD8vWmF8ylYDho1g99eXnp+h6j5U9tslM=;
-        b=ddZSNwW+l0vDLSWmj9o48QX5HCBcfZ38uyqDVGtGNQuaCOq9IDOOehNweUsK8+k2N1
-         LAml3iVVQfXVBhNE/OZFAvGKlaXg/Wd4DP2ySArck6na1NKRclzlYCQsKECvP/PGIsp7
-         SUe3X4Kfc3qqku765fYm3RCmUR0L/a8pPKno3/cYyc7VTpzZYqAmZaN1/ZsdIjECPYtN
-         mYegnKWj+iXgS9u45k86FKzr9mHkk0HiV8MiW5lDJ8tkNthLNFP3JELvMaVl2STuVHZk
-         zubeId9nk4IM6n8CbhmHbR1VRXZv7jW4pxlMw3VI8d9Tw4n7nRg02XYYP8f83DCOowvL
-         nazA==
-X-Gm-Message-State: AAQBX9cZAB5IjxKV7CR6nZ/TKl5Ybcub71P7CH3NVQKGto1e5kZ1C/PD
-	R7k5Bng7kR8/F1CQdW/tCDrpLOmR02wXSg==
-X-Google-Smtp-Source: AKy350aVg642CjKVJByVLxnvi+VXFsOaSnWKx2Ql6hkescJ411CpMXFKgcth0tawpCQgpEZxgUtrqw==
-X-Received: by 2002:a17:902:e749:b0:19d:244:a3a8 with SMTP id p9-20020a170902e74900b0019d0244a3a8mr41121780plf.10.1680457249204;
-        Sun, 02 Apr 2023 10:40:49 -0700 (PDT)
+        bh=oFDB9LhVbwvi+GFuJU7TlQL47vvccvecXu0iQDtacqw=;
+        b=MsjNUzex0e9j6D9Ion9HUaMQ9HOzlrBFmrH1d390AGzgHZRXe82YapFU1Pp01kLXgB
+         eqkymR0SzKelI9/2e+GtwYXrVsyQQ8sLQVA4wXq1+SIwk4VPWq7lLpwgIae+da0vDxjh
+         5CzXFmcdh1kiNk7l8sRdtD5hIKuDxS6Pjhuxk+eKpvlJuNItMlPIAE4paiiZwt4CBOYr
+         qr81Bw/2p7aZE7MTYZ74wfCbuH07ENs05gzltT/2oXVcF7+QbcuBTDgSYcS0A4Huu95D
+         vOWqt84uFMOiUY57V22KT8L+jC55FCpGiM9/GPWdJoxhSHRo8606Q8fOOK76CRmbga7G
+         EZBg==
+X-Gm-Message-State: AAQBX9ePndowhgbya9K92Tn71RqoOGYekrdQx4ayvRwJo99SlX5OoE0t
+	gLbj3P2hqUER5ehd2L3bLCvHMwt9KfWBEA==
+X-Google-Smtp-Source: AKy350YssZiLVL6B3zwL5/Itjem4BZYeMQWe36Q/6Zw5CGLcSP3YXmmAvoB+TYrmiInJt0nRrtbwOg==
+X-Received: by 2002:a17:90b:4d83:b0:23f:9a73:c20b with SMTP id oj3-20020a17090b4d8300b0023f9a73c20bmr37513345pjb.18.1680457560543;
+        Sun, 02 Apr 2023 10:46:00 -0700 (PDT)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9181:d380::17e4])
-        by smtp.gmail.com with ESMTPSA id jj20-20020a170903049400b0019309be03e7sm5066669plb.66.2023.04.02.10.40.48
+        by smtp.gmail.com with ESMTPSA id gq16-20020a17090b105000b002309279baf8sm8259548pjb.43.2023.04.02.10.45.59
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 02 Apr 2023 10:40:48 -0700 (PDT)
+        Sun, 02 Apr 2023 10:46:00 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH] libidn: Update largefile m4 macros
-Date: Sun,  2 Apr 2023 10:40:46 -0700
-Message-Id: <20230402174046.2217832-1-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH] emacs: Fix build with autconf 2.72+
+Date: Sun,  2 Apr 2023 10:45:58 -0700
+Message-Id: <20230402174558.2227109-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.40.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 02 Apr 2023 17:40:59 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101876
-
-This is a backport from gnulib, its needed for configure to work with
-latest autoconf 2.72
+ <openembedded-devel@lists.openembedded.org>; Sun, 02 Apr 2023 17:46:09 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101877
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...largefile.m4-Sync-with-latest-gnulib.patch | 390 ++++++++++++++++++
- .../recipes-extended/libidn/libidn_1.41.bb    |   1 +
+ meta-oe/recipes-support/emacs/emacs_28.2.bb   |   1 +
+ ...rgefile.m4-Update-from-latest-gnulib.patch | 390 ++++++++++++++++++
  2 files changed, 391 insertions(+)
- create mode 100644 meta-oe/recipes-extended/libidn/libidn/0001-largefile.m4-Sync-with-latest-gnulib.patch
+ create mode 100644 meta-oe/recipes-support/emacs/files/0001-largefile.m4-Update-from-latest-gnulib.patch
 
-diff --git a/meta-oe/recipes-extended/libidn/libidn/0001-largefile.m4-Sync-with-latest-gnulib.patch b/meta-oe/recipes-extended/libidn/libidn/0001-largefile.m4-Sync-with-latest-gnulib.patch
+diff --git a/meta-oe/recipes-support/emacs/emacs_28.2.bb b/meta-oe/recipes-support/emacs/emacs_28.2.bb
+index 7b0a422be6..df210ef5e9 100644
+--- a/meta-oe/recipes-support/emacs/emacs_28.2.bb
++++ b/meta-oe/recipes-support/emacs/emacs_28.2.bb
+@@ -5,6 +5,7 @@ LICENSE = "GPL-3.0-only"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=1ebbd3e34237af26da5dc08a4e440464"
+ 
+ SRC_URI = "https://ftp.gnu.org/pub/gnu/emacs/emacs-${PV}.tar.xz \
++           file://0001-largefile.m4-Update-from-latest-gnulib.patch \
+           "
+ SRC_URI:append:class-target = " file://usemake-docfile-native.patch"
+ 
+diff --git a/meta-oe/recipes-support/emacs/files/0001-largefile.m4-Update-from-latest-gnulib.patch b/meta-oe/recipes-support/emacs/files/0001-largefile.m4-Update-from-latest-gnulib.patch
 new file mode 100644
-index 0000000000..1dbf2955c9
+index 0000000000..72c0c0e413
 --- /dev/null
-+++ b/meta-oe/recipes-extended/libidn/libidn/0001-largefile.m4-Sync-with-latest-gnulib.patch
++++ b/meta-oe/recipes-support/emacs/files/0001-largefile.m4-Update-from-latest-gnulib.patch
 @@ -0,0 +1,390 @@
-+From 66c1646a3f12836846a054ebd2c427e30c93d3a5 Mon Sep 17 00:00:00 2001
++From c2bea3d033b5abd44698722d8eedc2b87373b33b Mon Sep 17 00:00:00 2001
 +From: Khem Raj <raj.khem@gmail.com>
-+Date: Sun, 2 Apr 2023 10:37:15 -0700
-+Subject: [PATCH] largefile.m4: Sync with latest gnulib
++Date: Sun, 2 Apr 2023 10:42:43 -0700
++Subject: [PATCH] largefile.m4: Update from latest gnulib
 +
-+This ensures it can work with latest autoconf 2.72 release ( upcoming )
++brings in latest largefile specific changes which autoconf 2.72+ requires
 +
-+Upstream-Status: Backport [it will be not needed with 1.42 release]
++Upstream-Status: Inappropriate [Drop it with new emacs release which has it]
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +---
-+ gl/m4/largefile.m4 | 330 ++++++++++++++++++++++++++++++++++++---------
++ m4/largefile.m4 | 330 ++++++++++++++++++++++++++++++++++++++----------
 + 1 file changed, 263 insertions(+), 67 deletions(-)
 +
-+diff --git a/gl/m4/largefile.m4 b/gl/m4/largefile.m4
++diff --git a/m4/largefile.m4 b/m4/largefile.m4
 +index 3e8b5e3..7fb81b8 100644
-+--- a/gl/m4/largefile.m4
-++++ b/gl/m4/largefile.m4
++--- a/m4/largefile.m4
+++++ b/m4/largefile.m4
 +@@ -1,7 +1,7 @@
 + # Enable large files on systems where this is not the default.
 + # Enable support for files on Linux file systems with 64-bit inode numbers.
@@ -466,18 +475,6 @@ index 0000000000..1dbf2955c9
 +-- 
 +2.40.0
 +
-diff --git a/meta-oe/recipes-extended/libidn/libidn_1.41.bb b/meta-oe/recipes-extended/libidn/libidn_1.41.bb
-index b4303a1623..17ffc6cdc5 100644
---- a/meta-oe/recipes-extended/libidn/libidn_1.41.bb
-+++ b/meta-oe/recipes-extended/libidn/libidn_1.41.bb
-@@ -18,6 +18,7 @@ inherit pkgconfig autotools gettext texinfo gtk-doc
- 
- SRC_URI = "${GNU_MIRROR}/libidn/${BPN}-${PV}.tar.gz \
-            file://dont-depend-on-help2man.patch \
-+           file://0001-largefile.m4-Sync-with-latest-gnulib.patch \
-            "
- 
- #SRC_URI[md5sum] = "813c7b268d1051ca02c3610986126f38"
 -- 
 2.40.0
 
