@@ -2,57 +2,57 @@ Return-Path: <ticotimo@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DBC62C76196
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DA65FC7619A
 	for <webhook@archiver.kernel.org>; Sun,  2 Apr 2023 22:30:10 +0000 (UTC)
-Received: from mail-pg1-f181.google.com (mail-pg1-f181.google.com [209.85.215.181])
- by mx.groups.io with SMTP id smtpd.web11.56494.1680474601046998486
+Received: from mail-pl1-f169.google.com (mail-pl1-f169.google.com [209.85.214.169])
+ by mx.groups.io with SMTP id smtpd.web11.56500.1680474608937530557
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 02 Apr 2023 15:30:01 -0700
+ Sun, 02 Apr 2023 15:30:09 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=Yz5LoFnp;
- spf=pass (domain: gmail.com, ip: 209.85.215.181, mailfrom: ticotimo@gmail.com)
-Received: by mail-pg1-f181.google.com with SMTP id d22so16389182pgw.2
-        for <openembedded-devel@lists.openembedded.org>; Sun, 02 Apr 2023 15:30:00 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=bYCnCNTd;
+ spf=pass (domain: gmail.com, ip: 209.85.214.169, mailfrom: ticotimo@gmail.com)
+Received: by mail-pl1-f169.google.com with SMTP id u10so26274732plz.7
+        for <openembedded-devel@lists.openembedded.org>; Sun, 02 Apr 2023 15:30:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112; t=1680474600;
+        d=gmail.com; s=20210112; t=1680474608;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=5rGfd6Z5zhiiTfeHMj/4lRjQ5mQhS9Y+lGiSWnkA680=;
-        b=Yz5LoFnpWnRZwq5QytkkYC7S9gYumMCNdcmLenRUqpdi2McZzZuMX74Q2DYjfL7I92
-         kGH+VRwhNAFjbhkTXu1W2ZD244eabhxKCxZjzQBQxF7Ee7gQXvlnCsK0hWzJdro5lHqD
-         r5anTcS4dTvhqPau72qo9h2YUUQY+s1Cs6dMpCOFXRpwFETieQ+sVICGE4hHcE/GU+L4
-         +hregqucHg1kz4hKe5y3V0kz+LxMn9HBEGBMFxmG8k/P9J0fUHSmk51hGfCUNUVYZQPH
-         LS36c/nWCPtHbP1lawxVPI62LEnT66Jlkv5IWqSsvR0kWANDschrpYmQ1KhfISTDVYif
-         0v+Q==
+        bh=uGP1/QIoou6A5NHdBvcpU2teH4LQ/zmHwO6R1QGKpBM=;
+        b=bYCnCNTdJzFz7LWvraAu7D6ekeTRGT9YoDHJNVL47A6Db1MMB0K5NNsRJrTl9dU6nk
+         xMFFFl4t+TaA/1wGYqZD5W82HRyOx0ei/08VMfnqm4zQ1Uazyj7wk0/O6vMYJGUSZxyA
+         IYSqdCS+ESfMreNYq6/xcuk1smlmDo4kQvdt4bxd27ieVnuLFBX1qVuPnFC0U1cVTRv1
+         +knSvXlQieQSHfZIOKGAqsA9QczkcosUojM4eh+hDb01J2gcVMszRmA7QWRTYTKrSHfV
+         wYW1POF6DMad9rydB1MYfvOrljg4rpv1uGTJQ76qLcx/X1OYjHsh3GOYeWqxyNX7/Ubc
+         a6ng==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112; t=1680474600;
+        d=1e100.net; s=20210112; t=1680474608;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=5rGfd6Z5zhiiTfeHMj/4lRjQ5mQhS9Y+lGiSWnkA680=;
-        b=oukmdNqaYlfkeQVitFdQMBDNM2aAoPYQNPCuxNB/FmZO38FaNqNrCNHOdNhuP9Nc1R
-         87gAi2INq+UuPm/cZaxvceL8SXtqja8OVShZsaPuFrMGWaL0spyjklhzRUuVUHgmHnoN
-         z+PSVAA0C0RUPsNbLfrbWsDYugp9M2kwIpz6not8LCjD86Ru2H6nlZ/igcqjDESwOjoU
-         sL82KbXtkR8IUEhZpnK4WNjV1hQemzI+TOapFoJJJff8l7V67yZRh0fs1razm7RFb9Aw
-         Qne2DaS7NvTXdN9AKTFCBnLA9PTNHW+WEyThQ3KbHlvQbfYKwt3Mv/31fG+iQBI89rAS
-         Tjhg==
-X-Gm-Message-State: AAQBX9ftPlp/812qKF1BGysZlowCSaOttPp8qja+9Z+usY3UJHG52p/8
-	DS9pcNAF11Yn/me4gE62+Pm7IL7oPI8=
-X-Google-Smtp-Source: AKy350Z14P+hleTn0lqEEGCnxX6I9CpmjbytWFhP9LS+IDTatzUDMB38AFD8aCqSVnL4DR1xCyrbNg==
-X-Received: by 2002:a62:1711:0:b0:62d:dad9:3d74 with SMTP id 17-20020a621711000000b0062ddad93d74mr11301304pfx.23.1680474599936;
-        Sun, 02 Apr 2023 15:29:59 -0700 (PDT)
+        bh=uGP1/QIoou6A5NHdBvcpU2teH4LQ/zmHwO6R1QGKpBM=;
+        b=GDaTuTd+vBNZqwfqnrxeDZEh3M2v6As5DS7RPRTH0BqxSfPPsNQ3KuMAUjxZmjK+rA
+         V3/pOPHD25Tfzf8ieoFyKyxEzQ0SFfdvWxXRvzSd976kWblX+SJzz1iBeOErE1zBFWgG
+         1yLcwrIW7wmNJ3ZOxU/9VZbg3iV6DeMLWDbYDOrd6ehew4xKRA96RgGemrVJcTzu7eMq
+         KSd98c4quw5dKhrnBMF7a2Zo9PwDsGlkXQRwudDvLeE47Io87z8qQ0f03GnjVX6noZB1
+         8rnjh2VXKGIdS7vFnK/WE+2FzrAFesM9khoKdIRloGSVBN121MYwA9PJd25Rimvh0HS2
+         6L8Q==
+X-Gm-Message-State: AO0yUKX9y05s0xoOPA2Xe9uHtM83qpAU1HzS3JHrnyqaozhB+3sRXdrX
+	nlpY48v21srdlLNpTAZ9E+g1Fie8bhI=
+X-Google-Smtp-Source: AK7set+Bm2YUDFm1GORx3YB36Zgh8CqZR2s+w3aUl8+UcU83/ytiYjSIjtdgbbrrGHgoBsszUD7Uqg==
+X-Received: by 2002:a05:6a20:4f24:b0:d6:a0a1:6c6c with SMTP id gi36-20020a056a204f2400b000d6a0a16c6cmr24537312pzb.8.1680474608015;
+        Sun, 02 Apr 2023 15:30:08 -0700 (PDT)
 Received: from chiron.. ([2601:1c0:ca00:cea0:c5a7:cc15:fd65:db07])
-        by smtp.gmail.com with ESMTPSA id x47-20020a056a000bef00b0062cc53e5db9sm5404357pfu.197.2023.04.02.15.29.59
+        by smtp.gmail.com with ESMTPSA id x47-20020a056a000bef00b0062cc53e5db9sm5404357pfu.197.2023.04.02.15.30.07
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 02 Apr 2023 15:29:59 -0700 (PDT)
+        Sun, 02 Apr 2023 15:30:07 -0700 (PDT)
 From: Tim Orling <ticotimo@gmail.com>
 X-Google-Original-From: Tim Orling <tim.orling@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH 02/11] span-lite: do not inherit ptest
-Date: Sun,  2 Apr 2023 15:29:34 -0700
-Message-Id: <7013d64531ae0214cabe338c5b37c05ba158198c.1680473253.git.tim.orling@konsulko.com>
+Subject: [meta-python][PATCH 07/11] python3-aspectlib: fix ptest
+Date: Sun,  2 Apr 2023 15:29:39 -0700
+Message-Id: <fba331aeb47d0113f5d5c51008a60bbac9d5b2cd.1680473253.git.tim.orling@konsulko.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <cover.1680473253.git.tim.orling@konsulko.com>
 References: <cover.1680473253.git.tim.orling@konsulko.com>
@@ -62,24 +62,43 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sun, 02 Apr 2023 22:30:10 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101880
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101885
 
-This recipe provides no run-ptest script.
+* ptest RDEPENDS on pytest
+* Use python3-unittest-automake-output instead of using sed to reformat
+  the output use this new module.
 
 Signed-off-by: Tim Orling <tim.orling@konsulko.com>
 ---
- meta-oe/recipes-support/span-lite/span-lite_0.10.3.bb | 1 -
- 1 file changed, 1 deletion(-)
+ .../recipes-devtools/python/python3-aspectlib/run-ptest       | 2 +-
+ .../recipes-devtools/python/python3-aspectlib_2.0.0.bb        | 4 +++-
+ 2 files changed, 4 insertions(+), 2 deletions(-)
 
-diff --git a/meta-oe/recipes-support/span-lite/span-lite_0.10.3.bb b/meta-oe/recipes-support/span-lite/span-lite_0.10.3.bb
-index 0d9a8c93d..15380f5d7 100644
---- a/meta-oe/recipes-support/span-lite/span-lite_0.10.3.bb
-+++ b/meta-oe/recipes-support/span-lite/span-lite_0.10.3.bb
-@@ -9,4 +9,3 @@ SRCREV = "cbb9c3c5162a0d7018c7b3e053153a04d4fbbbb9"
- S = "${WORKDIR}/git"
+diff --git a/meta-python/recipes-devtools/python/python3-aspectlib/run-ptest b/meta-python/recipes-devtools/python/python3-aspectlib/run-ptest
+index b63c4de0d..8d2017d39 100644
+--- a/meta-python/recipes-devtools/python/python3-aspectlib/run-ptest
++++ b/meta-python/recipes-devtools/python/python3-aspectlib/run-ptest
+@@ -1,3 +1,3 @@
+ #!/bin/sh
  
- inherit cmake
--inherit ptest
+-pytest -o log_cli=true -o log_cli_level=INFO | sed -e 's/\[...%\]//g'| sed -e 's/PASSED/PASS/g'| sed -e 's/FAILED/FAIL/g'|sed -e 's/SKIPPED/SKIP/g'| awk '{if ($NF=="PASS" || $NF=="FAIL" || $NF=="SKIP" || $NF=="XFAIL" || $NF=="XPASS"){printf "%s: %s\n", $NF, $0}else{print}}'| awk '{if ($NF=="PASS" || $NF=="FAIL" || $NF=="SKIP" || $NF=="XFAIL" || $NF=="XPASS") {$NF="";print $0}else{print}}'
++pytest --automake
+diff --git a/meta-python/recipes-devtools/python/python3-aspectlib_2.0.0.bb b/meta-python/recipes-devtools/python/python3-aspectlib_2.0.0.bb
+index 416b031c5..d2b0864ca 100644
+--- a/meta-python/recipes-devtools/python/python3-aspectlib_2.0.0.bb
++++ b/meta-python/recipes-devtools/python/python3-aspectlib_2.0.0.bb
+@@ -21,8 +21,10 @@ do_install_ptest() {
+ }
+ 
+ RDEPENDS:${PN}-ptest += "\
+-    python3-tornado \
+     python3-process-tests \
++    python3-pytest \
++    python3-tornado \
++    python3-unittest-automake-output \
+ "
+ 
+ RDEPENDS:${PN} += "python3-core python3-fields"
 -- 
 2.34.1
 
