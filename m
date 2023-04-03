@@ -2,68 +2,71 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 458EFC761A6
-	for <webhook@archiver.kernel.org>; Mon,  3 Apr 2023 10:02:04 +0000 (UTC)
-Received: from mail1.bemta32.messagelabs.com (mail1.bemta32.messagelabs.com [195.245.230.65])
- by mx.groups.io with SMTP id smtpd.web11.66229.1680516123001235697
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1F00AC76196
+	for <webhook@archiver.kernel.org>; Mon,  3 Apr 2023 10:02:24 +0000 (UTC)
+Received: from mail1.bemta32.messagelabs.com (mail1.bemta32.messagelabs.com [195.245.230.2])
+ by mx.groups.io with SMTP id smtpd.web10.66201.1680516143125791139
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 03 Apr 2023 03:02:03 -0700
+ Mon, 03 Apr 2023 03:02:23 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=JkEmF9HX;
- spf=pass (domain: fujitsu.com, ip: 195.245.230.65, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=vnTEN593;
+ spf=pass (domain: fujitsu.com, ip: 195.245.230.2, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1680516121; i=@fujitsu.com;
-	bh=z0AjFdh6xhqNTzwB05PA8LVFcRZMxbBekC/rQdM7V8M=;
-	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=JkEmF9HXewx0jnLxME+Eee9poLJv0to/N7/wOuBvHl9ehYYdGhqKzk8uW7ORpAIZ3
-	 IXjN+paTYhz3WwCjSIiXpCDtLQ2YH4Kz4Rj7eRkvRj/D8lzSFPHl1QlQTqWwJxNbfr
-	 PWJs6a17Pvv+z9YtaV4t4HvxBWCcuHiUWl1bImKvGDHzru8Ni6twTtrECOtWgF2o/V
-	 9PA/5p/jBiAnxv6LOgNjvW5xLwFoVm4pJX4KdmEFxvqiparLbOjpxzeA8qcFKBEFF8
-	 gi3rsGIFSgr/QrmqU1esOYoSzCAF6aYKQ+MEWBr2q/YdYNT69D6YFU7Dx/5un/XtkC
-	 HM6R2tSidSxow==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFlrPIsWRWlGSWpSXmKPExsViZ8ORpCuxRCv
-  FYOoSBYuLh5cyOzB6nNu4gjGAMYo1My8pvyKBNaPl7Q3mgnM8Fb+uXmJsYNzD3cXIxSEk8JBR
-  Ys3+8ywQzhUmiavf9jNCOLsZJTovf2HtYuTkYBOQkrhx/z8biC0ioC+xdPYeZhCbWUBF4sXvH
-  nYQW1jAX+LstbtgNgtQ/N7/KSwgNq+Ak8S1a8/BbAkBBYkpD98zQ8QFJU7OfMICMUdC4uCLF8
-  wQNYoSsy83Q9VXSDROP8QEYatJXD23iXkCI/8sJO2zkLQvYGRaxWhWnFpUllqka2igl1SUmZ5
-  RkpuYmaOXWKWbqJdaqlueWlyia6iXWF6sl1pcrFdcmZuck6KXl1qyiREYjinFjMk7GK/2/dU7
-  xCjJwaQkyitYr5UixJeUn1KZkVicEV9UmpNafIhRhoNDSYJ33iKgnGBRanpqRVpmDjA2YNISH
-  DxKIryKC4DSvMUFibnFmekQqVOMilLivKdB+gRAEhmleXBtsHi8xCgrJczLyMDAIMRTkFqUm1
-  mCKv+KUZyDUUmYV2wx0BSezLwSuOmvgBYzAS1ujdIAWVySiJCSamBinnLmhdufsn3mU6R/O0d
-  k6NoIeB68u7EvwPRVf+rBFb2ZnN9PWtmtEFee8OjOQvYvDSIffLoe1jBVtuwXLVKv3N/I7nmD
-  //XxmcZzX3aeNO+66rSkaunTXWGRDj+3Fn//M0/6KF/DrS/yL2o1f+jXvOn+8rDVivHt5WWiK
-  22WVzmGqiUVMD5beHG+98oz/hfv/azW/G3SW3up3H3O6wsinL92uG5afLlWcRJriUSLzQl2W4
-  P7gou08zm49O7IlF+4d8cuuTrs+gdeZf+E2l17wxkWFwerBUaGPX1qnSrC/fn2lsfzZKaFHQy
-  YrM9Wumtxn1jutwKnm2UGXa63DEMETt+LE7jPOO3TrwqFr1JKLMUZiYZazEXFiQBjNSJJQgMA
-  AA==
+	s=170520fj; t=1680516141; i=@fujitsu.com;
+	bh=xhRFf0EpGeUGN0M+mwheKKQ9juSSnJm5awZ3iiWfIqo=;
+	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type;
+	b=vnTEN593MvGAUIjdDkV49qcucPzA+hkljNpmM/Rw5C5VKGFvYaFbhoV309hRirG8x
+	 Y8cNC8mVvhNvsbFyjbqGLHD8EvgZuquE71cRf1mmulfF3URFjaWIn47TnZQCCatyAW
+	 anXrT55bePJgrF3TbLPai1Q9a1o1Tp2VB/dkD+q61Z184Bo2ZCFxTmqlo+40Hy2Ofg
+	 O0I2wnvBQhsEuMp1k77T0eqCDBk8Loxay5RzPIPHJg8c58VAXVgn+F3kctLQRPDxkq
+	 STtOIWJPE7OPVjkqwbFyZwP0mCHK5qTjmrJPgtDF9MXYGHMVxGf3D7YciOuZawiuaM
+	 D7XecSNq8wYvw==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrEIsWRWlGSWpSXmKPExsViZ8MxSVd3iVa
+  KwdJV7BYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8ahBQ/YCl4JVyzouM7YwLhHsIuRi0NI4Amj
+  xOcn89kgnOtMEktn3mSHcHYzSnR9fcPYxcjJwSYgJXHj/n82EFtEQF9i6ew9zCA2s4CKxIvfP
+  ewgtrBAmMTXz//B6lmA4m86P4HV8Ao4SVy//BSsV0JAQWLKw/dgcU4BZ4l/1/YB2RxAy5wkXn
+  4QhCgXlDg58wkLxHgJiYMvXjBDtCpKzL7czAJhV0g0Tj/EBGGrSVw9t4l5AqPgLCTts5C0L2B
+  kWsVoVpxaVJZapGtorJdUlJmeUZKbmJmjl1ilm6iXWqpbnlpcomuol1herJdaXKxXXJmbnJOi
+  l5dasokRGLwpxaxxOxi/9/3VO8QoycGkJMorWK+VIsSXlJ9SmZFYnBFfVJqTWnyIUYaDQ0mCd
+  94ioJxgUWp6akVaZg4wkmDSEhw8SiK8iguA0rzFBYm5xZnpEKlTjLocvY1X9zILseTl56VKif
+  OeBpkhAFKUUZoHNwIW1ZcYZaWEeRkZGBiEeApSi3IzS1DlXzGKczAqCfOKLQaawpOZVwK36RX
+  QEUxAR7RGaYAcUZKIkJJqYNqVt2mTet+uSVvqjN/sVFaoa5/15XWzueyywkZ1n7Y3fWkme+7c
+  DUv57+GU/enG7PLJG+ZuEtPbk7F+zs7P39eaxIuuuWNhZPA769iDp/Fybi6BylGcn/W/eHJ4/
+  al/fufteaENUp/kedcbzXkSME27X9BWVzPqjUDkV9v96rPWTX17giVDfIkvQ3N/Dk+D+S6uh3
+  qPZmV8/PTk3W7hKSs/9gT3RcoFT12nJfC274kQ0+OmF6zlfcJlLkKCj7byzLoutb8sUyfzzTZ
+  716+asvYr6szUJqw5sfTzTY8MxwqDLHHJ/R8knpTkpDH3xC14v/bfFrPMrsxp192mTjjyZre4
+  1YXEG7Xl2eJbvihEhiqxFGckGmoxFxUnAgAEWt6TZQMAAA==
 X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-11.tower-587.messagelabs.com!1680516120!1009517!1
-X-Originating-IP: [62.60.8.98]
+X-Msg-Ref: server-23.tower-591.messagelabs.com!1680516140!1459575!1
+X-Originating-IP: [62.60.8.146]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.104.1; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 21098 invoked from network); 3 Apr 2023 10:02:00 -0000
-Received: from unknown (HELO n03ukasimr03.n03.fujitsu.local) (62.60.8.98)
-  by server-11.tower-587.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 3 Apr 2023 10:02:00 -0000
-Received: from n03ukasimr03.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr03.n03.fujitsu.local (Postfix) with ESMTP id 206621C6
-	for <openembedded-devel@lists.openembedded.org>; Mon,  3 Apr 2023 11:02:00 +0100 (BST)
+Received: (qmail 20665 invoked from network); 3 Apr 2023 10:02:21 -0000
+Received: from unknown (HELO n03ukasimr02.n03.fujitsu.local) (62.60.8.146)
+  by server-23.tower-591.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 3 Apr 2023 10:02:21 -0000
+Received: from n03ukasimr02.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTP id B1FB11009B6
+	for <openembedded-devel@lists.openembedded.org>; Mon,  3 Apr 2023 11:02:20 +0100 (BST)
 Received: from R01UKEXCASM121.r01.fujitsu.local (R01UKEXCASM121 [10.183.43.173])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by n03ukasimr03.n03.fujitsu.local (Postfix) with ESMTPS id 1575F1B0
-	for <openembedded-devel@lists.openembedded.org>; Mon,  3 Apr 2023 11:02:00 +0100 (BST)
+	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTPS id A534E1009B3
+	for <openembedded-devel@lists.openembedded.org>; Mon,  3 Apr 2023 11:02:20 +0100 (BST)
 Received: from localhost.localdomain (10.167.225.33) by
  R01UKEXCASM121.r01.fujitsu.local (10.183.43.173) with Microsoft SMTP Server
- (TLS) id 15.0.1497.42; Mon, 3 Apr 2023 11:01:58 +0100
+ (TLS) id 15.0.1497.42; Mon, 3 Apr 2023 11:02:19 +0100
 From: <wangmy@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-python] [PATCH] python3-argcomplete: upgrade 3.0.0 -> 3.0.5
-Date: Mon, 3 Apr 2023 18:01:44 +0800
-Message-ID: <1680516108-30896-1-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH] python3-cassandra-driver: upgrade 3.25.0 -> 3.26.0
+Date: Mon, 3 Apr 2023 18:01:46 +0800
+Message-ID: <1680516108-30896-3-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
+In-Reply-To: <1680516108-30896-1-git-send-email-wangmy@fujitsu.com>
+References: <1680516108-30896-1-git-send-email-wangmy@fujitsu.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-Originating-IP: [10.167.225.33]
@@ -73,43 +76,63 @@ X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 03 Apr 2023 10:02:04 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101909
+ <openembedded-devel@lists.openembedded.org>; Mon, 03 Apr 2023 10:02:24 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101911
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
 Changelog:
-=========
- Call _default as fallback in zsh global completion hook
- Begin support for mapping-emitting completers
- activate-global-python-argcomplete: do not overwrite existing dotfile in user directory
- Add NOTICE file
- Establish long term name for split_line as argcomplete.lexers.split_line
- Re-add split_line to API (#419)
- Fix zsh default completion issues
- Fix zsh autoload issues
+===========
+Features
+--------
+    Add support for execution profiles in execute_concurrent (PR 1122)
+
+Bug Fixes
+----------
+    Handle empty non-final result pages (PR 1110)
+    Do not re-use stream IDs for in-flight requests (PR 1114)
+    Asyncore race condition cause logging exception on shutdown (PYTHON-1266)
+
+Others
+---------
+    Fix deprecation warning in query tracing (PR 1103)
+    Remove mutable default values from some tests (PR 1116)
+    Remove dependency on unittest2 (PYTHON-1289)
+    Fix deprecation warnings for asyncio.coroutine annotation in asyncioreactor (PYTTHON-1290)
+    Fix typos in source files (PR 1126)
+    HostFilterPolicyInitTest fix for Python 3.11 (PR 1131)
+    Fix for DontPrepareOnIgnoredHostsTest (PYTHON-1287)
+    tests.integration.simulacron.test_connection failures (PYTHON-1304)
+    tests.integration.standard.test_single_interface.py appears to be failing for C* 4.0 (PYTHON-1329)
+    Authentication tests appear to be failing fraudulently (PYTHON-1328)
+    PreparedStatementTests.test_fail_if_different_query_id_on_reprepare() failing unexpectedly (PTYHON-1327)
+    Refactor deprecated unittest aliases for Python 3.11 compatibility (PR 1112)
+
+Deprecations
+------------
+    This release removes support for Python 2.7.x as well as Python 3.5.x and 3.6.x
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- ...ython3-argcomplete_3.0.0.bb => python3-argcomplete_3.0.5.bb} | 2 +-
+ ...ndra-driver_3.25.0.bb => python3-cassandra-driver_3.26.0.bb} | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-argcomplete_3.0.0.bb => python3-argcomplete_3.0.5.bb} (83%)
+ rename meta-python/recipes-devtools/python/{python3-cassandra-driver_3.25.0.bb => python3-cassandra-driver_3.26.0.bb} (89%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-argcomplete_3.0.0.bb b/meta-python/recipes-devtools/python/python3-argcomplete_3.0.5.bb
-similarity index 83%
-rename from meta-python/recipes-devtools/python/python3-argcomplete_3.0.0.bb
-rename to meta-python/recipes-devtools/python/python3-argcomplete_3.0.5.bb
-index 3ec271bac..1e884f486 100644
---- a/meta-python/recipes-devtools/python/python3-argcomplete_3.0.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-argcomplete_3.0.5.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/kislyuk/argcomplete"
- LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=2ee41112a44fe7014dce33e26468ba93"
+diff --git a/meta-python/recipes-devtools/python/python3-cassandra-driver_3.25.0.bb b/meta-python/recipes-devtools/python/python3-cassandra-driver_3.26.0.bb
+similarity index 89%
+rename from meta-python/recipes-devtools/python/python3-cassandra-driver_3.25.0.bb
+rename to meta-python/recipes-devtools/python/python3-cassandra-driver_3.26.0.bb
+index cf27f7f47..4c5c78105 100644
+--- a/meta-python/recipes-devtools/python/python3-cassandra-driver_3.25.0.bb
++++ b/meta-python/recipes-devtools/python/python3-cassandra-driver_3.26.0.bb
+@@ -8,7 +8,7 @@ LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=2ee41112a44fe7014dce33e26468ba93"
+ SRCNAME = "cassandra-driver"
  
--SRC_URI[sha256sum] = "69db74ba0c72897452f2666267bd76c9cd10829686e99889e6758fac99b23286"
-+SRC_URI[sha256sum] = "fe3ce77125f434a0dd1bffe5f4643e64126d5731ce8d173d36f62fa43d6eb6f7"
+-SRC_URI[sha256sum] = "8ad7d7c090eb1cac6110b3bfc1fd2d334ac62f415aac09350ebb8d241b7aa7ee"
++SRC_URI[sha256sum] = "425338478c14324704f6973451f3c54f7ffa65b49be045ad1de19628ab6e9492"
  
- PYPI_PACKAGE = "argcomplete"
+ inherit pypi setuptools3
  
 -- 
 2.34.1
