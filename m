@@ -1,94 +1,249 @@
-Return-Path: <ticotimo@gmail.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EEA41C76196
-	for <webhook@archiver.kernel.org>; Sun,  2 Apr 2023 22:30:20 +0000 (UTC)
-Received: from mail-pg1-f181.google.com (mail-pg1-f181.google.com [209.85.215.181])
- by mx.groups.io with SMTP id smtpd.web10.56522.1680474613628637362
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BCA2CC76196
+	for <webhook@archiver.kernel.org>; Mon,  3 Apr 2023 04:14:02 +0000 (UTC)
+Received: from mail-oi1-f178.google.com (mail-oi1-f178.google.com [209.85.167.178])
+ by mx.groups.io with SMTP id smtpd.web11.62611.1680495232782463758
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 02 Apr 2023 15:30:13 -0700
+ Sun, 02 Apr 2023 21:13:52 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=ZZdml2E0;
- spf=pass (domain: gmail.com, ip: 209.85.215.181, mailfrom: ticotimo@gmail.com)
-Received: by mail-pg1-f181.google.com with SMTP id h14so16378001pgj.7
-        for <openembedded-devel@lists.openembedded.org>; Sun, 02 Apr 2023 15:30:13 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=WYUhVd2R;
+ spf=pass (domain: gmail.com, ip: 209.85.167.178, mailfrom: raj.khem@gmail.com)
+Received: by mail-oi1-f178.google.com with SMTP id r14so15126316oiw.12
+        for <openembedded-devel@lists.openembedded.org>; Sun, 02 Apr 2023 21:13:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112; t=1680474613;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=0rzDxQUAB5KMImZouw9yqlppBx2Y7A68IMTYJlhzqU4=;
-        b=ZZdml2E01F7rf+zGD0FKIENoWTY19dTkUoZyTSXgCiyLeBkUiiqL0AhdQzr+rmaqnU
-         tM8y45zYH8I1foXviHsTeoJVj8Ssnf44OUiLCa+igNGp0Z53g8gUZRvMJtSp5n2clbSe
-         aOx2j0QOLnonWfcHy6gR5H6KTKz0L2Uj+RpGAavOPTI0F1EXxg/rk1GoDzJdHNHCQ3hm
-         IyLAsmDIR88bh5OzcOvlm60NptO5QQLALnta07+85X6zxW3MHPWPYujVUKzfB5Ubcg67
-         0TROSR/SX8HYGIwNW8cZQpRvRxK7Pgoq6JL2jPKDZB+C++VkrCRahStRn7znogJUqDBt
-         bSog==
+        d=gmail.com; s=20210112; t=1680495232;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=ykmW96dMl57Ds4IWr9u2e49DYrouHxrWEbvhTPFT9AQ=;
+        b=WYUhVd2RKzKBrYccVoTY642PULjrzYbf2Df4ncf6cXyrGVG4A42y07Rpvf1YBr/I01
+         Z3aPPt3Bh1V8p2s8gUo65T8Oa08D7EBV//RJrzlxlQS72qQrCyo6tLTMLoTOiNUysQNa
+         Rj9WfCy+AaSdjl1xQj/vC6w5JbqYS3eWMq92VtECv6zzUn/HMNUSQC1YYgindUChzaXP
+         jelfJejBZR8MBfbaLpz3X/3qWlf4yGymH1FLD1MtyHEcGoUhPI3//zV76VVN6GGvN0uD
+         zLPmiUVLDoNNNruzj/BDLfcHFYrq68nUpebqQH560qT5uIjk4mKVBBmciMK9TMIK+KsB
+         162Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112; t=1680474613;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
+        d=1e100.net; s=20210112; t=1680495232;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=0rzDxQUAB5KMImZouw9yqlppBx2Y7A68IMTYJlhzqU4=;
-        b=B/o6bj8Nbf7qjSju+W/7Ym90AbtCPKlcGpLkCeN9gneF7F2rVnW3i2lKP9DrlB4228
-         lTxxkO2RzGnpYLZ1YfQMrjZRqn1u0jAhHq96d/l0a6HWEV73bsz/u33TWM/vmaRppemo
-         7sRt9t68oTPNNOvLePxkKy1U1VcVKz7rmqqHjPjBg33I232/lpvcG5p/lpL7o8MV5Pn3
-         1UFedYmPPBOGovYOqm1j8NCgSLtoo/4hnlTXU0s0vFGIEYYRY5jigJLWEvJAKOp4oxd4
-         twfjUASJjRrnY6bAayOl6Qpbq1fzvd1vVKaDIL+5Mi0WKogwMMkYeAoChmrMk9Ha/yzi
-         qgQQ==
-X-Gm-Message-State: AAQBX9fOuCEgDnl2xLCzG3zMWdUmdh1uhaIswizfnVMhpUdRq2s5+j7y
-	Vrd3N51p4SkPXS44zBy+j4qGgyUZWUE=
-X-Google-Smtp-Source: AKy350ZFpmpx4lG+GshiZB2JXmoijMXnngdtGkFlLimG0Jc6fMLm+OaQuJbf8UwKsllZHskWpMDx7A==
-X-Received: by 2002:a62:6454:0:b0:5a8:b2bf:26ac with SMTP id y81-20020a626454000000b005a8b2bf26acmr30977038pfb.20.1680474612736;
-        Sun, 02 Apr 2023 15:30:12 -0700 (PDT)
-Received: from chiron.. ([2601:1c0:ca00:cea0:c5a7:cc15:fd65:db07])
-        by smtp.gmail.com with ESMTPSA id x47-20020a056a000bef00b0062cc53e5db9sm5404357pfu.197.2023.04.02.15.30.12
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 02 Apr 2023 15:30:12 -0700 (PDT)
-From: Tim Orling <ticotimo@gmail.com>
-X-Google-Original-From: Tim Orling <tim.orling@konsulko.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-perl][PATCH 10/11] recipes-perl/images: move to recipes-core
-Date: Sun,  2 Apr 2023 15:29:42 -0700
-Message-Id: <8641dfe33feea365918907299622794be00fe3f2.1680473253.git.tim.orling@konsulko.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <cover.1680473253.git.tim.orling@konsulko.com>
-References: <cover.1680473253.git.tim.orling@konsulko.com>
+        bh=ykmW96dMl57Ds4IWr9u2e49DYrouHxrWEbvhTPFT9AQ=;
+        b=sWOCkBGd8ylL4Q8kXP4K078fLGI0lBQtUHh6USZkaqLfwj9yaIjdhKlL91ksqSnPJO
+         Mb67CzXy6YxIctdVqx90NXzkKKZWRaki8HPZAclzf5B0Iw2KBvhMOIzEcHEUuOWO4Bw0
+         NjEdvTXk7kAIb6E2b5mfKs8tew4isGSpZOZl1SuC2z5YV9xYP0ju5pcpDYFrZM3wTNQ9
+         +1hsOIbjy6bSceGHyMUgiguLJzyb+ktyjhY0g+bKhs0eAycyh3UxfkJJdOOL2McwNTdH
+         QxRIFgzH4DVECdeRLyALdfwR0z4mCPLDaobmO2qzPBGZeJ6fPnJC/QE7qTpvXvCnvIH+
+         x68Q==
+X-Gm-Message-State: AO0yUKVuW1l+ztPSO644XseSqJjRUdqBbXiGRrJkCCHrhDbMPDzyc7iy
+	EZMnawEiMeh9TfNFmw4W2ic3id1FUpcCJjjgAD0=
+X-Google-Smtp-Source: AK7set+ZLkSpHj0DPlAleg43u1PYBXZULOiGzTcddDrXqgCpKGYBbogER0XPUF/i3EExfAD/48PRBqGsP2dL56stirE=
+X-Received: by 2002:a54:4d84:0:b0:387:251b:71fa with SMTP id
+ y4-20020a544d84000000b00387251b71famr10889484oix.4.1680495231834; Sun, 02 Apr
+ 2023 21:13:51 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <cover.1680473253.git.tim.orling@konsulko.com> <040cff75f5cc2f926c6ab489c0a4b1776ce7d17d.1680473253.git.tim.orling@konsulko.com>
+In-Reply-To: <040cff75f5cc2f926c6ab489c0a4b1776ce7d17d.1680473253.git.tim.orling@konsulko.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sun, 2 Apr 2023 21:13:25 -0700
+Message-ID: <CAMKF1sqVHAb9gzjaW96OLtJGr4ALAZU6NZKTFaxXX4RYnBPYBg@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH 04/11] meta-oe-ptest*-image: enable
+ BBCLASSEXTEND parallel execution
+To: Tim Orling <ticotimo@gmail.com>
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 02 Apr 2023 22:30:20 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101888
+ <openembedded-devel@lists.openembedded.org>; Mon, 03 Apr 2023 04:14:02 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101890
 
-Be consistent with other layers like oe-core, meta-oe and meta-python
+Thanks for this patchset Tim, really appreciate it. I have few comments.
 
-Signed-off-by: Tim Orling <tim.orling@konsulko.com>
----
- meta-perl/{recipes-perl => recipes-core}/images/meta-perl-base.bb | 0
- .../{recipes-perl => recipes-core}/images/meta-perl-image.bb      | 0
- .../images/meta-perl-ptest-image.bb                               | 0
- 3 files changed, 0 insertions(+), 0 deletions(-)
- rename meta-perl/{recipes-perl => recipes-core}/images/meta-perl-base.bb (100%)
- rename meta-perl/{recipes-perl => recipes-core}/images/meta-perl-image.bb (100%)
- rename meta-perl/{recipes-perl => recipes-core}/images/meta-perl-ptest-image.bb (100%)
+On Sun, Apr 2, 2023 at 3:30=E2=80=AFPM Tim Orling <ticotimo@gmail.com> wrot=
+e:
+>
+> Similar to "core-image-ptest: Switch to BBCLASSEXTEND parallel execution"
+>
+> Refactor meta-oe-ptest-image.bb for an image per ptest in the form of
+> meta-oe-ptest-image-XXX using class extensions.
+>
+> * Add meta-oe-ptest-all-image.bb depends on ALL meta-oe-ptest-image-XXX i=
+n meta-oe
+> * Add meta-oe-ptest-fast-image.bb depends on meta-oe ptests which take le=
+ss than ~30s
+>
+> This allows parallel execution of the tests.
+>
+> The downside to this approach is the parsing time of an image generating
+> this number of class extensions is slow but making it easier to execute
+> and collect test data should outweigh that.
+>
+> A useful advantage is that the dependencies of each ptest package are
+> checked/tested individually.
+>
+> Add to local.conf:
+> IMAGE_CLASSES +=3D "testimage"
+>
+> All the meta-oe-ptest-image-XXX can be built with:
+> $ bitbake meta-oe-ptest-all-image
+>
+> Subsequently, all the ptest images can be run with:
+> $ bitbake -c testimage meta-oe-ptest-all-image
+>
+> You will likely want to limit the number of parallel image tests:
+>
+> BB_NUMBER_THREADS =3D "4"
+>
+> based on the number of TAP devices you have defined or the number of simu=
+ltaneous
+> QEMU sessions your server can support.
+>
+> Results can be summarized with:
+>
+> $ resulttool report tmp/log/oeqa/testresult.json
+>
+> Signed-off-by: Tim Orling <tim.orling@konsulko.com>
+> ---
+>  .../images/meta-oe-ptest-all-image.bb         | 25 ++++++++++++
+>  .../images/meta-oe-ptest-fast-image.bb        |  6 +++
+>  .../images/meta-oe-ptest-image.bb             | 38 ++++++++++++++++++-
+>  3 files changed, 68 insertions(+), 1 deletion(-)
+>  create mode 100644 meta-oe/recipes-core/images/meta-oe-ptest-all-image.b=
+b
+>  create mode 100644 meta-oe/recipes-core/images/meta-oe-ptest-fast-image.=
+bb
 
-diff --git a/meta-perl/recipes-perl/images/meta-perl-base.bb b/meta-perl/recipes-core/images/meta-perl-base.bb
-similarity index 100%
-rename from meta-perl/recipes-perl/images/meta-perl-base.bb
-rename to meta-perl/recipes-core/images/meta-perl-base.bb
-diff --git a/meta-perl/recipes-perl/images/meta-perl-image.bb b/meta-perl/recipes-core/images/meta-perl-image.bb
-similarity index 100%
-rename from meta-perl/recipes-perl/images/meta-perl-image.bb
-rename to meta-perl/recipes-core/images/meta-perl-image.bb
-diff --git a/meta-perl/recipes-perl/images/meta-perl-ptest-image.bb b/meta-perl/recipes-core/images/meta-perl-ptest-image.bb
-similarity index 100%
-rename from meta-perl/recipes-perl/images/meta-perl-ptest-image.bb
-rename to meta-perl/recipes-core/images/meta-perl-ptest-image.bb
--- 
-2.34.1
+I think these images also need ( and also the ones in meta-python and
+meta-perl too I think )
 
+IMAGE_FEATURES +=3D "debug-tweaks"
+
+since some of them add ssh and it will be helpful to be able to do
+passwordless access. and I was also wondering
+if meta-oe-image-base.bb is really needed. We could simply include
+core-image-base.bb here. This change also makes
+meta-oe-image.bb and packagegroup-meta-oe.bb also questionable. Since
+build part can be taken care by bitbake world.
+but we can address that later.
+
+>
+> diff --git a/meta-oe/recipes-core/images/meta-oe-ptest-all-image.bb b/met=
+a-oe/recipes-core/images/meta-oe-ptest-all-image.bb
+> new file mode 100644
+> index 000000000..0ea03dd2e
+> --- /dev/null
+> +++ b/meta-oe/recipes-core/images/meta-oe-ptest-all-image.bb
+> @@ -0,0 +1,25 @@
+> +DESCRIPTION =3D "Recipe to trigger execution of all meta-oe ptest images=
+."
+> +HOMEPAGE =3D "https://www.openembedded.org/"
+> +
+> +LICENSE =3D "MIT"
+> +
+> +inherit features_check nopackages
+> +REQUIRED_DISTRO_FEATURES =3D "ptest"
+> +
+> +require conf/include/ptest-packagelists-meta-oe.inc
+> +
+> +# Include the full set of ptests
+> +PTESTS_META_OE =3D "${PTESTS_FAST_META_OE} ${PTESTS_SLOW_META_OE}"
+> +
+> +do_testimage[noexec] =3D "1"
+> +do_testimage[depends] =3D "${@' '.join(['meta-oe-ptest-image-'+x+':do_te=
+stimage' for x in d.getVar('PTESTS_META_OE').split()])}"
+> +
+> +do_build[depends] =3D "${@' '.join(['meta-oe-ptest-image-'+x+':do_build'=
+ for x in d.getVar('PTESTS_META_OE').split()])}"
+> +
+> +# normally image.bbclass would do this
+> +EXCLUDE_FROM_WORLD =3D "1"
+> +
+> +python () {
+> +    if bb.utils.contains('IMAGE_CLASSES', 'testimage', True, False, d):
+> +        bb.build.addtask("do_testimage", "", "", d)
+> +}
+> diff --git a/meta-oe/recipes-core/images/meta-oe-ptest-fast-image.bb b/me=
+ta-oe/recipes-core/images/meta-oe-ptest-fast-image.bb
+> new file mode 100644
+> index 000000000..f56e841ff
+> --- /dev/null
+> +++ b/meta-oe/recipes-core/images/meta-oe-ptest-fast-image.bb
+> @@ -0,0 +1,6 @@
+> +require meta-oe-ptest-all-image.bb
+> +
+> +DESCRIPTION =3D "Recipe to trigger execution of all fast meta-oe ptest i=
+mages."
+> +
+> +PTESTS_META_OE =3D "${PTESTS_FAST_META_OE}"
+> +
+> diff --git a/meta-oe/recipes-core/images/meta-oe-ptest-image.bb b/meta-oe=
+/recipes-core/images/meta-oe-ptest-image.bb
+> index 0166b9c41..951d91f82 100644
+> --- a/meta-oe/recipes-core/images/meta-oe-ptest-image.bb
+> +++ b/meta-oe/recipes-core/images/meta-oe-ptest-image.bb
+> @@ -1,5 +1,41 @@
+> +inherit features_check
+> +REQUIRED_DISTRO_FEATURES =3D "ptest"
+> +
+> +require conf/include/ptest-packagelists-meta-oe.inc
+> +
+>  require  meta-oe-image-base.bb
+>
+>  SUMMARY =3D "meta-oe ptest test image"
+>
+> -IMAGE_INSTALL +=3D "packagegroup-meta-oe"
+> +DESCRIPTION +=3D "Also including the ${MCNAME} ptest package."
+> +HOMEPAGE =3D "https://www.openembedded.org/"
+> +
+> +PTESTS_META_OE =3D "${PTESTS_SLOW_META_OE} ${PTESTS_FAST_META_OE}"
+> +
+> +IMAGE_INSTALL:append =3D " ${MCNAME}-ptest openssh"
+> +
+> +BBCLASSEXTEND =3D "${@' '.join(['mcextend:'+x for x in d.getVar('PTESTS_=
+META_OE').split()])}"
+> +
+> +# The image can be sufficiently large (~1.8GB) that we need to be carefu=
+l that it fits in a live
+> +# image (which has a 4GB limit), so nullify the overhead factor (1.3x ou=
+t of the
+> +# box) and explicitly add up to 1500MB.
+> +IMAGE_OVERHEAD_FACTOR =3D "1.0"
+> +IMAGE_ROOTFS_EXTRA_SPACE =3D "324288"
+> +# If a particular ptest needs more space, it can be customized:
+> +#IMAGE_ROOTFS_EXTRA_SPACE:virtclass-mcextend-<pn> =3D "1024288"
+> +
+> +# ptests need more memory than standard to avoid the OOM killer
+> +QB_MEM =3D "-m 1024"
+> +# If a particular ptest needs more memroy, it can be customized:
+> +#QB_MEM:virtclass-mcextend-<pn> =3D "-m 4096"
+> +
+> +TEST_SUITES =3D "ping ssh parselogs ptest"
+> +
+> +# Sadly at the moment the full set of ptests is not robust enough and sp=
+oradically fails in random places
+> +PTEST_EXPECT_FAILURE =3D "1"
+> +
+> +python () {
+> +    if not d.getVar("MCNAME"):
+> +        raise bb.parse.SkipRecipe("No class extension set")
+> +}
+> +
+> --
+> 2.34.1
+>
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#101882): https://lists.openembedded.org/g/openembedde=
+d-devel/message/101882
+> Mute This Topic: https://lists.openembedded.org/mt/98023314/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
+aj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
 
