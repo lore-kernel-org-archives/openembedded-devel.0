@@ -2,68 +2,71 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CCB5AC761A6
-	for <webhook@archiver.kernel.org>; Mon,  3 Apr 2023 09:00:23 +0000 (UTC)
-Received: from mail1.bemta32.messagelabs.com (mail1.bemta32.messagelabs.com [195.245.230.66])
- by mx.groups.io with SMTP id smtpd.web10.65400.1680512420728753144
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CCF94C77B60
+	for <webhook@archiver.kernel.org>; Mon,  3 Apr 2023 09:00:33 +0000 (UTC)
+Received: from mail3.bemta32.messagelabs.com (mail3.bemta32.messagelabs.com [195.245.230.82])
+ by mx.groups.io with SMTP id smtpd.web11.65496.1680512431513728103
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 03 Apr 2023 02:00:21 -0700
+ Mon, 03 Apr 2023 02:00:31 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=PnhhFv0+;
- spf=pass (domain: fujitsu.com, ip: 195.245.230.66, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=OiRFZE8G;
+ spf=pass (domain: fujitsu.com, ip: 195.245.230.82, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1680512419; i=@fujitsu.com;
-	bh=Or9Jtlk87y4dBTOXHLmeQAjrNYHuWIteBvHMm78KB2Q=;
-	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=PnhhFv0+cpdiEY1PrurACrQPUGMv2ALyigUTTGTPLyikS0rmXFs8/uva9SOnjiQse
-	 9GX/3Z0H1cIT5ihHuDn6Kxvavtsw0uJIIQS5JhNiEUCLp8ejjgP0YD8D0hSM3XbsCL
-	 S5oDs40/5OE9gLboajX/SXiZcvGDJIO+DHTrhAuXoqt/4DwTHm/SsH62lx9PUAogYU
-	 jAsFNmmdmSCa+BB9mCX9weqgetITtfKRdmamHxfxysI2P8cX7eYzrqCppkq0+A13yz
-	 440ZOWZ7w8xcBRsX9Ofb/Tzn5Z73HosxV7COMzU17WP4WMf40gP07vz9kkoDMsue9c
-	 Xf1h+GOmHJ4jA==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFlrHIsWRWlGSWpSXmKPExsViZ8MxSXfRVK0
-  Ug7O/VCwuHl7K7MDocW7jCsYAxijWzLyk/IoE1ox7S6exFyzmqpg1dQ1LA+NUzi5GLg4hgSeM
-  Ej23u5kgnOtMEv2XHrFDOLsZJb4uambtYuTkYBOQkrhx/z8biC0ioC+xdPYeZhCbWUBF4sXvH
-  nYQW1jATaJj3h0wmwUofnLvYSYQm1fASWLPn31gcyQEFCSmPHzPDBEXlDg58wkLxBwJiYMvXj
-  BD1ChKzL7czAJhV0g0Tj/EBGGrSVw9t4l5AiP/LCTts5C0L2BkWsVoWpxaVJZapGukl1SUmZ5
-  RkpuYmaOXWKWbqJdaqlueWlyia6iXWF6sl1pcrFdcmZuck6KXl1qyiREYjCnFbN07GNf3/tU7
-  xCjJwaQkyitYr5UixJeUn1KZkVicEV9UmpNafIhRhoNDSYL34ASgnGBRanpqRVpmDjAyYNISH
-  DxKIrzBvUBp3uKCxNzizHSI1ClGRSlxXr8pQAkBkERGaR5cGywaLzHKSgnzMjIwMAjxFKQW5W
-  aWoMq/YhTnYFQS5n01EWgKT2ZeCdz0V0CLmYAWt0ZpgCwuSURISTUwyUbLaTTHv39neGGRzoG
-  ECan2x95X5zqHlTE+yp0h7vm7qP65wmnGc+YPO/fUMS+wf/5594KazAuPAw6espqZ4hVQqvzi
-  /uyEtyXCR1Ymh3/aOPvZ7IdNZ6Pb0k52C2+wFHk+L8iy7syi9+/jXvZYHioLe3vbjkXLsXOyx
-  sarF0RnP3ycuKJ6Q7gZ4/mF6fI2G+QDj32P3iTuGeJhbLrm6oX7LkUNlYWet3Rl+RfMKFq17+
-  iZToaDfpd1Un+LJkw9Nc3nk28jc/9prcydvxKX+krtWTwp43tTy67lb2QcJq7W1M6P2nAkc7d
-  jQpHME63muadEk6SsKjV+tdz6Yyx2xLDw8SPz6e8cCh8lL4pcosRSnJFoqMVcVJwIAJEckg1B
-  AwAA
+	s=170520fj; t=1680512429; i=@fujitsu.com;
+	bh=/blsR94SbNit+yXPQMUxPnQ9Q/eIiLBvo1laqjd8QE0=;
+	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type;
+	b=OiRFZE8G4dsaUSD9rSrQk3zmopQpVtEYfK57GG9ZnpxNwqny9wW/fx8d5uQxRWxud
+	 FUoZTsYTrAWh6pInBfoR5q5hpLVc+i3dqUmZFY035U1AnH5Ada87ZJ4e89EVFLNNxR
+	 c+tArI0McJqji6jc+oJuvcp3r+u1c0DUzVEO73dagr9+Eb8Kl+DDkqBkBX/Wk8OF1Y
+	 0Rp2MyxMrqggCdj9KZdHhx2xkrSSoNHvVsGSHqsBDCi7D0JJ4Jgsdz4wSD1emhSyeA
+	 l1ZMybZnZbM+U8Vsf6VcMKCiTnhE92TBvmsyhW2ZD4bOmacqWCU1ksqTUM7cilLYZk
+	 uXkfd/ubxIJQA==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrPIsWRWlGSWpSXmKPExsViZ8MxSXftVK0
+  Ug6VbpC0uHl7K7MDocW7jCsYAxijWzLyk/IoE1owlTedZCpZyVWyb/Ie1gXEhZxcjF4eQwBNG
+  if+zDjJ3MXICOdeZJB61ukEkdjNKvHn5mxUkwSYgJXHj/n82EFtEQF9i6ew9YA3MAioSL373s
+  HcxcnAIC7hJXJzHBxJmAQo/nnmQBcTmFXCS2HJhA5gtIaAgMeXhe2aQck4BZ4n5W3Qh1jpJ/N
+  h1jwmiXFDi5MwnLBDTJSQOvnjBDNGqKDH7cjPUmAqJxumHmCBsNYmr5zYxT2AUnIWkfRaS9gW
+  MTKsYTYtTi8pSi3RN9ZKKMtMzSnITM3P0Eqt0E/VSS3XLU4tLdA31EsuL9VKLi/WKK3OTc1L0
+  8lJLNjECwzalmMVsB2N731+9Q4ySHExKoryC9VopQnxJ+SmVGYnFGfFFpTmpxYcYZTg4lCR4D
+  04AygkWpaanVqRl5gBjCCYtwcGjJMIb3AuU5i0uSMwtzkyHSJ1i1OW4euXKXmYhlrz8vFQpcV
+  6/KUBFAiBFGaV5cCNg8XyJUVZKmJeRgYFBiKcgtSg3swRV/hWjOAejkjDvq4lAU3gy80rgNr0
+  COoIJ6IjWKA2QI0oSEVJSDUxii71v7+idvGu6WZWW+LqXfqW7u/98vHnHf9Eu8ZNGJTHfrwSd
+  ZZfXS7v6YP2dlCkJi7TuWWybPfXt9QCru62uT1aoGgYfUlgrnPJ7peiOoyyb53Nbbzsosk68I
+  fLxD7Y3Kd/qYx6um/b6YLtW8ZqeC8Jy/36qFqxb+8mkeYrmw+l+U045P1wrsrTxcBjrVB6rih
+  ShWTpNiU8lv3h6N5Tx/b0gPeHo52sZnvcn/DOq81jFnMj/6PVHn5azGbtz8vZwaX36c4t3Frf
+  es+XVDpaL3CZrTYndsqJBQkvYjmeF1YUZmp9zXq2M9314+sjUDV8EA/xemuz7pv6qb3vFhAe2
+  pjHftj9e7qK3jDP2NcNvRSWW4oxEQy3mouJEADEQLOBiAwAA
 X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-6.tower-587.messagelabs.com!1680512418!1033657!1
+X-Msg-Ref: server-11.tower-585.messagelabs.com!1680512429!287312!1
 X-Originating-IP: [62.60.8.146]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.104.1; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 17831 invoked from network); 3 Apr 2023 09:00:18 -0000
+Received: (qmail 14493 invoked from network); 3 Apr 2023 09:00:29 -0000
 Received: from unknown (HELO n03ukasimr02.n03.fujitsu.local) (62.60.8.146)
-  by server-6.tower-587.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 3 Apr 2023 09:00:18 -0000
+  by server-11.tower-585.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 3 Apr 2023 09:00:29 -0000
 Received: from n03ukasimr02.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTP id 3682B1009B6
-	for <openembedded-devel@lists.openembedded.org>; Mon,  3 Apr 2023 10:00:18 +0100 (BST)
+	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTP id F350F1009B3
+	for <openembedded-devel@lists.openembedded.org>; Mon,  3 Apr 2023 10:00:28 +0100 (BST)
 Received: from R01UKEXCASM121.r01.fujitsu.local (R01UKEXCASM121 [10.183.43.173])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTPS id 2872D10047F
-	for <openembedded-devel@lists.openembedded.org>; Mon,  3 Apr 2023 10:00:18 +0100 (BST)
+	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTPS id E626810047F
+	for <openembedded-devel@lists.openembedded.org>; Mon,  3 Apr 2023 10:00:28 +0100 (BST)
 Received: from localhost.localdomain (10.167.225.33) by
  R01UKEXCASM121.r01.fujitsu.local (10.183.43.173) with Microsoft SMTP Server
- (TLS) id 15.0.1497.42; Mon, 3 Apr 2023 10:00:16 +0100
+ (TLS) id 15.0.1497.42; Mon, 3 Apr 2023 10:00:27 +0100
 From: <wangmy@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-networking] [PATCH] libldb: upgrade 2.7.1 -> 2.7.2
-Date: Mon, 3 Apr 2023 17:00:04 +0800
-Message-ID: <1680512408-30384-1-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-networking] [PATCH] ndisc6: upgrade 1.0.6 -> 1.0.7
+Date: Mon, 3 Apr 2023 17:00:07 +0800
+Message-ID: <1680512408-30384-4-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
+In-Reply-To: <1680512408-30384-1-git-send-email-wangmy@fujitsu.com>
+References: <1680512408-30384-1-git-send-email-wangmy@fujitsu.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-Originating-IP: [10.167.225.33]
@@ -73,34 +76,38 @@ X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 03 Apr 2023 09:00:23 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101897
+ <openembedded-devel@lists.openembedded.org>; Mon, 03 Apr 2023 09:00:33 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101900
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
+Changelog:
+=========
+# Do not ignore multicast advertisements when discovery was sent as unicast
+  (fix regression from 1.0.5).
+
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../libldb/{libldb_2.7.1.bb => libldb_2.7.2.bb}                | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
- rename meta-networking/recipes-support/libldb/{libldb_2.7.1.bb => libldb_2.7.2.bb} (95%)
+ .../recipes-support/ndisc6/{ndisc6_1.0.6.bb => ndisc6_1.0.7.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-networking/recipes-support/ndisc6/{ndisc6_1.0.6.bb => ndisc6_1.0.7.bb} (98%)
 
-diff --git a/meta-networking/recipes-support/libldb/libldb_2.7.1.bb b/meta-networking/recipes-support/libldb/libldb_2.7.2.bb
-similarity index 95%
-rename from meta-networking/recipes-support/libldb/libldb_2.7.1.bb
-rename to meta-networking/recipes-support/libldb/libldb_2.7.2.bb
-index d13bd37cc..daf0f73b8 100644
---- a/meta-networking/recipes-support/libldb/libldb_2.7.1.bb
-+++ b/meta-networking/recipes-support/libldb/libldb_2.7.2.bb
-@@ -35,8 +35,7 @@ LIC_FILES_CHKSUM = "file://pyldb.h;endline=24;md5=dfbd238cecad76957f7f860fbe9ada
-                     file://man/ldb.3.xml;beginline=261;endline=262;md5=137f9fd61040c1505d1aa1019663fd08 \
-                     file://tools/ldbdump.c;endline=19;md5=a7d4fc5d1f75676b49df491575a86a42"
+diff --git a/meta-networking/recipes-support/ndisc6/ndisc6_1.0.6.bb b/meta-networking/recipes-support/ndisc6/ndisc6_1.0.7.bb
+similarity index 98%
+rename from meta-networking/recipes-support/ndisc6/ndisc6_1.0.6.bb
+rename to meta-networking/recipes-support/ndisc6/ndisc6_1.0.7.bb
+index 6861314a0..a5b9bd08b 100644
+--- a/meta-networking/recipes-support/ndisc6/ndisc6_1.0.6.bb
++++ b/meta-networking/recipes-support/ndisc6/ndisc6_1.0.7.bb
+@@ -5,7 +5,7 @@ HOMEPAGE = "http://www.remlab.net/ndisc6/"
+ LICENSE = "GPL-2.0-only"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
  
--SRC_URI[md5sum] = "e443a8da17758479c3b5c542e8e3ff1a"
--SRC_URI[sha256sum] = "c4632c9a7f81f8a45ed46fc14d18eb507edf4e79f6e88d16977478ef95ed5b7f"
-+SRC_URI[sha256sum] = "26ee72d647854e662d99643eb2b2d341655abf31f4990838d6650fb5cf9209c8"
- 
- inherit pkgconfig waf-samba
- 
+-SRCREV = "7e314b23329f9c24c4c097b8513673fed7e7158a"
++SRCREV = "c308ba5370d66acc44d411f12d59af61d522b91a"
+ SRC_URI = "git://git.remlab.net/git/ndisc6.git;protocol=http;branch=master \
+            file://0001-autogen-Do-not-symlink-gettext.h-from-build-host.patch \
+            "
 -- 
 2.34.1
 
