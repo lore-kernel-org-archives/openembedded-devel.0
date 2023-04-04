@@ -1,89 +1,97 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1D54BC76196
-	for <webhook@archiver.kernel.org>; Mon,  3 Apr 2023 20:17:27 +0000 (UTC)
-Received: from mail-pj1-f47.google.com (mail-pj1-f47.google.com [209.85.216.47])
- by mx.groups.io with SMTP id smtpd.web11.82837.1680553040332137847
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E5A99C6FD1D
+	for <webhook@archiver.kernel.org>; Tue,  4 Apr 2023 13:00:41 +0000 (UTC)
+Received: from mail-yw1-f176.google.com (mail-yw1-f176.google.com [209.85.128.176])
+ by mx.groups.io with SMTP id smtpd.web10.100700.1680613234581729446
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 03 Apr 2023 13:17:20 -0700
+ Tue, 04 Apr 2023 06:00:34 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=D+merdv7;
- spf=pass (domain: gmail.com, ip: 209.85.216.47, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f47.google.com with SMTP id p13-20020a17090a284d00b0023d2e945aebso157050pjf.0
-        for <openembedded-devel@lists.openembedded.org>; Mon, 03 Apr 2023 13:17:20 -0700 (PDT)
+ dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20210112 header.b=YXGyh1EF;
+ spf=pass (domain: gmail.com, ip: 209.85.128.176, mailfrom: akuster808@gmail.com)
+Received: by mail-yw1-f176.google.com with SMTP id 00721157ae682-5419d4c340aso611568847b3.11
+        for <openembedded-devel@lists.openembedded.org>; Tue, 04 Apr 2023 06:00:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112; t=1680553039;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=wZh9coS8AdBz06m8PT0AI9eg7aUp1nfWy/he1K+LqG0=;
-        b=D+merdv7S4Sl6rdu1aFRxNLJ3iWjnB+MRVllvxrGP11+Hekv4/tqBEOcqt24xhve2f
-         nf+ftMxSInko5oJFLUN+/pjkQa6B3cvc3wzBU2Kbi3jsnYusDP/ZY9E6+wDQKK6wiM8F
-         GamkpUNofPMlzECApqYAlUjWEX5HfnvC2SgpWpGnPef4p/rEDar85/iIkZU/Kn2ufeL3
-         /KW/kloQRbdMBtZaaXrpKQSEloepGEFWd4Gy7xEibJwWe4iRkkeS01EILBfUvqpAHmoC
-         Xx2/CmyNSDrNumFvRl4Fx0qtUgPrVZStFnNDlvw+hdB/g95js9VyH5Fr7H0li45WrqcX
-         o4pw==
+        d=gmail.com; s=20210112; t=1680613233; x=1683205233;
+        h=content-transfer-encoding:subject:from:to:content-language
+         :user-agent:mime-version:date:message-id:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=sQD7fVezyDcNLFz2gDyGxplUxbGXVxuMW824EkzplgM=;
+        b=YXGyh1EFFyh6IWbf+30+a1neF8h/4n0+jX5KNsykc3PCkFEjq82Qr8v9QFXbdQMp0n
+         HlHJV75SrXPCViCSZ+hHT4V6gjUw4/s3HEq9d2tGTE7RLjsC1gaR9jIIf0tbP506ue33
+         Ee4hz/OjzKLRV0iiutoHyFlcJhMOO/pwF8YDGX47yEmCSByItE+0M2AsG7/Lb3CRz5hI
+         c+T56U607qDig6Z8xg/BizpQlpW1Ok6NGJo40Kf4lAegERwNPn4t/kKkG3iZthConmZo
+         e3QllpW6GNXkO2Z01uv7rjjPSRsfjCqio/xFssm/yjdnkMLJDdbVvkNlAPRZcpKfkGxN
+         ezWg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112; t=1680553039;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=wZh9coS8AdBz06m8PT0AI9eg7aUp1nfWy/he1K+LqG0=;
-        b=2vu+BS5Q90IxlGJ2BRZtTn+A8cCSq6cUb0vFBSXUWoEjVUJPBaqm1ldntuUJeGgoiy
-         +wpLRWugNSpbbtBAk2/QwWnofmLpsl9Szhqh1KGYRWFeIQLSl0VuIfBg/EXSbnuvqZY5
-         UeRbTR2On1LDpA4O/kCKVOS02dGll/0uKeHd3KIT3TgLlcmbhZ9EmgezsyDzuNfjB69x
-         ENx3AaBPf6wVhsP2adWcgxmPlaUPBSe+Qe9zpukD87BEd+75CTRwAUEJjw2TX4aP1j0v
-         YjkQG0w88qsMQpNZ1liKtJsJcqpxg77K5pVatuOyWh+OwONvm9r8yN3jpUi7/lQm8nLF
-         PHKg==
-X-Gm-Message-State: AAQBX9dUu7ul3X3v+q4BvKi2kWSt5Sbyudk42MIGCPRvqpn7iEA+6xb2
-	f2KXjeD2CBenSlgDxthLuBGcTci5QCWw/Q==
-X-Google-Smtp-Source: AKy350Y2I/NNIMyb8fcckXlAXB1WE8NHTa7Lqp8nLNOBsUhXxsih+7Km1vlrMIYQy6OG9HkEDebUrQ==
-X-Received: by 2002:a17:90b:3882:b0:23b:4bf6:bbed with SMTP id mu2-20020a17090b388200b0023b4bf6bbedmr143916pjb.24.1680553039461;
-        Mon, 03 Apr 2023 13:17:19 -0700 (PDT)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9181:d380::2a5b])
-        by smtp.gmail.com with ESMTPSA id z3-20020a170902708300b0019f9fd10f62sm6990662plk.70.2023.04.03.13.17.18
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 03 Apr 2023 13:17:19 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH] poco: Remove pushd/popd from run-ptest
-Date: Mon,  3 Apr 2023 13:17:17 -0700
-Message-Id: <20230403201717.2145496-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.40.0
+        d=1e100.net; s=20210112; t=1680613233; x=1683205233;
+        h=content-transfer-encoding:subject:from:to:content-language
+         :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=sQD7fVezyDcNLFz2gDyGxplUxbGXVxuMW824EkzplgM=;
+        b=InXlXaobpPwjEWhQ6NUQ9cP0jJYRE+DtWtnS61lLDhkKNxIjP9/xccFAVCC9W6wIx3
+         /O6Wk/bPWL3AW7usfrAXtpf8xcS3GgwmzC9k+goupTydbm8XGoWPueDLK9X+b2/6wnt2
+         cWXIaKw23nTuDJgznDUe/zqXrkFMSDWkLMobfIujPcYwXXn2zX+uyNJsYUP7ZNDg5Vpo
+         bAzcvFXDRtqop+r4RDsKCGI2hCH5IxVv3i88oHbRb97y1DhAyWfFRP9WT5KiGW1OYJFc
+         XykR5jRxsL8nAj1/JsH4riDdYLvWhfNMlDeIoTJK4yWQifUwNUezWQMhdzaejT4o1JI9
+         tLkw==
+X-Gm-Message-State: AAQBX9fpCUtNPUaitOVPWGR2FjiLMivlcKPf5ElAWeukM9QPRq0fym/n
+	SkrFmUNrLaX6N4Ev0FJG2YI=
+X-Google-Smtp-Source: AKy350aWx4DRXxcVXIdZu46wAUMZnTyKkqm0xFymiYq8ic1QYOl5U490oOeaN5P5mQeWaB4vR7eMtQ==
+X-Received: by 2002:a0d:c5c7:0:b0:541:66e8:d4da with SMTP id h190-20020a0dc5c7000000b0054166e8d4damr2064386ywd.29.1680613233119;
+        Tue, 04 Apr 2023 06:00:33 -0700 (PDT)
+Received: from ?IPV6:2600:1700:9190:ba10:36a4:266a:a865:5f55? ([2600:1700:9190:ba10:36a4:266a:a865:5f55])
+        by smtp.gmail.com with ESMTPSA id cd7-20020a05690c088700b00545b9498c1asm3155152ywb.12.2023.04.04.06.00.32
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Tue, 04 Apr 2023 06:00:32 -0700 (PDT)
+Message-ID: <2cfa3a10-db72-7ea9-0a13-d1ce1b6b7b2b@gmail.com>
+Date: Tue, 4 Apr 2023 09:00:30 -0400
 MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.9.0
+Content-Language: en-US
+To: Khem Raj <raj.khem@gmail.com>,
+ OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+From: akuster808 <akuster808@gmail.com>
+Subject: langdale merge request: April 4th
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 03 Apr 2023 20:17:27 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101944
+ <openembedded-devel@lists.openembedded.org>; Tue, 04 Apr 2023 13:00:41 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101945
 
-This could be worked out without needing to add bash dependency
+The following changes since commit 3f9340a9241d497753b330d90d6a3d8332c1ba7f:
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- meta-oe/recipes-support/poco/poco/run-ptest | 5 ++---
- 1 file changed, 2 insertions(+), 3 deletions(-)
+   mbedtls: upgrade to 2.28.2 to fix CVE-2022-46392, CVE-2022-46393 
+(2023-03-21 14:37:51 -0400)
 
-diff --git a/meta-oe/recipes-support/poco/poco/run-ptest b/meta-oe/recipes-support/poco/poco/run-ptest
-index c479f7ac10..c9896eadee 100644
---- a/meta-oe/recipes-support/poco/poco/run-ptest
-+++ b/meta-oe/recipes-support/poco/poco/run-ptest
-@@ -1,9 +1,8 @@
- #!/bin/sh
- while read runner; do
--  pushd . >/dev/null
-+  oldpath=`pwd` >/dev/null
-   cd bin
-   echo Testing $runner
-   ./$runner-testrunner -all
--  popd >/dev/null
-+  cd $oldpath >/dev/null
- done < testrunners
--
--- 
-2.40.0
+are available in the Git repository at:
+
+   https://git.openembedded.org/meta-openembedded langdale-next
+
+for you to fetch changes up to b4ff73905b887cf7c489248de80dab2721090cbf:
+
+   dnsmasq: fix CVE-2023-28450 (2023-03-25 09:07:27 -0400)
+
+----------------------------------------------------------------
+Peter Marko (2):
+       c-ares: fix CVE-2022-4904
+       dnsmasq: fix CVE-2023-28450
+
+  meta-networking/recipes-support/dnsmasq/dnsmasq.inc             | 1 +
+  .../recipes-support/dnsmasq/files/CVE-2023-28450.patch          | 48 
++++++++++++++++++++++
+  meta-oe/recipes-support/c-ares/c-ares/CVE-2022-4904.patch       | 66 
++++++++++++++++++++++++++++++
+  meta-oe/recipes-support/c-ares/c-ares_1.18.1.bb                 | 4 +-
+  4 files changed, 118 insertions(+), 1 deletion(-)
+  create mode 100644 
+meta-networking/recipes-support/dnsmasq/files/CVE-2023-28450.patch
+  create mode 100644 
+meta-oe/recipes-support/c-ares/c-ares/CVE-2022-4904.patch
 
 
