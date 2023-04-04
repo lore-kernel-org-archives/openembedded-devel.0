@@ -1,103 +1,65 @@
-Return-Path: <Martin.Jansa@gmail.com>
+Return-Path: <peter.kjellerstedt@axis.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D93B8C6FD1D
-	for <webhook@archiver.kernel.org>; Tue,  4 Apr 2023 23:36:54 +0000 (UTC)
-Received: from mail-wr1-f53.google.com (mail-wr1-f53.google.com [209.85.221.53])
- by mx.groups.io with SMTP id smtpd.web11.117873.1680651411422422025
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E43D8C761AF
+	for <webhook@archiver.kernel.org>; Tue,  4 Apr 2023 23:51:04 +0000 (UTC)
+Received: from smtp2.axis.com (smtp2.axis.com [195.60.68.18])
+ by mx.groups.io with SMTP id smtpd.web10.118099.1680652255084745890
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 04 Apr 2023 16:36:51 -0700
+ Tue, 04 Apr 2023 16:50:56 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20210112 header.b=S42QYyuZ;
- spf=pass (domain: gmail.com, ip: 209.85.221.53, mailfrom: martin.jansa@gmail.com)
-Received: by mail-wr1-f53.google.com with SMTP id r11so34429066wrr.12
-        for <openembedded-devel@lists.openembedded.org>; Tue, 04 Apr 2023 16:36:51 -0700 (PDT)
+ dkim=pass header.i=@axis.com header.s=axis-central1 header.b=fZ5I101X;
+ spf=pass (domain: axis.com, ip: 195.60.68.18, mailfrom: peter.kjellerstedt@axis.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112; t=1680651410; x=1683243410;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=zETdAoMeu1XL1kD0RebsRAX116vZNnSMMdTy0u+Hchk=;
-        b=S42QYyuZytV+rKkTc0MPEeo8s4TOb5almo/F9Jh/xm3eA6sBrmjJ2ZpVij3AcJZPM/
-         x8FydmbjgSmaVFLgip0qbc3pJUMFkRCuD4Ap6aOmczVq1uQ4L0vqnHCqujpFdB9tlCj3
-         twVuFRZJq1s16zWTE328YzznF+vcs5Y8+FV1vhGH2OTpNSHrSCdXojAq8oT0xXW5YudR
-         xQJx3dcnxwA18ptGbIdOxmHIYP4ygyTI2DJgk589sWVqgsCydDBg0mjTsphImz0dWCCp
-         MPN2gXW44GLFqJr+hJ6Egd0lgevq/8OlF32hf5bfP+UDIG/yn/pMpTptEJZkE00pqmp0
-         mAJg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112; t=1680651410; x=1683243410;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=zETdAoMeu1XL1kD0RebsRAX116vZNnSMMdTy0u+Hchk=;
-        b=L03tM4VPl0Kd06blFkyF4KofQcMDHxTYFN7s9rOb4fRWPhDLK238ML6gMnnMLrhKgJ
-         LzhvJ5cJ4QbY3CLfXwl4z0fBwH10V4+HuoqIazAKttaJabaxXer4k86jzfsy2l04zQmf
-         xAZc4zZr8aGplnc36tWogo3gA7osZppN0wNrUmjXOKHAXG/6RxZjpX7OllJcdp0G1AMC
-         JdO3yy0S30h9mqWXc1wW0bjZCaP3/CIHRQ0Y40Noff3jv4nEylhJQz8nixMlwK3agMaT
-         KTU9M5b3NFv70WzwtYAVxPIfIRm34eiFk53IuOFCZuakAwZGR97UQPZJMAAONJm2F50j
-         So4Q==
-X-Gm-Message-State: AAQBX9c14WFkUnN94M3kAcnETlClodfrcNHFQDmI5cdaAh65i8sYo2hR
-	EYFC8PVJC5C1hfNB3520y+ntvZrMURI=
-X-Google-Smtp-Source: AKy350ZbgEwS4dfV5Fa/wYRjBH0oMyQhMGxcaW0DaWoG823e878/E3bgmepu9jg23WYSAq6+g5uC+g==
-X-Received: by 2002:a5d:510c:0:b0:2d7:627b:200 with SMTP id s12-20020a5d510c000000b002d7627b0200mr3112859wrt.64.1680651409586;
-        Tue, 04 Apr 2023 16:36:49 -0700 (PDT)
-Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
-        by smtp.gmail.com with ESMTPSA id i12-20020a5d55cc000000b002c3f81c51b6sm13393251wrw.90.2023.04.04.16.36.49
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 04 Apr 2023 16:36:49 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Martin Jansa <Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH] zsh: fix installed-vs-shipped with multilib
-Date: Wed,  5 Apr 2023 01:36:40 +0200
-Message-Id: <20230404233640.3074570-1-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.40.0
+  d=axis.com; q=dns/txt; s=axis-central1; t=1680652256;
+  x=1712188256;
+  h=from:to:subject:date:message-id:in-reply-to:references:
+   mime-version:content-transfer-encoding;
+  bh=5cYbIG6ml0KIBd2RXAjN8fJ4AAlrzcbAkpR2LemReTk=;
+  b=fZ5I101XCEkJcN7vjBv9LGGydhDfsYhLauD+pqJNMZx8dQlQMfw6m1bQ
+   4l/0npouGIt8s5wINOOAJmImwue8ESfIAz2dRGxa8Woo0E80H9wBOBgAF
+   OufIlrpnuzlLqDyMJhEexpzkVtRLHay38s7eIWl2FrJLDeLrLYb0WmjaY
+   zB5VvsHFq5bwNxSJAmRI9NiGmQOwm6M65TvbKpAfwya7Cra6INcVBgRyh
+   zyNFGF7RCQT3mN6+to389qR2PCJXgCSefEHHG/J90+3jCICiMYkfHxXIl
+   f9zoaUzhsjheP07XqSWBAtYEtpBLlkPR89F6ARhcIjKPDPR75uSOO2pUi
+   A==;
+From: Peter Kjellerstedt <pkj@axis.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [meta-python][PATCH 3/5] python3-crc32c: Correct the license information
+Date: Wed, 5 Apr 2023 01:50:45 +0200
+Message-ID: <20230404235047.601178-3-pkj@axis.com>
+X-Mailer: git-send-email 2.39.2
+In-Reply-To: <20230404235047.601178-1-pkj@axis.com>
+References: <20230404235047.601178-1-pkj@axis.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 04 Apr 2023 23:36:54 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101952
+ <openembedded-devel@lists.openembedded.org>; Tue, 04 Apr 2023 23:51:04 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101954
 
-* fixes:
-lib32-zsh-5.8: lib32-zsh: Files/directories were installed but not shipped in any package:
-  /usr/share/lib32-zsh
-  /usr/share/lib32-zsh/5.8
-  /usr/share/lib32-zsh/site-functions
-  /usr/share/lib32-zsh/5.8/functions
-  /usr/share/lib32-zsh/5.8/functions/_selinux_users
-... 1000+ lines ...
-  /usr/share/lib32-zsh/5.8/functions/VCS_INFO_bydir_detect
-Please set FILES such that these items are packaged. Alternatively if they are unneeded, avoid installing them or delete them within do_install.
-lib32-zsh: 1116 installed and not shipped files. [installed-vs-shipped]
+Correct "startline=" to "beginline=" in LIC_FILES_CHKSUM so that the
+correct lines from crc32c_adler.c are used.
 
-* they will clash if someone is trying to install both zsh
-  and lib32-zsh, but it's not very likely as nobody sane
-  was building lib32-zsh with 1000+ line warning regularly
-
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+Signed-off-by: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
 ---
- meta-oe/recipes-shells/zsh/zsh_5.8.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ meta-python/recipes-devtools/python/python3-crc32c_2.3.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-shells/zsh/zsh_5.8.bb b/meta-oe/recipes-shells/zsh/zsh_5.8.bb
-index b023e8d297..7602ff9f64 100644
---- a/meta-oe/recipes-shells/zsh/zsh_5.8.bb
-+++ b/meta-oe/recipes-shells/zsh/zsh_5.8.bb
-@@ -22,8 +22,8 @@ inherit autotools-brokensep gettext update-alternatives manpages
- EXTRA_OECONF = " \
-     --bindir=${base_bindir} \
-     --enable-etcdir=${sysconfdir} \
--    --enable-fndir=${datadir}/${PN}/${PV}/functions \
--    --enable-site-fndir=${datadir}/${PN}/site-functions \
-+    --enable-fndir=${datadir}/${BPN}/${PV}/functions \
-+    --enable-site-fndir=${datadir}/${BPN}/site-functions \
-     --with-term-lib='ncursesw ncurses' \
-     --with-tcsetpgrp \
-     --enable-cap \
--- 
-2.40.0
-
+diff --git a/meta-python/recipes-devtools/python/python3-crc32c_2.3.bb b/meta-python/recipes-devtools/python/python3-crc32c_2.3.bb
+index 203256895..da756ea07 100644
+--- a/meta-python/recipes-devtools/python/python3-crc32c_2.3.bb
++++ b/meta-python/recipes-devtools/python/python3-crc32c_2.3.bb
+@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = " \
+     file://LICENSE;md5=4fbd65380cdd255951079008b364516c \
+     file://LICENSE.google-crc32c;md5=e9ed01b5e5ac9eae23fc2bb33701220c \
+     file://LICENSE.slice-by-8;md5=6b3bc7709d6b2db6646ec2467310ff6b \
+-    file://crc32c_adler.c;startline=9;endline=24;md5=c60e6e55d0e5d95effa6fad27db0711a \
++    file://crc32c_adler.c;beginline=9;endline=24;md5=9c8bd2afd2d340fd37c038759cd4eff8 \
+ "
+ 
+ SRC_URI[sha256sum] = "17ce6c596ad0d53df52dcd72defb66984aeabd98fbefea7ba848a6b6bdece36a"
 
