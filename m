@@ -2,81 +2,96 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9C17CC7618D
-	for <webhook@archiver.kernel.org>; Thu,  6 Apr 2023 03:13:12 +0000 (UTC)
-Received: from mail-pj1-f49.google.com (mail-pj1-f49.google.com [209.85.216.49])
- by mx.groups.io with SMTP id smtpd.web10.149981.1680750783930481013
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A21C1C7618D
+	for <webhook@archiver.kernel.org>; Thu,  6 Apr 2023 03:16:12 +0000 (UTC)
+Received: from mail-pj1-f44.google.com (mail-pj1-f44.google.com [209.85.216.44])
+ by mx.groups.io with SMTP id smtpd.web11.150195.1680750971462447258
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 05 Apr 2023 20:13:04 -0700
+ Wed, 05 Apr 2023 20:16:11 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=Uw2buj/Y;
- spf=pass (domain: gmail.com, ip: 209.85.216.49, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f49.google.com with SMTP id nh20-20020a17090b365400b0024496d637e1so278225pjb.5
-        for <openembedded-devel@lists.openembedded.org>; Wed, 05 Apr 2023 20:13:03 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=iH0vSFd7;
+ spf=pass (domain: gmail.com, ip: 209.85.216.44, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f44.google.com with SMTP id o6-20020a17090a9f8600b0023f32869993so41597203pjp.1
+        for <openembedded-devel@lists.openembedded.org>; Wed, 05 Apr 2023 20:16:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112; t=1680750783;
+        d=gmail.com; s=20210112; t=1680750971;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=MVMP0bfuet9nK4vmTSGDP2cuNlEdXyw1wVtOiKOksCs=;
-        b=Uw2buj/YgiAf17Z3/8GqrYZfyfphdbikGwgtSovtwnPXoP6SnFC218AqvSFYgP7Bfe
-         mHm3KnSrYXMjM531nulvgZ5oRDD79E43xhs3Ye4yyaoVInQpV+Wi2IZ//Afdd4b9PwQQ
-         YNbR3gAPglCKOOZfWgJg/jkyjkb31DaAkUysfgjNY/KXNyneCFfbqUhFaSfunhr9P4VT
-         9t/heJ1VRuo7doM87wZ2NT1M+IG/z6szXbsXMe565ZgxQhd+vk4FOc5G75wtXNxQV0SY
-         y+zUAsxRHQzeSOtXPAGlHUjfgkTzr6AiVKYWVHcSK5AQllDslwmazK/VKEQnKnuVthcE
-         +31Q==
+        bh=BbP0Vc0jh7a+rlpZWmFz6lDbW1rsjfEWAxQGy8H5RIc=;
+        b=iH0vSFd7CsA66+iILKxsBAd8W+bI/6uJ2bzAjigk+K2cCEbxzgzf1/r5CQlksgR9rV
+         XDXVmX8oNJAtv+OEedzCIE5F85AeUuVA1WunHN8AQJQG/HPHHtF5TSkrzxn95Q5oE1W0
+         35rp70maehHrJua4cjncCbR/NGeCysXWRx89yT6vyuANPoYa7u1b21KgLTmdq4jsSkU2
+         Xqi4VbFWR84KRgb+XqASyqotQJTmbrKH7jgt5fCMbVwVdgpGWd20YtifsUROVUgsKHys
+         niKYnMpbJ4TJCpVy5e7872HXtaa5xI64iu9mQCfFP44QEJXU0Clv330R7CsbcrfJGQCa
+         LuIQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112; t=1680750783;
+        d=1e100.net; s=20210112; t=1680750971;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=MVMP0bfuet9nK4vmTSGDP2cuNlEdXyw1wVtOiKOksCs=;
-        b=eckfdhSbDB/QwQXBA2ApgK+3rW6GVrXzp0NyJAwiPh/AyAYWHNbXl/g/FN4J7dpxAB
-         ZwwtY+2y4TZTE1iKI+iOnMD44AEZCrfx/YP4sJLGOJ0kBS0ZHzQKG74/OklzpvZ596Vy
-         NH0qFAIq2TGEAYilRyn2qNP259tflZC/LocoHSnTHfaLob5ubNzBdZ0v03XuAX1whXNJ
-         HywmbUEsZGQhRsf63uDQwWBAhobYZhWY4ICvrn2PiPg/rrQlBVmDBo83Gt8rz5HT705O
-         4rDMWO1RcXFDl/2kQTYURu9EDbfM4SQUgV6QIn61Qanxuh0vWZaRUv5eZ/5OJ41hrf6O
-         uV5g==
-X-Gm-Message-State: AAQBX9eyyvuPv2WqEIziMTgEUox2mOufGClyopXLavkCuE+ttmRIZ81f
-	CTJujvkJTwJs072KXbElGwrek1USpbWLsw==
-X-Google-Smtp-Source: AKy350YflZiqsl1IzZLINmW4ZrtfhSo9tk7leIVHnpdFmqBC+fFQXZl1Sr+wI31vfk65EBK7u/Sx5Q==
-X-Received: by 2002:a05:6a20:b113:b0:e6:b780:2a60 with SMTP id ed19-20020a056a20b11300b000e6b7802a60mr1559269pzb.19.1680750782976;
-        Wed, 05 Apr 2023 20:13:02 -0700 (PDT)
+        bh=BbP0Vc0jh7a+rlpZWmFz6lDbW1rsjfEWAxQGy8H5RIc=;
+        b=gmvPomU3NlOdL2BoCTBUOaC/nmdsT8Bh8pQRi8g7yL/SBDVMTA3OLbWRUn8ohZ4Zo+
+         YS9fKaYo02ZGX65VaWVGEm4Fmqpja4V/YKCA91CU7PwbwWr0VUBFVVILJ7VKlB12lvUe
+         lNAjvlhf/leBlt4A3NDAuJOL1cv4kVI3RN61auCOBqd3glmZHZl8fuwWzboWx/xqL2IX
+         AffkrMFsrduWn3AOboA9RMhdQNWp/sMzwJ1qKdGjTivgyTAFeJlrYgAsqh2d7dWeVkL0
+         ExA3EVYwGRNT368h5TyX4i1kEluSma/Gq2n3wsXL5KGcadzGB22NQ/X8lcSGWh21ztwf
+         WBAQ==
+X-Gm-Message-State: AAQBX9cK9iDJgU3fF4s700VPsVbLp1IqtusVdER/7VxzvCERcFwfrVit
+	P2pSJeJP7SYnvgfPQiIqcaUQZ2cFaEN66A==
+X-Google-Smtp-Source: AKy350awc+vl7E1KUkn3bn+36KnX4niWd3G2Mc/dExeGcEX22y++s9GEx6d5BM9ngw70wZzL9hWnwg==
+X-Received: by 2002:a17:90b:4d8c:b0:23d:31c3:c9a4 with SMTP id oj12-20020a17090b4d8c00b0023d31c3c9a4mr9501122pjb.26.1680750970536;
+        Wed, 05 Apr 2023 20:16:10 -0700 (PDT)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9181:d380::26f8])
-        by smtp.gmail.com with ESMTPSA id h3-20020a654683000000b00502fd141ffbsm95141pgr.49.2023.04.05.20.13.02
+        by smtp.gmail.com with ESMTPSA id t16-20020a1709028c9000b001a279237e73sm137589plo.152.2023.04.05.20.16.09
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 05 Apr 2023 20:13:02 -0700 (PDT)
+        Wed, 05 Apr 2023 20:16:10 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-perl][PATCH] libnet-ssleay-perl: Fix patch upstream status
-Date: Wed,  5 Apr 2023 20:13:00 -0700
-Message-Id: <20230406031300.3284655-1-raj.khem@gmail.com>
+Subject: [meta-xfce][PATCH] meta-xfce: Fix missing upstream status in patches
+Date: Wed,  5 Apr 2023 20:16:07 -0700
+Message-Id: <20230406031607.3285228-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.40.0
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 06 Apr 2023 03:13:12 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101962
+ <openembedded-devel@lists.openembedded.org>; Thu, 06 Apr 2023 03:16:12 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101963
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../libnet/libnet-ssleay-perl/no-exec-on-configure.patch      | 4 ++++
- 1 file changed, 4 insertions(+)
+ .../0001-check-for-fstab.h-during-configure.patch               | 1 +
+ .../files/0001-xsettings.xml-Set-default-themes.patch           | 2 +-
+ 2 files changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/meta-perl/recipes-perl/libnet/libnet-ssleay-perl/no-exec-on-configure.patch b/meta-perl/recipes-perl/libnet/libnet-ssleay-perl/no-exec-on-configure.patch
-index 6efa7d8f95..9620df5ece 100644
---- a/meta-perl/recipes-perl/libnet/libnet-ssleay-perl/no-exec-on-configure.patch
-+++ b/meta-perl/recipes-perl/libnet/libnet-ssleay-perl/no-exec-on-configure.patch
-@@ -1,3 +1,7 @@
-+Avoid running target binaries during in cross build
-+
-+Upstream-Status: Inappropriate [Cross-compile specific]
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
- --- a/inc/Module/Install/PRIVATE/Net/SSLeay.pm	2018-08-27 14:56:24.788544991 +0200
- +++ b/inc/Module/Install/PRIVATE/Net/SSLeay.pm	2018-08-27 15:00:12.847266331 +0200
- @@ -24,20 +24,7 @@
+diff --git a/meta-xfce/recipes-panel-plugins/mount/xfce4-mount-plugin/0001-check-for-fstab.h-during-configure.patch b/meta-xfce/recipes-panel-plugins/mount/xfce4-mount-plugin/0001-check-for-fstab.h-during-configure.patch
+index d81f702891..64f06cebb5 100644
+--- a/meta-xfce/recipes-panel-plugins/mount/xfce4-mount-plugin/0001-check-for-fstab.h-during-configure.patch
++++ b/meta-xfce/recipes-panel-plugins/mount/xfce4-mount-plugin/0001-check-for-fstab.h-during-configure.patch
+@@ -9,6 +9,7 @@ plugin
+ 
+ Makes it compile/build with musl
+ 
++Upstream-Status: Pending
+ Signed-off-by: Khem Raj <raj.khem@gmail.com>
+ 
+ Patch Reworked for xfce4-mount-plugin 0.6.4->1.1.2
+diff --git a/meta-xfce/recipes-xfce/xfce4-settings/files/0001-xsettings.xml-Set-default-themes.patch b/meta-xfce/recipes-xfce/xfce4-settings/files/0001-xsettings.xml-Set-default-themes.patch
+index 0463d2ebdb..274454c015 100644
+--- a/meta-xfce/recipes-xfce/xfce4-settings/files/0001-xsettings.xml-Set-default-themes.patch
++++ b/meta-xfce/recipes-xfce/xfce4-settings/files/0001-xsettings.xml-Set-default-themes.patch
+@@ -6,7 +6,7 @@ MIME-Version: 1.0
+ Content-Type: text/plain; charset=UTF-8
+ Content-Transfer-Encoding: 8bit
+ 
+-Upstram status:  Inappropriate [configuration]
++Upstream-Status: Inappropriate [configuration]
+ 
+ Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+ 
 -- 
 2.40.0
 
