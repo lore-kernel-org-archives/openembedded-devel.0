@@ -2,56 +2,56 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A63A9C77B6C
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BAA1EC77B71
 	for <webhook@archiver.kernel.org>; Thu,  6 Apr 2023 06:54:33 +0000 (UTC)
-Received: from mail-pl1-f175.google.com (mail-pl1-f175.google.com [209.85.214.175])
- by mx.groups.io with SMTP id smtpd.web11.152552.1680764068687098403
+Received: from mail-pj1-f41.google.com (mail-pj1-f41.google.com [209.85.216.41])
+ by mx.groups.io with SMTP id smtpd.web11.152550.1680764067370246318
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 05 Apr 2023 23:54:28 -0700
+ Wed, 05 Apr 2023 23:54:27 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=o3gPLTpw;
- spf=pass (domain: gmail.com, ip: 209.85.214.175, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f175.google.com with SMTP id ja10so36698942plb.5
-        for <openembedded-devel@lists.openembedded.org>; Wed, 05 Apr 2023 23:54:28 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=Bhwcgq/R;
+ spf=pass (domain: gmail.com, ip: 209.85.216.41, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f41.google.com with SMTP id q102so36411465pjq.3
+        for <openembedded-devel@lists.openembedded.org>; Wed, 05 Apr 2023 23:54:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112; t=1680764068;
+        d=gmail.com; s=20210112; t=1680764066;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=8+g5crCwGTTKIxL/03OFkI6vt/W8joOHCJKeuTv0/VA=;
-        b=o3gPLTpwEZyNngK6/6+YJuIXHEmIv8Pm5/GQmyAtCyvCwP0CPyh/0DqByg88cSQ1Tp
-         Es8Np5y7AiM8yhWsewwMTE4UOM/x5LX6Tt0iFm7/Ei/xnjkq2utKeRuM2W4vwH/pmjst
-         oPdFeXcod3CVhJRQ9NSmnJ+7XitLHoVhlTFQk6swfFFL0Qwuf9emhuL6Fop/baNqrygR
-         eRE3Cdkj5NChNoDJ3F3lJk7F+yWyVfwI/wx4vRnKqBbHFMoWsrkwcTdAT4joEvIzWTlW
-         aPE5xHLcZPhHRZho1GoIg/WVXT+6vec7Bq5ySr0nXd/+D2QtpPdvUJiiX3PZrMMPFDw+
-         3TDw==
+        bh=Q0J3ym1BPrNGEjdFxJcZyYK/xtTHNn+l5aif8LSBx5k=;
+        b=Bhwcgq/R2EsY6m+M7Z0/o5VDCngM3kcyqEYVAzZ6YhHNUK8XIWN+ZHfDKZ7DkA+aDz
+         mILno/xUkj3AMr2sVGc9UwUx+2SDrZokIwk7pwjXu86X1h29BcAdsYODmoSBY/3PyLZQ
+         R3rTsd2bXose97E/+qalFyUGrOPj/BfmXndivG3f2QrEvrLZ7B7M3bMMDLlkFaHLPQBa
+         96GZ+kfP+HwYDq+/gZulXaBMVAqTQJ2n4LJHJADIllOUg01pP/jkfxyWnY/bjJFXzjNZ
+         zFNszTplFtQjXTdUfyxbwdX9VEhNAC5Dor5x9FLeHt8xXl4m1Bse27G/zVrqgJsFa3/c
+         4KvA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112; t=1680764068;
+        d=1e100.net; s=20210112; t=1680764066;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=8+g5crCwGTTKIxL/03OFkI6vt/W8joOHCJKeuTv0/VA=;
-        b=jLBBgF+ULBBXXplzNaL4IYIsC+Sz6dA4LRq9660rjSVr9GBTm/0ZLUEQKcE6zW3xdD
-         iXY3g95oD5qOBXqQQi4RQMAz/GbhE43luDVJZsmIXSp54RgtaZR21exvZIqhCWARfUHX
-         C/K5SjPSev+NIHu++D3MjYM+vggglG54RETNSXomla2XkvZJz+HwZ8ucyUGb8XBV3Ve9
-         7UDc87MSMSK8jX5eOzFtO0NUw7d/uSnpL6Bd7b/YdTC3haUrgOIyN83Oz4NCT8IEQBkT
-         Lg84UnxHiCNybDbkzgUEmqoFWycVWZaZq59jrN7IZ1kPAm97voOvTunInJ9wL+PY0H66
-         ++Lw==
-X-Gm-Message-State: AAQBX9fMbLuNo8LD3LLY97xFWLULKLK6hfwu4vqAOjUjkV3kZSmqlKDW
-	SUO3pbXtzVx5NM/pl9X1eDceGmjaVYpIgQ==
-X-Google-Smtp-Source: AKy350ZsNsnnlQ7O/3dvrFyk6oFsWeUPXGArnek+TAcsasF/oEUlKs6bnzG1D6bQWWGk0XdKgKPcwQ==
-X-Received: by 2002:a17:903:283:b0:1a2:63af:e980 with SMTP id j3-20020a170903028300b001a263afe980mr10705970plr.13.1680764067872;
-        Wed, 05 Apr 2023 23:54:27 -0700 (PDT)
+        bh=Q0J3ym1BPrNGEjdFxJcZyYK/xtTHNn+l5aif8LSBx5k=;
+        b=riMeOCCimDGMEoiG02a6wcVrEuvy1gf2E11U+jY7PGJoC7hmuTb6wTsF/ej0DxWu1h
+         QTOLimI11L1zaBKZd8tTBcV/O6gKNUL/azwOcdDvQB7/z4mY+zhxnhOSippnk2Xw6A6V
+         9alaK3dLNYfoaTQr7wdOQlKD+2aMVDP+GiCrlB2XSPe5J2hWvT6O9P1EbjBcax/3blZ8
+         Bjp0JdQEArqQ9s2HohnIxZEMBdp+DSCFk35xNd810sFAi1p18H+Vn30bG1SMGP/Ke1X/
+         YAh9gurV6bBr1ESIp4HIXt/HAcHo+DyG70apsIqETj6qCdRSjvN5RofAxfF9VekfKKrJ
+         XqJQ==
+X-Gm-Message-State: AAQBX9eet2/76sVt3Ooleq5XGeElsaFmTTwf9KkeChMQmiW/OW75Jmru
+	qeEiCMfbAzc6fzbDqY1X0+x9cYtDoeP/OQ==
+X-Google-Smtp-Source: AKy350ZtHxjvwLaWTYKRHbrNfIsCLQ60l2TqAnSWsRwzN1860eGO31/sGKNlf6s/G7M00jv4Rc4WmQ==
+X-Received: by 2002:a17:902:c403:b0:1a2:7356:1ecd with SMTP id k3-20020a170902c40300b001a273561ecdmr13077905plk.5.1680764066441;
+        Wed, 05 Apr 2023 23:54:26 -0700 (PDT)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9181:d380::26f8])
-        by smtp.gmail.com with ESMTPSA id y11-20020a1709027c8b00b0019c919bccf8sm648703pll.86.2023.04.05.23.54.27
+        by smtp.gmail.com with ESMTPSA id y11-20020a1709027c8b00b0019c919bccf8sm648703pll.86.2023.04.05.23.54.26
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 05 Apr 2023 23:54:27 -0700 (PDT)
+        Wed, 05 Apr 2023 23:54:26 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 5/5] minifi-cpp: Always use stat on 64bit linux
-Date: Wed,  5 Apr 2023 23:54:21 -0700
-Message-Id: <20230406065421.767010-5-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 3/5] libtinyxml2: Add ptest support
+Date: Wed,  5 Apr 2023 23:54:19 -0700
+Message-Id: <20230406065421.767010-3-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.40.0
 In-Reply-To: <20230406065421.767010-1-raj.khem@gmail.com>
 References: <20230406065421.767010-1-raj.khem@gmail.com>
@@ -61,71 +61,64 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 06 Apr 2023 06:54:33 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101970
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101968
 
-stat64 is an alias to stat on 64bit linux moreover this makes it work
-with musl where LFS64 functions are deprecated
+- Switch to usong meson build system
+- Fix build with musl by defining _LARGEFILE64_SOURCE
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...ot-use-LFS64-functions-on-linux-musl.patch | 35 +++++++++++++++++++
- .../minifi-cpp/minifi-cpp_0.7.0.bb            |  1 +
- 2 files changed, 36 insertions(+)
- create mode 100644 meta-oe/recipes-extended/minifi-cpp/files/0001-Do-not-use-LFS64-functions-on-linux-musl.patch
+ .../recipes-support/libtinyxml2/files/run-ptest  | 10 ++++++++++
+ .../libtinyxml2/libtinyxml2_9.0.0.bb             | 16 +++++++++++-----
+ 2 files changed, 21 insertions(+), 5 deletions(-)
+ create mode 100644 meta-oe/recipes-support/libtinyxml2/files/run-ptest
 
-diff --git a/meta-oe/recipes-extended/minifi-cpp/files/0001-Do-not-use-LFS64-functions-on-linux-musl.patch b/meta-oe/recipes-extended/minifi-cpp/files/0001-Do-not-use-LFS64-functions-on-linux-musl.patch
+diff --git a/meta-oe/recipes-support/libtinyxml2/files/run-ptest b/meta-oe/recipes-support/libtinyxml2/files/run-ptest
 new file mode 100644
-index 0000000000..29f5b94a04
+index 0000000000..0797ea2374
 --- /dev/null
-+++ b/meta-oe/recipes-extended/minifi-cpp/files/0001-Do-not-use-LFS64-functions-on-linux-musl.patch
-@@ -0,0 +1,35 @@
-+From 6690e7fe566445e20fec178e9e209e5f9f2fdde3 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Wed, 5 Apr 2023 23:33:46 -0700
-+Subject: [PATCH] Do not use LFS64 functions on linux/musl
++++ b/meta-oe/recipes-support/libtinyxml2/files/run-ptest
+@@ -0,0 +1,10 @@
++#!/bin/sh
 +
-+On musl, off_t is 64bit always ( even on 32bit platforms ), therefore using
-+LFS64 funcitons is not needed on such platforms. Moreover, musl has stopped
-+providing aliases for these functions [1] which means it wont compile on
-+newer musl systems. Therefore only use it on 32bit glibc/linux platforms
-+and exclude musl like cygwin or OSX
++for i in `ls *test`; do
++    $i
++    if [ $? -eq 0 ]; then
++        echo "PASS: $i"
++    else
++        echo "FAIL: $i"
++    fi
++done
+diff --git a/meta-oe/recipes-support/libtinyxml2/libtinyxml2_9.0.0.bb b/meta-oe/recipes-support/libtinyxml2/libtinyxml2_9.0.0.bb
+index 7f205987f4..b99a126ba2 100644
+--- a/meta-oe/recipes-support/libtinyxml2/libtinyxml2_9.0.0.bb
++++ b/meta-oe/recipes-support/libtinyxml2/libtinyxml2_9.0.0.bb
+@@ -4,14 +4,20 @@ SECTION = "libs"
+ LICENSE = "Zlib"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=135624eef03e1f1101b9ba9ac9b5fffd"
+ 
+-SRC_URI = "git://github.com/leethomason/tinyxml2.git;branch=master;protocol=https"
+-
+ SRCREV = "1dee28e51f9175a31955b9791c74c430fe13dc82"
++SRC_URI = "git://github.com/leethomason/tinyxml2.git;branch=master;protocol=https \
++           file://run-ptest"
+ 
+ S = "${WORKDIR}/git"
+ 
+-inherit cmake
++inherit meson ptest
+ 
+-BBCLASSEXTEND = "native"
++EXTRA_OEMESON += "${@bb.utils.contains('PTEST_ENABLED', '1', '-Dtests=true', '', d)}"
 +
-+[1] https://git.musl-libc.org/cgit/musl/commit/?id=246f1c811448f37a44b41cd8df8d0ef9736d95f4
++CXXFLAGS:append:libc-musl = " -D_LARGEFILE64_SOURCE"
+ 
+-EXTRA_OECMAKE += "-Dtinyxml2_SHARED_LIBS=YES"
++do_install_ptest() {
++    install -Dm 0755 ${B}/xmltest ${D}${PTEST_PATH}/xmltest
++}
 +
-+Upstream-Status: Submitted [https://github.com/gabime/spdlog/pull/2589]
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ thirdparty/spdlog-20170710/include/spdlog/details/os.h | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/thirdparty/spdlog-20170710/include/spdlog/details/os.h b/thirdparty/spdlog-20170710/include/spdlog/details/os.h
-+index 735f60147..639b07a79 100644
-+--- a/thirdparty/spdlog-20170710/include/spdlog/details/os.h
-++++ b/thirdparty/spdlog-20170710/include/spdlog/details/os.h
-+@@ -237,7 +237,7 @@ inline size_t filesize(FILE *f)
-+ #else // unix
-+     int fd = fileno(f);
-+     //64 bits(but not in osx, where fstat64 is deprecated)
-+-#if !defined(__FreeBSD__) && !defined(__APPLE__) && (defined(__x86_64__) || defined(__ppc64__))
-++#if !defined(__FreeBSD__) && !defined(__APPLE__) && ((defined(__x86_64__) || defined(__ppc64__)) && (!defined(__linux__)))
-+     struct stat64 st;
-+     if (fstat64(fd, &st) == 0)
-+         return static_cast<size_t>(st.st_size);
-+-- 
-+2.40.0
-+
-diff --git a/meta-oe/recipes-extended/minifi-cpp/minifi-cpp_0.7.0.bb b/meta-oe/recipes-extended/minifi-cpp/minifi-cpp_0.7.0.bb
-index 1bf99d4907..b76f120ee1 100644
---- a/meta-oe/recipes-extended/minifi-cpp/minifi-cpp_0.7.0.bb
-+++ b/meta-oe/recipes-extended/minifi-cpp/minifi-cpp_0.7.0.bb
-@@ -32,6 +32,7 @@ SRC_URI = "git://github.com/apache/nifi-minifi-cpp.git;branch=master;protocol=ht
-             file://0001-Fix-build-with-libc.patch \
-             file://0001-civetweb-Disable-lto.patch \
-             file://0001-Add-missing-includes-cstdint-and-cstdio.patch \
-+            file://0001-Do-not-use-LFS64-functions-on-linux-musl.patch \
-             file://minifi.service \
-             file://systemd-volatile.conf \
-             file://sysvinit-volatile.conf \
++BBCLASSEXTEND = "native"
 -- 
 2.40.0
 
