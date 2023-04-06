@@ -2,343 +2,213 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B0FD2C7618D
-	for <webhook@archiver.kernel.org>; Thu,  6 Apr 2023 03:34:22 +0000 (UTC)
-Received: from mail-pl1-f179.google.com (mail-pl1-f179.google.com [209.85.214.179])
- by mx.groups.io with SMTP id smtpd.web11.150419.1680752053534695820
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B0EACC7618D
+	for <webhook@archiver.kernel.org>; Thu,  6 Apr 2023 03:41:02 +0000 (UTC)
+Received: from mail-pl1-f172.google.com (mail-pl1-f172.google.com [209.85.214.172])
+ by mx.groups.io with SMTP id smtpd.web10.150327.1680752459842093351
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 05 Apr 2023 20:34:13 -0700
+ Wed, 05 Apr 2023 20:40:59 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=bOZvqIgW;
- spf=pass (domain: gmail.com, ip: 209.85.214.179, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f179.google.com with SMTP id o2so36359337plg.4
-        for <openembedded-devel@lists.openembedded.org>; Wed, 05 Apr 2023 20:34:13 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=lkfQKHZ/;
+ spf=pass (domain: gmail.com, ip: 209.85.214.172, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f172.google.com with SMTP id n14so20498842plc.8
+        for <openembedded-devel@lists.openembedded.org>; Wed, 05 Apr 2023 20:40:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112; t=1680752053;
+        d=gmail.com; s=20210112; t=1680752459;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=naYPdzCJVR1VPc/79KHLryK/AU74aK3LrMXC9w4/GVg=;
-        b=bOZvqIgWDbogn6jtj0OWfm8mlOxx26QXlHKXn9vYH24ebjo2TEnLm1h2tl5RER56ni
-         zBfIVI2lev93l+0s8WXvfgvxzLrS7aBimhk+6W1XmVE6QcJWVPRi6+CMDlRXqWkZm3Vd
-         bwLpBjQ20ATQdvMWMIetg6wfNcRr2s8bG0ZswV/FshC7nZwBbe89CxilRRAstzy6pIrU
-         nV2TN/tA8TVjX6sZv/QjHdwgye6Wdk5RopJwqLpF8zHebWi7BbudGq570R4vYRvPWmv4
-         VJoa0+5wORnXKI9Daji66OnIRsg6Zdpnzo5BNm2F4bQfWKy1JlPbUWPjGcsVAz/dKtLM
-         Lr9w==
+        bh=J7Wpb9HQTnwzTpND8+x8g6aAzk8Wku+uQ+x789O8oZw=;
+        b=lkfQKHZ/313TDmh6NZ7UlKaysA3KsBqhYfQ38PtonEG0K21Hg8Y868/CgPwiEBd+FJ
+         YTU1rs9doV3ZIYgVwrWxXt9pYS/+32S3NcY/ZpEw9vGPZFm2BDMzHIuEZsULJzmosoyC
+         8wFk2pXr6Wm2b9R0tWW82SEx0wqdqqEqwCrmcrfex+jZwkHVy/YqxjYmVKRNYaGpWxbM
+         uzQhHwRdYW9eydHR3tc9o1w4LitR/nvtGHm1PK1nkzYuma75EnFpCYHtTxdRXKSNd5zm
+         afLqnx4tURL1ULxxJTf8NlQRS7GR+AY9/PIFAtqKl8XDYYwLhkxy6YAtAxq+lXC/S+xY
+         vAzA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112; t=1680752053;
+        d=1e100.net; s=20210112; t=1680752459;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=naYPdzCJVR1VPc/79KHLryK/AU74aK3LrMXC9w4/GVg=;
-        b=r4izIq0dxEK5Rqp1QSnWqOZYRQT0bIFpBQrF6bh7bNnti+U35JWojumc9nZWTHBvJC
-         Gzv/kJw4OvfZPpJTY95od/xqwj0wb0/YULzJmaYGbIyp786Hs/micAruTWpJxlZzxnEf
-         yRypHbH8ZJE4NalRe6QI1Rvv+Tr240MRZvDil0RPB6Cq0gcImVpamzT1o9VLsV3eWbiG
-         6TDvUQCP+gl40NefnxpQSGE1S9qqG/cArX+hpayfXlPbWq9SqqjRxkKWuQRj/Vfp22K0
-         eSWUz8SfapYO4lcJQ6hOwg06MuR2bZ18jV3DFgtNKkySJEeOwYuObyrEaoa+5T5V5oE/
-         qiOg==
-X-Gm-Message-State: AAQBX9fZkXP7LKSQcidyNQILEYO+40527fmW1qZS0Ba6Wwy7TElnSSDH
-	QyZsihspzcieOUVgZHuUCcJgOpN+rGfxUg==
-X-Google-Smtp-Source: AKy350aaVWvbRO2STPqBt09do/dvyHgtkWIyQ63TJiLX86XMeYZdIsYNQx7D/qww/zu8pjdvjd1LFQ==
-X-Received: by 2002:a17:902:ecca:b0:19a:b754:4053 with SMTP id a10-20020a170902ecca00b0019ab7544053mr10601455plh.26.1680752052501;
-        Wed, 05 Apr 2023 20:34:12 -0700 (PDT)
+        bh=J7Wpb9HQTnwzTpND8+x8g6aAzk8Wku+uQ+x789O8oZw=;
+        b=Glww2v+fI2MA7/qM+7UVYxsaaTgCAh0uHWGbqz/l+YFBwoQYrahgskC6pmTaLCFWjz
+         WYhk3ioQ6/UDLHOn6NS9yeeLulzI1P5/T3FkCXmo37gXyzFaXVgNPwOcewGDN/T+aQLr
+         BKq5S40YrOnncLnEtt7z09/gqmbtTBxKU7UOQp6ppKhciobJ1aEdtRB9D+AVZcWyTDd5
+         7Ntsq5wf6X+emr+GHW7d4H6OTJW9W4x6v0TPSYijMxu7/5rVd6mWalruDQ/kQR7+hGlh
+         TjgSve6lDBE0I40ersfQdpbMjV69dkA737g3lyVH1vjbaKDFps9oOq76M+EeNLgBkQa1
+         KUOQ==
+X-Gm-Message-State: AAQBX9cJIqXkhhBpXMotqxfQED1OSuhz+POQxnNO4J96VSWnaG+GAMB8
+	lads7eKUbwoi/g57GiE//Wjm+tAwO0fpHA==
+X-Google-Smtp-Source: AKy350aGQZhxI4ABBpXKNTwegR9LO2m6JLzf04Cp1vYweeUAOlSk6kZHze8TePPQ0pyOhJKR0EpQUg==
+X-Received: by 2002:a17:902:d491:b0:1a1:d70f:712d with SMTP id c17-20020a170902d49100b001a1d70f712dmr10490348plg.31.1680752458902;
+        Wed, 05 Apr 2023 20:40:58 -0700 (PDT)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9181:d380::26f8])
-        by smtp.gmail.com with ESMTPSA id u20-20020a170902a61400b0019a7ef5e9a8sm273358plq.82.2023.04.05.20.34.11
+        by smtp.gmail.com with ESMTPSA id ik23-20020a170902ab1700b001a281063ab4sm260932plb.233.2023.04.05.20.40.58
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 05 Apr 2023 20:34:11 -0700 (PDT)
+        Wed, 05 Apr 2023 20:40:58 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-multimedia][PATCH] meta-multimedia: Fix missing upstream status in several patches
-Date: Wed,  5 Apr 2023 20:34:09 -0700
-Message-Id: <20230406033409.3287941-1-raj.khem@gmail.com>
+Subject: [meta-webserver][PATCH] meta-webserver: Fix missing upstream status on patches
+Date: Wed,  5 Apr 2023 20:40:56 -0700
+Message-Id: <20230406034056.3289471-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.40.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 06 Apr 2023 03:34:22 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101964
+ <openembedded-devel@lists.openembedded.org>; Thu, 06 Apr 2023 03:41:02 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101965
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../0001-Makefile-Use-LINKFLAGS-during-link-step.patch       | 1 +
- .../caps/0001-basic.h-Use-c99-supported-stdint-types.patch   | 1 +
- .../recipes-multimedia/caps/caps/append_ldflags.patch        | 3 ++-
- ...0001-check-for-null-buffer-before-trying-a-byteswap.patch | 1 +
- .../0001-utils-Use-c99-compiler-independent-types.patch      | 1 +
- .../cdparanoia/files/0002-Fix-printf-format-errors.patch     | 1 +
- .../cdparanoia/files/dont-use-internal-configs.patch         | 5 +++++
- .../cdparanoia/files/out-of-tree-build.patch                 | 5 +++++
- .../dvb-apps/files/0001-Fix-generate-keynames.patch          | 1 +
- .../0001-dvbdate-Remove-Obsoleted-stime-API-calls.patch      | 1 +
- .../files/0003-handle-static-shared-only-build.patch         | 1 +
- .../dvb-apps/files/0004-Makefile-remove-test.patch           | 1 +
- .../dvb-apps/files/0005-libucsi-optimization-removal.patch   | 5 +++++
- .../recipes-multimedia/dvb-apps/files/0006-CA_SET_PID.patch  | 4 ++++
- .../gerbera/gerbera/0001-Fix-build-with-fmt-9.0.patch        | 2 ++
- .../gstreamer-1.0/gstd/0001-gstd-yocto-compatibility.patch   | 2 ++
- .../libdc1394/files/install_examples.patch                   | 5 +++++
- .../nv-codec-headers/0001-Makefile-add-clean-target.patch    | 2 ++
- ...emove-the-error-line-and-live-without-file-type-det.patch | 4 ++--
- .../vlc/0004-Use-packageconfig-to-detect-mmal-support.patch  | 1 +
- 20 files changed, 44 insertions(+), 3 deletions(-)
+ ...gure.ac-Add-foreign-to-AM_INIT_AUTOMAKE.patch |  1 +
+ .../0001-make-Do-not-build-po-files.patch        |  1 +
+ ...onfigure-Respect-LIBS-variable-from-env.patch |  1 +
+ .../0001-remove-tests-dep-on-gobject-intro.patch |  2 ++
+ ...file-use-copy-rule-for-unmodified-files.patch |  2 ++
+ .../webmin/files/init-exclude.patch              | 16 ++++++++--------
+ .../webmin/files/media-tomb.patch                |  4 ++++
+ .../webmin/files/net-generic.patch               | 10 +++++-----
+ .../webmin/files/remove-startup-option.patch     | 12 ++++++------
+ 9 files changed, 30 insertions(+), 19 deletions(-)
 
-diff --git a/meta-multimedia/recipes-mkv/libmatroska/libmatroska/0001-Makefile-Use-LINKFLAGS-during-link-step.patch b/meta-multimedia/recipes-mkv/libmatroska/libmatroska/0001-Makefile-Use-LINKFLAGS-during-link-step.patch
-index 90e997561a..f7656913b5 100644
---- a/meta-multimedia/recipes-mkv/libmatroska/libmatroska/0001-Makefile-Use-LINKFLAGS-during-link-step.patch
-+++ b/meta-multimedia/recipes-mkv/libmatroska/libmatroska/0001-Makefile-Use-LINKFLAGS-during-link-step.patch
-@@ -5,6 +5,7 @@ Subject: [PATCH] Makefile: Use LINKFLAGS during link step
- 
- Adds much needed GNU_HASH section into the .so
- 
-+Upstream-Status: Pending
- Signed-off-by: Khem Raj <raj.khem@gmail.com>
- ---
-  make/linux/Makefile | 2 +-
-diff --git a/meta-multimedia/recipes-multimedia/caps/caps/0001-basic.h-Use-c99-supported-stdint-types.patch b/meta-multimedia/recipes-multimedia/caps/caps/0001-basic.h-Use-c99-supported-stdint-types.patch
-index 1087b0e79c..528bd153dd 100644
---- a/meta-multimedia/recipes-multimedia/caps/caps/0001-basic.h-Use-c99-supported-stdint-types.patch
-+++ b/meta-multimedia/recipes-multimedia/caps/caps/0001-basic.h-Use-c99-supported-stdint-types.patch
-@@ -5,6 +5,7 @@ Subject: [PATCH] basic.h: Use c99 supported stdint types
- 
- include stdint.h for getting the definitions for int types
+diff --git a/meta-webserver/recipes-httpd/cherokee/cherokee/0001-configure.ac-Add-foreign-to-AM_INIT_AUTOMAKE.patch b/meta-webserver/recipes-httpd/cherokee/cherokee/0001-configure.ac-Add-foreign-to-AM_INIT_AUTOMAKE.patch
+index f3be7c6e52..b16060f2a1 100644
+--- a/meta-webserver/recipes-httpd/cherokee/cherokee/0001-configure.ac-Add-foreign-to-AM_INIT_AUTOMAKE.patch
++++ b/meta-webserver/recipes-httpd/cherokee/cherokee/0001-configure.ac-Add-foreign-to-AM_INIT_AUTOMAKE.patch
+@@ -7,6 +7,7 @@ Fixes errors like
+ | Makefile.am: error: required file './README' not found
+ | Makefile.am: error: required file './ChangeLog' not found
  
 +Upstream-Status: Pending
  Signed-off-by: Khem Raj <raj.khem@gmail.com>
  ---
-  basics.h | 17 +++++++++--------
-diff --git a/meta-multimedia/recipes-multimedia/caps/caps/append_ldflags.patch b/meta-multimedia/recipes-multimedia/caps/caps/append_ldflags.patch
-index 3abd381891..6e34a8a984 100644
---- a/meta-multimedia/recipes-multimedia/caps/caps/append_ldflags.patch
-+++ b/meta-multimedia/recipes-multimedia/caps/caps/append_ldflags.patch
-@@ -1,7 +1,8 @@
- Change the order of linker flags such that -shared is appearig after -pie/-fpie
- this helps in building the package when secuiry flags are enabled
+  configure.ac | 2 +-
+diff --git a/meta-webserver/recipes-httpd/cherokee/cherokee/0001-make-Do-not-build-po-files.patch b/meta-webserver/recipes-httpd/cherokee/cherokee/0001-make-Do-not-build-po-files.patch
+index d4c0b6e8c6..1d6a2182bd 100644
+--- a/meta-webserver/recipes-httpd/cherokee/cherokee/0001-make-Do-not-build-po-files.patch
++++ b/meta-webserver/recipes-httpd/cherokee/cherokee/0001-make-Do-not-build-po-files.patch
+@@ -5,6 +5,7 @@ Subject: [PATCH] make: Do not build po files
  
---Khem
-+Upstream-Status: Pending
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
- 
- Index: caps-0.9.24/Makefile
- ===================================================================
-diff --git a/meta-multimedia/recipes-multimedia/cdparanoia/files/0001-check-for-null-buffer-before-trying-a-byteswap.patch b/meta-multimedia/recipes-multimedia/cdparanoia/files/0001-check-for-null-buffer-before-trying-a-byteswap.patch
-index 682cf6e033..0451a453a3 100644
---- a/meta-multimedia/recipes-multimedia/cdparanoia/files/0001-check-for-null-buffer-before-trying-a-byteswap.patch
-+++ b/meta-multimedia/recipes-multimedia/cdparanoia/files/0001-check-for-null-buffer-before-trying-a-byteswap.patch
-@@ -8,6 +8,7 @@ Author: Monty <paranoia@xiph.org>
- Patch from debian
- http://sources.debian.net/src/cdparanoia/3.10.2%2Bdebian-11/debian/patches/04-endian.patch
- 
-+Upstream-Status: Pending
- Signed-off-by: Khem Raj <raj.khem@gmail.com>
- ---
-  interface/interface.c | 2 +-
-diff --git a/meta-multimedia/recipes-multimedia/cdparanoia/files/0001-utils-Use-c99-compiler-independent-types.patch b/meta-multimedia/recipes-multimedia/cdparanoia/files/0001-utils-Use-c99-compiler-independent-types.patch
-index 7699017f77..b364a3b2a7 100644
---- a/meta-multimedia/recipes-multimedia/cdparanoia/files/0001-utils-Use-c99-compiler-independent-types.patch
-+++ b/meta-multimedia/recipes-multimedia/cdparanoia/files/0001-utils-Use-c99-compiler-independent-types.patch
-@@ -5,6 +5,7 @@ Subject: [PATCH] utils: Use c99 compiler independent types
- 
- Make it portable across different platforms
- 
-+Upstream-Status: Pending
- Signed-off-by: Khem Raj <raj.khem@gmail.com>
- ---
-  utils.h | 13 +++++++------
-diff --git a/meta-multimedia/recipes-multimedia/cdparanoia/files/0002-Fix-printf-format-errors.patch b/meta-multimedia/recipes-multimedia/cdparanoia/files/0002-Fix-printf-format-errors.patch
-index 024479ca7d..ea30559384 100644
---- a/meta-multimedia/recipes-multimedia/cdparanoia/files/0002-Fix-printf-format-errors.patch
-+++ b/meta-multimedia/recipes-multimedia/cdparanoia/files/0002-Fix-printf-format-errors.patch
-@@ -5,6 +5,7 @@ Subject: [PATCH 2/2] Fix printf format errors
- 
- error: format not a string literal and no format arguments
- 
-+Upstream-Status: Pending
- Signed-off-by: Khem Raj <raj.khem@gmail.com>
- ---
-  main.c | 4 ++--
-diff --git a/meta-multimedia/recipes-multimedia/cdparanoia/files/dont-use-internal-configs.patch b/meta-multimedia/recipes-multimedia/cdparanoia/files/dont-use-internal-configs.patch
-index 9b268b7ed6..2738ba70e8 100644
---- a/meta-multimedia/recipes-multimedia/cdparanoia/files/dont-use-internal-configs.patch
-+++ b/meta-multimedia/recipes-multimedia/cdparanoia/files/dont-use-internal-configs.patch
-@@ -1,3 +1,8 @@
-+Fix build on aarch64
-+
-+Upstream-Status: Pending
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+
- Index: cdparanoia-III-10.2/configure.in
- ===================================================================
- --- cdparanoia-III-10.2.orig/configure.in
-diff --git a/meta-multimedia/recipes-multimedia/cdparanoia/files/out-of-tree-build.patch b/meta-multimedia/recipes-multimedia/cdparanoia/files/out-of-tree-build.patch
-index 06ee82099d..96c5dda31c 100644
---- a/meta-multimedia/recipes-multimedia/cdparanoia/files/out-of-tree-build.patch
-+++ b/meta-multimedia/recipes-multimedia/cdparanoia/files/out-of-tree-build.patch
-@@ -1,3 +1,8 @@
-+Fix build out of tree builds
-+
-+Upstream-Status: Pending
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+
- Index: cdparanoia-III-10.2/Makefile.in
- ===================================================================
- --- cdparanoia-III-10.2.orig/Makefile.in
-diff --git a/meta-multimedia/recipes-multimedia/dvb-apps/files/0001-Fix-generate-keynames.patch b/meta-multimedia/recipes-multimedia/dvb-apps/files/0001-Fix-generate-keynames.patch
-index 498607d97d..f3d14354b4 100644
---- a/meta-multimedia/recipes-multimedia/dvb-apps/files/0001-Fix-generate-keynames.patch
-+++ b/meta-multimedia/recipes-multimedia/dvb-apps/files/0001-Fix-generate-keynames.patch
-@@ -5,6 +5,7 @@ symbols. However, when cross-compiling, the include path points
- somewhere else. Allow the user to pass CROSS_ROOT to point to the
- root of the cross-compilation environment.
+ Target fails to build
  
 +Upstream-Status: Inappropriate [Cross-compile specific]
- Signed-off-by: Arnout Vandecappelle (Essensium/Mind) <arnout@mind.be>
- ---
- diff -rup dvb-apps-83c746462ccb.orig/util/av7110_loadkeys/generate-keynames.sh dvb-apps-83c746462ccb/util/av7110_loadkeys/generate-keynames.sh
-diff --git a/meta-multimedia/recipes-multimedia/dvb-apps/files/0001-dvbdate-Remove-Obsoleted-stime-API-calls.patch b/meta-multimedia/recipes-multimedia/dvb-apps/files/0001-dvbdate-Remove-Obsoleted-stime-API-calls.patch
-index e89f9a3cdc..8ff1e029b0 100644
---- a/meta-multimedia/recipes-multimedia/dvb-apps/files/0001-dvbdate-Remove-Obsoleted-stime-API-calls.patch
-+++ b/meta-multimedia/recipes-multimedia/dvb-apps/files/0001-dvbdate-Remove-Obsoleted-stime-API-calls.patch
-@@ -6,6 +6,7 @@ Subject: [PATCH] dvbdate: Remove Obsoleted stime API calls
- stime() has been deprecated in glibc 2.31+ its recommended to
- replaced with clock_settime()
- 
-+Upstream-Status: Pending
  Signed-off-by: Khem Raj <raj.khem@gmail.com>
  ---
-  util/dvbdate/dvbdate.c | 5 ++++-
-diff --git a/meta-multimedia/recipes-multimedia/dvb-apps/files/0003-handle-static-shared-only-build.patch b/meta-multimedia/recipes-multimedia/dvb-apps/files/0003-handle-static-shared-only-build.patch
-index 4dc7c68ac2..ce51084c97 100644
---- a/meta-multimedia/recipes-multimedia/dvb-apps/files/0003-handle-static-shared-only-build.patch
-+++ b/meta-multimedia/recipes-multimedia/dvb-apps/files/0003-handle-static-shared-only-build.patch
-@@ -6,6 +6,7 @@ Subject: [PATCH] Make.rules: Handle static/shared only build
- Do not build .a library when enable_static is set to "no"
- Do not build .so library when enable_shared is set to "no"
+  Makefile.am | 2 +-
+diff --git a/meta-webserver/recipes-httpd/monkey/files/0001-configure-Respect-LIBS-variable-from-env.patch b/meta-webserver/recipes-httpd/monkey/files/0001-configure-Respect-LIBS-variable-from-env.patch
+index 7a229513b6..6669848a06 100644
+--- a/meta-webserver/recipes-httpd/monkey/files/0001-configure-Respect-LIBS-variable-from-env.patch
++++ b/meta-webserver/recipes-httpd/monkey/files/0001-configure-Respect-LIBS-variable-from-env.patch
+@@ -6,6 +6,7 @@ Subject: [PATCH] configure: Respect LIBS variable from env
+ For musl we need to pass -lexecinfo from env
+ this change accomodates that
  
-+Upstream-Status: Pending
- Signed-off-by: Romain Naour <romain.naour@openwide.fr>
++Upstream-Status: [OE-specific]
+ Signed-off-by: Khem Raj <raj.khem@gmail.com>
  ---
-  Make.rules | 10 ++++++++--
-diff --git a/meta-multimedia/recipes-multimedia/dvb-apps/files/0004-Makefile-remove-test.patch b/meta-multimedia/recipes-multimedia/dvb-apps/files/0004-Makefile-remove-test.patch
-index 45bfad914c..6ec5b08ccc 100644
---- a/meta-multimedia/recipes-multimedia/dvb-apps/files/0004-Makefile-remove-test.patch
-+++ b/meta-multimedia/recipes-multimedia/dvb-apps/files/0004-Makefile-remove-test.patch
-@@ -5,6 +5,7 @@ Subject: [PATCH] Makefile: remove test
+  configure | 2 +-
+diff --git a/meta-webserver/recipes-webadmin/cockpit/files/0001-remove-tests-dep-on-gobject-intro.patch b/meta-webserver/recipes-webadmin/cockpit/files/0001-remove-tests-dep-on-gobject-intro.patch
+index 8f70fe9434..b633cb0cf3 100644
+--- a/meta-webserver/recipes-webadmin/cockpit/files/0001-remove-tests-dep-on-gobject-intro.patch
++++ b/meta-webserver/recipes-webadmin/cockpit/files/0001-remove-tests-dep-on-gobject-intro.patch
+@@ -3,6 +3,8 @@ From: Adrian Freihofer <adrian.freihofer@siemens.com>
+ Date: Wed, 4 Dec 2019 17:23:46 +0100
+ Subject: [PATCH] remove tests dep on gobject-intro
  
- Tests needs static libraries, remove them for shared only build.
- 
-+Upstream-Status: Inappropriate [Cross-compile specific]
- Signed-off-by: Romain Naour <romain.naour@openwide.fr>
- ---
-  Makefile | 1 -
-diff --git a/meta-multimedia/recipes-multimedia/dvb-apps/files/0005-libucsi-optimization-removal.patch b/meta-multimedia/recipes-multimedia/dvb-apps/files/0005-libucsi-optimization-removal.patch
-index f12d35bc7e..dbb848c72c 100644
---- a/meta-multimedia/recipes-multimedia/dvb-apps/files/0005-libucsi-optimization-removal.patch
-+++ b/meta-multimedia/recipes-multimedia/dvb-apps/files/0005-libucsi-optimization-removal.patch
-@@ -1,3 +1,8 @@
-+Use -O1 with gcc > 6
-+
 +Upstream-Status: Pending
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
+ ---
+  src/ws/Makefile-ws.am | 54 ---------------------------------------------------
+  1 file changed, 54 deletions(-)
+diff --git a/meta-webserver/recipes-webadmin/cockpit/files/0002-fix-makefile-use-copy-rule-for-unmodified-files.patch b/meta-webserver/recipes-webadmin/cockpit/files/0002-fix-makefile-use-copy-rule-for-unmodified-files.patch
+index 48702c3d1e..1e5cf09d16 100644
+--- a/meta-webserver/recipes-webadmin/cockpit/files/0002-fix-makefile-use-copy-rule-for-unmodified-files.patch
++++ b/meta-webserver/recipes-webadmin/cockpit/files/0002-fix-makefile-use-copy-rule-for-unmodified-files.patch
+@@ -3,6 +3,8 @@ From: Michael Haener <michael.haener@siemens.com>
+ Date: Wed, 25 Mar 2020 08:32:07 +0100
+ Subject: [PATCH] fix(makefile): use copy rule for unmodified files
+ 
++Upstream-Status: Pending
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
+ ---
+  pkg/Makefile.am | 27 +++++++++++++++++++++++++++
+  1 file changed, 27 insertions(+)
+diff --git a/meta-webserver/recipes-webadmin/webmin/files/init-exclude.patch b/meta-webserver/recipes-webadmin/webmin/files/init-exclude.patch
+index 4212917f6e..027a9d4ad9 100644
+--- a/meta-webserver/recipes-webadmin/webmin/files/init-exclude.patch
++++ b/meta-webserver/recipes-webadmin/webmin/files/init-exclude.patch
+@@ -1,11 +1,11 @@
+-# Hack in support for an "exclude" config option for the init module, so
+-# we can hide certain system services that shouldn't really be configurable
+-# via the web interface
+-#
+-# Upstream-status: Pending
+-#
+-# Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
+-# Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
++Hack in support for an "exclude" config option for the init module, so
++we can hide certain system services that shouldn't really be configurable
++via the web interface
 +
- diff -r 3d43b280298c lib/libucsi/endianops.h
- --- a/lib/libucsi/endianops.h	Fri Mar 21 20:26:36 2014 +0100
- +++ b/lib/libucsi/endianops.h	Fri Jan 19 06:56:15 2018 +0000
-diff --git a/meta-multimedia/recipes-multimedia/dvb-apps/files/0006-CA_SET_PID.patch b/meta-multimedia/recipes-multimedia/dvb-apps/files/0006-CA_SET_PID.patch
-index e100c659e7..59abd32a01 100644
---- a/meta-multimedia/recipes-multimedia/dvb-apps/files/0006-CA_SET_PID.patch
-+++ b/meta-multimedia/recipes-multimedia/dvb-apps/files/0006-CA_SET_PID.patch
++Upstream-status: Pending
++
++Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
++Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+ ---
+  init/index.cgi   | 27 ++++++++++++++-------------
+  init/init-lib.pl |  5 +++--
+diff --git a/meta-webserver/recipes-webadmin/webmin/files/media-tomb.patch b/meta-webserver/recipes-webadmin/webmin/files/media-tomb.patch
+index 46f3109796..dfc962bfb7 100644
+--- a/meta-webserver/recipes-webadmin/webmin/files/media-tomb.patch
++++ b/meta-webserver/recipes-webadmin/webmin/files/media-tomb.patch
 @@ -1,3 +1,7 @@
-+Fix build with newer than 4.14 kernels
++add mediatomb support
++
++Upstream-Status: Pending
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
+ diff -Nru webmin-1.570.bak/mediatomb/index.cgi webmin-1.570/mediatomb/index.cgi
+ --- webmin-1.570.bak/mediatomb/index.cgi	1969-12-31 16:00:00.000000000 -0800
+ +++ webmin-1.570/mediatomb/index.cgi	2011-10-26 10:00:05.992522036 -0700
+diff --git a/meta-webserver/recipes-webadmin/webmin/files/net-generic.patch b/meta-webserver/recipes-webadmin/webmin/files/net-generic.patch
+index 5549392851..6ae3dced72 100644
+--- a/meta-webserver/recipes-webadmin/webmin/files/net-generic.patch
++++ b/meta-webserver/recipes-webadmin/webmin/files/net-generic.patch
+@@ -1,8 +1,8 @@
+-# Add support for configuring network interfaces on a generic linux system
+-#
+-# Upstream-status: Not appropriate [config]
+-#
+-# Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
++Add support for configuring network interfaces on a generic linux system
++
++Upstream-Status: Inappropriate [config]
++
++Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
+ Index: webmin-1.850/net/module.info
+ ===================================================================
+ --- webmin-1.850.orig/net/module.info
+diff --git a/meta-webserver/recipes-webadmin/webmin/files/remove-startup-option.patch b/meta-webserver/recipes-webadmin/webmin/files/remove-startup-option.patch
+index d957f4a3bc..358e53ab8c 100644
+--- a/meta-webserver/recipes-webadmin/webmin/files/remove-startup-option.patch
++++ b/meta-webserver/recipes-webadmin/webmin/files/remove-startup-option.patch
+@@ -1,9 +1,9 @@
+-# Remove "start on boot" option from webmin configuration, as
+-# end-users should not need to configure this from the web interface
+-#
+-# Upstream-status: Inappropriate
+-#
+-# Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
++Remove "start on boot" option from webmin configuration, as
++end-users should not need to configure this from the web interface
 +
 +Upstream-Status: Inappropriate [OE-specific]
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
- Index: dvb-apps/util/dst-utils/dst_test.c
- ===================================================================
- --- dvb-apps.orig/util/dst-utils/dst_test.c
-diff --git a/meta-multimedia/recipes-multimedia/gerbera/gerbera/0001-Fix-build-with-fmt-9.0.patch b/meta-multimedia/recipes-multimedia/gerbera/gerbera/0001-Fix-build-with-fmt-9.0.patch
-index 9de0e4f28e..bb8e438304 100644
---- a/meta-multimedia/recipes-multimedia/gerbera/gerbera/0001-Fix-build-with-fmt-9.0.patch
-+++ b/meta-multimedia/recipes-multimedia/gerbera/gerbera/0001-Fix-build-with-fmt-9.0.patch
-@@ -4,6 +4,8 @@ Date: Fri, 19 Aug 2022 15:22:10 +0300
- Subject: [PATCH] Fix build with fmt 9.0
- 
- Fixes #2681
-+Upstream-Status: Pending
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
- ---
-  src/database/sql_format.h | 4 ++--
-  1 file changed, 2 insertions(+), 2 deletions(-)
-diff --git a/meta-multimedia/recipes-multimedia/gstreamer-1.0/gstd/0001-gstd-yocto-compatibility.patch b/meta-multimedia/recipes-multimedia/gstreamer-1.0/gstd/0001-gstd-yocto-compatibility.patch
-index c1c88999a5..64fd578a96 100644
---- a/meta-multimedia/recipes-multimedia/gstreamer-1.0/gstd/0001-gstd-yocto-compatibility.patch
-+++ b/meta-multimedia/recipes-multimedia/gstreamer-1.0/gstd/0001-gstd-yocto-compatibility.patch
-@@ -3,6 +3,8 @@ From: Carlos <carlos.rodriguez@ridgerun.com>
- Date: Fri, 15 Dec 2017 10:14:05 -0600
- Subject: [PATCH] gstd:yocto compatibility
- 
-+Upstream-Status: Pending
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
- ---
-  gstd/Makefile.am                | 2 +-
-  3 files changed, 9 insertions(+), 3 deletions(-)
-diff --git a/meta-multimedia/recipes-multimedia/libdc1394/files/install_examples.patch b/meta-multimedia/recipes-multimedia/libdc1394/files/install_examples.patch
-index df0c2355d0..51761eb8c9 100755
---- a/meta-multimedia/recipes-multimedia/libdc1394/files/install_examples.patch
-+++ b/meta-multimedia/recipes-multimedia/libdc1394/files/install_examples.patch
-@@ -1,3 +1,8 @@
-+Install all examples
 +
-+Upstream-Status: Pending
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+
- Index: libdc1394/examples/Makefile.am
- ===================================================================
- --- libdc1394.orig/examples/Makefile.am
-diff --git a/meta-multimedia/recipes-multimedia/nv-codec-headers/nv-codec-headers/0001-Makefile-add-clean-target.patch b/meta-multimedia/recipes-multimedia/nv-codec-headers/nv-codec-headers/0001-Makefile-add-clean-target.patch
-index 7ae749beda..ac9e70a718 100644
---- a/meta-multimedia/recipes-multimedia/nv-codec-headers/nv-codec-headers/0001-Makefile-add-clean-target.patch
-+++ b/meta-multimedia/recipes-multimedia/nv-codec-headers/nv-codec-headers/0001-Makefile-add-clean-target.patch
-@@ -3,6 +3,8 @@ From: Markus Volk <f_L_K@t-online.de>
- Date: Sat, 1 Apr 2023 04:42:32 +0200
- Subject: [PATCH] Makefile: add clean target
- 
-+Upstream-Status: Pending
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
- ---
-  Makefile | 4 +++-
-  1 file changed, 3 insertions(+), 1 deletion(-)
-diff --git a/meta-multimedia/recipes-multimedia/sox/sox/0001-remove-the-error-line-and-live-without-file-type-det.patch b/meta-multimedia/recipes-multimedia/sox/sox/0001-remove-the-error-line-and-live-without-file-type-det.patch
-index 4f02a66fcc..3085bd495c 100644
---- a/meta-multimedia/recipes-multimedia/sox/sox/0001-remove-the-error-line-and-live-without-file-type-det.patch
-+++ b/meta-multimedia/recipes-multimedia/sox/sox/0001-remove-the-error-line-and-live-without-file-type-det.patch
-@@ -1,11 +1,11 @@
- From d0313be5fb947df399a4db24a5f9244510d2ce87 Mon Sep 17 00:00:00 2001
- From: Khem Raj <raj.khem@gmail.com>
- Date: Wed, 12 Jul 2017 16:36:06 -0700
--Subject: [PATCH] remove the #error line and live without file-type detection
-- with pipes
-+Subject: [PATCH] remove the #error line and live without file-type detection with pipes
- 
- this fallback is executed with musl
- 
-+Upstream-Status: Inappropriate [musl specific]
- Signed-off-by: Khem Raj <raj.khem@gmail.com>
- ---
-  src/formats.c | 1 -
-diff --git a/meta-multimedia/recipes-multimedia/vlc/vlc/0004-Use-packageconfig-to-detect-mmal-support.patch b/meta-multimedia/recipes-multimedia/vlc/vlc/0004-Use-packageconfig-to-detect-mmal-support.patch
-index 078ac41ca5..b9f5ad591c 100644
---- a/meta-multimedia/recipes-multimedia/vlc/vlc/0004-Use-packageconfig-to-detect-mmal-support.patch
-+++ b/meta-multimedia/recipes-multimedia/vlc/vlc/0004-Use-packageconfig-to-detect-mmal-support.patch
-@@ -8,6 +8,7 @@ in different locations, therefore its best to rely on pkgconf to find
- the libs and header locations instead of assuming /opt/vc which might
- work on some distros ( like raspbian ) but not everywhere
- 
-+Upstream-Status: Pending
- Signed-off-by: Khem Raj <raj.khem@gmail.com>
- ---
-  configure.ac | 31 +++++++++++--------------------
++Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
+ --- webmin-1.570.orig/webmin/index.cgi
+ +++ webmin-1.570/webmin/index.cgi
+ @@ -79,20 +79,6 @@ print &ui_buttons_start();
 -- 
 2.40.0
 
