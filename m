@@ -1,167 +1,209 @@
-Return-Path: <ppjadhav456@gmail.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3BBBCC76188
-	for <webhook@archiver.kernel.org>; Wed,  5 Apr 2023 15:03:59 +0000 (UTC)
-Received: from mail-pl1-f169.google.com (mail-pl1-f169.google.com [209.85.214.169])
- by mx.groups.io with SMTP id smtpd.web10.132520.1680707035216646214
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AD042C7618D
+	for <webhook@archiver.kernel.org>; Thu,  6 Apr 2023 03:09:52 +0000 (UTC)
+Received: from mail-pj1-f53.google.com (mail-pj1-f53.google.com [209.85.216.53])
+ by mx.groups.io with SMTP id smtpd.web10.149951.1680750592007080293
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 05 Apr 2023 08:03:55 -0700
+ Wed, 05 Apr 2023 20:09:52 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20210112 header.b=JYnBpcY8;
- spf=pass (domain: gmail.com, ip: 209.85.214.169, mailfrom: ppjadhav456@gmail.com)
-Received: by mail-pl1-f169.google.com with SMTP id w4so34659605plg.9
-        for <openembedded-devel@lists.openembedded.org>; Wed, 05 Apr 2023 08:03:55 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=ge3NsxQl;
+ spf=pass (domain: gmail.com, ip: 209.85.216.53, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f53.google.com with SMTP id x15so36039558pjk.2
+        for <openembedded-devel@lists.openembedded.org>; Wed, 05 Apr 2023 20:09:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112; t=1680707034; x=1683299034;
+        d=gmail.com; s=20210112; t=1680750591;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=IVgXATGht+WK34CG7eYxkyelC9g/xF8U+hiA/JTdd+k=;
-        b=JYnBpcY8Au+U67hBL7e1Ti7gW55K+I7rHpqMVfbGOUzMfaf7UgGfeC67HtbAAYKDYA
-         OnlS1N00lFjbvDx0PStjczg4j/7Ml398bqy8qDN3x2/6edyZifVL8DmK7Sp+KgE/Ja5v
-         vByfe9tnp+SzT2bMvyUI6QUBnwRzSiJXv3ckN9hgofrfjbllBmKreF1PkVxMCK7+v+vM
-         I7EGieTkXuCE4eAGY71vnsGmKnEc0Jw4a3xhLiqRkSFJp9tsL53Y3v1N2Mp0IFnj7xxp
-         cfhtnWUhv70Iwd4wp/eCUAs3Idqp9y0IT9WY/1Nmrty5ujdr/ihjYoRY4eep1HP+5KIj
-         v7pw==
+        bh=cXB/BagWcWUZVe9mE+EDYw0XVMfaN3retJRMLEfZKoM=;
+        b=ge3NsxQlYVTddEmNvcGejaYLb/Lr/tIEihpyAkkTLpxTtOpT5IK9Ix5cwF11uiwxzZ
+         LpfDvj2azm5XXOkMpmUvpoyIPHAD0/P+UQBJC7LF7uzCc3BGjWAbbvinCuCjhFDkCOg3
+         TLLb4c4sI7CBZD8B3NopE4yTdar8dA5j6vzAqzUqgH5tntEpNa1YB1H6TE515Uo0lHZh
+         IyMFg9WD+qzIuOIETeCcfKejwf6menvvOhd37HXa+JUdBnofOUHVyfNmPfO5xq1twVYP
+         ZJWVvgSSNTFwHfMnWG0Dnoga/tqkxDBAAjIN6SeF7KocESMp0wEQpqc06XGJehQcfCH2
+         PvGA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112; t=1680707034; x=1683299034;
+        d=1e100.net; s=20210112; t=1680750591;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=IVgXATGht+WK34CG7eYxkyelC9g/xF8U+hiA/JTdd+k=;
-        b=Tixk8GgpMxFnQS679wfUNFNHXi7WQYTytUFgffhNeDAH90EW1f3blA5lnViUZZwhk3
-         w5UKGzOjWwMfbR0OFRt5DOQXu6UNXfailHIjAt2UwcFjP0RhZKMcic38V0hQ0JdAjBZq
-         IABVUclL21RqUKEamu44Kh1Z8p0awaCF3NUU7y883TzAl/TdzgctUmCOSBn/FhKsmdyj
-         opqH5vPTUGPlsARihtodqslqoxD+22F3Roe+eIftLzE5v6QmsIPBsAEekp4oekHBpoSJ
-         +/anD5bFE859PNDm+1NwH8N/GZipauuh/su0xac/cbuBkJ5tXPxXx4g6PjmkCHcNfOYs
-         pa1A==
-X-Gm-Message-State: AAQBX9dd8w6DIbZ6P8xoRsnLXcotT+Jxnw+V+/+XtWACkNKJUiYOyivh
-	UeK4GGokIFJBEUi8EgoBtX5qPHcJWL4=
-X-Google-Smtp-Source: AKy350Ze2LF6OMRwTn8uw2Ct5v8aDPafP72M51AwBUCLucxuztOHfCgIPuKJb8hyZsNE5MVRNBDjrg==
-X-Received: by 2002:a05:6a20:b04:b0:cd:74aa:df55 with SMTP id x4-20020a056a200b0400b000cd74aadf55mr4911322pzf.25.1680707034136;
-        Wed, 05 Apr 2023 08:03:54 -0700 (PDT)
-Received: from localhost.localdomain ([38.41.69.49])
-        by smtp.gmail.com with ESMTPSA id k9-20020aa78209000000b0062505afff9fsm10385231pfi.126.2023.04.05.08.03.52
+        bh=cXB/BagWcWUZVe9mE+EDYw0XVMfaN3retJRMLEfZKoM=;
+        b=pc1fzPjiGTvWzuceaOp00DdC62NS0T1gtdL3SPgQo0SdfiuxPdEOfTsT5lgPupq1q/
+         OZ7Jx3XpUj9L/6kIJl97shYqZWvVf864drwPeAaMdREhuHKT8FsAxOkvlsFru8ezVUq2
+         9cwpTZbK4xXfmG+wmbf53BJr/buRB29UayM8ywd2kCH0/3oaalMVi3DlmOtkd65MvPbx
+         X2HhEkQa0mfPqQ/EWT7+4xev8A6oDOIY5IYFj0sfD6xlBuAO1Ugt9I8oOzjKcJDHbPH5
+         ZPER9BJU7rvagVoNiMPHGpg74TDXtzoTsLWuj11O6eI6FUhv/ssQKUm3sCJGRKKGwtoX
+         a0+g==
+X-Gm-Message-State: AAQBX9dcyd5Va874Nx79Gz6Lm96h0orIk+t6Yo2B7SuHNBMTmzCoWgLd
+	lHPpCWeZAakbIQ26EP8R6aMA1k+Ci+i+oQ==
+X-Google-Smtp-Source: AKy350Y21Ye+La0d7rwM/S75ejwMHMJUVM4yQdndNPnlf4JsAs7sikviSrHGBrIOuunANM44JiOt5Q==
+X-Received: by 2002:a17:902:f9cd:b0:1a2:85f0:e748 with SMTP id kz13-20020a170902f9cd00b001a285f0e748mr7875090plb.20.1680750590945;
+        Wed, 05 Apr 2023 20:09:50 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9181:d380::26f8])
+        by smtp.gmail.com with ESMTPSA id bh10-20020a170902a98a00b001a2b79db755sm240449plb.140.2023.04.05.20.09.50
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 05 Apr 2023 08:03:53 -0700 (PDT)
-From: Poonam Jadhav <ppjadhav456@gmail.com>
-To: openembedded-devel@lists.openembedded.org,
-	poonam.jadhav@kpit.com
-Cc: ranjitsinh.rathod@kpit.com
-Subject: [meta-oe][dunfell][PATCH] c-ares: Fix CVE-2022-4904
-Date: Wed,  5 Apr 2023 20:33:46 +0530
-Message-Id: <20230405150346.3546817-1-ppjadhav456@gmail.com>
-X-Mailer: git-send-email 2.25.1
+        Wed, 05 Apr 2023 20:09:50 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-gnome][PATCH] meta-gnome: Update patch status for several recipes
+Date: Wed,  5 Apr 2023 20:09:48 -0700
+Message-Id: <20230406030948.3282617-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.40.0
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 05 Apr 2023 15:03:59 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101960
+ <openembedded-devel@lists.openembedded.org>; Thu, 06 Apr 2023 03:09:52 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101961
 
-From: Poonam Jadhav <poonam.jadhav@kpit.com>
-
-Add patch to fix CVE-2022-4904
-
-Link: https://github.com/c-ares/c-ares/commit/9903253c347f9e0bffd285ae3829aef251cc852d.patch
-
-Signed-off-by: Poonam Jadhav <poonam.jadhav@kpit.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../c-ares/c-ares/CVE-2022-4904.patch         | 66 +++++++++++++++++++
- .../recipes-support/c-ares/c-ares_1.18.1.bb   |  4 +-
- 2 files changed, 69 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-support/c-ares/c-ares/CVE-2022-4904.patch
+ ...Select-the-current-user-to-authenticate-with-by-defa.patch | 2 ++
+ .../0002-Auth-dialog-Make-the-label-wrap-at-70-chars.patch    | 2 ++
+ ...Get-user-icon-from-accountsservice-instead-of-lookin.patch | 3 +++
+ ...Use-fresh-X11-timestamps-when-displaying-authenticat.patch | 3 +++
+ ...configure.ac-disable-gnome-tools-that-are-not-provid.patch | 1 +
+ .../0001-cmake-Do-not-export-CC-into-gir-compiler.patch       | 4 ++++
+ ...0002-CMakeLists.txt-remove-CHECK_C_SOURCE_RUNS-check.patch | 1 +
+ .../libxklavier/libxklavier/fix-do_installe-failure.patch     | 2 +-
+ .../accountsservice/0001-musl-Hack-to-fix-build.patch         | 2 ++
+ .../0001-Makefile.am-Link-with-libm-for-powl-API.patch        | 1 +
+ 10 files changed, 20 insertions(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-support/c-ares/c-ares/CVE-2022-4904.patch b/meta-oe/recipes-support/c-ares/c-ares/CVE-2022-4904.patch
-new file mode 100644
-index 000000000..dc937c616
---- /dev/null
-+++ b/meta-oe/recipes-support/c-ares/c-ares/CVE-2022-4904.patch
-@@ -0,0 +1,66 @@
-+From 9903253c347f9e0bffd285ae3829aef251cc852d Mon Sep 17 00:00:00 2001
-+From: hopper-vul <118949689+hopper-vul@users.noreply.github.com>
-+Date: Wed, 18 Jan 2023 22:14:26 +0800
-+Subject: [PATCH] Add str len check in config_sortlist to avoid stack overflow
-+ (#497)
-+
-+In ares_set_sortlist, it calls config_sortlist(..., sortstr) to parse
-+the input str and initialize a sortlist configuration.
-+
-+However, ares_set_sortlist has not any checks about the validity of the input str.
-+It is very easy to create an arbitrary length stack overflow with the unchecked
-+`memcpy(ipbuf, str, q-str);` and `memcpy(ipbufpfx, str, q-str);`
-+statements in the config_sortlist call, which could potentially cause severe
-+security impact in practical programs.
-+
-+This commit add necessary check for `ipbuf` and `ipbufpfx` which avoid the
-+potential stack overflows.
-+
-+fixes #496
-+
-+Fix By: @hopper-vul
-+
-+CVE: CVE-2022-4904
-+Upstream-Status: Backport [https://github.com/c-ares/c-ares/commit/9903253c347f9e0bffd285ae3829aef251cc852d.patch]
-+Comment: No hunks refreshed
-+Signed-off-by: Poonam Jadhav <poonam.jadhav@kpit.com>
-+---
-+ src/lib/ares_init.c    | 4 ++++
-+ test/ares-test-init.cc | 2 ++
-+ 2 files changed, 6 insertions(+)
-+
-+diff --git a/src/lib/ares_init.c b/src/lib/ares_init.c
-+index 51668a5c..3f9cec65 100644
-+--- a/src/lib/ares_init.c
-++++ b/src/lib/ares_init.c
-+@@ -1913,6 +1913,8 @@ static int config_sortlist(struct apattern **sortlist, int *nsort,
-+       q = str;
-+       while (*q && *q != '/' && *q != ';' && !ISSPACE(*q))
-+         q++;
-++      if (q-str >= 16)
-++        return ARES_EBADSTR;
-+       memcpy(ipbuf, str, q-str);
-+       ipbuf[q-str] = '\0';
-+       /* Find the prefix */
-+@@ -1921,6 +1923,8 @@ static int config_sortlist(struct apattern **sortlist, int *nsort,
-+           const char *str2 = q+1;
-+           while (*q && *q != ';' && !ISSPACE(*q))
-+             q++;
-++          if (q-str >= 32)
-++            return ARES_EBADSTR;
-+           memcpy(ipbufpfx, str, q-str);
-+           ipbufpfx[q-str] = '\0';
-+           str = str2;
-+diff --git a/test/ares-test-init.cc b/test/ares-test-init.cc
-+index 63c6a228..ee845181 100644
-+--- a/test/ares-test-init.cc
-++++ b/test/ares-test-init.cc
-+@@ -275,6 +275,8 @@ TEST_F(DefaultChannelTest, SetAddresses) {
-+ 
-+ TEST_F(DefaultChannelTest, SetSortlistFailures) {
-+   EXPECT_EQ(ARES_ENODATA, ares_set_sortlist(nullptr, "1.2.3.4"));
-++  EXPECT_EQ(ARES_EBADSTR, ares_set_sortlist(channel_, "111.111.111.111*/16"));
-++  EXPECT_EQ(ARES_EBADSTR, ares_set_sortlist(channel_, "111.111.111.111/255.255.255.240*"));
-+   EXPECT_EQ(ARES_SUCCESS, ares_set_sortlist(channel_, "xyzzy ; lwk"));
-+   EXPECT_EQ(ARES_SUCCESS, ares_set_sortlist(channel_, "xyzzy ; 0x123"));
-+ }
-diff --git a/meta-oe/recipes-support/c-ares/c-ares_1.18.1.bb b/meta-oe/recipes-support/c-ares/c-ares_1.18.1.bb
-index 25ce45d74..408a5ab2f 100644
---- a/meta-oe/recipes-support/c-ares/c-ares_1.18.1.bb
-+++ b/meta-oe/recipes-support/c-ares/c-ares_1.18.1.bb
-@@ -5,7 +5,9 @@ SECTION = "libs"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE.md;md5=fb997454c8d62aa6a47f07a8cd48b006"
+diff --git a/meta-gnome/recipes-extended/polkit-gnome/polkit-gnome/0001-Select-the-current-user-to-authenticate-with-by-defa.patch b/meta-gnome/recipes-extended/polkit-gnome/polkit-gnome/0001-Select-the-current-user-to-authenticate-with-by-defa.patch
+index 91f67bbc8a..f8f7ec34f9 100644
+--- a/meta-gnome/recipes-extended/polkit-gnome/polkit-gnome/0001-Select-the-current-user-to-authenticate-with-by-defa.patch
++++ b/meta-gnome/recipes-extended/polkit-gnome/polkit-gnome/0001-Select-the-current-user-to-authenticate-with-by-defa.patch
+@@ -5,6 +5,8 @@ Subject: Select the current user to authenticate with by default
  
--SRC_URI = "git://github.com/c-ares/c-ares.git;branch=main"
-+SRC_URI = "git://github.com/c-ares/c-ares.git;branch=main \
-+           file://CVE-2022-4904.patch \
-+          "
- SRCREV = "2aa086f822aad5017a6f2061ef656f237a62d0ed"
+ Bug: http://bugzilla.gnome.org/show_bug.cgi?id=596188
+ Bug-Ubuntu: https://launchpad.net/bugs/435227
++Upstream-Status: Pending
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
+ ---
+  src/polkitgnomeauthenticationdialog.c | 23 ++++++++++++++---------
+  1 file changed, 14 insertions(+), 9 deletions(-)
+diff --git a/meta-gnome/recipes-extended/polkit-gnome/polkit-gnome/0002-Auth-dialog-Make-the-label-wrap-at-70-chars.patch b/meta-gnome/recipes-extended/polkit-gnome/polkit-gnome/0002-Auth-dialog-Make-the-label-wrap-at-70-chars.patch
+index 76b96f47de..011fe6ef25 100644
+--- a/meta-gnome/recipes-extended/polkit-gnome/polkit-gnome/0002-Auth-dialog-Make-the-label-wrap-at-70-chars.patch
++++ b/meta-gnome/recipes-extended/polkit-gnome/polkit-gnome/0002-Auth-dialog-Make-the-label-wrap-at-70-chars.patch
+@@ -6,6 +6,8 @@ Because GtkWindow doesn't have a default width anymore.
  
- UPSTREAM_CHECK_GITTAGREGEX = "cares-(?P<pver>\d+_(\d_?)+)"
+ Bug: https://bugzilla.gnome.org/show_bug.cgi?id=738688
+ Bug-Ubuntu: https://launchpad.net/bugs/1382566
++Upstream-Status: Pending
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
+ ---
+  src/polkitgnomeauthenticationdialog.c | 2 ++
+  1 file changed, 2 insertions(+)
+diff --git a/meta-gnome/recipes-extended/polkit-gnome/polkit-gnome/0003-Get-user-icon-from-accountsservice-instead-of-lookin.patch b/meta-gnome/recipes-extended/polkit-gnome/polkit-gnome/0003-Get-user-icon-from-accountsservice-instead-of-lookin.patch
+index 4314939061..a3759c4dcf 100644
+--- a/meta-gnome/recipes-extended/polkit-gnome/polkit-gnome/0003-Get-user-icon-from-accountsservice-instead-of-lookin.patch
++++ b/meta-gnome/recipes-extended/polkit-gnome/polkit-gnome/0003-Get-user-icon-from-accountsservice-instead-of-lookin.patch
+@@ -4,6 +4,9 @@ Subject: Get user icon from accountsservice instead of looking in ~/.face
+ 
+ Bug: https://bugzilla.gnome.org/show_bug.cgi?id=669857
+ Bug-Ubuntu: https://launchpad.net/bugs/928249
++
++Upstream-Status: Pending
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
+ ---
+  src/polkitgnomeauthenticationdialog.c | 107 ++++++++++++++++++++++++++++++----
+  1 file changed, 97 insertions(+), 10 deletions(-)
+diff --git a/meta-gnome/recipes-extended/polkit-gnome/polkit-gnome/0004-Use-fresh-X11-timestamps-when-displaying-authenticat.patch b/meta-gnome/recipes-extended/polkit-gnome/polkit-gnome/0004-Use-fresh-X11-timestamps-when-displaying-authenticat.patch
+index 83ad38d833..2c9c5bb16b 100644
+--- a/meta-gnome/recipes-extended/polkit-gnome/polkit-gnome/0004-Use-fresh-X11-timestamps-when-displaying-authenticat.patch
++++ b/meta-gnome/recipes-extended/polkit-gnome/polkit-gnome/0004-Use-fresh-X11-timestamps-when-displaying-authenticat.patch
+@@ -7,6 +7,9 @@ This circumvents focus-stealing prevention.
+ Bug: https://bugzilla.gnome.org/show_bug.cgi?id=676076
+ Bug-Debian: https://bugs.debian.org/684300
+ Bug-Ubuntu: https://launchpad.net/bugs/946171
++
++Upstream-Status: Pending
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
+ ---
+  src/polkitgnomeauthenticator.c | 4 +++-
+  1 file changed, 3 insertions(+), 1 deletion(-)
+diff --git a/meta-gnome/recipes-extended/polkit-gnome/polkit-gnome/0005-configure.ac-disable-gnome-tools-that-are-not-provid.patch b/meta-gnome/recipes-extended/polkit-gnome/polkit-gnome/0005-configure.ac-disable-gnome-tools-that-are-not-provid.patch
+index 153cca25e1..7eee12a920 100644
+--- a/meta-gnome/recipes-extended/polkit-gnome/polkit-gnome/0005-configure.ac-disable-gnome-tools-that-are-not-provid.patch
++++ b/meta-gnome/recipes-extended/polkit-gnome/polkit-gnome/0005-configure.ac-disable-gnome-tools-that-are-not-provid.patch
+@@ -3,6 +3,7 @@ From: Markus Volk <f_l_k@t-online.de>
+ Date: Fri, 24 Feb 2023 17:29:24 +0100
+ Subject: [PATCH] configure.ac: disable gnome-tools that are not provided
+ 
++Upstream-Status: Inappropriate [OE-specific]
+ Signed-off-by: Markus Volk <f_l_k@t-online.de>
+ ---
+  configure.ac | 4 ++--
+diff --git a/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server/0001-cmake-Do-not-export-CC-into-gir-compiler.patch b/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server/0001-cmake-Do-not-export-CC-into-gir-compiler.patch
+index fda84acae7..118d93a72a 100644
+--- a/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server/0001-cmake-Do-not-export-CC-into-gir-compiler.patch
++++ b/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server/0001-cmake-Do-not-export-CC-into-gir-compiler.patch
+@@ -1,3 +1,7 @@
++Use G_IR_SCANNER without passing additional environment
++
++Upstream-Status: Inappropriate [OE-specific]
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
+ --- a/cmake/modules/GObjectIntrospection.cmake
+ +++ b/cmake/modules/GObjectIntrospection.cmake
+ @@ -122,9 +122,7 @@ macro(gir_add_introspection gir)
+diff --git a/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server/0002-CMakeLists.txt-remove-CHECK_C_SOURCE_RUNS-check.patch b/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server/0002-CMakeLists.txt-remove-CHECK_C_SOURCE_RUNS-check.patch
+index 23c3a96d43..51eaf7cfef 100644
+--- a/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server/0002-CMakeLists.txt-remove-CHECK_C_SOURCE_RUNS-check.patch
++++ b/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server/0002-CMakeLists.txt-remove-CHECK_C_SOURCE_RUNS-check.patch
+@@ -9,6 +9,7 @@ Content-Transfer-Encoding: 8bit
+ * TRY_RUN: does not work for OE
+ * HAVE_LKSTRFTIME is set by recipe as configure option
+ 
++Upstream-Status: Inappropriate [Cross-compile specific]
+ Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+ ---
+  CMakeLists.txt | 23 -----------------------
+diff --git a/meta-gnome/recipes-gnome/libxklavier/libxklavier/fix-do_installe-failure.patch b/meta-gnome/recipes-gnome/libxklavier/libxklavier/fix-do_installe-failure.patch
+index 29eeef3d50..6c32bfa14f 100644
+--- a/meta-gnome/recipes-gnome/libxklavier/libxklavier/fix-do_installe-failure.patch
++++ b/meta-gnome/recipes-gnome/libxklavier/libxklavier/fix-do_installe-failure.patch
+@@ -12,7 +12,7 @@ libxklavier.vapi': No such file or directory
+ | 21 make[3]: *** [install-vapiDATA] Error 1
+ | 22 make[3]: *** Waiting for unfinished jobs....
+ 
+-Upstream-Stauts: Pending
++Upstream-Status: Pending
+ 
+ Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+ ---
+diff --git a/meta-gnome/recipes-support/accountsservice/accountsservice/0001-musl-Hack-to-fix-build.patch b/meta-gnome/recipes-support/accountsservice/accountsservice/0001-musl-Hack-to-fix-build.patch
+index 99bd09a6c3..944d2f9165 100644
+--- a/meta-gnome/recipes-support/accountsservice/accountsservice/0001-musl-Hack-to-fix-build.patch
++++ b/meta-gnome/recipes-support/accountsservice/accountsservice/0001-musl-Hack-to-fix-build.patch
+@@ -3,6 +3,8 @@ From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+ Date: Sun, 8 Dec 2019 23:42:00 +0100
+ Subject: [PATCH] musl: Hack to fix configure
+ 
++Upstream-Status: Inappropriate [Musl Specific]
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
+ ---
+  meson.build | 11 ++++++++---
+  1 file changed, 8 insertions(+), 3 deletions(-)
+diff --git a/meta-gnome/recipes-support/usermode/usermode/0001-Makefile.am-Link-with-libm-for-powl-API.patch b/meta-gnome/recipes-support/usermode/usermode/0001-Makefile.am-Link-with-libm-for-powl-API.patch
+index 8ea34cf239..7a052b23b9 100644
+--- a/meta-gnome/recipes-support/usermode/usermode/0001-Makefile.am-Link-with-libm-for-powl-API.patch
++++ b/meta-gnome/recipes-support/usermode/usermode/0001-Makefile.am-Link-with-libm-for-powl-API.patch
+@@ -3,6 +3,7 @@ From: Khem Raj <raj.khem@gmail.com>
+ Date: Tue, 25 Jul 2017 18:28:15 -0700
+ Subject: [PATCH] Makefile.am: Link with libm for powl() API
+ 
++Upstream-Status: Pending
+ Signed-off-by: Khem Raj <raj.khem@gmail.com>
+ ---
+  Makefile.am | 2 +-
 -- 
-2.25.1
+2.40.0
 
 
