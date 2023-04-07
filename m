@@ -1,114 +1,260 @@
-Return-Path: <bindudaniel1996@gmail.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D2921C76196
-	for <webhook@archiver.kernel.org>; Fri,  7 Apr 2023 04:39:02 +0000 (UTC)
-Received: from mail-pf1-f172.google.com (mail-pf1-f172.google.com [209.85.210.172])
- by mx.groups.io with SMTP id smtpd.web11.696.1680842334748711210
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1B249C6FD1D
+	for <webhook@archiver.kernel.org>; Fri,  7 Apr 2023 05:38:33 +0000 (UTC)
+Received: from mail-pl1-f171.google.com (mail-pl1-f171.google.com [209.85.214.171])
+ by mx.groups.io with SMTP id smtpd.web10.1255.1680845906250403989
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 06 Apr 2023 21:38:54 -0700
+ Thu, 06 Apr 2023 22:38:26 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=DKFPqByw;
- spf=pass (domain: gmail.com, ip: 209.85.210.172, mailfrom: bindudaniel1996@gmail.com)
-Received: by mail-pf1-f172.google.com with SMTP id d2e1a72fcca58-62ddb232ddaso235520b3a.1
-        for <openembedded-devel@lists.openembedded.org>; Thu, 06 Apr 2023 21:38:54 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=TA0kcn2H;
+ spf=pass (domain: gmail.com, ip: 209.85.214.171, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f171.google.com with SMTP id ja10so39260657plb.5
+        for <openembedded-devel@lists.openembedded.org>; Thu, 06 Apr 2023 22:38:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112; t=1680842334;
+        d=gmail.com; s=20210112; t=1680845905;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=ait7IaFtogFoNpD5dUImiXYb0gqSk+pLMWKzZg5nSj8=;
-        b=DKFPqBywMvGkZ0+YyMbZFDv4YqX/AEuDYBaV5O8DS/CggGofjsNjH7Oq1pDzUqkAYo
-         Cyhqajd94Ityhq8DhmRjrTgXmIfSgIrMTlXFVWg9J10fjo8F8QMMHOW0qe9mpKnpCPsR
-         MO5y3P2Sa0pHuYN2Jcikppl5m+ggzshBENvbjcIkpJzUXxCDeTUxq6G+DimID+XQqrja
-         a2Onj6jtjgoi6rTvgwacJ8FudF4niKSIfE7s8rmWrtwpjNrwGCsu/fj7kKpRd7HlIT2e
-         0IB8tUd6qhOuW6wOm4OtYBNLxUwhkuc/w1VPesOXdZIJPGN4+McRxPhzrEwSmXTMrrXa
-         Jl7A==
+        bh=fVDyg6dxVSvTPF5G4Q7SMZ0Oy8aXwKHpIka0a6TMGT4=;
+        b=TA0kcn2HoqKHUrr702+Q1hYa85L90iMbX9bm79DOvRdprb885gees7XW3K7gss8gUe
+         SyhWQW43qPmo/L8/kyXKbyg1KGRlXE/gJLMC93G3ctdCp6xC9r0g71OsPgERpRWlE4Bh
+         mkt6t362YuKp6MfrTes2HDXKNd1NdfM8FIsx5nmHZIY+VkkRztOl3hPN4lkqJqxIlCQb
+         CtMP3fugS6JbPrNkJ6BPh1blTG5q9eaTmF1zcHctoH2NaU5YB27v3loMo8lQOFsps44a
+         iGPa6u65JbGbthwEnq6hK0mYNKnGbiKUJQam42ULzzpYdx1C0sXDjR71+wiwmbJy+WWz
+         W6dw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112; t=1680842334;
+        d=1e100.net; s=20210112; t=1680845905;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=ait7IaFtogFoNpD5dUImiXYb0gqSk+pLMWKzZg5nSj8=;
-        b=AFxhn7EBdZuxjBlpK8VZq/n1VDuJD+4dt24FdqKy2BUANn0FMZRDzgDRkaslSMRRB9
-         h0JJ56gy3pF6ZrHfkHX4EC/A8j7tbgf3bdw8IuBv/RiERfYslJM3GTwgmd9kFgl1ONQp
-         NXohTAv8cY57QyfG6Q8c+EPg+05o3oVfHq5E64ovjhAr+la22uNOPZj3AkcZZIkzQSoP
-         Ns5naLYyyTjReSxwLugTEr1zcBJxR6DBS5raZ1CnTVbzOvEj3dMwiOdx+GFeXYa/JCO0
-         dpCBs8xac68+KXfwxQ+jeYBkQdnWushjGxOkLWzurkiNYd1DkcjNY7aHve9wFAqamXuT
-         aDHg==
-X-Gm-Message-State: AAQBX9c7WPHjMtnCR/eK0eN8bXYN/8nJpcX8ovLKaeCH+RyWFpqlE7/Z
-	3za1wPeNIXo9Rpt9ketJNH+WNUuXBj4=
-X-Google-Smtp-Source: AKy350apmNLF3CS57Or7pYuaFPxjTV0fX/MRJaaYVzVFvclAJS/5a73EpZTSy/U16CFPXdcjTFJ+Fg==
-X-Received: by 2002:a05:6a00:140f:b0:627:e677:bc70 with SMTP id l15-20020a056a00140f00b00627e677bc70mr704583pfu.14.1680842333797;
-        Thu, 06 Apr 2023 21:38:53 -0700 (PDT)
-Received: from localhost.localdomain ([2401:4900:1f26:7754:b142:7aa2:403c:4b04])
-        by smtp.gmail.com with ESMTPSA id j23-20020a62b617000000b00625cfe645d0sm2120859pff.7.2023.04.06.21.38.52
+        bh=fVDyg6dxVSvTPF5G4Q7SMZ0Oy8aXwKHpIka0a6TMGT4=;
+        b=686kIaGgTLDqaWB8boqLOjvtww5EkaFnRYdTsqW5NK5qWz0i+M16iKtcTx/jVBnrjb
+         v43K1Uw10NafEyaKcm3LpEV+3rBkK+wWVZpB7MR+FPRee9BN/qjOTvX/rBSIb7QawgN5
+         kPzQhjvI2XlonBlE74LJ3diFZfpi3k4UbuRRECgsWFsdPs/1vRauoqZqLY9x5TqYImfk
+         p7tk+LKgAnmTDVoUi1hubF2LDF2R5ThEkm3NBlY5vPczay03yzxU/vI+k4E0ul0Ix+UR
+         cobwn8KIbnQSufysUCQj3ikfnB6iBxFOd7rDHxwMD2Pj9+y3PGHukBqZUHYuxcy6Q0sW
+         4I+w==
+X-Gm-Message-State: AAQBX9f0OuNex4/eHrtxiAh56wwhZxw+6Z5vrwOG+kKVXgBHuGeuO6EX
+	Bd8fTsBA4pEzlIz7lKKM8JdfdlkTNrtsZw==
+X-Google-Smtp-Source: AKy350Z3ir4va1ODIRPCfHqwrEspVf1e26aRgI5zIylSA7sjXWabIlmXEZi7iDpV1TqEALid/sgfjw==
+X-Received: by 2002:a05:6a20:7517:b0:db:443b:58d0 with SMTP id r23-20020a056a20751700b000db443b58d0mr1600491pzd.12.1680845905182;
+        Thu, 06 Apr 2023 22:38:25 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9181:d380::26f8])
+        by smtp.gmail.com with ESMTPSA id j4-20020aa79284000000b005ae02dc5b94sm2167619pfa.219.2023.04.06.22.38.24
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 06 Apr 2023 21:38:53 -0700 (PDT)
-From: Bhabu Bindu <bindudaniel1996@gmail.com>
-To: openembedded-devel@lists.openembedded.org,
-	bhabu.bindu@kpit.com
-Cc: Bhabu Bindu <bindudaniel1996@gmail.com>,
-	Ivan Stepic <Ivan.Stepic@bmw.de>
-Subject: [oe][meta-oe][kirkstone][PATCH] flatbuffers: adapt for cross-compilation environments
-Date: Fri,  7 Apr 2023 10:08:45 +0530
-Message-Id: <20230407043845.1314587-1-bindudaniel1996@gmail.com>
-X-Mailer: git-send-email 2.25.1
+        Thu, 06 Apr 2023 22:38:24 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-python][PATCH] python3-pyruvate: regenerate with updated bbclass
+Date: Thu,  6 Apr 2023 22:38:22 -0700
+Message-Id: <20230407053822.3052463-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.40.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 07 Apr 2023 04:39:02 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101976
+ <openembedded-devel@lists.openembedded.org>; Fri, 07 Apr 2023 05:38:33 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101977
 
-Flatbuffers contains a library and a schema compiler. The package
-contains cmake files to discover the libraries and the compiler tool.
-Currently, all of these cmake files are installed into the target
-sysroot. However, the compiler utility isn't installed into the sysroot
-(as it is not runnable on the build machine).
+* it's needed for compatibility with updated fetcher from:
+  https://patchwork.yoctoproject.org/project/bitbake/patch/20230405122125.3358972-1-enrico.scholz@sigma-chemnitz.de/
 
-When an application that depends on flatbuffers gets built, it uses
-flatbuffers' exported cmake targets to configure the project. One of the
-exported targets is FlatcTarget.cmake which expects to see flatc binary
-in /usr/bin of the sysroot. Since binaries for target don't end up in
-target sysroot, cmake configuration fails.
-
-This patch addresses this problem of flatbuffers' build infrastructure
-in cross-compiling environments. By removing FlatcTarget.cmake for
-target builds from the sysroot we essentially skip this step of
-flatbuffers' configuration.
-
-Signed-off-by: Ivan Stepic <Ivan.Stepic@bmw.de>
-Signed-off-by: Bhabu Bindu <bindudaniel1996@gmail.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-oe/recipes-devtools/flatbuffers/flatbuffers_2.0.0.bb | 7 ++++++-
- 1 file changed, 6 insertions(+), 1 deletion(-)
+ .../python/python3-pyruvate-crates.inc        | 178 +++++++++---------
+ 1 file changed, 89 insertions(+), 89 deletions(-)
 
-diff --git a/meta-oe/recipes-devtools/flatbuffers/flatbuffers_2.0.0.bb b/meta-oe/recipes-devtools/flatbuffers/flatbuffers_2.0.0.bb
-index bf74f1229..44478ea0b 100644
---- a/meta-oe/recipes-devtools/flatbuffers/flatbuffers_2.0.0.bb
-+++ b/meta-oe/recipes-devtools/flatbuffers/flatbuffers_2.0.0.bb
-@@ -25,12 +25,17 @@ BUILD_CXXFLAGS += "-fPIC"
- # BUILD_TYPE=Release is required, otherwise flatc is not installed
- EXTRA_OECMAKE += "\
-     -DCMAKE_BUILD_TYPE=Release \
--    -DFLATBUFFERS_BUILD_TESTS=OFF \    
-+    -DFLATBUFFERS_BUILD_TESTS=OFF \
-     -DFLATBUFFERS_BUILD_SHAREDLIB=ON \
+diff --git a/meta-python/recipes-devtools/python/python3-pyruvate-crates.inc b/meta-python/recipes-devtools/python/python3-pyruvate-crates.inc
+index 52fb9d4571..9d4a7272f7 100644
+--- a/meta-python/recipes-devtools/python/python3-pyruvate-crates.inc
++++ b/meta-python/recipes-devtools/python/python3-pyruvate-crates.inc
+@@ -93,92 +93,92 @@ SRC_URI += " \
+     crate://crates.io/winapi-x86_64-pc-windows-gnu/0.4.0 \
  "
  
- inherit cmake
- 
-+rm_flatc_cmaketarget_for_target() {
-+    rm -f "${SYSROOT_DESTDIR}/${libdir}/cmake/flatbuffers/FlatcTargets.cmake"
-+}
-+SYSROOT_PREPROCESS_FUNCS:class-target += "rm_flatc_cmaketarget_for_target"
-+
- do_install:append() {
-     install -d ${D}${PYTHON_SITEPACKAGES_DIR}
-     cp -rf ${S}/python/flatbuffers ${D}${PYTHON_SITEPACKAGES_DIR}
+-SRC_URI[aho-corasick.sha256sum] = "1e37cfd5e7657ada45f742d6e99ca5788580b5c529dc78faf11ece6dc702656f"
+-SRC_URI[atty.sha256sum] = "d9b39be18770d11421cdb1b9947a45dd3f37e93092cbf377614828a319d5fee8"
+-SRC_URI[autocfg.sha256sum] = "cdb031dd78e28731d87d56cc8ffef4a8f36ca26c38fe2de700543e627f8a464a"
+-SRC_URI[bitflags.sha256sum] = "bef38d45163c2f1dde094a7dfd33ccf595c92905c8f8f4fdc18d06fb1037718a"
+-SRC_URI[block-buffer.sha256sum] = "4152116fd6e9dadb291ae18fc1ec3575ed6d84c29642d97890f4b4a3417297e4"
+-SRC_URI[cc.sha256sum] = "22a9137b95ea06864e018375b72adfb7db6e6f68cfc8df5a04d00288050485ee"
+-SRC_URI[cfg-if.sha256sum] = "baf1de4339761588bc0619e3cbc0120ee582ebb74b53b4efbf79117bd2da40fd"
+-SRC_URI[chrono.sha256sum] = "670ad68c9088c2a963aaa298cb369688cf3f9465ce5e2d4ca10e6e0098a1ce73"
+-SRC_URI[cpufeatures.sha256sum] = "95059428f66df56b63431fdb4e1947ed2190586af5c5a8a8b71122bdf5a7f469"
+-SRC_URI[cpython.sha256sum] = "b7d46ba8ace7f3a1d204ac5060a706d0a68de6b42eafb6a586cc08bebcffe664"
+-SRC_URI[crossbeam.sha256sum] = "4ae5588f6b3c3cb05239e90bd110f257254aecd01e4635400391aeae07497845"
+-SRC_URI[crossbeam-channel.sha256sum] = "e54ea8bc3fb1ee042f5aace6e3c6e025d3874866da222930f70ce62aceba0bfa"
+-SRC_URI[crossbeam-deque.sha256sum] = "6455c0ca19f0d2fbf751b908d5c55c1f5cbc65e03c4225427254b46890bdde1e"
+-SRC_URI[crossbeam-epoch.sha256sum] = "97242a70df9b89a65d0b6df3c4bf5b9ce03c5b7309019777fbde37e7537f8762"
+-SRC_URI[crossbeam-queue.sha256sum] = "b979d76c9fcb84dffc80a73f7290da0f83e4c95773494674cb44b76d13a7a110"
+-SRC_URI[crossbeam-utils.sha256sum] = "cfcae03edb34f947e64acdb1c33ec169824e20657e9ecb61cef6c8c74dcb8120"
+-SRC_URI[crypto-mac.sha256sum] = "b1d1a86f49236c215f271d40892d5fc950490551400b02ef360692c29815c714"
+-SRC_URI[ctrlc.sha256sum] = "a19c6cedffdc8c03a3346d723eb20bd85a13362bb96dc2ac000842c6381ec7bf"
+-SRC_URI[digest.sha256sum] = "d3dd60d1080a57a05ab032377049e0591415d2b31afd7028356dbf3cc6dcb066"
+-SRC_URI[encoding.sha256sum] = "6b0d943856b990d12d3b55b359144ff341533e516d94098b1d3fc1ac666d36ec"
+-SRC_URI[encoding-index-japanese.sha256sum] = "04e8b2ff42e9a05335dbf8b5c6f7567e5591d0d916ccef4e0b1710d32a0d0c91"
+-SRC_URI[encoding-index-korean.sha256sum] = "4dc33fb8e6bcba213fe2f14275f0963fd16f0a02c878e3095ecfdf5bee529d81"
+-SRC_URI[encoding-index-simpchinese.sha256sum] = "d87a7194909b9118fc707194baa434a4e3b0fb6a5a757c73c3adb07aa25031f7"
+-SRC_URI[encoding-index-singlebyte.sha256sum] = "3351d5acffb224af9ca265f435b859c7c01537c0849754d3db3fdf2bfe2ae84a"
+-SRC_URI[encoding-index-tradchinese.sha256sum] = "fd0e20d5688ce3cab59eb3ef3a2083a5c77bf496cb798dc6fcdb75f323890c18"
+-SRC_URI[encoding_index_tests.sha256sum] = "a246d82be1c9d791c5dfde9a2bd045fc3cbba3fa2b11ad558f27d01712f00569"
+-SRC_URI[env_logger.sha256sum] = "0b2cf0344971ee6c64c31be0d530793fba457d322dfec2810c453d0ef228f9c3"
+-SRC_URI[errno.sha256sum] = "f639046355ee4f37944e44f60642c6f3a7efa3cf6b78c78a0d989a8ce6c396a1"
+-SRC_URI[errno-dragonfly.sha256sum] = "aa68f1b12764fab894d2755d2518754e71b4fd80ecfb822714a1206c2aab39bf"
+-SRC_URI[fastrand.sha256sum] = "779d043b6a0b90cc4c0ed7ee380a6504394cee7efd7db050e3774eee387324b2"
+-SRC_URI[generic-array.sha256sum] = "fd48d33ec7f05fbfa152300fdad764757cbded343c1aa1cff2fbaf4134851803"
+-SRC_URI[getrandom.sha256sum] = "7fcd999463524c52659517fe2cea98493cfe485d10565e7b0fb07dbba7ad2753"
+-SRC_URI[hermit-abi.sha256sum] = "62b467343b94ba476dcb2500d242dadbb39557df889310ac77c5d99100aaac33"
+-SRC_URI[hmac.sha256sum] = "2a2a2320eb7ec0ebe8da8f744d7812d9fc4cb4d09344ac01898dbcb6a20ae69b"
+-SRC_URI[httparse.sha256sum] = "acd94fdbe1d4ff688b67b04eee2e17bd50995534a61539e45adfefb45e5e5503"
+-SRC_URI[humantime.sha256sum] = "9a3a5bfb195931eeb336b2a7b4d761daec841b97f947d34394601737a7bba5e4"
+-SRC_URI[instant.sha256sum] = "7a5bbe824c507c5da5956355e86a746d82e0e1464f65d862cc5e71da70e94b2c"
+-SRC_URI[lazy_static.sha256sum] = "e2abad23fbc42b3700f2f279844dc832adb2b2eb069b2df918f455c4e18cc646"
+-SRC_URI[libc.sha256sum] = "1b03d17f364a3a042d5e5d46b053bbbf82c92c9430c592dd4c064dc6ee997125"
+-SRC_URI[libsystemd.sha256sum] = "6f4f0b5b062ba67aa075e331de778082c09e66b5ef32970ea5a1e9c37c9555d1"
+-SRC_URI[log.sha256sum] = "51b9bbe6c47d51fc3e1a9b945965946b4c44142ab8792c50835a980d362c2710"
+-SRC_URI[memchr.sha256sum] = "308cc39be01b73d0d18f82a0e7b2a3df85245f84af96fdddc5d202d27e47b86a"
+-SRC_URI[memoffset.sha256sum] = "5aa361d4faea93603064a027415f07bd8e1d5c88c9fbf68bf56a285428fd79ce"
+-SRC_URI[mio.sha256sum] = "ba272f85fa0b41fc91872be579b3bbe0f56b792aa361a380eb669469f68dafb2"
+-SRC_URI[miow.sha256sum] = "b9f1c5b025cda876f66ef43a113f91ebc9f4ccef34843000e0adf6ebbab84e21"
+-SRC_URI[nix.sha256sum] = "9f866317acbd3a240710c63f065ffb1e4fd466259045ccb504130b7f668f35c6"
+-SRC_URI[ntapi.sha256sum] = "3f6bb902e437b6d86e03cce10a7e2af662292c5dfef23b65899ea3ac9354ad44"
+-SRC_URI[num-integer.sha256sum] = "d2cc698a63b549a70bc047073d2949cce27cd1c7b0a4a862d08a8031bc2801db"
+-SRC_URI[num-traits.sha256sum] = "9a64b1ec5cda2586e284722486d802acf1f7dbdc623e2bfc57e65ca1cd099290"
+-SRC_URI[num_cpus.sha256sum] = "19e64526ebdee182341572e50e9ad03965aa510cd94427a4549448f285e957a1"
+-SRC_URI[once_cell.sha256sum] = "da32515d9f6e6e489d7bc9d84c71b060db7247dc035bbe44eac88cf87486d8d5"
+-SRC_URI[opaque-debug.sha256sum] = "624a8340c38c1b80fd549087862da4ba43e08858af025b236e509b6649fc13d5"
+-SRC_URI[paste.sha256sum] = "0744126afe1a6dd7f394cb50a716dbe086cb06e255e53d8d0185d82828358fb5"
+-SRC_URI[ppv-lite86.sha256sum] = "eb9f9e6e233e5c4a35559a617bf40a4ec447db2e84c20b55a6f83167b7e57872"
+-SRC_URI[proc-macro2.sha256sum] = "c7342d5883fbccae1cc37a2353b09c87c9b0f3afd73f5fb9bba687a1f733b029"
+-SRC_URI[python3-sys.sha256sum] = "b18b32e64c103d5045f44644d7ddddd65336f7a0521f6fde673240a9ecceb77e"
+-SRC_URI[quote.sha256sum] = "47aa80447ce4daf1717500037052af176af5d38cc3e571d9ec1c7353fc10c87d"
+-SRC_URI[rand.sha256sum] = "2e7573632e6454cf6b99d7aac4ccca54be06da05aca2ef7423d22d27d4d4bcd8"
+-SRC_URI[rand_chacha.sha256sum] = "e6c10a63a0fa32252be49d21e7709d4d4baf8d231c2dbce1eaa8141b9b127d88"
+-SRC_URI[rand_core.sha256sum] = "d34f1408f55294453790c48b2f1ebbb1c5b4b7563eb1f418bcfcfdbb06ebb4e7"
+-SRC_URI[rand_hc.sha256sum] = "d51e9f596de227fda2ea6c84607f5558e196eeaf43c986b724ba4fb8fdf497e7"
+-SRC_URI[redox_syscall.sha256sum] = "8383f39639269cde97d255a32bdb68c047337295414940c68bdd30c2e13203ff"
+-SRC_URI[regex.sha256sum] = "d07a8629359eb56f1e2fb1652bb04212c072a87ba68546a04065d525673ac461"
+-SRC_URI[regex-syntax.sha256sum] = "f497285884f3fcff424ffc933e56d7cbca511def0c9831a7f9b5f6153e3cc89b"
+-SRC_URI[remove_dir_all.sha256sum] = "3acd125665422973a33ac9d3dd2df85edad0f4ae9b00dafb1a05e43a9f5ef8e7"
+-SRC_URI[scopeguard.sha256sum] = "d29ab0c6d3fc0ee92fe66e2d99f700eab17a8d57d1c1d3b748380fb20baa78cd"
+-SRC_URI[serde.sha256sum] = "97565067517b60e2d1ea8b268e59ce036de907ac523ad83a0475da04e818989a"
+-SRC_URI[serde_derive.sha256sum] = "ed201699328568d8d08208fdd080e3ff594e6c422e438b6705905da01005d537"
+-SRC_URI[sha2.sha256sum] = "4d58a1e1bf39749807d89cf2d98ac2dfa0ff1cb3faa38fbb64dd88ac8013d800"
+-SRC_URI[simplelog.sha256sum] = "ecabc0118918611790b8615670ab79296272cbe09496b6884b02b1e929c20886"
+-SRC_URI[spmc.sha256sum] = "02a8428da277a8e3a15271d79943e80ccc2ef254e78813a166a08d65e4c3ece5"
+-SRC_URI[subtle.sha256sum] = "6bdef32e8150c2a081110b42772ffe7d7c9032b606bc226c8260fd97e0976601"
+-SRC_URI[syn.sha256sum] = "a684ac3dcd8913827e18cd09a68384ee66c1de24157e3c556c9ab16d85695fb7"
+-SRC_URI[tempfile.sha256sum] = "5cdb1ef4eaeeaddc8fbd371e5017057064af0911902ef36b39801f67cc6d79e4"
+-SRC_URI[termcolor.sha256sum] = "2dfed899f0eb03f32ee8c6a0aabdb8a7949659e3466561fc0adf54e26d88c5f4"
+-SRC_URI[thiserror.sha256sum] = "854babe52e4df1653706b98fcfc05843010039b406875930a70e4d9644e5c417"
+-SRC_URI[thiserror-impl.sha256sum] = "aa32fd3f627f367fe16f893e2597ae3c05020f8bba2666a4e6ea73d377e5714b"
+-SRC_URI[threadpool.sha256sum] = "d050e60b33d41c19108b32cea32164033a9013fe3b46cbd4457559bfbf77afaa"
+-SRC_URI[time.sha256sum] = "6db9e6914ab8b1ae1c260a4ae7a49b6c5611b40328a735b21862567685e73255"
+-SRC_URI[typenum.sha256sum] = "dcf81ac59edc17cc8697ff311e8f5ef2d99fcbd9817b34cec66f90b6c3dfd987"
+-SRC_URI[unicode-xid.sha256sum] = "8ccb82d61f80a663efe1f787a51b16b5a51e3314d6ac365b08639f52387b33f3"
+-SRC_URI[urlencoding.sha256sum] = "68b90931029ab9b034b300b797048cf23723400aa757e8a2bfb9d748102f9821"
+-SRC_URI[uuid.sha256sum] = "bc5cf98d8186244414c848017f0e2676b3fcb46807f6668a97dfe67359a3c4b7"
+-SRC_URI[version_check.sha256sum] = "49874b5167b65d7193b8aba1567f5c7d93d001cafc34600cee003eda787e483f"
+-SRC_URI[wasi.sha256sum] = "1a143597ca7c7793eff794def352d41792a93c481eb1042423ff7ff72ba2c31f"
+-SRC_URI[winapi.sha256sum] = "5c839a674fcd7a98952e593242ea400abe93992746761e38641405d28b00f419"
+-SRC_URI[winapi-i686-pc-windows-gnu.sha256sum] = "ac3b87c63620426dd9b991e5ce0329eff545bccbbb34f3be09ff6fb6ab51b7b6"
+-SRC_URI[winapi-util.sha256sum] = "70ec6ce85bb158151cae5e5c87f95a8e97d2c0c4b001223f33a334e3ce5de178"
+-SRC_URI[winapi-x86_64-pc-windows-gnu.sha256sum] = "712e227841d057c1ee1cd2fb22fa7e5a5461ae8e48fa2ca79ec42cfc1931183f"
++SRC_URI[aho-corasick-0.7.18.sha256sum] = "1e37cfd5e7657ada45f742d6e99ca5788580b5c529dc78faf11ece6dc702656f"
++SRC_URI[atty-0.2.14.sha256sum] = "d9b39be18770d11421cdb1b9947a45dd3f37e93092cbf377614828a319d5fee8"
++SRC_URI[autocfg-1.0.1.sha256sum] = "cdb031dd78e28731d87d56cc8ffef4a8f36ca26c38fe2de700543e627f8a464a"
++SRC_URI[bitflags-1.3.2.sha256sum] = "bef38d45163c2f1dde094a7dfd33ccf595c92905c8f8f4fdc18d06fb1037718a"
++SRC_URI[block-buffer-0.9.0.sha256sum] = "4152116fd6e9dadb291ae18fc1ec3575ed6d84c29642d97890f4b4a3417297e4"
++SRC_URI[cc-1.0.72.sha256sum] = "22a9137b95ea06864e018375b72adfb7db6e6f68cfc8df5a04d00288050485ee"
++SRC_URI[cfg-if-1.0.0.sha256sum] = "baf1de4339761588bc0619e3cbc0120ee582ebb74b53b4efbf79117bd2da40fd"
++SRC_URI[chrono-0.4.19.sha256sum] = "670ad68c9088c2a963aaa298cb369688cf3f9465ce5e2d4ca10e6e0098a1ce73"
++SRC_URI[cpufeatures-0.2.1.sha256sum] = "95059428f66df56b63431fdb4e1947ed2190586af5c5a8a8b71122bdf5a7f469"
++SRC_URI[cpython-0.7.0.sha256sum] = "b7d46ba8ace7f3a1d204ac5060a706d0a68de6b42eafb6a586cc08bebcffe664"
++SRC_URI[crossbeam-0.8.1.sha256sum] = "4ae5588f6b3c3cb05239e90bd110f257254aecd01e4635400391aeae07497845"
++SRC_URI[crossbeam-channel-0.5.2.sha256sum] = "e54ea8bc3fb1ee042f5aace6e3c6e025d3874866da222930f70ce62aceba0bfa"
++SRC_URI[crossbeam-deque-0.8.1.sha256sum] = "6455c0ca19f0d2fbf751b908d5c55c1f5cbc65e03c4225427254b46890bdde1e"
++SRC_URI[crossbeam-epoch-0.9.6.sha256sum] = "97242a70df9b89a65d0b6df3c4bf5b9ce03c5b7309019777fbde37e7537f8762"
++SRC_URI[crossbeam-queue-0.3.3.sha256sum] = "b979d76c9fcb84dffc80a73f7290da0f83e4c95773494674cb44b76d13a7a110"
++SRC_URI[crossbeam-utils-0.8.6.sha256sum] = "cfcae03edb34f947e64acdb1c33ec169824e20657e9ecb61cef6c8c74dcb8120"
++SRC_URI[crypto-mac-0.11.1.sha256sum] = "b1d1a86f49236c215f271d40892d5fc950490551400b02ef360692c29815c714"
++SRC_URI[ctrlc-3.2.1.sha256sum] = "a19c6cedffdc8c03a3346d723eb20bd85a13362bb96dc2ac000842c6381ec7bf"
++SRC_URI[digest-0.9.0.sha256sum] = "d3dd60d1080a57a05ab032377049e0591415d2b31afd7028356dbf3cc6dcb066"
++SRC_URI[encoding-0.2.33.sha256sum] = "6b0d943856b990d12d3b55b359144ff341533e516d94098b1d3fc1ac666d36ec"
++SRC_URI[encoding-index-japanese-1.20141219.5.sha256sum] = "04e8b2ff42e9a05335dbf8b5c6f7567e5591d0d916ccef4e0b1710d32a0d0c91"
++SRC_URI[encoding-index-korean-1.20141219.5.sha256sum] = "4dc33fb8e6bcba213fe2f14275f0963fd16f0a02c878e3095ecfdf5bee529d81"
++SRC_URI[encoding-index-simpchinese-1.20141219.5.sha256sum] = "d87a7194909b9118fc707194baa434a4e3b0fb6a5a757c73c3adb07aa25031f7"
++SRC_URI[encoding-index-singlebyte-1.20141219.5.sha256sum] = "3351d5acffb224af9ca265f435b859c7c01537c0849754d3db3fdf2bfe2ae84a"
++SRC_URI[encoding-index-tradchinese-1.20141219.5.sha256sum] = "fd0e20d5688ce3cab59eb3ef3a2083a5c77bf496cb798dc6fcdb75f323890c18"
++SRC_URI[encoding_index_tests-0.1.4.sha256sum] = "a246d82be1c9d791c5dfde9a2bd045fc3cbba3fa2b11ad558f27d01712f00569"
++SRC_URI[env_logger-0.9.0.sha256sum] = "0b2cf0344971ee6c64c31be0d530793fba457d322dfec2810c453d0ef228f9c3"
++SRC_URI[errno-0.2.8.sha256sum] = "f639046355ee4f37944e44f60642c6f3a7efa3cf6b78c78a0d989a8ce6c396a1"
++SRC_URI[errno-dragonfly-0.1.2.sha256sum] = "aa68f1b12764fab894d2755d2518754e71b4fd80ecfb822714a1206c2aab39bf"
++SRC_URI[fastrand-1.6.0.sha256sum] = "779d043b6a0b90cc4c0ed7ee380a6504394cee7efd7db050e3774eee387324b2"
++SRC_URI[generic-array-0.14.5.sha256sum] = "fd48d33ec7f05fbfa152300fdad764757cbded343c1aa1cff2fbaf4134851803"
++SRC_URI[getrandom-0.2.3.sha256sum] = "7fcd999463524c52659517fe2cea98493cfe485d10565e7b0fb07dbba7ad2753"
++SRC_URI[hermit-abi-0.1.19.sha256sum] = "62b467343b94ba476dcb2500d242dadbb39557df889310ac77c5d99100aaac33"
++SRC_URI[hmac-0.11.0.sha256sum] = "2a2a2320eb7ec0ebe8da8f744d7812d9fc4cb4d09344ac01898dbcb6a20ae69b"
++SRC_URI[httparse-1.5.1.sha256sum] = "acd94fdbe1d4ff688b67b04eee2e17bd50995534a61539e45adfefb45e5e5503"
++SRC_URI[humantime-2.1.0.sha256sum] = "9a3a5bfb195931eeb336b2a7b4d761daec841b97f947d34394601737a7bba5e4"
++SRC_URI[instant-0.1.12.sha256sum] = "7a5bbe824c507c5da5956355e86a746d82e0e1464f65d862cc5e71da70e94b2c"
++SRC_URI[lazy_static-1.4.0.sha256sum] = "e2abad23fbc42b3700f2f279844dc832adb2b2eb069b2df918f455c4e18cc646"
++SRC_URI[libc-0.2.112.sha256sum] = "1b03d17f364a3a042d5e5d46b053bbbf82c92c9430c592dd4c064dc6ee997125"
++SRC_URI[libsystemd-0.4.1.sha256sum] = "6f4f0b5b062ba67aa075e331de778082c09e66b5ef32970ea5a1e9c37c9555d1"
++SRC_URI[log-0.4.14.sha256sum] = "51b9bbe6c47d51fc3e1a9b945965946b4c44142ab8792c50835a980d362c2710"
++SRC_URI[memchr-2.4.1.sha256sum] = "308cc39be01b73d0d18f82a0e7b2a3df85245f84af96fdddc5d202d27e47b86a"
++SRC_URI[memoffset-0.6.5.sha256sum] = "5aa361d4faea93603064a027415f07bd8e1d5c88c9fbf68bf56a285428fd79ce"
++SRC_URI[mio-0.8.0.sha256sum] = "ba272f85fa0b41fc91872be579b3bbe0f56b792aa361a380eb669469f68dafb2"
++SRC_URI[miow-0.3.7.sha256sum] = "b9f1c5b025cda876f66ef43a113f91ebc9f4ccef34843000e0adf6ebbab84e21"
++SRC_URI[nix-0.23.1.sha256sum] = "9f866317acbd3a240710c63f065ffb1e4fd466259045ccb504130b7f668f35c6"
++SRC_URI[ntapi-0.3.6.sha256sum] = "3f6bb902e437b6d86e03cce10a7e2af662292c5dfef23b65899ea3ac9354ad44"
++SRC_URI[num-integer-0.1.44.sha256sum] = "d2cc698a63b549a70bc047073d2949cce27cd1c7b0a4a862d08a8031bc2801db"
++SRC_URI[num-traits-0.2.14.sha256sum] = "9a64b1ec5cda2586e284722486d802acf1f7dbdc623e2bfc57e65ca1cd099290"
++SRC_URI[num_cpus-1.13.1.sha256sum] = "19e64526ebdee182341572e50e9ad03965aa510cd94427a4549448f285e957a1"
++SRC_URI[once_cell-1.9.0.sha256sum] = "da32515d9f6e6e489d7bc9d84c71b060db7247dc035bbe44eac88cf87486d8d5"
++SRC_URI[opaque-debug-0.3.0.sha256sum] = "624a8340c38c1b80fd549087862da4ba43e08858af025b236e509b6649fc13d5"
++SRC_URI[paste-1.0.6.sha256sum] = "0744126afe1a6dd7f394cb50a716dbe086cb06e255e53d8d0185d82828358fb5"
++SRC_URI[ppv-lite86-0.2.16.sha256sum] = "eb9f9e6e233e5c4a35559a617bf40a4ec447db2e84c20b55a6f83167b7e57872"
++SRC_URI[proc-macro2-1.0.36.sha256sum] = "c7342d5883fbccae1cc37a2353b09c87c9b0f3afd73f5fb9bba687a1f733b029"
++SRC_URI[python3-sys-0.7.0.sha256sum] = "b18b32e64c103d5045f44644d7ddddd65336f7a0521f6fde673240a9ecceb77e"
++SRC_URI[quote-1.0.14.sha256sum] = "47aa80447ce4daf1717500037052af176af5d38cc3e571d9ec1c7353fc10c87d"
++SRC_URI[rand-0.8.4.sha256sum] = "2e7573632e6454cf6b99d7aac4ccca54be06da05aca2ef7423d22d27d4d4bcd8"
++SRC_URI[rand_chacha-0.3.1.sha256sum] = "e6c10a63a0fa32252be49d21e7709d4d4baf8d231c2dbce1eaa8141b9b127d88"
++SRC_URI[rand_core-0.6.3.sha256sum] = "d34f1408f55294453790c48b2f1ebbb1c5b4b7563eb1f418bcfcfdbb06ebb4e7"
++SRC_URI[rand_hc-0.3.1.sha256sum] = "d51e9f596de227fda2ea6c84607f5558e196eeaf43c986b724ba4fb8fdf497e7"
++SRC_URI[redox_syscall-0.2.10.sha256sum] = "8383f39639269cde97d255a32bdb68c047337295414940c68bdd30c2e13203ff"
++SRC_URI[regex-1.5.4.sha256sum] = "d07a8629359eb56f1e2fb1652bb04212c072a87ba68546a04065d525673ac461"
++SRC_URI[regex-syntax-0.6.25.sha256sum] = "f497285884f3fcff424ffc933e56d7cbca511def0c9831a7f9b5f6153e3cc89b"
++SRC_URI[remove_dir_all-0.5.3.sha256sum] = "3acd125665422973a33ac9d3dd2df85edad0f4ae9b00dafb1a05e43a9f5ef8e7"
++SRC_URI[scopeguard-1.1.0.sha256sum] = "d29ab0c6d3fc0ee92fe66e2d99f700eab17a8d57d1c1d3b748380fb20baa78cd"
++SRC_URI[serde-1.0.133.sha256sum] = "97565067517b60e2d1ea8b268e59ce036de907ac523ad83a0475da04e818989a"
++SRC_URI[serde_derive-1.0.133.sha256sum] = "ed201699328568d8d08208fdd080e3ff594e6c422e438b6705905da01005d537"
++SRC_URI[sha2-0.9.9.sha256sum] = "4d58a1e1bf39749807d89cf2d98ac2dfa0ff1cb3faa38fbb64dd88ac8013d800"
++SRC_URI[simplelog-0.11.1.sha256sum] = "ecabc0118918611790b8615670ab79296272cbe09496b6884b02b1e929c20886"
++SRC_URI[spmc-0.3.0.sha256sum] = "02a8428da277a8e3a15271d79943e80ccc2ef254e78813a166a08d65e4c3ece5"
++SRC_URI[subtle-2.4.1.sha256sum] = "6bdef32e8150c2a081110b42772ffe7d7c9032b606bc226c8260fd97e0976601"
++SRC_URI[syn-1.0.85.sha256sum] = "a684ac3dcd8913827e18cd09a68384ee66c1de24157e3c556c9ab16d85695fb7"
++SRC_URI[tempfile-3.3.0.sha256sum] = "5cdb1ef4eaeeaddc8fbd371e5017057064af0911902ef36b39801f67cc6d79e4"
++SRC_URI[termcolor-1.1.2.sha256sum] = "2dfed899f0eb03f32ee8c6a0aabdb8a7949659e3466561fc0adf54e26d88c5f4"
++SRC_URI[thiserror-1.0.30.sha256sum] = "854babe52e4df1653706b98fcfc05843010039b406875930a70e4d9644e5c417"
++SRC_URI[thiserror-impl-1.0.30.sha256sum] = "aa32fd3f627f367fe16f893e2597ae3c05020f8bba2666a4e6ea73d377e5714b"
++SRC_URI[threadpool-1.8.1.sha256sum] = "d050e60b33d41c19108b32cea32164033a9013fe3b46cbd4457559bfbf77afaa"
++SRC_URI[time-0.1.44.sha256sum] = "6db9e6914ab8b1ae1c260a4ae7a49b6c5611b40328a735b21862567685e73255"
++SRC_URI[typenum-1.15.0.sha256sum] = "dcf81ac59edc17cc8697ff311e8f5ef2d99fcbd9817b34cec66f90b6c3dfd987"
++SRC_URI[unicode-xid-0.2.2.sha256sum] = "8ccb82d61f80a663efe1f787a51b16b5a51e3314d6ac365b08639f52387b33f3"
++SRC_URI[urlencoding-2.1.0.sha256sum] = "68b90931029ab9b034b300b797048cf23723400aa757e8a2bfb9d748102f9821"
++SRC_URI[uuid-0.8.2.sha256sum] = "bc5cf98d8186244414c848017f0e2676b3fcb46807f6668a97dfe67359a3c4b7"
++SRC_URI[version_check-0.9.4.sha256sum] = "49874b5167b65d7193b8aba1567f5c7d93d001cafc34600cee003eda787e483f"
++SRC_URI[wasi-0.10.0+wasi-snapshot-preview1.sha256sum] = "1a143597ca7c7793eff794def352d41792a93c481eb1042423ff7ff72ba2c31f"
++SRC_URI[winapi-0.3.9.sha256sum] = "5c839a674fcd7a98952e593242ea400abe93992746761e38641405d28b00f419"
++SRC_URI[winapi-i686-pc-windows-gnu-0.4.0.sha256sum] = "ac3b87c63620426dd9b991e5ce0329eff545bccbbb34f3be09ff6fb6ab51b7b6"
++SRC_URI[winapi-util-0.1.5.sha256sum] = "70ec6ce85bb158151cae5e5c87f95a8e97d2c0c4b001223f33a334e3ce5de178"
++SRC_URI[winapi-x86_64-pc-windows-gnu-0.4.0.sha256sum] = "712e227841d057c1ee1cd2fb22fa7e5a5461ae8e48fa2ca79ec42cfc1931183f"
 -- 
-2.25.1
+2.40.0
 
 
