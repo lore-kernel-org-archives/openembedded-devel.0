@@ -1,139 +1,134 @@
-Return-Path: <philip@balister.org>
+Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B55EEC76196
-	for <webhook@archiver.kernel.org>; Fri,  7 Apr 2023 11:45:34 +0000 (UTC)
-Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.web11.2205.1680851931825014883
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 93562C6FD1D
+	for <webhook@archiver.kernel.org>; Fri,  7 Apr 2023 11:46:04 +0000 (UTC)
+Received: from mail-yw1-f179.google.com (mail-yw1-f179.google.com [209.85.128.179])
+ by mx.groups.io with SMTP id smtpd.web11.5358.1680867956413751117
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 07 Apr 2023 00:18:51 -0700
+ Fri, 07 Apr 2023 04:45:56 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=pps06212021 header.b=et29TSJR;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=3461fac36a=manojsingh.saun@windriver.com)
-Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 3376wpWl027234
-	for <openembedded-devel@lists.openembedded.org>; Fri, 7 Apr 2023 00:18:51 -0700
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com; h=from : to : cc :
- subject : date : message-id : mime-version : content-transfer-encoding :
- content-type; s=PPS06212021;
- bh=ZsATJ+8T+AkqpcI+5Eah8xOEI3XekQGec3A0jdgjsCY=;
- b=et29TSJREOdwViB7W2+QHenENkXx3Bq8/WYWtsnNQwbBVi9UcCoCkikRy+8xRQrqDvHD
- GRt9SX8xSoYJdvgBDZxVAADTVAfICTfpd+1QnK7XOIpWszlxsiJElgB3izValdR7/1HL
- LE5r7aDCA/yxLF3o9g8MpIDhmLu3hwFXB5FPy1U//V64XAiEpdckTBg4d9nmqF/9WlgR
- 7zkMitm7bzFhCGGjR5XnorGHnyM4BPq73q5+8TGYZ+NDVQLx9rRIMEsNY2sKPcqlexVn
- w4x094uLQh2RKydJthoUmweRNkO+SrKuvA2G2jS9iP0sO+kOqU3M1KG/YPlNknH0P4Vn SQ== 
-Received: from ala-exchng02.corp.ad.wrs.com (unknown-82-254.windriver.com [147.11.82.254])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3ppfw6xkck-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Fri, 07 Apr 2023 00:18:51 -0700
-Received: from ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) by
- ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.23; Fri, 7 Apr 2023 00:18:50 -0700
-Received: from blr-linux-engg1.wrs.com (147.11.136.210) by
- ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server id
- 15.1.2507.23 via Frontend Transport; Fri, 7 Apr 2023 00:18:49 -0700
-From: "Manoj Saun" <manojsingh.saun@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-CC: <narpat.mali@windriver.com>, Manoj Saun <manojsingh.saun@windriver.com>
-Subject: [oe][meta-oe][kirkstone][PATCH 1/1] postgresql: fix ptest failure of sysviews test
-Date: Fri, 7 Apr 2023 07:18:42 +0000
-Message-ID: <20230407071842.1901649-1-manojsingh.saun@windriver.com>
-X-Mailer: git-send-email 2.34.1
+ dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20210112 header.b=Ac35c4Jw;
+ spf=pass (domain: gmail.com, ip: 209.85.128.179, mailfrom: akuster808@gmail.com)
+Received: by mail-yw1-f179.google.com with SMTP id 00721157ae682-54c0dd7e2f3so85274527b3.8
+        for <openembedded-devel@lists.openembedded.org>; Fri, 07 Apr 2023 04:45:56 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112; t=1680867955; x=1683459955;
+        h=content-transfer-encoding:in-reply-to:from:references:cc:to
+         :content-language:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=v2cbQsFHaJ78oE+2Fpe1+LyTiwLeSOzwJCAs7OnNyXQ=;
+        b=Ac35c4Jwm+9GaCljcL2AP17FbXW1bsOWxChfwgqlEVcxOlABDwbCyNLxaaEeOjDwGX
+         ueY8HVx9pfu6Yz8orjDIj+uMQS7F6dRQANrKPAPNSubp195xSwCWX4+ssevyJwcLaegp
+         j8KmTCT8z4OxVOtnHb8374oF8Uc++Vpf/fKlQRX9T1PuaEsrbmNU9pxLZ8ccvje9sEoE
+         mAGXo2cc0dKg2wB2QE03y5tNhqxh3oXDHIgHdAZ4Th7r9eQy3kzd4rIPUXVnbAfOu7RZ
+         nEjnDSd+W7eNHX/eo1BvGpHjGOex2HOJdNvmESh/BAPHRxMG6//RqTLttHkVV6rAgogt
+         csfg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112; t=1680867955; x=1683459955;
+        h=content-transfer-encoding:in-reply-to:from:references:cc:to
+         :content-language:subject:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=v2cbQsFHaJ78oE+2Fpe1+LyTiwLeSOzwJCAs7OnNyXQ=;
+        b=bryyI+DJKbaagimsWyKuSFNx6IldLgsaNBWKo8yg04ld1zsurBxVn51ntlB4Aqqbw+
+         6T4j+ORSA6tlVGtU7O7bDc/BPrkztIVHwGWJd5sWTFWu14WrdaNQVM0NMvoJGx+i8K9d
+         kZQ02vTUtth0quTqWIHJwVop33r5s6rHuwP4OzcpKdZ1tMnZzvNr6Zu9K5WIjlJn+raO
+         HzHoTd8aT/KViO/kITos43vv998tFvQz3rcjudD9tCWlInG2dAzFc1ZCaMhTfPq4Rdk7
+         bTlXhhFsrVheM+/ztDeJsyWrVX88MElrE3W7wilWOLPsWKAwewS0jlxHKvzdzQEtgYDb
+         4jdQ==
+X-Gm-Message-State: AAQBX9eG0iy462OJUO6FX17Dol4tI3stbteq3Gl5opq5XYgKlDgMhqmj
+	GSaGkf8DXXHu5900U6y7NDo=
+X-Google-Smtp-Source: AKy350aj9O/FLo8rGxCy1HloHX+tCvC/fz/V8WxZctVNvXFxxMUd692a4EeQMhnlwxkUMip8371/0g==
+X-Received: by 2002:a81:8352:0:b0:54d:61e0:c821 with SMTP id t79-20020a818352000000b0054d61e0c821mr1054030ywf.24.1680867955488;
+        Fri, 07 Apr 2023 04:45:55 -0700 (PDT)
+Received: from ?IPV6:2600:1700:9190:ba10:58ca:ec79:9c9b:289b? ([2600:1700:9190:ba10:58ca:ec79:9c9b:289b])
+        by smtp.gmail.com with ESMTPSA id l11-20020a0de20b000000b00545a08184edsm957900ywe.125.2023.04.07.04.45.54
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Fri, 07 Apr 2023 04:45:55 -0700 (PDT)
+Message-ID: <1377940a-ba4f-f8a4-2032-7179c72ccb71@gmail.com>
+Date: Fri, 7 Apr 2023 07:45:53 -0400
 MIME-Version: 1.0
-X-Proofpoint-ORIG-GUID: 6Z5GT1zj6k6RnXdMQuMX3V556WlkSPDo
-X-Proofpoint-GUID: 6Z5GT1zj6k6RnXdMQuMX3V556WlkSPDo
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.254,Aquarius:18.0.942,Hydra:6.0.573,FMLib:17.11.170.22
- definitions=2023-04-07_04,2023-04-06_03,2023-02-09_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 bulkscore=0 spamscore=0
- clxscore=1011 mlxlogscore=678 lowpriorityscore=0 impostorscore=0
- adultscore=0 phishscore=0 mlxscore=0 priorityscore=1501 malwarescore=0
- suspectscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2303200000 definitions=main-2304070067
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.9.0
+Subject: Re: [oe][meta-oe][kirkstone][PATCH] flatbuffers: adapt for
+ cross-compilation environments
+Content-Language: en-US
+To: BINDU <bindudaniel1996@gmail.com>,
+ openembedded-devel@lists.openembedded.org, bhabu.bindu@kpit.com
+Cc: Ivan Stepic <Ivan.Stepic@bmw.de>
+References: <20230407043845.1314587-1-bindudaniel1996@gmail.com>
+From: akuster808 <akuster808@gmail.com>
+In-Reply-To: <20230407043845.1314587-1-bindudaniel1996@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 07 Apr 2023 11:45:34 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101983
+ <openembedded-devel@lists.openembedded.org>; Fri, 07 Apr 2023 11:46:04 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101984
 
-In postgresql sysview ptest are failing due to hidden debug info in pg_config table.
-The information is hidden due to existing patch 0001-config_info.c-not-expose-build-info.patch
-So for passing the test we need to reduce the row count in the sysviews test.
-Also for test results to be shown as pass we need to reduce the row count for
-the expected count in the sysviews.out file.
 
-Signed-off-by: Manoj Saun <manojsingh.saun@windriver.com>
----
- ...gresql-fix-ptest-failure-of-sysviews.patch | 42 +++++++++++++++++++
- .../recipes-dbs/postgresql/postgresql_14.5.bb |  1 +
- 2 files changed, 43 insertions(+)
- create mode 100644 meta-oe/recipes-dbs/postgresql/files/0001-postgresql-fix-ptest-failure-of-sysviews.patch
 
-diff --git a/meta-oe/recipes-dbs/postgresql/files/0001-postgresql-fix-ptest-failure-of-sysviews.patch b/meta-oe/recipes-dbs/postgresql/files/0001-postgresql-fix-ptest-failure-of-sysviews.patch
-new file mode 100644
-index 000000000..4db36d26f
---- /dev/null
-+++ b/meta-oe/recipes-dbs/postgresql/files/0001-postgresql-fix-ptest-failure-of-sysviews.patch
-@@ -0,0 +1,42 @@
-+From 9f81377dddfe32d950844d7053020a36b40fce08 Mon Sep 17 00:00:00 2001
-+From: Manoj Saun <manojsingh.saun@windriver.com>
-+Date: Wed, 22 Mar 2023 08:07:26 +0000
-+Subject: [PATCH] postgresql: fix ptest failure of sysviews
-+
-+The patch "0001-config_info.c-not-expose-build-info.patch" hides the debug info
-+in pg_config table which reduces the count of rows from pg_config and leads to
-+sysviews test failure.
-+To fix it we need to reduce the count of parameters in sysviews test.
-+Also we need to reduce the row count in expected result of sysview test
-+to make the test output shown as pass.
-+
-+Upstream-Status: Inappropriate [oe specific]
-+
-+Signed-off-by: Manoj Saun <manojsingh.saun@windriver.com>
-+---
-+ src/test/regress/expected/sysviews.out | 2 +-
-+ src/test/regress/sql/sysviews.sql      | 2 +-
-+ 2 files changed, 2 insertions(+), 2 deletions(-)
-+
-+--- a/src/test/regress/expected/sysviews.out
-++++ b/src/test/regress/expected/sysviews.out
-+@@ -29,7 +29,7 @@ select name, ident, parent, level, total
-+ (1 row)
-+ 
-+ -- At introduction, pg_config had 23 entries; it may grow
-+-select count(*) > 20 as ok from pg_config;
-++select count(*) > 13 as ok from pg_config;
-+  ok 
-+ ----
-+  t
-+--- a/src/test/regress/sql/sysviews.sql
-++++ b/src/test/regress/sql/sysviews.sql
-+@@ -18,7 +18,7 @@ select name, ident, parent, level, total
-+   from pg_backend_memory_contexts where level = 0;
-+ 
-+ -- At introduction, pg_config had 23 entries; it may grow
-+-select count(*) > 20 as ok from pg_config;
-++select count(*) > 13 as ok from pg_config;
-+ 
-+ -- We expect no cursors in this test; see also portals.sql
-+ select count(*) = 0 as ok from pg_cursors;
-diff --git a/meta-oe/recipes-dbs/postgresql/postgresql_14.5.bb b/meta-oe/recipes-dbs/postgresql/postgresql_14.5.bb
-index 5eba1f7b4..fbc08d64f 100644
---- a/meta-oe/recipes-dbs/postgresql/postgresql_14.5.bb
-+++ b/meta-oe/recipes-dbs/postgresql/postgresql_14.5.bb
-@@ -10,6 +10,7 @@ SRC_URI += "\
-    file://remove_duplicate.patch \
-    file://0001-config_info.c-not-expose-build-info.patch \
-    file://0001-Properly-NULL-terminate-GSS-receive-buffer-on-error-.patch \
-+   file://0001-postgresql-fix-ptest-failure-of-sysviews.patch \
- "
- 
- SRC_URI[sha256sum] = "d4f72cb5fb857c9a9f75ec8cf091a1771272802f2178f0b2e65b7b6ff64f4a30"
--- 
-2.34.1
+On 4/7/23 12:38 AM, BINDU wrote:
+> Flatbuffers contains a library and a schema compiler. The package
+> contains cmake files to discover the libraries and the compiler tool.
+> Currently, all of these cmake files are installed into the target
+> sysroot. However, the compiler utility isn't installed into the sysroot
+> (as it is not runnable on the build machine).
+>
+> When an application that depends on flatbuffers gets built, it uses
+> flatbuffers' exported cmake targets to configure the project. One of the
+> exported targets is FlatcTarget.cmake which expects to see flatc binary
+> in /usr/bin of the sysroot. Since binaries for target don't end up in
+> target sysroot, cmake configuration fails.
+>
+> This patch addresses this problem of flatbuffers' build infrastructure
+> in cross-compiling environments. By removing FlatcTarget.cmake for
+> target builds from the sysroot we essentially skip this step of
+> flatbuffers' configuration.
+
+Does this need to be done in Master as well?
+
+-armin
+>
+> Signed-off-by: Ivan Stepic <Ivan.Stepic@bmw.de>
+> Signed-off-by: Bhabu Bindu <bindudaniel1996@gmail.com>
+> ---
+>   meta-oe/recipes-devtools/flatbuffers/flatbuffers_2.0.0.bb | 7 ++++++-
+>   1 file changed, 6 insertions(+), 1 deletion(-)
+>
+> diff --git a/meta-oe/recipes-devtools/flatbuffers/flatbuffers_2.0.0.bb b/meta-oe/recipes-devtools/flatbuffers/flatbuffers_2.0.0.bb
+> index bf74f1229..44478ea0b 100644
+> --- a/meta-oe/recipes-devtools/flatbuffers/flatbuffers_2.0.0.bb
+> +++ b/meta-oe/recipes-devtools/flatbuffers/flatbuffers_2.0.0.bb
+> @@ -25,12 +25,17 @@ BUILD_CXXFLAGS += "-fPIC"
+>   # BUILD_TYPE=Release is required, otherwise flatc is not installed
+>   EXTRA_OECMAKE += "\
+>       -DCMAKE_BUILD_TYPE=Release \
+> -    -DFLATBUFFERS_BUILD_TESTS=OFF \
+> +    -DFLATBUFFERS_BUILD_TESTS=OFF \
+>       -DFLATBUFFERS_BUILD_SHAREDLIB=ON \
+>   "
+>   
+>   inherit cmake
+>   
+> +rm_flatc_cmaketarget_for_target() {
+> +    rm -f "${SYSROOT_DESTDIR}/${libdir}/cmake/flatbuffers/FlatcTargets.cmake"
+> +}
+> +SYSROOT_PREPROCESS_FUNCS:class-target += "rm_flatc_cmaketarget_for_target"
+> +
+>   do_install:append() {
+>       install -d ${D}${PYTHON_SITEPACKAGES_DIR}
+>       cp -rf ${S}/python/flatbuffers ${D}${PYTHON_SITEPACKAGES_DIR}
+>
+> -=-=-=-=-=-=-=-=-=-=-=-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#101976): https://lists.openembedded.org/g/openembedded-devel/message/101976
+> Mute This Topic: https://lists.openembedded.org/mt/98119685/3616698
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [akuster808@gmail.com]
+> -=-=-=-=-=-=-=-=-=-=-=-
+>
 
 
