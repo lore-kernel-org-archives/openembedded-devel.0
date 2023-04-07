@@ -1,134 +1,93 @@
-Return-Path: <akuster808@gmail.com>
+Return-Path: <Martin.Jansa@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 93562C6FD1D
-	for <webhook@archiver.kernel.org>; Fri,  7 Apr 2023 11:46:04 +0000 (UTC)
-Received: from mail-yw1-f179.google.com (mail-yw1-f179.google.com [209.85.128.179])
- by mx.groups.io with SMTP id smtpd.web11.5358.1680867956413751117
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3CCD9C77B61
+	for <webhook@archiver.kernel.org>; Fri,  7 Apr 2023 14:06:55 +0000 (UTC)
+Received: from mail-ej1-f51.google.com (mail-ej1-f51.google.com [209.85.218.51])
+ by mx.groups.io with SMTP id smtpd.web10.8803.1680876410881603063
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 07 Apr 2023 04:45:56 -0700
+ Fri, 07 Apr 2023 07:06:51 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20210112 header.b=Ac35c4Jw;
- spf=pass (domain: gmail.com, ip: 209.85.128.179, mailfrom: akuster808@gmail.com)
-Received: by mail-yw1-f179.google.com with SMTP id 00721157ae682-54c0dd7e2f3so85274527b3.8
-        for <openembedded-devel@lists.openembedded.org>; Fri, 07 Apr 2023 04:45:56 -0700 (PDT)
+ dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20210112 header.b=WDtWsAVF;
+ spf=pass (domain: gmail.com, ip: 209.85.218.51, mailfrom: martin.jansa@gmail.com)
+Received: by mail-ej1-f51.google.com with SMTP id g18so8655196ejj.5
+        for <openembedded-devel@lists.openembedded.org>; Fri, 07 Apr 2023 07:06:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112; t=1680867955; x=1683459955;
-        h=content-transfer-encoding:in-reply-to:from:references:cc:to
-         :content-language:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=v2cbQsFHaJ78oE+2Fpe1+LyTiwLeSOzwJCAs7OnNyXQ=;
-        b=Ac35c4Jwm+9GaCljcL2AP17FbXW1bsOWxChfwgqlEVcxOlABDwbCyNLxaaEeOjDwGX
-         ueY8HVx9pfu6Yz8orjDIj+uMQS7F6dRQANrKPAPNSubp195xSwCWX4+ssevyJwcLaegp
-         j8KmTCT8z4OxVOtnHb8374oF8Uc++Vpf/fKlQRX9T1PuaEsrbmNU9pxLZ8ccvje9sEoE
-         mAGXo2cc0dKg2wB2QE03y5tNhqxh3oXDHIgHdAZ4Th7r9eQy3kzd4rIPUXVnbAfOu7RZ
-         nEjnDSd+W7eNHX/eo1BvGpHjGOex2HOJdNvmESh/BAPHRxMG6//RqTLttHkVV6rAgogt
-         csfg==
+        d=gmail.com; s=20210112; t=1680876409; x=1683468409;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=c86Biq67mIVW/wLmgAGBEF9B9DEX6cm0PmYimKtpW3M=;
+        b=WDtWsAVF29e3RUOoeftgUlLruQPVqGcnbQrEflWnJaPxuVjdMDlmQR3+gyBS6M4BJQ
+         qxxPx/SvNxdqzw1GX60p8zCPYwOZHW13cwW9M4V3IT/g23HQWi9EzEuKebZSzX6T1jhM
+         GCWxo+k0NE3DahBrZqTB3c7Y6i+ByrRiJHwf2TIPhilG4U1MPhY4Y2EgbgWldrtoWcne
+         1IT2tKIx9fCblgS0G1XhbO+p8JduBPV+Xxw2+TBiuiC0C/dgpZdC3IlnIzncXeKvrRvw
+         yAkhpf7fIUfKsLhS5YJp0OYsrpVRxr5o68IPzwOcYOnOqQKpaAfWt9yQOEBYGvmAmnz4
+         VcoQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112; t=1680867955; x=1683459955;
-        h=content-transfer-encoding:in-reply-to:from:references:cc:to
-         :content-language:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=v2cbQsFHaJ78oE+2Fpe1+LyTiwLeSOzwJCAs7OnNyXQ=;
-        b=bryyI+DJKbaagimsWyKuSFNx6IldLgsaNBWKo8yg04ld1zsurBxVn51ntlB4Aqqbw+
-         6T4j+ORSA6tlVGtU7O7bDc/BPrkztIVHwGWJd5sWTFWu14WrdaNQVM0NMvoJGx+i8K9d
-         kZQ02vTUtth0quTqWIHJwVop33r5s6rHuwP4OzcpKdZ1tMnZzvNr6Zu9K5WIjlJn+raO
-         HzHoTd8aT/KViO/kITos43vv998tFvQz3rcjudD9tCWlInG2dAzFc1ZCaMhTfPq4Rdk7
-         bTlXhhFsrVheM+/ztDeJsyWrVX88MElrE3W7wilWOLPsWKAwewS0jlxHKvzdzQEtgYDb
-         4jdQ==
-X-Gm-Message-State: AAQBX9eG0iy462OJUO6FX17Dol4tI3stbteq3Gl5opq5XYgKlDgMhqmj
-	GSaGkf8DXXHu5900U6y7NDo=
-X-Google-Smtp-Source: AKy350aj9O/FLo8rGxCy1HloHX+tCvC/fz/V8WxZctVNvXFxxMUd692a4EeQMhnlwxkUMip8371/0g==
-X-Received: by 2002:a81:8352:0:b0:54d:61e0:c821 with SMTP id t79-20020a818352000000b0054d61e0c821mr1054030ywf.24.1680867955488;
-        Fri, 07 Apr 2023 04:45:55 -0700 (PDT)
-Received: from ?IPV6:2600:1700:9190:ba10:58ca:ec79:9c9b:289b? ([2600:1700:9190:ba10:58ca:ec79:9c9b:289b])
-        by smtp.gmail.com with ESMTPSA id l11-20020a0de20b000000b00545a08184edsm957900ywe.125.2023.04.07.04.45.54
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 07 Apr 2023 04:45:55 -0700 (PDT)
-Message-ID: <1377940a-ba4f-f8a4-2032-7179c72ccb71@gmail.com>
-Date: Fri, 7 Apr 2023 07:45:53 -0400
+        d=1e100.net; s=20210112; t=1680876409; x=1683468409;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=c86Biq67mIVW/wLmgAGBEF9B9DEX6cm0PmYimKtpW3M=;
+        b=G9q0lcG0j+fx552xErokbappb7hz6mcS45DrbIWNgchrf1igXb1tx/XQGS7hk5M1vD
+         e/HKFLE+XzPHOfgBO2xjAr35oAS5/8MjGMGmoD4TWayCdSkQSYxVpi2/0drpq0P9qRG2
+         ++pF58xN08y4EvFeudz0EBIWL4w/FOV+bK4yEK7InD918yjrT62BNNmg0M6BZ75EtIMQ
+         YVYV1XlttnAybP03NPNxtfPnVPI/Rf8+LLWEln9Sgzz3hA2PiPQQsicGbG438jBdWzk9
+         gHNCbgJP7BMLS9Qg3Z/bJXg4EnKWWymUrlS+e6HmlbHB5t4bsjvIUTSM3k3sk0kfXq8K
+         5teg==
+X-Gm-Message-State: AAQBX9fSKF76uXR5jhI661RtDu8z3nlkk+jgTxIiPhOtSouwIcV8Eu/g
+	E3D6vIZzow9juomVFkjtBcMsnKt/Zcg=
+X-Google-Smtp-Source: AKy350athT9Cc4kwJHTdR9uCDUGJg9Zhy6S8YGEVzXUoiaAERIU7gI6jSM//Y41usRfeLgUhGWzmXA==
+X-Received: by 2002:a17:907:783:b0:93e:908d:cfe2 with SMTP id xd3-20020a170907078300b0093e908dcfe2mr2648370ejb.0.1680876409004;
+        Fri, 07 Apr 2023 07:06:49 -0700 (PDT)
+Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
+        by smtp.gmail.com with ESMTPSA id n5-20020a170906840500b0093fa8c2e877sm2078308ejx.80.2023.04.07.07.06.48
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 07 Apr 2023 07:06:48 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Martin Jansa <Martin.Jansa@gmail.com>
+Subject: [meta-oe][PATCH 1/2] restinio: fix S variable in multilib builds
+Date: Fri,  7 Apr 2023 16:06:37 +0200
+Message-Id: <20230407140638.2359718-1-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.40.0
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.9.0
-Subject: Re: [oe][meta-oe][kirkstone][PATCH] flatbuffers: adapt for
- cross-compilation environments
-Content-Language: en-US
-To: BINDU <bindudaniel1996@gmail.com>,
- openembedded-devel@lists.openembedded.org, bhabu.bindu@kpit.com
-Cc: Ivan Stepic <Ivan.Stepic@bmw.de>
-References: <20230407043845.1314587-1-bindudaniel1996@gmail.com>
-From: akuster808 <akuster808@gmail.com>
-In-Reply-To: <20230407043845.1314587-1-bindudaniel1996@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 07 Apr 2023 11:46:04 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101984
+ <openembedded-devel@lists.openembedded.org>; Fri, 07 Apr 2023 14:06:55 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101985
 
+* do_populate_lic as well as do_configure fails in multilib builds, because S points to empty:
+  lib32-restinio/0.6.13-r0/lib32-restinio-0.6.13/dev
 
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ .../recipes-connectivity/restinio/restinio_0.6.13.bb          | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-On 4/7/23 12:38 AM, BINDU wrote:
-> Flatbuffers contains a library and a schema compiler. The package
-> contains cmake files to discover the libraries and the compiler tool.
-> Currently, all of these cmake files are installed into the target
-> sysroot. However, the compiler utility isn't installed into the sysroot
-> (as it is not runnable on the build machine).
->
-> When an application that depends on flatbuffers gets built, it uses
-> flatbuffers' exported cmake targets to configure the project. One of the
-> exported targets is FlatcTarget.cmake which expects to see flatc binary
-> in /usr/bin of the sysroot. Since binaries for target don't end up in
-> target sysroot, cmake configuration fails.
->
-> This patch addresses this problem of flatbuffers' build infrastructure
-> in cross-compiling environments. By removing FlatcTarget.cmake for
-> target builds from the sysroot we essentially skip this step of
-> flatbuffers' configuration.
-
-Does this need to be done in Master as well?
-
--armin
->
-> Signed-off-by: Ivan Stepic <Ivan.Stepic@bmw.de>
-> Signed-off-by: Bhabu Bindu <bindudaniel1996@gmail.com>
-> ---
->   meta-oe/recipes-devtools/flatbuffers/flatbuffers_2.0.0.bb | 7 ++++++-
->   1 file changed, 6 insertions(+), 1 deletion(-)
->
-> diff --git a/meta-oe/recipes-devtools/flatbuffers/flatbuffers_2.0.0.bb b/meta-oe/recipes-devtools/flatbuffers/flatbuffers_2.0.0.bb
-> index bf74f1229..44478ea0b 100644
-> --- a/meta-oe/recipes-devtools/flatbuffers/flatbuffers_2.0.0.bb
-> +++ b/meta-oe/recipes-devtools/flatbuffers/flatbuffers_2.0.0.bb
-> @@ -25,12 +25,17 @@ BUILD_CXXFLAGS += "-fPIC"
->   # BUILD_TYPE=Release is required, otherwise flatc is not installed
->   EXTRA_OECMAKE += "\
->       -DCMAKE_BUILD_TYPE=Release \
-> -    -DFLATBUFFERS_BUILD_TESTS=OFF \
-> +    -DFLATBUFFERS_BUILD_TESTS=OFF \
->       -DFLATBUFFERS_BUILD_SHAREDLIB=ON \
->   "
->   
->   inherit cmake
->   
-> +rm_flatc_cmaketarget_for_target() {
-> +    rm -f "${SYSROOT_DESTDIR}/${libdir}/cmake/flatbuffers/FlatcTargets.cmake"
-> +}
-> +SYSROOT_PREPROCESS_FUNCS:class-target += "rm_flatc_cmaketarget_for_target"
-> +
->   do_install:append() {
->       install -d ${D}${PYTHON_SITEPACKAGES_DIR}
->       cp -rf ${S}/python/flatbuffers ${D}${PYTHON_SITEPACKAGES_DIR}
->
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#101976): https://lists.openembedded.org/g/openembedded-devel/message/101976
-> Mute This Topic: https://lists.openembedded.org/mt/98119685/3616698
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [akuster808@gmail.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
->
+diff --git a/meta-networking/recipes-connectivity/restinio/restinio_0.6.13.bb b/meta-networking/recipes-connectivity/restinio/restinio_0.6.13.bb
+index e715135dc3..03eff43dd2 100644
+--- a/meta-networking/recipes-connectivity/restinio/restinio_0.6.13.bb
++++ b/meta-networking/recipes-connectivity/restinio/restinio_0.6.13.bb
+@@ -9,11 +9,11 @@ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://../LICENSE;md5=f399b62ce0a152525d1589a5a40c0ff6"
+ DEPENDS = "asio fmt http-parser"
+ 
+-SRC_URI = "https://github.com/Stiffstream/restinio/releases/download/v.${PV}/restinio-${PV}.tar.bz2"
++SRC_URI = "https://github.com/Stiffstream/restinio/releases/download/v.${PV}/${BP}.tar.bz2"
+ SRC_URI[md5sum] = "37a4310e98912030a74bdd4ed789f33c"
+ SRC_URI[sha256sum] = "b35d696e6fafd4563ca708fcecf9d0cf6705c846d417b5000f5252e0188848e7"
+ 
+-S = "${WORKDIR}/${PN}-${PV}/dev"
++S = "${WORKDIR}/${BP}/dev"
+ 
+ inherit cmake
+ 
+-- 
+2.40.0
 
 
