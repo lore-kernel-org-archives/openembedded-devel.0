@@ -1,97 +1,88 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <Martin.Jansa@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 48D92C6FD1D
-	for <webhook@archiver.kernel.org>; Fri,  7 Apr 2023 17:14:36 +0000 (UTC)
-Received: from mail-pl1-f170.google.com (mail-pl1-f170.google.com [209.85.214.170])
- by mx.groups.io with SMTP id smtpd.web11.15327.1680887670965584785
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DFA9CC77B6C
+	for <webhook@archiver.kernel.org>; Fri,  7 Apr 2023 22:07:53 +0000 (UTC)
+Received: from mail-ej1-f42.google.com (mail-ej1-f42.google.com [209.85.218.42])
+ by mx.groups.io with SMTP id smtpd.web10.2600.1680905272131067680
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 07 Apr 2023 10:14:31 -0700
+ Fri, 07 Apr 2023 15:07:52 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=UG5gh/Rq;
- spf=pass (domain: gmail.com, ip: 209.85.214.170, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f170.google.com with SMTP id z19so40495246plo.2
-        for <openembedded-devel@lists.openembedded.org>; Fri, 07 Apr 2023 10:14:30 -0700 (PDT)
+ dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20210112 header.b=CWNDrffp;
+ spf=pass (domain: gmail.com, ip: 209.85.218.42, mailfrom: martin.jansa@gmail.com)
+Received: by mail-ej1-f42.google.com with SMTP id a640c23a62f3a-93df929479cso246923766b.3
+        for <openembedded-devel@lists.openembedded.org>; Fri, 07 Apr 2023 15:07:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112; t=1680887670;
+        d=gmail.com; s=20210112; t=1680905270; x=1683497270;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=7EyZaKrygRc9tv+lrC+z8t7HNBi8SPjx42Cfpf8pPJk=;
-        b=UG5gh/Rq0iTtGwsTaoozrI0e8V8wrOONdATdycpLEAgeyuSjkXAi4pYx2o1Lu+xwAz
-         wwM5LQZ0RtRDNE9rN5PBVu7EpbW4nL+PgPGDM6GzlGq1FNUjBFaXHNx6hxG0/n5NvJwA
-         JMhzOjj9AEjCjG94tMZPDQ5/8nq4l/8Fm/4riVpcuC0U5Z2vbQtghU7+2Gv0l1CfWTz3
-         pUAzRaanx3ca7W9dZqyONWDIb954GKWo29CFIqQKx1Y8jhQZ1K8qIDGJO7Qm365Jeq41
-         h5aHgZV/+/1hqP2IfdvrpD6/d0pHK+BO9HKsLb5VEq/0pjCeALoFuxkqH+fJvbvVIZ9n
-         ZBSQ==
+        bh=EgRt2voe9GttGdha6oo2QNB8VfaQqNTJwieBshoWhKI=;
+        b=CWNDrffpNCvNMXHBMauMiEefr70PpWN2/qqL15GD74TAV3vywcg4roKphov3gqF1L9
+         ifgIduM0ffiC7VjKmOm7TCUKexwq6TdMRMByVjIIopKwLQ8sfWZF+L6CSDid9ldRuAUt
+         Ba8veuYtS/2KLcMv+w55c9CL82yZalXSwWMXLqDPnzlH95rxhgDTc5wzeEGH81UbQYO+
+         d1nfQsAS7VXkbxpQeDmrYZlWbygepVzC+JmVuSdb81umNFBgsbFaqTFGWYoJT0G0JZ0Q
+         Tf5v7TqSJJwJSXTxNDijFbgclNYU2RF+lTQiCYLTj97JA8pfqjsDIuwRoviZ5SBOZcCJ
+         bsHQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112; t=1680887670;
+        d=1e100.net; s=20210112; t=1680905270; x=1683497270;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=7EyZaKrygRc9tv+lrC+z8t7HNBi8SPjx42Cfpf8pPJk=;
-        b=yvPHty7sqUSzx4X553SoHxC0srV2EEvKk+t55ajHdYQH5D4R4RbUydkc2eeRar2j02
-         DZEtTulTxNNBz2wpf+tM/NOTje9keIoN0PjFwq6jPscs/KRKL6Vwo7plqzP9vvX6kCbQ
-         /A3IlcK3Xg84Zq2OEcPG5TakbhZQvVUO/5gWV1ry+/oTeideDsGCcueDIFYeapG1sW70
-         4UEQXvRNlU5qbaHAhVYGttEEFsqebn0BBZ0M7aFstm3nNK3wRuCtlHmcb37gv9n8iAjT
-         pBvD/IPDF1fsgLAoA+mOMGIvKpieOC5tzeGlRAew+kQut91c6LQDOHj9JdDJOMRwrZaC
-         XAtg==
-X-Gm-Message-State: AAQBX9eSmpbqX6q0/b2xdrAZEQ8HN70BF3DpxhiPJsZTFwbrMAB8EiqA
-	HNxmBsqrnmkZ2s7nWsF7QhupA2iRVn4dmQ==
-X-Google-Smtp-Source: AKy350ZE8nGBFK/O0JoRUn8Rp7jUPdWneWc2cUG3ujhROOB4zcFhVpGhPwqNC/L+OaUYaTFRZFNGCw==
-X-Received: by 2002:a17:90a:7c09:b0:23d:e0e8:f453 with SMTP id v9-20020a17090a7c0900b0023de0e8f453mr3027975pjf.38.1680887669869;
-        Fri, 07 Apr 2023 10:14:29 -0700 (PDT)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9181:d380::26f8])
-        by smtp.gmail.com with ESMTPSA id bx7-20020a17090af48700b002369a14d6b1sm4890568pjb.31.2023.04.07.10.14.29
+        bh=EgRt2voe9GttGdha6oo2QNB8VfaQqNTJwieBshoWhKI=;
+        b=T2fw9myu3hIsRFF8Qg5ZBgpvuuY/cTbmEXuijk7fcpei4PfFaqjwStpcVAGh3ZeyJD
+         nGpHn/ZaBJAswrFoT2VKsZbRFDRokdj7suy1tuakEDGp5MJ+yzwILgtuHBSmllCgUnJh
+         KqJ+K/3pYwjWzY4L3gW6O2ahRwRSsPXb449t+u+sH1Qni9DVz0S0t8KqVwrGIDwQ8Tf2
+         cMQ0K6A/eZ3xDJZuTA3vHX8SvxZFHlEEhhBuX34ngA1GJSN0jMUSVHJ1tw/0v3NsUWis
+         O7Y1wOcFKhE83tW+nNpLfQuSGwV2DE62JkQTXl8/ZetBTS9EuvCnLCVBzdd35QU19rm+
+         6gFg==
+X-Gm-Message-State: AAQBX9fY9fkYCR1WBGNE4fkKvLOxgTqHM7ure0xNgxA92FEInshkrpBz
+	Qy/hWYsv/U8Ed8R9yw1RlIXL8LYLgmc=
+X-Google-Smtp-Source: AKy350ZK62JPDs87TzWzNSzfga64r1npPGSiHCpS/K+zVH4SZ0JL4Ny3AdVQgjraLfK2GeTBX/JF/w==
+X-Received: by 2002:aa7:c0d1:0:b0:4ac:b69a:2f06 with SMTP id j17-20020aa7c0d1000000b004acb69a2f06mr3078982edp.0.1680905270208;
+        Fri, 07 Apr 2023 15:07:50 -0700 (PDT)
+Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
+        by smtp.gmail.com with ESMTPSA id o20-20020a509b14000000b004acbda55f6bsm2289857edi.27.2023.04.07.15.07.49
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 07 Apr 2023 10:14:29 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
+        Fri, 07 Apr 2023 15:07:49 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-webserver][PATCH] monkey,webmin: Fix upstream patch status
-Date: Fri,  7 Apr 2023 10:14:27 -0700
-Message-Id: <20230407171427.31181-1-raj.khem@gmail.com>
+Cc: Martin Jansa <Martin.Jansa@gmail.com>
+Subject: [meta-oe][PATCH 1/2] pahole: respect libdir
+Date: Sat,  8 Apr 2023 00:07:36 +0200
+Message-Id: <20230407220737.889502-1-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.40.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 07 Apr 2023 17:14:36 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101989
+ <openembedded-devel@lists.openembedded.org>; Fri, 07 Apr 2023 22:07:53 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101990
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+* use the same expression as cmake.bbclass is using:
+  CMAKE_INSTALL_LIBDIR:PATH=${@os.path.relpath(d.getVar('libdir'), d.getVar('prefix') + '/')}
+  but ${baselib} should work here as well
+
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- .../files/0001-configure-Respect-LIBS-variable-from-env.patch   | 2 +-
- meta-webserver/recipes-webadmin/webmin/files/init-exclude.patch | 2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
+ meta-oe/recipes-devtools/pahole/pahole_1.24.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-webserver/recipes-httpd/monkey/files/0001-configure-Respect-LIBS-variable-from-env.patch b/meta-webserver/recipes-httpd/monkey/files/0001-configure-Respect-LIBS-variable-from-env.patch
-index 6669848a06..3eb3067394 100644
---- a/meta-webserver/recipes-httpd/monkey/files/0001-configure-Respect-LIBS-variable-from-env.patch
-+++ b/meta-webserver/recipes-httpd/monkey/files/0001-configure-Respect-LIBS-variable-from-env.patch
-@@ -6,7 +6,7 @@ Subject: [PATCH] configure: Respect LIBS variable from env
- For musl we need to pass -lexecinfo from env
- this change accomodates that
+diff --git a/meta-oe/recipes-devtools/pahole/pahole_1.24.bb b/meta-oe/recipes-devtools/pahole/pahole_1.24.bb
+index b7f1f8bb28..2bb73c3eb7 100644
+--- a/meta-oe/recipes-devtools/pahole/pahole_1.24.bb
++++ b/meta-oe/recipes-devtools/pahole/pahole_1.24.bb
+@@ -20,7 +20,7 @@ inherit cmake pkgconfig
  
--Upstream-Status: [OE-specific]
-+Upstream-Status: Inappropriate [OE-specific]
- Signed-off-by: Khem Raj <raj.khem@gmail.com>
- ---
-  configure | 2 +-
-diff --git a/meta-webserver/recipes-webadmin/webmin/files/init-exclude.patch b/meta-webserver/recipes-webadmin/webmin/files/init-exclude.patch
-index 027a9d4ad9..489318b4bd 100644
---- a/meta-webserver/recipes-webadmin/webmin/files/init-exclude.patch
-+++ b/meta-webserver/recipes-webadmin/webmin/files/init-exclude.patch
-@@ -2,7 +2,7 @@ Hack in support for an "exclude" config option for the init module, so
- we can hide certain system services that shouldn't really be configurable
- via the web interface
+ PACKAGECONFIG[python3] = ",,python3-core,python3-core"
  
--Upstream-status: Pending
-+Upstream-Status: Pending
+-EXTRA_OECMAKE = "-D__LIB=lib -DCMAKE_BUILD_TYPE=Release -DLIBBPF_EMBEDDED=OFF"
++EXTRA_OECMAKE = "-D__LIB=${@os.path.relpath(d.getVar('libdir'), d.getVar('prefix') + '/')} -DCMAKE_BUILD_TYPE=Release -DLIBBPF_EMBEDDED=OFF"
  
- Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
- Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+ FILES:${PN} =  "${bindir}/pahole \
+ 		${libdir}/libdwarves.so* \
 -- 
 2.40.0
 
