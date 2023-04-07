@@ -1,213 +1,114 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <bindudaniel1996@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0799DC76196
-	for <webhook@archiver.kernel.org>; Thu,  6 Apr 2023 19:19:57 +0000 (UTC)
-Received: from mail-pj1-f44.google.com (mail-pj1-f44.google.com [209.85.216.44])
- by mx.groups.io with SMTP id smtpd.web11.167870.1680808792387003805
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D2921C76196
+	for <webhook@archiver.kernel.org>; Fri,  7 Apr 2023 04:39:02 +0000 (UTC)
+Received: from mail-pf1-f172.google.com (mail-pf1-f172.google.com [209.85.210.172])
+ by mx.groups.io with SMTP id smtpd.web11.696.1680842334748711210
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 06 Apr 2023 12:19:52 -0700
+ Thu, 06 Apr 2023 21:38:54 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=dQS5feYs;
- spf=pass (domain: gmail.com, ip: 209.85.216.44, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f44.google.com with SMTP id gp15-20020a17090adf0f00b0023d1bbd9f9eso43927645pjb.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 06 Apr 2023 12:19:52 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=DKFPqByw;
+ spf=pass (domain: gmail.com, ip: 209.85.210.172, mailfrom: bindudaniel1996@gmail.com)
+Received: by mail-pf1-f172.google.com with SMTP id d2e1a72fcca58-62ddb232ddaso235520b3a.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 06 Apr 2023 21:38:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112; t=1680808792;
+        d=gmail.com; s=20210112; t=1680842334;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=WDtpY5fkhW1Xd4qcyJSE53jvaDjhXYJl+Uf23ACd2uM=;
-        b=dQS5feYsGfXxCSAJRnzvw2LYd4hMTGZ3hlpXtTPTQSuCe5GzE376CRyDN3z5LHVG2V
-         llm+bLGtKbG6bRUlOqbal7jdCQjM5vkkF4MOYhuKD1o4sAWQFov1xUvSLhXa916FGset
-         cpwc2QLIbTqXDvvRRpP8hbqUgu3vrCj0a/0ma2elNuL8isiNxNFtqAnwPKvoSDtF7Dth
-         ibQ10syFIQZxXHBcR9Sg90L9ALr5oXmYfC9p3Ice1AIUXTs7C7ZdN2qJjR8qhbYOlN7q
-         ReOtWYMln7687/kRVkYCxX0xBTE7HjJaQtGcWcw5aKbejwAfVZ3NGzQzpp1+sZGJ4JR6
-         X/XQ==
+        bh=ait7IaFtogFoNpD5dUImiXYb0gqSk+pLMWKzZg5nSj8=;
+        b=DKFPqBywMvGkZ0+YyMbZFDv4YqX/AEuDYBaV5O8DS/CggGofjsNjH7Oq1pDzUqkAYo
+         Cyhqajd94Ityhq8DhmRjrTgXmIfSgIrMTlXFVWg9J10fjo8F8QMMHOW0qe9mpKnpCPsR
+         MO5y3P2Sa0pHuYN2Jcikppl5m+ggzshBENvbjcIkpJzUXxCDeTUxq6G+DimID+XQqrja
+         a2Onj6jtjgoi6rTvgwacJ8FudF4niKSIfE7s8rmWrtwpjNrwGCsu/fj7kKpRd7HlIT2e
+         0IB8tUd6qhOuW6wOm4OtYBNLxUwhkuc/w1VPesOXdZIJPGN4+McRxPhzrEwSmXTMrrXa
+         Jl7A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112; t=1680808792;
+        d=1e100.net; s=20210112; t=1680842334;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=WDtpY5fkhW1Xd4qcyJSE53jvaDjhXYJl+Uf23ACd2uM=;
-        b=ziDBOSY4DSkQ4Wd99Eksu1xBf8uHJGvn3diMuDUUrIJ+Kq7+WQnw8Y9/esaxAh5eVd
-         9507YMFhUzD6mdhdUzynYrRMMtaw//TYAfFxhSumtlPkmPUCOng3rDyj/2+5igQnknXU
-         D/cnjRAHfI+W3M2Jw1bNSnJPCqspvkLQfB8nSBiMD0xFes5DGFLWjva6lSs+Il6Wr+0K
-         75SEbd4tm8CFEtdANVhwZRRH3p+2yIesQpyNX9ehqtFF51zasjdenGcI6kx4TpBv4Cl7
-         cqBu0mnM8Fha2KWq1ATevSckYuZRr0sgqVMPVjP/LRItCdChmX5P7PYC++ucOpD5xvyJ
-         wI+w==
-X-Gm-Message-State: AAQBX9cwnCfX+8C3dm6vM/RPP4RIo9xENCXsClUnLrf9FWxTHFsPy9Ch
-	SYI031VnMdUwT3aIAZcjf2MHv63+/85KgQ==
-X-Google-Smtp-Source: AKy350ZmYZ/DVXdjozMCxxlLnwqXQVkCVwV8oeNx6KXXh3UdbNTSTid15GSOt2qyG/lldIg0vPHrkA==
-X-Received: by 2002:a17:902:ea08:b0:1a2:7356:1ec8 with SMTP id s8-20020a170902ea0800b001a273561ec8mr197535plg.67.1680808791432;
-        Thu, 06 Apr 2023 12:19:51 -0700 (PDT)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9181:d380::26f8])
-        by smtp.gmail.com with ESMTPSA id c7-20020a170902b68700b001a064282b11sm1707771pls.151.2023.04.06.12.19.50
+        bh=ait7IaFtogFoNpD5dUImiXYb0gqSk+pLMWKzZg5nSj8=;
+        b=AFxhn7EBdZuxjBlpK8VZq/n1VDuJD+4dt24FdqKy2BUANn0FMZRDzgDRkaslSMRRB9
+         h0JJ56gy3pF6ZrHfkHX4EC/A8j7tbgf3bdw8IuBv/RiERfYslJM3GTwgmd9kFgl1ONQp
+         NXohTAv8cY57QyfG6Q8c+EPg+05o3oVfHq5E64ovjhAr+la22uNOPZj3AkcZZIkzQSoP
+         Ns5naLYyyTjReSxwLugTEr1zcBJxR6DBS5raZ1CnTVbzOvEj3dMwiOdx+GFeXYa/JCO0
+         dpCBs8xac68+KXfwxQ+jeYBkQdnWushjGxOkLWzurkiNYd1DkcjNY7aHve9wFAqamXuT
+         aDHg==
+X-Gm-Message-State: AAQBX9c7WPHjMtnCR/eK0eN8bXYN/8nJpcX8ovLKaeCH+RyWFpqlE7/Z
+	3za1wPeNIXo9Rpt9ketJNH+WNUuXBj4=
+X-Google-Smtp-Source: AKy350apmNLF3CS57Or7pYuaFPxjTV0fX/MRJaaYVzVFvclAJS/5a73EpZTSy/U16CFPXdcjTFJ+Fg==
+X-Received: by 2002:a05:6a00:140f:b0:627:e677:bc70 with SMTP id l15-20020a056a00140f00b00627e677bc70mr704583pfu.14.1680842333797;
+        Thu, 06 Apr 2023 21:38:53 -0700 (PDT)
+Received: from localhost.localdomain ([2401:4900:1f26:7754:b142:7aa2:403c:4b04])
+        by smtp.gmail.com with ESMTPSA id j23-20020a62b617000000b00625cfe645d0sm2120859pff.7.2023.04.06.21.38.52
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 06 Apr 2023 12:19:51 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-networking][PATCH] libdnet: Upgrade to 1.16.3
-Date: Thu,  6 Apr 2023 12:19:49 -0700
-Message-Id: <20230406191949.3818718-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.40.0
+        Thu, 06 Apr 2023 21:38:53 -0700 (PDT)
+From: Bhabu Bindu <bindudaniel1996@gmail.com>
+To: openembedded-devel@lists.openembedded.org,
+	bhabu.bindu@kpit.com
+Cc: Bhabu Bindu <bindudaniel1996@gmail.com>,
+	Ivan Stepic <Ivan.Stepic@bmw.de>
+Subject: [oe][meta-oe][kirkstone][PATCH] flatbuffers: adapt for cross-compilation environments
+Date: Fri,  7 Apr 2023 10:08:45 +0530
+Message-Id: <20230407043845.1314587-1-bindudaniel1996@gmail.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 06 Apr 2023 19:19:57 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101975
+ <openembedded-devel@lists.openembedded.org>; Fri, 07 Apr 2023 04:39:02 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/101976
 
-Fix build with upcoming autoconf 1.16.3
+Flatbuffers contains a library and a schema compiler. The package
+contains cmake files to discover the libraries and the compiler tool.
+Currently, all of these cmake files are installed into the target
+sysroot. However, the compiler utility isn't installed into the sysroot
+(as it is not runnable on the build machine).
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+When an application that depends on flatbuffers gets built, it uses
+flatbuffers' exported cmake targets to configure the project. One of the
+exported targets is FlatcTarget.cmake which expects to see flatc binary
+in /usr/bin of the sysroot. Since binaries for target don't end up in
+target sysroot, cmake configuration fails.
+
+This patch addresses this problem of flatbuffers' build infrastructure
+in cross-compiling environments. By removing FlatcTarget.cmake for
+target builds from the sysroot we essentially skip this step of
+flatbuffers' configuration.
+
+Signed-off-by: Ivan Stepic <Ivan.Stepic@bmw.de>
+Signed-off-by: Bhabu Bindu <bindudaniel1996@gmail.com>
 ---
- ...onfigure-Replace-use-of-AC_EGREP_CPP.patch | 39 +++++++++++++++++++
- ...g-config-variable-to-find-check-incl.patch | 27 +++++++++++++
- .../libdnet/libdnet_1.14.bb                   | 20 ----------
- .../libdnet/libdnet_1.16.3.bb                 | 23 +++++++++++
- 4 files changed, 89 insertions(+), 20 deletions(-)
- create mode 100644 meta-networking/recipes-connectivity/libdnet/libdnet/0001-configure-Replace-use-of-AC_EGREP_CPP.patch
- create mode 100644 meta-networking/recipes-connectivity/libdnet/libdnet/0001-configure-Use-pkg-config-variable-to-find-check-incl.patch
- delete mode 100644 meta-networking/recipes-connectivity/libdnet/libdnet_1.14.bb
- create mode 100644 meta-networking/recipes-connectivity/libdnet/libdnet_1.16.3.bb
+ meta-oe/recipes-devtools/flatbuffers/flatbuffers_2.0.0.bb | 7 ++++++-
+ 1 file changed, 6 insertions(+), 1 deletion(-)
 
-diff --git a/meta-networking/recipes-connectivity/libdnet/libdnet/0001-configure-Replace-use-of-AC_EGREP_CPP.patch b/meta-networking/recipes-connectivity/libdnet/libdnet/0001-configure-Replace-use-of-AC_EGREP_CPP.patch
-new file mode 100644
-index 0000000000..133ccc46b2
---- /dev/null
-+++ b/meta-networking/recipes-connectivity/libdnet/libdnet/0001-configure-Replace-use-of-AC_EGREP_CPP.patch
-@@ -0,0 +1,39 @@
-+From b0c98f93a7f427d18206c79bf2a0350dc81172f6 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Thu, 6 Apr 2023 10:44:08 -0700
-+Subject: [PATCH] configure: Replace use of AC_EGREP_CPP
+diff --git a/meta-oe/recipes-devtools/flatbuffers/flatbuffers_2.0.0.bb b/meta-oe/recipes-devtools/flatbuffers/flatbuffers_2.0.0.bb
+index bf74f1229..44478ea0b 100644
+--- a/meta-oe/recipes-devtools/flatbuffers/flatbuffers_2.0.0.bb
++++ b/meta-oe/recipes-devtools/flatbuffers/flatbuffers_2.0.0.bb
+@@ -25,12 +25,17 @@ BUILD_CXXFLAGS += "-fPIC"
+ # BUILD_TYPE=Release is required, otherwise flatc is not installed
+ EXTRA_OECMAKE += "\
+     -DCMAKE_BUILD_TYPE=Release \
+-    -DFLATBUFFERS_BUILD_TESTS=OFF \    
++    -DFLATBUFFERS_BUILD_TESTS=OFF \
+     -DFLATBUFFERS_BUILD_SHAREDLIB=ON \
+ "
+ 
+ inherit cmake
+ 
++rm_flatc_cmaketarget_for_target() {
++    rm -f "${SYSROOT_DESTDIR}/${libdir}/cmake/flatbuffers/FlatcTargets.cmake"
++}
++SYSROOT_PREPROCESS_FUNCS:class-target += "rm_flatc_cmaketarget_for_target"
 +
-+Use AC_COMPILE_IFELSE instead to compute platform support for arp ioctls
-+AC_EGREP_CPP does not work as used with upcoming autoconf 2.72
-+
-+Upstream-Status: Submitted [https://github.com/ofalk/libdnet/pull/85]
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ m4/acinclude.m4 | 11 +++++------
-+ 1 file changed, 5 insertions(+), 6 deletions(-)
-+
-+diff --git a/m4/acinclude.m4 b/m4/acinclude.m4
-+index d6350a2..3699bf1 100644
-+--- a/m4/acinclude.m4
-++++ b/m4/acinclude.m4
-+@@ -196,12 +196,11 @@ dnl
-+ AC_DEFUN([AC_DNET_IOCTL_ARP],
-+     [AC_MSG_CHECKING(for arp(7) ioctls)
-+     AC_CACHE_VAL(ac_cv_dnet_ioctl_arp,
-+-    AC_EGREP_CPP(werd,[#include <sys/types.h>
-+-                       #define BSD_COMP
-+-                       #include <sys/ioctl.h>
-+-                       #ifdef SIOCGARP
-+-                 werd
-+-                       #endif],
-++    AC_COMPILE_IFELSE(
-++        [AC_LANG_PROGRAM([[#include <sys/types.h>
-++                           #define BSD_COMP
-++                           #include <sys/ioctl.h>]],
-++                          [[int foo = SIOCGARP;]])],
-+     ac_cv_dnet_ioctl_arp=yes,
-+     ac_cv_dnet_ioctl_arp=no))
-+     case "$host_os" in
-+-- 
-+2.40.0
-+
-diff --git a/meta-networking/recipes-connectivity/libdnet/libdnet/0001-configure-Use-pkg-config-variable-to-find-check-incl.patch b/meta-networking/recipes-connectivity/libdnet/libdnet/0001-configure-Use-pkg-config-variable-to-find-check-incl.patch
-new file mode 100644
-index 0000000000..8a78e7ac28
---- /dev/null
-+++ b/meta-networking/recipes-connectivity/libdnet/libdnet/0001-configure-Use-pkg-config-variable-to-find-check-incl.patch
-@@ -0,0 +1,27 @@
-+From 85d8338a3ebc01a3ea7600aa602139c4eac3be07 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Thu, 6 Apr 2023 12:13:09 -0700
-+Subject: [PATCH] configure: Use pkg-config variable to find check include paths
-+
-+Upstream-Status: Submitted [https://github.com/ofalk/libdnet/pull/85]
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ configure.ac | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/configure.ac b/configure.ac
-+index 3f0c404..553b487 100644
-+--- a/configure.ac
-++++ b/configure.ac
-+@@ -153,7 +153,7 @@ AC_ARG_WITH(check,
-+   esac ],
-+ [ PKG_CHECK_MODULES([CHECK], [check])
-+   if test -n "${CHECK_LIBS}"; then
-+-     CHECKINC="-I${prefix}/include"
-++     CHECKINC="${CHECK_CFLAGS}"
-+      CHECKLIB="${CHECK_LIBS}"
-+      AC_MSG_RESULT(yes)
-+   else
-+-- 
-+2.40.0
-+
-diff --git a/meta-networking/recipes-connectivity/libdnet/libdnet_1.14.bb b/meta-networking/recipes-connectivity/libdnet/libdnet_1.14.bb
-deleted file mode 100644
-index 9f2ff51576..0000000000
---- a/meta-networking/recipes-connectivity/libdnet/libdnet_1.14.bb
-+++ /dev/null
-@@ -1,20 +0,0 @@
--SUMMARY = "dumb networking library"
--HOMEPAGE = "http://code.google.com/p/libdnet/"
--SECTION = "libs"
--LICENSE = "BSD-3-Clause"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=0036c1b155f4e999f3e0a373490b5db9"
--
--SRC_URI = "git://github.com/dugsong/libdnet.git;nobranch=1;protocol=https"
--SRCREV = "3e782472d2a58d5e1b94d04eda4a364c2d257600"
--
--UPSTREAM_CHECK_GITTAGREGEX = "libdnet-(?P<pver>\d+(\.\d+)+)"
--
--S = "${WORKDIR}/git"
--
--inherit autotools multilib_script
--
--acpaths = "-I ./config/"
--
--BBCLASSEXTEND = "native"
--
--MULTILIB_SCRIPTS = "${PN}:${bindir}/dnet-config"
-diff --git a/meta-networking/recipes-connectivity/libdnet/libdnet_1.16.3.bb b/meta-networking/recipes-connectivity/libdnet/libdnet_1.16.3.bb
-new file mode 100644
-index 0000000000..05c8fb309f
---- /dev/null
-+++ b/meta-networking/recipes-connectivity/libdnet/libdnet_1.16.3.bb
-@@ -0,0 +1,23 @@
-+SUMMARY = "dumb networking library"
-+HOMEPAGE = "https://github.com/ofalk/libdnet"
-+SECTION = "libs"
-+LICENSE = "BSD-3-Clause"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=0036c1b155f4e999f3e0a373490b5db9"
-+
-+SRC_URI = "git://github.com/ofalk/libdnet.git;nobranch=1;protocol=https \
-+           file://0001-configure-Replace-use-of-AC_EGREP_CPP.patch \
-+           file://0001-configure-Use-pkg-config-variable-to-find-check-incl.patch"
-+SRCREV = "a03043bec8e66b240a45555e37147b22db182c21"
-+
-+UPSTREAM_CHECK_GITTAGREGEX = "libdnet-(?P<pver>\d+(\.\d+)+)"
-+
-+S = "${WORKDIR}/git"
-+
-+inherit autotools multilib_script pkgconfig
-+
-+DEPENDS += "libcheck"
-+
-+EXTRA_AUTORECONF += "-I ./config"
-+BBCLASSEXTEND = "native"
-+
-+MULTILIB_SCRIPTS = "${PN}:${bindir}/dnet-config"
+ do_install:append() {
+     install -d ${D}${PYTHON_SITEPACKAGES_DIR}
+     cp -rf ${S}/python/flatbuffers ${D}${PYTHON_SITEPACKAGES_DIR}
 -- 
-2.40.0
+2.25.1
 
 
