@@ -2,68 +2,68 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A4EE4C77B6F
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A4CC0C77B61
 	for <webhook@archiver.kernel.org>; Mon, 10 Apr 2023 08:28:28 +0000 (UTC)
-Received: from mail1.bemta37.messagelabs.com (mail1.bemta37.messagelabs.com [85.158.142.112])
- by mx.groups.io with SMTP id smtpd.web11.39448.1681115302965712593
+Received: from mail1.bemta34.messagelabs.com (mail1.bemta34.messagelabs.com [195.245.231.4])
+ by mx.groups.io with SMTP id smtpd.web11.39449.1681115306469916646
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 10 Apr 2023 01:28:23 -0700
+ Mon, 10 Apr 2023 01:28:26 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=l0KGL8uJ;
- spf=pass (domain: fujitsu.com, ip: 85.158.142.112, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=MKtobM/i;
+ spf=pass (domain: fujitsu.com, ip: 195.245.231.4, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1681115301; i=@fujitsu.com;
-	bh=8sQsmAH7bGUZ/+lqARbCwoGYnIFzsvtxmhhYLzS9Kx4=;
+	s=170520fj; t=1681115304; i=@fujitsu.com;
+	bh=7O5iLmUlOFJ1sjTSxk6lRNaNuFEGPPYS1A1Q3Wy8N90=;
 	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
 	 MIME-Version:Content-Type;
-	b=l0KGL8uJ8KTEedcz1TXKwlSH3alcb+gfbnO8bbOkKlrm7t0SFFMEBXZFa70yId+vq
-	 ggogdNzrKalaIrC3Mfor1JLCpf4Spse/5Ju6Rsv5MuqfW+uIhRFlcX0eLI/EC3IVql
-	 ZzVvZQXm7I9LcZXNRUn6PlrZKuQpq5Bev0PNXZiDqMZtwMuMxE0TwA0NneWYhdr8yK
-	 Vb0L2pM3r3Gl+npv84VSii48ZfNuG9ZQ4B+IZgdh+ij9yulhekCKagNU/6U7WO41HK
-	 ttklfb4bbXNeHVy2TwGeqcCB8T7tT+p/fJBhqvvdh6tvMMvFBxJx4XN4wYA+LM4Wmi
-	 PwETaDRS0n0/Q==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrCIsWRWlGSWpSXmKPExsViZ8ORpLvkhHG
-  KwdWXIhYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8aKT7wFc4QqHq38zNrAuFmgi5GLQ0jgIaNE
-  8/NPTF2MnEDOFSaJ7+d0IBJ7GCV6z65iBUmwCUhJ3Lj/nw3EFhHQl1g6ew8ziM0soCLx4ncPO
-  4gtLOAvMWvXLqAaDg4WAVWJJdP5QMK8Ak4SG+/sASuREFCQmPLwPVgrp4CzxLJrJ1gh9jpJLH
-  /9iBGiXlDi5MwnLBDjJSQOvnjBDNGrKDH7cjMLhF0h0Tj9EBOErSZx9dwm5gmMgrOQtM9C0r6
-  AkWkVo1lxalFZapGuiV5SUWZ6RkluYmaOXmKVbqJeaqluXn5RSYauoV5iebFeanGxXnFlbnJO
-  il5easkmRmDgphQnpO1gbO37q3eIUZKDSUmUt4vLOEWILyk/pTIjsTgjvqg0J7X4EKMMB4eSB
-  O/CA0A5waLU9NSKtMwcYBTBpCU4eJREeCuOAaV5iwsSc4sz0yFSpxgVpcR5a48DJQRAEhmleX
-  BtsMi9xCgrJczLyMDAIMRTkFqUm1mCKv+KUZyDUUmYd9thoCk8mXklcNNfAS1mAlrM5WIAsrg
-  kESEl1cDk0aPFrZc5ne9KjZXC33xpSWH5c7uqXQ6szdrAlTz3bIL8WbYa9vV7C60br1xbFKm3
-  boe/dupKjjLGb0/vyVw2+hTUWvtBqTLZbM/yBUevHSrLnrT0+39P7xrLlGeyL6aHyClOabybK
-  vzB71DZarkoP9VOudhf295Hykz8wB2Y6fqrpci2zMzUk2v/rSWzpu1/zmsx//GLI3/mrS5lX8
-  2hz7P00HHh23tZa0/lSAe75G+0LmU8dVz5wD7fI7wZ909v2FfEN7tXwOG2/act3/5YFlp0/H/
-  XzJJwy2LD+Wwp5i9hzpm7XzYJCM/bs1i7PPbQUhOr2O2a/yqXPJxxqWf3hrM1CzP6/57Prem2
-  8HikxFKckWioxVxUnAgAxxBl4FcDAAA=
+	b=MKtobM/idxLCn1t0RSyv7eZd8YEdd2Q4ng69gxqfIDhdYb6K9MTfRVnr1mOBorjqH
+	 ldD4cdbltKnDDlQMxGFxZEdntdMEpoVT2w3ozeBuh27CkPbWRXTm+rwq8I+sTR8nvD
+	 RyjZDgsdPe/+S/xqIjf0IQ+TrniSvRyVkr8PfGxwZWI4/t3G1LIor14JDN71ERE9CY
+	 VYVjp9MDHgAsGFc4sr9Qi5R80ibXGgH/RPiBQ5RwbKWDglDMV3e6OUovVGVwTeEShL
+	 d/PUvy6zWeqPaSVs0lotQhG48YWOMxQm2sYAfU4gnRb8VEwaM+Gf9+Ne5RnTa2+lze
+	 D+Cp4RuhBOgqg==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrKIsWRWlGSWpSXmKPExsViZ8MxSXfFCeM
+  Ugz++FhcPL2V2YPQ4t3EFYwBjFGtmXlJ+RQJrxtmWP8wFW6QrnnVeYmlg7JfoYuTiEBJ4wijR
+  0neCEcK5ziQx6e0WFghnD6PE0WlLmLoYOTnYBKQkbtz/zwZiiwjoSyydvYcZxGYWUJF48buHH
+  cQWFnCWaJ78GMxmEVCV6Jl5DWgQBwevgJPE7Fd8IGEJAQWJKQ/fg7VyApUvu3aCFcQWAipZ/v
+  oRI4jNKyAocXLmExaI8RISB1+8YIboVZSYfbmZBcKukGicfogJwlaTuHpuE/MERsFZSNpnIWl
+  fwMi0itGsOLWoLLVI19BCL6koMz2jJDcxM0cvsUo3US+1VLc8tbhE10gvsbxYL7W4WK+4Mjc5
+  J0UvL7VkEyMwdFOKlT/sYFza91fvEKMkB5OSKG8Xl3GKEF9SfkplRmJxRnxRaU5q8SFGGQ4OJ
+  QnehQeAcoJFqempFWmZOcA4gklLcPAoifBWHANK8xYXJOYWZ6ZDpE4xKkqJ8/aCJARAEhmleX
+  BtsNi9xCgrJczLyMDAIMRTkFqUm1mCKv+KUZyDUUmYd9thoCk8mXklcNNfAS1mAlrM5WIAsrg
+  kESEl1cBUteJQDbuOe8DCpzcOlgiIaazlEPozs6TBZv7uuZcuhprfkygIX2F56dyKFUfWnPr0
+  6Zix582t6p8+3K77Hv36R5/cvrkfBJxPx6y6nWb3VOuKjgjnw08bsm9MqlZ8XxP6pYGBXb7nv
+  aJ86hGZo6VbGG6ffMAXsTj8lFO9yA3tyG9ck7TWFRgJXH3aGuussbnUWKh41YJz3w8vfHjv9+
+  6CYw160pmbLl78F7rL4xjLvF/cGg8enfyveZo3+Hbf4/wfK04U8FTt/Mso+Nk9hqnH5FnGHt6
+  G0tlKkz2bG/qDnxwp7Hhx2YThzbalDMrbW15NEDa71b3tjPJb+6szJ/kL8Zw8qpDMKsh8wvLP
+  Tm6Vm0osxRmJhlrMRcWJAAbYw5BYAwAA
 X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-18.tower-732.messagelabs.com!1681115299!471853!1
-X-Originating-IP: [62.60.8.98]
+X-Msg-Ref: server-21.tower-565.messagelabs.com!1681115303!288110!1
+X-Originating-IP: [62.60.8.146]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
-X-StarScan-Version: 9.104.1; banners=-,-,-
+X-StarScan-Version: 9.104.2; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 6775 invoked from network); 10 Apr 2023 08:28:20 -0000
-Received: from unknown (HELO n03ukasimr03.n03.fujitsu.local) (62.60.8.98)
-  by server-18.tower-732.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 10 Apr 2023 08:28:20 -0000
-Received: from n03ukasimr03.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr03.n03.fujitsu.local (Postfix) with ESMTP id C3B751CF
-	for <openembedded-devel@lists.openembedded.org>; Mon, 10 Apr 2023 09:28:19 +0100 (BST)
+Received: (qmail 17028 invoked from network); 10 Apr 2023 08:28:24 -0000
+Received: from unknown (HELO n03ukasimr02.n03.fujitsu.local) (62.60.8.146)
+  by server-21.tower-565.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 10 Apr 2023 08:28:24 -0000
+Received: from n03ukasimr02.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTP id B37B510032B
+	for <openembedded-devel@lists.openembedded.org>; Mon, 10 Apr 2023 09:28:23 +0100 (BST)
 Received: from R01UKEXCASM121.r01.fujitsu.local (R01UKEXCASM121 [10.183.43.173])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by n03ukasimr03.n03.fujitsu.local (Postfix) with ESMTPS id B87FE1C8
-	for <openembedded-devel@lists.openembedded.org>; Mon, 10 Apr 2023 09:28:19 +0100 (BST)
+	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTPS id A73E7100323
+	for <openembedded-devel@lists.openembedded.org>; Mon, 10 Apr 2023 09:28:23 +0100 (BST)
 Received: from localhost.localdomain (10.167.225.33) by
  R01UKEXCASM121.r01.fujitsu.local (10.183.43.173) with Microsoft SMTP Server
- (TLS) id 15.0.1497.42; Mon, 10 Apr 2023 09:28:18 +0100
+ (TLS) id 15.0.1497.42; Mon, 10 Apr 2023 09:28:22 +0100
 From: <wangmy@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-python] [PATCH] python3-websockets: upgrade 10.4  -> 11.0.1
-Date: Mon, 10 Apr 2023 16:27:42 +0800
-Message-ID: <1681115263-24378-4-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH] poppler: upgrade 23.03.0 -> 23.04.0
+Date: Mon, 10 Apr 2023 16:27:43 +0800
+Message-ID: <1681115263-24378-5-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 In-Reply-To: <1681115263-24378-1-git-send-email-wangmy@fujitsu.com>
 References: <1681115263-24378-1-git-send-email-wangmy@fujitsu.com>
@@ -77,64 +77,88 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 10 Apr 2023 08:28:28 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102013
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102014
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
-License-Update: Use standard licence text and SPDX identifier.
-
 Changelog:
-==========
-Bug fixes
-----------
-Restored the C extension in the source distribution.
+=========
+core:
+ * Fix memory issue when signing fails. Issue #1372
+ * Internal improvements of signature related code
+ * CairoOutputDev: improve type3 font rendering
+ * Fix memory leak in GlobalParams::findSystemFontFileForFamilyAndStyle
 
-Backwards-incompatible changes
--------------------------------
-The Sans-I/O implementation was moved.
-Sans-I/O protocol constructors now use keyword-only arguments.
-Closing a connection without an empty close frame is OK.
-serve() times out on the opening handshake after 10 seconds by default.
-
-New features
--------------
-websockets 10.0 introduces a implementation on top of threading.
-Added open_timeout to serve().
-Made it possible to close a server without closing existing connections.
-Added select_subprotocol to customize negotiation of subprotocols in the Sans-I/O layer.
-
-Improvements
---------------
-Added platform-independent wheels.
-Improved error handling in broadcast().
-Set server_hostname automatically on TLS connections when providing a sock argument to connect().
+utils:
+ * pdftocairo: Fix crash in some special situations
+ * pdfsig: allow holes in -dump signature list
+ * pdfsig: Support --help
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- ...ython3-websockets_10.4.bb => python3-websockets_11.0.1.bb} | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-websockets_10.4.bb => python3-websockets_11.0.1.bb} (61%)
+ .../poppler/0001-cmake-Do-not-use-isystem.patch        | 10 ++++------
+ .../poppler/{poppler_23.03.0.bb => poppler_23.04.0.bb} |  2 +-
+ 2 files changed, 5 insertions(+), 7 deletions(-)
+ rename meta-oe/recipes-support/poppler/{poppler_23.03.0.bb => poppler_23.04.0.bb} (96%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-websockets_10.4.bb b/meta-python/recipes-devtools/python/python3-websockets_11.0.1.bb
-similarity index 61%
-rename from meta-python/recipes-devtools/python/python3-websockets_10.4.bb
-rename to meta-python/recipes-devtools/python/python3-websockets_11.0.1.bb
-index fac4d7a42..06110d38b 100644
---- a/meta-python/recipes-devtools/python/python3-websockets_10.4.bb
-+++ b/meta-python/recipes-devtools/python/python3-websockets_11.0.1.bb
-@@ -2,11 +2,11 @@ SUMMARY = "An implementation of the WebSocket Protocol (RFC 6455)"
- HOMEPAGE = "https://github.com/aaugustin/websockets"
+diff --git a/meta-oe/recipes-support/poppler/poppler/0001-cmake-Do-not-use-isystem.patch b/meta-oe/recipes-support/poppler/poppler/0001-cmake-Do-not-use-isystem.patch
+index 44a22963a..b4e3fb05e 100644
+--- a/meta-oe/recipes-support/poppler/poppler/0001-cmake-Do-not-use-isystem.patch
++++ b/meta-oe/recipes-support/poppler/poppler/0001-cmake-Do-not-use-isystem.patch
+@@ -1,4 +1,4 @@
+-From 51a2a1e4d8ca4040a6a7eac398cb704da35f39e5 Mon Sep 17 00:00:00 2001
++From 04686340c4cd375a17d60d31bf6943367cc33214 Mon Sep 17 00:00:00 2001
+ From: Khem Raj <raj.khem@gmail.com>
+ Date: Sat, 21 Jan 2023 03:09:08 -0800
+ Subject: [PATCH] cmake: Do not use -isystem
+@@ -28,6 +28,7 @@ but instead of prepending, it will append to system headers and the
+ issue is addressed
  
- LICENSE = "BSD-3-Clause"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=78c2cc91e172ca96d6f8e4a76c739ec6"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=51924a6af4495b8cfaee1b1da869b6f4"
+ Signed-off-by: Khem Raj <raj.khem@gmail.com>
++
+ ---
+  CMakeLists.txt         |  4 ++--
+  glib/CMakeLists.txt    |  4 ++--
+@@ -38,7 +39,7 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
+  6 files changed, 16 insertions(+), 16 deletions(-)
  
- inherit pypi setuptools3
+ diff --git a/CMakeLists.txt b/CMakeLists.txt
+-index 4768ac8..cdc014d 100644
++index c6c757c..5f1c540 100644
+ --- a/CMakeLists.txt
+ +++ b/CMakeLists.txt
+ @@ -603,10 +603,10 @@ add_library(poppler ${poppler_SRCS})
+@@ -53,7 +54,7 @@ index 4768ac8..cdc014d 100644
+ +  target_include_directories(poppler  PRIVATE ${LCMS2_INCLUDE_DIR})
+  endif()
+  generate_export_header(poppler BASE_NAME poppler-private EXPORT_FILE_NAME "${CMAKE_CURRENT_BINARY_DIR}/poppler_private_export.h")
+- set_target_properties(poppler PROPERTIES VERSION 126.0.0 SOVERSION 126)
++ set_target_properties(poppler PROPERTIES VERSION 127.0.0 SOVERSION 127)
+ diff --git a/glib/CMakeLists.txt b/glib/CMakeLists.txt
+ index 52e8687..08ab39a 100644
+ --- a/glib/CMakeLists.txt
+@@ -187,6 +188,3 @@ index 1c3ebcb..bc1840a 100644
+  endif()
+  install(TARGETS pdftops DESTINATION bin)
+  install(FILES pdftops.1 DESTINATION ${CMAKE_INSTALL_MANDIR}/man1)
+--- 
+-2.39.1
+-
+diff --git a/meta-oe/recipes-support/poppler/poppler_23.03.0.bb b/meta-oe/recipes-support/poppler/poppler_23.04.0.bb
+similarity index 96%
+rename from meta-oe/recipes-support/poppler/poppler_23.03.0.bb
+rename to meta-oe/recipes-support/poppler/poppler_23.04.0.bb
+index 165e155ec..19bdce4d8 100644
+--- a/meta-oe/recipes-support/poppler/poppler_23.03.0.bb
++++ b/meta-oe/recipes-support/poppler/poppler_23.04.0.bb
+@@ -8,7 +8,7 @@ SRC_URI = "http://poppler.freedesktop.org/${BP}.tar.xz \
+            file://basename-include.patch \
+            file://0001-cmake-Do-not-use-isystem.patch \
+            "
+-SRC_URI[sha256sum] = "b04148bf849c1965ada7eff6be4685130e3a18a84e0cce73bf9bc472ec32f2b4"
++SRC_URI[sha256sum] = "b6d893dc7dcd4138b9e9df59a13c59695e50e80dc5c2cacee0674670693951a1"
  
--SRC_URI[sha256sum] = "eef610b23933c54d5d921c92578ae5f89813438fded840c2e9809d378dc765d3"
-+SRC_URI[sha256sum] = "369410925b240b30ef1c1deadbd6331e9cd865ad0b8966bf31e276cc8e0da159"
- 
- BBCLASSEXTEND = "native nativesdk"
+ DEPENDS = "fontconfig zlib cairo lcms glib-2.0"
  
 -- 
 2.34.1
