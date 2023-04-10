@@ -2,112 +2,70 @@ Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 13CEEC77B61
-	for <webhook@archiver.kernel.org>; Mon, 10 Apr 2023 13:47:00 +0000 (UTC)
-Received: from mailout08.t-online.de (mailout08.t-online.de [194.25.134.20])
- by mx.groups.io with SMTP id smtpd.web10.45393.1681134410995007785
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 49F65C76196
+	for <webhook@archiver.kernel.org>; Mon, 10 Apr 2023 14:18:10 +0000 (UTC)
+Received: from mailout12.t-online.de (mailout12.t-online.de [194.25.134.22])
+ by mx.groups.io with SMTP id smtpd.web10.46280.1681136285205813942
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 10 Apr 2023 06:46:51 -0700
+ Mon, 10 Apr 2023 07:18:05 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=SPF record not found (domain: t-online.de, ip: 194.25.134.20, mailfrom: f_l_k@t-online.de)
-Received: from fwd84.dcpf.telekom.de (fwd84.aul.t-online.de [10.223.144.110])
-	by mailout08.t-online.de (Postfix) with SMTP id 205187F98
-	for <openembedded-devel@lists.openembedded.org>; Mon, 10 Apr 2023 15:46:49 +0200 (CEST)
-Received: from flk-MS-7C91.fritz.box ([84.163.40.74]) by fwd84.t-online.de
+ dkim=missing; spf=none, err=SPF record not found (domain: t-online.de, ip: 194.25.134.22, mailfrom: f_l_k@t-online.de)
+Received: from fwd71.dcpf.telekom.de (fwd71.aul.t-online.de [10.223.144.97])
+	by mailout12.t-online.de (Postfix) with SMTP id AE0F1EB5
+	for <openembedded-devel@lists.openembedded.org>; Mon, 10 Apr 2023 16:17:58 +0200 (CEST)
+Received: from flk-MS-7C91.fritz.box ([84.163.40.74]) by fwd71.t-online.de
 	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1plrr5-1wfzik0; Mon, 10 Apr 2023 15:46:47 +0200
+	esmtp id 1plsLB-1bJ85J0; Mon, 10 Apr 2023 16:17:53 +0200
 From: Markus Volk <f_l_k@t-online.de>
 To: openembedded-devel@lists.openembedded.org
 Cc: Markus Volk <f_l_k@t-online.de>
-Subject: [meta-oe][PATCH 2/2] glibmm: fix reproducibility issues
-Date: Mon, 10 Apr 2023 15:46:36 +0200
-Message-Id: <20230410134636.459404-2-f_l_k@t-online.de>
+Subject: [meta-oe][PATCH] adw-gtk3: add recipe
+Date: Mon, 10 Apr 2023 16:17:47 +0200
+Message-Id: <20230410141747.592811-1-f_l_k@t-online.de>
 X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20230410134636.459404-1-f_l_k@t-online.de>
-References: <20230410134636.459404-1-f_l_k@t-online.de>
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1681134407-837FDC79-9163FE87/0/0 CLEAN NORMAL
-X-TOI-MSGID: 2f901386-6929-423a-baaa-8093e333ba81
+X-TOI-EXPURGATEID: 150726::1681136273-8F7FDC12-0003E709/0/0 CLEAN NORMAL
+X-TOI-MSGID: 2d45c0d2-0a57-4456-a402-5af0b61c9880
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 10 Apr 2023 13:47:00 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102032
+ <openembedded-devel@lists.openembedded.org>; Mon, 10 Apr 2023 14:18:10 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102033
+
+This Theme will provide a unified look for gtk2/3/4
 
 Signed-off-by: Markus Volk <f_l_k@t-online.de>
 ---
- .../recipes-core/glib-2.0/glibmm-2.68_2.74.0.bb  | 16 ++++++++++------
- meta-oe/recipes-core/glib-2.0/glibmm_2.66.2.bb   | 16 ++++++++++------
- 2 files changed, 20 insertions(+), 12 deletions(-)
+ .../recipes-gnome/gnome-themes/adw-gtk3_4.5.bb   | 16 ++++++++++++++++
+ 1 file changed, 16 insertions(+)
+ create mode 100644 meta-oe/recipes-gnome/gnome-themes/adw-gtk3_4.5.bb
 
-diff --git a/meta-oe/recipes-core/glib-2.0/glibmm-2.68_2.74.0.bb b/meta-o=
-e/recipes-core/glib-2.0/glibmm-2.68_2.74.0.bb
-index 5028a8bb8..83ceb6458 100644
---- a/meta-oe/recipes-core/glib-2.0/glibmm-2.68_2.74.0.bb
-+++ b/meta-oe/recipes-core/glib-2.0/glibmm-2.68_2.74.0.bb
-@@ -17,13 +17,17 @@ SRC_URI[archive.sha256sum] =3D "2b472696cbac79db8e405=
-724118ec945219c5b9b18af63dc8c
-=20
- S =3D "${WORKDIR}/${GNOMEBN}-${PV}"
-=20
--do_install:append() {
--    for i in generate_wrap_init.pl gmmproc; do
--        sed -i -e '1s,.*,#!${bindir}/env perl,' ${D}${libdir}/glibmm-2.6=
-8/proc/$i
--    done
--}
--
- FILES:${PN} =3D "${libdir}/lib*.so.*"
- FILES:${PN}-dev +=3D "${datadir}/glibmm-* ${libdir}/${BPN}/include/ ${li=
-bdir}/${BPN}/proc/ ${libdir}/giomm-2.68/include/"
-=20
- RDEPENDS:${PN}-dev =3D "perl"
+diff --git a/meta-oe/recipes-gnome/gnome-themes/adw-gtk3_4.5.bb b/meta-oe=
+/recipes-gnome/gnome-themes/adw-gtk3_4.5.bb
+new file mode 100644
+index 000000000..cb79b5df8
+--- /dev/null
++++ b/meta-oe/recipes-gnome/gnome-themes/adw-gtk3_4.5.bb
+@@ -0,0 +1,16 @@
++SUMMARY =3D "An unofficial GTK3 port of libadwaita."
++HOMEPAGE =3D "http://github.com/lassekongo83/adw-gtk3"
++SECTION =3D "graphics"
++LICENSE =3D "LGPL-2.1-only"
++LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D1803fa9c2c3ce8cb06b4861d75310=
+742"
 +
-+EXTRA_OEMESON +=3D "--cross-file=3D${WORKDIR}/meson-${PN}.cross -Dmainta=
-iner-mode=3Dfalse"
++DEPENDS =3D "sassc-native"
 +
-+do_write_config:append() {
-+    cat >${WORKDIR}/meson-${PN}.cross <<EOF
-+[binaries]
-+m4 =3D '${bindir}/m4'
-+perl =3D '${bindir}/perl'
-+EOF
-+}
-diff --git a/meta-oe/recipes-core/glib-2.0/glibmm_2.66.2.bb b/meta-oe/rec=
-ipes-core/glib-2.0/glibmm_2.66.2.bb
-index f554a73fa..a6dc8ff20 100644
---- a/meta-oe/recipes-core/glib-2.0/glibmm_2.66.2.bb
-+++ b/meta-oe/recipes-core/glib-2.0/glibmm_2.66.2.bb
-@@ -15,13 +15,17 @@ SHRT_VER =3D "${@d.getVar('PV').split('.')[0]}.${@d.g=
-etVar('PV').split('.')[1]}"
-=20
- SRC_URI[archive.sha256sum] =3D "b2a4cd7b9ae987794cbb5a1becc10cecb65182b9=
-bb841868625d6bbb123edb1d"
-=20
--do_install:append() {
--    for i in generate_wrap_init.pl gmmproc; do
--        sed -i -e '1s,.*,#!${bindir}/env perl,' ${D}${libdir}/glibmm-2.4=
-/proc/$i
--    done
--}
--
- FILES:${PN} =3D "${libdir}/lib*.so.*"
- FILES:${PN}-dev +=3D "${datadir}/glibmm-* ${libdir}/glibmm-2.4/include/ =
-${libdir}/glibmm-2.4/proc/ ${libdir}/giomm-2.4/include/"
-=20
- RDEPENDS:${PN}-dev =3D "perl"
++inherit meson
 +
-+EXTRA_OEMESON +=3D "--cross-file=3D${WORKDIR}/meson-${PN}.cross -Dmainta=
-iner-mode=3Dfalse"
++SRC_URI =3D "git://github.com/lassekongo83/adw-gtk3.git;protocol=3Dhttps=
+;branch=3Dmain"
 +
-+do_write_config:append() {
-+    cat >${WORKDIR}/meson-${PN}.cross <<EOF
-+[binaries]
-+m4 =3D '${bindir}/m4'
-+perl =3D '${bindir}/perl'
-+EOF
-+}
++S =3D "${WORKDIR}/git"
++SRCREV =3D "bbc539534e881aa9c554665bd3cbf42ffeec6b76"
++
++FILES:${PN} =3D "${datadir}/themes"
 --=20
 2.34.1
 
