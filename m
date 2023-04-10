@@ -2,59 +2,57 @@ Return-Path: <Martin.Jansa@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 77A41C77B61
-	for <webhook@archiver.kernel.org>; Mon, 10 Apr 2023 18:58:01 +0000 (UTC)
-Received: from mail-ed1-f50.google.com (mail-ed1-f50.google.com [209.85.208.50])
- by mx.groups.io with SMTP id smtpd.web11.52957.1681153081018382308
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 789B3C76196
+	for <webhook@archiver.kernel.org>; Mon, 10 Apr 2023 18:58:11 +0000 (UTC)
+Received: from mail-ej1-f52.google.com (mail-ej1-f52.google.com [209.85.218.52])
+ by mx.groups.io with SMTP id smtpd.web11.52967.1681153084241729972
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 10 Apr 2023 11:58:01 -0700
+ Mon, 10 Apr 2023 11:58:04 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=nMcltc0R;
- spf=pass (domain: gmail.com, ip: 209.85.208.50, mailfrom: martin.jansa@gmail.com)
-Received: by mail-ed1-f50.google.com with SMTP id 4fb4d7f45d1cf-5027e589e20so3937282a12.3
-        for <openembedded-devel@lists.openembedded.org>; Mon, 10 Apr 2023 11:58:00 -0700 (PDT)
+ dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20210112 header.b=Gz4fQKu/;
+ spf=pass (domain: gmail.com, ip: 209.85.218.52, mailfrom: martin.jansa@gmail.com)
+Received: by mail-ej1-f52.google.com with SMTP id ud9so14420196ejc.7
+        for <openembedded-devel@lists.openembedded.org>; Mon, 10 Apr 2023 11:58:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112; t=1681153079; x=1683745079;
+        d=gmail.com; s=20210112; t=1681153082; x=1683745082;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=xV+JrjqQaNYjJCFtWZm5a0PYsLW1VywsJpQhoPeyjoA=;
-        b=nMcltc0Rh0Oi9VXZNdEzPou0VV1BZT1XeRnpsruS8bs9ETv8K0R5CuCqsDQxsabsHU
-         RAjsOoPBGoZq/xbAZrLrxkIpq4k7vap9hi4HZOe83zo7gCBP5ZfJS2M/rNkkE9wUVbmg
-         fGHLGtNBybdYSfT9k24sR6AT3kXKKzi6Gz5OuNSugQ44iAmKN54f0Vr2/CajBJCMxyKu
-         O/JZVf84psVoa42wJAtcZf9gRPHrvIMYYo+rZtCNqKJf9Her6hG3DxOQVOHetA9r3hi/
-         w86NX0RjWnx5epzrVvx/Mtnaa2TS516AY7d72nnR9j85cADhPH82TEbs3zqOwRFEBVfC
-         AshA==
+        bh=Pm16gROop0d/Sq+r+P26cLkl8psiYgSSWhpPYksFpy0=;
+        b=Gz4fQKu/pIm38sttrPBVvm1FLkybqv6sxwgyj9BOq2Zp/fVTqSIVOMwMzV+x3AJDD2
+         pBZ1oxFXg63GMYqS04tsxIdGNqOaILF5lA6Sr2lQoNL90LQrNKyUZ3ACXswJ3wNr7xVK
+         Y/lxdX4zH94ae0RqCuZNid1cJ5hHazNDrNatiz47dEGI7OnMTkhkUzkBcF05cIwIDwCW
+         y7KCql+/368LAAYx0biwf+NLDkuRsd5s1KG2gt8WHQWXuuzR8CZHuvBdW6xZYeOTbfGQ
+         HiMI0aSjTFD9e/KS/4rN72G+OujQds9P1MmiIaaVLDkqQ2u7DVK6UnS9yhKflC/8qRVV
+         s0Qw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112; t=1681153079; x=1683745079;
+        d=1e100.net; s=20210112; t=1681153082; x=1683745082;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=xV+JrjqQaNYjJCFtWZm5a0PYsLW1VywsJpQhoPeyjoA=;
-        b=6/S/v3paBtjlnZduAU6RY5kGE+lxifWP+CMf6YAusnSaml6KgY8wUzRi8GtlMd+Wuk
-         sBjBmubDWUbAu5kACurCy+FzviT9EIloYieXxGl7GC81nlaLt5vyc3U/AVPCJzZFuMUn
-         vsCLxRxPFUyJz5C+mgp6S4ZT5taHCjhvEw8DE/AO6ZQ657sBO8DETcUSRp/Oe6N0+Tul
-         Rw3jEQIH0vF4gI/BiPuI2+h1DUUpAL/Nx66L0w7O3umLUXzw0SK7dQX22DXkAD+/7m1J
-         QQFE8JagcIm1Zde89mW+YSbWEAtLNdlMtHQkPUhqw/0Xz+Fv1Iy2CrZXeLTZUkKWFais
-         dDIw==
-X-Gm-Message-State: AAQBX9c3gzNuEZ0GlceU96GlzBR5G/YogzfzYSZRxIlK6Mq0CZ1LRuxx
-	Bm5I2V/rQb0R6rru6Kuxr01ICV77T6I=
-X-Google-Smtp-Source: AKy350Y5JvM8SRf24Y1eAVtQonVOAV1lyOr5Fayv4GVVsU8GUMPDVfJTpDaFO9CySFFxOyHz4YAjSA==
-X-Received: by 2002:aa7:c691:0:b0:4fb:78a0:eabe with SMTP id n17-20020aa7c691000000b004fb78a0eabemr7250543edq.14.1681153079449;
-        Mon, 10 Apr 2023 11:57:59 -0700 (PDT)
+        bh=Pm16gROop0d/Sq+r+P26cLkl8psiYgSSWhpPYksFpy0=;
+        b=tGqpHMVQWf8542FpVq6sXRGob0ksC3E7OIAxF3JPt3WMDz0msuEnzhTuDpXswcDZIC
+         6xcONdTcTSDfI+L6LfjSpkbgIOi0H0RuFXWLSLEBMhcYbWplm7TAgbSeAU/R4etsUptC
+         hEHnoc7CJueEOo3KHVFKkiu7X939/zUd80FW0GRkR1L3RYPLxCJYaBnCar6UTm8VH2KA
+         vjN3YQujxqJ/kAXcH0PZzc+4MS27Q+gLgBHichAOus2Y9+ElczLj12MmD4tAC5h9mrga
+         gS06gpG1Tg9uGygvDxcQUiUFIi7rjRi76dawKarHUAGJ/41+lpQVh6d90VJR7IxuHBGG
+         50aA==
+X-Gm-Message-State: AAQBX9dGVU3WuxDMSUcU9aAfWgGixWcpCAGIdjkiy8OxB+2NTGi8fMeq
+	cSX46zDuNh+eBS4AKTxy3WkHZStNssI=
+X-Google-Smtp-Source: AKy350Zkt4wI9pLzU8VabRSz3A9Z8A9jvf3I2qUv/XRmUapnZGf7acw75qKVeLusSEAmiuF+HFPjww==
+X-Received: by 2002:a17:907:969e:b0:94d:20d2:47ce with SMTP id hd30-20020a170907969e00b0094d20d247cemr1900361ejc.14.1681153082632;
+        Mon, 10 Apr 2023 11:58:02 -0700 (PDT)
 Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
-        by smtp.gmail.com with ESMTPSA id z95-20020a509e68000000b004c09527d62dsm5110021ede.30.2023.04.10.11.57.59
+        by smtp.gmail.com with ESMTPSA id lf24-20020a170906ae5800b00933d64cd447sm5335193ejb.121.2023.04.10.11.58.02
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 10 Apr 2023 11:57:59 -0700 (PDT)
+        Mon, 10 Apr 2023 11:58:02 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Martin Jansa <martin.jansa@gmail.com>,
-	Martin Jansa <Martin.Jansa@gmail.com>,
-	Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][langdale][PATCH 3/7] mongodb: fix chown user for multilib builds
-Date: Mon, 10 Apr 2023 20:57:38 +0200
-Message-Id: <20230410185742.2416583-3-Martin.Jansa@gmail.com>
+Cc: Martin Jansa <Martin.Jansa@gmail.com>
+Subject: [meta-oe][langdale][PATCH 7/7] dleyna-{server,renderer}: fix dev-so QA issue with multilib
+Date: Mon, 10 Apr 2023 20:57:42 +0200
+Message-Id: <20230410185742.2416583-7-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.40.0
 In-Reply-To: <20230410185742.2416583-1-Martin.Jansa@gmail.com>
 References: <20230410185742.2416583-1-Martin.Jansa@gmail.com>
@@ -63,33 +61,40 @@ Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 10 Apr 2023 18:58:01 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102038
+ <openembedded-devel@lists.openembedded.org>; Mon, 10 Apr 2023 18:58:11 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102042
 
-From: Martin Jansa <martin.jansa@gmail.com>
-
-* the user is named mongodb (BPN) and in multilib builds this fails with:
-  chown: invalid user: 'lib32-mongodb:lib32-mongodb'
+* the libdir is arch specific, but the subdirectory is always BPN
+* fixes:
+  lib32-dleyna-server-0.6.0+gitAUTOINC+eb895ae827: non -dev/-dbg/nativesdk- package lib32-dleyna-server contains symlink .so '/usr/lib/dleyna-server/libdleyna-server-1.0.so' [dev-so]
+  lib32-dleyna-renderer-0.6.0: non -dev/-dbg/nativesdk- package lib32-dleyna-renderer contains symlink .so '/usr/lib/dleyna-renderer/libdleyna-renderer-1.0.so' [dev-so]
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../meta-python/recipes-dbs/mongodb/mongodb_git.bb              | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ .../recipes-multimedia/dleyna/dleyna-renderer_0.6.0.bb          | 2 +-
+ .../recipes-multimedia/dleyna/dleyna-server_0.6.0.bb            | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb_git.bb b/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb_git.bb
-index d040ab160b..ff0938d583 100644
---- a/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb_git.bb
-+++ b/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb_git.bb
-@@ -118,7 +118,7 @@ scons_do_install() {
+diff --git a/meta-multimedia/recipes-multimedia/dleyna/dleyna-renderer_0.6.0.bb b/meta-multimedia/recipes-multimedia/dleyna/dleyna-renderer_0.6.0.bb
+index 3e43c0d2a7..e7f918333a 100644
+--- a/meta-multimedia/recipes-multimedia/dleyna/dleyna-renderer_0.6.0.bb
++++ b/meta-multimedia/recipes-multimedia/dleyna/dleyna-renderer_0.6.0.bb
+@@ -22,4 +22,4 @@ inherit autotools pkgconfig
+ CFLAGS += " -I${S}"
  
-     # install mongo data folder
-     install -m 755 -d ${D}${localstatedir}/lib/${BPN}
--    chown ${PN}:${PN} ${D}${localstatedir}/lib/${BPN}
-+    chown ${BPN}:${BPN} ${D}${localstatedir}/lib/${BPN}
+ FILES:${PN} += "${datadir}/dbus-1"
+-FILES:${PN}-dev += "${libdir}/${PN}/*.so"
++FILES:${PN}-dev += "${libdir}/${BPN}/*.so"
+diff --git a/meta-multimedia/recipes-multimedia/dleyna/dleyna-server_0.6.0.bb b/meta-multimedia/recipes-multimedia/dleyna/dleyna-server_0.6.0.bb
+index b25e446c41..071379758c 100644
+--- a/meta-multimedia/recipes-multimedia/dleyna/dleyna-server_0.6.0.bb
++++ b/meta-multimedia/recipes-multimedia/dleyna/dleyna-server_0.6.0.bb
+@@ -19,4 +19,4 @@ S = "${WORKDIR}/git"
+ inherit autotools pkgconfig
  
-     # Create /var/log/mongodb in runtime.
-     if [ "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}" ]; then
+ FILES:${PN} += "${datadir}/dbus-1"
+-FILES:${PN}-dev += "${libdir}/${PN}/*.so"
++FILES:${PN}-dev += "${libdir}/${BPN}/*.so"
 -- 
 2.40.0
 
