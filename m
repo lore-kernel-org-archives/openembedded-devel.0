@@ -2,97 +2,99 @@ Return-Path: <Martin.Jansa@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7572EC76196
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 87A95C77B61
 	for <webhook@archiver.kernel.org>; Mon, 10 Apr 2023 18:58:51 +0000 (UTC)
-Received: from mail-ej1-f45.google.com (mail-ej1-f45.google.com [209.85.218.45])
- by mx.groups.io with SMTP id smtpd.web11.52988.1681153122607584755
+Received: from mail-ed1-f52.google.com (mail-ed1-f52.google.com [209.85.208.52])
+ by mx.groups.io with SMTP id smtpd.web11.52990.1681153123331810073
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 10 Apr 2023 11:58:42 -0700
+ Mon, 10 Apr 2023 11:58:43 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20210112 header.b=P1q2DJ/d;
- spf=pass (domain: gmail.com, ip: 209.85.218.45, mailfrom: martin.jansa@gmail.com)
-Received: by mail-ej1-f45.google.com with SMTP id a640c23a62f3a-94a34a14a54so143862566b.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 10 Apr 2023 11:58:42 -0700 (PDT)
+ dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20210112 header.b=KGiM3+uO;
+ spf=pass (domain: gmail.com, ip: 209.85.208.52, mailfrom: martin.jansa@gmail.com)
+Received: by mail-ed1-f52.google.com with SMTP id 4fb4d7f45d1cf-50489c0dcb9so1409990a12.2
+        for <openembedded-devel@lists.openembedded.org>; Mon, 10 Apr 2023 11:58:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112; t=1681153121; x=1683745121;
+        d=gmail.com; s=20210112; t=1681153122; x=1683745122;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=r10PaH+mABbNHFJjo5h/YTMoNhGvAmpd9lCWbi4gfVA=;
-        b=P1q2DJ/dqBqpqmt0emTVntDz9FKveknsEJRPnmjYRdlacAxjVmtv/NoSYRA5cNHnvX
-         Ox/UhGok645uTdjjtlA8JA1oBVg3rB/Wwn1YNe+Q65gE5+1Fhxvd2aSlxjO4FVsWppXT
-         N6ymvtUDQAHrsHuCOaSp31Okpmg2JPkkA6q/fRXhv5CiNDhUhE2eLSgEjFDnV6A23Rmp
-         /jG/Ct8dFhhxsOqnxBJ7YcLcaglqBBcJvQlY4NiWMn9v/UiWo60uhqMZk0Jcg8lC7IRW
-         MKB8UDhQESVvjDCVvihYFgZm/dT/0yUwZoJwMK2+hUbS3PODha1yKmwqHxNgwFdTExc7
-         MyFg==
+        bh=Pm16gROop0d/Sq+r+P26cLkl8psiYgSSWhpPYksFpy0=;
+        b=KGiM3+uO5VX0U4UIXXR16yasaHNjirlfQiwb800FAPW6bN+8qIbd50unodhAQLdIoI
+         CmENuky7N4tKhLvDoXZVIdA/Kvo63h0FiFs/8y06LykKb0kH3hiTeO2pdbxMRx6lDipF
+         PHCEM2VqOvf8YhI/Xc9yrL6symXGFAVDYHovStUeIoCkKZJWPNvg8o4twvnEsa/j96dp
+         VN3Xilxo3gfmxjlEzqQBLzjXR3NC6hPZ0u/eNbKNwhU0iaPRz5fOWRJ/YmGTcOAc7JBo
+         2f2VEh0TlL7N3cFG+FdgIrMbFTlGYu8RTX38LOBOYl8nOWAh6hX7b9hRgfxVrE2RXODv
+         e8jQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112; t=1681153121; x=1683745121;
+        d=1e100.net; s=20210112; t=1681153122; x=1683745122;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=r10PaH+mABbNHFJjo5h/YTMoNhGvAmpd9lCWbi4gfVA=;
-        b=47XEBhQRGTshz+71Lquws9rYjpt4rXPJcc9crFkcxNuwi+hnWb859E/Z8rB2tlMHg+
-         4ypXSQgSFjPTTA5uChhLIZiL9MVQ2K96QZ+5pHZRRG4owV/exyXvwbRSswbjxj/JX+6w
-         57ysuEvqaVox++Fwp+KQn6K3LNttKooBbAwWuaJU7QNwwCe/03D0EDqBvWTyDSv/ZMFq
-         J0QWhCfrjtv7vcD+4cD1ue+s1lYM0XPC5Nk8C72AeFoXFACqk+AaJAvizT9kinqg5gCI
-         14UDZdYfT9VhNp4/jjLd95uc4adAWWOqksZF9tn1jfE0wOLlt8BSGXgZvTIMNZV6qW5Q
-         iCog==
-X-Gm-Message-State: AAQBX9ekBSU1uPW/Fj4d+cWJc0hbc4nEc933MxpYjwKsV6Qt2VOaLQh/
-	3hDozBuMX2586td8u1fV2rsyjqap/wA=
-X-Google-Smtp-Source: AKy350a1Al3XkT0yEuOpU+fW5bo6p4RAerflisaWQP8WhA7cZfZmBjdj1hP2Dqz+wF17gX/0U5J0Xg==
-X-Received: by 2002:a50:ee06:0:b0:502:2a76:5781 with SMTP id g6-20020a50ee06000000b005022a765781mr10353053eds.5.1681153121051;
+        bh=Pm16gROop0d/Sq+r+P26cLkl8psiYgSSWhpPYksFpy0=;
+        b=zLbj9ZFbHTJ8pU37McpdFNAF3eb3/Aba3IU5cR6poUyePLrVD0f4I26ZiuSZRqTl2t
+         L3RyvpU4GmV0i5pG6FyebnJCxw7JsOHF/hqN/ZtgsXJq9VHHhkVs5bNVEv9mkLOwlCsP
+         seCGn18Sj/QEjsVt8Zy3VI0+GbBJ7NFW3ZEikthiL7n3BRimEhzOO1f2a9QKgIJbYJT9
+         jw/yqcTO7DxcLekj5h456MZ/dYpCKWr6oyyek2tFkxPpuQQ/xEX+0WQLDlW2g3MEkfjZ
+         O5sZtva/c7b+XrbVEJ2xR4IKzMMCE63SmaEZaICLerLddxb7lIlOaRo4NsBbYp6wZRZa
+         6wpw==
+X-Gm-Message-State: AAQBX9dMomMNmctVPQioQXf67mXpVWdqfJ4y7NYnPaOqNcXKmAwhgOp3
+	I9iHQclOCO6AawYooWjXuJwodRYl2WE=
+X-Google-Smtp-Source: AKy350a/ed69JuabkZzwfpmWXqdBBrEPIlIFivk1l0xzI+rI4OaE/pZF5+dWbH6FXrlODSqbcK1Wrg==
+X-Received: by 2002:aa7:c0c7:0:b0:4fb:395a:6aa4 with SMTP id j7-20020aa7c0c7000000b004fb395a6aa4mr10067562edp.31.1681153121744;
         Mon, 10 Apr 2023 11:58:41 -0700 (PDT)
 Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
-        by smtp.gmail.com with ESMTPSA id co2-20020a0564020c0200b005049297c5d4sm2345131edb.56.2023.04.10.11.58.40
+        by smtp.gmail.com with ESMTPSA id i13-20020a50c3cd000000b004fa012332ecsm3707139edf.1.2023.04.10.11.58.41
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 10 Apr 2023 11:58:40 -0700 (PDT)
+        Mon, 10 Apr 2023 11:58:41 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Martin Jansa <Martin.Jansa@gmail.com>
-Subject: [meta-oe][kirkstone][PATCH 8/9] lirc: fix do_install with multilib
-Date: Mon, 10 Apr 2023 20:58:18 +0200
-Message-Id: <20230410185819.2416704-8-Martin.Jansa@gmail.com>
+Subject: [meta-oe][kirkstone][PATCH 9/9] dleyna-{server,renderer}: fix dev-so QA issue with multilib
+Date: Mon, 10 Apr 2023 20:58:19 +0200
+Message-Id: <20230410185819.2416704-9-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.40.0
 In-Reply-To: <20230410185819.2416704-1-Martin.Jansa@gmail.com>
 References: <20230410185819.2416704-1-Martin.Jansa@gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 10 Apr 2023 18:58:51 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102050
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102051
 
-* use ${S} instead of ${WORKDIR}/${PN}-${PV}
-  and ${BP} instead of ${PN}-${PV}
-  to fix build with multilib, where PN is lib32-lirc, but S is correctly set
-  as ${WORKDIR}/${BP} and do_install fails with:
-  mkdir: cannot create directory ‘lib32-lirc/0.10.1-r0/lib32-lirc-0.10.1/python-pkg/dist/’: No such file or directory
+* the libdir is arch specific, but the subdirectory is always BPN
+* fixes:
+  lib32-dleyna-server-0.6.0+gitAUTOINC+eb895ae827: non -dev/-dbg/nativesdk- package lib32-dleyna-server contains symlink .so '/usr/lib/dleyna-server/libdleyna-server-1.0.so' [dev-so]
+  lib32-dleyna-renderer-0.6.0: non -dev/-dbg/nativesdk- package lib32-dleyna-renderer contains symlink .so '/usr/lib/dleyna-renderer/libdleyna-renderer-1.0.so' [dev-so]
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- .../meta-python/recipes-connectivity/lirc/lirc_0.10.1.bb    | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ .../recipes-multimedia/dleyna/dleyna-renderer_0.6.0.bb          | 2 +-
+ .../recipes-multimedia/dleyna/dleyna-server_0.6.0.bb            | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-oe/dynamic-layers/meta-python/recipes-connectivity/lirc/lirc_0.10.1.bb b/meta-oe/dynamic-layers/meta-python/recipes-connectivity/lirc/lirc_0.10.1.bb
-index fe9685924b..226543bbd8 100644
---- a/meta-oe/dynamic-layers/meta-python/recipes-connectivity/lirc/lirc_0.10.1.bb
-+++ b/meta-oe/dynamic-layers/meta-python/recipes-connectivity/lirc/lirc_0.10.1.bb
-@@ -49,9 +49,9 @@ do_configure:append() {
+diff --git a/meta-multimedia/recipes-multimedia/dleyna/dleyna-renderer_0.6.0.bb b/meta-multimedia/recipes-multimedia/dleyna/dleyna-renderer_0.6.0.bb
+index 3e43c0d2a7..e7f918333a 100644
+--- a/meta-multimedia/recipes-multimedia/dleyna/dleyna-renderer_0.6.0.bb
++++ b/meta-multimedia/recipes-multimedia/dleyna/dleyna-renderer_0.6.0.bb
+@@ -22,4 +22,4 @@ inherit autotools pkgconfig
+ CFLAGS += " -I${S}"
  
- # Create PYTHON_TARBALL which LIRC needs for install-nodist_pkgdataDATA
- do_install:prepend() {
--    rm -rf ${WORKDIR}/${PN}-${PV}/python-pkg/dist/
--    mkdir ${WORKDIR}/${PN}-${PV}/python-pkg/dist/
--    tar --exclude='${WORKDIR}/${PN}-${PV}/python-pkg/*' -czf ${WORKDIR}/${PN}-${PV}/python-pkg/dist/${PN}-${PV}.tar.gz ${S}
-+    rm -rf ${S}/python-pkg/dist/
-+    mkdir ${S}/python-pkg/dist/
-+    tar --exclude='${S}/python-pkg/*' -czf ${S}/python-pkg/dist/${BP}.tar.gz ${S}
- }
+ FILES:${PN} += "${datadir}/dbus-1"
+-FILES:${PN}-dev += "${libdir}/${PN}/*.so"
++FILES:${PN}-dev += "${libdir}/${BPN}/*.so"
+diff --git a/meta-multimedia/recipes-multimedia/dleyna/dleyna-server_0.6.0.bb b/meta-multimedia/recipes-multimedia/dleyna/dleyna-server_0.6.0.bb
+index b25e446c41..071379758c 100644
+--- a/meta-multimedia/recipes-multimedia/dleyna/dleyna-server_0.6.0.bb
++++ b/meta-multimedia/recipes-multimedia/dleyna/dleyna-server_0.6.0.bb
+@@ -19,4 +19,4 @@ S = "${WORKDIR}/git"
+ inherit autotools pkgconfig
  
- # In code, path to python is a variable that is replaced with path to native version of it
+ FILES:${PN} += "${datadir}/dbus-1"
+-FILES:${PN}-dev += "${libdir}/${PN}/*.so"
++FILES:${PN}-dev += "${libdir}/${BPN}/*.so"
 -- 
 2.40.0
 
