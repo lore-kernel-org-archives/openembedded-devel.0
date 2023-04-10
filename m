@@ -2,68 +2,71 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A8D87C77B6F
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A8D37C77B61
 	for <webhook@archiver.kernel.org>; Mon, 10 Apr 2023 08:31:08 +0000 (UTC)
-Received: from mail1.bemta37.messagelabs.com (mail1.bemta37.messagelabs.com [85.158.142.112])
- by mx.groups.io with SMTP id smtpd.web10.40264.1681115464271521643
+Received: from mail1.bemta34.messagelabs.com (mail1.bemta34.messagelabs.com [195.245.231.4])
+ by mx.groups.io with SMTP id smtpd.web11.39483.1681115466233902968
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 10 Apr 2023 01:31:04 -0700
+ Mon, 10 Apr 2023 01:31:06 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=nIvl0enm;
- spf=pass (domain: fujitsu.com, ip: 85.158.142.112, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=feg9Fowg;
+ spf=pass (domain: fujitsu.com, ip: 195.245.231.4, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1681115462; i=@fujitsu.com;
-	bh=rkT9OkzfP5I47bka3ws5SIvigJGbR8hMTmciFfODWoQ=;
-	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=nIvl0enmr7klTxPoDez7PV1L9IJmdwI0yO/P72/KV3nYHMozSjMIZ8zjmqHLFLt6w
-	 VM/0kFV7yLWIM4lidu7Aa3fFHCNrqcud0uNyBjsn8Kk5sQODedr67T70Ca8A5JSPqd
-	 ZbfiOcOcDx3S/k57/a8YZ9kxrIGsTwSK9nFuBvbDbo1r3XN9TX+3hA2npOz+P2d+TG
-	 y3nXRAu/wYa2V3vAvw7Es/nOsJRVjlPt+PuZWkMX2PX0EtqIx0LZtPbFTglyWEN42W
-	 YUlQUhX4D/zLCYjSe+OLcv4JEEMhEFeLc2u0L+QvwU/h3Eo12dZ7mIvlL3FAbNYsTb
-	 +xipJik9ml2YA==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFlrPIsWRWlGSWpSXmKPExsViZ8ORpOt60jj
-  F4PsBM4uLh5cyOzB6nNu4gjGAMYo1My8pvyKBNeP//PCCQ5wVi/8sY21gfMjRxcjFISTwkFHi
-  9rRVjBDOFSaJhsOvWCGcPYwS6/YsYe9i5ORgE5CSuHH/PxuILSKgL7F09h5mEJtZQEXixe8es
-  BphAR+J11+bwOIsAqoS/9ufgMV5BZwkfkx+xwpiSwgoSEx5+J4ZIi4ocXLmExaIORISB1+8YI
-  aoUZSYfbmZBcKukGicfogJwlaTuHpuE/MERv5ZSNpnIWlfwMi0itG8OLWoLLVI19BIL6koMz2
-  jJDcxM0cvsUo3US+1VDcvv6gkQ9dQL7G8WC+1uFivuDI3OSdFLy+1ZBMjMBxTitPcdjD+7vur
-  d4hRkoNJSZS3i8s4RYgvKT+lMiOxOCO+qDQntfgQowwHh5IE78IDQDnBotT01Iq0zBxgbMCkJ
-  Th4lER4K44BpXmLCxJzizPTIVKnGBWlxHlbTwAlBEASGaV5cG2weLzEKCslzMvIwMAgxFOQWp
-  SbWYIq/4pRnINRSZh322GgKTyZeSVw018BLWYCWszlYgCyuCQRISXVwGQ54UC7FOfh1//CNM0
-  vrwty+lZUaMkYvp/9FW/Qzq26M3VW9uSVKyy9vS9xzxz+NRsWnJbfzNYu5bKA5emfnWvvcEl5
-  hMTrd0aq/SjJ/XRWUEtZ47+n6ryNXc/KVsbaR8y+xfM7doH8Ot0s7nbhI7qBinzXwxX+rXjEs
-  D5u9mzGKinRKNUI3rR7usJWvozqz5u2KBa/PqN8+PKq1n0bFH0TGw06Zxj59zHxmcSctu89/W
-  JK/mHH6Nb86vM1fdZ6zMGb3a+7rE70f6ZfsU9ty9Md1TutM34nPulSvuJd2mf79uHH3wdyS4S
-  d9j3vO6jybIpKZGTcT9X8aXKRZ/J1N81oXNZqNTn17evDP8pOK7EUZyQaajEXFScCAKwFAoNC
-  AwAA
+	s=170520fj; t=1681115464; i=@fujitsu.com;
+	bh=xGNijZxN+9NFuwfqUKknh1HYCHrMmT4QYgmXVCZa/6Y=;
+	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type;
+	b=feg9FowgA3RtSmEUhRyM38f21bRXhMaLZugowoPG0N/7X+LX8wMVm78KK/8hJFz6k
+	 vMxPxxQE3fczdmdELJdU7iDfyLwJKA93H3/L9KuHvw70gkAHLV9MbRu0elIr9bx0Gr
+	 RyEJ4+AAZ+XK2gJIDf/jEN3KImtTQjFNK7vSRmJWTAHyxXYcilEla5oGeyWu4tJqcM
+	 rdgys4NHnIzcFzwLULi+MiDk4PDqfqiUxuXtdlMH8i+s2lXWI5c6C0A4WhrL3/BZt9
+	 zuavoRTOKVreHFx9cv6BFmr8j2FFkw0wOUMlittIm57XaxPWic/ydnuDzMiB7iZ0g1
+	 jGON+KMRpwtGA==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrCIsWRWlGSWpSXmKPExsViZ8ORqOtx0jj
+  FYO0MUYuLh5cyOzB6nNu4gjGAMYo1My8pvyKBNWPSsfdMBau5KtbevMrewHiIs4uRi0NI4Amj
+  xPuz5xghnOtMEjPPdrN2MXICOXsYJeb8LAWx2QSkJG7c/88GYosI6Essnb2HGcRmFlCRePG7h
+  x3EFhYIkmi+9IGpi5GDg0VAVeLSrGyQMK+Ak8SOnmeMILaEgILElIfvwVo5BZwldi6fBLXKSe
+  LbwYWsEPWCEidnPmGBGC8hcfDFC2aIXkWJ2ZebWSDsConG6YeYIGw1iavnNjFPYBSchaR9FpL
+  2BYxMqxhNi1OLylKLdI30kooy0zNKchMzc/QSq3QT9VJLdctTi0uAMonlxXqpxcV6xZW5yTkp
+  enmpJZsYgYGbUqzav4Nxbe9fvUOMkhxMSqK8XVzGKUJ8SfkplRmJxRnxRaU5qcWHGGU4OJQke
+  BceAMoJFqWmp1akZeYAowgmLcHBoyTCW3EMKM1bXJCYW5yZDpE6xagoJc7begIoIQCSyCjNg2
+  uDRe4lRlkpYV5GBgYGIZ6C1KLczBJU+VeM4hyMSsK82w4DTeHJzCuBm/4KaDET0GIuFwOQxSW
+  JCCmpBqYpAp39/UtkY+4d9jb/6xDwXi3gcN4N66olHSt2hHzjW8578EM4U6lqF4fUG6eKmR85
+  eS5rpd/0LvxatKP2yK63uTNWNeh+czA09Lh6rOD0z9i8HR2WPf8Z8xTkbRUjeIreMyVzH7D9M
+  afKpO7CksmzzhlsKwiYeHV/it2rZ65NZxbVeTtd2DGxP5u/dbWuopPbh6LQFv6NJ7v3NEzatj
+  6Uo8t0sfaDyCZx47t207QfnrzRmbT7lqr/4fBzXVqNsVWeVovc9267amm0w0Tv6OnfR49uE2R
+  zswuxvBrw+EjmNT2rSaUs71y9ed0U9xgEOrOJe66Wbj715FDa1htV+6aESRwUmML4d++Tkze+
+  fFBiKc5INNRiLipOBADUcrfDVwMAAA==
 X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-29.tower-745.messagelabs.com!1681115461!189441!1
-X-Originating-IP: [62.60.8.98]
+X-Msg-Ref: server-15.tower-565.messagelabs.com!1681115464!289009!1
+X-Originating-IP: [62.60.8.97]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.104.2; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 28927 invoked from network); 10 Apr 2023 08:31:01 -0000
-Received: from unknown (HELO n03ukasimr03.n03.fujitsu.local) (62.60.8.98)
-  by server-29.tower-745.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 10 Apr 2023 08:31:01 -0000
-Received: from n03ukasimr03.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr03.n03.fujitsu.local (Postfix) with ESMTP id 54F731C8
-	for <openembedded-devel@lists.openembedded.org>; Mon, 10 Apr 2023 09:31:01 +0100 (BST)
+Received: (qmail 8222 invoked from network); 10 Apr 2023 08:31:04 -0000
+Received: from unknown (HELO n03ukasimr01.n03.fujitsu.local) (62.60.8.97)
+  by server-15.tower-565.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 10 Apr 2023 08:31:04 -0000
+Received: from n03ukasimr01.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTP id 0FF951001B8
+	for <openembedded-devel@lists.openembedded.org>; Mon, 10 Apr 2023 09:31:04 +0100 (BST)
 Received: from R01UKEXCASM121.r01.fujitsu.local (R01UKEXCASM121 [10.183.43.173])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by n03ukasimr03.n03.fujitsu.local (Postfix) with ESMTPS id 49DBE1C7
-	for <openembedded-devel@lists.openembedded.org>; Mon, 10 Apr 2023 09:31:01 +0100 (BST)
+	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTPS id 043C41001A5
+	for <openembedded-devel@lists.openembedded.org>; Mon, 10 Apr 2023 09:31:04 +0100 (BST)
 Received: from localhost.localdomain (10.167.225.33) by
  R01UKEXCASM121.r01.fujitsu.local (10.183.43.173) with Microsoft SMTP Server
- (TLS) id 15.0.1497.42; Mon, 10 Apr 2023 09:30:59 +0100
+ (TLS) id 15.0.1497.42; Mon, 10 Apr 2023 09:31:02 +0100
 From: <wangmy@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-python] [PATCH] python3-imgtool: upgrade 1.9.0 -> 1.10.0
-Date: Mon, 10 Apr 2023 16:30:44 +0800
-Message-ID: <1681115447-24458-1-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH] python3-pychromecast: upgrade 13.0.6 -> 13.0.7
+Date: Mon, 10 Apr 2023 16:30:45 +0800
+Message-ID: <1681115447-24458-2-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
+In-Reply-To: <1681115447-24458-1-git-send-email-wangmy@fujitsu.com>
+References: <1681115447-24458-1-git-send-email-wangmy@fujitsu.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-Originating-IP: [10.167.225.33]
@@ -74,31 +77,36 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 10 Apr 2023 08:31:08 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102020
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102021
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
+Changelog:
+===========
+ Wait longer when attempting to play media
+ Bump black from 23.1.0 to 23.3.0
+
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../{python3-imgtool_1.9.0.bb => python3-imgtool_1.10.0.bb}     | 2 +-
+ ...n3-pychromecast_13.0.6.bb => python3-pychromecast_13.0.7.bb} | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-imgtool_1.9.0.bb => python3-imgtool_1.10.0.bb} (79%)
+ rename meta-python/recipes-devtools/python/{python3-pychromecast_13.0.6.bb => python3-pychromecast_13.0.7.bb} (84%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-imgtool_1.9.0.bb b/meta-python/recipes-devtools/python/python3-imgtool_1.10.0.bb
-similarity index 79%
-rename from meta-python/recipes-devtools/python/python3-imgtool_1.9.0.bb
-rename to meta-python/recipes-devtools/python/python3-imgtool_1.10.0.bb
-index 1e5efbe18..5282bccd0 100644
---- a/meta-python/recipes-devtools/python/python3-imgtool_1.9.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-imgtool_1.10.0.bb
-@@ -3,7 +3,7 @@ SUMMARY = "MCUboot's image signing and key management tool"
- LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://imgtool/main.py;beginline=3;endline=18;md5=9965f09ae52c04886a1f04e13ccdce57"
+diff --git a/meta-python/recipes-devtools/python/python3-pychromecast_13.0.6.bb b/meta-python/recipes-devtools/python/python3-pychromecast_13.0.7.bb
+similarity index 84%
+rename from meta-python/recipes-devtools/python/python3-pychromecast_13.0.6.bb
+rename to meta-python/recipes-devtools/python/python3-pychromecast_13.0.7.bb
+index 2d9efa390..c27d490f4 100644
+--- a/meta-python/recipes-devtools/python/python3-pychromecast_13.0.6.bb
++++ b/meta-python/recipes-devtools/python/python3-pychromecast_13.0.7.bb
+@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/balloob/pychromecast"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=b1dbd4e85f47b389bdadee9c694669f5"
  
--SRC_URI[sha256sum] = "7fa7f6bd6bf069b5ffa07ea47478e16b6206bd2fc5b7607def999de0e9134a43"
-+SRC_URI[sha256sum] = "03b34e75934ac3d96e7c42b6bcaf11ceaf4f453f7c6f26c17d726bd183104b40"
+-SRC_URI[sha256sum] = "149dad28cbed2296b5074c326662d9cb0093b834b417cb9ee05828e97b282e73"
++SRC_URI[sha256sum] = "0de98e9e5be43269dd41efb16126ab0d5ba941ca4acae024329712851c0c0324"
  
- inherit pypi setuptools3
+ PYPI_PACKAGE = "PyChromecast"
  
 -- 
 2.34.1
