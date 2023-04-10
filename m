@@ -2,59 +2,58 @@ Return-Path: <Martin.Jansa@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 852C7C77B75
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8D5C8C77B74
 	for <webhook@archiver.kernel.org>; Mon, 10 Apr 2023 18:58:41 +0000 (UTC)
-Received: from mail-ej1-f47.google.com (mail-ej1-f47.google.com [209.85.218.47])
- by mx.groups.io with SMTP id smtpd.web10.54245.1681153119041711349
+Received: from mail-ej1-f43.google.com (mail-ej1-f43.google.com [209.85.218.43])
+ by mx.groups.io with SMTP id smtpd.web11.52985.1681153118418951678
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 10 Apr 2023 11:58:39 -0700
+ Mon, 10 Apr 2023 11:58:38 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20210112 header.b=KyAChDoX;
- spf=pass (domain: gmail.com, ip: 209.85.218.47, mailfrom: martin.jansa@gmail.com)
-Received: by mail-ej1-f47.google.com with SMTP id jg21so14292877ejc.2
+ dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20210112 header.b=piSTXUBY;
+ spf=pass (domain: gmail.com, ip: 209.85.218.43, mailfrom: martin.jansa@gmail.com)
+Received: by mail-ej1-f43.google.com with SMTP id dm2so14736166ejc.8
         for <openembedded-devel@lists.openembedded.org>; Mon, 10 Apr 2023 11:58:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112; t=1681153117; x=1683745117;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=5K9bnRrci2eYUece1R+dc97K2aWiIbx4QWgQnf/gi7M=;
-        b=KyAChDoXHSD8TEGEi6PJjpqp2EfPhsmh0Pv8X5mnIZQiX1mstIAaN8QKEsqAzpFNEK
-         irKGP6JSLjsb4HKiFj9dvQgoRLf2PHqQt4qjEO2hRhun/vBryrts0+PFzdV9G8qn/G1B
-         4r69gTyhP+NqsFe64DA54M8lFXAOMOFDW3Lcrx6GsGBbaAYorDjp+BK6Hv4BdZ6Th6xS
-         z7l16lbdo4Rv4Ni/fThzLa6zCJh5foSk2ayuOfkLxTciV7V0kOXk2ZivXUoyIXL5LoUE
-         2oc6gCTYzoU4TxorkmXoo3OTEgd2irDPNpKgH6TlW2k6btX3ioJ5zrO9g/gcKdcTN16s
-         cAcg==
+        bh=0cRCCgTpTXPe3v71O3gFnsQ9wZmzaBgDgCIQiAAKm6Q=;
+        b=piSTXUBYW1bafRoBHfeNRS+A1KZl8WEU+ctvRbJTJwdP0klyDnQKowGoiDfHs2YSEp
+         J08ddjEdNALekFtfqmX13Ul4pQgU/m14Oe48JyGLquHDiQJH0bH9hLrG9qj14h4KykFp
+         PDFzrS4fYkeuqCf6Xs3H7dc408EX3sDSn6vzkutOWyauUz3OfRDEk/uM4xcAtMIXUQGF
+         Ym7oSqAMq9RKvxeM8lnHzy0If7Li+phjaRqdBQ2fquQT1OKA/DWePmK141pO8NrCpa0F
+         6lnuS9GaG3lQf4HU0p6IgzjrrMk5/RV4f0dvwnG5iw27qnkRdecYfeVIaFXpLpFYBjl8
+         jPPg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112; t=1681153117; x=1683745117;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=5K9bnRrci2eYUece1R+dc97K2aWiIbx4QWgQnf/gi7M=;
-        b=DZ5j4c0az89VftfwjozOkwRL6kEDKGvny1elZkQZYVj30coRoaviY6Mqx7GKd8hHEt
-         syBdWgRWXLkpGF4kDgEF7rYFWxwHtNd7u6mYrVqtmg1NYfQgwxOc26+3Ue0NBNYkF9za
-         vxvrXov/KUbsk6ZU/yy+1Z2V3bo5QdxruyRRKG2md/9UXt3YnYmGn20R9FO6osxPHWr2
-         nG0cIkPGdSL3Ad2/x8K0DAjx079A3V1D+rewbhni1z40eaGcVdribUD/ypYVU0rBU+Qw
-         lcg33sa0iZ23BIoR6OIp/U9uiDSc0CJ+fAFc+ematkMYku9WAsRjehTAkW6PQg+dPbC8
-         GOzg==
-X-Gm-Message-State: AAQBX9fMdbqdRZzenF3DDxu25ZZKsGiU8N4gRvZSkXTg9+d1vyM0Fa5f
-	wOn2qJxbOl03Ouc2cX272KVvHnBheQ8=
-X-Google-Smtp-Source: AKy350aoGKAM85HB5wvNDyG7FjcEs1VZtV1BX2Rgl0Zeck9tnf1X7rN9aDH5fBNLR7tc2E6hDHsdSg==
-X-Received: by 2002:a17:906:3a16:b0:925:5eb8:92fd with SMTP id z22-20020a1709063a1600b009255eb892fdmr8378667eje.14.1681153117588;
-        Mon, 10 Apr 2023 11:58:37 -0700 (PDT)
+        bh=0cRCCgTpTXPe3v71O3gFnsQ9wZmzaBgDgCIQiAAKm6Q=;
+        b=wggF1R6RSKqjsqNgKomHWjEh4z6WwcYYLRtp6xeuzZmQsVAhiyNMLSj/5nWdz/CjBp
+         bcKdwHxZuJK2R2gTEg0D0zXOXzaGG/uAsITotEYG/MK1sim1q1z95XVPIkYHd/QqHy8L
+         nzgepsXzx5r1DFirvuaR1YA9ML+IxNbwEelJV4frOmIM25VEUEccouTMtKAvOuQyuvKl
+         UDtFOicTjluWX5+ejqEYAk9LROrHfs71q5Uqcr7aZOh2s2IMPGlIgDBxg6JMOSCI/zH+
+         UOTqlS8U3xMULDgHz71zXG8ST2ngdgtXCFNs+yMMyRPDCJVHXVIPgjP7RASQTM14TAkW
+         Izgw==
+X-Gm-Message-State: AAQBX9dS7JaKRtH+kEeKkYzKivZ/04xT/IOyvTESTioQQbn40D9s3wgG
+	1KEwp62ly/qf4Yg9lP0AX17ZQcxdmwU=
+X-Google-Smtp-Source: AKy350aVXru4T0zq51rnpfnCkFynWwBXA93EaTGWvaTHjON2xTreXAmaxVszMFiuMwbfH7ouWsEITw==
+X-Received: by 2002:a17:906:3958:b0:94a:4ec9:cf27 with SMTP id g24-20020a170906395800b0094a4ec9cf27mr5235640eje.20.1681153116751;
+        Mon, 10 Apr 2023 11:58:36 -0700 (PDT)
 Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
-        by smtp.gmail.com with ESMTPSA id g23-20020a1709067c5700b00947c0df0fc4sm5393504ejp.19.2023.04.10.11.58.37
+        by smtp.gmail.com with ESMTPSA id xh8-20020a170906da8800b0094809142160sm5288321ejb.55.2023.04.10.11.58.36
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 10 Apr 2023 11:58:37 -0700 (PDT)
+        Mon, 10 Apr 2023 11:58:36 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Martin Jansa <martin.jansa@gmail.com>,
-	Martin Jansa <Martin.Jansa@gmail.com>,
+Cc: Wang Mingyu <wangmy@fujitsu.com>,
 	Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][kirkstone][PATCH 3/9] restinio: fix S variable in multilib builds
-Date: Mon, 10 Apr 2023 20:58:13 +0200
-Message-Id: <20230410185819.2416704-3-Martin.Jansa@gmail.com>
+Subject: [meta-oe][kirkstone][PATCH 2/9] openwsman: Change download branch from master to main.
+Date: Mon, 10 Apr 2023 20:58:12 +0200
+Message-Id: <20230410185819.2416704-2-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.40.0
 In-Reply-To: <20230410185819.2416704-1-Martin.Jansa@gmail.com>
 References: <20230410185819.2416704-1-Martin.Jansa@gmail.com>
@@ -64,37 +63,29 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 10 Apr 2023 18:58:41 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102045
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102044
 
-From: Martin Jansa <martin.jansa@gmail.com>
+From: Wang Mingyu <wangmy@fujitsu.com>
 
-* do_populate_lic as well as do_configure fails in multilib builds, because S points to empty:
-  lib32-restinio/0.6.13-r0/lib32-restinio-0.6.13/dev
-
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../recipes-connectivity/restinio/restinio_0.6.13.bb          | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ meta-oe/recipes-extended/openwsman/openwsman_2.6.11.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-networking/recipes-connectivity/restinio/restinio_0.6.13.bb b/meta-networking/recipes-connectivity/restinio/restinio_0.6.13.bb
-index e715135dc3..03eff43dd2 100644
---- a/meta-networking/recipes-connectivity/restinio/restinio_0.6.13.bb
-+++ b/meta-networking/recipes-connectivity/restinio/restinio_0.6.13.bb
-@@ -9,11 +9,11 @@ LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://../LICENSE;md5=f399b62ce0a152525d1589a5a40c0ff6"
- DEPENDS = "asio fmt http-parser"
+diff --git a/meta-oe/recipes-extended/openwsman/openwsman_2.6.11.bb b/meta-oe/recipes-extended/openwsman/openwsman_2.6.11.bb
+index af0a3c2bd2..6801020ef9 100644
+--- a/meta-oe/recipes-extended/openwsman/openwsman_2.6.11.bb
++++ b/meta-oe/recipes-extended/openwsman/openwsman_2.6.11.bb
+@@ -17,7 +17,7 @@ REQUIRED_DISTRO_FEATURES = "pam"
  
--SRC_URI = "https://github.com/Stiffstream/restinio/releases/download/v.${PV}/restinio-${PV}.tar.bz2"
-+SRC_URI = "https://github.com/Stiffstream/restinio/releases/download/v.${PV}/${BP}.tar.bz2"
- SRC_URI[md5sum] = "37a4310e98912030a74bdd4ed789f33c"
- SRC_URI[sha256sum] = "b35d696e6fafd4563ca708fcecf9d0cf6705c846d417b5000f5252e0188848e7"
+ SRCREV = "d8eba6cb6682b59d84ca1da67a523520b879ade6"
  
--S = "${WORKDIR}/${PN}-${PV}/dev"
-+S = "${WORKDIR}/${BP}/dev"
- 
- inherit cmake
- 
+-SRC_URI = "git://github.com/Openwsman/openwsman.git;branch=master;protocol=https \
++SRC_URI = "git://github.com/Openwsman/openwsman.git;branch=main;protocol=https \
+            file://libssl-is-required-if-eventint-supported.patch \
+            file://openwsmand.service \
+            file://0001-lock.c-Define-PTHREAD_MUTEX_RECURSIVE_NP-if-undefine.patch \
 -- 
 2.40.0
 
