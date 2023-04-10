@@ -1,117 +1,128 @@
-Return-Path: <wangmy@fujitsu.com>
+Return-Path: <kai.kang@eng.windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AB288C77B61
-	for <webhook@archiver.kernel.org>; Mon, 10 Apr 2023 08:33:58 +0000 (UTC)
-Received: from mail3.bemta32.messagelabs.com (mail3.bemta32.messagelabs.com [195.245.230.81])
- by mx.groups.io with SMTP id smtpd.web10.40301.1681115634398567725
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1BFD6C77B61
+	for <webhook@archiver.kernel.org>; Mon, 10 Apr 2023 13:17:40 +0000 (UTC)
+Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
+ by mx.groups.io with SMTP id smtpd.web11.43661.1681132655206001169
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 10 Apr 2023 01:33:54 -0700
+ Mon, 10 Apr 2023 06:17:35 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=My1ar1vF;
- spf=pass (domain: fujitsu.com, ip: 195.245.230.81, mailfrom: wangmy@fujitsu.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1681115632; i=@fujitsu.com;
-	bh=NKy07wsKM7OF4LV06cChD2Poog87moZz1fzBeKKZgRQ=;
-	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type;
-	b=My1ar1vFA5d4fEQqbnrOQ0wkbvoxqxoF+EwDuk6wXqJrCyShzzPTb2elCVPvUaIhg
-	 i/r1m5mmudfpicCsr8m3ZO1VgWJwuxlWyQ3Wz6DYkYa8uRro9KSg8uLODmU8YQX/0G
-	 f+8TGEQHFVcO2/q7QN10lK6BUzbxT2PzRRGxo1DvJUO6PwQJf5aIYW/SsT38JXIb1l
-	 9Ozc/S7npechy5KNRYgtUIcHAh74x4HoeYhcUJZjL9s+MCc0QF8vwyJ0nN5zuoVi8T
-	 Rn1gsOhb1SHxgUDc24KunNyu0E4J9LTnbLZLKFhQuvC4Lf51BNl+Yai/n8RZJiEEvO
-	 7gNfzJ6cGC5sQ==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrOIsWRWlGSWpSXmKPExsViZ8OxWffDSeM
-  Ug3lNrBYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8a+rbdYC2ZwVSzrbGVrYFzK2cXIxSEk8JBR
-  4v7EPmYI5wqTxJeLZ9ghnD2MEvsedbB2MXJysAlISdy4/58NxBYR0JdYOnsPM4jNLKAi8eJ3D
-  zuILSwQIHHk1yawOIuAqkTf3QdgNq+Ak8Sra99YQGwJAQWJKQ/fg8U5BZwldh3ZADZTCKhm0e
-  8njBD1ghInZz5hgZgvIXHwxQtmiF5FidmXm6HmVEg0Tj/EBGGrSVw9t4l5AqPgLCTts5C0L2B
-  kWsVoVpxaVJZapGtoqZdUlJmeUZKbmJmjl1ilm6iXWqpbnlpcomuol1herJdaXKxXXJmbnJOi
-  l5dasokRGL4pxazHdzDO6vurd4hRkoNJSZS3i8s4RYgvKT+lMiOxOCO+qDQntfgQowwHh5IEb
-  xkwIoQEi1LTUyvSMnOAsQSTluDgURLhrTgGlOYtLkjMLc5Mh0idYlSUEufVAOkTAElklObBtc
-  Hi9xKjrJQwLyMDA4MQT0FqUW5mCar8K0ZxDkYlYd5th4Gm8GTmlcBNfwW0mAloMZeLAcjikkS
-  ElFQDU9Lf+nvn2Re8XcqxY7GY27dH5Yfbf6i45caZJD2dOPFLetWeVYf3eTx5kVBqtGCpYXCp
-  Skz/pE3W7yYeD91294Ly3UrvpymxffeVWTuPVE/RW6pwauqy79KxezZxy0jV3o85L3Oel/Gs6
-  Lb2UAPlP1zbPO8I/GPT/PTqkan6r5mWP+83nv+XN0FynmhMyty+xj+9EjHrz8YW5j/QKZ11/e
-  1Mo+v2e69VqJ/tYlvlmOe4K2rmtsyAOqeA/gBZo4CXf/J1WjJmdURU5Ir6X9z4IeVLBnOTWqN
-  fy1xlpwO54X1ruEy1EkOW9mQujXmTJL2CS+vM9TyeCWWh99pX7jZ3ecl6x2zzwbzy6RVm/h9s
-  lViKMxINtZiLihMBsMXiaVoDAAA=
-X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-12.tower-585.messagelabs.com!1681115631!193094!1
-X-Originating-IP: [62.60.8.179]
-X-SYMC-ESS-Client-Auth: outbound-route-from=pass
-X-StarScan-Received: 
-X-StarScan-Version: 9.104.2; banners=-,-,-
-X-VirusChecked: Checked
-Received: (qmail 31307 invoked from network); 10 Apr 2023 08:33:52 -0000
-Received: from unknown (HELO n03ukasimr04.n03.fujitsu.local) (62.60.8.179)
-  by server-12.tower-585.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 10 Apr 2023 08:33:52 -0000
-Received: from n03ukasimr04.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTP id A860415F
-	for <openembedded-devel@lists.openembedded.org>; Mon, 10 Apr 2023 09:33:51 +0100 (BST)
-Received: from R01UKEXCASM121.r01.fujitsu.local (R01UKEXCASM121 [10.183.43.173])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTPS id 9BEA1159
-	for <openembedded-devel@lists.openembedded.org>; Mon, 10 Apr 2023 09:33:51 +0100 (BST)
-Received: from localhost.localdomain (10.167.225.33) by
- R01UKEXCASM121.r01.fujitsu.local (10.183.43.173) with Microsoft SMTP Server
- (TLS) id 15.0.1497.42; Mon, 10 Apr 2023 09:33:50 +0100
-From: <wangmy@fujitsu.com>
+ dkim=fail reason="body hash did not verify" header.i=@windriver.com header.s=pps06212021 header.b=pRY2wjnr;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=3464c2a9ec=kai.kang@windriver.com)
+Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 33ADG5ij013683
+	for <openembedded-devel@lists.openembedded.org>; Mon, 10 Apr 2023 06:17:35 -0700
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com; h=from : to :
+ subject : date : message-id : in-reply-to : references : mime-version :
+ content-type : content-transfer-encoding; s=PPS06212021;
+ bh=dzdn7LYJWTRKE3o1EXifGXX153IOq2hoS/Tfh/VYV0I=;
+ b=pRY2wjnrn4wTJ3QKXARnkg0dmdzYVSv+bg/sJ7ircJpBRckSdaj6mlTYK7lNaYEF/wle
+ bbGcRhm23oYL92svSc+uH4c0PKne4AWKzrPQrdke7o0HREnzGeDMCr2I1C6y8zSYHPV2
+ NUyyIdYSW8OexEZLL5IetcQekZ2tTM/hoONc5FuLQ4QpwLhYvRSzMLS1HPPYxBEaPZnn
+ LU5FNUzrPmPj/y9KzO0gHbPgPmCavvxu8rq768SIImHPMKhFaSWl+zDDp/Jw9kQvo3ge
+ M0B9Pi50HZmLtm3dA3PGlCr92TVqfMOtf6ykXo5wlgoyRJjh+Oh7UctWGckH8qXnVFhi Qw== 
+Received: from ala-exchng01.corp.ad.wrs.com (unknown-82-252.windriver.com [147.11.82.252])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3pu7snhm1y-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Mon, 10 Apr 2023 06:17:34 -0700
+Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.23; Mon, 10 Apr 2023 06:17:34 -0700
+Received: from pek-lpg-core3.wrs.com (128.224.153.232) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
+ 15.1.2507.23 via Frontend Transport; Mon, 10 Apr 2023 06:17:33 -0700
+From: <kai.kang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-python] [PATCH] python3-sentry-sdk: upgrade 1.18.0 -> 1.19.1
-Date: Mon, 10 Apr 2023 16:32:12 +0800
-Message-ID: <1681115532-24518-5-git-send-email-wangmy@fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
-In-Reply-To: <1681115532-24518-1-git-send-email-wangmy@fujitsu.com>
-References: <1681115532-24518-1-git-send-email-wangmy@fujitsu.com>
+Subject: [meta-xfce][PATCH 2/2] thunar: 4.18.0 -> 4.18.4
+Date: Mon, 10 Apr 2023 21:17:30 +0800
+Message-ID: <20230410131730.4445-2-kai.kang@windriver.com>
+X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20230410131730.4445-1-kai.kang@windriver.com>
+References: <20230410131730.4445-1-kai.kang@windriver.com>
 MIME-Version: 1.0
-Content-Type: text/plain
-X-Originating-IP: [10.167.225.33]
-X-ClientProxiedBy: G08CNEXCHPEKD07.g08.fujitsu.local (10.167.33.80) To
- R01UKEXCASM121.r01.fujitsu.local (10.183.43.173)
-X-Virus-Scanned: ClamAV using ClamSMTP
+Content-Type: text/plain; charset="UTF-8"
+X-Proofpoint-GUID: 6sVcTxRaN_OXZrj3Idt_fEeCmzqu0AbX
+X-Proofpoint-ORIG-GUID: 6sVcTxRaN_OXZrj3Idt_fEeCmzqu0AbX
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.254,Aquarius:18.0.942,Hydra:6.0.573,FMLib:17.11.170.22
+ definitions=2023-04-10_09,2023-04-06_03,2023-02-09_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 spamscore=0 malwarescore=0
+ suspectscore=0 mlxlogscore=696 adultscore=0 impostorscore=0
+ priorityscore=1501 mlxscore=0 lowpriorityscore=0 phishscore=0 bulkscore=0
+ clxscore=1015 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.12.0-2303200000 definitions=main-2304100112
+Content-Transfer-Encoding: quoted-printable
+X-MIME-Autoconverted: from 8bit to quoted-printable by mx0a-0064b401.pphosted.com id 33ADG5ij013683
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 10 Apr 2023 08:33:58 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102028
+ <openembedded-devel@lists.openembedded.org>; Mon, 10 Apr 2023 13:17:40 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102030
 
-From: Wang Mingyu <wangmy@fujitsu.com>
+From: Kai Kang <kai.kang@windriver.com>
 
-Changelog:
-==========
-Make auto monitoring beat update support Celery 4 and 5
-New: Celery Beat auto monitoring
-New: gRPC integration
-New: gRPC integration
-Fix: Do not trim span descriptions.
+Release notes for 4.18.4
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Bugfix and translation release on the 4.18 branch
 
-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+Bugfixes:
+- Don't open folder when mounting device (Issue #919)
+- Don't show full menu for unmounted devices (#1049)
+- Support handling URIs via desktop file (#1044)
+- Focus correct split pane on mouse click (#1039)
+- Prevent wrong undo/redo notify (#1036)
+- Support undo trash for linked paths (#1030)
+- Always ask before delete files via undo (#1027)
+- Fix use after free fault (#1031)
+- Allow symlink creation on remote locations (#875)
+- Prevent crash when closing window (#884)
+- Keep directory specific sort details (#1017)
+- Don't add extra-dot when creating links (#1019)
+
+Translation Updates:
+  Albanian, Arabic, Armenian, Armenian (Armenia), Asturian, Basque,
+  Belarusian, Bengali, Bulgarian, Catalan, Chinese (China), Chinese
+  (Hong Kong), Chinese (Taiwan), Croatian, Czech, Danish, Dutch,
+  Eastern Armenian, English (Australia), English (United Kingdom),
+  Estonian, Finnish, French, Galician, German, Greek, Hebrew,
+  Hungarian, Icelandic, Indonesian, Interlingue, Italian, Japanese,
+  Kazakh, Korean, Latvian, Malay, Norwegian Bokm=C3=A5l, Norwegian Nynors=
+k,
+  Occitan (post 1500), Persian (Iran), Polish, Portuguese, Portuguese
+  (Brazil), Romanian, Serbian, Slovak, Slovenian, Spanish, Swedish,
+  Thai, Turkish, Ukrainian, Uyghur, Vietnamese
+
+Signed-off-by: Kai Kang <kai.kang@windriver.com>
 ---
- ...ython3-sentry-sdk_1.18.0.bb => python3-sentry-sdk_1.19.1.bb} | 2 +-
+ .../recipes-xfce/thunar/{thunar_4.18.0.bb =3D> thunar_4.18.4.bb}  | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-sentry-sdk_1.18.0.bb => python3-sentry-sdk_1.19.1.bb} (86%)
+ rename meta-xfce/recipes-xfce/thunar/{thunar_4.18.0.bb =3D> thunar_4.18.=
+4.bb} (92%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-sentry-sdk_1.18.0.bb b/meta-python/recipes-devtools/python/python3-sentry-sdk_1.19.1.bb
-similarity index 86%
-rename from meta-python/recipes-devtools/python/python3-sentry-sdk_1.18.0.bb
-rename to meta-python/recipes-devtools/python/python3-sentry-sdk_1.19.1.bb
-index add255d5b..0eb29c71b 100644
---- a/meta-python/recipes-devtools/python/python3-sentry-sdk_1.18.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-sentry-sdk_1.19.1.bb
-@@ -15,7 +15,7 @@ RDEPENDS:${PN} += "\
- 	${PYTHON_PN}-datetime \
- "
- 
--SRC_URI[sha256sum] = "d07b9569a151033b462f7a7113ada94cc41ecf49daa83d35f5f852a0b9cf3b44"
-+SRC_URI[sha256sum] = "7ae78bd921981a5010ab540d6bdf3b793659a4db8cccf7f16180702d48a80d84"
- 
- PYPI_PACKAGE = "sentry-sdk"
- 
--- 
-2.34.1
+diff --git a/meta-xfce/recipes-xfce/thunar/thunar_4.18.0.bb b/meta-xfce/r=
+ecipes-xfce/thunar/thunar_4.18.4.bb
+similarity index 92%
+rename from meta-xfce/recipes-xfce/thunar/thunar_4.18.0.bb
+rename to meta-xfce/recipes-xfce/thunar/thunar_4.18.4.bb
+index 508416b03..921dba063 100644
+--- a/meta-xfce/recipes-xfce/thunar/thunar_4.18.0.bb
++++ b/meta-xfce/recipes-xfce/thunar/thunar_4.18.4.bb
+@@ -10,7 +10,7 @@ inherit xfce gobject-introspection features_check mime-=
+xdg perlnative
+ # cairo would at least needed to be built with xlib.
+ ANY_OF_DISTRO_FEATURES =3D "${GTK3DISTROFEATURES}"
+=20
+-SRC_URI[sha256sum] =3D "d1f4b080c97b9e390eff199aaaac7562fb20f031686f8d5e=
+e5207e953bfc2feb"
++SRC_URI[sha256sum] =3D "c4463ce2fb1d628adce70a828e8b4de5fa0802236894d2c4=
+0f749471619bedcc"
+=20
+ PACKAGECONFIG ??=3D "${@bb.utils.filter('DISTRO_FEATURES', 'x11', d)}"
+ PACKAGECONFIG[pcre] =3D "--enable-pcre2,--disable-pcre2,libpcre2"
+--=20
+2.17.1
 
 
