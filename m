@@ -1,267 +1,223 @@
-Return-Path: <kai.kang@eng.windriver.com>
+Return-Path: <wentao.zhang@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0234BC77B61
-	for <webhook@archiver.kernel.org>; Tue, 11 Apr 2023 02:09:38 +0000 (UTC)
-Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.web10.4271.1681178974824891038
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 36A4FC77B61
+	for <webhook@archiver.kernel.org>; Tue, 11 Apr 2023 03:00:09 +0000 (UTC)
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.web11.5139.1681182004660076325
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 10 Apr 2023 19:09:35 -0700
+ Mon, 10 Apr 2023 20:00:04 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="body hash did not verify" header.i=@windriver.com header.s=pps06212021 header.b=IvuxMtFp;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=3465c4dfd5=kai.kang@windriver.com)
-Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 33B21Vh9031354
-	for <openembedded-devel@lists.openembedded.org>; Mon, 10 Apr 2023 19:09:34 -0700
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com; h=message-id : date
- : subject : to : cc : references : from : in-reply-to : content-type :
- content-transfer-encoding : mime-version; s=PPS06212021;
- bh=DWr6eSHQmnhLghTMhYGrOlJq2dULXnfnfD3dcmbJjR8=;
- b=IvuxMtFpgGnQAzzlhN/KLAn5BFIHb5h9QF34jd+zyyhbSwwjtysiCZd8kLHl8t0qPhRs
- p1HP0uH6opZGYzPX89gRBRDjIMfDoRcvimIlJKFfcm2SIzwUPQioGTtVzfSwnkfvrRkk
- PzsKTjbRnqOZ4+zPZo9aSIkFJfB2K78g0XDySz5pOP75mac0iuZyl3mgVAnvkDbFLzbo
- xDKZ56j7+DhUf9yUqjpuT5z1GX/GutYhxu0mXbrtv3m7m/nvAjULoMpyZkdFruq+tRFK
- aZtTIdmP8C3PwBeDtojIODqMZ+Csh/kJ7k7Z24lD/qNfHXFIaz4114SfJtCJnNuK4FoT ow== 
-Received: from pps.reinject (localhost [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3pu7snj9m8-1
+ dkim=pass header.i=@windriver.com header.s=pps06212021 header.b=icqqDALz;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=3465c715be=wentao.zhang@windriver.com)
+Received: from pps.filterd (m0250811.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 33B2cETw032705
+	for <openembedded-devel@lists.openembedded.org>; Tue, 11 Apr 2023 03:00:03 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com; h=from : to :
+ subject : date : message-id : content-transfer-encoding : content-type :
+ mime-version; s=PPS06212021;
+ bh=Bv5BU3rSKewJ+p/aIIl4f9e5QpG3NarwJMgVv7ictJw=;
+ b=icqqDALzJsq+0r9w7BLHl4bdGnq/6Ttut2nnYSEJJY79SyxZFbzDmpb0EkOkL4a4JKTt
+ 75CSUMd1QzUGB37AmUvs9ICkMgSn/z4nEZ3aekkwM4+L+b+2nENi77L470it/7IOtZHQ
+ vkw/N90EtARTlibKrX234YaIzziRXUg5t2l9P68wpbWYzTwP8Q0rp6wrJ/J3EaKAHcBP
+ yR1vLShfK+zzq4nfH815VErpunXJVil7QBc3juCSEuQHmTswPqkYWTKhoQ5Lb0D1XCQU
+ 22xwbcbpztzfOTBYzy0v6RTuFHTuRtWOVo1kx8lsiUhoMOpqLsc3/4PHFIa6GxyyOlL2 Lg== 
+Received: from nam12-bn8-obe.outbound.protection.outlook.com (mail-bn8nam12lp2175.outbound.protection.outlook.com [104.47.55.175])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3ptwg3tmxw-1
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Mon, 10 Apr 2023 19:09:34 -0700
-Received: from m0250809.ppops.net (m0250809.ppops.net [127.0.0.1])
-	by pps.reinject (8.17.1.5/8.17.1.5) with ESMTP id 33B29X6J013922
-	for <openembedded-devel@lists.openembedded.org>; Mon, 10 Apr 2023 19:09:33 -0700
-Received: from nam10-mw2-obe.outbound.protection.outlook.com (mail-mw2nam10lp2101.outbound.protection.outlook.com [104.47.55.101])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3pu7snj9m7-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Mon, 10 Apr 2023 19:09:33 -0700
+	for <openembedded-devel@lists.openembedded.org>; Tue, 11 Apr 2023 03:00:03 +0000
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=fqGLtvzMH4+gIAKILMwFlSmySTtUyueHLE4lq+lqiY4xQsTR7OXBOl/wvvpwDa0ZZxZsA6+ec4lwJQK92+nL2HOQk2Ep5HBmZNwwsXtJEDQkOSiYAxq3IOWhVmnKdaobsRR93UJZC0+vNJYswaQtPoG9PC+0T+oGl4p7qvNd0nDRK3VhEYDAC+W1+46307JfDJYRjDEFJPQ4wzF4rKniq2ozVPP6nAKmnr1wxB2s/wJdoIO2JgiGwHI6qpFmTyMcpoRGqCLlaP6IpSrXv9Elg4BmzIkS7z+bHppuyXiOxikCu+zHr2RkOZhNVRjvAXaYGZIpVVIZjcV/lbRfFALCNQ==
+ b=js0Ot3B5qXHQrJJDM5Y17JOL4Ef59dHadsX/BaZxHZkniaXClFip144pLnY0s0krJlcQRskVav0Nhn9tuQ/yXJMHpLXh9kPB7ING0UGKcgFQGJVwxOfIwCnervIPjgA6Fbk+omTzIosrtUnR6I1OdJ7Cls0gfRAu7eBdS10zbeIB34P4j5Y7Cxdqqz/ftpoC3IHLnWXQiVaRE1NUbnvc0g339fV6K+Az7s5R7yMZ48DKV6Xkgj0PNsferhRWhdI1meAYOhywG3qoq66We+bBGUlIoVuwZGMEw/UiIGRdQL59tV2HjxyERSLB+zWdeC/PZ8iDVhtkrlbVCEIrsbBt+g==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=DWr6eSHQmnhLghTMhYGrOlJq2dULXnfnfD3dcmbJjR8=;
- b=mxEu5DPbG5kVdPOLWmzYOP7jqcGTDZaD6W4uGT9dk+5kT1kygrF0ZNMy7rMH1kquamPEMLvbemvPK3mWj6BQ4CPZEtK2YYqiwIegglV5SshWlhmsPkSYXZIVRCT/E0SBpLe3Kri+Ffjnc3zMAJ8ajErJ0BGaDP0ud7icZe/T3C4NRabbCGybc2j/tebT2kBph6GNhsfTZIcDGVJ9oo9WllfvHcZndQIOypbfetL37zjeZg47kBOTFkkvkoMRnfzjZ5QFhzGEdXGfkvsolN9BdY2loMr5gYXCi+FXTnIG3rVFobwe/HdiBxQB+6amPpFI4tlVT/6gtn4QA484+7lsoA==
+ bh=Bv5BU3rSKewJ+p/aIIl4f9e5QpG3NarwJMgVv7ictJw=;
+ b=fZr0P/OwFQE7/8RH/F57pK38zV3hYZcQ/Y2+6gSvbh1rSXCgTNY9Q7uxoUI5kZkiXqherywuUELhJ7/Js2PiUtGGwEQ2lG/jHwnEkUQ1W/26/u1FjYl2Zh3VC0/EO1C1eH0No2wmRmmYOxj5odD/+fE+aLnFv/GqfGjcOgVOzzpVBhDN92XpQb8AzpuEMqREYlaztfJVxgajAuxQkGiHm3pEvI7DoB4xTSCG/WwfJHhKh33qwt3T5h930KplTe2pWiz5I9Rd41Td8cRRqFSSASrGi37hMC0j7BaKDpq1Jk2dCU49QxPt3XNEtxLsYG7Rf2z4VawfCUeMcKPzsluCLw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
-Received: from DS7PR11MB6064.namprd11.prod.outlook.com (2603:10b6:8:77::14) by
- IA0PR11MB7332.namprd11.prod.outlook.com (2603:10b6:208:434::5) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.6254.35; Tue, 11 Apr 2023 02:09:28 +0000
-Received: from DS7PR11MB6064.namprd11.prod.outlook.com
- ([fe80::b701:6f31:1d4:98c4]) by DS7PR11MB6064.namprd11.prod.outlook.com
- ([fe80::b701:6f31:1d4:98c4%3]) with mapi id 15.20.6277.036; Tue, 11 Apr 2023
- 02:09:28 +0000
-Message-ID: <1d7d9bfb-e65b-712f-29ee-fe61d6b4f80e@windriver.com>
-Date: Tue, 11 Apr 2023 10:09:18 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.4.2
-Subject: Re: [oe] [meta-xfce][PATCH 4/4] xfce4-screenshooter: 1.9.10 -> 1.10.3
-Content-Language: en-US
-To: Khem Raj <raj.khem@gmail.com>
-Cc: Kai Kang <kai.kang@eng.windriver.com>,
-        openembedded-devel@lists.openembedded.org
-References: <20230407091722.5576-1-kai.kang@windriver.com>
- <20230407091722.5576-4-kai.kang@windriver.com>
- <CAMKF1sqBB86gAtOkPZ=8WBPxup8Y46TzMc_LKJ0GC3rih9_jag@mail.gmail.com>
- <1aaac718-c8a9-dca7-ddc7-5a3a83f66def@windriver.com>
- <CAMKF1sre7ZvBPRaWCkhUo2gziUAT+5z8PPyPSRQnSYMc1LVMqQ@mail.gmail.com>
-From: Kai <kai.kang@windriver.com>
-In-Reply-To: <CAMKF1sre7ZvBPRaWCkhUo2gziUAT+5z8PPyPSRQnSYMc1LVMqQ@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-X-ClientProxiedBy: BYAPR03CA0027.namprd03.prod.outlook.com
- (2603:10b6:a02:a8::40) To DS7PR11MB6064.namprd11.prod.outlook.com
- (2603:10b6:8:77::14)
+Received: from SA2PR11MB4938.namprd11.prod.outlook.com (2603:10b6:806:fb::14)
+ by CY8PR11MB7170.namprd11.prod.outlook.com (2603:10b6:930:91::18) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6277.36; Tue, 11 Apr
+ 2023 03:00:01 +0000
+Received: from SA2PR11MB4938.namprd11.prod.outlook.com
+ ([fe80::9ad:892d:ae85:59bc]) by SA2PR11MB4938.namprd11.prod.outlook.com
+ ([fe80::9ad:892d:ae85:59bc%5]) with mapi id 15.20.6277.034; Tue, 11 Apr 2023
+ 03:00:01 +0000
+From: Wentao Zhang <wentao.zhang@windriver.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-oe][PATCH] nss: fix failed test of nss.
+Date: Tue, 11 Apr 2023 10:59:39 +0800
+Message-Id: <20230411025939.823368-1-wentao.zhang@windriver.com>
+X-Mailer: git-send-email 2.25.1
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: TYCPR01CA0170.jpnprd01.prod.outlook.com
+ (2603:1096:400:2b2::10) To SA2PR11MB4938.namprd11.prod.outlook.com
+ (2603:10b6:806:fb::14)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DS7PR11MB6064:EE_|IA0PR11MB7332:EE_
-X-MS-Office365-Filtering-Correlation-Id: c7704d6f-3acb-49a8-02b3-08db3a31c7e3
+X-MS-TrafficTypeDiagnostic: SA2PR11MB4938:EE_|CY8PR11MB7170:EE_
+X-MS-Office365-Filtering-Correlation-Id: 3a71886d-6778-4e87-0bfb-08db3a38d7d7
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	S4Tr8MYPidFqEINHdAs/8euQBFx0ZarFKAiK0KDb9dntdd8X9fZwkhGnyxSZaPaWWGn02fgDyvhNBg7CU61KpC3vIt2u00StTYZFnKw8foNEflGpl8gNE579Mpwac2YuCK8NJbXkqzUeOAnw7a9U/zoUC65Kw2U9ltB0FlrqNofkqKzdojxua6masN0yiXWffZkG+m3zTdNeZ/8d8WGFXqIFddnbBFsaqRuDLIXkeTvYbbH3XDG1CI87RfuLOXPwL7wxkcpeQM7AhHRRhkYJx2hIN9Q/hGL/AtbklWWqUTISJTK8xgmfv77Pamc9+2udFIyW3io5d4ES3bWalEhfy+VnQGX+eknoWiXhEkJVL1BzHQbyLHo35Tgo99RkPObDzuPyBgHNjhzO3o5eI7aNBPUc/fgRgDvxOVOzsFPOuv8592fOvfIH9N1XpFtYkqDqvn1nm2eBgWURk2wHCA/p4qvVICAoWp6WBA57arW1fOIr/Gvalq1Bwqi/uUvWqCy8EyDfGi8GAMBOwXUvu6IxOYti/S+3nj/dpKFrcJZ+AQL9alCE5LeTpTADnlWMD7CNSaGaXoppmPiUumeDQvrsbTlK+NXHcHlwX7sDu7ebGiJjj9f0tg08oUpT0TlAVZKR+3RQLH4n59jgD85d8oevO4hHNrubabQE0S0CN2pyfh0=
+	Yt88yhQERaOdx/VeE03j/R0xiN/c/N5pPqy8yuc0j9u2xF9gtp8vER5Br3PFa5YuotTuIsZREHV4WnCNLV7ACZVNwEiXQfnZInjoib3Zltl4yLOf2P62ejOQk3qT/UqbzCqJwpOHrg6tZkpg/Yp+8etNYvZRcM8KyxeKAkKsGtMMgcXp+klCJ3D6F0P2fs+d0Pi8fmzDEwITzxOfIe+gvBIO81gEimEOdmXsElMlcP5lLRn0yOsA0pB2cfe7G/eeXmxKb0cRMzrnEfdMQILt5f8TFvcSkMiJihCftMeDyQ9qylPkcCD38+zqCyfBHjhYoNPqcw1ft2f0RtpSgvTU0NyClJnXhxwrUqvnzDfeDXyWKEISO42fZBARbZZkdkDQ54VUpBPPzCIwhYtvCbBVBMVej5R1raaxD9WkjZ2g54yd4WUOwxT5biTFgQ/HAoGKyW//VDWDAfY6kZA2QLTqrTtlGucjb3DzzC23DENV8SSBUtVsg1/j1+ja9Amjja7M7p2al5r4Roe2zoknwJe8Y9BQM9j7s54hbCtemK0+qXSWe8n3jZ8/ia0s2ELgROEdLOKY3EDJstk6YRraHv//PbR1D8dm3fZlkaqaJZkatqk=
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DS7PR11MB6064.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230028)(4636009)(366004)(39850400004)(136003)(346002)(396003)(376002)(451199021)(5660300002)(36756003)(86362001)(83380400001)(6506007)(31696002)(186003)(6512007)(2616005)(6486002)(26005)(966005)(53546011)(38100700002)(6666004)(8936002)(41300700001)(66946007)(66476007)(316002)(8676002)(66556008)(4326008)(478600001)(6916009)(31686004)(66899021)(2906002)(43740500002)(45980500001);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:SA2PR11MB4938.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230028)(4636009)(346002)(396003)(376002)(366004)(39850400004)(136003)(451199021)(478600001)(52116002)(1076003)(6512007)(316002)(26005)(44832011)(6506007)(186003)(966005)(6666004)(6486002)(2906002)(5660300002)(66946007)(41300700001)(8676002)(6916009)(66476007)(8936002)(66556008)(38100700002)(38350700002)(86362001)(83380400001)(36756003)(2616005);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?utf-8?B?S0FTNnVnclNuV0xCUmROakJEU2pzZVhua2NJUkVQanZROFVEVUpjMTVRUDJL?=
- =?utf-8?B?QWhSSUhhK0w5ZkFWN2hDMHhkVzJIeFhpMUU2U2hWL3pwSHNUOTU5TU9iTFZO?=
- =?utf-8?B?SmhDL1Q3NENIUXFkUUw0UUhJaTlWWnhUNiswYnQ2L1F3S3BsZjlmNExvNUJU?=
- =?utf-8?B?Q3lPWWxXWTF0MmVTU1FxbkxKazdnOG5kYTRoOG1RS2NlK25hUER6d29NTHRT?=
- =?utf-8?B?ZW9ZeWtpWHVVVzc2TGhyVVJtTUcydjVVdzJqYzZRMFozN1ZTT1F4U2ZZditU?=
- =?utf-8?B?N1dQR3R2YUZOVDR1bVZjQ3piWkRvcENsaUF1cVpZeUxzcnNwNzNPc1FkUk1O?=
- =?utf-8?B?TWlFWFNkNVJCR2ZmaGpsNVVrc1BqYkowT1ZVbWJpUnRYMnRRdmNCU0lOcTFv?=
- =?utf-8?B?SVNFSVQrK2FPMll3RFdPc1FJMHZiTklFSmEwMjBMVUJvWUNrb2YwWFlMQ1B2?=
- =?utf-8?B?NDlXTWJYY0RMUCt2YnZsanZESityZmN1eHM0dnF2UnFLWFdEMzQ0OTZOVW92?=
- =?utf-8?B?OHo0cnQ0NXNES2pLZE53LzVCL2dxOGgvd1RsNWVEVDRFUWNZaDFJMlFOZ1FC?=
- =?utf-8?B?cllMNzVaU3pFSlZNRmcwemJENmh2MS9EV1cxaThOdlJhTkk1aVkrbjRoYmFh?=
- =?utf-8?B?S0swdHFnYUJNR2V6b1VpRW5GaTI2c2dWYXFnbTJxUjRVdDlTcXlDVVA2QTFS?=
- =?utf-8?B?MVNuN2R2WmFOMFlJamY3cHZLSk0xdlhQeVB1V3A1MlRNb3hFQ3ZiSjM3WDJw?=
- =?utf-8?B?TjZpMW4rWldMaTNZdjVrVHY5R2Z4TXd3NXlHOWFMczBDekUxV0p6L1JMYy96?=
- =?utf-8?B?V0FzYkRnc3pEeXdJbHlMQWxwQUlEZmQ2Y2xYYmJZcjd0NEFnV1VVVXFDYi82?=
- =?utf-8?B?cURFZlAzWUNqYmVabW50S2lPTkRzcUNrQWpQNG9tL202enRhOFpvRVdCb2Mx?=
- =?utf-8?B?RVhHK2oxckpHT0s1ZUREV3JzRHE3VTFPbjBvVkNVVUJUUHFLUVJSMnFhR2Fw?=
- =?utf-8?B?UVBvbFY2VktrNTYzeVNKd1B4Q0NJWVkyK09EQlQ0dzJmTUJ1VGxVVnJDMitT?=
- =?utf-8?B?Nk50QnNQU1lnKzBUU21RbUJxRkJLUkxNWEhnd25pQUpORDJvejR5RE9uTTBo?=
- =?utf-8?B?M3NnRUlHMUZiUzhaQW5yakVBSTE0S1lOMWN5b2s4NHVOSTRhNEJ0UE9UUE9l?=
- =?utf-8?B?czFkRklSWnZHS1g3Q3pmMlRBVmF1K0xkTitSbWZNelRzVG5RWUQ1dU9EcGkz?=
- =?utf-8?B?VCtoNHRUZWRaMGZucVZEZXAwbW1md2tKUHNjYzh6VDlOb0J2Q2tXZ2N4TnBh?=
- =?utf-8?B?RWl6akI2R1MvWkM1dEJLaDFkazRUVEdKWUgwVmtmbXQrQmNIR0wzU2dnUEdK?=
- =?utf-8?B?MFRBNEZ0TjdCaW9OaXJPSjAyenVkNSsvclVDNUZwUmxnS2N0VkFMSW5qeWl3?=
- =?utf-8?B?U21PU2hZb1IrUWJzb3ZjdnBTOGpMN3Z5VlMwRytYTmt4MGljS2JTNkVweU5i?=
- =?utf-8?B?VHVYRnI2YStKWWZ4WVIrcXBzZ0s1SEpLS3phOXdpT0RCbVh3NzhFcHlzR0o1?=
- =?utf-8?B?cXlhenA2cW1qSUVyRXdFZnduNWx2eW9PNzF1cmE5U1VGR0J5c0JZTllhbG4v?=
- =?utf-8?B?QXNCUTBDUkNiNkx2Q2xhcjk4ak5pVjlIaHJybHBmQUhwQU5CM3AyMkM3S0xU?=
- =?utf-8?B?UERhcXBJNDhjMkY4N05PT1V5aC9sQUZ3M21YWTFrTS8vaXlxcStncW5VWEM5?=
- =?utf-8?B?NXlRK0xaTlpZOGxZaGVXMTdmS1cwdUhsT2VKa3BsZHZueWJGTzJhV0dqcXFK?=
- =?utf-8?B?M05RUGxDZFZ2cnBWVHRaQmRZOWROU3VDUXB6aVRoNS9nRnd5RHlyVTlyZjhz?=
- =?utf-8?B?TStONU55dDdjLzhidkloYVRsek9FMWhEQk9qcTE5aDBEcU1YdXZDbm1OQXBT?=
- =?utf-8?B?dEYzZnNlSTNVRUNhaXcvYm1HMFdSYmZjK2tHWHJyUXoyaU9wd09GdHBrVGoz?=
- =?utf-8?B?VFhsVWlMRU5zdmo3TXpHVHpoVktZZVR6R2F6YnJSSml0VXB5TmMzN2RMcUll?=
- =?utf-8?B?WFNRNUxwWUVFZmtSK2k1eGQ0OWowVVhlUFJtR2VHVHBDWjdKSWY2M0dqTVk3?=
- =?utf-8?Q?P/wsHIqp2L0BlcMbS0aO4SIwf?=
+	=?us-ascii?Q?gxNKeQuhM72gJwE/Wb4HmTkGdXuTHoXnR7KvR7myl+lzSHbOEeMUgMvRFIXr?=
+ =?us-ascii?Q?RQPpBbR52Www2uEAJdPsqfnc//vBYJnInvGTGa4CRUC53jZGFhCoOGddw33J?=
+ =?us-ascii?Q?ZGmmesDjWJfwmmA5iDFfQ2+pDDJ6QrLX+L9quWJmFiiv6c6HnvAyLucNJ2wG?=
+ =?us-ascii?Q?UFQfSlEU+c8NZJLqlHf1BkwxNjLZKOp+U42F3hA+ilkALxe4Kr8Jf8bHnBjV?=
+ =?us-ascii?Q?o+8Tmks3GUoh+VXYFO9wluGj72k7iqA+u0z9spxDb2/rFHFE70HcR1vyvK6S?=
+ =?us-ascii?Q?TFL5DTAmOb+FyaEWwlcEkjvl9OrtatE89SyHWmTdL4eob6Qelj6VvuEypYuE?=
+ =?us-ascii?Q?2BAKdfxFmlATv2sv1G9xUIkjIUzMoeRO6M6NopZ5WJhQNfQ4n6Liaa58ROfz?=
+ =?us-ascii?Q?MGuz8KxLSSv2wCqw9hAXbYjXWfBYRiKTvN0uiHGybCCKC0STvdqLFOcWd+Tc?=
+ =?us-ascii?Q?sozYbPOg42OS9EgKQQX9Or1uNMxGNsxo2GH57M0Oj/N5i7gi/6h1FbsfYec3?=
+ =?us-ascii?Q?sQKGwfK8YiHB3nIcV56vwp+fTzoxfBLM46Sz6Gbqbxp3g/32qUts5yGCEQoI?=
+ =?us-ascii?Q?Dtzw8CyE/NI4g7k3XpLJzG8Y6wN75akjSVa1oevOZsaIdas19FG+g4SWWjGI?=
+ =?us-ascii?Q?6F7WIwrZ8440HknAvWyQ4PWyCiAlPCP1w0vmLA0wDY9Zd94M+/qW4NjQZQrD?=
+ =?us-ascii?Q?VVVFnEw4Ddl6Tuda5l7LPAn9QFrTcPHmzOLEFQZfyGkhQo1sfIBXmuAJAPS0?=
+ =?us-ascii?Q?s+MqKEZb8JzgbbuhdOAgNFOoe83y9R8B3moNs2m+ZHn5uBzE/HjBKbLfXVfH?=
+ =?us-ascii?Q?TMUBDOeL1yqQGdeWu7KTnlciJ/invnmjisa+m4eGeoswMnmxaJRTI9oB/Agh?=
+ =?us-ascii?Q?0Z1gFbGZGLqXHoCJ/ICxngKNoXdmaaGBRf2SoFAny4NDL0Ql/0FDZ+a4JLHH?=
+ =?us-ascii?Q?4ufIKildSUdbH8+lEO1BKEvVvVtHEQiJ8w9pl2UVkaoR8mYsXPWX5nUdj+1r?=
+ =?us-ascii?Q?NkIsxy109/tc3SPiUlNbg//BHl8M4nGfHbFpEWN1nIUOpSOl3oALNrq4Rr+t?=
+ =?us-ascii?Q?3RVz7ky3wBscZZfA94ghUVFeR8gDlxRhAO8Sq3PKSqBliRyp20Z0DRYmyYLI?=
+ =?us-ascii?Q?HbZ0JAMzDOUPf/zEFSq9qQzN8rzK3znM9iHpi0mJqDmiohRsohn76kao1wSt?=
+ =?us-ascii?Q?xMilO2r4wPJZp5OhnAh6E7/CzZMABQZDg0SYht+09caMniw6RNF/oRNPodDc?=
+ =?us-ascii?Q?jWArmODmcfdUQaRO31rM8AZyXY+AMgaFewff2Tpo8vcW9f/OUmgEYQeQtY+B?=
+ =?us-ascii?Q?Fs5nI6NxXv8ZqbJWxT9l7+KjSMNUtEOrN/XAzyBYcbPe6ClQxIfGZQBKd4bd?=
+ =?us-ascii?Q?5oiCvZsGyHK2rcINst0erlmO0h7fzUpH/kPlgH6ycEJ1m2f03/LqTpOuQMar?=
+ =?us-ascii?Q?MNzH8Cwqy0b2pwU3unnj70+xIAskBFNepcEk5CAGGEy7AyL6MBE+5DyBD1vS?=
+ =?us-ascii?Q?DWdCK8H0JXKHi+iRL4iZ+xtDJDtK0bDEmhQtYbhM/tFqbwrDqcVPCXjEY0Z+?=
+ =?us-ascii?Q?H0ikayEKqUtpDPfQaXm4QePxLSpmBFm/Ez3NTpcA2eqamtjeXz5Bo7VZxYWH?=
+ =?us-ascii?Q?zA=3D=3D?=
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: c7704d6f-3acb-49a8-02b3-08db3a31c7e3
-X-MS-Exchange-CrossTenant-AuthSource: DS7PR11MB6064.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 3a71886d-6778-4e87-0bfb-08db3a38d7d7
+X-MS-Exchange-CrossTenant-AuthSource: SA2PR11MB4938.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Apr 2023 02:09:28.6177
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Apr 2023 03:00:01.8539
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: A/MoZojpbxRupTpXdtvs1/1ngI78uyVIXAJ/KCKP6BzO4DQRODpf5y62q/IXKavE+QzzLZhW3v0KEtl086Xo2Q==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA0PR11MB7332
-X-Proofpoint-GUID: H1AZfz2Py7YbWNOqRxYeO1plrTeZyato
-X-Proofpoint-ORIG-GUID: _B3zxS0iVGqZko0mnWZVptmlEqNn_Vn9
+X-MS-Exchange-CrossTenant-UserPrincipalName: nuJunmusPemfTvgnHM7ipuC4Fhp+6GJ9Z3us2EW/5c5VAKEspiab2YYEQYIgnWm7l96dC89DGTbKv9GRlAS9Y2fGFGIFu6CJJbdr9vqzQYQ=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY8PR11MB7170
+X-Proofpoint-GUID: 5zNAnp-em6nqsXttlDs9iMa4pcvm1DqS
+X-Proofpoint-ORIG-GUID: 5zNAnp-em6nqsXttlDs9iMa4pcvm1DqS
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.254,Aquarius:18.0.942,Hydra:6.0.573,FMLib:17.11.170.22
  definitions=2023-04-10_18,2023-04-06_03,2023-02-09_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 spamscore=0 malwarescore=0
- suspectscore=0 mlxlogscore=962 adultscore=0 impostorscore=0
- priorityscore=1501 mlxscore=0 lowpriorityscore=0 phishscore=0 bulkscore=0
- clxscore=1015 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2303200000 definitions=main-2304110018
-Content-Transfer-Encoding: quoted-printable
-X-MIME-Autoconverted: from 8bit to quoted-printable by mx0a-0064b401.pphosted.com id 33B21Vh9031354
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 phishscore=0 mlxlogscore=999
+ suspectscore=0 clxscore=1015 impostorscore=0 bulkscore=0 malwarescore=0
+ mlxscore=0 spamscore=0 priorityscore=1501 adultscore=0 lowpriorityscore=0
+ classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2303200000
+ definitions=main-2304110026
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 11 Apr 2023 02:09:38 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102052
+ <openembedded-devel@lists.openembedded.org>; Tue, 11 Apr 2023 03:00:09 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102053
 
-On 4/10/23 14:36, Khem Raj wrote:
-> On Sun, Apr 9, 2023 at 10:36=E2=80=AFPM Kai <kai.kang@windriver.com> wr=
-ote:
->> On 4/7/23 23:41, Khem Raj wrote:
->>> On Fri, Apr 7, 2023 at 2:17=E2=80=AFAM Kai Kang <kai.kang@eng.windriv=
-er.com> wrote:
->>>> From: Kai Kang <kai.kang@windriver.com>
->>>>
->>>> Update xfce4-screenshooter from 1.9.10 to 1.10.3
->>>>
->>>> * update HOMEPAGE that goodies.xfce.org has been decommissioning
->>>> * content of license file has been updated
->>> Its vague and does not state what has changed. Can you add some more
->>> info towards what has changed ?
->> Hi Khem,
->>
->> According to
->>
->> https://gitlab.xfce.org/apps/xfce4-screenshooter/-/issues/70
->>
->> The current license for this component is out of date. Please see
->> xfce4-taskmanager Issue #49 for additional details & discussion.
->>
->> Briefly:
->>
->> Comparing the 17 years old file with the new one, we have:
->>
->>    - some whitespace changes
->>    - a new FSF address
->>    - some extra commas
->>
->> All references to GNU Library General Public License have been replace=
-d
->> with GNU Lesser General Public License
->>
-> This info would have been good in the commit message.
+The expiration date of the "PayPalEE.cert" test certificate in the nss package
+is Jan 12 2022 and causing a test failure.
 
-OK. I'll add such info next time since it seems you have merged it.
+Signed-off-by: Wentao Zhang <wentao.zhang@windriver.com>
+---
+ ...validation-date-for-PayPalEE-test-ce.patch | 64 +++++++++++++++++++
+ meta-oe/recipes-support/nss/nss_3.74.bb       |  1 +
+ 2 files changed, 65 insertions(+)
+ create mode 100644 meta-oe/recipes-support/nss/nss/0001-Bug-1750624-Pin-validation-date-for-PayPalEE-test-ce.patch
 
-Regards,
-Kai
-
->
->> Regards,
->> Kai
->>
->>>> Signed-off-by: Kai Kang <kai.kang@windriver.com>
->>>> ---
->>>>    ...creenshooter_1.9.10.bb =3D> xfce4-screenshooter_1.10.3.bb} | 6=
- +++---
->>>>    1 file changed, 3 insertions(+), 3 deletions(-)
->>>>    rename meta-xfce/recipes-apps/xfce4-screenshooter/{xfce4-screensh=
-ooter_1.9.10.bb =3D> xfce4-screenshooter_1.10.3.bb} (66%)
->>>>
->>>> diff --git a/meta-xfce/recipes-apps/xfce4-screenshooter/xfce4-screen=
-shooter_1.9.10.bb b/meta-xfce/recipes-apps/xfce4-screenshooter/xfce4-scre=
-enshooter_1.10.3.bb
->>>> similarity index 66%
->>>> rename from meta-xfce/recipes-apps/xfce4-screenshooter/xfce4-screens=
-hooter_1.9.10.bb
->>>> rename to meta-xfce/recipes-apps/xfce4-screenshooter/xfce4-screensho=
-oter_1.10.3.bb
->>>> index bb44ec782..10427dab3 100644
->>>> --- a/meta-xfce/recipes-apps/xfce4-screenshooter/xfce4-screenshooter=
-_1.9.10.bb
->>>> +++ b/meta-xfce/recipes-apps/xfce4-screenshooter/xfce4-screenshooter=
-_1.10.3.bb
->>>> @@ -1,13 +1,13 @@
->>>>    SUMMARY =3D "Application to take screenshots"
->>>> -HOMEPAGE =3D "http://goodies.xfce.org/projects/applications/xfce4-s=
-creenshooter"
->>>> +HOMEPAGE =3D "https://docs.xfce.org/apps/xfce4-screenshooter/start"
->>>>    SECTION =3D "x11/application"
->>>>    LICENSE =3D "GPL-2.0-only"
->>>> -LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dd791728a073bc009b4ffaf00=
-b7599855"
->>>> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Db234ee4d69f5fce4486a80fd=
-af4a4263"
->>>>    DEPENDS =3D "xfce4-panel libxfce4util libxfce4ui gdk-pixbuf gtk+3=
- glib-2.0 libsoup-2.4 exo libxfixes xext virtual/libx11 libxml-parser-per=
-l-native"
->>>>
->>>>    inherit xfce-app perlnative
->>>>
->>>> -SRC_URI[sha256sum] =3D "04b4178527f5b98cfe76ae427e95581067edf262a53=
-0639d332f6db9a68292d7"
->>>> +SRC_URI[sha256sum] =3D "a454159847becfeca274a5b58c0e5817d4a260a2934=
-5a37bbc3b4ff46f8f3818"
->>>>
->>>>    do_compile:prepend() {
->>>>        mkdir -p lib
->>>> --
->>>> 2.17.1
->>>>
->>>>
->>>> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->>>> Links: You receive all messages sent to this group.
->>>> View/Reply Online (#101981): https://lists.openembedded.org/g/openem=
-bedded-devel/message/101981
->>>> Mute This Topic: https://lists.openembedded.org/mt/98121607/1997914
->>>> Group Owner: openembedded-devel+owner@lists.openembedded.org
->>>> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/uns=
-ub [raj.khem@gmail.com]
->>>> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->>>>
->> --
->> Kai Kang
->> Wind River Linux
->>
-
---=20
-Kai Kang
-Wind River Linux
+diff --git a/meta-oe/recipes-support/nss/nss/0001-Bug-1750624-Pin-validation-date-for-PayPalEE-test-ce.patch b/meta-oe/recipes-support/nss/nss/0001-Bug-1750624-Pin-validation-date-for-PayPalEE-test-ce.patch
+new file mode 100644
+index 000000000..d905bf10e
+--- /dev/null
++++ b/meta-oe/recipes-support/nss/nss/0001-Bug-1750624-Pin-validation-date-for-PayPalEE-test-ce.patch
+@@ -0,0 +1,64 @@
++From 1109c1b8259ad840ac1688d533f76ca268c67b6b Mon Sep 17 00:00:00 2001
++From: "John M. Schanck" <jschanck@mozilla.com>
++Date: Sat, 5 Feb 2022 11:12:43 +0000
++Subject: [PATCH] Bug 1750624 - Pin validation date for PayPalEE test cert.
++ r=nss-reviewers,bbeurdouche,rrelyea
++
++Differential Revision: https://phabricator.services.mozilla.com/D136289
++
++--HG--
++extra : moz-landing-system : lando
++
++Upstream-Status: Backport
++
++---
++ tests/chains/chains.sh               | 6 +++++-
++ tests/chains/scenarios/realcerts.cfg | 1 +
++ 2 files changed, 6 insertions(+), 1 deletion(-)
++
++diff --git a/tests/chains/chains.sh b/tests/chains/chains.sh
++index 32c7ef54c..e13ae52f9 100755
++--- a/nss/tests/chains/chains.sh
+++++ b/nss/tests/chains/chains.sh
++@@ -917,7 +917,7 @@ verify_cert()
++     done
++ 
++     VFY_OPTS_TNAME="${DB_OPT} ${ENGINE} ${TRUST_AND_DB_OPT} ${REV_OPTS} ${FETCH_OPT} ${USAGE_OPT} ${POLICY_OPT} ${TRUST_OPT}"
++-    VFY_OPTS_ALL="${DB_OPT} ${ENGINE} -vv ${TRUST_AND_DB_OPT} ${REV_OPTS} ${FETCH_OPT} ${USAGE_OPT} ${POLICY_OPT} ${VFY_CERTS} ${TRUST_OPT}"
+++    VFY_OPTS_ALL="${DB_OPT} ${ENGINE} -vv ${VFY_TIME_OPT} ${TRUST_AND_DB_OPT} ${REV_OPTS} ${FETCH_OPT} ${USAGE_OPT} ${POLICY_OPT} ${VFY_CERTS} ${TRUST_OPT}"
++ 
++     TESTNAME="Verifying certificate(s) ${VFY_LIST} with flags ${VFY_OPTS_TNAME}"
++     echo "${SCRIPTNAME}: ${TESTNAME}"
++@@ -1118,6 +1118,7 @@ parse_config()
++             ;;
++         "verify")
++             VERIFY="${VALUE}"
+++            VFY_TIME_OPT=
++             TRUST=
++             TRUST_AND_DB=
++             POLICY=
++@@ -1126,6 +1127,9 @@ parse_config()
++             REV_OPTS=
++             USAGE_OPT=
++             ;;
+++        "at_time")
+++            VFY_TIME_OPT="-b ${VALUE}"
+++            ;;
++         "cert")
++             VERIFY="${VERIFY} ${VALUE}"
++             ;;
++diff --git a/tests/chains/scenarios/realcerts.cfg b/tests/chains/scenarios/realcerts.cfg
++index 305443fc3..f8b0fc452 100644
++--- a/nss/tests/chains/scenarios/realcerts.cfg
+++++ b/nss/tests/chains/scenarios/realcerts.cfg
++@@ -22,6 +22,7 @@ verify TestUser51:x
++ 
++ verify PayPalEE:x
++   policy OID.2.16.840.1.114412.2.1 
+++  at_time 2201010000Z
++   result pass
++ 
++ verify BrAirWaysBadSig:x
++-- 
++2.25.1
++
+diff --git a/meta-oe/recipes-support/nss/nss_3.74.bb b/meta-oe/recipes-support/nss/nss_3.74.bb
+index 4a9482fca..a7048f0fe 100644
+--- a/meta-oe/recipes-support/nss/nss_3.74.bb
++++ b/meta-oe/recipes-support/nss/nss_3.74.bb
+@@ -32,6 +32,7 @@ SRC_URI = "http://ftp.mozilla.org/pub/security/nss/releases/${VERSION_DIR}/src/$
+            file://system-pkcs11.txt \
+            file://nss-fix-nsinstall-build.patch \
+            file://0001-freebl-add-a-configure-option-to-disable-ARM-HW-cryp.patch \
++           file://0001-Bug-1750624-Pin-validation-date-for-PayPalEE-test-ce.patch \
+            "
+ SRC_URI[sha256sum] = "88928811f9f40f87d42e2eaccdf6e454562e51486067f2ddbe90aa47ea6cd056"
+ 
+-- 
+2.25.1
 
 
