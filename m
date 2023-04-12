@@ -2,66 +2,66 @@ Return-Path: <Martin.Jansa@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 544F9C7619A
-	for <webhook@archiver.kernel.org>; Wed, 12 Apr 2023 05:14:26 +0000 (UTC)
-Received: from mail-ej1-f51.google.com (mail-ej1-f51.google.com [209.85.218.51])
- by mx.groups.io with SMTP id smtpd.web10.35867.1681276459136950566
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 46597C77B6E
+	for <webhook@archiver.kernel.org>; Wed, 12 Apr 2023 05:14:36 +0000 (UTC)
+Received: from mail-ej1-f54.google.com (mail-ej1-f54.google.com [209.85.218.54])
+ by mx.groups.io with SMTP id smtpd.web10.35871.1681276470746640517
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 11 Apr 2023 22:14:19 -0700
+ Tue, 11 Apr 2023 22:14:31 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=AZCgmvfo;
- spf=pass (domain: gmail.com, ip: 209.85.218.51, mailfrom: martin.jansa@gmail.com)
-Received: by mail-ej1-f51.google.com with SMTP id q23so16328938ejz.3
-        for <openembedded-devel@lists.openembedded.org>; Tue, 11 Apr 2023 22:14:18 -0700 (PDT)
+ dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=agcvLqOZ;
+ spf=pass (domain: gmail.com, ip: 209.85.218.54, mailfrom: martin.jansa@gmail.com)
+Received: by mail-ej1-f54.google.com with SMTP id ud9so25600295ejc.7
+        for <openembedded-devel@lists.openembedded.org>; Tue, 11 Apr 2023 22:14:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1681276457; x=1683868457;
+        d=gmail.com; s=20221208; t=1681276469; x=1683868469;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
         bh=RlLwTxKo+Xgu/pIc1B8jguLMmuPehyQO3J/lI1zEOs4=;
-        b=AZCgmvfodBHjwVW1ga331FWeKqjRwOrUAZCVJgMzN2dmkLFwBYyHBCHeNBja0dhNO8
-         px10Rfdy2Xk6NDw1KTMyNvDzR0cUiWpD3T5DOuU3vgM+mdqEehR8tUpXRzLmrQwaewTK
-         3gaST2ub7NZrD18qyijo6DNY2Vu6/kNWDeUI+d4l5p0tQ3fv5s4tbEJujvoiHf8zDbyo
-         AtW6twV2NGXQuHIcuvqf7B1TV1OHXsCwSHXsykQqA6zR+rDRinAV3trmSBLnYV/AUGHg
-         0nHTCMavf1tqZeoaNrUJ2QWDeZe817uqut313N1QwxCukyEDjDvKmoOAfJvnxW3lx3Nl
-         ZCLw==
+        b=agcvLqOZJmuNf6ma8RxbjhSmWKtmb+jIGDAoyptqhEw6k0NT2fyS5aw+ux1Y1QVm81
+         JYQCrnzFAoLbmwX9Ps1Y/DZGRAQNrcHIkncOB8GbJRf6Zd+iiGEvORVxw9R0JUHBmTjd
+         dfKlMoVZCKQXJl078w4liQzVoqThXaKByZlzSg04FwDApy8HwYoNHfUkxjjGDHpdIuSh
+         gOM4FuRkEzXk0vMTAcKNH1ijHA10RR/vJoygR6W/lWAw7IV1MstWhpwzshKAdDajgpwy
+         JYNXi4VoAqTezPb9UdS6yxhgS+N+6J4s7xWFUbsIUfxdCmrdgJ4qe3PLHaue5yFbvCMo
+         ndrQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112; t=1681276457; x=1683868457;
+        d=1e100.net; s=20210112; t=1681276469; x=1683868469;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
         bh=RlLwTxKo+Xgu/pIc1B8jguLMmuPehyQO3J/lI1zEOs4=;
-        b=6J8mbybaoyP3rZfhApjNopabjyflCAZ0FOroQOmzbOaA090kM0mNSuAPDg9KOYJN9d
-         PCnYWiR10aHmpmx9QEF6auQpDxjz4rbWjbzBK1yJF55rpmidGlHM3t+XDqpHVcKjaA2A
-         7gOVqAyHveUS7DdXPX81J+4+OumQ6YbB7TOL0SUPsMZ0F2nTYTQrltCRMCixMvEYYAGt
-         78HdCu7ueL3RHcyLziKN+Qa+9Ht6FOJwOtVlLiHVYEnE+BE+skI41QvDzWzGElNg4xx7
-         BDznG07Yn9CZ4ogMCr9qFCEqOeyG5gRP0NmgRNP6ODMR95xE54qL4uxANdgYvnR8+Uc7
-         3x6g==
-X-Gm-Message-State: AAQBX9f56fjSPxd/mOb9dCsWbUWEMOzxOfqyd5ZoKesbIYWdjvJRV/KH
-	VSLyJY2BF8vQO27hyKPtwd7Mi27W6XI=
-X-Google-Smtp-Source: AKy350bEjRbDbK3M3zkjtydhhxtftg196JUHVYzkXg5wClOQjBB/fVrefUkUcCfEf7MkBOk1TuTd7g==
-X-Received: by 2002:a17:906:3da2:b0:8b1:820a:7b60 with SMTP id y2-20020a1709063da200b008b1820a7b60mr12129057ejh.6.1681276457336;
-        Tue, 11 Apr 2023 22:14:17 -0700 (PDT)
+        b=adR/+NmESAKTvVDdYQnTV7qB33KbBKkxHm1evUMOcSkFA3l6ww6jILo87ThnIDXduQ
+         xdwfTrdZNGJXR4n+4GRYObdhojVKE24RlFqiTzvIdOSvaSjVMNAGNWZGQaSrdqFnfyN8
+         PrJIUAlDvsyk20Iz4t2uS9dvEzuWu1FBA+sz+P8uNtaDUyNanJksnuGIfUMg91vHE6aD
+         XYi+yFTDcB/0dLG3eA7AjO7b9w4jKrDTazhgWehXy1hy6THPr22p0zocvDBfkcRarMKL
+         5KKVk3k8Rw6NzWAJhE402hFPzwVcA9rr+nmPZ1/WYLbK3r78jDQlvXNocL8g9SUjEJIc
+         cr+g==
+X-Gm-Message-State: AAQBX9ea3YVC/YcQO+sHFr3XKsrg1DzvDGCeufamebOYhXEHcWJovlo3
+	l2Zc0fIUa7S9wROBhVSvat3jzVFkW8s=
+X-Google-Smtp-Source: AKy350Y/oKGSY8wCZgFlyFRnCyhi0tCSv5mua7TqPpGZh0EmjWg9I+VuKpxa+5E/s8ZR92aXJ5Y1Pw==
+X-Received: by 2002:a17:907:96a9:b0:94a:9525:66d9 with SMTP id hd41-20020a17090796a900b0094a952566d9mr1012809ejc.43.1681276469096;
+        Tue, 11 Apr 2023 22:14:29 -0700 (PDT)
 Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
-        by smtp.gmail.com with ESMTPSA id o21-20020a1709061b1500b0094a7e4dfed8sm2956731ejg.47.2023.04.11.22.14.16
+        by smtp.gmail.com with ESMTPSA id hd10-20020a170907968a00b008d606b1bbb1sm6802889ejc.9.2023.04.11.22.14.28
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 11 Apr 2023 22:14:16 -0700 (PDT)
+        Tue, 11 Apr 2023 22:14:28 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Martin Jansa <martin.jansa@gmail.com>,
 	Martin Jansa <Martin.Jansa@gmail.com>,
 	Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][langdale][PATCH] zsh: fix installed-vs-shipped with multilib
-Date: Wed, 12 Apr 2023 07:14:08 +0200
-Message-Id: <20230412051408.10469-1-Martin.Jansa@gmail.com>
+Subject: [meta-oe][kirkstone][PATCH] zsh: fix installed-vs-shipped with multilib
+Date: Wed, 12 Apr 2023 07:14:20 +0200
+Message-Id: <20230412051420.10545-1-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.40.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 12 Apr 2023 05:14:26 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102059
+ <openembedded-devel@lists.openembedded.org>; Wed, 12 Apr 2023 05:14:36 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102060
 
 From: Martin Jansa <martin.jansa@gmail.com>
 
