@@ -2,106 +2,94 @@ Return-Path: <Martin.Jansa@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 46597C77B6E
-	for <webhook@archiver.kernel.org>; Wed, 12 Apr 2023 05:14:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 75DC5C77B6E
+	for <webhook@archiver.kernel.org>; Wed, 12 Apr 2023 05:45:06 +0000 (UTC)
 Received: from mail-ej1-f54.google.com (mail-ej1-f54.google.com [209.85.218.54])
- by mx.groups.io with SMTP id smtpd.web10.35871.1681276470746640517
+ by mx.groups.io with SMTP id smtpd.web11.36195.1681278297475792457
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 11 Apr 2023 22:14:31 -0700
+ Tue, 11 Apr 2023 22:44:57 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=agcvLqOZ;
+ dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=jorZyaOF;
  spf=pass (domain: gmail.com, ip: 209.85.218.54, mailfrom: martin.jansa@gmail.com)
-Received: by mail-ej1-f54.google.com with SMTP id ud9so25600295ejc.7
-        for <openembedded-devel@lists.openembedded.org>; Tue, 11 Apr 2023 22:14:30 -0700 (PDT)
+Received: by mail-ej1-f54.google.com with SMTP id a640c23a62f3a-94a9606518cso142230366b.2
+        for <openembedded-devel@lists.openembedded.org>; Tue, 11 Apr 2023 22:44:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1681276469; x=1683868469;
+        d=gmail.com; s=20221208; t=1681278296; x=1683870296;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=RlLwTxKo+Xgu/pIc1B8jguLMmuPehyQO3J/lI1zEOs4=;
-        b=agcvLqOZJmuNf6ma8RxbjhSmWKtmb+jIGDAoyptqhEw6k0NT2fyS5aw+ux1Y1QVm81
-         JYQCrnzFAoLbmwX9Ps1Y/DZGRAQNrcHIkncOB8GbJRf6Zd+iiGEvORVxw9R0JUHBmTjd
-         dfKlMoVZCKQXJl078w4liQzVoqThXaKByZlzSg04FwDApy8HwYoNHfUkxjjGDHpdIuSh
-         gOM4FuRkEzXk0vMTAcKNH1ijHA10RR/vJoygR6W/lWAw7IV1MstWhpwzshKAdDajgpwy
-         JYNXi4VoAqTezPb9UdS6yxhgS+N+6J4s7xWFUbsIUfxdCmrdgJ4qe3PLHaue5yFbvCMo
-         ndrQ==
+        bh=TbG9qWauBw3ah20YlP08TOwf/nyBeds+ITuOxhJYndg=;
+        b=jorZyaOFtR+CZ6VL5YaWiOTDDMoORweiqQDbaWdkl6M0dYbPVU0/DDA9LLexFDAxrx
+         6xFI69S4Vnt/gUL+jsXbWY9hK9YavDQw/FBNw67KgO8ey+BV5WtO6VOTPTHkbKb2ubzJ
+         XT9F7aaHvsyAx9XjkCsPqsZdaWsMGsw7dRMUYYoKJIRnkT9Ntf/dFythJ/rmr+QiOFd6
+         mYSilh4PWok8f4lPWK3CRT+KyAuj/AaUdpqFceZKv4jGLDDrkPQ3e8Wu81BR50ahoN2B
+         plbYXknq73Vm30+rY5m44O6Zxg65xT1bVnLRZlvm18XrfbzX++8/uzV4CnnGV3SLAg5S
+         yb5g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112; t=1681276469; x=1683868469;
+        d=1e100.net; s=20210112; t=1681278296; x=1683870296;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=RlLwTxKo+Xgu/pIc1B8jguLMmuPehyQO3J/lI1zEOs4=;
-        b=adR/+NmESAKTvVDdYQnTV7qB33KbBKkxHm1evUMOcSkFA3l6ww6jILo87ThnIDXduQ
-         xdwfTrdZNGJXR4n+4GRYObdhojVKE24RlFqiTzvIdOSvaSjVMNAGNWZGQaSrdqFnfyN8
-         PrJIUAlDvsyk20Iz4t2uS9dvEzuWu1FBA+sz+P8uNtaDUyNanJksnuGIfUMg91vHE6aD
-         XYi+yFTDcB/0dLG3eA7AjO7b9w4jKrDTazhgWehXy1hy6THPr22p0zocvDBfkcRarMKL
-         5KKVk3k8Rw6NzWAJhE402hFPzwVcA9rr+nmPZ1/WYLbK3r78jDQlvXNocL8g9SUjEJIc
-         cr+g==
-X-Gm-Message-State: AAQBX9ea3YVC/YcQO+sHFr3XKsrg1DzvDGCeufamebOYhXEHcWJovlo3
-	l2Zc0fIUa7S9wROBhVSvat3jzVFkW8s=
-X-Google-Smtp-Source: AKy350Y/oKGSY8wCZgFlyFRnCyhi0tCSv5mua7TqPpGZh0EmjWg9I+VuKpxa+5E/s8ZR92aXJ5Y1Pw==
-X-Received: by 2002:a17:907:96a9:b0:94a:9525:66d9 with SMTP id hd41-20020a17090796a900b0094a952566d9mr1012809ejc.43.1681276469096;
-        Tue, 11 Apr 2023 22:14:29 -0700 (PDT)
+        bh=TbG9qWauBw3ah20YlP08TOwf/nyBeds+ITuOxhJYndg=;
+        b=Vsc/WAzaEPUUn/FQxI4BRKcP3dS3RK8itCBgMBWHLOmSB4AAm3A9uchV0pQJLuAR9u
+         sc4FojvRS82Ci9k/cweGrPxmtkHgu9Jl09s0ndwsUiCZbC5EvU/AcYRPnvRGAsV2Lt5B
+         SqwcAUoqifeQdSC+qiICvDo0Z8k5oVwZWz+rjnyMgpG1lXFvcwgu9GDsjckuYw1X3m0m
+         FQcomq6TGaCmJ3+Rtb6BXWjxpKfAwhd9kHIM0E67B0cB2fDlIAPGkskafkLgMNypeZ/H
+         A/AlfZaZ99Q03IMNQ9TZQBJashwKnx4Q0H47qY/WmqOa3tTBcd+IHiqMuBBlW1ztn/Mg
+         oX0A==
+X-Gm-Message-State: AAQBX9dKGjZaNgwOe40uhHWlMu13RpWlsE9HcHFY1Dt/cp7pNPkgjoVT
+	gvy+lYj9LiqJ/zrQXha7YGb3HDJZqSI=
+X-Google-Smtp-Source: AKy350YNvwILdJBZ35KWwhtexF6YnOIxLISH/jAIWlrPqQUQ4lL2VD82KRg2FHgf9+gr1rjAKEXBfA==
+X-Received: by 2002:a50:ed17:0:b0:504:8173:ec8c with SMTP id j23-20020a50ed17000000b005048173ec8cmr16239730eds.13.1681278295765;
+        Tue, 11 Apr 2023 22:44:55 -0700 (PDT)
 Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
-        by smtp.gmail.com with ESMTPSA id hd10-20020a170907968a00b008d606b1bbb1sm6802889ejc.9.2023.04.11.22.14.28
+        by smtp.gmail.com with ESMTPSA id b13-20020a509f0d000000b00504ecbd5ae2sm512379edf.42.2023.04.11.22.44.55
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 11 Apr 2023 22:14:28 -0700 (PDT)
+        Tue, 11 Apr 2023 22:44:55 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Martin Jansa <martin.jansa@gmail.com>,
-	Martin Jansa <Martin.Jansa@gmail.com>,
-	Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][kirkstone][PATCH] zsh: fix installed-vs-shipped with multilib
-Date: Wed, 12 Apr 2023 07:14:20 +0200
-Message-Id: <20230412051420.10545-1-Martin.Jansa@gmail.com>
+Cc: Martin Jansa <Martin.Jansa@gmail.com>
+Subject: [meta-oe][mickledore][PATCH 1/2] lirc: fix do_install with multilib
+Date: Wed, 12 Apr 2023 07:44:46 +0200
+Message-Id: <20230412054447.24461-1-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.40.0
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 12 Apr 2023 05:14:36 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102060
+ <openembedded-devel@lists.openembedded.org>; Wed, 12 Apr 2023 05:45:06 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102061
 
-From: Martin Jansa <martin.jansa@gmail.com>
-
-* fixes:
-lib32-zsh-5.8: lib32-zsh: Files/directories were installed but not shipped in any package:
-  /usr/share/lib32-zsh
-  /usr/share/lib32-zsh/5.8
-  /usr/share/lib32-zsh/site-functions
-  /usr/share/lib32-zsh/5.8/functions
-  /usr/share/lib32-zsh/5.8/functions/_selinux_users
-... 1000+ lines ...
-  /usr/share/lib32-zsh/5.8/functions/VCS_INFO_bydir_detect
-Please set FILES such that these items are packaged. Alternatively if they are unneeded, avoid installing them or delete them within do_install.
-lib32-zsh: 1116 installed and not shipped files. [installed-vs-shipped]
-
-* they will clash if someone is trying to install both zsh
-  and lib32-zsh, but it's not very likely as nobody sane
-  was building lib32-zsh with 1000+ line warning regularly
+* use ${S} instead of ${WORKDIR}/${PN}-${PV}
+  and ${BP} instead of ${PN}-${PV}
+  to fix build with multilib, where PN is lib32-lirc, but S is correctly set
+  as ${WORKDIR}/${BP} and do_install fails with:
+  mkdir: cannot create directory ‘lib32-lirc/0.10.1-r0/lib32-lirc-0.10.1/python-pkg/dist/’: No such file or directory
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-oe/recipes-shells/zsh/zsh_5.8.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ .../meta-python/recipes-connectivity/lirc/lirc_0.10.2.bb    | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/meta-oe/recipes-shells/zsh/zsh_5.8.bb b/meta-oe/recipes-shells/zsh/zsh_5.8.bb
-index b023e8d297..7602ff9f64 100644
---- a/meta-oe/recipes-shells/zsh/zsh_5.8.bb
-+++ b/meta-oe/recipes-shells/zsh/zsh_5.8.bb
-@@ -22,8 +22,8 @@ inherit autotools-brokensep gettext update-alternatives manpages
- EXTRA_OECONF = " \
-     --bindir=${base_bindir} \
-     --enable-etcdir=${sysconfdir} \
--    --enable-fndir=${datadir}/${PN}/${PV}/functions \
--    --enable-site-fndir=${datadir}/${PN}/site-functions \
-+    --enable-fndir=${datadir}/${BPN}/${PV}/functions \
-+    --enable-site-fndir=${datadir}/${BPN}/site-functions \
-     --with-term-lib='ncursesw ncurses' \
-     --with-tcsetpgrp \
-     --enable-cap \
+diff --git a/meta-oe/dynamic-layers/meta-python/recipes-connectivity/lirc/lirc_0.10.2.bb b/meta-oe/dynamic-layers/meta-python/recipes-connectivity/lirc/lirc_0.10.2.bb
+index 88e3f0486b..fcb347a2e5 100644
+--- a/meta-oe/dynamic-layers/meta-python/recipes-connectivity/lirc/lirc_0.10.2.bb
++++ b/meta-oe/dynamic-layers/meta-python/recipes-connectivity/lirc/lirc_0.10.2.bb
+@@ -51,9 +51,9 @@ do_configure:append() {
+ 
+ # Create PYTHON_TARBALL which LIRC needs for install-nodist_pkgdataDATA
+ do_install:prepend() {
+-    rm -rf ${WORKDIR}/${PN}-${PV}/python-pkg/dist/
+-    mkdir ${WORKDIR}/${PN}-${PV}/python-pkg/dist/
+-    tar --exclude='${WORKDIR}/${PN}-${PV}/python-pkg/*' -czf ${WORKDIR}/${PN}-${PV}/python-pkg/dist/${PN}-${PV}.tar.gz ${S}
++    rm -rf ${S}/python-pkg/dist/
++    mkdir ${S}/python-pkg/dist/
++    tar --exclude='${S}/python-pkg/*' -czf ${S}/python-pkg/dist/${BP}.tar.gz ${S}
+ }
+ 
+ # In code, path to python is a variable that is replaced with path to native version of it
 -- 
 2.40.0
 
