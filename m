@@ -1,180 +1,86 @@
-Return-Path: <mingli.yu@eng.windriver.com>
+Return-Path: <peron.clem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BE245C77B6E
-	for <webhook@archiver.kernel.org>; Wed, 12 Apr 2023 06:58:06 +0000 (UTC)
-Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
- by mx.groups.io with SMTP id smtpd.web10.36806.1681282676295152048
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5D62EC77B72
+	for <webhook@archiver.kernel.org>; Wed, 12 Apr 2023 12:28:48 +0000 (UTC)
+Received: from mail-qk1-f178.google.com (mail-qk1-f178.google.com [209.85.222.178])
+ by mx.groups.io with SMTP id smtpd.web10.41693.1681302518594092115
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 11 Apr 2023 23:57:56 -0700
+ Wed, 12 Apr 2023 05:28:38 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=3466d2cce5=mingli.yu@windriver.com)
-Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 33C5BITZ002992
-	for <openembedded-devel@lists.openembedded.org>; Wed, 12 Apr 2023 06:57:55 GMT
-Received: from ala-exchng02.corp.ad.wrs.com (unknown-82-254.windriver.com [147.11.82.254])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3pty8b421k-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Wed, 12 Apr 2023 06:57:55 +0000
-Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
- ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.23; Tue, 11 Apr 2023 23:57:53 -0700
-Received: from pek-lpg-core2.wrs.com (128.224.153.41) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
- 15.1.2507.23 via Frontend Transport; Tue, 11 Apr 2023 23:57:53 -0700
-From: <mingli.yu@eng.windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-oe][PATCH] php: Fix GCC 12 -Og
-Date: Wed, 12 Apr 2023 14:57:52 +0800
-Message-ID: <20230412065752.2905789-1-mingli.yu@eng.windriver.com>
-X-Mailer: git-send-email 2.25.1
+ dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=kC5yz+i2;
+ spf=pass (domain: gmail.com, ip: 209.85.222.178, mailfrom: peron.clem@gmail.com)
+Received: by mail-qk1-f178.google.com with SMTP id b15so4293617qkj.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 12 Apr 2023 05:28:38 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20221208; t=1681302517; x=1683894517;
+        h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
+         :date:message-id:reply-to;
+        bh=GpwuPOOE352SrSqiBsY/+1wVDIoZBvQu58RZsqfmkfQ=;
+        b=kC5yz+i20Ydyv46iq5KzygFigzVaJqsJmR2Qd9T3JdqE95TaZuwk6X1EMhMxgnvjdj
+         3kWwMUMg2SzdFatCJqg1nDEHi8yUs/h4F9qZPLFhDrTacT6KY7ALwRsAkBC09ufzWcex
+         ScG8cJ5QBrMcIP2jp+WOQTZ6fBb91LqGUCiXjsp4QPEG0nPsM1E6n3BJ5TuIVYQxOQVe
+         h8G6wtONIrPrBfOR76y1HB0rbCSKeTumL7CEEKPBFUf31aJEY3fzONlazp25fmh3I56e
+         Ox9lTUyqo3yKYDX7Blt8xTUH/HbLEjbw1BFPmoAnETVk13oz2RuiVaujVTOjsRxG9JRf
+         SXJw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112; t=1681302517; x=1683894517;
+        h=cc:to:subject:message-id:date:from:mime-version:x-gm-message-state
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=GpwuPOOE352SrSqiBsY/+1wVDIoZBvQu58RZsqfmkfQ=;
+        b=zTTsfglxKXHv4OVgRexmV1s+DaGnuvhXhrtN7BJ6c84JTOPiJr7ICRsI6dDL5eNdEq
+         hy36zhR9WrKkC0l54Hz0ev3Ys+x8Q9DbulYmmQs+zWEMHsPfUzTPqtxi80FPTwBwhY7h
+         j4P5OY1moPvzpSYo30mFp1g3+IPBa6qJ4SjDeTqvwxqKQpHB1NhbfTY6QZ2Kj2GDGuxB
+         Ih1kbaTsnYaINfHpGRA5KPDLKTXSQ+M9bbsxnwz9qVoA5RbaY1zgec4NuxlH5XR25TZ7
+         ToSJ8LCBxac7LKJPj3qZO6XuDgbmkCLQ7paI+Gn7qxMWzk328Vnlacc7l55d6mo8PFmT
+         FM5Q==
+X-Gm-Message-State: AAQBX9ebSqy3DN7+RmLtInsitWbaNPEGqwBRpYBvWa8uVrRm3eYGtf1H
+	JK89kt6qbgcTATauqHtDIvdEYurM8xf5BdK3UOM=
+X-Google-Smtp-Source: AKy350a/z2g2eI5IbEbnjr/hMHU3S0oz5qdZj3Z7gLGWohVnjLoBjd1Vz8hQva1YzbrL+mq7pJiIU3cKmiOLUe+KKtk=
+X-Received: by 2002:a05:620a:4306:b0:746:b87c:e2f1 with SMTP id
+ u6-20020a05620a430600b00746b87ce2f1mr827435qko.6.1681302517618; Wed, 12 Apr
+ 2023 05:28:37 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Proofpoint-ORIG-GUID: AA5R8_FnSJCD_rbo5N5H26TJTCiVBLKO
-X-Proofpoint-GUID: AA5R8_FnSJCD_rbo5N5H26TJTCiVBLKO
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.254,Aquarius:18.0.942,Hydra:6.0.573,FMLib:17.11.170.22
- definitions=2023-04-12_02,2023-04-11_02,2023-02-09_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 mlxscore=0 priorityscore=1501
- bulkscore=0 phishscore=0 spamscore=0 adultscore=0 impostorscore=0
- lowpriorityscore=0 suspectscore=0 clxscore=1011 mlxlogscore=999
- malwarescore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2303200000 definitions=main-2304120063
+From: =?UTF-8?B?Q2zDqW1lbnQgUMOpcm9u?= <peron.clem@gmail.com>
+Date: Wed, 12 Apr 2023 14:28:26 +0200
+Message-ID: <CAJiuCcfqsWps9Z+M8t5L6O1FQ=yTGtoWRGe_2RtDo2vM_o5KtA@mail.gmail.com>
+Subject: Build nodejs application using vite
+To: Stefan Herbrechtsmeier <stefan.herbrechtsmeier-oss@weidmueller.com>, 
+	Richard Purdie <richard.purdie@linuxfoundation.org>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 12 Apr 2023 06:58:06 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102063
+ <openembedded-devel@lists.openembedded.org>; Wed, 12 Apr 2023 12:28:48 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102064
 
-From: Mingli Yu <mingli.yu@windriver.com>
+Hi Stefan, Richard,
 
-Change whether to inline XXH3_hashLong_withSecret to a config option
-to fix GCC 12 -Og.
+I have moved to kirkstone release and I'm now using the npmsw fetcher
+instead of manually using npm install in my recipe.
 
-Ref: https://github.com/Cyan4973/xxHash/commit/ace22bddc7a366a5dd8a71e8b8247694530684ec
+But I have an issue, It seems that the npmsw fetcher doesn't add
+node_modules in the PATH.
 
-Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
----
- ...o-inline-XXH3_hashLong_withSecret-to.patch | 93 +++++++++++++++++++
- meta-oe/recipes-devtools/php/php_8.2.4.bb     |  1 +
- 2 files changed, 94 insertions(+)
- create mode 100644 meta-oe/recipes-devtools/php/php/0001-Change-whether-to-inline-XXH3_hashLong_withSecret-to.patch
+So my recipe is now failing saying that "vite is not found"
 
-diff --git a/meta-oe/recipes-devtools/php/php/0001-Change-whether-to-inline-XXH3_hashLong_withSecret-to.patch b/meta-oe/recipes-devtools/php/php/0001-Change-whether-to-inline-XXH3_hashLong_withSecret-to.patch
-new file mode 100644
-index 000000000..5b8c76209
---- /dev/null
-+++ b/meta-oe/recipes-devtools/php/php/0001-Change-whether-to-inline-XXH3_hashLong_withSecret-to.patch
-@@ -0,0 +1,93 @@
-+From 1eeb59366d6140a799f6051fb9f57d988b81fd5b Mon Sep 17 00:00:00 2001
-+From: easyaspi314 <easyaspi314@users.noreply.github.com>
-+Date: Wed, 12 Apr 2023 13:33:07 +0800
-+Subject: [PATCH] Change whether to inline XXH3_hashLong_withSecret to a config
-+ option
-+
-+Change whether to inline XXH3_hashLong_withSecret to a config option to fix
-+GCC 12 -Og.
-+
-+Upstream-Status: Submitted [https://github.com/php/php-src/pull/11062]
-+
-+Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
-+---
-+ ext/hash/xxhash/xxhash.h | 35 +++++++++++++++++++++++++++++++++--
-+ 1 file changed, 33 insertions(+), 2 deletions(-)
-+
-+diff --git a/ext/hash/xxhash/xxhash.h b/ext/hash/xxhash/xxhash.h
-+index b5bd2864..8e816c05 100644
-+--- a/ext/hash/xxhash/xxhash.h
-++++ b/ext/hash/xxhash/xxhash.h
-+@@ -1375,6 +1375,23 @@ XXH3_128bits_reset_withSecretandSeed(XXH3_state_t* statePtr,
-+  */
-+ #  define XXH_NO_INLINE_HINTS 0
-+ 
-++/*!
-++ * @def XXH3_INLINE_SECRET
-++ * @brief Determines whether to inline the XXH3 withSecret code.
-++ *
-++ * When the secret size is known, the compiler can improve the performance
-++ * of XXH3_64bits_withSecret() and XXH3_128bits_withSecret().
-++ *
-++ * However, if the secret size is not known, it doesn't have any benefit. This
-++ * happens when xxHash is compiled into a global symbol. Therefore, if
-++ * @ref XXH_INLINE_ALL is *not* defined, this will be defined to 0.
-++ *
-++ * Additionally, this defaults to 0 on GCC 12+, which has an issue with function pointers
-++ * that are *sometimes* force inline on -Og, and it is impossible to automatically
-++ * detect this optimization level.
-++ */
-++#  define XXH3_INLINE_SECRET 0
-++
-+ /*!
-+  * @def XXH32_ENDJMP
-+  * @brief Whether to use a jump for `XXH32_finalize`.
-+@@ -1439,6 +1456,15 @@ XXH3_128bits_reset_withSecretandSeed(XXH3_state_t* statePtr,
-+ #  endif
-+ #endif
-+ 
-++#ifndef XXH3_INLINE_SECRET
-++#  if (defined(__GNUC__) && !defined(__clang__) && __GNUC__ >= 12) \
-++     || !defined(XXH_INLINE_ALL)
-++#    define XXH3_INLINE_SECRET 0
-++#  else
-++#    define XXH3_INLINE_SECRET 1
-++#  endif
-++#endif
-++
-+ #ifndef XXH32_ENDJMP
-+ /* generally preferable for performance */
-+ #  define XXH32_ENDJMP 0
-+@@ -1515,6 +1541,11 @@ static void* XXH_memcpy(void* dest, const void* src, size_t size)
-+ #  define XXH_NO_INLINE static
-+ #endif
-+ 
-++#if XXH3_INLINE_SECRET
-++#  define XXH3_WITH_SECRET_INLINE XXH_FORCE_INLINE
-++#else
-++#  define XXH3_WITH_SECRET_INLINE XXH_NO_INLINE
-++#endif
-+ 
-+ 
-+ /* *************************************
-+@@ -4465,7 +4496,7 @@ XXH3_hashLong_64b_internal(const void* XXH_RESTRICT input, size_t len,
-+  * so that the compiler can properly optimize the vectorized loop.
-+  * This makes a big performance difference for "medium" keys (<1 KB) when using AVX instruction set.
-+  */
-+-XXH_FORCE_INLINE XXH64_hash_t
-++XXH3_WITH_SECRET_INLINE XXH64_hash_t
-+ XXH3_hashLong_64b_withSecret(const void* XXH_RESTRICT input, size_t len,
-+                              XXH64_hash_t seed64, const xxh_u8* XXH_RESTRICT secret, size_t secretLen)
-+ {
-+@@ -5263,7 +5294,7 @@ XXH3_hashLong_128b_default(const void* XXH_RESTRICT input, size_t len,
-+  * It's important for performance to pass @secretLen (when it's static)
-+  * to the compiler, so that it can properly optimize the vectorized loop.
-+  */
-+-XXH_FORCE_INLINE XXH128_hash_t
-++XXH3_WITH_SECRET_INLINE XXH128_hash_t
-+ XXH3_hashLong_128b_withSecret(const void* XXH_RESTRICT input, size_t len,
-+                               XXH64_hash_t seed64,
-+                               const void* XXH_RESTRICT secret, size_t secretLen)
-+-- 
-+2.25.1
-+
-diff --git a/meta-oe/recipes-devtools/php/php_8.2.4.bb b/meta-oe/recipes-devtools/php/php_8.2.4.bb
-index aec222b58..d5954d976 100644
---- a/meta-oe/recipes-devtools/php/php_8.2.4.bb
-+++ b/meta-oe/recipes-devtools/php/php_8.2.4.bb
-@@ -19,6 +19,7 @@ SRC_URI = "http://php.net/distributions/php-${PV}.tar.bz2 \
-            file://0006-ext-phar-Makefile.frag-Fix-phar-packaging.patch \
-            file://0009-php-don-t-use-broken-wrapper-for-mkdir.patch \
-            file://0010-iconv-fix-detection.patch \
-+           file://0001-Change-whether-to-inline-XXH3_hashLong_withSecret-to.patch \
-           "
- 
- SRC_URI:append:class-target = " \
--- 
-2.25.1
+vite is present in node_modules/vite/bin/vite.js
 
+My recipe looks like this (not mine but 99% identical):
+https://github.com/linux-automation/meta-lxatac/blob/langdale/meta-lxatac-software/recipes-webadmin/tacd-webinterface/tacd-webinterface_git.bb
+
+And the package.json configure "build": "vite build"
+
+Changing the
+"npm run build"
+to
+"node node_modules/vite/bin/vite.js build"
+
+Fix my issue, but is it expected that node_modules aren't present in
+the PATH? Or am I doing something wrong?
+
+Thanks for your help,
+Regards
 
