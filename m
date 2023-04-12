@@ -1,101 +1,180 @@
-Return-Path: <Martin.Jansa@gmail.com>
+Return-Path: <mingli.yu@eng.windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 770BBC77B73
-	for <webhook@archiver.kernel.org>; Wed, 12 Apr 2023 05:45:06 +0000 (UTC)
-Received: from mail-ej1-f53.google.com (mail-ej1-f53.google.com [209.85.218.53])
- by mx.groups.io with SMTP id smtpd.web10.36113.1681278298215908347
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BE245C77B6E
+	for <webhook@archiver.kernel.org>; Wed, 12 Apr 2023 06:58:06 +0000 (UTC)
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.web10.36806.1681282676295152048
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 11 Apr 2023 22:44:58 -0700
+ Tue, 11 Apr 2023 23:57:56 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=l33Q0+he;
- spf=pass (domain: gmail.com, ip: 209.85.218.53, mailfrom: martin.jansa@gmail.com)
-Received: by mail-ej1-f53.google.com with SMTP id j17so16270857ejs.5
-        for <openembedded-devel@lists.openembedded.org>; Tue, 11 Apr 2023 22:44:57 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1681278296; x=1683870296;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=Pm16gROop0d/Sq+r+P26cLkl8psiYgSSWhpPYksFpy0=;
-        b=l33Q0+hezkBuEAcmU62oOB+abFT/ca4mJIlLSNWzWHx61NQasyId4YNjFG2tQaoGSy
-         DkoVSDSPYeAu+2shxVztJi1iZDZisq1uuhtO5u1/TTCIlihtPd2OWG664fwhY+qFHX3w
-         mL5kZST9b4G7H2IPqhxuCY9JJh394JEYTuwKb7am6Ify+I/k0QBRm/S7ASv0ygp5N5vB
-         iFo6CwZZiZNivmk6PzUYk43yAmHVpd0j8/a5RoMLa6M/sFHxgtFJuokaAS0LyUvoh0M8
-         BkhAp25CFLG2CELIEfH8S0PfxrDoWq1FsgGW6WjPdtMcai479f5hL0helI07jNo5JaPo
-         YFzQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112; t=1681278296; x=1683870296;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=Pm16gROop0d/Sq+r+P26cLkl8psiYgSSWhpPYksFpy0=;
-        b=Qi/aR0D+KfE7iylL1xOePy629zREDldog/d2tRmj/wfGksJVFrhVqV0I2sD9Ckd6OQ
-         Vq4mi8IxmzIE6bIdwZ/S5SEWtfEZrio1/ZOHfUCJzxMjq3CdiYSo7GZCl5Zyka2VGcRS
-         QIGyCdAEmfv0HDKaL6WbKdDbaKI9aED8vql0iyCD8E3MR2nth9sW8h1OaOwaNU+XjvsS
-         G6m9HXRfKV58zlLb0f+ezo5h7wkyH7ItXj7svI9ycreIL+TrItfBS5nuFD80d5NE4G9D
-         YCcVQtRsJ7BG1TgiwKQGfnNZkoypY+/ZRxPHqLKJq6faes8KwBWt7UHKCgzrIEuEUxqK
-         q4og==
-X-Gm-Message-State: AAQBX9fRP1fzkscqwS+8HzA4L6Sn9QYdCXLEsFEtLQkWZFP0JSCvR4Oy
-	McJyBR9LtPCkMrp9h0bId6y93pnOIpk=
-X-Google-Smtp-Source: AKy350bY6HYpJQui9xJbBqaTpnuGDYRafm9Gs98AbQ8r8IHYnUubt+gdNCZJ6sZnosBQhmQCCFOxCw==
-X-Received: by 2002:a17:906:454a:b0:94a:5602:5d6a with SMTP id s10-20020a170906454a00b0094a56025d6amr4903332ejq.9.1681278296451;
-        Tue, 11 Apr 2023 22:44:56 -0700 (PDT)
-Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
-        by smtp.gmail.com with ESMTPSA id gq10-20020a170906e24a00b0094a962da55dsm2564928ejb.195.2023.04.11.22.44.56
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 11 Apr 2023 22:44:56 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Martin Jansa <Martin.Jansa@gmail.com>
-Subject: [meta-oe][mickledore][PATCH 2/2] dleyna-{server,renderer}: fix dev-so QA issue with multilib
-Date: Wed, 12 Apr 2023 07:44:47 +0200
-Message-Id: <20230412054447.24461-2-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.40.0
-In-Reply-To: <20230412054447.24461-1-Martin.Jansa@gmail.com>
-References: <20230412054447.24461-1-Martin.Jansa@gmail.com>
+ dkim=missing; spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=3466d2cce5=mingli.yu@windriver.com)
+Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 33C5BITZ002992
+	for <openembedded-devel@lists.openembedded.org>; Wed, 12 Apr 2023 06:57:55 GMT
+Received: from ala-exchng02.corp.ad.wrs.com (unknown-82-254.windriver.com [147.11.82.254])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3pty8b421k-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Wed, 12 Apr 2023 06:57:55 +0000
+Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
+ ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.23; Tue, 11 Apr 2023 23:57:53 -0700
+Received: from pek-lpg-core2.wrs.com (128.224.153.41) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
+ 15.1.2507.23 via Frontend Transport; Tue, 11 Apr 2023 23:57:53 -0700
+From: <mingli.yu@eng.windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [meta-oe][PATCH] php: Fix GCC 12 -Og
+Date: Wed, 12 Apr 2023 14:57:52 +0800
+Message-ID: <20230412065752.2905789-1-mingli.yu@eng.windriver.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Proofpoint-ORIG-GUID: AA5R8_FnSJCD_rbo5N5H26TJTCiVBLKO
+X-Proofpoint-GUID: AA5R8_FnSJCD_rbo5N5H26TJTCiVBLKO
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.254,Aquarius:18.0.942,Hydra:6.0.573,FMLib:17.11.170.22
+ definitions=2023-04-12_02,2023-04-11_02,2023-02-09_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 mlxscore=0 priorityscore=1501
+ bulkscore=0 phishscore=0 spamscore=0 adultscore=0 impostorscore=0
+ lowpriorityscore=0 suspectscore=0 clxscore=1011 mlxlogscore=999
+ malwarescore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.12.0-2303200000 definitions=main-2304120063
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 12 Apr 2023 05:45:06 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102062
+ <openembedded-devel@lists.openembedded.org>; Wed, 12 Apr 2023 06:58:06 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102063
 
-* the libdir is arch specific, but the subdirectory is always BPN
-* fixes:
-  lib32-dleyna-server-0.6.0+gitAUTOINC+eb895ae827: non -dev/-dbg/nativesdk- package lib32-dleyna-server contains symlink .so '/usr/lib/dleyna-server/libdleyna-server-1.0.so' [dev-so]
-  lib32-dleyna-renderer-0.6.0: non -dev/-dbg/nativesdk- package lib32-dleyna-renderer contains symlink .so '/usr/lib/dleyna-renderer/libdleyna-renderer-1.0.so' [dev-so]
+From: Mingli Yu <mingli.yu@windriver.com>
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+Change whether to inline XXH3_hashLong_withSecret to a config option
+to fix GCC 12 -Og.
+
+Ref: https://github.com/Cyan4973/xxHash/commit/ace22bddc7a366a5dd8a71e8b8247694530684ec
+
+Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
 ---
- .../recipes-multimedia/dleyna/dleyna-renderer_0.6.0.bb          | 2 +-
- .../recipes-multimedia/dleyna/dleyna-server_0.6.0.bb            | 2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
+ ...o-inline-XXH3_hashLong_withSecret-to.patch | 93 +++++++++++++++++++
+ meta-oe/recipes-devtools/php/php_8.2.4.bb     |  1 +
+ 2 files changed, 94 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/php/php/0001-Change-whether-to-inline-XXH3_hashLong_withSecret-to.patch
 
-diff --git a/meta-multimedia/recipes-multimedia/dleyna/dleyna-renderer_0.6.0.bb b/meta-multimedia/recipes-multimedia/dleyna/dleyna-renderer_0.6.0.bb
-index 3e43c0d2a7..e7f918333a 100644
---- a/meta-multimedia/recipes-multimedia/dleyna/dleyna-renderer_0.6.0.bb
-+++ b/meta-multimedia/recipes-multimedia/dleyna/dleyna-renderer_0.6.0.bb
-@@ -22,4 +22,4 @@ inherit autotools pkgconfig
- CFLAGS += " -I${S}"
+diff --git a/meta-oe/recipes-devtools/php/php/0001-Change-whether-to-inline-XXH3_hashLong_withSecret-to.patch b/meta-oe/recipes-devtools/php/php/0001-Change-whether-to-inline-XXH3_hashLong_withSecret-to.patch
+new file mode 100644
+index 000000000..5b8c76209
+--- /dev/null
++++ b/meta-oe/recipes-devtools/php/php/0001-Change-whether-to-inline-XXH3_hashLong_withSecret-to.patch
+@@ -0,0 +1,93 @@
++From 1eeb59366d6140a799f6051fb9f57d988b81fd5b Mon Sep 17 00:00:00 2001
++From: easyaspi314 <easyaspi314@users.noreply.github.com>
++Date: Wed, 12 Apr 2023 13:33:07 +0800
++Subject: [PATCH] Change whether to inline XXH3_hashLong_withSecret to a config
++ option
++
++Change whether to inline XXH3_hashLong_withSecret to a config option to fix
++GCC 12 -Og.
++
++Upstream-Status: Submitted [https://github.com/php/php-src/pull/11062]
++
++Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
++---
++ ext/hash/xxhash/xxhash.h | 35 +++++++++++++++++++++++++++++++++--
++ 1 file changed, 33 insertions(+), 2 deletions(-)
++
++diff --git a/ext/hash/xxhash/xxhash.h b/ext/hash/xxhash/xxhash.h
++index b5bd2864..8e816c05 100644
++--- a/ext/hash/xxhash/xxhash.h
+++++ b/ext/hash/xxhash/xxhash.h
++@@ -1375,6 +1375,23 @@ XXH3_128bits_reset_withSecretandSeed(XXH3_state_t* statePtr,
++  */
++ #  define XXH_NO_INLINE_HINTS 0
++ 
+++/*!
+++ * @def XXH3_INLINE_SECRET
+++ * @brief Determines whether to inline the XXH3 withSecret code.
+++ *
+++ * When the secret size is known, the compiler can improve the performance
+++ * of XXH3_64bits_withSecret() and XXH3_128bits_withSecret().
+++ *
+++ * However, if the secret size is not known, it doesn't have any benefit. This
+++ * happens when xxHash is compiled into a global symbol. Therefore, if
+++ * @ref XXH_INLINE_ALL is *not* defined, this will be defined to 0.
+++ *
+++ * Additionally, this defaults to 0 on GCC 12+, which has an issue with function pointers
+++ * that are *sometimes* force inline on -Og, and it is impossible to automatically
+++ * detect this optimization level.
+++ */
+++#  define XXH3_INLINE_SECRET 0
+++
++ /*!
++  * @def XXH32_ENDJMP
++  * @brief Whether to use a jump for `XXH32_finalize`.
++@@ -1439,6 +1456,15 @@ XXH3_128bits_reset_withSecretandSeed(XXH3_state_t* statePtr,
++ #  endif
++ #endif
++ 
+++#ifndef XXH3_INLINE_SECRET
+++#  if (defined(__GNUC__) && !defined(__clang__) && __GNUC__ >= 12) \
+++     || !defined(XXH_INLINE_ALL)
+++#    define XXH3_INLINE_SECRET 0
+++#  else
+++#    define XXH3_INLINE_SECRET 1
+++#  endif
+++#endif
+++
++ #ifndef XXH32_ENDJMP
++ /* generally preferable for performance */
++ #  define XXH32_ENDJMP 0
++@@ -1515,6 +1541,11 @@ static void* XXH_memcpy(void* dest, const void* src, size_t size)
++ #  define XXH_NO_INLINE static
++ #endif
++ 
+++#if XXH3_INLINE_SECRET
+++#  define XXH3_WITH_SECRET_INLINE XXH_FORCE_INLINE
+++#else
+++#  define XXH3_WITH_SECRET_INLINE XXH_NO_INLINE
+++#endif
++ 
++ 
++ /* *************************************
++@@ -4465,7 +4496,7 @@ XXH3_hashLong_64b_internal(const void* XXH_RESTRICT input, size_t len,
++  * so that the compiler can properly optimize the vectorized loop.
++  * This makes a big performance difference for "medium" keys (<1 KB) when using AVX instruction set.
++  */
++-XXH_FORCE_INLINE XXH64_hash_t
+++XXH3_WITH_SECRET_INLINE XXH64_hash_t
++ XXH3_hashLong_64b_withSecret(const void* XXH_RESTRICT input, size_t len,
++                              XXH64_hash_t seed64, const xxh_u8* XXH_RESTRICT secret, size_t secretLen)
++ {
++@@ -5263,7 +5294,7 @@ XXH3_hashLong_128b_default(const void* XXH_RESTRICT input, size_t len,
++  * It's important for performance to pass @secretLen (when it's static)
++  * to the compiler, so that it can properly optimize the vectorized loop.
++  */
++-XXH_FORCE_INLINE XXH128_hash_t
+++XXH3_WITH_SECRET_INLINE XXH128_hash_t
++ XXH3_hashLong_128b_withSecret(const void* XXH_RESTRICT input, size_t len,
++                               XXH64_hash_t seed64,
++                               const void* XXH_RESTRICT secret, size_t secretLen)
++-- 
++2.25.1
++
+diff --git a/meta-oe/recipes-devtools/php/php_8.2.4.bb b/meta-oe/recipes-devtools/php/php_8.2.4.bb
+index aec222b58..d5954d976 100644
+--- a/meta-oe/recipes-devtools/php/php_8.2.4.bb
++++ b/meta-oe/recipes-devtools/php/php_8.2.4.bb
+@@ -19,6 +19,7 @@ SRC_URI = "http://php.net/distributions/php-${PV}.tar.bz2 \
+            file://0006-ext-phar-Makefile.frag-Fix-phar-packaging.patch \
+            file://0009-php-don-t-use-broken-wrapper-for-mkdir.patch \
+            file://0010-iconv-fix-detection.patch \
++           file://0001-Change-whether-to-inline-XXH3_hashLong_withSecret-to.patch \
+           "
  
- FILES:${PN} += "${datadir}/dbus-1"
--FILES:${PN}-dev += "${libdir}/${PN}/*.so"
-+FILES:${PN}-dev += "${libdir}/${BPN}/*.so"
-diff --git a/meta-multimedia/recipes-multimedia/dleyna/dleyna-server_0.6.0.bb b/meta-multimedia/recipes-multimedia/dleyna/dleyna-server_0.6.0.bb
-index b25e446c41..071379758c 100644
---- a/meta-multimedia/recipes-multimedia/dleyna/dleyna-server_0.6.0.bb
-+++ b/meta-multimedia/recipes-multimedia/dleyna/dleyna-server_0.6.0.bb
-@@ -19,4 +19,4 @@ S = "${WORKDIR}/git"
- inherit autotools pkgconfig
- 
- FILES:${PN} += "${datadir}/dbus-1"
--FILES:${PN}-dev += "${libdir}/${PN}/*.so"
-+FILES:${PN}-dev += "${libdir}/${BPN}/*.so"
+ SRC_URI:append:class-target = " \
 -- 
-2.40.0
+2.25.1
 
 
