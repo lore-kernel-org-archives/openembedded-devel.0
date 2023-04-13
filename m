@@ -1,75 +1,88 @@
-Return-Path: <f_l_k@t-online.de>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 72539C77B61
-	for <webhook@archiver.kernel.org>; Thu, 13 Apr 2023 14:55:03 +0000 (UTC)
-Received: from mailout02.t-online.de (mailout02.t-online.de [194.25.134.17])
- by mx.groups.io with SMTP id smtpd.web11.15477.1681397700732714400
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E652BC77B6E
+	for <webhook@archiver.kernel.org>; Thu, 13 Apr 2023 15:47:53 +0000 (UTC)
+Received: from mail-pj1-f48.google.com (mail-pj1-f48.google.com [209.85.216.48])
+ by mx.groups.io with SMTP id smtpd.web11.17033.1681400870106012145
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 13 Apr 2023 07:55:01 -0700
+ Thu, 13 Apr 2023 08:47:50 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=SPF record not found (domain: t-online.de, ip: 194.25.134.17, mailfrom: f_l_k@t-online.de)
-Received: from fwd74.dcpf.telekom.de (fwd74.aul.t-online.de [10.223.144.100])
-	by mailout02.t-online.de (Postfix) with SMTP id D4D62AF23
-	for <openembedded-devel@lists.openembedded.org>; Thu, 13 Apr 2023 16:54:58 +0200 (CEST)
-Received: from flk-MS-7C91.fritz.box ([84.163.34.78]) by fwd74.t-online.de
-	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1pmyLi-2Tw5Td0; Thu, 13 Apr 2023 16:54:58 +0200
-From: Markus Volk <f_l_k@t-online.de>
+ dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=O9uXzc1W;
+ spf=pass (domain: gmail.com, ip: 209.85.216.48, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f48.google.com with SMTP id z11-20020a17090abd8b00b0024721c47ceaso1723057pjr.3
+        for <openembedded-devel@lists.openembedded.org>; Thu, 13 Apr 2023 08:47:50 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20221208; t=1681400869; x=1683992869;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=Qgb8yChVfl7p31ImzvFJ8JVy7jxPulH/fOy8Tw9WG2E=;
+        b=O9uXzc1Wy+2PaQgUypfy07J6D1bfEURUY7DWpsAc7RUkrLFlaCbVEmdoojMu8SkWMG
+         rTZ87oPe0RCQsggYZ4fdZdZSU3Bi2inzYxjMxMx2hgevKK9YWslSntE3BCYmolP1KZlw
+         nftgbIC+hIdBfogPId9uJrWORbPouGwgXq9pvyTemUVAUdLLoetqBhYpJJdBkuSn/kni
+         +MauFWK0Sin+E1sYIOxE+jvtDpGaXKrrBSwYU3yp9anEw2UEF8qbF8jRCGbHXSSJwWpI
+         ZzPMOv5KtsGYWq+6AbRMuTSssV94cKj38V657YvQVEYrdG7O8h/kWtuCbCmPNu8/8q98
+         6wPQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20221208; t=1681400869; x=1683992869;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=Qgb8yChVfl7p31ImzvFJ8JVy7jxPulH/fOy8Tw9WG2E=;
+        b=da5f7oZ4CuntPOUfr30iByc8q8C1Gof0TkqL2Z4/GoIs+3ZqMCzpKRkXZwASWTnmoT
+         /losPyFoXdbxqdt4C7Zv0CHABu0kyGnQyVmfJwOo99qs/wCWhIKrX4txP7MP4THwfpQu
+         YPYtRiolZ/ZV3DCP1u4N6Nt32mlTkLDqr5KOvizkfo/q7cfG6pJBAzzyHgJTujvSIVB8
+         CLrWPTtV4TohqL1IDDEeqUyTNqm1bIqFJnCZ2X4QIzvALA+qSf3yCVmA0WSGLlVDsar3
+         V1OB2AUPxRvUCKBwqh6toCcKoIRE+pISz8a90f3cXnHZx62mfSvsK+6ZKlYQRMVjTmJm
+         eG6w==
+X-Gm-Message-State: AAQBX9c7CO3DEz/X5M9hxZIHSBmNIurla2P1AeECxqIyQpEaT23VSVni
+	AGXObpS7peUPOkpxer4o9OPhSEEUL1A=
+X-Google-Smtp-Source: AKy350b76YPuIRJzNWzG+MAMeLOAbS8Gmn7x09g61ymjTX95Oar9r36Nb5LI+yXXAY8lJsFlC3VGiA==
+X-Received: by 2002:a05:6a21:3283:b0:ec:885a:a056 with SMTP id yt3-20020a056a21328300b000ec885aa056mr1896785pzb.33.1681400868996;
+        Thu, 13 Apr 2023 08:47:48 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9181:d380::ebd0])
+        by smtp.gmail.com with ESMTPSA id y3-20020a62b503000000b00625b9e625fdsm1583946pfe.179.2023.04.13.08.47.48
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 13 Apr 2023 08:47:48 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Markus Volk <f_l_k@t-online.de>
-Subject: [master][meta-gnome][PATCH] xdg-desktop-portal-gnome: downgrade to 43.1
-Date: Thu, 13 Apr 2023 16:54:50 +0200
-Message-Id: <20230413145450.1216168-1-f_l_k@t-online.de>
-X-Mailer: git-send-email 2.34.1
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][PATCH] onig: Ignore .debug directories while finding ptests
+Date: Thu, 13 Apr 2023 08:47:47 -0700
+Message-Id: <20230413154747.2052138-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.40.0
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1681397698-6F7FDC08-F420FDFE/0/0 CLEAN NORMAL
-X-TOI-MSGID: 5245bb80-4f75-4779-8439-1e985b37f0c6
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 13 Apr 2023 14:55:03 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102080
+ <openembedded-devel@lists.openembedded.org>; Thu, 13 Apr 2023 15:47:53 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102081
 
-xdg-desktop-portal-gnome_44.0 requires that mutter, gnome-shell and
-gnome-control-center are also updated to v44. The v43 variants experience
-problems such as protals not working and delayed startup of some gtk
-applications. Downgrade to fix these problems
+.debug directories maybe generated when building ptest images with
+pkgs-dbg, these directories should be ignored in run-ptest script where
+it tries to find test binaries to execute
 
-Signed-off-by: Markus Volk <f_l_k@t-online.de>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...op-portal-gnome_44.0.bb =3D> xdg-desktop-portal-gnome_43.1.bb} | 2 +-
+ meta-oe/recipes-support/onig/onig/run-ptest | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-gnome/recipes-support/xdg-desktop-portal/{xdg-desktop-portal=
--gnome_44.0.bb =3D> xdg-desktop-portal-gnome_43.1.bb} (94%)
 
-diff --git a/meta-gnome/recipes-support/xdg-desktop-portal/xdg-desktop-po=
-rtal-gnome_44.0.bb b/meta-gnome/recipes-support/xdg-desktop-portal/xdg-de=
-sktop-portal-gnome_43.1.bb
-similarity index 94%
-rename from meta-gnome/recipes-support/xdg-desktop-portal/xdg-desktop-por=
-tal-gnome_44.0.bb
-rename to meta-gnome/recipes-support/xdg-desktop-portal/xdg-desktop-porta=
-l-gnome_43.1.bb
-index c92037d6e..636aba689 100644
---- a/meta-gnome/recipes-support/xdg-desktop-portal/xdg-desktop-portal-gn=
-ome_44.0.bb
-+++ b/meta-gnome/recipes-support/xdg-desktop-portal/xdg-desktop-portal-gn=
-ome_43.1.bb
-@@ -24,7 +24,7 @@ REQUIRED_DISTRO_FEATURES =3D "polkit"
- SRC_URI =3D "git://gitlab.gnome.org/GNOME/xdg-desktop-portal-gnome.git;p=
-rotocol=3Dhttps;nobranch=3D1"
-=20
- S =3D "${WORKDIR}/git"
--SRCREV =3D "8e1c4fd928be500208ca1df62441a56e2569bfb8"
-+SRCREV =3D "4fd5a8bf16b01c78ed19764415cb26d29aaf7eab"
-=20
- PACKAGECONFIG ?=3D "screenshot screencast ${@bb.utils.filter('DISTRO_FEA=
-TURES', 'wayland', d)}"
-=20
---=20
-2.34.1
+diff --git a/meta-oe/recipes-support/onig/onig/run-ptest b/meta-oe/recipes-support/onig/onig/run-ptest
+index 2574d7efa5..fbce336990 100755
+--- a/meta-oe/recipes-support/onig/onig/run-ptest
++++ b/meta-oe/recipes-support/onig/onig/run-ptest
+@@ -17,7 +17,7 @@ workdir=$(mktemp -d -t onig.ptest.XXXXXX)
+ status="${workdir}/failed"
+ touch "${status}"
+ 
+-find tests/ -perm -111 -type f -exec sh -c '
++find tests/ -perm -111 -type f ! -path "tests/.debug/*" -exec sh -c '
+     workdir="${1}"
+     status="${2}"
+     t="${3}"
+-- 
+2.40.0
 
 
