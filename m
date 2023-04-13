@@ -2,36 +2,36 @@ Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9C0A1C77B6E
-	for <webhook@archiver.kernel.org>; Thu, 13 Apr 2023 14:54:23 +0000 (UTC)
-Received: from mailout06.t-online.de (mailout06.t-online.de [194.25.134.19])
- by mx.groups.io with SMTP id smtpd.web10.15570.1681397659748164624
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 72539C77B61
+	for <webhook@archiver.kernel.org>; Thu, 13 Apr 2023 14:55:03 +0000 (UTC)
+Received: from mailout02.t-online.de (mailout02.t-online.de [194.25.134.17])
+ by mx.groups.io with SMTP id smtpd.web11.15477.1681397700732714400
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 13 Apr 2023 07:54:20 -0700
+ Thu, 13 Apr 2023 07:55:01 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=SPF record not found (domain: t-online.de, ip: 194.25.134.19, mailfrom: f_l_k@t-online.de)
-Received: from fwd85.dcpf.telekom.de (fwd85.aul.t-online.de [10.223.144.111])
-	by mailout06.t-online.de (Postfix) with SMTP id A172224ADB
-	for <openembedded-devel@lists.openembedded.org>; Thu, 13 Apr 2023 16:54:17 +0200 (CEST)
-Received: from flk-MS-7C91.fritz.box ([84.163.34.78]) by fwd85.t-online.de
+ dkim=missing; spf=none, err=SPF record not found (domain: t-online.de, ip: 194.25.134.17, mailfrom: f_l_k@t-online.de)
+Received: from fwd74.dcpf.telekom.de (fwd74.aul.t-online.de [10.223.144.100])
+	by mailout02.t-online.de (Postfix) with SMTP id D4D62AF23
+	for <openembedded-devel@lists.openembedded.org>; Thu, 13 Apr 2023 16:54:58 +0200 (CEST)
+Received: from flk-MS-7C91.fritz.box ([84.163.34.78]) by fwd74.t-online.de
 	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1pmyKz-3R17yL0; Thu, 13 Apr 2023 16:54:13 +0200
+	esmtp id 1pmyLi-2Tw5Td0; Thu, 13 Apr 2023 16:54:58 +0200
 From: Markus Volk <f_l_k@t-online.de>
 To: openembedded-devel@lists.openembedded.org
 Cc: Markus Volk <f_l_k@t-online.de>
-Subject: [mickledore][meta-gnome][PATCH] xdg-desktop-portal-gnome: downgrade to 43.1
-Date: Thu, 13 Apr 2023 16:54:06 +0200
-Message-Id: <20230413145406.1216066-1-f_l_k@t-online.de>
+Subject: [master][meta-gnome][PATCH] xdg-desktop-portal-gnome: downgrade to 43.1
+Date: Thu, 13 Apr 2023 16:54:50 +0200
+Message-Id: <20230413145450.1216168-1-f_l_k@t-online.de>
 X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1681397653-A4FC4C52-21868A8E/0/0 CLEAN NORMAL
-X-TOI-MSGID: 2f5eb041-26d3-4a2a-a0e6-e16dac67ab57
+X-TOI-EXPURGATEID: 150726::1681397698-6F7FDC08-F420FDFE/0/0 CLEAN NORMAL
+X-TOI-MSGID: 5245bb80-4f75-4779-8439-1e985b37f0c6
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 13 Apr 2023 14:54:23 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102079
+ <openembedded-devel@lists.openembedded.org>; Thu, 13 Apr 2023 14:55:03 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102080
 
 xdg-desktop-portal-gnome_44.0 requires that mutter, gnome-shell and
 gnome-control-center are also updated to v44. The v43 variants experience
