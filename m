@@ -1,133 +1,261 @@
-Return-Path: <Yogita.Urade@windriver.com>
+Return-Path: <bindudaniel1996@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5874BC77B61
-	for <webhook@archiver.kernel.org>; Thu, 13 Apr 2023 06:27:11 +0000 (UTC)
-Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.web10.6200.1681367221103013682
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 73687C77B61
+	for <webhook@archiver.kernel.org>; Thu, 13 Apr 2023 07:03:01 +0000 (UTC)
+Received: from mail-pl1-f177.google.com (mail-pl1-f177.google.com [209.85.214.177])
+ by mx.groups.io with SMTP id smtpd.web10.6591.1681369377019141432
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 12 Apr 2023 23:27:01 -0700
+ Thu, 13 Apr 2023 00:02:57 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=pps06212021 header.b=XnoIQF2K;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=34677b4284=yogita.urade@windriver.com)
-Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 33D5FRrF010592
-	for <openembedded-devel@lists.openembedded.org>; Wed, 12 Apr 2023 23:27:00 -0700
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com; h=from : to : cc :
- subject : date : message-id : mime-version : content-transfer-encoding :
- content-type; s=PPS06212021;
- bh=5L1Yv5QNUnzWQ0JzRV4TABGYbyWdVS1C8WvqRn2eztI=;
- b=XnoIQF2Kdegf1qfDumUR4gloH3eRw8NfJpgXlptQPfJDtBkxFHMSpf1h8bqlthHI3YyE
- 3Wi7WzgUBRwQlwEcTa27kDtX/0jHw1/i6ZaBcFJq/ZYZ3THnXkRBv/48gDfiyuNa1aqS
- zCcpJSDGXTjTd5ieq4aipVygYgg3CmPjAmvygXholk7uIXkSGvrNmPl04DnxCuZJ0P9y
- FpBkig5caj7JJL1L8G8XZB3F9FywarOmeLF8cFZDTD1g2GNbBA+8hVQkgIPT+ZqYeChi
- 5uN3keH8TZd6ubqVrf/8IXMMo/ODONaW3TnAub5CoOExrwiA6kCc2vMhS+G7TJbksouu 2w== 
-Received: from ala-exchng01.corp.ad.wrs.com (unknown-82-252.windriver.com [147.11.82.252])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3px7d8r7te-3
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Wed, 12 Apr 2023 23:27:00 -0700
-Received: from blr-linux-engg1.wrs.com (147.11.136.210) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.23; Wed, 12 Apr 2023 23:26:57 -0700
-From: Yogita Urade <yogita.urade@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-CC: <hari.gpillai@windriver.com>, <yogita.urade@windriver.com>
-Subject: [oe][meta-oe][kirkstone][PATCH 1/1] dlt-daemon: fix CVE-2023-26257
-Date: Thu, 13 Apr 2023 06:26:40 +0000
-Message-ID: <20230413062640.837181-1-yogita.urade@windriver.com>
-X-Mailer: git-send-email 2.40.0
+ dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=FWV/ph9k;
+ spf=pass (domain: gmail.com, ip: 209.85.214.177, mailfrom: bindudaniel1996@gmail.com)
+Received: by mail-pl1-f177.google.com with SMTP id d9443c01a7336-1a667067275so3631945ad.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 13 Apr 2023 00:02:56 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20221208; t=1681369376; x=1683961376;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=9DJMKOyHAXPQA0LT1gvCahgKkdAQfvXR8sXF3zN0VvE=;
+        b=FWV/ph9kNNY95x1PJRq1W6+sW7xUy04rGZffPdsViGoXFkAoA71qE7NOb9kkOUBLVM
+         0t752aO0LxnczHkHuqWck+2LP2Jvat4gpVDfWeEsRXeKFLJtGcli8lJGX5Bjcm5/eta5
+         0OBAU+yT4/NIufeJzV1ZijmsEvTLUNSOcKhKWnAhVXQQyh0/z7IpUQzGhCLTAGSWsLTB
+         F++C2rUOTf/SpJj8QDR19R1/0tGvsw6Gy5mb1a37qnykItrhJmDRa8W8oeC2EcloMZYR
+         vRJYzF7JZfrk2IW1jEXIy3vbcrCwICfdijXiIPAHywldELB5BmbIweT0XZtwB4QT/U/P
+         R/ng==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20221208; t=1681369376; x=1683961376;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=9DJMKOyHAXPQA0LT1gvCahgKkdAQfvXR8sXF3zN0VvE=;
+        b=jkYTWglncwx9J3dNI4rEGViIzZOAwdLYVmtnU5CA0W/X/9NHJVA4erCFzg5QFqzvhb
+         DveTkmHAa/5FFf+UXiuSTQ7Raq15PAHHMiviaz1iInxjQ1oHDi0G2Qaww2gIvdC7RrUZ
+         s319DsAgJVX0KNXeia4T3rDUOyGvMIk7sHfRi1CKeYCQeaEOIRC3LGmsWPdjj3Xuv7kD
+         vl2VEg3xfOw6u2lnqMA7K0wZvBuPpLzYmv15RbfPta4UcAp2dfq0Q8TgBtdT5kiN049R
+         AgNnekKmfyRoqp+N1+a6PHqmvfLJko5rtE/9whmEDF2F+Mj9vJFGyYK0kTdW21Xlscud
+         +A/Q==
+X-Gm-Message-State: AAQBX9eWrxEiBu8oEzI887giMfy7d3BRVD7VsS7ru0Axqll80r/8UikP
+	tVSs6TJz2/EBtJSzN6ZBL9OGWqjaOhlbLjjxyao=
+X-Google-Smtp-Source: AKy350YnTYNyubsc5GFEiPFf8+lEHy7upRRYeWw3XCz5IkEgLF76uVqi0nx23FmTiDRQDnLJ+hDr3huzDPc8Uhi1eSs=
+X-Received: by 2002:a05:6a00:2e09:b0:633:4fea:3d06 with SMTP id
+ fc9-20020a056a002e0900b006334fea3d06mr737048pfb.1.1681369376015; Thu, 13 Apr
+ 2023 00:02:56 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [147.11.136.210]
-X-ClientProxiedBy: ala-exchng01.corp.ad.wrs.com (147.11.82.252) To
- ala-exchng01.corp.ad.wrs.com (147.11.82.252)
-X-Proofpoint-GUID: DsFzAWF2pz-J7C5V4niPYODQkrC7Z8RH
-X-Proofpoint-ORIG-GUID: DsFzAWF2pz-J7C5V4niPYODQkrC7Z8RH
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.254,Aquarius:18.0.942,Hydra:6.0.573,FMLib:17.11.170.22
- definitions=2023-04-13_02,2023-04-12_01,2023-02-09_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 suspectscore=0 bulkscore=0
- malwarescore=0 impostorscore=0 mlxscore=0 lowpriorityscore=0 spamscore=0
- adultscore=0 phishscore=0 clxscore=1015 priorityscore=1501 mlxlogscore=999
- classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2303200000
- definitions=main-2304130058
+References: <20230407043845.1314587-1-bindudaniel1996@gmail.com> <1377940a-ba4f-f8a4-2032-7179c72ccb71@gmail.com>
+In-Reply-To: <1377940a-ba4f-f8a4-2032-7179c72ccb71@gmail.com>
+From: BINDU <bindudaniel1996@gmail.com>
+Date: Thu, 13 Apr 2023 12:32:45 +0530
+Message-ID: <CAFGCuZW+x0DQf6NJ_OzRPyLuaw+uqvLNuwhN_MvT=v9ogZ4uEg@mail.gmail.com>
+Subject: Re: [oe][meta-oe][kirkstone][PATCH] flatbuffers: adapt for
+ cross-compilation environments
+To: akuster808 <akuster808@gmail.com>
+Cc: openembedded-devel@lists.openembedded.org, 
+	Bhabu Bindu <bhabu.bindu@kpit.com>, Ivan Stepic <Ivan.Stepic@bmw.de>
+Content-Type: multipart/alternative; boundary="00000000000064c80105f93250e5"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 13 Apr 2023 06:27:11 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102073
+ <openembedded-devel@lists.openembedded.org>; Thu, 13 Apr 2023 07:03:01 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102074
 
-An issue was discovered in the Connected Vehicle Systems Alliance (COVESA; formerly GENIVI)
-dlt-daemon through 2.18.8. Dynamic memory is not released after
-it is allocated in dlt-control-common.c.
+--00000000000064c80105f93250e5
+Content-Type: text/plain; charset="UTF-8"
 
-References:
-https://nvd.nist.gov/vuln/detail/CVE-2023-26257
-https://github.com/COVESA/dlt-daemon/issues/440
+Hello @akuster808@gmail.com <akuster808@gmail.com> ,
 
-Signed-off-by: Yogita Urade <yogita.urade@windriver.com>
----
- .../dlt-daemon/0001-Fix-memory-leak.patch     | 34 +++++++++++++++++++
- .../dlt-daemon/dlt-daemon_2.18.8.bb           |  1 +
- 2 files changed, 35 insertions(+)
- create mode 100644 meta-oe/recipes-extended/dlt-daemon/dlt-daemon/0001-Fix-memory-leak.patch
+This is fixed in a different way in master, so this doesn't need to be be
+done for master.
 
-diff --git a/meta-oe/recipes-extended/dlt-daemon/dlt-daemon/0001-Fix-memory-leak.patch b/meta-oe/recipes-extended/dlt-daemon/dlt-daemon/0001-Fix-memory-leak.patch
-new file mode 100644
-index 000000000..72e3b9802
---- /dev/null
-+++ b/meta-oe/recipes-extended/dlt-daemon/dlt-daemon/0001-Fix-memory-leak.patch
-@@ -0,0 +1,34 @@
-+From b6149e203f919c899fefc702a17fbb78bdec3700 Mon Sep 17 00:00:00 2001
-+From: Le Van Khanh <Khanh.LeVan@vn.bosch.com>
-+Date: Thu, 9 Feb 2023 03:17:13 -0500
-+Subject: [PATCH] Fix memory leak
-+
-+Free the ecuid_conf in case of memory alllocated
-+
-+CVE: CVE-2023-26257
-+
-+Upstream-Status: Backport
-+[https://github.com/COVESA/dlt-daemon/pull/441/commits/b6149e203f919c899fefc702a17fbb78bdec3700]
-+
-+Signed-off-by: Le Van Khanh <Khanh.LeVan@vn.bosch.com>
-+
-+Signed-off-by: Yogita Urade <yogita.urade@windriver.com>
-+---
-+ src/console/dlt-control-common.c | 2 ++
-+ 1 file changed, 2 insertions(+)
-+
-+diff --git a/src/console/dlt-control-common.c b/src/console/dlt-control-common.c
-+index abcaf92..64951c1 100644
-+--- a/src/console/dlt-control-common.c
-++++ b/src/console/dlt-control-common.c
-+@@ -124,6 +124,8 @@ void set_ecuid(char *ecuid)
-+             if (dlt_parse_config_param("ECUId", &ecuid_conf) == 0) {
-+                 memset(local_ecuid, 0, DLT_CTRL_ECUID_LEN);
-+                 strncpy(local_ecuid, ecuid_conf, DLT_CTRL_ECUID_LEN);
-++                if (ecuid_conf !=NULL)
-++                    free(ecuid_conf);
-+                 local_ecuid[DLT_CTRL_ECUID_LEN - 1] = '\0';
-+             }
-+             else {
-+--
-+2.34.1
-diff --git a/meta-oe/recipes-extended/dlt-daemon/dlt-daemon_2.18.8.bb b/meta-oe/recipes-extended/dlt-daemon/dlt-daemon_2.18.8.bb
-index 7a613bcc9..b98cfadf3 100644
---- a/meta-oe/recipes-extended/dlt-daemon/dlt-daemon_2.18.8.bb
-+++ b/meta-oe/recipes-extended/dlt-daemon/dlt-daemon_2.18.8.bb
-@@ -18,6 +18,7 @@ SRC_URI = "git://github.com/GENIVI/${BPN}.git;protocol=https;branch=master \
-            file://0002-Don-t-execute-processes-as-a-specific-user.patch \
-            file://0004-Modify-systemd-config-directory.patch \
-            file://0001-cmake-Link-with-libatomic-on-rv32-rv64.patch \
-+           file://0001-Fix-memory-leak.patch \
-            "
- SRCREV = "6a3bd901d825c7206797e36ea98e10a218f5aad2"
- 
--- 
-2.34.1
 
+
+On Fri, 7 Apr, 2023, 5:15 pm akuster808, <akuster808@gmail.com> wrote:
+
+>
+>
+> On 4/7/23 12:38 AM, BINDU wrote:
+> > Flatbuffers contains a library and a schema compiler. The package
+> > contains cmake files to discover the libraries and the compiler tool.
+> > Currently, all of these cmake files are installed into the target
+> > sysroot. However, the compiler utility isn't installed into the sysroot
+> > (as it is not runnable on the build machine).
+> >
+> > When an application that depends on flatbuffers gets built, it uses
+> > flatbuffers' exported cmake targets to configure the project. One of the
+> > exported targets is FlatcTarget.cmake which expects to see flatc binary
+> > in /usr/bin of the sysroot. Since binaries for target don't end up in
+> > target sysroot, cmake configuration fails.
+> >
+> > This patch addresses this problem of flatbuffers' build infrastructure
+> > in cross-compiling environments. By removing FlatcTarget.cmake for
+> > target builds from the sysroot we essentially skip this step of
+> > flatbuffers' configuration.
+>
+> Does this need to be done in Master as well?
+>
+> -armin
+> >
+> > Signed-off-by: Ivan Stepic <Ivan.Stepic@bmw.de>
+> > Signed-off-by: Bhabu Bindu <bindudaniel1996@gmail.com>
+> > ---
+> >   meta-oe/recipes-devtools/flatbuffers/flatbuffers_2.0.0.bb | 7 ++++++-
+> >   1 file changed, 6 insertions(+), 1 deletion(-)
+> >
+> > diff --git a/meta-oe/recipes-devtools/flatbuffers/flatbuffers_2.0.0.bb
+> b/meta-oe/recipes-devtools/flatbuffers/flatbuffers_2.0.0.bb
+> > index bf74f1229..44478ea0b 100644
+> > --- a/meta-oe/recipes-devtools/flatbuffers/flatbuffers_2.0.0.bb
+> > +++ b/meta-oe/recipes-devtools/flatbuffers/flatbuffers_2.0.0.bb
+> > @@ -25,12 +25,17 @@ BUILD_CXXFLAGS += "-fPIC"
+> >   # BUILD_TYPE=Release is required, otherwise flatc is not installed
+> >   EXTRA_OECMAKE += "\
+> >       -DCMAKE_BUILD_TYPE=Release \
+> > -    -DFLATBUFFERS_BUILD_TESTS=OFF \
+> > +    -DFLATBUFFERS_BUILD_TESTS=OFF \
+> >       -DFLATBUFFERS_BUILD_SHAREDLIB=ON \
+> >   "
+> >
+> >   inherit cmake
+> >
+> > +rm_flatc_cmaketarget_for_target() {
+> > +    rm -f
+> "${SYSROOT_DESTDIR}/${libdir}/cmake/flatbuffers/FlatcTargets.cmake"
+> > +}
+> > +SYSROOT_PREPROCESS_FUNCS:class-target +=
+> "rm_flatc_cmaketarget_for_target"
+> > +
+> >   do_install:append() {
+> >       install -d ${D}${PYTHON_SITEPACKAGES_DIR}
+> >       cp -rf ${S}/python/flatbuffers ${D}${PYTHON_SITEPACKAGES_DIR}
+> >
+> > -=-=-=-=-=-=-=-=-=-=-=-
+> > Links: You receive all messages sent to this group.
+> > View/Reply Online (#101976):
+> https://lists.openembedded.org/g/openembedded-devel/message/101976
+> > Mute This Topic: https://lists.openembedded.org/mt/98119685/3616698
+> > Group Owner: openembedded-devel+owner@lists.openembedded.org
+> > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
+> akuster808@gmail.com]
+> > -=-=-=-=-=-=-=-=-=-=-=-
+> >
+>
+>
+
+--00000000000064c80105f93250e5
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"auto">Hello <span class=3D"gmail_chip gmail_plusreply" dir=3D"a=
+uto"><a href=3D"mailto:akuster808@gmail.com" style=3D"color:#15c;text-decor=
+ation:underline">@akuster808@gmail.com</a></span><span>=C2=A0,=C2=A0</span>=
+<div dir=3D"auto"><span><br></span></div><div dir=3D"auto"><span>This is fi=
+xed in a different way in master, so this doesn&#39;t need to be be done fo=
+r master.=C2=A0</span></div><div dir=3D"auto"><span><br></span></div><div d=
+ir=3D"auto"><span><br></span></div></div><br><div class=3D"gmail_quote"><di=
+v dir=3D"ltr" class=3D"gmail_attr">On Fri, 7 Apr, 2023, 5:15 pm akuster808,=
+ &lt;<a href=3D"mailto:akuster808@gmail.com">akuster808@gmail.com</a>&gt; w=
+rote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex=
+;border-left:1px #ccc solid;padding-left:1ex"><br>
+<br>
+On 4/7/23 12:38 AM, BINDU wrote:<br>
+&gt; Flatbuffers contains a library and a schema compiler. The package<br>
+&gt; contains cmake files to discover the libraries and the compiler tool.<=
+br>
+&gt; Currently, all of these cmake files are installed into the target<br>
+&gt; sysroot. However, the compiler utility isn&#39;t installed into the sy=
+sroot<br>
+&gt; (as it is not runnable on the build machine).<br>
+&gt;<br>
+&gt; When an application that depends on flatbuffers gets built, it uses<br=
+>
+&gt; flatbuffers&#39; exported cmake targets to configure the project. One =
+of the<br>
+&gt; exported targets is FlatcTarget.cmake which expects to see flatc binar=
+y<br>
+&gt; in /usr/bin of the sysroot. Since binaries for target don&#39;t end up=
+ in<br>
+&gt; target sysroot, cmake configuration fails.<br>
+&gt;<br>
+&gt; This patch addresses this problem of flatbuffers&#39; build infrastruc=
+ture<br>
+&gt; in cross-compiling environments. By removing FlatcTarget.cmake for<br>
+&gt; target builds from the sysroot we essentially skip this step of<br>
+&gt; flatbuffers&#39; configuration.<br>
+<br>
+Does this need to be done in Master as well?<br>
+<br>
+-armin<br>
+&gt;<br>
+&gt; Signed-off-by: Ivan Stepic &lt;<a href=3D"mailto:Ivan.Stepic@bmw.de" t=
+arget=3D"_blank" rel=3D"noreferrer">Ivan.Stepic@bmw.de</a>&gt;<br>
+&gt; Signed-off-by: Bhabu Bindu &lt;<a href=3D"mailto:bindudaniel1996@gmail=
+.com" target=3D"_blank" rel=3D"noreferrer">bindudaniel1996@gmail.com</a>&gt=
+;<br>
+&gt; ---<br>
+&gt;=C2=A0 =C2=A0meta-oe/recipes-devtools/flatbuffers/<a href=3D"http://fla=
+tbuffers_2.0.0.bb" rel=3D"noreferrer noreferrer" target=3D"_blank">flatbuff=
+ers_2.0.0.bb</a> | 7 ++++++-<br>
+&gt;=C2=A0 =C2=A01 file changed, 6 insertions(+), 1 deletion(-)<br>
+&gt;<br>
+&gt; diff --git a/meta-oe/recipes-devtools/flatbuffers/<a href=3D"http://fl=
+atbuffers_2.0.0.bb" rel=3D"noreferrer noreferrer" target=3D"_blank">flatbuf=
+fers_2.0.0.bb</a> b/meta-oe/recipes-devtools/flatbuffers/<a href=3D"http://=
+flatbuffers_2.0.0.bb" rel=3D"noreferrer noreferrer" target=3D"_blank">flatb=
+uffers_2.0.0.bb</a><br>
+&gt; index bf74f1229..44478ea0b 100644<br>
+&gt; --- a/meta-oe/recipes-devtools/flatbuffers/<a href=3D"http://flatbuffe=
+rs_2.0.0.bb" rel=3D"noreferrer noreferrer" target=3D"_blank">flatbuffers_2.=
+0.0.bb</a><br>
+&gt; +++ b/meta-oe/recipes-devtools/flatbuffers/<a href=3D"http://flatbuffe=
+rs_2.0.0.bb" rel=3D"noreferrer noreferrer" target=3D"_blank">flatbuffers_2.=
+0.0.bb</a><br>
+&gt; @@ -25,12 +25,17 @@ BUILD_CXXFLAGS +=3D &quot;-fPIC&quot;<br>
+&gt;=C2=A0 =C2=A0# BUILD_TYPE=3DRelease is required, otherwise flatc is not=
+ installed<br>
+&gt;=C2=A0 =C2=A0EXTRA_OECMAKE +=3D &quot;\<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0-DCMAKE_BUILD_TYPE=3DRelease \<br>
+&gt; -=C2=A0 =C2=A0 -DFLATBUFFERS_BUILD_TESTS=3DOFF \<br>
+&gt; +=C2=A0 =C2=A0 -DFLATBUFFERS_BUILD_TESTS=3DOFF \<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0-DFLATBUFFERS_BUILD_SHAREDLIB=3DON \<br>
+&gt;=C2=A0 =C2=A0&quot;<br>
+&gt;=C2=A0 =C2=A0<br>
+&gt;=C2=A0 =C2=A0inherit cmake<br>
+&gt;=C2=A0 =C2=A0<br>
+&gt; +rm_flatc_cmaketarget_for_target() {<br>
+&gt; +=C2=A0 =C2=A0 rm -f &quot;${SYSROOT_DESTDIR}/${libdir}/cmake/flatbuff=
+ers/FlatcTargets.cmake&quot;<br>
+&gt; +}<br>
+&gt; +SYSROOT_PREPROCESS_FUNCS:class-target +=3D &quot;rm_flatc_cmaketarget=
+_for_target&quot;<br>
+&gt; +<br>
+&gt;=C2=A0 =C2=A0do_install:append() {<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0install -d ${D}${PYTHON_SITEPACKAGES_DIR}<br=
+>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0cp -rf ${S}/python/flatbuffers ${D}${PYTHON_=
+SITEPACKAGES_DIR}<br>
+&gt;<br>
+&gt; -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+&gt; Links: You receive all messages sent to this group.<br>
+&gt; View/Reply Online (#101976): <a href=3D"https://lists.openembedded.org=
+/g/openembedded-devel/message/101976" rel=3D"noreferrer noreferrer" target=
+=3D"_blank">https://lists.openembedded.org/g/openembedded-devel/message/101=
+976</a><br>
+&gt; Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/98119685=
+/3616698" rel=3D"noreferrer noreferrer" target=3D"_blank">https://lists.ope=
+nembedded.org/mt/98119685/3616698</a><br>
+&gt; Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openem=
+bedded.org" target=3D"_blank" rel=3D"noreferrer">openembedded-devel+owner@l=
+ists.openembedded.org</a><br>
+&gt; Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-=
+devel/unsub" rel=3D"noreferrer noreferrer" target=3D"_blank">https://lists.=
+openembedded.org/g/openembedded-devel/unsub</a> [<a href=3D"mailto:akuster8=
+08@gmail.com" target=3D"_blank" rel=3D"noreferrer">akuster808@gmail.com</a>=
+]<br>
+&gt; -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+&gt;<br>
+<br>
+</blockquote></div>
+
+--00000000000064c80105f93250e5--
 
