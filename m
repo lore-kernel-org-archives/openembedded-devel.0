@@ -1,133 +1,77 @@
-Return-Path: <Yogita.Urade@windriver.com>
+Return-Path: <brgl@bgdev.pl>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 75C0DC77B70
-	for <webhook@archiver.kernel.org>; Fri, 14 Apr 2023 05:57:59 +0000 (UTC)
-Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
- by mx.groups.io with SMTP id smtpd.web11.2632.1681451876102099077
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 70392C77B6E
+	for <webhook@archiver.kernel.org>; Fri, 14 Apr 2023 06:21:29 +0000 (UTC)
+Received: from mail-ua1-f45.google.com (mail-ua1-f45.google.com [209.85.222.45])
+ by mx.groups.io with SMTP id smtpd.web11.2971.1681453281227334638
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 13 Apr 2023 22:57:56 -0700
+ Thu, 13 Apr 2023 23:21:21 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=pps06212021 header.b=X5Yca97w;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=3468de62af=yogita.urade@windriver.com)
-Received: from pps.filterd (m0250811.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 33E4wLNN020441
-	for <openembedded-devel@lists.openembedded.org>; Fri, 14 Apr 2023 05:57:55 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com; h=from : to : cc :
- subject : date : message-id : mime-version : content-transfer-encoding :
- content-type; s=PPS06212021;
- bh=30oMo01j6PIXkX32SmzzHbF7XWDg24iUW5YEt3Dhe2Q=;
- b=X5Yca97wwVWaVpSjs20nPCvkGPlTWH7bg/vzj2gwCtcb5Uzyr4mtS2zLaubG5GTWYc+c
- LtQ8xwx4qVjB9I74Xc6pU3YHvixRAvrUPB2zJOxGTPQOgcIGl2lMBVEsVs6rnqQFjhQI
- 8wRlEkuzRF4xMyNvlOK0qucm7a5ImEI97Io1rtTdGrqJs+BAwL6ggzAai57hg3zGzojX
- 4/ndk8ytD5rVjEsLztWEEmQFGlln/FJ/g0zgwu4RreHlrxFky4O3b6wfaERvdCne9JKj
- CEWHqvy4ZKIJQ1SFBJ2sho8xhyuP1Kzja6p5g+1zrVPRBsRU/DVfWHILDaiwJ9Wyzp2V ZQ== 
-Received: from ala-exchng01.corp.ad.wrs.com (unknown-82-252.windriver.com [147.11.82.252])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3px7kfhdkc-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Fri, 14 Apr 2023 05:57:55 +0000
-Received: from blr-linux-engg1.wrs.com (147.11.136.210) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.23; Thu, 13 Apr 2023 22:57:52 -0700
-From: Yogita Urade <yogita.urade@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-CC: <hari.gpillai@windriver.com>, <yogita.urade@windriver.com>
-Subject: [oe][meta-oe][PATCH 1/1] dlt-daemon: fix CVE-2023-26257
-Date: Fri, 14 Apr 2023 05:57:35 +0000
-Message-ID: <20230414055735.2891145-1-yogita.urade@windriver.com>
-X-Mailer: git-send-email 2.40.0
+ dkim=fail reason="signature has expired" header.i=@bgdev-pl.20221208.gappssmtp.com header.s=20221208 header.b=x3iWvndT;
+ spf=none, err=SPF record not found (domain: bgdev.pl, ip: 209.85.222.45, mailfrom: brgl@bgdev.pl)
+Received: by mail-ua1-f45.google.com with SMTP id p91so25193133uap.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 13 Apr 2023 23:21:20 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=bgdev-pl.20221208.gappssmtp.com; s=20221208; t=1681453280; x=1684045280;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=9SKJ60N8X2I5mRcgxA4dpAvCu3pddJviFMlRii60bJs=;
+        b=x3iWvndThOqvU/joljEW8yYr0o+0Q/kyjy+jsw8Q3kFoSXbXAR9e+YSsjRXMAdPx7V
+         NYrGCVkniSa2FSABwfda1LClPHiEpmmMGAnq64RlA5tsafB/HkqwNqIWpfCZzuneJeEv
+         yiV97xRnpkrWvDBYh8Q78NWDtQuxUcQSGLim/ygFCGPRzd0GPgXeKie4My0znI60wkeo
+         xhIbPm5mPpclCdfEpxNJXoZA+DwUMDmvOD8RnHwg+dvvinXuXU2pdrzI2PIg4Fgv5e6j
+         9iW1SebtH8cp9yDEF2vYm9OILCgwdyktyWAtp1ajcwZ+9YuopnY98FJ34dr67FPDFrH+
+         8AwQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20221208; t=1681453280; x=1684045280;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=9SKJ60N8X2I5mRcgxA4dpAvCu3pddJviFMlRii60bJs=;
+        b=Pds92jyM0H3nyX+VwCUybs+1F+G8oBr052W9NYwNqg3BYCt6DgOPHxKj0/Z1oE0bDs
+         4nsLDTtBu9LzyBdZAPluX7M6Q8zEhC4yA/0+1PY3axu0jRIVtvI2bUPTYqYkog/giHgN
+         8dMksY3u2dG0qBy0l0AO2WRsjeEeXiVB92NsURUEs2I7zpH7J4hc/90fAg6U3fwG5C3N
+         2zQj/eWvXDGbJn/5o3OFf4XZknwY8HmZzMFCAzVv+tv1+JAlFtKLeY9yjYGFtPY0HvR0
+         YIPzkugedqsxRk9x8WngUpYuyUjb6EehDhnBbaFiU7gUAaTdy2mj2A+5JrBLz24Qx4Zk
+         pCQQ==
+X-Gm-Message-State: AAQBX9cVmx53Ro9EsnO5lszoSiESCziyiyqKsSnGSAN3wP40ipxbZ3Qr
+	/vtPWnnkeIzI295HnIRVKfdwKpqOUX21pa8HKPB7kQ==
+X-Google-Smtp-Source: AKy350b9erHHOWgqKnSlAx9yF1A9TV9HTNZ48lKyK1ntpZzwC+8CtcuYuzviL8Y5+n2uFxVzMQTrG2hZMIadNl9sv00=
+X-Received: by 2002:a1f:2941:0:b0:43b:af47:ba56 with SMTP id
+ p62-20020a1f2941000000b0043baf47ba56mr2450788vkp.2.1681453280044; Thu, 13 Apr
+ 2023 23:21:20 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [147.11.136.210]
-X-ClientProxiedBy: ala-exchng01.corp.ad.wrs.com (147.11.82.252) To
- ala-exchng01.corp.ad.wrs.com (147.11.82.252)
-X-Proofpoint-ORIG-GUID: mYhdEydeCKaPVGjxLeA1Any4W9zw0eZQ
-X-Proofpoint-GUID: mYhdEydeCKaPVGjxLeA1Any4W9zw0eZQ
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.254,Aquarius:18.0.942,Hydra:6.0.573,FMLib:17.11.170.22
- definitions=2023-04-14_02,2023-04-13_01,2023-02-09_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 priorityscore=1501
- lowpriorityscore=0 suspectscore=0 clxscore=1015 spamscore=0
- mlxlogscore=999 impostorscore=0 malwarescore=0 adultscore=0 mlxscore=0
- phishscore=0 bulkscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2303200000 definitions=main-2304140054
+References: <20230411131518.401912-1-brgl@bgdev.pl> <20230411131518.401912-4-brgl@bgdev.pl>
+ <CAMKF1spb_w1q6dy2GApO=UyoGm67jnuOfPG55dKbh78Dk6cPCg@mail.gmail.com>
+In-Reply-To: <CAMKF1spb_w1q6dy2GApO=UyoGm67jnuOfPG55dKbh78Dk6cPCg@mail.gmail.com>
+From: Bartosz Golaszewski <brgl@bgdev.pl>
+Date: Fri, 14 Apr 2023 08:21:09 +0200
+Message-ID: <CAMRc=Md6AsrBea7NE6odvAxG0bJ7j4Nm3+k48Xij-KPwO=Ps6w@mail.gmail.com>
+Subject: Re: [meta-oe][PATCH 4/4] libgpiod: update to v2.0.1
+To: Khem Raj <raj.khem@gmail.com>
+Cc: openembedded-devel@lists.openembedded.org, 
+	Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 14 Apr 2023 05:57:59 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102085
+ <openembedded-devel@lists.openembedded.org>; Fri, 14 Apr 2023 06:21:29 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102086
 
-An issue was discovered in the Connected Vehicle Systems Alliance (COVESA; formerly GENIVI)
-dlt-daemon through 2.18.8. Dynamic memory is not released after
-it is allocated in dlt-control-common.c.
+On Fri, Apr 14, 2023 at 3:19=E2=80=AFAM Khem Raj <raj.khem@gmail.com> wrote=
+:
+>
+> still seeing these errors
+>
+> https://autobuilder.yoctoproject.org/typhoon/#/builders/88/builds/2659/st=
+eps/14/logs/stdio
+>
 
-References:
-https://nvd.nist.gov/vuln/detail/CVE-2023-26257
-https://github.com/COVESA/dlt-daemon/issues/440
+Seems like this is from python3-gpiod. Can I see the recipe logs somewhere?
 
-Signed-off-by: Yogita Urade <yogita.urade@windriver.com>
----
- .../dlt-daemon/0001-Fix-memory-leak.patch     | 34 +++++++++++++++++++
- .../dlt-daemon/dlt-daemon_2.18.8.bb           |  1 +
- 2 files changed, 35 insertions(+)
- create mode 100644 meta-oe/recipes-extended/dlt-daemon/dlt-daemon/0001-Fix-memory-leak.patch
-
-diff --git a/meta-oe/recipes-extended/dlt-daemon/dlt-daemon/0001-Fix-memory-leak.patch b/meta-oe/recipes-extended/dlt-daemon/dlt-daemon/0001-Fix-memory-leak.patch
-new file mode 100644
-index 000000000..72e3b9802
---- /dev/null
-+++ b/meta-oe/recipes-extended/dlt-daemon/dlt-daemon/0001-Fix-memory-leak.patch
-@@ -0,0 +1,34 @@
-+From b6149e203f919c899fefc702a17fbb78bdec3700 Mon Sep 17 00:00:00 2001
-+From: Le Van Khanh <Khanh.LeVan@vn.bosch.com>
-+Date: Thu, 9 Feb 2023 03:17:13 -0500
-+Subject: [PATCH] Fix memory leak
-+
-+Free the ecuid_conf in case of memory alllocated
-+
-+CVE: CVE-2023-26257
-+
-+Upstream-Status: Backport
-+[https://github.com/COVESA/dlt-daemon/pull/441/commits/b6149e203f919c899fefc702a17fbb78bdec3700]
-+
-+Signed-off-by: Le Van Khanh <Khanh.LeVan@vn.bosch.com>
-+
-+Signed-off-by: Yogita Urade <yogita.urade@windriver.com>
-+---
-+ src/console/dlt-control-common.c | 2 ++
-+ 1 file changed, 2 insertions(+)
-+
-+diff --git a/src/console/dlt-control-common.c b/src/console/dlt-control-common.c
-+index abcaf92..64951c1 100644
-+--- a/src/console/dlt-control-common.c
-++++ b/src/console/dlt-control-common.c
-+@@ -124,6 +124,8 @@ void set_ecuid(char *ecuid)
-+             if (dlt_parse_config_param("ECUId", &ecuid_conf) == 0) {
-+                 memset(local_ecuid, 0, DLT_CTRL_ECUID_LEN);
-+                 strncpy(local_ecuid, ecuid_conf, DLT_CTRL_ECUID_LEN);
-++                if (ecuid_conf !=NULL)
-++                    free(ecuid_conf);
-+                 local_ecuid[DLT_CTRL_ECUID_LEN - 1] = '\0';
-+             }
-+             else {
-+--
-+2.34.1
-diff --git a/meta-oe/recipes-extended/dlt-daemon/dlt-daemon_2.18.8.bb b/meta-oe/recipes-extended/dlt-daemon/dlt-daemon_2.18.8.bb
-index aa5ef46a9..cfbe0ff60 100644
---- a/meta-oe/recipes-extended/dlt-daemon/dlt-daemon_2.18.8.bb
-+++ b/meta-oe/recipes-extended/dlt-daemon/dlt-daemon_2.18.8.bb
-@@ -19,6 +19,7 @@ SRC_URI = "git://github.com/GENIVI/${BPN}.git;protocol=https;branch=master \
-            file://0004-Modify-systemd-config-directory.patch \
-            file://0001-cmake-Link-with-libatomic-on-rv32-rv64.patch \
-            file://0001-dlt-system-Fix-buffer-overflow-detection-on-32bit-ta.patch \
-+           file://0001-Fix-memory-leak.patch \
-            "
- SRCREV = "6a3bd901d825c7206797e36ea98e10a218f5aad2"
- 
--- 
-2.34.1
-
+Bart
 
