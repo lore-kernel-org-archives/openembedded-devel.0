@@ -1,77 +1,74 @@
-Return-Path: <brgl@bgdev.pl>
+Return-Path: <linusja@axis.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 70392C77B6E
-	for <webhook@archiver.kernel.org>; Fri, 14 Apr 2023 06:21:29 +0000 (UTC)
-Received: from mail-ua1-f45.google.com (mail-ua1-f45.google.com [209.85.222.45])
- by mx.groups.io with SMTP id smtpd.web11.2971.1681453281227334638
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8671CC77B70
+	for <webhook@archiver.kernel.org>; Fri, 14 Apr 2023 06:35:39 +0000 (UTC)
+Received: from smtp2.axis.com (smtp2.axis.com [195.60.68.18])
+ by mx.groups.io with SMTP id smtpd.web11.3133.1681454137935100226
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 13 Apr 2023 23:21:21 -0700
+ Thu, 13 Apr 2023 23:35:38 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="signature has expired" header.i=@bgdev-pl.20221208.gappssmtp.com header.s=20221208 header.b=x3iWvndT;
- spf=none, err=SPF record not found (domain: bgdev.pl, ip: 209.85.222.45, mailfrom: brgl@bgdev.pl)
-Received: by mail-ua1-f45.google.com with SMTP id p91so25193133uap.1
-        for <openembedded-devel@lists.openembedded.org>; Thu, 13 Apr 2023 23:21:20 -0700 (PDT)
+ dkim=pass header.i=@axis.com header.s=axis-central1 header.b=F5SRu9ia;
+ spf=pass (domain: axis.com, ip: 195.60.68.18, mailfrom: linus.jacobson@axis.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=bgdev-pl.20221208.gappssmtp.com; s=20221208; t=1681453280; x=1684045280;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=9SKJ60N8X2I5mRcgxA4dpAvCu3pddJviFMlRii60bJs=;
-        b=x3iWvndThOqvU/joljEW8yYr0o+0Q/kyjy+jsw8Q3kFoSXbXAR9e+YSsjRXMAdPx7V
-         NYrGCVkniSa2FSABwfda1LClPHiEpmmMGAnq64RlA5tsafB/HkqwNqIWpfCZzuneJeEv
-         yiV97xRnpkrWvDBYh8Q78NWDtQuxUcQSGLim/ygFCGPRzd0GPgXeKie4My0znI60wkeo
-         xhIbPm5mPpclCdfEpxNJXoZA+DwUMDmvOD8RnHwg+dvvinXuXU2pdrzI2PIg4Fgv5e6j
-         9iW1SebtH8cp9yDEF2vYm9OILCgwdyktyWAtp1ajcwZ+9YuopnY98FJ34dr67FPDFrH+
-         8AwQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1681453280; x=1684045280;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=9SKJ60N8X2I5mRcgxA4dpAvCu3pddJviFMlRii60bJs=;
-        b=Pds92jyM0H3nyX+VwCUybs+1F+G8oBr052W9NYwNqg3BYCt6DgOPHxKj0/Z1oE0bDs
-         4nsLDTtBu9LzyBdZAPluX7M6Q8zEhC4yA/0+1PY3axu0jRIVtvI2bUPTYqYkog/giHgN
-         8dMksY3u2dG0qBy0l0AO2WRsjeEeXiVB92NsURUEs2I7zpH7J4hc/90fAg6U3fwG5C3N
-         2zQj/eWvXDGbJn/5o3OFf4XZknwY8HmZzMFCAzVv+tv1+JAlFtKLeY9yjYGFtPY0HvR0
-         YIPzkugedqsxRk9x8WngUpYuyUjb6EehDhnBbaFiU7gUAaTdy2mj2A+5JrBLz24Qx4Zk
-         pCQQ==
-X-Gm-Message-State: AAQBX9cVmx53Ro9EsnO5lszoSiESCziyiyqKsSnGSAN3wP40ipxbZ3Qr
-	/vtPWnnkeIzI295HnIRVKfdwKpqOUX21pa8HKPB7kQ==
-X-Google-Smtp-Source: AKy350b9erHHOWgqKnSlAx9yF1A9TV9HTNZ48lKyK1ntpZzwC+8CtcuYuzviL8Y5+n2uFxVzMQTrG2hZMIadNl9sv00=
-X-Received: by 2002:a1f:2941:0:b0:43b:af47:ba56 with SMTP id
- p62-20020a1f2941000000b0043baf47ba56mr2450788vkp.2.1681453280044; Thu, 13 Apr
- 2023 23:21:20 -0700 (PDT)
+  d=axis.com; q=dns/txt; s=axis-central1; t=1681454138;
+  x=1712990138;
+  h=from:to:cc:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=/zZIfqzqtIR5DfBCuw4oU4G++8KpSb2vOks/WiqW1do=;
+  b=F5SRu9iadSBjto42l/fJvSpt87DVYL1kTsnQNDYSJz0+PpEw+rYtrIwl
+   Aw8kLWd2klZEktgMvy5xs8zM6PZk5F8DO3HAK2hKdKpn1+gliOHENmexv
+   yFBEpoKLzb4fCinWoPFPumcsX6KGiYMsf2UUyU4OPx7ZwuQN3YQPO6ITI
+   HvZl9M8sMzbExOyLOmPdGAX/kDoxn3tG8iBb3AXMnvCllR5HSDBaX00KZ
+   QTiU6w4NSc2o9Q92ou++p80ENNWtnff33MkA48nX3Si6wBsUwMSmIzrgZ
+   jNNgxyeoZF55hdwZiAcy5CyiLfAx8ETIo+ICxMBPUmAPIM49TyMS7p2A/
+   A==;
+From: Linus Jacobson <linusja@axis.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: Linus Jacobson <linusja@axis.com>
+Subject: [meta-oe][PATCH] khronos-cts: Replace wayland feature dependancy with vulkan
+Date: Fri, 14 Apr 2023 08:35:33 +0200
+Message-ID: <20230414063533.11913-1-linusja@axis.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-References: <20230411131518.401912-1-brgl@bgdev.pl> <20230411131518.401912-4-brgl@bgdev.pl>
- <CAMKF1spb_w1q6dy2GApO=UyoGm67jnuOfPG55dKbh78Dk6cPCg@mail.gmail.com>
-In-Reply-To: <CAMKF1spb_w1q6dy2GApO=UyoGm67jnuOfPG55dKbh78Dk6cPCg@mail.gmail.com>
-From: Bartosz Golaszewski <brgl@bgdev.pl>
-Date: Fri, 14 Apr 2023 08:21:09 +0200
-Message-ID: <CAMRc=Md6AsrBea7NE6odvAxG0bJ7j4Nm3+k48Xij-KPwO=Ps6w@mail.gmail.com>
-Subject: Re: [meta-oe][PATCH 4/4] libgpiod: update to v2.0.1
-To: Khem Raj <raj.khem@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org, 
-	Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 14 Apr 2023 06:21:29 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102086
+ <openembedded-devel@lists.openembedded.org>; Fri, 14 Apr 2023 06:35:39 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102087
 
-On Fri, Apr 14, 2023 at 3:19=E2=80=AFAM Khem Raj <raj.khem@gmail.com> wrote=
-:
->
-> still seeing these errors
->
-> https://autobuilder.yoctoproject.org/typhoon/#/builders/88/builds/2659/st=
-eps/14/logs/stdio
->
+Khronos-cts.inc is used for building vulkan-cts or opengl-es-cts. Even
+though vulkan-cts depends on vulkan-loader, which automatically
+requires vulkan distro feature, it is more explicitly stated if written
+here next to opengl.
 
-Seems like this is from python3-gpiod. Can I see the recipe logs somewhere?
+Some systems do not support a windowing service (like wayland) but still
+might use standard khronos GPU libraries. For these cases, wayland
+dependancy is invalid.
 
-Bart
+Patch replaces the invalid wayland distro feature dependancy with
+vulkan for clarity.
+---
+ meta-oe/recipes-graphics/vk-gl-cts/khronos-cts.inc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/meta-oe/recipes-graphics/vk-gl-cts/khronos-cts.inc b/meta-oe/recipes-graphics/vk-gl-cts/khronos-cts.inc
+index f9074556f..1fda43521 100644
+--- a/meta-oe/recipes-graphics/vk-gl-cts/khronos-cts.inc
++++ b/meta-oe/recipes-graphics/vk-gl-cts/khronos-cts.inc
+@@ -20,7 +20,7 @@ S = "${WORKDIR}/git"
+ 
+ inherit pkgconfig cmake features_check python3native qemu
+ 
+-ANY_OF_DISTRO_FEATURES += "opengl wayland"
++ANY_OF_DISTRO_FEATURES += "opengl vulkan"
+ 
+ DEPENDS += "python3-lxml-native libpng zlib virtual/libgles2 qemu-native"
+ 
+-- 
+2.20.1
+
 
