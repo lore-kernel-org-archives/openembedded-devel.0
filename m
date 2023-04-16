@@ -2,84 +2,86 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BAB01C77B61
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BE018C77B77
 	for <webhook@archiver.kernel.org>; Sun, 16 Apr 2023 14:58:16 +0000 (UTC)
-Received: from mail-pj1-f42.google.com (mail-pj1-f42.google.com [209.85.216.42])
- by mx.groups.io with SMTP id smtpd.web11.31334.1681657086496034641
+Received: from mail-pj1-f49.google.com (mail-pj1-f49.google.com [209.85.216.49])
+ by mx.groups.io with SMTP id smtpd.web10.31745.1681657087595040621
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 16 Apr 2023 07:58:06 -0700
+ Sun, 16 Apr 2023 07:58:07 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20221208 header.b=ht1u6xvc;
- spf=pass (domain: gmail.com, ip: 209.85.216.42, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f42.google.com with SMTP id z11-20020a17090abd8b00b0024721c47ceaso9645709pjr.3
-        for <openembedded-devel@lists.openembedded.org>; Sun, 16 Apr 2023 07:58:06 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20221208 header.b=qXa9bA8Y;
+ spf=pass (domain: gmail.com, ip: 209.85.216.49, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f49.google.com with SMTP id cm18-20020a17090afa1200b0024713adf69dso10982681pjb.3
+        for <openembedded-devel@lists.openembedded.org>; Sun, 16 Apr 2023 07:58:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1681657086; x=1684249086;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=Edf0RD9xPdAjzXeWwp+RvgpgtL7/T7gQ6vSgdc8T/zw=;
-        b=ht1u6xvcRs+EX5ZidLnTQLWELCtqXnt902g3bNer8HaNarEucKuwjGTDDK/EVsFUHn
-         8W02ovIWE8apa2RhQs2/9K3Bynv8WGXcgik85KaOd0V3565H9z5ysfA4x8iI8KpuqiMX
-         p3GI/wWQKhnZ0ms1pzfv1lC4GOr8pWuE58JNLCaZiabOy4mSij2UfhpsIORTJG5uTCAn
-         iUVbGcj6knq6DfiwBEc7mSuAGCk03m+RAkCFLcOIwDSCdlK5Lx3hO1h8/HBqqhvrw8c2
-         5iNomraFJpRcjtitT2bMAOokqMpYAtMxP/RKD48TmQ0V9fP7U/VO5PB492UsoA9pG+QX
-         Cr3g==
+        d=gmail.com; s=20221208; t=1681657087; x=1684249087;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=GN9giLkS8boBU65mldYb0LGvotJjqqGVB8uFuqrfNUA=;
+        b=qXa9bA8YUBFiN3cdykDRKSYQtyzRJpG8a3R1GUCyBccRJWEXFhbQeSIB5QbF45X8TS
+         cKkz9ZKZTnXS2memjx/smsp7L4yQAD6w1782kAHR2tVM9ebiaAIwxrkp4uAvMnD6kylU
+         M1fK+BIvY2V3/8NZWYrQPx29ShflBLdAY+tRvWTRZgkc1g0bjhHkb99ek7RVBYO2K7R8
+         KbFprLsGpPFj6NSvmW/CusNaCe8SwuQYsHwMonFicXh4iOZXe+TNFpphjruh9lXHujpF
+         3TOyxkH5bJo/JyzOA7IvYYihf64lp+Qc1pFUyjHUeVboKMdFk5fjhDj29JIi+k6rR5ox
+         NM8w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1681657086; x=1684249086;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=Edf0RD9xPdAjzXeWwp+RvgpgtL7/T7gQ6vSgdc8T/zw=;
-        b=K1L6oTGinvRTMPVBpGh7gjhSVQb4EgtTErCAkhf8wkDmNvY++TS6vqd2WRobjLCAir
-         IBHdes6Rhlnls1WExOTDdhcwk+O3e6FX+YwmXjmECyIkdiYB5n0O44DoFYaYjMyUjcyM
-         uSsfIJaxvb+v/RR0o4uMoTw5Zt8Giw7P/khbGJ52kYfD25lkD3bNccwR3MC2KedL1z9p
-         K7TG1JtFpSry5V/UrqgxZGl+I+BCZXg9yQ5FSQk1TuNyLVD86C1K2CZNtxpA9D6ixKxK
-         /g6T36FvlUOCc12XV2+A6VAUtQCNPpH7IqJ73tqL5r0ITchSJTSMcTJRcc9+z0e+amkF
-         7ikA==
-X-Gm-Message-State: AAQBX9dQhRPZqMzw6goB9EelxZ9NcdgdVwCZ45ek5NWOAlLL/p1H/ui9
-	BVO5tde1q1R3LJwxzeWUpxfJPTeEfgjeeg==
-X-Google-Smtp-Source: AKy350aP9+bBvM9qt+HxHOLHq+NLl5cit/0M2sY14FK6/7EJhZ7Fi2O+nbg4yzoVNaKmjgZX840dmA==
-X-Received: by 2002:a17:902:c602:b0:19e:ad18:da5c with SMTP id r2-20020a170902c60200b0019ead18da5cmr9201831plr.37.1681657085567;
-        Sun, 16 Apr 2023 07:58:05 -0700 (PDT)
+        d=1e100.net; s=20221208; t=1681657087; x=1684249087;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=GN9giLkS8boBU65mldYb0LGvotJjqqGVB8uFuqrfNUA=;
+        b=T3IfO32KVlDzsbDLXDbKTSbSIn6XWTrf4u+biF33ovo5zPIkw2AbdsMuVRl77/R/7X
+         uyGl6BprAigBp448b1OQIcCxnYqgfKDJE2dTBWdKVGwb6kja2KAxRxw9+s37r7Xh0D5j
+         WWBm4kg49Z1HK+P8bg46I2kQctThEN8br9eFWpuJ5rDFt3rrZ0nIdVebTbhLqDtQLLXd
+         YNBEd/VMPdwDswDADPa/ujc7RtrnHeAFAapIrN5hQjc8xSSr59gT1Xc7ewlnLSPLrYnr
+         iCXZVNWt5bnGpQHEbKWsgmmKEVvpSDEzIy4udEISTiOAuzl50KGYYKJdhMP5Rc3xCXAA
+         ZS7A==
+X-Gm-Message-State: AAQBX9f2JDlby5XTerJRzzbAGgpNzSXHTJmdupUeojNIUmFA/aqi1KTG
+	/JojJt2WPsArZ682b9diMxaPdoyPPdTOQg==
+X-Google-Smtp-Source: AKy350Z/9oGCJ+opb8uy2QiOVo6DI2hnqEz+E0ec3nn56qq9ZmDGbvjnRkrcavLvS0mbwBPACj5XqA==
+X-Received: by 2002:a17:902:7489:b0:19f:3d59:e0ac with SMTP id h9-20020a170902748900b0019f3d59e0acmr9060968pll.44.1681657086629;
+        Sun, 16 Apr 2023 07:58:06 -0700 (PDT)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9181:d380::ebd0])
-        by smtp.gmail.com with ESMTPSA id b5-20020a170902bd4500b001a19cf1b37esm6044758plx.40.2023.04.16.07.58.04
+        by smtp.gmail.com with ESMTPSA id b5-20020a170902bd4500b001a19cf1b37esm6044758plx.40.2023.04.16.07.58.05
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
         Sun, 16 Apr 2023 07:58:05 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-python][PATCH 1/2] python3-h5py: Fix TMPDIR references in dbg files
-Date: Sun, 16 Apr 2023 07:58:01 -0700
-Message-Id: <20230416145802.2419372-1-raj.khem@gmail.com>
+Subject: [meta-python][PATCH 2/2] python3-pandas: Fix TMPDIR references in dbg files
+Date: Sun, 16 Apr 2023 07:58:02 -0700
+Message-Id: <20230416145802.2419372-2-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.40.0
+In-Reply-To: <20230416145802.2419372-1-raj.khem@gmail.com>
+References: <20230416145802.2419372-1-raj.khem@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sun, 16 Apr 2023 14:58:16 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102100
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102101
 
 These are embedded into comments in C source code generated with cython
 during do_compile.
 
 Fixes
 
-WARNING: python3-h5py-3.8.0-r0 do_package_qa: QA Issue: File /usr/src/debug/python3-h5py/3.8.0-r0/h5py/_conv.c in package python3-h5py-src contains reference to TMPDIR
-File /usr/src/debug/python3-h5py/3.8.0-r0/h5py/h5fd.c in package python3-h5py-src contains reference to TMPDIR [buildpaths]
+WARNING: python3-pandas-1.5.3-r0 do_package_qa: QA Issue: File /usr/src/debug/python3-pandas/1.5.3-r0/pandas/_libs/hashing.c in package python3-pandas-src contains reference to TMPDIR
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../recipes-devtools/python/python3-h5py_3.8.0.bb      | 10 ++++++++++
+ .../recipes-devtools/python/python3-pandas_1.5.3.bb    | 10 ++++++++++
  1 file changed, 10 insertions(+)
 
-diff --git a/meta-python/recipes-devtools/python/python3-h5py_3.8.0.bb b/meta-python/recipes-devtools/python/python3-h5py_3.8.0.bb
-index 75a41e29dc..3436444695 100644
---- a/meta-python/recipes-devtools/python/python3-h5py_3.8.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-h5py_3.8.0.bb
-@@ -21,6 +21,16 @@ DEPENDS = "python3-pkgconfig-native \
-            hdf5 \
-           "
+diff --git a/meta-python/recipes-devtools/python/python3-pandas_1.5.3.bb b/meta-python/recipes-devtools/python/python3-pandas_1.5.3.bb
+index aa8dfe279d..129c3147cf 100644
+--- a/meta-python/recipes-devtools/python/python3-pandas_1.5.3.bb
++++ b/meta-python/recipes-devtools/python/python3-pandas_1.5.3.bb
+@@ -14,6 +14,16 @@ DEPENDS += " \
+     ${PYTHON_PN}-numpy-native ${PYTHON_PN}-cython-native \
+ "
  
 +PACKAGESPLITFUNCS =+ "fix_cythonized_sources"
 +
@@ -91,9 +93,9 @@ index 75a41e29dc..3436444695 100644
 +	done
 +}
 +
- RDEPENDS:${PN} = "python3-numpy \
-                   python3-six \
-                   python3-json \
+ CFLAGS:append:toolchain-clang = " -Wno-error=deprecated-declarations"
+ 
+ RDEPENDS:${PN} += " \
 -- 
 2.40.0
 
