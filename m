@@ -1,203 +1,127 @@
-Return-Path: <kai.kang@eng.windriver.com>
+Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6E0B1C77B7D
-	for <webhook@archiver.kernel.org>; Mon, 17 Apr 2023 07:56:31 +0000 (UTC)
-Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.web11.48594.1681718186110245754
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 71B4CC77B70
+	for <webhook@archiver.kernel.org>; Mon, 17 Apr 2023 08:01:31 +0000 (UTC)
+Received: from mail1.bemta37.messagelabs.com (mail1.bemta37.messagelabs.com [85.158.142.1])
+ by mx.groups.io with SMTP id smtpd.web11.48664.1681718482475302227
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 17 Apr 2023 00:56:26 -0700
+ Mon, 17 Apr 2023 01:01:22 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="body hash did not verify" header.i=@windriver.com header.s=pps06212021 header.b=czVguV33;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=3471b6e0c9=kai.kang@windriver.com)
-Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 33H6GhT2020197
-	for <openembedded-devel@lists.openembedded.org>; Mon, 17 Apr 2023 00:56:25 -0700
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com; h=from : to :
- subject : date : message-id : in-reply-to : references : mime-version :
- content-type : content-transfer-encoding; s=PPS06212021;
- bh=U0DS5sJKkcyj3UliTX6rvNNORsAIxvmnPYYwvow/Km0=;
- b=czVguV33snHXyZxt3ND0/FEPotHQBUUEqZXhIL3BJXwVZhUKFuZJMI1xwM/XWvzBk0Cs
- Vc3txmWS4vecw3cPCXFUmgRfF8za2jOlc9AEXGMHKZMxf4RKnbLanYqZidjqqieZkhU2
- +yJZelOuxzd/91VHMlSr7wo5RZI/Qr02R7F5wJB+H7wY4ZWiaQ/a6MEkn7KafciOC2cn
- 4sEj+Q1NU+MDCygtvZYG/6ba/UVvFgr2mo7Yo3zksHXxQM8p78MjwzE8wSNfP8rFFg84
- 45rJ9GTSNOlPB4S/nHdg+FxSBSuLlU08olZPmx17thy069ZaGFpoAyO1kQTD+LS4Lo7h Aw== 
-Received: from ala-exchng02.corp.ad.wrs.com (unknown-82-254.windriver.com [147.11.82.254])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3q01kdhnss-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Mon, 17 Apr 2023 00:56:25 -0700
-Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
- ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.23; Mon, 17 Apr 2023 00:56:24 -0700
-Received: from pek-lpg-core3.wrs.com (128.224.153.232) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
- 15.1.2507.23 via Frontend Transport; Mon, 17 Apr 2023 00:56:24 -0700
-From: <kai.kang@windriver.com>
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=UMe9mR89;
+ spf=pass (domain: fujitsu.com, ip: 85.158.142.1, mailfrom: wangmy@fujitsu.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
+	s=170520fj; t=1681718480; i=@fujitsu.com;
+	bh=V7htNflb82qx54jm5iw6dFPsdFh7jKUmVfeHX6DK0Nk=;
+	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
+	b=UMe9mR89SFBIvJDz9KCoVsT9gxd4j5IRv5sZgFAxtXj8IXCi9zYWUDgVQbp8Ahp6/
+	 XlCuErM5srvPcEpjSC55sb5NZuUWUsgfPIHAdU3+a7qkQMGcyo+ZYmYaLiKqD0AwZe
+	 Z73pSGO/kmg6CRId8NOZymrCW39hbHfu0WCh3HaGCmvVZiWk/8Cezlyq2xYu820vDX
+	 eZPR/ODLCC0agxMXp2PtUmxZfO1acZkVZn9As2Nldbq3VBy3apgpi316rJ21a4c0J6
+	 F/FHi8Bo6M6PDe9uzr/SltrAiBG0pdQwMDCEo1ex2bhBeHzo2ondpNzsLDSIDKMonw
+	 Ek0O04tj1wlow==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrAIsWRWlGSWpSXmKPExsViZ8OxWff8H5s
+  Ug49N1hYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8bRu1sYC/bzVsyfuZu9gfEDdxcjF4eQwENG
+  iZOP97BCOFeZJDY/nM8O4exllLiz/TFzFyMnB5uAlMSN+//ZQGwRAX2JpbP3gMWZBVQkXvzuY
+  QexhQU8JQ4s+AJmswioSpw/9JMJxOYVcJK42rIFrFdCQEFiysP3zBBxQYmTM5+wQMyRkDj44g
+  UzRI2ixOzLzSwQdqVE64dfULaaxNVzm5gnMPLPQtI+C0n7AkamVYzmxalFZalFuobGeklFmek
+  ZJbmJmTl6iVW6iXqppbp5+UUlGbqGeonlxXqpxcV6xZW5yTkpenmpJZsYgQGZUpwwYwfjr76/
+  eocYJTmYlER5X6RapwjxJeWnVGYkFmfEF5XmpBYfYpTh4FCS4H350yZFSLAoNT21Ii0zBxgdM
+  GkJDh4lEV7jZ0Bp3uKCxNzizHSI1ClGRSlxXlZgTAkJgCQySvPg2mAReYlRVkqYl5GBgUGIpy
+  C1KDezBFX+FaM4B6OSMO8+kO08mXklcNNfAS1mAlospwS2uCQRISXVwLRLasqHGkP2vVOq2vL
+  +x9fdqU+4LbaARZdl2YuoVcdP1E4SDvHRkvbcHrtSjFXNRjpYyv6+5E4hi+mZgeUPWNX2frmr
+  fzHq5aH8u+kKZl5CU8xsSv4fUVg9z3qfzvSd/QGLLiYa87f9NKmVPWr7i6/qYc534fulbzgnn
+  BRplNo0f07hEx8f95OH1Kfd9XseUnniv+ulQ+ULnnaxfJE4NnfLNVdBO3mTqBXP45zLlyRdDl
+  aRcJlnfzQmh2n5my2s6ycd89882UbR+8J7VU7RWs7IJXr3VngETvwzJSUjvC3rQuH+SInL8sK
+  hzZzRaj97cwX6TeQ+Bkx5Wea33fnvbeumbTe/hdWqMO9+p6a6X4mlOCPRUIu5qDgRAAJQKFND
+  AwAA
+X-Env-Sender: wangmy@fujitsu.com
+X-Msg-Ref: server-31.tower-745.messagelabs.com!1681718479!219175!1
+X-Originating-IP: [62.60.8.179]
+X-SYMC-ESS-Client-Auth: outbound-route-from=pass
+X-StarScan-Received: 
+X-StarScan-Version: 9.104.2; banners=-,-,-
+X-VirusChecked: Checked
+Received: (qmail 30496 invoked from network); 17 Apr 2023 08:01:19 -0000
+Received: from unknown (HELO n03ukasimr04.n03.fujitsu.local) (62.60.8.179)
+  by server-31.tower-745.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 17 Apr 2023 08:01:19 -0000
+Received: from n03ukasimr04.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTP id 4D77A153
+	for <openembedded-devel@lists.openembedded.org>; Mon, 17 Apr 2023 09:01:19 +0100 (BST)
+Received: from R01UKEXCASM223.r01.fujitsu.local (R01UKEXCASM223 [10.182.185.121])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTPS id 417ED151
+	for <openembedded-devel@lists.openembedded.org>; Mon, 17 Apr 2023 09:01:19 +0100 (BST)
+Received: from localhost.localdomain (10.167.225.33) by
+ R01UKEXCASM223.r01.fujitsu.local (10.182.185.121) with Microsoft SMTP Server
+ (TLS) id 15.0.1497.42; Mon, 17 Apr 2023 09:01:17 +0100
+From: <wangmy@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-xfce][PATCH 4/4] xfce4-screensaver: 4.16.0 -> 4.18.1
-Date: Mon, 17 Apr 2023 15:56:17 +0800
-Message-ID: <20230417075617.35121-4-kai.kang@windriver.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20230417075617.35121-1-kai.kang@windriver.com>
-References: <20230417075617.35121-1-kai.kang@windriver.com>
+CC: Wang Mingyu <wangmy@fujitsu.com>
+Subject: [oe] [meta-networking] [PATCH] tcpdump: upgrade 4.99.3 -> 4.99.4
+Date: Mon, 17 Apr 2023 16:01:03 +0800
+Message-ID: <1681718464-19357-1-git-send-email-wangmy@fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-X-Proofpoint-ORIG-GUID: zKBkg1CCrTM5NJHVHRuNyLrrhW4jDUst
-X-Proofpoint-GUID: zKBkg1CCrTM5NJHVHRuNyLrrhW4jDUst
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.254,Aquarius:18.0.942,Hydra:6.0.573,FMLib:17.11.170.22
- definitions=2023-04-17_04,2023-04-14_01,2023-02-09_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 mlxscore=0 lowpriorityscore=0
- mlxlogscore=750 phishscore=0 priorityscore=1501 impostorscore=0
- suspectscore=0 malwarescore=0 adultscore=0 bulkscore=0 spamscore=0
- clxscore=1015 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2303200000 definitions=main-2304170072
-Content-Transfer-Encoding: quoted-printable
-X-MIME-Autoconverted: from 8bit to quoted-printable by mx0a-0064b401.pphosted.com id 33H6GhT2020197
+Content-Type: text/plain
+X-Originating-IP: [10.167.225.33]
+X-ClientProxiedBy: G08CNEXCHPEKD07.g08.fujitsu.local (10.167.33.80) To
+ R01UKEXCASM223.r01.fujitsu.local (10.182.185.121)
+X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 17 Apr 2023 07:56:31 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102125
+ <openembedded-devel@lists.openembedded.org>; Mon, 17 Apr 2023 08:01:31 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102126
 
-From: Kai Kang <kai.kang@windriver.com>
+From: Wang Mingyu <wangmy@fujitsu.com>
 
-Update xfce4-screensaver from 4.16.0 to 4.18.1
+Changelog:
+==========
+Source code:
+----------------
+  Fix spaces before tabs in indentation.
+Updated printers:
+-----------------
+  LSP ping: Fix "Unused value" warnings from Coverity.
+  CVE-2023-1801: Fix an out-of-bounds write in the SMB printer.
+  DNS: sync resource types with IANA.
+  ICMPv6: Update the output to show a RPL DAO field name.
+  Geneve: Fix the Geneve UDP port test.
+Building and testing:
+----------------------
+  Require at least autoconf 2.69.
+  Don't check for strftime(), as it's in C90 and beyond.
+  Update config.{guess,sub}, timestamps 2023-01-01,2023-01-21.
+Documentation:
+-------------
+  man: Document TCP flag names better.
 
-* rebase fix-cross-compile.patch
-
-Release notes for 4.18.1
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-This release is to fix a build issue on BSD systems
-
-- Refactor spawn_make_environment_for_display()
-
-Release notes for 4.18.0
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-- Add copyright notice to configure.ac
-- Make missing GNOME Keyring PAM module warning quiet (Fixes #46)
-- build: Fix --disable-locking (Fixes #83)
-- Remove duplicated lines in README (Fixes #109)
-- savers: Fix critical warnings on exit
-- savers: Fix critical warnings from GSThemeWindow on "realize"
-- Do not redirect stderr for our own commands
-- Round the user picture on lock dialog.
-- build: Do not warn if PAM prefix is correct
-- Improve lightdm detection (Fixes #39)
-- build: Fix -Wunused-value compiler warning
-- build: Fix -Wdeclaration-after-statement compiler warning
-- build: Fix -Wsign-compare compiler warning
-- build: Use XDT_FEATURE_DEBUG
-- Fix use-after-free crash in xfce4-screensaver-dialog
-- Fix D-Bus sleep inhibit when screen locker is disabled
-- Complete previous commit
-- Fix Xfconf memory management
-- build: Set GLib macros via XDT_CHECK_PACKAGE
-- autogen.sh: Do not `mkdir m4`
-- Fix crash when XDG_PICTURES_DIR is not set (Fixes #86)
-- Fix build warning from Clang
-- --with-password-helper expects full pathname of password helper
-- Add missing zeroing of timeout_id in dialog_timed_out() timer handler
-- Fix wrong signal name for GtkSpinButton
-- Remove ENABLE_NLS ifdefs and use xfce_textdomain()
-- build: Fix intltool lock file problem during make distcheck
-- Fix compilation warnings
-- autoconf: Some updates
-- Translation Updates:
-  Albanian, Armenian (Armenia), Basque, Belarusian, Bulgarian, Catalan,
-  Chinese (China), Chinese (Taiwan), Danish, Dutch, Eastern Armenian,
-  English (Australia), Estonian, Finnish, French, Galician, German,
-  Hebrew, Hungarian, Icelandic, Indonesian, Italian, Japanese, Kabyle,
-  Korean, Lithuanian, Malay, Norwegian Bokm=C3=A5l, Polish, Portuguese,
-  Portuguese (Brazil), Russian, Serbian, Slovak, Slovenian, Spanish,
-  Swedish, Thai, Ukrainian
-
-Signed-off-by: Kai Kang <kai.kang@windriver.com>
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../xfce4-screensaver/fix-cross-compile.patch      | 14 +++++++++-----
- ...saver_4.16.0.bb =3D> xfce4-screensaver_4.18.1.bb} |  2 +-
- 2 files changed, 10 insertions(+), 6 deletions(-)
- rename meta-xfce/recipes-apps/xfce4-screensaver/{xfce4-screensaver_4.16.=
-0.bb =3D> xfce4-screensaver_4.18.1.bb} (91%)
+ .../tcpdump/{tcpdump_4.99.3.bb => tcpdump_4.99.4.bb}            | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-networking/recipes-support/tcpdump/{tcpdump_4.99.3.bb => tcpdump_4.99.4.bb} (93%)
 
-diff --git a/meta-xfce/recipes-apps/xfce4-screensaver/xfce4-screensaver/f=
-ix-cross-compile.patch b/meta-xfce/recipes-apps/xfce4-screensaver/xfce4-s=
-creensaver/fix-cross-compile.patch
-index f726064e2..eabcaaae6 100644
---- a/meta-xfce/recipes-apps/xfce4-screensaver/xfce4-screensaver/fix-cros=
-s-compile.patch
-+++ b/meta-xfce/recipes-apps/xfce4-screensaver/xfce4-screensaver/fix-cros=
-s-compile.patch
-@@ -6,11 +6,15 @@ Upstream-Status: Inappropriate [cross compile specific]
-=20
- Signed-off-by: Kai Kang <kai.kang@windriver.com>
-=20
-+---
-+ configure.ac | 24 ++++++++++++------------
-+ 1 file changed, 12 insertions(+), 12 deletions(-)
-+
- diff --git a/configure.ac b/configure.ac
--index f0ec537..05c393d 100644
-+index 6f149bb..3890677 100644
- --- a/configure.ac
- +++ b/configure.ac
--@@ -230,9 +230,9 @@ dnl ------------------------------------------------=
----------------------------
-+@@ -237,9 +237,9 @@ dnl ------------------------------------------------=
----------------------------
-  #
-  AC_DEFUN([AC_CHECK_X_HEADER], [
-    ac_save_CPPFLAGS=3D"$CPPFLAGS"
-@@ -23,7 +27,7 @@ index f0ec537..05c393d 100644
-    CPPFLAGS=3D"$CPPFLAGS $X_CFLAGS"
-    AC_CHECK_HEADER([$1],[$2],[$3],[$4])
-    CPPFLAGS=3D"$ac_save_CPPFLAGS"])
--@@ -241,9 +241,9 @@ AC_DEFUN([AC_CHECK_X_HEADER], [
-+@@ -248,9 +248,9 @@ AC_DEFUN([AC_CHECK_X_HEADER], [
-  #
-  AC_DEFUN([AC_TRY_X_COMPILE], [
-    ac_save_CPPFLAGS=3D"$CPPFLAGS"
-@@ -34,9 +38,9 @@ index f0ec537..05c393d 100644
- +#    CPPFLAGS=3D"$CPPFLAGS -I$includedir"
- +#  fi
-    CPPFLAGS=3D"$CPPFLAGS $X_CFLAGS"
--   AC_TRY_COMPILE([$1], [$2], [$3], [$4])
-+   AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[$1]], [[$2]])], [$3], [$4])
-    CPPFLAGS=3D"$ac_save_CPPFLAGS"])
--@@ -257,15 +257,15 @@ AC_DEFUN([AC_CHECK_X_LIB], [
-+@@ -264,15 +264,15 @@ AC_DEFUN([AC_CHECK_X_LIB], [
-    ac_save_LDFLAGS=3D"$LDFLAGS"
-  #  ac_save_LIBS=3D"$LIBS"
- =20
-diff --git a/meta-xfce/recipes-apps/xfce4-screensaver/xfce4-screensaver_4=
-.16.0.bb b/meta-xfce/recipes-apps/xfce4-screensaver/xfce4-screensaver_4.1=
-8.1.bb
-similarity index 91%
-rename from meta-xfce/recipes-apps/xfce4-screensaver/xfce4-screensaver_4.=
-16.0.bb
-rename to meta-xfce/recipes-apps/xfce4-screensaver/xfce4-screensaver_4.18=
-.1.bb
-index 685c4c1f6..2c5cba0d8 100644
---- a/meta-xfce/recipes-apps/xfce4-screensaver/xfce4-screensaver_4.16.0.b=
-b
-+++ b/meta-xfce/recipes-apps/xfce4-screensaver/xfce4-screensaver_4.18.1.b=
-b
-@@ -13,7 +13,7 @@ DEPENDS =3D "dbus-glib garcon gtk+3 libxklavier libxscr=
-nsaver virtual/libx11 xfcon
- inherit xfce-app
-=20
- SRC_URI:append =3D " file://fix-cross-compile.patch"
--SRC_URI[sha256sum] =3D "6d4d143e3e62db679ce83ce7da97903390773ee0a8ceb05f=
-f4c3dac36616268d"
-+SRC_URI[sha256sum] =3D "b731e8abd68a18cc5d3b523351aa8f9f293c9f63290c1781=
-c9155259deb04a5c"
-=20
- do_install:append() {
-     install -D -m 0644 ${S}/data/xfce4-screensaver.common-auth ${D}${sys=
-confdir}/pam.d/xfce4-screensaver
---=20
-2.17.1
+diff --git a/meta-networking/recipes-support/tcpdump/tcpdump_4.99.3.bb b/meta-networking/recipes-support/tcpdump/tcpdump_4.99.4.bb
+similarity index 93%
+rename from meta-networking/recipes-support/tcpdump/tcpdump_4.99.3.bb
+rename to meta-networking/recipes-support/tcpdump/tcpdump_4.99.4.bb
+index 03f1b76f9..803a9bb5f 100644
+--- a/meta-networking/recipes-support/tcpdump/tcpdump_4.99.3.bb
++++ b/meta-networking/recipes-support/tcpdump/tcpdump_4.99.4.bb
+@@ -26,7 +26,7 @@ SRC_URI = " \
+     file://run-ptest \
+ "
+ 
+-SRC_URI[sha256sum] = "ad75a6ed3dc0d9732945b2e5483cb41dc8b4b528a169315e499c6861952e73b3"
++SRC_URI[sha256sum] = "0232231bb2f29d6bf2426e70a08a7e0c63a0d59a9b44863b7f5e2357a6e49fea"
+ 
+ UPSTREAM_CHECK_REGEX = "tcpdump-(?P<pver>\d+(\.\d+)+)\.tar"
+ 
+-- 
+2.34.1
 
 
