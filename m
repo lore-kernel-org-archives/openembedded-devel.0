@@ -2,68 +2,71 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 71B4CC77B70
-	for <webhook@archiver.kernel.org>; Mon, 17 Apr 2023 08:01:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3C0F4C77B70
+	for <webhook@archiver.kernel.org>; Mon, 17 Apr 2023 08:01:41 +0000 (UTC)
 Received: from mail1.bemta37.messagelabs.com (mail1.bemta37.messagelabs.com [85.158.142.1])
- by mx.groups.io with SMTP id smtpd.web11.48664.1681718482475302227
+ by mx.groups.io with SMTP id smtpd.web10.49311.1681718493032634756
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 17 Apr 2023 01:01:22 -0700
+ Mon, 17 Apr 2023 01:01:33 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=UMe9mR89;
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=e7gYFXFu;
  spf=pass (domain: fujitsu.com, ip: 85.158.142.1, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1681718480; i=@fujitsu.com;
-	bh=V7htNflb82qx54jm5iw6dFPsdFh7jKUmVfeHX6DK0Nk=;
-	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=UMe9mR89SFBIvJDz9KCoVsT9gxd4j5IRv5sZgFAxtXj8IXCi9zYWUDgVQbp8Ahp6/
-	 XlCuErM5srvPcEpjSC55sb5NZuUWUsgfPIHAdU3+a7qkQMGcyo+ZYmYaLiKqD0AwZe
-	 Z73pSGO/kmg6CRId8NOZymrCW39hbHfu0WCh3HaGCmvVZiWk/8Cezlyq2xYu820vDX
-	 eZPR/ODLCC0agxMXp2PtUmxZfO1acZkVZn9As2Nldbq3VBy3apgpi316rJ21a4c0J6
-	 F/FHi8Bo6M6PDe9uzr/SltrAiBG0pdQwMDCEo1ex2bhBeHzo2ondpNzsLDSIDKMonw
-	 Ek0O04tj1wlow==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrAIsWRWlGSWpSXmKPExsViZ8OxWff8H5s
-  Ug49N1hYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8bRu1sYC/bzVsyfuZu9gfEDdxcjF4eQwENG
-  iZOP97BCOFeZJDY/nM8O4exllLiz/TFzFyMnB5uAlMSN+//ZQGwRAX2JpbP3gMWZBVQkXvzuY
-  QexhQU8JQ4s+AJmswioSpw/9JMJxOYVcJK42rIFrFdCQEFiysP3zBBxQYmTM5+wQMyRkDj44g
-  UzRI2ixOzLzSwQdqVE64dfULaaxNVzm5gnMPLPQtI+C0n7AkamVYzmxalFZalFuobGeklFmek
-  ZJbmJmTl6iVW6iXqppbp5+UUlGbqGeonlxXqpxcV6xZW5yTkpenmpJZsYgQGZUpwwYwfjr76/
-  eocYJTmYlER5X6RapwjxJeWnVGYkFmfEF5XmpBYfYpTh4FCS4H350yZFSLAoNT21Ii0zBxgdM
-  GkJDh4lEV7jZ0Bp3uKCxNzizHSI1ClGRSlxXlZgTAkJgCQySvPg2mAReYlRVkqYl5GBgUGIpy
-  C1KDezBFX+FaM4B6OSMO8+kO08mXklcNNfAS1mAlospwS2uCQRISXVwLRLasqHGkP2vVOq2vL
-  +x9fdqU+4LbaARZdl2YuoVcdP1E4SDvHRkvbcHrtSjFXNRjpYyv6+5E4hi+mZgeUPWNX2frmr
-  fzHq5aH8u+kKZl5CU8xsSv4fUVg9z3qfzvSd/QGLLiYa87f9NKmVPWr7i6/qYc534fulbzgnn
-  BRplNo0f07hEx8f95OH1Kfd9XseUnniv+ulQ+ULnnaxfJE4NnfLNVdBO3mTqBXP45zLlyRdDl
-  aRcJlnfzQmh2n5my2s6ycd89882UbR+8J7VU7RWs7IJXr3VngETvwzJSUjvC3rQuH+SInL8sK
-  hzZzRaj97cwX6TeQ+Bkx5Wea33fnvbeumbTe/hdWqMO9+p6a6X4mlOCPRUIu5qDgRAAJQKFND
-  AwAA
+	s=170520fj; t=1681718491; i=@fujitsu.com;
+	bh=INDxEEM1fknOzI5DfgprUGGrmlqr3NZhLbaPZTcb4SM=;
+	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type;
+	b=e7gYFXFuqNjZUkci6b3Xbb9qhuNcSxzHEv8hHeDIZCAOiUPuAo2wDrxUbH8APLWdu
+	 MyR5TmpnrVjGNKM7Vt98IfD6wNrIhMvEu8ckWKmjwxCsQGAB8xpvu+hSTLa6JkmnPI
+	 GXKe3yYDhUssOTP67qxp8UTcF16AQN+RxURW9bYIlHseRliqmQ0bc+48qcd6kpuDLe
+	 wWP2E2dHall+HvcTqLWjos9QyxwYunr8E1A7C91epQky0u6kdb3CsgoB49iMq/cJMY
+	 gTFdPXeJYyt0vHn6iRogWrKA6ugKnK1+GvVHTEwTc0wboslXuDOk89CJYnfBfuIcPJ
+	 8+EltrakBAdaA==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrCIsWRWlGSWpSXmKPExsViZ8ORqHvrj02
+  Kwd7LJhYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8bCj1PZCl5zVJy8/Z2xgfEPexcjF4eQwBNG
+  iTPtHSwQzg0miRmbZwFlOIGcvYwSf9oEQGw2ASmJG/f/s4HYIgL6Ektn72EGsZkFVCRe/O4Bq
+  xcWcJB4+a2PtYuRg4NFQFXixoRMkDCvgJPE7Z73rCC2hICCxJSH75lBSjgFnCUmzQ+D2OQkcf
+  H6PHaIckGJkzOfsEBMl5A4+OIFM0SrosTsy80sEHalROuHX1C2msTVc5uYJzAKzkLSPgtJ+wJ
+  GplWMZsWpRWWpRbrmeklFmekZJbmJmTl6iVW6iXqppbp5+UUlGbqGeonlxXqpxcV6xZW5yTkp
+  enmpJZsYgYGbUpzKuYNxZd9fvUOMkhxMSqK8L1KtU4T4kvJTKjMSizPii0pzUosPMcpwcChJ8
+  L78aZMiJFiUmp5akZaZA4wimLQEB4+SCK/xM6A0b3FBYm5xZjpE6hSjopQ4Lysw9oQEQBIZpX
+  lwbbDIvcQoKyXMy8jAwCDEU5BalJtZgir/ilGcg1FJmHcfyHaezLwSuOmvgBYzAS2WUwJbXJK
+  IkJJqYEq7wL6jRXlqa/5O/pnbV8S72M23kbBbcihtqs/es+a5d/xVP7rrMVz2jjkxwT3gmtSH
+  mQp3rBvXf0+pPOrBIXb3ofDU7wbh3Gf/9HaVvXNvX2Xgv4sr+dmUD7tqVU/laP1uUMq+FLeFp
+  3j54ReLp5hXiXQb5oZwTIw8nvC48aiXp3RR6U6t9a4aJkcSfnhxiJza5PfTu2lT6+P4JM51Ov
+  1BcyXPb569IVZRZ02PGq9oVMwjp3aNiEt+6WZRrJHSfAK9erWfsgt0qmOluK1T/nqp7j+ouWu
+  9de2eK8Xb3S9UsW2svlSW5/tof8xs5dq0Tw+kPxSphq+sfLLt5PlaQbkFEtvKX69grpF5fkFc
+  iaU4I9FQi7moOBEAVC3Zy1cDAAA=
 X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-31.tower-745.messagelabs.com!1681718479!219175!1
-X-Originating-IP: [62.60.8.179]
+X-Msg-Ref: server-6.tower-728.messagelabs.com!1681718490!219557!1
+X-Originating-IP: [62.60.8.97]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.104.2; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 30496 invoked from network); 17 Apr 2023 08:01:19 -0000
-Received: from unknown (HELO n03ukasimr04.n03.fujitsu.local) (62.60.8.179)
-  by server-31.tower-745.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 17 Apr 2023 08:01:19 -0000
-Received: from n03ukasimr04.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTP id 4D77A153
-	for <openembedded-devel@lists.openembedded.org>; Mon, 17 Apr 2023 09:01:19 +0100 (BST)
+Received: (qmail 25757 invoked from network); 17 Apr 2023 08:01:30 -0000
+Received: from unknown (HELO n03ukasimr01.n03.fujitsu.local) (62.60.8.97)
+  by server-6.tower-728.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 17 Apr 2023 08:01:30 -0000
+Received: from n03ukasimr01.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTP id 39F131001A0
+	for <openembedded-devel@lists.openembedded.org>; Mon, 17 Apr 2023 09:01:30 +0100 (BST)
 Received: from R01UKEXCASM223.r01.fujitsu.local (R01UKEXCASM223 [10.182.185.121])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTPS id 417ED151
-	for <openembedded-devel@lists.openembedded.org>; Mon, 17 Apr 2023 09:01:19 +0100 (BST)
+	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTPS id 2C739100194
+	for <openembedded-devel@lists.openembedded.org>; Mon, 17 Apr 2023 09:01:30 +0100 (BST)
 Received: from localhost.localdomain (10.167.225.33) by
  R01UKEXCASM223.r01.fujitsu.local (10.182.185.121) with Microsoft SMTP Server
- (TLS) id 15.0.1497.42; Mon, 17 Apr 2023 09:01:17 +0100
+ (TLS) id 15.0.1497.42; Mon, 17 Apr 2023 09:01:27 +0100
 From: <wangmy@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-networking] [PATCH] tcpdump: upgrade 4.99.3 -> 4.99.4
-Date: Mon, 17 Apr 2023 16:01:03 +0800
-Message-ID: <1681718464-19357-1-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH] tcsh: upgrade 6.24.07 -> 6.24.10
+Date: Mon, 17 Apr 2023 16:01:04 +0800
+Message-ID: <1681718464-19357-2-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
+In-Reply-To: <1681718464-19357-1-git-send-email-wangmy@fujitsu.com>
+References: <1681718464-19357-1-git-send-email-wangmy@fujitsu.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-Originating-IP: [10.167.225.33]
@@ -73,54 +76,36 @@ X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 17 Apr 2023 08:01:31 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102126
+ <openembedded-devel@lists.openembedded.org>; Mon, 17 Apr 2023 08:01:41 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102127
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
 Changelog:
-==========
-Source code:
-----------------
-  Fix spaces before tabs in indentation.
-Updated printers:
------------------
-  LSP ping: Fix "Unused value" warnings from Coverity.
-  CVE-2023-1801: Fix an out-of-bounds write in the SMB printer.
-  DNS: sync resource types with IANA.
-  ICMPv6: Update the output to show a RPL DAO field name.
-  Geneve: Fix the Geneve UDP port test.
-Building and testing:
-----------------------
-  Require at least autoconf 2.69.
-  Don't check for strftime(), as it's in C90 and beyond.
-  Update config.{guess,sub}, timestamps 2023-01-01,2023-01-21.
-Documentation:
--------------
-  man: Document TCP flag names better.
+   - Avoid non-default settings in system-wide init files.
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../tcpdump/{tcpdump_4.99.3.bb => tcpdump_4.99.4.bb}            | 2 +-
+ .../recipes-shells/tcsh/{tcsh_6.24.07.bb => tcsh_6.24.10.bb}    | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-networking/recipes-support/tcpdump/{tcpdump_4.99.3.bb => tcpdump_4.99.4.bb} (93%)
+ rename meta-oe/recipes-shells/tcsh/{tcsh_6.24.07.bb => tcsh_6.24.10.bb} (94%)
 
-diff --git a/meta-networking/recipes-support/tcpdump/tcpdump_4.99.3.bb b/meta-networking/recipes-support/tcpdump/tcpdump_4.99.4.bb
-similarity index 93%
-rename from meta-networking/recipes-support/tcpdump/tcpdump_4.99.3.bb
-rename to meta-networking/recipes-support/tcpdump/tcpdump_4.99.4.bb
-index 03f1b76f9..803a9bb5f 100644
---- a/meta-networking/recipes-support/tcpdump/tcpdump_4.99.3.bb
-+++ b/meta-networking/recipes-support/tcpdump/tcpdump_4.99.4.bb
-@@ -26,7 +26,7 @@ SRC_URI = " \
-     file://run-ptest \
+diff --git a/meta-oe/recipes-shells/tcsh/tcsh_6.24.07.bb b/meta-oe/recipes-shells/tcsh/tcsh_6.24.10.bb
+similarity index 94%
+rename from meta-oe/recipes-shells/tcsh/tcsh_6.24.07.bb
+rename to meta-oe/recipes-shells/tcsh/tcsh_6.24.10.bb
+index f136c06b7..abeb6e803 100644
+--- a/meta-oe/recipes-shells/tcsh/tcsh_6.24.07.bb
++++ b/meta-oe/recipes-shells/tcsh/tcsh_6.24.10.bb
+@@ -13,7 +13,7 @@ SRC_URI = " \
+     file://0001-Enable-system-malloc-on-all-linux.patch \
+     file://0002-Add-debian-csh-scripts.patch \
  "
+-SRC_URI[sha256sum] = "74e4e9805cbd9413ed34b4ffa1d72fc8d0ef81a5b79476854091416ce9336995"
++SRC_URI[sha256sum] = "13475c0fbeb74139d33ed793bf00ffbbb2ac2dc9fb1d44467a410760aba36664"
  
--SRC_URI[sha256sum] = "ad75a6ed3dc0d9732945b2e5483cb41dc8b4b528a169315e499c6861952e73b3"
-+SRC_URI[sha256sum] = "0232231bb2f29d6bf2426e70a08a7e0c63a0d59a9b44863b7f5e2357a6e49fea"
- 
- UPSTREAM_CHECK_REGEX = "tcpdump-(?P<pver>\d+(\.\d+)+)\.tar"
- 
+ EXTRA_OEMAKE += "CC_FOR_GETHOST='${BUILD_CC}'"
+ inherit autotools
 -- 
 2.34.1
 
