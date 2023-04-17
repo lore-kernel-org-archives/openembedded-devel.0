@@ -1,119 +1,100 @@
-Return-Path: <wangmy@fujitsu.com>
+Return-Path: <kai.kang@eng.windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2E0E8C77B76
-	for <webhook@archiver.kernel.org>; Mon, 17 Apr 2023 07:48:41 +0000 (UTC)
-Received: from mail3.bemta32.messagelabs.com (mail3.bemta32.messagelabs.com [195.245.230.82])
- by mx.groups.io with SMTP id smtpd.web11.48505.1681717711249598704
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 51DC4C77B7C
+	for <webhook@archiver.kernel.org>; Mon, 17 Apr 2023 07:56:31 +0000 (UTC)
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.web11.48592.1681718182995262794
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 17 Apr 2023 00:48:31 -0700
+ Mon, 17 Apr 2023 00:56:23 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=dv6FAuI4;
- spf=pass (domain: fujitsu.com, ip: 195.245.230.82, mailfrom: wangmy@fujitsu.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1681717709; i=@fujitsu.com;
-	bh=rWvooL3a64fuFMZmzQhYA4xSLF5yXuhYxakLz33IBcA=;
-	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type;
-	b=dv6FAuI4wplD9JM3SAcz75PY4rGlFoqhL+9kkWG6ifSh6p38KEomN6zclXTP1nFZB
-	 mQQ8hqIErKZdlXbVhE75f3hpIP4DB7gQP3Pk1cOAQTBm39b3oiiSboCqTBVpLjkFJm
-	 sMpfKAaolF0+3hann2bFQEMYoIQnPkXbKiCJ+ZdXiH8rhNhCKrhQeARHvHqPgnGAvb
-	 RtpFnB3KgsZXL5KeaXnWvk22CghKfQzMtH1EqKLkVFI//DVfq5LW0WXDF70o2KWAeF
-	 xtmb2C3JC1srrA7fIboBuMYhBlHMFM6hhCVR4fxNZUMtmvQjE16ctbXI7vvM3Jg2u9
-	 /yd69GU+fCVyw==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrOIsWRWlGSWpSXmKPExsViZ8MxSffMT5s
-  Ug7/PrC0uHl7K7MDocW7jCsYAxijWzLyk/IoE1oynN3ezFWzlrliw/yFLA2MzVxcjF4eQwBNG
-  iWcHbjJDODeYJBrPdbBCOHsZJXZcfc3YxcjJwSYgJXHj/n82EFtEQF9i6ew9zCA2s4CKxIvfP
-  ewgtrCAtUTvoZlg9SwCqhLzNz8Ei/MKOEn0Hl7LBGJLCChITHn4HqyXU8BZYvGr72D1QkA1H6
-  ZvhKoXlDg58wkLxHwJiYMvXjBD9CpKzL7czAJhV0q0fvgFZatJXD23iXkCo+AsJO2zkLQvYGR
-  axWhWnFpUllqka2iul1SUmZ5RkpuYmaOXWKWbqJdaqlueWlyia6iXWF6sl1pcrFdcmZuck6KX
-  l1qyiREYvinFzOU7GLf3/dU7xCjJwaQkyvsi1TpFiC8pP6UyI7E4I76oNCe1+BCjDAeHkgTv+
-  W82KUKCRanpqRVpmTnAWIJJS3DwKInwGj8DSvMWFyTmFmemQ6ROMSpKifP6fwdKCIAkMkrz4N
-  pg8XuJUVZKmJeRgYFBiKcgtSg3swRV/hWjOAejkjDvpB9AU3gy80rgpr8CWswEtFhOCWxxSSJ
-  CSqqBia9+nVrDha8cLv1HnsxUNdvyP3Gyn8GmU0t97oZdmMdh7GhenzJn/9EzNsWz3v88/I83
-  rfde8VZTqbMvGP9YXPriPe3jY5k3nJxbVLY5bakVnn4tQiT1al9AXES+y9WJdgfnbe+Lk38o6
-  rfHsuzqI5srbDliW+ZFzK92ifI+b/r+1uTV3x77bNW7yLrp20Qv2z/qfSfM6tYu2NT7aHeswM
-  QY65IADrfL1d1Lcv9PMV+9b9qsJPsFV4Jliuxjor+fYk1qE/wbmXo650bT8+npIn7HLEMzj73
-  5aM4dfbtZrKDk0L7V07fKnPyyMv5G+HvjpxMKJmhILNHYZbwkx6Q3oZbd6NVcno+luW+PzEmR
-  iVRiKc5INNRiLipOBABZDMA8WgMAAA==
-X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-5.tower-585.messagelabs.com!1681717708!740350!1
-X-Originating-IP: [62.60.8.146]
-X-SYMC-ESS-Client-Auth: outbound-route-from=pass
-X-StarScan-Received: 
-X-StarScan-Version: 9.104.2; banners=-,-,-
-X-VirusChecked: Checked
-Received: (qmail 343 invoked from network); 17 Apr 2023 07:48:28 -0000
-Received: from unknown (HELO n03ukasimr02.n03.fujitsu.local) (62.60.8.146)
-  by server-5.tower-585.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 17 Apr 2023 07:48:28 -0000
-Received: from n03ukasimr02.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTP id 934E41000FE
-	for <openembedded-devel@lists.openembedded.org>; Mon, 17 Apr 2023 08:48:28 +0100 (BST)
-Received: from R01UKEXCASM223.r01.fujitsu.local (R01UKEXCASM223 [10.182.185.121])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTPS id 871DA1000FC
-	for <openembedded-devel@lists.openembedded.org>; Mon, 17 Apr 2023 08:48:28 +0100 (BST)
-Received: from localhost.localdomain (10.167.225.33) by
- R01UKEXCASM223.r01.fujitsu.local (10.182.185.121) with Microsoft SMTP Server
- (TLS) id 15.0.1497.42; Mon, 17 Apr 2023 08:48:27 +0100
-From: <wangmy@fujitsu.com>
+ dkim=pass header.i=@windriver.com header.s=pps06212021 header.b=NOe5EBxK;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=3471b6e0c9=kai.kang@windriver.com)
+Received: from pps.filterd (m0250811.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 33H4cMDd012997
+	for <openembedded-devel@lists.openembedded.org>; Mon, 17 Apr 2023 07:56:22 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com; h=from : to :
+ subject : date : message-id : mime-version : content-type; s=PPS06212021;
+ bh=q9ADMzfMZk27dwgTK8VAHks2M/mBfDH/xrIG0phBquk=;
+ b=NOe5EBxKNb353pux1SgtjrA0tXHQgM6zkN3VytPO0uBce6+IC8faV4sLXrFAKjtbVFyS
+ DWH/esvBsdn2Z4mgggFm3JegX/KzIWGBY1745z07uXhcfKQacGvSeWrQ/Adw3iopnmCd
+ sxwgr3vDTxCM6zwgVeOIuwmhAQZME8Pq5th7a4nKshE1OP5fhOimnr8cxAEJ8H2uF8wU
+ ZuzbZXKiN/ye5gCkvltjnGFq3TR/dHZKx5MZpYH2aSrDWsrcK3gfR/VNw3UCCBSpjdRD
+ 2VVlT44oAuqqaYLiY/or3V6w3THh52LJi0EDiZn2kNink68NDOxPMAYa2aNB77eanokb yw== 
+Received: from ala-exchng01.corp.ad.wrs.com (unknown-82-252.windriver.com [147.11.82.252])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3pyh53jfjs-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Mon, 17 Apr 2023 07:56:22 +0000
+Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.23; Mon, 17 Apr 2023 00:56:20 -0700
+Received: from pek-lpg-core3.wrs.com (128.224.153.232) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
+ 15.1.2507.23 via Frontend Transport; Mon, 17 Apr 2023 00:56:20 -0700
+From: <kai.kang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-oe] [PATCH] sip: upgrade 6.7.7 -> 6.7.8
-Date: Mon, 17 Apr 2023 15:47:44 +0800
-Message-ID: <1681717665-19231-4-git-send-email-wangmy@fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
-In-Reply-To: <1681717665-19231-1-git-send-email-wangmy@fujitsu.com>
-References: <1681717665-19231-1-git-send-email-wangmy@fujitsu.com>
+Subject: [meta-xfce][PATCH 1/4] thunar-archive-plugin: 0.5.0 -> 0.5.1
+Date: Mon, 17 Apr 2023 15:56:14 +0800
+Message-ID: <20230417075617.35121-1-kai.kang@windriver.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
 Content-Type: text/plain
-X-Originating-IP: [10.167.225.33]
-X-ClientProxiedBy: G08CNEXCHPEKD07.g08.fujitsu.local (10.167.33.80) To
- R01UKEXCASM223.r01.fujitsu.local (10.182.185.121)
-X-Virus-Scanned: ClamAV using ClamSMTP
+X-Proofpoint-GUID: FRTJk-ClBZbluPnf2lXRz2LT7AsI9Xj8
+X-Proofpoint-ORIG-GUID: FRTJk-ClBZbluPnf2lXRz2LT7AsI9Xj8
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.254,Aquarius:18.0.942,Hydra:6.0.573,FMLib:17.11.170.22
+ definitions=2023-04-17_04,2023-04-14_01,2023-02-09_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 malwarescore=0 clxscore=1015
+ suspectscore=0 priorityscore=1501 mlxscore=0 adultscore=2 mlxlogscore=727
+ impostorscore=0 bulkscore=0 lowpriorityscore=0 phishscore=0 spamscore=0
+ classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2303200000
+ definitions=main-2304170071
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 17 Apr 2023 07:48:41 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102120
+ <openembedded-devel@lists.openembedded.org>; Mon, 17 Apr 2023 07:56:31 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102123
 
-From: Wang Mingyu <wangmy@fujitsu.com>
+From: Kai Kang <kai.kang@windriver.com>
 
-Changelog:
-==========
-  - The latest version of ABI v13 is v13.5.0.
-  - The latest version of ABI v12 is v12.12.0.
-  - The 'wheel-includes' value of the 'tool.sip.project' section of
-    pyproject.toml now supports the use of absolute file patterns.
-  - Replaced the use of the 'toml' package with the standard library 'tomllib'
-    package for Python v3.11 and later, and the 'tomli' package for earlier
-    versions of Python.
-  - Bug fixes.
+Release notes for 0.5.1
+=======================
+Bugfix and translation release
 
-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+Fixes:
+- Fix use-after-free crash in "tap_provider_child_watch_destroy"
+- build: Add GLib requirement
+- build: Fix autotools warnings
+- Use generic package icon name in dialog header
+
+Translation Updates:
+  English (Canada), Greek, Persian (Iran), Russian
+
+Signed-off-by: Kai Kang <kai.kang@windriver.com>
 ---
- meta-oe/recipes-devtools/sip/{sip_6.7.7.bb => sip_6.7.8.bb} | 2 +-
+ ...r-archive-plugin_0.5.0.bb => thunar-archive-plugin_0.5.1.bb} | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-devtools/sip/{sip_6.7.7.bb => sip_6.7.8.bb} (83%)
+ rename meta-xfce/recipes-thunar-plugins/archive/{thunar-archive-plugin_0.5.0.bb => thunar-archive-plugin_0.5.1.bb} (82%)
 
-diff --git a/meta-oe/recipes-devtools/sip/sip_6.7.7.bb b/meta-oe/recipes-devtools/sip/sip_6.7.8.bb
-similarity index 83%
-rename from meta-oe/recipes-devtools/sip/sip_6.7.7.bb
-rename to meta-oe/recipes-devtools/sip/sip_6.7.8.bb
-index 5e361d972..01000f59c 100644
---- a/meta-oe/recipes-devtools/sip/sip_6.7.7.bb
-+++ b/meta-oe/recipes-devtools/sip/sip_6.7.8.bb
-@@ -11,6 +11,6 @@ LIC_FILES_CHKSUM = "file://LICENSE-GPL2;md5=e91355d8a6f8bd8f7c699d62863c7303"
- inherit pypi setuptools3 python3native
+diff --git a/meta-xfce/recipes-thunar-plugins/archive/thunar-archive-plugin_0.5.0.bb b/meta-xfce/recipes-thunar-plugins/archive/thunar-archive-plugin_0.5.1.bb
+similarity index 82%
+rename from meta-xfce/recipes-thunar-plugins/archive/thunar-archive-plugin_0.5.0.bb
+rename to meta-xfce/recipes-thunar-plugins/archive/thunar-archive-plugin_0.5.1.bb
+index c2c4b9fa5..044a39a3c 100644
+--- a/meta-xfce/recipes-thunar-plugins/archive/thunar-archive-plugin_0.5.0.bb
++++ b/meta-xfce/recipes-thunar-plugins/archive/thunar-archive-plugin_0.5.1.bb
+@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=4cf66a4984120007c9881cc871cf49db"
  
- PYPI_PACKAGE = "sip"
--SRC_URI[sha256sum] = "dee9c06fa8ae6d441a401f922867fc6196edda274eebd9fbfec54f0769c2a9e2"
-+SRC_URI[sha256sum] = "7e7186a36818c9d325c82e59ac5b049d9022c2d5783942c38d49497ac8a94c8f"
+ inherit thunar-plugin
  
- BBCLASSEXTEND = "native"
+-SRC_URI[sha256sum] = "8eca88a358282a5acdea72984db0d930efdf658b4bc5b82ef7bcd06224366ffa"
++SRC_URI[sha256sum] = "a81b3ab1d3cd77c7b3d6db15b37a3c12d65b06e373edc3c21083f02d605d8bed"
+ 
+ # install tap files in ${libdir}/thunar-archive-plugin
+ EXTRA_OECONF += "--libexecdir=${libdir}"
 -- 
-2.34.1
+2.17.1
 
 
