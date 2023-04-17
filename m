@@ -2,68 +2,68 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1D5BBC77B70
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1E29CC77B72
 	for <webhook@archiver.kernel.org>; Mon, 17 Apr 2023 07:40:41 +0000 (UTC)
-Received: from mail3.bemta32.messagelabs.com (mail3.bemta32.messagelabs.com [195.245.230.17])
- by mx.groups.io with SMTP id smtpd.web11.48389.1681717233607818218
+Received: from mail1.bemta34.messagelabs.com (mail1.bemta34.messagelabs.com [195.245.231.3])
+ by mx.groups.io with SMTP id smtpd.web10.49029.1681717234835506117
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 17 Apr 2023 00:40:33 -0700
+ Mon, 17 Apr 2023 00:40:35 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=QDU/8l5L;
- spf=pass (domain: fujitsu.com, ip: 195.245.230.17, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=vCsKvNWO;
+ spf=pass (domain: fujitsu.com, ip: 195.245.231.3, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1681717231; i=@fujitsu.com;
-	bh=1WWZ4r0ndMlIBTvHQkfevYKnPNd68a86Gz3K8XpPlz8=;
+	s=170520fj; t=1681717233; i=@fujitsu.com;
+	bh=pdOj3atlumGUrsHdJejPQ6x1tLwJV+QWywzb4tbqnZQ=;
 	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
 	 MIME-Version:Content-Type;
-	b=QDU/8l5LHTZh8uM6bQU6tLwhH/mAf/rwLyEHVITvO7SpmuXLa03PKelk2qbHU8vQo
-	 biTOS1Edss9OyEV89/bpvtOg+289/Orr/d9QPOx814S1FfM/98/a7tR69CyNmQCjoi
-	 dDGUDVrNvosqWxqVVW+R92qY7TiWD0ct/lQvPNt9I34mlM9pTycM4j+PdSQ3VoCMlP
-	 tppcq6ztov2dtr5L83O+Mey/YyB05En55gq6mZD7rMY/xEwcVIgzpxALgnLlxazEVR
-	 P6og6GDxFNiqdKJug7ekQ6e4zYr2sc9sEeWNf7hHo6KZ5n3Qzc6dTL/xqTai88g49X
-	 mNvC3qY8N/MUw==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrKIsWRWlGSWpSXmKPExsViZ8OxWff9d5s
-  Ug2PvJC0uHl7K7MDocW7jCsYAxijWzLyk/IoE1owFl+ewF1zgqjj1YjJ7A+Njzi5GLg4hgYeM
-  Eive9bJCOFeZJBa9b2CDcPYySix5+Jm5i5GTg01ASuLG/f9sILaIgL7E0tl7wOLMAioSL373s
-  IPYwgL+Ek23n7CA2CwCqhL/Nh0Cqufg4BVwklgwuwgkLCGgIDHl4XuwVk4BZ4mG9c9YQUqEgE
-  oaW0pBwrwCghInZ0JMYRaQkDj44gUzRKuixOzLzSwQdqVE64dfULaaxNVzm5gnMArOQtI+C0n
-  7AkamVYxmxalFZalFuoZGeklFmekZJbmJmTl6iVW6iXqppbrlqcUluoZ6ieXFeqnFxXrFlbnJ
-  OSl6eaklmxiBoZtSzPxiB+OPvr96hxglOZiURHlfpFqnCPEl5adUZiQWZ8QXleakFh9ilOHgU
-  JLgPf/NJkVIsCg1PbUiLTMHGEcwaQkOHiURXuNnQGne4oLE3OLMdIjUKUZFKXFef2D0CQmAJD
-  JK8+DaYLF7iVFWSpiXkYGBQYinILUoN7MEVf4VozgHo5Iw7xuQ7TyZeSVw018BLWYCWiynBLa
-  4JBEhJdXA5Jt0Vy9zc3dYYujZppTG85mC1ubHpi0716tZ3Xf3wSszG7U7xt/Pfb5tcZj/yZ3E
-  pzb7OJ89z1jim9z29af/tfKtQte3q96NiL1avveNijxPkf2T9FohduuP9385HVwxcY3iHHtr6
-  YlJrr6m2+dF65hVSLxf1aBQx+6efvfqnrupD/Mzz/YvmP/uYueKsysW2p37+GuCWsWXDZnGne
-  uNOvlFX09vy55r3/Ziv/BJy2XP4iYwTZpi4v5nVs4v9oQQZnML94N1jo0MwWkLDdiPaqyNdPi
-  RP5dF80mQsNcch7q6PvlfJ8+cl53VUZ1a9qp5mlLD6RMLvp7qKP3MN8GhWVlMaE637sbvsez1
-  nxRdlViKMxINtZiLihMBYap3elgDAAA=
+	b=vCsKvNWOOtnfKUb1qqHa5zs1rPBLfyjOhYhrrWR3zPAUOgCGu5A1/npdnOeT2fQWs
+	 1kRi9eaaAz56Bo8+n9N59IPN9ycy4imtWcWSerkcEXI2c9+omjeJgva+Ag/G+dUKfH
+	 B6smYqgXr3fGwPsL5vpf2ofNgQ47o8TlFrnygI2h7qSd7oMgVH8IbBT6yt+Qu0+6eM
+	 SvJGu8u1o7VA1EzM6GiQdmcpOrHvWR4CUKcmXSFZHqpj41hViOeahttr9Au0H2tv/o
+	 c2dNtevf1ibth70IceO6kQ1ejm5XZWL9U+OO0NbO3RqMmHt6buL+kgnQS4Or6xgvuc
+	 yy1WAvYV5B1Qw==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrCIsWRWlGSWpSXmKPExsViZ8ORpPvhu02
+  KQc9yI4uLh5cyOzB6nNu4gjGAMYo1My8pvyKBNaPr+RL2goncFTO39bA0MG7n6mLk4hASeMgo
+  ce3scaYuRk4g5wqTxJ12XYjEXkaJlsvbWEESbAJSEjfu/2cDsUUE9CWWzt7DDGIzC6hIvPjdw
+  w5iCwvESbz9thLMZhFQlTi65i4LiM0r4CRx4dJZMFtCQEFiysP3YL2cAs4SDeufAc3nAFrmJN
+  HYUgpRLihxcuYTFojxEhIHX7xghmhVlJh9uRlqTKVE64dfULaaxNVzm5gnMArOQtI+C0n7Aka
+  mVYymxalFZalFusZ6SUWZ6RkluYmZOXqJVbqJeqmluuWpxSW6RnqJ5cV6qcXFesWVuck5KXp5
+  qSWbGIGBm1KsJryD8UvvX71DjJIcTEqivC9SrVOE+JLyUyozEosz4otKc1KLDzHKcHAoSfCe/
+  2aTIiRYlJqeWpGWmQOMIpi0BAePkgiv8TOgNG9xQWJucWY6ROoUo6KUOK8/MPaEBEASGaV5cG
+  2wyL3EKCslzMvIwMAgxFOQWpSbWYIq/4pRnINRSZj3Dch2nsy8Erjpr4AWMwEtllMCW1ySiJC
+  SamASsP985dnRsxMFJL1vqv85VF2RItN7s63EZzVXikDhK8FGx9cvwzbXNVl/Ul+2Lr7CZVnl
+  uxZZqe1CCVcWPLL/MKMj9PGMG52ZBnceTy257XBN0L2pIcjX5qbzjGvnUzql/2tfYS3ZfsjXS
+  +jTq4tTdpl9bW4+cmjOd2Fn9VbFr/837mX57KX5XsPUNN1ZOyQh7MDcyL4Pme8eCq+5VLLL4W
+  0hR61EqkEGo+Od0omRm5q5WPiKnc6wf1p8vrvoclgun9antZcmmguJRkgcEFq+WGp2j8m5Ct2
+  E6H92XNPT5yolu2lxzLExybaY6b94Wf+BSZJeNqfctPQF1WacZVl+dYJ+3qkqBj1BtRjV10os
+  xRmJhlrMRcWJAFKR2A9XAwAA
 X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-4.tower-585.messagelabs.com!1681717231!149808!1
-X-Originating-IP: [62.60.8.179]
+X-Msg-Ref: server-6.tower-571.messagelabs.com!1681717232!406921!1
+X-Originating-IP: [62.60.8.98]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.104.2; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 11672 invoked from network); 17 Apr 2023 07:40:31 -0000
-Received: from unknown (HELO n03ukasimr04.n03.fujitsu.local) (62.60.8.179)
-  by server-4.tower-585.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 17 Apr 2023 07:40:31 -0000
-Received: from n03ukasimr04.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTP id 1088C151
-	for <openembedded-devel@lists.openembedded.org>; Mon, 17 Apr 2023 08:40:31 +0100 (BST)
+Received: (qmail 16187 invoked from network); 17 Apr 2023 07:40:32 -0000
+Received: from unknown (HELO n03ukasimr03.n03.fujitsu.local) (62.60.8.98)
+  by server-6.tower-571.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 17 Apr 2023 07:40:32 -0000
+Received: from n03ukasimr03.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr03.n03.fujitsu.local (Postfix) with ESMTP id 87FA41B5
+	for <openembedded-devel@lists.openembedded.org>; Mon, 17 Apr 2023 08:40:32 +0100 (BST)
 Received: from R01UKEXCASM223.r01.fujitsu.local (R01UKEXCASM223 [10.182.185.121])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTPS id 048E5142
-	for <openembedded-devel@lists.openembedded.org>; Mon, 17 Apr 2023 08:40:31 +0100 (BST)
+	by n03ukasimr03.n03.fujitsu.local (Postfix) with ESMTPS id 7C3ED7B
+	for <openembedded-devel@lists.openembedded.org>; Mon, 17 Apr 2023 08:40:32 +0100 (BST)
 Received: from localhost.localdomain (10.167.225.33) by
  R01UKEXCASM223.r01.fujitsu.local (10.182.185.121) with Microsoft SMTP Server
- (TLS) id 15.0.1497.42; Mon, 17 Apr 2023 08:40:29 +0100
+ (TLS) id 15.0.1497.42; Mon, 17 Apr 2023 08:40:31 +0100
 From: <wangmy@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-python] [PATCH] python3-elementpath: upgrade 4.1.0 -> 4.1.1
-Date: Mon, 17 Apr 2023 15:39:56 +0800
-Message-ID: <1681717197-19108-4-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH] python3-google-api-python-client: upgrade 2.84.0 -> 2.85.0
+Date: Mon, 17 Apr 2023 15:39:57 +0800
+Message-ID: <1681717197-19108-5-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 In-Reply-To: <1681717197-19108-1-git-send-email-wangmy@fujitsu.com>
 References: <1681717197-19108-1-git-send-email-wangmy@fujitsu.com>
@@ -77,37 +77,35 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 17 Apr 2023 07:40:41 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102110
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102111
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
 Changelog:
-=========
- Simplify type annotations for XSD datatypes
- Full test coverage of sequence type functions with bugfixes
+https://github.com/googleapis/google-api-python-client/blob/main/CHANGELOG.md
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- ...ython3-elementpath_4.1.0.bb => python3-elementpath_4.1.1.bb} | 2 +-
+ ...ent_2.84.0.bb => python3-google-api-python-client_2.85.0.bb} | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-elementpath_4.1.0.bb => python3-elementpath_4.1.1.bb} (86%)
+ rename meta-python/recipes-devtools/python/{python3-google-api-python-client_2.84.0.bb => python3-google-api-python-client_2.85.0.bb} (86%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-elementpath_4.1.0.bb b/meta-python/recipes-devtools/python/python3-elementpath_4.1.1.bb
+diff --git a/meta-python/recipes-devtools/python/python3-google-api-python-client_2.84.0.bb b/meta-python/recipes-devtools/python/python3-google-api-python-client_2.85.0.bb
 similarity index 86%
-rename from meta-python/recipes-devtools/python/python3-elementpath_4.1.0.bb
-rename to meta-python/recipes-devtools/python/python3-elementpath_4.1.1.bb
-index 5b8560782..c5f96f2de 100644
---- a/meta-python/recipes-devtools/python/python3-elementpath_4.1.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-elementpath_4.1.1.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/sissaschool/elementpath"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=5dbb7fb7d72da3921202dd7b995d3ecf"
+rename from meta-python/recipes-devtools/python/python3-google-api-python-client_2.84.0.bb
+rename to meta-python/recipes-devtools/python/python3-google-api-python-client_2.85.0.bb
+index f22c52702..6acac0647 100644
+--- a/meta-python/recipes-devtools/python/python3-google-api-python-client_2.84.0.bb
++++ b/meta-python/recipes-devtools/python/python3-google-api-python-client_2.85.0.bb
+@@ -4,7 +4,7 @@ HOMEPAGE = "https://github.com/googleapis/google-api-python-client"
+ LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=86d3f3a95c324c9479bd8986968f4327"
  
--SRC_URI[sha256sum] = "dbd7eba3cf0b3b4934f627ba24851a3e0798ef2bc9104555a4cd831f2e6e8e14"
-+SRC_URI[sha256sum] = "cd2bff3de8cddf8a480f728e648c6cae47d8ab66696c7d830a7a84536d8cae58"
+-SRC_URI[sha256sum] = "c398fd6f9ead0be23aade3b2704c72c5146df0e3352d8ff9101286077e1b010a"
++SRC_URI[sha256sum] = "07b21ef21a542dd69cd7c09817a6079b2769cc2a791981402e8f0fcdb2d47f90"
  
- PYPI_PACKAGE = "elementpath"
  inherit pypi setuptools3
+ 
 -- 
 2.34.1
 
