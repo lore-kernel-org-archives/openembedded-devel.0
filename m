@@ -2,132 +2,129 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 167A5C77B76
-	for <webhook@archiver.kernel.org>; Mon, 17 Apr 2023 18:51:52 +0000 (UTC)
-Received: from mail-pj1-f48.google.com (mail-pj1-f48.google.com [209.85.216.48])
- by mx.groups.io with SMTP id smtpd.web11.4976.1681757504532341410
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A52F3C77B72
+	for <webhook@archiver.kernel.org>; Tue, 18 Apr 2023 00:54:13 +0000 (UTC)
+Received: from mail-pf1-f169.google.com (mail-pf1-f169.google.com [209.85.210.169])
+ by mx.groups.io with SMTP id smtpd.web10.14806.1681779246367307445
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 17 Apr 2023 11:51:44 -0700
+ Mon, 17 Apr 2023 17:54:06 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20221208 header.b=LyL9PHvn;
- spf=pass (domain: gmail.com, ip: 209.85.216.48, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f48.google.com with SMTP id s23-20020a17090aba1700b00247a8f0dd50so2799054pjr.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 17 Apr 2023 11:51:44 -0700 (PDT)
+ dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=naWYdCRk;
+ spf=pass (domain: gmail.com, ip: 209.85.210.169, mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f169.google.com with SMTP id d2e1a72fcca58-63b5c4c769aso1578713b3a.3
+        for <openembedded-devel@lists.openembedded.org>; Mon, 17 Apr 2023 17:54:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1681757504; x=1684349504;
+        d=gmail.com; s=20221208; t=1681779245; x=1684371245;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=GPk0XNG22TcPcT+48qWRlZ8BNBcQp5/t6o8nW/37S44=;
-        b=LyL9PHvniY4+EmoktnFpUK8HJtaYf0VB4ED2v9KWWZjFNLQPmrxoktRbbtzlSYxfpH
-         Ps/A7kchKezJH26Wu+P7LvlKlFeduGqb2N6j1QKO0o0R1Xh84ZtUPU2js6y/z4iAi2pD
-         2le5ihj5PFlwIL0NgqN1DlMSDRE/OfZQug4oBkvWmR7O5sae7LtyPV7MH714M2R4cTny
-         CPOXvKn3uf5DmwT1EnfMjFjwe/DyA9puPYbInozEbOzjd+u0txq7f6uO5sXZ33/gITff
-         y/25mknjwUdLbAfZFv3b3fplrJk8D5NqOyWiULKwzHRVoAJCIj2yeJG9sHFMVOUpPeCJ
-         STNw==
+        bh=jepei+bQAh1j/Z6ahQ2lRLA26seB74neOdt+NNlWZZQ=;
+        b=naWYdCRk82j2l5JdHvH3pXoX/LYpPBhGBkwINaFChwYmImP2wkHEDnYwiGs7q6KeRA
+         MGUc3y+I6XOtYFyQhx6gZPx6JIXzQFFefEyWYRL3nsbTBwDNFrTNC0P5f5kf979DjPk1
+         3SXGdEz8Vhqf0TfdL1VxZRS/r6SdhgnAXx/h5egK3kzHPGBq67s6MSVaeEXc02YTw0ku
+         7UVErM6JbZ22cNA7h1H/6R71KOCaTAC1IiE9Ve09rk/xbR8NnmHZGHqBm/3oMtPjFgno
+         zZA+/MjdBD45xq/XNE1khilAA9ZZzM4xgvw8WO2DhA56clswepqqfKehww4Z5XzKId0F
+         43sg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1681757504; x=1684349504;
+        d=1e100.net; s=20221208; t=1681779245; x=1684371245;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=GPk0XNG22TcPcT+48qWRlZ8BNBcQp5/t6o8nW/37S44=;
-        b=aSamBPHRz/Bu8jk4Lj6kB8TfANkaZtGojV53kDEMh41kV78d/2NDxu3wM2RBZZDKtG
-         eQIfdS4iVvQ1zMnkw1UWyP0XC2/A6kYqHQprzVlvLsicm36bZ/tp5rf205dFKrG4PJTH
-         4KfhRbAFMMWt8wQb7ZdKNlVDKA9bag2AcVw0fW1ntPpNeVQA9UYeX24T753D/lWesrD5
-         q+/ON06tvBrwlH9cCKVU+xgRhuCqiLXj96tnT3edaoyToGEmtOyguqj+t6j8AwLbgvFh
-         Q27lZ/whD63vXHdNU4I6ZCTUztqEJAFu3r884tiCfm084zH2BIFPLts87nRkzUX3/Qju
-         L1NQ==
-X-Gm-Message-State: AAQBX9e/Oea83TDxRG7pJ8Kpw4zmG5zdWa4HcGQXIYylt7DgEjROksu2
-	h83OOwzK13IPR2RiVcq1rq9y0tIirtuG4g==
-X-Google-Smtp-Source: AKy350Yfi+EXHQnOkFn28ffkobV2RhmBgo+wZ5Bal/yQIM9YgQqSB594ao7k9vKMUujVgQSPx8p7gQ==
-X-Received: by 2002:a05:6a20:a00d:b0:f0:60be:33a with SMTP id p13-20020a056a20a00d00b000f060be033amr1404824pzj.56.1681757502962;
-        Mon, 17 Apr 2023 11:51:42 -0700 (PDT)
+        bh=jepei+bQAh1j/Z6ahQ2lRLA26seB74neOdt+NNlWZZQ=;
+        b=Z+Tf9S5a5F2tkj/RBy4dnR+bXB5BiLf3pU/FP8Vs9X8o9ZLG9z1pxE48TWtSgKEDA4
+         uFYkh+JSaHVpa6KoEAgXVT+pgedMywsIFl/ypl5EKsdNLWxQGijT1AS17RbPDaS3gJF1
+         M6p4ecTOuGSfUQIw8vCu3o+zd1uxYdTrSDKp/1lz7C2cchDK1ghfCqMmMIWs84kEvSFj
+         in1EcIrqCVpsJ0Metr5lMgEm7ASTSEJFyiTgB32KxO4PxLQDjBBg4Msw7c444/iugtRy
+         SgBA/Le1jUNWCad3+vslzHt2UygXJFd9EyR6zpWf1hikNcAH6vfjRn/WVLS/pi2w4VcS
+         GPIQ==
+X-Gm-Message-State: AAQBX9fDDA62+e0DekYXMM9R1T6NAhwA8pCiGIVZGds/AStXLI1n1vza
+	LwzlyV4T3ByKkqWQZQ7OVIhmvEF9n1KW1g==
+X-Google-Smtp-Source: AKy350ZbqHtxt1jAp3tkMimJkOeM+0XaZA/2QvqIUXGuVHc13WtVLy2BFe1Zwttq3+NRWrXTTiVt1w==
+X-Received: by 2002:a05:6a00:14c6:b0:63b:88f6:3817 with SMTP id w6-20020a056a0014c600b0063b88f63817mr10375326pfu.19.1681779244997;
+        Mon, 17 Apr 2023 17:54:04 -0700 (PDT)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9181:d380::ebd0])
-        by smtp.gmail.com with ESMTPSA id x2-20020aa79182000000b0062ddaa823bfsm7864234pfa.185.2023.04.17.11.51.42
+        by smtp.gmail.com with ESMTPSA id a22-20020a62bd16000000b0063b59ad4e0dsm7245575pff.118.2023.04.17.17.54.04
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 17 Apr 2023 11:51:42 -0700 (PDT)
+        Mon, 17 Apr 2023 17:54:04 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH] fwupd: Do not emit build time paths into generated headers
-Date: Mon, 17 Apr 2023 11:51:40 -0700
-Message-Id: <20230417185140.1389241-1-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH] libcereal: Fix TMPDIR leaking into debug_str section
+Date: Mon, 17 Apr 2023 17:54:01 -0700
+Message-Id: <20230418005401.1481350-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.40.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 17 Apr 2023 18:51:52 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102129
+ <openembedded-devel@lists.openembedded.org>; Tue, 18 Apr 2023 00:54:13 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102130
 
-Fixes
-WARNING: fwupd-1.8.9-r0 do_package_qa: QA Issue: File /usr/src/debug/fwupd/1.8.9-r0/src/fu-plugin-builtin.h in package fwupd-src contains reference to TMPDIR [buildpaths]
+Fixes errors like
+File /usr/lib/libcereal/ptest/tests/.debug/test_unordered_map in package libcereal-dbg contains reference to TMPDIR
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...lute-buildtime-paths-in-generated-he.patch | 41 +++++++++++++++++++
- meta-oe/recipes-bsp/fwupd/fwupd_1.8.9.bb      |  1 +
- 2 files changed, 42 insertions(+)
- create mode 100644 meta-oe/recipes-bsp/fwupd/fwupd/0001-meson-Avoid-absolute-buildtime-paths-in-generated-he.patch
+ ...001-doctest-Do-not-use-unnamed-class.patch | 38 +++++++++++++++++++
+ .../libcereal/libcereal_1.3.2.bb              |  1 +
+ 2 files changed, 39 insertions(+)
+ create mode 100644 meta-oe/recipes-support/libcereal/files/0001-doctest-Do-not-use-unnamed-class.patch
 
-diff --git a/meta-oe/recipes-bsp/fwupd/fwupd/0001-meson-Avoid-absolute-buildtime-paths-in-generated-he.patch b/meta-oe/recipes-bsp/fwupd/fwupd/0001-meson-Avoid-absolute-buildtime-paths-in-generated-he.patch
+diff --git a/meta-oe/recipes-support/libcereal/files/0001-doctest-Do-not-use-unnamed-class.patch b/meta-oe/recipes-support/libcereal/files/0001-doctest-Do-not-use-unnamed-class.patch
 new file mode 100644
-index 0000000000..2273bdf105
+index 0000000000..9396cc5d01
 --- /dev/null
-+++ b/meta-oe/recipes-bsp/fwupd/fwupd/0001-meson-Avoid-absolute-buildtime-paths-in-generated-he.patch
-@@ -0,0 +1,41 @@
-+From b1df1ed3a21b8ef0244102043a8fb88b0ccc3f91 Mon Sep 17 00:00:00 2001
++++ b/meta-oe/recipes-support/libcereal/files/0001-doctest-Do-not-use-unnamed-class.patch
+@@ -0,0 +1,38 @@
++From 03bbb1b055c41ec652470f775b55a7cf80d664ef Mon Sep 17 00:00:00 2001
 +From: Khem Raj <raj.khem@gmail.com>
-+Date: Mon, 17 Apr 2023 11:30:21 -0700
-+Subject: [PATCH] meson: Avoid absolute buildtime paths in generated headers
++Date: Mon, 17 Apr 2023 16:46:12 -0700
++Subject: [PATCH] doctest: Do not use unnamed class
 +
-+using meson.project_source_root() means the path emitted to include .h
-+files is absolute and it makes its way into PN-src as well, which infact
-+is not going to work if the -src package was used to re-build this in a
-+different build path. Therefore use relative path which is '.' and
-+relative to ${S}
++When compiling with clang this results in emitting absolute path into
++debug info, especially .debug_str section has
 +
-+Changes
-+include "<abspath>/plugins/acpi-dmar/fu-acpi-dmar-plugin.h"
-+to
-+include "./plugins/acpi-dmar/fu-acpi-dmar-plugin.h"
++~(unnamed class at /mnt/b/yoe/master/build/tmp/work/core2-64-yoe-linux-musl/libcereal/1.3.2+gitAUTOINC+ebef1e9298-r0/git/unittests/doctest.h:6428:5)
++(unnamed class at /mnt/b/yoe/master/build/tmp/work/core2-64-yoe-linux-musl/libcereal/1.3.2+gitAUTOINC+ebef1e9298-r0/git/unittests/doctest.h:6428:5)
 +
-+in generated build/src/fu-plugin-builtin.h
++Therefore use a name for the class instead and help get rid of this
++absolute path in debug info. This fixes
 +
-+Upstream-Status: Pending
++File /usr/lib/libcereal/ptest/tests/.debug/test_unordered_map in package libcereal-dbg contains reference to TMPDIR
 +
++Upstream-Status: Submitted [https://github.com/USCiLab/cereal/pull/788]
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +---
-+ src/meson.build | 2 +-
++ unittests/doctest.h | 2 +-
 + 1 file changed, 1 insertion(+), 1 deletion(-)
 +
-+diff --git a/src/meson.build b/src/meson.build
-+index b9f6736..bb856ea 100644
-+--- a/src/meson.build
-++++ b/src/meson.build
-+@@ -188,7 +188,7 @@ plugins_hdr = custom_target('fwupd-generate-plugins-header',
-+   command : [
-+     join_paths(meson.project_source_root(), 'contrib', 'generate-plugins-header.py'),
-+     '@OUTPUT@',
-+-    meson.project_source_root(),
-++    '.',
-+     ','.join(plugin_names),
-+   ],
-+ )
++diff --git a/unittests/doctest.h b/unittests/doctest.h
++index cd5b44d6..e6d8f7f9 100644
++--- a/unittests/doctest.h
+++++ b/unittests/doctest.h
++@@ -6424,7 +6424,7 @@ void Context::setCout(std::ostream* out) { p->cout = out; }
++ static class DiscardOStream : public std::ostream
++ {
++ private:
++-    class : public std::streambuf
+++    class discardBufStream: public std::streambuf
++     {
++     private:
++         // allowing some buffering decreases the amount of calls to overflow
 +-- 
 +2.40.0
 +
-diff --git a/meta-oe/recipes-bsp/fwupd/fwupd_1.8.9.bb b/meta-oe/recipes-bsp/fwupd/fwupd_1.8.9.bb
-index 14d83ec521..1f95dee1be 100644
---- a/meta-oe/recipes-bsp/fwupd/fwupd_1.8.9.bb
-+++ b/meta-oe/recipes-bsp/fwupd/fwupd_1.8.9.bb
-@@ -5,6 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
- DEPENDS = "glib-2.0 libxmlb json-glib libjcat gcab vala-native"
- 
- SRC_URI = "https://github.com/${BPN}/${BPN}/releases/download/${PV}/${BP}.tar.xz \
-+           file://0001-meson-Avoid-absolute-buildtime-paths-in-generated-he.patch \
-            file://run-ptest"
- SRC_URI[sha256sum] = "719a791ac4ba5988aeb93ec42778bd65d33cb075d0c093b5c04e5e1682be528a"
+diff --git a/meta-oe/recipes-support/libcereal/libcereal_1.3.2.bb b/meta-oe/recipes-support/libcereal/libcereal_1.3.2.bb
+index f15927554b..c5f26ecb4e 100644
+--- a/meta-oe/recipes-support/libcereal/libcereal_1.3.2.bb
++++ b/meta-oe/recipes-support/libcereal/libcereal_1.3.2.bb
+@@ -21,6 +21,7 @@ SRCREV = "ebef1e929807629befafbb2918ea1a08c7194554"
+ SRC_URI = "git://github.com/USCiLab/cereal.git;branch=master;protocol=https \
+            file://0001-sandbox-Do-not-use-int8_t-in-std-uniform_int_distrib.patch \
+            file://0001-cmake-Use-idirafter-instead-of-isystem.patch \
++           file://0001-doctest-Do-not-use-unnamed-class.patch \
+            file://run-ptest \
+ "
  
 -- 
 2.40.0
