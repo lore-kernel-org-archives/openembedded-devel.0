@@ -2,71 +2,68 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 02720C77B60
-	for <webhook@archiver.kernel.org>; Mon, 24 Apr 2023 03:22:09 +0000 (UTC)
-Received: from mail1.bemta37.messagelabs.com (mail1.bemta37.messagelabs.com [85.158.142.1])
- by mx.groups.io with SMTP id smtpd.web11.42793.1682306519297551341
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2192DC77B60
+	for <webhook@archiver.kernel.org>; Mon, 24 Apr 2023 03:23:29 +0000 (UTC)
+Received: from mail1.bemta34.messagelabs.com (mail1.bemta34.messagelabs.com [195.245.231.1])
+ by mx.groups.io with SMTP id smtpd.web10.43118.1682306607890233702
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 23 Apr 2023 20:21:59 -0700
+ Sun, 23 Apr 2023 20:23:28 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=KkhMLdFz;
- spf=pass (domain: fujitsu.com, ip: 85.158.142.1, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=vWiWK5CL;
+ spf=pass (domain: fujitsu.com, ip: 195.245.231.1, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1682306517; i=@fujitsu.com;
-	bh=nQi+2bEczc5jrU0M4iqVAXPurn5ev/3/fV78zkl5mvI=;
-	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type;
-	b=KkhMLdFzs1kIrw5sS/sgvKmJjV434RRjF6s2LugwrfOMxHk+RNKOovOLgeGAjBAW6
-	 ya6ayIrTy6p0QleskrmX9M7saYY0DZJ+heLn8DtAHWyvxc8KnstDyW4FCLDwCfDvQE
-	 p2g9/bAeDJH64hLcXiO+XI0Pc3bB7NYZbw3j3isijFyMVMiIFLf85h3MIGIk9J2Zvg
-	 DMpjjBfE5OcF3ehXKANl3HZLzxdAa/K9vn2lfnTPXS1OWHErQl7ms+MxG8O1smLtdw
-	 CSf6lHIZYT36xkn1UQxipfA3g+1DU1aio98Gcj1oQKLzLl7UHXlR3PrrkifyIWRvSe
-	 q1szOc9gcgPmg==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrGIsWRWlGSWpSXmKPExsViZ8ORpHvlq2u
-  Kwca7LBYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8bJN4/YCq7zVsze/5y9gfESTxcjF4eQwENG
-  ievdB1ggnKtMEh+/b2WGcPYySvy8tAPI4eRgE5CSuHH/PxuILSKgL7F09h6wOLOAisSL3z3sI
-  LawQLDEg47ZQJM4OFgEVCUWT7cACfMKOEmc3zELrFVCQEFiysP3YK2cAs4S71YeZwSxhYBqXs
-  w4zAxRLyhxcuYTFojxEhIHX7xghuhVlJh9uZkFwq6UaP3wC8pWk7h6bhPzBEbBWUjaZyFpX8D
-  ItIrRrDi1qCy1SNdSL6koMz2jJDcxM0cvsUo3US+1VDcvv6gkQ9dQL7G8WC+1uFivuDI3OSdF
-  Ly+1ZBMjMHhTilNn72BcvOuv3iFGSQ4mJVHeJRtcUoT4kvJTKjMSizPii0pzUosPMcpwcChJ8
-  BZ9ck0REixKTU+tSMvMAUYSTFqCg0dJhHfZF6A0b3FBYm5xZjpE6hSjopQ4byBIQgAkkVGaB9
-  cGi95LjLJSwryMDAwMQjwFqUW5mSWo8q8YxTkYlYR5JT8ATeHJzCuBm/4KaDET0OJd3C4gi0s
-  SEVJSDUwdpv2c5w+wRCw/zPMs2OrmP4ULx7XXMQdMP5K+Wq5EsVxs3jYB9aU/NY6L2uTGSAcw
-  SAo9P/pjYVb+sddndU7WrQq6WS0bf1py/eJ5mzZ89/yxZF7y7XuHv+44E2L2iuu3hITn01dXB
-  CV5jvy3mPUjP/Yq61nh9p4r/3Qmt959wfD0JqeW2Ymk31u8X5ZPYLYs15Ls6J4l77A4c+cHuZ
-  LM6drdKjEdx3tmnqmOD2PVmna6oz1e2Wl1dtKXlMRNAcXNIb5Xlx+uq5jt8G6prH78lbWzLhf
-  dfhF+80eu2ZV5HgL7eDbErMyaVPwi6PjrgErZOQria7+6L85jlraQDNN7dSjS3U2wvX3pyYza
-  1QuUWIozEg21mIuKEwHMBIWIWQMAAA==
+	s=170520fj; t=1682306606; i=@fujitsu.com;
+	bh=9BW23S7abtJlpyRZAyGWUL4AinjkuSMpn1agVx4DNCs=;
+	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
+	b=vWiWK5CLJ+wzkw4EIuDS/maFQwyYkyTJC1+ceat4C5/6mHSh+3ZWdmomrP9FmqKi+
+	 Tqkgl8Z00nz8C0Xz4/V/x/iSsFoBERdQdFKS+wJDfh0hKrn+IYPba9dz1uZ9i6xFob
+	 Af6+rqExDbi97H9+K6yBeFAxmMxdFGEdFtPz+cku78Ye92d0KRSIOBBBOnR04LNEGz
+	 g93kYcT7sEpR8dUHJzLa0qUql2WG+UdfmSGbYaODiR0KtjqQjd5MTTs8Uv4q04E8YP
+	 AwhjdHJDVEmRq9iPz77IhhfERcm3K0Fd2hdjHYVsoUH/k6MsW+O9qcrt3UtNk3xR2l
+	 ANf9yzgXjVV8g==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFlrLIsWRWlGSWpSXmKPExsViZ8MxSVfnm2u
+  KwfrLVhYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8bsez+ZC97xVLQ+n8HUwHiBu4uRi0NI4Amj
+  xNHpJ5m7GDmBnBtMEnPv+UEk9jJKtD0+yAiSYBOQkrhx/z8biC0ioC+xdPYesAZmARWJF7972
+  EFsYQFfiR2bHrOA2CwCqhJrfs4D6+UVcJJ4vnIlWK+EgILElIfvmSHighInZz5hgZgjIXHwxQ
+  tmiBpFidmXm1kg7EqJ1g+/oGw1iavnNjFPYOSfhaR9FpL2BYxMqxhNi1OLylKLdI30kooy0zN
+  KchMzc/QSq3QT9VJLdctTi0uAMonlxXqpxcV6xZW5yTkpenmpJZsYgaGYUqzEsIPxwM6/eocY
+  JTmYlER5l2xwSRHiS8pPqcxILM6ILyrNSS0+xCjDwaEkwVv0yTVFSLAoNT21Ii0zBxgXMGkJD
+  h4lEd5lX4DSvMUFibnFmekQqVOMilLivIEgCQGQREZpHlwbLBYvMcpKCfMyMjAwCPEUpBblZp
+  agyr9iFOdgVBLmlfwANIUnM68EbvoroMVMQIt3cbuALC5JREhJNTDNPvKWcbJR3Lz2qxGfrEv
+  1/SdeZo9Qu3GkXz1B6/MS68drJJx+rlLwWHnlxdZpO9e9l8r57dTBP0sj0Cp9k6ao/7/ugNIT
+  cuzzk/96955MikjveZ2xPM9ol+KeyTGRL9lnduxWdH+t5SnvaSNevChOKqElUMTzS3Xthw/7b
+  de8zxQ8lzTj9o/+qyqT9wjbtMTI3I9Q/aOcX1axYdEdAY9v2WEh/GfZlVts++9KHxdi+WW379
+  eGlx5eP7skW5iWXVGYEvG13PXyhvluBjru6c55xqvqLdPra+9tqPx2lLd5gcZi819By8VWf7o
+  e90ps6y2J1HtRH6+e01221KDr4sZt97Y+5VjLXJnqt8MhfLESS3FGoqEWc1FxIgBN1J9PQAMA
+  AA==
 X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-4.tower-728.messagelabs.com!1682306515!288652!1
-X-Originating-IP: [62.60.8.98]
+X-Msg-Ref: server-3.tower-571.messagelabs.com!1682306604!66493!1
+X-Originating-IP: [62.60.8.146]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
-X-StarScan-Version: 9.104.2; banners=-,-,-
+X-StarScan-Version: 9.105.2; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 23537 invoked from network); 24 Apr 2023 03:21:56 -0000
-Received: from unknown (HELO n03ukasimr03.n03.fujitsu.local) (62.60.8.98)
-  by server-4.tower-728.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 24 Apr 2023 03:21:56 -0000
-Received: from n03ukasimr03.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr03.n03.fujitsu.local (Postfix) with ESMTP id 84F041AF
-	for <openembedded-devel@lists.openembedded.org>; Mon, 24 Apr 2023 04:21:55 +0100 (BST)
+Received: (qmail 25511 invoked from network); 24 Apr 2023 03:23:24 -0000
+Received: from unknown (HELO n03ukasimr02.n03.fujitsu.local) (62.60.8.146)
+  by server-3.tower-571.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 24 Apr 2023 03:23:24 -0000
+Received: from n03ukasimr02.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTP id A1BA210032B
+	for <openembedded-devel@lists.openembedded.org>; Mon, 24 Apr 2023 04:23:24 +0100 (BST)
 Received: from R01UKEXCASM223.r01.fujitsu.local (R01UKEXCASM223 [10.182.185.121])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by n03ukasimr03.n03.fujitsu.local (Postfix) with ESMTPS id 791481AC
-	for <openembedded-devel@lists.openembedded.org>; Mon, 24 Apr 2023 04:21:55 +0100 (BST)
+	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTPS id 95E2D100329
+	for <openembedded-devel@lists.openembedded.org>; Mon, 24 Apr 2023 04:23:24 +0100 (BST)
 Received: from localhost.localdomain (10.167.225.33) by
  R01UKEXCASM223.r01.fujitsu.local (10.182.185.121) with Microsoft SMTP Server
- (TLS) id 15.0.1497.42; Mon, 24 Apr 2023 04:21:54 +0100
+ (TLS) id 15.0.1497.42; Mon, 24 Apr 2023 04:23:23 +0100
 From: <wangmy@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-perl] [PATCH] libmodule-build-tiny-perl: upgrade 0.039 -> 0.043
-Date: Mon, 24 Apr 2023 11:21:27 +0800
-Message-ID: <1682306487-11783-5-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH] python3-periphery: upgrade 2.3.0 -> 2.4.1
+Date: Mon, 24 Apr 2023 11:23:05 +0800
+Message-ID: <1682306589-11841-1-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
-In-Reply-To: <1682306487-11783-1-git-send-email-wangmy@fujitsu.com>
-References: <1682306487-11783-1-git-send-email-wangmy@fujitsu.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-Originating-IP: [10.167.225.33]
@@ -76,44 +73,44 @@ X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 24 Apr 2023 03:22:09 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102158
+ <openembedded-devel@lists.openembedded.org>; Mon, 24 Apr 2023 03:23:29 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102159
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
 Changelog:
- - Fix manification test for perls without man paths
+===========
+  Fix realtime timestamp reporting for line events in gpio-cdev v2 implementation.
+  Avoid writing direction and inverted on open to retain existing state with sysfs GPIOs
+  Add support for gpio-cdev v2 ABI.
+  Add type stubs.
 
-License-Update: remove whitespace of end of the line.
+License-Update: Copyright year updated to 2023.
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- ...tiny-perl_0.039.bb => libmodule-build-tiny-perl_0.043.bb} | 5 ++---
- 1 file changed, 2 insertions(+), 3 deletions(-)
- rename meta-perl/recipes-perl/libmodule/{libmodule-build-tiny-perl_0.039.bb => libmodule-build-tiny-perl_0.043.bb} (90%)
+ ...{python3-periphery_2.3.0.bb => python3-periphery_2.4.1.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-periphery_2.3.0.bb => python3-periphery_2.4.1.bb} (67%)
 
-diff --git a/meta-perl/recipes-perl/libmodule/libmodule-build-tiny-perl_0.039.bb b/meta-perl/recipes-perl/libmodule/libmodule-build-tiny-perl_0.043.bb
-similarity index 90%
-rename from meta-perl/recipes-perl/libmodule/libmodule-build-tiny-perl_0.039.bb
-rename to meta-perl/recipes-perl/libmodule/libmodule-build-tiny-perl_0.043.bb
-index ff3f4d694..dd60d01db 100644
---- a/meta-perl/recipes-perl/libmodule/libmodule-build-tiny-perl_0.039.bb
-+++ b/meta-perl/recipes-perl/libmodule/libmodule-build-tiny-perl_0.043.bb
-@@ -10,13 +10,12 @@ SECTION = "libs"
- HOMEPAGE = "http://search.cpan.org/~leont/Module-Build-Tiny/"
+diff --git a/meta-python/recipes-devtools/python/python3-periphery_2.3.0.bb b/meta-python/recipes-devtools/python/python3-periphery_2.4.1.bb
+similarity index 67%
+rename from meta-python/recipes-devtools/python/python3-periphery_2.3.0.bb
+rename to meta-python/recipes-devtools/python/python3-periphery_2.4.1.bb
+index 4d81b8d24..e284ccc33 100644
+--- a/meta-python/recipes-devtools/python/python3-periphery_2.3.0.bb
++++ b/meta-python/recipes-devtools/python/python3-periphery_2.4.1.bb
+@@ -2,9 +2,9 @@ DESCRIPTION = "A pure Python 2/3 library for peripheral I/O (GPIO, LED, PWM, SPI
+ HOMEPAGE = "http://pythonhosted.org/python-periphery/"
+ LICENSE = "MIT"
  
- LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=57b8100f0b648cd37fbc3725fe3c111a"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=6374136f6774db2f51cc116f5efbf705"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=fed1784a083509430580a913df680706"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=30fe6f023a80fb33989fb3b9d773fea0"
  
- DEPENDS = "libextutils-config-perl-native libextutils-helpers-perl-native libextutils-installpaths-perl-native"
+-SRC_URI[sha256sum] = "8a8ec019d9b330a6a6f69a7de61d14b4c98b102d76359047c5ce0263e12246a6"
++SRC_URI[sha256sum] = "61d461d736982a6f766e878720ab10a68151e2e8c1086600d9389ac47e40e88a"
  
- SRC_URI = "${CPAN_MIRROR}/authors/id/L/LE/LEONT/Module-Build-Tiny-${PV}.tar.gz"
--SRC_URI[md5sum] = "2332c90c17454107fea3f2614e11a3a9"
--SRC_URI[sha256sum] = "7d580ff6ace0cbe555bf36b86dc8ea232581530cbeaaea09bccb57b55797f11c"
-+SRC_URI[sha256sum] = "68f4e4620e8a75124ce2dadee48d2ba5160b9167012924588d6fb242ff2d7206"
- 
- S = "${WORKDIR}/Module-Build-Tiny-${PV}"
+ inherit pypi setuptools3
  
 -- 
 2.34.1
