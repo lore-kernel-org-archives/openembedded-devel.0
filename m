@@ -2,71 +2,68 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id F2367C6FD18
-	for <webhook@archiver.kernel.org>; Mon, 24 Apr 2023 03:19:58 +0000 (UTC)
-Received: from mail1.bemta34.messagelabs.com (mail1.bemta34.messagelabs.com [195.245.231.4])
- by mx.groups.io with SMTP id smtpd.web10.43073.1682306383747317401
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1A147C77B73
+	for <webhook@archiver.kernel.org>; Mon, 24 Apr 2023 03:21:59 +0000 (UTC)
+Received: from mail1.bemta37.messagelabs.com (mail1.bemta37.messagelabs.com [85.158.142.112])
+ by mx.groups.io with SMTP id smtpd.web11.42786.1682306509922091098
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 23 Apr 2023 20:19:49 -0700
+ Sun, 23 Apr 2023 20:21:50 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=H89nYass;
- spf=pass (domain: fujitsu.com, ip: 195.245.231.4, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=SUgTM1Cl;
+ spf=pass (domain: fujitsu.com, ip: 85.158.142.112, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1682306388; i=@fujitsu.com;
-	bh=n3GK+ndLM4xPwTdpOqP0HKArkk4mJ4/WV9jfXcfJvyg=;
-	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type;
-	b=H89nYassrzHmfbiT+C8PCDRjH5+Ru1LV6mAqip0+zo7yNdbI7SQPDlal7XlyBl/pD
-	 C6aBW5MKtzw1E7iRI/apXO4lixpazR5pyu1b3ouG2maQDSDllHsg+2nUZb2J8NfY2k
-	 kPaWDWf0KgE9cxuhuHPUVo28CZdxNbh19twbDpPy6a4za2zSWJX3qYGFvoitLHMsFL
-	 QlyzzCE8yndMigk4k/2d67ffRBaKTXn72TxjkkqqRb9OZrvX8D2QDlg++1mKlaXegK
-	 RuZSHAU1kGAv6I5XaEz0d61iG2WS5LkLKiVqpm6TJzRmSBtP8EwvlX70ICGzNSE7/C
-	 2bCi7O4cn6ANw==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrIIsWRWlGSWpSXmKPExsViZ8MxSTf4q2u
-  Kwe7X1hYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8aaOy3sBS18FV9aDrI3ML7j6WLk4hASeMIo
-  0bzuIiOEc4NJ4lHPPxYIZy+jxNK1M4EynBxsAlISN+7/ZwOxRQT0JZbO3sMMYjMLqEi8+N3DD
-  mILCwRLzLg9HayeRUBVYvvaZjCbV8BJ4seyN2C2hICCxJSH74F6OTg4BZwl3vZngISFgEquLH
-  vFDFEuKHFy5hMWiPESEgdfvGCGaFWUmH25mQXCrpRo/fALylaTuHpuE/MERsFZSNpnIWlfwMi
-  0itG0OLWoLLVI11wvqSgzPaMkNzEzRy+xSjdRL7VUtzy1uETXSC+xvFgvtbhYr7gyNzknRS8v
-  tWQTIzB0U4qVenYw/tv5V+8QoyQHk5Io75INLilCfEn5KZUZicUZ8UWlOanFhxhlODiUJHiLP
-  rmmCAkWpaanVqRl5gDjCCYtwcGjJMK77AtQmre4IDG3ODMdInWKUZfjw6Ere5mFWPLy81KlxH
-  kDQYoEQIoySvPgRsBi+hKjrJQwLyMDA4MQT0FqUW5mCar8K0ZxDkYlYV7JD0BTeDLzSuA2vQI
-  6ggnoiF3cLiBHlCQipKQamBa1XOIzZZyVWfXuRoJb/XePvUwyZR8vVE/3/Jp0xbnjucfk6g4B
-  id9bQ150fUmr4Xu8X6jqw94bz1YWF7sICM6WjXjY906VS35X9pFXXf/ztGpFdjDnd4mnMvP/Z
-  6h//Pvqj/d6GeLCb17mH1aUd/e7dVb7eHjsZa97hTq1Ebutjmin+7y0j/r3KKwk5KJpwY6Yki
-  nZDz8eypSc90n/1KLyPcb1H+5sfrjWJ1bYUlZ07nauK/8W/TxcxCb7KdNwKvP8P9PEG+fFzZR
-  NXNd88PSh7Sf2K0eKvC5L37n98tPLV/9lhSYcSN2aukxptdbSiUIrLaaaia7IS05jeXI8Krgl
-  fXZBnYbNebNF6z3kI5RYijMSDbWYi4oTAZLPeK5kAwAA
+	s=170520fj; t=1682306507; i=@fujitsu.com;
+	bh=01h6fldkULyssDueQyh6vSpfRMOUP6ogQoVOVZUV5sY=;
+	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
+	b=SUgTM1CliNfZXlauVO7ZOH7nsWxA2EZuwapnnErl10D9DagSmYGJgFNnFgYRZBiVd
+	 4pd5BeDa1MEpEJJc7wrTO/1QRC+RQXsOSQ5OcKwwU0aMgmhRYqAEWrQy2HwO7i8Pkq
+	 UMaQRGRP2ioUmVjRlUvOEbLsDg8d3Pz4T3zSUWO425bniMrrS2kP2R9eVVusYavQQt
+	 00j/DpifzNPIakg63wXUzRjeIarFXkp848fKYzRM+2DIHRXub2xeFjfzl5ouaqOKbC
+	 GBJlsP09UXm8IJmWNL8Laj1vteplmLdbO+YVUej5ua6HNz5Y5NgtaPrwxUbP/h9Dh5
+	 YvdeW675xem3g==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFlrDIsWRWlGSWpSXmKPExsViZ8OxWffUV9c
+  Ug6PPzCwuHl7K7MDocW7jCsYAxijWzLyk/IoE1oyVxz4zFTzjqXg86SVrA+M+7i5GTg4hgYeM
+  Eg3LUiHsq0wSLYvUuxi5gOy9jBITVt5hBkmwCUhJ3Lj/nw3EFhHQl1g6ew9YnFlAReLF7x52E
+  FtYIEBix8a3LCA2i4CqxIsbj4HqOTh4BZwk1u+pBwlLCChITHn4HqyVV0BQ4uTMJywQYyQkDr
+  54wQxRoygx+3IzC4RdKdH64ReUrSZx9dwm5gmM/LOQtM9C0r6AkWkVo1lxalFZapGumV5SUWZ
+  6RkluYmaOXmKVbqJeaqluXn5RSYauoV5iebFeanGxXnFlbnJOil5easkmRmAgphQn2+1g/LLz
+  r94hRkkOJiVR3iUbXFKE+JLyUyozEosz4otKc1KLDzHKcHAoSfAWfXJNERIsSk1PrUjLzAFGB
+  UxagoNHSYR32RegNG9xQWJucWY6ROoUo6KUOG8gSEIAJJFRmgfXBovES4yyUsK8jAwMDEI8Ba
+  lFuZklqPKvGMU5GJWEeSU/AE3hycwrgZv+CmgxE9DiXdwuIItLEhFSUg1MXmeV7P49YpgndV3
+  E1ML/xNYNN0PtC6xnPXmUtHGJpZxJ6evtjcuC5m3dxzynJUtn8V1NR683PuH3GjZ0qL47suSQ
+  37lXkTvfhM+PyOifoM7EcpfhQbR2VVLlpkJe3a2yau5ST15t8jzAeqvmow/jxJfhJrcXbVL2T
+  4vo11g9rVXWP6p/xly2rOWTWx9FPbmU8T1usqyU4fIT6o8MDkz2TDhvuKz8rXMAXz3rNd2Kt9
+  5nNkjum9Hxc+Z2dSuLajuLNLU9AoFLy8NCpEWLOg9y51xWO/60WPB4nrvQ9esfzY9Yr65799H
+  X79uTRB/91ptnGCY9cLzjvvL/r93l2w3m1Ql3PMudc9qaXZTzt9BtJZbijERDLeai4kQAIRNV
+  LD8DAAA=
 X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-23.tower-565.messagelabs.com!1682306387!215608!1
-X-Originating-IP: [62.60.8.146]
+X-Msg-Ref: server-3.tower-732.messagelabs.com!1682306506!290213!1
+X-Originating-IP: [62.60.8.179]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
-X-StarScan-Version: 9.105.2; banners=-,-,-
+X-StarScan-Version: 9.104.2; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 10554 invoked from network); 24 Apr 2023 03:19:47 -0000
-Received: from unknown (HELO n03ukasimr02.n03.fujitsu.local) (62.60.8.146)
-  by server-23.tower-565.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 24 Apr 2023 03:19:47 -0000
-Received: from n03ukasimr02.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTP id A9D0310032D
-	for <openembedded-devel@lists.openembedded.org>; Mon, 24 Apr 2023 04:19:47 +0100 (BST)
+Received: (qmail 17014 invoked from network); 24 Apr 2023 03:21:46 -0000
+Received: from unknown (HELO n03ukasimr04.n03.fujitsu.local) (62.60.8.179)
+  by server-3.tower-732.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 24 Apr 2023 03:21:46 -0000
+Received: from n03ukasimr04.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTP id 4838E155
+	for <openembedded-devel@lists.openembedded.org>; Mon, 24 Apr 2023 04:21:46 +0100 (BST)
 Received: from R01UKEXCASM223.r01.fujitsu.local (R01UKEXCASM223 [10.182.185.121])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTPS id 9D81C10032B
-	for <openembedded-devel@lists.openembedded.org>; Mon, 24 Apr 2023 04:19:47 +0100 (BST)
+	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTPS id 3B6C6142
+	for <openembedded-devel@lists.openembedded.org>; Mon, 24 Apr 2023 04:21:46 +0100 (BST)
 Received: from localhost.localdomain (10.167.225.33) by
  R01UKEXCASM223.r01.fujitsu.local (10.182.185.121) with Microsoft SMTP Server
- (TLS) id 15.0.1497.42; Mon, 24 Apr 2023 04:19:46 +0100
+ (TLS) id 15.0.1497.42; Mon, 24 Apr 2023 04:21:44 +0100
 From: <wangmy@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-gnome] [PATCH] network-manager-applet: upgrade 1.30.0 -> 1.32.0
-Date: Mon, 24 Apr 2023 11:19:11 +0800
-Message-ID: <1682306351-11741-5-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-networking] [PATCH] networkmanager: upgrade 1.42.4 -> 1.42.6
+Date: Mon, 24 Apr 2023 11:21:23 +0800
+Message-ID: <1682306487-11783-1-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
-In-Reply-To: <1682306351-11741-1-git-send-email-wangmy@fujitsu.com>
-References: <1682306351-11741-1-git-send-email-wangmy@fujitsu.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-Originating-IP: [10.167.225.33]
@@ -76,43 +73,46 @@ X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 24 Apr 2023 03:19:58 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102153
+ <openembedded-devel@lists.openembedded.org>; Mon, 24 Apr 2023 03:21:59 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102154
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
 Changelog:
 ==========
-* Allow using MTU larger than 10000 octets.
-* Prefer using AppIndicator outside X11.
-* Added support for importing WireGuard profiles from wg-quick files.
-* Added Interlingue translation.
-* Updated Basque, Catalan, Croatian, Danish, Georgian, German, Indonesian,
-  Lithuanian, Polish, Portuguese, Moscoviyan, Slovenian, Swedish, Turkish
-  and Ukrainian translations.
+* Emit the dhcp-change dispatcher event also after a lease renewal.
+* Fix assertion failure on DHCP renewal.
+* Add support for EC2 IMDSv2 in nm-cloud-setup.
+* Allow setting tunnel flags for ip6gre & ip6gretap connection
+  profiles.
+* Improve the Wi-Fi hotspot functionality.
+* Fix setting the Wi-Fi roaming policy based on the number of seen
+  BSSIDs.
+* Support the "no-aaaa" resolv.conf option.
+* Some oFono fixes.
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- ...anager-applet_1.30.0.bb => network-manager-applet_1.32.0.bb} | 2 +-
+ .../{networkmanager_1.42.4.bb => networkmanager_1.42.6.bb}      | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-gnome/recipes-connectivity/network-manager-applet/{network-manager-applet_1.30.0.bb => network-manager-applet_1.32.0.bb} (90%)
+ rename meta-networking/recipes-connectivity/networkmanager/{networkmanager_1.42.4.bb => networkmanager_1.42.6.bb} (99%)
 
-diff --git a/meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_1.30.0.bb b/meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_1.32.0.bb
-similarity index 90%
-rename from meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_1.30.0.bb
-rename to meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_1.32.0.bb
-index 8c7564a8e..cc37291c8 100644
---- a/meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_1.30.0.bb
-+++ b/meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_1.32.0.bb
-@@ -9,7 +9,7 @@ inherit features_check gnomebase gsettings gtk-icon-cache gettext
+diff --git a/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.42.4.bb b/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.42.6.bb
+similarity index 99%
+rename from meta-networking/recipes-connectivity/networkmanager/networkmanager_1.42.4.bb
+rename to meta-networking/recipes-connectivity/networkmanager/networkmanager_1.42.6.bb
+index 5ff90be22..31687a30b 100644
+--- a/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.42.4.bb
++++ b/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.42.6.bb
+@@ -31,7 +31,7 @@ SRC_URI = " \
+     file://enable-iwd.conf \
+ "
  
- REQUIRED_DISTRO_FEATURES = "x11 opengl"
+-SRC_URI[sha256sum] = "86ee16a2f7f525629133fa0c3dc060caf96ae4f34084eda1c24551951abe5a3c"
++SRC_URI[sha256sum] = "8c388ac3775ac6bceb605fae21be2c3e261cafe6067994a89f0dfa4610ed0279"
  
--SRC_URI[archive.sha256sum] = "9516b84e9d9f100db89a0c67cbfe57cedb0562310d45caafb6332e27bbeb5cd3"
-+SRC_URI[archive.sha256sum] = "a2b5affa1505ad43902959fdbe09e5bcec57b11ed333fa60458ffb9c62efba38"
+ S = "${WORKDIR}/NetworkManager-${PV}"
  
- # We don't not have ubuntu's appindicator (yet?)
- EXTRA_OEMESON = "-Dappindicator=no"
 -- 
 2.34.1
 
