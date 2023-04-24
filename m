@@ -2,68 +2,68 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 04E70C77B73
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 03F56C6FD18
 	for <webhook@archiver.kernel.org>; Mon, 24 Apr 2023 03:19:49 +0000 (UTC)
-Received: from mail1.bemta34.messagelabs.com (mail1.bemta34.messagelabs.com [195.245.231.4])
- by mx.groups.io with SMTP id smtpd.web10.43073.1682306383747317401
+Received: from mail1.bemta37.messagelabs.com (mail1.bemta37.messagelabs.com [85.158.142.112])
+ by mx.groups.io with SMTP id smtpd.web10.43074.1682306388246116098
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 23 Apr 2023 20:19:44 -0700
+ Sun, 23 Apr 2023 20:19:48 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=pBbuHYUa;
- spf=pass (domain: fujitsu.com, ip: 195.245.231.4, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=MywRlK6o;
+ spf=pass (domain: fujitsu.com, ip: 85.158.142.112, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1682306382; i=@fujitsu.com;
-	bh=dHMS6MjdTVtKvftHT9LDQXgIw81D7KvGXoCQ8nASTWI=;
+	s=170520fj; t=1682306386; i=@fujitsu.com;
+	bh=N+vBdAAh5mePZ05NmKmbwF32I6RnG/ghiZmpb86m02U=;
 	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
 	 MIME-Version:Content-Type;
-	b=pBbuHYUaxM5q8E2rDAC8wTWXnz4yM2yNJPUbPxJ5NY5r6SXetp+4lD+Pjz3+Ve5HS
-	 DSyf0tmlIWBz0QtM6q4kaymKosoN5ZkkQGhJoJUBoD21avsfw8TUkaVG2GucbTqho7
-	 47sKHkG6v3WZwW6o4M8cSU2oe0GOaoRzpm1VUgGkejMv27X+P8cxW3BcmZxn+du75M
-	 sxGq4XRqmiwq+YwozlkncUMZ9gauGcxBVKtWKNsExGpiqCfpirxrEORnReM1UJZxOH
-	 rYc/MGt6fjNFXG/pLhBQPT/2QDmxscL68b0DoctU97Euc3g76eIvArhwbZMiA3sgbW
-	 miqdRo0z7nN2Q==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrPIsWRWlGSWpSXmKPExsViZ8OxWdf3q2u
-  Kwe073BYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8b7txUFlzgqTi9dztLAeJS9i5GTQ0jgIaPE
-  ubkCXYxcQPZVJokX5z4zQjh7GSV2nT4EVsUmICVx4/5/NhBbREBfYunsPcwgNrOAisSL3z1gN
-  cICdhL73/wAs1kEVCVeflsFZvMKOEls6LnMCmJLCChITHn4HqiXg4NTwFnibX8GxBFOEleWvW
-  KGKBeUODnzCQvEeAmJgy9eMEO0KkrMvtzMAmFXSrR++AVlq0lcPbeJeQKj4Cwk7bOQtC9gZFr
-  FaFqcWlSWWqRrppdUlJmeUZKbmJmjl1ilm6iXWqpbnlpcomukl1herJdaXKxXXJmbnJOil5da
-  sokRGLYpxYqaOxg/7Pyrd4hRkoNJSZR3yQaXFCG+pPyUyozE4oz4otKc1OJDjDIcHEoSvEWfX
-  FOEBItS01Mr0jJzgDEEk5bg4FES4V32BSjNW1yQmFucmQ6ROsWoy3H1ypW9zEIsefl5qVLivI
-  EgRQIgRRmleXAjYPF8iVFWSpiXkYGBQYinILUoN7MEVf4VozgHo5Iwr+QHoCk8mXklcJteAR3
-  BBHTELm4XkCNKEhFSUg1MJzOYlv/R/ni35/of926eFS+3REeelVl6KV2u74GqGnvjz5VPPdVT
-  e8P4PlZnWvy4eldur3xBZPJnh5a606bfo7c5Ct1kkQ5ZOvulV0LWE6s4JrboJX6P1xxZOXfzf
-  9tcSYOET/MfZ/x5pcapKMGmdJy78N/FjTLmKzgqc64tUJGX+OzAYfyz733BCd1v5csPNC3YWL
-  hxz4kHM9/0iC32fVoStz953tIPgdH/4l64l+s+XMyYZPOld4bv9C9LdPJUWPez5H3Q/Sp/eOM
-  u8f+SZQ9vH00KCPi2YY9l5rbNSR1Hvs5IepvRPZ9lk+HbP2Lt7k8mt5y9ej82YUJ0sMZT7mM7
-  Tn3a7G0736T3ksv/BUosxRmJhlrMRcWJAEQGw91iAwAA
+	b=MywRlK6oPrbhZY8Z+4+B1XL+6FeTAV7luZjX/GogI7K9bHYhxf5jg4vYs7DRDCcfz
+	 ymebGR+dJ2JcNohojflY2964M4mI2BkPYWfX4i4Y+o7rfCsyxhH4ROyYSV64dsnRgG
+	 jLQ8pAFTuorjGAuL+w6QghGgTS6cLNfIBhecukWLUxFSdfdDU1pMAi3pIS/W2AfQlK
+	 uO58cwufUENYZ9j1Rso7DI3N9fYS7rbH3sR8YKF9+W6fYPplOY+S6doaKq2KhhJ+oe
+	 42yEC6mregthLW1D0z+RjUhEe7feR/umO7fvSaMqRiTXGmzqxzax/ulBy0YawGcp00
+	 8PE3soXmrlSsA==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrAIsWRWlGSWpSXmKPExsViZ8ORpBvw1TX
+  F4EWDrsXFw0uZHRg9zm1cwRjAGMWamZeUX5HAmvHp0ya2gmmcFZsmRzcwruPoYuTiEBJ4yCjR
+  /GMlUxcjJ5BzlUli50phiMReRolVpxaygyTYBKQkbtz/zwZiiwjoSyydvYcZxGYWUJF48bsHr
+  EZYwFaieeonsDiLgKrEyasrwWxeASeJN78Ps4DYEgIKElMevgeKc3BwCjhLvO3PgNjrJHFl2S
+  uockGJkzOfsECMl5A4+OIFM0SrosTsy81QYyolWj/8grLVJK6e28Q8gVFwFpL2WUjaFzAyrWI
+  0K04tKkst0jXXSyrKTM8oyU3MzNFLrNJN1Est1c3LLyrJ0DXUSywv1kstLtYrrsxNzknRy0st
+  2cQIDNyU4lTPHYxtu/7qHWKU5GBSEuVdssElRYgvKT+lMiOxOCO+qDQntfgQowwHh5IEb9En1
+  xQhwaLU9NSKtMwcYBTBpCU4eJREeHNPAqV5iwsSc4sz0yFSpxh1OdY2HNjLLMSSl5+XKiXO2w
+  YyQwCkKKM0D24ELKIvMcpKCfMyMjAwCPEUpBblZpagyr9iFOdgVBLmlfwANIUnM68EbtMroCO
+  YgI7Yxe0CckRJIkJKqoFJ5Nn+adxFUodzLda71RioPlXRNbgRofPqSVFi+5/9y7oCrmv5XK8X
+  LDm+OvGytZTW8X4O9dn3/NlcnY7WHo/98jLd40+FsPXHfPkDDszt2m0/FRL3vvLvXn/8S71fk
+  ZPvj3dZS7REQ3kqDm6Rumn8V4LDpmxra3Zomv8FOYWs02cnL7hS+tF1YWq1oZyI52yR1Pddmo
+  utxRvUin02Xz3LHNQd/N9MPccyuYX53fyvPV3xJ8/OsLDbNjf0o+6agmOcT2J3z5840/h2dvX
+  tvedF9omnBaRsbHN82bP4VOqqNC8vjlQVl96gafc+9/OuTfRoFPgSmmx2QD9sn7C8RGTqOblt
+  D0Jq5SSuhTNEKrEUZyQaajEXFScCAMnHZotjAwAA
 X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-22.tower-565.messagelabs.com!1682306381!215142!1
-X-Originating-IP: [62.60.8.179]
+X-Msg-Ref: server-3.tower-728.messagelabs.com!1682306384!286862!1
+X-Originating-IP: [62.60.8.98]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
-X-StarScan-Version: 9.105.2; banners=-,-,-
+X-StarScan-Version: 9.104.2; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 16100 invoked from network); 24 Apr 2023 03:19:41 -0000
-Received: from unknown (HELO n03ukasimr04.n03.fujitsu.local) (62.60.8.179)
-  by server-22.tower-565.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 24 Apr 2023 03:19:41 -0000
-Received: from n03ukasimr04.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTP id E22D4155
-	for <openembedded-devel@lists.openembedded.org>; Mon, 24 Apr 2023 04:19:40 +0100 (BST)
+Received: (qmail 31491 invoked from network); 24 Apr 2023 03:19:44 -0000
+Received: from unknown (HELO n03ukasimr03.n03.fujitsu.local) (62.60.8.98)
+  by server-3.tower-728.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 24 Apr 2023 03:19:44 -0000
+Received: from n03ukasimr03.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr03.n03.fujitsu.local (Postfix) with ESMTP id 308C91B5
+	for <openembedded-devel@lists.openembedded.org>; Mon, 24 Apr 2023 04:19:44 +0100 (BST)
 Received: from R01UKEXCASM223.r01.fujitsu.local (R01UKEXCASM223 [10.182.185.121])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTPS id D5BE8142
-	for <openembedded-devel@lists.openembedded.org>; Mon, 24 Apr 2023 04:19:40 +0100 (BST)
+	by n03ukasimr03.n03.fujitsu.local (Postfix) with ESMTPS id 24A4A1AC
+	for <openembedded-devel@lists.openembedded.org>; Mon, 24 Apr 2023 04:19:44 +0100 (BST)
 Received: from localhost.localdomain (10.167.225.33) by
  R01UKEXCASM223.r01.fujitsu.local (10.182.185.121) with Microsoft SMTP Server
- (TLS) id 15.0.1497.42; Mon, 24 Apr 2023 04:19:39 +0100
+ (TLS) id 15.0.1497.42; Mon, 24 Apr 2023 04:19:42 +0100
 From: <wangmy@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-oe] [PATCH] gensio: upgrade 2.6.2 -> 2.6.4
-Date: Mon, 24 Apr 2023 11:19:09 +0800
-Message-ID: <1682306351-11741-3-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH] libopus: upgrade 1.3.1 -> 1.4
+Date: Mon, 24 Apr 2023 11:19:10 +0800
+Message-ID: <1682306351-11741-4-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 In-Reply-To: <1682306351-11741-1-git-send-email-wangmy@fujitsu.com>
 References: <1682306351-11741-1-git-send-email-wangmy@fujitsu.com>
@@ -77,31 +77,32 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 24 Apr 2023 03:19:49 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102151
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102152
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../gensio/{gensio_2.6.2.bb => gensio_2.6.4.bb}                 | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-connectivity/gensio/{gensio_2.6.2.bb => gensio_2.6.4.bb} (93%)
+ .../libopus/{libopus_1.3.1.bb => libopus_1.4.bb}               | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+ rename meta-oe/recipes-multimedia/libopus/{libopus_1.3.1.bb => libopus_1.4.bb} (94%)
 
-diff --git a/meta-oe/recipes-connectivity/gensio/gensio_2.6.2.bb b/meta-oe/recipes-connectivity/gensio/gensio_2.6.4.bb
-similarity index 93%
-rename from meta-oe/recipes-connectivity/gensio/gensio_2.6.2.bb
-rename to meta-oe/recipes-connectivity/gensio/gensio_2.6.4.bb
-index 4aca6fee5..c61adb1df 100644
---- a/meta-oe/recipes-connectivity/gensio/gensio_2.6.2.bb
-+++ b/meta-oe/recipes-connectivity/gensio/gensio_2.6.4.bb
-@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING.LIB;md5=a0fd36908af843bcee10cb6dfc47fa67 \
-                     file://COPYING;md5=bae3019b4c6dc4138c217864bd04331f \
-                     "
+diff --git a/meta-oe/recipes-multimedia/libopus/libopus_1.3.1.bb b/meta-oe/recipes-multimedia/libopus/libopus_1.4.bb
+similarity index 94%
+rename from meta-oe/recipes-multimedia/libopus/libopus_1.3.1.bb
+rename to meta-oe/recipes-multimedia/libopus/libopus_1.4.bb
+index 830bc0473..200211774 100644
+--- a/meta-oe/recipes-multimedia/libopus/libopus_1.3.1.bb
++++ b/meta-oe/recipes-multimedia/libopus/libopus_1.4.bb
+@@ -9,8 +9,7 @@ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=e304cdf74c2a1b0a33a5084c128a23a3"
  
--SRCREV = "c1e878f5710bafb17aca5ece7d9079e73a78c554"
-+SRCREV = "a96805508864a46b8a7977aaf131c28742cddd11"
+ SRC_URI = "http://downloads.xiph.org/releases/opus/opus-${PV}.tar.gz"
+-SRC_URI[md5sum] = "d7c07db796d21c9cf1861e0c2b0c0617"
+-SRC_URI[sha256sum] = "65b58e1e25b2a114157014736a3d9dfeaad8d41be1c8179866f144a2fb44ff9d"
++SRC_URI[sha256sum] = "c9b32b4253be5ae63d1ff16eea06b94b5f0f2951b7a02aceef58e3a3ce49c51f"
  
- SRC_URI = "git://github.com/cminyard/gensio;protocol=https;branch=master"
+ S = "${WORKDIR}/opus-${PV}"
  
 -- 
 2.34.1
