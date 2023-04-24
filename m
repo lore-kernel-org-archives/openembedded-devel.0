@@ -2,68 +2,71 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1A147C77B73
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2B0B0C77B76
 	for <webhook@archiver.kernel.org>; Mon, 24 Apr 2023 03:21:59 +0000 (UTC)
-Received: from mail1.bemta37.messagelabs.com (mail1.bemta37.messagelabs.com [85.158.142.112])
- by mx.groups.io with SMTP id smtpd.web11.42786.1682306509922091098
+Received: from mail1.bemta34.messagelabs.com (mail1.bemta34.messagelabs.com [195.245.231.2])
+ by mx.groups.io with SMTP id smtpd.web11.42789.1682306516274477303
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 23 Apr 2023 20:21:50 -0700
+ Sun, 23 Apr 2023 20:21:56 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=SUgTM1Cl;
- spf=pass (domain: fujitsu.com, ip: 85.158.142.112, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=tkcpRTJz;
+ spf=pass (domain: fujitsu.com, ip: 195.245.231.2, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1682306507; i=@fujitsu.com;
-	bh=01h6fldkULyssDueQyh6vSpfRMOUP6ogQoVOVZUV5sY=;
-	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=SUgTM1CliNfZXlauVO7ZOH7nsWxA2EZuwapnnErl10D9DagSmYGJgFNnFgYRZBiVd
-	 4pd5BeDa1MEpEJJc7wrTO/1QRC+RQXsOSQ5OcKwwU0aMgmhRYqAEWrQy2HwO7i8Pkq
-	 UMaQRGRP2ioUmVjRlUvOEbLsDg8d3Pz4T3zSUWO425bniMrrS2kP2R9eVVusYavQQt
-	 00j/DpifzNPIakg63wXUzRjeIarFXkp848fKYzRM+2DIHRXub2xeFjfzl5ouaqOKbC
-	 GBJlsP09UXm8IJmWNL8Laj1vteplmLdbO+YVUej5ua6HNz5Y5NgtaPrwxUbP/h9Dh5
-	 YvdeW675xem3g==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFlrDIsWRWlGSWpSXmKPExsViZ8OxWffUV9c
-  Ug6PPzCwuHl7K7MDocW7jCsYAxijWzLyk/IoE1oyVxz4zFTzjqXg86SVrA+M+7i5GTg4hgYeM
-  Eg3LUiHsq0wSLYvUuxi5gOy9jBITVt5hBkmwCUhJ3Lj/nw3EFhHQl1g6ew9YnFlAReLF7x52E
-  FtYIEBix8a3LCA2i4CqxIsbj4HqOTh4BZwk1u+pBwlLCChITHn4HqyVV0BQ4uTMJywQYyQkDr
-  54wQxRoygx+3IzC4RdKdH64ReUrSZx9dwm5gmM/LOQtM9C0r6AkWkVo1lxalFZapGumV5SUWZ
-  6RkluYmaOXmKVbqJeaqluXn5RSYauoV5iebFeanGxXnFlbnJOil5easkmRmAgphQn2+1g/LLz
-  r94hRkkOJiVR3iUbXFKE+JLyUyozEosz4otKc1KLDzHKcHAoSfAWfXJNERIsSk1PrUjLzAFGB
-  UxagoNHSYR32RegNG9xQWJucWY6ROoUo6KUOG8gSEIAJJFRmgfXBovES4yyUsK8jAwMDEI8Ba
-  lFuZklqPKvGMU5GJWEeSU/AE3hycwrgZv+CmgxE9DiXdwuIItLEhFSUg1MXmeV7P49YpgndV3
-  E1ML/xNYNN0PtC6xnPXmUtHGJpZxJ6evtjcuC5m3dxzynJUtn8V1NR683PuH3GjZ0qL47suSQ
-  37lXkTvfhM+PyOifoM7EcpfhQbR2VVLlpkJe3a2yau5ST15t8jzAeqvmow/jxJfhJrcXbVL2T
-  4vo11g9rVXWP6p/xly2rOWTWx9FPbmU8T1usqyU4fIT6o8MDkz2TDhvuKz8rXMAXz3rNd2Kt9
-  5nNkjum9Hxc+Z2dSuLajuLNLU9AoFLy8NCpEWLOg9y51xWO/60WPB4nrvQ9esfzY9Yr65799H
-  X79uTRB/91ptnGCY9cLzjvvL/r93l2w3m1Ql3PMudc9qaXZTzt9BtJZbijERDLeai4kQAIRNV
-  LD8DAAA=
+	s=170520fj; t=1682306514; i=@fujitsu.com;
+	bh=oCHn+XRj1xqQGT4zm779Z9i5uOZFho5ZTeZ6xG5TiAw=;
+	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type;
+	b=tkcpRTJz4rXfmyEKIU3CQoF9gaSSE5fKJR7kJ1hvjsktsN4z7uexHyjhqpH8rapoz
+	 hPDHwK0umjPC/F/5feA4uyN/SDP94+tfO5CHLbTHmcbtJYtstbtZEc+00dMpnxvOEw
+	 nzsHZYG2CvkGmjZhSIBZXPmuVV/6TrQQQJp/ACkq0ygm/jtc2EDbl+9Tu+MXwuvyfo
+	 ohyP+D+g0NrarsiX7OBQQYrV8w6rvs/JbHUl42vj5y0priaND83v5avhkDipGGj5rB
+	 NL4YgMwF1JAsKdy0Qanp2qlgUnBlq8bF48bthnzCfGUU/zPkcw0/3U+KmJpgFsX5f+
+	 uI3WBXSqsWe/A==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrCIsWRWlGSWpSXmKPExsViZ8OxWffiV9c
+  Ug8079S0uHl7K7MDocW7jCsYAxijWzLyk/IoE1ozT/36yFZznqNh2aDpjA+Mn9i5GLg4hgYeM
+  Etd6/zNBOFeZJJZuW8sM4exllPj5rAuojJODTUBK4sb9/2wgtoiAvsTS2XuYQWxmARWJF797g
+  Go4OIQFAiR2TAQLswioSvx4fQMszCvgJNGwKgUkLCGgIDHl4XuwEk4BZ4l3K48zgthCQCUvZh
+  wGi/MKCEqcnPmEBWK6hMTBFy+YIXoVJWZfbmaBsCslWj/8grLVJK6e28Q8gVFwFpL2WUjaFzA
+  yrWI0LU4tKkst0jXVSyrKTM8oyU3MzNFLrNJN1Est1S1PLS7RNdJLLC/WSy0u1iuuzE3OSdHL
+  Sy3ZxAgM3JRiRaMdjE92/tU7xCjJwaQkyrtkg0uKEF9SfkplRmJxRnxRaU5q8SFGGQ4OJQneo
+  k+uKUKCRanpqRVpmTnAKIJJS3DwKInwLvsClOYtLkjMLc5Mh0idYlSUEucNBEkIgCQySvPg2m
+  CRe4lRVkqYl5GBgUGIpyC1KDezBFX+FaM4B6OSMK/kB6ApPJl5JXDTXwEtZgJavIvbBWRxSSJ
+  CSqqBqer0zbmVa8y/Way6e5Wj7FdMw96fNyWPH2Yq1v+2Nvz887cht04L+QndEo+dFnp4Qz/r
+  4b+84Q/nH9K8XGCRPzln1Y/W1NnlFRyWL/PKxWpm1Sz1STJf3tjt8PXhFPeMBUc1Hs6K7WFyO
+  Bhy4+GvhjvJDuwNmnMmK4WkaIdW/w8omptktfetr9kK9mu1jYejOs8/OvuXUW9G5ATj0q8/b0
+  bVTmGIZzz+s8Y4wjCG5+3XokbPq0uEudVSH0kLd4osW3586Y/5yguPVYsvd/PJE2CXeaz/58J
+  bvp+H1VUEX6yVPef+wSnL7+ufq0+8X4R/sX9ypmC2uwKDUdu97cxXWO6tOD7DZDU7z4XVFu8L
+  8pVYijMSDbWYi4oTAeevkMdXAwAA
 X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-3.tower-732.messagelabs.com!1682306506!290213!1
+X-Msg-Ref: server-7.tower-548.messagelabs.com!1682306513!139741!1
 X-Originating-IP: [62.60.8.179]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
-X-StarScan-Version: 9.104.2; banners=-,-,-
+X-StarScan-Version: 9.105.2; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 17014 invoked from network); 24 Apr 2023 03:21:46 -0000
+Received: (qmail 26784 invoked from network); 24 Apr 2023 03:21:53 -0000
 Received: from unknown (HELO n03ukasimr04.n03.fujitsu.local) (62.60.8.179)
-  by server-3.tower-732.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 24 Apr 2023 03:21:46 -0000
+  by server-7.tower-548.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 24 Apr 2023 03:21:53 -0000
 Received: from n03ukasimr04.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTP id 4838E155
-	for <openembedded-devel@lists.openembedded.org>; Mon, 24 Apr 2023 04:21:46 +0100 (BST)
+	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTP id 789C8155
+	for <openembedded-devel@lists.openembedded.org>; Mon, 24 Apr 2023 04:21:53 +0100 (BST)
 Received: from R01UKEXCASM223.r01.fujitsu.local (R01UKEXCASM223 [10.182.185.121])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTPS id 3B6C6142
-	for <openembedded-devel@lists.openembedded.org>; Mon, 24 Apr 2023 04:21:46 +0100 (BST)
+	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTPS id 6A251142
+	for <openembedded-devel@lists.openembedded.org>; Mon, 24 Apr 2023 04:21:53 +0100 (BST)
 Received: from localhost.localdomain (10.167.225.33) by
  R01UKEXCASM223.r01.fujitsu.local (10.182.185.121) with Microsoft SMTP Server
- (TLS) id 15.0.1497.42; Mon, 24 Apr 2023 04:21:44 +0100
+ (TLS) id 15.0.1497.42; Mon, 24 Apr 2023 04:21:52 +0100
 From: <wangmy@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-networking] [PATCH] networkmanager: upgrade 1.42.4 -> 1.42.6
-Date: Mon, 24 Apr 2023 11:21:23 +0800
-Message-ID: <1682306487-11783-1-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH] opencl-headers: upgrade 2023.02.06 -> 2023.04.17
+Date: Mon, 24 Apr 2023 11:21:26 +0800
+Message-ID: <1682306487-11783-4-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
+In-Reply-To: <1682306487-11783-1-git-send-email-wangmy@fujitsu.com>
+References: <1682306487-11783-1-git-send-email-wangmy@fujitsu.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-Originating-IP: [10.167.225.33]
@@ -74,45 +77,33 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 24 Apr 2023 03:21:59 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102154
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102157
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
-Changelog:
-==========
-* Emit the dhcp-change dispatcher event also after a lease renewal.
-* Fix assertion failure on DHCP renewal.
-* Add support for EC2 IMDSv2 in nm-cloud-setup.
-* Allow setting tunnel flags for ip6gre & ip6gretap connection
-  profiles.
-* Improve the Wi-Fi hotspot functionality.
-* Fix setting the Wi-Fi roaming policy based on the number of seen
-  BSSIDs.
-* Support the "no-aaaa" resolv.conf option.
-* Some oFono fixes.
-
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../{networkmanager_1.42.4.bb => networkmanager_1.42.6.bb}      | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-networking/recipes-connectivity/networkmanager/{networkmanager_1.42.4.bb => networkmanager_1.42.6.bb} (99%)
+ .../opencl/{opencl-headers_git.bb => opencl-headers_04.17.bb}  | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+ rename meta-oe/recipes-core/opencl/{opencl-headers_git.bb => opencl-headers_04.17.bb} (88%)
 
-diff --git a/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.42.4.bb b/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.42.6.bb
-similarity index 99%
-rename from meta-networking/recipes-connectivity/networkmanager/networkmanager_1.42.4.bb
-rename to meta-networking/recipes-connectivity/networkmanager/networkmanager_1.42.6.bb
-index 5ff90be22..31687a30b 100644
---- a/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.42.4.bb
-+++ b/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.42.6.bb
-@@ -31,7 +31,7 @@ SRC_URI = " \
-     file://enable-iwd.conf \
- "
+diff --git a/meta-oe/recipes-core/opencl/opencl-headers_git.bb b/meta-oe/recipes-core/opencl/opencl-headers_04.17.bb
+similarity index 88%
+rename from meta-oe/recipes-core/opencl/opencl-headers_git.bb
+rename to meta-oe/recipes-core/opencl/opencl-headers_04.17.bb
+index 83ea6528c..6ffaf68ea 100644
+--- a/meta-oe/recipes-core/opencl/opencl-headers_git.bb
++++ b/meta-oe/recipes-core/opencl/opencl-headers_04.17.bb
+@@ -5,8 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
+ SECTION = "base"
  
--SRC_URI[sha256sum] = "86ee16a2f7f525629133fa0c3dc060caf96ae4f34084eda1c24551951abe5a3c"
-+SRC_URI[sha256sum] = "8c388ac3775ac6bceb605fae21be2c3e261cafe6067994a89f0dfa4610ed0279"
+ S = "${WORKDIR}/git"
+-PV = "2023.02.06"
+-SRCREV = "4c82e9cfaaad18c340f48af3cf5d09ff33e8c1b7"
++SRCREV = "4fdcfb0ae675f2f63a9add9552e0af62c2b4ed30"
+ SRC_URI = "git://github.com/KhronosGroup/OpenCL-Headers.git;branch=main;protocol=https"
  
- S = "${WORKDIR}/NetworkManager-${PV}"
- 
+ do_configure[noexec] = "1"
 -- 
 2.34.1
 
