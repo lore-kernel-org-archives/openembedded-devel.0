@@ -2,71 +2,68 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2B5E4C6FD18
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2E378C77B73
 	for <webhook@archiver.kernel.org>; Mon, 24 Apr 2023 03:19:39 +0000 (UTC)
-Received: from mail3.bemta32.messagelabs.com (mail3.bemta32.messagelabs.com [195.245.230.82])
- by mx.groups.io with SMTP id smtpd.web11.42763.1682306375025217045
+Received: from mail1.bemta34.messagelabs.com (mail1.bemta34.messagelabs.com [195.245.231.2])
+ by mx.groups.io with SMTP id smtpd.web11.42761.1682306371437445387
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 23 Apr 2023 20:19:35 -0700
+ Sun, 23 Apr 2023 20:19:33 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=Y0ye6xAR;
- spf=pass (domain: fujitsu.com, ip: 195.245.230.82, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=bdPfyuB1;
+ spf=pass (domain: fujitsu.com, ip: 195.245.231.2, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1682306373; i=@fujitsu.com;
-	bh=L0wNVlyQ+66A9PGEB/poz0F6PvV69nYgmlXY0oJmGJk=;
-	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type;
-	b=Y0ye6xARufzPyDZukOXTtOB5FOSrMrAAbu2PmXD6ARMmGg/SBCOIW2ulbUfi43dDQ
-	 PUKkvXgmcMBA66Jp9Dyejb7gcVUfjLM00jKjPY1IJMlJgtqJNpYbf+Qzey2PK1bOUA
-	 ivs9ttnI9ooNmGL2Sg6P5G5r0TF7/M//WIxOhJ4uM2DGSLqQw41iJ2WnLdfxccvYyv
-	 ovBBIS6XaNhsn0VEUS8oyXpRSYss4GZ808bqe4i9AzuGlRn8UMT3lM0UqY9cswVl9H
-	 0QjoLN1/mGVxJY6+TvCCu5Yh+Ez/WLGZsP2qGmF86gz/dSnNWgzPYttQDGFjO+kApl
-	 67wbyTTl755Xw==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrEIsWRWlGSWpSXmKPExsViZ8ORqOv81TX
-  F4Mcyc4uLh5cyOzB6nNu4gjGAMYo1My8pvyKBNeP4y4XMBZ08FevmpTUwPuLqYuTiEBJ4wijx
-  sekEO4Rzg0ni8JVzUM5eRolbs/tZuxg5OdgEpCRu3P/PBmKLCOhLLJ29hxnEZhZQkXjxuweog
-  YNDWCBI4tlmAZAwi4CqxJoDHWBhXgEniUczE0DCEgIKElMevmcGCXMKOEu87c8ACQsBVVxZ9g
-  psIK+AoMTJmU9YIIZLSBx88YIZolVRYvblZhYIu1Ki9cMvKFtN4uq5TcwTGAVnIWmfhaR9ASP
-  TKkbT4tSistQiXVO9pKLM9IyS3MTMHL3EKt1EvdRS3fLU4hJdQ73E8mK91OJiveLK3OScFL28
-  1JJNjMCgTSlmYtjB+GjnX71DjJIcTEqivEs2uKQI8SXlp1RmJBZnxBeV5qQWH2KU4eBQkuAt+
-  uSaIiRYlJqeWpGWmQOMIJi0BAePkgjvsi9Aad7igsTc4sx0iNQpRkUpcd5AkIQASCKjNA+uDR
-  a1lxhlpYR5GRkYGIR4ClKLcjNLUOVfMYpzMCoJ80p+AJrCk5lXAjf9FdBiJqDFu7hdQBaXJCK
-  kpBqYPJKXdCywUlVbcvbgMyE+w7Qtk9Pbjvn+KHti2HtCrrPpy8tbL7LclZW9X/fUa5ld13A6
-  PP2Y/605H7bb/hG5VCFWMuGbJv8Epv/Cj78bLXA6dL5IabGo8+5WqYCGsi2swtHC39tSk6KF9
-  273nlOxWOet9FKBYxacad8CPuro3FBZctgt66wLx8vydczp5yeffHyb7Ruf4fXNK6/t3blJJI
-  hPV1D8rsZGNebfLv4XD57c7WMbsW6ZzE2mta1b/aosbXe5+vneSyit259nf2BR4a6z3wq1/qy
-  TNs2+0Jdo7rM1RlBccSb3p8/FrVamcr4tSQkLtY5NeHyBxZYzLbxFr8Imt+5GLpOa7Ac16VNK
-  LMUZiYZazEXFiQALpLcRVQMAAA==
+	s=170520fj; t=1682306369; i=@fujitsu.com;
+	bh=nFPIbKz5Gd1fT/OLNlCgHkoXca3ReqKNPAmJSotDjlo=;
+	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
+	b=bdPfyuB1TcitDsQglj0LaZETMpFCj3pR52ujF6y25Nc1c37azXzimut27Ps49rj9M
+	 /DUqMy1RQhrdRpsBQima+r3vMyvU32MtNpdhGesz55NisXHui2hkJDqwqdVQH1FkCv
+	 lDI2qO1r9O/UgCq01gg5MHnHmkAOCn2ZPRtFEB0+XpQhJVBh5M2whABBPIf/YxKp2U
+	 dVH0Y2adPs4Dhy5r1G+ERofvR+nnaFTE3Mb1Qt7Jh5P4KXKAv2op6Z39BYcnAIuLob
+	 AsNdaFblpJ0SXG/MLEEUBx0dJjUgiCksqj870WJiA0hzAHgKRUW1ddqIvovjusNyur
+	 rrfOSZsPi1riQ==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFlrNIsWRWlGSWpSXmKPExsViZ8MxSdfhq2u
+  Kwf1f4hYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8aNnWfYC5o4Kw5+2sTSwDiLo4uRi0NI4Amj
+  xJe3hxi7GDmBnBtMEktmyUEk9gIlZrezgiTYBKQkbtz/zwZiiwjoSyydvYcZxGYWUJF48buHH
+  cQWFnCWWPSjE2gQBweLgKpE2zsWEJNXwEli/i9DkAoJAQWJKQ/fg3XyCghKnJz5hAViioTEwR
+  cvmCFqFCVmX25mgbArJVo//IKy1SSuntvEPIGRfxaS9llI2hcwMq1iNC1OLSpLLdI110sqykz
+  PKMlNzMzRS6zSTdRLLdUtTy0u0TXSSywv1kstLtYrrsxNzknRy0st2cQIDMOUYqWeHYz/dv7V
+  O8QoycGkJMq7ZINLihBfUn5KZUZicUZ8UWlOavEhRhkODiUJ3qJPrilCgkWp6akVaZk5wJiAS
+  Utw8CiJ8OaeBErzFhck5hZnpkOkTjEqSonztoH0CYAkMkrz4NpgcXiJUVZKmJeRgYFBiKcgtS
+  g3swRV/hWjOAejkjCv5AegKTyZeSVw018BLWYCWryL2wVkcUkiQkqqgSlmTtjU328Onvv3piH
+  g2TX/O6mvVmgenbby1tKp0mXH+uL18/Pqoqa9s5m/vnOvVpKUSMns7S5KZcXTI8znd7l9iTm5
+  WvFG7K8Df+KLvP9bzFLc/NJ96Qeb2D0C6/b6rTlp6iDxQY4596uwzQfZ+YeVOhmPvjrMtyW5x
+  P2q/g+9hQwzYyYxLWsXuyNkuGiOeBrPn7kaLFoXXm0/t0VWIXcq98nt+rUNM3V8Il9FCdilO5
+  29ecW+gk3YdYv+q7drehWXvti7fIpSl3jVkdrk/8vfT3v7fGXj+id/ph9nYPJhnnb30ke1mUn
+  TL4TwOktr31AU2LnzW6+obUWs2/vH53WPVanLZzhsWPBthqtW+CRPJZbijERDLeai4kQASbLz
+  4T4DAAA=
 X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-11.tower-585.messagelabs.com!1682306371!120599!1
-X-Originating-IP: [62.60.8.97]
+X-Msg-Ref: server-17.tower-565.messagelabs.com!1682306368!214709!1
+X-Originating-IP: [62.60.8.146]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.105.2; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 7868 invoked from network); 24 Apr 2023 03:19:31 -0000
-Received: from unknown (HELO n03ukasimr01.n03.fujitsu.local) (62.60.8.97)
-  by server-11.tower-585.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 24 Apr 2023 03:19:31 -0000
-Received: from n03ukasimr01.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTP id 840E51001A5
-	for <openembedded-devel@lists.openembedded.org>; Mon, 24 Apr 2023 04:19:31 +0100 (BST)
+Received: (qmail 7366 invoked from network); 24 Apr 2023 03:19:28 -0000
+Received: from unknown (HELO n03ukasimr02.n03.fujitsu.local) (62.60.8.146)
+  by server-17.tower-565.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 24 Apr 2023 03:19:28 -0000
+Received: from n03ukasimr02.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTP id 1EC9310032B
+	for <openembedded-devel@lists.openembedded.org>; Mon, 24 Apr 2023 04:19:28 +0100 (BST)
 Received: from R01UKEXCASM223.r01.fujitsu.local (R01UKEXCASM223 [10.182.185.121])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTPS id 778AF1001A1
-	for <openembedded-devel@lists.openembedded.org>; Mon, 24 Apr 2023 04:19:31 +0100 (BST)
+	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTPS id 0667A1000FC
+	for <openembedded-devel@lists.openembedded.org>; Mon, 24 Apr 2023 04:19:28 +0100 (BST)
 Received: from localhost.localdomain (10.167.225.33) by
  R01UKEXCASM223.r01.fujitsu.local (10.182.185.121) with Microsoft SMTP Server
- (TLS) id 15.0.1497.42; Mon, 24 Apr 2023 04:19:29 +0100
+ (TLS) id 15.0.1497.42; Mon, 24 Apr 2023 04:19:26 +0100
 From: <wangmy@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-gnome] [PATCH] evolution-data-server: upgrade 3.48.0 -> 3.48.1
-Date: Mon, 24 Apr 2023 11:19:08 +0800
-Message-ID: <1682306351-11741-2-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-gnome] [PATCH] babl: upgrade 0.1.102 -> 0.1.104
+Date: Mon, 24 Apr 2023 11:19:07 +0800
+Message-ID: <1682306351-11741-1-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
-In-Reply-To: <1682306351-11741-1-git-send-email-wangmy@fujitsu.com>
-References: <1682306351-11741-1-git-send-email-wangmy@fujitsu.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-Originating-IP: [10.167.225.33]
@@ -77,43 +74,35 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 24 Apr 2023 03:19:39 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102150
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102149
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
 Changelog:
-==========
-Bug Fixes:
----------
- I#459 - Camel: POP3's 'UTF8' command blocking login
- I#461 - backends: React to destination URI changes
- I#462 - Fails to refresh backend with offline changes and broken local cache state
- I#469 - IMAPx: Ignore 'Permission denied' error on refresh
- M!116 - libedataserver: Disable deprecation notice around e_flag_timed_wait
- M!119 - Calendar: Change file backend discard_alarm() function
-
-Miscellaneous:
---------------
- WebDAV Notes: Fallback to derive component summary from description
- CamelFilterDriver: Unset info's headers only when folder has summary
+ LUT code-paths re-enabled, some array overflow proofing.
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../evolution-data-server/evolution-data-server.inc           | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ .../recipes-gimp/babl/{babl_0.1.102.bb => babl_0.1.104.bb}      | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-gnome/recipes-gimp/babl/{babl_0.1.102.bb => babl_0.1.104.bb} (84%)
 
-diff --git a/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server.inc b/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server.inc
-index 9db5e9011..59d3b5a29 100644
---- a/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server.inc
-+++ b/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server.inc
-@@ -9,5 +9,5 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=6a6e689d19255cf0557f3fe7d7068212 \
+diff --git a/meta-gnome/recipes-gimp/babl/babl_0.1.102.bb b/meta-gnome/recipes-gimp/babl/babl_0.1.104.bb
+similarity index 84%
+rename from meta-gnome/recipes-gimp/babl/babl_0.1.102.bb
+rename to meta-gnome/recipes-gimp/babl/babl_0.1.104.bb
+index 68b3f933d..a79dd4d1d 100644
+--- a/meta-gnome/recipes-gimp/babl/babl_0.1.102.bb
++++ b/meta-gnome/recipes-gimp/babl/babl_0.1.104.bb
+@@ -11,7 +11,7 @@ inherit setuptools3 gnomebase gobject-introspection vala
+ DEPENDS += "lcms"
  
- inherit gnomebase upstream-version-is-even
+ SRC_URI = "https://download.gimp.org/pub/${BPN}/0.1/${BP}.tar.xz"
+-SRC_URI[sha256sum] = "a88bb28506575f95158c8c89df6e23686e50c8b9fea412bf49fe8b80002d84f0"
++SRC_URI[sha256sum] = "22e38e1d19c5391abc8ccf936033a9d035e8a8ec7523e5cd76a4c01137d7160c"
  
--SRC_URI[archive.sha256sum] = "0f25f73331edf53909be40f412b2a86939270327517616303f322de157083c35"
--PV = "3.48.0"
-+SRC_URI[archive.sha256sum] = "5ce62c1e67f2789342a7f4a035b102f74e62ed85f60e81a5b7f3e04165404dff"
-+PV = "3.48.1"
+ FILES:${PN} += "${libdir}/${BPN}-${@gnome_verdir("${PV}")}"
+ 
 -- 
 2.34.1
 
