@@ -2,60 +2,67 @@ Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9FAADC77B61
-	for <webhook@archiver.kernel.org>; Mon, 24 Apr 2023 20:01:23 +0000 (UTC)
-Received: from mailout05.t-online.de (mailout05.t-online.de [194.25.134.82])
- by mx.groups.io with SMTP id smtpd.web11.62253.1682366476400555072
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E47BBC6FD18
+	for <webhook@archiver.kernel.org>; Tue, 25 Apr 2023 11:14:17 +0000 (UTC)
+Received: from mailout03.t-online.de (mailout03.t-online.de [194.25.134.81])
+ by mx.groups.io with SMTP id smtpd.web11.76211.1682421252772206268
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 24 Apr 2023 13:01:16 -0700
+ Tue, 25 Apr 2023 04:14:13 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=SPF record not found (domain: t-online.de, ip: 194.25.134.82, mailfrom: f_l_k@t-online.de)
-Received: from fwd76.dcpf.telekom.de (fwd76.aul.t-online.de [10.223.144.102])
-	by mailout05.t-online.de (Postfix) with SMTP id 52DC2DE8F
-	for <openembedded-devel@lists.openembedded.org>; Mon, 24 Apr 2023 22:01:09 +0200 (CEST)
-Received: from flk-MS-7C91.fritz.box ([84.163.38.153]) by fwd76.t-online.de
+ dkim=missing; spf=none, err=SPF record not found (domain: t-online.de, ip: 194.25.134.81, mailfrom: f_l_k@t-online.de)
+Received: from fwd89.dcpf.telekom.de (fwd89.aul.t-online.de [10.223.144.115])
+	by mailout03.t-online.de (Postfix) with SMTP id 71D5A3E7F4
+	for <openembedded-devel@lists.openembedded.org>; Tue, 25 Apr 2023 13:14:10 +0200 (CEST)
+Received: from flk-MS-7C91.fritz.box ([84.163.37.27]) by fwd89.t-online.de
 	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1pr2N1-3WMkxF0; Mon, 24 Apr 2023 22:01:07 +0200
+	esmtp id 1prGcb-2fqxtJ0; Tue, 25 Apr 2023 13:14:09 +0200
 From: Markus Volk <f_l_k@t-online.de>
 To: openembedded-devel@lists.openembedded.org
 Cc: Markus Volk <f_l_k@t-online.de>
-Subject: [mickledore][meta-oe][PATCH] polkit: update SRC_URI
-Date: Mon, 24 Apr 2023 22:01:00 +0200
-Message-Id: <20230424200100.754047-1-f_l_k@t-online.de>
+Subject: [meta-gnome][PATCH] webp-pixbuf-loader: update 0.2.0 -> 0.2.4
+Date: Tue, 25 Apr 2023 13:13:58 +0200
+Message-Id: <20230425111358.5499-1-f_l_k@t-online.de>
 X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1682366467-85B50C3F-C39A3B86/0/0 CLEAN NORMAL
-X-TOI-MSGID: 4aa1d3a9-57d0-4343-9d7a-76b2bb6d2b63
+X-TOI-EXPURGATEID: 150726::1682421249-E0F43C25-85FECF4D/0/0 CLEAN NORMAL
+X-TOI-MSGID: 8ecd4753-3f00-4100-8ec9-2cbd0de03c76
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 24 Apr 2023 20:01:23 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102185
+ <openembedded-devel@lists.openembedded.org>; Tue, 25 Apr 2023 11:14:17 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102186
 
 Signed-off-by: Markus Volk <f_l_k@t-online.de>
 ---
- meta-oe/recipes-extended/polkit/polkit_122.bb | 2 +-
+ ...{webp-pixbuf-loader_0.2.0.bb =3D> webp-pixbuf-loader_0.2.4.bb} | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-gnome/recipes-support/webp-pixbuf-loader/{webp-pixbuf-loader=
+_0.2.0.bb =3D> webp-pixbuf-loader_0.2.4.bb} (91%)
 
-diff --git a/meta-oe/recipes-extended/polkit/polkit_122.bb b/meta-oe/reci=
-pes-extended/polkit/polkit_122.bb
-index b441da744..290640626 100644
---- a/meta-oe/recipes-extended/polkit/polkit_122.bb
-+++ b/meta-oe/recipes-extended/polkit/polkit_122.bb
-@@ -4,7 +4,7 @@ HOMEPAGE =3D "http://www.freedesktop.org/wiki/Software/po=
-lkit"
- LICENSE =3D "LGPL-2.0-or-later"
- LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D155db86cdbafa7532b41f39040928=
-3eb"
-=20
--SRC_URI =3D "git://github.com/freedesktop/polkit.git;protocol=3Dhttps;br=
-anch=3Dmaster"
-+SRC_URI =3D "git://gitlab.freedesktop.org/polkit/polkit.git;protocol=3Dh=
-ttps;branch=3Dmaster"
+diff --git a/meta-gnome/recipes-support/webp-pixbuf-loader/webp-pixbuf-lo=
+ader_0.2.0.bb b/meta-gnome/recipes-support/webp-pixbuf-loader/webp-pixbuf=
+-loader_0.2.4.bb
+similarity index 91%
+rename from meta-gnome/recipes-support/webp-pixbuf-loader/webp-pixbuf-loa=
+der_0.2.0.bb
+rename to meta-gnome/recipes-support/webp-pixbuf-loader/webp-pixbuf-loade=
+r_0.2.4.bb
+index acd4acd92..71c5244f1 100644
+--- a/meta-gnome/recipes-support/webp-pixbuf-loader/webp-pixbuf-loader_0.=
+2.0.bb
++++ b/meta-gnome/recipes-support/webp-pixbuf-loader/webp-pixbuf-loader_0.=
+2.4.bb
+@@ -15,7 +15,7 @@ EXTRA_OEMESON =3D "-Dupdate_cache=3Dtrue"
+ SRC_URI =3D "git://github.com/aruiz/webp-pixbuf-loader.git;protocol=3Dht=
+tps;nobranch=3D1"
 =20
  S =3D "${WORKDIR}/git"
- SRCREV =3D "da87c5698019897dd731bb2cbb54ebd9c9481f52"
+-SRCREV =3D "eaa4ea02fd9d8ea8e0f4aac00dc6fa5b0eddd700"
++SRCREV =3D "a35014104a226265e44fe30fcdb4df9305af3466"
+=20
+ FILES:${PN} =3D " \
+     ${datadir}/thumbnailers/webp-pixbuf.thumbnailer \
 --=20
 2.34.1
 
