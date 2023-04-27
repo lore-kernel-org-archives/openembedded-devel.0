@@ -1,62 +1,165 @@
-Return-Path: <f_l_k@t-online.de>
+Return-Path: <rs@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DD81CC77B73
-	for <webhook@archiver.kernel.org>; Thu, 27 Apr 2023 16:32:53 +0000 (UTC)
-Received: from mailout08.t-online.de (mailout08.t-online.de [194.25.134.20])
- by mx.groups.io with SMTP id smtpd.web10.25844.1682613166065404041
- for <openembedded-devel@lists.openembedded.org>;
- Thu, 27 Apr 2023 09:32:46 -0700
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D5859C77B7E
+	for <webhook@archiver.kernel.org>; Thu, 27 Apr 2023 16:35:33 +0000 (UTC)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ by mx.groups.io with SMTP id smtpd.web10.25939.1682613331433811369
+ for <Openembedded-devel@lists.openembedded.org>;
+ Thu, 27 Apr 2023 09:35:31 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=SPF record not found (domain: t-online.de, ip: 194.25.134.20, mailfrom: f_l_k@t-online.de)
-Received: from fwd85.dcpf.telekom.de (fwd85.aul.t-online.de [10.223.144.111])
-	by mailout08.t-online.de (Postfix) with SMTP id 079BC25FFF
-	for <openembedded-devel@lists.openembedded.org>; Thu, 27 Apr 2023 18:32:44 +0200 (CEST)
-Received: from flk-MS-7C91.fritz.box ([79.219.227.127]) by fwd85.t-online.de
-	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1ps4Xy-3iJHf70; Thu, 27 Apr 2023 18:32:42 +0200
-From: Markus Volk <f_l_k@t-online.de>
-To: openembedded-devel@lists.openembedded.org
-Cc: Markus Volk <f_l_k@t-online.de>
-Subject: [meta-oe][PATCH] udisks2: add PACKAGECONFIGs for btrfs,lvm2 and lsm
-Date: Thu, 27 Apr 2023 18:32:28 +0200
-Message-Id: <20230427163228.2577813-1-f_l_k@t-online.de>
-X-Mailer: git-send-email 2.34.1
+ dkim=fail reason="body hash did not verify" header.i=@ti.com header.s=ti-com-17q1 header.b=WrhWWOeQ;
+ spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: rs@ti.com)
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 33RGZQKa069449;
+	Thu, 27 Apr 2023 11:35:26 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1682613326;
+	bh=IDm8Vy9TkUr5rZhg+pcl33MvznQ1NgwZi6aGEr1Qnm8=;
+	h=Date:Subject:To:CC:References:From:In-Reply-To;
+	b=WrhWWOeQqXpbRgxU2wZ4xEEjNguYVOVvfeVBGEhsLPUlpIZwYLhQiB2DIPGA0XN2M
+	 wSRXQap1ARktHTTq16XMR3B1A7uStJMwHnbKF24T35GqHvapEe2xqHyQnOeeNSXYfg
+	 movtrU/OvcZEuQ3wDG1MLcm0KbqvdMkq0DhT2ijM=
+Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
+	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 33RGZQcl004020
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+	Thu, 27 Apr 2023 11:35:26 -0500
+Received: from DFLE100.ent.ti.com (10.64.6.21) by DFLE113.ent.ti.com
+ (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 27
+ Apr 2023 11:35:26 -0500
+Received: from lelv0326.itg.ti.com (10.180.67.84) by DFLE100.ent.ti.com
+ (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Thu, 27 Apr 2023 11:35:25 -0500
+Received: from [128.247.81.144] (ileaxei01-snat2.itg.ti.com [10.180.69.6])
+	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 33RGZPRD025697;
+	Thu, 27 Apr 2023 11:35:25 -0500
+Message-ID: <a3b2faa0-6086-1ab0-036d-5e724aa82b48@ti.com>
+Date: Thu, 27 Apr 2023 11:35:25 -0500
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1682613162-977FDC52-EDCC0F2C/0/0 CLEAN NORMAL
-X-TOI-MSGID: 9c2cc1af-f919-43ea-aef0-0f4d64ee7872
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.10.0
+Subject: Re: [EXTERNAL] Re: [EXTERNAL] Re: [oe] [meta-oe][kirkstone][PATCH]
+ glfw: add packageconfig and wayland dependencies
+Content-Language: en-US, en-US-large
+To: Khem Raj <raj.khem@gmail.com>
+CC: Denys Dmytriyenko <denis@denix.org>,
+        <Openembedded-devel@lists.openembedded.org>, <afd@ti.com>,
+        <akuster808@gmail.com>, <detheridge@ti.com>, <reatmon@ti.com>
+References: <20230426203453.3497409-1-rs@ti.com>
+ <20230426203453.3497409-2-rs@ti.com>
+ <CAMKF1soDfEAhBYq91JVt9xhvQFr6yV2gsiOAcebCvX5wNio8iw@mail.gmail.com>
+ <20230427160243.GK9226@denix.org>
+ <19d24e40-7918-3329-6745-741fcd260dfd@ti.com>
+ <CAMKF1srVyFcNkGMOshndO1w3yL_4TzhX5XtSWTLq8Uetnx-LvA@mail.gmail.com>
+From: Randolph Sapp <rs@ti.com>
+In-Reply-To: <CAMKF1srVyFcNkGMOshndO1w3yL_4TzhX5XtSWTLq8Uetnx-LvA@mail.gmail.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 Content-Transfer-Encoding: quoted-printable
+X-MIME-Autoconverted: from 8bit to quoted-printable by fllv0016.ext.ti.com id 33RGZQKa069449
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 27 Apr 2023 16:32:53 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102214
+ <openembedded-devel@lists.openembedded.org>; Thu, 27 Apr 2023 16:35:33 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102215
 
-Signed-off-by: Markus Volk <f_l_k@t-online.de>
----
- meta-oe/recipes-support/udisks/udisks2_2.9.4.bb | 6 ++++++
- 1 file changed, 6 insertions(+)
+On 4/27/23 11:21, Khem Raj wrote:
+>=20
+>=20
+> On Thu, Apr 27, 2023 at 9:14 AM Randolph Sapp <rs@ti.com=20
+> <mailto:rs@ti.com>> wrote:
+>=20
+>     On 4/27/23 11:02, Denys Dmytriyenko wrote:
+>      > On Thu, Apr 27, 2023 at 01:22:16AM -0700, Khem Raj wrote:
+>      >> fails layer check perhaps it has some cross layer deps
+>      >>
+>      >>
+>     https://autobuilder.yoctoproject.org/typhoon/#/builders/88/builds/2=
+693 <https://autobuilder.yoctoproject.org/typhoon/#/builders/88/builds/26=
+93>
+>      >>
+>      >> On Wed, Apr 26, 2023 at 1:35=E2=80=AFPM Randolph Sapp via
+>      >> lists.openembedded.org <http://lists.openembedded.org>
+>     <rs=3Dti.com@lists.openembedded.org
+>     <mailto:ti.com@lists.openembedded.org>> wrote:
+>      >>>
+>      >>> From: Randolph Sapp <rs@ti.com <mailto:rs@ti.com>>
+>      >>>
+>      >>> GLFW has the ability to use a wayland backend. This patch adds
+>     a config
+>      >>> for it and attempts to automatically resolve the most common
+>     collision
+>      >>> since the wayland and x11 backends are mutually exclusive.
+>      >>>
+>      >>> Signed-off-by: Randolph Sapp <rs@ti.com <mailto:rs@ti.com>>
+>      >>> ---
+>      >>>=C2=A0 =C2=A0meta-oe/recipes-core/glfw/glfw_3.3.bb <http://glfw=
+_3.3.bb> |
+>     15 +++++++++++++--
+>      >>>=C2=A0 =C2=A01 file changed, 13 insertions(+), 2 deletions(-)
+>      >>>
+>      >>> diff --git a/meta-oe/recipes-core/glfw/glfw_3.3.bb
+>     <http://glfw_3.3.bb> b/meta-oe/recipes-core/glfw/glfw_3.3.bb
+>     <http://glfw_3.3.bb>
+>      >>> index b31bba6b6b..29d7b5de42 100644
+>      >>> --- a/meta-oe/recipes-core/glfw/glfw_3.3.bb <http://glfw_3.3.b=
+b>
+>      >>> +++ b/meta-oe/recipes-core/glfw/glfw_3.3.bb <http://glfw_3.3.b=
+b>
+>      >>> @@ -20,7 +20,18 @@ EXTRA_OECMAKE +=3D "-DBUILD_SHARED_LIBS=3DO=
+N
+>     -DGLFW_BUILD_DOCS=3DOFF"
+>      >>>
+>      >>>=C2=A0 =C2=A0CFLAGS +=3D "-fPIC"
+>      >>>
+>      >>> -DEPENDS =3D "libpng libglu zlib libxrandr libxinerama libxi
+>     libxcursor"
+>      >>> -REQUIRED_DISTRO_FEATURES =3D "x11 opengl"
+>      >>> +DEPENDS =3D "libpng libglu zlib"
+>      >>> +REQUIRED_DISTRO_FEATURES =3D "opengl"
+>      >>> +ANY_OF_DISTRO_FEATURES =3D "wayland x11"
+>      >>> +
+>      >>> +# upstream considers x11 and wayland backends mutually
+>     exclusive and will
+>      >>> +# prioritize wayland if it is enabled
+>      >>> +
+>      >>> +PACKAGECONFIG ??=3D " \
+>      >>> +=C2=A0 =C2=A0 ${@bb.utils.contains('DISTRO_FEATURES', 'waylan=
+d',
+>     'wayland', 'x11', d)} \
+>      >>> +"
+>      >>> +
+>      >>> +PACKAGECONFIG[wayland] =3D "-DGLFW_USE_WAYLAND=3DON,,wayland
+>     wayland-native wayland-protocols extra-cmake-modules libxkbcommon"
+>      >
+>      > ^^^ extra-cmake-modules is a KDE piece and available from these
+>     layers:
+>      >
+>     https://layers.openembedded.org/layerindex/branch/master/recipes/?q=
+=3Dextra-cmake-modules <https://layers.openembedded.org/layerindex/branch=
+/master/recipes/?q=3Dextra-cmake-modules>
+>      >
+>      >
+>      >>> +PACKAGECONFIG[x11] =3D ",,libxrandr libxinerama libxi libxcur=
+sor"
+>      >>>
+>      >>>=C2=A0 =C2=A0COMPATIBLE_HOST:libc-musl =3D "null"
+>      >>> --
+>      >>> 2.40.0
+>=20
+>     Rats. Well now I guess I know why this was never enabled. What's th=
+e
+>     play? Drop this or add a new layer dependency? I think I already kn=
+ow=20
+>=20
+>=20
+> You can add this as dependency via packageconfig and keep it disabled b=
+y=20
+> default
 
-diff --git a/meta-oe/recipes-support/udisks/udisks2_2.9.4.bb b/meta-oe/re=
-cipes-support/udisks/udisks2_2.9.4.bb
-index 3de555723..203006371 100644
---- a/meta-oe/recipes-support/udisks/udisks2_2.9.4.bb
-+++ b/meta-oe/recipes-support/udisks/udisks2_2.9.4.bb
-@@ -35,6 +35,12 @@ do_configure:prepend() {
-     touch ${S}/build-aux/config.rpath
- }
-=20
-+PACKAGECONFIG ?=3D ""
-+
-+PACKAGECONFIG[lvm2] =3D "--enable-lvm2,--disable-lvm2,lvm2"
-+PACKAGECONFIG[btrfs] =3D "--enable-btrfs,--disable-btrfs,,btrfs-tools"
-+PACKAGECONFIG[lsm] =3D "--enable-lsm,--disable-lsm,libstoragemgmt"
-+
- FILES:${PN} +=3D " \
-     ${datadir}/dbus-1/ \
-     ${datadir}/polkit-1 \
---=20
-2.34.1
+Better than nothing. V2 in a minute.
 
 
