@@ -2,56 +2,57 @@ Return-Path: <costamagna.gianfranco@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 24986C77B60
-	for <webhook@archiver.kernel.org>; Sat, 29 Apr 2023 07:28:24 +0000 (UTC)
-Received: from mail-wr1-f53.google.com (mail-wr1-f53.google.com [209.85.221.53])
- by mx.groups.io with SMTP id smtpd.web10.42165.1682753294756259666
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1D025C77B60
+	for <webhook@archiver.kernel.org>; Sat, 29 Apr 2023 07:30:24 +0000 (UTC)
+Received: from mail-wm1-f48.google.com (mail-wm1-f48.google.com [209.85.128.48])
+ by mx.groups.io with SMTP id smtpd.web10.42181.1682753421666274254
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 29 Apr 2023 00:28:15 -0700
+ Sat, 29 Apr 2023 00:30:22 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=HSpVJSvD;
- spf=pass (domain: gmail.com, ip: 209.85.221.53, mailfrom: costamagna.gianfranco@gmail.com)
-Received: by mail-wr1-f53.google.com with SMTP id ffacd0b85a97d-2f55ffdbaedso297355f8f.2
-        for <openembedded-devel@lists.openembedded.org>; Sat, 29 Apr 2023 00:28:14 -0700 (PDT)
+ dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=nIgJE3KR;
+ spf=pass (domain: gmail.com, ip: 209.85.128.48, mailfrom: costamagna.gianfranco@gmail.com)
+Received: by mail-wm1-f48.google.com with SMTP id 5b1f17b1804b1-3f20215fa70so2911295e9.0
+        for <openembedded-devel@lists.openembedded.org>; Sat, 29 Apr 2023 00:30:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1682753293; x=1685345293;
+        d=gmail.com; s=20221208; t=1682753420; x=1685345420;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=g1wBMllzWe7TH6YqXI7SUnw8P20w8phK9SHH/TfNwJ0=;
-        b=HSpVJSvD6cCJPD4wWcgYQ0bQwYd1ogo4VEq72BrS6RyYM1rOAetAanZLkLzq7F1npz
-         42n0y2XYQ6I1PuQ5MAHFKbMjlfNuS5xRBIY2SN8edtBqkt32pAu3ekwEciYsKqnPkrx0
-         K9gPWIsa+Xy+M26FNcSuqmB5Hu6Yi/pwKVoSF/zjFqbOW1wdj3qIpkD7AM1Bd5pyH1jV
-         ijO3oVDrygNAyRvSI6pFn6ykT27q/rPeZ5qtPgYxuEpMh+SX+3gw4JAi1w5uBaVxKvCB
-         h08apaBENWDycxGuCjtqHC8sK07xg2zXgfTMU0eVp24RurXRXKQkxe2U3N6px9T6V6eH
-         86KA==
+        bh=J62z1xklKpxKPXcy2LcNNjOPLvQi25PUzcTtfpviwrw=;
+        b=nIgJE3KR4QuCsyGbVlynhdRFwx/jBOxN5JWZpiBPqwikv9Ezohz82NgjnJsh0C9ZZr
+         PVrXywvx8IMfc8Ae5uKZTnVXxh4PJcHwU05DyqBcMVTumNuxmprmcYesM0PaZYHhZnPq
+         w0KJjkK0lgVXFa1BYTgEEWxcPJodt+fZyrlyUEatfbt5ADD+Sr3APw+DoQXs0gXifbf4
+         p7K94+dls0mjeYttSTcXX+cR/NU5ejySxEY3cwfLWZkkq99UkFcpVqW1jmsQtlL8nzj+
+         qnsmjVAsvFJSubbaOAVvVVpWv8PDjGNOvjZKbfzliPRZQ7N6TGR09xfULh/fDpLtgNAc
+         D40A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1682753293; x=1685345293;
+        d=1e100.net; s=20221208; t=1682753420; x=1685345420;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=g1wBMllzWe7TH6YqXI7SUnw8P20w8phK9SHH/TfNwJ0=;
-        b=N9KAdn1sGt9Y1sajGIl+QP4I/ypISim8wGgeVSfPyd01E6mV1uU61Xa+0dZzVGQrSj
-         ncseFOeQOoXP1Eeo6UfS9WJmLmoC7Xur9EXk8BT6xWYHrw74m8RFdUbu6l7t/UGCldIW
-         72uVy0FnvOZ3aOhzdjBcNkbk/0HENbSL71ND5fq0PULVv/oA/c91y1FgKy1g134BpWNQ
-         TVHDw7xtX15T/9HD1RQzfLXkPXqpQZUdHfO4vcKxpgGEZByS93JiGRkzLFOfrDqRzFRr
-         gTS1hRH2/d/j6CwjUKri/bm9r8iHAg325eJgPRu8UJF6XK6BYYTZ9cr3WQK/oQX4jLzn
-         5i9A==
-X-Gm-Message-State: AC+VfDzombZoDEwfcPuWGMx10Tm0Osly2Xo1MImVr/PfcKfgFgiWmuM5
-	QFTiE9OcXVskfO8d216szFDqP6ZDvkM=
-X-Google-Smtp-Source: ACHHUZ65xZ2JchSvDL2FGyrboPb8rFSa5rXMkLcwOFLT1olImMx0dpLzZXUV5+TtKVqQbKi/x/OCUQ==
-X-Received: by 2002:adf:f046:0:b0:306:147e:5553 with SMTP id t6-20020adff046000000b00306147e5553mr302675wro.23.1682753292565;
-        Sat, 29 Apr 2023 00:28:12 -0700 (PDT)
+        bh=J62z1xklKpxKPXcy2LcNNjOPLvQi25PUzcTtfpviwrw=;
+        b=DGKGMkdLNSS02VN1ZY475x+wS7GHJkXcw0Zuyv5eFrCXjUov/+4n3Rg5Q/S9KDKJIS
+         EMilJ+P7M21h9DHIujezNj3u6ASYkRUdoaE5I7xeNrEHZTqtwMI8B72lisqJEjkG3b7q
+         ONyECK7cOJZfKDI5vneWKGA/LlikUCQAShUFD8bKZyfIERpjZkhV4zrwzRKm7Gb6vYo5
+         4APckbMLvtGaa1fNv8HgNKcM9VWBvky0vcQpjN5NiDvWjGv9Z+ZA1aEKea0J7jKIlxnZ
+         f4WMACGKp4NhAYf377QpFWs+WHmqc0DgPQG3shnb+CWTKBM1WIXwVqiCDtllbLyrmlZM
+         W+Ew==
+X-Gm-Message-State: AC+VfDx3ZHMPhXs6hwnocCb+PvCspepwhOoJ1LwJD0u8hd/S5GC9Bfkl
+	9DACg8lPyaSYgvssV0kJO5GUYDU3A+A=
+X-Google-Smtp-Source: ACHHUZ53mYT17K4wLMSXIBIDhMoNllQnmLQkbwvriWUgkRvFddr4KSzmgC0enxS2bEJCxRw+l3MMjg==
+X-Received: by 2002:a5d:634e:0:b0:2fa:6929:eb81 with SMTP id b14-20020a5d634e000000b002fa6929eb81mr5673828wrw.31.1682753419521;
+        Sat, 29 Apr 2023 00:30:19 -0700 (PDT)
 Received: from localhost.localdomain (mob-31-159-146-181.net.vodafone.it. [31.159.146.181])
-        by smtp.gmail.com with ESMTPSA id z18-20020adfd0d2000000b002fae7408544sm22673503wrh.108.2023.04.29.00.28.11
+        by smtp.gmail.com with ESMTPSA id c1-20020a5d4f01000000b002fc0de07930sm22857940wru.13.2023.04.29.00.30.18
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 29 Apr 2023 00:28:11 -0700 (PDT)
+        Sat, 29 Apr 2023 00:30:19 -0700 (PDT)
 From: Gianfranco Costamagna <costamagna.gianfranco@gmail.com>
 X-Google-Original-From: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
 To: openembedded-devel@lists.openembedded.org
-Cc: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
+Cc: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>,
+	Gianfranco Costamagna <locutusofborg@debian.org>
 Subject: [meta-oe][PATCH] dlt-daemon: upgrade 2.18.8 -> 2.18.9 (commit: 9a2312d3512a27620d41b9a325338b6e7b3d42de)
-Date: Sat, 29 Apr 2023 09:28:08 +0200
-Message-Id: <20230429072808.2583612-1-costamagnagianfranco@yahoo.it>
+Date: Sat, 29 Apr 2023 09:30:16 +0200
+Message-Id: <20230429073016.2583860-1-costamagnagianfranco@yahoo.it>
 X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
@@ -59,8 +60,8 @@ Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 29 Apr 2023 07:28:24 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102226
+ <openembedded-devel@lists.openembedded.org>; Sat, 29 Apr 2023 07:30:24 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102227
 
 Drop patches now part of new upstream release:
 - 0001-Fix-memory-leak.patch
@@ -175,6 +176,9 @@ in #456
     dlt_multiple_files: remove superfluous mode bits and add header file to=
  header list by @minminlittleshrimp in #462
     dlt-user: fix crash with certain strings by @alexmohr in #463
+
+Signed-off-by: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
+Signed-off-by: Gianfranco Costamagna <locutusofborg@debian.org>
 ---
  .../dlt-daemon/0001-Fix-memory-leak.patch     | 34 --------------
  ...ake-Link-with-libatomic-on-rv32-rv64.patch | 45 ------------------
