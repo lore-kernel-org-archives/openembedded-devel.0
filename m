@@ -2,56 +2,56 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 995D9C77B7F
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9A729C7EE24
 	for <webhook@archiver.kernel.org>; Mon,  1 May 2023 06:05:26 +0000 (UTC)
 Received: from mail-pf1-f176.google.com (mail-pf1-f176.google.com [209.85.210.176])
- by mx.groups.io with SMTP id smtpd.web11.87293.1682921122136148592
+ by mx.groups.io with SMTP id smtpd.web10.87634.1682921125826928116
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 30 Apr 2023 23:05:22 -0700
+ Sun, 30 Apr 2023 23:05:25 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=ffxeisNz;
+ dkim=pass header.i=@gmail.com header.s=20221208 header.b=FnTXrTdO;
  spf=pass (domain: gmail.com, ip: 209.85.210.176, mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f176.google.com with SMTP id d2e1a72fcca58-63b4bf2d74aso1468391b3a.2
-        for <openembedded-devel@lists.openembedded.org>; Sun, 30 Apr 2023 23:05:22 -0700 (PDT)
+Received: by mail-pf1-f176.google.com with SMTP id d2e1a72fcca58-63b4e5fdb1eso2583664b3a.1
+        for <openembedded-devel@lists.openembedded.org>; Sun, 30 Apr 2023 23:05:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1682921121; x=1685513121;
+        d=gmail.com; s=20221208; t=1682921125; x=1685513125;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=EOUBgIafks7m7GyNzTnJQhQRpch+e8qr13Vny2TFL8Y=;
-        b=ffxeisNzQFaR3n6i57Q4KHS5X1mOgz4uikJkTxGQ5/qJgGijIQbm6w63+cME9HJtC0
-         z5atVryfjxmU46NK07MU6uZsf2/S5HyMoBpzy/E0UkWWpUDxycLb0KcR+7kwW5yr2fpw
-         xHlikM/D3kCY56PVWoP83ReEgLjctZ/cOky1M5hkuV3Nji0RAef070ro+8mW/H6n3naU
-         ZbeXL3V0G8CLxj8WV23I5c70vSi8TTejcoaxpyWBSiafJnpGCKyy49fJlEDTSd4W0OsM
-         euGExmwTljGHrvre1R5EBuirdKvAP9TmwPUcTg7Q4dFokP0fI9vXonbKmcFOHbSmDbra
-         XXmQ==
+        bh=5Ec/yE3lm8gTVp0PzP2xLS8dBY0P+ezOUJv0qgwoB5I=;
+        b=FnTXrTdOv4KteRjKpHARPU2eIttFfmMbbUXRpBPTQmWb1tSceO6c936Q3qgfMk61Kz
+         pTwfx6yhTcrWD34qv9h5a0gGYeeAm6aMzSrBR3swY4zH6CYohpouqyqbLWTn0PN9P2XL
+         Yn6ivfhMDGM/QGTXxYoIZ6Tezcr2BiICyYXQhQCmjdFSv125e1c6tDozRk6zeiBDSyV+
+         XgM6+tM9AzDrvJgToU+U93ooavxC2DXa+xQRdzVgMeiMdV8RX+CxAwSkwp9lX83jBjcL
+         xKzqkysx0RNfrjaBXbiqZlo4zhuvN7jrCd3xXT6s6JrhGw9jnEfhkxGGA2UHxKRMjL7y
+         mtcw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1682921121; x=1685513121;
+        d=1e100.net; s=20221208; t=1682921125; x=1685513125;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=EOUBgIafks7m7GyNzTnJQhQRpch+e8qr13Vny2TFL8Y=;
-        b=XP2DLRnAPPrBopOTk7wdEbxNr00/xsTBZ5jEfFmwHnXiiJM/15V0MBCkJ8nNR6kzOp
-         QJcwu/EldmbclDzxH6qqy53VDsj3tWbU7gfRdPm5671y6nQXFT6yo/zHe6SE/kqZ5wMi
-         4Z4CFB8VV8QZv0TEltLr5rACLLdWcjJUS+8tI0PFG2E5El42HgGGOEmCAt4n8hu/7AK6
-         o3il6Hcvk695BdmonXhcT+VxusIhxDqF6FHu/8WkM84xyFoUgf5yp9nP9uu58eifZ5rH
-         HDpuRsFU9QgK32frtp/cVPj3wLte4ZwV73SxIb5xw6DqVfEOKh1RUST5KTXhiESvsyEk
-         FHkg==
-X-Gm-Message-State: AC+VfDycHCgop7fZo790z7ArOaiFhwwjnlvVZkIlfyhDVKqNY9nMmFAZ
-	1NMmVSj3vbrggHWbvAw2OR+/H1hZXTwpOg==
-X-Google-Smtp-Source: ACHHUZ4P4Xd4D1KnviJAdd31LFw8PHttv97A2OfEmJeHflXusjb1MM1t9GoplGNUHmbRln9FjUwWwg==
-X-Received: by 2002:a05:6a20:1448:b0:dc:4369:16a4 with SMTP id a8-20020a056a20144800b000dc436916a4mr16443878pzi.19.1682921121115;
-        Sun, 30 Apr 2023 23:05:21 -0700 (PDT)
+        bh=5Ec/yE3lm8gTVp0PzP2xLS8dBY0P+ezOUJv0qgwoB5I=;
+        b=Aa8SawvFqzK/BE86wTk2hf/crmTFHL5dHqUvrUaSQ2JQ0HXqtDlq9tdcHHLu9e33Tg
+         HNElOyMVeJ89/e8ilQnpEwXnN4K3d1wJhBEHJnHAxziE8uy0pKpaDNFoPYO6macGB2+c
+         2HiFZmjUDpY8Qk/hWqWoAYsmbQg7Sp41jMhIx+ltcAbOfodKFcO9DdEMLyv8mH9awqIJ
+         E56HhteKybJYRPb16CWgACta/KseP59J7w9D0iAoKeX8dchgU+Hhvc4J5qC39LgRPXKh
+         E0i7G3zpZIiDzhHdN8K02u94p4l611BfoyT94ffwMB1ROfQD+a4V2wSnYu3obtVAEoYX
+         oXGA==
+X-Gm-Message-State: AC+VfDyQIL3M8HMW5BQYqHflWVoxxh5LJM1/lcmS+16IWxzc/CRbhc45
+	oyULapPNxngEomZ4LGP/mfXH71JmBECJpw==
+X-Google-Smtp-Source: ACHHUZ6yvF7aY8JDyDOaKHIZdZqVb48NpJcKLSioLEAogsiN3zg2SR+Mkwk4ULn3nUQvlTloRnjfNQ==
+X-Received: by 2002:a05:6a20:7f92:b0:f0:e3ed:469a with SMTP id d18-20020a056a207f9200b000f0e3ed469amr16110184pzj.55.1682921125021;
+        Sun, 30 Apr 2023 23:05:25 -0700 (PDT)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9181:d380::f98d])
-        by smtp.gmail.com with ESMTPSA id q8-20020a656848000000b005134fc049d7sm16767730pgt.31.2023.04.30.23.05.20
+        by smtp.gmail.com with ESMTPSA id q8-20020a656848000000b005134fc049d7sm16767730pgt.31.2023.04.30.23.05.24
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 30 Apr 2023 23:05:20 -0700 (PDT)
+        Sun, 30 Apr 2023 23:05:24 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 02/13] ttf-arphic-uming: Update to 0.2.20080216-2
-Date: Sun, 30 Apr 2023 23:05:07 -0700
-Message-Id: <20230501060518.3505068-2-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 07/13] ctapi-common: Point to working SRC_URI locations
+Date: Sun, 30 Apr 2023 23:05:12 -0700
+Message-Id: <20230501060518.3505068-7-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20230501060518.3505068-1-raj.khem@gmail.com>
 References: <20230501060518.3505068-1-raj.khem@gmail.com>
@@ -61,35 +61,33 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 01 May 2023 06:05:26 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102231
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102236
 
-Point to a valid URI
+Drop md5sum checksum
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../ttf-fonts/ttf-arphic-uming_20080216.bb                 | 7 +++----
+ .../recipes-support/ctapi-common/ctapi-common_1.1-14.bb    | 7 +++----
  1 file changed, 3 insertions(+), 4 deletions(-)
 
-diff --git a/meta-oe/recipes-graphics/ttf-fonts/ttf-arphic-uming_20080216.bb b/meta-oe/recipes-graphics/ttf-fonts/ttf-arphic-uming_20080216.bb
-index 73c8eb41a1..3fc7f39e85 100644
---- a/meta-oe/recipes-graphics/ttf-fonts/ttf-arphic-uming_20080216.bb
-+++ b/meta-oe/recipes-graphics/ttf-fonts/ttf-arphic-uming_20080216.bb
-@@ -8,12 +8,11 @@ PR = "r6"
+diff --git a/meta-oe/recipes-support/ctapi-common/ctapi-common_1.1-14.bb b/meta-oe/recipes-support/ctapi-common/ctapi-common_1.1-14.bb
+index 25d5b09e7f..b7a9d3e936 100644
+--- a/meta-oe/recipes-support/ctapi-common/ctapi-common_1.1-14.bb
++++ b/meta-oe/recipes-support/ctapi-common/ctapi-common_1.1-14.bb
+@@ -4,10 +4,9 @@ SECTION = "System Environment/Libraries"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://../ctapi-common.LICENSE;md5=8744cd52545ecb45befebd0da6f70f0a"
  
- FONT_PACKAGES = "${PN}"
+-SRC_URI = "http://ftp.riken.jp/Linux/fedora/releases/23/Everything/source/SRPMS/c/${BPN}-${PV}.fc23.src.rpm;extract=ctapi-common.LICENSE \
+-           http://ftp.riken.jp/Linux/fedora/releases/23/Everything/source/SRPMS/c/${BPN}-${PV}.fc23.src.rpm;extract=ctapi-common.README"
+-SRC_URI[md5sum] = "5b7259ef1c8cd9ae801fca7a5cb548c1"
+-SRC_URI[sha256sum] = "87a74eb0a66055c34ba2c5c919e74f3211c5950ae1c2cbab967fdf4137f5de91"
++SRC_URI = "https://distrib-coffee.ipsl.jussieu.fr/pub/linux/altlinux/autoimports/Sisyphus/x86_64/SRPMS.autoimports/ctapi-common-1.1-alt1_14.src.rpm;extract=ctapi-common.LICENSE \
++           https://distrib-coffee.ipsl.jussieu.fr/pub/linux/altlinux/autoimports/Sisyphus/x86_64/SRPMS.autoimports/ctapi-common-1.1-alt1_14.src.rpm;extract=ctapi-common.README"
++SRC_URI[sha256sum] = "0531a6db39271166f1e9060f81a0b2d47f878210dfb4f465c703fe205cc3a8ce"
  
--SRC_URI = "http://archive.ubuntu.com/ubuntu/pool/main/t/ttf-arphic-uming/ttf-arphic-uming_0.2.${PV}.1.orig.tar.gz"
--S = "${WORKDIR}"
-+SRC_URI = "https://deb.debian.org/debian/pool/main/f/fonts-arphic-uming/fonts-arphic-uming_0.2.${PV}.2.orig.tar.bz2"
-+S = "${WORKDIR}/ttf-arphic-uming-0.2.20080216.2"
- 
- require ttf.inc
- 
- FILES:${PN} = "${datadir}"
- 
--SRC_URI[md5sum] = "d219fcaf953f3eb1889399955a00379f"
--SRC_URI[sha256sum] = "8038a6db9e832456d5da5559aff8d15130243be1091bf24f3243503a6f1bda98"
-+SRC_URI[sha256sum] = "e3c19e04ea7a565b4acff6f1e4248084d2e10752e305bf7dd6c76e80860dc1db"
+ do_compile() {
+     install -pm 644 ${WORKDIR}/ctapi-common.LICENSE LICENSE
 -- 
 2.40.1
 
