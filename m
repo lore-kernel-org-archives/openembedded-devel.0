@@ -2,56 +2,56 @@ Return-Path: <tgamblin@baylibre.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7B2B3C7EE22
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8BC4DC7EE29
 	for <webhook@archiver.kernel.org>; Tue,  2 May 2023 16:50:14 +0000 (UTC)
-Received: from mail-qk1-f176.google.com (mail-qk1-f176.google.com [209.85.222.176])
- by mx.groups.io with SMTP id smtpd.web11.1307.1683046209580312193
+Received: from mail-qv1-f53.google.com (mail-qv1-f53.google.com [209.85.219.53])
+ by mx.groups.io with SMTP id smtpd.web10.1310.1683046211974603411
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 02 May 2023 09:50:09 -0700
+ Tue, 02 May 2023 09:50:12 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="signature has expired" header.i=@baylibre-com.20221208.gappssmtp.com header.s=20221208 header.b=gx/JL8Fw;
- spf=pass (domain: baylibre.com, ip: 209.85.222.176, mailfrom: tgamblin@baylibre.com)
-Received: by mail-qk1-f176.google.com with SMTP id af79cd13be357-74e462a540aso188255985a.1
-        for <openembedded-devel@lists.openembedded.org>; Tue, 02 May 2023 09:50:09 -0700 (PDT)
+ dkim=fail reason="signature has expired" header.i=@baylibre-com.20221208.gappssmtp.com header.s=20221208 header.b=TrfgaXSh;
+ spf=pass (domain: baylibre.com, ip: 209.85.219.53, mailfrom: tgamblin@baylibre.com)
+Received: by mail-qv1-f53.google.com with SMTP id 6a1803df08f44-5f95cedb135so18267126d6.1
+        for <openembedded-devel@lists.openembedded.org>; Tue, 02 May 2023 09:50:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=baylibre-com.20221208.gappssmtp.com; s=20221208; t=1683046208; x=1685638208;
+        d=baylibre-com.20221208.gappssmtp.com; s=20221208; t=1683046211; x=1685638211;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=Ny1Eb7h6BYAdiTh3a+SMiPlQx5wRweupU97HjBnlYqE=;
-        b=gx/JL8Fw+UiGEqnISGV9/wAX5vT3bkCM3mQvJfFNSHTvcSSZMGlrIQw8+PmvD7tJM0
-         zClRKwIBllIMK7txSi7eDg1rT5yFg09Xqz17E92q/8a3cui8cS1ufqJW4343JPJBD920
-         gDkU9GexPNn4B1ZCCRms0Q09582piS8kv676TrSxyRBkdwCXejdGbOUXQIyNA6+uQjnK
-         tUaB34NhNOiGJoxWwrcCJM29UHxfFafwMMXwBVfdkT9A0yfx7ZyivctMExPbxPFhi6Xf
-         EsVKmRTDdvCqoOvjWGc0+hJED6beL4HXNF7Ub4jA6W9Yavb4z1WI7EKLVrGr2p107WGy
-         B40Q==
+        bh=Gkm+UwBotn2Oy1ENr13yXOxIiWiWLkdjfvnGGl5u2dU=;
+        b=TrfgaXSh8IR3iGsoXFSxdXArDihpkD7dadwE31h29t45AJczikixbmDlsx67Fvh0z3
+         5RgyUz/P8PRm2JkuClkhRY9AY1v2vW9RMagKUt4FI6FVjmG/89DsJb/lwo+817smw0RC
+         IDDqARYimXiWTY7qZJgMqLdAXXV4D3deeYIV3m44nQzCraA2eL8t17cu2iZkEtT8xQ/R
+         880V27n+A/aVVrQ8dj+ygwGuCLIEcm09UqUg+9m+aLH15gRXSM7JlbIdARFdx/KFcArW
+         dkX+G9/j1WWXbK7n5153Z+sDLxQYOKEfAflxExJCLqgumO9Ff3zjGRKfvKuIUoUfrDUp
+         7yWw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1683046208; x=1685638208;
+        d=1e100.net; s=20221208; t=1683046211; x=1685638211;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=Ny1Eb7h6BYAdiTh3a+SMiPlQx5wRweupU97HjBnlYqE=;
-        b=PSlUawCM362L6mvT54zr9X7wZvMu2XnaJMIOo8TteaiEggGwNc300NCKC/BZqqzf1u
-         GPfaLhx41th3UMlKz5705gUc7Q817wDRNDwhkmtSM8GMQCCd6+Wh9HwDvVMvXwL3MUnf
-         4/fMBbdwfGfJs65Fm4ZXA5LO4vjh3o6/+8GTKx5WraahlOnSrydniQLSquRQheXF9ZEl
-         4XSGx/zkHUIR4VEHv+SBfBeWuxa/UHyDZpZtTzmrApd/K3GGaemdLqP5u5IRiq1cFyWl
-         G1GjxafWJzHASsd7NmPODHjOff6VPWu8ftVyf4xWn/OZ3YQEGozBDI2/c4lU8nQrxJGM
-         WWkQ==
-X-Gm-Message-State: AC+VfDzysof6AzXg6pkA5mrSpVJuo4G+K4Exj/hs2aTHIjGaC3dSIADH
-	/W1c+C5+FCMLAKG3X4TcqWuNgAPB1hsMNqv2DzQ=
-X-Google-Smtp-Source: ACHHUZ43eceUfvpAwealXiWNyOnPTKts8WKxufm/z5TNWPuPKv8cJlofF4eeLzTMuUQd17umNCeu6w==
-X-Received: by 2002:ad4:5de5:0:b0:5ef:642e:7cd2 with SMTP id jn5-20020ad45de5000000b005ef642e7cd2mr6222750qvb.7.1683046208583;
-        Tue, 02 May 2023 09:50:08 -0700 (PDT)
+        bh=Gkm+UwBotn2Oy1ENr13yXOxIiWiWLkdjfvnGGl5u2dU=;
+        b=b+fsxio4WeT6NlNVH7QMJ3xq+VOPN7xxLk/rRs+eKgYdKSKIVdYGHYRJwCa8OvKbF5
+         0QleHf36+YRtjKOPvZYQdcmPq93KdYu9IrcHKpNa5Esq2wxdaZISlmu2TXGEw+uq5c9r
+         vpr+LHya3fmRcDFiV8z9SEvfZgkKtnLURnp1kZyo4krm0p9tXhYR1BCwqekoM9FR15oV
+         RCYOH8b6g6P0HVAvG88FeqQqY0OgoHejVQofi7+EOmeXfKmz93iP21eC56SANoPxUsH4
+         XtMWZLJXKDh7onfibubQ2D+YLoGhT8S+YEgmcNN2iiMld4Aa/K+0m7Ida3LG2t11jVxn
+         avLw==
+X-Gm-Message-State: AC+VfDxVI2lR04sdqICQA+lH8fLdd6pjluK0wJ/3DE9p3VuPj02+2FX4
+	V6RxWM9QZuLe7OKdi/BApa9kPqLhvq3L6L/Vxgg=
+X-Google-Smtp-Source: ACHHUZ6Oz3C2bqolF2x2QCLwG0HDi8fhWSWMneKYRFdzb8n/ib2atvkPiWzgmAjt/IAV0Hi4mjMQYg==
+X-Received: by 2002:a05:6214:2422:b0:5a6:1571:1eb with SMTP id gy2-20020a056214242200b005a6157101ebmr6968507qvb.27.1683046210887;
+        Tue, 02 May 2023 09:50:10 -0700 (PDT)
 Received: from megalith.ht.home (cpe64777de11593-cm64777de11590.cpe.net.cable.rogers.com. [174.115.224.47])
-        by smtp.gmail.com with ESMTPSA id u9-20020a0cf889000000b0061b5afbd8e8sm1531777qvn.52.2023.05.02.09.50.08
+        by smtp.gmail.com with ESMTPSA id u9-20020a0cf889000000b0061b5afbd8e8sm1531777qvn.52.2023.05.02.09.50.10
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 02 May 2023 09:50:08 -0700 (PDT)
+        Tue, 02 May 2023 09:50:10 -0700 (PDT)
 From: Trevor Gamblin <tgamblin@baylibre.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-python][PATCH 3/6] python3-tomlkit: Add recipe
-Date: Tue,  2 May 2023 12:50:02 -0400
-Message-Id: <20230502165005.880470-4-tgamblin@baylibre.com>
+Subject: [meta-python][PATCH 6/6] ptest-packagelists-meta-python: Add new tests
+Date: Tue,  2 May 2023 12:50:05 -0400
+Message-Id: <20230502165005.880470-7-tgamblin@baylibre.com>
 X-Mailer: git-send-email 2.40.0
 In-Reply-To: <20230502165005.880470-1-tgamblin@baylibre.com>
 References: <20230502165005.880470-1-tgamblin@baylibre.com>
@@ -61,54 +61,45 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 02 May 2023 16:50:14 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102268
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102271
+
+Add ptests for python3-pylint, python3-platformdirs,
+python3-pytest-mock, python3-tomlkit.
 
 Signed-off-by: Trevor Gamblin <tgamblin@baylibre.com>
 ---
- .../python/python3-tomlkit/run-ptest          |  3 +++
- .../python/python3-tomlkit_0.11.8.bb          | 23 +++++++++++++++++++
- 2 files changed, 26 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-tomlkit/run-ptest
- create mode 100644 meta-python/recipes-devtools/python/python3-tomlkit_0.11.8.bb
+ meta-python/conf/include/ptest-packagelists-meta-python.inc | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-diff --git a/meta-python/recipes-devtools/python/python3-tomlkit/run-ptest b/meta-python/recipes-devtools/python/python3-tomlkit/run-ptest
-new file mode 100644
-index 000000000..b63c4de0d
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-tomlkit/run-ptest
-@@ -0,0 +1,3 @@
-+#!/bin/sh
-+
-+pytest -o log_cli=true -o log_cli_level=INFO | sed -e 's/\[...%\]//g'| sed -e 's/PASSED/PASS/g'| sed -e 's/FAILED/FAIL/g'|sed -e 's/SKIPPED/SKIP/g'| awk '{if ($NF=="PASS" || $NF=="FAIL" || $NF=="SKIP" || $NF=="XFAIL" || $NF=="XPASS"){printf "%s: %s\n", $NF, $0}else{print}}'| awk '{if ($NF=="PASS" || $NF=="FAIL" || $NF=="SKIP" || $NF=="XFAIL" || $NF=="XPASS") {$NF="";print $0}else{print}}'
-diff --git a/meta-python/recipes-devtools/python/python3-tomlkit_0.11.8.bb b/meta-python/recipes-devtools/python/python3-tomlkit_0.11.8.bb
-new file mode 100644
-index 000000000..71a43c455
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-tomlkit_0.11.8.bb
-@@ -0,0 +1,23 @@
-+SUMMARY = "Style preserving TOML library"
-+HOMEPAGE = "https://pypi.org/project/tomlkit/"
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=31aac0dbc1babd278d5386dadb7f8e82"
-+
-+SRC_URI[sha256sum] = "9330fc7faa1db67b541b28e62018c17d20be733177d290a13b24c62d1614e0c3"
-+
-+inherit pypi python_poetry_core ptest
-+
-+SRC_URI += " \
-+        file://run-ptest \
-+"
-+
-+RDEPENDS:${PN}-ptest += " \
-+        ${PYTHON_PN}-poetry-core \
-+        ${PYTHON_PN}-pytest \
-+        ${PYTHON_PN}-pyyaml \
-+"
-+
-+do_install_ptest() {
-+        install -d ${D}${PTEST_PATH}/tests
-+        cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
-+}
+diff --git a/meta-python/conf/include/ptest-packagelists-meta-python.inc b/meta-python/conf/include/ptest-packagelists-meta-python.inc
+index ef5d20bcd..f5935e4a9 100644
+--- a/meta-python/conf/include/ptest-packagelists-meta-python.inc
++++ b/meta-python/conf/include/ptest-packagelists-meta-python.inc
+@@ -23,13 +23,16 @@ PTESTS_FAST_META_PYTHON = "\
+     python3-ipy \
+     python3-iso3166 \
+     python3-parse-type \
++    python3-platformdirs \
+     python3-polyline \
+     python3-precise-runner \
+     python3-prettytable \
+     python3-ptyprocess \
+     python3-pyasn1-modules \
++    python3-pylint \
+     python3-pyroute2 \
+     python3-pyserial \
++    python3-pytest-mock \
+     python3-pytoml \
+     python3-requests-file \
+     python3-requests-toolbelt \
+@@ -39,6 +42,7 @@ PTESTS_FAST_META_PYTHON = "\
+     python3-smpplib \
+     python3-soupsieve \
+     python3-sqlparse \
++    python3-tomlkit \
+     python3-u-msgpack-python \
+     python3-unidiff \
+     python3-uritemplate \
 -- 
 2.40.0
 
