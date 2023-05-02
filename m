@@ -2,85 +2,85 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6BFAEC77B73
-	for <webhook@archiver.kernel.org>; Tue,  2 May 2023 06:19:58 +0000 (UTC)
-Received: from mail-pf1-f174.google.com (mail-pf1-f174.google.com [209.85.210.174])
- by mx.groups.io with SMTP id smtpd.web10.122285.1683008397805957503
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 66BF6C7EE29
+	for <webhook@archiver.kernel.org>; Tue,  2 May 2023 06:20:08 +0000 (UTC)
+Received: from mail-pf1-f171.google.com (mail-pf1-f171.google.com [209.85.210.171])
+ by mx.groups.io with SMTP id smtpd.web11.121807.1683008403038078206
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 01 May 2023 23:19:57 -0700
+ Mon, 01 May 2023 23:20:03 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20221208 header.b=rRv354I4;
- spf=pass (domain: gmail.com, ip: 209.85.210.174, mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f174.google.com with SMTP id d2e1a72fcca58-63b5c48ea09so2562810b3a.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 01 May 2023 23:19:57 -0700 (PDT)
+ dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=KQ7ozlWx;
+ spf=pass (domain: gmail.com, ip: 209.85.210.171, mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f171.google.com with SMTP id d2e1a72fcca58-63b60366047so2423695b3a.1
+        for <openembedded-devel@lists.openembedded.org>; Mon, 01 May 2023 23:20:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1683008397; x=1685600397;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=uQMRKhw6Pm1mROsMgKaDOHU9ieskwMbB2OBWEf+aRQo=;
-        b=rRv354I4RH9rfAp9K0WreysXpSCgvSsfxHExCujfVX27P8X0Z2E4QSZ7b7jvMIN0Ls
-         pLnmT/pYNRj89SRxsng5zdADvEuzv3pQ7Jwm+GBSpq14E81AKjEqemb5paCWE0IGV5PZ
-         VU3yBfKTKkddMM9l/R7zyzdmYdoaaSrSpRze38Fz6RstkU4WUr7lkyf1hhNWETlVSQRb
-         vYcuc53bZlvuYMHUkiPzmHVq20gAHefuw2WG+xg7hYtq48YI844ZblWM8iDd4OESFp1U
-         npEClRMeS8LNSDpUm5//WUnattw1r7H5/lM3AKbedwZHGTqAzDEI8ozb9nT5mwJZjPr9
-         M90w==
+        d=gmail.com; s=20221208; t=1683008402; x=1685600402;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=InnwXPzMTUhdeXyw/FXBQhpvsEADDdmof69+yG2VYj4=;
+        b=KQ7ozlWx2TVCnJVl0faEl3neMJGStbof24oV75GCGQdJv3A3j7wc5dApEl+pDnXdNU
+         RbzCFLIaINe7BIIIXzNacrdu7EZaanrLLp4q5wyPq0YY4VBBCBepgjuIYXcKeYLT09hg
+         4Z5Xpz237eCXAlKOpYtRo2vD6MP1l7uEfFHd6fuMiUX/Q/H8+zTEntFJqiYFAjYj7RPf
+         scRf7ZnLYchPqjWyeKoC6Gw1KmGvkkyITL2DgQfzaiDzsRt3atkgQ/s/3kM5J9tX0VVm
+         8yZqD/5zgXJhas0+VTWk2+ZmDDKg1GgHoYc4EupsSnzMlRnnlCUtPkNApKClc/FFqxTw
+         Ecqw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1683008397; x=1685600397;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=uQMRKhw6Pm1mROsMgKaDOHU9ieskwMbB2OBWEf+aRQo=;
-        b=KssG9mWyfilPugjS2J+uy5+x1gZMDvSeoxJWzOVd+HnoFljVv7yn0d9Qz4Hubi90sH
-         xO/XgLeZxPEzZNr8N71tb6pz7j1RYMEYoISwpLkPWl7Q18sqcnSBpE1x2tXFR17N1S7B
-         rRrsxBgSZYG8ODBPMx+EgtWlTYRyZRWx1enwjrs9u27EA0mgcRC7XoPAlvyiYGSOQ5nt
-         vbW1M+b7o79+gCDneG7FN00/3BCxyF93S20K/C0p3x2AOpNAr9snAUAXZPcyTSZJSl1h
-         V6nMh7sZlwWB383/uKj1rncnZB+OZJo4rrxDM49ArumTmJpoHQcfpLTkYTKWfxjjFfKI
-         Lg3A==
-X-Gm-Message-State: AC+VfDxibt9dyTUqS/PzYpMe66Ra7h87MYRduDxFtOSeIebRnVjq5glm
-	tp1MAXbSc+UDlAoeFdER3+AZ03+roJs7Ow==
-X-Google-Smtp-Source: ACHHUZ7krxHWlvNd4J/hwkRzgdiwZi1CTBA5X4ojaji7sdRWkDX8AGml5itEaQsuXc6W7QMSS6aXgg==
-X-Received: by 2002:a05:6a00:1486:b0:63a:cefa:9d44 with SMTP id v6-20020a056a00148600b0063acefa9d44mr20531478pfu.14.1683008396611;
-        Mon, 01 May 2023 23:19:56 -0700 (PDT)
+        d=1e100.net; s=20221208; t=1683008402; x=1685600402;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=InnwXPzMTUhdeXyw/FXBQhpvsEADDdmof69+yG2VYj4=;
+        b=fPi+U4jRnVbdChnOOAnkyBhsLPCN0HE1Enhp/QqgoBussDXrH64E+jSdQ/B7Ttv1V8
+         /hWL2Buv9TUWUYZiqXIszeAqgfEeAUAjNEoMtO5ut9XPDNX+G4ca+uTng3sjcy6VIc/f
+         bKU2mpqBXz68XQuhy2V/1rh5+BA8FH6QxQ7c3HOduCHhUt0KMDUoOtZ3SAhD4cXK/l64
+         3prLF3Mt70OgtVY7ThVw9iviozhcl/+rqLEl1OJL5BzEhSE4EomluIXkhUz6VpFukIp3
+         wMYmTqMa+crFlFeK8eFge3xl+0TUkMUJwdtalBSYdDxpr+2+uU9TQpqszepdXXVfR/x1
+         gRgA==
+X-Gm-Message-State: AC+VfDymecJz/jHZqWcSzJ+IX0XS3EZtc5Rmz/g5v3FICwRQD7yFkytL
+	YhIl5tRQN+Jd/oouDGuxUyCfMDIUOT1HnQ==
+X-Google-Smtp-Source: ACHHUZ4kyek4GQVRM/pVtLWpAgpebJK1/X/b4eJrbuZZ76nB1zqxUeChxm1K/TfL85B9u7/aDOZPng==
+X-Received: by 2002:a05:6a00:2450:b0:638:7c22:6fd with SMTP id d16-20020a056a00245000b006387c2206fdmr20181026pfj.1.1683008402042;
+        Mon, 01 May 2023 23:20:02 -0700 (PDT)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9181:d380::f98d])
-        by smtp.gmail.com with ESMTPSA id o8-20020a62f908000000b0063b5776b073sm20735612pfh.117.2023.05.01.23.19.55
+        by smtp.gmail.com with ESMTPSA id o8-20020a62f908000000b0063b5776b073sm20735612pfh.117.2023.05.01.23.20.01
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 01 May 2023 23:19:55 -0700 (PDT)
+        Mon, 01 May 2023 23:20:01 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 01/11] ttf-lklug: Point SRC_URI to a working location
-Date: Mon,  1 May 2023 23:19:44 -0700
-Message-Id: <20230502061954.3782607-1-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 09/11] debootstrap: Use DEBIAN_MIRROR for SRC_URI
+Date: Mon,  1 May 2023 23:19:52 -0700
+Message-Id: <20230502061954.3782607-9-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.40.1
+In-Reply-To: <20230502061954.3782607-1-raj.khem@gmail.com>
+References: <20230502061954.3782607-1-raj.khem@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 02 May 2023 06:19:58 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102247
+ <openembedded-devel@lists.openembedded.org>; Tue, 02 May 2023 06:20:08 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102255
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../ttf-fonts/ttf-lklug_0.6-14.20090803cvs.fc24.bb           | 5 ++---
- 1 file changed, 2 insertions(+), 3 deletions(-)
+ meta-oe/recipes-devtools/debootstrap/debootstrap_1.0.128.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-graphics/ttf-fonts/ttf-lklug_0.6-14.20090803cvs.fc24.bb b/meta-oe/recipes-graphics/ttf-fonts/ttf-lklug_0.6-14.20090803cvs.fc24.bb
-index 8a7c1f333b..3951647337 100644
---- a/meta-oe/recipes-graphics/ttf-fonts/ttf-lklug_0.6-14.20090803cvs.fc24.bb
-+++ b/meta-oe/recipes-graphics/ttf-fonts/ttf-lklug_0.6-14.20090803cvs.fc24.bb
-@@ -5,9 +5,8 @@ HOMEPAGE = "http://rpms.famillecollet.com/rpmphp/zoom.php?rpm=lklug-fonts"
- LICENSE = "GPL-2.0-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
+diff --git a/meta-oe/recipes-devtools/debootstrap/debootstrap_1.0.128.bb b/meta-oe/recipes-devtools/debootstrap/debootstrap_1.0.128.bb
+index 4d13aa66c8..592d997aad 100644
+--- a/meta-oe/recipes-devtools/debootstrap/debootstrap_1.0.128.bb
++++ b/meta-oe/recipes-devtools/debootstrap/debootstrap_1.0.128.bb
+@@ -5,7 +5,7 @@ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://debian/copyright;md5=1e68ced6e1689d4cd9dac75ff5225608"
  
--SRC_URI = "http://dl.fedoraproject.org/pub/fedora/linux/releases/24/Everything/source/tree/Packages/l/lklug-fonts-0.6-14.20090803cvs.fc24.src.rpm;extract=lklug-20090803.tar.gz"
--SRC_URI[md5sum] = "3341dfb997043d234ab3f6e5a965e759"
--SRC_URI[sha256sum] = "f54c1f3b4df08995982657fed290b562556191fee2a0386afd9e8bf228f72b1a"
-+SRC_URI = "https://src.fedoraproject.org/repo/pkgs/lklug-fonts/lklug-20090803.tar.gz/b6e0daaf8cf41208fd2a7bc04fb23f84/lklug-20090803.tar.gz"
-+SRC_URI[sha256sum] = "de5750f7048973f851961050f76b8b58e9bda400d5007c3078d9317fbe2ff5fd"
- 
- DEPENDS = "fontforge-native"
- 
+ SRC_URI  = "\
+-    http://http.debian.net/debian/pool/main/d/debootstrap/debootstrap_${PV}.tar.gz \
++    ${DEBIAN_MIRROR}/main/d/debootstrap/debootstrap_${PV}.tar.gz \
+     file://0001-support-to-override-usr-sbin-and-usr-share.patch \
+     file://0002-support-to-override-usr-bin-arch-test.patch \
+     file://0001-do-not-hardcode-the-full-path-of-dpkg.patch \
 -- 
 2.40.1
 
