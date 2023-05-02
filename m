@@ -1,266 +1,87 @@
-Return-Path: <hprajapati@mvista.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 137C0C77B73
-	for <webhook@archiver.kernel.org>; Tue,  2 May 2023 04:58:08 +0000 (UTC)
-Received: from mail-pg1-f180.google.com (mail-pg1-f180.google.com [209.85.215.180])
- by mx.groups.io with SMTP id smtpd.web10.121438.1683003484381041810
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6BFAEC77B73
+	for <webhook@archiver.kernel.org>; Tue,  2 May 2023 06:19:58 +0000 (UTC)
+Received: from mail-pf1-f174.google.com (mail-pf1-f174.google.com [209.85.210.174])
+ by mx.groups.io with SMTP id smtpd.web10.122285.1683008397805957503
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 01 May 2023 21:58:04 -0700
+ Mon, 01 May 2023 23:19:57 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="signature has expired" header.i=@mvista.com header.s=google header.b=B6zmCssU;
- spf=pass (domain: mvista.com, ip: 209.85.215.180, mailfrom: hprajapati@mvista.com)
-Received: by mail-pg1-f180.google.com with SMTP id 41be03b00d2f7-517bdc9e81dso1689235a12.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 01 May 2023 21:58:04 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20221208 header.b=rRv354I4;
+ spf=pass (domain: gmail.com, ip: 209.85.210.174, mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f174.google.com with SMTP id d2e1a72fcca58-63b5c48ea09so2562810b3a.1
+        for <openembedded-devel@lists.openembedded.org>; Mon, 01 May 2023 23:19:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=mvista.com; s=google; t=1683003483; x=1685595483;
+        d=gmail.com; s=20221208; t=1683008397; x=1685600397;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=jzA7BfDikRi8+YNRDSZlAsd+cbRNvcUohQ7m15s0k5s=;
-        b=B6zmCssUiWN2dst7wxoUt2gOLH5qumD9hccJgq/8HizJ4p5WTZrmMmS//AnNGCwm0O
-         nO93UmzMiTPTI71p2iVRFT14xLN2e9/KrB26Yuvh/1owZZjz108TP2Z2ZSganKmJttx4
-         Fft/UueYd9GqMD3XSJdhuJGsWUcWfNjoh20es=
+        bh=uQMRKhw6Pm1mROsMgKaDOHU9ieskwMbB2OBWEf+aRQo=;
+        b=rRv354I4RH9rfAp9K0WreysXpSCgvSsfxHExCujfVX27P8X0Z2E4QSZ7b7jvMIN0Ls
+         pLnmT/pYNRj89SRxsng5zdADvEuzv3pQ7Jwm+GBSpq14E81AKjEqemb5paCWE0IGV5PZ
+         VU3yBfKTKkddMM9l/R7zyzdmYdoaaSrSpRze38Fz6RstkU4WUr7lkyf1hhNWETlVSQRb
+         vYcuc53bZlvuYMHUkiPzmHVq20gAHefuw2WG+xg7hYtq48YI844ZblWM8iDd4OESFp1U
+         npEClRMeS8LNSDpUm5//WUnattw1r7H5/lM3AKbedwZHGTqAzDEI8ozb9nT5mwJZjPr9
+         M90w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1683003483; x=1685595483;
+        d=1e100.net; s=20221208; t=1683008397; x=1685600397;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=jzA7BfDikRi8+YNRDSZlAsd+cbRNvcUohQ7m15s0k5s=;
-        b=cxMI3asK67GCCR7MEwlxYWJhOqUs9vdmZiMpmXqBJ3sp3nd/zs7cqGbkoC6N9HTgNT
-         H8qs2z0QPXCuLLYlSqrkjORBC6Kk34y000lnEVYd9pW3OM9tTZDa9mJAYUoYnvJaAljL
-         o6cirzSotFboyX1dEWmlwGwFrhtDIuDUnH9wtzLHxL5WUutB09oUpXuka5R5hcwDyiNw
-         baUxNccxr6fkHjMj5tO5ApsRqJR4dMSxv/JiyWmPInDV1+BdKg3g13nPODj903Ih3Ero
-         z/bZBOZKrATQgca+xItG6YrnpgYtxnihhhTzRCyFRMw7OkeZWBLOc/nt5zw9o0eIt0Y+
-         GZ6g==
-X-Gm-Message-State: AC+VfDwwDWObK+oDjuF+VTm1Cd5JO+A55rzZXrAgTrSCYNv+TI/5y4h7
-	CGZMLf7eg9SqQ5toEu7UcBXm7URHbTp16C6iPr4=
-X-Google-Smtp-Source: ACHHUZ5+Wf0e5xIOZiXUxIwCYnrrObHpFqSblHxDGdZOsdx3zsFds99XezsObaTKG3itxbAsUhvz2A==
-X-Received: by 2002:a05:6a20:9d91:b0:d3:78ab:77c3 with SMTP id mu17-20020a056a209d9100b000d378ab77c3mr16080137pzb.48.1683003483283;
-        Mon, 01 May 2023 21:58:03 -0700 (PDT)
-Received: from MVIN00024 ([43.249.234.249])
-        by smtp.gmail.com with ESMTPSA id g13-20020aa7874d000000b0063b8f17768dsm20782760pfo.129.2023.05.01.21.58.00
+        bh=uQMRKhw6Pm1mROsMgKaDOHU9ieskwMbB2OBWEf+aRQo=;
+        b=KssG9mWyfilPugjS2J+uy5+x1gZMDvSeoxJWzOVd+HnoFljVv7yn0d9Qz4Hubi90sH
+         xO/XgLeZxPEzZNr8N71tb6pz7j1RYMEYoISwpLkPWl7Q18sqcnSBpE1x2tXFR17N1S7B
+         rRrsxBgSZYG8ODBPMx+EgtWlTYRyZRWx1enwjrs9u27EA0mgcRC7XoPAlvyiYGSOQ5nt
+         vbW1M+b7o79+gCDneG7FN00/3BCxyF93S20K/C0p3x2AOpNAr9snAUAXZPcyTSZJSl1h
+         V6nMh7sZlwWB383/uKj1rncnZB+OZJo4rrxDM49ArumTmJpoHQcfpLTkYTKWfxjjFfKI
+         Lg3A==
+X-Gm-Message-State: AC+VfDxibt9dyTUqS/PzYpMe66Ra7h87MYRduDxFtOSeIebRnVjq5glm
+	tp1MAXbSc+UDlAoeFdER3+AZ03+roJs7Ow==
+X-Google-Smtp-Source: ACHHUZ7krxHWlvNd4J/hwkRzgdiwZi1CTBA5X4ojaji7sdRWkDX8AGml5itEaQsuXc6W7QMSS6aXgg==
+X-Received: by 2002:a05:6a00:1486:b0:63a:cefa:9d44 with SMTP id v6-20020a056a00148600b0063acefa9d44mr20531478pfu.14.1683008396611;
+        Mon, 01 May 2023 23:19:56 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9181:d380::f98d])
+        by smtp.gmail.com with ESMTPSA id o8-20020a62f908000000b0063b5776b073sm20735612pfh.117.2023.05.01.23.19.55
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 01 May 2023 21:58:02 -0700 (PDT)
-Received: by MVIN00024 (sSMTP sendmail emulation); Tue, 02 May 2023 10:27:57 +0530
-From: Hitendra Prajapati <hprajapati@mvista.com>
+        Mon, 01 May 2023 23:19:55 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Hitendra Prajapati <hprajapati@mvista.com>
-Subject: [meta-oe][dunfell][PATCH] multipath-tools: CVE-2022-41973 Symlink attack multipathd operates insecurely
-Date: Tue,  2 May 2023 10:27:56 +0530
-Message-Id: <20230502045756.62108-1-hprajapati@mvista.com>
-X-Mailer: git-send-email 2.25.1
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 01/11] ttf-lklug: Point SRC_URI to a working location
+Date: Mon,  1 May 2023 23:19:44 -0700
+Message-Id: <20230502061954.3782607-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.40.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 02 May 2023 04:58:08 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102246
+ <openembedded-devel@lists.openembedded.org>; Tue, 02 May 2023 06:19:58 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102247
 
-Upstream-Status: Backport from https://github.com/opensvc/multipath-tools/commit/cb57b930fa690ab79b3904846634681685e3470f
-
-dev/shm may have unsafe permissions. Use /run instead.
-Use systemd's tmpfiles.d mechanism to create /run/multipath
-early during boot.
-
-For backward compatibilty, make the runtime directory configurable
-via the "runtimedir" make variable.
-
-QA Issue: non -dev/-dbg/nativesdk- package multipath-tools-libs
-  contains symlink .so '/usr/lib/libdmmp.so'
-  ...
-
-Fix this by making the new pattern for multipath-tools-libs package
-more specific.
-
-Signed-off-by: Hitendra Prajapati <hprajapati@mvista.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../files/CVE-2022-41973.patch                | 154 ++++++++++++++++++
- .../multipath-tools/multipath-tools_0.8.4.bb  |   4 +
- 2 files changed, 158 insertions(+)
- create mode 100644 meta-oe/recipes-support/multipath-tools/files/CVE-2022-41973.patch
+ .../ttf-fonts/ttf-lklug_0.6-14.20090803cvs.fc24.bb           | 5 ++---
+ 1 file changed, 2 insertions(+), 3 deletions(-)
 
-diff --git a/meta-oe/recipes-support/multipath-tools/files/CVE-2022-41973.patch b/meta-oe/recipes-support/multipath-tools/files/CVE-2022-41973.patch
-new file mode 100644
-index 000000000..d06ef44f6
---- /dev/null
-+++ b/meta-oe/recipes-support/multipath-tools/files/CVE-2022-41973.patch
-@@ -0,0 +1,154 @@
-+From cb57b930fa690ab79b3904846634681685e3470f Mon Sep 17 00:00:00 2001
-+From: Martin Wilck <mwilck@suse.com>
-+Date: Thu, 1 Sep 2022 19:21:30 +0200
-+Subject: [PATCH] multipath-tools: use /run instead of /dev/shm
-+
-+/dev/shm may have unsafe permissions. Use /run instead.
-+Use systemd's tmpfiles.d mechanism to create /run/multipath
-+early during boot.
-+
-+For backward compatibilty, make the runtime directory configurable
-+via the "runtimedir" make variable.
-+
-+Signed-off-by: Martin Wilck <mwilck@suse.com>
-+Reviewed-by: Benjamin Marzinski <bmarzins@redhat.com>
-+
-+CVE: CVE-2022-41973
-+Upstream-Status: Backport [https://github.com/opensvc/multipath-tools/commit/cb57b930fa690ab79b3904846634681685e3470f]
-+Signed-off-by: Hitendra Prajapati <hprajapati@mvista.com>
-+---
-+ .gitignore                                        |  2 ++
-+ Makefile.inc                                      |  7 ++++++-
-+ libmultipath/defaults.h                           |  3 +--
-+ multipath/Makefile                                | 11 ++++++++---
-+ multipath/{multipath.rules => multipath.rules.in} |  4 ++--
-+ multipath/tmpfiles.conf.in                        |  1 +
-+ 6 files changed, 20 insertions(+), 8 deletions(-)
-+ rename multipath/{multipath.rules => multipath.rules.in} (95%)
-+ create mode 100644 multipath/tmpfiles.conf.in
-+
-+diff --git a/.gitignore b/.gitignore
-+index 9926756b..f90b0350 100644
-+--- a/.gitignore
-++++ b/.gitignore
-+@@ -8,6 +8,8 @@
-+ *.d
-+ kpartx/kpartx
-+ multipath/multipath
-++multipath/multipath.rules
-++multipath/tmpfiles.conf
-+ multipathd/multipathd
-+ mpathpersist/mpathpersist
-+ .nfs*
-+diff --git a/Makefile.inc b/Makefile.inc
-+index 4eb08eed..648f91b4 100644
-+--- a/Makefile.inc
-++++ b/Makefile.inc
-+@@ -44,6 +44,7 @@ exec_prefix	= $(prefix)
-+ usr_prefix	= $(prefix)
-+ bindir		= $(exec_prefix)/usr/sbin
-+ libudevdir	= $(prefix)/$(SYSTEMDPATH)/udev
-++tmpfilesdir	= $(prefix)/$(SYSTEMDPATH)/tmpfiles.d
-+ udevrulesdir	= $(libudevdir)/rules.d
-+ multipathdir	= $(TOPDIR)/libmultipath
-+ man8dir		= $(prefix)/usr/share/man/man8
-+@@ -60,6 +61,7 @@ libdmmpdir	= $(TOPDIR)/libdmmp
-+ nvmedir		= $(TOPDIR)/libmultipath/nvme
-+ includedir	= $(prefix)/usr/include
-+ pkgconfdir	= $(usrlibdir)/pkgconfig
-++runtimedir      := /$(RUN)
-+ 
-+ GZIP		= gzip -9 -c
-+ RM		= rm -f
-+@@ -95,7 +97,10 @@ OPTFLAGS       += -Wextra -Wstrict-prototypes -Wformat=2 -Werror=implicit-int \
-+                   -Wno-unused-parameter -Werror=cast-qual \
-+                   -Werror=discarded-qualifiers
-+ 
-+-CPPFLAGS	:= -Wp,-D_FORTIFY_SOURCE=2 
-++CPPFLAGS	:= $(FORTIFY_OPT) \
-++		   -DBIN_DIR=\"$(bindir)\" -DMULTIPATH_DIR=\"$(plugindir)\" -DRUN_DIR=\"${RUN}\" \
-++		   -DRUNTIME_DIR=\"$(runtimedir)\" \
-++		   -DCONFIG_DIR=\"$(configdir)\" -DEXTRAVERSION=\"$(EXTRAVERSION)\" -MMD -MP 
-+ CFLAGS		:= $(OPTFLAGS) -DBIN_DIR=\"$(bindir)\" -DLIB_STRING=\"${LIB}\" -DRUN_DIR=\"${RUN}\" \
-+ 		   -MMD -MP $(CFLAGS)
-+ BIN_CFLAGS	= -fPIE -DPIE
-+diff --git a/libmultipath/defaults.h b/libmultipath/defaults.h
-+index c2164c16..908e0ca3 100644
-+--- a/libmultipath/defaults.h
-++++ b/libmultipath/defaults.h
-+@@ -64,8 +64,7 @@
-+ #define DEFAULT_WWIDS_FILE	"/etc/multipath/wwids"
-+ #define DEFAULT_PRKEYS_FILE    "/etc/multipath/prkeys"
-+ #define DEFAULT_CONFIG_DIR	"/etc/multipath/conf.d"
-+-#define MULTIPATH_SHM_BASE	"/dev/shm/multipath/"
-+-
-++#define MULTIPATH_SHM_BASE	RUNTIME_DIR "/multipath/"
-+ 
-+ static inline char *set_default(char *str)
-+ {
-+diff --git a/multipath/Makefile b/multipath/Makefile
-+index e720c7f6..28976546 100644
-+--- a/multipath/Makefile
-++++ b/multipath/Makefile
-+@@ -12,7 +12,7 @@ EXEC = multipath
-+ 
-+ OBJS = main.o
-+ 
-+-all: $(EXEC)
-++all: $(EXEC) multipath.rules tmpfiles.conf
-+ 
-+ $(EXEC): $(OBJS) $(multipathdir)/libmultipath.so $(mpathcmddir)/libmpathcmd.so
-+ 	$(CC) $(CFLAGS) $(OBJS) -o $(EXEC) $(LDFLAGS) $(LIBDEPS)
-+@@ -26,7 +26,9 @@ install:
-+ 	$(INSTALL_PROGRAM) -m 755 mpathconf $(DESTDIR)$(bindir)/
-+ 	$(INSTALL_PROGRAM) -d $(DESTDIR)$(udevrulesdir)
-+ 	$(INSTALL_PROGRAM) -m 644 11-dm-mpath.rules $(DESTDIR)$(udevrulesdir)
-+-	$(INSTALL_PROGRAM) -m 644 $(EXEC).rules $(DESTDIR)$(libudevdir)/rules.d/62-multipath.rules
-++	$(INSTALL_PROGRAM) -m 644 multipath.rules $(DESTDIR)$(udevrulesdir)/56-multipath.rules
-++	$(INSTALL_PROGRAM) -d $(DESTDIR)$(tmpfilesdir)
-++	$(INSTALL_PROGRAM) -m 644 tmpfiles.conf $(DESTDIR)$(tmpfilesdir)/multipath.conf
-+ 	$(INSTALL_PROGRAM) -d $(DESTDIR)$(man8dir)
-+ 	$(INSTALL_PROGRAM) -m 644 $(EXEC).8.gz $(DESTDIR)$(man8dir)
-+ 	$(INSTALL_PROGRAM) -d $(DESTDIR)$(man5dir)
-+@@ -43,9 +45,12 @@ uninstall:
-+ 	$(RM) $(DESTDIR)$(man8dir)/mpathconf.8.gz
-+ 
-+ clean: dep_clean
-+-	$(RM) core *.o $(EXEC) *.gz
-++	$(RM) core *.o $(EXEC) multipath.rules tmpfiles.conf
-+ 
-+ include $(wildcard $(OBJS:.o=.d))
-+ 
-+ dep_clean:
-+ 	$(RM) $(OBJS:.o=.d)
-++
-++%:	%.in
-++	sed 's,@RUNTIME_DIR@,$(runtimedir),' $< >$@	
-+diff --git a/multipath/multipath.rules b/multipath/multipath.rules.in
-+similarity index 95%
-+rename from multipath/multipath.rules
-+rename to multipath/multipath.rules.in
-+index 0486bf70..5fb499e6 100644
-+--- a/multipath/multipath.rules
-++++ b/multipath/multipath.rules.in
-+@@ -1,8 +1,8 @@
-+ # Set DM_MULTIPATH_DEVICE_PATH if the device should be handled by multipath
-+ SUBSYSTEM!="block", GOTO="end_mpath"
-+ KERNEL!="sd*|dasd*|nvme*", GOTO="end_mpath"
-+-ACTION=="remove", TEST=="/dev/shm/multipath/find_multipaths/$major:$minor", \
-+-	RUN+="/usr/bin/rm -f /dev/shm/multipath/find_multipaths/$major:$minor"
-++ACTION=="remove", TEST=="@RUNTIME_DIR@/multipath/find_multipaths/$major:$minor", \
-++	RUN+="/usr/bin/rm -f @RUNTIME_DIR@/multipath/find_multipaths/$major:$minor"
-+ ACTION!="add|change", GOTO="end_mpath"
-+ 
-+ IMPORT{cmdline}="nompath"
-+diff --git a/multipath/tmpfiles.conf.in b/multipath/tmpfiles.conf.in
-+new file mode 100644
-+index 00000000..21be438a
-+--- /dev/null
-++++ b/multipath/tmpfiles.conf.in
-+@@ -0,0 +1 @@
-++d @RUNTIME_DIR@/multipath 0700 root root -
-+-- 
-+2.25.1
-+
-diff --git a/meta-oe/recipes-support/multipath-tools/multipath-tools_0.8.4.bb b/meta-oe/recipes-support/multipath-tools/multipath-tools_0.8.4.bb
-index 90cfd7d20..23273f5d5 100644
---- a/meta-oe/recipes-support/multipath-tools/multipath-tools_0.8.4.bb
-+++ b/meta-oe/recipes-support/multipath-tools/multipath-tools_0.8.4.bb
-@@ -45,6 +45,7 @@ SRC_URI = "git://github.com/opensvc/multipath-tools.git;protocol=http;branch=mas
-            file://0031-Always-use-devmapper-for-kpartx.patch \
-            file://0001-fix-bug-of-do_compile-and-do_install.patch \
-            file://0001-add-explicit-dependency-on-libraries.patch \
-+           file://CVE-2022-41973.patch \
-            "
+diff --git a/meta-oe/recipes-graphics/ttf-fonts/ttf-lklug_0.6-14.20090803cvs.fc24.bb b/meta-oe/recipes-graphics/ttf-fonts/ttf-lklug_0.6-14.20090803cvs.fc24.bb
+index 8a7c1f333b..3951647337 100644
+--- a/meta-oe/recipes-graphics/ttf-fonts/ttf-lklug_0.6-14.20090803cvs.fc24.bb
++++ b/meta-oe/recipes-graphics/ttf-fonts/ttf-lklug_0.6-14.20090803cvs.fc24.bb
+@@ -5,9 +5,8 @@ HOMEPAGE = "http://rpms.famillecollet.com/rpmphp/zoom.php?rpm=lklug-fonts"
+ LICENSE = "GPL-2.0-only"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
  
- LIC_FILES_CHKSUM = "file://COPYING;md5=5f30f0716dfdd0d91eb439ebec522ec2"
-@@ -117,3 +118,6 @@ FILES_kpartx = "${base_sbindir}/kpartx \
+-SRC_URI = "http://dl.fedoraproject.org/pub/fedora/linux/releases/24/Everything/source/tree/Packages/l/lklug-fonts-0.6-14.20090803cvs.fc24.src.rpm;extract=lklug-20090803.tar.gz"
+-SRC_URI[md5sum] = "3341dfb997043d234ab3f6e5a965e759"
+-SRC_URI[sha256sum] = "f54c1f3b4df08995982657fed290b562556191fee2a0386afd9e8bf228f72b1a"
++SRC_URI = "https://src.fedoraproject.org/repo/pkgs/lklug-fonts/lklug-20090803.tar.gz/b6e0daaf8cf41208fd2a7bc04fb23f84/lklug-20090803.tar.gz"
++SRC_URI[sha256sum] = "de5750f7048973f851961050f76b8b58e9bda400d5007c3078d9317fbe2ff5fd"
  
- RDEPENDS_${PN} += "kpartx"
- PARALLEL_MAKE = ""
-+
-+FILES:${PN}-libs += "usr/lib/*.so.*"
-+FILES:${PN}-libs += "usr/lib/tmpfiles.d/*"
+ DEPENDS = "fontforge-native"
+ 
 -- 
-2.25.1
+2.40.1
 
 
