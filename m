@@ -2,106 +2,99 @@ Return-Path: <Martin.Jansa@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6ADFDC7EE2E
-	for <webhook@archiver.kernel.org>; Wed,  3 May 2023 17:24:11 +0000 (UTC)
-Received: from mail-wm1-f41.google.com (mail-wm1-f41.google.com [209.85.128.41])
- by mx.groups.io with SMTP id smtpd.web11.26077.1683134644930206481
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 38DA9C77B75
+	for <webhook@archiver.kernel.org>; Wed,  3 May 2023 20:08:32 +0000 (UTC)
+Received: from mail-wm1-f45.google.com (mail-wm1-f45.google.com [209.85.128.45])
+ by mx.groups.io with SMTP id smtpd.web11.31224.1683144508485175876
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 03 May 2023 10:24:05 -0700
+ Wed, 03 May 2023 13:08:28 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=jRKp4Elq;
- spf=pass (domain: gmail.com, ip: 209.85.128.41, mailfrom: martin.jansa@gmail.com)
-Received: by mail-wm1-f41.google.com with SMTP id 5b1f17b1804b1-3f178da21afso37528545e9.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 03 May 2023 10:24:04 -0700 (PDT)
+ dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=RXEzITUz;
+ spf=pass (domain: gmail.com, ip: 209.85.128.45, mailfrom: martin.jansa@gmail.com)
+Received: by mail-wm1-f45.google.com with SMTP id 5b1f17b1804b1-3f1950f5628so55171375e9.3
+        for <openembedded-devel@lists.openembedded.org>; Wed, 03 May 2023 13:08:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1683134643; x=1685726643;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=EFl0bMwfz9CPu2SQe6GBs9aCHS8ffwzBHlE+0QCUIT0=;
-        b=jRKp4ElqcuJnNFLg0MbOeOZ2dYoH+/OPLwu7ZfsiHDYT7KsTKZvBQRAajVMAVxz1wb
-         NtMwVSw5VEx9KoZT7NviMtIZ5St/OGw+QA59AwiBFGCIrHBL6y/oOxidoF4Lhb9qS5gA
-         FRNXAkpeqReM3JJqPz4pDiG33/3LeV4jnu9u7TKM6PuX6N2N9x6eAXPPjsTB1ZPSNhhA
-         uMyfIGaxwvhx6lguBVKTsO4QOWqPF06hofcO1TtGKrpB6JsBdmfttztj//V6hLHqOOHS
-         0DHFpHwRSS/e8TlOSYgibuuZhTrBuznzqiEJJ1lZ5k8VVePSU6T6kVwo/5kON8IP9uc4
-         n4kw==
+        d=gmail.com; s=20221208; t=1683144507; x=1685736507;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=jFnMjdKHZrQ3dzidaWecklZb5uZ2WxXnRul0G3BsTfQ=;
+        b=RXEzITUz6UkNB+CgP6MDY4GMtYxlvX8WMRoB8xUSg5r5pX8S4/H+n/NBgje+/f1fGt
+         AisBPeSs9C2dgqiJs7s3lXMcN1YQnLoSBu68go8rj7bsvUKYs0j8Jabt/h+TL/JGesS9
+         HcCxF8LlgOIU/LsAcdjRlv/JuZTW6BcuIaZm9cA2oy5UocmlQwtu4ZUubSe7zBVQE5fS
+         vu4l5dhhyFFcNI4BddghEu/26HBZKVQbonmafehEiqhfgvIQPVMQ/csC6wKJFnMTMSMb
+         h+isaJmv0M6MKd5gDjgOGRvCmQad6f4RXWCY9WAcbpNWcqJ+xtqRbJ+lqn7uvZ+/33if
+         hkJw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1683134643; x=1685726643;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=EFl0bMwfz9CPu2SQe6GBs9aCHS8ffwzBHlE+0QCUIT0=;
-        b=Is2g8eWOjCT4ylBBNk9EjhK5wtV/sUZWOwECdfPX24Rla/hbIMxI1wAUOwvHCZc6Sz
-         FPL6pCSJxQ0IcYlp9zbft33FLPL5TxyffzUwN3uyKlU0vSzzg/f+tAVnl6hDv+LoBo6W
-         snTTI7HX9eUGLGQGbtrBahb3UMYDMnAcbOGJZBqmEqjxUPjaWe3v4vfXisChS0HQmwpW
-         U3kOfSeOXDYb0f06zmpq7AhkSWxPtk9z2mQ9MwLvqOz7rZSVlo+gx8xvt78tkIoriWGJ
-         aMFouSH9Byj1nL+catv3vcamib9nQolGDkOlTH5muxn8Vx/xQpMt82KHVIPwJOcgWTlD
-         76wg==
-X-Gm-Message-State: AC+VfDwzncjcQzYXj5+aXMfypAbiNHqkYdbtQkaBwlEgQnR3ImV/UL9t
-	wSg7wPaFhi7V1m3NyPi5Q4Ej47jmEBw=
-X-Google-Smtp-Source: ACHHUZ55H0FwY0LzT15omgD/cKlMixmo2USdaUPwadk1c5LCkeJRlYkq7UNYuSYdEHnJGi+6oOuFQg==
-X-Received: by 2002:a1c:4c03:0:b0:3ef:acf6:f815 with SMTP id z3-20020a1c4c03000000b003efacf6f815mr15638051wmf.32.1683134643218;
-        Wed, 03 May 2023 10:24:03 -0700 (PDT)
+        d=1e100.net; s=20221208; t=1683144507; x=1685736507;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=jFnMjdKHZrQ3dzidaWecklZb5uZ2WxXnRul0G3BsTfQ=;
+        b=bfC3fmNdyulfHr//r9IIwuceHX1Eb/P6Ka9J2nwNjkkL0uR/AO7mDJ4aemk9rPwj1D
+         rmPqTIXM5yWA50niJ/hTWzFQ61sYlsVTTzOk7GgUe7Bx4mvoLUJKhuH81Kv5UOwc97Zn
+         ot+hhN3RPT4Tt08FU90MFgIhv8PqEjQPSZK7FemXy2q56+2ntKwaf7YKPN09GQgEDJ8P
+         iOvUlrNW/0RG8rSE5fW7ibA8kUP7uhJQOB3KAZjNSnEKsNVPOCv9H4VPsLFz5zLbHyyX
+         Am7qC4ownI/l8SFNlcB0dJ2rFHqdqju9mXpWF9yMEy5uiC+teSKW74KUIezqCKYgIAr+
+         YauQ==
+X-Gm-Message-State: AC+VfDxXbCHhMO17DRO3Kl+81rpuXvFtfNit+akvEsDVlw3bCQCYeaFu
+	g6mQHGr7MIiGkzzPSXi5CUMvr5aKuuk=
+X-Google-Smtp-Source: ACHHUZ5NEB063+Cn7354NMmkENjTNq6WkowWfNnSlB4xGrQAVUYlG6MMrDyK2dPZ8/WnMPBvI+ACNA==
+X-Received: by 2002:a1c:7917:0:b0:3f1:6942:e024 with SMTP id l23-20020a1c7917000000b003f16942e024mr16476652wme.27.1683144506845;
+        Wed, 03 May 2023 13:08:26 -0700 (PDT)
 Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
-        by smtp.gmail.com with ESMTPSA id q7-20020a1cf307000000b003f18b52c73asm2438912wmq.24.2023.05.03.10.24.02
+        by smtp.gmail.com with ESMTPSA id d19-20020a1c7313000000b003f17b91c3adsm2796430wmb.28.2023.05.03.13.08.25
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 03 May 2023 10:24:02 -0700 (PDT)
+        Wed, 03 May 2023 13:08:25 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Martin Jansa <Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 5/7] ostree: fix build without gobject-introspection-data
-Date: Wed,  3 May 2023 19:23:52 +0200
-Message-Id: <20230503172354.1439352-5-Martin.Jansa@gmail.com>
+Subject: [meta-oe][PATCH] cpulimit: fix do_install with multilib
+Date: Wed,  3 May 2023 22:08:20 +0200
+Message-Id: <20230503200820.1892496-1-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.40.1
-In-Reply-To: <20230503172354.1439352-1-Martin.Jansa@gmail.com>
-References: <20230503172354.1439352-1-Martin.Jansa@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 03 May 2023 17:24:11 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102295
+ <openembedded-devel@lists.openembedded.org>; Wed, 03 May 2023 20:08:32 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102298
 
-* add --disable-introspection to UNKNOWN_CONFIGURE_OPT_IGNORE to fix:
-  http://errors.yoctoproject.org/Errors/Details/702779/
-  ERROR: QA Issue: ostree: configure was passed unrecognised options: --disable-introspection [unknown-configure-option]
+* fixes:
+  DEBUG: Executing shell function do_install
+  install: cannot stat 'TOPDIR/.../lib32-cpulimit/0.2-r0/git/src/lib32-cpulimit': No such file or directory
+  WARNING: exit code 1 from a shell command.
 
-* add glib-2.0-native to DEPENDS to fix:
-  http://errors.yoctoproject.org/Errors/Details/702787/
-  glib-mkenums \
-    --template ../libostree-2023.2/src/libostree/ostree-enumtypes.h.template \
-    ../libostree-2023.2/src/libostree/ostree-fetcher.h > src/libostree/ostree-enumtypes.h.tmp && mv src/libostree/ostree-enumtypes.h.tmp src/libostree/ostree-enumtypes.h
-  /bin/bash: line 2: glib-mkenums: command not found
-  make: *** [Makefile:9990: src/libostree/ostree-enumtypes.h] Error 127
+* drop strange 'g...@' from SRC_URI
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-oe/recipes-extended/ostree/ostree_2023.2.bb | 3 +++
- 1 file changed, 3 insertions(+)
+ meta-oe/recipes-support/cpulimit/cpulimit_0.2.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-oe/recipes-extended/ostree/ostree_2023.2.bb b/meta-oe/recipes-extended/ostree/ostree_2023.2.bb
-index 2990122959..7eeb77474f 100644
---- a/meta-oe/recipes-extended/ostree/ostree_2023.2.bb
-+++ b/meta-oe/recipes-extended/ostree/ostree_2023.2.bb
-@@ -9,6 +9,7 @@ LICENSE = "LGPL-2.1-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=5f30f0716dfdd0d91eb439ebec522ec2"
+diff --git a/meta-oe/recipes-support/cpulimit/cpulimit_0.2.bb b/meta-oe/recipes-support/cpulimit/cpulimit_0.2.bb
+index 86a58beda4..58e4fd6e88 100644
+--- a/meta-oe/recipes-support/cpulimit/cpulimit_0.2.bb
++++ b/meta-oe/recipes-support/cpulimit/cpulimit_0.2.bb
+@@ -4,7 +4,7 @@ LICENSE = "GPL-2.0-or-later"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=86c1c0d961a437e529db93aa3bb32dc4"
+ SRCREV ?= "f4d2682804931e7aea02a869137344bb5452a3cd"
  
- DEPENDS = " \
-+    glib-2.0-native \
-     glib-2.0 \
-     e2fsprogs \
-     libcap \
-@@ -28,6 +29,8 @@ S = "${WORKDIR}/libostree-${PV}"
+-SRC_URI = "git://g...@github.com/opsengine/cpulimit.git;protocol=https;branch=master \
++SRC_URI = "git://github.com/opsengine/cpulimit.git;protocol=https;branch=master \
+            file://0001-Remove-sys-sysctl.h-and-add-missing-libgen.h-include.patch \
+            "
  
- inherit autotools bash-completion gobject-introspection github-releases gtk-doc manpages pkgconfig ptest-gnome systemd
+@@ -15,7 +15,7 @@ do_compile() {
+ }
+ do_install() {
+     install -d ${D}${sbindir}
+-    install -m 0755 ${B}/src/${PN} ${D}${sbindir}/
++    install -m 0755 ${B}/src/${BPN} ${D}${sbindir}/
+ }
  
-+UNKNOWN_CONFIGURE_OPT_IGNORE = "--disable-introspection --enable-introspection"
-+
- # Workaround compile failure:
- # |../git/src/libotutil/zbase32.c:37:1: error: function returns an aggregate [-Werror=aggregate-return]
- # so remove -Og and use -O2 as workaround
+ CFLAGS += "-D_GNU_SOURCE ${LDFLAGS}"
 -- 
 2.40.1
 
