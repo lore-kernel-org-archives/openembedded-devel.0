@@ -1,129 +1,88 @@
-Return-Path: <Martin.Jansa@gmail.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5BECAC7EE23
-	for <webhook@archiver.kernel.org>; Wed,  3 May 2023 14:47:50 +0000 (UTC)
-Received: from mail-wm1-f50.google.com (mail-wm1-f50.google.com [209.85.128.50])
- by mx.groups.io with SMTP id smtpd.web10.21591.1683125266975913737
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B4C60C77B75
+	for <webhook@archiver.kernel.org>; Wed,  3 May 2023 15:44:00 +0000 (UTC)
+Received: from mail-pl1-f172.google.com (mail-pl1-f172.google.com [209.85.214.172])
+ by mx.groups.io with SMTP id smtpd.web11.23228.1683128633133769107
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 03 May 2023 07:47:47 -0700
+ Wed, 03 May 2023 08:43:53 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=HvdqfyI3;
- spf=pass (domain: gmail.com, ip: 209.85.128.50, mailfrom: martin.jansa@gmail.com)
-Received: by mail-wm1-f50.google.com with SMTP id 5b1f17b1804b1-3f19323259dso52151335e9.3
-        for <openembedded-devel@lists.openembedded.org>; Wed, 03 May 2023 07:47:46 -0700 (PDT)
+ dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=Wm1xpPvb;
+ spf=pass (domain: gmail.com, ip: 209.85.214.172, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f172.google.com with SMTP id d9443c01a7336-1aaea43def7so31491135ad.2
+        for <openembedded-devel@lists.openembedded.org>; Wed, 03 May 2023 08:43:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1683125265; x=1685717265;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=XyQcDu2ncfp53wKx7RnkvzsfTJvg8pF8YFznJBrluYY=;
-        b=HvdqfyI3Sw/fNn1dnZkkepcQki3jzA780vbQreUtpJAV0BsXffTMiA6s5QvIo2T31q
-         36ZAdcsoDAnZ8mQRyOkHE50RDsL/EhiJ7xbtpfVnC4qLAwUrsbB7oLI/Ge0aDQIwTWJG
-         VlZyRCIypzMuN6/Z3Iek5E4rK/SYMNO4YOYEONaViVlOR2P1uxWLCHxaCqOsU4P1xoOr
-         IjHOqwDOckmzayUcZ7ZtgZArlnFMJjKM6YXtLRssTcT2A8FOuvlj3SRllLL8SUhGaDSp
-         +HVORYkZMSVPOwhQCzHKK+3xk6ysICbJcE6t7WSUfJ2XMXhnQjq/3F91e3RAZrFe68kj
-         4NRw==
+        d=gmail.com; s=20221208; t=1683128632; x=1685720632;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=PUuwUT8mdHfNm+kpErnUSGvJaheUkhxp/7qGaC0TAYY=;
+        b=Wm1xpPvbj7ka7FfIq1A+E010WBlIO/XERfGAGdiPgKZBZlTlbYgugjkd4L3XBfcwrs
+         PyG2ILSHs8uT1W18//lcODHSJlFvd6wH7XRuFI855DfWstxzHuLGKsH7MPuvoWhr47co
+         HiHbd1Dbv1+5ZDDSg789h+SJCv7ilE42b2ch7RUUD7k2f5lhHGyUp96njL3DNZq5xTcC
+         kzeCTbVUAuuQwjBWCWQAb+flqc2dfXBJhc4iYZLseNMosLr7DwzHWF9sFdSJjDK+hUOX
+         KW9rzjAPoDmN6r+h12Y4UNtWxzPp2UL2upmtKdz/FOIGilhqHvVCNpegk0QK4VseXYKI
+         8rNA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1683125265; x=1685717265;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=XyQcDu2ncfp53wKx7RnkvzsfTJvg8pF8YFznJBrluYY=;
-        b=bgJfDfT2Sp+T1iU0p57t34jERAVbkP3/XUxjPH52yxnSRYLLA419NK9JvpZCHa3FHX
-         cf/uwe62sKkEiIhve0QWWC1PKFIZUZtVZ65K4iwF6FPd0DzTtlT03ezofnD21+jkfC/U
-         UhwIP7hwm2bpixpq+qJ3/57mNaV2eKgY0BS+NOZSEo7CQNKRJvRy1biJ6fCULAipbH0+
-         0CW3m5basbZwXmrGa6mIiB2ytlTQxUC5BiicLDG8lIyGlQQnGnoTWxa6Tfq5Oq6pvu64
-         enD5uXFneZjrhfzM2bP+LBe5G3Ko4gGNvaOIqt5JDKqvTR1Wv9mMtq2k6oVSiyJlo/u8
-         162w==
-X-Gm-Message-State: AC+VfDxV2XX67pn0lQOVJwm0VaS1NQ90t0tT9yu0tUISUUgHZSp5YEU1
-	juUTLPBF4MhsXpl4yDYvowPMl3P6L8A=
-X-Google-Smtp-Source: ACHHUZ79bAfNYica7IaZWADIUPM2pHJDjxCrpITNr3wHtc+q25mF58ptOOMWcrCsn19aM9b3XhMgdw==
-X-Received: by 2002:a1c:7502:0:b0:3f2:5028:a558 with SMTP id o2-20020a1c7502000000b003f25028a558mr14824633wmc.0.1683125265285;
-        Wed, 03 May 2023 07:47:45 -0700 (PDT)
-Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
-        by smtp.gmail.com with ESMTPSA id k1-20020a7bc301000000b003eddc6aa5fasm2094553wmj.39.2023.05.03.07.47.44
+        d=1e100.net; s=20221208; t=1683128632; x=1685720632;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=PUuwUT8mdHfNm+kpErnUSGvJaheUkhxp/7qGaC0TAYY=;
+        b=JEh2ixwDKAnS3rVATQWr9C9wHchq5HuMWHvpJGh7HonsMRoVur7BAUA0cKAfiK3yQ7
+         FTSi17Yq15P/43PC4FhZhgmdhRVb+NvuQoaO7oEN1aHZgZGOFtM8Q4/xbnWsbyMc4Rg4
+         hyGqY8qeh6A99ZHVooSHNBElmpFIjsnQBMfxWQUtSaHWxIyhC69Gp1uCSW9dig7KKzl7
+         AQ4IEgvKnV68iL3C6ZDqKYqGuOTcecCpmSbxy3r42dgroMYskX5m7jwUS2HCesLbB1kN
+         zOGiGKkTAMcwffNdib59UFqxkDgF+U+OYF1k1urHimgTHkNeKq8VBYh9vOzl1FFYXhoB
+         Dp1A==
+X-Gm-Message-State: AC+VfDwTEHhu4Lv/45kXfjBHEJHSxPNaqWVDM/nG6244EWedk7extauY
+	lmGV/LYrW91kkSymLu8a8oZXxMqYrTxjz7V1
+X-Google-Smtp-Source: ACHHUZ7T+1jOD7jouaxGBVBPcAvuRg9Ep07k2+filcgY+YmRPXGclhzVCwklkBC6+tPC92bHb7Ng2g==
+X-Received: by 2002:a17:902:ea10:b0:1aa:df9e:2d08 with SMTP id s16-20020a170902ea1000b001aadf9e2d08mr555021plg.37.1683128632123;
+        Wed, 03 May 2023 08:43:52 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9181:d380::ade2])
+        by smtp.gmail.com with ESMTPSA id d4-20020a170903230400b001a072aedec7sm8063282plh.75.2023.05.03.08.43.51
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 03 May 2023 07:47:44 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+        Wed, 03 May 2023 08:43:51 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Martin Jansa <Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH] glfw: respect DISTRO_FEATURES when enabling x11 in default PACKAGECONFIG and return it to REQUIRED_DISTRO_FEATURES
-Date: Wed,  3 May 2023 16:47:41 +0200
-Message-Id: <20230503144741.3909244-1-Martin.Jansa@gmail.com>
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][PATCH] gitpkgv: Fix python deprecation warning
+Date: Wed,  3 May 2023 08:43:49 -0700
+Message-Id: <20230503154349.93589-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.40.1
-In-Reply-To: <175B62BB4F7F5F02.4923@lists.openembedded.org>
-References: <175B62BB4F7F5F02.4923@lists.openembedded.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 03 May 2023 14:47:50 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102288
+ <openembedded-devel@lists.openembedded.org>; Wed, 03 May 2023 15:44:00 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102289
 
-x11 was recently removed from REQUIRED_DISTRO_FEATURES but it
-should still respect x11 in DISTRO_FEATURES, now this causes:
+Fixes
+DeprecationWarning: 'pipes' is deprecated and slated for removal in Python 3.13
 
-ERROR: Nothing PROVIDES 'libxi' (but meta-oe/recipes-core/glfw/glfw_3.3.bb DEPENDS on or otherwise requires it)
-libxi was skipped: missing required distro feature 'x11' (not in DISTRO_FEATURES)
-ERROR: Nothing PROVIDES 'libxinerama' (but meta-oe/recipes-core/glfw/glfw_3.3.bb DEPENDS on or otherwise requires it)
-libxinerama was skipped: missing required distro feature 'x11' (not in DISTRO_FEATURES)
-ERROR: Nothing PROVIDES 'libxrandr' (but meta-oe/recipes-core/glfw/glfw_3.3.bb DEPENDS on or otherwise requires it)
-libxrandr was skipped: missing required distro feature 'x11' (not in DISTRO_FEATURES)
-ERROR: Nothing PROVIDES 'libglu' (but meta-oe/recipes-core/glfw/glfw_3.3.bb DEPENDS on or otherwise requires it)
-libglu was skipped: missing required distro feature 'x11' (not in DISTRO_FEATURES)
-ERROR: Nothing PROVIDES 'libxcursor' (but meta-oe/recipes-core/glfw/glfw_3.3.bb DEPENDS on or otherwise requires it)
-libxcursor was skipped: missing required distro feature 'x11' (not in DISTRO_FEATURES)
+pipes is an alias for shlex therefore switch to using shlex
 
-when wayland and opengl are in DISTRO_FEATURES, but x11 isn't.
-
-REQUIRED_DISTRO_FEATURES is satisfied by "opengl" and ANY_OF_DISTRO_FEATURES by "wayland",
-but the default PACKAGECONFIG doesn't match with that.
-
-Also move libglu to x11 PACKAGECONFIG, because that also has x11
-in REQUIRED_DISTRO_FEATURES.
-
-Return x11 to REQUIRED_DISTRO_FEATURES because even with this change
-it still fails to build without x11 in DISTRO_FEATURES, so until
-wayland support is resolved it does require x11 to build, otherwise fails with:
-
-glfw/3.3+gitAUTOINC+781fbbadb0-r0/recipe-sysroot-native/usr/share/cmake-3.25/Modules/FindPackageHandleStandardArgs.cmake:230 (message):
-|   Could NOT find X11 (missing: X11_X11_INCLUDE_PATH X11_X11_LIB)
-
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-oe/recipes-core/glfw/glfw_3.3.bb | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
+ meta-oe/classes/gitpkgv.bbclass | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-core/glfw/glfw_3.3.bb b/meta-oe/recipes-core/glfw/glfw_3.3.bb
-index 5b0d61241e..f4d983a6e0 100644
---- a/meta-oe/recipes-core/glfw/glfw_3.3.bb
-+++ b/meta-oe/recipes-core/glfw/glfw_3.3.bb
-@@ -20,17 +20,17 @@ EXTRA_OECMAKE += "-DBUILD_SHARED_LIBS=ON -DGLFW_BUILD_DOCS=OFF"
+diff --git a/meta-oe/classes/gitpkgv.bbclass b/meta-oe/classes/gitpkgv.bbclass
+index 180421ed35..cb2cea26be 100644
+--- a/meta-oe/classes/gitpkgv.bbclass
++++ b/meta-oe/classes/gitpkgv.bbclass
+@@ -56,7 +56,7 @@ def gitpkgv_drop_tag_prefix(d, version):
+ def get_git_pkgv(d, use_tags):
+     import os
+     import bb
+-    from pipes import quote
++    from shlex import quote
  
- CFLAGS += "-fPIC"
- 
--DEPENDS = "libpng libglu zlib"
--REQUIRED_DISTRO_FEATURES = "opengl"
-+DEPENDS = "libpng zlib"
-+REQUIRED_DISTRO_FEATURES = "opengl x11"
- ANY_OF_DISTRO_FEATURES = "wayland x11"
- 
- # upstream considers x11 and wayland backends mutually exclusive and will
- # prioritize wayland if it is enabled, but wayland has dependencies that cannot
- # be satisfied by this layer so it is disabled by default
- 
--PACKAGECONFIG ??= "x11"
-+PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'x11', d)}"
- 
- PACKAGECONFIG[wayland] = "-DGLFW_USE_WAYLAND=ON,,wayland wayland-native wayland-protocols extra-cmake-modules libxkbcommon"
--PACKAGECONFIG[x11] = ",,libxrandr libxinerama libxi libxcursor"
-+PACKAGECONFIG[x11] = ",,libxrandr libxinerama libxi libxcursor libglu"
- 
- COMPATIBLE_HOST:libc-musl = "null"
+     src_uri = d.getVar('SRC_URI').split()
+     fetcher = bb.fetch2.Fetch(src_uri, d)
 -- 
 2.40.1
 
