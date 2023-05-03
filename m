@@ -1,161 +1,98 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <Martin.Jansa@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D78E1C77B7F
-	for <webhook@archiver.kernel.org>; Wed,  3 May 2023 15:49:50 +0000 (UTC)
-Received: from mail-ot1-f44.google.com (mail-ot1-f44.google.com [209.85.210.44])
- by mx.groups.io with SMTP id smtpd.web10.23566.1683128982963249301
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4025AC7EE29
+	for <webhook@archiver.kernel.org>; Wed,  3 May 2023 17:24:11 +0000 (UTC)
+Received: from mail-wr1-f50.google.com (mail-wr1-f50.google.com [209.85.221.50])
+ by mx.groups.io with SMTP id smtpd.web10.26201.1683134642865359545
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 03 May 2023 08:49:43 -0700
+ Wed, 03 May 2023 10:24:03 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=KPKnPcT+;
- spf=pass (domain: gmail.com, ip: 209.85.210.44, mailfrom: raj.khem@gmail.com)
-Received: by mail-ot1-f44.google.com with SMTP id 46e09a7af769-6a5dd070aa1so2129841a34.3
-        for <openembedded-devel@lists.openembedded.org>; Wed, 03 May 2023 08:49:42 -0700 (PDT)
+ dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=fCGgAiJX;
+ spf=pass (domain: gmail.com, ip: 209.85.221.50, mailfrom: martin.jansa@gmail.com)
+Received: by mail-wr1-f50.google.com with SMTP id ffacd0b85a97d-2fddb442d47so5167125f8f.2
+        for <openembedded-devel@lists.openembedded.org>; Wed, 03 May 2023 10:24:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1683128982; x=1685720982;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
+        d=gmail.com; s=20221208; t=1683134641; x=1685726641;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=wYDhAWVrgWE84u07bq+4Q9tauY/YIprLc7koUf7uwQ4=;
-        b=KPKnPcT+udzMy7RgEPFrSSCmnhz6Gifz7BGEIkHUykuXqF2Sxf5iSgh3FrOou3/RZg
-         xTKjaNS/judjyNbXNr1xwQyamZ1EWUg/XHMOUgbdZGqw2s1+iuO/4hid+57YZ4OVY2F6
-         rQr6GuSSlHznGdq0fkeyUBpAygdhPbqGbXn4PZpUZiq6zTZnR8BwJ6OqmV4oLZLf2Ju9
-         Hh8g6GUrwsbAOLO2hgnKyoUiajq8m1Adqr7UZx1zOz4Mg0LhVQOGrSKUoSiXDqoIZXR6
-         lLrj23EDLnmBFt1NGHRPPqenFuF4EK6lcBfAC3eGGQqcIhggsLEJGxfQuVMtnEeUkk24
-         /EYQ==
+        bh=YdPgmCfy1GsYYrPPzT+kkKWReAwWItEV1BJf6fo+R0g=;
+        b=fCGgAiJXweesbwrM/AOgIC7t27AHmRHzyliAYzPGGkzZrhL6YVgfLWLLiul78ZBKW/
+         lo+pPsHgO+6TQIfDnhKN9LabWrQCoMehT4QfHn0Fo44w4U86jVBUxNr8/Iiyq4krwuBJ
+         F6q1HaxymIWeGUZqMRvag8Lw0/+iyw4v+XJl590S9mx2yh5QcAzPCdB0/sMoUOpKR/yT
+         ELnquKtq/odFbnMHD2/Ut2uHHh1bLuiPcZnp7SBsbtIO5TmXqQBKiFNXBH/oD0TrZ13/
+         r8oxZCWqyUKRhTdrL9HS6TzSozEKqdEOxeL/eEjtJezshvp3A8H8fhmNHUqOwKv1LFph
+         o4+Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1683128982; x=1685720982;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+        d=1e100.net; s=20221208; t=1683134641; x=1685726641;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=wYDhAWVrgWE84u07bq+4Q9tauY/YIprLc7koUf7uwQ4=;
-        b=Rp/E+OHKsWrFoEJVX6EUoqfyWf8iFBmWlu7qtxpxh7JtPKAzKCJpvyNnJzxYqA0FRe
-         W9qaBgP9Qfx9o4ojL52jz+J0jjOXb5k9TitYpozDyZTklbFrghcR/JgmCh0ghJ7K27JC
-         4LN485eGc+L9RhPVbBuOlLzKX2CLQbftOY/aQXduPh43Ty0XNfxXv/QrqvKzBZ0S/kKY
-         9lsJl8firOoiIaLJtMpcr95rqL8T27UoyYLEGla1zLevTDHqrGfwzXV0V1N82WTNsbmf
-         6bP51gfe/3ZY5Fr6Oms5jbvRuY8d6XSa2L7roBq71a5VOezEYSQRKpnjywTEthKWCi/P
-         KIoQ==
-X-Gm-Message-State: AC+VfDyCMwmjqrOKlmm2+k0eXRG+fRstNBg2v7NsM0atyloIqcvR8rBn
-	/9hV44edNV5XqTTOO8Ndv/WbTM97nx3aO/OOTLI=
-X-Google-Smtp-Source: ACHHUZ4AfUMpDcp8vL55HdZXYStBxnc4J/HlAMkc9CIlV2y1QJ9cbpdWGeykM4lJt/mLFBwlUQcEUuwItD2M2q6POK0=
-X-Received: by 2002:a05:6808:1a17:b0:390:6235:1e77 with SMTP id
- bk23-20020a0568081a1700b0039062351e77mr327442oib.21.1683128982116; Wed, 03
- May 2023 08:49:42 -0700 (PDT)
+        bh=YdPgmCfy1GsYYrPPzT+kkKWReAwWItEV1BJf6fo+R0g=;
+        b=UelRt1Vt4nGM4+D4iKHX6nU+sWyRrfnf8ni4jGupvsnsXZCVPub+qxwx9leuYUjcTn
+         /9NWk/9c2pReKs16tmiBqEulXduhTUXzx1+XsFojRSIyVbMUIcJGtNOuhN9iGls7vFDw
+         cyXxfHEaIqjQx0UscrSAYHlsbDxyI2sUJkys9OuaFs+RmzPD2RxC01EDjcrPNy4nNt8h
+         YG+PjfiPJ8dAEdDyhclTZhP2qggg0dNe283SC661IeWFbrgl27zVegZV0SgEH0gT3zvM
+         QmT6GCYP1rsdWcMDHkZMKQKFjFH2v++vE1Jy+8ZJrp091oPV9lRj15S5NyQTYvydwEJn
+         mLhA==
+X-Gm-Message-State: AC+VfDy4bfBht5YpXlWGozVui5yd2kl2gepd4nITj/OwA+JD6BjCLDlp
+	AfRmcYdEHGNLEI0OOUGsxB29XHhtYPw=
+X-Google-Smtp-Source: ACHHUZ7DDSPkyMWvP63/JL3pk3+nEPr6C1ItNoEc9+A8NMi34H033YoU06CuG1yjjEoNvpLD1BFoyw==
+X-Received: by 2002:a05:6000:1363:b0:306:2cf5:79dc with SMTP id q3-20020a056000136300b003062cf579dcmr615708wrz.35.1683134641112;
+        Wed, 03 May 2023 10:24:01 -0700 (PDT)
+Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
+        by smtp.gmail.com with ESMTPSA id k10-20020a5d428a000000b00306337e5464sm6496945wrq.44.2023.05.03.10.24.00
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 03 May 2023 10:24:00 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Martin Jansa <Martin.Jansa@gmail.com>
+Subject: [meta-oe][PATCH 2/7] libxmlb: add missing dependency on glib-2.0 and xz
+Date: Wed,  3 May 2023 19:23:49 +0200
+Message-Id: <20230503172354.1439352-2-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.40.1
+In-Reply-To: <20230503172354.1439352-1-Martin.Jansa@gmail.com>
+References: <20230503172354.1439352-1-Martin.Jansa@gmail.com>
 MIME-Version: 1.0
-References: <175B62BB4F7F5F02.4923@lists.openembedded.org> <20230503144741.3909244-1-Martin.Jansa@gmail.com>
-In-Reply-To: <20230503144741.3909244-1-Martin.Jansa@gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 3 May 2023 08:49:16 -0700
-Message-ID: <CAMKF1srbxCjf8AabLn0T2WnWdyv-PeyOJcCP_PDQBTyZb94WHw@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH] glfw: respect DISTRO_FEATURES when enabling
- x11 in default PACKAGECONFIG and return it to REQUIRED_DISTRO_FEATURES
-To: Martin Jansa <Martin.Jansa@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 03 May 2023 15:49:50 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102290
+ <openembedded-devel@lists.openembedded.org>; Wed, 03 May 2023 17:24:11 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102292
 
-Thanks Martin for clearing that up.
+* without gobject-introspection-data in DISTRO_FEATURES it fails with:
 
-On Wed, May 3, 2023 at 7:47=E2=80=AFAM Martin Jansa <Martin.Jansa@gmail.com=
-> wrote:
->
-> x11 was recently removed from REQUIRED_DISTRO_FEATURES but it
-> should still respect x11 in DISTRO_FEATURES, now this causes:
->
-> ERROR: Nothing PROVIDES 'libxi' (but meta-oe/recipes-core/glfw/glfw_3.3.b=
-b DEPENDS on or otherwise requires it)
-> libxi was skipped: missing required distro feature 'x11' (not in DISTRO_F=
-EATURES)
-> ERROR: Nothing PROVIDES 'libxinerama' (but meta-oe/recipes-core/glfw/glfw=
-_3.3.bb DEPENDS on or otherwise requires it)
-> libxinerama was skipped: missing required distro feature 'x11' (not in DI=
-STRO_FEATURES)
-> ERROR: Nothing PROVIDES 'libxrandr' (but meta-oe/recipes-core/glfw/glfw_3=
-.3.bb DEPENDS on or otherwise requires it)
-> libxrandr was skipped: missing required distro feature 'x11' (not in DIST=
-RO_FEATURES)
-> ERROR: Nothing PROVIDES 'libglu' (but meta-oe/recipes-core/glfw/glfw_3.3.=
-bb DEPENDS on or otherwise requires it)
-> libglu was skipped: missing required distro feature 'x11' (not in DISTRO_=
-FEATURES)
-> ERROR: Nothing PROVIDES 'libxcursor' (but meta-oe/recipes-core/glfw/glfw_=
-3.3.bb DEPENDS on or otherwise requires it)
-> libxcursor was skipped: missing required distro feature 'x11' (not in DIS=
-TRO_FEATURES)
->
-> when wayland and opengl are in DISTRO_FEATURES, but x11 isn't.
->
-> REQUIRED_DISTRO_FEATURES is satisfied by "opengl" and ANY_OF_DISTRO_FEATU=
-RES by "wayland",
-> but the default PACKAGECONFIG doesn't match with that.
->
-> Also move libglu to x11 PACKAGECONFIG, because that also has x11
-> in REQUIRED_DISTRO_FEATURES.
->
-> Return x11 to REQUIRED_DISTRO_FEATURES because even with this change
-> it still fails to build without x11 in DISTRO_FEATURES, so until
-> wayland support is resolved it does require x11 to build, otherwise fails=
- with:
->
-> glfw/3.3+gitAUTOINC+781fbbadb0-r0/recipe-sysroot-native/usr/share/cmake-3=
-.25/Modules/FindPackageHandleStandardArgs.cmake:230 (message):
-> |   Could NOT find X11 (missing: X11_X11_INCLUDE_PATH X11_X11_LIB)
->
-> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-> ---
->  meta-oe/recipes-core/glfw/glfw_3.3.bb | 8 ++++----
->  1 file changed, 4 insertions(+), 4 deletions(-)
->
-> diff --git a/meta-oe/recipes-core/glfw/glfw_3.3.bb b/meta-oe/recipes-core=
-/glfw/glfw_3.3.bb
-> index 5b0d61241e..f4d983a6e0 100644
-> --- a/meta-oe/recipes-core/glfw/glfw_3.3.bb
-> +++ b/meta-oe/recipes-core/glfw/glfw_3.3.bb
-> @@ -20,17 +20,17 @@ EXTRA_OECMAKE +=3D "-DBUILD_SHARED_LIBS=3DON -DGLFW_B=
-UILD_DOCS=3DOFF"
->
->  CFLAGS +=3D "-fPIC"
->
-> -DEPENDS =3D "libpng libglu zlib"
-> -REQUIRED_DISTRO_FEATURES =3D "opengl"
-> +DEPENDS =3D "libpng zlib"
-> +REQUIRED_DISTRO_FEATURES =3D "opengl x11"
->  ANY_OF_DISTRO_FEATURES =3D "wayland x11"
->
->  # upstream considers x11 and wayland backends mutually exclusive and wil=
-l
->  # prioritize wayland if it is enabled, but wayland has dependencies that=
- cannot
->  # be satisfied by this layer so it is disabled by default
->
-> -PACKAGECONFIG ??=3D "x11"
-> +PACKAGECONFIG ??=3D "${@bb.utils.filter('DISTRO_FEATURES', 'x11', d)}"
->
->  PACKAGECONFIG[wayland] =3D "-DGLFW_USE_WAYLAND=3DON,,wayland wayland-nat=
-ive wayland-protocols extra-cmake-modules libxkbcommon"
-> -PACKAGECONFIG[x11] =3D ",,libxrandr libxinerama libxi libxcursor"
-> +PACKAGECONFIG[x11] =3D ",,libxrandr libxinerama libxi libxcursor libglu"
->
->  COMPATIBLE_HOST:libc-musl =3D "null"
-> --
-> 2.40.1
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#102288): https://lists.openembedded.org/g/openembedde=
-d-devel/message/102288
-> Mute This Topic: https://lists.openembedded.org/mt/98663243/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
-aj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
+  http://errors.yoctoproject.org/Errors/Details/702774/
+  Run-time dependency gio-2.0 found: NO (tried pkgconfig)
+  ../git/meson.build:119:0: ERROR: Dependency gio-2.0 not found, tried pkgconfig
+
+  and http://errors.yoctoproject.org/Errors/Details/702777/
+  Run-time dependency liblzma found: NO (tried pkgconfig)
+  ../git/meson.build:121:0: ERROR: Dependency liblzma not found, tried pkgconfig
+
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ meta-oe/recipes-gnome/libxmlb/libxmlb_0.3.10.bb | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/meta-oe/recipes-gnome/libxmlb/libxmlb_0.3.10.bb b/meta-oe/recipes-gnome/libxmlb/libxmlb_0.3.10.bb
+index 3366b7e7f9..61abd07fda 100644
+--- a/meta-oe/recipes-gnome/libxmlb/libxmlb_0.3.10.bb
++++ b/meta-oe/recipes-gnome/libxmlb/libxmlb_0.3.10.bb
+@@ -8,6 +8,8 @@ SRC_URI = "git://github.com/hughsie/libxmlb.git;branch=main;protocol=https \
+ SRCREV = "a6cac6a715d57c393bbddee4d0381ad943341af9"
+ S = "${WORKDIR}/git"
+ 
++DEPENDS = "glib-2.0 xz"
++
+ inherit gobject-introspection gtk-doc meson ptest-gnome lib_package
+ 
+ PACKAGECONFIG ??= "\
+-- 
+2.40.1
+
 
