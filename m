@@ -2,56 +2,57 @@ Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3EB73C7EE2F
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3BEC7C77B75
 	for <webhook@archiver.kernel.org>; Sun,  7 May 2023 16:33:23 +0000 (UTC)
-Received: from mail-yw1-f178.google.com (mail-yw1-f178.google.com [209.85.128.178])
- by mx.groups.io with SMTP id smtpd.web11.69127.1683477191715428731
+Received: from mail-yw1-f169.google.com (mail-yw1-f169.google.com [209.85.128.169])
+ by mx.groups.io with SMTP id smtpd.web10.69000.1683477194004226544
  for <openembedded-devel@lists.openembedded.org>;
  Sun, 07 May 2023 09:33:14 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20221208 header.b=DsM4Vcva;
- spf=pass (domain: gmail.com, ip: 209.85.128.178, mailfrom: akuster808@gmail.com)
-Received: by mail-yw1-f178.google.com with SMTP id 00721157ae682-55a214572e8so56929637b3.0
-        for <openembedded-devel@lists.openembedded.org>; Sun, 07 May 2023 09:33:14 -0700 (PDT)
+ dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=E9gawnhj;
+ spf=pass (domain: gmail.com, ip: 209.85.128.169, mailfrom: akuster808@gmail.com)
+Received: by mail-yw1-f169.google.com with SMTP id 00721157ae682-55a2691637bso55107197b3.0
+        for <openembedded-devel@lists.openembedded.org>; Sun, 07 May 2023 09:33:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1683477194; x=1686069194;
+        d=gmail.com; s=20221208; t=1683477193; x=1686069193;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=priMjADnSE/mj2F5wIZYYuPSfCDpjec7LxY7gmNbJnU=;
-        b=DsM4VcvadASVMklC309Wm9qbdf6GOHVzHt9fFbAarPjOYz/UWZAXCePKY8ep1MU1x2
-         J+3AcYch42/EVH4ZIEC/FjNcGtNF3Y7SoEYv3pdzo7xt11nw6zl5KHi38TkL3IvTcDWK
-         kRlB99ryDSDC+YKWD33vOGVlWs5Iw8ZGGsIkv9B8ZgAGugE1UAYDTyZkHpNvaQvm/BZ8
-         GG5zF/T/o9jWsqgzLg8j/4G4A9Nq0kN0nqe7XRFknKJadGzeQgG09wf5bBl3ICGh6etI
-         ikSw4oBtYFuZ1JHIzZiLjyXstejFb2w/ywXXV/vhnrwP0OuWs5+rQBB++2YIZD6+ZLA2
-         luhg==
+        bh=ybFZoUcfS9BwyBPuF53LDuqbdxX/ohGPc+lDJVkKEP0=;
+        b=E9gawnhjr27QdelK1mpYyH7l0rthAYidb7cIn8XpmPnMYS4rOc4eYtd2k8IEBeJX9Z
+         FS2OORiFLcxxfWxoaKU3d3THgF+FA7F86sqArg9GffKUg0mdovogrRdIA0AibSa8/R7e
+         xFtZvvMHsq8bIYqFmHKiWZpktEnumYcgaJCVPCr0EV8nhjz9F4FK58j27muUfH5/a2gg
+         3IIKKVBw9+Ds8LR2hDx/w+S+wgzeGY2OFQCG7xQVmU5J9a471XNmSTWEdPpFbpiUOBEV
+         3CQSD2CR27alt/b6ZwqUN+zbPWsauXpymtk7zE5sRIeQ6REE40dmlgLUf6EgZgLtAkdV
+         nqsQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1683477194; x=1686069194;
+        d=1e100.net; s=20221208; t=1683477193; x=1686069193;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=priMjADnSE/mj2F5wIZYYuPSfCDpjec7LxY7gmNbJnU=;
-        b=TdApTyUTO1N9qTwOcaP78okFR9kJdd6NCQ/UMkwPit3JiFBey04k1oe42RTGPlDjMk
-         o91SEYAanoHfXSUhPf8DdtM6O4liwsZTtd+v4oPtJYiCZ5EEH7Cz88aba5tLJmJ/a6J0
-         0f/Qb71QnTYJ4mbwqaBAmPDGspQWyqYaIVL04JdrGWebfJnZ2sVu8tVVvRYLz9FGGlh4
-         CJzFOkFUJGUEmh1ImZQO1qZDWlk054PlBbcvh13rjrLJMi/dtUn55HrSoHU27IJBtkJD
-         MslRT0ed6sbHOxU/Q753FNDhb4LPKf42ET+A9KzmrWujbf4WgFgIK8kj7wn9U7bWFi4a
-         ebmg==
-X-Gm-Message-State: AC+VfDwt/POrlCKnRgfLgvL8d0WZNq4e5fo2XovTUfXVRzzkJEIDbyTP
-	XuSIf+3CfHn9ZJi9ytCTrqgjujElrRU=
-X-Google-Smtp-Source: ACHHUZ6YK6BI3HuoHT1bjfbQ27nEsrsWEhnZi2x/XeAHTW4//WB/n/TKXd0Zl2R70b7Eog4Argy30g==
-X-Received: by 2002:a0d:eb09:0:b0:54e:84f6:6669 with SMTP id u9-20020a0deb09000000b0054e84f66669mr8495989ywe.49.1683477193814;
-        Sun, 07 May 2023 09:33:13 -0700 (PDT)
+        bh=ybFZoUcfS9BwyBPuF53LDuqbdxX/ohGPc+lDJVkKEP0=;
+        b=KVFmVlgs7VyLxCeIqsJIUX9KolrcR8p1v/8VXS71RWCTZ6ApKe8SRlGNm5AckU64zk
+         DjxyM/NDFfgAh6s9SAzv8rnC6z3WfpipOjbBA7dE/56v3RYp3NUXJdaEzV0Tvm44Biix
+         NeWlrHTMdTwa/jp3YxlOOPvJkANKV9d2SO2K676pZAx+BXjA0ft9NO89XUE41Ll6abhT
+         CYTyPmg71tJfWMeWb/iu3/PXE0Q5nvl9gIa/ocl5FH/tYpb+eHsmZsQb3oMF/GTfdbtp
+         Vx9EZ4vpayKd2k0Jm+zMJ8bVLN60xmuq+UGOQ2P+EHqycGLmsZSHY1O0p3M61cRIWBxH
+         9hjg==
+X-Gm-Message-State: AC+VfDxHVcjDlwMrFKb7KKUuDR2OoON4KpJ73zE+a1Up2D964vcnpsHa
+	w2YBlHLiUgDc39UJWw3FSK7vKHW7Yic=
+X-Google-Smtp-Source: ACHHUZ5F/DBha20DQPAIg09u4VD89go5x5wyWe2C9zxYctaYUsi2F+WkYF6xjMJ1tBc3JEY1PSCzDw==
+X-Received: by 2002:a0d:e209:0:b0:555:cbdc:c6 with SMTP id l9-20020a0de209000000b00555cbdc00c6mr8532864ywe.9.1683477192907;
+        Sun, 07 May 2023 09:33:12 -0700 (PDT)
 Received: from keaua.attlocal.net ([2600:1700:9190:ba10:b2f5:e641:5b7c:2972])
-        by smtp.gmail.com with ESMTPSA id q82-20020a817555000000b0055dbeb68f7asm1113524ywc.69.2023.05.07.09.33.13
+        by smtp.gmail.com with ESMTPSA id q82-20020a817555000000b0055dbeb68f7asm1113524ywc.69.2023.05.07.09.33.12
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 07 May 2023 09:33:13 -0700 (PDT)
+        Sun, 07 May 2023 09:33:12 -0700 (PDT)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][mickledore][PATCH 08/29] fwupd: Do not emit build time paths into generated headers
-Date: Sun,  7 May 2023 12:32:44 -0400
-Message-Id: <20230507163305.3261044-8-akuster808@gmail.com>
+Cc: Wang Mingyu <wangmy@fujitsu.com>,
+	Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][mickledore][PATCH 07/29] php: upgrade 8.2.4 -> 8.2.5
+Date: Sun,  7 May 2023 12:32:43 -0400
+Message-Id: <20230507163305.3261044-7-akuster808@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20230507163305.3261044-1-akuster808@gmail.com>
 References: <20230507163305.3261044-1-akuster808@gmail.com>
@@ -61,81 +62,48 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sun, 07 May 2023 16:33:23 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102338
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102337
 
-From: Khem Raj <raj.khem@gmail.com>
+From: Wang Mingyu <wangmy@fujitsu.com>
 
-Fixes
-WARNING: fwupd-1.8.9-r0 do_package_qa: QA Issue: File /usr/src/debug/fwupd/1.8.9-r0/src/fu-plugin-builtin.h in package fwupd-src contains reference to TMPDIR [buildpaths]
+Changelog:
+==========
+    Added optional support for max_execution_time in ZTS/Linux builds
+    Fixed use-after-free in recursive AST evaluation.
+    Fixed bug GH-8646 (Memory leak PHP FPM 8.1).
+    Re-add some CTE functions that were removed from being CTE by a mistake.
+    Remove CTE flag from array_diff_ukey(), which was added by mistake.
+    Fixed bug GH-10801 (Named arguments in CTE functions cause a segfault).
+    Fixed bug GH-8789 (PHP 8.0.20 (ZTS) zend_signal_handler_defer crashes on apache).
+    Fixed bug GH-10015 (zend_signal_handler_defer crashes on apache shutdown).
+    Fixed bug GH-10810 (Fix NUL byte terminating Exception::__toString()).
+    Fix potential memory corruption when mixing __callStatic() and FFI.
 
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 62a3fa25e4b685a51acba19da62b2387346c8abe)
+(cherry picked from commit 486153255da95c1b4152a37168cc8f4528a1549e)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- ...lute-buildtime-paths-in-generated-he.patch | 41 +++++++++++++++++++
- meta-oe/recipes-bsp/fwupd/fwupd_1.8.9.bb      |  1 +
- 2 files changed, 42 insertions(+)
- create mode 100644 meta-oe/recipes-bsp/fwupd/fwupd/0001-meson-Avoid-absolute-buildtime-paths-in-generated-he.patch
+ meta-oe/recipes-devtools/php/{php_8.2.4.bb => php_8.2.5.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-devtools/php/{php_8.2.4.bb => php_8.2.5.bb} (99%)
 
-diff --git a/meta-oe/recipes-bsp/fwupd/fwupd/0001-meson-Avoid-absolute-buildtime-paths-in-generated-he.patch b/meta-oe/recipes-bsp/fwupd/fwupd/0001-meson-Avoid-absolute-buildtime-paths-in-generated-he.patch
-new file mode 100644
-index 0000000000..2273bdf105
---- /dev/null
-+++ b/meta-oe/recipes-bsp/fwupd/fwupd/0001-meson-Avoid-absolute-buildtime-paths-in-generated-he.patch
-@@ -0,0 +1,41 @@
-+From b1df1ed3a21b8ef0244102043a8fb88b0ccc3f91 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Mon, 17 Apr 2023 11:30:21 -0700
-+Subject: [PATCH] meson: Avoid absolute buildtime paths in generated headers
-+
-+using meson.project_source_root() means the path emitted to include .h
-+files is absolute and it makes its way into PN-src as well, which infact
-+is not going to work if the -src package was used to re-build this in a
-+different build path. Therefore use relative path which is '.' and
-+relative to ${S}
-+
-+Changes
-+include "<abspath>/plugins/acpi-dmar/fu-acpi-dmar-plugin.h"
-+to
-+include "./plugins/acpi-dmar/fu-acpi-dmar-plugin.h"
-+
-+in generated build/src/fu-plugin-builtin.h
-+
-+Upstream-Status: Pending
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ src/meson.build | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/src/meson.build b/src/meson.build
-+index b9f6736..bb856ea 100644
-+--- a/src/meson.build
-++++ b/src/meson.build
-+@@ -188,7 +188,7 @@ plugins_hdr = custom_target('fwupd-generate-plugins-header',
-+   command : [
-+     join_paths(meson.project_source_root(), 'contrib', 'generate-plugins-header.py'),
-+     '@OUTPUT@',
-+-    meson.project_source_root(),
-++    '.',
-+     ','.join(plugin_names),
-+   ],
-+ )
-+-- 
-+2.40.0
-+
-diff --git a/meta-oe/recipes-bsp/fwupd/fwupd_1.8.9.bb b/meta-oe/recipes-bsp/fwupd/fwupd_1.8.9.bb
-index 14d83ec521..1f95dee1be 100644
---- a/meta-oe/recipes-bsp/fwupd/fwupd_1.8.9.bb
-+++ b/meta-oe/recipes-bsp/fwupd/fwupd_1.8.9.bb
-@@ -5,6 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
- DEPENDS = "glib-2.0 libxmlb json-glib libjcat gcab vala-native"
+diff --git a/meta-oe/recipes-devtools/php/php_8.2.4.bb b/meta-oe/recipes-devtools/php/php_8.2.5.bb
+similarity index 99%
+rename from meta-oe/recipes-devtools/php/php_8.2.4.bb
+rename to meta-oe/recipes-devtools/php/php_8.2.5.bb
+index aec222b587..48a0d6b228 100644
+--- a/meta-oe/recipes-devtools/php/php_8.2.4.bb
++++ b/meta-oe/recipes-devtools/php/php_8.2.5.bb
+@@ -33,7 +33,7 @@ SRC_URI:append:class-target = " \
+           "
  
- SRC_URI = "https://github.com/${BPN}/${BPN}/releases/download/${PV}/${BP}.tar.xz \
-+           file://0001-meson-Avoid-absolute-buildtime-paths-in-generated-he.patch \
-            file://run-ptest"
- SRC_URI[sha256sum] = "719a791ac4ba5988aeb93ec42778bd65d33cb075d0c093b5c04e5e1682be528a"
+ S = "${WORKDIR}/php-${PV}"
+-SRC_URI[sha256sum] = "79186f94bd510db86e31e535dd448277a1eb92a87878303a1ead44602d8b1197"
++SRC_URI[sha256sum] = "e5a80663cca4f6044ad86a489798147c7af037eca96f6cd357ab36d28cb63757"
  
+ CVE_CHECK_IGNORE += "\
+     CVE-2007-2728 \
 -- 
 2.25.1
 
