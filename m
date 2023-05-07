@@ -2,57 +2,57 @@ Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2FE56C77B7C
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3FB75C7EE2A
 	for <webhook@archiver.kernel.org>; Sun,  7 May 2023 16:33:13 +0000 (UTC)
-Received: from mail-yw1-f181.google.com (mail-yw1-f181.google.com [209.85.128.181])
- by mx.groups.io with SMTP id smtpd.web10.68998.1683477192232338250
+Received: from mail-yw1-f177.google.com (mail-yw1-f177.google.com [209.85.128.177])
+ by mx.groups.io with SMTP id smtpd.web11.69125.1683477189810614116
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 07 May 2023 09:33:12 -0700
+ Sun, 07 May 2023 09:33:09 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=J8wkRkCC;
- spf=pass (domain: gmail.com, ip: 209.85.128.181, mailfrom: akuster808@gmail.com)
-Received: by mail-yw1-f181.google.com with SMTP id 00721157ae682-55a5e0f5b1aso33498137b3.0
-        for <openembedded-devel@lists.openembedded.org>; Sun, 07 May 2023 09:33:12 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20221208 header.b=bDdM1pOL;
+ spf=pass (domain: gmail.com, ip: 209.85.128.177, mailfrom: akuster808@gmail.com)
+Received: by mail-yw1-f177.google.com with SMTP id 00721157ae682-55a010774a5so56635087b3.3
+        for <openembedded-devel@lists.openembedded.org>; Sun, 07 May 2023 09:33:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1683477191; x=1686069191;
+        d=gmail.com; s=20221208; t=1683477189; x=1686069189;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=TjbQS9oDNYnZqR9VqoEDTSEEgD7t/YLjkFw/kemAwvE=;
-        b=J8wkRkCCvWMg3GJemRuqNPIB6NLqZG0tgjzFbxqMrfaQnQTjUEovpj9G+KxNNRQYTF
-         BDkKo19pCuHTm2og66uQNPK9xhv6bsF0rSbgDnTGVDBXLmjJP2KS6EQwTrGPoi8SNMEc
-         6sDRI+inaygu2gBcqbcFcYsWv5sM2cpM8UOsYr1rPuLPRQo+7XbeBKK1Tz51Aj4aB3Nz
-         G0bfispJLkst+/3FzHbBRo2rI/dhh3NWc25QXl6q6vwLFEn7Hpc+s4kmfQHLs0c2W3sf
-         msDiRDjj3PaJpYAACKqzMXYBoUYIttew7pcABiboUziiRGRWWxQpNEV64yFcJ4tiyiG7
-         3h1w==
+        bh=2jFhzKfinvjesvKqfsKBtAXXypB+TaraaDFfQERoL54=;
+        b=bDdM1pOLrlnncPQAKA7ZZ/qdCyqx2xrjZMEHf+rE8sLmxsneEhJD4ZjCxJ3YnP0NbL
+         y55VMGWZ2R15caDNx5oWlp6bDGF0eldFfOkV30T4pQtKEebcrI0oqq31g4PmDFMMiLJp
+         1+qfxRLw58Jfppk7RASgBthSN0dYsTTwr5TCT36+KLiq0Xp94OWK4pclOaIeGxSDhaQ+
+         n5s9uJSFxdkCjA0EzxpBMYFqSuoKQ4AsgxRsR9u6r0swIvcTgML8dHjo80KAzt/PjoWS
+         gc4/uMyR33lTA29rfOJ/mxZCkX5bE93Ey+u71WxJDI9Hgi8DnJ4UHFrF2K5tRYPC04Ek
+         3lQg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1683477191; x=1686069191;
+        d=1e100.net; s=20221208; t=1683477189; x=1686069189;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=TjbQS9oDNYnZqR9VqoEDTSEEgD7t/YLjkFw/kemAwvE=;
-        b=CnfItiIWwjiLqsfAm+oYrMaIXekQuw32i4gpcFkyLnhcNPeTCX/plAITGurV64Jgz8
-         aB0qr3By5+94zLLgVe5Qx7a16XU7KI5qEHAfDVos0/ZR5zgVWorIoz/UhOJ+VXEcqdxB
-         iqVA7F9+cuhOILwx1TufE3TP6aMpIRhWkLb+3uwZMaxJrw/k16IzULkIworA6S+1aErl
-         fu0KSFvjqcAXyy5qC2ef5PA+Vcc1QJFOmItvDvp1Sp3m35A15Sj8KyjjrGIlJz7fJLpx
-         F98oPaX/MQ9kxsSU/dYaCXMxMOg/Z9+ICbibORfnNWuEBgNKCfpzcz5ju0msa8ebzg/m
-         FgNA==
-X-Gm-Message-State: AC+VfDwvI1dTwd0Gu9pDE63OCF1igv7/9UkR51aFA3jRc4+0TMrnyM0R
-	HEkp3kA3/njzx50dJLZLpkUlz9XObGY=
-X-Google-Smtp-Source: ACHHUZ5JeskXZX9e6tB/Uk5XiDxUIgEAuFBf5cBpvpttUB9NVhv+ZU+Jh8AMjgN5SXDlGYtedB/d5A==
-X-Received: by 2002:a0d:d754:0:b0:559:f038:456b with SMTP id z81-20020a0dd754000000b00559f038456bmr8647360ywd.13.1683477191068;
-        Sun, 07 May 2023 09:33:11 -0700 (PDT)
+        bh=2jFhzKfinvjesvKqfsKBtAXXypB+TaraaDFfQERoL54=;
+        b=hQHbtD+V9XHrJpjT41ip+OL4IDaXkW3Yorx4FxtcPWeGPEyX4xeYTmEpMCTBSw5H7n
+         Nrp/a+DHng8+LObfKnlxZD2V+m8VcDb1oQuoPaGqYbyM++A9fv2xm2Wf3yPjRTmqgCGy
+         XxaPFZF+ttxg9fRrR/x1WmFOFRepx+cK32QQbH84Qr8n5jnZksluG964OUxRqiMpcldu
+         0sgJLEYQAUiWeeOGKQmyqEl9PSa8+LjbVJsr4kYvMsITlslKP+08x32iJ0SLgqImkVqd
+         bVXt+dE7F0eX7klkHQmNtyq7T0H4SFW5E1irWW75nxbIXAWcZM8csuFd4qfQUMfL84ow
+         AKcw==
+X-Gm-Message-State: AC+VfDyQu1KMzw5xUZuv0AGB+oQpv5oFYa9mpblxL8ICqN4AjhFPG+Ny
+	H5YMrehT5YyDMzFyz8Q/lfC/z1JFPd8=
+X-Google-Smtp-Source: ACHHUZ6LFMhGgbdpwGMfgtItYgg1zj5jptCw/oDoVZyMgKHBTJOrrG9WWenvhcOUSyqTraRu4XVxzA==
+X-Received: by 2002:a0d:d581:0:b0:55a:3486:6f5b with SMTP id x123-20020a0dd581000000b0055a34866f5bmr8333144ywd.13.1683477188762;
+        Sun, 07 May 2023 09:33:08 -0700 (PDT)
 Received: from keaua.attlocal.net ([2600:1700:9190:ba10:b2f5:e641:5b7c:2972])
-        by smtp.gmail.com with ESMTPSA id q82-20020a817555000000b0055dbeb68f7asm1113524ywc.69.2023.05.07.09.33.10
+        by smtp.gmail.com with ESMTPSA id q82-20020a817555000000b0055dbeb68f7asm1113524ywc.69.2023.05.07.09.33.08
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 07 May 2023 09:33:10 -0700 (PDT)
+        Sun, 07 May 2023 09:33:08 -0700 (PDT)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>,
+Cc: Wang Mingyu <wangmy@fujitsu.com>,
 	Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][mickledore][PATCH 05/29] libgpiod: install the libgpiosim header
-Date: Sun,  7 May 2023 12:32:41 -0400
-Message-Id: <20230507163305.3261044-5-akuster808@gmail.com>
+Subject: [meta-oe][mickledore][PATCH 02/29] redis: upgrade 7.0.10 -> 7.0.11
+Date: Sun,  7 May 2023 12:32:38 -0400
+Message-Id: <20230507163305.3261044-2-akuster808@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20230507163305.3261044-1-akuster808@gmail.com>
 References: <20230507163305.3261044-1-akuster808@gmail.com>
@@ -62,40 +62,35 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sun, 07 May 2023 16:33:13 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102335
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102332
 
-From: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
+From: Wang Mingyu <wangmy@fujitsu.com>
 
-This header is used for building tests. While libgpiod can access it
-from the source tree, the python bindings that live in a separate recipe
-must be able to use it from its recipe sysroot.
-
-Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 62cd19e3f4b971483d6250c9ca64be12758e89f8)
+(cherry picked from commit 34153d91b47765eedb3f0010ec7bc367a00c82d6)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-oe/recipes-support/libgpiod/libgpiod_2.0.bb | 6 ++++++
- 1 file changed, 6 insertions(+)
+ .../recipes-extended/redis/{redis_7.0.10.bb => redis_7.0.11.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-extended/redis/{redis_7.0.10.bb => redis_7.0.11.bb} (96%)
 
-diff --git a/meta-oe/recipes-support/libgpiod/libgpiod_2.0.bb b/meta-oe/recipes-support/libgpiod/libgpiod_2.0.bb
-index becc9adb29..179fe170e2 100644
---- a/meta-oe/recipes-support/libgpiod/libgpiod_2.0.bb
-+++ b/meta-oe/recipes-support/libgpiod/libgpiod_2.0.bb
-@@ -15,7 +15,13 @@ S = "${WORKDIR}/libgpiod-2.0"
- PACKAGECONFIG[tests] = "--enable-tests --enable-gpioset-interactive,--disable-tests,kmod util-linux glib-2.0 catch2 libedit"
- PACKAGECONFIG[gpioset-interactive] = "--enable-gpioset-interactive,--disable-gpioset-interactive,libedit"
+diff --git a/meta-oe/recipes-extended/redis/redis_7.0.10.bb b/meta-oe/recipes-extended/redis/redis_7.0.11.bb
+similarity index 96%
+rename from meta-oe/recipes-extended/redis/redis_7.0.10.bb
+rename to meta-oe/recipes-extended/redis/redis_7.0.11.bb
+index 5d21f7e877..4626044781 100644
+--- a/meta-oe/recipes-extended/redis/redis_7.0.10.bb
++++ b/meta-oe/recipes-extended/redis/redis_7.0.11.bb
+@@ -19,7 +19,7 @@ SRC_URI = "http://download.redis.io/releases/${BP}.tar.gz \
+            file://GNU_SOURCE-7.patch \
+            file://0006-Define-correct-gregs-for-RISCV32.patch \
+            "
+-SRC_URI[sha256sum] = "1dee4c6487341cae7bd6432ff7590906522215a061fdef87c7d040a0cb600131"
++SRC_URI[sha256sum] = "ce250d1fba042c613de38a15d40889b78f7cb6d5461a27e35017ba39b07221e3"
  
-+PACKAGES =+ "${PN}-ptest-dev"
- FILES:${PN}-tools += "${bindir}/gpionotify"
- FILES:${PN}-ptest += "${libdir}/libgpiosim.so.*"
-+FILES:${PN}-ptest-dev += "${includedir}/gpiosim.h"
+ inherit autotools-brokensep update-rc.d systemd useradd
  
- RRECOMMENDS:${PN}-ptest += "kernel-module-gpio-sim"
-+
-+do_install_ptest:append() {
-+    install -m 0644 ${S}/tests/gpiosim/gpiosim.h ${D}${includedir}/gpiosim.h
-+}
 -- 
 2.25.1
 
