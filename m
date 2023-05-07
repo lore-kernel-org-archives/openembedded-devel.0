@@ -2,57 +2,57 @@ Return-Path: <Martin.Jansa@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 57AC2C7EE2D
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 55616C7EE26
 	for <webhook@archiver.kernel.org>; Sun,  7 May 2023 22:44:25 +0000 (UTC)
-Received: from mail-ej1-f48.google.com (mail-ej1-f48.google.com [209.85.218.48])
- by mx.groups.io with SMTP id smtpd.web10.94803.1683499456321146400
+Received: from mail-ej1-f52.google.com (mail-ej1-f52.google.com [209.85.218.52])
+ by mx.groups.io with SMTP id smtpd.web10.94804.1683499457328907988
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 07 May 2023 15:44:16 -0700
+ Sun, 07 May 2023 15:44:17 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=HmCVaDVI;
- spf=pass (domain: gmail.com, ip: 209.85.218.48, mailfrom: martin.jansa@gmail.com)
-Received: by mail-ej1-f48.google.com with SMTP id a640c23a62f3a-965fc25f009so404295966b.3
-        for <openembedded-devel@lists.openembedded.org>; Sun, 07 May 2023 15:44:16 -0700 (PDT)
+ dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=lekhCm5U;
+ spf=pass (domain: gmail.com, ip: 209.85.218.52, mailfrom: martin.jansa@gmail.com)
+Received: by mail-ej1-f52.google.com with SMTP id a640c23a62f3a-9661047f8b8so299394366b.0
+        for <openembedded-devel@lists.openembedded.org>; Sun, 07 May 2023 15:44:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1683499455; x=1686091455;
+        d=gmail.com; s=20221208; t=1683499456; x=1686091456;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=eLJJ2RyW5Xk75IKfV1Wel0u/jh5JIZW4xVSjxaXuwG0=;
-        b=HmCVaDVIYlJWUEUBW2Ko2tc6r7v66XuKANBs3dn2Rp8/frLcclpKfSkzgJSPok0eYx
-         Bd/zuCjpwlMzA9QRvJWTHAdoOJKaIJ00etBkYzyS+aJ1tugXcSwpx5N9wAPH5oPX4dS1
-         TtSfaO0KszsmAW3Jea/2+zjcOY90Wkl4Nh1yU29RBL1u2/icoHZgAOh8zVSn81dbZlE0
-         CQKx7dVj8Un7tcvwbZyqgJNW4fn2lPZVVolAUl80Dxe+Ib3IJ1k09FkfMlceATfYNfBi
-         PyYKqNJTDheeZUO9r2JChNlfu47RgZdYmwzeH/5wObD2T70D21sEAxsqrT3N5zXxfa31
-         oc4A==
+        bh=aY2ue3Q+SafhqHeecxwT/ai89xf+1gKjb4ppWhy7flo=;
+        b=lekhCm5UARDvNpP5g7+4ohJws8ByD/VkclZTK7Eb879+0HBWGrfvZoh3o2WhS8kqkM
+         7nnpB76UpRHHiFv3tU1VaeU04N3w8ZOb0uREuWDrh8MZ6a2L9sS12Uk9BBDZGSSx/g9O
+         vo6tz3nPVGnn9pNP5lj+CjqcxyKnMPnEGJCqDqzANuga2A8owrNCjtvyYWzUHczKay7h
+         xiUJfw26HiZ+AOfnKixClEb4hAcGyZlc+MM27mZ5I7NuQeGWWsiUG0HvDh8ghnnFJEo4
+         eUM+441cWtHRQPOFjdouZ1X22Yj69xGGP48oEOQUZJ7aCM8n/MuprasO9cWEzpsDmHby
+         Pz4Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1683499455; x=1686091455;
+        d=1e100.net; s=20221208; t=1683499456; x=1686091456;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=eLJJ2RyW5Xk75IKfV1Wel0u/jh5JIZW4xVSjxaXuwG0=;
-        b=ex32S/N1PkfJvEOoxI41Yb4ora18zACUM9QZ6YyzrV+3NT4BE/Z3shwTxYh5zlnkB7
-         6aOq1UfZ6ry4K3KVHtciEhFPLJBHrNFh5Jij0otXZEMyLSP0wzEk4wKUy7sRPNT+7Ks4
-         F+f+JS3p2EQNCvehadaU7p0cm7/jAn+jDzUb4mtgrTdylW4YpIaxQv/kuzjKGAtG4OjU
-         C2ifCmpuXu67mTDFpUam6suO2uyOSw7y8DFTu0q1X2lFqtqU9F4+ZX3vAf7Bc4BQqIhz
-         l08LL7nwvkG4k8omahAeTko9LFF1FdFcXR8CcRxiDClZrXT96/3p+eQ5PgoV0vyONNX8
-         1xKA==
-X-Gm-Message-State: AC+VfDzl99t8eujYVOYJTdq7nO3R9afBUnpQpbPS7AUc3fWrUjk+ZjVj
-	E2qWKEweNCcfaSTFN5xBi8e15lRFdg4=
-X-Google-Smtp-Source: ACHHUZ4NI6H+s9p5GLo9i6MXHJW9bxNLL4Pr2/jd8XDCxllkHov8rnPHRmlArRGQJ1D8chuib9Gt7A==
-X-Received: by 2002:a17:907:9616:b0:94f:1a23:2f1b with SMTP id gb22-20020a170907961600b0094f1a232f1bmr7704801ejc.24.1683499454860;
-        Sun, 07 May 2023 15:44:14 -0700 (PDT)
+        bh=aY2ue3Q+SafhqHeecxwT/ai89xf+1gKjb4ppWhy7flo=;
+        b=FSMIYoTXwZSl69uqQirT2dkLDSQNWBoGD5x3HB/tlppz4OYCrOgnDFXWyQDItehhme
+         1tgtS8d+0AhyLSJgLg5Kdistxg9CraBP+pLhOxKjivcf8l1LUTUJ59MYP5T0o5jQOheY
+         GNfLQrSd44ftDa+lj3LxSAE3bgrqYO4+VDEraN9C2fFFQZzkUKdqzsvzhjxWD6x3bLXg
+         l7q2+GIpNW2d5QHLMPk1ZUhkp/2+v4H95vxJmb/YDeYVRLTlYJR4IRGtJEOBqc1VqvpB
+         8ju3M2SCw14u4bJzfvKfZ6W0qGpL73cJilCGGeRY6EjfSPmzpld2Z+1tD4cHLH0GLkTV
+         iW/w==
+X-Gm-Message-State: AC+VfDy0xeF/PNAl8OaXy4TkOrlYIXdAM3VJOiwB70FD6IWfxZLXjJ6y
+	nLVcfMCRBeVFzl4OEhWmdem933r4b58=
+X-Google-Smtp-Source: ACHHUZ5gheHrFp7sSmf3n/xO9k1yoCAA/onyl9cGv8dRh46y7y01GHHmmg8e678tkanYLti2SeCHVQ==
+X-Received: by 2002:a17:907:da4:b0:966:4d99:b0aa with SMTP id go36-20020a1709070da400b009664d99b0aamr2298654ejc.59.1683499455701;
+        Sun, 07 May 2023 15:44:15 -0700 (PDT)
 Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
-        by smtp.gmail.com with ESMTPSA id nb35-20020a1709071ca300b009663b7c95a3sm1643423ejc.144.2023.05.07.15.44.14
+        by smtp.gmail.com with ESMTPSA id z6-20020a170906240600b0094f4d2d81d9sm4140134eja.94.2023.05.07.15.44.15
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 07 May 2023 15:44:14 -0700 (PDT)
+        Sun, 07 May 2023 15:44:15 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Martin Jansa <Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 13/16] libtomcrypt: pass LIBPATH to fix installed-vs-shipped with multilib
-Date: Mon,  8 May 2023 00:43:51 +0200
-Message-Id: <20230507224354.1149327-13-Martin.Jansa@gmail.com>
+Subject: [meta-oe][PATCH 14/16] nanopb: fix installed-vs-shipped with multilib
+Date: Mon,  8 May 2023 00:43:52 +0200
+Message-Id: <20230507224354.1149327-14-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20230507224354.1149327-1-Martin.Jansa@gmail.com>
 References: <20230507224354.1149327-1-Martin.Jansa@gmail.com>
@@ -62,37 +62,125 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sun, 07 May 2023 22:44:25 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102375
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102376
 
 * fixes:
-  ERROR: QA Issue: libtomcrypt: Files/directories were installed but not shipped in any package:
+  ERROR: QA Issue: nanopb: Files/directories were installed but not shipped in any package:
     /usr/lib
-    /usr/lib/libtomcrypt.so.1.0.1
-    /usr/lib/libtomcrypt.so.1
-    /usr/lib/libtomcrypt.so
-    /usr/lib/pkgconfig
-    /usr/lib/pkgconfig/libtomcrypt.pc
+    /usr/lib/python3.11
+    /usr/lib/python3.11/site-packages
+    /usr/lib/python3.11/site-packages/proto
+    /usr/lib/python3.11/site-packages/proto/nanopb_pb2.py
+    /usr/lib/python3.11/site-packages/proto/nanopb.proto
+    /usr/lib/python3.11/site-packages/proto/_utils.py
   Please set FILES such that these items are packaged. Alternatively if they are unneeded, avoid installing them or delete them within do_install.
-  libtomcrypt: 6 installed and not shipped files. [installed-vs-shipped]
+  nanopb: 7 installed and not shipped files. [installed-vs-shipped]
 
-  when libdir is /usr/lib64 with multilib
+when libdir is /usr/lib64 with multilib.
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-oe/recipes-crypto/libtomcrypt/libtomcrypt_1.18.2.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ ...llow-to-set-PYTHON_INSTDIR-from-outs.patch | 67 +++++++++++++++++++
+ .../recipes-devtools/nanopb/nanopb_0.4.7.bb   |  6 +-
+ 2 files changed, 72 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/dynamic-layers/meta-python/recipes-devtools/nanopb/nanopb/0001-CMakeLists.txt-allow-to-set-PYTHON_INSTDIR-from-outs.patch
 
-diff --git a/meta-oe/recipes-crypto/libtomcrypt/libtomcrypt_1.18.2.bb b/meta-oe/recipes-crypto/libtomcrypt/libtomcrypt_1.18.2.bb
-index 357fd0ab8d..b144338921 100644
---- a/meta-oe/recipes-crypto/libtomcrypt/libtomcrypt_1.18.2.bb
-+++ b/meta-oe/recipes-crypto/libtomcrypt/libtomcrypt_1.18.2.bb
-@@ -17,5 +17,5 @@ do_compile() {
- }
+diff --git a/meta-oe/dynamic-layers/meta-python/recipes-devtools/nanopb/nanopb/0001-CMakeLists.txt-allow-to-set-PYTHON_INSTDIR-from-outs.patch b/meta-oe/dynamic-layers/meta-python/recipes-devtools/nanopb/nanopb/0001-CMakeLists.txt-allow-to-set-PYTHON_INSTDIR-from-outs.patch
+new file mode 100644
+index 0000000000..474f0f1584
+--- /dev/null
++++ b/meta-oe/dynamic-layers/meta-python/recipes-devtools/nanopb/nanopb/0001-CMakeLists.txt-allow-to-set-PYTHON_INSTDIR-from-outs.patch
+@@ -0,0 +1,67 @@
++From 30c79d1b49839a15c05a0d0ca7e54787cd7988c6 Mon Sep 17 00:00:00 2001
++From: Martin Jansa <Martin.Jansa@gmail.com>
++Date: Thu, 4 May 2023 07:17:57 +0000
++Subject: [PATCH] CMakeLists.txt: allow to set PYTHON_INSTDIR from outside
++
++CMakeLists.txt used:
++
++find_package(Python REQUIRED COMPONENTS Interpreter)
++execute_process(
++    COMMAND ${Python_EXECUTABLE} -c
++        "import os.path, sys, sysconfig; print(os.path.relpath(sysconfig.get_path('purelib'), start=sys.prefix))"
++    OUTPUT_VARIABLE PYTHON_INSTDIR
++    OUTPUT_STRIP_TRAILING_WHITESPACE
++)
++
++but with python3native this returns:
++
++nanopb/0.4.7-r0/git $ ../recipe-sysroot-native/usr/bin/python3-native/python3 -c "import os.path, sys, sysconfig; print(os.path.relpath(sysconfig.get_path('purelib'), start=sys.prefix))"
++lib/python3.11/site-packages
++
++which doesn't respect target libdir which might be lib64 with multilib and with python3targetconfig
++it also doesn't work right because of the long relative path:
++
++nanopb/0.4.7-r0/build $ ../recipe-sysroot-native/usr/bin/python3-native/python3 -c "import os.path, sys, sysconfig; print(os.path.relpath(sysconfig.get_path('purelib'), start=sys.prefix))"
++../../../../../../../../../../../../usr/lib64/python3.11/site-packages
++
++CMake Error at cmake_install.cmake:46 (file):
++  file cannot create directory:
++  /OE/lge/build/starfish/nanbield/BUILD/work/o22-starfish-linux/nanopb/0.4.7-r0/image/usr/../../../../../../../../../../../../usr/lib64/python3.11/site-packages/proto.
++  Maybe need administrative privileges.
++
++Let CMake variable to be passed from the recipe to avoid this as we're already using
++${D}${PYTHON_SITEPACKAGES_DIR} in do_install:append anyway.
++
++Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
++Upstream-Status: Pending
++---
++ CMakeLists.txt | 16 +++++++++-------
++ 1 file changed, 9 insertions(+), 7 deletions(-)
++
++diff --git a/CMakeLists.txt b/CMakeLists.txt
++index 8d241c5..7d3f993 100644
++--- a/CMakeLists.txt
+++++ b/CMakeLists.txt
++@@ -39,13 +39,15 @@ if(NOT DEFINED CMAKE_INSTALL_CMAKEDIR)
++     set(CMAKE_INSTALL_CMAKEDIR "${CMAKE_INSTALL_LIBDIR}/cmake/nanopb")
++ endif()
++ 
++-find_package(Python REQUIRED COMPONENTS Interpreter)
++-execute_process(
++-    COMMAND ${Python_EXECUTABLE} -c
++-        "import os.path, sys, sysconfig; print(os.path.relpath(sysconfig.get_path('purelib'), start=sys.prefix))"
++-    OUTPUT_VARIABLE PYTHON_INSTDIR
++-    OUTPUT_STRIP_TRAILING_WHITESPACE
++-)
+++if(NOT DEFINED PYTHON_INSTDIR)
+++    find_package(Python REQUIRED COMPONENTS Interpreter)
+++    execute_process(
+++        COMMAND ${Python_EXECUTABLE} -c
+++            "import os.path, sys, sysconfig; print(os.path.relpath(sysconfig.get_path('purelib'), start=sys.prefix))"
+++        OUTPUT_VARIABLE PYTHON_INSTDIR
+++        OUTPUT_STRIP_TRAILING_WHITESPACE
+++    )
+++endif()
++ 
++ if(nanopb_BUILD_GENERATOR)
++     set(generator_protos nanopb)
+diff --git a/meta-oe/dynamic-layers/meta-python/recipes-devtools/nanopb/nanopb_0.4.7.bb b/meta-oe/dynamic-layers/meta-python/recipes-devtools/nanopb/nanopb_0.4.7.bb
+index 897caea2a7..9ad558146c 100644
+--- a/meta-oe/dynamic-layers/meta-python/recipes-devtools/nanopb/nanopb_0.4.7.bb
++++ b/meta-oe/dynamic-layers/meta-python/recipes-devtools/nanopb/nanopb_0.4.7.bb
+@@ -4,13 +4,17 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=9db4b73a55a3994384112efcdb37c01f"
  
- do_install() {
--    oe_runmake -f makefile.shared 'PREFIX=${prefix}' 'DESTDIR=${D}' install
-+    oe_runmake -f makefile.shared 'PREFIX=${prefix}' 'DESTDIR=${D}' 'LIBPATH=${libdir}' install
- }
+ DEPENDS = "protobuf-native"
+ 
+-SRC_URI = "git://github.com/nanopb/nanopb.git;branch=master;protocol=https"
++SRC_URI = "git://github.com/nanopb/nanopb.git;branch=master;protocol=https \
++    file://0001-CMakeLists.txt-allow-to-set-PYTHON_INSTDIR-from-outs.patch \
++"
+ SRCREV = "b97aa657a706d3ba4a9a6ccca7043c9d6fe41cba"
+ 
+ S = "${WORKDIR}/git"
+ 
+ inherit cmake python3native
+ 
++EXTRA_OECMAKE += "-DPYTHON_INSTDIR=${PYTHON_SITEPACKAGES_DIR}"
++
+ do_install:append() {
+     install -Dm 0755 ${S}/generator/nanopb_generator.py ${D}${bindir}/nanopb_generator.py
+     install -Dm 0755 ${S}/generator/protoc-gen-nanopb ${D}${bindir}/protoc-gen-nanopb
 -- 
 2.40.1
 
