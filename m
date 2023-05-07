@@ -2,56 +2,56 @@ Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3EC19C7EE31
-	for <webhook@archiver.kernel.org>; Sun,  7 May 2023 16:33:23 +0000 (UTC)
-Received: from mail-yw1-f178.google.com (mail-yw1-f178.google.com [209.85.128.178])
- by mx.groups.io with SMTP id smtpd.web11.69127.1683477191715428731
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2E372C77B7C
+	for <webhook@archiver.kernel.org>; Sun,  7 May 2023 16:33:33 +0000 (UTC)
+Received: from mail-yw1-f182.google.com (mail-yw1-f182.google.com [209.85.128.182])
+ by mx.groups.io with SMTP id smtpd.web10.69003.1683477203946252971
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 07 May 2023 09:33:15 -0700
+ Sun, 07 May 2023 09:33:24 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20221208 header.b=TSEFBtBf;
- spf=pass (domain: gmail.com, ip: 209.85.128.178, mailfrom: akuster808@gmail.com)
-Received: by mail-yw1-f178.google.com with SMTP id 00721157ae682-55a214572e8so56929867b3.0
-        for <openembedded-devel@lists.openembedded.org>; Sun, 07 May 2023 09:33:15 -0700 (PDT)
+ dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=TqHiQTYx;
+ spf=pass (domain: gmail.com, ip: 209.85.128.182, mailfrom: akuster808@gmail.com)
+Received: by mail-yw1-f182.google.com with SMTP id 00721157ae682-55d2e87048cso54955287b3.1
+        for <openembedded-devel@lists.openembedded.org>; Sun, 07 May 2023 09:33:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1683477195; x=1686069195;
+        d=gmail.com; s=20221208; t=1683477202; x=1686069202;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=McKbKw1AdSdOCKvYkfkQXM6UFRuiprHaax+4av6j2Ys=;
-        b=TSEFBtBfQznuMgm4ABzeCJLKEq50sYURbIrEdcnQH0pMDxa+6f6wcFiN/BEoIxiLry
-         jKYec7A7V9lPUbWG6NH+ntM5AxwEmOLCDTV3H2nFazPqyYYzB0kETdWcSWMeo4+5Bi6c
-         g9JeN1pGVNFU97j7X/+Y8A2zqubtgxhhhez/PGLeJDvDE6u+zgbJZFctRPBddgA9+bTo
-         9o39iTmPuuHPMtnHCgUQ2JF0qlP+z/vLF/+evsCbUSOs7bZUDLeFGDML+XBaD5xb/ORB
-         BL5Qti0wtKqNddQ8LQmz+OnW0CRQzAA/BNZXDz/AhTrDbMrw3KopULXzOeclJcW3VUuJ
-         tJjA==
+        bh=Me9CpbQnC259krrdJdqcTrRjsdFJmHtQ2zKF0N4ZAG0=;
+        b=TqHiQTYxVWPhdewm8Iq7sAQpedU0g1IbJqGQYHiCnIfzHh7Pwk03Y68Evcc6pEvE+u
+         vtuXsxJOWotOldEOTFT5yPFV4PBmR4Ol+vUvaZATygWvdz2lklCmN+3FdyETcGJzQFXV
+         paGD4JfiH10ePUDe9wi+JKLQbRhxzzxcalrN0zKjOzeqygGMoqSugZOk+mKUe053gjHt
+         sUyp4Wyb6WxFRHCeVs1JVA3xcQlVJMO3xWzVg+MHQmRDnrREUx+OukVrYzEk4ANo06ac
+         gHp+fxXsGT9ePWA5gaagmjpQuo6btjlsqrvxknTC6L7iZziJUWaMPPOSsgSnweyicwtO
+         ampg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1683477195; x=1686069195;
+        d=1e100.net; s=20221208; t=1683477202; x=1686069202;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=McKbKw1AdSdOCKvYkfkQXM6UFRuiprHaax+4av6j2Ys=;
-        b=USd6trj2EVcTvMbx8bpsoJPerRyMnUyJqSYPI/vaoPrQp/uf+JTFdCsYQD/3xEWDoa
-         TiKFKTrOMNp2cvo+tpTbgDHs1Lt+gOvKH+DZ3OZwgW8TcKCcoUZqck1bX24WOD6Z70g0
-         JxWWQPRIsY5piwOsChMvPK+kVWzTYktF1RcNzGgzNg8eFdeF24RwyyCZzF6KyRW+il1i
-         7OfIfja8jkk7PqX06iIYWFS8T7QG6rvo0Oxz9yBC8omJ3Yz/IJEgB40Dn91752NFUUYV
-         tPKXpvgmPPa1SVxkohK+NH490TlopCiJPg5i5Hf3ukD10Bjluj6anvPTWXyxGr0jzoho
-         NFwQ==
-X-Gm-Message-State: AC+VfDx1WJiwBc35o+1fBOTYrTwoHdY7kbc4OLNv5eplqSL3cQWGYODh
-	Z0z7trFY4KZHHE1MT7EYiwoSLb5XtRI=
-X-Google-Smtp-Source: ACHHUZ4H0+6xbZeacbqfS6GywibnLBKkUNeHS8xuRkuYFo0S5T50eE58bKJ/aNA29JarPmWecA52sg==
-X-Received: by 2002:a81:6007:0:b0:55a:9303:1fb4 with SMTP id u7-20020a816007000000b0055a93031fb4mr8294650ywb.32.1683477194966;
-        Sun, 07 May 2023 09:33:14 -0700 (PDT)
+        bh=Me9CpbQnC259krrdJdqcTrRjsdFJmHtQ2zKF0N4ZAG0=;
+        b=AAOQacoXAVwOlPpkXiI6vEh2Z5Se+BGISxaNYoRnC5D2hMB0S/jbhjCwgAsKvk6tpf
+         JugCuFV3ArXjtPwyxGjZYfN0dkeeaBujR+CGFTwfkJFyKnwzSlIfxdHFnTG0WXSdH+FM
+         eC0mDUQTniptzuUvOe6OScyBLoEObnujmGKaGvMFSrK0TcX4Knk2SkZQw8tM4PHpUN34
+         iySQ79CdbZLJTPyQQzxCdusDWoFnIsNn1HRit+CT8U7QSG7MZUJLmzfhyT4IiMVJbmzD
+         lxLfMnLLhzvTGtI+0n/rLb0a9nlh52ZrD6ehmcFtPmXhaIIJ0k6FFEnKKZvwBKV6irWk
+         TyGA==
+X-Gm-Message-State: AC+VfDzb7KBrS4j1nyBCxqmrFFx8o+PLrHPA8pPtXCGx50Pax/ie0sHV
+	PjvDWIQLuvnU7FH+76XpzeoLdvZgWYA=
+X-Google-Smtp-Source: ACHHUZ57csH108vgnmS8QdH8QNrK6gdf8AO2FpMuGp36bWjmCO18m8A/wTT6IJ6g+8tPQmRCM4NQyw==
+X-Received: by 2002:a81:8104:0:b0:55d:7d07:7fbb with SMTP id r4-20020a818104000000b0055d7d077fbbmr8576667ywf.27.1683477202500;
+        Sun, 07 May 2023 09:33:22 -0700 (PDT)
 Received: from keaua.attlocal.net ([2600:1700:9190:ba10:b2f5:e641:5b7c:2972])
-        by smtp.gmail.com with ESMTPSA id q82-20020a817555000000b0055dbeb68f7asm1113524ywc.69.2023.05.07.09.33.14
+        by smtp.gmail.com with ESMTPSA id q82-20020a817555000000b0055dbeb68f7asm1113524ywc.69.2023.05.07.09.33.21
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 07 May 2023 09:33:14 -0700 (PDT)
+        Sun, 07 May 2023 09:33:21 -0700 (PDT)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][mickledore][PATCH 09/29] libcereal: Fix TMPDIR leaking into debug_str section
-Date: Sun,  7 May 2023 12:32:45 -0400
-Message-Id: <20230507163305.3261044-9-akuster808@gmail.com>
+Subject: [meta-oe][mickledore][PATCH 15/29] netkit-ftp: Update to debian patch 34
+Date: Sun,  7 May 2023 12:32:51 -0400
+Message-Id: <20230507163305.3261044-15-akuster808@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20230507163305.3261044-1-akuster808@gmail.com>
 References: <20230507163305.3261044-1-akuster808@gmail.com>
@@ -60,78 +60,41 @@ Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 07 May 2023 16:33:23 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102339
+ <openembedded-devel@lists.openembedded.org>; Sun, 07 May 2023 16:33:33 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102345
 
 From: Khem Raj <raj.khem@gmail.com>
 
-Fixes errors like
-File /usr/lib/libcereal/ptest/tests/.debug/test_unordered_map in package libcereal-dbg contains reference to TMPDIR
+drop md5 SRC_URI checksums while here
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 8eb74815c2e6ddebd7f28ff703b4b91f90b468d3)
+(cherry picked from commit 29c80a7350a56b6f7c4e27ed5aa0747ca570d2fd)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- ...001-doctest-Do-not-use-unnamed-class.patch | 38 +++++++++++++++++++
- .../libcereal/libcereal_1.3.2.bb              |  1 +
- 2 files changed, 39 insertions(+)
- create mode 100644 meta-oe/recipes-support/libcereal/files/0001-doctest-Do-not-use-unnamed-class.patch
+ .../recipes-netkit/netkit-ftp/netkit-ftp_0.17.bb           | 7 ++-----
+ 1 file changed, 2 insertions(+), 5 deletions(-)
 
-diff --git a/meta-oe/recipes-support/libcereal/files/0001-doctest-Do-not-use-unnamed-class.patch b/meta-oe/recipes-support/libcereal/files/0001-doctest-Do-not-use-unnamed-class.patch
-new file mode 100644
-index 0000000000..9396cc5d01
---- /dev/null
-+++ b/meta-oe/recipes-support/libcereal/files/0001-doctest-Do-not-use-unnamed-class.patch
-@@ -0,0 +1,38 @@
-+From 03bbb1b055c41ec652470f775b55a7cf80d664ef Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Mon, 17 Apr 2023 16:46:12 -0700
-+Subject: [PATCH] doctest: Do not use unnamed class
-+
-+When compiling with clang this results in emitting absolute path into
-+debug info, especially .debug_str section has
-+
-+~(unnamed class at /mnt/b/yoe/master/build/tmp/work/core2-64-yoe-linux-musl/libcereal/1.3.2+gitAUTOINC+ebef1e9298-r0/git/unittests/doctest.h:6428:5)
-+(unnamed class at /mnt/b/yoe/master/build/tmp/work/core2-64-yoe-linux-musl/libcereal/1.3.2+gitAUTOINC+ebef1e9298-r0/git/unittests/doctest.h:6428:5)
-+
-+Therefore use a name for the class instead and help get rid of this
-+absolute path in debug info. This fixes
-+
-+File /usr/lib/libcereal/ptest/tests/.debug/test_unordered_map in package libcereal-dbg contains reference to TMPDIR
-+
-+Upstream-Status: Submitted [https://github.com/USCiLab/cereal/pull/788]
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ unittests/doctest.h | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/unittests/doctest.h b/unittests/doctest.h
-+index cd5b44d6..e6d8f7f9 100644
-+--- a/unittests/doctest.h
-++++ b/unittests/doctest.h
-+@@ -6424,7 +6424,7 @@ void Context::setCout(std::ostream* out) { p->cout = out; }
-+ static class DiscardOStream : public std::ostream
-+ {
-+ private:
-+-    class : public std::streambuf
-++    class discardBufStream: public std::streambuf
-+     {
-+     private:
-+         // allowing some buffering decreases the amount of calls to overflow
-+-- 
-+2.40.0
-+
-diff --git a/meta-oe/recipes-support/libcereal/libcereal_1.3.2.bb b/meta-oe/recipes-support/libcereal/libcereal_1.3.2.bb
-index f15927554b..c5f26ecb4e 100644
---- a/meta-oe/recipes-support/libcereal/libcereal_1.3.2.bb
-+++ b/meta-oe/recipes-support/libcereal/libcereal_1.3.2.bb
-@@ -21,6 +21,7 @@ SRCREV = "ebef1e929807629befafbb2918ea1a08c7194554"
- SRC_URI = "git://github.com/USCiLab/cereal.git;branch=master;protocol=https \
-            file://0001-sandbox-Do-not-use-int8_t-in-std-uniform_int_distrib.patch \
-            file://0001-cmake-Use-idirafter-instead-of-isystem.patch \
-+           file://0001-doctest-Do-not-use-unnamed-class.patch \
-            file://run-ptest \
- "
+diff --git a/meta-networking/recipes-netkit/netkit-ftp/netkit-ftp_0.17.bb b/meta-networking/recipes-netkit/netkit-ftp/netkit-ftp_0.17.bb
+index 1ba0dd46a7..31fdd9e4d8 100644
+--- a/meta-networking/recipes-netkit/netkit-ftp/netkit-ftp_0.17.bb
++++ b/meta-networking/recipes-netkit/netkit-ftp/netkit-ftp_0.17.bb
+@@ -6,15 +6,12 @@ LICENSE = "BSD-4-Clause"
+ LIC_FILES_CHKSUM = "file://ftp/ftp.c;beginline=2;endline=3;md5=2d40a75a50d83b8f6317b3f53db72bfa"
+ 
+ SRC_URI = "${DEBIAN_MIRROR}/main/n/netkit-ftp/netkit-ftp_${PV}.orig.tar.gz;name=archive \
+-           ${DEBIAN_MIRROR}/main/n/netkit-ftp/netkit-ftp_${PV}-31.debian.tar.xz;name=patch31 \
++           ${DEBIAN_MIRROR}/main/n/netkit-ftp/netkit-ftp_${PV}-34.debian.tar.xz;name=patch34 \
+            file://Add_ARG_MAX_define.patch \
+            file://0001-ftp-include-sys-types.h-for-u_long.patch \
+            "
+-
+-SRC_URI[archive.md5sum] = "94441610c9b86ef45c4c6ec609444060"
+ SRC_URI[archive.sha256sum] = "61c913299b81a4671ff089aac821329f7db9bc111aa812993dd585798b700349"
+-SRC_URI[patch31.md5sum] = "93d71e28ce70df69e080c7f90da63cac"
+-SRC_URI[patch31.sha256sum] = "4edd46a32d70daa7ba00f0ebf0118dc5d17dff23d6e46aa21a2722be2e22d1c1"
++SRC_URI[patch34.sha256sum] = "716b984bc6926ed98345fa4e68adcee2efcf08d0f7315d6be8ad6de76f255748"
+ 
+ inherit autotools-brokensep update-alternatives
  
 -- 
 2.25.1
