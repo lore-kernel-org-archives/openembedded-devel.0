@@ -2,57 +2,57 @@ Return-Path: <Martin.Jansa@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0BBF3C7EE22
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 07455C77B7D
 	for <webhook@archiver.kernel.org>; Sun,  7 May 2023 22:44:15 +0000 (UTC)
-Received: from mail-ej1-f47.google.com (mail-ej1-f47.google.com [209.85.218.47])
- by mx.groups.io with SMTP id smtpd.web11.94681.1683499454201866379
+Received: from mail-ed1-f50.google.com (mail-ed1-f50.google.com [209.85.208.50])
+ by mx.groups.io with SMTP id smtpd.web11.94680.1683499453520055299
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 07 May 2023 15:44:14 -0700
+ Sun, 07 May 2023 15:44:13 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=BIjlEQ+2;
- spf=pass (domain: gmail.com, ip: 209.85.218.47, mailfrom: martin.jansa@gmail.com)
-Received: by mail-ej1-f47.google.com with SMTP id a640c23a62f3a-965ddb2093bso447799666b.2
+ dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=VMvjJwcE;
+ spf=pass (domain: gmail.com, ip: 209.85.208.50, mailfrom: martin.jansa@gmail.com)
+Received: by mail-ed1-f50.google.com with SMTP id 4fb4d7f45d1cf-50bd37ca954so43817013a12.0
         for <openembedded-devel@lists.openembedded.org>; Sun, 07 May 2023 15:44:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20221208; t=1683499452; x=1686091452;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=jFnMjdKHZrQ3dzidaWecklZb5uZ2WxXnRul0G3BsTfQ=;
-        b=BIjlEQ+2ChXdvTF0fdCmzxnrtSVQnkPamgezEesfNUv/ENbY1h4m+DxkVTQ9wbNFQb
-         Bshssqqdnjo3w+SST0S6CtWWebdKIyxZKTRZeoiZANDPlzJL30l4N8YNxFnW2ToHpWAB
-         IQDVuaRZREXQ0Pj1TDG9F0G6p9Qjtu3MehLhDeGUtvQp62DH7c/wtlJbq5BuLB6wEfGj
-         hL1Erxo8xNHcIndTy7QVo/OrxGtwov/GU8rhVGwYKynZuFuwwnFAzVHCklFm2QLC+ir3
-         HDnkRWmm6nZtTJCgAJWOUtOC+8VAp1GT0PXvfStndMwaQ3xtfAp8E2zPt7DvYyWzM1px
-         qOdw==
+        bh=3t4LDF4mf+RShlb3NtiAFabsZyP/pFAORBFzRLxwTBg=;
+        b=VMvjJwcEoRb3NizDwiQlYiOoD1o84+psaCTWRzuTnrHglDSet+qPq9zJHn6FPrthPt
+         TbomS1Kn0nwtECHl6Xxp828lUkhXUsJKdRy+oVRBw9pt5j8C0EV6HN1hDbtUhldq/4z7
+         e33RwdF8b4ouEX25tUu2Tt/nBseGBG7/m/ZjoVeDM7dywckvIJbVrzYPpP9xizm+wqk5
+         MKwN6IemX4v9oegaX7Youd/5+l6PUN/PCzbLHxyLM6paD3/jI8xakMpXaOYjhtRyQU2/
+         akT9L8AES6+g3nOP3igM8LyAVR18f/axGzfaCS0Fjx787cCMljhlx6IIqThqSiv1we07
+         1NDw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20221208; t=1683499452; x=1686091452;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=jFnMjdKHZrQ3dzidaWecklZb5uZ2WxXnRul0G3BsTfQ=;
-        b=d+3A1yWnl8lBHoXsiyIhlin3agwZfEiToEw5+ScQmngwuqxkJmP4Ybfcqte0T4BAmE
-         Xx1zW2jsX2XvUopeX6/3Q+fsjHaXxkGD4RBhQBM978cUAXo1wqSjHv1P0rYDgMmhwXYC
-         qIs+/mzfakNZUVyLnUYpxfmIgR93RjoO76gyRXtyGGfbo3kDdYINMLRSe2u9WHIEANkN
-         Lyn01h8fs00EeWUYKWXeV2HOnQLTXO1R0XIKROV0fwuUFdWrGjHLTYh7m7uMAxhqOEYW
-         p+vGkFjTupqGmOujOCUlbAFZCTWBkhBs2Ui/Ur7icLf94GGcnP37+gppAv3RFsSnvZck
-         w3Aw==
-X-Gm-Message-State: AC+VfDzzoxTAcVm0/SrwUrwV+zzFs2Wjqx0JMuz6qKo1vzoucXMrUAb8
-	kSIxdUb1Rh6DvyzwPGUNn9b6uZWxIxk=
-X-Google-Smtp-Source: ACHHUZ6jZ8J0rsQYa7IpSDcSphfvUUB4E9UcTkRniea1gur3Sybhphv0Jzhs7oeeszRfV3tXCG49bQ==
-X-Received: by 2002:a17:906:4fd1:b0:959:8575:2635 with SMTP id i17-20020a1709064fd100b0095985752635mr7681629ejw.17.1683499452666;
+        bh=3t4LDF4mf+RShlb3NtiAFabsZyP/pFAORBFzRLxwTBg=;
+        b=F13vVeIInUZht+uryXsLerGo64TRZr+/3qF8+SscIoXgNJMI3W4mtuJExRexshQ2nF
+         8ia2mfsTj4JSxaE88lmGx9kzclvTy4p2/a0SOZKYK4o6ZOMrV4WSqMOsYa5FN7IkTIQG
+         FF5pXQW16YAVy1ed5r2RbCQQdLVpbbCgve1qRxBUAwZ/v2Ez2JygSPRO508ktVnQreXJ
+         V80uImGUmQ+E41DKDwz3hnnX6Aj/d0kk54drXC51pXz/1wxGaMMTtyxFu0vcu55mZzds
+         Rhj4YBgzVwG+2aR1GE2uenTb/Yj+qxvJ65eyBWEYGvaWdUHRyddYp5bGJhhMus0E/sbX
+         ZAmQ==
+X-Gm-Message-State: AC+VfDxgVU+O080c8hvD130k6vWJbTPk0rMgkxw9uppfSCukvfv9SoPd
+	fn6uDVme5SVQ+XhQSkWxnAzR4GPCLN8=
+X-Google-Smtp-Source: ACHHUZ7R4foymFrJAbHx7Yf/CRLS3JxkgjcjAoh00DISpl/s8+9UM0nbHIE0Ocl7UvAUxGBvHz/hSQ==
+X-Received: by 2002:a17:907:3e2a:b0:966:4973:b35 with SMTP id hp42-20020a1709073e2a00b0096649730b35mr2271278ejc.22.1683499452010;
         Sun, 07 May 2023 15:44:12 -0700 (PDT)
 Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
-        by smtp.gmail.com with ESMTPSA id jx4-20020a170907760400b00965f4171642sm3463869ejc.125.2023.05.07.15.44.12
+        by smtp.gmail.com with ESMTPSA id w11-20020a170907270b00b009600ce4fb53sm4163967ejk.37.2023.05.07.15.44.11
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 07 May 2023 15:44:12 -0700 (PDT)
+        Sun, 07 May 2023 15:44:11 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Martin Jansa <Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 10/16] cpulimit: fix do_install with multilib
-Date: Mon,  8 May 2023 00:43:48 +0200
-Message-Id: <20230507224354.1149327-10-Martin.Jansa@gmail.com>
+Subject: [meta-oe][PATCH 09/16] spice-gtk: respect gobject-introspection-data
+Date: Mon,  8 May 2023 00:43:47 +0200
+Message-Id: <20230507224354.1149327-9-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20230507224354.1149327-1-Martin.Jansa@gmail.com>
 References: <20230507224354.1149327-1-Martin.Jansa@gmail.com>
@@ -62,42 +62,66 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sun, 07 May 2023 22:44:14 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102372
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102371
 
-* fixes:
-  DEBUG: Executing shell function do_install
-  install: cannot stat 'TOPDIR/.../lib32-cpulimit/0.2-r0/git/src/lib32-cpulimit': No such file or directory
-  WARNING: exit code 1 from a shell command.
+* without gobject-introspection-data in DISTRO_FEATURES the bbclass
+  correctly disables it:
 
-* drop strange 'g...@' from SRC_URI
+  $ bitbake-getvar -r spice-gtk EXTRA_OEMESON
+  #
+  # $EXTRA_OEMESON [6 operations]
+  #   :append /OE/build/oe-core/openembedded-core/meta/classes-recipe/meson.bbclass:44
+  #     " ${PACKAGECONFIG_CONFARGS}"
+  #   :prepend[class-target] /OE/build/oe-core/openembedded-core/meta/classes-recipe/gobject-introspection.bbclass:28
+  #     "${@['', '${GIRMESONTARGET}'][d.getVar('GIR_MESON_OPTION') != '']}"
+  #   :prepend[class-native] /OE/build/oe-core/openembedded-core/meta/classes-recipe/gobject-introspection.bbclass:33
+  #     "${@['', '${GIRMESONBUILD}'][d.getVar('GIR_MESON_OPTION') != '']}"
+  #   :prepend[class-nativesdk] /OE/build/oe-core/openembedded-core/meta/classes-recipe/gobject-introspection.bbclass:34
+  #     "${@['', '${GIRMESONBUILD}'][d.getVar('GIR_MESON_OPTION') != '']}"
+  #   set /OE/build/oe-core/meta-openembedded/meta-networking/recipes-support/spice/spice-gtk_0.42.bb:49
+  #     "-Dpie=true -Dvapi=enabled"
+  #   :append[libc-musl] /OE/build/oe-core/meta-openembedded/meta-networking/recipes-support/spice/spice-gtk_0.42.bb:50
+  #     " -Dcoroutine=libucontext"
+  # pre-expansion value:
+  #   "${@['', '${GIRMESONTARGET}'][d.getVar('GIR_MESON_OPTION') != '']}-Dpie=true -Dvapi=enabled ${PACKAGECONFIG_CONFARGS}"
+  EXTRA_OEMESON="-Dintrospection=false -Dpie=true -Dvapi=enabled "
+
+  and prevents build failure:
+  http://errors.yoctoproject.org/Errors/Details/702789/
+  Run-time dependency gobject-introspection-1.0 found: NO (tried pkgconfig)
+  ../git/meson.build:346:0: ERROR: Dependency "gobject-introspection-1.0" not found, tried pkgconfig
+
+* it just needs GIR_MESON_*_FLAG to be set to avoid:
+  meson.build:4:0: ERROR: Value "false" (of type "string") for combo option "Check for GObject instrospection requirements" is not one of the choices. Possible choices are (as string): "enabled", "disabled", "auto".
+
+* and enable vapi only when introspection is enabled, use PACKAGECONFIG for that to avoid:
+  meson.build:358:4: ERROR: Problem encountered: VAPI support requested without introspection
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-oe/recipes-support/cpulimit/cpulimit_0.2.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ meta-networking/recipes-support/spice/spice-gtk_0.42.bb | 9 +++++++--
+ 1 file changed, 7 insertions(+), 2 deletions(-)
 
-diff --git a/meta-oe/recipes-support/cpulimit/cpulimit_0.2.bb b/meta-oe/recipes-support/cpulimit/cpulimit_0.2.bb
-index 86a58beda4..58e4fd6e88 100644
---- a/meta-oe/recipes-support/cpulimit/cpulimit_0.2.bb
-+++ b/meta-oe/recipes-support/cpulimit/cpulimit_0.2.bb
-@@ -4,7 +4,7 @@ LICENSE = "GPL-2.0-or-later"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=86c1c0d961a437e529db93aa3bb32dc4"
- SRCREV ?= "f4d2682804931e7aea02a869137344bb5452a3cd"
+diff --git a/meta-networking/recipes-support/spice/spice-gtk_0.42.bb b/meta-networking/recipes-support/spice/spice-gtk_0.42.bb
+index 2d1b64967e..542ddb69b7 100644
+--- a/meta-networking/recipes-support/spice/spice-gtk_0.42.bb
++++ b/meta-networking/recipes-support/spice/spice-gtk_0.42.bb
+@@ -46,8 +46,13 @@ inherit meson pkgconfig vala gobject-introspection features_check
  
--SRC_URI = "git://g...@github.com/opsengine/cpulimit.git;protocol=https;branch=master \
-+SRC_URI = "git://github.com/opsengine/cpulimit.git;protocol=https;branch=master \
-            file://0001-Remove-sys-sysctl.h-and-add-missing-libgen.h-include.patch \
-            "
+ REQUIRED_DISTRO_FEATURES = "opengl"
  
-@@ -15,7 +15,7 @@ do_compile() {
- }
- do_install() {
-     install -d ${D}${sbindir}
--    install -m 0755 ${B}/src/${PN} ${D}${sbindir}/
-+    install -m 0755 ${B}/src/${BPN} ${D}${sbindir}/
- }
+-EXTRA_OEMESON = "-Dpie=true -Dvapi=enabled -Dintrospection=enabled"
+-EXTRA_OEMESON:append:libc-musl = " -Dcoroutine=libucontext"
++GIR_MESON_ENABLE_FLAG = 'enabled'
++GIR_MESON_DISABLE_FLAG = 'disabled'
++
++PACKAGECONFIG ??= "${@bb.utils.contains('GI_DATA_ENABLED', 'True', 'vapi', '', d)}"
++PACKAGECONFIG[vapi] = "-Dvapi=enabled,-Dvapi=disabled"
  
- CFLAGS += "-D_GNU_SOURCE ${LDFLAGS}"
++EXTRA_OEMESON = "-Dpie=true"
++EXTRA_OEMESON:append:libc-musl = " -Dcoroutine=libucontext"
+ 
+ FILES:${PN} += "${datadir}"
 -- 
 2.40.1
 
