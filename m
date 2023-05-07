@@ -2,56 +2,56 @@ Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 50D2FC7EE2E
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 50256C77B7C
 	for <webhook@archiver.kernel.org>; Sun,  7 May 2023 16:33:43 +0000 (UTC)
 Received: from mail-yw1-f177.google.com (mail-yw1-f177.google.com [209.85.128.177])
- by mx.groups.io with SMTP id smtpd.web11.69124.1683477188999494246
+ by mx.groups.io with SMTP id smtpd.web10.69013.1683477216492377976
  for <openembedded-devel@lists.openembedded.org>;
  Sun, 07 May 2023 09:33:36 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=TS89agCF;
+ dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=I8oj61Us;
  spf=pass (domain: gmail.com, ip: 209.85.128.177, mailfrom: akuster808@gmail.com)
-Received: by mail-yw1-f177.google.com with SMTP id 00721157ae682-55cc8aadc97so54833477b3.3
-        for <openembedded-devel@lists.openembedded.org>; Sun, 07 May 2023 09:33:35 -0700 (PDT)
+Received: by mail-yw1-f177.google.com with SMTP id 00721157ae682-55a2cb9788dso53746057b3.2
+        for <openembedded-devel@lists.openembedded.org>; Sun, 07 May 2023 09:33:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20221208; t=1683477215; x=1686069215;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=9/busuOYtDXG9Iz6p7NhaohDnsxj7bOaptbwnqn9wPw=;
-        b=TS89agCFrni6LPwxJzJdWuqlIwO1zj27kEeRyJILj815GkC0cMyOZjTipC8erwkxY/
-         6PNDX/HMGA34wvemrwqLYIQKGJ5iEGsUbb5mIi+/XzF76hqIbzhWI68puDy5KevVNHSn
-         0JrXiSHosV+HTDF32cC/DRzPY2RLWW9MfZ0mmv+mp2xpCvTQXoPd5uLh3EBbYn3AysrJ
-         sc+DUHk90cHDkB+3pBMuyaeKcAGGfPmLgWtkdQeTuMFMCbH26wVCjLqxZJfSsQBBxrak
-         bN4DEe/ov8Z5o32h3LNizsSPYWnVnKWCBS9WQ5EKmyDF8bZKGskbAV/sTChHiIXVKm+i
-         dNXQ==
+        bh=EoVXRaOQyC8ugbghBG4mYAuBTVze+HFTGrzvqDhwMEc=;
+        b=I8oj61UsNZPbspiy0v0HPqojp29MEQdb7d3S9KFgk1KFkK8f4QQPw/7JwK/BKDXdWH
+         Pv4KB2bhFZ22M5iTguwn+y6JIqF4qKQhridt0UNQ6l47SVuPlXR7xsWgeWoVo/gE3ZTH
+         z+X3FUZoQuJ1rXUOKT2+k39smQ5dX/wb0qpx6ap+UABUTBSgviKc4gvVAyE4hJCByigx
+         jY4xf/UJM5538fwSt7nDAoJKZ1U2W/ekEm7ZOBk2+oizR4QkctO+MHUvyOfJLxLOQdtw
+         oOzBWif/XzOh4nPWb8zxgKtQmQdWwe1rzWzHhvW2Q/ZPtsE0as6eWWU6NyaPmERXFYsH
+         L6bw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20221208; t=1683477215; x=1686069215;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=9/busuOYtDXG9Iz6p7NhaohDnsxj7bOaptbwnqn9wPw=;
-        b=ZuEju6xHA+vj6Ylk9L28xWGsUQRdBAIkn/xDUhr27UYVVfHuKlNKl9SAz2cdQU7ZMk
-         f9yb6oA6vh2I09EapnS0svFGyA8vc1RygfQKQfM1R6NmYewacCuDDKpSUGNE3YlGbWO3
-         z9D3dAOxnA+G+a29lKQUDFWh4a8y7XFeaAg9ds6AUvpIrS6EMWNR6ht1nJD4nVJh/6LQ
-         CQS9SV0skPVQnzXeN5YU7EUAbyp09nbBWMlR1KklrHjdgfO+Vr/BkxWB3qt6rfHNDLIu
-         LXXxB1BrJHqbqLIrvZ8/1QwqJEc7nAXOLfcD0G1S8V0rkoSA6Du5cUYGZ5Hh/i0IfFDt
-         WI2Q==
-X-Gm-Message-State: AC+VfDxVroFrralXdTgJvq5Tk6l36CE9yn8dOtbexJKL4W8UcPoHiHEc
-	qVXuHyV81jys+RHv5zhdCgqTtVGHby0=
-X-Google-Smtp-Source: ACHHUZ4Sz8IGZf7NmK7tlmoWqbqGILB5FTv3iBta/kY+mdKbmsNvCoySMSx2cXQDSSDUQ7y8ORSC4Q==
-X-Received: by 2002:a0d:c7c2:0:b0:552:a63e:18d1 with SMTP id j185-20020a0dc7c2000000b00552a63e18d1mr7570051ywd.52.1683477215002;
+        bh=EoVXRaOQyC8ugbghBG4mYAuBTVze+HFTGrzvqDhwMEc=;
+        b=QxaoI8hyiMUEbWy41LTkV6gRaFgtmJnfNhR1ENFxd5oAuHN09FbSudxogu9xQAOeia
+         5agFpyB1XpQ2eF3iOPpJaXRDgjKI9qILkBVbmoBC8ZfFe+UAatCJKaDyWlQ3HTtILZQ7
+         SZlvQcyWbmoBdYN5ySuSh7yV/phNHXDsGLaXYq0jGQ8b13U3E0L7LFLU8JUBOvdvVB4d
+         O+/dBVkm0KRkqSSeBCJoc9O12Mw6EBe2lwA/Vq6OO8eJan7u6mQEmKWsiiE7ukk3gpDW
+         oXDun6DKDeD1m1s/tfaCy1PAiUATraCz6QoxRg9FD3DSrAHB3KEGPIXxdzo9MNb+Svn6
+         6s7A==
+X-Gm-Message-State: AC+VfDwbWrckPOcI0Fi/oCcJTt4djRz1lQf5XDNYwlhWvJ5q8j1hTteC
+	B6a1eMvwhGWxM65DyOCAw7+ZiqcfAI4=
+X-Google-Smtp-Source: ACHHUZ5lRUfmaBy1X8a9B3/k/WRqun/uL+vZKJv7j63RDIoAtKjZ3HXfMfyqTHNAtZr4al8odmLkxg==
+X-Received: by 2002:a0d:d888:0:b0:55b:22cd:3ab3 with SMTP id a130-20020a0dd888000000b0055b22cd3ab3mr9544533ywe.50.1683477215481;
         Sun, 07 May 2023 09:33:35 -0700 (PDT)
 Received: from keaua.attlocal.net ([2600:1700:9190:ba10:b2f5:e641:5b7c:2972])
-        by smtp.gmail.com with ESMTPSA id q82-20020a817555000000b0055dbeb68f7asm1113524ywc.69.2023.05.07.09.33.34
+        by smtp.gmail.com with ESMTPSA id q82-20020a817555000000b0055dbeb68f7asm1113524ywc.69.2023.05.07.09.33.35
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 07 May 2023 09:33:34 -0700 (PDT)
+        Sun, 07 May 2023 09:33:35 -0700 (PDT)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][mickledore][PATCH 26/29] debootstrap: Use DEBIAN_MIRROR for SRC_URI
-Date: Sun,  7 May 2023 12:33:02 -0400
-Message-Id: <20230507163305.3261044-26-akuster808@gmail.com>
+Subject: [meta-oe][mickledore][PATCH 27/29] ttf-gentium: Switch to debian archive mirror for SRC_URI
+Date: Sun,  7 May 2023 12:33:03 -0400
+Message-Id: <20230507163305.3261044-27-akuster808@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20230507163305.3261044-1-akuster808@gmail.com>
 References: <20230507163305.3261044-1-akuster808@gmail.com>
@@ -61,30 +61,30 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sun, 07 May 2023 16:33:43 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102356
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102357
 
 From: Khem Raj <raj.khem@gmail.com>
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 34796ff654d7c6acd348a54664a167830e0e6ecd)
+(cherry picked from commit 3c34a8f8ebad5a8e6b6bcf96c3d2196107c1ed66)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-oe/recipes-devtools/debootstrap/debootstrap_1.0.128.bb | 2 +-
+ meta-oe/recipes-graphics/ttf-fonts/ttf-gentium_1.02.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-devtools/debootstrap/debootstrap_1.0.128.bb b/meta-oe/recipes-devtools/debootstrap/debootstrap_1.0.128.bb
-index 4d13aa66c8..592d997aad 100644
---- a/meta-oe/recipes-devtools/debootstrap/debootstrap_1.0.128.bb
-+++ b/meta-oe/recipes-devtools/debootstrap/debootstrap_1.0.128.bb
-@@ -5,7 +5,7 @@ LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://debian/copyright;md5=1e68ced6e1689d4cd9dac75ff5225608"
+diff --git a/meta-oe/recipes-graphics/ttf-fonts/ttf-gentium_1.02.bb b/meta-oe/recipes-graphics/ttf-fonts/ttf-gentium_1.02.bb
+index 5e355eefa7..eb13b47b56 100644
+--- a/meta-oe/recipes-graphics/ttf-fonts/ttf-gentium_1.02.bb
++++ b/meta-oe/recipes-graphics/ttf-fonts/ttf-gentium_1.02.bb
+@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "file://OFL;md5=33a5bf7b98a9c0ae87430760ba762295 \
+ "
+ PR = "r8"
  
- SRC_URI  = "\
--    http://http.debian.net/debian/pool/main/d/debootstrap/debootstrap_${PV}.tar.gz \
-+    ${DEBIAN_MIRROR}/main/d/debootstrap/debootstrap_${PV}.tar.gz \
-     file://0001-support-to-override-usr-sbin-and-usr-share.patch \
-     file://0002-support-to-override-usr-bin-arch-test.patch \
-     file://0001-do-not-hardcode-the-full-path-of-dpkg.patch \
+-SRC_URI = "${DEBIAN_MIRROR}/main/t/ttf-gentium/ttf-gentium_${PV}.orig.tar.gz "
++SRC_URI = "https://archive.debian.org/debian/pool/main/t/ttf-gentium/ttf-gentium_${PV}.orig.tar.gz "
+ 
+ S = "${WORKDIR}/ttf-sil-gentium-${PV}"
+ 
 -- 
 2.25.1
 
