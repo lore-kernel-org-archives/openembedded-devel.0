@@ -2,63 +2,63 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 441B6C7EE26
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 44175C77B75
 	for <webhook@archiver.kernel.org>; Mon,  8 May 2023 10:03:08 +0000 (UTC)
-Received: from mail1.bemta37.messagelabs.com (mail1.bemta37.messagelabs.com [85.158.142.1])
- by mx.groups.io with SMTP id smtpd.web10.103566.1683540178697970087
+Received: from mail3.bemta32.messagelabs.com (mail3.bemta32.messagelabs.com [195.245.230.82])
+ by mx.groups.io with SMTP id smtpd.web11.103483.1683540180157226764
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 08 May 2023 03:02:59 -0700
+ Mon, 08 May 2023 03:03:00 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=cKHPPUgo;
- spf=pass (domain: fujitsu.com, ip: 85.158.142.1, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=HOOvjj4M;
+ spf=pass (domain: fujitsu.com, ip: 195.245.230.82, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1683540176; i=@fujitsu.com;
-	bh=KItzsdx664QMCC2zyi+dop5rcw0GP1r1VVNBaL9Oj10=;
+	s=170520fj; t=1683540178; i=@fujitsu.com;
+	bh=5HwhJrKjessjLvJ747oRyoRyqgqK5P57m8T2LieWpxE=;
 	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References;
-	b=cKHPPUgoXytiRt2VejKAeaYjY/HwSAumsCJy0iS3rEL1K4ckzgr7FWM1u4D34TnaN
-	 XoKMorCyiiTYQt3zVQNXbokov9j3p5a9sl/eSoOketci6qM6xhYgBwo3jbmSv+D//Y
-	 +OzyuZm8W+HsLEhX7Q8Pm7AAukvCTPWHAyiZ8JRP/INEWI2jbvolaGmB0op1WOJaYG
-	 W0F3Bh95tyELn47J34tAw5mUOWC/DuZclUP4qU/p6RJhYgqJkul2CY/NQFw8/dTU37
-	 U8x9oRNxdHGWHt15wLrjHQtS9FMXC08WjArtfqBsCM6IQ7snqrZnxr5fs43Qdt79Aw
-	 v+Hm/kEWeeCLA==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFvrELMWRWlGSWpSXmKPExsViZ8ORpHvhRES
-  KwdbfUhYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8aWG50sBac5Kpb+3M/YwPiVvYuRi0NIYCOj
-  xLWNjYwQzjQmiTsf9zJ1MXJysAlISEzfe5IdxBYR0JX4+GEuI4jNLKAiMWPyEbAaYQEPiXktL
-  4BqODhYBFQl1m1PAgnzCjhJPP+yBKxcQkBBYsrD98wgNqeAs8TZGw/A4kJANY9+n2GDqFGTuH
-  puE/MERp4FjAyrGM2LU4vKUot0DS31kooy0zNKchMzc/QSq3QT9VJLdfPyi0oydA31EsuL9VK
-  Li/WKK3OTc1L08lJLNjECgyKlOO33DsavO//qHWKU5GBSEuU1PRiWIsSXlJ9SmZFYnBFfVJqT
-  WnyIUYaDQ0mCt21bRIqQYFFqempFWmYOMEBh0hIcPEoivLJHgNK8xQWJucWZ6RCpU4yKUuK8p
-  ceBEgIgiYzSPLg2WFRcYpSVEuZlZGBgEOIpSC3KzSxBlX/FKM7BqCTMWw0yniczrwRu+iugxU
-  xAi/0vh4MsLklESEk1MPHbmGYcSr/Td/BYp3eucsDfN9X3Uuuqa6qvzb345UTaqc9Hnj+8Piv
-  YdEmbkuPyqzYxLbL3N/a971+39dhJF9Fjm3P/NZq56rR1PrySZXFrnZfv2QkWl1NttgQ5X5O5
-  ZP9GRyi9bkNYJcvTXQ/FxaqMf2tXi1lf1z3Ys3bCZ5Xpx7Z/u7v2478lAjxnuW9k8vfNt4jze
-  702YtYux0dPpsovk7zd/fb3njfv+N59sHPlOHFX54Li/eQ7XyuXFGen12izf6he4MKsvSrUn/
-  WtmKBB/XuGP+33FilLrz9y8ctU4aN7AuqfpH51etvColKgMn/+/w08E+e3aHkujYt60mShUvT
-  2ZlDW4vBCdcWCmu1KLMUZiYZazEXFiQD71G17BQMAAA==
+	b=HOOvjj4MRQZG3s+xMA0vlmIVy1pcCEVV7azBNpu032XxSvAW3X3wpRK01QlaThLPn
+	 VUTMOPl+oA1Poh1r4yNsjer+SVzkohyihELbaQh/SBX9Kp63YBTHh7bcOqsU8zw6iN
+	 mMB2fTiDO7cGBhrA3OM4UDH1TZDOzw2n3h2daiXh8TXi09/UG643z29pv7J8Ihe3xa
+	 k5NR3Qvofyv3JgFSUmrKwyjBxA4k629d3fChRhzVzcu/nii/fheSY5DrLlLqGVue0P
+	 orGNG0hrnzCinXkRRd/jIb6Q9azF+2naB+IbYRv4KInsb50RI+zog+IDVrj9Wy95UP
+	 MUl03TQQYhrFw==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFvrELMWRWlGSWpSXmKPExsViZ8ORpHvpRES
+  Kwa4OdouLh5cyOzB6nNu4gjGAMYo1My8pvyKBNaNr50u2gibOirYZU5kbGJdxdDFycQgJbGSU
+  +NvcywLhTGOS2LK6nbGLkZODTUBCYvrek+wgtoiArsTHD3PB4swCKhIzJh9hArGFBdwlHi9fC
+  1bDIqAqseHEX2YQm1fASeLU8oVgtoSAgsSUh+/BbE4BZ4mzNx6AzRECqnn0+wwbRI2axNVzm5
+  gnMPIsYGRYxWhWnFpUllqka2ipl1SUmZ5RkpuYmaOXWKWbqJdaqlueWlyia6iXWF6sl1pcrFd
+  cmZuck6KXl1qyiREYFCnFzDd2MH7e+VfvEKMkB5OSKK/pwbAUIb6k/JTKjMTijPii0pzU4kOM
+  MhwcShK8bdsiUoQEi1LTUyvSMnOAAQqTluDgURLhlT0ClOYtLkjMLc5Mh0idYlSUEuctPQ6UE
+  ABJZJTmwbXBouISo6yUMC8jAwODEE9BalFuZgmq/CtGcQ5GJWHeapDxPJl5JXDTXwEtZgJa7H
+  85HGRxSSJCSqqBafHaH01mrz5vldxbyiI6xzni4M0Xe0ts8oLVii/bu0u9+2kfLSl+T/KiJjd
+  T34oJHwNFq2ZO9TvCdKb+hdkm2YWKLdxuv7fssz7m6efDlpZSPGV1C8flI7UtSuLLf9X2/dp4
+  /LtS6t87GW2RSe8u8sVv6Xj2uWfvQ+mWZ20nHfJOKu0+YFY0UaBKWf/sN+6Jnfbzo4tWBh29J
+  yw/7fVdp3mWjTle3AfCHv+ezqDy5t8HL6bbE3M5nHyXHJAtWsoVOD+VxWJjXX5d64OJln+sDO
+  RypzitYTh/ZmK75KbE1tkSy2Y73JmbHnTyGNNSFqY/U703zzrdy+DZ7FvcIQLU4jl74hazFZJ
+  dXFtyVTcosRRnJBpqMRcVJwIA7pETQAUDAAA=
 X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-4.tower-732.messagelabs.com!1683540176!496190!1
+X-Msg-Ref: server-11.tower-585.messagelabs.com!1683540177!504314!1
 X-Originating-IP: [62.60.8.98]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.105.2; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 7007 invoked from network); 8 May 2023 10:02:56 -0000
+Received: (qmail 16835 invoked from network); 8 May 2023 10:02:58 -0000
 Received: from unknown (HELO n03ukasimr03.n03.fujitsu.local) (62.60.8.98)
-  by server-4.tower-732.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 8 May 2023 10:02:56 -0000
+  by server-11.tower-585.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 8 May 2023 10:02:58 -0000
 Received: from n03ukasimr03.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr03.n03.fujitsu.local (Postfix) with ESMTP id DA81B1D2;
-	Mon,  8 May 2023 11:02:55 +0100 (BST)
+	by n03ukasimr03.n03.fujitsu.local (Postfix) with ESMTP id B9BB61D2;
+	Mon,  8 May 2023 11:02:57 +0100 (BST)
 Received: from localhost.localdomain (unknown [10.167.225.33])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by n03ukasimr03.n03.fujitsu.local (Postfix) with ESMTPS id 0B8691C2;
-	Mon,  8 May 2023 11:02:54 +0100 (BST)
+	by n03ukasimr03.n03.fujitsu.local (Postfix) with ESMTPS id E04B41C2;
+	Mon,  8 May 2023 11:02:56 +0100 (BST)
 From: wangmy@fujitsu.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-oe] [PATCH] etcd-cpp-apiv3: upgrade 0.14.2 -> 0.14.3
-Date: Mon,  8 May 2023 18:02:40 +0800
-Message-Id: <1683540162-25172-3-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH] googlebenchmark: upgrade 1.7.1 -> 1.8.0
+Date: Mon,  8 May 2023 18:02:41 +0800
+Message-Id: <1683540162-25172-4-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 In-Reply-To: <1683540162-25172-1-git-send-email-wangmy@fujitsu.com>
 References: <1683540162-25172-1-git-send-email-wangmy@fujitsu.com>
@@ -67,31 +67,31 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 08 May 2023 10:03:08 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102387
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102388
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../etcd/{etcd-cpp-apiv3_0.14.2.bb => etcd-cpp-apiv3_0.14.3.bb} | 2 +-
+ .../{googlebenchmark_1.7.1.bb => googlebenchmark_1.8.0.bb}      | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-extended/etcd/{etcd-cpp-apiv3_0.14.2.bb => etcd-cpp-apiv3_0.14.3.bb} (91%)
+ rename meta-oe/recipes-support/googlebenchmark/{googlebenchmark_1.7.1.bb => googlebenchmark_1.8.0.bb} (90%)
 
-diff --git a/meta-oe/recipes-extended/etcd/etcd-cpp-apiv3_0.14.2.bb b/meta-oe/recipes-extended/etcd/etcd-cpp-apiv3_0.14.3.bb
-similarity index 91%
-rename from meta-oe/recipes-extended/etcd/etcd-cpp-apiv3_0.14.2.bb
-rename to meta-oe/recipes-extended/etcd/etcd-cpp-apiv3_0.14.3.bb
-index 2994df322d..71744026da 100644
---- a/meta-oe/recipes-extended/etcd/etcd-cpp-apiv3_0.14.2.bb
-+++ b/meta-oe/recipes-extended/etcd/etcd-cpp-apiv3_0.14.3.bb
-@@ -5,7 +5,7 @@ LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=eae7da6a2cd1788a5cf8a9f838cf6450"
+diff --git a/meta-oe/recipes-support/googlebenchmark/googlebenchmark_1.7.1.bb b/meta-oe/recipes-support/googlebenchmark/googlebenchmark_1.8.0.bb
+similarity index 90%
+rename from meta-oe/recipes-support/googlebenchmark/googlebenchmark_1.7.1.bb
+rename to meta-oe/recipes-support/googlebenchmark/googlebenchmark_1.8.0.bb
+index 1a565636d5..209f51ea3d 100644
+--- a/meta-oe/recipes-support/googlebenchmark/googlebenchmark_1.7.1.bb
++++ b/meta-oe/recipes-support/googlebenchmark/googlebenchmark_1.8.0.bb
+@@ -5,7 +5,7 @@ LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
  
- SRC_URI += "git://github.com/etcd-cpp-apiv3/etcd-cpp-apiv3.git;branch=master;protocol=https"
--SRCREV = "91c64e18d325f4b63f0dfbd795c50c9c3ec3d3e0"
-+SRCREV = "5e2884f36276e44f683fa02fca39807716fdbc16"
+ SRC_URI = "git://github.com/google/benchmark.git;protocol=https;branch=main"
+-SRCREV = "d572f4777349d43653b21d6c2fc63020ab326db2"
++SRCREV = "2dd015dfef425c866d9a43f2c67d8b52d709acb6"
  
- inherit cmake
+ S = "${WORKDIR}/git"
  
 -- 
 2.34.1
