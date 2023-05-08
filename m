@@ -2,63 +2,63 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 864ADC7EE2D
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 77433C7EE26
 	for <webhook@archiver.kernel.org>; Mon,  8 May 2023 09:59:38 +0000 (UTC)
-Received: from mail1.bemta34.messagelabs.com (mail1.bemta34.messagelabs.com [195.245.231.1])
- by mx.groups.io with SMTP id smtpd.web10.103508.1683539972068876318
+Received: from mail1.bemta34.messagelabs.com (mail1.bemta34.messagelabs.com [195.245.231.3])
+ by mx.groups.io with SMTP id smtpd.web11.103418.1683539975394995629
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 08 May 2023 02:59:32 -0700
+ Mon, 08 May 2023 02:59:35 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=lT8epAey;
- spf=pass (domain: fujitsu.com, ip: 195.245.231.1, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=JsLfYL33;
+ spf=pass (domain: fujitsu.com, ip: 195.245.231.3, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1683539969; i=@fujitsu.com;
-	bh=rUd1VEav2l6je5D5p5/n88pe+qw0L05Ly/8VZ00tsRM=;
+	s=170520fj; t=1683539973; i=@fujitsu.com;
+	bh=fDIzgZ++tyDVQYNWlgW4LTSwOgO1FjRCSLFPs1fLtR4=;
 	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References;
-	b=lT8epAeylh/gR8fG6qm9a8sTNvG/gtCJVq49SsVX5QMDKDHgGO/1N4QJxIQ2UxNCx
-	 ImrXgHY3TH9T1DU4HxmziGXPWsxAxqr+7Z2f8LXB0JDDFcW2BZyQwBTRo5+El8vJIM
-	 hwpoMrQYqHQ5mrlqKHWH7uxC96L4rRyHau8inwfktIXh/3T7PNvD98udN32pZsk9nH
-	 cDDDavjd1Ytmepp+wCR3j8eNTr/XMNZMELHHznANalInifs/6OsWCtDehhwFAlZpKo
-	 XD2pargHopedJlwahliorQbo3/iTKfApNzIA8uRG1YaFsR5D6lXyI+0cu4c/MhVnCJ
-	 WCa+WKXtGEJNA==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFvrILMWRWlGSWpSXmKPExsViZ8ORpMt4IiL
-  F4H6roMXFw0uZHRg9zm1cwRjAGMWamZeUX5HAmrHy51G2gi6hij/np7M3MN7n72Lk4hAS2Mgo
-  0XDqHROEM41J4u69lWxdjJwcbAJqEtNv3WAFsUUEdCU+fpjLCGIzC6hIzJh8hAnEFhZwlti27
-  Qw7iM0ioCqxbt5OsHpeASeJXzO6mEFsCQEFiSkP34PZnED1qy6fBpsvBFSz6c9HdogaNYmr5z
-  YxT2DkWcDIsIrRtDi1qCy1SNdCL6koMz2jJDcxM0cvsUo3US+1VLc8tbhE10gvsbxYL7W4WK+
-  4Mjc5J0UvL7VkEyMwJFKKlbp2MPbt+qt3iFGSg0lJlNf0YFiKEF9SfkplRmJxRnxRaU5q8SFG
-  GQ4OJQnetm0RKUKCRanpqRVpmTnA8IRJS3DwKInwyh4BSvMWFyTmFmemQ6ROMSpKifMuPQaUE
-  ABJZJTmwbXBYuISo6yUMC8jAwODEE9BalFuZgmq/CtGcQ5GJWHeapDxPJl5JXDTXwEtZgJa7H
-  85HGRxSSJCSqqBifUjV+O2VW+XMPp9l0tvkdg5VeZ0+RX5rpTrCwvTpJX6zu9Ycnaq3JyIS0c
-  jaqruJJQfq1y1+5014xwb50MX/plkmU+tf8CQM/3IK4E9nCJHJ52137Or+DdT40pWGb1Fzq/3
-  qLLxHOTXfVr5bleNx5Zz8xbvNt3wSSAyoG3ObI2Y3Nqbv/89+tfkrbXjYHtdfMQ9ExEJg7krb
-  ll0eZWtsbcXb3CxZHqWk9FWfF6ofM0ssf1tSjPqWT8vEt4eZh7bvWJypUbOPJ79a1TViw7sZP
-  P3WJD5akVvzfomh9/a6mfkNR9yKM7tYE92zpykKbHs7eb5iw7Kb+nz2qyY/fXk/X0/5kxw49o
-  SGnX7kXvUeyWW4oxEQy3mouJEAKBusb0EAwAA
+	b=JsLfYL33QvYEL5co4j0oJ0iWs7xp/s49uSCJQWfI3fsD7wcwrCgN4+5Heo4sgCWvA
+	 d2aa9tSVrn38u0zH/bGstpcAMA8PHpS5CRd34pBZ7W4oI+LZHexQeu2GpHeAgNFOLE
+	 y3AlAhDUJ38rDVneEBOWMmCwxmaqov+0wrWJkw7HjHImAQqZi+3bHHxNynPJIxeasI
+	 t+sQKL0bWR8dj77MO6rhdmO/KxICx7xjjy9fxzrw9nC5kJsCF9dNJVCdB2h1Ti3/yx
+	 YW1hdOlDL/o+zlg0eXvxZzpn7QP4KRnfddhwHIux29jLISNVrUpNGN9nhhYjBIezxy
+	 62mhmDXOaOluA==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFvrALMWRWlGSWpSXmKPExsViZ8ORpMt6IiL
+  FYMZMMYuLh5cyOzB6nNu4gjGAMYo1My8pvyKBNaN7aWzBDM6KL/NXsDYwruboYuTiEBLYyCjx
+  Zu4Sxi5GTiBnGpPEoX5PEJtNQE1i+q0brCC2iICuxMcPc8FqmAVUJGZMPsIEYgsLOEuc2bGPH
+  cRmEVCVeLTgIlicV8BJomHFMjYQW0JAQWLKw/fMIDYnUP2qy6fZIHY5SWz685EdokZN4uq5Tc
+  wTGHkWMDKsYjQrTi0qSy3SNTTSSyrKTM8oyU3MzNFLrNJN1Est1S1PLS7RNdJLLC/WSy0u1iu
+  uzE3OSdHLSy3ZxAgMiJRixa4djAd2/dU7xCjJwaQkymt6MCxFiC8pP6UyI7E4I76oNCe1+BCj
+  DAeHkgRv27aIFCHBotT01Iq0zBxgcMKkJTh4lER4ZY8ApXmLCxJzizPTIVKnGBWlxHlLjwMlB
+  EASGaV5cG2wiLjEKCslzMvIwMAgxFOQWpSbWYIq/4pRnINRSZi3GmQ8T2ZeCdz0V0CLmYAW+1
+  8OB1lckoiQkmpgsjy6U1yscYr2qyURhzSv1bCv7jC/lvctdXv3Be4zSyfMVpeQbZ57MspVtia
+  waOpcg78/VW9x8blrLLpUXJnMU3HuyIub4ltiFn6Om7w/g9ejZJ3GtG8Kk/4zbYrMd4uqrLcN
+  SU9tLl5fcsPxSeTZtZwsacuq39+/9msdW9tj2Snuouu+JOxafIxfoOnNYvtzdZ1VYdPZePefF
+  MqY8K/vVFtcz2rN3PYVzz3XpBsXb5j0/uHafJmpTTOq7k/KDFoU3RRoHKfHZqKx/J0y35J3jI
+  5CUpfUDuepbZux+Hn+N/HXjacli387SXiHiLJ+K732XeA0l0Tl4dc9OjPcIq53bja22PtJjPW
+  Q7OpSRdWFSizFGYmGWsxFxYkAcr9SuAMDAAA=
 X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-7.tower-565.messagelabs.com!1683539969!180093!1
+X-Msg-Ref: server-20.tower-571.messagelabs.com!1683539973!413411!1
 X-Originating-IP: [62.60.8.98]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
-X-StarScan-Version: 9.105.3; banners=-,-,-
+X-StarScan-Version: 9.105.2; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 8863 invoked from network); 8 May 2023 09:59:29 -0000
+Received: (qmail 29214 invoked from network); 8 May 2023 09:59:33 -0000
 Received: from unknown (HELO n03ukasimr03.n03.fujitsu.local) (62.60.8.98)
-  by server-7.tower-565.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 8 May 2023 09:59:29 -0000
+  by server-20.tower-571.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 8 May 2023 09:59:33 -0000
 Received: from n03ukasimr03.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr03.n03.fujitsu.local (Postfix) with ESMTP id 062E01D2;
-	Mon,  8 May 2023 10:59:29 +0100 (BST)
+	by n03ukasimr03.n03.fujitsu.local (Postfix) with ESMTP id 1A3AF1D4;
+	Mon,  8 May 2023 10:59:33 +0100 (BST)
 Received: from localhost.localdomain (unknown [10.167.225.33])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by n03ukasimr03.n03.fujitsu.local (Postfix) with ESMTPS id 0F5041C2;
-	Mon,  8 May 2023 10:59:27 +0100 (BST)
+	by n03ukasimr03.n03.fujitsu.local (Postfix) with ESMTPS id 386AC1C2;
+	Mon,  8 May 2023 10:59:31 +0100 (BST)
 From: Wang Mingyu <wangmy@fujitsu.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-oe] [PATCH] appstream: upgrade 0.16.1 -> 0.16.2
-Date: Mon,  8 May 2023 17:59:14 +0800
-Message-Id: <1683539957-25094-2-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-gnome] [PATCH] babl: upgrade 0.1.104 -> 0.1.106
+Date: Mon,  8 May 2023 17:59:16 +0800
+Message-Id: <1683539957-25094-4-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 In-Reply-To: <1683539957-25094-1-git-send-email-wangmy@fujitsu.com>
 References: <1683539957-25094-1-git-send-email-wangmy@fujitsu.com>
@@ -67,57 +67,34 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 08 May 2023 09:59:38 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102381
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102383
 
 Changelog:
 =========
-Notes:
- * Due to a past mistake, AppStream until now assumed xml:lang was
-   using POSIX locale, while in fact XML locale need to be in BCP47 format.
-   Most of the translation tools do this correctly, but notably msgfmt
-   when used in batch mode doesn't (which affects anything using Meson's
-   i18n module). AppStream is now behaving according to spec, with some
-   fallback code in place, but please check your XML is translated
-   correctly to ensure all translations are visible.
-
-Features:
- * Add API for asking whether the pool is empty
- * Add DDE to known desktop-environment list
- * validator: Check if Release Description is inside description tag
- * Make AppStream use BCP47 for locale in XML data
-
-Bugfixes:
- * Add missing standard::is-hidden attribute to file search enumerator
- * spdx: Accept brackets in spdx license expression check
- * introspection: Bring back AS_FORMAT_STYLE_COLLECTION into its enum
- * compose: Fix crash in asc_l10n_search_translations_qt()
- * compose: Set lower-cased CID for synthesized components again
- * Don't crash when non-YAML documents are read as YAML
-
-Miscellaneous:
- * sanitizers: Allow null-dereference check again
+Disable LUTs on big-endian, fix to 1bpp->4bpp LUTs, faster startup by caching
+balanced RGB to XYZ matrices.
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../appstream/{appstream_0.16.1.bb => appstream_0.16.2.bb}      | 2 +-
+ .../recipes-gimp/babl/{babl_0.1.104.bb => babl_0.1.106.bb}      | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-support/appstream/{appstream_0.16.1.bb => appstream_0.16.2.bb} (93%)
+ rename meta-gnome/recipes-gimp/babl/{babl_0.1.104.bb => babl_0.1.106.bb} (84%)
 
-diff --git a/meta-oe/recipes-support/appstream/appstream_0.16.1.bb b/meta-oe/recipes-support/appstream/appstream_0.16.2.bb
-similarity index 93%
-rename from meta-oe/recipes-support/appstream/appstream_0.16.1.bb
-rename to meta-oe/recipes-support/appstream/appstream_0.16.2.bb
-index 50d8cdb4c2..1c117e99c6 100644
---- a/meta-oe/recipes-support/appstream/appstream_0.16.1.bb
-+++ b/meta-oe/recipes-support/appstream/appstream_0.16.2.bb
-@@ -25,7 +25,7 @@ GIR_MESON_OPTION = ""
+diff --git a/meta-gnome/recipes-gimp/babl/babl_0.1.104.bb b/meta-gnome/recipes-gimp/babl/babl_0.1.106.bb
+similarity index 84%
+rename from meta-gnome/recipes-gimp/babl/babl_0.1.104.bb
+rename to meta-gnome/recipes-gimp/babl/babl_0.1.106.bb
+index a79dd4d1df..5a5f4f5e7c 100644
+--- a/meta-gnome/recipes-gimp/babl/babl_0.1.104.bb
++++ b/meta-gnome/recipes-gimp/babl/babl_0.1.106.bb
+@@ -11,7 +11,7 @@ inherit setuptools3 gnomebase gobject-introspection vala
+ DEPENDS += "lcms"
  
- SRC_URI = "https://www.freedesktop.org/software/appstream/releases/AppStream-${PV}.tar.xz"
- SRC_URI:append:class-target = " file://0001-fix-crosscompile.patch"
--SRC_URI[sha256sum] = "77e274e163db1f0a1bec8f4134b1d0f31e9c0a8c54cd37f724a7d30a71cf41d2"
-+SRC_URI[sha256sum] = "f9cb80bd388fbf06be268afa7f2d65863c85d605ad874b905094f3982d03f232"
+ SRC_URI = "https://download.gimp.org/pub/${BPN}/0.1/${BP}.tar.xz"
+-SRC_URI[sha256sum] = "22e38e1d19c5391abc8ccf936033a9d035e8a8ec7523e5cd76a4c01137d7160c"
++SRC_URI[sha256sum] = "d325135d3304f088c134cc620013acf035de2e5d125a50a2d91054e7377c415f"
  
- S = "${WORKDIR}/AppStream-${PV}"
+ FILES:${PN} += "${libdir}/${BPN}-${@gnome_verdir("${PV}")}"
  
 -- 
 2.34.1
