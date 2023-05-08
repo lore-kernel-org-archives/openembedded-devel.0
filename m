@@ -2,95 +2,97 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 63D21C7EE26
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 68408C7EE2D
 	for <webhook@archiver.kernel.org>; Mon,  8 May 2023 10:04:38 +0000 (UTC)
-Received: from mail1.bemta34.messagelabs.com (mail1.bemta34.messagelabs.com [195.245.231.2])
- by mx.groups.io with SMTP id smtpd.web11.103521.1683540270760360969
+Received: from mail1.bemta32.messagelabs.com (mail1.bemta32.messagelabs.com [195.245.230.1])
+ by mx.groups.io with SMTP id smtpd.web11.103525.1683540276827139862
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 08 May 2023 03:04:31 -0700
+ Mon, 08 May 2023 03:04:37 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=WMH0sC4k;
- spf=pass (domain: fujitsu.com, ip: 195.245.231.2, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=VnCoxWJg;
+ spf=pass (domain: fujitsu.com, ip: 195.245.230.1, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1683540268; i=@fujitsu.com;
-	bh=A+jHidKLG730FaMmDIS/MyuoewJ5u/3Mk+fTK6WJ0eA=;
-	h=From:To:Cc:Subject:Date:Message-Id;
-	b=WMH0sC4kFxy/PvuqWfn4HXM0MvdEnvX3Z4jLutEODyjBxzQTJgPIzF3AJI6Jl1oTd
-	 dk9REghEHjgN7Kp5YIJj/k6IqRae9VLH8fOdHEp1VOnfBKaJnQCCkOHtUWIKvZbbFu
-	 FHKftFwV51oO3+oz12zQ13lb19pU78LmG2NEO6PLYk/Avm3sZiQrUTy2prld8MEsRy
-	 IkTv8zhixwW1uq2ZRqhM1RnV5zmYUy8HPn7Ih4M8JJV0sOMjSSaIT1dJQZZiwXkhlv
-	 OWuHRDIPLvffwqP+XnF+0NBH/h4mYOnYH6ITNk3yZP4X+DF2UX4qRziX8TpsYrVIU3
-	 YnhiKHDGTacsw==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFnrKLMWRWlGSWpSXmKPExsViZ8ORpKtzMiL
-  FoPuXlMXFw0uZHRg9zm1cwRjAGMWamZeUX5HAmnH2zxTmguUcFRfPfWVqYDzD3sXIxSEksJFR
-  YuGXTSwQzjQmiaP32oAynBxsAhIS0/eeBLNFBHQlPn6YywhiMwuoSMyYfIQJxBYWsJP4NHc7a
-  xcjBweLgKrEppcFIGFeASeJ+XdOgpVICChITHn4nhnCVpO4em4T8wRGrgWMDKsYzYpTi8pSi3
-  QNjfWSijLTM0pyEzNz9BKrdBP1Ukt1y1OLS3SN9BLLi/VSi4v1iitzk3NS9PJSSzYxAn2cUqy
-  +dwfj/l1/9Q4xSnIwKYnymh4MSxHiS8pPqcxILM6ILyrNSS0+xCjDwaEkwdu2LSJFSLAoNT21
-  Ii0zBxhuMGkJDh4lEV7ZI0Bp3uKCxNzizHSI1ClGXY6rV67sZRZiycvPS5US5xU5AVQkAFKUU
-  ZoHNwIW+pcYZaWEeRkZGBiEeApSi3IzS1DlXzGKczAqCfPagUzhycwrgdv0CugIJqAj/C+Hgx
-  xRkoiQkmpgSuLK+8hjsqJ98YmOXaEV03tlPgk93XTRSDqLMdT0qvvM32sqzzqaer/fx7Igp+S
-  U8mmzPWUGctNUd/95uC04bu+p32t6eKzTroTUFJfYxUZN1940+Y54u+lkUe7FQU5PWuc+3fTi
-  +8LTP7618lpkTEgoyaoucVZZdO7kUtWUvNKH/xbOWOpy6PeDwKSDy5d7enyudQ860+/r8tV3l
-  V+h0FN+v7TjszZNeimy6GbE09WKn+zubFValR+vtGHW2p/LHS3cvu2TuFwqmLvhfaLvrKj9nw
-  P/dgXa/erfvb50lb931QOPl31S3eHrcv+pS3K7W6wSme+3UORt9CnfX+fc/yR6H1rouu3tOcY
-  N2jZFLUosxRmJhlrMRcWJAJjYLo/4AgAA
+	s=170520fj; t=1683540274; i=@fujitsu.com;
+	bh=cBqDgtGIeATrZHsF1IVpVgzxHZxcVOQe6cTP901V6MQ=;
+	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References;
+	b=VnCoxWJgO/+LNPCIieBKaaL8hWQpzfYDMUYvEuOni8xkcWZtdiohXRbFkpcaH15zp
+	 ajY0ZjZEN3WcMvlGJKQHhD2nIu9QQWAoA8+V9eQYfONaCuaQHVgcNnCveLi3pWlIdx
+	 NEGeJ8rk9ZHgMZhM74/ijHLnOSTyHT9DAl9uQvZixmREP9mjiuo0DaKcFJYx6fyAM5
+	 Q3NadYyXrr2PHdY8LNwkmsgzxK4qfdRebc49fUf9EvBA0RyNQwuYaBmaNFTPfyGCNR
+	 Hp560/aAHEUSy9Irbp9ozcN0ngaNDJr93fM+FT9Tf4bZ+mdBBCFtXpiHxO0Kotjqbq
+	 3X320p5xJ36bA==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFvrILMWRWlGSWpSXmKPExsViZ8ORpGt0MiL
+  FYNl+SYuLh5cyOzB6nNu4gjGAMYo1My8pvyKBNePP05nMBWc5KjqvX2duYPzE3sXIySEksJFR
+  YlWTUhcjF5A9jUnizOm7jCAJNgEJiel7T4IViQjoSnz8MBcsziygIjFj8hEmEFtYwE6ic88ls
+  DiLgKpEz7L5bCA2r4CTxN6WE2A1EgIKElMevmcGsTkFnCWeH5jCCrHYSWLZ1W3MEDVqElfPbW
+  KewMizgJFhFaNZcWpRWWqRrqGpXlJRZnpGSW5iZo5eYpVuol5qqW55anGJrqFeYnmxXmpxsV5
+  xZW5yTopeXmrJJkZgSKQUsxnuYFyx66/eIUZJDiYlUV7Tg2EpQnxJ+SmVGYnFGfFFpTmpxYcY
+  ZTg4lCR427ZFpAgJFqWmp1akZeYAwxMmLcHBoyTCK3sEKM1bXJCYW5yZDpE6xagoJc4rcgIoI
+  QCSyCjNg2uDxcQlRlkpYV5GBgYGIZ6C1KLczBJU+VeM4hyMSsK8m0Gm8GTmlcBNfwW0mAlosf
+  /lcJDFJYkIKakGpuMXY/Yt33WPl/H3koeLJ26KOmElNnWL7jetyYVeHVU/2/7qV050vOoubu1
+  0/6Qyw/lpM3wF+49bnA0RnWxnlpkYO3W/9Cyeja5bohbG2Cx6LV9aFp54Sn7xjP8d01RSmH6d
+  59G9wmhyQ9EmNaw0evk1J/6G10xz0/VXeXFt59lbOude2ev+9JMHPrn86Zvvl2QVuDa4mNuh6
+  afOKz/9Es3OuZz99azbAg/c2iU85UJ5wxlHSZ4fszOX/jid58p/bca+mptn7y1MMInS/MLmJc
+  2sxl/fds5/gdWxzJm6TXaWhzavFu99Kstne9PUZWL1BN45PTeLrCo+s7xKs9192jzVM3PxXMG
+  JNqrvFh/+pMRSnJFoqMVcVJwIAGtx1BEEAwAA
 X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-19.tower-565.messagelabs.com!1683540268!181045!1
+X-Msg-Ref: server-2.tower-587.messagelabs.com!1683540274!424409!1
 X-Originating-IP: [62.60.8.98]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
-X-StarScan-Version: 9.105.3; banners=-,-,-
+X-StarScan-Version: 9.105.2; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 9912 invoked from network); 8 May 2023 10:04:28 -0000
+Received: (qmail 21259 invoked from network); 8 May 2023 10:04:34 -0000
 Received: from unknown (HELO n03ukasimr03.n03.fujitsu.local) (62.60.8.98)
-  by server-19.tower-565.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 8 May 2023 10:04:28 -0000
+  by server-2.tower-587.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 8 May 2023 10:04:34 -0000
 Received: from n03ukasimr03.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr03.n03.fujitsu.local (Postfix) with ESMTP id 2D9BC1D2;
-	Mon,  8 May 2023 11:04:28 +0100 (BST)
+	by n03ukasimr03.n03.fujitsu.local (Postfix) with ESMTP id 090431D4;
+	Mon,  8 May 2023 11:04:34 +0100 (BST)
 Received: from localhost.localdomain (unknown [10.167.225.33])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by n03ukasimr03.n03.fujitsu.local (Postfix) with ESMTPS id 526CD1C2;
-	Mon,  8 May 2023 11:04:27 +0100 (BST)
+	by n03ukasimr03.n03.fujitsu.local (Postfix) with ESMTPS id 2FA7E1D2;
+	Mon,  8 May 2023 11:04:32 +0100 (BST)
 From: wangmy@fujitsu.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-oe] [PATCH] hwdata: upgrade 0.369 -> 0.370
-Date: Mon,  8 May 2023 18:04:15 +0800
-Message-Id: <1683540259-25209-1-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH] libbpf: upgrade 1.1.0 -> 1.2.0
+Date: Mon,  8 May 2023 18:04:18 +0800
+Message-Id: <1683540259-25209-4-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
+In-Reply-To: <1683540259-25209-1-git-send-email-wangmy@fujitsu.com>
+References: <1683540259-25209-1-git-send-email-wangmy@fujitsu.com>
 X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 08 May 2023 10:04:38 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102390
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102393
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../recipes-support/hwdata/{hwdata_0.369.bb => hwdata_0.370.bb} | 2 +-
+ .../recipes-kernel/libbpf/{libbpf_1.1.0.bb => libbpf_1.2.0.bb}  | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-support/hwdata/{hwdata_0.369.bb => hwdata_0.370.bb} (91%)
+ rename meta-oe/recipes-kernel/libbpf/{libbpf_1.1.0.bb => libbpf_1.2.0.bb} (92%)
 
-diff --git a/meta-oe/recipes-support/hwdata/hwdata_0.369.bb b/meta-oe/recipes-support/hwdata/hwdata_0.370.bb
-similarity index 91%
-rename from meta-oe/recipes-support/hwdata/hwdata_0.369.bb
-rename to meta-oe/recipes-support/hwdata/hwdata_0.370.bb
-index c20e2430bc..56d4253772 100644
---- a/meta-oe/recipes-support/hwdata/hwdata_0.369.bb
-+++ b/meta-oe/recipes-support/hwdata/hwdata_0.370.bb
-@@ -5,7 +5,7 @@ SECTION = "System/Base"
- LICENSE = "GPL-2.0-or-later | XFree86-1.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=1556547711e8246992b999edd9445a57"
+diff --git a/meta-oe/recipes-kernel/libbpf/libbpf_1.1.0.bb b/meta-oe/recipes-kernel/libbpf/libbpf_1.2.0.bb
+similarity index 92%
+rename from meta-oe/recipes-kernel/libbpf/libbpf_1.1.0.bb
+rename to meta-oe/recipes-kernel/libbpf/libbpf_1.2.0.bb
+index 1aee51f1eb..7c3df5f8ad 100644
+--- a/meta-oe/recipes-kernel/libbpf/libbpf_1.1.0.bb
++++ b/meta-oe/recipes-kernel/libbpf/libbpf_1.2.0.bb
+@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = "file://../LICENSE.LGPL-2.1;md5=b370887980db5dd40659b50909238
+ DEPENDS = "zlib elfutils"
  
--SRCREV = "ced93f9d1c15e45e35378e82b8da96027e58174a"
-+SRCREV = "21cb47beb1716545b25dfe8ae1b9e079c73b85d9"
- SRC_URI = "git://github.com/vcrhonek/${BPN}.git;branch=master;protocol=https"
+ SRC_URI = "git://github.com/libbpf/libbpf.git;protocol=https;branch=master"
+-SRCREV = "6597330c45d185381900037f0130712cd326ae59"
++SRCREV = "fbd60dbff51c870f5e80a17c4f2fd639eb80af90"
  
- S = "${WORKDIR}/git"
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
+ COMPATIBLE_HOST = "(x86_64|i.86|aarch64|riscv64|powerpc64).*-linux"
 -- 
 2.34.1
 
