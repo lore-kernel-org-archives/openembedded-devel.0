@@ -2,31 +2,31 @@ Return-Path: <marex@denx.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A7E3AC7EE2C
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A8805C7EE2D
 	for <webhook@archiver.kernel.org>; Tue,  9 May 2023 02:44:19 +0000 (UTC)
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
- by mx.groups.io with SMTP id smtpd.web11.6843.1683600256757956902
+ by mx.groups.io with SMTP id smtpd.web11.6845.1683600257280305146
  for <openembedded-devel@lists.openembedded.org>;
  Mon, 08 May 2023 19:44:17 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="body hash did not verify" header.i=@denx.de header.s=phobos-20191101 header.b=iXyeN98+;
+ dkim=fail reason="body hash did not verify" header.i=@denx.de header.s=phobos-20191101 header.b=SG9mtzbi;
  spf=pass (domain: denx.de, ip: 85.214.62.61, mailfrom: marex@denx.de)
 Received: from tr.lan (ip-86-49-120-218.bb.vodafone.cz [86.49.120.218])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
 	(No client certificate requested)
 	(Authenticated sender: marex@denx.de)
-	by phobos.denx.de (Postfix) with ESMTPSA id 9853184791;
-	Tue,  9 May 2023 04:44:13 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTPSA id A9EE78479B;
+	Tue,  9 May 2023 04:44:14 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
 	s=phobos-20191101; t=1683600254;
-	bh=MsFo5T1rlFMuVBE+HZAcWJrL/xLYp6Vcv+WroOo0WvA=;
-	h=From:To:Cc:Subject:Date:From;
-	b=iXyeN98+/zrvPBbRKCdDU28aw+X7cdwWvzv9eIhhiOzb4isghAWi2wufSpQ+/40jN
-	 Zr9DUaW9XAuJY1Fmv5fevkPkZYoXC2nrJ0mKAh5DoXgfelBX6Dzal0dVyLM9jKyfRz
-	 0sELOVANqsBpuIjwVvcnH/eWvVtZGGxpG/Im79EerX/1D4lt24BKgYfj2kqRtzhOp1
-	 Hb7JvF940leyCoElwkX6C6xDnE+i5EfZ6lsF2vSXLall7KaRCBdqiJGtIOQKNIarI4
-	 ASwI73L1M+jMy6vUDjIwYM59V0S8EVGJhepV0USOeCWEcKeVkydcwr/nRjWpbdTbgD
-	 Sce0oxcpPwEcg==
+	bh=lSelbQBWlzAFbm6gheZVDb8OwvCEhBW0uaNngkAn7NU=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+	b=SG9mtzbi6JJveD0IddNTh6Ai0HzxCwerB4vaM6cDBiowo8wHlb9E+nMQzDhyrSJQ1
+	 V4Q0yrJBsveRyyL3+e0T60ZiQfL6CYH7rOTEAE1Jj8cVcPht+bsFGgV9K5vbRqzIeE
+	 BIomIEjeIRl7b7GfbxObAXiKfBYVAcJMcyjNlO4aAz3ZV0bR2f5kjDR+SofWEICQq+
+	 ioMSFs71SaO0aeGCvSKg7ilw3pFkACwkJfUiJrPIxhlaaFkqdfY4HvBkB1AqmDaW2b
+	 G1goXTd/KplIs+/1wmaC1UIJflgeVUpOcXAYowueerVs1lQaPw/tLymRCjM9CUFPb8
+	 EdfQnvDtHbGxQ==
 From: Marek Vasut <marex@denx.de>
 To: openembedded-devel@lists.openembedded.org
 Cc: Marek Vasut <marex@denx.de>,
@@ -35,10 +35,12 @@ Cc: Marek Vasut <marex@denx.de>,
 	Martin Jansa <martin.jansa@gmail.com>,
 	Philippe Coval <philippe.coval.ext@huawei.com>,
 	Philippe Coval <philippe.coval@huawei.com>
-Subject: [meta-oe][PATCH v2 1/7] lvgl: Upgrade lvgl to 8.3.7 and lv-driver to 8.3.0
-Date: Tue,  9 May 2023 04:43:49 +0200
-Message-Id: <20230509024355.79006-1-marex@denx.de>
+Subject: [meta-oe][PATCH v2 3/7] lvgl: Add configurable color depth, default to 32bpp
+Date: Tue,  9 May 2023 04:43:51 +0200
+Message-Id: <20230509024355.79006-3-marex@denx.de>
 X-Mailer: git-send-email 2.39.2
+In-Reply-To: <20230509024355.79006-1-marex@denx.de>
+References: <20230509024355.79006-1-marex@denx.de>
 MIME-Version: 1.0
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
@@ -47,11 +49,9 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 09 May 2023 02:44:19 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102455
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102456
 
-Both the LVGL and lv-drivers are now available in 8.3.y release,
-upgrade both to latest 8.3.y release version in lock step. Also,
-lvgl contains no submodules, drop the gitsm fetcher use.
+Make color depth configurable and default to 32bpp .
 
 Signed-off-by: Marek Vasut <marex@denx.de>
 ---
@@ -63,59 +63,34 @@ Cc: Philippe Coval <philippe.coval@huawei.com>
 ---
 V2: No change
 ---
- .../lvgl/{lv-drivers_7.11.0.bb =3D> lv-drivers_8.3.0.bb}       | 5 ++---
- .../recipes-graphics/lvgl/{lvgl_8.1.0.bb =3D> lvgl_8.3.7.bb}   | 4 ++--
- 2 files changed, 4 insertions(+), 5 deletions(-)
- rename meta-oe/recipes-graphics/lvgl/{lv-drivers_7.11.0.bb =3D> lv-drive=
-rs_8.3.0.bb} (89%)
- rename meta-oe/recipes-graphics/lvgl/{lvgl_8.1.0.bb =3D> lvgl_8.3.7.bb} =
-(89%)
+ meta-oe/recipes-graphics/lvgl/lvgl_8.3.7.bb | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/meta-oe/recipes-graphics/lvgl/lv-drivers_7.11.0.bb b/meta-oe=
-/recipes-graphics/lvgl/lv-drivers_8.3.0.bb
-similarity index 89%
-rename from meta-oe/recipes-graphics/lvgl/lv-drivers_7.11.0.bb
-rename to meta-oe/recipes-graphics/lvgl/lv-drivers_8.3.0.bb
-index cf33c6904..d9cde497c 100644
---- a/meta-oe/recipes-graphics/lvgl/lv-drivers_7.11.0.bb
-+++ b/meta-oe/recipes-graphics/lvgl/lv-drivers_8.3.0.bb
-@@ -8,9 +8,8 @@ DESCRIPTION =3D "Collection of drivers: SDL, framebuffer,=
- wayland and more..."
- LICENSE =3D "MIT"
- LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Dd6fc0df890c5270ef045981b516bb=
-8f2"
-=20
--# TODO: Pin upstream release (current v7.11.0-80-g419a757)
--SRC_URI =3D "git://github.com/lvgl/lv_drivers;protocol=3Dhttps;nobranch=3D=
-1"
--SRCREV =3D "419a757c23aaa67c676fe3a2196d64808fcf2254"
-+SRC_URI =3D "git://github.com/lvgl/lv_drivers;protocol=3Dhttps;branch=3D=
-release/v8.3"
-+SRCREV =3D "71830257710f430b6d8d1c324f89f2eab52488f1"
-=20
- DEPENDS =3D "libxkbcommon lvgl wayland"
-=20
-diff --git a/meta-oe/recipes-graphics/lvgl/lvgl_8.1.0.bb b/meta-oe/recipe=
+diff --git a/meta-oe/recipes-graphics/lvgl/lvgl_8.3.7.bb b/meta-oe/recipe=
 s-graphics/lvgl/lvgl_8.3.7.bb
-similarity index 89%
-rename from meta-oe/recipes-graphics/lvgl/lvgl_8.1.0.bb
-rename to meta-oe/recipes-graphics/lvgl/lvgl_8.3.7.bb
-index ea74c5918..a82ab3b74 100644
---- a/meta-oe/recipes-graphics/lvgl/lvgl_8.1.0.bb
+index 5f3fc44cf..a3fd7e04c 100644
+--- a/meta-oe/recipes-graphics/lvgl/lvgl_8.3.7.bb
 +++ b/meta-oe/recipes-graphics/lvgl/lvgl_8.3.7.bb
-@@ -8,8 +8,8 @@ SUMMARY =3D "Light and Versatile Graphics Library"
- LICENSE =3D "MIT"
- LIC_FILES_CHKSUM =3D "file://LICENCE.txt;md5=3Dbf1198c89ae87f043108cea62=
-460b03a"
+@@ -20,6 +20,7 @@ EXTRA_OECMAKE =3D "-DLIB_INSTALL_DIR=3D${baselib}"
+ S =3D "${WORKDIR}/git"
 =20
--SRC_URI =3D "gitsm://github.com/lvgl/lvgl;protocol=3Dhttps;nobranch=3D1"
--SRCREV =3D "d38eb1e689fa5a64c25e677275172d9c8a4ab2f0"
-+SRC_URI =3D "git://github.com/lvgl/lvgl;protocol=3Dhttps;branch=3Dreleas=
-e/v8.3"
-+SRCREV =3D "2b56e04205481daa6575bd5f7ab5df59d11676eb"
+ LVGL_CONFIG_LV_MEM_CUSTOM ?=3D "0"
++LVGL_CONFIG_LV_COLOR_DEPTH ?=3D "32"
 =20
- REQUIRED_DISTRO_FEATURES =3D "wayland"
-=20
+ # Upstream does not support a default configuration
+ # but propose a default "disabled" template, which is used as reference
+@@ -27,6 +28,8 @@ LVGL_CONFIG_LV_MEM_CUSTOM ?=3D "0"
+ do_configure:prepend() {
+     [ -r "${S}/lv_conf.h" ] \
+         || sed -e 's|#if 0 .*Set it to "1" to enable .*|#if 1 // Enabled=
+|g' \
++	    -e "s|\(#define LV_COLOR_DEPTH \).*|\1 ${LVGL_CONFIG_LV_COLOR_DEPTH=
+}|g" \
++	    \
+ 	    -e "s|\(#define LV_MEM_CUSTOM .*\)0|\1${LVGL_CONFIG_LV_MEM_CUSTOM}|=
+g" \
+ 	    \
+ 	    -e "s|\(#define LV_TICK_CUSTOM \).*|\1 1|g" \
 --=20
 2.39.2
 
