@@ -2,57 +2,57 @@ Return-Path: <Martin.Jansa@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id F208DC77B75
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EA9CDC77B7C
 	for <webhook@archiver.kernel.org>; Tue,  9 May 2023 07:07:20 +0000 (UTC)
-Received: from mail-wr1-f46.google.com (mail-wr1-f46.google.com [209.85.221.46])
- by mx.groups.io with SMTP id smtpd.web10.25910.1683616032540171048
+Received: from mail-wr1-f48.google.com (mail-wr1-f48.google.com [209.85.221.48])
+ by mx.groups.io with SMTP id smtpd.web10.25909.1683616031657207240
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 09 May 2023 00:07:12 -0700
+ Tue, 09 May 2023 00:07:11 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=KhBwWcz9;
- spf=pass (domain: gmail.com, ip: 209.85.221.46, mailfrom: martin.jansa@gmail.com)
-Received: by mail-wr1-f46.google.com with SMTP id ffacd0b85a97d-3078fa679a7so2269576f8f.3
-        for <openembedded-devel@lists.openembedded.org>; Tue, 09 May 2023 00:07:12 -0700 (PDT)
+ dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=fa1pcUqi;
+ spf=pass (domain: gmail.com, ip: 209.85.221.48, mailfrom: martin.jansa@gmail.com)
+Received: by mail-wr1-f48.google.com with SMTP id ffacd0b85a97d-3063891d61aso5169953f8f.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 09 May 2023 00:07:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1683616031; x=1686208031;
+        d=gmail.com; s=20221208; t=1683616030; x=1686208030;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=dylY0Wu7b1dnjSBo4F3H2malLOZhbWxdUpEV46GfhTw=;
-        b=KhBwWcz97oy3KevOnD4A+yl4khvq7AYRHXkTdu+FYKjgzO77qBCq0fJmcymsvcIRgy
-         29xn5x1ygx0jncsk+bt8FBeuVrW3g+5sToYlZMFE93WBFTFKdbhJaa9xEPOJP5LxsTy1
-         dE9Ce/vE1wTORkyzZDc5oekOZKPuli3Dvgu+L6ktfs1l6h3435bD4QBKYPeYvEQSsyTt
-         xu5E08XCgvtC+NMiw0H3J7foJoEpMm4uyxXtFqtMFYr/uPHPTlaMEHD+WbEISjPWUcMa
-         679+1QhA2S7rIF34Z1Kiz+jtyXYIzDc6O13LsavVZlh9HmC26d3wQnbG2OiYmUEu9GlS
-         df5w==
+        bh=BCSZn9YL97TGwLp3r//6n7mV32k7Zdu2knh/u3i5To4=;
+        b=fa1pcUqi5N+OdyKc91VLevdN1vryRZx8sN+xSQESqc01BoVtAOCWR3HtDyfbs2X4b1
+         AS3pJpO9i4Y0mip4EnqzYrDFE9XpNUVRnoTL53rs5zqw1gK+x0BX84bvH/A1j3b/AV8B
+         2pgMh1psg1y4LAL3t9P6T6mf5fK2+6YX7O0x9j/ukXqys75jIx4EUvMKJ3WPb4IZfwIs
+         nlzt/Taz6tro6nIVAEQEv51cFlJZ6NDZ3RfjlLep06o0Bj8+QYwJLqh767mKWC8ZlSJ2
+         RJ7tZupwSYyqm2cneG+cKx7J3VMHc6rhAkjaFSRIFUQJXd6xJPdsCEotAMvRpVILYIVa
+         PMdQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1683616031; x=1686208031;
+        d=1e100.net; s=20221208; t=1683616030; x=1686208030;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=dylY0Wu7b1dnjSBo4F3H2malLOZhbWxdUpEV46GfhTw=;
-        b=OvBRHzYFxDvjFhfFEC6DoCRJIGHyQKw+U9d7G7wMFKlE0j0TsKsPwZ0ejsR3bZIME2
-         Ea1SYBV706YWQithdW0uQCsDZCmRXp4kNr54HAHfYG3PaRLwD1SWzLQcCU/Mdgpg416y
-         bkK6Y1hVW6uQv7Ur79P76CpYOrlq9XB6Httq29k73bL/uwIsPryBJuuDHtXz3o8eB3gN
-         AS1YMzERl8ZAuooxf4baPyaImRprrfxVxOOYJ1Caz89cIeMkvw1Tks5AG9mTtmDETMsu
-         KfPHKwmn5nRhBoLooqTgIgNgMoUbVxwHmqDKXz8CL/FvEsoFWJ+d6i9/Vas3kqJjjkPm
-         axTA==
-X-Gm-Message-State: AC+VfDzYzQOozriymfv/7HOyG0DUNrLk/Xj0B+1zBAiEykWJYKh2++X3
-	1uR60c6HEJ4AIgGqqVt3qlo111RPGUw=
-X-Google-Smtp-Source: ACHHUZ6uLDkgAk/j6VWb4k1DIiFtHjzjfQNfQczKaJKsyPYVJisCfq6R1MIyYLxWKsUJ2xgPxr5ERQ==
-X-Received: by 2002:adf:f646:0:b0:307:a287:3728 with SMTP id x6-20020adff646000000b00307a2873728mr1125394wrp.69.1683616030911;
+        bh=BCSZn9YL97TGwLp3r//6n7mV32k7Zdu2knh/u3i5To4=;
+        b=bxDNkm5jrTIP/fpr8IAna70d+XZQ//u0O3zSDP04X3W8V2C+7+bN6l2MhrR3CBy3Ju
+         c/8bOm/CIl2RWl4qviZlzBOLrWY/51KpE3lDOAvKWGvZLQfkeQmhPPN+WdANtsq8znHq
+         DTWXWeDWhONOv6wok/QUDXsUDoWmcgYZ9M5g4VQDM9zswEejA4e9TCqZK6eYZzQgCIS+
+         H9IHD50xhIAoWOfsLwUzH8/l/IFtq+dX+rcNTdy03fDT3MFF/+HwpQLkQ6pi8Rbsrp5p
+         300FwJo02E9vhHvG7ccN1ykCFFAXBswr+Ij703ReDKGARPgZ+povwZCs7hlxNam80vPG
+         sjCQ==
+X-Gm-Message-State: AC+VfDwbxmiCiulUYXHNS1FWZHiB7FTQJiWnVquzvt9tuZn+bXB6Z8wk
+	prDb/ZHj3KS1hyXq5SDuswZ8wdWzBLs=
+X-Google-Smtp-Source: ACHHUZ5855USbk546JOsb+wOtLelgrvLX4tkcwlQtSuUFrbzxgxc6KZLf7M7yKolLmtB/UMRSQTXAA==
+X-Received: by 2002:a05:6000:11d0:b0:306:2b8d:baa4 with SMTP id i16-20020a05600011d000b003062b8dbaa4mr8538612wrx.9.1683616030195;
         Tue, 09 May 2023 00:07:10 -0700 (PDT)
 Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
-        by smtp.gmail.com with ESMTPSA id v23-20020a5d5917000000b0030632833e74sm13486357wrd.11.2023.05.09.00.07.10
+        by smtp.gmail.com with ESMTPSA id f16-20020a5d4dd0000000b003062ad45243sm13326307wru.14.2023.05.09.00.07.09
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 09 May 2023 00:07:10 -0700 (PDT)
+        Tue, 09 May 2023 00:07:09 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Martin Jansa <Martin.Jansa@gmail.com>
-Subject: [meta-oe][mickledore][PATCH 16/16] zfs: fix installation paths for multilib
-Date: Tue,  9 May 2023 09:06:55 +0200
-Message-Id: <20230509070655.70784-16-Martin.Jansa@gmail.com>
+Subject: [meta-oe][mickledore][PATCH 15/16] nv-codec-headers: fix installed-vs-shipped with multilib
+Date: Tue,  9 May 2023 09:06:54 +0200
+Message-Id: <20230509070655.70784-15-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20230509070655.70784-1-Martin.Jansa@gmail.com>
 References: <20230509070655.70784-1-Martin.Jansa@gmail.com>
@@ -62,127 +62,38 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 09 May 2023 07:07:20 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102484
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102483
 
-* pass --with-systemd* variables to install in more typical directories
-* adjust FILES:${PN} to package them and more explicitly list some of
-  the directories like sudoers.d
-* also remove unnecessary trailing /* and fix indentation of closing quote
+* pass LIBDIR to install ffnvcodec.pc in right directory
 
 * fixes:
-ERROR: QA Issue: zfs: Files/directories were installed but not shipped in any package:
-  /lib
-  /lib/modules
-  /lib/modules/6.1.20-v8
-  /lib/modules/6.1.20-v8/extra
-  /lib/modules/6.1.20-v8/extra/zstd
-  /lib/modules/6.1.20-v8/extra/zfs
-  /lib/modules/6.1.20-v8/extra/unicode
-  /lib/modules/6.1.20-v8/extra/lua
-  /lib/modules/6.1.20-v8/extra/spl
-  /lib/modules/6.1.20-v8/extra/zcommon
-  /lib/modules/6.1.20-v8/extra/avl
-  /lib/modules/6.1.20-v8/extra/nvpair
-  /lib/modules/6.1.20-v8/extra/icp
-  /lib/modules/6.1.20-v8/extra/zstd/zzstd.ko.xz
-  /lib/modules/6.1.20-v8/extra/zfs/zfs.ko.xz
-  /lib/modules/6.1.20-v8/extra/unicode/zunicode.ko.xz
-  /lib/modules/6.1.20-v8/extra/lua/zlua.ko.xz
-  /lib/modules/6.1.20-v8/extra/spl/spl.ko.xz
-  /lib/modules/6.1.20-v8/extra/zcommon/zcommon.ko.xz
-  /lib/modules/6.1.20-v8/extra/avl/zavl.ko.xz
-  /lib/modules/6.1.20-v8/extra/nvpair/znvpair.ko.xz
-  /lib/modules/6.1.20-v8/extra/icp/icp.ko.xz
-  /usr/lib/modules-load.d
-  /usr/lib/systemd/system
-  /usr/lib/systemd/system-preset
-  /usr/lib/systemd/system-generators/zfs-mount-generator
-  /usr/lib/systemd/system/zfs-scrub@.service
-  /usr/lib/systemd/system/zfs-scrub-weekly@.timer
-  /usr/lib/systemd/system/zfs-import.service
-  /usr/lib/systemd/system/zfs-import-scan.service
-  /usr/lib/systemd/system/zfs-share.service
-  /usr/lib/systemd/system/zfs-mount.service
-  /usr/lib/systemd/system/zfs-volume-wait.service
-  /usr/lib/systemd/system/zfs.target
-  /usr/lib/systemd/system/zfs-load-key.service
-  /usr/lib/systemd/system/zfs-import.target
-  /usr/lib/systemd/system/zfs-import-cache.service
-  /usr/lib/systemd/system/zfs-zed.service
-  /usr/lib/systemd/system/zfs-scrub-monthly@.timer
-  /usr/lib/systemd/system/zfs-volumes.target
-  /usr/lib/systemd/system-preset/50-zfs.preset
-  /usr/lib/modules-load.d/zfs.conf
-Please set FILES such that these items are packaged. Alternatively if they are unneeded, avoid installing them or delete them within do_install.
-zfs: 42 installed and not shipped files. [installed-vs-shipped]
+  ERROR: QA Issue: nv-codec-headers: Files/directories were installed but not shipped in any package:
+    /usr/lib
+    /usr/lib/pkgconfig
+    /usr/lib/pkgconfig/ffnvcodec.pc
+  Please set FILES such that these items are packaged. Alternatively if they are unneeded, avoid installing them or delete them within do_install.
+  nv-codec-headers: 3 installed and not shipped files. [installed-vs-shipped]
 
-when libdir is /usr/lib64 with multilib.
+  when libdir is /usr/lib64 with multilib
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- .../recipes-filesystems/zfs/zfs_2.1.9.bb      | 36 ++++++++++++-------
- 1 file changed, 23 insertions(+), 13 deletions(-)
+ .../nv-codec-headers/nv-codec-headers_12.0.16.0.bb              | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-filesystems/recipes-filesystems/zfs/zfs_2.1.9.bb b/meta-filesystems/recipes-filesystems/zfs/zfs_2.1.9.bb
-index 77daab7dd5..573561db25 100644
---- a/meta-filesystems/recipes-filesystems/zfs/zfs_2.1.9.bb
-+++ b/meta-filesystems/recipes-filesystems/zfs/zfs_2.1.9.bb
-@@ -27,12 +27,16 @@ EXTRA_OECONF:append = " \
-     --with-linux=${STAGING_KERNEL_DIR} --with-linux-obj=${STAGING_KERNEL_BUILDDIR} \
-     --with-mounthelperdir=${base_sbin} \
-     --with-udevdir=${base_libdir}/udev \
-+    --with-systemdunitdir=${systemd_system_unitdir} \
-+    --with-systemdgeneratordir=${nonarch_base_libdir}/systemd/system-generators \
-+    --with-systemdpresetdir=${nonarch_base_libdir}/systemd/system-preset \
-+    --with-systemdmodulesloaddir=${sysconfdir}/module-load.d \
-     --without-dracutdir \
--    "
-+"
+diff --git a/meta-multimedia/recipes-multimedia/nv-codec-headers/nv-codec-headers_12.0.16.0.bb b/meta-multimedia/recipes-multimedia/nv-codec-headers/nv-codec-headers_12.0.16.0.bb
+index 5ef7ead810..4bff4f24b7 100644
+--- a/meta-multimedia/recipes-multimedia/nv-codec-headers/nv-codec-headers_12.0.16.0.bb
++++ b/meta-multimedia/recipes-multimedia/nv-codec-headers/nv-codec-headers_12.0.16.0.bb
+@@ -10,7 +10,7 @@ SRC_URI = " \
+ SRCREV = "c5e4af74850a616c42d39ed45b9b8568b71bf8bf"
+ S = "${WORKDIR}/git"
  
- EXTRA_OEMAKE:append = " \
-     INSTALL_MOD_PATH=${D}${root_prefix} \
--    "
-+"
+-EXTRA_OEMAKE = "PREFIX=${prefix} DESTDIR=${D}"
++EXTRA_OEMAKE = "PREFIX=${prefix} DESTDIR=${D} LIBDIR=${baselib}"
  
- do_install:append() {
-     # /usr/share/zfs contains the zfs-tests folder which we do not need:
-@@ -42,19 +46,25 @@ do_install:append() {
- }
- 
- FILES:${PN} += "\
--    ${base_sbindir}/* \
--    ${base_libdir}/* \
--    ${sysconfdir}/* \
--    ${sbindir}/* \
--    ${bindir}/* \
--    ${libexecdir}/${BPN}/* \
--    ${libdir}/* \
--    "
-+    ${nonarch_base_libdir}/modules \
-+    ${systemd_system_unitdir} \
-+    ${nonarch_base_libdir}/systemd/system-generators \
-+    ${nonarch_base_libdir}/systemd/system-preset \
-+    ${sysconfdir}/modules-load.d/${BPN}.conf \
-+    ${sysconfdir}/default/${BPN} \
-+    ${sysconfdir}/sudoers.d/${BPN} \
-+    ${sysconfdir}/${BPN} \
-+    ${base_libdir}/udev \
-+    ${sbindir} \
-+    ${bindir} \
-+    ${libexecdir}/${BPN} \
-+    ${libdir} \
-+"
- 
- FILES:${PN}-dev += "\
--    ${prefix}/src/zfs-${PV}/* \
--    ${prefix}/src/spl-${PV}/* \
--    "
-+    ${prefix}/src/zfs-${PV} \
-+    ${prefix}/src/spl-${PV} \
-+"
- # Not yet ported to rv32
- COMPATIBLE_HOST:riscv32 = "null"
- # conflicting definition of ABS macro from asm/asm.h from kernel
+ do_install() {
+     oe_runmake install
 -- 
 2.40.1
 
