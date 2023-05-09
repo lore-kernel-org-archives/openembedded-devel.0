@@ -2,128 +2,140 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 33D34C77B75
-	for <webhook@archiver.kernel.org>; Tue,  9 May 2023 04:26:10 +0000 (UTC)
-Received: from mail-pg1-f180.google.com (mail-pg1-f180.google.com [209.85.215.180])
- by mx.groups.io with SMTP id smtpd.web11.24102.1683606365709459535
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2D209C7EE22
+	for <webhook@archiver.kernel.org>; Tue,  9 May 2023 04:46:00 +0000 (UTC)
+Received: from mail-oi1-f175.google.com (mail-oi1-f175.google.com [209.85.167.175])
+ by mx.groups.io with SMTP id smtpd.web11.24390.1683607555533519221
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 08 May 2023 21:26:05 -0700
+ Mon, 08 May 2023 21:45:55 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20221208 header.b=D90IeMqZ;
- spf=pass (domain: gmail.com, ip: 209.85.215.180, mailfrom: raj.khem@gmail.com)
-Received: by mail-pg1-f180.google.com with SMTP id 41be03b00d2f7-52867360efcso3733126a12.2
-        for <openembedded-devel@lists.openembedded.org>; Mon, 08 May 2023 21:26:05 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20221208 header.b=TWxSj30w;
+ spf=pass (domain: gmail.com, ip: 209.85.167.175, mailfrom: raj.khem@gmail.com)
+Received: by mail-oi1-f175.google.com with SMTP id 5614622812f47-38ea3f8e413so2780540b6e.2
+        for <openembedded-devel@lists.openembedded.org>; Mon, 08 May 2023 21:45:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1683606365; x=1686198365;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=+MkiUT7ImJbweJ82gFJmqoTBHpy5Ak+YmHOkRtAEvqc=;
-        b=D90IeMqZnwX+DeVgxdwvmUZwdm7R/UxaZMvMlmLmi3e7AmP/OeWjzWk+Meg0ugY53L
-         OvDlHIm3ida8APmVa9Wc2FvTSb39saJifXqCgo9CXGsx2VC/HlgZxTxrNcW65hfr3XG2
-         FrTSOfbEutmCfUlWBKqtpsSfZUQzv7qkr9Ji7ejAxlmY4AuEhDXz0rJ4iox3gW39W/qH
-         8txUPNAycKEfUVhW9+sFBVUQEctGR4ALTLNl3Kd9Uy79MRG1ofcY0AxiPyGFeGm31FNz
-         TNaJ1fnRUkf+lMYwtBZjlAXUDhCgT/OSFOuLwxj93P9YQC+BsMECzIuwOSNPU0HYrpiq
-         uf5A==
+        d=gmail.com; s=20221208; t=1683607555; x=1686199555;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=2+ur1c3KxG0bmY3If3qaMuoA4bFxUzasRPg5aA4OLGE=;
+        b=TWxSj30wcuvMBMPVR9bpEQdQr+SVUW+J/nu1WsjbaYLFOuLpbA5gvFYop3ChLM9qjA
+         QNoZHYTPTTbCYHC1Yw35ob5Dgs6wr+6iqeDPHYimxQJUN7a9lvEAY4sfONsKbzgLokmE
+         g7lqU0Gx5s9X1OLqCxYUH07g4I333DujOijokxqfZIABr+wPDVWphsCAGlu35eJnzTxf
+         lIcL1fVkeImAu3O+tJotV4bFL8CucpU4Nuo6pL2n6Fjh7uksmZBtzUAvi2RT7bpvWpRc
+         CKzQWwIJ1au+VJZ50mU+0fHplRcjz4/chWha6NzMyFOHFYf7aTX4twUYbap1wE1UBusx
+         k3jg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1683606365; x=1686198365;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=+MkiUT7ImJbweJ82gFJmqoTBHpy5Ak+YmHOkRtAEvqc=;
-        b=SGpL5AxawK0lxHQfwugZmcvfsh0Z+U68iWL70R4cxMf/28mfjYjSW04C31vWqvTw+Z
-         XrY5M5djqWgartLzARCJqfn+xRid/BTHO/VrcRODU3rE9XGRGP7BWAmc6Qclfmx4pgp0
-         UAr6MdVyuLn+FsX4fkc4+xI1EZDCaJm1h9NKvIIEXFq8yR3BsZ2nB/qt0u1T/Qq4xhh8
-         OEohGlL1OvpqWR75zZhgU355rIv/gE/rURrSS6XWmMgq2ZGurducCtJhg9hwZ5nrq60p
-         Ygl+89J+TzrL4yAxChSvTRqeywbxjiK2uFKL7yjisQ6/y1/Q8ZL+ZbAbPhpj72Byznd8
-         h0EA==
-X-Gm-Message-State: AC+VfDxu9dNw+b3Exdj2+zakVl3s3RdROzdLtCflT8SRXyocrvTyhS7+
-	xRzfDPtzX/x1qLaR1xH0/DsmNB0iTlumCg==
-X-Google-Smtp-Source: ACHHUZ527vw8CSE0+D5hK5qy05wZMxSZSg+fUSpKcXtFnXzl/8ezPaN4ERQoGZVeNPOxjTNLJllQSw==
-X-Received: by 2002:a17:903:124f:b0:1aa:f6e9:4cb3 with SMTP id u15-20020a170903124f00b001aaf6e94cb3mr16002585plh.52.1683606364771;
-        Mon, 08 May 2023 21:26:04 -0700 (PDT)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9181:d380::298a])
-        by smtp.gmail.com with ESMTPSA id h5-20020a170902748500b001ac2a73dbf2sm321321pll.291.2023.05.08.21.26.04
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 08 May 2023 21:26:04 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH] enca: Remove buildpaths from target scripts
-Date: Mon,  8 May 2023 21:26:02 -0700
-Message-Id: <20230509042602.1052322-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.40.1
+        d=1e100.net; s=20221208; t=1683607555; x=1686199555;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=2+ur1c3KxG0bmY3If3qaMuoA4bFxUzasRPg5aA4OLGE=;
+        b=jj5qXh/xG9OCj317Mi74uQohOw1NMtcWDLzrcIYk2Jc06WH6S9E5z7soCRSImVaDQe
+         WAiqDtHy2IUpm7wc3LgGF2HrMswyzvxBnYv7nwFeWP69LovvMSaHWAfgk2DwVnasZGHr
+         XGK2fLOHIXNWx/I+6q6PwsRgaFs0fYu+RxV2ZecMJ8LiFumPhNW8Tj/L8CxbfaIv4O5S
+         6Kdj06elHc+qzKdZyEKkYF6rrzZMF13TTPllh+PlNhbMPjKNoI6J9EdhCthNW2ZnrivQ
+         cvVF3S3O37nHdywrrBmHqSS9QTF+JiYZnfio0j3ViqnZTF8g5KHLiM4/qzLtrQfKqD9b
+         7Paw==
+X-Gm-Message-State: AC+VfDwGELuINLQ2QSAZOFg+Z6ZnYpeFA17rSLiUfc1b/NZ13v+bN0Gk
+	3Wb/SySWiz7QBGwxNAyb0GeUhZMYEa4FlF0j1CA=
+X-Google-Smtp-Source: ACHHUZ6BS7CT6FdkGi77sc/7MgTNxls3En15uOgpKprsh/dDXGbEORAniFlp9WIV0P7mh46EKjsvsHryWtGfHDk4Hnk=
+X-Received: by 2002:a05:6808:404b:b0:389:1274:be46 with SMTP id
+ cz11-20020a056808404b00b003891274be46mr747897oib.19.1683607554595; Mon, 08
+ May 2023 21:45:54 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <1683540471-25268-1-git-send-email-wangmy@fujitsu.com> <1683540471-25268-3-git-send-email-wangmy@fujitsu.com>
+In-Reply-To: <1683540471-25268-3-git-send-email-wangmy@fujitsu.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 8 May 2023 21:45:28 -0700
+Message-ID: <CAMKF1srpDzE0zSHChu1dSZC=S6jASo7-NsnO5jEUepsWyzw88g@mail.gmail.com>
+Subject: Re: [oe] [meta-oe] [PATCH] libplist: upgrade 2.2.0 -> 2.3.0
+To: wangmy <wangmy@fujitsu.com>
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 09 May 2023 04:26:10 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102462
+ <openembedded-devel@lists.openembedded.org>; Tue, 09 May 2023 04:46:00 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102463
 
-Using configure checks to detect mktemp can result in problems in
-cross-builds where buildtime mktemp ( native ) maybe detected in a path
-that does not exist on target, therefore rely upon PATH variable to find
-this binary when executing this script.
+In order to get this patch through we need to fix
+libimobiledevice-glue recipe as well. See the error below
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- ...o-not-use-MKTEMP_PROG-in-cross-build.patch | 30 +++++++++++++++++++
- meta-oe/recipes-support/enca/enca_1.19.bb     |  4 +--
- 2 files changed, 32 insertions(+), 2 deletions(-)
- create mode 100644 meta-oe/recipes-support/enca/enca/0001-Do-not-use-MKTEMP_PROG-in-cross-build.patch
+https://errors.yoctoproject.org/Errors/Details/703594/
 
-diff --git a/meta-oe/recipes-support/enca/enca/0001-Do-not-use-MKTEMP_PROG-in-cross-build.patch b/meta-oe/recipes-support/enca/enca/0001-Do-not-use-MKTEMP_PROG-in-cross-build.patch
-new file mode 100644
-index 0000000000..32fa239084
---- /dev/null
-+++ b/meta-oe/recipes-support/enca/enca/0001-Do-not-use-MKTEMP_PROG-in-cross-build.patch
-@@ -0,0 +1,30 @@
-+From c6a59d512706978e8c67f9a2d84ec650f8763368 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Mon, 8 May 2023 18:02:52 -0700
-+Subject: [PATCH] Do not use $MKTEMP_PROG in cross-build
-+
-+$MKTEMP_PROG points to native location which could be absolute path that
-+wont exist on target rootfs. Therefore use it from PATH
-+
-+Upstream-Status: Pending
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ configure.ac | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/configure.ac b/configure.ac
-+index 4852a2f..d23b384 100644
-+--- a/configure.ac
-++++ b/configure.ac
-+@@ -186,7 +186,7 @@ ye_PATH_LOCALE_ALIAS
-+ 
-+ dnl Random filename generation in scripts
-+ if test -n "$MKTEMP_PROG"; then
-+-  SHELL_RANDOM_FILENAME='`'$MKTEMP_PROG' /tmp/enca-$$-XXXXXXXX`'
-++  SHELL_RANDOM_FILENAME='`mktemp /tmp/enca-$$-XXXXXXXX`'
-+ else
-+   SHELL_RANDOM_FILENAME='/tmp/enca-$$-$RANDOM'
-+ fi
-+-- 
-+2.40.1
-+
-diff --git a/meta-oe/recipes-support/enca/enca_1.19.bb b/meta-oe/recipes-support/enca/enca_1.19.bb
-index eed0ad1b93..774f05f7c4 100644
---- a/meta-oe/recipes-support/enca/enca_1.19.bb
-+++ b/meta-oe/recipes-support/enca/enca_1.19.bb
-@@ -10,8 +10,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=24b9569831c46d4818450b55282476b4"
- SRC_URI = "https://dl.cihar.com/enca/enca-${PV}.tar.gz \
-     file://dont-run-tests.patch \
-     file://makefile-remove-tools.patch \
--    file://libenca-003-iconv.patch "
--
-+    file://libenca-003-iconv.patch \
-+    file://0001-Do-not-use-MKTEMP_PROG-in-cross-build.patch"
- SRC_URI[sha256sum] = "4c305cc59f3e57f2cfc150a6ac511690f43633595760e1cb266bf23362d72f8a"
- 
- inherit autotools
--- 
-2.40.1
+also while you are at it, we have duplicate recipes for libplist,
+please merge them into one if possible
 
+see meta-oe/recipes-extended/libimobiledevice/libplist_git.bb and
+libplist_2.2.0.bb
+
+On Mon, May 8, 2023 at 3:08=E2=80=AFAM wangmy <wangmy@fujitsu.com> wrote:
+>
+> From: Wang Mingyu <wangmy@fujitsu.com>
+>
+> Changelog:
+> =3D=3D=3D=3D=3D=3D=3D=3D=3D
+> - Changes:
+>   * Rename PLIST_UINT to PLIST_INT and add plist_new_int() and plist_get_=
+int_val()
+>   * Add support for JSON format
+>   * Add support for OpenStep format
+>   * Introduce error codes and format constants
+>   * Add return value to import/export functions to allow returning error =
+codes
+>   * Add new plist_sort function
+>   * Add several human-readable output-only formats
+>   * Add new plist_write_to_string/_stream/_file functions
+>   * Add new plist_print function
+>   * Add new plist_read_from_file function
+>   * Add new plist_mem_free() function
+>   * Add a few C++ methods
+>   * Add C++ interface test
+>   * Add PLIST_NULL type
+>   * Some code housekeeping (mostly clang-tidy)
+> - Breaking:
+>   * plist_from_memory() gets additional parameter
+> - Bugfixes:
+>   * Fix multiple bugs in all of the parsers
+>   * Fix handling of PLIST_UID nodes
+>
+> Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+> ---
+>  meta-oe/recipes-extended/libimobiledevice/libplist_git.bb | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+>
+> diff --git a/meta-oe/recipes-extended/libimobiledevice/libplist_git.bb b/=
+meta-oe/recipes-extended/libimobiledevice/libplist_git.bb
+> index 82f3e4d0c9..8f5a7f166f 100644
+> --- a/meta-oe/recipes-extended/libimobiledevice/libplist_git.bb
+> +++ b/meta-oe/recipes-extended/libimobiledevice/libplist_git.bb
+> @@ -8,9 +8,9 @@ DEPENDS =3D "libxml2 glib-2.0 swig python3"
+>
+>  inherit autotools pkgconfig python3native python3targetconfig
+>
+> -PV =3D "2.2.0+git${SRCPV}"
+> +PV =3D "2.3.0"
+>
+> -SRCREV =3D "db93bae96d64140230ad050061632531644c46ad"
+> +SRCREV =3D "72480212cd8ec0ab8d0b5064df52c146cac603b4"
+>  SRC_URI =3D "git://github.com/libimobiledevice/libplist;protocol=3Dhttps=
+;branch=3Dmaster"
+>
+>  S =3D "${WORKDIR}/git"
+> --
+> 2.34.1
+>
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#102397): https://lists.openembedded.org/g/openembedde=
+d-devel/message/102397
+> Mute This Topic: https://lists.openembedded.org/mt/98757857/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
+aj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
 
