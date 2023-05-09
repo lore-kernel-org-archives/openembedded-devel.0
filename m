@@ -1,88 +1,83 @@
-Return-Path: <marex@denx.de>
+Return-Path: <chee.yang.lee@intel.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 735D0C7EE25
-	for <webhook@archiver.kernel.org>; Tue,  9 May 2023 02:44:29 +0000 (UTC)
-Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
- by mx.groups.io with SMTP id smtpd.web10.6994.1683600259688840936
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 04B2EC77B7C
+	for <webhook@archiver.kernel.org>; Tue,  9 May 2023 04:04:59 +0000 (UTC)
+Received: from mga07.intel.com (mga07.intel.com [134.134.136.100])
+ by mx.groups.io with SMTP id smtpd.web10.23815.1683605090633784767
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 08 May 2023 19:44:20 -0700
+ Mon, 08 May 2023 21:04:50 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="body hash did not verify" header.i=@denx.de header.s=phobos-20191101 header.b=zk8+n01N;
- spf=pass (domain: denx.de, ip: 85.214.62.61, mailfrom: marex@denx.de)
-Received: from tr.lan (ip-86-49-120-218.bb.vodafone.cz [86.49.120.218])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
-	(No client certificate requested)
-	(Authenticated sender: marex@denx.de)
-	by phobos.denx.de (Postfix) with ESMTPSA id 2E8B48479F;
-	Tue,  9 May 2023 04:44:16 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1683600256;
-	bh=oXRZgULX7Q15l9jMkB39/1bEfvfcagXmgnCmgoqgDxI=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=zk8+n01NpMoOqxwwEIKDVGWQxkVihsi2wTLQYwMFXhnZIZDo9EanxBv1orZlJ2wgb
-	 FWToMQnoFurH8lqC/lR8tFuPF72RYzZzCX7fpP4VslmAtW5ZgkdqgUHSPClXEp7ItH
-	 voj3SZPfxzb6vc0BY2jwsW6zU6WSKZP8wrcVVDk+zNfPDYLLw8NuSaRL5KGvtU3DjL
-	 FUw9Jd9uIYLALw/+qEsGwmCIzIDl7fAQZ+1281PkWFPrL+akJN4LgXbciMFyR8vAkl
-	 oAbxBhULjh5ch0Xob2q9+8OkeLsLDAJqaH/oFrDpP1Vv0cbPyw5VWx15Qza+weLMjL
-	 P43OAHB29n73w==
-From: Marek Vasut <marex@denx.de>
+ dkim=fail reason="unable to parse pub key" header.i=@intel.com header.s=intel header.b=RoaQT7dw;
+ spf=pass (domain: intel.com, ip: 134.134.136.100, mailfrom: chee.yang.lee@intel.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1683605090; x=1715141090;
+  h=from:to:subject:date:message-id:in-reply-to:references:
+   mime-version:content-transfer-encoding;
+  bh=Lc13aqpGTyjExiP1xkOM0s/MGYxJf99Lwz1HuwTd/vo=;
+  b=RoaQT7dwkcHAk+DDL4mu3zQXoXLuj0AC/yWwBM9skoFYUTnrkkyeSvxS
+   KAuuuyXtusaSpWxd3OVnzXb6XzFNSteH3vK3+D0XmxogFotu378YIE/EL
+   KqCseuptxBGmENQi1JnjViNz9DcRFsPqjJSLpwE1tyYrBqupNBjjsTbkk
+   X7RGsm5LW3W4R+NnSSUaYmunjYEjOZgfuuTbSvtcVCmzoafWsoptgzVVu
+   PRwNiTYeHcVWw3o4nL7Fm9cKSbO0XAV0Y1UprAkuC4wTNpdcfE5hvSjaM
+   /8nUlCWPXv5EtQiybx6KY9LVqkm/uGq+BtAjN47Q1WDIGMLd+x7x5H3iI
+   g==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10704"; a="415369859"
+X-IronPort-AV: E=Sophos;i="5.99,259,1677571200"; 
+   d="scan'208";a="415369859"
+Received: from orsmga008.jf.intel.com ([10.7.209.65])
+  by orsmga105.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 08 May 2023 21:04:49 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=McAfee;i="6600,9927,10704"; a="729317053"
+X-IronPort-AV: E=Sophos;i="5.99,259,1677571200"; 
+   d="scan'208";a="729317053"
+Received: from andromeda02.png.intel.com ([10.221.253.198])
+  by orsmga008.jf.intel.com with ESMTP; 08 May 2023 21:04:48 -0700
+From: chee.yang.lee@intel.com
 To: openembedded-devel@lists.openembedded.org
-Cc: Marek Vasut <marex@denx.de>,
-	Fabio Estevam <festevam@denx.de>,
-	Khem Raj <raj.khem@gmail.com>,
-	Martin Jansa <martin.jansa@gmail.com>,
-	Philippe Coval <philippe.coval.ext@huawei.com>,
-	Philippe Coval <philippe.coval@huawei.com>
-Subject: [meta-oe][PATCH v2 7/7] lvgl: Add dependency on fbdev into lvgl-demo-fb DISTRO_FEATURES
-Date: Tue,  9 May 2023 04:43:55 +0200
-Message-Id: <20230509024355.79006-7-marex@denx.de>
-X-Mailer: git-send-email 2.39.2
-In-Reply-To: <20230509024355.79006-1-marex@denx.de>
-References: <20230509024355.79006-1-marex@denx.de>
+Subject: [meta-oe][kirkstone 2/2] capnproto: upgrade to 0.9.2
+Date: Tue,  9 May 2023 11:53:09 +0800
+Message-Id: <20230509035309.3773590-2-chee.yang.lee@intel.com>
+X-Mailer: git-send-email 2.37.3
+In-Reply-To: <20230509035309.3773590-1-chee.yang.lee@intel.com>
+References: <20230509035309.3773590-1-chee.yang.lee@intel.com>
 MIME-Version: 1.0
-X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
-X-Virus-Status: Clean
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 09 May 2023 02:44:29 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102458
+ <openembedded-devel@lists.openembedded.org>; Tue, 09 May 2023 04:04:59 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102460
 
-This recipe hard depends on fbdev, since it specifically targets
-systems using it. Add the DISTRO_FEATURES dependency to indicate
-it.
+From: Chee Yang Lee <chee.yang.lee@intel.com>
 
-Signed-off-by: Marek Vasut <marex@denx.de>
----
-Cc: Fabio Estevam <festevam@denx.de>
-Cc: Khem Raj <raj.khem@gmail.com>
-Cc: Martin Jansa <martin.jansa@gmail.com>
-Cc: Philippe Coval <philippe.coval.ext@huawei.com>
-Cc: Philippe Coval <philippe.coval@huawei.com>
----
-V2: New patch
----
- meta-oe/recipes-graphics/lvgl/lvgl-demo-fb_8.3.0.bb | 2 ++
- 1 file changed, 2 insertions(+)
+upgrade include fix for CVE-2022-46149
 
-diff --git a/meta-oe/recipes-graphics/lvgl/lvgl-demo-fb_8.3.0.bb b/meta-o=
-e/recipes-graphics/lvgl/lvgl-demo-fb_8.3.0.bb
-index d86d6ff9c..8e0b91cac 100644
---- a/meta-oe/recipes-graphics/lvgl/lvgl-demo-fb_8.3.0.bb
-+++ b/meta-oe/recipes-graphics/lvgl/lvgl-demo-fb_8.3.0.bb
-@@ -10,6 +10,8 @@ SRCREV =3D "adf2c4490e17a1b9ec1902cc412a24b3b8235c8e"
-=20
- S =3D "${WORKDIR}/git"
-=20
-+REQUIRED_DISTRO_FEATURES =3D "fbdev"
-+
- EXTRA_OEMAKE =3D "DESTDIR=3D${D}"
-=20
- do_install() {
---=20
-2.39.2
+Signed-off-by: Chee Yang Lee <chee.yang.lee@intel.com>
+---
+ .../capnproto/{capnproto_0.9.1.bb => capnproto_0.9.2.bb}        | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-devtools/capnproto/{capnproto_0.9.1.bb => capnproto_0.9.2.bb} (93%)
+
+diff --git a/meta-oe/recipes-devtools/capnproto/capnproto_0.9.1.bb b/meta-oe/recipes-devtools/capnproto/capnproto_0.9.2.bb
+similarity index 93%
+rename from meta-oe/recipes-devtools/capnproto/capnproto_0.9.1.bb
+rename to meta-oe/recipes-devtools/capnproto/capnproto_0.9.2.bb
+index d14bd843ef..d114ad0c63 100644
+--- a/meta-oe/recipes-devtools/capnproto/capnproto_0.9.1.bb
++++ b/meta-oe/recipes-devtools/capnproto/capnproto_0.9.2.bb
+@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://../LICENSE;md5=a05663ae6cca874123bf667a60dca8c9"
+ 
+ SRC_URI = "git://github.com/sandstorm-io/capnproto.git;branch=release-${PV};protocol=https \
+            "
+-SRCREV = "b49431c48d40490ef979247d308af63345376cee"
++SRCREV = "0274bf17374df912ea834687c667bed33bd318db"
+ 
+ S = "${WORKDIR}/git/c++"
+ 
+-- 
+2.37.3
 
 
