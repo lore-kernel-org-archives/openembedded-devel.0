@@ -1,118 +1,103 @@
-Return-Path: <chee.yang.lee@intel.com>
+Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 50186C7EE22
-	for <webhook@archiver.kernel.org>; Tue,  9 May 2023 07:55:51 +0000 (UTC)
-Received: from mga03.intel.com (mga03.intel.com [134.134.136.65])
- by mx.groups.io with SMTP id smtpd.web10.26436.1683618941683671034
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5963BC77B7C
+	for <webhook@archiver.kernel.org>; Tue,  9 May 2023 08:45:11 +0000 (UTC)
+Received: from mail1.bemta37.messagelabs.com (mail1.bemta37.messagelabs.com [85.158.142.113])
+ by mx.groups.io with SMTP id smtpd.web10.27058.1683621901823310377
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 09 May 2023 00:55:41 -0700
+ Tue, 09 May 2023 01:45:02 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="unable to parse pub key" header.i=@intel.com header.s=intel header.b=ZIPxpw1V;
- spf=pass (domain: intel.com, ip: 134.134.136.65, mailfrom: chee.yang.lee@intel.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1683618941; x=1715154941;
-  h=from:to:subject:date:message-id:mime-version:
-   content-transfer-encoding;
-  bh=mfLggCkkk681nSVIJlplOKKSUfsXjyISyExBVVnRoMA=;
-  b=ZIPxpw1VXZu+PFEkpb+uhmyLwT46mHjD1fOr0yiWoTNWOXh1+h38Im1E
-   P/l3TtL+YdIpVOf5Pzc5EwgmY7w2lp8IhFil4ks+PpC4ij2wlKSrYLepw
-   tW4l2Ig/xlY1r4P9MA2D/cTQ9YfDBv8BzhMHCMhEUcLBEevZGrBwG/tP9
-   PJimo3iocUCYEx0iFMw+SUNwiWAr5W/0EFH30GVXkeobFjMQ8/fBQ18jV
-   tCRNG3TeOXcOIhOqZNlJ7uSEaxLUwCu0m5YWFNtF9ydup7hfw5973l7n/
-   TwE2g+VXTxyWSi+zz5c0orIR7ypnK7oIVDTuk+cusurJcl0v6qhRRGsqF
-   Q==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10704"; a="352894193"
-X-IronPort-AV: E=Sophos;i="5.99,261,1677571200"; 
-   d="scan'208";a="352894193"
-Received: from orsmga001.jf.intel.com ([10.7.209.18])
-  by orsmga103.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 09 May 2023 00:53:55 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10704"; a="731580469"
-X-IronPort-AV: E=Sophos;i="5.99,261,1677571200"; 
-   d="scan'208";a="731580469"
-Received: from andromeda02.png.intel.com ([10.221.253.198])
-  by orsmga001.jf.intel.com with ESMTP; 09 May 2023 00:53:55 -0700
-From: chee.yang.lee@intel.com
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=aRo53l4b;
+ spf=pass (domain: fujitsu.com, ip: 85.158.142.113, mailfrom: wangmy@fujitsu.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
+	s=170520fj; t=1683621899; i=@fujitsu.com;
+	bh=afxlAmV4We3YW5/5LxbKl0u0jbkvluxzLYvLxmG9Aoc=;
+	h=From:To:Cc:Subject:Date:Message-Id;
+	b=aRo53l4bYFj7VYkt+WhQaqLNm4CPR3kuM+TO6UxrphSayk77YR4EdrgcNqKd/cUVi
+	 rMz43sFQqVVFEp8txe+eWUWyzqZj0oDf8F2Dr3/Os/CAQdXo+oxGZFlxb2PTEwApy5
+	 gZjC1ZHy5IY19BrVpA1VLCAAepkk7txzmbKX4yjtw8ah3y7jpJjJNsDrKP9WxY0laG
+	 vPXoi9WDfUs+CiLlhywgXvLcxcQRej5JVx/8j2pD+k5yqIyGzP0xQw3AvCNFGk0YN5
+	 +LpaUlZy5zVBGhQg5rmyU49YUPQOps3699MsI8DzPPDGyHBXUkeZfBfJw0XTrCZm00
+	 ktKIE3RdmPyxg==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFnrKLMWRWlGSWpSXmKPExsViZ8ORpMvNEZV
+  icHWBqMXFw0uZHRg9zm1cwRjAGMWamZeUX5HAmtG4soW14BpnxfRja5gbGC9ydDFycggJbGSU
+  2PHcvIuRC8iexiRxo2MLM0iCTUBCYvrek+wgtoiArsTHD3MZQWxmARWJGZOPMIHYwgLBEk/7d
+  4PVswioSnxvPAhWwyvgKLHv7BWwuISAgsSUh++hbDWJq+c2MU9g5FrAyLCK0aw4tagstUjXTC
+  +pKDM9oyQ3MTNHL7FKN1EvtVQ3L7+oJEPXUC+xvFgvtbhYr7gyNzknRS8vtWQTI9DHKcXJdjs
+  Yv+z8q3eIUZKDSUmUt2tfZIoQX1J+SmVGYnFGfFFpTmrxIUYZDg4lCV5n1qgUIcGi1PTUirTM
+  HGC4waQlOHiURHhPsACleYsLEnOLM9MhUqcYdTmuXrmyl1mIJS8/L1VKnFeIHahIAKQoozQPb
+  gQs9C8xykoJ8zIyMDAI8RSkFuVmlqDKv2IU52BUEubVAVnFk5lXArfpFdARTEBH+F8OBzmiJB
+  EhJdXA1NtQ8323vf/uk3xxWzInd30u+TXj4G7XbJl5exeL9R40//Zv8WEbtR0/A3UmZTlZ1Ul
+  asYqHWZadTCualL9LXaa+MpHL855VyVePSfmLuarLOn7+WeV91+VB0YukF3N29Qb0LPPOnnd9
+  m9T/xr061/tNclZyiFlEiV/1OSX6WfJLxzG7aXXtPLJ+C2ZM4nq4RWDJV5dFP29+PvE5jdtla
+  +ipLS+3TROr3HkurUhFcLVh8As908QHtdH71GUf/1rW8DPpnLsaUzor02V9vaALsRPcJs++8/
+  l0xZR81mIxn+Sd2VHyM3evMS6f7fBlzcQOHrNupY9MxVxmafceGXce2iOX12GzaXP8jK3+k4N
+  WKbEUZyQaajEXFScCADN87GD4AgAA
+X-Env-Sender: wangmy@fujitsu.com
+X-Msg-Ref: server-5.tower-745.messagelabs.com!1683621898!577277!1
+X-Originating-IP: [62.60.8.98]
+X-SYMC-ESS-Client-Auth: outbound-route-from=pass
+X-StarScan-Received: 
+X-StarScan-Version: 9.105.2; banners=-,-,-
+X-VirusChecked: Checked
+Received: (qmail 6822 invoked from network); 9 May 2023 08:44:59 -0000
+Received: from unknown (HELO n03ukasimr03.n03.fujitsu.local) (62.60.8.98)
+  by server-5.tower-745.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 9 May 2023 08:44:59 -0000
+Received: from n03ukasimr03.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr03.n03.fujitsu.local (Postfix) with ESMTP id BDF801B4;
+	Tue,  9 May 2023 09:44:58 +0100 (BST)
+Received: from localhost.localdomain (unknown [10.167.225.33])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by n03ukasimr03.n03.fujitsu.local (Postfix) with ESMTPS id 081171B1;
+	Tue,  9 May 2023 09:44:57 +0100 (BST)
+From: wangmy@fujitsu.com
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-networking][kirkstone] tinyproxy: fix CVE-2022-40468
-Date: Tue,  9 May 2023 15:42:17 +0800
-Message-Id: <20230509074217.3874975-1-chee.yang.lee@intel.com>
-X-Mailer: git-send-email 2.37.3
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Cc: Wang Mingyu <wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH] libimobiledevice-glue: SRCREV bump d2ff796..114098d
+Date: Tue,  9 May 2023 16:44:47 +0800
+Message-Id: <1683621888-1304-1-git-send-email-wangmy@fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
+X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 09 May 2023 07:55:51 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102492
+ <openembedded-devel@lists.openembedded.org>; Tue, 09 May 2023 08:45:11 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102493
 
-From: Chee Yang Lee <chee.yang.lee@intel.com>
+From: Wang Mingyu <wangmy@fujitsu.com>
 
-(cherry-picked from 795ccdd86cad05c425adae15af27797f42f33c56)
+Changelogs:
+==========
+Add a scheduled build every 1st of the month so we always have an artifact
+Fix compilation on cygwin
+Remove plist-related code in favor of new libplist API
+Set minimum required libplist version to 2.3.0
+autoconf: Automatically derive version number from latest git tag
+Add NEWS for release
+Add missing include
 
-Signed-off-by: Chee Yang Lee <chee.yang.lee@intel.com>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../tinyproxy/tinyproxy/CVE-2022-40468.patch  | 33 +++++++++++++++++++
- .../tinyproxy/tinyproxy_1.11.0.bb             |  1 +
- 2 files changed, 34 insertions(+)
- create mode 100644 meta-networking/recipes-support/tinyproxy/tinyproxy/CVE-2022-40468.patch
+ .../libimobiledevice-glue/libimobiledevice-glue_git.bb          | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-networking/recipes-support/tinyproxy/tinyproxy/CVE-2022-40468.patch b/meta-networking/recipes-support/tinyproxy/tinyproxy/CVE-2022-40468.patch
-new file mode 100644
-index 0000000000..4e2157ca75
---- /dev/null
-+++ b/meta-networking/recipes-support/tinyproxy/tinyproxy/CVE-2022-40468.patch
-@@ -0,0 +1,33 @@
-+From 3764b8551463b900b5b4e3ec0cd9bb9182191cb7 Mon Sep 17 00:00:00 2001
-+From: rofl0r <rofl0r@users.noreply.github.com>
-+Date: Thu, 8 Sep 2022 15:18:04 +0000
-+Subject: [PATCH] prevent junk from showing up in error page in invalid
-+ requests
-+
-+fixes #457
-+
-+https://github.com/tinyproxy/tinyproxy/commit/3764b8551463b900b5b4e3ec0cd9bb9182191cb7
-+Upstream-Status: Backport
-+CVE: CVE-2022-40468
-+Signed-off-by: Chee Yang Lee <chee.yang.lee@intel.com>
-+---
-+ src/reqs.c | 4 ++++
-+ 1 file changed, 4 insertions(+)
-+
-+diff --git a/src/reqs.c b/src/reqs.c
-+index bce69819..45db118d 100644
-+--- a/src/reqs.c
-++++ b/src/reqs.c
-+@@ -343,8 +343,12 @@ static struct request_s *process_request (struct conn_s *connptr,
-+                 goto fail;
-+         }
-+ 
-++        /* zero-terminate the strings so they don't contain junk in error page */
-++        request->method[0] = url[0] = request->protocol[0] = 0;
-++
-+         ret = sscanf (connptr->request_line, "%[^ ] %[^ ] %[^ ]",
-+                       request->method, url, request->protocol);
-++
-+         if (ret == 2 && !strcasecmp (request->method, "GET")) {
-+                 request->protocol[0] = 0;
-+ 
-diff --git a/meta-networking/recipes-support/tinyproxy/tinyproxy_1.11.0.bb b/meta-networking/recipes-support/tinyproxy/tinyproxy_1.11.0.bb
-index 388f7aecbb..4ddb202268 100644
---- a/meta-networking/recipes-support/tinyproxy/tinyproxy_1.11.0.bb
-+++ b/meta-networking/recipes-support/tinyproxy/tinyproxy_1.11.0.bb
-@@ -7,6 +7,7 @@ SRC_URI = "https://github.com/${BPN}/${BPN}/releases/download/${PV}/${BP}.tar.gz
-            file://disable-documentation.patch \
-            file://tinyproxy.service \
-            file://tinyproxy.conf \
-+           file://CVE-2022-40468.patch \
-            "
+diff --git a/meta-oe/recipes-connectivity/libimobiledevice-glue/libimobiledevice-glue_git.bb b/meta-oe/recipes-connectivity/libimobiledevice-glue/libimobiledevice-glue_git.bb
+index 7e9299c9f3..b63aabdc0c 100644
+--- a/meta-oe/recipes-connectivity/libimobiledevice-glue/libimobiledevice-glue_git.bb
++++ b/meta-oe/recipes-connectivity/libimobiledevice-glue/libimobiledevice-glue_git.bb
+@@ -10,7 +10,7 @@ DEPENDS = "libplist"
  
- SRC_URI[md5sum] = "658db5558ffb849414341b756a546a99"
+ PV = "1.0.0+git${SRCPV}"
+ 
+-SRCREV = "d2ff7969dcd0a12e4f18f63dab03e6cd03054fcb"
++SRCREV = "114098d30e783fbb3def5c9b49427a86621cfcb1"
+ SRC_URI = "git://github.com/libimobiledevice/libimobiledevice-glue;protocol=https;branch=master"
+ 
+ S = "${WORKDIR}/git"
 -- 
-2.37.3
+2.34.1
 
 
