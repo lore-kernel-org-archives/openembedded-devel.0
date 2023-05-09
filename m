@@ -1,114 +1,96 @@
-Return-Path: <f_l_k@t-online.de>
+Return-Path: <ross.burton@arm.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 645FEC7EE22
-	for <webhook@archiver.kernel.org>; Tue,  9 May 2023 12:46:42 +0000 (UTC)
-Received: from mailout03.t-online.de (mailout03.t-online.de [194.25.134.81])
- by mx.groups.io with SMTP id smtpd.web11.31212.1683636392620171232
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E2446C7EE2D
+	for <webhook@archiver.kernel.org>; Tue,  9 May 2023 13:36:42 +0000 (UTC)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by mx.groups.io with SMTP id smtpd.web11.32638.1683639397560020104
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 09 May 2023 05:46:32 -0700
+ Tue, 09 May 2023 06:36:37 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=SPF record not found (domain: t-online.de, ip: 194.25.134.81, mailfrom: f_l_k@t-online.de)
-Received: from fwd79.dcpf.telekom.de (fwd79.aul.t-online.de [10.223.144.105])
-	by mailout03.t-online.de (Postfix) with SMTP id 61A082246D
-	for <openembedded-devel@lists.openembedded.org>; Tue,  9 May 2023 14:46:30 +0200 (CEST)
-Received: from flk-MS-7C91.fritz.box ([84.163.32.109]) by fwd79.t-online.de
-	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1pwMjd-0P8K9q0; Tue, 9 May 2023 14:46:29 +0200
-From: Markus Volk <f_l_k@t-online.de>
+ dkim=missing; spf=pass (domain: arm.com, ip: 217.140.110.172, mailfrom: ross.burton@arm.com)
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id AD45D1576;
+	Tue,  9 May 2023 06:37:21 -0700 (PDT)
+Received: from oss-tx204.lab.cambridge.arm.com (usa-sjc-imap-foss1.foss.arm.com [10.121.207.14])
+	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id C358D3F663;
+	Tue,  9 May 2023 06:36:36 -0700 (PDT)
+From: ross.burton@arm.com
 To: openembedded-devel@lists.openembedded.org
-Cc: Markus Volk <f_l_k@t-online.de>
-Subject: [meta-oe][PATCH 2/2] imaagemagick: update 7.1.1-5 -> 7.1.1-8
-Date: Tue,  9 May 2023 14:46:12 +0200
-Message-Id: <20230509124612.37627-2-f_l_k@t-online.de>
+Cc: nd@arm.com
+Subject: [PATCH 4/4] xorriso: remove obsolete recipe
+Date: Tue,  9 May 2023 14:36:32 +0100
+Message-Id: <20230509133632.191360-4-ross.burton@arm.com>
 X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20230509124612.37627-1-f_l_k@t-online.de>
-References: <20230509124612.37627-1-f_l_k@t-online.de>
+In-Reply-To: <20230509133632.191360-1-ross.burton@arm.com>
+References: <20230509133632.191360-1-ross.burton@arm.com>
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1683636389-42FF7266-743E8604/0/0 CLEAN NORMAL
-X-TOI-MSGID: 07f399e4-d585-445d-8ffd-6e1722cd39eb
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 09 May 2023 12:46:42 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102506
+ <openembedded-devel@lists.openembedded.org>; Tue, 09 May 2023 13:36:42 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102510
 
-- add PACKAGECONFIG for xml
-- add configuration
-- workaround reproducibility issues
+From: Ross Burton <ross.burton@arm.com>
 
-Signed-off-by: Markus Volk <f_l_k@t-online.de>
+GNU xorriso is simply a bundling of libisofs+libburn+libisoburn which
+also "restricts itself to a technical form where the legal commitments
+of the libburnia project and the legal intentions of FSF match
+completely".[1] What this actually means is unclear.
+
+We can follow upstream faster and have more modular recipes by packaging
+the pieces directly, instead of building the development snapshot of GNU
+xorriso 1.5.5.
+
+Signed-off-by: Ross Burton <ross.burton@arm.com>
 ---
- .../imagemagick/imagemagick_7.1.1.bb          | 23 ++++++++++++-------
- 1 file changed, 15 insertions(+), 8 deletions(-)
+ .../recipes-utils/xorriso/xorriso_1.5.5.bb    | 29 -------------------
+ 1 file changed, 29 deletions(-)
+ delete mode 100644 meta-filesystems/recipes-utils/xorriso/xorriso_1.5.5.=
+bb
 
-diff --git a/meta-oe/recipes-support/imagemagick/imagemagick_7.1.1.bb b/m=
-eta-oe/recipes-support/imagemagick/imagemagick_7.1.1.bb
-index 07434c0564..e59b511a72 100644
---- a/meta-oe/recipes-support/imagemagick/imagemagick_7.1.1.bb
-+++ b/meta-oe/recipes-support/imagemagick/imagemagick_7.1.1.bb
-@@ -10,23 +10,19 @@ LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Dac58ac14f9=
-d9d02cafd2d81ef38fb2cc \
- DEPENDS =3D "lcms bzip2 jpeg libpng tiff zlib fftw freetype libtool"
-=20
- BASE_PV :=3D "${PV}"
--PV .=3D "-5"
-+PV .=3D "-8"
- SRC_URI =3D "git://github.com/ImageMagick/ImageMagick.git;branch=3Dmain;=
-protocol=3Dhttps \
-            file://0001-m4-Use-autconf-provided-AC_FUNC_FSEEKO.patch"
--SRCREV =3D "2d24be538f286962c355cf422bb525375ac77998"
-+SRCREV =3D "920f79206ff59f30a4cff22c9c9c393508b82663"
-=20
- S =3D "${WORKDIR}/git"
-=20
- inherit autotools pkgconfig update-alternatives
- export ac_cv_sys_file_offset_bits=3D"64"
-=20
--# xml disabled because it's using xml2-config --prefix to determine pref=
-ix which returns just /usr with our libxml2
--# if someone needs xml support then fix it first
--EXTRA_OECONF =3D "--program-prefix=3D --program-suffix=3D.im7 --without-=
-perl \
--                --disable-openmp --without-xml --disable-opencl \
--                --enable-largefile"
-+EXTRA_OECONF =3D "--program-prefix=3D --program-suffix=3D.im7 --without-=
-perl --enable-largefile"
-=20
--PACKAGECONFIG ??=3D "${@bb.utils.filter('DISTRO_FEATURES', 'x11', d)}"
-+PACKAGECONFIG ??=3D "${@bb.utils.filter('DISTRO_FEATURES', 'x11', d)} cx=
-x webp xml"
- PACKAGECONFIG[cxx] =3D "--with-magick-plus-plus,--without-magick-plus-pl=
-us"
- PACKAGECONFIG[graphviz] =3D "--with-gvc,--without-gvc,graphviz"
- PACKAGECONFIG[jp2] =3D "--with-jp2,,jasper"
-@@ -38,6 +34,17 @@ PACKAGECONFIG[tcmalloc] =3D "--with-tcmalloc=3Dyes,--w=
-ith-tcmalloc=3Dno,gperftools"
- PACKAGECONFIG[webp] =3D "--with-webp,--without-webp,libwebp"
- PACKAGECONFIG[wmf] =3D "--with-wmf,--without-wmf,libwmf"
- PACKAGECONFIG[x11] =3D "--with-x,--without-x,virtual/libx11 libxext libx=
-t"
-+PACKAGECONFIG[xml] =3D "--with-xml,--without-xml,libxml2"
-+
-+do_install:append:class-target() {
-+    for file in MagickCore-config.im7 MagickWand-config.im7 Magick++-con=
-fig.im7; do
-+        sed -i 's,${STAGING_DIR_NATIVE},,g' ${D}${bindir}/"$file"
-+    done
-+    sed -i 's,${S},,g' ${D}${libdir}/ImageMagick-${BASE_PV}/config-Q16HD=
-RI/configure.xml
-+    sed -i 's,${B},,g' ${D}${libdir}/ImageMagick-${BASE_PV}/config-Q16HD=
-RI/configure.xml
-+    sed -i 's,${RECIPE_SYSROOT},,g' ${D}${libdir}/ImageMagick-${BASE_PV}=
-/config-Q16HDRI/configure.xml
-+    sed -i 's,${HOSTTOOLS_DIR},${bindir},g' ${D}${sysconfdir}/ImageMagic=
-k-7/delegates.xml
-+}
-=20
- FILES:${PN} +=3D "${libdir}/ImageMagick-${BASE_PV}/config-Q16* \
-                 ${datadir}/ImageMagick-7"
+diff --git a/meta-filesystems/recipes-utils/xorriso/xorriso_1.5.5.bb b/me=
+ta-filesystems/recipes-utils/xorriso/xorriso_1.5.5.bb
+deleted file mode 100644
+index a83950db82..0000000000
+--- a/meta-filesystems/recipes-utils/xorriso/xorriso_1.5.5.bb
++++ /dev/null
+@@ -1,29 +0,0 @@
+-DESCRIPTION =3D "xorriso copies file objects from POSIX compliant filesy=
+stems \
+-into Rock Ridge enhanced ISO 9660 filesystems and allows session-wise \
+-manipulation of such filesystems"
+-
+-LICENSE =3D "GPL-3.0-only"
+-LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dd32239bcb673463ab874e80d47fae=
+504"
+-
+-SRC_URI =3D "http://www.gnu.org/software/${BPN}/${BPN}-${PV}.tar.gz"
+-
+-SRC_URI[md5sum] =3D "a5e3dc4e0b92be6837f9ed6cbf7f9df5"
+-SRC_URI[sha256sum] =3D "91663d61bee61ff790b3f6861fdf57c54af0e238ab14f297=
+b55bae8ab5d17684"
+-
+-PACKAGECONFIG ??=3D "acl attr zlib bzip2 readline"
+-PACKAGECONFIG[acl] =3D "--enable-libacl,--disable-libacl,acl,"
+-PACKAGECONFIG[attr] =3D "--enable-xattr,--disable-xattr,attr,"
+-PACKAGECONFIG[zlib] =3D "--enable-zlib,--disable-zlib,zlib,"
+-PACKAGECONFIG[bzip2] =3D "--enable-libbz2,--disable-libbz2,bzip2,"
+-PACKAGECONFIG[readline] =3D "--enable-libreadline,--disable-libreadline,=
+readline,"
+-
+-inherit autotools-brokensep pkgconfig features_check
+-
+-do_configure:prepend () {
+-    touch NEWS
+-}
+-
+-RDEPENDS:${PN} =3D "tk"
+-REQUIRED_DISTRO_FEATURES =3D "x11"
+-
+-BBCLASSEXTEND =3D "native"
 --=20
 2.34.1
 
