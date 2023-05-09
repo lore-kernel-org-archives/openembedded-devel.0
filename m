@@ -2,31 +2,31 @@ Return-Path: <marex@denx.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 98B08C7EE26
-	for <webhook@archiver.kernel.org>; Tue,  9 May 2023 02:44:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7359BC7EE22
+	for <webhook@archiver.kernel.org>; Tue,  9 May 2023 02:44:29 +0000 (UTC)
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
- by mx.groups.io with SMTP id smtpd.web11.6846.1683600257323744781
+ by mx.groups.io with SMTP id smtpd.web11.6847.1683600259711281856
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 08 May 2023 19:44:17 -0700
+ Mon, 08 May 2023 19:44:20 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="body hash did not verify" header.i=@denx.de header.s=phobos-20191101 header.b=oQBRcScf;
+ dkim=fail reason="body hash did not verify" header.i=@denx.de header.s=phobos-20191101 header.b=XGD+XdlK;
  spf=pass (domain: denx.de, ip: 85.214.62.61, mailfrom: marex@denx.de)
 Received: from tr.lan (ip-86-49-120-218.bb.vodafone.cz [86.49.120.218])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
 	(No client certificate requested)
 	(Authenticated sender: marex@denx.de)
-	by phobos.denx.de (Postfix) with ESMTPSA id 6A4ED8479D;
+	by phobos.denx.de (Postfix) with ESMTPSA id C61FC8479E;
 	Tue,  9 May 2023 04:44:15 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1683600255;
-	bh=auS28xqNLL2TtVP9dnMFHTyMGTM925KWIO32fuIYejs=;
+	s=phobos-20191101; t=1683600256;
+	bh=zWrpwEbGQrzeKg4vnxcK6U+9og1bGfX9jOzKtcMVutA=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=oQBRcScfE7LBElAY/MFKRcLJKSOLD7T5r8LrCD2H+Asy0vQtTIdo04mhjfwqS+TO8
-	 HToY2zIpGzELu3zOrnxfCGUErK/gp8Of+/lMX5prAPgj+ZyJY+6jf1ESLYXbm5nnue
-	 KL+1k++9qR4YRfzIjkijbUDzujniufYUck+ajT410+oyNFJpoLu9PizTgD2DirlneC
-	 OKYOD1ghEdYdC0dEeDwiwXkzWlW3c1P890eLz34aHU23LXWg5Q1UZEkOWvziYy7Hlg
-	 fGWv0XKyKqwrohwgpgVSFedLapD9fyeWklLm9qd+9IaMjzgBNLduaTMTHGxeQyqUvt
-	 qmweLfp7/mDiA==
+	b=XGD+XdlKXEfKC5Ecb26temNQTOAorT4CZxLR3j+WjvGjYDrrIUTBxAN7jcsikq9kV
+	 A5Mk+oqQNTHaEXSeC8oZ/0GsbD/E0ogQY+hDZPDt7JfR8FLsUFSh6YOJCEJO5b/4tN
+	 uKeh8HRlWgoMiSrEwbgIXXE+XcHiI1tIrK5nbRQrzq8SGi6VmKcgrWh4fGV0/AYL8N
+	 5kKquY1A+55lcC0tiBFRybYcTZQ3ZHPBP18mJvnX/+PzO01Pim3OEtUmZWeQgcl7Zv
+	 MeBVui0A8a1V3V6zADixuRIqcTQ4T7u2XUmw6A9JgKP9d3bN6FAM62t2vk8BIIPrt+
+	 9l8+8DvUpYZ3g==
 From: Marek Vasut <marex@denx.de>
 To: openembedded-devel@lists.openembedded.org
 Cc: Marek Vasut <marex@denx.de>,
@@ -35,9 +35,9 @@ Cc: Marek Vasut <marex@denx.de>,
 	Martin Jansa <martin.jansa@gmail.com>,
 	Philippe Coval <philippe.coval.ext@huawei.com>,
 	Philippe Coval <philippe.coval@huawei.com>
-Subject: [meta-oe][PATCH v2 5/7] lvgl: Update lvgl-demo-fb to 8.3.0
-Date: Tue,  9 May 2023 04:43:53 +0200
-Message-Id: <20230509024355.79006-5-marex@denx.de>
+Subject: [meta-oe][PATCH v2 6/7] lvgl: Upgrade dialog-lvgl to next/main version
+Date: Tue,  9 May 2023 04:43:54 +0200
+Message-Id: <20230509024355.79006-6-marex@denx.de>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20230509024355.79006-1-marex@denx.de>
 References: <20230509024355.79006-1-marex@denx.de>
@@ -48,24 +48,21 @@ Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 09 May 2023 02:44:19 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102453
+ <openembedded-devel@lists.openembedded.org>; Tue, 09 May 2023 02:44:29 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102459
 
-The lvgl-demo-fb depends on specific configuration of LVGL which
-includes demo widgets, which as far as I can tell are not needed
-for regular LVGL application development. Currently lvgl-demo-fb
-contains its own copy of lvgl and lv-drivers, for which meta-oe
-already contains its own recipes, but so far we cannot reuse them.
+The dialog-lvgl has been unmaintained and stuck at LVGL v8.1.0 in
+its now archived repository branch main. There is subsequent effort
+in next/main branch which updates the code base to LVGL v8.2.0 that
+is almost compatible enough to still build against LVGL v8.3.7.
 
-Upgrade the lvgl-demo-fb to 8.3.0 to at least match the lvgl and
-lv-drivers .
+Upgrade to this next/main branch which contains three additional
+commits on top of the main branch, which implement the update to
+newer LVGL. Add two more fixes to build against system timer provided
+tick and another fix for WL callback data type. Since there is no
+upstream, track the patches here for now.
 
 Signed-off-by: Marek Vasut <marex@denx.de>
----
-NOTE: I am almost tempted to drop this recipe, it basically builds
-two files against LVGL configured in specific way. And it seems the
-LVGL has no modularity support, so we cannot deal with packaging
-the extra widgets easily.
 ---
 Cc: Fabio Estevam <festevam@denx.de>
 Cc: Khem Raj <raj.khem@gmail.com>
@@ -75,31 +72,157 @@ Cc: Philippe Coval <philippe.coval@huawei.com>
 ---
 V2: New patch
 ---
- .../lvgl/{lvgl-demo-fb.bb =3D> lvgl-demo-fb_8.3.0.bb}             | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-graphics/lvgl/{lvgl-demo-fb.bb =3D> lvgl-demo-fb_=
-8.3.0.bb} (91%)
+ ...-wayland-Switch-to-custom-timer-tick.patch | 72 +++++++++++++++++++
+ .../0002-wayland-Fix-callback-data-type.patch | 30 ++++++++
+ .../recipes-graphics/lvgl/dialog-lvgl_git.bb  |  7 +-
+ 3 files changed, 107 insertions(+), 2 deletions(-)
+ create mode 100644 meta-oe/recipes-graphics/lvgl/dialog-lvgl/0001-waylan=
+d-Switch-to-custom-timer-tick.patch
+ create mode 100644 meta-oe/recipes-graphics/lvgl/dialog-lvgl/0002-waylan=
+d-Fix-callback-data-type.patch
 
-diff --git a/meta-oe/recipes-graphics/lvgl/lvgl-demo-fb.bb b/meta-oe/reci=
-pes-graphics/lvgl/lvgl-demo-fb_8.3.0.bb
-similarity index 91%
-rename from meta-oe/recipes-graphics/lvgl/lvgl-demo-fb.bb
-rename to meta-oe/recipes-graphics/lvgl/lvgl-demo-fb_8.3.0.bb
-index 3430c2491..d86d6ff9c 100644
---- a/meta-oe/recipes-graphics/lvgl/lvgl-demo-fb.bb
-+++ b/meta-oe/recipes-graphics/lvgl/lvgl-demo-fb_8.3.0.bb
-@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D802d3d83ae80ef=
-5f343050bf96cce3a4 \
-                     file://lvgl/LICENCE.txt;md5=3Dbf1198c89ae87f043108ce=
-a62460b03a"
+diff --git a/meta-oe/recipes-graphics/lvgl/dialog-lvgl/0001-wayland-Switc=
+h-to-custom-timer-tick.patch b/meta-oe/recipes-graphics/lvgl/dialog-lvgl/=
+0001-wayland-Switch-to-custom-timer-tick.patch
+new file mode 100644
+index 000000000..5149002ff
+--- /dev/null
++++ b/meta-oe/recipes-graphics/lvgl/dialog-lvgl/0001-wayland-Switch-to-cu=
+stom-timer-tick.patch
+@@ -0,0 +1,72 @@
++From 1d92e1854c19c06c553243d29170bb4d1a9e3863 Mon Sep 17 00:00:00 2001
++From: Marek Vasut <marex@denx.de>
++Date: Tue, 9 May 2023 02:57:30 +0200
++Subject: [PATCH 1/2] wayland: Switch to custom timer tick
++
++The OE LVGL is configured to obtain timer tick from system timer
++instead of using ad-hoc mechanisms to emulate timer tick using
++threads or such. Use system timer to provide the tick.
++
++The tick handling implementation comes from:
++https://github.com/lvgl/lv_port_linux_frame_buffer.git
++as of commit adf2c4490e17a1b9ec1902cc412a24b3b8235c8e
++
++Upstream-Status: Inappropriate [Upstream repo is archived]
++Signed-off-by: Marek Vasut <marex@denx.de>
++---
++ src/drivers/wayland.c | 24 ++++++++++++++++--------
++ 1 file changed, 16 insertions(+), 8 deletions(-)
++
++diff --git a/src/drivers/wayland.c b/src/drivers/wayland.c
++index 633dc18..bcebf4d 100644
++--- a/src/drivers/wayland.c
+++++ b/src/drivers/wayland.c
++@@ -6,6 +6,7 @@
++ #if defined(USE_WAYLAND) && USE_WAYLAND
++=20
++ #include <pthread.h>
+++#include <sys/time.h>
++ #include <unistd.h>
++=20
++ #include <lv_drivers/wayland/wayland.h>
++@@ -18,13 +19,22 @@
++ #define WAYLAND_VER_RES      320
++ #endif
++=20
++-static void * tick_thread(void * data)
+++uint32_t custom_tick_get(void)
++ {
++-    (void) data;
++-    while(true) {
++-        usleep(5 * 1000);
++-        lv_tick_inc(5);
++-    }
+++	static uint64_t start_ms =3D 0;
+++	if(start_ms =3D=3D 0) {
+++		struct timeval tv_start;
+++		gettimeofday(&tv_start, NULL);
+++		start_ms =3D (tv_start.tv_sec * 1000000 + tv_start.tv_usec) / 1000;
+++	}
+++
+++	struct timeval tv_now;
+++	gettimeofday(&tv_now, NULL);
+++	uint64_t now_ms;
+++	now_ms =3D (tv_now.tv_sec * 1000000 + tv_now.tv_usec) / 1000;
+++
+++	uint32_t time_ms =3D now_ms - start_ms;
+++	return time_ms;
++ }
++=20
++=20
++@@ -47,8 +57,6 @@ void hal_init(void)
++=20
++     lv_group_t * g =3D lv_group_create();
++     lv_group_set_default(g);
++-    static pthread_t hal_thread;
++-    pthread_create(&hal_thread, NULL, tick_thread, NULL);
++ }
++=20
++ #endif
++--=20
++2.39.2
++
+diff --git a/meta-oe/recipes-graphics/lvgl/dialog-lvgl/0002-wayland-Fix-c=
+allback-data-type.patch b/meta-oe/recipes-graphics/lvgl/dialog-lvgl/0002-=
+wayland-Fix-callback-data-type.patch
+new file mode 100644
+index 000000000..8919a1a2a
+--- /dev/null
++++ b/meta-oe/recipes-graphics/lvgl/dialog-lvgl/0002-wayland-Fix-callback=
+-data-type.patch
+@@ -0,0 +1,30 @@
++From b7af695d79820adf53e7d612120bda12ed2886e2 Mon Sep 17 00:00:00 2001
++From: Marek Vasut <marex@denx.de>
++Date: Tue, 9 May 2023 02:57:38 +0200
++Subject: [PATCH 2/2] wayland: Fix callback data type
++
++The LVGL 8.3.y changed the callback data type, update it accordingly.
++
++Upstream-Status: Inappropriate [Upstream repo is archived]
++Signed-off-by: Marek Vasut <marex@denx.de>
++---
++ src/drivers/wayland.c | 3 +--
++ 1 file changed, 1 insertion(+), 2 deletions(-)
++
++diff --git a/src/drivers/wayland.c b/src/drivers/wayland.c
++index bcebf4d..cfefa88 100644
++--- a/src/drivers/wayland.c
+++++ b/src/drivers/wayland.c
++@@ -37,8 +37,7 @@ uint32_t custom_tick_get(void)
++ 	return time_ms;
++ }
++=20
++-
++-static lv_wayland_display_close_f_t close_cb()
+++static bool close_cb(lv_disp_t * disp)
++ {
++ }
++=20
++--=20
++2.39.2
++
+diff --git a/meta-oe/recipes-graphics/lvgl/dialog-lvgl_git.bb b/meta-oe/r=
+ecipes-graphics/lvgl/dialog-lvgl_git.bb
+index 7e24c51f2..9e820d0db 100644
+--- a/meta-oe/recipes-graphics/lvgl/dialog-lvgl_git.bb
++++ b/meta-oe/recipes-graphics/lvgl/dialog-lvgl_git.bb
+@@ -1,8 +1,11 @@
+ # SPDX-FileCopyrightText: Huawei Inc.
+ # SPDX-License-Identifier: MIT
 =20
- SRC_URI =3D "gitsm://github.com/lvgl/lv_port_linux_frame_buffer.git;bran=
-ch=3Dmaster;protocol=3Dhttps"
--SRCREV =3D "dd010430b959f40b8f25a51c76bc920cbc2550cc"
-+SRCREV =3D "adf2c4490e17a1b9ec1902cc412a24b3b8235c8e"
+-SRC_URI =3D "gitsm://git.ostc-eu.org/rzr/dialog-lvgl;destsuffix=3D${S};p=
+rotocol=3Dhttps;nobranch=3D1"
+-SRCREV =3D "5d2121457a6988c97cacb0790594440693fc3d29"
++SRC_URI =3D "git://git.ostc-eu.org/rzr/dialog-lvgl;destsuffix=3D${S};pro=
+tocol=3Dhttps;nobranch=3D1 \
++           file://0001-wayland-Switch-to-custom-timer-tick.patch \
++           file://0002-wayland-Fix-callback-data-type.patch \
++           "
++SRCREV =3D "cdf8d38acca87e871c3a488fd07f1e4779590f8e"
 =20
- S =3D "${WORKDIR}/git"
-=20
+ LICENSE =3D "MIT"
+ LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D8ce0a84e5276f01364119c873b712=
+c4f"
 --=20
 2.39.2
 
