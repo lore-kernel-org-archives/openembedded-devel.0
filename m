@@ -2,158 +2,159 @@ Return-Path: <Martin.Jansa@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BADE6C7EE2D
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CD14BC7EE2E
 	for <webhook@archiver.kernel.org>; Tue,  9 May 2023 07:07:10 +0000 (UTC)
-Received: from mail-wm1-f51.google.com (mail-wm1-f51.google.com [209.85.128.51])
- by mx.groups.io with SMTP id smtpd.web11.25853.1683616028524249602
+Received: from mail-wr1-f46.google.com (mail-wr1-f46.google.com [209.85.221.46])
+ by mx.groups.io with SMTP id smtpd.web11.25851.1683616026694747784
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 09 May 2023 00:07:08 -0700
+ Tue, 09 May 2023 00:07:07 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=HVm1EJYS;
- spf=pass (domain: gmail.com, ip: 209.85.128.51, mailfrom: martin.jansa@gmail.com)
-Received: by mail-wm1-f51.google.com with SMTP id 5b1f17b1804b1-3f423ac6e2dso14864195e9.2
-        for <openembedded-devel@lists.openembedded.org>; Tue, 09 May 2023 00:07:08 -0700 (PDT)
+ dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=m028uOKs;
+ spf=pass (domain: gmail.com, ip: 209.85.221.46, mailfrom: martin.jansa@gmail.com)
+Received: by mail-wr1-f46.google.com with SMTP id ffacd0b85a97d-30786c6082dso1962271f8f.2
+        for <openembedded-devel@lists.openembedded.org>; Tue, 09 May 2023 00:07:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1683616027; x=1686208027;
+        d=gmail.com; s=20221208; t=1683616025; x=1686208025;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=L9ieuQPCEI5ko4usvpKPzFADY7xrSoakE4gV5esaV7M=;
-        b=HVm1EJYSctNS7VYVbAM8Q1r2yiZyEhmaXa8nD5TVZIxYGYQttIA6oJXmN/kGe0/iBg
-         haIAVI+ns+t6iYUld2EubwmfoCSQ3qNXFyikZSaQCC9L15dVLXFVhE+jSg2oCOjZcst7
-         3VObJB28V+YzBBrXQ70APQVcaiJckbriY936a8Bn8q6AyoI5WCZde40SuTrrMM1ll9vw
-         OxN1YdHW4NXEXDAMEBmLg4vaURRNxtvyhopPu+5r8wI5xOod2ZuwYaDZSwfLX5BZABF7
-         TEv4N2pgiPqU7BcOWk01HF3ICyMGZetiGP+yR1N31H3XpAFPjdY53XBt3PWlSO0MqINR
-         38Xg==
+        bh=Itq8s7nvXxSR6duwcOL7DYmTk9Kqfg8pPMUyaqWaOdk=;
+        b=m028uOKsu+kdsdJda6Q6LlsdkIkQ8A3+0qf+54Wyjok2uheMQ+zMorI9TEi2P+NyCa
+         sMnxQaddg9KPTYJhaQcSdxoWyvUhKuh3QHBtOb5zdiEfjSx961QOeWdBMhkkv8MxNFd7
+         hzcZAbbLwIVLHo2qf2KFt0zkmPZLr4zQ9hZ/S5bgmFxox2X7cKdE3DP+RMpd+/yFdh59
+         jKWIow/8ADSwv4XB/GHz2t4HUob3JZaE3x7QZAaWUCy6MGK6ekEeE+wo6fT/W2OAtXzG
+         uvmr1xyroGdZx4lxbbGivU+sFMG8hum1AFRpl4LNZPjy1Q9VdvzwO3UbwQSW1Xpg/9Eg
+         eK7A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1683616027; x=1686208027;
+        d=1e100.net; s=20221208; t=1683616025; x=1686208025;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=L9ieuQPCEI5ko4usvpKPzFADY7xrSoakE4gV5esaV7M=;
-        b=lRR3WKL1CVmRWBNscuFnroJh7GhtAVW5A6ZmaE7MJk9pce9QuT6LqRRlTb8zYhYaZS
-         IkQscszsb7zIjjBrmKsA9GzuS+5vBQjciynDeXTYN9jtWaffRMDIGqvF8SO+qWlobmYz
-         yR25aRkYGreUNf+jIrGX79O3evMjpf4b5DwDc0SeMGIIx2mjRlV98Vaz7ebtDx+4lWa1
-         0KxDNCAICv82KCz4JXQLVfLqY9cF5K1i9GzA92Ss00qPfqwPaGjjdApCLknQ6Esd1XK1
-         JyAdsRSPMlBi+NdSI5qzWnhnoyEwjr48R6yYdYfjcxzppVtqATSOIbfgZnQ7e+79VM3r
-         HMMg==
-X-Gm-Message-State: AC+VfDxbp4HaBcnGmKB/k/yzaNcNjWtntUUFfT3fMjXyIf6aWnrvLjyY
-	DvfNlclVRub56EhdHMT5RU7uGQrcmJY=
-X-Google-Smtp-Source: ACHHUZ4MryZVe4HnzrQF2v9CQV2p354WspFJSV1nmLL/tfugD+mBI77GIQTBjdMJpOsXZ8DH8nZoRg==
-X-Received: by 2002:a7b:c7cb:0:b0:3f4:2cb2:a6cf with SMTP id z11-20020a7bc7cb000000b003f42cb2a6cfmr317691wmk.10.1683616027030;
-        Tue, 09 May 2023 00:07:07 -0700 (PDT)
+        bh=Itq8s7nvXxSR6duwcOL7DYmTk9Kqfg8pPMUyaqWaOdk=;
+        b=Pm+Y4+HlLl3eMuLXuWPNSC2yL2dTqEnqkqijZSQh0i0WqYz+sA1H53wLW+Dv20PXt3
+         vZK16rcKh5+NV81sbbFnZOOTAYGVVBTkUEO9Rk8ha6r9JdlOBxN9fBXS4pkpyg4V9ZW0
+         hSwUhrsv1RBhHR7TGLHjpYJYCnIEtXGZYXx+4BnYyvYs0mE4+X+AXtNLIzYXZjzEXbJT
+         LAtirq+38ACZgWWX7lEFxdSofBxcVlNP/zbNPjcjA/Qy5jK+3VXzKQGzJNAFrLP8VXnd
+         icNKUdIOcDuwbF6jlt2coTZn/CHNREE/OOIhIO4SpfZdVWeh/UKsq5cyUteGZWXBQeo/
+         oKmw==
+X-Gm-Message-State: AC+VfDxaho0mIrn3bGCB+GUUsbM0l3Ve/enbioowS+3dOT9eteX7SC7l
+	4OJoiE3HdQrFZyMdsgxOvcJUy1kb6Vw=
+X-Google-Smtp-Source: ACHHUZ6Ptwb5bkbkIYRMGk84cGzooIg7f9JKvEw397aOO7uggUi1NVRaBUdPZFywxZZGgBuuZdlv4Q==
+X-Received: by 2002:adf:d092:0:b0:306:31fb:1c3d with SMTP id y18-20020adfd092000000b0030631fb1c3dmr8413720wrh.32.1683616025072;
+        Tue, 09 May 2023 00:07:05 -0700 (PDT)
 Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
-        by smtp.gmail.com with ESMTPSA id t6-20020a1c7706000000b003f42cc7aac4sm400302wmi.37.2023.05.09.00.07.06
+        by smtp.gmail.com with ESMTPSA id a4-20020adffac4000000b00304ae802f02sm13436053wrs.66.2023.05.09.00.07.04
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 09 May 2023 00:07:06 -0700 (PDT)
+        Tue, 09 May 2023 00:07:04 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Martin Jansa <Martin.Jansa@gmail.com>
-Subject: [meta-oe][mickledore][PATCH 11/16] libnfs: fix installed-vs-shipped issues with multilib
-Date: Tue,  9 May 2023 09:06:50 +0200
-Message-Id: <20230509070655.70784-11-Martin.Jansa@gmail.com>
+Subject: [meta-oe][mickledore][PATCH 08/16] rdfind: fix build with -Werror=return-type
+Date: Tue,  9 May 2023 09:06:47 +0200
+Message-Id: <20230509070655.70784-8-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20230509070655.70784-1-Martin.Jansa@gmail.com>
 References: <20230509070655.70784-1-Martin.Jansa@gmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 09 May 2023 07:07:10 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102479
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102476
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- ...espect-CMAKE_INSTALL_LIBDIR-for-mult.patch | 61 +++++++++++++++++++
- .../libnfs/libnfs_5.0.2.bb                    |  4 +-
- 2 files changed, 64 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-connectivity/libnfs/libnfs/0001-CMakeLists.txt-respect-CMAKE_INSTALL_LIBDIR-for-mult.patch
+ ...-configure.ac-fix-C-11-support-check.patch | 37 +++++++++++++++++++
+ .../recipes-support/rdfind/rdfind_1.5.0.bb    |  1 +
+ 2 files changed, 38 insertions(+)
+ create mode 100644 meta-oe/recipes-support/rdfind/rdfind/0001-configure.ac=
+-fix-C-11-support-check.patch
 
-diff --git a/meta-oe/recipes-connectivity/libnfs/libnfs/0001-CMakeLists.txt-respect-CMAKE_INSTALL_LIBDIR-for-mult.patch b/meta-oe/recipes-connectivity/libnfs/libnfs/0001-CMakeLists.txt-respect-CMAKE_INSTALL_LIBDIR-for-mult.patch
+diff --git a/meta-oe/recipes-support/rdfind/rdfind/0001-configure.ac-fix-C-=
+11-support-check.patch b/meta-oe/recipes-support/rdfind/rdfind/0001-configu=
+re.ac-fix-C-11-support-check.patch
 new file mode 100644
-index 0000000000..55595104aa
+index 0000000000..815939b82d
 --- /dev/null
-+++ b/meta-oe/recipes-connectivity/libnfs/libnfs/0001-CMakeLists.txt-respect-CMAKE_INSTALL_LIBDIR-for-mult.patch
-@@ -0,0 +1,61 @@
-+From 95708ff427c12b58e53fab225a08c811ca358394 Mon Sep 17 00:00:00 2001
++++ b/meta-oe/recipes-support/rdfind/rdfind/0001-configure.ac-fix-C-11-supp=
+ort-check.patch
+@@ -0,0 +1,37 @@
++From 9070bc210b2ecff641b73e4ade30040c1461969c Mon Sep 17 00:00:00 2001
 +From: Martin Jansa <Martin.Jansa@gmail.com>
-+Date: Wed, 3 May 2023 22:27:10 +0200
-+Subject: [PATCH] CMakeLists.txt: respect ${CMAKE_INSTALL_LIBDIR} for multilib
++Date: Wed, 3 May 2023 18:31:57 +0200
++Subject: [PATCH] configure.ac: fix C++11 support check
 +
-+* fixes:
-+  ERROR: libnfs-5.0.2-r0 do_package: QA Issue: libnfs: Files/directories were installed but not shipped in any package:
-+    /usr/lib/libnfs.so
-+    /usr/lib/libnfs.so.11.1.0
-+    /usr/lib/libnfs.so.5.0.2
-+    /usr/lib/pkgconfig
-+    /usr/lib/cmake
-+    /usr/lib/pkgconfig/libnfs.pc
-+    /usr/lib/cmake/libnfs
-+    /usr/lib/cmake/libnfs/libnfs-config-version.cmake
-+    /usr/lib/cmake/libnfs/libnfs-config.cmake
-+    /usr/lib/cmake/libnfs/libnfs-config-noconfig.cmake
-+    /usr/lib/cmake/libnfs/FindNFS.cmake
-+  Please set FILES such that these items are packaged. Alternatively if they are unneeded, avoid installing them or delete them within do_install.
-+  libnfs: 11 installed and not shipped files. [installed-vs-shipped]
++* with -Werror=3Dreturn-type in CFLAGS this test fails with:
 +
-+  when libdir is /usr/lib64 with multilib
++  configure:4290: checking for C++11 support or better
++  configure:4303: x86_64-webos-linux-g++  -m64 -march=3Dcore2 -mtune=3Dcor=
+e2 -msse3 -mfpmath=3Dsse -fstack-protector-strong  -O2 -D_FORTIFY_SOURCE=3D=
+2 -Wformat -Wformat-security -Werror=3Dformat-security -Werror=3Dreturn-typ=
+e --sysroot=3D/OE/lge/build/webos/mickledore/BUILD/work/qemux86_64-webos-li=
+nux/rdfind/1.5.0-r0/recipe-sysroot -c  -O2 -pipe -g -feliminate-unused-debu=
+g-types -fmacro-prefix-map=3D/OE/lge/build/webos/mickledore/BUILD/work/qemu=
+x86_64-webos-linux/rdfind/1.5.0-r0/rdfind-1.5.0=3D/usr/src/debug/rdfind/1.5=
+.0-r0  -fdebug-prefix-map=3D/OE/lge/build/webos/mickledore/BUILD/work/qemux=
+86_64-webos-linux/rdfind/1.5.0-r0/rdfind-1.5.0=3D/usr/src/debug/rdfind/1.5.=
+0-r0  -fmacro-prefix-map=3D/OE/lge/build/webos/mickledore/BUILD/work/qemux8=
+6_64-webos-linux/rdfind/1.5.0-r0/build=3D/usr/src/debug/rdfind/1.5.0-r0  -f=
+debug-prefix-map=3D/OE/lge/build/webos/mickledore/BUILD/work/qemux86_64-web=
+os-linux/rdfind/1.5.0-r0/build=3D/usr/src/debug/rdfind/1.5.0-r0  -fdebug-pr=
+efix-map=3D/OE/lge/build/webos/mickledore/BUILD/work/qemux86_64-webos-linux=
+/rdfind/1.5.0-r0/recipe-sysroot=3D  -fmacro-prefix-map=3D/OE/lge/build/webo=
+s/mickledore/BUILD/work/qemux86_64-webos-linux/rdfind/1.5.0-r0/recipe-sysro=
+ot=3D  -fdebug-prefix-map=3D/OE/lge/build/webos/mickledore/BUILD/work/qemux=
+86_64-webos-linux/rdfind/1.5.0-r0/recipe-sysroot-native=3D  -fvisibility-in=
+lines-hidden   conftest.cpp >&5
++  conftest.cpp: In function 'int f()':
++  conftest.cpp:22:20: error: no return statement in function returning non=
+-void [-Werror=3Dreturn-type]
++     22 | int f() { auto a=3D1;}                                          =
+                                                                           =
+                                                                           =
+                        |                    ^
++  cc1plus: some warnings being treated as errors
++  ...
++  configure:4308: error: no c++11 support, please set CXXFLAGS properly
++
++* fix the test to pass
 +
 +Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-+Upstream-Status: Pending
++Upstream-Status: Submitted [https://github.com/pauldreik/rdfind/pull/132]
 +---
-+ CMakeLists.txt     | 6 +++---
-+ lib/CMakeLists.txt | 4 ++--
-+ 2 files changed, 5 insertions(+), 5 deletions(-)
++ configure.ac | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
 +
-+diff --git a/CMakeLists.txt b/CMakeLists.txt
-+index 4fb0fe7..8e5a0e4 100644
-+--- a/CMakeLists.txt
-++++ b/CMakeLists.txt
-+@@ -6,11 +6,11 @@ project(libnfs
-+ 
-+ set(SOVERSION 11.1.0 CACHE STRING "" FORCE)
-+ 
-+-set(INSTALL_LIB_DIR "${CMAKE_INSTALL_PREFIX}/lib" CACHE PATH "Installation directory for libraries")
-++set(INSTALL_LIB_DIR "${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}" CACHE PATH "Installation directory for libraries")
-+ set(INSTALL_INC_DIR "${CMAKE_INSTALL_PREFIX}/include" CACHE PATH "Installation directory for headers")
-+ set(INSTALL_MAN_DIR "${CMAKE_INSTALL_PREFIX}/share/man" CACHE PATH "Installation directory for manual pages")
-+-set(INSTALL_PKGCONFIG_DIR "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" CACHE PATH "Installation directory for pkgconfig (.pc) files")
-+-set(INSTALL_CMAKE_DIR "${CMAKE_INSTALL_PREFIX}/lib/cmake/libnfs" CACHE PATH "Installation directory for cmake (.cmake) files")
-++set(INSTALL_PKGCONFIG_DIR "${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}/pkgconfig" CACHE PATH "Installation directory for pkgconfig (.pc) files")
-++set(INSTALL_CMAKE_DIR "${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}/cmake/libnfs" CACHE PATH "Installation directory for cmake (.cmake) files")
-+ 
-+ option(BUILD_SHARED_LIBS "Build shared libraries" ON)
-+ option(ENABLE_TESTS "Build and run test programs" OFF)
-+diff --git a/lib/CMakeLists.txt b/lib/CMakeLists.txt
-+index 88ba7b8..5ff89dc 100644
-+--- a/lib/CMakeLists.txt
-++++ b/lib/CMakeLists.txt
-+@@ -23,5 +23,5 @@ set_target_properties(nfs PROPERTIES
-+ 
-+ install(TARGETS nfs EXPORT libnfs
-+                     RUNTIME DESTINATION bin
-+-                    ARCHIVE DESTINATION lib
-+-                    LIBRARY DESTINATION lib)
-++                    ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
-++                    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})
-diff --git a/meta-oe/recipes-connectivity/libnfs/libnfs_5.0.2.bb b/meta-oe/recipes-connectivity/libnfs/libnfs_5.0.2.bb
-index 7a40f4efc3..e0df18a50c 100644
---- a/meta-oe/recipes-connectivity/libnfs/libnfs_5.0.2.bb
-+++ b/meta-oe/recipes-connectivity/libnfs/libnfs_5.0.2.bb
-@@ -3,7 +3,9 @@ HOMEPAGE = "https://github.com/sahlberg/libnfs"
- LICENSE = "LGPL-2.1-only & BSD-2-Clause & GPL-3.0-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=825301ba17efc9d188ee0abd4b924ada"
- 
--SRC_URI = "git://github.com/sahlberg/libnfs.git;protocol=https;branch=master"
-+SRC_URI = "git://github.com/sahlberg/libnfs.git;protocol=https;branch=master \
-+    file://0001-CMakeLists.txt-respect-CMAKE_INSTALL_LIBDIR-for-mult.patch \
-+"
- SRCREV = "40348f45d6beb8a8f50b6b63414a98fc1a061b7d"
- S = "${WORKDIR}/git"
- 
--- 
++diff --git a/configure.ac b/configure.ac
++index be1b2fd..9c3513c 100644
++--- a/configure.ac
+++++ b/configure.ac
++@@ -64,7 +64,7 @@ AC_SYS_LARGEFILE
++=20
++ dnl make sure we have c++11 or better,
++ AC_MSG_CHECKING([for C++11 support or better])
++-AC_COMPILE_IFELSE([AC_LANG_PROGRAM([int f() { auto a=3D1;}])],
+++AC_COMPILE_IFELSE([AC_LANG_PROGRAM([int f() { auto a=3D1;return a;}])],
++                   [AC_MSG_RESULT([yes])],
++ 		  [AC_MSG_ERROR([no c++11 support, please set CXXFLAGS properly])])
++=20
+diff --git a/meta-oe/recipes-support/rdfind/rdfind_1.5.0.bb b/meta-oe/recip=
+es-support/rdfind/rdfind_1.5.0.bb
+index 8f2c5e8852..dab66c3827 100644
+--- a/meta-oe/recipes-support/rdfind/rdfind_1.5.0.bb
++++ b/meta-oe/recipes-support/rdfind/rdfind_1.5.0.bb
+@@ -8,6 +8,7 @@ DEPENDS =3D "nettle autoconf-archive"
+ SRC_URI =3D "https://rdfind.pauldreik.se/${BP}.tar.gz \
+            file://0001-configure-Fix-check-for-AC_CHECK_LIB.patch \
+            file://0001-include-standard-headers-limits-and-cstdint.patch \
++           file://0001-configure.ac-fix-C-11-support-check.patch \
+ "
+=20
+ SRC_URI[sha256sum] =3D "4150ed1256f7b12b928c65113c485761552b9496c433778aac=
+3f9afc3e767080"
+--=20
 2.40.1
 
 
