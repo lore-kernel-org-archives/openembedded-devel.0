@@ -2,57 +2,57 @@ Return-Path: <Martin.Jansa@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BE1B3C7EE2C
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CD68CC7EE30
 	for <webhook@archiver.kernel.org>; Tue,  9 May 2023 07:07:10 +0000 (UTC)
-Received: from mail-wm1-f43.google.com (mail-wm1-f43.google.com [209.85.128.43])
- by mx.groups.io with SMTP id smtpd.web11.25845.1683616022244716497
+Received: from mail-wm1-f54.google.com (mail-wm1-f54.google.com [209.85.128.54])
+ by mx.groups.io with SMTP id smtpd.web11.25848.1683616025088771289
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 09 May 2023 00:07:02 -0700
+ Tue, 09 May 2023 00:07:05 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=Zsmtu+W+;
- spf=pass (domain: gmail.com, ip: 209.85.128.43, mailfrom: martin.jansa@gmail.com)
-Received: by mail-wm1-f43.google.com with SMTP id 5b1f17b1804b1-3f4000ec71dso36346495e9.2
-        for <openembedded-devel@lists.openembedded.org>; Tue, 09 May 2023 00:07:02 -0700 (PDT)
+ dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=PQy8eVcs;
+ spf=pass (domain: gmail.com, ip: 209.85.128.54, mailfrom: martin.jansa@gmail.com)
+Received: by mail-wm1-f54.google.com with SMTP id 5b1f17b1804b1-3f19afc4f60so35743745e9.1
+        for <openembedded-devel@lists.openembedded.org>; Tue, 09 May 2023 00:07:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1683616020; x=1686208020;
+        d=gmail.com; s=20221208; t=1683616023; x=1686208023;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=IECsR9cAQuk6pxEokrdSw6lYNylI+3bj7mTK7GlwO6Y=;
-        b=Zsmtu+W+X+5btCuaQcMHnW1QiKvR4vvbnNtUBIzYRkhMJXw2jHMi8BxsaVD49C0+ji
-         ffx7J0xIOqGSGld+iHY3QDAt8YuG80D3aUZ4dSTHf0X3HvcLeWT1IzD/PPwwxAQ0ju/G
-         UQOKzOIQjX9mfGPURULzcc3QCms7knJYs56gwkb4I5+sQ2xOR174mOqPZ6T3XGMI15Oz
-         VLzFwsxH78PnjU+EjBc5ZwJ0R+8oRu9KPjDmh7djnMJOvQyhbC99rgdus+aw9UBOi4p/
-         2ZTAINzypskOsWj6q7Kor9O3Hs0VCPP0zZfe+dNr42CdHApt1cd58JJr4U9NJIyQMUPu
-         A5fQ==
+        bh=fHO65dUebySbJGGVKSP2ByuOSoq9b8tMZkMCE9rax1E=;
+        b=PQy8eVcs+XIECKWbjre+3+Oh6dTiqLiBTvkXCFfOgpIKsiOmJS0UyGrFIpTjr7huft
+         uUfmaEssN5yx7toN8kd9i31pgNHXxIuM8xuFZ1CKVh1W2g2st+tYgIkaFV0alnRH8xN+
+         b+CU2hybNDUmWU7wHcypf4zVJ1lOHnPKJLHicXD/1mOBfTvh1QOzR2Z6TTHBN0eUF0fe
+         mro6iL7IbXaVIlemUT0sgcwzCSc8cERSvRcl6TwwN3R8yLlb5BzgyS2eHjr5NhLcQN9u
+         IIDNgwbVaM4SFaYtpFBd6fLzx5NlWDGN2tu9l8bIVGLQSIlbC+WXtgl54ljJC4MBOXwV
+         rX9g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1683616020; x=1686208020;
+        d=1e100.net; s=20221208; t=1683616023; x=1686208023;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=IECsR9cAQuk6pxEokrdSw6lYNylI+3bj7mTK7GlwO6Y=;
-        b=fOWqlwbKplbyu+eIST9MESj/6E4dnq9yf4tXZlg8wDdNT75gZcwPXzs/MZ2x5qpUWn
-         CSnH86zG+/twjpU0o4QcA0c9Vg6Twvu92MYpqYSoEj26UiZIMJ54cBEbGpiRnnwfzPGl
-         mXYSEwZTg0upv+DmqiCsgVhP7RZmRtCBs+wEQZQDNslTKO4LYsK+ArHhCYXGJqVkrp4W
-         LR7JWwDb1iZJMj5nGQzP6iQonDXgGADqfbKqdday3R2yXiRmRK+e2Y0JnsWPc7Erv6hj
-         wCshiUUSXOtGPC8ndmQALEAh/qRyxPdlY+dKE6f+K+iO8iKmwY1ve714Z1TlLUJLEB8b
-         Uv3w==
-X-Gm-Message-State: AC+VfDz3r2bA/DTq9kxDicn0gyrlTrDPbK8A8ZPeBz85Svr80kf1tAvw
-	eAmEhMgJ7M5jkY+ZoWFTyJZ3h35ExYY=
-X-Google-Smtp-Source: ACHHUZ56U5GbbId+P/LLjpveU/B+5Z/QNRjr4cU//cAbLqpb8LVfIyt2tnrK13z7C/uRHlL1rqEh2A==
-X-Received: by 2002:adf:ee84:0:b0:306:3261:809 with SMTP id b4-20020adfee84000000b0030632610809mr9041446wro.50.1683616020757;
-        Tue, 09 May 2023 00:07:00 -0700 (PDT)
+        bh=fHO65dUebySbJGGVKSP2ByuOSoq9b8tMZkMCE9rax1E=;
+        b=LqyJyiCD3D8fD/p9lVJL/KaiNbQMZ950Q6b2RUu2VFZZODlg+b+hZbr+i4DmH8MsDE
+         4Uyjt+SFVJXY/O/j/9UfS7deQdWmgngmznNU5qplupZZAfiTH+SLUoWOUaXMMAt90iRJ
+         MUO+lNTn34zv6qbDhveyR5+wk3Lb5NK7kf/vvsawH/peVzYDKtroRgcKlVITuyyhq67O
+         vJeSyxjelfKpmv/kDR/YZOnGIhpHAzwOkScI2Rop22JEqjAK6b5MJWwj5FVrc20alH4B
+         nTJV32hTKSie/+hJ17+bR5PfN4hsJayN6fblc7Z9h11aEQqo/yuh+vjMQVaVBU9PLSU6
+         iSkw==
+X-Gm-Message-State: AC+VfDzdyiLNMYhJ6TpE09iIOVjZqNkPJyDESL+/hW+CuuxijEFJ9gQn
+	LI/7CaPyK4UWxWUMRc/BXvB9O/nWCBo=
+X-Google-Smtp-Source: ACHHUZ4GDJPwCyM2KDA8bnvDGBZPy7qYTmrUw5a7bjytKjVoGILhY9rl7ecEvD7yxtc/BmTahsIYkA==
+X-Received: by 2002:a05:600c:3655:b0:3f4:2cc7:aac5 with SMTP id y21-20020a05600c365500b003f42cc7aac5mr284311wmq.9.1683616023534;
+        Tue, 09 May 2023 00:07:03 -0700 (PDT)
 Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
-        by smtp.gmail.com with ESMTPSA id r12-20020a5d494c000000b003077f3dfcc8sm12639639wrs.32.2023.05.09.00.07.00
+        by smtp.gmail.com with ESMTPSA id f25-20020a1c6a19000000b003f4290720cbsm2655629wmc.29.2023.05.09.00.07.03
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 09 May 2023 00:07:00 -0700 (PDT)
+        Tue, 09 May 2023 00:07:03 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Martin Jansa <Martin.Jansa@gmail.com>
-Subject: [meta-oe][mickledore][PATCH 02/16] dleyna-{server,renderer}: fix dev-so QA issue with multilib
-Date: Tue,  9 May 2023 09:06:41 +0200
-Message-Id: <20230509070655.70784-2-Martin.Jansa@gmail.com>
+Subject: [meta-oe][mickledore][PATCH 06/16] appstream: fix build without gobject-introspection-data
+Date: Tue,  9 May 2023 09:06:45 +0200
+Message-Id: <20230509070655.70784-6-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20230509070655.70784-1-Martin.Jansa@gmail.com>
 References: <20230509070655.70784-1-Martin.Jansa@gmail.com>
@@ -62,39 +62,32 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 09 May 2023 07:07:10 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102470
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102474
 
-* the libdir is arch specific, but the subdirectory is always BPN
-* fixes:
-  lib32-dleyna-server-0.6.0+gitAUTOINC+eb895ae827: non -dev/-dbg/nativesdk- package lib32-dleyna-server contains symlink .so '/usr/lib/dleyna-server/libdleyna-server-1.0.so' [dev-so]
-  lib32-dleyna-renderer-0.6.0: non -dev/-dbg/nativesdk- package lib32-dleyna-renderer contains symlink .so '/usr/lib/dleyna-renderer/libdleyna-renderer-1.0.so' [dev-so]
+* there is a meson option to disable introspection, it's just called 'gir'
+  fix GIR_MESON_OPTION to resolve:
+  http://errors.yoctoproject.org/Errors/Details/702780/
+  Run-time dependency gobject-introspection-1.0 found: NO (tried pkgconfig)
+  ../AppStream-0.16.1/meson.build:173:4: ERROR: Dependency "gobject-introspection-1.0" not found, tried pkgconfig
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- .../recipes-multimedia/dleyna/dleyna-renderer_0.6.0.bb          | 2 +-
- .../recipes-multimedia/dleyna/dleyna-server_0.6.0.bb            | 2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
+ meta-oe/recipes-support/appstream/appstream_0.16.1.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-multimedia/recipes-multimedia/dleyna/dleyna-renderer_0.6.0.bb b/meta-multimedia/recipes-multimedia/dleyna/dleyna-renderer_0.6.0.bb
-index 3e43c0d2a7..e7f918333a 100644
---- a/meta-multimedia/recipes-multimedia/dleyna/dleyna-renderer_0.6.0.bb
-+++ b/meta-multimedia/recipes-multimedia/dleyna/dleyna-renderer_0.6.0.bb
-@@ -22,4 +22,4 @@ inherit autotools pkgconfig
- CFLAGS += " -I${S}"
+diff --git a/meta-oe/recipes-support/appstream/appstream_0.16.1.bb b/meta-oe/recipes-support/appstream/appstream_0.16.1.bb
+index 50d8cdb4c2..b8cecec41f 100644
+--- a/meta-oe/recipes-support/appstream/appstream_0.16.1.bb
++++ b/meta-oe/recipes-support/appstream/appstream_0.16.1.bb
+@@ -21,7 +21,7 @@ DEPENDS = " \
  
- FILES:${PN} += "${datadir}/dbus-1"
--FILES:${PN}-dev += "${libdir}/${PN}/*.so"
-+FILES:${PN}-dev += "${libdir}/${BPN}/*.so"
-diff --git a/meta-multimedia/recipes-multimedia/dleyna/dleyna-server_0.6.0.bb b/meta-multimedia/recipes-multimedia/dleyna/dleyna-server_0.6.0.bb
-index b25e446c41..071379758c 100644
---- a/meta-multimedia/recipes-multimedia/dleyna/dleyna-server_0.6.0.bb
-+++ b/meta-multimedia/recipes-multimedia/dleyna/dleyna-server_0.6.0.bb
-@@ -19,4 +19,4 @@ S = "${WORKDIR}/git"
- inherit autotools pkgconfig
+ inherit meson gobject-introspection gettext gtk-doc pkgconfig vala
  
- FILES:${PN} += "${datadir}/dbus-1"
--FILES:${PN}-dev += "${libdir}/${PN}/*.so"
-+FILES:${PN}-dev += "${libdir}/${BPN}/*.so"
+-GIR_MESON_OPTION = ""
++GIR_MESON_OPTION = "gir"
+ 
+ SRC_URI = "https://www.freedesktop.org/software/appstream/releases/AppStream-${PV}.tar.xz"
+ SRC_URI:append:class-target = " file://0001-fix-crosscompile.patch"
 -- 
 2.40.1
 
