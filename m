@@ -2,88 +2,94 @@ Return-Path: <liu.ming50@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 47DFAC7EE24
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5507EC7EE26
 	for <webhook@archiver.kernel.org>; Tue,  9 May 2023 11:36:22 +0000 (UTC)
-Received: from mail-lf1-f52.google.com (mail-lf1-f52.google.com [209.85.167.52])
- by mx.groups.io with SMTP id smtpd.web10.29559.1683632175145052338
+Received: from mail-lf1-f45.google.com (mail-lf1-f45.google.com [209.85.167.45])
+ by mx.groups.io with SMTP id smtpd.web11.29583.1683632178922279334
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 09 May 2023 04:36:15 -0700
+ Tue, 09 May 2023 04:36:19 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=axTLdeM4;
- spf=pass (domain: gmail.com, ip: 209.85.167.52, mailfrom: liu.ming50@gmail.com)
-Received: by mail-lf1-f52.google.com with SMTP id 2adb3069b0e04-4ec8133c59eso6527184e87.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 09 May 2023 04:36:14 -0700 (PDT)
+ dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=V7jn1msl;
+ spf=pass (domain: gmail.com, ip: 209.85.167.45, mailfrom: liu.ming50@gmail.com)
+Received: by mail-lf1-f45.google.com with SMTP id 2adb3069b0e04-4efd6e26585so6503308e87.1
+        for <openembedded-devel@lists.openembedded.org>; Tue, 09 May 2023 04:36:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1683632173; x=1686224173;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=9WsxB1/0gmyK9ItPnBFggbUEnsmuaq7tgXiKSPE/xZE=;
-        b=axTLdeM4o3pLvyWCXXmcbmVF39NV9DhLiRuKAdhJrM08L/Hu7kli5rik/5JinK7CC0
-         /gB2niwG6d4VR70OmguXrmEJfm5qPj8nHtJ7YEnNBx4/2QU+oCUQOP8XTMNqZXSEV2/7
-         ensuNjgorn7/J4Q44iNOWYneeO7iFL3Kq6IoIc72V7DZ3L86lNl/3oriJ7w6QV51EBqZ
-         VyFXqkXWlU22Pfde1uN657vkkErPAf0ikrzpfD3ejj8kAyleFddXkvfhY4Hk9Q6zV5zN
-         ouE9Lx7ISMBM+qBAwSgVFisEDtCWZvNuaAV1ICbf1Ayv+1mx6MJUfjlWcacl8UAWBCWN
-         5dew==
+        d=gmail.com; s=20221208; t=1683632177; x=1686224177;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=F9ZjdB0she1vQIHABCu00XxxzsCMjsDa8P0KE4DPcFw=;
+        b=V7jn1mslMtSCabl7va1kkT/7S4r6IFc4tE/0H9V5iUgYwZZ7RVW4D8Ck+jrijB/DKB
+         QLJPhRo1W1VecodIYmBelzgxcYK0JnRyYho64X4aOnzWcArut5mbpCiUkMWBVgLG3Xmp
+         w8x9gjDkuRjMpA/+qED7HkQQmcwcuOyA0Wh3rT8f4Omakq0t3BibI6yaEuGhaEb0mlPh
+         cwbrqGFhz7wZuwCRHbjbMgBiKbEkNlsNC5GwHddS9f/8KhDGWZTosYUwLhiBCcpm9Of1
+         xDTO/IDofeWSA8HBf7UIqr5lAEi8LPCRg+k7qAKuQP6cMyCJcyZIsED2KY0OAvK0n9ku
+         WjFQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1683632173; x=1686224173;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=9WsxB1/0gmyK9ItPnBFggbUEnsmuaq7tgXiKSPE/xZE=;
-        b=bsW/bbPQ4Q4u0RNRpmqQlnXXX1OYN5ffCIEwEjEyP+bKJzpxvArCAPaDov9/nMsg7e
-         GC/H1PQEDVTuKQTR4X97onHKm96ZspksP0UOT7m2D9VkZiew8ajRPVv+3hbj59Wl7WAC
-         zAGClXJYo/MJpKDq/RM/zrB+oqyBbfCyDGliT2+f5g3DpxGavSXfDO/ov5+Wr3igQh2d
-         sWhDVD0zLuRZQUTbIWA1sDtpqqeWjKe4NUNaf7HBC2uwm2wj3jxfheVhhQeWpBowblb3
-         xPY/g7ALGFUh0lDVxYGkNhG+72YasjrlpLyi3SDG46xvZAuB7aTRQgWWEWaDFsjDSHrz
-         1rzA==
-X-Gm-Message-State: AC+VfDxDS6f6g5VkeNv39Jx8PrYv9oMzuMOg3IrZTUd3QlLiJfl32+eu
-	yWHvJeE70yU/2IyzFo+fhmLCl+p1Gdc=
-X-Google-Smtp-Source: ACHHUZ4pHjnyfbsWep/hIuHYS+BqSWN5msXrxRNAMiT/5JRDdIRiREo9Ynzj9kotNebUIAE4uihm6A==
-X-Received: by 2002:ac2:5fec:0:b0:4f1:4ed6:4a6e with SMTP id s12-20020ac25fec000000b004f14ed64a6emr663279lfg.28.1683632172625;
-        Tue, 09 May 2023 04:36:12 -0700 (PDT)
+        d=1e100.net; s=20221208; t=1683632177; x=1686224177;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=F9ZjdB0she1vQIHABCu00XxxzsCMjsDa8P0KE4DPcFw=;
+        b=dykdNRhzMuU326OLp/B3Edr23bfD6z7OuG5bYcSS8saeLH5cWX/vLq1AuiUhdiKIs3
+         x/h4x103SOFpUikN+k3M52dKiIFb4j4aOHtr6tBAkXf251dFim3JJPjWUtd8O/RZWKaI
+         DQvDAzcKjQeJruMjBSMeKOt4BEBSbw9o05jJ0oYaYevZJ2nl6XVNmG4/DyvzU8CEhfcn
+         km/rNtVh1IemftYrmRCjnTOTZMLcCdqoSwdakiYHArGIp8Mb1CPuk9TEk1dNqIPxt3XS
+         Gy69/lALQVPK2Cy5609Gc6yQ5QYUArCtXYSuvr7H0Ef+sowtOHZUbJVkStg2JTJBK0A+
+         aAfg==
+X-Gm-Message-State: AC+VfDyrnhr+9JeRsQ6GqTCYxShFcy7H9JW2+8YBMzRD72dcWtjqYgzD
+	DBNTzUaa1hoCQUiuKpyjZoF80cHcHE4=
+X-Google-Smtp-Source: ACHHUZ44KvFD84TSpZB2jLzy88Wg17kYQbnHWfk4dHQ6GF9ljt1U9VTQyVZuaThzrOEJabEQWuXSog==
+X-Received: by 2002:a05:6512:21c2:b0:4eb:1527:e29d with SMTP id d2-20020a05651221c200b004eb1527e29dmr697614lft.52.1683632177081;
+        Tue, 09 May 2023 04:36:17 -0700 (PDT)
 Received: from peterliu-Precision-7530.emea.group.atlascopco.com ([2a00:801:724:fbaf:9ccd:45e1:5af6:d3a6])
-        by smtp.gmail.com with ESMTPSA id m27-20020ac24adb000000b004efe7b2e35asm314209lfp.248.2023.05.09.04.36.12
+        by smtp.gmail.com with ESMTPSA id m27-20020ac24adb000000b004efe7b2e35asm314209lfp.248.2023.05.09.04.36.16
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 09 May 2023 04:36:12 -0700 (PDT)
+        Tue, 09 May 2023 04:36:16 -0700 (PDT)
 From: liu.ming50@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: francesco.dolcini@toradex.com,
+	Marcel Ziswiler <marcel.ziswiler@toradex.com>,
 	Ming Liu <liu.ming50@gmail.com>
-Subject: [meta-oe] [PATCH V3 0/3] libusbgx: uprev to the latest/fix hotplug/fix systemd service
-Date: Tue,  9 May 2023 13:36:17 +0200
-Message-Id: <20230509113620.786170-1-liu.ming50@gmail.com>
+Subject: [meta-oe] [PATCH V3 2/3] libusbgx: fix device hot-plug use case
+Date: Tue,  9 May 2023 13:36:19 +0200
+Message-Id: <20230509113620.786170-3-liu.ming50@gmail.com>
 X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20230509113620.786170-1-liu.ming50@gmail.com>
+References: <20230509113620.786170-1-liu.ming50@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 09 May 2023 11:36:22 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102501
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102503
 
-From: Ming Liu <liu.ming50@gmail.com>
+From: Marcel Ziswiler <marcel.ziswiler@toradex.com>
 
-I found more issues on libusbgx, have to make this V3, the new changes
-include:
+Upon hot-plugging device (resp. un-plugging host) dwc3_gadget_init()
+does nicely get executed. However, for an actual gadget to get started,
+it also requires the libusbgx dance as well. Instead of only doing this
+upon boot aka after multi-user.target (which is fine only if the device
+is already there at boot), execute it after usb-gadget.target. This
+ensures dwc3_gadget_start() gets executed also during hot-plugging.
 
-1 Add some dependency checking in usbgx.service.
-2 Turn it to be a simple type.
+Signed-off-by: Marcel Ziswiler <marcel.ziswiler@toradex.com>
+Signed-off-by: Ming Liu <liu.ming50@gmail.com>
+---
+ meta-oe/recipes-support/libusbgx/libusbgx/usbgx.service | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Marcel Ziswiler (1):
-  libusbgx: fix device hot-plug use case
-
-Ming Liu (2):
-  libusbgx: uprev to the latest commit
-  libusbgx: fix some systemd service conditions
-
- ...-overflow-in-usbg_f_foo_attr_val-pro.patch | 796 ++++++++++++++++++
- ...erface-name-for-NCM-Feature-Descript.patch |  52 ++
- .../libusbgx/libusbgx/usbgx.service           |   6 +-
- .../recipes-support/libusbgx/libusbgx_git.bb  |   4 +-
- 4 files changed, 855 insertions(+), 3 deletions(-)
- create mode 100644 meta-oe/recipes-support/libusbgx/libusbgx/0001-fix-stack-buffer-overflow-in-usbg_f_foo_attr_val-pro.patch
- create mode 100644 meta-oe/recipes-support/libusbgx/libusbgx/0001-libusbgx-Add-interface-name-for-NCM-Feature-Descript.patch
-
+diff --git a/meta-oe/recipes-support/libusbgx/libusbgx/usbgx.service b/meta-oe/recipes-support/libusbgx/libusbgx/usbgx.service
+index 74541d3c2..e2aa95a52 100644
+--- a/meta-oe/recipes-support/libusbgx/libusbgx/usbgx.service
++++ b/meta-oe/recipes-support/libusbgx/libusbgx/usbgx.service
+@@ -6,4 +6,4 @@ Type=oneshot
+ ExecStart=/usr/bin/gadget-start
+ 
+ [Install]
+-WantedBy=multi-user.target
++WantedBy=usb-gadget.target
 -- 
 2.25.1
 
