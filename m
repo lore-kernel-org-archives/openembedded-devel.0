@@ -2,215 +2,170 @@ Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E4C55C7EE22
-	for <webhook@archiver.kernel.org>; Tue,  9 May 2023 10:15:11 +0000 (UTC)
-Received: from mail-yw1-f181.google.com (mail-yw1-f181.google.com [209.85.128.181])
- by mx.groups.io with SMTP id smtpd.web11.28138.1683627309792876936
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 074E0C77B7C
+	for <webhook@archiver.kernel.org>; Tue,  9 May 2023 10:36:32 +0000 (UTC)
+Received: from mail-yb1-f179.google.com (mail-yb1-f179.google.com [209.85.219.179])
+ by mx.groups.io with SMTP id smtpd.web11.28462.1683628588665585511
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 09 May 2023 03:15:09 -0700
+ Tue, 09 May 2023 03:36:28 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20221208 header.b=Zc5r9YY8;
- spf=pass (domain: gmail.com, ip: 209.85.128.181, mailfrom: akuster808@gmail.com)
-Received: by mail-yw1-f181.google.com with SMTP id 00721157ae682-559e2051d05so81772057b3.3
-        for <openembedded-devel@lists.openembedded.org>; Tue, 09 May 2023 03:15:09 -0700 (PDT)
+ dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=B2jWM3MP;
+ spf=pass (domain: gmail.com, ip: 209.85.219.179, mailfrom: akuster808@gmail.com)
+Received: by mail-yb1-f179.google.com with SMTP id 3f1490d57ef6-b9d9dad9edfso7554059276.2
+        for <openembedded-devel@lists.openembedded.org>; Tue, 09 May 2023 03:36:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1683627309; x=1686219309;
-        h=content-transfer-encoding:subject:from:to:content-language
-         :user-agent:mime-version:date:message-id:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=vhKogZAhGsf541/FYzDKMI09oTl2TVUq0MaCfTHMdxk=;
-        b=Zc5r9YY8fDjtxPxTgtOzsyMHtsz8f8i9ke3iyPAGaqLJGxUIVNi+q69O2kCfCA0L+F
-         mEiHPLMyS+P/bn+dzupFTLN/A6KrvampcchJd2f3ApoN7k59nb+tYQEmEpdjW6oMkMQR
-         wj6uXm1lOzdXMtQLYUxGXFs9yCKd5viKcnrBbqZffSyOpZGftznfwVpU1dbeusGUNSw6
-         QuARSrGEbuUibo1xXIY/C3PndBWLWdT0s2cyrdlHjp2Qp21JuyY19+QzqHXS9wKPM6TI
-         o3cf4BPwafVnukDMR3VHYrLS6Mqacmhfti/hfl8lLWawObmcEE+iU/Kdb6bksrjBW7eu
-         JkbQ==
+        d=gmail.com; s=20221208; t=1683628587; x=1686220587;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=NiA4ZDHMQVxIzsm6fU8X+7h3xm9zNvHWhLv+Z0EcQsg=;
+        b=B2jWM3MPQ559w07vFnlPZ8q6joWAvFt/4WWVCfi81t0sYr4Ee8kYoEuH56RmpiaZCf
+         Evwkqhr+wt4q04p+I1eQzzY0AEnneOy6z8s8HWx2FZQ6wzSEXw1lpkR/9TtS7jyWB6On
+         zBJXvum6a8esEnRkCgLVMKNVJwXtkqksIsVimARhp5KZYiqWw29/b++oSNYKaR5z3v8w
+         LKQGmXpgpRD3Ni9yOsqUNYF84n0Yk3erSC44SM6RW+vI40GBUrmcqDZ92C6l8SuPY1pe
+         XaHlSjsKdroyf5JMojdgJkadJGiJNeRC9T2+DtChEEm+Cx3fdl1knXmbUzm3qe+XXHKA
+         XqPQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1683627309; x=1686219309;
-        h=content-transfer-encoding:subject:from:to:content-language
-         :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=vhKogZAhGsf541/FYzDKMI09oTl2TVUq0MaCfTHMdxk=;
-        b=iQhaFFhelbTvo6w+6nMI+Lh1SDK6OLvWdoRHl5e9r71HYCQl8TprpYbINl8YCWZHt6
-         44y0kdyxLoqYAFcHpJ90ELgoV80Qb/3IfWwscCICZ8MzVROgLKhxnu4h35m/yC74w5Ij
-         VFZf1hxjyPa5BS0GyauMMeA48IDtLwaeLi39gkyR4JAv122lCwmoDPckWkUwuCCAGEgL
-         3t1MWHdoXAZejTLpuvYPil/QYjrAAB497CwBhi1CN8EV/5Xv5Z2GSzkN9swWzO95FJWs
-         96375npiG+nA2t7GX2NSHqoSaSJZlVlA51f+3RsWOTEdvSJ3RdZqeU/W/I1iJbsTTGx1
-         VfaA==
-X-Gm-Message-State: AC+VfDzTZBG74JTk7PXJaDgQwMG8Duq7FVwOEJyUMmXnGGZDNfQ8LV1Q
-	3l/siGuPhyR2S/V5O4Mm0UsrFYoaI6c=
-X-Google-Smtp-Source: ACHHUZ7aze6hi3sq2f+33Mk8o/cJTWPKzGHE7wjE1bmGEE/56Nts3tVN6FeD8YTDU0cmCTzRAQntSg==
-X-Received: by 2002:a81:8348:0:b0:55b:f05b:d68 with SMTP id t69-20020a818348000000b0055bf05b0d68mr17501335ywf.20.1683627308504;
-        Tue, 09 May 2023 03:15:08 -0700 (PDT)
-Received: from ?IPV6:2600:1700:9190:ba10:183a:1604:2591:7a1e? ([2600:1700:9190:ba10:183a:1604:2591:7a1e])
-        by smtp.gmail.com with ESMTPSA id o185-20020a8173c2000000b00555d2944284sm3126281ywc.67.2023.05.09.03.15.07
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 09 May 2023 03:15:07 -0700 (PDT)
-Message-ID: <48a1ba96-95c4-450c-87f0-7dfb9eaa6220@gmail.com>
-Date: Tue, 9 May 2023 06:15:06 -0400
+        d=1e100.net; s=20221208; t=1683628587; x=1686220587;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=NiA4ZDHMQVxIzsm6fU8X+7h3xm9zNvHWhLv+Z0EcQsg=;
+        b=S1pdflKIiQaN6oylzT7yStL7O51z/BeAmnqmNF1WRqLK9aCTSpFUdi9PfZj5dmjBGq
+         2+CgdOTc+d6OC/k5G0KrcIQsrIHTnhmgABVTE3zm+uiXVmnOsw9c0ho/Q4YPbBUyOcZT
+         fCVTLm6jFNyFQIEaghyTqBF2tW3aO3BhU8pb3prpbeHuP/jezdEJztwhf7GKRUT0Jxxc
+         coyGrns/Q31Il2S5Ap2y9Vri4o8FckGISwQ9/kmw8j95RAYB9TukmZp9/1MnDWErDQ8t
+         MterwR8ZOuEAX+YPSCsi0MRPpdFz0Vu0N0X8bNDkNluP8Vz7+LOpP2h/piGp5pxdNHyY
+         SGJA==
+X-Gm-Message-State: AC+VfDy1QwkvCpvHfVH4t+ehYJM2cTSogC6sm5tnWX3uc8cEjPr3f7Ed
+	iI6eJ3tq6yfiPV/IpkQdaDzEueuUMSU=
+X-Google-Smtp-Source: ACHHUZ59HPgyTRllu1LUMiwF6aeSNqb9Zn646PE3h7B/TSaWS45EijaDhFCAUP4R6BE32Ry9AbHmSw==
+X-Received: by 2002:a25:aa47:0:b0:ba1:ca8a:c740 with SMTP id s65-20020a25aa47000000b00ba1ca8ac740mr14161595ybi.38.1683628587562;
+        Tue, 09 May 2023 03:36:27 -0700 (PDT)
+Received: from keaua.caveonetworks.com ([2600:1700:9190:ba10:183a:1604:2591:7a1e])
+        by smtp.gmail.com with ESMTPSA id 207-20020a2502d8000000b00b8f3b826e58sm2978424ybc.19.2023.05.09.03.36.27
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 09 May 2023 03:36:27 -0700 (PDT)
+From: Armin Kuster <akuster808@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Valeria Petrov <valeria.petrov@spinetix.com>,
+	Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][langdale][PATCH 1/2] apache2: upgrade 2.4.56 -> 2.4.57
+Date: Tue,  9 May 2023 06:36:23 -0400
+Message-Id: <20230509103624.10328-1-akuster808@gmail.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.10.0
-Content-Language: en-US
-To: Khem Raj <raj.khem@gmail.com>,
- OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-From: akuster808 <akuster808@gmail.com>
-Subject: mickeldore merge request: May 9th
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 09 May 2023 10:15:11 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102495
+ <openembedded-devel@lists.openembedded.org>; Tue, 09 May 2023 10:36:32 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102496
 
-The following changes since commit 2d89a469e5f6a209fdc50bf447cd645929e4b735:
+From: Valeria Petrov <valeria.petrov@spinetix.com>
 
-   meta-openemnedded: Add myself as mickledore maintainer (2023-04-09 
-08:52:55 -0700)
+Changelog:
+Changes with Apache 2.4.57
 
-are available in the Git repository at:
+  *) mod_proxy: Check before forwarding that a nocanon path has not been
+     rewritten with spaces during processing.  [Yann Ylavic]
 
-   https://git.openembedded.org/meta-openembedded mickledore-next
+  *) mod_proxy: In case that AllowEncodedSlashes is set to NoDecode do not
+     double encode encoded slashes in the URL sent by the reverse proxy to the
+     backend. [Ruediger Pluem]
 
-for you to fetch changes up to 54b177f4acb3048d21a68f180fc183d0fdf47a94:
+  *) mod_http2: fixed a crash during connection termination. See PR 66539.
+     [Stefan Eissing]
 
-   meta-networking/licenses/netperf: remove unused license (2023-05-08 
-08:03:30 -0400)
+  *) mod_rewrite: Fix a 2.4.56 regression for substitutions ending
+     in a question mark. PR66547. [Eric Covener]
 
-----------------------------------------------------------------
-Arsalan H. Awan (1):
-       meta-networking/licenses/netperf: remove unused license
+  *) mod_rewrite: Add "BCTLS" and "BNE" RewriteRule flags. Re-allow encoded
+     characters on redirections without the "NE" flag.
+     [Yann Ylavic, Eric Covener]
 
-Bartosz Golaszewski (2):
-       python3-gpiod: add missing run-time dependencies
-       libgpiod: install the libgpiosim header
+  *) mod_proxy: Fix double encoding of the uri-path of the request forwarded
+     to the origin server, when using mapping=encoded|servlet.  [Yann Ylavic]
 
-Bergin, Peter (1):
-       freediameter: fix typo and old overide syntax
+  *) mod_mime: Do not match the extention against possible query string
+     parameters in case ProxyPass was used with the nocanon option.
+     [Ruediger Pluem]
 
-Bhargav Das (2):
-       tslib: Add native & nativestdk package support
-       pointercal: Add native & nativestdk package support
+New patch:
+0011-modules-mappers-config9.m4-Add-server-directory-to-i.patch
+Accepted in upstream, expected to be removed at next apache2 2.4.58 update.
 
-Jasper Orschulko (1):
-       python3-gcovr: Add missing runtime dependency
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+(cherry picked from commit 0b9305faa29f6e26871e7662391efbaae4ae92d9)
+Signed-off-by: Armin Kuster <akuster808@gmail.com>
+---
+ ...config9.m4-Add-server-directory-to-i.patch | 31 +++++++++++++++++++
+ .../{apache2_2.4.56.bb => apache2_2.4.57.bb}  |  3 +-
+ 2 files changed, 33 insertions(+), 1 deletion(-)
+ create mode 100644 meta-webserver/recipes-httpd/apache2/apache2/0011-modules-mappers-config9.m4-Add-server-directory-to-i.patch
+ rename meta-webserver/recipes-httpd/apache2/{apache2_2.4.56.bb => apache2_2.4.57.bb} (98%)
 
-Khem Raj (20):
-       fwupd: Do not emit build time paths into generated headers
-       libcereal: Fix TMPDIR leaking into debug_str section
-       libtimezonemap: Point to a working SRC_URI
-       unixODBC: Update SRC_URI to use updated location of tarball
-       unicode-ucd: Update license URI to reflect renamed license
-       libx86: Point to working SRC_URI
-       ctapi-common: Point to working SRC_URI locations
-       netkit-ftp: Update to debian patch 34
-       nicstat: Use SOURCEFORGE_MIRROR in SRC_URI
-       rp-pppoe: Point SRC_URI to valid location
-       ttf-mplus: Point to valid download location for SRC_URI
-       ttf-lklug: Point SRC_URI to a working location
-       radiusclient-ng: Point SRC_URI to archive.ubuntu.com
-       httpfs2: Do not use S during compile/install tasks
-       p910nd: Switch to using github for SRC_URI
-       mosh: Point SRC_URI to https://mosh.org/
-       debootstrap: Update SRC_URI to point to valid URL
-       debootstrap: Use DEBIAN_MIRROR for SRC_URI
-       ttf-gentium: Switch to debian archive mirror for SRC_URI
-       nfacct: Update SRC_URI to point to valid URL
-
-Markus Volk (1):
-       polkit: update SRC_URI
-
-Martin Jansa (2):
-       lirc: fix do_install with multilib
-       dleyna-{server,renderer}: fix dev-so QA issue with multilib
-
-Peter Marko (1):
-       ntp: whitelist CVE-2019-11331
-
-Petr Gotthard (1):
-       gensio: fix QA issue: non -staticdev package with .a libraries
-
-Valeria Petrov (1):
-       apache2: upgrade 2.4.56 -> 2.4.57
-
-Virendra Thakur (2):
-       p7zip: fix for CVE-2018-5996
-       p7zip: Fix for CVE-2016-9296
-
-Wang Mingyu (3):
-       redis: upgrade 7.0.10 -> 7.0.11
-       hdf5: Fix install conflict when enable multilib.
-       php: upgrade 8.2.4 -> 8.2.5
-
-Yogita Urade (1):
-       dlt-daemon: fix CVE-2023-26257
-
-  .../recipes-filesystems/httpfs2-fuse/httpfs2_0.1.5.bb           | 9 +-
-  meta-gnome/recipes-gnome/libtimezonemap/libtimezonemap_0.4.6.bb | 3 +-
-  .../recipes-multimedia/dleyna/dleyna-renderer_0.6.0.bb          | 2 +-
-  .../recipes-multimedia/dleyna/dleyna-server_0.6.0.bb            | 2 +-
-  meta-networking/licenses/netperf                                | 43 
-------
-  meta-networking/recipes-filter/nfacct/nfacct_1.0.2.bb           | 8 +-
-  meta-networking/recipes-netkit/netkit-ftp/netkit-ftp_0.17.bb    | 7 +-
-  .../recipes-protocols/freediameter/freediameter_1.4.0.bb        | 2 +-
-  .../recipes-protocols/radiusclient-ng/radiusclient-ng_0.5.6.bb  | 3 +-
-  meta-networking/recipes-protocols/rp-pppoe/rp-pppoe_3.15.bb     | 2 +-
-  meta-networking/recipes-support/ntp/ntp_4.2.8p15.bb             | 2 +
-  .../meta-python/recipes-connectivity/lirc/lirc_0.10.2.bb        | 6 +-
-  ...1-meson-Avoid-absolute-buildtime-paths-in-generated-he.patch | 41 +++++
-  meta-oe/recipes-bsp/fwupd/fwupd_1.8.9.bb                        | 1 +
-  meta-oe/recipes-bsp/pointercal/pointercal_0.0.bb                | 2 +
-  meta-oe/recipes-connectivity/gensio/gensio_2.6.2.bb             | 2 +
-  meta-oe/recipes-connectivity/mosh/mosh_1.4.0.bb                 | 2 +-
-  meta-oe/recipes-connectivity/obex/obex-data-server_0.4.6.bb     | 3 +-
-  meta-oe/recipes-devtools/debootstrap/debootstrap_1.0.128.bb     | 2 +-
-  meta-oe/recipes-devtools/php/{php_8.2.4.bb => php_8.2.5.bb} |   2 +-
-  .../dlt-daemon/dlt-daemon/0001-Fix-memory-leak.patch            | 34 +++++
-  meta-oe/recipes-extended/dlt-daemon/dlt-daemon_2.18.8.bb        | 1 +
-  meta-oe/recipes-extended/libx86-1/libx86-1_1.1.bb               | 4 +-
-  meta-oe/recipes-extended/nicstat/nicstat_1.95.bb                | 2 +-
-  meta-oe/recipes-extended/p7zip/files/CVE-2016-9296.patch        | 27 ++++
-  meta-oe/recipes-extended/p7zip/files/CVE-2018-5996.patch        | 227 
-++++++++++++++++++++++++++++
-  meta-oe/recipes-extended/p7zip/p7zip_16.02.bb                   | 2 +
-  meta-oe/recipes-extended/polkit/polkit_122.bb                   | 2 +-
-  .../recipes-extended/redis/{redis_7.0.10.bb => redis_7.0.11.bb} |   2 +-
-  meta-oe/recipes-graphics/tslib/tslib_1.22.bb                    | 2 +
-  meta-oe/recipes-graphics/ttf-fonts/ttf-gentium_1.02.bb          | 2 +-
-  .../ttf-fonts/ttf-lklug_0.6-14.20090803cvs.fc24.bb              | 5 +-
-  meta-oe/recipes-graphics/ttf-fonts/ttf-mplus_027.bb             | 3 +-
-  meta-oe/recipes-support/ctapi-common/ctapi-common_1.1-14.bb     | 7 +-
-  meta-oe/recipes-support/hdf5/hdf5_1.14.0.bb                     | 3 +-
-  .../libcereal/files/0001-doctest-Do-not-use-unnamed-class.patch | 38 +++++
-  meta-oe/recipes-support/libcereal/libcereal_1.3.2.bb            | 1 +
-  meta-oe/recipes-support/libgpiod/libgpiod_2.0.bb                | 6 +
-  meta-oe/recipes-support/p910nd/p910nd_0.97.bb                   | 19 ++-
-  meta-oe/recipes-support/unicode-ucd/unicode-ucd_14.0.0.bb       | 6 +-
-  meta-oe/recipes-support/unixodbc/unixodbc_2.3.11.bb             | 2 +-
-  meta-python/recipes-devtools/python/python3-gcovr_6.0.bb        | 2 +-
-  meta-python/recipes-devtools/python/python3-gpiod_2.0.bb        | 6 +-
-  ...1-modules-mappers-config9.m4-Add-server-directory-to-i.patch | 31 ++++
-  .../apache2/{apache2_2.4.56.bb => apache2_2.4.57.bb} |   3 +-
-  45 files changed, 476 insertions(+), 105 deletions(-)
-  delete mode 100644 meta-networking/licenses/netperf
-  create mode 100644 
-meta-oe/recipes-bsp/fwupd/fwupd/0001-meson-Avoid-absolute-buildtime-paths-in-generated-he.patch
-  rename meta-oe/recipes-devtools/php/{php_8.2.4.bb => php_8.2.5.bb} (99%)
-  create mode 100644 
-meta-oe/recipes-extended/dlt-daemon/dlt-daemon/0001-Fix-memory-leak.patch
-  create mode 100644 
-meta-oe/recipes-extended/p7zip/files/CVE-2016-9296.patch
-  create mode 100644 
-meta-oe/recipes-extended/p7zip/files/CVE-2018-5996.patch
-  rename meta-oe/recipes-extended/redis/{redis_7.0.10.bb => 
-redis_7.0.11.bb} (96%)
-  create mode 100644 
-meta-oe/recipes-support/libcereal/files/0001-doctest-Do-not-use-unnamed-class.patch
-  create mode 100644 
-meta-webserver/recipes-httpd/apache2/apache2/0011-modules-mappers-config9.m4-Add-server-directory-to-i.patch
-  rename meta-webserver/recipes-httpd/apache2/{apache2_2.4.56.bb => 
-apache2_2.4.57.bb} (98%)
+diff --git a/meta-webserver/recipes-httpd/apache2/apache2/0011-modules-mappers-config9.m4-Add-server-directory-to-i.patch b/meta-webserver/recipes-httpd/apache2/apache2/0011-modules-mappers-config9.m4-Add-server-directory-to-i.patch
+new file mode 100644
+index 0000000000..996eabf586
+--- /dev/null
++++ b/meta-webserver/recipes-httpd/apache2/apache2/0011-modules-mappers-config9.m4-Add-server-directory-to-i.patch
+@@ -0,0 +1,31 @@
++From 5c9257fa34335ff83f7c01581cf953111072a457 Mon Sep 17 00:00:00 2001
++From: Valeria Petrov <valeria.petrov@spinetix.com>
++Date: Tue, 18 Apr 2023 15:38:53 +0200
++Subject: [PATCH] * modules/mappers/config9.m4: Add 'server' directory to
++ include path if mod_rewrite is enabled.
++
++Upstream-Status: Accepted [https://svn.apache.org/viewvc?view=revision&revision=1909241]
++
++---
++ modules/mappers/config9.m4 | 5 +++++
++ 1 file changed, 5 insertions(+)
++
++diff --git a/modules/mappers/config9.m4 b/modules/mappers/config9.m4
++index 55a97ab993..7120b729b7 100644
++--- a/modules/mappers/config9.m4
+++++ b/modules/mappers/config9.m4
++@@ -14,6 +14,11 @@ APACHE_MODULE(userdir, mapping of requests to user-specific directories, , , mos
++ APACHE_MODULE(alias, mapping of requests to different filesystem parts, , , yes)
++ APACHE_MODULE(rewrite, rule based URL manipulation, , , most)
++ 
+++if test "x$enable_rewrite" != "xno"; then
+++    # mod_rewrite needs test_char.h
+++    APR_ADDTO(INCLUDES, [-I\$(top_builddir)/server])
+++fi
+++
++ APR_ADDTO(INCLUDES, [-I\$(top_srcdir)/$modpath_current])
++ 
++ APACHE_MODPATH_FINISH
++-- 
++2.25.1
++
+diff --git a/meta-webserver/recipes-httpd/apache2/apache2_2.4.56.bb b/meta-webserver/recipes-httpd/apache2/apache2_2.4.57.bb
+similarity index 98%
+rename from meta-webserver/recipes-httpd/apache2/apache2_2.4.56.bb
+rename to meta-webserver/recipes-httpd/apache2/apache2_2.4.57.bb
+index 1ad222ace4..00f8aaa415 100644
+--- a/meta-webserver/recipes-httpd/apache2/apache2_2.4.56.bb
++++ b/meta-webserver/recipes-httpd/apache2/apache2_2.4.57.bb
+@@ -16,6 +16,7 @@ SRC_URI = "${APACHE_MIRROR}/httpd/httpd-${PV}.tar.bz2 \
+            file://0008-Fix-perl-install-directory-to-usr-bin.patch \
+            file://0009-support-apxs.in-force-destdir-to-be-empty-string.patch \
+            file://0001-make_exports.awk-not-expose-the-path.patch \
++           file://0011-modules-mappers-config9.m4-Add-server-directory-to-i.patch \
+           "
+ 
+ SRC_URI:append:class-target = " \
+@@ -27,7 +28,7 @@ SRC_URI:append:class-target = " \
+            "
+ 
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=bddeddfac80b2c9a882241d008bb41c3"
+-SRC_URI[sha256sum] = "d8d45f1398ba84edd05bb33ca7593ac2989b17cb9c7a0cafe5442d41afdb2d7c"
++SRC_URI[sha256sum] = "dbccb84aee95e095edfbb81e5eb926ccd24e6ada55dcd83caecb262e5cf94d2a"
+ 
+ S = "${WORKDIR}/httpd-${PV}"
+ 
+-- 
+2.25.1
 
 
