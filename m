@@ -1,185 +1,129 @@
-Return-Path: <chee.yang.lee@intel.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 05E86C7EE22
-	for <webhook@archiver.kernel.org>; Tue,  9 May 2023 04:04:59 +0000 (UTC)
-Received: from mga07.intel.com (mga07.intel.com [134.134.136.100])
- by mx.groups.io with SMTP id smtpd.web10.23815.1683605090633784767
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 33D34C77B75
+	for <webhook@archiver.kernel.org>; Tue,  9 May 2023 04:26:10 +0000 (UTC)
+Received: from mail-pg1-f180.google.com (mail-pg1-f180.google.com [209.85.215.180])
+ by mx.groups.io with SMTP id smtpd.web11.24102.1683606365709459535
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 08 May 2023 21:04:51 -0700
+ Mon, 08 May 2023 21:26:05 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="unable to parse pub key" header.i=@intel.com header.s=intel header.b=KQxH15ZW;
- spf=pass (domain: intel.com, ip: 134.134.136.100, mailfrom: chee.yang.lee@intel.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1683605090; x=1715141090;
-  h=from:to:subject:date:message-id:mime-version:
-   content-transfer-encoding;
-  bh=U2FaNaZ+ZV4ihf9A3Lidh89wwaVh+QQje/95MFG+/UM=;
-  b=KQxH15ZWVoZhOgotR7o6OU4zQdZKW1nPJ3uHOXz5/L/lQNuCwYtUHAuM
-   rEC7B6nduagVUkUAWaFx64zdIwFHpRXg2BjgofzkutCsdf87P4JaElcvw
-   AT7Z9bVfzZdUWBRKYfzceErCVLKWCRUjW7qBYpJZ1EPRdDd7JTnlgYu7u
-   k5hX3HzR8TyOuhJeiRTr94FLBX8dWVJMjs7i6ezheZrSXyo2j/HT2etea
-   TEHszRATJ5QkCCQJwboHPCnXI+RMIvR0Ucg/WEmf90P8dmiLzksH2PKif
-   zVNzgBcu5Mo9CmZNRr0PI8fQw8R/URXPECsfNwhbXDIwtWd1mRSlozZ60
-   g==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10704"; a="415369857"
-X-IronPort-AV: E=Sophos;i="5.99,259,1677571200"; 
-   d="scan'208";a="415369857"
-Received: from orsmga008.jf.intel.com ([10.7.209.65])
-  by orsmga105.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 08 May 2023 21:04:48 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10704"; a="729317042"
-X-IronPort-AV: E=Sophos;i="5.99,259,1677571200"; 
-   d="scan'208";a="729317042"
-Received: from andromeda02.png.intel.com ([10.221.253.198])
-  by orsmga008.jf.intel.com with ESMTP; 08 May 2023 21:04:47 -0700
-From: chee.yang.lee@intel.com
+ dkim=pass header.i=@gmail.com header.s=20221208 header.b=D90IeMqZ;
+ spf=pass (domain: gmail.com, ip: 209.85.215.180, mailfrom: raj.khem@gmail.com)
+Received: by mail-pg1-f180.google.com with SMTP id 41be03b00d2f7-52867360efcso3733126a12.2
+        for <openembedded-devel@lists.openembedded.org>; Mon, 08 May 2023 21:26:05 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20221208; t=1683606365; x=1686198365;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=+MkiUT7ImJbweJ82gFJmqoTBHpy5Ak+YmHOkRtAEvqc=;
+        b=D90IeMqZnwX+DeVgxdwvmUZwdm7R/UxaZMvMlmLmi3e7AmP/OeWjzWk+Meg0ugY53L
+         OvDlHIm3ida8APmVa9Wc2FvTSb39saJifXqCgo9CXGsx2VC/HlgZxTxrNcW65hfr3XG2
+         FrTSOfbEutmCfUlWBKqtpsSfZUQzv7qkr9Ji7ejAxlmY4AuEhDXz0rJ4iox3gW39W/qH
+         8txUPNAycKEfUVhW9+sFBVUQEctGR4ALTLNl3Kd9Uy79MRG1ofcY0AxiPyGFeGm31FNz
+         TNaJ1fnRUkf+lMYwtBZjlAXUDhCgT/OSFOuLwxj93P9YQC+BsMECzIuwOSNPU0HYrpiq
+         uf5A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20221208; t=1683606365; x=1686198365;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=+MkiUT7ImJbweJ82gFJmqoTBHpy5Ak+YmHOkRtAEvqc=;
+        b=SGpL5AxawK0lxHQfwugZmcvfsh0Z+U68iWL70R4cxMf/28mfjYjSW04C31vWqvTw+Z
+         XrY5M5djqWgartLzARCJqfn+xRid/BTHO/VrcRODU3rE9XGRGP7BWAmc6Qclfmx4pgp0
+         UAr6MdVyuLn+FsX4fkc4+xI1EZDCaJm1h9NKvIIEXFq8yR3BsZ2nB/qt0u1T/Qq4xhh8
+         OEohGlL1OvpqWR75zZhgU355rIv/gE/rURrSS6XWmMgq2ZGurducCtJhg9hwZ5nrq60p
+         Ygl+89J+TzrL4yAxChSvTRqeywbxjiK2uFKL7yjisQ6/y1/Q8ZL+ZbAbPhpj72Byznd8
+         h0EA==
+X-Gm-Message-State: AC+VfDxu9dNw+b3Exdj2+zakVl3s3RdROzdLtCflT8SRXyocrvTyhS7+
+	xRzfDPtzX/x1qLaR1xH0/DsmNB0iTlumCg==
+X-Google-Smtp-Source: ACHHUZ527vw8CSE0+D5hK5qy05wZMxSZSg+fUSpKcXtFnXzl/8ezPaN4ERQoGZVeNPOxjTNLJllQSw==
+X-Received: by 2002:a17:903:124f:b0:1aa:f6e9:4cb3 with SMTP id u15-20020a170903124f00b001aaf6e94cb3mr16002585plh.52.1683606364771;
+        Mon, 08 May 2023 21:26:04 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9181:d380::298a])
+        by smtp.gmail.com with ESMTPSA id h5-20020a170902748500b001ac2a73dbf2sm321321pll.291.2023.05.08.21.26.04
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 08 May 2023 21:26:04 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][kirkstone 1/2] freerdp: fix CVE-2022-39316/39318/39319
-Date: Tue,  9 May 2023 11:53:08 +0800
-Message-Id: <20230509035309.3773590-1-chee.yang.lee@intel.com>
-X-Mailer: git-send-email 2.37.3
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][PATCH] enca: Remove buildpaths from target scripts
+Date: Mon,  8 May 2023 21:26:02 -0700
+Message-Id: <20230509042602.1052322-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.40.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 09 May 2023 04:04:59 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102461
+ <openembedded-devel@lists.openembedded.org>; Tue, 09 May 2023 04:26:10 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102462
 
-From: Chee Yang Lee <chee.yang.lee@intel.com>
+Using configure checks to detect mktemp can result in problems in
+cross-builds where buildtime mktemp ( native ) maybe detected in a path
+that does not exist on target, therefore rely upon PATH variable to find
+this binary when executing this script.
 
-Signed-off-by: Chee Yang Lee <chee.yang.lee@intel.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../freerdp/freerdp/CVE-2022-39316.patch      | 53 +++++++++++++++++++
- .../freerdp/CVE-2022-39318-39319.patch        | 41 ++++++++++++++
- .../recipes-support/freerdp/freerdp_2.6.1.bb  |  2 +
- 3 files changed, 96 insertions(+)
- create mode 100644 meta-oe/recipes-support/freerdp/freerdp/CVE-2022-39316.patch
- create mode 100644 meta-oe/recipes-support/freerdp/freerdp/CVE-2022-39318-39319.patch
+ ...o-not-use-MKTEMP_PROG-in-cross-build.patch | 30 +++++++++++++++++++
+ meta-oe/recipes-support/enca/enca_1.19.bb     |  4 +--
+ 2 files changed, 32 insertions(+), 2 deletions(-)
+ create mode 100644 meta-oe/recipes-support/enca/enca/0001-Do-not-use-MKTEMP_PROG-in-cross-build.patch
 
-diff --git a/meta-oe/recipes-support/freerdp/freerdp/CVE-2022-39316.patch b/meta-oe/recipes-support/freerdp/freerdp/CVE-2022-39316.patch
+diff --git a/meta-oe/recipes-support/enca/enca/0001-Do-not-use-MKTEMP_PROG-in-cross-build.patch b/meta-oe/recipes-support/enca/enca/0001-Do-not-use-MKTEMP_PROG-in-cross-build.patch
 new file mode 100644
-index 0000000000..a60b2854c8
+index 0000000000..32fa239084
 --- /dev/null
-+++ b/meta-oe/recipes-support/freerdp/freerdp/CVE-2022-39316.patch
-@@ -0,0 +1,53 @@
-+https://github.com/FreeRDP/FreeRDP/commit/e865c24efc40ebc52e75979c94cdd4ee2c1495b0
-+CVE: CVE-2022-39316
-+Upstream-Status: Backport
-+Signed-off-by: Lee Chee Yang <chee.yang.lee@intel.com>
++++ b/meta-oe/recipes-support/enca/enca/0001-Do-not-use-MKTEMP_PROG-in-cross-build.patch
+@@ -0,0 +1,30 @@
++From c6a59d512706978e8c67f9a2d84ec650f8763368 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Mon, 8 May 2023 18:02:52 -0700
++Subject: [PATCH] Do not use $MKTEMP_PROG in cross-build
 +
-+From e865c24efc40ebc52e75979c94cdd4ee2c1495b0 Mon Sep 17 00:00:00 2001
-+From: akallabeth <akallabeth@posteo.net>
-+Date: Thu, 13 Oct 2022 09:09:28 +0200
-+Subject: [PATCH] Added missing length checks in zgfx_decompress_segment
++$MKTEMP_PROG points to native location which could be absolute path that
++wont exist on target rootfs. Therefore use it from PATH
 +
-+(cherry picked from commit 64716b335858109d14f27b51acc4c4d71a92a816)
++Upstream-Status: Pending
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +---
-+ libfreerdp/codec/zgfx.c | 11 +++++++----
-+ 1 file changed, 7 insertions(+), 4 deletions(-)
++ configure.ac | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
 +
-+diff --git a/libfreerdp/codec/zgfx.c b/libfreerdp/codec/zgfx.c
-+index 20fbd354571..e260aa6e28a 100644
-+--- a/libfreerdp/codec/zgfx.c
-++++ b/libfreerdp/codec/zgfx.c
-+@@ -230,19 +230,19 @@ static BOOL zgfx_decompress_segment(ZGFX_CONTEXT* zgfx, wStream* stream, size_t
-+ 	BYTE* pbSegment;
-+ 	size_t cbSegment;
++diff --git a/configure.ac b/configure.ac
++index 4852a2f..d23b384 100644
++--- a/configure.ac
+++++ b/configure.ac
++@@ -186,7 +186,7 @@ ye_PATH_LOCALE_ALIAS
 + 
-+-	if (!zgfx || !stream)
-++	if (!zgfx || !stream || (segmentSize < 2))
-+ 		return FALSE;
-+ 
-+ 	cbSegment = segmentSize - 1;
-+ 
-+-	if ((Stream_GetRemainingLength(stream) < segmentSize) || (segmentSize < 1) ||
-+-	    (segmentSize > UINT32_MAX))
-++	if ((Stream_GetRemainingLength(stream) < segmentSize) || (segmentSize > UINT32_MAX))
-+ 		return FALSE;
-+ 
-+ 	Stream_Read_UINT8(stream, flags); /* header (1 byte) */
-+ 	zgfx->OutputCount = 0;
-+ 	pbSegment = Stream_Pointer(stream);
-+-	Stream_Seek(stream, cbSegment);
-++	if (!Stream_SafeSeek(stream, cbSegment))
-++		return FALSE;
-+ 
-+ 	if (!(flags & PACKET_COMPRESSED))
-+ 	{
-+@@ -346,6 +346,9 @@ static BOOL zgfx_decompress_segment(ZGFX_CONTEXT* zgfx, wStream* stream, size_t
-+ 						if (count > sizeof(zgfx->OutputBuffer) - zgfx->OutputCount)
-+ 							return FALSE;
-+ 
-++						if (count > zgfx->cBitsRemaining / 8)
-++							return FALSE;
-++
-+ 						CopyMemory(&(zgfx->OutputBuffer[zgfx->OutputCount]), zgfx->pbInputCurrent,
-+ 						           count);
-+ 						zgfx_history_buffer_ring_write(zgfx, zgfx->pbInputCurrent, count);
-diff --git a/meta-oe/recipes-support/freerdp/freerdp/CVE-2022-39318-39319.patch b/meta-oe/recipes-support/freerdp/freerdp/CVE-2022-39318-39319.patch
-new file mode 100644
-index 0000000000..76a9e00dd3
---- /dev/null
-+++ b/meta-oe/recipes-support/freerdp/freerdp/CVE-2022-39318-39319.patch
-@@ -0,0 +1,41 @@
-+https://github.com/FreeRDP/FreeRDP/commit/80adde17ddc4b596ed1dae0922a0c54ab3d4b8ea
-+CVE: CVE-2022-39318 CVE-2022-39319
-+Upstream-Status: Backport
-+Signed-off-by: Lee Chee Yang <chee.yang.lee@intel.com>
++ dnl Random filename generation in scripts
++ if test -n "$MKTEMP_PROG"; then
++-  SHELL_RANDOM_FILENAME='`'$MKTEMP_PROG' /tmp/enca-$$-XXXXXXXX`'
+++  SHELL_RANDOM_FILENAME='`mktemp /tmp/enca-$$-XXXXXXXX`'
++ else
++   SHELL_RANDOM_FILENAME='/tmp/enca-$$-$RANDOM'
++ fi
++-- 
++2.40.1
 +
-+From 80adde17ddc4b596ed1dae0922a0c54ab3d4b8ea Mon Sep 17 00:00:00 2001
-+From: akallabeth <akallabeth@posteo.net>
-+Date: Thu, 13 Oct 2022 08:27:41 +0200
-+Subject: [PATCH] Fixed division by zero in urbdrc
-+
-+(cherry picked from commit 731f8419d04b481d7160de1f34062d630ed48765)
-+---
-+ channels/urbdrc/client/libusb/libusb_udevice.c | 12 +++++++++---
-+ 1 file changed, 9 insertions(+), 3 deletions(-)
-+
-+diff --git a/channels/urbdrc/client/libusb/libusb_udevice.c b/channels/urbdrc/client/libusb/libusb_udevice.c
-+index 505c31d7b55..ef87f195f38 100644
-+--- a/channels/urbdrc/client/libusb/libusb_udevice.c
-++++ b/channels/urbdrc/client/libusb/libusb_udevice.c
-+@@ -1221,12 +1221,18 @@ static int libusb_udev_isoch_transfer(IUDEVICE* idev, URBDRC_CHANNEL_CALLBACK* c
-+ 	if (!Buffer)
-+ 		Stream_Seek(user_data->data, (NumberOfPackets * 12));
-+ 
-+-	iso_packet_size = BufferSize / NumberOfPackets;
-+-	iso_transfer = libusb_alloc_transfer(NumberOfPackets);
-++	if (NumberOfPackets > 0)
-++	{
-++		iso_packet_size = BufferSize / NumberOfPackets;
-++		iso_transfer = libusb_alloc_transfer((int)NumberOfPackets);
-++	}
-+ 
-+ 	if (iso_transfer == NULL)
-+ 	{
-+-		WLog_Print(urbdrc->log, WLOG_ERROR, "Error: libusb_alloc_transfer.");
-++		WLog_Print(urbdrc->log, WLOG_ERROR,
-++		           "Error: libusb_alloc_transfer [NumberOfPackets=%" PRIu32 ", BufferSize=%" PRIu32
-++		           " ]",
-++		           NumberOfPackets, BufferSize);
-+ 		async_transfer_user_data_free(user_data);
-+ 		return -1;
-+ 	}
-diff --git a/meta-oe/recipes-support/freerdp/freerdp_2.6.1.bb b/meta-oe/recipes-support/freerdp/freerdp_2.6.1.bb
-index ece2f56960..9da8b27c0d 100644
---- a/meta-oe/recipes-support/freerdp/freerdp_2.6.1.bb
-+++ b/meta-oe/recipes-support/freerdp/freerdp_2.6.1.bb
-@@ -16,6 +16,8 @@ PKGV = "${GITPKGVTAG}"
- SRCREV = "658a72980f6e93241d927c46cfa664bf2547b8b1"
- SRC_URI = "git://github.com/FreeRDP/FreeRDP.git;branch=stable-2.0;protocol=https \
-     file://winpr-makecert-Build-with-install-RPATH.patch \
-+    file://CVE-2022-39316.patch \
-+    file://CVE-2022-39318-39319.patch \
- "
+diff --git a/meta-oe/recipes-support/enca/enca_1.19.bb b/meta-oe/recipes-support/enca/enca_1.19.bb
+index eed0ad1b93..774f05f7c4 100644
+--- a/meta-oe/recipes-support/enca/enca_1.19.bb
++++ b/meta-oe/recipes-support/enca/enca_1.19.bb
+@@ -10,8 +10,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=24b9569831c46d4818450b55282476b4"
+ SRC_URI = "https://dl.cihar.com/enca/enca-${PV}.tar.gz \
+     file://dont-run-tests.patch \
+     file://makefile-remove-tools.patch \
+-    file://libenca-003-iconv.patch "
+-
++    file://libenca-003-iconv.patch \
++    file://0001-Do-not-use-MKTEMP_PROG-in-cross-build.patch"
+ SRC_URI[sha256sum] = "4c305cc59f3e57f2cfc150a6ac511690f43633595760e1cb266bf23362d72f8a"
  
- S = "${WORKDIR}/git"
+ inherit autotools
 -- 
-2.37.3
+2.40.1
 
 
