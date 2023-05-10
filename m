@@ -2,54 +2,54 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 20CC0C77B75
-	for <webhook@archiver.kernel.org>; Wed, 10 May 2023 00:23:36 +0000 (UTC)
-Received: from mail-oa1-f41.google.com (mail-oa1-f41.google.com [209.85.160.41])
- by mx.groups.io with SMTP id smtpd.web11.5114.1683678209442869510
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 31A92C77B75
+	for <webhook@archiver.kernel.org>; Wed, 10 May 2023 00:28:16 +0000 (UTC)
+Received: from mail-oi1-f175.google.com (mail-oi1-f175.google.com [209.85.167.175])
+ by mx.groups.io with SMTP id smtpd.web11.5229.1683678486353557340
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 09 May 2023 17:23:29 -0700
+ Tue, 09 May 2023 17:28:06 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20221208 header.b=IIocoxjF;
- spf=pass (domain: gmail.com, ip: 209.85.160.41, mailfrom: raj.khem@gmail.com)
-Received: by mail-oa1-f41.google.com with SMTP id 586e51a60fabf-195c83a9ed8so3803767fac.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 09 May 2023 17:23:29 -0700 (PDT)
+ dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=jmCb0kWx;
+ spf=pass (domain: gmail.com, ip: 209.85.167.175, mailfrom: raj.khem@gmail.com)
+Received: by mail-oi1-f175.google.com with SMTP id 5614622812f47-393ffb310d0so1077050b6e.1
+        for <openembedded-devel@lists.openembedded.org>; Tue, 09 May 2023 17:28:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1683678209; x=1686270209;
+        d=gmail.com; s=20221208; t=1683678485; x=1686270485;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=aU1fSHU/MDBPHSnVeeqWXZCGqiU+exP6tfPs+JlXL5k=;
-        b=IIocoxjFCtnDbUmrV0gg1oM7yJZ6ylbZKwYj0ZicJLwtveaQf99+u0bp8QHpH1aAI8
-         3DXrB29/CdpeSIMA867+febQoBOp8aVX5SiZvkhWucrSO17ViHEigCPXP5G0NwPT+3mE
-         P8dx09s9a0Cq3ZRJgfOjcwQC3DgRfHbWrM3GulHZlOnxqTX2mLiUrncyLaSmnbb4FCQz
-         4CPgN/tNwzKqQaknmDSUA5equGKxpkBlq3kzCW7uNoHzoselZkW1QdGFGyl19AwySTE9
-         RD0ZEeUcZlxZnGk/DZV9Ozr2U5VoLmq4vJsZbLLnHuJN2klIVxuXAO2+XSyDMg6gJyAj
-         OOsA==
+        bh=ZnnMw8ddXJvduVCSYgMoEbmr+3NY53reYb52L9IfOPU=;
+        b=jmCb0kWxWrZSLJCUbjRt+xoyhMoMZVOaD0HvCTik9D//if7moSH26PHF7+riXh+dni
+         3HnNDay9OfWeFdPK7iqjQkJXcxMO50CWraDFfu4cid1L6oiAT8jmwWxLRMAc577/QYc8
+         Tqv4NMh7p/Z1MracX4cFDqCtFU0N0ppv/YpLZDZP4EnQGaKwaguZB/6q7KQMNYbTr9Zf
+         URrWRWos87sdMb8gILkveM4jujtXHCb4SawuMSa3/ya3o9Nff0vQqgVYkJujN4lP8/5k
+         y1aBLGXSlttqirXWZMhny0V3UL9am8rf3FxANoLuOecyVs6gcFYsPfLjolE7/dFtc1xZ
+         Ju8g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1683678209; x=1686270209;
+        d=1e100.net; s=20221208; t=1683678485; x=1686270485;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=aU1fSHU/MDBPHSnVeeqWXZCGqiU+exP6tfPs+JlXL5k=;
-        b=ZcdSWK3e9eAs4DhTaS5PBdQhxnHU3ZT/NJo9rqhubrzf7P5Oc9zK5dRZI0Ym+gf+K+
-         e1A6mLhzQHW6rovIYY+ry26OSDaDi6v4OcPBShbkSW43JM9ZPHmUBGDICa1wtsG7NjYq
-         R1HlMSaojND14nja4JPuIJobdt2SKgZPdd7GfTI5DUks3b3t2w93F1B/6AzdwuD4aOpH
-         daDq/OK3sLveyQKaO/XQym0O1U1lxK35AJipx+adRwp3R1YS8/RgfzIb6xu7W10Lbh5t
-         PTwJPN5hWCw5zjz8TfwRAm907rpOunY50tLABiVfEOIPW2fGv6UgGsb0XAxB9bq5vHup
-         bDNg==
-X-Gm-Message-State: AC+VfDxwA96Vmrlqm9EaqEr1GPpZUOaIpcVlzg7NdSuWxAumvA3nFTP4
-	8BcZ7jmKELWzYyrXQXqYVJOA9NfMg2aGUNkK0Gg=
-X-Google-Smtp-Source: ACHHUZ4NUnlih75wHbfaBvHoXKhJD02jV8gpoJAXwu4M8VTrio9/HL9fbZsaEkx4Ltbk2t/LVEM5LpkDuFEik9Ayk3s=
-X-Received: by 2002:a05:6808:614e:b0:38c:5a32:325b with SMTP id
- dl14-20020a056808614e00b0038c5a32325bmr2541016oib.41.1683678208500; Tue, 09
- May 2023 17:23:28 -0700 (PDT)
+        bh=ZnnMw8ddXJvduVCSYgMoEbmr+3NY53reYb52L9IfOPU=;
+        b=EMfnMGlC4wn/kQLCZY/s1g45ljuc3TFFfKNK/dXTzkBW6ehuuzzPZ+BX4j9PGp1MH6
+         yd52efOvweY2xepKHbWz7gnyu1lLG+IgE0QM4hoWikC99SdYKwUkmwKTNmn0hE4HSQOZ
+         jUbMpP9KeMIA7sqIpwzm1SXK7Lboni6RqBmrxQ/DAMVIgE+P27p5SWPv6ec6Gz38DAZh
+         xa60BZVzHvS+z8q0Qxj7TOWe4RTtcV+GXYLtETXNnupLvi19wEK1qLzCdLi/BVdrceHm
+         ZxwEqf4y6or4p14WpepIrrYwbV5af/ifux4kCtich+Y/UvLFIFR6R3uEtr71dohZ9Dhi
+         s65w==
+X-Gm-Message-State: AC+VfDw6OVotAjLZwzjMsWm1lahJIQLXNQSAWvKdzEvAdSKBylorbXpH
+	ANbQM+GS6EPj0X4uLQtQwWpDC7RV2pw/UdEajg8=
+X-Google-Smtp-Source: ACHHUZ7GEHqW4vhOvpjK/yQX8UITJRqIxSXJ92b9c+Obe8GrmdXp22KwAO7wZbJYb8iBrwI3199zUDMdxq02Z//JQtU=
+X-Received: by 2002:a05:6808:628a:b0:387:4754:107f with SMTP id
+ du10-20020a056808628a00b003874754107fmr2079601oib.51.1683678485519; Tue, 09
+ May 2023 17:28:05 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230509065940.1584276-1-jun.nie@linaro.org> <20230509065940.1584276-3-jun.nie@linaro.org>
-In-Reply-To: <20230509065940.1584276-3-jun.nie@linaro.org>
+References: <20230509065940.1584276-1-jun.nie@linaro.org> <20230509065940.1584276-2-jun.nie@linaro.org>
+In-Reply-To: <20230509065940.1584276-2-jun.nie@linaro.org>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 9 May 2023 17:23:02 -0700
-Message-ID: <CAMKF1srzicnZJ8kC6UMk76TeEcuDfMFoyowkhgACY+o0P51riA@mail.gmail.com>
-Subject: Re: [meta-oe 2/3] python3-pefile: Add initial support
+Date: Tue, 9 May 2023 17:27:39 -0700
+Message-ID: <CAMKF1srFj1enrOfDR=X0Q+ue8OMKyEX8iJV_NcK6QuXoLoDOiw@mail.gmail.com>
+Subject: Re: [meta-oe 1/3] libcbor: Add initial support
 To: Jun Nie <jun.nie@linaro.org>
 Cc: richard@hughsie.com, openembedded-devel@lists.openembedded.org
 Content-Type: text/plain; charset="UTF-8"
@@ -57,61 +57,50 @@ Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 10 May 2023 00:23:36 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102516
-
-how was this tested ?
-
-For new recipes its always good to do a bitbake -ccleanall <recipe> &&
-bitbake recipe as a sanity check before sending.
-
-I am seeing fetch errors like below
-
-File: '/mnt/b/yoe/master/downloads/pefile-2023.2.7.tar.gz.tmp' has
-sha256 checksum
-'82e6114004b3d6911c77c3953e3838654b04511b8b66e8583db70c65998017dc'
-when '11cd7ed7082d5256e9741e8b98c654f061723fafb5b2719c01a0b4cc6f
-89e09d' was expected
-If this change is expected (e.g. you have upgraded to a new version
-without updating the checksums) then you can use these lines within
-the recipe:
-SRC_URI[sha256sum] =3D
-"82e6114004b3d6911c77c3953e3838654b04511b8b66e8583db70c65998017dc"
+ <openembedded-devel@lists.openembedded.org>; Wed, 10 May 2023 00:28:16 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102517
 
 On Mon, May 8, 2023 at 11:58=E2=80=AFPM Jun Nie <jun.nie@linaro.org> wrote:
 >
-> To parse and work with Portable Executable (PE) files
+> To handle the general-purpose schema-less binary data format
 >
 > Signed-off-by: Jun Nie <jun.nie@linaro.org>
 > ---
->  .../python/python3-pefile_2023.2.7.bb               | 13 +++++++++++++
+>  meta-oe/recipes-extended/libcbor/libcbor_git.bb | 13 +++++++++++++
 >  1 file changed, 13 insertions(+)
->  create mode 100644 meta-python/recipes-devtools/python/python3-pefile_20=
-23.2.7.bb
+>  create mode 100755 meta-oe/recipes-extended/libcbor/libcbor_git.bb
 >
-> diff --git a/meta-python/recipes-devtools/python/python3-pefile_2023.2.7.=
-bb b/meta-python/recipes-devtools/python/python3-pefile_2023.2.7.bb
-> new file mode 100644
-> index 0000000000..37e27b1a03
+> diff --git a/meta-oe/recipes-extended/libcbor/libcbor_git.bb b/meta-oe/re=
+cipes-extended/libcbor/libcbor_git.bb
+> new file mode 100755
+> index 0000000000..53ba230533
 > --- /dev/null
-> +++ b/meta-python/recipes-devtools/python/python3-pefile_2023.2.7.bb
+> +++ b/meta-oe/recipes-extended/libcbor/libcbor_git.bb
 > @@ -0,0 +1,13 @@
-> +SUMMARY =3D "Python PE parsing module"
-> +DESCRIPTION =3D "A multi-platform Python module to parse and work with P=
-ortable Executable (PE) files."
-> +HOMEPAGE =3D "https://github.com/erocarrera/pefile"
+> +SUMMARY =3D "library for CBOR"
+> +DESCRIPTION =3D " C library for parsing and generating CBOR, the general=
+-purpose schema-less binary data format."
+> +
 > +LICENSE =3D "MIT"
-> +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D38066667888b01d8118ff9cc23da1=
-873"
+> +LIC_FILES_CHKSUM =3D "file://LICENSE.md;md5=3D6f3b3881df62ca763a02d359a6=
+e94071"
 > +
-> +inherit setuptools3 pypi ptest
-> +SRC_URI[sha256sum] =3D "11cd7ed7082d5256e9741e8b98c654f061723fafb5b2719c=
-01a0b4cc6f89e09d"
+> +SRC_URI =3D "git://github.com/PJK/libcbor.git;protocol=3Dhttps;branch=3D=
+master"
+> +SRCREV =3D "efa6c0886bae46bdaef9b679f61f4b9d8bc296ae"
 > +
-> +PIP_INSTALL_PACKAGE =3D "pefile"
-> +PIP_INSTALL_DIST_PATH =3D "${S}/dist"
+
+Please rename the recipe to reflect version libcbor_0.10.2.bb, you are
+using the right SHA1 for SRCREV above
+
+> +S =3D "${WORKDIR}/git"
+> +PV =3D "git${SRCPV}"
+
+Setting PV is not needed if its using a SRCREV corresponding to a release t=
+ag
+
 > +
-> +BBCLASSEXTEND =3D "native nativesdk"
+> +inherit cmake
 > --
 > 2.34.1
 >
