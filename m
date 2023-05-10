@@ -1,109 +1,86 @@
-Return-Path: <akuster808@gmail.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 25C64C77B7C
-	for <webhook@archiver.kernel.org>; Wed, 10 May 2023 11:25:39 +0000 (UTC)
-Received: from mail-yw1-f174.google.com (mail-yw1-f174.google.com [209.85.128.174])
- by mx.groups.io with SMTP id smtpd.web11.13893.1683717937594485119
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AEE22C7EE22
+	for <webhook@archiver.kernel.org>; Wed, 10 May 2023 13:33:09 +0000 (UTC)
+Received: from mail-pf1-f178.google.com (mail-pf1-f178.google.com [209.85.210.178])
+ by mx.groups.io with SMTP id smtpd.web10.16903.1683725582728575463
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 10 May 2023 04:25:37 -0700
+ Wed, 10 May 2023 06:33:02 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20221208 header.b=VPXy+6Tr;
- spf=pass (domain: gmail.com, ip: 209.85.128.174, mailfrom: akuster808@gmail.com)
-Received: by mail-yw1-f174.google.com with SMTP id 00721157ae682-559f1819c5dso106644757b3.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 10 May 2023 04:25:37 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20221208 header.b=s3Mhacz2;
+ spf=pass (domain: gmail.com, ip: 209.85.210.178, mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f178.google.com with SMTP id d2e1a72fcca58-6435bbedb4fso7808119b3a.3
+        for <openembedded-devel@lists.openembedded.org>; Wed, 10 May 2023 06:33:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1683717937; x=1686309937;
-        h=content-transfer-encoding:subject:from:to:content-language
-         :user-agent:mime-version:date:message-id:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=K5QzQHh0ki0dijaM2Iqm2siY31haKuqWhLclehNdskI=;
-        b=VPXy+6TrLaBWRWdwD9DSziKPJCw6mUPV3mvan2JnBs6/fIjB53+48hwj/Gx+hgarIP
-         s7NdU03cTzsPLVAs6yfIOJTDrCqDklBRD8L8Nbpa8m9uJOpcSVncPwQkujGjfJ79GS5/
-         n+s50xo67Hefk7Kj+Y+nXg+nM3nTzK8p4cbokFiYK72xLPU1Mvz6RIrAI/Jbqn5M+SKv
-         s2QgSk9tt0tL79dWam390KM5Ib32dtRd762I6meHk5cjFmaRU610TOWMaAOdN6gw8QhS
-         KU/VWGZ3dhyh8DLFyNE3hRRvSnp6ki1wxoZP5xCiXtOMDOQwohnQtwSEAR+1ci0FTnHM
-         gdmA==
+        d=gmail.com; s=20221208; t=1683725582; x=1686317582;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=eqAUDQC2PzHuacSyX5+zjcgmJOf7n+dWcGwbs3vFeRg=;
+        b=s3Mhacz2XcVN+e4qEBVrRRKDbquuFjeRMF+0C4FU3i4it+1aeKzKfdi18e/6eRPm6A
+         1qU6UwxkCFEG/6XRtUusc45Z9VsnE9XG5Yidpu19zpz8GLD7PsE3/aGEYv1cdjfUMmBv
+         gZhjoueH50prUBU8kJ6hM2rP8Ch6bWqOQlCodIKvA8XgewfphB1Fq52zJVYUaz+1szT3
+         /3+U0AuC9fKFs88sCiyXJKNThFnLH3LJtCSG0ZaXfXUzHi2ZXsKM5q2GCnOeoqF3azGH
+         P3CfJ04Ud8Xf28RAmOavJJ3dwgEsB5MS0dmkoVkJE/P38YkjyPowzG2GO1A8GctVojNz
+         sLNA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1683717937; x=1686309937;
-        h=content-transfer-encoding:subject:from:to:content-language
-         :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=K5QzQHh0ki0dijaM2Iqm2siY31haKuqWhLclehNdskI=;
-        b=NOlg36YljD1cRb6JraIVsAk1+82MMuW7H5f2M795z9vkrCOuiCQYPLqFvbgN726xJ+
-         WZRKsvNkzGtyFzdsxbzKn4Qs2oBELg6To1Rymq0jSibAkiUfisAh8jbTY2e9UcT3B7WH
-         gFPlPkT1Th8jF7Nv++dH3Yrm7CTBKFPIH8ZGzfUaumKvDiT46wwpeP6rtbVoXlgU9onF
-         5ZC+Av0Y3QybrHIxkfgM1hhQKP375KMwyGci+k+2lbiUnAfhQfNORjzEgpRbVp/J6PKI
-         w8ApQtfspXTk8dEPhwxjBU5jqXqxufuFVpAr1gV5wPKoDovzs/Q5Jsx4MN+Zq7xfxxPT
-         rxfA==
-X-Gm-Message-State: AC+VfDyunSJB9M8LsSk1oISr7PyqQCaTAyLnTXozwIHhl0Bs4ci4bp63
-	t4n1PyK30sTMLrHJScY+JAU=
-X-Google-Smtp-Source: ACHHUZ6MZutpMbx8AoLZdUlTpXbkxYjC7O6JdjLnFhowtnNO2LJebWW7S7nxpVqVUdYPaJLhNhb+Jg==
-X-Received: by 2002:a0d:d58f:0:b0:55a:a1dd:3f04 with SMTP id x137-20020a0dd58f000000b0055aa1dd3f04mr18017209ywd.30.1683717936672;
-        Wed, 10 May 2023 04:25:36 -0700 (PDT)
-Received: from ?IPV6:2600:1700:9190:ba10:8122:c224:cc78:85c7? ([2600:1700:9190:ba10:8122:c224:cc78:85c7])
-        by smtp.gmail.com with ESMTPSA id m194-20020a0dcacb000000b0055d8ce6d686sm4031251ywd.1.2023.05.10.04.25.35
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 10 May 2023 04:25:36 -0700 (PDT)
-Message-ID: <a50f215b-ca3c-77c9-b14e-2479f2ae8296@gmail.com>
-Date: Wed, 10 May 2023 07:25:35 -0400
+        d=1e100.net; s=20221208; t=1683725582; x=1686317582;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=eqAUDQC2PzHuacSyX5+zjcgmJOf7n+dWcGwbs3vFeRg=;
+        b=HpEYNZ7BMTYC+CU4zWrdFau/785gwcF70DfRU2l+O3YHe9sh3O4cYy5jBE7EKLdJzC
+         PzTyA5FeuAZ29YbFmJC6BehL/o+mcM2GBtG2HAXNTHo3xx2JsnmytWH+e+CKUH/gKol5
+         ViTz3VM6Wg5N7et0Y/lVlsgtmEdmg+jgUBTZZqJY11ENDpXg77nLJlwmfexm7VehrC4p
+         WHLnpgKzPcMl1gTS3gma3ctqKPU5MfASmk6fE2QrwsHVw6bgkMGW/FHKTt7+6X3xM/j7
+         vOndtXQfPBMgxWTEsrX8SsT6CP0R+p0jqxmy6DIWs2zw48shxfw9sM/m0e93uAwHuhP5
+         y9bA==
+X-Gm-Message-State: AC+VfDxLPsye43WCn0B6xKvP5RQNKWnqqD9MSl3MlJyPP28+krcynCVu
+	ZM06cK1okYMSKhkANEfB6F0ec7kdU9baYw==
+X-Google-Smtp-Source: ACHHUZ7pGnvxKg/VdId0MmyOxXjB+oDvg+TQeyQrLTkK/80DOKx4qVGmQsRLwc7R+DK2pARamYLQ2A==
+X-Received: by 2002:a05:6a00:2d25:b0:643:6b94:374b with SMTP id fa37-20020a056a002d2500b006436b94374bmr26951346pfb.1.1683725581484;
+        Wed, 10 May 2023 06:33:01 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9181:d380::298a])
+        by smtp.gmail.com with ESMTPSA id s145-20020a632c97000000b0050bc4ca9024sm3171977pgs.65.2023.05.10.06.33.00
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 10 May 2023 06:33:01 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][PATCH] idevicerestore: Update to latest on master branch
+Date: Wed, 10 May 2023 06:32:58 -0700
+Message-Id: <20230510133258.2997303-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.40.1
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.10.0
-Content-Language: en-US
-To: Khem Raj <raj.khem@gmail.com>,
- OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-From: akuster808 <akuster808@gmail.com>
-Subject: langdale merge request: May 10th
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 10 May 2023 11:25:39 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102529
+ <openembedded-devel@lists.openembedded.org>; Wed, 10 May 2023 13:33:09 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102530
 
-The following changes since commit 3d1ec70ed319c1b7f561fcda7b8cd0c2e0b2c262:
+Needed to pick fixes to build with latest libplist
 
-   dleyna-{server,renderer}: fix dev-so QA issue with multilib 
-(2023-04-18 06:45:59 -0400)
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ meta-oe/recipes-support/idevicerestore/idevicerestore_git.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-are available in the Git repository at:
-
-   https://git.openembedded.org/meta-openembedded langdale-next
-
-for you to fetch changes up to cbbaa82238cd60f08c9b9cb58dde59d5f9318c7b:
-
-   python3-gcovr: Add missing runtime dependency (2023-05-08 09:51:05 -0400)
-
-----------------------------------------------------------------
-Arsalan H. Awan (1):
-       meta-networking/licenses/netperf: remove unused license
-
-Changqing Li (1):
-       redis: upgrade 7.0.9 -> 7.0.10
-
-Jasper Orschulko (1):
-       python3-gcovr: Add missing runtime dependency
-
-Valeria Petrov (1):
-       apache2: upgrade 2.4.56 -> 2.4.57
-
-  meta-networking/licenses/netperf                                | 43 
------------------------------
-  .../recipes-extended/redis/{redis_7.0.9.bb => redis_7.0.10.bb} |  2 +-
-  meta-python/recipes-devtools/python/python3-gcovr_5.2.bb        | 2 +-
-  ...1-modules-mappers-config9.m4-Add-server-directory-to-i.patch | 31 
-+++++++++++++++++++++
-  .../apache2/{apache2_2.4.56.bb => apache2_2.4.57.bb} |  3 +-
-  5 files changed, 35 insertions(+), 46 deletions(-)
-  delete mode 100644 meta-networking/licenses/netperf
-  rename meta-oe/recipes-extended/redis/{redis_7.0.9.bb => 
-redis_7.0.10.bb} (96%)
-  create mode 100644 
-meta-webserver/recipes-httpd/apache2/apache2/0011-modules-mappers-config9.m4-Add-server-directory-to-i.patch
-  rename meta-webserver/recipes-httpd/apache2/{apache2_2.4.56.bb => 
-apache2_2.4.57.bb} (98%)
+diff --git a/meta-oe/recipes-support/idevicerestore/idevicerestore_git.bb b/meta-oe/recipes-support/idevicerestore/idevicerestore_git.bb
+index d7c76a5971..2a0a129fee 100644
+--- a/meta-oe/recipes-support/idevicerestore/idevicerestore_git.bb
++++ b/meta-oe/recipes-support/idevicerestore/idevicerestore_git.bb
+@@ -10,7 +10,7 @@ DEPENDS = "libirecovery libimobiledevice libzip curl libimobiledevice-glue opens
+ 
+ PV = "1.0.1+git${SRCPV}"
+ 
+-SRCREV = "7d622d916be16f2df5a72bf53a42f3a326bbfaa4"
++SRCREV = "163a1647dedb7ca4656c0f072e4733573f9f982b"
+ SRC_URI = "git://github.com/libimobiledevice/idevicerestore;protocol=https;branch=master"
+ 
+ S = "${WORKDIR}/git"
+-- 
+2.40.1
 
 
