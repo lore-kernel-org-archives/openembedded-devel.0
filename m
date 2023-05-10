@@ -2,56 +2,56 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id ECAFCC7EE23
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EDDCCC7EE26
 	for <webhook@archiver.kernel.org>; Wed, 10 May 2023 03:25:16 +0000 (UTC)
-Received: from mail-pl1-f173.google.com (mail-pl1-f173.google.com [209.85.214.173])
- by mx.groups.io with SMTP id smtpd.web11.8126.1683689108880206989
+Received: from mail-pl1-f179.google.com (mail-pl1-f179.google.com [209.85.214.179])
+ by mx.groups.io with SMTP id smtpd.web11.8125.1683689107663324737
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 09 May 2023 20:25:08 -0700
+ Tue, 09 May 2023 20:25:09 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20221208 header.b=MxEn7XkT;
- spf=pass (domain: gmail.com, ip: 209.85.214.173, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f173.google.com with SMTP id d9443c01a7336-1ab1ce53ca6so48468945ad.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 09 May 2023 20:25:08 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20221208 header.b=QD2dfDyT;
+ spf=pass (domain: gmail.com, ip: 209.85.214.179, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f179.google.com with SMTP id d9443c01a7336-1aaebed5bd6so47843865ad.1
+        for <openembedded-devel@lists.openembedded.org>; Tue, 09 May 2023 20:25:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1683689108; x=1686281108;
+        d=gmail.com; s=20221208; t=1683689109; x=1686281109;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=kwJ/XFzSnvIvD8RWdC8YLxH8jM5+giP6Zrw14M3s2bg=;
-        b=MxEn7XkTYetZO3az0LqwL+vHgbUQ8S2/xYhyQIPvBXBrlT4jPHIT6JorElh4MFWFwQ
-         y5oHrc750UEiLELZBe2xWZK0ZcnA5NbxHgABIrEM/R0cnsEiUHlJ4xFMMfHCb5KMOG47
-         5CanRQt7yhLI9BNQGLqQgZqsJ2qRvJhREtEbCgg8oBSdgvYnz+fnqM+7fq+vKAaO4Ymi
-         NoSFg5qBaM08Z/68mmrPt73eguaKl/edxwdZj/P+dwwyfeBaNx8Y1XvDXmSwCc/DuCkC
-         YlfQFRvAlV4Qs2Hl3oZIVqjRq8Io71rEno9UGcIzpHoFHVswdIoOnjB7UbPUvI4Ph4+4
-         V8jg==
+        bh=Lb5xpamDWYabpy00jzdHB9jwUzUptptcCl1JBF7i4yw=;
+        b=QD2dfDyTvamqfu26aNEzqnMM6OVXKMyBdfV9g8EwQgcTAWRhmJ0JZjMo3wSgVpE3QC
+         gnZzi7jTMD/YzoqgGzbIAnfVq6lpaUzh9YdPfiVYQHzOHIvZq4jXEz7R0mi0+WWq0LWS
+         xfAgTsSzR2lvl6CH0XhfQXb5UW6Ss8LLE6C5jceHbQNy7sAG+eAFXlIYA8lJZKE7kUcS
+         stua2GeE00TuAn8xh9bil9+DtuDgM9wIH05IGV9BcbEN7vEht3JEzZze746jfu2C/1FM
+         jK6EgJXYRbzj3Pj8HORuBB84YfAyhWVWmJxZbjBXCHsKy7F1M5aY7klTskVwvZKEhxgt
+         JMTg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1683689108; x=1686281108;
+        d=1e100.net; s=20221208; t=1683689109; x=1686281109;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=kwJ/XFzSnvIvD8RWdC8YLxH8jM5+giP6Zrw14M3s2bg=;
-        b=F+xzeOrvwwwP6wSQLq/0OtdXghe6lpz++d0QmeIMEuKH5w5Wb77MjFEQ4G4CWojdfG
-         1ZBVw4+gGWw3ea/0nb5FeIthTTsEG2ksezZ3kjMG2a83A+o9GU9N2EYx2QR0BXsql/3u
-         uCc7Dp5FtkqbPivkvZ9LNdZcEkTD3467mBbU8vjgdJtZmBunA1812TKLuKMtZCSNHDgQ
-         Ne1ABFQk1WIDbL8v1oRqznuaGeGh9/rE7e1Q12xCJ402B39X0/KBDWPdrf3jd1rDojeE
-         ihkUgptpQdI+OCfYzSa3y3KnICRhaGMTf3XmIZofawUAPvysTkrj1/hn4TlNu8tWYAd8
-         4uvQ==
-X-Gm-Message-State: AC+VfDzNyhINCb+m0Y47qsGlPFVgCqbyPpzT8WvCBiJIZjT1sNMAqozj
-	xhS8n1YM11lY74KF3+zTsxDiKf2WJs5ehg==
-X-Google-Smtp-Source: ACHHUZ5Beo7Vv6DbKpDUSYfBRCadJFF3OhIgVEpOJmvkOJ53Es3GnvfJl2I8bHZff6V/lsXJBaQtIg==
-X-Received: by 2002:a17:902:e741:b0:1a6:77b8:23e0 with SMTP id p1-20020a170902e74100b001a677b823e0mr20345485plf.60.1683689107950;
-        Tue, 09 May 2023 20:25:07 -0700 (PDT)
+        bh=Lb5xpamDWYabpy00jzdHB9jwUzUptptcCl1JBF7i4yw=;
+        b=J/U+w/Uc+I5sKOnfVNT5OHVMcLMfDMdNw4nIZeYA+os7ZLkwmFNJrVA6tA2QCFC2Gr
+         KyUC46bjcXDDs6LmIKMI6NGT4rtXq0ycfWB+Wd3GttJd7vife3jatEbRhaTdSo6fsRCA
+         7oa5hoD5MZJ059lrkhNwKzsEuU4xWJFj9/sqkYAseq75/YlkxUDNrGbKWVOoh29jD4+k
+         7eU+YLt7ToeZtEOMDfnJdMZ0V6bGIZ9iLPVa/zE+hukOL+2Y966OusH9bLzMuRSnJFQi
+         LPC1Z7PgMO/3QgES8YTm10o7l5XO2MJOl3+QzrDonrx3mUms/TtjHHWpdX06gK49J1rb
+         xjJw==
+X-Gm-Message-State: AC+VfDyoUQaQY4qQ8fmTktYxZttD19s2gAMnMBeub76XzKCV007F2qTQ
+	/Wm7Nl5YgEwoNvqJwA/c5khuTP8qZrGiKQ==
+X-Google-Smtp-Source: ACHHUZ7JuMg+9W1miT97taNHaNLdVN6fzb8iw4F/s+XSG4WrTzCJQfuUzyA/ihkZq6pOmjomNgRcHw==
+X-Received: by 2002:a17:902:ef96:b0:1aa:ce4d:c77d with SMTP id iz22-20020a170902ef9600b001aace4dc77dmr15545375plb.24.1683689108595;
+        Tue, 09 May 2023 20:25:08 -0700 (PDT)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9181:d380::298a])
-        by smtp.gmail.com with ESMTPSA id t24-20020a170902b21800b001a505f04a06sm2446100plr.190.2023.05.09.20.25.07
+        by smtp.gmail.com with ESMTPSA id t24-20020a170902b21800b001a505f04a06sm2446100plr.190.2023.05.09.20.25.08
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 09 May 2023 20:25:07 -0700 (PDT)
+        Tue, 09 May 2023 20:25:08 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 3/5] libimobiledevice: Delete recipe for 1.3.0
-Date: Tue,  9 May 2023 20:25:02 -0700
-Message-Id: <20230510032504.457574-3-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 4/5] libimobiledevice: Update to latest tip
+Date: Tue,  9 May 2023 20:25:03 -0700
+Message-Id: <20230510032504.457574-4-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20230510032504.457574-1-raj.khem@gmail.com>
 References: <20230510032504.457574-1-raj.khem@gmail.com>
@@ -61,37 +61,28 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 10 May 2023 03:25:16 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102524
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102525
+
+This is to supported latest libplist
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../libimobiledevice/libimobiledevice_1.3.0.bb  | 17 -----------------
- 1 file changed, 17 deletions(-)
- delete mode 100644 meta-oe/recipes-connectivity/libimobiledevice/libimobiledevice_1.3.0.bb
+ .../libimobiledevice/libimobiledevice_git.bb                    | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-connectivity/libimobiledevice/libimobiledevice_1.3.0.bb b/meta-oe/recipes-connectivity/libimobiledevice/libimobiledevice_1.3.0.bb
-deleted file mode 100644
-index 41b8d94a03..0000000000
---- a/meta-oe/recipes-connectivity/libimobiledevice/libimobiledevice_1.3.0.bb
-+++ /dev/null
-@@ -1,17 +0,0 @@
--SUMMARY = "A protocol library to access an iPhone or iPod Touch in Linux"
--LICENSE = "GPL-2.0-only & LGPL-2.1-only"
--LIC_FILES_CHKSUM = "\
--    file://COPYING;md5=ebb5c50ab7cab4baeffba14977030c07 \
--    file://COPYING.LESSER;md5=6ab17b41640564434dda85c06b7124f7 \
--"
--HOMEPAGE = "http://www.libimobiledevice.org/"
--
--DEPENDS = "libplist usbmuxd libusbmuxd libtasn1 gnutls libgcrypt"
--
--SRCREV = "15f8652126664e3a4b980e5d1c039b9053ce8566"
--SRC_URI = "git://github.com/libimobiledevice/libimobiledevice;protocol=https;branch=master"
--
--S = "${WORKDIR}/git"
--inherit autotools pkgconfig
--
--EXTRA_OECONF = " --without-cython "
+diff --git a/meta-oe/recipes-connectivity/libimobiledevice/libimobiledevice_git.bb b/meta-oe/recipes-connectivity/libimobiledevice/libimobiledevice_git.bb
+index 52176872cf..c17c7224f8 100644
+--- a/meta-oe/recipes-connectivity/libimobiledevice/libimobiledevice_git.bb
++++ b/meta-oe/recipes-connectivity/libimobiledevice/libimobiledevice_git.bb
+@@ -10,7 +10,7 @@ DEPENDS = "libplist usbmuxd libusbmuxd libtasn1 gnutls libgcrypt libimobiledevic
+ 
+ PV = "1.3.0+git${SRCPV}"
+ 
+-SRCREV = "2eec1b9a172354c8521123a767d998b17bd2ac18"
++SRCREV = "860ffb707af3af94467d2ece4ad258dda957c6cd"
+ SRC_URI = "git://github.com/libimobiledevice/libimobiledevice;protocol=https;branch=master"
+ 
+ S = "${WORKDIR}/git"
 -- 
 2.40.1
 
