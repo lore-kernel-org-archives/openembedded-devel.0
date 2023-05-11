@@ -2,54 +2,54 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3B8F5C77B7C
-	for <webhook@archiver.kernel.org>; Thu, 11 May 2023 23:50:49 +0000 (UTC)
-Received: from mail-oo1-f47.google.com (mail-oo1-f47.google.com [209.85.161.47])
- by mx.groups.io with SMTP id smtpd.web11.12140.1683849041916742478
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2BC69C7EE22
+	for <webhook@archiver.kernel.org>; Thu, 11 May 2023 23:51:39 +0000 (UTC)
+Received: from mail-oo1-f42.google.com (mail-oo1-f42.google.com [209.85.161.42])
+ by mx.groups.io with SMTP id smtpd.web10.12224.1683849093463748647
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 11 May 2023 16:50:42 -0700
+ Thu, 11 May 2023 16:51:33 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=IzgoyjiL;
- spf=pass (domain: gmail.com, ip: 209.85.161.47, mailfrom: raj.khem@gmail.com)
-Received: by mail-oo1-f47.google.com with SMTP id 006d021491bc7-549f0b45ac6so2931908eaf.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 11 May 2023 16:50:41 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20221208 header.b=Gm20M9ti;
+ spf=pass (domain: gmail.com, ip: 209.85.161.42, mailfrom: raj.khem@gmail.com)
+Received: by mail-oo1-f42.google.com with SMTP id 006d021491bc7-54fba751417so1470908eaf.0
+        for <openembedded-devel@lists.openembedded.org>; Thu, 11 May 2023 16:51:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1683849041; x=1686441041;
+        d=gmail.com; s=20221208; t=1683849093; x=1686441093;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=ONRVC1gjWtpBbVdjANAm2srp5WME8FRaJddmTm56IJo=;
-        b=IzgoyjiLQ4J75+Vc+PnMHkE9dCzFQt7puPn4AjVpYwCAtJ6TpUi53zz0165IoikMk2
-         uZgVIdtfjwzg9LWWYjAsKWUDUcqFMlhvZPmLDX+/6qf6xDcy7Yl8h92oyWj1etUXiNpQ
-         fEJNXotKghJe2sSlvI55GjcFViY8iqs59ZjQG8pGARYYHR6HXLjdMk98Kmoh6k5xLnuM
-         0t4ZPxQVzjThrxfBSqto2Yp+XPJ2WtB/rE2hDoy8rA07szqc3SniWnZrqqiJDn7ZMbU4
-         XN9O6SWAEXgICeTtOoUym1IUb73FMlMSRyo56JRxJLDExIp4aFg4NT7BpenaX7/e9zwp
-         Z7rw==
+        bh=N/0M9nxazfnfwz8Lpx2N2Sd0v+oKeAa8qMBVhsScf3Y=;
+        b=Gm20M9tipE7sYdbBiWoMgv7++8M3e+/PgFIFqcfKnBNR3O0vs7wg0TQNnPYna9tEXn
+         C+CQUO5KfE8xZAAe5CvJtcvhrZ/sQX6PlrMoG2Lu9hFi78NHFL+5b8E6mvGNZB/KaWbi
+         buyIfskgxkcQw0HU6BUDi8t57J/L3AdrhRUsdPAHYM3jila9PtiL67jqL5UoRqOQPtuW
+         z/AFUvdZVg0h3mltaUxiUva8OOHQeIMTbIKO6YP1y2sDowm0AExOVS3rL/YdT/26Srms
+         EzaZQuuFqGp8DTkzYTXdD7te6jJGyzk44yD3jzq3IbUUicHSs2cbhbCZQQHaWn07/Knq
+         CKCw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1683849041; x=1686441041;
+        d=1e100.net; s=20221208; t=1683849093; x=1686441093;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=ONRVC1gjWtpBbVdjANAm2srp5WME8FRaJddmTm56IJo=;
-        b=jUcw2PU1UI/PQgQJ2o3B4orZrnKvMEjsZNmBDnoagDPloYTJb6NYeVsgkoVG3orNzC
-         gBc5rL3NamY8If5PgRpuKEnr/y/8zqTjAf8hs4Zd1SFJ/lbtIg2GT5Jlrq4FkuTRM8x5
-         A6eJ7IlWu1OZYW9p4BEviIUMQVyXuVOgDu7ycJweEZxltDqAOCKtnl1t5WHVOPRoR1DY
-         lQLRaZbGAiTJYWom6faJvze03WDELKU7wUCTfoS4Pb1DQU2sNtAecl3P725xQqyInZ+3
-         lGfwwUy5tzOJRrRA4v57rA6/xDiq28RGrVcKSCfK2/skn97TXg/tlX2GTXj6I3QTxINN
-         FFEA==
-X-Gm-Message-State: AC+VfDxRmPnJ3lB0J7tXqpgxsq1q7Ai0xbLX3CNh8URjXSU7/1340sfB
-	TehAukQSO9klx4iRr1HmJ7UYcVqh0YGAg/uSd1o+HyWzzGQ=
-X-Google-Smtp-Source: ACHHUZ74Mf28w2HiKkEahHuYN4EbHuKwZz4nPBO9x0/yN6/2LwDBm2kvgSxqtk7pI7WYMIbxFwql3SaGC04LwkI4YhA=
-X-Received: by 2002:a05:6870:e2c7:b0:187:bc38:cfb0 with SMTP id
- w7-20020a056870e2c700b00187bc38cfb0mr10814458oad.29.1683849040623; Thu, 11
- May 2023 16:50:40 -0700 (PDT)
+        bh=N/0M9nxazfnfwz8Lpx2N2Sd0v+oKeAa8qMBVhsScf3Y=;
+        b=E+Q74eQL+93DjzylO3IuTEyTLjnMLAw7E6fMnd7zebHE10rbsUO8xmAvg/x8ddHDy2
+         9oaD+/X+rXByM+eyfi2kvPrwhlLPR2DVq3agrPbnIXQD5Q1EnrWU71Dflm6VWsvfE91y
+         /BPuKUioN9ORVl2fYL1DvIjS7S+75PIlYL0eqKcnEpX0SIvNSlC23o/2Xei/a03Nsak9
+         I5Gp3Ezz3tUrdohLPAXPWmsePyFXpnOQAyi9S9XOHmDlHja7kqL/YABEnaBeXYGmxqCy
+         88DCmHJbss7T7Qab+QZOj7eCROlZpdolLU0sVyqfP/CBoptrIwLWlmycnbKaofpc4SOp
+         32Iw==
+X-Gm-Message-State: AC+VfDxiX+LZNjw90v2i/39XJEtQ2bIJu3RThHJICZLMhcp3/vSxoJhg
+	tohdnZ1mq8mI9zMMSFyJoj9uNe6sTnS3D4xCONeKpvCgJg4=
+X-Google-Smtp-Source: ACHHUZ4CjXGH3Epkfjm/yzjEvG82unm/9VcMDmyyH8ViulqwZV8QHuocgRSdTWB/y1Nxvfc8ST2AqLk8//zNq0VnEy0=
+X-Received: by 2002:a05:6808:289a:b0:384:167d:736b with SMTP id
+ eu26-20020a056808289a00b00384167d736bmr5596236oib.15.1683849092496; Thu, 11
+ May 2023 16:51:32 -0700 (PDT)
 MIME-Version: 1.0
-References: <TY2PR02MB367859735163870EE76A95A981749@TY2PR02MB3678.apcprd02.prod.outlook.com>
-In-Reply-To: <TY2PR02MB367859735163870EE76A95A981749@TY2PR02MB3678.apcprd02.prod.outlook.com>
+References: <TY2PR02MB3678CB86F8FECE2510FB308881749@TY2PR02MB3678.apcprd02.prod.outlook.com>
+In-Reply-To: <TY2PR02MB3678CB86F8FECE2510FB308881749@TY2PR02MB3678.apcprd02.prod.outlook.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 11 May 2023 16:50:14 -0700
-Message-ID: <CAMKF1so6bpy_c1jrnbXH4Wvf0k9uBYmvyvXHGTOYDk9b_MWYTw@mail.gmail.com>
-Subject: Re: [oe] [meta-networking][PATCH] openfortivpn: add new recipe
+Date: Thu, 11 May 2023 16:51:06 -0700
+Message-ID: <CAMKF1sqzMVOThwJyGnPJYs_oX+qeAUC2XKK+Z+C3wL9CVgdc-g@mail.gmail.com>
+Subject: Re: [oe] [meta-networking][PATCH] networkmanager-fortisslvpn: add new recipe
 To: Petr Gotthard <petr.gotthard@advantech.cz>
 Cc: "openembedded-devel@lists.openembedded.org" <openembedded-devel@lists.openembedded.org>
 Content-Type: text/plain; charset="UTF-8"
@@ -57,66 +57,115 @@ Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 11 May 2023 23:50:49 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102552
+ <openembedded-devel@lists.openembedded.org>; Thu, 11 May 2023 23:51:39 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102553
 
-Fails to configure -
+Fails to compile
 
-checking for /sbin/resolvconf... configure: error: cannot check for
-file existence when cross compiling
-
-
-https://errors.yoctoproject.org/Errors/Details/703717/
+https://errors.yoctoproject.org/Errors/Details/703718/
 
 On Thu, May 11, 2023 at 9:33=E2=80=AFAM Petr Gotthard
 <petr.gotthard@advantech.cz> wrote:
 >
-> A client for PPP+SSL VPN tunnel services, compatible with Fortinet VPNs.
-> https://github.com/adrienverge/openfortivpn
+> Fortinet SSLVPN support for NetworkManager
+> https://gitlab.gnome.org/GNOME/NetworkManager-fortisslvpn
 >
 > Signed-off-by: Petr Gotthard <petr.gotthard@advantech.cz>
 > ---
->  .../openfortivpn/openfortivpn_1.20.3.bb          | 16 ++++++++++++++++
->  1 file changed, 16 insertions(+)
->  create mode 100644 meta-networking/recipes-connectivity/openfortivpn/ope=
-nfortivpn_1.20.3.bb
+>  .../networkmanager-fortisslvpn_1.4.0.bb       | 66 +++++++++++++++++++
+>  1 file changed, 66 insertions(+)
+>  create mode 100644 meta-networking/recipes-connectivity/networkmanager/n=
+etworkmanager-fortisslvpn_1.4.0.bb
 >
-> diff --git a/meta-networking/recipes-connectivity/openfortivpn/openfortiv=
-pn_1.20.3.bb b/meta-networking/recipes-connectivity/openfortivpn/openfortiv=
-pn_1.20.3.bb
+> diff --git a/meta-networking/recipes-connectivity/networkmanager/networkm=
+anager-fortisslvpn_1.4.0.bb b/meta-networking/recipes-connectivity/networkm=
+anager/networkmanager-fortisslvpn_1.4.0.bb
 > new file mode 100644
-> index 0000000000..84ef8f80d4
+> index 0000000000..afaece245b
 > --- /dev/null
-> +++ b/meta-networking/recipes-connectivity/openfortivpn/openfortivpn_1.20=
-.3.bb
-> @@ -0,0 +1,16 @@
-> +SUMMARY =3D "Client for PPP+SSL VPN tunnel services"
-> +LICENSE =3D "GPL-3.0-or-later"
-> +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D3d575262a651a6f1a17210ce41bf9=
-07d"
+> +++ b/meta-networking/recipes-connectivity/networkmanager/networkmanager-=
+fortisslvpn_1.4.0.bb
+> @@ -0,0 +1,66 @@
+> +SUMMARY =3D "Fortinet SSLVPN support for NetworkManager"
+> +SECTION =3D "net/misc"
 > +
-> +SRC_URI =3D "git://github.com/adrienverge/openfortivpn.git;protocol=3Dht=
-tps;branch=3Dmaster"
-> +SRCREV =3D "45cb8e0f9984f1d54b648e499bda637d96568908"
+> +LICENSE =3D "GPL-2.0-or-later"
+> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D59530bdf33659b29e73d4adb9f9f6=
+552"
 > +
-> +DEPENDS =3D "openssl"
+> +DEPENDS =3D "glib-2.0-native libxml2-native networkmanager ppp"
 > +
-> +S =3D "${WORKDIR}/git"
+> +inherit gnomebase gettext useradd
 > +
-> +inherit autotools pkgconfig
+> +SRC_URI =3D "${GNOME_MIRROR}/NetworkManager-fortisslvpn/${@gnome_verdir(=
+"${PV}")}/NetworkManager-fortisslvpn-${PV}.tar.xz"
+> +SRC_URI[sha256sum] =3D "b055e26349b516b23585798ab3ef57b436b014800e92a8ac=
+732cfc8e76c5dafa"
 > +
-> +EXTRA_OECONF =3D "--with-pppd=3D${sbindir}/pppd --disable-proc"
+> +S =3D "${WORKDIR}/NetworkManager-fortisslvpn-${PV}"
 > +
-> +RDEPENDS:${PN} =3D "ppp"
+> +# meta-gnome in layers is required using gnome:
+> +PACKAGECONFIG[gnome] =3D "--with-gnome,--without-gnome,gtk+3 libnma libs=
+ecret,"
+> +PACKAGECONFIG[gtk4] =3D "--with-gtk4,--without-gtk4,gtk4,"
+> +
+> +EXTRA_OECONF =3D "--with-pppd-plugin-dir=3D${libdir}/pppd/${@get_ppp_ver=
+sion(d)}"
+> +
+> +def get_ppp_version(d):
+> +    import re
+> +
+> +    pppd_plugin =3D d.expand('${STAGING_LIBDIR}/pppd')
+> +    if not os.path.isdir(pppd_plugin):
+> +        return None
+> +
+> +    bb.debug(1, "pppd plugin dir %s" % pppd_plugin)
+> +    r =3D re.compile(r"\d*\.\d*\.\d*")
+> +    for f in os.listdir(pppd_plugin):
+> +        if os.path.isdir(os.path.join(pppd_plugin, f)):
+> +            ma =3D r.match(f)
+> +            if ma:
+> +                bb.debug(1, "pppd version dir %s" % f)
+> +                return f
+> +            else:
+> +                bb.debug(1, "under pppd plugin dir %s" % f)
+> +
+> +    return None
+> +
+> +# gdbus-codegen requires target directories to exist
+> +do_configure:append() {
+> +    mkdir -p ${B}/properties
+> +    mkdir -p ${B}/src
+> +}
+> +
+> +USERADD_PACKAGES =3D "${PN}"
+> +USERADD_PARAM:${PN} =3D "--system nm-fortisslvpn"
+> +
+> +FILES:${PN} +=3D " \
+> +    ${libdir}/NetworkManager/*.so \
+> +    ${libdir}/pppd/*/*.so \
+> +    ${nonarch_libdir}/NetworkManager/VPN/nm-fortisslvpn-service.name \
+> +"
+> +
+> +FILES:${PN}-staticdev +=3D " \
+> +    ${libdir}/NetworkManager/*.a \
+> +    ${libdir}/pppd/*/*.a \
+> +"
+> +
+> +RDEPENDS:${PN} =3D " \
+> +    networkmanager \
+> +    openfortivpn \
+> +    ppp \
+> +"
 > --
 > 2.34.1
 >
 >
 > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
 > Links: You receive all messages sent to this group.
-> View/Reply Online (#102547): https://lists.openembedded.org/g/openembedde=
-d-devel/message/102547
-> Mute This Topic: https://lists.openembedded.org/mt/98831514/1997914
+> View/Reply Online (#102548): https://lists.openembedded.org/g/openembedde=
+d-devel/message/102548
+> Mute This Topic: https://lists.openembedded.org/mt/98831519/1997914
 > Group Owner: openembedded-devel+owner@lists.openembedded.org
 > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
 aj.khem@gmail.com]
