@@ -1,89 +1,124 @@
-Return-Path: <changqing.li@eng.windriver.com>
+Return-Path: <jun.nie@linaro.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8944DC77B7F
-	for <webhook@archiver.kernel.org>; Thu, 11 May 2023 10:42:35 +0000 (UTC)
-Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
- by mx.groups.io with SMTP id smtpd.web10.55859.1683801747847422342
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 534DAC7EE22
+	for <webhook@archiver.kernel.org>; Thu, 11 May 2023 13:56:26 +0000 (UTC)
+Received: from mail-lj1-f176.google.com (mail-lj1-f176.google.com [209.85.208.176])
+ by mx.groups.io with SMTP id smtpd.web10.59923.1683813377583882622
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 11 May 2023 03:42:28 -0700
+ Thu, 11 May 2023 06:56:18 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=pps06212021 header.b=jxrnhJmT;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=44952012bc=changqing.li@windriver.com)
-Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 34BAg0JY025321
-	for <openembedded-devel@lists.openembedded.org>; Thu, 11 May 2023 10:42:27 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com; h=from : to :
- subject : date : message-id : mime-version : content-transfer-encoding :
- content-type; s=PPS06212021;
- bh=ZizKDUbiQ6+ia+iAHtos1fGrNrtRyahLKETj/gnRsOM=;
- b=jxrnhJmT4rw6lJsj9ShnfykBQtHR1zjWJz1Hxfa+qX3oSJvAokQ/S59CDy/FtSEA+h+l
- bZNpgmbazzJK52YRFVmGlChOrgOZT7STzihXS5gh+kOgOlIG7nPlj2Gs3V1rrYSIWvW3
- JpO6ax8dE++1ZE++pjuXPpK8E7tlFyFNS1f5ILHghT1jQym9rCzt+xtok91kGT/BbmD9
- XUiLazIembBbd8rqZNB8FAASdJoY1+nYLW+q7EUZwHdABSjqRZC2KxPY3vGkvwv+M918
- BCFn07pXT/t0O3VmeCOaqG4CuuQ+Pd784JZgvIgxl8VsD6S2W+0VpkLDmKyKzsZxqYw+ Hw== 
-Received: from ala-exchng01.corp.ad.wrs.com (unknown-82-252.windriver.com [147.11.82.252])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3qf8b92j57-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Thu, 11 May 2023 10:42:26 +0000
-Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.23; Thu, 11 May 2023 03:42:25 -0700
-Received: from pek-lpg-core2.wrs.com (128.224.153.41) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
- 15.1.2507.23 via Frontend Transport; Thu, 11 May 2023 03:42:24 -0700
-From: <changqing.li@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [mickledore][master][meta-oe][PATCH] redis: upgrade 6.2.11 -> 6.2.12
-Date: Thu, 11 May 2023 18:42:23 +0800
-Message-ID: <20230511104223.249742-1-changqing.li@windriver.com>
-X-Mailer: git-send-email 2.25.1
+ dkim=fail reason="signature has expired" header.i=@linaro.org header.s=google header.b=AG/5xbkO;
+ spf=pass (domain: linaro.org, ip: 209.85.208.176, mailfrom: jun.nie@linaro.org)
+Received: by mail-lj1-f176.google.com with SMTP id 38308e7fff4ca-2ad819ab8a9so62789331fa.0
+        for <openembedded-devel@lists.openembedded.org>; Thu, 11 May 2023 06:56:17 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google; t=1683813375; x=1686405375;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=JfwZKzpBoQWSvsAkPoiFCzdaQG/oznSeBzK9RUVoTa0=;
+        b=AG/5xbkOF+3JVHLX9jJMYVcQFlcX3OlXcwTAX/BnW9Sl45lUWKMWuKOg3WV23AIbrq
+         VKGO3vDtN32sKo6SfJJvRK0A8DvsyVSoJplo2op/VYd1XyN1TjIlroYLGrLJeCzNFhwP
+         uf0yRnyOkHD/NWr7+AvDty/GG4f0Gneh9fh6mdS/Pm/5jM0miiSuiAzJwwgzZQB7bErH
+         T+S2WdLr+u6hpxWbLqG6AemJGYE3yZ4XpE8mIVAJ2u80WOxEOrHaTUNynn5dkMhOnth0
+         +ofCMZWSI69INEmCFSmcRF8O2QOJ1/5c2FMhHyFQj1FPmTUhnsnevUeZx5iRSGKE4o6O
+         4ZRQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20221208; t=1683813375; x=1686405375;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=JfwZKzpBoQWSvsAkPoiFCzdaQG/oznSeBzK9RUVoTa0=;
+        b=XoKD76JGWBd+rWDGgQJfQG3kDxHZRMDoLIgFKJVk3H+TVSPi7Nyjm066nqT5xYk4KG
+         xuA3B1kkOuh700dOpUVNFLiITvq7ziy4Vt52YDyTDHCcBOfJ01d0+MjwhievbGC6ftMu
+         EF2BN3v6e6FKbhmj1WcKZ0kHEgBoCFQxfDSp7TtjTgxr+ckcfBMgBZ/6JAQp5RYBq2+y
+         v1xhsMZmT7ufTzMA29q0tmamXy+TB5MdmeZRskMc3jBn068gq204J4GDPOSlry01HzFp
+         uPSUy8o4VjAK8PxUGmLsk8zQZL80LHPnZlzqZ9A9B3CxynuzCdMoKVJRfai80j6Kjh8D
+         xbbQ==
+X-Gm-Message-State: AC+VfDy/W7iIaZcS4aBfPIYSdLbKcDYdq9DSRbedRD3anF6dXBheFtq9
+	tp0dRrmVmloedE1OHF36MqsXwsp+mak2q7g82iqBKA==
+X-Google-Smtp-Source: ACHHUZ6T4UWcJ4crrR9ZIKBhAw0hg8r7H6uM6Gfjp+jb/yqaCsOAgS578t3xySttItqVihQOofzpXwvBWeZljYoFs1Y=
+X-Received: by 2002:a2e:7004:0:b0:2ab:365b:dc7d with SMTP id
+ l4-20020a2e7004000000b002ab365bdc7dmr3119585ljc.27.1683813375220; Thu, 11 May
+ 2023 06:56:15 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Proofpoint-GUID: sFtAAnxqx2OoJbME2NIFmGRC27JdtfGc
-X-Proofpoint-ORIG-GUID: sFtAAnxqx2OoJbME2NIFmGRC27JdtfGc
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.254,Aquarius:18.0.942,Hydra:6.0.573,FMLib:17.11.170.22
- definitions=2023-05-11_07,2023-05-05_01,2023-02-09_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 mlxscore=0 impostorscore=0
- clxscore=1015 lowpriorityscore=0 mlxlogscore=728 adultscore=0 spamscore=0
- malwarescore=0 suspectscore=0 phishscore=0 priorityscore=1501 bulkscore=0
- classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2304280000
- definitions=main-2305110091
+References: <20230509065940.1584276-1-jun.nie@linaro.org> <20230509065940.1584276-2-jun.nie@linaro.org>
+ <CAMKF1srFj1enrOfDR=X0Q+ue8OMKyEX8iJV_NcK6QuXoLoDOiw@mail.gmail.com>
+In-Reply-To: <CAMKF1srFj1enrOfDR=X0Q+ue8OMKyEX8iJV_NcK6QuXoLoDOiw@mail.gmail.com>
+From: Jun Nie <jun.nie@linaro.org>
+Date: Thu, 11 May 2023 21:58:32 +0800
+Message-ID: <CABymUCNfF516hUWy9uzbUq+ih3_CNvtav-7AKSOjNnqnfvmm6A@mail.gmail.com>
+Subject: Re: [meta-oe 1/3] libcbor: Add initial support
+To: Khem Raj <raj.khem@gmail.com>
+Cc: richard@hughsie.com, openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 11 May 2023 10:42:35 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102539
+ <openembedded-devel@lists.openembedded.org>; Thu, 11 May 2023 13:56:26 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102540
 
-From: Changqing Li <changqing.li@windriver.com>
+Khem Raj <raj.khem@gmail.com> =E4=BA=8E2023=E5=B9=B45=E6=9C=8810=E6=97=A5=
+=E5=91=A8=E4=B8=89 08:28=E5=86=99=E9=81=93=EF=BC=9A
+>
+> On Mon, May 8, 2023 at 11:58=E2=80=AFPM Jun Nie <jun.nie@linaro.org> wrot=
+e:
+> >
+> > To handle the general-purpose schema-less binary data format
+> >
+> > Signed-off-by: Jun Nie <jun.nie@linaro.org>
+> > ---
+> >  meta-oe/recipes-extended/libcbor/libcbor_git.bb | 13 +++++++++++++
+> >  1 file changed, 13 insertions(+)
+> >  create mode 100755 meta-oe/recipes-extended/libcbor/libcbor_git.bb
+> >
+> > diff --git a/meta-oe/recipes-extended/libcbor/libcbor_git.bb b/meta-oe/=
+recipes-extended/libcbor/libcbor_git.bb
+> > new file mode 100755
+> > index 0000000000..53ba230533
+> > --- /dev/null
+> > +++ b/meta-oe/recipes-extended/libcbor/libcbor_git.bb
+> > @@ -0,0 +1,13 @@
+> > +SUMMARY =3D "library for CBOR"
+> > +DESCRIPTION =3D " C library for parsing and generating CBOR, the gener=
+al-purpose schema-less binary data format."
+> > +
+> > +LICENSE =3D "MIT"
+> > +LIC_FILES_CHKSUM =3D "file://LICENSE.md;md5=3D6f3b3881df62ca763a02d359=
+a6e94071"
+> > +
+> > +SRC_URI =3D "git://github.com/PJK/libcbor.git;protocol=3Dhttps;branch=
+=3Dmaster"
+> > +SRCREV =3D "efa6c0886bae46bdaef9b679f61f4b9d8bc296ae"
+> > +
+>
+> Please rename the recipe to reflect version libcbor_0.10.2.bb, you are
+> using the right SHA1 for SRCREV above
+>
+> > +S =3D "${WORKDIR}/git"
+> > +PV =3D "git${SRCPV}"
+>
+> Setting PV is not needed if its using a SRCREV corresponding to a release=
+ tag
+>
+> > +
+> > +inherit cmake
+> > --
+> > 2.34.1
+> >
 
-Signed-off-by: Changqing Li <changqing.li@windriver.com>
----
- .../recipes-extended/redis/{redis_6.2.11.bb => redis_6.2.12.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-extended/redis/{redis_6.2.11.bb => redis_6.2.12.bb} (96%)
+Thanks! Will rename the recipe and remove PV in future version.
 
-diff --git a/meta-oe/recipes-extended/redis/redis_6.2.11.bb b/meta-oe/recipes-extended/redis/redis_6.2.12.bb
-similarity index 96%
-rename from meta-oe/recipes-extended/redis/redis_6.2.11.bb
-rename to meta-oe/recipes-extended/redis/redis_6.2.12.bb
-index 5a410bf4cd..3ed6867816 100644
---- a/meta-oe/recipes-extended/redis/redis_6.2.11.bb
-+++ b/meta-oe/recipes-extended/redis/redis_6.2.12.bb
-@@ -17,7 +17,7 @@ SRC_URI = "http://download.redis.io/releases/${BP}.tar.gz \
-            file://GNU_SOURCE.patch \
-            file://0006-Define-correct-gregs-for-RISCV32.patch \
-            "
--SRC_URI[sha256sum] = "8c75fb9cdd01849e92c23f30cb7fe205ea0032a38d11d46af191014e9acc3098"
-+SRC_URI[sha256sum] = "75352eef41e97e84bfa94292cbac79e5add5345fc79787df5cbdff703353fb1b"
- 
- inherit autotools-brokensep update-rc.d systemd useradd
- 
--- 
-2.25.1
+For the "not a valid ELF file" issue, it is due to missing a CMAKE
+argument. I did not find the error as
+there is no issue in real use case. But dwarfdump cannot find any
+information with the issue.
+Is there any method to run QA test locally? Or the error notification
+can be forwarded to patch owner
+directly from auto-build server?
 
+- Jun
 
