@@ -2,97 +2,91 @@ Return-Path: <jun.nie@linaro.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 57B4DC7EE22
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5AC0CC7EE23
 	for <webhook@archiver.kernel.org>; Thu, 11 May 2023 14:05:56 +0000 (UTC)
-Received: from mail-pf1-f180.google.com (mail-pf1-f180.google.com [209.85.210.180])
- by mx.groups.io with SMTP id smtpd.web10.60156.1683813955751539132
+Received: from mail-pj1-f49.google.com (mail-pj1-f49.google.com [209.85.216.49])
+ by mx.groups.io with SMTP id smtpd.web11.59852.1683813949154268311
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 11 May 2023 07:05:55 -0700
+ Thu, 11 May 2023 07:05:49 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@linaro.org header.s=google header.b=sbPMSZlA;
- spf=pass (domain: linaro.org, ip: 209.85.210.180, mailfrom: jun.nie@linaro.org)
-Received: by mail-pf1-f180.google.com with SMTP id d2e1a72fcca58-6434e263962so6454183b3a.2
-        for <openembedded-devel@lists.openembedded.org>; Thu, 11 May 2023 07:05:55 -0700 (PDT)
+ dkim=fail reason="signature has expired" header.i=@linaro.org header.s=google header.b=kBKckfBo;
+ spf=pass (domain: linaro.org, ip: 209.85.216.49, mailfrom: jun.nie@linaro.org)
+Received: by mail-pj1-f49.google.com with SMTP id 98e67ed59e1d1-250252e4113so5722838a91.0
+        for <openembedded-devel@lists.openembedded.org>; Thu, 11 May 2023 07:05:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1683813955; x=1686405955;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=Ey4Rs5oJOJ5WEU0MB5E9oJPAc2ylUwJ7oIBcShwootg=;
-        b=sbPMSZlAudRR5AaMIAu2PAwIFSQ1wRq8JFoarlMAC4dBiftqA8z1z+UnPh+PoA0ucc
-         08wAMJ9L7jrmK/MC+gOKUvclscyBvBfo+58f/+E9hD/xd+3W9jifCSdoILIS/aoPySgp
-         9oXDmK5L6iyWhXiMx2q5KamVneneVpSwCwwGt/H818Y0bQ/np0D7m+iPacG7Z+xHeSTK
-         vMkoUNKeETgFk7smbc6Z+OEM1dRtMQaxBWNIuISdj69z+Gzl/2RvZeznqgzFVz8OaRVf
-         ayeITib+5wOplmmGknQWYqsufKlHj3QPqI1xgkHVYX9iqXPLCAiSrccXXuhfVZzWJYzK
-         HVHQ==
+        d=linaro.org; s=google; t=1683813948; x=1686405948;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=2ZzYBChk+Y+4FnTAnhrjmA1kZp161oQ438DA4o/vhqg=;
+        b=kBKckfBoUDPXxiE8MP3hW8qldzjKiXRJVFwX3ykv1tc/l49TYUPAEQl8XO1HfPcj4l
+         PXGuV7ZjJb7mz1a2Ahi33uBdsok+QNQvlvKweMaP/BKllomMdYQL8WrGQDCHAOioOJCb
+         nBKPAOGUjZznwspxKlNl55X7J7+AeoqCuyiaCjkMU027egl005kwZSPLqYFdvUHSVDxz
+         oBz39l4T3rUaBwMeXn3UYJvh5A45hQrYqBAoo1yMKqVQIQcaYbub0SgLrHYfuQKK2D0a
+         3jyC37dgYaJvXNhXOYN1b0agYW+cdTvMZ0c0vN3wT012kqNZkVzSzPuLU2AAwjm1o2+n
+         G4CQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1683813955; x=1686405955;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=Ey4Rs5oJOJ5WEU0MB5E9oJPAc2ylUwJ7oIBcShwootg=;
-        b=HW3kYyu1yXBA493ftUgjAMdtSMhsD9kSHheMlTA3GEaCes1ccAeQJDGHm2CUuFj/im
-         u9k14FiqtTvPPFWuAJVmHu80ZrOXj4PUg8qAL38v9MUoj7/Gz1G4AHCKjcj1fUy2vzDX
-         Fw1ojd7zVDu2QYFunYpoxMxybFa8M53ndKZE1V5W38RJtTNZQdgVXYgjv6lw2bed/wck
-         59HDq18/nqNzJfXzmrykn/MFf1QYj/g9z/4rXDt70gbtFQ9mTzOmnLG+jhLQTwVjzJJ2
-         cdWMMITeiiv0gG0ECwiBbOuq1ZhwW0VrgucIxDFBonprWY7pHG9QLJdnkL3J2DpZPb4V
-         OWZg==
-X-Gm-Message-State: AC+VfDwcgq+lM01FjwEdNsU+wK2316zPi6Lu5AyObTFr9ELpDXr5gXrg
-	WA70GUOlQSKyl81hb7135wgtLw==
-X-Google-Smtp-Source: ACHHUZ4l/ylmCjZjgFwMcB+zxl+xCB4a/y0bMsvZhKZdhlFKb1FpRlBh6wJbWZTwCYtxdv2CWBc8Cg==
-X-Received: by 2002:a05:6a21:900c:b0:103:d538:5e94 with SMTP id tq12-20020a056a21900c00b00103d5385e94mr2351876pzb.12.1683813954128;
-        Thu, 11 May 2023 07:05:54 -0700 (PDT)
+        d=1e100.net; s=20221208; t=1683813948; x=1686405948;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=2ZzYBChk+Y+4FnTAnhrjmA1kZp161oQ438DA4o/vhqg=;
+        b=bVtCN/gu3rawxc+DvZRZsii55rPRwtDw7it6GWrtyx299ISK7b+OBTSN7nZMuQWled
+         a/iCZudXEuQXq443yptfNA6+DZ9LbPmGEVKwT5wIkVKH/xKkK7VlGpJUgT9ZIls+Waa8
+         0OVHtc+ybnHHzZvE3kFaJ6gZgxAhv5szgD9N2pp52xFkj9UlRr9PAchSkDi5pEpHJUdJ
+         kfFnkCK6hpKC9GhsLG+ZWP4yVS3gd/TS/zMC1egxd0syR4iHW+pPdpQFwM1nqfuuE4jy
+         IL6m1sMnXMIVJldS7stTgtLOFsAIexm5bJw/dwIfzrXx3i9QMaQzfmXNMMxH8vtobjEA
+         K1PQ==
+X-Gm-Message-State: AC+VfDz5ZmS/Jz4HShAlpqBzO3kni+oVs1mzit94DmYRPE2/mDwYtB8U
+	iATLPlCl4vFYNh+W7fQJ149TFg==
+X-Google-Smtp-Source: ACHHUZ61/jdUB0Dp3JJOWvTtcsc5r7NJcFLUvrCqt1teRoHDX92pnsmumMlGKWAvycAhuGv93AEJvg==
+X-Received: by 2002:a17:90b:3881:b0:24e:109a:94e with SMTP id mu1-20020a17090b388100b0024e109a094emr21315449pjb.7.1683813948535;
+        Thu, 11 May 2023 07:05:48 -0700 (PDT)
 Received: from niej-dt-7B47.. (80.251.214.228.16clouds.com. [80.251.214.228])
-        by smtp.gmail.com with ESMTPSA id m3-20020a63fd43000000b0051b36aee4f6sm5033731pgj.83.2023.05.11.07.05.49
+        by smtp.gmail.com with ESMTPSA id m3-20020a63fd43000000b0051b36aee4f6sm5033731pgj.83.2023.05.11.07.05.43
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 11 May 2023 07:05:53 -0700 (PDT)
+        Thu, 11 May 2023 07:05:47 -0700 (PDT)
 From: Jun Nie <jun.nie@linaro.org>
 To: richard@hughsie.com,
 	raj.khem@gmail.com
 Cc: openembedded-devel@lists.openembedded.org,
 	Jun Nie <jun.nie@linaro.org>
-Subject: [meta-oe][PATCH v2 1/3] libcbor: Add initial support
-Date: Thu, 11 May 2023 22:07:42 +0800
-Message-Id: <20230511140744.2918627-2-jun.nie@linaro.org>
+Subject: [meta-oe][PATCH v2 0/3] Add necessary lib and python tool to handle CoSWID tag
+Date: Thu, 11 May 2023 22:07:41 +0800
+Message-Id: <20230511140744.2918627-1-jun.nie@linaro.org>
 X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20230511140744.2918627-1-jun.nie@linaro.org>
-References: <20230511140744.2918627-1-jun.nie@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 11 May 2023 14:05:56 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102542
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102541
 
-To handle the general-purpose schema-less binary data format
+Software Identification (SWID) tags provide an extensible XML-based structure
+to identify and describe individual software components, patches, and
+installation bundles.
 
-Signed-off-by: Jun Nie <jun.nie@linaro.org>
----
- meta-oe/recipes-extended/libcbor/libcbor_0.10.2.bb | 14 ++++++++++++++
- 1 file changed, 14 insertions(+)
+CoSWID supports a similar set of semantics and features as SWID tags, as well
+as new semantics that allow us to describe additional types of information,
+all in a more memory efficient format.
+
+Changes vs V1:
+ - fix libcbor cmake flag and rename recipe with version
+ - fix python3-pefile SRC_URI sha value
+
+Jun Nie (3):
+  libcbor: Add initial support
+  python3-pefile: Add initial support
+  python3-uswid: Add initial support
+
+ .../recipes-extended/libcbor/libcbor_0.10.2.bb    | 14 ++++++++++++++
+ .../python/python3-pefile_2023.2.7.bb             | 13 +++++++++++++
+ .../recipes-devtools/python/python3-uswid_git.bb  | 15 +++++++++++++++
+ 3 files changed, 42 insertions(+)
  create mode 100755 meta-oe/recipes-extended/libcbor/libcbor_0.10.2.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-pefile_2023.2.7.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-uswid_git.bb
 
-diff --git a/meta-oe/recipes-extended/libcbor/libcbor_0.10.2.bb b/meta-oe/recipes-extended/libcbor/libcbor_0.10.2.bb
-new file mode 100755
-index 0000000000..3ac270e5e0
---- /dev/null
-+++ b/meta-oe/recipes-extended/libcbor/libcbor_0.10.2.bb
-@@ -0,0 +1,14 @@
-+SUMMARY = "library for CBOR"
-+DESCRIPTION = "C library for parsing and generating CBOR, the general-purpose schema-less binary data format."
-+
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://LICENSE.md;md5=6f3b3881df62ca763a02d359a6e94071"
-+
-+SRC_URI = "git://github.com/PJK/libcbor.git;protocol=https;branch=master"
-+SRCREV = "efa6c0886bae46bdaef9b679f61f4b9d8bc296ae"
-+
-+S = "${WORKDIR}/git"
-+
-+inherit cmake
-+
-+EXTRA_OECMAKE += " -DCMAKE_BUILD_TYPE=Release"
 -- 
 2.34.1
 
