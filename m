@@ -1,173 +1,742 @@
-Return-Path: <petr.gotthard@advantech.cz>
+Return-Path: <narpat.mali@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 25EA2C77B7F
-	for <webhook@archiver.kernel.org>; Thu, 11 May 2023 16:33:37 +0000 (UTC)
-Received: from APC01-TYZ-obe.outbound.protection.outlook.com (APC01-TYZ-obe.outbound.protection.outlook.com [40.107.117.68])
- by mx.groups.io with SMTP id smtpd.web11.1365.1683822816112325691
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4ECEBC77B7C
+	for <webhook@archiver.kernel.org>; Thu, 11 May 2023 16:38:47 +0000 (UTC)
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.web11.1496.1683823124061769463
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 11 May 2023 09:33:36 -0700
+ Thu, 11 May 2023 09:38:44 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@advantech.cz header.s=selector1 header.b=dSyW5NBd;
- spf=pass (domain: advantech.cz, ip: 40.107.117.68, mailfrom: petr.gotthard@advantech.cz)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=dzRH8aDUxG5T3GLvfbSzQvZlVBQnNFWL0NquPpChYnrZO5RH/335bQMxBJbiL2GlWE7DzFgKSs2A6zeLWBfaO5EcF+Zi/jSivaVw4omidW/3l4X4C5ElncWM3sn7QJx1zRuYOjU05q4v6qaujat3jqZBuetVYAZ+nJ//KMm9JVcsuqEbLD6ebDRcluF3xobH9koCTXpStRGNabgKs8kJPMuHJ0XyjSSdKQRd6Kzd+3xJyLrX6LtoDPGPmjifkngdVakEoVBmr8abUbfn/o5MhBsUrts0eixrFHXb0jde+WCO4xxgwo90sloTaHTERIUM9lzrtXGts5zqbA/TU+Yh3Q==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=A5Da2lCI4GATN65YqLMCd84bchYfKOgjWPPNlcDhqYY=;
- b=oMSg7ADS+aAFav5xNSs4oq8O5COzGsYwclOXj4Qo4/rKKkCacGdjUaTiHCmkI9t+RrS7CXF50TlVVCtt2UXJ7tdaH8WB595eT/m819rofYdA7eUVi71hWh9+JtglgoA2/x7ttZm1mEYAQ6ufB3rGsXddeKJ0RCmlag+YHQs92E1t6mbOyRsQ3ctZz1KuPHOvjrbP4wzT76vJOZvwdM/RLzCOl2j0Tkt31fETx9qrfsisn1pYOwWDkK+RGGgxmq//eJXyuy6hsLRgh/EdkX94s1El65FWCc1GOdrOrgFP/yEa9TnxgYtXpS5TByAJ/pvjGT2WaGgt9804yS7ODJpUdw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=advantech.cz; dmarc=pass action=none header.from=advantech.cz;
- dkim=pass header.d=advantech.cz; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=advantech.cz;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=A5Da2lCI4GATN65YqLMCd84bchYfKOgjWPPNlcDhqYY=;
- b=dSyW5NBd2ySWYAH2nlKxpt7KXOx+pFwKPxVVuQi0bI5XM8S2TGspncpJ+uGhkMMTTKATGspUfktl8cX++jrNKYwWSv26IwfCU6pCIvikTicqsz5+YoQG1tLo7P8sNJWdDqfoqpcfu+Z30iBw+hGg/34RSPncY40xUo3UyGOhNTwONNyoFNQCtlE+odP89LeO7ju78h7ZXoYlVijWPvrhDvPKuBIY/OWbXiY9QlO+lKPQHm+qnScgzPl+m1dy7X8KrlYbx0t/trY5/bUzqkF3QyxXKzSBCgibgJ05qaGIp12NvfJ+IoPHxlOySK2m+BgExrLM8zlfsu6mPTWJuaKVZQ==
-Received: from TY2PR02MB3678.apcprd02.prod.outlook.com (2603:1096:404:b7::12)
- by PSAPR02MB5061.apcprd02.prod.outlook.com (2603:1096:301:86::8) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6411.7; Thu, 11 May
- 2023 16:33:32 +0000
-Received: from TY2PR02MB3678.apcprd02.prod.outlook.com
- ([fe80::3e74:b6f0:fad1:4598]) by TY2PR02MB3678.apcprd02.prod.outlook.com
- ([fe80::3e74:b6f0:fad1:4598%4]) with mapi id 15.20.6387.021; Thu, 11 May 2023
- 16:33:32 +0000
-From: Petr Gotthard <petr.gotthard@advantech.cz>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: [meta-networking][PATCH] networkmanager-fortisslvpn: add new recipe
-Thread-Topic: [meta-networking][PATCH] networkmanager-fortisslvpn: add new
- recipe
-Thread-Index: AdmEJRkbAQsRZv8QTby4BWzUuN730Q==
-Date: Thu, 11 May 2023 16:33:32 +0000
-Message-ID: 
- <TY2PR02MB3678CB86F8FECE2510FB308881749@TY2PR02MB3678.apcprd02.prod.outlook.com>
-Accept-Language: en-US
-Content-Language: cs-CZ
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=advantech.cz;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: TY2PR02MB3678:EE_|PSAPR02MB5061:EE_
-x-ms-office365-filtering-correlation-id: 510529b1-7f02-4d1c-5fc9-08db523d75f9
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: 
- uI6044r4MpzX5MVotpg7qlqbCCHA9oi4kSwmljUEcCb5toeVnRyWexFbbuOlF411sDrlxI9rePHATCqnpTiK2tMhKrQQkFVxthJk9vNERsgfhURrydwdJgDgF6IuPCs6tyt4NcCWplUMvN78RJlRuCPAUVtekNeLnx9wBcOt5Q/uMhLpH8c7CQuk1+JuPpZBLpSPRP4v54c76x5IC6uzAxjCpjtDrIyOtkh8k/0eCC4ZgycabUUBs2ZRCrVxqItDGaSd+M9lfBpEY2emgv8xuV7WDvD5oLVMvvaoUKf3j5TPSQQ4rCS6Q6YrrosWcXuwzCp23wOp26rmkr091p6S3Wt7ziPZ6JUdxTrK7HXfnBC+KVoVXxpm9yYeFLcvq0NQTKNjQxvKNnDq3MjkogiT1oeib8MKU5tIeBBA9GPGh6HY9vO59r1AgdCRR94zJcOW53F7gX8Unj9rja5hXlACFcF6im/EEU6ZKByvi/MOZTMAm90ypMCSzrDDbgDUtzJOuJN1OFX5nOly7Z2gNRouZts95dIA99M6qdErgsPJ+VlwB64EQ7VXSz9XV7uqz/QHzIw9rojfeIkJyK1ryGS3jbbfwxiISBWTP8cYVgPz9Gg=
-x-forefront-antispam-report: 
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:TY2PR02MB3678.apcprd02.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230028)(4636009)(396003)(39860400002)(346002)(366004)(376002)(136003)(451199021)(186003)(55016003)(478600001)(86362001)(966005)(33656002)(7696005)(71200400001)(38100700002)(122000001)(2906002)(5660300002)(52536014)(44832011)(8676002)(8936002)(64756008)(66446008)(66476007)(66556008)(66946007)(76116006)(38070700005)(6916009)(41300700001)(316002)(9686003)(6506007)(26005);DIR:OUT;SFP:1101;
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: 
- =?utf-8?B?WnVQM1NPd3pLYmk3dkhVeFl3WllqRTlDS09sNHJXWnRoc01NMEdXNmZLaE1j?=
- =?utf-8?B?VEdNT3FhNjU0aTRETzdkNllaVlN2a0RLWi9nMHFVSmJwZzNCK0Mxc0c0c0g2?=
- =?utf-8?B?UWIzQzBRYW4xbUJQQXVFYlF3d3ZLK2xOaGVRcU40TktyRG96MExrL3FhWkVR?=
- =?utf-8?B?VnVORWd6dW9sdCtjZVAxb3RwQ0UwOHA3Zm1sdGo3RklvcHd0NEIxTzlrR0ZF?=
- =?utf-8?B?VXdxNXJRTDRSVnRoMnRwbGxZVzk3L2dxbmNqZFRKSk9wMkNNOVFBMnZTb1lN?=
- =?utf-8?B?TTlORHU5M0g1N3hIT2lnUkc5TVNEY25kZ01Xc09VVWdRd2hxNGQybmJXVDNQ?=
- =?utf-8?B?bmZDRVNYKzZZeUlnZ210NWtIWFE0TTc5QjF0N3dvM0t5R0t3VHVjUkVjUzhG?=
- =?utf-8?B?NjVFRXA4UFc5MWlMZWdrU093NlFkZmE1R0VjUEcxU0Rxdk11cEtabUJzRDcv?=
- =?utf-8?B?TzROVmhMMHBNL25EVE01Mk40S0ttUDhoMWVEK3NBMS9OKzNjN2NQaTBCQXpt?=
- =?utf-8?B?VWQ2TUF5djExZ0drbG9wUXhQRjJRMDUrLzNhOGFvTVFmNit4Ty9JYmxyamE3?=
- =?utf-8?B?SjVCRHpXOEpOcUlldjkzMVlPcEJ4SVZyUmF6aVJ0bW01RmQ2bUtpNlp5TGt5?=
- =?utf-8?B?VXdxUHBaZHlqL2FWS1FlaFpUazlJZ0cxWVlIMjBVSFl6S010QTgzUXVYSEV5?=
- =?utf-8?B?eGNvenppRmlRY0h3ZkczUExCQWVqMzI1NGdpYXdYUzVaSWppWW5YUkJaQ1dG?=
- =?utf-8?B?RStnR2J0Y0FvQlRzaUdobG5rSUQwWUVwSzBodDRlellCdXRQeHVtck0ybWY5?=
- =?utf-8?B?UHJOYzFNQWZjWHN2RlFFR1RScDZ0YWlSMTlZUzNoR3RnbkwwNEIvWSs0anMy?=
- =?utf-8?B?Z0lyRzdVTk92SytlYkFlKzJzdmo2K0RzaDNKUGoyVjVKNG5wNjY3a1NPekNa?=
- =?utf-8?B?MWZQaXUrN0dBTGlJc0hEeW9EK3F4RWlaQTZtY3JEVFNrL2JGKytIN0todVc4?=
- =?utf-8?B?Nld5QmdBSHQ5Zy9nMkNtNWlHTnlGTVlPaEZLcFQrYm9JTmFkQTlKazhTdTlL?=
- =?utf-8?B?bmVwWDBiTEhlYk5vMmJSSUcwZGt4L0VzSENVMk5FeWtkQjlTNldkTTFQOWVs?=
- =?utf-8?B?akViTFh4MkJTZVJxQVpuK3pJUU93UmZQT1kycDE2cjA5SGg5T3lzN0ZpOGRK?=
- =?utf-8?B?c1lXRVNBVWwxQnJWMUl3N21UbDE3TzMrVk4rUlJOV2pCeUM0WjAyQy9URzl0?=
- =?utf-8?B?NlE4bEZxMEVCYm1xa2dFeFNQTlFEcnJTZ0lRVGV6b2JkeklzRi9yVCtueDA3?=
- =?utf-8?B?b0RiVnVldXl5NFhJSHk1QXZqdlVacThDS1ZKVzczaWZ2UnN4eHVwTGpFY2s4?=
- =?utf-8?B?dnVmUm1rbVNJUFdlYjJQc1MxUytSRHNudG81QTJGMnd1R1diOFlHck1Qb3B3?=
- =?utf-8?B?d0JhdmFNNkJLZlYxcFI3ZTRackl3Y2RKMlpuRmFFM2ZrQVlUSU9ReDdsL2lW?=
- =?utf-8?B?OGZyUW1WVXR1YzhHWVp1WWtIRVZzSktYN0pGN21YUTNvRkdOcU12YXpxbTFs?=
- =?utf-8?B?M1h5OWdqVWNhSzlUaHp4dHFqYWZxS1lRNmkxR0tCT25WSkl3RHBScW54RVhq?=
- =?utf-8?B?NXRvRGVHUGxhOUNwcHY5RTBOdTJXYjNvZk1qUjk1c1NuclhaUmtxdzA1Y2or?=
- =?utf-8?B?R2FPQ3k1OXNzMGpDZVNLZlVDZFdxMlM4SjNRbFd0d1NNR3RPcHh5RmwxTTVK?=
- =?utf-8?B?K0JQR2tHMkFJSjRDNVNtbVFUNFQ3UVJVbHdPWjVDRDdHL0RaZjJrbEJWTnB6?=
- =?utf-8?B?VTdWUlY1MElhWHZuZElrTFlzNVN2U09wRm42Mk1QeDl0YlJvNWVZejFMOTVv?=
- =?utf-8?B?eEcweVhZRHlhSHhZSTd1UUNZd2FBMVRkTWd0UFRpZnRPZVIybzRtd1BlY2FK?=
- =?utf-8?B?NFh6c09mbXhVY0YraFZ4cDcvY1dLQkNHMElmSmlQQ092K2FxK0xHNklyTU55?=
- =?utf-8?B?dnVQa3piYlh2YkRMV1lIZk44cUtvbkp0ZHFROWpzcVV3MVFKSGFkNmU4dEtT?=
- =?utf-8?B?RFdMY05XbFJHMGRpZmhHeWtlNGVGM0s5MVBPdS85b0VUVStWbGFFUm9xV011?=
- =?utf-8?B?aWNMczhadHBFbkh2TXVDUWg3M281b2JEOFNOZ1lUeW0zVXJHQVYwN2hqb3Q0?=
- =?utf-8?B?VkE9PQ==?=
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+ dkim=fail reason="body hash did not verify" header.i=@windriver.com header.s=pps06212021 header.b=SISIZ0aC;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=44952a835d=narpat.mali@windriver.com)
+Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 34BBg7qR004372;
+	Thu, 11 May 2023 16:38:24 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com; h=from : to : cc :
+ subject : date : message-id : mime-version : content-type :
+ content-transfer-encoding; s=PPS06212021;
+ bh=9Jc/CG4AlOXlFQ6sqhuC38a9H3Lc5UPfgFzPwdjxMGk=;
+ b=SISIZ0aCGUvhDzKvG87tNVLkceljZkhyY3PA+OJPsDYplw72NHwjudjAVsEnxftFevn4
+ 5aTWBeBeHRVVUrWViQDWRMcQxO+RuC2gwVq8z5O3LvTgiJEkZXs8x7k/f9bb7XolE46A
+ hyZSMb9yym8tcC/TTlUJoL6+lk2y/WglHUcIdNEJoN6LGQolwp95dLihdHwEYgqbtfRi
+ uF0YHcciwqBU/TLJsLreVqXRSyaB3pCL3bV4owSnbxoC+bi8Caaf16AucokexKyRrfH+
+ WKrPNldaq32iQjRQ3MtNp893eyReCfiztYaZAAeJQ37LRpSQ5+1FkJNpin8S88X4gLKL LQ== 
+Received: from ala-exchng01.corp.ad.wrs.com (unknown-82-252.windriver.com [147.11.82.252])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3qf8b92va5-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT);
+	Thu, 11 May 2023 16:38:24 +0000
+Received: from blr-linux-engg1.wrs.com (147.11.136.210) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.23; Thu, 11 May 2023 09:38:20 -0700
+From: nmali <narpat.mali@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: <akuster808@gmail.com>, <raj.khem@gmail.com>, <max@igalia.com>,
+        <raphael.kubo.da.costa@intel.com>, <Randy.MacLeod@windriver.com>,
+        <hari.gpillai@windriver.com>
+Subject: [meta-oe][dunfell][PATCH v2 1/1] nodejs: make 14.18.1 available but not default
+Date: Thu, 11 May 2023 16:37:58 +0000
+Message-ID: <20230511163758.358936-1-narpat.mali@windriver.com>
+X-Mailer: git-send-email 2.40.0
 MIME-Version: 1.0
-X-OriginatorOrg: advantech.cz
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: TY2PR02MB3678.apcprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 510529b1-7f02-4d1c-5fc9-08db523d75f9
-X-MS-Exchange-CrossTenant-originalarrivaltime: 11 May 2023 16:33:32.8705
- (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: a77d40d9-dcba-4dda-b571-5f18e6da853f
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: S90RSkCJKlcyn2PTR9ym0IHlz7rooFPLC1PKqPQiEC+s7l2oVSfRFrMznn2WWGcmWPtrHWaE37A3i0QnWsbJLobwsSCTYe10suEIQB+Y5Ds=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PSAPR02MB5061
+Content-Type: text/plain; charset="UTF-8"
+X-Originating-IP: [147.11.136.210]
+X-ClientProxiedBy: ala-exchng01.corp.ad.wrs.com (147.11.82.252) To
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252)
+X-Proofpoint-GUID: -CVPZYWySWwJlM8bAL58wJP23kZL9RRl
+X-Proofpoint-ORIG-GUID: -CVPZYWySWwJlM8bAL58wJP23kZL9RRl
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.254,Aquarius:18.0.942,Hydra:6.0.573,FMLib:17.11.170.22
+ definitions=2023-05-11_13,2023-05-05_01,2023-02-09_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 mlxscore=0 impostorscore=0
+ clxscore=1015 lowpriorityscore=0 mlxlogscore=999 adultscore=0 spamscore=0
+ malwarescore=0 suspectscore=0 phishscore=0 priorityscore=1501 bulkscore=0
+ classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2304280000
+ definitions=main-2305110143
+Content-Transfer-Encoding: quoted-printable
+X-MIME-Autoconverted: from 8bit to quoted-printable by mx0a-0064b401.pphosted.com id 34BBg7qR004372
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 11 May 2023 16:33:37 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102548
+ <openembedded-devel@lists.openembedded.org>; Thu, 11 May 2023 16:38:47 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102549
 
-Rm9ydGluZXQgU1NMVlBOIHN1cHBvcnQgZm9yIE5ldHdvcmtNYW5hZ2VyDQpodHRwczovL2dpdGxh
-Yi5nbm9tZS5vcmcvR05PTUUvTmV0d29ya01hbmFnZXItZm9ydGlzc2x2cG4NCg0KU2lnbmVkLW9m
-Zi1ieTogUGV0ciBHb3R0aGFyZCA8cGV0ci5nb3R0aGFyZEBhZHZhbnRlY2guY3o+DQotLS0NCiAu
-Li4vbmV0d29ya21hbmFnZXItZm9ydGlzc2x2cG5fMS40LjAuYmIgICAgICAgfCA2NiArKysrKysr
-KysrKysrKysrKysrDQogMSBmaWxlIGNoYW5nZWQsIDY2IGluc2VydGlvbnMoKykNCiBjcmVhdGUg
-bW9kZSAxMDA2NDQgbWV0YS1uZXR3b3JraW5nL3JlY2lwZXMtY29ubmVjdGl2aXR5L25ldHdvcmtt
-YW5hZ2VyL25ldHdvcmttYW5hZ2VyLWZvcnRpc3NsdnBuXzEuNC4wLmJiDQoNCmRpZmYgLS1naXQg
-YS9tZXRhLW5ldHdvcmtpbmcvcmVjaXBlcy1jb25uZWN0aXZpdHkvbmV0d29ya21hbmFnZXIvbmV0
-d29ya21hbmFnZXItZm9ydGlzc2x2cG5fMS40LjAuYmIgYi9tZXRhLW5ldHdvcmtpbmcvcmVjaXBl
-cy1jb25uZWN0aXZpdHkvbmV0d29ya21hbmFnZXIvbmV0d29ya21hbmFnZXItZm9ydGlzc2x2cG5f
-MS40LjAuYmINCm5ldyBmaWxlIG1vZGUgMTAwNjQ0DQppbmRleCAwMDAwMDAwMDAwLi5hZmFlY2Uy
-NDViDQotLS0gL2Rldi9udWxsDQorKysgYi9tZXRhLW5ldHdvcmtpbmcvcmVjaXBlcy1jb25uZWN0
-aXZpdHkvbmV0d29ya21hbmFnZXIvbmV0d29ya21hbmFnZXItZm9ydGlzc2x2cG5fMS40LjAuYmIN
-CkBAIC0wLDAgKzEsNjYgQEANCitTVU1NQVJZID0gIkZvcnRpbmV0IFNTTFZQTiBzdXBwb3J0IGZv
-ciBOZXR3b3JrTWFuYWdlciINCitTRUNUSU9OID0gIm5ldC9taXNjIg0KKw0KK0xJQ0VOU0UgPSAi
-R1BMLTIuMC1vci1sYXRlciINCitMSUNfRklMRVNfQ0hLU1VNID0gImZpbGU6Ly9DT1BZSU5HO21k
-NT01OTUzMGJkZjMzNjU5YjI5ZTczZDRhZGI5ZjlmNjU1MiINCisNCitERVBFTkRTID0gImdsaWIt
-Mi4wLW5hdGl2ZSBsaWJ4bWwyLW5hdGl2ZSBuZXR3b3JrbWFuYWdlciBwcHAiDQorDQoraW5oZXJp
-dCBnbm9tZWJhc2UgZ2V0dGV4dCB1c2VyYWRkDQorDQorU1JDX1VSSSA9ICIke0dOT01FX01JUlJP
-Un0vTmV0d29ya01hbmFnZXItZm9ydGlzc2x2cG4vJHtAZ25vbWVfdmVyZGlyKCIke1BWfSIpfS9O
-ZXR3b3JrTWFuYWdlci1mb3J0aXNzbHZwbi0ke1BWfS50YXIueHoiDQorU1JDX1VSSVtzaGEyNTZz
-dW1dID0gImIwNTVlMjYzNDliNTE2YjIzNTg1Nzk4YWIzZWY1N2I0MzZiMDE0ODAwZTkyYThhYzcz
-MmNmYzhlNzZjNWRhZmEiDQorDQorUyA9ICIke1dPUktESVJ9L05ldHdvcmtNYW5hZ2VyLWZvcnRp
-c3NsdnBuLSR7UFZ9Ig0KKw0KKyMgbWV0YS1nbm9tZSBpbiBsYXllcnMgaXMgcmVxdWlyZWQgdXNp
-bmcgZ25vbWU6DQorUEFDS0FHRUNPTkZJR1tnbm9tZV0gPSAiLS13aXRoLWdub21lLC0td2l0aG91
-dC1nbm9tZSxndGsrMyBsaWJubWEgbGlic2VjcmV0LCINCitQQUNLQUdFQ09ORklHW2d0azRdID0g
-Ii0td2l0aC1ndGs0LC0td2l0aG91dC1ndGs0LGd0azQsIg0KKw0KK0VYVFJBX09FQ09ORiA9ICIt
-LXdpdGgtcHBwZC1wbHVnaW4tZGlyPSR7bGliZGlyfS9wcHBkLyR7QGdldF9wcHBfdmVyc2lvbihk
-KX0iDQorDQorZGVmIGdldF9wcHBfdmVyc2lvbihkKToNCisgICAgaW1wb3J0IHJlDQorDQorICAg
-IHBwcGRfcGx1Z2luID0gZC5leHBhbmQoJyR7U1RBR0lOR19MSUJESVJ9L3BwcGQnKQ0KKyAgICBp
-ZiBub3Qgb3MucGF0aC5pc2RpcihwcHBkX3BsdWdpbik6DQorICAgICAgICByZXR1cm4gTm9uZQ0K
-Kw0KKyAgICBiYi5kZWJ1ZygxLCAicHBwZCBwbHVnaW4gZGlyICVzIiAlIHBwcGRfcGx1Z2luKQ0K
-KyAgICByID0gcmUuY29tcGlsZShyIlxkKlwuXGQqXC5cZCoiKQ0KKyAgICBmb3IgZiBpbiBvcy5s
-aXN0ZGlyKHBwcGRfcGx1Z2luKToNCisgICAgICAgIGlmIG9zLnBhdGguaXNkaXIob3MucGF0aC5q
-b2luKHBwcGRfcGx1Z2luLCBmKSk6DQorICAgICAgICAgICAgbWEgPSByLm1hdGNoKGYpDQorICAg
-ICAgICAgICAgaWYgbWE6DQorICAgICAgICAgICAgICAgIGJiLmRlYnVnKDEsICJwcHBkIHZlcnNp
-b24gZGlyICVzIiAlIGYpDQorICAgICAgICAgICAgICAgIHJldHVybiBmDQorICAgICAgICAgICAg
-ZWxzZToNCisgICAgICAgICAgICAgICAgYmIuZGVidWcoMSwgInVuZGVyIHBwcGQgcGx1Z2luIGRp
-ciAlcyIgJSBmKQ0KKw0KKyAgICByZXR1cm4gTm9uZQ0KKw0KKyMgZ2RidXMtY29kZWdlbiByZXF1
-aXJlcyB0YXJnZXQgZGlyZWN0b3JpZXMgdG8gZXhpc3QNCitkb19jb25maWd1cmU6YXBwZW5kKCkg
-ew0KKyAgICBta2RpciAtcCAke0J9L3Byb3BlcnRpZXMNCisgICAgbWtkaXIgLXAgJHtCfS9zcmMN
-Cit9DQorDQorVVNFUkFERF9QQUNLQUdFUyA9ICIke1BOfSINCitVU0VSQUREX1BBUkFNOiR7UE59
-ID0gIi0tc3lzdGVtIG5tLWZvcnRpc3NsdnBuIg0KKw0KK0ZJTEVTOiR7UE59ICs9ICIgXA0KKyAg
-ICAke2xpYmRpcn0vTmV0d29ya01hbmFnZXIvKi5zbyBcDQorICAgICR7bGliZGlyfS9wcHBkLyov
-Ki5zbyBcDQorICAgICR7bm9uYXJjaF9saWJkaXJ9L05ldHdvcmtNYW5hZ2VyL1ZQTi9ubS1mb3J0
-aXNzbHZwbi1zZXJ2aWNlLm5hbWUgXA0KKyINCisNCitGSUxFUzoke1BOfS1zdGF0aWNkZXYgKz0g
-IiBcDQorICAgICR7bGliZGlyfS9OZXR3b3JrTWFuYWdlci8qLmEgXA0KKyAgICAke2xpYmRpcn0v
-cHBwZC8qLyouYSBcDQorIg0KKw0KK1JERVBFTkRTOiR7UE59ID0gIiBcDQorICAgIG5ldHdvcmtt
-YW5hZ2VyIFwNCisgICAgb3BlbmZvcnRpdnBuIFwNCisgICAgcHBwIFwNCisiDQotLSANCjIuMzQu
-MQ0KDQo=
+From: Narpat Mali <narpat.mali@windriver.com>
+
+Chromium 112 needs nodejs-native version 14 or later.
+Add the nodejs_14.18.1 recipe from kirkstone:
+   246b20b92 nodejs: Upgrade to 14.18.1
+but, use DEFAULT_PREFERENCE to make sure that the default version of node=
+js
+remains 12.x.
+
+7 patches which were modified between nodejs 12 & nodejs 14 were renamed =
+by
+adding the suffix "-nodejs14". Note there are some common patches used by
+nodejs 12 & 14 so, that will require attention during future maintenance.
+In addition, there were 3 CVE-2022* patches which applied cleanly to node=
+js
+14 so, they were added to the nodejs 14 recipe. One patch, CVE-llhttp.pat=
+ch
+conflicted so, it has not been applied in nodejs 14 yet.
+
+Nodejs 14 compile for qemux86-64 but, no run-time testing has been perfor=
+med.
+
+For chromium, we would either require users to modify the local.conf file=
+ or
+we may create a dunfell specific branch in meta-browser.
+See: https://github.com/OSSystems/meta-browser/pull/709
+
+Signed-off-by: Randy MacLeod <Randy.MacLeod@windriver.com>
+Signed-off-by: Narpat Mali <narpat.mali@windriver.com>
+---
+ ...-gyp-files-for-bundled-deps-nodejs14.patch |  22 ++
+ ...ja-tests.py-add-py-3.10-fix-nodejs14.patch |  40 ++++
+ ...use-mminimal-toc-with-clang-nodejs14.patch |  27 +++
+ .../0002-Using-native-binaries-nodejs14.patch |  62 ++++++
+ ...oth-binaries-and-use-libdir-nodejs14.patch |  84 +++++++
+ .../nodejs/nodejs/libatomic-nodejs14.patch    |  21 ++
+ .../nodejs/mips-less-memory-nodejs14.patch    |  32 +++
+ .../recipes-devtools/nodejs/nodejs_14.18.1.bb | 205 ++++++++++++++++++
+ 8 files changed, 493 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/nodejs/nodejs/0001-Disable-r=
+unning-gyp-files-for-bundled-deps-nodejs14.patch
+ create mode 100644 meta-oe/recipes-devtools/nodejs/nodejs/0001-jinja-tes=
+ts.py-add-py-3.10-fix-nodejs14.patch
+ create mode 100644 meta-oe/recipes-devtools/nodejs/nodejs/0001-ppc64-Do-=
+not-use-mminimal-toc-with-clang-nodejs14.patch
+ create mode 100644 meta-oe/recipes-devtools/nodejs/nodejs/0002-Using-nat=
+ive-binaries-nodejs14.patch
+ create mode 100644 meta-oe/recipes-devtools/nodejs/nodejs/0003-Install-b=
+oth-binaries-and-use-libdir-nodejs14.patch
+ create mode 100644 meta-oe/recipes-devtools/nodejs/nodejs/libatomic-node=
+js14.patch
+ create mode 100644 meta-oe/recipes-devtools/nodejs/nodejs/mips-less-memo=
+ry-nodejs14.patch
+ create mode 100644 meta-oe/recipes-devtools/nodejs/nodejs_14.18.1.bb
+
+diff --git a/meta-oe/recipes-devtools/nodejs/nodejs/0001-Disable-running-=
+gyp-files-for-bundled-deps-nodejs14.patch b/meta-oe/recipes-devtools/node=
+js/nodejs/0001-Disable-running-gyp-files-for-bundled-deps-nodejs14.patch
+new file mode 100644
+index 000000000..c719c9c3b
+--- /dev/null
++++ b/meta-oe/recipes-devtools/nodejs/nodejs/0001-Disable-running-gyp-fil=
+es-for-bundled-deps-nodejs14.patch
+@@ -0,0 +1,22 @@
++From 7d94bfe53beeb2d25eb5f2ff6b1d509df7e6ab80 Mon Sep 17 00:00:00 2001
++From: Zuzana Svetlikova <zsvetlik@redhat.com>
++Date: Thu, 27 Apr 2017 14:25:42 +0200
++Subject: [PATCH] Disable running gyp on shared deps
++
++---
++ Makefile | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/Makefile b/Makefile
++index 93d63110..79caaec2 100644
++--- a/Makefile
+++++ b/Makefile
++@@ -138,7 +138,7 @@ with-code-cache test-code-cache:
++	$(warning '$@' target is a noop)
++
++ out/Makefile: config.gypi common.gypi node.gyp \
++-	deps/uv/uv.gyp deps/llhttp/llhttp.gyp deps/zlib/zlib.gyp \
+++	deps/llhttp/llhttp.gyp \
++	tools/v8_gypfiles/toolchain.gypi tools/v8_gypfiles/features.gypi \
++	tools/v8_gypfiles/inspector.gypi tools/v8_gypfiles/v8.gyp
++	$(PYTHON) tools/gyp_node.py -f make
+diff --git a/meta-oe/recipes-devtools/nodejs/nodejs/0001-jinja-tests.py-a=
+dd-py-3.10-fix-nodejs14.patch b/meta-oe/recipes-devtools/nodejs/nodejs/00=
+01-jinja-tests.py-add-py-3.10-fix-nodejs14.patch
+new file mode 100644
+index 000000000..8c5f75112
+--- /dev/null
++++ b/meta-oe/recipes-devtools/nodejs/nodejs/0001-jinja-tests.py-add-py-3=
+.10-fix-nodejs14.patch
+@@ -0,0 +1,40 @@
++From e1d838089cd461d9efcf4d29d9f18f65994d2d6b Mon Sep 17 00:00:00 2001
++From: Alexander Kanavin <alex@linutronix.de>
++Date: Sun, 3 Oct 2021 22:48:39 +0200
++Subject: [PATCH] jinja/tests.py: add py 3.10 fix
++
++Upstream-Status: Pending
++Signed-off-by: Alexander Kanavin <alex@linutronix.de>
++---
++ deps/v8/third_party/jinja2/tests.py      | 2 +-
++ tools/inspector_protocol/jinja2/tests.py | 2 +-
++ 2 files changed, 2 insertions(+), 2 deletions(-)
++
++diff --git a/deps/v8/third_party/jinja2/tests.py b/deps/v8/third_party/j=
+inja2/tests.py
++index 0adc3d4..b14f85f 100644
++--- a/deps/v8/third_party/jinja2/tests.py
+++++ b/deps/v8/third_party/jinja2/tests.py
++@@ -10,7 +10,7 @@
++ """
++ import operator
++ import re
++-from collections import Mapping
+++from collections.abc import Mapping
++ from jinja2.runtime import Undefined
++ from jinja2._compat import text_type, string_types, integer_types
++ import decimal
++diff --git a/tools/inspector_protocol/jinja2/tests.py b/tools/inspector_=
+protocol/jinja2/tests.py
++index 0adc3d4..b14f85f 100644
++--- a/tools/inspector_protocol/jinja2/tests.py
+++++ b/tools/inspector_protocol/jinja2/tests.py
++@@ -10,7 +10,7 @@
++ """
++ import operator
++ import re
++-from collections import Mapping
+++from collections.abc import Mapping
++ from jinja2.runtime import Undefined
++ from jinja2._compat import text_type, string_types, integer_types
++ import decimal
++--
++2.20.1
+diff --git a/meta-oe/recipes-devtools/nodejs/nodejs/0001-ppc64-Do-not-use=
+-mminimal-toc-with-clang-nodejs14.patch b/meta-oe/recipes-devtools/nodejs=
+/nodejs/0001-ppc64-Do-not-use-mminimal-toc-with-clang-nodejs14.patch
+new file mode 100644
+index 000000000..ee287bf94
+--- /dev/null
++++ b/meta-oe/recipes-devtools/nodejs/nodejs/0001-ppc64-Do-not-use-mminim=
+al-toc-with-clang-nodejs14.patch
+@@ -0,0 +1,27 @@
++From 0976af0f3b328436ea44a74a406f311adb2ab211 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Tue, 15 Jun 2021 19:01:31 -0700
++Subject: [PATCH] ppc64: Do not use -mminimal-toc with clang
++
++clang does not support this option
++
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ common.gypi | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/common.gypi b/common.gypi
++index ee91fb1d..049c8f8c 100644
++--- a/common.gypi
+++++ b/common.gypi
++@@ -413,7 +413,7 @@
++             'ldflags': [ '-m32' ],
++           }],
++           [ 'target_arch=3D=3D"ppc64" and OS!=3D"aix"', {
++-            'cflags': [ '-m64', '-mminimal-toc' ],
+++            'cflags': [ '-m64' ],
++             'ldflags': [ '-m64' ],
++           }],
++           [ 'target_arch=3D=3D"s390x"', {
++--
++2.32.0
+diff --git a/meta-oe/recipes-devtools/nodejs/nodejs/0002-Using-native-bin=
+aries-nodejs14.patch b/meta-oe/recipes-devtools/nodejs/nodejs/0002-Using-=
+native-binaries-nodejs14.patch
+new file mode 100644
+index 000000000..c6fc2dcd7
+--- /dev/null
++++ b/meta-oe/recipes-devtools/nodejs/nodejs/0002-Using-native-binaries-n=
+odejs14.patch
+@@ -0,0 +1,62 @@
++From 6c3ac20477a4bac643088f24df3c042e627fafa9 Mon Sep 17 00:00:00 2001
++From: Guillaume Burel <guillaume.burel@stormshield.eu>
++Date: Fri, 3 Jan 2020 11:25:54 +0100
++Subject: [PATCH] Using native binaries
++
++---
++ node.gyp                 |  4 ++--
++ tools/v8_gypfiles/v8.gyp | 11 ++++-------
++ 2 files changed, 6 insertions(+), 9 deletions(-)
++
++--- a/node.gyp
+++++ b/node.gyp
++@@ -487,6 +487,7 @@
++               'action_name': 'run_mkcodecache',
++               'process_outputs_as_sources': 1,
++               'inputs': [
+++                '<(PRODUCT_DIR)/v8-qemu-wrapper.sh',
++                 '<(mkcodecache_exec)',
++               ],
++               'outputs': [
++@@ -512,6 +513,7 @@
++               'action_name': 'node_mksnapshot',
++               'process_outputs_as_sources': 1,
++               'inputs': [
+++                '<(PRODUCT_DIR)/v8-qemu-wrapper.sh',
++                 '<(node_mksnapshot_exec)',
++               ],
++               'outputs': [
++--- a/tools/v8_gypfiles/v8.gyp
+++++ b/tools/v8_gypfiles/v8.gyp
++@@ -220,6 +220,7 @@
++         {
++           'action_name': 'run_torque_action',
++           'inputs': [  # Order matters.
+++            '<(PRODUCT_DIR)/v8-qemu-wrapper.sh',
++             '<(PRODUCT_DIR)/<(EXECUTABLE_PREFIX)torque<(EXECUTABLE_SUFF=
+IX)',
++             '<@(torque_files)',
++           ],
++@@ -351,6 +352,7 @@
++         {
++           'action_name': 'generate_bytecode_builtins_list_action',
++           'inputs': [
+++            '<(PRODUCT_DIR)/v8-qemu-wrapper.sh',
++             '<(PRODUCT_DIR)/<(EXECUTABLE_PREFIX)bytecode_builtins_list_=
+generator<(EXECUTABLE_SUFFIX)',
++           ],
++           'outputs': [
++@@ -533,6 +535,7 @@
++             ],
++           },
++           'inputs': [
+++            '<(PRODUCT_DIR)/v8-qemu-wrapper.sh',
++             '<(mksnapshot_exec)',
++           ],
++           'outputs': [
++@@ -1448,6 +1451,7 @@
++         {
++           'action_name': 'run_gen-regexp-special-case_action',
++           'inputs': [
+++            '<(PRODUCT_DIR)/v8-qemu-wrapper.sh',
++             '<(PRODUCT_DIR)/<(EXECUTABLE_PREFIX)gen-regexp-special-case=
+<(EXECUTABLE_SUFFIX)',
++           ],
++           'outputs': [
+diff --git a/meta-oe/recipes-devtools/nodejs/nodejs/0003-Install-both-bin=
+aries-and-use-libdir-nodejs14.patch b/meta-oe/recipes-devtools/nodejs/nod=
+ejs/0003-Install-both-binaries-and-use-libdir-nodejs14.patch
+new file mode 100644
+index 000000000..3c4b2317d
+--- /dev/null
++++ b/meta-oe/recipes-devtools/nodejs/nodejs/0003-Install-both-binaries-a=
+nd-use-libdir-nodejs14.patch
+@@ -0,0 +1,84 @@
++From 5b22fac923d1ca3e9fefb97f5a171124a88f5e22 Mon Sep 17 00:00:00 2001
++From: Elliott Sales de Andrade <quantum.analyst@gmail.com>
++Date: Tue, 19 Mar 2019 23:22:40 -0400
++Subject: [PATCH] Install both binaries and use libdir.
++MIME-Version: 1.0
++Content-Type: text/plain; charset=3DUTF-8
++Content-Transfer-Encoding: 8bit
++
++This allows us to build with a shared library for other users while
++still providing the normal executable.
++
++Taken from - https://src.fedoraproject.org/rpms/nodejs/raw/rawhide/f/000=
+2-Install-both-binaries-and-use-libdir.patch
++
++Upstream-Status: Pending
++
++Signed-off-by: Elliott Sales de Andrade <quantum.analyst@gmail.com>
++Signed-off-by: Andreas M=C3=BCller <schnitzeltony@gmail.com>
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ configure.py     |  7 +++++++
++ tools/install.py | 21 +++++++++------------
++ 2 files changed, 16 insertions(+), 12 deletions(-)
++
++diff --git a/configure.py b/configure.py
++index e6f7e4db..6cf5c45d 100755
++--- a/configure.py
+++++ b/configure.py
++@@ -626,6 +626,12 @@ parser.add_option('--shared',
++     help=3D'compile shared library for embedding node in another projec=
+t. ' +
++          '(This mode is not officially supported for regular applicatio=
+ns)')
++
+++parser.add_option('--libdir',
+++    action=3D'store',
+++    dest=3D'libdir',
+++    default=3D'lib',
+++    help=3D'a directory to install the shared library into')
+++
++ parser.add_option('--without-v8-platform',
++     action=3D'store_true',
++     dest=3D'without_v8_platform',
++@@ -1202,6 +1208,7 @@ def configure_node(o):
++   o['variables']['node_no_browser_globals'] =3D b(options.no_browser_gl=
+obals)
++
++   o['variables']['node_shared'] =3D b(options.shared)
+++  o['variables']['libdir'] =3D options.libdir
++   node_module_version =3D getmoduleversion.get_version()
++
++   if options.dest_os =3D=3D 'android':
++diff --git a/tools/install.py b/tools/install.py
++index 729b416f..9bfc6234 100755
++--- a/tools/install.py
+++++ b/tools/install.py
++@@ -121,22 +121,19 @@ def subdir_files(path, dest, action):
++
++ def files(action):
++   is_windows =3D sys.platform =3D=3D 'win32'
++-  output_file =3D 'node'
++   output_prefix =3D 'out/Release/'
+++  output_libprefix =3D output_prefix
++
++-  if 'false' =3D=3D variables.get('node_shared'):
++-    if is_windows:
++-      output_file +=3D '.exe'
+++  if is_windows:
+++    output_bin =3D 'node.exe'
+++    output_lib =3D 'node.dll'
++   else:
++-    if is_windows:
++-      output_file +=3D '.dll'
++-    else:
++-      output_file =3D 'lib' + output_file + '.' + variables.get('shlib_=
+suffix')
+++    output_bin =3D 'node'
+++    output_lib =3D 'libnode.' + variables.get('shlib_suffix')
++
++-  if 'false' =3D=3D variables.get('node_shared'):
++-    action([output_prefix + output_file], 'bin/' + output_file)
++-  else:
++-    action([output_prefix + output_file], 'lib/' + output_file)
+++  action([output_prefix + output_bin], 'bin/' + output_bin)
+++  if 'true' =3D=3D variables.get('node_shared'):
+++    action([output_libprefix + output_lib], variables.get('libdir') + '=
+/' + output_lib)
++
++   if 'true' =3D=3D variables.get('node_use_dtrace'):
++     action(['out/Release/node.d'], 'lib/dtrace/node.d')
+diff --git a/meta-oe/recipes-devtools/nodejs/nodejs/libatomic-nodejs14.pa=
+tch b/meta-oe/recipes-devtools/nodejs/nodejs/libatomic-nodejs14.patch
+new file mode 100644
+index 000000000..cdf6bc8e2
+--- /dev/null
++++ b/meta-oe/recipes-devtools/nodejs/nodejs/libatomic-nodejs14.patch
+@@ -0,0 +1,21 @@
++Link mksnapshot with libatomic on x86
++
++Clang-12 on x86 emits atomic builtins
++
++Fixes
++| module-compiler.cc:(.text._ZN2v88internal4wasm12_GLOBAL__N_123ExecuteC=
+ompilationUnitsERKSt10shared_ptrINS2_22BackgroundCompileTokenEEPNS0_8Coun=
+tersEiNS2_19CompileBaselineOnlyE+0x558): un
++defined reference to `__atomic_load'
++
++Upstream-Status: Pending
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++
++--- a/tools/v8_gypfiles/v8.gyp
+++++ b/tools/v8_gypfiles/v8.gyp
++@@ -1336,6 +1336,7 @@
++     {
++       'target_name': 'mksnapshot',
++       'type': 'executable',
+++      'libraries': [ '-latomic' ],
++       'dependencies': [
++         'v8_base_without_compiler',
++         'v8_compiler_for_mksnapshot',
+diff --git a/meta-oe/recipes-devtools/nodejs/nodejs/mips-less-memory-node=
+js14.patch b/meta-oe/recipes-devtools/nodejs/nodejs/mips-less-memory-node=
+js14.patch
+new file mode 100644
+index 000000000..21a228123
+--- /dev/null
++++ b/meta-oe/recipes-devtools/nodejs/nodejs/mips-less-memory-nodejs14.pa=
+tch
+@@ -0,0 +1,32 @@
++Description: mksnapshot uses too much memory on 32-bit mipsel
++Author: J=C3=A9r=C3=A9my Lal <kapouer@melix.org>
++Last-Update: 2020-06-03
++Forwarded: https://bugs.chromium.org/p/v8/issues/detail?id=3D10586
++
++This ensures that we reserve 500M instead of 2G range for codegen
++ensures that qemu-mips can allocate such large ranges
++
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++
++--- a/deps/v8/src/common/globals.h
+++++ b/deps/v8/src/common/globals.h
++@@ -224,7 +224,7 @@ constexpr size_t kMinimumCodeRangeSize =3D
++ constexpr size_t kMinExpectedOSPageSize =3D 64 * KB;  // OS page on PPC=
+ Linux
++ #elif V8_TARGET_ARCH_MIPS
++ constexpr bool kPlatformRequiresCodeRange =3D false;
++-constexpr size_t kMaximalCodeRangeSize =3D 2048LL * MB;
+++constexpr size_t kMaximalCodeRangeSize =3D 512 * MB;
++ constexpr size_t kMinimumCodeRangeSize =3D 0 * MB;
++ constexpr size_t kMinExpectedOSPageSize =3D 4 * KB;  // OS page.
++ #else
++--- a/deps/v8/src/codegen/mips/constants-mips.h
+++++ b/deps/v8/src/codegen/mips/constants-mips.h
++@@ -140,7 +140,7 @@ const uint32_t kLeastSignificantByteInIn
++ namespace v8 {
++ namespace internal {
++
++-constexpr size_t kMaxPCRelativeCodeRangeInMB =3D 4096;
+++constexpr size_t kMaxPCRelativeCodeRangeInMB =3D 1024;
++
++ // --------------------------------------------------------------------=
+---------
++ // Registers and FPURegisters.
+diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_14.18.1.bb b/meta-oe/=
+recipes-devtools/nodejs/nodejs_14.18.1.bb
+new file mode 100644
+index 000000000..fc886817a
+--- /dev/null
++++ b/meta-oe/recipes-devtools/nodejs/nodejs_14.18.1.bb
+@@ -0,0 +1,205 @@
++DESCRIPTION =3D "nodeJS Evented I/O for V8 JavaScript"
++HOMEPAGE =3D "http://nodejs.org"
++LICENSE =3D "MIT & BSD & Artistic-2.0"
++LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D6768abdfc4dae4fde59d6b4df9693=
+0f3"
++
++DEFAULT_PREFERENCE =3D "-1"
++
++DEPENDS =3D "openssl"
++DEPENDS:append:class-target =3D " qemu-native"
++DEPENDS:append:class-native =3D " c-ares-native"
++
++inherit pkgconfig python3native qemu
++
++COMPATIBLE_MACHINE:armv4 =3D "(!.*armv4).*"
++COMPATIBLE_MACHINE:armv5 =3D "(!.*armv5).*"
++COMPATIBLE_MACHINE:mips64 =3D "(!.*mips64).*"
++
++COMPATIBLE_HOST:riscv64 =3D "null"
++COMPATIBLE_HOST:riscv32 =3D "null"
++
++SRC_URI =3D "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.xz \
++           file://0001-Disable-running-gyp-files-for-bundled-deps-nodejs=
+14.patch \
++           file://0003-Install-both-binaries-and-use-libdir-nodejs14.pat=
+ch \
++           file://0004-v8-don-t-override-ARM-CFLAGS.patch \
++           file://big-endian.patch \
++           file://mips-warnings.patch \
++           file://mips-less-memory-nodejs14.patch \
++           file://0001-jinja-tests.py-add-py-3.10-fix-nodejs14.patch \
++           file://CVE-2022-32212.patch \
++           file://CVE-2022-35255.patch \
++           file://CVE-2022-43548.patch \
++           "
++SRC_URI:append:class-target =3D " \
++           file://0002-Using-native-binaries-nodejs14.patch \
++           "
++SRC_URI:append:toolchain-clang:x86 =3D " \
++           file://libatomic-nodejs14.patch \
++           "
++SRC_URI:append:toolchain-clang:powerpc64le =3D " \
++           file://0001-ppc64-Do-not-use-mminimal-toc-with-clang-nodejs14=
+.patch \
++           "
++SRC_URI[sha256sum] =3D "3fa1d71adddfab2f5e3e41874b4eddbdf92b65cade4a4392=
+2fb1e437afcf89ed"
++
++S =3D "${WORKDIR}/node-v${PV}"
++
++# v8 errors out if you have set CCACHE
++CCACHE =3D ""
++
++def map_nodejs_arch(a, d):
++    import re
++
++    if   re.match('i.86$', a): return 'ia32'
++    elif re.match('x86_64$', a): return 'x64'
++    elif re.match('aarch64$', a): return 'arm64'
++    elif re.match('(powerpc64|powerpc64le|ppc64le)$', a): return 'ppc64'
++    elif re.match('powerpc$', a): return 'ppc'
++    return a
++
++ARCHFLAGS:arm =3D "${@bb.utils.contains('TUNE_FEATURES', 'callconvention=
+-hard', '--with-arm-float-abi=3Dhard', '--with-arm-float-abi=3Dsoftfp', d=
+)} \
++                 ${@bb.utils.contains('TUNE_FEATURES', 'neon', '--with-a=
+rm-fpu=3Dneon', \
++                    bb.utils.contains('TUNE_FEATURES', 'vfpv3d16', '--wi=
+th-arm-fpu=3Dvfpv3-d16', \
++                    bb.utils.contains('TUNE_FEATURES', 'vfpv3', '--with-=
+arm-fpu=3Dvfpv3', \
++                    '--with-arm-fpu=3Dvfp', d), d), d)}"
++GYP_DEFINES:append:mipsel =3D " mips_arch_variant=3D'r1' "
++ARCHFLAGS ?=3D ""
++
++PACKAGECONFIG ??=3D "brotli icu zlib"
++
++PACKAGECONFIG[ares] =3D "--shared-cares,,c-ares"
++PACKAGECONFIG[brotli] =3D "--shared-brotli,,brotli"
++PACKAGECONFIG[icu] =3D "--with-intl=3Dsystem-icu,--without-intl,icu"
++PACKAGECONFIG[libuv] =3D "--shared-libuv,,libuv"
++PACKAGECONFIG[nghttp2] =3D "--shared-nghttp2,,nghttp2"
++PACKAGECONFIG[shared] =3D "--shared"
++PACKAGECONFIG[zlib] =3D "--shared-zlib,,zlib"
++
++# We don't want to cross-compile during target compile,
++# and we need to use the right flags during host compile,
++# too.
++EXTRA_OEMAKE =3D "\
++    CC.host=3D'${CC}' \
++    CFLAGS.host=3D'${CPPFLAGS} ${CFLAGS}' \
++    CXX.host=3D'${CXX}' \
++    CXXFLAGS.host=3D'${CPPFLAGS} ${CXXFLAGS}' \
++    LDFLAGS.host=3D'${LDFLAGS}' \
++    AR.host=3D'${AR}' \
++    \
++    builddir_name=3D./ \
++"
++
++python do_unpack() {
++    import shutil
++
++    bb.build.exec_func('base_do_unpack', d)
++
++    if 'ares' in d.getVar('PACKAGECONFIG'):
++        shutil.rmtree(d.getVar('S') + '/deps/cares', True)
++    if 'brotli' in d.getVar('PACKAGECONFIG'):
++        shutil.rmtree(d.getVar('S') + '/deps/brotli', True)
++    if 'libuv' in d.getVar('PACKAGECONFIG'):
++        shutil.rmtree(d.getVar('S') + '/deps/uv', True)
++    if 'nghttp2' in d.getVar('PACKAGECONFIG'):
++        shutil.rmtree(d.getVar('S') + '/deps/nghttp2', True)
++    if 'zlib' in d.getVar('PACKAGECONFIG'):
++        shutil.rmtree(d.getVar('S') + '/deps/zlib', True)
++}
++
++# V8's JIT infrastructure requires binaries such as mksnapshot and
++# mkpeephole to be run in the host during the build. However, these
++# binaries must have the same bit-width as the target (e.g. a x86_64
++# host targeting ARMv6 needs to produce a 32-bit binary). Instead of
++# depending on a third Yocto toolchain, we just build those binaries
++# for the target and run them on the host with QEMU.
++python do_create_v8_qemu_wrapper () {
++    """Creates a small wrapper that invokes QEMU to run some target V8 b=
+inaries
++    on the host."""
++    qemu_libdirs =3D [d.expand('${STAGING_DIR_HOST}${libdir}'),
++                    d.expand('${STAGING_DIR_HOST}${base_libdir}')]
++    qemu_cmd =3D qemu_wrapper_cmdline(d, d.getVar('STAGING_DIR_HOST', Tr=
+ue),
++                                    qemu_libdirs)
++    wrapper_path =3D d.expand('${B}/v8-qemu-wrapper.sh')
++    with open(wrapper_path, 'w') as wrapper_file:
++        wrapper_file.write("""#!/bin/sh
++
++# This file has been generated automatically.
++# It invokes QEMU to run binaries built for the target in the host durin=
+g the
++# build process.
++
++%s "$@"
++""" % qemu_cmd)
++    os.chmod(wrapper_path, 0o755)
++}
++
++do_create_v8_qemu_wrapper[dirs] =3D "${B}"
++addtask create_v8_qemu_wrapper after do_configure before do_compile
++
++LDFLAGS:append:x86 =3D " -latomic"
++
++# Node is way too cool to use proper autotools, so we install two wrappe=
+rs to forcefully inject proper arch cflags to workaround gypi
++do_configure () {
++    export LD=3D"${CXX}"
++    GYP_DEFINES=3D"${GYP_DEFINES}" export GYP_DEFINES
++    # $TARGET_ARCH settings don't match --dest-cpu settings
++    python3 configure.py --prefix=3D${prefix} --cross-compiling \
++               --without-dtrace \
++               --without-etw \
++               --dest-cpu=3D"${@map_nodejs_arch(d.getVar('TARGET_ARCH'),=
+ d)}" \
++               --dest-os=3Dlinux \
++               --libdir=3D${D}${libdir} \
++               ${ARCHFLAGS} \
++               ${PACKAGECONFIG_CONFARGS}
++}
++
++do_compile () {
++    export LD=3D"${CXX}"
++    install -Dm 0755 ${B}/v8-qemu-wrapper.sh ${B}/out/Release/v8-qemu-wr=
+apper.sh
++    oe_runmake BUILDTYPE=3DRelease
++}
++
++do_install () {
++    oe_runmake install DESTDIR=3D${D}
++
++    # wasn't updated since 2009 and is the only thing requiring python2 =
+in runtime
++    # ERROR: nodejs-12.14.1-r0 do_package_qa: QA Issue: /usr/lib/node_mo=
+dules/npm/node_modules/node-gyp/gyp/samples/samples contained in package =
+nodejs-npm requires /usr/bin/python, but no providers found in RDEPENDS:n=
+odejs-npm? [file-rdeps]
++    rm -f ${D}${exec_prefix}/lib/node_modules/npm/node_modules/node-gyp/=
+gyp/samples/samples
++}
++
++do_install:append:class-native() {
++    # use node from PATH instead of absolute path to sysroot
++    # node-v0.10.25/tools/install.py is using:
++    # shebang =3D os.path.join(node_prefix, 'bin/node')
++    # update_shebang(link_path, shebang)
++    # and node_prefix can be very long path to bindir in native sysroot =
+and
++    # when it exceeds 128 character shebang limit it's stripped to incor=
+rect path
++    # and npm fails to execute like in this case with 133 characters sho=
+w in log.do_install:
++    # updating shebang of /home/jenkins/workspace/build-webos-nightly/de=
+vice/qemux86/label/open-webos-builder/BUILD-qemux86/work/x86_64-linux/nod=
+ejs-native/0.10.15-r0/image/home/jenkins/workspace/build-webos-nightly/de=
+vice/qemux86/label/open-webos-builder/BUILD-qemux86/sysroots/x86_64-linux=
+/usr/bin/npm to /home/jenkins/workspace/build-webos-nightly/device/qemux8=
+6/label/open-webos-builder/BUILD-qemux86/sysroots/x86_64-linux/usr/bin/no=
+de
++    # /usr/bin/npm is symlink to /usr/lib/node_modules/npm/bin/npm-cli.j=
+s
++    # use sed on npm-cli.js because otherwise symlink is replaced with n=
+ormal file and
++    # npm-cli.js continues to use old shebang
++    sed "1s^.*^#\!/usr/bin/env node^g" -i ${D}${exec_prefix}/lib/node_mo=
+dules/npm/bin/npm-cli.js
++
++    # Install the native binaries to provide it within sysroot for the t=
+arget compilation
++    install -d ${D}${bindir}
++    install -m 0755 ${S}/out/Release/torque ${D}${bindir}/torque
++    install -m 0755 ${S}/out/Release/bytecode_builtins_list_generator ${=
+D}${bindir}/bytecode_builtins_list_generator
++    if ${@bb.utils.contains('PACKAGECONFIG','icu','true','false',d)}; th=
+en
++        install -m 0755 ${S}/out/Release/gen-regexp-special-case ${D}${b=
+indir}/gen-regexp-special-case
++    fi
++    install -m 0755 ${S}/out/Release/mkcodecache ${D}${bindir}/mkcodecac=
+he
++    install -m 0755 ${S}/out/Release/node_mksnapshot ${D}${bindir}/node_=
+mksnapshot
++}
++
++do_install:append:class-target() {
++    sed "1s^.*^#\!${bindir}/env node^g" -i ${D}${exec_prefix}/lib/node_m=
+odules/npm/bin/npm-cli.js
++}
++
++PACKAGES =3D+ "${PN}-npm"
++FILES:${PN}-npm =3D "${exec_prefix}/lib/node_modules ${bindir}/npm ${bin=
+dir}/npx"
++RDEPENDS:${PN}-npm =3D "bash python3-core python3-shell python3-datetime=
+ \
++    python3-misc python3-multiprocessing"
++
++PACKAGES =3D+ "${PN}-systemtap"
++FILES:${PN}-systemtap =3D "${datadir}/systemtap"
++
++BBCLASSEXTEND =3D "native"
+--=20
+2.40.0
+
 
