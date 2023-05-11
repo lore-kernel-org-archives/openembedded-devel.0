@@ -1,197 +1,125 @@
-Return-Path: <akuster808@gmail.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7FA32C7EE22
-	for <webhook@archiver.kernel.org>; Thu, 11 May 2023 17:36:57 +0000 (UTC)
-Received: from mail-yb1-f179.google.com (mail-yb1-f179.google.com [209.85.219.179])
- by mx.groups.io with SMTP id smtpd.web10.2884.1683826614691898952
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3B8F5C77B7C
+	for <webhook@archiver.kernel.org>; Thu, 11 May 2023 23:50:49 +0000 (UTC)
+Received: from mail-oo1-f47.google.com (mail-oo1-f47.google.com [209.85.161.47])
+ by mx.groups.io with SMTP id smtpd.web11.12140.1683849041916742478
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 11 May 2023 10:36:54 -0700
+ Thu, 11 May 2023 16:50:42 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20221208 header.b=nlVyB0qX;
- spf=pass (domain: gmail.com, ip: 209.85.219.179, mailfrom: akuster808@gmail.com)
-Received: by mail-yb1-f179.google.com with SMTP id 3f1490d57ef6-b9a6f17f2b6so42573013276.1
-        for <openembedded-devel@lists.openembedded.org>; Thu, 11 May 2023 10:36:54 -0700 (PDT)
+ dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=IzgoyjiL;
+ spf=pass (domain: gmail.com, ip: 209.85.161.47, mailfrom: raj.khem@gmail.com)
+Received: by mail-oo1-f47.google.com with SMTP id 006d021491bc7-549f0b45ac6so2931908eaf.0
+        for <openembedded-devel@lists.openembedded.org>; Thu, 11 May 2023 16:50:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1683826614; x=1686418614;
-        h=content-transfer-encoding:in-reply-to:from:references:to
-         :content-language:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=2eVTkTyjP2Nfb4vdXBg+NEwJWbYcUAlymfPT4Os/fkI=;
-        b=nlVyB0qXTNjTpzOIqlTesvmRDWdeulGjQIYhXP/ArZHhsm2fv900ltR6wbu5DTQZOz
-         quM9PzhMhj5xUg2cctQcmgnpZbSAHFGRX90BuZWp0nzVRa3XDMZ8kfePjWJvHgLGnMwI
-         a2g2uWuhq3uz9X2z72qILFM+QWKbYqFYoFrmrGaBT43fkstLK7cWkMKMMeMcEmFeUhPS
-         aOIF77JnV5+UiVpKekx1lOqbIvGpaXD0SI3fkTNY9ZOJsiwCVdNWMWa3rdYYOF+ig4QO
-         UFKknxu6krp3v3jqg1LYYCnfsir99rZcN/m/adFrxkLFiwxz5snBmVuQC/w7SFdhZYB9
-         UFuw==
+        d=gmail.com; s=20221208; t=1683849041; x=1686441041;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=ONRVC1gjWtpBbVdjANAm2srp5WME8FRaJddmTm56IJo=;
+        b=IzgoyjiLQ4J75+Vc+PnMHkE9dCzFQt7puPn4AjVpYwCAtJ6TpUi53zz0165IoikMk2
+         uZgVIdtfjwzg9LWWYjAsKWUDUcqFMlhvZPmLDX+/6qf6xDcy7Yl8h92oyWj1etUXiNpQ
+         fEJNXotKghJe2sSlvI55GjcFViY8iqs59ZjQG8pGARYYHR6HXLjdMk98Kmoh6k5xLnuM
+         0t4ZPxQVzjThrxfBSqto2Yp+XPJ2WtB/rE2hDoy8rA07szqc3SniWnZrqqiJDn7ZMbU4
+         XN9O6SWAEXgICeTtOoUym1IUb73FMlMSRyo56JRxJLDExIp4aFg4NT7BpenaX7/e9zwp
+         Z7rw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1683826614; x=1686418614;
-        h=content-transfer-encoding:in-reply-to:from:references:to
-         :content-language:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=2eVTkTyjP2Nfb4vdXBg+NEwJWbYcUAlymfPT4Os/fkI=;
-        b=Mix89m2vXbqzSuqMDzrfS2NgqSaRLZO8HNjqoFwbtzajgGydUP/GakPSPn9r0wBTYC
-         DDBOT82ojwkXi4Emq9g7t6q7A4ErMjOEcmfq/RjyroHdzad+7ZmKZ6ezLDGyEi3M5/YJ
-         WysIHTEwF5LJXhX4p+vS30ZzigMJ70DgOagm3Q8GSyGK5q8LLF0CVBcbIoyihgfnvoyl
-         cLnnKPuOt+pHOp5cBScQP8pEFbdWkG2kyvIPOV1/aay2gLfVtEbIbhVLGqEGkr5bo7b3
-         0gJF9n9ocHguZqSlm+VOIXhd/vJciSqjizOltuozoWiKmTto6eG9oUeVoiwOU3FAwmNr
-         Tlcg==
-X-Gm-Message-State: AC+VfDxatn+nnRl9U8JkOKuJh7hciK3m7lMvMiDR6Vco65hjSCabpsLi
-	G74xcxcjmnKcIvRkuauo94o=
-X-Google-Smtp-Source: ACHHUZ4rrXLsP1RvifJK3cUkWKj4NsBk4R+VYGpnFd8LPKDfvZ8cp+W6CWaOKqGnJxI8GR3jtDOe8g==
-X-Received: by 2002:a0d:dfcf:0:b0:55a:416d:5202 with SMTP id i198-20020a0ddfcf000000b0055a416d5202mr18733208ywe.26.1683826613724;
-        Thu, 11 May 2023 10:36:53 -0700 (PDT)
-Received: from ?IPV6:2600:1700:9190:ba10:f345:2295:bbfb:ef27? ([2600:1700:9190:ba10:f345:2295:bbfb:ef27])
-        by smtp.gmail.com with ESMTPSA id i64-20020a0ddf43000000b0054662f7b42dsm4992012ywe.63.2023.05.11.10.36.53
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 11 May 2023 10:36:53 -0700 (PDT)
-Message-ID: <3302978f-fc4e-5d1c-8a82-4a9d40e78a43@gmail.com>
-Date: Thu, 11 May 2023 13:36:52 -0400
+        d=1e100.net; s=20221208; t=1683849041; x=1686441041;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=ONRVC1gjWtpBbVdjANAm2srp5WME8FRaJddmTm56IJo=;
+        b=jUcw2PU1UI/PQgQJ2o3B4orZrnKvMEjsZNmBDnoagDPloYTJb6NYeVsgkoVG3orNzC
+         gBc5rL3NamY8If5PgRpuKEnr/y/8zqTjAf8hs4Zd1SFJ/lbtIg2GT5Jlrq4FkuTRM8x5
+         A6eJ7IlWu1OZYW9p4BEviIUMQVyXuVOgDu7ycJweEZxltDqAOCKtnl1t5WHVOPRoR1DY
+         lQLRaZbGAiTJYWom6faJvze03WDELKU7wUCTfoS4Pb1DQU2sNtAecl3P725xQqyInZ+3
+         lGfwwUy5tzOJRrRA4v57rA6/xDiq28RGrVcKSCfK2/skn97TXg/tlX2GTXj6I3QTxINN
+         FFEA==
+X-Gm-Message-State: AC+VfDxRmPnJ3lB0J7tXqpgxsq1q7Ai0xbLX3CNh8URjXSU7/1340sfB
+	TehAukQSO9klx4iRr1HmJ7UYcVqh0YGAg/uSd1o+HyWzzGQ=
+X-Google-Smtp-Source: ACHHUZ74Mf28w2HiKkEahHuYN4EbHuKwZz4nPBO9x0/yN6/2LwDBm2kvgSxqtk7pI7WYMIbxFwql3SaGC04LwkI4YhA=
+X-Received: by 2002:a05:6870:e2c7:b0:187:bc38:cfb0 with SMTP id
+ w7-20020a056870e2c700b00187bc38cfb0mr10814458oad.29.1683849040623; Thu, 11
+ May 2023 16:50:40 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.10.0
-Subject: Re: [oe] [meta-oe][dunfell][PATCH 2/2] nss: backport fix for native
- build failure due to dangling pointer with gcc13
-Content-Language: en-US
-To: Jack Mitchell <ml@embed.me.uk>,
- OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-References: <20230510090648.2762735-1-ml@embed.me.uk>
- <20230510090648.2762735-2-ml@embed.me.uk>
-From: akuster808 <akuster808@gmail.com>
-In-Reply-To: <20230510090648.2762735-2-ml@embed.me.uk>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+References: <TY2PR02MB367859735163870EE76A95A981749@TY2PR02MB3678.apcprd02.prod.outlook.com>
+In-Reply-To: <TY2PR02MB367859735163870EE76A95A981749@TY2PR02MB3678.apcprd02.prod.outlook.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 11 May 2023 16:50:14 -0700
+Message-ID: <CAMKF1so6bpy_c1jrnbXH4Wvf0k9uBYmvyvXHGTOYDk9b_MWYTw@mail.gmail.com>
+Subject: Re: [oe] [meta-networking][PATCH] openfortivpn: add new recipe
+To: Petr Gotthard <petr.gotthard@advantech.cz>
+Cc: "openembedded-devel@lists.openembedded.org" <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 11 May 2023 17:36:57 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102551
+ <openembedded-devel@lists.openembedded.org>; Thu, 11 May 2023 23:50:49 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102552
+
+Fails to configure -
+
+checking for /sbin/resolvconf... configure: error: cannot check for
+file existence when cross compiling
 
 
+https://errors.yoctoproject.org/Errors/Details/703717/
 
-On 5/10/23 5:06 AM, Jack Mitchell wrote:
-> Upstream-Status: Backport
-> Link: https://github.com/nss-dev/nss/commit/cbf5a2bce75ca2c2fd3e247796b9892f5298584e
+On Thu, May 11, 2023 at 9:33=E2=80=AFAM Petr Gotthard
+<petr.gotthard@advantech.cz> wrote:
 >
-> Signed-off-by: Jack Mitchell <ml@embed.me.uk>
-
-What is the difference between the patch #1 and #2, they look the same 
-to me.
+> A client for PPP+SSL VPN tunnel services, compatible with Fortinet VPNs.
+> https://github.com/adrienverge/openfortivpn
+>
+> Signed-off-by: Petr Gotthard <petr.gotthard@advantech.cz>
 > ---
->   ...ecperf-fix-dangling-pointer-warning-.patch | 75 +++++++++++++++++++
->   meta-oe/recipes-support/nss/nss_3.51.1.bb     |  1 +
->   2 files changed, 76 insertions(+)
->   create mode 100644 meta-oe/recipes-support/nss/nss/0001-Bug-1826650-cmd-ecperf-fix-dangling-pointer-warning-.patch
+>  .../openfortivpn/openfortivpn_1.20.3.bb          | 16 ++++++++++++++++
+>  1 file changed, 16 insertions(+)
+>  create mode 100644 meta-networking/recipes-connectivity/openfortivpn/ope=
+nfortivpn_1.20.3.bb
 >
-> diff --git a/meta-oe/recipes-support/nss/nss/0001-Bug-1826650-cmd-ecperf-fix-dangling-pointer-warning-.patch b/meta-oe/recipes-support/nss/nss/0001-Bug-1826650-cmd-ecperf-fix-dangling-pointer-warning-.patch
+> diff --git a/meta-networking/recipes-connectivity/openfortivpn/openfortiv=
+pn_1.20.3.bb b/meta-networking/recipes-connectivity/openfortivpn/openfortiv=
+pn_1.20.3.bb
 > new file mode 100644
-> index 000000000..dc7e172aa
+> index 0000000000..84ef8f80d4
 > --- /dev/null
-> +++ b/meta-oe/recipes-support/nss/nss/0001-Bug-1826650-cmd-ecperf-fix-dangling-pointer-warning-.patch
-> @@ -0,0 +1,75 @@
-> +From cbf5a2bce75ca2c2fd3e247796b9892f5298584e Mon Sep 17 00:00:00 2001
-> +From: "John M. Schanck" <jschanck@mozilla.com>
-> +Date: Thu, 13 Apr 2023 17:43:46 +0000
-> +Subject: [PATCH] Bug 1826650 - cmd/ecperf: fix dangling pointer warning on gcc
-> + 13. r=djackson
+> +++ b/meta-networking/recipes-connectivity/openfortivpn/openfortivpn_1.20=
+.3.bb
+> @@ -0,0 +1,16 @@
+> +SUMMARY =3D "Client for PPP+SSL VPN tunnel services"
+> +LICENSE =3D "GPL-3.0-or-later"
+> +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D3d575262a651a6f1a17210ce41bf9=
+07d"
 > +
-> +Differential Revision: https://phabricator.services.mozilla.com/D174822
-
-This patch should contain:
-
-Upstream-Status: Backport
-Link: https://github.com/nss-dev/nss/commit/cbf5a2bce75ca2c2fd3e247796b9892f5298584e
-
-and your sign-off-by.
+> +SRC_URI =3D "git://github.com/adrienverge/openfortivpn.git;protocol=3Dht=
+tps;branch=3Dmaster"
+> +SRCREV =3D "45cb8e0f9984f1d54b648e499bda637d96568908"
 > +
-> +--HG--
-> +extra : moz-landing-system : lando
-> +---
-> + cmd/ecperf/ecperf.c | 12 ++++++++++++
-> + 1 file changed, 12 insertions(+)
+> +DEPENDS =3D "openssl"
 > +
-> +diff --git a/cmd/ecperf/ecperf.c b/cmd/ecperf/ecperf.c
-> +index 705d68f35..a07004d8e 100644
-> +--- a/cmd/ecperf/ecperf.c
-> ++++ b/cmd/ecperf/ecperf.c
-> +@@ -53,6 +53,7 @@ PKCS11Thread(void *data)
-> +     SECItem sig;
-> +     CK_SESSION_HANDLE session;
-> +     CK_RV crv;
-> ++    void *tmp = NULL;
+> +S =3D "${WORKDIR}/git"
 > +
-> +     threadData->status = SECSuccess;
-> +     threadData->count = 0;
-> +@@ -68,6 +69,7 @@ PKCS11Thread(void *data)
-> +     if (threadData->isSign) {
-> +         sig.data = sigData;
-> +         sig.len = sizeof(sigData);
-> ++        tmp = threadData->p2;
-> +         threadData->p2 = (void *)&sig;
-> +     }
+> +inherit autotools pkgconfig
 > +
-> +@@ -79,6 +81,10 @@ PKCS11Thread(void *data)
-> +         }
-> +         threadData->count++;
-> +     }
-> ++
-> ++    if (threadData->isSign) {
-> ++        threadData->p2 = tmp;
-> ++    }
-> +     return;
-> + }
+> +EXTRA_OECONF =3D "--with-pppd=3D${sbindir}/pppd --disable-proc"
 > +
-> +@@ -89,6 +95,7 @@ genericThread(void *data)
-> +     int iters = threadData->iters;
-> +     unsigned char sigData[256];
-> +     SECItem sig;
-> ++    void *tmp = NULL;
-> +
-> +     threadData->status = SECSuccess;
-> +     threadData->count = 0;
-> +@@ -96,6 +103,7 @@ genericThread(void *data)
-> +     if (threadData->isSign) {
-> +         sig.data = sigData;
-> +         sig.len = sizeof(sigData);
-> ++        tmp = threadData->p2;
-> +         threadData->p2 = (void *)&sig;
-> +     }
-> +
-> +@@ -107,6 +115,10 @@ genericThread(void *data)
-> +         }
-> +         threadData->count++;
-> +     }
-> ++
-> ++    if (threadData->isSign) {
-> ++        threadData->p2 = tmp;
-> ++    }
-> +     return;
-> + }
-> +
-> +--
-> +2.40.1
-> +
-> diff --git a/meta-oe/recipes-support/nss/nss_3.51.1.bb b/meta-oe/recipes-support/nss/nss_3.51.1.bb
-> index 721b38ddb..af842ee67 100644
-> --- a/meta-oe/recipes-support/nss/nss_3.51.1.bb
-> +++ b/meta-oe/recipes-support/nss/nss_3.51.1.bb
-> @@ -44,6 +44,7 @@ SRC_URI = "http://ftp.mozilla.org/pub/mozilla.org/security/nss/releases/${VERSIO
->              file://CVE-2022-22747.patch \
->              file://CVE-2023-0767.patch \
->              file://0001-Bug-1812671-build-failure-while-implicitly-casting-S.patch;patchdir=nss \
-> +           file://0001-Bug-1826650-cmd-ecperf-fix-dangling-pointer-warning-.patch;patchdir=nss \
->              "
->   
->   SRC_URI[md5sum] = "6acaf1ddff69306ae30a908881c6f233"
+> +RDEPENDS:${PN} =3D "ppp"
+> --
+> 2.34.1
 >
-> -=-=-=-=-=-=-=-=-=-=-=-
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
 > Links: You receive all messages sent to this group.
-> View/Reply Online (#102528): https://lists.openembedded.org/g/openembedded-devel/message/102528
-> Mute This Topic: https://lists.openembedded.org/mt/98802000/3616698
+> View/Reply Online (#102547): https://lists.openembedded.org/g/openembedde=
+d-devel/message/102547
+> Mute This Topic: https://lists.openembedded.org/mt/98831514/1997914
 > Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [akuster808@gmail.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
+aj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
 >
-
 
