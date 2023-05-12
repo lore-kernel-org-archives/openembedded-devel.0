@@ -1,102 +1,220 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <ml@embed.me.uk>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0FC81C77B7F
-	for <webhook@archiver.kernel.org>; Fri, 12 May 2023 02:46:40 +0000 (UTC)
-Received: from mail-pf1-f179.google.com (mail-pf1-f179.google.com [209.85.210.179])
- by mx.groups.io with SMTP id smtpd.web11.15220.1683859595344552074
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7867FC77B75
+	for <webhook@archiver.kernel.org>; Fri, 12 May 2023 07:45:31 +0000 (UTC)
+Received: from dane.soverin.net (dane.soverin.net [185.233.34.150])
+ by mx.groups.io with SMTP id smtpd.web11.18642.1683877526900571578
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 11 May 2023 19:46:35 -0700
+ Fri, 12 May 2023 00:45:27 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=NuvAp9eS;
- spf=pass (domain: gmail.com, ip: 209.85.210.179, mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f179.google.com with SMTP id d2e1a72fcca58-6439df6c268so5961407b3a.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 11 May 2023 19:46:35 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1683859594; x=1686451594;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=R3BOx85QTSloYmpiByuGWFf+2KlkBOnR8AYVVi+m9XA=;
-        b=NuvAp9eSQPLCNarmsDNsLq7uZgBiAozmfuMQCihtVwX8UKH5GBm5CfuDljYHCOq62G
-         5xFIAJsVM/gVkSnmILG/Pf38jtiLHTCYzMTgreiIXL7CUC/hQ02L5nHaHgZqUBLFF5HX
-         5ymHY6NzGgp6VdLJFcG6Yk7MJKvYxLSfk3/X1HBN8JqDzD/kck9Q3mMG0NRC8zSOdycB
-         FgEBxiV5KH8r6lpyZEu0ghbqTGWsYwZZi9SQ+xutltp2TZYigWHaAZ0e7vTbXUmXtByJ
-         3M6IVEnErPjp5+g5TqDGdVIxet+h6cc3NongDiBE2dMyoGCKvb7ocViiKhx9PdJ07KWU
-         ga2Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1683859594; x=1686451594;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=R3BOx85QTSloYmpiByuGWFf+2KlkBOnR8AYVVi+m9XA=;
-        b=dP1S5utwLtLMBfZ5CYmN3/4R9LjawU3/bhOxcVxHmsO4zKqEAZa8gpGbgVqLgisu6n
-         RxKth5PmAkdgwDJmUZtNsdfWEc5/6sVENcd0mkefNPpey+nPnkXq8syrd9vXi8ElLc0v
-         x6QC38EBZdtC4c0rlOE1sMLlyQ2sjG/llfmjKcybIDq5cnYBH4kNxG29vTRBfDmXlgxJ
-         h6eu8Jtkk6JofONH/1O2MMXPdxIn56v2lYI9hC5l/3J/dLKlB2nyT6RP90DzZYsE7iqp
-         +SAsQJSQKSP3zO3ZjDsh9d/M6qbcpsmApNX/Q6gS0+3+cU0THjKBNk1JlnizqjIeIxi7
-         1sdA==
-X-Gm-Message-State: AC+VfDz3gRFfCnQ5K2T0Q1DMcQfeDZZ+6FnEJ9YiHJSQFhf8PkRyFcua
-	QXAkGvOXD1i70OJoOxDA2Zn7Ny1HJxYzjw==
-X-Google-Smtp-Source: ACHHUZ77FnhhIHDymse56mClnejOdN0LaYSpoA/p2T0+Tgg7UpthBclN7ENTlDGxgkVcDzDDh42vDw==
-X-Received: by 2002:a05:6a00:1a56:b0:646:2e83:6b2e with SMTP id h22-20020a056a001a5600b006462e836b2emr18996142pfv.31.1683859594315;
-        Thu, 11 May 2023 19:46:34 -0700 (PDT)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9181:d380::298a])
-        by smtp.gmail.com with ESMTPSA id d30-20020a631d5e000000b0051baf3f1b3esm5629068pgm.76.2023.05.11.19.46.33
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 11 May 2023 19:46:33 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-networking][PATCH] ippool: Enable systemd service on install
-Date: Thu, 11 May 2023 19:46:32 -0700
-Message-Id: <20230512024632.1400-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.40.1
+ dkim=missing; spf=pass (domain: embed.me.uk, ip: 185.233.34.150, mailfrom: ml@embed.me.uk)
+Received: from smtp.soverin.net (c04smtp-lb01.int.sover.in [10.10.4.74])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	(No client certificate requested)
+	by dane.soverin.net (Postfix) with ESMTPS id 4QHgm44YqFzpy;
+	Fri, 12 May 2023 07:45:24 +0000 (UTC)
+Received: from smtp.soverin.net (smtp.soverin.net [10.10.4.99]) by soverin.net (Postfix) with ESMTPSA id 4QHgm36YkDzFk;
+	Fri, 12 May 2023 07:45:23 +0000 (UTC)
+Message-ID: <d4056549-3ff4-3b6c-99a1-f9c6a944afd5@embed.me.uk>
+Date: Fri, 12 May 2023 08:45:23 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Subject: Re: [oe] [meta-oe][dunfell][PATCH 2/2] nss: backport fix for native
+ build failure due to dangling pointer with gcc13
+Content-Language: en-US-large
+To: openembedded-devel@lists.openembedded.org
+References: <20230510090648.2762735-1-ml@embed.me.uk>
+ <20230510090648.2762735-2-ml@embed.me.uk>
+ <3302978f-fc4e-5d1c-8a82-4a9d40e78a43@gmail.com>
+Cc: akuster808@gmail.com
+X-Soverin-Authenticated: true
+From: Jack Mitchell <ml@embed.me.uk>
+In-Reply-To: <3302978f-fc4e-5d1c-8a82-4a9d40e78a43@gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 12 May 2023 02:46:40 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102555
+ <openembedded-devel@lists.openembedded.org>; Fri, 12 May 2023 07:45:31 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102556
 
-Start the daemon with RPC support
+Hi Armin,
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- meta-networking/recipes-daemons/ippool/ippool/ippool.service | 4 ++--
- meta-networking/recipes-daemons/ippool/ippool_1.3.bb         | 2 --
- 2 files changed, 2 insertions(+), 4 deletions(-)
+On 11/05/2023 18:36, Armin Kuster wrote:
+>=20
+>=20
+> On 5/10/23 5:06 AM, Jack Mitchell wrote:
+>> Upstream-Status: Backport
+>> Link:
+>> https://github.com/nss-dev/nss/commit/cbf5a2bce75ca2c2fd3e247796b9892f=
+5298584e
+>>
+>> Signed-off-by: Jack Mitchell <ml@embed.me.uk>
+>=20
+> What is the difference between the patch #1 and #2, they look the same
+> to me.
 
-diff --git a/meta-networking/recipes-daemons/ippool/ippool/ippool.service b/meta-networking/recipes-daemons/ippool/ippool/ippool.service
-index 281ae5fd19..f168e4ccb6 100644
---- a/meta-networking/recipes-daemons/ippool/ippool/ippool.service
-+++ b/meta-networking/recipes-daemons/ippool/ippool/ippool.service
-@@ -5,8 +5,8 @@ After=rpcbind.service
- 
- [Service]
- Type=simple
--# Start ippoold in the foreground!
--ExecStart=@SBINDIR@/ippoold -f
-+# Start ippoold in the foreground! and enable RPC
-+ExecStart=@SBINDIR@/ippoold -R -f
- # Normal output will go to syslog, so suppress stdout.
- StandardOutput=null
- # ExecStop is not needed. systemd will send SIGTERM
-diff --git a/meta-networking/recipes-daemons/ippool/ippool_1.3.bb b/meta-networking/recipes-daemons/ippool/ippool_1.3.bb
-index f592912f9b..36ea289945 100644
---- a/meta-networking/recipes-daemons/ippool/ippool_1.3.bb
-+++ b/meta-networking/recipes-daemons/ippool/ippool_1.3.bb
-@@ -50,8 +50,6 @@ EXTRA_OEMAKE += "IPPOOL_TEST=y"
- CPPFLAGS += "${SELECTED_OPTIMIZATION} -I${STAGING_INCDIR}/tirpc"
- 
- SYSTEMD_SERVICE:${PN} = "ippool.service"
--SYSTEMD_AUTO_ENABLE = "disable"
--
- 
- do_compile:prepend() {
-     # fix the CFLAGS= and CPPFLAGS= in main Makefile, to have the extra CFLAGS in env
--- 
-2.40.1
+They're two different patches fixing different problems when compiling
+under gcc13. I'm happy to squash into a single commit if that would be
+preferable.
 
+>> ---
+>> =C2=A0 ...ecperf-fix-dangling-pointer-warning-.patch | 75 ++++++++++++=
++++++++
+>> =C2=A0 meta-oe/recipes-support/nss/nss_3.51.1.bb=C2=A0=C2=A0=C2=A0=C2=A0=
+ |=C2=A0 1 +
+>> =C2=A0 2 files changed, 76 insertions(+)
+>> =C2=A0 create mode 100644
+>> meta-oe/recipes-support/nss/nss/0001-Bug-1826650-cmd-ecperf-fix-dangli=
+ng-pointer-warning-.patch
+>>
+>> diff --git
+>> a/meta-oe/recipes-support/nss/nss/0001-Bug-1826650-cmd-ecperf-fix-dang=
+ling-pointer-warning-.patch b/meta-oe/recipes-support/nss/nss/0001-Bug-18=
+26650-cmd-ecperf-fix-dangling-pointer-warning-.patch
+>> new file mode 100644
+>> index 000000000..dc7e172aa
+>> --- /dev/null
+>> +++
+>> b/meta-oe/recipes-support/nss/nss/0001-Bug-1826650-cmd-ecperf-fix-dang=
+ling-pointer-warning-.patch
+>> @@ -0,0 +1,75 @@
+>> +From cbf5a2bce75ca2c2fd3e247796b9892f5298584e Mon Sep 17 00:00:00 200=
+1
+>> +From: "John M. Schanck" <jschanck@mozilla.com>
+>> +Date: Thu, 13 Apr 2023 17:43:46 +0000
+>> +Subject: [PATCH] Bug 1826650 - cmd/ecperf: fix dangling pointer
+>> warning on gcc
+>> + 13. r=3Ddjackson
+>> +
+>> +Differential Revision: https://phabricator.services.mozilla.com/D1748=
+22
+>=20
+> This patch should contain:
+>=20
+> Upstream-Status: Backport
+> Link:
+> https://github.com/nss-dev/nss/commit/cbf5a2bce75ca2c2fd3e247796b9892f5=
+298584e
+>=20
+> and your sign-off-by.
+
+Will fix.
+
+>> +
+>> +--HG--
+>> +extra : moz-landing-system : lando
+>> +---
+>> + cmd/ecperf/ecperf.c | 12 ++++++++++++
+>> + 1 file changed, 12 insertions(+)
+>> +
+>> +diff --git a/cmd/ecperf/ecperf.c b/cmd/ecperf/ecperf.c
+>> +index 705d68f35..a07004d8e 100644
+>> +--- a/cmd/ecperf/ecperf.c
+>> ++++ b/cmd/ecperf/ecperf.c
+>> +@@ -53,6 +53,7 @@ PKCS11Thread(void *data)
+>> +=C2=A0=C2=A0=C2=A0=C2=A0 SECItem sig;
+>> +=C2=A0=C2=A0=C2=A0=C2=A0 CK_SESSION_HANDLE session;
+>> +=C2=A0=C2=A0=C2=A0=C2=A0 CK_RV crv;
+>> ++=C2=A0=C2=A0=C2=A0 void *tmp =3D NULL;
+>> +
+>> +=C2=A0=C2=A0=C2=A0=C2=A0 threadData->status =3D SECSuccess;
+>> +=C2=A0=C2=A0=C2=A0=C2=A0 threadData->count =3D 0;
+>> +@@ -68,6 +69,7 @@ PKCS11Thread(void *data)
+>> +=C2=A0=C2=A0=C2=A0=C2=A0 if (threadData->isSign) {
+>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 sig.data =3D sigData=
+;
+>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 sig.len =3D sizeof(s=
+igData);
+>> ++=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 tmp =3D threadData->p2;
+>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 threadData->p2 =3D (=
+void *)&sig;
+>> +=C2=A0=C2=A0=C2=A0=C2=A0 }
+>> +
+>> +@@ -79,6 +81,10 @@ PKCS11Thread(void *data)
+>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 }
+>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 threadData->count++;
+>> +=C2=A0=C2=A0=C2=A0=C2=A0 }
+>> ++
+>> ++=C2=A0=C2=A0=C2=A0 if (threadData->isSign) {
+>> ++=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 threadData->p2 =3D tmp;
+>> ++=C2=A0=C2=A0=C2=A0 }
+>> +=C2=A0=C2=A0=C2=A0=C2=A0 return;
+>> + }
+>> +
+>> +@@ -89,6 +95,7 @@ genericThread(void *data)
+>> +=C2=A0=C2=A0=C2=A0=C2=A0 int iters =3D threadData->iters;
+>> +=C2=A0=C2=A0=C2=A0=C2=A0 unsigned char sigData[256];
+>> +=C2=A0=C2=A0=C2=A0=C2=A0 SECItem sig;
+>> ++=C2=A0=C2=A0=C2=A0 void *tmp =3D NULL;
+>> +
+>> +=C2=A0=C2=A0=C2=A0=C2=A0 threadData->status =3D SECSuccess;
+>> +=C2=A0=C2=A0=C2=A0=C2=A0 threadData->count =3D 0;
+>> +@@ -96,6 +103,7 @@ genericThread(void *data)
+>> +=C2=A0=C2=A0=C2=A0=C2=A0 if (threadData->isSign) {
+>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 sig.data =3D sigData=
+;
+>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 sig.len =3D sizeof(s=
+igData);
+>> ++=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 tmp =3D threadData->p2;
+>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 threadData->p2 =3D (=
+void *)&sig;
+>> +=C2=A0=C2=A0=C2=A0=C2=A0 }
+>> +
+>> +@@ -107,6 +115,10 @@ genericThread(void *data)
+>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 }
+>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 threadData->count++;
+>> +=C2=A0=C2=A0=C2=A0=C2=A0 }
+>> ++
+>> ++=C2=A0=C2=A0=C2=A0 if (threadData->isSign) {
+>> ++=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 threadData->p2 =3D tmp;
+>> ++=C2=A0=C2=A0=C2=A0 }
+>> +=C2=A0=C2=A0=C2=A0=C2=A0 return;
+>> + }
+>> +
+>> +--
+>> +2.40.1
+>> +
+>> diff --git a/meta-oe/recipes-support/nss/nss_3.51.1.bb
+>> b/meta-oe/recipes-support/nss/nss_3.51.1.bb
+>> index 721b38ddb..af842ee67 100644
+>> --- a/meta-oe/recipes-support/nss/nss_3.51.1.bb
+>> +++ b/meta-oe/recipes-support/nss/nss_3.51.1.bb
+>> @@ -44,6 +44,7 @@ SRC_URI =3D
+>> "http://ftp.mozilla.org/pub/mozilla.org/security/nss/releases/${VERSIO
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+ file://CVE-2022-22747.patch \
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+ file://CVE-2023-0767.patch \
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0
+>> file://0001-Bug-1812671-build-failure-while-implicitly-casting-S.patch=
+;patchdir=3Dnss \
+>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0
+>> file://0001-Bug-1826650-cmd-ecperf-fix-dangling-pointer-warning-.patch=
+;patchdir=3Dnss \
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+ "
+>> =C2=A0 =C2=A0 SRC_URI[md5sum] =3D "6acaf1ddff69306ae30a908881c6f233"
+>>
+>>
+>>
+>=20
+>=20
+>=20
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#102551): https://lists.openembedded.org/g/openembed=
+ded-devel/message/102551
+> Mute This Topic: https://lists.openembedded.org/mt/98802000/3618454
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub =
+[ml@embed.me.uk]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>=20
+
+--=20
+Jack Mitchell, Consultant
+https://www.tuxable.co.uk
 
