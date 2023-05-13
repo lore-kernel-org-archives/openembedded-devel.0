@@ -1,150 +1,191 @@
-Return-Path: <petr.gotthard@advantech.cz>
+Return-Path: <ticotimo@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A1C98C77B7F
-	for <webhook@archiver.kernel.org>; Sat, 13 May 2023 13:17:19 +0000 (UTC)
-Received: from APC01-TYZ-obe.outbound.protection.outlook.com (APC01-TYZ-obe.outbound.protection.outlook.com [40.107.117.89])
- by mx.groups.io with SMTP id smtpd.web11.46813.1683983828541182682
- for <openembedded-devel@lists.openembedded.org>;
- Sat, 13 May 2023 06:17:09 -0700
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2DB64C77B7D
+	for <webhook@archiver.kernel.org>; Sat, 13 May 2023 18:57:31 +0000 (UTC)
+Received: from mail-yw1-f171.google.com (mail-yw1-f171.google.com [209.85.128.171])
+ by mx.groups.io with SMTP id smtpd.web11.53308.1684004242205148265
+ for <Openembedded-devel@lists.openembedded.org>;
+ Sat, 13 May 2023 11:57:22 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@advantech.cz header.s=selector1 header.b=NhN6PluJ;
- spf=pass (domain: advantech.cz, ip: 40.107.117.89, mailfrom: petr.gotthard@advantech.cz)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=hARWDk5sEZT9h7B2OA93ITEgiPO+PqOzurQ5uI0+GlGlFlRz0dS2OPT2Ir9TSz1dObBGaTN6jg2JL6ozzgzrPgjIRYCb/XcbXIHZ9aezOlJptvcxGXs6HYCEQQI4PoqEuz0k37I07RWj7miKoSo+a8ylHlsszxUUuXd5tnv6Oh4kZ9dYIqXkDAb02JYHrtzXZprX2lQtTr8AJJ3Xk8WfIY8rRPGspbHEBldTp9MoSie5zVrrGcKebL60hG7kBHTycUnZHiIeBhLE5sMnwGyxcH/e54QAVT6f/oqgnhaB5q8rGV6Sq32e8DRmENix69wD/TwfLDtD5JegL2iqsKBzuQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=owSemk7jmKVfJGXemEIZMRCbxDb8Xl46iTYCSFl3ChY=;
- b=PVmVhmBBPpUnSPrE8GBdjCJDBLlluLnz7ClnEnm2HcDAgYUYkweiEexRYT+/Jwq2J2vveNMdUh25jPusDw6ItIxwRcnnfoMqEWNb2l0PVprnKH4UwrEzLmF2mPIh4/LKjV1D4jeWEERQtft3J8MjTCBWeSwnDr+RcHd4Ur6KnuXDkhhHG5UsHfNUkF3jSuAsim6TWfSDlByNbOKhqxFzOXri0y66LtRrPY6kWLiVrJGXA/KOXve2UBaEYCywXeu0x+HxpkurWJ1IN1ke/R9XZrZqjxefxyNIkeiO7LqiBv8yv3WuWsb82D6ggpgStc+wqc+UZiJerxDgir/InjcJzw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=advantech.cz; dmarc=pass action=none header.from=advantech.cz;
- dkim=pass header.d=advantech.cz; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=advantech.cz;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=owSemk7jmKVfJGXemEIZMRCbxDb8Xl46iTYCSFl3ChY=;
- b=NhN6PluJgeC7IPXQvMjjIKbTtMJkqm0pPJFYCdmSpkCq8tadZtJQ8W115P/YkLid//IdLT0SsQDUwGrGVt0bR4bBMktynKQf9AugKJ5mnrjQaNxfaFLowFw9kTRLn37kbfjkehzoJD3GHeOl/WR6fpfuTHOgjObGeLuorwlpjONYbFTzrxIUU/IGE9v4tYpwEcLivrO1zvGJRhCpld2PDD3bpJ0tcqzRFJ4fCJwqw9EBZv9b4I4dvZJtTbF7nFCFiEMFkGSBRE33pcM0YWIVfCCWXBGPTYlPi7PXpQ9yTPkpVruRqzOdvV26A8TZyrzVsCJMX5x9ZazzDjd2HxshGA==
-Received: from TY2PR02MB3678.apcprd02.prod.outlook.com (2603:1096:404:b7::12)
- by SEYPR02MB6339.apcprd02.prod.outlook.com (2603:1096:101:13a::6) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6411.11; Sat, 13 May
- 2023 13:17:02 +0000
-Received: from TY2PR02MB3678.apcprd02.prod.outlook.com
- ([fe80::3e74:b6f0:fad1:4598]) by TY2PR02MB3678.apcprd02.prod.outlook.com
- ([fe80::3e74:b6f0:fad1:4598%5]) with mapi id 15.20.6411.011; Sat, 13 May 2023
- 13:17:02 +0000
-From: Petr Gotthard <petr.gotthard@advantech.cz>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: [meta-networking][PATCH v2] openfortivpn: add new recipe
-Thread-Topic: [meta-networking][PATCH v2] openfortivpn: add new recipe
-Thread-Index: AdmFnQRuiyzHOadZQTOizzUiOeyZDw==
-Date: Sat, 13 May 2023 13:17:01 +0000
-Message-ID: 
- <TY2PR02MB3678782F00D00359FD526A17817A9@TY2PR02MB3678.apcprd02.prod.outlook.com>
-Accept-Language: en-US
-Content-Language: cs-CZ
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=advantech.cz;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: TY2PR02MB3678:EE_|SEYPR02MB6339:EE_
-x-ms-office365-filtering-correlation-id: ffe832d0-c196-40b2-f94e-08db53b456b3
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: 
- rHzqzZYufraG4Y400+OlaXrEesJjoPPR8Lgl0E3w5VRESKjtwppHWb1FRBiwRxsrE8xjeRnPdZn83/gjaFUJOqSZYn8CdcURu2JXgo9DIgnajVfAdEUS0gQmZH4OYLLtSchQPU/RPJP2NsvEa2i3ijWCCdXSQlzow48AfO2BribRdnbykheV//ZLhH9Grvg7eWzXTYyvHmZdwgSrQZyRXQmtLFEc5RiV9sw2s6AtdoZw8lrVueHAyrrLX6WTssJKOxMpxGpXbG+Ur9ovrxzerQ0YrYCbxBCosVC9uJzNVtVfz6kiv0n+OM5Ky6HIj5e+3exPKDHQOBm5Qt5K5hMNUrDVQpj7elBXejiuzTuPGyxwbuni6P0ARZ4S34QxsizuYXrgK/iMi8YKGw0Txj9JMCkxbMlOcqjAK9qB/+68OrRBKSHxNmo3loXxOe+Tti1pP/kPW34Nk6T4AquYNoCoNJHus+Z+TDHO33T25/xFhLMnA5XUHp9MAl7HFJZgWSwPG6Qim5lztHAZSiGJO1ZlJdMTsbV3Da4bfAk012ObUVL5hemJcwary+NsyEx2nMqgvGG+sOVzhhMBEG6Eyqa4rixZll/TVDNdWm5LEIUCZMI=
-x-forefront-antispam-report: 
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:TY2PR02MB3678.apcprd02.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230028)(4636009)(366004)(39850400004)(136003)(376002)(396003)(346002)(451199021)(8676002)(478600001)(316002)(44832011)(5660300002)(8936002)(52536014)(2906002)(86362001)(38070700005)(33656002)(122000001)(76116006)(6916009)(66476007)(66446008)(66556008)(64756008)(66946007)(55016003)(38100700002)(41300700001)(186003)(83380400001)(9686003)(6506007)(26005)(7696005)(71200400001)(966005);DIR:OUT;SFP:1101;
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: 
- =?utf-8?B?a1ovTTRJZDFSYkpDRTJiMnNyME1HV1dKR3VYWUZ4YTNiNjJRak5hYXJDc0lV?=
- =?utf-8?B?c3Ftb2o1bkFGc2tBMk1zWE9YVjI0RytHYjVla1pOMWpQa1JFcmlYb1NXRmxw?=
- =?utf-8?B?b1JMcEZYOGY0aTZHK0d2SGR3Q0hYZ3laTVlrTi9pejhRVzBnYTZSYWNTZGlz?=
- =?utf-8?B?aHEvbnZPVmVMS00zMTlYNmc1aUhQcFZNZlJLOHZ6UUNmQTlDc0VYYnRycFo2?=
- =?utf-8?B?WmpvdExxSlFSVmJCQy9zaUNWa0p1NmVrQmVseUlYRzNmZ0VYV3pwOFoxTEJ1?=
- =?utf-8?B?WUIvZEFCcVJ6ZUhQeE1RUHF5VHdVMndLVXk4ckJBTHJqOHhuNmNnRkV3azE1?=
- =?utf-8?B?V1JOMFVxTzRSZ0F4NS93bEpLdmlsZVc2TGszanRuTlZKSGFmYWRTMVhvUE5i?=
- =?utf-8?B?RWRSN245RUd3YzlxWktXdFBPcDRvZUhxSDFsRkV0ZDhlYmp0QVFBNjRaWnZD?=
- =?utf-8?B?VU9nNXppa0w5RGhCK0VwbTVQWHB4M3ZIdEpNekxhMGFodEdlS0k2clNOaUh6?=
- =?utf-8?B?aDdhY3hEMkVEQmtxbVZNZ1ZHL0R2YXhZeVJFM1ZyTXpSZFAyVWVXRU90cExu?=
- =?utf-8?B?OEQ2VEQ1Y2QwVDF6TlBYU1BweW9ZdkdQM0loM0toYXRQTnpDSDlOVW5WcExM?=
- =?utf-8?B?VG1QeDVuYmIzbWFOUmNWNEdDMk5sZUNFZlFvdlRtbnZ6ekkwUW0reDl0VE84?=
- =?utf-8?B?ak9SUWJNdTZkZU5Ia3ZTVDh4WXR4M1V5UTB0TTRmTjQrQ0xDYWlYbnJwWkhO?=
- =?utf-8?B?eFJGQlZycGZ0cjk4RkNYcWZJckluMUkzM2V1UUFzOG1lUFpGTVhudVRQdmVK?=
- =?utf-8?B?Y1JiY0lUeEdjQ0h4eksvY1NJY1k4QU0zMmNGVitIYnRzU3dPOHZCdTZnSlVl?=
- =?utf-8?B?eDdlM2JuWEtBQkRoRW5lZ0krOWZDU1p2NWZLWmJHWVJFQUczRDBoMU5SVW9u?=
- =?utf-8?B?bWdLRmNFai91SGJIYjBGUGNsU0lPbTljcEYyZjc0bWdQMG03N2JxMkZldWNM?=
- =?utf-8?B?OHhvR2s4UEFPbHFOMkJhZHBPVmZaV1JQaVIyeW5MTjRMWEJJZmhFNGN3SU1z?=
- =?utf-8?B?bVNvVy9hUlZBaTdqM2M2S0cvSk1RTHYrWFo5Qk9CWW4xSmk2UXh2YkJ6MUgr?=
- =?utf-8?B?NzNqUURjdDJKdllWRlE2VjlqZGJ6N0tHa1k0Z3JpUHFPZHUwWFRGa3pvK210?=
- =?utf-8?B?cXdCeFFpdENSOVd4UzR4WWpQVmMrejZTTHUwb29qVUYrZk85OFhsN3Q2RW9N?=
- =?utf-8?B?dUxGZSszNlpsR2dvVUpWOTBHZHRzeEl2V2QzR3BLMDJPVUhKS2JsZEljbFhw?=
- =?utf-8?B?VktGbGtyVFFycDFoQUhINFdHWnppL1B0QVJrbmdyTWh0Z2pid0tNSE5uUDJl?=
- =?utf-8?B?V0ROTkd3NE5TWEhHaVVHTU9pMXp4c01QNjR1M2NLM1FiNGx4WWRMY0xlSmJ1?=
- =?utf-8?B?c2NKWTdKWHg0VGdkNys0ZG1jOEJxZGlpdjJFeFV0dXhycDR5anQxTHZhRCtz?=
- =?utf-8?B?SHJrSjdnOHluU3FLdzA3WVA5aHMwUFlwSW5ham56RFVnQ1Vla1RjZDkrT0Nl?=
- =?utf-8?B?eTZGWVh2RklsblBBRStrbHpXem9mU3V6WEZzQTNxZlMrQWxBc1JxSk9WVzJp?=
- =?utf-8?B?WFNtMU14VUp4R3V3a0gwK1A5ZWQrT0ZBNVV5UVZwTFBHK2xleHU3M0wwOXFs?=
- =?utf-8?B?KzhDS1BBRnhDNXUvT0VNL3dpVkxYT2JsSEN2SmJwSmc4R080anZoOHI0dmN6?=
- =?utf-8?B?Y1N2RGFTOEg5WENsb0tjUnBrOVBFNjZiK1AyV1EyQlo0Mkd3SlRwYndyVmNu?=
- =?utf-8?B?SXRpeG8xeW1xN2tGdWZHOEMycVpGVEJOak5uVzBMY2J4MzhZNXBUbDFFQ3p2?=
- =?utf-8?B?Y2wvbk84cGJmN2E1RzFvVlZnbGdRMkg1UmV5eWZxWUMzTXVGT1lMc3RENWRC?=
- =?utf-8?B?Nmh5RXpNOEY5L2psVHZjMGd1Qy9sWnlqN2FZU2t5NFZYU2RZRFdtQ1dUaFl2?=
- =?utf-8?B?d3JtdHVNWnVRdlhmdmN2NkFsU2hZTVE0Qjd3Y2FEczl0OGZpbEpQZTVEdDly?=
- =?utf-8?B?RmxkYm1Ddm1LQTlJTUtXS0o4cjk4d09wZTFZY3pUS0ttV2NjdURXcG11aHNN?=
- =?utf-8?B?cjRXOEtpQnVpd1d5VjE2SnRoNTE5MDBmd0pHNDF6YUs5MEJRTDMwQVlpUzRT?=
- =?utf-8?B?N1E9PQ==?=
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+ dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=W1AkBqms;
+ spf=pass (domain: gmail.com, ip: 209.85.128.171, mailfrom: ticotimo@gmail.com)
+Received: by mail-yw1-f171.google.com with SMTP id 00721157ae682-55a5a830238so104555787b3.3
+        for <Openembedded-devel@lists.openembedded.org>; Sat, 13 May 2023 11:57:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20221208; t=1684004241; x=1686596241;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=D/dGQU1eBkzcdz/wQXwDGOC/wDeI9eW4ekxQI7mljN4=;
+        b=W1AkBqms+/O6FWTA5NLbsz5opcHEyRPVOG7s6YVNu/8H9GkhpGBIJ6cj98FGxhQGQX
+         rBlZJV3t7d1HdYGWqItB9AJ6CtMisixXd47tKcjLRB7nRQADQBfuUVgpiIs6rvGp19Mr
+         ha9SRjWCKCR6vjpOlGTa2iRSUCWQnYzmS6GoqAr/9o230rtlNZZIMgHJCGxqBkyl6mbc
+         2+kG3i/aoZ5gyIVLhhyHIKCrcPCHoVtJjN9y6uazVwZvZIeOkXDXNkZgOldHdYwWI8bK
+         8SWX2HwpTF5fU27zl9ETCToYVEFRpopczPVO95KhaYS8JS51ave5bNnJp1OxD3knZ2So
+         ZDWA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20221208; t=1684004241; x=1686596241;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=D/dGQU1eBkzcdz/wQXwDGOC/wDeI9eW4ekxQI7mljN4=;
+        b=SWGykk0xyVXZptmm8HSwRugEMLjUp2zpcj79ZDWHucV/McGX0zVlhQOmA6pjLBxTet
+         mNNwogNLeut1SbXAAYRzJ/puyarCr83QuaJ8sAu9O8pWPPk04XbRsT367w/f07TB516P
+         XOtUveUtimd6QEY8R8FXm6vPdyG0A0GI8suMRJ8kwlYbVS/N10p4I7Fxwf+IsWJFipUM
+         2XfnOHYPD/x+nBZAMIHDo2MywfREEsVTBWUuHlHi8FiGtkwhDAJPjXZbEKiPvtmE13xO
+         qpcTrw/J4eUuivi/hqgJYBQ3OXFGCIcIakGhcyhgDO7zmWINsVom6SiOkB+LQx1xprkn
+         MUow==
+X-Gm-Message-State: AC+VfDz9Rn2SwAmVoXzICBh0NZSEw6XqLPxaQvtpoY3mSryShICGwPW/
+	C+Jw+FinhwDU0Cc4MvjMIfWUIN33UlqI767QDc4=
+X-Google-Smtp-Source: ACHHUZ5ze6CjrPbbyTVu7MgwDpw2J4EsrDT15cwHU+M0PQsGw8PFDUHZCS8pQ04xphNVIueJkwEDuEScEvA9TBmYLEU=
+X-Received: by 2002:a81:6004:0:b0:559:cd61:cec5 with SMTP id
+ u4-20020a816004000000b00559cd61cec5mr26652366ywb.27.1684004241027; Sat, 13
+ May 2023 11:57:21 -0700 (PDT)
 MIME-Version: 1.0
-X-OriginatorOrg: advantech.cz
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: TY2PR02MB3678.apcprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: ffe832d0-c196-40b2-f94e-08db53b456b3
-X-MS-Exchange-CrossTenant-originalarrivaltime: 13 May 2023 13:17:01.6731
- (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: a77d40d9-dcba-4dda-b571-5f18e6da853f
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: yxz1uveEit0jbsiDL+9KgWBBnXMNczs9L6O4HaGx8wDA8UktDdf2O1gTzV2Q8rAEkeHJSwXBCXydD8DVP0A+y8x7/m3dFo9KtRLbMKILFyc=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SEYPR02MB6339
+References: <6ef48dfeb218986c6227fadef69959b1493157cd.camel@gmail.com> <674.1683926094725585368@lists.openembedded.org>
+In-Reply-To: <674.1683926094725585368@lists.openembedded.org>
+From: Tim Orling <ticotimo@gmail.com>
+Date: Sat, 13 May 2023 11:57:10 -0700
+Message-ID: <CANx9H-B4h67Tk+B_2AgshgrE8zMGot7aHdq2RgAikQMn4_hjWQ@mail.gmail.com>
+Subject: Re: [oe] bug: meta-networking: networkmanager: Langdale: duplicate
+ NetworkManager services at runtime
+To: ken.s@variscite.com
+Cc: Openembedded-devel@lists.openembedded.org
+Content-Type: multipart/alternative; boundary="00000000000096399c05fb97caeb"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 13 May 2023 13:17:19 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102561
+ <openembedded-devel@lists.openembedded.org>; Sat, 13 May 2023 18:57:31 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102562
 
-QSBjbGllbnQgZm9yIFBQUCtTU0wgVlBOIHR1bm5lbCBzZXJ2aWNlcywgY29tcGF0aWJsZSB3aXRo
-IEZvcnRpbmV0IFZQTnMuDQpodHRwczovL2dpdGh1Yi5jb20vYWRyaWVudmVyZ2Uvb3BlbmZvcnRp
-dnBuDQoNClNpZ25lZC1vZmYtYnk6IFBldHIgR290dGhhcmQgPHBldHIuZ290dGhhcmRAYWR2YW50
-ZWNoLmN6Pg0KLS0tDQogLi4uL29wZW5mb3J0aXZwbi9vcGVuZm9ydGl2cG5fMS4yMC4zLmJiICAg
-ICAgIHwgMjYgKysrKysrKysrKysrKysrKysrKw0KIDEgZmlsZSBjaGFuZ2VkLCAyNiBpbnNlcnRp
-b25zKCspDQogY3JlYXRlIG1vZGUgMTAwNjQ0IG1ldGEtbmV0d29ya2luZy9yZWNpcGVzLWNvbm5l
-Y3Rpdml0eS9vcGVuZm9ydGl2cG4vb3BlbmZvcnRpdnBuXzEuMjAuMy5iYg0KDQpkaWZmIC0tZ2l0
-IGEvbWV0YS1uZXR3b3JraW5nL3JlY2lwZXMtY29ubmVjdGl2aXR5L29wZW5mb3J0aXZwbi9vcGVu
-Zm9ydGl2cG5fMS4yMC4zLmJiIGIvbWV0YS1uZXR3b3JraW5nL3JlY2lwZXMtY29ubmVjdGl2aXR5
-L29wZW5mb3J0aXZwbi9vcGVuZm9ydGl2cG5fMS4yMC4zLmJiDQpuZXcgZmlsZSBtb2RlIDEwMDY0
-NA0KaW5kZXggMDAwMDAwMDAwMC4uYmZkNTFmN2Y3MA0KLS0tIC9kZXYvbnVsbA0KKysrIGIvbWV0
-YS1uZXR3b3JraW5nL3JlY2lwZXMtY29ubmVjdGl2aXR5L29wZW5mb3J0aXZwbi9vcGVuZm9ydGl2
-cG5fMS4yMC4zLmJiDQpAQCAtMCwwICsxLDI2IEBADQorU1VNTUFSWSA9ICJDbGllbnQgZm9yIFBQ
-UCtTU0wgVlBOIHR1bm5lbCBzZXJ2aWNlcyINCitMSUNFTlNFID0gIkdQTC0zLjAtb3ItbGF0ZXIi
-DQorTElDX0ZJTEVTX0NIS1NVTSA9ICJmaWxlOi8vTElDRU5TRTttZDU9M2Q1NzUyNjJhNjUxYTZm
-MWExNzIxMGNlNDFiZjkwN2QiDQorDQorU1JDX1VSSSA9ICJnaXQ6Ly9naXRodWIuY29tL2Fkcmll
-bnZlcmdlL29wZW5mb3J0aXZwbi5naXQ7cHJvdG9jb2w9aHR0cHM7YnJhbmNoPW1hc3RlciINCitT
-UkNSRVYgPSAiNDVjYjhlMGY5OTg0ZjFkNTRiNjQ4ZTQ5OWJkYTYzN2Q5NjU2ODkwOCINCisNCitE
-RVBFTkRTID0gIm9wZW5zc2wiDQorDQorUEFDS0FHRUNPTkZJRyA/Pz0gIiR7QGJiLnV0aWxzLmZp
-bHRlcignRElTVFJPX0ZFQVRVUkVTJywgJ3N5c3RlbWQnLCBkKX0iDQorDQorUEFDS0FHRUNPTkZJ
-R1tyZXNvbHZjb25mXSA9ICItLXdpdGgtcmVzb2x2Y29uZj0ke2Jhc2Vfc2JpbmRpcn0vcmVzb2x2
-Y29uZiAtLWVuYWJsZS1yZXNvbHZjb25mLC0td2l0aC1yZXNvbHZjb25mPURJU0FCTEVELCwiDQor
-UEFDS0FHRUNPTkZJR1tzeXN0ZW1kXSA9ICItLXdpdGgtc3lzdGVtZHN5c3RlbXVuaXRkaXI9JHtz
-eXN0ZW1kX3N5c3RlbV91bml0ZGlyfSwtLXdpdGhvdXQtc3lzdGVtZHN5c3RlbXVuaXRkaXIsLCIN
-CisNCitTID0gIiR7V09SS0RJUn0vZ2l0Ig0KKw0KK2luaGVyaXQgYXV0b3Rvb2xzIHBrZ2NvbmZp
-ZyBzeXN0ZW1kDQorDQorRVhUUkFfT0VDT05GID0gIiBcDQorICAgIC0td2l0aC1wcHBkPSR7c2Jp
-bmRpcn0vcHBwZCBcDQorICAgIC0tZGlzYWJsZS1wcm9jIFwNCisiDQorDQorU1lTVEVNRF9TRVJW
-SUNFOiR7UE59ID0gIm9wZW5mb3J0aXZwbkAuc2VydmljZSINCisNCitSREVQRU5EUzoke1BOfSA9
-ICJwcHAiDQotLSANCjIuMzQuMQ0KDQo=
+--00000000000096399c05fb97caeb
+Content-Type: text/plain; charset="UTF-8"
+
+On Fri, May 12, 2023 at 2:14 PM Ken Sloat via lists.openembedded.org <ken.s=
+variscite.com@lists.openembedded.org> wrote:
+
+> Hi Adrian,
+>
+> Thanks for your quick reply.
+>
+> I was looking at the packages-split folders the other day and yes it is
+> packaged there.
+>
+> Thanks for pointing out rm_sysvinit_initddir. I debugged this a bit, and
+> it turns out that "sysvinit" is actually still in DISTRO_FEATURES along
+> with "systemd." In Langdale at least, it appears that the statements from:
+>
+>
+> https://github.com/yoctoproject/poky/blob/langdale/meta/conf/distro/include/init-manager-systemd.inc
+>
+> that is:
+> DISTRO_FEATURES:append = " systemd"
+> DISTRO_FEATURES_BACKFILL_CONSIDERED:append = " sysvinit"
+> VIRTUAL-RUNTIME_init_manager ??= "systemd"
+> VIRTUAL-RUNTIME_initscripts ??= "systemd-compat-units"
+> VIRTUAL-RUNTIME_login_manager ??= "shadow-base"
+> VIRTUAL-RUNTIME_dev_manager ??= "systemd"
+>
+> are not removing "sysvinit" from DISTRO_FEATURES. The if statement in
+> rm_sysvinit_initddir requires that both systemd be present and sysvinit not
+> present to call the removal functions.
+>
+> I was only able to force "sysvinit" removal via
+> DISTRO_FEATURES:remove = "sysvinit"
+>
+> I debugged in Kirkstone as well and rm_sysvinit_initddir did remove the
+> scripts there (DISTRO_FEATURES properly set). Did something change with
+> specifying systemd in Langdale? Those statements are still in
+> init-manager-systemd.inc file in Langdale.
+>
+
+Langdale is now EOL.
+https://wiki.yoctoproject.org/wiki/Releases
+
+You probably want to be using INIT_MANAGER
+
+https://docs.yoctoproject.org/4.2/dev-manual/init-manager.html#using-systemd-exclusively
+
+
+> Sincerely,
+> Ken Sloat
+>
+> -=-=-=-=-=-=-=-=-=-=-=-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#102559):
+> https://lists.openembedded.org/g/openembedded-devel/message/102559
+> Mute This Topic: https://lists.openembedded.org/mt/98852053/924729
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
+> ticotimo@gmail.com]
+> -=-=-=-=-=-=-=-=-=-=-=-
+>
+>
+
+--00000000000096399c05fb97caeb
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div><br></div><div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=
+=3D"gmail_attr">On Fri, May 12, 2023 at 2:14 PM Ken Sloat via <a href=3D"ht=
+tp://lists.openembedded.org">lists.openembedded.org</a> &lt;ken.s=3D<a href=
+=3D"mailto:variscite.com@lists.openembedded.org">variscite.com@lists.openem=
+bedded.org</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=
+=3D"margin:0px 0px 0px 0.8ex;border-left-width:1px;border-left-style:solid;=
+padding-left:1ex;border-left-color:rgb(204,204,204)"><p>Hi Adrian,<br><br>T=
+hanks for your quick reply.<br><br>I was looking at the packages-split fold=
+ers the other day and yes it is packaged there.<br><br>Thanks for pointing =
+out rm_sysvinit_initddir. I debugged this a bit, and it turns out that &quo=
+t;sysvinit&quot; is actually still in DISTRO_FEATURES along with &quot;syst=
+emd.&quot; In Langdale at least, it appears that the statements from:</p>
+<p><a href=3D"https://github.com/yoctoproject/poky/blob/langdale/meta/conf/=
+distro/include/init-manager-systemd.inc" rel=3D"noopener" target=3D"_blank"=
+>https://github.com/yoctoproject/poky/blob/langdale/meta/conf/distro/includ=
+e/init-manager-systemd.inc</a><br><br>that is:<br>DISTRO_FEATURES:append =
+=3D &quot; systemd&quot;<br>DISTRO_FEATURES_BACKFILL_CONSIDERED:append =3D =
+&quot; sysvinit&quot;<br>VIRTUAL-RUNTIME_init_manager ??=3D &quot;systemd&q=
+uot;<br>VIRTUAL-RUNTIME_initscripts ??=3D &quot;systemd-compat-units&quot;<=
+br>VIRTUAL-RUNTIME_login_manager ??=3D &quot;shadow-base&quot;<br>VIRTUAL-R=
+UNTIME_dev_manager ??=3D &quot;systemd&quot;<br><br>are not removing &quot;=
+sysvinit&quot; from DISTRO_FEATURES. The if statement in rm_sysvinit_initdd=
+ir requires that both systemd be present and sysvinit not present to call t=
+he removal functions.<br><br>I was only able to force &quot;sysvinit&quot; =
+removal via<br>DISTRO_FEATURES:remove =3D &quot;sysvinit&quot;<br><br>I deb=
+ugged in Kirkstone as well and rm_sysvinit_initddir did remove the scripts =
+there (DISTRO_FEATURES properly set). Did something change with specifying =
+systemd in Langdale? Those statements are still in init-manager-systemd.inc=
+ file in Langdale.<br></p></blockquote><div dir=3D"auto"><br></div><div dir=
+=3D"auto">Langdale is now EOL.</div><div dir=3D"auto"><div><a href=3D"https=
+://wiki.yoctoproject.org/wiki/Releases">https://wiki.yoctoproject.org/wiki/=
+Releases</a></div></div><div dir=3D"auto"><br></div><div dir=3D"auto">You p=
+robably want to be using INIT_MANAGER</div><div dir=3D"auto"><div dir=3D"au=
+to"><br></div><div dir=3D"auto"><a href=3D"https://docs.yoctoproject.org/4.=
+2/dev-manual/init-manager.html#using-systemd-exclusively">https://docs.yoct=
+oproject.org/4.2/dev-manual/init-manager.html#using-systemd-exclusively</a>=
+</div><br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0=
+px 0.8ex;border-left-width:1px;border-left-style:solid;padding-left:1ex;bor=
+der-left-color:rgb(204,204,204)"><p><br></p>
+<p>Sincerely,<br>Ken Sloat</p>
+<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+Links: You receive all messages sent to this group.<br>
+View/Reply Online (#102559): <a href=3D"https://lists.openembedded.org/g/op=
+enembedded-devel/message/102559" rel=3D"noreferrer" target=3D"_blank">https=
+://lists.openembedded.org/g/openembedded-devel/message/102559</a><br>
+Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/98852053/9247=
+29" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/mt/=
+98852053/924729</a><br>
+Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
+d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
+><br>
+Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
+/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
+/g/openembedded-devel/unsub</a> [<a href=3D"mailto:ticotimo@gmail.com" targ=
+et=3D"_blank">ticotimo@gmail.com</a>]<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+<br>
+</blockquote></div></div>
+
+--00000000000096399c05fb97caeb--
 
