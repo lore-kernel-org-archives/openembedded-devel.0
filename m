@@ -2,63 +2,63 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DB97EC77B7F
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DBCF8C7EE24
 	for <webhook@archiver.kernel.org>; Sun, 14 May 2023 13:06:55 +0000 (UTC)
-Received: from mail3.bemta32.messagelabs.com (mail3.bemta32.messagelabs.com [195.245.230.81])
- by mx.groups.io with SMTP id smtpd.web10.66578.1684069610267815130
+Received: from mail1.bemta37.messagelabs.com (mail1.bemta37.messagelabs.com [85.158.142.112])
+ by mx.groups.io with SMTP id smtpd.web11.66070.1684069609968874429
  for <openembedded-devel@lists.openembedded.org>;
  Sun, 14 May 2023 06:06:50 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=lrc+WkUC;
- spf=pass (domain: fujitsu.com, ip: 195.245.230.81, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=eGN+5ZBF;
+ spf=pass (domain: fujitsu.com, ip: 85.158.142.112, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
 	s=170520fj; t=1684069608; i=@fujitsu.com;
-	bh=I7HAhmOpcoT5A+FhuYkYPVRwsaxAxwi2ZUo55GIZpHg=;
+	bh=4hMfz1lFPLmpshAWBqCQULYXPvsYLfw5R8iBBzBRWAs=;
 	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References;
-	b=lrc+WkUCCHTeUmLEeTZ58QuLwAuWpoLlrwqwMjXePT9uVaqHfcbdaVrlUQofq2FyT
-	 8czeo8NytOCbGB2dA46VpporJjEqM9auJJarjzlFqmqkoGJ5ODoRKMCmgEakCRGpn1
-	 xHc4emLvSDPH5IfFuPHARgcp/DLz6rzKj0426bp/CiUFYOGC3EEOiKVwk70UgdrVs7
-	 Vqe/1TqjbH1CuoUpJ9uuw7NpyNcxtgpyw4wqgoE6EGe8O/Dl8gPPAmXsP8ABLrmSTy
-	 th0GRKK8GT/K1yfqqF2vPvVhm875wRulKtBM++pdyH3eiGtO22tEo3mrDVDNwRI3rm
-	 AyBIWmMZY0geg==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFnrPLMWRWlGSWpSXmKPExsViZ8ORpPv8TkK
-  KwZkTqhYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa0bT77eMBbuEKk6/fcncwLhXoIuRk0NIYCOj
-  xNHNvl2MXED2NCaJF186mUESbAISEtP3nmQHsUUEdCU+fpjLCGIzC6hIzJh8hAnEFhbwlDhxd
-  RJYnEVAVaLv6zqWLkYODl4BJ4k3U1VBwhICChJTHr4HG8kp4Cyx8cN7Roi9ThJLbqxhh6hRk7
-  h6bhPzBEaeBYwMqxhNi1OLylKLdE30kooy0zNKchMzc/QSq3QT9VJLdctTi0t0DfUSy4v1Uou
-  L9Yorc5NzUvTyUks2MQLDIaWYIXIH4/2df/UOMUpyMCmJ8l4riUsR4kvKT6nMSCzOiC8qzUkt
-  PsQow8GhJMGrczMhRUiwKDU9tSItMwcYmjBpCQ4eJRHeuKtAad7igsTc4sx0iNQpRkUpcd4DI
-  H0CIImM0jy4Nlg8XGKUlRLmZWRgYBDiKUgtys0sQZV/xSjOwagkzMtzA2gKT2ZeCdz0V0CLmY
-  AW39oTD7K4JBEhJdXAtO9C9bvtVZaTAjb9X8QQc3de+uxFDx2+CBjFnbve1rFTN96KQzj6QPb
-  ewxdFvySyrN3ksFvlSIWpxLXwcxfYbJX+KIvvubhy2qfg1K37a/1dLjIqh7wp+7fVvyJq44ct
-  Hu6y1hPSkz4+fnrR1eltdtq3nMUTGr/+mbN7htBxr7n6N3WFGF/tXrVXn6nKwLXHXbPscGqRq
-  +ND/xdNG5j5UjrnvX9/4dhPnZZZgTN4FKqvF94922+fGXX584k9EQ/2zmpapGabWlcTxX7le+
-  muCdqc3pIBWVe2Ve174P56xUmO1rm/+O1vXXCPbtVTuPXl9ueUsgMrNwd16wREGdr2XHvnqhN
-  oOkGSg9U94/KERUosxRmJhlrMRcWJADvJSLoCAwAA
+	b=eGN+5ZBFK4Fk7wUkl25IpYuefVUuVjaL5CH9Ac3TdFT+++1cca2oFcMVhEwIopEEt
+	 OValxxpHwaiSeZUnyXl6qPyDacRYXSN/9t1Q0TI3SkzKAF7s8N0CKh7jIx890sAebK
+	 yGmI7TqKr7cqaINJqP0L4N/QLUsHjiCeq1HeZf5tJsCuinepnLdhEb+RwmIrGXX/Du
+	 +crsZP9N+YCWjon7johZszELELFE5jIewKAuEbITxYG9lz99GUqh6YUEKzjqAGyW1C
+	 tlfWN/JfkpY+7c9mEMsL6v9sl8MQj1211zueTU1iFvz5TZxoP5d3C7wTdnIAr3j6bL
+	 rUVZOI6AFd60g==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFvrELMWRWlGSWpSXmKPExsViZ8ORpPv0TkK
+  Kwec5xhYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa0bX3LKCpVwVW96sYWtgPMDZxcjFISSwkVHi
+  y6TNrBDONCaJK30/WboYOTnYBCQkpu89yQ5iiwjoSnz8MJcRxGYWUJGYMfkIE4gtLBAg8bd7L
+  VicRUBV4sXcuWwgNq+Ak8TWFevBbAkBBYkpD98zg9icAs4SGz+8B6sXAqpZcmMNO0SNmsTVc5
+  uYJzDyLGBkWMVoXpxaVJZapGtooJdUlJmeUZKbmJmjl1ilm6iXWqqbl19UkqFrqJdYXqyXWly
+  sV1yZm5yTopeXWrKJERgUKcUJtjsY1+z6q3eIUZKDSUmU91pJXIoQX1J+SmVGYnFGfFFpTmrx
+  IUYZDg4lCV6dmwkpQoJFqempFWmZOcAAhUlLcPAoifDGXQVK8xYXJOYWZ6ZDpE4xKkqJ8x4A6
+  RMASWSU5sG1waLiEqOslDAvIwMDgxBPQWpRbmYJqvwrRnEORiVhXp4bQFN4MvNK4Ka/AlrMBL
+  T41p54kMUliQgpqQamtPxt1zJ8pdbpTJi1Rcrz4dMFTKsv39OxEJq0SUWiwVch8PeTRqHb9Sq
+  3nu5JKZreelh92jTeYMa/yo2B73w6d71bwxIx76vnK4epkTvS5nC8fnthvcPEzvlF6y19bne5
+  CJ4L6v0u8lv0SF2txa2fjh0bPPsbgs1u/NlcrXbz+Mfn+dFxSmdUK39/Y337492s83Erg+/f5
+  77WtVj9uMD3fS3BqxbblXbn9C+YZBdmyb/r7sa+VyqP+J0WNhb0/o2ZXq6SGfX3Xt7t0xUMjM
+  6R+T+f3+FNPBvj8mqf2npbvlCfMokl4XIL1GP2fzL/ui5B5Lfj12+3Dh43OnVh5dWu1/8/FZu
+  KRvP/fh/VKbi1WYmlOCPRUIu5qDgRALt0/kcFAwAA
 X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-2.tower-585.messagelabs.com!1684069607!382686!1
+X-Msg-Ref: server-3.tower-728.messagelabs.com!1684069605!367829!1
 X-Originating-IP: [62.60.8.98]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.105.3; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 4721 invoked from network); 14 May 2023 13:06:47 -0000
+Received: (qmail 7479 invoked from network); 14 May 2023 13:06:45 -0000
 Received: from unknown (HELO n03ukasimr03.n03.fujitsu.local) (62.60.8.98)
-  by server-2.tower-585.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 14 May 2023 13:06:47 -0000
+  by server-3.tower-728.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 14 May 2023 13:06:45 -0000
 Received: from n03ukasimr03.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr03.n03.fujitsu.local (Postfix) with ESMTP id 437C41AE;
-	Sun, 14 May 2023 14:06:47 +0100 (BST)
+	by n03ukasimr03.n03.fujitsu.local (Postfix) with ESMTP id 4B60C1AE;
+	Sun, 14 May 2023 14:06:45 +0100 (BST)
 Received: from localhost.localdomain (unknown [10.167.225.33])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by n03ukasimr03.n03.fujitsu.local (Postfix) with ESMTPS id 6A75F1AC;
-	Sun, 14 May 2023 14:06:46 +0100 (BST)
+	by n03ukasimr03.n03.fujitsu.local (Postfix) with ESMTPS id 728631AC;
+	Sun, 14 May 2023 14:06:44 +0100 (BST)
 From: wangmy@fujitsu.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-python] [PATCH] python3-redis: upgrade 4.5.4 -> 4.5.5
-Date: Sun, 14 May 2023 21:06:23 +0800
-Message-Id: <1684069583-12337-5-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH] python3-pytest-xdist: upgrade 3.2.1 -> 3.3.0
+Date: Sun, 14 May 2023 21:06:22 +0800
+Message-Id: <1684069583-12337-4-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 In-Reply-To: <1684069583-12337-1-git-send-email-wangmy@fujitsu.com>
 References: <1684069583-12337-1-git-send-email-wangmy@fujitsu.com>
@@ -67,64 +67,34 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sun, 14 May 2023 13:06:55 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102580
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102579
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
 Changelog:
-===========
-New Features
---------------
-Add support for CLIENT NO-TOUCH (#2745)
-Add support for CLUSTER MYSHARDID (#2704)
-Add "address_remap" feature to RedisCluster (#2726)
-Add WITHSCORES argument to ZREVRANK command (#2725)
-Improve error output for master discovery (#2720)
-
-Bug Fixes
-----------
-Fix XADD: allow non negative maxlen (#2739)
-Fix create single connection client from url (#2752)
-Optionally disable disconnects in read_response (#2695)
-Fix SLOWLOG GET return value (#2732)
-Fix potential race condition during disconnection (#2719)
-Return response in case of KeyError (#2628)
-Fix incorrect usage of once flag in async Sentinel (#2718)
-Fix memory leak caused by hiredis in asyncio case (#2694)
-Really do not use asyncio's timeout lib before 3.11.2 (#2699)
-
- Maintenance
------------
-Clean PytestUnraisableExceptionWarning from asycio client (#2731)
-Add RedisCluster.remap_host_port, Update tests for CWE 404 (#2706)
-Updated AWS Elasticache IAM connection example (#2702)
-Update CONTRIBUTING guidelines (#2736)
-Fix ClusterCommandProtocol type (#2729)
-Fix TOPK list example. (#2724)
-Improving vector similarity search example (#2661)
-Update example of Redisearch creating index (#2703)
+ #555: Improved progress output when collecting nodes to be less verbose.
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../python/{python3-redis_4.5.4.bb => python3-redis_4.5.5.bb}   | 2 +-
+ ...hon3-pytest-xdist_3.2.1.bb => python3-pytest-xdist_3.3.0.bb} | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-redis_4.5.4.bb => python3-redis_4.5.5.bb} (82%)
+ rename meta-python/recipes-devtools/python/{python3-pytest-xdist_3.2.1.bb => python3-pytest-xdist_3.3.0.bb} (84%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-redis_4.5.4.bb b/meta-python/recipes-devtools/python/python3-redis_4.5.5.bb
-similarity index 82%
-rename from meta-python/recipes-devtools/python/python3-redis_4.5.4.bb
-rename to meta-python/recipes-devtools/python/python3-redis_4.5.5.bb
-index 1a439cdc3d..40210b5e25 100644
---- a/meta-python/recipes-devtools/python/python3-redis_4.5.4.bb
-+++ b/meta-python/recipes-devtools/python/python3-redis_4.5.5.bb
-@@ -4,7 +4,7 @@ HOMEPAGE = "http://github.com/andymccurdy/redis-py"
+diff --git a/meta-python/recipes-devtools/python/python3-pytest-xdist_3.2.1.bb b/meta-python/recipes-devtools/python/python3-pytest-xdist_3.3.0.bb
+similarity index 84%
+rename from meta-python/recipes-devtools/python/python3-pytest-xdist_3.2.1.bb
+rename to meta-python/recipes-devtools/python/python3-pytest-xdist_3.3.0.bb
+index 02e5400b7b..aa3606680b 100644
+--- a/meta-python/recipes-devtools/python/python3-pytest-xdist_3.2.1.bb
++++ b/meta-python/recipes-devtools/python/python3-pytest-xdist_3.3.0.bb
+@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/pytest-dev/pytest-xdist"
  LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=1db1f331d351900707368237cc4880cf"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=772fcdaca14b378878d05c7d857e6c3e"
  
--SRC_URI[sha256sum] = "73ec35da4da267d6847e47f68730fdd5f62e2ca69e3ef5885c6a78a9374c3893"
-+SRC_URI[sha256sum] = "dc87a0bdef6c8bfe1ef1e1c40be7034390c2ae02d92dcd0c7ca1729443899880"
+-SRC_URI[sha256sum] = "1849bd98d8b242b948e472db7478e090bf3361912a8fed87992ed94085f54727"
++SRC_URI[sha256sum] = "d42c9efb388da35480878ef4b2993704c6cea800c8bafbe85a8cdc461baf0748"
  
- inherit pypi setuptools3
+ inherit pypi python_setuptools_build_meta
  
 -- 
 2.34.1
