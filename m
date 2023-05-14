@@ -1,141 +1,97 @@
-Return-Path: <akuster808@gmail.com>
+Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 043BFC77B7D
-	for <webhook@archiver.kernel.org>; Sun, 14 May 2023 12:50:46 +0000 (UTC)
-Received: from mail-yb1-f176.google.com (mail-yb1-f176.google.com [209.85.219.176])
- by mx.groups.io with SMTP id smtpd.web10.66332.1684068640294415115
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DDB55C77B7D
+	for <webhook@archiver.kernel.org>; Sun, 14 May 2023 13:04:25 +0000 (UTC)
+Received: from mail1.bemta34.messagelabs.com (mail1.bemta34.messagelabs.com [195.245.231.3])
+ by mx.groups.io with SMTP id smtpd.web11.66028.1684069457087854304
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 14 May 2023 05:50:40 -0700
+ Sun, 14 May 2023 06:04:17 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=ZzaLhrwv;
- spf=pass (domain: gmail.com, ip: 209.85.219.176, mailfrom: akuster808@gmail.com)
-Received: by mail-yb1-f176.google.com with SMTP id 3f1490d57ef6-ba6f8e0b39cso4009562276.0
-        for <openembedded-devel@lists.openembedded.org>; Sun, 14 May 2023 05:50:40 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1684068639; x=1686660639;
-        h=content-transfer-encoding:subject:from:to:content-language
-         :user-agent:mime-version:date:message-id:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=uEcSThOvRCGMdDpQXrCVM9bWlICOt98huuUqLS2k5xM=;
-        b=ZzaLhrwvDV9gi08BVlhwgbl30l0H8a95lzXqkJkb7Bw56cBWsnwdDjq5Hqwv7WLOkf
-         KmNR63Bm3Te08r1kn5AbYakpJWHyTFyRixf8c/T2cE2t93HVi3tnSMaJ3MXY6O3wa43K
-         bvgFnC+umuFXpSuY9HCOdimYWGKzG+3489o//WoB/fC42hs9IFyTCN9KRLD8vPUXM8cf
-         H4A1It/umtCUmeyIotJ+DKe2A8mNLQhSXuYFWdhAlt7QJ+8hZ/o+76MGJb5tuQcYesST
-         NVhmYs1JrHNAk6MTRDczMrj1+tJ3wRI/7eTyB0ynGVrENOUBtMYYgBht2hQ2c1isZ0GA
-         qvPQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1684068639; x=1686660639;
-        h=content-transfer-encoding:subject:from:to:content-language
-         :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=uEcSThOvRCGMdDpQXrCVM9bWlICOt98huuUqLS2k5xM=;
-        b=jtDFm3u6q4gggwT7vC6bhTNfn9c/9rHpOpMHTc7QlDhfs6f6QS6NmHHcgvrbRAcJFi
-         eF/YE4f4/76FnIAez0I3m6CjBkR5+qAH+QuvrWdmzbwVTui8WHaqjznDc5FNtiFHGabg
-         SrO7BkRA/ryTEpBJppfX3iLdwy0RWxZ9VOzXI1mFSSaC8Mvp7mc+9Wevaih2TOlqE8GI
-         EFnFh2wIlsvOt3pJNCjPxPagt1SbK3Oqnyc8io6rz7AnRlAueZrYE3Oa16NKD+UKfL+P
-         kHsWQsr1/NQCKI8iR599aSgju6AFcH/VY6DKYb7Vwn1ozlyAbN4LdwmijdrqG/rzgUeA
-         0yLQ==
-X-Gm-Message-State: AC+VfDzhXdw4mIxNnQd85kpVsFUhLYAK984kLlvMVnfZHjTb3Whufnb0
-	mizCFvG0vzeiWV/D7RtYcgs=
-X-Google-Smtp-Source: ACHHUZ6xG1I1c5jvoXnh9Zn0i+e0DCvs/SBe7RMDBMvi148s+C2wOAt4SRJd7rWYF24LrmC5ucl2FA==
-X-Received: by 2002:a25:3202:0:b0:ba6:ffa6:4b3e with SMTP id y2-20020a253202000000b00ba6ffa64b3emr6926548yby.2.1684068639280;
-        Sun, 14 May 2023 05:50:39 -0700 (PDT)
-Received: from ?IPV6:2600:1700:9190:ba10:3335:7534:9f49:975c? ([2600:1700:9190:ba10:3335:7534:9f49:975c])
-        by smtp.gmail.com with ESMTPSA id b12-20020a25b84c000000b00b8f6ec5a955sm6260424ybm.49.2023.05.14.05.50.38
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Sun, 14 May 2023 05:50:38 -0700 (PDT)
-Message-ID: <00cd0caf-b0ec-e755-3b17-8481ef2b8d17@gmail.com>
-Date: Sun, 14 May 2023 08:50:38 -0400
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.10.0
-Content-Language: en-US
-To: Khem Raj <raj.khem@gmail.com>,
- OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-From: akuster808 <akuster808@gmail.com>
-Subject: kirkstone merge request: May 14th
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=IOMUUJSm;
+ spf=pass (domain: fujitsu.com, ip: 195.245.231.3, mailfrom: wangmy@fujitsu.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
+	s=170520fj; t=1684069455; i=@fujitsu.com;
+	bh=HmTzYYSJgW2e6k9DWciQcBiWzu0JvHSojaddcHmwb9E=;
+	h=From:To:Cc:Subject:Date:Message-Id;
+	b=IOMUUJSmMF3F3mTGFjPVe0h1WkqNsccNwjgml8hMTt6tQXVINQZCyX1RETil8ErN1
+	 Bwj+gzTqtHO+G2g9KWJQUFAxa+9a9TVuSuE4ixPX9gAOAYVG7t01t0JPqnYQM/Zk1f
+	 orvjiMkjB5j1hv02dYuCIJfpXY5C3Ucr0azHf73sTHjk1Lut1BlS8Iw2RlrqgKjvwO
+	 gpGxQQ72wXg7KtlyJ5oEDqUdi9F6xMD57VSz3aNbMbGEqldcyTjgts0iZH+urtj0Qn
+	 dYbZRVg7/aOHSdoK3IxVnaIL58I68UftjZCtp5kfm+nd1jgbmFpWzpeydj1vjTIef7
+	 V57VIxIgLRujg==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrJLMWRWlGSWpSXmKPExsViZ8ORpOt3JyH
+  FYEqzksXFw0uZHRg9zm1cwRjAGMWamZeUX5HAmnHy6z2mghscFX9O3GJqYPzP3sXIxSEksJFR
+  YuuvFmYIZyqTxM72I0AOJwebgITE9L0n2UFsEQFdiY8f5jKC2MwCKhIzJh9hArGFBfwl5q18C
+  WazCKhKXF79BayeV8BJ4uKah6wgtoSAgsSUh++ZIWw1iavnNjFPYORawMiwitG0OLWoLLVI10
+  gvqSgzPaMkNzEzRy+xSjdRL7VUtzy1uAQok1herJdaXKxXXJmbnJOil5dasokR6OOUYiWGHYw
+  Hdv7VO8QoycGkJMp7rSQuRYgvKT+lMiOxOCO+qDQntfgQowwHh5IEr87NhBQhwaLU9NSKtMwc
+  YLjBpCU4eJREeOOuAqV5iwsSc4sz0yFSpxgVpcR5D4D0CYAkMkrz4NpgIX6JUVZKmJeRgYFBi
+  KcgtSg3swRV/hWjOAejkjAvzw2gKTyZeSVw018BLWYCWnxrTzzI4pJEhJRUA1NSklxsuK2yTH
+  /Nx45iKVXrd5+mWejuUi7z9lw8Y6nq39Rdhg0sgsc1hQKsVj+7/+7W9QnGPhPZY0q6Ak3bZ0v
+  nHDyeJXa0Yslb43s3nC7vffFLRtT3wxf3pefc+vNb/89PjxV9pxvUGWnavj/j4pklupP+cDyJ
+  vmnImqissXT60cNzBEs/H0xOUIg4/jxadXl7//NcfbmS17JXfyS8fnzM4ZBq+OEungvpb/den
+  Pjq9SmnCxU7BBOrpLa6zRSVaTi+VYJ9xpme2B7dY3NWdq775nkrWejz5HMvdGO3OhcK1OzP6X
+  i1yUL27nuHpkmTL261it6o1zr/3nJb/0/xyX+/7uV/7/Fx1TTNklRGPXklluKMREMt5qLiRAA
+  NOV6H7AIAAA==
+X-Env-Sender: wangmy@fujitsu.com
+X-Msg-Ref: server-14.tower-565.messagelabs.com!1684069454!255697!1
+X-Originating-IP: [62.60.8.98]
+X-SYMC-ESS-Client-Auth: outbound-route-from=pass
+X-StarScan-Received: 
+X-StarScan-Version: 9.105.3; banners=-,-,-
+X-VirusChecked: Checked
+Received: (qmail 11879 invoked from network); 14 May 2023 13:04:14 -0000
+Received: from unknown (HELO n03ukasimr03.n03.fujitsu.local) (62.60.8.98)
+  by server-14.tower-565.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 14 May 2023 13:04:14 -0000
+Received: from n03ukasimr03.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr03.n03.fujitsu.local (Postfix) with ESMTP id 477BD1AE;
+	Sun, 14 May 2023 14:04:14 +0100 (BST)
+Received: from localhost.localdomain (unknown [10.167.225.33])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by n03ukasimr03.n03.fujitsu.local (Postfix) with ESMTPS id 6B4D97B;
+	Sun, 14 May 2023 14:04:13 +0100 (BST)
+From: wangmy@fujitsu.com
+To: openembedded-devel@lists.openembedded.org
+Cc: Wang Mingyu <wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH] ctags: upgrade 6.0.20230430.0 -> 6.0.20230507.0
+Date: Sun, 14 May 2023 21:03:58 +0800
+Message-Id: <1684069442-12244-1-git-send-email-wangmy@fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
+X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 14 May 2023 12:50:46 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102565
+ <openembedded-devel@lists.openembedded.org>; Sun, 14 May 2023 13:04:25 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102566
 
-The following changes since commit df452d9d98659b49888fa8a5428a0a8bd3e3aaec:
+From: Wang Mingyu <wangmy@fujitsu.com>
 
-   redis: upgrade 7.0.10 -> 7.0.11 (2023-04-28 07:25:03 -0400)
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+---
+ .../ctags/{ctags_6.0.20230430.0.bb => ctags_6.0.20230507.0.bb}  | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-devtools/ctags/{ctags_6.0.20230430.0.bb => ctags_6.0.20230507.0.bb} (95%)
 
-are available in the Git repository at:
-
-   https://git.openembedded.org/meta-openembedded kirkstone-next
-
-for you to fetch changes up to 9e539aaed608a03b1128a7361426703d8f9ba705:
-
-   capnproto: upgrade to 0.9.2 (2023-05-09 06:51:22 -0400)
-
-----------------------------------------------------------------
-Arsalan H. Awan (1):
-       meta-networking/licenses/netperf: remove unused license
-
-Bhargav Das (2):
-       tslib: Add native & nativestdk package support
-       pointercal: Add native & nativestdk package support
-
-Changqing Li (1):
-       redis: fix do_patch fuzz warning
-
-Chee Yang Lee (2):
-       tinyproxy: fix CVE-2022-40468
-       capnproto: upgrade to 0.9.2
-
-Gianluigi Spagnuolo (1):
-       libbpf: add native and nativesdk BBCLASSEXTEND
-
-Jasper Orschulko (1):
-       python3-gcovr: Add missing runtime dependency
-
-Narpat Mali (1):
-       python3-werkzeug: fix for CVE-2023-25577
-
-Valeria Petrov (1):
-       apache2: upgrade 2.4.56 -> 2.4.57
-
-Xiangyu Chen (1):
-       pahole: fix native package build error
-
-  meta-networking/licenses/netperf                                | 43 
-------
-  .../recipes-support/tinyproxy/tinyproxy/CVE-2022-40468.patch    | 33 ++++
-  meta-networking/recipes-support/tinyproxy/tinyproxy_1.11.0.bb   | 1 +
-  meta-oe/recipes-bsp/pointercal/pointercal_0.0.bb                | 2 +
-  .../capnproto/{capnproto_0.9.1.bb => capnproto_0.9.2.bb} |   2 +-
-  meta-oe/recipes-devtools/pahole/pahole_1.22.bb                  | 1 +
-  .../redis/redis-7/{GNU_SOURCE.patch => GNU_SOURCE-7.patch} |   0
-  meta-oe/recipes-extended/redis/redis_7.0.11.bb                  | 4 +-
-  meta-oe/recipes-graphics/tslib/tslib_1.22.bb                    | 2 +
-  meta-oe/recipes-kernel/libbpf/libbpf_0.7.0.bb                   | 2 +
-  meta-python/recipes-devtools/python/python3-gcovr_5.1.bb        | 2 +-
-  .../python/python3-werkzeug/CVE-2023-25577.patch                | 231 
-++++++++++++++++++++++++++++
-  meta-python/recipes-devtools/python/python3-werkzeug_2.1.1.bb   | 2 +
-  ...1-modules-mappers-config9.m4-Add-server-directory-to-i.patch | 31 ++++
-  .../apache2/{apache2_2.4.56.bb => apache2_2.4.57.bb} |   3 +-
-  15 files changed, 311 insertions(+), 48 deletions(-)
-  delete mode 100644 meta-networking/licenses/netperf
-  create mode 100644 
-meta-networking/recipes-support/tinyproxy/tinyproxy/CVE-2022-40468.patch
-  rename meta-oe/recipes-devtools/capnproto/{capnproto_0.9.1.bb => 
-capnproto_0.9.2.bb} (93%)
-  rename meta-oe/recipes-extended/redis/redis-7/{GNU_SOURCE.patch => 
-GNU_SOURCE-7.patch} (100%)
-  create mode 100644 
-meta-python/recipes-devtools/python/python3-werkzeug/CVE-2023-25577.patch
-  create mode 100644 
-meta-webserver/recipes-httpd/apache2/apache2/0011-modules-mappers-config9.m4-Add-server-directory-to-i.patch
-  rename meta-webserver/recipes-httpd/apache2/{apache2_2.4.56.bb => 
-apache2_2.4.57.bb} (98%)
+diff --git a/meta-oe/recipes-devtools/ctags/ctags_6.0.20230430.0.bb b/meta-oe/recipes-devtools/ctags/ctags_6.0.20230507.0.bb
+similarity index 95%
+rename from meta-oe/recipes-devtools/ctags/ctags_6.0.20230430.0.bb
+rename to meta-oe/recipes-devtools/ctags/ctags_6.0.20230507.0.bb
+index 9ed34de694..b8df3b02b6 100644
+--- a/meta-oe/recipes-devtools/ctags/ctags_6.0.20230430.0.bb
++++ b/meta-oe/recipes-devtools/ctags/ctags_6.0.20230507.0.bb
+@@ -14,7 +14,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3"
+ 
+ inherit autotools-brokensep pkgconfig manpages
+ 
+-SRCREV = "39a017244892394f65a51cdb2ec37a3e29f43a0a"
++SRCREV = "6b06565cd3b9c351835aea80a07efd55a9b2d77a"
+ SRC_URI = "git://github.com/universal-ctags/ctags;branch=master;protocol=https"
+ 
+ S = "${WORKDIR}/git"
+-- 
+2.34.1
 
 
