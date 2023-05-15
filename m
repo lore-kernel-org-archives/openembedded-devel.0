@@ -1,130 +1,88 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <Martin.Jansa@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2D4AEC7EE22
-	for <webhook@archiver.kernel.org>; Mon, 15 May 2023 05:15:20 +0000 (UTC)
-Received: from mail-oa1-f44.google.com (mail-oa1-f44.google.com [209.85.160.44])
- by mx.groups.io with SMTP id smtpd.web10.81829.1684127711836707698
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D5887C77B75
+	for <webhook@archiver.kernel.org>; Mon, 15 May 2023 07:04:40 +0000 (UTC)
+Received: from mail-wm1-f51.google.com (mail-wm1-f51.google.com [209.85.128.51])
+ by mx.groups.io with SMTP id smtpd.web11.82537.1684134276476254542
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 14 May 2023 22:15:11 -0700
+ Mon, 15 May 2023 00:04:36 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20221208 header.b=bEvMhPE2;
- spf=pass (domain: gmail.com, ip: 209.85.160.44, mailfrom: raj.khem@gmail.com)
-Received: by mail-oa1-f44.google.com with SMTP id 586e51a60fabf-192d5ab4962so8133591fac.3
-        for <openembedded-devel@lists.openembedded.org>; Sun, 14 May 2023 22:15:11 -0700 (PDT)
+ dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=U7cjjMdl;
+ spf=pass (domain: gmail.com, ip: 209.85.128.51, mailfrom: martin.jansa@gmail.com)
+Received: by mail-wm1-f51.google.com with SMTP id 5b1f17b1804b1-3f42bcf5df1so67432055e9.3
+        for <openembedded-devel@lists.openembedded.org>; Mon, 15 May 2023 00:04:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1684127711; x=1686719711;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=VCNRzRSSSmDRtsZ0loL2x3ZJ2GLnfgtBYAFNHVqHelA=;
-        b=bEvMhPE2EHuRKKScU7KnvbKnOsnrQ+eqqk6XVyFaR8VccdrwGF7cYlgb+a3o0L0ze3
-         B3HBberlW+McfeHWG8NrNHWFwcQs23nPlwKetw7yYtWWyb0q/xUFstmva8EHuFsxeFbn
-         nOIHhqQdjZi54b9ITwBFkcqC+e6WZp3yvFORv+F9+8ytYjTiPB4Q+1REF42P86Uvmd85
-         DwRkvSLiWTgOtuG0QZF2HOc62XFxTsgPNDEizx2DJVqkmvANbOXh5wQvdK59y+rxkhZm
-         /A5EmY6kC/Q44S73oYZRxQiy+l7GRu9DzPqfT3+z4NUAi2nfgHG49rqirGWFioMJpgT+
-         omgQ==
+        d=gmail.com; s=20221208; t=1684134275; x=1686726275;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=mO8G9KfgohMZnUFXv2mXodQwGMjSMwlYvZf/4gnDvpI=;
+        b=U7cjjMdlrqz8/qMyKqMcpo42RLoXrnvM7f91PVOd9dl3CqD3hLFE4biVqxuRwfPTB/
+         mBBhIXSlg/afKeN8A7kMH3VBr/8r9SN2SMBLU8jAMHL5DcuE9FsFWiFLnws//ph4+mI1
+         2NlOa6lNrPWv5GmjdaNi2mfpb8FpAFDJKESpiI/0l6I2cP6RXMQnPA2rFtkNOEkJLLke
+         X3SW+Gnjej4967+xYpii/p77RmeoSyINNZt9YliN4mgFy+I/YJyouCBabwRxD/rOSIKT
+         mYRKI/nQriuhKD1g3hDb9E32cVnuFscG2eIEr4jPDPFmv31KHJdUoh8Raq8nzbk5DqHQ
+         duAQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1684127711; x=1686719711;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=VCNRzRSSSmDRtsZ0loL2x3ZJ2GLnfgtBYAFNHVqHelA=;
-        b=DdImiOIDJZmnTijcuFO902iFOSlT46GnD9BcVUr7aXbZCjpH99fbBDRwiePkE+iFY5
-         VsVgW/oCo+YactDTjpoIxZO4XENVRZvmW1ddG5geBYAqTCeDuwObxE5Wens0mrWNKBin
-         zGB1rI1Dripk+pmufNW2GrCnL2V+ll1IXhIlTBRODaoy5lRHMMkwqJ+MofLw6ycE+/3p
-         qEiK+bfEre1jiRs2DcnoIWNKsamT8gP8H5mNzDnj/oafJOzfHU/4y3pRgwJPkD30IvFM
-         fENQMPC/1u1O/cwX22Crv1UxjLNE6uo2ooyeBZR1WooGAOta4XZN/rtFIE4y0GNROw+b
-         ACyw==
-X-Gm-Message-State: AC+VfDzPP520FfP9G81BiqcvfBLEdyyQedwOl1ubSgtuTSUcOXMd3x39
-	q00hDiPI/kzHbOmMmNYvHKSYLvfQw1995Zs6Ye5GgxFp3bc=
-X-Google-Smtp-Source: ACHHUZ6lqjQxhzmuPhMJaD//Erg7+qQOgGDAgcR4xQWpI+zAmlvGOIqGBXDRhn30n7CHpx7Abp23xZpQ0wGO6Iw0Sj8=
-X-Received: by 2002:a05:6870:35c7:b0:184:4624:15f8 with SMTP id
- c7-20020a05687035c700b00184462415f8mr15508878oak.58.1684127711011; Sun, 14
- May 2023 22:15:11 -0700 (PDT)
+        d=1e100.net; s=20221208; t=1684134275; x=1686726275;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=mO8G9KfgohMZnUFXv2mXodQwGMjSMwlYvZf/4gnDvpI=;
+        b=GFUJZWWQTY3XoRaLl/0ADPLWMbdjcwmomk3SLKWVe7XVQQxxQHFlWhdVT+VNKjtnDM
+         WEMtwY0nDftkIUu8l9n/H53jQc30g9kBs2OnAMzYUKzGBMhO8hUMgg/T4YMEz+HKIb13
+         1hRil1xpvtnSbcfWOd/56x+jpw+czI/CAwmGd/zbKFLJVRze9qcZGUx3zJWos3bt/OYD
+         hZhVyOQHOKe2WLUn9KAA8AaH9tWofyR8ZGj9o/Afffc0jgyj7uNK7Uw4cSL53Jxas15M
+         QRw6i2WaGS3xJaYVJdDtTStqnJ7mCrwy/V3UdBxIXTT26sLimbvhhgaHORgxg1IvdLHa
+         CSeA==
+X-Gm-Message-State: AC+VfDwxxSmH7y0xp6RKWZ70jefO+UfF1dRRh9LRfq386RVhRn4wauIV
+	6DOm1UMFJHtYH7CO7GifX2fLZOKkPDY=
+X-Google-Smtp-Source: ACHHUZ7mHctsUAJvPAQWCInPWbbruXzqZKTq9iPUtDr3D9jGVjBNzSG5rGDV9d3PsopFPmwO1Fndrg==
+X-Received: by 2002:a7b:cd04:0:b0:3f1:9527:8e8a with SMTP id f4-20020a7bcd04000000b003f195278e8amr21081349wmj.21.1684134274498;
+        Mon, 15 May 2023 00:04:34 -0700 (PDT)
+Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
+        by smtp.gmail.com with ESMTPSA id n22-20020a7bcbd6000000b003f41bb52834sm26640533wmi.38.2023.05.15.00.04.34
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 15 May 2023 00:04:34 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Martin Jansa <Martin.Jansa@gmail.com>
+Subject: [meta-oe][PATCH] poppler: add dependency on glib-2.0-native
+Date: Mon, 15 May 2023 09:04:30 +0200
+Message-Id: <20230515070430.4135398-1-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.40.1
 MIME-Version: 1.0
-References: <1684069442-12244-1-git-send-email-wangmy@fujitsu.com>
- <1684069442-12244-4-git-send-email-wangmy@fujitsu.com> <CAMKF1sodK_ZGVmHGb0Xrs+-TKUAHK3ZtZcBb+q1zakqiVfFzAg@mail.gmail.com>
-In-Reply-To: <CAMKF1sodK_ZGVmHGb0Xrs+-TKUAHK3ZtZcBb+q1zakqiVfFzAg@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Sun, 14 May 2023 22:14:45 -0700
-Message-ID: <CAMKF1srVUA3gfuMYhLXG3WhsLZzifmchhubzNOjL8n9=GWJoeg@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH] fmt: upgrade 9.1.0 -> 10.0.0
-To: wangmy <wangmy@fujitsu.com>
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 15 May 2023 05:15:20 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102594
+ <openembedded-devel@lists.openembedded.org>; Mon, 15 May 2023 07:04:40 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102595
 
-and also mpd - https://errors.yoctoproject.org/Errors/Details/704170/
+* in some builds (probably without gobject-introspection-data enabled) it fails to find native glib-mkenums and fails with:
+  poppler/23.04.0-r0/recipe-sysroot-native/usr/bin/python3-native/python3: can't open file 'poppler/23.04.0-r0/poppler-23.04.0/glib/GLIB2_MKENUMS-NOTFOUND': [Errno 2] No such file or directory
 
-On Sun, May 14, 2023 at 10:13=E2=80=AFPM Khem Raj <raj.khem@gmail.com> wrot=
-e:
->
-> Please fix spdlog as well to work with fmt version 10.
->
-> see - https://errors.yoctoproject.org/Errors/Details/704169/
->
-> On Sun, May 14, 2023 at 6:04=E2=80=AFAM wangmy <wangmy@fujitsu.com> wrote=
-:
-> >
-> > From: Wang Mingyu <wangmy@fujitsu.com>
-> >
-> > License-Update:
-> >  Add " and {fmt} contributors" to Copyright
-> >
-> > Changelog:
-> >  https://github.com/fmtlib/fmt/blob/master/ChangeLog.rst
-> >
-> > Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
-> > ---
-> >  meta-oe/recipes-support/fmt/{fmt_9.1.0.bb =3D> fmt_10.0.0.bb} | 4 ++--
-> >  1 file changed, 2 insertions(+), 2 deletions(-)
-> >  rename meta-oe/recipes-support/fmt/{fmt_9.1.0.bb =3D> fmt_10.0.0.bb} (=
-77%)
-> >
-> > diff --git a/meta-oe/recipes-support/fmt/fmt_9.1.0.bb b/meta-oe/recipes=
--support/fmt/fmt_10.0.0.bb
-> > similarity index 77%
-> > rename from meta-oe/recipes-support/fmt/fmt_9.1.0.bb
-> > rename to meta-oe/recipes-support/fmt/fmt_10.0.0.bb
-> > index 34896153c2..a8e6e563da 100644
-> > --- a/meta-oe/recipes-support/fmt/fmt_9.1.0.bb
-> > +++ b/meta-oe/recipes-support/fmt/fmt_10.0.0.bb
-> > @@ -2,10 +2,10 @@ SUMMARY =3D "open-source formatting library for C++"
-> >  DESCRIPTION =3D "{fmt} is an open-source formatting library for C++. I=
-t can be used as a safe and fast alternative to (s)printf and iostreams."
-> >  HOMEPAGE =3D "https://fmt.dev"
-> >  LICENSE =3D "MIT"
-> > -LIC_FILES_CHKSUM =3D "file://LICENSE.rst;md5=3Daf88d758f75f3c5c48a9675=
-01f24384b"
-> > +LIC_FILES_CHKSUM =3D "file://LICENSE.rst;md5=3Db9257785fc4f3803a4b71b7=
-6c1412729"
-> >
-> >  SRC_URI =3D "git://github.com/fmtlib/fmt;branch=3Dmaster;protocol=3Dht=
-tps"
-> > -SRCREV =3D "a33701196adfad74917046096bf5a2aa0ab0bb50"
-> > +SRCREV =3D "a0b8a92e3d1532361c2f7feb63babc5c18d00ef2"
-> >
-> >  S =3D "${WORKDIR}/git"
-> >
-> > --
-> > 2.34.1
-> >
-> >
-> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> > Links: You receive all messages sent to this group.
-> > View/Reply Online (#102569): https://lists.openembedded.org/g/openembed=
-ded-devel/message/102569
-> > Mute This Topic: https://lists.openembedded.org/mt/98883938/1997914
-> > Group Owner: openembedded-devel+owner@lists.openembedded.org
-> > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub =
-[raj.khem@gmail.com]
-> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> >
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ meta-oe/recipes-support/poppler/poppler_23.04.0.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/meta-oe/recipes-support/poppler/poppler_23.04.0.bb b/meta-oe/recipes-support/poppler/poppler_23.04.0.bb
+index 19bdce4d86..099be58a42 100644
+--- a/meta-oe/recipes-support/poppler/poppler_23.04.0.bb
++++ b/meta-oe/recipes-support/poppler/poppler_23.04.0.bb
+@@ -10,7 +10,7 @@ SRC_URI = "http://poppler.freedesktop.org/${BP}.tar.xz \
+            "
+ SRC_URI[sha256sum] = "b6d893dc7dcd4138b9e9df59a13c59695e50e80dc5c2cacee0674670693951a1"
+ 
+-DEPENDS = "fontconfig zlib cairo lcms glib-2.0"
++DEPENDS = "fontconfig zlib cairo lcms glib-2.0 glib-2.0-native"
+ 
+ inherit cmake pkgconfig gobject-introspection
+ 
+-- 
+2.40.1
+
 
