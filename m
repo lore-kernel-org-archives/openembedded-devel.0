@@ -2,87 +2,164 @@ Return-Path: <Martin.Jansa@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D5887C77B75
-	for <webhook@archiver.kernel.org>; Mon, 15 May 2023 07:04:40 +0000 (UTC)
-Received: from mail-wm1-f51.google.com (mail-wm1-f51.google.com [209.85.128.51])
- by mx.groups.io with SMTP id smtpd.web11.82537.1684134276476254542
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3A04FC77B7D
+	for <webhook@archiver.kernel.org>; Mon, 15 May 2023 08:14:01 +0000 (UTC)
+Received: from mail-wr1-f53.google.com (mail-wr1-f53.google.com [209.85.221.53])
+ by mx.groups.io with SMTP id smtpd.web11.83206.1684138436371971873
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 15 May 2023 00:04:36 -0700
+ Mon, 15 May 2023 01:13:56 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=U7cjjMdl;
- spf=pass (domain: gmail.com, ip: 209.85.128.51, mailfrom: martin.jansa@gmail.com)
-Received: by mail-wm1-f51.google.com with SMTP id 5b1f17b1804b1-3f42bcf5df1so67432055e9.3
-        for <openembedded-devel@lists.openembedded.org>; Mon, 15 May 2023 00:04:36 -0700 (PDT)
+ dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=pdpzOMA1;
+ spf=pass (domain: gmail.com, ip: 209.85.221.53, mailfrom: martin.jansa@gmail.com)
+Received: by mail-wr1-f53.google.com with SMTP id ffacd0b85a97d-307d20548adso2560368f8f.0
+        for <openembedded-devel@lists.openembedded.org>; Mon, 15 May 2023 01:13:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1684134275; x=1686726275;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=mO8G9KfgohMZnUFXv2mXodQwGMjSMwlYvZf/4gnDvpI=;
-        b=U7cjjMdlrqz8/qMyKqMcpo42RLoXrnvM7f91PVOd9dl3CqD3hLFE4biVqxuRwfPTB/
-         mBBhIXSlg/afKeN8A7kMH3VBr/8r9SN2SMBLU8jAMHL5DcuE9FsFWiFLnws//ph4+mI1
-         2NlOa6lNrPWv5GmjdaNi2mfpb8FpAFDJKESpiI/0l6I2cP6RXMQnPA2rFtkNOEkJLLke
-         X3SW+Gnjej4967+xYpii/p77RmeoSyINNZt9YliN4mgFy+I/YJyouCBabwRxD/rOSIKT
-         mYRKI/nQriuhKD1g3hDb9E32cVnuFscG2eIEr4jPDPFmv31KHJdUoh8Raq8nzbk5DqHQ
-         duAQ==
+        d=gmail.com; s=20221208; t=1684138435; x=1686730435;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=yd+2i2PFaRR2UDL0UfNpZZcCo7jyR4pQUX5EMpoUUZY=;
+        b=pdpzOMA1cmwWlQ+lxQuGXgCI7ot3Cy79BLwmJPrVbSw9X87bnTakyQRr/5Tym1a8nd
+         AkJ3xvTHYd31NIvuh6eYy5Skufyne4AHWK+rW68Tv4p1y5aM3DrXf0RG+ugUHnuSQezp
+         mWC97Zef1q4HFkpsBMC2HFToaYnu/hTH98MogElblUbb7oJcpow4BnVJMTR8GzmVVuTK
+         qNJwrVaemE3gO+eDs+OQX2zZzEqzpP8gmI5C385tCAMrq3tWQrd17+YrdCjQ8T8YKPKX
+         FfeL+3MzIi+19ueSMqKnZFGmJF6HDL5Sw/jB1NTrM6Y5RVcdkDEZbnXI16n71p0uJ2uj
+         pPog==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1684134275; x=1686726275;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+        d=1e100.net; s=20221208; t=1684138435; x=1686730435;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=mO8G9KfgohMZnUFXv2mXodQwGMjSMwlYvZf/4gnDvpI=;
-        b=GFUJZWWQTY3XoRaLl/0ADPLWMbdjcwmomk3SLKWVe7XVQQxxQHFlWhdVT+VNKjtnDM
-         WEMtwY0nDftkIUu8l9n/H53jQc30g9kBs2OnAMzYUKzGBMhO8hUMgg/T4YMEz+HKIb13
-         1hRil1xpvtnSbcfWOd/56x+jpw+czI/CAwmGd/zbKFLJVRze9qcZGUx3zJWos3bt/OYD
-         hZhVyOQHOKe2WLUn9KAA8AaH9tWofyR8ZGj9o/Afffc0jgyj7uNK7Uw4cSL53Jxas15M
-         QRw6i2WaGS3xJaYVJdDtTStqnJ7mCrwy/V3UdBxIXTT26sLimbvhhgaHORgxg1IvdLHa
-         CSeA==
-X-Gm-Message-State: AC+VfDwxxSmH7y0xp6RKWZ70jefO+UfF1dRRh9LRfq386RVhRn4wauIV
-	6DOm1UMFJHtYH7CO7GifX2fLZOKkPDY=
-X-Google-Smtp-Source: ACHHUZ7mHctsUAJvPAQWCInPWbbruXzqZKTq9iPUtDr3D9jGVjBNzSG5rGDV9d3PsopFPmwO1Fndrg==
-X-Received: by 2002:a7b:cd04:0:b0:3f1:9527:8e8a with SMTP id f4-20020a7bcd04000000b003f195278e8amr21081349wmj.21.1684134274498;
-        Mon, 15 May 2023 00:04:34 -0700 (PDT)
-Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
-        by smtp.gmail.com with ESMTPSA id n22-20020a7bcbd6000000b003f41bb52834sm26640533wmi.38.2023.05.15.00.04.34
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 15 May 2023 00:04:34 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Martin Jansa <Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH] poppler: add dependency on glib-2.0-native
-Date: Mon, 15 May 2023 09:04:30 +0200
-Message-Id: <20230515070430.4135398-1-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.40.1
+        bh=yd+2i2PFaRR2UDL0UfNpZZcCo7jyR4pQUX5EMpoUUZY=;
+        b=FOxZrU8zByAfOnQwtt+MfjeYR9VsWO5OQd0fTy6dgMU5FYsmc0TilXQbjOdHHKE0mx
+         bae+1A74ECMJ568pVlwbpVKiItohhDfOhkp+yMh/YU2dPr55Ea/GiL+Dq1JPXGautVTc
+         qNShCdMZST+VtnwgvIYay8gRtwzW/xmBuJNBD7woBVwmYwBX9zoYxvmT1+kSrV7oLk1z
+         BmcNEDb5MkJcMhRJgTdgBWF9sMbWPK0BOT+SFPQQNKROYZqpMMjsRBeNUTPncM1jYA0V
+         zdLTWOTA0S/Ous3ylw0o1PHdb6MfY7xtlaSAlMZL9dnnpd90oc39Yw10g+8G94WANCJ/
+         QuKg==
+X-Gm-Message-State: AC+VfDwxBMY65d59l2t5P4FSzHtMhYkZH30nlj7EjORNDSG+pv5143PT
+	spjLvdnjP82is+j+mTFP2SBH9F8nKT7F3KhJMXA=
+X-Google-Smtp-Source: ACHHUZ7MxjWIhy0i69VI66oun2B6vcQ46IWDwQcR93h2gltWFu56uZlxGwN4LbE7dPDxcIlokBsY+1+6zuJJILHtqI8=
+X-Received: by 2002:adf:ecc4:0:b0:2f9:ee8c:a2fa with SMTP id
+ s4-20020adfecc4000000b002f9ee8ca2famr23225411wro.64.1684138434545; Mon, 15
+ May 2023 01:13:54 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20230509124612.37627-1-f_l_k@t-online.de>
+In-Reply-To: <20230509124612.37627-1-f_l_k@t-online.de>
+From: Martin Jansa <martin.jansa@gmail.com>
+Date: Mon, 15 May 2023 10:13:41 +0200
+Message-ID: <CA+chaQdJjtYgByUO9wNXEC-2hRC7EmsMF_2gwVGY0qRDkSveuQ@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH 1/2] paprefs: add recipe
+To: Markus Volk <f_l_k@t-online.de>
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: multipart/alternative; boundary="00000000000024cdc905fbb7092c"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 15 May 2023 07:04:40 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102595
+ <openembedded-devel@lists.openembedded.org>; Mon, 15 May 2023 08:14:01 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102596
 
-* in some builds (probably without gobject-introspection-data enabled) it fails to find native glib-mkenums and fails with:
-  poppler/23.04.0-r0/recipe-sysroot-native/usr/bin/python3-native/python3: can't open file 'poppler/23.04.0-r0/poppler-23.04.0/glib/GLIB2_MKENUMS-NOTFOUND': [Errno 2] No such file or directory
+--00000000000024cdc905fbb7092c
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- meta-oe/recipes-support/poppler/poppler_23.04.0.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+On Tue, May 9, 2023 at 2:46=E2=80=AFPM Markus Volk <f_l_k@t-online.de> wrot=
+e:
 
-diff --git a/meta-oe/recipes-support/poppler/poppler_23.04.0.bb b/meta-oe/recipes-support/poppler/poppler_23.04.0.bb
-index 19bdce4d86..099be58a42 100644
---- a/meta-oe/recipes-support/poppler/poppler_23.04.0.bb
-+++ b/meta-oe/recipes-support/poppler/poppler_23.04.0.bb
-@@ -10,7 +10,7 @@ SRC_URI = "http://poppler.freedesktop.org/${BP}.tar.xz \
-            "
- SRC_URI[sha256sum] = "b6d893dc7dcd4138b9e9df59a13c59695e50e80dc5c2cacee0674670693951a1"
- 
--DEPENDS = "fontconfig zlib cairo lcms glib-2.0"
-+DEPENDS = "fontconfig zlib cairo lcms glib-2.0 glib-2.0-native"
- 
- inherit cmake pkgconfig gobject-introspection
- 
--- 
-2.40.1
+> Signed-off-by: Markus Volk <f_l_k@t-online.de>
+> ---
+>  .../pulseaudio/paprefs_1.2.bb                  | 18 ++++++++++++++++++
+>  1 file changed, 18 insertions(+)
+>  create mode 100644 meta-oe/recipes-multimedia/pulseaudio/paprefs_1.2.bb
+>
+> diff --git a/meta-oe/recipes-multimedia/pulseaudio/paprefs_1.2.bb
+> b/meta-oe/recipes-multimedia/pulseaudio/paprefs_1.2.bb
+> new file mode 100644
+> index 0000000000..6d0cf7ed7f
+> --- /dev/null
+> +++ b/meta-oe/recipes-multimedia/pulseaudio/paprefs_1.2.bb
+> @@ -0,0 +1,18 @@
+> +DESCRIPTION =3D "PulseAudio Preferences (paprefs) is a simple GTK based
+> configuration dialog for the PulseAudio sound server."
+> +HOMEPAGE =3D "https://freedesktop.org/software/pulseaudio/paprefs/"
+> +LICENSE =3D "GPL-2.0-only"
+> +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D751419260aa954499f7abaabaa882=
+bbe"
+> +
+> +DEPENDS =3D "pulseaudio gtkmm3 gtk+3 libsigc++-3 glibmm"
+> +
+> +inherit meson pkgconfig features_check
+> +
+> +ANY_OF_DISTRO_FEATURES =3D "${GTK3DISTROFEATURES}"
+>
 
+This doesn't build with any gtk3 DISTRO_FEATURES, without x11 in
+DISTRO_FEATURES gtk3+ doesn't provide gdkx.h and paprefs build fails with:
+http://errors.yoctoproject.org/Errors/Details/704195/
+
+../paprefs-1.2/src/paprefs.cc:30:10: fatal error: gdk/gdkx.h: No such file
+or directory
+   30 | #include <gdk/gdkx.h>
+      |          ^~~~~~~~~~~~
+
+Please change it to REQUIRED_DISTRO_FEATURES =3D "x11" if you don't care
+about non-x11 usecase or fix otherwise if you do care.
+
+Regards,
+
+--00000000000024cdc905fbb7092c
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div dir=3D"ltr">On Tue, May 9, 2023 at 2:46=E2=80=AFPM Ma=
+rkus Volk &lt;<a href=3D"mailto:f_l_k@t-online.de">f_l_k@t-online.de</a>&gt=
+; wrote:<br></div><div class=3D"gmail_quote"><blockquote class=3D"gmail_quo=
+te" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204=
+);padding-left:1ex">Signed-off-by: Markus Volk &lt;<a href=3D"mailto:f_l_k@=
+t-online.de" target=3D"_blank">f_l_k@t-online.de</a>&gt;<br>
+---<br>
+=C2=A0.../pulseaudio/<a href=3D"http://paprefs_1.2.bb" rel=3D"noreferrer" t=
+arget=3D"_blank">paprefs_1.2.bb</a>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 | 18 ++++++++++++++++++<br>
+=C2=A01 file changed, 18 insertions(+)<br>
+=C2=A0create mode 100644 meta-oe/recipes-multimedia/pulseaudio/<a href=3D"h=
+ttp://paprefs_1.2.bb" rel=3D"noreferrer" target=3D"_blank">paprefs_1.2.bb</=
+a><br>
+<br>
+diff --git a/meta-oe/recipes-multimedia/pulseaudio/<a href=3D"http://papref=
+s_1.2.bb" rel=3D"noreferrer" target=3D"_blank">paprefs_1.2.bb</a> b/meta-oe=
+/recipes-multimedia/pulseaudio/<a href=3D"http://paprefs_1.2.bb" rel=3D"nor=
+eferrer" target=3D"_blank">paprefs_1.2.bb</a><br>
+new file mode 100644<br>
+index 0000000000..6d0cf7ed7f<br>
+--- /dev/null<br>
++++ b/meta-oe/recipes-multimedia/pulseaudio/<a href=3D"http://paprefs_1.2.b=
+b" rel=3D"noreferrer" target=3D"_blank">paprefs_1.2.bb</a><br>
+@@ -0,0 +1,18 @@<br>
++DESCRIPTION =3D &quot;PulseAudio Preferences (paprefs) is a simple GTK bas=
+ed configuration dialog for the PulseAudio sound server.&quot;<br>
++HOMEPAGE =3D &quot;<a href=3D"https://freedesktop.org/software/pulseaudio/=
+paprefs/" rel=3D"noreferrer" target=3D"_blank">https://freedesktop.org/soft=
+ware/pulseaudio/paprefs/</a>&quot;<br>
++LICENSE =3D &quot;GPL-2.0-only&quot;<br>
++LIC_FILES_CHKSUM =3D &quot;file://LICENSE;md5=3D751419260aa954499f7abaabaa=
+882bbe&quot;<br>
++<br>
++DEPENDS =3D &quot;pulseaudio gtkmm3 gtk+3 libsigc++-3 glibmm&quot;<br>
++<br>
++inherit meson pkgconfig features_check<br>
++<br>
++ANY_OF_DISTRO_FEATURES =3D &quot;${GTK3DISTROFEATURES}&quot;<br></blockquo=
+te><div><br></div><div>This doesn&#39;t build with any gtk3 DISTRO_FEATURES=
+, without x11 in DISTRO_FEATURES gtk3+ doesn&#39;t provide=C2=A0gdkx.h and =
+paprefs build fails with:</div><div><a href=3D"http://errors.yoctoproject.o=
+rg/Errors/Details/704195/">http://errors.yoctoproject.org/Errors/Details/70=
+4195/</a></div><div><br></div><div>../paprefs-1.2/src/paprefs.cc:30:10: fat=
+al error: gdk/gdkx.h: No such file or directory<br>=C2=A0 =C2=A030 | #inclu=
+de &lt;gdk/gdkx.h&gt;<br>=C2=A0 =C2=A0 =C2=A0 | =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+ =C2=A0^~~~~~~~~~~~<br></div><div><br></div><div>Please change it to REQUIR=
+ED_DISTRO_FEATURES =3D &quot;x11&quot; if you don&#39;t care about non-x11 =
+usecase or fix otherwise if you do care.</div><div><br></div><div>Regards,<=
+/div></div></div>
+
+--00000000000024cdc905fbb7092c--
 
