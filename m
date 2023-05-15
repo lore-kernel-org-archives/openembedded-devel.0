@@ -1,93 +1,66 @@
-Return-Path: <festevam@gmail.com>
+Return-Path: <marex@denx.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D2B03C77B7F
-	for <webhook@archiver.kernel.org>; Sun, 14 May 2023 23:32:48 +0000 (UTC)
-Received: from mail-ot1-f48.google.com (mail-ot1-f48.google.com [209.85.210.48])
- by mx.groups.io with SMTP id smtpd.web10.77370.1684107165238933547
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 15D2FC77B7F
+	for <webhook@archiver.kernel.org>; Mon, 15 May 2023 00:27:39 +0000 (UTC)
+Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
+ by mx.groups.io with SMTP id smtpd.web11.77911.1684110450118220137
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 14 May 2023 16:32:45 -0700
+ Sun, 14 May 2023 17:27:31 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=OOEhQeIh;
- spf=pass (domain: gmail.com, ip: 209.85.210.48, mailfrom: festevam@gmail.com)
-Received: by mail-ot1-f48.google.com with SMTP id 46e09a7af769-6aaf9180636so449263a34.1
-        for <openembedded-devel@lists.openembedded.org>; Sun, 14 May 2023 16:32:45 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1684107164; x=1686699164;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=zFoyprtl3gyqIcOU5eluetX/hd297nfNPBeoEJx+lMY=;
-        b=OOEhQeIhGrUcRX+6wFZMBlkinIr58Fo6V0AqumvWcpAEacnBfVoSjRk7Kwf4IBggeK
-         H5p6J52uX1KO3prg30W+P9zqKQ45mIvlax9QvCDO95LBAiPuZwQUvQ7wk1FYUD0d1Urz
-         g5B4Rm2x/PYYZd4zXTP7bkfTCgcsbSZVlLD1YTs1YfvHSBkfTA0OMIv6cEWSeaf+DrHE
-         +UAq/4mJ/Wf6dUleCUQ0GCsT0ORpBuPQN0WzPHSG0Hx6WpzvvQu7Elc7ZL8BtXxi8mjE
-         jZPnfegv1TifvYi+jWLRtRTji/9Dj8u2lRd995kUid1ZOucWW8nfu33SuiozlmrX1zwQ
-         UNDA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1684107164; x=1686699164;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=zFoyprtl3gyqIcOU5eluetX/hd297nfNPBeoEJx+lMY=;
-        b=UjOW1COQEV/fdi5qHie6akgRkyYt3gDMTsqlEWQGMf0G7osC3lcKqache8+DRTTqoa
-         ag6iUNdejs59K5YB/Hq/yZyKjac6A28e3N/ymTBxm8JH3qBPJG82p334IdXCrHUoSECE
-         GjB00p1eW0qjgcR+2y2MP+4z1C1cCHxnMdyelM+hHSxW8LsVTpHfDL420Y3v/lYaeT3J
-         EevULmaUk0BrsKAh2Rna5jkie+XOOKJbqdstIuMomotHDzslm0gS3g9zTbvJYvi/o8Uf
-         HoJJU2lgXuRDbTo2PvwnL8RdIpcK1kRbe2OuoS5Qa3VIlZXHFWOknvxjOiNs2MvbRSXM
-         sOtg==
-X-Gm-Message-State: AC+VfDyNr5kcBSah5vrEpnUYIQvC5N900nuymu8YWhDmkMrV7l4rBBsl
-	CzK5Pbmo8yh/D9dRLOSMcnh00ecH6JGdcg==
-X-Google-Smtp-Source: ACHHUZ5iszxZYnNxH+Du0WHIZgkNeb6RxQtB/Gf1HjXaECJpZ+e7q1O/2OhBrbUfqpmvNXCnzQOVzg==
-X-Received: by 2002:a05:6870:519:b0:18e:2bb2:3f95 with SMTP id j25-20020a056870051900b0018e2bb23f95mr3626487oao.4.1684107164121;
-        Sun, 14 May 2023 16:32:44 -0700 (PDT)
-Received: from fabio-Precision-3551.. ([2804:14c:485:4b69:5edb:8aba:d5e2:1f1d])
-        by smtp.gmail.com with ESMTPSA id s9-20020acac209000000b00395f5cd1a0dsm1334193oif.9.2023.05.14.16.32.41
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 14 May 2023 16:32:43 -0700 (PDT)
-From: Fabio Estevam <festevam@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: martin.jansa@gmail.com,
-	marex@denx.de,
-	Fabio Estevam <festevam@denx.de>
-Subject: [PATCH] lvgl: lvgl-demo-fb: Inherit features_check
-Date: Sun, 14 May 2023 20:32:33 -0300
-Message-Id: <20230514233233.169181-1-festevam@gmail.com>
-X-Mailer: git-send-email 2.34.1
+ dkim=pass header.i=@denx.de header.s=phobos-20191101 header.b=ZJFi26e+;
+ spf=pass (domain: denx.de, ip: 85.214.62.61, mailfrom: marex@denx.de)
+Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+	(No client certificate requested)
+	(Authenticated sender: marex@denx.de)
+	by phobos.denx.de (Postfix) with ESMTPSA id 8359A847C5;
+	Mon, 15 May 2023 02:27:26 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1684110446;
+	bh=lU6Da9vKwL35Puwm/6HdvS9Kv9Pp8VSfuuUzgmeDCMg=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+	b=ZJFi26e+ScWsNZO7GeylidS7SS/YDKqhiHa9fMU/KcTgwEYncss5q0TrUjCtsSlOw
+	 9dW+Nn11SY77j04Q5QQ2G7R+rhXtpDJUzVDJq7Hkfh3PeJ7HSX9YMt2DoZ17qzNaIF
+	 9DXRnUVMTT/mBf+ATCyz9XCNlx7PVyCLJa5eoFC6c+xzAHlnpW8suK2MbjgFAHPAMu
+	 81pHVz7l5B7z8JwhZ6TzAq+0/88ni2XLmjmf19GW1I6TrToEgblxfAz+nxSRh2VFp/
+	 Qyk0Bvp3GZC+Rrt7tasTLc8OMLUgK55f0e8wt+dHLasIK+GRMWkgNJLCIhrEt2XTIy
+	 kFfhVUi5xPPWw==
+Message-ID: <f6dbe6e3-5163-2d4d-cca7-befa02119739@denx.de>
+Date: Mon, 15 May 2023 02:27:25 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.10.0
+Subject: Re: [PATCH] lvgl: lvgl-demo-fb: Inherit features_check
+To: Fabio Estevam <festevam@gmail.com>,
+ openembedded-devel@lists.openembedded.org
+Cc: martin.jansa@gmail.com, Fabio Estevam <festevam@denx.de>
+References: <20230514233233.169181-1-festevam@gmail.com>
+Content-Language: en-US
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <20230514233233.169181-1-festevam@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
+X-Virus-Status: Clean
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 14 May 2023 23:32:48 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102591
+ <openembedded-devel@lists.openembedded.org>; Mon, 15 May 2023 00:27:39 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102592
 
-From: Fabio Estevam <festevam@denx.de>
+On 5/15/23 01:32, Fabio Estevam wrote:
+> From: Fabio Estevam <festevam@denx.de>
+> 
+> Inherit features_check to fix the following QA error:
+> 
+> ERROR: QA Issue: lvgl-demo-fb: recipe doesn't inherit features_check [unhandled-features-check]
+> 
+> Reported-by: Martin Jansa <martin.jansa@gmail.com>
+> Signed-off-by: Fabio Estevam <festevam@denx.de>
 
-Inherit features_check to fix the following QA error:
+You beat me to it, thank you.
 
-ERROR: QA Issue: lvgl-demo-fb: recipe doesn't inherit features_check [unhandled-features-check]
-
-Reported-by: Martin Jansa <martin.jansa@gmail.com>
-Signed-off-by: Fabio Estevam <festevam@denx.de>
----
- meta-oe/recipes-graphics/lvgl/lvgl-demo-fb_8.3.0.bb | 2 ++
- 1 file changed, 2 insertions(+)
-
-diff --git a/meta-oe/recipes-graphics/lvgl/lvgl-demo-fb_8.3.0.bb b/meta-oe/recipes-graphics/lvgl/lvgl-demo-fb_8.3.0.bb
-index 8e0b91cac119..1dfb199ff300 100644
---- a/meta-oe/recipes-graphics/lvgl/lvgl-demo-fb_8.3.0.bb
-+++ b/meta-oe/recipes-graphics/lvgl/lvgl-demo-fb_8.3.0.bb
-@@ -12,6 +12,8 @@ S = "${WORKDIR}/git"
- 
- REQUIRED_DISTRO_FEATURES = "fbdev"
- 
-+inherit features_check
-+
- EXTRA_OEMAKE = "DESTDIR=${D}"
- 
- do_install() {
--- 
-2.34.1
-
+Reviewed-by: Marek Vasut <marex@denx.de>
 
