@@ -1,99 +1,94 @@
-Return-Path: <Martin.Jansa@gmail.com>
+Return-Path: <alexander@amelkin.msk.ru>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0D28DC77B7D
-	for <webhook@archiver.kernel.org>; Mon, 15 May 2023 11:36:32 +0000 (UTC)
-Received: from mail-wr1-f48.google.com (mail-wr1-f48.google.com [209.85.221.48])
- by mx.groups.io with SMTP id smtpd.web11.85912.1684150589901334140
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D98F9C77B7D
+	for <webhook@archiver.kernel.org>; Mon, 15 May 2023 13:40:12 +0000 (UTC)
+Received: from mail.fiord.ru (mail.fiord.ru [62.140.247.50])
+ by mx.groups.io with SMTP id smtpd.web11.88451.1684158009238946876
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 15 May 2023 04:36:30 -0700
+ Mon, 15 May 2023 06:40:10 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=Lu2pF1J0;
- spf=pass (domain: gmail.com, ip: 209.85.221.48, mailfrom: martin.jansa@gmail.com)
-Received: by mail-wr1-f48.google.com with SMTP id ffacd0b85a97d-3063208beedso12042167f8f.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 15 May 2023 04:36:29 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1684150588; x=1686742588;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=MZUbwkU3EUM1xjvYNTkK0ArzBh/bbvP7EyqXIK6CBJI=;
-        b=Lu2pF1J0nSOWxJNVH1GHrYZiLN3f17bvSgTl9g1KgUM79D+NK4j5TKc4OXqf4y6qsu
-         7VBXgTS90tJDSXG1UPvEcS45wzwD2UW4//io1brrISSjXuydSEehpw3aE3jdAFmc+sfQ
-         HVjZwFlkr6sY7tOBtx2VoIQAda/JNtF6Vh1TdBKiJLubIJRFgRaUyrAEnYDuNa7rdPDx
-         PKhzXgoo7S1Sgc/lOhedC3jx8WSiS1kWW4kdGWbwT7usgxoM1K3JarYQ+GIHjzjiMM1j
-         4vcX0WXKKTfJcJc+RstnngGhg8nupcSc7hphm1BVY8EM+W0q4kbS9bWwMAIYhXJqQY3Y
-         aPGQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1684150588; x=1686742588;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=MZUbwkU3EUM1xjvYNTkK0ArzBh/bbvP7EyqXIK6CBJI=;
-        b=J4AYpcWQBrNQMRypURkZATK54s5OQ2siAZHBURbfKNo4GcpjBnTZ/LugjN347ld00L
-         bSq+dERTZvstTA9EMvdDDvRv4Gvvp97xkUL+dkfEiGo/kKrIMoOhYgcvShkIc6iCxj1W
-         SlM42bIzyfMcICVKGIsp8OdwbcLIkoG5nEx5af8t3IIMXcjk7aqHK9+yPUZXx1yp8n8S
-         KrLBvnN2aYQMhdkvKNL30PdWlzt+BF/59Jel4hYjvO3dv6LVGQAKM2SEyufmokS6rzfO
-         gjrtT52I6pM25ZWtEH0rwr67RczBKkEm2YK5SLrcbKmyN3f3FzAQsoCE4q8RDjuQyT59
-         +fdQ==
-X-Gm-Message-State: AC+VfDz0X8GfaBOyDUbB7aJ6A/765EUIiUEo8DxStAyVWL24ztdY1f//
-	laLRzwz//gYvzttNmq3uGMTk4K0No1Q=
-X-Google-Smtp-Source: ACHHUZ40EP385GE9M3QsQtk4cB/jGdARMe52mMUskeuJNSyDjvjlgIYU8P8NtBPD8nk0YXDM+SyITA==
-X-Received: by 2002:adf:e50e:0:b0:2ef:bb9f:e9e1 with SMTP id j14-20020adfe50e000000b002efbb9fe9e1mr21666248wrm.56.1684150588153;
-        Mon, 15 May 2023 04:36:28 -0700 (PDT)
-Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
-        by smtp.gmail.com with ESMTPSA id u5-20020a05600c210500b003f427cba193sm21660442wml.41.2023.05.15.04.36.27
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 15 May 2023 04:36:27 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Martin Jansa <Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 3/4] glade: add gobject-introspection-data to REQUIRED_DISTRO_FEATURES
-Date: Mon, 15 May 2023 13:36:19 +0200
-Message-Id: <20230515113620.42510-3-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.40.1
-In-Reply-To: <20230515113620.42510-1-Martin.Jansa@gmail.com>
-References: <20230515113620.42510-1-Martin.Jansa@gmail.com>
+ dkim=missing; spf=pass (domain: amelkin.msk.ru, ip: 62.140.247.50, mailfrom: alexander@amelkin.msk.ru)
+Received: from [::1] (helo=mail.fiord.ru)
+	by mail.fiord.ru with esmtp (Exim 4.94.2)
+	(envelope-from <alexander@amelkin.msk.ru>)
+	id 1pyYQm-001Q7c-Hq
+	for openembedded-devel@lists.openembedded.org; Mon, 15 May 2023 16:40:05 +0300
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Date: Mon, 15 May 2023 16:40:04 +0300
+From: Alexander Amelkin <alexander@amelkin.msk.ru>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-oe][PATCH] ipmitool: Update links
+Message-ID: <4fc4e05da1303cbeceba45db400e31e9@amelkin.msk.ru>
+X-Sender: alexander@amelkin.msk.ru
+X-Remote-Browser: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36
+ (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36 Edg/112.0.1722.58
+X-Originating-IP: [89.207.88.249]
+X-RoundCube-Server: 62.140.247.50
+Content-Type: multipart/mixed;
+ boundary="=_8f5793998c36b9506bdf9eb062cdaf76"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 15 May 2023 11:36:32 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102601
+ <openembedded-devel@lists.openembedded.org>; Mon, 15 May 2023 13:40:12 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102603
 
-* otherwise do_configure fails:
-  http://errors.yoctoproject.org/Errors/Details/704194/
+--=_8f5793998c36b9506bdf9eb062cdaf76
+Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=US-ASCII;
+ format=flowed
 
-  gladeui/Makefile.am:267: error: HAVE_INTROSPECTION does not appear in AM_CONDITIONAL
+The project has been moved to CodeBerg.org.
+Update the links in the recipe and also bump to the
+latest revision (1.8.19.13).
 
-* AM_CONDITIONAL is in ${STAGING_DIR_TARGET}/${datadir}/aclocal/introspection.m4:
-  AM_CONDITIONAL(HAVE_INTROSPECTION, test "x$found_introspection" = "xyes")
+Additionally fix the link to the IANA PEN registry as IANA
+has changed their URL scheme some time ago and the old link
+started pointing to the HTML page instead of the text file.
 
-  but since:
-  https://git.openembedded.org/openembedded-core/commit/meta/classes-recipe/gobject-introspection.bbclass?id=4e51c1815c92bb15977a3bdb14171d770da44004
-  it doesn't get copied to ${S}/m4 without gobject-introspection-data
-
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+Signed-off-by: Alexander Amelkin <alexander@amelkin.msk.ru>
 ---
- meta-oe/recipes-devtools/glade/glade_3.22.2.bb | 1 +
- 1 file changed, 1 insertion(+)
+  meta-oe/recipes-kernel/ipmitool/ipmitool_1.8.19.bb | 6 +++---
+  1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/meta-oe/recipes-devtools/glade/glade_3.22.2.bb b/meta-oe/recipes-devtools/glade/glade_3.22.2.bb
-index 6c1112038c..9ee087fdb7 100644
---- a/meta-oe/recipes-devtools/glade/glade_3.22.2.bb
-+++ b/meta-oe/recipes-devtools/glade/glade_3.22.2.bb
-@@ -13,6 +13,7 @@ inherit features_check autotools pkgconfig gnomebase gobject-introspection mime-
- # xfce4 depends on libwnck3, gtk+3 and libepoxy need to be built with x11 PACKAGECONFIG.
- # cairo would at least needed to be built with xlib.
- ANY_OF_DISTRO_FEATURES = "${GTK3DISTROFEATURES}"
-+REQUIRED_DISTRO_FEATURES = "gobject-introspection-data"
- 
- SRC_URI = "http://ftp.gnome.org/pub/GNOME/sources/glade/3.22/glade-${PV}.tar.xz \
-            file://remove-yelp-help-rules-var.patch \
--- 
-2.40.1
 
+--=_8f5793998c36b9506bdf9eb062cdaf76
+Content-Transfer-Encoding: base64
+Content-Type: text/x-patch; charset=us-ascii;
+ name=0001-ipmitool-Update-links.patch
+Content-Disposition: attachment;
+ filename=0001-ipmitool-Update-links.patch;
+ size=1635
+
+ZGlmZiAtLWdpdCBhL21ldGEtb2UvcmVjaXBlcy1rZXJuZWwvaXBtaXRvb2wvaXBtaXRvb2xfMS44
+LjE5LmJiIGIvbWV0YS1vZS9yZWNpcGVzLWtlcm5lbC9pcG1pdG9vbC9pcG1pdG9vbF8xLjguMTku
+YmINCmluZGV4IDAzNDA5MDFjMi4uYWI5MDc0YmJhIDEwMDY0NA0KLS0tIGEvbWV0YS1vZS9yZWNp
+cGVzLWtlcm5lbC9pcG1pdG9vbC9pcG1pdG9vbF8xLjguMTkuYmINCisrKyBiL21ldGEtb2UvcmVj
+aXBlcy1rZXJuZWwvaXBtaXRvb2wvaXBtaXRvb2xfMS44LjE5LmJiDQpAQCAtMTQsNyArMTQsNyBA
+QCBMb2cgKFNFTCksIHByaW50aW5nIEZpZWxkIFJlcGxhY2VhYmxlIFVuaXQgKEZSVSkgaW5mb3Jt
+YXRpb24sIHJlYWRpbmcgYW5kIFwNCiBzZXR0aW5nIExBTiBjb25maWd1cmF0aW9uLCBhbmQgY2hh
+c3NpcyBwb3dlciBjb250cm9sLiBcDQogIg0KIA0KLUhPTUVQQUdFID0gImh0dHA6Ly9pcG1pdG9v
+bC5zb3VyY2Vmb3JnZS5uZXQvIg0KK0hPTUVQQUdFID0gImh0dHA6Ly9jb2RlYmVyZy5vcmcvSVBN
+SVRvb2wvaXBtaXRvb2wiDQogU0VDVElPTiA9ICJrZXJuZWwvdXNlcmxhbmQiDQogDQogTElDRU5T
+RSA9ICJCU0QtMy1DbGF1c2UiDQpAQCAtMjIsMTQgKzIyLDE0IEBAIExJQ19GSUxFU19DSEtTVU0g
+PSAiZmlsZTovL0NPUFlJTkc7bWQ1PTlhYTkxZTEzZDY0NDMyNmJmMjgxOTI0MjEyODYyMTg0Ig0K
+IA0KIERFUEVORFMgPSAib3BlbnNzbCByZWFkbGluZSBuY3Vyc2VzIg0KIFNSQ1JFViA9ICIxOWQ3
+ODc4MmQ3OTVkMGNmNGNlZWZlNjU1ZjYxNjIxMGM5MTQzZTYyIg0KLVNSQ19VUkkgPSAiZ2l0Oi8v
+Z2l0aHViLmNvbS9pcG1pdG9vbC9pcG1pdG9vbDtwcm90b2NvbD1odHRwczticmFuY2g9bWFzdGVy
+IFwNCitTUkNfVVJJID0gImdpdDovL2NvZGViZXJnLm9yZy9pcG1pdG9vbC9pcG1pdG9vbDtwcm90
+b2NvbD1odHRwczticmFuY2g9bWFzdGVyIFwNCiAgICAgICAgICAgICR7SUFOQV9FTlRFUlBSSVNF
+X05VTUJFUlN9IFwNCiAgICAgICAgICAgIGZpbGU6Ly8wMDAxLWNvbmZpZ3VyZS1SZW1vdmUtdGhl
+LWxvZ2ljLXRvLWRvd25sb2FkLUlBTkEtUEVOLWRhdGEucGF0Y2ggXA0KICAgICAgICAgICAgIg0K
+IElBTkFfRU5URVJQUklTRV9OVU1CRVJTID89ICIiDQogDQogIyBBZGQgdGhlc2UgdmlhIGJiYXBw
+ZW5kIGlmIHRoaXMgZGF0YWJhc2UgaXMgbmVlZGVkIGJ5IHRoZSBzeXN0ZW0NCi0jSUFOQV9FTlRF
+UlBSSVNFX05VTUJFUlMgPSAiaHR0cDovL3d3dy5pYW5hLm9yZy9hc3NpZ25tZW50cy9lbnRlcnBy
+aXNlLW51bWJlcnM7bmFtZT1pYW5hLWVudGVycHJpc2UtbnVtYmVycztkb3dubG9hZGZpbGVuYW1l
+PWlhbmEtZW50ZXJwcmlzZS1udW1iZXJzIg0KKyNJQU5BX0VOVEVSUFJJU0VfTlVNQkVSUyA9ICJo
+dHRwOi8vd3d3LmlhbmEub3JnL2Fzc2lnbm1lbnRzL2VudGVycHJpc2UtbnVtYmVycy50eHQ7bmFt
+ZT1pYW5hLWVudGVycHJpc2UtbnVtYmVycztkb3dubG9hZGZpbGVuYW1lPWlhbmEtZW50ZXJwcmlz
+ZS1udW1iZXJzIg0KICNTUkNfVVJJW2lhbmEtZW50ZXJwcmlzZS1udW1iZXJzLnNoYTI1NnN1bV0g
+PSAiY2RkOTdmYzA4MzI1NjY3NDM0YjgwNWViNTg5MTA0YWU2M2Y3YTllYjcyMGVjZWE3M2NiNTUx
+MTBiMzgzOTM0YyINCiANCiBTID0gIiR7V09SS0RJUn0vZ2l0Ig0K
+--=_8f5793998c36b9506bdf9eb062cdaf76--
 
