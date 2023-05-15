@@ -1,141 +1,95 @@
-Return-Path: <hvdbosch@cybercomm.nl>
+Return-Path: <Martin.Jansa@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2FD8FC77B7D
-	for <webhook@archiver.kernel.org>; Mon, 15 May 2023 08:41:21 +0000 (UTC)
-Received: from smtpq5.tb.mail.iss.as9143.net (smtpq5.tb.mail.iss.as9143.net [212.54.42.168])
- by mx.groups.io with SMTP id smtpd.web11.83513.1684140073907021011
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0ECA2C77B75
+	for <webhook@archiver.kernel.org>; Mon, 15 May 2023 11:36:32 +0000 (UTC)
+Received: from mail-wr1-f51.google.com (mail-wr1-f51.google.com [209.85.221.51])
+ by mx.groups.io with SMTP id smtpd.web11.85911.1684150589471698252
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 15 May 2023 01:41:15 -0700
+ Mon, 15 May 2023 04:36:29 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=softfail (domain: cybercomm.nl, ip: 212.54.42.168, mailfrom: hvdbosch@cybercomm.nl)
-Received: from [212.54.42.106] (helo=smtp2.tb.mail.iss.as9143.net)
-	by smtpq5.tb.mail.iss.as9143.net with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
-	(Exim 4.90_1)
-	(envelope-from <hvdbosch@cybercomm.nl>)
-	id 1pyTlX-0004Qg-Rg
-	for openembedded-devel@lists.openembedded.org; Mon, 15 May 2023 10:41:11 +0200
-Received: from [192.168.1.73] ([136.143.84.161])
-	by smtp2.tb.mail.iss.as9143.net with ESMTPA
-	id yTlXpK8BkP27EyTlXpxDG7; Mon, 15 May 2023 10:41:11 +0200
-X-Env-Mailfrom: hvdbosch@cybercomm.nl
-X-Env-Rcptto: openembedded-devel@lists.openembedded.org
-X-SourceIP: 136.143.84.161
-X-CNFS-Analysis: v=2.4 cv=H5AdgcUi c=1 sm=1 tr=0 ts=6461f027 cx=a_exe
- a=Lpxq9Z7DlmQWwF6NxkYm+Q==:117 a=Lpxq9Z7DlmQWwF6NxkYm+Q==:17
- a=IkcTkHD0fZMA:10 a=NEAV23lmAAAA:8 a=iGHA9ds3AAAA:8 a=pGLkceISAAAA:8
- a=omOdbC7AAAAA:8 a=XkUYdDwvAAAA:8 a=Q4-j1AaZAAAA:8 a=KrVtv3ciAAAA:8
- a=MVsEpj5VVmiP7O4E3FQA:9 a=QEXdDO2ut3YA:10 a=nM-MV4yxpKKO9kiQg6Ot:22
- a=22Hr7QaVm-UqefIw97Vx:22 a=9H3Qd4_ONW2Ztcrla5EB:22 a=17drFM-zVP18_KCs3dSJ:22
-X-Authenticated-Sender: hainsvdbosch@ziggo.nl
-Message-ID: <d8531078-1797-2a7a-5f98-4dc89b95c3b4@cybercomm.nl>
-Date: Mon, 15 May 2023 10:41:11 +0200
+ dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=BflDdO9D;
+ spf=pass (domain: gmail.com, ip: 209.85.221.51, mailfrom: martin.jansa@gmail.com)
+Received: by mail-wr1-f51.google.com with SMTP id ffacd0b85a97d-30626f4d74aso8211978f8f.0
+        for <openembedded-devel@lists.openembedded.org>; Mon, 15 May 2023 04:36:29 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20221208; t=1684150588; x=1686742588;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=SozDs2nldn8ncxMRIVYzwN2vI3cIOL6jouGFTTfsEKE=;
+        b=BflDdO9DY7qupvpnedIjJGQSqlQ+eEWRCoBZtNgSYW0Z6ib542QVAallvgua35Q4BF
+         IkcRkDTY9bO+8naGH+Jb9EdoxJfAE4tmK+6YfuJaiHc2TH9wzUfNkWQ10DAlUpWgGC2a
+         n01Jd+R8e/jJ24RGT8pLbqaK5Lz95iBYpnaddPCxrb2Xs6JFjtuLk8Q+P7LyaWwPwo1L
+         JLSqW4FEL8zFZrP7PCNbx6xNVn3odFsqtscwVhl6VfVNWlG/0PIE+vCN2Pep3+DKMs23
+         Gq13WU3xpPmmeLmsnSDdZpGnTkA00t5n2D8VgXYILvJUwiRm4QmRsCS3Q9LvN5PfVJIH
+         oNug==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20221208; t=1684150588; x=1686742588;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=SozDs2nldn8ncxMRIVYzwN2vI3cIOL6jouGFTTfsEKE=;
+        b=Fzk6mkg5XRiozsQTN2GV8muBkYVQRodL56fPdfAEerZfLGV/l+xFQa8kzPVDGrfysq
+         7YKLCbQnRyWf3MwxXJZbTH+2hKOLD9w+UOg/Z8tGIeoTOZvXeJWCqXsfRItG67Y1VzB/
+         Xt5aKEQffKry4/woreMQfgZ9TG4q21voYyUy/w2QAL17n/euZH3B2H0lltGvHmWR0VKN
+         wv7/4MHA0nuAbqtgsFYJ6nvfBo3NDIbw3rNQrJrNdTI0pAF6/wfx1w8GgrYJ9Eme020/
+         kYfV32gDkaTXWVYXCJpj7zi6wsD1Yl1aTQZ0iCrZrz/28dAa3MiNn03losql8c+ECgqr
+         A/Fg==
+X-Gm-Message-State: AC+VfDyqxYm23DTmy2/y5oJIw7UMLMRGNFoHdbADvnfKNDwu5DBm384j
+	4KyFP12HK6EResoiIKBJRgzQuSWT9i8=
+X-Google-Smtp-Source: ACHHUZ6DANYxRPkXRokIfDWT0jlkGqGL74JBPOxXsYSv1QbomhHHSUGkfjudCBeahAXRwJiyaMMcdw==
+X-Received: by 2002:adf:facc:0:b0:306:30e8:eb34 with SMTP id a12-20020adffacc000000b0030630e8eb34mr25406713wrs.48.1684150587502;
+        Mon, 15 May 2023 04:36:27 -0700 (PDT)
+Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
+        by smtp.gmail.com with ESMTPSA id i14-20020a5d558e000000b003079f2c2de7sm20725139wrv.112.2023.05.15.04.36.27
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 15 May 2023 04:36:27 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Martin Jansa <Martin.Jansa@gmail.com>
+Subject: [meta-oe][PATCH 2/4] libpeas: add gobject-introspection-data to REQUIRED_DISTRO_FEATURES
+Date: Mon, 15 May 2023 13:36:18 +0200
+Message-Id: <20230515113620.42510-2-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.40.1
+In-Reply-To: <20230515113620.42510-1-Martin.Jansa@gmail.com>
+References: <20230515113620.42510-1-Martin.Jansa@gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.10.0
-Subject: Re: [oe] [meta-oe][PATCH] fmt: upgrade 9.1.0 -> 10.0.0
-To: Khem Raj <raj.khem@gmail.com>, wangmy <wangmy@fujitsu.com>
-Cc: openembedded-devel@lists.openembedded.org
-References: <1684069442-12244-1-git-send-email-wangmy@fujitsu.com>
- <1684069442-12244-4-git-send-email-wangmy@fujitsu.com>
- <CAMKF1sodK_ZGVmHGb0Xrs+-TKUAHK3ZtZcBb+q1zakqiVfFzAg@mail.gmail.com>
- <CAMKF1srVUA3gfuMYhLXG3WhsLZzifmchhubzNOjL8n9=GWJoeg@mail.gmail.com>
-Content-Language: en-US
-From: Hains van den Bosch <hvdbosch@cybercomm.nl>
-In-Reply-To: <CAMKF1srVUA3gfuMYhLXG3WhsLZzifmchhubzNOjL8n9=GWJoeg@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-CMAE-Envelope: MS4xfB+r+1suA6a+/EfnP/dPfSJMBY125dE2WWkNJeyFtLfuyWChVdHCnQnHRQ5UJm0nQJgq0FpK8rRjy7MCdkQj5/dnkhFBVU3nRMLfjZK2V0nC6mAynika
- iwKq3QIOCw7vtBGFH5LFVYPvehdwbxEvxpOQOz/PMU5VdvIA/JrCGunKgaLebMq5AV1YRc4k0IvH35w9kXNPkhywDcUMdd17/cTUl84czP6kIvCoBNmr/VPZ
- R1NLbstZZmaDdjQfFeDoXZbjuRBrmo9MgJ1aXvlgBX6xh41CcKAVcvvsEA3AatNz
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 15 May 2023 08:41:21 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102598
+ <openembedded-devel@lists.openembedded.org>; Mon, 15 May 2023 11:36:32 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102600
 
-Regarding  spdlog, you can update to latest git or apply back-port patch:
+* do_configure fails without it:
+  http://errors.yoctoproject.org/Errors/Details/704193/
 
-https://github.com/gabime/spdlog/commit/0ca574ae168820da0268b3ec7607ca7b33024d05
+* there is "introspection" meson option, but the search
+  for gobject-introspection-1.0 doesn't respect it (nor use "required: false")
 
-For Musci player and Gerbera I've created patches to fix build with 
-latest FMT, but needs review.
+  introspection_dep = dependency('gobject-introspection-1.0', version: introspection_req)
 
-Introduced with comit:
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ meta-oe/recipes-gnome/libpeas/libpeas_1.36.0.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-https://github.com/fmtlib/fmt/commit/fce74caa15b24cbc0fcafe4706692cb06cb0b815
+diff --git a/meta-oe/recipes-gnome/libpeas/libpeas_1.36.0.bb b/meta-oe/recipes-gnome/libpeas/libpeas_1.36.0.bb
+index 1282e93634..f5b088240f 100644
+--- a/meta-oe/recipes-gnome/libpeas/libpeas_1.36.0.bb
++++ b/meta-oe/recipes-gnome/libpeas/libpeas_1.36.0.bb
+@@ -11,6 +11,7 @@ GTKDOC_MESON_OPTION = "gtk_doc"
+ inherit gnomebase gobject-introspection gtk-doc gtk-icon-cache features_check
+ 
+ ANY_OF_DISTRO_FEATURES = "${GTK3DISTROFEATURES}"
++REQUIRED_DISTRO_FEATURES = "gobject-introspection-data"
+ 
+ SRC_URI[archive.sha256sum] = "297cb9c2cccd8e8617623d1a3e8415b4530b8e5a893e3527bbfd1edd13237b4c"
+ 
+-- 
+2.40.1
 
-
-Patches:
-
-MPD:
-
-https://github.com/Hains/openpli-dm920-python3/commit/688ae121bd3928925a8656bd4aaf3857d8e8a8ed
-
-Gerbera:
-
-https://github.com/Hains/openpli-dm920-python3/commit/584b0ae72f0e1a3628a5e20b251fb4ec18cae208
-
-
-
-
-On 15-05-2023 07:14, Khem Raj wrote:
-> and also mpd - https://errors.yoctoproject.org/Errors/Details/704170/
->
-> On Sun, May 14, 2023 at 10:13 PM Khem Raj <raj.khem@gmail.com> wrote:
->> Please fix spdlog as well to work with fmt version 10.
->>
->> see - https://errors.yoctoproject.org/Errors/Details/704169/
->>
->> On Sun, May 14, 2023 at 6:04 AM wangmy <wangmy@fujitsu.com> wrote:
->>> From: Wang Mingyu <wangmy@fujitsu.com>
->>>
->>> License-Update:
->>>   Add " and {fmt} contributors" to Copyright
->>>
->>> Changelog:
->>>   https://github.com/fmtlib/fmt/blob/master/ChangeLog.rst
->>>
->>> Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
->>> ---
->>>   meta-oe/recipes-support/fmt/{fmt_9.1.0.bb => fmt_10.0.0.bb} | 4 ++--
->>>   1 file changed, 2 insertions(+), 2 deletions(-)
->>>   rename meta-oe/recipes-support/fmt/{fmt_9.1.0.bb => fmt_10.0.0.bb} (77%)
->>>
->>> diff --git a/meta-oe/recipes-support/fmt/fmt_9.1.0.bb b/meta-oe/recipes-support/fmt/fmt_10.0.0.bb
->>> similarity index 77%
->>> rename from meta-oe/recipes-support/fmt/fmt_9.1.0.bb
->>> rename to meta-oe/recipes-support/fmt/fmt_10.0.0.bb
->>> index 34896153c2..a8e6e563da 100644
->>> --- a/meta-oe/recipes-support/fmt/fmt_9.1.0.bb
->>> +++ b/meta-oe/recipes-support/fmt/fmt_10.0.0.bb
->>> @@ -2,10 +2,10 @@ SUMMARY = "open-source formatting library for C++"
->>>   DESCRIPTION = "{fmt} is an open-source formatting library for C++. It can be used as a safe and fast alternative to (s)printf and iostreams."
->>>   HOMEPAGE = "https://fmt.dev"
->>>   LICENSE = "MIT"
->>> -LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=af88d758f75f3c5c48a967501f24384b"
->>> +LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=b9257785fc4f3803a4b71b76c1412729"
->>>
->>>   SRC_URI = "git://github.com/fmtlib/fmt;branch=master;protocol=https"
->>> -SRCREV = "a33701196adfad74917046096bf5a2aa0ab0bb50"
->>> +SRCREV = "a0b8a92e3d1532361c2f7feb63babc5c18d00ef2"
->>>
->>>   S = "${WORKDIR}/git"
->>>
->>> --
->>> 2.34.1
->>>
->>>
->>>
->>>
->>>
->>> -=-=-=-=-=-=-=-=-=-=-=-
->>> Links: You receive all messages sent to this group.
->>> View/Reply Online (#102594): https://lists.openembedded.org/g/openembedded-devel/message/102594
->>> Mute This Topic: https://lists.openembedded.org/mt/98883938/4454664
->>> Group Owner: openembedded-devel+owner@lists.openembedded.org
->>> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [hvdbosch@cybercomm.nl]
->>> -=-=-=-=-=-=-=-=-=-=-=-
->>>
 
