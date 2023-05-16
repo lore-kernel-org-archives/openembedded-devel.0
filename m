@@ -1,103 +1,87 @@
-Return-Path: <Martin.Jansa@gmail.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D43D6C77B7D
-	for <webhook@archiver.kernel.org>; Mon, 15 May 2023 17:40:20 +0000 (UTC)
-Received: from mail-wr1-f47.google.com (mail-wr1-f47.google.com [209.85.221.47])
- by mx.groups.io with SMTP id smtpd.web10.6.1684172411339847201
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 86F99C77B75
+	for <webhook@archiver.kernel.org>; Tue, 16 May 2023 00:43:29 +0000 (UTC)
+Received: from mail-pl1-f180.google.com (mail-pl1-f180.google.com [209.85.214.180])
+ by mx.groups.io with SMTP id smtpd.web11.8028.1684197799135481612
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 15 May 2023 10:40:11 -0700
+ Mon, 15 May 2023 17:43:19 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=ad2UPjFc;
- spf=pass (domain: gmail.com, ip: 209.85.221.47, mailfrom: martin.jansa@gmail.com)
-Received: by mail-wr1-f47.google.com with SMTP id ffacd0b85a97d-3063891d61aso12504857f8f.0
-        for <openembedded-devel@lists.openembedded.org>; Mon, 15 May 2023 10:40:11 -0700 (PDT)
+ dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=D1aw0STc;
+ spf=pass (domain: gmail.com, ip: 209.85.214.180, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f180.google.com with SMTP id d9443c01a7336-1aaff9c93a5so91679525ad.2
+        for <openembedded-devel@lists.openembedded.org>; Mon, 15 May 2023 17:43:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1684172410; x=1686764410;
+        d=gmail.com; s=20221208; t=1684197798; x=1686789798;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=/vyPiZzQYOq5WxMOHgSM5h8oseC0LVWE7DFrl+fiTOI=;
-        b=ad2UPjFclHeCp4LfBZ0OhWab7g/ndYCUwIlQXx4pwmifNSeVN/8aDP7w9xYfkK3CXo
-         5wHkmGU7r4QnqtC0Ynwlv+30mmpml/7jZKAlFSyLC2wgqP5Ygm4AAWiYbNqonq+3n9Cg
-         RD4Snmzyw77Uu4gcVDpThN4qQGNYu5CJuhbgFB8a+W2qK8Eaa5zhBio0Qk8OvM7Vb11Q
-         ZiDDA3j0YYXqvcWVjGmgZispqYytoFYR4Vqrq4Mwve3IKuSUCiNjiG6JvStKBlDTw+i9
-         O1b0xe1o5fbk5erbCUJacKvWR5ljkoc7DNKHJxwXThG+zGSxYDeNlsS4zkl3yEh1/0Fr
-         Rmmw==
+        bh=SgpJd+7WnCVUecZ5ncdmRWTlkLbPtM00pjvhxJgK5po=;
+        b=D1aw0STcv1wLYBnMzMs0iIQpXlQTe0j7CCH01syHjc3ibUX/eExUOKlSPQgqP3B9Jc
+         oLB+ZANpf2If/pgckqNfOQQj6cS6A4vUYUy/M+CSyn5qLRRutsfWQePv0jIiTiAqLh0q
+         bNvFQHWMaA0e0QlfQ4Pp/6sEFL+ZXPxbs+aA2kNSiZCjpTiQ/U/PatPAIxKlJSngvzO9
+         pmyCamVFh5L9TJ+V/BSaBwcjmr1Qy1mn8AHp/1ABNYDHtNoktzuQo48LJyOqrT+DAsnF
+         mgJq52BALqa3mwaU09+tnQw7qrnkMKhsuEl7aqnu5are+cnLIHUT37F8qJkjOq++sxGy
+         VXHA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1684172410; x=1686764410;
+        d=1e100.net; s=20221208; t=1684197798; x=1686789798;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=/vyPiZzQYOq5WxMOHgSM5h8oseC0LVWE7DFrl+fiTOI=;
-        b=GLFEbM0Egx23+RXz6YMh8aCwFUY4hXQRMCa51qQ4qQt+3LJzTG3duCI0FeXbaeC64o
-         TrTzkObz0czE3cAyLKOm08V9KEfaqnssyg064AVW9yiCoTO0jj36fCOa2a/BK/+e6ipt
-         TQwsUZYEdsyfmo35ymYBRQGSCI4h/5TFbxNyLAUViRxs26OZ2cXcv0wTmw+9F/EsPS6t
-         tuOG9olIIvlo/76EedoA4iGov6oDMommb6reIJQE4gUE3YCALHO8vD1jAoX5K1EQgYw1
-         Q5vHqZl+4DUVgcHci1IS9o2DdMRW5eJkgn9AEJ0rqn2Wwq2naX1P/c5Jb+WibkO1c2dE
-         p8Cg==
-X-Gm-Message-State: AC+VfDyFlLT/j16qBKHExrzL87wwDOM91kUFUqNT+N2/AHH2NlVnSl68
-	K9795r9x+sc/Yl4yU/V6bXQoerp8wME=
-X-Google-Smtp-Source: ACHHUZ4Jf1HN5ozELyrIVVlecfovRzTdk6v0q4I9GWh7YqGZMODiBzna/+MFIVIs/cy7luY7nhl7vA==
-X-Received: by 2002:a5d:4f8c:0:b0:2f8:f3da:72cf with SMTP id d12-20020a5d4f8c000000b002f8f3da72cfmr25541584wru.18.1684172409483;
-        Mon, 15 May 2023 10:40:09 -0700 (PDT)
-Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
-        by smtp.gmail.com with ESMTPSA id a13-20020adff7cd000000b0030632833e74sm458377wrq.11.2023.05.15.10.40.09
+        bh=SgpJd+7WnCVUecZ5ncdmRWTlkLbPtM00pjvhxJgK5po=;
+        b=WNNUjgxeXvouaFdI2a3n3X1Fp+flddF8mbQ5HEJLfyhfzClvAgVYex7gggpFjy75nq
+         dqaLv+oNYVA8pjGq77yZnuECYrZvJNlRaMxIrMsyRb+YYRtME087E449RiKRp6BeG49h
+         9ovpBG5/81HZG2i03Pf8V/nyCt/unsedf42XQVKzn5NgciYrxwxs0STQPvZ8ZBX4Vu3y
+         A2a1I4nfouzlvt6jL9Q0XAKgFW7/23KUs8oXQ79UAnMqBwh5TZUAJvHoLdRGDs+Eup50
+         O+ETl1fMst6oFW7QJ03x9m74gZbS+66wVvRuemzDkunTGlVkJls4mk8y3yo7v/1SNbeE
+         SMnw==
+X-Gm-Message-State: AC+VfDxEv9gGO0L2HvnVZm5/50A+IZTDjUwuU61YI0mgY3tKzsLXL1XH
+	btnEgKZiKDUhvBgNreUaZPIFtDeGisI=
+X-Google-Smtp-Source: ACHHUZ4zT0sEx4ZoWRFY8L1id2DyeoHNEYkBCpS7kjV942to4TJEEQVqwUZMbywZf9CEHQyR/KN8dA==
+X-Received: by 2002:a17:903:124f:b0:1aa:d292:3814 with SMTP id u15-20020a170903124f00b001aad2923814mr43188953plh.67.1684197798245;
+        Mon, 15 May 2023 17:43:18 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9181:d380::298a])
+        by smtp.gmail.com with ESMTPSA id i2-20020a170902c94200b001a988a71617sm14119125pla.192.2023.05.15.17.43.17
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 15 May 2023 10:40:09 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+        Mon, 15 May 2023 17:43:17 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Martin Jansa <Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH] etcd: don't hardcode /usr/lib in do_install
-Date: Mon, 15 May 2023 19:40:03 +0200
-Message-Id: <20230515174003.2096033-1-Martin.Jansa@gmail.com>
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][PATCH] libiio: Do not generate lineinfo in lex/yacc generated files
+Date: Mon, 15 May 2023 17:43:16 -0700
+Message-Id: <20230516004316.3866952-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.40.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 15 May 2023 17:40:20 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102607
+ <openembedded-devel@lists.openembedded.org>; Tue, 16 May 2023 00:43:29 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102608
 
-* I don't know anything about etcd including why we need these binaries duplicated
-  in libdir and bindir, but use ${libdir} instead of hardcoded /usr/lib to fix
-  do_install with multilib enabled when libdir is /usr/lib64 and it was failing
-  with:
-  DEBUG: Executing shell function do_install
-  ls: cannot access 'etcd/3.5.7-r0/build/bin/linux_arm64/': No such file or directory
-  install: cannot stat 'etcd/3.5.7-r0/image/usr/lib/go/src/go.etcd.io/etcd/v3/bin/etcd': No such file or directory
-  WARNING: exit code 1 from a shell command.
+This avoid buildpaths being in target packages. These are emitted into
+generated lexer.c and parser.c, therefore ensure that lex and yacc are
+directled to not include lines in their output.
 
-* the error from ls is unrelated, fixed in:
-  https://lists.openembedded.org/g/openembedded-core/message/181269
-
-* also reported on github:
-  https://github.com/openembedded/meta-openembedded/pull/616
-
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-oe/recipes-extended/etcd/etcd_3.5.7.bb | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ meta-oe/recipes-support/libiio/libiio_git.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-oe/recipes-extended/etcd/etcd_3.5.7.bb b/meta-oe/recipes-extended/etcd/etcd_3.5.7.bb
-index 9a8b9861f2..0794158a52 100644
---- a/meta-oe/recipes-extended/etcd/etcd_3.5.7.bb
-+++ b/meta-oe/recipes-extended/etcd/etcd_3.5.7.bb
-@@ -59,9 +59,9 @@ SYSTEMD_SERVICE:${PN}:append = " etcd.service etcd-new.service etcd-new.path"
+diff --git a/meta-oe/recipes-support/libiio/libiio_git.bb b/meta-oe/recipes-support/libiio/libiio_git.bb
+index bb253f421a..c8ff0d34bc 100644
+--- a/meta-oe/recipes-support/libiio/libiio_git.bb
++++ b/meta-oe/recipes-support/libiio/libiio_git.bb
+@@ -24,6 +24,8 @@ inherit cmake python3native systemd setuptools3
  
- do_install:append() {
-     install -d ${D}${bindir}/
--    install -m 0755 ${D}/usr/lib/go/src/go.etcd.io/etcd/v3/bin/etcd ${D}${bindir}
--    install -m 0755 ${D}/usr/lib/go/src/go.etcd.io/etcd/v3/bin/etcdctl ${D}${bindir}
--    install -m 0755 ${D}/usr/lib/go/src/go.etcd.io/etcd/v3/bin/etcdutl ${D}${bindir}
-+    install -m 0755 ${D}${libdir}/go/src/go.etcd.io/etcd/v3/bin/etcd ${D}${bindir}
-+    install -m 0755 ${D}${libdir}/go/src/go.etcd.io/etcd/v3/bin/etcdctl ${D}${bindir}
-+    install -m 0755 ${D}${libdir}/go/src/go.etcd.io/etcd/v3/bin/etcdutl ${D}${bindir}
-     install -m 0644 ${WORKDIR}/etcd-existing.conf -D -t ${D}${sysconfdir}/etcd.d
-     install -d ${D}${systemd_system_unitdir}
-     install -m 0644 ${WORKDIR}/etcd.service ${D}${systemd_system_unitdir}/
+ EXTRA_OECMAKE = " \
+     -DCMAKE_BUILD_TYPE=RelWithDebInfo \
++    -DFLEX_TARGET_ARG_COMPILE_FLAGS='--noline' \
++    -DBISON_TARGET_ARG_COMPILE_FLAGS='--no-lines' \
+     -DUDEV_RULES_INSTALL_DIR=${nonarch_base_libdir}/udev/rules.d \
+     ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '-DWITH_SYSTEMD=ON -DSYSTEMD_UNIT_INSTALL_DIR=${systemd_system_unitdir}', '', d)} \
+ "
 -- 
 2.40.1
 
