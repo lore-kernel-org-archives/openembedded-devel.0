@@ -2,152 +2,94 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 11E77C77B7A
-	for <webhook@archiver.kernel.org>; Tue, 16 May 2023 14:56:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2EE69C77B75
+	for <webhook@archiver.kernel.org>; Tue, 16 May 2023 14:58:13 +0000 (UTC)
 Received: from mail-oa1-f50.google.com (mail-oa1-f50.google.com [209.85.160.50])
- by mx.groups.io with SMTP id smtpd.web10.24144.1684248953273858851
+ by mx.groups.io with SMTP id smtpd.web11.24158.1684249090898331543
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 16 May 2023 07:55:53 -0700
+ Tue, 16 May 2023 07:58:11 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=gNOa5nA8;
+ dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=C4stP2IR;
  spf=pass (domain: gmail.com, ip: 209.85.160.50, mailfrom: raj.khem@gmail.com)
-Received: by mail-oa1-f50.google.com with SMTP id 586e51a60fabf-199c95698baso2033783fac.3
-        for <openembedded-devel@lists.openembedded.org>; Tue, 16 May 2023 07:55:53 -0700 (PDT)
+Received: by mail-oa1-f50.google.com with SMTP id 586e51a60fabf-1929818d7faso5134840fac.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 16 May 2023 07:58:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1684248952; x=1686840952;
+        d=gmail.com; s=20221208; t=1684249090; x=1686841090;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=iJCmJUtGjf05/4o4JTPFzPzuJ9jLhuVE2O9DxWQ/Zq8=;
-        b=gNOa5nA8wedJA/px08rfCd+Dlwo0bSqX4YBSO7i5pYZdNkTRCKgmSWkMTNJYV7oLI6
-         DUlodfCZFTxURq+suvnz4jakxAwsPzmT1LDbCLsCbCKIv0jjybla15uGutfHSeVVVwfy
-         F8Oq6DxPqbvHAQwZeKj5PM2jPm2bsvfflkNLWRcML8N3M3myiZrM3lV34rH9sG4WpXjL
-         awvwqKg7/uXZYGR4v1xvi14fvakh4ir9Tswp+tGpFKbHZHgiobWQocnhePEDLMS+qsKQ
-         Ycq1U+FSrM3PxuqI9eA5Wb9VVGYBnYY9B4gL2uE3oUkxw37NbOLP9B+CnAYBS+rW+4XW
-         EaBw==
+        bh=0iwUzCzOT8VgRH43Sk17ng1/yqjS3+4fxW4sXdF2dkg=;
+        b=C4stP2IRZMcnFvaLlSGqy/TxuyOVuNQyws/ruLyL4vN3shmgtziN3jQLX27Gx/6Woz
+         u09MpH+pNYzQb3fWO3ELu9jrkwRy/HaRNQA7Zz9zitMaetypoaTr9UG9S6tqZj6UO+o+
+         Ru+tCDWeUxsMWBepEpZMg8z1JOYqzr5ZEtWcF3eRCfk5jn5Qx5ooxI4oNEJcGSmrKc/1
+         NdSThyKpFTdgzKn3usgFA4Tp2+PMqVc4HMs0SkL0YnOJNGW9XTcPVjUqj3PUzW0AWV9M
+         skIvcwfwpjgjk6fUoB6CMM80yshj0RqqE0rr3G7odl+VZhfR66XsDq/3TrejJxpCLCwY
+         Ba7g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1684248952; x=1686840952;
+        d=1e100.net; s=20221208; t=1684249090; x=1686841090;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=iJCmJUtGjf05/4o4JTPFzPzuJ9jLhuVE2O9DxWQ/Zq8=;
-        b=LszdIlpRRD3cHVqvNxW3OIFyHo65Gh/1830g7ZxPC3VZRcZMftO+gmN1YsVUTOsZsW
-         IQU2C72AFcuxaFkDD1Bt58mN0YthQhXEgRczCjMpnk8ihXyotnCKVWRESfqy0VojEMcA
-         D3MFKR8aA4+C/cnUmzjaRxkhK1BMmqlZaKzcopS2BMagqpU9g9zm9HT/e8oSy0zXZf9S
-         yVSjV5Nlilauj82WHRyEAu087JHrc0MWcXtMou41x1yuiLcSYRcHyi9xrMHx79Gs/hdW
-         ZqaRPFYANUwM7+SeLdbX2ybAOp2iSCkvwbaAWYAYxQiLzZXq9wt4kvg6w0GBgh8yQrs0
-         SF5w==
-X-Gm-Message-State: AC+VfDyOy4XXD+6O6qVCrP/fVtqbWj+VPl0WOH16ai5NqSViCWgkXo5w
-	kvDkafkSSjiY5VDlufomkNBVEy3tQVY2qpJ+7Us=
-X-Google-Smtp-Source: ACHHUZ7JJMaL+xmM4YRldAKI+7WB+FLzdIGE2+sMR9m78CpC6d6ts8xO4800K2oDVCUb577AuQmrEBxIH+5ZzFEB63E=
-X-Received: by 2002:a05:6870:5316:b0:183:cc50:f7e2 with SMTP id
- j22-20020a056870531600b00183cc50f7e2mr8234178oan.49.1684248952351; Tue, 16
- May 2023 07:55:52 -0700 (PDT)
+        bh=0iwUzCzOT8VgRH43Sk17ng1/yqjS3+4fxW4sXdF2dkg=;
+        b=OUaEbQ2Zj58pvnXyGWWrykTLPR+zCaNdeSlaNEcTC7O35RSkircxrEcn4IhpRKiDke
+         uFs6updAazc8zfkx+gnW9XNAoXdxT5zu8UIDblG4wFpPt1+TviljpZp5tFimu7KwyZWm
+         6jS6fpMBVBINN+VRR33ngUwbXpkePzpoqbzywEBulmUifjo4feqkE2ysj/KCF9/QT4LD
+         azqkamHY46ZHDwORpJEx+F/WKjCg7RjuD3mznNi/hrbVTsJ1luBTTJ3pGpzAFCHB/hRC
+         bP9zdYh8WCUvCficYhLk/Kw61MSb7mg0tyJ59kKiNXypVAl1sdA5veEazE1lnx4YO3+P
+         TEiQ==
+X-Gm-Message-State: AC+VfDxkM/NykpGYSDkYqWxkGNFCpZ02gQ2t0wILeV35UGzruRa/G5tu
+	y03uoBamS/b7OL/6E+pSlPlst2xDhaBXUdfDv9g=
+X-Google-Smtp-Source: ACHHUZ7xmf3LXwO2IVRykJvXdXmKimnFLUj8nUjzLdmQPaB/napPwYMYGYWnjEhlvT0bYDSaxH8oo2FjS37Vg3Cfryk=
+X-Received: by 2002:a05:6870:f697:b0:199:da44:a6a5 with SMTP id
+ el23-20020a056870f69700b00199da44a6a5mr2865232oab.9.1684249089967; Tue, 16
+ May 2023 07:58:09 -0700 (PDT)
 MIME-Version: 1.0
-References: <095ad873-2d15-5f66-52fc-5c4e34be3348@gmail.com>
-In-Reply-To: <095ad873-2d15-5f66-52fc-5c4e34be3348@gmail.com>
+References: <20230516043458.6180-1-f_l_k@t-online.de> <20230516043458.6180-4-f_l_k@t-online.de>
+ <CAMKF1soBAvB2NQQCTFMGAp3+AG-EGzzUnAumgRg0ciH1_poG=w@mail.gmail.com>
+ <175F89755DC86A25.20583@lists.openembedded.org> <2NLQUR.Y193GFGMC2W51@t-online.de>
+In-Reply-To: <2NLQUR.Y193GFGMC2W51@t-online.de>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 16 May 2023 07:55:26 -0700
-Message-ID: <CAMKF1sr8uampG5S7vDymeMdf3EsRaMFVLCQr6+b1rLVMTWOhTw@mail.gmail.com>
-Subject: Re: dunfell merge request: May 16th
-To: akuster808 <akuster808@gmail.com>
-Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Date: Tue, 16 May 2023 07:57:44 -0700
+Message-ID: <CAMKF1sovUY6aPaA6wPrKgiAuEXiz8bdG6519fJEPmoc_gztaLA@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH 4/7] evince: update 44.0 -> 44.1
+To: Markus Volk <f_l_k@t-online.de>
+Cc: openembedded-devel@lists.openembedded.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 16 May 2023 14:56:03 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102630
+ <openembedded-devel@lists.openembedded.org>; Tue, 16 May 2023 14:58:13 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102631
 
-merged thanks Armin
+On Mon, May 15, 2023 at 10:52=E2=80=AFPM Markus Volk <f_l_k@t-online.de> wr=
+ote:
+>
+> I think it's just a reproducibility issue because the buildpath makes it =
+into the debug package
+>
+> Am Di, 16. Mai 2023 um 07:45:12 +0200 schrieb Markus Volk <f_l_k@t-online=
+.de>:
+>
+> Am Mo, 15. Mai 2023 um 22:26:45 -0700 schrieb Khem Raj <raj.khem@gmail.co=
+m>:
+>
+> do these files get compiled into binary ? if so then it might be too late=
+ to edit these paths out. Perhaps they should be removed before they get co=
+mpiled in.
+>
+>
+> The buildpath doesn't get compiled into binary, I checked that.
+> Probably glib-mkenum will fail, if the paths get changed before it got co=
+mpiled. The buildpath is included to ev-view-type-builtins.c like this:
+> /* enumerations from "ev-jobs.h" */
+> #include "/home/flk/poky/build-intel/tmp/work/corei7-64-poky-linux/evince=
+/44.0-r0/build/../evince-44.0/libview/ev-jobs.h"
+>
 
-On Tue, May 16, 2023 at 4:12=E2=80=AFAM akuster808 <akuster808@gmail.com> w=
-rote:
->
-> The following changes since commit e39b002df9675776cc99dccdcac07607ce783b=
-15:
->
->    multipath-tools: CVE-2022-41973 Symlink attack multipathd operates
-> insecurely (2023-05-05 07:20:59 -0400)
->
-> are available in the Git repository at:
->
->    https://git.openembedded.org/meta-openembedded dunfell-next
->
-> for you to fetch changes up to 116bfe8d5e5851e7fc5424f40da8691a19c5b5ee:
->
->    nodejs: make 14.18.1 available but not default (2023-05-16 07:09:25
-> -0400)
->
-> ----------------------------------------------------------------
-> Jack Mitchell (2):
->        nss: backport fix for native build failure due to implicit
-> casting with gcc13
->        nss: backport fix for native build failure due to dangling
-> pointer with gcc13
->
-> Narpat Mali (1):
->        nodejs: make 14.18.1 available but not default
->
-> Valeria Petrov (1):
->        apache2: upgrade 2.4.56 -> 2.4.57
->
->   ...01-Disable-running-gyp-files-for-bundled-deps-nodejs14.patch | 22 ++=
-+
->   .../nodejs/0001-jinja-tests.py-add-py-3.10-fix-nodejs14.patch   | 40
-> ++++++
->   ...0001-ppc64-Do-not-use-mminimal-toc-with-clang-nodejs14.patch | 27 ++=
-++
->   .../nodejs/nodejs/0002-Using-native-binaries-nodejs14.patch     | 62
-> +++++++++
->   .../0003-Install-both-binaries-and-use-libdir-nodejs14.patch    | 84
-> ++++++++++++
->   meta-oe/recipes-devtools/nodejs/nodejs/libatomic-nodejs14.patch | 21 ++=
-+
->   .../nodejs/nodejs/mips-less-memory-nodejs14.patch               | 32 ++=
-+++
->   meta-oe/recipes-devtools/nodejs/nodejs_14.18.1.bb               | 205
-> ++++++++++++++++++++++++++++
->   ...1-Bug-1812671-build-failure-while-implicitly-casting-S.patch | 46
-> +++++++
->   ...1-Bug-1826650-cmd-ecperf-fix-dangling-pointer-warning-.patch | 75
-> ++++++++++
->   meta-oe/recipes-support/nss/nss_3.51.1.bb                       | 2 +
->   ...1-modules-mappers-config9.m4-Add-server-directory-to-i.patch | 31 ++=
-+++
->   .../apache2/{apache2_2.4.56.bb =3D> apache2_2.4.57.bb} |   3 +-
->   13 files changed, 649 insertions(+), 1 deletion(-)
->   create mode 100644
-> meta-oe/recipes-devtools/nodejs/nodejs/0001-Disable-running-gyp-files-for=
--bundled-deps-nodejs14.patch
->   create mode 100644
-> meta-oe/recipes-devtools/nodejs/nodejs/0001-jinja-tests.py-add-py-3.10-fi=
-x-nodejs14.patch
->   create mode 100644
-> meta-oe/recipes-devtools/nodejs/nodejs/0001-ppc64-Do-not-use-mminimal-toc=
--with-clang-nodejs14.patch
->   create mode 100644
-> meta-oe/recipes-devtools/nodejs/nodejs/0002-Using-native-binaries-nodejs1=
-4.patch
->   create mode 100644
-> meta-oe/recipes-devtools/nodejs/nodejs/0003-Install-both-binaries-and-use=
--libdir-nodejs14.patch
->   create mode 100644
-> meta-oe/recipes-devtools/nodejs/nodejs/libatomic-nodejs14.patch
->   create mode 100644
-> meta-oe/recipes-devtools/nodejs/nodejs/mips-less-memory-nodejs14.patch
->   create mode 100644 meta-oe/recipes-devtools/nodejs/nodejs_14.18.1.bb
->   create mode 100644
-> meta-oe/recipes-support/nss/nss/0001-Bug-1812671-build-failure-while-impl=
-icitly-casting-S.patch
->   create mode 100644
-> meta-oe/recipes-support/nss/nss/0001-Bug-1826650-cmd-ecperf-fix-dangling-=
-pointer-warning-.patch
->   create mode 100644
-> meta-webserver/recipes-httpd/apache2/apache2/0011-modules-mappers-config9=
-.m4-Add-server-directory-to-i.patch
->   rename meta-webserver/recipes-httpd/apache2/{apache2_2.4.56.bb =3D>
-> apache2_2.4.57.bb} (98%)
->
+I wonder if ${B} should be replaced with usr/src/debug/ on the same
+line at -ffile-prefix-map etc. we have to remap such
+things
+
+> And i guess thats needed so ev-jobs.h could be found
 
