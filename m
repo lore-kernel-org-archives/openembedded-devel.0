@@ -1,190 +1,153 @@
-Return-Path: <f_l_k@t-online.de>
+Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DC2D8C77B75
-	for <webhook@archiver.kernel.org>; Tue, 16 May 2023 06:23:30 +0000 (UTC)
-Received: from mailout03.t-online.de (mailout03.t-online.de [194.25.134.81])
- by mx.groups.io with SMTP id smtpd.web10.14780.1684218201927343549
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6B554C77B7A
+	for <webhook@archiver.kernel.org>; Tue, 16 May 2023 08:13:51 +0000 (UTC)
+Received: from mail1.bemta32.messagelabs.com (mail1.bemta32.messagelabs.com [195.245.230.65])
+ by mx.groups.io with SMTP id smtpd.web10.16564.1684224829268983105
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 15 May 2023 23:23:22 -0700
+ Tue, 16 May 2023 01:13:49 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=SPF record not found (domain: t-online.de, ip: 194.25.134.81, mailfrom: f_l_k@t-online.de)
-Received: from fwd86.dcpf.telekom.de (fwd86.aul.t-online.de [10.223.144.112])
-	by mailout03.t-online.de (Postfix) with SMTP id 7B80146069;
-	Tue, 16 May 2023 08:23:18 +0200 (CEST)
-Received: from [192.168.178.156] ([79.219.228.204]) by fwd86.t-online.de
-	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1pyo5c-0HM0NE0; Tue, 16 May 2023 08:23:17 +0200
-Date: Tue, 16 May 2023 08:23:11 +0200
-From: Markus Volk <f_l_k@t-online.de>
-Subject: Re: [oe] [meta-oe][PATCH 1/2] paprefs: add recipe
-To: Martin Jansa <Martin.Jansa@gmail.com>
-Cc: Markus Volk <mrksvolk@googlemail.com>,
-	openembedded-devel@lists.openembedded.org
-Message-Id: <N2NQUR.VMSJ9SVTK49Q1@t-online.de>
-In-Reply-To: 
-	<CA+chaQex3YhM61ELh9mfk-MACC5z9nTMmeZcYSQ=mTJxYPCbGw@mail.gmail.com>
-References: <20230509124612.37627-1-f_l_k@t-online.de>
-	<CA+chaQdJjtYgByUO9wNXEC-2hRC7EmsMF_2gwVGY0qRDkSveuQ@mail.gmail.com>
-	<G9IQUR.FHRNZP7EKVIS3@googlemail.com>
-	<CA+chaQex3YhM61ELh9mfk-MACC5z9nTMmeZcYSQ=mTJxYPCbGw@mail.gmail.com>
-X-Mailer: geary/40.0
-MIME-Version: 1.0
-Content-Type: multipart/alternative; boundary="=-ZVOIehcRQtCMe3p6414K"
-X-TOI-EXPURGATEID: 150726::1684218197-14ACBC77-941F5BDE/0/0 CLEAN NORMAL
-X-TOI-MSGID: f486df52-263f-4dfc-b89b-eadc326e65af
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=btRcABwt;
+ spf=pass (domain: fujitsu.com, ip: 195.245.230.65, mailfrom: wangmy@fujitsu.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
+	s=170520fj; t=1684224827; i=@fujitsu.com;
+	bh=5tgIWIPPwxvHWmWqAE4ou9tqqJxbBMg5pQLIrV7RRpI=;
+	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References;
+	b=btRcABwtWdmqerqcx863K7HVSUQbxsjLDErbk0W4vphnjQ6Svfroz+h09xUV9Ed1K
+	 /xL0nV7LFj7hlWqOhNBnWj7i3ifC9pAn/z7jSYV90/7DS28VCWHO6kV2FvQzHaUV9i
+	 jLZxKEmIIpZiPDGUEjhrc3RiFw8GM8l87L0bTT3qEFyc0wkHXilawMRhLrtqMxqPfw
+	 ZlyDOp5uCKLgWpZB2w4yVQY/dSx4bv+5pBCqk6DFc7igBTuYNe4TLAfyVuC2xMUprF
+	 rBlFeZNcY4Jw77wj9pMpzVPMHZj8DvBuuE3E62p7D0zzSuWjxr3Jhf0sraNPFE0DqP
+	 /1z1P/fYH6RJQ==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFmpkkeJIrShJLcpLzFFi42Kxs+FI0rW2Tk4
+  xuC1ocfHwUmYHRo9zG1cwBjBGsWbmJeVXJLBmrP3XxFJwQ6ri4uqTzA2Mz8S7GLk4hAQ2Mkq8
+  OtfB0sXICeRMZZK4sjICxGYTkJCYvvckO4gtIqAr8fHDXEYQm1lARWLG5CNMILawgJvEgTt/w
+  GwWAVWJedN+gdXwCjhJHNg5nxXElhBQkJjy8D1zFyMHB6eAs8TjUzUQq5wkFrfOZ4MoUZO4em
+  4T8wRGngWMDKsYzYpTi8pSi3SNDPSSijLTM0pyEzNz9BKrdBP1Ukt1y1OLS3QN9RLLi/VSi4v
+  1iitzk3NS9PJSSzYxAsMhpZjt2g7GZzv/6h1ilORgUhLlZVmQlCLEl5SfUpmRWJwRX1Sak1p8
+  iFGGg0NJgpfbKjlFSLAoNT21Ii0zBxiaMGkJDh4lEd5qC6A0b3FBYm5xZjpE6hSjMcfqRXv3M
+  nNs2td1gFmIJS8/L1VKnJcdZJIASGlGaR7cIFjMXGKUlRLmZWRgYBDiKUgtys0sQZV/xSjOwa
+  gkzLvOCGgKT2ZeCdy+V0CnMAGdcmtPPMgpJYkIKakGppcOnanne99+cuF1nr5zUSQDH3fEptW
+  PTfJ37/RcOnfxqcP8t56czPddzmxXJsooosvpku0keurxoYfOAi8Wl7z4t+dk8XqhswUHuXlM
+  FC4UJurXcFUy6PnNu5PpKNMva3Q6ftWnJ7s7vRSCLjKv8PhQL9cc+k0nnnOLbszHn7O8495dL
+  /7zI2CbxYMTouuuHn077eMS3dd9e141tmSIHAivZLZd8PgJi+LZT23OGT7Cxqv97IMf6ieVlL
+  xY66rxVfzo+ttJMXECO5NVjz0v+mWkz3il6AvjTatDRyd4Ryt+q+H97pXza5Kvx/N3aXX6azk
+  fiS93uxR041DqMr69SlszZc/OuVAZJr7Q6l1JtRJLcUaioRZzUXEiANB1c1AUAwAA
+X-Env-Sender: wangmy@fujitsu.com
+X-Msg-Ref: server-5.tower-591.messagelabs.com!1684224826!494186!1
+X-Originating-IP: [62.60.8.98]
+X-SYMC-ESS-Client-Auth: outbound-route-from=pass
+X-StarScan-Received: 
+X-StarScan-Version: 9.105.3; banners=-,-,-
+X-VirusChecked: Checked
+Received: (qmail 19507 invoked from network); 16 May 2023 08:13:46 -0000
+Received: from unknown (HELO n03ukasimr03.n03.fujitsu.local) (62.60.8.98)
+  by server-5.tower-591.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP; 16 May 2023 08:13:46 -0000
+Received: from n03ukasimr03.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr03.n03.fujitsu.local (Postfix) with ESMTP id 9A23C1B0;
+	Tue, 16 May 2023 09:13:46 +0100 (BST)
+Received: from localhost.localdomain (unknown [10.167.225.33])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by n03ukasimr03.n03.fujitsu.local (Postfix) with ESMTPS id D615C7B;
+	Tue, 16 May 2023 09:13:45 +0100 (BST)
+From: wangmy@fujitsu.com
+To: openembedded-devel@lists.openembedded.org
+Cc: Wang Mingyu <wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH] spdlog: fix build error for master fmt
+Date: Tue, 16 May 2023 16:13:32 +0800
+Message-Id: <1684224813-27544-2-git-send-email-wangmy@fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
+In-Reply-To: <1684224813-27544-1-git-send-email-wangmy@fujitsu.com>
+References: <1684224813-27544-1-git-send-email-wangmy@fujitsu.com>
+X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 16 May 2023 06:23:30 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102622
+ <openembedded-devel@lists.openembedded.org>; Tue, 16 May 2023 08:13:51 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102624
 
---=-ZVOIehcRQtCMe3p6414K
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
+From: Wang Mingyu <wangmy@fujitsu.com>
 
-Thanks for this. Your patch has the far better commit message
+error message:
+include/spdlog/common.h:168:111: error: 'basic_runtime' is not a member of 'fmt'
 
-Am Di, 16. Mai 2023 um 08:21:13 +0200 schrieb Martin Jansa=20
-<Martin.Jansa@gmail.com>:
-> In the end I've sent one as well:=20
-> <https://lists.openembedded.org/g/openembedded-devel/message/102602>=20
-> both do the same, lets see which one is picked by Khem sooner.
->=20
-> On Tue, May 16, 2023 at 6:39=E2=80=AFAM Markus Volk=20
-> <mrksvolk@googlemail.com <mailto:mrksvolk@googlemail.com>> wrote:
->> Thanks for pointing me to this issue. I've sent a patch that adds=20
->> REQUIRED_DISTRO_FEATURES =3D "x11"
->>=20
->> Am Mo, 15. Mai 2023 um 10:13:41 +0200 schrieb Martin Jansa=20
->> <martin.jansa@gmail.com <mailto:martin.jansa@gmail.com>>:
->>> On Tue, May 9, 2023 at 2:46=E2=80=AFPM Markus Volk <f_l_k@t-online.de=20
->>> <mailto:f_l_k@t-online.de>> wrote:
->>>> Signed-off-by: Markus Volk <f_l_k@t-online.de=20
->>>> <mailto:f_l_k@t-online.de>>
->>>>  ---
->>>>   .../pulseaudio/paprefs_1.2.bb <http://paprefs_1.2.bb/>          =20
->>>>        | 18 ++++++++++++++++++
->>>>   1 file changed, 18 insertions(+)
->>>>   create mode 100644=20
->>>> meta-oe/recipes-multimedia/pulseaudio/paprefs_1.2.bb=20
->>>> <http://paprefs_1.2.bb/>
->>>>=20
->>>>  diff --git a/meta-oe/recipes-multimedia/pulseaudio/paprefs_1.2.bb=20
->>>> <http://paprefs_1.2.bb/>=20
->>>> b/meta-oe/recipes-multimedia/pulseaudio/paprefs_1.2.bb=20
->>>> <http://paprefs_1.2.bb/>
->>>>  new file mode 100644
->>>>  index 0000000000..6d0cf7ed7f
->>>>  --- /dev/null
->>>>  +++ b/meta-oe/recipes-multimedia/pulseaudio/paprefs_1.2.bb=20
->>>> <http://paprefs_1.2.bb/>
->>>>  @@ -0,0 +1,18 @@
->>>>  +DESCRIPTION =3D "PulseAudio Preferences (paprefs) is a simple GTK=20
->>>> based configuration dialog for the PulseAudio sound server."
->>>>  +HOMEPAGE =3D=20
->>>> "<https://freedesktop.org/software/pulseaudio/paprefs/>"
->>>>  +LICENSE =3D "GPL-2.0-only"
->>>>  +LIC_FILES_CHKSUM =3D=20
->>>> "file://LICENSE;md5=3D751419260aa954499f7abaabaa882bbe"
->>>>  +
->>>>  +DEPENDS =3D "pulseaudio gtkmm3 gtk+3 libsigc++-3 glibmm"
->>>>  +
->>>>  +inherit meson pkgconfig features_check
->>>>  +
->>>>  +ANY_OF_DISTRO_FEATURES =3D "${GTK3DISTROFEATURES}"
->>>=20
->>> This doesn't build with any gtk3 DISTRO_FEATURES, without x11 in=20
->>> DISTRO_FEATURES gtk3+ doesn't provide gdkx.h and paprefs build=20
->>> fails with:
->>> <http://errors.yoctoproject.org/Errors/Details/704195/>
->>>=20
->>> ../paprefs-1.2/src/paprefs.cc:30:10: fatal error: gdk/gdkx.h: No=20
->>> such file or directory
->>>    30 | #include <gdk/gdkx.h>
->>>       |          ^~~~~~~~~~~~
->>>=20
->>> Please change it to REQUIRED_DISTRO_FEATURES =3D "x11" if you don't=20
->>> care about non-x11 usecase or fix otherwise if you do care.
->>>=20
->>> Regards,
+Add fix-build-for-master-fmt.patch:
+* update fmt_runtime_string macro
+* fix build of updated macro
 
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+---
+ .../spdlog/fix-build-for-master-fmt.patch     | 44 +++++++++++++++++++
+ .../recipes-support/spdlog/spdlog_1.11.0.bb   |  1 +
+ 2 files changed, 45 insertions(+)
+ create mode 100644 meta-oe/recipes-support/spdlog/spdlog/fix-build-for-master-fmt.patch
 
---=-ZVOIehcRQtCMe3p6414K
-Content-Type: text/html; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-
-<div id=3D"geary-body" dir=3D"auto"><div>Thanks for this. Your patch has th=
-e far better commit message</div></div><div id=3D"geary-quote" dir=3D"auto"=
-><br>Am Di, 16. Mai 2023 um 08:21:13 +0200 schrieb Martin Jansa &lt;Martin.=
-Jansa@gmail.com&gt;:<br><blockquote type=3D"cite"><div dir=3D"ltr">In the e=
-nd I've sent one as well:&nbsp;<a href=3D"https://lists.openembedded.org/g/=
-openembedded-devel/message/102602">https://lists.openembedded.org/g/openemb=
-edded-devel/message/102602</a> both do the same, lets see which one is pick=
-ed by Khem sooner.</div><br><div class=3D"gmail_quote"><div dir=3D"ltr" cla=
-ss=3D"gmail_attr">On Tue, May 16, 2023 at 6:39=E2=80=AFAM Markus Volk &lt;<=
-a href=3D"mailto:mrksvolk@googlemail.com">mrksvolk@googlemail.com</a>&gt; w=
-rote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0p=
-x 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex"><div id=3D=
-"m_-4721783881392406812geary-body" dir=3D"auto"><div>Thanks for pointing me=
- to this issue. I've sent a patch that adds REQUIRED_DISTRO_FEATURES =3D "x=
-11"</div></div><div id=3D"m_-4721783881392406812geary-quote" dir=3D"auto"><=
-br>Am Mo, 15. Mai 2023 um 10:13:41 +0200 schrieb Martin Jansa &lt;<a href=
-=3D"mailto:martin.jansa@gmail.com" target=3D"_blank">martin.jansa@gmail.com=
-</a>&gt;:<br><blockquote type=3D"cite"><div dir=3D"ltr"><div dir=3D"ltr">On=
- Tue, May 9, 2023 at 2:46=E2=80=AFPM Markus Volk &lt;<a href=3D"mailto:f_l_=
-k@t-online.de" target=3D"_blank">f_l_k@t-online.de</a>&gt; wrote:<br></div>=
-<div class=3D"gmail_quote"><blockquote class=3D"gmail_quote" style=3D"margi=
-n:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex=
-">Signed-off-by: Markus Volk &lt;<a href=3D"mailto:f_l_k@t-online.de" targe=
-t=3D"_blank">f_l_k@t-online.de</a>&gt;<br>
----<br>
-&nbsp;.../pulseaudio/<a href=3D"http://paprefs_1.2.bb" rel=3D"noreferrer" t=
-arget=3D"_blank">paprefs_1.2.bb</a>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp=
-; &nbsp; &nbsp; &nbsp; | 18 ++++++++++++++++++<br>
-&nbsp;1 file changed, 18 insertions(+)<br>
-&nbsp;create mode 100644 meta-oe/recipes-multimedia/pulseaudio/<a href=3D"h=
-ttp://paprefs_1.2.bb" rel=3D"noreferrer" target=3D"_blank">paprefs_1.2.bb</=
-a><br>
-<br>
-diff --git a/meta-oe/recipes-multimedia/pulseaudio/<a href=3D"http://papref=
-s_1.2.bb" rel=3D"noreferrer" target=3D"_blank">paprefs_1.2.bb</a> b/meta-oe=
-/recipes-multimedia/pulseaudio/<a href=3D"http://paprefs_1.2.bb" rel=3D"nor=
-eferrer" target=3D"_blank">paprefs_1.2.bb</a><br>
-new file mode 100644<br>
-index 0000000000..6d0cf7ed7f<br>
---- /dev/null<br>
-+++ b/meta-oe/recipes-multimedia/pulseaudio/<a href=3D"http://paprefs_1.2.b=
-b" rel=3D"noreferrer" target=3D"_blank">paprefs_1.2.bb</a><br>
-@@ -0,0 +1,18 @@<br>
-+DESCRIPTION =3D "PulseAudio Preferences (paprefs) is a simple GTK based co=
-nfiguration dialog for the PulseAudio sound server."<br>
-+HOMEPAGE =3D "<a href=3D"https://freedesktop.org/software/pulseaudio/papre=
-fs/" rel=3D"noreferrer" target=3D"_blank">https://freedesktop.org/software/=
-pulseaudio/paprefs/</a>"<br>
-+LICENSE =3D "GPL-2.0-only"<br>
-+LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D751419260aa954499f7abaabaa882bb=
-e"<br>
-+<br>
-+DEPENDS =3D "pulseaudio gtkmm3 gtk+3 libsigc++-3 glibmm"<br>
-+<br>
-+inherit meson pkgconfig features_check<br>
-+<br>
-+ANY_OF_DISTRO_FEATURES =3D "${GTK3DISTROFEATURES}"<br></blockquote><div><b=
-r></div><div>This doesn't build with any gtk3 DISTRO_FEATURES, without x11 =
-in DISTRO_FEATURES gtk3+ doesn't provide&nbsp;gdkx.h and paprefs build fail=
-s with:</div><div><a href=3D"http://errors.yoctoproject.org/Errors/Details/=
-704195/" target=3D"_blank">http://errors.yoctoproject.org/Errors/Details/70=
-4195/</a></div><div><br></div><div>../paprefs-1.2/src/paprefs.cc:30:10: fat=
-al error: gdk/gdkx.h: No such file or directory<br>&nbsp; &nbsp;30 | #inclu=
-de &lt;gdk/gdkx.h&gt;<br>&nbsp; &nbsp; &nbsp; | &nbsp; &nbsp; &nbsp; &nbsp;=
- &nbsp;^~~~~~~~~~~~<br></div><div><br></div><div>Please change it to REQUIR=
-ED_DISTRO_FEATURES =3D "x11" if you don't care about non-x11 usecase or fix=
- otherwise if you do care.</div><div><br></div><div>Regards,</div></div></d=
-iv>
-</blockquote></div></blockquote></div>
-</blockquote></div>
---=-ZVOIehcRQtCMe3p6414K--
+diff --git a/meta-oe/recipes-support/spdlog/spdlog/fix-build-for-master-fmt.patch b/meta-oe/recipes-support/spdlog/spdlog/fix-build-for-master-fmt.patch
+new file mode 100644
+index 0000000000..c767db919f
+--- /dev/null
++++ b/meta-oe/recipes-support/spdlog/spdlog/fix-build-for-master-fmt.patch
+@@ -0,0 +1,44 @@
++Upstream-Status: Backport
++[https://github.com/gabime/spdlog/commit/0ca574ae168820da0268b3ec7607ca7b33024d05]
++
++Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
++
++From 0ca574ae168820da0268b3ec7607ca7b33024d05 Mon Sep 17 00:00:00 2001
++From: H1X4 <10332146+H1X4Dev@users.noreply.github.com>
++Date: Fri, 31 Mar 2023 20:39:32 +0300
++Subject: [PATCH] fix build for master fmt (non-bundled) (#2694)
++
++* fix build for master fmt (non-bundled)
++
++* update fmt_runtime_string macro
++
++* fix build of updated macro
++---
++ include/spdlog/common.h | 9 ++++++++-
++ 1 file changed, 8 insertions(+), 1 deletion(-)
++
++diff --git a/include/spdlog/common.h b/include/spdlog/common.h
++index e69201a81..5f671c5c6 100644
++--- a/include/spdlog/common.h
+++++ b/include/spdlog/common.h
++@@ -173,12 +173,19 @@ using format_string_t = fmt::format_string<Args...>;
++ template<class T>
++ using remove_cvref_t = typename std::remove_cv<typename std::remove_reference<T>::type>::type;
++ 
+++template <typename Char>
+++#if FMT_VERSION >= 90101
+++using fmt_runtime_string = fmt::runtime_format_string<Char>;
+++#else
+++using fmt_runtime_string = fmt::basic_runtime<Char>;
+++#endif
+++
++ // clang doesn't like SFINAE disabled constructor in std::is_convertible<> so have to repeat the condition from basic_format_string here,
++ // in addition, fmt::basic_runtime<Char> is only convertible to basic_format_string<Char> but not basic_string_view<Char>
++ template<class T, class Char = char>
++ struct is_convertible_to_basic_format_string
++     : std::integral_constant<bool,
++-          std::is_convertible<T, fmt::basic_string_view<Char>>::value || std::is_same<remove_cvref_t<T>, fmt::basic_runtime<Char>>::value>
+++          std::is_convertible<T, fmt::basic_string_view<Char>>::value || std::is_same<remove_cvref_t<T>, fmt_runtime_string<Char>>::value>
++ {};
++ 
++ #    if defined(SPDLOG_WCHAR_FILENAMES) || defined(SPDLOG_WCHAR_TO_UTF8_SUPPORT)
+diff --git a/meta-oe/recipes-support/spdlog/spdlog_1.11.0.bb b/meta-oe/recipes-support/spdlog/spdlog_1.11.0.bb
+index ec985fb039..2800be4784 100644
+--- a/meta-oe/recipes-support/spdlog/spdlog_1.11.0.bb
++++ b/meta-oe/recipes-support/spdlog/spdlog_1.11.0.bb
+@@ -6,6 +6,7 @@ LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/MIT;md5=0835ad
+ SRCREV = "ad0e89cbfb4d0c1ce4d097e134eb7be67baebb36"
+ SRC_URI = "git://github.com/gabime/spdlog.git;protocol=https;branch=v1.x \
+            file://0001-Do-not-use-LFS64-functions-on-linux-musl.patch \
++           file://fix-build-for-master-fmt.patch \
+            "
+ 
+ DEPENDS += "fmt"
+-- 
+2.34.1
 
 
