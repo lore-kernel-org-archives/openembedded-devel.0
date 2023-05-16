@@ -1,69 +1,89 @@
-Return-Path: <f_l_k@t-online.de>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C0BBCC77B75
-	for <webhook@archiver.kernel.org>; Tue, 16 May 2023 05:45:30 +0000 (UTC)
-Received: from mailout05.t-online.de (mailout05.t-online.de [194.25.134.82])
- by mx.groups.io with SMTP id smtpd.web11.14468.1684215921717356146
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C889CC77B75
+	for <webhook@archiver.kernel.org>; Tue, 16 May 2023 05:51:00 +0000 (UTC)
+Received: from mail-pf1-f173.google.com (mail-pf1-f173.google.com [209.85.210.173])
+ by mx.groups.io with SMTP id smtpd.web11.14517.1684216251351893767
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 15 May 2023 22:45:22 -0700
+ Mon, 15 May 2023 22:50:51 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=SPF record not found (domain: t-online.de, ip: 194.25.134.82, mailfrom: f_l_k@t-online.de)
-Received: from fwd79.dcpf.telekom.de (fwd79.aul.t-online.de [10.223.144.105])
-	by mailout05.t-online.de (Postfix) with SMTP id 2B4EA1FBF;
-	Tue, 16 May 2023 07:45:18 +0200 (CEST)
-Received: from [192.168.178.156] ([79.219.228.204]) by fwd79.t-online.de
-	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1pynUr-079ow40; Tue, 16 May 2023 07:45:17 +0200
-Date: Tue, 16 May 2023 07:45:12 +0200
-From: Markus Volk <f_l_k@t-online.de>
-Subject: Re: [oe] [meta-oe][PATCH 4/7] evince: update 44.0 -> 44.1
-To: Khem Raj <raj.khem@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org
-Message-Id: <CBLQUR.NXO420D7LTJ43@t-online.de>
-In-Reply-To: 
-	<CAMKF1soBAvB2NQQCTFMGAp3+AG-EGzzUnAumgRg0ciH1_poG=w@mail.gmail.com>
-References: <20230516043458.6180-1-f_l_k@t-online.de>
-	<20230516043458.6180-4-f_l_k@t-online.de>
-	<CAMKF1soBAvB2NQQCTFMGAp3+AG-EGzzUnAumgRg0ciH1_poG=w@mail.gmail.com>
-X-Mailer: geary/40.0
+ dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=MIcKVVyL;
+ spf=pass (domain: gmail.com, ip: 209.85.210.173, mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f173.google.com with SMTP id d2e1a72fcca58-64a9335a8e7so3054981b3a.0
+        for <openembedded-devel@lists.openembedded.org>; Mon, 15 May 2023 22:50:51 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20221208; t=1684216250; x=1686808250;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=Qqiq41hOwXAL5iyvXlgh6KMiwboPyOBpkjLvQWWhbxw=;
+        b=MIcKVVyLt226CbDa7RfUc43fpK7j9dEXGgLatL26kYQSSmQX07uqgO5YA3IjCZ4Bll
+         Wo7ksP8qXxOnjEwZPTFwyhnstHoHKC3/TCPgI4vdONpP5v4k6QSBPMeKW4xVkNKPNT0H
+         AlRr216TVHv2GnV8jssFh3FM4R373ruAtv/o6wPb1rUXZMQayOi04HiwaadyFk/zRx32
+         BhV3ebg/lU086Luwj0+OszJfTOpBKhZTaQDq25z8tye6SWiIF1EFMn7/WyCtjZO+z4gA
+         o3Gh6qNlnOhfdma6/0+dhjL7QU73OLGtNzZSSH/bHNGe5zGkNn1e17O733PX/P96F4yE
+         aP/w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20221208; t=1684216250; x=1686808250;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=Qqiq41hOwXAL5iyvXlgh6KMiwboPyOBpkjLvQWWhbxw=;
+        b=Ouj8k1CUuuoMaRY7226zctqicUM0vC3I1AqzJ5wsWdIbuTh6VV0so+BkM5g/oBbZ6e
+         Bb4Y7em029sGM16jH4gn/lR87JJONAFp7MyoQbmmgXq8D/0rqP0aRpKGQcX9x3wi1HQj
+         gKXoK/GuIRmlx/SL7GBfNsO+RdGM2lvPZNQvUEgRmM3jbmUlfbsNC/71Gdn/C/v5+8uu
+         8/1DLIga7ePUr7EJRR0HfWb8sDcVDXdlzQgN2YqrnTGfCZmvY0VTvT2FwPcci5fbe1ga
+         zpHvhydvUid5WwYdUdnL+AQFSKt5o8xUNGYeYBRdAosSfmRmwQ7zRr5Aky9MyXbEJLCt
+         Jcfg==
+X-Gm-Message-State: AC+VfDyXM3oQF8gCscR3W4gxMLa4ruJ00oJJ7mHMJZ75dHfiEIPQZ4rM
+	ld2fH5iC4D1pw7fbdVkTVXkwg0Uafhc=
+X-Google-Smtp-Source: ACHHUZ6CJMUGYRcuHMkL/oTEG3LiF3QrH7bUlQjXLYFI0R8E7Nv5WuUTO3zrfl7/fHO6/WvV6m2JpQ==
+X-Received: by 2002:a05:6a00:a23:b0:63d:45f3:9fc with SMTP id p35-20020a056a000a2300b0063d45f309fcmr43835457pfh.5.1684216250221;
+        Mon, 15 May 2023 22:50:50 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9181:d380::298a])
+        by smtp.gmail.com with ESMTPSA id a13-20020a62e20d000000b0063b6d68f4bcsm12719131pfi.41.2023.05.15.22.50.49
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 15 May 2023 22:50:49 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][PATCH] php: Remove buildpaths from scripts and generated headers
+Date: Mon, 15 May 2023 22:50:47 -0700
+Message-Id: <20230516055047.3236690-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.40.1
 MIME-Version: 1.0
-Content-Type: multipart/alternative; boundary="=-XGb3KQtKXk0a3kNrz94h"
-X-TOI-EXPURGATEID: 150726::1684215917-49620266-32166610/0/0 CLEAN NORMAL
-X-TOI-MSGID: 0ba91634-9da4-4225-a686-cd9c18b1920a
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 16 May 2023 05:45:30 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102619
+ <openembedded-devel@lists.openembedded.org>; Tue, 16 May 2023 05:51:00 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102620
 
---=-XGb3KQtKXk0a3kNrz94h
-Content-Type: text/plain; charset=us-ascii; format=flowed
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ meta-oe/recipes-devtools/php/php_8.2.6.bb | 7 +++++++
+ 1 file changed, 7 insertions(+)
 
-Am Mo, 15. Mai 2023 um 22:26:45 -0700 schrieb Khem Raj 
-<raj.khem@gmail.com>:
-> do these files get compiled into binary ? if so then it might be too
-> late to edit these paths out. Perhaps they should
-> be removed before they get compiled in.
-
-The buildpath doesn't get compiled into binary, I checked that.
-Probably glib-mkenum will fail, if the paths get changed before it got 
-compiled. The buildpath is included to ev-view-type-builtins.c like 
-this:
-/* enumerations from "ev-jobs.h" */
-#include 
-"/home/flk/poky/build-intel/tmp/work/corei7-64-poky-linux/evince/44.0-r0/build/../evince-44.0/libview/ev-jobs.h"
-
-And i guess thats needed so ev-jobs.h could be found
-
-
---=-XGb3KQtKXk0a3kNrz94h
-Content-Type: text/html; charset=us-ascii
-
-<div id="geary-body" dir="auto">Am Mo, 15. Mai 2023 um 22:26:45 -0700 schrieb Khem Raj &lt;raj.khem@gmail.com&gt;:<br><blockquote type="cite"><div class="plaintext" style="white-space: break-spaces;">do these files get compiled into binary ? if so then it might be too
-late to edit these paths out. Perhaps they should
-be removed before they get compiled in.</div></blockquote><div><br></div><div>The buildpath doesn't get compiled into binary, I checked that.&nbsp;</div><div>Probably glib-mkenum will fail, if the paths get changed before it got compiled. The buildpath is included to&nbsp;<span style="caret-color: rgb(48, 48, 48); color: rgb(48, 48, 48); white-space: break-spaces; background-color: rgb(232, 232, 232);">ev-view-type-builtins.c</span>&nbsp;like this:</div><div><div>/* enumerations from "ev-jobs.h" */</div><div>#include "/home/flk/poky/build-intel/tmp/work/corei7-64-poky-linux/evince/44.0-r0/build/../evince-44.0/libview/ev-jobs.h"</div></div><div><br></div><div>And i guess thats needed so ev-jobs.h could be found</div></div>
---=-XGb3KQtKXk0a3kNrz94h--
+diff --git a/meta-oe/recipes-devtools/php/php_8.2.6.bb b/meta-oe/recipes-devtools/php/php_8.2.6.bb
+index 833a70fac3..7e2ea78a15 100644
+--- a/meta-oe/recipes-devtools/php/php_8.2.6.bb
++++ b/meta-oe/recipes-devtools/php/php_8.2.6.bb
+@@ -143,6 +143,13 @@ do_configure:append() {
+     # No, libtool, we really don't want rpath set...
+     sed -i 's|^hardcode_libdir_flag_spec=.*|hardcode_libdir_flag_spec=""|g' libtool
+     sed -i 's|^runpath_var=LD_RUN_PATH|runpath_var=DIE_RPATH_DIE|g' libtool
++    sed -i -e's@${RECIPE_SYSROOT}@@g' \
++        -e's@-ffile-prefix-map=[^ ]*[ ]*@@g' \
++        -e's@-fdebug-prefix-map=[^ ]*[ ]*@@g' \
++        -e's@-ffile-prefix-map=[^ ]*[ ]*@@g' \
++        -e's@-fmacro-prefix-map=[^ ]*[ ]*@@g' \
++        ${B}/main/build-defs.h \
++        ${B}/scripts/php-config
+ }
+ 
+ do_install:append:class-native() {
+-- 
+2.40.1
 
 
