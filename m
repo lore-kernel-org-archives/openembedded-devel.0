@@ -2,94 +2,88 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2EE69C77B75
-	for <webhook@archiver.kernel.org>; Tue, 16 May 2023 14:58:13 +0000 (UTC)
-Received: from mail-oa1-f50.google.com (mail-oa1-f50.google.com [209.85.160.50])
- by mx.groups.io with SMTP id smtpd.web11.24158.1684249090898331543
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 676BEC77B7F
+	for <webhook@archiver.kernel.org>; Tue, 16 May 2023 15:28:13 +0000 (UTC)
+Received: from mail-pl1-f182.google.com (mail-pl1-f182.google.com [209.85.214.182])
+ by mx.groups.io with SMTP id smtpd.web10.24989.1684250884829439358
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 16 May 2023 07:58:11 -0700
+ Tue, 16 May 2023 08:28:04 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=C4stP2IR;
- spf=pass (domain: gmail.com, ip: 209.85.160.50, mailfrom: raj.khem@gmail.com)
-Received: by mail-oa1-f50.google.com with SMTP id 586e51a60fabf-1929818d7faso5134840fac.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 16 May 2023 07:58:10 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20221208 header.b=b5ltJ6Oh;
+ spf=pass (domain: gmail.com, ip: 209.85.214.182, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f182.google.com with SMTP id d9443c01a7336-1aaec6f189cso97376865ad.3
+        for <openembedded-devel@lists.openembedded.org>; Tue, 16 May 2023 08:28:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1684249090; x=1686841090;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=0iwUzCzOT8VgRH43Sk17ng1/yqjS3+4fxW4sXdF2dkg=;
-        b=C4stP2IRZMcnFvaLlSGqy/TxuyOVuNQyws/ruLyL4vN3shmgtziN3jQLX27Gx/6Woz
-         u09MpH+pNYzQb3fWO3ELu9jrkwRy/HaRNQA7Zz9zitMaetypoaTr9UG9S6tqZj6UO+o+
-         Ru+tCDWeUxsMWBepEpZMg8z1JOYqzr5ZEtWcF3eRCfk5jn5Qx5ooxI4oNEJcGSmrKc/1
-         NdSThyKpFTdgzKn3usgFA4Tp2+PMqVc4HMs0SkL0YnOJNGW9XTcPVjUqj3PUzW0AWV9M
-         skIvcwfwpjgjk6fUoB6CMM80yshj0RqqE0rr3G7odl+VZhfR66XsDq/3TrejJxpCLCwY
-         Ba7g==
+        d=gmail.com; s=20221208; t=1684250884; x=1686842884;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=Dh2ac5SwITDOTuhitPJXcNN7SyLE5mM1h6u0u0b0xRw=;
+        b=b5ltJ6OhdMIE2oo/d+6GL+kXtuj5IIUdkcHqxOv4nO74A/sKpkf3e8opLXb9K51X9V
+         SP0XSHS3i+Z6Yb/Xf5Rt699X4/2n/LNov/0Spg/yXuWed5Pm0Ev9sZLqyBLTgZWuygaw
+         gNFnQVjRAZCO8A6iVAvVC2mAPvCFqkPunojxEz65a6DDdXecWmJP8f34iDktJZdjwRPA
+         HIB5dVeR325Nry5tt2qerbj/N4xoS8cfRyxmmwHcJav7I/8NjdxpJvSK8dRrdZPTAHyL
+         pK5ZrsR2SudhKN7f5sk+mia3oGMGC4xJfc3lB7ypDQjA5jgHW2Xenh2kSHRXpyv1E9XM
+         ItXw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1684249090; x=1686841090;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=0iwUzCzOT8VgRH43Sk17ng1/yqjS3+4fxW4sXdF2dkg=;
-        b=OUaEbQ2Zj58pvnXyGWWrykTLPR+zCaNdeSlaNEcTC7O35RSkircxrEcn4IhpRKiDke
-         uFs6updAazc8zfkx+gnW9XNAoXdxT5zu8UIDblG4wFpPt1+TviljpZp5tFimu7KwyZWm
-         6jS6fpMBVBINN+VRR33ngUwbXpkePzpoqbzywEBulmUifjo4feqkE2ysj/KCF9/QT4LD
-         azqkamHY46ZHDwORpJEx+F/WKjCg7RjuD3mznNi/hrbVTsJ1luBTTJ3pGpzAFCHB/hRC
-         bP9zdYh8WCUvCficYhLk/Kw61MSb7mg0tyJ59kKiNXypVAl1sdA5veEazE1lnx4YO3+P
-         TEiQ==
-X-Gm-Message-State: AC+VfDxkM/NykpGYSDkYqWxkGNFCpZ02gQ2t0wILeV35UGzruRa/G5tu
-	y03uoBamS/b7OL/6E+pSlPlst2xDhaBXUdfDv9g=
-X-Google-Smtp-Source: ACHHUZ7xmf3LXwO2IVRykJvXdXmKimnFLUj8nUjzLdmQPaB/napPwYMYGYWnjEhlvT0bYDSaxH8oo2FjS37Vg3Cfryk=
-X-Received: by 2002:a05:6870:f697:b0:199:da44:a6a5 with SMTP id
- el23-20020a056870f69700b00199da44a6a5mr2865232oab.9.1684249089967; Tue, 16
- May 2023 07:58:09 -0700 (PDT)
-MIME-Version: 1.0
-References: <20230516043458.6180-1-f_l_k@t-online.de> <20230516043458.6180-4-f_l_k@t-online.de>
- <CAMKF1soBAvB2NQQCTFMGAp3+AG-EGzzUnAumgRg0ciH1_poG=w@mail.gmail.com>
- <175F89755DC86A25.20583@lists.openembedded.org> <2NLQUR.Y193GFGMC2W51@t-online.de>
-In-Reply-To: <2NLQUR.Y193GFGMC2W51@t-online.de>
+        d=1e100.net; s=20221208; t=1684250884; x=1686842884;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=Dh2ac5SwITDOTuhitPJXcNN7SyLE5mM1h6u0u0b0xRw=;
+        b=MB3evl6bzUDXVufWhx7Q5INCmZXy8UmH0d1Tv3wPFgSF36teQ5vgocL8cdTbzpwQmg
+         OaKM6isYeYCWoteqq7lrcNj/HbQ/cXieuFjUvhDOUv+ntufQXGUmgqOIjdNtGBWXzZEx
+         +jLYcBFdPG24JPq0mu2i5er+4akGtih/68mXfaTrXUn6/SiH4n1lDOwjAChRtm8CveWE
+         zXPnHWwkL6DOr3+tNP5YQl9uvC2WBu7T2AwuO35IEhpqE6eyf6UFEL3ndYx6UUDgrOgO
+         3RBQ4UhpgiChIom6TBJwvdH1D/7Re12P5r1vU6bKq6zKvP3Jxg3y1VsJKTck8kYrOUhE
+         St2A==
+X-Gm-Message-State: AC+VfDzyOeIQocsqeJiIE5jLFIs72veJu1b5YNdIcAIwwButsxd/bLK+
+	+n9LiwzQZNyUMxtaodcb4bxMXTc+dos=
+X-Google-Smtp-Source: ACHHUZ7WMgiI84Trbd0AiVZI0N0aplSi6lonTTCcBn8ZEwaywhoIhRZt8BAg3uCYiyizPIRHV9PdYg==
+X-Received: by 2002:a17:902:be0b:b0:1a9:7ffb:5ed0 with SMTP id r11-20020a170902be0b00b001a97ffb5ed0mr33044501pls.59.1684250883864;
+        Tue, 16 May 2023 08:28:03 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9181:d380::c675])
+        by smtp.gmail.com with ESMTPSA id 17-20020a170902c11100b001aad714400asm15647365pli.229.2023.05.16.08.28.03
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 16 May 2023 08:28:03 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 16 May 2023 07:57:44 -0700
-Message-ID: <CAMKF1sovUY6aPaA6wPrKgiAuEXiz8bdG6519fJEPmoc_gztaLA@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH 4/7] evince: update 44.0 -> 44.1
-To: Markus Volk <f_l_k@t-online.de>
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][PATCH] uw-imap: Pass CFLAGS from environment
+Date: Tue, 16 May 2023 08:28:01 -0700
+Message-Id: <20230516152801.198459-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.40.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 16 May 2023 14:58:13 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102631
+ <openembedded-devel@lists.openembedded.org>; Tue, 16 May 2023 15:28:13 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102632
 
-On Mon, May 15, 2023 at 10:52=E2=80=AFPM Markus Volk <f_l_k@t-online.de> wr=
-ote:
->
-> I think it's just a reproducibility issue because the buildpath makes it =
-into the debug package
->
-> Am Di, 16. Mai 2023 um 07:45:12 +0200 schrieb Markus Volk <f_l_k@t-online=
-.de>:
->
-> Am Mo, 15. Mai 2023 um 22:26:45 -0700 schrieb Khem Raj <raj.khem@gmail.co=
-m>:
->
-> do these files get compiled into binary ? if so then it might be too late=
- to edit these paths out. Perhaps they should be removed before they get co=
-mpiled in.
->
->
-> The buildpath doesn't get compiled into binary, I checked that.
-> Probably glib-mkenum will fail, if the paths get changed before it got co=
-mpiled. The buildpath is included to ev-view-type-builtins.c like this:
-> /* enumerations from "ev-jobs.h" */
-> #include "/home/flk/poky/build-intel/tmp/work/corei7-64-poky-linux/evince=
-/44.0-r0/build/../evince-44.0/libview/ev-jobs.h"
->
+This ensures that -ffile-prefix-map passed to compiler
 
-I wonder if ${B} should be replaced with usr/src/debug/ on the same
-line at -ffile-prefix-map etc. we have to remap such
-things
+Fixes
+WARNING: uw-imap-2007f-r0 do_package_qa: QA Issue: File /usr/lib/libc-client.a in package uw-imap-staticdev contains reference to TMPDIR [buildpaths]
 
-> And i guess thats needed so ev-jobs.h could be found
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ meta-oe/recipes-devtools/uw-imap/uw-imap_2007f.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/meta-oe/recipes-devtools/uw-imap/uw-imap_2007f.bb b/meta-oe/recipes-devtools/uw-imap/uw-imap_2007f.bb
+index 2f4261b00d..ea76d4870b 100644
+--- a/meta-oe/recipes-devtools/uw-imap/uw-imap_2007f.bb
++++ b/meta-oe/recipes-devtools/uw-imap/uw-imap_2007f.bb
+@@ -29,7 +29,7 @@ CVE_CHECK_IGNORE += "\
+ PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'pam', d)}"
+ PACKAGECONFIG[pam] = ",,libpam"
+ 
+-EXTRA_OEMAKE = "CC='${CC} -std=c99 -D_GNU_SOURCE' ARRC='${AR} -rc' RANLIB='${RANLIB}'"
++EXTRA_OEMAKE = "CC='${CC} -std=c99 -D_GNU_SOURCE' ARRC='${AR} -rc' RANLIB='${RANLIB}' EXTRACFLAGS='${CFLAGS}'"
+ 
+ HEADERS = "src/c-client/*.h src/osdep/unix/*.h c-client/auths.c c-client/linkage.c c-client/linkage.h c-client/osdep.h"
+ 
+-- 
+2.40.1
+
 
