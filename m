@@ -1,95 +1,153 @@
-Return-Path: <liu.ming50@gmail.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B26ABC77B7A
-	for <webhook@archiver.kernel.org>; Tue, 16 May 2023 13:31:42 +0000 (UTC)
-Received: from mail-lj1-f169.google.com (mail-lj1-f169.google.com [209.85.208.169])
- by mx.groups.io with SMTP id smtpd.web11.21851.1684243898061072827
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 11E77C77B7A
+	for <webhook@archiver.kernel.org>; Tue, 16 May 2023 14:56:03 +0000 (UTC)
+Received: from mail-oa1-f50.google.com (mail-oa1-f50.google.com [209.85.160.50])
+ by mx.groups.io with SMTP id smtpd.web10.24144.1684248953273858851
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 16 May 2023 06:31:38 -0700
+ Tue, 16 May 2023 07:55:53 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=YFvjyRp1;
- spf=pass (domain: gmail.com, ip: 209.85.208.169, mailfrom: liu.ming50@gmail.com)
-Received: by mail-lj1-f169.google.com with SMTP id 38308e7fff4ca-2ad9f2926adso98764771fa.1
-        for <openembedded-devel@lists.openembedded.org>; Tue, 16 May 2023 06:31:37 -0700 (PDT)
+ dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=gNOa5nA8;
+ spf=pass (domain: gmail.com, ip: 209.85.160.50, mailfrom: raj.khem@gmail.com)
+Received: by mail-oa1-f50.google.com with SMTP id 586e51a60fabf-199c95698baso2033783fac.3
+        for <openembedded-devel@lists.openembedded.org>; Tue, 16 May 2023 07:55:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1684243896; x=1686835896;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=CdXDuINXjW0pLehcIc15Nj/wePVvcRvBEz4V4Z7ugEw=;
-        b=YFvjyRp10ufRXIw4yLDWYV/pqMs4LcisNGLzROLxfLYyhIlbojg3YY0TFoA0K5Fd8P
-         LXDYqV027WqIxm6KB+ZlLiUV8DN2EaXqEaR7JFyleX5PLg/JiOcQuRza0pK4REXOQk8x
-         gNo9W2exnFiiGSko3VhPmzIfe7tl/dRUK397yJN+HJ77npK4fhSaXSEpJWyp/p3XBb4R
-         4LEj9Hd4tJ0LjxCn132vuGOdMTo48gVIR/YbuFgcsM8WfMmW51pA5+Nb6nKB4ciGBxBQ
-         TSEjxpMhp47qUEYazARFPLY7AKrxJiBEYFFnXoIojipGUIsZjxBnm7a46OPIldCPN91W
-         fcNA==
+        d=gmail.com; s=20221208; t=1684248952; x=1686840952;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=iJCmJUtGjf05/4o4JTPFzPzuJ9jLhuVE2O9DxWQ/Zq8=;
+        b=gNOa5nA8wedJA/px08rfCd+Dlwo0bSqX4YBSO7i5pYZdNkTRCKgmSWkMTNJYV7oLI6
+         DUlodfCZFTxURq+suvnz4jakxAwsPzmT1LDbCLsCbCKIv0jjybla15uGutfHSeVVVwfy
+         F8Oq6DxPqbvHAQwZeKj5PM2jPm2bsvfflkNLWRcML8N3M3myiZrM3lV34rH9sG4WpXjL
+         awvwqKg7/uXZYGR4v1xvi14fvakh4ir9Tswp+tGpFKbHZHgiobWQocnhePEDLMS+qsKQ
+         Ycq1U+FSrM3PxuqI9eA5Wb9VVGYBnYY9B4gL2uE3oUkxw37NbOLP9B+CnAYBS+rW+4XW
+         EaBw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1684243896; x=1686835896;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=CdXDuINXjW0pLehcIc15Nj/wePVvcRvBEz4V4Z7ugEw=;
-        b=ChxEEhaafIjKHv/YDSuzCZ5YkP4AhPIBkLSk3IPW/57pv+he8PQQC946WR6loeRW6i
-         t/LKf7pTh4+YIL48C6Ym9CKBGk10s8rILoGvPg7H66FqMpuY31PSgFOuF+aUdev15i7f
-         1J8lduLvf8bvbJJzlCRPq3+j4k/mKY7D0u6OCDQgyfki3yUoZa7uQgqf2gpnBeWKhQtv
-         XYBkwmEMIlLJqLJ7j/5z/aXqOD2F8P9qkQFN4CCEbkFqz14M14QRpgt8f46K0T/ruYnl
-         IeIQM0yH/GCE+h1SUO29eScVCDs3RX/ADPjbCJs/plQNQl+OpMBgM6b4iYX2AFHsX0m8
-         0JPw==
-X-Gm-Message-State: AC+VfDxnDynwmuXER8szoOnwsxJVkZ/adIg+XeZZHVK/pqD08CxIWOId
-	9B5vw6MG71ozuhzPwPc71f+e726d42s=
-X-Google-Smtp-Source: ACHHUZ7Ct1udGoo1UtKJWTX/YkegA/7dUTPnUvaeM1cLGekLFgFcb9U5yduUrCewqXtnhs/cj3BEgw==
-X-Received: by 2002:a2e:9916:0:b0:2ac:689e:241b with SMTP id v22-20020a2e9916000000b002ac689e241bmr8922288lji.47.1684243895686;
-        Tue, 16 May 2023 06:31:35 -0700 (PDT)
-Received: from peterliu-Precision-7530.emea.group.atlascopco.com ([2a00:801:7ac:9fa0:5593:5e7e:494a:e2c8])
-        by smtp.gmail.com with ESMTPSA id w8-20020a2e9588000000b002a77583b718sm4122170ljh.12.2023.05.16.06.31.35
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 16 May 2023 06:31:35 -0700 (PDT)
-From: liu.ming50@gmail.com
-To: openembedded-devel@lists.openembedded.org
-Cc: Ming Liu <liu.ming50@gmail.com>
-Subject: [meta-oe] [PATCH] libusbgx: check scripts in /etc/usbgx.d
-Date: Tue, 16 May 2023 15:32:57 +0200
-Message-Id: <20230516133257.2072092-1-liu.ming50@gmail.com>
-X-Mailer: git-send-email 2.25.1
+        d=1e100.net; s=20221208; t=1684248952; x=1686840952;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=iJCmJUtGjf05/4o4JTPFzPzuJ9jLhuVE2O9DxWQ/Zq8=;
+        b=LszdIlpRRD3cHVqvNxW3OIFyHo65Gh/1830g7ZxPC3VZRcZMftO+gmN1YsVUTOsZsW
+         IQU2C72AFcuxaFkDD1Bt58mN0YthQhXEgRczCjMpnk8ihXyotnCKVWRESfqy0VojEMcA
+         D3MFKR8aA4+C/cnUmzjaRxkhK1BMmqlZaKzcopS2BMagqpU9g9zm9HT/e8oSy0zXZf9S
+         yVSjV5Nlilauj82WHRyEAu087JHrc0MWcXtMou41x1yuiLcSYRcHyi9xrMHx79Gs/hdW
+         ZqaRPFYANUwM7+SeLdbX2ybAOp2iSCkvwbaAWYAYxQiLzZXq9wt4kvg6w0GBgh8yQrs0
+         SF5w==
+X-Gm-Message-State: AC+VfDyOy4XXD+6O6qVCrP/fVtqbWj+VPl0WOH16ai5NqSViCWgkXo5w
+	kvDkafkSSjiY5VDlufomkNBVEy3tQVY2qpJ+7Us=
+X-Google-Smtp-Source: ACHHUZ7JJMaL+xmM4YRldAKI+7WB+FLzdIGE2+sMR9m78CpC6d6ts8xO4800K2oDVCUb577AuQmrEBxIH+5ZzFEB63E=
+X-Received: by 2002:a05:6870:5316:b0:183:cc50:f7e2 with SMTP id
+ j22-20020a056870531600b00183cc50f7e2mr8234178oan.49.1684248952351; Tue, 16
+ May 2023 07:55:52 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <095ad873-2d15-5f66-52fc-5c4e34be3348@gmail.com>
+In-Reply-To: <095ad873-2d15-5f66-52fc-5c4e34be3348@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 16 May 2023 07:55:26 -0700
+Message-ID: <CAMKF1sr8uampG5S7vDymeMdf3EsRaMFVLCQr6+b1rLVMTWOhTw@mail.gmail.com>
+Subject: Re: dunfell merge request: May 16th
+To: akuster808 <akuster808@gmail.com>
+Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 16 May 2023 13:31:42 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102629
+ <openembedded-devel@lists.openembedded.org>; Tue, 16 May 2023 14:56:03 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102630
 
-From: Ming Liu <liu.ming50@gmail.com>
+merged thanks Armin
 
-Sometimes an end user might want to change some values in
-/sys/kernel/config/usb_gadget/ at runtime, for instance, a product id
-or serial number must be read from /proc/device-tree, and so on.
-
-Support that by letting gadget-start run all scripts in /etc/usbgx.d
-after importing the schemas.
-
-Signed-off-by: Ming Liu <liu.ming50@gmail.com>
----
- meta-oe/recipes-support/libusbgx/libusbgx/gadget-start | 4 ++++
- 1 file changed, 4 insertions(+)
-
-diff --git a/meta-oe/recipes-support/libusbgx/libusbgx/gadget-start b/meta-oe/recipes-support/libusbgx/libusbgx/gadget-start
-index 9e22671a9..e80cb2c34 100755
---- a/meta-oe/recipes-support/libusbgx/libusbgx/gadget-start
-+++ b/meta-oe/recipes-support/libusbgx/libusbgx/gadget-start
-@@ -6,6 +6,10 @@ for i in $IMPORT_SCHEMAS; do
-     /usr/bin/gadget-import "$i" /etc/usbgx/"$i".schema
- done
- 
-+for script in $(find -L /etc/usbgx.d -type f -exec test -e {} \; -print 2>/dev/null); do
-+    $script
-+done
+On Tue, May 16, 2023 at 4:12=E2=80=AFAM akuster808 <akuster808@gmail.com> w=
+rote:
+>
+> The following changes since commit e39b002df9675776cc99dccdcac07607ce783b=
+15:
+>
+>    multipath-tools: CVE-2022-41973 Symlink attack multipathd operates
+> insecurely (2023-05-05 07:20:59 -0400)
+>
+> are available in the Git repository at:
+>
+>    https://git.openembedded.org/meta-openembedded dunfell-next
+>
+> for you to fetch changes up to 116bfe8d5e5851e7fc5424f40da8691a19c5b5ee:
+>
+>    nodejs: make 14.18.1 available but not default (2023-05-16 07:09:25
+> -0400)
+>
+> ----------------------------------------------------------------
+> Jack Mitchell (2):
+>        nss: backport fix for native build failure due to implicit
+> casting with gcc13
+>        nss: backport fix for native build failure due to dangling
+> pointer with gcc13
+>
+> Narpat Mali (1):
+>        nodejs: make 14.18.1 available but not default
+>
+> Valeria Petrov (1):
+>        apache2: upgrade 2.4.56 -> 2.4.57
+>
+>   ...01-Disable-running-gyp-files-for-bundled-deps-nodejs14.patch | 22 ++=
 +
- for i in $ENABLED_SCHEMAS; do
-     configured_udc=$(eval 'echo ${UDC_FOR_SCHEMA_'"$i"'}')
-     if [ -n "${configured_udc}" ] && [ -e "/sys/class/udc/${configured_udc}" ]; then
--- 
-2.25.1
-
+>   .../nodejs/0001-jinja-tests.py-add-py-3.10-fix-nodejs14.patch   | 40
+> ++++++
+>   ...0001-ppc64-Do-not-use-mminimal-toc-with-clang-nodejs14.patch | 27 ++=
+++
+>   .../nodejs/nodejs/0002-Using-native-binaries-nodejs14.patch     | 62
+> +++++++++
+>   .../0003-Install-both-binaries-and-use-libdir-nodejs14.patch    | 84
+> ++++++++++++
+>   meta-oe/recipes-devtools/nodejs/nodejs/libatomic-nodejs14.patch | 21 ++=
++
+>   .../nodejs/nodejs/mips-less-memory-nodejs14.patch               | 32 ++=
++++
+>   meta-oe/recipes-devtools/nodejs/nodejs_14.18.1.bb               | 205
+> ++++++++++++++++++++++++++++
+>   ...1-Bug-1812671-build-failure-while-implicitly-casting-S.patch | 46
+> +++++++
+>   ...1-Bug-1826650-cmd-ecperf-fix-dangling-pointer-warning-.patch | 75
+> ++++++++++
+>   meta-oe/recipes-support/nss/nss_3.51.1.bb                       | 2 +
+>   ...1-modules-mappers-config9.m4-Add-server-directory-to-i.patch | 31 ++=
++++
+>   .../apache2/{apache2_2.4.56.bb =3D> apache2_2.4.57.bb} |   3 +-
+>   13 files changed, 649 insertions(+), 1 deletion(-)
+>   create mode 100644
+> meta-oe/recipes-devtools/nodejs/nodejs/0001-Disable-running-gyp-files-for=
+-bundled-deps-nodejs14.patch
+>   create mode 100644
+> meta-oe/recipes-devtools/nodejs/nodejs/0001-jinja-tests.py-add-py-3.10-fi=
+x-nodejs14.patch
+>   create mode 100644
+> meta-oe/recipes-devtools/nodejs/nodejs/0001-ppc64-Do-not-use-mminimal-toc=
+-with-clang-nodejs14.patch
+>   create mode 100644
+> meta-oe/recipes-devtools/nodejs/nodejs/0002-Using-native-binaries-nodejs1=
+4.patch
+>   create mode 100644
+> meta-oe/recipes-devtools/nodejs/nodejs/0003-Install-both-binaries-and-use=
+-libdir-nodejs14.patch
+>   create mode 100644
+> meta-oe/recipes-devtools/nodejs/nodejs/libatomic-nodejs14.patch
+>   create mode 100644
+> meta-oe/recipes-devtools/nodejs/nodejs/mips-less-memory-nodejs14.patch
+>   create mode 100644 meta-oe/recipes-devtools/nodejs/nodejs_14.18.1.bb
+>   create mode 100644
+> meta-oe/recipes-support/nss/nss/0001-Bug-1812671-build-failure-while-impl=
+icitly-casting-S.patch
+>   create mode 100644
+> meta-oe/recipes-support/nss/nss/0001-Bug-1826650-cmd-ecperf-fix-dangling-=
+pointer-warning-.patch
+>   create mode 100644
+> meta-webserver/recipes-httpd/apache2/apache2/0011-modules-mappers-config9=
+.m4-Add-server-directory-to-i.patch
+>   rename meta-webserver/recipes-httpd/apache2/{apache2_2.4.56.bb =3D>
+> apache2_2.4.57.bb} (98%)
+>
 
