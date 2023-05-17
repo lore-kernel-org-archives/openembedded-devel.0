@@ -2,81 +2,61 @@ Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8A67FC77B75
-	for <webhook@archiver.kernel.org>; Wed, 17 May 2023 11:23:29 +0000 (UTC)
-Received: from mailout03.t-online.de (mailout03.t-online.de [194.25.134.81])
- by mx.groups.io with SMTP id smtpd.web10.46808.1684322599673154483
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 84128C77B75
+	for <webhook@archiver.kernel.org>; Wed, 17 May 2023 11:27:19 +0000 (UTC)
+Received: from mailout01.t-online.de (mailout01.t-online.de [194.25.134.80])
+ by mx.groups.io with SMTP id smtpd.web10.46859.1684322832161638040
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 17 May 2023 04:23:20 -0700
+ Wed, 17 May 2023 04:27:12 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=SPF record not found (domain: t-online.de, ip: 194.25.134.81, mailfrom: f_l_k@t-online.de)
-Received: from fwd88.dcpf.telekom.de (fwd88.aul.t-online.de [10.223.144.114])
-	by mailout03.t-online.de (Postfix) with SMTP id BC16135A9
-	for <openembedded-devel@lists.openembedded.org>; Wed, 17 May 2023 13:23:17 +0200 (CEST)
-Received: from flk-MS-7C91.fritz.box ([84.163.40.181]) by fwd88.t-online.de
+ dkim=missing; spf=none, err=SPF record not found (domain: t-online.de, ip: 194.25.134.80, mailfrom: f_l_k@t-online.de)
+Received: from fwd89.dcpf.telekom.de (fwd89.aul.t-online.de [10.223.144.115])
+	by mailout01.t-online.de (Postfix) with SMTP id A01F734C7E;
+	Wed, 17 May 2023 13:27:10 +0200 (CEST)
+Received: from [192.168.178.156] ([84.163.40.181]) by fwd89.t-online.de
 	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1pzFFT-1i7mFt0; Wed, 17 May 2023 13:23:15 +0200
+	esmtp id 1pzFJE-290AdM0; Wed, 17 May 2023 13:27:08 +0200
+Date: Wed, 17 May 2023 13:27:02 +0200
 From: Markus Volk <f_l_k@t-online.de>
-To: openembedded-devel@lists.openembedded.org
-Cc: Markus Volk <f_l_k@t-online.de>
-Subject: [meta-gnome][PATCHv2] evince: update 44.0 -> 44.1
-Date: Wed, 17 May 2023 13:23:03 +0200
-Message-Id: <20230517112303.1127846-1-f_l_k@t-online.de>
-X-Mailer: git-send-email 2.34.1
+Subject: Re: [oe] [meta-oe][PATCH 4/7] evince: update 44.0 -> 44.1
+To: Khem Raj <raj.khem@gmail.com>
+Cc: Markus Volk <f_l_k@t-online.de>, openembedded-devel@lists.openembedded.org
+Message-Id: <2TVSUR.670ER26ODOD91@t-online.de>
+In-Reply-To: 
+	<CAMKF1sovUY6aPaA6wPrKgiAuEXiz8bdG6519fJEPmoc_gztaLA@mail.gmail.com>
+References: <20230516043458.6180-1-f_l_k@t-online.de>
+	<20230516043458.6180-4-f_l_k@t-online.de>
+	<CAMKF1soBAvB2NQQCTFMGAp3+AG-EGzzUnAumgRg0ciH1_poG=w@mail.gmail.com>
+	<175F89755DC86A25.20583@lists.openembedded.org>
+	<2NLQUR.Y193GFGMC2W51@t-online.de>
+	<CAMKF1sovUY6aPaA6wPrKgiAuEXiz8bdG6519fJEPmoc_gztaLA@mail.gmail.com>
+X-Mailer: geary/40.0
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1684322595-18DBAE62-F945D789/0/0 CLEAN NORMAL
-X-TOI-MSGID: 5b0f43e2-f84e-4c0f-920a-e90145b98a69
-Content-Transfer-Encoding: quoted-printable
+Content-Type: multipart/alternative; boundary="=-oJZ+LBajsFIarnKP6oZn"
+X-TOI-EXPURGATEID: 150726::1684322828-F9FEC283-BC728F62/0/0 CLEAN NORMAL
+X-TOI-MSGID: 28cb421c-697d-48eb-96f6-61d6694caf13
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 17 May 2023 11:23:29 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102645
+ <openembedded-devel@lists.openembedded.org>; Wed, 17 May 2023 11:27:19 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102646
 
-- remove buildpath from enum-types
+--=-oJZ+LBajsFIarnKP6oZn
+Content-Type: text/plain; charset=us-ascii; format=flowed
 
-Signed-off-by: Markus Volk <f_l_k@t-online.de>
----
- .../evince/{evince_44.0.bb =3D> evince_44.1.bb}              | 7 ++++++-
- 1 file changed, 6 insertions(+), 1 deletion(-)
- rename meta-gnome/recipes-gnome/evince/{evince_44.0.bb =3D> evince_44.1.=
-bb} (79%)
+Am Di, 16. Mai 2023 um 07:57:44 -0700 schrieb Khem Raj 
+<raj.khem@gmail.com>:
+> I wonder if ${B} should be replaced with usr/src/debug/
 
-diff --git a/meta-gnome/recipes-gnome/evince/evince_44.0.bb b/meta-gnome/=
-recipes-gnome/evince/evince_44.1.bb
-similarity index 79%
-rename from meta-gnome/recipes-gnome/evince/evince_44.0.bb
-rename to meta-gnome/recipes-gnome/evince/evince_44.1.bb
-index 1c7103c900..a844324ade 100644
---- a/meta-gnome/recipes-gnome/evince/evince_44.0.bb
-+++ b/meta-gnome/recipes-gnome/evince/evince_44.1.bb
-@@ -34,7 +34,7 @@ REQUIRED_DISTRO_FEATURES =3D "${@bb.utils.contains('DIS=
-TRO_FEATURES', 'x11', 'open
- def gnome_verdir(v):
-     return oe.utils.trim_version(v, 1)
-=20
--SRC_URI[archive.sha256sum] =3D "339ee9e005dd7823a13fe21c71c2ec6d2c4cb745=
-48026e4741eee7b2703e09da"
-+SRC_URI[archive.sha256sum] =3D "15afd3bb15ffb38fecab34c23350950ad270ab03=
-a85b94e333d9dd7ee6a74314"
-=20
- GTKDOC_MESON_OPTION =3D "gtk_doc"
-=20
-@@ -46,6 +46,11 @@ RRECOMMENDS:${PN} =3D "adwaita-icon-theme"
-=20
- PACKAGES =3D+ "${PN}-nautilus-extension"
-=20
-+do_install:prepend() {
-+    sed -i -e 's|${B}/../${PN}-${PV}|/usr/src/debug/${PN}/${PV}-${PR}|g'=
- ${B}/libview/ev-view-type-builtins.c
-+    sed -i -e 's|${B}/../${PN}-${PV}|/usr/src/debug/${PN}/${PV}-${PR}|g'=
- ${B}/libdocument/ev-document-type-builtins.c
-+}
-+
- FILES:${PN} +=3D "${datadir}/dbus-1 \
-                 ${datadir}/metainfo \
-                 ${datadir}/thumbnailers \
---=20
-2.34.1
+Thats true. I've sent a v2, that edits the line like this:
+/* enumerations from "ev-jobs.h" */
+#include "/usr/src/debug/evince/44.1-r0/libview/ev-jobs.h"
+
+
+--=-oJZ+LBajsFIarnKP6oZn
+Content-Type: text/html; charset=us-ascii
+
+<div id="geary-body" dir="auto">Am Di, 16. Mai 2023 um 07:57:44 -0700 schrieb Khem Raj &lt;raj.khem@gmail.com&gt;:<br><blockquote type="cite"><div class="plaintext" style="white-space: break-spaces;">I wonder if ${B} should be replaced with usr/src/debug/</div></blockquote><div><br></div><div>Thats true. I've sent a v2, that edits the line like this:</div><div><div>/* enumerations from "ev-jobs.h" */</div><div>#include "/usr/src/debug/evince/44.1-r0/libview/ev-jobs.h"</div></div></div>
+--=-oJZ+LBajsFIarnKP6oZn--
 
 
