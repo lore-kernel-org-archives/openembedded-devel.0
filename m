@@ -1,96 +1,125 @@
-Return-Path: <philip@balister.org>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A90EFC77B7F
-	for <webhook@archiver.kernel.org>; Wed, 17 May 2023 12:10:59 +0000 (UTC)
-Received: from perceval.ideasonboard.com (perceval.ideasonboard.com [213.167.242.64])
- by mx.groups.io with SMTP id smtpd.web10.47591.1684325260711253010
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 07E9FC77B7D
+	for <webhook@archiver.kernel.org>; Wed, 17 May 2023 16:26:11 +0000 (UTC)
+Received: from mail-ot1-f52.google.com (mail-ot1-f52.google.com [209.85.210.52])
+ by mx.groups.io with SMTP id smtpd.web11.55033.1684340767313310742
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 17 May 2023 05:07:41 -0700
+ Wed, 17 May 2023 09:26:07 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ideasonboard.com header.s=mail header.b=ZeUrAUes;
- spf=pass (domain: ideasonboard.com, ip: 213.167.242.64, mailfrom: kieran.bingham@ideasonboard.com)
-Received: from pendragon.ideasonboard.com (aztw-30-b2-v4wan-166917-cust845.vm26.cable.virginm.net [82.37.23.78])
-	by perceval.ideasonboard.com (Postfix) with ESMTPSA id 18C17720;
-	Wed, 17 May 2023 14:07:26 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ideasonboard.com;
-	s=mail; t=1684325246;
-	bh=zQrsg8iCBWYfJf5bEeHEF9vSjtgvj1HUMgkl2F/Ibs4=;
-	h=In-Reply-To:References:Subject:From:Cc:To:Date:From;
-	b=ZeUrAUesJS+GqYXfVkKUpTVz2C7mTDG7r44x+xkxIjHjF2oPphKD8YycEVRzpp7og
-	 DtYBaYnz2dq+Ni0ObwzP5LilZlZMfllwnloR5QwWwWLXiwU6kks2536xnvgcwhEoms
-	 Waqo/ppEqaGDQT7p9+DR9sH18bQZj0G5IiOL65mo=
+ dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=ejPob7op;
+ spf=pass (domain: gmail.com, ip: 209.85.210.52, mailfrom: raj.khem@gmail.com)
+Received: by mail-ot1-f52.google.com with SMTP id 46e09a7af769-6a82841e582so129933a34.1
+        for <openembedded-devel@lists.openembedded.org>; Wed, 17 May 2023 09:26:07 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20221208; t=1684340766; x=1686932766;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=2wP5jfN7txNl2A4K/a5fcSdF82B+pIB4hLiMFAmtYG0=;
+        b=ejPob7op3zjsiq762uQuXu8GgLJ10JSzARUEcxxTQmebtPQHBqYp567VH++OOAk5dh
+         C0wNu30JnBKTt3OSU02SI2v9Wa3xAWq2kv/w3q6rB3U5lzUp3yOy35RtqgUULE3nRFpp
+         nQ6+6nfm9POSwPJ9quEIxSclF7KsUiqO0RTmwMUE0+dzUR7rEhE2YsJyb+Pc8n9BMjOO
+         S6DYaPlPgcqWsxIh8At80kzMhKQKr26ZCRgzRRTHmqvtNCT2yJudG536+aldDTpV1AAe
+         Y1a8wGuafIo64gmBelDnDpivlMd/KYzn53fmo56BHmau2c9bNi+lxx1oB24yWckj/ipM
+         FMzA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20221208; t=1684340766; x=1686932766;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=2wP5jfN7txNl2A4K/a5fcSdF82B+pIB4hLiMFAmtYG0=;
+        b=k8VvowCdZo+9xzIu5uKXApjzGKXS1//OPLDX2sXz/jg2ryuZSdhYaOMq3jIMsOEo0w
+         x5ylObZbbzvGOsInG3GN6jzv84iusTM944pxgnCkf1vcltNTH04GSdShislCYa41zhYR
+         /Et2C94kFsUsPIonwKlKYVUCvIcE5dZG7LNflu8W4dVttInGOwqB3EIWco9qmz2tBQ01
+         8gNOVJPHNcaR9m3sdRqvzQP6Din80VMsnCIv3x20GQUQYNqlmrNMjwndx3DZGLLrjyC4
+         LCoUdUmna9hv2nwsIbNvMFFkZFercwYub08YFRxQtjYDRyGpXCRwaB0QX8HaZbbnWTY5
+         xQvA==
+X-Gm-Message-State: AC+VfDx5rLau+li0PnyVi2NP20OBuPog84GPpNa/O1sP78n2ttz4VgD2
+	X6qb9RG8QGsszO+ePYpVm/NfHbw9EAdu2iRkbjM=
+X-Google-Smtp-Source: ACHHUZ7il7W634wc8nNpVlwRZLMdEi6dpvqhXfwcbBIpV22LIe34Hog1Zbo824kJJzKvpUcio0eTHFvJ179lT71Wvfg=
+X-Received: by 2002:aca:efc4:0:b0:394:4a66:a89 with SMTP id
+ n187-20020acaefc4000000b003944a660a89mr1351786oih.1.1684340766311; Wed, 17
+ May 2023 09:26:06 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <20230517082759.1289294-1-alexander.stein@ew.tq-group.com>
-References: <20230517082759.1289294-1-alexander.stein@ew.tq-group.com>
-Subject: Re: [[oe] [meta-oe] 1/1] libcamera: Allow overwriting default pipelines and IPA
-From: "Kieran Bingham" <kieran.bingham@ideasonboard.com>
-Cc: Alexander Stein <alexander.stein@ew.tq-group.com>
-To: Alexander Stein <alexander.stein@ew.tq-group.com>, openembedded-devel@lists.openembedded.org
-Date: Wed, 17 May 2023 13:07:35 +0100
-Message-ID: <168432525509.3378917.14773482271941853163@Monstersaurus>
-User-Agent: alot/0.10
-Content-Type: text/plain; charset="utf-8"
+References: <20230517112303.1127846-1-f_l_k@t-online.de>
+In-Reply-To: <20230517112303.1127846-1-f_l_k@t-online.de>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 17 May 2023 09:25:40 -0700
+Message-ID: <CAMKF1sog9wcG29Pph1MOiR22WRZP1me0XcM6L-6cD+GohZuuHQ@mail.gmail.com>
+Subject: Re: [oe] [meta-gnome][PATCHv2] evince: update 44.0 -> 44.1
+To: Markus Volk <f_l_k@t-online.de>
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 17 May 2023 12:10:59 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102648
+ <openembedded-devel@lists.openembedded.org>; Wed, 17 May 2023 16:26:11 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102649
 
-Hi Alex,
+Can you send a v2 as incremental patch on top of v1, I already applied v1
 
-Quoting Alexander Stein (2023-05-17 09:27:59)
-> By default only uvcvideo, simple and vimc pipelines as well as vimc IPA
-> are built. Add new variables for enabling a custom set of enabled
-> pipelines and IPAs.
->=20
-> Signed-off-by: Alexander Stein <alexander.stein@ew.tq-group.com>
+On Wed, May 17, 2023 at 4:23=E2=80=AFAM Markus Volk <f_l_k@t-online.de> wro=
+te:
+>
+> - remove buildpath from enum-types
+>
+> Signed-off-by: Markus Volk <f_l_k@t-online.de>
 > ---
-> An example is the 'rkips1' pipeline and IPA.
->=20
->  .../recipes-multimedia/libcamera/libcamera_0.0.5.bb        | 7 +++++--
->  1 file changed, 5 insertions(+), 2 deletions(-)
->=20
-> diff --git a/meta-multimedia/recipes-multimedia/libcamera/libcamera_0.0.5=
-.bb b/meta-multimedia/recipes-multimedia/libcamera/libcamera_0.0.5.bb
-> index 14a20b431..47da0ec61 100644
-> --- a/meta-multimedia/recipes-multimedia/libcamera/libcamera_0.0.5.bb
-> +++ b/meta-multimedia/recipes-multimedia/libcamera/libcamera_0.0.5.bb
-> @@ -26,9 +26,12 @@ PACKAGES =3D+ "${PN}-gst"
->  PACKAGECONFIG ??=3D ""
->  PACKAGECONFIG[gst] =3D "-Dgstreamer=3Denabled,-Dgstreamer=3Ddisabled,gst=
-reamer1.0 gstreamer1.0-plugins-base"
-> =20
-> +LIBCAMERA_PIPELINES ??=3D "uvcvideo,simple,vimc"
-> +LIBCAMERA_IPAS ??=3D "vimc"
-
-Could you test with LIBCAMERA_PIPELINES ??=3D "auto" please? That should
-give an appropriate selection based on the architecture. But it may
-depend on the correct architecture being conveyed through the meson
-cross files.
-
-
+>  .../evince/{evince_44.0.bb =3D> evince_44.1.bb}              | 7 ++++++-
+>  1 file changed, 6 insertions(+), 1 deletion(-)
+>  rename meta-gnome/recipes-gnome/evince/{evince_44.0.bb =3D> evince_44.1.=
+bb} (79%)
+>
+> diff --git a/meta-gnome/recipes-gnome/evince/evince_44.0.bb b/meta-gnome/=
+recipes-gnome/evince/evince_44.1.bb
+> similarity index 79%
+> rename from meta-gnome/recipes-gnome/evince/evince_44.0.bb
+> rename to meta-gnome/recipes-gnome/evince/evince_44.1.bb
+> index 1c7103c900..a844324ade 100644
+> --- a/meta-gnome/recipes-gnome/evince/evince_44.0.bb
+> +++ b/meta-gnome/recipes-gnome/evince/evince_44.1.bb
+> @@ -34,7 +34,7 @@ REQUIRED_DISTRO_FEATURES =3D "${@bb.utils.contains('DIS=
+TRO_FEATURES', 'x11', 'open
+>  def gnome_verdir(v):
+>      return oe.utils.trim_version(v, 1)
+>
+> -SRC_URI[archive.sha256sum] =3D "339ee9e005dd7823a13fe21c71c2ec6d2c4cb745=
+48026e4741eee7b2703e09da"
+> +SRC_URI[archive.sha256sum] =3D "15afd3bb15ffb38fecab34c23350950ad270ab03=
+a85b94e333d9dd7ee6a74314"
+>
+>  GTKDOC_MESON_OPTION =3D "gtk_doc"
+>
+> @@ -46,6 +46,11 @@ RRECOMMENDS:${PN} =3D "adwaita-icon-theme"
+>
+>  PACKAGES =3D+ "${PN}-nautilus-extension"
+>
+> +do_install:prepend() {
+> +    sed -i -e 's|${B}/../${PN}-${PV}|/usr/src/debug/${PN}/${PV}-${PR}|g'=
+ ${B}/libview/ev-view-type-builtins.c
+> +    sed -i -e 's|${B}/../${PN}-${PV}|/usr/src/debug/${PN}/${PV}-${PR}|g'=
+ ${B}/libdocument/ev-document-type-builtins.c
+> +}
 > +
->  EXTRA_OEMESON =3D " \
-> -    -Dpipelines=3Duvcvideo,simple,vimc \
-> -    -Dipas=3Dvimc \
-> +    -Dpipelines=3D${LIBCAMERA_PIPELINES} \
-> +    -Dipas=3D${LIBCAMERA_IPAS} \
-
-I think you should probably remove the -Dipas option too and let that be
-selected automatically by the pipelines choice.
-
---
-Kieran
-
-
->      -Dv4l2=3Dtrue \
->      -Dcam=3Denabled \
->      -Dlc-compliance=3Ddisabled \
-> --=20
+>  FILES:${PN} +=3D "${datadir}/dbus-1 \
+>                  ${datadir}/metainfo \
+>                  ${datadir}/thumbnailers \
+> --
 > 2.34.1
->=20
+>
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#102645): https://lists.openembedded.org/g/openembedde=
+d-devel/message/102645
+> Mute This Topic: https://lists.openembedded.org/mt/98945571/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
+aj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
 >
 
