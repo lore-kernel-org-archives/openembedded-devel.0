@@ -1,95 +1,82 @@
-Return-Path: <alexander@amelkin.msk.ru>
+Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 843EBC77B7A
-	for <webhook@archiver.kernel.org>; Wed, 17 May 2023 11:13:29 +0000 (UTC)
-Received: from mail.fiord.ru (mail.fiord.ru [62.140.247.50])
- by mx.groups.io with SMTP id smtpd.web10.46658.1684322007174234403
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8A67FC77B75
+	for <webhook@archiver.kernel.org>; Wed, 17 May 2023 11:23:29 +0000 (UTC)
+Received: from mailout03.t-online.de (mailout03.t-online.de [194.25.134.81])
+ by mx.groups.io with SMTP id smtpd.web10.46808.1684322599673154483
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 17 May 2023 04:13:27 -0700
+ Wed, 17 May 2023 04:23:20 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: amelkin.msk.ru, ip: 62.140.247.50, mailfrom: alexander@amelkin.msk.ru)
-Received: from [::1] (helo=mail.fiord.ru)
-	by mail.fiord.ru with esmtp (Exim 4.94.2)
-	(envelope-from <alexander@amelkin.msk.ru>)
-	id 1pzF5v-0029is-C4
-	for openembedded-devel@lists.openembedded.org; Wed, 17 May 2023 14:13:23 +0300
-MIME-Version: 1.0
-Date: Wed, 17 May 2023 14:13:23 +0300
-From: Alexander Amelkin <alexander@amelkin.msk.ru>
+ dkim=missing; spf=none, err=SPF record not found (domain: t-online.de, ip: 194.25.134.81, mailfrom: f_l_k@t-online.de)
+Received: from fwd88.dcpf.telekom.de (fwd88.aul.t-online.de [10.223.144.114])
+	by mailout03.t-online.de (Postfix) with SMTP id BC16135A9
+	for <openembedded-devel@lists.openembedded.org>; Wed, 17 May 2023 13:23:17 +0200 (CEST)
+Received: from flk-MS-7C91.fritz.box ([84.163.40.181]) by fwd88.t-online.de
+	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
+	esmtp id 1pzFFT-1i7mFt0; Wed, 17 May 2023 13:23:15 +0200
+From: Markus Volk <f_l_k@t-online.de>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH] ipmitool: Update links
-In-Reply-To: <CAMKF1sqfE0Q5vwC+2sG5wGHeadoabqQHhSSy=y4aQVjPDOrfgA@mail.gmail.com>
-References: <CAMKF1sqfE0Q5vwC+2sG5wGHeadoabqQHhSSy=y4aQVjPDOrfgA@mail.gmail.com>
-Message-ID: <ba0f0a849c0c2eedd3d1bf04635ae5ea@amelkin.msk.ru>
-X-Sender: alexander@amelkin.msk.ru
-X-Remote-Browser: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36
- (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36 Edg/112.0.1722.58
-X-Originating-IP: [185.174.110.9]
-X-RoundCube-Server: 62.140.247.50
-Content-Type: text/plain; charset=US-ASCII;
- format=flowed
-Content-Transfer-Encoding: 7bit
+Cc: Markus Volk <f_l_k@t-online.de>
+Subject: [meta-gnome][PATCHv2] evince: update 44.0 -> 44.1
+Date: Wed, 17 May 2023 13:23:03 +0200
+Message-Id: <20230517112303.1127846-1-f_l_k@t-online.de>
+X-Mailer: git-send-email 2.34.1
+MIME-Version: 1.0
+X-TOI-EXPURGATEID: 150726::1684322595-18DBAE62-F945D789/0/0 CLEAN NORMAL
+X-TOI-MSGID: 5b0f43e2-f84e-4c0f-920a-e90145b98a69
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 17 May 2023 11:13:29 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102644
+ <openembedded-devel@lists.openembedded.org>; Wed, 17 May 2023 11:23:29 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102645
 
-The project has been moved to CodeBerg.org.
-Update the links in the recipe and also bump to the
-latest revision (1.8.19.13).
+- remove buildpath from enum-types
 
-Additionally fix the link to the IANA PEN registry as IANA
-has changed their URL scheme some time ago and the old link
-started pointing to the HTML page instead of the text file.
-
-Signed-off-by: Alexander Amelkin <alexander@amelkin.msk.ru>
+Signed-off-by: Markus Volk <f_l_k@t-online.de>
 ---
-  meta-oe/recipes-kernel/ipmitool/ipmitool_1.8.19.bb | 6 +++---
-  1 file changed, 3 insertions(+), 3 deletions(-)
+ .../evince/{evince_44.0.bb =3D> evince_44.1.bb}              | 7 ++++++-
+ 1 file changed, 6 insertions(+), 1 deletion(-)
+ rename meta-gnome/recipes-gnome/evince/{evince_44.0.bb =3D> evince_44.1.=
+bb} (79%)
 
-diff --git a/meta-oe/recipes-kernel/ipmitool/ipmitool_1.8.19.bb 
-b/meta-oe/recipes-kernel/ipmitool/ipmitool_1.8.19.bb
-index 0340901c2..ab9074bba 100644
---- a/meta-oe/recipes-kernel/ipmitool/ipmitool_1.8.19.bb
-+++ b/meta-oe/recipes-kernel/ipmitool/ipmitool_1.8.19.bb
-@@ -14,7 +14,7 @@ Log (SEL), printing Field Replaceable Unit (FRU) 
-information, reading and \
-  setting LAN configuration, and chassis power control. \
-  "
-
--HOMEPAGE = "http://ipmitool.sourceforge.net/"
-+HOMEPAGE = "http://codeberg.org/IPMITool/ipmitool"
-  SECTION = "kernel/userland"
-
-  LICENSE = "BSD-3-Clause"
-@@ -22,14 +22,14 @@ LIC_FILES_CHKSUM = 
-"file://COPYING;md5=9aa91e13d644326bf281924212862184"
-
-  DEPENDS = "openssl readline ncurses"
-  SRCREV = "19d78782d795d0cf4ceefe655f616210c9143e62"
--SRC_URI = 
-"git://github.com/ipmitool/ipmitool;protocol=https;branch=master \
-+SRC_URI = 
-"git://codeberg.org/ipmitool/ipmitool;protocol=https;branch=master \
-             ${IANA_ENTERPRISE_NUMBERS} \
-             
-file://0001-configure-Remove-the-logic-to-download-IANA-PEN-data.patch \
-             "
-  IANA_ENTERPRISE_NUMBERS ?= ""
-
-  # Add these via bbappend if this database is needed by the system
--#IANA_ENTERPRISE_NUMBERS = 
-"http://www.iana.org/assignments/enterprise-numbers;name=iana-enterprise-numbers;downloadfilename=iana-enterprise-numbers"
-+#IANA_ENTERPRISE_NUMBERS = 
-"http://www.iana.org/assignments/enterprise-numbers.txt;name=iana-enterprise-numbers;downloadfilename=iana-enterprise-numbers"
-  #SRC_URI[iana-enterprise-numbers.sha256sum] = 
-"cdd97fc08325667434b805eb589104ae63f7a9eb720ecea73cb55110b383934c"
-
-  S = "${WORKDIR}/git"
--- 
-2.28.0
+diff --git a/meta-gnome/recipes-gnome/evince/evince_44.0.bb b/meta-gnome/=
+recipes-gnome/evince/evince_44.1.bb
+similarity index 79%
+rename from meta-gnome/recipes-gnome/evince/evince_44.0.bb
+rename to meta-gnome/recipes-gnome/evince/evince_44.1.bb
+index 1c7103c900..a844324ade 100644
+--- a/meta-gnome/recipes-gnome/evince/evince_44.0.bb
++++ b/meta-gnome/recipes-gnome/evince/evince_44.1.bb
+@@ -34,7 +34,7 @@ REQUIRED_DISTRO_FEATURES =3D "${@bb.utils.contains('DIS=
+TRO_FEATURES', 'x11', 'open
+ def gnome_verdir(v):
+     return oe.utils.trim_version(v, 1)
+=20
+-SRC_URI[archive.sha256sum] =3D "339ee9e005dd7823a13fe21c71c2ec6d2c4cb745=
+48026e4741eee7b2703e09da"
++SRC_URI[archive.sha256sum] =3D "15afd3bb15ffb38fecab34c23350950ad270ab03=
+a85b94e333d9dd7ee6a74314"
+=20
+ GTKDOC_MESON_OPTION =3D "gtk_doc"
+=20
+@@ -46,6 +46,11 @@ RRECOMMENDS:${PN} =3D "adwaita-icon-theme"
+=20
+ PACKAGES =3D+ "${PN}-nautilus-extension"
+=20
++do_install:prepend() {
++    sed -i -e 's|${B}/../${PN}-${PV}|/usr/src/debug/${PN}/${PV}-${PR}|g'=
+ ${B}/libview/ev-view-type-builtins.c
++    sed -i -e 's|${B}/../${PN}-${PV}|/usr/src/debug/${PN}/${PV}-${PR}|g'=
+ ${B}/libdocument/ev-document-type-builtins.c
++}
++
+ FILES:${PN} +=3D "${datadir}/dbus-1 \
+                 ${datadir}/metainfo \
+                 ${datadir}/thumbnailers \
+--=20
+2.34.1
 
 
