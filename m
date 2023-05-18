@@ -1,232 +1,170 @@
-Return-Path: <f_l_k@t-online.de>
+Return-Path: <Martin.Jansa@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0994AC77B7D
-	for <webhook@archiver.kernel.org>; Thu, 18 May 2023 05:40:45 +0000 (UTC)
-Received: from mailout03.t-online.de (mailout03.t-online.de [194.25.134.81])
- by mx.groups.io with SMTP id smtpd.web11.10517.1684388437109369686
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EADF7C7EE24
+	for <webhook@archiver.kernel.org>; Thu, 18 May 2023 09:33:15 +0000 (UTC)
+Received: from mail-ej1-f53.google.com (mail-ej1-f53.google.com [209.85.218.53])
+ by mx.groups.io with SMTP id smtpd.web11.12930.1684402386575017575
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 17 May 2023 22:40:37 -0700
+ Thu, 18 May 2023 02:33:06 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=SPF record not found (domain: t-online.de, ip: 194.25.134.81, mailfrom: f_l_k@t-online.de)
-Received: from fwd72.dcpf.telekom.de (fwd72.aul.t-online.de [10.223.144.98])
-	by mailout03.t-online.de (Postfix) with SMTP id 817AD4CD0F
-	for <openembedded-devel@lists.openembedded.org>; Thu, 18 May 2023 07:40:35 +0200 (CEST)
-Received: from flk-MS-7C91.fritz.box ([84.163.44.3]) by fwd72.t-online.de
-	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1pzWNH-1WvioU0; Thu, 18 May 2023 07:40:27 +0200
-From: Markus Volk <f_l_k@t-online.de>
+ dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=V2+TnjkM;
+ spf=pass (domain: gmail.com, ip: 209.85.218.53, mailfrom: martin.jansa@gmail.com)
+Received: by mail-ej1-f53.google.com with SMTP id a640c23a62f3a-95fde138693so199904066b.0
+        for <openembedded-devel@lists.openembedded.org>; Thu, 18 May 2023 02:33:06 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20221208; t=1684402385; x=1686994385;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=VwuscvX6/Oj3vqy1tCUNm+2vsNuTWzqFVJL4RzoyIiE=;
+        b=V2+TnjkMzRvc03CXdXjxIxla6F05ELZtbYVnIO3bZxQLtLoSBLQ3T5tPkbqagpzEg2
+         3FgaF8PbvISzQb6Ya9cBjLUzESSd2mv8YkZ2wgFUgOPMl0PbnBZruh1309Ua8VXwDg9M
+         A9VFGZcHBncwIrfvDytXTFZRwOgOQuyEh1+33tHW9u8y1ZJJMQF7HkV1iqxw6NuRDYQ/
+         hDJkYJTA/8EhvPGLXICpitrzee7n0+/kkGT1j3cCuospRRFmND5G0ljRZGfvsRQRbTtg
+         ijMlfX1A5qBiidI+FKsMac3lotTJswQx/fPQV7ZOJZdRo+R2U0z94JhBFAP2WNIiEkX1
+         qUzQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20221208; t=1684402385; x=1686994385;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=VwuscvX6/Oj3vqy1tCUNm+2vsNuTWzqFVJL4RzoyIiE=;
+        b=ZwhZziwDuokQUbJjfiGweVv9eB2i6Bk/yBnTyVTqtdWEDt5nzBEUu3nuNLHwelY6kl
+         hNnF7JNeKf04qolRttrLl3nqJpCYftjXqHKmdAFHXXQ4+xAIJTQEwqCuWM6MUMEQOZMN
+         5VM/x1BsdGfEGRAacWOwooK/zuy+wl+x/IbHAH1t1DPle9dvj8MlbRXfjL4iMFhuhBHX
+         wMaayi/owtxb9P3E4asqBBz/KDa0Xz61hNwITJ4lBd/SgJT5plYFVknGijQtsvOLQWOC
+         6SeJNhNoSwY0g90DRD0avfwmorPAnjGjpgx3dgh2561B0TSaX4jsKnHTl55J8N27Mk6V
+         eQmw==
+X-Gm-Message-State: AC+VfDwddaaBb87i3ctjyoM9j9eXsrssS2zI4j8wHBkIZl6t37SeuoKB
+	WtOzHfNS4TPRtXNarkN7w4kXuIajjWI=
+X-Google-Smtp-Source: ACHHUZ6D0GGkYsTGwNiP9EQ5lqefd4QoCnWWDHJSz7zw+iKYoNvMvAFLUWrHx/NNUfXM4+os682vtQ==
+X-Received: by 2002:a17:907:1688:b0:969:df2e:d7d1 with SMTP id hc8-20020a170907168800b00969df2ed7d1mr5275243ejc.24.1684402384845;
+        Thu, 18 May 2023 02:33:04 -0700 (PDT)
+Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
+        by smtp.gmail.com with ESMTPSA id m14-20020a170906258e00b0096f272206b3sm712218ejb.125.2023.05.18.02.33.04
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 18 May 2023 02:33:04 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Markus Volk <f_l_k@t-online.de>
-Subject: [meta-openembedded][PATCH 2/2] pipewire: update 0.3.70 -> 0.3.71
-Date: Thu, 18 May 2023 07:40:15 +0200
-Message-Id: <20230518054015.81043-2-f_l_k@t-online.de>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20230518054015.81043-1-f_l_k@t-online.de>
-References: <20230518054015.81043-1-f_l_k@t-online.de>
+Cc: Khem Raj <raj.khem@gmail.com>,
+	Martin Jansa <Martin.Jansa@gmail.com>
+Subject: [meta-oe][kirkstone][PATCH 2/2] nodejs: Fix build with gcc13
+Date: Thu, 18 May 2023 11:33:01 +0200
+Message-Id: <20230518093301.2938164-2-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.40.1
+In-Reply-To: <20230518093301.2938164-1-Martin.Jansa@gmail.com>
+References: <20230518093301.2938164-1-Martin.Jansa@gmail.com>
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1684388427-5A7F357F-864D9379/0/0 CLEAN NORMAL
-X-TOI-MSGID: f95f6f1d-3ba3-41ac-96c9-e9a5b2e931bd
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 18 May 2023 05:40:45 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102653
+ <openembedded-devel@lists.openembedded.org>; Thu, 18 May 2023 09:33:15 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102655
 
-This is a bugfix release that is API and ABI compatible with previous
-0.3.x releases.
+From: Khem Raj <raj.khem@gmail.com>
 
-  - A new zero-latency jackdbus bridge was added. This works similar to w=
-hat
-    PulseAudio has to offer and creates a sink/source when jackdbus is
-    started. It is however much more efficient and runs the complete Pipe=
-Wire
-    graph as a synchronous JACK client with no added latency.
-  - Many performance improvements. Activation of remote nodes is more
-    efficient, fewer eventfds are required on the clients, less callback
-    overhead in performence critical paths and an optimized poll function
-    was added. This was mainly driven by the jackdbus module to get the l=
-owest
-    possible overhead when running the graph.
-  - The JACK notify callback implementation was reworked to emulate bette=
-r what
-    JACK does, improving compatibility with ardour7 and the JACK stress t=
-est.
-  - More work on BAP devices. Device latency is now passed on to
-    applications also for multi-device headsets, and channel allocation
-    is handled better.
-  - Many more improvements and bugfixes.
-
-  - Remove the hardcoded limit on io_areas. This is used to link nodes to=
-gether
-    and exchange buffers, it was limited to 2048 but now dynamically scal=
-es
-    based on requirements.
-  - Rate and quantum changes are now applied correctly in more cases. (#3=
-159)
-  - Updates to client-node to more efficiently process the driver.
-  - The profiler information was improved to be more accurate. It should
-    now work better for remote drivers.
-  - Some potential memory map errors were fixed in the protocol because i=
-n some
-    case with large messages, some fds were closed too soon.
-  - pw-filter now implements the pw_filter_set_active() method.
-  - A potential out-of-buffers case was fixed in capture pw-streams where=
- buffers
-    were not moved to the recycle queue when the node suspended.
-  - Nodes are now always woken up with the eventfd. Previously there were
-    some optimiztions in the server to directly call into the node proces=
-s
-    function but that optimization is not necessary. Without this optimiz=
-ation
-    it is now possible to run nodes in different threads.
-  - pw-stream trigger is now implemented correctly in all cases.
-  - Remote nodes now use one eventfd less because they get triggered with=
- the
-    node eventfd directly.
-  - Monitor ports are now ignored in latency updates.
-  - A potential race when reporting an error to a client was fixed. (#319=
-2)
-  - Fix a bug where always_process nodes would sometimes IDLE. (#3189)
-  - Optimize peer activation. Nodes are now activated more efficiently an=
-d
-    independent of the number of links. It also reduces the number of eve=
-ntfds
-    and memory in remote clients.
-  - A bug in property serialization was fixed. Values with spaces would o=
-nly
-    serialize the first part of the value.
-
-  - Correctly handle the echo-canceler plugin init method fallback. The
-    samplerate was not correctly configured. This is only a regression fo=
-r people
-    that have external echo-canceler plugins.
-  - RAOP sink now only sets the volume on the remote end when the stream =
-is
-    recording. (#3175)
-  - RAOP discover now tries to deduplicate entries from the same host.
-  - A new zero-latency jackdbus bridge was added. This works similar to w=
-hat
-    pulseaudio has to offer and creates a sink/source when jackdbus is
-    started. It is however much more efficient and runs the complete Pipe=
-Wire
-    graph as a synchronous JACK client.
-  - The access module uses a more secure way to check the application
-    executable.
-  - module-combine-stream now has configurable delay and latency for each
-    stream. This can be used to align sinks/sources with different latenc=
-ies.
-  - A potential crash in module-pulse-tunnel was fixed when shutting down=
-.
-    (#3199)
-  - Module-rt will now clamp the nice value to the min allowed value to a=
-void
-    errors from rtkit. (#3186)
-  - Fix a bug with the session counters in module-rtp-sap. Also use the r=
-ight
-    format for L24. Improve the AES67 example config.
-  - Improve some warning and info messages in module-rt. (#3194)
-  - module-rtp-session should now do something when started without argum=
-ents.
-  - A potential crash in module-rtp-session was fixed. (#3217)
-  - module-filter-chain has better error reporting when a convolver fails=
- to
-    load. (#3223)
-
-  - Move some things around to avoid compiler warnings. (#3171)
-  - Increase mixer ports. Reorganize some things and bump mixer input por=
-ts
-    from 128 to 512.
-  - Fix a potential crash when a node is scheduled before it completes
-    the setup.
-  - The JACK sink and source SPA plugins have seen some improvements.
-  - Allow the peaks resampler still if we disabled resampling.
-  - Perform more cleanup in audioadapter when in error.
-  - An optimized non-cancellable loop implementation was added.
-  - Callbacks were optimized with a _fast() varsion that doesn't check th=
-e
-    version and method. When this check is performed earlier, it can
-    be skipped in performance critical places.
-  - Some of the callbacks and system methods are now using the fast funct=
-ion
-    calls in critical paths.
-  - A potential division by zero was fixed in the ALSA plugins.
-  - Improve rate and quantum when starting audioconvert.
-  - Make it possible to override node.driver in the SPA null-audio-driver=
-.
-    (#3220)
-
-  - The audio info parameter parsing was refactored and improved.
-  - Fix some races with clients exiting when playing samples.
-  - An option was added to change or disable the dbus name registration.
-    (#2987)
-
-  - Implement battery reporting using AT+XEVENT.
-  - Disable hardware volume for 3M WorkTunes.
-  - Implement BAP audio locations (channel positions) by using the new
-    bluez properties.
-
-  - Fix some errors reported by JACK test.cpp. (#2638)
-  - Add jack.show-midi option to show/hide midi ports.
-  - Add jack.max-client-ports option. JACK also has a port limit and so
-    PipeWire needs it as well to make the tests happy.
-  - Call the shutdown callback only when the server stopped, not when the=
-re
-    is a random error. (#3070)
-  - Avoid registering the same port name twice.
-  - Call port registration callbacks in activate/deactivate.
-  - Improve jack_port_connected().
-  - Improve some error reporting.
-  - The JACK headers were updated to a newer version.
-  - JACK callbacks are now managed with an event queue to simulate
-    more what JACK does. This avoids emiting callbacks when a method is b=
-locking
-    for a reply and causing deadlocks. (#3183)
-  - Assign unique names to JACK clients. (#2833)
-  - Fix a potential crash when the thread_utils was used after free.
-  - Aliases are now not filled in by default to improve JACK compatibilit=
-y.
-    (#3154)
-
-  - The ALSA plugin will now wait for negotiation to complete or an error
-    before _prepare() completes. This makes more applications deal correc=
-tly
-    with the potential errors.
-
-  - A new document about how scheduling is implemented was added.
-  - Update the pw-cli man page. (#2988)
-  - Document the SPA Pod serialization.
-  - Document the PipeWire native protocol.
-
-Signed-off-by: Markus Volk <f_l_k@t-online.de>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- .../pipewire/{pipewire_0.3.70.bb =3D> pipewire_0.3.71.bb}         | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-multimedia/recipes-multimedia/pipewire/{pipewire_0.3.70.bb =3D=
-> pipewire_0.3.71.bb} (99%)
+ .../nodejs/nodejs/gcc13.patch                 | 70 +++++++++++++++++++
+ .../recipes-devtools/nodejs/nodejs_16.19.1.bb |  1 +
+ 2 files changed, 71 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/nodejs/nodejs/gcc13.patch
 
-diff --git a/meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.70.=
-bb b/meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.71.bb
-similarity index 99%
-rename from meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.70.b=
-b
-rename to meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.71.bb
-index 56595e7686..7f117e10b2 100644
---- a/meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.70.bb
-+++ b/meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.71.bb
-@@ -13,7 +13,7 @@ LIC_FILES_CHKSUM =3D " \
-=20
- DEPENDS =3D "dbus ncurses"
-=20
--SRCREV =3D "9f7d60c1e84cc0481afc3f6ccf76e127567943a8"
-+SRCREV =3D "bd225b14bbda1a6e2dc7a52780eaf728920e0ff2"
- SRC_URI =3D "git://gitlab.freedesktop.org/pipewire/pipewire.git;branch=3D=
-master;protocol=3Dhttps"
-=20
- S =3D "${WORKDIR}/git"
---=20
-2.34.1
+diff --git a/meta-oe/recipes-devtools/nodejs/nodejs/gcc13.patch b/meta-oe/recipes-devtools/nodejs/nodejs/gcc13.patch
+new file mode 100644
+index 0000000000..be82c3369c
+--- /dev/null
++++ b/meta-oe/recipes-devtools/nodejs/nodejs/gcc13.patch
+@@ -0,0 +1,70 @@
++From 0be1c5728173ea9ac42843058e26b6268568acf0 Mon Sep 17 00:00:00 2001
++From: Jiawen Geng <technicalcute@gmail.com>
++Date: Fri, 14 Oct 2022 09:54:33 +0800
++Subject: [PATCH] deps: V8: cherry-pick c2792e58035f
++MIME-Version: 1.0
++Content-Type: text/plain; charset=UTF-8
++Content-Transfer-Encoding: 8bit
++
++Original commit message:
++
++    [base] Fix build with gcc-13
++
++    See https://gcc.gnu.org/gcc-13/porting_to.html#header-dep-changes.
++
++    Also see Gentoo Linux bug report: https://bugs.gentoo.org/865981
++
++    Change-Id: I421f396b02ba37e12ee70048ee33e034f8113566
++    Reviewed-on: https://chromium-review.googlesource.com/c/v8/v8/+/3934140
++    Reviewed-by: Clemens Backes <clemensb@chromium.org>
++    Reviewed-by: Simon Zünd <szuend@chromium.org>
++    Commit-Queue: Clemens Backes <clemensb@chromium.org>
++    Cr-Commit-Position: refs/heads/main@{#83587}
++
++Refs: https://github.com/v8/v8/commit/c2792e58035fcbaa16d0cb70998852fbeb5df4cc
++PR-URL: https://github.com/nodejs/node/pull/44961
++Fixes: https://github.com/nodejs/node/issues/43642
++Reviewed-By: Michaël Zasso <targos@protonmail.com>
++Reviewed-By: Richard Lau <rlau@redhat.com>
++Reviewed-By: Luigi Pinca <luigipinca@gmail.com>
++Reviewed-By: Colin Ihrig <cjihrig@gmail.com>
++
++Upstream-Status: Backport [https://github.com/nodejs/node/commit/0be1c5728173ea9ac42843058e26b6268568acf0]
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ common.gypi                                   | 2 +-
++ deps/v8/AUTHORS                               | 1 +
++ deps/v8/src/base/logging.h                    | 1 +
++ deps/v8/src/inspector/v8-string-conversions.h | 1 +
++ 4 files changed, 4 insertions(+), 1 deletion(-)
++
++--- a/deps/v8/AUTHORS
+++++ b/deps/v8/AUTHORS
++@@ -247,6 +247,7 @@ Vlad Burlik <vladbph@gmail.com>
++ Vladimir Krivosheev <develar@gmail.com>
++ Vladimir Shutoff <vovan@shutoff.ru>
++ Wael Almattar <waelsy123@gmail.com>
+++WANG Xuerui <git@xen0n.name>
++ Wei Wu <lazyparser@gmail.com>
++ Wenlu Wang <kingwenlu@gmail.com>
++ Wenming Yang <yangwenming@bytedance.com>
++--- a/deps/v8/src/base/logging.h
+++++ b/deps/v8/src/base/logging.h
++@@ -5,6 +5,7 @@
++ #ifndef V8_BASE_LOGGING_H_
++ #define V8_BASE_LOGGING_H_
++ 
+++#include <cstdint>
++ #include <cstring>
++ #include <sstream>
++ #include <string>
++--- a/deps/v8/src/inspector/v8-string-conversions.h
+++++ b/deps/v8/src/inspector/v8-string-conversions.h
++@@ -5,6 +5,7 @@
++ #ifndef V8_INSPECTOR_V8_STRING_CONVERSIONS_H_
++ #define V8_INSPECTOR_V8_STRING_CONVERSIONS_H_
++ 
+++#include <cstdint>
++ #include <string>
++ 
++ // Conversion routines between UT8 and UTF16, used by string-16.{h,cc}. You may
+diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_16.19.1.bb b/meta-oe/recipes-devtools/nodejs/nodejs_16.19.1.bb
+index 0661fd6f1c..dfc4af3df5 100644
+--- a/meta-oe/recipes-devtools/nodejs/nodejs_16.19.1.bb
++++ b/meta-oe/recipes-devtools/nodejs/nodejs_16.19.1.bb
+@@ -26,6 +26,7 @@ SRC_URI = "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.xz \
+            file://0001-liftoff-Correct-function-signatures.patch \
+            file://0001-mips-Use-32bit-cast-for-operand-on-mips32.patch \
+            file://0001-Nodejs-Fixed-pipes-DeprecationWarning.patch \
++           file://gcc13.patch \
+            "
+ SRC_URI:append:class-target = " \
+            file://0001-Using-native-binaries.patch \
+-- 
+2.40.1
 
 
