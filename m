@@ -1,89 +1,136 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0BD63C77B7A
-	for <webhook@archiver.kernel.org>; Fri, 19 May 2023 07:01:37 +0000 (UTC)
-Received: from mail-pl1-f170.google.com (mail-pl1-f170.google.com [209.85.214.170])
- by mx.groups.io with SMTP id smtpd.web10.20147.1684479695708985330
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B25F0C77B7F
+	for <webhook@archiver.kernel.org>; Fri, 19 May 2023 12:57:58 +0000 (UTC)
+Received: from mail-yw1-f178.google.com (mail-yw1-f178.google.com [209.85.128.178])
+ by mx.groups.io with SMTP id smtpd.web10.25604.1684501075817253995
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 19 May 2023 00:01:35 -0700
+ Fri, 19 May 2023 05:57:55 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20221208 header.b=ISznEW2d;
- spf=pass (domain: gmail.com, ip: 209.85.214.170, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f170.google.com with SMTP id d9443c01a7336-1ae4c5e1388so29835195ad.1
-        for <openembedded-devel@lists.openembedded.org>; Fri, 19 May 2023 00:01:35 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20221208 header.b=QilOntnH;
+ spf=pass (domain: gmail.com, ip: 209.85.128.178, mailfrom: akuster808@gmail.com)
+Received: by mail-yw1-f178.google.com with SMTP id 00721157ae682-561d611668eso40766577b3.0
+        for <openembedded-devel@lists.openembedded.org>; Fri, 19 May 2023 05:57:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1684479695; x=1687071695;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=VGJ5wsqgm/QE2jGGqpXrNm1Dt4wQA4C123cJpDXX+mQ=;
-        b=ISznEW2do35SKCc3dyLW5eeTkotAW94JS850DeEnJqEPPsvFMTxKZvBY/Ee8bqCcOH
-         NQyW0ntCGAHE/c2sq41NNPMKYiMiKEIZLR76SzhDYWt5Luskyw/FND581UDOVT8pRqY8
-         YqDduK1b9YVfnTTiWzTr1V98GlHCkduPqKERsXqoTm/0pgmhAwTh+t3iz0PtxkFCx/7E
-         peEX+zICTrT2QOog1nRE8CAMWJm3iIrKMZi3ir8MXAnLebizdYMstQx09Qus0hgzbqGy
-         PrJAxihx4y4offBNSTXiVE+UyVX8V0pVNU/Oi1l3VMfI3v/dCHVJwt6uEeKz0XdMWVnh
-         MZXw==
+        d=gmail.com; s=20221208; t=1684501075; x=1687093075;
+        h=content-transfer-encoding:subject:from:to:content-language
+         :user-agent:mime-version:date:message-id:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=jfryUO2J6W+4dd0qGvzbsTounRbVjJpU1ZWs2PpK0K4=;
+        b=QilOntnHno0ZXUZQkNXhY0pqyC63Kf6BhKc0+/vMGsLutQkJuxCZRQ582rbOQ7ymiv
+         PWnvVCvuMF0Tl+O896Q27XtAohom6DadQdRXuKLvP60dk8IiylR8ce8oj4wwzrVegOgn
+         wKP7HxBLS1u24s6SAhZ9kc4Pjp85qfTJrrgdfE3QTrm5mzE0xgdq+cW7r9T51eY7FHld
+         TgKyScDck7Fq5RcEDzZTwV9TnOeu8xUMy3aGTAoeQqZQl4hbpB17Z3QrkCJv2UdQ1fdz
+         XpYEcuBCN47xts1drLqdYW8VU2bjioFXyMpuMT4Gdlo+x8v/O7qes8Fw4+g9XLPvj9Fh
+         K8wA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1684479695; x=1687071695;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=VGJ5wsqgm/QE2jGGqpXrNm1Dt4wQA4C123cJpDXX+mQ=;
-        b=esKeixbKibKtd+4jk26OX5Ju347Q/OX3u82cj/P+g+BAts11DOhPGuQLbebZNthSrR
-         8OJqB3aERityr5H6uuMVukipESdCxrOEHrxqniny68gSQLrhwHWYsYRtadit6UWayoE+
-         2ked7pV+5mKAk0I3Spx0jrCjx/8d3ghiF662t/nfV9nRvkjJ+l6dwf6819MAgtO2Nipr
-         JuVKN6sZ6R8HN3y8v7y+DKPM4bzCxKCSEtMP2ePepxHqQqkfgIiOI3037ZHG+GBdYP4j
-         7Hkq+gNMzhzY5R9qyRXODD1OaziHFjl/iBBK224znOTkQENFtZAqOq81H93SKcYn3i++
-         p1Aw==
-X-Gm-Message-State: AC+VfDzTYy+UvvertRlpARa7z1tdvkOF4XVKvUHamRGYhKJHfwMJBu8W
-	nfswCZQK11hjA4XhS0Ft3mEZb82kDBY=
-X-Google-Smtp-Source: ACHHUZ6psk0O55N6FPhsUfoC5qnBd422j6gbKrIUYAgZ+ExMYj3OppclE25/VJRLZQi9+BffDuVp3Q==
-X-Received: by 2002:a17:902:7683:b0:1ac:637d:5888 with SMTP id m3-20020a170902768300b001ac637d5888mr1686431pll.43.1684479694614;
-        Fri, 19 May 2023 00:01:34 -0700 (PDT)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9181:d380::c675])
-        by smtp.gmail.com with ESMTPSA id j6-20020a170902c08600b001ae365072cfsm2602234pld.219.2023.05.19.00.01.33
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 19 May 2023 00:01:34 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH] lirc: Define SH_PATH=/bin/sh
-Date: Fri, 19 May 2023 00:01:32 -0700
-Message-Id: <20230519070132.1032337-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.40.1
+        d=1e100.net; s=20221208; t=1684501075; x=1687093075;
+        h=content-transfer-encoding:subject:from:to:content-language
+         :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=jfryUO2J6W+4dd0qGvzbsTounRbVjJpU1ZWs2PpK0K4=;
+        b=jB7tMM/PZ+wLCCxhiJHJoJi6/r8F0fxbWEJKrK32T8P/PrDhj/G21gsO1b3bbtKPtp
+         9sWewhShGcwadLbAlyWFvsaEHYIjZu4R3avyvvqtAo3H9rBE7g5yNqZYQ4VsvjN7DqgR
+         vGF1hvqhStHumVYPhf9VDmWIWrJY0H7ldtcTB8oBoxLrX34SjV5T4xBuYT0WS3mYs+JC
+         +IFRq3rMNxn7RZI1Een94Cl1FNiNzKT8gTM2oAi09OHyDPbRQweWv2m94HpucU7mBz22
+         Y/uFYmIx+XbTgwvSDzI/wMdFiCnPDtea5L4DX9mA19S/g9xvPPqQZUVzFSueerAYrq57
+         X4jQ==
+X-Gm-Message-State: AC+VfDzCBzd5mK7ETw4iiN2SXeNlFA1Ouv9soiAIorvYI1k+PhMdws14
+	IK/N+tkURpYhavVib984kCI=
+X-Google-Smtp-Source: ACHHUZ5AwTnuCCs0L1S/tVlAEJ5VBnqxEOTbUhCauYCMcygcD3kRxO0QP3MbCJSmFRifh+4llzAYAw==
+X-Received: by 2002:a81:c247:0:b0:55a:20a1:4ba6 with SMTP id t7-20020a81c247000000b0055a20a14ba6mr1775814ywg.25.1684501074828;
+        Fri, 19 May 2023 05:57:54 -0700 (PDT)
+Received: from ?IPV6:2600:1700:9190:ba10:4d1d:cc38:139f:3d91? ([2600:1700:9190:ba10:4d1d:cc38:139f:3d91])
+        by smtp.gmail.com with ESMTPSA id h15-20020a81b40f000000b0055aafcef659sm1145038ywi.5.2023.05.19.05.57.54
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Fri, 19 May 2023 05:57:54 -0700 (PDT)
+Message-ID: <400ca12b-5176-d872-3314-1dfed4de43e7@gmail.com>
+Date: Fri, 19 May 2023 08:57:48 -0400
 MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.10.0
+Content-Language: en-US
+To: Khem Raj <raj.khem@gmail.com>,
+ OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+From: akuster808 <akuster808@gmail.com>
+Subject: mickeldore merge request: May 19th
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 19 May 2023 07:01:37 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102671
+ <openembedded-devel@lists.openembedded.org>; Fri, 19 May 2023 12:57:58 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102672
 
-It points to sh provided by HOSTTOOLS in the build systems path
+The following changes since commit 54b177f4acb3048d21a68f180fc183d0fdf47a94:
 
-Fixes
-WARNING: lirc-0.10.2-r0 do_package_qa: QA Issue: File /usr/include/lirc/config.h in package lirc-dev contains reference to TMPDIR [buildpaths]
+   meta-networking/licenses/netperf: remove unused license (2023-05-08 
+08:03:30 -0400)
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- .../meta-python/recipes-connectivity/lirc/lirc_0.10.2.bb        | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+are available in the Git repository at:
 
-diff --git a/meta-oe/dynamic-layers/meta-python/recipes-connectivity/lirc/lirc_0.10.2.bb b/meta-oe/dynamic-layers/meta-python/recipes-connectivity/lirc/lirc_0.10.2.bb
-index fcb347a2e5..3d474305d7 100644
---- a/meta-oe/dynamic-layers/meta-python/recipes-connectivity/lirc/lirc_0.10.2.bb
-+++ b/meta-oe/dynamic-layers/meta-python/recipes-connectivity/lirc/lirc_0.10.2.bb
-@@ -40,7 +40,7 @@ PACKAGECONFIG ?= " \
-     ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', ' systemd', '', d)} \
-     ${@bb.utils.contains('DISTRO_FEATURES', 'x11', ' x11', '', d)} \
- "
--CACHED_CONFIGUREVARS = "HAVE_WORKING_POLL=yes"
-+CACHED_CONFIGUREVARS = "HAVE_WORKING_POLL=yes SH_PATH=/bin/sh"
- 
- #EXTRA_OEMAKE = 'SUBDIRS="lib daemons tools"'
- 
--- 
-2.40.1
+   https://git.openembedded.org/meta-openembedded mickledore-next
+
+for you to fetch changes up to c032fd0b1a9d444711103c2703dfa8e2964a3865:
+
+   redis: upgrade 6.2.11 -> 6.2.12 (2023-05-16 07:32:31 -0400)
+
+----------------------------------------------------------------
+Changqing Li (1):
+       redis: upgrade 6.2.11 -> 6.2.12
+
+Martin Jansa (14):
+       libreport: add dependency on libarchive
+       libxmlb: add missing dependency on glib-2.0 and xz
+       geoclue: fix build without gobject-introspection-data
+       appstream: fix build without gobject-introspection-data
+       ostree: fix build without gobject-introspection-data
+       rdfind: fix build with -Werror=return-type
+       spice-gtk: respect gobject-introspection-data
+       cpulimit: fix do_install with multilib
+       libnfs: fix installed-vs-shipped issues with multilib
+       btrfsmaintenance: install to ${datadir}/${BPN}
+       libtomcrypt: pass LIBPATH to fix installed-vs-shipped with multilib
+       nanopb: fix installed-vs-shipped with multilib
+       nv-codec-headers: fix installed-vs-shipped with multilib
+       zfs: fix installation paths for multilib
+
+  meta-filesystems/recipes-filesystems/zfs/zfs_2.1.9.bb           | 36 
+++++++++++------
+  .../recipes-utils/btrfsmaintenance/btrfsmaintenance_0.5.bb      | 4 +-
+  .../nv-codec-headers/nv-codec-headers_12.0.16.0.bb              | 2 +-
+  meta-networking/recipes-support/spice/spice-gtk_0.42.bb         | 9 +++-
+  ...1-CMakeLists.txt-allow-to-set-PYTHON_INSTDIR-from-outs.patch | 67 
++++++++++++++++++++++++++++++
+  .../meta-python/recipes-devtools/nanopb/nanopb_0.4.7.bb         | 6 ++-
+  ...1-CMakeLists.txt-respect-CMAKE_INSTALL_LIBDIR-for-mult.patch | 61 
+++++++++++++++++++++++++++
+  meta-oe/recipes-connectivity/libnfs/libnfs_5.0.2.bb             | 4 +-
+  meta-oe/recipes-crypto/libtomcrypt/libtomcrypt_1.18.2.bb        | 2 +-
+  meta-oe/recipes-extended/libreport/libreport_2.17.8.bb          | 2 +-
+  meta-oe/recipes-extended/ostree/ostree_2023.2.bb                | 3 ++
+  .../recipes-extended/redis/{redis_6.2.11.bb => redis_6.2.12.bb} |  2 +-
+  meta-oe/recipes-gnome/libxmlb/libxmlb_0.3.10.bb                 | 2 +
+  ...1-libgeoclue-don-t-try-to-use-g-ir-scanner-when-intros.patch | 30 
++++++++++++++
+  meta-oe/recipes-navigation/geoclue/geoclue_2.7.0.bb             | 4 +-
+  meta-oe/recipes-support/appstream/appstream_0.16.1.bb           | 2 +-
+  meta-oe/recipes-support/cpulimit/cpulimit_0.2.bb                | 4 +-
+  .../rdfind/0001-configure.ac-fix-C-11-support-check.patch       | 37 
+++++++++++++++++
+  meta-oe/recipes-support/rdfind/rdfind_1.5.0.bb                  | 1 +
+  19 files changed, 251 insertions(+), 27 deletions(-)
+  create mode 100644 
+meta-oe/dynamic-layers/meta-python/recipes-devtools/nanopb/nanopb/0001-CMakeLists.txt-allow-to-set-PYTHON_INSTDIR-from-outs.patch
+  create mode 100644 
+meta-oe/recipes-connectivity/libnfs/libnfs/0001-CMakeLists.txt-respect-CMAKE_INSTALL_LIBDIR-for-mult.patch
+  rename meta-oe/recipes-extended/redis/{redis_6.2.11.bb => 
+redis_6.2.12.bb} (96%)
+  create mode 100644 
+meta-oe/recipes-navigation/geoclue/geoclue/0001-libgeoclue-don-t-try-to-use-g-ir-scanner-when-intros.patch
+  create mode 100644 
+meta-oe/recipes-support/rdfind/rdfind/0001-configure.ac-fix-C-11-support-check.patch
 
 
