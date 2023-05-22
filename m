@@ -1,89 +1,79 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 401ADC7EE2D
-	for <webhook@archiver.kernel.org>; Mon, 22 May 2023 01:10:46 +0000 (UTC)
-Received: from mail-pj1-f41.google.com (mail-pj1-f41.google.com [209.85.216.41])
- by mx.groups.io with SMTP id smtpd.web10.3014.1684717838312734193
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A499FC77B73
+	for <webhook@archiver.kernel.org>; Mon, 22 May 2023 06:03:27 +0000 (UTC)
+Received: from mailout05.t-online.de (mailout05.t-online.de [194.25.134.82])
+ by mx.groups.io with SMTP id smtpd.web10.15876.1684735405448259241
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 21 May 2023 18:10:38 -0700
+ Sun, 21 May 2023 23:03:26 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=ie30X/Jq;
- spf=pass (domain: gmail.com, ip: 209.85.216.41, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f41.google.com with SMTP id 98e67ed59e1d1-2553f2706bfso887729a91.1
-        for <openembedded-devel@lists.openembedded.org>; Sun, 21 May 2023 18:10:38 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1684717837; x=1687309837;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=oPAaXrEtW6amsiTx3eimcol0pFweDbry2X7acPUrVLA=;
-        b=ie30X/JqZsIyRXeelnkJee4ckupl6UjfC19Ofmx4b/4V/pKYrXu4e20DQaI3Vs/M7E
-         W7kx1f8GoVlqZMIqyxJPvsdvpzs7SW5KSkIl8pbrXzrMHdPQVTjSGXfpCpyC/QuWAkOF
-         A7TgJ1Se0v4cgVXo3lFIBhJSvSu9eet7ePMDPZJrH0PA8NpeHWkPLQ6PJOiIbOvONxCk
-         /ZpT7b0yH75GYkBelz5uKFecXjTe9JgU1tjosY3rW/9dvhd+70LNIWrGvozhmyUaKgCK
-         prjV85sOj3cCe2H1P051sjfBhOQEFGcbdhoyWiytZlsVYRn3pqwxAKh1AZ2zwpua9wAG
-         5CYw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1684717837; x=1687309837;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=oPAaXrEtW6amsiTx3eimcol0pFweDbry2X7acPUrVLA=;
-        b=QUkt5HPdftOVEYc3vlNwrXRT2Ef4uDBf0nh2HlCs1ZlF4QV6tPvj12ZFCItJIrs3Fh
-         OTgMIhJ/NLmhBLufo787JMJj+nE6vjGwrbSCjVr2iVgEncMt3s9ZHk2FjapNnwPXRHkC
-         UeWMin2+bO8A5byvbtYlnV762EDxGtAsQZ60k8vzZib8Kk1n/O8/4uFLUKETMYvbXCfo
-         VSn0HDqiY0GPCL5irfrA6YlKyxBTNGb9KZhKQlsMoUq2I3LyFR1gC2j+C0b+Z/mdc/EH
-         pctxa84ckJvsqiDJ6Chkpcai2QbboCWCn3jMFz/ZRzPlQHl28/92A/W1NjCcqQiDWqEN
-         xbvg==
-X-Gm-Message-State: AC+VfDzc3nqH+zn7hoMhzNhH07+VR9woI8SpqgEiINdwufbwRlrg4df5
-	dowfKwzUJK6rwvPnGKIzax7QRlW5Llc=
-X-Google-Smtp-Source: ACHHUZ4T2DsArODESZsucL+Ahkkdgz6LhZWOMldS/y8PMgcKQbJgyMWSp2EcdiRI+Q3Fcp6qR1gWpg==
-X-Received: by 2002:a17:90a:cb09:b0:250:78d0:f78c with SMTP id z9-20020a17090acb0900b0025078d0f78cmr10284088pjt.9.1684717837265;
-        Sun, 21 May 2023 18:10:37 -0700 (PDT)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9181:d380::c675])
-        by smtp.gmail.com with ESMTPSA id v23-20020a17090ae99700b002532d74fb59sm3037349pjy.22.2023.05.21.18.10.36
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 21 May 2023 18:10:36 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
+ dkim=missing; spf=none, err=SPF record not found (domain: t-online.de, ip: 194.25.134.82, mailfrom: f_l_k@t-online.de)
+Received: from fwd82.dcpf.telekom.de (fwd82.aul.t-online.de [10.223.144.108])
+	by mailout05.t-online.de (Postfix) with SMTP id 31A73169E0
+	for <openembedded-devel@lists.openembedded.org>; Mon, 22 May 2023 08:03:23 +0200 (CEST)
+Received: from flk-MS-7C91.fritz.box ([84.163.34.41]) by fwd82.t-online.de
+	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
+	esmtp id 1q0yde-1Nwbj70; Mon, 22 May 2023 08:03:22 +0200
+From: Markus Volk <f_l_k@t-online.de>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 2/3] mce-test: Update to latest
-Date: Sun, 21 May 2023 18:10:33 -0700
-Message-Id: <20230522011034.1311197-2-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.40.1
-In-Reply-To: <20230522011034.1311197-1-raj.khem@gmail.com>
-References: <20230522011034.1311197-1-raj.khem@gmail.com>
+Cc: Markus Volk <f_l_k@t-online.de>
+Subject: [meta-multimedia][PATCH] dav1d: update 1.1.0 -> 1.2.0
+Date: Mon, 22 May 2023 08:03:13 +0200
+Message-Id: <20230522060313.10062-1-f_l_k@t-online.de>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-TOI-EXPURGATEID: 150726::1684735402-63FE59E6-5CB61867/0/0 CLEAN NORMAL
+X-TOI-MSGID: 71dbf6d8-7f6d-4b71-b7a4-4e9939a5d6bd
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 22 May 2023 01:10:46 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102693
+ <openembedded-devel@lists.openembedded.org>; Mon, 22 May 2023 06:03:27 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102695
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Changes for 1.2.0 'Arctic Peregrine Falcon':
+-------------------------------------------
+
+1.2.0 is a small release of dav1d, adding more SIMD and fixes
+
+- Improvements on attachments of props and T.35 entries on output picture=
+s
+- NEON z1/z3 high bit-depth optimizations and improvements for 8bpc
+- SSSE3 z2/z3 8bpc and SSSE3 z1/z3 high bit-depth optimziations
+- refmvs.save_tmvs optimizations in SSSE3/AVX2/AVX-512
+- AVX-512 optimizations for high bit-depth itx (16x64, 32x64, 64x16, 64x3=
+2, 64x64)
+- AVX2 optimizations for 12bpc for 16x32, 32x16, 32x32 itx
+
+Signed-off-by: Markus Volk <f_l_k@t-online.de>
 ---
- meta-oe/recipes-support/mcelog/mce-test_git.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ .../recipes-multimedia/dav1d/{dav1d_1.1.0.bb =3D> dav1d_1.2.0.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-multimedia/recipes-multimedia/dav1d/{dav1d_1.1.0.bb =3D> dav=
+1d_1.2.0.bb} (89%)
 
-diff --git a/meta-oe/recipes-support/mcelog/mce-test_git.bb b/meta-oe/recipes-support/mcelog/mce-test_git.bb
-index f4f1b37d78..99487fd9b6 100644
---- a/meta-oe/recipes-support/mcelog/mce-test_git.bb
-+++ b/meta-oe/recipes-support/mcelog/mce-test_git.bb
-@@ -14,8 +14,8 @@ SRC_URI = "git://git.kernel.org/pub/scm/utils/cpu/mce/mce-test.git;protocol=git;
-            file://makefile-remove-ldflags.patch \
-            file://0001-gcov_merge.py-scov_merge.py-switch-to-python3.patch \
-           "
--SRCREV = "7643baf6c3919b3d727e6ba6c2e545dc6a653307"
--PV = "20190917+git${SRCPV}"
-+SRCREV = "025014dedca39d2b8a57a82e52286e72e157d73a"
-+PV = "20222810+git${SRCPV}"
- 
- RDEPENDS:${PN} = "mcelog mce-inject dialog bash"
- 
--- 
-2.40.1
+diff --git a/meta-multimedia/recipes-multimedia/dav1d/dav1d_1.1.0.bb b/me=
+ta-multimedia/recipes-multimedia/dav1d/dav1d_1.2.0.bb
+similarity index 89%
+rename from meta-multimedia/recipes-multimedia/dav1d/dav1d_1.1.0.bb
+rename to meta-multimedia/recipes-multimedia/dav1d/dav1d_1.2.0.bb
+index 33dbef3524..5d43921b03 100644
+--- a/meta-multimedia/recipes-multimedia/dav1d/dav1d_1.1.0.bb
++++ b/meta-multimedia/recipes-multimedia/dav1d/dav1d_1.2.0.bb
+@@ -7,7 +7,7 @@ LICENSE =3D "BSD-2-Clause"
+ LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dc8055cfe7548dfdaa3a6dc45d8793=
+669"
+=20
+ SRC_URI =3D "git://code.videolan.org/videolan/dav1d.git;protocol=3Dhttps=
+;branch=3Dmaster"
+-SRCREV =3D "9593e625b75d498d1edea544da21ea764b98d507"
++SRCREV =3D "676a864a11af2c0522e1f992e770589543894686"
+=20
+ S =3D "${WORKDIR}/git"
+=20
+--=20
+2.34.1
 
 
