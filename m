@@ -1,132 +1,145 @@
-Return-Path: <jan.vermaete@gmail.com>
+Return-Path: <xiangyu.chen@eng.windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 28256C77B73
-	for <webhook@archiver.kernel.org>; Mon, 22 May 2023 11:12:49 +0000 (UTC)
-Received: from mail-ot1-f42.google.com (mail-ot1-f42.google.com [209.85.210.42])
- by mx.groups.io with SMTP id smtpd.web11.19127.1684753965672483160
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3E00EC77B75
+	for <webhook@archiver.kernel.org>; Mon, 22 May 2023 12:07:29 +0000 (UTC)
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.web10.20273.1684757247167870941
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 22 May 2023 04:12:45 -0700
+ Mon, 22 May 2023 05:07:27 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20221208 header.b=UARxQzFz;
- spf=pass (domain: gmail.com, ip: 209.85.210.42, mailfrom: jan.vermaete@gmail.com)
-Received: by mail-ot1-f42.google.com with SMTP id 46e09a7af769-6ad13a1fbceso4287551a34.2
-        for <openembedded-devel@lists.openembedded.org>; Mon, 22 May 2023 04:12:45 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1684753965; x=1687345965;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=5ZFxjQ2oUd0GHEk2NEnTw82QpM5DvR0+JowgvawTrlo=;
-        b=UARxQzFzHdAOFQt73xN1XvD6tik2Qm4scbbi/gz82x7OCxPIl/IaXlUD5wnsDh0+pd
-         erAXgV0dGMWJpLK7GkYVFic8IAuMyga/wG6XmLzoblUcWlDNZ7FiUpOSPNqSkJqZfK9L
-         u6GKw6mdtEcyJ8Wr+ZvbZ80Gdye0kztppT9nC1kXUPveC7aS0M6q7Uq79M1IJRmzgJGt
-         oMNi3DwRIcbGRP1XhLdU5kPsSxi7v52POdrmSEGH3u1T/oswm319D3gcrJcS7bOkK6dn
-         Bg/J4Ex9du4bdi84rwdToN2lSWxQScyhnP69Y5ghCLo6EUyDZ1qmxd3Srbrmrs3XS4GK
-         tSqQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1684753965; x=1687345965;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=5ZFxjQ2oUd0GHEk2NEnTw82QpM5DvR0+JowgvawTrlo=;
-        b=CbLNXyU57XUumAmw0qqAhTgp3Z9drBv6iEKCRL6WVNYW2Crf42BxK4oVetH58PPmMy
-         uMYQcFnsHVw+6V534tdjkVhgKRC7SvcJNBxyYUmwa/nCzOpplziDkFc878nKWtmLeq9Q
-         QY6ks6fpXjDiKxMigp44v+8d/+TO5SAwxEdxWvDICzMnysh+e1I8I8Q6h8IUNZrGUL6C
-         fW7INDd5gp8GPJkZ2OwTYVINCezgluSOOlfPKmMZ9/oLGcP4NJwveW853/Tv71RQHFer
-         oJ0tq4DOD/UAaNdvR6aBrSzV1rHYf4aV+j3J9QH7A/CKxLE51rdxh7bog3LhykS2NtX+
-         7rYw==
-X-Gm-Message-State: AC+VfDyVqRQj3UA2gmtOhE1ZpeyERPWIOZZ+Nx6gs7w2B0JOD2aq/1Sb
-	twI/+3wLOeEbMB2xpuUzTjNmWP6XcaqWqaHGahg=
-X-Google-Smtp-Source: ACHHUZ6L/lJ5k0tPhhU99IDDryVPGTztjgqVfOu/bZrol+bRmyDLa22Jh1HGwSgfCg2yEODuEfOxvb42K1tAVDdLAtQ=
-X-Received: by 2002:a05:6870:7682:b0:196:275:59ba with SMTP id
- dx2-20020a056870768200b00196027559bamr7046066oab.7.1684753964781; Mon, 22 May
- 2023 04:12:44 -0700 (PDT)
+ dkim=missing; spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=45064acf6e=xiangyu.chen@windriver.com)
+Received: from pps.filterd (m0250811.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 34MB182i004581
+	for <openembedded-devel@lists.openembedded.org>; Mon, 22 May 2023 12:07:26 GMT
+Received: from nam12-mw2-obe.outbound.protection.outlook.com (mail-mw2nam12lp2044.outbound.protection.outlook.com [104.47.66.44])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3qpkn1hry4-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Mon, 22 May 2023 12:07:26 +0000
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=QU+WM+q5pIHOaYTd2j0f5QCU0W94HWK9zGZ5NbXmC6b2WMt93BuH2cuUTF1+WKWSSu3bMpjGqLlfaOWh2xBpPGAVVFxzPmR5JYDaBmJUbNQOp4m8Vo/JWZSKLjGqqr9AGsgmIoKGHEhV0Bt83O0AFufp8x2RdC14DxSkVxDArUb9jMGzlYvDb5rtZvZvPi17WbE3sm8uzURKJf2rDdX9rnlOSgke2IvKVbp+O7s4C+98nnJVkgXSV8oCkav4aF4xicXAqDp5+Td9I0R8iS6YUuhNfQMshkeh4sqVtdtISLZJ/rqHIXj3KVFRFE3nmCgbE6WmFSqqxi5/nd5Vc1JgxQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=2rbh4oCPTqn8n4sHk2HrckNEOzenoQUYhUBEoJov70E=;
+ b=KKA/gHwYlilqMA7+wAcsG4PZzqmShy2PRVz7FPzrNWKDba7/2wY5OUL0UfG+NC/1ioD7iJLfGEjTRDMCqEum+UhREIvVxccMK0FMpLlWL8JKW/sveZrdYIA7jBknCxFg2Cv/qTmzkc7PcIl7Z7M3X7qi585l9A67THGiH0agUrbwBWdBgVkR/BqhFMlLETnCPVm1qBXCK89R8MQX+lXQI+UepXU+UhRywjggj+8pCaHQF5r6ToGI+wrKfMh/zLCWIdhHRcXgdewD26GK0N5EiX0tedKIKGa22uxU3J+HQvDPrjMn1V0SS4JQI/hzwlOdg+EqH3+2zXmgCVVMbwei9Q==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=windriver.com; dmarc=pass action=none
+ header.from=eng.windriver.com; dkim=pass header.d=eng.windriver.com; arc=none
+Received: from PH7PR11MB5820.namprd11.prod.outlook.com (2603:10b6:510:133::17)
+ by DS7PR11MB6125.namprd11.prod.outlook.com (2603:10b6:8:9f::16) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6411.28; Mon, 22 May
+ 2023 12:07:24 +0000
+Received: from PH7PR11MB5820.namprd11.prod.outlook.com
+ ([fe80::84b2:b711:8939:b703]) by PH7PR11MB5820.namprd11.prod.outlook.com
+ ([fe80::84b2:b711:8939:b703%7]) with mapi id 15.20.6411.027; Mon, 22 May 2023
+ 12:07:24 +0000
+From: Xiangyu Chen <xiangyu.chen@eng.windriver.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: [oe][meta-oe][PATCH 1/2] Revert "pahole: fix native package build error"
+Date: Mon, 22 May 2023 20:07:07 +0800
+Message-Id: <20230522120708.356500-1-xiangyu.chen@eng.windriver.com>
+X-Mailer: git-send-email 2.34.1
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: TY2PR01CA0003.jpnprd01.prod.outlook.com
+ (2603:1096:404:a::15) To PH7PR11MB5820.namprd11.prod.outlook.com
+ (2603:10b6:510:133::17)
 MIME-Version: 1.0
-References: <20230514035746.1550853-1-raj.khem@gmail.com>
-In-Reply-To: <20230514035746.1550853-1-raj.khem@gmail.com>
-From: jan vermaete <jan.vermaete@gmail.com>
-Date: Mon, 22 May 2023 13:12:33 +0200
-Message-ID: <CABF_=yifnMP5HbbpMj2jtc48TpHCCTE=KEUij2hLSQA2KpkiGQ@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH] fftw: Remove hardcoded sysroot into binaries
-To: Khem Raj <raj.khem@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PH7PR11MB5820:EE_|DS7PR11MB6125:EE_
+X-MS-Office365-Filtering-Correlation-Id: a6bb963c-4cc0-41e7-6b95-08db5abd1a21
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 
+	QyryNpOVlde8IF1N8fJwUpjGYQGEOZqkrikTZ01KVcdrfoM7qfRk/g3K3C668wwJAw/39O9MHtOwPr1BJSYxvyV0tEzqySptkw4C2GzaV/+ZxOkv1yjjV13SxTU1RO+ENa83OXx/k2IjJGhAicHXC+19O5WUuLI81X6ADk9nMtFgCzIn2UzE+VNz1RDdTPTqSW4Jyh750tSJrDW9mmxwmsAgVHmEBv1Z8DMmEhwWIif0TUSXllNtogJXLoV37Xe4F2j4PsUY06bG2qY0Trk1Kgo10Oi20FXHua0vZNqn1RenQyKUOFNkvtWcpq4DkZMLHrKowVBjqD/5D25eizQ1jP2/ExT9ZiOnd8LJZPM6TKRQzULNEu8LPy9SrHyGhUVtNZTCL18TPWxFZnMB85nUQvJXVe4KJH4k2uD4iiBijsgWR2/YBxBZtpnJNv5gV+g/cSM+zLDRAXVSmsfm4qPYM4po5HI/iyl5h0SnoJ2+YmFb2u8jLmrFJ0KBiKOb/Yo3C9Kef6vhOl1P5HVuLDuDctur5CHzb8j+JTN/ryBroFbHWv5tf4u/ofymZFW/Xq43qk8PQsv5DyI5bUuU+YvvOWdGXyJFQ7BVLxBuaoGkOJ2aSXHR5xYDyNRFA1HatPxt
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PH7PR11MB5820.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230028)(4636009)(136003)(376002)(39840400004)(396003)(366004)(346002)(451199021)(4744005)(2906002)(5660300002)(44832011)(8676002)(8936002)(41300700001)(316002)(66476007)(66556008)(66946007)(478600001)(6916009)(52116002)(6666004)(6486002)(1076003)(6506007)(6512007)(38100700002)(38350700002)(2616005)(26005)(186003)(83380400001)(83170400001);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?us-ascii?Q?1Yaja5QRmVTdjgjaYRWdIp9IIFTEPQka8xBuhVI9cEQh8bboACR1e2eZdx5U?=
+ =?us-ascii?Q?oRGaxw8pQZj6fEzDxqYiRK+Ctv3OUzyjMiTg6Coah44Bzqj8BJz28jcPHdGm?=
+ =?us-ascii?Q?8JHYlBwk5WSEXXAp+IuzKxtJDI+qqOTCCE6aBi3rJFzw5YGmY9WsxQjWhfcF?=
+ =?us-ascii?Q?ZUXitbrnskcfxi37NM1jxHabQqeeIuUkzx6i/7IcPEzQopNpJ9gZ2qYLj710?=
+ =?us-ascii?Q?4R/UbBV4h2Ack1xPvSSSjdLlgtUSio1qF9jmBcnX9Kb3Rd1VmDpea2RJbdwo?=
+ =?us-ascii?Q?mcg3+jN4XPNOyhZrdDdUCrGrk+G5n5g380N4agoHB9YV1/Sex792L4c8KIw3?=
+ =?us-ascii?Q?5aH/nlPTQGwteVBFjhjhUDYWPhwuPRnuzRiWE9HIdI/80yYYLBWuun+FernM?=
+ =?us-ascii?Q?cIT0QDWpaLlv7o5EUhbPo9/Se+WGsDY4Sn2s6vOmQie0++A6W9Uojzyq5o0e?=
+ =?us-ascii?Q?u5QtskpEZN13FhYExAJY4FPcgHC9tW0Uz9NvPfS9uvQg5/ICLt7zyaXhczdG?=
+ =?us-ascii?Q?ZvWUajkVAM80m34+xo75PUiqdRhQnL00OuX7yGTqtMtmyyum5BICvIm48RgR?=
+ =?us-ascii?Q?gs8IHmJ6fDrERwj9Z0rGj97dnncnUUPtJtQDUQYYixMyRNWZPMlZoMn9HoDL?=
+ =?us-ascii?Q?lKotiuUnb22VEsqmiYkyZ7ALsYQ4iSIk2LNRK8JNInA+lQG7UpiYGOcp9fmH?=
+ =?us-ascii?Q?tzqiY95WzLSDlU6GYVf4OB3blu0cf61hfbpDEE+kzOwRGY39FRzOkQxWF35+?=
+ =?us-ascii?Q?ptJT6UptVL7HLguiUSPMPzO8FgGByhBq91b7ku92JGzDMhhoAXy04M0oA0TM?=
+ =?us-ascii?Q?9MeEsO176TuSw7H8FxPOscJZXgfuk5gqqrqPMgx/AHjg2PZqt2hDPzc7/LoG?=
+ =?us-ascii?Q?x1uff/X02t7KiwVaR5MPxEkoWeyxHwYlyuYaHB8bTvPWgI/cq/KMjYGOZtb+?=
+ =?us-ascii?Q?rg3+MyzWGdrJ40lhyiy9GYoPLsFTJb0M29kpD/hKjs6t2HIgCAXfU2VHTqxd?=
+ =?us-ascii?Q?Qsqr19TfCM8fUt0EsP2cgvZHInh9RFCRqgbwZI1QnREGsMfSstk/AOYxHoxq?=
+ =?us-ascii?Q?YtwhdgBGZQZi4ksEInKxtJ59s29+2izLkRWNiZacPJeFZlukNqIQHsXhmRif?=
+ =?us-ascii?Q?DSGVn7lTnY1mH9jMqJjlYIHWHudXjrPHNxXacKD6rh67vN4lIVwrMfrdzNCG?=
+ =?us-ascii?Q?Kqhb6Rjab4kD7O8h+jWUkDEHj19u8BrGEMsu5S0oif5swwoytJGGTvrvNuZN?=
+ =?us-ascii?Q?YZjrAVDmYmiglxaKkcl4JD83rN4ZLWMFKnIGO87n9KMNb42jGZYCq+NizCsV?=
+ =?us-ascii?Q?LBMSEnjhH9L7b4z6AZnpnp77ayEgPFf9tM54i3J//vY9fuIOEnaY3rUda6tn?=
+ =?us-ascii?Q?jkyyKAjBtTSlmuYyTF+WCl2Go4IqLOhnVtmTQyfqbNnmPYKZVQqqKlzyuiyv?=
+ =?us-ascii?Q?VWDTM25YMfiGvEBImyGaqF8TIiYtc3AJmoU6xQWbZyUnaHpAXix91CzZC8z8?=
+ =?us-ascii?Q?rjtyFiEKkw349nYWY17z6Q8Op7FoYtgkdfl2NAZ1JESpotd6jIHouJm8Z1/S?=
+ =?us-ascii?Q?DygLx6p4B9Ty/jTu8zghXW29y8Tfrgg7YZQqwtdz7WJ+04KQ2g0Xjr9bMlbz?=
+ =?us-ascii?Q?CQ=3D=3D?=
+X-OriginatorOrg: eng.windriver.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: a6bb963c-4cc0-41e7-6b95-08db5abd1a21
+X-MS-Exchange-CrossTenant-AuthSource: PH7PR11MB5820.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 May 2023 12:07:23.9654
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: JwuLYLXSM7JYekcgRuQYItkxxLxTZOpNLBxQ/0N5iQ7Ua85sbp6Za+Y6W5Y3fLwj0IlB6DH5gJ54HmLVBma0v0pHkLnG5JM4ftvs1CU4zXg=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS7PR11MB6125
+X-Proofpoint-ORIG-GUID: RwDLi7V10151lr2H-H9uyUkr6H6mrMfy
+X-Proofpoint-GUID: RwDLi7V10151lr2H-H9uyUkr6H6mrMfy
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.254,Aquarius:18.0.957,Hydra:6.0.573,FMLib:17.11.170.22
+ definitions=2023-05-22_08,2023-05-22_03,2023-02-09_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 malwarescore=0
+ mlxlogscore=591 priorityscore=1501 adultscore=0 lowpriorityscore=0
+ mlxscore=0 suspectscore=0 bulkscore=0 clxscore=1015 spamscore=0
+ phishscore=0 impostorscore=0 classifier=spam adjust=0 reason=mlx
+ scancount=1 engine=8.12.0-2304280000 definitions=main-2305220101
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 22 May 2023 11:12:49 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102706
+ <openembedded-devel@lists.openembedded.org>; Mon, 22 May 2023 12:07:29 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102707
 
-Hi,
+From: Xiangyu Chen <xiangyu.chen@windriver.com>
 
-Could it be this is causing a failure (see below)
+This reverts commit b9df3387002195ad365735bd15a3b70b1355d70f.
 
-Thanks,
+The pahole-native package should use the header from libbpf instead of linux-libc-headers,
+the b9df33870 would cause compile error, so revert it.
 
-DEBUG: Executing python function autotools_aclocals
-DEBUG: SITE files ['endian-little', 'common-linux', 'common-glibc',
-'bit-64', 'x86_64-linux', 'common']
-DEBUG: Python function autotools_aclocals finished
-DEBUG: Executing shell function do_compile
-sed: -e expression #1, char 0: no previous regular expression
-WARNING: .../build/tmp/work/x86_64-linux/fftw-native/3.3.10-r0/temp/run.do_=
-compile.464684:153
-exit 1 from 'sed -i -e 's|||g' config.h'
-WARNING: Backtrace (BB generated script):
-        #1: do_compile,
-.../build/tmp/work/x86_64-linux/fftw-native/3.3.10-r0/temp/run.do_compile.4=
-64684,
-line 153
-        #2: main,
-.../build/tmp/work/x86_64-linux/fftw-native/3.3.10-r0/temp/run.do_compile.4=
-64684,
-line 199
+Signed-off-by: Xiangyu Chen <xiangyu.chen@windriver.com>
+---
+ meta-oe/recipes-devtools/pahole/pahole_1.24.bb | 1 -
+ 1 file changed, 1 deletion(-)
 
-On Sun, May 14, 2023 at 5:57=E2=80=AFAM Khem Raj <raj.khem@gmail.com> wrote=
-:
->
-> FFTW_CC is added to image via version.o and its CC + CFLAGS however CC
-> in OE containes --syroot compiler option which encodes buildpaths into
-> binary, therefore remove this option from FFTW_CC in config.h
->
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> ---
->  meta-oe/recipes-support/fftw/fftw_3.3.10.bb | 1 +
->  1 file changed, 1 insertion(+)
->
-> diff --git a/meta-oe/recipes-support/fftw/fftw_3.3.10.bb b/meta-oe/recipe=
-s-support/fftw/fftw_3.3.10.bb
-> index cb45e2b91f..1fead4d029 100644
-> --- a/meta-oe/recipes-support/fftw/fftw_3.3.10.bb
-> +++ b/meta-oe/recipes-support/fftw/fftw_3.3.10.bb
-> @@ -55,6 +55,7 @@ do_configure() {
->  do_compile() {
->      for lib in fftw fftwl fftwf; do
->          cd ${WORKDIR}/build-$lib
-> +        sed -i -e 's|${TOOLCHAIN_OPTIONS}||g' config.h
->          autotools_do_compile
->      done
->  }
-> --
-> 2.40.1
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#102563): https://lists.openembedded.org/g/openembedde=
-d-devel/message/102563
-> Mute This Topic: https://lists.openembedded.org/mt/98879626/2167232
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [j=
-an.vermaete@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
+diff --git a/meta-oe/recipes-devtools/pahole/pahole_1.24.bb b/meta-oe/recipes-devtools/pahole/pahole_1.24.bb
+index f44b0cef0..2bb73c3eb 100644
+--- a/meta-oe/recipes-devtools/pahole/pahole_1.24.bb
++++ b/meta-oe/recipes-devtools/pahole/pahole_1.24.bb
+@@ -4,7 +4,6 @@ LICENSE = "GPL-2.0-only"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
+ 
+ DEPENDS = "elfutils zlib libbpf"
+-DEPENDS:append:class-native = " linux-libc-headers"
+ 
+ # Depends on MACHINE_ARCH libbpf
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
+-- 
+2.34.1
 
-
---=20
-Jan Vermaete
-=E2=80=9CSuccess is a self-correcting phenomenom.=E2=80=9D -- Gary Hamel
 
