@@ -2,89 +2,100 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0C65FC77B73
-	for <webhook@archiver.kernel.org>; Mon, 22 May 2023 23:22:56 +0000 (UTC)
-Received: from mail-pf1-f176.google.com (mail-pf1-f176.google.com [209.85.210.176])
- by mx.groups.io with SMTP id smtpd.web11.6879.1684797775270045225
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D92A5C7EE29
+	for <webhook@archiver.kernel.org>; Mon, 22 May 2023 23:23:05 +0000 (UTC)
+Received: from mail-pf1-f173.google.com (mail-pf1-f173.google.com [209.85.210.173])
+ by mx.groups.io with SMTP id smtpd.web11.6881.1684797778385812103
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 22 May 2023 16:22:55 -0700
+ Mon, 22 May 2023 16:22:58 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=mJsnnCpW;
- spf=pass (domain: gmail.com, ip: 209.85.210.176, mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f176.google.com with SMTP id d2e1a72fcca58-64d24136685so2992150b3a.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 22 May 2023 16:22:55 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20221208 header.b=ekjsWJ7M;
+ spf=pass (domain: gmail.com, ip: 209.85.210.173, mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f173.google.com with SMTP id d2e1a72fcca58-64d18d772bdso5991768b3a.3
+        for <openembedded-devel@lists.openembedded.org>; Mon, 22 May 2023 16:22:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1684797774; x=1687389774;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=pcxm+/C5IHCWZ0qemHJhxR2rartyOcQ1N9ZwD7icu+Y=;
-        b=mJsnnCpWAidzCtwBxtWKUnAeNsIOLFZDhHchaJtAXmJPRm5eZCEpsBQe9FBKj4hdnQ
-         KbcG922ElGbX3B0I26ZBHbmtMysK1EzneDTfgZFi5vb4Zh+EJ94zm6sHVRK91DrbWjLx
-         LUNMW0cFdgyDO/W9Z9ey9y2UMNDoff2v4ARmoNqAsagTa/LNTycMTL11z3BvkfexnqND
-         g5NePvvzSOP8/jGd6jIMb6OY5f0WlUWdPfYi+7DCdPGsxxRRTUyhGanSFNt8yNbZDvX2
-         O8oEmw1PDpkFLtBVRBnYrRGZ7HgJ8PYJY0fkoCiQMT2GRyGHCY2mOoCmDrLqlxl/RAJl
-         VWSg==
+        d=gmail.com; s=20221208; t=1684797778; x=1687389778;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=uAAOkKMRyC6ehrRwDz0Z4H92d54ZwAH3hacDsy5tWgo=;
+        b=ekjsWJ7MsGy1daKyqc/TR7P+Mo2l2krvTleMl0ShDVIBOzyrUfV2WpQD4CmVnUbN3M
+         yGGu3Oe0AGuZ1cjIuXG2JDjArqXQJPUn3C8wb2p1YSn8O0a/6EQnGYAxzziqN9BwR6zV
+         +tK2xuc2BWScVfuNuz5xq+ufOkuR29HYJLag4tvUygHVOkjRj97VSufXiEsWhJSFG74E
+         sTUch3CFMGSmEQmXH4pV64HlYXEErny5BNPL+IAJpxg4xunGUs451Z6+g7D6hRlzjJNl
+         abjh6q3EZyUTa4RZBKygJwl43HfHM4H0PVtCoXefK3d+4HUMTmx/Gqn1vIne2Ow8zG/t
+         088A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1684797774; x=1687389774;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=pcxm+/C5IHCWZ0qemHJhxR2rartyOcQ1N9ZwD7icu+Y=;
-        b=Cezn3Njk2LF2a2asVHlz1tYQTpDCFq0CwGudrgflL324jhoz4M9Dy4mVnPJACFoqen
-         SJqJQbZJsOhz5Z8cXqT15gUITMwk8LdMkbBXxkrGPfWmhAk7gf06Uw+EbjmQ5nGhdIc+
-         ILfiZlUu23G8Q8VceBYGCDy64BkFg/1RMPpCSnCoXEzxvTHzeqeYZBl3ha6JS9rZ8Sa7
-         3Gne/yocoHp3Z1ihE+MpgxcIAmSgrjtdp/YR3fnPVLI+q5Pxwf7SRcc8Loe8qrqtrbsV
-         AEeoVGMQRuxR/Vkr4212Q+gtl/PV0jcv0+LAidNNUh+BuDIc0JKHr6eZu4FfKKuqs6CM
-         Fdng==
-X-Gm-Message-State: AC+VfDxjw6ZtdLKum5QpgKYg6rP7WSYhr15NofuwacRazM4flpcyYR0y
-	HMj1wFk8DB9KrVJfpUFMcKNP9yd1cb0=
-X-Google-Smtp-Source: ACHHUZ4TbAY/xJn18mpeX2l0aWiaFa53OhtSdzKgCQJ4upFI5FpSPB0OYyW1I8fEb73OXXSjG1NSfg==
-X-Received: by 2002:a05:6a00:2d02:b0:63b:6279:1039 with SMTP id fa2-20020a056a002d0200b0063b62791039mr14268929pfb.0.1684797774338;
-        Mon, 22 May 2023 16:22:54 -0700 (PDT)
+        d=1e100.net; s=20221208; t=1684797778; x=1687389778;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=uAAOkKMRyC6ehrRwDz0Z4H92d54ZwAH3hacDsy5tWgo=;
+        b=X+YAv8jIaJjbpr3JfQIWuNN1lqkXZTB1s5iOXQdIwcvC7jflbIpzckLHrdWarUS9zd
+         jwtFxrSFLqLkdLffoa1EpEcc3UsOlmjNfp0nu6HtfurHOkhp8xf/pcu3HtEaICWgY39f
+         kA6Rbid+JRFXeJPJCaZ88bx+CAh0IIOkKQg27pi5oWqxgoJLAd7Ojf0hfLcHto9jAIwE
+         wFbMD9JTKqw004IvSyRz89sIeMYnzZHZmqaEUNzYUmEva4ZtOuxrx0IBj0yuZ5p5VwnC
+         lrMaZ0jjcpPHOodcUxT+1/X1N03tCpfenuepPNi39elc+IWkNXVFFyAueKYWIJZg+Ho4
+         wAVg==
+X-Gm-Message-State: AC+VfDxAOH93LnQu6ess/iuqMmWOU9Q+PJR2mDsfM22hEGozg8Ur86eQ
+	h4M18hIAHbA52hHVZE5RB9bwyDIvEls=
+X-Google-Smtp-Source: ACHHUZ48KeXt5hQ1yqnmOwKFRtdZDLaDdSOFTCWP8RbTIXo99MrXAZxrc2eWm9r1Dx6INKw6cCm3Fw==
+X-Received: by 2002:a05:6a20:3d91:b0:106:76e8:940a with SMTP id s17-20020a056a203d9100b0010676e8940amr12540122pzi.61.1684797777566;
+        Mon, 22 May 2023 16:22:57 -0700 (PDT)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9181:d380::c675])
-        by smtp.gmail.com with ESMTPSA id x22-20020aa793b6000000b006439df7ed5fsm4621267pff.6.2023.05.22.16.22.53
+        by smtp.gmail.com with ESMTPSA id x22-20020aa793b6000000b006439df7ed5fsm4621267pff.6.2023.05.22.16.22.56
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 22 May 2023 16:22:53 -0700 (PDT)
+        Mon, 22 May 2023 16:22:56 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 1/5] meta-oe-ptests: Add mcelog to PTESTS_FAST_META_OE
-Date: Mon, 22 May 2023 16:22:48 -0700
-Message-Id: <20230522232252.3475281-1-raj.khem@gmail.com>
+Subject: [meta-multimedia][PATCH 5/5] aom: Pass nasm flags via toochain.cmake
+Date: Mon, 22 May 2023 16:22:52 -0700
+Message-Id: <20230522232252.3475281-5-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.40.1
+In-Reply-To: <20230522232252.3475281-1-raj.khem@gmail.com>
+References: <20230522232252.3475281-1-raj.khem@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 22 May 2023 23:22:56 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102711
+ <openembedded-devel@lists.openembedded.org>; Mon, 22 May 2023 23:23:05 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102715
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-oe/conf/include/ptest-packagelists-meta-oe.inc | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-multimedia/recipes-multimedia/aom/aom_3.6.1.bb | 10 ++++++----
+ 1 file changed, 6 insertions(+), 4 deletions(-)
 
-diff --git a/meta-oe/conf/include/ptest-packagelists-meta-oe.inc b/meta-oe/conf/include/ptest-packagelists-meta-oe.inc
-index 23d81296b2..0c5f6beaae 100644
---- a/meta-oe/conf/include/ptest-packagelists-meta-oe.inc
-+++ b/meta-oe/conf/include/ptest-packagelists-meta-oe.inc
-@@ -26,6 +26,7 @@ PTESTS_FAST_META_OE = "\
-     libxmlb \
-     libyang \
-     lmdb \
-+    mcelog \
-     minicoredumper \
-     neon \
-     nodejs \
-@@ -56,7 +57,6 @@ PTESTS_PROBLEMS_META_OE ="\
-     libjcat \
-     libteam \
-     libxml++ \
--    mcelog \
-     oprofile \
-     ostree \
-     psqlodbc \
+diff --git a/meta-multimedia/recipes-multimedia/aom/aom_3.6.1.bb b/meta-multimedia/recipes-multimedia/aom/aom_3.6.1.bb
+index 8f4913450b..571698d9f4 100644
+--- a/meta-multimedia/recipes-multimedia/aom/aom_3.6.1.bb
++++ b/meta-multimedia/recipes-multimedia/aom/aom_3.6.1.bb
+@@ -7,17 +7,19 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=6ea91368c1bbdf877159435572b931f5 \
+                    "
+ SRCREV = "7ade96172b95adc91a5d85bf80c90989cd543ee8"
+ SRC_URI = "git://aomedia.googlesource.com/aom;protocol=https;branch=main"
+-
+ S = "${WORKDIR}/git"
+ 
+ inherit cmake pkgconfig
+ 
+ DEPENDS = " nasm-native"
+ 
+-EXTRA_OECMAKE = " -DBUILD_SHARED_LIBS=1 -DENABLE_TESTS=0 \
+-                  -DAOM_AS_FLAGS=--reproducible \
+-                  -DPERL_EXECUTABLE=${HOSTTOOLS_DIR}/perl \
++EXTRA_OECMAKE = "-DBUILD_SHARED_LIBS=1 -DENABLE_TESTS=0 \
++                 -DPERL_EXECUTABLE=${HOSTTOOLS_DIR}/perl \
+                 "
+ CMAKE_VERBOSE = "VERBOSE=1"
+ CFLAGS:append:libc-musl = " -D_GNU_SOURCE"
+ EXTRA_OECMAKE:append:arm = " ${@bb.utils.contains("TUNE_FEATURES","neon","-DENABLE_NEON=ON","-DENABLE_NEON=OFF",d)}"
++
++do_generate_toolchain_file:append() {
++    echo "set(AOM_AS_FLAGS --debug-prefix-map ${S}=/usr/src/debug/${PN}/${EXTENDPE}${PV}-${PR})" >> ${WORKDIR}/toolchain.cmake
++}
 -- 
 2.40.1
 
