@@ -1,120 +1,129 @@
-Return-Path: <dzagorui@cisco.com>
+Return-Path: <philip@balister.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 30729C77B75
-	for <webhook@archiver.kernel.org>; Tue, 23 May 2023 14:00:40 +0000 (UTC)
-Received: from rcdn-iport-5.cisco.com (rcdn-iport-5.cisco.com [173.37.86.76])
- by mx.groups.io with SMTP id smtpd.web11.23477.1684850435948149429
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 31C1FC7EE26
+	for <webhook@archiver.kernel.org>; Tue, 23 May 2023 15:19:27 +0000 (UTC)
+Received: from perceval.ideasonboard.com (perceval.ideasonboard.com [213.167.242.64])
+ by mx.groups.io with SMTP id smtpd.web10.25012.1684853040768851364
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 23 May 2023 07:00:36 -0700
+ Tue, 23 May 2023 07:44:01 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@cisco.com header.s=iport header.b=nGAwD8aG;
- spf=pass (domain: cisco.com, ip: 173.37.86.76, mailfrom: dzagorui@cisco.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=cisco.com; i=@cisco.com; l=1266; q=dns/txt; s=iport;
-  t=1684850436; x=1686060036;
-  h=from:to:subject:date:message-id:mime-version:
-   content-transfer-encoding;
-  bh=XYEujKmV0Til0+x6cXFbpTmPHXoG2xd6NjQazq6VGTU=;
-  b=nGAwD8aGF4inOoZskZrEoB3zn/toah/z6R/vme4AQNCDYvomj7SGDlid
-   fhiwcDESuZbtjHQKeMunZ5dOdB/+QeVoK65OepiGEcnHfeBVZDG1QCkgf
-   hcIac9gIXwLuNHBUXmYzWwbZuu7Ykp1+OaGXE6llDuBKju33lWBOpUhgM
-   E=;
-X-IPAS-Result: =?us-ascii?q?A0AiAQCUxmxkmJtdJa1agliDJFVARrNygSUDVg8BAQENA?=
- =?us-ascii?q?QExEwQBAYpiAiU0CQ4BAgQBAQEBAwIDAQEBAQEBAwEBBQEBAQIBBwQUAQEBA?=
- =?us-ascii?q?QEBAQEeGQUOECeFaA2GPQGBU0SCfgGCXAOsEoIsgQGEdJprgWeBQowUhUonG?=
- =?us-ascii?q?4FJRIR+hRGFdQSPKYx1gTBygSM/aYECAgkCEWeBDghmgXNAAg1kCwtsgTuDB?=
- =?us-ascii?q?gICEUIMFV0CahoQARMDBwQCgQ4QMQcENywGCR01LQZdBxkWJAkTFVMHhFgDC?=
- =?us-ascii?q?QMHBUlAAwsYDVARLDUUHwYmIIEJGGMEggRPnQWCfoEOgW96pBOgIYQPi3mVA?=
- =?us-ascii?q?RozhVWjepgJo1mELgIEBgUCFoFjOoFbMxoIGxWDIglJGQ+OOYI1kT4kMTsCB?=
- =?us-ascii?q?wsBAQMJimheAQE?=
-IronPort-Data: A9a23:pDU3E68OnRwn+GDmJuZTDrUD8n6TJUtcMsCJ2f8bNWPcYEJGY0x3z
- jFJXWiBOv6JYGWmco0nPdi3phsOusWGzt8xGgVq/H9EQiMRo6IpJzg2wmQcns+2BpeeJK6yx
- 5xGMrEsFOhtEjmE4E3F3oHJ9RGQ74nQLlbHILCCYngZqTNMEn970ko+wbVh2OaEvPDga++zk
- YKqyyHgEAfNNw5cagr4PIra9XuDFNyr0N8plgRWicJj5TcypFFJZH4rHpxdGlOjKmVi8kFWc
- M6YpF2x1juxEx7AkbpJmJ6jGqEBaua60QRjFhO6VoD66iWuqBDe3Y4DNMAWV2NqlQnWwcIgx
- Ygd7I2xVFkma/ikdOQ1C3G0EglkNqFAvbTAO3X67YqYzlbNdD3nxPAG4EMeZNJDvL0oRzAVs
- 6VFdVjhbTjb7w6y6L6pQ+ZrnNkiBMLqJ4gY/HpnyFk1CN54GM2fGPSVvre02h8cnsENBfTxW
- PA7cDVNNzbFUUMQZkwYXcdWcOCA3ymjLGIwREiuja0v7m7eyQZ83LTgPJ/Zd8KHQe1Rn12Ev
- STB52n/DxQQOdCTxDbD9Wij7tIjhgvhU44UUba/7PMv3BuYx3cYD1sdUl7TTeSFZlCWY9JlI
- XIwxzQS8vYgpUH2HoDsXgDmryvR1vIDYOZ4H+o/4QCL76Pb5QeFG2QJJgKtjvR77KfaohR3j
- je0c8PV6S9H6+LKFCrMnluAhXbjZnhPdD5qiTosFFNdu7HeTJcPYgUjp+uP/YavhdHzXDr32
- T3P8G41hq4YiogA0KDTEbH7b9CE+MGhou0dv1W/soeZAuVRP9fNi2uAsgOz0Bq4BNzFJmRtR
- VBd8yRk0MgADIuWiAuGS/gXEbei6p6taWOM3QE/R8N9r2j2oxZPmLy8Bhkjei+F1e5ZJ1fUj
- LP74mu9GbcKZiLxNP8rC25PI5VwlsAM6ugJptiNPoYRPfCdhSeM/TplYgaLznvxnU03+ZzTy
- r/FGftA+U0yUPw9pBLvHr91+eZymkgWmziJLbillEvP7FZrTCPPIVvzGAHQPrlRAWLtiFi9z
- uuzwOPTlUgCCLGhPXSGmWPRRHhTRUUG6VnNg5Q/Xoa+zsBOSAnN19e5LWsdRrFY
-IronPort-HdrOrdr: A9a23:n/7mxa65dVczrSukpAPXwN3XdLJyesId70hD6qkXc202TiX2ra
- 6TdZgguCMc6wxhO03I5+rgBEDoexq1nvRICOIqUotKMjOLhILRFuFfBU+I+UyFJ8U4ndQtsJ
- tdTw==
-X-Talos-CUID: 9a23:+6cf6GxjTeadr1SD/OOEBgUsGvovTFng0kuPfV3pBDs5EayUVAGfrfY=
-X-Talos-MUID: 9a23:7fl2IQSDi07Zyt6xRXTAnDAhLMVH3J6MEU8vyrcDiZfbaTd/bmI=
-X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-AV: E=Sophos;i="6.00,186,1681171200"; 
-   d="scan'208";a="61543973"
-Received: from rcdn-core-4.cisco.com ([173.37.93.155])
-  by rcdn-iport-5.cisco.com with ESMTP/TLS/DHE-RSA-SEED-SHA; 23 May 2023 14:00:34 +0000
-Received: from sjc-ads-9103.cisco.com (sjc-ads-9103.cisco.com [10.30.208.113])
-	by rcdn-core-4.cisco.com (8.15.2/8.15.2) with ESMTPS id 34NE0OBf009196
-	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO)
-	for <openembedded-devel@lists.openembedded.org>; Tue, 23 May 2023 14:00:33 GMT
-Received: by sjc-ads-9103.cisco.com (Postfix, from userid 487941)
-	id 29B03CC1293; Tue, 23 May 2023 07:00:22 -0700 (PDT)
-From: Denys Zagorui <dzagorui@cisco.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH v2] bpftool: Fix externalsrc support
-Date: Tue, 23 May 2023 07:00:20 -0700
-Message-Id: <20230523140020.3089451-1-dzagorui@cisco.com>
-X-Mailer: git-send-email 2.35.6
+ dkim=pass header.i=@ideasonboard.com header.s=mail header.b=NKtFRpXR;
+ spf=pass (domain: ideasonboard.com, ip: 213.167.242.64, mailfrom: kieran.bingham@ideasonboard.com)
+Received: from pendragon.ideasonboard.com (aztw-30-b2-v4wan-166917-cust845.vm26.cable.virginm.net [82.37.23.78])
+	by perceval.ideasonboard.com (Postfix) with ESMTPSA id 3F75E496;
+	Tue, 23 May 2023 16:43:42 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ideasonboard.com;
+	s=mail; t=1684853022;
+	bh=MUsSoOYxO8/TJi8g21L4IorHOnHPtTHkKo5zuzaz1a0=;
+	h=In-Reply-To:References:Subject:From:To:Date:From;
+	b=NKtFRpXR19wr9vy2IhiM8t/6r6e4B3lnYJsjPXVvU9HfOO0SlHcljJby7/dZH4+Qu
+	 5W2eFy4FoV0UEwlfOVGbMGGsvLmwAb5k72gYllIgruU1aDHIfAVuW55zpa7teet3CL
+	 eXCSuUlrUQHjqYZRDuS7IaO6tEaN2KjDS30A2tOM=
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Outbound-SMTP-Client: 10.30.208.113, sjc-ads-9103.cisco.com
-X-Outbound-Node: rcdn-core-4.cisco.com
+In-Reply-To: <2146662.irdbgypaU6@steina-w>
+References: <20230517082759.1289294-1-alexander.stein@ew.tq-group.com> <168432525509.3378917.14773482271941853163@Monstersaurus> <2146662.irdbgypaU6@steina-w>
+Subject: Re: [[oe] [meta-oe] 1/1] libcamera: Allow overwriting default pipelines and IPA
+From: "Kieran Bingham" <kieran.bingham@ideasonboard.com>
+To: Alexander Stein <alexander.stein@ew.tq-group.com>, openembedded-devel@lists.openembedded.org
+Date: Tue, 23 May 2023 15:43:55 +0100
+Message-ID: <168485303519.2931851.7244682223427714089@Monstersaurus>
+User-Agent: alot/0.10
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 23 May 2023 14:00:40 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102739
+ <openembedded-devel@lists.openembedded.org>; Tue, 23 May 2023 15:19:27 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102740
 
-When the externalsrc class is used the tasks listed in
-SRCTREECOVEREDTASKS are deleted to prevent them being executed. If
-externalsrc is used for the kernel then this will include
-virtual/kernel:do_patch.
+Hi Alexander,
 
-We can depend on do_shared_workdir instead as this will survive when
-externalsrc is used.
+Quoting Alexander Stein (2023-05-23 14:15:55)
+> Hi Kieran,
+>=20
+> Am Mittwoch, 17. Mai 2023, 14:07:35 CEST schrieb Kieran Bingham:
+> > Hi Alex,
+> >=20
+> > Quoting Alexander Stein (2023-05-17 09:27:59)
+> >=20
+> > > By default only uvcvideo, simple and vimc pipelines as well as vimc I=
+PA
+> > > are built. Add new variables for enabling a custom set of enabled
+> > > pipelines and IPAs.
+> > >=20
+> > > Signed-off-by: Alexander Stein <alexander.stein@ew.tq-group.com>
+> > > ---
+> > > An example is the 'rkips1' pipeline and IPA.
+> > >=20
+> > >  .../recipes-multimedia/libcamera/libcamera_0.0.5.bb        | 7 +++++=
+--
+> > >  1 file changed, 5 insertions(+), 2 deletions(-)
+> > >=20
+> > > diff --git
+> > > a/meta-multimedia/recipes-multimedia/libcamera/libcamera_0.0.5.bb
+> > > b/meta-multimedia/recipes-multimedia/libcamera/libcamera_0.0.5.bb ind=
+ex
+> > > 14a20b431..47da0ec61 100644
+> > > --- a/meta-multimedia/recipes-multimedia/libcamera/libcamera_0.0.5.bb
+> > > +++ b/meta-multimedia/recipes-multimedia/libcamera/libcamera_0.0.5.bb
+> > > @@ -26,9 +26,12 @@ PACKAGES =3D+ "${PN}-gst"
+> > >=20
+> > >  PACKAGECONFIG ??=3D ""
+> > >  PACKAGECONFIG[gst] =3D
+> > >  "-Dgstreamer=3Denabled,-Dgstreamer=3Ddisabled,gstreamer1.0
+> > >  gstreamer1.0-plugins-base">=20
+> > > +LIBCAMERA_PIPELINES ??=3D "uvcvideo,simple,vimc"
+> > > +LIBCAMERA_IPAS ??=3D "vimc"
+> >=20
+> > Could you test with LIBCAMERA_PIPELINES ??=3D "auto" please? That should
+> > give an appropriate selection based on the architecture. But it may
+> > depend on the correct architecture being conveyed through the meson
+> > cross files.
+>=20
+> That seems to work as well. Using "-Dpipelines=3Dauto" and "Dipas" remove=
+d, I=20
+> get the following lines in log.do_configure:
+>=20
+> >   Configuration
+> >  =20
+> >     IPA modules signed with  : gnutls
+> >     Enabled pipelines        : imx8-isi
+> >    =20
+> >                                rkisp1
+> >                                rpi/vc4
+> >                                simple
+> >                                uvcvideo
+> >    =20
+> >     Enabled IPA modules      : rkisp1
+> >    =20
+> >                                rpi/vc4
+>=20
+> This seems a good default for an aarch64 platform.
+>=20
+> > > +
+> > >=20
+> > >  EXTRA_OEMESON =3D " \
+> > >=20
+> > > -    -Dpipelines=3Duvcvideo,simple,vimc \
+> > > -    -Dipas=3Dvimc \
+> > > +    -Dpipelines=3D${LIBCAMERA_PIPELINES} \
+> > > +    -Dipas=3D${LIBCAMERA_IPAS} \
+> >=20
+> > I think you should probably remove the -Dipas option too and let that be
+> > selected automatically by the pipelines choice.
+>=20
+> That's true as well (see above), but I still would like to disable unneed=
+ed,=20
+> unwanted IPAs or pipelines. If I read the meson code correctly an IPA is =
+only=20
+> enabled if a corresponding pipeline is enabled as well, right?
 
-Similar to [openembedded-core] (eab605bab945 "perf: Fix externalsrc support")
+Correct. Only IPA's with a corresponding Pipeline handler enabled will be b=
+uilt.
+And with auto - that will match the target architecture + UVC.
 
-Signed-off-by: Denys Zagorui <dzagorui@cisco.com>
----
- meta-oe/recipes-kernel/bpftool/bpftool.bb | 4 +---
- 1 file changed, 1 insertion(+), 3 deletions(-)
-
-diff --git a/meta-oe/recipes-kernel/bpftool/bpftool.bb b/meta-oe/recipes-kernel/bpftool/bpftool.bb
-index 67a821c07..d4286295c 100644
---- a/meta-oe/recipes-kernel/bpftool/bpftool.bb
-+++ b/meta-oe/recipes-kernel/bpftool/bpftool.bb
-@@ -7,7 +7,7 @@ PROVIDES = "virtual/bpftool"
- 
- inherit bash-completion kernelsrc kernel-arch
- 
--do_populate_lic[depends] += "virtual/kernel:do_patch"
-+do_populate_lic[depends] += "virtual/kernel:do_shared_workdir"
- 
- EXTRA_OEMAKE = "\
-     V=1 \
-@@ -22,8 +22,6 @@ EXTRA_OEMAKE = "\
- 
- SECURITY_CFLAGS = ""
- 
--do_configure[depends] += "virtual/kernel:do_shared_workdir"
--
- COMPATIBLE_HOST = "(x86_64|aarch64).*-linux"
- COMPATIBLE_HOST:libc-musl = 'null'
- 
--- 
-2.35.6
-
+--
+Kieran
 
