@@ -2,137 +2,139 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CE3D2C77B7A
-	for <webhook@archiver.kernel.org>; Tue, 23 May 2023 04:41:27 +0000 (UTC)
-Received: from mail-pj1-f48.google.com (mail-pj1-f48.google.com [209.85.216.48])
- by mx.groups.io with SMTP id smtpd.web11.13827.1684816878601818485
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B6B91C7EE2D
+	for <webhook@archiver.kernel.org>; Tue, 23 May 2023 04:47:27 +0000 (UTC)
+Received: from mail-oo1-f41.google.com (mail-oo1-f41.google.com [209.85.161.41])
+ by mx.groups.io with SMTP id smtpd.web11.13908.1684817246841595346
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 22 May 2023 21:41:18 -0700
+ Mon, 22 May 2023 21:47:26 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20221208 header.b=rPM6QxOF;
- spf=pass (domain: gmail.com, ip: 209.85.216.48, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f48.google.com with SMTP id 98e67ed59e1d1-25374c9be49so4338480a91.3
-        for <openembedded-devel@lists.openembedded.org>; Mon, 22 May 2023 21:41:18 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20221208 header.b=qGdE2z5w;
+ spf=pass (domain: gmail.com, ip: 209.85.161.41, mailfrom: raj.khem@gmail.com)
+Received: by mail-oo1-f41.google.com with SMTP id 006d021491bc7-541f4ee6f89so1868778eaf.2
+        for <openembedded-devel@lists.openembedded.org>; Mon, 22 May 2023 21:47:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1684816878; x=1687408878;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=r5sGX3566poNz0kJM18z7z++tMLlYCWFybcvwMWQUDA=;
-        b=rPM6QxOFU/HmQ+tzkNDikUlb/IB8rzpIayJtICZ3NbC8FMvz1fcjqyPvDsJ5pGw2x/
-         hnNfQtB9vixc10p8pyo/xqbhEnZy5MsCmj3jY6NnykzFuvjRBedt0dqP9AKQfkSr648X
-         yUCjSpQvmMxGv1dEPYteavN+rIGx6r2anJIE8N5f5ajivpl4Y/bVKWHZX8JEqX8Sx/HM
-         ZRs1WgnwPn9jFE0EKlieRnKtznYemmDbH2g4JO/Ku2leqhmSdr4A9tMjz8GWNWLrCMwu
-         rbmhmFrbTWNh9eHuUex7NR+cgxnnFCbGxdvPuEcGfUOqit0Toya2lVmdbdnXaPAP5eg/
-         YiOA==
+        d=gmail.com; s=20221208; t=1684817246; x=1687409246;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=wdlNY6GZaY03mNsVTNnV/L9nmYF5npUyO0XrXqZsYm4=;
+        b=qGdE2z5wHrL+lP9Qa53+SGbCyccEFiqLyUgRAmMwtkcnuJVWidnvcl8r71bKLXKYs1
+         keAS4l8xFnwnWol0nChll3UkBIJAvEsmC3MBNvoYahQjfB86NBjkgVLop9lvE7pauasG
+         GULFlQS74RgexsJZjEahprFFReOTIf8H+PQgyfM0+O4E3u7TPQw93YfLJL2NPdF7fMCC
+         mb7tvMmw0Kkif0cLtw/jwZU/JogCPI5pdo26t48PHUloLoNCOge8qH5zuqC+ojVEGW9k
+         LxwSD7Q0Uk5fg/KUvHJ1vb7jqTFOL7hxZwGEtGXf2ecauJ3v4Ws1A/8qM4HiP6WGPWM+
+         7kEg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1684816878; x=1687408878;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=r5sGX3566poNz0kJM18z7z++tMLlYCWFybcvwMWQUDA=;
-        b=Ax3NA30OeDfZeEaLUY8pNQ69RUkEmDH1pf2QagSNkjjm7QendrSJlwBExD5WgtnKlY
-         3I2rFP0dvsDAPkDXi3/Pd3/TkAnxJcKmgh/IGSQI0gDkidErCYCr7AK3u5gEYWkqvgeJ
-         wXm5HtCkZ/07i2IjUqt5VQjYY4dIQSYlb7KWohnRNOSbGDCRN5vtd+vZ75vMmsOuX5EK
-         lrdDODSGCXArMx2r7OkTtYXhujIJ1fpRaBq2KGF6BKZbg3yC63KwLftEBeRGQ6HsQcP7
-         QAdEYMw6VHcmW+crLGaiiAhB/h87klGkgUAj04lOEsILZJhpYyuW1B5Qb2RXHUvXHZHW
-         UmZw==
-X-Gm-Message-State: AC+VfDxMed/Uhqq0xSUtFADdu0aUGDTSHxKKO6R49jE44Qz0bC/kGAe/
-	yNsDnvHk74uxFkzcv+fpU1Rj8ij/3ZY=
-X-Google-Smtp-Source: ACHHUZ7KMPdPBw0itOeNcv0x9g1eQLQqZLpW7dbtzmvvd0vrcN4rqpdokQy2cQalzKLW/MduKSUy+Q==
-X-Received: by 2002:a17:90a:2806:b0:253:e0e1:618f with SMTP id e6-20020a17090a280600b00253e0e1618fmr9146428pjd.29.1684816877749;
-        Mon, 22 May 2023 21:41:17 -0700 (PDT)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9181:d380::c675])
-        by smtp.gmail.com with ESMTPSA id d61-20020a17090a6f4300b0024dfbac9e2fsm7176561pjk.21.2023.05.22.21.41.17
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 22 May 2023 21:41:17 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH] redis-plus-plus: Upgrade to 1.3.8
-Date: Mon, 22 May 2023 21:41:15 -0700
-Message-Id: <20230523044115.4187178-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.40.1
+        d=1e100.net; s=20221208; t=1684817246; x=1687409246;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=wdlNY6GZaY03mNsVTNnV/L9nmYF5npUyO0XrXqZsYm4=;
+        b=Cu8il9W4g4w/zQqhkYSgc6fS65+lWjkxnDYIQ1xh57ELuGvu24Zv++7BE+1f8TO+dt
+         yUO4/2i4L1KRaibLeM7eepjfsD+iYOvQggAIXBKL5Vhpl3Xo2KR20+oB9PVTh0w2YQul
+         KJWoMsc9gN8UC4rB8Iev0PJ3dEFkU9H7m4psWqEBuouKPzeMGeVQM4gLdnlEFYDTyUSZ
+         7q6SMmqojBpHp6tmGl2DngWlcsdSdrAOM6vnhJHm1H0xSyZkadnCw2CRXfh2jyoDzIbb
+         J+1L80mK7IJOq4hG2s4O8sr/M4gJc1GSADxm6iz3C5P3SS/lz/T6upIjt4QV5a+MlpLn
+         UZsw==
+X-Gm-Message-State: AC+VfDxxekaZtkNXP9/ygUJvRIghAIphJyoUnugnAcjPgs3fnRPsvGrF
+	s0JUfpsBnuTasfc64SYjLTCGfcPMyDixlmz46cI=
+X-Google-Smtp-Source: ACHHUZ5gMciKYhcWf+EJhEdCBbccJVCsijcySC45+ZNCN9XzecH5C5W/5zYis3FEvy9flZMOutP45VRDKFesk5sGSvc=
+X-Received: by 2002:a4a:d1c2:0:b0:555:7682:7644 with SMTP id
+ a2-20020a4ad1c2000000b0055576827644mr325731oos.2.1684817245869; Mon, 22 May
+ 2023 21:47:25 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20230514035746.1550853-1-raj.khem@gmail.com> <CABF_=yifnMP5HbbpMj2jtc48TpHCCTE=KEUij2hLSQA2KpkiGQ@mail.gmail.com>
+In-Reply-To: <CABF_=yifnMP5HbbpMj2jtc48TpHCCTE=KEUij2hLSQA2KpkiGQ@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 22 May 2023 21:46:59 -0700
+Message-ID: <CAMKF1sq3nwWxAGSW41_xGRiV-BFLqXEAND4Hb92qmuzjcxe+Hw@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH] fftw: Remove hardcoded sysroot into binaries
+To: jan vermaete <jan.vermaete@gmail.com>
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 23 May 2023 04:41:27 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102727
+ <openembedded-devel@lists.openembedded.org>; Tue, 23 May 2023 04:47:27 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102728
 
-Drop upstreamed patch
+On Mon, May 22, 2023 at 4:12=E2=80=AFAM jan vermaete <jan.vermaete@gmail.co=
+m> wrote:
+>
+> Hi,
+>
+> Could it be this is causing a failure (see below)
+>
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- .../files/0001-include-cstdint.patch          | 37 -------------------
- ...plus_1.3.7.bb => redis-plus-plus_1.3.8.bb} |  5 +--
- 2 files changed, 2 insertions(+), 40 deletions(-)
- delete mode 100644 meta-oe/recipes-extended/redis-plus-plus/files/0001-include-cstdint.patch
- rename meta-oe/recipes-extended/redis-plus-plus/{redis-plus-plus_1.3.7.bb => redis-plus-plus_1.3.8.bb} (81%)
+Yes, it seems that we need to check for TOOLCHAIN_OPTIONS to be not
+empty which is the case when
+building the native recipe.
 
-diff --git a/meta-oe/recipes-extended/redis-plus-plus/files/0001-include-cstdint.patch b/meta-oe/recipes-extended/redis-plus-plus/files/0001-include-cstdint.patch
-deleted file mode 100644
-index bfe2412b5d..0000000000
---- a/meta-oe/recipes-extended/redis-plus-plus/files/0001-include-cstdint.patch
-+++ /dev/null
-@@ -1,37 +0,0 @@
--From e74bb5a7ef87e697571181280e6108b89104c02d Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Wed, 25 Jan 2023 20:40:56 -0800
--Subject: [PATCH] include <cstdint>
--
--gcc 13 libstdc++ moved some includes around and as a result <cstdint>
--is no longer transitively included [1]. Explicitly include it for uintXX_t.
--
--Fixes
--
--../git/src/sw/redis++/utils.h:187:1: error: 'uint16_t' does not name a type
--  187 | uint16_t crc16(const char *buf, int len);
--      | ^~~~~~~~
--
--[1] https://gcc.gnu.org/gcc-13/porting_to.html#header-dep-changes
--
--Upstream-Status: Submitted [https://github.com/sewenew/redis-plus-plus/pull/449]
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
-- src/sw/redis++/utils.h | 1 +
-- 1 file changed, 1 insertion(+)
--
--diff --git a/src/sw/redis++/utils.h b/src/sw/redis++/utils.h
--index f77f796..ff38f2d 100644
----- a/src/sw/redis++/utils.h
--+++ b/src/sw/redis++/utils.h
--@@ -17,6 +17,7 @@
-- #ifndef SEWENEW_REDISPLUSPLUS_UTILS_H
-- #define SEWENEW_REDISPLUSPLUS_UTILS_H
-- 
--+#include <cstdint>
-- #include <cstring>
-- #include <string>
-- #include <type_traits>
---- 
--2.39.1
--
-diff --git a/meta-oe/recipes-extended/redis-plus-plus/redis-plus-plus_1.3.7.bb b/meta-oe/recipes-extended/redis-plus-plus/redis-plus-plus_1.3.8.bb
-similarity index 81%
-rename from meta-oe/recipes-extended/redis-plus-plus/redis-plus-plus_1.3.7.bb
-rename to meta-oe/recipes-extended/redis-plus-plus/redis-plus-plus_1.3.8.bb
-index 8e906a4483..3117e70d13 100644
---- a/meta-oe/recipes-extended/redis-plus-plus/redis-plus-plus_1.3.7.bb
-+++ b/meta-oe/recipes-extended/redis-plus-plus/redis-plus-plus_1.3.8.bb
-@@ -4,9 +4,8 @@ SECTION = "libs"
- LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=86d3f3a95c324c9479bd8986968f4327"
- 
--SRC_URI = "git://github.com/sewenew/redis-plus-plus;branch=master;protocol=https \
--           file://0001-include-cstdint.patch"
--SRCREV = "f3b19a8a1f609d1a1b79002802e5cf8c336dc262"
-+SRCREV = "4368319fb668204f345da05b9dd79762506c67b6"
-+SRC_URI = "git://github.com/sewenew/redis-plus-plus;branch=master;protocol=https"
- 
- S = "${WORKDIR}/git"
- 
--- 
-2.40.1
-
+> Thanks,
+>
+> DEBUG: Executing python function autotools_aclocals
+> DEBUG: SITE files ['endian-little', 'common-linux', 'common-glibc',
+> 'bit-64', 'x86_64-linux', 'common']
+> DEBUG: Python function autotools_aclocals finished
+> DEBUG: Executing shell function do_compile
+> sed: -e expression #1, char 0: no previous regular expression
+> WARNING: .../build/tmp/work/x86_64-linux/fftw-native/3.3.10-r0/temp/run.d=
+o_compile.464684:153
+> exit 1 from 'sed -i -e 's|||g' config.h'
+> WARNING: Backtrace (BB generated script):
+>         #1: do_compile,
+> .../build/tmp/work/x86_64-linux/fftw-native/3.3.10-r0/temp/run.do_compile=
+.464684,
+> line 153
+>         #2: main,
+> .../build/tmp/work/x86_64-linux/fftw-native/3.3.10-r0/temp/run.do_compile=
+.464684,
+> line 199
+>
+> On Sun, May 14, 2023 at 5:57=E2=80=AFAM Khem Raj <raj.khem@gmail.com> wro=
+te:
+> >
+> > FFTW_CC is added to image via version.o and its CC + CFLAGS however CC
+> > in OE containes --syroot compiler option which encodes buildpaths into
+> > binary, therefore remove this option from FFTW_CC in config.h
+> >
+> > Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> > ---
+> >  meta-oe/recipes-support/fftw/fftw_3.3.10.bb | 1 +
+> >  1 file changed, 1 insertion(+)
+> >
+> > diff --git a/meta-oe/recipes-support/fftw/fftw_3.3.10.bb b/meta-oe/reci=
+pes-support/fftw/fftw_3.3.10.bb
+> > index cb45e2b91f..1fead4d029 100644
+> > --- a/meta-oe/recipes-support/fftw/fftw_3.3.10.bb
+> > +++ b/meta-oe/recipes-support/fftw/fftw_3.3.10.bb
+> > @@ -55,6 +55,7 @@ do_configure() {
+> >  do_compile() {
+> >      for lib in fftw fftwl fftwf; do
+> >          cd ${WORKDIR}/build-$lib
+> > +        sed -i -e 's|${TOOLCHAIN_OPTIONS}||g' config.h
+> >          autotools_do_compile
+> >      done
+> >  }
+> > --
+> > 2.40.1
+> >
+> >
+> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> > Links: You receive all messages sent to this group.
+> > View/Reply Online (#102563): https://lists.openembedded.org/g/openembed=
+ded-devel/message/102563
+> > Mute This Topic: https://lists.openembedded.org/mt/98879626/2167232
+> > Group Owner: openembedded-devel+owner@lists.openembedded.org
+> > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub =
+[jan.vermaete@gmail.com]
+> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> >
+>
+>
+> --
+> Jan Vermaete
+> =E2=80=9CSuccess is a self-correcting phenomenom.=E2=80=9D -- Gary Hamel
 
