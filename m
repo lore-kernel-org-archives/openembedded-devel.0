@@ -2,137 +2,88 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5D2E8C7EE23
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 59E36C77B7A
 	for <webhook@archiver.kernel.org>; Tue, 23 May 2023 04:27:07 +0000 (UTC)
-Received: from mail-pf1-f181.google.com (mail-pf1-f181.google.com [209.85.210.181])
- by mx.groups.io with SMTP id smtpd.web10.13894.1684816022645359175
+Received: from mail-pf1-f171.google.com (mail-pf1-f171.google.com [209.85.210.171])
+ by mx.groups.io with SMTP id smtpd.web10.13892.1684816021346120497
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 22 May 2023 21:27:06 -0700
+ Mon, 22 May 2023 21:27:01 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20221208 header.b=WPxvIcTk;
- spf=pass (domain: gmail.com, ip: 209.85.210.181, mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f181.google.com with SMTP id d2e1a72fcca58-64d1e96c082so3824129b3a.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 22 May 2023 21:27:06 -0700 (PDT)
+ dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=mH7Ba8J+;
+ spf=pass (domain: gmail.com, ip: 209.85.210.171, mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f171.google.com with SMTP id d2e1a72fcca58-64d18d772bdso6234786b3a.3
+        for <openembedded-devel@lists.openembedded.org>; Mon, 22 May 2023 21:27:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1684816026; x=1687408026;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=ZPTkRH+ulc9rCUECGvIiByhHMQr6jKRXc7Mxuk4+kTs=;
-        b=WPxvIcTkDK+hxx50uueq6uZlwJHYLyZzgieMu4dZJd/vXkg/pqyE5/Fmq3XJp6yebP
-         DO0cO5kuKubof+jDNwYBChodkZmQWu1FAyQMGaKsToBEnLNq1Kl4TeouqnHz0ht/6dpv
-         kEQg8Gsd+d+G2irh2x1Mfirs4dHYy/Txg7xbC9hnZgvU50MpbDoPe2V71AUdU1mdmGbt
-         ylHUciA/jIOBBsjBuYGYAgcpszwnJHD/wkv7dDWa0PWjhxyfIi0ctjcdVMx+HMBx/8Y5
-         lfzG02nl3r7IC9NumEMwZCRh4Ypa7Ye855Ayp+j8GPYriO/nS08DhqF89cDQ6gcy4sbw
-         ZzsA==
+        d=gmail.com; s=20221208; t=1684816020; x=1687408020;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=I8j8ppYyxHzuT8r2EhWRK7S2rDSpK49vQloV9MN1bnk=;
+        b=mH7Ba8J+78QqcoPxaTIvEunUDY8ON3J8dua1IFhk6S3uwnrlgDi9M+RcdCT55hDgtS
+         ygQBEH584gtB7XUAmYtJRrsgOd2M6T+s4mRuP3DjRUBAV7V8cMXv9vtVBl2Bp6ET/YgQ
+         gAE9pVbv3t+F0No4hTma46WcU/qX73/ioTpdZW0sw3JC0JjFXmK+xeBI4/Oa//4Rvfpe
+         odV//S/+t6sAX3KBd5ojwy9tCcPKSw8cfLtVN5E1fDW1N9e4kH7TUEf90Tw6NJQ7POhE
+         UG/f4/UkiU9nl/kcSrSSga8dSoeZZ+/8nhoukfISXEZ2L0r8gNXmXt7/4m4usCiQil00
+         PScg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1684816026; x=1687408026;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=ZPTkRH+ulc9rCUECGvIiByhHMQr6jKRXc7Mxuk4+kTs=;
-        b=EhJN+GTo5lZPHMzR2ij2M0P9/W4/07npVp+eh0vn03SXfpbOmZCoiQdE11+WimovXw
-         JTDSqrHcZ9vyABaduSlXPsHMd81os3XXwnzqoug4RUlszAEBFrD5QkK5PkBlGtAPy7Jk
-         LU+s+7hGXZVjju4KDGEuZHPNgn4IyEZh1ta1GTnKnyu/Yw+ePyiDgxWVqcaKvV+8zSXt
-         1OUUCDvpVmwbL24UoXAUGFTmGj+6v+RtHcw1VBNdr01I3r2rGSmR1cl6iFBI0gu966vl
-         v8q1q1uaCWa1ZBg2QaqxkBDW64Pnc5RAL7K0aR4Th8vCR/vqKmKf4uiFc/2MoVepGGwt
-         QICg==
-X-Gm-Message-State: AC+VfDwPUxQmWtZxIIvErMwrpl+ziDwzjoygAvt37jCYgQW88Abt1bn8
-	7Yagw9VEDH+VEH1c90H8iMbq2PKgJds=
-X-Google-Smtp-Source: ACHHUZ7ARed2G0o6vTos1m9b1cJZ8zsHHkhALZG2cSO8R6oyXJp0/eCmqLI97PLcS3Gr2laBuS/vDw==
-X-Received: by 2002:a05:6a00:13a2:b0:643:85a0:57fe with SMTP id t34-20020a056a0013a200b0064385a057femr19779299pfg.2.1684816026143;
-        Mon, 22 May 2023 21:27:06 -0700 (PDT)
+        d=1e100.net; s=20221208; t=1684816020; x=1687408020;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=I8j8ppYyxHzuT8r2EhWRK7S2rDSpK49vQloV9MN1bnk=;
+        b=VKZa0emop67t6HJicJpOcv4iv9xs/orGqPClaEJH49QtbxBmePxFlj0ISXexjAGp8D
+         geeLttmfRlCyM5xhmpMDPHZRdU/mkVUo2pBrPC1sydMWfZPtz5LuHnQMwOHohLkiExdA
+         8ykV/hylZKqRrZY4yI6Qm9dNhIKnuwNtRPQnTF1pJt+GV3zp2bCZ74shbfp7/Be9DqZx
+         0kQ7hQ+u0OXD9izquz6S5/FllpWH29LjAJkIDXJu/q78gHcCY4AZkrS7YSO8Q+vRhGs3
+         VfAoHVzPu/pMbIEdYzikC2A6y8htxcGQSrpsh4RJHjgvgRCnOPbodM9Ld6K9WeMvns6v
+         4EeA==
+X-Gm-Message-State: AC+VfDxHJ4w6dLv2af5aEBNAYJaunuOrVGGlJeWeLIFg65ykZDmz2lbG
+	cXWvkM8iBhL1wWjqngPDn+MJVqzGaqI=
+X-Google-Smtp-Source: ACHHUZ5ujuLe3Kz378sFcDe/9of7QSBiAkIKtr5sukH6OWx52aZDykyFww5zkhrZOsSpcqwa5Sxq3A==
+X-Received: by 2002:a05:6a00:2e84:b0:63b:7119:64a9 with SMTP id fd4-20020a056a002e8400b0063b711964a9mr17112962pfb.16.1684816020246;
+        Mon, 22 May 2023 21:27:00 -0700 (PDT)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9181:d380::c675])
-        by smtp.gmail.com with ESMTPSA id n7-20020aa79047000000b0064d2c7ac49fsm4844332pfo.31.2023.05.22.21.27.05
+        by smtp.gmail.com with ESMTPSA id n7-20020aa79047000000b0064d2c7ac49fsm4844332pfo.31.2023.05.22.21.26.59
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 22 May 2023 21:27:05 -0700 (PDT)
+        Mon, 22 May 2023 21:26:59 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-networking][PATCH 10/11] curlpp: Remove references to buildpaths e.g. TMPDIR
-Date: Mon, 22 May 2023 21:26:57 -0700
-Message-Id: <20230523042658.4159559-10-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 01/11] lockfile-progs: Pass DEBUG_PREFIX_MAP options
+Date: Mon, 22 May 2023 21:26:48 -0700
+Message-Id: <20230523042658.4159559-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.40.1
-In-Reply-To: <20230523042658.4159559-1-raj.khem@gmail.com>
-References: <20230523042658.4159559-1-raj.khem@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 23 May 2023 04:27:07 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102725
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102716
+
+This recipe overrides normal CFLAGS which loses the prefix rewrite
+options, add them manually.
 
 Fixes
-WARNING: curlpp-0.8.1-r0 do_package_qa: QA Issue: File /usr/bin/curlpp-config in package curlpp-dev contains reference to TMPDIR [buildpaths]
+File /usr/bin/.debug/mail-lock in package lockfile-progs-dbg contains reference to TMPDIR
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...-Remove-references-to-absolute-build.patch | 40 +++++++++++++++++++
- .../recipes-support/curlpp/curlpp_0.8.1.bb    |  3 +-
- 2 files changed, 42 insertions(+), 1 deletion(-)
- create mode 100644 meta-networking/recipes-support/curlpp/curlpp/0001-curlpp-config.in-Remove-references-to-absolute-build.patch
+ .../recipes-extended/lockfile-progs/lockfile-progs_0.1.19.bb    | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-networking/recipes-support/curlpp/curlpp/0001-curlpp-config.in-Remove-references-to-absolute-build.patch b/meta-networking/recipes-support/curlpp/curlpp/0001-curlpp-config.in-Remove-references-to-absolute-build.patch
-new file mode 100644
-index 0000000000..539e9cefb6
---- /dev/null
-+++ b/meta-networking/recipes-support/curlpp/curlpp/0001-curlpp-config.in-Remove-references-to-absolute-build.patch
-@@ -0,0 +1,40 @@
-+From d6eee2d52f31e034f9d84d38a749d86a63d5b769 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Mon, 22 May 2023 20:37:47 -0700
-+Subject: [PATCH] curlpp-config.in: Remove references to absolute buildpaths
-+
-+Upstream-Status: Pending
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ extras/curlpp-config.in | 6 +++---
-+ 1 file changed, 3 insertions(+), 3 deletions(-)
-+
-+diff --git a/extras/curlpp-config.in b/extras/curlpp-config.in
-+index b0bd964..1416b94 100644
-+--- a/extras/curlpp-config.in
-++++ b/extras/curlpp-config.in
-+@@ -43,7 +43,7 @@ while test $# -gt 0; do
-+ 
-+     case "$1" in
-+     --cc)
-+-	echo @CC@
-++	curl-config --cc
-+ 	;;
-+ 
-+     --prefix)
-+@@ -73,10 +73,10 @@ while test $# -gt 0; do
-+        	;;
-+ 
-+     --libs)
-+-       	echo -L@libdir@ @LDFLAGS@ @LIBS@ `curl-config --libs` -lcurlpp
-++       	echo `curl-config --libs` -lcurlpp
-+        	;;
-+     --static-libs)
-+-       	echo @libdir_static@/libcurlpp.@libext@ @LDFLAGS@ @LIBS@ `curl-config --static-libs`
-++       	echo $prefix/@libdir_static@/libcurlpp.@libext@ `curl-config --static-libs`
-+         ;;
-+ 
-+     *)
-+-- 
-+2.40.1
-+
-diff --git a/meta-networking/recipes-support/curlpp/curlpp_0.8.1.bb b/meta-networking/recipes-support/curlpp/curlpp_0.8.1.bb
-index e36a86fd09..131f1873a2 100644
---- a/meta-networking/recipes-support/curlpp/curlpp_0.8.1.bb
-+++ b/meta-networking/recipes-support/curlpp/curlpp_0.8.1.bb
-@@ -7,7 +7,8 @@ LIC_FILES_CHKSUM = "file://doc/LICENSE;md5=fd0c9adf285a69aa3b4faf34384e1029"
- DEPENDS = "curl"
- DEPENDS:class-native = "curl-native"
+diff --git a/meta-oe/recipes-extended/lockfile-progs/lockfile-progs_0.1.19.bb b/meta-oe/recipes-extended/lockfile-progs/lockfile-progs_0.1.19.bb
+index d7ba6e14b2..834687b43b 100644
+--- a/meta-oe/recipes-extended/lockfile-progs/lockfile-progs_0.1.19.bb
++++ b/meta-oe/recipes-extended/lockfile-progs/lockfile-progs_0.1.19.bb
+@@ -12,7 +12,7 @@ SRC_URI = "${DEBIAN_MIRROR}/main/l/${BPN}/${BPN}_${PV}.tar.gz"
+ SRC_URI[sha256sum] = "2c5704b01c8f474f82921780e4592a927b2bf6a6d7616354a6c5d7cd5664857e"
  
--SRC_URI = "git://github.com/jpbarrette/curlpp.git;branch=master;protocol=https"
-+SRC_URI = "git://github.com/jpbarrette/curlpp.git;branch=master;protocol=https \
-+           file://0001-curlpp-config.in-Remove-references-to-absolute-build.patch"
+ do_compile() {
+-    oe_runmake CFLAGS=' -g -pipe -Wall -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector --param=ssp-buffer-size=4 -fasynchronous-unwind-tables'
++    oe_runmake CFLAGS=' -g -pipe -Wall -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector --param=ssp-buffer-size=4 -fasynchronous-unwind-tables ${DEBUG_PREFIX_MAP}'
+ }
  
- SRCREV = "592552a165cc569dac7674cb7fc9de3dc829906f"
- 
+ do_install() {
 -- 
 2.40.1
 
