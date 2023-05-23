@@ -1,89 +1,240 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C3C05C77B75
-	for <webhook@archiver.kernel.org>; Tue, 23 May 2023 04:51:57 +0000 (UTC)
-Received: from mail-pl1-f180.google.com (mail-pl1-f180.google.com [209.85.214.180])
- by mx.groups.io with SMTP id smtpd.web10.14153.1684817514864357852
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DE5ACC7EE23
+	for <webhook@archiver.kernel.org>; Tue, 23 May 2023 08:49:48 +0000 (UTC)
+Received: from mailout09.t-online.de (mailout09.t-online.de [194.25.134.84])
+ by mx.groups.io with SMTP id smtpd.web10.17112.1684831787636352738
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 22 May 2023 21:51:54 -0700
+ Tue, 23 May 2023 01:49:48 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20221208 header.b=SDK+pK1s;
- spf=pass (domain: gmail.com, ip: 209.85.214.180, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f180.google.com with SMTP id d9443c01a7336-1ae85b71141so36849135ad.0
-        for <openembedded-devel@lists.openembedded.org>; Mon, 22 May 2023 21:51:54 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1684817514; x=1687409514;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=QcuSXFSgflTeS/UALpIIt/AWqeRaPsZKA3f8DFfBcPM=;
-        b=SDK+pK1svfmlf+N4RD+D5zmpPNEaOahwOleUGWHHR8VaL6aU0a6f1pH8uFyhIqA2RM
-         8hm2Te4oz+BZqjqvn7F8PUF5yiD9NLMU1gofCXDowP9Fm+HoK4v/Zu2e3sgd/0HH1xDz
-         EllO2/BVkvIyC3M8DzGglCKzVvG7Dk2Jmn51nOmlWZQIi8vzG3DgRHJWEp2GjBuqLHid
-         GEWocahBvuh91TI9ReYWMSCW/DeCugv+eC9WfSgR2MacQO8a7pWlNoCunx4GWGqjKdru
-         tRyEQVIGnW+DLuRqS4rt86/+ffXnu6y8Ma6vHm3zq1YjT/94tZVSOKg/C7UzIrAb/MTs
-         0QDA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1684817514; x=1687409514;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=QcuSXFSgflTeS/UALpIIt/AWqeRaPsZKA3f8DFfBcPM=;
-        b=ckkngE6myKsfrrpk6pIke22cDpDeEAZiJyC733zr7nkgKcJp5F1jk85a1hxOm5S58z
-         33GQ2S6JzVyYDcGHBHlXqO7u0vaZmpI6o0ms1P/v72dIpvYlh+vd44ldPIzgZV9SPgQq
-         XA3KCisyRrYlVXlnRCAt+6aYIn4BLt8XcX5FebRreyZCvXm/4hH9/iGuMQWgrY+NVUZE
-         D61lKuDo45mkPKqMqGTBOS0SIlQAZkKXsuTFFiwNMnOyhzqC5FhbKcvxRj7T8xP0c+bz
-         kOs3L4a9HM8kXyweL3PuAVhHP2+m9NqDHNZ4UoDiUdap5S5RTNc42BvjJfrPCI4NqEUN
-         AClw==
-X-Gm-Message-State: AC+VfDzxaRLs7YoIB8EzJ2A3LojqAThk+4G6H+nUuUl00OGNRQohbCwE
-	Pp8WvC7Ub8x5cVub/xBRo10Y2bsyZHc=
-X-Google-Smtp-Source: ACHHUZ4l0ngH8HvJMfiN5eneuxTbQbYnepH/kPxGjrV7lXhe3QrQxWOwRhAxccrzAer8HYtbt6c8FA==
-X-Received: by 2002:a17:902:e84c:b0:1af:bfb0:e7e4 with SMTP id t12-20020a170902e84c00b001afbfb0e7e4mr3891838plg.36.1684817514012;
-        Mon, 22 May 2023 21:51:54 -0700 (PDT)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9181:d380::c675])
-        by smtp.gmail.com with ESMTPSA id o5-20020a170903210500b001ae6fe84244sm5690390ple.243.2023.05.22.21.51.53
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 22 May 2023 21:51:53 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
+ dkim=missing; spf=none, err=SPF record not found (domain: t-online.de, ip: 194.25.134.84, mailfrom: f_l_k@t-online.de)
+Received: from fwd86.dcpf.telekom.de (fwd86.aul.t-online.de [10.223.144.112])
+	by mailout09.t-online.de (Postfix) with SMTP id 3B85377FA
+	for <openembedded-devel@lists.openembedded.org>; Tue, 23 May 2023 10:49:45 +0200 (CEST)
+Received: from flk-MS-7C91.fritz.box ([84.163.41.120]) by fwd86.t-online.de
+	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
+	esmtp id 1q1NiC-1gwuIL0; Tue, 23 May 2023 10:49:44 +0200
+From: Markus Volk <f_l_k@t-online.de>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>,
-	jan vermaete <jan.vermaete@gmail.com>
-Subject: [meta-oe][PATCH] fftw: Check for TOOLCHAIN_OPTIONS to be non-empty before sed ops
-Date: Mon, 22 May 2023 21:51:51 -0700
-Message-Id: <20230523045151.139311-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.40.1
+Cc: Markus Volk <f_l_k@t-online.de>
+Subject: [meta-multimedia][PATCH] fluidsynth: update 2.2.6 -> 2.3.2
+Date: Tue, 23 May 2023 10:49:28 +0200
+Message-Id: <20230523084928.1109458-1-f_l_k@t-online.de>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=UTF-8
+X-TOI-EXPURGATEID: 150726::1684831784-0EFFDC77-4737F879/0/0 CLEAN NORMAL
+X-TOI-MSGID: ffd92db9-658d-4c81-8a7d-e15e259568f5
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 23 May 2023 04:51:57 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102729
+ <openembedded-devel@lists.openembedded.org>; Tue, 23 May 2023 08:49:48 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102730
 
-Ensures that we do not apply empty sed expression which might happen
-when building native recipe
+-remove unneeded patch
+-remove fluidsynth-native as it seems to be unneeded
+-remove STAGING_LIBDIR from target files
+-add more packageconfig options
 
-Cc: jan vermaete <jan.vermaete@gmail.com>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Markus Volk <f_l_k@t-online.de>
 ---
- meta-oe/recipes-support/fftw/fftw_3.3.10.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ .../fluidsynth/fluidsynth-native_git.bb       | 10 ----
+ .../fluidsynth/fluidsynth.inc                 | 12 -----
+ ...tables-helper-we-have-to-use-native-.patch | 49 -------------------
+ .../fluidsynth/fluidsynth_git.bb              | 33 ++++++++++---
+ 4 files changed, 25 insertions(+), 79 deletions(-)
+ delete mode 100644 meta-multimedia/recipes-multimedia/fluidsynth/fluidsy=
+nth-native_git.bb
+ delete mode 100644 meta-multimedia/recipes-multimedia/fluidsynth/fluidsy=
+nth.inc
+ delete mode 100644 meta-multimedia/recipes-multimedia/fluidsynth/fluidsy=
+nth/0001-Do-not-build-gentables-helper-we-have-to-use-native-.patch
 
-diff --git a/meta-oe/recipes-support/fftw/fftw_3.3.10.bb b/meta-oe/recipes-support/fftw/fftw_3.3.10.bb
-index 1fead4d029..33e8279880 100644
---- a/meta-oe/recipes-support/fftw/fftw_3.3.10.bb
-+++ b/meta-oe/recipes-support/fftw/fftw_3.3.10.bb
-@@ -55,7 +55,7 @@ do_configure() {
- do_compile() {
-     for lib in fftw fftwl fftwf; do
-         cd ${WORKDIR}/build-$lib
--        sed -i -e 's|${TOOLCHAIN_OPTIONS}||g' config.h
-+        test -n "${TOOLCHAIN_OPTIONS}" && sed -i -e 's|${TOOLCHAIN_OPTIONS}||g' config.h
-         autotools_do_compile
-     done
+diff --git a/meta-multimedia/recipes-multimedia/fluidsynth/fluidsynth-nat=
+ive_git.bb b/meta-multimedia/recipes-multimedia/fluidsynth/fluidsynth-nat=
+ive_git.bb
+deleted file mode 100644
+index a95c4c42a8..0000000000
+--- a/meta-multimedia/recipes-multimedia/fluidsynth/fluidsynth-native_git=
+.bb
++++ /dev/null
+@@ -1,10 +0,0 @@
+-require ${BPN}.inc
+-
+-inherit native
+-
+-OECMAKE_SOURCEPATH =3D "${S}/src/gentables"
+-
+-do_install() {
+-    install -d ${D}/${bindir}
+-    install -m 755 ${B}/make_tables.exe ${D}/${bindir}/
+-}
+diff --git a/meta-multimedia/recipes-multimedia/fluidsynth/fluidsynth.inc=
+ b/meta-multimedia/recipes-multimedia/fluidsynth/fluidsynth.inc
+deleted file mode 100644
+index a4590d61a9..0000000000
+--- a/meta-multimedia/recipes-multimedia/fluidsynth/fluidsynth.inc
++++ /dev/null
+@@ -1,12 +0,0 @@
+-SUMMARY =3D "Fluidsynth is a software synthesizer"
+-HOMEPAGE =3D "http://www.fluidsynth.org/"
+-SECTION =3D "libs/multimedia"
+-LICENSE =3D "LGPL-2.1-only"
+-LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Dfc178bcd425090939a8b634d1d6a9=
+594"
+-
+-SRC_URI =3D "git://github.com/FluidSynth/fluidsynth.git;branch=3Dmaster;=
+protocol=3Dhttps"
+-SRCREV =3D "8b00644751578ba67b709a827cbe5133d849d339"
+-S =3D "${WORKDIR}/git"
+-PV =3D "2.2.6"
+-
+-inherit cmake pkgconfig lib_package
+diff --git a/meta-multimedia/recipes-multimedia/fluidsynth/fluidsynth/000=
+1-Do-not-build-gentables-helper-we-have-to-use-native-.patch b/meta-multi=
+media/recipes-multimedia/fluidsynth/fluidsynth/0001-Do-not-build-gentable=
+s-helper-we-have-to-use-native-.patch
+deleted file mode 100644
+index cc73bdb1d9..0000000000
+--- a/meta-multimedia/recipes-multimedia/fluidsynth/fluidsynth/0001-Do-no=
+t-build-gentables-helper-we-have-to-use-native-.patch
++++ /dev/null
+@@ -1,49 +0,0 @@
+-From 81ea820b155e887b13ea5986c3407cf93b2737f6 Mon Sep 17 00:00:00 2001
+-From: =3D?UTF-8?q?Andreas=3D20M=3DC3=3DBCller?=3D <schnitzeltony@gmail.c=
+om>
+-Date: Wed, 2 Jan 2019 18:42:46 +0100
+-Subject: [PATCH] Do not build gentables helper - we have to use native v=
+ariant
+-MIME-Version: 1.0
+-Content-Type: text/plain; charset=3DUTF-8
+-Content-Transfer-Encoding: 8bit
+-
+-Upstream-Status: Inappropriate [embedded specific]
+-
+-Signed-off-by: Andreas M=C3=BCller <schnitzeltony@gmail.com>
+----
+- src/CMakeLists.txt | 23 +----------------------
+- 1 file changed, 1 insertion(+), 22 deletions(-)
+-
+-diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
+-index 356bb734..58ff7635 100644
+---- a/src/CMakeLists.txt
+-+++ b/src/CMakeLists.txt
+-@@ -399,25 +399,4 @@ else ( MACOSX_FRAMEWORK )
+-    install ( FILES ${public_main_HEADER} DESTINATION ${INCLUDE_INSTALL_=
+DIR} )
+- endif ( MACOSX_FRAMEWORK )
+-=20
+--# ******* Auto Generated Lookup Tables ******
+--
+--include(ExternalProject)
+--
+--set (GENTAB_SDIR ${CMAKE_CURRENT_SOURCE_DIR}/gentables)
+--set (GENTAB_BDIR ${CMAKE_CURRENT_BINARY_DIR}/gentables)
+--
+--# Use external project to ensure that cmake uses the host compiler when=
+ building make_tables.exe
+--# To fix cross-compiling fluidsynth from Win32 to ARM (using vcpkg), we=
+ need to pass the current generator
+--# on to the external project, otherwise (for some unknown reason) the t=
+arget compiler will be used rather
+--# than the host compiler.
+--ExternalProject_Add(gentables
+--    DOWNLOAD_COMMAND ""
+--    SOURCE_DIR ${GENTAB_SDIR}
+--    BINARY_DIR ${GENTAB_BDIR}
+--    CONFIGURE_COMMAND
+--        "${CMAKE_COMMAND}" -DCMAKE_VERBOSE_MAKEFILE=3D${CMAKE_VERBOSE_M=
+AKEFILE} -G "${CMAKE_GENERATOR}" -B "${GENTAB_BDIR}" "${GENTAB_SDIR}"
+--    BUILD_COMMAND
+--        "${CMAKE_COMMAND}" --build "${GENTAB_BDIR}"
+--    INSTALL_COMMAND ${GENTAB_BDIR}/make_tables.exe "${CMAKE_BINARY_DIR}=
+/"
+--)
+--add_dependencies(libfluidsynth-OBJ gentables)
+-+
+---=20
+-2.21.1
+-
+diff --git a/meta-multimedia/recipes-multimedia/fluidsynth/fluidsynth_git=
+.bb b/meta-multimedia/recipes-multimedia/fluidsynth/fluidsynth_git.bb
+index 984f37b756..a1083af56d 100644
+--- a/meta-multimedia/recipes-multimedia/fluidsynth/fluidsynth_git.bb
++++ b/meta-multimedia/recipes-multimedia/fluidsynth/fluidsynth_git.bb
+@@ -1,23 +1,40 @@
+-require ${BPN}.inc
++SUMMARY =3D "Fluidsynth is a software synthesizer"
++HOMEPAGE =3D "http://www.fluidsynth.org/"
++SECTION =3D "libs/multimedia"
++LICENSE =3D "LGPL-2.1-only"
++LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Dfc178bcd425090939a8b634d1d6a9=
+594"
+=20
+-DEPENDS =3D "${BPN}-native alsa-lib ncurses glib-2.0"
++SRC_URI =3D "git://github.com/FluidSynth/fluidsynth.git;branch=3Dmaster;=
+protocol=3Dhttps"
++SRCREV =3D "4d8fe638e1a48660a4c843d493f69a86579e12f0"
++S =3D "${WORKDIR}/git"
++PV =3D "2.3.2"
++
++inherit cmake pkgconfig lib_package
++
++DEPENDS =3D "glib-2.0"
+=20
+ SRC_URI +=3D " \
+-    file://0001-Do-not-build-gentables-helper-we-have-to-use-native-.pat=
+ch \
+     file://0002-fluid_synth_nwrite_float-Allow-zero-pointer-for-left.pat=
+ch \
+     file://0003-Use-ARM-NEON-accelaration-for-float-multithreaded-se.pat=
+ch \
+ "
+=20
+ EXTRA_OECMAKE =3D "-Denable-floats=3DON -DLIB_SUFFIX=3D${@d.getVar('base=
+lib').replace('lib', '')}"
+=20
+-do_configure:append() {
+-    make_tables.exe ${B}/
++do_install:append() {
++    sed -i -e 's|${STAGING_LIBDIR}|${libdir}|g' ${D}${libdir}/pkgconfig/=
+fluidsynth.pc
++    sed -i -e 's|${STAGING_LIBDIR}|${libdir}|g' ${D}${libdir}/cmake/flui=
+dsynth/FluidSynthTargets.cmake
  }
--- 
-2.40.1
+=20
+-PACKAGECONFIG ??=3D "${@bb.utils.filter('DISTRO_FEATURES', 'pulseaudio',=
+ d)}"
+-PACKAGECONFIG[sndfile] =3D "-Denable-libsndfile=3DON,-Denable-libsndfile=
+=3DOFF,libsndfile1"
++PACKAGECONFIG ??=3D "${@bb.utils.filter('DISTRO_FEATURES', 'pulseaudio p=
+ipewire systemd alsa dbus', d)}"
++PACKAGECONFIG[alsa] =3D "-Denable-alsa=3DON,-Denable-alsa=3DOFF,alsa-lib=
+"
++PACKAGECONFIG[dbus] =3D "-Denable-dbus=3DON,-Denable-dbus=3DOFF,dbus"
+ PACKAGECONFIG[jack] =3D "-Denable-jack=3DON,-Denable-jack=3DOFF,jack"
+-PACKAGECONFIG[pulseaudio] =3D "-Denable-pulseaudio=3DON,-Denable-pulseau=
+dio=3DOFF,pulseaudio"
++PACKAGECONFIG[oss] =3D "-Denable-oss=3DON,-Denable-oss=3DOFF"
++PACKAGECONFIG[pipewire] =3D "-Denable-pipewire=3DON,-Denable-pipewire=3D=
+OFF,pipewire"
+ PACKAGECONFIG[portaudio] =3D "-Denable-portaudio=3DON,-Denable-portaudio=
+=3DOFF,portaudio-v19"
+ PACKAGECONFIG[profiling] =3D "-Denable-profiling=3DON,-Denable-profiling=
+=3DOFF"
++PACKAGECONFIG[pulseaudio] =3D "-Denable-pulseaudio=3DON,-Denable-pulseau=
+dio=3DOFF,pulseaudio"
+ PACKAGECONFIG[readline] =3D "-Denable-readline=3DON,-Denable-readline=3D=
+OFF,readline"
++PACKAGECONFIG[sdl] =3D "-Denable-sdl2=3DON,-Denable-sdl2=3DOFF,libsdl2"
++PACKAGECONFIG[sndfile] =3D "-Denable-libsndfile=3DON,-Denable-libsndfile=
+=3DOFF,libsndfile1"
++PACKAGECONFIG[systemd] =3D "-Denable-systemd=3DON,-Denable-systemd=3DOFF=
+,systemd"
+--=20
+2.34.1
 
 
