@@ -2,57 +2,57 @@ Return-Path: <Martin.Jansa@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BDEF9C7EE31
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C4E73C7EE45
 	for <webhook@archiver.kernel.org>; Wed, 24 May 2023 07:53:13 +0000 (UTC)
-Received: from mail-ed1-f53.google.com (mail-ed1-f53.google.com [209.85.208.53])
- by mx.groups.io with SMTP id smtpd.web11.3575.1684914785093992289
+Received: from mail-ed1-f50.google.com (mail-ed1-f50.google.com [209.85.208.50])
+ by mx.groups.io with SMTP id smtpd.web11.3578.1684914791655669610
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 24 May 2023 00:53:05 -0700
+ Wed, 24 May 2023 00:53:11 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=Ld/4eY72;
- spf=pass (domain: gmail.com, ip: 209.85.208.53, mailfrom: martin.jansa@gmail.com)
-Received: by mail-ed1-f53.google.com with SMTP id 4fb4d7f45d1cf-50c8d87c775so1163646a12.3
-        for <openembedded-devel@lists.openembedded.org>; Wed, 24 May 2023 00:53:04 -0700 (PDT)
+ dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=Gf5LNSjn;
+ spf=pass (domain: gmail.com, ip: 209.85.208.50, mailfrom: martin.jansa@gmail.com)
+Received: by mail-ed1-f50.google.com with SMTP id 4fb4d7f45d1cf-510b56724caso3545355a12.1
+        for <openembedded-devel@lists.openembedded.org>; Wed, 24 May 2023 00:53:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1684914783; x=1687506783;
+        d=gmail.com; s=20221208; t=1684914790; x=1687506790;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=28gm8/CKodUHGRlKkH4w5sX8lsKVxUo70kuRkNK12mU=;
-        b=Ld/4eY72fOyX/r8DRAhRn9wD7DvFGvnnWNoJ4Myl/atvfEnOWHkf5KuBDl/dnv4V1n
-         zUJkJrOnxQ8dAIyBFg1oTPK1wYetROYsQ8wdoh38O1+6ryrUQCeKokv9TPwvj1rBizXi
-         /DSfz1CxXl04kCe1UkidgiJsNNhLPFr57XMNE0tlokZRRRKMEOTtMJ3sp9WmZ6FTD0bd
-         A38r5bIKatK6kryKq8ndfCqh0W5NagIe/UcQAjhRF1XZ0aC0gPj1PKR8uHtKIdRinMCq
-         PTISNNH6PiEAuMEAjLWInNCJFOifzN7UTMHrr+Yd+3QRCgvtY53Y74qrYKT7o4n+b08/
-         GDVQ==
+        bh=/lRpmApyweeCt37g2JlTxkplxSfrTpnCNXK+JH7km5M=;
+        b=Gf5LNSjnU18HzOH8tlaVTYots6Qwl3DhAllnt/2ae2FP+dNyW/XW+sY5/Y78kWR7U7
+         wpiRHczDlrRDbNOtDm7HR8djlsc8mKEh0aC8JhcHnlA9tDmAX0tzitZ+5m9lcvNhtfX/
+         Bim0ro+skQUivIPXcEa+c6fKCCvzJeYtTGRJrKEB1ZUv8oVanbfxaGNV8NHgds8PieyJ
+         kqROTnhxiX9omBFXJuumcYcu3IJLuFE53RF2cTiLF78fgPqJ1GXeYlWkg1VF5HXTgIxh
+         npQ44bY1DOR7T7fIfgSxwiWZNXAfO1Ck0D5fPELtNKx21+8FnaFVxIaGu71CAo28EazT
+         d2LQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1684914783; x=1687506783;
+        d=1e100.net; s=20221208; t=1684914790; x=1687506790;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=28gm8/CKodUHGRlKkH4w5sX8lsKVxUo70kuRkNK12mU=;
-        b=EiGHgd7n5uZ4wmd0IhZFTaLCKWLTCSsAzSgG0b7FgKzsEXq3tzbjilbYH/RIXsdcAK
-         /EEDT3J/pKD6vIR9uDrzelE2zkvWTl5N7CCMwc+joFwCybhQ2ygR9kxvpYH7X8aeActF
-         2n1tLGLOvW6CMU7QCYYsZ6bTwvdYYAxySVinbPSYGt2El9sgiwtEH5cq1ZHlpOkYGaS2
-         CaAJNI2Q3fGd++OHoVnavfCoJbuhF+oVhNs6SxUwLrOuUTG+Ww1WwuRYpNigJ77X+4sR
-         5n9Z7CEEHR0albVfAROHVObeGc6Mw7TE3XGajcDSJx5xxHS/8UAu40c1e2Q3U1ucZ9GP
-         zBxw==
-X-Gm-Message-State: AC+VfDzZZlodiBKN/+KgxG8+Rw/3fCNu19ru8Fn+zhshODhmlBYVzv16
-	W/3KqNSBNq36e6DlL2JS7FAB8J/8q9g=
-X-Google-Smtp-Source: ACHHUZ5bH78dMn/KgToreJi84kFT2nBuqJZhqUyGz2mIL6yn+coPuoh6xcSnE1RUG2077kgTZUoTlg==
-X-Received: by 2002:a17:906:7087:b0:965:fa3b:7478 with SMTP id b7-20020a170906708700b00965fa3b7478mr13611905ejk.53.1684914783559;
-        Wed, 24 May 2023 00:53:03 -0700 (PDT)
+        bh=/lRpmApyweeCt37g2JlTxkplxSfrTpnCNXK+JH7km5M=;
+        b=U1heaAjxM9nDNmdjGclvG0Oi8qVNr9O8F5L20Y/kLu2XdvV0JKI+R4L8xf78i6sv5g
+         YOrao4E95Q9BIAPFZu57f9IhW28WKgd7DX5OsGxT4Vod8OoyoRyqbCP9aJhLRN9Omzra
+         0oBGC6UpAEocoM5GrF8sGW6jNZ4MLSdur+DsDiF+kkZMTjW46YXpYCvOAVpu50zgim/+
+         OTWvtPxIK+iTznBQ4poxQzAWKT5cUB3Mq2mIxnqIzqsgBZOxpJRv1COJYax9TVvF1ZiD
+         6V+VjI33tWCPxuxVt8AhtoBQNW4HV/GRMTzhsNf4xRssjXIbWjUB1IMNAn0hi2/b2ijt
+         4KHw==
+X-Gm-Message-State: AC+VfDx46UJ59alYFmcySjVzdrI8wbU+R/2Q8EI3TBy+c55mJLctv+87
+	tDbx3bMicBWLPMd0JVuVKywFBkcmmyc=
+X-Google-Smtp-Source: ACHHUZ4fCnSKnEqf80AjPaD2dFSygD5aXAnmIE13eN4waUOnJn5fwt1R03I9s6Oy08p5z9SCzdCZQQ==
+X-Received: by 2002:a17:907:360c:b0:969:9c0c:4c97 with SMTP id bk12-20020a170907360c00b009699c0c4c97mr14240403ejc.1.1684914790077;
+        Wed, 24 May 2023 00:53:10 -0700 (PDT)
 Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
-        by smtp.gmail.com with ESMTPSA id gt24-20020a170906f21800b0096f6a910ab7sm5396996ejb.190.2023.05.24.00.53.03
+        by smtp.gmail.com with ESMTPSA id kg17-20020a17090776f100b0096a6bf89259sm5227283ejc.167.2023.05.24.00.53.09
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 24 May 2023 00:53:03 -0700 (PDT)
+        Wed, 24 May 2023 00:53:09 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Martin Jansa <Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 04/20] python3-anyjson: remove unused files
-Date: Wed, 24 May 2023 09:52:37 +0200
-Message-Id: <20230524075253.1033593-4-Martin.Jansa@gmail.com>
+Subject: [meta-oe][PATCH 13/20] opencv: remove unused patch file
+Date: Wed, 24 May 2023 09:52:46 +0200
+Message-Id: <20230524075253.1033593-13-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20230524075253.1033593-1-Martin.Jansa@gmail.com>
 References: <20230524075253.1033593-1-Martin.Jansa@gmail.com>
@@ -62,63 +62,59 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 24 May 2023 07:53:13 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102758
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102767
 
-* the recipe was removed in:
-  https://git.openembedded.org/meta-openembedded/commit/?id=09abb3ffad217edbbc0c95bc6dda41f2764f2b67
+* it was removed from SRC_URI in:
+  https://git.openembedded.org/meta-openembedded/commit/?id=d0e72f07d3f6362a8d3f070ca00c153aae718cb7
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- .../0001-setup.py-Do-not-use-2to3.patch       | 29 -------------------
- .../python/python3-anyjson/run-ptest          |  3 --
- 2 files changed, 32 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python3-anyjson/0001-setup.py-Do-not-use-2to3.patch
- delete mode 100644 meta-python/recipes-devtools/python/python3-anyjson/run-ptest
+ ...dparty-ippicv-Use-pre-downloaded-ipp.patch | 36 -------------------
+ 1 file changed, 36 deletions(-)
+ delete mode 100644 meta-oe/recipes-support/opencv/opencv/0001-3rdparty-ippicv-Use-pre-downloaded-ipp.patch
 
-diff --git a/meta-python/recipes-devtools/python/python3-anyjson/0001-setup.py-Do-not-use-2to3.patch b/meta-python/recipes-devtools/python/python3-anyjson/0001-setup.py-Do-not-use-2to3.patch
+diff --git a/meta-oe/recipes-support/opencv/opencv/0001-3rdparty-ippicv-Use-pre-downloaded-ipp.patch b/meta-oe/recipes-support/opencv/opencv/0001-3rdparty-ippicv-Use-pre-downloaded-ipp.patch
 deleted file mode 100644
-index 2b9e6e52e8..0000000000
---- a/meta-python/recipes-devtools/python/python3-anyjson/0001-setup.py-Do-not-use-2to3.patch
+index 9e6a613713..0000000000
+--- a/meta-oe/recipes-support/opencv/opencv/0001-3rdparty-ippicv-Use-pre-downloaded-ipp.patch
 +++ /dev/null
-@@ -1,29 +0,0 @@
--From 4fb61d7c621599b0db9c2c45f4243f07936c5953 Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Wed, 13 Oct 2021 08:20:00 -0700
--Subject: [PATCH] setup.py: Do not use 2to3
+@@ -1,36 +0,0 @@
+-From 9b4959b97d2e95d4b49cf6ca2a3fce3cdb484f2d Mon Sep 17 00:00:00 2001
+-From: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
+-Date: Thu, 31 Mar 2016 00:20:15 +0200
+-Subject: [PATCH] 3rdparty/ippicv: Use pre-downloaded ipp
 -
--This helps compiling with setuptools 0.58+
--and it seems to compile fine with python3
+-Signed-off-by: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
+-Signed-off-by: Ismo Puustinen <ismo.puustinen@intel.com>
 -
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ----
-- setup.py | 2 --
-- 1 file changed, 2 deletions(-)
+- 3rdparty/ippicv/ippicv.cmake | 15 +--------------
+- 1 file changed, 1 insertion(+), 14 deletions(-)
 -
--diff --git a/setup.py b/setup.py
--index 9fe4902..f2098e1 100644
----- a/setup.py
--+++ b/setup.py
--@@ -2,8 +2,6 @@ import os
-- import sys
+-diff --git a/3rdparty/ippicv/ippicv.cmake b/3rdparty/ippicv/ippicv.cmake
+-index 257af6fcc6..f88460450f 100644
+---- a/3rdparty/ippicv/ippicv.cmake
+-+++ b/3rdparty/ippicv/ippicv.cmake
+-@@ -34,18 +34,5 @@ function(download_ippicv root_var)
+-   endif()
 - 
-- extra = {}
---if sys.version_info >= (3, 0):
---    extra.update(use_2to3=True)
-- 
-- try:
--     from setuptools import setup, find_packages
---- 
--2.33.0
--
-diff --git a/meta-python/recipes-devtools/python/python3-anyjson/run-ptest b/meta-python/recipes-devtools/python/python3-anyjson/run-ptest
-deleted file mode 100644
-index b63c4de0d9..0000000000
---- a/meta-python/recipes-devtools/python/python3-anyjson/run-ptest
-+++ /dev/null
-@@ -1,3 +0,0 @@
--#!/bin/sh
--
--pytest -o log_cli=true -o log_cli_level=INFO | sed -e 's/\[...%\]//g'| sed -e 's/PASSED/PASS/g'| sed -e 's/FAILED/FAIL/g'|sed -e 's/SKIPPED/SKIP/g'| awk '{if ($NF=="PASS" || $NF=="FAIL" || $NF=="SKIP" || $NF=="XFAIL" || $NF=="XPASS"){printf "%s: %s\n", $NF, $0}else{print}}'| awk '{if ($NF=="PASS" || $NF=="FAIL" || $NF=="SKIP" || $NF=="XFAIL" || $NF=="XPASS") {$NF="";print $0}else{print}}'
+-   set(THE_ROOT "${OpenCV_BINARY_DIR}/3rdparty/ippicv")
+--  ocv_download(FILENAME ${OPENCV_ICV_NAME}
+--               HASH ${OPENCV_ICV_HASH}
+--               URL
+--                 "${OPENCV_IPPICV_URL}"
+--                 "$ENV{OPENCV_IPPICV_URL}"
+--                 "https://raw.githubusercontent.com/opencv/opencv_3rdparty/${IPPICV_COMMIT}/ippicv/"
+--               DESTINATION_DIR "${THE_ROOT}"
+--               ID IPPICV
+--               STATUS res
+--               UNPACK RELATIVE_URL)
+--
+--  if(res)
+--    set(${root_var} "${THE_ROOT}/${OPENCV_ICV_PACKAGE_SUBDIR}" PARENT_SCOPE)
+--  endif()
+-+  set(${root_var} "${THE_ROOT}/${OPENCV_ICV_PACKAGE_SUBDIR}" PARENT_SCOPE)
+- endfunction()
 -- 
 2.40.1
 
