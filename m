@@ -2,26 +2,26 @@ Return-Path: <ross.burton@arm.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A62AFC7EE32
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A6F13C7EE31
 	for <webhook@archiver.kernel.org>; Wed, 24 May 2023 17:14:52 +0000 (UTC)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by mx.groups.io with SMTP id smtpd.web10.311.1684948485810545079
+ by mx.groups.io with SMTP id smtpd.web10.312.1684948486464849839
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 24 May 2023 10:14:45 -0700
+ Wed, 24 May 2023 10:14:46 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=pass (domain: arm.com, ip: 217.140.110.172, mailfrom: ross.burton@arm.com)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 874BF113E;
-	Wed, 24 May 2023 10:15:30 -0700 (PDT)
+	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 3C1011042;
+	Wed, 24 May 2023 10:15:31 -0700 (PDT)
 Received: from oss-tx204.lab.cambridge.arm.com (usa-sjc-imap-foss1.foss.arm.com [10.121.207.14])
-	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 000FD3F6C4;
-	Wed, 24 May 2023 10:14:44 -0700 (PDT)
+	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id A90873F6C4;
+	Wed, 24 May 2023 10:14:45 -0700 (PDT)
 From: ross.burton@arm.com
 To: openembedded-devel@lists.openembedded.org
 Cc: nd@arm.com
-Subject: [PATCH 5/6] networkd-dispatcher: add features_check on gobject-introspection-data
-Date: Wed, 24 May 2023 18:14:37 +0100
-Message-Id: <20230524171438.122588-5-ross.burton@arm.com>
+Subject: [PATCH 6/6] python3-asyncio-glib: add features_check on gobject-introspection-data
+Date: Wed, 24 May 2023 18:14:38 +0100
+Message-Id: <20230524171438.122588-6-ross.burton@arm.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230524171438.122588-1-ross.burton@arm.com>
 References: <20230524171438.122588-1-ross.burton@arm.com>
@@ -31,7 +31,7 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 24 May 2023 17:14:52 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102789
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102790
 
 From: Ross Burton <ross.burton@arm.com>
 
@@ -39,28 +39,27 @@ This project uses gobject-introspection, so depend on the DISTRO_FEATURE.
 
 Signed-off-by: Ross Burton <ross.burton@arm.com>
 ---
- .../networkd-dispatcher/networkd-dispatcher_2.1.bb              | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ .../recipes-devtools/python/python3-asyncio-glib_0.1.bb       | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
-diff --git a/meta-networking/recipes-daemons/networkd-dispatcher/networkd=
--dispatcher_2.1.bb b/meta-networking/recipes-daemons/networkd-dispatcher/=
-networkd-dispatcher_2.1.bb
-index e929534c3f..a83dad350f 100644
---- a/meta-networking/recipes-daemons/networkd-dispatcher/networkd-dispat=
-cher_2.1.bb
-+++ b/meta-networking/recipes-daemons/networkd-dispatcher/networkd-dispat=
-cher_2.1.bb
-@@ -10,7 +10,7 @@ LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D84dcc94da3ad=
-b52b53ae4fa38fe49e5d"
- inherit features_check systemd
+diff --git a/meta-python/recipes-devtools/python/python3-asyncio-glib_0.1=
+.bb b/meta-python/recipes-devtools/python/python3-asyncio-glib_0.1.bb
+index 2314f72845..02ace02a3d 100644
+--- a/meta-python/recipes-devtools/python/python3-asyncio-glib_0.1.bb
++++ b/meta-python/recipes-devtools/python/python3-asyncio-glib_0.1.bb
+@@ -3,7 +3,9 @@ AUTHOR =3D "James Henstridge"
+ LICENSE =3D "LGPL-2.1-only"
+ LIC_FILES_CHKSUM =3D "file://COPYING.LGPL;md5=3D4fbd65380cdd255951079008=
+b364516c"
 =20
- RDEPENDS:${PN} =3D "python3-pygobject python3-dbus"
--REQUIRED_DISTRO_FEATURES =3D "systemd"
-+REQUIRED_DISTRO_FEATURES =3D "systemd gobject-introspection-data"
+-inherit setuptools3 pypi
++inherit setuptools3 pypi features_check
++
++REQUIRED_DISTRO_FEATURES =3D "gobject-introspection-data"
 =20
- SRCREV =3D "30e278e50749a60a930ceaa0971207c6436b8a0c"
- SRC_URI =3D "git://gitlab.com/craftyguy/networkd-dispatcher;protocol=3Dh=
-ttps;nobranch=3D1"
+ SRC_URI[md5sum] =3D "60153055e76ceaacdfbaeafb03d61dd9"
+ SRC_URI[sha256sum] =3D "fe3ceb2ba5f541330c07ca1bd7ae792468d625bad1acf535=
+4a3a7a0b9fd87521"
 --=20
 2.34.1
 
