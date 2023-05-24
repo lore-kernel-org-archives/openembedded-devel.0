@@ -1,102 +1,73 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <ross.burton@arm.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 88B99C7EE2D
-	for <webhook@archiver.kernel.org>; Wed, 24 May 2023 17:11:02 +0000 (UTC)
-Received: from mail-pl1-f172.google.com (mail-pl1-f172.google.com [209.85.214.172])
- by mx.groups.io with SMTP id smtpd.web10.229.1684948259017356363
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9234DC7EE2E
+	for <webhook@archiver.kernel.org>; Wed, 24 May 2023 17:14:52 +0000 (UTC)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by mx.groups.io with SMTP id smtpd.web11.295.1684948484434144379
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 24 May 2023 10:10:59 -0700
+ Wed, 24 May 2023 10:14:44 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=RNay6fHF;
- spf=pass (domain: gmail.com, ip: 209.85.214.172, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f172.google.com with SMTP id d9443c01a7336-1ae52ce3205so3887545ad.3
-        for <openembedded-devel@lists.openembedded.org>; Wed, 24 May 2023 10:10:58 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1684948258; x=1687540258;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=n8XiVS29sJHwGE6A5wqPx0qq38tNq6SCtdOAFAhfL3s=;
-        b=RNay6fHFc0o7sQFP9OhZjQnppj/fy63nIttTCiKHCz3QPlfL7UfkJDHot2vABY1GqP
-         xxbTpCMr1xABy6TQ4pYg+aVEP+M3s/nnfjX45iSQBAWbNt39S5aa/h/qJSOVW2//NV0t
-         DWA6QU6Ixr21i5C0aDQvKSndXn1Ie5hOyFIAskQzN//JBKGUdUmPJ2oOnFhoqCEIqKHr
-         vd8KGzmA1e7WwPIbvzk8olwE3uD2k4XYwpZghVFrFKhm9W2j9+M2M+5kUMNgf5SpLyPm
-         0Oia18eUd4GAPVoq8HLz6JN9xLXMFNaC9wI3soniwpOuUvOzFY/02X8kDJ7GrTGuTAy7
-         pr7w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1684948258; x=1687540258;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=n8XiVS29sJHwGE6A5wqPx0qq38tNq6SCtdOAFAhfL3s=;
-        b=JGZHVl2nmperHUyjIe5F34MK9BdTZCOpMadEewKKQQXPZdqvUltAPvSMbTVfX3k7PG
-         DlsGk17aH0/L4qE+jcEj//2+/nzzU5gMoxCEBQL1UcjtBfutTeu+Umor85iQ/S2C3J36
-         /NtHgvb0UrAAXJiek5ySOGoxbl35shZs0dVoF0XqJJmHZZoTlJefCMnrg3U+iNRhsyuB
-         XtSK0M3J+agyrqNDHdw59AEQnChWepNEv8KBeqRnYgaE0GON38BZr0Zp+Mow4Wbgmn+T
-         0eYibeTZKH8sw/P4EEN32qItt8u3FrGis26EjTFccGG7MyIpzD+zFmYuBt52YTIDzECs
-         erJw==
-X-Gm-Message-State: AC+VfDwG6CRueUOb9tAOKBsYb2AubkoYGHIn2vEW+HFjTCID832lFFNT
-	cPmE18nodBkWmYuVQpVN6ImSD+UeGVA=
-X-Google-Smtp-Source: ACHHUZ7xAA2kDL/Wk+1Jq5QCCEQGzHAyZwlU13SvCLBpfoKSPJsHWB3FBqWgv2cmkhLKe+sVQrUVCw==
-X-Received: by 2002:a17:902:d48f:b0:1af:daf7:7240 with SMTP id c15-20020a170902d48f00b001afdaf77240mr4535022plg.58.1684948258081;
-        Wed, 24 May 2023 10:10:58 -0700 (PDT)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9181:d380::c675])
-        by smtp.gmail.com with ESMTPSA id z18-20020a170902ee1200b001ae78ad48c3sm8931701plb.309.2023.05.24.10.10.57
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 24 May 2023 10:10:57 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
+ dkim=missing; spf=pass (domain: arm.com, ip: 217.140.110.172, mailfrom: ross.burton@arm.com)
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 2943A15BF;
+	Wed, 24 May 2023 10:15:29 -0700 (PDT)
+Received: from oss-tx204.lab.cambridge.arm.com (usa-sjc-imap-foss1.foss.arm.com [10.121.207.14])
+	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 9EA393F6C4;
+	Wed, 24 May 2023 10:14:43 -0700 (PDT)
+From: ross.burton@arm.com
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH] minifi-cpp: Remove references to buildpaths in generated files
-Date: Wed, 24 May 2023 10:10:56 -0700
-Message-Id: <20230524171056.1064430-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.40.1
+Cc: nd@arm.com
+Subject: [PATCH 3/6] firewalld: add features_check on gobject-introspection-data
+Date: Wed, 24 May 2023 18:14:35 +0100
+Message-Id: <20230524171438.122588-3-ross.burton@arm.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20230524171438.122588-1-ross.burton@arm.com>
+References: <20230524171438.122588-1-ross.burton@arm.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 24 May 2023 17:11:02 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102784
+ <openembedded-devel@lists.openembedded.org>; Wed, 24 May 2023 17:14:52 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102787
 
-bison/flex emits line directives which can be safely removed from
-generated files.
+From: Ross Burton <ross.burton@arm.com>
 
-agent_version.h is generated by cmake which has build information like
-compiler and cflags etc. which contains buildpaths too, therefore
-replace real workdir with <WORKDIR>
+This project uses gobject-introspection, so depend on the DISTRO_FEATURE.
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Ross Burton <ross.burton@arm.com>
 ---
- meta-oe/recipes-extended/minifi-cpp/minifi-cpp_0.7.0.bb | 6 ++++++
- 1 file changed, 6 insertions(+)
+ .../recipes-connectivity/firewalld/firewalld_1.2.0.bb         | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-extended/minifi-cpp/minifi-cpp_0.7.0.bb b/meta-oe/recipes-extended/minifi-cpp/minifi-cpp_0.7.0.bb
-index b76f120ee1..9ae72d2e99 100644
---- a/meta-oe/recipes-extended/minifi-cpp/minifi-cpp_0.7.0.bb
-+++ b/meta-oe/recipes-extended/minifi-cpp/minifi-cpp_0.7.0.bb
-@@ -61,6 +61,8 @@ EXTRA_OECMAKE += " \
-     -DGCC_AR=${STAGING_BINDIR_TOOLCHAIN}/${AR} \
-     -DGCC_RANLIB=${STAGING_BINDIR_TOOLCHAIN}/${RANLIB} \
-     -DDISABLE_PYTHON_SCRIPTING=ON \
-+    -DFLEX_TARGET_ARG_COMPILE_FLAGS='--noline' \
-+    -DBISON_TARGET_ARG_COMPILE_FLAGS='--no-lines --file-prefix-map=${S}=/usr/src/debug/${PN}/${EXTENDPE}${PV}-${PR}' \
-     "
- EXTRA_OECMAKE:append:toolchain-clang = " -DCMAKE_RANLIB=${STAGING_BINDIR_TOOLCHAIN}/${TARGET_PREFIX}llvm-ranlib"
- LDFLAGS:append:toolchain-clang = " -fuse-ld=lld"
-@@ -88,6 +90,10 @@ do_configure:prepend:libc-musl() {
-     sed -i -e 's/-DHAVE_POSIX_STRERROR_R=0/-DHAVE_POSIX_STRERROR_R=1/' ${S}/CMakeLists.txt
- }
- 
-+do_configure:append() {
-+    sed -i -e 's|${WORKDIR}|<WORKDIR>|g' ${S}/libminifi/include/agent/agent_version.h
-+}
+diff --git a/meta-networking/dynamic-layers/meta-python/recipes-connectiv=
+ity/firewalld/firewalld_1.2.0.bb b/meta-networking/dynamic-layers/meta-py=
+thon/recipes-connectivity/firewalld/firewalld_1.2.0.bb
+index 987cc640e1..8efbd39f74 100644
+--- a/meta-networking/dynamic-layers/meta-python/recipes-connectivity/fir=
+ewalld/firewalld_1.2.0.bb
++++ b/meta-networking/dynamic-layers/meta-python/recipes-connectivity/fir=
+ewalld/firewalld_1.2.0.bb
+@@ -15,7 +15,9 @@ SRC_URI[sha256sum] =3D "28fd90e88bda0dfd460f370f3534748=
+11b2e295d7eb27f0d7d18ffa3d7
+ # glib-2.0-native is needed for GSETTINGS_RULES autoconf macro from gset=
+tings.m4
+ DEPENDS =3D "intltool-native glib-2.0-native nftables"
+=20
+-inherit gettext autotools-brokensep bash-completion pkgconfig python3nat=
+ive python3-dir gsettings systemd update-rc.d ptest
++inherit gettext autotools-brokensep bash-completion pkgconfig python3nat=
+ive python3-dir gsettings systemd update-rc.d ptest features_check
 +
- CFLAGS:append:libc-glibc = " -D_GNU_SOURCE"
- CXXFLAGS:append:libc-glibc = " -D_GNU_SOURCE"
- 
--- 
-2.40.1
++REQUIRED_DISTRO_FEATURES =3D "gobject-introspection"
+=20
+ PACKAGECONFIG ??=3D "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)=
+}"
+ PACKAGECONFIG[systemd] =3D "--with-systemd-unitdir=3D${systemd_system_un=
+itdir},--disable-systemd"
+--=20
+2.34.1
 
 
