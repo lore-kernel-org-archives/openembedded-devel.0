@@ -2,135 +2,100 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6627DC77B73
-	for <webhook@archiver.kernel.org>; Wed, 24 May 2023 16:30:03 +0000 (UTC)
-Received: from mail-pf1-f170.google.com (mail-pf1-f170.google.com [209.85.210.170])
- by mx.groups.io with SMTP id smtpd.web11.1716.1684945800871563529
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 88B99C7EE2D
+	for <webhook@archiver.kernel.org>; Wed, 24 May 2023 17:11:02 +0000 (UTC)
+Received: from mail-pl1-f172.google.com (mail-pl1-f172.google.com [209.85.214.172])
+ by mx.groups.io with SMTP id smtpd.web10.229.1684948259017356363
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 24 May 2023 09:30:00 -0700
+ Wed, 24 May 2023 10:10:59 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20221208 header.b=SFL3ip2a;
- spf=pass (domain: gmail.com, ip: 209.85.210.170, mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f170.google.com with SMTP id d2e1a72fcca58-64d2a87b9daso853546b3a.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 24 May 2023 09:30:00 -0700 (PDT)
+ dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=RNay6fHF;
+ spf=pass (domain: gmail.com, ip: 209.85.214.172, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f172.google.com with SMTP id d9443c01a7336-1ae52ce3205so3887545ad.3
+        for <openembedded-devel@lists.openembedded.org>; Wed, 24 May 2023 10:10:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1684945800; x=1687537800;
+        d=gmail.com; s=20221208; t=1684948258; x=1687540258;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=6MVPNuCjWqt8pMCTe708MXY/kkeMKVTj5Gm2Yh4GCgM=;
-        b=SFL3ip2a9necIPdLvSYU1zd6xAQJi73PooToUJFtXF6UawJyi+lkGTzEn3D/1iTGeK
-         og9KRegsUPjJIdEIpQiFxYh1F7LvCy9NgWM6aeVOFajDDNxKqcugle2qhpZcw/SUGHWE
-         yaAs/yxXhpasBmVCoBx9eE3VbHP4jvF3bynmJHhyD6ceEG+0LG8FeEoQzuwMBiQwBvc2
-         dEqDXafvLeKGN0ktV9lLpvZBTNCTHmAak+sq47AwnXATkM67owV3bC3Bm8QbsJ/+tENw
-         S/PwX3ZuhDFZSciKNHNQAKMhE7LvUm6QBJo94U6+DOqxBMX9ulAGpQ2MyQRb/6L6rSNc
-         1geA==
+        bh=n8XiVS29sJHwGE6A5wqPx0qq38tNq6SCtdOAFAhfL3s=;
+        b=RNay6fHFc0o7sQFP9OhZjQnppj/fy63nIttTCiKHCz3QPlfL7UfkJDHot2vABY1GqP
+         xxbTpCMr1xABy6TQ4pYg+aVEP+M3s/nnfjX45iSQBAWbNt39S5aa/h/qJSOVW2//NV0t
+         DWA6QU6Ixr21i5C0aDQvKSndXn1Ie5hOyFIAskQzN//JBKGUdUmPJ2oOnFhoqCEIqKHr
+         vd8KGzmA1e7WwPIbvzk8olwE3uD2k4XYwpZghVFrFKhm9W2j9+M2M+5kUMNgf5SpLyPm
+         0Oia18eUd4GAPVoq8HLz6JN9xLXMFNaC9wI3soniwpOuUvOzFY/02X8kDJ7GrTGuTAy7
+         pr7w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1684945800; x=1687537800;
+        d=1e100.net; s=20221208; t=1684948258; x=1687540258;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=6MVPNuCjWqt8pMCTe708MXY/kkeMKVTj5Gm2Yh4GCgM=;
-        b=I/YX7X89Kp9Xu01INPGBTHiYP/2TmwWQ2A/aV8DoD4xqZDcNpOAJ6edyNU+kPm2Ozy
-         AmeT7xqdAFdxj9SghoG/Sdaq0/dexyy2ozgyPFeETbSv1OjnqYJPRFWkpMTP9Da+FYru
-         jdiFPSKFBPajGcPGcMgmwB3MMp+yi3+PNYGyMp/lisFPoTnn3xtFBbTiElthcBU2z1Ub
-         XbT9+9svlNW+Ea5CjMCwnIHfFgBt0fSaHqqihytIJnCK8THgoFxjnuDW2GuqVrC6UcVm
-         XTYU2Z+bp25FZxSexCin7T1fYhge+0N/VifBoneLFh9SuPK9pC3QsFMX6/ellAr1zIxw
-         ddTw==
-X-Gm-Message-State: AC+VfDwvpnZB3qZKHjLmhPsIfYkH0iUnlXvNGFVclN03wXZHa2tDouu8
-	Hy/6PIjbweUSG+KB9//6lqhFaVYRBA0=
-X-Google-Smtp-Source: ACHHUZ7tw347OpS31YmBmG7wOGnpiNceisSD3L5EGA7uNoBw9MQ0MbQIHA7ZFSiiFjVGN26hbob3NA==
-X-Received: by 2002:a05:6a20:728a:b0:10b:9527:7127 with SMTP id o10-20020a056a20728a00b0010b95277127mr11614034pzk.20.1684945799779;
-        Wed, 24 May 2023 09:29:59 -0700 (PDT)
+        bh=n8XiVS29sJHwGE6A5wqPx0qq38tNq6SCtdOAFAhfL3s=;
+        b=JGZHVl2nmperHUyjIe5F34MK9BdTZCOpMadEewKKQQXPZdqvUltAPvSMbTVfX3k7PG
+         DlsGk17aH0/L4qE+jcEj//2+/nzzU5gMoxCEBQL1UcjtBfutTeu+Umor85iQ/S2C3J36
+         /NtHgvb0UrAAXJiek5ySOGoxbl35shZs0dVoF0XqJJmHZZoTlJefCMnrg3U+iNRhsyuB
+         XtSK0M3J+agyrqNDHdw59AEQnChWepNEv8KBeqRnYgaE0GON38BZr0Zp+Mow4Wbgmn+T
+         0eYibeTZKH8sw/P4EEN32qItt8u3FrGis26EjTFccGG7MyIpzD+zFmYuBt52YTIDzECs
+         erJw==
+X-Gm-Message-State: AC+VfDwG6CRueUOb9tAOKBsYb2AubkoYGHIn2vEW+HFjTCID832lFFNT
+	cPmE18nodBkWmYuVQpVN6ImSD+UeGVA=
+X-Google-Smtp-Source: ACHHUZ7xAA2kDL/Wk+1Jq5QCCEQGzHAyZwlU13SvCLBpfoKSPJsHWB3FBqWgv2cmkhLKe+sVQrUVCw==
+X-Received: by 2002:a17:902:d48f:b0:1af:daf7:7240 with SMTP id c15-20020a170902d48f00b001afdaf77240mr4535022plg.58.1684948258081;
+        Wed, 24 May 2023 10:10:58 -0700 (PDT)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9181:d380::c675])
-        by smtp.gmail.com with ESMTPSA id w5-20020a63c105000000b0053ba9ddbb62sm4754067pgf.91.2023.05.24.09.29.59
+        by smtp.gmail.com with ESMTPSA id z18-20020a170902ee1200b001ae78ad48c3sm8931701plb.309.2023.05.24.10.10.57
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 24 May 2023 09:29:59 -0700 (PDT)
+        Wed, 24 May 2023 10:10:57 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-gnome][PATCH] nautilus: Fix buildpath QA errors
-Date: Wed, 24 May 2023 09:29:57 -0700
-Message-Id: <20230524162957.966829-1-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH] minifi-cpp: Remove references to buildpaths in generated files
+Date: Wed, 24 May 2023 10:10:56 -0700
+Message-Id: <20230524171056.1064430-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.40.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 24 May 2023 16:30:03 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102783
+ <openembedded-devel@lists.openembedded.org>; Wed, 24 May 2023 17:11:02 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102784
+
+bison/flex emits line directives which can be safely removed from
+generated files.
+
+agent_version.h is generated by cmake which has build information like
+compiler and cflags etc. which contains buildpaths too, therefore
+replace real workdir with <WORKDIR>
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../0001-Replace-filename-with-basename.patch | 46 +++++++++++++++++++
- .../recipes-gnome/nautilus/nautilus_44.1.bb   |  1 +
- 2 files changed, 47 insertions(+)
- create mode 100644 meta-gnome/recipes-gnome/nautilus/nautilus/0001-Replace-filename-with-basename.patch
+ meta-oe/recipes-extended/minifi-cpp/minifi-cpp_0.7.0.bb | 6 ++++++
+ 1 file changed, 6 insertions(+)
 
-diff --git a/meta-gnome/recipes-gnome/nautilus/nautilus/0001-Replace-filename-with-basename.patch b/meta-gnome/recipes-gnome/nautilus/nautilus/0001-Replace-filename-with-basename.patch
-new file mode 100644
-index 0000000000..dbf42a9ab9
---- /dev/null
-+++ b/meta-gnome/recipes-gnome/nautilus/nautilus/0001-Replace-filename-with-basename.patch
-@@ -0,0 +1,46 @@
-+From 4ec1f99f170033138036d6547dce9b7dcf541338 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Wed, 24 May 2023 07:56:33 -0700
-+Subject: [PATCH] Replace filename with basename
-+
-+This avoids emitting absolute paths into generated sourcecode, it
-+improves reproducibility. See [1]
-+
-+[1] https://developer-old.gnome.org/gobject/stable/glib-mkenums.html
-+
-+Upstream-Status: Submitted [https://gitlab.gnome.org/GNOME/nautilus/-/merge_requests/1211]
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ src/nautilus-enum-types.c.template | 2 +-
-+ src/nautilus-enum-types.h.template | 2 +-
-+ 2 files changed, 2 insertions(+), 2 deletions(-)
-+
-+diff --git a/src/nautilus-enum-types.c.template b/src/nautilus-enum-types.c.template
-+index 9d8ac83..a757949 100644
-+--- a/src/nautilus-enum-types.c.template
-++++ b/src/nautilus-enum-types.c.template
-+@@ -4,7 +4,7 @@
-+ /*** END file-header ***/
-+ 
-+ /*** BEGIN file-production ***/
-+-/* Enumerations from "@filename@" */
-++/* Enumerations from "@basename@" */
-+ #include "@filename@"
-+ 
-+ /*** END file-production ***/
-+diff --git a/src/nautilus-enum-types.h.template b/src/nautilus-enum-types.h.template
-+index 399bbca..7eb6c54 100644
-+--- a/src/nautilus-enum-types.h.template
-++++ b/src/nautilus-enum-types.h.template
-+@@ -8,7 +8,7 @@ G_BEGIN_DECLS
-+ /*** END file-header ***/
-+ 
-+ /*** BEGIN file-production ***/
-+-/* Enumerations from "@filename@" */
-++/* Enumerations from "@basename@" */
-+ 
-+ /*** END file-production ***/
-+ 
-+-- 
-+2.40.1
-+
-diff --git a/meta-gnome/recipes-gnome/nautilus/nautilus_44.1.bb b/meta-gnome/recipes-gnome/nautilus/nautilus_44.1.bb
-index 9c60d15d86..f7eeb5f5d0 100644
---- a/meta-gnome/recipes-gnome/nautilus/nautilus_44.1.bb
-+++ b/meta-gnome/recipes-gnome/nautilus/nautilus_44.1.bb
-@@ -26,6 +26,7 @@ inherit gnomebase gsettings gobject-introspection gtk-doc gettext features_check
- def gnome_verdir(v):
-     return oe.utils.trim_version(v, 1)
+diff --git a/meta-oe/recipes-extended/minifi-cpp/minifi-cpp_0.7.0.bb b/meta-oe/recipes-extended/minifi-cpp/minifi-cpp_0.7.0.bb
+index b76f120ee1..9ae72d2e99 100644
+--- a/meta-oe/recipes-extended/minifi-cpp/minifi-cpp_0.7.0.bb
++++ b/meta-oe/recipes-extended/minifi-cpp/minifi-cpp_0.7.0.bb
+@@ -61,6 +61,8 @@ EXTRA_OECMAKE += " \
+     -DGCC_AR=${STAGING_BINDIR_TOOLCHAIN}/${AR} \
+     -DGCC_RANLIB=${STAGING_BINDIR_TOOLCHAIN}/${RANLIB} \
+     -DDISABLE_PYTHON_SCRIPTING=ON \
++    -DFLEX_TARGET_ARG_COMPILE_FLAGS='--noline' \
++    -DBISON_TARGET_ARG_COMPILE_FLAGS='--no-lines --file-prefix-map=${S}=/usr/src/debug/${PN}/${EXTENDPE}${PV}-${PR}' \
+     "
+ EXTRA_OECMAKE:append:toolchain-clang = " -DCMAKE_RANLIB=${STAGING_BINDIR_TOOLCHAIN}/${TARGET_PREFIX}llvm-ranlib"
+ LDFLAGS:append:toolchain-clang = " -fuse-ld=lld"
+@@ -88,6 +90,10 @@ do_configure:prepend:libc-musl() {
+     sed -i -e 's/-DHAVE_POSIX_STRERROR_R=0/-DHAVE_POSIX_STRERROR_R=1/' ${S}/CMakeLists.txt
+ }
  
-+SRC_URI += "file://0001-Replace-filename-with-basename.patch"
- SRC_URI[archive.sha256sum] = "360802a595e3edbad962c8cea353b62baa8be407513b5162c89c933ca5387aa9"
++do_configure:append() {
++    sed -i -e 's|${WORKDIR}|<WORKDIR>|g' ${S}/libminifi/include/agent/agent_version.h
++}
++
+ CFLAGS:append:libc-glibc = " -D_GNU_SOURCE"
+ CXXFLAGS:append:libc-glibc = " -D_GNU_SOURCE"
  
- REQUIRED_DISTRO_FEATURES = "x11 opengl"
 -- 
 2.40.1
 
