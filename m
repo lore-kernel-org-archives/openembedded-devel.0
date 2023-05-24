@@ -1,85 +1,104 @@
-Return-Path: <xiao.zhang@windriver.com>
+Return-Path: <alexander.stein@ew.tq-group.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 839EEC7EE39
-	for <webhook@archiver.kernel.org>; Wed, 24 May 2023 06:38:53 +0000 (UTC)
-Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.web11.2828.1684910323453659555
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6A536C77B7A
+	for <webhook@archiver.kernel.org>; Wed, 24 May 2023 06:55:43 +0000 (UTC)
+Received: from mx1.tq-group.com (mx1.tq-group.com [93.104.207.81])
+ by mx.groups.io with SMTP id smtpd.web11.3012.1684911340523143263
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 23 May 2023 23:38:43 -0700
+ Tue, 23 May 2023 23:55:41 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=pps06212021 header.b=YOTCm49P;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=4508a17f3f=xiao.zhang@windriver.com)
-Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 34O5vowR015782
-	for <openembedded-devel@lists.openembedded.org>; Tue, 23 May 2023 23:38:43 -0700
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com; h=from : to : cc :
- subject : date : message-id : mime-version : content-transfer-encoding :
- content-type; s=PPS06212021;
- bh=yZfAyRwP5116Kyr5NS5tIS3wLBrMUuwnoq67wm9D+nc=;
- b=YOTCm49PuM4yvea1pWuu9p0WRiro/yFhjMMX9pC/JtDtGUUlNZ9PjJ0XhrVin+0DfNXM
- Jn8pxnKn269IsS7IOZI8GGa6L/KLOMaDuEdW6E1vuXO7duflef3LZ48SDbwQnaCHQLAz
- GAxH7wER8s766yqZWVCQyrsgRKfoSws+fnnYPcXVQ7V7DLupZEWyWzpuhyL6YvdqV44G
- +kblW1au49NjQ9qK2nB+mpPuCBzjrekifps9bwDMtKWEutGohqQ/Vwb2UpoUwaEuxVM4
- 4Wf5jkWXkfpU8xd7GZSqKYSjeP10+axcM5CU5B9a+bL6wJvTv0QDTwQrxKwS75xijnaK 1w== 
-Received: from ala-exchng01.corp.ad.wrs.com (unknown-82-252.windriver.com [147.11.82.252])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3qpwqhbcu9-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Tue, 23 May 2023 23:38:42 -0700
-Received: from ala-lpggp5.wrs.com (147.11.136.210) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.23; Tue, 23 May 2023 23:38:42 -0700
-From: Zhang Xiao <xiao.zhang@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-CC: <Yi.Zhao@windriver.com>
-Subject: [PATCH] dhcp-relay: dev subpackage conflicts with bind-dev
-Date: Tue, 23 May 2023 23:38:36 -0700
-Message-ID: <20230524063836.4147882-1-xiao.zhang@windriver.com>
-X-Mailer: git-send-email 2.39.1
+ dkim=fail reason="signature has expired" header.i=@tq-group.com header.s=key1 header.b=gIQKJHO9;
+ spf=pass (domain: ew.tq-group.com, ip: 93.104.207.81, mailfrom: alexander.stein@ew.tq-group.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+  d=tq-group.com; i=@tq-group.com; q=dns/txt; s=key1;
+  t=1684911340; x=1716447340;
+  h=from:to:cc:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=MYfqZxxIbINITRoG40S3ROIYA2pcHaBsx0Lg5M+RtTA=;
+  b=gIQKJHO9KPZYKlWY/rBEbCC/+/WI6nDmioODiG6oA7yUd9vbwVqzeaeg
+   KcZ01ju9pTVx/jUUcNXfjTNZwbptkBpEdFc4Rn5ZFDPWdC6cijAUONkvv
+   BwwMpT2LUyeJ9gFFD+RUb0XCPZCEHgq1jtWiGgYhTaAbdF95usKOwewS/
+   HqR+P2D7jjZUP0rEMUlADLitkcI13WYdHTecxmL1Rx3gnqJK+UezKqUys
+   O2fv0vFDVQDxpLOv70ouNqOz6/LaLS8y4b5dI0KBW8XA+K5G2VakO6Qj1
+   vfYd274I9AXb3FaCXfVUES5rE147Qe6gE84VOXLVM1J4C9kli9ZBNpt5m
+   g==;
+X-IronPort-AV: E=Sophos;i="6.00,188,1681164000"; 
+   d="scan'208";a="31061892"
+Received: from unknown (HELO tq-pgp-pr1.tq-net.de) ([192.168.6.15])
+  by mx1-pgp.tq-group.com with ESMTP; 24 May 2023 08:55:38 +0200
+Received: from mx1.tq-group.com ([192.168.6.7])
+  by tq-pgp-pr1.tq-net.de (PGP Universal service);
+  Wed, 24 May 2023 08:55:38 +0200
+X-PGP-Universal: processed;
+	by tq-pgp-pr1.tq-net.de on Wed, 24 May 2023 08:55:38 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+  d=tq-group.com; i=@tq-group.com; q=dns/txt; s=key1;
+  t=1684911338; x=1716447338;
+  h=from:to:cc:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=MYfqZxxIbINITRoG40S3ROIYA2pcHaBsx0Lg5M+RtTA=;
+  b=Hd6hx/IDrYaW5WGYXfvwtOMsdLXfNYyfKw8y4Y90bPCnLAAENRVYJoMd
+   RJ0vsLZj3dVHA9QtdU0d4czHIQaN9kIGiszfbCoYP/vKo209+XiGOn4RQ
+   a1rhj3uDVmhdySrCRfSwPsfZbv+zzAm1Jd89ylBYv2f/wCZ5OU0Yz0YA1
+   UlxNME2syKOtdDjux/oUpDNkXVRCetNJibpjLzgLXfIannU9gbGKFGeL+
+   iEj6ZIOXwISuciroT/6Af0IYL2QNpTIRBSIIhQkzIlwKhGF/uz4VJkCQv
+   WcqRfxUhR0LAlWQrGnD75QPUmIpet0pJzbo13Y8fpotW91cQr7YhXrLa+
+   Q==;
+X-IronPort-AV: E=Sophos;i="6.00,188,1681164000"; 
+   d="scan'208";a="31061891"
+Received: from vtuxmail01.tq-net.de ([10.115.0.20])
+  by mx1.tq-group.com with ESMTP; 24 May 2023 08:55:38 +0200
+Received: from steina-w.tq-net.de (unknown [10.123.53.21])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by vtuxmail01.tq-net.de (Postfix) with ESMTPSA id 7FFFC280082;
+	Wed, 24 May 2023 08:55:38 +0200 (CEST)
+From: Alexander Stein <alexander.stein@ew.tq-group.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Alexander Stein <alexander.stein@ew.tq-group.com>
+Subject: [oe] [meta-oe][PATCH 1/1] libcamera: Simplify pipeline configuration
+Date: Wed, 24 May 2023 08:55:34 +0200
+Message-Id: <20230524065534.2977672-1-alexander.stein@ew.tq-group.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [147.11.136.210]
-X-ClientProxiedBy: ala-exchng01.corp.ad.wrs.com (147.11.82.252) To
- ala-exchng01.corp.ad.wrs.com (147.11.82.252)
-X-Proofpoint-GUID: JSZlzFaF8PGhFRqD_SEcvKjzQjNbPmND
-X-Proofpoint-ORIG-GUID: JSZlzFaF8PGhFRqD_SEcvKjzQjNbPmND
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.254,Aquarius:18.0.957,Hydra:6.0.573,FMLib:17.11.176.26
- definitions=2023-05-24_02,2023-05-23_02,2023-05-22_02
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 suspectscore=0 mlxscore=0
- adultscore=0 spamscore=0 impostorscore=0 mlxlogscore=608
- lowpriorityscore=0 clxscore=1011 bulkscore=0 priorityscore=1501
- phishscore=0 malwarescore=0 classifier=spam adjust=0 reason=mlx
- scancount=1 engine=8.12.0-2304280000 definitions=main-2305240056
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 24 May 2023 06:38:53 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102753
+ <openembedded-devel@lists.openembedded.org>; Wed, 24 May 2023 06:55:43 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102754
 
-dhcp-relay contains a bundled bind thus their development packages
-conflict each other.
+Default to 'auto' which enables all target architecture pipelines (+UVC).
+IPAs are also automatically enabled if the corresponding required pipeline
+is enabled as well.
 
-Signed-off-by: Zhang Xiao <xiao.zhang@windriver.com>
+Signed-off-by: Alexander Stein <alexander.stein@ew.tq-group.com>
 ---
- .../recipes-connectivity/dhcp/dhcp-relay_4.4.3p1.bb            | 3 +++
- 1 file changed, 3 insertions(+)
+ .../recipes-multimedia/libcamera/libcamera_0.0.5.bb           | 4 +---
+ 1 file changed, 1 insertion(+), 3 deletions(-)
 
-diff --git a/meta-networking/recipes-connectivity/dhcp/dhcp-relay_4.4.3p1.bb b/meta-networking/recipes-connectivity/dhcp/dhcp-relay_4.4.3p1.bb
-index 2fd86bc28..d36646c0d 100644
---- a/meta-networking/recipes-connectivity/dhcp/dhcp-relay_4.4.3p1.bb
-+++ b/meta-networking/recipes-connectivity/dhcp/dhcp-relay_4.4.3p1.bb
-@@ -60,3 +60,6 @@ do_install:append () {
- }
+diff --git a/meta-multimedia/recipes-multimedia/libcamera/libcamera_0.0.5.bb b/meta-multimedia/recipes-multimedia/libcamera/libcamera_0.0.5.bb
+index 47da0ec61..6ad376f29 100644
+--- a/meta-multimedia/recipes-multimedia/libcamera/libcamera_0.0.5.bb
++++ b/meta-multimedia/recipes-multimedia/libcamera/libcamera_0.0.5.bb
+@@ -26,12 +26,10 @@ PACKAGES =+ "${PN}-gst"
+ PACKAGECONFIG ??= ""
+ PACKAGECONFIG[gst] = "-Dgstreamer=enabled,-Dgstreamer=disabled,gstreamer1.0 gstreamer1.0-plugins-base"
  
- PARALLEL_MAKE = ""
-+
-+# dhcp-relay contains a bundled "bind", thus their dev packages conflict each other
-+RCONFLICTS:${PN}-dev = "bind-dev"
+-LIBCAMERA_PIPELINES ??= "uvcvideo,simple,vimc"
+-LIBCAMERA_IPAS ??= "vimc"
++LIBCAMERA_PIPELINES ??= "auto"
+ 
+ EXTRA_OEMESON = " \
+     -Dpipelines=${LIBCAMERA_PIPELINES} \
+-    -Dipas=${LIBCAMERA_IPAS} \
+     -Dv4l2=true \
+     -Dcam=enabled \
+     -Dlc-compliance=disabled \
 -- 
-2.39.1
+2.34.1
 
 
