@@ -1,254 +1,294 @@
-Return-Path: <akuster808@gmail.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6D610C77B7E
-	for <webhook@archiver.kernel.org>; Wed, 24 May 2023 03:04:42 +0000 (UTC)
-Received: from mail-pf1-f178.google.com (mail-pf1-f178.google.com [209.85.210.178])
- by mx.groups.io with SMTP id smtpd.web11.695.1684897472745090652
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 27A70C77B7A
+	for <webhook@archiver.kernel.org>; Wed, 24 May 2023 05:57:23 +0000 (UTC)
+Received: from mail-oa1-f44.google.com (mail-oa1-f44.google.com [209.85.160.44])
+ by mx.groups.io with SMTP id smtpd.web11.2501.1684907834360048358
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 23 May 2023 20:04:32 -0700
+ Tue, 23 May 2023 22:57:14 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20221208 header.b=Le2PRLbH;
- spf=pass (domain: gmail.com, ip: 209.85.210.178, mailfrom: akuster808@gmail.com)
-Received: by mail-pf1-f178.google.com with SMTP id d2e1a72fcca58-64f47448aeaso254681b3a.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 23 May 2023 20:04:32 -0700 (PDT)
+ dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=K5TgZTNW;
+ spf=pass (domain: gmail.com, ip: 209.85.160.44, mailfrom: raj.khem@gmail.com)
+Received: by mail-oa1-f44.google.com with SMTP id 586e51a60fabf-19a5831610dso401744fac.1
+        for <openembedded-devel@lists.openembedded.org>; Tue, 23 May 2023 22:57:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1684897472; x=1687489472;
-        h=content-transfer-encoding:in-reply-to:from:references:cc:to
-         :content-language:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=kMFGVoTnmUelThCHjNRImQtJ993XJ6aMvZxSRU0Lftg=;
-        b=Le2PRLbHDIUq+CCMWhpFZmLNn/eJvZQ3K95T81VVPO6G46cnrBgqRjcQZpp3cUDM4h
-         8HjvE32ecrJHo/Bfe1jtSvQB+jJajoRgobyzwIL4IftVhiBzytrHpkRWNIjyLpYWyLO6
-         w5Cx0l/vIQtHY80NIDFZS9jSViDMhBYKO/b+5QeYplAwzPTiLgp1d15bXW7Y1LfsJ4lz
-         lPENBetKC6XzPUURfmfP5/eyb6l7C2Mnpz6rnIHvjQgMJmerrHpwqjNtzcEkqLyPFvbn
-         ToNKN9g2LH/Ek/Kyz9fzSltLkV2volceatl39O6mzRydkOPCLLpQuKivTdHAsDQ8Q4cL
-         45+Q==
+        d=gmail.com; s=20221208; t=1684907833; x=1687499833;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=RGTBlgtdHQwZTPJ4nWk1DkUZa+8/tYAyadw93IXuTpE=;
+        b=K5TgZTNWEKeYYlZOeHWmfka44JzKsYnCXRRKcb3g5NgHK/JCUcDN6Ooqvcf+kcWCxI
+         X3Ltm0D5gWcs/fgLaAb+SpK+d/PPKzZ9u0nxJErBb6wObLhvgzLRgYYZN+qYDeQcRfHL
+         FQMH+bB15s0jsljd2qpt9vAR8AJSmWhaUK1zI+ms+hGdKhDyJa7PJ5DLknkW+b3Qm84f
+         IyICAULsHvMKcvef2agYRnNKhB8fLH/tt/LqLIs4wESpGkmI9xJYI7uSQsY+kcmEt90S
+         3//x6cnBQ8wwSzGaG/49Q8DHSOMcaJW17bJE7y8Sxtb5ZPQsjb4Ugm1dN9OGPD6ysytu
+         Dxaw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1684897472; x=1687489472;
-        h=content-transfer-encoding:in-reply-to:from:references:cc:to
-         :content-language:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=kMFGVoTnmUelThCHjNRImQtJ993XJ6aMvZxSRU0Lftg=;
-        b=jXvO8FbC+mU4/J4C560/Oaxe7kfLltN/39cO1hXxxj9o1xcVAIUHm3kdXGvbBijbaN
-         1SHTetG4iHhnEOK2SDJKIwtmDQEo4/9bbKH+o28U67nTEPy3Ah4ZmzV3WZ9eKeNb/a9c
-         hL7g+k4lF+4RSbEL0JFBMco6zCw3dHY6eIrVxiJ9EqDvUOT72jEAteyA8+3LPSTcANLM
-         LaZnf1SJp4uPoJAqhabubBGhDndqDBNttkQU9OIR67eXkfuF3hjHormpaNqMqWca9whH
-         4k6y+7RPeoewof9eQjWNxZ+YF7UyhSYg6+6hD6GKNf7fkPLDvh9YN+21YeQ6UqdF3BVX
-         /4Vw==
-X-Gm-Message-State: AC+VfDwDrAKviTuqRZva+6vl+GjaMrVdxgGdg2iqSG227uN9LygiT/R3
-	doepRSjvIPw8YIsLitsrqEw=
-X-Google-Smtp-Source: ACHHUZ5GAo3XItRlJ62s1E2gzK+iV5U3OA9OKtYY2uP0zcLHhDvSLWWFLQR8B+lEgIBHh31aWHWAbg==
-X-Received: by 2002:a05:6a00:218b:b0:64d:2487:5b20 with SMTP id h11-20020a056a00218b00b0064d24875b20mr1509938pfi.9.1684897472084;
-        Tue, 23 May 2023 20:04:32 -0700 (PDT)
-Received: from [192.168.153.47] ([12.32.73.67])
-        by smtp.gmail.com with ESMTPSA id y10-20020a63e24a000000b0051b0e564963sm6722440pgj.49.2023.05.23.20.04.30
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 23 May 2023 20:04:30 -0700 (PDT)
-Message-ID: <e2a0cd62-0632-f473-6d44-32fe1cb566a6@gmail.com>
-Date: Tue, 23 May 2023 23:04:30 -0400
+        d=1e100.net; s=20221208; t=1684907833; x=1687499833;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=RGTBlgtdHQwZTPJ4nWk1DkUZa+8/tYAyadw93IXuTpE=;
+        b=YRdSQ+gyzGVIjt0ARsmDWCO8lRwnVDPUHpgxsG3onimQHmTU1/GrpqtP60yzSccZd/
+         PsJJdRcKW12Ghme7VG2lYgcZBd6iPhvB/DEkKAsNLcogmvkCAT4rhObsoOp7r7SkhdQD
+         jmqIW1AfGtzk+QEkf1f1RtYo/+sC/VIRxMMbbHs0noxDMDVDLdhxQnVbBqGn2tT8N5st
+         ZGcWUMaMAem5PjX/+6AUaTE9WLNxSXOuoJcRMmnqOpHn5qm9ryzOJTv12HPzG+lt5ExQ
+         X4ZTp/za3KIn4cE7HfI38uWJ5QjOlLqp6xWFmlICDN7UhmzQEYJMxSr1BD+nYNme7SX/
+         GCGg==
+X-Gm-Message-State: AC+VfDyb/+pbDwdTvCbvkJ8FxZ7kKwvw+bMYhFmy49FbumcP8j/7gQbQ
+	pnVaLzh//exW3cV3naa919JtoczkixEa+err2qE=
+X-Google-Smtp-Source: ACHHUZ4tmQjOGutTD2Ux6T9IrNnohm7ImUPbllgalbRrZGVcKJTxmgllUWxrQHVUr8Jv66LCS+ZTppjwz23ClmS1MVg=
+X-Received: by 2002:a05:6808:102:b0:396:12ba:f9d3 with SMTP id
+ b2-20020a056808010200b0039612baf9d3mr7991058oie.25.1684907833258; Tue, 23 May
+ 2023 22:57:13 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.11.0
-Subject: Re: [oe] [meta-python][hardknott][PATCH 2/2] python3-django: upgrade
- 3.2.5 -> 3.2.12
-Content-Language: en-US
-To: Randy MacLeod <randy.macleod@windriver.com>,
- openembedded-devel@lists.openembedded.org,
- "Mali, Narpat" <narpat.mali@windriver.com>
-Cc: "Reyna, David" <david.reyna@windriver.com>, Khem Raj
- <raj.khem@gmail.com>, Trevor Gamblin <trevor.gamblin@windriver.com>
-References: <20220323173332.16576-1-trevor.gamblin@windriver.com>
- <20220323173332.16576-2-trevor.gamblin@windriver.com>
- <0611ffa9-537e-0186-2c99-d3e092b2bdb1@windriver.com>
-From: akuster808 <akuster808@gmail.com>
-In-Reply-To: <0611ffa9-537e-0186-2c99-d3e092b2bdb1@windriver.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+References: <20230523121831.1877208-1-ross.burton@arm.com> <20230523121831.1877208-3-ross.burton@arm.com>
+In-Reply-To: <20230523121831.1877208-3-ross.burton@arm.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 23 May 2023 22:56:47 -0700
+Message-ID: <CAMKF1spFeyaU-Ym699XLNOV+cFsG4uvBwRdFx5rnke3jYCYCjg@mail.gmail.com>
+Subject: Re: [oe] [PATCH 3/3] gutenprint: rewrite recipe and update
+To: Ross Burton <ross.burton@arm.com>
+Cc: openembedded-devel@lists.openembedded.org, nd@arm.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 24 May 2023 03:04:42 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102750
+ <openembedded-devel@lists.openembedded.org>; Wed, 24 May 2023 05:57:23 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102751
 
+seeing this error
 
+https://errors.yoctoproject.org/Errors/Details/704895/
 
-On 5/23/23 5:58 PM, Randy MacLeod wrote:
-> On 2022-03-23 13:33, Trevor Gamblin wrote:
->> The delta between 3.2.5 and 3.2.12 contain numerous CVE and other
->> bugfixes. git log --oneline 3.2.5..3.2.12 shows:
+On Tue, May 23, 2023 at 5:18=E2=80=AFAM Ross Burton <ross.burton@arm.com> w=
+rote:
 >
-> Narpat is working on a patch for: CVE-2023-31047
+> From: Ross Burton <ross.burton@arm.com>
 >
-
-Isn't Hardknott EOL?
-
-- armin
+> There hasn't been a gutenprint upgrade for quite a while, but a lot of
+> fixes upstream, so grab the latest SHA.
 >
-> He'll start with the default version of django : 2.2*
+> This means we can now do out-of-tree builds, so drop the use of
+> autotools-brokensep. Also stop autogen.sh from running configure as we
+> run it again.
 >
-> Which if any of the other versions should be fixed?
+> Clean up build dependencies.
 >
-> Can we remove version 3.2?
-> Can we update django 4.0 to 4.1 rather than backport the fix?
+> Enable NLS, as there's no reason to disable it.
 >
-> meta-oe.git on  kirkstone [$]
-> ❯ fd django_
-> meta-python/recipes-devtools/python/python3-django_2.2.28.bb
-> meta-python/recipes-devtools/python/python3-django_3.2.12.bb
-> meta-python/recipes-devtools/python/python3-django_4.0.2.bb
+> Remove the explicit gutenprint-native recipe, instead use class extension
+> and build as little as possible in the native do_compile.
 >
-> Can we add a check to ensure that we never have 3 versions of a single
-> recipe at branch time again? It's rare I think but worth discussing 
-> the idea.
+> Signed-off-by: Ross Burton <ross.burton@arm.com>
+> ---
+>  .../gutenprint/gutenprint-native_git.bb       | 42 -------------
+>  .../gutenprint/gutenprint.inc                 | 22 -------
+>  .../gutenprint/gutenprint_git.bb              | 60 +++++++++++++------
+>  3 files changed, 43 insertions(+), 81 deletions(-)
+>  delete mode 100644 meta-oe/recipes-printing/gutenprint/gutenprint-native=
+_git.bb
+>  delete mode 100644 meta-oe/recipes-printing/gutenprint/gutenprint.inc
 >
-> ../Randy
+> diff --git a/meta-oe/recipes-printing/gutenprint/gutenprint-native_git.bb=
+ b/meta-oe/recipes-printing/gutenprint/gutenprint-native_git.bb
+> deleted file mode 100644
+> index c6e00c340a..0000000000
+> --- a/meta-oe/recipes-printing/gutenprint/gutenprint-native_git.bb
+> +++ /dev/null
+> @@ -1,42 +0,0 @@
+> -# Recipe for building gutenprint-native
+> -#
+> -# Native part is for generating strings - xmli18n-tmp.h used by target r=
+ecipe
+> -# We don't depend on cups as this is for generating the string header.
+> -#
+> -# Copyright (c) Ambu A/S - All rights reserved
+> -# SPDX-License-Identifier: MIT
+> -#
+> -# Author(s)
+> -#   clst@ambu.com (Claus Stovgaard)
+> -#
+> -
+> -require gutenprint.inc
+> -
+> -# We could consider switching to BBCLASSEXTEND native instead of inherit
+> -# Using devtool with this results in warning, as devtool append external=
+src to
+> -# inheritance, making native not being inherited last.
+> -inherit autotools-brokensep pkgconfig native
+> -
+> -SECTION =3D "libs"
+> -
+> -# binutils is for xz etc.
+> -# gettext-native for configuration
+> -# flex-native is used for compilation
+> -# byacc-native is for yacc command (compilation)
+> -DEPENDS +=3D "binutils-native gettext-native flex-native byacc-native"
+> -
+> -EXTRA_OECONF =3D "--without-doc --without-cups"
+> -
+> -# gutenprint does not have a configure file in its root folder.
+> -# Rather it has a autogen.sh in its root folder. We just use it
+> -do_configure() {
+> -    ${S}/autogen.sh || bbnote "${PN} failed to autogen.sh"
+> -    oe_runconf
+> -}
+> -
+> -# Currently we only uses the string header, even though we compile the c=
+omplete
+> -# native version of the library. So we limit the install to the needed.
+> -do_install() {
+> -    install -d ${D}${datadir}/gutenprint/
+> -    install -m644 ${B}/src/xml/xmli18n-tmp.h ${D}${datadir}/gutenprint/
+> -}
+> \ No newline at end of file
+> diff --git a/meta-oe/recipes-printing/gutenprint/gutenprint.inc b/meta-oe=
+/recipes-printing/gutenprint/gutenprint.inc
+> deleted file mode 100644
+> index 1f712585f7..0000000000
+> --- a/meta-oe/recipes-printing/gutenprint/gutenprint.inc
+> +++ /dev/null
+> @@ -1,22 +0,0 @@
+> -# common part for gutenprint-native / gutenprint
+> -#
+> -# As we are using the native part for generating string header to the ta=
+rget
+> -# version, it is important they use the same version.
+> -# So we set the SRC_URI and SRCREV here.
+> -#
+> -# Copyright (c) Ambu A/S - All rights reserved
+> -# SPDX-License-Identifier: MIT
+> -#
+> -# Author(s)
+> -#   clst@ambu.com (Claus Stovgaard)
+> -#
+> -
+> -DESCRIPTION =3D "Gutenprint printer drivers"
+> -HOMEPAGE =3D "http://gimp-print.sourceforge.net/"
+> -LICENSE =3D "GPL-2.0-or-later"
+> -
+> -SRC_URI =3D "git://git.code.sf.net/p/gimp-print/source;protocol=3Dhttps;=
+branch=3Dmaster"
+> -SRCREV =3D "8e47dc44dd7738302ba9e8fbc1f918461fed0236"
+> -S =3D "${WORKDIR}/git"
+> -
+> -LIC_FILES_CHKSUM =3D "file://${S}/COPYING;md5=3D59530bdf33659b29e73d4adb=
+9f9f6552"
+> \ No newline at end of file
+> diff --git a/meta-oe/recipes-printing/gutenprint/gutenprint_git.bb b/meta=
+-oe/recipes-printing/gutenprint/gutenprint_git.bb
+> index 7779793948..abdd3d5e40 100644
+> --- a/meta-oe/recipes-printing/gutenprint/gutenprint_git.bb
+> +++ b/meta-oe/recipes-printing/gutenprint/gutenprint_git.bb
+> @@ -9,38 +9,64 @@
+>  #   clst@ambu.com (Claus Stovgaard)
+>  #
+>
+> -require gutenprint.inc
+> +DESCRIPTION =3D "Gutenprint printer drivers"
+> +HOMEPAGE =3D "http://gimp-print.sourceforge.net/"
+> +LICENSE =3D "GPL-2.0-or-later"
+>
+> -inherit autotools-brokensep pkgconfig
+> +SRC_URI =3D "git://git.code.sf.net/p/gimp-print/source;protocol=3Dhttps;=
+branch=3Dmaster"
+> +SRCREV =3D "66b0a7bc3fd25659a3f295db0ebb39d04e413c01"
+> +PV =3D "5.3.3+git${SRCPV}"
+>
+> -DEPENDS +=3D "cups gutenprint-native"
+> +S =3D "${WORKDIR}/git"
+>
+> -# cups-genppdupdate depend on perl
+> -# We also set the path to PERL as else the version in hosttools would be=
+ used
+> -# with full path
+> -RDEPENDS:${PN} =3D "perl "
+> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D59530bdf33659b29e73d4adb9f9f6=
+552"
+>
+> -EXTRA_OECONF =3D "--without-doc --disable-test --disable-nls PERL=3D/usr=
+/bin/perl"
+> +inherit autotools gettext pkgconfig
+>
+> -# gutenprint does not have a configure file in its root folder.
+> -# Rather it has a autogen.sh in its root folder. We just use it
+> -# together with adapting for cross compilation
+> -do_configure() {
+> +DEPENDS +=3D "cups gutenprint-native"
+> +# autogen.sh needs autopoint
+> +DEPENDS:class-native =3D "gettext-native"
+> +
+> +EXTRA_OECONF =3D "--without-doc --disable-test PERL=3D/usr/bin/perl"
+> +EXTRA_OECONF:append:class-native =3D " --without-cups"
+> +
+> +do_configure:prepend:class-target() {
+>      # Disable the xmli18n-tmp.h rule
+>      # It depend on the local build extract-strings, we are not able to r=
+un this
+>      # So we are using the xmli18n-tmp.h created by gutenprint-native
+>      sed -i 's/all-local: xmli18n-tmp.h xml-stamp/all-local: xml-stamp/' =
+ ${S}/src/xml/Makefile.am
+>      sed -i 's/dist-hook: xmli18n-tmp.h xml-stamp/dist-hook: xml-stamp/' =
+ ${S}/src/xml/Makefile.am
+> -    cp ${RECIPE_SYSROOT_NATIVE}${datadir}/gutenprint/xmli18n-tmp.h ${S}/=
+src/xml/
+> +    # Despite being a generated file, this needs to be in S.
+> +    cp ${STAGING_DATADIR_NATIVE}/gutenprint/xmli18n-tmp.h ${S}/src/xml/
+> +}
+>
+> -    ${S}/autogen.sh || bbnote "${PN} failed to autogen.sh"
+> +do_configure() {
+> +    # Need to call autogen.sh as that creates m4/stp_release.m4
+> +    cd ${S}
+> +    NOCONFIGURE=3D1 ./autogen.sh
+> +    cd ${B}
+>      oe_runconf
+>  }
+>
+> -# gutenprint install the calibrate.ppm and net.sf.gimp-print.usb-quirks =
+in
+> -# /usr/share/cups
+> +do_install:append() {
+> +    # This file contains build paths and isn't very useful, remove it
+> +    rm -f ${D}${libdir}/gutenprint/*/config.summary
+> +}
+> +
+> +do_compile:class-native() {
+> +    oe_runmake -C ${B}/src/xml
+> +}
+> +
+> +do_install:class-native() {
+> +    install -d ${D}${datadir}/gutenprint/
+> +    install -m644 ${B}/src/xml/xmli18n-tmp.h ${D}${datadir}/gutenprint/
+> +}
+> +
+>  FILES:${PN} +=3D "${datadir}/cups/*"
+> +RDEPENDS:${PN} =3D "perl"
+>
+>  # Install in /etc/cups when RPM needs DIRFILES to not conflict
+>  # https://stackoverflow.com/questions/44762430/why-do-i-get-etc-cups-con=
+flicts-between-attempted-installs-in-yocto
+> -DIRFILES =3D "1"
+> \ No newline at end of file
+> +DIRFILES =3D "1"
+> +
+> +BBCLASSEXTEND =3D "native"
+> --
+> 2.34.1
 >
 >
->> fdf209eab8 (tag: 3.2.12) [3.2.x] Bumped version for 3.2.12 release.
->> d16133568e [3.2.x] Fixed CVE-2022-23833 -- Fixed DoS possiblity in file uploads.
->> 1a1e8278c4 [3.2.x] Fixed CVE-2022-22818 -- Fixed possible XSS via {% debug %} template tag.
->> a7e89fe776 [3.2.x] Added stub release notes for 3.2.12 and 2.2.27.
->> 027f4c4ceb [3.2.x] Added CVE-2021-45115, CVE-2021-45116, and CVE-2021-45452 to security archive.
->> 0a9a46a1d7 [3.2.x] Post-release version bump.
->> 6e499a28ac (tag: 3.2.11) [3.2.x] Bumped version for 3.2.11 release.
->> 8d2f7cff76 [3.2.x] Fixed CVE-2021-45452 -- Fixed potential path traversal in storage subsystem.
->> c7fe895bca [3.2.x] Fixed CVE-2021-45116 -- Fixed potential information disclosure in dictsort template filter.
->> a8b32fe13b [3.2.x] Fixed CVE-2021-45115 -- Prevented DoS vector in UserAttributeSimilarityValidator.
->> b0aa0709a5 [3.2.x] Added stub release notes for 3.2.11, and 2.2.26 releases.
->> ae242235db [3.2.x] Refs #33365, Refs #30530 -- Doc'd re_path() behavior change in Django 2.2.25, 3.1.14, and 3.2.10.
->> ecd2793897 [3.2.x] Added CVE-2021-44420 to security archive.
->> 1cea03ab00 [3.2.x] Post-release version bump.
->> 0153a63a67 (tag: 3.2.10) [3.2.x] Bumped version for 3.2.10 release.
->> 333c656030 [3.2.x] Fixed #30530, CVE-2021-44420 -- Fixed potential bypass of an upstream access control based on URL paths.
->> 6014b812e2 [3.2.x] Refs #33333 -- Fixed PickleabilityTestCase.test_annotation_with_callable_default() crash on Oracle.
->> cb724ef6c0 [3.2.x] Fixed #33333 -- Fixed setUpTestData() crash with models.BinaryField on PostgreSQL.
->> 0cf2d48ba8 [3.2.x] Added requirements.txt to files ignored by Sphinx builds.
->> 487a2da02e [3.2.x] Added stub release notes and release date for 3.2.10, 3.1.14 and 2.2.25.
->> 742d6bc8db [3.2.x] Corrected signatures of QuerySet's methods.
->> 99532fdadf [3.2.x] Corrected isort example in coding style docs.
->> 31539a63f2 [3.2.x] Corrected "pip install" call in coding style docs.
->> 76a0a8a917 [3.2.x] Configured Read The Docs to build all formats.
->> 04e66e245d [3.2.x] Fixed crash building HTML docs since Sphinx 4.3.
->> dfa1145a22 [3.2.x] Corrected multiply defined labels in docs.
->> 9d171643d4 [3.2.x] Refs #33247 -- Corrected configuration for Read The Docs.
->> 327dac6e7c [3.2.x] Fixed #33247 -- Added configuration for Read The Docs.
->> bc691d555e [3.2.x] Corrected module reference in contributing tutorial.
->> 3357ad2de2 [3.2.x] Fixed typo in docs/topics/logging.txt.
->> 34e5e61479 [3.2.x] Added stub release notes for Django 3.2.10.
->> 21a56d596a [3.2.x] Post-release version bump.
->> 1b3c0d3b54 (tag: 3.2.9) [3.2.x] Bumped version for 3.2.9 release.
->> e299cc2d2c [3.2.x] Added release date for 3.2.9.
->> 947d2707c6 [3.2.x] Added Google Cloud Spanner to list of third-party DB backends.
->> 128179c0f8 [3.2.x] Refs #33182 -- Adjusted custom admin theming example to use correct template block.
->> f5802a21c4 [3.2.x] Fixed #33194 -- Fixed migrations when altering a field with functional indexes on SQLite.
->> fdc1c6435c [3.2.x] Fixed #33198 -- Corrected BinaryField.max_length docs.
->> dbcd81841f [3.2.x] Refs #32074 -- Removed usage of deprecated asyncore and smtpd modules.
->> 137a9899d7 [3.2.x] Refs #27131 -- Removed SMTPBackendTests.test_server_login().
->> 1128291650 [3.2.x] Added 'formatter' to spelling wordlist.
->> 82fee0446d [3.2.x] Refs #32074 -- Doc'd Python 3.10 compatibility in Django 3.2.x.
->> 1aed4663c3 [3.2.x] Refs #32074 -- Added Python 3.10 to classifiers and tox.ini.
->> 53fad80ffe [3.2.x] Refs #32074 -- Used asyncio.get_running_loop() instead of get_event_loop() on Python 3.7+.
->> f6726fdc3e [3.2.x] Refs #32074 -- Fixed find_module()/find_loader() warnings on Python 3.10+.
->> d0dc446444 [3.2.x] Refs #32074 -- Removed usage of deprecated Thread.setDaemon().
->> 8bebb1c04a [3.2.x] Refs #32074 -- Removed usage of Python's deprecated distutils.version package.
->> faeae84dad [3.2.x] Skipped test_archive tests when bz2/lzma module is not installed.
->> 329311ecbd [3.2.x] Added stub release notes for Django 3.2.9.
->> 85e4af6a22 [3.2.x] Post-release version bump.
->> 4540e976d4 (tag: 3.2.8) [3.2.x] Bumped version for 3.2.8 release.
->> 65367b0500 [3.2.x] Added release date for 3.2.7.
->> 51e4dbfeb2 [3.2.x] Refs #27694 -- Doc'd lookups that can be chained with HStoreField key transforms.
->> 031ffc5c84 [3.2.x] Corrected field and model check messages in docs.
->> 7607fe922f [3.2.x] Removed obsolete GEOS 3.5 requirement note.
->> 6760f4fa25 [3.2.x] Fixed #33083 -- Fixed selecting all items in the admin changelist when actions are both top and bottom.
->> e235c7815a [3.2.x] Fixed broken links and redirects in docs.
->> 51e76c922f [3.2.x] Used :rfc: role in docs/topics/conditional-view-processing.txt.
->> d4a587a5fa [3.2.x] Fixed #33077 -- Fixed links to related models for admin's readonly fields in custom admin site.
->> 561a1c0905 [3.2.x] Fixed typo in docs/intro/reusable-apps.txt.
->> 454ee4d3b8 [3.2.x] Corrected outputs and made cosmetic edits in GeoDjango tutorial.
->> b51e0a37cf [3.2.x] Doc'd Jinja2 form renderer.
->> a7be74d017 [3.2.x] Clarified type of Window()'s partition_by and order_by arguments.
->> 54684a3ec0 [3.2.x] Refs #31055 -- Doc'd 'databases' argument of check functions.
->> 1f86ff31b1 [3.2.x] Fixed typo in docs/topics/i18n/formatting.txt.
->> b61f44c339 [3.2.x] Fixed #33082 -- Fixed CommandTests.test_subparser_invalid_option on Python 3.9.7+.
->> 707239eabf [3.2.x] Added stub release notes for Django 3.2.8.
->> d5710f405a [3.2.x] Post-release version bump.
->> 45a0c54b67 (tag: 3.2.7) [3.2.x] Bumped version for 3.2.7 release.
->> 4b80a40272 [3.2.x] Added release date for 3.2.7.
->> 4e55806720 [3.2.x] Refs #25264 -- Doc's that not all default options are supported by every management command.
->> fe3a854e1d [3.2.x] Fixed #32992 -- Restored offset extraction for fixed offset timezones.
->> 382374a360 [3.2.x] Corrected BaseDatabaseSchemaEditor.execute() signature in docs.
->> 11b2cbb65f [3.2.x] Made sentence about Model consistent in docs.
->> 69009f4952 [3.2.x] Fixed #33046 -- Added note about using length of cached result by QuerySet.count().
->> d95a0144e5 [3.2.x] Used backend vendors in custom model fields docs.
->> 358e65a5cd [3.2.x] Fixed #33030 -- Fixed broken links to GDAL docs.
->> d29a9ed504 [3.2.x] The geodjango mailing list moved to the Django Forum.
->> eb26b8a0fe [3.2.x] The django-i18n mailing list moved to the Django Forum.
->> 6bb74f3de8 [3.2.x] Fixed some broken links and redirects in docs.
->> f18da11b8a [3.2.x] Updated BaseDatabaseFeatures link in testing tools docs.
->> 2c46e55314 [3.2.x] Clarified URL patterns in tutorial 3.
->> 87e7399760 [3.2.x] Added stub release notes for Django 3.2.7.
->> e1cad66dca [3.2.x] Post-release version bump.
->> eb0f298e76 (tag: 3.2.6) [3.2.x] Bumped version for 3.2.6 release.
->> 70840232f9 [3.2.x] Confirmed release date for Django 3.2.6.
->> d9e05ea17a [3.2.x] Refs #31676 -- Updated technical board description in organization docs.
->> 99d9a3ef7c [3.2.x] Refs #31676 -- Added Mergers and Releasers to organization docs.
->> ed29959812 [3.2.x] Refs #31676 -- Removed Core team from organization docs.
->> 55daaa0c79 [3.2.x] Made minor edits to QuerySet.update_or_create() docs.
->> 5fa70c91b4 [3.2.x] Fixed typo in docs/ref/contrib/admin/index.txt.
->> aace6c531d [3.2.x] Fixed #32933 -- Documented BoundField.initial as preferred over Form.get_initial_for_field().
->> bdd4cbe84a [3.2.x] Fixed #32957 -- Improved visibility of arguments sections in Model.save() docs.
->> b2f7b53fac [3.2.x] Fixed #32947 -- Fixed hash() crash on reverse M2M relation when through_fields is a list.
->> de5a044cf4 [3.2.x] Fixed #32950 -- Removed myproject from imports in admin docs where appropriate.
->> f4cf86f870 [3.2.x] Refs #32949 -- Adjusted release note wording.
->> 1346381760 [3.2.x] Fixed #32949 -- Restored invalid number handling in DecimalField.validate().
->> 05e997c404 [3.2.x] Fixed typo in docs/ref/databases.txt.
->> 9a65e62c93 [3.2.x] Fixed typo in docs/releases/3.1.13.txt.
->> 0ee092c8dd [3.2.x] Fixed typo in docs/topics/signals.txt.
->> b7d25d025e [3.2.x] Fixed typo in docs/internals/deprecation.txt.
->> 6931963886 [3.2.x] Fixed typo in docs/internals/contributing/committing-code.txt.
->> f36edbc378 [3.2.x] Refs #31676 -- Removed Django Core-Mentorship mailing list references in docs.
->> 527482c513 [3.2.x] Fixed typo in docs/ref/contrib/gis/tutorial.txt.
->> 1d53d2502d [3.2.x] Documented in_bulk behavior with nonexistent id_list items.
->> 9fadb97583 [3.2.x] Added CVE-2021-35042 to security archive.
->> 92efd69107 [3.2.x] Added stub release notes for Django 3.2.6.
->> 3ab942f10a [3.2.x] Post-release version bump.
->>
->> Signed-off-by: Trevor Gamblin<trevor.gamblin@windriver.com>
->> ---
->>   .../{python3-django_3.2.5.bb => python3-django_3.2.12.bb}       | 2 +-
->>   1 file changed, 1 insertion(+), 1 deletion(-)
->>   rename meta-python/recipes-devtools/python/{python3-django_3.2.5.bb => python3-django_3.2.12.bb} (77%)
->>
->> diff --git a/meta-python/recipes-devtools/python/python3-django_3.2.5.bb b/meta-python/recipes-devtools/python/python3-django_3.2.12.bb
->> similarity index 77%
->> rename from meta-python/recipes-devtools/python/python3-django_3.2.5.bb
->> rename to meta-python/recipes-devtools/python/python3-django_3.2.12.bb
->> index 5890c8541..ee71f953b 100644
->> --- a/meta-python/recipes-devtools/python/python3-django_3.2.5.bb
->> +++ b/meta-python/recipes-devtools/python/python3-django_3.2.12.bb
->> @@ -1,7 +1,7 @@
->>   require python-django.inc
->>   inherit setuptools3
->>   
->> -SRC_URI[sha256sum] = "3da05fea54fdec2315b54a563d5b59f3b4e2b1e69c3a5841dda35019c01855cd"
->> +SRC_URI[sha256sum] = "9772e6935703e59e993960832d66a614cf0233a1c5123bc6224ecc6ad69e41e2"
->>   
->>   RDEPENDS_${PN} += "\
->>       ${PYTHON_PN}-sqlparse \
->>
->> -=-=-=-=-=-=-=-=-=-=-=-
->> Links: You receive all messages sent to this group.
->> View/Reply Online (#96163):https://lists.openembedded.org/g/openembedded-devel/message/96163
->> Mute This Topic:https://lists.openembedded.org/mt/89981302/3616765
->> Group Owner:openembedded-devel+owner@lists.openembedded.org
->> Unsubscribe:https://lists.openembedded.org/g/openembedded-devel/unsub  [randy.macleod@windriver.com]
->> -=-=-=-=-=-=-=-=-=-=-=-
->>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#102734): https://lists.openembedded.org/g/openembedde=
+d-devel/message/102734
+> Mute This Topic: https://lists.openembedded.org/mt/99085728/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
+aj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
 >
-> -- 
-> # Randy MacLeod
-> # Wind River Linux
-
 
