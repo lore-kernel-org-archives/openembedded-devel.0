@@ -2,57 +2,57 @@ Return-Path: <Martin.Jansa@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B6F9AC7EE39
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C467EC7EE3A
 	for <webhook@archiver.kernel.org>; Wed, 24 May 2023 07:53:13 +0000 (UTC)
-Received: from mail-ed1-f53.google.com (mail-ed1-f53.google.com [209.85.208.53])
- by mx.groups.io with SMTP id smtpd.web10.3704.1684914790329649329
+Received: from mail-ej1-f52.google.com (mail-ej1-f52.google.com [209.85.218.52])
+ by mx.groups.io with SMTP id smtpd.web11.3577.1684914785785538264
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 24 May 2023 00:53:10 -0700
+ Wed, 24 May 2023 00:53:06 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=Ukb5DFFC;
- spf=pass (domain: gmail.com, ip: 209.85.208.53, mailfrom: martin.jansa@gmail.com)
-Received: by mail-ed1-f53.google.com with SMTP id 4fb4d7f45d1cf-510f525e06cso1469173a12.2
-        for <openembedded-devel@lists.openembedded.org>; Wed, 24 May 2023 00:53:10 -0700 (PDT)
+ dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=CQ22K9fP;
+ spf=pass (domain: gmail.com, ip: 209.85.218.52, mailfrom: martin.jansa@gmail.com)
+Received: by mail-ej1-f52.google.com with SMTP id a640c23a62f3a-96fab30d1e1so159504066b.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 24 May 2023 00:53:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1684914789; x=1687506789;
+        d=gmail.com; s=20221208; t=1684914784; x=1687506784;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=6dwF6/K2FhJIjeipYWSyhNV+gWYr8sJy7pPixte5Vc8=;
-        b=Ukb5DFFCM+ddVzUgUgEK2L79+AfIRDEAbPZv6GRK0fZoORNCE9IXHkOPjnYIlW0fGi
-         WmWRoFpPtRbZWNuCXYdm+1u4xltj2Xhr10nlu6LFU45LFMeA1No0xW4m6XiQC1VZTR1K
-         Dpvi8+fauiTtFzJkYSJpBr6ULSjWlldlYoYbwwHuL/KTGjCXzah/5f57PlZxSKvMRfuP
-         3VHnDsXQEmD5L2zAQ21wfQfJgpoipG36lSXg2K7MBIBixcCDPuntg7CGK3m4K3Gna9+/
-         b+OjllaWZCJf7YKw2hXTtB+6v+63TtCn7qgJ326BiqQYPnycg2oTRub/hznVjA2ZMH/6
-         R/YQ==
+        bh=E3yDw7qtj5ZvSM7E7QtvxrjNxv3/DTIuK244ZBWQe+g=;
+        b=CQ22K9fPSpERBjKLFzQvdoB9YfV8650ipZEswBZoRFAtr3rLK6XHExsHVik6ZR4iu/
+         TDvhmnbZ+5WxALhOQ5UsjhuegfTYOZNQpHFiVF3OMXNeB2z19R7+azk+p0VmmAFRhE/9
+         5JWl4udL2hx+pbxmwmkJEoRUfKWD/CGS524owFc+RKYhe9GINZSqsFC+gZYV32ox+SeB
+         178cSB5AW5OCefEZp8AejcUF1PrZ6EzH451yEGt/0aixrGoYFlTJPjjEHsVaA8OtCDHi
+         PYeJWkwoTCFCJDnXRZfuppYNsX6HBnNE9KTALFOIesnkLm227s7tHAYNUhdMPBgqXXS1
+         c9/Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1684914789; x=1687506789;
+        d=1e100.net; s=20221208; t=1684914784; x=1687506784;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=6dwF6/K2FhJIjeipYWSyhNV+gWYr8sJy7pPixte5Vc8=;
-        b=CYYOBAC/keRgnFZdHbmVd67/yHT3iTrG6yF5laSDBn6uNWEsXTHloTNj2naQX8FD17
-         rQiNV21bSuIi63fHTgdU6G9ANnl2Ge5r9bfec7RIf1EEAqLlvXx6zflvOKWMRbE5IdS8
-         v0AWqwh3Mu0CK0jHnn0CaGq4oduw95Xy0M5q19s5qqydZJmHAezHHQEwWhf4qWDV2y2k
-         AOQju5iGufQu8uF179psMckMtmC28BvjhqTK74hONS1n0jNBxCS3NUbX3D3fekEDn9Ve
-         RJo2T+Kj7cRviy+LF4xoLQN475Qb05OP9ds8GiLjHkDfCCveVBIbMNe6SqGdx+jGGBYy
-         Q4Ng==
-X-Gm-Message-State: AC+VfDzLcoFetTiYuG50VVCuypvVhoUoq4xH0NdhmiyWmw/jaJIzXsjx
-	fzk3QUaU9fElfpK5a+eIPg1F1pBtTiQ=
-X-Google-Smtp-Source: ACHHUZ5Gv1Fgv7ceGxE7DaVzKDPLBzw7q6JQ3wn4yTYZ74u2GEZNeHYJxBP7Y/YhRJQfyJGNbAqYow==
-X-Received: by 2002:a17:907:9708:b0:96f:4225:9009 with SMTP id jg8-20020a170907970800b0096f42259009mr18091471ejc.0.1684914788582;
-        Wed, 24 May 2023 00:53:08 -0700 (PDT)
+        bh=E3yDw7qtj5ZvSM7E7QtvxrjNxv3/DTIuK244ZBWQe+g=;
+        b=jsjATZjTON8yQbqP/P6UqDagW/3rAO71zUge/jVJiWRHn7R2KNzZOuIZOT3Y4vxAK4
+         X43gQUfLphNlGaL6bWU7iRNgJbqIO6HXyxsYCZxMNCBAhO6JHyE7j80tlfs3v2QuVkna
+         zqbzHQJEoXNLOOm6Gq2iHjh8em+AIUoOX5cCgCVBOnaS3wLZD4kaej9RwfENVRQoS+00
+         SP+ghZJPf14XnTq9nYqOVqWsnMpt4VDf2xVGP5BBrNQuFRDLf7nrIQinoReSCast/onJ
+         lzDYdfJgswYMHf89CdQaYhW36F2kL5r/hOe91sfgjYTyFZ0weuiw7YpLDuVag/XDnH8f
+         AMMQ==
+X-Gm-Message-State: AC+VfDxH/nElbXO3F2bYSsNo3bKcwV+cE39x8zId1bVtTirMb0k71XEZ
+	x/SRf5cUxxiZsjtDmnqfmkCRXTMTrJk=
+X-Google-Smtp-Source: ACHHUZ4oyei7s6mYxLSFFTT4FryiSn9oM5XSVebjYf2/+IcRV48onU3hWcAPzh9o4gcWRS98CUTzTQ==
+X-Received: by 2002:a17:907:a40f:b0:973:8edc:5a57 with SMTP id sg15-20020a170907a40f00b009738edc5a57mr526012ejc.4.1684914784242;
+        Wed, 24 May 2023 00:53:04 -0700 (PDT)
 Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
-        by smtp.gmail.com with ESMTPSA id k17-20020a1709063e1100b0096f641a4c01sm5435129eji.179.2023.05.24.00.53.08
+        by smtp.gmail.com with ESMTPSA id rv25-20020a17090710d900b00965f6ad266bsm5408355ejb.119.2023.05.24.00.53.03
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 24 May 2023 00:53:08 -0700 (PDT)
+        Wed, 24 May 2023 00:53:04 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Martin Jansa <Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 11/20] plymouth: remove unused patch file
-Date: Wed, 24 May 2023 09:52:44 +0200
-Message-Id: <20230524075253.1033593-11-Martin.Jansa@gmail.com>
+Subject: [meta-oe][PATCH 05/20] monkey: remove unused patch file
+Date: Wed, 24 May 2023 09:52:38 +0200
+Message-Id: <20230524075253.1033593-5-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20230524075253.1033593-1-Martin.Jansa@gmail.com>
 References: <20230524075253.1033593-1-Martin.Jansa@gmail.com>
@@ -62,65 +62,50 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 24 May 2023 07:53:13 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102765
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102759
 
 * it was removed from SRC_URI in:
-  https://git.openembedded.org/meta-openembedded/commit/?id=479b1455e37d49bc24f709bd2284effdb92686ab
-
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+  https://git.openembedded.org/meta-openembedded/commit/?id=45b327ba1620febf3dd8a8b415d601c9c9e78bc5
 ---
- ...001-systemd-switch-to-KillMode-mixed.patch | 43 -------------------
- 1 file changed, 43 deletions(-)
- delete mode 100644 meta-oe/recipes-core/plymouth/files/0001-systemd-switch-to-KillMode-mixed.patch
+ ...igure-Respect-LIBS-variable-from-env.patch | 30 -------------------
+ 1 file changed, 30 deletions(-)
+ delete mode 100644 meta-webserver/recipes-httpd/monkey/files/0001-configure-Respect-LIBS-variable-from-env.patch
 
-diff --git a/meta-oe/recipes-core/plymouth/files/0001-systemd-switch-to-KillMode-mixed.patch b/meta-oe/recipes-core/plymouth/files/0001-systemd-switch-to-KillMode-mixed.patch
+diff --git a/meta-webserver/recipes-httpd/monkey/files/0001-configure-Respect-LIBS-variable-from-env.patch b/meta-webserver/recipes-httpd/monkey/files/0001-configure-Respect-LIBS-variable-from-env.patch
 deleted file mode 100644
-index eb1c8db21c..0000000000
---- a/meta-oe/recipes-core/plymouth/files/0001-systemd-switch-to-KillMode-mixed.patch
+index 3eb3067394..0000000000
+--- a/meta-webserver/recipes-httpd/monkey/files/0001-configure-Respect-LIBS-variable-from-env.patch
 +++ /dev/null
-@@ -1,43 +0,0 @@
--From 9d0f8b2e7bc2d1d2b0900fcdf119bb9a2cc4f474 Mon Sep 17 00:00:00 2001
--From: Ray Strode <rstrode@redhat.com>
--Date: Tue, 25 Aug 2020 10:49:11 -0400
--Subject: [PATCH] systemd: switch to KillMode=mixed
+@@ -1,30 +0,0 @@
+-From b0526a9b5325bd4758dad8d14efd85c98ef2ebff Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Fri, 14 Jul 2017 18:25:23 -0700
+-Subject: [PATCH] configure: Respect LIBS variable from env
 -
--KillMode=none is deprecated, so we need to stop using it.
+-For musl we need to pass -lexecinfo from env
+-this change accomodates that
 -
--For now, use `KillMode=mixed` and `IgnoreOnIsolate=true` instead.
--
--In the future, we should change plymouth to be able to exit and
--start again without restarting the active animation, but that's
--going to require some effort.
--
--https://gitlab.freedesktop.org/plymouth/plymouth/-/issues/123
--
--Upstream-Status: Backport [https://gitlab.freedesktop.org/plymouth/plymouth/-/commit/9d0f8b2e7bc2d1d2b0900fcdf119bb9a2cc4f474]
--
--Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+-Upstream-Status: Inappropriate [OE-specific]
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ----
-- systemd-units/plymouth-start.service.in | 3 ++-
-- 1 file changed, 2 insertions(+), 1 deletion(-)
+- configure | 2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
 -
--diff --git a/systemd-units/plymouth-start.service.in b/systemd-units/plymouth-start.service.in
--index 3d00cc6..830a62d 100644
----- a/systemd-units/plymouth-start.service.in
--+++ b/systemd-units/plymouth-start.service.in
--@@ -6,11 +6,12 @@ After=systemd-vconsole-setup.service systemd-udev-trigger.service systemd-udevd.
-- Before=systemd-ask-password-plymouth.service
-- ConditionKernelCommandLine=!plymouth.enable=0
-- ConditionVirtualization=!container
--+IgnoreOnIsolate=true
-- 
-- [Service]
-- ExecStart=@PLYMOUTH_DAEMON_DIR@/plymouthd --mode=boot --pid-file=@plymouthruntimedir@/pid --attach-to-session
-- ExecStartPost=-@PLYMOUTH_CLIENT_DIR@/plymouth show-splash
-- Type=forking
-- RemainAfterExit=yes
---KillMode=none
--+KillMode=mixed
-- SendSIGKILL=no
+-diff --git a/configure b/configure
+-index 4286c34..f1c65db 100755
+---- a/configure
+-+++ b/configure
+-@@ -620,7 +620,7 @@ LIBDEFS = -DSHAREDLIB -fPIC \$(DEFS)
+- INCDIR  = ./include
+- LDFLAGS = $LDFLAGS
+- DESTDIR = ../bin/monkey
+--LIBS    = -ldl $libs
+-+LIBS    = -ldl $libs ${LIBS}
+- OBJ     = monkey.o mk_method.o mk_mimetype.o mk_vhost.o mk_request.o \\
+-           mk_header.o mk_config.o mk_signals.o \\
+-           mk_user.o mk_utils.o mk_epoll.o mk_scheduler.o \\
 --- 
--2.17.1
+-2.13.3
 -
 -- 
 2.40.1
