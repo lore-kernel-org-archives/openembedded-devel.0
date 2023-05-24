@@ -2,57 +2,58 @@ Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 68327C77B7E
-	for <webhook@archiver.kernel.org>; Wed, 24 May 2023 02:41:42 +0000 (UTC)
-Received: from mail-pg1-f179.google.com (mail-pg1-f179.google.com [209.85.215.179])
- by mx.groups.io with SMTP id smtpd.web10.435.1684896095141564769
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6D610C77B7E
+	for <webhook@archiver.kernel.org>; Wed, 24 May 2023 03:04:42 +0000 (UTC)
+Received: from mail-pf1-f178.google.com (mail-pf1-f178.google.com [209.85.210.178])
+ by mx.groups.io with SMTP id smtpd.web11.695.1684897472745090652
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 23 May 2023 19:41:35 -0700
+ Tue, 23 May 2023 20:04:32 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=Zf6hazb0;
- spf=pass (domain: gmail.com, ip: 209.85.215.179, mailfrom: akuster808@gmail.com)
-Received: by mail-pg1-f179.google.com with SMTP id 41be03b00d2f7-53482b44007so279217a12.2
-        for <openembedded-devel@lists.openembedded.org>; Tue, 23 May 2023 19:41:35 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20221208 header.b=Le2PRLbH;
+ spf=pass (domain: gmail.com, ip: 209.85.210.178, mailfrom: akuster808@gmail.com)
+Received: by mail-pf1-f178.google.com with SMTP id d2e1a72fcca58-64f47448aeaso254681b3a.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 23 May 2023 20:04:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1684896094; x=1687488094;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
+        d=gmail.com; s=20221208; t=1684897472; x=1687489472;
+        h=content-transfer-encoding:in-reply-to:from:references:cc:to
+         :content-language:subject:user-agent:mime-version:date:message-id
          :from:to:cc:subject:date:message-id:reply-to;
-        bh=Du6IdBU74akEJByedNxIPVVePEkJf+XQkdORyeCmxYY=;
-        b=Zf6hazb05TAQxpqJN+zHjDj4P2N4rrI1clvaMiTUqar8JY1ie0mSqSzELcNKQTp4Nx
-         DGM8jpmG9JqTr8mLcLEvto/YnOpigiwBxUEcJTqmx+5VsA8XNqns1TxmrhCbcZZfBSPc
-         GeWt8a8M2AsEVYPWsUn1HKG+NjsMEcaGxvfxEGDW6SaAoljql+5t2Q6Wb4bsWxOJqRkL
-         XcJ73sB1pzpDYIQp6cR4oRiPiM+R9sJeCfctwaJX8eQS9ewcNVEn7k6gdPqUKj5SWVlX
-         RopSg2jZZtNHsPLBL87Y4IXVkz5kMDzTSgL8NlEPhGaG0h87Q1p8FEUOtE3dGtI45YQL
-         2LOg==
+        bh=kMFGVoTnmUelThCHjNRImQtJ993XJ6aMvZxSRU0Lftg=;
+        b=Le2PRLbHDIUq+CCMWhpFZmLNn/eJvZQ3K95T81VVPO6G46cnrBgqRjcQZpp3cUDM4h
+         8HjvE32ecrJHo/Bfe1jtSvQB+jJajoRgobyzwIL4IftVhiBzytrHpkRWNIjyLpYWyLO6
+         w5Cx0l/vIQtHY80NIDFZS9jSViDMhBYKO/b+5QeYplAwzPTiLgp1d15bXW7Y1LfsJ4lz
+         lPENBetKC6XzPUURfmfP5/eyb6l7C2Mnpz6rnIHvjQgMJmerrHpwqjNtzcEkqLyPFvbn
+         ToNKN9g2LH/Ek/Kyz9fzSltLkV2volceatl39O6mzRydkOPCLLpQuKivTdHAsDQ8Q4cL
+         45+Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1684896094; x=1687488094;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
+        d=1e100.net; s=20221208; t=1684897472; x=1687489472;
+        h=content-transfer-encoding:in-reply-to:from:references:cc:to
+         :content-language:subject:user-agent:mime-version:date:message-id
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=Du6IdBU74akEJByedNxIPVVePEkJf+XQkdORyeCmxYY=;
-        b=IOfwS2092F31BMy6JVtlcmKi8ARXZPTcYZwvdeAXjxcZyak+vhlmepFbjabQssmXC9
-         3RxsIwkCarnY7eryLN2rXNeZBi64BsOuuF4HHMKvyFwPTgXo8Aj1D6xMltwqTA1ki39W
-         8ee9LffFyAqp9HG2vz7/uqaY5R98g6xkNUaAK5+xRBdko9H3Fn7/zj2NMmyMiV0jZAtO
-         8BWb8r7IGkYJpw3Gj5HBQYls52r3l/zMFDQiucNwCNegHLzmATg/yqzHQpOJTB+pyFmI
-         tRrlm4k7BltTIuSBGNCJKlK2hTF5Rl2//Tdw3fbjfXGpIes9SctRzlJUsIn4+ilAmWoo
-         k1PA==
-X-Gm-Message-State: AC+VfDyRlj7lQ+XQ/DSZk5WOXeNGFQmsrih+/6b1QXmk35ImTjbdsWMb
-	9E8ukvmA7BkfXeBapIWjl0I=
-X-Google-Smtp-Source: ACHHUZ6y8k1aSpLxExwd+QI8reBhBrxflUhnmCVo2l1Uw0SI3TomAYPVveScNVhrNnwmUpg4iY5fPQ==
-X-Received: by 2002:a17:902:e74e:b0:1af:ccc9:ce5a with SMTP id p14-20020a170902e74e00b001afccc9ce5amr3601304plf.24.1684896094233;
-        Tue, 23 May 2023 19:41:34 -0700 (PDT)
+        bh=kMFGVoTnmUelThCHjNRImQtJ993XJ6aMvZxSRU0Lftg=;
+        b=jXvO8FbC+mU4/J4C560/Oaxe7kfLltN/39cO1hXxxj9o1xcVAIUHm3kdXGvbBijbaN
+         1SHTetG4iHhnEOK2SDJKIwtmDQEo4/9bbKH+o28U67nTEPy3Ah4ZmzV3WZ9eKeNb/a9c
+         hL7g+k4lF+4RSbEL0JFBMco6zCw3dHY6eIrVxiJ9EqDvUOT72jEAteyA8+3LPSTcANLM
+         LaZnf1SJp4uPoJAqhabubBGhDndqDBNttkQU9OIR67eXkfuF3hjHormpaNqMqWca9whH
+         4k6y+7RPeoewof9eQjWNxZ+YF7UyhSYg6+6hD6GKNf7fkPLDvh9YN+21YeQ6UqdF3BVX
+         /4Vw==
+X-Gm-Message-State: AC+VfDwDrAKviTuqRZva+6vl+GjaMrVdxgGdg2iqSG227uN9LygiT/R3
+	doepRSjvIPw8YIsLitsrqEw=
+X-Google-Smtp-Source: ACHHUZ5GAo3XItRlJ62s1E2gzK+iV5U3OA9OKtYY2uP0zcLHhDvSLWWFLQR8B+lEgIBHh31aWHWAbg==
+X-Received: by 2002:a05:6a00:218b:b0:64d:2487:5b20 with SMTP id h11-20020a056a00218b00b0064d24875b20mr1509938pfi.9.1684897472084;
+        Tue, 23 May 2023 20:04:32 -0700 (PDT)
 Received: from [192.168.153.47] ([12.32.73.67])
-        by smtp.gmail.com with ESMTPSA id u6-20020a17090282c600b0019a773419a6sm7437112plz.170.2023.05.23.19.41.33
+        by smtp.gmail.com with ESMTPSA id y10-20020a63e24a000000b0051b0e564963sm6722440pgj.49.2023.05.23.20.04.30
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 23 May 2023 19:41:33 -0700 (PDT)
-Message-ID: <b3dc5cc8-5db1-d3ab-97e0-592a0995c19a@gmail.com>
-Date: Tue, 23 May 2023 22:41:32 -0400
+        Tue, 23 May 2023 20:04:30 -0700 (PDT)
+Message-ID: <e2a0cd62-0632-f473-6d44-32fe1cb566a6@gmail.com>
+Date: Tue, 23 May 2023 23:04:30 -0400
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.11.0
 Subject: Re: [oe] [meta-python][hardknott][PATCH 2/2] python3-django: upgrade
  3.2.5 -> 3.2.12
+Content-Language: en-US
 To: Randy MacLeod <randy.macleod@windriver.com>,
  openembedded-devel@lists.openembedded.org,
  "Mali, Narpat" <narpat.mali@windriver.com>
@@ -61,7 +62,6 @@ Cc: "Reyna, David" <david.reyna@windriver.com>, Khem Raj
 References: <20220323173332.16576-1-trevor.gamblin@windriver.com>
  <20220323173332.16576-2-trevor.gamblin@windriver.com>
  <0611ffa9-537e-0186-2c99-d3e092b2bdb1@windriver.com>
-Content-Language: en-US
 From: akuster808 <akuster808@gmail.com>
 In-Reply-To: <0611ffa9-537e-0186-2c99-d3e092b2bdb1@windriver.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
@@ -69,8 +69,8 @@ Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 24 May 2023 02:41:42 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102749
+ <openembedded-devel@lists.openembedded.org>; Wed, 24 May 2023 03:04:42 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102750
 
 
 
@@ -80,6 +80,11 @@ On 5/23/23 5:58 PM, Randy MacLeod wrote:
 >> bugfixes. git log --oneline 3.2.5..3.2.12 shows:
 >
 > Narpat is working on a patch for: CVE-2023-31047
+>
+
+Isn't Hardknott EOL?
+
+- armin
 >
 > He'll start with the default version of django : 2.2*
 >
@@ -97,12 +102,6 @@ On 5/23/23 5:58 PM, Randy MacLeod wrote:
 > Can we add a check to ensure that we never have 3 versions of a single
 > recipe at branch time again? It's rare I think but worth discussing 
 > the idea.
->
-
-If we have 4, it meets your requirements ; )
-
-- armin
->
 >
 > ../Randy
 >
