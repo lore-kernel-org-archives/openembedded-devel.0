@@ -1,56 +1,56 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <brgl@bgdev.pl>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E6CA8C77B73
-	for <webhook@archiver.kernel.org>; Sat, 27 May 2023 16:37:01 +0000 (UTC)
-Received: from mail-oi1-f179.google.com (mail-oi1-f179.google.com [209.85.167.179])
- by mx.groups.io with SMTP id smtpd.web10.13362.1685205415062196952
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 83D40C77B73
+	for <webhook@archiver.kernel.org>; Sat, 27 May 2023 18:48:52 +0000 (UTC)
+Received: from mail-vk1-f171.google.com (mail-vk1-f171.google.com [209.85.221.171])
+ by mx.groups.io with SMTP id smtpd.web10.15644.1685213330154801303
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 27 May 2023 09:36:55 -0700
+ Sat, 27 May 2023 11:48:50 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=acJAMF0K;
- spf=pass (domain: gmail.com, ip: 209.85.167.179, mailfrom: raj.khem@gmail.com)
-Received: by mail-oi1-f179.google.com with SMTP id 5614622812f47-38dec65ab50so1140310b6e.2
-        for <openembedded-devel@lists.openembedded.org>; Sat, 27 May 2023 09:36:54 -0700 (PDT)
+ dkim=fail reason="signature has expired" header.i=@bgdev-pl.20221208.gappssmtp.com header.s=20221208 header.b=5W2AI5vb;
+ spf=none, err=SPF record not found (domain: bgdev.pl, ip: 209.85.221.171, mailfrom: brgl@bgdev.pl)
+Received: by mail-vk1-f171.google.com with SMTP id 71dfb90a1353d-4572fa2a92fso434415e0c.2
+        for <openembedded-devel@lists.openembedded.org>; Sat, 27 May 2023 11:48:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1685205414; x=1687797414;
+        d=bgdev-pl.20221208.gappssmtp.com; s=20221208; t=1685213329; x=1687805329;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=bKvhD1JU/DSFS4xQt3INhD5eiOEXD9bUjimb6NwjvgE=;
-        b=acJAMF0Ki1rc9kPAVfylYY1crhzvFrGBqBMe+L+H5zv7psHFdhZb9nweKeBdpTATGd
-         4XHISzGBACU4HJTgRyo/9t64AzsgilPwaPp6wdwHndW4ttNwfGJ8gnbsGCrPs2+SgL9/
-         lvTKAZllpwOUOgkZjOpY548NtM2OUSjgIQC8BLJQ2KfWEif9abFtuTI1gxxu/WwEbNU5
-         E3lXeYzpzGqNG4BMHKAoTdnZTtlGMulXzaaucZK6nprSQe0bzduGFHfonuZl8cGPFnT5
-         xhWm0FD4GTobQ0VqQYmwnWIhrCNHUWifIPZPkX4xfjcma2KqjaiYhDJuVrGsM8g2cWQn
-         eWkg==
+        bh=mtjw68FMAkoYlOo/3i7caKUpIh8qdne+yIBjxYbamGA=;
+        b=5W2AI5vbYhpRFp+a+Q/JFuyMPkqlTaKj4uHbBTCYUOrOYueOshm30LQu/GIjKkdkBh
+         nRNktC+6Ja7/Ba7FqGpPvA9OS503AP3FY42ULUyaeKBkJF/LpTPTWBKZn2dJy3DPdzp1
+         7MTLL17frk2xgUU2fasoxGNi0m+iV7GrkEWUAk7rnzoJjGyQRrMZetqhxotjSa62FFa4
+         RAAMN/nRbtt3BY/Lajx6O6G22fYEiLwCKrJwqu1Zmhft6Jsi5O3/usYoPRew84hYg0qX
+         Xl9oeH1vQGkj0+BEmVC1skBHsSgr3WE4rEp/lBghi0G2C2x5pLBCnWgzneg7x75GQJDA
+         OYsg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1685205414; x=1687797414;
+        d=1e100.net; s=20221208; t=1685213329; x=1687805329;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=bKvhD1JU/DSFS4xQt3INhD5eiOEXD9bUjimb6NwjvgE=;
-        b=dDH9EkhXM4ENbdarQLRE66TYCAy3IcTcU8JnvUTwE9j4p7ItT7IRe0CVPFod8Otf2B
-         kX324nep7UUc3EFzOeC2kprVC1yUNColufC15btMuXeBRTK6PQbmCG21VY9RxTCiiVR7
-         CPuuzbrhP2DxYrCzWA5hRo2G6hXj6zR8dYY8CRB+36uKc/0+BIK90lUn09nkh7vbRvBq
-         W9dxDP0clZkqFLUWPOaAckgIZ/Od/0yKZNtIIv2vvswbXVZGSDQJZHjmtfjO/gcFVdsa
-         QSxWHdyd2z9jc8dAn3HUwRwSo2x7Q8+5vjuuyIhYeVWv114wRBfKV45mukYpaGcBf7rs
-         nQaw==
-X-Gm-Message-State: AC+VfDyisVYPOToApYpWVwSW31isZh/ieZ+rhND+kTYrqP976BEwgpS+
-	vuGudbk5W2OdFN/qoD0O2PqQ2hdWO/XI1ajMxrg=
-X-Google-Smtp-Source: ACHHUZ4ZuAyHNt8AjR5Ybz20kNI1RUE9nnn8083nuhAUvxYZity8b9QI9ukoow5UTsW9G2O5QpJ57b0eJcdpozHe878=
-X-Received: by 2002:a05:6808:2225:b0:394:45ad:3ea7 with SMTP id
- bd37-20020a056808222500b0039445ad3ea7mr3964408oib.5.1685205414109; Sat, 27
- May 2023 09:36:54 -0700 (PDT)
+        bh=mtjw68FMAkoYlOo/3i7caKUpIh8qdne+yIBjxYbamGA=;
+        b=BqAfQaUgdr38a0NC82lEbddW0hDD9auBHPDG7334nVs1jJrnHmeS+fg2fxUhRzgSG4
+         EBhJRovYdoqGdSG8rCx1FbyXqLlMTiMDhFX+4d7eSkOZbYTq+aHSDRF1dILzQKCW2151
+         bLFh612ht66p9HWmaHJEHpDq6LlqXpG5LHNslHA450ee/eIKLD1Km8KzGTMSsM1MTtNk
+         itPNySfJh6tgcG0agbGhbJd0tP0joEBQf7JdyJIDNUZk5eNq/yB3Xz4I62KMYZtLxFYI
+         oN2TziSQa5AubBInPJFUHJg6UID6XPbgDe3SjE74GzSX1CcI5zrRfz3iwvI+36s6ZVwv
+         hNEw==
+X-Gm-Message-State: AC+VfDxculy2+oB6dU3qW6xdbDpMPxP6xXxk7EDOjYM+5XmnRmMgem2T
+	PukuS0wE96J0xf6PmQI09OT8hWGiyfAgmErr5/FoTw==
+X-Google-Smtp-Source: ACHHUZ7VWkeahnAAcJfxpdoV499o2QXd4eNeV01CzXjUPovbKCncjVvqjw6+PPGBnmZcjQ61Di3/NemBhRmHnH4fCo8=
+X-Received: by 2002:a1f:bf58:0:b0:457:1a8:9eaa with SMTP id
+ p85-20020a1fbf58000000b0045701a89eaamr1158467vkf.4.1685213329051; Sat, 27 May
+ 2023 11:48:49 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230526202409.74712-1-brgl@bgdev.pl>
-In-Reply-To: <20230526202409.74712-1-brgl@bgdev.pl>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Sat, 27 May 2023 09:36:28 -0700
-Message-ID: <CAMKF1sotJ7SsTd36bzEQKK2jpOtKccGEyHcfpgwFXTMQSznmBw@mail.gmail.com>
+References: <20230526202409.74712-1-brgl@bgdev.pl> <CAMKF1sotJ7SsTd36bzEQKK2jpOtKccGEyHcfpgwFXTMQSznmBw@mail.gmail.com>
+In-Reply-To: <CAMKF1sotJ7SsTd36bzEQKK2jpOtKccGEyHcfpgwFXTMQSznmBw@mail.gmail.com>
+From: Bartosz Golaszewski <brgl@bgdev.pl>
+Date: Sat, 27 May 2023 20:48:38 +0200
+Message-ID: <CAMRc=MfE=tZ+4rqQ-tRFVmLDXkPWSptgLV=56ZWX7VnMSzhh5w@mail.gmail.com>
 Subject: Re: [meta-oe][PATCH] snagboot: new recipe
-To: Bartosz Golaszewski <brgl@bgdev.pl>
+To: Khem Raj <raj.khem@gmail.com>
 Cc: openembedded-devel@lists.openembedded.org, 
 	Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
 Content-Type: text/plain; charset="UTF-8"
@@ -58,59 +58,23 @@ Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 27 May 2023 16:37:01 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102880
+ <openembedded-devel@lists.openembedded.org>; Sat, 27 May 2023 18:48:52 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102881
 
-Seeing this error
+On Sat, May 27, 2023 at 6:36=E2=80=AFPM Khem Raj <raj.khem@gmail.com> wrote=
+:
+>
+> Seeing this error
+>
+> Missing or unbuildable dependency chain was: ['meta-world-pkgdata',
+> 'snagboot', 'python3-pyusb']
+>
+> Perhaps this recipe should be in meta-python or under
+> meta-oe/dynamic-layers/meta-python
+>
 
-Missing or unbuildable dependency chain was: ['meta-world-pkgdata',
-'snagboot', 'python3-pyusb']
+It's a python package and fetched from pypi so I'll move it over to meta-py=
+thon.
 
-Perhaps this recipe should be in meta-python or under
-meta-oe/dynamic-layers/meta-python
-
-On Fri, May 26, 2023 at 1:24=E2=80=AFPM Bartosz Golaszewski <brgl@bgdev.pl>=
- wrote:
->
-> From: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
->
-> Add a recipe that builds snagrecover and snagflash. These tools are
-> useful for yocto-based distros used to control DUTs in board farms.
->
-> Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
-> ---
->  .../recipes-support/snagboot/snagboot_1.0.bb    | 17 +++++++++++++++++
->  1 file changed, 17 insertions(+)
->  create mode 100644 meta-oe/recipes-support/snagboot/snagboot_1.0.bb
->
-> diff --git a/meta-oe/recipes-support/snagboot/snagboot_1.0.bb b/meta-oe/r=
-ecipes-support/snagboot/snagboot_1.0.bb
-> new file mode 100644
-> index 000000000..1500353ae
-> --- /dev/null
-> +++ b/meta-oe/recipes-support/snagboot/snagboot_1.0.bb
-> @@ -0,0 +1,17 @@
-> +SUMMARY =3D "Snagboot intends to be an open-source replacement vendor-sp=
-ecific tools used to recover and/or reflash embedded platforms."
-> +
-> +LICENSE =3D "GPL-2.0-only"
-> +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Db234ee4d69f5fce4486a80fdaf4a4=
-263"
-> +
-> +SRC_URI[sha256sum] =3D "c2d21cadddecfd97dd62a8b66b6f88bd56272627b9b71272=
-e9dda6f868ee8715"
-> +
-> +inherit pypi python_setuptools_build_meta
-> +
-> +RDEPENDS:${PN} +=3D " \
-> +    bash \
-> +    python3-fcntl \
-> +    python3-pyusb \
-> +    python3-pyyaml \
-> +    python3-setuptools \
-> +    python3-six \
-> +"
-> --
-> 2.39.2
->
+Bart
 
