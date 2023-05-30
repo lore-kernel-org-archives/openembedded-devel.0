@@ -1,121 +1,110 @@
-Return-Path: <Martin.Jansa@gmail.com>
+Return-Path: <alex.kiernan@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 623FCC77B73
-	for <webhook@archiver.kernel.org>; Tue, 30 May 2023 14:16:22 +0000 (UTC)
-Received: from mail-wm1-f54.google.com (mail-wm1-f54.google.com [209.85.128.54])
- by mx.groups.io with SMTP id smtpd.web10.11361.1685456181799650831
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B7FDCC77B73
+	for <webhook@archiver.kernel.org>; Tue, 30 May 2023 14:36:27 +0000 (UTC)
+Received: from mail-wm1-f50.google.com (mail-wm1-f50.google.com [209.85.128.50])
+ by mx.groups.io with SMTP id smtpd.web10.709.1685457380490010294
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 30 May 2023 07:16:22 -0700
+ Tue, 30 May 2023 07:36:20 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=AKalEq6T;
- spf=pass (domain: gmail.com, ip: 209.85.128.54, mailfrom: martin.jansa@gmail.com)
-Received: by mail-wm1-f54.google.com with SMTP id 5b1f17b1804b1-3f6ffc2b314so16793685e9.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 30 May 2023 07:16:21 -0700 (PDT)
+ dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=al/PCNK5;
+ spf=pass (domain: gmail.com, ip: 209.85.128.50, mailfrom: alex.kiernan@gmail.com)
+Received: by mail-wm1-f50.google.com with SMTP id 5b1f17b1804b1-3f611ccd06eso31686105e9.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 30 May 2023 07:36:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1685456180; x=1688048180;
+        d=gmail.com; s=20221208; t=1685457379; x=1688049379;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=51U/Oi5A7sMIVa84iMCAyYaSqs3iBROumP9jjgvmmEE=;
-        b=AKalEq6TXcOg3/SWP1rIZ+9nhJG+IJa9+Zpb/aSDkW41OsxcxWxTMeBYoJ3bpvbGBw
-         zvOuiLjfBM3i3sWY/HLtZ2Ya9lSPDrHgj391lo4kFMVibnUmIvqLDZE9ILYrtAXcfHcZ
-         rz4CGi6SA1+l1O4PF8FthacsUyqZxOOZG+Sgmyqtn7lYqd8tu4PdSgF28M3QRNCLtW1U
-         yP8J5QlVRUi8GrrxgdkQ+GzloSUb/wVihBZWwPpFo0WW+oY6SehlEn9+6+ODQDVgWT1j
-         Ugk7/yjfpdYtpA6toA87eJswsQ8+M9C4khYgHiNzkgcjib9o4DAL6XJ+fsXOiUdZpnQJ
-         0HWQ==
+        bh=divHk8OEAEcDuAKyJ1SQz58tTzUQYmJqFRwwGhUir3o=;
+        b=al/PCNK5MIXv1WZpjcBum54Uc5YVCk886Uoh1L0luKR2S4rQ9r0gtEuUoqCauHICVD
+         ivE8Pg/btO9urlOpIWZHpaMvaMatlYqV7s+yBRumrX5TPXIcGo2PSY/V2VNH7ERZ0x63
+         fa5FMuB00IQrrqh6SQE5QGm8CPQIJmnGZmNlrPGbIt0nrxQEbMlk3DVGCbxC+6WHnJsm
+         e405TMg5YKrOOs4EMea9vLAfVs+Sz2ppdYBnG29l+WgXsP/VXa+z9J7Fu65m5ojr36Bt
+         K1AGdbfshvLWIfNO/gt66y0vhbuLl9cwxdE5j3oBzLVhD/dnBCYXVG7krGkqpC5QadiH
+         GtHw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1685456180; x=1688048180;
+        d=1e100.net; s=20221208; t=1685457379; x=1688049379;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=51U/Oi5A7sMIVa84iMCAyYaSqs3iBROumP9jjgvmmEE=;
-        b=Ge64NDoBeJyuqdHaj3Fl5e4y9HC60B1KQ8rDv8407Qb9d5gw5p2fvqptmeqX2hRsDV
-         gvV8PT3Hw1LZg8V3n04Kfxr8LLbmRyIJcbaUz8kh6AfglJpHH+MVmllW58w1adak/IGa
-         Fs4iyyXgJwXuTBxrsSrsr5q+iJe9ft3/4dZdG5fqC3frvAEsqi7iXxkcI5O6SIxSa8r1
-         yte8cvgSgtU4k08RHMDMzxUDMrah+y7zRTplW1UBKM7w0SbgDNf5X0GwKcQPuDwGLPYs
-         CAmoK0JY2yjaB1PrlZ/Zb78V5UMdnX9d+5KBhBWBIsSKGHFNZcnE1ibk/rrr365wsaDx
-         yoGg==
-X-Gm-Message-State: AC+VfDxl5DGAZ7unZ7/+CmVrKlQ15D8pbtIdXt43MYuoh8DnMb3QZ1kN
-	MogoyCu7GzCG1pEQQOs+iOyvQBOTkzI=
-X-Google-Smtp-Source: ACHHUZ5qksR+k7sBds2My8OBr9uS2oqKzJT5UD4s07mpSgOLkLxGLgUsYRsIDTqfaXXIjUN+i5VSKw==
-X-Received: by 2002:a05:600c:2208:b0:3f6:d90:3db with SMTP id z8-20020a05600c220800b003f60d9003dbmr1855343wml.3.1685456180016;
-        Tue, 30 May 2023 07:16:20 -0700 (PDT)
-Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
-        by smtp.gmail.com with ESMTPSA id i2-20020a05600c290200b003eddc6aa5fasm21152583wmd.39.2023.05.30.07.16.19
+        bh=divHk8OEAEcDuAKyJ1SQz58tTzUQYmJqFRwwGhUir3o=;
+        b=QUIkNrVAVZ/NQE8AtFW3M76a8lMXuzBYa9iqRnvuc0S5m/jlv9CrrrKltNjMuG4sOx
+         XEU9B3Paoif/2YAQfVNR0Wy08/vGKdwibxxGhGMXTbqQufp9U8EYRGeOQpBO7S9M5N0y
+         KTu66Ep+ithgs8AjSzIYnIPsiFhSyWklCUGTo1iCCS2n5UMqzFsFUZ/qEPCcMSfcoBEq
+         IMZi3L5CABxQbhXAfJUQawnBv3rxhMa2uCjfoOvXCkl9p23FriOUSFbGuPNu9qLW021d
+         0/IOCDo3/0PoqgJpxRYQQ6asNlTT+xaOCpT/k1RTlJ2F0WgCvHRLTVC0K9rNFktNVpoD
+         LzAQ==
+X-Gm-Message-State: AC+VfDwK4HlOSXaD085DGy++bGDu/26G0MznOzHL3xfrLLzdD9jiFOAf
+	zqG2GKr55k+sN7b9kcg5PwO+CGK/Mhc=
+X-Google-Smtp-Source: ACHHUZ67nsZGAkYdtp6057mCHkB4fWJNj6qPk3pl5ZCUqZrSnAcu5AAu0SRiAeHOPo8uOzBKSaebdQ==
+X-Received: by 2002:a05:600c:2196:b0:3f6:13f5:d1ea with SMTP id e22-20020a05600c219600b003f613f5d1eamr1600876wme.11.1685457378555;
+        Tue, 30 May 2023 07:36:18 -0700 (PDT)
+Received: from localhost.localdomain (cust18-dsl93-89-130.idnet.net. [93.89.130.18])
+        by smtp.gmail.com with ESMTPSA id x21-20020a05600c21d500b003f6041f5a6csm17667090wmj.12.2023.05.30.07.36.17
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 30 May 2023 07:16:19 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+        Tue, 30 May 2023 07:36:18 -0700 (PDT)
+From: Alex Kiernan <alex.kiernan@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Martin Jansa <Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH] switchtec-user: fix installed-vs-shipped with multilib
-Date: Tue, 30 May 2023 16:16:09 +0200
-Message-Id: <20230530141609.14693-1-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.40.1
+Cc: Alex Kiernan <alex.kiernan@gmail.com>
+Subject: [meta-oe][PATCH] ostree: Add soup3 PACKAGECONFIG, rename soup to soup2
+Date: Tue, 30 May 2023 15:36:11 +0100
+Message-Id: <20230530143612.740-1-alex.kiernan@gmail.com>
+X-Mailer: git-send-email 2.39.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 30 May 2023 14:16:22 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102897
+ <openembedded-devel@lists.openembedded.org>; Tue, 30 May 2023 14:36:27 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102898
 
-* fixes:
-  ERROR: QA Issue: switchtec-user: Files/directories were installed but not shipped in any package:
-    /usr/lib/libswitchtec.a
-    /usr/lib/libswitchtec.so
-    /usr/lib/libswitchtec.so.4.0
-  Please set FILES such that these items are packaged. Alternatively if they are unneeded, avoid installing them or delete them within do_install.
-  switchtec-user: 3 installed and not shipped files. [installed-vs-shipped]
+libsoup3 is now supported by ostree, add `soup2` to select the
+deprecated libsoup2 library and `soup3` for libsoup3.
 
-  when libdir is e.g. /usr/lib64
+Drop `--disable-glibtest` from PACKAGECONFIG as it does nothing (nor
+does it appear to have ever done anything).
 
-  The Makefile.in defines default LIBDIR with DESTDIR:
-  LIBDIR ?= $(DESTDIR)$(PREFIX)/lib
-  so include ${D} here as well
-
-* use 4 spaces for indentation and ' instead of " so that it doesn't
-  need backslashes
-
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
 ---
- .../switchtec-user/switchtec-user_4.1.bb              | 11 ++++++-----
- 1 file changed, 6 insertions(+), 5 deletions(-)
 
-diff --git a/meta-oe/recipes-support/switchtec-user/switchtec-user_4.1.bb b/meta-oe/recipes-support/switchtec-user/switchtec-user_4.1.bb
-index 6d5c9f1a67..443e5bc493 100644
---- a/meta-oe/recipes-support/switchtec-user/switchtec-user_4.1.bb
-+++ b/meta-oe/recipes-support/switchtec-user/switchtec-user_4.1.bb
-@@ -3,12 +3,13 @@ HOMEPAGE = "https://github.com/Microsemi/switchtec-user"
- SECTION = "console/utils"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=3d6b07c89629cff2990d2e8e1f4c2382"
-+
- DEPENDS = "ncurses openssl"
--SRCREV = "762ba441d2c02685f98e5f56e984db033bab279a"
- 
-+SRCREV = "762ba441d2c02685f98e5f56e984db033bab279a"
- SRC_URI = " \
--        git://github.com/Microsemi/switchtec-user.git;protocol=https;branch=master \
--        file://0001-cli-Fix-format-security-warning.patch \
-+    git://github.com/Microsemi/switchtec-user.git;protocol=https;branch=master \
-+    file://0001-cli-Fix-format-security-warning.patch \
- "
- SRC_URI[sha256sum] = "f98c1fe23e1d7a11fb23e8bcf9b563929fc805ea669191a7fd525ad16519f655"
- 
-@@ -16,8 +17,8 @@ S = "${WORKDIR}/git"
- 
- inherit autotools-brokensep pkgconfig
- 
--EXTRA_OEMAKE = "DESTDIR=\"${D}\" PREFIX=\"${prefix}\" LDCONFIG=\"true\""
-+EXTRA_OEMAKE = "DESTDIR='${D}' PREFIX='${prefix}' LDCONFIG='true' LIBDIR='${D}${libdir}'"
- 
- do_install () {
--        oe_runmake install
-+     oe_runmake install
- }
+ meta-oe/recipes-extended/ostree/ostree_2023.3.bb | 7 ++++---
+ 1 file changed, 4 insertions(+), 3 deletions(-)
+
+diff --git a/meta-oe/recipes-extended/ostree/ostree_2023.3.bb b/meta-oe/recipes-extended/ostree/ostree_2023.3.bb
+index 3129dc114029..dc771ce28a20 100644
+--- a/meta-oe/recipes-extended/ostree/ostree_2023.3.bb
++++ b/meta-oe/recipes-extended/ostree/ostree_2023.3.bb
+@@ -42,7 +42,7 @@ BUILD_OPTIMIZATION:append = " -O2"
+ # Package configuration - match ostree defaults, but without rofiles-fuse
+ # otherwise we introduce a dependendency on meta-filesystems and swap
+ # soup for curl to avoid bringing in deprecated libsoup2 (though
+-# to run ptest requires that you have soup).
++# to run ptest requires that you have soup2 or soup3).
+ PACKAGECONFIG ??= " \
+     ${@bb.utils.filter('DISTRO_FEATURES', 'selinux smack', d)} \
+     ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd libmount', '', d)} \
+@@ -85,7 +85,8 @@ PACKAGECONFIG[openssl] = "--with-crypto=openssl, , openssl, , , glib gnutls"
+ PACKAGECONFIG[rofiles-fuse] = "--enable-rofiles-fuse, --disable-rofiles-fuse, fuse3"
+ PACKAGECONFIG[selinux] = "--with-selinux, --without-selinux, libselinux, bubblewrap"
+ PACKAGECONFIG[smack] = "--with-smack, --without-smack, smack"
+-PACKAGECONFIG[soup] = "--with-soup, --without-soup --disable-glibtest, libsoup-2.4"
++PACKAGECONFIG[soup2] = "--with-soup, --without-soup, libsoup-2.4, , , soup3"
++PACKAGECONFIG[soup3] = "--with-soup3, --without-soup3, libsoup, , , soup2"
+ PACKAGECONFIG[static] = ""
+ PACKAGECONFIG[systemd] = "--with-libsystemd --with-systemdsystemunitdir=${systemd_system_unitdir}, --without-libsystemd, systemd"
+ PACKAGECONFIG[trivial-httpd-cmdline] = "--enable-trivial-httpd-cmdline, --disable-trivial-httpd-cmdline"
+@@ -188,7 +189,7 @@ RDEPENDS:${PN}:class-target = " \
+ #
+ # Something like this in your local.conf:
+ #
+-# PACKAGECONFIG:append:pn-ostree = " static soup"
++# PACKAGECONFIG:append:pn-ostree = " static soup3"
+ # KERNEL_EXTRA_FEATURES:append = " features/overlayfs/overlayfs.scc"
+ # TARGET_CFLAGS:append:pn-busybox = " -static"
+ #
 -- 
-2.40.1
+2.39.0
 
 
