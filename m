@@ -2,68 +2,68 @@ Return-Path: <brgl@bgdev.pl>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2F549C7EE33
-	for <webhook@archiver.kernel.org>; Wed, 31 May 2023 08:26:52 +0000 (UTC)
-Received: from mail-wr1-f46.google.com (mail-wr1-f46.google.com [209.85.221.46])
- by mx.groups.io with SMTP id smtpd.web11.9089.1685521603198310791
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 51240C7EE2F
+	for <webhook@archiver.kernel.org>; Wed, 31 May 2023 08:31:02 +0000 (UTC)
+Received: from mail-wm1-f49.google.com (mail-wm1-f49.google.com [209.85.128.49])
+ by mx.groups.io with SMTP id smtpd.web11.9135.1685521858521079085
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 31 May 2023 01:26:43 -0700
+ Wed, 31 May 2023 01:31:01 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="signature has expired" header.i=@bgdev-pl.20221208.gappssmtp.com header.s=20221208 header.b=oiwHhVux;
- spf=none, err=SPF record not found (domain: bgdev.pl, ip: 209.85.221.46, mailfrom: brgl@bgdev.pl)
-Received: by mail-wr1-f46.google.com with SMTP id ffacd0b85a97d-30ae5f2ac94so3876418f8f.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 31 May 2023 01:26:42 -0700 (PDT)
+ dkim=pass header.i=@bgdev-pl.20221208.gappssmtp.com header.s=20221208 header.b=sPBlC904;
+ spf=none, err=SPF record not found (domain: bgdev.pl, ip: 209.85.128.49, mailfrom: brgl@bgdev.pl)
+Received: by mail-wm1-f49.google.com with SMTP id 5b1f17b1804b1-3f6dbe3c230so56193825e9.3
+        for <openembedded-devel@lists.openembedded.org>; Wed, 31 May 2023 01:31:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=bgdev-pl.20221208.gappssmtp.com; s=20221208; t=1685521601; x=1688113601;
+        d=bgdev-pl.20221208.gappssmtp.com; s=20221208; t=1685521861; x=1688113861;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=TMrmt+vYVy40+oSS/6Gf2Anac6AyoKyDaufZjpXTTyU=;
-        b=oiwHhVuxHAmJc3i+edJe2d+GGQHHq0yhI3qkt3vfUvy3wwsyWbv2X6RwEZ5TeolDrV
-         Z8I7HM+x2blqlsfQT7WBzKL+YZFKlD3HUiHAvrXrwDP/hTTt08z3pvGdzfDwzDSGzTEt
-         pcfoasAIq7Db195uaV41jiLYJVgGHLEZRh+iDtYhhdw30GxvWnGhQeQiUPLD5EmJxFWs
-         Gd2gM5oa5csN1yO7CJOH2+3fk6mt4lxfD0Mb4YaIyANJDxYr9zkdY14PXXQc1gWOyBPo
-         NWAufvtXe04Pb9aAux0eri+PcMc7SWvINpswxUCX+4iyajsRZtpQbo6JQKQiIiTvo1dO
-         glWg==
+        bh=1nCV5KD6XW6yTbI9PAAmsGBuiDFA7txQU9zx6dOCYnw=;
+        b=sPBlC904XanGEpdQ3sDO+NC1O0XiCHFt2RHRBPUsE6XbFcd5c+gmpgNOcQTswWfD/g
+         vEMANiGvstcZMWmIO3rtIIDSc1tVhdWzW9lIk75QLfFoT2sg/WVtt8kGjQHSxe8xHOaF
+         CyTnJJbSK0hQVD9dFMmZI5GOvjjnaEpuIFXy5rDRcVAl7ylNExsk8q93j9uqi8J5vajH
+         8JHYaEKQQCHDbaobOVdCuUBu183Qr96Ddc6Q0sdKYctucy8gGy7SM/LzUo7+5bfWBtgj
+         2YL9DJYiVLUoiwEZm7hI9PnjO03InkesPooRPBOduhxd005Ou+Av2OFbLHmd1xJrnmYO
+         rrTQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1685521601; x=1688113601;
+        d=1e100.net; s=20221208; t=1685521861; x=1688113861;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=TMrmt+vYVy40+oSS/6Gf2Anac6AyoKyDaufZjpXTTyU=;
-        b=aGEEkhlFAorWN+k3WiYRGU8EC9ujUDviWMFvgW990h7hq8GlqeFjT+40cv3yIRLA3B
-         rWbU91BM4KIXt15gJXRhiG7VafJhKYmUok7+vv/mHDGKb5NiEQ7k2MGZgi2tmIyYdknQ
-         vt7Ovrn4OCxs2SMVwBzo4tDLrjBlrjZxeDV9oYpA6vOhR0q+a3IKzIJFDNW5zM10uQOw
-         lfQkIgyzi+/fdR7ibVYRHRspHno+vvSpxYvqOqPcAmXttvikDYku2lg8r4AdaCcg2r6F
-         pYujs2QwMpY8zj2uabTyhQG9wyhlnGfuwgOE0+hqqcO+b9GGzBAk/RAiLz9jd0XUtPfg
-         w5og==
-X-Gm-Message-State: AC+VfDwb7UXPm8uG2gN7S2jUgNhcOYDRKhK55PBxZCGz7Tu0c0famfXQ
-	9HzmmOJbKk3RXtHvRzBrQs9UoQ==
-X-Google-Smtp-Source: ACHHUZ4elPBxMzjKePOoWrdQR/7Jr8wkqJY4N5fCU5C2XUTAs8XNv1tFpKnG88YKMDbn8LuJrdX4bg==
-X-Received: by 2002:a5d:44ce:0:b0:306:3f97:4847 with SMTP id z14-20020a5d44ce000000b003063f974847mr3385939wrr.65.1685521601771;
-        Wed, 31 May 2023 01:26:41 -0700 (PDT)
+        bh=1nCV5KD6XW6yTbI9PAAmsGBuiDFA7txQU9zx6dOCYnw=;
+        b=fFQ4X1FKlH+0HUXkDWlgwJN3TNxBGrhMNHREXIzZkdvsrvuda/YRpD0431jh4od7Yq
+         EPlFWRCMWmrHIkuTNFjT16CIDemkDpeAvTZaI7YKU5S+3zQrqRJaO35ErW9iNgy4T5Cn
+         y/igAS2u5swwamXcfRmMdK/aYFoNSVUCjxwZ2bJ3NCCRpYkpaNgKXL169BdkcfCI2Tci
+         vLw9X+TZ2nSNfPC/UrSQi13/484a4bU1D4KGZDhfvMs6tdmKuQUQJIQvOIR52Rt+Bk4I
+         zGRv8fBuWVRwRH78ecZvCQXe/cTZ7GTP5LBW3C+HNFKlnHCQx9lIlNveAvnCcBZ3gUkt
+         GT5w==
+X-Gm-Message-State: AC+VfDysQfH0UcoPALyWmneAaPEWRhDGRf9gBqtHCjwiOfMm3FrcIqsJ
+	WF19qqmJXBMP6au80VmAW37cxw==
+X-Google-Smtp-Source: ACHHUZ74GkBKSFw1IS/2mbxWpvXKIN+zvE8ZyO/vgNIjoNw/CkLd4Jv25kJiUmx7KtyxmA7qSkN3yw==
+X-Received: by 2002:a7b:c44a:0:b0:3f4:2c71:b9ad with SMTP id l10-20020a7bc44a000000b003f42c71b9admr4406613wmi.30.1685521860864;
+        Wed, 31 May 2023 01:31:00 -0700 (PDT)
 Received: from brgl-uxlite.home ([2a01:cb1d:334:ac00:fc69:2162:e0f2:38b5])
-        by smtp.gmail.com with ESMTPSA id o11-20020a5d670b000000b0030ada01ca78sm5855346wru.10.2023.05.31.01.26.40
+        by smtp.gmail.com with ESMTPSA id t16-20020a1c7710000000b003f604793989sm23338288wmi.18.2023.05.31.01.31.00
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 31 May 2023 01:26:41 -0700 (PDT)
+        Wed, 31 May 2023 01:31:00 -0700 (PDT)
 From: Bartosz Golaszewski <brgl@bgdev.pl>
 To: Khem Raj <raj.khem@gmail.com>,
 	Bruce Ashfield <bruce.ashfield@gmail.com>,
 	openembedded-devel@lists.openembedded.org
 Cc: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
-Subject: [meta-python][PATCH 086/149] python3-kconfiglib: add missing run-time dependencies
-Date: Wed, 31 May 2023 10:23:34 +0200
-Message-Id: <20230531082437.10646-87-brgl@bgdev.pl>
+Subject: [meta-python][PATCH 097/149] python3-nmap: add missing run-time dependencies
+Date: Wed, 31 May 2023 10:29:12 +0200
+Message-Id: <20230531083004.11083-6-brgl@bgdev.pl>
 X-Mailer: git-send-email 2.39.2
-In-Reply-To: <20230531082437.10646-1-brgl@bgdev.pl>
-References: <20230531082437.10646-1-brgl@bgdev.pl>
+In-Reply-To: <20230531083004.11083-1-brgl@bgdev.pl>
+References: <20230531083004.11083-1-brgl@bgdev.pl>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 31 May 2023 08:26:52 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103013
+ <openembedded-devel@lists.openembedded.org>; Wed, 31 May 2023 08:31:02 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103023
 
 From: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
 
@@ -71,22 +71,22 @@ Add missing RDEPENDS for this package.
 
 Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
 ---
- .../recipes-devtools/python/python3-kconfiglib_14.1.0.bb    | 6 ++++++
- 1 file changed, 6 insertions(+)
+ meta-oe/recipes-security/nmap/nmap_7.80.bb | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
 
-diff --git a/meta-python/recipes-devtools/python/python3-kconfiglib_14.1.0.bb b/meta-python/recipes-devtools/python/python3-kconfiglib_14.1.0.bb
-index ec09cfc58..b9c1c4e38 100644
---- a/meta-python/recipes-devtools/python/python3-kconfiglib_14.1.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-kconfiglib_14.1.0.bb
-@@ -8,3 +8,9 @@ SRC_URI[sha256sum] = "bed2cc2216f538eca4255a83a4588d8823563cdd50114f86cf1a2674e6
- inherit pypi setuptools3
+diff --git a/meta-oe/recipes-security/nmap/nmap_7.80.bb b/meta-oe/recipes-security/nmap/nmap_7.80.bb
+index 030f03348..52c62cde3 100644
+--- a/meta-oe/recipes-security/nmap/nmap_7.80.bb
++++ b/meta-oe/recipes-security/nmap/nmap_7.80.bb
+@@ -59,4 +59,8 @@ do_install:append() {
  
- BBCLASSEXTEND = "native nativesdk"
-+
+ FILES:${PN} += "${PYTHON_SITEPACKAGES_DIR} ${datadir}/ncat"
+ 
+-RDEPENDS:${PN} += "python3-core"
 +RDEPENDS:${PN} += " \
-+    python3-curses \
-+    python3-shell \
-+    python3-tkinter \
++    python3-difflib \
++    python3-asyncio \
++    python3-xml \
 +"
 -- 
 2.39.2
