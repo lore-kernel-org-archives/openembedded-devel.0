@@ -1,98 +1,107 @@
-Return-Path: <narpat.mali@windriver.com>
+Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CDFA8C7EE24
-	for <webhook@archiver.kernel.org>; Wed, 31 May 2023 10:03:22 +0000 (UTC)
-Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
- by mx.groups.io with SMTP id smtpd.web10.10419.1685527401046094834
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1412DC77B73
+	for <webhook@archiver.kernel.org>; Wed, 31 May 2023 11:13:13 +0000 (UTC)
+Received: from mail-yw1-f172.google.com (mail-yw1-f172.google.com [209.85.128.172])
+ by mx.groups.io with SMTP id smtpd.web11.11434.1685531592240771762
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 31 May 2023 03:03:21 -0700
+ Wed, 31 May 2023 04:13:12 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=pps06212021 header.b=GpzbAYLj;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=5515a05663=narpat.mali@windriver.com)
-Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 34V4eLi3012919
-	for <openembedded-devel@lists.openembedded.org>; Wed, 31 May 2023 10:03:20 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com; h=from : to : cc :
- subject : date : message-id : mime-version : content-transfer-encoding :
- content-type; s=PPS06212021;
- bh=m91E+1CuFtjDDShhNMC00SLxbxpLX2V3IdDcefMWN0k=;
- b=GpzbAYLjsNGbTL3+BXCDQ60UziKkAoD9MexGe9J9Y9yN1pWPUMynq9XCDy2sZE0Bpdaq
- leBA6moaZkQ4afWBBkqNkS0x9EZ+V+MYf9c8lIFhzeS9Up/t9KXcyrj0gqg41kQiVdIr
- sbS937MrsVYOKpxsKKE+zjXG7atspGFQ/NoCRLenRHFb/EjEPwepyPcIcTDUF/NMo+zF
- duAmGZRcXM6GgLdxZKoGymzU5/ucwDhufGoYRMD/Lr5UEp1dizKPuxAKGHN3u5ElvibR
- bvBjNW9jxS+JZlDtic5tRChr2OVdZHo+K4O0yiVJvuSDLD5kbhFW2kidIHm/3j6qbgxs EA== 
-Received: from ala-exchng01.corp.ad.wrs.com (unknown-82-252.windriver.com [147.11.82.252])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3qu8u8kjst-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Wed, 31 May 2023 10:03:20 +0000
-Received: from blr-linux-engg1.wrs.com (147.11.136.210) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.23; Wed, 31 May 2023 03:03:17 -0700
-From: nmali <narpat.mali@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-CC: <hari.gpillai@windriver.com>
-Subject: [meta-python][kirkstone][PATCH 1/1] python3-django: upgrade 4.0.2 -> 4.2.1
-Date: Wed, 31 May 2023 10:02:57 +0000
-Message-ID: <20230531100257.3467702-1-narpat.mali@windriver.com>
-X-Mailer: git-send-email 2.40.0
+ dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=e4MyhdjJ;
+ spf=pass (domain: gmail.com, ip: 209.85.128.172, mailfrom: akuster808@gmail.com)
+Received: by mail-yw1-f172.google.com with SMTP id 00721157ae682-561b7729a12so12290257b3.1
+        for <openembedded-devel@lists.openembedded.org>; Wed, 31 May 2023 04:13:12 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20221208; t=1685531591; x=1688123591;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=KjzkXBp0cdKErA72NC9e20oHsPJi7VkKGwA2E6OGKEw=;
+        b=e4MyhdjJ6QPZHqXDGw3Tay892x/1YHNfEKBUrGcQN608Abk9/RsC8s4z1ba40AS1b/
+         qVF+76HXrSzwD6yqiRYOLFR3P8TDeXfOQsq4mSAKHL+NsZYTrp53u+PO4ZoUZUmBR4nZ
+         XotHKlGOFnaSmwYqvxLj1P6DqVU/5lWVM9P0vN0H/Q7jiXA+UuDE1J1ETcr1MpKSnobt
+         KgBO4VLAVvRb8LeMlPli9PEiP7vpMsBXYukqPzGm61j8k+NuzQk5XQvjvYZCcRHt43JE
+         uBv8tKduQpG860t3yDY5km+S1s9PpU/8pMT2Qx7nZ2zyEhfT4pt9p8z4y8FhmQP0Mj+S
+         pnWA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20221208; t=1685531591; x=1688123591;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=KjzkXBp0cdKErA72NC9e20oHsPJi7VkKGwA2E6OGKEw=;
+        b=b96yBZmW/LUhaIF7XNMCTar5enWoDrYKx2gQ5MTHBGP9JB2ApdwcQB6RmtLHMyVSBh
+         1FNypwWOYa8VwJWacQADs9UE3EsJAdQwZP0NyjQS+tb+YIGgbSKPS8wzBcfLpezbOpcY
+         YiueLHU7jaqptE/u+ycO1/45OAr28GjOoe2kTXMiONQbBo2LcSE9vpIA5qnniXjUYYQR
+         /Ir41m7AY92MIqs1vqCRgSlVXfKLcQUyxggQp4psaVpieCvTGYjcUNTvLXIqkpAjwOwM
+         tCqWgLE4JJDbSMP524ELmh0ygaP9wG5f+tOO8jKW3W6ygtSWZEQvbfmk+QqPILp60Tny
+         p9ng==
+X-Gm-Message-State: AC+VfDxRUEE5m1obHMMLYr3ye4JxRPEuMDpnpRoQgyz2xR668CK6p0qR
+	SQms0WYIPNlf8gYcaJWq2CTTvWI8EdY=
+X-Google-Smtp-Source: ACHHUZ7eCab/eaEvxg4/xHD/RInTONLZmVtNt2248YnYZB/ye1L5NGjzuxRw8VUU1ws4dfjMIo9BEg==
+X-Received: by 2002:a0d:eac4:0:b0:561:1cb6:f3d6 with SMTP id t187-20020a0deac4000000b005611cb6f3d6mr5591874ywe.0.1685531591133;
+        Wed, 31 May 2023 04:13:11 -0700 (PDT)
+Received: from keaua.attlocal.net ([2600:1700:9190:ba10:a3c5:f403:52db:88cf])
+        by smtp.gmail.com with ESMTPSA id t129-20020a814687000000b00545a08184fdsm5246897ywa.141.2023.05.31.04.13.10
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 31 May 2023 04:13:10 -0700 (PDT)
+From: Armin Kuster <akuster808@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][mickledore][PATCH 01/36] libencode-perl: Remove buildpaths from generated .exh files
+Date: Wed, 31 May 2023 07:12:34 -0400
+Message-Id: <20230531111309.2454603-1-akuster808@gmail.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [147.11.136.210]
-X-ClientProxiedBy: ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) To
- ala-exchng01.corp.ad.wrs.com (147.11.82.252)
-X-Proofpoint-ORIG-GUID: _SJEe8imADLifuNR0UqFmX3RBwNpnvSJ
-X-Proofpoint-GUID: _SJEe8imADLifuNR0UqFmX3RBwNpnvSJ
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.254,Aquarius:18.0.957,Hydra:6.0.573,FMLib:17.11.176.26
- definitions=2023-05-31_06,2023-05-30_01,2023-05-22_02
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 lowpriorityscore=0
- clxscore=1015 malwarescore=0 bulkscore=0 mlxlogscore=999 impostorscore=0
- suspectscore=0 adultscore=0 phishscore=0 spamscore=0 priorityscore=1501
- mlxscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2304280000 definitions=main-2305310087
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 31 May 2023 10:03:22 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103029
+ <openembedded-devel@lists.openembedded.org>; Wed, 31 May 2023 11:13:13 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103030
 
-From: Narpat Mali <narpat.mali@windriver.com>
+From: Khem Raj <raj.khem@gmail.com>
 
-Django 4.2* is designated as a long-term support release. It will receive
-security updates for at least three years after its release.
+there are generated .exh files which has the absolute perl interpreter
+path in comments, which is caught by build QA, therefore remove the
+absolute perl native path prefix
 
-The delta between 4.0.2 and 4.2.1 contain numerous CVEs and other
-bugfixes.
+Fixes warnings like
+WARNING: libencode-perl-3.19-r0 do_package_qa: QA Issue: File /usr/src/debug/libencode-perl/3.19-r0/def_t.exh in package libencode-perl-src contains reference to TMPDIR [buildpaths]
 
-Release Notes: https://docs.djangoproject.com/en/dev/releases/
-
-Signed-off-by: Narpat Mali <narpat.mali@windriver.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+(cherry picked from commit 8e110d9c5cf22520af4b69fe4f6b90709f2c7545)
+Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../python/{python3-django_4.0.2.bb => python3-django_4.2.1.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-django_4.0.2.bb => python3-django_4.2.1.bb} (77%)
+ meta-perl/recipes-perl/libencode/libencode-perl_3.19.bb | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
 
-diff --git a/meta-python/recipes-devtools/python/python3-django_4.0.2.bb b/meta-python/recipes-devtools/python/python3-django_4.2.1.bb
-similarity index 77%
-rename from meta-python/recipes-devtools/python/python3-django_4.0.2.bb
-rename to meta-python/recipes-devtools/python/python3-django_4.2.1.bb
-index 690b9809dc..4daca65eb5 100644
---- a/meta-python/recipes-devtools/python/python3-django_4.0.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-django_4.2.1.bb
-@@ -1,7 +1,7 @@
- require python-django.inc
- inherit setuptools3
+diff --git a/meta-perl/recipes-perl/libencode/libencode-perl_3.19.bb b/meta-perl/recipes-perl/libencode/libencode-perl_3.19.bb
+index 352517ca67..79934e2229 100644
+--- a/meta-perl/recipes-perl/libencode/libencode-perl_3.19.bb
++++ b/meta-perl/recipes-perl/libencode/libencode-perl_3.19.bb
+@@ -21,8 +21,8 @@ UPSTREAM_CHECK_REGEX = "Encode\-(?P<pver>(\d+\.\d+))(?!_\d+).tar"
  
--SRC_URI[sha256sum] = "110fb58fb12eca59e072ad59fc42d771cd642dd7a2f2416582aa9da7a8ef954a"
-+SRC_URI[sha256sum] = "7efa6b1f781a6119a10ac94b4794ded90db8accbe7802281cd26f8664ffed59c"
+ S = "${WORKDIR}/Encode-${PV}"
  
- RDEPENDS:${PN} += "\
-     ${PYTHON_PN}-sqlparse \
++#EXTRA_CPANFLAGS:append = "PERL=../recipe-sysroot-native/usr/bin/perl-native/perl"
+ inherit cpan ptest-perl
+-
+ do_install:prepend() {
+     # Requires "-T" (taint) option on command line
+     rm -rf ${B}/t/taint.t
+@@ -32,6 +32,10 @@ do_install:prepend() {
+     rm -rf ${B}/t/use-Encode-Alias.t
+ }
+ 
++do_install:append() {
++    sed -i -e "s|${STAGING_BINDIR_NATIVE}/perl-native||g" ${S}/*/*.exh ${S}/*.exh
++}
++
+ do_install_ptest() {
+     mkdir ${D}${PTEST_PATH}/bin
+     cp -r ${B}/bin/piconv ${D}${PTEST_PATH}/bin
 -- 
-2.40.0
+2.25.1
 
 
