@@ -2,58 +2,58 @@ Return-Path: <brgl@bgdev.pl>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DCB47C7EE32
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CD5CDC77B73
 	for <webhook@archiver.kernel.org>; Wed, 31 May 2023 08:26:21 +0000 (UTC)
-Received: from mail-wr1-f43.google.com (mail-wr1-f43.google.com [209.85.221.43])
- by mx.groups.io with SMTP id smtpd.web10.9110.1685521530121090666
+Received: from mail-wr1-f45.google.com (mail-wr1-f45.google.com [209.85.221.45])
+ by mx.groups.io with SMTP id smtpd.web11.9068.1685521558319128912
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 31 May 2023 01:26:16 -0700
+ Wed, 31 May 2023 01:26:18 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="signature has expired" header.i=@bgdev-pl.20221208.gappssmtp.com header.s=20221208 header.b=RR6YOF+S;
- spf=none, err=SPF record not found (domain: bgdev.pl, ip: 209.85.221.43, mailfrom: brgl@bgdev.pl)
-Received: by mail-wr1-f43.google.com with SMTP id ffacd0b85a97d-30af159b433so2510916f8f.3
-        for <openembedded-devel@lists.openembedded.org>; Wed, 31 May 2023 01:26:15 -0700 (PDT)
+ dkim=fail reason="signature has expired" header.i=@bgdev-pl.20221208.gappssmtp.com header.s=20221208 header.b=4VTsnsRL;
+ spf=none, err=SPF record not found (domain: bgdev.pl, ip: 209.85.221.45, mailfrom: brgl@bgdev.pl)
+Received: by mail-wr1-f45.google.com with SMTP id ffacd0b85a97d-30adc51b65cso4917449f8f.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 31 May 2023 01:26:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=bgdev-pl.20221208.gappssmtp.com; s=20221208; t=1685521575; x=1688113575;
+        d=bgdev-pl.20221208.gappssmtp.com; s=20221208; t=1685521577; x=1688113577;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=ui2Kc2W6GV3enkn0vNEdZwRYold1qmHYXYIrm9/qmCE=;
-        b=RR6YOF+S1aZGKxzIGBwi9yn19X73XThj5MpPe4hdcfEx1TVOiDXZSL5GAmduP2Oasm
-         q6J7AnDoI3BDYdjPohjXd1UzigctKI64pk5uyWbpP+pqBVDERIEoGIwxxlDfwRbN6ZjZ
-         sav4UXSXR+yvcCIjeTS8FWQIIlkwKs9DIYbjxfoAbnhVkwZdhCd6kxpk9YlpN051/j2v
-         xbg8+IwPgP7luJaAjGvsRtsgQDCCUdSQtkKNYuGNWTybJMg24HuljCDF0HpTJupP6ryO
-         9kNOOh5PZ/weuM42uRBAaNDzoSSiKccVXV8U2Yeh74Ssq6HNvQl/ENfxhgm5GYT0hchl
-         TX0Q==
+        bh=0gjkJus4Ab1I95Q+SXPJTVRY+RA6fMzONMJw3ioKx6M=;
+        b=4VTsnsRLAnnz/rsGUgVPylSktnTms/i8CqakGLgvGvu1CqRSDS77CFc+Ff2Kbkydd/
+         UVPLRTUhCFYZbEKjtU81HddqVCUVXXdBxpQby3kVrCpd0Uxxp/S99FGP+zZhM152Fy9n
+         +qi5/t9GsBBDOvwqHabb7+7R70vgQfeVtzoXw7zU7tbhrUBXvBaeQ/oMokBl/efGVFaV
+         4VpY3sg7xqyKRl6rVBouB6A0GV1sp+NivloB0M6SkFJy1/1cl9Vh7S7+1qIuS1Cmq/eV
+         ImGsmsu47B7UCEdlb3jHDfWZcAv3BbuEj0nLLchbMnV+Z0XF79LYzMil2T/Cahn6EkfY
+         Jy6A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1685521575; x=1688113575;
+        d=1e100.net; s=20221208; t=1685521577; x=1688113577;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=ui2Kc2W6GV3enkn0vNEdZwRYold1qmHYXYIrm9/qmCE=;
-        b=AOaRnQYvP1qg+QA+mSU6FTY+1KGxNO31Gv+yWS/KEsg2i7akit+79YmjMjuHxaGq88
-         LVy77mkDhAF4GjQXRGjfwSdCvTLcZCJI7J/HYvuT0QW5UZHtnx8Rb2PiCD48D47u3dR1
-         T7Xu6hNLPZYg7fc5vFnGg1tn3IC4s2DRWNZGhUXb8uhHpMun8B4WgZz0aEcG23UBmnsQ
-         K7KsEj8O1IX/GAvszOqHdMzhMOPBIGSbziMgg/BY7uunB/GBcQzIBXPkQyCdCZXZ0hPB
-         cQ7T88wK6WZZu/7Cf9USkSQE1/WdmuhooESfZO+6UrWlI2xeelDL3PHRwxpClMa+MHgi
-         KqkQ==
-X-Gm-Message-State: AC+VfDzA0X5pICoJTZ9tidsKJAVlZUDB2RldYjWHsi0a9NRGZHkrelh2
-	dsRP9XeLT36Gt/xOi8iWwEtRi0zy2PriC0tpah8=
-X-Google-Smtp-Source: ACHHUZ5pdYuHmdEpfoQYin99AeytmvCu5clud49S0E8RKyHJXwBgeo8HL0roKNSipQ43wy9QhWD1ww==
-X-Received: by 2002:a5d:4eca:0:b0:301:8551:446a with SMTP id s10-20020a5d4eca000000b003018551446amr3527493wrv.2.1685521575555;
-        Wed, 31 May 2023 01:26:15 -0700 (PDT)
+        bh=0gjkJus4Ab1I95Q+SXPJTVRY+RA6fMzONMJw3ioKx6M=;
+        b=Tx6TA+sluaOPuEAE6UFcxV9/8paMpmBddBoYuqwfppht6xt4YA74M7maLjQIaxrLDa
+         +jfmuALO9Gc1VtjR3CuCYmh+SAt2KvpluGI7mu1K9BgQJoq/ktQqHNoq/29WUdZFDRvL
+         jk+Yjo7dJG6jy7K7n7sh0sOMTVm+6URvv2k0z39ULxIFmt95cBuR8PreqixI/S4g2Mzq
+         4QsD+YdmVis4y1TjplZ18xS5NVnQfIqccUkE/zSd5KIz6MDue5pEuSGED/YvthV4woAZ
+         bqvP+rF5HEG93DFy17vUrPJVL//PTymzo66lcCdQzT+enEPWb/wv1jVqnjPkEuyBw3vp
+         qKaA==
+X-Gm-Message-State: AC+VfDxT4lpW7vhp81rOsQfByujCTiwiyV97fqswDtjB1N5MdgmdmvUa
+	Ra2EyK0BTQW/SxeLe3KBTD+4GA==
+X-Google-Smtp-Source: ACHHUZ4UIrC0ydHqTROzqRRgnqT/MEGhGkVdYX4KLSiifjtZxiGkeQ2RkifMk4qYOyvLVO0YaKk+7Q==
+X-Received: by 2002:a5d:6a04:0:b0:307:8718:7891 with SMTP id m4-20020a5d6a04000000b0030787187891mr3989493wru.54.1685521577250;
+        Wed, 31 May 2023 01:26:17 -0700 (PDT)
 Received: from brgl-uxlite.home ([2a01:cb1d:334:ac00:fc69:2162:e0f2:38b5])
-        by smtp.gmail.com with ESMTPSA id o11-20020a5d670b000000b0030ada01ca78sm5855346wru.10.2023.05.31.01.26.14
+        by smtp.gmail.com with ESMTPSA id o11-20020a5d670b000000b0030ada01ca78sm5855346wru.10.2023.05.31.01.26.15
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 31 May 2023 01:26:15 -0700 (PDT)
+        Wed, 31 May 2023 01:26:16 -0700 (PDT)
 From: Bartosz Golaszewski <brgl@bgdev.pl>
 To: Khem Raj <raj.khem@gmail.com>,
 	Bruce Ashfield <bruce.ashfield@gmail.com>,
 	openembedded-devel@lists.openembedded.org
 Cc: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
-Subject: [meta-python][PATCH 062/149] python3-pyusb: fix run-time dependencies
-Date: Wed, 31 May 2023 10:23:10 +0200
-Message-Id: <20230531082437.10646-63-brgl@bgdev.pl>
+Subject: [meta-python][PATCH 063/149] python3-pytest-mock: add missing run-time dependencies
+Date: Wed, 31 May 2023 10:23:11 +0200
+Message-Id: <20230531082437.10646-64-brgl@bgdev.pl>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20230531082437.10646-1-brgl@bgdev.pl>
 References: <20230531082437.10646-1-brgl@bgdev.pl>
@@ -63,31 +63,34 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 31 May 2023 08:26:21 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102989
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102990
 
 From: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
 
-Add the missing dependency on ctypes and drop libusb1 from RDEPENDS as
-it will be already present in the rootfs thanks to being in project's
-build-time dependencies.
+Add missing RDEPENDS for this package.
 
 Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
 ---
- meta-python/recipes-devtools/python/python3-pyusb_1.2.1.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ .../recipes-devtools/python/python3-pytest-mock_3.10.0.bb   | 6 ++++++
+ 1 file changed, 6 insertions(+)
 
-diff --git a/meta-python/recipes-devtools/python/python3-pyusb_1.2.1.bb b/meta-python/recipes-devtools/python/python3-pyusb_1.2.1.bb
-index 286e9672b..abe352911 100644
---- a/meta-python/recipes-devtools/python/python3-pyusb_1.2.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-pyusb_1.2.1.bb
-@@ -13,6 +13,6 @@ SRC_URI[sha256sum] = "a4cc7404a203144754164b8b40994e2849fde1cfff06b08492f12fff9d
+diff --git a/meta-python/recipes-devtools/python/python3-pytest-mock_3.10.0.bb b/meta-python/recipes-devtools/python/python3-pytest-mock_3.10.0.bb
+index c4e672f33..bf5bc250a 100644
+--- a/meta-python/recipes-devtools/python/python3-pytest-mock_3.10.0.bb
++++ b/meta-python/recipes-devtools/python/python3-pytest-mock_3.10.0.bb
+@@ -18,6 +18,12 @@ inherit setuptools3 ptest
  
- inherit pypi setuptools3
+ DEPENDS += "${PYTHON_PN}-setuptools-scm-native"
  
--RDEPENDS:${PN} += "libusb1"
-+RDEPENDS:${PN} += "python3-ctypes"
++RDEPENDS:${PN} += " \
++    python3-asyncio \
++    python3-pytest \
++    python3-unittest \
++"
++
+ S = "${WORKDIR}/git"
  
- BBCLASSEXTEND = "native nativesdk"
+ do_install_ptest() {
 -- 
 2.39.2
 
