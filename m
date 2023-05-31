@@ -2,56 +2,56 @@ Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 535A3C7EE23
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 53C06C77B7C
 	for <webhook@archiver.kernel.org>; Wed, 31 May 2023 11:13:53 +0000 (UTC)
-Received: from mail-yw1-f173.google.com (mail-yw1-f173.google.com [209.85.128.173])
- by mx.groups.io with SMTP id smtpd.web10.11460.1685531623237134022
+Received: from mail-yb1-f173.google.com (mail-yb1-f173.google.com [209.85.219.173])
+ by mx.groups.io with SMTP id smtpd.web11.11461.1685531626850593037
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 31 May 2023 04:13:43 -0700
+ Wed, 31 May 2023 04:13:47 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=rKM0ueGL;
- spf=pass (domain: gmail.com, ip: 209.85.128.173, mailfrom: akuster808@gmail.com)
-Received: by mail-yw1-f173.google.com with SMTP id 00721157ae682-565ee3d14c2so46374777b3.2
-        for <openembedded-devel@lists.openembedded.org>; Wed, 31 May 2023 04:13:43 -0700 (PDT)
+ dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=KvJqE6Hz;
+ spf=pass (domain: gmail.com, ip: 209.85.219.173, mailfrom: akuster808@gmail.com)
+Received: by mail-yb1-f173.google.com with SMTP id 3f1490d57ef6-bacf685150cso9849533276.3
+        for <openembedded-devel@lists.openembedded.org>; Wed, 31 May 2023 04:13:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1685531622; x=1688123622;
+        d=gmail.com; s=20221208; t=1685531626; x=1688123626;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=tTe7yl+ULyNDZLZNzbPMqHgj9o7vrc2JJtJpps1vGjM=;
-        b=rKM0ueGL+Gcw11tr1Ih8A0KSmdxK19ie4fIuWhJ1nkojCxPSPV+J6hNGAnPGFC+OzX
-         L7nbIKvSWn9k7fIu2UI/omieivxr2W2unGwN2gyuvbwSrQRnX5WUOnp0G6i+E9h8N6dC
-         FM0s4p+IkTroONkquGgz4w0KNkic4m/D80Acug2UdraWGAKr9XPq9jLZzWCoIZwvK73F
-         Smlj6ZudLlISTpKWi28CB43YRaF8y23O4YRV5rgLFTxwpOOA2DkmoeutBfafq3pESnwQ
-         vTleUqUc2EesAThtMFxFi47kg9/goT9wWIJld5bQzicYU79ZPIeRg1t3Se9umcK19Qz/
-         WidQ==
+        bh=ut9DpL8AwaKUC84JfcGr2uOsRvhdHJuME8rt+YcRIqw=;
+        b=KvJqE6HzVgsmNTrvy4OmWgRI3oKk2aiZdioRKe1ipE9w9AtNBbFw6xast6IIN/l+u0
+         Q5ENyMJiL+gEAz5bA80ocUxawO5GEejk39TOsIEEBBHUP2a5wlTIijrV3yWkhNAtDgJw
+         JTyZrmnEljdZ5UUPkkpGMF9m5rCqa6LAT/qBWMx0JCOnmdnzHqgGOdGuv0BqZUu6OVS+
+         3HjS8aYXQe+NlaOHGNZt97gvuQAuQRZPvkBj+6mLOofczDhfz3O59dzkU+V5cGWYND0s
+         grnYiJCUmjM2GKMUhnbGI3UXS5lvYg7pm5LiyyP6kdvUZnZgKu1wpZJW8xmh1LTwX8ph
+         ibDA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1685531622; x=1688123622;
+        d=1e100.net; s=20221208; t=1685531626; x=1688123626;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=tTe7yl+ULyNDZLZNzbPMqHgj9o7vrc2JJtJpps1vGjM=;
-        b=S7d+lNhME6qz6ha8VrNFsUdFfl212ob+3fnEO1BHrsjge7vuGb9o+BAeAgjpDDc2bb
-         UKAQJt2HSqgSL5TD7RFB6i70AOULyz5/zp5EZ+7MunzhH+466DJ/5QykdrrqpYG36AXF
-         2XyeRVNuFLsamv+l1QD7Nr5zARdSFGXnWsYrHzsQUP4QSLv+CVls3c5bjDN7GYiLNKpH
-         QOXh8IxUDVwKrgaCf5t1KAySWDdYifB7Zj0ACxB4aLsAJf1NYf6j+SJKX4fe0rdP3a91
-         K7u69qYf7lJIHNY4HDZobBXdpiRHGCKEEj24fLZ+5aP2ifJVfKEjtE8Jew+5N5bZ+vu8
-         7Pmg==
-X-Gm-Message-State: AC+VfDxe9bWbc7YKypxqP9rbRGCtcHRi/e2bWeO+FbIZwPbPp8MYR2N6
-	rXd3C+UrDG0uFUeU1SDzejbCqt3Pfog=
-X-Google-Smtp-Source: ACHHUZ6hfImbeiThjIrRWSA3C5liSp3WVvRwz6HpZ4eXI08Kl8iDGxkPuGxdGrvHOfbDvEBOstB5wg==
-X-Received: by 2002:a81:4945:0:b0:568:8b79:731 with SMTP id w66-20020a814945000000b005688b790731mr6224911ywa.41.1685531622100;
-        Wed, 31 May 2023 04:13:42 -0700 (PDT)
+        bh=ut9DpL8AwaKUC84JfcGr2uOsRvhdHJuME8rt+YcRIqw=;
+        b=PSbtSd5RU1Wou9lL2WHQ6r7vzOZ1sin8jJmIZW409yoyMq7IVnocKLaqU65cP1Nlka
+         OJ7OF/Lt8PRz+uyCcD+ZO/E+q5YtdInV4LVpznosYaxq7Hcv92TLw1U48WgCF6pTk5yC
+         72K/nf3C6qZ+587SmDRSKFR8dXK7ygFRXXqEM620Ce/+Sz9LYcjQbD7YapEBSxr9rW1z
+         rs8ywzLMJj4C48kZ0Ld7tKd3QBSni/xNWUfqSczfV1YEUpS1Wu6HUw1g8nvgNUk8hrIu
+         fYDsdxjjwrwlKb+COovcX/Qt8B73TTleLCgQ8Ib7Wg9j79T10ZpIjP7uxhgN/7PNIX+g
+         QNnA==
+X-Gm-Message-State: AC+VfDzwUolAA7opnoWnmRK1PvTW70uejH1KGmj6kigTFr50gCL3w7Ab
+	W2DP6/SQ/w6DSnBIPogF0jSb0nT8MdA=
+X-Google-Smtp-Source: ACHHUZ5/s2P/CbWLZkMd9PxDz4tkJhafmG7V/Zu4IlErJoGiOOrGOPav6eM2ooD5FRMJ32h83b2hlA==
+X-Received: by 2002:a81:d54e:0:b0:54d:ea34:c31 with SMTP id l14-20020a81d54e000000b0054dea340c31mr6071259ywj.29.1685531625838;
+        Wed, 31 May 2023 04:13:45 -0700 (PDT)
 Received: from keaua.attlocal.net ([2600:1700:9190:ba10:a3c5:f403:52db:88cf])
-        by smtp.gmail.com with ESMTPSA id t129-20020a814687000000b00545a08184fdsm5246897ywa.141.2023.05.31.04.13.41
+        by smtp.gmail.com with ESMTPSA id t129-20020a814687000000b00545a08184fdsm5246897ywa.141.2023.05.31.04.13.45
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 31 May 2023 04:13:41 -0700 (PDT)
+        Wed, 31 May 2023 04:13:45 -0700 (PDT)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][mickledore][PATCH 31/36] ibus: Point python interpreter to target location
-Date: Wed, 31 May 2023 07:13:04 -0400
-Message-Id: <20230531111309.2454603-31-akuster808@gmail.com>
+Subject: [meta-oe][mickledore][PATCH 36/36] x265: Pass --debug-prefix-map to nasm
+Date: Wed, 31 May 2023 07:13:09 -0400
+Message-Id: <20230531111309.2454603-36-akuster808@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20230531111309.2454603-1-akuster808@gmail.com>
 References: <20230531111309.2454603-1-akuster808@gmail.com>
@@ -61,48 +61,37 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 31 May 2023 11:13:53 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103060
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103065
 
 From: Khem Raj <raj.khem@gmail.com>
 
-it encoded PYTHON variable during build which otherwise points to python
-on build host which is not correct for cross compiled packages.
+Ensures absolute source paths are not emitted into nasm assembled objects
 
-Add missing dependency on python3-core which is needed for ibus-setup
-script to run
+Fixes
+WARNING: x265-3.2.1-r0 do_package_qa: QA Issue: File /usr/lib/.debug/libx265.so.179 in package x265-dbg contains reference to TMPDIR [buildpaths]
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit fe0e3d77eb1a992c487038e64b734b2b8b395647)
+(cherry picked from commit 6ab0ca758a901afc70104372cabaf79301f933ec)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-gnome/recipes-support/ibus/ibus.bb  | 2 +-
- meta-gnome/recipes-support/ibus/ibus.inc | 3 +++
- 2 files changed, 4 insertions(+), 1 deletion(-)
+ meta-multimedia/recipes-multimedia/x265/x265_3.2.1.bb | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-diff --git a/meta-gnome/recipes-support/ibus/ibus.bb b/meta-gnome/recipes-support/ibus/ibus.bb
-index 7156081499..141341e341 100644
---- a/meta-gnome/recipes-support/ibus/ibus.bb
-+++ b/meta-gnome/recipes-support/ibus/ibus.bb
-@@ -38,4 +38,4 @@ FILES:${PN} += " \
- FILES:${PN}-dev += " \
-     ${datadir}/gettext \
- "
--
-+RDEPENDS:${PN} += "python3-core"
-diff --git a/meta-gnome/recipes-support/ibus/ibus.inc b/meta-gnome/recipes-support/ibus/ibus.inc
-index bb662f2ec9..9579404b3e 100644
---- a/meta-gnome/recipes-support/ibus/ibus.inc
-+++ b/meta-gnome/recipes-support/ibus/ibus.inc
-@@ -31,6 +31,9 @@ EXTRA_OECONF = " \
-     --disable-emoji-dict \
-     --disable-python2 \
- "
-+EXTRA_OECONF:append:class-target = "\
-+    --with-python=${bindir}/python3 \
-+"
+diff --git a/meta-multimedia/recipes-multimedia/x265/x265_3.2.1.bb b/meta-multimedia/recipes-multimedia/x265/x265_3.2.1.bb
+index d786afe81e..250af58e17 100644
+--- a/meta-multimedia/recipes-multimedia/x265/x265_3.2.1.bb
++++ b/meta-multimedia/recipes-multimedia/x265/x265_3.2.1.bb
+@@ -17,6 +17,10 @@ SRC_URI[sha256sum] = "fb9badcf92364fd3567f8b5aa0e5e952aeea7a39a2b864387cec31e3b5
  
- do_configure:prepend() {
-     touch ${S}/ChangeLog
+ inherit lib_package pkgconfig cmake
+ 
++do_generate_toolchain_file:append() {
++    echo "set(CMAKE_ASM_NASM_FLAGS --debug-prefix-map ${S}=/usr/src/debug/${PN}/${EXTENDPE}${PV}-${PR})" >> ${WORKDIR}/toolchain.cmake
++}
++
+ EXTRA_OECMAKE:append:x86 = " -DENABLE_ASSEMBLY=OFF"
+ EXTRA_OECMAKE:append:aarch64 = " -DENABLE_PIC=ON"
+ 
 -- 
 2.25.1
 
