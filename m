@@ -2,56 +2,56 @@ Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 46AA2C7EE39
-	for <webhook@archiver.kernel.org>; Wed, 31 May 2023 11:13:33 +0000 (UTC)
-Received: from mail-yw1-f173.google.com (mail-yw1-f173.google.com [209.85.128.173])
- by mx.groups.io with SMTP id smtpd.web10.11451.1685531606408285446
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3E14BC7EE23
+	for <webhook@archiver.kernel.org>; Wed, 31 May 2023 11:13:43 +0000 (UTC)
+Received: from mail-yw1-f182.google.com (mail-yw1-f182.google.com [209.85.128.182])
+ by mx.groups.io with SMTP id smtpd.web11.11456.1685531621283753703
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 31 May 2023 04:13:26 -0700
+ Wed, 31 May 2023 04:13:41 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=SFIX1oi2;
- spf=pass (domain: gmail.com, ip: 209.85.128.173, mailfrom: akuster808@gmail.com)
-Received: by mail-yw1-f173.google.com with SMTP id 00721157ae682-565eaf83853so47765137b3.3
-        for <openembedded-devel@lists.openembedded.org>; Wed, 31 May 2023 04:13:26 -0700 (PDT)
+ dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=Ki6c/lJk;
+ spf=pass (domain: gmail.com, ip: 209.85.128.182, mailfrom: akuster808@gmail.com)
+Received: by mail-yw1-f182.google.com with SMTP id 00721157ae682-561c1436c75so80771237b3.1
+        for <openembedded-devel@lists.openembedded.org>; Wed, 31 May 2023 04:13:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1685531605; x=1688123605;
+        d=gmail.com; s=20221208; t=1685531620; x=1688123620;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=0Z8+Ir7Etv3S+eeODzvZT5lJRtDz3QZq++zPJ094T9Y=;
-        b=SFIX1oi2f5IuXJHCgvSFVTexk9eEe9KLSB9nGbh5bDs4+cGYUNqdwgHFJyxZbVncDb
-         /PZuI2IPPyESUIjDdRRzKl6wu42hRHJcgIFQyj64MaUGTAHmFL3KknGq7LsviJvkJq/F
-         W4Utus8c0turKQCWjRR6HHSb+RdNvIaYaM1EK5I3EVELkQiRX02ZjsIdvZn+Gn56udsy
-         fMEslaKZWZEe9ZOphuhL+qGbH4aGisFiWDLblLc+ycPaBGBZIjdxJh/KTXlVvEW6IRQu
-         a5hFYhMh4XaRQra86ffwrCy4gRXGsfwR/EdAKiu/8dkNhf9HYAHyUMNFhyRv6Xgn2hHC
-         LIKw==
+        bh=qhKtlS/5sJvXGxsAmtufKfuIGKVFj+aRjnKuhdYGUX0=;
+        b=Ki6c/lJk/eoDfFOHMmzlTrVf4+EBaEqDktySv4mLQRhe/NaaYdbFw/SSnqOGi1nRWr
+         nwY2TeH5DsgthDJGM5UYxQviBNd574jSyQPNZdd0moVM0/dEWpvQxa4YYMK0pMR/mNtY
+         MfVM6x8jdGLx9HxgSxc0sLHg8oFfCd8P4uUwUZzagK47xABTbrJQQt9qQgvn0CRNhLo2
+         1Zd9/FEHn5kn0V8ctAXXRg4YUEb9NCN5Nu7pzd3n65QohkdkRfsYW+tUeMn8OJHvWL+M
+         G58lCUGPStayKelmLfAtc1vI0pWsafoF5t/i3/1KaudK/q7BFhWqOshaHxd+Qty1rXvc
+         F8+g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1685531605; x=1688123605;
+        d=1e100.net; s=20221208; t=1685531620; x=1688123620;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=0Z8+Ir7Etv3S+eeODzvZT5lJRtDz3QZq++zPJ094T9Y=;
-        b=JpgN3d7LN+p+EDtfnTGqxL4gPsFoVH2lOE4HNLLBYD39Dh0udhS84wg+6jovDlPxn1
-         m9+C8qlA/KTFzPEDrkAD8jyB89uUe90nu/CmVlyC3Qip7E3Sdldv/dIdapcmwkq+r0qf
-         cxleo9NtxT856wfP4jONVs3RlKNpcK7236TA8qnisCv0lGYPOhNFDF3+Fb97rE+74M5F
-         h9G0/0+rJdirFY0w6o4MhaGsuUhWrKyXifKye6JQiihOi7KSoQ5Fa/PI2riuI7zRQMyA
-         TRwlKjkTvS2JNyloO9qNmxbBjktYF3y+SIoN07SlUmxKC6Xa1hJaS4GzyEWC3Q//RfhQ
-         v3iQ==
-X-Gm-Message-State: AC+VfDxh0BDk80SrjWY48C1NqjvWLoWHGydLLZAFCK6wG1LuEq6M0P7R
-	6YCmC/5+fzJYahnE6LBXeU4HO6uruZQ=
-X-Google-Smtp-Source: ACHHUZ4k4UHVotTMAniKZ1y3j/o6xp68qQEd9vw+Polcu3oDEQwNB0aFPElKa0m3UfHdFvNvXfDM3A==
-X-Received: by 2002:a0d:d888:0:b0:565:9e48:2597 with SMTP id a130-20020a0dd888000000b005659e482597mr5551211ywe.50.1685531605342;
-        Wed, 31 May 2023 04:13:25 -0700 (PDT)
+        bh=qhKtlS/5sJvXGxsAmtufKfuIGKVFj+aRjnKuhdYGUX0=;
+        b=M+Jc9qUobhDYg/hW3YSKIjCdnMqUKNvuoWHJywA9fctktTqrj9lmjclk58Z5X/ECBQ
+         OnaGJ6aMbrc9rE+PiOd0gUJ9pRYtJ2wVp3yaX9HhM3Pq5WUeKJ30UNSvPESTOjwDkotN
+         ffexFPuo4u3Y2mWW7u6dlGLFC7qiPmOXQOAat0kcEWTWjHv8sJ5zFPMRfxp+ozhOiJTt
+         ciFZiQfscD+D5rNeC7QN2HS+5rtjmPCauouB5z4Vu8D5qTukKFru4EIv3AkwdXCS0kyL
+         47UjvN2RyJxhFp3OSCbmLfSkVLqUllogSVeVshQrTdo5AgAYEKklMwv62VpM28xxxYOR
+         Xe/g==
+X-Gm-Message-State: AC+VfDwldwjwhOT7bCL8F5AIMkjjlEF+ODLGZ2OMpBY5WAEKl2mza74+
+	R9bUEcW3UogTpCVWU48NMssqJsuVdB4=
+X-Google-Smtp-Source: ACHHUZ5ufbmf2xD0rRC6trxdAYZ54dIrMimQIM0XIFj1Xn3l+cCTgV4r3U2ePPmRYw2zEHwgV35SJw==
+X-Received: by 2002:a81:618a:0:b0:565:9a3d:a3f9 with SMTP id v132-20020a81618a000000b005659a3da3f9mr6574379ywb.9.1685531620235;
+        Wed, 31 May 2023 04:13:40 -0700 (PDT)
 Received: from keaua.attlocal.net ([2600:1700:9190:ba10:a3c5:f403:52db:88cf])
-        by smtp.gmail.com with ESMTPSA id t129-20020a814687000000b00545a08184fdsm5246897ywa.141.2023.05.31.04.13.24
+        by smtp.gmail.com with ESMTPSA id t129-20020a814687000000b00545a08184fdsm5246897ywa.141.2023.05.31.04.13.39
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 31 May 2023 04:13:24 -0700 (PDT)
+        Wed, 31 May 2023 04:13:39 -0700 (PDT)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][mickledore][PATCH 17/36] lirc: Define SH_PATH=/bin/sh
-Date: Wed, 31 May 2023 07:12:50 -0400
-Message-Id: <20230531111309.2454603-17-akuster808@gmail.com>
+Subject: [meta-oe][mickledore][PATCH 29/36] nautilus: Fix buildpath QA errors
+Date: Wed, 31 May 2023 07:13:02 -0400
+Message-Id: <20230531111309.2454603-29-akuster808@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20230531111309.2454603-1-akuster808@gmail.com>
 References: <20230531111309.2454603-1-akuster808@gmail.com>
@@ -60,36 +60,84 @@ Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 31 May 2023 11:13:33 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103046
+ <openembedded-devel@lists.openembedded.org>; Wed, 31 May 2023 11:13:43 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103058
 
 From: Khem Raj <raj.khem@gmail.com>
 
-It points to sh provided by HOSTTOOLS in the build systems path
-
-Fixes
-WARNING: lirc-0.10.2-r0 do_package_qa: QA Issue: File /usr/include/lirc/config.h in package lirc-dev contains reference to TMPDIR [buildpaths]
-
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit d112323521083a4369bd8c80e1f860f1ca8ebe8d)
+(cherry picked from commit aca77cfa3c0b6ba4ae011918bef7cadc7fe365db)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../meta-python/recipes-connectivity/lirc/lirc_0.10.2.bb        | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ .../0001-Replace-filename-with-basename.patch | 46 +++++++++++++++++++
+ .../recipes-gnome/nautilus/nautilus_44.1.bb   |  1 +
+ 2 files changed, 47 insertions(+)
+ create mode 100644 meta-gnome/recipes-gnome/nautilus/nautilus/0001-Replace-filename-with-basename.patch
 
-diff --git a/meta-oe/dynamic-layers/meta-python/recipes-connectivity/lirc/lirc_0.10.2.bb b/meta-oe/dynamic-layers/meta-python/recipes-connectivity/lirc/lirc_0.10.2.bb
-index fcb347a2e5..3d474305d7 100644
---- a/meta-oe/dynamic-layers/meta-python/recipes-connectivity/lirc/lirc_0.10.2.bb
-+++ b/meta-oe/dynamic-layers/meta-python/recipes-connectivity/lirc/lirc_0.10.2.bb
-@@ -40,7 +40,7 @@ PACKAGECONFIG ?= " \
-     ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', ' systemd', '', d)} \
-     ${@bb.utils.contains('DISTRO_FEATURES', 'x11', ' x11', '', d)} \
- "
--CACHED_CONFIGUREVARS = "HAVE_WORKING_POLL=yes"
-+CACHED_CONFIGUREVARS = "HAVE_WORKING_POLL=yes SH_PATH=/bin/sh"
+diff --git a/meta-gnome/recipes-gnome/nautilus/nautilus/0001-Replace-filename-with-basename.patch b/meta-gnome/recipes-gnome/nautilus/nautilus/0001-Replace-filename-with-basename.patch
+new file mode 100644
+index 0000000000..dbf42a9ab9
+--- /dev/null
++++ b/meta-gnome/recipes-gnome/nautilus/nautilus/0001-Replace-filename-with-basename.patch
+@@ -0,0 +1,46 @@
++From 4ec1f99f170033138036d6547dce9b7dcf541338 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Wed, 24 May 2023 07:56:33 -0700
++Subject: [PATCH] Replace filename with basename
++
++This avoids emitting absolute paths into generated sourcecode, it
++improves reproducibility. See [1]
++
++[1] https://developer-old.gnome.org/gobject/stable/glib-mkenums.html
++
++Upstream-Status: Submitted [https://gitlab.gnome.org/GNOME/nautilus/-/merge_requests/1211]
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ src/nautilus-enum-types.c.template | 2 +-
++ src/nautilus-enum-types.h.template | 2 +-
++ 2 files changed, 2 insertions(+), 2 deletions(-)
++
++diff --git a/src/nautilus-enum-types.c.template b/src/nautilus-enum-types.c.template
++index 9d8ac83..a757949 100644
++--- a/src/nautilus-enum-types.c.template
+++++ b/src/nautilus-enum-types.c.template
++@@ -4,7 +4,7 @@
++ /*** END file-header ***/
++ 
++ /*** BEGIN file-production ***/
++-/* Enumerations from "@filename@" */
+++/* Enumerations from "@basename@" */
++ #include "@filename@"
++ 
++ /*** END file-production ***/
++diff --git a/src/nautilus-enum-types.h.template b/src/nautilus-enum-types.h.template
++index 399bbca..7eb6c54 100644
++--- a/src/nautilus-enum-types.h.template
+++++ b/src/nautilus-enum-types.h.template
++@@ -8,7 +8,7 @@ G_BEGIN_DECLS
++ /*** END file-header ***/
++ 
++ /*** BEGIN file-production ***/
++-/* Enumerations from "@filename@" */
+++/* Enumerations from "@basename@" */
++ 
++ /*** END file-production ***/
++ 
++-- 
++2.40.1
++
+diff --git a/meta-gnome/recipes-gnome/nautilus/nautilus_44.1.bb b/meta-gnome/recipes-gnome/nautilus/nautilus_44.1.bb
+index 9c60d15d86..f7eeb5f5d0 100644
+--- a/meta-gnome/recipes-gnome/nautilus/nautilus_44.1.bb
++++ b/meta-gnome/recipes-gnome/nautilus/nautilus_44.1.bb
+@@ -26,6 +26,7 @@ inherit gnomebase gsettings gobject-introspection gtk-doc gettext features_check
+ def gnome_verdir(v):
+     return oe.utils.trim_version(v, 1)
  
- #EXTRA_OEMAKE = 'SUBDIRS="lib daemons tools"'
++SRC_URI += "file://0001-Replace-filename-with-basename.patch"
+ SRC_URI[archive.sha256sum] = "360802a595e3edbad962c8cea353b62baa8be407513b5162c89c933ca5387aa9"
  
+ REQUIRED_DISTRO_FEATURES = "x11 opengl"
 -- 
 2.25.1
 
