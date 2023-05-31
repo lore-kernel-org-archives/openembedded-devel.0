@@ -2,56 +2,57 @@ Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3E14BC7EE23
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4A497C7EE32
 	for <webhook@archiver.kernel.org>; Wed, 31 May 2023 11:13:43 +0000 (UTC)
-Received: from mail-yw1-f182.google.com (mail-yw1-f182.google.com [209.85.128.182])
- by mx.groups.io with SMTP id smtpd.web11.11456.1685531621283753703
+Received: from mail-yb1-f177.google.com (mail-yb1-f177.google.com [209.85.219.177])
+ by mx.groups.io with SMTP id smtpd.web11.11455.1685531620343180383
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 31 May 2023 04:13:41 -0700
+ Wed, 31 May 2023 04:13:40 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=Ki6c/lJk;
- spf=pass (domain: gmail.com, ip: 209.85.128.182, mailfrom: akuster808@gmail.com)
-Received: by mail-yw1-f182.google.com with SMTP id 00721157ae682-561c1436c75so80771237b3.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 31 May 2023 04:13:41 -0700 (PDT)
+ dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=Ts8hgAOE;
+ spf=pass (domain: gmail.com, ip: 209.85.219.177, mailfrom: akuster808@gmail.com)
+Received: by mail-yb1-f177.google.com with SMTP id 3f1490d57ef6-ba818eb96dcso4386314276.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 31 May 2023 04:13:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1685531620; x=1688123620;
+        d=gmail.com; s=20221208; t=1685531619; x=1688123619;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=qhKtlS/5sJvXGxsAmtufKfuIGKVFj+aRjnKuhdYGUX0=;
-        b=Ki6c/lJk/eoDfFOHMmzlTrVf4+EBaEqDktySv4mLQRhe/NaaYdbFw/SSnqOGi1nRWr
-         nwY2TeH5DsgthDJGM5UYxQviBNd574jSyQPNZdd0moVM0/dEWpvQxa4YYMK0pMR/mNtY
-         MfVM6x8jdGLx9HxgSxc0sLHg8oFfCd8P4uUwUZzagK47xABTbrJQQt9qQgvn0CRNhLo2
-         1Zd9/FEHn5kn0V8ctAXXRg4YUEb9NCN5Nu7pzd3n65QohkdkRfsYW+tUeMn8OJHvWL+M
-         G58lCUGPStayKelmLfAtc1vI0pWsafoF5t/i3/1KaudK/q7BFhWqOshaHxd+Qty1rXvc
-         F8+g==
+        bh=CltrQRpMB0rOKpdrS+2ahoXkrc4ZURY6MyC1tDus7gg=;
+        b=Ts8hgAOEtsQrk8QTTopPvQcDAAMB9lopPqPNlIo+O1f5TQKJfwl1skV7BasvtNfKBC
+         9Umn0LhfB/qZRsw0eiH1Sesb8WnjOMXw3mtkoHAxMdoB4HEV2xJJ+wvfv8OZ5mvSijvN
+         0HZ1Am6vFKX0rGYsmRxMFQR7mvAM0CgNhAXLrF/RCBknJE0FUGTAUd8wlrn6LfSPPUg6
+         a9k+vB3TRbGPwn40On3UPdazwZHZ4syIs59hRXiYodEPnKzrU7lZLLB3qHyH2g8s7lfO
+         pn+QXXtGk19gFK/KJdQDP0xBxAmqd1g/sJVE8MW/2b1lWZx+V6k7bLAfffdgDZul+CI9
+         udcg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1685531620; x=1688123620;
+        d=1e100.net; s=20221208; t=1685531619; x=1688123619;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=qhKtlS/5sJvXGxsAmtufKfuIGKVFj+aRjnKuhdYGUX0=;
-        b=M+Jc9qUobhDYg/hW3YSKIjCdnMqUKNvuoWHJywA9fctktTqrj9lmjclk58Z5X/ECBQ
-         OnaGJ6aMbrc9rE+PiOd0gUJ9pRYtJ2wVp3yaX9HhM3Pq5WUeKJ30UNSvPESTOjwDkotN
-         ffexFPuo4u3Y2mWW7u6dlGLFC7qiPmOXQOAat0kcEWTWjHv8sJ5zFPMRfxp+ozhOiJTt
-         ciFZiQfscD+D5rNeC7QN2HS+5rtjmPCauouB5z4Vu8D5qTukKFru4EIv3AkwdXCS0kyL
-         47UjvN2RyJxhFp3OSCbmLfSkVLqUllogSVeVshQrTdo5AgAYEKklMwv62VpM28xxxYOR
-         Xe/g==
-X-Gm-Message-State: AC+VfDwldwjwhOT7bCL8F5AIMkjjlEF+ODLGZ2OMpBY5WAEKl2mza74+
-	R9bUEcW3UogTpCVWU48NMssqJsuVdB4=
-X-Google-Smtp-Source: ACHHUZ5ufbmf2xD0rRC6trxdAYZ54dIrMimQIM0XIFj1Xn3l+cCTgV4r3U2ePPmRYw2zEHwgV35SJw==
-X-Received: by 2002:a81:618a:0:b0:565:9a3d:a3f9 with SMTP id v132-20020a81618a000000b005659a3da3f9mr6574379ywb.9.1685531620235;
-        Wed, 31 May 2023 04:13:40 -0700 (PDT)
-Received: from keaua.attlocal.net ([2600:1700:9190:ba10:a3c5:f403:52db:88cf])
-        by smtp.gmail.com with ESMTPSA id t129-20020a814687000000b00545a08184fdsm5246897ywa.141.2023.05.31.04.13.39
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        bh=CltrQRpMB0rOKpdrS+2ahoXkrc4ZURY6MyC1tDus7gg=;
+        b=ctarm4zmx+X2aDzk9yx88TW96LVEE2Q+JDuzB0y+7IhgeHugKgQmz9a0jOnWgDiria
+         Fb/lrPhRC/3T9pQFkneCw63AccAygXUE2tCwHeYUVJzKvuCcf/Hwx05yDbVMx7fPkNyh
+         d1WUc0H56m7LCmhpKX1ytsQE/qJslwtK7/ilufHbJJYZHz5KMAZU0iXivaS3BguxWlPQ
+         2eYN85+swiGeG+8GydkPmacuJsypVN0e7DNNtnp0zwcD1KBwjTHzgVs7VDrTO6EpDZK2
+         bdDP39cNpR+PkXNMPKrR4fNBQujQrBC3a+YI31CgDFGVnBtyt/5hf+dqDXyjBBccLhF8
+         eaiw==
+X-Gm-Message-State: AC+VfDwptUHJY0+ENWOvG1mBdMUtDL19lllZq3YYgtgNUnE2jFJXuf0h
+	b2eIXKfrUkvz3wVCxj3t9qF4DMsXxr8=
+X-Google-Smtp-Source: ACHHUZ7nND9ejh9ppWUG+hvfdcwoboAH+UjBvG046giPKEGk67m8sjOtWJ7nj91R1AJbvIr3jAObBg==
+X-Received: by 2002:a0d:ca8b:0:b0:568:9785:3f05 with SMTP id m133-20020a0dca8b000000b0056897853f05mr4594205ywd.31.1685531619241;
         Wed, 31 May 2023 04:13:39 -0700 (PDT)
+Received: from keaua.attlocal.net ([2600:1700:9190:ba10:a3c5:f403:52db:88cf])
+        by smtp.gmail.com with ESMTPSA id t129-20020a814687000000b00545a08184fdsm5246897ywa.141.2023.05.31.04.13.38
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 31 May 2023 04:13:38 -0700 (PDT)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][mickledore][PATCH 29/36] nautilus: Fix buildpath QA errors
-Date: Wed, 31 May 2023 07:13:02 -0400
-Message-Id: <20230531111309.2454603-29-akuster808@gmail.com>
+Cc: Wang Mingyu <wangmy@fujitsu.com>,
+	Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][mickledore][PATCH 28/36] nautilus: upgrade 44.0 -> 44.1
+Date: Wed, 31 May 2023 07:13:01 -0400
+Message-Id: <20230531111309.2454603-28-akuster808@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20230531111309.2454603-1-akuster808@gmail.com>
 References: <20230531111309.2454603-1-akuster808@gmail.com>
@@ -61,83 +62,118 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 31 May 2023 11:13:43 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103058
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103057
 
-From: Khem Raj <raj.khem@gmail.com>
+From: Wang Mingyu <wangmy@fujitsu.com>
 
+0001-initialize-GdkDragAction-action-to-0.patch
+removed since it's included in 44.1
+
+Changelog:
+==========
+* Resolve some crashes
+* Visual bugfixes:
+  - Tweak style colors in view items
+  - Show custom emblems from extensions again
+  - Relayout SELinux property row
+  - Flip switches correctly
+* Other bugfixes:
+  - Disable some actions when not useful
+  - Fix dead characters handling in batch rename dialog
+  - Fix crashes when rapidly opening and closing windows
+  - Prevent location change when autofs timeouts
+  - Fix issues with translations in libadwaita widgets
+  - Drop workarounds for fixed GTK bugs
+  - Fix other issues
+* Enhancements:
+  - Dismiss toast on undo
+  - Select right items after some operations
+  - Paste into expanded folders
+  - Allow extraction of .tar.zst and .zstd archives
+  - Performance optimization
+* Translation updates
+
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit aca77cfa3c0b6ba4ae011918bef7cadc7fe365db)
+(cherry picked from commit 0398ebda1188038e95196bd84673ea63a3b89f70)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../0001-Replace-filename-with-basename.patch | 46 +++++++++++++++++++
- .../recipes-gnome/nautilus/nautilus_44.1.bb   |  1 +
- 2 files changed, 47 insertions(+)
- create mode 100644 meta-gnome/recipes-gnome/nautilus/nautilus/0001-Replace-filename-with-basename.patch
+ ...initialize-GdkDragAction-action-to-0.patch | 47 -------------------
+ .../{nautilus_44.0.bb => nautilus_44.1.bb}    |  3 +-
+ 2 files changed, 1 insertion(+), 49 deletions(-)
+ delete mode 100644 meta-gnome/recipes-gnome/nautilus/nautilus/0001-initialize-GdkDragAction-action-to-0.patch
+ rename meta-gnome/recipes-gnome/nautilus/{nautilus_44.0.bb => nautilus_44.1.bb} (88%)
 
-diff --git a/meta-gnome/recipes-gnome/nautilus/nautilus/0001-Replace-filename-with-basename.patch b/meta-gnome/recipes-gnome/nautilus/nautilus/0001-Replace-filename-with-basename.patch
-new file mode 100644
-index 0000000000..dbf42a9ab9
---- /dev/null
-+++ b/meta-gnome/recipes-gnome/nautilus/nautilus/0001-Replace-filename-with-basename.patch
-@@ -0,0 +1,46 @@
-+From 4ec1f99f170033138036d6547dce9b7dcf541338 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Wed, 24 May 2023 07:56:33 -0700
-+Subject: [PATCH] Replace filename with basename
-+
-+This avoids emitting absolute paths into generated sourcecode, it
-+improves reproducibility. See [1]
-+
-+[1] https://developer-old.gnome.org/gobject/stable/glib-mkenums.html
-+
-+Upstream-Status: Submitted [https://gitlab.gnome.org/GNOME/nautilus/-/merge_requests/1211]
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ src/nautilus-enum-types.c.template | 2 +-
-+ src/nautilus-enum-types.h.template | 2 +-
-+ 2 files changed, 2 insertions(+), 2 deletions(-)
-+
-+diff --git a/src/nautilus-enum-types.c.template b/src/nautilus-enum-types.c.template
-+index 9d8ac83..a757949 100644
-+--- a/src/nautilus-enum-types.c.template
-++++ b/src/nautilus-enum-types.c.template
-+@@ -4,7 +4,7 @@
-+ /*** END file-header ***/
-+ 
-+ /*** BEGIN file-production ***/
-+-/* Enumerations from "@filename@" */
-++/* Enumerations from "@basename@" */
-+ #include "@filename@"
-+ 
-+ /*** END file-production ***/
-+diff --git a/src/nautilus-enum-types.h.template b/src/nautilus-enum-types.h.template
-+index 399bbca..7eb6c54 100644
-+--- a/src/nautilus-enum-types.h.template
-++++ b/src/nautilus-enum-types.h.template
-+@@ -8,7 +8,7 @@ G_BEGIN_DECLS
-+ /*** END file-header ***/
-+ 
-+ /*** BEGIN file-production ***/
-+-/* Enumerations from "@filename@" */
-++/* Enumerations from "@basename@" */
-+ 
-+ /*** END file-production ***/
-+ 
-+-- 
-+2.40.1
-+
-diff --git a/meta-gnome/recipes-gnome/nautilus/nautilus_44.1.bb b/meta-gnome/recipes-gnome/nautilus/nautilus_44.1.bb
-index 9c60d15d86..f7eeb5f5d0 100644
---- a/meta-gnome/recipes-gnome/nautilus/nautilus_44.1.bb
+diff --git a/meta-gnome/recipes-gnome/nautilus/nautilus/0001-initialize-GdkDragAction-action-to-0.patch b/meta-gnome/recipes-gnome/nautilus/nautilus/0001-initialize-GdkDragAction-action-to-0.patch
+deleted file mode 100644
+index abe584874c..0000000000
+--- a/meta-gnome/recipes-gnome/nautilus/nautilus/0001-initialize-GdkDragAction-action-to-0.patch
++++ /dev/null
+@@ -1,47 +0,0 @@
+-From d8f8859369b228d86aeeb043d732b9c60fdce289 Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Fri, 24 Mar 2023 15:29:04 -0700
+-Subject: [PATCH] initialize GdkDragAction action to 0
+-
+-This helps in silencing clang found warning
+-
+-autilus-pathbar.c:759:9: error: variable 'action' is used uninitialized whenever 'if' condition is false [-Werror,-Wsometimes-uninitialized]
+-    if (G_VALUE_HOLDS (value, GDK_TYPE_FILE_LIST))
+-        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-
+-Upstream-Status: Submitted [https://gitlab.gnome.org/GNOME/nautilus/-/merge_requests/1158]
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+- src/nautilus-pathbar.c | 2 +-
+- src/nautilus-window.c  | 2 +-
+- 2 files changed, 2 insertions(+), 2 deletions(-)
+-
+-diff --git a/src/nautilus-pathbar.c b/src/nautilus-pathbar.c
+-index 1b6ea6a..a5ab780 100644
+---- a/src/nautilus-pathbar.c
+-+++ b/src/nautilus-pathbar.c
+-@@ -746,7 +746,7 @@ on_drag_motion (GtkDropTarget *target,
+-                 gpointer       user_data)
+- {
+-     ButtonData *button_data = user_data;
+--    GdkDragAction action;
+-+    GdkDragAction action = 0;
+-     const GValue *value;
+-     graphene_point_t start;
+- 
+-diff --git a/src/nautilus-window.c b/src/nautilus-window.c
+-index 30299b1..74c548f 100644
+---- a/src/nautilus-window.c
+-+++ b/src/nautilus-window.c
+-@@ -1476,7 +1476,7 @@ extra_drag_value_cb (AdwTabBar    *self,
+- {
+-     NautilusWindowSlot *slot = NAUTILUS_WINDOW_SLOT (adw_tab_page_get_child (page));
+-     g_autoptr (NautilusFile) file = nautilus_file_get (nautilus_window_slot_get_location (slot));
+--    GdkDragAction action;
+-+    GdkDragAction action = 0;
+- 
+-     if (value == NULL)
+-     {
+--- 
+-2.40.0
+-
+diff --git a/meta-gnome/recipes-gnome/nautilus/nautilus_44.0.bb b/meta-gnome/recipes-gnome/nautilus/nautilus_44.1.bb
+similarity index 88%
+rename from meta-gnome/recipes-gnome/nautilus/nautilus_44.0.bb
+rename to meta-gnome/recipes-gnome/nautilus/nautilus_44.1.bb
+index e066556177..9c60d15d86 100644
+--- a/meta-gnome/recipes-gnome/nautilus/nautilus_44.0.bb
 +++ b/meta-gnome/recipes-gnome/nautilus/nautilus_44.1.bb
-@@ -26,6 +26,7 @@ inherit gnomebase gsettings gobject-introspection gtk-doc gettext features_check
+@@ -26,8 +26,7 @@ inherit gnomebase gsettings gobject-introspection gtk-doc gettext features_check
  def gnome_verdir(v):
      return oe.utils.trim_version(v, 1)
  
-+SRC_URI += "file://0001-Replace-filename-with-basename.patch"
- SRC_URI[archive.sha256sum] = "360802a595e3edbad962c8cea353b62baa8be407513b5162c89c933ca5387aa9"
+-SRC_URI += "file://0001-initialize-GdkDragAction-action-to-0.patch"
+-SRC_URI[archive.sha256sum] = "57b99ebb8e2b9c1512d381e53096188c087b33410d6c52d87a27bd60ee76ac7f"
++SRC_URI[archive.sha256sum] = "360802a595e3edbad962c8cea353b62baa8be407513b5162c89c933ca5387aa9"
  
  REQUIRED_DISTRO_FEATURES = "x11 opengl"
+ 
 -- 
 2.25.1
 
