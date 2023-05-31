@@ -2,57 +2,57 @@ Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 03685C7EE2F
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 03900C7EE32
 	for <webhook@archiver.kernel.org>; Wed, 31 May 2023 11:13:23 +0000 (UTC)
-Received: from mail-yw1-f172.google.com (mail-yw1-f172.google.com [209.85.128.172])
- by mx.groups.io with SMTP id smtpd.web11.11434.1685531592240771762
+Received: from mail-yw1-f176.google.com (mail-yw1-f176.google.com [209.85.128.176])
+ by mx.groups.io with SMTP id smtpd.web10.11447.1685531599503629456
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 31 May 2023 04:13:18 -0700
+ Wed, 31 May 2023 04:13:19 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=PEB+aGh2;
- spf=pass (domain: gmail.com, ip: 209.85.128.172, mailfrom: akuster808@gmail.com)
-Received: by mail-yw1-f172.google.com with SMTP id 00721157ae682-561b7729a12so12292007b3.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 31 May 2023 04:13:17 -0700 (PDT)
+ dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=bf9uNfY6;
+ spf=pass (domain: gmail.com, ip: 209.85.128.176, mailfrom: akuster808@gmail.com)
+Received: by mail-yw1-f176.google.com with SMTP id 00721157ae682-565d354b59fso55171877b3.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 31 May 2023 04:13:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1685531597; x=1688123597;
+        d=gmail.com; s=20221208; t=1685531598; x=1688123598;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=lgbTNrDfDSgXMieCTtbT2+7wApp1IxA9TqTlETwO0dc=;
-        b=PEB+aGh2iynfUkyQ4N638CxPwricJWroksIxjAv9wjbsQndI1mIlqsuaKjvOXykOLi
-         eT594oBTUBpDn8Rj7b6rpG5y/zt7ecGI6S93tV0kuAafCn01Cr6YNzM0glhC+Zsj0Bqd
-         qhJS2SGdsfUDZnVNxLqLizaJ3m71/FRBSvuBXLt8F+1CWoCLdvMAU1MYhjqTLLbdUEEM
-         qbI+AqyQCgLXrvoDOVpFdMonG71RmyQr3jQdoAwGXbTN/a0ztGvlZ3p2YfVlxj+5ar+H
-         XUFq1pADUXbKiW9sCR+yHHfUSR7Zz7weUeIGXy/wfKGUEvIOHEL8Q0R+m2eQrDBZemb3
-         a0hQ==
+        bh=IfCJb4yJrEYgOBS9IQh5W+83QPEdlryPx0x+gEZz1/U=;
+        b=bf9uNfY6y80iW9Y68YB4WAQ840yH6PhOtcJeOcvMjRJn2ZWcW5wx0JOZbk0USTAYQB
+         W/cYvAjoplGMP6ZzHaoj97LyulA4eLf3n/VhSjoMJkFbkAAXeBxQpKZiBqmCppljOtf/
+         ZH3J0e1aMT5Tr2zU43s5W23rGlkpUNmnCDzbMSZUpkZFAt2QREx3hT8CFwXtSAVyMqJC
+         eW14hwduKaDqdM5T6pZj8UM0eseWlQrMweXXpoyBsXb2XBoQg1udDD2s9g2Yw+VCTTXC
+         IIWQD/v+1HdtDfR9UHEg4B7Xa4oA1uEOXM5tI2+2YibFFVu/fiOvfksDFjN6pc8sTreM
+         cB9w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1685531597; x=1688123597;
+        d=1e100.net; s=20221208; t=1685531598; x=1688123598;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=lgbTNrDfDSgXMieCTtbT2+7wApp1IxA9TqTlETwO0dc=;
-        b=U23/7l0OT81+heIRY42DmC0CwW4X+i+XkWZWGayXxgBT0oaCqYMG3iu2l9twP0MkiH
-         oLrLgpme6kwtWrXHfQBz31di3Ml/gO0DE7TSrml3ib1nTPSTYkBcSqUt9rxrEUYNo8h3
-         Zee1oNAPtEvCEBoeFrWBT8rqpjsZB+qNjFV2J/pYoaEW/vBwZawlfJB0gp93tGJVoXOT
-         XwNwT/BfrwZkXWRBsp2ng5yzz4okhVWbnOnuiiBiMDAI8KDfb4MvG/eKy/sUfAxm1hDt
-         jkkpMQbPWrt32VttK/v/mbJpYrRcN8Q8msBvaZemqfBh790WtozDwRedmKTxp/0lXKDE
-         Hu0A==
-X-Gm-Message-State: AC+VfDwnnpH77w5aASmDZUlCe/ZZgF4q5y6E4wHEaK8/D2JviMx4FTzK
-	sJpPNOeTy8YTFlLuWSg1jda9CZypPFM=
-X-Google-Smtp-Source: ACHHUZ7Z2BEB3qFYozNdtl2sPj/ci6Lj72xI26TU1GfbBVuTdDPxVWeqBMs9b+txq576+VJTACe7XQ==
-X-Received: by 2002:a81:a155:0:b0:559:d19a:37ee with SMTP id y82-20020a81a155000000b00559d19a37eemr5852326ywg.15.1685531597319;
-        Wed, 31 May 2023 04:13:17 -0700 (PDT)
+        bh=IfCJb4yJrEYgOBS9IQh5W+83QPEdlryPx0x+gEZz1/U=;
+        b=lNZjbAsP64HRttBLm7Ec4L0xAPwe45ZzCzLRJ2ANOY3IsSIQbk9JNn9R1Eg7ZnCPbY
+         k9gtNrU+QA+/GghIsSj/4r9vE+IFvVhUyqxx/ncn+P9pNNmT+ifriGKWEWL7b7O3d+ns
+         LW/Da9qiGfBqF1slm9Tj/BgloycEcay2lqSD1Y+YewMYk2de+DrBxGtLvsPdNhGDzP8Q
+         m22qfqXvzI4jMn5o5IJfl7w/I96l8GEvXoq9Z+GNLZBB9xkyVEXsvxTzumQza7YvTKX7
+         NFe373a68zbNiw8sl9N3Rsr9vhAhD02b/I8uZvmt5uTj7dyUKIrbcYdvlqmHpe6RtmaC
+         7UDw==
+X-Gm-Message-State: AC+VfDz1flpCppUepom4ccXVWgceaQbADiGPDLFBQYHqd0c67HUAGNcY
+	mvqXIsJA1GsCz2IM2FgjiF2xqGnEWDw=
+X-Google-Smtp-Source: ACHHUZ4oDsRrCuJGUqnNOKWd4U/Q+piztaOltoShsv1c/JXeLtc6mnRjGso9tcQ9iKyqDE745SCUlA==
+X-Received: by 2002:a81:49cf:0:b0:561:c5d4:ee31 with SMTP id w198-20020a8149cf000000b00561c5d4ee31mr5779640ywa.38.1685531598468;
+        Wed, 31 May 2023 04:13:18 -0700 (PDT)
 Received: from keaua.attlocal.net ([2600:1700:9190:ba10:a3c5:f403:52db:88cf])
-        by smtp.gmail.com with ESMTPSA id t129-20020a814687000000b00545a08184fdsm5246897ywa.141.2023.05.31.04.13.16
+        by smtp.gmail.com with ESMTPSA id t129-20020a814687000000b00545a08184fdsm5246897ywa.141.2023.05.31.04.13.17
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 31 May 2023 04:13:16 -0700 (PDT)
+        Wed, 31 May 2023 04:13:18 -0700 (PDT)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Mingli Yu <mingli.yu@windriver.com>,
+Cc: Wang Mingyu <wangmy@fujitsu.com>,
 	Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][mickledore][PATCH 09/36] minicoredumper: correct the sysvinit service file attribute
-Date: Wed, 31 May 2023 07:12:42 -0400
-Message-Id: <20230531111309.2454603-9-akuster808@gmail.com>
+Subject: [meta-oe][mickledore][PATCH 10/36] php: upgrade 8.2.5 -> 8.2.6
+Date: Wed, 31 May 2023 07:12:43 -0400
+Message-Id: <20230531111309.2454603-10-akuster808@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20230531111309.2454603-1-akuster808@gmail.com>
 References: <20230531111309.2454603-1-akuster808@gmail.com>
@@ -62,36 +62,43 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 31 May 2023 11:13:23 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103038
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103039
 
-From: Mingli Yu <mingli.yu@windriver.com>
+From: Wang Mingyu <wangmy@fujitsu.com>
 
-Add the execute attribute for sysvinit service file to fix the
-below error:
-  $ service minicoredumper status
-  minicoredumper: unrecognized service
+Changelog:
+=========
+Fix inconsistent float negation in constant expressions.
+Fixed bug GH-8841 (php-cli core dump calling a badly formed function).
+Fixed bug GH-10737 (PHP 8.1.16 segfaults on line 597 of sapi/apache2handler/sapi_apache2.c).
+Fixed bug GH-11028 (Heap Buffer Overflow in zval_undefined_cv.).
+Fixed bug GH-11108 (Incorrect CG(memoize_mode) state after bailout in ??=).
 
-Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit d477cbb5267f39846d129f27d0f6a7f2b001db7b)
+(cherry picked from commit d8ae640c02eebcf6082df40dc3adc0634e1e1ef2)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-oe/recipes-kernel/minicoredumper/minicoredumper_2.0.3.bb | 2 +-
+ meta-oe/recipes-devtools/php/{php_8.2.5.bb => php_8.2.6.bb} | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-devtools/php/{php_8.2.5.bb => php_8.2.6.bb} (99%)
 
-diff --git a/meta-oe/recipes-kernel/minicoredumper/minicoredumper_2.0.3.bb b/meta-oe/recipes-kernel/minicoredumper/minicoredumper_2.0.3.bb
-index 2c4111bc3e..1e8ce7e69b 100644
---- a/meta-oe/recipes-kernel/minicoredumper/minicoredumper_2.0.3.bb
-+++ b/meta-oe/recipes-kernel/minicoredumper/minicoredumper_2.0.3.bb
-@@ -37,7 +37,7 @@ do_install:append() {
-     install -d ${D}${systemd_system_unitdir}
-     install -m 0644 ${WORKDIR}/minicoredumper.service ${D}${systemd_system_unitdir}
-     install -d ${D}${sysconfdir}/init.d
--    install -m 0644 ${WORKDIR}/minicoredumper.init ${D}${sysconfdir}/init.d/minicoredumper
-+    install -m 0755 ${WORKDIR}/minicoredumper.init ${D}${sysconfdir}/init.d/minicoredumper
+diff --git a/meta-oe/recipes-devtools/php/php_8.2.5.bb b/meta-oe/recipes-devtools/php/php_8.2.6.bb
+similarity index 99%
+rename from meta-oe/recipes-devtools/php/php_8.2.5.bb
+rename to meta-oe/recipes-devtools/php/php_8.2.6.bb
+index fc11e65af4..d302878999 100644
+--- a/meta-oe/recipes-devtools/php/php_8.2.5.bb
++++ b/meta-oe/recipes-devtools/php/php_8.2.6.bb
+@@ -33,7 +33,7 @@ SRC_URI:append:class-target = " \
+           "
  
-     # correct path of minicoredumper
-     sed -i -e s:/usr/bin/minicoredumper:${sbindir}/minicoredumper:g ${D}${sysconfdir}/init.d/minicoredumper
+ S = "${WORKDIR}/php-${PV}"
+-SRC_URI[sha256sum] = "e5a80663cca4f6044ad86a489798147c7af037eca96f6cd357ab36d28cb63757"
++SRC_URI[sha256sum] = "44a70c52f537662c10d91eedbf51fd765c9961be6ba2508ed63bf7a26cdd3100"
+ 
+ CVE_CHECK_IGNORE += "\
+     CVE-2007-2728 \
 -- 
 2.25.1
 
