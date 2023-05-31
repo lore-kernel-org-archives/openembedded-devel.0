@@ -2,58 +2,58 @@ Return-Path: <brgl@bgdev.pl>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D06CFC77B7A
+	by smtp.lore.kernel.org (Postfix) with ESMTP id F1F48C7EE39
 	for <webhook@archiver.kernel.org>; Wed, 31 May 2023 08:26:21 +0000 (UTC)
-Received: from mail-wr1-f45.google.com (mail-wr1-f45.google.com [209.85.221.45])
- by mx.groups.io with SMTP id smtpd.web11.9068.1685521558319128912
+Received: from mail-wr1-f52.google.com (mail-wr1-f52.google.com [209.85.221.52])
+ by mx.groups.io with SMTP id smtpd.web10.9132.1685521575001045183
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 31 May 2023 01:26:12 -0700
+ Wed, 31 May 2023 01:26:15 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="signature has expired" header.i=@bgdev-pl.20221208.gappssmtp.com header.s=20221208 header.b=W7yuwf+U;
- spf=none, err=SPF record not found (domain: bgdev.pl, ip: 209.85.221.45, mailfrom: brgl@bgdev.pl)
-Received: by mail-wr1-f45.google.com with SMTP id ffacd0b85a97d-30adc51b65cso4917326f8f.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 31 May 2023 01:26:11 -0700 (PDT)
+ dkim=fail reason="signature has expired" header.i=@bgdev-pl.20221208.gappssmtp.com header.s=20221208 header.b=zCsQiJva;
+ spf=none, err=SPF record not found (domain: bgdev.pl, ip: 209.85.221.52, mailfrom: brgl@bgdev.pl)
+Received: by mail-wr1-f52.google.com with SMTP id ffacd0b85a97d-30af86a966eso1183052f8f.2
+        for <openembedded-devel@lists.openembedded.org>; Wed, 31 May 2023 01:26:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=bgdev-pl.20221208.gappssmtp.com; s=20221208; t=1685521571; x=1688113571;
+        d=bgdev-pl.20221208.gappssmtp.com; s=20221208; t=1685521573; x=1688113573;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=BBnNI/1E3vZDEx3coaPcmPIzFbBWH2Ci4Gjnz7yDJyU=;
-        b=W7yuwf+U3h+zUZSWunK6xwc7hbE5qTh8evAAbQ1LMqrB7Qn74jqZIyLTb3sbGvTEK+
-         2t9de2uhyiDn8L9k3VTYJbgolwB2Tg+VAaZFqwvOWy4ffPbrtbTfEIyhubrnQT4FR8JX
-         Wn0/prkPqfBCGeXa3hrOydgd6FSozxhLEKA7cIop5dTcc0axGlx/2ctm+x3L6gsX8DHv
-         Ps2VEJFx2QOi5K2tgEsqtHQgvf37gjFie8XeSCDp09z25Kd2wd4mcC9To1rgolWMMpYJ
-         CNefAL9xETBV4wOukFnVHZTzy7bd0tfmTp76h5RZ8KFWUH8eqmRfkURnJIOniNUykI94
-         RAQQ==
+        bh=kaJLcjlVgIwDtAmvPFIDK8E2RaNxU31h6haXrsL5oiU=;
+        b=zCsQiJvaciXLprW7672KcCCLVgbEyaWxF+CSOnNvfDSEs/WG3xTHGgPnwTWBaSnTte
+         G6lXC2BShO/sHfW3D4oHlLvIkKWQk5fRYifAnNj/lcfN156XAqDlT3ZvjZJVZQ5nBVEm
+         9NYV+5bv9squgEIfSCRLmPfbSxKH0wUcUYcFyp73NTqDI4e5MlzwaY6hj6eV6+iuh5IT
+         n6NHy6YlgckDO9afjRzam/W3N5g7b/neR5G47u/E4KY4/YSfhPpzgtoLna9bcQ0PEWe/
+         LM7zmv8HouUqXujujs/XacRl6HAiFalglFVO4n15x+48XnXaOtdDOfmEJoL9XB/LI0sh
+         VXlw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1685521571; x=1688113571;
+        d=1e100.net; s=20221208; t=1685521573; x=1688113573;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=BBnNI/1E3vZDEx3coaPcmPIzFbBWH2Ci4Gjnz7yDJyU=;
-        b=PKty+M1ktu3xQvu3XkfnNG7BcQ2mBT5TUmTyfdI+A40RVE8axA9JfMATm0wWeIQoRw
-         BQNbDJ4ePy6TB2G8v4OtOB7y7XciKpqffGOHsgLVvBjzIUfPnRxUc9btXJp/1Ctdjq9Z
-         RhRIzyxDZnCeSKoVRPkra5fUWJsMTGCLcaxbKUrs3Ys56iYUVStdMw8j0F8NFDSqQHZD
-         1RBjRcRtACdbrk4+Aq3WoEJWxmwsHafyyEZRZH3kdZYpRugjx0Ibr6ipbP7Iw7qj9oa8
-         j0xv3l827LOskpqJLJGVXg9LgiVkmev8rP+TOGDMjbqNfxXqwj94OM82eym/jmbcDcSG
-         eWFg==
-X-Gm-Message-State: AC+VfDwA6ogsniCkPrT+u9Z+LYcj+6dyc70ymPWBXHvqJTVcCE5144RU
-	YlCFICy3KfgE8QzyvVttSX4Dwg==
-X-Google-Smtp-Source: ACHHUZ6GVZMEvFBlvyyNInFVQh48TUfXbIl+fZOb/KP9rY8vOKSc3F7UzfSYAc2ordMVGH9hWRSrnQ==
-X-Received: by 2002:a5d:4441:0:b0:306:3ded:2bf1 with SMTP id x1-20020a5d4441000000b003063ded2bf1mr4498613wrr.60.1685521571361;
-        Wed, 31 May 2023 01:26:11 -0700 (PDT)
+        bh=kaJLcjlVgIwDtAmvPFIDK8E2RaNxU31h6haXrsL5oiU=;
+        b=bmtaQlEMV6+jEOppoqszzofkg3gaPNKCsfpA2Y9n2JuVT0voMSr9/RGKFnUCQA6xmo
+         MFHEqiqQlVdu3s3GsBvVestRDAX7NFWBQsWSbyAduEGbT5El6OI7PTxLSlG0PbUtJEqZ
+         V4X4ed1XPeiGVp+EKKO0iG01N55XJ0AE+xX0JbddISwS9bQhm+Tcm41PaEp9428hD12N
+         XfTB7Q+RQrZ+4mCrPFBMcj0koAbfqlhyLtbZceuwsz18/UJddWH26uwKCj45DO9/QWW/
+         2t4ufzc42oaW8sPupuPxiRpGagXdUX8d2t3dl8GRvDB5YPcTsbi9I0yPc/Mz88TSZ4f7
+         XepQ==
+X-Gm-Message-State: AC+VfDxnDTXLanKK/MmBgzlcHboryLOaN4+F8bLwEkcukOB6r/eIlQ7/
+	BZGGGT2pNqWcmw36qY1YW9XZr5Eop6cfMA32ka4=
+X-Google-Smtp-Source: ACHHUZ4zay47P6Rm9mqxxMH3xwBIApoeObQu8qby5eCyw0Cx1bwrKUfe9vwS4UbYDpIVLd8lBqLffw==
+X-Received: by 2002:adf:f00c:0:b0:306:2a1a:d265 with SMTP id j12-20020adff00c000000b003062a1ad265mr3058422wro.58.1685521573591;
+        Wed, 31 May 2023 01:26:13 -0700 (PDT)
 Received: from brgl-uxlite.home ([2a01:cb1d:334:ac00:fc69:2162:e0f2:38b5])
-        by smtp.gmail.com with ESMTPSA id o11-20020a5d670b000000b0030ada01ca78sm5855346wru.10.2023.05.31.01.26.10
+        by smtp.gmail.com with ESMTPSA id o11-20020a5d670b000000b0030ada01ca78sm5855346wru.10.2023.05.31.01.26.12
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 31 May 2023 01:26:10 -0700 (PDT)
+        Wed, 31 May 2023 01:26:12 -0700 (PDT)
 From: Bartosz Golaszewski <brgl@bgdev.pl>
 To: Khem Raj <raj.khem@gmail.com>,
 	Bruce Ashfield <bruce.ashfield@gmail.com>,
 	openembedded-devel@lists.openembedded.org
 Cc: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
-Subject: [meta-python][PATCH 058/149] python3-redis: add missing run-time dependencies
-Date: Wed, 31 May 2023 10:23:06 +0200
-Message-Id: <20230531082437.10646-59-brgl@bgdev.pl>
+Subject: [meta-python][PATCH 060/149] python3-pypng: new package
+Date: Wed, 31 May 2023 10:23:08 +0200
+Message-Id: <20230531082437.10646-61-brgl@bgdev.pl>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20230531082437.10646-1-brgl@bgdev.pl>
 References: <20230531082437.10646-1-brgl@bgdev.pl>
@@ -63,31 +63,34 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 31 May 2023 08:26:21 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102985
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102987
 
 From: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
 
-Add missing RDEPENDS for this package.
+python3-qrcode has a run-time dependency on pypng but it's not provided
+in meta-python. Add a recipe for it. It has no run-time dependencies
+itself.
 
 Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
 ---
- meta-python/recipes-devtools/python/python3-redis_4.5.5.bb | 2 ++
- 1 file changed, 2 insertions(+)
+ .../recipes-devtools/python/python3-pypng_0.20220715.0.bb | 8 ++++++++
+ 1 file changed, 8 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-pypng_0.20220715.0.bb
 
-diff --git a/meta-python/recipes-devtools/python/python3-redis_4.5.5.bb b/meta-python/recipes-devtools/python/python3-redis_4.5.5.bb
-index 056a31398..eb407a2a1 100644
---- a/meta-python/recipes-devtools/python/python3-redis_4.5.5.bb
-+++ b/meta-python/recipes-devtools/python/python3-redis_4.5.5.bb
-@@ -10,7 +10,9 @@ inherit pypi setuptools3
- 
- RDEPENDS:${PN} += " \
-     python3-asyncio \
-+    python3-compression \
-     python3-cryptography \
-     python3-datetime \
-+    python3-json \
-     python3-packaging \
- "
+diff --git a/meta-python/recipes-devtools/python/python3-pypng_0.20220715.0.bb b/meta-python/recipes-devtools/python/python3-pypng_0.20220715.0.bb
+new file mode 100644
+index 000000000..9e30f67dc
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-pypng_0.20220715.0.bb
+@@ -0,0 +1,8 @@
++SUMMARY = "PNG module for Python."
++SECTION = "devel/python"
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://LICENCE;md5=5b60f319c8cf51f825b4f40aadee3243"
++
++SRC_URI[sha256sum] = "739c433ba96f078315de54c0db975aee537cbc3e1d0ae4ed9aab0ca1e427e2c1"
++
++inherit pypi python_setuptools_build_meta
 -- 
 2.39.2
 
