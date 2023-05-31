@@ -1,92 +1,96 @@
-Return-Path: <wangmy@fujitsu.com>
+Return-Path: <brgl@bgdev.pl>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DE955C77B7C
-	for <webhook@archiver.kernel.org>; Wed, 31 May 2023 07:41:10 +0000 (UTC)
-Received: from esa2.hc1455-7.c3s2.iphmx.com (esa2.hc1455-7.c3s2.iphmx.com [207.54.90.48])
- by mx.groups.io with SMTP id smtpd.web10.8614.1685518863533370609
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3CF64C77B7A
+	for <webhook@archiver.kernel.org>; Wed, 31 May 2023 08:25:11 +0000 (UTC)
+Received: from mail-wr1-f41.google.com (mail-wr1-f41.google.com [209.85.221.41])
+ by mx.groups.io with SMTP id smtpd.web11.9050.1685521510292316342
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 31 May 2023 00:41:03 -0700
+ Wed, 31 May 2023 01:25:10 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: fujitsu.com, ip: 207.54.90.48, mailfrom: wangmy@fujitsu.com)
-X-IronPort-AV: E=McAfee;i="6600,9927,10726"; a="118931667"
-X-IronPort-AV: E=Sophos;i="6.00,205,1681138800"; 
-   d="scan'208";a="118931667"
-Received: from unknown (HELO oym-r2.gw.nic.fujitsu.com) ([210.162.30.90])
-  by esa2.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 31 May 2023 16:40:48 +0900
-Received: from oym-m2.gw.nic.fujitsu.com (oym-nat-oym-m2.gw.nic.fujitsu.com [192.168.87.59])
-	by oym-r2.gw.nic.fujitsu.com (Postfix) with ESMTP id 9E854CD7E7
-	for <openembedded-devel@lists.openembedded.org>; Wed, 31 May 2023 16:40:46 +0900 (JST)
-Received: from kws-ab4.gw.nic.fujitsu.com (kws-ab4.gw.nic.fujitsu.com [192.51.206.22])
-	by oym-m2.gw.nic.fujitsu.com (Postfix) with ESMTP id E00E1BF4BE
-	for <openembedded-devel@lists.openembedded.org>; Wed, 31 May 2023 16:40:45 +0900 (JST)
-Received: from localhost.localdomain (unknown [10.167.225.33])
-	by kws-ab4.gw.nic.fujitsu.com (Postfix) with ESMTP id D0A7A68957;
-	Wed, 31 May 2023 16:40:44 +0900 (JST)
-From: wangmy@fujitsu.com
-To: openembedded-devel@lists.openembedded.org
-Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-python] [PATCH] python3-pint: upgrade 0.21 -> 0.22
-Date: Wed, 31 May 2023 15:40:16 +0800
-Message-Id: <1685518820-20028-18-git-send-email-wangmy@fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
-In-Reply-To: <1685518820-20028-1-git-send-email-wangmy@fujitsu.com>
-References: <1685518820-20028-1-git-send-email-wangmy@fujitsu.com>
-X-TM-AS-GCONF: 00
-X-TM-AS-Product-Ver: IMSS-9.1.0.1417-9.0.0.1002-27662.006
-X-TM-AS-User-Approved-Sender: Yes
-X-TMASE-Version: IMSS-9.1.0.1417-9.0.1002-27662.006
-X-TMASE-Result: 10-0.808900-10.000000
-X-TMASE-MatchedRID: 4E21WKQgrFSjz0nOeth/yUIIxwDaU5mr3SkTY86NiDivY1zctlJ9TBwz
-	72zDzvkOEpOBzVcqqX4Nyr61Mu6ROm0Xr+fj3ww/8t4fUUGeErTBOVz0Jwcxl/qzSYnI5VS9npt
-	r8PnHpyni8zVgXoAltuJ5hXsnxp7jC24oEZ6SpSmcfuxsiY4QFPUvB7glXA0/mq0Ng/3WmFJoO6
-	PAvHEP227xG+qJo14Dv+LHf1sSYaPOhp1+AKBHb4JlKYkl++M48ndb548u/OBLRRcCnMOQSux9n
-	1XpDqsJmC9SiJioatWbjnu8jwgbwH9jicWwFYB0PpCuffGH9zI=
-X-TMASE-SNAP-Result: 1.821001.0001-0-1-22:0,33:0,34:0-0
+ dkim=fail reason="signature has expired" header.i=@bgdev-pl.20221208.gappssmtp.com header.s=20221208 header.b=kiHAoZUj;
+ spf=none, err=SPF record not found (domain: bgdev.pl, ip: 209.85.221.41, mailfrom: brgl@bgdev.pl)
+Received: by mail-wr1-f41.google.com with SMTP id ffacd0b85a97d-30aef0b8837so2318569f8f.1
+        for <openembedded-devel@lists.openembedded.org>; Wed, 31 May 2023 01:25:10 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=bgdev-pl.20221208.gappssmtp.com; s=20221208; t=1685521509; x=1688113509;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=vtSxaDcqbeagR5uUnJeoM3a4ji6bJq9n34yWW1+L6UQ=;
+        b=kiHAoZUjhqmPm7bsBwhAvOKRpbAtdVFwTbNsQcqGm8gemr12fVwOO+Z+eCSIku8gnm
+         HC1xV4dp4gpqIX8jQzrot66a4xGx4mJllu/eD1EXWHh+39zPKIMIN3uUseDGfFpPRqZv
+         dxWrunKSTzOWW9jY3g4wfWc+I5ON16FAa+K2poe1cv5Pz1ep/G5IrQrxjS8H9J1rQYFB
+         k8LrMYYbzE56IGRW3DEQa9wnyHmp+kCIzsILd0dDsU/MPJAH2P91ykpHgRzdj49zSpoV
+         6StHWRd9IoZ89EoOSUBhWss1GSJzrvuYTyuCKshzKC+hPaRZ7QTUXYlidxTzFde9E3XM
+         bJZg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20221208; t=1685521509; x=1688113509;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=vtSxaDcqbeagR5uUnJeoM3a4ji6bJq9n34yWW1+L6UQ=;
+        b=MnpFvdkxC1mW2xJrnwxHcOg4nZSkkUaDt3h8OB8NogEuC19rWatDTtswe22a4CbZox
+         /Nnu89vOphS6dr5/n2W63nNQaoxH0S0WIbfvqHxccRwuG15wRkKY562wjTxAS+OpQyxe
+         QWPOJPG58MpdlGNhOxJ6xGQc0X7/edIpz9geM7AFwruHSuQ/GDGWr30jWDI8Y4luG95e
+         P9emHVmNeN1AZ12m/G79rX2nPlyQqh9Usvo0PhZN6yGOujwjxdOPgjBtw2FOhBf61ztG
+         39AKyrturrk/mboAPFDt5hpN6LIAWGMHfcKFAi1TufIIsbRkdURvFR+J7UTD56neaRh0
+         drxQ==
+X-Gm-Message-State: AC+VfDwxjomjk0s25FjILjLVLPCeovia6NISJIqSLt4rlKtmxOZ81lX9
+	op4FRbp3Wb6zQHF9pC5NUhAlx3wlFRAMs0XimaU=
+X-Google-Smtp-Source: ACHHUZ73yqXv17z8KvBGZ2330KRdIT+Li6eQaGNgNsnfCLP8oHprcCqcA3+tDH8ywMADMqLeNbgC5w==
+X-Received: by 2002:a5d:448f:0:b0:30a:e9a9:a4e4 with SMTP id j15-20020a5d448f000000b0030ae9a9a4e4mr3185078wrq.51.1685521508782;
+        Wed, 31 May 2023 01:25:08 -0700 (PDT)
+Received: from brgl-uxlite.home ([2a01:cb1d:334:ac00:fc69:2162:e0f2:38b5])
+        by smtp.gmail.com with ESMTPSA id o11-20020a5d670b000000b0030ada01ca78sm5855346wru.10.2023.05.31.01.25.08
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 31 May 2023 01:25:08 -0700 (PDT)
+From: Bartosz Golaszewski <brgl@bgdev.pl>
+To: Khem Raj <raj.khem@gmail.com>,
+	Bruce Ashfield <bruce.ashfield@gmail.com>,
+	openembedded-devel@lists.openembedded.org
+Cc: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
+Subject: [meta-python][PATCH 001/149] python3-pyparted: add missing run-time dependencies
+Date: Wed, 31 May 2023 10:22:09 +0200
+Message-Id: <20230531082437.10646-2-brgl@bgdev.pl>
+X-Mailer: git-send-email 2.39.2
+In-Reply-To: <20230531082437.10646-1-brgl@bgdev.pl>
+References: <20230531082437.10646-1-brgl@bgdev.pl>
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 31 May 2023 07:41:10 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102926
+ <openembedded-devel@lists.openembedded.org>; Wed, 31 May 2023 08:25:11 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102928
 
-From: Wang Mingyu <wangmy@fujitsu.com>
+From: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
 
-Changelog:
-==========
-- Drop Python 3.8 compatability following NEP-29.
-- Drop NumPy < 1.21 following NEP-29.
-- Improved typing experience.
-- Migrated fully to pyproject.toml.
-- Migrated to ruff.
-- In order to make static typing possible as required by mypy
-  and similar tools, the way to subclass the registry has been
-  changed.
-- Allow non-quantity atol parameters for isclose and allclose.
+Add missing RDEPENDS for this package.
 
-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
 ---
- .../python/{python3-pint_0.21.bb => python3-pint_0.22.bb}       | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-pint_0.21.bb => python3-pint_0.22.bb} (88%)
+ .../python-pyparted/python3-pyparted_3.12.0.bb               | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
 
-diff --git a/meta-python/recipes-devtools/python/python3-pint_0.21.bb b/meta-python/recipes-devtools/python/python3-pint_0.22.bb
-similarity index 88%
-rename from meta-python/recipes-devtools/python/python3-pint_0.21.bb
-rename to meta-python/recipes-devtools/python/python3-pint_0.22.bb
-index 13944ec78..0eed33f79 100644
---- a/meta-python/recipes-devtools/python/python3-pint_0.21.bb
-+++ b/meta-python/recipes-devtools/python/python3-pint_0.22.bb
-@@ -10,7 +10,7 @@ PYPI_PACKAGE := "Pint"
+diff --git a/meta-python/recipes-extended/python-pyparted/python3-pyparted_3.12.0.bb b/meta-python/recipes-extended/python-pyparted/python3-pyparted_3.12.0.bb
+index 9dd362766..7a0d3987d 100644
+--- a/meta-python/recipes-extended/python-pyparted/python3-pyparted_3.12.0.bb
++++ b/meta-python/recipes-extended/python-pyparted/python3-pyparted_3.12.0.bb
+@@ -17,7 +17,10 @@ DEPENDS += "parted"
  
- inherit pypi ptest python_setuptools_build_meta
- 
--SRC_URI[sha256sum] = "3e98bdf01f4dcf840cc0207c0b6f7510d4e0c6288efc1bf470626e875c831172"
-+SRC_URI[sha256sum] = "2d139f6abbcf3016cad7d3cec05707fe908ac4f99cf59aedfd6ee667b7a64433"
- 
- DEPENDS += "python3-setuptools-scm-native"
+ RDEPENDS:${PN}:class-target += " \
+     parted (>= 2.3) \
+-    python3-stringold python3-codecs python3-math \
++    python3-codecs \
++    python3-math \
++    python3-numbers \
++    python3-stringold \
+ "
+ RDEPENDS:${PN}:class-native = ""
  
 -- 
-2.34.1
+2.39.2
 
 
