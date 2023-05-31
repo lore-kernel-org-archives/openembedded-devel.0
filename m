@@ -2,56 +2,56 @@ Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 60BC0C7EE33
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 58C6DC7EE2F
 	for <webhook@archiver.kernel.org>; Wed, 31 May 2023 11:13:53 +0000 (UTC)
-Received: from mail-yw1-f178.google.com (mail-yw1-f178.google.com [209.85.128.178])
- by mx.groups.io with SMTP id smtpd.web11.11458.1685531624897982455
+Received: from mail-yb1-f172.google.com (mail-yb1-f172.google.com [209.85.219.172])
+ by mx.groups.io with SMTP id smtpd.web11.11457.1685531623706795150
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 31 May 2023 04:13:45 -0700
+ Wed, 31 May 2023 04:13:43 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=oq+1bRSq;
- spf=pass (domain: gmail.com, ip: 209.85.128.178, mailfrom: akuster808@gmail.com)
-Received: by mail-yw1-f178.google.com with SMTP id 00721157ae682-565a63087e9so72811947b3.2
-        for <openembedded-devel@lists.openembedded.org>; Wed, 31 May 2023 04:13:44 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20221208 header.b=PFEXCGtk;
+ spf=pass (domain: gmail.com, ip: 209.85.219.172, mailfrom: akuster808@gmail.com)
+Received: by mail-yb1-f172.google.com with SMTP id 3f1490d57ef6-bad102ce9eeso7491320276.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 31 May 2023 04:13:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1685531624; x=1688123624;
+        d=gmail.com; s=20221208; t=1685531623; x=1688123623;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=W0VZWymFyfk2pGDDYz1WPH7wwyWX0TbCWx5Bz6k0z1Q=;
-        b=oq+1bRSqu1328tZ+0xhi0wJEJk8fpudg90L/KrTucJflLUs2o+32XnbXonHUgsptTO
-         LU40MEXyKgMJfpTRKsbzYuGDB3zAGLrC4aNAQ1LVtSTuze9KILI0lbCUh63oq9B1LJUt
-         eSzWxNLr0hvDuCT2HvBAYa/7wRR0ZD3gEZxlyo+cWw0VmCElNBFTc7jH/nrBrMAfRUyg
-         nlJfvHO88XsMV3/dCrcOvv629qET0mc+KosgYGm7X0vSUXFXso0ouXdUAM6swVKmItai
-         WhXKjdPCr1QhdkulnEU4Ao43jMKPy9mTpV7erP1vCno9vPpMNpM4Ksf+WswuJJ2gG3aT
-         q12w==
+        bh=MOc2h9R32nSz0RvFBo4SQahh1DM3svFQh5TtXhtMY+c=;
+        b=PFEXCGtkWhaMX+SDMZfghPzWKOSFnVnMxGjCksOVl4fz5Hu7nYbwjD/vN67a69fYkG
+         XAwE3eixILCretr31oiHUXg0HBqSpIXUG1t9xePyxkePSj/+uKeLnyUWuLQTf7ub1gk9
+         Hexm4o8QX7lUnB8t161guJcymfGZ7AFbrGfnVZaEnRpATyoZNc0TBWsbKveUbWmXasg4
+         xGqJ68dvwgU5HLPXYMCzUwupE4xpPOItItkfn9rjJO5DH9vEVSJrU/kF7P8SRY4oG5BZ
+         UkRzmqd0+jrswPlDVWIxBDyHMcQCnIQbi4VYbwL8fWKoVY8R5oOtHIMK58+xQV9vg8MN
+         MwXw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1685531624; x=1688123624;
+        d=1e100.net; s=20221208; t=1685531623; x=1688123623;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=W0VZWymFyfk2pGDDYz1WPH7wwyWX0TbCWx5Bz6k0z1Q=;
-        b=GFmh54bPaA9tkNBkRDfXB/464uJYKVoW4crGuGf05SVfhcf0xnJsvWsZzhxefokZzJ
-         AcqTkRV4CwEqxU/55lSe7RIO/E7dMW7xsq3Ajz2qxN6R4IEiQfaxnWmODjRmkqTjgXhw
-         ypDxtEyRQigcH5ZNHiqeOf8C2w9NvElhP9SQzu0t5s3gHjffQ5TUvSEGW5cGfdrIzgpg
-         aMUYwClVbq4csTH5PGZXF37SwN4a+HwnG1XGv/h6MNGyTUUqBXwZOnnOsZC69FAqTTBz
-         hWT7GOYterUtRaVS+ghMjO9bxQ8vHkQBWxxg9brGbg6jv+5NJ/v8GTgISIxFdA+O+v/V
-         VQ2g==
-X-Gm-Message-State: AC+VfDxM5QDb69qf655+eZUQIQ0WPr2mikySPPAmGY/jlivax2u8FSjs
-	209W3qTaAXHrifpOneXWVM8tB4gbKV4=
-X-Google-Smtp-Source: ACHHUZ7LcazyPUj4SmO4EW0/HnuQ/FRoRzlGHZJlI/pdWfG1Uf6DEWiEzUZ08wXX4vkiyNd/Enq3ZQ==
-X-Received: by 2002:a0d:e84b:0:b0:565:f045:18c3 with SMTP id r72-20020a0de84b000000b00565f04518c3mr5823623ywe.20.1685531623738;
-        Wed, 31 May 2023 04:13:43 -0700 (PDT)
+        bh=MOc2h9R32nSz0RvFBo4SQahh1DM3svFQh5TtXhtMY+c=;
+        b=IK2wJzv2sr+E4FyV+lnhexVmPAvwzSIpiQjQjnIGB30Bow5xQp2G5ER/DsiFYWSS1V
+         0UN3/D1Rv+4leRPsd8Q68moVMf0PL64mxzPV0ciTuiYVn/asjCXWBteBu0gHqmoGQZnW
+         Zl/3JERtF5mv9SX9I88O9SK7AruBcd6xAguBBVhx+ovqtTTfZ2JvykdA0E4mCrjW4URm
+         xZ7wLO5dwDfa4IkCNgi9yl5PPf1Ru9Haq94q+5xzxOvhDAAd5E9rE5rHAuwWWu31CtCu
+         nV6YIlM+mrA+RB4gwauR/Pr5TqXQHZjK5bRYVvG03iC64GM68Lx2XdPfKXLaaAt6awqF
+         AwlA==
+X-Gm-Message-State: AC+VfDxRoNI1Hfr9uBFabndZYGXFPnbGifJkxiT4uuiJAMZ7Azc3Gdlb
+	8mvHgShA7P0X+U6WXTiGBY5pqhFWl6I=
+X-Google-Smtp-Source: ACHHUZ6XI/eZ1CYnWhXGND3IrWIILDs5IofG0iZpV4FO+RvP2iBPXHNWuzS5L6YRA7OQnaRs2vBcxg==
+X-Received: by 2002:a25:24c5:0:b0:bad:6f:8526 with SMTP id k188-20020a2524c5000000b00bad006f8526mr6115995ybk.57.1685531622576;
+        Wed, 31 May 2023 04:13:42 -0700 (PDT)
 Received: from keaua.attlocal.net ([2600:1700:9190:ba10:a3c5:f403:52db:88cf])
         by smtp.gmail.com with ESMTPSA id t129-20020a814687000000b00545a08184fdsm5246897ywa.141.2023.05.31.04.13.42
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 31 May 2023 04:13:43 -0700 (PDT)
+        Wed, 31 May 2023 04:13:42 -0700 (PDT)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][mickledore][PATCH 33/36] libgphoto2: Edit out sysroot from CC variable in configure
-Date: Wed, 31 May 2023 07:13:06 -0400
-Message-Id: <20230531111309.2454603-33-akuster808@gmail.com>
+Subject: [meta-oe][mickledore][PATCH 32/36] gimp: Fix buildpaths in binaries and scripts
+Date: Wed, 31 May 2023 07:13:05 -0400
+Message-Id: <20230531111309.2454603-32-akuster808@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20230531111309.2454603-1-akuster808@gmail.com>
 References: <20230531111309.2454603-1-akuster808@gmail.com>
@@ -61,103 +61,119 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 31 May 2023 11:13:53 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103062
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103061
 
 From: Khem Raj <raj.khem@gmail.com>
 
-Configure emits HAVE_CC variable to be used in sourcecode and its built
-from CC env var, CC in OE contains buildpaths in --sysroot option,
-therefore edit this option out in configure.ac itself and remove all
-other workarounds to fix this issue in recipe
+Fixes
+
+WARNING: gimp-2.10.34-r0 do_package_qa: QA Issue: File /usr/libexec/gimp-debug-tool-2.0 in package gimp contains reference to TMPDIR
+File /usr/bin/gimp-console-2.10 in package gimp contains reference to TMPDIR
+File /usr/bin/gimptool-2.0 in package gimp contains reference to TMPDIR
+File /usr/bin/gimp-2.10 in package gimp contains reference to TMPDIR [buildpaths]
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit c0a344ab713d213933d59875f74ce89612c877c3)
+(cherry picked from commit d3bfe80601963cf8c41d67e0eba299b37beec9a5)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- ...figure-Filter-out-buildpaths-from-CC.patch | 48 +++++++++++++++++++
- .../gphoto2/libgphoto2_2.5.30.bb              |  7 +--
- 2 files changed, 49 insertions(+), 6 deletions(-)
- create mode 100644 meta-oe/recipes-graphics/gphoto2/libgphoto2/0001-configure-Filter-out-buildpaths-from-CC.patch
+ ...irst-line-of-compiler-version-string.patch | 30 ++++++++++++++++
+ ...dd-build-time-library-paths-to-LD_LI.patch | 34 +++++++++++++++++++
+ meta-gnome/recipes-gimp/gimp/gimp_2.10.34.bb  |  4 ++-
+ 3 files changed, 67 insertions(+), 1 deletion(-)
+ create mode 100644 meta-gnome/recipes-gimp/gimp/gimp/0001-configure-Keep-first-line-of-compiler-version-string.patch
+ create mode 100644 meta-gnome/recipes-gimp/gimp/gimp/0001-libtool-Do-not-add-build-time-library-paths-to-LD_LI.patch
 
-diff --git a/meta-oe/recipes-graphics/gphoto2/libgphoto2/0001-configure-Filter-out-buildpaths-from-CC.patch b/meta-oe/recipes-graphics/gphoto2/libgphoto2/0001-configure-Filter-out-buildpaths-from-CC.patch
+diff --git a/meta-gnome/recipes-gimp/gimp/gimp/0001-configure-Keep-first-line-of-compiler-version-string.patch b/meta-gnome/recipes-gimp/gimp/gimp/0001-configure-Keep-first-line-of-compiler-version-string.patch
 new file mode 100644
-index 0000000000..570bb3e4c1
+index 0000000000..618b4cc7a7
 --- /dev/null
-+++ b/meta-oe/recipes-graphics/gphoto2/libgphoto2/0001-configure-Filter-out-buildpaths-from-CC.patch
-@@ -0,0 +1,48 @@
-+From 06be633b8f4e2241bd37d4faf62b49606ad778e7 Mon Sep 17 00:00:00 2001
++++ b/meta-gnome/recipes-gimp/gimp/gimp/0001-configure-Keep-first-line-of-compiler-version-string.patch
+@@ -0,0 +1,30 @@
++From 5711ccfab40e304ced7f5be39a4083e3fcecff91 Mon Sep 17 00:00:00 2001
 +From: Khem Raj <raj.khem@gmail.com>
-+Date: Thu, 25 May 2023 19:01:36 -0700
-+Subject: [PATCH] configure: Filter out buildpaths from CC
++Date: Wed, 24 May 2023 22:22:41 -0700
++Subject: [PATCH] configure: Keep first line of compiler version string
++
++Full output of cc -v may contain additional information which could
++contain build path information, which is unnessasary
++
++Upstream-Status: Submitted [https://gitlab.gnome.org/GNOME/gimp/-/merge_requests/926]
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ configure.ac | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/configure.ac b/configure.ac
++index c25415d..68707a0 100644
++--- a/configure.ac
+++++ b/configure.ac
++@@ -599,7 +599,7 @@ fi
++ for CC_VERSION_OPT in $CC_VERSION_OPTS; do
++   # We run $CC, and escape and format its output, in a single step,
++   # since some shells expand escape sequences in "echo" arguments.
++-  CC_VERSION="`$CC $CC_VERSION_OPT 2>&1 | sed -e 's/\\\\/\\\\\\\\\\\\\\\\/g;s/^/\\\\t/;s/$/\\\\n/' | tr -d '\n'`"
+++  CC_VERSION="`$CC $CC_VERSION_OPT 2>&1 | head -1 | sed -e 's/\\\\/\\\\\\\\\\\\\\\\/g;s/^/\\\\t/;s/$/\\\\n/' | tr -d '\n'`"
++   if test $? -eq 0; then
++     break
++   fi
++-- 
++2.40.1
++
+diff --git a/meta-gnome/recipes-gimp/gimp/gimp/0001-libtool-Do-not-add-build-time-library-paths-to-LD_LI.patch b/meta-gnome/recipes-gimp/gimp/gimp/0001-libtool-Do-not-add-build-time-library-paths-to-LD_LI.patch
+new file mode 100644
+index 0000000000..cec0055284
+--- /dev/null
++++ b/meta-gnome/recipes-gimp/gimp/gimp/0001-libtool-Do-not-add-build-time-library-paths-to-LD_LI.patch
+@@ -0,0 +1,34 @@
++From c720df90dfe3a3e92e34bfb36a04cc792064a501 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Wed, 24 May 2023 22:39:02 -0700
++Subject: [PATCH] libtool: Do not add build time library paths to
++ LD_LIBRARY_PATH
++
++This does not serve much purpose on cross builds as it will add build
++time paths which are only useful when trying to run these tools from
++build area but when they are cross built this is not possible to run
++them like this.
 +
 +Upstream-Status: Inappropriate [Cross-compile specific]
 +
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +---
-+ configure.ac                 | 4 +++-
-+ libgphoto2_port/configure.ac | 6 ++++--
-+ 2 files changed, 7 insertions(+), 3 deletions(-)
++ ltmain.sh | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
 +
-+diff --git a/configure.ac b/configure.ac
-+index 17216b1..39c8cc4 100644
-+--- a/configure.ac
-++++ b/configure.ac
-+@@ -261,7 +261,9 @@ GP_CONFIG_MSG([Compiler],[${CC}])
-+ GP_CONFIG_MSG([libltdl includes],[$LTDLINCL])
-+ GP_CONFIG_MSG([libltdl library],[$LIBLTDL])
++diff --git a/ltmain.sh b/ltmain.sh
++index 134902c..068d74a 100644
++--- a/ltmain.sh
+++++ b/ltmain.sh
++@@ -5748,7 +5748,7 @@ func_exec_program ()
++ 	if test yes = "$shlibpath_overrides_runpath" && test -n "$shlibpath_var" && test -n "$temp_rpath"; then
++ 	  $ECHO "\
++     # Add our own library path to $shlibpath_var
++-    $shlibpath_var=\"$temp_rpath\$$shlibpath_var\"
+++    $shlibpath_var=\"$shlibpath_var\"
 + 
-+-AC_DEFINE_UNQUOTED([HAVE_CC], ["$CC"],
-++CC_NO_SYSROOT=`echo $CC | sed -e \
-++		's|--sysroot=.*\b||g'`
-++AC_DEFINE_UNQUOTED([HAVE_CC], ["$CC_NO_SYSROOT"],
-+                    [The C compiler we are using])
-+ 
-+ 
-+diff --git a/libgphoto2_port/configure.ac b/libgphoto2_port/configure.ac
-+index 1086b8e..59f3c34 100644
-+--- a/libgphoto2_port/configure.ac
-++++ b/libgphoto2_port/configure.ac
-+@@ -103,8 +103,10 @@ GP_CONFIG_MSG([Compiler],[${CC}])
-+ GP_CONFIG_MSG([libltdl includes],[$LTDLINCL])
-+ GP_CONFIG_MSG([libltdl library],[$LIBLTDL])
-+ 
-+-AC_DEFINE_UNQUOTED([HAVE_CC], ["$CC"],
-+-                   [The C compiler we're using])
-++CC_NO_SYSROOT=`echo $CC | sed -e \
-++		's|--sysroot=.*\b||g'`
-++AC_DEFINE_UNQUOTED([HAVE_CC], ["$CC_NO_SYSROOT"],
-++                   [The C compiler we are using])
-+ 
-+ AM_CPPFLAGS=""
-+ 
++     # Some systems cannot cope with colon-terminated $shlibpath_var
++     # The second colon is a workaround for a bug in BeOS R4 sed
 +-- 
 +2.40.1
 +
-diff --git a/meta-oe/recipes-graphics/gphoto2/libgphoto2_2.5.30.bb b/meta-oe/recipes-graphics/gphoto2/libgphoto2_2.5.30.bb
-index 0f2800a95f..b1fb7579ee 100644
---- a/meta-oe/recipes-graphics/gphoto2/libgphoto2_2.5.30.bb
-+++ b/meta-oe/recipes-graphics/gphoto2/libgphoto2_2.5.30.bb
-@@ -12,6 +12,7 @@ DEPENDS = "libtool jpeg virtual/libusb0 libexif zlib libxml2"
- SRC_URI = "${SOURCEFORGE_MIRROR}/gphoto/libgphoto2-${PV}.tar.bz2;name=libgphoto2 \
-            file://40-libgphoto2.rules \
-            file://0001-configure.ac-remove-AM_PO_SUBDIRS.patch \
-+           file://0001-configure-Filter-out-buildpaths-from-CC.patch \
- "
- SRC_URI[libgphoto2.sha256sum] = "ee61a1dac6ad5cf711d114e06b90a6d431961a6e7ec59f4b757a7cd77b1c0fb4"
+diff --git a/meta-gnome/recipes-gimp/gimp/gimp_2.10.34.bb b/meta-gnome/recipes-gimp/gimp/gimp_2.10.34.bb
+index 76825d96c5..7343036807 100644
+--- a/meta-gnome/recipes-gimp/gimp/gimp_2.10.34.bb
++++ b/meta-gnome/recipes-gimp/gimp/gimp_2.10.34.bb
+@@ -43,7 +43,9 @@ REQUIRED_DISTRO_FEATURES = "x11"
  
-@@ -32,12 +33,6 @@ do_configure:append() {
-     cp ${STAGING_DATADIR_NATIVE}/gettext/po/Makefile.in.in ${S}/libgphoto2_port/po/
-     cd ${S}/libgphoto2_port/
-     autoreconf -Wcross --verbose --install --force ${EXTRA_AUTORECONF} $acpaths
--
--    # remove WORKDIR information from config to improve reproducibility
--    # libgphoto2_port recheck config will set the WORKDIR info again, so dont do that
--    sed -i 's/'$(echo ${WORKDIR} | sed 's_/_\\/_g')'/../g' ${B}/config.h
--    sed -i 's/'$(echo ${WORKDIR} | sed 's_/_\\/_g')'/../g' ${B}/libgphoto2_port/config.status
--    sed -i '/config\.status/ s/\-\-recheck//' ${B}/libgphoto2_port/Makefile
-     cd ${S}
- }
+ SHPV = "${@gnome_verdir("${PV}")}"
  
+-SRC_URI = "https://download.gimp.org/pub/${BPN}/v${SHPV}/${BP}.tar.bz2"
++SRC_URI = "https://download.gimp.org/pub/${BPN}/v${SHPV}/${BP}.tar.bz2 \
++           file://0001-configure-Keep-first-line-of-compiler-version-string.patch \
++           file://0001-libtool-Do-not-add-build-time-library-paths-to-LD_LI.patch"
+ SRC_URI[sha256sum] = "84004642d351b398a4293cd7fd3592044a944f05bb52850ee6068f247c657aa3"
+ 
+ EXTRA_OECONF = "--disable-python \
 -- 
 2.25.1
 
