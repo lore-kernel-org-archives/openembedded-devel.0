@@ -1,103 +1,98 @@
-Return-Path: <brgl@bgdev.pl>
+Return-Path: <narpat.mali@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 728FCC77B7C
-	for <webhook@archiver.kernel.org>; Wed, 31 May 2023 09:02:32 +0000 (UTC)
-Received: from mail-vs1-f52.google.com (mail-vs1-f52.google.com [209.85.217.52])
- by mx.groups.io with SMTP id smtpd.web11.9552.1685523747195007373
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CDFA8C7EE24
+	for <webhook@archiver.kernel.org>; Wed, 31 May 2023 10:03:22 +0000 (UTC)
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.web10.10419.1685527401046094834
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 31 May 2023 02:02:27 -0700
+ Wed, 31 May 2023 03:03:21 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="signature has expired" header.i=@bgdev-pl.20221208.gappssmtp.com header.s=20221208 header.b=1Yr3Uw9R;
- spf=none, err=SPF record not found (domain: bgdev.pl, ip: 209.85.217.52, mailfrom: brgl@bgdev.pl)
-Received: by mail-vs1-f52.google.com with SMTP id ada2fe7eead31-437d6a60763so523906137.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 31 May 2023 02:02:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=bgdev-pl.20221208.gappssmtp.com; s=20221208; t=1685523746; x=1688115746;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=eywlWXyL1gWHslE8MSaHHT2qmUFi6FrHXAe5QPMMpsw=;
-        b=1Yr3Uw9RxHyeQIn7IKelSGI9ff//zlAeONx5H9XDKPMRJZigz0WrvUqUbCI17sRgPO
-         fLXTxbC8St5qWtCudTU0/XLyK3z2HYoixjXAaKB463YNPbG22qfS1D1gqroDxEQLmHxo
-         RxHZusSplybQg6EqBAAouLLCj1TIOBOn/BTg5zuE2DLBUtUlAxNYQlE9cpQP406W1Y/r
-         k6vUnhr0XHObIKVt1th47ABZQW27njTVfWCU8YzqGTCkslnyrLaNWFgl+Ca0Fu0L2FO+
-         K9iFAOeioJlPE6FAJaqOydG1lDCGlcsQpWRDjdWlv5RpWHnJlejGs44O3lRAeZ+a/SPF
-         Cuqw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1685523746; x=1688115746;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=eywlWXyL1gWHslE8MSaHHT2qmUFi6FrHXAe5QPMMpsw=;
-        b=iK3OZUe9ckhxeslAemA0LtFhUzzNUY27sxPUV6Sfh7s/K8REjzi2LTvN/8lZkoo0cp
-         KovRObvjQVUMcZ0FtgjiGiG3lzUCW4c9i/YheeDDNUpEPK5gT/qd8h5Doyfw3yPGgs0F
-         x66m/4M6LM5h4lD27tlUWYqIaqYFsqwXdigeopzRAXcq44MRAnPlLWackMKR9CeSnWMe
-         gRkgKZQtjQnIN2VpIphJct7HkJH0QqP4oCl8YvohzYvzl6j4aJDHQSvw81Mc68b6CSx9
-         xk6j5dGrtcTWPRb/S7GLyQPO4bb/Y5+ER4+pwT4/m62xbvcGN6x3J6mJwiOHzTFusHL7
-         7iUQ==
-X-Gm-Message-State: AC+VfDzmYStbOcYmpE6pOSBMHZl4c0vOc9ijcMWlBB+mE1Eo9Ta8q63M
-	wycs6VNiLhtJ/5zxr4HjvCZI9oDbXxXRYlSMq2WJRg==
-X-Google-Smtp-Source: ACHHUZ4a041fnROgxY8j/ahHpXaAhTSbOQCY2G5NmvX/2WRBQR9ymV9g4B+wJxW12bJIPHVZG8q7ZAMN6RkLerh5vzA=
-X-Received: by 2002:a05:6102:374:b0:439:4fb6:83fa with SMTP id
- f20-20020a056102037400b004394fb683famr4430458vsa.9.1685523746274; Wed, 31 May
- 2023 02:02:26 -0700 (PDT)
+ dkim=pass header.i=@windriver.com header.s=pps06212021 header.b=GpzbAYLj;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=5515a05663=narpat.mali@windriver.com)
+Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 34V4eLi3012919
+	for <openembedded-devel@lists.openembedded.org>; Wed, 31 May 2023 10:03:20 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com; h=from : to : cc :
+ subject : date : message-id : mime-version : content-transfer-encoding :
+ content-type; s=PPS06212021;
+ bh=m91E+1CuFtjDDShhNMC00SLxbxpLX2V3IdDcefMWN0k=;
+ b=GpzbAYLjsNGbTL3+BXCDQ60UziKkAoD9MexGe9J9Y9yN1pWPUMynq9XCDy2sZE0Bpdaq
+ leBA6moaZkQ4afWBBkqNkS0x9EZ+V+MYf9c8lIFhzeS9Up/t9KXcyrj0gqg41kQiVdIr
+ sbS937MrsVYOKpxsKKE+zjXG7atspGFQ/NoCRLenRHFb/EjEPwepyPcIcTDUF/NMo+zF
+ duAmGZRcXM6GgLdxZKoGymzU5/ucwDhufGoYRMD/Lr5UEp1dizKPuxAKGHN3u5ElvibR
+ bvBjNW9jxS+JZlDtic5tRChr2OVdZHo+K4O0yiVJvuSDLD5kbhFW2kidIHm/3j6qbgxs EA== 
+Received: from ala-exchng01.corp.ad.wrs.com (unknown-82-252.windriver.com [147.11.82.252])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3qu8u8kjst-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Wed, 31 May 2023 10:03:20 +0000
+Received: from blr-linux-engg1.wrs.com (147.11.136.210) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.23; Wed, 31 May 2023 03:03:17 -0700
+From: nmali <narpat.mali@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: <hari.gpillai@windriver.com>
+Subject: [meta-python][kirkstone][PATCH 1/1] python3-django: upgrade 4.0.2 -> 4.2.1
+Date: Wed, 31 May 2023 10:02:57 +0000
+Message-ID: <20230531100257.3467702-1-narpat.mali@windriver.com>
+X-Mailer: git-send-email 2.40.0
 MIME-Version: 1.0
-References: <20230531082437.10646-1-brgl@bgdev.pl> <45fcfa94-0f71-47af-3eb8-2091d3c8d0db@windriver.com>
-In-Reply-To: <45fcfa94-0f71-47af-3eb8-2091d3c8d0db@windriver.com>
-From: Bartosz Golaszewski <brgl@bgdev.pl>
-Date: Wed, 31 May 2023 11:02:15 +0200
-Message-ID: <CAMRc=Me-r_8sj_9-OVo0kYHDVu2aNXpJLjdxu0AptVo=78nZrg@mail.gmail.com>
-Subject: Re: [oe] [meta-python][PATCH 000/149] python3: improve run-time
- dependencies situation
-To: ChenQi <Qi.Chen@windriver.com>
-Cc: Khem Raj <raj.khem@gmail.com>, Bruce Ashfield <bruce.ashfield@gmail.com>, 
-	openembedded-devel@lists.openembedded.org, 
-	Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [147.11.136.210]
+X-ClientProxiedBy: ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) To
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252)
+X-Proofpoint-ORIG-GUID: _SJEe8imADLifuNR0UqFmX3RBwNpnvSJ
+X-Proofpoint-GUID: _SJEe8imADLifuNR0UqFmX3RBwNpnvSJ
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.254,Aquarius:18.0.957,Hydra:6.0.573,FMLib:17.11.176.26
+ definitions=2023-05-31_06,2023-05-30_01,2023-05-22_02
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 lowpriorityscore=0
+ clxscore=1015 malwarescore=0 bulkscore=0 mlxlogscore=999 impostorscore=0
+ suspectscore=0 adultscore=0 phishscore=0 spamscore=0 priorityscore=1501
+ mlxscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.12.0-2304280000 definitions=main-2305310087
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 31 May 2023 09:02:32 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103028
+ <openembedded-devel@lists.openembedded.org>; Wed, 31 May 2023 10:03:22 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103029
 
-On Wed, May 31, 2023 at 10:55=E2=80=AFAM ChenQi <Qi.Chen@windriver.com> wro=
-te:
->
-> On 5/31/23 16:22, Bartosz Golaszewski wrote:
-> > From: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
-> >
-> > A significant number of python recipes don't specify all the run-time
-> > dependencies required to at least be able to import all the installed
-> > modules. This series is the result of a semi-automated run through all
-> > python recipes in meta-python, building minimal images and verifying th=
-at
-> > there are no import exceptions.
->
-> I checked a few changes. Why are some recipes adding 'python3-unittest'
-> as a runtime dependency?
->
-> For example, python3-ldap does not seem to need it. I checked the codes,
-> https://github.com/cannatag/ldap3, all unittest references reside inside
-> the test/ directory.
->
-> If it's a semi-automated run, then when it fails, I think the failed
-> import commands could be recorded and put in the commit message. This
-> could be achieved by using a template commit file which is then
-> substituted to generate the actual commit file and using '-F' option to
-> commit.
->
-> Regards,
->
-> Qi
+From: Narpat Mali <narpat.mali@windriver.com>
 
-In this case it's not ldap itself but slapdtest which is also shipped
-and installed by the recipe. If someone ends up splitting it into its
-propert ptest package then we could remove this dependency but as it
-is now: it's impossible to import all shipped modules without unittest
-so adding it at least makes it more correct.
+Django 4.2* is designated as a long-term support release. It will receive
+security updates for at least three years after its release.
 
-Bart
+The delta between 4.0.2 and 4.2.1 contain numerous CVEs and other
+bugfixes.
+
+Release Notes: https://docs.djangoproject.com/en/dev/releases/
+
+Signed-off-by: Narpat Mali <narpat.mali@windriver.com>
+---
+ .../python/{python3-django_4.0.2.bb => python3-django_4.2.1.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-django_4.0.2.bb => python3-django_4.2.1.bb} (77%)
+
+diff --git a/meta-python/recipes-devtools/python/python3-django_4.0.2.bb b/meta-python/recipes-devtools/python/python3-django_4.2.1.bb
+similarity index 77%
+rename from meta-python/recipes-devtools/python/python3-django_4.0.2.bb
+rename to meta-python/recipes-devtools/python/python3-django_4.2.1.bb
+index 690b9809dc..4daca65eb5 100644
+--- a/meta-python/recipes-devtools/python/python3-django_4.0.2.bb
++++ b/meta-python/recipes-devtools/python/python3-django_4.2.1.bb
+@@ -1,7 +1,7 @@
+ require python-django.inc
+ inherit setuptools3
+ 
+-SRC_URI[sha256sum] = "110fb58fb12eca59e072ad59fc42d771cd642dd7a2f2416582aa9da7a8ef954a"
++SRC_URI[sha256sum] = "7efa6b1f781a6119a10ac94b4794ded90db8accbe7802281cd26f8664ffed59c"
+ 
+ RDEPENDS:${PN} += "\
+     ${PYTHON_PN}-sqlparse \
+-- 
+2.40.0
+
 
