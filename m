@@ -2,58 +2,58 @@ Return-Path: <brgl@bgdev.pl>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2DF05C7EE31
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 21917C77B73
 	for <webhook@archiver.kernel.org>; Wed, 31 May 2023 08:26:52 +0000 (UTC)
-Received: from mail-wm1-f51.google.com (mail-wm1-f51.google.com [209.85.128.51])
- by mx.groups.io with SMTP id smtpd.web11.9090.1685521604177201209
+Received: from mail-wr1-f48.google.com (mail-wr1-f48.google.com [209.85.221.48])
+ by mx.groups.io with SMTP id smtpd.web10.9143.1685521602129475363
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 31 May 2023 01:26:44 -0700
+ Wed, 31 May 2023 01:26:42 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="signature has expired" header.i=@bgdev-pl.20221208.gappssmtp.com header.s=20221208 header.b=oVMpiSGM;
- spf=none, err=SPF record not found (domain: bgdev.pl, ip: 209.85.128.51, mailfrom: brgl@bgdev.pl)
-Received: by mail-wm1-f51.google.com with SMTP id 5b1f17b1804b1-3f6e1394060so40687425e9.3
-        for <openembedded-devel@lists.openembedded.org>; Wed, 31 May 2023 01:26:43 -0700 (PDT)
+ dkim=fail reason="signature has expired" header.i=@bgdev-pl.20221208.gappssmtp.com header.s=20221208 header.b=jfr4QV6O;
+ spf=none, err=SPF record not found (domain: bgdev.pl, ip: 209.85.221.48, mailfrom: brgl@bgdev.pl)
+Received: by mail-wr1-f48.google.com with SMTP id ffacd0b85a97d-30ae95c4e75so3597023f8f.2
+        for <openembedded-devel@lists.openembedded.org>; Wed, 31 May 2023 01:26:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=bgdev-pl.20221208.gappssmtp.com; s=20221208; t=1685521602; x=1688113602;
+        d=bgdev-pl.20221208.gappssmtp.com; s=20221208; t=1685521600; x=1688113600;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=JrsRKTlmsbEvV63nf9glI2a3zUCW5iA2fpMRNrgCAq0=;
-        b=oVMpiSGMxPVJ7S15EenBy3eklCGbqwz9YGM6JNONUoXZYbEJ/3VL9kxklbJOxzo099
-         EKGfAm1qY+zfH2xA3Yh7WVUiVZzzonTiLe1nJfoXawSaAPmQLJgQDmG125WBuO1K/Ug7
-         RqiUfq2qg8E9wkSZ8uhG6HwpgiWCpXyFOuiikIDyioGKBs3VoKWBJuj0LihPV1pz522w
-         dWC8TjslbZ7zfmHL81hpfGlXST7ZuggVsatj4tCpK/jSBkvRrb4VpjTXhHufP1Nm/LYa
-         lrQv42Ly6xrcjeZ8d27qkkYO1GmvvRaPBuleBBPa4d1sPPqme9HdpdY+n83LJKS2Wvcc
-         R3Pg==
+        bh=yTDQ1PMam5WWB++yPBJOh187prHyp9MRbg8Sf+uSEwY=;
+        b=jfr4QV6Oy9ttMsfo9Kop442X+bgO7y84JWZgjdSwcrqCWMWdEOTmWpFe3g1OQ9brBd
+         Q3gzIsli5JnTk2BX24brFpiN1WmLOG+23t75NDjxC3lbBLJIollwQTCLxZB/aHQRnYau
+         L7wHPiea+KQYpiy2ZeoYI1JxNlZ7N5T8jdyYqLuEzoL3cXEXgijMsIS0ZJq5NxNSn1d8
+         XsQ/JGA8SyVGouKrq9VkXzgpK0Uby5DPteXwAY/l8MVEU8Hf21BUIfJwFLt1hJi01y77
+         82bWnrvoe1dKbgOquqcvkGjJUe6XmrmAubKr4zp+WK/Q3EbRugcbyVz5IkWmqjBcF9ce
+         OtuA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1685521602; x=1688113602;
+        d=1e100.net; s=20221208; t=1685521600; x=1688113600;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=JrsRKTlmsbEvV63nf9glI2a3zUCW5iA2fpMRNrgCAq0=;
-        b=CsmxkWZz8SrIGvRaRlJiOeylC/tPlaDytuyMQ7UYK8Q+ShWLtKvWW0idPLsYJf4glY
-         MOUQrNLHFPKd7zYv6iHRLfVgJoLmAqGqoLSQxtySSmzpyBXGckI4/IO4fjY6QpSBMoPq
-         AHDtHNh/Ce5IKfYsCVJ0teRXCRs04WwdPv950eW7ySKUjmcrGYBcm8qEy2Zr33sCy3+e
-         6Qhx+lww3jwB49VRJgbQgclcz7CTFPBTrrzLA7ep5i5Ciy6eISFYhJPJWLCVhIhwkdXT
-         e5GdL8oPOxV02v0I6yAZI5GLttYtWuG4HIBbFoqDZgcy571xnzIGcLQb1Yd78gKrveZS
-         Dntg==
-X-Gm-Message-State: AC+VfDwNw9rsbWWf1eJ9Es5PT+mkr4M5CyVXmv3TikSiwJUbJV7wpFN/
-	P6fmWkJ/9Kx7LS+Zy+/pG64r+Q==
-X-Google-Smtp-Source: ACHHUZ7j+K1Qs3r7Tp17ckdtRvEu+y+HvG1Vz2cpvd+xCn05fuoi7CbsIFYJ26V8h4Esns3odSFKRw==
-X-Received: by 2002:adf:ed47:0:b0:306:41d3:fca8 with SMTP id u7-20020adfed47000000b0030641d3fca8mr3786335wro.69.1685521602718;
-        Wed, 31 May 2023 01:26:42 -0700 (PDT)
+        bh=yTDQ1PMam5WWB++yPBJOh187prHyp9MRbg8Sf+uSEwY=;
+        b=i78WK2GWaQIXHoZq52MKt/i+HLaW9h/LEnELVz0nR04QmzikwreBZ6H1Qg8RV1DH/h
+         FIcx14HgjiQzv5yiO+bF7WnIE8hCXpDoG23QEXbjUiLM3CB+fQT1zHMCPkaQhpzD9Pfa
+         A/gibxrBRu/kWbJyPsp4CXei3+TMdfZwiyW5q1rfzAGhBxHFA7oWWr56CBv0EFYIlcri
+         Vpvi0nzgql49DlIi0AjPfU09i4prpOZ2JYY0spUk0JU5GVZ2f0d6/8x5SQdg6/BLy/Jb
+         HdsoFRF2rerUQxffnoV/SD4x2Bng14CJ729gjy3Sj5MQnfNNtAlczLZecvyI7Kci+Isr
+         2ZCQ==
+X-Gm-Message-State: AC+VfDwwUDsfC/egjfuRcuNuHkbSzB9eHE5gz248C7SE/W/w/qMoBI2t
+	rMN6YBtrfE3k7akXCjMfHcFakw==
+X-Google-Smtp-Source: ACHHUZ4jYKqHWs+qjPwUsqBFhQWnabsgQyU6TtMF1s3/JNELY3H18jhCxM6OguB7yRumM1ZYhFpH+A==
+X-Received: by 2002:adf:de01:0:b0:30a:e7b6:52d6 with SMTP id b1-20020adfde01000000b0030ae7b652d6mr3470099wrm.52.1685521600756;
+        Wed, 31 May 2023 01:26:40 -0700 (PDT)
 Received: from brgl-uxlite.home ([2a01:cb1d:334:ac00:fc69:2162:e0f2:38b5])
-        by smtp.gmail.com with ESMTPSA id o11-20020a5d670b000000b0030ada01ca78sm5855346wru.10.2023.05.31.01.26.41
+        by smtp.gmail.com with ESMTPSA id o11-20020a5d670b000000b0030ada01ca78sm5855346wru.10.2023.05.31.01.26.39
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 31 May 2023 01:26:42 -0700 (PDT)
+        Wed, 31 May 2023 01:26:40 -0700 (PDT)
 From: Bartosz Golaszewski <brgl@bgdev.pl>
 To: Khem Raj <raj.khem@gmail.com>,
 	Bruce Ashfield <bruce.ashfield@gmail.com>,
 	openembedded-devel@lists.openembedded.org
 Cc: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
-Subject: [meta-python][PATCH 087/149] python3-libevdev: add missing run-time dependencies
-Date: Wed, 31 May 2023 10:23:35 +0200
-Message-Id: <20230531082437.10646-88-brgl@bgdev.pl>
+Subject: [meta-python][PATCH 085/149] python3-jstyleson: add missing run-time dependencies
+Date: Wed, 31 May 2023 10:23:33 +0200
+Message-Id: <20230531082437.10646-86-brgl@bgdev.pl>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20230531082437.10646-1-brgl@bgdev.pl>
 References: <20230531082437.10646-1-brgl@bgdev.pl>
@@ -63,7 +63,7 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 31 May 2023 08:26:52 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103014
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103012
 
 From: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
 
@@ -71,22 +71,19 @@ Add missing RDEPENDS for this package.
 
 Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
 ---
- meta-python/recipes-devtools/python/python3-libevdev_0.11.bb | 5 +++++
- 1 file changed, 5 insertions(+)
+ meta-python/recipes-devtools/python/python3-jstyleson_0.0.2.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-python/recipes-devtools/python/python3-libevdev_0.11.bb b/meta-python/recipes-devtools/python/python3-libevdev_0.11.bb
-index c728cd0ff..27e336710 100644
---- a/meta-python/recipes-devtools/python/python3-libevdev_0.11.bb
-+++ b/meta-python/recipes-devtools/python/python3-libevdev_0.11.bb
-@@ -11,3 +11,8 @@ SRC_URI[sha256sum] = "e9ca006a4df2488a60bd9a740011ee948d81904be2364f017e56016950
- inherit pypi setuptools3
+diff --git a/meta-python/recipes-devtools/python/python3-jstyleson_0.0.2.bb b/meta-python/recipes-devtools/python/python3-jstyleson_0.0.2.bb
+index e70ce33ef..237713bf1 100644
+--- a/meta-python/recipes-devtools/python/python3-jstyleson_0.0.2.bb
++++ b/meta-python/recipes-devtools/python/python3-jstyleson_0.0.2.bb
+@@ -13,3 +13,5 @@ inherit pypi setuptools3
+ SRC_URI[sha256sum] = "680003f3b15a2959e4e6a351f3b858e3c07dd3e073a0d54954e34d8ea5e1308e"
  
- PYPI_PACKAGE = "libevdev"
+ BBCLASSEXTEND = "native nativesdk"
 +
-+RDEPENDS:${PN} += " \
-+    libevdev \
-+    python3-ctypes \
-+"
++RDEPENDS:${PN} += "python3-json"
 -- 
 2.39.2
 
