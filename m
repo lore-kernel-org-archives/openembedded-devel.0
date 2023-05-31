@@ -2,56 +2,56 @@ Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 53C06C77B7C
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 60B8CC7EE31
 	for <webhook@archiver.kernel.org>; Wed, 31 May 2023 11:13:53 +0000 (UTC)
-Received: from mail-yb1-f173.google.com (mail-yb1-f173.google.com [209.85.219.173])
- by mx.groups.io with SMTP id smtpd.web11.11461.1685531626850593037
+Received: from mail-yb1-f171.google.com (mail-yb1-f171.google.com [209.85.219.171])
+ by mx.groups.io with SMTP id smtpd.web11.11460.1685531626110547861
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 31 May 2023 04:13:47 -0700
+ Wed, 31 May 2023 04:13:46 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=KvJqE6Hz;
- spf=pass (domain: gmail.com, ip: 209.85.219.173, mailfrom: akuster808@gmail.com)
-Received: by mail-yb1-f173.google.com with SMTP id 3f1490d57ef6-bacf685150cso9849533276.3
+ dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=SRJyNPZ7;
+ spf=pass (domain: gmail.com, ip: 209.85.219.171, mailfrom: akuster808@gmail.com)
+Received: by mail-yb1-f171.google.com with SMTP id 3f1490d57ef6-bad041bf313so7933657276.0
         for <openembedded-devel@lists.openembedded.org>; Wed, 31 May 2023 04:13:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1685531626; x=1688123626;
+        d=gmail.com; s=20221208; t=1685531625; x=1688123625;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=ut9DpL8AwaKUC84JfcGr2uOsRvhdHJuME8rt+YcRIqw=;
-        b=KvJqE6HzVgsmNTrvy4OmWgRI3oKk2aiZdioRKe1ipE9w9AtNBbFw6xast6IIN/l+u0
-         Q5ENyMJiL+gEAz5bA80ocUxawO5GEejk39TOsIEEBBHUP2a5wlTIijrV3yWkhNAtDgJw
-         JTyZrmnEljdZ5UUPkkpGMF9m5rCqa6LAT/qBWMx0JCOnmdnzHqgGOdGuv0BqZUu6OVS+
-         3HjS8aYXQe+NlaOHGNZt97gvuQAuQRZPvkBj+6mLOofczDhfz3O59dzkU+V5cGWYND0s
-         grnYiJCUmjM2GKMUhnbGI3UXS5lvYg7pm5LiyyP6kdvUZnZgKu1wpZJW8xmh1LTwX8ph
-         ibDA==
+        bh=Lidv/ACSByHsVGai/XnvY4YcDOmmkF2dgjmVdcQa8Kg=;
+        b=SRJyNPZ7q9DMegiAZenQEior1RqXqUAx5MnQso+s7n5dkN0xZrex8tNhkLaX+Qs+41
+         DlGy5FHLhLL5ji/PZOyDVwW4cJjuj9xRcqA9E24YWNIyIpELz4RsZYD5H4uosF3yFQ+A
+         /EzLJ8jfWEbn6ApKjk4v8Umorkz/Zg9uyHus4pCyv+NbNtPouFUPus73+wmjwKi2jwIj
+         /yldJ17T1O/QJyHCsb93ZgWtyhCg8bygqu5dWVLONVCcEfelBEVjriKGojvooheJp6hC
+         BGlxrftJhKQ5RdjJo3VKbK8G+iH2aUJRov5Ihd3s+Kd64pOLmYa2jTi040u7QsiK3RaM
+         1iMw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1685531626; x=1688123626;
+        d=1e100.net; s=20221208; t=1685531625; x=1688123625;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=ut9DpL8AwaKUC84JfcGr2uOsRvhdHJuME8rt+YcRIqw=;
-        b=PSbtSd5RU1Wou9lL2WHQ6r7vzOZ1sin8jJmIZW409yoyMq7IVnocKLaqU65cP1Nlka
-         OJ7OF/Lt8PRz+uyCcD+ZO/E+q5YtdInV4LVpznosYaxq7Hcv92TLw1U48WgCF6pTk5yC
-         72K/nf3C6qZ+587SmDRSKFR8dXK7ygFRXXqEM620Ce/+Sz9LYcjQbD7YapEBSxr9rW1z
-         rs8ywzLMJj4C48kZ0Ld7tKd3QBSni/xNWUfqSczfV1YEUpS1Wu6HUw1g8nvgNUk8hrIu
-         fYDsdxjjwrwlKb+COovcX/Qt8B73TTleLCgQ8Ib7Wg9j79T10ZpIjP7uxhgN/7PNIX+g
-         QNnA==
-X-Gm-Message-State: AC+VfDzwUolAA7opnoWnmRK1PvTW70uejH1KGmj6kigTFr50gCL3w7Ab
-	W2DP6/SQ/w6DSnBIPogF0jSb0nT8MdA=
-X-Google-Smtp-Source: ACHHUZ5/s2P/CbWLZkMd9PxDz4tkJhafmG7V/Zu4IlErJoGiOOrGOPav6eM2ooD5FRMJ32h83b2hlA==
-X-Received: by 2002:a81:d54e:0:b0:54d:ea34:c31 with SMTP id l14-20020a81d54e000000b0054dea340c31mr6071259ywj.29.1685531625838;
+        bh=Lidv/ACSByHsVGai/XnvY4YcDOmmkF2dgjmVdcQa8Kg=;
+        b=C+shVevoaiy2lE3+jsM16W2trDQkVB3bezGyc6k3+csIAYtwPir5MeP+bLifTd6pVk
+         iOSpnWdQYK2e06RFiYsiADugzqLmk5xnW8PY9dpiPkfwB/rOan1XdER3W55wTt0ddgxv
+         7rNzU+plUU/pnEPaXWFMXZhjqkfo11td1cYwm+d6UwwbJaKAKHM5LGOZ1LxvIqigpLpO
+         cgvCZQTqMmEPMB3YR3MCSqnS3YdffCawajvHob+WJB5f7Kc6Wmop0LIE1nwUaXkgrK3l
+         VH7USMVOonkQ/eiCrf8eOWgCdnW9Jz7l+X1vkurhjwdW2GXahsgqWvP2bcfPrnHmWVhv
+         dmsg==
+X-Gm-Message-State: AC+VfDyePBvkXG3pWmebT6q3owHgUUV7qs2Sum5IN6GuCwKOjIDXDiVY
+	B5j2vDwIgjBe+fqtZw2VwKZCph/+ICo=
+X-Google-Smtp-Source: ACHHUZ7QgjUKdlOOO+rR/DoVYK2JVS0Rza9MbLbINw2Pzc0iW+1OTyRp8HQtoyxXVHi3Cjnp7cyAQw==
+X-Received: by 2002:a0d:e647:0:b0:568:bca8:de50 with SMTP id p68-20020a0de647000000b00568bca8de50mr5362560ywe.17.1685531625087;
         Wed, 31 May 2023 04:13:45 -0700 (PDT)
 Received: from keaua.attlocal.net ([2600:1700:9190:ba10:a3c5:f403:52db:88cf])
-        by smtp.gmail.com with ESMTPSA id t129-20020a814687000000b00545a08184fdsm5246897ywa.141.2023.05.31.04.13.45
+        by smtp.gmail.com with ESMTPSA id t129-20020a814687000000b00545a08184fdsm5246897ywa.141.2023.05.31.04.13.44
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 31 May 2023 04:13:45 -0700 (PDT)
+        Wed, 31 May 2023 04:13:44 -0700 (PDT)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][mickledore][PATCH 36/36] x265: Pass --debug-prefix-map to nasm
-Date: Wed, 31 May 2023 07:13:09 -0400
-Message-Id: <20230531111309.2454603-36-akuster808@gmail.com>
+Subject: [meta-oe][mickledore][PATCH 35/36] sgpio: Pass CFLAGS to make
+Date: Wed, 31 May 2023 07:13:08 -0400
+Message-Id: <20230531111309.2454603-35-akuster808@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20230531111309.2454603-1-akuster808@gmail.com>
 References: <20230531111309.2454603-1-akuster808@gmail.com>
@@ -61,37 +61,31 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 31 May 2023 11:13:53 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103065
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103063
 
 From: Khem Raj <raj.khem@gmail.com>
 
-Ensures absolute source paths are not emitted into nasm assembled objects
-
-Fixes
-WARNING: x265-3.2.1-r0 do_package_qa: QA Issue: File /usr/lib/.debug/libx265.so.179 in package x265-dbg contains reference to TMPDIR [buildpaths]
+Ensures all compiler options are passed to build
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 6ab0ca758a901afc70104372cabaf79301f933ec)
+(cherry picked from commit eb0878eccffa9e644c5e5a9563353ab1007b5ecd)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-multimedia/recipes-multimedia/x265/x265_3.2.1.bb | 4 ++++
- 1 file changed, 4 insertions(+)
+ meta-oe/recipes-extended/sgpio/sgpio_1.2.0.10.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-multimedia/recipes-multimedia/x265/x265_3.2.1.bb b/meta-multimedia/recipes-multimedia/x265/x265_3.2.1.bb
-index d786afe81e..250af58e17 100644
---- a/meta-multimedia/recipes-multimedia/x265/x265_3.2.1.bb
-+++ b/meta-multimedia/recipes-multimedia/x265/x265_3.2.1.bb
-@@ -17,6 +17,10 @@ SRC_URI[sha256sum] = "fb9badcf92364fd3567f8b5aa0e5e952aeea7a39a2b864387cec31e3b5
+diff --git a/meta-oe/recipes-extended/sgpio/sgpio_1.2.0.10.bb b/meta-oe/recipes-extended/sgpio/sgpio_1.2.0.10.bb
+index fe2ebe4ff7..9b25745ed6 100644
+--- a/meta-oe/recipes-extended/sgpio/sgpio_1.2.0.10.bb
++++ b/meta-oe/recipes-extended/sgpio/sgpio_1.2.0.10.bb
+@@ -14,6 +14,7 @@ S = "${WORKDIR}/${BPN}"
+ LICENSE = "GPL-2.0-or-later"
+ LIC_FILES_CHKSUM = "file://LICENSE_GPL;md5=393a5ca445f6965873eca0259a17f833"
  
- inherit lib_package pkgconfig cmake
- 
-+do_generate_toolchain_file:append() {
-+    echo "set(CMAKE_ASM_NASM_FLAGS --debug-prefix-map ${S}=/usr/src/debug/${PN}/${EXTENDPE}${PV}-${PR})" >> ${WORKDIR}/toolchain.cmake
-+}
-+
- EXTRA_OECMAKE:append:x86 = " -DENABLE_ASSEMBLY=OFF"
- EXTRA_OECMAKE:append:aarch64 = " -DENABLE_PIC=ON"
- 
++EXTRA_OEMAKE = "CFLAGS='${CFLAGS}'"
+ do_compile:prepend() {
+     oe_runmake clean
+ }
 -- 
 2.25.1
 
