@@ -2,56 +2,56 @@ Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 577A9C7EE33
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 49FDCC7EE31
 	for <webhook@archiver.kernel.org>; Wed, 31 May 2023 11:13:43 +0000 (UTC)
-Received: from mail-yb1-f176.google.com (mail-yb1-f176.google.com [209.85.219.176])
- by mx.groups.io with SMTP id smtpd.web10.11456.1685531618141214852
+Received: from mail-yw1-f177.google.com (mail-yw1-f177.google.com [209.85.128.177])
+ by mx.groups.io with SMTP id smtpd.web11.11437.1685531596290989976
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 31 May 2023 04:13:38 -0700
+ Wed, 31 May 2023 04:13:41 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=clRnDKC4;
- spf=pass (domain: gmail.com, ip: 209.85.219.176, mailfrom: akuster808@gmail.com)
-Received: by mail-yb1-f176.google.com with SMTP id 3f1490d57ef6-b9a6eec8611so1239387276.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 31 May 2023 04:13:38 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20221208 header.b=bNl/+aL/;
+ spf=pass (domain: gmail.com, ip: 209.85.128.177, mailfrom: akuster808@gmail.com)
+Received: by mail-yw1-f177.google.com with SMTP id 00721157ae682-55db055b412so12539777b3.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 31 May 2023 04:13:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1685531617; x=1688123617;
+        d=gmail.com; s=20221208; t=1685531621; x=1688123621;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=j+f94rYmWdZXto3Kfh+2m5tUeEYJWLsMS//MD2difFc=;
-        b=clRnDKC4BTUuIKD4k+3lhz7BDZYGtXpX7uiaEe30sOOS8FAE1b51FMOOsc0jEYXvoR
-         u7AP+6yl7UKO3rIid1MBurvBZ7au5cNDSUrOWSkh3M6LJuYN3tDCuD86no3+Zdnsjgv1
-         OkaFIGY86EfCswJ6FV/sBQRJcUQGrHjv3s+RkHFun+XZLIz5kR/MpXKgTS1+bXqwTNuO
-         xp0p1HGFDUSsKm/dSbGX233DAsoonD1C3Lw3rgCiLfiPcIi3s4sVpksrEZM4vYIY3yP/
-         0Ph+utVxlILT0ArOPO/iZ040Lwtzbr/NZVnnEDY0eRFujsc25b7DmbPrW+g9rDAzdWQC
-         c/tA==
+        bh=RYnqBgakSQIZ2Q9njOYF4HwqcvmTTvJCMUTwrujppLY=;
+        b=bNl/+aL/t6yKHdzrSI9HeGcc128efc87RVjGULBeu9RZjthX+QTPABWNL/mVd1WZUh
+         V10moP8tTrBYuW7tVss9bCX4IkDa9x42qzobUoWth7yOUWFBhS9OxdjOGEFqoJZRL2OL
+         5VKIq4TJVqpkxhdFuB9CSWswoWpz6BuJI+Pvjyu5GwVYwnXle6DD4xwlJuxNXlHPgIoj
+         Kyv8yajF/i2RogGIci/cXLQZ6CWKEMfRjAfOd0to6w53le+EZVo7FzC9vW3wjbVpvDGD
+         BFcVi5ge1oQ3iu184fujtA5Da0oatNTOskmiCrRhkTAKeO3RUlQoQCwZTW5BjJyfYI/d
+         sx8Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1685531617; x=1688123617;
+        d=1e100.net; s=20221208; t=1685531621; x=1688123621;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=j+f94rYmWdZXto3Kfh+2m5tUeEYJWLsMS//MD2difFc=;
-        b=QGFqoONMbiDQig+uFICDmZtmbxREzKMQPGedQtDwdxnnwHFDQR6X//SGSx4gCInMst
-         hCbPVpQ0m8fPcl9s5RisTXNu3Ns3XP3yFtLI/B6DtZ1ayMWBwU3AcQH5UiHikgQU5RH6
-         rycLiwrpGx2KAPiRVtO7t0sofGsrNtFR6k1nA5ax6UYDPFwzfSBzND1N+xuPeFOCoqU5
-         RB7IieMuYYFvFy9+NGf6/DOp8BNlmSp7myB4+fHDGKbrH03dCxu+D1sc5zgfAcOO3AF4
-         42iFUVEs9/8rJnVLFbJoHFspPGxsKLHhrUzPv+mFDGG0XI9E+C7xMappqZ3XIot1MtGl
-         j9vQ==
-X-Gm-Message-State: AC+VfDz1X1gTWLBBmtEWAXDO3Z1wUTG89yZS288Ls1DxxFvyhKcXHN4S
-	uDnlDij9k5cUdanLKz9/hDchEw3oX/w=
-X-Google-Smtp-Source: ACHHUZ5yeRMqb+mOzalHCHdWrflDCFpU1x5r4YGZQbBzokbhwICVYXe8nuliAhokaVdbyc8wl9gokA==
-X-Received: by 2002:a0d:db89:0:b0:55a:c779:d8c0 with SMTP id d131-20020a0ddb89000000b0055ac779d8c0mr5540335ywe.22.1685531617132;
-        Wed, 31 May 2023 04:13:37 -0700 (PDT)
+        bh=RYnqBgakSQIZ2Q9njOYF4HwqcvmTTvJCMUTwrujppLY=;
+        b=ZV3H/Ogv5/7AvDD6q+QjdFWXHAQNC9KAlBAEin3Jf3GZmPbx8KIHxsQMuCsdTnpBsa
+         QwQikrkGQQyktLJFsNYKggPa10/4DsKYhfLCpHbWyW6YGQr0VgkdXUS0S/AEJTv7xaI6
+         mLm6ZOGjp+G4xzQMw+vXpkEYn9Pz6kijiExL16XWNbxU/jbl3m0YZOKRwBcLIWVFovdQ
+         7CAQvR/4amn93KvjH/DbwZTa5WIam76lIsecbH24BgjyOkHjgxNCUkLZqfmwlJro1VwM
+         4kG/LUQmmaVCSmfaJdbanICCDxl5R9u9EzaVtvxlQLvyg/8Xpamk2JZbDFKLP1rrxw/f
+         r8Lg==
+X-Gm-Message-State: AC+VfDx/F36pUsSLVE5isLjjpQEhVWAiTFt/Aa1ftVOLX8aplqK17Oma
+	dC7ImRt9lMCy2cdJt2ZzsMelcIAS5QU=
+X-Google-Smtp-Source: ACHHUZ7e/qa+mAT467KxH6s2e20KjlTUC9m/zDO8LxsZBYVkplbtTFs4cQ+CfISz0WD/WFxlN9OrKg==
+X-Received: by 2002:a05:690c:985:b0:55a:103:db0d with SMTP id ce5-20020a05690c098500b0055a0103db0dmr17173249ywb.7.1685531621163;
+        Wed, 31 May 2023 04:13:41 -0700 (PDT)
 Received: from keaua.attlocal.net ([2600:1700:9190:ba10:a3c5:f403:52db:88cf])
-        by smtp.gmail.com with ESMTPSA id t129-20020a814687000000b00545a08184fdsm5246897ywa.141.2023.05.31.04.13.35
+        by smtp.gmail.com with ESMTPSA id t129-20020a814687000000b00545a08184fdsm5246897ywa.141.2023.05.31.04.13.40
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 31 May 2023 04:13:36 -0700 (PDT)
+        Wed, 31 May 2023 04:13:40 -0700 (PDT)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][mickledore][PATCH 26/36] minifi-cpp: Remove references to buildpaths in generated files
-Date: Wed, 31 May 2023 07:12:59 -0400
-Message-Id: <20230531111309.2454603-26-akuster808@gmail.com>
+Subject: [meta-oe][mickledore][PATCH 30/36] cgdb: Fix buildpaths emitted into cgdb binary
+Date: Wed, 31 May 2023 07:13:03 -0400
+Message-Id: <20230531111309.2454603-30-akuster808@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20230531111309.2454603-1-akuster808@gmail.com>
 References: <20230531111309.2454603-1-akuster808@gmail.com>
@@ -61,48 +61,78 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 31 May 2023 11:13:43 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103055
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103059
 
 From: Khem Raj <raj.khem@gmail.com>
 
-bison/flex emits line directives which can be safely removed from
-generated files.
+Do not add builddir to search paths for cgdb.txt
 
-agent_version.h is generated by cmake which has build information like
-compiler and cflags etc. which contains buildpaths too, therefore
-replace real workdir with <WORKDIR>
+Fixes
+WARNING: cgdb-0.8.0-r0 do_package_qa: QA Issue: File /usr/bin/cgdb in package cgdb contains reference to TMPDIR [buildpaths]
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 0d2df1e4c404fd93ee0095a15db00d17f2321e18)
+(cherry picked from commit ee2f57c7c3b489ddaab3343b9501f6257c65dcee)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-oe/recipes-extended/minifi-cpp/minifi-cpp_0.7.0.bb | 6 ++++++
- 1 file changed, 6 insertions(+)
+ ...not-search-for-cgdb.txt-in-build-dir.patch | 34 +++++++++++++++++++
+ meta-oe/recipes-devtools/cgdb/cgdb_0.8.0.bb   |  3 +-
+ 2 files changed, 36 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-devtools/cgdb/cgdb/0001-cgdb-Do-not-search-for-cgdb.txt-in-build-dir.patch
 
-diff --git a/meta-oe/recipes-extended/minifi-cpp/minifi-cpp_0.7.0.bb b/meta-oe/recipes-extended/minifi-cpp/minifi-cpp_0.7.0.bb
-index b76f120ee1..9ae72d2e99 100644
---- a/meta-oe/recipes-extended/minifi-cpp/minifi-cpp_0.7.0.bb
-+++ b/meta-oe/recipes-extended/minifi-cpp/minifi-cpp_0.7.0.bb
-@@ -61,6 +61,8 @@ EXTRA_OECMAKE += " \
-     -DGCC_AR=${STAGING_BINDIR_TOOLCHAIN}/${AR} \
-     -DGCC_RANLIB=${STAGING_BINDIR_TOOLCHAIN}/${RANLIB} \
-     -DDISABLE_PYTHON_SCRIPTING=ON \
-+    -DFLEX_TARGET_ARG_COMPILE_FLAGS='--noline' \
-+    -DBISON_TARGET_ARG_COMPILE_FLAGS='--no-lines --file-prefix-map=${S}=/usr/src/debug/${PN}/${EXTENDPE}${PV}-${PR}' \
-     "
- EXTRA_OECMAKE:append:toolchain-clang = " -DCMAKE_RANLIB=${STAGING_BINDIR_TOOLCHAIN}/${TARGET_PREFIX}llvm-ranlib"
- LDFLAGS:append:toolchain-clang = " -fuse-ld=lld"
-@@ -88,6 +90,10 @@ do_configure:prepend:libc-musl() {
-     sed -i -e 's/-DHAVE_POSIX_STRERROR_R=0/-DHAVE_POSIX_STRERROR_R=1/' ${S}/CMakeLists.txt
- }
- 
-+do_configure:append() {
-+    sed -i -e 's|${WORKDIR}|<WORKDIR>|g' ${S}/libminifi/include/agent/agent_version.h
-+}
+diff --git a/meta-oe/recipes-devtools/cgdb/cgdb/0001-cgdb-Do-not-search-for-cgdb.txt-in-build-dir.patch b/meta-oe/recipes-devtools/cgdb/cgdb/0001-cgdb-Do-not-search-for-cgdb.txt-in-build-dir.patch
+new file mode 100644
+index 0000000000..989df8ed92
+--- /dev/null
++++ b/meta-oe/recipes-devtools/cgdb/cgdb/0001-cgdb-Do-not-search-for-cgdb.txt-in-build-dir.patch
+@@ -0,0 +1,34 @@
++From be56e955a32e5e9da0be32008afb8a8ee60e9b56 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Wed, 24 May 2023 19:31:23 -0700
++Subject: [PATCH] cgdb: Do not search for cgdb.txt in build dir
 +
- CFLAGS:append:libc-glibc = " -D_GNU_SOURCE"
- CXXFLAGS:append:libc-glibc = " -D_GNU_SOURCE"
++If we do cross builds it encodes the build time workdir here and it wont
++be useful to look into this dir since cross-built cgdb may not run on
++build host and build workdir will not exist on target
++
++Upstream-Status: Inappropriate [Cross-compile specific]
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ cgdb/interface.cpp | 5 -----
++ 1 file changed, 5 deletions(-)
++
++diff --git a/cgdb/interface.cpp b/cgdb/interface.cpp
++index dc58137..d3aab5e 100644
++--- a/cgdb/interface.cpp
+++++ b/cgdb/interface.cpp
++@@ -1568,11 +1568,6 @@ void if_display_help(void)
++ 
++     fs_util_get_path(PKGDATADIR, "cgdb.txt", cgdb_help_file);
++ 
++-    /* File doesn't exist. Try to find cgdb.txt in the build dir in case
++-     * the user is running a built cgdb binary directly. */
++-    if (!fs_verify_file_exists(cgdb_help_file))
++-        fs_util_get_path(TOPBUILDDIR, "doc/cgdb.txt", cgdb_help_file);
++-
++     ret_val = source_set_exec_line(src_viewer, cgdb_help_file, 1, 0);
++ 
++     if (ret_val == 0)
++-- 
++2.40.1
++
+diff --git a/meta-oe/recipes-devtools/cgdb/cgdb_0.8.0.bb b/meta-oe/recipes-devtools/cgdb/cgdb_0.8.0.bb
+index c5a0030823..922dfc7763 100644
+--- a/meta-oe/recipes-devtools/cgdb/cgdb_0.8.0.bb
++++ b/meta-oe/recipes-devtools/cgdb/cgdb_0.8.0.bb
+@@ -9,7 +9,8 @@ DEPENDS = "flex-native readline ncurses"
  
+ inherit autotools texinfo
+ 
+-SRC_URI = "http://cgdb.me/files/${BP}.tar.gz"
++SRC_URI = "http://cgdb.me/files/${BP}.tar.gz \
++           file://0001-cgdb-Do-not-search-for-cgdb.txt-in-build-dir.patch"
+ SRC_URI[sha256sum] = "0d38b524d377257b106bad6d856d8ae3304140e1ee24085343e6ddf1b65811f1"
+ 
+ CACHED_CONFIGUREVARS = "ac_cv_file__dev_ptmx=yes ac_cv_rl_version=6.2 ac_cv_file__proc_self_status=yes"
 -- 
 2.25.1
 
