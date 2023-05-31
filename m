@@ -2,58 +2,58 @@ Return-Path: <brgl@bgdev.pl>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8F743C7EE43
-	for <webhook@archiver.kernel.org>; Wed, 31 May 2023 08:25:41 +0000 (UTC)
-Received: from mail-lf1-f53.google.com (mail-lf1-f53.google.com [209.85.167.53])
- by mx.groups.io with SMTP id smtpd.web11.9059.1685521532438247023
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8AA13C7EE2F
+	for <webhook@archiver.kernel.org>; Wed, 31 May 2023 08:25:51 +0000 (UTC)
+Received: from mail-wr1-f46.google.com (mail-wr1-f46.google.com [209.85.221.46])
+ by mx.groups.io with SMTP id smtpd.web11.9066.1685521550326919156
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 31 May 2023 01:25:32 -0700
+ Wed, 31 May 2023 01:25:50 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="signature has expired" header.i=@bgdev-pl.20221208.gappssmtp.com header.s=20221208 header.b=CAdT3Yv5;
- spf=none, err=SPF record not found (domain: bgdev.pl, ip: 209.85.167.53, mailfrom: brgl@bgdev.pl)
-Received: by mail-lf1-f53.google.com with SMTP id 2adb3069b0e04-4f3bb61f860so6485353e87.3
-        for <openembedded-devel@lists.openembedded.org>; Wed, 31 May 2023 01:25:32 -0700 (PDT)
+ dkim=fail reason="signature has expired" header.i=@bgdev-pl.20221208.gappssmtp.com header.s=20221208 header.b=kpS/CDxp;
+ spf=none, err=SPF record not found (domain: bgdev.pl, ip: 209.85.221.46, mailfrom: brgl@bgdev.pl)
+Received: by mail-wr1-f46.google.com with SMTP id ffacd0b85a97d-30ae69ef78aso513372f8f.1
+        for <openembedded-devel@lists.openembedded.org>; Wed, 31 May 2023 01:25:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=bgdev-pl.20221208.gappssmtp.com; s=20221208; t=1685521530; x=1688113530;
+        d=bgdev-pl.20221208.gappssmtp.com; s=20221208; t=1685521549; x=1688113549;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=pDBNdz240U6QWqttdYdRyiNYKZQ/AVlfcX+TF2bHkAY=;
-        b=CAdT3Yv5Z6JbOtzG6FWJlyBv5PIurwX21/1XQD3c6KdhuO7AJhkk0RKPuySUKNLSsh
-         qhn/b+Gblv6K3yhX6fPi115ILcN4jd2UrG6lulihtYrXmRXAmVyH/MpwVSaHcaU+IkEP
-         VuE0izNht6NLnAo0JOBjjI8fb8J5J7ZV9KpgY86qfgZgLjtGfPZhck9k9AvvcarbdIeA
-         u8r9gp4FjotmgCFkn8jXHGFrrRL45t4G9VOF2HkXrvALXga2bYeA+S919QJrXJEqkRAe
-         3RH/Dva82kZtaID2kh36MnyNyUEPq4oqZxo6UaM/Ce/RGaUr60dv53PxS9T+Ede9ar2F
-         UGGA==
+        bh=lYQERKvufHYVTkqrQu/+itjIDPTPzWRjK6hJp0sHYxw=;
+        b=kpS/CDxpfP7PC47G97w/u9pSYVzZYHmlhPsRFL5gvu5AqUMqJcjJxittcaNyDhP3XQ
+         wA3apUDEMDXXnjxiRGo/PKlB90iVd9oVDgBWXWTm/Gw4dZ5h3q0O/80Yfufl2WtwU7WX
+         94ZZ4bQ+WPnPSIVvtTLUlSWExlQCJyrOx8u5VJwHj2HScPw4oZkao0twm6bFSMLcjyyz
+         dCq/h6D58WxW8ZNdw9rC/whPFI5Phwz0x1L0/8UAeqr2SC4P6shEwvrtZnvxjByYOnaF
+         rCO64EP0U1ORNqU69RgSsAzNAHM+DG6zYNf776Z1FC6Jyi+a2Xof/hNKqMkXb6wTHEYo
+         vb+A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1685521530; x=1688113530;
+        d=1e100.net; s=20221208; t=1685521549; x=1688113549;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=pDBNdz240U6QWqttdYdRyiNYKZQ/AVlfcX+TF2bHkAY=;
-        b=cHGENvLY6/Ph6HORUj4VfmJmx/InzrrxbHK5D/JZ4JtqQ3lNw9Fx5iQRRJ1OXFG7U4
-         HzQIoFuiWLBg7Ap5A/09/VRW0ND4ULib0EKlJxsJC4punorG2KFrBvahKlAWbvj6iCiz
-         JOs9eA00rt3wYDvA7twBQx8bJTXBS/VQENdvUQ31I9wKWFmfCYg7XBgHB9jRA7kD1ucC
-         9Sy7Gv0boGgZjsmD2GDEuONu9i3oUehwgfO6Ps/Ro9IFkjH1FIJR+vFnf3ynVH5Pc85J
-         EIS2BN0qaEYWZ73XEkAgsSPT4DU+bQ94VIXZgkVKad4AqtzNIMYJGgGtchw45IPDK22t
-         QXbg==
-X-Gm-Message-State: AC+VfDwMFDgEB/0SF+ATx8RqfUYi0NJKXwdo5i9c8qqSm+Da5/Kz2Bkg
-	/8N44quPxCH6HNTD6WsVGLi+nw==
-X-Google-Smtp-Source: ACHHUZ6j2eyF8bkfx8xPzJUr+MNG7AJU+AxD+GKXZGW/eFx6Etmvt8nMuUO33izYXazOikH+VAWH5Q==
-X-Received: by 2002:ac2:5544:0:b0:4f2:50ea:c7a2 with SMTP id l4-20020ac25544000000b004f250eac7a2mr2104257lfk.40.1685521530687;
-        Wed, 31 May 2023 01:25:30 -0700 (PDT)
+        bh=lYQERKvufHYVTkqrQu/+itjIDPTPzWRjK6hJp0sHYxw=;
+        b=Vcrk0grYrh2X5sYQGjO3Z+U4e7vUWZlJDMceX7s9K3EoxFjRA1VtPdxndclFC0Hb38
+         RgdV/t8vK02JggN/LEXXwYT7n4b29dx94kcIVAazfe6ingfbCv1pZpg0K5CpAiaJi1/0
+         hFISdAZPTAL71Z/ZnfzN6iKLm+87zdHYd0F1Dh0bN2WB8suKEYp1qb539DnGNbtuUuCv
+         Crrz5GV1EWLNVJST3ETboQXfwc3VuUAxNpvsaiXm/7l2rBiHvd8SOemF7jJBWbHFSbq7
+         OKiw9DqR0Pw0eDL/SzirTCnxkATwhSaqtmB3HFRSR467Q0m6hBrDKMpsHi5V9Q7CmRlO
+         XcZQ==
+X-Gm-Message-State: AC+VfDzmW6q3hK6qXULfiZomLC8+7KG9NZpSJ9l6AFlUW9Tu0HRTpoGp
+	EoDg96GBnNiniNS1OBgsDEc4aHwuj+hSlLVWuc4=
+X-Google-Smtp-Source: ACHHUZ6SwAgtZNLT3bhJWlC8X3y3eZS7G5SMe4jrY3ie9fIZDqbz1CkuHBIWszClGskDxpP+bqGsCg==
+X-Received: by 2002:a5d:4cc2:0:b0:30a:f1dd:697b with SMTP id c2-20020a5d4cc2000000b0030af1dd697bmr3541920wrt.6.1685521548903;
+        Wed, 31 May 2023 01:25:48 -0700 (PDT)
 Received: from brgl-uxlite.home ([2a01:cb1d:334:ac00:fc69:2162:e0f2:38b5])
-        by smtp.gmail.com with ESMTPSA id o11-20020a5d670b000000b0030ada01ca78sm5855346wru.10.2023.05.31.01.25.29
+        by smtp.gmail.com with ESMTPSA id o11-20020a5d670b000000b0030ada01ca78sm5855346wru.10.2023.05.31.01.25.48
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 31 May 2023 01:25:30 -0700 (PDT)
+        Wed, 31 May 2023 01:25:48 -0700 (PDT)
 From: Bartosz Golaszewski <brgl@bgdev.pl>
 To: Khem Raj <raj.khem@gmail.com>,
 	Bruce Ashfield <bruce.ashfield@gmail.com>,
 	openembedded-devel@lists.openembedded.org
 Cc: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
-Subject: [meta-python][PATCH 022/149] python3-pykwalify: don't use PYTHON_PN and improve coding style
-Date: Wed, 31 May 2023 10:22:30 +0200
-Message-Id: <20230531082437.10646-23-brgl@bgdev.pl>
+Subject: [meta-python][PATCH 039/149] python3-tornado: remove the testing submodule from FILES:${PN}-test
+Date: Wed, 31 May 2023 10:22:47 +0200
+Message-Id: <20230531082437.10646-40-brgl@bgdev.pl>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20230531082437.10646-1-brgl@bgdev.pl>
 References: <20230531082437.10646-1-brgl@bgdev.pl>
@@ -62,36 +62,33 @@ Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 31 May 2023 08:25:41 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102949
+ <openembedded-devel@lists.openembedded.org>; Wed, 31 May 2023 08:25:51 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/102966
 
 From: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
 
-We no longer support python2. Drop PYTHON_PN and use python3 explicitly.
-While at it: make indentation consistent
+Tornado has the testing submodule in __all__ so calling:
+
+  from tornado import *
+
+fails if we don't include the ptest package. To fix it: put the testing
+module into the main package.
 
 Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
 ---
- .../recipes-devtools/python/python3-pykwalify_1.8.0.bb      | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ meta-python/recipes-devtools/python/python3-tornado_6.3.bb | 1 -
+ 1 file changed, 1 deletion(-)
 
-diff --git a/meta-python/recipes-devtools/python/python3-pykwalify_1.8.0.bb b/meta-python/recipes-devtools/python/python3-pykwalify_1.8.0.bb
-index 6d93f384e..01196d864 100644
---- a/meta-python/recipes-devtools/python/python3-pykwalify_1.8.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-pykwalify_1.8.0.bb
-@@ -11,9 +11,9 @@ PYPI_PACKAGE = "pykwalify"
- inherit setuptools3 pypi
+diff --git a/meta-python/recipes-devtools/python/python3-tornado_6.3.bb b/meta-python/recipes-devtools/python/python3-tornado_6.3.bb
+index bceb50956..2d9606bb8 100644
+--- a/meta-python/recipes-devtools/python/python3-tornado_6.3.bb
++++ b/meta-python/recipes-devtools/python/python3-tornado_6.3.bb
+@@ -32,5 +32,4 @@ PACKAGES =+ "\
  
- RDEPENDS:${PN} = "\
--    ${PYTHON_PN}-docopt \
--    ${PYTHON_PN}-dateutil \
--    ${PYTHON_PN}-ruamel-yaml \
-+    python3-dateutil \
-+    python3-docopt \
-+    python3-ruamel-yaml \
+ FILES:${PN}-test = " \
+     ${libdir}/${PYTHON_DIR}/site-packages/*/test \
+-    ${libdir}/${PYTHON_DIR}/site-packages/*/testing.py* \
  "
- 
- BBCLASSEXTEND = "native nativesdk"
 -- 
 2.39.2
 
