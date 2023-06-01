@@ -1,191 +1,134 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <hadkeakash4@live.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D660BC7EE23
-	for <webhook@archiver.kernel.org>; Thu,  1 Jun 2023 02:24:26 +0000 (UTC)
-Received: from mail-oi1-f174.google.com (mail-oi1-f174.google.com [209.85.167.174])
- by mx.groups.io with SMTP id smtpd.web11.4717.1685586257617357962
- for <Openembedded-devel@lists.openembedded.org>;
- Wed, 31 May 2023 19:24:17 -0700
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 62D71C77B7E
+	for <webhook@archiver.kernel.org>; Thu,  1 Jun 2023 15:19:41 +0000 (UTC)
+Received: from APC01-PSA-obe.outbound.protection.outlook.com (APC01-PSA-obe.outbound.protection.outlook.com [40.92.52.95])
+ by mx.groups.io with SMTP id smtpd.web10.35111.1685632774126082986
+ for <openembedded-devel@lists.openembedded.org>;
+ Thu, 01 Jun 2023 08:19:35 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20221208 header.b=R7NB5nZ/;
- spf=pass (domain: gmail.com, ip: 209.85.167.174, mailfrom: raj.khem@gmail.com)
-Received: by mail-oi1-f174.google.com with SMTP id 5614622812f47-397f3aec11aso308670b6e.1
-        for <Openembedded-devel@lists.openembedded.org>; Wed, 31 May 2023 19:24:17 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1685586257; x=1688178257;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=knLvZ4OGfodRHMbO0uSaoqd7iVv2jfTddTWGRc3IjQ0=;
-        b=R7NB5nZ/zwzaeo6ILKgdpoGAxxv+yUQPWmnqQ//ys+0rsQqChKXN81h5/ytO69Xs6q
-         oWf5fNOej/DF8VAaHSkVhJZ3qqq4VC9Ecnu4jN6vIGz0I3NsasG5j+KzrLVp7vDavjiZ
-         phgFo358B/A4hpt6D6BHTexEdu+CeXQGq6O3wwUaZT7VpoOwKptPowWIet0STp6hBtcl
-         J/it3giVNRve9dgJLC7WhuCe7w9qffGGUZen+v5BYrHq3bpjWlm0bfEI8W63YtKgrcxV
-         KFUwkiUWIOtTYZYhA3uAMh8CZfBgT1eh6BuHlUzmvQf/EP3iHbxDD2bejtYgh0w0AcSO
-         GoyA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1685586257; x=1688178257;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=knLvZ4OGfodRHMbO0uSaoqd7iVv2jfTddTWGRc3IjQ0=;
-        b=B97cd0YmGAsbRtbrKAz5ZFk64eWy4OLZquHj4CvITG78/IcQjxRu0uxKrRNkGE8oMN
-         F3nzQ8MA3csL55FIY06cCFcXBnKMJa8+48668mL1MeDVtc9WyIYazTQOzdZ5Z3NFZvPl
-         8lPHHnE6goQZ4pV8uHXo58070T2Zl1RUm1LWtsVAgliEJtp5is3m7KxK3l0McPsOoB1w
-         wt9+Z816pEJ5Unjso7uZItVeFbKQjs2K94uoz48G1gpRl/I2C7tPLVUezPdqAwMMxJRW
-         Mqbc3erMP0+6af9znXiKx5svXKKZn1WICwewGDGrWsP2oEcHSyqlaJeUWOmCbYV/00F2
-         MqzA==
-X-Gm-Message-State: AC+VfDy2qwRtMZ7WwGDRRVsxllhhrlHL1Q9860m2bRe3aMJYMhNicSmd
-	WL4CE/rDpyIqI1HiA/bi+cVcXiCDnmNLnYjr3R7tZ6+J
-X-Google-Smtp-Source: ACHHUZ4BoUKgpYrT7TIAtAktnjgA44y/ALIxE7wOOhaaxrWz2QoW2+BiRMOa2jklTAX7BdgHFcRQ5bjghnL9rMInhZE=
-X-Received: by 2002:aca:a995:0:b0:39a:5047:f8a7 with SMTP id
- s143-20020acaa995000000b0039a5047f8a7mr242960oie.16.1685586256660; Wed, 31
- May 2023 19:24:16 -0700 (PDT)
+ dkim=pass header.i=@live.com header.s=selector1 header.b=A9338YOE;
+ spf=pass (domain: live.com, ip: 40.92.52.95, mailfrom: hadkeakash4@live.com)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=mot6QVWXcYeRptLkuBkkdKQEAi4zXgf/tC4D6U3XHDPH+86HFjFp8nIbgit9XrdzEySYckhlTLcYpzSG9qO/mwpNIqcW4d3YpgtXYdFgMJsQKlVdyjgugUxXiO7iGDEZoCKZiOv75xOYLXGsz3/Rp2M9RsTfOwvKvsVvMclx3qkbgh/5p/E+3+jDENfrFXcYCo09KsMX+Our6NTgrGJSo+6nCkUfIEUdPvYYJSIKv+lmy9Wbij6I25samTXaFNjyRM4ikOxkEjd6PHiW3K9KH70a7WRwxynXa8k6V5f+BzAAjX5WO8v8I3R+gfhOahvGkOhv8+2AmjHaNj0mEcu6bQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=R2paZxpDTgXlBNjo2QuSNE8tyxwvj1zcwaoCX/FPViA=;
+ b=EfMjzJnausj7q5uhs6kRnpVF/sbbHQ64UZjGrTDrZUHlVqvKDu2BGOFRjOGuiJwkvIhQzTUwy6rpLGUH4MWTqeOZHAk2WfA3mpT1IWbl9YzRHzhDZzwI0kkJiRoIC41/kCufNgg01LPE8VozpaqMOOI4gTSR4DvKuMCllm6sTu5OnSOr7dsnw2hU84GnsVG2/byita6g8MPWkSEApM3lIvi/IcGUO0iyzxXO4Mh97HRM2Vkf8h4G3e7bjBl6DgVag5P/LzYMLJ30pzD3omuCU74WFXAImqpsh1CYi+vocGi8US/Jzq3i4J22+fIiJcub7BO6CjkBjquS1bDBXRgxYw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
+ dkim=none; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=live.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=R2paZxpDTgXlBNjo2QuSNE8tyxwvj1zcwaoCX/FPViA=;
+ b=A9338YOEUaAhFwPXt6x6ilsELOkiFqjZ5lceFHvZ0neSJp9SU0UV8c4+wrfScGcUGmrQ0xL2kaVIgPiBnutNzXG0CckEFaUSakmGoGlWcZY62myaMGu0ahh1E4lHGGDCi8/6LHJZXVzFUpvv+OffS7GnV5muumfTnLsjDY3AusEUB4PxrwsXe2cd8Uj3m3e9kLGnfIdy+v/j0E1MK43FQ2oS7is/UZamMy3WHUozbjY0w5OczXiBxDIV0/1I6Jtm2ArURvG9BC5ja5vcf+SBhsFJ2p2oTq9b41UUtIqJQi031iRTnrPnEwOW2JNECfQEudoAUxxgzIjoZPlYutXcJw==
+Received: from TYZPR06MB5026.apcprd06.prod.outlook.com (2603:1096:400:1ca::9)
+ by PSAPR06MB4183.apcprd06.prod.outlook.com (2603:1096:301:3d::11) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6455.22; Thu, 1 Jun
+ 2023 15:19:31 +0000
+Received: from TYZPR06MB5026.apcprd06.prod.outlook.com
+ ([fe80::acfb:f22e:d0d:fce4]) by TYZPR06MB5026.apcprd06.prod.outlook.com
+ ([fe80::acfb:f22e:d0d:fce4%6]) with mapi id 15.20.6433.024; Thu, 1 Jun 2023
+ 15:19:31 +0000
+From: Akash Hadke <hadkeakash4@live.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Cameron Miller <cameron.miller@homeaware.com>,
+	Akash Hadke <akash.hadke@kpit.com>
+Subject: [meta-java][kirkstone][PATCH 2/3] Switch to use git SRCREV
+Date: Thu,  1 Jun 2023 17:18:42 +0200
+Message-ID: 
+ <TYZPR06MB502635F16D1EC81A60ED88D784499@TYZPR06MB5026.apcprd06.prod.outlook.com>
+X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20230601151843.29599-1-hadkeakash4@live.com>
+References: <20230601151843.29599-1-hadkeakash4@live.com>
+Content-Type: text/plain
+X-TMN: [YQK/PFhXWFlUIzxytHlfcPibU2PL0Udn]
+X-ClientProxiedBy: FR3P281CA0023.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:1c::7) To TYZPR06MB5026.apcprd06.prod.outlook.com
+ (2603:1096:400:1ca::9)
+X-Microsoft-Original-Message-ID: <20230601151843.29599-2-hadkeakash4@live.com>
 MIME-Version: 1.0
-References: <20230531223435.2927651-1-nat.bailey@windriver.com>
-In-Reply-To: <20230531223435.2927651-1-nat.bailey@windriver.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 31 May 2023 19:23:50 -0700
-Message-ID: <CAMKF1spStGBCvL0ZRTUZWHnKm9M4dt8CvsyypxFuAi5aJEXqRQ@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH] libyang: backport a fix for CVE-2023-26916
-To: nat.bailey@windriver.com
-Cc: Openembedded-devel@lists.openembedded.org, randy.macleod@windriver.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-MS-Exchange-MessageSentRepresentingType: 1
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: TYZPR06MB5026:EE_|PSAPR06MB4183:EE_
+X-MS-Office365-Filtering-Correlation-Id: 6057732c-0c9c-40ac-6164-08db62b39934
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 
+	2bZ1MtgXuL1ip8XAaVXYWeEqTijXmomZ36T9EiFCoVmgZnbjOmV7pMjqTPbNEICG/QA0LdX/zRHMZS0mOaMhRPm2oVj83xypM7qZQ/t6WUHVqyo/SMAx2XeJ7kd68/zlVMm4M7/xeWRxjlaOGYRrHJjY0h/e50mRoVt3dM6yUzcQHS70tLZT+W0N+pDF4t+zAdn08yO3Ax4ODvyY3NKyFe+5sovNGPItV2Cl0HtxBhHwFkoICvIrnrsW5/pHknULqQFyWDxFnwIT55MZZ+RxJKb4VIg5239Q6K8LRj9J5DK7/xsmvCysqv6HGpnrvlNnoAja8PjeL1CQHB5k09BMQwjQfGmAegs5TyKUPq+Aalbqnrg1DF7NJB4Mi4zws3oSP3d20PXg7ekvk9tRVsEMg+tQlqAmJO9h1boTC5yyfTycQPXDerqrQ79jhlTXoELpOxZyGNt/qhkyULr4KlYOeNyRKuLVt9PpRpUgxNAUB0P0jL0vd/Ig8fFwhKgCUqYpeHDQxwn9eaVusLhc4tHeJYaVEErS63MAtxDRbReM4OY=
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?us-ascii?Q?/BCpOu0x/OvJw27XCfJmojKonAwo8UzSOCfA0Sp/ZJmoRF8TMOp0Hyk+I3Qz?=
+ =?us-ascii?Q?Ei9NkIHlkPDi29CFJJiomIDi6H4pYiGIQZkhbps70NEY+/PLVd63pz+GBcWm?=
+ =?us-ascii?Q?iTzl/20usaen4A+pnQmMI8ncCU94cj/38MSdqXyGruPSVBn/rZJZZP6tot0H?=
+ =?us-ascii?Q?f7QlpCSEzD6bfA/b5LWFb0+GI6VzxRmiyATkP1nLZ3POMMrAHNO5/sEFHzd4?=
+ =?us-ascii?Q?d9D57Vgfd/urj/dA37wxcL8B7PMv4K63cYNselwzGBhHbyXiHcq8lfRj7xd5?=
+ =?us-ascii?Q?GMlA+Ydd+zMpUTkIu9UmREQjkhju7tFZa7OKsKx05ljgRG4WCfxS0K7IWvgK?=
+ =?us-ascii?Q?t3i1fSa4PogxavJiIhmhStK5BApdtbvRry6cVQJMCYel3mI/Ir7t90d9LCQw?=
+ =?us-ascii?Q?xSCuau5++ruLWCsVAppGiThT1GPME2DNkMbAJ3fSGqAAsdPAuYYMzdh0Ofas?=
+ =?us-ascii?Q?DF+/YAqpS2rbki7EddPOikB4AlmRkvf+P4GF7q6rQ8juJHVwRkMS4dLtIEIP?=
+ =?us-ascii?Q?Z23EqmZTty2F28QQl0kIhb32mUaa9nf5/TYsn/JDl2EMi7ilp+ge5EPajUdN?=
+ =?us-ascii?Q?TYMeM+149k/OWl0/IlEmx5aN1jPinRnTfJJOsYhRCjGz//lHt3exScmeMbJP?=
+ =?us-ascii?Q?N9vxR2wlK34jcVepHS540tafMWSKQNmfxlqTdnSRBKBrRiM0SeD/XMvVIdNv?=
+ =?us-ascii?Q?QIdMSlOBbAH21GQlMhYC6i0usFTz8+4qCB0mcdC1Ca3sx/XMdgUzvbCh4YiQ?=
+ =?us-ascii?Q?4s1N1CtxTOUvF9J0q5pkll94S1wonAZDCg3xjdSsbaYClobadmx4JIw6rz4o?=
+ =?us-ascii?Q?s6Lmowtc7wCkCvRUJ0QjwfGQbx94mKY1odgCyjtVvfZyGK6cSWzr74eKlzWa?=
+ =?us-ascii?Q?FajjFZPRWQdOweqMiGrUuq4Yi1pa58EXZgTVTCnu82Ud8jVfBziIK95TEv7x?=
+ =?us-ascii?Q?czxtnVpWrUG8PWtzebGCv77ttaIpSjtoQte4KmSqf3qXnpl+foXIZStdwD/w?=
+ =?us-ascii?Q?iH2Aghswyc+1DPhwOhkFuSVGiZ0NJtVXm26S05IuO6BgJbfPgeUvi1UpMIt9?=
+ =?us-ascii?Q?AswtOe0qVmPt3lHpN9pO2PSrGoWQUKfaJsPGOz6GIraMNULwkTTtzW0Yjd61?=
+ =?us-ascii?Q?N331fHaEbQq30cuIq2H7GrKiOxZXP1ow5SnU8nj1Awnh0LIAsUVxFxLxc4mH?=
+ =?us-ascii?Q?87bTvgMJ0a8fRqb3Dq5hbWEHZjwUS0Y9lGAwpQ=3D=3D?=
+X-OriginatorOrg: sct-15-20-4755-11-msonline-outlook-3208f.templateTenant
+X-MS-Exchange-CrossTenant-Network-Message-Id: 6057732c-0c9c-40ac-6164-08db62b39934
+X-MS-Exchange-CrossTenant-AuthSource: TYZPR06MB5026.apcprd06.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Jun 2023 15:19:31.7718
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
+X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 
+	00000000-0000-0000-0000-000000000000
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PSAPR06MB4183
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 01 Jun 2023 02:24:26 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103076
+ <openembedded-devel@lists.openembedded.org>; Thu, 01 Jun 2023 15:19:41 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103078
 
-it does not look like its for master branch. Please prefix subject
-line with correct release infor to help route it better.
+From: Cameron Miller <cameron.miller@homeaware.com>
 
-On Wed, May 31, 2023 at 3:41=E2=80=AFPM Nat Bailey via lists.openembedded.o=
-rg
-<nat.bailey=3Dwindriver.com@lists.openembedded.org> wrote:
->
-> From: Natasha Bailey <nat.bailey@windriver.com>
->
-> This patch fixes a bug in libyang which could cause a null
-> pointer dereference from a call to strcmp.
->
-> Since this recipe includes ptests, the tests were run twice
-> (once before the patch and once after) with the same results:
-> all tests passing except utest_types, which is skipped.
->
-> Signed-off-by: Natasha Bailey <nat.bailey@windriver.com>
-> Signed-off-by: Randy MacLeod <Randy.MacLeod@windriver.com>
-> ---
->  .../libyang/libyang/CVE-2023-26916.patch      | 57 +++++++++++++++++++
->  .../libyang/libyang_2.0.164.bb                |  1 +
->  2 files changed, 58 insertions(+)
->  create mode 100644 meta-oe/recipes-extended/libyang/libyang/CVE-2023-269=
-16.patch
->
-> diff --git a/meta-oe/recipes-extended/libyang/libyang/CVE-2023-26916.patc=
-h b/meta-oe/recipes-extended/libyang/libyang/CVE-2023-26916.patch
-> new file mode 100644
-> index 000000000..f3af3dbff
-> --- /dev/null
-> +++ b/meta-oe/recipes-extended/libyang/libyang/CVE-2023-26916.patch
-> @@ -0,0 +1,57 @@
-> +From dc668d296f9f05aeab6315d44cff3208641e3096 Mon Sep 17 00:00:00 2001
-> +From: Michal Vasko <mvasko@cesnet.cz>
-> +Date: Mon, 13 Feb 2023 10:23:13 +0100
-> +Subject: [PATCH] schema compile UPDATE do not implement 2 same modules
-> +
-> +CVE: CVE-2023-26916
-> +Upstream-Status: Backport [https://github.com/CESNET/libyang/commit/dc66=
-8d296f9f05aeab6315d44cff3208641e3096]
-> +
-> +Refs #1979
-> +---
-> + src/schema_compile.c | 20 +++++++-------------
-> + 1 file changed, 7 insertions(+), 13 deletions(-)
-> +
-> +diff --git a/src/schema_compile.c b/src/schema_compile.c
-> +index ed768ba0..68c0d681 100644
-> +--- a/src/schema_compile.c
-> ++++ b/src/schema_compile.c
-> +@@ -1748,7 +1748,7 @@ lys_has_compiled_import_r(struct lys_module *mod)
-> + LY_ERR
-> + lys_implement(struct lys_module *mod, const char **features, struct lys=
-_glob_unres *unres)
-> + {
-> +-    LY_ERR ret;
-> ++    LY_ERR r;
-> +     struct lys_module *m;
-> +
-> +     assert(!mod->implemented);
-> +@@ -1757,21 +1757,15 @@ lys_implement(struct lys_module *mod, const char=
- **features, struct lys_glob_unr
-> +     m =3D ly_ctx_get_module_implemented(mod->ctx, mod->name);
-> +     if (m) {
-> +         assert(m !=3D mod);
-> +-        if (!strcmp(mod->name, "yang") && (strcmp(m->revision, mod->rev=
-ision) > 0)) {
-> +-            /* special case for newer internal module, continue */
-> +-            LOGVRB("Internal module \"%s@%s\" is already implemented in=
- revision \"%s\", using it instead.",
-> +-                    mod->name, mod->revision ? mod->revision : "<none>"=
-, m->revision ? m->revision : "<none>");
-> +-        } else {
-> +-            LOGERR(mod->ctx, LY_EDENIED, "Module \"%s@%s\" is already i=
-mplemented in revision \"%s\".",
-> +-                    mod->name, mod->revision ? mod->revision : "<none>"=
-, m->revision ? m->revision : "<none>");
-> +-            return LY_EDENIED;
-> +-        }
-> ++        LOGERR(mod->ctx, LY_EDENIED, "Module \"%s@%s\" is already imple=
-mented in revision \"%s\".",
-> ++                mod->name, mod->revision ? mod->revision : "<none>", m-=
->revision ? m->revision : "<none>");
-> ++        return LY_EDENIED;
-> +     }
-> +
-> +     /* set features */
-> +-    ret =3D lys_set_features(mod->parsed, features);
-> +-    if (ret && (ret !=3D LY_EEXIST)) {
-> +-        return ret;
-> ++    r =3D lys_set_features(mod->parsed, features);
-> ++    if (r && (r !=3D LY_EEXIST)) {
-> ++        return r;
-> +     }
-> +
-> +     /*
-> +--
-> +2.34.1
-> +
-> diff --git a/meta-oe/recipes-extended/libyang/libyang_2.0.164.bb b/meta-o=
-e/recipes-extended/libyang/libyang_2.0.164.bb
-> index 2817be7c8..7875c1ef7 100644
-> --- a/meta-oe/recipes-extended/libyang/libyang_2.0.164.bb
-> +++ b/meta-oe/recipes-extended/libyang/libyang_2.0.164.bb
-> @@ -11,6 +11,7 @@ SRCREV =3D "a0cc89516ab5eca84d01c85309f320a94752a64c"
->  SRC_URI =3D "git://github.com/CESNET/libyang.git;branch=3Dmaster;protoco=
-l=3Dhttps \
->             file://libyang-add-stdint-h.patch \
->             file://run-ptest \
-> +           file://CVE-2023-26916.patch \
->             "
->
->  S =3D "${WORKDIR}/git"
-> --
-> 2.34.1
->
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#103075): https://lists.openembedded.org/g/openembedde=
-d-devel/message/103075
-> Mute This Topic: https://lists.openembedded.org/mt/99253028/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
-aj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
+(cherry picked from commit 7fcb6fdace27e25551f84ef4fe730b712a4a5fd0)
+Signed-off-by: Akash Hadke <akash.hadke@kpit.com>
+Signed-off-by: Akash Hadke <hadkeakash4@live.com>
+---
+ recipes-core/rhino/rhino_1.7r4.bb | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
+
+diff --git a/recipes-core/rhino/rhino_1.7r4.bb b/recipes-core/rhino/rhino_1.7r4.bb
+index bb172a5..9a580d5 100644
+--- a/recipes-core/rhino/rhino_1.7r4.bb
++++ b/recipes-core/rhino/rhino_1.7r4.bb
+@@ -10,13 +10,14 @@ PACKAGE_ARCH = "${TUNE_PKGARCH}"
+ 
+ inherit java-library
+ 
++SRCREV = "82ffb8f3e09e77e3b1f5782c35b621e7ca742b58"
+ SRC_URI = "\
+-	https://github.com/mozilla/rhino/archive/refs/tags/Rhino1_7R4_RELEASE.zip \
++	git://github.com/mozilla/rhino;protocol=https;branch=master \
+ 	file://rhino \
+ 	file://rhino-jsc \
+ 	"
+ 
+-S = "${WORKDIR}/rhino-Rhino1_7R4_RELEASE"
++S = "${WORKDIR}/git"
+ 
+ PACKAGES = "${JPN} rhino"
+ 
+-- 
+2.17.1
+
 
