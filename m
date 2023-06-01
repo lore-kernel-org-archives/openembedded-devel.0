@@ -1,262 +1,186 @@
-Return-Path: <brgl@bgdev.pl>
+Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CF93DC7EE23
-	for <webhook@archiver.kernel.org>; Thu,  1 Jun 2023 19:20:28 +0000 (UTC)
-Received: from mail-ua1-f43.google.com (mail-ua1-f43.google.com [209.85.222.43])
- by mx.groups.io with SMTP id smtpd.web10.1652.1685647222598026850
- for <openembedded-devel@lists.openembedded.org>;
- Thu, 01 Jun 2023 12:20:22 -0700
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 28EBBC77B7E
+	for <webhook@archiver.kernel.org>; Thu,  1 Jun 2023 20:38:49 +0000 (UTC)
+Received: from mail-yw1-f180.google.com (mail-yw1-f180.google.com [209.85.128.180])
+ by mx.groups.io with SMTP id smtpd.web10.3456.1685651922017342091
+ for <Openembedded-devel@lists.openembedded.org>;
+ Thu, 01 Jun 2023 13:38:42 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="signature has expired" header.i=@bgdev-pl.20221208.gappssmtp.com header.s=20221208 header.b=RWbhSu3k;
- spf=none, err=SPF record not found (domain: bgdev.pl, ip: 209.85.222.43, mailfrom: brgl@bgdev.pl)
-Received: by mail-ua1-f43.google.com with SMTP id a1e0cc1a2514c-783fc329e72so349177241.3
-        for <openembedded-devel@lists.openembedded.org>; Thu, 01 Jun 2023 12:20:22 -0700 (PDT)
+ dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=QL8Ohiab;
+ spf=pass (domain: gmail.com, ip: 209.85.128.180, mailfrom: akuster808@gmail.com)
+Received: by mail-yw1-f180.google.com with SMTP id 00721157ae682-565c9109167so12852507b3.2
+        for <Openembedded-devel@lists.openembedded.org>; Thu, 01 Jun 2023 13:38:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=bgdev-pl.20221208.gappssmtp.com; s=20221208; t=1685647221; x=1688239221;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=SYuDqQfteIXfXXWeuzJ7yLDCTGuVsbxJUoPvJDo6f5s=;
-        b=RWbhSu3kSb370BRPPPsfVsGBat3lreIidMpGY4Lt9BXTCmja04Vejokh75VsNFFQaw
-         kkRBnTU4t3a9t2FesSdQ8OEASA0cAXiZJyfVb9AvWmxZ/92LNrcLIgCTfWCBZhNKCmpQ
-         EYo4Nk5k6IYKgtpjVEU+WA+IUBy4Y9UujCJOO8eBWLncFdS0CBg710NMiYQRFdCuNNz0
-         uTMoh4+yYvh6Zf+L6LAvNM3J/u/4Eaq0CdRYqMAoaom987TpH360wpWqunzAEgaSmwdy
-         3IILTa56aMoi1+ff9L58LwHYPPBETVacO2mcHONp+j4t0a+nZbyEJ+1qGgCkkuAL5hn6
-         OKuw==
+        d=gmail.com; s=20221208; t=1685651921; x=1688243921;
+        h=content-transfer-encoding:in-reply-to:from:references:to
+         :content-language:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=+ksoTfa+ZKa89DdnYOs3Eu65uvOg4WJryi4XHF07kek=;
+        b=QL8OhiabWJ/mK55pafqnr3Be026m0Nz0z427sdmrDa9lqdPndXSdWk71yeo+DuFmJz
+         MSGKYiVe699feNBXZcpuJ/4RonPDaoKIQ9PCKxSK6WK0huMf0rQoMe9tyvJfjIH735fY
+         O73GHDihyqQQnExyTJ66G3wZpNWPJS6d6HXQr4Gt/uvpEloOF2ZYuLZ3Dl9fuCWvwNoT
+         aT+6O1j8u++vRlZIBjE8Dyds6s4bEXR49fVzGf0QCa5XEJ/s3Ghq5U1gvuWmWlU4rYS9
+         b/xVHmz5iuLg+JR7SfM4Fdgl0/ubLOefP83oA1/gDoYayQYVHtfa8TTH/uoyKSRG7fiM
+         TLNA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1685647221; x=1688239221;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=SYuDqQfteIXfXXWeuzJ7yLDCTGuVsbxJUoPvJDo6f5s=;
-        b=MbX3JwiY7IDusXJIQ0iVrNIyIZtTZ1n0/DBg7PEi2CrcjDr0ye5PkqkYqlivHeSLXy
-         OQ9jwdsLCLzRfqLlsU2aKU69pztt63dv7PooVY+HnJfrQKDWVgruNO3P9xow0mtSYdgb
-         qhZD6TjGZuCO+TsWFxS4j8Dcew62JmrQ96YG80Lq2JjRQgG3w5+vW1LacVNXIq7rQxU7
-         6n8ScG5NwNOYIXQFix/GoScOsE51gMtaVt8fszuyLPetK1kiBQnZZCxcQPUxXvV0c5Wl
-         vxpCKupkkBssyAAyUg2L6uvgbeFj6p1oxh561dvGxgbJvNHCLomC9lQKOE5AtT5Gv5uc
-         x0uw==
-X-Gm-Message-State: AC+VfDyrUJrvSywFmmqDFRhnpLmsApO2nL6CEK4mCgHu7buScftb+ZEf
-	B+ikcfsZHoC8D+5UT5jDap57IXKRHjasrmN8yPoKFXpMI9DkeO9C
-X-Google-Smtp-Source: ACHHUZ4jjKy8/cFAysRUxnXH+XdKl5iWGN88LMMFUuXpWiligJLM3cqfSOpuxGeTsaqQB3VyuKHGPaBQOUJoVDfctKQ=
-X-Received: by 2002:a1f:454e:0:b0:450:2025:5b00 with SMTP id
- s75-20020a1f454e000000b0045020255b00mr1503173vka.4.1685647221314; Thu, 01 Jun
- 2023 12:20:21 -0700 (PDT)
+        d=1e100.net; s=20221208; t=1685651921; x=1688243921;
+        h=content-transfer-encoding:in-reply-to:from:references:to
+         :content-language:subject:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=+ksoTfa+ZKa89DdnYOs3Eu65uvOg4WJryi4XHF07kek=;
+        b=MWpSkvcEyHEHyAyaCt8kGGju0l7GaEVgpv6K4pjjw5SZzskGH24mEgLCwHGziCPskD
+         YwDzfqphlR9RjUGAEoCd99dzE1Bsc+EK64Avjmzd7hRJOAUUxQNMx/CeM5fjJN2VdDMN
+         /ihTPladGIQzljYm6IZ/fgHHpTLnOBleEK2gGCJi7v/gbgK/4EOvNr2vMIvkw5emQlRS
+         Ks6yQX0iBNsboOT+HyMWsiVI2hc9nK+EIQGTby3Y7xsQx+/GvlhirrPGJnOVhi9nkDhy
+         SIgb2805iR9eOjcfWyY1p3PjusV0d0SkzFCcNA8K4GuAg9aIb3BQGxmtiyG/eYCwiyO8
+         rtog==
+X-Gm-Message-State: AC+VfDyn5ii6TxTgIVsBK4Pl0ZN+5gWr4pCG1KL7Ur0YkJraCzWPlFm2
+	VChsqh8P9Gf6DjneW1vKXTs=
+X-Google-Smtp-Source: ACHHUZ7sASeVdKmCcr/ut6Y2PZYaEJgIZkNl0qxFYPe4n5I9Lz+EZ9AKwEXS+p8LJA2uzVSCbAFzLA==
+X-Received: by 2002:a0d:d8c1:0:b0:565:d8f0:7534 with SMTP id a184-20020a0dd8c1000000b00565d8f07534mr9441619ywe.36.1685651921085;
+        Thu, 01 Jun 2023 13:38:41 -0700 (PDT)
+Received: from ?IPV6:2600:1700:9190:ba10:5862:3a98:b5a9:8131? ([2600:1700:9190:ba10:5862:3a98:b5a9:8131])
+        by smtp.gmail.com with ESMTPSA id m124-20020a0dca82000000b0055c935364eesm5456093ywd.2.2023.06.01.13.38.40
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 01 Jun 2023 13:38:40 -0700 (PDT)
+Message-ID: <d60a9b2a-e0a9-c5ca-cd0e-3b35267ca9cb@gmail.com>
+Date: Thu, 1 Jun 2023 16:38:39 -0400
 MIME-Version: 1.0
-References: <20230524181131.3890392-1-joe.slater@windriver.com>
- <6a34b59d-413b-ab1c-2818-8b933ad55438@windriver.com> <CAMRc=MeZTM-cUaganZ2Tuf5WOnbDQftVAX-_QODzvO_fWrWGhw@mail.gmail.com>
- <CAMKF1srQ6rTbVCEVhcbnVyJAqxekTfK3gvZSL6QqxCdaaSHxsw@mail.gmail.com>
-In-Reply-To: <CAMKF1srQ6rTbVCEVhcbnVyJAqxekTfK3gvZSL6QqxCdaaSHxsw@mail.gmail.com>
-From: Bartosz Golaszewski <brgl@bgdev.pl>
-Date: Thu, 1 Jun 2023 21:20:10 +0200
-Message-ID: <CAMRc=Me_aBNJMC47nVxA02g3uFrsmK+0-mhv1NYnsbOy6R+2cw@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH 1/1] libgpiod: modify test 'gpioset: toggle (continuous)'
-To: Khem Raj <raj.khem@gmail.com>
-Cc: randy.macleod@windriver.com, joe.slater@windriver.com, 
-	openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.11.0
+Subject: Re: [meta-oe][PATCH] libyang: backport a fix for CVE-2023-26916 ->
+ For kirkstone !
+Content-Language: en-US
+To: Randy MacLeod <randy.macleod@windriver.com>,
+ Nat Bailey <nat.bailey@windriver.com>,
+ Openembedded-devel@lists.openembedded.org, Khem Raj <raj.khem@gmail.com>
+References: <20230531223435.2927651-1-nat.bailey@windriver.com>
+ <5f4b92d0-7d69-541c-c383-a1c70596887f@windriver.com>
+From: akuster808 <akuster808@gmail.com>
+In-Reply-To: <5f4b92d0-7d69-541c-c383-a1c70596887f@windriver.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 01 Jun 2023 19:20:28 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103088
+ <openembedded-devel@lists.openembedded.org>; Thu, 01 Jun 2023 20:38:49 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103089
 
-On Thu, Jun 1, 2023 at 9:15=E2=80=AFPM Khem Raj <raj.khem@gmail.com> wrote:
->
-> On Thu, Jun 1, 2023 at 12:04=E2=80=AFPM Bartosz Golaszewski <brgl@bgdev.p=
-l> wrote:
-> >
-> > On Wed, May 24, 2023 at 9:46=E2=80=AFPM Randy MacLeod via
-> > lists.openembedded.org
-> > <randy.macleod=3Dwindriver.com@lists.openembedded.org> wrote:
-> > >
-> > > On 2023-05-24 14:11, joe.slater@windriver.com wrote:
-> > >
-> > > From: Joe Slater <joe.slater@windriver.com>
-> > >
-> > > Look for level transitions when testing toggling
-> > > values because using fixed delays to assume value
-> > > changes is not reliable.
-> > >
-> > > The updated commit log and comment below look good to me.
-> > >
-> > >
-> > > Please send a patch to upstream and reply to this thread with
-> > > a link to that or send a commit to update the:
-> > >
-> > > Upstream-Status: pending
-> > >
-> >
-> > This patch breaks the following test for me:
-> >
-> >  =E2=9C=97 gpioset: toggle (continuous)
-> >    (from function `gpiosim_wait_value' in file
-> > /usr/lib/libgpiod/ptest/tests/gpio-tools-test.bats, line 155,
-> >     in test file /usr/lib/libgpiod/ptest/tests/gpio-tools-test.bats, li=
-ne 1587)
-> >      `gpiosim_wait_value sim0 1 0' failed
-> >
-> > on current master meta-openembedded. Why did this even get here?
->
-> It was reviewed and request to upstream was also made.
->
-> We now have ptests runs for meta-oe but on a subset of recipes and they a=
-re
-> run regularly as part of testing. So perhaps it will be good to enable
-> ptests for
-> this and add it to PTESTS_FAST_META_OE in
-> meta-oe/conf/include/ptest-packagelists-meta-oe.inc
-> currently this recipe is part of PTESTS_PROBLEMS_META_OE which means
-> tests are not ready to be enabled, it will be good to sort this out for f=
-uture.
->
 
-Ptest for libgpiod require a kernel feature (gpio-sim module) to be
-enabled if using the yocto kernel. Could this pose a problem? I have
-an automated yocto build that runs the ptests locally but it would be
-great to have it on official autobuilders too.
 
-> The
-> > patch did not go upstream in this form and needs some more work.
-> > Please Cc me on future patches to any of the libgpiod recipes.
-> >
+On 6/1/23 1:48 PM, Randy MacLeod wrote:
+> Oops, Nat forgot the branch prefix.
 >
-> Thanks for signing up although I am not sure how to make it visible,
-> perhaps it would be good to
-> add maintainer info in the recipe header in standard way.
+> Shall she re-send ?
+
+No need. I moved it to the correct folder.
+
+thanks for highlighting it.
+
+-armin
 >
-
-Will do, thanks.
-
-> > In the meantime. Khem: could you please revert this?
-> >
+> ../Randy
 >
-> Yes we can.
+> On 2023-05-31 18:34, Nat Bailey wrote:
+>> From: Natasha Bailey<nat.bailey@windriver.com>
+>>
+>> This patch fixes a bug in libyang which could cause a null
+>> pointer dereference from a call to strcmp.
+>>
+>> Since this recipe includes ptests, the tests were run twice
+>> (once before the patch and once after) with the same results:
+>> all tests passing except utest_types, which is skipped.
+>>
+>> Signed-off-by: Natasha Bailey<nat.bailey@windriver.com>
+>> Signed-off-by: Randy MacLeod<Randy.MacLeod@windriver.com>
+>> ---
+>>   .../libyang/libyang/CVE-2023-26916.patch      | 57 +++++++++++++++++++
+>>   .../libyang/libyang_2.0.164.bb                |  1 +
+>>   2 files changed, 58 insertions(+)
+>>   create mode 100644 meta-oe/recipes-extended/libyang/libyang/CVE-2023-26916.patch
+>>
+>> diff --git a/meta-oe/recipes-extended/libyang/libyang/CVE-2023-26916.patch b/meta-oe/recipes-extended/libyang/libyang/CVE-2023-26916.patch
+>> new file mode 100644
+>> index 000000000..f3af3dbff
+>> --- /dev/null
+>> +++ b/meta-oe/recipes-extended/libyang/libyang/CVE-2023-26916.patch
+>> @@ -0,0 +1,57 @@
+>> +From dc668d296f9f05aeab6315d44cff3208641e3096 Mon Sep 17 00:00:00 2001
+>> +From: Michal Vasko<mvasko@cesnet.cz>
+>> +Date: Mon, 13 Feb 2023 10:23:13 +0100
+>> +Subject: [PATCH] schema compile UPDATE do not implement 2 same modules
+>> +
+>> +CVE: CVE-2023-26916
+>> +Upstream-Status: Backport [https://github.com/CESNET/libyang/commit/dc668d296f9f05aeab6315d44cff3208641e3096]
+>> +
+>> +Refs #1979
+>> +---
+>> + src/schema_compile.c | 20 +++++++-------------
+>> + 1 file changed, 7 insertions(+), 13 deletions(-)
+>> +
+>> +diff --git a/src/schema_compile.c b/src/schema_compile.c
+>> +index ed768ba0..68c0d681 100644
+>> +--- a/src/schema_compile.c
+>> ++++ b/src/schema_compile.c
+>> +@@ -1748,7 +1748,7 @@ lys_has_compiled_import_r(struct lys_module *mod)
+>> + LY_ERR
+>> + lys_implement(struct lys_module *mod, const char **features, struct lys_glob_unres *unres)
+>> + {
+>> +-    LY_ERR ret;
+>> ++    LY_ERR r;
+>> +     struct lys_module *m;
+>> +
+>> +     assert(!mod->implemented);
+>> +@@ -1757,21 +1757,15 @@ lys_implement(struct lys_module *mod, const char **features, struct lys_glob_unr
+>> +     m = ly_ctx_get_module_implemented(mod->ctx, mod->name);
+>> +     if (m) {
+>> +         assert(m != mod);
+>> +-        if (!strcmp(mod->name, "yang") && (strcmp(m->revision, mod->revision) > 0)) {
+>> +-            /* special case for newer internal module, continue */
+>> +-            LOGVRB("Internal module \"%s@%s\" is already implemented in revision \"%s\", using it instead.",
+>> +-                    mod->name, mod->revision ? mod->revision : "<none>", m->revision ? m->revision : "<none>");
+>> +-        } else {
+>> +-            LOGERR(mod->ctx, LY_EDENIED, "Module \"%s@%s\" is already implemented in revision \"%s\".",
+>> +-                    mod->name, mod->revision ? mod->revision : "<none>", m->revision ? m->revision : "<none>");
+>> +-            return LY_EDENIED;
+>> +-        }
+>> ++        LOGERR(mod->ctx, LY_EDENIED, "Module \"%s@%s\" is already implemented in revision \"%s\".",
+>> ++                mod->name, mod->revision ? mod->revision : "<none>", m->revision ? m->revision : "<none>");
+>> ++        return LY_EDENIED;
+>> +     }
+>> +
+>> +     /* set features */
+>> +-    ret = lys_set_features(mod->parsed, features);
+>> +-    if (ret && (ret != LY_EEXIST)) {
+>> +-        return ret;
+>> ++    r = lys_set_features(mod->parsed, features);
+>> ++    if (r && (r != LY_EEXIST)) {
+>> ++        return r;
+>> +     }
+>> +
+>> +     /*
+>> +--
+>> +2.34.1
+>> +
+>> diff --git a/meta-oe/recipes-extended/libyang/libyang_2.0.164.bb b/meta-oe/recipes-extended/libyang/libyang_2.0.164.bb
+>> index 2817be7c8..7875c1ef7 100644
+>> --- a/meta-oe/recipes-extended/libyang/libyang_2.0.164.bb
+>> +++ b/meta-oe/recipes-extended/libyang/libyang_2.0.164.bb
+>> @@ -11,6 +11,7 @@ SRCREV = "a0cc89516ab5eca84d01c85309f320a94752a64c"
+>>   SRC_URI = "git://github.com/CESNET/libyang.git;branch=master;protocol=https \
+>>              file://libyang-add-stdint-h.patch  \
+>>              file://run-ptest  \
+>> +file://CVE-2023-26916.patch  \
+>>              "
+>>   
+>>   S = "${WORKDIR}/git"
 >
+>
+> -- 
+> # Randy MacLeod
+> # Wind River Linux
 
-Thank you.
-
-Bartosz
-
-> > Bart
-> >
-> > > tag.
-> > >
-> > > Thanks,
-> > >
-> > > ../Randy
-> > >
-> > > Signed-off-by: Joe Slater <joe.slater@windriver.com>
-> > > ---
-> > >  ...-ptest-modify-delays-in-toggle-tests.patch | 60 +++++++++++++++++=
-++
-> > >  .../libgpiod/libgpiod_2.0.1.bb                |  2 +
-> > >  2 files changed, 62 insertions(+)
-> > >  create mode 100644 meta-oe/recipes-support/libgpiod/libgpiod-2.x/000=
-1-ptest-modify-delays-in-toggle-tests.patch
-> > >
-> > > diff --git a/meta-oe/recipes-support/libgpiod/libgpiod-2.x/0001-ptest=
--modify-delays-in-toggle-tests.patch b/meta-oe/recipes-support/libgpiod/lib=
-gpiod-2.x/0001-ptest-modify-delays-in-toggle-tests.patch
-> > > new file mode 100644
-> > > index 0000000000..11f2d5c4a9
-> > > --- /dev/null
-> > > +++ b/meta-oe/recipes-support/libgpiod/libgpiod-2.x/0001-ptest-modify=
--delays-in-toggle-tests.patch
-> > > @@ -0,0 +1,60 @@
-> > > +From b73a79245ac0fa36b15bf3308e4ed008793ff15c Mon Sep 17 00:00:00 20=
-01
-> > > +From: Joe Slater <joe.slater@windriver.com>
-> > > +Date: Fri, 19 May 2023 08:46:47 -0700
-> > > +Subject: [PATCH] ptest: modify delays in toggle test
-> > > +
-> > > +The test "gpioset: toggle (continuous)" uses fixed delays to test
-> > > +toggling values.  This is not reliable, so we switch to looking
-> > > +for transitions from one value to another.
-> > > +
-> > > +Upstream-Status: pending
-> > > +
-> > > +Signed-off-by: Joe Slater <joe.slater@windriver.com>
-> > > +---
-> > > + tools/gpio-tools-test.bats | 6 +++---
-> > > + 1 file changed, 3 insertions(+), 3 deletions(-)
-> > > +
-> > > +--- libgpiod-2.0.orig/tools/gpio-tools-test.bats
-> > > ++++ libgpiod-2.0/tools/gpio-tools-test.bats
-> > > +@@ -141,6 +141,20 @@ gpiosim_check_value() {
-> > > + [ "$VAL" =3D "$EXPECTED" ]
-> > > + }
-> > > +
-> > > ++gpiosim_wait_value() {
-> > > ++ local OFFSET=3D$2
-> > > ++ local EXPECTED=3D$3
-> > > ++ local DEVNAME=3D${GPIOSIM_DEV_NAME[$1]}
-> > > ++ local CHIPNAME=3D${GPIOSIM_CHIP_NAME[$1]}
-> > > ++
-> > > ++ for i in {1..10} ; do
-> > > ++ VAL=3D$(<$GPIOSIM_SYSFS/$DEVNAME/$CHIPNAME/sim_gpio$OFFSET/value)
-> > > ++ [ "$VAL" =3D "$EXPECTED" ] && return
-> > > ++ sleep 0.1
-> > > ++ done
-> > > ++ return 1
-> > > ++}
-> > > ++
-> > > + gpiosim_cleanup() {
-> > > + for CHIP in ${!GPIOSIM_CHIP_NAME[@]}
-> > > + do
-> > > +@@ -1567,15 +1581,15 @@ request_release_line() {
-> > > + gpiosim_check_value sim0 4 0
-> > > + gpiosim_check_value sim0 7 0
-> > > +
-> > > +- sleep 1
-> > > +-
-> > > +- gpiosim_check_value sim0 1 0
-> > > ++ # sleeping fixed amounts can be unreliable, so we
-> > > ++ # sync to the toggles
-> > > ++ #
-> > > ++ gpiosim_wait_value sim0 1 0
-> > > + gpiosim_check_value sim0 4 1
-> > > + gpiosim_check_value sim0 7 1
-> > > +
-> > > +- sleep 1
-> > > +
-> > > +- gpiosim_check_value sim0 1 1
-> > > ++ gpiosim_wait_value sim0 1 1
-> > > + gpiosim_check_value sim0 4 0
-> > > + gpiosim_check_value sim0 7 0
-> > > + }
-> > > diff --git a/meta-oe/recipes-support/libgpiod/libgpiod_2.0.1.bb b/met=
-a-oe/recipes-support/libgpiod/libgpiod_2.0.1.bb
-> > > index 337554cd89..91c4d27692 100644
-> > > --- a/meta-oe/recipes-support/libgpiod/libgpiod_2.0.1.bb
-> > > +++ b/meta-oe/recipes-support/libgpiod/libgpiod_2.0.1.bb
-> > > @@ -9,6 +9,8 @@ LIC_FILES_CHKSUM =3D " \
-> > >
-> > >  FILESEXTRAPATHS:prepend :=3D "${THISDIR}/${PN}-2.x:"
-> > >
-> > > +SRC_URI +=3D "file://0001-ptest-modify-delays-in-toggle-tests.patch"
-> > > +
-> > >  SRC_URI[sha256sum] =3D "b5367d28d045b36007a4ffd42cceda4c358737ef4f2c=
-e22b0c1d05ec57a38392"
-> > >
-> > >  # Enable all project features for ptest
-> > >
-> > >
-> > > --
-> > > # Randy MacLeod
-> > > # Wind River Linux
-> > >
-> > >
-> > > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> > > Links: You receive all messages sent to this group.
-> > > View/Reply Online (#102793): https://lists.openembedded.org/g/openemb=
-edded-devel/message/102793
-> > > Mute This Topic: https://lists.openembedded.org/mt/99114621/3618139
-> > > Group Owner: openembedded-devel+owner@lists.openembedded.org
-> > > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsu=
-b [brgl@bgdev.pl]
-> > > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> > >
 
