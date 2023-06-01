@@ -1,159 +1,216 @@
-Return-Path: <nat.bailey@windriver.com>
+Return-Path: <brgl@bgdev.pl>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3EE9BC77B7E
-	for <webhook@archiver.kernel.org>; Thu,  1 Jun 2023 17:58:59 +0000 (UTC)
-Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.web11.1448.1685642333990493039
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C47F6C77B7A
+	for <webhook@archiver.kernel.org>; Thu,  1 Jun 2023 19:04:58 +0000 (UTC)
+Received: from mail-pf1-f174.google.com (mail-pf1-f174.google.com [209.85.210.174])
+ by mx.groups.io with SMTP id smtpd.web11.1262.1685646296786182434
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 01 Jun 2023 10:58:54 -0700
+ Thu, 01 Jun 2023 12:04:56 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=pps06212021 header.b=s0KSeBHi;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=5516a9a59a=nat.bailey@windriver.com)
-Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 351Dc9D4016660
-	for <openembedded-devel@lists.openembedded.org>; Thu, 1 Jun 2023 10:58:53 -0700
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com; h=from : to : cc :
- subject : date : message-id : mime-version : content-transfer-encoding :
- content-type; s=PPS06212021;
- bh=kboxlY1ErZ4NiGqXKuDjlUBSr7r68Kqml2i6ByVovk8=;
- b=s0KSeBHiVplE9IVnYUXf91hON+sFlSgqyEHmZtk5k19Yo3o4Z8MOdVnN8BX5rIohpFZl
- b7HlMaFK6ykvp0ijDvfmxu3TU9fR4TiQcOpUQFz8oCnzR9z/rj+9S/rpH0rOLRx93UXd
- UD6hw/t9HrDt3+kgWiCUf+NnvQ+OJoX8xKpWXdgforCCr6ImeHSFs0WivOzlKQL7qU9a
- CwB9rXtPJvPm/u0TBGYnzgPCwTKQRIYN4gSFINKTBTbYVspKqHzcQPzo/3TqqpSqkzDR
- 7P+YSq7/5tTuQDN3BV98RmeoJmdH71RgapnOmRX/YmiOHp+qdasrcWxwe+5BHaz7k5mT fg== 
-Received: from ala-exchng01.corp.ad.wrs.com (unknown-82-252.windriver.com [147.11.82.252])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3qud53cx4s-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Thu, 01 Jun 2023 10:58:53 -0700
-Received: from ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.23; Thu, 1 Jun 2023 10:58:52 -0700
-Received: from dreyna-dlerner-T5600.corp.ad.wrs.com (147.11.136.210) by
- ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server id
- 15.1.2507.23 via Frontend Transport; Thu, 1 Jun 2023 10:58:52 -0700
-From: Nat Bailey <nat.bailey@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-CC: <randy.macleod@windriver.com>, <nat.bailey@windriver.com>,
-        <david.reyna@windriver.com>
-Subject: [meta-oe][kirkstone][PATCH v2] libyang: backport a fix for CVE-2023-26916
-Date: Thu, 1 Jun 2023 10:52:08 -0700
-Message-ID: <20230601175208.2942269-1-nat.bailey@windriver.com>
-X-Mailer: git-send-email 2.34.1
+ dkim=pass header.i=@bgdev-pl.20221208.gappssmtp.com header.s=20221208 header.b=p9/zA2Yt;
+ spf=none, err=SPF record not found (domain: bgdev.pl, ip: 209.85.210.174, mailfrom: brgl@bgdev.pl)
+Received: by mail-pf1-f174.google.com with SMTP id d2e1a72fcca58-65299178ac5so276670b3a.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 01 Jun 2023 12:04:56 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=bgdev-pl.20221208.gappssmtp.com; s=20221208; t=1685646296; x=1688238296;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=CjbnCVgqltTsY/ODgdxIdvjV55ncfgl6Gh1BwU6XAdE=;
+        b=p9/zA2YtdvSAreLV1pNegCkm3ys1a8GUz2zlZDn34x/Mm1V02W6PBjMi4TagY/oqkF
+         0ci3KkXlj7slS4aItTS1fXonoC2p50EeYd/FDvyrth6vlK2jStNLiPq2jvfhYT3STT2O
+         je2ZAkaeOxrV6K1BagK6HV2XzrDM6BnwFJ23GWrXu4vYvHs8wRjTn4O9SJbQm3zM5HGc
+         q9SjlTd2StDUvHtkOFcIu0JAsj58ImqbJwkkIo7OxmF9531GzOU4B0a4G3bdkeF1hFWu
+         ySTDVnokNnBb4ghiLmEB+hHzA6HbSCnt6rBeOKhY5mAw/x3Zi0YA0LX5hRaEa2FtGhUa
+         414Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20221208; t=1685646296; x=1688238296;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=CjbnCVgqltTsY/ODgdxIdvjV55ncfgl6Gh1BwU6XAdE=;
+        b=lWljtSOhgVAq/qRQKoiZxhc0MNAFhoaNhpUeRlcdXFc2YxyavYEUnzlb/1qMHuYEKu
+         1yF/VskJSMfrcN/n0GNKlRlIXHWn+1jGOBrsEXQufVbOUi5ZGxPPBsTfVq8FvPL3rrbu
+         XJ3+ovG6bbrC4r8HbUsXMXPwfdQu6iUFMWWUVHwSxGJJoDH7JPUMOAVB9I3XQL6Wei3l
+         cfY7e5Qnv5kil2oKVAvvXKWGiTYfVNo+O2/3FAhBc36AytyHAVdKaUJRmuY9/8AOQv8d
+         rUFkfctJQep4bPPxh8sW3T3MX0ZbnebGr8IJ1Hx+CJdD8ATfmrpdKtVt+/XHN6aYepgn
+         3YZQ==
+X-Gm-Message-State: AC+VfDzsUpFkSua8hRQBrSbJkEkub5acs9Rth+x79bx7bgpTmWf6YzGg
+	l7s4f35pkGRnu3ulh+3Fj/yZW4uGik29WnKUheadYQ==
+X-Google-Smtp-Source: ACHHUZ51PBy2G4mlvgeaafQstsXJFI+rwvz+gN9eVGHdSyZyzgoOF4mbIlX3mnIpGfRxNoPFiL1VVLbNwhlaq2cKzaI=
+X-Received: by 2002:a05:6a20:c510:b0:10f:8798:9ff3 with SMTP id
+ gm16-20020a056a20c51000b0010f87989ff3mr9121179pzb.8.1685646296193; Thu, 01
+ Jun 2023 12:04:56 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Proofpoint-GUID: sLbo0crC_ukV2rvgKJUIDOnfTCCAowLC
-X-Proofpoint-ORIG-GUID: sLbo0crC_ukV2rvgKJUIDOnfTCCAowLC
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.254,Aquarius:18.0.957,Hydra:6.0.573,FMLib:17.11.176.26
- definitions=2023-06-01_08,2023-05-31_03,2023-05-22_02
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 mlxlogscore=775 spamscore=0
- phishscore=0 bulkscore=0 priorityscore=1501 suspectscore=0 mlxscore=0
- malwarescore=0 lowpriorityscore=0 impostorscore=0 clxscore=1015
- adultscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2304280000 definitions=main-2306010155
+References: <20230524181131.3890392-1-joe.slater@windriver.com> <6a34b59d-413b-ab1c-2818-8b933ad55438@windriver.com>
+In-Reply-To: <6a34b59d-413b-ab1c-2818-8b933ad55438@windriver.com>
+From: Bartosz Golaszewski <brgl@bgdev.pl>
+Date: Thu, 1 Jun 2023 21:04:45 +0200
+Message-ID: <CAMRc=MeZTM-cUaganZ2Tuf5WOnbDQftVAX-_QODzvO_fWrWGhw@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH 1/1] libgpiod: modify test 'gpioset: toggle (continuous)'
+To: randy.macleod@windriver.com, Khem Raj <raj.khem@gmail.com>
+Cc: joe.slater@windriver.com, openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 01 Jun 2023 17:58:59 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103084
+ <openembedded-devel@lists.openembedded.org>; Thu, 01 Jun 2023 19:04:58 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103085
 
-From: Natasha Bailey <nat.bailey@windriver.com>
+On Wed, May 24, 2023 at 9:46=E2=80=AFPM Randy MacLeod via
+lists.openembedded.org
+<randy.macleod=3Dwindriver.com@lists.openembedded.org> wrote:
+>
+> On 2023-05-24 14:11, joe.slater@windriver.com wrote:
+>
+> From: Joe Slater <joe.slater@windriver.com>
+>
+> Look for level transitions when testing toggling
+> values because using fixed delays to assume value
+> changes is not reliable.
+>
+> The updated commit log and comment below look good to me.
+>
+>
+> Please send a patch to upstream and reply to this thread with
+> a link to that or send a commit to update the:
+>
+> Upstream-Status: pending
+>
 
-This patch fixes a bug in libyang which could cause a null
-pointer dereference from a call to strcmp.
+This patch breaks the following test for me:
 
-Since this recipe includes ptests, the tests were run twice
-(once before the patch and once after) with the same results:
-all tests passing except utest_types, which is skipped.
+ =E2=9C=97 gpioset: toggle (continuous)
+   (from function `gpiosim_wait_value' in file
+/usr/lib/libgpiod/ptest/tests/gpio-tools-test.bats, line 155,
+    in test file /usr/lib/libgpiod/ptest/tests/gpio-tools-test.bats, line 1=
+587)
+     `gpiosim_wait_value sim0 1 0' failed
 
-Signed-off-by: Natasha Bailey <nat.bailey@windriver.com>
-Signed-off-by: Randy MacLeod <Randy.MacLeod@windriver.com>
----
- .../libyang/libyang/CVE-2023-26916.patch      | 57 +++++++++++++++++++
- .../libyang/libyang_2.0.164.bb                |  1 +
- 2 files changed, 58 insertions(+)
- create mode 100644 meta-oe/recipes-extended/libyang/libyang/CVE-2023-26916.patch
+on current master meta-openembedded. Why did this even get here? The
+patch did not go upstream in this form and needs some more work.
+Please Cc me on future patches to any of the libgpiod recipes.
 
-diff --git a/meta-oe/recipes-extended/libyang/libyang/CVE-2023-26916.patch b/meta-oe/recipes-extended/libyang/libyang/CVE-2023-26916.patch
-new file mode 100644
-index 000000000..f3af3dbff
---- /dev/null
-+++ b/meta-oe/recipes-extended/libyang/libyang/CVE-2023-26916.patch
-@@ -0,0 +1,57 @@
-+From dc668d296f9f05aeab6315d44cff3208641e3096 Mon Sep 17 00:00:00 2001
-+From: Michal Vasko <mvasko@cesnet.cz>
-+Date: Mon, 13 Feb 2023 10:23:13 +0100
-+Subject: [PATCH] schema compile UPDATE do not implement 2 same modules
-+
-+CVE: CVE-2023-26916
-+Upstream-Status: Backport [https://github.com/CESNET/libyang/commit/dc668d296f9f05aeab6315d44cff3208641e3096]
-+
-+Refs #1979
-+---
-+ src/schema_compile.c | 20 +++++++-------------
-+ 1 file changed, 7 insertions(+), 13 deletions(-)
-+
-+diff --git a/src/schema_compile.c b/src/schema_compile.c
-+index ed768ba0..68c0d681 100644
-+--- a/src/schema_compile.c
-++++ b/src/schema_compile.c
-+@@ -1748,7 +1748,7 @@ lys_has_compiled_import_r(struct lys_module *mod)
-+ LY_ERR
-+ lys_implement(struct lys_module *mod, const char **features, struct lys_glob_unres *unres)
-+ {
-+-    LY_ERR ret;
-++    LY_ERR r;
-+     struct lys_module *m;
-+ 
-+     assert(!mod->implemented);
-+@@ -1757,21 +1757,15 @@ lys_implement(struct lys_module *mod, const char **features, struct lys_glob_unr
-+     m = ly_ctx_get_module_implemented(mod->ctx, mod->name);
-+     if (m) {
-+         assert(m != mod);
-+-        if (!strcmp(mod->name, "yang") && (strcmp(m->revision, mod->revision) > 0)) {
-+-            /* special case for newer internal module, continue */
-+-            LOGVRB("Internal module \"%s@%s\" is already implemented in revision \"%s\", using it instead.",
-+-                    mod->name, mod->revision ? mod->revision : "<none>", m->revision ? m->revision : "<none>");
-+-        } else {
-+-            LOGERR(mod->ctx, LY_EDENIED, "Module \"%s@%s\" is already implemented in revision \"%s\".",
-+-                    mod->name, mod->revision ? mod->revision : "<none>", m->revision ? m->revision : "<none>");
-+-            return LY_EDENIED;
-+-        }
-++        LOGERR(mod->ctx, LY_EDENIED, "Module \"%s@%s\" is already implemented in revision \"%s\".",
-++                mod->name, mod->revision ? mod->revision : "<none>", m->revision ? m->revision : "<none>");
-++        return LY_EDENIED;
-+     }
-+ 
-+     /* set features */
-+-    ret = lys_set_features(mod->parsed, features);
-+-    if (ret && (ret != LY_EEXIST)) {
-+-        return ret;
-++    r = lys_set_features(mod->parsed, features);
-++    if (r && (r != LY_EEXIST)) {
-++        return r;
-+     }
-+ 
-+     /*
-+-- 
-+2.34.1
-+
-diff --git a/meta-oe/recipes-extended/libyang/libyang_2.0.164.bb b/meta-oe/recipes-extended/libyang/libyang_2.0.164.bb
-index 2817be7c8..7875c1ef7 100644
---- a/meta-oe/recipes-extended/libyang/libyang_2.0.164.bb
-+++ b/meta-oe/recipes-extended/libyang/libyang_2.0.164.bb
-@@ -11,6 +11,7 @@ SRCREV = "a0cc89516ab5eca84d01c85309f320a94752a64c"
- SRC_URI = "git://github.com/CESNET/libyang.git;branch=master;protocol=https \
-            file://libyang-add-stdint-h.patch \
-            file://run-ptest \
-+           file://CVE-2023-26916.patch \
-            "
- 
- S = "${WORKDIR}/git"
--- 
-2.34.1
+In the meantime. Khem: could you please revert this?
 
+Bart
+
+> tag.
+>
+> Thanks,
+>
+> ../Randy
+>
+> Signed-off-by: Joe Slater <joe.slater@windriver.com>
+> ---
+>  ...-ptest-modify-delays-in-toggle-tests.patch | 60 +++++++++++++++++++
+>  .../libgpiod/libgpiod_2.0.1.bb                |  2 +
+>  2 files changed, 62 insertions(+)
+>  create mode 100644 meta-oe/recipes-support/libgpiod/libgpiod-2.x/0001-pt=
+est-modify-delays-in-toggle-tests.patch
+>
+> diff --git a/meta-oe/recipes-support/libgpiod/libgpiod-2.x/0001-ptest-mod=
+ify-delays-in-toggle-tests.patch b/meta-oe/recipes-support/libgpiod/libgpio=
+d-2.x/0001-ptest-modify-delays-in-toggle-tests.patch
+> new file mode 100644
+> index 0000000000..11f2d5c4a9
+> --- /dev/null
+> +++ b/meta-oe/recipes-support/libgpiod/libgpiod-2.x/0001-ptest-modify-del=
+ays-in-toggle-tests.patch
+> @@ -0,0 +1,60 @@
+> +From b73a79245ac0fa36b15bf3308e4ed008793ff15c Mon Sep 17 00:00:00 2001
+> +From: Joe Slater <joe.slater@windriver.com>
+> +Date: Fri, 19 May 2023 08:46:47 -0700
+> +Subject: [PATCH] ptest: modify delays in toggle test
+> +
+> +The test "gpioset: toggle (continuous)" uses fixed delays to test
+> +toggling values.  This is not reliable, so we switch to looking
+> +for transitions from one value to another.
+> +
+> +Upstream-Status: pending
+> +
+> +Signed-off-by: Joe Slater <joe.slater@windriver.com>
+> +---
+> + tools/gpio-tools-test.bats | 6 +++---
+> + 1 file changed, 3 insertions(+), 3 deletions(-)
+> +
+> +--- libgpiod-2.0.orig/tools/gpio-tools-test.bats
+> ++++ libgpiod-2.0/tools/gpio-tools-test.bats
+> +@@ -141,6 +141,20 @@ gpiosim_check_value() {
+> + [ "$VAL" =3D "$EXPECTED" ]
+> + }
+> +
+> ++gpiosim_wait_value() {
+> ++ local OFFSET=3D$2
+> ++ local EXPECTED=3D$3
+> ++ local DEVNAME=3D${GPIOSIM_DEV_NAME[$1]}
+> ++ local CHIPNAME=3D${GPIOSIM_CHIP_NAME[$1]}
+> ++
+> ++ for i in {1..10} ; do
+> ++ VAL=3D$(<$GPIOSIM_SYSFS/$DEVNAME/$CHIPNAME/sim_gpio$OFFSET/value)
+> ++ [ "$VAL" =3D "$EXPECTED" ] && return
+> ++ sleep 0.1
+> ++ done
+> ++ return 1
+> ++}
+> ++
+> + gpiosim_cleanup() {
+> + for CHIP in ${!GPIOSIM_CHIP_NAME[@]}
+> + do
+> +@@ -1567,15 +1581,15 @@ request_release_line() {
+> + gpiosim_check_value sim0 4 0
+> + gpiosim_check_value sim0 7 0
+> +
+> +- sleep 1
+> +-
+> +- gpiosim_check_value sim0 1 0
+> ++ # sleeping fixed amounts can be unreliable, so we
+> ++ # sync to the toggles
+> ++ #
+> ++ gpiosim_wait_value sim0 1 0
+> + gpiosim_check_value sim0 4 1
+> + gpiosim_check_value sim0 7 1
+> +
+> +- sleep 1
+> +
+> +- gpiosim_check_value sim0 1 1
+> ++ gpiosim_wait_value sim0 1 1
+> + gpiosim_check_value sim0 4 0
+> + gpiosim_check_value sim0 7 0
+> + }
+> diff --git a/meta-oe/recipes-support/libgpiod/libgpiod_2.0.1.bb b/meta-oe=
+/recipes-support/libgpiod/libgpiod_2.0.1.bb
+> index 337554cd89..91c4d27692 100644
+> --- a/meta-oe/recipes-support/libgpiod/libgpiod_2.0.1.bb
+> +++ b/meta-oe/recipes-support/libgpiod/libgpiod_2.0.1.bb
+> @@ -9,6 +9,8 @@ LIC_FILES_CHKSUM =3D " \
+>
+>  FILESEXTRAPATHS:prepend :=3D "${THISDIR}/${PN}-2.x:"
+>
+> +SRC_URI +=3D "file://0001-ptest-modify-delays-in-toggle-tests.patch"
+> +
+>  SRC_URI[sha256sum] =3D "b5367d28d045b36007a4ffd42cceda4c358737ef4f2ce22b=
+0c1d05ec57a38392"
+>
+>  # Enable all project features for ptest
+>
+>
+> --
+> # Randy MacLeod
+> # Wind River Linux
+>
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#102793): https://lists.openembedded.org/g/openembedde=
+d-devel/message/102793
+> Mute This Topic: https://lists.openembedded.org/mt/99114621/3618139
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [b=
+rgl@bgdev.pl]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
 
