@@ -1,207 +1,162 @@
-Return-Path: <archana.polampalli@windriver.com>
+Return-Path: <petr.gotthard@advantech.cz>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9AA56C7EE23
-	for <webhook@archiver.kernel.org>; Mon,  5 Jun 2023 10:47:52 +0000 (UTC)
-Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
- by mx.groups.io with SMTP id smtpd.web10.4444.1685962070130088191
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 82360C7EE23
+	for <webhook@archiver.kernel.org>; Mon,  5 Jun 2023 17:56:44 +0000 (UTC)
+Received: from APC01-SG2-obe.outbound.protection.outlook.com (APC01-SG2-obe.outbound.protection.outlook.com [40.107.215.68])
+ by mx.groups.io with SMTP id smtpd.web11.15822.1685987797946009066
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 05 Jun 2023 03:47:50 -0700
+ Mon, 05 Jun 2023 10:56:39 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=pps06212021 header.b=hwAgm5p6;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=5520839f50=archana.polampalli@windriver.com)
-Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 355AlnCY004143
-	for <openembedded-devel@lists.openembedded.org>; Mon, 5 Jun 2023 10:47:49 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com; h=from : to : cc :
- subject : date : message-id : mime-version : content-transfer-encoding :
- content-type; s=PPS06212021;
- bh=8rsYIUs5j0nAapVKZ3U1p/t0NjCXZvbpMihdVOh46gQ=;
- b=hwAgm5p6YvCl24SZOne9IodJhbC/Izlmu10a5Za7hReZZNP0y8TU7vl2YWA73lnUBmlC
- 203GG0x/4guEc9NZ6ZdvS3OIIWfrGeuimCXfzAgn3yzDVjTTLiiR9mNF4o+3NDPjrugA
- OAxZWzcCQtiWkQQegR8DScVTyneV4wZ52p5RorxewdHzVdEkuKgk3SrAqrZF8ZRtposF
- gE5/YaDeMH+SoRXvAejVd6CdPcNYs31EJLPw4Ut6P190/9Cs2cVhzk4BNnWTUeq9igzi
- H1AiQzhbp+UjTUgnrUgh1B6OPXYPMnKf8UMLG+adWJYPFNx/sB/3o/rezV+H+8CDdUGB 9A== 
-Received: from ala-exchng01.corp.ad.wrs.com (unknown-82-252.windriver.com [147.11.82.252])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3qyvg8hdk0-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Mon, 05 Jun 2023 10:47:49 +0000
-Received: from blr-linux-engg1.wrs.com (147.11.136.210) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.23; Mon, 5 Jun 2023 03:47:46 -0700
-From: Archana Polampalli <archana.polampalli@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-CC: <Hari.GPillai@windriver.com>
-Subject: [oe][meta-networking][kirkstone][PATCH V2 1/1] tcpreplay: fix CVE-2023-27784,27785,27786,27787,27788,27789
-Date: Mon, 5 Jun 2023 10:47:33 +0000
-Message-ID: <20230605104733.2290460-1-archana.polampalli@windriver.com>
-X-Mailer: git-send-email 2.40.0
+ dkim=pass header.i=@advantech.cz header.s=selector1 header.b=YVSZDlkV;
+ spf=pass (domain: advantech.cz, ip: 40.107.215.68, mailfrom: petr.gotthard@advantech.cz)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=Z2lQ9Oj6diwE0VFZTdnO/8+73jIWTAFCrDGnNHOr9569DvwzI5NaUY7tek4jGmGN0V6he3R47eOMNDgT/EytO8DEmiwCRHBIU8gisJfcB1eDYNtnvRK8HkhdNINHmT+dMqZ75acJghywKN/tbdfucdHiYAeptyjZTGbvM0D+O7Y9KozhFl9osQh9Kc1oGZHvXajm5+UzX1/YeQAqrp2AqANQpd+/jEP0QHXmpoIdogwXXlfxK5U60d/legsqQ+s4qYy+VRIoBfpJ0Cb9dl4tCPZrygL+ewY0FAcNWIlsesRb7cJQNuTA1+v88JWlpKfNuweE7qc+XsFYrfwSlyX+fw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=vF7S8ULIWVV1l1+ZkA/jMQ/o/iV5Go5QasBSE8/l8IM=;
+ b=MwOsbPj4cI2y09AoziqkxcImbNBjpmPw75MrtpL5rI2LUU6o1JpBliZ4Gncn6m4rbLeOYk1yt7iMWYHNrc9hNVWYu/tEfVJJLOHR33znpo8rb0jonXHasVNvy3GXi01tqCFpFWbUzEPUV3EUxPvtkiUuB0Oxzvjp2rj0BiUH4LXLAtaQg+pqjLs5nok18jqGxopxZBs6SfnLgUVn/upaW3wzNIzIcE/3E1ARkG9s9RVYFtHGSshxorXWJ9paIvtH/LvLaLXrrSNcUduoA5HZPSEqM6P+Blz226d+FJCBH4Cj6xnLQdptgcy/goQJKz8BX461cIJDmfoAFqSriE4u/A==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=advantech.cz; dmarc=pass action=none header.from=advantech.cz;
+ dkim=pass header.d=advantech.cz; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=advantech.cz;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=vF7S8ULIWVV1l1+ZkA/jMQ/o/iV5Go5QasBSE8/l8IM=;
+ b=YVSZDlkVMJbu5zql12Rb8+2+CG5vOg6moRtE10C2e8hB/fXn75b7bwKxRLR3g4aW/1igu8mOK+HJafxd1sdU1njjmDLLeChrKqS5hy9tAR9ReM/iU+q0jWKpafPUmyP4E5zYOIH9WGdn2z481bvxjGJwEsSADjLViMkIaSQtYnd1x8zgagqJYf3uX2+iEs3ZjQ8kF97SMZw51b3TOuaKCEnsfax0+W+BwVXV0aY+0KWQLaOEhC3UdkaA0IkaLLeaOFGZs4pCpjMXcwPsQW4xrV5Z25oh902AN3OqkE0JRgkXgg3O8ccSxFR0aONlND9m9w71Rf9NOjhOEREWUl7DDg==
+Received: from TY2PR02MB3678.apcprd02.prod.outlook.com (2603:1096:404:b7::12)
+ by SG2PR02MB5843.apcprd02.prod.outlook.com (2603:1096:4:1b7::9) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6477.18; Mon, 5 Jun
+ 2023 17:56:32 +0000
+Received: from TY2PR02MB3678.apcprd02.prod.outlook.com
+ ([fe80::92d1:234c:7ffa:27b7]) by TY2PR02MB3678.apcprd02.prod.outlook.com
+ ([fe80::92d1:234c:7ffa:27b7%4]) with mapi id 15.20.6477.016; Mon, 5 Jun 2023
+ 17:56:32 +0000
+From: Petr Gotthard <petr.gotthard@advantech.cz>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: [meta-networking][PATCH] firewalld: upgrade 1.2.0 -> 1.3.2
+Thread-Topic: [meta-networking][PATCH] firewalld: upgrade 1.2.0 -> 1.3.2
+Thread-Index: AdmX1osCSC9m4NmjRNetfHv+qaEGog==
+Date: Mon, 5 Jun 2023 17:56:32 +0000
+Message-ID: 
+ <TY2PR02MB3678FC4C459691FAE198A727814DA@TY2PR02MB3678.apcprd02.prod.outlook.com>
+Accept-Language: en-US
+Content-Language: cs-CZ
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=advantech.cz;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: TY2PR02MB3678:EE_|SG2PR02MB5843:EE_
+x-ms-office365-filtering-correlation-id: 668d8664-476b-4dfc-94d6-08db65ee3273
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: 
+ tfW7bFK4SeCflVUVxWXN5z5s4oxWGG39YpVktEUeaT/5rQejG0I37yfzrUpMAVPYZ5l3ForBzooHEUJrtOUx/2wWEqkKiYZcUH92Pu6uYleHqhZX86dNPSfoFpKUbBDFvOMhlFxjn3AG3ZhQmMou1zpq0drHtP9dOLLkP4z2/qXSq+838mxav6SsktwOKi/D9tt3TX4vRnFBuj9kU2VzCsG4pIbkOX3atVNAAwyRLO04zpaGI+wJ4v+wzwyjuIxfiRxIISJJM3nVn5+iMhCJdrjwaMAfojK4OJRIjXtUDU3JVJUcMvwIT6i5tBYzT5leQygAwcxidBqZQLFRPyafONAoZXhJHBuMjYoBsAaULvPBiFzhJ/ON0Jwl3k08l2SMXLn3HNwCVGXoBVN1XysYHVtdg3zRPUJb+8U/TJoLt3JcXEf9ppjEsrx8Rfzo/qjjbTh/9CFJm8g/kMACCj1frMktP5fFFi81F9edJaHyi8wIK/V3vGoEM0ZxOPZGZJQ5CLfLPrj5QjX0sBB6D1MzoCXYg78OxwcNdA9OZ24SiePyFc2rdT4eiv39XCN3iq0yOrYdFb1DVZw5XKQ9xav2VQmrDiZnsrnoR6u/TVZrEb0=
+x-forefront-antispam-report: 
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:TY2PR02MB3678.apcprd02.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230028)(4636009)(396003)(346002)(366004)(136003)(39860400002)(376002)(451199021)(9686003)(26005)(6506007)(966005)(83380400001)(33656002)(122000001)(86362001)(38070700005)(38100700002)(186003)(55016003)(41300700001)(44832011)(2906002)(66446008)(478600001)(76116006)(66946007)(66476007)(8676002)(6916009)(8936002)(64756008)(316002)(52536014)(5660300002)(7696005)(71200400001)(66556008);DIR:OUT;SFP:1101;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: 
+ =?utf-8?B?OVVCMCtqdVc1T3JZZTJoTktGS09uRC9LNTE5QktIMTB1b3JWVXFveEhST0Mw?=
+ =?utf-8?B?eHVXYnBRckVkWmdueFl5UFZTUVRMbWEzdklVOEZ3dTRxelRCZVJkN21hampn?=
+ =?utf-8?B?aGUrRTlZL2VCMDhwc2ZzdFpLM01GYjhaL3p6Mk5RcGVCN1Fnb2U1a3lLYmJz?=
+ =?utf-8?B?V1VIbEpsYjJrSS9yYUlubGszU0p0dk1aeFhmMzlZcEx0Nmc5OUNyR0k3ejJG?=
+ =?utf-8?B?ZDMrNjU5REY2TWtRbldUZEtybDdGR3pvSkR0WUd4WnAwelhRQnMwZjJBOFdl?=
+ =?utf-8?B?ZGllZEVYNSswTVNJRkZ2djM2MzFjQS9DRWdBbDEzcHVNNzZ3SmQvaFRUVnNu?=
+ =?utf-8?B?V2hQcktkTEEvcUV5RjhEWVBZd3l1UzhDTHpCMUxZdEovL1pGcHZoKzVDWTlm?=
+ =?utf-8?B?a2d6eVQremcrNWl1MzRUWUsvV0tFQmRrTzVNN1NaV2RsNC82SVRRK3ZiR0Vs?=
+ =?utf-8?B?RW9DeTFOb3pRZUxMVStWMDlwY092L2MzTFVjTStHdGlnNVlqS1B5TEpxUEYw?=
+ =?utf-8?B?OFUzS1VLczEzKzJSTjVpdXdDWFdOejI1QklOWFhUdTlpQzdtbCthV0l4S09q?=
+ =?utf-8?B?ODdQVDhDSVI4YkM1OXVSbDZsUVdmdkJmWTFqYmpFTGVYN0lLdldkQ2ZyN3lq?=
+ =?utf-8?B?QTU5YnJNMVJOUklmMnVBMUpYZjhwaXptYTdDYm5QU3U4bStTUTkvdExVWks5?=
+ =?utf-8?B?M2lTdURJQmhHUnlVZGtXWnB4akQzV1h3M25XQy9xMlltVWp2RXVNR0E1KzU5?=
+ =?utf-8?B?d21qckxNMDlYbm1WYzMxNEpSclZKckIvNTRSVWJUY29UbUl1YTRUWFBNWmk5?=
+ =?utf-8?B?SkNTVjlxa1pJdGw4aXg3dVUvdndBRElRSzZ3ZDdEeWZXb0plZ2d1VExoaWZk?=
+ =?utf-8?B?Ymc5L3BhNlVVRjJaODM3K3AxOUNOeU1SdnBJOEdWaGhJSU1NdFFxYVpqRk5S?=
+ =?utf-8?B?N09ZTzFFVVE2K1ZZR1AvRUFuQXZ2ckh0UUNxdzc5c0NyUTMvaVMxdzR4YWp3?=
+ =?utf-8?B?THdZTlZnZmFkbHFiWDJiejJFcE5GRTdXM1VFL2FQd0FqOVBXUHFZMlVWdkdR?=
+ =?utf-8?B?MEdWY2IwZEJFcjRUUFljcTNhVnZaeHl3VkpMUzdxTExGK21iNVoxdlpQYm9z?=
+ =?utf-8?B?SUZrSWxKU3NnVCtlN3dTdVp3SFZqK0NMMXZ4RHM2VFFWZ0pyQ1BKUSs5WGJl?=
+ =?utf-8?B?L2FwUFdXY0R6Q2d3bTBPeHhNM0hBRVJpcjBzT04zUmJYekt3L2ljSHgvQ1Fs?=
+ =?utf-8?B?NkVtWDZPeGhucllrOVRReTJnMW1XL2xzdk51UFdtU213d0NuWjgySVBuSW1R?=
+ =?utf-8?B?aTJmbmlaZldXaGlqQ0E1K0VBUm9CL240Sy9qNFJ1Sjhsc3dGUWhHNEpPMzV2?=
+ =?utf-8?B?Y0ZiUWt3MjVDTGZVNjJFbGhhVWkwaDBkSFBUelVPb0NnYWhMd3RXTTR0a2oz?=
+ =?utf-8?B?bmJweEhaNUNFVDNBNHpLSWowVWExT3QyUno2eHZNanhCS1FvZ2xaQXhVdHky?=
+ =?utf-8?B?ZCtPUUJPdHhaN3B2Q1NNUkkzekdwODlHTEl6V1M2TDh1dmlXRVN4NEdDQjFQ?=
+ =?utf-8?B?N29OY0JmOFArRkpXY0hIdG44VmZqS25aRlpRYS9VUGc2YUs3QVpmcWdMeVhW?=
+ =?utf-8?B?Y3VYb21kYUc0YXJJZXRTMHNQZThsYVk3LzZlTGp4QTFsb2FEcHEvb01MQnFh?=
+ =?utf-8?B?aWVPaG5MeTNneVJONzNvRkZFMDlzd083YTlVM21FTGFDN0pRcWtvYVpOcHFH?=
+ =?utf-8?B?em9NWGppNEVJeWZON0Q1SnU2QWNkeGpYWkZYdlNpaHpGY2IvcWNnUEExMWxX?=
+ =?utf-8?B?QkpCV0pTQ1dlaXUvNVJQSGFmblZ0Y3NzNzg2aDRVTDVaOXp0L3FqWUdVZ0kv?=
+ =?utf-8?B?MWlCNWxQQ3RmN0haVXhPRXFiSExReE1XZFR0dzY0Mi9pUlNZYUxQQ0cyblYy?=
+ =?utf-8?B?czd0SlAzYTU1VWJydjgvTFJpczh6VTJWc3AxTEFCc2tnT09TZFF5cTByWldY?=
+ =?utf-8?B?SE94QlQ0TzJQWHd0aURyanVTWDk3SGpmSVVnRHBOczVRZHVWNXhJSnVLbVow?=
+ =?utf-8?B?YmFOUkNEWVRXWUgzOXp3cVhUTkZNMVZqOUp2czlHNXF2QTN3RndVcWtPSkdt?=
+ =?utf-8?B?MUYzNE5tWnV3NTgxMW1USk1yZTNYQTM4RmVLcVBuMkFYam5iazI5WHJzQ1ZW?=
+ =?utf-8?B?U3c9PQ==?=
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [147.11.136.210]
-X-ClientProxiedBy: ala-exchng01.corp.ad.wrs.com (147.11.82.252) To
- ala-exchng01.corp.ad.wrs.com (147.11.82.252)
-X-Proofpoint-ORIG-GUID: JFdhVQ4RyW37XQiaYR95suVg70cbr2Lx
-X-Proofpoint-GUID: JFdhVQ4RyW37XQiaYR95suVg70cbr2Lx
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.254,Aquarius:18.0.957,Hydra:6.0.573,FMLib:17.11.176.26
- definitions=2023-06-03_08,2023-06-02_02,2023-05-22_02
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 mlxscore=0 malwarescore=0
- bulkscore=0 spamscore=0 impostorscore=0 lowpriorityscore=0 mlxlogscore=999
- phishscore=0 clxscore=1015 suspectscore=0 priorityscore=1501 adultscore=0
- classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2304280000
- definitions=main-2306050096
+X-OriginatorOrg: advantech.cz
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: TY2PR02MB3678.apcprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 668d8664-476b-4dfc-94d6-08db65ee3273
+X-MS-Exchange-CrossTenant-originalarrivaltime: 05 Jun 2023 17:56:32.5817
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: a77d40d9-dcba-4dda-b571-5f18e6da853f
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: o3HoAuNPoQrkGC4O6MvWgBd/oB6FcTOAoRoqcfApwXv6jRpmbHPWEWZGlfpIb/USyRgweEiT6GtR+ODhXcZ55BH3+Kcwk957PhEBa7/jmXc=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SG2PR02MB5843
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 05 Jun 2023 10:47:52 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103128
+ <openembedded-devel@lists.openembedded.org>; Mon, 05 Jun 2023 17:56:44 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103129
 
-An issue found in TCPReplay v.4.4.3 allows a remote attacker to cause a denial of service via
-the read_hexstring function at the utils.c:309 endpoint, the read_hexstring function at
-the utils.c:309 endpoint, the macinstring function, the parse_list function at the list.c:81 endpoint,
-the ports2PORT function at the portmap.c:69 endpoint and the cidr2cidr function at the cidr.c:178 endpoint.
-
-This security patch incorporates fixes for below list of CVEs
-	CVE-2023-27784
-	CVE-2023-27785
-	CVE-2023-27786
-	CVE-2023-27787
-	CVE-2023-27788
-	CVE-2023-27789
-
-References:
-https://nvd.nist.gov/vuln/detail/CVE-2023-27784
-https://nvd.nist.gov/vuln/detail/CVE-2023-27785
-https://nvd.nist.gov/vuln/detail/CVE-2023-27786
-https://nvd.nist.gov/vuln/detail/CVE-2023-27787
-https://nvd.nist.gov/vuln/detail/CVE-2023-27788
-https://nvd.nist.gov/vuln/detail/CVE-2023-27789
-https://github.com/appneta/tcpreplay/pull/783
-
-Signed-off-by: Archana Polampalli <archana.polampalli@windriver.com>
----
- .../tcpreplay/tcpreplay/CVE-2023-27784.patch  | 94 +++++++++++++++++++
- .../tcpreplay/tcpreplay_4.4.2.bb              |  1 +
- 2 files changed, 95 insertions(+)
- create mode 100644 meta-networking/recipes-support/tcpreplay/tcpreplay/CVE-2023-27784.patch
-
-diff --git a/meta-networking/recipes-support/tcpreplay/tcpreplay/CVE-2023-27784.patch b/meta-networking/recipes-support/tcpreplay/tcpreplay/CVE-2023-27784.patch
-new file mode 100644
-index 000000000..0cc2f295b
---- /dev/null
-+++ b/meta-networking/recipes-support/tcpreplay/tcpreplay/CVE-2023-27784.patch
-@@ -0,0 +1,94 @@
-+From df18c48812462ea802d639d2477887055666ee58 Mon Sep 17 00:00:00 2001
-+From: Marsman1996 <lqliuyuwei@outlook.com>
-+Date: Wed Mar 1 16:52:35 2023 +0800
-+Subject: [PATCH] Add check after call strtok_r
-+
-+CVE: CVE-2023-27784 CVE-2023-27785 CVE-2023-27786 CVE-2023-27787 CVE-2023-27788 CVE-2023-27789
-+
-+Upstream-Status: Backport [https://github.com/appneta/tcpreplay/commit/342d29d9e42898b1e097a9f9a31fe0ad15d2f43b]
-+
-+Signed-off-by: Archana Polampalli <archana.polampalli@windriver.com>
-+---
-+ src/common/cidr.c     | 4 ++++
-+ src/common/list.c     | 2 +-
-+ src/common/mac.c      | 2 +-
-+ src/common/utils.c    | 2 ++
-+ src/tcpedit/portmap.c | 2 +-
-+ 5 files changed, 9 insertions(+), 3 deletions(-)
-+
-+diff --git a/src/common/cidr.c b/src/common/cidr.c
-+index 59aaf87..4fc8aad 100644
-+--- a/src/common/cidr.c
-++++ b/src/common/cidr.c
-+@@ -295,6 +295,8 @@ parse_cidr(tcpr_cidr_t ** cidrdata, char *cidrin, char *delim)
-+
-+     /* first iteration of input using strtok */
-+     network = strtok_r(cidrin, delim, &token);
-++    if (network == NULL)
-++        return 0;
-+
-+     *cidrdata = cidr2cidr(network);
-+     cidr_ptr = *cidrdata;
-+@@ -362,6 +364,8 @@ parse_endpoints(tcpr_cidrmap_t ** cidrmap1, tcpr_cidrmap_t ** cidrmap2, const ch
-+         /* ipv4 mode */
-+         memset(newmap, '\0', NEWMAP_LEN);
-+         map = strtok_r(string, ":", &token);
-++        if (map == NULL)
-++            goto done;
-+
-+         strlcpy(newmap, "0.0.0.0/0:", NEWMAP_LEN);
-+         strlcat(newmap, map, NEWMAP_LEN);
-+diff --git a/src/common/list.c b/src/common/list.c
-+index 303e5a5..fbd5450 100644
-+--- a/src/common/list.c
-++++ b/src/common/list.c
-+@@ -78,7 +78,7 @@ parse_list(tcpr_list_t ** listdata, char *ourstr)
-+     second = NULL;
-+
-+     /* regex test */
-+-    if (regexec(&preg, this, 0, NULL, 0) != 0) {
-++    if (this == NULL || regexec(&preg, this, 0, NULL, 0) != 0) {
-+         warnx("Unable to parse: %s", this);
-+         regfree(&preg);
-+         return 0;
-+diff --git a/src/common/mac.c b/src/common/mac.c
-+index 3747a17..8ec2df3 100644
-+--- a/src/common/mac.c
-++++ b/src/common/mac.c
-+@@ -117,7 +117,7 @@ macinstring(const char *macstring, const u_char *mac)
-+     memset(&tempmac[0], 0, sizeof(tempmac));
-+
-+     tempstr = strtok_r(ourstring, ",", &tok);
-+-    if (strlen(tempstr)) {
-++    if (tempstr != NULL && strlen(tempstr)) {
-+        mac2hex(tempstr, tempmac, len);
-+        if (memcmp(mac, tempmac, len) == 0) {
-+            dbgx(3, "Packet matches: " MAC_FORMAT " sending out primary.\n", MAC_STR(tempmac));
-+diff --git a/src/common/utils.c b/src/common/utils.c
-+index a641939..fcfddb5 100644
-+--- a/src/common/utils.c
-++++ b/src/common/utils.c
-+@@ -306,6 +306,8 @@ read_hexstring(const char *l2string, u_char *hex, const int hexlen)
-+
-+     /* get the first byte */
-+     l2byte = strtok_r(string, ",", &token);
-++    if (l2byte == NULL)
-++        err(-1, "Hex buffer must contain something");
-+     sscanf(l2byte, "%x", &value);
-+     if (value > 0xff)
-+         errx(-1, "Invalid hex string byte: %s", l2byte);
-+diff --git a/src/tcpedit/portmap.c b/src/tcpedit/portmap.c
-+index 61c0d2a..ebafe39 100644
-+--- a/src/tcpedit/portmap.c
-++++ b/src/tcpedit/portmap.c
-+@@ -194,7 +194,7 @@ parse_portmap(tcpedit_portmap_t ** portmap, const char *ourstr)
-+     /* first iteration of input */
-+     substr = strtok_r(ourstrcpy, ",", &token);
-+
-+-    if ((*portmap = ports2PORT(substr)) == NULL) {
-++    if (substr == NULL || (*portmap = ports2PORT(substr)) == NULL) {
-+         safe_free(ourstrcpy);
-+         return 0;
-+     }
-+--
-+2.40.0
-diff --git a/meta-networking/recipes-support/tcpreplay/tcpreplay_4.4.2.bb b/meta-networking/recipes-support/tcpreplay/tcpreplay_4.4.2.bb
-index ccff19f16..1e240c69e 100644
---- a/meta-networking/recipes-support/tcpreplay/tcpreplay_4.4.2.bb
-+++ b/meta-networking/recipes-support/tcpreplay/tcpreplay_4.4.2.bb
-@@ -9,6 +9,7 @@ LIC_FILES_CHKSUM = "file://docs/LICENSE;md5=10f0474a2f0e5dccfca20f69d6598ad8"
- 
- SRC_URI = "https://github.com/appneta/tcpreplay/releases/download/v${PV}/tcpreplay-${PV}.tar.gz \
-            file://CVE-2023-27783.patch \
-+           file://CVE-2023-27784.patch \
-            "
- 
- SRC_URI[sha256sum] = "5b272cd83b67d6288a234ea15f89ecd93b4fadda65eddc44e7b5fcb2f395b615"
--- 
-2.40.0
-
+QXBhcnQgdGhlIGJ1Z2ZpeGVzLCB0aGUgMS4zLjAgaW50cm9kdWNlZCB0aGUgZm9sbG93aW5nIGZl
+YXR1cmVzOg0KDQogIGZlYXQoc2VydmljZSk6IGFkZCBXYXJwaW5hdG9yICg2ZGUzZjE4KQ0KICBm
+ZWF0KGRidXMpOiByZXNldCB0byBkZWZhdWx0IHNldHRpbmdzICg0ZDMyN2M1KQ0KICBmZWF0KHNl
+cnZpY2UpOiBhZGQgYmFyZW9zLWRpcmVjdG9yIGJhcmVvcy1maWxlZGFlbW9uIGJhcmVvcy1zdG9y
+YWdlICg3NTUyMDk1KQ0KICBmZWF0KHBvbGljeSk6IG1hc3F1ZXJhZGU6IGFsbG93IGluZ3Jlc3Mg
+em9uZSB0byBoYXZlIGludGVyZmFjZSAoZDhlYmUxZCkNCiAgZmVhdChzZXJ2aWNlKTogYWRkIE5l
+YnVsYSBzZXJ2aWNlICgzZjU5Y2U5KQ0KICBmZWF0KHNlcnZpY2UpOiBhZGQgQ2VwaCBQcm9tZXRo
+ZXVzIGV4cG9ydGVyIChlZjlkNTFmKQ0KICBmZWF0KHNlcnZpY2UpOiBhZGQgT01HIEREUyBzZXJ2
+aWNlIGRlZmluaXRpb24gKDlhZDNkMzcpDQogIGZlYXQoc2VydmljZSk6IGFkZCBsbG1uci1jbGll
+bnQgc2VydmljZSAoMGFlNzY1YykNCiAgZmVhdChzZXJ2aWNlKTogYWRkIHBzMmxpbmsgc2Vydmlj
+ZSAoNmQxNTg2YykNCiAgZmVhdChzZXJ2aWNlKTogYWRkIGRlZmluaXRpb24gZm9yIHN5bmN0aGlu
+Zy1yZWxheSAoY2FiMGQ0MykNCg0KU2lnbmVkLW9mZi1ieTogUGV0ciBHb3R0aGFyZCA8cGV0ci5n
+b3R0aGFyZEBhZHZhbnRlY2guY3o+DQotLS0NCiAuLi4vZmlyZXdhbGxkL3tmaXJld2FsbGRfMS4y
+LjAuYmIgPT4gZmlyZXdhbGxkXzEuMy4yLmJifSAgICAgIHwgNCArKy0tDQogMSBmaWxlIGNoYW5n
+ZWQsIDIgaW5zZXJ0aW9ucygrKSwgMiBkZWxldGlvbnMoLSkNCiByZW5hbWUgbWV0YS1uZXR3b3Jr
+aW5nL2R5bmFtaWMtbGF5ZXJzL21ldGEtcHl0aG9uL3JlY2lwZXMtY29ubmVjdGl2aXR5L2ZpcmV3
+YWxsZC97ZmlyZXdhbGxkXzEuMi4wLmJiID0+IGZpcmV3YWxsZF8xLjMuMi5iYn0gKDk5JSkNCg0K
+ZGlmZiAtLWdpdCBhL21ldGEtbmV0d29ya2luZy9keW5hbWljLWxheWVycy9tZXRhLXB5dGhvbi9y
+ZWNpcGVzLWNvbm5lY3Rpdml0eS9maXJld2FsbGQvZmlyZXdhbGxkXzEuMi4wLmJiIGIvbWV0YS1u
+ZXR3b3JraW5nL2R5bmFtaWMtbGF5ZXJzL21ldGEtcHl0aG9uL3JlY2lwZXMtY29ubmVjdGl2aXR5
+L2ZpcmV3YWxsZC9maXJld2FsbGRfMS4zLjIuYmINCnNpbWlsYXJpdHkgaW5kZXggOTklDQpyZW5h
+bWUgZnJvbSBtZXRhLW5ldHdvcmtpbmcvZHluYW1pYy1sYXllcnMvbWV0YS1weXRob24vcmVjaXBl
+cy1jb25uZWN0aXZpdHkvZmlyZXdhbGxkL2ZpcmV3YWxsZF8xLjIuMC5iYg0KcmVuYW1lIHRvIG1l
+dGEtbmV0d29ya2luZy9keW5hbWljLWxheWVycy9tZXRhLXB5dGhvbi9yZWNpcGVzLWNvbm5lY3Rp
+dml0eS9maXJld2FsbGQvZmlyZXdhbGxkXzEuMy4yLmJiDQppbmRleCA5MTBkODJmY2Q4Li41MjE1
+N2NmOWE4IDEwMDY0NA0KLS0tIGEvbWV0YS1uZXR3b3JraW5nL2R5bmFtaWMtbGF5ZXJzL21ldGEt
+cHl0aG9uL3JlY2lwZXMtY29ubmVjdGl2aXR5L2ZpcmV3YWxsZC9maXJld2FsbGRfMS4yLjAuYmIN
+CisrKyBiL21ldGEtbmV0d29ya2luZy9keW5hbWljLWxheWVycy9tZXRhLXB5dGhvbi9yZWNpcGVz
+LWNvbm5lY3Rpdml0eS9maXJld2FsbGQvZmlyZXdhbGxkXzEuMy4yLmJiDQpAQCAtNiwxMSArNiwx
+MSBAQCBMSUNFTlNFID0gIkdQTC0yLjAtb3ItbGF0ZXIiDQogTElDX0ZJTEVTX0NIS1NVTSA9ICJm
+aWxlOi8vQ09QWUlORzttZDU9YjIzNGVlNGQ2OWY1ZmNlNDQ4NmE4MGZkYWY0YTQyNjMiDQogDQog
+U1JDX1VSSSA9ICJcDQotICAgIGh0dHBzOi8vZ2l0aHViLmNvbS8ke0JQTn0vJHtCUE59L3JlbGVh
+c2VzL2Rvd25sb2FkL3Yke1BWfS8ke0JQfS50YXIuZ3ogXA0KKyAgICBodHRwczovL2dpdGh1Yi5j
+b20vJHtCUE59LyR7QlBOfS9yZWxlYXNlcy9kb3dubG9hZC92JHtQVn0vJHtCUH0udGFyLmJ6MiBc
+DQogICAgIGZpbGU6Ly9maXJld2FsbGQuaW5pdCBcDQogICAgIGZpbGU6Ly9ydW4tcHRlc3QgXA0K
+ICINCi1TUkNfVVJJW3NoYTI1NnN1bV0gPSAiMjhmZDkwZTg4YmRhMGRmZDQ2MGYzNzBmMzUzNDc0
+ODExYjJlMjk1ZDdlYjI3ZjBkN2QxOGZmYTNkNzg2ZWViNyINCitTUkNfVVJJW3NoYTI1NnN1bV0g
+PSAiYWJhMGQ4Y2U5NjE3YjkwNmVhNDg2NmJmMGJkZmIyYzJkNTMxMmY1M2I4ZTllOGU5ZTRkNDli
+ZjMzMGRhNWI1ZSINCiANCiAjIGdsaWItMi4wLW5hdGl2ZSBpcyBuZWVkZWQgZm9yIEdTRVRUSU5H
+U19SVUxFUyBhdXRvY29uZiBtYWNybyBmcm9tIGdzZXR0aW5ncy5tNA0KIERFUEVORFMgPSAiaW50
+bHRvb2wtbmF0aXZlIGdsaWItMi4wLW5hdGl2ZSBuZnRhYmxlcyINCi0tIA0KMi4zNC4xDQoNCg==
 
