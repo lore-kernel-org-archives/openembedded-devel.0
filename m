@@ -1,210 +1,108 @@
-Return-Path: <vanusuri@mvista.com>
+Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 263F1C7EE23
-	for <webhook@archiver.kernel.org>; Mon,  5 Jun 2023 07:20:01 +0000 (UTC)
-Received: from mail-pf1-f180.google.com (mail-pf1-f180.google.com [209.85.210.180])
- by mx.groups.io with SMTP id smtpd.web11.1813.1685949592917596869
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4499DC7EE23
+	for <webhook@archiver.kernel.org>; Mon,  5 Jun 2023 07:53:31 +0000 (UTC)
+Received: from esa6.hc1455-7.c3s2.iphmx.com (esa6.hc1455-7.c3s2.iphmx.com [68.232.139.139])
+ by mx.groups.io with SMTP id smtpd.web10.2113.1685951608827785697
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 05 Jun 2023 00:19:53 -0700
+ Mon, 05 Jun 2023 00:53:30 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@mvista.com header.s=google header.b=BvklUJXs;
- spf=pass (domain: mvista.com, ip: 209.85.210.180, mailfrom: vanusuri@mvista.com)
-Received: by mail-pf1-f180.google.com with SMTP id d2e1a72fcca58-64d44b198baso3196905b3a.0
-        for <openembedded-devel@lists.openembedded.org>; Mon, 05 Jun 2023 00:19:52 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=mvista.com; s=google; t=1685949592; x=1688541592;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=z0rcO9ocfX58dCkIBDALQz2ZDad59pAtIwdFEGhGgfg=;
-        b=BvklUJXsBZrUqeBmCSuSO17WuQGph8lPuAKzw26PtXwdlpjoE6aINetKJ2AMGYmQBT
-         D8wB+Nvr0kQOzlZYzvY6r9nspwpzOiepcofw6ABKUTnQfT3Mhw+MGWPu4cUhmL81sJmG
-         AJD2gXSjNUgAE6PxmcwC767aAWwKuoS72eje4=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1685949592; x=1688541592;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=z0rcO9ocfX58dCkIBDALQz2ZDad59pAtIwdFEGhGgfg=;
-        b=iaJz0tDn7vBDYK0umd6V0eifDmk7NBULFjxZNAXqpWDAe3EcJGQ7u810ngKDRZImDU
-         NJXhLpjQdnQR2UiccoclngyDmPjW5CmNEC6hS/4k0GwG5GIr3juIAF1qrhNFu++bzlnd
-         9mjqZmUPH0AOPff05s0tDZtRV7/oRItUXgr52kGNkeyC7TSc9blg0Yjjr44CmSOFPwC5
-         HkUJxey05w2uI93WK+FGFmCwNUbd8rmbta7Tvi0OPLthMdnymtfLT4rJYUS9dW/wH+Xv
-         rZxXZ8cGoV6n+XCWtEj5vnbauQ2As6om3rjpzXROxz7bCCLKrxcLeblNEzARP6mPyJt0
-         NM8Q==
-X-Gm-Message-State: AC+VfDzhV/p31URY8oaIVGt24RqczzQO6vaSrSirjb3vkj3f5E6NVBfh
-	FjPQJmDO+ZRawCVoUl9G7hzgZGlJE9X3QWvj2hY=
-X-Google-Smtp-Source: ACHHUZ4Gt6gwpAm7i+v5wjX30Bp9vFyaeh1koyuHBQzQgKLp/meTCJEquwi68ClEbEEfIzh5hvCIVQ==
-X-Received: by 2002:a05:6a00:3016:b0:657:622b:21b5 with SMTP id ay22-20020a056a00301600b00657622b21b5mr4018659pfb.12.1685949591747;
-        Mon, 05 Jun 2023 00:19:51 -0700 (PDT)
-Received: from MVIN00020.mvista.com ([27.59.199.11])
-        by smtp.gmail.com with ESMTPSA id s11-20020a62e70b000000b0065440a07294sm3359184pfh.95.2023.06.05.00.19.49
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 05 Jun 2023 00:19:51 -0700 (PDT)
-From: vanusuri@mvista.com
+ dkim=missing; spf=pass (domain: fujitsu.com, ip: 68.232.139.139, mailfrom: wangmy@fujitsu.com)
+X-IronPort-AV: E=McAfee;i="6600,9927,10731"; a="120638930"
+X-IronPort-AV: E=Sophos;i="6.00,217,1681138800"; 
+   d="scan'208";a="120638930"
+Received: from unknown (HELO oym-r4.gw.nic.fujitsu.com) ([210.162.30.92])
+  by esa6.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 05 Jun 2023 16:53:28 +0900
+Received: from oym-m2.gw.nic.fujitsu.com (oym-nat-oym-m2.gw.nic.fujitsu.com [192.168.87.59])
+	by oym-r4.gw.nic.fujitsu.com (Postfix) with ESMTP id EC1DADDC65
+	for <openembedded-devel@lists.openembedded.org>; Mon,  5 Jun 2023 16:53:25 +0900 (JST)
+Received: from aks-ab1.gw.nic.fujitsu.com (aks-ab1.gw.nic.fujitsu.com [192.51.207.11])
+	by oym-m2.gw.nic.fujitsu.com (Postfix) with ESMTP id E8600BF3C7
+	for <openembedded-devel@lists.openembedded.org>; Mon,  5 Jun 2023 16:53:24 +0900 (JST)
+Received: from localhost.localdomain (unknown [10.167.225.33])
+	by aks-ab1.gw.nic.fujitsu.com (Postfix) with ESMTP id 151152FC85E5;
+	Mon,  5 Jun 2023 16:53:24 +0900 (JST)
+From: wangmy@fujitsu.com
 To: openembedded-devel@lists.openembedded.org
-Cc: Vijay Anusuri <vanusuri@mvista.com>
-Subject: [oe][meta-oe][dunfell][PATCH] openldap: Fix CVE-2023-2953
-Date: Mon,  5 Jun 2023 12:47:40 +0530
-Message-Id: <20230605071740.105422-1-vanusuri@mvista.com>
-X-Mailer: git-send-email 2.25.1
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Cc: Wang Mingyu <wangmy@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH] pamela: upgrade 1.0.0 -> 1.1.0
+Date: Mon,  5 Jun 2023 15:53:01 +0800
+Message-Id: <1685951589-29920-10-git-send-email-wangmy@fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
+In-Reply-To: <1685951589-29920-1-git-send-email-wangmy@fujitsu.com>
+References: <1685951589-29920-1-git-send-email-wangmy@fujitsu.com>
+X-TM-AS-GCONF: 00
+X-TM-AS-Product-Ver: IMSS-9.1.0.1408-9.0.0.1002-27672.004
+X-TM-AS-User-Approved-Sender: Yes
+X-TMASE-Version: IMSS-9.1.0.1408-9.0.1002-27672.004
+X-TMASE-Result: 10--3.331900-10.000000
+X-TMASE-MatchedRID: /gZnudouedqjz0nOeth/yQPZZctd3P4BRzUPAqhCjtiY5nVpihxiw5Uh
+	t+myr0XM28kKXD7bCdn/tdOuViNvuC/7QU2czuUNGYJhRh6ssesYH39vFLryE6Y5ZGw7wyeHs8W
+	7VNomNMPVuPnsbKmJlg1UuEJlsPFUu2PzD0SpTPUK3Ma88LL+bq4sbbURvhPzgW6bY8SOq3WjxY
+	yRBa/qJShNCXvA0fw+jaPj0W1qn0TGVuWouVipcgA4hBs+pxYHH80VDRjWOilP/OStRTunHBDvL
+	nHbRj69ak2Qu6K9sTsM6VHWle1BJ59lnjqeiP1fIgANZFKUJS0mgWf0G2NLKv6/2/nZkihaOgB/
+	fz3EXdcVKT0eFRmfDs4YhafCzgujIdY9jOi4lTI=
+X-TMASE-SNAP-Result: 1.821001.0001-0-1-22:0,33:0,34:0-0
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 05 Jun 2023 07:20:01 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103107
+ <openembedded-devel@lists.openembedded.org>; Mon, 05 Jun 2023 07:53:31 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103118
 
-From: Vijay Anusuri <vanusuri@mvista.com>
+From: Wang Mingyu <wangmy@fujitsu.com>
 
-Upstream-Status: Backport
-[https://git.openldap.org/openldap/openldap/-/commit/752d320cf96e46f24c0900f1a8f6af0a3fc3c4ce
-&
-https://git.openldap.org/openldap/openldap/-/commit/6563fab9e2feccb0a684d0398e78571d09fb808b]
-
-Signed-off-by: Vijay Anusuri <vanusuri@mvista.com>
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../openldap/openldap/CVE-2023-2953-1.patch   | 30 ++++++++
- .../openldap/openldap/CVE-2023-2953-2.patch   | 76 +++++++++++++++++++
- .../openldap/openldap_2.4.57.bb               |  2 +
- 3 files changed, 108 insertions(+)
- create mode 100644 meta-oe/recipes-support/openldap/openldap/CVE-2023-2953-1.patch
- create mode 100644 meta-oe/recipes-support/openldap/openldap/CVE-2023-2953-2.patch
+ .../recipes-devtools/python/pamela_1.0.0.bb       | 15 ---------------
+ .../recipes-devtools/python/pamela_1.1.0.bb       | 14 ++++++++++++++
+ 2 files changed, 14 insertions(+), 15 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/pamela_1.0.0.bb
+ create mode 100644 meta-python/recipes-devtools/python/pamela_1.1.0.bb
 
-diff --git a/meta-oe/recipes-support/openldap/openldap/CVE-2023-2953-1.patch b/meta-oe/recipes-support/openldap/openldap/CVE-2023-2953-1.patch
+diff --git a/meta-python/recipes-devtools/python/pamela_1.0.0.bb b/meta-python/recipes-devtools/python/pamela_1.0.0.bb
+deleted file mode 100644
+index 369ed78ca7..0000000000
+--- a/meta-python/recipes-devtools/python/pamela_1.0.0.bb
++++ /dev/null
+@@ -1,15 +0,0 @@
+-DESCRIPTION = "Pamela: yet another Python wrapper for PAM"
+-LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://PKG-INFO;md5=3f9b78307cdde4e6a4976bfd82a0e7f3"
+-
+-SRC_URI[md5sum] = "5fc14f5275383ed8bdd509007af0323d"
+-SRC_URI[sha256sum] = "65c9389bef7d1bb0b168813b6be21964df32016923aac7515bdf05366acbab6c"
+-
+-PYPI_PACKAGE = "pamela"
+-
+-inherit pypi setuptools3
+-
+-RDEPENDS:${PN} = "libpam"
+-
+-inherit features_check
+-REQUIRED_DISTRO_FEATURES = "pam"
+diff --git a/meta-python/recipes-devtools/python/pamela_1.1.0.bb b/meta-python/recipes-devtools/python/pamela_1.1.0.bb
 new file mode 100644
-index 000000000..f4b4eb95d
+index 0000000000..3573de551d
 --- /dev/null
-+++ b/meta-oe/recipes-support/openldap/openldap/CVE-2023-2953-1.patch
-@@ -0,0 +1,30 @@
-+From 752d320cf96e46f24c0900f1a8f6af0a3fc3c4ce Mon Sep 17 00:00:00 2001
-+From: Howard Chu <hyc@openldap.org>
-+Date: Wed, 24 Aug 2022 14:40:51 +0100
-+Subject: [PATCH] ITS#9904 ldif_open_url: check for ber_strdup failure
++++ b/meta-python/recipes-devtools/python/pamela_1.1.0.bb
+@@ -0,0 +1,14 @@
++DESCRIPTION = "Pamela: yet another Python wrapper for PAM"
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://PKG-INFO;md5=6b706db92112b8384848de3e5c6adaa3"
 +
-+Code present since 1999, df8f7cbb9b79be3be9205d116d1dd0b263d6861a
++SRC_URI[sha256sum] = "d4b139fe600e192e176a2a368059207a6bffa0e7879879b13f4fcba0163481be"
 +
-+Upstream-Status: Backport [https://git.openldap.org/openldap/openldap/-/commit/752d320cf96e46f24c0900f1a8f6af0a3fc3c4ce]
-+CVE: CVE-2023-2953
-+Signed-off-by: Vijay Anusuri <vanusuri@mvista.com>
-+---
-+ libraries/libldap/fetch.c | 2 ++
-+ 1 file changed, 2 insertions(+)
++PYPI_PACKAGE = "pamela"
 +
-+diff --git a/libraries/libldap/fetch.c b/libraries/libldap/fetch.c
-+index 9e426dc647..536871bcfe 100644
-+--- a/libraries/libldap/fetch.c
-++++ b/libraries/libldap/fetch.c
-+@@ -69,6 +69,8 @@ ldif_open_url(
-+ 		}
-+ 
-+ 		p = ber_strdup( urlstr );
-++		if ( p == NULL )
-++			return NULL;
-+ 
-+ 		/* But we should convert to LDAP_DIRSEP before use */
-+ 		if ( LDAP_DIRSEP[0] != '/' ) {
-+-- 
-+GitLab
++inherit pypi setuptools3
 +
-diff --git a/meta-oe/recipes-support/openldap/openldap/CVE-2023-2953-2.patch b/meta-oe/recipes-support/openldap/openldap/CVE-2023-2953-2.patch
-new file mode 100644
-index 000000000..02c43bc44
---- /dev/null
-+++ b/meta-oe/recipes-support/openldap/openldap/CVE-2023-2953-2.patch
-@@ -0,0 +1,76 @@
-+From 6563fab9e2feccb0a684d0398e78571d09fb808b Mon Sep 17 00:00:00 2001
-+From: Howard Chu <hyc@openldap.org>
-+Date: Thu, 25 Aug 2022 16:13:21 +0100
-+Subject: [PATCH] ITS#9904 ldap_url_parsehosts: check for strdup failure
++RDEPENDS:${PN} = "libpam"
 +
-+Avoid unnecessary strdup in IPv6 addr parsing, check for strdup
-+failure when dup'ing scheme.
-+
-+Code present since 2000, 8da110a9e726dbc612b302feafe0109271e6bc59
-+
-+Upstream-Status: Backport [https://git.openldap.org/openldap/openldap/-/commit/6563fab9e2feccb0a684d0398e78571d09fb808b]
-+CVE: CVE-2023-2953
-+Signed-off-by: Vijay Anusuri <vanusuri@mvista.com>
-+---
-+ libraries/libldap/url.c | 21 ++++++++++++---------
-+ 1 file changed, 12 insertions(+), 9 deletions(-)
-+
-+diff --git a/libraries/libldap/url.c b/libraries/libldap/url.c
-+index dcf2aac9e8..493fd7ce47 100644
-+--- a/libraries/libldap/url.c
-++++ b/libraries/libldap/url.c
-+@@ -1385,24 +1385,22 @@ ldap_url_parsehosts(
-+ 		}
-+ 		ludp->lud_port = port;
-+ 		ludp->lud_host = specs[i];
-+-		specs[i] = NULL;
-+ 		p = strchr(ludp->lud_host, ':');
-+ 		if (p != NULL) {
-+ 			/* more than one :, IPv6 address */
-+ 			if ( strchr(p+1, ':') != NULL ) {
-+ 				/* allow [address] and [address]:port */
-+ 				if ( *ludp->lud_host == '[' ) {
-+-					p = LDAP_STRDUP(ludp->lud_host+1);
-+-					/* copied, make sure we free source later */
-+-					specs[i] = ludp->lud_host;
-+-					ludp->lud_host = p;
-+-					p = strchr( ludp->lud_host, ']' );
-++					p = strchr( ludp->lud_host+1, ']' );
-+ 					if ( p == NULL ) {
-+ 						LDAP_FREE(ludp);
-+ 						ldap_charray_free(specs);
-+ 						return LDAP_PARAM_ERROR;
-+ 					}
-+-					*p++ = '\0';
-++					/* Truncate trailing ']' and shift hostname down 1 char */
-++					*p = '\0';
-++					AC_MEMCPY( ludp->lud_host, ludp->lud_host+1, p - ludp->lud_host );
-++					p++;
-+ 					if ( *p != ':' ) {
-+ 						if ( *p != '\0' ) {
-+ 							LDAP_FREE(ludp);
-+@@ -1428,14 +1426,19 @@ ldap_url_parsehosts(
-+ 				}
-+ 			}
-+ 		}
-+-		ldap_pvt_hex_unescape(ludp->lud_host);
-+ 		ludp->lud_scheme = LDAP_STRDUP("ldap");
-++		if ( ludp->lud_scheme == NULL ) {
-++			LDAP_FREE(ludp);
-++			ldap_charray_free(specs);
-++			return LDAP_NO_MEMORY;
-++		}
-++		specs[i] = NULL;
-++		ldap_pvt_hex_unescape(ludp->lud_host);
-+ 		ludp->lud_next = *ludlist;
-+ 		*ludlist = ludp;
-+ 	}
-+ 
-+ 	/* this should be an array of NULLs now */
-+-	/* except entries starting with [ */
-+ 	ldap_charray_free(specs);
-+ 	return LDAP_SUCCESS;
-+ }
-+-- 
-+GitLab
-+
-diff --git a/meta-oe/recipes-support/openldap/openldap_2.4.57.bb b/meta-oe/recipes-support/openldap/openldap_2.4.57.bb
-index e3e9caa1b..1e7e6b3d7 100644
---- a/meta-oe/recipes-support/openldap/openldap_2.4.57.bb
-+++ b/meta-oe/recipes-support/openldap/openldap_2.4.57.bb
-@@ -24,6 +24,8 @@ SRC_URI = "http://www.openldap.org/software/download/OpenLDAP/openldap-release/$
-     file://openldap-CVE-2015-3276.patch \
-     file://remove-user-host-pwd-from-version.patch \
-     file://CVE-2022-29155.patch \
-+    file://CVE-2023-2953-1.patch \
-+    file://CVE-2023-2953-2.patch \
- "
- SRC_URI[md5sum] = "e3349456c3a66e5e6155be7ddc3f042c"
- SRC_URI[sha256sum] = "c7ba47e1e6ecb5b436f3d43281df57abeffa99262141aec822628bc220f6b45a"
++inherit features_check
++REQUIRED_DISTRO_FEATURES = "pam"
 -- 
-2.25.1
+2.34.1
 
 
