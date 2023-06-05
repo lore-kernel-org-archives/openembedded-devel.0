@@ -2,41 +2,41 @@ Return-Path: <archana.polampalli@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7C5EBC77B73
-	for <webhook@archiver.kernel.org>; Mon,  5 Jun 2023 10:40:02 +0000 (UTC)
-Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.web11.4336.1685961600347219261
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9AA56C7EE23
+	for <webhook@archiver.kernel.org>; Mon,  5 Jun 2023 10:47:52 +0000 (UTC)
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.web10.4444.1685962070130088191
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 05 Jun 2023 03:40:00 -0700
+ Mon, 05 Jun 2023 03:47:50 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=pps06212021 header.b=iEJQraGn;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=5520839f50=archana.polampalli@windriver.com)
-Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 355ACQnj030791
-	for <openembedded-devel@lists.openembedded.org>; Mon, 5 Jun 2023 03:39:59 -0700
+ dkim=pass header.i=@windriver.com header.s=pps06212021 header.b=hwAgm5p6;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=5520839f50=archana.polampalli@windriver.com)
+Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 355AlnCY004143
+	for <openembedded-devel@lists.openembedded.org>; Mon, 5 Jun 2023 10:47:49 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com; h=from : to : cc :
  subject : date : message-id : mime-version : content-transfer-encoding :
  content-type; s=PPS06212021;
- bh=Pa+24w70RidVCS3pAEEbjsoUz12jAdpwi0PThpxhUjE=;
- b=iEJQraGnbzBEOv1+sw8kekc4bdotr0647RMwblzJu8qJkyQ+RAj26dTd9x3cT5cBuF06
- Aw+MfsJmAX7w6w/naAWQp+x1zyaeDaVByhdd4D/AAh0VY6EIgUTC0pUOyM2VPdNAwXKq
- qkQrXdeoBT/Ol6pS3G1jjAwPyFRHVBju4nSSdVyW45x7aAjuWIlHrobGtGjk9DJ4Pvm9
- HOTvxVeQQFxvl9f42sf5YZ5usC3WAdIDPO1uTdZ5sPzed8ef+kRkUWhx4sZ2PISxlPUw
- l3ZLJHhLFwVP/PXH/2fjCh+H1A/6ZPkf6zGNVcmfNvK+h/PjHXN34YHwDSq6o/qriE03 Ww== 
+ bh=8rsYIUs5j0nAapVKZ3U1p/t0NjCXZvbpMihdVOh46gQ=;
+ b=hwAgm5p6YvCl24SZOne9IodJhbC/Izlmu10a5Za7hReZZNP0y8TU7vl2YWA73lnUBmlC
+ 203GG0x/4guEc9NZ6ZdvS3OIIWfrGeuimCXfzAgn3yzDVjTTLiiR9mNF4o+3NDPjrugA
+ OAxZWzcCQtiWkQQegR8DScVTyneV4wZ52p5RorxewdHzVdEkuKgk3SrAqrZF8ZRtposF
+ gE5/YaDeMH+SoRXvAejVd6CdPcNYs31EJLPw4Ut6P190/9Cs2cVhzk4BNnWTUeq9igzi
+ H1AiQzhbp+UjTUgnrUgh1B6OPXYPMnKf8UMLG+adWJYPFNx/sB/3o/rezV+H+8CDdUGB 9A== 
 Received: from ala-exchng01.corp.ad.wrs.com (unknown-82-252.windriver.com [147.11.82.252])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3r051j953t-1
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3qyvg8hdk0-1
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Mon, 05 Jun 2023 03:39:59 -0700
+	for <openembedded-devel@lists.openembedded.org>; Mon, 05 Jun 2023 10:47:49 +0000
 Received: from blr-linux-engg1.wrs.com (147.11.136.210) by
  ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.23; Mon, 5 Jun 2023 03:39:57 -0700
+ 15.1.2507.23; Mon, 5 Jun 2023 03:47:46 -0700
 From: Archana Polampalli <archana.polampalli@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: <Hari.GPillai@windriver.com>
-Subject: [oe][meta-networking][kirkstone][PATCH 1/1] tcpreplay: fix CVE-2023-27784,27785,27786,27787,27788,27789
-Date: Mon, 5 Jun 2023 10:39:24 +0000
-Message-ID: <20230605103924.1191777-1-archana.polampalli@windriver.com>
+Subject: [oe][meta-networking][kirkstone][PATCH V2 1/1] tcpreplay: fix CVE-2023-27784,27785,27786,27787,27788,27789
+Date: Mon, 5 Jun 2023 10:47:33 +0000
+Message-ID: <20230605104733.2290460-1-archana.polampalli@windriver.com>
 X-Mailer: git-send-email 2.40.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -44,21 +44,21 @@ Content-Type: text/plain
 X-Originating-IP: [147.11.136.210]
 X-ClientProxiedBy: ala-exchng01.corp.ad.wrs.com (147.11.82.252) To
  ala-exchng01.corp.ad.wrs.com (147.11.82.252)
-X-Proofpoint-ORIG-GUID: -u_fUCffEI8mfnYfN1khsnV0jZ0Kd_dH
-X-Proofpoint-GUID: -u_fUCffEI8mfnYfN1khsnV0jZ0Kd_dH
+X-Proofpoint-ORIG-GUID: JFdhVQ4RyW37XQiaYR95suVg70cbr2Lx
+X-Proofpoint-GUID: JFdhVQ4RyW37XQiaYR95suVg70cbr2Lx
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.254,Aquarius:18.0.957,Hydra:6.0.573,FMLib:17.11.176.26
  definitions=2023-06-03_08,2023-06-02_02,2023-05-22_02
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 lowpriorityscore=0
- clxscore=1015 priorityscore=1501 bulkscore=0 mlxscore=0 suspectscore=0
- malwarescore=0 mlxlogscore=999 adultscore=0 phishscore=0 impostorscore=0
- spamscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2304280000 definitions=main-2306050095
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 mlxscore=0 malwarescore=0
+ bulkscore=0 spamscore=0 impostorscore=0 lowpriorityscore=0 mlxlogscore=999
+ phishscore=0 clxscore=1015 suspectscore=0 priorityscore=1501 adultscore=0
+ classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2304280000
+ definitions=main-2306050096
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 05 Jun 2023 10:40:02 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103127
+ <openembedded-devel@lists.openembedded.org>; Mon, 05 Jun 2023 10:47:52 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103128
 
 An issue found in TCPReplay v.4.4.3 allows a remote attacker to cause a denial of service via
 the read_hexstring function at the utils.c:309 endpoint, the read_hexstring function at
@@ -91,7 +91,7 @@ Signed-off-by: Archana Polampalli <archana.polampalli@windriver.com>
 
 diff --git a/meta-networking/recipes-support/tcpreplay/tcpreplay/CVE-2023-27784.patch b/meta-networking/recipes-support/tcpreplay/tcpreplay/CVE-2023-27784.patch
 new file mode 100644
-index 000000000..d8b317e86
+index 000000000..0cc2f295b
 --- /dev/null
 +++ b/meta-networking/recipes-support/tcpreplay/tcpreplay/CVE-2023-27784.patch
 @@ -0,0 +1,94 @@
@@ -100,7 +100,7 @@ index 000000000..d8b317e86
 +Date: Wed Mar 1 16:52:35 2023 +0800
 +Subject: [PATCH] Add check after call strtok_r
 +
-+CVE: CVE-2023-27784
++CVE: CVE-2023-27784 CVE-2023-27785 CVE-2023-27786 CVE-2023-27787 CVE-2023-27788 CVE-2023-27789
 +
 +Upstream-Status: Backport [https://github.com/appneta/tcpreplay/commit/342d29d9e42898b1e097a9f9a31fe0ad15d2f43b]
 +
