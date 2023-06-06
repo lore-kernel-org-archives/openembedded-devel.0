@@ -1,110 +1,119 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5F6E4C77B7A
-	for <webhook@archiver.kernel.org>; Tue,  6 Jun 2023 15:57:36 +0000 (UTC)
-Received: from mail-oo1-f42.google.com (mail-oo1-f42.google.com [209.85.161.42])
- by mx.groups.io with SMTP id smtpd.web11.219.1686067052281839588
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A042DC77B7A
+	for <webhook@archiver.kernel.org>; Tue,  6 Jun 2023 16:46:16 +0000 (UTC)
+Received: from mailout11.t-online.de (mailout11.t-online.de [194.25.134.85])
+ by mx.groups.io with SMTP id smtpd.web10.1624.1686069973525507459
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 06 Jun 2023 08:57:32 -0700
+ Tue, 06 Jun 2023 09:46:13 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=Ws0ETM+i;
- spf=pass (domain: gmail.com, ip: 209.85.161.42, mailfrom: raj.khem@gmail.com)
-Received: by mail-oo1-f42.google.com with SMTP id 006d021491bc7-55a35e2a430so1054594eaf.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 06 Jun 2023 08:57:32 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1686067051; x=1688659051;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=GnGy3nivTMOnQLT7Wv4KzhYL/KkEVVBLNmMdXLzrRSY=;
-        b=Ws0ETM+i6fjlxGNynbITafbqGQWFSHULOLutxd7y04FFK9slhKRnTExaiYgXXhcvCp
-         kOLs5E1zjKyvt7PiajV0mTSha5cHtAhORL/Q3yBXFuZ50loacRLKfBCtVM6XPJRrfTl6
-         qWljrKw3IYavo17Il6Us2p+ZGh6YHzhmUBYFDUVXk7rWe+bgWoGZzBJCbT483S9oh187
-         9wLnd+BMSAeW09BF+P6eBi3H027vWmmMlNgUK8TtssmnrjGB1z27AaXlb7Yh8KT8TNDw
-         jubLcDvLbwCGadzJUtcZJxGvoAFKdlAkBD6um7RXpudoRk5B979vaRLnnyHySLQrNjDo
-         EnjQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1686067051; x=1688659051;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=GnGy3nivTMOnQLT7Wv4KzhYL/KkEVVBLNmMdXLzrRSY=;
-        b=FkGBcD5iNbiayLbMSkrmhmTcCjcf8XLC1LRanpv0lEiAx5uYtYMPToN7NQxyYATZxl
-         QCxKanFulznqUNDobCfuNM/bTGcpuNRPul9VHE2M5vFAYFRrrfjgqRh0yGKjVqPdH45c
-         ttsYXNDaKhUZywG7cClHIj1D9nPgjciYmqWsDBXbTF7K3RFUT9JNFSSEc0EZec2YQvDR
-         9N/sRjv4ngoXdJJrS+kpLU7H8QJqapDxlWmdiLgXkHfFHKZeR/Xra/79yc85Iya3me7h
-         Zk8YF0byIc2GU7RCkvdUmieTqmr5w7/gwwVyhga57RuMtQXF5vmghT8gWDM9KcwnuvYA
-         yisQ==
-X-Gm-Message-State: AC+VfDyp1LNhFA9kmTPYbakJKLhh2x1TMHlUABYJ9jjau4V1e/O8qQ9V
-	szaUsbqtFK7iiYNi8Yy33/ult/wRexGi0bJflgA=
-X-Google-Smtp-Source: ACHHUZ6Z2xfeb3wFRtUXyb6bL1V4R8v3e2TQWUyhsJz0D93mYRUY/UEp/O4RivMze8EnQk/xlA19Guc/9c7RQDh/SkM=
-X-Received: by 2002:a4a:e885:0:b0:558:b793:f10b with SMTP id
- g5-20020a4ae885000000b00558b793f10bmr1228415ooe.6.1686067051310; Tue, 06 Jun
- 2023 08:57:31 -0700 (PDT)
+ dkim=missing; spf=none, err=SPF record not found (domain: t-online.de, ip: 194.25.134.85, mailfrom: f_l_k@t-online.de)
+Received: from fwd85.dcpf.telekom.de (fwd85.aul.t-online.de [10.223.144.111])
+	by mailout11.t-online.de (Postfix) with SMTP id 2963B23829
+	for <openembedded-devel@lists.openembedded.org>; Tue,  6 Jun 2023 18:46:04 +0200 (CEST)
+Received: from flk-MS-7C91.fritz.box ([84.154.173.9]) by fwd85.t-online.de
+	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
+	esmtp id 1q6Zoo-4TIzsv0; Tue, 6 Jun 2023 18:46:02 +0200
+From: Markus Volk <f_l_k@t-online.de>
+To: openembedded-devel@lists.openembedded.org
+Cc: Markus Volk <f_l_k@t-online.de>
+Subject: [meta-gnome][PATCH 1/3] gnome-control-center: upgrade 44.1 -> 44.2
+Date: Tue,  6 Jun 2023 18:45:49 +0200
+Message-Id: <20230606164551.4874-1-f_l_k@t-online.de>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <20230606090013.1455222-1-f_l_k@t-online.de> <20230606090013.1455222-3-f_l_k@t-online.de>
-In-Reply-To: <20230606090013.1455222-3-f_l_k@t-online.de>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 6 Jun 2023 08:57:05 -0700
-Message-ID: <CAMKF1sqcqv4z5Z0=VS88DnzrJF+Y7aUaOaz5E0Pf42cPeUetYg@mail.gmail.com>
-Subject: Re: [oe] [meta-gnome][PATCH 3/3] gnome-shell: upgrade 44.1 -> 44.2
-To: Markus Volk <f_l_k@t-online.de>
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
+X-TOI-EXPURGATEID: 150726::1686069962-ADD8FDAB-56B67B7E/0/0 CLEAN NORMAL
+X-TOI-MSGID: 56a4d5e9-e4fd-43ff-9b1b-b0a3c1b4b910
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 06 Jun 2023 15:57:36 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103148
+ <openembedded-devel@lists.openembedded.org>; Tue, 06 Jun 2023 16:46:16 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103149
 
-was there a patch missed in this series ? I see 2/3 and 3/3 but not 1/3
+Signed-off-by: Markus Volk <f_l_k@t-online.de>
+---
+ .../0001-Add-meson-option-to-pass-sysroot.patch | 17 +++++++++++++++--
+ ...ter_44.1.bb =3D> gnome-control-center_44.2.bb} |  2 +-
+ 2 files changed, 16 insertions(+), 3 deletions(-)
+ rename meta-gnome/recipes-gnome/gnome-control-center/{gnome-control-cent=
+er_44.1.bb =3D> gnome-control-center_44.2.bb} (94%)
 
-On Tue, Jun 6, 2023 at 2:00=E2=80=AFAM Markus Volk <f_l_k@t-online.de> wrot=
-e:
->
-> Signed-off-by: Markus Volk <f_l_k@t-online.de>
-> ---
->  .../gnome-shell/{gnome-shell_44.1.bb =3D> gnome-shell_44.2.bb}    | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->  rename meta-gnome/recipes-gnome/gnome-shell/{gnome-shell_44.1.bb =3D> gn=
-ome-shell_44.2.bb} (95%)
->
-> diff --git a/meta-gnome/recipes-gnome/gnome-shell/gnome-shell_44.1.bb b/m=
-eta-gnome/recipes-gnome/gnome-shell/gnome-shell_44.2.bb
-> similarity index 95%
-> rename from meta-gnome/recipes-gnome/gnome-shell/gnome-shell_44.1.bb
-> rename to meta-gnome/recipes-gnome/gnome-shell/gnome-shell_44.2.bb
-> index f8f500afe..09995e51e 100644
-> --- a/meta-gnome/recipes-gnome/gnome-shell/gnome-shell_44.1.bb
-> +++ b/meta-gnome/recipes-gnome/gnome-shell/gnome-shell_44.2.bb
-> @@ -32,7 +32,7 @@ GIR_MESON_OPTION =3D ""
->  # gobject-introspection is mandatory and cannot be configured
->  REQUIRED_DISTRO_FEATURES +=3D "gobject-introspection-data"
->
-> -SRC_URI[archive.sha256sum] =3D "0bfbe4394d267625154d08d01467bdbd99e81575=
-12fc8df45d5c02ddb7551ca6"
-> +SRC_URI[archive.sha256sum] =3D "55f279ec6303b7c0c89246eced81247c87fc1c73=
-948f45eb212a647218d1b63f"
->  SRC_URI +=3D "file://0001-Introduce-options-gjs_path-to-optionally-set-p=
-ath-to.patch"
->
->  PACKAGECONFIG ??=3D "bluetooth nm ${@bb.utils.filter('DISTRO_FEATURES', =
-'systemd', d)}"
-> --
-> 2.34.1
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#103135): https://lists.openembedded.org/g/openembedde=
-d-devel/message/103135
-> Mute This Topic: https://lists.openembedded.org/mt/99359497/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
-aj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
+diff --git a/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-=
+center/0001-Add-meson-option-to-pass-sysroot.patch b/meta-gnome/recipes-g=
+nome/gnome-control-center/gnome-control-center/0001-Add-meson-option-to-p=
+ass-sysroot.patch
+index 11ad30eda..5c0eee576 100644
+--- a/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center/=
+0001-Add-meson-option-to-pass-sysroot.patch
++++ b/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center/=
+0001-Add-meson-option-to-pass-sysroot.patch
+@@ -28,10 +28,10 @@ index dbca723..af0f871 100644
+  option('ibus', type: 'boolean', value: true, description: 'build with I=
+Bus support')
+  option('privileged_group', type: 'string', value: 'wheel', description:=
+ 'name of group that has elevated permissions')
+ diff --git a/panels/background/meson.build b/panels/background/meson.bui=
+ld
+-index 3634c47..459ccfe 100644
++index 69af0cfea..6edcaa5ff 100644
+ --- a/panels/background/meson.build
+ +++ b/panels/background/meson.build
+-@@ -25,7 +25,7 @@ common_sources =3D []
++@@ -19,7 +19,7 @@ common_sources =3D []
+ =20
+  enums =3D 'gdesktop-enums-types'
+  enums_header =3D files(
+@@ -40,5 +40,18 @@ index 3634c47..459ccfe 100644
+    'cc-background-item.h'
+  )
+ =20
++diff --git a/panels/datetime/meson.build b/panels/datetime/meson.build
++index 3b6f5e197..30b207882 100644
++--- a/panels/datetime/meson.build
+++++ b/panels/datetime/meson.build
++@@ -45,7 +45,7 @@ sources =3D files(
++=20
++ enums =3D 'gdesktop-enums-types'
++ enums_header =3D files(
++-  gsettings_desktop_dep.get_pkgconfig_variable('prefix') + '/include/gs=
+ettings-desktop-schemas/gdesktop-enums.h',
+++  get_option('oe_sysroot') + gsettings_desktop_dep.get_pkgconfig_variab=
+le('prefix') + '/include/gsettings-desktop-schemas/gdesktop-enums.h',
++   'cc-datetime-panel.h'
++ )
++=20
+ --=20
+ 2.34.1
+diff --git a/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-=
+center_44.1.bb b/meta-gnome/recipes-gnome/gnome-control-center/gnome-cont=
+rol-center_44.2.bb
+similarity index 94%
+rename from meta-gnome/recipes-gnome/gnome-control-center/gnome-control-c=
+enter_44.1.bb
+rename to meta-gnome/recipes-gnome/gnome-control-center/gnome-control-cen=
+ter_44.2.bb
+index a64c2410a..b2c04c2f6 100644
+--- a/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center_=
+44.1.bb
++++ b/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center_=
+44.2.bb
+@@ -37,7 +37,7 @@ inherit gtk-icon-cache pkgconfig gnomebase gsettings ge=
+ttext upstream-version-is
+ REQUIRED_DISTRO_FEATURES +=3D "opengl polkit pulseaudio systemd x11"
+=20
+ SRC_URI +=3D "file://0001-Add-meson-option-to-pass-sysroot.patch"
+-SRC_URI[archive.sha256sum] =3D "7abd365018e28679def60a5ecd3049db0fb85de6=
+da49a96dadd21fba8db002e7"
++SRC_URI[archive.sha256sum] =3D "0623d7d21cfe970d2ef34420623545a5945b9892=
+e641f9a011cecec21afda10c"
+=20
+ PACKAGECONFIG ??=3D "ibus ${@bb.utils.filter('DISTRO_FEATURES', 'wayland=
+', d)}"
+ PACKAGECONFIG[cups] =3D ",,cups,cups"
+--=20
+2.34.1
+
 
