@@ -1,201 +1,187 @@
-Return-Path: <Yogita.Urade@windriver.com>
+Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 032ABC7EE24
-	for <webhook@archiver.kernel.org>; Tue,  6 Jun 2023 05:20:39 +0000 (UTC)
-Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.web11.2150.1686028837615174128
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6A992C77B7A
+	for <webhook@archiver.kernel.org>; Tue,  6 Jun 2023 06:55:09 +0000 (UTC)
+Received: from esa11.hc1455-7.c3s2.iphmx.com (esa11.hc1455-7.c3s2.iphmx.com [207.54.90.137])
+ by mx.groups.io with SMTP id smtpd.web10.2932.1686034500007189513
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 05 Jun 2023 22:20:37 -0700
+ Mon, 05 Jun 2023 23:55:00 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=pps06212021 header.b=onI3v1ZI;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=55213888e3=yogita.urade@windriver.com)
-Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 3564cKEa010482
-	for <openembedded-devel@lists.openembedded.org>; Mon, 5 Jun 2023 22:20:37 -0700
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com; h=from : to : cc :
- subject : date : message-id : mime-version : content-transfer-encoding :
- content-type; s=PPS06212021;
- bh=KIRzc7qWTeZt2T2QpdSynf/Xz5aSstFOfWgsYgWro/M=;
- b=onI3v1ZIhiznU4fg8o29CnkV2Y0+N3/d/9WE7k3BArj4Ozjh09Dq8lw1BpbRDJbOhF9D
- rajALCEs9+qc+RR29yMn7hap184qKXeP3rwzPoCJ8vxpphvEpxoIGysKF0fgox/J6AA3
- KZStf0Y+3U8+8Cq0b8Bwe5y9aLYp8zVQGJCDTFrPiet7cV8BfBHG89pW6xsa+pcyOgi2
- 4UJBkcp1Pf0JN+YgqR0r3pUCcj/pvgEwckgNSZwvXUXFDH9qmrstl28NpiQ8A1sCq/k4
- nzWAM8U8+2A1IUMFos9S3c24hPPQhyWWYzjP1LqYJgBzvVIKIJEygduiFsyrKh0c1c71 1w== 
-Received: from ala-exchng01.corp.ad.wrs.com (unknown-82-252.windriver.com [147.11.82.252])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3r051j9vtb-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Mon, 05 Jun 2023 22:20:37 -0700
-Received: from blr-linux-engg1.wrs.com (147.11.136.210) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.23; Mon, 5 Jun 2023 22:20:34 -0700
-From: Yogita Urade <yogita.urade@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-CC: <hari.gpillai@windriver.com>, <yogita.urade@windriver.com>
-Subject: [oe-core][kirkstone][PATCH 1/1] webkitgtk: fix CVE-2022-42867
-Date: Tue, 6 Jun 2023 05:20:15 +0000
-Message-ID: <20230606052015.314199-1-yogita.urade@windriver.com>
-X-Mailer: git-send-email 2.40.0
+ dkim=missing; spf=pass (domain: fujitsu.com, ip: 207.54.90.137, mailfrom: wangmy@fujitsu.com)
+X-IronPort-AV: E=McAfee;i="6600,9927,10732"; a="98955709"
+X-IronPort-AV: E=Sophos;i="6.00,219,1681138800"; 
+   d="scan'208";a="98955709"
+Received: from unknown (HELO oym-r3.gw.nic.fujitsu.com) ([210.162.30.91])
+  by esa11.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 06 Jun 2023 15:54:57 +0900
+Received: from oym-m1.gw.nic.fujitsu.com (oym-nat-oym-m1.gw.nic.fujitsu.com [192.168.87.58])
+	by oym-r3.gw.nic.fujitsu.com (Postfix) with ESMTP id 37FAECA1E9
+	for <openembedded-devel@lists.openembedded.org>; Tue,  6 Jun 2023 15:54:55 +0900 (JST)
+Received: from kws-ab3.gw.nic.fujitsu.com (kws-ab3.gw.nic.fujitsu.com [192.51.206.21])
+	by oym-m1.gw.nic.fujitsu.com (Postfix) with ESMTP id 6B690D88B0
+	for <openembedded-devel@lists.openembedded.org>; Tue,  6 Jun 2023 15:54:54 +0900 (JST)
+Received: from ubuntu20.g08.fujitsu.local (unknown [10.167.225.227])
+	by kws-ab3.gw.nic.fujitsu.com (Postfix) with ESMTP id 17B9F2007472C;
+	Tue,  6 Jun 2023 15:54:53 +0900 (JST)
+From: wangmy@fujitsu.com
+To: openembedded-devel@lists.openembedded.org
+Cc: Lei Maohui <leimaohui@fujitsu.com>,
+	Wang Mingyu <wangmy@fujitsu.com>
+Subject: [oe] [meta-networking] [PATCH] dovecot: Fix install conflict when  enable multilib.
+Date: Tue,  6 Jun 2023 14:54:50 +0800
+Message-Id: <20230606065450.766061-1-wangmy@fujitsu.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [147.11.136.210]
-X-ClientProxiedBy: ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) To
- ala-exchng01.corp.ad.wrs.com (147.11.82.252)
-X-Proofpoint-ORIG-GUID: Ctuixw8WF7hR0muy8mQNhwSWnAdY7ojO
-X-Proofpoint-GUID: Ctuixw8WF7hR0muy8mQNhwSWnAdY7ojO
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.254,Aquarius:18.0.957,Hydra:6.0.573,FMLib:17.11.176.26
- definitions=2023-06-06_02,2023-06-05_01,2023-05-22_02
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 lowpriorityscore=0
- clxscore=1015 priorityscore=1501 bulkscore=0 mlxscore=0 suspectscore=0
- malwarescore=0 mlxlogscore=849 adultscore=0 phishscore=0 impostorscore=0
- spamscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2304280000 definitions=main-2306060045
+X-TM-AS-GCONF: 00
+X-TM-AS-Product-Ver: IMSS-9.1.0.1417-9.0.0.1002-27674.005
+X-TM-AS-User-Approved-Sender: Yes
+X-TMASE-Version: IMSS-9.1.0.1417-9.0.1002-27674.005
+X-TMASE-Result: 10--7.847100-10.000000
+X-TMASE-MatchedRID: TvBNXvLpXm+ZxQ0LLmG+f79A3Bl1/DcV4y6x6rwIkstHpEd1UrzmFS2i
+	kZ6i+33cFK7ef+hAE5nOkqBOmxsNEwV6K461K3zK/HTKStsDGMJHNQ8CqEKO2MC5DTEMxpeQfiq
+	1gj2xET/gK2NiZClvaaRQhplL2ywrlwV2iaAfSWcURSScn+QSXt0H8LFZNFG7bkV4e2xSge6wpy
+	KR/6c3FD2gA9HrAVRokGcYl+i4Obwszuq8rhdLMkuFvzEYSdV+
+X-TMASE-SNAP-Result: 1.821001.0001-0-1-22:0,33:0,34:0-0
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 06 Jun 2023 05:20:39 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103132
+ <openembedded-devel@lists.openembedded.org>; Tue, 06 Jun 2023 06:55:09 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103133
 
-A use after free issue was addressed with improved memory management. This issue is fixed in Safari 16.2, tvOS 16.2, macOS Ventura 13.1, iOS 16.2 and iPadOS 16.2, watchOS 9.2. Processing maliciously crafted web content may lead to arbitrary code execution.
+From: Lei Maohui <leimaohui@fujitsu.com>
 
-Reference:
-https://nvd.nist.gov/vuln/detail/CVE-2022-42867
-https://support.apple.com/en-us/HT213537
+There's conflict of config.h between dovecot and lib32-dovecot.
 
-Signed-off-by: Yogita Urade <yogita.urade@windriver.com>
----
- .../webkit/webkitgtk/CVE-2022-42867.patch     | 104 ++++++++++++++++++
- meta/recipes-sato/webkit/webkitgtk_2.36.8.bb  |   1 +
- 2 files changed, 105 insertions(+)
- create mode 100644 meta/recipes-sato/webkit/webkitgtk/CVE-2022-42867.patch
+The differences of config-64.h and config-32.h are as follows:
+@@ -774,7 +774,7 @@
+#define MODULE_SUFFIX ".so"
 
-diff --git a/meta/recipes-sato/webkit/webkitgtk/CVE-2022-42867.patch b/meta/recipes-sato/webkit/webkitgtk/CVE-2022-42867.patch
-new file mode 100644
-index 0000000000..c7d684097d
---- /dev/null
-+++ b/meta/recipes-sato/webkit/webkitgtk/CVE-2022-42867.patch
-@@ -0,0 +1,104 @@
-+From 8747a631dff858a27ab1a75edb7f21658c2962e2 Mon Sep 17 00:00:00 2001
-+From: Yogita Urade <yogita.urade@windriver.com>
-+Date: Fri, 2 Jun 2023 10:22:34 +0000
-+Subject: [PATCH] RenderElement::updateFillImages should take pointer arguments
-+ like other similar functions https://bugs.webkit.org/show_bug.cgi?id=247317
-+ rdar://100273147
-+
-+Reviewed by Alan Baradlay.
-+
-+* Source/WebCore/rendering/RenderElement.cpp:
-+(WebCore::RenderElement::updateFillImages):
-+(WebCore::RenderElement::styleDidChange):
-+* Source/WebCore/rendering/RenderElement.h:
-+
-+Canonical link: https://commits.webkit.org/256215@main
-+
-+CVE: CVE-2022-42867
-+
-+Upstream-Status: Backport
-+[https://github.com/WebKit/WebKit/commit/091a04e55c801ac6ba13f4b328fbee2eece853fc]
-+
-+Signed-off-by: Yogita Urade <yogita.urade@windriver.com>
-+---
-+ Source/WebCore/rendering/RenderElement.cpp | 27 ++++++++++++++--------
-+ Source/WebCore/rendering/RenderElement.h   |  2 +-
-+ 2 files changed, 19 insertions(+), 10 deletions(-)
-+
-+diff --git a/Source/WebCore/rendering/RenderElement.cpp b/Source/WebCore/rendering/RenderElement.cpp
-+index da43bf3d..eb0a9b4c 100644
-+--- a/Source/WebCore/rendering/RenderElement.cpp
-++++ b/Source/WebCore/rendering/RenderElement.cpp
-+@@ -358,7 +358,7 @@ inline bool RenderElement::shouldRepaintForStyleDifference(StyleDifference diff)
-+     return diff == StyleDifference::Repaint || (diff == StyleDifference::RepaintIfTextOrBorderOrOutline && hasImmediateNonWhitespaceTextChildOrBorderOrOutline());
-+ }
-+
-+-void RenderElement::updateFillImages(const FillLayer* oldLayers, const FillLayer& newLayers)
-++void RenderElement::updateFillImages(const FillLayer* oldLayers, const FillLayer* newLayers)
-+ {
-+     auto fillImagesAreIdentical = [](const FillLayer* layer1, const FillLayer* layer2) -> bool {
-+         if (layer1 == layer2)
-+@@ -379,7 +379,7 @@ void RenderElement::updateFillImages(const FillLayer* oldLayers, const FillLayer
-+     };
-+
-+     auto isRegisteredWithNewFillImages = [&]() -> bool {
-+-        for (auto* layer = &newLayers; layer; layer = layer->next()) {
-++        for (auto* layer = newLayers; layer; layer = layer->next()) {
-+             if (layer->image() && !layer->image()->hasClient(*this))
-+                 return false;
-+         }
-+@@ -388,11 +388,11 @@ void RenderElement::updateFillImages(const FillLayer* oldLayers, const FillLayer
-+
-+     // If images have the same characteristics and this element is already registered as a
-+     // client to the new images, there is nothing to do.
-+-    if (fillImagesAreIdentical(oldLayers, &newLayers) && isRegisteredWithNewFillImages())
-++    if (fillImagesAreIdentical(oldLayers, newLayers) && isRegisteredWithNewFillImages())
-+         return;
-+
-+     // Add before removing, to avoid removing all clients of an image that is in both sets.
-+-    for (auto* layer = &newLayers; layer; layer = layer->next()) {
-++    for (auto* layer = newLayers; layer; layer = layer->next()) {
-+         if (layer->image())
-+             layer->image()->addClient(*this);
-+     }
-+@@ -937,11 +937,20 @@ static inline bool areCursorsEqual(const RenderStyle* a, const RenderStyle* b)
-+
-+ void RenderElement::styleDidChange(StyleDifference diff, const RenderStyle* oldStyle)
-+ {
-+-    updateFillImages(oldStyle ? &oldStyle->backgroundLayers() : nullptr, m_style.backgroundLayers());
-+-    updateFillImages(oldStyle ? &oldStyle->maskLayers() : nullptr, m_style.maskLayers());
-+-    updateImage(oldStyle ? oldStyle->borderImage().image() : nullptr, m_style.borderImage().image());
-+-    updateImage(oldStyle ? oldStyle->maskBoxImage().image() : nullptr, m_style.maskBoxImage().image());
-+-    updateShapeImage(oldStyle ? oldStyle->shapeOutside() : nullptr, m_style.shapeOutside());
-++    auto registerImages = [this](auto* style, auto* oldStyle) {
-++        if (!style && !oldStyle)
-++            return;
-++        updateFillImages(oldStyle ? &oldStyle->backgroundLayers() : nullptr, style ? &style->backgroundLayers() : nullptr);
-++        updateFillImages(oldStyle ? &oldStyle->maskLayers() : nullptr, style ? &style->maskLayers() : nullptr);
-++        updateImage(oldStyle ? oldStyle->borderImage().image() : nullptr, style ? style->borderImage().image() : nullptr);
-++        updateImage(oldStyle ? oldStyle->maskBoxImage().image() : nullptr, style ? style->maskBoxImage().image() : nullptr);
-++        updateShapeImage(oldStyle ? oldStyle->shapeOutside() : nullptr, style ? style->shapeOutside() : nullptr);
-++    };
-++
-++    registerImages(&style(), oldStyle);
-++
-++    // Are there other pseudo-elements that need the resources to be registered?
-++    registerImages(style().getCachedPseudoStyle(PseudoId::FirstLine), oldStyle ? oldStyle->getCachedPseudoStyle(PseudoId::FirstLine) : nullptr);
-+
-+     SVGRenderSupport::styleChanged(*this, oldStyle);
-+
-+diff --git a/Source/WebCore/rendering/RenderElement.h b/Source/WebCore/rendering/RenderElement.h
-+index f376cecb..d6ba2cdf 100644
-+--- a/Source/WebCore/rendering/RenderElement.h
-++++ b/Source/WebCore/rendering/RenderElement.h
-+@@ -349,7 +349,7 @@ private:
-+     bool shouldRepaintForStyleDifference(StyleDifference) const;
-+     bool hasImmediateNonWhitespaceTextChildOrBorderOrOutline() const;
-+
-+-    void updateFillImages(const FillLayer*, const FillLayer&);
-++    void updateFillImages(const FillLayer*, const FillLayer*);
-+     void updateImage(StyleImage*, StyleImage*);
-+     void updateShapeImage(const ShapeValue*, const ShapeValue*);
-+
-+--
-+2.35.5
-diff --git a/meta/recipes-sato/webkit/webkitgtk_2.36.8.bb b/meta/recipes-sato/webkit/webkitgtk_2.36.8.bb
-index 1dac4f5677..0fce7d0d6e 100644
---- a/meta/recipes-sato/webkit/webkitgtk_2.36.8.bb
-+++ b/meta/recipes-sato/webkit/webkitgtk_2.36.8.bb
-@@ -17,6 +17,7 @@ SRC_URI = "https://www.webkitgtk.org/releases/${BP}.tar.xz \
-            file://0001-When-building-introspection-files-do-not-quote-CFLAG.patch \
-            file://CVE-2022-32888.patch \
-            file://CVE-2022-32923.patch \
-+           file://CVE-2022-42867.patch \
-            "
- SRC_URI[sha256sum] = "0ad9fb6bf28308fe3889faf184bd179d13ac1b46835d2136edbab2c133d00437"
  
+
+/* Maximum value of off_t */
+-#define OFF_T_MAX LONG_MAX
++#define OFF_T_MAX LLONG_MAX
+
+ 
+
+/* Name of package */
+#define PACKAGE "dovecot"
+@@ -834,7 +834,7 @@
+#define PRIdTIME_T "ld"
+
+ 
+
+/* printf() format for uoff_t */
+-#define PRIuUOFF_T "lu"
++#define PRIuUOFF_T "llu"
+
+ 
+
+/* printf() fmt for hex time_t */
+#define PRIxTIME_T "lx"
+@@ -846,19 +846,19 @@
+#define SIZEOF_INT 4
+
+ 
+
+/* The size of `long', as computed by sizeof. */
+-#define SIZEOF_LONG 8
++#define SIZEOF_LONG 4
+
+ 
+
+/* The size of `long long', as computed by sizeof. */
+#define SIZEOF_LONG_LONG 8
+
+ 
+
+/* The size of `void *', as computed by sizeof. */
+-#define SIZEOF_VOID_P 8
++#define SIZEOF_VOID_P 4
+
+ 
+
+/* Build SQL drivers as plugins */
+/* #undef SQL_DRIVER_PLUGINS */
+
+ 
+
+/* Maximum value of ssize_t */
+-#define SSIZE_T_MAX LONG_MAX
++#define SSIZE_T_MAX INT_MAX
+
+ 
+
+/* C99 static array */
+#define STATIC_ARRAY static
+@@ -887,13 +887,13 @@
+/* #undef UOFF_T_INT */
+
+ 
+
+/* Define if off_t is long */
+-#define UOFF_T_LONG /**/
++/* #undef UOFF_T_LONG */
+
+ 
+
+/* Define if off_t is long long */
+-/* #undef UOFF_T_LONG_LONG */
++#define UOFF_T_LONG_LONG /**/
+
+ 
+
+/* Maximum value of uoff_t */
+-#define UOFF_T_MAX ULONG_MAX
++#define UOFF_T_MAX ULLONG_MAX
+
+ 
+
+/* Build with checkpassword userdb support */
+#define USERDB_CHECKPASSWORD /**/
+@@ -935,7 +935,7 @@
+#endif
+
+ 
+
+/* Number of bits in a file offset, on hosts where this is settable. */
+-/* #undef _FILE_OFFSET_BITS */
++#define _FILE_OFFSET_BITS 64
+
+ 
+
+/* Define for large files, on AIX-style hosts. */
+/* #undef _LARGE_FILES */
+
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+---
+ meta-networking/recipes-support/dovecot/dovecot_2.3.20.bb | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/meta-networking/recipes-support/dovecot/dovecot_2.3.20.bb b/meta-networking/recipes-support/dovecot/dovecot_2.3.20.bb
+index effde16a9..01e060e2f 100644
+--- a/meta-networking/recipes-support/dovecot/dovecot_2.3.20.bb
++++ b/meta-networking/recipes-support/dovecot/dovecot_2.3.20.bb
+@@ -18,7 +18,7 @@ DEPENDS = "openssl xz zlib bzip2 libcap icu libtirpc bison-native"
+ CFLAGS += "-I${STAGING_INCDIR}/tirpc"
+ LDFLAGS += "-ltirpc"
+ 
+-inherit autotools pkgconfig systemd useradd gettext
++inherit autotools pkgconfig systemd useradd gettext multilib_header
+ 
+ PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'ldap pam systemd', d)}"
+ 
+@@ -56,6 +56,7 @@ do_install:append () {
+         sed -i -e 's#@SYSCONFDIR@#${sysconfdir}#g' ${D}${systemd_unitdir}/system/dovecot.service
+         sed -i -e 's#@SBINDIR@#${sbindir}#g' ${D}${systemd_unitdir}/system/dovecot.service
+     fi
++    oe_multilib_header dovecot/config.h
+ }
+ 
+ USERADD_PACKAGES = "${PN}"
 -- 
-2.40.0
+2.34.1
 
 
