@@ -2,132 +2,101 @@ Return-Path: <zboszor@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2CD9BC77B7A
-	for <webhook@archiver.kernel.org>; Wed,  7 Jun 2023 07:53:36 +0000 (UTC)
-Received: from mail-wm1-f49.google.com (mail-wm1-f49.google.com [209.85.128.49])
- by mx.groups.io with SMTP id smtpd.web11.3218.1686124406423956267
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 20ED3C7EE23
+	for <webhook@archiver.kernel.org>; Wed,  7 Jun 2023 07:54:26 +0000 (UTC)
+Received: from mail-wr1-f42.google.com (mail-wr1-f42.google.com [209.85.221.42])
+ by mx.groups.io with SMTP id smtpd.web10.3204.1686124461435500695
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 07 Jun 2023 00:53:26 -0700
+ Wed, 07 Jun 2023 00:54:21 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=VB6HqMhY;
- spf=pass (domain: gmail.com, ip: 209.85.128.49, mailfrom: zboszor@gmail.com)
-Received: by mail-wm1-f49.google.com with SMTP id 5b1f17b1804b1-3f6e68cc738so58523915e9.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 07 Jun 2023 00:53:26 -0700 (PDT)
+ dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=HoFhpQqM;
+ spf=pass (domain: gmail.com, ip: 209.85.221.42, mailfrom: zboszor@gmail.com)
+Received: by mail-wr1-f42.google.com with SMTP id ffacd0b85a97d-30af20f5f67so6898370f8f.1
+        for <openembedded-devel@lists.openembedded.org>; Wed, 07 Jun 2023 00:54:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1686124405; x=1688716405;
+        d=gmail.com; s=20221208; t=1686124460; x=1688716460;
         h=content-transfer-encoding:in-reply-to:from:references:cc:to
          :content-language:subject:user-agent:mime-version:date:message-id
          :from:to:cc:subject:date:message-id:reply-to;
-        bh=ISn295IZYP9jWJKWHLbn0N7VdmsdfpxNBKx8aM8Xv8E=;
-        b=VB6HqMhYWKSHPtX1nD5zg/jkw9x812hGik7bpGYkR+se5i9NPuoknD+0XCVBIXUUsm
-         oy6z0IcurbSUNFm73vQxXzliMP3k5D0UiUGR2YHSXqeLhCKHwjLfH2Puegf1TTg5w+51
-         F7bI9tZ9lXpSa7F0CgHiU1SvFFvLce3RqYXxU5Ygeng64Tqms/fQZ/h5zcxISgs7gh2N
-         5bMEvgSCV2/eXTvUqMWEed47P1Ukps2L4bPrzzDPGFjDTjGwJBC3QSKpMbLZ25xYafic
-         molfNQgfantFShm+OdOdBq7kpcykugMbZZBIGsy0gePllfjZWa6SN3mKV8lgA5kyUcJO
-         MRgw==
+        bh=kQGLaDQV4297GjMtnflEHGjwwd0uHVoCsFPuVWLXkV0=;
+        b=HoFhpQqMnK+R6fGwbfpNyI7WzqGdWZ5CYYT3KtDbkh/W2yKHFUsw6XBLzgjLJuBGGR
+         INBI3XIEKtTabl0yf6b4HHDKJjAjkJLrd3NwSqGbarNxZEl5aLJunjgMk6JKPfM6qT2z
+         +n9rhvKZs+QabcTWEi0zoTgsgA6OlNcK4XfTexLruMuH1VU/WtsT2K261jASY2ZEYCPL
+         dwE0hXwVyqsxMs8tw0374Zc/dnDel4EJOKH3dYBIvgigC9BJ0wNpN9Z/f2yE+NvB29x3
+         6jX9/QUarzeSRc3EsOZ+XJScfZXwGj8UExjaZ00Tc9G+0HZQ2qQX2GuHy8YGVNr/YpHa
+         JsDA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1686124405; x=1688716405;
+        d=1e100.net; s=20221208; t=1686124460; x=1688716460;
         h=content-transfer-encoding:in-reply-to:from:references:cc:to
          :content-language:subject:user-agent:mime-version:date:message-id
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=ISn295IZYP9jWJKWHLbn0N7VdmsdfpxNBKx8aM8Xv8E=;
-        b=P/hDMHAvTKME9j6SUb8xhABZ1aZHtUR1YlCD+3hKAfRu8vSb5Grfh623X8WH7KXF6w
-         y7KQuvpdwx2GcozF8yIGKVaGBZm84i2su756pkQAV/bEsd5Vj1MO3MWnfKfvrcfht2w/
-         hr3oyFGIPCs6LqzDEP4ua0yNdr1Mylm6iPt6iKysCN1r8eLNCWzpoX5bFGFbk6OT0VP+
-         Pm/wtiVLC3B9s1P+Q8kbuXCwFJDzj6WPvzfMk3UxGEEUO8PwJeYrdq3AOvC1TWxoYERm
-         CYlPgNG/nM6Qs8+nYrVMg3/EOS9lveVGS6sWiRvx2FW9EwuldhWCr0Qw+ybsl9isqqql
-         z3Ng==
-X-Gm-Message-State: AC+VfDxateKaFDV0mzILxdygVC5xg0jdwpJ5d2D5TyL76FM9qbB1BR9w
-	JCGLolcHCotsVGXkvQNWTrU=
-X-Google-Smtp-Source: ACHHUZ7LAdA7Rl/X13J8+Aqbwb72iW4ImAvz/2Eur1Ri7GFeqAlmOB+7IZ0JRxXeCABcOTUyZt4HBg==
-X-Received: by 2002:a7b:c8c6:0:b0:3f7:e548:6611 with SMTP id f6-20020a7bc8c6000000b003f7e5486611mr3519096wml.40.1686124404629;
-        Wed, 07 Jun 2023 00:53:24 -0700 (PDT)
+        bh=kQGLaDQV4297GjMtnflEHGjwwd0uHVoCsFPuVWLXkV0=;
+        b=DvD3UIuINdtvDyr5I1h+/d/deqhcnSETLyXXlkWEZMAPIH3DDy0zX0g6E5BB0wDIQe
+         TyOH1/MJZUr8LeVcX6mBNmkli0YcwNb5GHb1yylLcVlrJV7Zry8CMIR9CILufWhI+utT
+         NpR3qpLbJ5hUg49U6rp1hw8eNVUJ/blNPO2MJU7q3YrfVToyGRiEE8L6m4VPEeNyV8eJ
+         VLJ6Iq1PDh2EyZWg7skAAABN1lCDTmfPQ6x4bE4PxVpBmb3Ed9atBoMKEYqHwbp9akLQ
+         B55NZG+393iI2RET15TqNtdEVy5iwt9f+NITT25dvX5LdudZlKw19fvmy2/12Ep5pEft
+         qPNg==
+X-Gm-Message-State: AC+VfDwRh2L87e2Ts2/BaUO8pSsp8IQwUfdYfFCmgpAd8n+CT+ouXkvP
+	H32fuzkaZiQ++ApzXp1u+iJmDEk4l3o=
+X-Google-Smtp-Source: ACHHUZ4dsyM8LVfruhIOD/GXhWcysXjRZ0lK460nvi4mUAoIvzyUna5AoePkURGsseHYIUSgroLqrg==
+X-Received: by 2002:a5d:4482:0:b0:30e:3f55:ebc9 with SMTP id j2-20020a5d4482000000b0030e3f55ebc9mr3768818wrq.13.1686124459742;
+        Wed, 07 Jun 2023 00:54:19 -0700 (PDT)
 Received: from [192.168.2.2] (dsl51B7D2F9.fixip.t-online.hu. [81.183.210.249])
-        by smtp.gmail.com with ESMTPSA id c3-20020a056000104300b003062ad45243sm14658829wrx.14.2023.06.07.00.53.24
+        by smtp.gmail.com with ESMTPSA id f4-20020adff8c4000000b00307a83ea722sm14497136wrq.58.2023.06.07.00.54.19
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 07 Jun 2023 00:53:24 -0700 (PDT)
-Message-ID: <4e71566e-bcd3-5bd3-02d2-6a1b530619b2@gmail.com>
-Date: Wed, 7 Jun 2023 09:53:23 +0200
+        Wed, 07 Jun 2023 00:54:19 -0700 (PDT)
+Message-ID: <ed363ff3-2d2f-999f-c7ae-2311751ef4dd@gmail.com>
+Date: Wed, 7 Jun 2023 09:54:18 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.10.0
-Subject: Re: [oe] [meta-oe][mickledore][PATCH 05/36] fftw: Remove hardcoded
- sysroot into binaries
+Subject: Re: [oe] [meta-oe][PATCH] fftw: Check for TOOLCHAIN_OPTIONS to be
+ non-empty before sed ops
 Content-Language: en-US
-To: Armin Kuster <akuster808@gmail.com>,
- openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-References: <20230531111309.2454603-1-akuster808@gmail.com>
- <20230531111309.2454603-5-akuster808@gmail.com>
+To: Khem Raj <raj.khem@gmail.com>, openembedded-devel@lists.openembedded.org
+Cc: jan vermaete <jan.vermaete@gmail.com>
+References: <20230523045151.139311-1-raj.khem@gmail.com>
 From: =?UTF-8?B?QsO2c3rDtnJtw6lueWkgWm9sdMOhbg==?= <zboszor@gmail.com>
-In-Reply-To: <20230531111309.2454603-5-akuster808@gmail.com>
+In-Reply-To: <20230523045151.139311-1-raj.khem@gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 07 Jun 2023 07:53:36 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103168
+ <openembedded-devel@lists.openembedded.org>; Wed, 07 Jun 2023 07:54:26 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103169
 
-This causes a build error in fftw-native:
+Please backport this to mickledore ASAP.
 
-ERROR: fftw-native-3.3.10-r0 do_compile: 
-ExecutionError('/data2/dtd-yocto-4.2/tmp-sicom-glibc/work/x86_64-linux/fftw-native/3.3.10-r0/temp/run.do_compile.3532203', 
-1, None, None)
-ERROR: Logfile of failure stored in: 
-/data2/dtd-yocto-4.2/tmp-sicom-glibc/work/x86_64-linux/fftw-native/3.3.10-r0/temp/log.do_compile.3532203
-Log data follows:
-| DEBUG: Executing python function autotools_aclocals
-| DEBUG: SITE files ['endian-little', 'common-linux', 'common-glibc', 'bit-64', 
-'x86_64-linux', 'common']
-| DEBUG: Python function autotools_aclocals finished
-| DEBUG: Executing shell function do_compile
-| sed: -e expression #1, char 0: no previous regular expression
-| WARNING: 
-/data2/dtd-yocto-4.2/tmp-sicom-glibc/work/x86_64-linux/fftw-native/3.3.10-r0/temp/run.do_compile.3532203:154 
-exit 1 from 'sed -i -e 's|||g' config.h'
-| WARNING: Backtrace (BB generated script):
-|     #1: do_compile, 
-/data2/dtd-yocto-4.2/tmp-sicom-glibc/work/x86_64-linux/fftw-native/3.3.10-r0/temp/run.do_compile.3532203, 
-line 154
-|     #2: main, 
-/data2/dtd-yocto-4.2/tmp-sicom-glibc/work/x86_64-linux/fftw-native/3.3.10-r0/temp/run.do_compile.3532203, 
-line 200
-ERROR: Task 
-(virtual:native:/data2/dtd-yocto-4.2/conf/../layers/meta-openembedded/meta-oe/recipes-support/fftw/fftw_3.3.10.bb:do_compile) 
-failed with exit code '1'
-
-2023. 05. 31. 13:12 keltezéssel, Armin Kuster írta:
-> From: Khem Raj <raj.khem@gmail.com>
+2023. 05. 23. 6:51 keltezéssel, Khem Raj írta:
+> Ensures that we do not apply empty sed expression which might happen
+> when building native recipe
 >
-> FFTW_CC is added to image via version.o and its CC + CFLAGS however CC
-> in OE containes --syroot compiler option which encodes buildpaths into
-> binary, therefore remove this option from FFTW_CC in config.h
->
+> Cc: jan vermaete <jan.vermaete@gmail.com>
 > Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> (cherry picked from commit ef03326d31360abdfa3e4a34eb00b328a76de12c)
-> Signed-off-by: Armin Kuster <akuster808@gmail.com>
 > ---
->   meta-oe/recipes-support/fftw/fftw_3.3.10.bb | 1 +
->   1 file changed, 1 insertion(+)
+>   meta-oe/recipes-support/fftw/fftw_3.3.10.bb | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
 >
 > diff --git a/meta-oe/recipes-support/fftw/fftw_3.3.10.bb b/meta-oe/recipes-support/fftw/fftw_3.3.10.bb
-> index cb45e2b91f..1fead4d029 100644
+> index 1fead4d029..33e8279880 100644
 > --- a/meta-oe/recipes-support/fftw/fftw_3.3.10.bb
 > +++ b/meta-oe/recipes-support/fftw/fftw_3.3.10.bb
-> @@ -55,6 +55,7 @@ do_configure() {
+> @@ -55,7 +55,7 @@ do_configure() {
 >   do_compile() {
 >       for lib in fftw fftwl fftwf; do
 >           cd ${WORKDIR}/build-$lib
-> +        sed -i -e 's|${TOOLCHAIN_OPTIONS}||g' config.h
+> -        sed -i -e 's|${TOOLCHAIN_OPTIONS}||g' config.h
+> +        test -n "${TOOLCHAIN_OPTIONS}" && sed -i -e 's|${TOOLCHAIN_OPTIONS}||g' config.h
 >           autotools_do_compile
 >       done
 >   }
 >
 > -=-=-=-=-=-=-=-=-=-=-=-
 > Links: You receive all messages sent to this group.
-> View/Reply Online (#103034): https://lists.openembedded.org/g/openembedded-devel/message/103034
-> Mute This Topic: https://lists.openembedded.org/mt/99239744/3617728
+> View/Reply Online (#102729): https://lists.openembedded.org/g/openembedded-devel/message/102729
+> Mute This Topic: https://lists.openembedded.org/mt/99081361/3617728
 > Group Owner: openembedded-devel+owner@lists.openembedded.org
 > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [zboszor@gmail.com]
 > -=-=-=-=-=-=-=-=-=-=-=-
