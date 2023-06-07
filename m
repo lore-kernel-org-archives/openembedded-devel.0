@@ -1,147 +1,279 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <hprajapati@mvista.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3E38CC7EE29
-	for <webhook@archiver.kernel.org>; Wed,  7 Jun 2023 08:09:46 +0000 (UTC)
-Received: from mail-oo1-f42.google.com (mail-oo1-f42.google.com [209.85.161.42])
- by mx.groups.io with SMTP id smtpd.web10.3377.1686125378400621865
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5B04CC77B7A
+	for <webhook@archiver.kernel.org>; Wed,  7 Jun 2023 08:37:16 +0000 (UTC)
+Received: from mail-qk1-f175.google.com (mail-qk1-f175.google.com [209.85.222.175])
+ by mx.groups.io with SMTP id smtpd.web10.3661.1686127027221958027
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 07 Jun 2023 01:09:38 -0700
+ Wed, 07 Jun 2023 01:37:07 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=FTXTl2xM;
- spf=pass (domain: gmail.com, ip: 209.85.161.42, mailfrom: raj.khem@gmail.com)
-Received: by mail-oo1-f42.google.com with SMTP id 006d021491bc7-55afa2472d9so232134eaf.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 07 Jun 2023 01:09:38 -0700 (PDT)
+ dkim=fail reason="signature has expired" header.i=@mvista.com header.s=google header.b=a+VHccFR;
+ spf=pass (domain: mvista.com, ip: 209.85.222.175, mailfrom: hprajapati@mvista.com)
+Received: by mail-qk1-f175.google.com with SMTP id af79cd13be357-75d4fb03100so468963285a.3
+        for <openembedded-devel@lists.openembedded.org>; Wed, 07 Jun 2023 01:37:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1686125377; x=1688717377;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=2B4TBTc4lG2eeFAgA4/3VrXPBM7h7q5HjMuyYMeNqXw=;
-        b=FTXTl2xMXhL9dE/TMsmh9PY1N00qnMrsZZPWgG9mzLT/vpOB3NbUntx3zTxpia/8d6
-         PAAzhzoGBut9XAEg1xJdcYc2az75SiBYpaclxp4Dj+MBuXfMOIfiWR0VkiSlejmilbLr
-         wccWXHgiK6DuTjaA0dwJnL/URiXEQqwQgmomHlURLfyDkI1TDG8KzzFrSR0xBSgXdONi
-         /s7F9sDyQKEYqaoGy9+GfujjpE9ZpvzrfzS7XP/ieXOz7F7e7LCM+y94rKkl6oP8rhD7
-         s42rJqufB/obCMP5clEzNdrtBfKhPLS4eL6CdCh6Dh+lMwYa15wt+XVt8ehg0y1Y69Q5
-         6B0w==
+        d=mvista.com; s=google; t=1686127026; x=1688719026;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=nonjC6c2uTPCAQk+4Gbhv2vvr9+2WzRGeEZjJ32PYj0=;
+        b=a+VHccFR8aQsxYI70Qhp9nt/v0SEQnCc4UQbPfVzgv7IPndvgWlUpTaDHtrwAR+EZq
+         W+yendd5bbwrfqY8Elk/tFTpNW2jEaFvghH6gJAP6PdUG3Bm8kYjaakZPdOUy0hc0Z3w
+         IXL0UqX6bmSmA6HtBdm4rnYUVE5iC1HCqmZXo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1686125377; x=1688717377;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=2B4TBTc4lG2eeFAgA4/3VrXPBM7h7q5HjMuyYMeNqXw=;
-        b=N2IUsszKvXH7cLoRJE47JFSdn4Z4xflLPDnlMiZJO0l5a1djgM6w3KcIGRA9PS5lJd
-         lDQDUgFY9xWr38m4OzYKSlNwz7vu+j4/MqvptyJwIiN1qr0axtyZ3U7mJq4SzupS1Nfz
-         57jn9BYCsg810BfKnA8/xp8gVEVHMyVAC+56E07Ng8T3B/PM1BwwEir8SvxyrHmcJu8p
-         7jy3O3/CEF92RpggpmR2mbn/OHO+tZ8q77S2N3jlMJXgM5DSCjw2F/VIr5rNV0GiwKZh
-         6/3JhQpdR7VeMKBibItKx70jaLhjABWg/5X+xJub6oomfvqGQeXTq4EvchEIZl/WWpXn
-         f9aQ==
-X-Gm-Message-State: AC+VfDwNw4NxVpv4YzDCYWkxh8MElPV2Z/lk1MMPrh8u7gtPX6ifzWBV
-	lutdThVeOAQGX2/5KXr7KIHerwxazRvMHfapU3U=
-X-Google-Smtp-Source: ACHHUZ49fA3FyADA/8nmtRh9Lkh/ZMb+XttxiD7Lk3JukGLH0co6ZwyeAmFBQHFYMPI2PQC0JUXFOe3/Y67CfcMO+a0=
-X-Received: by 2002:a4a:df48:0:b0:555:34f1:cc55 with SMTP id
- j8-20020a4adf48000000b0055534f1cc55mr2885240oou.0.1686125377515; Wed, 07 Jun
- 2023 01:09:37 -0700 (PDT)
+        d=1e100.net; s=20221208; t=1686127026; x=1688719026;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=nonjC6c2uTPCAQk+4Gbhv2vvr9+2WzRGeEZjJ32PYj0=;
+        b=KKsiQ0E8Hzej6tn9bQx5jMxNcJL6mH0IX+gTaZZFwDfU4/F9DyvEXWvWjIRmnByIHp
+         zVkfYk62ZRV05HXKTIMdwjQJxGw3vpBWTHzOIDBbtoxMddpw5Az6j4gwkQFnC1hXe7JC
+         pp055+JZOcaCckiNEM2Z+feR47hp5odglSpZL8uPzUtkAupCmU30JLLh3SsAL6e/4T0Q
+         PYaBGKbl37P0tkSazfxLvZfVk714Y/hRhhzwtXyuZWH/GApIGeMZkH8cF5zyVeKJwTn5
+         dLgIAZkx4/sLusfv8pMmCo8eFlPDcJy2lobaZHxPoyZkfzC3u6/kt/ex5DNeq1dpFvGr
+         cupQ==
+X-Gm-Message-State: AC+VfDxJAvqd8/Ybo3somTqPszRC0CZR4LG7fctT/22BTNvfnWPN80S/
+	f9x7857uxBXJkzscCA7ahWQAlEgjLyQQrulhOPA=
+X-Google-Smtp-Source: ACHHUZ5toS8N4aNOyJDoa7IZl2DWbtWDnZw3h867M2/vrQrtMDPE+bKRM2PaOO4UIU88Yv8t15CWrw==
+X-Received: by 2002:a05:6214:e6d:b0:62a:cc88:1d37 with SMTP id jz13-20020a0562140e6d00b0062acc881d37mr2008717qvb.45.1686127025924;
+        Wed, 07 Jun 2023 01:37:05 -0700 (PDT)
+Received: from MVIN00024 ([43.249.234.249])
+        by smtp.gmail.com with ESMTPSA id 60-20020a17090a0fc200b002591f7ff90csm888438pjz.43.2023.06.07.01.36.59
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 07 Jun 2023 01:37:05 -0700 (PDT)
+Received: by MVIN00024 (sSMTP sendmail emulation); Wed, 07 Jun 2023 14:06:54 +0530
+From: Hitendra Prajapati <hprajapati@mvista.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Hitendra Prajapati <hprajapati@mvista.com>
+Subject: [meta-networking][mickledore][PATCH] wireshark: Fix CVE-2023-2855 & CVE-2023-2856
+Date: Wed,  7 Jun 2023 14:06:53 +0530
+Message-Id: <20230607083653.30363-1-hprajapati@mvista.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-References: <20230531111309.2454603-1-akuster808@gmail.com>
- <20230531111309.2454603-5-akuster808@gmail.com> <4e71566e-bcd3-5bd3-02d2-6a1b530619b2@gmail.com>
-In-Reply-To: <4e71566e-bcd3-5bd3-02d2-6a1b530619b2@gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 7 Jun 2023 01:09:11 -0700
-Message-ID: <CAMKF1spB5xZ36YAvWTajVH2OvpC9Y-A4LiiAimwDAwzmJL2auA@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][mickledore][PATCH 05/36] fftw: Remove hardcoded
- sysroot into binaries
-To: =?UTF-8?B?QsO2c3rDtnJtw6lueWkgWm9sdMOhbg==?= <zboszor@gmail.com>
-Cc: Armin Kuster <akuster808@gmail.com>, openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 07 Jun 2023 08:09:46 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103170
+ <openembedded-devel@lists.openembedded.org>; Wed, 07 Jun 2023 08:37:16 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103171
 
-On Wed, Jun 7, 2023 at 12:53=E2=80=AFAM B=C3=B6sz=C3=B6rm=C3=A9nyi Zolt=C3=
-=A1n <zboszor@gmail.com> wrote:
->
-> This causes a build error in fftw-native:
+Backport fixes for:
+* CVE-2023-2855 - Upstream-Status: Backport from https://gitlab.com/wireshark/wireshark/-/commit/0181fafb2134a177328443a60b5e29c4ee1041cb
+* CVE-2023-2856 - Upstream-Status: Backport from https://gitlab.com/wireshark/wireshark/-/commit/db5135826de3a5fdb3618225c2ff02f4207012ca
 
-right. We also need to backport
-https://git.openembedded.org/meta-openembedded/commit/?id=3Dfcdb991b8015e77=
-353517fb327d0def2a23b0173
+Signed-off-by: Hitendra Prajapati <hprajapati@mvista.com>
+---
+ .../wireshark/files/CVE-2023-2855.patch       | 108 ++++++++++++++++++
+ .../wireshark/files/CVE-2023-2856.patch       |  69 +++++++++++
+ .../wireshark/wireshark_3.4.12.bb             |   2 +
+ 3 files changed, 179 insertions(+)
+ create mode 100644 meta-networking/recipes-support/wireshark/files/CVE-2023-2855.patch
+ create mode 100644 meta-networking/recipes-support/wireshark/files/CVE-2023-2856.patch
 
->
-> ERROR: fftw-native-3.3.10-r0 do_compile:
-> ExecutionError('/data2/dtd-yocto-4.2/tmp-sicom-glibc/work/x86_64-linux/ff=
-tw-native/3.3.10-r0/temp/run.do_compile.3532203',
-> 1, None, None)
-> ERROR: Logfile of failure stored in:
-> /data2/dtd-yocto-4.2/tmp-sicom-glibc/work/x86_64-linux/fftw-native/3.3.10=
--r0/temp/log.do_compile.3532203
-> Log data follows:
-> | DEBUG: Executing python function autotools_aclocals
-> | DEBUG: SITE files ['endian-little', 'common-linux', 'common-glibc', 'bi=
-t-64',
-> 'x86_64-linux', 'common']
-> | DEBUG: Python function autotools_aclocals finished
-> | DEBUG: Executing shell function do_compile
-> | sed: -e expression #1, char 0: no previous regular expression
-> | WARNING:
-> /data2/dtd-yocto-4.2/tmp-sicom-glibc/work/x86_64-linux/fftw-native/3.3.10=
--r0/temp/run.do_compile.3532203:154
-> exit 1 from 'sed -i -e 's|||g' config.h'
-> | WARNING: Backtrace (BB generated script):
-> |     #1: do_compile,
-> /data2/dtd-yocto-4.2/tmp-sicom-glibc/work/x86_64-linux/fftw-native/3.3.10=
--r0/temp/run.do_compile.3532203,
-> line 154
-> |     #2: main,
-> /data2/dtd-yocto-4.2/tmp-sicom-glibc/work/x86_64-linux/fftw-native/3.3.10=
--r0/temp/run.do_compile.3532203,
-> line 200
-> ERROR: Task
-> (virtual:native:/data2/dtd-yocto-4.2/conf/../layers/meta-openembedded/met=
-a-oe/recipes-support/fftw/fftw_3.3.10.bb:do_compile)
-> failed with exit code '1'
->
-> 2023. 05. 31. 13:12 keltez=C3=A9ssel, Armin Kuster =C3=ADrta:
-> > From: Khem Raj <raj.khem@gmail.com>
-> >
-> > FFTW_CC is added to image via version.o and its CC + CFLAGS however CC
-> > in OE containes --syroot compiler option which encodes buildpaths into
-> > binary, therefore remove this option from FFTW_CC in config.h
-> >
-> > Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> > (cherry picked from commit ef03326d31360abdfa3e4a34eb00b328a76de12c)
-> > Signed-off-by: Armin Kuster <akuster808@gmail.com>
-> > ---
-> >   meta-oe/recipes-support/fftw/fftw_3.3.10.bb | 1 +
-> >   1 file changed, 1 insertion(+)
-> >
-> > diff --git a/meta-oe/recipes-support/fftw/fftw_3.3.10.bb b/meta-oe/reci=
-pes-support/fftw/fftw_3.3.10.bb
-> > index cb45e2b91f..1fead4d029 100644
-> > --- a/meta-oe/recipes-support/fftw/fftw_3.3.10.bb
-> > +++ b/meta-oe/recipes-support/fftw/fftw_3.3.10.bb
-> > @@ -55,6 +55,7 @@ do_configure() {
-> >   do_compile() {
-> >       for lib in fftw fftwl fftwf; do
-> >           cd ${WORKDIR}/build-$lib
-> > +        sed -i -e 's|${TOOLCHAIN_OPTIONS}||g' config.h
-> >           autotools_do_compile
-> >       done
-> >   }
-> >
-> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> > Links: You receive all messages sent to this group.
-> > View/Reply Online (#103034): https://lists.openembedded.org/g/openembed=
-ded-devel/message/103034
-> > Mute This Topic: https://lists.openembedded.org/mt/99239744/3617728
-> > Group Owner: openembedded-devel+owner@lists.openembedded.org
-> > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub =
-[zboszor@gmail.com]
-> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> >
->
+diff --git a/meta-networking/recipes-support/wireshark/files/CVE-2023-2855.patch b/meta-networking/recipes-support/wireshark/files/CVE-2023-2855.patch
+new file mode 100644
+index 000000000..b4718f460
+--- /dev/null
++++ b/meta-networking/recipes-support/wireshark/files/CVE-2023-2855.patch
+@@ -0,0 +1,108 @@
++From 0181fafb2134a177328443a60b5e29c4ee1041cb Mon Sep 17 00:00:00 2001
++From: Guy Harris <gharris@sonic.net>
++Date: Tue, 16 May 2023 12:05:07 -0700
++Subject: [PATCH] candump: check for a too-long frame length.
++
++If the frame length is longer than the maximum, report an error in the
++file.
++
++Fixes #19062, preventing the overflow on a buffer on the stack (assuming
++your compiler doesn't call a bounds-checknig version of memcpy() if the
++size of the target space is known).
++
++Upstream-Status: Backport [https://gitlab.com/wireshark/wireshark/-/commit/0181fafb2134a177328443a60b5e29c4ee1041cb]
++CVE: CVE-2023-2855
++
++Signed-off-by: Hitendra Prajapati <hprajapati@mvista.com>
++---
++ wiretap/candump.c | 39 +++++++++++++++++++++++++++++++--------
++ 1 file changed, 31 insertions(+), 8 deletions(-)
++
++diff --git a/wiretap/candump.c b/wiretap/candump.c
++index 0def7bc..3f7c2b2 100644
++--- a/wiretap/candump.c
+++++ b/wiretap/candump.c
++@@ -26,8 +26,9 @@ static gboolean candump_seek_read(wtap *wth, gint64 seek_off,
++                                   wtap_rec *rec, Buffer *buf,
++                                   int *err, gchar **err_info);
++ 
++-static void
++-candump_write_packet(wtap_rec *rec, Buffer *buf, const msg_t *msg)
+++static gboolean
+++candump_write_packet(wtap_rec *rec, Buffer *buf, const msg_t *msg, int *err,
+++                     gchar **err_info)
++ {
++     static const char *can_proto_name    = "can-hostendian";
++     static const char *canfd_proto_name  = "canfd";
++@@ -59,6 +60,18 @@ candump_write_packet(wtap_rec *rec, Buffer *buf, const msg_t *msg)
++     {
++         canfd_frame_t canfd_frame = {0};
++ 
+++        /*
+++         * There's a maximum of CANFD_MAX_DLEN bytes in a CAN-FD frame.
+++         */
+++        if (msg->data.length > CANFD_MAX_DLEN) {
+++            *err = WTAP_ERR_BAD_FILE;
+++            if (err_info != NULL) {
+++	        *err_info = g_strdup_printf("candump: File has %u-byte CAN FD packet, bigger than maximum of %u",
+++                                             msg->data.length, CANFD_MAX_DLEN);
+++            }
+++            return FALSE;
+++        }
+++
++         canfd_frame.can_id = msg->id;
++         canfd_frame.flags  = msg->flags;
++         canfd_frame.len    = msg->data.length;
++@@ -70,6 +83,18 @@ candump_write_packet(wtap_rec *rec, Buffer *buf, const msg_t *msg)
++     {
++         can_frame_t can_frame = {0};
++ 
+++        /*
+++         * There's a maximum of CAN_MAX_DLEN bytes in a CAN frame.
+++         */
+++        if (msg->data.length > CAN_MAX_DLEN) {
+++            *err = WTAP_ERR_BAD_FILE;
+++            if (err_info != NULL) {
+++	        *err_info = g_strdup_printf("candump: File has %u-byte CAN packet, bigger than maximum of %u",
+++                                             msg->data.length, CAN_MAX_DLEN);
+++            }
+++            return FALSE;
+++        }
+++
++         can_frame.can_id  = msg->id;
++         can_frame.can_dlc = msg->data.length;
++         memcpy(can_frame.data, msg->data.data, msg->data.length);
++@@ -84,6 +109,8 @@ candump_write_packet(wtap_rec *rec, Buffer *buf, const msg_t *msg)
++ 
++     rec->rec_header.packet_header.caplen = packet_length;
++     rec->rec_header.packet_header.len    = packet_length;
+++
+++    return TRUE;
++ }
++ 
++ static gboolean
++@@ -190,9 +217,7 @@ candump_read(wtap *wth, wtap_rec *rec, Buffer *buf, int *err, gchar **err_info,
++     ws_debug_printf("%s: Stopped at offset %" PRIi64 "\n", G_STRFUNC, file_tell(wth->fh));
++ #endif
++ 
++-    candump_write_packet(rec, buf, &msg);
++-
++-    return TRUE;
+++    return candump_write_packet(rec, buf, &msg, err, err_info);
++ }
++ 
++ static gboolean
++@@ -216,9 +241,7 @@ candump_seek_read(wtap *wth , gint64 seek_off, wtap_rec *rec,
++     if (!candump_parse(wth->random_fh, &msg, NULL, err, err_info))
++         return FALSE;
++ 
++-    candump_write_packet(rec, buf, &msg);
++-
++-    return TRUE;
+++    return candump_write_packet(rec, buf, &msg, err, err_info);
++ }
++ 
++ /*
++-- 
++2.25.1
++
+diff --git a/meta-networking/recipes-support/wireshark/files/CVE-2023-2856.patch b/meta-networking/recipes-support/wireshark/files/CVE-2023-2856.patch
+new file mode 100644
+index 000000000..863421f98
+--- /dev/null
++++ b/meta-networking/recipes-support/wireshark/files/CVE-2023-2856.patch
+@@ -0,0 +1,69 @@
++From db5135826de3a5fdb3618225c2ff02f4207012ca Mon Sep 17 00:00:00 2001
++From: Guy Harris <gharris@sonic.net>
++Date: Thu, 18 May 2023 15:03:23 -0700
++Subject: [PATCH] vms: fix the search for the packet length field.
++
++The packet length field is of the form
++
++    Total Length = DDD = ^xXXX
++
++where "DDD" is the length in decimal and "XXX" is the length in
++hexadecimal.
++
++Search for "length ". not just "Length", as we skip past "Length ", not
++just "Length", so if we assume we found "Length " but only found
++"Length", we'd skip past the end of the string.
++
++While we're at it, fail if we don't find a length field, rather than
++just blithely acting as if the packet length were zero.
++
++Fixes #19083.
++
++Upstream-Status: Backport [https://gitlab.com/wireshark/wireshark/-/commit/db5135826de3a5fdb3618225c2ff02f4207012ca]
++CVE: CVE-2023-2856
++
++Signed-off-by: Hitendra Prajapati <hprajapati@mvista.com>
++---
++ wiretap/vms.c | 9 ++++++++-
++ 1 file changed, 8 insertions(+), 1 deletion(-)
++
++diff --git a/wiretap/vms.c b/wiretap/vms.c
++index 0aa83ea..5f5fdbb 100644
++--- a/wiretap/vms.c
+++++ b/wiretap/vms.c
++@@ -318,6 +318,7 @@ parse_vms_packet(FILE_T fh, wtap_rec *rec, Buffer *buf, int *err, gchar **err_in
++ {
++     char    line[VMS_LINE_LENGTH + 1];
++     int     num_items_scanned;
+++    gboolean have_pkt_len = FALSE;
++     guint32 pkt_len = 0;
++     int     pktnum;
++     int     csec = 101;
++@@ -374,7 +375,7 @@ parse_vms_packet(FILE_T fh, wtap_rec *rec, Buffer *buf, int *err, gchar **err_in
++                 return FALSE;
++             }
++         }
++-        if ( (! pkt_len) && (p = strstr(line, "Length"))) {
+++        if ( (! have_pkt_len) && (p = strstr(line, "Length "))) {
++             p += sizeof("Length ");
++             while (*p && ! g_ascii_isdigit(*p))
++                 p++;
++@@ -390,9 +391,15 @@ parse_vms_packet(FILE_T fh, wtap_rec *rec, Buffer *buf, int *err, gchar **err_in
++                 *err_info = g_strdup_printf("vms: Length field '%s' not valid", p);
++                 return FALSE;
++             }
+++            have_pkt_len = TRUE;
++             break;
++         }
++     } while (! isdumpline(line));
+++    if (! have_pkt_len) {
+++        *err = WTAP_ERR_BAD_FILE;
+++        *err_info = g_strdup_printf("vms: Length field not found");
+++        return FALSE;
+++    }
++     if (pkt_len > WTAP_MAX_PACKET_SIZE_STANDARD) {
++         /*
++          * Probably a corrupt capture file; return an error,
++-- 
++2.25.1
++
+diff --git a/meta-networking/recipes-support/wireshark/wireshark_3.4.12.bb b/meta-networking/recipes-support/wireshark/wireshark_3.4.12.bb
+index 693a16793..ff99a7508 100644
+--- a/meta-networking/recipes-support/wireshark/wireshark_3.4.12.bb
++++ b/meta-networking/recipes-support/wireshark/wireshark_3.4.12.bb
+@@ -16,6 +16,8 @@ SRC_URI += " \
+     file://0003-bison-Remove-line-directives.patch \
+     file://0004-lemon-Remove-line-directives.patch \
+     file://CVE-2022-3190.patch \
++    file://CVE-2023-2855.patch \
++    file://CVE-2023-2856.patch \
+ "
+ 
+ UPSTREAM_CHECK_URI = "https://1.as.dl.wireshark.org/src"
+-- 
+2.25.1
+
 
