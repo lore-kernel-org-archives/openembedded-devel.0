@@ -1,240 +1,514 @@
-Return-Path: <schitrod@cisco.com>
+Return-Path: <vkumbhar@mvista.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7D47AC7EE25
-	for <webhook@archiver.kernel.org>; Thu,  8 Jun 2023 07:16:27 +0000 (UTC)
-Received: from rcdn-iport-4.cisco.com (rcdn-iport-4.cisco.com [173.37.86.75])
- by mx.groups.io with SMTP id smtpd.web10.3488.1686208578113375180
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B5B9CC7EE23
+	for <webhook@archiver.kernel.org>; Thu,  8 Jun 2023 07:37:47 +0000 (UTC)
+Received: from mail-pg1-f173.google.com (mail-pg1-f173.google.com [209.85.215.173])
+ by mx.groups.io with SMTP id smtpd.web10.3739.1686209861343355594
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 08 Jun 2023 00:16:18 -0700
+ Thu, 08 Jun 2023 00:37:41 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@cisco.com header.s=iport header.b=CT0pi2oP;
- spf=pass (domain: cisco.com, ip: 173.37.86.75, mailfrom: schitrod@cisco.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=cisco.com; i=@cisco.com; l=1932; q=dns/txt; s=iport;
-  t=1686208578; x=1687418178;
-  h=from:to:cc:subject:date:message-id:references:
-   in-reply-to:content-transfer-encoding:mime-version;
-  bh=yK+TKzU0UQmIWw2xxqBwYmyUWKpCkAisNEYj6FAvYxw=;
-  b=CT0pi2oPFz0iOlPnh7IXrIiXVI6YpT7x6bOEyMkwOQCjzflrUmUqWFAf
-   GTDgF+6g4HVcLqO7rlhkNglg8bRmvmlBK/p4RV5tMMfJj4sdB0pfhRxJ7
-   9WmMHS+y9Fye5B7wPBKZSzRklSpnhtD0rQV4Z+ylGZvPpJrw43IXQJOXb
-   U=;
-X-IPAS-Result: =?us-ascii?q?A0AkAACJf4FkmJxdJa1aHQEBAQEJARIBBQUBQCWBFggBC?=
- =?us-ascii?q?wGBXFJzAlk8Gi2IHQOETl+IUgOLUZIagSUDVg8BAQENAQEuBw8EAQGFBgKFb?=
- =?us-ascii?q?AIlNAkOAQICAgEBAQEDAgMBAQEBAQEDAQEFAQEBAgEHBBQBAQEBAQEBAR4ZB?=
- =?us-ascii?q?Q4QJ4VoDYYEAQEBAQMBESgGAQEJAS0BCwQCAQgRBAEBHxAhBwodCAIEAQ0FC?=
- =?us-ascii?q?BqCXAGCKAMxAwGhIwGBPwKKJHiBNIEBgggBAQYEBWsfATEDmxENgkkJgUIBh?=
- =?us-ascii?q?1WFJxuESCcbQIFNgViCaD6CIEICA4FfhBKCLo4qhTOJUoEpb4EegSJ/AgkCE?=
- =?us-ascii?q?WeBCghgd3lAAg1VCwtjgR1SPYFGAgIRPBAFTXsdAwcEAoEFEC8HBDIJFQkGC?=
- =?us-ascii?q?RgwJwZTBy0kCRMVQgSDWQqBEEAVDhGCYjACBxY3A0QdQAMLcD01Bg4fBQQkS?=
- =?us-ascii?q?4FXMECBDQIiJJ4cgwiBDoFEQjkqlg+Lc6FPcAong2GLfI0agXmGJxeEAYFWi?=
- =?us-ascii?q?xSVPIMtmBUggi+OfpY/AgQCBAUCDgEBBoFjOoFbcBWDIglJGQ+OIBmDW4UUi?=
- =?us-ascii?q?mV1OwIHCwEBAwmLRgEB?=
-IronPort-PHdr: A9a23:n5nGPBU5XAgX2JikITicRXU/PLvV8K0yAWYlg6HPw5pUeailupP6M
- 1OaubNmjUTCWsPQ7PcXw+bVsqW1QWUb+t7Bq3ENdpVQSgUIwdsbhQ0uAcOJSAX7IffmYjZ8H
- ZFqX15+9Hb9Ok9QS47lf1OHmnSp9nYJHwnncw98J+D7AInX2t+81+Gu4ZrfSw5JnzG6J7h1K
- Ub+oQDYrMJDmYJ5Me5x0k7Qv3JScuJKxGVlbV6ShEP64cG9vdZvpi9RoPkmscVHVM3H
-IronPort-Data: A9a23:S3JfjqJNhsxxIrAUFE+R1ZUlxSXFcZb7ZxGr2PjKsXjdYENShWBUy
- DNJXGqFOPbcNmT3KNonaoix8xgEu5eBn4BiHQYd+CA2RRqmiyZq6fd1j6vUF3nPRiEWZBs/t
- 63yUvGZcIZsCCW0Si6FatANl1EkvU2zbuS6ULas1hxZH1c+E39/0UI7wobVv6Yx6TSHK1LV0
- T/Ni5W31G+Ng1aY5UpNtspvADs21BjDkGtwUm4WPJinj3eC/5UhN6/zEInqR5fOria4KcbhL
- wrL5OnREmo0ZH7BAPv9+lrwWhVirrI/oWFih1IOM5VOjCSuqQQw3qU7E8U6Kn5Olhizwc161
- Nltv5OvHFJB0q3kwIzxUjFCGC14eKZB4rKCfD60sNeYyAvNdH6EL/dGVR5te9ZHvLcsRzgTq
- 5T0KxhVBvyHr/m9wLOnUO5grs8iN8LseogYvxmMyBmHXKt+HsqcGc0m4/dH1zoZhsNMPsr7T
- JQgchk0fCjYbDlmbwJ/5JUWxbf02SaXnydjgFWNqKw65mLewAB83P3hPcTYfvSORN5JhQCfv
- m/A8mHzDx0WOdDZziCKmk9AncfVli/9HYkVDrD9q7hhgUaYwSoYDxh+uUaHTeeRiEK9W/VgD
- Q8t4zcDl/Yv/1CnbtPyQEjtyJKbhSI0V91VGuw8zQiCzKvI/gqUblToqBYcNrTKU+drGVQXO
- k+1c8DBXmMw7eXEIZ6J3vLF8mPoYHl9wXoqPHdcFWM4D8/fTJbfZy8jo/55G6Kzy9byAzy1n
- naBrTM1gPMYistjO0SHEbLv3m/ESnvhF15dCuDrsoSNsloRiGmNPNPA1LQjxawcRLt1t3HY1
- JT+p+CQ7foVEbaGnzGXTeMGEdmBvqjVbmSC2wAzR8hwq1xBHkJPm6gOuFmSw280Yq45lcPBO
- yc/RCsIvsYIZSv2BUOJS9voWptCIVfc+STND6CIMYUmjmlZfw6c9yYmfl+Lw23oiyARfVIXZ
- /+mnTKXJS9CU8xPlWPuL89EiOND7n5lnwv7G8ukpylLJJLDPhZ5v59fbgvXBg34hYvZyDjoH
- yF3aJfSlU8BAbGuCsQVmKZKRW03wbEALcmeg+Rcd/WIJUxtH2RJNhMb6e9Jl1BN90iNqtr1w
- w==
-IronPort-HdrOrdr: A9a23:HpCOB62ao3YclNKwQACafAqjBR1yeYIsimQD101hICG9Lfb4qy
- n+ppomPEHP5wr5AEtQ5+xoWJPrfZvdnaQFhrX5To3SLTUO31HYY72KjLGSjwEIfhefygcz79
- YaT0DxYueAd2SS4fyKhTVQVuxQv+Vvk5rYy9s2rU0dMD2CApsIh2wUe2XrcHGeBjM2eabRf6
- DsgPav0gDQAUj/Gf7Lf0XtMdKzw+EjkqiKXTc2QzocrCWehzKh77D3VzKC2A0Fbj9JybA+tU
- DYjg3Q/MyYwrGG4y6Z81WWw4VdmdPnxNcGLteLkNIpJjLljRvtTJh9WoeFoCs+rIiUmRUXeZ
- j30lUd1vZImjfsl1KO0FzQMs7boXATAkrZuBqlaL3Y0JXErXwBepJ8bMliA2vkAgIbzaJBOe
- RwriOkX149N2KboMw7jOK4DC1Chw66p2EvnvUUiGEaWYwCaKVJpYha509NFowcdRiKo7zPPd
- MeRf003swmOW+yfjTcpC1i0dasVnM8ElOPRVUDoNWc13xTkGpix0UVycQDljNYnahNBqVs9q
- DBKOBlhbtORsgZYeZ0A/oAW9K+DijITQjXOGyfLFz7HOUMOm7LqZTw/LIpjdvaMqAg3d83gt
- DMQVlYvWk9dwbnDtCPxoRC9lTXTGC0TV3Wu7djDlhCy8rBrZbQQFm+oQoV4rmdSt0kc7jmZ8
- o=
-X-Talos-CUID: =?us-ascii?q?9a23=3AP3lpvGlDknBLax+C4XLa2za3PSzXOX/Rz3f3HGn?=
- =?us-ascii?q?7MH90ZYfLVFSM9INunNU7zg=3D=3D?=
-X-Talos-MUID: =?us-ascii?q?9a23=3APgtZQw/JFefZtxSrQdnm706Qf9hj7o2uC0IurbA?=
- =?us-ascii?q?t5fCfFndgBy+SqB3iFw=3D=3D?=
-X-IronPort-Anti-Spam-Filtered: true
-Received: from rcdn-core-5.cisco.com ([173.37.93.156])
-  by rcdn-iport-4.cisco.com with ESMTP/TLS/DHE-RSA-SEED-SHA; 08 Jun 2023 07:16:17 +0000
-Received: from rcdn-opgw-4.cisco.com (rcdn-opgw-4.cisco.com [72.163.7.165])
-	by rcdn-core-5.cisco.com (8.15.2/8.15.2) with ESMTPS id 3587GFPK017259
-	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK)
-	for <openembedded-devel@lists.openembedded.org>; Thu, 8 Jun 2023 07:16:16 GMT
-Authentication-Results: rcdn-opgw-4.cisco.com; dkim=pass (signature verified) header.i=@cisco.com; spf=Pass smtp.mailfrom=schitrod@cisco.com; dmarc=pass (p=quarantine dis=none) d=cisco.com
-X-IronPort-AV: E=Sophos;i="6.00,226,1681171200"; 
-   d="scan'208";a="2709279"
-Received: from mail-bn7nam10lp2109.outbound.protection.outlook.com (HELO NAM10-BN7-obe.outbound.protection.outlook.com) ([104.47.70.109])
-  by rcdn-opgw-4.cisco.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 08 Jun 2023 07:16:15 +0000
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=oPNUdHxEAecK0tx5Nu30VGRvG3SKXmjJEhQNiP+0VAis6IX13mTt9Wb4JmlZYjPFZ9lTrAnDv+U32TpouRbeMyOpWSfjb2ZaetycruUnoUZGG49wk1Y1/6r06aVla8ZoR3RkA1pX8WUSxXvwgN+lTc0Pa2JKFt3YSw1nNFRN/VIXPCn28GTKqU8L3gbB5bhpWhXKujgdKAy94YwXHwA2eaUGh+8BHFX4S94gPFcrwkzHLDbJPBwx6m4mAn4qLyD3dVuiVj9UZjtKvL5SN/1NdjMV4sAbrqMNeTj+UgZUSCkkQkh2gyu5ZucHe6BPelXHC70eujSF69bnNI7phdA0bw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=i5Oi8O0JFBjaNGpgzI24AXca7NXCrWnyVtO2aGYy+3s=;
- b=TQJ9NRDblVm+tiptknWRa8tAqx2r1zGzMSV5zifiqdSOukl9khiXbJ5awsCqL8UjKA5ktCZg6raa70WH9w/+/eedYJWB4Ssoe6dWhXTArlPbN2ub9/anJDyprcooD9Xf5hY9QcPDU0uKiTlwyP2OexBJqtveZYPt/eo1RnJtX8MY//Vd629HU38HNw4lXZ3kPbCUlMbUMGPzE78bgjBK6nEVtED53P1vdNJ2X/tegU8CUU0lAto2uPH4x4rM8Ggx8qmvnPz7flrZ0ctIat5V0Cq0jXuuENXFfqAecLT/G4ejwK6ZqRsESeTDI47Rpw41vQPA+FJymfuJQbt5/i8UJA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=cisco.com; dmarc=pass action=none header.from=cisco.com;
- dkim=pass header.d=cisco.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cisco.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=i5Oi8O0JFBjaNGpgzI24AXca7NXCrWnyVtO2aGYy+3s=;
- b=KcG10y6A0bJUv7hmXpNmwrJ1llW5Wb5+r9nRTZO97bEABHRqh2gTYV/a0BIpRSgj40J65+hT8zZEJArZ/MQP8M7mTde9gygNf66Pii6QwAsLgIwa4RFwYLbiqSba+zSKMyfFP4pMQncXCtWhiejNqVkGUsgOhtFXXx861m9s/+Q=
-Received: from SJ0PR11MB6717.namprd11.prod.outlook.com (2603:10b6:a03:44f::9)
- by CH0PR11MB5332.namprd11.prod.outlook.com (2603:10b6:610:bf::17) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6455.33; Thu, 8 Jun
- 2023 07:16:12 +0000
-Received: from SJ0PR11MB6717.namprd11.prod.outlook.com
- ([fe80::2ddb:3ab6:484a:673a]) by SJ0PR11MB6717.namprd11.prod.outlook.com
- ([fe80::2ddb:3ab6:484a:673a%5]) with mapi id 15.20.6455.030; Thu, 8 Jun 2023
- 07:16:12 +0000
-From: "Sanjaykumar kantibhai Chitroda -X (schitrod - E-INFO CHIPS INC at
- Cisco)" <schitrod@cisco.com>
-To: "Sanjaykumar kantibhai Chitroda -X (schitrod - E-INFO CHIPS INC at Cisco)"
-	<schitrod@cisco.com>,
-        "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-CC: Khem Raj <raj.khem@gmail.com>
-Subject: RE: [oe] [meta-oe][kirkstone,PATCH] gnulib: Update recipe name to
- 2018-12-18
-Thread-Topic: [oe] [meta-oe][kirkstone,PATCH] gnulib: Update recipe name to
- 2018-12-18
-Thread-Index: AQHZk3bsBfeF0JO4ckidkMbu0ZIJwa+AiidQ
-Date: Thu, 8 Jun 2023 07:16:11 +0000
-Deferred-Delivery: Thu, 8 Jun 2023 07:15:53 +0000
-Message-ID: 
- <SJ0PR11MB671758B17CA6DCA7F00762DDDC50A@SJ0PR11MB6717.namprd11.prod.outlook.com>
-References: <17641F6741B13B67.25298@lists.openembedded.org>
-In-Reply-To: <17641F6741B13B67.25298@lists.openembedded.org>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: SJ0PR11MB6717:EE_|CH0PR11MB5332:EE_
-x-ms-office365-filtering-correlation-id: e3b3224f-ebf8-4f21-b821-08db67f03d52
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: 
- mFhnJSwXazyXhUtIUagMpaLhkyKP2ufmKvPwDoRnrdGWmdTBNc+obbXypD5OKZvL5hc04jlhCMuYQy5oWBWeBNdmAadNTu0sUHYE4tq4Y3ipm3F7NOG/yi8uQgEBpuis21cqZp8+UHo5+CiZDXXaP+qJlCNAyvzT3BjOuT3kfGfnCKb5fBxKU2OPzX6+cfjf1IdGa9gEu185TTuhwDJMOYfjLPLM5QBm7WCVbBglYoJgQ6mkAz303UMw77/g0Pg/vzdhfboDG4ffqd4Z9NGAQrJfab/0RtuW2uFUfKI93b33PFzNi9QQSM7v0gQsmhygV5urwXNsCP5IlOi18C+UKjedJqn8PrUS1wVTX3/kbizRwQ86xN19CkzK5yoNYTHWROIOhKl57NItMJY/QIfvUk10sk7uhdsyW2NYu465FLUIkjnT/qOYK42Oz/x5MWuNf+fKn+Sv2ludxh08aUsPmbgfug58CdzgLr6aiW/rFPwUyyJWMW37GqVMgruFo212bhxvXuOvv3LBdKmJt8kS54BnV7rXS6m9FZnKk56zX14Sbnrd9yN3VBmfSKfAzURsm2uRCPAhw8kAnwoVQovlBmWWbhNnxuJnLXgjwG1DZQuZlpikpluah0RfY7Fv58Gv
-x-forefront-antispam-report: 
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:SJ0PR11MB6717.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230028)(39860400002)(376002)(396003)(136003)(366004)(346002)(451199021)(66556008)(33656002)(38100700002)(122000001)(86362001)(38070700005)(15650500001)(4001150100001)(55016003)(71200400001)(110136005)(7696005)(478600001)(2906002)(9686003)(6506007)(186003)(316002)(5660300002)(52536014)(66446008)(4326008)(64756008)(66476007)(41300700001)(83380400001)(76116006)(66946007)(26005)(8936002)(8676002);DIR:OUT;SFP:1101;
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: 
- =?us-ascii?Q?UQvv29GJiwifJ/lu0jAcPaO6vrflweX+P11E0xC4QENzqik2o3fEGEeR93TB?=
- =?us-ascii?Q?w3ISp/XJfUSw5rZb2RSCwKR3rf365EhGnGbvMLNi4vFQycRefVs2xz7rHvri?=
- =?us-ascii?Q?jEEu+Yl6TD4oBbje1XX9rrrCo8UfcA15r8+Hdb0jlH4SZVt+q9Jy4WLOwn8C?=
- =?us-ascii?Q?nd7IKowRq0is6TS/SM8CLf1ZQCN/HfB9dTfjspy+vIMqlOLKCYoNTAE8P0Cp?=
- =?us-ascii?Q?FUsK8DLpPR+GDuxykhIE0Rf8fwSVt2P31AmD/PHpX6jen/Zvp2hqwsQF5t+3?=
- =?us-ascii?Q?BS6UPfqfGduOf9xSRNNvhVLOCrVKBk2xsMsvVwxI8HgWJmYuli1dgbhSrRzC?=
- =?us-ascii?Q?yS75fXkrieayLAVpU+9TuXql5v2yOdFR3cmFEY3L/4Olh3gNLR8jOgyWxuXd?=
- =?us-ascii?Q?vhzL1yF0oimPXHtRFuBptECADd3Xv84Y+jQTT8jl2sqDjnbSiV5v3/EmESvD?=
- =?us-ascii?Q?hF4ov5ZT5O7VtbESEcCSIJU6Kjoxe6xIh4su9kCTXGShttaktPyxpuAxYhb/?=
- =?us-ascii?Q?ZeIIuV7d/oj0LHRdlIXNX+nxjBziJPjY10BCfUaDv8xvKmCUDSh26YsVS44Z?=
- =?us-ascii?Q?u5LISqrppdCuWF0xE6bj/gmzphcqdsu3GQDT6JGs3MBO4tYz+2fA76yd/Zb7?=
- =?us-ascii?Q?Bbbla8KdzqL8DEDZbpo+NknkfjkDOSkWGtmYxTRIKjhNfsQcAAR6QUs3mr8/?=
- =?us-ascii?Q?MNWOzg5PsrCH8AFa62pD4rCdefJaJl4soeyJJvvmq2HIXghwlGgbMCR0drpV?=
- =?us-ascii?Q?JfUJNCXl+jzQ1RIDPzbcNKTpKk2LohChaTjLeYWQWPkqDJ+E+Ouom1vM6Dp2?=
- =?us-ascii?Q?CCd6j++QuQP2Jn9asTaAtXKnfPngB60S6zhkaZ/WGZ4FX8KvB4KODfDoZF2d?=
- =?us-ascii?Q?jwAFnDF4bYsm7Jjs3QoVscayVDzEoAJ+bkIvhhp53vwwngmpWnrLfEE12QzV?=
- =?us-ascii?Q?kVCXCo9HgB59RJXy4IO/JET1Voo7Rvvn7SZkRbpsVtfaOCofGlHde1fF8gRc?=
- =?us-ascii?Q?YvoVUfkRX0jek6gjhYenFsChkDvM1Jvqo+WcnsrCQzmHfJeIbgoSgBpk3Mhu?=
- =?us-ascii?Q?VVZcNhYAU5ZoPOcnwuOAH0hcHx/18f5WNnNiyy+zZ0Fh5/Vnphate4dJx8fK?=
- =?us-ascii?Q?bfiXhjtHIeW/OaQWA/4Lqwx935lLE/YzdY3jz1/YMnTma7djLlKMNWh5KcwU?=
- =?us-ascii?Q?tXk02F364j+cZ5rfhIUMqMorJ4W14g1tqe+VONQKcwr+6HKszu7XKsXKm8sM?=
- =?us-ascii?Q?I6jjrjk7xMqtWhz1JYaFK2MAsuWg2PzYVO0nJm9RaFL4apI7BMrJn2BxzxHH?=
- =?us-ascii?Q?esIFKxA24BvmVbetiDtyRYXrHeF2wUprsj9seZkCByNN57yPELPpNJCcANv7?=
- =?us-ascii?Q?mkoN4cyqLW+MdIQyOgkHiaz1N4648x3DQ8Y/qJbJgZqGJJhqpzaWjTdRCLBa?=
- =?us-ascii?Q?TFiy+o6PzLkNZyPP53Z9rViP1Hduwa22Vb6EigIYdfYIJ32za2ATQgteC87M?=
- =?us-ascii?Q?jo4tKmvshcISfpsEB8CGtNNH2KLUWj0e49+FN1RFSoRNmq5ls4PWxJybIqYB?=
- =?us-ascii?Q?sBVcYFRospLHyKecPJf9xABymVfdl533gdTbSrvW?=
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+ dkim=fail reason="signature has expired" header.i=@mvista.com header.s=google header.b=kgVaaFbS;
+ spf=pass (domain: mvista.com, ip: 209.85.215.173, mailfrom: vkumbhar@mvista.com)
+Received: by mail-pg1-f173.google.com with SMTP id 41be03b00d2f7-543c6a2aa07so86971a12.0
+        for <openembedded-devel@lists.openembedded.org>; Thu, 08 Jun 2023 00:37:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=mvista.com; s=google; t=1686209860; x=1688801860;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=NZa+Xmw2UuTyqGv2rqVKdPy8xdKDPtJhsWCslYlu0qA=;
+        b=kgVaaFbSdSwcPu1aSnBAd1mauieNBXpHo0ps1MeJRutlwr1RKT36FHZ+PVOl6OXScP
+         O9eDf9d0TnA4oRXpF75vQe8Ccdphadeg6QTHRpK/LqrOtq2Ei2aCgaznPc1vdLETqVua
+         y4UHu3JQbEzMtWnrt4V4A7cg9eEYQPdsDCS3E=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20221208; t=1686209860; x=1688801860;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=NZa+Xmw2UuTyqGv2rqVKdPy8xdKDPtJhsWCslYlu0qA=;
+        b=hX2ouZwI8lTTC2JhYSfTVTK0JUUe2ycx1qN7mLKaw4DaPBdcVWWt1zdU8wCI5W8lqF
+         JC92C48mocVqCkDz1IrQYT2EvvPBkvW/gl06rGsey57DjT5CTnlB+VDO9bRbODNPSqnC
+         rfA515C/UIVfE0meuLzJEB3UuhJ4YHhcFeClOiVPPGksyThJPBU4NSNnjPhOPeiA9j9Z
+         CbnZktO/CnK+jT+Js6kTlyksKulA0+I17T/hC8vcwXlZPrhym4DMEASIyw89efeU5qdH
+         SHgSRyo42SeY02VSeFfhdpuZXOUBRhruDEqRerapRaVchA6iDQGpR3JEEkSOABABIflh
+         Rlrg==
+X-Gm-Message-State: AC+VfDwx6rxjumxNb9HeOgMm37of5AXs3GFvImlKkvt8+tvehnqgvPX6
+	KqFE9wVhE7oNQggfXZSj6Hf61UOe+f7wozZJMbo=
+X-Google-Smtp-Source: ACHHUZ4Vwe/2iF0K9+X4COpmI7NBdfUrKxpFProJNquSUeMHiiEU6Yx/rqv2FV2X3sr8viygrPSu8Q==
+X-Received: by 2002:a05:6a20:3d1c:b0:118:ed8a:af35 with SMTP id y28-20020a056a203d1c00b00118ed8aaf35mr230616pzi.16.1686209859653;
+        Thu, 08 Jun 2023 00:37:39 -0700 (PDT)
+Received: from vkumbhar-Latitude-3400.mvista.com ([116.74.131.76])
+        by smtp.googlemail.com with ESMTPSA id r3-20020a170902be0300b001a98f844e60sm728112pls.263.2023.06.08.00.37.36
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 08 Jun 2023 00:37:39 -0700 (PDT)
+From: Vivek Kumbhar <vkumbhar@mvista.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Vivek Kumbhar <vkumbhar@mvista.com>
+Subject: [meta-oe][kirkstone][PATCH] c-ares: fix CVEs CVE-2023-32067 and CVE-2023-31130
+Date: Thu,  8 Jun 2023 13:07:18 +0530
+Message-Id: <20230608073718.339757-1-vkumbhar@mvista.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-X-OriginatorOrg: cisco.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: SJ0PR11MB6717.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: e3b3224f-ebf8-4f21-b821-08db67f03d52
-X-MS-Exchange-CrossTenant-originalarrivaltime: 08 Jun 2023 07:16:12.1244
- (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 5ae1af62-9505-4097-a69a-c1553ef7840e
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: 6T+JJmaEbeffUs33YwnNOA/vIm7wBMDDMXBH2SQDHxqbpfZWgvMWyVsvzJLhpiFp0WJ49JcOLbFanBh1gJwTPQ==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH0PR11MB5332
-X-Outbound-SMTP-Client: 72.163.7.165, rcdn-opgw-4.cisco.com
-X-Outbound-Node: rcdn-core-5.cisco.com
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 08 Jun 2023 07:16:27 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103183
+ <openembedded-devel@lists.openembedded.org>; Thu, 08 Jun 2023 07:37:47 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103184
 
-Hi Raj,
+Fix below CVE:
+1)CVE-2023-32067 c-ares: 0-byte UDP payload Denial of Service.
+2)CVE-2023-31130 c-ares: Buffer Underwrite in ares_inet_net_pton().
 
-As per discussion and comment from Arman.
-We need this changes on all the EM releases.
-
-Patch is merged on master and mickledore branches.
-I can't see any update on kirkstone branch for this patch.
-Please review and provide your comment.
-
-Thanks,
-Sanjay
-
------Original Message-----
-From: openembedded-devel@lists.openembedded.org <openembedded-devel@lists.o=
-penembedded.org> On Behalf Of Sanjaykumar kantibhai Chitroda -X (schitrod -=
- E-INFO CHIPS INC at Cisco) via lists.openembedded.org
-Sent: Wednesday, May 31, 2023 9:48 AM
-To: openembedded-devel@lists.openembedded.org
-Cc: Sanjaykumar kantibhai Chitroda -X (schitrod - E-INFO CHIPS INC at Cisco=
-) <schitrod@cisco.com>; Khem Raj <raj.khem@gmail.com>
-Subject: [oe] [meta-oe][kirkstone,PATCH] gnulib: Update recipe name to 2018=
--12-18
-
-As per gnulib_2018-03-07 recipe information, SRCREV =3D "0d6e3307bbdb8df4d5=
-6043d5f373eeeffe4cbef3"
-This revision was committed on "2018-12-18".
-
-There is a discrepancy between SRCREV and the recipe version.
-Which reports "CVE-2018-17942" as unpatched.
-
-To report "CVE-2018-17942" as patched,
-We need to align a recipe name with SRCREV commit date.
-
-Signed-off-by: Sanjay Chitroda <schitrod@cisco.com>
-Signed-off-by: Khem Raj <raj.khem@gmail.com> (cherry picked from commit 9ed=
-be7033cc41f4a49f74717cd3146b52588ce22)
-Signed-off-by: Sanjay Chitroda <schitrod@cisco.com>
+Signed-off-by: Vivek Kumbhar <vkumbhar@mvista.com>
 ---
- .../gnulib/{gnulib_2018-03-07.03.bb =3D> gnulib_2018-12-18.bb}      | 0
- 1 file changed, 0 insertions(+), 0 deletions(-)  rename meta-oe/recipes-su=
-pport/gnulib/{gnulib_2018-03-07.03.bb =3D> gnulib_2018-12-18.bb} (100%)
+ .../c-ares/c-ares/CVE-2023-31130.patch        | 328 ++++++++++++++++++
+ .../c-ares/c-ares/CVE-2023-32067.patch        |  85 +++++
+ .../recipes-support/c-ares/c-ares_1.18.1.bb   |   2 +
+ 3 files changed, 415 insertions(+)
+ create mode 100644 meta-oe/recipes-support/c-ares/c-ares/CVE-2023-31130.patch
+ create mode 100644 meta-oe/recipes-support/c-ares/c-ares/CVE-2023-32067.patch
 
-diff --git a/meta-oe/recipes-support/gnulib/gnulib_2018-03-07.03.bb b/meta-=
-oe/recipes-support/gnulib/gnulib_2018-12-18.bb
-similarity index 100%
-rename from meta-oe/recipes-support/gnulib/gnulib_2018-03-07.03.bb
-rename to meta-oe/recipes-support/gnulib/gnulib_2018-12-18.bb
---
-2.35.6
+diff --git a/meta-oe/recipes-support/c-ares/c-ares/CVE-2023-31130.patch b/meta-oe/recipes-support/c-ares/c-ares/CVE-2023-31130.patch
+new file mode 100644
+index 0000000000..3e507f7cda
+--- /dev/null
++++ b/meta-oe/recipes-support/c-ares/c-ares/CVE-2023-31130.patch
+@@ -0,0 +1,328 @@
++From f22cc01039b6473b736d3bf438f56a2654cdf2b2 Mon Sep 17 00:00:00 2001
++From: Brad House <brad@brad-house.com>
++Date: Mon, 22 May 2023 06:51:34 -0400
++Subject: [PATCH] Merge pull request from GHSA-x6mf-cxr9-8q6v
++
++* Merged latest OpenBSD changes for inet_net_pton_ipv6() into c-ares.
++* Always use our own IP conversion functions now, do not delegate to OS
++  so we can have consistency in testing and fuzzing.
++* Removed bogus test cases that never should have passed.
++* Add new test case for crash bug found.
++
++Fix By: Brad House (@bradh352)
++
++Upstream-Status: Backport [https://github.com/c-ares/c-ares/commit/f22cc01039b6473b736d3bf438f56a2654cdf2b2.patch]
++CVE: CVE-2023-31130
++Signed-off-by: Vivek Kumbhar <vkumbhar@mvista.com>
++---
++ src/lib/inet_net_pton.c    | 155 ++++++++++++++++++++-----------------
++ test/ares-test-internal.cc |   7 +-
++ 2 files changed, 86 insertions(+), 76 deletions(-)
++
++diff --git a/src/lib/inet_net_pton.c b/src/lib/inet_net_pton.c
++index 840de50..fc50425 100644
++--- a/src/lib/inet_net_pton.c
+++++ b/src/lib/inet_net_pton.c
++@@ -1,19 +1,20 @@
++ 
++ /*
++- * Copyright (c) 2004 by Internet Systems Consortium, Inc. ("ISC")
+++ * Copyright (c) 2012 by Gilles Chehade <gilles@openbsd.org>
++  * Copyright (c) 1996,1999 by Internet Software Consortium.
++  *
++  * Permission to use, copy, modify, and distribute this software for any
++  * purpose with or without fee is hereby granted, provided that the above
++  * copyright notice and this permission notice appear in all copies.
++  *
++- * THE SOFTWARE IS PROVIDED "AS IS" AND ISC DISCLAIMS ALL WARRANTIES
++- * WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
++- * MERCHANTABILITY AND FITNESS.  IN NO EVENT SHALL ISC BE LIABLE FOR
++- * ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
++- * WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
++- * ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT
++- * OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+++ * THE SOFTWARE IS PROVIDED "AS IS" AND INTERNET SOFTWARE CONSORTIUM DISCLAIMS
+++ * ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES
+++ * OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL INTERNET SOFTWARE
+++ * CONSORTIUM BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL
+++ * DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR
+++ * PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS
+++ * ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS
+++ * SOFTWARE.
++  */
++ 
++ #include "ares_setup.h"
++@@ -35,9 +36,6 @@
++ 
++ const struct ares_in6_addr ares_in6addr_any = { { { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 } } };
++ 
++-
++-#ifndef HAVE_INET_NET_PTON
++-
++ /*
++  * static int
++  * inet_net_pton_ipv4(src, dst, size)
++@@ -60,7 +58,7 @@ const struct ares_in6_addr ares_in6addr_any = { { { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,
++  *      Paul Vixie (ISC), June 1996
++  */
++ static int
++-inet_net_pton_ipv4(const char *src, unsigned char *dst, size_t size)
+++ares_inet_net_pton_ipv4(const char *src, unsigned char *dst, size_t size)
++ {
++   static const char xdigits[] = "0123456789abcdef";
++   static const char digits[] = "0123456789";
++@@ -261,19 +259,14 @@ getv4(const char *src, unsigned char *dst, int *bitsp)
++ }
++ 
++ static int
++-inet_net_pton_ipv6(const char *src, unsigned char *dst, size_t size)
+++ares_inet_pton6(const char *src, unsigned char *dst)
++ {
++   static const char xdigits_l[] = "0123456789abcdef",
++-    xdigits_u[] = "0123456789ABCDEF";
+++        xdigits_u[] = "0123456789ABCDEF";
++   unsigned char tmp[NS_IN6ADDRSZ], *tp, *endp, *colonp;
++   const char *xdigits, *curtok;
++-  int ch, saw_xdigit;
+++  int ch, saw_xdigit, count_xdigit;
++   unsigned int val;
++-  int digits;
++-  int bits;
++-  size_t bytes;
++-  int words;
++-  int ipv4;
++ 
++   memset((tp = tmp), '\0', NS_IN6ADDRSZ);
++   endp = tp + NS_IN6ADDRSZ;
++@@ -283,22 +276,22 @@ inet_net_pton_ipv6(const char *src, unsigned char *dst, size_t size)
++     if (*++src != ':')
++       goto enoent;
++   curtok = src;
++-  saw_xdigit = 0;
+++  saw_xdigit = count_xdigit = 0;
++   val = 0;
++-  digits = 0;
++-  bits = -1;
++-  ipv4 = 0;
++   while ((ch = *src++) != '\0') {
++     const char *pch;
++ 
++     if ((pch = strchr((xdigits = xdigits_l), ch)) == NULL)
++       pch = strchr((xdigits = xdigits_u), ch);
++     if (pch != NULL) {
+++      if (count_xdigit >= 4)
+++        goto enoent;
++       val <<= 4;
++-      val |= aresx_sztoui(pch - xdigits);
++-      if (++digits > 4)
+++      val |= (pch - xdigits);
+++      if (val > 0xffff)
++         goto enoent;
++       saw_xdigit = 1;
+++      count_xdigit++;
++       continue;
++     }
++     if (ch == ':') {
++@@ -308,78 +301,107 @@ inet_net_pton_ipv6(const char *src, unsigned char *dst, size_t size)
++           goto enoent;
++         colonp = tp;
++         continue;
++-      } else if (*src == '\0')
+++      } else if (*src == '\0') {
++         goto enoent;
+++      }
++       if (tp + NS_INT16SZ > endp)
++-        return (0);
++-      *tp++ = (unsigned char)((val >> 8) & 0xff);
++-      *tp++ = (unsigned char)(val & 0xff);
+++        goto enoent;
+++      *tp++ = (unsigned char) (val >> 8) & 0xff;
+++      *tp++ = (unsigned char) val & 0xff;
++       saw_xdigit = 0;
++-      digits = 0;
+++      count_xdigit = 0;
++       val = 0;
++       continue;
++     }
++     if (ch == '.' && ((tp + NS_INADDRSZ) <= endp) &&
++-        getv4(curtok, tp, &bits) > 0) {
++-      tp += NS_INADDRSZ;
+++        ares_inet_net_pton_ipv4(curtok, tp, INADDRSZ) > 0) {
+++      tp += INADDRSZ;
++       saw_xdigit = 0;
++-      ipv4 = 1;
+++      count_xdigit = 0;
++       break;  /* '\0' was seen by inet_pton4(). */
++     }
++-    if (ch == '/' && getbits(src, &bits) > 0)
++-      break;
++     goto enoent;
++   }
++   if (saw_xdigit) {
++     if (tp + NS_INT16SZ > endp)
++       goto enoent;
++-    *tp++ = (unsigned char)((val >> 8) & 0xff);
++-    *tp++ = (unsigned char)(val & 0xff);
+++    *tp++ = (unsigned char) (val >> 8) & 0xff;
+++    *tp++ = (unsigned char) val & 0xff;
++   }
++-  if (bits == -1)
++-    bits = 128;
++-
++-  words = (bits + 15) / 16;
++-  if (words < 2)
++-    words = 2;
++-  if (ipv4)
++-    words = 8;
++-  endp =  tmp + 2 * words;
++-
++   if (colonp != NULL) {
++     /*
++      * Since some memmove()'s erroneously fail to handle
++      * overlapping regions, we'll do the shift by hand.
++      */
++-    const ares_ssize_t n = tp - colonp;
++-    ares_ssize_t i;
+++    const int n = tp - colonp;
+++    int i;
++ 
++     if (tp == endp)
++       goto enoent;
++     for (i = 1; i <= n; i++) {
++-      *(endp - i) = *(colonp + n - i);
++-      *(colonp + n - i) = 0;
+++      endp[- i] = colonp[n - i];
+++      colonp[n - i] = 0;
++     }
++     tp = endp;
++   }
++   if (tp != endp)
++     goto enoent;
++ 
++-  bytes = (bits + 7) / 8;
++-  if (bytes > size)
++-    goto emsgsize;
++-  memcpy(dst, tmp, bytes);
++-  return (bits);
+++  memcpy(dst, tmp, NS_IN6ADDRSZ);
+++  return (1);
++ 
++-  enoent:
+++enoent:
++   SET_ERRNO(ENOENT);
++   return (-1);
++ 
++-  emsgsize:
+++emsgsize:
++   SET_ERRNO(EMSGSIZE);
++   return (-1);
++ }
++ 
+++static int
+++ares_inet_net_pton_ipv6(const char *src, unsigned char *dst, size_t size)
+++{
+++  struct ares_in6_addr in6;
+++  int                  ret;
+++  int                  bits;
+++  size_t               bytes;
+++  char                 buf[INET6_ADDRSTRLEN + sizeof("/128")];
+++  char                *sep;
+++  const char          *errstr;
+++
+++  if (strlen(src) >= sizeof buf) {
+++    SET_ERRNO(EMSGSIZE);
+++    return (-1);
+++  }
+++  strncpy(buf, src, sizeof buf);
+++
+++  sep = strchr(buf, '/');
+++  if (sep != NULL)
+++    *sep++ = '\0';
+++
+++  ret = ares_inet_pton6(buf, (unsigned char *)&in6);
+++  if (ret != 1)
+++    return (-1);
+++
+++  if (sep == NULL)
+++    bits = 128;
+++  else {
+++    if (!getbits(sep, &bits)) {
+++      SET_ERRNO(ENOENT);
+++      return (-1);
+++    }
+++  }
+++
+++  bytes = (bits + 7) / 8;
+++  if (bytes > size) {
+++    SET_ERRNO(EMSGSIZE);
+++    return (-1);
+++  }
+++  memcpy(dst, &in6, bytes);
+++  return (bits);
+++}
+++
++ /*
++  * int
++  * inet_net_pton(af, src, dst, size)
++@@ -403,18 +425,15 @@ ares_inet_net_pton(int af, const char *src, void *dst, size_t size)
++ {
++   switch (af) {
++   case AF_INET:
++-    return (inet_net_pton_ipv4(src, dst, size));
+++    return (ares_inet_net_pton_ipv4(src, dst, size));
++   case AF_INET6:
++-    return (inet_net_pton_ipv6(src, dst, size));
+++    return (ares_inet_net_pton_ipv6(src, dst, size));
++   default:
++     SET_ERRNO(EAFNOSUPPORT);
++     return (-1);
++   }
++ }
++ 
++-#endif /* HAVE_INET_NET_PTON */
++-
++-#ifndef HAVE_INET_PTON
++ int ares_inet_pton(int af, const char *src, void *dst)
++ {
++   int result;
++@@ -434,11 +453,3 @@ int ares_inet_pton(int af, const char *src, void *dst)
++     return 0;
++   return (result > -1 ? 1 : -1);
++ }
++-#else /* HAVE_INET_PTON */
++-int ares_inet_pton(int af, const char *src, void *dst)
++-{
++-  /* just relay this to the underlying function */
++-  return inet_pton(af, src, dst);
++-}
++-
++-#endif
++diff --git a/test/ares-test-internal.cc b/test/ares-test-internal.cc
++index 96d4ede..161f0a5 100644
++--- a/test/ares-test-internal.cc
+++++ b/test/ares-test-internal.cc
++@@ -81,6 +81,7 @@ TEST_F(LibraryTest, InetPtoN) {
++   EXPECT_EQ(0, ares_inet_net_pton(AF_INET6, "12:34::ff/0", &a6, sizeof(a6)));
++   EXPECT_EQ(16 * 8, ares_inet_net_pton(AF_INET6, "12:34::ffff:0.2", &a6, sizeof(a6)));
++   EXPECT_EQ(16 * 8, ares_inet_net_pton(AF_INET6, "1234:1234:1234:1234:1234:1234:1234:1234", &a6, sizeof(a6)));
+++  EXPECT_EQ(2, ares_inet_net_pton(AF_INET6, "0::00:00:00/2", &a6, sizeof(a6)));
++ 
++   // Various malformed versions
++   EXPECT_EQ(-1, ares_inet_net_pton(AF_INET, "", &a4, sizeof(a4)));
++@@ -118,11 +119,9 @@ TEST_F(LibraryTest, InetPtoN) {
++   EXPECT_EQ(-1, ares_inet_net_pton(AF_INET6, ":1234:1234:1234:1234:1234:1234:1234:1234", &a6, sizeof(a6)));
++   EXPECT_EQ(-1, ares_inet_net_pton(AF_INET6, ":1234:1234:1234:1234:1234:1234:1234:1234:", &a6, sizeof(a6)));
++   EXPECT_EQ(-1, ares_inet_net_pton(AF_INET6, "1234:1234:1234:1234:1234:1234:1234:1234:5678", &a6, sizeof(a6)));
++-  // TODO(drysdale): check whether the next two tests should give -1.
++-  EXPECT_EQ(0, ares_inet_net_pton(AF_INET6, "1234:1234:1234:1234:1234:1234:1234:1234:5678:5678", &a6, sizeof(a6)));
++-  EXPECT_EQ(0, ares_inet_net_pton(AF_INET6, "1234:1234:1234:1234:1234:1234:1234:1234:5678:5678:5678", &a6, sizeof(a6)));
+++  EXPECT_EQ(-1, ares_inet_net_pton(AF_INET6, "1234:1234:1234:1234:1234:1234:1234:1234:5678:5678", &a6, sizeof(a6)));
+++  EXPECT_EQ(-1, ares_inet_net_pton(AF_INET6, "1234:1234:1234:1234:1234:1234:1234:1234:5678:5678:5678", &a6, sizeof(a6)));
++   EXPECT_EQ(-1, ares_inet_net_pton(AF_INET6, "12:34::ffff:257.2.3.4", &a6, sizeof(a6)));
++-  EXPECT_EQ(-1, ares_inet_net_pton(AF_INET6, "12:34::ffff:002.2.3.4", &a6, sizeof(a6)));
++   EXPECT_EQ(-1, ares_inet_net_pton(AF_INET6, "12:34::ffff:1.2.3.4.5.6", &a6, sizeof(a6)));
++   EXPECT_EQ(-1, ares_inet_net_pton(AF_INET6, "12:34::ffff:1.2.3.4.5", &a6, sizeof(a6)));
++   EXPECT_EQ(-1, ares_inet_net_pton(AF_INET6, "12:34::ffff:1.2.3.z", &a6, sizeof(a6)));
++-- 
++2.25.1
++
+diff --git a/meta-oe/recipes-support/c-ares/c-ares/CVE-2023-32067.patch b/meta-oe/recipes-support/c-ares/c-ares/CVE-2023-32067.patch
+new file mode 100644
+index 0000000000..f6bcaee534
+--- /dev/null
++++ b/meta-oe/recipes-support/c-ares/c-ares/CVE-2023-32067.patch
+@@ -0,0 +1,85 @@
++From b9b8413cfdb70a3f99e1573333b23052d57ec1ae Mon Sep 17 00:00:00 2001
++From: Brad House <brad@brad-house.com>
++Date: Mon, 22 May 2023 06:51:49 -0400
++Subject: [PATCH] Merge pull request from GHSA-9g78-jv2r-p7vc
++
++Upstream-Status: Backport [https://github.com/c-ares/c-ares/commit/b9b8413cfdb70a3f99e1573333b23052d57ec1ae.patch]
++CVE: CVE-2023-32067
++Signed-off-by: Vivek Kumbhar <vkumbhar@mvista.com>
++---
++ src/lib/ares_process.c | 41 +++++++++++++++++++++++++----------------
++ 1 file changed, 25 insertions(+), 16 deletions(-)
++
++diff --git a/src/lib/ares_process.c b/src/lib/ares_process.c
++index 87329e3..605e5f8 100644
++--- a/src/lib/ares_process.c
+++++ b/src/lib/ares_process.c
++@@ -457,7 +457,7 @@ static void read_udp_packets(ares_channel channel, fd_set *read_fds,
++ {
++   struct server_state *server;
++   int i;
++-  ares_ssize_t count;
+++  ares_ssize_t read_len;
++   unsigned char buf[MAXENDSSZ + 1];
++ #ifdef HAVE_RECVFROM
++   ares_socklen_t fromlen;
++@@ -500,32 +500,41 @@ static void read_udp_packets(ares_channel channel, fd_set *read_fds,
++       /* To reduce event loop overhead, read and process as many
++        * packets as we can. */
++       do {
++-        if (server->udp_socket == ARES_SOCKET_BAD)
++-          count = 0;
++-
++-        else {
++-          if (server->addr.family == AF_INET)
+++        if (server->udp_socket == ARES_SOCKET_BAD) {
+++          read_len = -1;
+++        } else {
+++          if (server->addr.family == AF_INET) {
++             fromlen = sizeof(from.sa4);
++-          else
+++          } else {
++             fromlen = sizeof(from.sa6);
++-          count = socket_recvfrom(channel, server->udp_socket, (void *)buf,
++-                                  sizeof(buf), 0, &from.sa, &fromlen);
+++          }
+++          read_len = socket_recvfrom(channel, server->udp_socket, (void *)buf,
+++                                     sizeof(buf), 0, &from.sa, &fromlen);
++         }
++ 
++-        if (count == -1 && try_again(SOCKERRNO))
+++        if (read_len == 0) {
+++          /* UDP is connectionless, so result code of 0 is a 0-length UDP
+++           * packet, and not an indication the connection is closed like on
+++           * tcp */
++           continue;
++-        else if (count <= 0)
+++        } else if (read_len < 0) {
+++          if (try_again(SOCKERRNO))
+++            continue;
+++
++           handle_error(channel, i, now);
+++
++ #ifdef HAVE_RECVFROM
++-        else if (!same_address(&from.sa, &server->addr))
+++        } else if (!same_address(&from.sa, &server->addr)) {
++           /* The address the response comes from does not match the address we
++            * sent the request to. Someone may be attempting to perform a cache
++            * poisoning attack. */
++-          break;
+++          continue;
++ #endif
++-        else
++-          process_answer(channel, buf, (int)count, i, 0, now);
++-       } while (count > 0);
+++
+++        } else {
+++          process_answer(channel, buf, (int)read_len, i, 0, now);
+++        }
+++      } while (read_len >= 0);
++     }
++ }
++ 
++-- 
++2.25.1
++
+diff --git a/meta-oe/recipes-support/c-ares/c-ares_1.18.1.bb b/meta-oe/recipes-support/c-ares/c-ares_1.18.1.bb
+index 5614d1310f..beaf886c93 100644
+--- a/meta-oe/recipes-support/c-ares/c-ares_1.18.1.bb
++++ b/meta-oe/recipes-support/c-ares/c-ares_1.18.1.bb
+@@ -7,6 +7,8 @@ LIC_FILES_CHKSUM = "file://LICENSE.md;md5=fb997454c8d62aa6a47f07a8cd48b006"
+ 
+ SRC_URI = "git://github.com/c-ares/c-ares.git;branch=main;protocol=https \
+            file://CVE-2022-4904.patch \
++           file://CVE-2023-31130.patch \
++           file://CVE-2023-32067.patch \
+           "
+ SRCREV = "2aa086f822aad5017a6f2061ef656f237a62d0ed"
+ 
+-- 
+2.25.1
 
 
