@@ -1,192 +1,99 @@
-Return-Path: <Yogita.Urade@windriver.com>
+Return-Path: <jermain.horsman@nedap.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 449B3C7EE25
-	for <webhook@archiver.kernel.org>; Fri,  9 Jun 2023 14:35:39 +0000 (UTC)
-Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
- by mx.groups.io with SMTP id smtpd.web11.14946.1686321328931213686
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7E3C3C7EE29
+	for <webhook@archiver.kernel.org>; Fri,  9 Jun 2023 14:47:59 +0000 (UTC)
+Received: from mail-ej1-f53.google.com (mail-ej1-f53.google.com [209.85.218.53])
+ by mx.groups.io with SMTP id smtpd.web10.15269.1686322073525398321
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 09 Jun 2023 07:35:29 -0700
+ Fri, 09 Jun 2023 07:47:53 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=pps06212021 header.b=FD+xslqM;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=5524cb4a3f=yogita.urade@windriver.com)
-Received: from pps.filterd (m0250811.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 359Cp6CY006502
-	for <openembedded-devel@lists.openembedded.org>; Fri, 9 Jun 2023 14:35:28 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com; h=from : to : cc :
- subject : date : message-id : mime-version : content-transfer-encoding :
- content-type; s=PPS06212021;
- bh=RMjj7b0UAncyiD3wOdO7QKLnGYQtpmMz97Sm/HicwGw=;
- b=FD+xslqMcdxmDWNKdIvCTsiKHTRU2zCN3XuQOMBusJCcNz6I54LMEth26TU4WqaTAq07
- FoecJifsmZ4eoLOCO8F3w6vzFsKAj1Qt/WrNjzl7fwrL9Fg1Ly4Ec4i4t/XZHAIUhZ3H
- FL17BI08zwfGTCcWozCzOkOfridXWhKxmM9pI3O1+iQyelZnhHIYRrODLeDGZ7E66DpA
- tajGhB/fxhHlWGB4P88YD4SHLwKLzdvT3b9nclnGE8ecg6lbQnPZiA2YI63jbhpBqLOb
- bAS0WbbZ/EnOEA9rPbkv6T9GiYuwZULsiDOWFMkDwcZFo611jsQmLUWXmueO3JQ9UoC1 IQ== 
-Received: from ala-exchng01.corp.ad.wrs.com (unknown-82-252.windriver.com [147.11.82.252])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3r2avq2sda-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Fri, 09 Jun 2023 14:35:27 +0000
-Received: from blr-linux-engg1.wrs.com (147.11.136.210) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.23; Fri, 9 Jun 2023 07:35:24 -0700
-From: Yogita Urade <yogita.urade@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-CC: <hari.gpillai@windriver.com>, <yogita.urade@windriver.com>
-Subject: [oe][meta-oe][mickledore][PATCH 1/1] c-ares: fix CVE-2023-32067
-Date: Fri, 9 Jun 2023 14:35:05 +0000
-Message-ID: <20230609143505.3517749-1-yogita.urade@windriver.com>
-X-Mailer: git-send-email 2.40.0
+ dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=DEdFYANP;
+ spf=pass (domain: gmail.com, ip: 209.85.218.53, mailfrom: jhatnedap@gmail.com)
+Received: by mail-ej1-f53.google.com with SMTP id a640c23a62f3a-977d02931d1so280531066b.0
+        for <openembedded-devel@lists.openembedded.org>; Fri, 09 Jun 2023 07:47:53 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20221208; t=1686322072; x=1688914072;
+        h=content-transfer-encoding:mime-version:reply-to:message-id:date
+         :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=8ABmFhsj6+tjkPl+7lHwZs0ZkT9ML92Z74e5OfjIyRE=;
+        b=DEdFYANPXDGrFt2n1MuWMTaxQEq7mHeFFsV/leWRMYhqr5wUXx8kd55nxqI7UJ5Ebf
+         0jB/R2+kvmU3qrUIvQih8FJ5eFd/9GPUZwOMGZoxP6hC1d+k/8vMxU27HcL5Mcmk67/A
+         VO8VPzGvW/+nv8TY302/wm+mXrZs7ZUeixiuMYcgDPfe4D+9UGYXGWpbYz8pvomMOt2e
+         aHJmgPDGZ23DR9TXVtQ/52Kr9rO4Y3AxjrT22LeEJZYMBOeBzTMnHmH0SO5SA5kxu+Du
+         XNZkKogrWAm7DlH1fokgtUsy3Fbk8vusg9Kcm8qKqjyYWsm+SGVc+9+sGn7Dagn5UElB
+         hWyw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20221208; t=1686322072; x=1688914072;
+        h=content-transfer-encoding:mime-version:reply-to:message-id:date
+         :subject:cc:to:from:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=8ABmFhsj6+tjkPl+7lHwZs0ZkT9ML92Z74e5OfjIyRE=;
+        b=gCXwW5nNCmMMTNO9P0hUMQJUzvWOfU5Qt/kalwc9oHrMH5IZDanoMDJQQvI8lI6cJe
+         j11J5gTa1QtUivnqMLLJ0JFNoJpoeMsKLGhjr+cuoeDdOxilP1DpY9hyJk24D+nB0jOS
+         IMWv4e5dRGUoPM09sawlkkXiZWqZ+/Cqdm6s2nA3F75t6V7RrljA0f/FkJ1u5aqjWBqZ
+         fcalsJm2V6Fo7bkoOZ+C/em4RxmfwoPWc/4Ix2LY/EvZXzapCZHsTcAiNMMZlWj7SXXs
+         wvPDghrDv+mrEM8IlKxvYqDNr/m92HOBNId0xhA3eWAI1BieB9LgIW9R/zRYXYEKhzNa
+         Z5Wg==
+X-Gm-Message-State: AC+VfDzYYe8bg3cyvDJt4V8zPOn8mrfBeWUdjVNKxugfvfCCJSttBuuZ
+	+FE9/lLoDQoGVl6HE9S8nuGF9UiZSv8=
+X-Google-Smtp-Source: ACHHUZ7pC5dhqZgSf8F7tIdaVkuP45IuHcVO+ME9sEwBrnPyaq84TkJkh08E3rPcReRzKcdxm4oq7w==
+X-Received: by 2002:a17:906:58d2:b0:96f:f19b:887a with SMTP id e18-20020a17090658d200b0096ff19b887amr1842596ejs.56.1686322071857;
+        Fri, 09 Jun 2023 07:47:51 -0700 (PDT)
+Received: from NVC4181.nedap.local (159-210-178-143.ftth.glasoperator.nl. [143.178.210.159])
+        by smtp.gmail.com with ESMTPSA id gv11-20020a170906f10b00b00947ed087a2csm1377097ejb.154.2023.06.09.07.47.51
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 09 Jun 2023 07:47:51 -0700 (PDT)
+From: jhatnedap@gmail.com
+X-Google-Original-From: jermain.horsman@nedap.com
+To: openembedded-devel@lists.openembedded.org
+Cc: henning@itconsulting-heinold.de,
+	otavio@ossystems.com.br,
+	richard.leitner@skidata.com,
+	Jermain Horsman <jermain.horsman@nedap.com>
+Subject: [meta-java][PATCH 1/3] javasqlite: Revert changes to LIC_FILES_CHKSUM
+Date: Fri,  9 Jun 2023 16:46:44 +0200
+Message-Id: <20230609144646.1977-1-jermain.horsman@nedap.com>
+X-Mailer: git-send-email 2.39.2.windows.1
+Reply-To: jermain.horsman@nedap.com
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [147.11.136.210]
-X-ClientProxiedBy: ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) To
- ala-exchng01.corp.ad.wrs.com (147.11.82.252)
-X-Proofpoint-GUID: mAmWof-EegPmDQTHwpopA3FJZtToli4x
-X-Proofpoint-ORIG-GUID: mAmWof-EegPmDQTHwpopA3FJZtToli4x
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.254,Aquarius:18.0.957,Hydra:6.0.573,FMLib:17.11.176.26
- definitions=2023-06-09_10,2023-06-09_01,2023-05-22_02
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 suspectscore=0 bulkscore=0
- priorityscore=1501 malwarescore=0 impostorscore=0 lowpriorityscore=0
- spamscore=0 adultscore=0 mlxscore=0 mlxlogscore=999 phishscore=0
- clxscore=1015 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2305260000 definitions=main-2306090122
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 09 Jun 2023 14:35:39 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103200
+ <openembedded-devel@lists.openembedded.org>; Fri, 09 Jun 2023 14:47:59 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103201
 
-c-ares is an asynchronous resolver library. c-ares is vulnerable
-to denial of service. If a target resolver sends a query, the attacker
-forges a malformed UDP packet with a length of 0 and returns them to
-the target resolver. The target resolver erroneously interprets the 0
-length as a graceful shutdown of the connection. This issue has been
-patched in version 1.19.1.
+From: Jermain Horsman <jermain.horsman@nedap.com>
 
-References:
-https://nvd.nist.gov/vuln/detail/CVE-2023-32067
-https://github.com/c-ares/c-ares/security/advisories/GHSA-9g78-jv2r-p7vc
+Building javasqlite fails with a QA error due to LIC_FILES_CHKSUM
+being incorrect.
 
-Signed-off-by: Yogita Urade <yogita.urade@windriver.com>
+This checksum was changed when the LICENSE value was updated.
+However, neither the source, nor the license file has changed.
+This commit restores the old value and reverts the changes made in
+commit 6b2a48c3a7b1236a9d915135f685ef7eef5dcd02.
+
+Signed-off-by: Jermain Horsman <jermain.horsman@nedap.com>
 ---
- .../c-ares/c-ares/CVE-2023-32067.patch        | 87 +++++++++++++++++++
- .../recipes-support/c-ares/c-ares_1.19.0.bb   |  4 +-
- 2 files changed, 90 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-support/c-ares/c-ares/CVE-2023-32067.patch
+ recipes-core/javasqlite/javasqlite_20150419.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-support/c-ares/c-ares/CVE-2023-32067.patch b/meta-oe/recipes-support/c-ares/c-ares/CVE-2023-32067.patch
-new file mode 100644
-index 000000000..cd13e7d9e
---- /dev/null
-+++ b/meta-oe/recipes-support/c-ares/c-ares/CVE-2023-32067.patch
-@@ -0,0 +1,87 @@
-+From b9b8413cfdb70a3f99e1573333b23052d57ec1ae Mon Sep 17 00:00:00 2001
-+From: Brad House <brad@brad-house.com>
-+Date: Mon, 22 May 2023 06:51:49 -0400
-+Subject: [PATCH] Merge pull request from GHSA-9g78-jv2r-p7vc
-+
-+CVE: CVE-2023-32067
-+
-+Upstream Status: Backport
-+[https://github.com/c-ares/c-ares/commit/b9b8413cfdb70a3f99e1573333b23052d57ec1ae]
-+
-+Signed-off-by: Yogita Urade <yogita.urade@windriver.com>
-+---
-+ src/lib/ares_process.c | 41 +++++++++++++++++++++++++----------------
-+ 1 file changed, 25 insertions(+), 16 deletions(-)
-+
-+diff --git a/src/lib/ares_process.c b/src/lib/ares_process.c
-+index bf0cde4..6cac0a9 100644
-+--- a/src/lib/ares_process.c
-++++ b/src/lib/ares_process.c
-+@@ -470,7 +470,7 @@ static void read_udp_packets(ares_channel channel, fd_set *read_fds,
-+ {
-+   struct server_state *server;
-+   int i;
-+-  ares_ssize_t count;
-++  ares_ssize_t read_len;
-+   unsigned char buf[MAXENDSSZ + 1];
-+ #ifdef HAVE_RECVFROM
-+   ares_socklen_t fromlen;
-+@@ -513,32 +513,41 @@ static void read_udp_packets(ares_channel channel, fd_set *read_fds,
-+       /* To reduce event loop overhead, read and process as many
-+        * packets as we can. */
-+       do {
-+-        if (server->udp_socket == ARES_SOCKET_BAD)
-+-          count = 0;
-+-
-+-        else {
-+-          if (server->addr.family == AF_INET)
-++        if (server->udp_socket == ARES_SOCKET_BAD) {
-++          read_len = -1;
-++        } else {
-++          if (server->addr.family == AF_INET) {
-+             fromlen = sizeof(from.sa4);
-+-          else
-++          } else {
-+             fromlen = sizeof(from.sa6);
-+-          count = socket_recvfrom(channel, server->udp_socket, (void *)buf,
-+-                                  sizeof(buf), 0, &from.sa, &fromlen);
-++          }
-++          read_len = socket_recvfrom(channel, server->udp_socket, (void *)buf,
-++                                     sizeof(buf), 0, &from.sa, &fromlen);
-+         }
-+
-+-        if (count == -1 && try_again(SOCKERRNO))
-++        if (read_len == 0) {
-++          /* UDP is connectionless, so result code of 0 is a 0-length UDP
-++           * packet, and not an indication the connection is closed like on
-++           * tcp */
-+           continue;
-+-        else if (count <= 0)
-++        } else if (read_len < 0) {
-++          if (try_again(SOCKERRNO))
-++            continue;
-++
-+           handle_error(channel, i, now);
-++
-+ #ifdef HAVE_RECVFROM
-+-        else if (!same_address(&from.sa, &server->addr))
-++        } else if (!same_address(&from.sa, &server->addr)) {
-+           /* The address the response comes from does not match the address we
-+            * sent the request to. Someone may be attempting to perform a cache
-+            * poisoning attack. */
-+-          break;
-++          continue;
-+ #endif
-+-        else
-+-          process_answer(channel, buf, (int)count, i, 0, now);
-+-       } while (count > 0);
-++
-++        } else {
-++          process_answer(channel, buf, (int)read_len, i, 0, now);
-++        }
-++      } while (read_len >= 0);
-+     }
-+ }
-+
-+--
-+2.40.0
-diff --git a/meta-oe/recipes-support/c-ares/c-ares_1.19.0.bb b/meta-oe/recipes-support/c-ares/c-ares_1.19.0.bb
-index bb19ff1bd..997f27a89 100644
---- a/meta-oe/recipes-support/c-ares/c-ares_1.19.0.bb
-+++ b/meta-oe/recipes-support/c-ares/c-ares_1.19.0.bb
-@@ -5,7 +5,9 @@ SECTION = "libs"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE.md;md5=fb997454c8d62aa6a47f07a8cd48b006"
+diff --git a/recipes-core/javasqlite/javasqlite_20150419.bb b/recipes-core/javasqlite/javasqlite_20150419.bb
+index 27dad88..71e9676 100644
+--- a/recipes-core/javasqlite/javasqlite_20150419.bb
++++ b/recipes-core/javasqlite/javasqlite_20150419.bb
+@@ -13,7 +13,7 @@ SRC_URI =  " \
+     file://0001-fix-errors-during-cross-compile.patch \
+     "
  
--SRC_URI = "git://github.com/c-ares/c-ares.git;branch=main;protocol=https"
-+SRC_URI = "git://github.com/c-ares/c-ares.git;branch=main;protocol=https \
-+           file://CVE-2023-32067.patch \
-+	  "
- SRCREV = "fddf01938d3789e06cc1c3774e4cd0c7d2a89976"
+-LIC_FILES_CHKSUM = "file://license.terms;md5=788a765d15de8312110c282b2ef53c83"
++LIC_FILES_CHKSUM = "file://license.terms;md5=3da0e50feac5f64f08184584a8cad58a"
  
- UPSTREAM_CHECK_GITTAGREGEX = "cares-(?P<pver>\d+_(\d_?)+)"
+ inherit autotools-brokensep
+ 
 -- 
-2.40.0
+2.39.2.windows.1
 
 
