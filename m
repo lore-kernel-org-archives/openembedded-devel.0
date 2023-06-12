@@ -2,61 +2,61 @@ Return-Path: <hprajapati@mvista.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A8573C7EE25
-	for <webhook@archiver.kernel.org>; Mon, 12 Jun 2023 11:28:22 +0000 (UTC)
-Received: from mail-pf1-f172.google.com (mail-pf1-f172.google.com [209.85.210.172])
- by mx.groups.io with SMTP id smtpd.web10.56306.1686569294143387720
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C6838C7EE23
+	for <webhook@archiver.kernel.org>; Mon, 12 Jun 2023 11:31:22 +0000 (UTC)
+Received: from mail-pl1-f180.google.com (mail-pl1-f180.google.com [209.85.214.180])
+ by mx.groups.io with SMTP id smtpd.web10.56354.1686569478026655686
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 12 Jun 2023 04:28:14 -0700
+ Mon, 12 Jun 2023 04:31:18 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="signature has expired" header.i=@mvista.com header.s=google header.b=FbJsv8BF;
- spf=pass (domain: mvista.com, ip: 209.85.210.172, mailfrom: hprajapati@mvista.com)
-Received: by mail-pf1-f172.google.com with SMTP id d2e1a72fcca58-65292f79456so3169397b3a.2
-        for <openembedded-devel@lists.openembedded.org>; Mon, 12 Jun 2023 04:28:13 -0700 (PDT)
+ dkim=fail reason="signature has expired" header.i=@mvista.com header.s=google header.b=jPsoczGs;
+ spf=pass (domain: mvista.com, ip: 209.85.214.180, mailfrom: hprajapati@mvista.com)
+Received: by mail-pl1-f180.google.com with SMTP id d9443c01a7336-1b3b56dcf1bso14658015ad.2
+        for <openembedded-devel@lists.openembedded.org>; Mon, 12 Jun 2023 04:31:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=mvista.com; s=google; t=1686569293; x=1689161293;
+        d=mvista.com; s=google; t=1686569477; x=1689161477;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=bva93SO5usjotaZRHxCAKp75GgTS0TjkPoNEHj/ccVI=;
-        b=FbJsv8BFjz8wQLqK8RM4aIHdjD8Md7jpxR//EaFNCZ/VjvwJPW8ibI2VIkvspd7Irp
-         5nJSJXPR8zcU9P7szvWOTIS8yJCVU0zWExq9Lj1e9ZMyeUbJPdwqSEuasXcA013w0gjl
-         gIjUdWec8wv49j8aCVnx+Khs4SeCEcugI4L08=
+        bh=yhwQUKS9CDgXnj2Sunfc++u5SVSOBinHVzvSaWsqAN8=;
+        b=jPsoczGsPX+dwEuIK59Azwi3opdtAfdBuQfS9klbD5iofjCiO9nzh4/esQeHmzbXGh
+         mz0UuzzGgsh3k7HlfnIiYktRVpgYsnmxU+zCuuA1yt7zVJapSwm0qqort3UILd5RfRnY
+         KvFxfnyoW3qTS3gdX0bDDqnw86GVwT2aP8wwc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1686569293; x=1689161293;
+        d=1e100.net; s=20221208; t=1686569477; x=1689161477;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=bva93SO5usjotaZRHxCAKp75GgTS0TjkPoNEHj/ccVI=;
-        b=daz9mlaEe7KqRJJx4NdyaHZrlNyN/4UwtOcFruYOZ8plVoLlLEtRR6h+VyOCfhL0MU
-         zxjJNyRgm/cV0B84kPjT0/XbkZ9m2o28DCv+IY0+RmVEd+E/VJ0Y2i8Nwl56jpP62iZi
-         ALY4NkROKcaHqN7k7gg6pQbOJivVOWyjAvgpklGSQyQudUHtSe3AcPDfs5+ift1eXEPG
-         ssTZ/dudkg0QElZ42P34fIAyVMeFWSp/rW/d1pCEK7ay8bu21AErxIryo5jWSm5IGGhy
-         etGeL/cjr33pioZCIH3I/imhEk6YIEMQZ0PIGNIoA6zOdWUUT/c+/CA+HD39adTljcfy
-         Rw1w==
-X-Gm-Message-State: AC+VfDwYx6btJfU4tQ2ZZQguhf1RuEYps8BsQLRDok7B1rljvP9sRN0D
-	WWCuvKn9iwhPyZUAyVYAHyRXWXzrKS7xvKEwmXs=
-X-Google-Smtp-Source: ACHHUZ5zI/tXQM6XTt69wuW2mIH3XkPfOmPtaT/x1W/9PfNjNOdO+Qb+odyF7IrZ1R3jV73ri7yUDQ==
-X-Received: by 2002:a05:6a21:164d:b0:10a:dd89:420f with SMTP id no13-20020a056a21164d00b0010add89420fmr8280091pzb.6.1686569293278;
-        Mon, 12 Jun 2023 04:28:13 -0700 (PDT)
+        bh=yhwQUKS9CDgXnj2Sunfc++u5SVSOBinHVzvSaWsqAN8=;
+        b=YUZ53MEfru5Uylxj1cy0JvYUT0CACWd/KxZhfoZcWiWDZcTw7oTAzy7heC0F2Aipw9
+         ua5LgkAtqeLAU1aedAsL9+SwaGuOjPx+JTkdxoeYd27Nsb+iqwLuVTyKwBBoLXBQ+yRQ
+         ZbXiowKi+PC5C0uZ5xo2w3kuo0EwYjXj9IFfo/TBBqktnJ5upVFpYd2binycB/wkgP4u
+         Fdj6T2a9rSUOy2Do5rCRNuAiswGVeLBUMtStY3mPwyZScCTrvDdXTMBqXZizJo5h7E0l
+         4mwfOMUMdJ8/FV+JUmFNHw4n2ymv6/0W/Q5g6N/MmrnVmgi5ZUvfa68Db4zGYDywZX5T
+         zKyw==
+X-Gm-Message-State: AC+VfDw0l7F2mq4OEqwow7kSP6qQOmKaUDZ1mlnsGENOaKLbqY4i7O1o
+	A33T2kIgYKLG++D1tk8KA7IhONVOQbfcEFzEC2A=
+X-Google-Smtp-Source: ACHHUZ6n1p/IIQmVDqgjCj+6AZiP3dvGJcln/iBsc9yYgDTRCNiu2yiQWknro9UCCBzBv5wBqAVMWA==
+X-Received: by 2002:a17:902:9692:b0:1b3:e0c8:726 with SMTP id n18-20020a170902969200b001b3e0c80726mr127700plp.10.1686569477291;
+        Mon, 12 Jun 2023 04:31:17 -0700 (PDT)
 Received: from MVIN00024 ([103.250.136.163])
-        by smtp.gmail.com with ESMTPSA id h21-20020a631215000000b0052858b41008sm7275452pgl.87.2023.06.12.04.28.10
+        by smtp.gmail.com with ESMTPSA id p4-20020a1709026b8400b001b034d2e71csm8018140plk.34.2023.06.12.04.31.14
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 12 Jun 2023 04:28:12 -0700 (PDT)
-Received: by MVIN00024 (sSMTP sendmail emulation); Mon, 12 Jun 2023 16:58:07 +0530
+        Mon, 12 Jun 2023 04:31:16 -0700 (PDT)
+Received: by MVIN00024 (sSMTP sendmail emulation); Mon, 12 Jun 2023 17:01:12 +0530
 From: Hitendra Prajapati <hprajapati@mvista.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Hitendra Prajapati <hprajapati@mvista.com>
-Subject: [meta-networking][mickledore][PATCH] wireshark: CVE-2023-2952 XRA dissector infinite loop
-Date: Mon, 12 Jun 2023 16:58:06 +0530
-Message-Id: <20230612112806.10324-1-hprajapati@mvista.com>
+Subject: [meta-networking][kirkstone][PATCH] wireshark: CVE-2023-2952 XRA dissector infinite loop
+Date: Mon, 12 Jun 2023 17:01:10 +0530
+Message-Id: <20230612113110.10593-1-hprajapati@mvista.com>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 12 Jun 2023 11:28:22 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103213
+ <openembedded-devel@lists.openembedded.org>; Mon, 12 Jun 2023 11:31:22 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103214
 
 Upstream-Status: Backport from https://gitlab.com/wireshark/wireshark/-/commit/e18d0e369729b0fff5f76f41cbae67e97c2e52e5
 
@@ -172,7 +172,7 @@ index 000000000..41b02bb3f
 +2.25.1
 +
 diff --git a/meta-networking/recipes-support/wireshark/wireshark_3.4.12.bb b/meta-networking/recipes-support/wireshark/wireshark_3.4.12.bb
-index 693a16793..7d49c3c27 100644
+index 1a4aedc13..c48da9561 100644
 --- a/meta-networking/recipes-support/wireshark/wireshark_3.4.12.bb
 +++ b/meta-networking/recipes-support/wireshark/wireshark_3.4.12.bb
 @@ -16,6 +16,7 @@ SRC_URI += " \
