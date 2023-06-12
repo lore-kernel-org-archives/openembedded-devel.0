@@ -2,184 +2,136 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9168AC7EE2E
-	for <webhook@archiver.kernel.org>; Mon, 12 Jun 2023 18:01:04 +0000 (UTC)
-Received: from mail-oo1-f50.google.com (mail-oo1-f50.google.com [209.85.161.50])
- by mx.groups.io with SMTP id smtpd.web10.67260.1686592857747190986
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E7A9BC7EE2F
+	for <webhook@archiver.kernel.org>; Mon, 12 Jun 2023 18:43:14 +0000 (UTC)
+Received: from mail-il1-f174.google.com (mail-il1-f174.google.com [209.85.166.174])
+ by mx.groups.io with SMTP id smtpd.web11.68072.1686595392414976874
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 12 Jun 2023 11:00:57 -0700
+ Mon, 12 Jun 2023 11:43:12 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20221208 header.b=rtOyZc4P;
- spf=pass (domain: gmail.com, ip: 209.85.161.50, mailfrom: raj.khem@gmail.com)
-Received: by mail-oo1-f50.google.com with SMTP id 006d021491bc7-541f4ee6f89so2636621eaf.2
-        for <openembedded-devel@lists.openembedded.org>; Mon, 12 Jun 2023 11:00:57 -0700 (PDT)
+ dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=Go2SKNfw;
+ spf=pass (domain: gmail.com, ip: 209.85.166.174, mailfrom: raj.khem@gmail.com)
+Received: by mail-il1-f174.google.com with SMTP id e9e14a558f8ab-33e53672aa6so30004735ab.1
+        for <openembedded-devel@lists.openembedded.org>; Mon, 12 Jun 2023 11:43:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1686592857; x=1689184857;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=9o5HVNNJxXE8agISha4as/Ky5GSySkDAWnKTlFuSu20=;
-        b=rtOyZc4Pqcxyr4lgmcmw1boHMgJgfJGtiQu2THaLt19tHAxDd0Nk9qKZqAYdCQ98DM
-         au4P6qrH03ca8dGvTgRrvk2Imlu+Nb1Q7vAgIkeoYaKhbqtxEaG9ggVKNA2hpYsW4Pk7
-         arTiYulwinqGMe+isCBxlVzPF5AH2XlxMQ/HJibdcKCkQ4ilIcsMhyJ3+Idfhb2gzWFa
-         fNxjOUtGUe1+rfrN+F5j9ziDah38nnbB+rbvub6YYIxGFwVyLSLbv6oEIPLJpaoq1Xrq
-         nfezXMVIwXKaHotKBcgkzEygTf/yqGg4Jm3UAb1jjCwdXNyj8eDQAcfuZ2HcMvK0S1Nr
-         M7Rw==
+        d=gmail.com; s=20221208; t=1686595391; x=1689187391;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=v6tiYvMviAByBYL86uP3hk7llAkHQH4i03nTUT+wyi0=;
+        b=Go2SKNfwE30evimXB9zdr1mYOxXnTtT7hvL3BAwxnlMBmoVBm5Bj5kUcU9ERd8rJMN
+         VEzcybn8rkZDbAUQI0pIyF00J9PCApIxYs6eL7m0bYAq2qpT+Lp8ip1OM0NkpmfokaQA
+         vBFYdNJ3r93GqxGahL3gu/hD4SYJVc6XU6/FgZk1gzE7xAukd0hJBILZky249IO4ZgGq
+         PxV5ddkD7NKdJoNThAQHwx1G44HWDdmsZXV3Z6ova2R/VaU633o3VG6+nAmtcXhY3WMD
+         p7oEVwJ1LTUkNIkxXdZ2QpL9S8EgU8ORoIG/oWRLDr2sK4lRp8qT20ice4K2l8wDqD56
+         5P1g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1686592857; x=1689184857;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=9o5HVNNJxXE8agISha4as/Ky5GSySkDAWnKTlFuSu20=;
-        b=VvVgpbE6olkDHFQHkfdyAemJckTDh2SnONH+kSJ/8Qo7gZ6i4hA5AhmzTruQjwwCqD
-         rtM6RpQ8uP00bi3lx7dOHLlUqjYIG9jR0hJqIP4vvaYTE1aUe6Sakz7akdufl669SpZy
-         xBnhrFys3Yos0Les7KObauBAcJA41Ypmg3Qg2ojKSF2Y1Pt5T2s24Ui5VrIn/ZKzu8jK
-         PbXtbfcs6cjGYvkjjKIfWJuOGmvaiSQeLMyPChu4Bx7+658UMm6HzM/QPo/DT65S6FUo
-         yxKBdFGrW+Ez4SM5AQLuWrTphO57ACoPm4aiLFSprkUA9Q06YldSly94RrxWQv/D2uhn
-         ItfQ==
-X-Gm-Message-State: AC+VfDxyp+6uHhOPx634ArXvPLvEVKqetTWl2sS0V1CUaBNbt9mbnRTn
-	dzeQPQFtXM19KN+jqKsSfISukva9yiVqGa3m5Asch1EW
-X-Google-Smtp-Source: ACHHUZ4xL8qBwoT2qdNP1GXk8mj05m1aqWRbk89vYLzYrGfCuWZpiGIgDOQSm/t2Sd+JcwwYNlK+fdSCvwH7lDxJjNE=
-X-Received: by 2002:a4a:d892:0:b0:558:b224:ce9f with SMTP id
- b18-20020a4ad892000000b00558b224ce9fmr5307344oov.7.1686592856506; Mon, 12 Jun
- 2023 11:00:56 -0700 (PDT)
-MIME-Version: 1.0
-References: <20230611160530.392975-1-mhei@heimpold.de> <8273188.T7Z3S40VBb@kerker>
- <CAMKF1sqeRP-+YES+WoB784U1389_=f2MmuHzS13-d2rP2GK-Bw@mail.gmail.com> <3896518.ElGaqSPkdT@kerker>
-In-Reply-To: <3896518.ElGaqSPkdT@kerker>
+        d=1e100.net; s=20221208; t=1686595391; x=1689187391;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=v6tiYvMviAByBYL86uP3hk7llAkHQH4i03nTUT+wyi0=;
+        b=dve8hL0x+ULf8LR+ypvu6lwslu/xOezAxBOvB0T7dZcr5ZU1g60CQFwYZNEnSB96EW
+         QYmUiv9a1YMKz375DB215kpGK+n7C7/SwPE5rxvc5fr/Or+iKOErmGvi6sbllf0AY3wy
+         LWV5Wju3xh/T7clsyC4TNtaEE3NYlrZ40inW5ewy7hxb+uqACVr2+mHQh9nVtkA3bDM+
+         3nhXUSszfxaHu3T9DXWWhpS7jD/F50KCxUYOCAb/pKmA0N4He6ICx8ZHj5ktnrUsi/CS
+         KdftUsWN+we93kmKFdiKE8jg99lDMTqqF++XSrauM+4BAz5kMWCgu8KvVoCCPNRVn6GK
+         /stg==
+X-Gm-Message-State: AC+VfDwVtM4C1lrGdSN12S7C6wSvQ0mQe/Jeaw5qrqr1s1EA2Oor0Pw/
+	85p209TlSGFIZ9XBvLrVx39y8eaWlRY=
+X-Google-Smtp-Source: ACHHUZ6vinHAXG5Ugtvldg3MXze765gZbPEYaA1ZvzeCzz4TAKSrrc6SMULEBTpH/KrCW678amxaGg==
+X-Received: by 2002:a05:6e02:152:b0:331:53ee:921d with SMTP id j18-20020a056e02015200b0033153ee921dmr8827906ilr.25.1686595391333;
+        Mon, 12 Jun 2023 11:43:11 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9181:d380::eb87])
+        by smtp.gmail.com with ESMTPSA id s18-20020a63ff52000000b0054fa8539681sm520190pgk.34.2023.06.12.11.43.10
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 12 Jun 2023 11:43:10 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 12 Jun 2023 11:00:30 -0700
-Message-ID: <CAMKF1spknDkEMS1782o=G7UK6wmjAhruvNO_EU3Gnnd9ARC9gA@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH] php: drop explicite ARM_INSTRUCTION_SET
-To: Michael Heimpold <mhei@heimpold.de>
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-multimedia][PATCH 1/3] schroedinger: Fix building tests
+Date: Mon, 12 Jun 2023 11:43:07 -0700
+Message-ID: <20230612184309.1556169-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.41.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 12 Jun 2023 18:01:04 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103216
+ <openembedded-devel@lists.openembedded.org>; Mon, 12 Jun 2023 18:43:14 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103217
 
-On Mon, Jun 12, 2023 at 10:57=E2=80=AFAM Michael Heimpold <mhei@heimpold.de=
-> wrote:
->
-> Am Montag, 12. Juni 2023, 01:44:29 CEST schrieb Khem Raj:
-> > On Sun, Jun 11, 2023 at 1:53 PM Michael Heimpold <mhei@heimpold.de> wro=
-te:
-> > > Am Sonntag, 11. Juni 2023, 18:32:31 CEST schrieb Khem Raj:
-> > > > On Sun, Jun 11, 2023 at 9:05=E2=80=AFAM Michael Heimpold <mhei@heim=
-pold.de>
-> > >
-> > > wrote:
-> > > > > If my git skills don't trick me, forcing ARM mode for PHP
-> > > > > dates back to year 2015 with commit e836f8f93.
-> > > > >
-> > > > > I wondered whether the compile problem still persists and just
-> > > > > tested that it compiles fine for qemuarm nowaydays.
-> > > > >
-> > > > > I also tested the binaries on a physical device, a
-> > > > > NXP iMX6ULL based one, and did not notice any problems
-> > > > > so far.
-> > > > >
-> > > > > Signed-off-by: Michael Heimpold <mhei@heimpold.de>
-> > > > > ---
-> > > > >
-> > > > >  meta-oe/recipes-devtools/php/php_8.2.6.bb | 9 ---------
-> > > > >  1 file changed, 9 deletions(-)
-> > > > >
-> > > > > diff --git a/meta-oe/recipes-devtools/php/php_8.2.6.bb
-> > > > > b/meta-oe/recipes-devtools/php/php_8.2.6.bb index dad955452..404f=
-f393b
-> > > > > 100644
-> > > > > --- a/meta-oe/recipes-devtools/php/php_8.2.6.bb
-> > > > > +++ b/meta-oe/recipes-devtools/php/php_8.2.6.bb
-> > > > > @@ -284,12 +284,3 @@ do_install:append:class-native() {
-> > > > >
-> > > > >      create_wrapper ${D}${bindir}/php \
-> > > > >
-> > > > >          PHP_PEAR_SYSCONF_DIR=3D${sysconfdir}/
-> > > > >
-> > > > >  }
-> > > > >
-> > > > > -
-> > > > > -# Fails to build with thumb-1 (qemuarm)
-> > > > > -# | {standard input}: Assembler messages:
-> > > > > -# | {standard input}:3719: Error: selected processor does not su=
-pport
-> > > > > Thumb mode `smull r0,r2,r9,r3' -# | {standard input}:3720: Error:
-> > > > > unshifted register required -- `sub r2,r2,r0,asr#31' -# | {standa=
-rd
-> > > > > input}:3796: Error: selected processor does not support Thumb mod=
-e
-> > >
-> > > `smull
-> > >
-> > > > > r0,r2,r3,r3' -# | {standard input}:3797: Error: unshifted registe=
-r
-> > > > > required -- `sub r2,r2,r0,asr#31' -# | make: ***
-> > > > > [ext/standard/math.lo]
-> > > > > Error 1
-> > > > > -ARM_INSTRUCTION_SET =3D "arm"
-> > > >
-> > > > Martin explained it well, it was seen with thumb1 ISA some armv6 an=
-d
-> > > > all armv7+ uses thumb2 ISA along with standard ARM ISA
-> > > > Testing this will need armv4/armv5 perhaps you can limit this to
-> > > > armv5/arm4 arches
-> > > >
-> > > > ARM_INSTRUCTION_SET:armv5 =3D "arm"
-> > > > ARM_INSTRUCTION_SET:armv4 =3D "arm"
-> > > >
-> > > > If you can test it on armv5 and ensure that it works there too now =
-a
-> > > > days then we can remove it completely
-> > >
-> > > Thank you all for your feedback.
-> > >
-> > > Here is what I've done so far.
-> > >
-> > > I've done a compile test against machine qemuarmv5 which succeeded
-> > > without errors.
-> > >
-> > > I have a custom board at hand, which uses a NXP iMX28 CPU, the build
-> > > configuration tells me the same TUNE_FEATURES as qemuarmv5:
-> > > MACHINE              =3D "evachargese"
-> > > TUNE_FEATURES        =3D "arm armv5 thumb dsp"
-> > > I used the kirkstone branch to have a faster roundtrip since the boar=
-d
-> > > currently runs a kirkstone-based system. The PHP binaries run without
-> > > obvious problems in a quick test (simple webpages on the device).
-> >
-> > That=E2=80=99s for testing it out. Can you check compiler longs for php=
- and see if
-> > it passed -mthumb to it ?
->
-> Just to ensure, that I got you right: you mean something like
-> grep thumb tmp/work/armv5e-poky-linux-gnueabi/php/8.1.16-r0/temp/log.*
-> which shows an empty result for qemuarmv5/evachargese and for qemuarm
-> there are a lot of matches like:
-> .../log.do_compile.2431535:/bin/bash /.../cortexa15t2hf-neon-poky-linux-
-> gnueabi/php/8.1.16-r0/build/libtool --silent --preserve-dup-deps --tag CC=
- --
-> mode=3Dcompile arm-poky-linux-gnueabi-gcc -mthumb -mfpu=3Dneon -mfloat-ab=
-i=3Dhard -
-> mcpu=3Dcortex-a15 ...
+lld finds out this error where _orc_code_orc_deinterleave2_s16 is needed
+but is not linked into a testcase wavelet_max_gain
 
-yes thanks.
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ ...p-orc.c-for-missing-_orc_code_orc_de.patch | 43 +++++++++++++++++++
+ .../schroedinger/schroedinger_1.0.11.bb       |  1 +
+ 2 files changed, 44 insertions(+)
+ create mode 100644 meta-multimedia/recipes-multimedia/schroedinger/schroedinger/0001-testsuite-Add-tmp-orc.c-for-missing-_orc_code_orc_de.patch
 
->
-> > > I have no armv4 board at hand nor a found a configuration file for
-> > > qemuarmv4.
-> > > So I put some lines manually together using strongarm - which should =
-be
-> > > armv4,
-> > > right? It resulted in
-> > > TUNE_FEATURES        =3D "arm strongarm"
-> > > The build completed without error - no runtime testing with qemu done=
- yet.
->
->
->
->
+diff --git a/meta-multimedia/recipes-multimedia/schroedinger/schroedinger/0001-testsuite-Add-tmp-orc.c-for-missing-_orc_code_orc_de.patch b/meta-multimedia/recipes-multimedia/schroedinger/schroedinger/0001-testsuite-Add-tmp-orc.c-for-missing-_orc_code_orc_de.patch
+new file mode 100644
+index 0000000000..498630c638
+--- /dev/null
++++ b/meta-multimedia/recipes-multimedia/schroedinger/schroedinger/0001-testsuite-Add-tmp-orc.c-for-missing-_orc_code_orc_de.patch
+@@ -0,0 +1,43 @@
++From 7c998657c1787fcad8f0a502063adff71d78a140 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Mon, 12 Jun 2023 09:37:10 -0700
++Subject: [PATCH] testsuite: Add tmp-orc.c for missing
++ _orc_code_orc_deinterleave2_s16
++
++Fixes
++| aarch64-yoe-linux-ld.lld: error: undefined symbol: _orc_code_orc_deinterleave2_s16
++| >>> referenced by schroorc.h:1312 (../schroedinger/schroorc.h:1312)
++| >>>               wavelet_max_gain.o:(iwt_ref)
++| >>> referenced by schroorc.h:1312 (../schroedinger/schroorc.h:1312)
++| >>>               wavelet_max_gain.o:(iwt_ref)
++|
++| aarch64-yoe-linux-ld.lld: error: undefined symbol: _orc_code_orc_interleave2_s16
++| >>> referenced by wavelet_max_gain.c:281 (/usr/src/debug/schroedinger/1.0.11-r0/testsuite/wavelet_max_gain.c:281)
++| >>>               wavelet_max_gain.o:(iiwt_ref)
++| >>> referenced by wavelet_max_gain.c:281 (/usr/src/debug/schroedinger/1.0.11-r0/testsuite/wavelet_max_gain.c:281)
++| >>>               wavelet_max_gain.o:(iiwt_ref)
++| clang-16: error: linker command failed with exit code 1 (use -v to see invocation)
++| make[3]: *** [Makefile:1147: wavelet_max_gain] Error 1
++
++Upstream-Status: Pending
++
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ testsuite/Makefile.am | 1 +
++ 1 file changed, 1 insertion(+)
++
++diff --git a/testsuite/Makefile.am b/testsuite/Makefile.am
++index 6ee1130..762ecf2 100644
++--- a/testsuite/Makefile.am
+++++ b/testsuite/Makefile.am
++@@ -100,6 +100,7 @@ wavelet_2d_SOURCES = wavelet_2d.c
++ nodist_wavelet_2d_SOURCES = $(top_srcdir)/schroedinger/tmp-orc.c
++ 
++ wavelet_max_gain_SOURCES = wavelet_max_gain.c
+++nodist_wavelet_max_gain_SOURCES = $(top_srcdir)/schroedinger/tmp-orc.c
++ 
++ wavelet_noise_2d_SOURCES = wavelet_noise_2d.c
++ 
++-- 
++2.41.0
++
+diff --git a/meta-multimedia/recipes-multimedia/schroedinger/schroedinger_1.0.11.bb b/meta-multimedia/recipes-multimedia/schroedinger/schroedinger_1.0.11.bb
+index c9d98a2da1..c78e008007 100644
+--- a/meta-multimedia/recipes-multimedia/schroedinger/schroedinger_1.0.11.bb
++++ b/meta-multimedia/recipes-multimedia/schroedinger/schroedinger_1.0.11.bb
+@@ -11,6 +11,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d91a46405fc074b88c963cc4f2a0aae9 \
+ DEPENDS = "orc-native orc"
+ 
+ SRC_URI = "https://download.videolan.org/contrib/${BPN}/${BP}.tar.gz \
++           file://0001-testsuite-Add-tmp-orc.c-for-missing-_orc_code_orc_de.patch \
+            file://configure.ac.patch"
+ 
+ SRC_URI[md5sum] = "da6af08e564ca1157348fb8d92efc891"
+-- 
+2.41.0
+
 
