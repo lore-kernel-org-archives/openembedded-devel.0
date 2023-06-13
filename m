@@ -1,99 +1,97 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EE4FDC7EE2E
-	for <webhook@archiver.kernel.org>; Mon, 12 Jun 2023 18:43:14 +0000 (UTC)
-Received: from mail-pf1-f173.google.com (mail-pf1-f173.google.com [209.85.210.173])
- by mx.groups.io with SMTP id smtpd.web10.68435.1686595393408681345
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 32F27C88CB4
+	for <webhook@archiver.kernel.org>; Tue, 13 Jun 2023 01:40:43 +0000 (UTC)
+Received: from esa6.hc1455-7.c3s2.iphmx.com (esa6.hc1455-7.c3s2.iphmx.com [68.232.139.139])
+ by mx.groups.io with SMTP id smtpd.web10.3847.1686620442071140221
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 12 Jun 2023 11:43:13 -0700
+ Mon, 12 Jun 2023 18:40:42 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=D0KbKbBI;
- spf=pass (domain: gmail.com, ip: 209.85.210.173, mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f173.google.com with SMTP id d2e1a72fcca58-652a6bf4e6aso3718973b3a.2
-        for <openembedded-devel@lists.openembedded.org>; Mon, 12 Jun 2023 11:43:13 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1686595392; x=1689187392;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=uhx57ADwnJaqgfXd+bJ6h01g5jZ3VYfGVR8zkqetung=;
-        b=D0KbKbBIvGmlB2rg6ePm9dD54R/XRVgKSndeSmKjBLwQ1VzgQ4umSqcVZgIeBDyt+A
-         Qz01sE3fs6eSc0Vx3pvQm8JZUGqaljjYrryyYtbCeXtoOqDDUxS/bqtECcEGwbNEAkpB
-         O3bfj85f4hkOO7ocFzP0XZs0gyZXdYxEImeKsJ9mahtEVmZ0PXcDkpwiRFEybEZ3Vtja
-         f3C/rn2eRNAi+PvYrVCMRheUGXAylqvylHujSNhUNPQ8Z7Qqn9BWjmR7eFd/ULDto8q2
-         8S/xOafh3Z2sM0O+0JdDG8NBz0QdPlrALmaLOXFUcu5PQoEDFvdVyAhqeBHBQ/iAY5OQ
-         Hasg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1686595392; x=1689187392;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=uhx57ADwnJaqgfXd+bJ6h01g5jZ3VYfGVR8zkqetung=;
-        b=SZ5IM7XSeeYgFc9WVDICkbqpFWm3g6tlZoAS2/w0c9ILfI7ThqrptUOagRw+UtghLK
-         P9wE32xVibD+oMctrQqickko3PJqFmgybilLBsOJtmfyM5d9tJXRNZTPlapU5BarerPS
-         xMOK+sMM9OLxZGMt3SRNLQ3JonL8ArxJvQpV58i1wCAwbu3PEur/kOh8ewon+uwA5TZT
-         wckKpDrflQQ+wU/wMBPHe75Z9Y3eXci7PN2C6zD157VSYHmA73uRVnNI74+A+zsUXZc2
-         UV2PIdVN4bPbaRsbIZyQJz86PC2+ioeVo4LqY/8AAGAsgHJLj7rTBVYYhhGH7F+96Fp6
-         8VkA==
-X-Gm-Message-State: AC+VfDwGh81BpZIHHNd/LEj20N+nBQIGaDhH7H8+RGDiWWumN17yA0ru
-	gvG7Z5l/wXHSye5dkVqAcjeJLC7DgQE=
-X-Google-Smtp-Source: ACHHUZ62IPVZn0nY9QdfHZBtsCKlkY38HTMo9WYLq+mOUhgS/CflPm8/dI/fwdjg3g0R5nRFmSx1Mg==
-X-Received: by 2002:a05:6a20:2445:b0:117:6b17:106f with SMTP id t5-20020a056a20244500b001176b17106fmr11355368pzc.11.1686595392478;
-        Mon, 12 Jun 2023 11:43:12 -0700 (PDT)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9181:d380::eb87])
-        by smtp.gmail.com with ESMTPSA id s18-20020a63ff52000000b0054fa8539681sm520190pgk.34.2023.06.12.11.43.12
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 12 Jun 2023 11:43:12 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
+ dkim=missing; spf=pass (domain: fujitsu.com, ip: 68.232.139.139, mailfrom: wangmy@fujitsu.com)
+X-IronPort-AV: E=McAfee;i="6600,9927,10739"; a="121527720"
+X-IronPort-AV: E=Sophos;i="6.00,238,1681138800"; 
+   d="scan'208";a="121527720"
+Received: from unknown (HELO yto-r2.gw.nic.fujitsu.com) ([218.44.52.218])
+  by esa6.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 13 Jun 2023 10:40:40 +0900
+Received: from yto-m4.gw.nic.fujitsu.com (yto-nat-yto-m4.gw.nic.fujitsu.com [192.168.83.67])
+	by yto-r2.gw.nic.fujitsu.com (Postfix) with ESMTP id 5E79EC6811
+	for <openembedded-devel@lists.openembedded.org>; Tue, 13 Jun 2023 10:40:37 +0900 (JST)
+Received: from kws-ab3.gw.nic.fujitsu.com (kws-ab3.gw.nic.fujitsu.com [192.51.206.21])
+	by yto-m4.gw.nic.fujitsu.com (Postfix) with ESMTP id A3AE8D3F21
+	for <openembedded-devel@lists.openembedded.org>; Tue, 13 Jun 2023 10:40:36 +0900 (JST)
+Received: from localhost.localdomain (unknown [10.167.225.33])
+	by kws-ab3.gw.nic.fujitsu.com (Postfix) with ESMTP id 3393A20074724;
+	Tue, 13 Jun 2023 10:40:36 +0900 (JST)
+From: wangmy@fujitsu.com
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-xfce][PATCH 3/3] xfce4-sensors-plugin: Use bfd linker instead of lld
-Date: Mon, 12 Jun 2023 11:43:09 -0700
-Message-ID: <20230612184309.1556169-3-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.41.0
-In-Reply-To: <20230612184309.1556169-1-raj.khem@gmail.com>
-References: <20230612184309.1556169-1-raj.khem@gmail.com>
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Cc: Wang Mingyu <wangmy@fujitsu.com>
+Subject: [oe] [meta-gnome] [PATCH] gjs: upgrade 1.76.0 -> 1.76.1
+Date: Tue, 13 Jun 2023 09:39:51 +0800
+Message-Id: <1686620422-29962-2-git-send-email-wangmy@fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
+In-Reply-To: <1686620422-29962-1-git-send-email-wangmy@fujitsu.com>
+References: <1686620422-29962-1-git-send-email-wangmy@fujitsu.com>
+X-TM-AS-GCONF: 00
+X-TM-AS-Product-Ver: IMSS-9.1.0.1417-9.0.0.1002-27688.004
+X-TM-AS-User-Approved-Sender: Yes
+X-TMASE-Version: IMSS-9.1.0.1417-9.0.1002-27688.004
+X-TMASE-Result: 10--0.514000-10.000000
+X-TMASE-MatchedRID: KEcVumlYY7qjz0nOeth/yUIIxwDaU5mrG24YVeuZGmNOuRi6fMc6u1FY
+	wb6XIMLmXNMMjpO6mhWykidumpmDjWtBsvqOY75sHWRJEfGP5nlJ86oXuPDXceRkD0FFm1pJeAT
+	bS37YnZiwcLLU2//UpYDcKe8nL3eUWkIi5GvRHEo/QdUh6LEl0ME5XPQnBzGXq8KsbROd9VQs8m
+	1alsmNjVg82fo850ElCLsa6HeVb+e1/l9dBewCrgk3qL3jdFBN1QQ6Jx/fflbozDhGeQC9EkaF+
+	/5G+w6gkpCFGclEFCd5OPD8XJFfpB8TzIzimOwPC24oEZ6SpSmcfuxsiY4QFOb8OZ36wMyICN4O
+	h+7dXKy9hIM1uMztukCztGZQEtEcoeb2JUDokni+Jg3ImSZyThIpX7ZI/M3Wu2mGffOegCWA1Pc
+	c+u7WAux9n1XpDqsJmC9SiJioatWbjnu8jwgbwH9jicWwFYB0PpCuffGH9zI=
+X-TMASE-SNAP-Result: 1.821001.0001-0-1-22:0,33:0,34:0-0
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 12 Jun 2023 18:43:14 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103219
+ <openembedded-devel@lists.openembedded.org>; Tue, 13 Jun 2023 01:40:43 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103221
 
-lld linking fails
-| aarch64-yoe-linux-ld.lld: error: undefined symbol: gtk_sensorstacho_new(GtkOrientation, unsigned int, SensorsTachoStyle)
-| >>> referenced by actions.cc:143 (/usr/src/debug/xfce4-sensors-plugin/1.4.4-r0/src/../../xfce4-sensors-plugin-1.4.4/src/actions.cc:143)
-| >>>               xfce4_sensors-actions.o:(refresh_tacho_view(xfce4::Ptr<t_sensors_dialog> const&))
-|
-| aarch64-yoe-linux-ld.lld: error: undefined symbol: gtk_sensorstacho_set_color(_GtkSensorsTacho*, char const*)
-| >>> referenced by actions.cc:146 (/usr/src/debug/xfce4-sensors-plugin/1.4.4-r0/src/../../xfce4-sensors-plugin-1.4.4/src/actions.cc:146)
-| >>>               xfce4_sensors-actions.o:(refresh_tacho_view(xfce4::Ptr<t_sensors_dialog> const&))
-| >>> referenced by callbacks.cc:197 (/usr/src/debug/xfce4-sensors-plugin/1.4.4-r0/src/../../xfce4-sensors-plugin-1.4.4/src/callbacks.cc:197)
-| >>>               xfce4_sensors-callbacks.o:(list_cell_color_edited_(_GtkCellRendererText*, char const*, char const*, xfce4::Ptr<t_sensors_dialog> const&))
-|
+From: Wang Mingyu <wangmy@fujitsu.com>
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Changelog:
+===========
+- Various fixes ported from the development branch.
+
+- Closed bugs and merge requests:
+  * gnome-shell crashes on exit in js::gc::Cell::storeBuffer
+  * Memory leak with GError
+  * GVariant return values leaked
+  * GBytes's are leaked when passed as-is to a function
+  * Transformated GValues are leaking temporary instances
+  * GHash value infos are leaked
+  * "flat" arrays of GObject's are leaked
+  * Gjs console leaks invalid option errors
+  * gjs can't print null
+
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../recipes-panel-plugins/sensors/xfce4-sensors-plugin_1.4.4.bb | 2 ++
- 1 file changed, 2 insertions(+)
+ meta-gnome/recipes-gnome/gjs/{gjs_1.76.0.bb => gjs_1.76.1.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-gnome/recipes-gnome/gjs/{gjs_1.76.0.bb => gjs_1.76.1.bb} (92%)
 
-diff --git a/meta-xfce/recipes-panel-plugins/sensors/xfce4-sensors-plugin_1.4.4.bb b/meta-xfce/recipes-panel-plugins/sensors/xfce4-sensors-plugin_1.4.4.bb
-index 69996d2a3f..eb1165c578 100644
---- a/meta-xfce/recipes-panel-plugins/sensors/xfce4-sensors-plugin_1.4.4.bb
-+++ b/meta-xfce/recipes-panel-plugins/sensors/xfce4-sensors-plugin_1.4.4.bb
-@@ -13,6 +13,8 @@ EXTRA_OECONF = " \
-     --disable-xnvctrl \
- "
+diff --git a/meta-gnome/recipes-gnome/gjs/gjs_1.76.0.bb b/meta-gnome/recipes-gnome/gjs/gjs_1.76.1.bb
+similarity index 92%
+rename from meta-gnome/recipes-gnome/gjs/gjs_1.76.0.bb
+rename to meta-gnome/recipes-gnome/gjs/gjs_1.76.1.bb
+index e6d377cb3..93711bc3b 100644
+--- a/meta-gnome/recipes-gnome/gjs/gjs_1.76.0.bb
++++ b/meta-gnome/recipes-gnome/gjs/gjs_1.76.1.bb
+@@ -8,7 +8,7 @@ DEPENDS = "mozjs-102 cairo"
  
-+LDFLAGS:append = "${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-lld', ' -fuse-ld=bfd', '', d)}"
-+
- do_configure:prepend() {
-     sed -i 's:LIBSENSORS_CFLAGS=.*:LIBSENSORS_CFLAGS=-I${STAGING_INCDIR}:g' ${S}/configure.ac
- }
+ inherit gnomebase gsettings gobject-introspection vala gettext features_check upstream-version-is-even pkgconfig
+ 
+-SRC_URI[archive.sha256sum] = "a63f156964b136053eab51ea013114e7d7c193b7518d28c040b6b02c3c933a6d"
++SRC_URI[archive.sha256sum] = "7b867c18a9b30333ebbcff9ad3f20299f0372ffad439d49b87d40a1d1798b78d"
+ SRC_URI += " \
+     file://0001-Support-cross-builds-a-bit-better.patch \
+     file://0002-meson.build-Do-not-add-dir-installed-tests-when-inst.patch \
 -- 
-2.41.0
+2.34.1
 
 
