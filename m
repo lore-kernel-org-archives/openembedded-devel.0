@@ -1,349 +1,808 @@
-Return-Path: <Qi.Chen@windriver.com>
+Return-Path: <hprajapati@mvista.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D3454C88CB4
-	for <webhook@archiver.kernel.org>; Tue, 13 Jun 2023 09:50:05 +0000 (UTC)
-Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.web11.9414.1686649805319006743
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 666A1C77B7A
+	for <webhook@archiver.kernel.org>; Tue, 13 Jun 2023 11:14:26 +0000 (UTC)
+Received: from mail-pf1-f181.google.com (mail-pf1-f181.google.com [209.85.210.181])
+ by mx.groups.io with SMTP id smtpd.web11.10526.1686654860608412333
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 13 Jun 2023 02:50:05 -0700
+ Tue, 13 Jun 2023 04:14:20 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=pps06212021 header.b=Pqit16Lf;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=5528db4042=qi.chen@windriver.com)
-Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 35D99PaV008762
-	for <openembedded-devel@lists.openembedded.org>; Tue, 13 Jun 2023 02:50:05 -0700
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com; h=from : to : cc :
- subject : date : message-id : references : in-reply-to : content-type :
- mime-version; s=PPS06212021;
- bh=lr7ZqvQ8erUgB4A8sr7Iog9ZKHUBMZNOXb3q0JRONq0=;
- b=Pqit16LfBvrGMJ5rgckimb0ImF5P4HG3zaobR/cc1jQtqrkp2hOrCdpRZYwo8bjL6YBI
- ZiswM3/yPsFUWmJTnodTJJ3T4BE96FY+J1VqjJ5ylDzL4HU7FaT0uYaEPAXYZgljL1W7
- SgWsfTttt9tG/OcoWiZs4u9qlENG0tNkqpq+mAPzlvVQaVcM6I8q2dvGLHxqFv7VnXaa
- f1c9QPemr4CT18DbE90Y7SZftRKbWZIt6A+IAtUwlgY7QuM6TgxMh/hmrEpJ5SQAKlBL
- UyqfI3Edfg3SGT8Go1NaRBZWy8OYjx9L6Ars0pPJRkxWiAu77NX/q38XQyo1RMLIeC3/ xw== 
-Received: from pps.reinject (localhost [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3r4rphj93k-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Tue, 13 Jun 2023 02:50:04 -0700
-Received: from m0250809.ppops.net (m0250809.ppops.net [127.0.0.1])
-	by pps.reinject (8.17.1.5/8.17.1.5) with ESMTP id 35D9eqrt003620
-	for <openembedded-devel@lists.openembedded.org>; Tue, 13 Jun 2023 02:50:04 -0700
-Received: from nam10-mw2-obe.outbound.protection.outlook.com (mail-mw2nam10lp2102.outbound.protection.outlook.com [104.47.55.102])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3r4rphj93j-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Tue, 13 Jun 2023 02:50:04 -0700
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=J9vTwIvn7MS5S2sQuuq6SYfAeanFW6yIqgnZ5aTyvClH4haYLWzjz9xzLhaso/+Oc+goTIeWUyi4m7JMxhPDEFQOOjQtm8e7boZ5M9Jdcpe6AdjXZ+ag2bmiYiyDzfAQO98jSD2WDW8XZzFA6s2PgxeXiq2jbIUXawQFTS1f0V5gPiy2dieGO4I1fpxxSt15mpPiBwX1+ZMcr+n8m5DjbLkT6RWT7E2n/7kJ8hh4e01BaGhFEeIFMyyQ/+yLEfiFln0dKCg3y0NJeYILSnufNT2uzh7SN4P1+H3ttGow5P4mkMpZPu9VpNyuNUi5uIedn6L2zwiggpzuBOgmnQ8URQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=lr7ZqvQ8erUgB4A8sr7Iog9ZKHUBMZNOXb3q0JRONq0=;
- b=EuSee4qql1bN3qny5SwNO8vfeqCaIn6u8Msmn1Cg5yn/gobCDWJsYzew0EEtQA3aEJugaNS8ECxRbkkNfem4lcPsR2uBMXZSCOS7h0Qx59Klumipe48Njboh+DKHstfxCw795QtmMaiXFjMHAf7PiYLVBNeSF+dYdK9l2y0iykQqRg3ghDBCoLEhwY/ur9b/T7uCtkAt0lQM6bLEXxn0NpOXyz2cT6NFSS73U1O6sAW26kyozMQx+LlAB81SOb1SUxgzXQ7TaRAgOcBMJA2NPpazk4xL3emjVOII8SJCnV3D9RmKacMDjmNWsOBQmndrWHx8vlaaIU0YbRcs08kJgA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=windriver.com; dmarc=pass action=none
- header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
-Received: from CO6PR11MB5602.namprd11.prod.outlook.com (2603:10b6:303:13a::5)
- by CH0PR11MB8233.namprd11.prod.outlook.com (2603:10b6:610:183::19) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6455.42; Tue, 13 Jun
- 2023 09:50:02 +0000
-Received: from CO6PR11MB5602.namprd11.prod.outlook.com
- ([fe80::b504:c7a0:9ce8:6f17]) by CO6PR11MB5602.namprd11.prod.outlook.com
- ([fe80::b504:c7a0:9ce8:6f17%3]) with mapi id 15.20.6455.037; Tue, 13 Jun 2023
- 09:50:02 +0000
-From: "Chen, Qi" <Qi.Chen@windriver.com>
-To: "Chen, Qi" <Qi.Chen@windriver.com>, Martin Jansa <martin.jansa@gmail.com>
-CC: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: RE: [oe][meta-oe][master][mickledore][langdale][kirkstone][PATCH]
- redis: use the files path correctly
-Thread-Topic: [oe][meta-oe][master][mickledore][langdale][kirkstone][PATCH]
- redis: use the files path correctly
-Thread-Index: AQHZncfsKUvXOlsNVE+aKVQPruEwAq+Idw0AgAABOWCAAATuMA==
-Date: Tue, 13 Jun 2023 09:50:02 +0000
-Message-ID: 
- <CO6PR11MB5602FA538ABCD9E69AF9C036ED55A@CO6PR11MB5602.namprd11.prod.outlook.com>
-References: <20230613072303.3170646-1-Qi.Chen@windriver.com>
- <CA+chaQewhB=kkrqhCQC2qBmZZ5h7fubOGxaYCWcu+K8i+TYa+A@mail.gmail.com>
- <17682EA35436AE23.16517@lists.openembedded.org>
-In-Reply-To: <17682EA35436AE23.16517@lists.openembedded.org>
-Accept-Language: en-US, zh-CN
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: CO6PR11MB5602:EE_|CH0PR11MB8233:EE_
-x-ms-office365-filtering-correlation-id: 9689601a-d39d-4673-4d3f-08db6bf38ed2
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: 
- mBHit1qWabwMWJofnPzBD7kjVqafZvy7FM8jIUVsUGyn6PzFFD3lVDyrcnJRdcTGRnymwhY7lCdm5uMLZRryKMDlD+Nh4BM3ytdoE4TFZQNlBIBp8xojwfndOpaW1Erj1JeRIJrvxGK0QlPdsDcM3SCOjzWR0SjZ5/kLzFARgu6tWou05EK+wx87ekMYJABovfYT2fPOIFqODdsjJWlkub/c1jHycfHbTWSg5tSrPFjW5pxAZDMDwX5gILZTQBSQBFhA7LwFN+nHNZrovKcBaIPiXoUYcBaXCfk5By7cpoKNUwlG3nK7VaAGMCAzQbJ5+aY6a35BjfFx8OjOIDjiU8cbYcuNc7kuWLXvdoHQLfIq1qznfX+krsOVAd50hJKDjjL6Bdadf7ElI6lz58GQgpsalQ175wjqfwQV03BZ3lxm0CitMg/TRxefgDoSc/n9ZwsLYpIaDaEQXcLBjjlYKInPQLzRzDL3t6ihZ0RN7eBI0TQr53t1awEE4w+/ETdiRDW2qxdGxlVIXpGh3H+knr3OlmuRRXe8W7/B2lQYv/Bsmue1toXy6uhUTHXCHdVXMd80IDg0FcZqi7UX2aEi/81Fgx5GrMKUzTb8LD5/438=
-x-forefront-antispam-report: 
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CO6PR11MB5602.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230028)(4636009)(376002)(346002)(39850400004)(396003)(366004)(136003)(451199021)(55016003)(122000001)(110136005)(478600001)(66446008)(66476007)(38100700002)(8936002)(8676002)(66556008)(316002)(41300700001)(4326008)(76116006)(66946007)(64756008)(186003)(71200400001)(966005)(6506007)(7696005)(26005)(9686003)(53546011)(83380400001)(33656002)(86362001)(5660300002)(52536014)(2906002)(38070700005)(166002);DIR:OUT;SFP:1101;
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: 
- =?utf-8?B?NU01NExReDVHWnl3aUZud2d2azRRK0QvcnZZT09udThUbFcvZEJwazlNYXZI?=
- =?utf-8?B?ekgralg3OTI3endpbFlPZFdJazUyMm5QeklzQ0xrcDQ1UEQ5UDRadE8ya1Mz?=
- =?utf-8?B?dXMvUkYrQ3h1ajFVblVIM1ZlN1JGSjV3WG1ORTMzRGNNRkV0VXZ1SzFQZUNz?=
- =?utf-8?B?WjZmSzc1M1hLUlVhd2dPUlp3U3JpeHprKzlvSnV1U0FCUmxvbTBLOWY3aWtM?=
- =?utf-8?B?bVZnUFc3VEp6NzJ0UERqYTBTb0NXMkswcHc2clJrU3YxTFNrTzRsR3hRM05J?=
- =?utf-8?B?NjlIK1lGNEZ0Z1NaZ04rcUNGSUFOM0VmSlkwTDNZazI3L0ZTQzFPZzEyd2R2?=
- =?utf-8?B?YkxLajZEV2hyNzBwenpFbzEveXZ3V1ZxN1ExNW9hTmZJTjlQZlM5bEJseUQz?=
- =?utf-8?B?VWJkbUMrM1VDZExOdU15d3ZSZENUekZxSHp4UFIyS0thT01YdjVKNlZNNkZx?=
- =?utf-8?B?R3NDRXRUTEdHRlJuMVEvajJOYkRjS3FPUVV3VzBSa3pJZGl0SDBZOThaZmsz?=
- =?utf-8?B?cnl4Ym1VVnJWRzFyTXZvREM3MjQrMFRVVHJFUlhMZmp5c2x4Q2pwR09Zc3NV?=
- =?utf-8?B?TU1jenJWT1NDOHdMc052dTdEL21EUTFFMXg2VnBlTG1BYnh1WFBXQjRpMGlq?=
- =?utf-8?B?bUVuWE12eFVXZWkvRUxkNk5RSHdwZEVrSkJ4cGFZOWorZ01RU1VobEpQWlFx?=
- =?utf-8?B?TGNUMk44SkpFYXU4cFBaNDZ4aDkyS1lzQzdLU0dNMUFZTDhHcHFQemhmUTZ5?=
- =?utf-8?B?MHNiN2ovN25GWmJrOVE1UHRsMW9DRjV6cS9vSlltcituazdaUW9zdzAwZENR?=
- =?utf-8?B?eGNkVG0raUxuWE95SHpCYVNscGZ0SUloelMyNndPRTNsY3JGMXNHQzFvT204?=
- =?utf-8?B?S2pQSWtqNjdycnA3NkxhWHoyTDl0QXhoalppbGFQZm45dlVDZDNpNkxvRHgr?=
- =?utf-8?B?YnUwakRtUlNYSGNrVmdGT296K3JvRXZ0MFRLUlJXSU9sRWNRcFN5b1pObDZp?=
- =?utf-8?B?b3pxQXIrQkwyK2V0MDZ5SUZOcGQzZjViVm5GSGNoMldJclkzWDZnTDVkSWFC?=
- =?utf-8?B?eXBqZEtKZ2NFWFBCbDJBMWdvZFVpN2RoRUVnUGxrZkNFNFVlZVREdjN1ai9o?=
- =?utf-8?B?VXR0aFRtQnNtUzltb1Y4cmFpbkptYnBaNWw0dHVQeFpVYlFoSEVCQVpSUUk3?=
- =?utf-8?B?Wkh0K0RaY3lkNG1Ga3o2Y01aRU5CSG8rSitaUDVUL3BtYlJReGRlczFhQXB3?=
- =?utf-8?B?ZEVKaDMvaGd0a0puNHE4T1FiNjl0T0hqY2RIZE1qNHltbHFybjN1NFBGanoy?=
- =?utf-8?B?Q05GaUwrY2FHYlhZdzd2SUlIVDhmc3B0aWEzL09CLzdQVFVvR09IeWJaMlJ5?=
- =?utf-8?B?ZTdqRkVuMWxyMWVBeitzYk5VVGJSZG1hUk85b3hQemlmekVlRk9ieEF5YUEr?=
- =?utf-8?B?aUVnT0VqaG5xM3EyRUp2ZFdkVE9KTy82akQxT3Uwd2c2RklBcmFMWmpNdDg3?=
- =?utf-8?B?SGgzTkJNYUJRUFRwNEp4L05VbWpaSWZJczdNa0tVTDY1RHgvZUFVUEZPbmZE?=
- =?utf-8?B?aHMxV0hzay9ndXNvV3BQcmJBN2lNVzV3U2g5MGlOMkNNd0pNZXp2TXFxbzh0?=
- =?utf-8?B?VkdmKzJOOFRIdG13b2NNWkV5bzhNdDV6NHZ5MnJaZUxPOFZaMnJLaVpwK0RK?=
- =?utf-8?B?S014dHJEUVNqMjJkYlpiUHdoTlA3VlVLdjNxOTVDYTExL08reWRpeDgvRzBH?=
- =?utf-8?B?aEhtWHB3UDNxRFRVNmdKV3ZNRE45ZkxCajdUR1ZBZ09MdWp3Tnk0Z3ZKSjNU?=
- =?utf-8?B?Yk5wM1kxaFExRTZ1czVUcHMyWE1GSysvd1lyaHMvWmIxaW53TnJUbmFLOU80?=
- =?utf-8?B?UldzSU5MaFdQd09oakVTK0dCUGd4eWVlVzFJOEo1clE5K0s5WVJjRGc0alBh?=
- =?utf-8?B?NEs2UUxrVDQyNnJ3U3lUbFJqZ3NCY0tPUGNyWlBJbG1UYThNUnpWNGYxdkF6?=
- =?utf-8?B?am9iSHk4MjRwaFdFRDRKYVJnZ3BxNTMyODh5Y0NBNFJLbnlPNjZsMXBseUZQ?=
- =?utf-8?B?aVVpaHBHMUNIY2ZoYzFDcnduWGh5OEZPaEQycUd1dTQyUHduTml2eFJ5dFlL?=
- =?utf-8?Q?Nga7m0fG1G3ECWuD8/eE3B4mu?=
-Content-Type: multipart/alternative;
-	boundary="_000_CO6PR11MB5602FA538ABCD9E69AF9C036ED55ACO6PR11MB5602namp_"
+ dkim=fail reason="signature has expired" header.i=@mvista.com header.s=google header.b=W+cAO2jy;
+ spf=pass (domain: mvista.com, ip: 209.85.210.181, mailfrom: hprajapati@mvista.com)
+Received: by mail-pf1-f181.google.com with SMTP id d2e1a72fcca58-650c8cb68aeso4467162b3a.3
+        for <openembedded-devel@lists.openembedded.org>; Tue, 13 Jun 2023 04:14:20 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=mvista.com; s=google; t=1686654859; x=1689246859;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=BtuAxHHCOOYD6kyGDkN+zEAcoP0RYcAP1CzjJZb9Ums=;
+        b=W+cAO2jyJ3yzcKzzar07zCU2B4VGjL4RkdR7IKF+NNwzX5Lg5DHT8dhtcyD8pQcN6N
+         YRxAoc1HPtdhdcs1RJH5LFKMc6ezaQDJr22hQsvAS2FLNcHdyIWh9d8awIMLQdpOA198
+         KcKYGGMB8KT0+xnkgdr+PoWl3/qbyUnzDQVWY=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20221208; t=1686654859; x=1689246859;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=BtuAxHHCOOYD6kyGDkN+zEAcoP0RYcAP1CzjJZb9Ums=;
+        b=WpQ09WcirjteB0k6fy849gwIbdgVEC+r6OrXssm+So9IyKlg0tQMdt5vPQaB7AF9Ct
+         0lLCbnJ8Vd4c/3ASIkaBBxa7J3PUo+eqBPqFDsqx/uq76elNuXbvZWIhBAVnDVB4Z+kW
+         F3KNIBTMtKHQGAGDdZgJnShZVzP5lR+8SKdMuJYiq16qx4aldwXQZLsk0/ALqa6MkF57
+         g1KQQimWApbEuxxB/B4yEqzc2nPwCFkm8PFbYYwlLC7rhiutFJtTFel887/8DSEyv1gm
+         TY2NjFv5ZWhy+qs3ZdHh6LGvcP1YjM/p+miLK4vlJ1qSTqCO7AdBNPw94hKXDTBSDhqT
+         ncYA==
+X-Gm-Message-State: AC+VfDyDPMiUqThre3dilXmYPZis8gsJSJJnTNT/XUxqEEYPHAV3dsTK
+	LO/RcbrTJmJMOHSxP5kpUyofMmmt0VCGvgOCtOI=
+X-Google-Smtp-Source: ACHHUZ52dTgLMTUl/dW/YrWDtS9X6UI+THoMW5w6wE3+TfILIApzja4DOJxCugVGH0B8fl26JxxcSQ==
+X-Received: by 2002:a17:90a:aa08:b0:255:b1d9:a206 with SMTP id k8-20020a17090aaa0800b00255b1d9a206mr9145591pjq.22.1686654859067;
+        Tue, 13 Jun 2023 04:14:19 -0700 (PDT)
+Received: from MVIN00024 ([150.129.170.224])
+        by smtp.gmail.com with ESMTPSA id 6-20020a17090a018600b00247735d1463sm9611426pjc.39.2023.06.13.04.14.16
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 13 Jun 2023 04:14:18 -0700 (PDT)
+Received: by MVIN00024 (sSMTP sendmail emulation); Tue, 13 Jun 2023 16:44:11 +0530
+From: Hitendra Prajapati <hprajapati@mvista.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Hitendra Prajapati <hprajapati@mvista.com>
+Subject: [meta-oe][dunfell][PATCH] c-ares: CVE-2023-31147 Insufficient randomness in generation of DNS query IDs
+Date: Tue, 13 Jun 2023 16:44:10 +0530
+Message-Id: <20230613111410.28487-1-hprajapati@mvista.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: CO6PR11MB5602.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 9689601a-d39d-4673-4d3f-08db6bf38ed2
-X-MS-Exchange-CrossTenant-originalarrivaltime: 13 Jun 2023 09:50:02.0138
- (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: fJXBHVHEknHKg+xoCWOYooBvD/c5u3MrN9uff0J49MrG/YVV7T7u6NO2TUgy9mbtUiiP+z6KBZtY8uYDPMGHTw==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH0PR11MB8233
-X-Proofpoint-ORIG-GUID: goShhmskwfhHVg0tJTlvSrf7Ojg41Vd7
-X-Proofpoint-GUID: 5JBxd0u7wbOSAbvOckX6IqCGIrZK8r9T
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.254,Aquarius:18.0.957,Hydra:6.0.573,FMLib:17.11.176.26
- definitions=2023-06-13_04,2023-06-12_02,2023-05-22_02
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 phishscore=0 mlxlogscore=999
- lowpriorityscore=0 suspectscore=0 priorityscore=1501 impostorscore=0
- bulkscore=0 spamscore=0 mlxscore=0 malwarescore=0 clxscore=1015
- adultscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2305260000 definitions=main-2306130086
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 13 Jun 2023 09:50:05 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103267
+ <openembedded-devel@lists.openembedded.org>; Tue, 13 Jun 2023 11:14:26 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103268
 
---_000_CO6PR11MB5602FA538ABCD9E69AF9C036ED55ACO6PR11MB5602namp_
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Upstream-Status: Backport from https://github.com/c-ares/c-ares/commit/823df3b989e59465d17b0a2eb1239a5fc048b4e5
 
-VjIgc2VudCB3aXRoIGNvbW1pdCBtZXNzYWdlIHVwZGF0ZWQuIFNvcnJ5IGZvciB0aGUgY29uZnVz
-aW9uLg0KDQpSZWdhcmRzLA0KUWkNCg0KRnJvbTogb3BlbmVtYmVkZGVkLWRldmVsQGxpc3RzLm9w
-ZW5lbWJlZGRlZC5vcmcgPG9wZW5lbWJlZGRlZC1kZXZlbEBsaXN0cy5vcGVuZW1iZWRkZWQub3Jn
-PiBPbiBCZWhhbGYgT2YgQ2hlbiBRaSB2aWEgbGlzdHMub3BlbmVtYmVkZGVkLm9yZw0KU2VudDog
-VHVlc2RheSwgSnVuZSAxMywgMjAyMyA1OjQyIFBNDQpUbzogTWFydGluIEphbnNhIDxtYXJ0aW4u
-amFuc2FAZ21haWwuY29tPg0KQ2M6IG9wZW5lbWJlZGRlZC1kZXZlbEBsaXN0cy5vcGVuZW1iZWRk
-ZWQub3JnDQpTdWJqZWN0OiBSZTogW29lXVttZXRhLW9lXVttYXN0ZXJdW21pY2tsZWRvcmVdW2xh
-bmdkYWxlXVtraXJrc3RvbmVdW1BBVENIXSByZWRpczogdXNlIHRoZSBmaWxlcyBwYXRoIGNvcnJl
-Y3RseQ0KDQpIaSBNYXJ0aW4sDQoNClNvcnJ5IEkgZGlkbuKAmXQgcHV0IGVub3VnaCBleHBsYW5h
-dGlvbiBpbiB0aGUgY29tbWl0Lg0KDQpVc2luZyBGSUxFU1BBVEggaW4gdGhpcyB3YXkgcmVtb3Zl
-cyB0aGUgcG9zc2liaWxpdHkgb2Ygb3ZlcnJpZGluZyBzb21lIGZpbGVzIChlLmcuLCB0aGUgcmVk
-aXMgc2VydmljZSBmaWxlKSBmcm9tIG90aGVyIGxheWVycyB2aWEgRklMRVNFWFRSQVBBVEg6cHJl
-cGVuZCwgd2hpY2ggaXMga2luZCBvZiBhIGNvbW1vbiBwcmFjdGljZSBhbmQgaXMgYWN0dWFsbHkg
-d29ya2luZyBmb3IgYmFzaWNhbGx5IGFsbCBvdGhlciByZWNpcGVzLg0KDQpCZWNhdXNlIHdlIGhh
-dmU6DQptZXRhL2NsYXNzZXMtZ2xvYmFsL2Jhc2UuYmJjbGFzczpGSUxFU1BBVEggPSAiJHtAYmFz
-ZV9zZXRfZmlsZXNwYXRoKFsiJHtGSUxFX0RJUk5BTUV9LyR7QlB9IiwgIiR7RklMRV9ESVJOQU1F
-fS8ke0JQTn0iLCAiJHtGSUxFX0RJUk5BTUV9L2ZpbGVzIl0sIGQpfSINCkFuZCBGSUxFU0VYVFJB
-UEFUSCBpcyBoYW5kbGVkIGluIGJhc2Vfc2V0X2ZpbGVzcGF0aC4NCg0KVGhlIGlzc3VlIGlzIG5v
-dCBhYm91dCBtdWx0aWxpYi4gQW5kIHVuZG9pbmcgdGhlIEdOVV9TT1VSQ0UgcGF0Y2ggaXMgbm90
-IG5lY2Vzc2FyeSwgYmVjYXVzZSBpdCBkb2VzIG5vdCBjaGFuZ2UgYW55IG91dHB1dC4NCg0KUmVn
-YXJkcywNClFpDQoNCg0KRnJvbTogTWFydGluIEphbnNhIDxtYXJ0aW4uamFuc2FAZ21haWwuY29t
-PG1haWx0bzptYXJ0aW4uamFuc2FAZ21haWwuY29tPj4NClNlbnQ6IFR1ZXNkYXksIEp1bmUgMTMs
-IDIwMjMgNToyOCBQTQ0KVG86IENoZW4sIFFpIDxRaS5DaGVuQHdpbmRyaXZlci5jb208bWFpbHRv
-OlFpLkNoZW5Ad2luZHJpdmVyLmNvbT4+DQpDYzogb3BlbmVtYmVkZGVkLWRldmVsQGxpc3RzLm9w
-ZW5lbWJlZGRlZC5vcmc8bWFpbHRvOm9wZW5lbWJlZGRlZC1kZXZlbEBsaXN0cy5vcGVuZW1iZWRk
-ZWQub3JnPg0KU3ViamVjdDogUmU6IFtvZV1bbWV0YS1vZV1bbWFzdGVyXVttaWNrbGVkb3JlXVts
-YW5nZGFsZV1ba2lya3N0b25lXVtQQVRDSF0gcmVkaXM6IHVzZSB0aGUgZmlsZXMgcGF0aCBjb3Jy
-ZWN0bHkNCg0KDQoNCk9uIFR1ZSwgSnVuIDEzLCAyMDIzIGF0IDk6MjPigK9BTSBDaGVuIFFpIHZp
-YSBsaXN0cy5vcGVuZW1iZWRkZWQub3JnPGh0dHBzOi8vdXJsZGVmZW5zZS5jb20vdjMvX19odHRw
-Oi9saXN0cy5vcGVuZW1iZWRkZWQub3JnX187ISFBanZlWWR3OEV2USFkQUYyZlcwb0hoMlo1dnNl
-eFVLUWVoQVdRMkdsd3ZmcGdWV0JWNUx6WGY0R1VxRDFmVkhoaG5ULVRGUHF6NDc3YWUxa1c2Rmhq
-eDl6NjNtNmNUdnc5MkUkPiA8UWkuQ2hlbj13aW5kcml2ZXIuY29tQGxpc3RzLm9wZW5lbWJlZGRl
-ZC5vcmc8bWFpbHRvOndpbmRyaXZlci5jb21AbGlzdHMub3BlbmVtYmVkZGVkLm9yZz4+IHdyb3Rl
-Og0KRnJvbTogQ2hlbiBRaSA8UWkuQ2hlbkB3aW5kcml2ZXIuY29tPG1haWx0bzpRaS5DaGVuQHdp
-bmRyaXZlci5jb20+Pg0KDQpSZWNpcGVzIGFyZSBub3QgZXhwZWN0ZWQgdG8gc2V0IEZJTEVTUEFU
-SCBkaXJlY3RseSwgdGhleSBhcmUNCmV4cGVjdGVkIHRvIHVzZSBGSUxFU0VYVFJBUEFUSC4NCg0K
-SSBjYW4gc2VlIHRoZSBzZXRpbmcgb2YgRklMRVNQQVRIIGluIHRoaXMgcmVjaXBlIG9ubHkgd2Fu
-dHMgdG8NCmZpbmQgcmVkaXMtNyBzcGVjaWZpYyBwYXRjaGVzIGFuZCBmaWxlcy4gVGhpcyBjb3Vs
-ZCBiZSBlYXNpbHkNCmFjaGlldmVkIGJ5IHVzaW5nIHJlZGlzLTcuMC4xMS8gZGlyZWN0b3J5IHRv
-IGhvbGQgYWxsIHRob3NlIGZpbGVzLg0KDQpXaGF0J3MgdGhlIGlzc3VlIHdpdGggdGhpcywgeWVz
-IGl0J3MgYSBiaXQgdW5jb21tb24gYnV0IHNpbmNlOg0KaHR0cHM6Ly9naXQub3BlbmVtYmVkZGVk
-Lm9yZy9tZXRhLW9wZW5lbWJlZGRlZC9jb21taXQvP2g9a2lya3N0b25lJmlkPTNkZWNhNDUxNjky
-ZTk5ZDI2OTgxMjk1OWU2YjVlMGI1MTlhODJmMzA8aHR0cHM6Ly91cmxkZWZlbnNlLmNvbS92My9f
-X2h0dHBzOi9naXQub3BlbmVtYmVkZGVkLm9yZy9tZXRhLW9wZW5lbWJlZGRlZC9jb21taXQvP2g9
-a2lya3N0b25lJmlkPTNkZWNhNDUxNjkyZTk5ZDI2OTgxMjk1OWU2YjVlMGI1MTlhODJmMzBfXzsh
-IUFqdmVZZHc4RXZRIWRBRjJmVzBvSGgyWjV2c2V4VUtRZWhBV1EyR2x3dmZwZ1ZXQlY1THpYZjRH
-VXFEMWZWSGhoblQtVEZQcXo0NzdhZTFrVzZGaGp4OXo2M202ZVZTUy1GSSQ+DQoNCndoaWNoIGNv
-cnJlY3RseSB1c2VzIEJQTiBpbiBGSUxFU1BBVEggSSBkb24ndCBzZWUgYW55IHBhdGNoaW5nIGlz
-c3VlcyB3aXRoIHJlZGlzIGluIG15IHdvcmxkIGJ1aWxkcy4gQmVmb3JlIGl0IHdhcyBmYWlsaW5n
-IGluIG11bHRpbGliIGJ1aWxkcyBiZWNhdXNlIGl0IHdhcyBzZWFyY2hpbmcgaW4gbGliMzItcmVk
-aXMtNyBkaXJlY3RvcnkgYW5kIHdoZW4gbm90IGZvdW5kIHRoZXJlIGl0IHVzZWQgR05VX1NPVVJD
-RS5wYXRjaCBmcm9tIHRoZSBvdGhlciBkaXJlY3RvcnkgYW5kIGZhaWxlZCB3aXRoIHBhdGNoLWZ1
-enouDQoNCklmIHlvdSBzdGlsbCB3YW50IHRvIGdvIGFoZWFkIHdpdGggdGhpcyB0aGVuIHlvdSBj
-YW4gYWxzbyB1bmRvIEdOVV9TT1VSQ0UucGF0Y2ggdG8gR05VX1NPVVJDRS03LnBhdGNoIHJlbmFt
-ZSAod2hpY2ggaXMgSU1ITyB0aGUgb25seSBmaWxlIHdoaWNoIGlzbid0IHVubmVjZXNzYXJ5IGR1
-cGxpY2F0ZWQgYmV0d2VlbiByZWRpcy02IGFuZCByZWRpcy03Lg0K
+Signed-off-by: Hitendra Prajapati <hprajapati@mvista.com>
+---
+ .../c-ares/c-ares/CVE-2023-31147.patch        | 717 ++++++++++++++++++
+ .../recipes-support/c-ares/c-ares_1.18.1.bb   |   1 +
+ 2 files changed, 718 insertions(+)
+ create mode 100644 meta-oe/recipes-support/c-ares/c-ares/CVE-2023-31147.patch
 
---_000_CO6PR11MB5602FA538ABCD9E69AF9C036ED55ACO6PR11MB5602namp_
-Content-Type: text/html; charset="utf-8"
-Content-Transfer-Encoding: base64
+diff --git a/meta-oe/recipes-support/c-ares/c-ares/CVE-2023-31147.patch b/meta-oe/recipes-support/c-ares/c-ares/CVE-2023-31147.patch
+new file mode 100644
+index 000000000..ba17721a5
+--- /dev/null
++++ b/meta-oe/recipes-support/c-ares/c-ares/CVE-2023-31147.patch
+@@ -0,0 +1,717 @@
++From 823df3b989e59465d17b0a2eb1239a5fc048b4e5 Mon Sep 17 00:00:00 2001
++From: Brad House <brad@brad-house.com>
++Date: Mon, 22 May 2023 06:51:06 -0400
++Subject: [PATCH] Merge pull request from GHSA-8r8p-23f3-64c2
++
++* segment random number generation into own file
++
++* abstract random code to make it more modular so we can have multiple backends
++
++* rand: add support for arc4random_buf() and also direct CARES_RANDOM_FILE reading
++
++* autotools: fix detection of arc4random_buf
++
++* rework initial rc4 seed for PRNG as last fallback
++
++* rc4: more proper implementation, simplified for clarity
++
++* clarifications
++
++Upstream-Status: Backport [https://github.com/c-ares/c-ares/commit/823df3b989e59465d17b0a2eb1239a5fc048b4e5]
++CVE: CVE-2023-31147
++
++Signed-off-by: Hitendra Prajapati <hprajapati@mvista.com>
++---
++ CMakeLists.txt              |   2 +
++ configure.ac                |   1 +
++ m4/cares-functions.m4       |  85 +++++++++++
++ src/lib/Makefile.inc        |   1 +
++ src/lib/ares_config.h.cmake |   3 +
++ src/lib/ares_destroy.c      |   3 +
++ src/lib/ares_init.c         |  82 ++---------
++ src/lib/ares_private.h      |  19 ++-
++ src/lib/ares_query.c        |  36 +----
++ src/lib/ares_rand.c         | 274 ++++++++++++++++++++++++++++++++++++
++ 10 files changed, 387 insertions(+), 119 deletions(-)
++ create mode 100644 src/lib/ares_rand.c
++
++diff --git a/CMakeLists.txt b/CMakeLists.txt
++index 194485a3..1fb9af55 100644
++--- a/CMakeLists.txt
+++++ b/CMakeLists.txt
++@@ -386,6 +386,8 @@ CHECK_SYMBOL_EXISTS (strncasecmp     "${CMAKE_EXTRA_INCLUDE_FILES}" HAVE_STRNCAS
++ CHECK_SYMBOL_EXISTS (strncmpi        "${CMAKE_EXTRA_INCLUDE_FILES}" HAVE_STRNCMPI)
++ CHECK_SYMBOL_EXISTS (strnicmp        "${CMAKE_EXTRA_INCLUDE_FILES}" HAVE_STRNICMP)
++ CHECK_SYMBOL_EXISTS (writev          "${CMAKE_EXTRA_INCLUDE_FILES}" HAVE_WRITEV)
+++CHECK_SYMBOL_EXISTS (arc4random_buf  "${CMAKE_EXTRA_INCLUDE_FILES}" HAVE_ARC4RANDOM_BUF)
+++
++ 
++ # On Android, the system headers may define __system_property_get(), but excluded
++ # from libc.  We need to perform a link test instead of a header/symbol test.
++diff --git a/configure.ac b/configure.ac
++index 1d0fb5ce..9a763696 100644
++--- a/configure.ac
+++++ b/configure.ac
++@@ -683,6 +683,7 @@ CARES_CHECK_FUNC_STRNCASECMP
++ CARES_CHECK_FUNC_STRNCMPI
++ CARES_CHECK_FUNC_STRNICMP
++ CARES_CHECK_FUNC_WRITEV
+++CARES_CHECK_FUNC_ARC4RANDOM_BUF
++ 
++ 
++ dnl check for AF_INET6
++diff --git a/m4/cares-functions.m4 b/m4/cares-functions.m4
++index 0f3992c7..d4f4f994 100644
++--- a/m4/cares-functions.m4
+++++ b/m4/cares-functions.m4
++@@ -3753,3 +3753,88 @@ AC_DEFUN([CARES_CHECK_FUNC_WRITEV], [
++     ac_cv_func_writev="no"
++   fi
++ ])
+++
+++dnl CARES_CHECK_FUNC_ARC4RANDOM_BUF
+++dnl -------------------------------------------------
+++dnl Verify if arc4random_buf is available, prototyped, and
+++dnl can be compiled. If all of these are true, and
+++dnl usage has not been previously disallowed with
+++dnl shell variable cares_disallow_arc4random_buf, then
+++dnl HAVE_ARC4RANDOM_BUF will be defined.
+++
+++AC_DEFUN([CARES_CHECK_FUNC_ARC4RANDOM_BUF], [
+++  AC_REQUIRE([CARES_INCLUDES_STDLIB])dnl
+++  #
+++  tst_links_arc4random_buf="unknown"
+++  tst_proto_arc4random_buf="unknown"
+++  tst_compi_arc4random_buf="unknown"
+++  tst_allow_arc4random_buf="unknown"
+++  #
+++  AC_MSG_CHECKING([if arc4random_buf can be linked])
+++  AC_LINK_IFELSE([
+++    AC_LANG_FUNC_LINK_TRY([arc4random_buf])
+++  ],[
+++    AC_MSG_RESULT([yes])
+++    tst_links_arc4random_buf="yes"
+++  ],[
+++    AC_MSG_RESULT([no])
+++    tst_links_arc4random_buf="no"
+++  ])
+++  #
+++  if test "$tst_links_arc4random_buf" = "yes"; then
+++    AC_MSG_CHECKING([if arc4random_buf is prototyped])
+++    AC_EGREP_CPP([arc4random_buf],[
+++      $cares_includes_stdlib
+++    ],[
+++      AC_MSG_RESULT([yes])
+++      tst_proto_arc4random_buf="yes"
+++    ],[
+++      AC_MSG_RESULT([no])
+++      tst_proto_arc4random_buf="no"
+++    ])
+++  fi
+++  #
+++  if test "$tst_proto_arc4random_buf" = "yes"; then
+++    AC_MSG_CHECKING([if arc4random_buf is compilable])
+++    AC_COMPILE_IFELSE([
+++      AC_LANG_PROGRAM([[
+++        $cares_includes_stdlib
+++      ]],[[
+++          arc4random_buf(NULL, 0);
+++          return 1;
+++      ]])
+++    ],[
+++      AC_MSG_RESULT([yes])
+++      tst_compi_arc4random_buf="yes"
+++    ],[
+++      AC_MSG_RESULT([no])
+++      tst_compi_arc4random_buf="no"
+++    ])
+++  fi
+++  #
+++  if test "$tst_compi_arc4random_buf" = "yes"; then
+++    AC_MSG_CHECKING([if arc4random_buf usage allowed])
+++    if test "x$cares_disallow_arc4random_buf" != "xyes"; then
+++      AC_MSG_RESULT([yes])
+++      tst_allow_arc4random_buf="yes"
+++    else
+++      AC_MSG_RESULT([no])
+++      tst_allow_arc4random_buf="no"
+++    fi
+++  fi
+++  #
+++  AC_MSG_CHECKING([if arc4random_buf might be used])
+++  if test "$tst_links_arc4random_buf" = "yes" &&
+++     test "$tst_proto_arc4random_buf" = "yes" &&
+++     test "$tst_compi_arc4random_buf" = "yes" &&
+++     test "$tst_allow_arc4random_buf" = "yes"; then
+++    AC_MSG_RESULT([yes])
+++    AC_DEFINE_UNQUOTED(HAVE_ARC4RANDOM_BUF, 1,
+++      [Define to 1 if you have the arc4random_buf function.])
+++    ac_cv_func_arc4random_buf="yes"
+++  else
+++    AC_MSG_RESULT([no])
+++    ac_cv_func_arc4random_buf="no"
+++  fi
+++])
+++
++diff --git a/src/lib/Makefile.inc b/src/lib/Makefile.inc
++index a3b060c2..72a7673c 100644
++--- a/src/lib/Makefile.inc
+++++ b/src/lib/Makefile.inc
++@@ -45,6 +45,7 @@ CSOURCES = ares__addrinfo2hostent.c	\
++   ares_platform.c			\
++   ares_process.c			\
++   ares_query.c				\
+++  ares_rand.c \
++   ares_search.c				\
++   ares_send.c				\
++   ares_strcasecmp.c			\
++diff --git a/src/lib/ares_config.h.cmake b/src/lib/ares_config.h.cmake
++index fddb7853..798820a3 100644
++--- a/src/lib/ares_config.h.cmake
+++++ b/src/lib/ares_config.h.cmake
++@@ -346,6 +346,9 @@
++ /* Define to 1 if you need the memory.h header file even with stdlib.h */
++ #cmakedefine NEED_MEMORY_H
++ 
+++/* Define if have arc4random_buf() */
+++#cmakedefine HAVE_ARC4RANDOM_BUF
+++
++ /* a suitable file/device to read random data from */
++ #cmakedefine CARES_RANDOM_FILE "@CARES_RANDOM_FILE@"
++ 
++diff --git a/src/lib/ares_destroy.c b/src/lib/ares_destroy.c
++index fed2009a..0447af4c 100644
++--- a/src/lib/ares_destroy.c
+++++ b/src/lib/ares_destroy.c
++@@ -90,6 +90,9 @@ void ares_destroy(ares_channel channel)
++   if (channel->resolvconf_path)
++     ares_free(channel->resolvconf_path);
++ 
+++  if (channel->rand_state)
+++    ares__destroy_rand_state(channel->rand_state);
+++
++   ares_free(channel);
++ }
++ 
++diff --git a/src/lib/ares_init.c b/src/lib/ares_init.c
++index de5d86c9..2607ed6f 100644
++--- a/src/lib/ares_init.c
+++++ b/src/lib/ares_init.c
++@@ -72,7 +72,6 @@ static int config_nameserver(struct server_state **servers, int *nservers,
++ static int set_search(ares_channel channel, const char *str);
++ static int set_options(ares_channel channel, const char *str);
++ static const char *try_option(const char *p, const char *q, const char *opt);
++-static int init_id_key(rc4_key* key,int key_data_len);
++ 
++ static int config_sortlist(struct apattern **sortlist, int *nsort,
++                            const char *str);
++@@ -149,6 +148,7 @@ int ares_init_options(ares_channel *channelptr, struct ares_options *options,
++   channel->sock_funcs = NULL;
++   channel->sock_func_cb_data = NULL;
++   channel->resolvconf_path = NULL;
+++  channel->rand_state = NULL;
++ 
++   channel->last_server = 0;
++   channel->last_timeout_processed = (time_t)now.tv_sec;
++@@ -202,9 +202,13 @@ int ares_init_options(ares_channel *channelptr, struct ares_options *options,
++   /* Generate random key */
++ 
++   if (status == ARES_SUCCESS) {
++-    status = init_id_key(&channel->id_key, ARES_ID_KEY_LEN);
+++    channel->rand_state = ares__init_rand_state();
+++    if (channel->rand_state == NULL) {
+++      status = ARES_ENOMEM;
+++    }
+++
++     if (status == ARES_SUCCESS)
++-      channel->next_id = ares__generate_new_id(&channel->id_key);
+++      channel->next_id = ares__generate_new_id(channel->rand_state);
++     else
++       DEBUGF(fprintf(stderr, "Error: init_id_key failed: %s\n",
++                      ares_strerror(status)));
++@@ -224,6 +228,8 @@ done:
++         ares_free(channel->lookups);
++       if(channel->resolvconf_path)
++         ares_free(channel->resolvconf_path);
+++      if (channel->rand_state)
+++        ares__destroy_rand_state(channel->rand_state);
++       ares_free(channel);
++       return status;
++     }
++@@ -2495,76 +2501,6 @@ static int sortlist_alloc(struct apattern **sortlist, int *nsort,
++   return 1;
++ }
++ 
++-/* initialize an rc4 key. If possible a cryptographically secure random key
++-   is generated using a suitable function (for example win32's RtlGenRandom as
++-   described in
++-   http://blogs.msdn.com/michael_howard/archive/2005/01/14/353379.aspx
++-   otherwise the code defaults to cross-platform albeit less secure mechanism
++-   using rand
++-*/
++-static void randomize_key(unsigned char* key,int key_data_len)
++-{
++-  int randomized = 0;
++-  int counter=0;
++-#ifdef WIN32
++-  BOOLEAN res;
++-  if (ares_fpSystemFunction036)
++-    {
++-      res = (*ares_fpSystemFunction036) (key, key_data_len);
++-      if (res)
++-        randomized = 1;
++-    }
++-#else /* !WIN32 */
++-#ifdef CARES_RANDOM_FILE
++-  FILE *f = fopen(CARES_RANDOM_FILE, "rb");
++-  if(f) {
++-    setvbuf(f, NULL, _IONBF, 0);
++-    counter = aresx_uztosi(fread(key, 1, key_data_len, f));
++-    fclose(f);
++-  }
++-#endif
++-#endif /* WIN32 */
++-
++-  if (!randomized) {
++-    for (;counter<key_data_len;counter++)
++-      key[counter]=(unsigned char)(rand() % 256);  /* LCOV_EXCL_LINE */
++-  }
++-}
++-
++-static int init_id_key(rc4_key* key,int key_data_len)
++-{
++-  unsigned char index1;
++-  unsigned char index2;
++-  unsigned char* state;
++-  short counter;
++-  unsigned char *key_data_ptr = 0;
++-
++-  key_data_ptr = ares_malloc(key_data_len);
++-  if (!key_data_ptr)
++-    return ARES_ENOMEM;
++-  memset(key_data_ptr, 0, key_data_len);
++-
++-  state = &key->state[0];
++-  for(counter = 0; counter < 256; counter++)
++-    /* unnecessary AND but it keeps some compilers happier */
++-    state[counter] = (unsigned char)(counter & 0xff);
++-  randomize_key(key->state,key_data_len);
++-  key->x = 0;
++-  key->y = 0;
++-  index1 = 0;
++-  index2 = 0;
++-  for(counter = 0; counter < 256; counter++)
++-  {
++-    index2 = (unsigned char)((key_data_ptr[index1] + state[counter] +
++-                              index2) % 256);
++-    ARES_SWAP_BYTE(&state[counter], &state[index2]);
++-
++-    index1 = (unsigned char)((index1 + 1) % key_data_len);
++-  }
++-  ares_free(key_data_ptr);
++-  return ARES_SUCCESS;
++-}
++-
++ void ares_set_local_ip4(ares_channel channel, unsigned int local_ip)
++ {
++   channel->local_ip4 = local_ip;
++diff --git a/src/lib/ares_private.h b/src/lib/ares_private.h
++index 60d69e08..518b5c33 100644
++--- a/src/lib/ares_private.h
+++++ b/src/lib/ares_private.h
++@@ -101,8 +101,6 @@ W32_FUNC const char *_w32_GetHostsFile (void);
++ 
++ #endif
++ 
++-#define ARES_ID_KEY_LEN 31
++-
++ #include "ares_ipv6.h"
++ #include "ares_llist.h"
++ 
++@@ -262,12 +260,8 @@ struct apattern {
++   unsigned short type;
++ };
++ 
++-typedef struct rc4_key
++-{
++-  unsigned char state[256];
++-  unsigned char x;
++-  unsigned char y;
++-} rc4_key;
+++struct ares_rand_state;
+++typedef struct ares_rand_state ares_rand_state;
++ 
++ struct ares_channeldata {
++   /* Configuration data */
++@@ -302,8 +296,8 @@ struct ares_channeldata {
++ 
++   /* ID to use for next query */
++   unsigned short next_id;
++-  /* key to use when generating new ids */
++-  rc4_key id_key;
+++  /* random state to use when generating new ids */
+++  ares_rand_state *rand_state;
++ 
++   /* Generation number to use for the next TCP socket open/close */
++   int tcp_connection_generation;
++@@ -359,7 +353,10 @@ void ares__close_sockets(ares_channel channel, struct server_state *server);
++ int ares__get_hostent(FILE *fp, int family, struct hostent **host);
++ int ares__read_line(FILE *fp, char **buf, size_t *bufsize);
++ void ares__free_query(struct query *query);
++-unsigned short ares__generate_new_id(rc4_key* key);
+++
+++ares_rand_state *ares__init_rand_state(void);
+++void ares__destroy_rand_state(ares_rand_state *state);
+++unsigned short ares__generate_new_id(ares_rand_state *state);
++ struct timeval ares__tvnow(void);
++ int ares__expand_name_validated(const unsigned char *encoded,
++                                 const unsigned char *abuf,
++diff --git a/src/lib/ares_query.c b/src/lib/ares_query.c
++index 508274db..42323bec 100644
++--- a/src/lib/ares_query.c
+++++ b/src/lib/ares_query.c
++@@ -33,32 +33,6 @@ struct qquery {
++ 
++ static void qcallback(void *arg, int status, int timeouts, unsigned char *abuf, int alen);
++ 
++-static void rc4(rc4_key* key, unsigned char *buffer_ptr, int buffer_len)
++-{
++-  unsigned char x;
++-  unsigned char y;
++-  unsigned char* state;
++-  unsigned char xorIndex;
++-  int counter;
++-
++-  x = key->x;
++-  y = key->y;
++-
++-  state = &key->state[0];
++-  for(counter = 0; counter < buffer_len; counter ++)
++-  {
++-    x = (unsigned char)((x + 1) % 256);
++-    y = (unsigned char)((state[x] + y) % 256);
++-    ARES_SWAP_BYTE(&state[x], &state[y]);
++-
++-    xorIndex = (unsigned char)((state[x] + state[y]) % 256);
++-
++-    buffer_ptr[counter] = (unsigned char)(buffer_ptr[counter]^state[xorIndex]);
++-  }
++-  key->x = x;
++-  key->y = y;
++-}
++-
++ static struct query* find_query_by_id(ares_channel channel, unsigned short id)
++ {
++   unsigned short qid;
++@@ -78,7 +52,6 @@ static struct query* find_query_by_id(ares_channel channel, unsigned short id)
++   return NULL;
++ }
++ 
++-
++ /* a unique query id is generated using an rc4 key. Since the id may already
++    be used by a running query (as infrequent as it may be), a lookup is
++    performed per id generation. In practice this search should happen only
++@@ -89,19 +62,12 @@ static unsigned short generate_unique_id(ares_channel channel)
++   unsigned short id;
++ 
++   do {
++-    id = ares__generate_new_id(&channel->id_key);
+++    id = ares__generate_new_id(channel->rand_state);
++   } while (find_query_by_id(channel, id));
++ 
++   return (unsigned short)id;
++ }
++ 
++-unsigned short ares__generate_new_id(rc4_key* key)
++-{
++-  unsigned short r=0;
++-  rc4(key, (unsigned char *)&r, sizeof(r));
++-  return r;
++-}
++-
++ void ares_query(ares_channel channel, const char *name, int dnsclass,
++                 int type, ares_callback callback, void *arg)
++ {
++diff --git a/src/lib/ares_rand.c b/src/lib/ares_rand.c
++new file mode 100644
++index 00000000..a564bc23
++--- /dev/null
+++++ b/src/lib/ares_rand.c
++@@ -0,0 +1,274 @@
+++/* Copyright 1998 by the Massachusetts Institute of Technology.
+++ * Copyright (C) 2007-2013 by Daniel Stenberg
+++ *
+++ * Permission to use, copy, modify, and distribute this
+++ * software and its documentation for any purpose and without
+++ * fee is hereby granted, provided that the above copyright
+++ * notice appear in all copies and that both that copyright
+++ * notice and this permission notice appear in supporting
+++ * documentation, and that the name of M.I.T. not be used in
+++ * advertising or publicity pertaining to distribution of the
+++ * software without specific, written prior permission.
+++ * M.I.T. makes no representations about the suitability of
+++ * this software for any purpose.  It is provided "as is"
+++ * without express or implied warranty.
+++ */
+++
+++#include "ares_setup.h"
+++#include "ares.h"
+++#include "ares_private.h"
+++#include "ares_nowarn.h"
+++#include <stdlib.h>
+++
+++typedef enum  {
+++  ARES_RAND_OS   = 1,  /* OS-provided such as RtlGenRandom or arc4random */
+++  ARES_RAND_FILE = 2,  /* OS file-backed random number generator */
+++  ARES_RAND_RC4  = 3   /* Internal RC4 based PRNG */
+++} ares_rand_backend;
+++
+++typedef struct ares_rand_rc4
+++{
+++  unsigned char S[256];
+++  size_t        i;
+++  size_t        j;
+++} ares_rand_rc4;
+++
+++struct ares_rand_state
+++{
+++  ares_rand_backend type;
+++  union {
+++    FILE *rand_file;
+++    ares_rand_rc4 rc4;
+++  } state;
+++};
+++
+++
+++/* Define RtlGenRandom = SystemFunction036.  This is in advapi32.dll.  There is
+++ * no need to dynamically load this, other software used widely does not.
+++ * http://blogs.msdn.com/michael_howard/archive/2005/01/14/353379.aspx
+++ * https://docs.microsoft.com/en-us/windows/win32/api/ntsecapi/nf-ntsecapi-rtlgenrandom
+++ */
+++#ifdef _WIN32
+++BOOLEAN WINAPI SystemFunction036(PVOID RandomBuffer, ULONG RandomBufferLength);
+++#  ifndef RtlGenRandom
+++#    define RtlGenRandom(a,b) SystemFunction036(a,b)
+++#  endif
+++#endif
+++
+++
+++#define ARES_RC4_KEY_LEN 32 /* 256 bits */
+++
+++static unsigned int ares_u32_from_ptr(void *addr)
+++{
+++    if (sizeof(void *) == 8) {
+++        return (unsigned int)((((size_t)addr >> 32) & 0xFFFFFFFF) | ((size_t)addr & 0xFFFFFFFF));
+++    }
+++    return (unsigned int)((size_t)addr & 0xFFFFFFFF);
+++}
+++
+++
+++/* initialize an rc4 key as the last possible fallback. */
+++static void ares_rc4_generate_key(ares_rand_rc4 *rc4_state, unsigned char *key, size_t key_len)
+++{
+++  size_t         i;
+++  size_t         len = 0;
+++  unsigned int   data;
+++  struct timeval tv;
+++
+++  if (key_len != ARES_RC4_KEY_LEN)
+++    return;
+++
+++  /* Randomness is hard to come by.  Maybe the system randomizes heap and stack addresses.
+++   * Maybe the current timestamp give us some randomness.
+++   * Use  rc4_state (heap), &i (stack), and ares__tvnow()
+++   */
+++  data = ares_u32_from_ptr(rc4_state);
+++  memcpy(key + len, &data, sizeof(data));
+++  len += sizeof(data);
+++
+++  data = ares_u32_from_ptr(&i);
+++  memcpy(key + len, &data, sizeof(data));
+++  len += sizeof(data);
+++
+++  tv = ares__tvnow();
+++  data = (unsigned int)((tv.tv_sec | tv.tv_usec) & 0xFFFFFFFF);
+++  memcpy(key + len, &data, sizeof(data));
+++  len += sizeof(data);
+++
+++  srand(ares_u32_from_ptr(rc4_state) | ares_u32_from_ptr(&i) | (unsigned int)((tv.tv_sec | tv.tv_usec) & 0xFFFFFFFF));
+++
+++  for (i=len; i<key_len; i++) {
+++    key[i]=(unsigned char)(rand() % 256);  /* LCOV_EXCL_LINE */
+++  }
+++}
+++
+++
+++static void ares_rc4_init(ares_rand_rc4 *rc4_state)
+++{
+++  unsigned char key[ARES_RC4_KEY_LEN];
+++  size_t        i;
+++  size_t        j;
+++
+++  ares_rc4_generate_key(rc4_state, key, sizeof(key));
+++
+++  for (i = 0; i < sizeof(rc4_state->S); i++) {
+++    rc4_state->S[i] = i & 0xFF;
+++  }
+++
+++  for(i = 0, j = 0; i < 256; i++) {
+++    j = (j + rc4_state->S[i] + key[i % sizeof(key)]) % 256;
+++    ARES_SWAP_BYTE(&rc4_state->S[i], &rc4_state->S[j]);
+++  }
+++
+++  rc4_state->i = 0;
+++  rc4_state->j = 0;
+++}
+++
+++/* Just outputs the key schedule, no need to XOR with any data since we have none */
+++static void ares_rc4_prng(ares_rand_rc4 *rc4_state, unsigned char *buf, int len)
+++{
+++  unsigned char *S = rc4_state->S;
+++  size_t         i = rc4_state->i;
+++  size_t         j = rc4_state->j;
+++  size_t         cnt;
+++
+++  for (cnt=0; cnt<len; cnt++) {
+++    i = (i + 1) % 256;
+++    j = (j + S[i]) % 256;
+++
+++    ARES_SWAP_BYTE(&S[i], &S[j]);
+++    buf[cnt] = S[(S[i] + S[j]) % 256];
+++  }
+++
+++  rc4_state->i = i;
+++  rc4_state->j = j;
+++}
+++
+++
+++static int ares__init_rand_engine(ares_rand_state *state)
+++{
+++  memset(state, 0, sizeof(*state));
+++
+++#if defined(HAVE_ARC4RANDOM_BUF) || defined(_WIN32)
+++  state->type = ARES_RAND_OS;
+++  return 1;
+++#elif defined(CARES_RANDOM_FILE)
+++  state->type            = ARES_RAND_FILE;
+++  state->state.rand_file = fopen(CARES_RANDOM_FILE, "rb");
+++  if (state->state.rand_file) {
+++    setvbuf(state->state.rand_file, NULL, _IONBF, 0);
+++    return 1;
+++  }
+++  /* Fall-Thru on failure to RC4 */
+++#endif
+++
+++  state->type = ARES_RAND_RC4;
+++  ares_rc4_init(&state->state.rc4);
+++
+++  /* Currently cannot fail */
+++  return 1;
+++}
+++
+++
+++ares_rand_state *ares__init_rand_state()
+++{
+++  ares_rand_state *state = NULL;
+++
+++  state = ares_malloc(sizeof(*state));
+++  if (!state)
+++    return NULL;
+++
+++  if (!ares__init_rand_engine(state)) {
+++    ares_free(state);
+++    return NULL;
+++  }
+++
+++  return state;
+++}
+++
+++
+++static void ares__clear_rand_state(ares_rand_state *state)
+++{
+++  if (!state)
+++    return;
+++
+++  switch (state->type) {
+++    case ARES_RAND_OS:
+++      break;
+++    case ARES_RAND_FILE:
+++      fclose(state->state.rand_file);
+++      break;
+++    case ARES_RAND_RC4:
+++      break;
+++  }
+++}
+++
+++
+++static void ares__reinit_rand(ares_rand_state *state)
+++{
+++  ares__clear_rand_state(state);
+++  ares__init_rand_engine(state);
+++}
+++
+++
+++void ares__destroy_rand_state(ares_rand_state *state)
+++{
+++  if (!state)
+++    return;
+++
+++  ares__clear_rand_state(state);
+++  ares_free(state);
+++}
+++
+++
+++static void ares__rand_bytes(ares_rand_state *state, unsigned char *buf, size_t len)
+++{
+++
+++  while (1) {
+++    size_t rv;
+++    size_t bytes_read = 0;
+++
+++    switch (state->type) {
+++      case ARES_RAND_OS:
+++#ifdef _WIN32
+++        RtlGenRandom(buf, len);
+++        return;
+++#elif defined(HAVE_ARC4RANDOM_BUF)
+++        arc4random_buf(buf, len);
+++        return;
+++#else
+++        /* Shouldn't be possible to be here */
+++        break;
+++#endif
+++
+++      case ARES_RAND_FILE:
+++        while (1) {
+++          size_t rv = fread(buf + bytes_read, 1, len - bytes_read, state->state.rand_file);
+++          if (rv == 0)
+++            break; /* critical error, will reinit rand state */
+++
+++          bytes_read += rv;
+++          if (bytes_read == len)
+++            return;
+++        }
+++        break;
+++
+++      case ARES_RAND_RC4:
+++        ares_rc4_prng(&state->state.rc4, buf, len);
+++        return;
+++    }
+++
+++    /* If we didn't return before we got here, that means we had a critical rand
+++     * failure and need to reinitialized */
+++    ares__reinit_rand(state);
+++  }
+++}
+++
+++unsigned short ares__generate_new_id(ares_rand_state *state)
+++{
+++  unsigned short r=0;
+++
+++  ares__rand_bytes(state, (unsigned char *)&r, sizeof(r));
+++  return r;
+++}
+++
++-- 
++2.25.1
++
+diff --git a/meta-oe/recipes-support/c-ares/c-ares_1.18.1.bb b/meta-oe/recipes-support/c-ares/c-ares_1.18.1.bb
+index 3d8a851f6..9d47a9eab 100644
+--- a/meta-oe/recipes-support/c-ares/c-ares_1.18.1.bb
++++ b/meta-oe/recipes-support/c-ares/c-ares_1.18.1.bb
+@@ -7,6 +7,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.md;md5=fb997454c8d62aa6a47f07a8cd48b006"
+ 
+ SRC_URI = "git://github.com/c-ares/c-ares.git;branch=main \
+            file://CVE-2023-31130.patch \
++           file://CVE-2023-31147.patch \
+           "
+ 
+ SRCREV = "2aa086f822aad5017a6f2061ef656f237a62d0ed"
+-- 
+2.25.1
 
-PGh0bWwgeG1sbnM6dj0idXJuOnNjaGVtYXMtbWljcm9zb2Z0LWNvbTp2bWwiIHhtbG5zOm89InVy
-bjpzY2hlbWFzLW1pY3Jvc29mdC1jb206b2ZmaWNlOm9mZmljZSIgeG1sbnM6dz0idXJuOnNjaGVt
-YXMtbWljcm9zb2Z0LWNvbTpvZmZpY2U6d29yZCIgeG1sbnM6bT0iaHR0cDovL3NjaGVtYXMubWlj
-cm9zb2Z0LmNvbS9vZmZpY2UvMjAwNC8xMi9vbW1sIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcv
-VFIvUkVDLWh0bWw0MCI+DQo8aGVhZD4NCjxtZXRhIGh0dHAtZXF1aXY9IkNvbnRlbnQtVHlwZSIg
-Y29udGVudD0idGV4dC9odG1sOyBjaGFyc2V0PXV0Zi04Ij4NCjxtZXRhIG5hbWU9IkdlbmVyYXRv
-ciIgY29udGVudD0iTWljcm9zb2Z0IFdvcmQgMTUgKGZpbHRlcmVkIG1lZGl1bSkiPg0KPHN0eWxl
-PjwhLS0NCi8qIEZvbnQgRGVmaW5pdGlvbnMgKi8NCkBmb250LWZhY2UNCgl7Zm9udC1mYW1pbHk6
-IkNhbWJyaWEgTWF0aCI7DQoJcGFub3NlLTE6MiA0IDUgMyA1IDQgNiAzIDIgNDt9DQpAZm9udC1m
-YWNlDQoJe2ZvbnQtZmFtaWx5Ouetiee6vzsNCglwYW5vc2UtMToyIDEgNiAwIDMgMSAxIDEgMSAx
-O30NCkBmb250LWZhY2UNCgl7Zm9udC1mYW1pbHk6Q2FsaWJyaTsNCglwYW5vc2UtMToyIDE1IDUg
-MiAyIDIgNCAzIDIgNDt9DQpAZm9udC1mYWNlDQoJe2ZvbnQtZmFtaWx5OiJcQOetiee6vyI7DQoJ
-cGFub3NlLTE6MiAxIDYgMCAzIDEgMSAxIDEgMTt9DQovKiBTdHlsZSBEZWZpbml0aW9ucyAqLw0K
-cC5Nc29Ob3JtYWwsIGxpLk1zb05vcm1hbCwgZGl2Lk1zb05vcm1hbA0KCXttYXJnaW46MGluOw0K
-CWZvbnQtc2l6ZToxMS4wcHQ7DQoJZm9udC1mYW1pbHk6IkNhbGlicmkiLHNhbnMtc2VyaWY7fQ0K
-YTpsaW5rLCBzcGFuLk1zb0h5cGVybGluaw0KCXttc28tc3R5bGUtcHJpb3JpdHk6OTk7DQoJY29s
-b3I6Ymx1ZTsNCgl0ZXh0LWRlY29yYXRpb246dW5kZXJsaW5lO30NCnNwYW4uRW1haWxTdHlsZTIw
-DQoJe21zby1zdHlsZS10eXBlOnBlcnNvbmFsLXJlcGx5Ow0KCWZvbnQtZmFtaWx5OiJDYWxpYnJp
-IixzYW5zLXNlcmlmOw0KCWNvbG9yOndpbmRvd3RleHQ7fQ0KLk1zb0NocERlZmF1bHQNCgl7bXNv
-LXN0eWxlLXR5cGU6ZXhwb3J0LW9ubHk7DQoJZm9udC1zaXplOjEwLjBwdDt9DQpAcGFnZSBXb3Jk
-U2VjdGlvbjENCgl7c2l6ZTo4LjVpbiAxMS4waW47DQoJbWFyZ2luOjEuMGluIDEuMjVpbiAxLjBp
-biAxLjI1aW47fQ0KZGl2LldvcmRTZWN0aW9uMQ0KCXtwYWdlOldvcmRTZWN0aW9uMTt9DQotLT48
-L3N0eWxlPjwhLS1baWYgZ3RlIG1zbyA5XT48eG1sPg0KPG86c2hhcGVkZWZhdWx0cyB2OmV4dD0i
-ZWRpdCIgc3BpZG1heD0iMTAyNiIgLz4NCjwveG1sPjwhW2VuZGlmXS0tPjwhLS1baWYgZ3RlIG1z
-byA5XT48eG1sPg0KPG86c2hhcGVsYXlvdXQgdjpleHQ9ImVkaXQiPg0KPG86aWRtYXAgdjpleHQ9
-ImVkaXQiIGRhdGE9IjEiIC8+DQo8L286c2hhcGVsYXlvdXQ+PC94bWw+PCFbZW5kaWZdLS0+DQo8
-L2hlYWQ+DQo8Ym9keSBsYW5nPSJFTi1VUyIgbGluaz0iYmx1ZSIgdmxpbms9InB1cnBsZSIgc3R5
-bGU9IndvcmQtd3JhcDpicmVhay13b3JkIj4NCjxkaXYgY2xhc3M9IldvcmRTZWN0aW9uMSI+DQo8
-cCBjbGFzcz0iTXNvTm9ybWFsIj5WMiBzZW50IHdpdGggY29tbWl0IG1lc3NhZ2UgdXBkYXRlZC4g
-U29ycnkgZm9yIHRoZSBjb25mdXNpb24uPG86cD48L286cD48L3A+DQo8cCBjbGFzcz0iTXNvTm9y
-bWFsIj48bzpwPiZuYnNwOzwvbzpwPjwvcD4NCjxwIGNsYXNzPSJNc29Ob3JtYWwiPlJlZ2FyZHMs
-PG86cD48L286cD48L3A+DQo8cCBjbGFzcz0iTXNvTm9ybWFsIj5RaTxvOnA+PC9vOnA+PC9wPg0K
-PHAgY2xhc3M9Ik1zb05vcm1hbCI+PG86cD4mbmJzcDs8L286cD48L3A+DQo8ZGl2Pg0KPGRpdiBz
-dHlsZT0iYm9yZGVyOm5vbmU7Ym9yZGVyLXRvcDpzb2xpZCAjRTFFMUUxIDEuMHB0O3BhZGRpbmc6
-My4wcHQgMGluIDBpbiAwaW4iPg0KPHAgY2xhc3M9Ik1zb05vcm1hbCI+PGI+RnJvbTo8L2I+IG9w
-ZW5lbWJlZGRlZC1kZXZlbEBsaXN0cy5vcGVuZW1iZWRkZWQub3JnICZsdDtvcGVuZW1iZWRkZWQt
-ZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9yZyZndDsNCjxiPk9uIEJlaGFsZiBPZiA8L2I+Q2hl
-biBRaSB2aWEgbGlzdHMub3BlbmVtYmVkZGVkLm9yZzxicj4NCjxiPlNlbnQ6PC9iPiBUdWVzZGF5
-LCBKdW5lIDEzLCAyMDIzIDU6NDIgUE08YnI+DQo8Yj5Ubzo8L2I+IE1hcnRpbiBKYW5zYSAmbHQ7
-bWFydGluLmphbnNhQGdtYWlsLmNvbSZndDs8YnI+DQo8Yj5DYzo8L2I+IG9wZW5lbWJlZGRlZC1k
-ZXZlbEBsaXN0cy5vcGVuZW1iZWRkZWQub3JnPGJyPg0KPGI+U3ViamVjdDo8L2I+IFJlOiBbb2Vd
-W21ldGEtb2VdW21hc3Rlcl1bbWlja2xlZG9yZV1bbGFuZ2RhbGVdW2tpcmtzdG9uZV1bUEFUQ0hd
-IHJlZGlzOiB1c2UgdGhlIGZpbGVzIHBhdGggY29ycmVjdGx5PG86cD48L286cD48L3A+DQo8L2Rp
-dj4NCjwvZGl2Pg0KPHAgY2xhc3M9Ik1zb05vcm1hbCI+PG86cD4mbmJzcDs8L286cD48L3A+DQo8
-cCBjbGFzcz0iTXNvTm9ybWFsIj5IaSBNYXJ0aW4sPG86cD48L286cD48L3A+DQo8cCBjbGFzcz0i
-TXNvTm9ybWFsIj48bzpwPiZuYnNwOzwvbzpwPjwvcD4NCjxwIGNsYXNzPSJNc29Ob3JtYWwiPlNv
-cnJ5IEkgZGlkbuKAmXQgcHV0IGVub3VnaCBleHBsYW5hdGlvbiBpbiB0aGUgY29tbWl0LjxvOnA+
-PC9vOnA+PC9wPg0KPHAgY2xhc3M9Ik1zb05vcm1hbCI+PG86cD4mbmJzcDs8L286cD48L3A+DQo8
-cCBjbGFzcz0iTXNvTm9ybWFsIj5Vc2luZyBGSUxFU1BBVEggaW4gdGhpcyB3YXkgcmVtb3ZlcyB0
-aGUgcG9zc2liaWxpdHkgb2Ygb3ZlcnJpZGluZyBzb21lIGZpbGVzIChlLmcuLCB0aGUgcmVkaXMg
-c2VydmljZSBmaWxlKSBmcm9tIG90aGVyIGxheWVycyB2aWEgRklMRVNFWFRSQVBBVEg6cHJlcGVu
-ZCwgd2hpY2ggaXMga2luZCBvZiBhIGNvbW1vbiBwcmFjdGljZSBhbmQgaXMgYWN0dWFsbHkgd29y
-a2luZyBmb3IgYmFzaWNhbGx5IGFsbCBvdGhlcg0KIHJlY2lwZXMuPG86cD48L286cD48L3A+DQo8
-cCBjbGFzcz0iTXNvTm9ybWFsIj48bzpwPiZuYnNwOzwvbzpwPjwvcD4NCjxwIGNsYXNzPSJNc29O
-b3JtYWwiPkJlY2F1c2Ugd2UgaGF2ZTo8bzpwPjwvbzpwPjwvcD4NCjxwIGNsYXNzPSJNc29Ob3Jt
-YWwiPm1ldGEvY2xhc3Nlcy1nbG9iYWwvYmFzZS5iYmNsYXNzOkZJTEVTUEFUSCA9ICZxdW90OyR7
-QGJhc2Vfc2V0X2ZpbGVzcGF0aChbJnF1b3Q7JHtGSUxFX0RJUk5BTUV9LyR7QlB9JnF1b3Q7LCAm
-cXVvdDske0ZJTEVfRElSTkFNRX0vJHtCUE59JnF1b3Q7LCAmcXVvdDske0ZJTEVfRElSTkFNRX0v
-ZmlsZXMmcXVvdDtdLCBkKX0mcXVvdDs8bzpwPjwvbzpwPjwvcD4NCjxwIGNsYXNzPSJNc29Ob3Jt
-YWwiPkFuZCBGSUxFU0VYVFJBUEFUSCBpcyBoYW5kbGVkIGluIGJhc2Vfc2V0X2ZpbGVzcGF0aC48
-bzpwPjwvbzpwPjwvcD4NCjxwIGNsYXNzPSJNc29Ob3JtYWwiPjxvOnA+Jm5ic3A7PC9vOnA+PC9w
-Pg0KPHAgY2xhc3M9Ik1zb05vcm1hbCI+VGhlIGlzc3VlIGlzIG5vdCBhYm91dCBtdWx0aWxpYi4g
-QW5kIHVuZG9pbmcgdGhlIEdOVV9TT1VSQ0UgcGF0Y2ggaXMgbm90IG5lY2Vzc2FyeSwgYmVjYXVz
-ZSBpdCBkb2VzIG5vdCBjaGFuZ2UgYW55IG91dHB1dC48bzpwPjwvbzpwPjwvcD4NCjxwIGNsYXNz
-PSJNc29Ob3JtYWwiPjxvOnA+Jm5ic3A7PC9vOnA+PC9wPg0KPHAgY2xhc3M9Ik1zb05vcm1hbCI+
-UmVnYXJkcyw8bzpwPjwvbzpwPjwvcD4NCjxwIGNsYXNzPSJNc29Ob3JtYWwiPlFpPG86cD48L286
-cD48L3A+DQo8cCBjbGFzcz0iTXNvTm9ybWFsIj48bzpwPiZuYnNwOzwvbzpwPjwvcD4NCjxwIGNs
-YXNzPSJNc29Ob3JtYWwiPjxvOnA+Jm5ic3A7PC9vOnA+PC9wPg0KPGRpdiBzdHlsZT0iYm9yZGVy
-Om5vbmU7Ym9yZGVyLXRvcDpzb2xpZCAjRTFFMUUxIDEuMHB0O3BhZGRpbmc6My4wcHQgMGluIDBp
-biAwaW4iPg0KPHAgY2xhc3M9Ik1zb05vcm1hbCI+PGI+RnJvbTo8L2I+IE1hcnRpbiBKYW5zYSAm
-bHQ7PGEgaHJlZj0ibWFpbHRvOm1hcnRpbi5qYW5zYUBnbWFpbC5jb20iPm1hcnRpbi5qYW5zYUBn
-bWFpbC5jb208L2E+Jmd0Ow0KPGJyPg0KPGI+U2VudDo8L2I+IFR1ZXNkYXksIEp1bmUgMTMsIDIw
-MjMgNToyOCBQTTxicj4NCjxiPlRvOjwvYj4gQ2hlbiwgUWkgJmx0OzxhIGhyZWY9Im1haWx0bzpR
-aS5DaGVuQHdpbmRyaXZlci5jb20iPlFpLkNoZW5Ad2luZHJpdmVyLmNvbTwvYT4mZ3Q7PGJyPg0K
-PGI+Q2M6PC9iPiA8YSBocmVmPSJtYWlsdG86b3BlbmVtYmVkZGVkLWRldmVsQGxpc3RzLm9wZW5l
-bWJlZGRlZC5vcmciPm9wZW5lbWJlZGRlZC1kZXZlbEBsaXN0cy5vcGVuZW1iZWRkZWQub3JnPC9h
-Pjxicj4NCjxiPlN1YmplY3Q6PC9iPiBSZTogW29lXVttZXRhLW9lXVttYXN0ZXJdW21pY2tsZWRv
-cmVdW2xhbmdkYWxlXVtraXJrc3RvbmVdW1BBVENIXSByZWRpczogdXNlIHRoZSBmaWxlcyBwYXRo
-IGNvcnJlY3RseTxvOnA+PC9vOnA+PC9wPg0KPC9kaXY+DQo8cCBjbGFzcz0iTXNvTm9ybWFsIj48
-bzpwPiZuYnNwOzwvbzpwPjwvcD4NCjxkaXY+DQo8ZGl2Pg0KPHAgY2xhc3M9Ik1zb05vcm1hbCI+
-PG86cD4mbmJzcDs8L286cD48L3A+DQo8L2Rpdj4NCjxwIGNsYXNzPSJNc29Ob3JtYWwiPjxvOnA+
-Jm5ic3A7PC9vOnA+PC9wPg0KPGRpdj4NCjxkaXY+DQo8cCBjbGFzcz0iTXNvTm9ybWFsIj5PbiBU
-dWUsIEp1biAxMywgMjAyMyBhdCA5OjIz4oCvQU0gQ2hlbiBRaSB2aWEgPGEgaHJlZj0iaHR0cHM6
-Ly91cmxkZWZlbnNlLmNvbS92My9fX2h0dHA6L2xpc3RzLm9wZW5lbWJlZGRlZC5vcmdfXzshIUFq
-dmVZZHc4RXZRIWRBRjJmVzBvSGgyWjV2c2V4VUtRZWhBV1EyR2x3dmZwZ1ZXQlY1THpYZjRHVXFE
-MWZWSGhoblQtVEZQcXo0NzdhZTFrVzZGaGp4OXo2M202Y1R2dzkyRSQiPg0KbGlzdHMub3BlbmVt
-YmVkZGVkLm9yZzwvYT4gJmx0O1FpLkNoZW49PGEgaHJlZj0ibWFpbHRvOndpbmRyaXZlci5jb21A
-bGlzdHMub3BlbmVtYmVkZGVkLm9yZyI+d2luZHJpdmVyLmNvbUBsaXN0cy5vcGVuZW1iZWRkZWQu
-b3JnPC9hPiZndDsgd3JvdGU6PG86cD48L286cD48L3A+DQo8L2Rpdj4NCjxibG9ja3F1b3RlIHN0
-eWxlPSJib3JkZXI6bm9uZTtib3JkZXItbGVmdDpzb2xpZCAjQ0NDQ0NDIDEuMHB0O3BhZGRpbmc6
-MGluIDBpbiAwaW4gNi4wcHQ7bWFyZ2luLWxlZnQ6NC44cHQ7bWFyZ2luLXRvcDo1LjBwdDttYXJn
-aW4tcmlnaHQ6MGluO21hcmdpbi1ib3R0b206NS4wcHQiPg0KPHAgY2xhc3M9Ik1zb05vcm1hbCI+
-RnJvbTogQ2hlbiBRaSAmbHQ7PGEgaHJlZj0ibWFpbHRvOlFpLkNoZW5Ad2luZHJpdmVyLmNvbSIg
-dGFyZ2V0PSJfYmxhbmsiPlFpLkNoZW5Ad2luZHJpdmVyLmNvbTwvYT4mZ3Q7PGJyPg0KPGJyPg0K
-UmVjaXBlcyBhcmUgbm90IGV4cGVjdGVkIHRvIHNldCBGSUxFU1BBVEggZGlyZWN0bHksIHRoZXkg
-YXJlPGJyPg0KZXhwZWN0ZWQgdG8gdXNlIEZJTEVTRVhUUkFQQVRILiZuYnNwOzxvOnA+PC9vOnA+
-PC9wPg0KPC9ibG9ja3F1b3RlPg0KPGJsb2NrcXVvdGUgc3R5bGU9ImJvcmRlcjpub25lO2JvcmRl
-ci1sZWZ0OnNvbGlkICNDQ0NDQ0MgMS4wcHQ7cGFkZGluZzowaW4gMGluIDBpbiA2LjBwdDttYXJn
-aW4tbGVmdDo0LjhwdDttYXJnaW4tdG9wOjUuMHB0O21hcmdpbi1yaWdodDowaW47bWFyZ2luLWJv
-dHRvbTo1LjBwdCI+DQo8cCBjbGFzcz0iTXNvTm9ybWFsIj48YnI+DQpJIGNhbiBzZWUgdGhlIHNl
-dGluZyBvZiBGSUxFU1BBVEggaW4gdGhpcyByZWNpcGUgb25seSB3YW50cyB0bzxicj4NCmZpbmQg
-cmVkaXMtNyBzcGVjaWZpYyBwYXRjaGVzIGFuZCBmaWxlcy4gVGhpcyBjb3VsZCBiZSBlYXNpbHk8
-YnI+DQphY2hpZXZlZCBieSB1c2luZyByZWRpcy03LjAuMTEvIGRpcmVjdG9yeSB0byBob2xkIGFs
-bCB0aG9zZSBmaWxlcy48bzpwPjwvbzpwPjwvcD4NCjwvYmxvY2txdW90ZT4NCjxkaXY+DQo8cCBj
-bGFzcz0iTXNvTm9ybWFsIj48bzpwPiZuYnNwOzwvbzpwPjwvcD4NCjwvZGl2Pg0KPGRpdj4NCjxw
-IGNsYXNzPSJNc29Ob3JtYWwiPldoYXQncyB0aGUgaXNzdWUgd2l0aCB0aGlzLCB5ZXMgaXQncyBh
-IGJpdCB1bmNvbW1vbiBidXQgc2luY2U6PG86cD48L286cD48L3A+DQo8L2Rpdj4NCjxkaXY+DQo8
-cCBjbGFzcz0iTXNvTm9ybWFsIj48YSBocmVmPSJodHRwczovL3VybGRlZmVuc2UuY29tL3YzL19f
-aHR0cHM6L2dpdC5vcGVuZW1iZWRkZWQub3JnL21ldGEtb3BlbmVtYmVkZGVkL2NvbW1pdC8/aD1r
-aXJrc3RvbmUmYW1wO2lkPTNkZWNhNDUxNjkyZTk5ZDI2OTgxMjk1OWU2YjVlMGI1MTlhODJmMzBf
-XzshIUFqdmVZZHc4RXZRIWRBRjJmVzBvSGgyWjV2c2V4VUtRZWhBV1EyR2x3dmZwZ1ZXQlY1THpY
-ZjRHVXFEMWZWSGhoblQtVEZQcXo0NzdhZTFrVzZGaGp4OXo2M202ZVZTUy1GSSQiPmh0dHBzOi8v
-Z2l0Lm9wZW5lbWJlZGRlZC5vcmcvbWV0YS1vcGVuZW1iZWRkZWQvY29tbWl0Lz9oPWtpcmtzdG9u
-ZSZhbXA7aWQ9M2RlY2E0NTE2OTJlOTlkMjY5ODEyOTU5ZTZiNWUwYjUxOWE4MmYzMDwvYT48bzpw
-PjwvbzpwPjwvcD4NCjwvZGl2Pg0KPGRpdj4NCjxwIGNsYXNzPSJNc29Ob3JtYWwiPjxvOnA+Jm5i
-c3A7PC9vOnA+PC9wPg0KPC9kaXY+DQo8ZGl2Pg0KPHAgY2xhc3M9Ik1zb05vcm1hbCI+d2hpY2gg
-Y29ycmVjdGx5IHVzZXMgQlBOIGluIEZJTEVTUEFUSCBJIGRvbid0IHNlZSBhbnkgcGF0Y2hpbmcg
-aXNzdWVzIHdpdGggcmVkaXMgaW4gbXkgd29ybGQgYnVpbGRzLiBCZWZvcmUgaXQgd2FzIGZhaWxp
-bmcgaW4gbXVsdGlsaWIgYnVpbGRzIGJlY2F1c2UgaXQgd2FzIHNlYXJjaGluZyBpbiBsaWIzMi1y
-ZWRpcy03IGRpcmVjdG9yeSBhbmQgd2hlbiBub3QgZm91bmQgdGhlcmUgaXQgdXNlZCZuYnNwO0dO
-VV9TT1VSQ0UucGF0Y2gNCiBmcm9tIHRoZSBvdGhlciBkaXJlY3RvcnkgYW5kIGZhaWxlZCB3aXRo
-IHBhdGNoLWZ1enouPG86cD48L286cD48L3A+DQo8L2Rpdj4NCjxkaXY+DQo8cCBjbGFzcz0iTXNv
-Tm9ybWFsIj48bzpwPiZuYnNwOzwvbzpwPjwvcD4NCjwvZGl2Pg0KPGRpdj4NCjxwIGNsYXNzPSJN
-c29Ob3JtYWwiPklmIHlvdSBzdGlsbCB3YW50IHRvIGdvIGFoZWFkIHdpdGggdGhpcyB0aGVuIHlv
-dSBjYW4gYWxzbyB1bmRvJm5ic3A7R05VX1NPVVJDRS5wYXRjaCB0byBHTlVfU09VUkNFLTcucGF0
-Y2ggcmVuYW1lICh3aGljaCBpcyBJTUhPIHRoZSBvbmx5IGZpbGUgd2hpY2ggaXNuJ3QgdW5uZWNl
-c3NhcnkgZHVwbGljYXRlZCBiZXR3ZWVuIHJlZGlzLTYgYW5kIHJlZGlzLTcuPG86cD48L286cD48
-L3A+DQo8L2Rpdj4NCjwvZGl2Pg0KPC9kaXY+DQo8L2Rpdj4NCjwvYm9keT4NCjwvaHRtbD4NCg==
-
---_000_CO6PR11MB5602FA538ABCD9E69AF9C036ED55ACO6PR11MB5602namp_--
 
