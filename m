@@ -2,34 +2,34 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 707ACC88CBB
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 604D8C88CB9
 	for <webhook@archiver.kernel.org>; Tue, 13 Jun 2023 01:41:03 +0000 (UTC)
-Received: from esa5.hc1455-7.c3s2.iphmx.com (esa5.hc1455-7.c3s2.iphmx.com [68.232.139.130])
- by mx.groups.io with SMTP id smtpd.web11.3830.1686620458094551998
+Received: from esa11.hc1455-7.c3s2.iphmx.com (esa11.hc1455-7.c3s2.iphmx.com [207.54.90.137])
+ by mx.groups.io with SMTP id smtpd.web10.3857.1686620460634530100
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 12 Jun 2023 18:40:58 -0700
+ Mon, 12 Jun 2023 18:41:01 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: fujitsu.com, ip: 68.232.139.130, mailfrom: wangmy@fujitsu.com)
-X-IronPort-AV: E=McAfee;i="6600,9927,10739"; a="119840698"
+ dkim=missing; spf=pass (domain: fujitsu.com, ip: 207.54.90.137, mailfrom: wangmy@fujitsu.com)
+X-IronPort-AV: E=McAfee;i="6600,9927,10739"; a="99729198"
 X-IronPort-AV: E=Sophos;i="6.00,238,1681138800"; 
-   d="scan'208";a="119840698"
-Received: from unknown (HELO oym-r3.gw.nic.fujitsu.com) ([210.162.30.91])
-  by esa5.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 13 Jun 2023 10:40:49 +0900
-Received: from oym-m3.gw.nic.fujitsu.com (oym-nat-oym-m3.gw.nic.fujitsu.com [192.168.87.60])
-	by oym-r3.gw.nic.fujitsu.com (Postfix) with ESMTP id 58D93C53C3
-	for <openembedded-devel@lists.openembedded.org>; Tue, 13 Jun 2023 10:40:47 +0900 (JST)
+   d="scan'208";a="99729198"
+Received: from unknown (HELO yto-r2.gw.nic.fujitsu.com) ([218.44.52.218])
+  by esa11.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 13 Jun 2023 10:40:59 +0900
+Received: from yto-m3.gw.nic.fujitsu.com (yto-nat-yto-m3.gw.nic.fujitsu.com [192.168.83.66])
+	by yto-r2.gw.nic.fujitsu.com (Postfix) with ESMTP id 216ECC6811
+	for <openembedded-devel@lists.openembedded.org>; Tue, 13 Jun 2023 10:40:56 +0900 (JST)
 Received: from kws-ab3.gw.nic.fujitsu.com (kws-ab3.gw.nic.fujitsu.com [192.51.206.21])
-	by oym-m3.gw.nic.fujitsu.com (Postfix) with ESMTP id 98CAAD9485
-	for <openembedded-devel@lists.openembedded.org>; Tue, 13 Jun 2023 10:40:46 +0900 (JST)
+	by yto-m3.gw.nic.fujitsu.com (Postfix) with ESMTP id 5036D141A7
+	for <openembedded-devel@lists.openembedded.org>; Tue, 13 Jun 2023 10:40:55 +0900 (JST)
 Received: from localhost.localdomain (unknown [10.167.225.33])
-	by kws-ab3.gw.nic.fujitsu.com (Postfix) with ESMTP id 1A6F420074724;
-	Tue, 13 Jun 2023 10:40:46 +0900 (JST)
+	by kws-ab3.gw.nic.fujitsu.com (Postfix) with ESMTP id D1E7520074724;
+	Tue, 13 Jun 2023 10:40:54 +0900 (JST)
 From: wangmy@fujitsu.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-python] [PATCH] python3-eth-utils: upgrade 2.1.0 -> 2.1.1
-Date: Tue, 13 Jun 2023 09:40:04 +0800
-Message-Id: <1686620422-29962-15-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH] python3-pymisp: upgrade 2.4.171 -> 2.4.172
+Date: Tue, 13 Jun 2023 09:40:16 +0800
+Message-Id: <1686620422-29962-27-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 In-Reply-To: <1686620422-29962-1-git-send-email-wangmy@fujitsu.com>
 References: <1686620422-29962-1-git-send-email-wangmy@fujitsu.com>
@@ -37,48 +37,48 @@ X-TM-AS-GCONF: 00
 X-TM-AS-Product-Ver: IMSS-9.1.0.1417-9.0.0.1002-27688.004
 X-TM-AS-User-Approved-Sender: Yes
 X-TMASE-Version: IMSS-9.1.0.1417-9.0.1002-27688.004
-X-TMASE-Result: 10-0.426100-10.000000
-X-TMASE-MatchedRID: S9L8qTrmXfGjz0nOeth/yXg2y0j5vXZGSc4iQ7VD4M2U8ftiyKjZrdMj
-	jwb9QfV2CC8aAmGeO6lV00+whwxVQy/7QU2czuUNnVTWWiNp+v+u2GmdldmiUGAN6i+va16uBqd
-	FRjHdIbixfbhqGxLk+4Ay6p60ZV62yA7duzCw6dLdB/CxWTRRu+rAZ8KTspSzqxIZBxUqNkKsj4
-	w7eXCxSUW7aJeqSVbdTLeEGfh3G6nTeOYTXOJqw0KQsrY6ZVdtEOJenDj3pCOVr7eK3cAfSOk8U
-	PkgL0loiB6mlDKe1V7S/yytHeCN9GXv4CQeNUk7G6qTOwq/n71+3BndfXUhXQ==
+X-TMASE-Result: 10--1.959200-10.000000
+X-TMASE-MatchedRID: dhm/lGuWeZijz0nOeth/yUIIxwDaU5mrMCcAfUypiVi1FNn9j44/KHnK
+	0ev1kiPR4CtjYmQpb2kF1Ec/oUIRlVpCIuRr0RxKTuctSpiuWyU2ZWOmuJUS2WAN6i+va16ukWN
+	Ccn0XQOLn22EcSrQBnaBl62lPHvgXFfViMFFmQDLdCok3ibXlQX0tCKdnhB58I/9UW5M5dRNp7q
+	EhmmPgy46HM5rqDwqtt/Pm09EvMc+6wZ8FlnC2euj190R/iHhh7WZJ+BJ5WUSmUpLaFUucyuONV
+	HUULvWu3aHEDlRIP53KSL7BRD3oj43+Pj2eDw3THSbhGbmGylXFJK7yLnZRGZdO3Q67ImL8gi4R
+	Uz90EQwG2MApbv6odw==
 X-TMASE-SNAP-Result: 1.821001.0001-0-1-22:0,33:0,34:0-0
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 13 Jun 2023 01:41:03 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103242
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103245
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
-License-Update: Copyright year updated to 2023.
+Changelog:
+============
+- Update settings.default.py - tags not tag.
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- ...{python3-eth-utils_2.1.0.bb => python3-eth-utils_2.1.1.bb} | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-eth-utils_2.1.0.bb => python3-eth-utils_2.1.1.bb} (66%)
+ .../{python3-pymisp_2.4.171.bb => python3-pymisp_2.4.172.bb}    | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-pymisp_2.4.171.bb => python3-pymisp_2.4.172.bb} (92%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-eth-utils_2.1.0.bb b/meta-python/recipes-devtools/python/python3-eth-utils_2.1.1.bb
-similarity index 66%
-rename from meta-python/recipes-devtools/python/python3-eth-utils_2.1.0.bb
-rename to meta-python/recipes-devtools/python/python3-eth-utils_2.1.1.bb
-index da45cc7c9..896800a42 100644
---- a/meta-python/recipes-devtools/python/python3-eth-utils_2.1.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-eth-utils_2.1.1.bb
-@@ -2,9 +2,9 @@ SUMMARY = "Common utility functions for codebases which interact with ethereum."
- HOMEPAGE = "https://github.com/ethereum/eth-utils"
- SECTION = "devel/python"
- LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=287820ad3553117aa2f92bf84c219324"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=6749008d847c14b9718949c2e24d5c0a"
+diff --git a/meta-python/recipes-devtools/python/python3-pymisp_2.4.171.bb b/meta-python/recipes-devtools/python/python3-pymisp_2.4.172.bb
+similarity index 92%
+rename from meta-python/recipes-devtools/python/python3-pymisp_2.4.171.bb
+rename to meta-python/recipes-devtools/python/python3-pymisp_2.4.172.bb
+index d2d9ed1fd..59ddac388 100644
+--- a/meta-python/recipes-devtools/python/python3-pymisp_2.4.171.bb
++++ b/meta-python/recipes-devtools/python/python3-pymisp_2.4.172.bb
+@@ -4,7 +4,7 @@ LICENSE = "BSD-2-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=a3639cf5780f71b125d3e9d1dc127c20"
  
--SRC_URI[sha256sum] = "fcb4c3c1b32947ba92970963f9aaf40da73b04ea1034964ff8c0e70595127138"
-+SRC_URI[sha256sum] = "7cccfb0b0749431d0d001e327e9a7289bf07308316a73850ae3895020e5682f4"
+ SRC_URI = "git://github.com/MISP/PyMISP.git;protocol=https;branch=main"
+-SRCREV = "5c56fccfafa9ef335b9300499d12633368889f55"
++SRCREV = "7d1d8b6f38f210b28934a206f9c1470542e9da7e"
+ S = "${WORKDIR}/git"
  
- inherit pypi setuptools3
- 
+ inherit python_poetry_core
 -- 
 2.34.1
 
