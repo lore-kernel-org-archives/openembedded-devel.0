@@ -2,34 +2,34 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4F2F9C88CB5
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 60366C88CB7
 	for <webhook@archiver.kernel.org>; Tue, 13 Jun 2023 01:41:03 +0000 (UTC)
-Received: from esa6.hc1455-7.c3s2.iphmx.com (esa6.hc1455-7.c3s2.iphmx.com [68.232.139.139])
- by mx.groups.io with SMTP id smtpd.web11.3828.1686620455361391674
+Received: from esa8.hc1455-7.c3s2.iphmx.com (esa8.hc1455-7.c3s2.iphmx.com [139.138.61.253])
+ by mx.groups.io with SMTP id smtpd.web11.3831.1686620459046713221
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 12 Jun 2023 18:40:56 -0700
+ Mon, 12 Jun 2023 18:40:59 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: fujitsu.com, ip: 68.232.139.139, mailfrom: wangmy@fujitsu.com)
-X-IronPort-AV: E=McAfee;i="6600,9927,10739"; a="121527756"
+ dkim=missing; spf=pass (domain: fujitsu.com, ip: 139.138.61.253, mailfrom: wangmy@fujitsu.com)
+X-IronPort-AV: E=McAfee;i="6600,9927,10739"; a="108391038"
 X-IronPort-AV: E=Sophos;i="6.00,238,1681138800"; 
-   d="scan'208";a="121527756"
-Received: from unknown (HELO oym-r4.gw.nic.fujitsu.com) ([210.162.30.92])
-  by esa6.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 13 Jun 2023 10:40:54 +0900
-Received: from oym-m1.gw.nic.fujitsu.com (oym-nat-oym-m1.gw.nic.fujitsu.com [192.168.87.58])
-	by oym-r4.gw.nic.fujitsu.com (Postfix) with ESMTP id C4682DDC62
-	for <openembedded-devel@lists.openembedded.org>; Tue, 13 Jun 2023 10:40:51 +0900 (JST)
+   d="scan'208";a="108391038"
+Received: from unknown (HELO yto-r3.gw.nic.fujitsu.com) ([218.44.52.219])
+  by esa8.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 13 Jun 2023 10:40:57 +0900
+Received: from yto-m3.gw.nic.fujitsu.com (yto-nat-yto-m3.gw.nic.fujitsu.com [192.168.83.66])
+	by yto-r3.gw.nic.fujitsu.com (Postfix) with ESMTP id 074F4E8521
+	for <openembedded-devel@lists.openembedded.org>; Tue, 13 Jun 2023 10:40:55 +0900 (JST)
 Received: from kws-ab3.gw.nic.fujitsu.com (kws-ab3.gw.nic.fujitsu.com [192.51.206.21])
-	by oym-m1.gw.nic.fujitsu.com (Postfix) with ESMTP id 0595CD88A1
-	for <openembedded-devel@lists.openembedded.org>; Tue, 13 Jun 2023 10:40:51 +0900 (JST)
+	by yto-m3.gw.nic.fujitsu.com (Postfix) with ESMTP id 4625AF807
+	for <openembedded-devel@lists.openembedded.org>; Tue, 13 Jun 2023 10:40:54 +0900 (JST)
 Received: from localhost.localdomain (unknown [10.167.225.33])
-	by kws-ab3.gw.nic.fujitsu.com (Postfix) with ESMTP id 7F58920074724;
-	Tue, 13 Jun 2023 10:40:50 +0900 (JST)
+	by kws-ab3.gw.nic.fujitsu.com (Postfix) with ESMTP id C160120074732;
+	Tue, 13 Jun 2023 10:40:53 +0900 (JST)
 From: wangmy@fujitsu.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-python] [PATCH] python3-cassandra-driver: upgrade 3.27.0 -> 3.28.0
-Date: Tue, 13 Jun 2023 09:40:10 +0800
-Message-Id: <1686620422-29962-21-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH] python3-imageio: upgrade 2.30.0 -> 2.31.0
+Date: Tue, 13 Jun 2023 09:40:14 +0800
+Message-Id: <1686620422-29962-25-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 In-Reply-To: <1686620422-29962-1-git-send-email-wangmy@fujitsu.com>
 References: <1686620422-29962-1-git-send-email-wangmy@fujitsu.com>
@@ -37,62 +37,45 @@ X-TM-AS-GCONF: 00
 X-TM-AS-Product-Ver: IMSS-9.1.0.1417-9.0.0.1002-27688.004
 X-TM-AS-User-Approved-Sender: Yes
 X-TMASE-Version: IMSS-9.1.0.1417-9.0.1002-27688.004
-X-TMASE-Result: 10--4.163000-10.000000
-X-TMASE-MatchedRID: u4ys6248rQyjz0nOeth/yUIIxwDaU5mrF4r8H5YrEqy8YDH/UBNnm6Sr
-	9vLA6F20kHMaYUOh453DM6dtV8SC16PPacy+wTvuYb85H1Mvf+6C7C2rJeUToekw7W744CmzMEG
-	UYlC3/bfdGrWq1bnu41PC3zjPdw6ajEZqG6AU9+MD2WXLXdz+AdXLiEcLf+DIsrDwfHQQaK1yp+
-	gwY/4LBCL637QCIVpiEtxXtQrQ1G3c+HB+YVvemDsKXyzHgcEbrixttRG+E/OBbptjxI6rdaPFj
-	JEFr+olwXCBO/GKkVqOhzOa6g8KrZQAiWbzky62JblLT8xuL6Onz1R8G4aGDkKexKrQKk8M9YCW
-	vNDvMA4giTyeaSXEowv8Yb29y8FDczrmAb5ZI7aTyhv1eeIiIR0m4Rm5hspVxSSu8i52URmXTt0
-	OuyJi/IIuEVM/dBEMBtjAKW7+qHc=
+X-TMASE-Result: 10-1.466400-10.000000
+X-TMASE-MatchedRID: hsQjHHSArR6jz0nOeth/yUIIxwDaU5mrTfK5j0EZbyskqO0L6qpr3L6p
+	xbTOjavy+7QcRaVoa8nGKIf6hBf7VaGGOyqBK41vEXjPIvKd74Cu2GmdldmiUGAN6i+va16uBqd
+	FRjHdIbhbJcQH3furV3k48PxckV+kHxPMjOKY7A+u65UDD0aDgsRB0bsfrpPIcSqbxBgG0w5W3G
+	AUx857UX6Ow8Xf59WTzLMOIe5KFXyvXaqwRHARdw92hAjmvQRvD/D5epfoRbx8nKAk+oCIEpDxa
+	9kyICoStj8BaXT+c6uCvqWrFsheUcLe0zBjeZrbFQOP52BRBXJMTsKj18q/fA==
 X-TMASE-SNAP-Result: 1.821001.0001-0-1-22:0,33:0,34:0-0
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 13 Jun 2023 01:41:03 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103239
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103244
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
 Changelog:
-============
-Features
----------
-    Add support for vector type (PYTHON-1352)
-    Cryptography module is now an optional dependency (PYTHON-1351)
-
-Bug Fixes
-----------
-    Store IV along with encrypted text when using column-level encryption (PYTHON-1350)
-    Create session-specific protocol handlers to contain session-specific CLE policies (PYTHON-1356)
-
-Others
----------
-    Use Cython for smoke builds (PYTHON-1343)
-    Don't fail when inserting UDTs with prepared queries with some missing fields (PR 1151)
-    Convert print statement to function in docs (PR 1157)
-    Update comment for retry policy (DOC-3278)
-    Added error handling blog reference (DOC-2813)
+===========
+    Fix pilmode kwarg for get_reader/get_writer (#994) (21039b2)
+    Decode gray 16-bit PNG as uint16 (not int32) if pillow allows (#987)
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- ...ndra-driver_3.27.0.bb => python3-cassandra-driver_3.28.0.bb} | 2 +-
+ .../{python3-imageio_2.30.0.bb => python3-imageio_2.31.0.bb}    | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-cassandra-driver_3.27.0.bb => python3-cassandra-driver_3.28.0.bb} (89%)
+ rename meta-python/recipes-devtools/python/{python3-imageio_2.30.0.bb => python3-imageio_2.31.0.bb} (81%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-cassandra-driver_3.27.0.bb b/meta-python/recipes-devtools/python/python3-cassandra-driver_3.28.0.bb
-similarity index 89%
-rename from meta-python/recipes-devtools/python/python3-cassandra-driver_3.27.0.bb
-rename to meta-python/recipes-devtools/python/python3-cassandra-driver_3.28.0.bb
-index 679b51f75..468aa247e 100644
---- a/meta-python/recipes-devtools/python/python3-cassandra-driver_3.27.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-cassandra-driver_3.28.0.bb
-@@ -8,7 +8,7 @@ LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=2ee41112a44fe7014dce33e26468ba93"
- SRCNAME = "cassandra-driver"
+diff --git a/meta-python/recipes-devtools/python/python3-imageio_2.30.0.bb b/meta-python/recipes-devtools/python/python3-imageio_2.31.0.bb
+similarity index 81%
+rename from meta-python/recipes-devtools/python/python3-imageio_2.30.0.bb
+rename to meta-python/recipes-devtools/python/python3-imageio_2.31.0.bb
+index 6bcba2ca7..d3e575518 100644
+--- a/meta-python/recipes-devtools/python/python3-imageio_2.30.0.bb
++++ b/meta-python/recipes-devtools/python/python3-imageio_2.31.0.bb
+@@ -5,7 +5,7 @@ SECTION = "devel/python"
+ LICENSE = "BSD-2-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=24cb9a367a9e641b459a01c4d15256ba"
  
--SRC_URI[sha256sum] = "3f43b6023d3d2b34ceaea0a33abf9d9602c41cf316f283f651d835d0c4924124"
-+SRC_URI[sha256sum] = "64ff130d19f994b80997c14343a8306be52a0e7ab92520a534eed944c88d70df"
+-SRC_URI[sha256sum] = "7fc6ad5b5677cb1e58077875a72512aa8c392b6d40885eca0a6ab250efb4b8f4"
++SRC_URI[sha256sum] = "9e2d1dec1c74ba10d58856f2f02883b84f5cd5be937a1156cc238b539a6cf068"
  
  inherit pypi setuptools3
  
