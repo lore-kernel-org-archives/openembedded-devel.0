@@ -1,114 +1,424 @@
-Return-Path: <muhammad.hamzai@yahoo.com>
+Return-Path: <hprajapati@mvista.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BC58AC7EE29
-	for <webhook@archiver.kernel.org>; Tue, 13 Jun 2023 05:16:14 +0000 (UTC)
-Received: from sonic306-19.consmr.mail.ir2.yahoo.com (sonic306-19.consmr.mail.ir2.yahoo.com [77.238.176.205])
- by mx.groups.io with SMTP id smtpd.web11.6748.1686633372570645000
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C87C1C7EE29
+	for <webhook@archiver.kernel.org>; Tue, 13 Jun 2023 05:33:44 +0000 (UTC)
+Received: from mail-pf1-f180.google.com (mail-pf1-f180.google.com [209.85.210.180])
+ by mx.groups.io with SMTP id smtpd.web10.6929.1686634419001147211
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 12 Jun 2023 22:16:12 -0700
+ Mon, 12 Jun 2023 22:33:39 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@yahoo.com header.s=s2048 header.b=R2NvpOcN;
- spf=neutral (domain: yahoo.com, ip: 77.238.176.205, mailfrom: muhammad.hamzai@yahoo.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048; t=1686633370; bh=qdt+wOWQgmvjbuyQXYnGl8NeT9tU1f/LNH6FuJGgASk=; h=Date:From:To:Subject:References:From:Subject:Reply-To; b=R2NvpOcNgyjHVqzumNxyzNvzbCb29fqjOuPq7eYYfZy4q3yyPtlNBUXZXSfDEZ+NBqZFiXdIm48ui+clgLg6SVeLDWMOb6b8qWwTuo6oVd+CbIVxLV7IeGuuSFf98IFVIjpyZ4zvckajB7pz0p4BxWUSYJbsUcKoXUD2Zuy9f/eptmWvYtAvDon/T5CIbh6g0xubkKafRsZIvoHLng2JCECaT66WqhTh3YStGXYMSRhDEXjtlx4a4N3BrUioMvfE5Ss2HFc6005G2RTP5BnsNzaOQWXOspAU8FpfaLf8Y7SMyJHP9LhBJRXO+XKkKq3YVbrhQ14lkSofFGCa3RK/yA==
-X-SONIC-DKIM-SIGN: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048; t=1686633370; bh=wYh2YxAeaQ4aNHwNDE3yEdNaQZ1RbmIdQt9bBnVLBXJ=; h=X-Sonic-MF:Date:From:To:Subject:From:Subject; b=TDRPnYLd4S5OkgpclkR22Yd9FGxjM524D+L0t+Jd5Bs1fGmauIYwcmABQYfA4dEgXwzg+vPUk767sA3x+xE2pQvsS3Fmr1y0t1JRDJ6VDrm9vXIutH6D2/7dJVXm3NIh4QjjbWU91hVA5N+CC6auICzNjo1iZBw68OCKcbD6n445ftfgIuCdoas/zphSlNemP+zkIzR5x6KQpkEXC/6LMHiRv9QTkBHhk8r97caAEHtBM3VfVztPP2bxr8BRBwU65l/QydGAVjDEOGjiD+MS30pq0tnSCpUsMnTst3KK79gnGsSsb+BpHF3D1vUahRDgMH6i3HsML3qh55NnsFY+yA==
-X-YMail-OSG: w4Un1usVM1ldHvyWMFxqJZmeHJbl87LCknEgNEBy0oOfMHun75gwgnYdLzKPJQY
- 9N9wwVir3FGU.3C761TEeLjENIBG4r6LIRVirvNDWgjHqtLdX3DvVEXsUqDfr8TYyVcz7wvBRZzm
- Sq6Q6DST9Ig5C7SAWRPM06Azep7ejzw3bRXaYkAzXdHikYZM13NmiJE3TzAK2An6ajOBt1M5LMeS
- yTmiT_UaYRDahqGuRB6fc47j9UyJ_qneGkCfEi6Wnwf4kVYnvY_dZvoPpxAalkWPHNXODn9QqbdY
- 6va0FUhbQH4Bwk91c2bru0BcY4wf6cOtitbEBgPLIaG1GMlJEbmwglLTtUDR1TFZt5aSdgbx668U
- Pa2eMLF8HaiWzE0dSlCFLJFIzB6JMD.F7nHRqPAwe1PrN8FSiO234AemS8MTbUcs_iaFtm.1LnX1
- IIURgR3mjN8f2BrBMlvw1mHx3MGCEJ9xLnkZJttXWn7Gzl02d4hHlZnJ1Dh8jmZ_K0ZHJcRGnXeE
- Uc.Scb5neUQClLPHbXe.hI94uKPaoDvBLG0_g0l3SZJ.7RsrbPcs9sB3TmS8ZKsK4sMRhf7QR7ys
- WnLcmihSTF2p..XOIozCRCKVpdtYKDjBTxBM.4C7n_JNKftX7DfYq.tt0QmmHWDypZn_FHYwt_Hf
- iNz_TkzsaeFPLOjd07JleJ_XKL1GmyHwPCU7K6bVF0Y8na9GCg284ZicQBB0O6lGyHxfBJchdLLP
- OihGyG2yLJTPwk8eylJYRJ3muTEWCz.iYItvqHSn24YJPMG9JMVXzuw7WYiUpcheCZ1ZSQNobcTt
- B5NJTxCNUrkAoWniDM1vgS8v5Y8w4rA63EUKSGmYl9TXhCtY3pBfTUN.a2dRSF6PbdEaOHW7ulDZ
- Tu.woa5F1VtOKuWS4Cg.N8Qj0e2E_IoK0mRAzK15pIcCKC0zVht4jWa2ceikJZAHjaRf5Fs4lXL_
- O1MzWxPYNTVwacYk6tO9dOvFrjml6LCpHcGizqnPT4J4hF9t7x3WzrI0PjcJyk.4fY1Sg4OJ6jV_
- tdNQW2tVo7e.PdL3lrZeD4m.Py3s.G239MznwMtPZaTEjTW6BWCW7nb_MU0ENH3WuL0SIg8ekKys
- nzh6OsN3sqkeorKS3q._t4n6vxWpr6ELuwodlukPmlvJDwUKNZZsvKEbeqi47rI.3wOF6a5_LlG6
- bzTyhp37985CYR_JbLajnFI5WHqOmf1DQqQVasWzZ2gKLJGsaceyKnDwDWW89lAypTaTCnF0hhi5
- _fCZMGOeSEoPktdcNvnFRDn29x_wy6qlYyVoC7UZkUjIFDBtmkgUsZLVWDNtkYDhrYIOnTiwTlN7
- MSbkzwEBiURR_rtEbJ0AWm1ifxLE2nJH5ATMJqO9dx7.YFTMEZAkXq9DJ3kP5cjBWLUajPllkcP4
- o276vyxUWqEzASXxOhcR9dkrzu7tp011Cw0ERlM7EG5F6vTESiXE4SYZ3nnZtjsIhf5EEkEfUVBP
- 4Pa8p3r6Ph.QiR1TjfqD.ZvVhrGjbJbomGEtfxV0timST0XrIOgRGvSn6_n9LcqwyA69YvtGfISL
- gSzTXYi8UXx7HBmrQMVr0.WCV7.9vgSZmdAxrQiHK9S2npdAYYupvtclWxApxSKDxRV9xBQFIQph
- 0EtkFS9tjPLTYgFuC46Iw7Pqh6mi8a1ooRlTzttDUTV224PPbGeU.pBWTiW4rlN2G76doxuFopEL
- 1W1SNKGfmOOVgIlUSPBcVFPD5hYrYvE.nrAWA5zIXw7Ne1tUz1O6u1H5rNCwMcZCNW1_qXfNU4uw
- 7u4Ee6WBOwnAbYfbfRzzTdZpOXrzUHOSAuipytqZgb0ycLMcAo5UUKhDd8j4SImuAdEj9jC0KsCO
- Cdj2pj.PLosW50IzHJqzopaIYpOfsRda0ITsNFEnPvG0ZdH.vwNzK36UwW2uOJ2zf3wUSeMkkevK
- vGWVIZvTJDC42uImLIzVRbugAZKKYo12XHzzUZ_F7eYPzICMKbRrWnj4js.SYo7e_1piEOZAFEPV
- WV.ABgjhgzhge3CS3JeNU2qOf16xDOVzaZrx7WTm1t0pDea5BsRr2.hbxOgICK8jKsmIMzLVTXtq
- JjnwP5rdJZd2_KH793_X8bKKpv489AzH1DKt7fzpo5HSIdt7fTxFgpH8YRc8mgdp7y09_EpIySVR
- Jcv3MTVrawuaVVLhwSWgjFace1_5_fbls97ECuO0PfTY8JVk4N_Tk.elyqMRBwI96gzC5xA--
-X-Sonic-MF: <muhammad.hamzai@yahoo.com>
-X-Sonic-ID: 5837b0bf-c218-4e85-b3ac-9829f7a7a368
-Received: from sonic.gate.mail.ne1.yahoo.com by sonic306.consmr.mail.ir2.yahoo.com with HTTP; Tue, 13 Jun 2023 05:16:10 +0000
-Date: Tue, 13 Jun 2023 05:16:06 +0000 (UTC)
-From: "Muhammad.Hamza Ishfaq" <muhammad.hamzai@yahoo.com>
-To: 
-	"openembedded-devel@lists.openembedded.org" <openembedded-devel@lists.openembedded.org>
-Message-ID: <1747474539.3138796.1686633366135@mail.yahoo.com>
-Subject: [meta-oe][PATCH] exprtk_git: Fix SRCREV for exprtk_git
+ dkim=fail reason="signature has expired" header.i=@mvista.com header.s=google header.b=KVQx9mp+;
+ spf=pass (domain: mvista.com, ip: 209.85.210.180, mailfrom: hprajapati@mvista.com)
+Received: by mail-pf1-f180.google.com with SMTP id d2e1a72fcca58-665a18f5643so1010306b3a.0
+        for <openembedded-devel@lists.openembedded.org>; Mon, 12 Jun 2023 22:33:38 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=mvista.com; s=google; t=1686634418; x=1689226418;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=I7KvR8lSN8gP5DwDfZ6oNyDSk4oquILWVIrGVf3Ln+I=;
+        b=KVQx9mp+kjZx0B5Kiw64l9JdYihrvmc5sNwpqUnlitLr9Ze1ZShIMbqqusY3KE/rqM
+         DqFB+IPOiwm5NH6Yg/lb51z5CYAnetBctjeZZ7M9z7UqsSUJmTYtrAozhOumvYTq6UfD
+         5YJRlMbvPfHKrpIevU26xwHj+em1mOqAGUMkw=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20221208; t=1686634418; x=1689226418;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=I7KvR8lSN8gP5DwDfZ6oNyDSk4oquILWVIrGVf3Ln+I=;
+        b=A3COpfg8AdmySKd+d9WvVzBNd7VrsrC+05YBLuYeXmANErw3uFT8owckNCs1SfJ7zp
+         0u1AkrIrPBIYRgON8/SWdfnynTH6gaHfwVkLAXfjGtZhazj/XxAutKSWx/ZekXhJRNRx
+         2qyUJJskxAhPfmZ753AnSEdmywTT7T9mhzU/utygvMpZIz42pDIfb2Tm+41Gn2R2jwRc
+         UxNRFInmI4e4NIoR+q4J+ZhoNG3fPVsHSx1FK5fL7PggJeWj4C7zPCL1KG/2F5nY+T0b
+         rgTt2O+MuCSpgAgJttfgiUcqffyT1WWQB0uz6FQfkyZlWmx4pVZKw8iUDdSx5ZA4iHWz
+         H3ig==
+X-Gm-Message-State: AC+VfDwwyZbBOLJXMZdfmk6QCMaQAnU4xz5dmU29p8uEjGdhpTuPdpy+
+	zCNqbcRuQOHtNsadQdT4sP8kPVUjFdLJ/kSIxHg=
+X-Google-Smtp-Source: ACHHUZ48I0qPD9WBtWNkVbTxDCigi6HVQfpjoKx3KksdR/86nVX5W4zRDR7AltklADwVioT3NtjRgw==
+X-Received: by 2002:a05:6a00:1c83:b0:64d:42b9:6895 with SMTP id y3-20020a056a001c8300b0064d42b96895mr15827479pfw.5.1686634417674;
+        Mon, 12 Jun 2023 22:33:37 -0700 (PDT)
+Received: from MVIN00024 ([150.129.170.224])
+        by smtp.gmail.com with ESMTPSA id w15-20020aa7858f000000b0064ca1fa8442sm7994525pfn.178.2023.06.12.22.33.35
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 12 Jun 2023 22:33:37 -0700 (PDT)
+Received: by MVIN00024 (sSMTP sendmail emulation); Tue, 13 Jun 2023 11:03:31 +0530
+From: Hitendra Prajapati <hprajapati@mvista.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Hitendra Prajapati <hprajapati@mvista.com>
+Subject: [meta-oe][dunfell][PATCH] c-ares: CVE-2023-31130 fix Buffer Underwrite
+Date: Tue, 13 Jun 2023 11:03:30 +0530
+Message-Id: <20230613053330.15784-1-hprajapati@mvista.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Type: multipart/alternative; 
-	boundary="----=_Part_3138795_917642246.1686633366134"
-References: <1747474539.3138796.1686633366135.ref@mail.yahoo.com>
-X-Mailer: WebService/1.1.21516 YMailNorrin
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 13 Jun 2023 05:16:14 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103256
+ <openembedded-devel@lists.openembedded.org>; Tue, 13 Jun 2023 05:33:44 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103257
 
-------=_Part_3138795_917642246.1686633366134
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+Upstream-Status: Backport from https://github.com/c-ares/c-ares/commit/f22cc01039b6473b736d3bf438f56a2654cdf2b2
 
-exprtk_git recipe uses a SRCREV that does not belongto any branch and resul=
-ts in a fetcher failure when bitbaketries to fetch it.This commit updates t=
-he SRCREV to fix this issue.
-Signed-off-by: Muhammad Hamza <muhammad.hamzai@yahoo.com>---=C2=A0meta-oe/r=
-ecipes-devtools/exprtk/exprtk_git.bb | 2 +-=C2=A01 file changed, 1 insertio=
-n(+), 1 deletion(-)
-diff --git a/meta-oe/recipes-devtools/exprtk/exprtk_git.bb b/meta-oe/recipe=
-s-devtools/exprtk/exprtk_git.bbindex 52975c821..557c4f27a 100644--- a/meta-=
-oe/recipes-devtools/exprtk/exprtk_git.bb+++ b/meta-oe/recipes-devtools/expr=
-tk/exprtk_git.bb@@ -3,7 +3,7 @@ HOMEPAGE =3D "https://github.com/ArashParto=
-w/exprtk"=C2=A0SECTION =3D "libs"=C2=A0LICENSE =3D "MIT"=C2=A0LIC_FILES_CHK=
-SUM =3D "file://${COMMON_LICENSE_DIR}/MIT;md5=3D0835ade698e0bcf8506ecda2f7b=
-4f302"-SRCREV =3D "281c2ccc65b8f91c012ea3725ebcef406378a225"+SRCREV =3D "f4=
-6bffcd6966d38a09023fb37ba9335214c9b959"=C2=A0=C2=A0SRC_URI =3D "git://githu=
-b.com/ArashPartow/exprtk.git;branch=3Dmaster;protocol=3Dhttps"=C2=A0--=C2=
-=A02.34.1
+Signed-off-by: Hitendra Prajapati <hprajapati@mvista.com>
+---
+ .../c-ares/c-ares/CVE-2023-31130.patch        | 329 ++++++++++++++++++
+ .../recipes-support/c-ares/c-ares_1.18.1.bb   |   5 +-
+ 2 files changed, 333 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-support/c-ares/c-ares/CVE-2023-31130.patch
 
+diff --git a/meta-oe/recipes-support/c-ares/c-ares/CVE-2023-31130.patch b/meta-oe/recipes-support/c-ares/c-ares/CVE-2023-31130.patch
+new file mode 100644
+index 000000000..603d2687d
+--- /dev/null
++++ b/meta-oe/recipes-support/c-ares/c-ares/CVE-2023-31130.patch
+@@ -0,0 +1,329 @@
++From f22cc01039b6473b736d3bf438f56a2654cdf2b2 Mon Sep 17 00:00:00 2001
++From: Brad House <brad@brad-house.com>
++Date: Mon, 22 May 2023 06:51:34 -0400
++Subject: [PATCH] Merge pull request from GHSA-x6mf-cxr9-8q6v
++
++* Merged latest OpenBSD changes for inet_net_pton_ipv6() into c-ares.
++* Always use our own IP conversion functions now, do not delegate to OS
++  so we can have consistency in testing and fuzzing.
++* Removed bogus test cases that never should have passed.
++* Add new test case for crash bug found.
++
++Fix By: Brad House (@bradh352)
++
++Upstream-Status: Backport [https://github.com/c-ares/c-ares/commit/f22cc01039b6473b736d3bf438f56a2654cdf2b2]
++CVE: CVE-2023-31130
++
++Signed-off-by: Hitendra Prajapati <hprajapati@mvista.com>
++---
++ src/lib/inet_net_pton.c    | 155 ++++++++++++++++++++-----------------
++ test/ares-test-internal.cc |   7 +-
++ 2 files changed, 86 insertions(+), 76 deletions(-)
++
++diff --git a/src/lib/inet_net_pton.c b/src/lib/inet_net_pton.c
++index 840de506..fc50425b 100644
++--- a/src/lib/inet_net_pton.c
+++++ b/src/lib/inet_net_pton.c
++@@ -1,19 +1,20 @@
++ 
++ /*
++- * Copyright (c) 2004 by Internet Systems Consortium, Inc. ("ISC")
+++ * Copyright (c) 2012 by Gilles Chehade <gilles@openbsd.org>
++  * Copyright (c) 1996,1999 by Internet Software Consortium.
++  *
++  * Permission to use, copy, modify, and distribute this software for any
++  * purpose with or without fee is hereby granted, provided that the above
++  * copyright notice and this permission notice appear in all copies.
++  *
++- * THE SOFTWARE IS PROVIDED "AS IS" AND ISC DISCLAIMS ALL WARRANTIES
++- * WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
++- * MERCHANTABILITY AND FITNESS.  IN NO EVENT SHALL ISC BE LIABLE FOR
++- * ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
++- * WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
++- * ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT
++- * OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+++ * THE SOFTWARE IS PROVIDED "AS IS" AND INTERNET SOFTWARE CONSORTIUM DISCLAIMS
+++ * ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES
+++ * OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL INTERNET SOFTWARE
+++ * CONSORTIUM BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL
+++ * DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR
+++ * PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS
+++ * ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS
+++ * SOFTWARE.
++  */
++ 
++ #include "ares_setup.h"
++@@ -35,9 +36,6 @@
++ 
++ const struct ares_in6_addr ares_in6addr_any = { { { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 } } };
++ 
++-
++-#ifndef HAVE_INET_NET_PTON
++-
++ /*
++  * static int
++  * inet_net_pton_ipv4(src, dst, size)
++@@ -60,7 +58,7 @@ const struct ares_in6_addr ares_in6addr_any = { { { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,
++  *      Paul Vixie (ISC), June 1996
++  */
++ static int
++-inet_net_pton_ipv4(const char *src, unsigned char *dst, size_t size)
+++ares_inet_net_pton_ipv4(const char *src, unsigned char *dst, size_t size)
++ {
++   static const char xdigits[] = "0123456789abcdef";
++   static const char digits[] = "0123456789";
++@@ -261,19 +259,14 @@ getv4(const char *src, unsigned char *dst, int *bitsp)
++ }
++ 
++ static int
++-inet_net_pton_ipv6(const char *src, unsigned char *dst, size_t size)
+++ares_inet_pton6(const char *src, unsigned char *dst)
++ {
++   static const char xdigits_l[] = "0123456789abcdef",
++-    xdigits_u[] = "0123456789ABCDEF";
+++        xdigits_u[] = "0123456789ABCDEF";
++   unsigned char tmp[NS_IN6ADDRSZ], *tp, *endp, *colonp;
++   const char *xdigits, *curtok;
++-  int ch, saw_xdigit;
+++  int ch, saw_xdigit, count_xdigit;
++   unsigned int val;
++-  int digits;
++-  int bits;
++-  size_t bytes;
++-  int words;
++-  int ipv4;
++ 
++   memset((tp = tmp), '\0', NS_IN6ADDRSZ);
++   endp = tp + NS_IN6ADDRSZ;
++@@ -283,22 +276,22 @@ inet_net_pton_ipv6(const char *src, unsigned char *dst, size_t size)
++     if (*++src != ':')
++       goto enoent;
++   curtok = src;
++-  saw_xdigit = 0;
+++  saw_xdigit = count_xdigit = 0;
++   val = 0;
++-  digits = 0;
++-  bits = -1;
++-  ipv4 = 0;
++   while ((ch = *src++) != '\0') {
++     const char *pch;
++ 
++     if ((pch = strchr((xdigits = xdigits_l), ch)) == NULL)
++       pch = strchr((xdigits = xdigits_u), ch);
++     if (pch != NULL) {
+++      if (count_xdigit >= 4)
+++        goto enoent;
++       val <<= 4;
++-      val |= aresx_sztoui(pch - xdigits);
++-      if (++digits > 4)
+++      val |= (pch - xdigits);
+++      if (val > 0xffff)
++         goto enoent;
++       saw_xdigit = 1;
+++      count_xdigit++;
++       continue;
++     }
++     if (ch == ':') {
++@@ -308,78 +301,107 @@ inet_net_pton_ipv6(const char *src, unsigned char *dst, size_t size)
++           goto enoent;
++         colonp = tp;
++         continue;
++-      } else if (*src == '\0')
+++      } else if (*src == '\0') {
++         goto enoent;
+++      }
++       if (tp + NS_INT16SZ > endp)
++-        return (0);
++-      *tp++ = (unsigned char)((val >> 8) & 0xff);
++-      *tp++ = (unsigned char)(val & 0xff);
+++        goto enoent;
+++      *tp++ = (unsigned char) (val >> 8) & 0xff;
+++      *tp++ = (unsigned char) val & 0xff;
++       saw_xdigit = 0;
++-      digits = 0;
+++      count_xdigit = 0;
++       val = 0;
++       continue;
++     }
++     if (ch == '.' && ((tp + NS_INADDRSZ) <= endp) &&
++-        getv4(curtok, tp, &bits) > 0) {
++-      tp += NS_INADDRSZ;
+++        ares_inet_net_pton_ipv4(curtok, tp, INADDRSZ) > 0) {
+++      tp += INADDRSZ;
++       saw_xdigit = 0;
++-      ipv4 = 1;
+++      count_xdigit = 0;
++       break;  /* '\0' was seen by inet_pton4(). */
++     }
++-    if (ch == '/' && getbits(src, &bits) > 0)
++-      break;
++     goto enoent;
++   }
++   if (saw_xdigit) {
++     if (tp + NS_INT16SZ > endp)
++       goto enoent;
++-    *tp++ = (unsigned char)((val >> 8) & 0xff);
++-    *tp++ = (unsigned char)(val & 0xff);
+++    *tp++ = (unsigned char) (val >> 8) & 0xff;
+++    *tp++ = (unsigned char) val & 0xff;
++   }
++-  if (bits == -1)
++-    bits = 128;
++-
++-  words = (bits + 15) / 16;
++-  if (words < 2)
++-    words = 2;
++-  if (ipv4)
++-    words = 8;
++-  endp =  tmp + 2 * words;
++-
++   if (colonp != NULL) {
++     /*
++      * Since some memmove()'s erroneously fail to handle
++      * overlapping regions, we'll do the shift by hand.
++      */
++-    const ares_ssize_t n = tp - colonp;
++-    ares_ssize_t i;
+++    const int n = tp - colonp;
+++    int i;
++ 
++     if (tp == endp)
++       goto enoent;
++     for (i = 1; i <= n; i++) {
++-      *(endp - i) = *(colonp + n - i);
++-      *(colonp + n - i) = 0;
+++      endp[- i] = colonp[n - i];
+++      colonp[n - i] = 0;
++     }
++     tp = endp;
++   }
++   if (tp != endp)
++     goto enoent;
++ 
++-  bytes = (bits + 7) / 8;
++-  if (bytes > size)
++-    goto emsgsize;
++-  memcpy(dst, tmp, bytes);
++-  return (bits);
+++  memcpy(dst, tmp, NS_IN6ADDRSZ);
+++  return (1);
++ 
++-  enoent:
+++enoent:
++   SET_ERRNO(ENOENT);
++   return (-1);
++ 
++-  emsgsize:
+++emsgsize:
++   SET_ERRNO(EMSGSIZE);
++   return (-1);
++ }
++ 
+++static int
+++ares_inet_net_pton_ipv6(const char *src, unsigned char *dst, size_t size)
+++{
+++  struct ares_in6_addr in6;
+++  int                  ret;
+++  int                  bits;
+++  size_t               bytes;
+++  char                 buf[INET6_ADDRSTRLEN + sizeof("/128")];
+++  char                *sep;
+++  const char          *errstr;
+++
+++  if (strlen(src) >= sizeof buf) {
+++    SET_ERRNO(EMSGSIZE);
+++    return (-1);
+++  }
+++  strncpy(buf, src, sizeof buf);
+++
+++  sep = strchr(buf, '/');
+++  if (sep != NULL)
+++    *sep++ = '\0';
+++
+++  ret = ares_inet_pton6(buf, (unsigned char *)&in6);
+++  if (ret != 1)
+++    return (-1);
+++
+++  if (sep == NULL)
+++    bits = 128;
+++  else {
+++    if (!getbits(sep, &bits)) {
+++      SET_ERRNO(ENOENT);
+++      return (-1);
+++    }
+++  }
+++
+++  bytes = (bits + 7) / 8;
+++  if (bytes > size) {
+++    SET_ERRNO(EMSGSIZE);
+++    return (-1);
+++  }
+++  memcpy(dst, &in6, bytes);
+++  return (bits);
+++}
+++
++ /*
++  * int
++  * inet_net_pton(af, src, dst, size)
++@@ -403,18 +425,15 @@ ares_inet_net_pton(int af, const char *src, void *dst, size_t size)
++ {
++   switch (af) {
++   case AF_INET:
++-    return (inet_net_pton_ipv4(src, dst, size));
+++    return (ares_inet_net_pton_ipv4(src, dst, size));
++   case AF_INET6:
++-    return (inet_net_pton_ipv6(src, dst, size));
+++    return (ares_inet_net_pton_ipv6(src, dst, size));
++   default:
++     SET_ERRNO(EAFNOSUPPORT);
++     return (-1);
++   }
++ }
++ 
++-#endif /* HAVE_INET_NET_PTON */
++-
++-#ifndef HAVE_INET_PTON
++ int ares_inet_pton(int af, const char *src, void *dst)
++ {
++   int result;
++@@ -434,11 +453,3 @@ int ares_inet_pton(int af, const char *src, void *dst)
++     return 0;
++   return (result > -1 ? 1 : -1);
++ }
++-#else /* HAVE_INET_PTON */
++-int ares_inet_pton(int af, const char *src, void *dst)
++-{
++-  /* just relay this to the underlying function */
++-  return inet_pton(af, src, dst);
++-}
++-
++-#endif
++diff --git a/test/ares-test-internal.cc b/test/ares-test-internal.cc
++index 96d4edec..161f0a5c 100644
++--- a/test/ares-test-internal.cc
+++++ b/test/ares-test-internal.cc
++@@ -81,6 +81,7 @@ TEST_F(LibraryTest, InetPtoN) {
++   EXPECT_EQ(0, ares_inet_net_pton(AF_INET6, "12:34::ff/0", &a6, sizeof(a6)));
++   EXPECT_EQ(16 * 8, ares_inet_net_pton(AF_INET6, "12:34::ffff:0.2", &a6, sizeof(a6)));
++   EXPECT_EQ(16 * 8, ares_inet_net_pton(AF_INET6, "1234:1234:1234:1234:1234:1234:1234:1234", &a6, sizeof(a6)));
+++  EXPECT_EQ(2, ares_inet_net_pton(AF_INET6, "0::00:00:00/2", &a6, sizeof(a6)));
++ 
++   // Various malformed versions
++   EXPECT_EQ(-1, ares_inet_net_pton(AF_INET, "", &a4, sizeof(a4)));
++@@ -118,11 +119,9 @@ TEST_F(LibraryTest, InetPtoN) {
++   EXPECT_EQ(-1, ares_inet_net_pton(AF_INET6, ":1234:1234:1234:1234:1234:1234:1234:1234", &a6, sizeof(a6)));
++   EXPECT_EQ(-1, ares_inet_net_pton(AF_INET6, ":1234:1234:1234:1234:1234:1234:1234:1234:", &a6, sizeof(a6)));
++   EXPECT_EQ(-1, ares_inet_net_pton(AF_INET6, "1234:1234:1234:1234:1234:1234:1234:1234:5678", &a6, sizeof(a6)));
++-  // TODO(drysdale): check whether the next two tests should give -1.
++-  EXPECT_EQ(0, ares_inet_net_pton(AF_INET6, "1234:1234:1234:1234:1234:1234:1234:1234:5678:5678", &a6, sizeof(a6)));
++-  EXPECT_EQ(0, ares_inet_net_pton(AF_INET6, "1234:1234:1234:1234:1234:1234:1234:1234:5678:5678:5678", &a6, sizeof(a6)));
+++  EXPECT_EQ(-1, ares_inet_net_pton(AF_INET6, "1234:1234:1234:1234:1234:1234:1234:1234:5678:5678", &a6, sizeof(a6)));
+++  EXPECT_EQ(-1, ares_inet_net_pton(AF_INET6, "1234:1234:1234:1234:1234:1234:1234:1234:5678:5678:5678", &a6, sizeof(a6)));
++   EXPECT_EQ(-1, ares_inet_net_pton(AF_INET6, "12:34::ffff:257.2.3.4", &a6, sizeof(a6)));
++-  EXPECT_EQ(-1, ares_inet_net_pton(AF_INET6, "12:34::ffff:002.2.3.4", &a6, sizeof(a6)));
++   EXPECT_EQ(-1, ares_inet_net_pton(AF_INET6, "12:34::ffff:1.2.3.4.5.6", &a6, sizeof(a6)));
++   EXPECT_EQ(-1, ares_inet_net_pton(AF_INET6, "12:34::ffff:1.2.3.4.5", &a6, sizeof(a6)));
++   EXPECT_EQ(-1, ares_inet_net_pton(AF_INET6, "12:34::ffff:1.2.3.z", &a6, sizeof(a6)));
++-- 
++2.25.1
++
+diff --git a/meta-oe/recipes-support/c-ares/c-ares_1.18.1.bb b/meta-oe/recipes-support/c-ares/c-ares_1.18.1.bb
+index 25ce45d74..3d8a851f6 100644
+--- a/meta-oe/recipes-support/c-ares/c-ares_1.18.1.bb
++++ b/meta-oe/recipes-support/c-ares/c-ares_1.18.1.bb
+@@ -5,7 +5,10 @@ SECTION = "libs"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE.md;md5=fb997454c8d62aa6a47f07a8cd48b006"
+ 
+-SRC_URI = "git://github.com/c-ares/c-ares.git;branch=main"
++SRC_URI = "git://github.com/c-ares/c-ares.git;branch=main \
++           file://CVE-2023-31130.patch \
++          "
++
+ SRCREV = "2aa086f822aad5017a6f2061ef656f237a62d0ed"
+ 
+ UPSTREAM_CHECK_GITTAGREGEX = "cares-(?P<pver>\d+_(\d_?)+)"
+-- 
+2.25.1
 
-------=_Part_3138795_917642246.1686633366134
-Content-Type: text/html; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-
-<html><head></head><body><div class=3D"yahoo-style-wrap" style=3D"font-fami=
-ly:Helvetica Neue, Helvetica, Arial, sans-serif;font-size:13px;"><div dir=
-=3D"ltr" data-setdir=3D"false"><div><div>exprtk_git recipe uses a SRCREV th=
-at does not belong</div><div>to any branch and results in a fetcher failure=
- when bitbake</div><div>tries to fetch it.</div><div>This commit updates th=
-e SRCREV to fix this issue.</div><div><br></div><div>Signed-off-by: Muhamma=
-d Hamza &lt;muhammad.hamzai@yahoo.com&gt;</div><div>---</div><div>&nbsp;met=
-a-oe/recipes-devtools/exprtk/exprtk_git.bb | 2 +-</div><div>&nbsp;1 file ch=
-anged, 1 insertion(+), 1 deletion(-)</div><div><br></div><div>diff --git a/=
-meta-oe/recipes-devtools/exprtk/exprtk_git.bb b/meta-oe/recipes-devtools/ex=
-prtk/exprtk_git.bb</div><div>index 52975c821..557c4f27a 100644</div><div>--=
-- a/meta-oe/recipes-devtools/exprtk/exprtk_git.bb</div><div>+++ b/meta-oe/r=
-ecipes-devtools/exprtk/exprtk_git.bb</div><div>@@ -3,7 +3,7 @@ HOMEPAGE =3D=
- "https://github.com/ArashPartow/exprtk"</div><div>&nbsp;SECTION =3D "libs"=
-</div><div>&nbsp;LICENSE =3D "MIT"</div><div>&nbsp;LIC_FILES_CHKSUM =3D "fi=
-le://${COMMON_LICENSE_DIR}/MIT;md5=3D0835ade698e0bcf8506ecda2f7b4f302"</div=
-><div>-SRCREV =3D "281c2ccc65b8f91c012ea3725ebcef406378a225"</div><div>+SRC=
-REV =3D "f46bffcd6966d38a09023fb37ba9335214c9b959"</div><div>&nbsp;</div><d=
-iv>&nbsp;SRC_URI =3D "git://github.com/ArashPartow/exprtk.git;branch=3Dmast=
-er;protocol=3Dhttps"</div><div>&nbsp;</div><div>--&nbsp;</div><div>2.34.1</=
-div><div><br></div></div><br></div></div></body></html>
-------=_Part_3138795_917642246.1686633366134--
 
