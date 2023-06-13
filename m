@@ -2,34 +2,34 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6C1B7C88CB8
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 707ACC88CBB
 	for <webhook@archiver.kernel.org>; Tue, 13 Jun 2023 01:41:03 +0000 (UTC)
-Received: from esa4.hc1455-7.c3s2.iphmx.com (esa4.hc1455-7.c3s2.iphmx.com [68.232.139.117])
- by mx.groups.io with SMTP id smtpd.web11.3829.1686620456468378243
+Received: from esa5.hc1455-7.c3s2.iphmx.com (esa5.hc1455-7.c3s2.iphmx.com [68.232.139.130])
+ by mx.groups.io with SMTP id smtpd.web11.3830.1686620458094551998
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 12 Jun 2023 18:40:56 -0700
+ Mon, 12 Jun 2023 18:40:58 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: fujitsu.com, ip: 68.232.139.117, mailfrom: wangmy@fujitsu.com)
-X-IronPort-AV: E=McAfee;i="6600,9927,10739"; a="120353232"
+ dkim=missing; spf=pass (domain: fujitsu.com, ip: 68.232.139.130, mailfrom: wangmy@fujitsu.com)
+X-IronPort-AV: E=McAfee;i="6600,9927,10739"; a="119840698"
 X-IronPort-AV: E=Sophos;i="6.00,238,1681138800"; 
-   d="scan'208";a="120353232"
-Received: from unknown (HELO oym-r1.gw.nic.fujitsu.com) ([210.162.30.89])
-  by esa4.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 13 Jun 2023 10:40:54 +0900
-Received: from oym-m2.gw.nic.fujitsu.com (oym-nat-oym-m2.gw.nic.fujitsu.com [192.168.87.59])
-	by oym-r1.gw.nic.fujitsu.com (Postfix) with ESMTP id 853D6D29E1
-	for <openembedded-devel@lists.openembedded.org>; Tue, 13 Jun 2023 10:40:52 +0900 (JST)
+   d="scan'208";a="119840698"
+Received: from unknown (HELO oym-r3.gw.nic.fujitsu.com) ([210.162.30.91])
+  by esa5.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 13 Jun 2023 10:40:49 +0900
+Received: from oym-m3.gw.nic.fujitsu.com (oym-nat-oym-m3.gw.nic.fujitsu.com [192.168.87.60])
+	by oym-r3.gw.nic.fujitsu.com (Postfix) with ESMTP id 58D93C53C3
+	for <openembedded-devel@lists.openembedded.org>; Tue, 13 Jun 2023 10:40:47 +0900 (JST)
 Received: from kws-ab3.gw.nic.fujitsu.com (kws-ab3.gw.nic.fujitsu.com [192.51.206.21])
-	by oym-m2.gw.nic.fujitsu.com (Postfix) with ESMTP id AA053BF4AB
-	for <openembedded-devel@lists.openembedded.org>; Tue, 13 Jun 2023 10:40:51 +0900 (JST)
+	by oym-m3.gw.nic.fujitsu.com (Postfix) with ESMTP id 98CAAD9485
+	for <openembedded-devel@lists.openembedded.org>; Tue, 13 Jun 2023 10:40:46 +0900 (JST)
 Received: from localhost.localdomain (unknown [10.167.225.33])
-	by kws-ab3.gw.nic.fujitsu.com (Postfix) with ESMTP id 3691D20074724;
-	Tue, 13 Jun 2023 10:40:51 +0900 (JST)
+	by kws-ab3.gw.nic.fujitsu.com (Postfix) with ESMTP id 1A6F420074724;
+	Tue, 13 Jun 2023 10:40:46 +0900 (JST)
 From: wangmy@fujitsu.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-python] [PATCH] python3-cmake: upgrade 3.26.3 -> 3.26.4
-Date: Tue, 13 Jun 2023 09:40:11 +0800
-Message-Id: <1686620422-29962-22-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH] python3-eth-utils: upgrade 2.1.0 -> 2.1.1
+Date: Tue, 13 Jun 2023 09:40:04 +0800
+Message-Id: <1686620422-29962-15-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 In-Reply-To: <1686620422-29962-1-git-send-email-wangmy@fujitsu.com>
 References: <1686620422-29962-1-git-send-email-wangmy@fujitsu.com>
@@ -37,59 +37,48 @@ X-TM-AS-GCONF: 00
 X-TM-AS-Product-Ver: IMSS-9.1.0.1417-9.0.0.1002-27688.004
 X-TM-AS-User-Approved-Sender: Yes
 X-TMASE-Version: IMSS-9.1.0.1417-9.0.1002-27688.004
-X-TMASE-Result: 10--11.987900-10.000000
-X-TMASE-MatchedRID: /gZnudouedqjz0nOeth/yUIIxwDaU5mr/1vXbkGjWeVk2Y4pEw4KntAY
-	WUo4HSIkTJXHN8r/NGtaMorJtMi2CKXUs7kD79U2CTeoveN0UE3TlIO7ZQZ97+2lJX/+eKJIvqn
-	FtM6Nq/L7tBxFpWhrycYoh/qEF/tVoYY7KoErjW8ReM8i8p3vgGxx7vRUjbKhgW6bY8SOq3WjxY
-	yRBa/qJShNCXvA0fw+jaPj0W1qn0Q7AFczfjr/7NZoIYm6U3ym6ygoTiUKfhwFJHyj4Rw3fihdU
-	CZOMpQsbxdfpljB/Kw=
+X-TMASE-Result: 10-0.426100-10.000000
+X-TMASE-MatchedRID: S9L8qTrmXfGjz0nOeth/yXg2y0j5vXZGSc4iQ7VD4M2U8ftiyKjZrdMj
+	jwb9QfV2CC8aAmGeO6lV00+whwxVQy/7QU2czuUNnVTWWiNp+v+u2GmdldmiUGAN6i+va16uBqd
+	FRjHdIbixfbhqGxLk+4Ay6p60ZV62yA7duzCw6dLdB/CxWTRRu+rAZ8KTspSzqxIZBxUqNkKsj4
+	w7eXCxSUW7aJeqSVbdTLeEGfh3G6nTeOYTXOJqw0KQsrY6ZVdtEOJenDj3pCOVr7eK3cAfSOk8U
+	PkgL0loiB6mlDKe1V7S/yytHeCN9GXv4CQeNUk7G6qTOwq/n71+3BndfXUhXQ==
 X-TMASE-SNAP-Result: 1.821001.0001-0-1-22:0,33:0,34:0-0
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 13 Jun 2023 01:41:03 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103240
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103242
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
-Changelog:
-==========
-    chore(deps): bump cmake from 3.26.1 to 3.26.3
-    chore(deps): update pre-commit hooks
-    chore: remove unused requirements-deploy.txt
-    chore(deps): bump pypa/cibuildwheel from 2.12.1 to 2.12.3
-    chore(deps): update pre-commit hooks
-    chore(deps): bump pypa/gh-action-pypi-publish from 1.8.5 to release/v1
-    chore: only bump OpenSSL to 3.0.x (current LTS version)
-    Update to CMake 3.26.4
-    chore: use trusted publisher deployment
-    chore(deps): update pre-commit hooks
-    chore(deps): bump pypa/cibuildwheel from 2.12.3 to 2.13.0
-    Update to OpenSSL 3.0.9
-    fix(cross-compile): Fix download of arm64 CMake binaries
+License-Update: Copyright year updated to 2023.
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../python/{python3-cmake_3.26.3.bb => python3-cmake_3.26.4.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-cmake_3.26.3.bb => python3-cmake_3.26.4.bb} (90%)
+ ...{python3-eth-utils_2.1.0.bb => python3-eth-utils_2.1.1.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-eth-utils_2.1.0.bb => python3-eth-utils_2.1.1.bb} (66%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-cmake_3.26.3.bb b/meta-python/recipes-devtools/python/python3-cmake_3.26.4.bb
-similarity index 90%
-rename from meta-python/recipes-devtools/python/python3-cmake_3.26.3.bb
-rename to meta-python/recipes-devtools/python/python3-cmake_3.26.4.bb
-index 8e924acd3..c66c77757 100644
---- a/meta-python/recipes-devtools/python/python3-cmake_3.26.3.bb
-+++ b/meta-python/recipes-devtools/python/python3-cmake_3.26.4.bb
-@@ -11,7 +11,7 @@ PYPI_PACKAGE = "cmake"
- PYPI_ARCHIVE_NAME_PREFIX = "pypi-"
+diff --git a/meta-python/recipes-devtools/python/python3-eth-utils_2.1.0.bb b/meta-python/recipes-devtools/python/python3-eth-utils_2.1.1.bb
+similarity index 66%
+rename from meta-python/recipes-devtools/python/python3-eth-utils_2.1.0.bb
+rename to meta-python/recipes-devtools/python/python3-eth-utils_2.1.1.bb
+index da45cc7c9..896800a42 100644
+--- a/meta-python/recipes-devtools/python/python3-eth-utils_2.1.0.bb
++++ b/meta-python/recipes-devtools/python/python3-eth-utils_2.1.1.bb
+@@ -2,9 +2,9 @@ SUMMARY = "Common utility functions for codebases which interact with ethereum."
+ HOMEPAGE = "https://github.com/ethereum/eth-utils"
+ SECTION = "devel/python"
+ LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=287820ad3553117aa2f92bf84c219324"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=6749008d847c14b9718949c2e24d5c0a"
  
- inherit pypi python_setuptools_build_meta
--SRC_URI[sha256sum] = "b54cde1f1c0573321b22382bd2ffaf5d08f65188572d128cd4867fb9669723c5"
-+SRC_URI[sha256sum] = "d45b30b9ce7280829888c78650177ab525df2b6785e1a5b3d82b4c147d828c0e"
+-SRC_URI[sha256sum] = "fcb4c3c1b32947ba92970963f9aaf40da73b04ea1034964ff8c0e70595127138"
++SRC_URI[sha256sum] = "7cccfb0b0749431d0d001e327e9a7289bf07308316a73850ae3895020e5682f4"
  
- SRC_URI += " \
- 	file://CMakeLists.txt \
+ inherit pypi setuptools3
+ 
 -- 
 2.34.1
 
