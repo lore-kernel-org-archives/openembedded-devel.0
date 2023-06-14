@@ -1,158 +1,151 @@
-Return-Path: <ross.burton@arm.com>
+Return-Path: <rs@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id ABD34EB64D7
-	for <webhook@archiver.kernel.org>; Tue, 13 Jun 2023 21:17:01 +0000 (UTC)
-Received: from EUR02-VI1-obe.outbound.protection.outlook.com (EUR02-VI1-obe.outbound.protection.outlook.com [40.107.241.63])
- by mx.groups.io with SMTP id smtpd.web10.2686.1686691020650489244
- for <openembedded-devel@lists.openembedded.org>;
- Tue, 13 Jun 2023 14:17:01 -0700
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 32945EB64D7
+	for <webhook@archiver.kernel.org>; Wed, 14 Jun 2023 00:56:41 +0000 (UTC)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ by mx.groups.io with SMTP id smtpd.web10.1032.1686704198859499118
+ for <Openembedded-devel@lists.openembedded.org>;
+ Tue, 13 Jun 2023 17:56:39 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@armh.onmicrosoft.com header.s=selector2-armh-onmicrosoft-com header.b=ai5Hw0Mx;
- spf=pass (domain: arm.com, ip: 40.107.241.63, mailfrom: ross.burton@arm.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
- s=selector2-armh-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=R3dxUZeXVQqX4j0HK2qjfp6gODIlipz65+hbacRv/sk=;
- b=ai5Hw0MxPAFLONZmzX0kbemx0KP6+CUVaWk+wTidt4ywz6SjZGS5NdpR+c6lRttq8Hm1r53NzFBuhXpXgKiUY6YYDv7VNl5Tfjwp/DmniorW8E1fvyqGOutsas05YzGOKNYzsrjnmlIjWurifk4xdFRWsuelZUwqu63L/6C/4L0=
-Received: from DB8PR06CA0066.eurprd06.prod.outlook.com (2603:10a6:10:120::40)
- by VI1PR08MB5470.eurprd08.prod.outlook.com (2603:10a6:803:136::18) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6477.29; Tue, 13 Jun
- 2023 21:16:56 +0000
-Received: from DBAEUR03FT037.eop-EUR03.prod.protection.outlook.com
- (2603:10a6:10:120:cafe::50) by DB8PR06CA0066.outlook.office365.com
- (2603:10a6:10:120::40) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6477.36 via Frontend
- Transport; Tue, 13 Jun 2023 21:16:56 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 63.35.35.123)
- smtp.mailfrom=arm.com; dkim=pass (signature was verified)
- header.d=armh.onmicrosoft.com;dmarc=pass action=none header.from=arm.com;
-Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
- 63.35.35.123 as permitted sender) receiver=protection.outlook.com;
- client-ip=63.35.35.123; helo=64aa7808-outbound-1.mta.getcheckrecipient.com;
- pr=C
-Received: from 64aa7808-outbound-1.mta.getcheckrecipient.com (63.35.35.123) by
- DBAEUR03FT037.mail.protection.outlook.com (100.127.142.208) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.6500.22 via Frontend Transport; Tue, 13 Jun 2023 21:16:56 +0000
-Received: ("Tessian outbound 945aec65ec65:v136"); Tue, 13 Jun 2023 21:16:56 +0000
-X-CheckRecipientChecked: true
-X-CR-MTA-CID: 2691657e0213f155
-X-CR-MTA-TID: 64aa7808
-Received: from 4da064200f5c.1
-	by 64aa7808-outbound-1.mta.getcheckrecipient.com id 057690EB-5110-4E9F-8D2A-8A1D14190740.1;
-	Tue, 13 Jun 2023 21:16:50 +0000
-Received: from EUR01-HE1-obe.outbound.protection.outlook.com
-    by 64aa7808-outbound-1.mta.getcheckrecipient.com with ESMTPS id 4da064200f5c.1
-    (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384);
-    Tue, 13 Jun 2023 21:16:50 +0000
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=ALxk1dzjtIRrDBHHuI83QaLehrZ7HnliPPX19RUhfGfZ2iUiaVU18CBV8YGrc+1cKQAfGylgznBpNeT5PZWx+CAXPSoSmlMwH4SAV6zNd9p0MpLhVey1G7l3N1aCCIMv9ciVsNBuMV5HsalFQk5FSOt3iNnUwSqK0wgAAuInxqIjw1QlOpUWjdAMpibJ09C/pJO7WKRDjom78TRRK+WOROupuPqP73AkXxvErk8hGdGKSpABEQa/uS3R+LO1PvrLUOiagxq/qDo3fhuMWxCiTMufmR8jUJJedXJ9kG68W/EFedipw5n9iZgt3S36Xz+PZq/MS1ze6fB3ySkMggmcTQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=R3dxUZeXVQqX4j0HK2qjfp6gODIlipz65+hbacRv/sk=;
- b=G8IULdJZLoC7gb3qtJ028zE3t4mOVjDGRwzATa6jDnWXYm3G6TewmXdS+uYhj2+Pk+dvAsWZs6ULTWCwyMKyoUW2Qz6cY54uPpYrn2FrzdiueZSPQMm8kD3O1Sw/LIIyEv0gZVLU/oWqsyyJo9uFZfz6e/D+b2ERRT+1fTBViRvzZtDQzPuO/Af2qk2cCbokMbWFG6Sk0zgbYMM0g6M5S5cgMH6PBI4IO6JxTP3w6MV6FgQbHu/1GtUwRaSH7ujxgZ96yICCG0NN6W9ZWHB0VpBAXL+SYo/l4dUdbWWnRAwY78yaQhCHqsAtCc3Yd+Vj6lGSoCdLfsK89gIjSic3Lw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=arm.com; dmarc=pass action=none header.from=arm.com; dkim=pass
- header.d=arm.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
- s=selector2-armh-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=R3dxUZeXVQqX4j0HK2qjfp6gODIlipz65+hbacRv/sk=;
- b=ai5Hw0MxPAFLONZmzX0kbemx0KP6+CUVaWk+wTidt4ywz6SjZGS5NdpR+c6lRttq8Hm1r53NzFBuhXpXgKiUY6YYDv7VNl5Tfjwp/DmniorW8E1fvyqGOutsas05YzGOKNYzsrjnmlIjWurifk4xdFRWsuelZUwqu63L/6C/4L0=
-Received: from PA4PR08MB7411.eurprd08.prod.outlook.com (2603:10a6:102:2a3::12)
- by PAVPR08MB9506.eurprd08.prod.outlook.com (2603:10a6:102:314::13) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6455.44; Tue, 13 Jun
- 2023 21:16:47 +0000
-Received: from PA4PR08MB7411.eurprd08.prod.outlook.com
- ([fe80::eb3c:9b42:21c9:494e]) by PA4PR08MB7411.eurprd08.prod.outlook.com
- ([fe80::eb3c:9b42:21c9:494e%7]) with mapi id 15.20.6455.045; Tue, 13 Jun 2023
- 21:16:46 +0000
-From: Ross Burton <Ross.Burton@arm.com>
-To: "beniaminsandu@gmail.com" <beniaminsandu@gmail.com>
-CC: akuster808 <akuster808@gmail.com>,
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [oe] [meta-networking][kirkstone][PATCH] mbedtls: add support for
- v3.x
-Thread-Topic: [oe] [meta-networking][kirkstone][PATCH] mbedtls: add support
- for v3.x
-Thread-Index: AQHZnhESWVTTN1LZIU6FXN5J6DnJM6+JE5EAgAAD6QCAACUPAA==
-Date: Tue, 13 Jun 2023 21:16:46 +0000
-Message-ID: <40DE68FC-77A5-4FA3-9AEE-A2557E9EC880@arm.com>
-References: <20230613160621.100974-1-beniaminsandu@gmail.com>
- <b5aa26cd-11d5-f9e3-1b4c-2d51d600f9ab@gmail.com>
- <CABQJdOEWXKkkZnHVcfWOgR2gg6Exx5dbijWAHwGq9=if0B1WHw@mail.gmail.com>
-In-Reply-To: 
- <CABQJdOEWXKkkZnHVcfWOgR2gg6Exx5dbijWAHwGq9=if0B1WHw@mail.gmail.com>
-Accept-Language: en-GB, en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-mailer: Apple Mail (2.3731.600.7)
-Authentication-Results-Original: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=arm.com;
-x-ms-traffictypediagnostic: 
-	PA4PR08MB7411:EE_|PAVPR08MB9506:EE_|DBAEUR03FT037:EE_|VI1PR08MB5470:EE_
-X-MS-Office365-Filtering-Correlation-Id: a5227f55-aee1-4693-0bf9-08db6c5384b0
-x-checkrecipientrouted: true
-nodisclaimer: true
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam-Untrusted: BCL:0;
-X-Microsoft-Antispam-Message-Info-Original: 
- N/1UbnaaUlbZetaL2X65mETzfcZUR0PWXcdKzvZAAk2m1hgQV3d5gwUClHnDAWew1PQSl2NfZ5kPYkrKzS5a0yXRMo7um5xExLBGiIGU45TYi7TdxNuCaLtt19GnF5j80IgUyGw47ck0XLhjW33dyWhpXkOuCNuR8I53i3kqUg8djtHm7oFM6tzZ9DBXkVj0QL5Yi1VrozLv2KuNrnwSgtm7HsUoUEfgp1prAZ/ARr61nWASt3Dqd1gPQWnlWKEMO7/S/WGGFnmrFFvBONkzFhWAQHSHHAtdEtkUwnTK9ZW38ktfEoPEsHOhXQ5wytxGZMWwxYuRFqgsrAwIFCPiwSTS9YnOgpuqY9F2u9MbkXVNyYLa8GWFYRQEZpLDZwKR6XUqosQiRI8lh4CRGLGaIWEUDe2ERN879/ZeAtKUyHB66iHKtPwyB3dujRjQIRwTRnbmlSyBdoBXYf6p0D6xCoPtX6gj1vxArUSbT8gU+S3WVtB97Csadw7dHmAzMrtonyZetpjXNl2MU7WwFT35k/VFJZkX/1i/hC4+eXDrUlr3ItleGdNXQ0FL4+CxUSgdjfmWpj5I+ZkUEoMUXkgJT8T19jtv0uHsZifzzCTLq6y3FGD6201z/61ufBI68thNmTmZS1koS3wVHgAuyVHArg==
-X-Forefront-Antispam-Report-Untrusted: 
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PA4PR08MB7411.eurprd08.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230028)(4636009)(136003)(39860400002)(396003)(376002)(366004)(346002)(451199021)(66556008)(122000001)(4326008)(41300700001)(36756003)(316002)(66946007)(64756008)(66476007)(38070700005)(38100700002)(33656002)(6486002)(6512007)(53546011)(26005)(71200400001)(6506007)(6916009)(66446008)(76116006)(91956017)(478600001)(2906002)(86362001)(5660300002)(8936002)(8676002)(4744005)(54906003)(186003)(2616005)(45980500001);DIR:OUT;SFP:1101;
-Content-Type: text/plain; charset="us-ascii"
-Content-ID: <886498F6DA546047979CBA4DD3DACD43@eurprd08.prod.outlook.com>
-Content-Transfer-Encoding: quoted-printable
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=CiMGb8sa;
+ spf=pass (domain: ti.com, ip: 198.47.19.141, mailfrom: rs@ti.com)
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 35E0uWjE112043;
+	Tue, 13 Jun 2023 19:56:32 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1686704192;
+	bh=33Iysy8GDqGyH02/eu7tN/55EUWwUED/Cwz/euNpTno=;
+	h=From:To:CC:Subject:Date;
+	b=CiMGb8saWk9G3Jx6dHhAEOXGCSNi+dVPV8tN4fJ5OUs8swbCIDkzVG0homZbuwRYf
+	 ROUpVsSGWfgkvbBFT9muQeCMveEwjgniY/6gEWDZWbFSAdAf4kJ/HusQ3Di0W/LAH4
+	 DXyb/EZG4L4ugFD+mjKo/w4ABiyb5Z+oiIAioY4M=
+Received: from DFLE112.ent.ti.com (dfle112.ent.ti.com [10.64.6.33])
+	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 35E0uWJc038678
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+	Tue, 13 Jun 2023 19:56:32 -0500
+Received: from DFLE101.ent.ti.com (10.64.6.22) by DFLE112.ent.ti.com
+ (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 13
+ Jun 2023 19:56:32 -0500
+Received: from fllv0039.itg.ti.com (10.64.41.19) by DFLE101.ent.ti.com
+ (10.64.6.22) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Tue, 13 Jun 2023 19:56:32 -0500
+Received: from rs-desk.dhcp.ti.com (ileaxei01-snat2.itg.ti.com [10.180.69.6])
+	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 35E0uW7E074306;
+	Tue, 13 Jun 2023 19:56:32 -0500
+From: <rs@ti.com>
+To: <afd@ti.com>, <denis@denix.org>, <raj.khem@gmail.com>
+CC: <Openembedded-devel@lists.openembedded.org>, Randolph Sapp <rs@ti.com>
+Subject: [oe][meta-oe][PATCH] opengl-es-cts: 3.2.8.0 -> 3.2.9.3
+Date: Tue, 13 Jun 2023 19:56:22 -0500
+Message-ID: <20230614005622.2586311-1-rs@ti.com>
+X-Mailer: git-send-email 2.41.0
 MIME-Version: 1.0
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAVPR08MB9506
-Original-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=arm.com;
-X-EOPAttributedMessage: 0
-X-MS-Exchange-Transport-CrossTenantHeadersStripped: 
- DBAEUR03FT037.eop-EUR03.prod.protection.outlook.com
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id-Prvs: 
-	0dc3641c-019e-44a7-36e5-08db6c537eda
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 
-	sh4AseG2h2K/CCk1t9cpO3QgQoy/VfK4dvTXYRQvzGA9Db2umzJrYfvPanSI3OAwzMA3KWNUk/tKJ08gK2EJ/HMiq4Uioz9nV6U55NhJYnolZrEeaC4RCw5JH5OvkdhuX6K2M1oZ4/JRgeDItLhePEZvLd7eYyLIDP7gTlRstsV6RhL2EApmtmX/TcktRYouziCVI+w4eUH20qmAy2driXRxUbcSB33VUaY4PIWYDi2/nlg7iHW5lJsIKqneJNmE4EJ72V8r9ZHe6m+U1p7Qu2iCZ1ICixRpWzJ7QJZ4Qh0fjGbiM+G6IGtunid8Kmu+vztn6e3wsqjMTLMcGurKpeuUVTfA7FFKP9Fft0dAduFheKgjb0mEQTAALsEbkktuyWRTSOg5mVYG9Xt5CbgUWzNU2iuYbJGP9eaVZIEsaGPYqkw1OAc2O0IhRDiiQCVEib6D58ZsSrtSWhXyEuwXC4ERB1ssiP7Nt4I0hDs23+ccXCwCIreTdG2JWzhiV3Fv1lSjPhIPVgYXpmlTktXIsMVMrz5cf5wUGu7q/kjYqWYywfaEjuMm7aI3cJ/ZIgs8CWNnRFruBkS+DAsORjZtP5fLU6OXsqxR3vhPCPUvSVRhMNRFm2ombDXY71GfLpAX0NUPGRs2Cpwchh73ZGqjWwPTFvlqCUQ9WMEVDKIQDdeZKbYfMx+oEo0rsaoQkaT0aMp2JIXrBm8w3CrJN51xxCLhJgZtd3TR0IxIOc9/bzOAk/Nbi+ivS+LmV/vwvVJe
-X-Forefront-Antispam-Report: 
-	CIP:63.35.35.123;CTRY:IE;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:64aa7808-outbound-1.mta.getcheckrecipient.com;PTR:ec2-63-35-35-123.eu-west-1.compute.amazonaws.com;CAT:NONE;SFS:(13230028)(4636009)(136003)(346002)(396003)(39860400002)(376002)(451199021)(46966006)(40470700004)(36840700001)(5660300002)(8676002)(6862004)(2906002)(8936002)(4744005)(70206006)(70586007)(54906003)(6486002)(4326008)(6506007)(6512007)(26005)(53546011)(316002)(186003)(41300700001)(36860700001)(82740400003)(356005)(336012)(47076005)(2616005)(40460700003)(478600001)(40480700001)(33656002)(86362001)(36756003)(82310400005)(81166007);DIR:OUT;SFP:1101;
-X-OriginatorOrg: arm.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Jun 2023 21:16:56.7116
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: a5227f55-aee1-4693-0bf9-08db6c5384b0
-X-MS-Exchange-CrossTenant-Id: f34e5979-57d9-4aaa-ad4d-b122a662184d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=f34e5979-57d9-4aaa-ad4d-b122a662184d;Ip=[63.35.35.123];Helo=[64aa7808-outbound-1.mta.getcheckrecipient.com]
-X-MS-Exchange-CrossTenant-AuthSource: 
-	DBAEUR03FT037.eop-EUR03.prod.protection.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR08MB5470
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 13 Jun 2023 21:17:01 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103277
+ <openembedded-devel@lists.openembedded.org>; Wed, 14 Jun 2023 00:56:41 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103278
 
-On 13 Jun 2023, at 20:03, Beniamin Sandu via lists.openembedded.org <beniam=
-insandu=3Dgmail.com@lists.openembedded.org> wrote:
->=20
-> Thanks for the feedback, I was about to follow up with a similar patch
-> on the master branch.
->=20
-> Is there any chance we can include it on kirkstone too after it gets on m=
-aster?
+From: Randolph Sapp <rs@ti.com>
 
-Stable policy is it goes master -> mickledore -> kirkstone.
+Bump the opengl-es-cts version to latest since this package is currently
+incompatible with Weston 10 due to changes in wayland-protocols.
 
-Ross=
+I would bump the vulkan-cts test revision here as well, but
+unfortunately newer versions of vulkan-cts add video encode/decode tests
+from Nvidia that break on any arch other than amd64 in their current
+format.
+
+Signed-off-by: Randolph Sapp <rs@ti.com>
+---
+ .../vk-gl-cts/khronos-cts.inc                 | 10 ++++++----
+ ...ts_3.2.8.0.bb => opengl-es-cts_3.2.9.3.bb} | 19 +++++++++----------
+ .../vk-gl-cts/vulkan-cts_1.3.3.1.bb           |  3 +++
+ 3 files changed, 18 insertions(+), 14 deletions(-)
+ rename meta-oe/recipes-graphics/vk-gl-cts/{opengl-es-cts_3.2.8.0.bb => opengl-es-cts_3.2.9.3.bb} (65%)
+
+diff --git a/meta-oe/recipes-graphics/vk-gl-cts/khronos-cts.inc b/meta-oe/recipes-graphics/vk-gl-cts/khronos-cts.inc
+index 4fd32d93c..097acc1a0 100644
+--- a/meta-oe/recipes-graphics/vk-gl-cts/khronos-cts.inc
++++ b/meta-oe/recipes-graphics/vk-gl-cts/khronos-cts.inc
+@@ -4,12 +4,14 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
+ SRC_URI = "\
+ 	git://github.com/KhronosGroup/VK-GL-CTS.git;protocol=https;name=vk-gl-cts;nobranch=1 \
+ 	git://github.com/google/amber;protocol=https;destsuffix=git/external/amber/src;name=amber;branch=main \
+-	git://github.com/KhronosGroup/glslang.git;protocol=https;destsuffix=git/external/glslang/src;name=glslang;branch=master \
+-	git://github.com/KhronosGroup/SPIRV-Headers.git;protocol=https;destsuffix=git/external/spirv-headers/src;name=spirv-headers;branch=master \
+-	git://github.com/KhronosGroup/SPIRV-Tools.git;protocol=https;destsuffix=git/external/spirv-tools/src;name=spirv-tools;branch=master \
++	git://github.com/KhronosGroup/glslang.git;protocol=https;destsuffix=git/external/glslang/src;name=glslang;branch=main \
++	git://github.com/KhronosGroup/SPIRV-Headers.git;protocol=https;destsuffix=git/external/spirv-headers/src;name=spirv-headers;branch=main \
++	git://github.com/KhronosGroup/SPIRV-Tools.git;protocol=https;destsuffix=git/external/spirv-tools/src;name=spirv-tools;branch=main \
+         git://github.com/open-source-parsers/jsoncpp.git;protocol=https;destsuffix=git/external/jsoncpp/src;name=jsoncpp;branch=master \
+         git://github.com/KhronosGroup/Vulkan-Docs.git;protocol=https;destsuffix=git/external/vulkan-docs/src;name=vulkan-docs;branch=main \
+-        https://raw.githubusercontent.com/baldurk/renderdoc/fcdea67879fa1991e56cf7734ce0ce27866b665f/renderdoc/api/app/renderdoc_app.h;subdir=git/external/renderdoc/src;name=renderdoc \
++        https://raw.githubusercontent.com/baldurk/renderdoc/v1.1/renderdoc/api/app/renderdoc_app.h;subdir=git/external/renderdoc/src;name=renderdoc \
++        git://github.com/Igalia/ESExtractor.git;protocol=https;destsuffix=git/external/ESExtractor/src;name=ESExtractor;branch=main \
++        git://github.com/nvpro-samples/vk_video_samples.git;protocol=https;destsuffix=git/external/video-parser/src;name=video-parser;branch=main \
+         file://gen-framework-path.patch \
+ "
+ 
+diff --git a/meta-oe/recipes-graphics/vk-gl-cts/opengl-es-cts_3.2.8.0.bb b/meta-oe/recipes-graphics/vk-gl-cts/opengl-es-cts_3.2.9.3.bb
+similarity index 65%
+rename from meta-oe/recipes-graphics/vk-gl-cts/opengl-es-cts_3.2.8.0.bb
+rename to meta-oe/recipes-graphics/vk-gl-cts/opengl-es-cts_3.2.9.3.bb
+index edfeda2be..67ce5f2b9 100644
+--- a/meta-oe/recipes-graphics/vk-gl-cts/opengl-es-cts_3.2.8.0.bb
++++ b/meta-oe/recipes-graphics/vk-gl-cts/opengl-es-cts_3.2.9.3.bb
+@@ -1,20 +1,19 @@
+ DESCRIPTION = "OpenGL CTS"
+ 
+ require khronos-cts.inc
+-# opengl-es-cts-3.2.8.0
+-SRCREV_vk-gl-cts = "317f467fac032b88a4789e4345421f92c4e8716d"
+-SRCREV_amber = "209d92e2c27a333e723d24497e8c7a07b2f2eb39"
+-SRCREV_glslang = "9158061398a96033c990e69156bd28c67114544b"
+-SRCREV_spirv-headers = "449bc986ba6f4c5e10e32828783f9daef2a77644"
+-SRCREV_spirv-tools = "ee30773650eca50b1cd3c913babcc2b50d7b91fd"
++# opengl-es-cts-3.2.9.3
++SRCREV_vk-gl-cts = "7f5fb62245d535a1fc0bf50b2c7e5a342dc551fe"
++SRCREV_amber = "933ecb4d6288675a92eb1650e0f52b1d7afe8273"
++SRCREV_glslang = "a0ad0d7067521fff880e36acfb8ce453421c3f25"
++SRCREV_spirv-headers = "87d5b782bec60822aa878941e6b13c0a9a954c9b"
++SRCREV_spirv-tools = "f98473ceeb1d33700d01e20910433583e5256030"
++SRCREV_ESExtractor = "ce5d7ebcf0ebb0d78385ee4cc34653eb6764bfc4"
+ # Not yet needed
+ SRCREV_jsoncpp = "9059f5cad030ba11d37818847443a53918c327b1"
+-SRCREV_vulkan-docs = "d70e01c0be7b8a7d20b186b30b29a75b18bba75d"
++SRCREV_vulkan-docs = "9a2e576a052a1e65a5d41b593e693ff02745604b"
++SRCREV_video-parser = "7d68747d3524842afaf050c5e00a10f5b8c07904"
+ SRC_URI[renderdoc.sha256sum] = "e7b5f0aa5b1b0eadc63a1c624c0ca7f5af133aa857d6a4271b0ef3d0bdb6868e"
+ 
+-SRC_URI += "file://0001-Remove-dead-variable-984.patch;patchdir=external/amber/src \
+-            file://0001-include-missing-cstdint.patch;patchdir=external/amber/src"
+-
+ S = "${WORKDIR}/git"
+ 
+ do_install() {
+diff --git a/meta-oe/recipes-graphics/vk-gl-cts/vulkan-cts_1.3.3.1.bb b/meta-oe/recipes-graphics/vk-gl-cts/vulkan-cts_1.3.3.1.bb
+index b1aa7d9b1..f491385b3 100644
+--- a/meta-oe/recipes-graphics/vk-gl-cts/vulkan-cts_1.3.3.1.bb
++++ b/meta-oe/recipes-graphics/vk-gl-cts/vulkan-cts_1.3.3.1.bb
+@@ -10,6 +10,9 @@ SRCREV_spirv-tools = "b930e734ea198b7aabbbf04ee1562cf6f57962f0"
+ SRCREV_jsoncpp = "9059f5cad030ba11d37818847443a53918c327b1"
+ SRCREV_vulkan-docs = "9b5562187a8ad72c171410b036ceedbc450153ba"
+ SRC_URI[renderdoc.sha256sum] = "e7b5f0aa5b1b0eadc63a1c624c0ca7f5af133aa857d6a4271b0ef3d0bdb6868e"
++# Not yet needed
++SRCREV_ESExtractor = "ce5d7ebcf0ebb0d78385ee4cc34653eb6764bfc4"
++SRCREV_video-parser = "7d68747d3524842afaf050c5e00a10f5b8c07904"
+ 
+ SRC_URI += "file://0001-cmake-Define-WAYLAND_SCANNER-and-WAYLAND_PROTOCOLS_D.patch \
+             file://0001-vulkan-cts-include-missing-cstdint.patch \
+-- 
+2.41.0
+
 
