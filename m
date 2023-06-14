@@ -2,123 +2,202 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5332FEB64D9
-	for <webhook@archiver.kernel.org>; Wed, 14 Jun 2023 07:35:23 +0000 (UTC)
-Received: from mail-pl1-f180.google.com (mail-pl1-f180.google.com [209.85.214.180])
- by mx.groups.io with SMTP id smtpd.web10.5886.1686728119109497137
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 85B6DEB64D9
+	for <webhook@archiver.kernel.org>; Wed, 14 Jun 2023 07:42:33 +0000 (UTC)
+Received: from mail-oo1-f54.google.com (mail-oo1-f54.google.com [209.85.161.54])
+ by mx.groups.io with SMTP id smtpd.web10.5953.1686728543189531589
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 14 Jun 2023 00:35:19 -0700
+ Wed, 14 Jun 2023 00:42:23 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=Cf7e/HKb;
- spf=pass (domain: gmail.com, ip: 209.85.214.180, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f180.google.com with SMTP id d9443c01a7336-1b3d8aa2c17so16361895ad.3
-        for <openembedded-devel@lists.openembedded.org>; Wed, 14 Jun 2023 00:35:19 -0700 (PDT)
+ dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=ePtmp4v0;
+ spf=pass (domain: gmail.com, ip: 209.85.161.54, mailfrom: raj.khem@gmail.com)
+Received: by mail-oo1-f54.google.com with SMTP id 006d021491bc7-55b78f40301so332709eaf.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 14 Jun 2023 00:42:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1686728118; x=1689320118;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=WncpsRtY0pG8DaKXUqowlZeVRuxtmyx/fL7VZE5ZEhQ=;
-        b=Cf7e/HKbkUuk5+qtfRdFQ+2WnGl5M0tVS1jBRWc/kLdr+qDWklv/P2esHNGrNHUfne
-         J0oZIpf/OYqi6TgeohbTeI34XrEpZT0Nd+srzk1pM/NRwcdB2kQEn90yjkrMYelV6feD
-         MW1enVnx7zJKeSiSttqpb+ID7hrOZA+ISsv9DuLUQKA2eQgA976BG6bgjxvRniz79ILU
-         cRWTZh91YvChNeZdPmOJ1GiaXOUivJgbC9Zcw4IQG66nqmDS47SrOvAi6/RkdrSEC6Nw
-         QFHGfPNDz27sQQuhThgmVkpVWrSTmyYoxOUgxkAD9MFAoXXJX6mFJI2tgEBsFcgBhJC0
-         SjhA==
+        d=gmail.com; s=20221208; t=1686728542; x=1689320542;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=5uXHBbxKdQwdraWqgix/mEIp/Fjpm41RueVm/ht0+Uw=;
+        b=ePtmp4v0d2Gcw7csvHIY7PFbpaA/jjTn9qasLNhK+khsQ5/q1sh/Z8UtfMX8zp/qIA
+         WnafSNa2PK9mLGBqeI3PvqxHXQbNBla84XAxLZXb6odB3yFjz/1KpTOB1GvmqU7HFbpU
+         NGbZ5pUw0sqd1FUFwcM8VJ2dN06KxtGk8Hgvt9FFc0NbTR/PwXhxWgGghZO9lBAxmoNt
+         lGvqAapUYkmx5H+VRwyBhv7WiL1Tqxwa08LNP8q7I54VKbbv0Ntd5DlfrR+GATBfFWeb
+         mN9Y3FDUYFDrzae/6QeaBh0W1e5QaR1rFomnFeAgpb8Qd3Eldgj3HS4YaTjGPF9tHj4Q
+         KYLw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1686728118; x=1689320118;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=WncpsRtY0pG8DaKXUqowlZeVRuxtmyx/fL7VZE5ZEhQ=;
-        b=czzC3ebqaB3OHgLLHdIO+KaLxOo6QRSSw1oVca8lNeTtoXjS1BM55fWck2ruI5IPT5
-         NFPRq0dBF+zBjMIr0uELBxk6gayCTwhy8kNmEW0O3fjpNopa9/5HpqXM7ydChzxwIrCx
-         QWCMD3MEI9Cuxhd0X2R1fmF3SUVDOWzXF+Rqf6tfgUfs0AsMggqEhCMXC4rigmKlzGJB
-         6XTKKZpZdWQHh3BOu3KTw++8USjwRxMcdDgqxBX8L4l3Mmdeh2yRRQ1+Y4TU8XgXuK7T
-         C4vWbehozMcXRcQNHPfTYfMrNIrirsQZVjuhohWDdsxpdJPLJHopuDBRp9D3dpsalGKn
-         +6NQ==
-X-Gm-Message-State: AC+VfDwngJPcft0BDlkI/0sUSr9mkP2FLL+K+qI5deWMVJYmHG41sdyQ
-	Q+dOFxcv/v+ZTCltZ2GrU0U4qrQbPbE=
-X-Google-Smtp-Source: ACHHUZ7e132jNvCbzYzlfApFIbUMMMPT63mv9Q2BRQfyRNZ98WvpnzgQSIP1gOseSXMLfZt3Gq2KAg==
-X-Received: by 2002:a17:903:187:b0:1b3:f8db:6f0e with SMTP id z7-20020a170903018700b001b3f8db6f0emr2396755plg.43.1686728118131;
-        Wed, 14 Jun 2023 00:35:18 -0700 (PDT)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9181:d380::eb87])
-        by smtp.gmail.com with ESMTPSA id d10-20020a170902b70a00b001afd6647a77sm11524091pls.155.2023.06.14.00.35.17
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 14 Jun 2023 00:35:17 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>,
-	Wang Mingyu <wangmy@fujitsu.com>
-Subject: [meta-oe][PATCH] libtracefs: Fix build with clang+musl
-Date: Wed, 14 Jun 2023 00:35:15 -0700
-Message-ID: <20230614073515.324313-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.41.0
+        d=1e100.net; s=20221208; t=1686728542; x=1689320542;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=5uXHBbxKdQwdraWqgix/mEIp/Fjpm41RueVm/ht0+Uw=;
+        b=E2xBbC4Ho6sFKA4X1S5wB5xdA5yVFNysgZphaYyN8M9+xfgj+O2W1ZJNsech140aMa
+         31MXNU5+d8sIM+kkepO3fLponIc8XD04Wa8FYaaW5eYHK3Vn3GecqX6ktK6EmL7qXtqg
+         xHqHmCpt6O+daZFYm4q2f8bTL67txDI13UzBFVRqvv1b4DsFGj9JAKBSgDqQzj62hIx5
+         kfpqCbr4cDeiDkjFJGZfwpt88sKH4MRt5bsytaRvKyFEA7tIl6KXNU/S1N4WgAPQsAdS
+         9NxeT/1Gix8+IsnHT+LAv0QaKNh+ehj7Ji3sqbXunFN17WjBTSQ/pMcUchGBIMba0JwX
+         E9Bg==
+X-Gm-Message-State: AC+VfDzMyUvn+7sycE+sDoF9/foyYME6KytCMKgxVIa4TV3Gjh1AtXEY
+	JwJZA7Wy8aWi2WKC3BdHufsJX8qrKhQR0Cojvs1oSbDfUGw=
+X-Google-Smtp-Source: ACHHUZ6ppodOKHHUJIx0qERRo6HaJ+d8jw1H/xrD/0TZTRSb1YWpe4ckQnLggCVVpayX+LXX0UvZ/RWoWo3kNa6Q3T4=
+X-Received: by 2002:a4a:4308:0:b0:558:b4b6:7f8c with SMTP id
+ k8-20020a4a4308000000b00558b4b67f8cmr9276808ooj.6.1686728542212; Wed, 14 Jun
+ 2023 00:42:22 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20230613191758.29502-1-beniaminsandu@gmail.com>
+In-Reply-To: <20230613191758.29502-1-beniaminsandu@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 14 Jun 2023 00:41:56 -0700
+Message-ID: <CAMKF1sqp-BJd7xHrQ+nODHFuYGuCg4e9mC7LHX8ORrQ3mJ_f5w@mail.gmail.com>
+Subject: Re: [oe] [meta-networking][PATCH] mbedtls: add support for v3.x
+To: Beniamin Sandu <beniaminsandu@gmail.com>
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 14 Jun 2023 07:35:23 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103279
+ <openembedded-devel@lists.openembedded.org>; Wed, 14 Jun 2023 07:42:33 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103280
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-Cc: Wang Mingyu <wangmy@fujitsu.com>
----
- ...-missing-headers-for-syscall-and-SYS.patch | 31 +++++++++++++++++++
- .../libtracefs/libtracefs_1.7.0.bb            |  1 +
- 2 files changed, 32 insertions(+)
- create mode 100644 meta-oe/recipes-kernel/libtracefs/libtracefs/0001-tracefs-perf-Add-missing-headers-for-syscall-and-SYS.patch
+this might be the reason for a new build failure while building mdns
 
-diff --git a/meta-oe/recipes-kernel/libtracefs/libtracefs/0001-tracefs-perf-Add-missing-headers-for-syscall-and-SYS.patch b/meta-oe/recipes-kernel/libtracefs/libtracefs/0001-tracefs-perf-Add-missing-headers-for-syscall-and-SYS.patch
-new file mode 100644
-index 0000000000..a24dd1315b
---- /dev/null
-+++ b/meta-oe/recipes-kernel/libtracefs/libtracefs/0001-tracefs-perf-Add-missing-headers-for-syscall-and-SYS.patch
-@@ -0,0 +1,31 @@
-+From f539d96ef4a34ad23d33c552d1770ab429b0220e Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Wed, 14 Jun 2023 00:24:36 -0700
-+Subject: [PATCH] tracefs-perf: Add missing headers for syscall() and SYS_*
-+ defines
-+
-+These headers are needed to provide prototype definitions for functions
-+e.g. close(), syscall(), getpagesize(), getpid()
-+
-+The issue is observed with clang-16+ compiler on musl systems
-+
-+Upstream-Status: Submitted [https://lore.kernel.org/linux-trace-devel/20230614072759.316154-1-raj.khem@gmail.com/T/#u]
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ src/tracefs-perf.c | 3 ++-
-+ 1 file changed, 2 insertions(+), 1 deletion(-)
-+
-+diff --git a/src/tracefs-perf.c b/src/tracefs-perf.c
-+index 96d12cd..62c1508 100644
-+--- a/src/tracefs-perf.c
-++++ b/src/tracefs-perf.c
-+@@ -1,4 +1,5 @@
-+-#include <asm/unistd.h>
-++#include <unistd.h>
-++#include <sys/syscall.h>
-+ #include <sys/mman.h>
-+ #include <signal.h>
-+ #include <linux/perf_event.h>
-+-- 
-+2.41.0
-+
-diff --git a/meta-oe/recipes-kernel/libtracefs/libtracefs_1.7.0.bb b/meta-oe/recipes-kernel/libtracefs/libtracefs_1.7.0.bb
-index 77556d9126..9a408ba13c 100644
---- a/meta-oe/recipes-kernel/libtracefs/libtracefs_1.7.0.bb
-+++ b/meta-oe/recipes-kernel/libtracefs/libtracefs_1.7.0.bb
-@@ -12,6 +12,7 @@ DEPENDS = "libtraceevent bison-native flex-native"
- SRCREV = "aebab37379d0fbadc702d64aca0fe5cf18676404"
- SRC_URI = "git://git.kernel.org/pub/scm/libs/libtrace/libtracefs.git;branch=${BPN};protocol=https \
-            file://0001-makefile-Do-not-preserve-ownership-in-cp-command.patch \
-+           file://0001-tracefs-perf-Add-missing-headers-for-syscall-and-SYS.patch \
-            "
- S = "${WORKDIR}/git"
- 
--- 
-2.41.0
+| mbedtls.c:41:10: fatal error: mbedtls/certs.h: No such file or directory
+|    41 | #include <mbedtls/certs.h>
+|       |          ^~~~~~~~~~~~~~~~~
+| compilation terminated.
+| make[1]: *** [Makefile:510: objects/prod/mbedtls.c.o] Error 1
+| make[1]: Leaving directory
+'/home/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/core2-64-poky-li=
+nux/mdns/1790.80.10-r0/git/mDNSPosix'
 
+for more details see
+
+https://autobuilder.yoctoproject.org/typhoon/#/builders/88/builds/2821/step=
+s/14/logs/stdio
+
+On Tue, Jun 13, 2023 at 12:19=E2=80=AFPM Beniamin Sandu <beniaminsandu@gmai=
+l.com> wrote:
+>
+> Version 3.4.0 adds a lot of improvements and fixes (a notable one
+> being initial support for PKCS7 CMS), but since this is a pretty
+> big jump, let's keep both versions for a while, so the v2.x users
+> can upgrade to 3.x in a timely manner if needed.
+>
+> Signed-off-by: Beniamin Sandu <beniaminsandu@gmail.com>
+> ---
+>  .../mbedtls/mbedtls_3.4.0.bb                  | 76 +++++++++++++++++++
+>  1 file changed, 76 insertions(+)
+>  create mode 100644 meta-networking/recipes-connectivity/mbedtls/mbedtls_=
+3.4.0.bb
+>
+> diff --git a/meta-networking/recipes-connectivity/mbedtls/mbedtls_3.4.0.b=
+b b/meta-networking/recipes-connectivity/mbedtls/mbedtls_3.4.0.bb
+> new file mode 100644
+> index 000000000..351aa43ac
+> --- /dev/null
+> +++ b/meta-networking/recipes-connectivity/mbedtls/mbedtls_3.4.0.bb
+> @@ -0,0 +1,76 @@
+> +SUMMARY =3D "Lightweight crypto and SSL/TLS library"
+> +DESCRIPTION =3D "mbedtls is a lean open source crypto library          \
+> +for providing SSL and TLS support in your programs. It offers        \
+> +an intuitive API and documented header files, so you can actually    \
+> +understand what the code does. It features:                          \
+> +                                                                     \
+> + - Symmetric algorithms, like AES, Blowfish, Triple-DES, DES, ARC4,  \
+> +   Camellia and XTEA                                                 \
+> + - Hash algorithms, like SHA-1, SHA-2, RIPEMD-160 and MD5            \
+> + - Entropy pool and random generators, like CTR-DRBG and HMAC-DRBG   \
+> + - Public key algorithms, like RSA, Elliptic Curves, Diffie-Hellman, \
+> +   ECDSA and ECDH                                                    \
+> + - SSL v3 and TLS 1.0, 1.1 and 1.2                                   \
+> + - Abstraction layers for ciphers, hashes, public key operations,    \
+> +   platform abstraction and threading                                \
+> +"
+> +
+> +HOMEPAGE =3D "https://tls.mbed.org/"
+> +
+> +LICENSE =3D "Apache-2.0"
+> +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D3b83ef96387f14655fc854ddc3c6b=
+d57"
+> +
+> +SECTION =3D "libs"
+> +
+> +S =3D "${WORKDIR}/git"
+> +SRCREV =3D "1873d3bfc2da771672bd8e7e8f41f57e0af77f33"
+> +SRC_URI =3D "git://github.com/ARMmbed/mbedtls.git;protocol=3Dhttps;branc=
+h=3Dmaster \
+> +           file://run-ptest \
+> +          "
+> +
+> +inherit cmake update-alternatives ptest
+> +
+> +PACKAGECONFIG ??=3D "shared-libs programs ${@bb.utils.contains('PTEST_EN=
+ABLED', '1', 'tests', '', d)}"
+> +PACKAGECONFIG[shared-libs] =3D "-DUSE_SHARED_MBEDTLS_LIBRARY=3DON,-DUSE_=
+SHARED_MBEDTLS_LIBRARY=3DOFF"
+> +PACKAGECONFIG[programs] =3D "-DENABLE_PROGRAMS=3DON,-DENABLE_PROGRAMS=3D=
+OFF"
+> +PACKAGECONFIG[werror] =3D "-DMBEDTLS_FATAL_WARNINGS=3DON,-DMBEDTLS_FATAL=
+_WARNINGS=3DOFF"
+> +# Make X.509 and TLS calls use PSA
+> +# https://github.com/Mbed-TLS/mbedtls/blob/development/docs/use-psa-cryp=
+to.md
+> +PACKAGECONFIG[psa] =3D ""
+> +PACKAGECONFIG[tests] =3D "-DENABLE_TESTING=3DON,-DENABLE_TESTING=3DOFF"
+> +
+> +EXTRA_OECMAKE =3D "-DLIB_INSTALL_DIR:STRING=3D${libdir}"
+> +
+> +# For now the only way to enable PSA is to explicitly pass a -D via CFLA=
+GS
+> +CFLAGS:append =3D "${@bb.utils.contains('PACKAGECONFIG', 'psa', ' -DMBED=
+TLS_USE_PSA_CRYPTO', '', d)}"
+> +
+> +PROVIDES +=3D "polarssl"
+> +RPROVIDES:${PN} =3D "polarssl"
+> +
+> +PACKAGES =3D+ "${PN}-programs"
+> +FILES:${PN}-programs =3D "${bindir}/"
+> +
+> +ALTERNATIVE:${PN}-programs =3D "hello"
+> +ALTERNATIVE_LINK_NAME[hello] =3D "${bindir}/hello"
+> +
+> +BBCLASSEXTEND =3D "native nativesdk"
+> +
+> +CVE_PRODUCT =3D "mbed_tls"
+> +
+> +# Fix merged upstream https://github.com/Mbed-TLS/mbedtls/pull/5310
+> +CVE_CHECK_IGNORE +=3D "CVE-2021-43666"
+> +# Fix merged upstream https://github.com/Mbed-TLS/mbedtls/commit/9a4a9c6=
+6a48edfe9ece03c7e4a53310adf73a86c
+> +CVE_CHECK_IGNORE +=3D "CVE-2021-45451"
+> +
+> +# Export source files/headers needed by Arm Trusted Firmware
+> +sysroot_stage_all:append() {
+> +       sysroot_stage_dir "${S}/library" "${SYSROOT_DESTDIR}/usr/share/mb=
+edtls-source/library"
+> +       sysroot_stage_dir "${S}/include" "${SYSROOT_DESTDIR}/usr/share/mb=
+edtls-source/include"
+> +}
+> +
+> +do_install_ptest () {
+> +       install -d ${D}${PTEST_PATH}/tests
+> +       cp -f ${B}/tests/test_suite_* ${D}${PTEST_PATH}/tests/
+> +       find ${D}${PTEST_PATH}/tests/ -type f -name "*.c" -delete
+> +       cp -fR ${S}/tests/data_files ${D}${PTEST_PATH}/tests/
+> +}
+> --
+> 2.25.1
+>
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#103275): https://lists.openembedded.org/g/openembedde=
+d-devel/message/103275
+> Mute This Topic: https://lists.openembedded.org/mt/99512869/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
+aj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
 
