@@ -1,189 +1,55 @@
-Return-Path: <hprajapati@mvista.com>
+Return-Path: <jester@theyoctojester.info>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 131E4EB64D7
-	for <webhook@archiver.kernel.org>; Fri, 16 Jun 2023 06:02:01 +0000 (UTC)
-Received: from mail-pg1-f181.google.com (mail-pg1-f181.google.com [209.85.215.181])
- by mx.groups.io with SMTP id smtpd.web11.2494.1686895310878759046
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C4D8FEB64D7
+	for <webhook@archiver.kernel.org>; Fri, 16 Jun 2023 08:44:01 +0000 (UTC)
+Received: from smtp3-g21.free.fr (smtp3-g21.free.fr [212.27.42.3])
+ by mx.groups.io with SMTP id smtpd.web11.3182.1686899700480106441
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 15 Jun 2023 23:01:50 -0700
+ Fri, 16 Jun 2023 00:15:00 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@mvista.com header.s=google header.b=BaHH0Wzr;
- spf=pass (domain: mvista.com, ip: 209.85.215.181, mailfrom: hprajapati@mvista.com)
-Received: by mail-pg1-f181.google.com with SMTP id 41be03b00d2f7-54f85f8b961so310075a12.3
-        for <openembedded-devel@lists.openembedded.org>; Thu, 15 Jun 2023 23:01:50 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=mvista.com; s=google; t=1686895310; x=1689487310;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=UiZi5nHucIz+YReOxD7L4Oh7+fowz6LS3i+KyRTKomA=;
-        b=BaHH0WzrEvw1rXDJq2v6agVeytkL19Mo7IZuaC7ZTVnwxUZ9ctKi6Ve96Nedw+xlrj
-         3IUGARS/o+D/2x39J5RP8RToCIwoUlXIHW4ATGBQh46Zy4FtjDmTExRih3Qv5cBQfdMn
-         wCzcd+IamYZhRZ874f7qKdXe7h9slgPtXiaFQ=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1686895310; x=1689487310;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=UiZi5nHucIz+YReOxD7L4Oh7+fowz6LS3i+KyRTKomA=;
-        b=Cij73L4XDSzg2jlOHahcBPQfbaH5YN4K55Q1yZajFVAfxUPgXjjJlWStQzJ1L3ambs
-         SlgTZb2V6qnCoOh4BwTzF6QIqqH474t1yCu6QWl07bmkW00jaMZM9QOzzC/loS9X7g0t
-         xxqdcStFqus3awxsLO8O8ouKhA/t7fY96WX593CG9yNtGCCQQJ5YpRcyqky5hcpwgX1I
-         ulZ2Zv7jYzMNj+T2qiYrClszxOg4Rcwm7CpLkgQl1sr5nGz2e/a+WqdPtCnJ1bk0aWb+
-         JxAYJoeN5g7gx/slXXzqbaTqtvG/g2Wq9lRoFmrNi7o0XRl8CAt9Pg5XElWqTnOkdQEJ
-         kqpw==
-X-Gm-Message-State: AC+VfDzqWRu2vKPukZCz4POGtPhBIAhTcZiNd2JzMOR+aPBlDHSlFJGq
-	F0GiIzZvV9F0a4I7p2An2/fE3UQtK4b2bxe31So=
-X-Google-Smtp-Source: ACHHUZ5hPhFdK4BCJICMnWa+YIdGRt4nZYTQg1bwY2jiG88QOGIEsmhPnpFC6Hd1jPYTz/ybP4+o2A==
-X-Received: by 2002:a17:90b:818:b0:25e:7f55:d40b with SMTP id bk24-20020a17090b081800b0025e7f55d40bmr946268pjb.5.1686895310060;
-        Thu, 15 Jun 2023 23:01:50 -0700 (PDT)
-Received: from MVIN00024 ([49.34.75.92])
-        by smtp.gmail.com with ESMTPSA id u14-20020a17090a400e00b0025bbe90d3cbsm536296pjc.44.2023.06.15.23.01.47
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 15 Jun 2023 23:01:49 -0700 (PDT)
-Received: by MVIN00024 (sSMTP sendmail emulation); Fri, 16 Jun 2023 11:29:33 +0530
-From: Hitendra Prajapati <hprajapati@mvista.com>
+ dkim=missing; spf=permerror, err=parse error for token &{10 18 %{i}._ip.%{h}._ehlo.%{d}._spf.vali.email}: invalid domain name (domain: non.se.com, ip: 212.27.42.3, mailfrom: remi.peuvergne@non.se.com)
+Received: from localhost.localdomain (unknown [176.157.204.145])
+	(Authenticated sender: rpeuvergne@free.fr)
+	by smtp3-g21.free.fr (Postfix) with ESMTPSA id B3D6213F89C;
+	Fri, 16 Jun 2023 09:14:56 +0200 (CEST)
+From: "Remi Peuvergne" <rpeuvergne@free.fr>
 To: openembedded-devel@lists.openembedded.org
-Cc: Hitendra Prajapati <hprajapati@mvista.com>
-Subject: [meta-networking][kirkstone][PATCHv2] wireshark: CVE-2023-2952 XRA dissector infinite loop
-Date: Fri, 16 Jun 2023 11:29:31 +0530
-Message-Id: <20230616055931.33775-1-hprajapati@mvista.com>
+Cc: Remi Peuvergne <remi.peuvergne@non.se.com>
+Subject: [meta-oe][PATCH v2] zeromq: consider license exception over LGPL-3.0
+Date: Thu, 15 Jun 2023 18:12:44 +0200
+Message-Id: <20230615161244.1876491-1-remi.peuvergne@non.se.com>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 16 Jun 2023 06:02:01 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103335
+ <openembedded-devel@lists.openembedded.org>; Fri, 16 Jun 2023 08:44:01 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103336
 
-Upstream-Status: Backport from https://gitlab.com/wireshark/wireshark/-/commit/e18d0e369729b0fff5f76f41cbae67e97c2e52e5
-
-Signed-off-by: Hitendra Prajapati <hprajapati@mvista.com>
+Signed-off-by: Remi Peuvergne <remi.peuvergne@non.se.com>
 ---
- .../wireshark/files/CVE-2023-2952.patch       | 98 +++++++++++++++++++
- .../wireshark/wireshark_3.4.12.bb             |  1 +
- 2 files changed, 99 insertions(+)
- create mode 100644 meta-networking/recipes-support/wireshark/files/CVE-2023-2952.patch
+ meta-oe/recipes-connectivity/zeromq/zeromq_4.3.4.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-networking/recipes-support/wireshark/files/CVE-2023-2952.patch b/meta-networking/recipes-support/wireshark/files/CVE-2023-2952.patch
-new file mode 100644
-index 000000000..41b02bb3f
---- /dev/null
-+++ b/meta-networking/recipes-support/wireshark/files/CVE-2023-2952.patch
-@@ -0,0 +1,98 @@
-+From ce87eac0325581b600b3093fcd75080df14ccfda Mon Sep 17 00:00:00 2001
-+From: Gerald Combs <gerald@wireshark.org>
-+Date: Tue, 23 May 2023 13:52:03 -0700
-+Subject: [PATCH] XRA: Fix an infinite loop
-+
-+C compilers don't care what size a value was on the wire. Use
-+naturally-sized ints, including in dissect_message_channel_mb where we
-+would otherwise overflow and loop infinitely.
-+
-+Fixes #19100
-+
-+Upstream-Status: Backport [https://gitlab.com/wireshark/wireshark/-/commit/e18d0e369729b0fff5f76f41cbae67e97c2e52e5]
-+CVE: CVE-2023-2952
-+
-+Signed-off-by: Hitendra Prajapati <hprajapati@mvista.com>
-+---
-+ epan/dissectors/packet-xra.c | 16 ++++++++--------
-+ 1 file changed, 8 insertions(+), 8 deletions(-)
-+
-+diff --git a/epan/dissectors/packet-xra.c b/epan/dissectors/packet-xra.c
-+index 68a8e72..6c7ab74 100644
-+--- a/epan/dissectors/packet-xra.c
-++++ b/epan/dissectors/packet-xra.c
-+@@ -478,7 +478,7 @@ dissect_xra_tlv_cw_info(tvbuff_t * tvb, proto_tree * tree, void* data _U_, guint
-+   it = proto_tree_add_item (tree, hf_xra_tlv_cw_info, tvb, 0, tlv_length, ENC_NA);
-+   xra_tlv_cw_info_tree = proto_item_add_subtree (it, ett_xra_tlv_cw_info);
-+ 
-+-  guint32 tlv_index =0;
-++  unsigned tlv_index = 0;
-+   while (tlv_index < tlv_length) {
-+     guint8 type = tvb_get_guint8 (tvb, tlv_index);
-+     ++tlv_index;
-+@@ -533,7 +533,7 @@ dissect_xra_tlv_ms_info(tvbuff_t * tvb, proto_tree * tree, void* data _U_, guint
-+   it = proto_tree_add_item (tree, hf_xra_tlv_ms_info, tvb, 0, tlv_length, ENC_NA);
-+   xra_tlv_ms_info_tree = proto_item_add_subtree (it, ett_xra_tlv_ms_info);
-+ 
-+-  guint32 tlv_index =0;
-++  unsigned tlv_index = 0;
-+   while (tlv_index < tlv_length) {
-+     guint8 type = tvb_get_guint8 (tvb, tlv_index);
-+     ++tlv_index;
-+@@ -567,7 +567,7 @@ dissect_xra_tlv_burst_info(tvbuff_t * tvb, proto_tree * tree, void* data _U_, gu
-+   it = proto_tree_add_item (tree, hf_xra_tlv_burst_info, tvb, 0, tlv_length, ENC_NA);
-+   xra_tlv_burst_info_tree = proto_item_add_subtree (it, ett_xra_tlv_burst_info);
-+ 
-+-  guint32 tlv_index =0;
-++  unsigned tlv_index = 0;
-+   while (tlv_index < tlv_length) {
-+     guint8 type = tvb_get_guint8 (tvb, tlv_index);
-+     ++tlv_index;
-+@@ -607,7 +607,7 @@ dissect_xra_tlv(tvbuff_t * tvb, packet_info * pinfo, proto_tree * tree, void* da
-+   it = proto_tree_add_item (tree, hf_xra_tlv, tvb, 0, tlv_length, ENC_NA);
-+   xra_tlv_tree = proto_item_add_subtree (it, ett_xra_tlv);
-+ 
-+-  guint32 tlv_index =0;
-++  unsigned tlv_index = 0;
-+   tvbuff_t *xra_tlv_cw_info_tvb, *xra_tlv_ms_info_tvb, *xra_tlv_burst_info_tvb;
-+ 
-+   while (tlv_index < tlv_length) {
-+@@ -751,7 +751,7 @@ dissect_message_channel_mb(tvbuff_t * tvb, packet_info * pinfo, proto_tree* tree
-+   if(packet_start_pointer_field_present) {
-+     proto_tree_add_item_ret_uint (tree, hf_plc_mb_mc_psp, tvb, 1, 2, FALSE, &packet_start_pointer);
-+ 
-+-    guint16 docsis_start = 3 + packet_start_pointer;
-++    unsigned docsis_start = 3 + packet_start_pointer;
-+     while (docsis_start + 6 < remaining_length) {
-+       /*DOCSIS header in packet*/
-+       guint8 fc = tvb_get_guint8(tvb,docsis_start + 0);
-+@@ -760,7 +760,7 @@ dissect_message_channel_mb(tvbuff_t * tvb, packet_info * pinfo, proto_tree* tree
-+         docsis_start += 1;
-+         continue;
-+       }
-+-      guint16 docsis_length = 256*tvb_get_guint8(tvb,docsis_start + 2) + tvb_get_guint8(tvb,docsis_start + 3);
-++      unsigned docsis_length = 256*tvb_get_guint8(tvb,docsis_start + 2) + tvb_get_guint8(tvb,docsis_start + 3);
-+       if (docsis_start + 6 + docsis_length <= remaining_length) {
-+         /*DOCSIS packet included in packet*/
-+         tvbuff_t *docsis_tvb;
-+@@ -830,7 +830,7 @@ dissect_ncp_message_block(tvbuff_t * tvb, proto_tree * tree) {
-+ static int
-+ dissect_plc(tvbuff_t * tvb, packet_info * pinfo, proto_tree * tree, void* data _U_) {
-+ 
-+-  guint16 offset = 0;
-++  int offset = 0;
-+   proto_tree *plc_tree;
-+   proto_item *plc_item;
-+   tvbuff_t *mb_tvb;
-+@@ -890,7 +890,7 @@ dissect_plc(tvbuff_t * tvb, packet_info * pinfo, proto_tree * tree, void* data _
-+ 
-+ static int
-+ dissect_ncp(tvbuff_t * tvb, proto_tree * tree, void* data _U_) {
-+-  guint16 offset = 0;
-++  int offset = 0;
-+   proto_tree *ncp_tree;
-+   proto_item *ncp_item;
-+   tvbuff_t *ncp_mb_tvb;
-+-- 
-+2.25.1
-+
-diff --git a/meta-networking/recipes-support/wireshark/wireshark_3.4.12.bb b/meta-networking/recipes-support/wireshark/wireshark_3.4.12.bb
-index 9550546e7..94ce2e1ac 100644
---- a/meta-networking/recipes-support/wireshark/wireshark_3.4.12.bb
-+++ b/meta-networking/recipes-support/wireshark/wireshark_3.4.12.bb
-@@ -20,6 +20,7 @@ SRC_URI += " \
-     file://CVE-2023-2856.patch \
-     file://CVE-2023-2858.patch \
-     file://CVE-2023-2879.patch \
-+    file://CVE-2023-2952.patch \
- "
- 
- UPSTREAM_CHECK_URI = "https://1.as.dl.wireshark.org/src"
--- 
+diff --git a/meta-oe/recipes-connectivity/zeromq/zeromq_4.3.4.bb b/meta-o=
+e/recipes-connectivity/zeromq/zeromq_4.3.4.bb
+index bf25d56ee..cd319b5d3 100644
+--- a/meta-oe/recipes-connectivity/zeromq/zeromq_4.3.4.bb
++++ b/meta-oe/recipes-connectivity/zeromq/zeromq_4.3.4.bb
+@@ -1,6 +1,6 @@
+ DESCRIPTION =3D "ZeroMQ looks like an embeddable networking library but =
+acts like a concurrency framework"
+ HOMEPAGE =3D "http://www.zeromq.org"
+-LICENSE =3D "LGPL-3.0-or-later"
++LICENSE =3D "LGPL-3.0-with-zeromq-exception"
+ LIC_FILES_CHKSUM =3D "file://COPYING.LESSER;md5=3Dd5311495d952062e0e4fbb=
+a39cbf3de1"
+=20
+ PACKAGECONFIG ??=3D "libsodium"
+--=20
 2.25.1
 
 
