@@ -1,113 +1,219 @@
-Return-Path: <hprajapati@mvista.com>
+Return-Path: <brgl@bgdev.pl>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4C89BEB64DB
-	for <webhook@archiver.kernel.org>; Thu, 15 Jun 2023 03:29:38 +0000 (UTC)
-Received: from mail-pg1-f171.google.com (mail-pg1-f171.google.com [209.85.215.171])
- by mx.groups.io with SMTP id smtpd.web11.10470.1686799773544208584
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8A48FEB64D9
+	for <webhook@archiver.kernel.org>; Thu, 15 Jun 2023 07:35:49 +0000 (UTC)
+Received: from mail-ua1-f51.google.com (mail-ua1-f51.google.com [209.85.222.51])
+ by mx.groups.io with SMTP id smtpd.web10.12741.1686814546258169109
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 14 Jun 2023 20:29:33 -0700
+ Thu, 15 Jun 2023 00:35:46 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@mvista.com header.s=google header.b=LmfjbsvP;
- spf=pass (domain: mvista.com, ip: 209.85.215.171, mailfrom: hprajapati@mvista.com)
-Received: by mail-pg1-f171.google.com with SMTP id 41be03b00d2f7-54f75f85a17so2794127a12.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 14 Jun 2023 20:29:33 -0700 (PDT)
+ dkim=fail reason="signature has expired" header.i=@bgdev-pl.20221208.gappssmtp.com header.s=20221208 header.b=t1vahuAg;
+ spf=none, err=SPF record not found (domain: bgdev.pl, ip: 209.85.222.51, mailfrom: brgl@bgdev.pl)
+Received: by mail-ua1-f51.google.com with SMTP id a1e0cc1a2514c-783f7e82f2aso1317542241.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 15 Jun 2023 00:35:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=mvista.com; s=google; t=1686799773; x=1689391773;
-        h=in-reply-to:from:content-language:references:cc:to:subject
-         :user-agent:mime-version:date:message-id:from:to:cc:subject:date
+        d=bgdev-pl.20221208.gappssmtp.com; s=20221208; t=1686814545; x=1689406545;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=fbEBno/Fk1LH14K1ocuDRnyLMatoais+WB3XmB1jDTg=;
-        b=LmfjbsvP5tx0paCzKcgWXRDUQ09/UoayRGcnvabKGwkjFZ0qgHkm7BBW/exqqujEJV
-         XnBCvnJ4j5/7XPiqsT3e+NRD+I93ddv8ybKrvJD88lqSWMBsw42OnS+I7ikWPcKt5CDC
-         U+WHfjb49AL5sDTJdHlTbVBU9wX6w/LkPNLJQ=
+        bh=KdzkWWC8DehXU257siE0yMzjTQ7R3BuIm75P+oHM1aI=;
+        b=t1vahuAgWO4Nlob+nk32Qvpe/DP3Bibun08IQpim1WDZ8fau3Vf1NOEt8R5TS/LGQJ
+         InDGftJsHo8u1w9AIS6L9QlQrk4U7UbS/DXzepC40Qmn21I5jlYzR5fxtVPcec/AmNtT
+         pqR6WXETgEGsQw1/w8IHV1BZ0LD8HYwFTrioVza896PO4HkEXvHRW1MIlVS9OIy8mvue
+         m9sB2TATTNAgw0QcZ/g2lBcJ8yf6tpU5Vvy1mJvK1xQLFTNInQzuy2GfWvdRJdV/6u7U
+         H8/90mOCJSc3G3Et/lUVieXAUT8JRvq52TkrgD8+iTXzCPMljphR2knjg9y3bPQNUz9X
+         0Tmg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1686799773; x=1689391773;
-        h=in-reply-to:from:content-language:references:cc:to:subject
-         :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=fbEBno/Fk1LH14K1ocuDRnyLMatoais+WB3XmB1jDTg=;
-        b=ePPVHQF1WnI+iseI6iGA8VE0nW9qXmbioieOEvlJe/BDIairSojTWD1aueXpvikv4h
-         NK6R/Re7QUldqcWFiaBuEos/UazW7ujgB2bGQ1RM2VAQhmU35BVPpl8lc78sw6sTeBos
-         tx/mbb/EhoAvqBOSST45m8srdvcmABI5A2JNBZAG3zOVaknV4ZavBQIOetbvKCZ15Dll
-         L22wMIAKjWYK3Jq/CX4fbkRPMkO453uTa+TdQSbuKy5NS4nhvtW1tDVxYfYMl0F0fX78
-         INr9eU8XouVCPly1gDrn3LwkfuZ8WvueXN6QVhTXfen/XbwWL80ozqdINkZ2VbMUqYRt
-         CVng==
-X-Gm-Message-State: AC+VfDwoYr5sFX2E0MdUP5RTdPV0uiBf3V0DK9xGbbTE/Te1mKKepIs0
-	e0w+6rGkJMbmt67bwqAjocgBVQ==
-X-Google-Smtp-Source: ACHHUZ7u9S3/zkGWkIHyg5l5MqTB9vcf2iOdtW0zythbMcQbz02peiFkao//X5X0V8vWkirKMCTjUw==
-X-Received: by 2002:a05:6a20:3cab:b0:114:dd7d:ce0c with SMTP id b43-20020a056a203cab00b00114dd7dce0cmr3633833pzj.48.1686799772820;
-        Wed, 14 Jun 2023 20:29:32 -0700 (PDT)
-Received: from ?IPV6:2409:4041:2d04:69ef:fb0a:bb62:7354:1c66? ([2409:4041:2d04:69ef:fb0a:bb62:7354:1c66])
-        by smtp.gmail.com with ESMTPSA id jc9-20020a17090325c900b001b3c2f4c9casm298902plb.253.2023.06.14.20.29.31
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 14 Jun 2023 20:29:32 -0700 (PDT)
-Content-Type: multipart/alternative;
- boundary="------------MrnTlKJxVn0Tkpg7H8SbjM7n"
-Message-ID: <ff37285c-4118-db9d-2638-fd64a081d732@mvista.com>
-Date: Thu, 15 Jun 2023 08:59:27 +0530
+        d=1e100.net; s=20221208; t=1686814545; x=1689406545;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=KdzkWWC8DehXU257siE0yMzjTQ7R3BuIm75P+oHM1aI=;
+        b=DYeETBAhKrSytdgetXasbZzoDIa4YS/v2nSRusp96qPeXohScCFSAUHSlKHQZofP1T
+         gvYXle4a/8ZjGyzBFXfv+0KkYgsCHsTWRXQvaBsMpgeP8E+pykoVlw+SZ7/wXuD3YQJx
+         qJFfgwr91P4hMk6A6YNRZRAIaxTg/gN53oob0Kt1Vz9eqVOjhkrP/ussJ35rYpAPfGB4
+         PavV6uaALny1mz8/eVdUyc91Y43zTH1E2eSXuh8r7wxdhywX0j3+MIQyyujr7LMSL7eB
+         pt0aFyFoBc/mPbRRgaSBhvKhzm5XrxFptCT7NaIAw6GrOD/3vwDeMH9O+2D7+GtzaVbd
+         uhCg==
+X-Gm-Message-State: AC+VfDye6KIYb5owHyTpbi2MPW5K5b7cySA+vwFtFfqlqAITZtRk+n+E
+	/E/njh7O5Do9fzw6p5/37/G9OqlSCkglf7YugdNtQg==
+X-Google-Smtp-Source: ACHHUZ4em0HMkjXKoC9/PE6295unhFlDGAkdkFA1en+WN80w19/pdOojGK4F72uJw2Ptr5Ee4kAarX7ZElVMODWJJgo=
+X-Received: by 2002:a05:6102:2759:b0:43f:5ce1:1d5 with SMTP id
+ p25-20020a056102275900b0043f5ce101d5mr219599vsu.8.1686814545158; Thu, 15 Jun
+ 2023 00:35:45 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.11.0
-Subject: Re: [meta-qt5][kirkstone][PATCH] qt: CVE-2023-32763 Fix Integer
- overflow
-To: Martin Jansa <martin.jansa@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org
-References: <20230614113800.34975-1-hprajapati@mvista.com>
- <CA+chaQeF3wfKui6k6mr7pv-vNi5hG8X-J2ZM2XL+chM9CKejrA@mail.gmail.com>
-Content-Language: en-US
-From: Hitendra Prajapati <hprajapati@mvista.com>
-In-Reply-To: <CA+chaQeF3wfKui6k6mr7pv-vNi5hG8X-J2ZM2XL+chM9CKejrA@mail.gmail.com>
+References: <20230614140611.2415960-1-joe.slater@windriver.com>
+ <CAMRc=Mdh3po_oMNU4mRJxkzatgaDGCJE-JNX3o4zdQp3iQZ5Hg@mail.gmail.com> <BY5PR11MB399222744470B071426ED281885AA@BY5PR11MB3992.namprd11.prod.outlook.com>
+In-Reply-To: <BY5PR11MB399222744470B071426ED281885AA@BY5PR11MB3992.namprd11.prod.outlook.com>
+From: Bartosz Golaszewski <brgl@bgdev.pl>
+Date: Thu, 15 Jun 2023 09:35:34 +0200
+Message-ID: <CAMRc=Me+qsZS1wK+rqhAwWSBQN8c7QNrCo9zX9nAY2mwuYTrOw@mail.gmail.com>
+Subject: Re: [v3][meta-oe][PATCH 1/1] libgpiod: modify test 'gpioset: toggle (continuous)'
+To: "Slater, Joseph" <joe.slater@windriver.com>
+Cc: "openembedded-devel@lists.openembedded.org" <openembedded-devel@lists.openembedded.org>, 
+	"MacLeod, Randy" <Randy.MacLeod@windriver.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 15 Jun 2023 03:29:38 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103290
+ <openembedded-devel@lists.openembedded.org>; Thu, 15 Jun 2023 07:35:49 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103291
 
-This is a multi-part message in MIME format.
---------------MrnTlKJxVn0Tkpg7H8SbjM7n
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+On Wed, Jun 14, 2023 at 5:41=E2=80=AFPM Slater, Joseph <joe.slater@windrive=
+r.com> wrote:
+>
+>
+>
+> > -----Original Message-----
+> > From: Bartosz Golaszewski <brgl@bgdev.pl>
+> > Sent: Wednesday, June 14, 2023 8:13 AM
+> > To: Slater, Joseph <joe.slater@windriver.com>
+> > Cc: openembedded-devel@lists.openembedded.org; MacLeod, Randy
+> > <Randy.MacLeod@windriver.com>
+> > Subject: Re: [v3][meta-oe][PATCH 1/1] libgpiod: modify test 'gpioset: t=
+oggle
+> > (continuous)'
+> >
+> > On Wed, Jun 14, 2023 at 4:06=E2=80=AFPM <joe.slater@windriver.com> wrot=
+e:
+> > >
+> > > From: Joe Slater <joe.slater@windriver.com>
+> > >
+> > > Look for level transitions when testing toggling values because using
+> > > fixed delays to assume value changes is not reliable.
+> > >
+> > > Signed-off-by: Joe Slater <joe.slater@windriver.com>
+> > > ---
+> > >  .../gpio-tools-test-bats-modify.patch         | 67 +++++++++++++++++=
+++
+> > >  .../libgpiod/libgpiod_2.0.1.bb                |  2 +
+> > >  2 files changed, 69 insertions(+)
+> > >  create mode 100644
+> > > meta-oe/recipes-support/libgpiod/libgpiod-2.x/gpio-tools-test-bats-mo=
+d
+> > > ify.patch
+> > >
+> > > diff --git
+> > > a/meta-oe/recipes-support/libgpiod/libgpiod-2.x/gpio-tools-test-bats-=
+m
+> > > odify.patch
+> > > b/meta-oe/recipes-support/libgpiod/libgpiod-2.x/gpio-tools-test-bats-=
+m
+> > > odify.patch
+> > > new file mode 100644
+> > > index 0000000000..4d49467968
+> > > --- /dev/null
+> > > +++ b/meta-oe/recipes-support/libgpiod/libgpiod-2.x/gpio-tools-test-b=
+a
+> > > +++ ts-modify.patch
+> > > @@ -0,0 +1,67 @@
+> > > +From 53f9670d6af1bd0745c1df9c469b269c72607b23 Mon Sep 17 00:00:00
+> > > +2001
+> > > +From: Joe Slater <joe.slater@windriver.com>
+> > > +Date: Tue, 6 Jun 2023 08:04:27 -0700
+> > > +Subject: [PATCH] tools: tests: modify delays in toggle test
+> > > +
+> > > +The test "gpioset: toggle (continuous)" uses fixed delays to test
+> > > +toggling values. This is not reliable, so we switch to looking for
+> > > +transitions from one value to another.
+> > > +
+> > > +We wait for a transition up to 1.5 seconds.
+> > > +
+> > > +Signed-off-by: Joe Slater <joe.slater@windriver.com>
+> > > +Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
+> > > +
+> > > +Upstream-status: accepted
+> > > +
+> > > +Signed-off-by: Joe Slater <joe.slater@windriver.com>
+> > > +---
+> > > + tools/gpio-tools-test.bats | 21 ++++++++++++++++-----
+> > > + 1 file changed, 16 insertions(+), 5 deletions(-)
+> > > +
+> > > +diff --git a/tools/gpio-tools-test.bats b/tools/gpio-tools-test.bats
+> > > +index c83ca7d..929c35a 100755
+> > > +--- a/tools/gpio-tools-test.bats
+> > > ++++ b/tools/gpio-tools-test.bats
+> > > +@@ -141,6 +141,20 @@ gpiosim_check_value() {
+> > > +       [ "$VAL" =3D "$EXPECTED" ]
+> > > + }
+> > > +
+> > > ++gpiosim_wait_value() {
+> > > ++      local OFFSET=3D$2
+> > > ++      local EXPECTED=3D$3
+> > > ++      local DEVNAME=3D${GPIOSIM_DEV_NAME[$1]}
+> > > ++      local CHIPNAME=3D${GPIOSIM_CHIP_NAME[$1]}
+> > > ++      local
+> > > ++PORT=3D$GPIOSIM_SYSFS/$DEVNAME/$CHIPNAME/sim_gpio$OFFSET/value
+> > > ++
+> > > ++      for i in {1..15}; do
+> > > ++              [ "$(<$PORT)" =3D "$EXPECTED" ] && return
+> > > ++              sleep 0.1
+> > > ++      done
+> > > ++      return 1
+> > > ++}
+> > > ++
+> > > + gpiosim_cleanup() {
+> > > +       for CHIP in ${!GPIOSIM_CHIP_NAME[@]}
+> > > +       do
+> > > +@@ -1567,15 +1581,12 @@ request_release_line() {
+> > > +       gpiosim_check_value sim0 4 0
+> > > +       gpiosim_check_value sim0 7 0
+> > > +
+> > > +-      sleep 1
+> > > +-
+> > > +-      gpiosim_check_value sim0 1 0
+> > > ++      gpiosim_wait_value sim0 1 0
+> > > +       gpiosim_check_value sim0 4 1
+> > > +       gpiosim_check_value sim0 7 1
+> > > +
+> > > +-      sleep 1
+> > > +
+> > > +-      gpiosim_check_value sim0 1 1
+> > > ++      gpiosim_wait_value sim0 1 1
+> > > +       gpiosim_check_value sim0 4 0
+> > > +       gpiosim_check_value sim0 7 0
+> > > + }
+> > > +--
+> > > +2.25.1
+> > > +
+> > > diff --git a/meta-oe/recipes-support/libgpiod/libgpiod_2.0.1.bb
+> > > b/meta-oe/recipes-support/libgpiod/libgpiod_2.0.1.bb
+> > > index 337554cd89..6958f2d841 100644
+> > > --- a/meta-oe/recipes-support/libgpiod/libgpiod_2.0.1.bb
+> > > +++ b/meta-oe/recipes-support/libgpiod/libgpiod_2.0.1.bb
+> > > @@ -9,6 +9,8 @@ LIC_FILES_CHKSUM =3D " \
+> > >
+> > >  FILESEXTRAPATHS:prepend :=3D "${THISDIR}/${PN}-2.x:"
+> > >
+> > > +SRC_URI +=3D "file://gpio-tools-test-bats-modify.patch"
+> > > +
+> > >  SRC_URI[sha256sum] =3D
+> > "b5367d28d045b36007a4ffd42cceda4c358737ef4f2ce22b0c1d05ec57a38392"
+> > >
+> > >  # Enable all project features for ptest
+> > > --
+> > > 2.25.1
+> > >
+> > Reluctant:
+> >
+> > Reviewed-by: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
+> >
+> > Although, I'm asking myself - why do you need this? Have you seen any f=
+ailures
+> > with ptest? Can this wait for a full release?
+>
+> [Slater, Joseph]
+> Yes, we have seen failures.  It is not my call as to when they need to be=
+ fixed.  I can understand meta-oe wanting to wait for a release.  If that i=
+s the case, I'll have to see what people want to do locally as a temporary =
+fix.
+>
 
-Hi,
+Ok, let's take it and I'll backport it to v2.0.x.
 
-It is not included in the 5.15.9 release used in mickledore.
-
-I'll try to work on that branch .
-
-On 14/06/23 19:50, Martin Jansa wrote:
-> 5.15.9 release used in mickledor
--- 
-Regards,
-Hitendra Prajapati
-MontaVista Software LLC
---------------MrnTlKJxVn0Tkpg7H8SbjM7n
-Content-Type: text/html; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-
-<html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  </head>
-  <body>
-    <p>Hi,</p>
-    <p>It is not included in the 5.15.9 release used in mickledore.</p>
-    <p>I'll try to work on that branch .<br>
-    </p>
-    <div class="moz-cite-prefix">On 14/06/23 19:50, Martin Jansa wrote:<br>
-    </div>
-    <blockquote type="cite"
-cite="mid:CA+chaQeF3wfKui6k6mr7pv-vNi5hG8X-J2ZM2XL+chM9CKejrA@mail.gmail.com">5.15.9
-      release used in mickledor</blockquote>
-    <div class="moz-signature">-- <br>
-      <font color="#0000ff">
-        Regards,<br>
-        Hitendra Prajapati<br>
-        MontaVista Software LLC<br>
-      </font></div>
-  </body>
-</html>
-
---------------MrnTlKJxVn0Tkpg7H8SbjM7n--
+Thanks,
+Bartosz
 
