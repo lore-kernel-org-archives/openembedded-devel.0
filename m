@@ -1,132 +1,63 @@
-Return-Path: <akuster808@gmail.com>
+Return-Path: <peter.marko@siemens.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 26ACDEB64D9
-	for <webhook@archiver.kernel.org>; Thu, 15 Jun 2023 13:21:01 +0000 (UTC)
-Received: from mail-yw1-f174.google.com (mail-yw1-f174.google.com [209.85.128.174])
- by mx.groups.io with SMTP id smtpd.web10.18146.1686835255596971579
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 55593EB64D9
+	for <webhook@archiver.kernel.org>; Thu, 15 Jun 2023 14:11:51 +0000 (UTC)
+Received: from mta-65-226.siemens.flowmailer.net (mta-65-226.siemens.flowmailer.net [185.136.65.226])
+ by mx.groups.io with SMTP id smtpd.web11.19540.1686838309060133385
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 15 Jun 2023 06:20:55 -0700
+ Thu, 15 Jun 2023 07:11:50 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20221208 header.b=e9E3rOjF;
- spf=pass (domain: gmail.com, ip: 209.85.128.174, mailfrom: akuster808@gmail.com)
-Received: by mail-yw1-f174.google.com with SMTP id 00721157ae682-5702116762fso13200147b3.3
-        for <openembedded-devel@lists.openembedded.org>; Thu, 15 Jun 2023 06:20:55 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1686835255; x=1689427255;
-        h=content-transfer-encoding:in-reply-to:from:references:cc:to
-         :content-language:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=sM9Do8hYPSTNlvK9et7zBzUpHk4XogZh4Yumv0VmAdM=;
-        b=e9E3rOjFhxdAyAL90Kum7pj3SY7I2UvfD9p4LrLUQkJp104IRW+XOmnv8pDOZKvFR7
-         vX8P3K9JkO5/mvTpjxYNj75q/nzEfmitYJ99bswDRgzyu+t69A1oYbJA6bzVN1S3dbkJ
-         SSyIlL8Nwj+jvrfal+hzSbnlrTumWVbaoSO11mE7Yg0ljtXzN6lPlZW0Vgk+lGYXZbrF
-         rsRPD5uJ4KAWwc5diynJaO2KROKpNP6AcEVVtP+s/Z1dqsYlftLiU2QHRrrwp6PLtVgD
-         HRXESKY+WTi7Dz4TYUMqJvgOq+lonoy0yJILWQ3iw6Q5Q5onppfbTge1utZoq3oXpeJP
-         s0fw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1686835255; x=1689427255;
-        h=content-transfer-encoding:in-reply-to:from:references:cc:to
-         :content-language:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=sM9Do8hYPSTNlvK9et7zBzUpHk4XogZh4Yumv0VmAdM=;
-        b=TDsigfV69cN/i0ek4oipB3E4zpjEv5VOZBrYBaoDxHtNSrbK5PDKMM0no1NrNLDqNT
-         1LSH5kavgtsDZ1NXukR8KbfPQkKcf85V21k013WSqc2I60E40Z6o0wsm9T6Fv2XTnUJP
-         Fpwnmivq0/KUN5f7rm2RwgAL2pQ4EkgLfBvo9vW50N4ZtGGV1t3AS+C9PEigjMEc4/Iy
-         l8WQL6X9fU69Fh7ystaUWScechXrKabJGGKp/jeJyOlPl5w5dhPVbJwxH+lAsCDLp1GT
-         YF8foezEVrT7Bvx7CR/n45FQousFw01yDcaLGIIhVP9HOmgWBiNSb9qeJCyQmxI65OHO
-         5mtA==
-X-Gm-Message-State: AC+VfDyG6574wri/pwuw4KGLbN/8AR31VJIIFsg6M98hLcvi2uQjtnIl
-	xlnsvilv4X86cez1VxBcyEg=
-X-Google-Smtp-Source: ACHHUZ4T7j7I+URWrw+h3gVEMQ05JwffH2agKKAmcRhAWEump6+ZABY5jferZhuRpMuHEnQNFXjM0g==
-X-Received: by 2002:a0d:d854:0:b0:55a:18e2:cdf9 with SMTP id a81-20020a0dd854000000b0055a18e2cdf9mr5091844ywe.49.1686835254731;
-        Thu, 15 Jun 2023 06:20:54 -0700 (PDT)
-Received: from ?IPV6:2600:1700:9190:ba10:b6a3:8a75:3124:ba44? ([2600:1700:9190:ba10:b6a3:8a75:3124:ba44])
-        by smtp.gmail.com with ESMTPSA id t9-20020a0dea09000000b0056d4649670fsm2116535ywe.133.2023.06.15.06.20.54
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 15 Jun 2023 06:20:54 -0700 (PDT)
-Message-ID: <346f05f8-3700-68fa-a631-d2f430eafef0@gmail.com>
-Date: Thu, 15 Jun 2023 09:20:51 -0400
+ dkim=pass header.i=peter.marko@siemens.com header.s=fm1 header.b=l1JJCfVq;
+ spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.65.226, mailfrom: fm-256628-20230615141145c43499ba87218da1a7-6ibj2t@rts-flowmailer.siemens.com)
+Received: by mta-65-226.siemens.flowmailer.net with ESMTPSA id 20230615141145c43499ba87218da1a7
+        for <openembedded-devel@lists.openembedded.org>;
+        Thu, 15 Jun 2023 16:11:46 +0200
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm1;
+ d=siemens.com; i=peter.marko@siemens.com;
+ h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc;
+ bh=klZC/KirnJORzgar84fmnXF0h4Cz0M/BBKrpLO8TLP0=;
+ b=l1JJCfVqiiIji9k/97i0Xa2GgVLIJzsEAe/IcxtZko5PBMwwpuxZSey4JT6PxxVt7J4dPU
+ y3kS7Cn15h/ODIqajwZZPeJmnHWq7hIgADgzmCOpKKaEwyawJV2cPYnNfZxar+c6ieQeiPrY
+ lbTaDFadFCMlVrfEXtwiqTuFvUX8k=;
+From: Peter Marko <peter.marko@siemens.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Peter Marko <peter.marko@siemens.com>
+Subject: [meta-python][PATCH] python3-stopit: fix override syntax
+Date: Thu, 15 Jun 2023 16:10:48 +0200
+Message-Id: <20230615141048.1526835-1-peter.marko@siemens.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.11.0
-Subject: Re: [oe] [meta-oe][PATCH] exprtk_git: Fix SRCREV for exprtk_git
-Content-Language: en-US
-To: Khem Raj <raj.khem@gmail.com>, muhammad.hamzai@yahoo.com
-Cc: "openembedded-devel@lists.openembedded.org"
- <openembedded-devel@lists.openembedded.org>
-References: <1747474539.3138796.1686633366135.ref@mail.yahoo.com>
- <1747474539.3138796.1686633366135@mail.yahoo.com>
- <CAMKF1sq_tn2QHQtjEJ8yg5fZ4gOp_Aj2fNFobJufGEvqBQBoqA@mail.gmail.com>
-From: akuster808 <akuster808@gmail.com>
-In-Reply-To: <CAMKF1sq_tn2QHQtjEJ8yg5fZ4gOp_Aj2fNFobJufGEvqBQBoqA@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
+X-Flowmailer-Platform: Siemens
+Feedback-ID: 519:519-256628:519-21489:flowmailer
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 15 Jun 2023 13:21:01 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103304
+ <openembedded-devel@lists.openembedded.org>; Thu, 15 Jun 2023 14:11:51 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103305
 
+From: Peter Marko <peter.marko@siemens.com>
 
+Signed-off-by: Peter Marko <peter.marko@siemens.com>
+---
+ meta-python/recipes-devtools/python/python3-stopit_1.1.2.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-On 6/13/23 1:47 AM, Khem Raj wrote:
-> which release is it for ? master branch already is at
-> f46bffcd6966d38a09023fb37ba9335214c9b959
-
-Well that is this change:
-
-  ExprTk: Update package to release/0.0.2
-
-Which also changes the branch.
-
-What is in the difference between the SRCREVs if this expected to be 
-backported to stable branches?
-
-- armin
->
-> On Mon, Jun 12, 2023 at 10:16 PM Muhammad Hamza via
-> lists.openembedded.org
-> <muhammad.hamzai=yahoo.com@lists.openembedded.org> wrote:
->> exprtk_git recipe uses a SRCREV that does not belong
->> to any branch and results in a fetcher failure when bitbake
->> tries to fetch it.
->> This commit updates the SRCREV to fix this issue.
->>
->> Signed-off-by: Muhammad Hamza <muhammad.hamzai@yahoo.com>
->> ---
->>   meta-oe/recipes-devtools/exprtk/exprtk_git.bb | 2 +-
->>   1 file changed, 1 insertion(+), 1 deletion(-)
->>
->> diff --git a/meta-oe/recipes-devtools/exprtk/exprtk_git.bb b/meta-oe/recipes-devtools/exprtk/exprtk_git.bb
->> index 52975c821..557c4f27a 100644
->> --- a/meta-oe/recipes-devtools/exprtk/exprtk_git.bb
->> +++ b/meta-oe/recipes-devtools/exprtk/exprtk_git.bb
->> @@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/ArashPartow/exprtk"
->>   SECTION = "libs"
->>   LICENSE = "MIT"
->>   LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda2f7b4f302"
->> -SRCREV = "281c2ccc65b8f91c012ea3725ebcef406378a225"
->> +SRCREV = "f46bffcd6966d38a09023fb37ba9335214c9b959"
->>
->>   SRC_URI = "git://github.com/ArashPartow/exprtk.git;branch=master;protocol=https"
->>
->> --
->> 2.34.1
->>
->>
->>
->>
->>
->>
->> -=-=-=-=-=-=-=-=-=-=-=-
->> Links: You receive all messages sent to this group.
->> View/Reply Online (#103258): https://lists.openembedded.org/g/openembedded-devel/message/103258
->> Mute This Topic: https://lists.openembedded.org/mt/99499725/3616698
->> Group Owner: openembedded-devel+owner@lists.openembedded.org
->> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [akuster808@gmail.com]
->> -=-=-=-=-=-=-=-=-=-=-=-
->>
+diff --git a/meta-python/recipes-devtools/python/python3-stopit_1.1.2.bb b/meta-python/recipes-devtools/python/python3-stopit_1.1.2.bb
+index 91ff21fa1..64e3671e1 100644
+--- a/meta-python/recipes-devtools/python/python3-stopit_1.1.2.bb
++++ b/meta-python/recipes-devtools/python/python3-stopit_1.1.2.bb
+@@ -10,7 +10,7 @@ SRC_URI[sha256sum] = "f7f39c583fd92027bd9d06127b259aee7a5b7945c1f1fa56263811e1e7
+ 
+ inherit pypi setuptools3
+ 
+-RDEPENDS_${PN} += "\
++RDEPENDS:${PN} += "\
+     ${PYTHON_PN}-setuptools \
+     "
+ 
+-- 
+2.30.2
 
 
