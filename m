@@ -1,154 +1,171 @@
-Return-Path: <rs@ti.com>
+Return-Path: <joe.slater@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BD43AC0015E
-	for <webhook@archiver.kernel.org>; Thu, 15 Jun 2023 20:57:03 +0000 (UTC)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- by mx.groups.io with SMTP id smtpd.web11.29698.1686862619616961274
- for <Openembedded-devel@lists.openembedded.org>;
- Thu, 15 Jun 2023 13:56:59 -0700
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 73FA3EB64DA
+	for <webhook@archiver.kernel.org>; Thu, 15 Jun 2023 22:04:14 +0000 (UTC)
+Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
+ by mx.groups.io with SMTP id smtpd.web11.31179.1686866651999382739
+ for <openembedded-devel@lists.openembedded.org>;
+ Thu, 15 Jun 2023 15:04:12 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=iSfCFbv4;
- spf=pass (domain: ti.com, ip: 198.47.19.141, mailfrom: rs@ti.com)
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
-	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 35FKutEx120683;
-	Thu, 15 Jun 2023 15:56:55 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1686862615;
-	bh=/nBWTtaFxfEqX2ZpkelsvVEGvt/wuGjL0eT4pUtwSzY=;
-	h=From:To:CC:Subject:Date:In-Reply-To:References;
-	b=iSfCFbv4drO4wv9+HpluwU4bbM1l1KyLYs8+AYHNOzHf4npBbww1Y8wRsvYE7ScVL
-	 xVT4d1EkGjO2PxJR0cGDeWVQkgVIoyJ9tkqTTfzFwK8hD8lMD3Nqkfby7pwUF3j4ns
-	 0xm2eNpf8Tb00ETDhJZp9qfIo/JZYeauYzcS2q/A=
-Received: from DFLE112.ent.ti.com (dfle112.ent.ti.com [10.64.6.33])
-	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 35FKut9u117340
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Thu, 15 Jun 2023 15:56:55 -0500
-Received: from DFLE109.ent.ti.com (10.64.6.30) by DFLE112.ent.ti.com
- (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 15
- Jun 2023 15:56:55 -0500
-Received: from lelv0326.itg.ti.com (10.180.67.84) by DFLE109.ent.ti.com
- (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 15 Jun 2023 15:56:55 -0500
-Received: from rs-desk.dhcp.ti.com (ileaxei01-snat2.itg.ti.com [10.180.69.6])
-	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 35FKutXl012389;
-	Thu, 15 Jun 2023 15:56:55 -0500
-From: <rs@ti.com>
-To: <raj.khem@gmail.com>, <afd@ti.com>, <denis@denix.org>
-CC: <Openembedded-devel@lists.openembedded.org>, Randolph Sapp <rs@ti.com>
-Subject: [meta-oe][kirkstone][PATCH 6/6] opengl-es-cts: 3.2.8.0 -> 3.2.9.3
-Date: Thu, 15 Jun 2023 15:56:37 -0500
-Message-ID: <20230615205637.724348-7-rs@ti.com>
-X-Mailer: git-send-email 2.41.0
-In-Reply-To: <20230615205637.724348-1-rs@ti.com>
-References: <20230615205637.724348-1-rs@ti.com>
+ dkim=pass header.i=@windriver.com header.s=pps06212021 header.b=kGRNoX7b;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=5530a2c30d=joe.slater@windriver.com)
+Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 35FKVHC3023827
+	for <openembedded-devel@lists.openembedded.org>; Thu, 15 Jun 2023 15:04:11 -0700
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com; h=from : to : cc :
+ subject : date : message-id : mime-version : content-transfer-encoding :
+ content-type; s=PPS06212021;
+ bh=nJ4/Qixb71BRQXeOBFTKTt6ITyo/h9/uZuZ0Dh9Ua5I=;
+ b=kGRNoX7bCbEFIoV5GQzmwArwr1kQDAEtywY6yjey2z/EkkE4R9AQ9IPph3CjiZAkPD+i
+ dKJ+xnkBi8mscU+sb+gTv7EtMZS7JTdoCZbvoyta9UQdLh+g3ClvdeWe4fW7+aH1pxw6
+ g1FGG0MdyHXDq98S639af7a6Jt3mja1MiFoowpa8mevapg63Te/uwmSlhMqUgy5Ro/IU
+ 4E19F+dUTH4tzfl8Oykjz8atIabxgReGeBG5b0oZbkNWu77IhurhT3+oeHdibE5Srva1
+ d5Rrq6rMNfZ4+UfQZOYihPRDPw1/MqIZrkuPykwgpgEBKFRwZvgxfqPMpe0FTRyNKz3R WQ== 
+Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3r4rphn5qr-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Thu, 15 Jun 2023 15:04:11 -0700
+Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.23; Thu, 15 Jun 2023 15:04:10 -0700
+Received: from ala-jslater-lx2.corp.ad.wrs.com (147.11.136.210) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
+ 15.1.2507.23 via Frontend Transport; Thu, 15 Jun 2023 15:04:10 -0700
+From: <joe.slater@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: <joe.slater@windriver.com>, <randy.macleod@windriver.com>
+Subject: [mickledore][meta-oe][PATCH 1/1] libgpiod: modify test 'gpioset: toggle (continuous)'
+Date: Thu, 15 Jun 2023 15:04:10 -0700
+Message-ID: <20230615220410.741458-1-joe.slater@windriver.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+X-Proofpoint-ORIG-GUID: 6-oyFaKoIlQRZXIpO0f5DtVx5Uz4aCJx
+X-Proofpoint-GUID: 6-oyFaKoIlQRZXIpO0f5DtVx5Uz4aCJx
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.254,Aquarius:18.0.957,Hydra:6.0.591,FMLib:17.11.176.26
+ definitions=2023-06-15_17,2023-06-15_01,2023-05-22_02
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 phishscore=0 mlxlogscore=595
+ lowpriorityscore=0 suspectscore=0 priorityscore=1501 impostorscore=0
+ bulkscore=0 spamscore=0 mlxscore=0 malwarescore=0 clxscore=1015
+ adultscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.12.0-2305260000 definitions=main-2306150189
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 15 Jun 2023 20:57:03 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103327
+ <openembedded-devel@lists.openembedded.org>; Thu, 15 Jun 2023 22:04:14 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103331
 
-From: Randolph Sapp <rs@ti.com>
+From: Joe Slater <joe.slater@windriver.com>
 
-Bump the opengl-es-cts version to latest since this package is currently
-incompatible with Weston 10 due to changes in wayland-protocols.
+Look for level transitions when testing toggling
+values because using fixed delays to assume value
+changes is not reliable.
 
-I would bump the vulkan-cts test revision here as well, but
-unfortunately newer versions of vulkan-cts add video encode/decode tests
-from Nvidia that break on any arch other than amd64 in their current
-format.
-
-Signed-off-by: Randolph Sapp <rs@ti.com>
+Signed-off-by: Joe Slater <joe.slater@windriver.com>
+Reviewed-by: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- .../vk-gl-cts/khronos-cts.inc                 | 10 ++++++----
- ...ts_3.2.8.0.bb => opengl-es-cts_3.2.9.3.bb} | 19 +++++++++----------
- .../vk-gl-cts/vulkan-cts_1.3.3.1.bb           |  3 +++
- 3 files changed, 18 insertions(+), 14 deletions(-)
- rename meta-oe/recipes-graphics/vk-gl-cts/{opengl-es-cts_3.2.8.0.bb => opengl-es-cts_3.2.9.3.bb} (65%)
 
-diff --git a/meta-oe/recipes-graphics/vk-gl-cts/khronos-cts.inc b/meta-oe/recipes-graphics/vk-gl-cts/khronos-cts.inc
-index 4fd32d93c..097acc1a0 100644
---- a/meta-oe/recipes-graphics/vk-gl-cts/khronos-cts.inc
-+++ b/meta-oe/recipes-graphics/vk-gl-cts/khronos-cts.inc
-@@ -4,12 +4,14 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
- SRC_URI = "\
- 	git://github.com/KhronosGroup/VK-GL-CTS.git;protocol=https;name=vk-gl-cts;nobranch=1 \
- 	git://github.com/google/amber;protocol=https;destsuffix=git/external/amber/src;name=amber;branch=main \
--	git://github.com/KhronosGroup/glslang.git;protocol=https;destsuffix=git/external/glslang/src;name=glslang;branch=master \
--	git://github.com/KhronosGroup/SPIRV-Headers.git;protocol=https;destsuffix=git/external/spirv-headers/src;name=spirv-headers;branch=master \
--	git://github.com/KhronosGroup/SPIRV-Tools.git;protocol=https;destsuffix=git/external/spirv-tools/src;name=spirv-tools;branch=master \
-+	git://github.com/KhronosGroup/glslang.git;protocol=https;destsuffix=git/external/glslang/src;name=glslang;branch=main \
-+	git://github.com/KhronosGroup/SPIRV-Headers.git;protocol=https;destsuffix=git/external/spirv-headers/src;name=spirv-headers;branch=main \
-+	git://github.com/KhronosGroup/SPIRV-Tools.git;protocol=https;destsuffix=git/external/spirv-tools/src;name=spirv-tools;branch=main \
-         git://github.com/open-source-parsers/jsoncpp.git;protocol=https;destsuffix=git/external/jsoncpp/src;name=jsoncpp;branch=master \
-         git://github.com/KhronosGroup/Vulkan-Docs.git;protocol=https;destsuffix=git/external/vulkan-docs/src;name=vulkan-docs;branch=main \
--        https://raw.githubusercontent.com/baldurk/renderdoc/fcdea67879fa1991e56cf7734ce0ce27866b665f/renderdoc/api/app/renderdoc_app.h;subdir=git/external/renderdoc/src;name=renderdoc \
-+        https://raw.githubusercontent.com/baldurk/renderdoc/v1.1/renderdoc/api/app/renderdoc_app.h;subdir=git/external/renderdoc/src;name=renderdoc \
-+        git://github.com/Igalia/ESExtractor.git;protocol=https;destsuffix=git/external/ESExtractor/src;name=ESExtractor;branch=main \
-+        git://github.com/nvpro-samples/vk_video_samples.git;protocol=https;destsuffix=git/external/video-parser/src;name=video-parser;branch=main \
-         file://gen-framework-path.patch \
- "
+cherry-pick from meta-oe/master 45a8bb2620...
+
+Signed-off-by: Joe Slater <joe.slater@windriver.com>
+---
+ .../gpio-tools-test-bats-modify.patch         | 67 +++++++++++++++++++
+ .../recipes-support/libgpiod/libgpiod_2.0.bb  |  2 +
+ 2 files changed, 69 insertions(+)
+ create mode 100644 meta-oe/recipes-support/libgpiod/libgpiod-2.0/gpio-tools-test-bats-modify.patch
+
+diff --git a/meta-oe/recipes-support/libgpiod/libgpiod-2.0/gpio-tools-test-bats-modify.patch b/meta-oe/recipes-support/libgpiod/libgpiod-2.0/gpio-tools-test-bats-modify.patch
+new file mode 100644
+index 0000000000..4d49467968
+--- /dev/null
++++ b/meta-oe/recipes-support/libgpiod/libgpiod-2.0/gpio-tools-test-bats-modify.patch
+@@ -0,0 +1,67 @@
++From 53f9670d6af1bd0745c1df9c469b269c72607b23 Mon Sep 17 00:00:00 2001
++From: Joe Slater <joe.slater@windriver.com>
++Date: Tue, 6 Jun 2023 08:04:27 -0700
++Subject: [PATCH] tools: tests: modify delays in toggle test
++
++The test "gpioset: toggle (continuous)" uses fixed delays to test
++toggling values. This is not reliable, so we switch to looking
++for transitions from one value to another.
++
++We wait for a transition up to 1.5 seconds.
++
++Signed-off-by: Joe Slater <joe.slater@windriver.com>
++Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
++
++Upstream-status: accepted
++
++Signed-off-by: Joe Slater <joe.slater@windriver.com>
++---
++ tools/gpio-tools-test.bats | 21 ++++++++++++++++-----
++ 1 file changed, 16 insertions(+), 5 deletions(-)
++
++diff --git a/tools/gpio-tools-test.bats b/tools/gpio-tools-test.bats
++index c83ca7d..929c35a 100755
++--- a/tools/gpio-tools-test.bats
+++++ b/tools/gpio-tools-test.bats
++@@ -141,6 +141,20 @@ gpiosim_check_value() {
++ 	[ "$VAL" = "$EXPECTED" ]
++ }
++ 
+++gpiosim_wait_value() {
+++	local OFFSET=$2
+++	local EXPECTED=$3
+++	local DEVNAME=${GPIOSIM_DEV_NAME[$1]}
+++	local CHIPNAME=${GPIOSIM_CHIP_NAME[$1]}
+++	local PORT=$GPIOSIM_SYSFS/$DEVNAME/$CHIPNAME/sim_gpio$OFFSET/value
+++
+++	for i in {1..15}; do
+++		[ "$(<$PORT)" = "$EXPECTED" ] && return
+++		sleep 0.1
+++	done
+++	return 1
+++}
+++
++ gpiosim_cleanup() {
++ 	for CHIP in ${!GPIOSIM_CHIP_NAME[@]}
++ 	do
++@@ -1567,15 +1581,12 @@ request_release_line() {
++ 	gpiosim_check_value sim0 4 0
++ 	gpiosim_check_value sim0 7 0
++ 
++-	sleep 1
++-
++-	gpiosim_check_value sim0 1 0
+++	gpiosim_wait_value sim0 1 0
++ 	gpiosim_check_value sim0 4 1
++ 	gpiosim_check_value sim0 7 1
++ 
++-	sleep 1
++ 
++-	gpiosim_check_value sim0 1 1
+++	gpiosim_wait_value sim0 1 1
++ 	gpiosim_check_value sim0 4 0
++ 	gpiosim_check_value sim0 7 0
++ }
++-- 
++2.25.1
++
+diff --git a/meta-oe/recipes-support/libgpiod/libgpiod_2.0.bb b/meta-oe/recipes-support/libgpiod/libgpiod_2.0.bb
+index 179fe170e2..ee20aaf792 100644
+--- a/meta-oe/recipes-support/libgpiod/libgpiod_2.0.bb
++++ b/meta-oe/recipes-support/libgpiod/libgpiod_2.0.bb
+@@ -11,6 +11,8 @@ SRC_URI[sha256sum] = "f74cbf82038b3cb98ebeb25bce55ee2553be28194002d2a9889b9268cc
  
-diff --git a/meta-oe/recipes-graphics/vk-gl-cts/opengl-es-cts_3.2.8.0.bb b/meta-oe/recipes-graphics/vk-gl-cts/opengl-es-cts_3.2.9.3.bb
-similarity index 65%
-rename from meta-oe/recipes-graphics/vk-gl-cts/opengl-es-cts_3.2.8.0.bb
-rename to meta-oe/recipes-graphics/vk-gl-cts/opengl-es-cts_3.2.9.3.bb
-index edfeda2be..67ce5f2b9 100644
---- a/meta-oe/recipes-graphics/vk-gl-cts/opengl-es-cts_3.2.8.0.bb
-+++ b/meta-oe/recipes-graphics/vk-gl-cts/opengl-es-cts_3.2.9.3.bb
-@@ -1,20 +1,19 @@
- DESCRIPTION = "OpenGL CTS"
+ S = "${WORKDIR}/libgpiod-2.0"
  
- require khronos-cts.inc
--# opengl-es-cts-3.2.8.0
--SRCREV_vk-gl-cts = "317f467fac032b88a4789e4345421f92c4e8716d"
--SRCREV_amber = "209d92e2c27a333e723d24497e8c7a07b2f2eb39"
--SRCREV_glslang = "9158061398a96033c990e69156bd28c67114544b"
--SRCREV_spirv-headers = "449bc986ba6f4c5e10e32828783f9daef2a77644"
--SRCREV_spirv-tools = "ee30773650eca50b1cd3c913babcc2b50d7b91fd"
-+# opengl-es-cts-3.2.9.3
-+SRCREV_vk-gl-cts = "7f5fb62245d535a1fc0bf50b2c7e5a342dc551fe"
-+SRCREV_amber = "933ecb4d6288675a92eb1650e0f52b1d7afe8273"
-+SRCREV_glslang = "a0ad0d7067521fff880e36acfb8ce453421c3f25"
-+SRCREV_spirv-headers = "87d5b782bec60822aa878941e6b13c0a9a954c9b"
-+SRCREV_spirv-tools = "f98473ceeb1d33700d01e20910433583e5256030"
-+SRCREV_ESExtractor = "ce5d7ebcf0ebb0d78385ee4cc34653eb6764bfc4"
- # Not yet needed
- SRCREV_jsoncpp = "9059f5cad030ba11d37818847443a53918c327b1"
--SRCREV_vulkan-docs = "d70e01c0be7b8a7d20b186b30b29a75b18bba75d"
-+SRCREV_vulkan-docs = "9a2e576a052a1e65a5d41b593e693ff02745604b"
-+SRCREV_video-parser = "7d68747d3524842afaf050c5e00a10f5b8c07904"
- SRC_URI[renderdoc.sha256sum] = "e7b5f0aa5b1b0eadc63a1c624c0ca7f5af133aa857d6a4271b0ef3d0bdb6868e"
- 
--SRC_URI += "file://0001-Remove-dead-variable-984.patch;patchdir=external/amber/src \
--            file://0001-include-missing-cstdint.patch;patchdir=external/amber/src"
--
- S = "${WORKDIR}/git"
- 
- do_install() {
-diff --git a/meta-oe/recipes-graphics/vk-gl-cts/vulkan-cts_1.3.3.1.bb b/meta-oe/recipes-graphics/vk-gl-cts/vulkan-cts_1.3.3.1.bb
-index 862963dd0..d086c0129 100644
---- a/meta-oe/recipes-graphics/vk-gl-cts/vulkan-cts_1.3.3.1.bb
-+++ b/meta-oe/recipes-graphics/vk-gl-cts/vulkan-cts_1.3.3.1.bb
-@@ -10,6 +10,9 @@ SRCREV_spirv-tools = "b930e734ea198b7aabbbf04ee1562cf6f57962f0"
- SRCREV_jsoncpp = "9059f5cad030ba11d37818847443a53918c327b1"
- SRCREV_vulkan-docs = "9b5562187a8ad72c171410b036ceedbc450153ba"
- SRC_URI[renderdoc.sha256sum] = "e7b5f0aa5b1b0eadc63a1c624c0ca7f5af133aa857d6a4271b0ef3d0bdb6868e"
-+# Not yet needed
-+SRCREV_ESExtractor = "ce5d7ebcf0ebb0d78385ee4cc34653eb6764bfc4"
-+SRCREV_video-parser = "7d68747d3524842afaf050c5e00a10f5b8c07904"
- 
- SRC_URI += "file://0001-cmake-Define-WAYLAND_SCANNER-and-WAYLAND_PROTOCOLS_D.patch \
-             file://0001-Include-missing-cstdint.patch \
++SRC_URI += "file://gpio-tools-test-bats-modify.patch"
++
+ # We must enable gpioset-interactive for all gpio-tools tests to pass
+ PACKAGECONFIG[tests] = "--enable-tests --enable-gpioset-interactive,--disable-tests,kmod util-linux glib-2.0 catch2 libedit"
+ PACKAGECONFIG[gpioset-interactive] = "--enable-gpioset-interactive,--disable-gpioset-interactive,libedit"
 -- 
-2.41.0
+2.25.1
 
 
