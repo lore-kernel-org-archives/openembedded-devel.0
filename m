@@ -1,76 +1,96 @@
-Return-Path: <rs@ti.com>
+Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8057EEB64D7
-	for <webhook@archiver.kernel.org>; Fri, 16 Jun 2023 22:18:24 +0000 (UTC)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
- by mx.groups.io with SMTP id smtpd.web11.542.1686953897614291085
+	by smtp.lore.kernel.org (Postfix) with ESMTP id F055DEB64DC
+	for <webhook@archiver.kernel.org>; Sat, 17 Jun 2023 17:15:05 +0000 (UTC)
+Received: from mail-yw1-f170.google.com (mail-yw1-f170.google.com [209.85.128.170])
+ by mx.groups.io with SMTP id smtpd.web10.9420.1687022103289836027
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 16 Jun 2023 15:18:17 -0700
+ Sat, 17 Jun 2023 10:15:03 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=F5jTzyFn;
- spf=pass (domain: ti.com, ip: 198.47.23.249, mailfrom: rs@ti.com)
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
-	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 35GMIHkT086182
-	for <openembedded-devel@lists.openembedded.org>; Fri, 16 Jun 2023 17:18:17 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1686953897;
-	bh=x4mRMMlHri/GDm+0Nso/8+AU33TIa4+j4P3q5w3/ilI=;
-	h=Date:Subject:To:References:From:In-Reply-To;
-	b=F5jTzyFnmFO+Ox31IFr/uzN3w9ujPnhNM2RbPfYsVApc25FfdfwShFJBLNs0njleC
-	 6m56hQtOFmwqUmrgbp3RmQpc6KyBRBuc4dlbx9JcvOfLaGOtNUABP2qGbszyVItVmi
-	 IKutfVjS2W88xt4Gaysay62P5ihGwQ2jwJtY5KQY=
-Received: from DLEE103.ent.ti.com (dlee103.ent.ti.com [157.170.170.33])
-	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 35GMIH2k024514
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Fri, 16 Jun 2023 17:18:17 -0500
-Received: from DLEE109.ent.ti.com (157.170.170.41) by DLEE103.ent.ti.com
- (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 16
- Jun 2023 17:18:16 -0500
-Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE109.ent.ti.com
- (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 16 Jun 2023 17:18:16 -0500
-Received: from [128.247.81.144] (ileaxei01-snat.itg.ti.com [10.180.69.5])
-	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 35GMIG42107471
-	for <openembedded-devel@lists.openembedded.org>; Fri, 16 Jun 2023 17:18:16 -0500
-Message-ID: <46982fd3-2875-6fa0-9b30-03dd8a4f9d1e@ti.com>
-Date: Fri, 16 Jun 2023 17:18:16 -0500
+ dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=gwYts5Cq;
+ spf=pass (domain: gmail.com, ip: 209.85.128.170, mailfrom: akuster808@gmail.com)
+Received: by mail-yw1-f170.google.com with SMTP id 00721157ae682-57028539aadso23067777b3.2
+        for <openembedded-devel@lists.openembedded.org>; Sat, 17 Jun 2023 10:15:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20221208; t=1687022102; x=1689614102;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=46CbGwcKR9m7MCS5L1aiik8NL0ntmHU80eakLrFUgaI=;
+        b=gwYts5CqBFdTdIs4oOFOvNTdUvjr1nSrYIDLWUALGsr3xdqWv66Yuc1k9zAB7eV7OL
+         d2ES9RAwIAXH2zIYUXZgFu9YrhlldIZbTuCdvxKK7jnTWRrSR/cU2O3/v/MO8I1Ax5qe
+         KtfpWt8SX63RjN/T5TwuNp+rbPtcnMip6xYWGIzngv6S5V36uqocptsRlkdViFIo8nPS
+         KbV8gdFnnAhY2/JBZdqUvOaBRYWGCFlsYZ9sv0HRriPGkYR85DbucAF5rIpWJmk2Q4/c
+         KgLRiOqveJ5nD1BnLnUR6nK6rXvOsY5x7BgGjXBtGUEvsif8QbHbfm0xovV8tN9k6WKK
+         i0lg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20221208; t=1687022102; x=1689614102;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=46CbGwcKR9m7MCS5L1aiik8NL0ntmHU80eakLrFUgaI=;
+        b=k/paLiaFmYM7iYea5lDTuhn1ejpNIMwx06ZrREpLAD4s0Nmm9vKY+SaIMhspqCPZQN
+         xmEA4LuQqMBL+5FK4oDW0G3UMWARYWTqmNjA+ppRb3ETlkruKbKCCdIt2LY6nYOp1TzR
+         cmzRJuPWZDpXH/nFwTPYe9jRTToyelwlXJZDk0YGkjP8/wtLVm9pdXcei1pFI4kA80qs
+         Is5qyjgNxZjPHinM/BpWVJEehi2D/DQ71gxH45LNGDTmTCeYInmr5567r2Wu0+za1Zgx
+         ORjzYIBnrpnA9aEJcMYR9GxsFeaL0xMOkvJqcfs+B+VWas2d0k8L/zTGULuqptun9upG
+         OsDQ==
+X-Gm-Message-State: AC+VfDxd0o1joVd5rLCHQsMiI9f04WhDmaEqEeAAzKIuWIF1cF5D3RjI
+	gAp8Y7HE2FwB1W+cyOxe6v6O45DM30w=
+X-Google-Smtp-Source: ACHHUZ47WBezDm8/hl7ZRGKimw5Jx7aNUYe9Wt78bDeMSjE98q3p4jzDZpUNq5SQQYw/xuz2kcFU2A==
+X-Received: by 2002:a81:920b:0:b0:56c:f916:905 with SMTP id j11-20020a81920b000000b0056cf9160905mr5374307ywg.32.1687022102248;
+        Sat, 17 Jun 2023 10:15:02 -0700 (PDT)
+Received: from keaua.caveonetworks.com ([2600:1700:9190:ba10:89fd:7ebd:1d10:5272])
+        by smtp.gmail.com with ESMTPSA id o125-20020a815a83000000b00545a08184cesm5737043ywb.94.2023.06.17.10.15.01
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sat, 17 Jun 2023 10:15:01 -0700 (PDT)
+From: Armin Kuster <akuster808@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Ross Burton <ross.burton@arm.com>,
+	Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][mickledore][PATCH 2/6] libgxim: add autoconf-archive-native DEPENDS
+Date: Sat, 17 Jun 2023 13:14:56 -0400
+Message-Id: <20230617171500.70558-2-akuster808@gmail.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20230617171500.70558-1-akuster808@gmail.com>
+References: <20230617171500.70558-1-akuster808@gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.11.2
-Subject: Re: [EXTERNAL] [oe] [meta-oe][kirkstone][PATCH 1/6] glfw: add
- packageconfig and wayland dependencies
-Content-Language: en-US, en-US-large
-To: <openembedded-devel@lists.openembedded.org>
-References: <20230615205637.724348-1-rs@ti.com>
- <1768F09D6B3AA47F.29648@lists.openembedded.org>
-From: Randolph Sapp <rs@ti.com>
-In-Reply-To: <1768F09D6B3AA47F.29648@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 16 Jun 2023 22:18:24 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103345
+ <openembedded-devel@lists.openembedded.org>; Sat, 17 Jun 2023 17:15:05 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103347
 
-On 6/15/23 15:56, Randolph Sapp via lists.openembedded.org wrote:
-> From: Randolph Sapp <rs@ti.com>
-> 
-> GLFW has the ability to use a wayland backend. This patch adds a config
-> for it, but does not enable it by default because it has a dependency on
-> extra-cmake-modules which is provided (most commonly) by meta-qt5-extra.
-> 
-> Signed-off-by: Randolph Sapp <rs@ti.com>
+From: Ross Burton <ross.burton@arm.com>
 
-Whoops. That wasn't supposed to be included. Please ignore this patch, 
-we had a previous discussion about it [1] and I haven't gotten around to 
-cleaning it up.
+This can be satisfied via transitive dependencies, but make it an
+explicit DEPENDS.
 
-[1] https://lists.openembedded.org/g/openembedded-devel/message/102216
+Signed-off-by: Ross Burton <ross.burton@arm.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+(cherry picked from commit 5fca30d672c291b1af8284d6d5cbfc520c95d4fc)
+Signed-off-by: Armin Kuster <akuster808@gmail.com>
+---
+ meta-oe/recipes-extended/libgxim/libgxim_0.5.0.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/meta-oe/recipes-extended/libgxim/libgxim_0.5.0.bb b/meta-oe/recipes-extended/libgxim/libgxim_0.5.0.bb
+index 2d93936f37..3912e0a8d7 100644
+--- a/meta-oe/recipes-extended/libgxim/libgxim_0.5.0.bb
++++ b/meta-oe/recipes-extended/libgxim/libgxim_0.5.0.bb
+@@ -24,7 +24,7 @@ LIC_FILES_CHKSUM = "\
+ file://COPYING;md5=2d5025d4aa3495befef8f17206a5b0a1"
+ 
+ EXTRA_OECONF = "--enable-debug --disable-static --disable-rebuilds --enable-compile-warnings=minimum"
+-DEPENDS += "gtk+ glib-2.0 glib-2.0-native ruby-native intltool-native gnome-common-native"
++DEPENDS += "gtk+ glib-2.0 glib-2.0-native ruby-native intltool-native gnome-common-native autoconf-archive-native"
+ 
+ inherit features_check autotools pkgconfig gettext
+ 
+-- 
+2.34.1
 
 
