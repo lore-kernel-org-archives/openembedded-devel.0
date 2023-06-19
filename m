@@ -1,87 +1,80 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E4DB7EB64D7
-	for <webhook@archiver.kernel.org>; Mon, 19 Jun 2023 01:36:03 +0000 (UTC)
-Received: from mail-oa1-f49.google.com (mail-oa1-f49.google.com [209.85.160.49])
- by mx.groups.io with SMTP id smtpd.web10.17651.1687138562810196844
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 84E8AEB64DB
+	for <webhook@archiver.kernel.org>; Mon, 19 Jun 2023 06:50:21 +0000 (UTC)
+Received: from esa1.hc1455-7.c3s2.iphmx.com (esa1.hc1455-7.c3s2.iphmx.com [207.54.90.47])
+ by mx.groups.io with SMTP id smtpd.web10.2313.1687157419852830676
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 18 Jun 2023 18:36:02 -0700
+ Sun, 18 Jun 2023 23:50:21 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20221208 header.b=rqMBOEB+;
- spf=pass (domain: gmail.com, ip: 209.85.160.49, mailfrom: raj.khem@gmail.com)
-Received: by mail-oa1-f49.google.com with SMTP id 586e51a60fabf-19fa4346498so2667579fac.1
-        for <openembedded-devel@lists.openembedded.org>; Sun, 18 Jun 2023 18:36:02 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1687138562; x=1689730562;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=C4MQD0aWG5rY7HsMt9SjLAeOxMOCyaAoLc/N6x7tGqQ=;
-        b=rqMBOEB+hSdGAUOt74H99LUOrQILviNiJbxH+c9srWrSWanTUX827WmtYPwXn3n8nI
-         isK4flAc3b3FSEwAargDr0sa1ECQxdAI/F7AfLs7jq2ApzoUhZ8D6NR/I0uXXSwVFC5I
-         21yf9y1ovVQGJ8MHin4orqC3IyXyG029qPYnCjMw/DE9l87tZHi6uKno9irfHIvGPq6I
-         3c9ZRjqW+azMO9wXvjXqXgh/hFREzP3sknKH0xx9GkZk30/sT2cbQ8T7j/070XqFl7Je
-         A//574LdeVfH3wk5mU5UNWxMas/ZRqEHsAqQ+LnEGxXvauEYU0qUUK1K38CnCX/jykKr
-         kUFw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1687138562; x=1689730562;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=C4MQD0aWG5rY7HsMt9SjLAeOxMOCyaAoLc/N6x7tGqQ=;
-        b=jI/JzZQJwzgTN0bFvdJJg/jQPcqErMBG4p415yfFsJtHltGMcdQRw5um7EHt4Qi2Wb
-         mc9Ib/u4Z97NB/2QIkXqxOhuV/ItfY8dCC9XWYywSppn1VmreB7qOo/F04FQcz2FxJ01
-         pms+IKsi4DjNjK6CJuEZvTPSUoJfan3uEd8cVLntHmavW2mMwLc9XXzrYuavtC15y6W5
-         tJszjg/GMB1eYZVrEPuklUG5u1jdl3gzvk7B9DXIWV8YuJySjZFSCqLCDXG1XzODu/n/
-         VIIbqNL1pXfCpO+pc+WgHnsRyXXFLk9wzyadi4jsEsUv36lqBei4QLj3TBnKRhjfzZZ3
-         1F9Q==
-X-Gm-Message-State: AC+VfDwaJ1s1Ts3jhrw2rcQr3C/jygLbfrpLRejKTeRxQvYXeEm1HL4j
-	bPVMvPKCIOHFDiBM2tzEFIuQ8Jxw1rQ=
-X-Google-Smtp-Source: ACHHUZ5qzKGE4690CMpM/dWI3ZvKMTKjojgu8ol52L9wmzzwheeouDCvPWYc2dKKkYh2FkIRGHhxBA==
-X-Received: by 2002:aca:bc45:0:b0:39a:b787:1ae2 with SMTP id m66-20020acabc45000000b0039ab7871ae2mr9836116oif.52.1687138561834;
-        Sun, 18 Jun 2023 18:36:01 -0700 (PDT)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9181:d380::eb87])
-        by smtp.gmail.com with ESMTPSA id 4-20020a17090a198400b0025643e5da99sm272210pji.37.2023.06.18.18.36.01
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 18 Jun 2023 18:36:01 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
+ dkim=missing; spf=pass (domain: fujitsu.com, ip: 207.54.90.47, mailfrom: wangmy@fujitsu.com)
+X-IronPort-AV: E=McAfee;i="6600,9927,10745"; a="121192083"
+X-IronPort-AV: E=Sophos;i="6.00,254,1681138800"; 
+   d="scan'208";a="121192083"
+Received: from unknown (HELO oym-r2.gw.nic.fujitsu.com) ([210.162.30.90])
+  by esa1.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 19 Jun 2023 15:50:18 +0900
+Received: from oym-m4.gw.nic.fujitsu.com (oym-nat-oym-m4.gw.nic.fujitsu.com [192.168.87.61])
+	by oym-r2.gw.nic.fujitsu.com (Postfix) with ESMTP id 6844AF0767
+	for <openembedded-devel@lists.openembedded.org>; Mon, 19 Jun 2023 15:50:16 +0900 (JST)
+Received: from aks-ab1.gw.nic.fujitsu.com (aks-ab1.gw.nic.fujitsu.com [192.51.207.11])
+	by oym-m4.gw.nic.fujitsu.com (Postfix) with ESMTP id 985D0D4BF5
+	for <openembedded-devel@lists.openembedded.org>; Mon, 19 Jun 2023 15:50:15 +0900 (JST)
+Received: from localhost.localdomain (unknown [10.167.225.33])
+	by aks-ab1.gw.nic.fujitsu.com (Postfix) with ESMTP id C3ABE2FC8442;
+	Mon, 19 Jun 2023 15:50:14 +0900 (JST)
+From: wangmy@fujitsu.com
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH] libforms: Replace hardcoded dep on mesa with virtual/libgl
-Date: Sun, 18 Jun 2023 18:35:58 -0700
-Message-ID: <20230619013558.3206367-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.41.0
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Cc: Wang Mingyu <wangmy@fujitsu.com>
+Subject: [oe] [meta-gnome] [PATCH] evince: upgrade 44.1 -> 44.2
+Date: Mon, 19 Jun 2023 14:48:07 +0800
+Message-Id: <1687157308-17342-2-git-send-email-wangmy@fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
+In-Reply-To: <1687157308-17342-1-git-send-email-wangmy@fujitsu.com>
+References: <1687157308-17342-1-git-send-email-wangmy@fujitsu.com>
+X-TM-AS-GCONF: 00
+X-TM-AS-Product-Ver: IMSS-9.1.0.1408-9.0.0.1002-27700.005
+X-TM-AS-User-Approved-Sender: Yes
+X-TMASE-Version: IMSS-9.1.0.1408-9.0.1002-27700.005
+X-TMASE-Result: 10--3.963400-10.000000
+X-TMASE-MatchedRID: 6e3s/u+cBDSjz0nOeth/yQPZZctd3P4Bchr4pBLGIvAH8UzOewTxw+z9
+	H+EUMUMlIvrftAIhWmJ8eC2pVr1wbx7GIvj+BE01sZaZ5UBQsoe8TPg5rIBCgIFum2PEjqt1o8W
+	MkQWv6iV3LAytsQR4e1cppCzPq+1UxlblqLlYqXKJO6NOecatZ8axAIhS4DzWWYr75uBfPNFols
+	kAbGxjiiN7h+Ytfx9bPIKv2xUhLzICHzwlReYmxZnXazZU7BXmWVnrUjptf63+v9v52ZIoWjoAf
+	389xF3XFSk9HhUZnw7OGIWnws4LoyHWPYzouJUy
+X-TMASE-SNAP-Result: 1.821001.0001-0-1-22:0,33:0,34:0-0
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 19 Jun 2023 01:36:03 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103356
+ <openembedded-devel@lists.openembedded.org>; Mon, 19 Jun 2023 06:50:21 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103358
 
-This ensures that it can be built on machines with non-mesa graphics
-drivers
+From: Wang Mingyu <wangmy@fujitsu.com>
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- meta-oe/recipes-graphics/libforms/libforms_1.2.5pre1.bb | 2 +-
+ .../recipes-gnome/evince/{evince_44.1.bb => evince_44.2.bb}     | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-gnome/recipes-gnome/evince/{evince_44.1.bb => evince_44.2.bb} (94%)
 
-diff --git a/meta-oe/recipes-graphics/libforms/libforms_1.2.5pre1.bb b/meta-oe/recipes-graphics/libforms/libforms_1.2.5pre1.bb
-index 52bddbd0de..251c07adf0 100644
---- a/meta-oe/recipes-graphics/libforms/libforms_1.2.5pre1.bb
-+++ b/meta-oe/recipes-graphics/libforms/libforms_1.2.5pre1.bb
-@@ -20,7 +20,7 @@ REQUIRED_DISTRO_FEATURES = "opengl x11"
+diff --git a/meta-gnome/recipes-gnome/evince/evince_44.1.bb b/meta-gnome/recipes-gnome/evince/evince_44.2.bb
+similarity index 94%
+rename from meta-gnome/recipes-gnome/evince/evince_44.1.bb
+rename to meta-gnome/recipes-gnome/evince/evince_44.2.bb
+index a844324ad..00d107910 100644
+--- a/meta-gnome/recipes-gnome/evince/evince_44.1.bb
++++ b/meta-gnome/recipes-gnome/evince/evince_44.2.bb
+@@ -34,7 +34,7 @@ REQUIRED_DISTRO_FEATURES = "${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'open
+ def gnome_verdir(v):
+     return oe.utils.trim_version(v, 1)
  
- S = "${WORKDIR}/xforms-${PV}"
+-SRC_URI[archive.sha256sum] = "15afd3bb15ffb38fecab34c23350950ad270ab03a85b94e333d9dd7ee6a74314"
++SRC_URI[archive.sha256sum] = "9a75c7ff8f599218d070e09fb4082cb26f9b86370a9bfae98e1aacb564d675dd"
  
--DEPENDS = "libxpm jpeg libx11 mesa"
-+DEPENDS = "libxpm jpeg libx11 virtual/libgl"
- RDEPENDS:${PN} = "bash"
+ GTKDOC_MESON_OPTION = "gtk_doc"
  
- EXTRA_OECONF = "--with-extra-inc=${S}/lib" 
 -- 
-2.41.0
+2.34.1
 
 
