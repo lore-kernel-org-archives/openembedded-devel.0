@@ -2,34 +2,34 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B7A3AEB64DC
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B1FCDEB64DA
 	for <webhook@archiver.kernel.org>; Mon, 19 Jun 2023 06:50:41 +0000 (UTC)
-Received: from esa7.hc1455-7.c3s2.iphmx.com (esa7.hc1455-7.c3s2.iphmx.com [139.138.61.252])
- by mx.groups.io with SMTP id smtpd.web10.2319.1687157431976211060
+Received: from esa6.hc1455-7.c3s2.iphmx.com (esa6.hc1455-7.c3s2.iphmx.com [68.232.139.139])
+ by mx.groups.io with SMTP id smtpd.web11.2282.1687157427260781352
  for <openembedded-devel@lists.openembedded.org>;
  Sun, 18 Jun 2023 23:50:32 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: fujitsu.com, ip: 139.138.61.252, mailfrom: wangmy@fujitsu.com)
-X-IronPort-AV: E=McAfee;i="6600,9927,10745"; a="100071982"
+ dkim=missing; spf=pass (domain: fujitsu.com, ip: 68.232.139.139, mailfrom: wangmy@fujitsu.com)
+X-IronPort-AV: E=McAfee;i="6600,9927,10745"; a="122527040"
 X-IronPort-AV: E=Sophos;i="6.00,254,1681138800"; 
-   d="scan'208";a="100071982"
-Received: from unknown (HELO oym-r4.gw.nic.fujitsu.com) ([210.162.30.92])
-  by esa7.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 19 Jun 2023 15:50:29 +0900
-Received: from oym-m1.gw.nic.fujitsu.com (oym-nat-oym-m1.gw.nic.fujitsu.com [192.168.87.58])
-	by oym-r4.gw.nic.fujitsu.com (Postfix) with ESMTP id AA2917E0C2
-	for <openembedded-devel@lists.openembedded.org>; Mon, 19 Jun 2023 15:50:27 +0900 (JST)
+   d="scan'208";a="122527040"
+Received: from unknown (HELO yto-r1.gw.nic.fujitsu.com) ([218.44.52.217])
+  by esa6.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 19 Jun 2023 15:50:31 +0900
+Received: from yto-m3.gw.nic.fujitsu.com (yto-nat-yto-m3.gw.nic.fujitsu.com [192.168.83.66])
+	by yto-r1.gw.nic.fujitsu.com (Postfix) with ESMTP id DC2BFDAE0C
+	for <openembedded-devel@lists.openembedded.org>; Mon, 19 Jun 2023 15:50:28 +0900 (JST)
 Received: from aks-ab1.gw.nic.fujitsu.com (aks-ab1.gw.nic.fujitsu.com [192.51.207.11])
-	by oym-m1.gw.nic.fujitsu.com (Postfix) with ESMTP id D2AFFD88C0
-	for <openembedded-devel@lists.openembedded.org>; Mon, 19 Jun 2023 15:50:26 +0900 (JST)
+	by yto-m3.gw.nic.fujitsu.com (Postfix) with ESMTP id 32D0E142A0
+	for <openembedded-devel@lists.openembedded.org>; Mon, 19 Jun 2023 15:50:28 +0900 (JST)
 Received: from localhost.localdomain (unknown [10.167.225.33])
-	by aks-ab1.gw.nic.fujitsu.com (Postfix) with ESMTP id 0FBD42FC8457;
-	Mon, 19 Jun 2023 15:50:26 +0900 (JST)
+	by aks-ab1.gw.nic.fujitsu.com (Postfix) with ESMTP id 62ED22FC8442;
+	Mon, 19 Jun 2023 15:50:27 +0900 (JST)
 From: wangmy@fujitsu.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-python] [PATCH] python3-ujson: upgrade 5.7.0 -> 5.8.0
-Date: Mon, 19 Jun 2023 14:48:24 +0800
-Message-Id: <1687157308-17342-19-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH] python3-xmodem: upgrade 0.4.6 -> 0.4.7
+Date: Mon, 19 Jun 2023 14:48:26 +0800
+Message-Id: <1687157308-17342-21-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 In-Reply-To: <1687157308-17342-1-git-send-email-wangmy@fujitsu.com>
 References: <1687157308-17342-1-git-send-email-wangmy@fujitsu.com>
@@ -37,57 +37,52 @@ X-TM-AS-GCONF: 00
 X-TM-AS-Product-Ver: IMSS-9.1.0.1408-9.0.0.1002-27700.005
 X-TM-AS-User-Approved-Sender: Yes
 X-TMASE-Version: IMSS-9.1.0.1408-9.0.1002-27700.005
-X-TMASE-Result: 10-4.507400-10.000000
-X-TMASE-MatchedRID: R9NZgeCyXhKjz0nOeth/yUIIxwDaU5mr5sPqcQkI8puU8ftiyKjZrdMj
-	jwb9QfV2CC8aAmGeO6lV00+whwxVQy/7QU2czuUN194/5X9VfCxYL/tox9XQkYkvBucr2+3cli+
-	BaqMwTNrVuPnsbKmJliiOf1NDnCI+rWL/xQJnm46eAiCmPx4NwGmRqNBHmBveVDC1CbuJXmMqtq
-	5d3cxkNZLja8gsEi30p/nboQpFSw9tGSgOkpaBDf1THl++95aIpLNAVTUBaaKu0C4I5ORCRGkC4
-	psljezLb2uTDL0oEK9vj4XTNyD5nWOCjzW1o6/EU8mdcvbI1h2S6jzjuXTm0MTMzICazP4UehYt
-	aVdyxm8=
+X-TMASE-Result: 10-1.316200-10.000000
+X-TMASE-MatchedRID: EzAtoNUuirijz0nOeth/yUIIxwDaU5mrPYWAASIMdr99KJhEY+vRMXvU
+	CoLZpk+xfif6PsvfsVJ82IENZx2kDTbcsMCH+ZLFtXpctKvGlKFUENBIMyKD0QfxTM57BPHD7v0
+	MlFSLfmlNDQmQ8bbzv+affHI8kAmi7IWnvto+9Z1oMLOoNHsM9hCE2NlBjIjcKXqmmYTGpxiUg5
+	UD6AlF0rF9uGobEuT7gDLqnrRlXrZ8nn9tnqel2MZW5ai5WKlyGj0TTUTL0es1B/9GNmu/1tYt3
+	a9syxFlTUGkjsAjy+yalC2w5NgUe3KDJWROKWXSHoMawA6AGtO3d478Q3tT1uI7o80gafQ8/r/b
+	+dmSKFo6AH9/PcRd1xUpPR4VGZ8OzhiFp8LOC6Mh1j2M6LiVMg==
 X-TMASE-SNAP-Result: 1.821001.0001-0-1-22:0,33:0,34:0-0
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 19 Jun 2023 06:50:41 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103376
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103377
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
 Changelog:
 ==========
-Added
---------
-    Build wheel for Python 3.12 beta (built against 3.12.0b2)
-
-Changed
---------
-    Drop support for Python 3.7
-
-Fixed
---------
-    Include BSD-3-Clause and TCL license text
+  bugfix: stall on some kinds of error in recv(), PR #56
+  bugfix: sequence number miscalculation in send(), PR #52
+  enhancement: callback function added for recv() method, PR #53
+  bugfix: receiving empty file and stall condition in recv(), PR #50
+  bugfix: callback is now called for some kinds of errors and some CLI fixes, 8a798e8
+  bugfix: remove DepreactionWarning for logging.warn(), PR #49
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../python/{python3-ujson_5.7.0.bb => python3-ujson_5.8.0.bb}   | 2 +-
+ .../python/{python3-xmodem_0.4.6.bb => python3-xmodem_0.4.7.bb} | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-ujson_5.7.0.bb => python3-ujson_5.8.0.bb} (90%)
+ rename meta-python/recipes-devtools/python/{python3-xmodem_0.4.6.bb => python3-xmodem_0.4.7.bb} (81%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-ujson_5.7.0.bb b/meta-python/recipes-devtools/python/python3-ujson_5.8.0.bb
-similarity index 90%
-rename from meta-python/recipes-devtools/python/python3-ujson_5.7.0.bb
-rename to meta-python/recipes-devtools/python/python3-ujson_5.8.0.bb
-index 5c431fa00..9486435d7 100644
---- a/meta-python/recipes-devtools/python/python3-ujson_5.7.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-ujson_5.8.0.bb
-@@ -4,7 +4,7 @@ DESCRIPTION = "UltraJSON is an ultra fast JSON encoder and decoder written in pu
- LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=e0039a83d8a99726b5418f0b03302d0a"
+diff --git a/meta-python/recipes-devtools/python/python3-xmodem_0.4.6.bb b/meta-python/recipes-devtools/python/python3-xmodem_0.4.7.bb
+similarity index 81%
+rename from meta-python/recipes-devtools/python/python3-xmodem_0.4.6.bb
+rename to meta-python/recipes-devtools/python/python3-xmodem_0.4.7.bb
+index 6df392e2d..80fe94555 100644
+--- a/meta-python/recipes-devtools/python/python3-xmodem_0.4.6.bb
++++ b/meta-python/recipes-devtools/python/python3-xmodem_0.4.7.bb
+@@ -3,7 +3,7 @@ DESCRIPTION = "XMODEM protocol implementation"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda2f7b4f302"
  
--SRC_URI[sha256sum] = "e788e5d5dcae8f6118ac9b45d0b891a0d55f7ac480eddcb7f07263f2bcf37b23"
-+SRC_URI[sha256sum] = "78e318def4ade898a461b3d92a79f9441e7e0e4d2ad5419abed4336d702c7425"
+-SRC_URI[sha256sum] = "089737298f5738eabc43f2519efdc80b402693768f16383f7013b9e6f8f279d7"
++SRC_URI[sha256sum] = "2f1068aa8676f0d1d112498b5786c4f8ea4f89d8f25d07d3a0f293cd21db1c35"
  
- inherit pypi ptest setuptools3
+ inherit pypi setuptools3
  
 -- 
 2.34.1
