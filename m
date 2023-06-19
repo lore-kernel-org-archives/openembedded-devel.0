@@ -1,168 +1,114 @@
-Return-Path: <beniaminsandu@gmail.com>
+Return-Path: <rs@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C86A9EB64D9
-	for <webhook@archiver.kernel.org>; Mon, 19 Jun 2023 18:26:25 +0000 (UTC)
-Received: from mail-ed1-f44.google.com (mail-ed1-f44.google.com [209.85.208.44])
- by mx.groups.io with SMTP id smtpd.web11.15070.1687199177406216449
- for <openembedded-devel@lists.openembedded.org>;
- Mon, 19 Jun 2023 11:26:17 -0700
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A514DEB64D9
+	for <webhook@archiver.kernel.org>; Mon, 19 Jun 2023 18:29:05 +0000 (UTC)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ by mx.groups.io with SMTP id smtpd.web11.15153.1687199342559435910
+ for <Openembedded-devel@lists.openembedded.org>;
+ Mon, 19 Jun 2023 11:29:02 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=n3gSvRlr;
- spf=pass (domain: gmail.com, ip: 209.85.208.44, mailfrom: beniaminsandu@gmail.com)
-Received: by mail-ed1-f44.google.com with SMTP id 4fb4d7f45d1cf-519608ddbf7so3906905a12.2
-        for <openembedded-devel@lists.openembedded.org>; Mon, 19 Jun 2023 11:26:17 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1687199175; x=1689791175;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=Nq8rOC3+fdBs5gq3a/ov0dT99tNV1V6ToGzdnQUgBfs=;
-        b=n3gSvRlrCFxGcfDF1v5yGl7CLE70gk523wbrLzylIx4tk8g+oJ9HwcHxdtuy0JUkar
-         ADVigTDabkq/RiZoyJWcQ1QBXxmKul4Gc3wpwn9SD/QkRL742d50A/KXlrsLItVOa/G4
-         UBSdkW6y04euys/g1TyC/P/+CKGgO1eZOJwXiczEwx8NrNMeDGrE1Rh4/6l0YuMb5ZlS
-         NwrehSg61wA1c90dL0jHINJdwvLbMdmbH4HAJr/lzbG+V8EZrTWu+pSIJya7L50htBtx
-         zJnqxLECg0MAhhJcGwsw+TAdQ56fhkRK3hgG/xiX+bhbEbWB27kkV4T/vdrR15bokECt
-         f65w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1687199175; x=1689791175;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=Nq8rOC3+fdBs5gq3a/ov0dT99tNV1V6ToGzdnQUgBfs=;
-        b=BQ2xJcyCG+CYL8d+NEr5jEou/30v+VzkHM3wFPMQttIcbbor8Q9DJL1XcNTxnG9bmu
-         Q97IJBDcxeNkKEotxrggknBBruSh/AyaFzfxXPvhxBn35MRyLvM+ibV7F/Rboj6CvO2R
-         JDZwgbBoQBDbDM1rzGF40em39xPAFGRtDEeMjDtyseQ1CHy/SSWEzHmrtb39BeFuPxxy
-         WxfCo5jH5WOcPyTsxOv0nxPg6gSSGZqBnh+TriHSPuXYG1ToEHXJYyzgCorKnz6YuU1Z
-         Xy9LnTXyJjJm0E7mG/wPmPdQMZYXbMQjcTSM2gp5+wVAX6dwDNkgdHlbDY++GRtu+rO5
-         PfPA==
-X-Gm-Message-State: AC+VfDxaxBsiBMD6l1ydhHORIioi+eH+uadczAAAIXTFGTYxZMZY19/G
-	rPMlLe0wXuRm2PWNU4UWC3ElQOeYVFHTmXlw
-X-Google-Smtp-Source: ACHHUZ68hbUhLy6arNb2hs8dgxiNlCFmWKzf3S1l4Ta8RFMyeHLqdZ0o6Smjw0ffb/Mtetn+119j1Q==
-X-Received: by 2002:a17:906:9b8b:b0:96f:4927:7a96 with SMTP id dd11-20020a1709069b8b00b0096f49277a96mr9205735ejc.70.1687199175507;
-        Mon, 19 Jun 2023 11:26:15 -0700 (PDT)
-Received: from localhost.localdomain ([5.13.151.121])
-        by smtp.gmail.com with ESMTPSA id z9-20020a1709063a0900b00988c0c175c6sm28770eje.189.2023.06.19.11.26.13
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 19 Jun 2023 11:26:14 -0700 (PDT)
-From: Beniamin Sandu <beniaminsandu@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Beniamin Sandu <beniaminsandu@gmail.com>
-Subject: [meta-networking][PATCH v2] mbedtls: add support for v3.x
-Date: Mon, 19 Jun 2023 21:25:59 +0300
-Message-Id: <20230619182559.104504-1-beniaminsandu@gmail.com>
-X-Mailer: git-send-email 2.25.1
+ dkim=fail reason="body hash did not verify" header.i=@ti.com header.s=ti-com-17q1 header.b=y+YyKJTk;
+ spf=pass (domain: ti.com, ip: 198.47.23.248, mailfrom: rs@ti.com)
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 35JISwoD012982;
+	Mon, 19 Jun 2023 13:28:58 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1687199338;
+	bh=zAn9HiSZl6Khtt8NwDMrHJyok1Fe3rpAQDuDTUaddzs=;
+	h=Date:Subject:To:CC:References:From:In-Reply-To;
+	b=y+YyKJTkM11U9xYUT+9+u8yNzrAbhc+ArhpcIH+DdyTfxaQiY3JVv2SrrmDMTzEh5
+	 uHe1sB+6Hzu1jfDPv6nljXN5hr0xJu0uKpjw7ib8w6PKBKXPE/VMuA2rLs3aM2m1PT
+	 9Vr/odMMQmto2fDBGeIr+LzNtHGRg6kwn4pA91rs=
+Received: from DLEE108.ent.ti.com (dlee108.ent.ti.com [157.170.170.38])
+	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 35JISwPC087873
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+	Mon, 19 Jun 2023 13:28:58 -0500
+Received: from DLEE114.ent.ti.com (157.170.170.25) by DLEE108.ent.ti.com
+ (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 19
+ Jun 2023 13:28:57 -0500
+Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE114.ent.ti.com
+ (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Mon, 19 Jun 2023 13:28:58 -0500
+Received: from [128.247.81.144] (ileaxei01-snat2.itg.ti.com [10.180.69.6])
+	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 35JISvsw059484;
+	Mon, 19 Jun 2023 13:28:57 -0500
+Message-ID: <116e4ca5-ec94-5569-3282-20b20dcdc9e3@ti.com>
+Date: Mon, 19 Jun 2023 13:28:57 -0500
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.11.2
+Subject: Re: [EXTERNAL] Re: [oe] [meta-oe][kirkstone][PATCH 0/6] Backport
+ everything relevant to using cts with Weston >= 10
+To: akuster808 <akuster808@gmail.com>, <raj.khem@gmail.com>, <afd@ti.com>,
+        <denis@denix.org>
+CC: <Openembedded-devel@lists.openembedded.org>
+References: <20230615205637.724348-1-rs@ti.com>
+ <dddc3e26-aa69-2b49-819a-a461581aed15@gmail.com>
+Content-Language: en-US, en-US-large
+From: Randolph Sapp <rs@ti.com>
+In-Reply-To: <dddc3e26-aa69-2b49-819a-a461581aed15@gmail.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Transfer-Encoding: quoted-printable
+X-MIME-Autoconverted: from 8bit to quoted-printable by lelv0143.ext.ti.com id 35JISwoD012982
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 19 Jun 2023 18:26:25 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103441
+ <openembedded-devel@lists.openembedded.org>; Mon, 19 Jun 2023 18:29:05 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103442
 
-Version 3.4.0 adds a lot of improvements and fixes (a notable one
-being initial support for PKCS7 CMS), but since this is a pretty
-big jump, let's keep both versions for a while, so the v2.x users
-can upgrade to 3.x in a timely manner if needed.
+On 6/17/23 13:07, akuster808 wrote:
+> On 6/15/23 4:56 PM, Randolph Sapp via lists.openembedded.org wrote:
+>> From: Randolph Sapp <rs@ti.com>
+>> Backport everything relevant to getting opengl-es-cts up and running o=
+n
+>> newer versions of wayland protocols and subsequently Weston 10.
+> Weston 10 was released months before Kirkstone released so IMHO there=20
+> was ample of time to get needed packages updated prior to release.=C2=A0=
+ This=20
+> does not sound like bug fixes.
+>=20
+> Nacking series.
+>=20
+> - armin
+>=20
 
-Signed-off-by: Beniamin Sandu <beniaminsandu@gmail.com>
----
- .../mbedtls/mbedtls_3.4.0.bb                  | 85 +++++++++++++++++++
- 1 file changed, 85 insertions(+)
- create mode 100644 meta-networking/recipes-connectivity/mbedtls/mbedtls_3.4.0.bb
+Sounds like an awful lot of speculation, have you tried running the=20
+current version of opengles-cts on Weston 10? :)
 
-diff --git a/meta-networking/recipes-connectivity/mbedtls/mbedtls_3.4.0.bb b/meta-networking/recipes-connectivity/mbedtls/mbedtls_3.4.0.bb
-new file mode 100644
-index 000000000..ebc6ba573
---- /dev/null
-+++ b/meta-networking/recipes-connectivity/mbedtls/mbedtls_3.4.0.bb
-@@ -0,0 +1,85 @@
-+SUMMARY = "Lightweight crypto and SSL/TLS library"
-+DESCRIPTION = "mbedtls is a lean open source crypto library          \
-+for providing SSL and TLS support in your programs. It offers        \
-+an intuitive API and documented header files, so you can actually    \
-+understand what the code does. It features:                          \
-+                                                                     \
-+ - Symmetric algorithms, like AES, Blowfish, Triple-DES, DES, ARC4,  \
-+   Camellia and XTEA                                                 \
-+ - Hash algorithms, like SHA-1, SHA-2, RIPEMD-160 and MD5            \
-+ - Entropy pool and random generators, like CTR-DRBG and HMAC-DRBG   \
-+ - Public key algorithms, like RSA, Elliptic Curves, Diffie-Hellman, \
-+   ECDSA and ECDH                                                    \
-+ - SSL v3 and TLS 1.0, 1.1 and 1.2                                   \
-+ - Abstraction layers for ciphers, hashes, public key operations,    \
-+   platform abstraction and threading                                \
-+"
-+
-+HOMEPAGE = "https://tls.mbed.org/"
-+
-+LICENSE = "Apache-2.0"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
-+
-+SECTION = "libs"
-+
-+S = "${WORKDIR}/git"
-+SRCREV = "1873d3bfc2da771672bd8e7e8f41f57e0af77f33"
-+SRC_URI = "git://github.com/ARMmbed/mbedtls.git;protocol=https;branch=master \
-+           file://run-ptest \
-+          "
-+
-+inherit cmake update-alternatives ptest
-+
-+PACKAGECONFIG ??= "shared-libs programs ${@bb.utils.contains('PTEST_ENABLED', '1', 'tests', '', d)}"
-+PACKAGECONFIG[shared-libs] = "-DUSE_SHARED_MBEDTLS_LIBRARY=ON,-DUSE_SHARED_MBEDTLS_LIBRARY=OFF"
-+PACKAGECONFIG[programs] = "-DENABLE_PROGRAMS=ON,-DENABLE_PROGRAMS=OFF"
-+PACKAGECONFIG[werror] = "-DMBEDTLS_FATAL_WARNINGS=ON,-DMBEDTLS_FATAL_WARNINGS=OFF"
-+# Make X.509 and TLS calls use PSA
-+# https://github.com/Mbed-TLS/mbedtls/blob/development/docs/use-psa-crypto.md
-+PACKAGECONFIG[psa] = ""
-+PACKAGECONFIG[tests] = "-DENABLE_TESTING=ON,-DENABLE_TESTING=OFF"
-+
-+EXTRA_OECMAKE = "-DLIB_INSTALL_DIR:STRING=${libdir}"
-+
-+# Needs crypto instructions on aarch64
-+TUNE_CCARGS_MARCH_OPTS:append:aarch64 = "${@bb.utils.contains('TUNE_FEATURES', 'crypto', '', '+crypto', d)}"
-+
-+# For now the only way to enable PSA is to explicitly pass a -D via CFLAGS
-+CFLAGS:append = "${@bb.utils.contains('PACKAGECONFIG', 'psa', ' -DMBEDTLS_USE_PSA_CRYPTO', '', d)}"
-+
-+PROVIDES += "polarssl"
-+RPROVIDES:${PN} = "polarssl"
-+
-+PACKAGES =+ "${PN}-programs"
-+FILES:${PN}-programs = "${bindir}/"
-+
-+ALTERNATIVE:${PN}-programs = "hello"
-+ALTERNATIVE_LINK_NAME[hello] = "${bindir}/hello"
-+
-+BBCLASSEXTEND = "native nativesdk"
-+
-+CVE_PRODUCT = "mbed_tls"
-+
-+# Fix merged upstream https://github.com/Mbed-TLS/mbedtls/pull/5310
-+CVE_CHECK_IGNORE += "CVE-2021-43666"
-+# Fix merged upstream https://github.com/Mbed-TLS/mbedtls/commit/9a4a9c66a48edfe9ece03c7e4a53310adf73a86c
-+CVE_CHECK_IGNORE += "CVE-2021-45451"
-+
-+# Strip host paths from autogenerated test files
-+do_compile:append() {
-+	sed -i 's+${S}/++g' ${B}/tests/*.c 2>/dev/null || :
-+	sed -i 's+${B}/++g' ${B}/tests/*.c 2>/dev/null || :
-+}
-+
-+# Export source files/headers needed by Arm Trusted Firmware
-+sysroot_stage_all:append() {
-+	sysroot_stage_dir "${S}/library" "${SYSROOT_DESTDIR}/usr/share/mbedtls-source/library"
-+	sysroot_stage_dir "${S}/include" "${SYSROOT_DESTDIR}/usr/share/mbedtls-source/include"
-+}
-+
-+do_install_ptest () {
-+	install -d ${D}${PTEST_PATH}/tests
-+	cp -f ${B}/tests/test_suite_* ${D}${PTEST_PATH}/tests/
-+	find ${D}${PTEST_PATH}/tests/ -type f -name "*.c" -delete
-+	cp -fR ${S}/tests/data_files ${D}${PTEST_PATH}/tests/
-+}
--- 
-2.25.1
+Anyways, here's the exact upstream commit required for Weston 10+=20
+support [1]:
+745d68215ebcfaf7fdb2a460447a0b6da3fda85a
+
+Here's the list of tags that has it currently:
+opengl-cts-4.6.3.0
+opengl-cts-4.6.3.1
+opengl-cts-4.6.3.2
+opengl-cts-4.6.3.3
+opengl-es-cts-3.2.9.0
+opengl-es-cts-3.2.9.1
+opengl-es-cts-3.2.9.2
+opengl-es-cts-3.2.9.3
+vulkan-cts-1.3.3.1
+vulkan-cts-1.3.4.0
+vulkan-cts-1.3.4.1
+vulkan-cts-1.3.5.0
+vulkan-cts-1.3.5.1
+vulkan-cts-1.3.5.2
+vulkan-cts-1.3.6.0
+
+Hence the version bump.
+
+[1]=20
+https://github.com/KhronosGroup/VK-GL-CTS/commit/745d68215ebcfaf7fdb2a460=
+447a0b6da3fda85a
+
+Randolph
+
+> [snip]
 
 
