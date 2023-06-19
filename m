@@ -2,179 +2,92 @@ Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0E4B1EB64D9
-	for <webhook@archiver.kernel.org>; Mon, 19 Jun 2023 11:10:23 +0000 (UTC)
-Received: from mail-oi1-f175.google.com (mail-oi1-f175.google.com [209.85.167.175])
- by mx.groups.io with SMTP id smtpd.web11.5028.1687173013006802829
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 92171EB64DA
+	for <webhook@archiver.kernel.org>; Mon, 19 Jun 2023 13:18:13 +0000 (UTC)
+Received: from mail-yw1-f173.google.com (mail-yw1-f173.google.com [209.85.128.173])
+ by mx.groups.io with SMTP id smtpd.web10.7290.1687180688051262496
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 19 Jun 2023 04:10:13 -0700
+ Mon, 19 Jun 2023 06:18:08 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=OE828Ztf;
- spf=pass (domain: gmail.com, ip: 209.85.167.175, mailfrom: akuster808@gmail.com)
-Received: by mail-oi1-f175.google.com with SMTP id 5614622812f47-39cd0c3e8deso2143779b6e.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 19 Jun 2023 04:10:12 -0700 (PDT)
+ dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=r32r7I/5;
+ spf=pass (domain: gmail.com, ip: 209.85.128.173, mailfrom: akuster808@gmail.com)
+Received: by mail-yw1-f173.google.com with SMTP id 00721157ae682-57083a06b71so28561957b3.1
+        for <openembedded-devel@lists.openembedded.org>; Mon, 19 Jun 2023 06:18:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1687173012; x=1689765012;
-        h=content-transfer-encoding:subject:from:to:content-language
-         :user-agent:mime-version:date:message-id:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=mVkAoooNqKZL8Jbj33SKSCdL10FVUvGJ/n64HhTYJfY=;
-        b=OE828ZtfujYfYZSvIsx7HL8ODr1oYoVHTx6La3cE9gXHs2b8epkRh9DGFHDj4clKAi
-         0OSJFfWhr3OtECmWGSoVfkTfAoaICyzZGpmgOXf7FRKFaqkdoMniiI3xvuemy9ijNPaN
-         DYwDdG/+SM417KhnnzGkjqcQRwxJ1EKWV/0xDHYWckjN2quezdsWRBr3zBGXzRSe5lZ/
-         7ebQ6x1a3zIyUVzbYP7i85OxUHcUKQEVhDSfH3Xr3qmpNxLTg5OwPyuEQ63HG6bMGB0u
-         kKvY7dYbHyyzOAXqI+bjhrFAJqt71j/jocKGdbhKcyLPUFYhpARRDs9JxonUUIcJIpWm
-         qAQA==
+        d=gmail.com; s=20221208; t=1687180687; x=1689772687;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=zjQJh6YrB17/LIyVI0W0Ux5d1PG8s2HRkKqMGCmhMoA=;
+        b=r32r7I/5iqheG6BPaK8YcqZ7ySkMvzA3MBdFPmNpcnJfK2aRn2F9d+ivEhyK/nK3Db
+         zSxlD6Bbaap7k2giO0HwMiolnl1KifgabZE0zIhXXLdL/GypwG4xGHikgR+7slF3RgOT
+         kRVIn2vIkcPNAOCk3L1IiRYzeZNmvDuUeQkpuQT7AXWJj1lx4gC+Z9b1wGzLursEg4jD
+         MOISpwVCkHqrFN+L0ym2IojeQv7inF2EUWJ0EHWyprzo6SFaM2WTLgW7UgX66TGOTk93
+         OFAKnjXOMp14/HwAXcdbWlBoRv46MSstZmF+5ym/OihKG7aDbpEipqvcibq8ArzJDuaP
+         f1tA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1687173012; x=1689765012;
-        h=content-transfer-encoding:subject:from:to:content-language
-         :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=mVkAoooNqKZL8Jbj33SKSCdL10FVUvGJ/n64HhTYJfY=;
-        b=GdDhe8dAcAf111+AtalnKhW4Qzvi++8WS/qDHHUmSBgWxPxRP2+uik+RAMleMx01NM
-         PLKSlyWHhYUQbTsS8X7TG9y3I1jh98DSCYdoOA1667c8AAoEBTQK4zEszm4qxHDDLK1N
-         Bg3spCl6ujk80mr0dSovUUWuyD0NLNKeSzZ0uIn08CSFYhqz8prkqg5M50Wl38ClmZd8
-         RdzCdbXk0dynzjWukQFROFymfFuFv5FjQ7zzLnNkscpxTNTL2hj/tov/AEJur90TlTUF
-         aviErRKURcbanHDBO8Z4YGnduk6f04B/Yyak9F4MX3yBaqeh0QCjDgt+xbH0KR2MuW/H
-         SvsQ==
-X-Gm-Message-State: AC+VfDwyO+MEMr0G16whCKugRQFL9clTr1gOqNd3szbF7vd5iMXq/MFZ
-	bWh/9aM25els0ZWOJ4aGNNkNJ+tVpZk=
-X-Google-Smtp-Source: ACHHUZ5s2tO0yECKb+YR1/2pgNEkhdTxrrwottnUZoirlUOnZ34bNqczx37CnkOeszeMaU7eU8LRbw==
-X-Received: by 2002:a05:6808:1986:b0:39e:c872:b5bb with SMTP id bj6-20020a056808198600b0039ec872b5bbmr3552850oib.14.1687173012145;
-        Mon, 19 Jun 2023 04:10:12 -0700 (PDT)
-Received: from ?IPV6:2600:1700:9190:ba10:c3d0:ee42:2807:16d4? ([2600:1700:9190:ba10:c3d0:ee42:2807:16d4])
-        by smtp.gmail.com with ESMTPSA id w138-20020a814990000000b005731f3c8989sm1123366ywa.62.2023.06.19.04.10.11
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 19 Jun 2023 04:10:11 -0700 (PDT)
-Message-ID: <8f1fd184-4efb-e493-f561-f472a4f955ac@gmail.com>
-Date: Mon, 19 Jun 2023 07:10:10 -0400
+        d=1e100.net; s=20221208; t=1687180687; x=1689772687;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=zjQJh6YrB17/LIyVI0W0Ux5d1PG8s2HRkKqMGCmhMoA=;
+        b=lkrGLYw4gJ0JZkbWTox2d1SKLUoORwaNbq42gSNhvClEy5qmziAXJgQDqi4Qx9W3ha
+         LGgJa2MCOlNlp9M6bxuR53wuZJ+hScJMfVpodh55fkncemH1sgIHLyWp/trzQzFe9bDy
+         vyNTpBk74lhgV5N4NfrAKx9MeBe0q/FrJJhEB23eWWAUquApKQX+fSViLAFUTRO3JnEs
+         wD/WCYiPkz70MFAa9M6hSOn/aYWOXhL0dAQWruAzTGNksmzvEb9ymwBBu2b6BD0coBdF
+         DqAzDeIoRX17qI9ImyJZ6GOFJENcHmmg9+lZlr5FhAl1sdAGRXVN2iAKvFCjttKRmsFn
+         vguA==
+X-Gm-Message-State: AC+VfDyMpbJRwWYfLJLiahWXwgYVlzfzl/683f60/hKiHunRPmGojdRz
+	WX0ASp8uuW6ac3g5gdew+fPDmenYXzI=
+X-Google-Smtp-Source: ACHHUZ64GLWA8iUFhBbEzpG97QErH0PnIrAtY4HmI9RBAUfSjS+X2VfepNpTRuUtfMOZsaG4nrw68A==
+X-Received: by 2002:a0d:ca91:0:b0:570:66f2:e3e3 with SMTP id m139-20020a0dca91000000b0057066f2e3e3mr8721212ywd.36.1687180686917;
+        Mon, 19 Jun 2023 06:18:06 -0700 (PDT)
+Received: from keaua.caveonetworks.com ([2600:1700:9190:ba10:c3d0:ee42:2807:16d4])
+        by smtp.gmail.com with ESMTPSA id p68-20020a0dcd47000000b0055a382ae26fsm6725568ywd.49.2023.06.19.06.18.06
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 19 Jun 2023 06:18:06 -0700 (PDT)
+From: Armin Kuster <akuster808@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Arash Partow <partow@gmail.com>,
+	Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][kirkstone][PATCH] ExprTk: Update package to release/0.0.2
+Date: Mon, 19 Jun 2023 09:18:06 -0400
+Message-Id: <20230619131806.181933-1-akuster808@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.11.0
-Content-Language: en-US
-To: Khem Raj <raj.khem@gmail.com>,
- OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-From: akuster808 <akuster808@gmail.com>
-Subject: mickledore merge request: June 19th
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 19 Jun 2023 11:10:23 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103382
+ <openembedded-devel@lists.openembedded.org>; Mon, 19 Jun 2023 13:18:13 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103383
 
-The following changes since commit 928658212611ea457a5eacec48f0760e03269a24:
+From: Arash Partow <partow@gmail.com>
 
-   gnulib: Update recipe name to 2018-12-18 (2023-05-31 10:50:50 -0400)
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+(cherry picked from commit 0522e66a26b1f4778948553a193a4728fb239efe)
+[The SRC_URI HASH no longer exists in repo so use 0.0.2 version]
+Signed-off-by: Armin Kuster <akuster808@gmail.com>
+---
+ meta-oe/recipes-devtools/exprtk/exprtk_git.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-are available in the Git repository at:
-
-   https://git.openembedded.org/meta-openembedded mickledore-next
-
-for you to fetch changes up to 5a01ab461c9bcabcbb2298236602373948f8f073:
-
-   wireshark: CVE-2023-2952 XRA dissector infinite loop (2023-06-17 
-13:15:57 -0400)
-
-----------------------------------------------------------------
-Chen Qi (1):
-       redis: use the files path correctly
-
-Hitendra Prajapati (3):
-       wireshark: Fix CVE-2023-2855 & CVE-2023-2856
-       wireshark: Fix CVE-2023-2858 & CVE-2023-2879
-       wireshark: CVE-2023-2952 XRA dissector infinite loop
-
-Joe Slater (1):
-       libgpiod: modify test 'gpioset: toggle (continuous)'
-
-Khem Raj (2):
-       fftw: Check for TOOLCHAIN_OPTIONS to be non-empty before sed ops
-       system-config-printer: Delete __pycache__ files
-
-Ross Burton (5):
-       glade: add autoconf-archive-native DEPENDS
-       libgxim: add autoconf-archive-native DEPENDS
-       libblockdev: clean up DEPENDS
-       imsettings: add missing DEPENDS on autoconf-archive-native
-       system-config-printer: clean up DEPENDS
-
-Urade, Yogita t.mo (1):
-       c-ares: fix CVE-2023-32067
-
-Xiangyu Chen (2):
-       libbpf: installing uapi headers for native package
-       meta-oe: add pahole to NON_MULTILIB_RECIPES
-
-  .../system-config-printer/system-config-printer_1.5.18.bb       | 13 +++-
-  .../recipes-support/wireshark/files/CVE-2023-2855.patch         | 108 
-++++++++++++++++++++++++++++
-  .../recipes-support/wireshark/files/CVE-2023-2856.patch         | 69 
-++++++++++++++++++
-  .../recipes-support/wireshark/files/CVE-2023-2858.patch         | 95 
-++++++++++++++++++++++++
-  .../recipes-support/wireshark/files/CVE-2023-2879.patch         | 37 
-++++++++++
-  .../recipes-support/wireshark/files/CVE-2023-2952.patch         | 98 
-+++++++++++++++++++++++++
-  meta-networking/recipes-support/wireshark/wireshark_3.4.12.bb   | 5 ++
-  meta-oe/conf/layer.conf                                         | 2 +-
-  meta-oe/recipes-devtools/glade/glade_3.22.2.bb                  | 1 +
-  meta-oe/recipes-extended/libblockdev/libblockdev_2.28.bb        | 6 +-
-  meta-oe/recipes-extended/libgxim/libgxim_0.5.0.bb               | 2 +-
-  .../0001-src-Do-not-reset-FINAL_LIBS.patch                      | 0
-  .../0006-Define-correct-gregs-for-RISCV32.patch                 | 0
-  .../redis/{redis-7 => redis-7.0.11}/GNU_SOURCE-7.patch |   0
-  .../hiredis-use-default-CC-if-it-is-set.patch                   | 0
-  .../redis/{redis-7 => redis-7.0.11}/init-redis-server |   0
-  .../lua-update-Makefile-to-use-environment-build-setting.patch  | 0
-  .../redis/{redis-7 => redis-7.0.11}/oe-use-libc-malloc.patch |   0
-  .../recipes-extended/redis/{redis-7 => redis-7.0.11}/redis.conf |   0
-  .../redis/{redis-7 => redis-7.0.11}/redis.service |   0
-  meta-oe/recipes-extended/redis/redis_7.0.11.bb                  | 2 -
-  meta-oe/recipes-kernel/libbpf/libbpf_1.1.0.bb                   | 5 ++
-  meta-oe/recipes-support/c-ares/c-ares/CVE-2023-32067.patch      | 87 
-++++++++++++++++++++++
-  meta-oe/recipes-support/c-ares/c-ares_1.19.0.bb                 | 4 +-
-  meta-oe/recipes-support/fftw/fftw_3.3.10.bb                     | 2 +-
-  .../libgpiod/libgpiod-2.0/gpio-tools-test-bats-modify.patch     | 67 
-+++++++++++++++++
-  meta-oe/recipes-support/libgpiod/libgpiod_2.0.bb                | 2 +
-  meta-xfce/recipes-extended/imsettings/imsettings_1.8.3.bb       | 2 +-
-  28 files changed, 596 insertions(+), 11 deletions(-)
-  create mode 100644 
-meta-networking/recipes-support/wireshark/files/CVE-2023-2855.patch
-  create mode 100644 
-meta-networking/recipes-support/wireshark/files/CVE-2023-2856.patch
-  create mode 100644 
-meta-networking/recipes-support/wireshark/files/CVE-2023-2858.patch
-  create mode 100644 
-meta-networking/recipes-support/wireshark/files/CVE-2023-2879.patch
-  create mode 100644 
-meta-networking/recipes-support/wireshark/files/CVE-2023-2952.patch
-  rename meta-oe/recipes-extended/redis/{redis-7 => 
-redis-7.0.11}/0001-src-Do-not-reset-FINAL_LIBS.patch (100%)
-  rename meta-oe/recipes-extended/redis/{redis-7 => 
-redis-7.0.11}/0006-Define-correct-gregs-for-RISCV32.patch (100%)
-  rename meta-oe/recipes-extended/redis/{redis-7 => 
-redis-7.0.11}/GNU_SOURCE-7.patch (100%)
-  rename meta-oe/recipes-extended/redis/{redis-7 => 
-redis-7.0.11}/hiredis-use-default-CC-if-it-is-set.patch (100%)
-  rename meta-oe/recipes-extended/redis/{redis-7 => 
-redis-7.0.11}/init-redis-server (100%)
-  rename meta-oe/recipes-extended/redis/{redis-7 => 
-redis-7.0.11}/lua-update-Makefile-to-use-environment-build-setting.patch 
-(100%)
-  rename meta-oe/recipes-extended/redis/{redis-7 => 
-redis-7.0.11}/oe-use-libc-malloc.patch (100%)
-  rename meta-oe/recipes-extended/redis/{redis-7 => 
-redis-7.0.11}/redis.conf (100%)
-  rename meta-oe/recipes-extended/redis/{redis-7 => 
-redis-7.0.11}/redis.service (100%)
-  create mode 100644 
-meta-oe/recipes-support/c-ares/c-ares/CVE-2023-32067.patch
-  create mode 100644 
-meta-oe/recipes-support/libgpiod/libgpiod-2.0/gpio-tools-test-bats-modify.patch
+diff --git a/meta-oe/recipes-devtools/exprtk/exprtk_git.bb b/meta-oe/recipes-devtools/exprtk/exprtk_git.bb
+index 52975c8215..4019f26899 100644
+--- a/meta-oe/recipes-devtools/exprtk/exprtk_git.bb
++++ b/meta-oe/recipes-devtools/exprtk/exprtk_git.bb
+@@ -3,9 +3,9 @@ HOMEPAGE = "https://github.com/ArashPartow/exprtk"
+ SECTION = "libs"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda2f7b4f302"
+-SRCREV = "281c2ccc65b8f91c012ea3725ebcef406378a225"
++SRCREV = "f46bffcd6966d38a09023fb37ba9335214c9b959"
+ 
+-SRC_URI = "git://github.com/ArashPartow/exprtk.git;branch=master;protocol=https"
++SRC_URI = "git://github.com/ArashPartow/exprtk.git;branch=release;protocol=https"
+ 
+ S = "${WORKDIR}/git"
+ 
+-- 
+2.34.1
 
 
