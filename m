@@ -1,151 +1,180 @@
-Return-Path: <sanakazisk19@gmail.com>
+Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 132F1EB64D9
-	for <webhook@archiver.kernel.org>; Mon, 19 Jun 2023 08:06:32 +0000 (UTC)
-Received: from mail-pj1-f45.google.com (mail-pj1-f45.google.com [209.85.216.45])
- by mx.groups.io with SMTP id smtpd.web11.3056.1687161981858613839
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0E4B1EB64D9
+	for <webhook@archiver.kernel.org>; Mon, 19 Jun 2023 11:10:23 +0000 (UTC)
+Received: from mail-oi1-f175.google.com (mail-oi1-f175.google.com [209.85.167.175])
+ by mx.groups.io with SMTP id smtpd.web11.5028.1687173013006802829
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 19 Jun 2023 01:06:21 -0700
+ Mon, 19 Jun 2023 04:10:13 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20221208 header.b=dXOLzXVZ;
- spf=pass (domain: gmail.com, ip: 209.85.216.45, mailfrom: sanakazisk19@gmail.com)
-Received: by mail-pj1-f45.google.com with SMTP id 98e67ed59e1d1-25bf4b269e0so2868805a91.0
-        for <openembedded-devel@lists.openembedded.org>; Mon, 19 Jun 2023 01:06:21 -0700 (PDT)
+ dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=OE828Ztf;
+ spf=pass (domain: gmail.com, ip: 209.85.167.175, mailfrom: akuster808@gmail.com)
+Received: by mail-oi1-f175.google.com with SMTP id 5614622812f47-39cd0c3e8deso2143779b6e.1
+        for <openembedded-devel@lists.openembedded.org>; Mon, 19 Jun 2023 04:10:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1687161981; x=1689753981;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=dXfI9QEI9fa7l+hjt8YNXj59mNT2dZ0mKZK3aaZqggc=;
-        b=dXOLzXVZJysiFNp3R6KUkNPPmu2S0ySRdJWCRNC2PJnIS6JeDiGbc/qmzAihOb21XB
-         7MSEg28jVUMM/jO0rNzkiwmeoGsjCVUktLVAVsXbMADgTjPrFwKKSIJbA8TKO2r8JxsN
-         GWns26FiNaPjNjQ1L+qmMLFCJfLDhU0TW8FEH7xTlHwHoI0r4+91lkZhr5aQ1gZeJvO7
-         8lhaw+Zz5KcX4t269d7FqrF8Uendbhie4Ej8J/ptjKlZI+YRBmjoly2UuwPgH7T53lb9
-         mbxU5bC0nS1OAJf47PXnkZF0I/IUIuCFWjDWm1Mn2CGnOfDaTPg3mMMCgblZIQEUd5b6
-         FoIg==
+        d=gmail.com; s=20221208; t=1687173012; x=1689765012;
+        h=content-transfer-encoding:subject:from:to:content-language
+         :user-agent:mime-version:date:message-id:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=mVkAoooNqKZL8Jbj33SKSCdL10FVUvGJ/n64HhTYJfY=;
+        b=OE828ZtfujYfYZSvIsx7HL8ODr1oYoVHTx6La3cE9gXHs2b8epkRh9DGFHDj4clKAi
+         0OSJFfWhr3OtECmWGSoVfkTfAoaICyzZGpmgOXf7FRKFaqkdoMniiI3xvuemy9ijNPaN
+         DYwDdG/+SM417KhnnzGkjqcQRwxJ1EKWV/0xDHYWckjN2quezdsWRBr3zBGXzRSe5lZ/
+         7ebQ6x1a3zIyUVzbYP7i85OxUHcUKQEVhDSfH3Xr3qmpNxLTg5OwPyuEQ63HG6bMGB0u
+         kKvY7dYbHyyzOAXqI+bjhrFAJqt71j/jocKGdbhKcyLPUFYhpARRDs9JxonUUIcJIpWm
+         qAQA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1687161981; x=1689753981;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=dXfI9QEI9fa7l+hjt8YNXj59mNT2dZ0mKZK3aaZqggc=;
-        b=XrniszbwqYBCGlemcEMW4qQFUhEy01RPCFEmIXliLOi1R74vSyGPhU6ILmJ0EafGdL
-         jU0cGqeh4Kg3jV/6bhpI76noI4TOQsPVgmizzSkbUG6F8645ImZpgWu9hhSlM9gAp0G1
-         p+aH5uDd6r7sFhBFKi/ztjdghV5Sh23xDYng3/jEZ9OwJqLVOKXDB3iIxlW7H6C3rxe4
-         qYUkfUFjvqqS+FTjEdUXYraiCtySnRq/CKzHMj580wVrdWbNmfB+K/hAJsYdp+/XyxxI
-         oG+zFDPAvVIHrAuzLkxa/T4MtE/q2nTQaBE7UFp+eFrz8xfK19N4K2MmHDup2+AwU9Dl
-         mUpg==
-X-Gm-Message-State: AC+VfDyV6VFp4qG2fAcqSV32Avo9u1rnJ91H/7oGXDxMVe5iRwf7RWOH
-	8IVZdz1jYiZQ9t6qBtHZ8nArk3aYBds=
-X-Google-Smtp-Source: ACHHUZ7O2XKB4NoDCFp8uUX91bNHW2q3jmEa3lHUzm76djsA6YkFM5qcVsKci8Qo3FwdDcLQkRpgLw==
-X-Received: by 2002:a17:90a:190f:b0:253:3eb5:3ade with SMTP id 15-20020a17090a190f00b002533eb53ademr11885749pjg.8.1687161980860;
-        Mon, 19 Jun 2023 01:06:20 -0700 (PDT)
-Received: from localhost.localdomain ([171.50.215.208])
-        by smtp.gmail.com with ESMTPSA id f17-20020a63f751000000b005501b24b1c9sm6430680pgk.62.2023.06.19.01.06.19
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 19 Jun 2023 01:06:20 -0700 (PDT)
-From: Sana Kazi <sanakazisk19@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: sanakazisk19@gmail.com,
-	ranjitsinh.rathod@kpit.com
-Subject: [meta-oe][kirkstone][PATCH] Googletest: Adapt googletest 1.11.0 with gcc11
-Date: Mon, 19 Jun 2023 13:35:53 +0530
-Message-Id: <20230619080553.1100632-1-sanakazisk19@gmail.com>
-X-Mailer: git-send-email 2.25.1
+        d=1e100.net; s=20221208; t=1687173012; x=1689765012;
+        h=content-transfer-encoding:subject:from:to:content-language
+         :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=mVkAoooNqKZL8Jbj33SKSCdL10FVUvGJ/n64HhTYJfY=;
+        b=GdDhe8dAcAf111+AtalnKhW4Qzvi++8WS/qDHHUmSBgWxPxRP2+uik+RAMleMx01NM
+         PLKSlyWHhYUQbTsS8X7TG9y3I1jh98DSCYdoOA1667c8AAoEBTQK4zEszm4qxHDDLK1N
+         Bg3spCl6ujk80mr0dSovUUWuyD0NLNKeSzZ0uIn08CSFYhqz8prkqg5M50Wl38ClmZd8
+         RdzCdbXk0dynzjWukQFROFymfFuFv5FjQ7zzLnNkscpxTNTL2hj/tov/AEJur90TlTUF
+         aviErRKURcbanHDBO8Z4YGnduk6f04B/Yyak9F4MX3yBaqeh0QCjDgt+xbH0KR2MuW/H
+         SvsQ==
+X-Gm-Message-State: AC+VfDwyO+MEMr0G16whCKugRQFL9clTr1gOqNd3szbF7vd5iMXq/MFZ
+	bWh/9aM25els0ZWOJ4aGNNkNJ+tVpZk=
+X-Google-Smtp-Source: ACHHUZ5s2tO0yECKb+YR1/2pgNEkhdTxrrwottnUZoirlUOnZ34bNqczx37CnkOeszeMaU7eU8LRbw==
+X-Received: by 2002:a05:6808:1986:b0:39e:c872:b5bb with SMTP id bj6-20020a056808198600b0039ec872b5bbmr3552850oib.14.1687173012145;
+        Mon, 19 Jun 2023 04:10:12 -0700 (PDT)
+Received: from ?IPV6:2600:1700:9190:ba10:c3d0:ee42:2807:16d4? ([2600:1700:9190:ba10:c3d0:ee42:2807:16d4])
+        by smtp.gmail.com with ESMTPSA id w138-20020a814990000000b005731f3c8989sm1123366ywa.62.2023.06.19.04.10.11
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Mon, 19 Jun 2023 04:10:11 -0700 (PDT)
+Message-ID: <8f1fd184-4efb-e493-f561-f472a4f955ac@gmail.com>
+Date: Mon, 19 Jun 2023 07:10:10 -0400
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.11.0
+Content-Language: en-US
+To: Khem Raj <raj.khem@gmail.com>,
+ OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+From: akuster808 <akuster808@gmail.com>
+Subject: mickledore merge request: June 19th
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 19 Jun 2023 08:06:32 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103381
+ <openembedded-devel@lists.openembedded.org>; Mon, 19 Jun 2023 11:10:23 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103382
 
-Backport a commit to fix the build error when using gcc11.
-[commit]
-https://github.com/google/googletest/pull/3993/commits/096014a45dc38dff993f5b7bb28a258d8323344b
-[error]
-/usr/include/gtest/gtest-printers.h:291:36: error: no matching function for call to
-‘testing::internal::internal_stream_operator_without_lexical_name_lookup::StreamPrinter::PrintValue(const A::B::C::D::E::F::G&, std::nullptr_t)’
-291 |     T, decltype(Printer::PrintValue(std::declval<const T&>(), nullptr)),
-    |                 ~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-/usr/include/gtest/gtest-printers.h:214:15: note: candidate: ‘template<class T, class, class> static void testing::internal::internal_stream_operator_without_lexical_name_lookup::StreamPrinter::PrintValue(const T&, std::ostream*)’
-  214 |   static void PrintValue(const T& value, ::std::ostream* os) {
-      |               ^~~~~~~~~~
+The following changes since commit 928658212611ea457a5eacec48f0760e03269a24:
 
-Signed-off-by: Peng Cui <peng.ca.cui@bmw.com>
-Signed-off-by: Sana Kazi <sana.kazi@kpit.com>
-Signed-off-by: Sana Kazi <sanakazisk19@gmail.com>
----
- .../0001-work-around-GCC-6-11-ADL-bug.patch   | 42 +++++++++++++++++++
- .../recipes-test/googletest/googletest_git.bb |  3 +-
- 2 files changed, 44 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-test/googletest/files/0001-work-around-GCC-6-11-ADL-bug.patch
+   gnulib: Update recipe name to 2018-12-18 (2023-05-31 10:50:50 -0400)
 
-diff --git a/meta-oe/recipes-test/googletest/files/0001-work-around-GCC-6-11-ADL-bug.patch b/meta-oe/recipes-test/googletest/files/0001-work-around-GCC-6-11-ADL-bug.patch
-new file mode 100644
-index 000000000..c2828e6a9
---- /dev/null
-+++ b/meta-oe/recipes-test/googletest/files/0001-work-around-GCC-6-11-ADL-bug.patch
-@@ -0,0 +1,42 @@
-+From 8c70e2680bec526012d96578160901e4c24e1c48 Mon Sep 17 00:00:00 2001
-+From: Paul Groke <paul.groke@dynatrace.com>
-+Date: Thu, 15 Sep 2022 13:36:49 +0200
-+Subject: [PATCH] work around GCC 6~11 ADL bug
-+
-+see https://gcc.gnu.org/bugzilla/show_bug.cgi?id=51577
-+ADL seems to work properly when we do the SFINAE check via the return type, but not when using a dummy template parameter
-+
-+fix #3992
-+Upstream-Status: Backport [https://github.com/google/googletest/pull/3993/commits/096014a45dc38dff993f5b7bb28a258d8323344b]
-+Signed-off-by: Paul Groke <paul.groke@dynatrace.com>
-+Signed-off-by: Sana Kazi <sana.kazi@kpit.com>
-+---
-+ googletest/include/gtest/gtest-printers.h | 13 +++++++------
-+ 1 file changed, 7 insertions(+), 6 deletions(-)
-+
-+diff --git a/googletest/include/gtest/gtest-printers.h b/googletest/include/gtest/gtest-printers.h
-+index 8e4d295344..19c3e0b69b 100644
-+--- a/googletest/include/gtest/gtest-printers.h
-++++ b/googletest/include/gtest/gtest-printers.h
-+@@ -205,12 +205,13 @@ struct StreamPrinter {
-+             // Don't accept member pointers here. We'd print them via implicit
-+             // conversion to bool, which isn't useful.
-+             typename = typename std::enable_if<
-+-                !std::is_member_pointer<T>::value>::type,
-+-            // Only accept types for which we can find a streaming operator via
-+-            // ADL (possibly involving implicit conversions).
-+-            typename = decltype(std::declval<std::ostream&>()
-+-                                << std::declval<const T&>())>
-+-  static void PrintValue(const T& value, ::std::ostream* os) {
-++                !std::is_member_pointer<T>::value>::type>
-++  // Only accept types for which we can find a streaming operator via
-++  // ADL (possibly involving implicit conversions).
-++  // (Use SFINAE via return type, because it seems GCC < 12 doesn't handle name
-++  // lookup properly when we do it in the template parameter list.)
-++  static auto PrintValue(const T& value, ::std::ostream* os) 
-++  -> decltype((void)(*os << value)) {
-+     // Call streaming operator found by ADL, possibly with implicit conversions
-+     // of the arguments.
-+     *os << value;
-+-- 
-+2.25.1
-diff --git a/meta-oe/recipes-test/googletest/googletest_git.bb b/meta-oe/recipes-test/googletest/googletest_git.bb
-index 869c2c86b..917a68e95 100644
---- a/meta-oe/recipes-test/googletest/googletest_git.bb
-+++ b/meta-oe/recipes-test/googletest/googletest_git.bb
-@@ -10,7 +10,8 @@ PROVIDES += "gmock gtest"
- 
- S = "${WORKDIR}/git"
- SRCREV = "9e712372214d75bb30ec2847a44bf124d48096f3"
--SRC_URI = "git://github.com/google/googletest.git;branch=main;protocol=https"
-+SRC_URI = "git://github.com/google/googletest.git;branch=main;protocol=https \
-+           file://0001-work-around-GCC-6-11-ADL-bug.patch "
- 
- inherit cmake
- 
--- 
-2.25.1
+are available in the Git repository at:
+
+   https://git.openembedded.org/meta-openembedded mickledore-next
+
+for you to fetch changes up to 5a01ab461c9bcabcbb2298236602373948f8f073:
+
+   wireshark: CVE-2023-2952 XRA dissector infinite loop (2023-06-17 
+13:15:57 -0400)
+
+----------------------------------------------------------------
+Chen Qi (1):
+       redis: use the files path correctly
+
+Hitendra Prajapati (3):
+       wireshark: Fix CVE-2023-2855 & CVE-2023-2856
+       wireshark: Fix CVE-2023-2858 & CVE-2023-2879
+       wireshark: CVE-2023-2952 XRA dissector infinite loop
+
+Joe Slater (1):
+       libgpiod: modify test 'gpioset: toggle (continuous)'
+
+Khem Raj (2):
+       fftw: Check for TOOLCHAIN_OPTIONS to be non-empty before sed ops
+       system-config-printer: Delete __pycache__ files
+
+Ross Burton (5):
+       glade: add autoconf-archive-native DEPENDS
+       libgxim: add autoconf-archive-native DEPENDS
+       libblockdev: clean up DEPENDS
+       imsettings: add missing DEPENDS on autoconf-archive-native
+       system-config-printer: clean up DEPENDS
+
+Urade, Yogita t.mo (1):
+       c-ares: fix CVE-2023-32067
+
+Xiangyu Chen (2):
+       libbpf: installing uapi headers for native package
+       meta-oe: add pahole to NON_MULTILIB_RECIPES
+
+  .../system-config-printer/system-config-printer_1.5.18.bb       | 13 +++-
+  .../recipes-support/wireshark/files/CVE-2023-2855.patch         | 108 
+++++++++++++++++++++++++++++
+  .../recipes-support/wireshark/files/CVE-2023-2856.patch         | 69 
+++++++++++++++++++
+  .../recipes-support/wireshark/files/CVE-2023-2858.patch         | 95 
+++++++++++++++++++++++++
+  .../recipes-support/wireshark/files/CVE-2023-2879.patch         | 37 
+++++++++++
+  .../recipes-support/wireshark/files/CVE-2023-2952.patch         | 98 
++++++++++++++++++++++++++
+  meta-networking/recipes-support/wireshark/wireshark_3.4.12.bb   | 5 ++
+  meta-oe/conf/layer.conf                                         | 2 +-
+  meta-oe/recipes-devtools/glade/glade_3.22.2.bb                  | 1 +
+  meta-oe/recipes-extended/libblockdev/libblockdev_2.28.bb        | 6 +-
+  meta-oe/recipes-extended/libgxim/libgxim_0.5.0.bb               | 2 +-
+  .../0001-src-Do-not-reset-FINAL_LIBS.patch                      | 0
+  .../0006-Define-correct-gregs-for-RISCV32.patch                 | 0
+  .../redis/{redis-7 => redis-7.0.11}/GNU_SOURCE-7.patch |   0
+  .../hiredis-use-default-CC-if-it-is-set.patch                   | 0
+  .../redis/{redis-7 => redis-7.0.11}/init-redis-server |   0
+  .../lua-update-Makefile-to-use-environment-build-setting.patch  | 0
+  .../redis/{redis-7 => redis-7.0.11}/oe-use-libc-malloc.patch |   0
+  .../recipes-extended/redis/{redis-7 => redis-7.0.11}/redis.conf |   0
+  .../redis/{redis-7 => redis-7.0.11}/redis.service |   0
+  meta-oe/recipes-extended/redis/redis_7.0.11.bb                  | 2 -
+  meta-oe/recipes-kernel/libbpf/libbpf_1.1.0.bb                   | 5 ++
+  meta-oe/recipes-support/c-ares/c-ares/CVE-2023-32067.patch      | 87 
+++++++++++++++++++++++
+  meta-oe/recipes-support/c-ares/c-ares_1.19.0.bb                 | 4 +-
+  meta-oe/recipes-support/fftw/fftw_3.3.10.bb                     | 2 +-
+  .../libgpiod/libgpiod-2.0/gpio-tools-test-bats-modify.patch     | 67 
++++++++++++++++++
+  meta-oe/recipes-support/libgpiod/libgpiod_2.0.bb                | 2 +
+  meta-xfce/recipes-extended/imsettings/imsettings_1.8.3.bb       | 2 +-
+  28 files changed, 596 insertions(+), 11 deletions(-)
+  create mode 100644 
+meta-networking/recipes-support/wireshark/files/CVE-2023-2855.patch
+  create mode 100644 
+meta-networking/recipes-support/wireshark/files/CVE-2023-2856.patch
+  create mode 100644 
+meta-networking/recipes-support/wireshark/files/CVE-2023-2858.patch
+  create mode 100644 
+meta-networking/recipes-support/wireshark/files/CVE-2023-2879.patch
+  create mode 100644 
+meta-networking/recipes-support/wireshark/files/CVE-2023-2952.patch
+  rename meta-oe/recipes-extended/redis/{redis-7 => 
+redis-7.0.11}/0001-src-Do-not-reset-FINAL_LIBS.patch (100%)
+  rename meta-oe/recipes-extended/redis/{redis-7 => 
+redis-7.0.11}/0006-Define-correct-gregs-for-RISCV32.patch (100%)
+  rename meta-oe/recipes-extended/redis/{redis-7 => 
+redis-7.0.11}/GNU_SOURCE-7.patch (100%)
+  rename meta-oe/recipes-extended/redis/{redis-7 => 
+redis-7.0.11}/hiredis-use-default-CC-if-it-is-set.patch (100%)
+  rename meta-oe/recipes-extended/redis/{redis-7 => 
+redis-7.0.11}/init-redis-server (100%)
+  rename meta-oe/recipes-extended/redis/{redis-7 => 
+redis-7.0.11}/lua-update-Makefile-to-use-environment-build-setting.patch 
+(100%)
+  rename meta-oe/recipes-extended/redis/{redis-7 => 
+redis-7.0.11}/oe-use-libc-malloc.patch (100%)
+  rename meta-oe/recipes-extended/redis/{redis-7 => 
+redis-7.0.11}/redis.conf (100%)
+  rename meta-oe/recipes-extended/redis/{redis-7 => 
+redis-7.0.11}/redis.service (100%)
+  create mode 100644 
+meta-oe/recipes-support/c-ares/c-ares/CVE-2023-32067.patch
+  create mode 100644 
+meta-oe/recipes-support/libgpiod/libgpiod-2.0/gpio-tools-test-bats-modify.patch
 
 
