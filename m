@@ -1,79 +1,67 @@
-Return-Path: <beniaminsandu@gmail.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0419FEB64D9
-	for <webhook@archiver.kernel.org>; Mon, 19 Jun 2023 19:38:26 +0000 (UTC)
-Received: from mail-pj1-f53.google.com (mail-pj1-f53.google.com [209.85.216.53])
- by mx.groups.io with SMTP id smtpd.web10.16947.1687203498702885887
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0F380EB64D9
+	for <webhook@archiver.kernel.org>; Tue, 20 Jun 2023 00:51:53 +0000 (UTC)
+Received: from mail-ot1-f41.google.com (mail-ot1-f41.google.com [209.85.210.41])
+ by mx.groups.io with SMTP id smtpd.web11.275.1687222305455197961
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 19 Jun 2023 12:38:18 -0700
+ Mon, 19 Jun 2023 17:51:45 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20221208 header.b=IUxta9lH;
- spf=pass (domain: gmail.com, ip: 209.85.216.53, mailfrom: beniaminsandu@gmail.com)
-Received: by mail-pj1-f53.google.com with SMTP id 98e67ed59e1d1-25695bb6461so3335156a91.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 19 Jun 2023 12:38:18 -0700 (PDT)
+ dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=dc/F82ZO;
+ spf=pass (domain: gmail.com, ip: 209.85.210.41, mailfrom: raj.khem@gmail.com)
+Received: by mail-ot1-f41.google.com with SMTP id 46e09a7af769-6b46e61638eso1797691a34.0
+        for <openembedded-devel@lists.openembedded.org>; Mon, 19 Jun 2023 17:51:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1687203498; x=1689795498;
+        d=gmail.com; s=20221208; t=1687222304; x=1689814304;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=UreEsRawKKxVNqrOZlg5T3Li96RbUDXhKYKw1A8foS0=;
-        b=IUxta9lHSPvqJVvnzhYGPQS9q5WRTFk7Cpan1k7UpSO/n8HOcP2catIlcQtfEYVcWm
-         dEfyN1596Zkl4Dz/+TSEtuWYOU9YIWcsw7e7FPgpoQqWf/JG33AbA85JsSKMh/sFQpW1
-         A5S6P7aW+kgNElSX4fqBw25JnJLbhE+rmW4PbFUlzsrGvbXdYYQN4Htpiy4mdijcn7pT
-         bvp23WVz9l7XzBMRlZiDa4uUME7ZucoAD5KKkUh8d2smYztnHTWkgmwOUvEd7ynHFSp0
-         SKNW9K+ynqeqmhjTCSiJFHNnoop9/eFziZYShywoJ8niyeRUb7CtCTko1bCwqEZ4Gsvg
-         E7Dw==
+        bh=3ZHIGu6Xhd3HUxzKrFMuqSnDF7PD+FK+R5Ns3QfoD+A=;
+        b=dc/F82ZOX3ol/guvi7CHROk9XjUFuFrnf9i5jeT8nwiTanUjus0JzfVhp3i1jsr/zJ
+         XFyjX8cw6dZUnOr3O+E4t+GFhi8tpup+m1TLSNP905WJ5SZVwBI4dwr9E9emIYvAcGL9
+         NqZkQ3NOM6+gf/9yUa5HyBGSLnKzaNj6m6cbnHDVWTlAv/uUlaUmnQZ/JxNsd2CrwHFb
+         rdak6o7GBSVL+u2ofzdGrX3AiaSSsZuPwFwD4iv64PUxbzD5tQDyxMd67Pv+GkeLadN5
+         u+YpCVY0aBKrQ2MKvQwGJVMkHM9kYBRbdp4tewEAISZ2sN83NVK6s+BjbCX1/PuhOOM1
+         alrw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1687203498; x=1689795498;
+        d=1e100.net; s=20221208; t=1687222304; x=1689814304;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=UreEsRawKKxVNqrOZlg5T3Li96RbUDXhKYKw1A8foS0=;
-        b=VxyUxCcxD3CvzdgZHWZThT82z/gT/3tIzG/60DAzfls/nGv1YOqLCNIfD8CC+0vmke
-         aidNNmQHkuXZXqfCyMOzJMuVQy43rYOf/GLOyVKY1Suq3Y05F6w+tMFa0RUgjZbQgEzs
-         RbsP0mcS3zC2NWEj+EYy9HjvIgbzQCOViwoP81tiQzCQ06D/m50S+zJClcn05BkwDFA5
-         O7k2TP83m1oBcARRFvWDtJ1OeDmeAXbHDHLgNE4MgW1OW50rZa6ZXO1HGwbHkwjJsszL
-         G20aUAEqv1mdXkwUWssTXqhdts/mbmVGlKGgcrrkZKztdFFvqLzrwR40Gx9GZ9ewJD+D
-         4tpg==
-X-Gm-Message-State: AC+VfDxcxSI81ljTEdk0tyb3xvk+VQdWRMetiNYZkSi8I4ENLNX+1hjF
-	KxugUc/2EXQL3O6O/757XyjaeS2yYunChAnPn9g=
-X-Google-Smtp-Source: ACHHUZ5yKDVkQHdb2yo7y/Ss3FQkN9pISmL7p6h651DcGjEJnjJdV7qirxKe/emLm98rxpaQUdKcj8Thum7Gzr9zHGc=
-X-Received: by 2002:a17:90a:6286:b0:25e:b5d4:a156 with SMTP id
- d6-20020a17090a628600b0025eb5d4a156mr13961772pjj.2.1687203498034; Mon, 19 Jun
- 2023 12:38:18 -0700 (PDT)
+        bh=3ZHIGu6Xhd3HUxzKrFMuqSnDF7PD+FK+R5Ns3QfoD+A=;
+        b=PZ3kMrJjGTDSg6JcNN0TfhuaKnGwdKvSDHmO7P70KMkPa4HFYAsev5c6Y24Q1QBh++
+         TIxQgv5GHDwClSlvSfQdU1MPW8m7W+2R4k+hi8MwThT3vuuCvoH4XGoJi+MbcatVjkzv
+         XrKCoOipvIebzGZC1sNKDBTBA2hvIlpFn141puI17MvFmt8tLuY8yEjgzcEpQPO1KwfX
+         gcsFqVMUK5AeHgic3yab96nSCcrwDDN+nKxujt4ZX2XF0P96oNsAHascb5T0zisJovc6
+         3nrWlue2vgsxwwUrd7w2LYfgjjE8GlwFkrC3rkePONB8x7Y/t5MltyRWG1L5haOO4yfM
+         BRMQ==
+X-Gm-Message-State: AC+VfDzOJsummXHee1nECKqICNuTQZLdS91/VdVPFKpLj7U4J6qt0gVx
+	AIpL6wpa637UMtyJ88Pe7kEgqvGCzAczRRTJlE8=
+X-Google-Smtp-Source: ACHHUZ5WSqmm9M9HiMlS8Sa8rdX2SfrZ6Qc6AHFuWpl9cAz+r74xOX8L4wEI+nsNBW22BlzgLg+RxB898ZralBlehYY=
+X-Received: by 2002:a05:6870:732:b0:1a9:601a:1cfc with SMTP id
+ ea50-20020a056870073200b001a9601a1cfcmr2135055oab.52.1687222304479; Mon, 19
+ Jun 2023 17:51:44 -0700 (PDT)
 MIME-Version: 1.0
 References: <20230619181955.103171-1-beniaminsandu@gmail.com> <CAO5Uq5SyM6MAO_Q5Y_+1F7PxQ7QevCMhCNwagSWDHLaEhL6Www@mail.gmail.com>
 In-Reply-To: <CAO5Uq5SyM6MAO_Q5Y_+1F7PxQ7QevCMhCNwagSWDHLaEhL6Www@mail.gmail.com>
-From: Beniamin Sandu <beniaminsandu@gmail.com>
-Date: Mon, 19 Jun 2023 22:38:06 +0300
-Message-ID: <CABQJdOE_4Pww8X_+j+PjFmzMiTm3cn8LEcH6OSebEqxh2=8gaQ@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 19 Jun 2023 17:51:18 -0700
+Message-ID: <CAMKF1sqb07CYybr=CuMiVTGMoM=sBfKxGcyGRYuCLVa9KTdKqw@mail.gmail.com>
 Subject: Re: [oe] [meta-networking][PATCH] mdns: remove unneeded headers
 To: Alex Kiernan <alex.kiernan@gmail.com>
-Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Cc: Beniamin Sandu <beniaminsandu@gmail.com>, 
+	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 19 Jun 2023 19:38:26 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103445
+ <openembedded-devel@lists.openembedded.org>; Tue, 20 Jun 2023 00:51:53 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103446
 
-I am trying to add a v3.x mbedtls recipe to master branch, and without
-this patch, mdns does not build. I could not find an obvious way to
-submit upstream patches to mdns from a quick search, otherwise I would
-gladly do it.
-
-While I am with you on trying to reduce technical debt within yocto
-layers, this one is very small and rather harmless, so I hope we can
-make a sacrifice for the greater good. :)
-
-Cheers,
-Beni
-
-
-On Mon, Jun 19, 2023 at 10:14=E2=80=AFPM Alex Kiernan <alex.kiernan@gmail.c=
+On Mon, Jun 19, 2023 at 12:14=E2=80=AFPM Alex Kiernan <alex.kiernan@gmail.c=
 om> wrote:
 >
 > Keeping up with Apple given they take nothing is frankly a right pain, ad=
@@ -82,6 +70,10 @@ ding things which are nice to have rather than just broken seems like we're=
 s, unless there's a really good reason to do this, or there's a way to get =
 it upstreamed I'd rather we didn't.
 >
+
+a different question would be, does upstream mdns stick to mbedTLS 2.x
+or is there support for mbedTLS 3.x expected/supported.
+
 >
 > On Mon, 19 Jun 2023, 19:20 Beniamin Sandu, <beniaminsandu@gmail.com> wrot=
 e:
@@ -154,14 +146,17 @@ mDNSResponder;protocol=3Dhttps
 >> 2.25.1
 >>
 >>
->> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->> Links: You receive all messages sent to this group.
->> View/Reply Online (#103440): https://lists.openembedded.org/g/openembedd=
-ed-devel/message/103440
->> Mute This Topic: https://lists.openembedded.org/mt/99629056/3618097
->> Group Owner: openembedded-devel+owner@lists.openembedded.org
->> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [=
-alex.kiernan@gmail.com]
->> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
 >>
+>>
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#103444): https://lists.openembedded.org/g/openembedde=
+d-devel/message/103444
+> Mute This Topic: https://lists.openembedded.org/mt/99629056/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
+aj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
 
