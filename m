@@ -1,152 +1,129 @@
-Return-Path: <narpat.mali@windriver.com>
+Return-Path: <philip@balister.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8D986EB64DC
-	for <webhook@archiver.kernel.org>; Tue, 20 Jun 2023 16:57:28 +0000 (UTC)
-Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
- by mx.groups.io with SMTP id smtpd.web11.1296.1687280242953970240
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9D773EB64D7
+	for <webhook@archiver.kernel.org>; Tue, 20 Jun 2023 17:08:48 +0000 (UTC)
+Received: from NAM10-DM6-obe.outbound.protection.outlook.com (NAM10-DM6-obe.outbound.protection.outlook.com [40.107.93.86])
+ by mx.groups.io with SMTP id smtpd.web11.124.1687274152609462601
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 20 Jun 2023 09:57:23 -0700
+ Tue, 20 Jun 2023 08:15:52 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=pps06212021 header.b=o3OUamLu;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=553544667c=narpat.mali@windriver.com)
-Received: from pps.filterd (m0250811.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 35K9kYYg001022
-	for <openembedded-devel@lists.openembedded.org>; Tue, 20 Jun 2023 16:57:22 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com; h=from : to : cc :
- subject : date : message-id : mime-version : content-transfer-encoding :
- content-type; s=PPS06212021;
- bh=/Lquk7zgFAc2zF13kx7xM6rZJy5omGAreC2CtBAa6H8=;
- b=o3OUamLufXntnqrWcLZ04xxch7o1DMil+VQpwaww6xAPZalUWqRi1/HIRuf2KozoI+F7
- Y9JwQAxB75RVBRuHQT7OHwfdkbY4JKDTzz39LeD06Exf/84/4cLMQPWz+Gb36GrdQGBQ
- yZ8/TFcZ9vltbAfAbg2At8IcgSUt1Xuo7alHELh4G0c9rPgL3wg2bqRVDhnMysxSvyB5
- DU6Y4Yyo2gEXXSALoVuUMKc5veGAA4uXo8ClyOzoBIxTdxww6PzYhQ2mek+qPHrikf8v
- by54PNJpovI7fs5tu0fJ8mz2HTgOyhc4qfD3BoRSNXOP9+hynpkoSTRHt2MY7Jl4k9l1 SQ== 
-Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3r9220juev-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Tue, 20 Jun 2023 16:57:21 +0000
-Received: from blr-linux-engg1.wrs.com (147.11.136.210) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.23; Tue, 20 Jun 2023 09:57:19 -0700
-From: nmali <narpat.mali@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-CC: <hari.gpillai@windriver.com>
-Subject: [meta-networking][kirkstone][PATCH 1/1] frr: fix for CVE-2023-31489
-Date: Tue, 20 Jun 2023 16:56:41 +0000
-Message-ID: <20230620165641.3705245-1-narpat.mali@windriver.com>
-X-Mailer: git-send-email 2.40.0
+ dkim=fail reason="body hash did not verify" header.i=@amd.com header.s=selector1 header.b=orAcU+JU;
+ spf=permerror, err=parse error for token &{10 18 %{i}._ip.%{h}._ehlo.%{d}._spf.vali.email}: invalid domain name (domain: amd.com, ip: 40.107.93.86, mailfrom: sandeep.gundlupet-raju@amd.com)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=UB+JDpU2V3/+1RaKaRfqWIQgef3dp6nsIEKV3I5FM9spdYJtcyJFtB7fvOljnGqsQ1uha71zIh0QQ1UvvyFFuhH7E6K8cxwktR+4k6eGZJMcTTvOcUFKQ+YEdQPc9lpjt7W7psqFo1rAYkwQKSxSlaHw2DckIrZV/KM4H3Snv29a1vkWY++g9Z3+WMR1XvjtprpiDS0nI9qC7n/2TMyNThfXZAyDCwvyY/G7M0QwJ+a2OfM3yYU3Jih9MI3miXwepA6k9Gu9yey98o2c4q7uurwfOVsPEsDgchu/jDjkVUy19V8GL6qwMnEeLlMSSi8iv1F6fZ4Z1s+j5NMD7tYXtw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=GlFHoi7FqarkaMHayBd+4sUNDvTUbajpvqucvMoF/B4=;
+ b=HlcQgNLHDWX7de30KZxIcUSxRYD2ss6YGofRRG0X4jaOvuH61aOCglu5ygH2/ajA7Oed6Q05KQEZzRlUaMlVwvbCzumu6BXJB3mN+AtzZt3wh1r32ePzhmNsZcqKXQzR60qfZ0JEsyKEj8LuYZnecCQYAGLPzHbJsTBe/2bpqtxtzL9gkE+LivfJtuK2EMV3abMCYKpBsiTCIr2IOI861WzbBCoYKtuhzFgG6IxptgAQpvWZv01ii/EKLjnRsYTjvrzxqdATMD2ekAuzJ2Quw2gI7tVnJnLPPTOVQEMOwJRuq35hfiLRYAARW6tN9mdhOx/aUi9xq9Nt7mPMIhLyOw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.openembedded.org
+ smtp.mailfrom=amd.com; dmarc=pass (p=quarantine sp=quarantine pct=100)
+ action=none header.from=amd.com; dkim=none (message not signed); arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=GlFHoi7FqarkaMHayBd+4sUNDvTUbajpvqucvMoF/B4=;
+ b=orAcU+JU0HBItS0BC5dl8aZyQ2R2ShTPNeehvBYjdmlx8Ic/dtRF0RAV6U7ZL2xY7TorB8BzUp+x4qUotr8TKD9WQEhkLsfUYpB8YzKF/RhWJIoxaD60+0SEN34Fz/VStOr1KOtEYx3nJZ3SixZ42QSbdYWZkYoZXOdsjH4c7d4=
+Received: from DS7PR03CA0132.namprd03.prod.outlook.com (2603:10b6:5:3b4::17)
+ by IA1PR12MB6555.namprd12.prod.outlook.com (2603:10b6:208:3a1::20) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6500.36; Tue, 20 Jun
+ 2023 15:15:50 +0000
+Received: from SN1PEPF000252A1.namprd05.prod.outlook.com
+ (2603:10b6:5:3b4:cafe::d2) by DS7PR03CA0132.outlook.office365.com
+ (2603:10b6:5:3b4::17) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6500.37 via Frontend
+ Transport; Tue, 20 Jun 2023 15:15:50 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
+Received: from SATLEXMB03.amd.com (165.204.84.17) by
+ SN1PEPF000252A1.mail.protection.outlook.com (10.167.242.8) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.6500.27 via Frontend Transport; Tue, 20 Jun 2023 15:15:49 +0000
+Received: from SATLEXMB08.amd.com (10.181.40.132) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.23; Tue, 20 Jun
+ 2023 10:15:49 -0500
+Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB08.amd.com
+ (10.181.40.132) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.23; Tue, 20 Jun
+ 2023 08:15:49 -0700
+Received: from xcosandeepg41.xilinx.com (10.180.168.240) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server id 15.1.2507.23 via Frontend
+ Transport; Tue, 20 Jun 2023 10:15:48 -0500
+From: "Sandeep Gundlupet Raju" <sandeep.gundlupet-raju@amd.com>
+To: <openembedded-devel@lists.openembedded.org>, <raj.khem@gmail.com>
+CC: <mark.hatle@kernel.crashing.org>, <twoerner@gmail.com>, "Sandeep Gundlupet
+ Raju" <sandeep.gundlupet-raju@amd.com>
+Subject: [meta-oe][PATCH] opencv: Revert fix runtime dependencies
+Date: Tue, 20 Jun 2023 09:15:45 -0600
+Message-ID: <20230620151545.1740610-1-sandeep.gundlupet-raju@amd.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SN1PEPF000252A1:EE_|IA1PR12MB6555:EE_
+X-MS-Office365-Filtering-Correlation-Id: ea439ece-ee31-4833-2c8b-08db71a13b2b
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 
+	0FWAoCwvH76vsVfLQQFnxS52lzcp17lC+KKSSYhwIsk533ne/V/FDunA7eIrazOnnFS7uknBSSKNBPD/v3HCAQBWT/i3L+vemaVe9KeiB+PuumZ3+gpP9uppCOcKaRTUFRuimdglzBwiP6VCV94NEvarxGLm/BgusDKZ5EGmX9Xtz4d2mXLqT+5MRVOIOB5QOkTZUiSDSfgbQ3B12vjvZwJkwmh0KlFqzKJilaWkNQt5OA7mCZNqeA4IZRqAS24z4bTwFqmdFRPZTc0653UbzOo9OyXhuJ93dy8RAAyQgAGjnOuJmtVFaESDQuZJ+j+0RXG1CA3OTrk7q33MJbiuRLfxaGSXvActznq1MWqo7WSVOySq8CvSivXd7a+fnfIbqrhCLHgohT3hpR2NehZAaJDVIFRsU6Yxx9DuxW/UUdI9r1dGws0QSmaorpL0nMy9VVr6oiSdBQNnlZeVvxY5mDpyAP9ev7KSEkExMqAvY0rA3ut1yQw9ce04B0/pZfy2IgukuC9qvbyoI9J+LUljNzq+7MjYAwTtO9srCjmxYvBp3K/vIhoO67G1BaN0TPPC5y7dO8144eZ9ymITOaZ6Ee1lJfbRvxQBgEQjJ3q7wHquAgtbo+8vdg8AtagL/c2JLKimpjF2Jsgi6eZ6pmlguGWiGC/x3nMHfS3n0ZLJiN5TrmdjkDb8toWpM2WKctOhjivYGZASF4PRocbRSp+sm9dGcFGZSpM+j6hrDDF1h0ZP2psmfdo+eAxQWEdhiLQx/AnqeRl+623OIUhZ1mzKdQ==
+X-Forefront-Antispam-Report: 
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB03.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230028)(4636009)(39860400002)(376002)(396003)(136003)(346002)(451199021)(46966006)(36840700001)(40470700004)(478600001)(6666004)(70586007)(70206006)(36756003)(8676002)(4326008)(41300700001)(81166007)(356005)(2616005)(47076005)(40480700001)(83380400001)(426003)(336012)(82310400005)(86362001)(2906002)(5660300002)(110136005)(54906003)(8936002)(316002)(40460700003)(1076003)(26005)(186003)(82740400003)(36860700001)(36900700001);DIR:OUT;SFP:1101;
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Jun 2023 15:15:49.8790
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: ea439ece-ee31-4833-2c8b-08db71a13b2b
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB03.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: 
+	SN1PEPF000252A1.namprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA1PR12MB6555
+Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain
-X-Originating-IP: [147.11.136.210]
-X-ClientProxiedBy: ala-exchng01.corp.ad.wrs.com (147.11.82.252) To
- ala-exchng01.corp.ad.wrs.com (147.11.82.252)
-X-Proofpoint-GUID: ZBWXR6oBhBV5hSlNXLrO6EqChd8kGCyo
-X-Proofpoint-ORIG-GUID: ZBWXR6oBhBV5hSlNXLrO6EqChd8kGCyo
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.254,Aquarius:18.0.957,Hydra:6.0.591,FMLib:17.11.176.26
- definitions=2023-06-20_12,2023-06-16_01,2023-05-22_02
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 phishscore=0
- lowpriorityscore=0 suspectscore=0 bulkscore=0 impostorscore=0 mlxscore=0
- mlxlogscore=995 clxscore=1015 spamscore=0 adultscore=0 malwarescore=0
- priorityscore=1501 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2305260000 definitions=main-2306200153
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 20 Jun 2023 16:57:28 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103464
+ <openembedded-devel@lists.openembedded.org>; Tue, 20 Jun 2023 17:08:48 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103465
 
-From: Narpat Mali <narpat.mali@windriver.com>
+This reverts commit 0abf5af3ffd3d13c009a8ffcd5a6f045c36be837
 
-An issue found in Frrouting bgpd v.8.4.2 allows a remote attacker to
-cause a denial of service via the bgp_capability_llgr() function.
+libopencv-ts package is not empty and libopencv_ts libraries are
+not all installed in the -dev package, these libraries are needed
+for sdk development listed in opencv4.pc file.
 
-References:
-https://nvd.nist.gov/vuln/detail/CVE-2023-31489
-https://github.com/FRRouting/frr/issues/13098
-
-Signed-off-by: Narpat Mali <narpat.mali@windriver.com>
+Signed-off-by: Sandeep Gundlupet Raju <sandeep.gundlupet-raju@amd.com>
 ---
- .../frr/frr/CVE-2023-31489.patch              | 52 +++++++++++++++++++
- .../recipes-protocols/frr/frr_8.2.2.bb        |  1 +
- 2 files changed, 53 insertions(+)
- create mode 100644 meta-networking/recipes-protocols/frr/frr/CVE-2023-31489.patch
+ meta-oe/recipes-support/opencv/opencv_4.7.0.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-networking/recipes-protocols/frr/frr/CVE-2023-31489.patch b/meta-networking/recipes-protocols/frr/frr/CVE-2023-31489.patch
-new file mode 100644
-index 0000000000..6fd6792087
---- /dev/null
-+++ b/meta-networking/recipes-protocols/frr/frr/CVE-2023-31489.patch
-@@ -0,0 +1,52 @@
-+From 4e1fc50394df0b69f32a9cf8ba8e1dcee2c67563 Mon Sep 17 00:00:00 2001
-+From: Narpat Mali <narpat.mali@windriver.com>
-+Date: Tue, 20 Jun 2023 14:01:46 +0000
-+Subject: [PATCH] bgpd: Check 7 bytes for Long-lived Graceful-Restart
-+ capability
-+
-+It's not 4 bytes, it was assuming the same as Graceful-Restart tuples.
-+LLGR has more 3 bytes (Long-lived Stale Time).
-+
-+Signed-off-by: Donatas Abraitis <donatas@opensourcerouting.org>
-+
-+CVE: CVE-2023-31489
-+
-+Upstream-Status: Backport [https://github.com/FRRouting/frr/commit/b1d33ec293e8e36fbb8766252f3b016d268e31ce]
-+
-+Signed-off-by: Narpat Mali <narpat.mali@windriver.com>
-+---
-+ bgpd/bgp_open.c | 14 +++++++++++++-
-+ 1 file changed, 13 insertions(+), 1 deletion(-)
-+
-+diff --git a/bgpd/bgp_open.c b/bgpd/bgp_open.c
-+index 6bdefd0e9..ad56149f6 100644
-+--- a/bgpd/bgp_open.c
-++++ b/bgpd/bgp_open.c
-+@@ -578,12 +578,24 @@ static int bgp_capability_restart(struct peer *peer,
-+ static int bgp_capability_llgr(struct peer *peer,
-+			       struct capability_header *caphdr)
-+ {
-++/*
-++ * +--------------------------------------------------+
-++ * | Address Family Identifier (16 bits)              |
-++ * +--------------------------------------------------+
-++ * | Subsequent Address Family Identifier (8 bits)    |
-++ * +--------------------------------------------------+
-++ * | Flags for Address Family (8 bits)                |
-++ * +--------------------------------------------------+
-++ * | Long-lived Stale Time (24 bits)                  |
-++ * +--------------------------------------------------+
-++ */
-++#define BGP_CAP_LLGR_MIN_PACKET_LEN 7
-+	struct stream *s = BGP_INPUT(peer);
-+	size_t end = stream_get_getp(s) + caphdr->length;
-+
-+	SET_FLAG(peer->cap, PEER_CAP_LLGR_RCV);
-+
-+-	while (stream_get_getp(s) + 4 <= end) {
-++	while (stream_get_getp(s) + BGP_CAP_LLGR_MIN_PACKET_LEN <= end) {
-+		afi_t afi;
-+		safi_t safi;
-+		iana_afi_t pkt_afi = stream_getw(s);
-+--
-+2.40.0
-diff --git a/meta-networking/recipes-protocols/frr/frr_8.2.2.bb b/meta-networking/recipes-protocols/frr/frr_8.2.2.bb
-index 80f4729e1f..800c377742 100644
---- a/meta-networking/recipes-protocols/frr/frr_8.2.2.bb
-+++ b/meta-networking/recipes-protocols/frr/frr_8.2.2.bb
-@@ -13,6 +13,7 @@ SRC_URI = "git://github.com/FRRouting/frr.git;protocol=https;branch=stable/8.2 \
-            file://CVE-2022-37035.patch \
-            file://CVE-2022-37032.patch \
-            file://CVE-2022-42917.patch \
-+           file://CVE-2023-31489.patch \
-            file://frr.pam \
- 	      "
- 
--- 
-2.40.0
+diff --git a/meta-oe/recipes-support/opencv/opencv_4.7.0.bb b/meta-oe/recip=
+es-support/opencv/opencv_4.7.0.bb
+index d02fd34ae..a1fbaaa09 100644
+--- a/meta-oe/recipes-support/opencv/opencv_4.7.0.bb
++++ b/meta-oe/recipes-support/opencv/opencv_4.7.0.bb
+@@ -163,7 +163,7 @@ python populate_packages:prepend () {
+=20
+     metapkg =3D  pn
+     d.setVar('ALLOW_EMPTY:' + metapkg, "1")
+-    blacklist =3D [ metapkg, "libopencv-ts" ]
++    blacklist =3D [ metapkg ]
+     metapkg_rdepends =3D [ ]
+     for pkg in packages[1:]:
+         if not pkg in blacklist and not pkg in metapkg_rdepends and not pk=
+g.endswith('-dev') and not pkg.endswith('-dbg') and not pkg.endswith('-doc'=
+) and not pkg.endswith('-locale') and not pkg.endswith('-staticdev'):
+--=20
+2.34.1
 
 
