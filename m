@@ -1,48 +1,47 @@
-Return-Path: <beniaminsandu@gmail.com>
+Return-Path: <alex.kiernan@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7D65BEB64D7
-	for <webhook@archiver.kernel.org>; Tue, 20 Jun 2023 16:42:08 +0000 (UTC)
-Received: from mail-pj1-f41.google.com (mail-pj1-f41.google.com [209.85.216.41])
- by mx.groups.io with SMTP id smtpd.web11.873.1687279318497478474
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8B038EB64D7
+	for <webhook@archiver.kernel.org>; Tue, 20 Jun 2023 16:43:48 +0000 (UTC)
+Received: from mail-io1-f54.google.com (mail-io1-f54.google.com [209.85.166.54])
+ by mx.groups.io with SMTP id smtpd.web10.947.1687279421501921533
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 20 Jun 2023 09:41:58 -0700
+ Tue, 20 Jun 2023 09:43:41 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20221208 header.b=rM/nze+H;
- spf=pass (domain: gmail.com, ip: 209.85.216.41, mailfrom: beniaminsandu@gmail.com)
-Received: by mail-pj1-f41.google.com with SMTP id 98e67ed59e1d1-25ea3a6d714so2388697a91.2
-        for <openembedded-devel@lists.openembedded.org>; Tue, 20 Jun 2023 09:41:58 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20221208 header.b=J7p68fPA;
+ spf=pass (domain: gmail.com, ip: 209.85.166.54, mailfrom: alex.kiernan@gmail.com)
+Received: by mail-io1-f54.google.com with SMTP id ca18e2360f4ac-77e2ed26037so124212639f.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 20 Jun 2023 09:43:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1687279318; x=1689871318;
+        d=gmail.com; s=20221208; t=1687279421; x=1689871421;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=w33+SdAy8bjjCIMnB+5mUlR7tlA5tc8nRAj6dLLaYxA=;
-        b=rM/nze+HDqaEvrrVy7eUv7gS6pnkpyURb3EVmTQIa3ek3lWppUOUwTmCCd2HpUDgMJ
-         YFXu3pglg27hxjK8mE0+flk14ajbowYjSGg5sX19m16pHWzPyRWznHfzr+RwFBg+wU2+
-         rjzCqqnNJEPrggjAgWBPK9Hh7wqVCOXZzArHNVNUFK1hJaqkonm812JnD0RPfalasuaH
-         hg7w/sMyfbo4n1Of3yqV75DRhUNi0M2kysI/SuS5Pq8kBFuyogcsltkjsmk0GpHmuWa/
-         V1Z8eUh1FQSOjeMSMCrr9t65Ab+FtV/q+P1LvxGjrbpq9yxPes0lOF1kLquo2LTfDf2L
-         +y2Q==
+        bh=pl19dzWFNG5ryvo/b9PoT21e5N6z53QnWAKwneokcCw=;
+        b=J7p68fPAy69R41hkmNfyUp5bWSOFvslhpbCE5+w7vIMDdreKzKbUD/QRRfoj+fge9G
+         vfIo6A4HtE/P2lf+gIBrhSTFHRWHsZ63LxGZFwQCPj249muo13smTXfocc947/nI+v37
+         HXzfSBJ/lyk7bnKf61XSdPEknBMk7YksqKSROozxYicuYtjtqwWocPGlrQpCLkJGGF++
+         KTJQTIl9QRB2StlKlj/Q32zEiHm6EhRmYNuSKXzaG71h01gNWCiEi6u2X3C1vaq2lvDq
+         vN3saJx1G4U0PxZVVLCNT7+m3gKwF/a8qFf8IoSjFDx0ycYjPvMpSS+BDBDklWQ3Zrvh
+         xaBg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1687279318; x=1689871318;
+        d=1e100.net; s=20221208; t=1687279421; x=1689871421;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=w33+SdAy8bjjCIMnB+5mUlR7tlA5tc8nRAj6dLLaYxA=;
-        b=CeZi/LD+v08ReQoKaLZaTe6LIp+bjKDDysthe6GrfYMvtYcCj03YxoU/o+FaqQLUS6
-         rDXFwBWqEYSZUWVB3l4IR1eyJCt5OXXBgokoidVJF+KdTNmKceH/FbpQpnskcEoJ9Jn0
-         l5oNVjKlFjXOlChjmghPGfRSv8DyFlljHjB5NmuwvDQ0W5qbxQ8hWwmtS6h5LJmY6eoX
-         qeHF3RN0wrdGHC1JChQSKEw1nLT+rhAsKXpmseURjfdsB0GVQeSUPbS5bK5h26o7TWG9
-         ius7fJIELOWOgFxrCgnlm6FOz/qc6vqEtrpI8PaRLblyJtFKPzonv1lPCqJRuV8GEp21
-         ppgg==
-X-Gm-Message-State: AC+VfDxbpAs6vf/6+2Z7Nd8Bor5jdIl6GGfkFCAt2hdqHHFy5bEuAkot
-	h3xXJHPULIurCDxbruCRGI2w+lolttvuEuLwBw0=
-X-Google-Smtp-Source: ACHHUZ7A0jerAPGKChQzd4p7OVauHtDoKGP6rt2Ih1SEot47s/9BaqJ1rb4pWQdj51MF6pPrm5hAMkFSsy052ghT3Bk=
-X-Received: by 2002:a17:90a:414b:b0:25c:1fb6:b9f7 with SMTP id
- m11-20020a17090a414b00b0025c1fb6b9f7mr3502258pjg.1.1687279317674; Tue, 20 Jun
- 2023 09:41:57 -0700 (PDT)
+        bh=pl19dzWFNG5ryvo/b9PoT21e5N6z53QnWAKwneokcCw=;
+        b=Gz6quEt2Rg1KWpsKnJ+gZEOp2XsB/F/KWLEj6OiCrlWRED5ihq3XzcSvhgSeq5r0qZ
+         lU/Y5RcKxZxmVfK3YcjYAaTqyLaICVVDJKtFO0qVz8g47A1ndQr8SVTrZdISyZfgMPmq
+         9/nA2bTLWXzl4VPcBrx+2kCXwKKpLOwVzjRMIfpNtEwkz8ECvfrde0c3uUFa43tATtHM
+         bromkzokSH2h2z+8z9VmaUKTqGh9KfWQ6Av7ryhEtqgOt+G2pyYBDdzUF+EUPceRDjez
+         ORmYEpsoOollDzkgTAITNccrsulBP++t6XG9Eplk+n5RhGZDiVAstIqkyPCz5YtiLsem
+         YkSw==
+X-Gm-Message-State: AC+VfDzL1qrk/9I7KrdN4L0VxNEp31Li78ZI1kYYoHILHXfy7eXQVPi4
+	HcCqVwRnaFq49qgJCFeUcMGVe/b50v9Pbp3RpxnRctWx
+X-Google-Smtp-Source: ACHHUZ5mfaqnOc3oXPK9vDJaXfxshvDCC2jzSStqN8p5h9ZHTGMZxu8mTZ4ysCv5x/FVBL7almnJ0k8TN03t8Z1+HMU=
+X-Received: by 2002:a6b:6107:0:b0:77e:52:a52a with SMTP id v7-20020a6b6107000000b0077e0052a52amr9694087iob.17.1687279420514;
+ Tue, 20 Jun 2023 09:43:40 -0700 (PDT)
 MIME-Version: 1.0
 References: <20230619181955.103171-1-beniaminsandu@gmail.com>
  <CAO5Uq5SyM6MAO_Q5Y_+1F7PxQ7QevCMhCNwagSWDHLaEhL6Www@mail.gmail.com>
@@ -52,21 +51,21 @@ References: <20230619181955.103171-1-beniaminsandu@gmail.com>
  <176A5C62B6CFBD15.4070@lists.openembedded.org> <CAO5Uq5TMWYSJbSLOciykBcMGV+vz72mpGi=dXECm_VN2GpuBgg@mail.gmail.com>
  <CABQJdOGpQ5LS9MneXahSkYyfBJZSyHEZvUczi6DqDJFTgxFY5w@mail.gmail.com> <CABQJdOGC2edPg50oOW6QhwiTxvH=Lxp97k8zoEBRVz5Y1ta-vA@mail.gmail.com>
 In-Reply-To: <CABQJdOGC2edPg50oOW6QhwiTxvH=Lxp97k8zoEBRVz5Y1ta-vA@mail.gmail.com>
-From: Beniamin Sandu <beniaminsandu@gmail.com>
-Date: Tue, 20 Jun 2023 19:41:46 +0300
-Message-ID: <CABQJdOHyUM=whZ0OjTRrq1irS4=aGaa_Zcew+=GFm0rhcogKWw@mail.gmail.com>
+From: Alex Kiernan <alex.kiernan@gmail.com>
+Date: Tue, 20 Jun 2023 17:43:28 +0100
+Message-ID: <CAO5Uq5QKfwvB8h30xuSjnAceH6JV8qvy6hSec-4nJf_+zam6Tw@mail.gmail.com>
 Subject: Re: [oe] [meta-networking][PATCH] mdns: remove unneeded headers
-To: Alex Kiernan <alex.kiernan@gmail.com>
+To: Beniamin Sandu <beniaminsandu@gmail.com>
 Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 20 Jun 2023 16:42:08 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103461
+ <openembedded-devel@lists.openembedded.org>; Tue, 20 Jun 2023 16:43:48 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103462
 
-On Tue, Jun 20, 2023 at 7:38=E2=80=AFPM Beniamin Sandu <beniaminsandu@gmail=
+On Tue, Jun 20, 2023 at 5:38=E2=80=AFPM Beniamin Sandu <beniaminsandu@gmail=
 .com> wrote:
 >
 > On Tue, Jun 20, 2023 at 4:12=E2=80=AFPM Beniamin Sandu <beniaminsandu@gma=
@@ -160,12 +159,14 @@ ERENCE
 >
 > Seems it could be a very simple way to make mbedtls v2 be the
 > "default" version unless specified by user through PREFERRED_PROVIDER?
-
-I meant PREFERRED_VERSION, so we could add this DEFAULT_PREFERENCE to
-mbedtls v3 recipe and anyone who wants to use it will need to select
-it on their side, otherwise v2 will get built.
-
 >
+
+It works, but if you have two recipes with conflicting requirements
+(which I do for some other things), it doesn't really help...
+
+Probably I'm leaning towards just upgrading to 3.x and taking the
+mDNSResponder patch, I just worry about where Apple go...
+
 > > > > > >
 > > > > > > My concern isn't really with the one liner now, its the how har=
 d does
@@ -295,4 +296,9 @@ sub [alex.kiernan@gmail.com]
 > > >
 > > > --
 > > > Alex Kiernan
+
+
+
+--=20
+Alex Kiernan
 
