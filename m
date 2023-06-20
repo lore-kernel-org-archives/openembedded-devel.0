@@ -1,318 +1,152 @@
-Return-Path: <beniaminsandu@gmail.com>
+Return-Path: <narpat.mali@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 88A53EB64DC
-	for <webhook@archiver.kernel.org>; Tue, 20 Jun 2023 16:49:08 +0000 (UTC)
-Received: from mail-pj1-f48.google.com (mail-pj1-f48.google.com [209.85.216.48])
- by mx.groups.io with SMTP id smtpd.web10.1094.1687279747963783750
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8D986EB64DC
+	for <webhook@archiver.kernel.org>; Tue, 20 Jun 2023 16:57:28 +0000 (UTC)
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.web11.1296.1687280242953970240
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 20 Jun 2023 09:49:08 -0700
+ Tue, 20 Jun 2023 09:57:23 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=EqogaZpq;
- spf=pass (domain: gmail.com, ip: 209.85.216.48, mailfrom: beniaminsandu@gmail.com)
-Received: by mail-pj1-f48.google.com with SMTP id 98e67ed59e1d1-25ea33087aaso3810681a91.3
-        for <openembedded-devel@lists.openembedded.org>; Tue, 20 Jun 2023 09:49:07 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1687279747; x=1689871747;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=59oqZns7i1ES8YFenb0hIb4suABoBVebHuDuT/hm8vI=;
-        b=EqogaZpqfQq3bodklL2AyfvKCWrdquxJTyJjZ2zUYU2wotBei9B7IOfariFFD0Mmso
-         4+OfiA9ZSycwWKu5LbNIEWv4MXgntm/LVVHqiNdCMV4hIsbC/P+28ZjBFBb57lAespJm
-         QydhIsXDpeZfo69xqvNJ6ZiMlSaogvIV1hBoM2EfE6sONeLDeqeEtyMiaMJJ75E7lwLQ
-         bbxnujR93KC/yBBurGQS9iIq4osjbYXiE2br0jqTdAy+40tiQzo5xifVpO33/TqGJB/l
-         BRSwe13h+/Cel9oWiM++viTKI4kabSuMbYYggFEHcAwrFITguXb4wd31xsT4culEakiX
-         FK/g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1687279747; x=1689871747;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=59oqZns7i1ES8YFenb0hIb4suABoBVebHuDuT/hm8vI=;
-        b=O9oRoAlmthrhPDLUT0HvkZJPiNwBpreeV3hNMP9/8dWgvVzsZMKHbEySJmPZaU3qUd
-         NIIiEhhGbuX+C+CSaCq8mfgAn+Zf8VlZFyi9j+nlAYmUXKm36KUhQxMjMC9UGDb6J8MN
-         iSuJsrx4PWDFHr/h7h/pnUQYxPXjJPug+vKBzqf//BO/h6uAufjZdFifgJqqFHP3+ZWa
-         WhAAksZHJOYQvBYhoI2qkX1AEOeA7KJTNaDPjZYKlL0VmVMfg/H2ezdkatOIUZyEMFmH
-         jyjdkaFUAdPw6FYOYJzLUSnM95G4PjUv7808PVbZSSyuI1d3JfLZ5/nwzATN+c7Oq+5s
-         v2qA==
-X-Gm-Message-State: AC+VfDy1w7JPhk5DsW++HvcTeCZS/7UADfZN6owaUPiCCNZPq0zjIczG
-	2GbKP0yhn6IhFnPtf14B8LANFpIONBJlONKk6QStHNMhLsA=
-X-Google-Smtp-Source: ACHHUZ6383BgXv/KvoPwtwXzwoUPDCNBqkxu8EVf2gOhpBKU+vxVSeC3YmGuDtv0dlSZiCOaAhoTZLhnTvQjxNBml5U=
-X-Received: by 2002:a17:90a:ce94:b0:259:548b:d385 with SMTP id
- g20-20020a17090ace9400b00259548bd385mr12168725pju.3.1687279747301; Tue, 20
- Jun 2023 09:49:07 -0700 (PDT)
+ dkim=pass header.i=@windriver.com header.s=pps06212021 header.b=o3OUamLu;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=553544667c=narpat.mali@windriver.com)
+Received: from pps.filterd (m0250811.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 35K9kYYg001022
+	for <openembedded-devel@lists.openembedded.org>; Tue, 20 Jun 2023 16:57:22 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com; h=from : to : cc :
+ subject : date : message-id : mime-version : content-transfer-encoding :
+ content-type; s=PPS06212021;
+ bh=/Lquk7zgFAc2zF13kx7xM6rZJy5omGAreC2CtBAa6H8=;
+ b=o3OUamLufXntnqrWcLZ04xxch7o1DMil+VQpwaww6xAPZalUWqRi1/HIRuf2KozoI+F7
+ Y9JwQAxB75RVBRuHQT7OHwfdkbY4JKDTzz39LeD06Exf/84/4cLMQPWz+Gb36GrdQGBQ
+ yZ8/TFcZ9vltbAfAbg2At8IcgSUt1Xuo7alHELh4G0c9rPgL3wg2bqRVDhnMysxSvyB5
+ DU6Y4Yyo2gEXXSALoVuUMKc5veGAA4uXo8ClyOzoBIxTdxww6PzYhQ2mek+qPHrikf8v
+ by54PNJpovI7fs5tu0fJ8mz2HTgOyhc4qfD3BoRSNXOP9+hynpkoSTRHt2MY7Jl4k9l1 SQ== 
+Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3r9220juev-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Tue, 20 Jun 2023 16:57:21 +0000
+Received: from blr-linux-engg1.wrs.com (147.11.136.210) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.23; Tue, 20 Jun 2023 09:57:19 -0700
+From: nmali <narpat.mali@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: <hari.gpillai@windriver.com>
+Subject: [meta-networking][kirkstone][PATCH 1/1] frr: fix for CVE-2023-31489
+Date: Tue, 20 Jun 2023 16:56:41 +0000
+Message-ID: <20230620165641.3705245-1-narpat.mali@windriver.com>
+X-Mailer: git-send-email 2.40.0
 MIME-Version: 1.0
-References: <20230619181955.103171-1-beniaminsandu@gmail.com>
- <CAO5Uq5SyM6MAO_Q5Y_+1F7PxQ7QevCMhCNwagSWDHLaEhL6Www@mail.gmail.com>
- <CABQJdOE_4Pww8X_+j+PjFmzMiTm3cn8LEcH6OSebEqxh2=8gaQ@mail.gmail.com>
- <CAO5Uq5QVdbRjTVv1USjLBwh3jtT_G6MBTVeSEOX9LjDrUnx6VQ@mail.gmail.com>
- <CABQJdOGJOzDrv0dg2zNSN16E3R6zAVrPD1XNs5Kc444kehQctg@mail.gmail.com>
- <176A5C62B6CFBD15.4070@lists.openembedded.org> <CAO5Uq5TMWYSJbSLOciykBcMGV+vz72mpGi=dXECm_VN2GpuBgg@mail.gmail.com>
- <CABQJdOGpQ5LS9MneXahSkYyfBJZSyHEZvUczi6DqDJFTgxFY5w@mail.gmail.com>
- <CABQJdOGC2edPg50oOW6QhwiTxvH=Lxp97k8zoEBRVz5Y1ta-vA@mail.gmail.com> <CAO5Uq5QKfwvB8h30xuSjnAceH6JV8qvy6hSec-4nJf_+zam6Tw@mail.gmail.com>
-In-Reply-To: <CAO5Uq5QKfwvB8h30xuSjnAceH6JV8qvy6hSec-4nJf_+zam6Tw@mail.gmail.com>
-From: Beniamin Sandu <beniaminsandu@gmail.com>
-Date: Tue, 20 Jun 2023 19:48:55 +0300
-Message-ID: <CABQJdOFkqDu4pD+yaOqKiYge0p8np43u22Jh51E5Ayt91qSPww@mail.gmail.com>
-Subject: Re: [oe] [meta-networking][PATCH] mdns: remove unneeded headers
-To: Alex Kiernan <alex.kiernan@gmail.com>
-Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [147.11.136.210]
+X-ClientProxiedBy: ala-exchng01.corp.ad.wrs.com (147.11.82.252) To
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252)
+X-Proofpoint-GUID: ZBWXR6oBhBV5hSlNXLrO6EqChd8kGCyo
+X-Proofpoint-ORIG-GUID: ZBWXR6oBhBV5hSlNXLrO6EqChd8kGCyo
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.254,Aquarius:18.0.957,Hydra:6.0.591,FMLib:17.11.176.26
+ definitions=2023-06-20_12,2023-06-16_01,2023-05-22_02
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 phishscore=0
+ lowpriorityscore=0 suspectscore=0 bulkscore=0 impostorscore=0 mlxscore=0
+ mlxlogscore=995 clxscore=1015 spamscore=0 adultscore=0 malwarescore=0
+ priorityscore=1501 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.12.0-2305260000 definitions=main-2306200153
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 20 Jun 2023 16:49:08 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103463
+ <openembedded-devel@lists.openembedded.org>; Tue, 20 Jun 2023 16:57:28 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103464
 
-On Tue, Jun 20, 2023 at 7:43=E2=80=AFPM Alex Kiernan <alex.kiernan@gmail.co=
-m> wrote:
->
-> On Tue, Jun 20, 2023 at 5:38=E2=80=AFPM Beniamin Sandu <beniaminsandu@gma=
-il.com> wrote:
-> >
-> > On Tue, Jun 20, 2023 at 4:12=E2=80=AFPM Beniamin Sandu <beniaminsandu@g=
-mail.com> wrote:
-> > >
-> > > On Tue, Jun 20, 2023 at 3:42=E2=80=AFPM Alex Kiernan <alex.kiernan@gm=
-ail.com> wrote:
-> > > >
-> > > > On Tue, Jun 20, 2023 at 1:03=E2=80=AFPM Alex Kiernan via
-> > > > lists.openembedded.org <alex.kiernan=3Dgmail.com@lists.openembedded=
-.org>
-> > > > wrote:
-> > > > >
-> > > > > On Tue, Jun 20, 2023 at 11:53=E2=80=AFAM Beniamin Sandu <beniamin=
-sandu@gmail.com> wrote:
-> > > > > >
-> > > > > > On Tue, Jun 20, 2023 at 12:56=E2=80=AFPM Alex Kiernan <alex.kie=
-rnan@gmail.com> wrote:
-> > > > > > >
-> > > > > > > On Mon, Jun 19, 2023 at 8:38=E2=80=AFPM Beniamin Sandu <benia=
-minsandu@gmail.com> wrote:
-> > > > > > > >
-> > > > > > > > I am trying to add a v3.x mbedtls recipe to master branch, =
-and without
-> > > > > > >
-> > > > > > > Sorry, was reading the thread out of order and missed that yo=
-u were
-> > > > > > > trying to add an Mbed TLS 3 recipe!
-> > > > > > >
-> > > > > > > > this patch, mdns does not build. I could not find an obviou=
-s way to
-> > > > > > > > submit upstream patches to mdns from a quick search, otherw=
-ise I would
-> > > > > > > > gladly do it.
-> > > > > > > >
-> > > > > > >
-> > > > > > > Several folk have tried sending them to dts@apple.com (seemin=
-gly
-> > > > > > > without success), there's also a couple of attempted PRs on g=
-ithub
-> > > > > > > (again seemingly going nowhere). Winding back about 20 years,=
- I tried
-> > > > > > > to get a bunch of portability fixes into the Quicktime Stream=
-ing
-> > > > > > > Server without success - the model appears to very much be op=
-en
-> > > > > > > source, not open contribution.
-> > > > > > >
-> > > > > > > > While I am with you on trying to reduce technical debt with=
-in yocto
-> > > > > > > > layers, this one is very small and rather harmless, so I ho=
-pe we can
-> > > > > > > > make a sacrifice for the greater good. :)
-> > > > > > > >
-> > > > > > >
-> > > > > > > I'm guessing we'll need to scope an Mbed TLS 3 recipe as bein=
-g
-> > > > > > > explicitly mbedtls3_...? So sticking with 2.x doesn't feel li=
-ke a
-> > > > > > > terrible option, but I agree its not ideal.
-> > > > > >
-> > > > > > This also sounds like a fairly decent option, having a separate
-> > > > > > mbedtls3 package might make it easier in general, although I am=
- not
-> > > > > > aware of how used the current v2 version actually is.
-> > > > > >
-> > > > >
-> > > > > Looks like we're out of date (there's a 2.28.3), but it's still
-> > > > > supported for now... "Mbed TLS 2.28 is a long-time support branch=
-. It
-> > > > > will be supported with bug-fixes and security fixes until end of
-> > > > > 2024."
-> > > > >
-> > > >
-> > > > Will send an update for 2.28.3, but constrain `devtool upgrade` to
-> > > > things on the 2.x branch
-> > > >
-> > > > One thought on 3.x - if mdns is the only failure maybe rename the
-> > > > current recipe to mbedtls2_% and add 3.x as mbedtls_% and then fix =
-up
-> > > > the mdns recipe to consume mbedtls2?
-> > > >
-> > >
-> > > Personally I would say it is not worth to do it, just because of this
-> > > one package. Plus, it's building fine with both versions by including
-> > > this small patch, but maybe Khem Raj can chime in with an opinion
-> > > here.
-> > >
-> >
-> > While looking through some stuff, I discovered some variable I had no
-> > idea exists, called DEFAULT_PREFERENCE:
-> > https://docs.yoctoproject.org/ref-manual/variables.html#term-DEFAULT_PR=
-EFERENCE
-> >
-> > Seems it could be a very simple way to make mbedtls v2 be the
-> > "default" version unless specified by user through PREFERRED_PROVIDER?
-> >
->
-> It works, but if you have two recipes with conflicting requirements
-> (which I do for some other things), it doesn't really help...
->
-> Probably I'm leaning towards just upgrading to 3.x and taking the
-> mDNSResponder patch, I just worry about where Apple go...
+From: Narpat Mali <narpat.mali@windriver.com>
 
-Right, then I think we just take in the patch and move on. I would be
-surprised if this one specifically will generate problems in the
-future, but we can deal with it at the time.
+An issue found in Frrouting bgpd v.8.4.2 allows a remote attacker to
+cause a denial of service via the bgp_capability_llgr() function.
 
->
-> > > > > > >
-> > > > > > > My concern isn't really with the one liner now, its the how h=
-ard does
-> > > > > > > it become to do the upgrades down the road - if we suddenly c=
-an't
-> > > > > > > upgrade because upstream's stuck on 2.x and there's something
-> > > > > > > incompatible with 3.x what do we do?
-> > > > > > >
-> > > > > > > > Cheers,
-> > > > > > > > Beni
-> > > > > > > >
-> > > > > > > >
-> > > > > > > > On Mon, Jun 19, 2023 at 10:14=E2=80=AFPM Alex Kiernan <alex=
-.kiernan@gmail.com> wrote:
-> > > > > > > > >
-> > > > > > > > > Keeping up with Apple given they take nothing is frankly =
-a right pain, adding things which are nice to have rather than just broken =
-seems like we're just adding to the problem. Last time I resynchronized thi=
-s it took me days, unless there's a really good reason to do this, or there=
-'s a way to get it upstreamed I'd rather we didn't.
-> > > > > > > > >
-> > > > > > > > >
-> > > > > > > > > On Mon, 19 Jun 2023, 19:20 Beniamin Sandu, <beniaminsandu=
-@gmail.com> wrote:
-> > > > > > > > >>
-> > > > > > > > >> Signed-off-by: Beniamin Sandu <beniaminsandu@gmail.com>
-> > > > > > > > >> ---
-> > > > > > > > >>  .../mdns/0009-remove-unneeded-headers.patch   | 33 ++++=
-+++++++++++++++
-> > > > > > > > >>  .../recipes-protocols/mdns/mdns_1790.80.10.bb |  1 +
-> > > > > > > > >>  2 files changed, 34 insertions(+)
-> > > > > > > > >>  create mode 100644 meta-networking/recipes-protocols/md=
-ns/mdns/0009-remove-unneeded-headers.patch
-> > > > > > > > >>
-> > > > > > > > >> diff --git a/meta-networking/recipes-protocols/mdns/mdns=
-/0009-remove-unneeded-headers.patch b/meta-networking/recipes-protocols/mdn=
-s/mdns/0009-remove-unneeded-headers.patch
-> > > > > > > > >> new file mode 100644
-> > > > > > > > >> index 000000000..74d387368
-> > > > > > > > >> --- /dev/null
-> > > > > > > > >> +++ b/meta-networking/recipes-protocols/mdns/mdns/0009-r=
-emove-unneeded-headers.patch
-> > > > > > > > >> @@ -0,0 +1,33 @@
-> > > > > > > > >> +From 1d7e71e72c597ffcc19c04373a477d1fbd3ad955 Mon Sep 1=
-7 00:00:00 2001
-> > > > > > > > >> +From: Beniamin Sandu <beniaminsandu@gmail.com>
-> > > > > > > > >> +Date: Thu, 15 Jun 2023 17:02:58 +0000
-> > > > > > > > >> +Subject: [PATCH] remove unneeded headers
-> > > > > > > > >> +
-> > > > > > > > >> +From a quick look, these seem to not be needed and havi=
-ng them
-> > > > > > > > >> +breaks the build with mbedtls 3.x. Without them it buil=
-ds fine
-> > > > > > > > >> +on both 2.x and 3.x versions.
-> > > > > > > > >> +
-> > > > > > > > >> +Upstream-Status: Pending
-> > > > > > > > >> +
-> > > > > > > > >> +Signed-off-by: Beniamin Sandu <beniaminsandu@gmail.com>
-> > > > > > > > >> +---
-> > > > > > > > >> + mDNSPosix/mbedtls.c | 2 --
-> > > > > > > > >> + 1 file changed, 2 deletions(-)
-> > > > > > > > >> +
-> > > > > > > > >> +diff --git a/mDNSPosix/mbedtls.c b/mDNSPosix/mbedtls.c
-> > > > > > > > >> +index a73681b..ab8f8c7 100644
-> > > > > > > > >> +--- a/mDNSPosix/mbedtls.c
-> > > > > > > > >> ++++ b/mDNSPosix/mbedtls.c
-> > > > > > > > >> +@@ -38,10 +38,8 @@
-> > > > > > > > >> + #include <mbedtls/sha256.h>
-> > > > > > > > >> + #include <mbedtls/base64.h>
-> > > > > > > > >> +
-> > > > > > > > >> +-#include <mbedtls/certs.h>
-> > > > > > > > >> + #include <mbedtls/x509.h>
-> > > > > > > > >> + #include <mbedtls/ssl.h>
-> > > > > > > > >> +-#include <mbedtls/config.h>
-> > > > > > > > >> +
-> > > > > > > > >> + // Posix TLS server context
-> > > > > > > > >> + struct TLSContext_struct {
-> > > > > > > > >> +--
-> > > > > > > > >> +2.34.1
-> > > > > > > > >> diff --git a/meta-networking/recipes-protocols/mdns/mdns=
-_1790.80.10.bb b/meta-networking/recipes-protocols/mdns/mdns_1790.80.10.bb
-> > > > > > > > >> index 612d343c8..46f1b70cb 100644
-> > > > > > > > >> --- a/meta-networking/recipes-protocols/mdns/mdns_1790.8=
-0.10.bb
-> > > > > > > > >> +++ b/meta-networking/recipes-protocols/mdns/mdns_1790.8=
-0.10.bb
-> > > > > > > > >> @@ -21,6 +21,7 @@ SRC_URI =3D "git://github.com/apple-os=
-s-distributions/mDNSResponder;protocol=3Dhttps
-> > > > > > > > >>             file://0006-Handle-noisy-netlink-sockets.pat=
-ch \
-> > > > > > > > >>             file://0007-Mark-deleted-interfaces-as-being=
--changed.patch \
-> > > > > > > > >>             file://0008-Handle-errors-from-socket-calls.=
-patch \
-> > > > > > > > >> +           file://0009-remove-unneeded-headers.patch \
-> > > > > > > > >>             file://mdns.service \
-> > > > > > > > >>             "
-> > > > > > > > >>  SRCREV =3D "8769ab51605e465425d33d757f602ce5905ca639"
-> > > > > > > > >> --
-> > > > > > > > >> 2.25.1
-> > > > > > > > >>
-> > > > > > > > >>
-> > > > > > > > >>
-> > > > > > > > >>
-> > > > > > >
-> > > > > > >
-> > > > > > >
-> > > > > > > --
-> > > > > > > Alex Kiernan
-> > > > >
-> > > > >
-> > > > >
-> > > > > --
-> > > > > Alex Kiernan
-> > > > >
-> > > > > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> > > > > Links: You receive all messages sent to this group.
-> > > > > View/Reply Online (#103455): https://lists.openembedded.org/g/ope=
-nembedded-devel/message/103455
-> > > > > Mute This Topic: https://lists.openembedded.org/mt/99629056/36180=
-97
-> > > > > Group Owner: openembedded-devel+owner@lists.openembedded.org
-> > > > > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/=
-unsub [alex.kiernan@gmail.com]
-> > > > > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> > > > >
-> > > >
-> > > >
-> > > > --
-> > > > Alex Kiernan
->
->
->
-> --
-> Alex Kiernan
+References:
+https://nvd.nist.gov/vuln/detail/CVE-2023-31489
+https://github.com/FRRouting/frr/issues/13098
+
+Signed-off-by: Narpat Mali <narpat.mali@windriver.com>
+---
+ .../frr/frr/CVE-2023-31489.patch              | 52 +++++++++++++++++++
+ .../recipes-protocols/frr/frr_8.2.2.bb        |  1 +
+ 2 files changed, 53 insertions(+)
+ create mode 100644 meta-networking/recipes-protocols/frr/frr/CVE-2023-31489.patch
+
+diff --git a/meta-networking/recipes-protocols/frr/frr/CVE-2023-31489.patch b/meta-networking/recipes-protocols/frr/frr/CVE-2023-31489.patch
+new file mode 100644
+index 0000000000..6fd6792087
+--- /dev/null
++++ b/meta-networking/recipes-protocols/frr/frr/CVE-2023-31489.patch
+@@ -0,0 +1,52 @@
++From 4e1fc50394df0b69f32a9cf8ba8e1dcee2c67563 Mon Sep 17 00:00:00 2001
++From: Narpat Mali <narpat.mali@windriver.com>
++Date: Tue, 20 Jun 2023 14:01:46 +0000
++Subject: [PATCH] bgpd: Check 7 bytes for Long-lived Graceful-Restart
++ capability
++
++It's not 4 bytes, it was assuming the same as Graceful-Restart tuples.
++LLGR has more 3 bytes (Long-lived Stale Time).
++
++Signed-off-by: Donatas Abraitis <donatas@opensourcerouting.org>
++
++CVE: CVE-2023-31489
++
++Upstream-Status: Backport [https://github.com/FRRouting/frr/commit/b1d33ec293e8e36fbb8766252f3b016d268e31ce]
++
++Signed-off-by: Narpat Mali <narpat.mali@windriver.com>
++---
++ bgpd/bgp_open.c | 14 +++++++++++++-
++ 1 file changed, 13 insertions(+), 1 deletion(-)
++
++diff --git a/bgpd/bgp_open.c b/bgpd/bgp_open.c
++index 6bdefd0e9..ad56149f6 100644
++--- a/bgpd/bgp_open.c
+++++ b/bgpd/bgp_open.c
++@@ -578,12 +578,24 @@ static int bgp_capability_restart(struct peer *peer,
++ static int bgp_capability_llgr(struct peer *peer,
++			       struct capability_header *caphdr)
++ {
+++/*
+++ * +--------------------------------------------------+
+++ * | Address Family Identifier (16 bits)              |
+++ * +--------------------------------------------------+
+++ * | Subsequent Address Family Identifier (8 bits)    |
+++ * +--------------------------------------------------+
+++ * | Flags for Address Family (8 bits)                |
+++ * +--------------------------------------------------+
+++ * | Long-lived Stale Time (24 bits)                  |
+++ * +--------------------------------------------------+
+++ */
+++#define BGP_CAP_LLGR_MIN_PACKET_LEN 7
++	struct stream *s = BGP_INPUT(peer);
++	size_t end = stream_get_getp(s) + caphdr->length;
++
++	SET_FLAG(peer->cap, PEER_CAP_LLGR_RCV);
++
++-	while (stream_get_getp(s) + 4 <= end) {
+++	while (stream_get_getp(s) + BGP_CAP_LLGR_MIN_PACKET_LEN <= end) {
++		afi_t afi;
++		safi_t safi;
++		iana_afi_t pkt_afi = stream_getw(s);
++--
++2.40.0
+diff --git a/meta-networking/recipes-protocols/frr/frr_8.2.2.bb b/meta-networking/recipes-protocols/frr/frr_8.2.2.bb
+index 80f4729e1f..800c377742 100644
+--- a/meta-networking/recipes-protocols/frr/frr_8.2.2.bb
++++ b/meta-networking/recipes-protocols/frr/frr_8.2.2.bb
+@@ -13,6 +13,7 @@ SRC_URI = "git://github.com/FRRouting/frr.git;protocol=https;branch=stable/8.2 \
+            file://CVE-2022-37035.patch \
+            file://CVE-2022-37032.patch \
+            file://CVE-2022-42917.patch \
++           file://CVE-2023-31489.patch \
+            file://frr.pam \
+ 	      "
+ 
+-- 
+2.40.0
+
 
