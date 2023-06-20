@@ -1,129 +1,283 @@
-Return-Path: <sandeep.gundlupet-raju@amd.com>
+Return-Path: <beniaminsandu@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 480B9EB64DB
-	for <webhook@archiver.kernel.org>; Tue, 20 Jun 2023 15:40:05 +0000 (UTC)
-Received: from NAM11-CO1-obe.outbound.protection.outlook.com (NAM11-CO1-obe.outbound.protection.outlook.com [40.107.220.76])
- by mx.groups.io with SMTP id smtpd.web10.712.1687275599368515951
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 860A8EB64D7
+	for <webhook@archiver.kernel.org>; Tue, 20 Jun 2023 16:38:48 +0000 (UTC)
+Received: from mail-oo1-f50.google.com (mail-oo1-f50.google.com [209.85.161.50])
+ by mx.groups.io with SMTP id smtpd.web11.804.1687279122439528881
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 20 Jun 2023 08:39:59 -0700
+ Tue, 20 Jun 2023 09:38:42 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="body hash did not verify" header.i=@amd.com header.s=selector1 header.b=n5tV8nhI;
- spf=permerror, err=parse error for token &{10 18 %{i}._ip.%{h}._ehlo.%{d}._spf.vali.email}: invalid domain name (domain: amd.com, ip: 40.107.220.76, mailfrom: sandeep.gundlupet-raju@amd.com)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=gSXAPJEWyPu/hnMh0LSKXm4aJCVxikvaAqIyG/ODxnnn6fUgkusQbU8QmUzOqB1LBt+6pGu4WamTjSIjxQ5X8rk6v03uZnfTWYJdrHa0ztZMhSX6Wc4Agei4ticiu8mtDzZ3u4l2Y7BJ17UF4wzAIsh7qu0tHc7ZO8X11aMXh8m4etjbZT2RUF0JExOsc9GXQrD51q05pv4mdujQsnrH1g3fm3gY5wnxegCiWTth4rUHugpEW2oTxbuJAdFdS9dnwZMvuD3iFiUvywDwkZVWjbAHvu8Qill0qaj5BG50rSnfnEY2Lh88SrlPaXI3nLbYUb5gCCdPRcQ+gp/52mBgug==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=GlFHoi7FqarkaMHayBd+4sUNDvTUbajpvqucvMoF/B4=;
- b=EHXmRMpYGb+Iki6UXTY1Ti9Xtopz9LEABEebAT9kfWB89BsBCsDWRjBrPqrxJnN+dnX532VwJFrhCwQv5lyQ909eOnwNI2mm9EWjovtvCs3P/KONRXCDWTAU1e2dhkf4DXZG18frprRBI8Axcm9NdTVSro6GmJmAM2O2qe89JbG3UNUG2Xg+vytWdIrPA9/L9Z8pmLt3sJd/nBJCorUQ+7TG717QOmH+YG6hBOQajeflrXZhHdyYxZSquyf4sPJyeVKWB8LiPtDzf8N1Hwh1z9UFnvbUiw0zV12asU76poFSypgdtWAVjkEjp38ZXU9l9wppdsPor15SjWt5TjW+iw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.openembedded.org
- smtp.mailfrom=amd.com; dmarc=pass (p=quarantine sp=quarantine pct=100)
- action=none header.from=amd.com; dkim=none (message not signed); arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=GlFHoi7FqarkaMHayBd+4sUNDvTUbajpvqucvMoF/B4=;
- b=n5tV8nhIHPJM0TRYyh7+TVDMVKTfNbq6Mkse4wL/DPP6kI8SihjIps83sHhL0cbfhPl2KKlGv/wZn8jrNFAtWptOgAxid4hwMuxqLig843Bx1awI12rkw/DBLjZR5fa228SoQXLM4l4aMZekZbyIqi1FgWHjTfceNccKaYvc7xc=
-Received: from DS7PR03CA0091.namprd03.prod.outlook.com (2603:10b6:5:3b7::6) by
- SA1PR12MB6969.namprd12.prod.outlook.com (2603:10b6:806:24c::14) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6500.35; Tue, 20 Jun
- 2023 15:39:56 +0000
-Received: from DM6NAM11FT057.eop-nam11.prod.protection.outlook.com
- (2603:10b6:5:3b7:cafe::15) by DS7PR03CA0091.outlook.office365.com
- (2603:10b6:5:3b7::6) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6521.21 via Frontend
- Transport; Tue, 20 Jun 2023 15:39:55 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- DM6NAM11FT057.mail.protection.outlook.com (10.13.172.252) with Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.6500.37 via Frontend Transport; Tue, 20 Jun 2023 15:39:55 +0000
-Received: from SATLEXMB06.amd.com (10.181.40.147) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.23; Tue, 20 Jun
- 2023 10:39:55 -0500
-Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB06.amd.com
- (10.181.40.147) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.23; Tue, 20 Jun
- 2023 10:39:54 -0500
-Received: from xcosandeepg41.xilinx.com (10.180.168.240) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server id 15.1.2507.23 via Frontend
- Transport; Tue, 20 Jun 2023 10:39:54 -0500
-From: Sandeep Gundlupet Raju <sandeep.gundlupet-raju@amd.com>
-To: <openembedded-devel@lists.openembedded.org>, <raj.khem@gmail.com>
-CC: <mark.hatle@kernel.crashing.org>, <twoerner@gmail.com>, "Sandeep Gundlupet
- Raju" <sandeep.gundlupet-raju@amd.com>
-Subject: [meta-oe][PATCH] opencv: Revert fix runtime dependencies
-Date: Tue, 20 Jun 2023 09:39:49 -0600
-Message-ID: <20230620153949.1749591-1-sandeep.gundlupet-raju@amd.com>
-X-Mailer: git-send-email 2.34.1
+ dkim=pass header.i=@gmail.com header.s=20221208 header.b=NfIkFkm6;
+ spf=pass (domain: gmail.com, ip: 209.85.161.50, mailfrom: beniaminsandu@gmail.com)
+Received: by mail-oo1-f50.google.com with SMTP id 006d021491bc7-55e1bb2ab1aso3124302eaf.2
+        for <openembedded-devel@lists.openembedded.org>; Tue, 20 Jun 2023 09:38:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20221208; t=1687279122; x=1689871122;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=LP6gwF/1m/rJSWD/MP5MJN1ISwpRM7OFuOM6YDcyCkA=;
+        b=NfIkFkm6jZ7u7mWVX0EHPDN0wPAFiIwSjCGGQKyyDNcX1cTZE1htoLlyJ16h5s9Mtd
+         9mHC3Yo4hNKqEyUa36VWh2vGO+6IM3cSRvToMMffESFULv11rv3+RboQaS9qhpJPhex1
+         xPbw6rtKVq8eP1S/wAZICx+oDPbUUlLuiAFqTEpw73Y4zsxJrfzMcpn15kSrZfyc1Gsk
+         TDxKI9+Ja1j4osbCTVIR3OUnNeb0sU61tPlaw8Efiv7Bk2hcmROCryNTbr5DSYxwfytb
+         5Hjz4G4YCSBzRaLqVyd49BE8P2n45+yDk93W616Cy4I6yDRDPwliymROHItgTQo672Mp
+         Yvzg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20221208; t=1687279122; x=1689871122;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=LP6gwF/1m/rJSWD/MP5MJN1ISwpRM7OFuOM6YDcyCkA=;
+        b=ZssZaxwj+SgcIRmDdoyLCpfqdvN2Sg/pVrfSRL4ijgcbj211tABR9H1VEh8KyizTPm
+         HTKQexqo5znVssD6prbEii3czQJTxOqkUKcScGmLTzdocJuxfuf65UGfNxiuuX+Y0SQj
+         Nx0pTHfmPdHCMEjB/rd+4g5SSXO0sKcn9+akR2Cg3dxagz6avvAzk7VW/WlYe9HkJmt5
+         pvO+9xN5xLNDJy0o/p2KXNsa1MgAZQltSIGVYt9EZ4aZPdx26uS5LC/cHFzazqyPQUjb
+         xhBBs8E3EGRYKYppL1Vc6v5NGnfZBOOz9U8YXHeR7P1dLWyC1RM9VXMl2VW9EBltkn+0
+         RYbg==
+X-Gm-Message-State: AC+VfDzyj/kuFGzGfrWKpDkAN+XcBedwdI5XsS1yw/TZfw80u0x/chSi
+	ea5ozosP7USFmcrObo7qTvAQjAeZ4Qs516TCYeI=
+X-Google-Smtp-Source: ACHHUZ5rSy5s17OJwvagsp+scgZGfEP5bqJfq/BEn0Wa3UvPKzXzBQL9dSA1+/puCzQsG0u/+vNniqPYOSci9q9Dfts=
+X-Received: by 2002:a05:6808:211e:b0:396:40c4:a2ef with SMTP id
+ r30-20020a056808211e00b0039640c4a2efmr4886601oiw.11.1687279121528; Tue, 20
+ Jun 2023 09:38:41 -0700 (PDT)
 MIME-Version: 1.0
+References: <20230619181955.103171-1-beniaminsandu@gmail.com>
+ <CAO5Uq5SyM6MAO_Q5Y_+1F7PxQ7QevCMhCNwagSWDHLaEhL6Www@mail.gmail.com>
+ <CABQJdOE_4Pww8X_+j+PjFmzMiTm3cn8LEcH6OSebEqxh2=8gaQ@mail.gmail.com>
+ <CAO5Uq5QVdbRjTVv1USjLBwh3jtT_G6MBTVeSEOX9LjDrUnx6VQ@mail.gmail.com>
+ <CABQJdOGJOzDrv0dg2zNSN16E3R6zAVrPD1XNs5Kc444kehQctg@mail.gmail.com>
+ <176A5C62B6CFBD15.4070@lists.openembedded.org> <CAO5Uq5TMWYSJbSLOciykBcMGV+vz72mpGi=dXECm_VN2GpuBgg@mail.gmail.com>
+ <CABQJdOGpQ5LS9MneXahSkYyfBJZSyHEZvUczi6DqDJFTgxFY5w@mail.gmail.com>
+In-Reply-To: <CABQJdOGpQ5LS9MneXahSkYyfBJZSyHEZvUczi6DqDJFTgxFY5w@mail.gmail.com>
+From: Beniamin Sandu <beniaminsandu@gmail.com>
+Date: Tue, 20 Jun 2023 19:38:30 +0300
+Message-ID: <CABQJdOGC2edPg50oOW6QhwiTxvH=Lxp97k8zoEBRVz5Y1ta-vA@mail.gmail.com>
+Subject: Re: [oe] [meta-networking][PATCH] mdns: remove unneeded headers
+To: Alex Kiernan <alex.kiernan@gmail.com>
+Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DM6NAM11FT057:EE_|SA1PR12MB6969:EE_
-X-MS-Office365-Filtering-Correlation-Id: 32b21de5-66e6-4bc3-ced6-08db71a498fe
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 
-	ZmA1JBAd6t24RjO4zmnTE9bXgPzz5Jc6z4QoQ8ecxN7XBNdx6DLj53fg0ERU4Fx5HVEImuqFBBuEj3RYIkAutoYnNmjQ2akVB/TH4M+pVsLoxntBJ+prJ5gYeJ1PtUg7FYwmfdY3Qjgl4F+yOiOw6jJps9UhGlWFts7WERCeG8rrdnTUlKsTsP6LvF0H9kENAWZIQ8ChyH+AuGCdLmwoW3THXGq7KbQ9Xg+EjDanjOeBI9ST7806eBEUrnVWPuT2nZpIkY7GFg4Br/8pNfxg8YbNTK9ByYW4cRzAN4IKlX4cx7YICwEBgGZDfKkdUx+4NZCCq8uJwV0lt9Fai7CD+ToIyPt9ba24xVZDVHQmBr/PYUKnfYOTN92u5sDPCgunOTfVzahdC6BnBiFptpQTn1wRlEjZ4SZRGwb5eUgz+Kh8/ffYBL3F8oB+rnGFsjPlcstI0xlGh+JmV6udtsEZpf2gZk3RX9rfMjTRLAdGeEASvgrVEIbupVoBZHsLS3jbBOcbsTw7668ufObhDNE3HsQruhjabd3Qd1lh65GjZ62CgNc8HWo8VSp9KnyJEb2ycfXiIzCaWg5pd486hBLheVLNV8v7A82KXSUssvSYYF9wVK1gc3O2nrxox4knkdWBCy5dYRoEauH1dGfeCsMZ4CDtE76HUb0ug7JTQbmHpoOpItvmOwnP7rQOOHwYQaJc7BxvMhhvPMNEuwlSvJ2sfGEK92cAgx54ASmD/ybTBEHlVPwK7thshSJ5gN179jKN7o+5+voapcd/Zpx2fyddcA==
-X-Forefront-Antispam-Report: 
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230028)(4636009)(346002)(136003)(376002)(39860400002)(396003)(451199021)(36840700001)(46966006)(40470700004)(70206006)(70586007)(40460700003)(316002)(4326008)(186003)(356005)(81166007)(2616005)(82310400005)(86362001)(26005)(82740400003)(36860700001)(47076005)(1076003)(83380400001)(336012)(426003)(478600001)(110136005)(54906003)(40480700001)(36756003)(2906002)(5660300002)(8936002)(6666004)(8676002)(41300700001)(36900700001);DIR:OUT;SFP:1101;
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Jun 2023 15:39:55.7687
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 32b21de5-66e6-4bc3-ced6-08db71a498fe
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: 
-	DM6NAM11FT057.eop-nam11.prod.protection.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR12MB6969
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 20 Jun 2023 15:40:05 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103459
+ <openembedded-devel@lists.openembedded.org>; Tue, 20 Jun 2023 16:38:48 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103460
 
-This reverts commit 0abf5af3ffd3d13c009a8ffcd5a6f045c36be837
+On Tue, Jun 20, 2023 at 4:12=E2=80=AFPM Beniamin Sandu <beniaminsandu@gmail=
+.com> wrote:
+>
+> On Tue, Jun 20, 2023 at 3:42=E2=80=AFPM Alex Kiernan <alex.kiernan@gmail.=
+com> wrote:
+> >
+> > On Tue, Jun 20, 2023 at 1:03=E2=80=AFPM Alex Kiernan via
+> > lists.openembedded.org <alex.kiernan=3Dgmail.com@lists.openembedded.org=
+>
+> > wrote:
+> > >
+> > > On Tue, Jun 20, 2023 at 11:53=E2=80=AFAM Beniamin Sandu <beniaminsand=
+u@gmail.com> wrote:
+> > > >
+> > > > On Tue, Jun 20, 2023 at 12:56=E2=80=AFPM Alex Kiernan <alex.kiernan=
+@gmail.com> wrote:
+> > > > >
+> > > > > On Mon, Jun 19, 2023 at 8:38=E2=80=AFPM Beniamin Sandu <beniamins=
+andu@gmail.com> wrote:
+> > > > > >
+> > > > > > I am trying to add a v3.x mbedtls recipe to master branch, and =
+without
+> > > > >
+> > > > > Sorry, was reading the thread out of order and missed that you we=
+re
+> > > > > trying to add an Mbed TLS 3 recipe!
+> > > > >
+> > > > > > this patch, mdns does not build. I could not find an obvious wa=
+y to
+> > > > > > submit upstream patches to mdns from a quick search, otherwise =
+I would
+> > > > > > gladly do it.
+> > > > > >
+> > > > >
+> > > > > Several folk have tried sending them to dts@apple.com (seemingly
+> > > > > without success), there's also a couple of attempted PRs on githu=
+b
+> > > > > (again seemingly going nowhere). Winding back about 20 years, I t=
+ried
+> > > > > to get a bunch of portability fixes into the Quicktime Streaming
+> > > > > Server without success - the model appears to very much be open
+> > > > > source, not open contribution.
+> > > > >
+> > > > > > While I am with you on trying to reduce technical debt within y=
+octo
+> > > > > > layers, this one is very small and rather harmless, so I hope w=
+e can
+> > > > > > make a sacrifice for the greater good. :)
+> > > > > >
+> > > > >
+> > > > > I'm guessing we'll need to scope an Mbed TLS 3 recipe as being
+> > > > > explicitly mbedtls3_...? So sticking with 2.x doesn't feel like a
+> > > > > terrible option, but I agree its not ideal.
+> > > >
+> > > > This also sounds like a fairly decent option, having a separate
+> > > > mbedtls3 package might make it easier in general, although I am not
+> > > > aware of how used the current v2 version actually is.
+> > > >
+> > >
+> > > Looks like we're out of date (there's a 2.28.3), but it's still
+> > > supported for now... "Mbed TLS 2.28 is a long-time support branch. It
+> > > will be supported with bug-fixes and security fixes until end of
+> > > 2024."
+> > >
+> >
+> > Will send an update for 2.28.3, but constrain `devtool upgrade` to
+> > things on the 2.x branch
+> >
+> > One thought on 3.x - if mdns is the only failure maybe rename the
+> > current recipe to mbedtls2_% and add 3.x as mbedtls_% and then fix up
+> > the mdns recipe to consume mbedtls2?
+> >
+>
+> Personally I would say it is not worth to do it, just because of this
+> one package. Plus, it's building fine with both versions by including
+> this small patch, but maybe Khem Raj can chime in with an opinion
+> here.
+>
 
-libopencv-ts package is not empty and libopencv_ts libraries are
-not all installed in the -dev package, these libraries are needed
-for sdk development listed in opencv4.pc file.
+While looking through some stuff, I discovered some variable I had no
+idea exists, called DEFAULT_PREFERENCE:
+https://docs.yoctoproject.org/ref-manual/variables.html#term-DEFAULT_PREFER=
+ENCE
 
-Signed-off-by: Sandeep Gundlupet Raju <sandeep.gundlupet-raju@amd.com>
----
- meta-oe/recipes-support/opencv/opencv_4.7.0.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Seems it could be a very simple way to make mbedtls v2 be the
+"default" version unless specified by user through PREFERRED_PROVIDER?
 
-diff --git a/meta-oe/recipes-support/opencv/opencv_4.7.0.bb b/meta-oe/recip=
-es-support/opencv/opencv_4.7.0.bb
-index d02fd34ae..a1fbaaa09 100644
---- a/meta-oe/recipes-support/opencv/opencv_4.7.0.bb
-+++ b/meta-oe/recipes-support/opencv/opencv_4.7.0.bb
-@@ -163,7 +163,7 @@ python populate_packages:prepend () {
-=20
-     metapkg =3D  pn
-     d.setVar('ALLOW_EMPTY:' + metapkg, "1")
--    blacklist =3D [ metapkg, "libopencv-ts" ]
-+    blacklist =3D [ metapkg ]
-     metapkg_rdepends =3D [ ]
-     for pkg in packages[1:]:
-         if not pkg in blacklist and not pkg in metapkg_rdepends and not pk=
-g.endswith('-dev') and not pkg.endswith('-dbg') and not pkg.endswith('-doc'=
-) and not pkg.endswith('-locale') and not pkg.endswith('-staticdev'):
---=20
-2.34.1
-
+> > > > >
+> > > > > My concern isn't really with the one liner now, its the how hard =
+does
+> > > > > it become to do the upgrades down the road - if we suddenly can't
+> > > > > upgrade because upstream's stuck on 2.x and there's something
+> > > > > incompatible with 3.x what do we do?
+> > > > >
+> > > > > > Cheers,
+> > > > > > Beni
+> > > > > >
+> > > > > >
+> > > > > > On Mon, Jun 19, 2023 at 10:14=E2=80=AFPM Alex Kiernan <alex.kie=
+rnan@gmail.com> wrote:
+> > > > > > >
+> > > > > > > Keeping up with Apple given they take nothing is frankly a ri=
+ght pain, adding things which are nice to have rather than just broken seem=
+s like we're just adding to the problem. Last time I resynchronized this it=
+ took me days, unless there's a really good reason to do this, or there's a=
+ way to get it upstreamed I'd rather we didn't.
+> > > > > > >
+> > > > > > >
+> > > > > > > On Mon, 19 Jun 2023, 19:20 Beniamin Sandu, <beniaminsandu@gma=
+il.com> wrote:
+> > > > > > >>
+> > > > > > >> Signed-off-by: Beniamin Sandu <beniaminsandu@gmail.com>
+> > > > > > >> ---
+> > > > > > >>  .../mdns/0009-remove-unneeded-headers.patch   | 33 ++++++++=
++++++++++++
+> > > > > > >>  .../recipes-protocols/mdns/mdns_1790.80.10.bb |  1 +
+> > > > > > >>  2 files changed, 34 insertions(+)
+> > > > > > >>  create mode 100644 meta-networking/recipes-protocols/mdns/m=
+dns/0009-remove-unneeded-headers.patch
+> > > > > > >>
+> > > > > > >> diff --git a/meta-networking/recipes-protocols/mdns/mdns/000=
+9-remove-unneeded-headers.patch b/meta-networking/recipes-protocols/mdns/md=
+ns/0009-remove-unneeded-headers.patch
+> > > > > > >> new file mode 100644
+> > > > > > >> index 000000000..74d387368
+> > > > > > >> --- /dev/null
+> > > > > > >> +++ b/meta-networking/recipes-protocols/mdns/mdns/0009-remov=
+e-unneeded-headers.patch
+> > > > > > >> @@ -0,0 +1,33 @@
+> > > > > > >> +From 1d7e71e72c597ffcc19c04373a477d1fbd3ad955 Mon Sep 17 00=
+:00:00 2001
+> > > > > > >> +From: Beniamin Sandu <beniaminsandu@gmail.com>
+> > > > > > >> +Date: Thu, 15 Jun 2023 17:02:58 +0000
+> > > > > > >> +Subject: [PATCH] remove unneeded headers
+> > > > > > >> +
+> > > > > > >> +From a quick look, these seem to not be needed and having t=
+hem
+> > > > > > >> +breaks the build with mbedtls 3.x. Without them it builds f=
+ine
+> > > > > > >> +on both 2.x and 3.x versions.
+> > > > > > >> +
+> > > > > > >> +Upstream-Status: Pending
+> > > > > > >> +
+> > > > > > >> +Signed-off-by: Beniamin Sandu <beniaminsandu@gmail.com>
+> > > > > > >> +---
+> > > > > > >> + mDNSPosix/mbedtls.c | 2 --
+> > > > > > >> + 1 file changed, 2 deletions(-)
+> > > > > > >> +
+> > > > > > >> +diff --git a/mDNSPosix/mbedtls.c b/mDNSPosix/mbedtls.c
+> > > > > > >> +index a73681b..ab8f8c7 100644
+> > > > > > >> +--- a/mDNSPosix/mbedtls.c
+> > > > > > >> ++++ b/mDNSPosix/mbedtls.c
+> > > > > > >> +@@ -38,10 +38,8 @@
+> > > > > > >> + #include <mbedtls/sha256.h>
+> > > > > > >> + #include <mbedtls/base64.h>
+> > > > > > >> +
+> > > > > > >> +-#include <mbedtls/certs.h>
+> > > > > > >> + #include <mbedtls/x509.h>
+> > > > > > >> + #include <mbedtls/ssl.h>
+> > > > > > >> +-#include <mbedtls/config.h>
+> > > > > > >> +
+> > > > > > >> + // Posix TLS server context
+> > > > > > >> + struct TLSContext_struct {
+> > > > > > >> +--
+> > > > > > >> +2.34.1
+> > > > > > >> diff --git a/meta-networking/recipes-protocols/mdns/mdns_179=
+0.80.10.bb b/meta-networking/recipes-protocols/mdns/mdns_1790.80.10.bb
+> > > > > > >> index 612d343c8..46f1b70cb 100644
+> > > > > > >> --- a/meta-networking/recipes-protocols/mdns/mdns_1790.80.10=
+.bb
+> > > > > > >> +++ b/meta-networking/recipes-protocols/mdns/mdns_1790.80.10=
+.bb
+> > > > > > >> @@ -21,6 +21,7 @@ SRC_URI =3D "git://github.com/apple-oss-di=
+stributions/mDNSResponder;protocol=3Dhttps
+> > > > > > >>             file://0006-Handle-noisy-netlink-sockets.patch \
+> > > > > > >>             file://0007-Mark-deleted-interfaces-as-being-cha=
+nged.patch \
+> > > > > > >>             file://0008-Handle-errors-from-socket-calls.patc=
+h \
+> > > > > > >> +           file://0009-remove-unneeded-headers.patch \
+> > > > > > >>             file://mdns.service \
+> > > > > > >>             "
+> > > > > > >>  SRCREV =3D "8769ab51605e465425d33d757f602ce5905ca639"
+> > > > > > >> --
+> > > > > > >> 2.25.1
+> > > > > > >>
+> > > > > > >>
+> > > > > > >>
+> > > > > > >>
+> > > > >
+> > > > >
+> > > > >
+> > > > > --
+> > > > > Alex Kiernan
+> > >
+> > >
+> > >
+> > > --
+> > > Alex Kiernan
+> > >
+> > > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> > > Links: You receive all messages sent to this group.
+> > > View/Reply Online (#103455): https://lists.openembedded.org/g/openemb=
+edded-devel/message/103455
+> > > Mute This Topic: https://lists.openembedded.org/mt/99629056/3618097
+> > > Group Owner: openembedded-devel+owner@lists.openembedded.org
+> > > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsu=
+b [alex.kiernan@gmail.com]
+> > > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> > >
+> >
+> >
+> > --
+> > Alex Kiernan
 
