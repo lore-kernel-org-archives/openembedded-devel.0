@@ -1,145 +1,99 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <Martin.Jansa@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3FC9DEB64D8
-	for <webhook@archiver.kernel.org>; Wed, 21 Jun 2023 16:04:43 +0000 (UTC)
-Received: from mail-oo1-f50.google.com (mail-oo1-f50.google.com [209.85.161.50])
- by mx.groups.io with SMTP id smtpd.web11.2626.1687363480919075048
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 75E93EB64DC
+	for <webhook@archiver.kernel.org>; Wed, 21 Jun 2023 16:09:33 +0000 (UTC)
+Received: from mail-ed1-f48.google.com (mail-ed1-f48.google.com [209.85.208.48])
+ by mx.groups.io with SMTP id smtpd.web10.2601.1687363765168454518
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 21 Jun 2023 09:04:41 -0700
+ Wed, 21 Jun 2023 09:09:25 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=nTkj/MeY;
- spf=pass (domain: gmail.com, ip: 209.85.161.50, mailfrom: raj.khem@gmail.com)
-Received: by mail-oo1-f50.google.com with SMTP id 006d021491bc7-55e299e1d02so3479902eaf.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 21 Jun 2023 09:04:40 -0700 (PDT)
+ dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=fT1P0iyL;
+ spf=pass (domain: gmail.com, ip: 209.85.208.48, mailfrom: martin.jansa@gmail.com)
+Received: by mail-ed1-f48.google.com with SMTP id 4fb4d7f45d1cf-51bde6a8c20so788062a12.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 21 Jun 2023 09:09:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1687363480; x=1689955480;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=qpGF9Eq74Xo/CGzkmVwenNhX6FHuKjpftvcdQt1+Ja8=;
-        b=nTkj/MeY81d+kpISnlW1tX8IGvweNzGFya4t8wqpm75HWhfNiYlUl/6KvfaGp+kqd/
-         qKMkZScglV5sLiBJvFMlqqZ61vqA3fnZ4/bEEi+rFwzNlAphPAkdooLk1fFbHh+LDUI0
-         hVKSY5b/+XT4GC5AaFUM6AIrTu5TXsDQkDJ4vlLZ/v9N6P837EuEbOYKucEfhNHjxgo8
-         Hgy2HJnn8baQmQeDDeQJbH7z2b4P30vToJv8QWXCCMWjx6VIZHw6xoy3yBEqSeZiahhc
-         CYoGUBKzC4K/uIeQ78yf8391Vsc7EM7ocTI/OjVssR/ULujZvY6FcgiW8qe+uBEp1Ffd
-         D9+g==
+        d=gmail.com; s=20221208; t=1687363763; x=1689955763;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=HkJauUF18xer1Gy6nmuiPR5BnXJb+qsb3T2mqZHd+5g=;
+        b=fT1P0iyLFHFQgxCnkwpQcDl1mPSoZImgfjcI09+jsVuA0TP9h63ZZmJUY3GLAHuJFP
+         bOWDMv7Qlw5XbBBIMDe12JmPrdrzEEIh3toaook0Vl2qDrFN/Q0xLumoBMQRSr4zRJ+0
+         vXSx2BxpaHhmimt/m+sN13pOtYw604ZQceOiAVPyzOhSSkmz2Yz1STpg05wnS/5p4CS1
+         XR4uM60y/+1J993TWtB9uMtavB6m+8Es7CaxH7ijRL/KqutVuGJFb3mORW952iKc0WCV
+         cY1S5L9gNslc0YwcefFKckhKYzbJ8mlGQ8GD1P+rd1m9Fe3SCh1Lz9N7NGawBuTqCxZN
+         28rA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1687363480; x=1689955480;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=qpGF9Eq74Xo/CGzkmVwenNhX6FHuKjpftvcdQt1+Ja8=;
-        b=ZTWXNbLXWa/Q9hO5iqs77zkDFhO1y7JvvR2W6kkrOCjNe+gUJ4ARU3+XmsyuxiznCh
-         SLb4M4CwwT5viC+ZeC9hUSGFcXVPNmJ7aqskgYyRT5RwZyXgOgC0YAa09LCRYVjPqxkI
-         PKnSGHli1VN2UBbZhk5s61uxlQl9DO6TquvVlNPsSi7PtIGyhvZlRgVdasTEZ54nC9NZ
-         25YZ2bnNmV1Ze+3NKbeWp6156G6WcZG9Adgk4hBmzSMkLvPivWM7IGiiG0towHG9kBNi
-         hY31Hzwi8HwYM54AkTkCwOqTYg8FD9drEYWG+6WRUANPKuzRX2oaqCboquTjyEGHepA9
-         lG4w==
-X-Gm-Message-State: AC+VfDx4pZaZHso4M52dtC7R0y8d3GdyzozNmYsPU9PQRza5AGV3m55J
-	6X1N7BfqebhKcM2LolAoN+5TtyWohlLkGRYnZ3E=
-X-Google-Smtp-Source: ACHHUZ7iAH6V4iNx0nv2PzRB2a2L5f46b30IvCFRG9eWsRKfRBQhuIiF/ugWc4QMoktn4LYPm7Z/gBiwwzbj/DPM8Ro=
-X-Received: by 2002:a05:6820:614:b0:55e:5c65:c6cd with SMTP id
- e20-20020a056820061400b0055e5c65c6cdmr8295420oow.6.1687363480030; Wed, 21 Jun
- 2023 09:04:40 -0700 (PDT)
+        d=1e100.net; s=20221208; t=1687363763; x=1689955763;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=HkJauUF18xer1Gy6nmuiPR5BnXJb+qsb3T2mqZHd+5g=;
+        b=GYHL5iHxf/zHeXkpUh9i6P2ctw/xWsSYjWWt87tVcMK6SktE1x/47rcuHsFk4cH5iZ
+         cSquNajeA7z8ySFqRDFZxQstFMEQdio7374L069QgnUnAbxmJjXtEnCLo49Lg1TvliB/
+         8IQUlKi3RzUpJCEz+zfJ98Bc5YBgD8ZHyHjxhUbXymgDzh7pD1Tg3h4zpXRg+RZ/dv+p
+         p5GN9zHNIU00ikC1RY4jIh3vPGvQgAg5eD7oecsj/Cxs9YPec5CXRc/q/ABEDQEKWrkl
+         Hxjh+gnVZqVZkH2FLTg9scKq161Vt9F2uI5VSQnBuC/PGs5UT7gC6hEUB+2ReIG2YASO
+         qV1w==
+X-Gm-Message-State: AC+VfDxA2cVdbcDtyC8+dVBA/ahi+gyA5m1GohH7IsehMqaZ9ehUvyWk
+	RonxIPhjbLcJVwwfnxPVmmzUB1TJSeM=
+X-Google-Smtp-Source: ACHHUZ5eopg3coZtj23dFVaDJOsBRrGwqa0b43DJUpoBRsfE5Sb1hRr/OycCtvABPfXcpriN2CyHGw==
+X-Received: by 2002:aa7:d1d4:0:b0:51a:5ae1:b6e5 with SMTP id g20-20020aa7d1d4000000b0051a5ae1b6e5mr6063091edp.10.1687363763345;
+        Wed, 21 Jun 2023 09:09:23 -0700 (PDT)
+Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
+        by smtp.gmail.com with ESMTPSA id ay15-20020a056402202f00b0051a26ce312dsm2839769edb.71.2023.06.21.09.09.22
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 21 Jun 2023 09:09:23 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Martin Jansa <Martin.Jansa@gmail.com>
+Subject: [meta-oe][PATCHv2 1/2] postfix: fix malformed Upstream-Status
+Date: Wed, 21 Jun 2023 18:09:10 +0200
+Message-ID: <20230621160912.4193765-1-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.41.0
 MIME-Version: 1.0
-References: <20230621143552.4140867-1-raj.khem@gmail.com> <CA+chaQenARDweHmhx8EZztpDfhBfJPPNMDXtFaEhDh-Jo2Akbg@mail.gmail.com>
-In-Reply-To: <CA+chaQenARDweHmhx8EZztpDfhBfJPPNMDXtFaEhDh-Jo2Akbg@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 21 Jun 2023 09:04:13 -0700
-Message-ID: <CAMKF1srO_BbuW82vvK=u-DQx3NgUyC67ndfZmjcjxvUWHSVnUA@mail.gmail.com>
-Subject: Re: [oe] [meta-networking][PATCH] postfix: Fix Upstream-Status keyword
-To: Martin Jansa <martin.jansa@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 21 Jun 2023 16:04:43 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103477
+ <openembedded-devel@lists.openembedded.org>; Wed, 21 Jun 2023 16:09:33 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103478
 
-yeah send a v2
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ .../recipes-daemons/postfix/files/0001-Fix-makedefs.patch       | 2 +-
+ ...2-Change-fixed-postconf-to-a-variable-for-cross-compil.patch | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
-On Wed, Jun 21, 2023 at 8:52=E2=80=AFAM Martin Jansa <martin.jansa@gmail.co=
-m> wrote:
->
-> On Wed, Jun 21, 2023 at 4:35=E2=80=AFPM Khem Raj <raj.khem@gmail.com> wro=
-te:
->>
->> Signed-off-by: Khem Raj <raj.khem@gmail.com>
->> ---
->>  .../recipes-daemons/postfix/files/0001-Fix-makedefs.patch      | 2 +-
->>  ...-Change-fixed-postconf-to-a-variable-for-cross-compil.patch | 3 +--
->>  2 files changed, 2 insertions(+), 3 deletions(-)
->>
->> diff --git a/meta-networking/recipes-daemons/postfix/files/0001-Fix-make=
-defs.patch b/meta-networking/recipes-daemons/postfix/files/0001-Fix-makedef=
-s.patch
->> index aa93083802..bacfdb5e67 100644
->> --- a/meta-networking/recipes-daemons/postfix/files/0001-Fix-makedefs.pa=
-tch
->> +++ b/meta-networking/recipes-daemons/postfix/files/0001-Fix-makedefs.pa=
-tch
->> @@ -11,7 +11,7 @@ for Linux2 and Linux3 systems.
->>    native build, search host library path for nsl and resolv library
->>    which comes from libc
->>
->> -Upstreamstatus: Inappropriate [embedded specific]
->> +Upstream-Status: Inappropriate [embedded specific]
->>
->>  Signed-off-by: Yao Zhao <yao.zhao@windriver.com>
->>  ---
->
->
-> Thanks Khem!
->
-> Sorry I should have spotted these when sending my Pending additions (the =
-regex in scripts/contrib/patchreview.py isn't wide enough to catch "Upstrea=
-mstatus" as well.
->
-> In this 0001-Fix-makedefs.patch there is also "Upstream-Status: Pending" =
-added by my change, if you can drop it here (or let me know if you want v2 =
-of my change with these 2 fixed).
->
-> Cheers,
->
->> diff --git a/meta-networking/recipes-daemons/postfix/files/0002-Change-f=
-ixed-postconf-to-a-variable-for-cross-compil.patch b/meta-networking/recipe=
-s-daemons/postfix/files/0002-Change-fixed-postconf-to-a-variable-for-cross-=
-compil.patch
->> index 6eee817716..8420b496a3 100644
->> --- a/meta-networking/recipes-daemons/postfix/files/0002-Change-fixed-po=
-stconf-to-a-variable-for-cross-compil.patch
->> +++ b/meta-networking/recipes-daemons/postfix/files/0002-Change-fixed-po=
-stconf-to-a-variable-for-cross-compil.patch
->> @@ -3,11 +3,10 @@ From: Li xin <lixin.fnst@cn.fujitsu.com>
->>  Date: Fri, 19 Jun 2015 17:14:58 +0900
->>  Subject: [PATCH] Change fixed postconf to a variable for cross-compilin=
-g
->>
->> -Upstreamstatus: Inappropriate [embedded specific]
->> +Upstream-Status: Inappropriate [embedded specific]
->>
->>  Signed-off-by: Yao Zhao <yao.zhao@windriver.com>
->>  ---
->> -Upstream-Status: Pending
->>
->>   Makefile.in     |  2 +-
->>   postfix-install | 18 ++++++++++--------
->> --
->> 2.41.0
->>
->>
->> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->> Links: You receive all messages sent to this group.
->> View/Reply Online (#103474): https://lists.openembedded.org/g/openembedd=
-ed-devel/message/103474
->> Mute This Topic: https://lists.openembedded.org/mt/99677348/3617156
->> Group Owner: openembedded-devel+owner@lists.openembedded.org
->> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [=
-Martin.Jansa@gmail.com]
->> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->>
+diff --git a/meta-networking/recipes-daemons/postfix/files/0001-Fix-makedefs.patch b/meta-networking/recipes-daemons/postfix/files/0001-Fix-makedefs.patch
+index e83085d20d..8c9c13b1c4 100644
+--- a/meta-networking/recipes-daemons/postfix/files/0001-Fix-makedefs.patch
++++ b/meta-networking/recipes-daemons/postfix/files/0001-Fix-makedefs.patch
+@@ -11,7 +11,7 @@ for Linux2 and Linux3 systems.
+   native build, search host library path for nsl and resolv library
+   which comes from libc
+ 
+-Upstreamstatus: Inappropriate [embedded specific]
++Upstream-Status: Inappropriate [embedded specific]
+ 
+ Signed-off-by: Yao Zhao <yao.zhao@windriver.com>
+ ---
+diff --git a/meta-networking/recipes-daemons/postfix/files/0002-Change-fixed-postconf-to-a-variable-for-cross-compil.patch b/meta-networking/recipes-daemons/postfix/files/0002-Change-fixed-postconf-to-a-variable-for-cross-compil.patch
+index 347b9de0a3..28199ccdd2 100644
+--- a/meta-networking/recipes-daemons/postfix/files/0002-Change-fixed-postconf-to-a-variable-for-cross-compil.patch
++++ b/meta-networking/recipes-daemons/postfix/files/0002-Change-fixed-postconf-to-a-variable-for-cross-compil.patch
+@@ -3,7 +3,7 @@ From: Li xin <lixin.fnst@cn.fujitsu.com>
+ Date: Fri, 19 Jun 2015 17:14:58 +0900
+ Subject: [PATCH] Change fixed postconf to a variable for cross-compiling
+ 
+-Upstreamstatus: Inappropriate [embedded specific]
++Upstream-Status: Inappropriate [embedded specific]
+ 
+ Signed-off-by: Yao Zhao <yao.zhao@windriver.com>
+ ---
+-- 
+2.41.0
+
 
