@@ -1,174 +1,155 @@
-Return-Path: <alex.kiernan@gmail.com>
+Return-Path: <brgl@bgdev.pl>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1A106EB64D7
-	for <webhook@archiver.kernel.org>; Wed, 21 Jun 2023 06:39:45 +0000 (UTC)
-Received: from mail-wm1-f48.google.com (mail-wm1-f48.google.com [209.85.128.48])
- by mx.groups.io with SMTP id smtpd.web11.5170.1687329580029959866
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2F276EB64D7
+	for <webhook@archiver.kernel.org>; Wed, 21 Jun 2023 09:51:06 +0000 (UTC)
+Received: from mail-vk1-f171.google.com (mail-vk1-f171.google.com [209.85.221.171])
+ by mx.groups.io with SMTP id smtpd.web11.7087.1687341060748964910
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 20 Jun 2023 23:39:40 -0700
+ Wed, 21 Jun 2023 02:51:01 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=FdIWyQsc;
- spf=pass (domain: gmail.com, ip: 209.85.128.48, mailfrom: alex.kiernan@gmail.com)
-Received: by mail-wm1-f48.google.com with SMTP id 5b1f17b1804b1-3f90b4ac529so41112075e9.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 20 Jun 2023 23:39:39 -0700 (PDT)
+ dkim=pass header.i=@bgdev-pl.20221208.gappssmtp.com header.s=20221208 header.b=A4Uf6N9p;
+ spf=none, err=SPF record not found (domain: bgdev.pl, ip: 209.85.221.171, mailfrom: brgl@bgdev.pl)
+Received: by mail-vk1-f171.google.com with SMTP id 71dfb90a1353d-4714e9f070bso1787963e0c.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 21 Jun 2023 02:51:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1687329578; x=1689921578;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=vFNC2lw2NI24GOQKCgtxHdgMOZsWUP0KCixu31DcMIA=;
-        b=FdIWyQscMZBO5ulVV/2eVknDd2LHhwKCWD/YbByONSJs8XZmJ4NCkkYi3xvpJm/4tN
-         VU+eRVFqBH+yjavpTVP1goQs8rkyspd8Q7Ksiw3hqxF1IyTzLnG9jDTjwC4AkJluQynx
-         kwdZ7AMJSQjzZh0tsWpXNwsLPHUFI0hzlm8Hc9lN0J7I1YItlMwfpST3ShRRzy8bqMJc
-         vzO1iPpxu0bWgM0Oz4Y3uoqCN6oItZumsw0i+rNmKh0wntG4TY0PUqQxJj5031sB5nwT
-         2ct++nPEUhwAfbXcVYPOq/QiTtNay4mTjb9U6LeFxAsi3XqFJxJ8n5R4AjALiPWslUhz
-         EsUQ==
+        d=bgdev-pl.20221208.gappssmtp.com; s=20221208; t=1687341059; x=1689933059;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=lPf2/QNAExyafyV5DYZXUFFh6/Ul3p2DHmpi+4QpSbk=;
+        b=A4Uf6N9pB65sZYAb4zASQYhg2NxY1v4sBUUVEw6emeeajkvkz4VViOrCDqXn4tV9Rk
+         CXa7hMOjes4dt3av6cNPd1Y0vs5ydtU/Rgck5OaxYU+JX13Ljh6sjDcCJkNPmkhEIpiw
+         +U7m1k0em0WfS8MKFBo1t7xr2iypfYOm8T/1zZtH7cHkw4KLEqv8Vv137R4/c1Z6Ct7Z
+         gH9JYfDaSYSOfm9vDdTzYSQ3zoUOw2i3P2zDahK2ooBR25XTZh9iZXLpP+yhoV9v1a/i
+         l0c3Be2fM3d/H7Dq2bCMOvuk7GCYQ+gj4vxaW0fmhWvCxJGhumpz4HbPUvSqHHnNmsZS
+         H6Ww==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1687329578; x=1689921578;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=vFNC2lw2NI24GOQKCgtxHdgMOZsWUP0KCixu31DcMIA=;
-        b=PMkIKSoPukG4VUfLcs2S26SZ1N/Frw+gBEnaEmO13pzYLFBaRI2rRMlzJ5x+d/C+WZ
-         AKnMSSnwSHN5mSMXPYAshQPMfE2HSaY6OXL4DAqemBZRr/seHKnkQy8QyiX51bocENl2
-         dQf4Pnr82Ch26MXrYnETgkt7xEGZYX5xbWAs+K1ePRDU5+e4oqYF5cRxhntfwQ5ENW32
-         p04SqbjwZeMEVRMcR8PtUN1kIgvJF5wZfJjLJElHvU0NU5Hs/vF3zWiCa1oSOxpoqpT9
-         2tELVHsjpgko+61BzJW5i8mIdXEbeV9OPaECvZPkF2P9YpYmkSJKX6ioYPWbu0TSWerz
-         8EJw==
-X-Gm-Message-State: AC+VfDysFGNbzBwdtb5UK3SJ2MBN0hZ48EHscgVkfEXXzSsPrRyHHYeq
-	dCQNMAGepeBE2rqrA1V+GlstvEgz+Y0=
-X-Google-Smtp-Source: ACHHUZ5WXSzzDKATeyBpupuKb3ko4NXkIfC7OIb+QzGi0/LURgWLem/ujz+zwG7HJx9ZjvhcoKdhMQ==
-X-Received: by 2002:a7b:c41a:0:b0:3f9:bdcd:e6dd with SMTP id k26-20020a7bc41a000000b003f9bdcde6ddmr867707wmi.39.1687329577878;
-        Tue, 20 Jun 2023 23:39:37 -0700 (PDT)
-Received: from localhost.localdomain (cust18-dsl93-89-130.idnet.net. [93.89.130.18])
-        by smtp.gmail.com with ESMTPSA id h25-20020a1ccc19000000b003f42158288dsm15117815wmb.20.2023.06.20.23.39.37
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 20 Jun 2023 23:39:37 -0700 (PDT)
-From: Alex Kiernan <alex.kiernan@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Alex Kiernan <alex.kiernan@gmail.com>
-Subject: [meta-oe][PATCH] ostree: Upgrade 2023.3 -> 2023.4
-Date: Wed, 21 Jun 2023 07:39:29 +0100
-Message-Id: <20230621063929.18341-1-alex.kiernan@gmail.com>
-X-Mailer: git-send-email 2.39.0
+        d=1e100.net; s=20221208; t=1687341059; x=1689933059;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=lPf2/QNAExyafyV5DYZXUFFh6/Ul3p2DHmpi+4QpSbk=;
+        b=BmeQPUYjSY6PKOfVlqLdmYgXenMAGpms48/yp2YRmOSxvrUkdJp9a5SKWA3BL+codd
+         4oniByZDMNHkFoNsJ/6EEcd/a4Tft3I9zL/tnO19uFuoQp0WbBtrB2hVJD/ZNdZKStz/
+         DYdPkMJalgXWA+aW5J55VYKn2Pa6DK3kiaLw/c+Wck8rcZ31Nin4i3yFqbKJhkuCO01V
+         C5u3FfITmlOI+AnSa78BuKyQnqNH8nGoToVyxk2r/ao2bmvq93VOma4c/dROxMsK9QAe
+         w/399+5Btuf5Sv4VtlqyB1JL0u4r7ZLxH5TCwNtkBz1d1j5GQX94JXgu835kFo+vyRUd
+         6K6w==
+X-Gm-Message-State: AC+VfDwjOpU3h6JXRhRNb2ZF6ga7kWZL8Xpj/HFF4QaylqwyZFHhF1i4
+	YUwTfkOw04Jy9KPnZF7+fd//ndsyBX+RQWgii7j2Dw==
+X-Google-Smtp-Source: ACHHUZ7INzwuUp30B0qvT7aapklStrfhH6CPfP4smw1RChUT1QNscs9NPS9eCEIjhCudkpE2KHwjA8e4/PWYDVWj8O0=
+X-Received: by 2002:a1f:bf92:0:b0:471:2aa6:41f6 with SMTP id
+ p140-20020a1fbf92000000b004712aa641f6mr4886651vkf.2.1687341059576; Wed, 21
+ Jun 2023 02:50:59 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20230619132214.213417-1-brgl@bgdev.pl> <20230619132214.213417-2-brgl@bgdev.pl>
+ <5a677745-c6a2-bd0a-5507-98bc3b185877@gmail.com> <CAMKF1sq=L-GyguojmkSd4KD9Aq5mAEaM9O-pUnECZqhzdrfetQ@mail.gmail.com>
+ <CAMKF1sp403GSqm3iA99qrw-14zLbbViwQ68AOK6XhUKN4kBK3w@mail.gmail.com>
+In-Reply-To: <CAMKF1sp403GSqm3iA99qrw-14zLbbViwQ68AOK6XhUKN4kBK3w@mail.gmail.com>
+From: Bartosz Golaszewski <brgl@bgdev.pl>
+Date: Wed, 21 Jun 2023 11:50:48 +0200
+Message-ID: <CAMRc=MdvdXOQgTooZCeRD01VG+TwhiO6qtZNO25SCF1DN1qxpw@mail.gmail.com>
+Subject: Re: [meta-python][RESEND PATCH 01/54] python3-pywbem: drop unneeded
+ class from RDEPENDS
+To: Khem Raj <raj.khem@gmail.com>
+Cc: Bruce Ashfield <bruce.ashfield@gmail.com>, openembedded-devel@lists.openembedded.org, 
+	Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 21 Jun 2023 06:39:45 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103469
+ <openembedded-devel@lists.openembedded.org>; Wed, 21 Jun 2023 09:51:06 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103470
 
-Drop upstreamed gpg_strerror_r fix.
+On Tue, Jun 20, 2023 at 8:15=E2=80=AFPM Khem Raj <raj.khem@gmail.com> wrote=
+:
+>
+> Some more dep failures on parse
+>
+> 23:11:18 ERROR: Nothing RPROVIDES 'python3-nocasedict-native' (but
+> virtual:native:/mnt/jenkins/workspace/Yocto-world-musl/sources/meta-opene=
+mbedded/meta-python/recipes-extended/pywbem/python3-pywbem_1.6.1.bb
+> RDEPENDS on or otherwise requires it)
+> 23:11:18 NOTE: Runtime target 'python3-nocasedict-native' is
+> unbuildable, removing...
+> 23:11:18 Missing or unbuildable dependency chain was:
+> ['python3-nocasedict-native']
+> 23:11:18 NOTE: Runtime target 'python3-pywbemtools-dev' is
+> unbuildable, removing...
+> 23:11:18 Missing or unbuildable dependency chain was:
+> ['python3-pywbemtools-dev', 'python3-pywbem-native',
+> 'python3-nocasedict-native']
+> 23:11:19 NOTE: Runtime target 'python3-pywbemtools' is unbuildable, remov=
+ing...
+> 23:11:19 Missing or unbuildable dependency chain was:
+> ['python3-pywbemtools', 'python3-pywbem-native',
+> 'python3-nocasedict-native']
+> 23:11:23 ERROR: Nothing RPROVIDES 'python3-nocaselist-native' (but
+> virtual:native:/mnt/jenkins/workspace/Yocto-world-musl/sources/meta-opene=
+mbedded/meta-python/recipes-extended/pywbem/python3-pywbem_1.6.1.bb
+> RDEPENDS on or otherwise requires it)
+> 23:11:23 NOTE: Runtime target 'python3-nocaselist-native' is
+> unbuildable, removing...
+> 23:11:23 Missing or unbuildable dependency chain was:
+> ['python3-nocaselist-native']
+> 23:11:28 ERROR: Nothing RPROVIDES 'python3-yamlloader-native' (but
+> virtual:native:/mnt/jenkins/workspace/Yocto-world-musl/sources/meta-opene=
+mbedded/meta-python/recipes-extended/pywbem/python3-pywbem_1.6.1.bb
+> RDEPENDS on or otherwise requires it)
+> 23:11:28 NOTE: Runtime target 'python3-yamlloader-native' is
+> unbuildable, removing...
+> 23:11:28 Missing or unbuildable dependency chain was:
+> ['python3-yamlloader-native']
+>
 
-Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
----
+Feel free to drop this and whichever other patches cause failures, I
+will look at whatever remains after this round.
 
- ...001-lib-deploy-Use-off_t-not-__off_t.patch | 27 ++++++++++++++++
- ...ith-libgpg-error-for-gpg_strerror_r-.patch | 31 -------------------
- .../{ostree_2023.3.bb => ostree_2023.4.bb}    | 11 +++----
- 3 files changed, 32 insertions(+), 37 deletions(-)
- create mode 100644 meta-oe/recipes-extended/ostree/ostree/0001-lib-deploy-Use-off_t-not-__off_t.patch
- delete mode 100644 meta-oe/recipes-extended/ostree/ostree/0001-libostree-Link-with-libgpg-error-for-gpg_strerror_r-.patch
- rename meta-oe/recipes-extended/ostree/{ostree_2023.3.bb => ostree_2023.4.bb} (96%)
+Bart
 
-diff --git a/meta-oe/recipes-extended/ostree/ostree/0001-lib-deploy-Use-off_t-not-__off_t.patch b/meta-oe/recipes-extended/ostree/ostree/0001-lib-deploy-Use-off_t-not-__off_t.patch
-new file mode 100644
-index 000000000000..a64d9de5ef6d
---- /dev/null
-+++ b/meta-oe/recipes-extended/ostree/ostree/0001-lib-deploy-Use-off_t-not-__off_t.patch
-@@ -0,0 +1,27 @@
-+From 6d690ebf64ce640afce3085f01da8694a04853a9 Mon Sep 17 00:00:00 2001
-+From: Alex Kiernan <alex.kiernan@gmail.com>
-+Date: Tue, 20 Jun 2023 19:24:04 +0100
-+Subject: [PATCH] lib/deploy: Use off_t not __off_t
-+
-+Not clear why this was __off_t which is the sole appearance in the code
-+base, but it breaks musl builds.
-+
-+Upstream-Status: Submitted [https://github.com/ostreedev/ostree/pull/2896]
-+Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
-+---
-+ src/libostree/ostree-sysroot-deploy.c | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/src/libostree/ostree-sysroot-deploy.c b/src/libostree/ostree-sysroot-deploy.c
-+index 8fcd5e802758..2454a5877d94 100644
-+--- a/src/libostree/ostree-sysroot-deploy.c
-++++ b/src/libostree/ostree-sysroot-deploy.c
-+@@ -2536,7 +2536,7 @@ get_kernel_layout_size (OstreeSysroot *self, OstreeDeployment *deployment, guint
-+ /* This is a roundabout but more trustworthy way of doing a space check than
-+  * relying on statvfs's f_bfree when you know the size of the objects. */
-+ static gboolean
-+-dfd_fallocate_check (int dfd, __off_t len, gboolean *out_passed, GError **error)
-++dfd_fallocate_check (int dfd, off_t len, gboolean *out_passed, GError **error)
-+ {
-+   /* If the requested size is 0 then return early. Passing a 0 len to
-+    * fallocate results in EINVAL */
-diff --git a/meta-oe/recipes-extended/ostree/ostree/0001-libostree-Link-with-libgpg-error-for-gpg_strerror_r-.patch b/meta-oe/recipes-extended/ostree/ostree/0001-libostree-Link-with-libgpg-error-for-gpg_strerror_r-.patch
-deleted file mode 100644
-index b87a41bfbb82..000000000000
---- a/meta-oe/recipes-extended/ostree/ostree/0001-libostree-Link-with-libgpg-error-for-gpg_strerror_r-.patch
-+++ /dev/null
-@@ -1,31 +0,0 @@
--From 597120777ff9410b715c19298df824ce3170d6d7 Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Mon, 12 Jun 2023 14:04:44 -0700
--Subject: [PATCH] libostree: Link with libgpg-error for gpg_strerror_r API
+> On Tue, Jun 20, 2023 at 11:03=E2=80=AFAM Khem Raj <raj.khem@gmail.com> wr=
+ote:
+> >
+> > here are some failures
+> >
+> > https://autobuilder.yoctoproject.org/typhoon/#/builders/88/builds/2841
+> >
+> > On Mon, Jun 19, 2023 at 6:16=E2=80=AFPM Khem Raj <raj.khem@gmail.com> w=
+rote:
+> > >
+> > > On 6/19/23 6:21 AM, Bartosz Golaszewski wrote:
+> > > > From: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
+> > > >
+> > > > The native package has the same dependencies. Even if normally they=
+ are
+> > > > satisfied by python3-native, we should still use a global RDEPENDS.
+> > > >
+> > >
+> > > This will deepen the dependency list for native packages. Why should =
+we
+> > > do this ?
+> > >
+> > > > Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
+> > > > ---
+> > > >   meta-python/recipes-extended/pywbem/python3-pywbem_1.6.1.bb | 2 +=
 -
--With f461c02bb55bf2853a3b81ed5c8618040ab54e98 use of gpg_strerror_r
--was added this symbol comes from libgpg-error however, therefore its
--needed to add -lgpg-error to cmdline to resolve this symbol especially
--with gold and lld linker. Fixes
--
--aarch64-yoe-linux-ld.lld: error: undefined reference due to --no-allow-shlib-undefined: gpg_strerror_r
-->>> referenced by ./.libs/libostree-1.so
--
--Upstream-Status: Submitted [https://github.com/ostreedev/ostree/pull/2880]
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
-- Makefile-libostree.am | 2 +-
-- 1 file changed, 1 insertion(+), 1 deletion(-)
--
----- a/configure.ac
--+++ b/configure.ac
--@@ -243,8 +243,7 @@ AC_ARG_WITH(gpgme,
-- 	    [], [with_gpgme=yes])
-- AS_IF([test x$with_gpgme != xno], [
--     have_gpgme=yes
---    PKG_CHECK_MODULES([OT_DEP_GPGME], gpgme >= $LIBGPGME_DEPENDENCY, [], have_gpgme=no)
---    PKG_CHECK_MODULES([OT_DEP_GPG_ERROR], [gpg-error], [], have_gpgme=no)
--+    PKG_CHECK_MODULES([OT_DEP_GPGME], [gpgme >= $LIBGPGME_DEPENDENCY gpg-error], [have_gpgme=yes], [have_gpgme=no])
--     ]
-- )
-- AS_IF([test x$with_gpgme != xno && test x$have_gpgme != xyes], [
-diff --git a/meta-oe/recipes-extended/ostree/ostree_2023.3.bb b/meta-oe/recipes-extended/ostree/ostree_2023.4.bb
-similarity index 96%
-rename from meta-oe/recipes-extended/ostree/ostree_2023.3.bb
-rename to meta-oe/recipes-extended/ostree/ostree_2023.4.bb
-index f5cd7d6ac6ca..d2a7b0456280 100644
---- a/meta-oe/recipes-extended/ostree/ostree_2023.3.bb
-+++ b/meta-oe/recipes-extended/ostree/ostree_2023.4.bb
-@@ -19,12 +19,11 @@ DEPENDS = " \
- "
- 
- GITHUB_BASE_URI = "https://github.com/ostreedev/ostree/releases"
--SRC_URI = " \
--    ${GITHUB_BASE_URI}/download/v${PV}/libostree-${PV}.tar.xz \
--    file://0001-libostree-Link-with-libgpg-error-for-gpg_strerror_r-.patch \
--    file://run-ptest \
--"
--SRC_URI[sha256sum] = "9c575a094da2c307769f0aee15de95470c3b5550cbff211fbbc4f6fc75f333b1"
-+SRC_URI = "${GITHUB_BASE_URI}/download/v${PV}/libostree-${PV}.tar.xz \
-+           file://run-ptest \
-+           file://0001-lib-deploy-Use-off_t-not-__off_t.patch \
-+           "
-+SRC_URI[sha256sum] = "7cee8ace6aae3c778527927a85abefbfbd491c021f52ae229c51ca3077f9c5d1"
- 
- S = "${WORKDIR}/libostree-${PV}"
- 
--- 
-2.39.0
-
+> > > >   1 file changed, 1 insertion(+), 1 deletion(-)
+> > > >
+> > > > diff --git a/meta-python/recipes-extended/pywbem/python3-pywbem_1.6=
+.1.bb b/meta-python/recipes-extended/pywbem/python3-pywbem_1.6.1.bb
+> > > > index 71af06881..8b0383cf6 100644
+> > > > --- a/meta-python/recipes-extended/pywbem/python3-pywbem_1.6.1.bb
+> > > > +++ b/meta-python/recipes-extended/pywbem/python3-pywbem_1.6.1.bb
+> > > > @@ -27,7 +27,7 @@ DEPENDS +=3D " \
+> > > >       ${PYTHON_PN}-wheel-native \
+> > > >   "
+> > > >
+> > > > -RDEPENDS:${PN}:class-target +=3D "\
+> > > > +RDEPENDS:${PN} +=3D "\
+> > > >       ${PYTHON_PN}-datetime \
+> > > >       ${PYTHON_PN}-io \
+> > > >       ${PYTHON_PN}-netclient \
 
