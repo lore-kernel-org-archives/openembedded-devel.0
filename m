@@ -1,207 +1,789 @@
-Return-Path: <narpat.mali@windriver.com>
+Return-Path: <peter.marko@siemens.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5A8B5EB64DA
-	for <webhook@archiver.kernel.org>; Thu, 22 Jun 2023 15:42:18 +0000 (UTC)
-Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
- by mx.groups.io with SMTP id smtpd.web10.14881.1687448532049679050
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 106D6EB64D8
+	for <webhook@archiver.kernel.org>; Thu, 22 Jun 2023 17:40:09 +0000 (UTC)
+Received: from mta-64-225.siemens.flowmailer.net (mta-64-225.siemens.flowmailer.net [185.136.64.225])
+ by mx.groups.io with SMTP id smtpd.web11.18035.1687455601953297583
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 22 Jun 2023 08:42:12 -0700
+ Thu, 22 Jun 2023 10:40:03 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="body hash did not verify" header.i=@windriver.com header.s=pps06212021 header.b=iVbq24HX;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=55378c4034=narpat.mali@windriver.com)
-Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.17.1.22/8.17.1.22) with ESMTP id 35MDhFNV015816
-	for <openembedded-devel@lists.openembedded.org>; Thu, 22 Jun 2023 15:42:10 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
-	 h=message-id:date:subject:from:to:cc:references:in-reply-to
-	:content-type:content-transfer-encoding:mime-version; s=
-	PPS06212021; bh=fC2rbjneWHt9XZiPouDKMznkxQiyEv9cSykpPUzPOhM=; b=
-	iVbq24HX5w5NimJc8rMP3DTIgP4KboHtT74+gbZRccmZmnKI4kUZ7Bm+4IFV5lWh
-	2qz9fOLLYgpAIVIwybQzCATmKvH9sZHm2qjEhSdcfpZKIS/Je1r8ADruYvAqIPRy
-	beXrJKxM3+ERwt042gHqXB3mLIwZMqHqqggyVPA3g7040cT8Qc7iV4+OHbvJHqfm
-	97UVxm27/ZTu+QLmuao8dzxQn+xb9c8bBLIXGhX1vf2SyvUxTWWSjKuys1zSrlZ3
-	olM2izZtMqL0Nq+SeT0HyiTH9Y6/LfHx3KBtAn0GGL+Ov4JWDNoAVxTbjnZwCrHq
-	Io+wSRvop9Z9RuflG1XGmQ==
-Received: from pps.reinject (localhost [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3rcdnx0hx6-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Thu, 22 Jun 2023 15:42:10 +0000 (GMT)
-Received: from m0250812.ppops.net (m0250812.ppops.net [127.0.0.1])
-	by pps.reinject (8.17.1.22/8.17.1.22) with ESMTP id 35MFg9HJ010496
-	for <openembedded-devel@lists.openembedded.org>; Thu, 22 Jun 2023 15:42:09 GMT
-Received: from nam10-dm6-obe.outbound.protection.outlook.com (mail-dm6nam10lp2105.outbound.protection.outlook.com [104.47.58.105])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3rcdnx0hx3-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Thu, 22 Jun 2023 15:42:09 +0000 (GMT)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=m31gk/UZlJDqQQ4WOfwfYWSvH4XJQEzmpl0TK6uHko9HUntDDSSlOxrivF23Mim1givGNI9BPwKG3C8FCA+uFbcH6C3Bv83LTAiNkQwPBnjIkXjNREFkKyaPrbUlzHtxExz55OaOzfGrdPFYHk3GjDITnGMU6VgDwaSxlk8Z5HUl0jW2oQSMVhRqg6d18IXqv0FlfgcXI8UaB37fy7mEFBaB06iSLCPc83WC3bhpsmZTd2rSiANKElhkcFCFBzThzTS3o60xvGN/iVUoKvJoXS189Ivbie027v5SmNQIsUPzjDrE0vOZoYMhO52CWyOlEKLKI9HR5iQlH3ZCbn6TwA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=fC2rbjneWHt9XZiPouDKMznkxQiyEv9cSykpPUzPOhM=;
- b=NvUqm/r9P1QHwnV8ZXkSw34+1IBE3d3IEAnrzwv1sIr+5goIQEb3Hl7Jv1MmrLfu+F+3tRFWm9mAOr4iFnHmFgoNx+j+bKSMvChEv6tjpeMFqb5bRqO1uEvjgqOiCdVk4KjGa8hRn8z7XM8JZaMnR9O5E245aH152uxPD0O6f1EpcYgSqXSIdXmlp1xooZHcI3+Ym+5Z/F3AGU5gEhxRbLeL2RgcMRGIaY98qD5V4FaJmDXPBKCqTS6TupagdPHR/xYIUfmVZEPp2Ah+NZm+hnIjPWg1DIOYQZfC5p0ieKxd7JyphhC/X/rlXfP62kWtfCVgqWjNPs+a+N+UyLd5vQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=windriver.com; dmarc=pass action=none
- header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
-Received: from DM4PR11MB5550.namprd11.prod.outlook.com (2603:10b6:5:38b::24)
- by PH7PR11MB6836.namprd11.prod.outlook.com (2603:10b6:510:1ef::20) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6521.24; Thu, 22 Jun
- 2023 15:42:05 +0000
-Received: from DM4PR11MB5550.namprd11.prod.outlook.com
- ([fe80::6d5f:a33b:c280:2981]) by DM4PR11MB5550.namprd11.prod.outlook.com
- ([fe80::6d5f:a33b:c280:2981%4]) with mapi id 15.20.6521.024; Thu, 22 Jun 2023
- 15:42:05 +0000
-Message-ID: <beb15b16-7a04-3a09-63fd-be64ddca19d2@windriver.com>
-Date: Thu, 22 Jun 2023 21:09:44 +0530
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
- Thunderbird/102.12.0
-Subject: Re: [oe] [meta-python][mickledore][PATCH 1/1] python3-django: upgrade
- 4.1.7 -> 4.2.1
-Content-Language: en-US
-From: "Mali, Narpat" <narpat.mali@windriver.com>
-To: openembedded-devel@lists.openembedded.org,
-        akuster808 <akuster808@gmail.com>
-Cc: hari.gpillai@windriver.com
-References: <1764E2D4F8CC0BEA.16620@lists.openembedded.org>
- <49a713ba-5335-c677-6f2d-e6ee5e43c71c@windriver.com>
-In-Reply-To: <49a713ba-5335-c677-6f2d-e6ee5e43c71c@windriver.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-X-ClientProxiedBy: BYAPR05CA0108.namprd05.prod.outlook.com
- (2603:10b6:a03:e0::49) To DM4PR11MB5550.namprd11.prod.outlook.com
- (2603:10b6:5:38b::24)
+ dkim=pass header.i=peter.marko@siemens.com header.s=fm1 header.b=V3JvCZWM;
+ spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.64.225, mailfrom: fm-256628-20230622173958a0464304d5ffc03b34-d5dsth@rts-flowmailer.siemens.com)
+Received: by mta-64-225.siemens.flowmailer.net with ESMTPSA id 20230622173958a0464304d5ffc03b34
+        for <openembedded-devel@lists.openembedded.org>;
+        Thu, 22 Jun 2023 19:39:59 +0200
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm1;
+ d=siemens.com; i=peter.marko@siemens.com;
+ h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc;
+ bh=sauWgkxfzPJoeHw5k9tKVBrIwQ7QAWQ97wLjn4BoTbA=;
+ b=V3JvCZWMV0Iffggk9GLmly/7WmwbQxnKH1xIe1dgY0IMe8ZFlqFYIXCVH33Z6WlE5LK8Ns
+ D3QLkWauddcgcCbcR0EHDJ9BdUpO6RqmWmcUAcOghho3QKtwq4UliwcoPLYKs5vCTLmFlmtG
+ xqFroxARc5tt6irgPAs3hT4Y8eew0=;
+From: Peter Marko <peter.marko@siemens.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Peter Marko <peter.marko@siemens.com>
+Subject: [OE-core][kirkstone][PATCH] c-ares: backport patch for CVE-2023-31147
+Date: Thu, 22 Jun 2023 19:39:13 +0200
+Message-Id: <20230622173913.776438-1-peter.marko@siemens.com>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DM4PR11MB5550:EE_|PH7PR11MB6836:EE_
-X-MS-Office365-Filtering-Correlation-Id: 5720671d-4794-43d2-a273-08db73373aac
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 
-	CPiCLRLeG4rWzEwY3mKrzbPnfb/W/uuPv0jy/SfCo2kX9OxxpCxKjasAcpOnH2wEq85m07o7Mmuo5keYIn/BW94q/Axr5ls++qayHZsXKJF8Y0znp3WsEVZGMUrF8B/+KT9Ya9STFbn89zMAK2dz8j8rERLgWtafcJNa27fDhtOGNcc/814lG6V0R6q1kfX/9l8z819GKsThLqR8axyDhuY5pbRkW2kte6vGu8/CCTHZfkN8boFZKNECPf/a2Lr5J44oa8BKYdDzbxH5DWRkK92X+whBZS9HJZeqUTDlY4ftzTYpk9oVAj1vYObjRqFtPJIwBunms29Qvh6/8qnnF262JFyt910vFuHGGVpZqeArjPkg0K0xUx96vG8Zi0TbixDdZXDx8LX3NcJWatPIs9nKhtliYvjbjzJEjpyoJDOWXzaWpcYhsvN4jt3ZGAI4UQzWet+mkQASWSYx7IDmdKHwZXrsHMLby1Ey3xxUymNKYeI5YRAXvtPhIGYAl1CSNuq1DukeqcgiMjKSSOJxSssFvgtYkyiJFg0BL70N3weHcOJYr7v5ISAp9N7OlAx6ryIFJEclSL6cNNkEeKm6kEMFm0+bD6PtFZW9MnCn34WEo8VAwpaZU4vNNyJqSL1W
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM4PR11MB5550.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230028)(4636009)(136003)(376002)(366004)(346002)(396003)(39850400004)(451199021)(66899021)(31696002)(86362001)(38100700002)(41300700001)(8676002)(8936002)(66946007)(6916009)(66476007)(66556008)(2616005)(316002)(83380400001)(5660300002)(53546011)(6486002)(6506007)(478600001)(6666004)(966005)(107886003)(6512007)(4326008)(186003)(26005)(2906002)(31686004)(36756003)(43740500002)(45980500001);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?utf-8?B?YnBSNFBwajJUOFlOSVpsQjJDcUcrcWpXUGJvR2ZoVDRHdDFUOXpkWG9WK1lJ?=
- =?utf-8?B?ZHpJeHptc2VUS3NIVzBYTENkSkFmcVQwMGRYN0NZMFh4TXh6bmIxWGRwS3Ja?=
- =?utf-8?B?Ti9rd0J3TkZnc3FPYk5LTWozMjkwbEF3WVVVZ3lKVVdzQ2p6bU5vNEhjRWd5?=
- =?utf-8?B?eTRpYm1yZi8xQ3JDc0ZVZWJoczVDa2lqb2NsR09ITnd2ZHdNQkVRUjNiTDYz?=
- =?utf-8?B?akxya0dYMDdWL1RQdGZxTlBIVlo2ZlRmcG9NZzF1aW5odDFuVzBVbUNwWXhC?=
- =?utf-8?B?UjhsQkpwQlZxbDZMR0Z4dmNxY0NDQTdqU2pUdGtoa29UV1RrZm1tQThVM2kz?=
- =?utf-8?B?Tys2QmtuV3B1YmlJL1dNRWRxVUNVdjdaOEprci8zcmRBY1NwY1pDb0s0QTNZ?=
- =?utf-8?B?M21SQlZYazVkZlNIOUhxTTVZaStRVytxOTBHa1JmUHM3TTBycml1ekt2WUZP?=
- =?utf-8?B?OXU3Yjh3R2tySWVZK1F3dzJZK2R5Zi9OU25GbWNZOGsvM01tQkdrdEk1N3lO?=
- =?utf-8?B?d3JXQVIzZmNwUkErWmN1QzhnWk5uNzlSWG1TUlcyaHM3VnRBb1Uwa0Q1bnQr?=
- =?utf-8?B?NjZIb1J6Z2ZaWE82YXowWXF5dVhqdjVPOHhiaGdFY1BWSWNIbElSbE5BV2lB?=
- =?utf-8?B?aEdrNkRnRGlrUmlmaW9INHdPbHVWSE11QTNSRWxXd1ptVHhsWVpnQ3d5dW5h?=
- =?utf-8?B?MVpHTXpwRlZOMEJzZmo3MUNrRmc1ejNOQzFZVFM0b2JvNUhGQ1YzOHcyU1ZB?=
- =?utf-8?B?Nm9ScEc4QUpkSzNNdSthdlJWT25iVGJScWtZMHZDVHhZbUE0cWI3dEdJdFZ1?=
- =?utf-8?B?N1ZNWmZpVndwMGE0STlpOHkwNmNad01BZDFmYXZFVGxBcVJoT1h3OG55Y0VV?=
- =?utf-8?B?a0RFUU9RcktvSnJITjNRQ2w3MWpYRzdFeU9vM3hsYjg0TXJRT01uank2Rjg5?=
- =?utf-8?B?TmlPZzJWcTRvTi96TEVSdGFPalRnTGlsbjlRSnE5NFlpMXYwUTJRcXljT2lK?=
- =?utf-8?B?ZGQ2ZGMzaEEwTytncEk3OTEwOGt4T0JQUEEyd01LL1dyRDZNTHBubFRrdURu?=
- =?utf-8?B?RXlxRWlEdVJyczBnZmlwTDFhSjhjWElLRHR3VjBubDVtK0g5dE9uRFQrR3dY?=
- =?utf-8?B?R25MRXNWaUJ4dXcxd0hXSlUveDlBMGhVY2xxK3BLL21OK0VLQUpsb20xai9y?=
- =?utf-8?B?SmFXODU3cXpudWhCM0l0M0dYRXRkTTBzOU1jYzVJOFZ4aVJGcGd1WWxuOXA4?=
- =?utf-8?B?bDQycW10RGNVd1VHVVJ4TzJnM0ZYcFhpSzNnci93WFVCVGhldlZIamN5OXpv?=
- =?utf-8?B?UEtSQWZNdDZ5ZU5keEIzMU5QcXlaOEJlVW9zUzhsUzlBS0RoUzBrMnVwa3g3?=
- =?utf-8?B?Y2pLVnRWU2hIQThJNGR2OGx6d3lUTWMzY3JUTVBybjdlWlZaTmlZVUdkR2dN?=
- =?utf-8?B?UGdOK0MyRTY1MGRmcjU1eVhTMlpWeW92UmVkWUdDUmRrVkM0QWxLZ1ZpYThG?=
- =?utf-8?B?RGd6K1dXSkxUVEVDeUtNcHR6V05UZTV0eEZsZHJsYzBGS2U0Yk5RWVllQVlv?=
- =?utf-8?B?V1NZRHFFNkw2TTZsL2hEOE5LWEJhMm9oKys4VDJGRFRaUUpWTTJTaFBKbW1a?=
- =?utf-8?B?b2VnbTVGQjVKdFZCbGJ4OVJqeFE2YmJ1ODB2OHV0RFhUUDlCdHdtL3IvdC84?=
- =?utf-8?B?TWZBZnphbnU5aWcvdURoS01YcUE1Z2tZWmdLb0VzU1kvOVJsN3YrVm01S21K?=
- =?utf-8?B?Ym9xS3VqaEJMOURxM0xwQ3VpY0RZYXp2YjlLV1haOTV4cHN0aWpwS1JHTXdP?=
- =?utf-8?B?eU5vZkNJK3ZUQldWcm01dFR5YUFkMEJ1RGMvdnFEcnlwZlYyT2s1NHdwZG43?=
- =?utf-8?B?NzZOM09MNmxmZERaQXkyRFBzNUp2VHhscnBYelVGZDhpWldsdXRBQ2VvVkw3?=
- =?utf-8?B?ZTFGR1BtRHNxcTc5THhsUU9mYnRNTk5McWlmVk4wbCtrRHJNVW1aK0d0ZCtp?=
- =?utf-8?B?SHRLNkZ4NDRPai9OQjBWOEozZjlyQ0hkTlBjLzNmMTgxcTN6VnZGVCsrQ2FE?=
- =?utf-8?B?L2h6b2lQTmJxNSs0WWo0c242ZjMxRUJwTks1TTdHU3dUVkVTbFBNZStRYi90?=
- =?utf-8?B?Z1NKcnpZbHYvdmUwTW96NkVNUFJqVUMxMTJQMWk4SlhrZmFSZGZDMFFLNU90?=
- =?utf-8?B?ZGc9PQ==?=
-X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 5720671d-4794-43d2-a273-08db73373aac
-X-MS-Exchange-CrossTenant-AuthSource: DM4PR11MB5550.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Jun 2023 15:42:04.9844
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: fT0Qmg3kiGgr0ux+RpELWkCg3Kfilni2Unp2JxmPpS6gxoHgHTm2PzJmnsMBB0acfL/ewTjbFlXU3B3crZvkf0+eMBkFgGHQQooUnw1fY/c=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR11MB6836
-X-Proofpoint-GUID: vFeRgt7M9keoNHpmWw08CkJ_frgICvd4
-X-Proofpoint-ORIG-GUID: BP_rhaLC3KY7K1hqrt4-zrASU9x9zItC
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.254,Aquarius:18.0.957,Hydra:6.0.591,FMLib:17.11.176.26
- definitions=2023-06-22_10,2023-06-22_02,2023-05-22_02
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 clxscore=1015 malwarescore=0
- phishscore=0 spamscore=0 impostorscore=0 mlxscore=0 priorityscore=1501
- lowpriorityscore=0 mlxlogscore=999 suspectscore=0 adultscore=0 bulkscore=0
- classifier=spam adjust=0 reason=mlx scancount=1 engine=8.19.0-2305260000
- definitions=main-2306220131
-Content-Transfer-Encoding: quoted-printable
-X-MIME-Autoconverted: from 8bit to quoted-printable by mx0a-0064b401.pphosted.com id 35MDhFNV015816
+Content-Transfer-Encoding: 8bit
+X-Flowmailer-Platform: Siemens
+Feedback-ID: 519:519-256628:519-21489:flowmailer
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 22 Jun 2023 15:42:18 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103492
+ <openembedded-devel@lists.openembedded.org>; Thu, 22 Jun 2023 17:40:09 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103493
 
-Gentle Reminder !!
+From: Peter Marko <peter.marko@siemens.com>
 
-On 15-06-2023 20:31, Mali, Narpat wrote:
-> Reminder.
->
-> On 02-06-2023 21:29, Narpat Mali via lists.openembedded.org wrote:
->> From: Wang Mingyu <wangmy@fujitsu.com>
->>
->> Changelog:
->> https://docs.djangoproject.com/en/4.2/releases/4.2.1/
->>
->> Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
->> Signed-off-by: Khem Raj <raj.khem@gmail.com>
->> Signed-off-by: Narpat Mali <narpat.mali@windriver.com>
->> ---
->> =C2=A0 .../python/{python3-django_4.1.7.bb =3D> python3-django_4.2.1.b=
-b} | 2 +-
->> =C2=A0 1 file changed, 1 insertion(+), 1 deletion(-)
->> =C2=A0 rename meta-python/recipes-devtools/python/{python3-django_4.1.=
-7.bb=20
->> =3D> python3-django_4.2.1.bb} (58%)
->>
->> diff --git=20
->> a/meta-python/recipes-devtools/python/python3-django_4.1.7.bb=20
->> b/meta-python/recipes-devtools/python/python3-django_4.2.1.bb
->> similarity index 58%
->> rename from meta-python/recipes-devtools/python/python3-django_4.1.7.b=
-b
->> rename to meta-python/recipes-devtools/python/python3-django_4.2.1.bb
->> index be806eefaa..b1474cf054 100644
->> --- a/meta-python/recipes-devtools/python/python3-django_4.1.7.bb
->> +++ b/meta-python/recipes-devtools/python/python3-django_4.2.1.bb
->> @@ -1,7 +1,7 @@
->> =C2=A0 require python-django.inc
->> =C2=A0 inherit setuptools3
->> =C2=A0 -SRC_URI[sha256sum] =3D=20
->> "44f714b81c5f190d9d2ddad01a532fe502fa01c4cb8faf1d081f4264ed15dcd8"
->> +SRC_URI[sha256sum] =3D=20
->> "7efa6b1f781a6119a10ac94b4794ded90db8accbe7802281cd26f8664ffed59c"
->> =C2=A0 =C2=A0 RDEPENDS:${PN} +=3D "\
->> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 ${PYTHON_PN}-sqlparse \
->>
->> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->> Links: You receive all messages sent to this group.
->> View/Reply Online (#103102):=20
->> https://lists.openembedded.org/g/openembedded-devel/message/103102
->> Mute This Topic: https://lists.openembedded.org/mt/99289334/7199376
->> Group Owner: openembedded-devel+owner@lists.openembedded.org
->> Unsubscribe:=20
->> https://lists.openembedded.org/g/openembedded-devel/unsub=20
->> [narpat.mali@windriver.com]
->> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->>
+Backported from https://github.com/c-ares/c-ares/commit/823df3b989e59465d17b0a2eb1239a5fc048b4e5
+
+Signed-off-by: Peter Marko <peter.marko@siemens.com>
+---
+ .../c-ares/c-ares/CVE-2023-31147.patch        | 717 ++++++++++++++++++
+ .../recipes-support/c-ares/c-ares_1.18.1.bb   |   1 +
+ 2 files changed, 718 insertions(+)
+ create mode 100644 meta-oe/recipes-support/c-ares/c-ares/CVE-2023-31147.patch
+
+diff --git a/meta-oe/recipes-support/c-ares/c-ares/CVE-2023-31147.patch b/meta-oe/recipes-support/c-ares/c-ares/CVE-2023-31147.patch
+new file mode 100644
+index 0000000000..bbd6aa0aec
+--- /dev/null
++++ b/meta-oe/recipes-support/c-ares/c-ares/CVE-2023-31147.patch
+@@ -0,0 +1,717 @@
++From c543406f44fa070ea101d4d4b173c2c88af0c2a5 Mon Sep 17 00:00:00 2001
++From: Brad House <brad@brad-house.com>
++Date: Mon, 22 May 2023 06:51:06 -0400
++Subject: [PATCH] Merge pull request from GHSA-8r8p-23f3-64c2
++
++* segment random number generation into own file
++
++* abstract random code to make it more modular so we can have multiple backends
++
++* rand: add support for arc4random_buf() and also direct CARES_RANDOM_FILE reading
++
++* autotools: fix detection of arc4random_buf
++
++* rework initial rc4 seed for PRNG as last fallback
++
++* rc4: more proper implementation, simplified for clarity
++
++* clarifications
++
++CVE: CVE-2023-31147
++Upstream-Status: Backport [https://github.com/c-ares/c-ares/commit/823df3b989e59465d17b0a2eb1239a5fc048b4e5]
++
++Signed-off-by: Peter Marko <peter.marko@siemens.com>
++---
++ CMakeLists.txt              |   2 +
++ configure.ac                |   1 +
++ m4/cares-functions.m4       |  85 +++++++++++
++ src/lib/Makefile.inc        |   1 +
++ src/lib/ares_config.h.cmake |   3 +
++ src/lib/ares_destroy.c      |   3 +
++ src/lib/ares_init.c         |  82 ++---------
++ src/lib/ares_private.h      |  19 ++-
++ src/lib/ares_query.c        |  36 +----
++ src/lib/ares_rand.c         | 274 ++++++++++++++++++++++++++++++++++++
++ 10 files changed, 387 insertions(+), 119 deletions(-)
++ create mode 100644 src/lib/ares_rand.c
++
++diff --git a/CMakeLists.txt b/CMakeLists.txt
++index 194485a..1fb9af5 100644
++--- a/CMakeLists.txt
+++++ b/CMakeLists.txt
++@@ -386,6 +386,8 @@ CHECK_SYMBOL_EXISTS (strncasecmp     "${CMAKE_EXTRA_INCLUDE_FILES}" HAVE_STRNCAS
++ CHECK_SYMBOL_EXISTS (strncmpi        "${CMAKE_EXTRA_INCLUDE_FILES}" HAVE_STRNCMPI)
++ CHECK_SYMBOL_EXISTS (strnicmp        "${CMAKE_EXTRA_INCLUDE_FILES}" HAVE_STRNICMP)
++ CHECK_SYMBOL_EXISTS (writev          "${CMAKE_EXTRA_INCLUDE_FILES}" HAVE_WRITEV)
+++CHECK_SYMBOL_EXISTS (arc4random_buf  "${CMAKE_EXTRA_INCLUDE_FILES}" HAVE_ARC4RANDOM_BUF)
+++
++ 
++ # On Android, the system headers may define __system_property_get(), but excluded
++ # from libc.  We need to perform a link test instead of a header/symbol test.
++diff --git a/configure.ac b/configure.ac
++index 1d0fb5c..9a76369 100644
++--- a/configure.ac
+++++ b/configure.ac
++@@ -683,6 +683,7 @@ CARES_CHECK_FUNC_STRNCASECMP
++ CARES_CHECK_FUNC_STRNCMPI
++ CARES_CHECK_FUNC_STRNICMP
++ CARES_CHECK_FUNC_WRITEV
+++CARES_CHECK_FUNC_ARC4RANDOM_BUF
++ 
++ 
++ dnl check for AF_INET6
++diff --git a/m4/cares-functions.m4 b/m4/cares-functions.m4
++index 0f3992c..d4f4f99 100644
++--- a/m4/cares-functions.m4
+++++ b/m4/cares-functions.m4
++@@ -3753,3 +3753,88 @@ AC_DEFUN([CARES_CHECK_FUNC_WRITEV], [
++     ac_cv_func_writev="no"
++   fi
++ ])
+++
+++dnl CARES_CHECK_FUNC_ARC4RANDOM_BUF
+++dnl -------------------------------------------------
+++dnl Verify if arc4random_buf is available, prototyped, and
+++dnl can be compiled. If all of these are true, and
+++dnl usage has not been previously disallowed with
+++dnl shell variable cares_disallow_arc4random_buf, then
+++dnl HAVE_ARC4RANDOM_BUF will be defined.
+++
+++AC_DEFUN([CARES_CHECK_FUNC_ARC4RANDOM_BUF], [
+++  AC_REQUIRE([CARES_INCLUDES_STDLIB])dnl
+++  #
+++  tst_links_arc4random_buf="unknown"
+++  tst_proto_arc4random_buf="unknown"
+++  tst_compi_arc4random_buf="unknown"
+++  tst_allow_arc4random_buf="unknown"
+++  #
+++  AC_MSG_CHECKING([if arc4random_buf can be linked])
+++  AC_LINK_IFELSE([
+++    AC_LANG_FUNC_LINK_TRY([arc4random_buf])
+++  ],[
+++    AC_MSG_RESULT([yes])
+++    tst_links_arc4random_buf="yes"
+++  ],[
+++    AC_MSG_RESULT([no])
+++    tst_links_arc4random_buf="no"
+++  ])
+++  #
+++  if test "$tst_links_arc4random_buf" = "yes"; then
+++    AC_MSG_CHECKING([if arc4random_buf is prototyped])
+++    AC_EGREP_CPP([arc4random_buf],[
+++      $cares_includes_stdlib
+++    ],[
+++      AC_MSG_RESULT([yes])
+++      tst_proto_arc4random_buf="yes"
+++    ],[
+++      AC_MSG_RESULT([no])
+++      tst_proto_arc4random_buf="no"
+++    ])
+++  fi
+++  #
+++  if test "$tst_proto_arc4random_buf" = "yes"; then
+++    AC_MSG_CHECKING([if arc4random_buf is compilable])
+++    AC_COMPILE_IFELSE([
+++      AC_LANG_PROGRAM([[
+++        $cares_includes_stdlib
+++      ]],[[
+++          arc4random_buf(NULL, 0);
+++          return 1;
+++      ]])
+++    ],[
+++      AC_MSG_RESULT([yes])
+++      tst_compi_arc4random_buf="yes"
+++    ],[
+++      AC_MSG_RESULT([no])
+++      tst_compi_arc4random_buf="no"
+++    ])
+++  fi
+++  #
+++  if test "$tst_compi_arc4random_buf" = "yes"; then
+++    AC_MSG_CHECKING([if arc4random_buf usage allowed])
+++    if test "x$cares_disallow_arc4random_buf" != "xyes"; then
+++      AC_MSG_RESULT([yes])
+++      tst_allow_arc4random_buf="yes"
+++    else
+++      AC_MSG_RESULT([no])
+++      tst_allow_arc4random_buf="no"
+++    fi
+++  fi
+++  #
+++  AC_MSG_CHECKING([if arc4random_buf might be used])
+++  if test "$tst_links_arc4random_buf" = "yes" &&
+++     test "$tst_proto_arc4random_buf" = "yes" &&
+++     test "$tst_compi_arc4random_buf" = "yes" &&
+++     test "$tst_allow_arc4random_buf" = "yes"; then
+++    AC_MSG_RESULT([yes])
+++    AC_DEFINE_UNQUOTED(HAVE_ARC4RANDOM_BUF, 1,
+++      [Define to 1 if you have the arc4random_buf function.])
+++    ac_cv_func_arc4random_buf="yes"
+++  else
+++    AC_MSG_RESULT([no])
+++    ac_cv_func_arc4random_buf="no"
+++  fi
+++])
+++
++diff --git a/src/lib/Makefile.inc b/src/lib/Makefile.inc
++index a3b060c..72a7673 100644
++--- a/src/lib/Makefile.inc
+++++ b/src/lib/Makefile.inc
++@@ -45,6 +45,7 @@ CSOURCES = ares__addrinfo2hostent.c	\
++   ares_platform.c			\
++   ares_process.c			\
++   ares_query.c				\
+++  ares_rand.c \
++   ares_search.c				\
++   ares_send.c				\
++   ares_strcasecmp.c			\
++diff --git a/src/lib/ares_config.h.cmake b/src/lib/ares_config.h.cmake
++index fddb785..798820a 100644
++--- a/src/lib/ares_config.h.cmake
+++++ b/src/lib/ares_config.h.cmake
++@@ -346,6 +346,9 @@
++ /* Define to 1 if you need the memory.h header file even with stdlib.h */
++ #cmakedefine NEED_MEMORY_H
++ 
+++/* Define if have arc4random_buf() */
+++#cmakedefine HAVE_ARC4RANDOM_BUF
+++
++ /* a suitable file/device to read random data from */
++ #cmakedefine CARES_RANDOM_FILE "@CARES_RANDOM_FILE@"
++ 
++diff --git a/src/lib/ares_destroy.c b/src/lib/ares_destroy.c
++index fed2009..0447af4 100644
++--- a/src/lib/ares_destroy.c
+++++ b/src/lib/ares_destroy.c
++@@ -90,6 +90,9 @@ void ares_destroy(ares_channel channel)
++   if (channel->resolvconf_path)
++     ares_free(channel->resolvconf_path);
++ 
+++  if (channel->rand_state)
+++    ares__destroy_rand_state(channel->rand_state);
+++
++   ares_free(channel);
++ }
++ 
++diff --git a/src/lib/ares_init.c b/src/lib/ares_init.c
++index de5d86c..2607ed6 100644
++--- a/src/lib/ares_init.c
+++++ b/src/lib/ares_init.c
++@@ -72,7 +72,6 @@ static int config_nameserver(struct server_state **servers, int *nservers,
++ static int set_search(ares_channel channel, const char *str);
++ static int set_options(ares_channel channel, const char *str);
++ static const char *try_option(const char *p, const char *q, const char *opt);
++-static int init_id_key(rc4_key* key,int key_data_len);
++ 
++ static int config_sortlist(struct apattern **sortlist, int *nsort,
++                            const char *str);
++@@ -149,6 +148,7 @@ int ares_init_options(ares_channel *channelptr, struct ares_options *options,
++   channel->sock_funcs = NULL;
++   channel->sock_func_cb_data = NULL;
++   channel->resolvconf_path = NULL;
+++  channel->rand_state = NULL;
++ 
++   channel->last_server = 0;
++   channel->last_timeout_processed = (time_t)now.tv_sec;
++@@ -202,9 +202,13 @@ int ares_init_options(ares_channel *channelptr, struct ares_options *options,
++   /* Generate random key */
++ 
++   if (status == ARES_SUCCESS) {
++-    status = init_id_key(&channel->id_key, ARES_ID_KEY_LEN);
+++    channel->rand_state = ares__init_rand_state();
+++    if (channel->rand_state == NULL) {
+++      status = ARES_ENOMEM;
+++    }
+++
++     if (status == ARES_SUCCESS)
++-      channel->next_id = ares__generate_new_id(&channel->id_key);
+++      channel->next_id = ares__generate_new_id(channel->rand_state);
++     else
++       DEBUGF(fprintf(stderr, "Error: init_id_key failed: %s\n",
++                      ares_strerror(status)));
++@@ -224,6 +228,8 @@ done:
++         ares_free(channel->lookups);
++       if(channel->resolvconf_path)
++         ares_free(channel->resolvconf_path);
+++      if (channel->rand_state)
+++        ares__destroy_rand_state(channel->rand_state);
++       ares_free(channel);
++       return status;
++     }
++@@ -2495,76 +2501,6 @@ static int sortlist_alloc(struct apattern **sortlist, int *nsort,
++   return 1;
++ }
++ 
++-/* initialize an rc4 key. If possible a cryptographically secure random key
++-   is generated using a suitable function (for example win32's RtlGenRandom as
++-   described in
++-   http://blogs.msdn.com/michael_howard/archive/2005/01/14/353379.aspx
++-   otherwise the code defaults to cross-platform albeit less secure mechanism
++-   using rand
++-*/
++-static void randomize_key(unsigned char* key,int key_data_len)
++-{
++-  int randomized = 0;
++-  int counter=0;
++-#ifdef WIN32
++-  BOOLEAN res;
++-  if (ares_fpSystemFunction036)
++-    {
++-      res = (*ares_fpSystemFunction036) (key, key_data_len);
++-      if (res)
++-        randomized = 1;
++-    }
++-#else /* !WIN32 */
++-#ifdef CARES_RANDOM_FILE
++-  FILE *f = fopen(CARES_RANDOM_FILE, "rb");
++-  if(f) {
++-    setvbuf(f, NULL, _IONBF, 0);
++-    counter = aresx_uztosi(fread(key, 1, key_data_len, f));
++-    fclose(f);
++-  }
++-#endif
++-#endif /* WIN32 */
++-
++-  if (!randomized) {
++-    for (;counter<key_data_len;counter++)
++-      key[counter]=(unsigned char)(rand() % 256);  /* LCOV_EXCL_LINE */
++-  }
++-}
++-
++-static int init_id_key(rc4_key* key,int key_data_len)
++-{
++-  unsigned char index1;
++-  unsigned char index2;
++-  unsigned char* state;
++-  short counter;
++-  unsigned char *key_data_ptr = 0;
++-
++-  key_data_ptr = ares_malloc(key_data_len);
++-  if (!key_data_ptr)
++-    return ARES_ENOMEM;
++-  memset(key_data_ptr, 0, key_data_len);
++-
++-  state = &key->state[0];
++-  for(counter = 0; counter < 256; counter++)
++-    /* unnecessary AND but it keeps some compilers happier */
++-    state[counter] = (unsigned char)(counter & 0xff);
++-  randomize_key(key->state,key_data_len);
++-  key->x = 0;
++-  key->y = 0;
++-  index1 = 0;
++-  index2 = 0;
++-  for(counter = 0; counter < 256; counter++)
++-  {
++-    index2 = (unsigned char)((key_data_ptr[index1] + state[counter] +
++-                              index2) % 256);
++-    ARES_SWAP_BYTE(&state[counter], &state[index2]);
++-
++-    index1 = (unsigned char)((index1 + 1) % key_data_len);
++-  }
++-  ares_free(key_data_ptr);
++-  return ARES_SUCCESS;
++-}
++-
++ void ares_set_local_ip4(ares_channel channel, unsigned int local_ip)
++ {
++   channel->local_ip4 = local_ip;
++diff --git a/src/lib/ares_private.h b/src/lib/ares_private.h
++index 60d69e0..518b5c3 100644
++--- a/src/lib/ares_private.h
+++++ b/src/lib/ares_private.h
++@@ -101,8 +101,6 @@ W32_FUNC const char *_w32_GetHostsFile (void);
++ 
++ #endif
++ 
++-#define ARES_ID_KEY_LEN 31
++-
++ #include "ares_ipv6.h"
++ #include "ares_llist.h"
++ 
++@@ -262,12 +260,8 @@ struct apattern {
++   unsigned short type;
++ };
++ 
++-typedef struct rc4_key
++-{
++-  unsigned char state[256];
++-  unsigned char x;
++-  unsigned char y;
++-} rc4_key;
+++struct ares_rand_state;
+++typedef struct ares_rand_state ares_rand_state;
++ 
++ struct ares_channeldata {
++   /* Configuration data */
++@@ -302,8 +296,8 @@ struct ares_channeldata {
++ 
++   /* ID to use for next query */
++   unsigned short next_id;
++-  /* key to use when generating new ids */
++-  rc4_key id_key;
+++  /* random state to use when generating new ids */
+++  ares_rand_state *rand_state;
++ 
++   /* Generation number to use for the next TCP socket open/close */
++   int tcp_connection_generation;
++@@ -359,7 +353,10 @@ void ares__close_sockets(ares_channel channel, struct server_state *server);
++ int ares__get_hostent(FILE *fp, int family, struct hostent **host);
++ int ares__read_line(FILE *fp, char **buf, size_t *bufsize);
++ void ares__free_query(struct query *query);
++-unsigned short ares__generate_new_id(rc4_key* key);
+++
+++ares_rand_state *ares__init_rand_state(void);
+++void ares__destroy_rand_state(ares_rand_state *state);
+++unsigned short ares__generate_new_id(ares_rand_state *state);
++ struct timeval ares__tvnow(void);
++ int ares__expand_name_validated(const unsigned char *encoded,
++                                 const unsigned char *abuf,
++diff --git a/src/lib/ares_query.c b/src/lib/ares_query.c
++index 508274d..42323be 100644
++--- a/src/lib/ares_query.c
+++++ b/src/lib/ares_query.c
++@@ -33,32 +33,6 @@ struct qquery {
++ 
++ static void qcallback(void *arg, int status, int timeouts, unsigned char *abuf, int alen);
++ 
++-static void rc4(rc4_key* key, unsigned char *buffer_ptr, int buffer_len)
++-{
++-  unsigned char x;
++-  unsigned char y;
++-  unsigned char* state;
++-  unsigned char xorIndex;
++-  int counter;
++-
++-  x = key->x;
++-  y = key->y;
++-
++-  state = &key->state[0];
++-  for(counter = 0; counter < buffer_len; counter ++)
++-  {
++-    x = (unsigned char)((x + 1) % 256);
++-    y = (unsigned char)((state[x] + y) % 256);
++-    ARES_SWAP_BYTE(&state[x], &state[y]);
++-
++-    xorIndex = (unsigned char)((state[x] + state[y]) % 256);
++-
++-    buffer_ptr[counter] = (unsigned char)(buffer_ptr[counter]^state[xorIndex]);
++-  }
++-  key->x = x;
++-  key->y = y;
++-}
++-
++ static struct query* find_query_by_id(ares_channel channel, unsigned short id)
++ {
++   unsigned short qid;
++@@ -78,7 +52,6 @@ static struct query* find_query_by_id(ares_channel channel, unsigned short id)
++   return NULL;
++ }
++ 
++-
++ /* a unique query id is generated using an rc4 key. Since the id may already
++    be used by a running query (as infrequent as it may be), a lookup is
++    performed per id generation. In practice this search should happen only
++@@ -89,19 +62,12 @@ static unsigned short generate_unique_id(ares_channel channel)
++   unsigned short id;
++ 
++   do {
++-    id = ares__generate_new_id(&channel->id_key);
+++    id = ares__generate_new_id(channel->rand_state);
++   } while (find_query_by_id(channel, id));
++ 
++   return (unsigned short)id;
++ }
++ 
++-unsigned short ares__generate_new_id(rc4_key* key)
++-{
++-  unsigned short r=0;
++-  rc4(key, (unsigned char *)&r, sizeof(r));
++-  return r;
++-}
++-
++ void ares_query(ares_channel channel, const char *name, int dnsclass,
++                 int type, ares_callback callback, void *arg)
++ {
++diff --git a/src/lib/ares_rand.c b/src/lib/ares_rand.c
++new file mode 100644
++index 0000000..a564bc2
++--- /dev/null
+++++ b/src/lib/ares_rand.c
++@@ -0,0 +1,274 @@
+++/* Copyright 1998 by the Massachusetts Institute of Technology.
+++ * Copyright (C) 2007-2013 by Daniel Stenberg
+++ *
+++ * Permission to use, copy, modify, and distribute this
+++ * software and its documentation for any purpose and without
+++ * fee is hereby granted, provided that the above copyright
+++ * notice appear in all copies and that both that copyright
+++ * notice and this permission notice appear in supporting
+++ * documentation, and that the name of M.I.T. not be used in
+++ * advertising or publicity pertaining to distribution of the
+++ * software without specific, written prior permission.
+++ * M.I.T. makes no representations about the suitability of
+++ * this software for any purpose.  It is provided "as is"
+++ * without express or implied warranty.
+++ */
+++
+++#include "ares_setup.h"
+++#include "ares.h"
+++#include "ares_private.h"
+++#include "ares_nowarn.h"
+++#include <stdlib.h>
+++
+++typedef enum  {
+++  ARES_RAND_OS   = 1,  /* OS-provided such as RtlGenRandom or arc4random */
+++  ARES_RAND_FILE = 2,  /* OS file-backed random number generator */
+++  ARES_RAND_RC4  = 3   /* Internal RC4 based PRNG */
+++} ares_rand_backend;
+++
+++typedef struct ares_rand_rc4
+++{
+++  unsigned char S[256];
+++  size_t        i;
+++  size_t        j;
+++} ares_rand_rc4;
+++
+++struct ares_rand_state
+++{
+++  ares_rand_backend type;
+++  union {
+++    FILE *rand_file;
+++    ares_rand_rc4 rc4;
+++  } state;
+++};
+++
+++
+++/* Define RtlGenRandom = SystemFunction036.  This is in advapi32.dll.  There is
+++ * no need to dynamically load this, other software used widely does not.
+++ * http://blogs.msdn.com/michael_howard/archive/2005/01/14/353379.aspx
+++ * https://docs.microsoft.com/en-us/windows/win32/api/ntsecapi/nf-ntsecapi-rtlgenrandom
+++ */
+++#ifdef _WIN32
+++BOOLEAN WINAPI SystemFunction036(PVOID RandomBuffer, ULONG RandomBufferLength);
+++#  ifndef RtlGenRandom
+++#    define RtlGenRandom(a,b) SystemFunction036(a,b)
+++#  endif
+++#endif
+++
+++
+++#define ARES_RC4_KEY_LEN 32 /* 256 bits */
+++
+++static unsigned int ares_u32_from_ptr(void *addr)
+++{
+++    if (sizeof(void *) == 8) {
+++        return (unsigned int)((((size_t)addr >> 32) & 0xFFFFFFFF) | ((size_t)addr & 0xFFFFFFFF));
+++    }
+++    return (unsigned int)((size_t)addr & 0xFFFFFFFF);
+++}
+++
+++
+++/* initialize an rc4 key as the last possible fallback. */
+++static void ares_rc4_generate_key(ares_rand_rc4 *rc4_state, unsigned char *key, size_t key_len)
+++{
+++  size_t         i;
+++  size_t         len = 0;
+++  unsigned int   data;
+++  struct timeval tv;
+++
+++  if (key_len != ARES_RC4_KEY_LEN)
+++    return;
+++
+++  /* Randomness is hard to come by.  Maybe the system randomizes heap and stack addresses.
+++   * Maybe the current timestamp give us some randomness.
+++   * Use  rc4_state (heap), &i (stack), and ares__tvnow()
+++   */
+++  data = ares_u32_from_ptr(rc4_state);
+++  memcpy(key + len, &data, sizeof(data));
+++  len += sizeof(data);
+++
+++  data = ares_u32_from_ptr(&i);
+++  memcpy(key + len, &data, sizeof(data));
+++  len += sizeof(data);
+++
+++  tv = ares__tvnow();
+++  data = (unsigned int)((tv.tv_sec | tv.tv_usec) & 0xFFFFFFFF);
+++  memcpy(key + len, &data, sizeof(data));
+++  len += sizeof(data);
+++
+++  srand(ares_u32_from_ptr(rc4_state) | ares_u32_from_ptr(&i) | (unsigned int)((tv.tv_sec | tv.tv_usec) & 0xFFFFFFFF));
+++
+++  for (i=len; i<key_len; i++) {
+++    key[i]=(unsigned char)(rand() % 256);  /* LCOV_EXCL_LINE */
+++  }
+++}
+++
+++
+++static void ares_rc4_init(ares_rand_rc4 *rc4_state)
+++{
+++  unsigned char key[ARES_RC4_KEY_LEN];
+++  size_t        i;
+++  size_t        j;
+++
+++  ares_rc4_generate_key(rc4_state, key, sizeof(key));
+++
+++  for (i = 0; i < sizeof(rc4_state->S); i++) {
+++    rc4_state->S[i] = i & 0xFF;
+++  }
+++
+++  for(i = 0, j = 0; i < 256; i++) {
+++    j = (j + rc4_state->S[i] + key[i % sizeof(key)]) % 256;
+++    ARES_SWAP_BYTE(&rc4_state->S[i], &rc4_state->S[j]);
+++  }
+++
+++  rc4_state->i = 0;
+++  rc4_state->j = 0;
+++}
+++
+++/* Just outputs the key schedule, no need to XOR with any data since we have none */
+++static void ares_rc4_prng(ares_rand_rc4 *rc4_state, unsigned char *buf, int len)
+++{
+++  unsigned char *S = rc4_state->S;
+++  size_t         i = rc4_state->i;
+++  size_t         j = rc4_state->j;
+++  size_t         cnt;
+++
+++  for (cnt=0; cnt<len; cnt++) {
+++    i = (i + 1) % 256;
+++    j = (j + S[i]) % 256;
+++
+++    ARES_SWAP_BYTE(&S[i], &S[j]);
+++    buf[cnt] = S[(S[i] + S[j]) % 256];
+++  }
+++
+++  rc4_state->i = i;
+++  rc4_state->j = j;
+++}
+++
+++
+++static int ares__init_rand_engine(ares_rand_state *state)
+++{
+++  memset(state, 0, sizeof(*state));
+++
+++#if defined(HAVE_ARC4RANDOM_BUF) || defined(_WIN32)
+++  state->type = ARES_RAND_OS;
+++  return 1;
+++#elif defined(CARES_RANDOM_FILE)
+++  state->type            = ARES_RAND_FILE;
+++  state->state.rand_file = fopen(CARES_RANDOM_FILE, "rb");
+++  if (state->state.rand_file) {
+++    setvbuf(state->state.rand_file, NULL, _IONBF, 0);
+++    return 1;
+++  }
+++  /* Fall-Thru on failure to RC4 */
+++#endif
+++
+++  state->type = ARES_RAND_RC4;
+++  ares_rc4_init(&state->state.rc4);
+++
+++  /* Currently cannot fail */
+++  return 1;
+++}
+++
+++
+++ares_rand_state *ares__init_rand_state()
+++{
+++  ares_rand_state *state = NULL;
+++
+++  state = ares_malloc(sizeof(*state));
+++  if (!state)
+++    return NULL;
+++
+++  if (!ares__init_rand_engine(state)) {
+++    ares_free(state);
+++    return NULL;
+++  }
+++
+++  return state;
+++}
+++
+++
+++static void ares__clear_rand_state(ares_rand_state *state)
+++{
+++  if (!state)
+++    return;
+++
+++  switch (state->type) {
+++    case ARES_RAND_OS:
+++      break;
+++    case ARES_RAND_FILE:
+++      fclose(state->state.rand_file);
+++      break;
+++    case ARES_RAND_RC4:
+++      break;
+++  }
+++}
+++
+++
+++static void ares__reinit_rand(ares_rand_state *state)
+++{
+++  ares__clear_rand_state(state);
+++  ares__init_rand_engine(state);
+++}
+++
+++
+++void ares__destroy_rand_state(ares_rand_state *state)
+++{
+++  if (!state)
+++    return;
+++
+++  ares__clear_rand_state(state);
+++  ares_free(state);
+++}
+++
+++
+++static void ares__rand_bytes(ares_rand_state *state, unsigned char *buf, size_t len)
+++{
+++
+++  while (1) {
+++    size_t rv;
+++    size_t bytes_read = 0;
+++
+++    switch (state->type) {
+++      case ARES_RAND_OS:
+++#ifdef _WIN32
+++        RtlGenRandom(buf, len);
+++        return;
+++#elif defined(HAVE_ARC4RANDOM_BUF)
+++        arc4random_buf(buf, len);
+++        return;
+++#else
+++        /* Shouldn't be possible to be here */
+++        break;
+++#endif
+++
+++      case ARES_RAND_FILE:
+++        while (1) {
+++          size_t rv = fread(buf + bytes_read, 1, len - bytes_read, state->state.rand_file);
+++          if (rv == 0)
+++            break; /* critical error, will reinit rand state */
+++
+++          bytes_read += rv;
+++          if (bytes_read == len)
+++            return;
+++        }
+++        break;
+++
+++      case ARES_RAND_RC4:
+++        ares_rc4_prng(&state->state.rc4, buf, len);
+++        return;
+++    }
+++
+++    /* If we didn't return before we got here, that means we had a critical rand
+++     * failure and need to reinitialized */
+++    ares__reinit_rand(state);
+++  }
+++}
+++
+++unsigned short ares__generate_new_id(ares_rand_state *state)
+++{
+++  unsigned short r=0;
+++
+++  ares__rand_bytes(state, (unsigned char *)&r, sizeof(r));
+++  return r;
+++}
+++
++-- 
++2.30.2
++
+diff --git a/meta-oe/recipes-support/c-ares/c-ares_1.18.1.bb b/meta-oe/recipes-support/c-ares/c-ares_1.18.1.bb
+index fef33cd083..b6cdd801e5 100644
+--- a/meta-oe/recipes-support/c-ares/c-ares_1.18.1.bb
++++ b/meta-oe/recipes-support/c-ares/c-ares_1.18.1.bb
+@@ -9,6 +9,7 @@ SRC_URI = "git://github.com/c-ares/c-ares.git;branch=main;protocol=https \
+            file://CVE-2022-4904.patch \
+            file://CVE-2023-31130.patch \
+            file://CVE-2023-32067.patch \
++           file://CVE-2023-31147.patch \
+           "
+ SRCREV = "2aa086f822aad5017a6f2061ef656f237a62d0ed"
+ 
+-- 
+2.30.2
+
 
