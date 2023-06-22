@@ -1,223 +1,261 @@
-Return-Path: <akuster808@gmail.com>
+Return-Path: <narpat.mali@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0485FEB64D8
-	for <webhook@archiver.kernel.org>; Thu, 22 Jun 2023 09:52:16 +0000 (UTC)
-Received: from mail-qt1-f172.google.com (mail-qt1-f172.google.com [209.85.160.172])
- by mx.groups.io with SMTP id smtpd.web10.7692.1687427531044712064
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 22B33EB64D8
+	for <webhook@archiver.kernel.org>; Thu, 22 Jun 2023 10:24:26 +0000 (UTC)
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.web11.8019.1687429458744368707
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 22 Jun 2023 02:52:11 -0700
+ Thu, 22 Jun 2023 03:24:18 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=UK9vzH94;
- spf=pass (domain: gmail.com, ip: 209.85.160.172, mailfrom: akuster808@gmail.com)
-Received: by mail-qt1-f172.google.com with SMTP id d75a77b69052e-400813cff23so419371cf.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 22 Jun 2023 02:52:10 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1687427530; x=1690019530;
-        h=content-transfer-encoding:subject:from:to:content-language
-         :user-agent:mime-version:date:message-id:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=TUZQgRx1iVrwoJt0ATs11bp6YnctlJOduw6RfQgf2z0=;
-        b=UK9vzH94oAbBACM7ChVRobFc30bNkyE3XGQzT604gJjZ1moSWHsmpBsKfwPTu7zFfL
-         I/lIRe3DoOP5zS2WfdU/Y6azqCoaXyYegQQLVE0YQ+hQC56QSHBBireUCxHgdP+PY3cg
-         KQIqmkW3CIlufOMD8y7ojUOhNyY7iZRoA3mv+EBmIELmuqORXMZ8q8WzL8BVcKxuxNIp
-         WdADHVgaPFAcPPZA39e3GUwqZXDBoti0K8vYFRky8aoGEFWULLnF2TJMIQ9wMvJNoRKS
-         6gG0qhmBYeD3WwFsgqlJ4Sp08GkdJxHOwihFOzXwXIsSvrdIelpknki4GvQqWhOVE9N2
-         28dg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1687427530; x=1690019530;
-        h=content-transfer-encoding:subject:from:to:content-language
-         :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=TUZQgRx1iVrwoJt0ATs11bp6YnctlJOduw6RfQgf2z0=;
-        b=AcvTQ3/IWTf/1MY09MiEFs06YFC3Nb/6HwbF7sB7YhFAj7X6w3Fb8JzhT6HMo4W6XP
-         ZlwElJncMNq9e02Iq757rlIaFtoNzJyVIP/3oAJ5UFT0VLDRUGhxhAwkXy9mVjxf+2Zr
-         SQxgbuGi2BkGsgN2tZG/gyFRPEZRIni0AEaa/qsi97sMcQP7r9pRs+qDRzU4yPe/m9FU
-         IC37GzijxDYJTOdTaanHIqMWxLGanBqOiFrtoTkfUCWtftX87J7CLwGFAtSX8fSBxOmK
-         XihLgbhi7gicxVWYTBiDX2Z7HH3iJk6E47ldKAroIjDE4+szgtnO941JhMsIpqIJh69D
-         1+qA==
-X-Gm-Message-State: AC+VfDwspxcXpj+iXDyPDbHjhXS9ppCZ264mFdQ3q9C5M3WRWwkpF/mW
-	jn6uoBNyXgyKfHhnCbYXoZE=
-X-Google-Smtp-Source: ACHHUZ5gWr8q5V7ii9+EYAAZPmTgQgW5bZ/kJmzIUexkmqrOyqooCtn/3pcISgxDdCbj7vyN7tLMGg==
-X-Received: by 2002:a05:622a:110a:b0:3fd:eca6:8aed with SMTP id e10-20020a05622a110a00b003fdeca68aedmr14752326qty.44.1687427529912;
-        Thu, 22 Jun 2023 02:52:09 -0700 (PDT)
-Received: from ?IPV6:2600:1700:9190:ba10:dc27:e982:11fd:2a21? ([2600:1700:9190:ba10:dc27:e982:11fd:2a21])
-        by smtp.gmail.com with ESMTPSA id c22-20020a25c016000000b00bb144da7d68sm1469709ybf.13.2023.06.22.02.52.09
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 22 Jun 2023 02:52:09 -0700 (PDT)
-Message-ID: <5b6db4a5-9c0f-e83d-f6de-9ae7551aed56@gmail.com>
-Date: Thu, 22 Jun 2023 05:52:09 -0400
+ dkim=pass header.i=@windriver.com header.s=pps06212021 header.b=qJ/ZEdNM;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=55378c4034=narpat.mali@windriver.com)
+Received: from pps.filterd (m0250811.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.17.1.22/8.17.1.22) with ESMTP id 35MADjKb021442
+	for <openembedded-devel@lists.openembedded.org>; Thu, 22 Jun 2023 10:24:17 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
+	 h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding:content-type; s=PPS06212021; bh=d20ba
+	r7XOwgUIdUDjtCgHqlOEH5d84bPAg/oO60ECqk=; b=qJ/ZEdNMPIc/EwL+yKtow
+	rD7BvPhzKsLxlltFFEtLm2GLJcqSwA8zu9w+r4gRVVutrApwqWYoCi9+MKqko8/s
+	sOlK9qJN6xqGXWKR4MUrc/rIaV7SAcKzk3y8MvteNNOiPpKQnvc6VaBbGtz4cvSe
+	CSoSf/jQ69aawzWB0UToSoSC3EF2ZqdPgZF1WmJUMU4Syp3PI0CLhqdhuNoyqstG
+	yn2RbBZtmOZPLemJ9Ftefur8N/3qRZcBuC4ZWggpwUk/RxfSHMTYM5A0eCDDDwxf
+	CIUw1KHzi/7d04dlprOMPjCJMojLp3mPNG0ipO+Zqvm0TNz/qO+e7v56UakXfiUY
+	g==
+Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3rce0g88nb-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Thu, 22 Jun 2023 10:24:17 +0000 (GMT)
+Received: from blr-linux-engg1.wrs.com (147.11.136.210) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.23; Thu, 22 Jun 2023 03:24:11 -0700
+From: nmali <narpat.mali@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: <hari.gpillai@windriver.com>
+Subject: [PATCH] frr: fix for CVE-2023-31490
+Date: Thu, 22 Jun 2023 10:23:45 +0000
+Message-ID: <20230622102345.2296870-1-narpat.mali@windriver.com>
+X-Mailer: git-send-email 2.40.0
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.11.0
-Content-Language: en-US
-To: Khem Raj <raj.khem@gmail.com>,
- OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-From: akuster808 <akuster808@gmail.com>
-Subject: kirkstone merge request: June 22nd
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [147.11.136.210]
+X-ClientProxiedBy: ala-exchng01.corp.ad.wrs.com (147.11.82.252) To
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252)
+X-Proofpoint-ORIG-GUID: S22GERwELEgjwXB6f1dbd3Vt4L8sbVxI
+X-Proofpoint-GUID: S22GERwELEgjwXB6f1dbd3Vt4L8sbVxI
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.254,Aquarius:18.0.957,Hydra:6.0.591,FMLib:17.11.176.26
+ definitions=2023-06-22_06,2023-06-22_01,2023-05-22_02
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 suspectscore=0
+ priorityscore=1501 spamscore=0 bulkscore=0 lowpriorityscore=0
+ malwarescore=0 clxscore=1015 adultscore=0 mlxlogscore=999 impostorscore=0
+ mlxscore=0 phishscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.19.0-2305260000 definitions=main-2306220086
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 22 Jun 2023 09:52:16 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103484
+ <openembedded-devel@lists.openembedded.org>; Thu, 22 Jun 2023 10:24:26 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103485
 
-The following changes since commit bdad2a789e30703a825b876279665720d06d55dc:
+From: Narpat Mali <narpat.mali@windriver.com>
 
-   python3-werkzeug: fix for CVE-2023-23934 (2023-06-11 11:43:33 -0400)
+An issue found in Frrouting bgpd v.8.4.2 allows a remote attacker to
+cause a denial of service via the bgp_attr_psid_sub() function.
 
-are available in the Git repository at:
+References:
+https://nvd.nist.gov/vuln/detail/CVE-2023-31490
+https://github.com/FRRouting/frr/issues/13099
 
-   https://git.openembedded.org/meta-openembedded kirkstone-next
+Signed-off-by: Narpat Mali <narpat.mali@windriver.com>
+---
+ .../frr/frr/CVE-2023-31490.patch              | 160 ++++++++++++++++++
+ .../recipes-protocols/frr/frr_8.2.2.bb        |   1 +
+ 2 files changed, 161 insertions(+)
+ create mode 100644 meta-networking/recipes-protocols/frr/frr/CVE-2023-31490.patch
 
-for you to fetch changes up to a82d92c8a6525da01524bf8f4a60bf6b35dcbb3d:
+diff --git a/meta-networking/recipes-protocols/frr/frr/CVE-2023-31490.patch b/meta-networking/recipes-protocols/frr/frr/CVE-2023-31490.patch
+new file mode 100644
+index 0000000000..d7b341d769
+--- /dev/null
++++ b/meta-networking/recipes-protocols/frr/frr/CVE-2023-31490.patch
+@@ -0,0 +1,160 @@
++From 72c13aac2eb7c8f3a10ad806d80ab635c28f4c04 Mon Sep 17 00:00:00 2001
++From: Narpat Mali <narpat.mali@windriver.com>
++Date: Wed, 21 Jun 2023 15:24:50 +0000
++Subject: [PATCH] bgpd: Ensure stream received has enough data
++
++BGP_PREFIX_SID_SRV6_L3_SERVICE attributes must not
++fully trust the length value specified in the nlri.
++Always ensure that the amount of data we need to read
++can be fullfilled.
++
++Reported-by: Iggy Frankovic <iggyfran@amazon.com>
++Signed-off-by: Donald Sharp <sharpd@nvidia.com>
++
++CVE: CVE-2023-31490
++
++Upstream-Status: Backport [https://github.com/FRRouting/frr/pull/12454/commits/06431bfa7570f169637ebb5898f0b0cc3b010802]
++
++Signed-off-by: Narpat Mali <narpat.mali@windriver.com>
++---
++ bgpd/bgp_attr.c | 79 ++++++++++++++++---------------------------------
++ 1 file changed, 25 insertions(+), 54 deletions(-)
++
++diff --git a/bgpd/bgp_attr.c b/bgpd/bgp_attr.c
++index 2154baf4e..5d06991e2 100644
++--- a/bgpd/bgp_attr.c
+++++ b/bgpd/bgp_attr.c
++@@ -2722,9 +2722,21 @@ static bgp_attr_parse_ret_t bgp_attr_psid_sub(uint8_t type, uint16_t length,
++	uint8_t sid_type, sid_flags;
++	char buf[BUFSIZ];
++
+++	/*
+++	 * Check that we actually have at least as much data as
+++	 * specified by the length field
+++	 */
+++	if (STREAM_READABLE(peer->curr) < length) {
+++		flog_err(
+++			EC_BGP_ATTR_LEN,
+++			"Prefix SID specifies length %hu, but only %zu bytes remain",
+++			length, STREAM_READABLE(peer->curr));
+++		return bgp_attr_malformed(args, BGP_NOTIFY_UPDATE_ATTR_LENG_ERR,
+++					  args->total);
+++	}
+++
++	if (type == BGP_PREFIX_SID_LABEL_INDEX) {
++-		if (STREAM_READABLE(peer->curr) < length
++-		    || length != BGP_PREFIX_SID_LABEL_INDEX_LENGTH) {
+++		if (length != BGP_PREFIX_SID_LABEL_INDEX_LENGTH) {
++			flog_err(EC_BGP_ATTR_LEN,
++				 "Prefix SID label index length is %hu instead of %u",
++				 length, BGP_PREFIX_SID_LABEL_INDEX_LENGTH);
++@@ -2746,12 +2758,8 @@ static bgp_attr_parse_ret_t bgp_attr_psid_sub(uint8_t type, uint16_t length,
++		/* Store label index; subsequently, we'll check on
++		 * address-family */
++		attr->label_index = label_index;
++-	}
++-
++-	/* Placeholder code for the IPv6 SID type */
++-	else if (type == BGP_PREFIX_SID_IPV6) {
++-		if (STREAM_READABLE(peer->curr) < length
++-		    || length != BGP_PREFIX_SID_IPV6_LENGTH) {
+++	} else if (type == BGP_PREFIX_SID_IPV6) {
+++		if (length != BGP_PREFIX_SID_IPV6_LENGTH) {
++			flog_err(EC_BGP_ATTR_LEN,
++				 "Prefix SID IPv6 length is %hu instead of %u",
++				 length, BGP_PREFIX_SID_IPV6_LENGTH);
++@@ -2765,10 +2773,7 @@ static bgp_attr_parse_ret_t bgp_attr_psid_sub(uint8_t type, uint16_t length,
++		stream_getw(peer->curr);
++
++		stream_get(&ipv6_sid, peer->curr, 16);
++-	}
++-
++-	/* Placeholder code for the Originator SRGB type */
++-	else if (type == BGP_PREFIX_SID_ORIGINATOR_SRGB) {
+++	} else if (type == BGP_PREFIX_SID_ORIGINATOR_SRGB) {
++		/*
++		 * ietf-idr-bgp-prefix-sid-05:
++		 *     Length is the total length of the value portion of the
++@@ -2793,19 +2798,6 @@ static bgp_attr_parse_ret_t bgp_attr_psid_sub(uint8_t type, uint16_t length,
++				args->total);
++		}
++
++-		/*
++-		 * Check that we actually have at least as much data as
++-		 * specified by the length field
++-		 */
++-		if (STREAM_READABLE(peer->curr) < length) {
++-			flog_err(EC_BGP_ATTR_LEN,
++-				 "Prefix SID Originator SRGB specifies length %hu, but only %zu bytes remain",
++-				 length, STREAM_READABLE(peer->curr));
++-			return bgp_attr_malformed(
++-				args, BGP_NOTIFY_UPDATE_ATTR_LENG_ERR,
++-				args->total);
++-		}
++-
++		/*
++		 * Check that the portion of the TLV containing the sequence of
++		 * SRGBs corresponds to a multiple of the SRGB size; to get
++@@ -2829,12 +2821,8 @@ static bgp_attr_parse_ret_t bgp_attr_psid_sub(uint8_t type, uint16_t length,
++			stream_get(&srgb_base, peer->curr, 3);
++			stream_get(&srgb_range, peer->curr, 3);
++		}
++-	}
++-
++-	/* Placeholder code for the VPN-SID Service type */
++-	else if (type == BGP_PREFIX_SID_VPN_SID) {
++-		if (STREAM_READABLE(peer->curr) < length
++-		    || length != BGP_PREFIX_SID_VPN_SID_LENGTH) {
+++	} else if (type == BGP_PREFIX_SID_VPN_SID) {
+++		if (length != BGP_PREFIX_SID_VPN_SID_LENGTH) {
++			flog_err(EC_BGP_ATTR_LEN,
++				 "Prefix SID VPN SID length is %hu instead of %u",
++				 length, BGP_PREFIX_SID_VPN_SID_LENGTH);
++@@ -2870,39 +2858,22 @@ static bgp_attr_parse_ret_t bgp_attr_psid_sub(uint8_t type, uint16_t length,
++		attr->srv6_vpn->sid_flags = sid_flags;
++		sid_copy(&attr->srv6_vpn->sid, &ipv6_sid);
++		attr->srv6_vpn = srv6_vpn_intern(attr->srv6_vpn);
++-	}
++-
++-	/* Placeholder code for the SRv6 L3 Service type */
++-	else if (type == BGP_PREFIX_SID_SRV6_L3_SERVICE) {
++-		if (STREAM_READABLE(peer->curr) < length) {
+++	} else if (type == BGP_PREFIX_SID_SRV6_L3_SERVICE) {
+++		if (STREAM_READABLE(peer->curr) < 1) {
++			flog_err(
++				EC_BGP_ATTR_LEN,
++-				"Prefix SID SRv6 L3-Service length is %hu, but only %zu bytes remain",
++-				length, STREAM_READABLE(peer->curr));
++-			return bgp_attr_malformed(args,
++-				 BGP_NOTIFY_UPDATE_ATTR_LENG_ERR,
++-				 args->total);
+++				"Prefix SID SRV6 L3 Service not enough data left, it must be at least 1 byte");
+++			return bgp_attr_malformed(
+++				args, BGP_NOTIFY_UPDATE_ATTR_LENG_ERR,
+++				args->total);
++		}
++-
++		/* ignore reserved */
++		stream_getc(peer->curr);
++
++		return bgp_attr_srv6_service(args);
++	}
++-
++	/* Placeholder code for Unsupported TLV */
++	else {
++-
++-		if (STREAM_READABLE(peer->curr) < length) {
++-			flog_err(
++-				EC_BGP_ATTR_LEN,
++-				"Prefix SID SRv6 length is %hu - too long, only %zu remaining in this UPDATE",
++-				length, STREAM_READABLE(peer->curr));
++-			return bgp_attr_malformed(
++-				args, BGP_NOTIFY_UPDATE_ATTR_LENG_ERR,
++-				args->total);
++-		}
++-
++		if (bgp_debug_update(peer, NULL, NULL, 1))
++			zlog_debug(
++				"%s attr Prefix-SID sub-type=%u is not supported, skipped",
++--
++2.40.0
+diff --git a/meta-networking/recipes-protocols/frr/frr_8.2.2.bb b/meta-networking/recipes-protocols/frr/frr_8.2.2.bb
+index 80f4729e1f..073657b652 100644
+--- a/meta-networking/recipes-protocols/frr/frr_8.2.2.bb
++++ b/meta-networking/recipes-protocols/frr/frr_8.2.2.bb
+@@ -13,6 +13,7 @@ SRC_URI = "git://github.com/FRRouting/frr.git;protocol=https;branch=stable/8.2 \
+            file://CVE-2022-37035.patch \
+            file://CVE-2022-37032.patch \
+            file://CVE-2022-42917.patch \
++           file://CVE-2023-31490.patch \
+            file://frr.pam \
+ 	      "
+ 
+-- 
+2.40.0
 
-   ExprTk: Update package to release/0.0.2 (2023-06-19 09:17:01 -0400)
-
-----------------------------------------------------------------
-Adrian Zaharia (1):
-       lapack: add packageconfig for lapacke
-
-Arash Partow (1):
-       ExprTk: Update package to release/0.0.2
-
-Ashish Sharma (1):
-       openldap: Fix CVE-2023-2953
-
-Chen Qi (1):
-       redis: use the files path correctly
-
-Hitendra Prajapati (1):
-       wireshark: CVE-2023-2952 XRA dissector infinite loop
-
-Narpat Mali (3):
-       python3-django: fix for CVE-2023-31047
-       python3-django: upgrade 3.2.12 -> 3.2.19
-       python3-sqlparse: fix for CVE-2023-30608
-
-Peter Marko (1):
-       c-ares: ignore CVE-2023-31124
-
-Polampalli, Archana (2):
-       samba: fix CVE-2022-41916
-       samba: fix CVE-2021-44758
-
-Polampalli, Archana A (1):
-       samba: fix CVE-2022-3437
-
-Polampalli, Archana ñ (1):
-       samba: fix CVE-2022-45142
-
-Soumya (1):
-       opencv: Fix for CVE-2023-2617
-
-Xiangyu Chen (1):
-       meta-oe: add pahole to NON_MULTILIB_RECIPES
-
-sana kazi (1):
-       Googletest: Adapt googletest 1.11.0 with gcc11
-
-  .../recipes-connectivity/samba/samba/CVE-2021-44758.patch      | 72 ++++++
-  .../recipes-connectivity/samba/samba/CVE-2022-3437-0001.patch  | 77 ++++++
-  .../recipes-connectivity/samba/samba/CVE-2022-3437-0002.patch  | 35 +++
-  .../recipes-connectivity/samba/samba/CVE-2022-3437-0003.patch  | 50 ++++
-  .../recipes-connectivity/samba/samba/CVE-2022-3437-0004.patch  | 57 +++++
-  .../recipes-connectivity/samba/samba/CVE-2022-3437-0005.patch  | 37 +++
-  .../recipes-connectivity/samba/samba/CVE-2022-3437-0006.patch  | 65 +++++
-  .../recipes-connectivity/samba/samba/CVE-2022-3437-0007.patch  | 39 +++
-  .../recipes-connectivity/samba/samba/CVE-2022-3437-0008.patch  | 48 ++++
-  .../recipes-connectivity/samba/samba/CVE-2022-41916.patch      | 38 +++
-  .../recipes-connectivity/samba/samba/CVE-2022-45142.patch      | 51 ++++
-  meta-networking/recipes-connectivity/samba/samba_4.14.14.bb    | 11 +
-  .../recipes-support/wireshark/files/CVE-2023-2952.patch        | 98 
-++++++++
-  meta-networking/recipes-support/wireshark/wireshark_3.4.12.bb  | 1 +
-  meta-oe/conf/layer.conf                                        | 2 +-
-  meta-oe/recipes-devtools/exprtk/exprtk_git.bb                  | 4 +-
-  meta-oe/recipes-devtools/lapack/lapack_3.10.0.bb               | 3 +
-  .../0001-src-Do-not-reset-FINAL_LIBS.patch                     | 0
-  .../0006-Define-correct-gregs-for-RISCV32.patch                | 0
-  .../redis/{redis-7 => redis-7.0.11}/GNU_SOURCE-7.patch |   0
-  .../hiredis-use-default-CC-if-it-is-set.patch                  | 0
-  .../redis/{redis-7 => redis-7.0.11}/init-redis-server |   0
-  .../lua-update-Makefile-to-use-environment-build-setting.patch | 0
-  .../redis/{redis-7 => redis-7.0.11}/oe-use-libc-malloc.patch |   0
-  .../redis/{redis-7 => redis-7.0.11}/redis.conf |   0
-  .../redis/{redis-7 => redis-7.0.11}/redis.service |   0
-  meta-oe/recipes-extended/redis/redis_7.0.11.bb                 | 2 -
-  meta-oe/recipes-support/c-ares/c-ares_1.18.1.bb                | 4 +
-  meta-oe/recipes-support/opencv/opencv/CVE-2023-2617.patch      | 88 
-+++++++
-  meta-oe/recipes-support/opencv/opencv_4.5.5.bb                 | 1 +
-  .../recipes-support/openldap/openldap/CVE-2023-2953-1.patch    | 30 +++
-  .../recipes-support/openldap/openldap/CVE-2023-2953-2.patch    | 76 ++++++
-  meta-oe/recipes-support/openldap/openldap_2.5.12.bb            | 2 +
-  .../googletest/files/0001-work-around-GCC-6-11-ADL-bug.patch   | 42 ++++
-  meta-oe/recipes-test/googletest/googletest_git.bb              | 3 +-
-  .../python/python3-django/CVE-2023-31047.patch                 | 352 
-++++++++++++++++++++++++++++
-  meta-python/recipes-devtools/python/python3-django_2.2.28.bb   | 2 +
-  .../{python3-django_3.2.12.bb => python3-django_3.2.19.bb} |   2 +-
-  .../python/python3-sqlparse/CVE-2023-30608.patch               | 75 ++++++
-  meta-python/recipes-devtools/python/python3-sqlparse_0.4.2.bb  | 1 +
-  40 files changed, 1361 insertions(+), 7 deletions(-)
-  create mode 100644 
-meta-networking/recipes-connectivity/samba/samba/CVE-2021-44758.patch
-  create mode 100644 
-meta-networking/recipes-connectivity/samba/samba/CVE-2022-3437-0001.patch
-  create mode 100644 
-meta-networking/recipes-connectivity/samba/samba/CVE-2022-3437-0002.patch
-  create mode 100644 
-meta-networking/recipes-connectivity/samba/samba/CVE-2022-3437-0003.patch
-  create mode 100644 
-meta-networking/recipes-connectivity/samba/samba/CVE-2022-3437-0004.patch
-  create mode 100644 
-meta-networking/recipes-connectivity/samba/samba/CVE-2022-3437-0005.patch
-  create mode 100644 
-meta-networking/recipes-connectivity/samba/samba/CVE-2022-3437-0006.patch
-  create mode 100644 
-meta-networking/recipes-connectivity/samba/samba/CVE-2022-3437-0007.patch
-  create mode 100644 
-meta-networking/recipes-connectivity/samba/samba/CVE-2022-3437-0008.patch
-  create mode 100644 
-meta-networking/recipes-connectivity/samba/samba/CVE-2022-41916.patch
-  create mode 100644 
-meta-networking/recipes-connectivity/samba/samba/CVE-2022-45142.patch
-  create mode 100644 
-meta-networking/recipes-support/wireshark/files/CVE-2023-2952.patch
-  rename meta-oe/recipes-extended/redis/{redis-7 => 
-redis-7.0.11}/0001-src-Do-not-reset-FINAL_LIBS.patch (100%)
-  rename meta-oe/recipes-extended/redis/{redis-7 => 
-redis-7.0.11}/0006-Define-correct-gregs-for-RISCV32.patch (100%)
-  rename meta-oe/recipes-extended/redis/{redis-7 => 
-redis-7.0.11}/GNU_SOURCE-7.patch (100%)
-  rename meta-oe/recipes-extended/redis/{redis-7 => 
-redis-7.0.11}/hiredis-use-default-CC-if-it-is-set.patch (100%)
-  rename meta-oe/recipes-extended/redis/{redis-7 => 
-redis-7.0.11}/init-redis-server (100%)
-  rename meta-oe/recipes-extended/redis/{redis-7 => 
-redis-7.0.11}/lua-update-Makefile-to-use-environment-build-setting.patch 
-(100%)
-  rename meta-oe/recipes-extended/redis/{redis-7 => 
-redis-7.0.11}/oe-use-libc-malloc.patch (100%)
-  rename meta-oe/recipes-extended/redis/{redis-7 => 
-redis-7.0.11}/redis.conf (100%)
-  rename meta-oe/recipes-extended/redis/{redis-7 => 
-redis-7.0.11}/redis.service (100%)
-  create mode 100644 
-meta-oe/recipes-support/opencv/opencv/CVE-2023-2617.patch
-  create mode 100644 
-meta-oe/recipes-support/openldap/openldap/CVE-2023-2953-1.patch
-  create mode 100644 
-meta-oe/recipes-support/openldap/openldap/CVE-2023-2953-2.patch
-  create mode 100644 
-meta-oe/recipes-test/googletest/files/0001-work-around-GCC-6-11-ADL-bug.patch
-  create mode 100644 
-meta-python/recipes-devtools/python/python3-django/CVE-2023-31047.patch
-  rename meta-python/recipes-devtools/python/{python3-django_3.2.12.bb 
-=> python3-django_3.2.19.bb} (77%)
-  create mode 100644 
-meta-python/recipes-devtools/python/python3-sqlparse/CVE-2023-30608.patch
 
