@@ -1,789 +1,134 @@
-Return-Path: <peter.marko@siemens.com>
+Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 106D6EB64D8
-	for <webhook@archiver.kernel.org>; Thu, 22 Jun 2023 17:40:09 +0000 (UTC)
-Received: from mta-64-225.siemens.flowmailer.net (mta-64-225.siemens.flowmailer.net [185.136.64.225])
- by mx.groups.io with SMTP id smtpd.web11.18035.1687455601953297583
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BDE12EB64DD
+	for <webhook@archiver.kernel.org>; Fri, 23 Jun 2023 11:03:14 +0000 (UTC)
+Received: from mail-yb1-f170.google.com (mail-yb1-f170.google.com [209.85.219.170])
+ by mx.groups.io with SMTP id smtpd.web11.39428.1687518186021752583
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 22 Jun 2023 10:40:03 -0700
+ Fri, 23 Jun 2023 04:03:06 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=peter.marko@siemens.com header.s=fm1 header.b=V3JvCZWM;
- spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.64.225, mailfrom: fm-256628-20230622173958a0464304d5ffc03b34-d5dsth@rts-flowmailer.siemens.com)
-Received: by mta-64-225.siemens.flowmailer.net with ESMTPSA id 20230622173958a0464304d5ffc03b34
-        for <openembedded-devel@lists.openembedded.org>;
-        Thu, 22 Jun 2023 19:39:59 +0200
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm1;
- d=siemens.com; i=peter.marko@siemens.com;
- h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc;
- bh=sauWgkxfzPJoeHw5k9tKVBrIwQ7QAWQ97wLjn4BoTbA=;
- b=V3JvCZWMV0Iffggk9GLmly/7WmwbQxnKH1xIe1dgY0IMe8ZFlqFYIXCVH33Z6WlE5LK8Ns
- D3QLkWauddcgcCbcR0EHDJ9BdUpO6RqmWmcUAcOghho3QKtwq4UliwcoPLYKs5vCTLmFlmtG
- xqFroxARc5tt6irgPAs3hT4Y8eew0=;
-From: Peter Marko <peter.marko@siemens.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Peter Marko <peter.marko@siemens.com>
-Subject: [OE-core][kirkstone][PATCH] c-ares: backport patch for CVE-2023-31147
-Date: Thu, 22 Jun 2023 19:39:13 +0200
-Message-Id: <20230622173913.776438-1-peter.marko@siemens.com>
+ dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=qk2L38pJ;
+ spf=pass (domain: gmail.com, ip: 209.85.219.170, mailfrom: akuster808@gmail.com)
+Received: by mail-yb1-f170.google.com with SMTP id 3f1490d57ef6-be3e2d172cbso405815276.3
+        for <openembedded-devel@lists.openembedded.org>; Fri, 23 Jun 2023 04:03:05 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20221208; t=1687518185; x=1690110185;
+        h=content-transfer-encoding:subject:from:to:content-language
+         :user-agent:mime-version:date:message-id:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=DebRCIC160zgopeYPCLisHpQiYMuzuWfFATr4rxOKkA=;
+        b=qk2L38pJxqoJKata9371sHNSmNMGymNZnvvZm1XjFZKDkROHk9hs2nuPYby+QG6vAZ
+         MTPBYvWf5NsaR366enXJCIdtILRSbjee0MQThGfLBR/3G7f9nLgMisZ5jdwJgG03eoSR
+         6E+RfRg4DaVsHErVJb8P48GJCXq4ZW0PXPB0qYOqSZJbGu+ur3Xz1fICS3tgo+U7oj9F
+         rug+JKQsTeAae7DfnkejBeErHzq1Wam12J14Bit7mRJZ8j40QNOn+jlOJ8X48d7Yuxnv
+         SSJcX1CIQyPz0EPb8LfQqADAY9qrYpxq0YH6vTod0p9z6R5Nq97AEQMFYEgkbQLxfJvy
+         SKNQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20221208; t=1687518185; x=1690110185;
+        h=content-transfer-encoding:subject:from:to:content-language
+         :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=DebRCIC160zgopeYPCLisHpQiYMuzuWfFATr4rxOKkA=;
+        b=BPgFL4/F/KEEPkApEpcqiOXeB1QfOAy9jAAHguZ7VlzsskyFl2Pv28y9aCdIBIfu5Z
+         pMpXqzgzYkUcJlHD9ScRVg6HzfoGeybWVIuBvkIPeSW/4CovW3CE94fbXIfIRGgOtPLK
+         oo98vTWPaHwG2yE0AotEBwWQ6tuwEAugcc3fpELkx5fMRC9UOjHkbSzxdio7cmPacA1K
+         yc3yqZ4DD6Ua0i02nKBqOJ33+8LvzwBS2On5l+QGjXWvfuPQqRctd9mZH7OnzH0cBi+2
+         v+oRNvcn5xhhWiph8PxMyMn0nzM9UbMI478Cg+wagHFq9XAzlwCr31vmv4tuh411J/ur
+         fsdA==
+X-Gm-Message-State: AC+VfDxSuS5FiwOq2IDMccqUg+iWBxlF11AhDNS4jmSdesCeS35UR4Xj
+	qCZDCE0BO7yWaus3sUZO3mFcluMPNj8=
+X-Google-Smtp-Source: ACHHUZ7VUJhGcgIXOrt3kB7zbR289EVnrcxSCQxqC6wDe4n3x4C/fJbBxa30WwVyn3SEzfAHZr1I1A==
+X-Received: by 2002:a25:7188:0:b0:bf2:b00c:f09 with SMTP id m130-20020a257188000000b00bf2b00c0f09mr10449860ybc.40.1687518185114;
+        Fri, 23 Jun 2023 04:03:05 -0700 (PDT)
+Received: from ?IPV6:2600:1700:9190:ba10:80e:b8b0:6c85:7e? ([2600:1700:9190:ba10:80e:b8b0:6c85:7e])
+        by smtp.gmail.com with ESMTPSA id 62-20020a250341000000b00be53a1eb5aesm2021360ybd.53.2023.06.23.04.03.04
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Fri, 23 Jun 2023 04:03:04 -0700 (PDT)
+Message-ID: <a1efe910-35a9-1b45-6c17-5eccc74bca3e@gmail.com>
+Date: Fri, 23 Jun 2023 07:03:04 -0400
 MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.11.0
+Content-Language: en-US
+To: Khem Raj <raj.khem@gmail.com>,
+ OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+From: akuster808 <akuster808@gmail.com>
+Subject: dunfell merge request: June 23rd
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-Flowmailer-Platform: Siemens
-Feedback-ID: 519:519-256628:519-21489:flowmailer
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 22 Jun 2023 17:40:09 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103493
+ <openembedded-devel@lists.openembedded.org>; Fri, 23 Jun 2023 11:03:14 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103494
 
-From: Peter Marko <peter.marko@siemens.com>
+The following changes since commit 116bfe8d5e5851e7fc5424f40da8691a19c5b5ee:
 
-Backported from https://github.com/c-ares/c-ares/commit/823df3b989e59465d17b0a2eb1239a5fc048b4e5
+   nodejs: make 14.18.1 available but not default (2023-05-16 07:09:25 
+-0400)
 
-Signed-off-by: Peter Marko <peter.marko@siemens.com>
----
- .../c-ares/c-ares/CVE-2023-31147.patch        | 717 ++++++++++++++++++
- .../recipes-support/c-ares/c-ares_1.18.1.bb   |   1 +
- 2 files changed, 718 insertions(+)
- create mode 100644 meta-oe/recipes-support/c-ares/c-ares/CVE-2023-31147.patch
+are available in the Git repository at:
 
-diff --git a/meta-oe/recipes-support/c-ares/c-ares/CVE-2023-31147.patch b/meta-oe/recipes-support/c-ares/c-ares/CVE-2023-31147.patch
-new file mode 100644
-index 0000000000..bbd6aa0aec
---- /dev/null
-+++ b/meta-oe/recipes-support/c-ares/c-ares/CVE-2023-31147.patch
-@@ -0,0 +1,717 @@
-+From c543406f44fa070ea101d4d4b173c2c88af0c2a5 Mon Sep 17 00:00:00 2001
-+From: Brad House <brad@brad-house.com>
-+Date: Mon, 22 May 2023 06:51:06 -0400
-+Subject: [PATCH] Merge pull request from GHSA-8r8p-23f3-64c2
-+
-+* segment random number generation into own file
-+
-+* abstract random code to make it more modular so we can have multiple backends
-+
-+* rand: add support for arc4random_buf() and also direct CARES_RANDOM_FILE reading
-+
-+* autotools: fix detection of arc4random_buf
-+
-+* rework initial rc4 seed for PRNG as last fallback
-+
-+* rc4: more proper implementation, simplified for clarity
-+
-+* clarifications
-+
-+CVE: CVE-2023-31147
-+Upstream-Status: Backport [https://github.com/c-ares/c-ares/commit/823df3b989e59465d17b0a2eb1239a5fc048b4e5]
-+
-+Signed-off-by: Peter Marko <peter.marko@siemens.com>
-+---
-+ CMakeLists.txt              |   2 +
-+ configure.ac                |   1 +
-+ m4/cares-functions.m4       |  85 +++++++++++
-+ src/lib/Makefile.inc        |   1 +
-+ src/lib/ares_config.h.cmake |   3 +
-+ src/lib/ares_destroy.c      |   3 +
-+ src/lib/ares_init.c         |  82 ++---------
-+ src/lib/ares_private.h      |  19 ++-
-+ src/lib/ares_query.c        |  36 +----
-+ src/lib/ares_rand.c         | 274 ++++++++++++++++++++++++++++++++++++
-+ 10 files changed, 387 insertions(+), 119 deletions(-)
-+ create mode 100644 src/lib/ares_rand.c
-+
-+diff --git a/CMakeLists.txt b/CMakeLists.txt
-+index 194485a..1fb9af5 100644
-+--- a/CMakeLists.txt
-++++ b/CMakeLists.txt
-+@@ -386,6 +386,8 @@ CHECK_SYMBOL_EXISTS (strncasecmp     "${CMAKE_EXTRA_INCLUDE_FILES}" HAVE_STRNCAS
-+ CHECK_SYMBOL_EXISTS (strncmpi        "${CMAKE_EXTRA_INCLUDE_FILES}" HAVE_STRNCMPI)
-+ CHECK_SYMBOL_EXISTS (strnicmp        "${CMAKE_EXTRA_INCLUDE_FILES}" HAVE_STRNICMP)
-+ CHECK_SYMBOL_EXISTS (writev          "${CMAKE_EXTRA_INCLUDE_FILES}" HAVE_WRITEV)
-++CHECK_SYMBOL_EXISTS (arc4random_buf  "${CMAKE_EXTRA_INCLUDE_FILES}" HAVE_ARC4RANDOM_BUF)
-++
-+ 
-+ # On Android, the system headers may define __system_property_get(), but excluded
-+ # from libc.  We need to perform a link test instead of a header/symbol test.
-+diff --git a/configure.ac b/configure.ac
-+index 1d0fb5c..9a76369 100644
-+--- a/configure.ac
-++++ b/configure.ac
-+@@ -683,6 +683,7 @@ CARES_CHECK_FUNC_STRNCASECMP
-+ CARES_CHECK_FUNC_STRNCMPI
-+ CARES_CHECK_FUNC_STRNICMP
-+ CARES_CHECK_FUNC_WRITEV
-++CARES_CHECK_FUNC_ARC4RANDOM_BUF
-+ 
-+ 
-+ dnl check for AF_INET6
-+diff --git a/m4/cares-functions.m4 b/m4/cares-functions.m4
-+index 0f3992c..d4f4f99 100644
-+--- a/m4/cares-functions.m4
-++++ b/m4/cares-functions.m4
-+@@ -3753,3 +3753,88 @@ AC_DEFUN([CARES_CHECK_FUNC_WRITEV], [
-+     ac_cv_func_writev="no"
-+   fi
-+ ])
-++
-++dnl CARES_CHECK_FUNC_ARC4RANDOM_BUF
-++dnl -------------------------------------------------
-++dnl Verify if arc4random_buf is available, prototyped, and
-++dnl can be compiled. If all of these are true, and
-++dnl usage has not been previously disallowed with
-++dnl shell variable cares_disallow_arc4random_buf, then
-++dnl HAVE_ARC4RANDOM_BUF will be defined.
-++
-++AC_DEFUN([CARES_CHECK_FUNC_ARC4RANDOM_BUF], [
-++  AC_REQUIRE([CARES_INCLUDES_STDLIB])dnl
-++  #
-++  tst_links_arc4random_buf="unknown"
-++  tst_proto_arc4random_buf="unknown"
-++  tst_compi_arc4random_buf="unknown"
-++  tst_allow_arc4random_buf="unknown"
-++  #
-++  AC_MSG_CHECKING([if arc4random_buf can be linked])
-++  AC_LINK_IFELSE([
-++    AC_LANG_FUNC_LINK_TRY([arc4random_buf])
-++  ],[
-++    AC_MSG_RESULT([yes])
-++    tst_links_arc4random_buf="yes"
-++  ],[
-++    AC_MSG_RESULT([no])
-++    tst_links_arc4random_buf="no"
-++  ])
-++  #
-++  if test "$tst_links_arc4random_buf" = "yes"; then
-++    AC_MSG_CHECKING([if arc4random_buf is prototyped])
-++    AC_EGREP_CPP([arc4random_buf],[
-++      $cares_includes_stdlib
-++    ],[
-++      AC_MSG_RESULT([yes])
-++      tst_proto_arc4random_buf="yes"
-++    ],[
-++      AC_MSG_RESULT([no])
-++      tst_proto_arc4random_buf="no"
-++    ])
-++  fi
-++  #
-++  if test "$tst_proto_arc4random_buf" = "yes"; then
-++    AC_MSG_CHECKING([if arc4random_buf is compilable])
-++    AC_COMPILE_IFELSE([
-++      AC_LANG_PROGRAM([[
-++        $cares_includes_stdlib
-++      ]],[[
-++          arc4random_buf(NULL, 0);
-++          return 1;
-++      ]])
-++    ],[
-++      AC_MSG_RESULT([yes])
-++      tst_compi_arc4random_buf="yes"
-++    ],[
-++      AC_MSG_RESULT([no])
-++      tst_compi_arc4random_buf="no"
-++    ])
-++  fi
-++  #
-++  if test "$tst_compi_arc4random_buf" = "yes"; then
-++    AC_MSG_CHECKING([if arc4random_buf usage allowed])
-++    if test "x$cares_disallow_arc4random_buf" != "xyes"; then
-++      AC_MSG_RESULT([yes])
-++      tst_allow_arc4random_buf="yes"
-++    else
-++      AC_MSG_RESULT([no])
-++      tst_allow_arc4random_buf="no"
-++    fi
-++  fi
-++  #
-++  AC_MSG_CHECKING([if arc4random_buf might be used])
-++  if test "$tst_links_arc4random_buf" = "yes" &&
-++     test "$tst_proto_arc4random_buf" = "yes" &&
-++     test "$tst_compi_arc4random_buf" = "yes" &&
-++     test "$tst_allow_arc4random_buf" = "yes"; then
-++    AC_MSG_RESULT([yes])
-++    AC_DEFINE_UNQUOTED(HAVE_ARC4RANDOM_BUF, 1,
-++      [Define to 1 if you have the arc4random_buf function.])
-++    ac_cv_func_arc4random_buf="yes"
-++  else
-++    AC_MSG_RESULT([no])
-++    ac_cv_func_arc4random_buf="no"
-++  fi
-++])
-++
-+diff --git a/src/lib/Makefile.inc b/src/lib/Makefile.inc
-+index a3b060c..72a7673 100644
-+--- a/src/lib/Makefile.inc
-++++ b/src/lib/Makefile.inc
-+@@ -45,6 +45,7 @@ CSOURCES = ares__addrinfo2hostent.c	\
-+   ares_platform.c			\
-+   ares_process.c			\
-+   ares_query.c				\
-++  ares_rand.c \
-+   ares_search.c				\
-+   ares_send.c				\
-+   ares_strcasecmp.c			\
-+diff --git a/src/lib/ares_config.h.cmake b/src/lib/ares_config.h.cmake
-+index fddb785..798820a 100644
-+--- a/src/lib/ares_config.h.cmake
-++++ b/src/lib/ares_config.h.cmake
-+@@ -346,6 +346,9 @@
-+ /* Define to 1 if you need the memory.h header file even with stdlib.h */
-+ #cmakedefine NEED_MEMORY_H
-+ 
-++/* Define if have arc4random_buf() */
-++#cmakedefine HAVE_ARC4RANDOM_BUF
-++
-+ /* a suitable file/device to read random data from */
-+ #cmakedefine CARES_RANDOM_FILE "@CARES_RANDOM_FILE@"
-+ 
-+diff --git a/src/lib/ares_destroy.c b/src/lib/ares_destroy.c
-+index fed2009..0447af4 100644
-+--- a/src/lib/ares_destroy.c
-++++ b/src/lib/ares_destroy.c
-+@@ -90,6 +90,9 @@ void ares_destroy(ares_channel channel)
-+   if (channel->resolvconf_path)
-+     ares_free(channel->resolvconf_path);
-+ 
-++  if (channel->rand_state)
-++    ares__destroy_rand_state(channel->rand_state);
-++
-+   ares_free(channel);
-+ }
-+ 
-+diff --git a/src/lib/ares_init.c b/src/lib/ares_init.c
-+index de5d86c..2607ed6 100644
-+--- a/src/lib/ares_init.c
-++++ b/src/lib/ares_init.c
-+@@ -72,7 +72,6 @@ static int config_nameserver(struct server_state **servers, int *nservers,
-+ static int set_search(ares_channel channel, const char *str);
-+ static int set_options(ares_channel channel, const char *str);
-+ static const char *try_option(const char *p, const char *q, const char *opt);
-+-static int init_id_key(rc4_key* key,int key_data_len);
-+ 
-+ static int config_sortlist(struct apattern **sortlist, int *nsort,
-+                            const char *str);
-+@@ -149,6 +148,7 @@ int ares_init_options(ares_channel *channelptr, struct ares_options *options,
-+   channel->sock_funcs = NULL;
-+   channel->sock_func_cb_data = NULL;
-+   channel->resolvconf_path = NULL;
-++  channel->rand_state = NULL;
-+ 
-+   channel->last_server = 0;
-+   channel->last_timeout_processed = (time_t)now.tv_sec;
-+@@ -202,9 +202,13 @@ int ares_init_options(ares_channel *channelptr, struct ares_options *options,
-+   /* Generate random key */
-+ 
-+   if (status == ARES_SUCCESS) {
-+-    status = init_id_key(&channel->id_key, ARES_ID_KEY_LEN);
-++    channel->rand_state = ares__init_rand_state();
-++    if (channel->rand_state == NULL) {
-++      status = ARES_ENOMEM;
-++    }
-++
-+     if (status == ARES_SUCCESS)
-+-      channel->next_id = ares__generate_new_id(&channel->id_key);
-++      channel->next_id = ares__generate_new_id(channel->rand_state);
-+     else
-+       DEBUGF(fprintf(stderr, "Error: init_id_key failed: %s\n",
-+                      ares_strerror(status)));
-+@@ -224,6 +228,8 @@ done:
-+         ares_free(channel->lookups);
-+       if(channel->resolvconf_path)
-+         ares_free(channel->resolvconf_path);
-++      if (channel->rand_state)
-++        ares__destroy_rand_state(channel->rand_state);
-+       ares_free(channel);
-+       return status;
-+     }
-+@@ -2495,76 +2501,6 @@ static int sortlist_alloc(struct apattern **sortlist, int *nsort,
-+   return 1;
-+ }
-+ 
-+-/* initialize an rc4 key. If possible a cryptographically secure random key
-+-   is generated using a suitable function (for example win32's RtlGenRandom as
-+-   described in
-+-   http://blogs.msdn.com/michael_howard/archive/2005/01/14/353379.aspx
-+-   otherwise the code defaults to cross-platform albeit less secure mechanism
-+-   using rand
-+-*/
-+-static void randomize_key(unsigned char* key,int key_data_len)
-+-{
-+-  int randomized = 0;
-+-  int counter=0;
-+-#ifdef WIN32
-+-  BOOLEAN res;
-+-  if (ares_fpSystemFunction036)
-+-    {
-+-      res = (*ares_fpSystemFunction036) (key, key_data_len);
-+-      if (res)
-+-        randomized = 1;
-+-    }
-+-#else /* !WIN32 */
-+-#ifdef CARES_RANDOM_FILE
-+-  FILE *f = fopen(CARES_RANDOM_FILE, "rb");
-+-  if(f) {
-+-    setvbuf(f, NULL, _IONBF, 0);
-+-    counter = aresx_uztosi(fread(key, 1, key_data_len, f));
-+-    fclose(f);
-+-  }
-+-#endif
-+-#endif /* WIN32 */
-+-
-+-  if (!randomized) {
-+-    for (;counter<key_data_len;counter++)
-+-      key[counter]=(unsigned char)(rand() % 256);  /* LCOV_EXCL_LINE */
-+-  }
-+-}
-+-
-+-static int init_id_key(rc4_key* key,int key_data_len)
-+-{
-+-  unsigned char index1;
-+-  unsigned char index2;
-+-  unsigned char* state;
-+-  short counter;
-+-  unsigned char *key_data_ptr = 0;
-+-
-+-  key_data_ptr = ares_malloc(key_data_len);
-+-  if (!key_data_ptr)
-+-    return ARES_ENOMEM;
-+-  memset(key_data_ptr, 0, key_data_len);
-+-
-+-  state = &key->state[0];
-+-  for(counter = 0; counter < 256; counter++)
-+-    /* unnecessary AND but it keeps some compilers happier */
-+-    state[counter] = (unsigned char)(counter & 0xff);
-+-  randomize_key(key->state,key_data_len);
-+-  key->x = 0;
-+-  key->y = 0;
-+-  index1 = 0;
-+-  index2 = 0;
-+-  for(counter = 0; counter < 256; counter++)
-+-  {
-+-    index2 = (unsigned char)((key_data_ptr[index1] + state[counter] +
-+-                              index2) % 256);
-+-    ARES_SWAP_BYTE(&state[counter], &state[index2]);
-+-
-+-    index1 = (unsigned char)((index1 + 1) % key_data_len);
-+-  }
-+-  ares_free(key_data_ptr);
-+-  return ARES_SUCCESS;
-+-}
-+-
-+ void ares_set_local_ip4(ares_channel channel, unsigned int local_ip)
-+ {
-+   channel->local_ip4 = local_ip;
-+diff --git a/src/lib/ares_private.h b/src/lib/ares_private.h
-+index 60d69e0..518b5c3 100644
-+--- a/src/lib/ares_private.h
-++++ b/src/lib/ares_private.h
-+@@ -101,8 +101,6 @@ W32_FUNC const char *_w32_GetHostsFile (void);
-+ 
-+ #endif
-+ 
-+-#define ARES_ID_KEY_LEN 31
-+-
-+ #include "ares_ipv6.h"
-+ #include "ares_llist.h"
-+ 
-+@@ -262,12 +260,8 @@ struct apattern {
-+   unsigned short type;
-+ };
-+ 
-+-typedef struct rc4_key
-+-{
-+-  unsigned char state[256];
-+-  unsigned char x;
-+-  unsigned char y;
-+-} rc4_key;
-++struct ares_rand_state;
-++typedef struct ares_rand_state ares_rand_state;
-+ 
-+ struct ares_channeldata {
-+   /* Configuration data */
-+@@ -302,8 +296,8 @@ struct ares_channeldata {
-+ 
-+   /* ID to use for next query */
-+   unsigned short next_id;
-+-  /* key to use when generating new ids */
-+-  rc4_key id_key;
-++  /* random state to use when generating new ids */
-++  ares_rand_state *rand_state;
-+ 
-+   /* Generation number to use for the next TCP socket open/close */
-+   int tcp_connection_generation;
-+@@ -359,7 +353,10 @@ void ares__close_sockets(ares_channel channel, struct server_state *server);
-+ int ares__get_hostent(FILE *fp, int family, struct hostent **host);
-+ int ares__read_line(FILE *fp, char **buf, size_t *bufsize);
-+ void ares__free_query(struct query *query);
-+-unsigned short ares__generate_new_id(rc4_key* key);
-++
-++ares_rand_state *ares__init_rand_state(void);
-++void ares__destroy_rand_state(ares_rand_state *state);
-++unsigned short ares__generate_new_id(ares_rand_state *state);
-+ struct timeval ares__tvnow(void);
-+ int ares__expand_name_validated(const unsigned char *encoded,
-+                                 const unsigned char *abuf,
-+diff --git a/src/lib/ares_query.c b/src/lib/ares_query.c
-+index 508274d..42323be 100644
-+--- a/src/lib/ares_query.c
-++++ b/src/lib/ares_query.c
-+@@ -33,32 +33,6 @@ struct qquery {
-+ 
-+ static void qcallback(void *arg, int status, int timeouts, unsigned char *abuf, int alen);
-+ 
-+-static void rc4(rc4_key* key, unsigned char *buffer_ptr, int buffer_len)
-+-{
-+-  unsigned char x;
-+-  unsigned char y;
-+-  unsigned char* state;
-+-  unsigned char xorIndex;
-+-  int counter;
-+-
-+-  x = key->x;
-+-  y = key->y;
-+-
-+-  state = &key->state[0];
-+-  for(counter = 0; counter < buffer_len; counter ++)
-+-  {
-+-    x = (unsigned char)((x + 1) % 256);
-+-    y = (unsigned char)((state[x] + y) % 256);
-+-    ARES_SWAP_BYTE(&state[x], &state[y]);
-+-
-+-    xorIndex = (unsigned char)((state[x] + state[y]) % 256);
-+-
-+-    buffer_ptr[counter] = (unsigned char)(buffer_ptr[counter]^state[xorIndex]);
-+-  }
-+-  key->x = x;
-+-  key->y = y;
-+-}
-+-
-+ static struct query* find_query_by_id(ares_channel channel, unsigned short id)
-+ {
-+   unsigned short qid;
-+@@ -78,7 +52,6 @@ static struct query* find_query_by_id(ares_channel channel, unsigned short id)
-+   return NULL;
-+ }
-+ 
-+-
-+ /* a unique query id is generated using an rc4 key. Since the id may already
-+    be used by a running query (as infrequent as it may be), a lookup is
-+    performed per id generation. In practice this search should happen only
-+@@ -89,19 +62,12 @@ static unsigned short generate_unique_id(ares_channel channel)
-+   unsigned short id;
-+ 
-+   do {
-+-    id = ares__generate_new_id(&channel->id_key);
-++    id = ares__generate_new_id(channel->rand_state);
-+   } while (find_query_by_id(channel, id));
-+ 
-+   return (unsigned short)id;
-+ }
-+ 
-+-unsigned short ares__generate_new_id(rc4_key* key)
-+-{
-+-  unsigned short r=0;
-+-  rc4(key, (unsigned char *)&r, sizeof(r));
-+-  return r;
-+-}
-+-
-+ void ares_query(ares_channel channel, const char *name, int dnsclass,
-+                 int type, ares_callback callback, void *arg)
-+ {
-+diff --git a/src/lib/ares_rand.c b/src/lib/ares_rand.c
-+new file mode 100644
-+index 0000000..a564bc2
-+--- /dev/null
-++++ b/src/lib/ares_rand.c
-+@@ -0,0 +1,274 @@
-++/* Copyright 1998 by the Massachusetts Institute of Technology.
-++ * Copyright (C) 2007-2013 by Daniel Stenberg
-++ *
-++ * Permission to use, copy, modify, and distribute this
-++ * software and its documentation for any purpose and without
-++ * fee is hereby granted, provided that the above copyright
-++ * notice appear in all copies and that both that copyright
-++ * notice and this permission notice appear in supporting
-++ * documentation, and that the name of M.I.T. not be used in
-++ * advertising or publicity pertaining to distribution of the
-++ * software without specific, written prior permission.
-++ * M.I.T. makes no representations about the suitability of
-++ * this software for any purpose.  It is provided "as is"
-++ * without express or implied warranty.
-++ */
-++
-++#include "ares_setup.h"
-++#include "ares.h"
-++#include "ares_private.h"
-++#include "ares_nowarn.h"
-++#include <stdlib.h>
-++
-++typedef enum  {
-++  ARES_RAND_OS   = 1,  /* OS-provided such as RtlGenRandom or arc4random */
-++  ARES_RAND_FILE = 2,  /* OS file-backed random number generator */
-++  ARES_RAND_RC4  = 3   /* Internal RC4 based PRNG */
-++} ares_rand_backend;
-++
-++typedef struct ares_rand_rc4
-++{
-++  unsigned char S[256];
-++  size_t        i;
-++  size_t        j;
-++} ares_rand_rc4;
-++
-++struct ares_rand_state
-++{
-++  ares_rand_backend type;
-++  union {
-++    FILE *rand_file;
-++    ares_rand_rc4 rc4;
-++  } state;
-++};
-++
-++
-++/* Define RtlGenRandom = SystemFunction036.  This is in advapi32.dll.  There is
-++ * no need to dynamically load this, other software used widely does not.
-++ * http://blogs.msdn.com/michael_howard/archive/2005/01/14/353379.aspx
-++ * https://docs.microsoft.com/en-us/windows/win32/api/ntsecapi/nf-ntsecapi-rtlgenrandom
-++ */
-++#ifdef _WIN32
-++BOOLEAN WINAPI SystemFunction036(PVOID RandomBuffer, ULONG RandomBufferLength);
-++#  ifndef RtlGenRandom
-++#    define RtlGenRandom(a,b) SystemFunction036(a,b)
-++#  endif
-++#endif
-++
-++
-++#define ARES_RC4_KEY_LEN 32 /* 256 bits */
-++
-++static unsigned int ares_u32_from_ptr(void *addr)
-++{
-++    if (sizeof(void *) == 8) {
-++        return (unsigned int)((((size_t)addr >> 32) & 0xFFFFFFFF) | ((size_t)addr & 0xFFFFFFFF));
-++    }
-++    return (unsigned int)((size_t)addr & 0xFFFFFFFF);
-++}
-++
-++
-++/* initialize an rc4 key as the last possible fallback. */
-++static void ares_rc4_generate_key(ares_rand_rc4 *rc4_state, unsigned char *key, size_t key_len)
-++{
-++  size_t         i;
-++  size_t         len = 0;
-++  unsigned int   data;
-++  struct timeval tv;
-++
-++  if (key_len != ARES_RC4_KEY_LEN)
-++    return;
-++
-++  /* Randomness is hard to come by.  Maybe the system randomizes heap and stack addresses.
-++   * Maybe the current timestamp give us some randomness.
-++   * Use  rc4_state (heap), &i (stack), and ares__tvnow()
-++   */
-++  data = ares_u32_from_ptr(rc4_state);
-++  memcpy(key + len, &data, sizeof(data));
-++  len += sizeof(data);
-++
-++  data = ares_u32_from_ptr(&i);
-++  memcpy(key + len, &data, sizeof(data));
-++  len += sizeof(data);
-++
-++  tv = ares__tvnow();
-++  data = (unsigned int)((tv.tv_sec | tv.tv_usec) & 0xFFFFFFFF);
-++  memcpy(key + len, &data, sizeof(data));
-++  len += sizeof(data);
-++
-++  srand(ares_u32_from_ptr(rc4_state) | ares_u32_from_ptr(&i) | (unsigned int)((tv.tv_sec | tv.tv_usec) & 0xFFFFFFFF));
-++
-++  for (i=len; i<key_len; i++) {
-++    key[i]=(unsigned char)(rand() % 256);  /* LCOV_EXCL_LINE */
-++  }
-++}
-++
-++
-++static void ares_rc4_init(ares_rand_rc4 *rc4_state)
-++{
-++  unsigned char key[ARES_RC4_KEY_LEN];
-++  size_t        i;
-++  size_t        j;
-++
-++  ares_rc4_generate_key(rc4_state, key, sizeof(key));
-++
-++  for (i = 0; i < sizeof(rc4_state->S); i++) {
-++    rc4_state->S[i] = i & 0xFF;
-++  }
-++
-++  for(i = 0, j = 0; i < 256; i++) {
-++    j = (j + rc4_state->S[i] + key[i % sizeof(key)]) % 256;
-++    ARES_SWAP_BYTE(&rc4_state->S[i], &rc4_state->S[j]);
-++  }
-++
-++  rc4_state->i = 0;
-++  rc4_state->j = 0;
-++}
-++
-++/* Just outputs the key schedule, no need to XOR with any data since we have none */
-++static void ares_rc4_prng(ares_rand_rc4 *rc4_state, unsigned char *buf, int len)
-++{
-++  unsigned char *S = rc4_state->S;
-++  size_t         i = rc4_state->i;
-++  size_t         j = rc4_state->j;
-++  size_t         cnt;
-++
-++  for (cnt=0; cnt<len; cnt++) {
-++    i = (i + 1) % 256;
-++    j = (j + S[i]) % 256;
-++
-++    ARES_SWAP_BYTE(&S[i], &S[j]);
-++    buf[cnt] = S[(S[i] + S[j]) % 256];
-++  }
-++
-++  rc4_state->i = i;
-++  rc4_state->j = j;
-++}
-++
-++
-++static int ares__init_rand_engine(ares_rand_state *state)
-++{
-++  memset(state, 0, sizeof(*state));
-++
-++#if defined(HAVE_ARC4RANDOM_BUF) || defined(_WIN32)
-++  state->type = ARES_RAND_OS;
-++  return 1;
-++#elif defined(CARES_RANDOM_FILE)
-++  state->type            = ARES_RAND_FILE;
-++  state->state.rand_file = fopen(CARES_RANDOM_FILE, "rb");
-++  if (state->state.rand_file) {
-++    setvbuf(state->state.rand_file, NULL, _IONBF, 0);
-++    return 1;
-++  }
-++  /* Fall-Thru on failure to RC4 */
-++#endif
-++
-++  state->type = ARES_RAND_RC4;
-++  ares_rc4_init(&state->state.rc4);
-++
-++  /* Currently cannot fail */
-++  return 1;
-++}
-++
-++
-++ares_rand_state *ares__init_rand_state()
-++{
-++  ares_rand_state *state = NULL;
-++
-++  state = ares_malloc(sizeof(*state));
-++  if (!state)
-++    return NULL;
-++
-++  if (!ares__init_rand_engine(state)) {
-++    ares_free(state);
-++    return NULL;
-++  }
-++
-++  return state;
-++}
-++
-++
-++static void ares__clear_rand_state(ares_rand_state *state)
-++{
-++  if (!state)
-++    return;
-++
-++  switch (state->type) {
-++    case ARES_RAND_OS:
-++      break;
-++    case ARES_RAND_FILE:
-++      fclose(state->state.rand_file);
-++      break;
-++    case ARES_RAND_RC4:
-++      break;
-++  }
-++}
-++
-++
-++static void ares__reinit_rand(ares_rand_state *state)
-++{
-++  ares__clear_rand_state(state);
-++  ares__init_rand_engine(state);
-++}
-++
-++
-++void ares__destroy_rand_state(ares_rand_state *state)
-++{
-++  if (!state)
-++    return;
-++
-++  ares__clear_rand_state(state);
-++  ares_free(state);
-++}
-++
-++
-++static void ares__rand_bytes(ares_rand_state *state, unsigned char *buf, size_t len)
-++{
-++
-++  while (1) {
-++    size_t rv;
-++    size_t bytes_read = 0;
-++
-++    switch (state->type) {
-++      case ARES_RAND_OS:
-++#ifdef _WIN32
-++        RtlGenRandom(buf, len);
-++        return;
-++#elif defined(HAVE_ARC4RANDOM_BUF)
-++        arc4random_buf(buf, len);
-++        return;
-++#else
-++        /* Shouldn't be possible to be here */
-++        break;
-++#endif
-++
-++      case ARES_RAND_FILE:
-++        while (1) {
-++          size_t rv = fread(buf + bytes_read, 1, len - bytes_read, state->state.rand_file);
-++          if (rv == 0)
-++            break; /* critical error, will reinit rand state */
-++
-++          bytes_read += rv;
-++          if (bytes_read == len)
-++            return;
-++        }
-++        break;
-++
-++      case ARES_RAND_RC4:
-++        ares_rc4_prng(&state->state.rc4, buf, len);
-++        return;
-++    }
-++
-++    /* If we didn't return before we got here, that means we had a critical rand
-++     * failure and need to reinitialized */
-++    ares__reinit_rand(state);
-++  }
-++}
-++
-++unsigned short ares__generate_new_id(ares_rand_state *state)
-++{
-++  unsigned short r=0;
-++
-++  ares__rand_bytes(state, (unsigned char *)&r, sizeof(r));
-++  return r;
-++}
-++
-+-- 
-+2.30.2
-+
-diff --git a/meta-oe/recipes-support/c-ares/c-ares_1.18.1.bb b/meta-oe/recipes-support/c-ares/c-ares_1.18.1.bb
-index fef33cd083..b6cdd801e5 100644
---- a/meta-oe/recipes-support/c-ares/c-ares_1.18.1.bb
-+++ b/meta-oe/recipes-support/c-ares/c-ares_1.18.1.bb
-@@ -9,6 +9,7 @@ SRC_URI = "git://github.com/c-ares/c-ares.git;branch=main;protocol=https \
-            file://CVE-2022-4904.patch \
-            file://CVE-2023-31130.patch \
-            file://CVE-2023-32067.patch \
-+           file://CVE-2023-31147.patch \
-           "
- SRCREV = "2aa086f822aad5017a6f2061ef656f237a62d0ed"
- 
--- 
-2.30.2
+   https://git.openembedded.org/meta-openembedded dunfell-next
+
+for you to fetch changes up to 6334241447e461f849035c47f071fa4a2125fee1:
+
+   c-ares: CVE-2023-31147 Insufficient randomness in generation of DNS 
+query IDs (2023-06-23 06:58:18 -0400)
+
+----------------------------------------------------------------
+Hitendra Prajapati (2):
+       c-ares: CVE-2023-31130 fix Buffer Underwrite
+       c-ares: CVE-2023-31147 Insufficient randomness in generation of 
+DNS query IDs
+
+Martin Jansa (1):
+       nodejs: fix native node-gyp to work with python-3.11
+
+Samuli Piippo (1):
+       spirv-tools: switch from master branch to main for re2
+
+Vijay Anusuri (3):
+       openldap: Fix CVE-2023-2953
+       c-ares: fix CVE-2022-4904 & Update SRC_URI branch and protocols
+       python3-cryptography: fix CVE-2023-23931
+
+schitrod=cisco.com@lists.openembedded.org (1):
+       gnulib: Update recipe name to 2018-12-18
+
+  .../nodejs/nodejs/python-3.11-invalid-mode-rU.patch            | 46 ++
+  meta-oe/recipes-devtools/nodejs/nodejs_12.22.12.bb             | 1 +
+  meta-oe/recipes-graphics/spir/spirv-tools_git.bb               | 2 +-
+  meta-oe/recipes-support/c-ares/c-ares/CVE-2022-4904.patch      | 67 +++
+  meta-oe/recipes-support/c-ares/c-ares/CVE-2023-31130.patch     | 329 
++++++++++++++
+  meta-oe/recipes-support/c-ares/c-ares/CVE-2023-31147.patch     | 717 
+++++++++++++++++++++++++++++
+  meta-oe/recipes-support/c-ares/c-ares_1.18.1.bb                | 6 +-
+  .../gnulib/{gnulib_2018-03-07.03.bb => gnulib_2018-12-18.bb} |   0
+  .../recipes-support/openldap/openldap/CVE-2023-2953-1.patch    | 30 ++
+  .../recipes-support/openldap/openldap/CVE-2023-2953-2.patch    | 76 +++
+  meta-oe/recipes-support/openldap/openldap_2.4.57.bb            | 2 +
+  .../python/python3-cryptography/CVE-2023-23931.patch           | 45 ++
+  .../recipes-devtools/python/python3-cryptography_2.8.bb        | 1 +
+  13 files changed, 1320 insertions(+), 2 deletions(-)
+  create mode 100644 
+meta-oe/recipes-devtools/nodejs/nodejs/python-3.11-invalid-mode-rU.patch
+  create mode 100644 
+meta-oe/recipes-support/c-ares/c-ares/CVE-2022-4904.patch
+  create mode 100644 
+meta-oe/recipes-support/c-ares/c-ares/CVE-2023-31130.patch
+  create mode 100644 
+meta-oe/recipes-support/c-ares/c-ares/CVE-2023-31147.patch
+  rename meta-oe/recipes-support/gnulib/{gnulib_2018-03-07.03.bb => 
+gnulib_2018-12-18.bb} (100%)
+  create mode 100644 
+meta-oe/recipes-support/openldap/openldap/CVE-2023-2953-1.patch
+  create mode 100644 
+meta-oe/recipes-support/openldap/openldap/CVE-2023-2953-2.patch
+  create mode 100644 
+meta-python/recipes-devtools/python/python3-cryptography/CVE-2023-23931.patch 
 
 
