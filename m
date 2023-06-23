@@ -1,134 +1,454 @@
-Return-Path: <akuster808@gmail.com>
+Return-Path: <vkumbhar@mvista.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BDE12EB64DD
-	for <webhook@archiver.kernel.org>; Fri, 23 Jun 2023 11:03:14 +0000 (UTC)
-Received: from mail-yb1-f170.google.com (mail-yb1-f170.google.com [209.85.219.170])
- by mx.groups.io with SMTP id smtpd.web11.39428.1687518186021752583
+	by smtp.lore.kernel.org (Postfix) with ESMTP id F11CCC0015E
+	for <webhook@archiver.kernel.org>; Fri, 23 Jun 2023 14:39:06 +0000 (UTC)
+Received: from mail-pf1-f179.google.com (mail-pf1-f179.google.com [209.85.210.179])
+ by mx.groups.io with SMTP id smtpd.web11.149.1687531144561335947
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 23 Jun 2023 04:03:06 -0700
+ Fri, 23 Jun 2023 07:39:04 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=qk2L38pJ;
- spf=pass (domain: gmail.com, ip: 209.85.219.170, mailfrom: akuster808@gmail.com)
-Received: by mail-yb1-f170.google.com with SMTP id 3f1490d57ef6-be3e2d172cbso405815276.3
-        for <openembedded-devel@lists.openembedded.org>; Fri, 23 Jun 2023 04:03:05 -0700 (PDT)
+ dkim=fail reason="signature has expired" header.i=@mvista.com header.s=google header.b=ej5fDtzK;
+ spf=pass (domain: mvista.com, ip: 209.85.210.179, mailfrom: vkumbhar@mvista.com)
+Received: by mail-pf1-f179.google.com with SMTP id d2e1a72fcca58-666ed230c81so484676b3a.0
+        for <openembedded-devel@lists.openembedded.org>; Fri, 23 Jun 2023 07:39:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1687518185; x=1690110185;
-        h=content-transfer-encoding:subject:from:to:content-language
-         :user-agent:mime-version:date:message-id:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=DebRCIC160zgopeYPCLisHpQiYMuzuWfFATr4rxOKkA=;
-        b=qk2L38pJxqoJKata9371sHNSmNMGymNZnvvZm1XjFZKDkROHk9hs2nuPYby+QG6vAZ
-         MTPBYvWf5NsaR366enXJCIdtILRSbjee0MQThGfLBR/3G7f9nLgMisZ5jdwJgG03eoSR
-         6E+RfRg4DaVsHErVJb8P48GJCXq4ZW0PXPB0qYOqSZJbGu+ur3Xz1fICS3tgo+U7oj9F
-         rug+JKQsTeAae7DfnkejBeErHzq1Wam12J14Bit7mRJZ8j40QNOn+jlOJ8X48d7Yuxnv
-         SSJcX1CIQyPz0EPb8LfQqADAY9qrYpxq0YH6vTod0p9z6R5Nq97AEQMFYEgkbQLxfJvy
-         SKNQ==
+        d=mvista.com; s=google; t=1687531143; x=1690123143;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=whq9PTu/fr/NueI9VlsBmwsiMOUTitNGUrycj0ZmQ3I=;
+        b=ej5fDtzKjlExOixiC3fVlLy671Yht6Qzf+n3kXM4a9BqqhnaFLZMeslXZ5aBdi369f
+         QyypsserfA18lIRBcYu7TTVP6IJ1t7HKLUTN9vJ08QG3nKYm9pJdFpdKSazLFGFkGCRG
+         /a5FpFn8KY6hdgFlp+VrWQkVz+FstDYPCNraY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1687518185; x=1690110185;
-        h=content-transfer-encoding:subject:from:to:content-language
-         :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=DebRCIC160zgopeYPCLisHpQiYMuzuWfFATr4rxOKkA=;
-        b=BPgFL4/F/KEEPkApEpcqiOXeB1QfOAy9jAAHguZ7VlzsskyFl2Pv28y9aCdIBIfu5Z
-         pMpXqzgzYkUcJlHD9ScRVg6HzfoGeybWVIuBvkIPeSW/4CovW3CE94fbXIfIRGgOtPLK
-         oo98vTWPaHwG2yE0AotEBwWQ6tuwEAugcc3fpELkx5fMRC9UOjHkbSzxdio7cmPacA1K
-         yc3yqZ4DD6Ua0i02nKBqOJ33+8LvzwBS2On5l+QGjXWvfuPQqRctd9mZH7OnzH0cBi+2
-         v+oRNvcn5xhhWiph8PxMyMn0nzM9UbMI478Cg+wagHFq9XAzlwCr31vmv4tuh411J/ur
-         fsdA==
-X-Gm-Message-State: AC+VfDxSuS5FiwOq2IDMccqUg+iWBxlF11AhDNS4jmSdesCeS35UR4Xj
-	qCZDCE0BO7yWaus3sUZO3mFcluMPNj8=
-X-Google-Smtp-Source: ACHHUZ7VUJhGcgIXOrt3kB7zbR289EVnrcxSCQxqC6wDe4n3x4C/fJbBxa30WwVyn3SEzfAHZr1I1A==
-X-Received: by 2002:a25:7188:0:b0:bf2:b00c:f09 with SMTP id m130-20020a257188000000b00bf2b00c0f09mr10449860ybc.40.1687518185114;
-        Fri, 23 Jun 2023 04:03:05 -0700 (PDT)
-Received: from ?IPV6:2600:1700:9190:ba10:80e:b8b0:6c85:7e? ([2600:1700:9190:ba10:80e:b8b0:6c85:7e])
-        by smtp.gmail.com with ESMTPSA id 62-20020a250341000000b00be53a1eb5aesm2021360ybd.53.2023.06.23.04.03.04
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 23 Jun 2023 04:03:04 -0700 (PDT)
-Message-ID: <a1efe910-35a9-1b45-6c17-5eccc74bca3e@gmail.com>
-Date: Fri, 23 Jun 2023 07:03:04 -0400
+        d=1e100.net; s=20221208; t=1687531143; x=1690123143;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=whq9PTu/fr/NueI9VlsBmwsiMOUTitNGUrycj0ZmQ3I=;
+        b=Lsuj5NnRbcZ8aXYojoNXNc1EEMsc23V0AxQU0tidlygSKNTHTmgEVbWkIilHvZOVIm
+         OiiFSe/ShTdXrB2Hq8KeBHJ+O9fRbhVBO2AzFvJ/ksftcjAi98VwBTu0D9kBH8iP1OWA
+         z+17t3kOJojyDKVGX4/1cnSE1cDdKIxNXcCUs5pgHfapeDt8nzvbv094O4V1zAksaURs
+         Pul1T3Nl4DpfxqK/Q/Oh4sXF5xPl08y9mqerNxOxP09qeFUxnSU3iR6RafQKMJ9AYl4P
+         Ms8xPpZx5T7xO3laFpFaefgndFutLOn33SAfsN16XX+a5dyRUv354B4VKYwsUYpxdswE
+         GQTA==
+X-Gm-Message-State: AC+VfDxZJGSdOQLklrLXUQ6RZtP2s2zUBbMXdcXfY8DcAu/Y2+Ousk8n
+	93wB811lHXagjjy6mKBfJFORG4KTpviE447hfRY=
+X-Google-Smtp-Source: ACHHUZ7U+tSi/c4gHUEIoFGQZLLVd9nts07MtRHLtkAS0C9lyy9fPWtqVPbrGzdGm5h8r/r2pdbnUQ==
+X-Received: by 2002:a05:6a20:144a:b0:122:d1c3:59ed with SMTP id a10-20020a056a20144a00b00122d1c359edmr10920484pzi.40.1687531142907;
+        Fri, 23 Jun 2023 07:39:02 -0700 (PDT)
+Received: from localhost.localdomain ([116.73.110.176])
+        by smtp.googlemail.com with ESMTPSA id y22-20020a17090264d600b001b6674b6140sm7343562pli.290.2023.06.23.07.39.00
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 23 Jun 2023 07:39:02 -0700 (PDT)
+From: Vivek Kumbhar <vkumbhar@mvista.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Vivek Kumbhar <vkumbhar@mvista.com>
+Subject: [meta-oe][kirkstone][PATCH] postgresql: fix CVE-2023-2454 & CVE-2023-2454
+Date: Fri, 23 Jun 2023 20:08:53 +0530
+Message-Id: <20230623143853.499686-1-vkumbhar@mvista.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.11.0
-Content-Language: en-US
-To: Khem Raj <raj.khem@gmail.com>,
- OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-From: akuster808 <akuster808@gmail.com>
-Subject: dunfell merge request: June 23rd
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 23 Jun 2023 11:03:14 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103494
+ <openembedded-devel@lists.openembedded.org>; Fri, 23 Jun 2023 14:39:06 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103495
 
-The following changes since commit 116bfe8d5e5851e7fc5424f40da8691a19c5b5ee:
+fixed Below security CVE:
+1)CVE-2023-2454 postgresql: schema_element defeats protective search_path changes.
+2)CVE-2023-2455 postgresql: row security policies disregard user ID changes after inlining.
 
-   nodejs: make 14.18.1 available but not default (2023-05-16 07:09:25 
--0400)
+Signed-off-by: Vivek Kumbhar <vkumbhar@mvista.com>
+---
+ .../postgresql/files/CVE-2023-2454.patch      | 235 ++++++++++++++++++
+ .../postgresql/files/CVE-2023-2455.patch      | 118 +++++++++
+ .../recipes-dbs/postgresql/postgresql_14.5.bb |   2 +
+ 3 files changed, 355 insertions(+)
+ create mode 100644 meta-oe/recipes-dbs/postgresql/files/CVE-2023-2454.patch
+ create mode 100644 meta-oe/recipes-dbs/postgresql/files/CVE-2023-2455.patch
 
-are available in the Git repository at:
-
-   https://git.openembedded.org/meta-openembedded dunfell-next
-
-for you to fetch changes up to 6334241447e461f849035c47f071fa4a2125fee1:
-
-   c-ares: CVE-2023-31147 Insufficient randomness in generation of DNS 
-query IDs (2023-06-23 06:58:18 -0400)
-
-----------------------------------------------------------------
-Hitendra Prajapati (2):
-       c-ares: CVE-2023-31130 fix Buffer Underwrite
-       c-ares: CVE-2023-31147 Insufficient randomness in generation of 
-DNS query IDs
-
-Martin Jansa (1):
-       nodejs: fix native node-gyp to work with python-3.11
-
-Samuli Piippo (1):
-       spirv-tools: switch from master branch to main for re2
-
-Vijay Anusuri (3):
-       openldap: Fix CVE-2023-2953
-       c-ares: fix CVE-2022-4904 & Update SRC_URI branch and protocols
-       python3-cryptography: fix CVE-2023-23931
-
-schitrod=cisco.com@lists.openembedded.org (1):
-       gnulib: Update recipe name to 2018-12-18
-
-  .../nodejs/nodejs/python-3.11-invalid-mode-rU.patch            | 46 ++
-  meta-oe/recipes-devtools/nodejs/nodejs_12.22.12.bb             | 1 +
-  meta-oe/recipes-graphics/spir/spirv-tools_git.bb               | 2 +-
-  meta-oe/recipes-support/c-ares/c-ares/CVE-2022-4904.patch      | 67 +++
-  meta-oe/recipes-support/c-ares/c-ares/CVE-2023-31130.patch     | 329 
-+++++++++++++
-  meta-oe/recipes-support/c-ares/c-ares/CVE-2023-31147.patch     | 717 
-++++++++++++++++++++++++++++
-  meta-oe/recipes-support/c-ares/c-ares_1.18.1.bb                | 6 +-
-  .../gnulib/{gnulib_2018-03-07.03.bb => gnulib_2018-12-18.bb} |   0
-  .../recipes-support/openldap/openldap/CVE-2023-2953-1.patch    | 30 ++
-  .../recipes-support/openldap/openldap/CVE-2023-2953-2.patch    | 76 +++
-  meta-oe/recipes-support/openldap/openldap_2.4.57.bb            | 2 +
-  .../python/python3-cryptography/CVE-2023-23931.patch           | 45 ++
-  .../recipes-devtools/python/python3-cryptography_2.8.bb        | 1 +
-  13 files changed, 1320 insertions(+), 2 deletions(-)
-  create mode 100644 
-meta-oe/recipes-devtools/nodejs/nodejs/python-3.11-invalid-mode-rU.patch
-  create mode 100644 
-meta-oe/recipes-support/c-ares/c-ares/CVE-2022-4904.patch
-  create mode 100644 
-meta-oe/recipes-support/c-ares/c-ares/CVE-2023-31130.patch
-  create mode 100644 
-meta-oe/recipes-support/c-ares/c-ares/CVE-2023-31147.patch
-  rename meta-oe/recipes-support/gnulib/{gnulib_2018-03-07.03.bb => 
-gnulib_2018-12-18.bb} (100%)
-  create mode 100644 
-meta-oe/recipes-support/openldap/openldap/CVE-2023-2953-1.patch
-  create mode 100644 
-meta-oe/recipes-support/openldap/openldap/CVE-2023-2953-2.patch
-  create mode 100644 
-meta-python/recipes-devtools/python/python3-cryptography/CVE-2023-23931.patch 
+diff --git a/meta-oe/recipes-dbs/postgresql/files/CVE-2023-2454.patch b/meta-oe/recipes-dbs/postgresql/files/CVE-2023-2454.patch
+new file mode 100644
+index 0000000000..a2f6927e30
+--- /dev/null
++++ b/meta-oe/recipes-dbs/postgresql/files/CVE-2023-2454.patch
+@@ -0,0 +1,235 @@
++From 23cb8eaeb97df350273cb8902e55842a955339c8 Mon Sep 17 00:00:00 2001
++From: Noah Misch <noah@leadboat.com>
++Date: Mon, 8 May 2023 06:14:07 -0700
++Subject: [PATCH] Replace last PushOverrideSearchPath() call with
++ set_config_option().
++
++The two methods don't cooperate, so set_config_option("search_path",
++...) has been ineffective under non-empty overrideStack.  This defect
++enabled an attacker having database-level CREATE privilege to execute
++arbitrary code as the bootstrap superuser.  While that particular attack
++requires v13+ for the trusted extension attribute, other attacks are
++feasible in all supported versions.
++
++Standardize on the combination of NewGUCNestLevel() and
++set_config_option("search_path", ...).  It is newer than
++PushOverrideSearchPath(), more-prevalent, and has no known
++disadvantages.  The "override" mechanism remains for now, for
++compatibility with out-of-tree code.  Users should update such code,
++which likely suffers from the same sort of vulnerability closed here.
++Back-patch to v11 (all supported versions).
++
++Alexander Lakhin.  Reported by Alexander Lakhin.
++
++Security: CVE-2023-2454
++
++Upstream-Status: Backport [https://git.postgresql.org/gitweb/?p=postgresql.git;a=commitdiff;h=23cb8eaeb97df350273cb8902e55842a955339c8]
++CVE: CVE-2023-2454
++Signed-off-by: Vivek Kumbhar <vkumbhar@mvista.com>
++---
++ src/backend/catalog/namespace.c         |  4 +++
++ src/backend/commands/schemacmds.c       | 37 ++++++++++++++------
++ src/test/regress/expected/namespace.out | 45 +++++++++++++++++++++++++
++ src/test/regress/sql/namespace.sql      | 24 +++++++++++++
++ 4 files changed, 100 insertions(+), 10 deletions(-)
++
++diff --git a/src/backend/catalog/namespace.c b/src/backend/catalog/namespace.c
++index 81b6472..0175a91 100644
++--- a/src/backend/catalog/namespace.c
+++++ b/src/backend/catalog/namespace.c
++@@ -3518,6 +3518,10 @@ OverrideSearchPathMatchesCurrent(OverrideSearchPath *path)
++ /*
++  * PushOverrideSearchPath - temporarily override the search path
++  *
+++ * Do not use this function; almost any usage introduces a security
+++ * vulnerability.  It exists for the benefit of legacy code running in
+++ * non-security-sensitive environments.
+++ *
++  * We allow nested overrides, hence the push/pop terminology.  The GUC
++  * search_path variable is ignored while an override is active.
++  *
++diff --git a/src/backend/commands/schemacmds.c b/src/backend/commands/schemacmds.c
++index 66306d1..ecd0cbb 100644
++--- a/src/backend/commands/schemacmds.c
+++++ b/src/backend/commands/schemacmds.c
++@@ -29,6 +29,7 @@
++ #include "commands/schemacmds.h"
++ #include "miscadmin.h"
++ #include "parser/parse_utilcmd.h"
+++#include "parser/scansup.h"
++ #include "tcop/utility.h"
++ #include "utils/acl.h"
++ #include "utils/builtins.h"
++@@ -52,14 +53,16 @@ CreateSchemaCommand(CreateSchemaStmt *stmt, const char *queryString,
++ {
++ 	const char *schemaName = stmt->schemaname;
++ 	Oid			namespaceId;
++-	OverrideSearchPath *overridePath;
++ 	List	   *parsetree_list;
++ 	ListCell   *parsetree_item;
++ 	Oid			owner_uid;
++ 	Oid			saved_uid;
++ 	int			save_sec_context;
+++	int			save_nestlevel;
+++	char	   *nsp = namespace_search_path;
++ 	AclResult	aclresult;
++ 	ObjectAddress address;
+++	StringInfoData pathbuf;
++ 
++ 	GetUserIdAndSecContext(&saved_uid, &save_sec_context);
++ 
++@@ -152,14 +155,26 @@ CreateSchemaCommand(CreateSchemaStmt *stmt, const char *queryString,
++ 	CommandCounterIncrement();
++ 
++ 	/*
++-	 * Temporarily make the new namespace be the front of the search path, as
++-	 * well as the default creation target namespace.  This will be undone at
++-	 * the end of this routine, or upon error.
+++	 * Prepend the new schema to the current search path.
+++	 *
+++	 * We use the equivalent of a function SET option to allow the setting to
+++	 * persist for exactly the duration of the schema creation.  guc.c also
+++	 * takes care of undoing the setting on error.
++ 	 */
++-	overridePath = GetOverrideSearchPath(CurrentMemoryContext);
++-	overridePath->schemas = lcons_oid(namespaceId, overridePath->schemas);
++-	/* XXX should we clear overridePath->useTemp? */
++-	PushOverrideSearchPath(overridePath);
+++	save_nestlevel = NewGUCNestLevel();
+++
+++	initStringInfo(&pathbuf);
+++	appendStringInfoString(&pathbuf, quote_identifier(schemaName));
+++
+++	while (scanner_isspace(*nsp))
+++		nsp++;
+++
+++	if (*nsp != '\0')
+++		appendStringInfo(&pathbuf, ", %s", nsp);
+++
+++	(void) set_config_option("search_path", pathbuf.data,
+++							 PGC_USERSET, PGC_S_SESSION,
+++							 GUC_ACTION_SAVE, true, 0, false);
++ 
++ 	/*
++ 	 * Report the new schema to possibly interested event triggers.  Note we
++@@ -213,8 +228,10 @@ CreateSchemaCommand(CreateSchemaStmt *stmt, const char *queryString,
++ 		CommandCounterIncrement();
++ 	}
++ 
++-	/* Reset search path to normal state */
++-	PopOverrideSearchPath();
+++	/*
+++	 * Restore the GUC variable search_path we set above.
+++	 */
+++	AtEOXact_GUC(true, save_nestlevel);
++ 
++ 	/* Reset current user and security context */
++ 	SetUserIdAndSecContext(saved_uid, save_sec_context);
++diff --git a/src/test/regress/expected/namespace.out b/src/test/regress/expected/namespace.out
++index 2564d1b..a62fd8d 100644
++--- a/src/test/regress/expected/namespace.out
+++++ b/src/test/regress/expected/namespace.out
++@@ -1,6 +1,14 @@
++ --
++ -- Regression tests for schemas (namespaces)
++ --
+++-- set the whitespace-only search_path to test that the
+++-- GUC list syntax is preserved during a schema creation
+++SELECT pg_catalog.set_config('search_path', ' ', false);
+++ set_config 
+++------------
+++  
+++(1 row)
+++
++ CREATE SCHEMA test_ns_schema_1
++        CREATE UNIQUE INDEX abc_a_idx ON abc (a)
++        CREATE VIEW abc_view AS
++@@ -9,6 +17,43 @@ CREATE SCHEMA test_ns_schema_1
++               a serial,
++               b int UNIQUE
++        );
+++-- verify that the correct search_path restored on abort
+++SET search_path to public;
+++BEGIN;
+++SET search_path to public, test_ns_schema_1;
+++CREATE SCHEMA test_ns_schema_2
+++       CREATE VIEW abc_view AS SELECT c FROM abc;
+++ERROR:  column "c" does not exist
+++LINE 2:        CREATE VIEW abc_view AS SELECT c FROM abc;
+++                                              ^
+++COMMIT;
+++SHOW search_path;
+++ search_path 
+++-------------
+++ public
+++(1 row)
+++
+++-- verify that the correct search_path preserved
+++-- after creating the schema and on commit
+++BEGIN;
+++SET search_path to public, test_ns_schema_1;
+++CREATE SCHEMA test_ns_schema_2
+++       CREATE VIEW abc_view AS SELECT a FROM abc;
+++SHOW search_path;
+++       search_path        
+++--------------------------
+++ public, test_ns_schema_1
+++(1 row)
+++
+++COMMIT;
+++SHOW search_path;
+++       search_path        
+++--------------------------
+++ public, test_ns_schema_1
+++(1 row)
+++
+++DROP SCHEMA test_ns_schema_2 CASCADE;
+++NOTICE:  drop cascades to view test_ns_schema_2.abc_view
++ -- verify that the objects were created
++ SELECT COUNT(*) FROM pg_class WHERE relnamespace =
++     (SELECT oid FROM pg_namespace WHERE nspname = 'test_ns_schema_1');
++diff --git a/src/test/regress/sql/namespace.sql b/src/test/regress/sql/namespace.sql
++index 6b12c96..3474f5e 100644
++--- a/src/test/regress/sql/namespace.sql
+++++ b/src/test/regress/sql/namespace.sql
++@@ -2,6 +2,10 @@
++ -- Regression tests for schemas (namespaces)
++ --
++ 
+++-- set the whitespace-only search_path to test that the
+++-- GUC list syntax is preserved during a schema creation
+++SELECT pg_catalog.set_config('search_path', ' ', false);
+++
++ CREATE SCHEMA test_ns_schema_1
++        CREATE UNIQUE INDEX abc_a_idx ON abc (a)
++ 
++@@ -13,6 +17,26 @@ CREATE SCHEMA test_ns_schema_1
++               b int UNIQUE
++        );
++ 
+++-- verify that the correct search_path restored on abort
+++SET search_path to public;
+++BEGIN;
+++SET search_path to public, test_ns_schema_1;
+++CREATE SCHEMA test_ns_schema_2
+++       CREATE VIEW abc_view AS SELECT c FROM abc;
+++COMMIT;
+++SHOW search_path;
+++
+++-- verify that the correct search_path preserved
+++-- after creating the schema and on commit
+++BEGIN;
+++SET search_path to public, test_ns_schema_1;
+++CREATE SCHEMA test_ns_schema_2
+++       CREATE VIEW abc_view AS SELECT a FROM abc;
+++SHOW search_path;
+++COMMIT;
+++SHOW search_path;
+++DROP SCHEMA test_ns_schema_2 CASCADE;
+++
++ -- verify that the objects were created
++ SELECT COUNT(*) FROM pg_class WHERE relnamespace =
++     (SELECT oid FROM pg_namespace WHERE nspname = 'test_ns_schema_1');
++-- 
++2.25.1
++
+diff --git a/meta-oe/recipes-dbs/postgresql/files/CVE-2023-2455.patch b/meta-oe/recipes-dbs/postgresql/files/CVE-2023-2455.patch
+new file mode 100644
+index 0000000000..a94c65cc0c
+--- /dev/null
++++ b/meta-oe/recipes-dbs/postgresql/files/CVE-2023-2455.patch
+@@ -0,0 +1,118 @@
++From 473626cf00babd829eb15c36b51dfb358d32bc95 Mon Sep 17 00:00:00 2001
++From: Tom Lane <tgl@sss.pgh.pa.us>
++Date: Mon, 8 May 2023 10:12:45 -0400
++Subject: [PATCH] Handle RLS dependencies in inlined set-returning functions
++ properly.
++
++If an SRF in the FROM clause references a table having row-level
++security policies, and we inline that SRF into the calling query,
++we neglected to mark the plan as potentially dependent on which
++role is executing it.  This could lead to later executions in the
++same session returning or hiding rows that should have been hidden
++or returned instead.
++
++Our thanks to Wolfgang Walther for reporting this problem.
++
++Stephen Frost and Tom Lane
++
++Security: CVE-2023-2455
++
++Upstream-Status: Backport [https://git.postgresql.org/gitweb/?p=postgresql.git;a=commitdiff;h=473626cf00babd829eb15c36b51dfb358d32bc95]
++CVE: CVE-2023-2455
++Signed-off-by: Vivek Kumbhar <vkumbhar@mvista.com>
++---
++ src/backend/optimizer/util/clauses.c      |  7 ++++++
++ src/test/regress/expected/rowsecurity.out | 27 +++++++++++++++++++++++
++ src/test/regress/sql/rowsecurity.sql      | 20 +++++++++++++++++
++ 3 files changed, 54 insertions(+)
++
++diff --git a/src/backend/optimizer/util/clauses.c b/src/backend/optimizer/util/clauses.c
++index 9d7aa8b..da50bef 100644
++--- a/src/backend/optimizer/util/clauses.c
+++++ b/src/backend/optimizer/util/clauses.c
++@@ -5095,6 +5095,13 @@ inline_set_returning_function(PlannerInfo *root, RangeTblEntry *rte)
++ 	 */
++ 	record_plan_function_dependency(root, func_oid);
++ 
+++	/*
+++	 * We must also notice if the inserted query adds a dependency on the
+++	 * calling role due to RLS quals.
+++	 */
+++	if (querytree->hasRowSecurity)
+++		root->glob->dependsOnRole = true;
+++
++ 	return querytree;
++ 
++ 	/* Here if func is not inlinable: release temp memory and return NULL */
++diff --git a/src/test/regress/expected/rowsecurity.out b/src/test/regress/expected/rowsecurity.out
++index 89397e4..379f988 100644
++--- a/src/test/regress/expected/rowsecurity.out
+++++ b/src/test/regress/expected/rowsecurity.out
++@@ -3982,6 +3982,33 @@ SELECT * FROM rls_tbl;
++ 
++ DROP TABLE rls_tbl;
++ RESET SESSION AUTHORIZATION;
+++-- CVE-2023-2455: inlining an SRF may introduce an RLS dependency
+++create table rls_t (c text);
+++insert into rls_t values ('invisible to bob');
+++alter table rls_t enable row level security;
+++grant select on rls_t to regress_rls_alice, regress_rls_bob;
+++create policy p1 on rls_t for select to regress_rls_alice using (true);
+++create policy p2 on rls_t for select to regress_rls_bob using (false);
+++create function rls_f () returns setof rls_t
+++  stable language sql
+++  as $$ select * from rls_t $$;
+++prepare q as select current_user, * from rls_f();
+++set role regress_rls_alice;
+++execute q;
+++   current_user    |        c         
+++-------------------+------------------
+++ regress_rls_alice | invisible to bob
+++(1 row)
+++
+++set role regress_rls_bob;
+++execute q;
+++ current_user | c 
+++--------------+---
+++(0 rows)
+++
+++RESET ROLE;
+++DROP FUNCTION rls_f();
+++DROP TABLE rls_t;
++ --
++ -- Clean up objects
++ --
++diff --git a/src/test/regress/sql/rowsecurity.sql b/src/test/regress/sql/rowsecurity.sql
++index 44deb42..3015d89 100644
++--- a/src/test/regress/sql/rowsecurity.sql
+++++ b/src/test/regress/sql/rowsecurity.sql
++@@ -1839,6 +1839,26 @@ SELECT * FROM rls_tbl;
++ DROP TABLE rls_tbl;
++ RESET SESSION AUTHORIZATION;
++ 
+++-- CVE-2023-2455: inlining an SRF may introduce an RLS dependency
+++create table rls_t (c text);
+++insert into rls_t values ('invisible to bob');
+++alter table rls_t enable row level security;
+++grant select on rls_t to regress_rls_alice, regress_rls_bob;
+++create policy p1 on rls_t for select to regress_rls_alice using (true);
+++create policy p2 on rls_t for select to regress_rls_bob using (false);
+++create function rls_f () returns setof rls_t
+++  stable language sql
+++  as $$ select * from rls_t $$;
+++prepare q as select current_user, * from rls_f();
+++set role regress_rls_alice;
+++execute q;
+++set role regress_rls_bob;
+++execute q;
+++
+++RESET ROLE;
+++DROP FUNCTION rls_f();
+++DROP TABLE rls_t;
+++
++ --
++ -- Clean up objects
++ --
++-- 
++2.25.1
++
+diff --git a/meta-oe/recipes-dbs/postgresql/postgresql_14.5.bb b/meta-oe/recipes-dbs/postgresql/postgresql_14.5.bb
+index fbc08d64f3..315f6db565 100644
+--- a/meta-oe/recipes-dbs/postgresql/postgresql_14.5.bb
++++ b/meta-oe/recipes-dbs/postgresql/postgresql_14.5.bb
+@@ -11,6 +11,8 @@ SRC_URI += "\
+    file://0001-config_info.c-not-expose-build-info.patch \
+    file://0001-Properly-NULL-terminate-GSS-receive-buffer-on-error-.patch \
+    file://0001-postgresql-fix-ptest-failure-of-sysviews.patch \
++   file://CVE-2023-2454.patch \
++   file://CVE-2023-2455.patch \
+ "
+ 
+ SRC_URI[sha256sum] = "d4f72cb5fb857c9a9f75ec8cf091a1771272802f2178f0b2e65b7b6ff64f4a30"
+-- 
+2.25.1
 
 
