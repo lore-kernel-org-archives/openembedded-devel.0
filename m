@@ -1,92 +1,101 @@
-Return-Path: <beniaminsandu@gmail.com>
+Return-Path: <crg7475@mailbox.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 84399EB64D7
-	for <webhook@archiver.kernel.org>; Fri, 23 Jun 2023 17:41:38 +0000 (UTC)
-Received: from mail-ej1-f53.google.com (mail-ej1-f53.google.com [209.85.218.53])
- by mx.groups.io with SMTP id smtpd.web10.4717.1687542097415846432
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AEEFDEB64DC
+	for <webhook@archiver.kernel.org>; Sat, 24 Jun 2023 13:27:29 +0000 (UTC)
+Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
+ by mx.groups.io with SMTP id smtpd.web10.16265.1687613245673549784
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 23 Jun 2023 10:41:37 -0700
+ Sat, 24 Jun 2023 06:27:26 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=sU+feeVw;
- spf=pass (domain: gmail.com, ip: 209.85.218.53, mailfrom: beniaminsandu@gmail.com)
-Received: by mail-ej1-f53.google.com with SMTP id a640c23a62f3a-98d2fb1bb23so108417466b.3
-        for <openembedded-devel@lists.openembedded.org>; Fri, 23 Jun 2023 10:41:37 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1687542096; x=1690134096;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=7lgMsOjtXCElFfYDQyC9Yg5Xrcr/oSftzeNwF3dxmrY=;
-        b=sU+feeVwjsXbDky4Vn+ryLpzvIE8iPRgdVD+uWtxwYnbIfAHj2kr7ekNdFibsqdZme
-         MvgN+CNjEpTVDfeQKpXPq02+pcHgdyo+0EO6/dKGt131PI+tVABF6WbCVp8vYAHqzJmR
-         Tl1+mnmapiBL6Q0yx0gO5A2BseyD/0ahzOJkiAWvkIIynSbUHts6I4pURevdZF8NyoGS
-         SCCF2pidgKXWASeEg7YKhi4fF86eg2oPzgAV/F8K5LqntvousCGvEZzYqIZJEDfPEKlS
-         DQa+xr42KNQ/W0+5J/ABOvKd59fkxg8k3BOuK8OoUJ+6g0eVfcQI7FpE0XPm2BLJwgli
-         ViAw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1687542096; x=1690134096;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=7lgMsOjtXCElFfYDQyC9Yg5Xrcr/oSftzeNwF3dxmrY=;
-        b=EMuCwEykd0TdoorzZYXqN8/Oi/bokD4RLYH7btleQRND1UfAI6sx7zG2Jx9/mloQYc
-         o2p2McBOxSbmpDykyu6qnQxHYyrUIuDmnpf74NoxYjMxTaFl3HR1A7P9bReaCPzSylyR
-         +h9/LJWNnVIZpgJtCDproeX51miX7obXEr6koKWaEbznf618H4Bb0ejkXxZITsSGsVWF
-         JLPhyW0Jsw1cpnKpJVSeUE/m7KqqRsknKWXpD6BJ4Xh8RDMCfYsRLJUgkNApr4IopeuW
-         Ib/VZOvdGFFfwEf0G5iCc9Es7qjERL7tU3hFdW3aYBw9YCF/xGRcqWd4QwVX47UXRxry
-         rmBw==
-X-Gm-Message-State: AC+VfDx4vdsHcCxtG3V0S4jE50RXtmZoVNn5ucQRCMyt87UQE2F5UaHA
-	833+U2QvzGF13ogAb49e0T69ageAYhnliQ==
-X-Google-Smtp-Source: ACHHUZ4/H2pX+5G/jL6YFNGUtLWrDWMiwV97OqUMigNLlnUra/XLSewYXD1QAuJ1fm1v5p7H27AJLg==
-X-Received: by 2002:a17:907:9303:b0:988:6bd2:b0bc with SMTP id bu3-20020a170907930300b009886bd2b0bcmr15102904ejc.2.1687542095605;
-        Fri, 23 Jun 2023 10:41:35 -0700 (PDT)
-Received: from localhost.localdomain ([5.13.151.121])
-        by smtp.gmail.com with ESMTPSA id ks25-20020a170906f85900b0098864f474cesm6224327ejb.126.2023.06.23.10.41.34
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 23 Jun 2023 10:41:35 -0700 (PDT)
-From: Beniamin Sandu <beniaminsandu@gmail.com>
+ dkim=fail reason="body hash did not verify" header.i=@mailbox.org header.s=mail20150812 header.b=AgYlJwok;
+ spf=pass (domain: mailbox.org, ip: 80.241.56.151, mailfrom: crg7475@mailbox.org)
+Received: from smtp202.mailbox.org (smtp202.mailbox.org [IPv6:2001:67c:2050:b231:465::202])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange ECDHE (P-384) server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	(No client certificate requested)
+	by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4QpFJq0K0xz9sQb
+	for <openembedded-devel@lists.openembedded.org>; Sat, 24 Jun 2023 15:27:23 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org; s=mail20150812;
+	t=1687613243;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=VzVCbYsgP08r5N2nRxzJBmb4cTLtvezvQaoNGwYzlSc=;
+	b=AgYlJwoks98xvwT55PHdfmTxl+VZSBNPHxHftkz0DYOd5tTrTexCi1rSjCSjXCZkyp9Vc/
+	wkmQ5opdcFa/4KBQgSQVKCNpxjJFyUcbXLVr94B5Hcse1d3VQdl3J3CHvwMX28rG3KjDNf
+	Oa0bRGlAswuP2/TpYylB60TzpjNFP4kF0Yk/AyZrHq5zdtr/EpFYz19RARtAlJIlYJ5hkf
+	wzxUZYzWbUCVRFnS0gfksrPacZC3JNewi6Zi7VnovlJlVvHN/w4tO2Lr3UYuwvjeOFLFZA
+	3gy6kbX4jwpa7IijBsxHpjD6nGBDeKtFje2zFdTMjgkuYACdCjChcRh0UBbF/w==
+From: Carlos Rafael Giani <crg7475@mailbox.org>
 To: openembedded-devel@lists.openembedded.org
-Cc: Beniamin Sandu <beniaminsandu@gmail.com>
-Subject: [meta-networking][PATCH] unbound: add option to build with libevent
-Date: Fri, 23 Jun 2023 20:41:12 +0300
-Message-Id: <20230623174112.12521-1-beniaminsandu@gmail.com>
-X-Mailer: git-send-email 2.25.1
+Subject: [meta-multimedia][PATCH 3/3] pipewire: Add dedicated aes67 package and fix rlimits.d package assignment
+Date: Sat, 24 Jun 2023 15:27:15 +0200
+Message-Id: <20230624132715.1664863-3-crg7475@mailbox.org>
+In-Reply-To: <20230624132715.1664863-1-crg7475@mailbox.org>
+References: <20230624132715.1664863-1-crg7475@mailbox.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-MBO-RS-ID: 5cf6eec5799ffbc1855
+X-MBO-RS-META: knd73buso79weyberuczwg79anzweiit
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 23 Jun 2023 17:41:38 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103554
+ <openembedded-devel@lists.openembedded.org>; Sat, 24 Jun 2023 13:27:29 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103556
 
-Signed-off-by: Beniamin Sandu <beniaminsandu@gmail.com>
+Signed-off-by: Carlos Rafael Giani <crg7475@mailbox.org>
 ---
- meta-networking/recipes-support/unbound/unbound_1.17.1.bb | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ .../recipes-multimedia/pipewire/pipewire_0.3.71.bb       | 9 +++++++--
+ 1 file changed, 7 insertions(+), 2 deletions(-)
 
-diff --git a/meta-networking/recipes-support/unbound/unbound_1.17.1.bb b/meta-networking/recipes-support/unbound/unbound_1.17.1.bb
-index 9855a557a..ff3d879ea 100644
---- a/meta-networking/recipes-support/unbound/unbound_1.17.1.bb
-+++ b/meta-networking/recipes-support/unbound/unbound_1.17.1.bb
-@@ -16,7 +16,7 @@ SRCREV = "90831af981221bbce1cd7b15055562336760e484"
- 
- inherit autotools pkgconfig systemd update-rc.d
- 
--DEPENDS = "openssl libevent libtool-native bison-native expat"
-+DEPENDS = "openssl libtool-native bison-native expat"
- RDEPENDS:${PN} = "bash openssl-bin daemonize"
- 
- S = "${WORKDIR}/git"
-@@ -28,6 +28,7 @@ EXTRA_OECONF = "--with-libexpat=${STAGING_EXECPREFIXDIR} \
- PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
- PACKAGECONFIG[dnscrypt] = "--enable-dnscrypt, --disable-dnscrypt, libsodium"
- PACKAGECONFIG[systemd] = "--enable-systemd,--disable-systemd,systemd"
-+PACKAGECONFIG[libevent] = "--with-libevent=${STAGING_EXECPREFIXDIR},,libevent"
- 
- do_configure:append() {
- 	sed -i -e 's#${RECIPE_SYSROOT}##g' ${B}/config.h
--- 
-2.25.1
+diff --git a/meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.71.=
+bb b/meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.71.bb
+index 414ae3ea8d..14a0e02f81 100644
+--- a/meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.71.bb
++++ b/meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.71.bb
+@@ -249,6 +249,7 @@ PACKAGES =3D+ "\
+     ${PN}-modules-meta \
+     ${PN}-alsa-card-profile \
+     ${PN}-v4l2 \
++    ${PN}-aes67 \
+     gstreamer1.0-pipewire \
+ "
+=20
+@@ -263,8 +264,6 @@ FILES:${PN} =3D " \
+     ${systemd_user_unitdir} \
+     ${bindir}/pipewire \
+     ${bindir}/pipewire-avb \
+-    ${bindir}/pipewire-aes67 \
+-    ${sysconfdir}/security/limits.d \
+ "
+=20
+ RRECOMMENDS:${PN}:class-target +=3D " \
+@@ -358,6 +357,7 @@ RRECOMMENDS:${PN}-modules +=3D "${PN}-modules-meta"
+ CONFFILES:${PN}-modules-rt =3D "${datadir}/pipewire/client-rt.conf"
+ FILES:${PN}-modules-rt +=3D " \
+     ${datadir}/pipewire/client-rt.conf \
++    ${sysconfdir}/security/limits.d/* \
+     "
+=20
+ CONFFILES:${PN}-modules-filter-chain =3D "${datadir}/pipewire/filter-cha=
+in/*"
+@@ -376,6 +376,11 @@ FILES:${PN}-v4l2 +=3D " \
+     ${libdir}/${PW_MODULE_SUBDIR}/v4l2/libpw-v4l2.so \
+ "
+=20
++# AES67 is a standard for audio over IP, from the Audio Engineering Soci=
+ety (AES).
++FILES:${PN}-aes67 +=3D " \
++    ${bindir}/pipewire-aes67 \
++"
++
+ FILES:gstreamer1.0-pipewire =3D " \
+     ${libdir}/gstreamer-1.0/* \
+ "
+--=20
+2.34.1
 
 
