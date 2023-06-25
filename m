@@ -2,31 +2,31 @@ Return-Path: <philip@balister.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EBDE5EB64DD
+	by smtp.lore.kernel.org (Postfix) with ESMTP id ECD12C001B0
 	for <webhook@archiver.kernel.org>; Sun, 25 Jun 2023 21:42:37 +0000 (UTC)
 Received: from mx.walter.deinstapel.de (mx.walter.deinstapel.de [62.176.232.99])
- by mx.groups.io with SMTP id smtpd.web11.20613.1687729311826769548
+ by mx.groups.io with SMTP id smtpd.web11.20611.1687729307225217797
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 25 Jun 2023 14:41:52 -0700
+ Sun, 25 Jun 2023 14:41:49 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="body hash did not verify" header.i=@fancydomain.eu header.s=mail header.b=b3y5TkQ5;
+ dkim=fail reason="body hash did not verify" header.i=@fancydomain.eu header.s=mail header.b=Z1lKmEn1;
  spf=pass (domain: fancydomain.eu, ip: 62.176.232.99, mailfrom: jasper@fancydomain.eu)
 From: "Jasper Orschulko" <jasper@fancydomain.eu>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=fancydomain.eu;
-	s=mail; t=1687729310;
-	bh=CQknQTQxmTO/Vzc+7AIA+dSKQ/t6XG9PT9xJ4vdX5XU=;
+	s=mail; t=1687729304;
+	bh=oCUQpAuEMv57O7SZ6MqQWHCCVAqmSAPBCimuE5JbFYo=;
 	h=From:To:Cc:Subject:In-Reply-To:References;
-	b=b3y5TkQ5FkaSGPao8AM8jYOj1c13Z3b6m/Ru8Z9Nv05KNDzGiGE29hwk5fbv/6TIg
-	 UXrl5vzfQQeAxI6d38nKvw/LECbfubuTk92SsTxtVuuk0o7aZ5FmsS6wfE/JN/Qmcj
-	 zV/6EBuP2fhOweArafAqGx4CqYIx5ZFGn6BDx07JRdDY/IWT9JBq8BS8Cyma8i66pD
-	 ry/MvOuK7ExnYjpWBj67L/Cl6Sk521LN/onWvAzo8MYW3f06+/YCauIeUvKWOUOguy
-	 Q1Soi1yq4zpsCnZ/8YKBmufpK5hH6YA0bvfCsgDvctsXrkBkAzNH7fx773FTtK6FWh
-	 BDRdrFtoyhj4g==
+	b=Z1lKmEn1JmTQjexOf2TGuFxH0lMDZI/XKad0VUisyfWFMLjXjk/IgJikMu3HBAKn8
+	 8N4LQEqQ60EH7H7RE45RHuy61uBRZ8c1xczqKFpRFdwfH9be2EKvozs0GFevlpNb5n
+	 QHrOI4RXO2ZZSCkCk4nb6eq3Cc/ZJWcK0OcReW/TRZSdT3onMnYQXCniL7ut3giSMU
+	 gjVrMSY78zFODrmPoBMiKnLTQLieBxStEsu6vikJ0UssU4Uj9npU7xC0Op32tlneNe
+	 GA8stMS3CweTcPl16uoBZRMhh7XVohlWABp7FKiBiYz1Y98cZzHDRLr9R6xq9BJguh
+	 UR0CnmwgVJdRw==
 To: openembedded-devel@lists.openembedded.org
 Cc: Jasper Orschulko <jasper@fancydomain.eu>
-Subject: [meta-python][PATCH 3/3] python3-platformdirs: Fix recipe version 3.6.0
-Date: Sun, 25 Jun 2023 23:39:59 +0200
-Message-ID: <20230625213959.2791472-3-jasper@fancydomain.eu>
+Subject: [meta-python][PATCH 2/3] python3-covdefaults: Add initial recipe 2.3.0
+Date: Sun, 25 Jun 2023 23:39:58 +0200
+Message-ID: <20230625213959.2791472-2-jasper@fancydomain.eu>
 In-Reply-To: <20230625213959.2791472-1-jasper@fancydomain.eu>
 References: <20230625213959.2791472-1-jasper@fancydomain.eu>
 Mime-Version: 1.0
@@ -35,69 +35,75 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sun, 25 Jun 2023 21:42:37 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103568
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103567
 
-python3-platformdirs version 3.6.0 requires hatchling build system.
-Before this fix it would previously build without issue but throw error w=
-hen
-used in the final image.
+Dependency for python3-platformdirs 3.6.0 ptest
 
-Additionally, fixing the ptest which now requires two additional
-dependencies.
+Signed-off-by: Jasper Orschulko <jasper@fancydomain.eu>
 ---
- .../python/python3-platformdirs_3.6.0.bb       | 18 +++++++-----------
- 1 file changed, 7 insertions(+), 11 deletions(-)
+ .../python/python3-covdefaults/run-ptest      |  3 ++
+ .../python/python3-covdefaults_2.3.0.bb       | 31 +++++++++++++++++++
+ 2 files changed, 34 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-covdefaul=
+ts/run-ptest
+ create mode 100644 meta-python/recipes-devtools/python/python3-covdefaul=
+ts_2.3.0.bb
 
-diff --git a/meta-python/recipes-devtools/python/python3-platformdirs_3.6=
-.0.bb b/meta-python/recipes-devtools/python/python3-platformdirs_3.6.0.bb
-index 20b3299ac7..6444fde7ea 100644
---- a/meta-python/recipes-devtools/python/python3-platformdirs_3.6.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-platformdirs_3.6.0.bb
-@@ -3,32 +3,28 @@ HOMEPAGE =3D "https://github.com/platformdirs/platformd=
-irs"
- LICENSE =3D "BSD-3-Clause"
- LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Dea4f5a41454746a9ed111e3d8723d=
-17a"
-=20
--SRC_URI =3D " \
--    git://github.com/platformdirs/platformdirs.git;branch=3Dmain;protoco=
-l=3Dhttps \
+diff --git a/meta-python/recipes-devtools/python/python3-covdefaults/run-=
+ptest b/meta-python/recipes-devtools/python/python3-covdefaults/run-ptest
+new file mode 100644
+index 0000000000..3385d68939
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-covdefaults/run-ptest
+@@ -0,0 +1,3 @@
++#!/bin/sh
++
++pytest -o log_cli=3Dtrue -o log_cli_level=3DINFO | sed -e 's/\[...%\]//g=
+'| sed -e 's/PASSED/PASS/g'| sed -e 's/FAILED/FAIL/g'|sed -e 's/SKIPED/SK=
+IP/g'| awk '{if ($NF=3D=3D"PASS" || $NF=3D=3D"FAIL" || $NF=3D=3D"SKIP" ||=
+ $NF=3D=3D"XFAIL" || $NF=3D=3D"XPASS"){printf "%s: %s\n", $NF, $0}else{pr=
+int}}'| awk '{if ($NF=3D=3D"PASS" || $NF=3D=3D"FAIL" || $NF=3D=3D"SKIP" |=
+| $NF=3D=3D"XFAIL" || $NF=3D=3D"XPASS") {$NF=3D"";print $0}else{print}}'
+diff --git a/meta-python/recipes-devtools/python/python3-covdefaults_2.3.=
+0.bb b/meta-python/recipes-devtools/python/python3-covdefaults_2.3.0.bb
+new file mode 100644
+index 0000000000..b7709aa1ca
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-covdefaults_2.3.0.bb
+@@ -0,0 +1,31 @@
++SUMMARY =3D "A coverage plugin to provide sensible default settings"
++HOMEPAGE =3D "https://github.com/asottile/covdefaults"
++LICENSE =3D "MIT"
++LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Da3da826da635201a80d2fb40f3034=
+929"
++
++# Use GitHub SRC_URI, as pypi package does not include tests
 +SRC_URI +=3D " \
-     file://run-ptest \
- "
-=20
--SRCREV ?=3D "85b0b67eb33a835b797c1d52dab4a06c5554b7ee"
--SRC_URI[sha256sum] =3D "7954a68d0ba23558d753f73437c55f89027cf8f5108c1984=
-4d4b82e5af396335"
-+SRC_URI[sha256sum] =3D "57e28820ca8094678b807ff529196506d7a21e17156cb1cd=
-db3e74cebce54640"
-=20
--inherit python_setuptools_build_meta ptest
-+inherit pypi python_hatchling ptest
-=20
- DEPENDS +=3D " \
--    python3-hatch-vcs-native \
--    python3-setuptools-scm-native \
--    python3-toml-native \
-+    ${PYTHON_PN}-hatch-vcs-native \
- "
-=20
--S =3D "${WORKDIR}/git"
--
- RDEPENDS:${PN}-ptest +=3D " \
-     ${PYTHON_PN}-appdirs \
-+    ${PYTHON_PN}-covdefaults \
-     ${PYTHON_PN}-pytest \
-     ${PYTHON_PN}-pytest-mock \
-+    ${PYTHON_PN}-pytest-cov \
- "
-=20
- do_install_ptest() {
--        install -d ${D}${PTEST_PATH}/Tests
++    git://github.com/asottile/covdefaults.git;branch=3Dmain;protocol=3Dh=
+ttps \
++    file://run-ptest \
++"
++
++SRCREV =3D "007f5aff5d1c817883385a5f61f742dd11776dc6"
++
++S =3D "${WORKDIR}/git"
++
++inherit setuptools3 ptest
++
++RDEPENDS:${PN} +=3D " \
++    ${PYTHON_PN}-coverage \
++"
++
++RDEPENDS:${PN}-ptest +=3D " \
++    ${PYTHON_PN}-pytest \
++"
++
++do_install_ptest() {
 +        install -d ${D}${PTEST_PATH}
-         cp -rf ${S}/tests ${D}${PTEST_PATH}/
- }
-=20
++        cp -rf ${S}/tests ${D}${PTEST_PATH}
++}
++
++BBCLASSEXTEND =3D "native nativesdk"
 --=20
 2.41.0
 
