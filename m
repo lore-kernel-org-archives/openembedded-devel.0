@@ -1,219 +1,100 @@
-Return-Path: <beniaminsandu@gmail.com>
+Return-Path: <marex@denx.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6D7CAEB64DC
-	for <webhook@archiver.kernel.org>; Sun, 25 Jun 2023 13:42:55 +0000 (UTC)
-Received: from mail-pg1-f172.google.com (mail-pg1-f172.google.com [209.85.215.172])
- by mx.groups.io with SMTP id smtpd.web10.11634.1687700569807483674
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 73D09EB64DC
+	for <webhook@archiver.kernel.org>; Sun, 25 Jun 2023 13:49:25 +0000 (UTC)
+Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
+ by mx.groups.io with SMTP id smtpd.web10.11739.1687700960598488438
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 25 Jun 2023 06:42:49 -0700
+ Sun, 25 Jun 2023 06:49:21 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20221208 header.b=TJV8I/uX;
- spf=pass (domain: gmail.com, ip: 209.85.215.172, mailfrom: beniaminsandu@gmail.com)
-Received: by mail-pg1-f172.google.com with SMTP id 41be03b00d2f7-543c692db30so2076886a12.3
-        for <openembedded-devel@lists.openembedded.org>; Sun, 25 Jun 2023 06:42:49 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1687700569; x=1690292569;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=MbOW5xTriQaQKyFoQN3TXrlAx7vue9IQNIMpzl+O98w=;
-        b=TJV8I/uX1/4Ipx+q8w7mnrE0zMg5So+SeRssHH8uFCkNocVDoibTL+WgD1g4w3nacG
-         thpvA4CKCIs3krE5URF+HPFaRcrOYHFUWVM0Hx0g3FUcRw9v+/orhmQs3kvPvyXttC5n
-         4ixj4jY1DwW2OKF0xcDAIo9hHs9ZTczUlL7a52UDSQY7sKNQXdPnpZlHoMFPFyURATzy
-         bJESbXrm9YG086iDA1FTY8x3dx7ie1gzpOZ861W/Frhhcx56NLvZoi8ngDlwFYvXMfHV
-         1Wsd4Akc9mSrKPQmUAOb1OfzzokKiW7AYBnSdVTdaEoVvIDq+p/HyOJZtaFvIx19TBsL
-         uv0w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1687700569; x=1690292569;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=MbOW5xTriQaQKyFoQN3TXrlAx7vue9IQNIMpzl+O98w=;
-        b=IaXz86Oq9J8WPzq3+pF9A6OCNuHyGSPU4UlSbAAmhTc+so3C4ywEl909DhHpYFaufT
-         8d49CnAiWsngP7Rtl7+TgGbCdB0h7E85ymmmxMy62/4MuyTjIS30bsf1Hs/sp9HTfjvF
-         ZJTAfqQb7W0bMUlMsK0fxQI3gXKseuPuzYgsWokocTVeB0MZ9J6/EIKBrU3flE1cTxam
-         igAd5WOp1ZKtpBEP1F5Mk4mLjzij71CgGysp7XDzWnUkQVJAGkhN14ZgG+KV+753s/Sn
-         TVHCvpWOOJGe/KvAgP0bfpqFUpNM9+13Yd//kgJwvdzJi29j2/h+T7lmpgkYOewoPpxD
-         SNxg==
-X-Gm-Message-State: AC+VfDyheIS6owtQCxmrXoVFk0UfRVxeDmslwov4kpB7ekHH8OZARX79
-	cqOEi7JShtsfwZMzXc4Q8BcyhnxnP0cywyhvvEA=
-X-Google-Smtp-Source: ACHHUZ4VeTSSO4uYPvnG3HVbniay08MQRtGXfKhS2+g5OZMlGPpOLLx101iAzLnVud/SPeP8negy0V8o+6479SiTNC4=
-X-Received: by 2002:a17:90a:9bcc:b0:262:ec13:d3a with SMTP id
- b12-20020a17090a9bcc00b00262ec130d3amr1195110pjw.28.1687700569036; Sun, 25
- Jun 2023 06:42:49 -0700 (PDT)
+ dkim=fail reason="body hash did not verify" header.i=@denx.de header.s=phobos-20191101 header.b=zYmGd/ct;
+ spf=pass (domain: denx.de, ip: 85.214.62.61, mailfrom: marex@denx.de)
+Received: from tr.lan (ip-86-49-120-218.bb.vodafone.cz [86.49.120.218])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+	(No client certificate requested)
+	(Authenticated sender: marex@denx.de)
+	by phobos.denx.de (Postfix) with ESMTPSA id 0DBA2861AA;
+	Sun, 25 Jun 2023 15:49:18 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1687700958;
+	bh=IAkBsbbVQN0tCwcswF1hdqNYm4TjXGKsLtr1fchmOzE=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+	b=zYmGd/ct/2L4yDzHb4ihWzo8syWDMt+V8fErX9H712fC42IK6U7/6vnsB3b2ObsGc
+	 LyDkGF6pE/q0On/v7Jo69pDukoeDXJt6BEfWrO4E4OuhC7nsakIPqQkyFOCSKNP1wZ
+	 pEiKlio/q0fhZNqn6hnvJxI8eZCyYEPk1FgymymQJbPm4Box1S8Xs3oLRo0nMh7zWz
+	 DswdSeyoBvURXDnREylziBFoDKMh3G/fcb2kLPRckBiz00NGadz8ubeeggx2rusu75
+	 2AMS74rBABKMOKAyOHyZ6QCz2A74R+FiReFEyXlh8CsL9NOlgUFFcEXtDg0AXOlOr3
+	 Ww8enZNes3Zog==
+From: Marek Vasut <marex@denx.de>
+To: openembedded-devel@lists.openembedded.org
+Cc: Marek Vasut <marex@denx.de>,
+	Fabio Estevam <festevam@denx.de>,
+	Khem Raj <raj.khem@gmail.com>,
+	Martin Jansa <martin.jansa@gmail.com>
+Subject: [meta-oe][PATCH 2/2] lvgl: Add default input device configuration option
+Date: Sun, 25 Jun 2023 15:49:02 +0200
+Message-Id: <20230625134902.104109-2-marex@denx.de>
+X-Mailer: git-send-email 2.40.1
+In-Reply-To: <20230625134902.104109-1-marex@denx.de>
+References: <20230625134902.104109-1-marex@denx.de>
 MIME-Version: 1.0
-References: <20230619182559.104504-1-beniaminsandu@gmail.com> <CA+chaQcgWg7AJ7kk62HE2xTS6k3sORmgb4OTJmhqcwyN+ZqmPQ@mail.gmail.com>
-In-Reply-To: <CA+chaQcgWg7AJ7kk62HE2xTS6k3sORmgb4OTJmhqcwyN+ZqmPQ@mail.gmail.com>
-From: Beniamin Sandu <beniaminsandu@gmail.com>
-Date: Sun, 25 Jun 2023 16:42:37 +0300
-Message-ID: <CABQJdOG4=HojBgBTc9cJX92pe0ZKzS6=c0NgKHQiKR6Ue67ZVQ@mail.gmail.com>
-Subject: Re: [oe] [meta-networking][PATCH v2] mbedtls: add support for v3.x
-To: Martin Jansa <martin.jansa@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
+X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
+X-Virus-Status: Clean
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 25 Jun 2023 13:42:55 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103561
+ <openembedded-devel@lists.openembedded.org>; Sun, 25 Jun 2023 13:49:25 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103563
 
-On Sun, Jun 25, 2023 at 1:53=E2=80=AFPM Martin Jansa <martin.jansa@gmail.co=
-m> wrote:
->
-> On Mon, Jun 19, 2023 at 8:26=E2=80=AFPM Beniamin Sandu <beniaminsandu@gma=
-il.com> wrote:
->>
->> Version 3.4.0 adds a lot of improvements and fixes (a notable one
->> being initial support for PKCS7 CMS), but since this is a pretty
->> big jump, let's keep both versions for a while, so the v2.x users
->> can upgrade to 3.x in a timely manner if needed.
->>
->> Signed-off-by: Beniamin Sandu <beniaminsandu@gmail.com>
->> ---
->>  .../mbedtls/mbedtls_3.4.0.bb                  | 85 +++++++++++++++++++
->>  1 file changed, 85 insertions(+)
->>  create mode 100644 meta-networking/recipes-connectivity/mbedtls/mbedtls=
-_3.4.0.bb
->>
->> diff --git a/meta-networking/recipes-connectivity/mbedtls/mbedtls_3.4.0.=
-bb b/meta-networking/recipes-connectivity/mbedtls/mbedtls_3.4.0.bb
->> new file mode 100644
->> index 000000000..ebc6ba573
->> --- /dev/null
->> +++ b/meta-networking/recipes-connectivity/mbedtls/mbedtls_3.4.0.bb
->
->
-> ....
->
->> +# Needs crypto instructions on aarch64
->> +TUNE_CCARGS_MARCH_OPTS:append:aarch64 =3D "${@bb.utils.contains('TUNE_F=
-EATURES', 'crypto', '', '+crypto', d)}"
->
->
-> This assumes too much about TUNE_CCARGS_MARCH_OPTS structure and in some =
-multilib builds I'm seeing:
->
-> # $TUNE_CCARGS_MARCH_OPTS [4 operations]
-> #   set oe-core/meta/conf/machine/include/arm/arch-arm.inc:19
-> #     [_defaultval] ""
-> #   postdot oe-core/meta/conf/machine/include/arm/feature-arm-neon.inc:26
-> #     "${@bb.utils.contains('TUNE_FEATURES', [ 'vfpv3d16', 'vfpv5spd16' ]=
-, '+fp', '', d)}"
-> #   postdot oe-core/meta/conf/machine/include/arm/feature-arm-simd.inc:5
-> #     "${@bb.utils.contains('TUNE_FEATURES', 'simd', '+simd', '', d)}"
-> #   :append[aarch64] meta-oe/meta-networking/recipes-connectivity/mbedtls=
-/mbedtls_3.4.0.bb:45
-> #     "${@bb.utils.contains('TUNE_FEATURES', 'crypto', '', '+crypto', d)}=
-"
-> # pre-expansion value:
-> #   "${@bb.utils.contains('TUNE_FEATURES', [ 'vfpv3d16', 'vfpv5spd16' ], =
-'+fp', '', d)}${@bb.utils.contains('TUNE_FEATURES', 'simd', '+simd', '', d)=
-}${@bb.utils.contains('TUNE_FEATURES', 'crypto', '', '+crypto', d)}"
-> TUNE_CCARGS_MARCH_OPTS=3D"+crypto"
->
-> And empty TUNE_CCARGS_MARCH, because TUNE_FEATURES has only aarch64
->
-> # $TUNE_CCARGS_MARCH [4 operations]
-> #   postdot oe-core/meta/conf/machine/include/arm/arch-armv7a.inc:6
-> #     "${@bb.utils.contains('TUNE_FEATURES', 'armv7a', ' -march=3Darmv7-a=
-', '', d)}"
-> #   postdot oe-core/meta/conf/machine/include/arm/arch-armv6.inc:5
-> #     "${@bb.utils.contains('TUNE_FEATURES', 'armv6', ' -march=3Darmv6', =
-'', d)}"
-> #   postdot oe-core/meta/conf/machine/include/arm/arch-armv5.inc:5
-> #     "${@bb.utils.contains('TUNE_FEATURES', 'armv5', ' -march=3Darmv5t${=
-ARMPKGSFX_DSP}', '', d)}"
-> #   postdot oe-core/meta/conf/machine/include/arm/arch-armv4.inc:5
-> #     "${@bb.utils.contains('TUNE_FEATURES', 'armv4', ' -march=3Darmv4${A=
-RMPKGSFX_THUMB}', '', d)}"
-> # pre-expansion value:
-> #   "${@bb.utils.contains('TUNE_FEATURES', 'armv7a', ' -march=3Darmv7-a',=
- '', d)}${@bb.utils.contains('TUNE_FEATURES', 'armv6', ' -march=3Darmv6', '=
-', d)}${@bb.utils.contains('TUNE_FEATURES', 'armv5', ' -march=3Darmv5t${ARM=
-PKGSFX_DSP}', '', d)}${@bb.utils.contains('TUNE_FEATURES', 'armv4', ' -marc=
-h=3Darmv4${ARMPKGSFX_THUMB}', '', d)}"
-> TUNE_CCARGS_MARCH=3D""
->
-> causing do_configure failure:
->
-> aarch64-oe-linux-gcc: warning: +crypto: linker input file unused because =
-linking not done
-> aarch64-oe-linux-gcc: error: +crypto: linker input file not found: No suc=
-h file or directory
-> ninja: build stopped: subcommand failed.
+Add the ability to override default touch input device hard-coded into LV=
+GL.
+The current default in the code is "/dev/input/event10" for whatever reas=
+on,
+let user override this. Pick "/dev/input/touchscreen" as the OE default, =
+as
+that is more likely to be present on embedded hardware.
 
-As I understand, you are building a lib64 multilib variant with a pure
-aarch64 tune (no core specifications or optimizations whatsoever)?
-I have tested with a bunch of different machines and tuning variations
-on my side, but I never encountered a build in the real world with
-arm64 instructions enabled and nothing else, so did not think trying
-out this one would be useful.
-Building with crypto instructions on arm64 machines was the path with
-the least resistance in getting rid of compilation errors because of
-target specific option mismatches, but I will look if there is better
-way to handle this when I get the chance.
+Signed-off-by: Marek Vasut <marex@denx.de>
+---
+Cc: Fabio Estevam <festevam@denx.de>
+Cc: Khem Raj <raj.khem@gmail.com>
+Cc: Martin Jansa <martin.jansa@gmail.com>
+---
+ meta-oe/recipes-graphics/lvgl/lv-drivers.inc | 2 ++
+ 1 file changed, 2 insertions(+)
 
->
->>  +
->> +# For now the only way to enable PSA is to explicitly pass a -D via CFL=
-AGS
->> +CFLAGS:append =3D "${@bb.utils.contains('PACKAGECONFIG', 'psa', ' -DMBE=
-DTLS_USE_PSA_CRYPTO', '', d)}"
->> +
->> +PROVIDES +=3D "polarssl"
->> +RPROVIDES:${PN} =3D "polarssl"
->> +
->> +PACKAGES =3D+ "${PN}-programs"
->> +FILES:${PN}-programs =3D "${bindir}/"
->> +
->> +ALTERNATIVE:${PN}-programs =3D "hello"
->> +ALTERNATIVE_LINK_NAME[hello] =3D "${bindir}/hello"
->> +
->> +BBCLASSEXTEND =3D "native nativesdk"
->> +
->> +CVE_PRODUCT =3D "mbed_tls"
->> +
->> +# Fix merged upstream https://github.com/Mbed-TLS/mbedtls/pull/5310
->> +CVE_CHECK_IGNORE +=3D "CVE-2021-43666"
->> +# Fix merged upstream https://github.com/Mbed-TLS/mbedtls/commit/9a4a9c=
-66a48edfe9ece03c7e4a53310adf73a86c
->> +CVE_CHECK_IGNORE +=3D "CVE-2021-45451"
->> +
->> +# Strip host paths from autogenerated test files
->> +do_compile:append() {
->> +       sed -i 's+${S}/++g' ${B}/tests/*.c 2>/dev/null || :
->> +       sed -i 's+${B}/++g' ${B}/tests/*.c 2>/dev/null || :
->> +}
->> +
->> +# Export source files/headers needed by Arm Trusted Firmware
->> +sysroot_stage_all:append() {
->> +       sysroot_stage_dir "${S}/library" "${SYSROOT_DESTDIR}/usr/share/m=
-bedtls-source/library"
->> +       sysroot_stage_dir "${S}/include" "${SYSROOT_DESTDIR}/usr/share/m=
-bedtls-source/include"
->> +}
->> +
->> +do_install_ptest () {
->> +       install -d ${D}${PTEST_PATH}/tests
->> +       cp -f ${B}/tests/test_suite_* ${D}${PTEST_PATH}/tests/
->> +       find ${D}${PTEST_PATH}/tests/ -type f -name "*.c" -delete
->> +       cp -fR ${S}/tests/data_files ${D}${PTEST_PATH}/tests/
->> +}
->> --
->> 2.25.1
->>
->>
->> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->> Links: You receive all messages sent to this group.
->> View/Reply Online (#103441): https://lists.openembedded.org/g/openembedd=
-ed-devel/message/103441
->> Mute This Topic: https://lists.openembedded.org/mt/99629175/3617156
->> Group Owner: openembedded-devel+owner@lists.openembedded.org
->> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [=
-Martin.Jansa@gmail.com]
->> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->>
+diff --git a/meta-oe/recipes-graphics/lvgl/lv-drivers.inc b/meta-oe/recip=
+es-graphics/lvgl/lv-drivers.inc
+index 284d8421b..dcf1ad14b 100644
+--- a/meta-oe/recipes-graphics/lvgl/lv-drivers.inc
++++ b/meta-oe/recipes-graphics/lvgl/lv-drivers.inc
+@@ -7,6 +7,7 @@ LVGL_CONFIG_USE_DRM =3D "${@bb.utils.contains('PACKAGECON=
+FIG', 'drm', '1', '0', d)
+ LVGL_CONFIG_DRM_CARD ?=3D "/dev/dri/card0"
+=20
+ LVGL_CONFIG_USE_EVDEV =3D "${@bb.utils.contains_any('PACKAGECONFIG', 'dr=
+m fbdev', '1', '0', d)}"
++LVGL_CONFIG_EVDEV_INPUT ?=3D "/dev/input/touchscreen"
+=20
+ LVGL_CONFIG_USE_FBDEV =3D "${@bb.utils.contains('PACKAGECONFIG', 'fbdev'=
+, '1', '0', d)}"
+=20
+@@ -29,6 +30,7 @@ do_configure:append() {
+         -e "s|\(^#  define DRM_CARD \).*|#  define DRM_CARD \"${LVGL_CON=
+FIG_DRM_CARD}\"|g" \
+ 	\
+         -e "s|\(^#  define USE_EVDEV \).*|#  define USE_EVDEV ${LVGL_CON=
+FIG_USE_EVDEV}|g" \
++        -e "s|\(^#  define EVDEV_NAME \).*|#  define EVDEV_NAME \"${LVGL=
+_CONFIG_EVDEV_INPUT}\"|g" \
+         \
+         -e "s|\(^#  define USE_FBDEV \).*|#  define USE_FBDEV ${LVGL_CON=
+FIG_USE_FBDEV}|g" \
+         \
+--=20
+2.40.1
+
 
