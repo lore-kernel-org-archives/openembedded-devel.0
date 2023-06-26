@@ -2,70 +2,81 @@ Return-Path: <philip@balister.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9F217EB64DA
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B10B1EB64DD
 	for <webhook@archiver.kernel.org>; Mon, 26 Jun 2023 12:03:53 +0000 (UTC)
 Received: from mx.walter.deinstapel.de (mx.walter.deinstapel.de [62.176.232.99])
- by mx.groups.io with SMTP id smtpd.web10.5680.1687780019229276364
+ by mx.groups.io with SMTP id smtpd.web10.5684.1687780024252383693
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 26 Jun 2023 04:47:00 -0700
+ Mon, 26 Jun 2023 04:47:04 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="body hash did not verify" header.i=@fancydomain.eu header.s=mail header.b=WOC1tTiX;
+ dkim=fail reason="body hash did not verify" header.i=@fancydomain.eu header.s=mail header.b=Q8VJvxVV;
  spf=pass (domain: fancydomain.eu, ip: 62.176.232.99, mailfrom: jasper@fancydomain.eu)
 From: "Jasper Orschulko" <jasper@fancydomain.eu>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=fancydomain.eu;
-	s=mail; t=1687780015;
-	bh=LXUDjE6eMq6q1+zPziWydWNMkCG0888C0zXZTxZr620=;
-	h=From:To:Cc:Subject;
-	b=WOC1tTiXduijlosmYRzygHLRnbquv8sdSu7Ba4DEmj0uF/9W+YWdHCjd7fbjW91xV
-	 6FdrGW06zS/7vHuKoc2eQtthTMMDohpjUNIO6tzq1P2YkfMCM+0GECRBMwLaLBaQQF
-	 ymz7VEaxJFKPDkrNlK9GShxzgJnGF4s7X9Ki5TIN+NVRNJ3NfzbDHdTeXHYl0mnbFz
-	 firegHQqCB7JDhF1pkZll5fwrZxQwCK/12Hmp7SNuuLJXy9G4G12tF/F3dUDdUUD0y
-	 MFY/APg4w3YNFOgWRXXXyKI3PuXvASkY8i9HzIXDBmESbrAx1C0owe3qRaL7xLp14f
-	 aUR9uju6io/+A==
+	s=mail; t=1687780021;
+	bh=sOJdH2t8WdidG7EBkMwuimJZsjCI9fGFQBPRAs8ylY8=;
+	h=From:To:Cc:Subject:In-Reply-To:References;
+	b=Q8VJvxVV1BvQ7B/0zBsOJxDfiM9kM9ImdgthkYbh88RP0UdfSEb4xbCLXI4+neshq
+	 0J/LN9yo+L7wAg38a9PsOA/v4lROBwb8yautxlBPAOGCV9av3h/StoJ53a1WrhIPT2
+	 8sUVO6qe9FqGUQtDg+AEONQQdb+LEyN/nZeimcq+kRKyjs8ItTRlWJJibTqjmBMFsa
+	 hUjzds5iC3tp0/bZxhPk9eEB/9UM8ZuLQZJpVXnpqcOUGgcH5H7yAuZ7hXUaUELtq8
+	 LOzgT4YhyeYyrqzyHwvMYR5/5Io6NJxwcKFSDqrsLa/+h9GpuffmvJBn+gE7bTnqRJ
+	 U1F+LFXP1I2Mg==
 To: openembedded-devel@lists.openembedded.org
 Cc: Jasper Orschulko <jasper@fancydomain.eu>
-Subject: [meta-python][PATCH 1/5] python3-distlib: Add initial recipe 0.3.6
-Date: Mon, 26 Jun 2023 13:45:29 +0200
-Message-ID: <20230626114533.221953-1-jasper@fancydomain.eu>
+Subject: [meta-python][PATCH 3/5] python3-virtualenv: Add initial recipe 20.23.0
+Date: Mon, 26 Jun 2023 13:45:31 +0200
+Message-ID: <20230626114533.221953-3-jasper@fancydomain.eu>
+In-Reply-To: <20230626114533.221953-1-jasper@fancydomain.eu>
+References: <20230626114533.221953-1-jasper@fancydomain.eu>
 Mime-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 26 Jun 2023 12:03:53 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103576
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103578
 
-Dependency for python3-virtualenv
+Dependency for python3-tox
 
 Signed-off-by: Jasper Orschulko <jasper@fancydomain.eu>
 ---
- .../recipes-devtools/python/python3-distlib_0.3.6.bb | 12 ++++++++++++
- 1 file changed, 12 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-distlib_0=
-.3.6.bb
+ .../python/python3-virtualenv_20.23.0.bb      | 22 +++++++++++++++++++
+ 1 file changed, 22 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-virtualen=
+v_20.23.0.bb
 
-diff --git a/meta-python/recipes-devtools/python/python3-distlib_0.3.6.bb=
- b/meta-python/recipes-devtools/python/python3-distlib_0.3.6.bb
+diff --git a/meta-python/recipes-devtools/python/python3-virtualenv_20.23=
+.0.bb b/meta-python/recipes-devtools/python/python3-virtualenv_20.23.0.bb
 new file mode 100644
-index 0000000000..ffffece56a
+index 0000000000..38487488a9
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-distlib_0.3.6.bb
-@@ -0,0 +1,12 @@
++++ b/meta-python/recipes-devtools/python/python3-virtualenv_20.23.0.bb
+@@ -0,0 +1,22 @@
 +# SPDX-License-Identifier: MIT
 +# Copyright (C) 2023 iris-GmbH infrared & intelligent sensors
 +
-+SUMMARY =3D "A library which implements low-level functions that relate =
-to packaging and distribution of Python software."
-+HOMEPAGE =3D "https://github.com/pypa/distlib"
-+LICENSE =3D "PSF-2.0"
-+LIC_FILES_CHKSUM =3D "file://LICENSE.txt;md5=3Df6a11430d5cd6e2cd3832ee94=
-f22ddfc"
++SUMMARY =3D "A tool for creating isolated virtual python environments."
++HOMEPAGE =3D "https://github.com/pypa/virtualenv"
++LICENSE =3D "MIT"
++LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D0ce089158cf60a8ab6abb452b6405=
+538"
 +
-+SRC_URI[sha256sum] =3D "14bad2d9b04d3a36127ac97f30b12a19268f211063d8f8ee=
-4f47108896e11b46"
++SRC_URI[sha256sum] =3D "a85caa554ced0c0afbd0d638e7e2d7b5f92d23478d05d17a=
+76daeac8f279f924"
 +
 +BBCLASSEXTEND =3D "native nativesdk"
-+inherit pypi python_setuptools_build_meta
++inherit pypi python_hatchling
++
++DEPENDS +=3D "\
++    ${PYTHON_PN}-hatch-vcs-native \
++"
++
++RDEPENDS:${PN} +=3D " \
++    ${PYTHON_PN}-distlib \
++    ${PYTHON_PN}-filelock \
++    ${PYTHON_PN}-platformdirs \
++"
 --=20
 2.41.0
 
