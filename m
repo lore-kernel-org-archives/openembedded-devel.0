@@ -1,84 +1,90 @@
-Return-Path: <wangmy@fujitsu.com>
+Return-Path: <thakur.virendra1810@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4656DC001DE
-	for <webhook@archiver.kernel.org>; Tue, 27 Jun 2023 07:14:35 +0000 (UTC)
-Received: from esa3.hc1455-7.c3s2.iphmx.com (esa3.hc1455-7.c3s2.iphmx.com [207.54.90.49])
- by mx.groups.io with SMTP id smtpd.web11.7470.1687850068489129204
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1872EEB64DD
+	for <webhook@archiver.kernel.org>; Tue, 27 Jun 2023 07:50:36 +0000 (UTC)
+Received: from mail-ot1-f41.google.com (mail-ot1-f41.google.com [209.85.210.41])
+ by mx.groups.io with SMTP id smtpd.web10.7940.1687852233689074414
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 27 Jun 2023 00:14:30 -0700
+ Tue, 27 Jun 2023 00:50:33 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: fujitsu.com, ip: 207.54.90.49, mailfrom: wangmy@fujitsu.com)
-X-IronPort-AV: E=McAfee;i="6600,9927,10753"; a="122377936"
-X-IronPort-AV: E=Sophos;i="6.01,161,1684767600"; 
-   d="scan'208";a="122377936"
-Received: from unknown (HELO yto-r2.gw.nic.fujitsu.com) ([218.44.52.218])
-  by esa3.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 27 Jun 2023 16:14:20 +0900
-Received: from yto-m4.gw.nic.fujitsu.com (yto-nat-yto-m4.gw.nic.fujitsu.com [192.168.83.67])
-	by yto-r2.gw.nic.fujitsu.com (Postfix) with ESMTP id 727A7C68E2
-	for <openembedded-devel@lists.openembedded.org>; Tue, 27 Jun 2023 16:14:17 +0900 (JST)
-Received: from aks-ab2.gw.nic.fujitsu.com (aks-ab2.gw.nic.fujitsu.com [192.51.207.12])
-	by yto-m4.gw.nic.fujitsu.com (Postfix) with ESMTP id B6D1ED3F13
-	for <openembedded-devel@lists.openembedded.org>; Tue, 27 Jun 2023 16:14:16 +0900 (JST)
-Received: from localhost.localdomain (unknown [10.167.225.33])
-	by aks-ab2.gw.nic.fujitsu.com (Postfix) with ESMTP id A946A88D20;
-	Tue, 27 Jun 2023 16:14:15 +0900 (JST)
-From: wangmy@fujitsu.com
-To: openembedded-devel@lists.openembedded.org
-Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-python] [PATCH] python3-google-api-python-client: upgrade 2.89.0 -> 2.90.0
-Date: Tue, 27 Jun 2023 15:12:09 +0800
-Message-Id: <1687849939-19941-10-git-send-email-wangmy@fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
-In-Reply-To: <1687849939-19941-1-git-send-email-wangmy@fujitsu.com>
-References: <1687849939-19941-1-git-send-email-wangmy@fujitsu.com>
-X-TM-AS-GCONF: 00
-X-TM-AS-Product-Ver: IMSS-9.1.0.1408-9.0.0.1002-27716.005
-X-TM-AS-User-Approved-Sender: Yes
-X-TMASE-Version: IMSS-9.1.0.1408-9.0.1002-27716.005
-X-TMASE-Result: 10-1.445100-10.000000
-X-TMASE-MatchedRID: R9NZgeCyXhKjz0nOeth/yUIIxwDaU5mr9pLnYtQ99xIwS+fKi1+IroIB
-	CrHXdfvc4CtjYmQpb2kF1Ec/oUIRlVpCIuRr0RxKTuctSpiuWyUUi4Ehat054xHfiujuTbedlNc
-	WZ7137CiBkESMI05d4iiOf1NDnCI+rWL/xQJnm46eAiCmPx4NwGmRqNBHmBveVDC1CbuJXmMqtq
-	5d3cxkNaCHaLMe2Keu57XkF71+H63FsvPliSNYAiTTfkwY/Q1kIe1/cb7ecdRk32kTbuDuggar/
-	GQ4X3RmHcjoV5i9yR8yYWSf3VH1cWOCjzW1o6/EU8mdcvbI1h2S6jzjuXTm0MTMzICazP4UehYt
-	aVdyxm8=
-X-TMASE-SNAP-Result: 1.821001.0001-0-1-22:0,33:0,34:0-0
+ dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=N/GJbqj4;
+ spf=pass (domain: gmail.com, ip: 209.85.210.41, mailfrom: thakur.virendra1810@gmail.com)
+Received: by mail-ot1-f41.google.com with SMTP id 46e09a7af769-6b7541d885cso1162655a34.3
+        for <openembedded-devel@lists.openembedded.org>; Tue, 27 Jun 2023 00:50:33 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20221208; t=1687852232; x=1690444232;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=ePUtpbGZePzbSnG2uUJFHrcuSmz+Scz9ps8KAAiP0JA=;
+        b=N/GJbqj4DukV3D2v9hp02UsPQSOchW/dt8Nk940Ram/iDk5ksARUYwo4GBIKElJmmp
+         ShuRO+Z8jZFAOGUUdv+MXbnYiRYDhCGrh+wXfcMZLjKPyHAzi+qgDSR1fF5i5efAbk7B
+         0tw7SbpNP5MJa1zFELTfgCsgU0dC3bsJECkNS1D/y7sPjbYr6NGQgHLsh6CebvKpLlB8
+         Tm5i4MfB5MEUTe9F62mxrosKmFLeK1TxExjUO06W8n643DmeCxHKUQ+S74BVD888IAie
+         W6lVYRBf9ZroS8kKlhOm3quJ+tn9ai4xuBAPbSoJ/Iipf1n8eupAEWM5LkP8ERWRQc3t
+         V99w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20221208; t=1687852232; x=1690444232;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=ePUtpbGZePzbSnG2uUJFHrcuSmz+Scz9ps8KAAiP0JA=;
+        b=HAC7w6YcSJf510h2+PJDtIHBDCp8SBByHM+lbbXccKNECUb6pZThCCCb8mZFVIcCvV
+         Y/NA+C4JYfwxrxsz677SzJfEq/dSg9zklBz5Y3kBMvXUkFupbattHr4gftJQBJQV3DU5
+         E2sPdpASmVNaiq5fscBfU0rvn0kZWi3TAMlgfOSWzcqZAcmZg520I6ATa3gNmAPoNDc/
+         729+NXgX+WSQQyEQ/NNLTyM0SB8fVhfVP66RY02IIWXMpqFbQA8JCyLUYDRgXGG3rxHd
+         dVee3dKsntM5Pq6drQUs9hogszZLpuYLMbZtmyECDSXvOnojErmIMAlxlcYXVjDKPLP0
+         +AjQ==
+X-Gm-Message-State: AC+VfDzHW9KxwBuyryD2XNNih37CtQPShXpAUTOL5t3orJhvYaUWmEAn
+	RjJOWum2+8+LnJx7eGfN3HjAl9lPC1o=
+X-Google-Smtp-Source: ACHHUZ6iplKJUGMdjwrHaEnrCvUzz8aA60zT4ck5eV/7XSF82qhy0wKWRetwaHwXklA2Os2WUF2PKQ==
+X-Received: by 2002:a05:6830:11ce:b0:6b7:e9ad:db90 with SMTP id v14-20020a05683011ce00b006b7e9addb90mr2310646otq.11.1687852232270;
+        Tue, 27 Jun 2023 00:50:32 -0700 (PDT)
+Received: from localhost.localdomain ([223.233.81.169])
+        by smtp.gmail.com with ESMTPSA id q136-20020a632a8e000000b0055b0c330b30sm568874pgq.84.2023.06.27.00.50.30
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 27 Jun 2023 00:50:31 -0700 (PDT)
+From: virendra thakur <thakur.virendra1810@gmail.com>
+X-Google-Original-From: virendra thakur <virendrak@kpit.com>
+To: openembedded-devel@lists.openembedded.org,
+	koen@dominion.thruhere.net
+Subject: [meta-oe][dunfell][PATCH] c-ares: whitelist CVE-2023-31124
+Date: Tue, 27 Jun 2023 13:20:13 +0530
+Message-Id: <20230627075013.23809-1-virendrak@kpit.com>
+X-Mailer: git-send-email 2.25.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 27 Jun 2023 07:14:35 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103614
+ <openembedded-devel@lists.openembedded.org>; Tue, 27 Jun 2023 07:50:36 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103615
 
-From: Wang Mingyu <wangmy@fujitsu.com>
+CVE-2023-31124 applies only when cross-compiling using autotools.
+Yocto cross-compiles via cmake which is also listed as official workaround.
 
-Changelog:
-https://github.com/googleapis/google-api-python-client/blob/main/CHANGELOG.md
+See:
+* https://nvd.nist.gov/vuln/detail/CVE-2023-31124
+* https://github.com/c-ares/c-ares/security/advisories/GHSA-54xr-f67r-4pc4
 
-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+Signed-off-by: virendra thakur <virendrak@kpit.com>
 ---
- ...ent_2.89.0.bb => python3-google-api-python-client_2.90.0.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-google-api-python-client_2.89.0.bb => python3-google-api-python-client_2.90.0.bb} (86%)
+ meta-oe/recipes-support/c-ares/c-ares_1.18.1.bb | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-diff --git a/meta-python/recipes-devtools/python/python3-google-api-python-client_2.89.0.bb b/meta-python/recipes-devtools/python/python3-google-api-python-client_2.90.0.bb
-similarity index 86%
-rename from meta-python/recipes-devtools/python/python3-google-api-python-client_2.89.0.bb
-rename to meta-python/recipes-devtools/python/python3-google-api-python-client_2.90.0.bb
-index a62d599137..7309431aea 100644
---- a/meta-python/recipes-devtools/python/python3-google-api-python-client_2.89.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-google-api-python-client_2.90.0.bb
-@@ -4,7 +4,7 @@ HOMEPAGE = "https://github.com/googleapis/google-api-python-client"
- LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=86d3f3a95c324c9479bd8986968f4327"
+diff --git a/meta-oe/recipes-support/c-ares/c-ares_1.18.1.bb b/meta-oe/recipes-support/c-ares/c-ares_1.18.1.bb
+index 66254583b..152d91332 100644
+--- a/meta-oe/recipes-support/c-ares/c-ares_1.18.1.bb
++++ b/meta-oe/recipes-support/c-ares/c-ares_1.18.1.bb
+@@ -23,3 +23,7 @@ PACKAGES =+ "${PN}-utils"
+ FILES_${PN}-utils = "${bindir}"
  
--SRC_URI[sha256sum] = "0b0c9503df2da92692ffceee88423ca593cbf0b939d879e2c46fbdc1a39cf091"
-+SRC_URI[sha256sum] = "cbcb3ba8be37c6806676a49df16ac412077e5e5dc7fa967941eff977b31fba03"
- 
- inherit pypi setuptools3
- 
+ BBCLASSEXTEND = "native nativesdk"
++
++# this vulneribility applies only when cross-compiling using autotools
++# yocto cross-compiles via cmake which is also listed as official workaround
++CVE_CHECK_WHITELIST += "CVE-2023-31124"
 -- 
-2.34.1
+2.25.1
 
 
