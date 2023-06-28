@@ -1,154 +1,274 @@
-Return-Path: <petr.gotthard@advantech.cz>
+Return-Path: <beniaminsandu@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5220BC001E0
-	for <webhook@archiver.kernel.org>; Wed, 28 Jun 2023 15:32:38 +0000 (UTC)
-Received: from APC01-PSA-obe.outbound.protection.outlook.com (APC01-PSA-obe.outbound.protection.outlook.com [40.107.255.84])
- by mx.groups.io with SMTP id smtpd.web10.19714.1687966351117957205
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A5E4BEB64D7
+	for <webhook@archiver.kernel.org>; Wed, 28 Jun 2023 18:41:31 +0000 (UTC)
+Received: from mail-wr1-f54.google.com (mail-wr1-f54.google.com [209.85.221.54])
+ by mx.groups.io with SMTP id smtpd.web10.1794.1687977689277043019
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 28 Jun 2023 08:32:32 -0700
+ Wed, 28 Jun 2023 11:41:29 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@advantech.cz header.s=selector1 header.b=CwnGhyiM;
- spf=pass (domain: advantech.cz, ip: 40.107.255.84, mailfrom: petr.gotthard@advantech.cz)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=OUZxV7F3qN4rGVNiZcfVJbXntbsbkkzYRPbPZXg9s+llqq1f03Gn9qiUJQH/jw3KhqvaryIemIraESrq0AOsGVG3nUiaCZaFwVgyUoEQl5uFZdMGdamtFCuR9kGWFuiIzAcjldQskch5be14bNdhPfAwi68AK76x3PkfSiP4Anx9omeI6N8BaV+yP4pd6V7bxyzu+lmTBfb49cLpqSQZhQfZP/78b1xxUJNpuPrlAs7AyJDeT1Ev/UMJEJlxx1RUiqQVwUQ4gcDGYqIT2H+mxtr09WYXzYLYQKtpqAbWktD6jqbfoqdsjW4vDrkuMuThKFJXauMYtqPadEp6FJ7ZHQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=mUE8yLng7Ykii26koyoBigfG6PX6M1bAPOfRWpj2/uo=;
- b=LbAc4YPyWEjhpsMbrJURCfCY1gP3nnZ9zgo9pkdIKHqEjRE9BlD1GqnUL00+7P6pPLKdF/9TnvvJOhnLGUd9gCi+4FwQhDH/Fl7Z4s3J7JONFP83l9MkSanTn991H2u1wReLx43RmW6RM+4imYgUSLP0rHlWcycEY+XWV5c9luTvOikT/UKGw4iNtlHGNFuwvK7mTdq5bQDxpNGMZC98q/tm35zNbjO4NPGB6sYgOIn2mHZtNTWGxN3xBoiaIEtF/F1BniH1Sh7hJyOKjSRlwC0Twc2mnmrd8YXVA+n/ds+iRbd5dqKXGoWLzWiUfg1gbzitbzT/cD4hLrAElD6xJQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=advantech.cz; dmarc=pass action=none header.from=advantech.cz;
- dkim=pass header.d=advantech.cz; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=advantech.cz;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=mUE8yLng7Ykii26koyoBigfG6PX6M1bAPOfRWpj2/uo=;
- b=CwnGhyiM1wNtPI3c3yi4GttJ+ebhhOsAkimtCd6J0qHeaiSz0MYPIlPAP3JPuoNsWYR3YTHy2TlKfz59JJ7YfZ48C5HgMHjIL4ffczMF+u32poKkjWZinDwsVmcFMvd9x/SoyCCjSYX4kD5q9xX9MB/DRe+J+/d3nSWzW7pHi03f5TqB3pAm6Twd37Xr6rWIYpbsL2/QUcP7LnG2xCJKksnksjpR0MY8IVqjHbBMEmpj52vLvv/NMrGEaghqHSJZyRrXE8ycIbAbRjOiapX41ps4iYBKi+XipfoKDofwgFFu7NCCpyVoO4XoqHvCFO3G7aU/5noV5fccDX+GOQGnhQ==
-Received: from SL2PR02MB3676.apcprd02.prod.outlook.com (2603:1096:100:47::18)
- by TYZPR02MB4637.apcprd02.prod.outlook.com (2603:1096:405:6::7) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6521.24; Wed, 28 Jun
- 2023 15:32:26 +0000
-Received: from SL2PR02MB3676.apcprd02.prod.outlook.com
- ([fe80::843e:9515:21d4:f24c]) by SL2PR02MB3676.apcprd02.prod.outlook.com
- ([fe80::843e:9515:21d4:f24c%6]) with mapi id 15.20.6521.026; Wed, 28 Jun 2023
- 15:32:26 +0000
-From: Petr Gotthard <petr.gotthard@advantech.cz>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: [meta-python][PATCH] python3-pyroute2: upgrade 0.5.19 -> 0.7.9
-Thread-Topic: [meta-python][PATCH] python3-pyroute2: upgrade 0.5.19 -> 0.7.9
-Thread-Index: Admp1T/MrirM+5cZSmC8x9vN7wuvxg==
-Date: Wed, 28 Jun 2023 15:32:25 +0000
-Message-ID: 
- <SL2PR02MB36760242EC121C5EC93ECBE58124A@SL2PR02MB3676.apcprd02.prod.outlook.com>
-Accept-Language: en-US
-Content-Language: cs-CZ
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=advantech.cz;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: SL2PR02MB3676:EE_|TYZPR02MB4637:EE_
-x-ms-office365-filtering-correlation-id: ef87a027-ea55-419b-6bf4-08db77ece034
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: 
- b/T3JOsiLWHtFPq/HTyA6WJWuZz8v/g5WO8clAhcWk4LSbZ9b+Ytm6lketE3XJ8xucQh1MksgJ9mdwxttq3pezqEK9ds681dZI11Fj4jaiuKn7WdyX618Ge8twXY+CWiw9WtPAnaZQHxMnrLQmnmJTNq7thUvhWi/cQd90ThCvoKs7QcKCgJrg29ngq/9oq8VCYDrLDUdvs1xMsoCnf/w1n99wXUUcqVHRLUG/+DZjvbUhrLr1hNyy+7VgWWzZi/BZc4md8Bti3nQyC6GgzDf4hFFZOG9GAvd5Df9K04WnQ3AW9JO7VBfoxs9t5nyklKgYpwsGA9Rk7Hsbog/3iyqil/ftfvQdwbdBOjoqlwsyGg9r0ImuDQyidrJHEcEqb8io0UOwXWQmPVCnJiYOlOXGJaGhmQOLhl3en4FrVSgBKtxppVGyN4CpRsxsST2gaVz/z7OYAy6yeD9sHahHPO4WiJRb/jyMLWBRpLAjHAsNTXPYnI6BjW8r11++TZ5b9rq6TO0YmbMX4J9uAk87wc0bogjg9lWWiwW5xvkAtq90D0LwQQmu4ADNOsYBYANBLswncYVVcgC/5Guzocvv0EMvUbxQeqbQLCPj2G+miKzPc=
-x-forefront-antispam-report: 
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:SL2PR02MB3676.apcprd02.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230028)(4636009)(136003)(366004)(346002)(39860400002)(396003)(376002)(451199021)(2906002)(186003)(44832011)(26005)(55016003)(38070700005)(8676002)(33656002)(6916009)(316002)(86362001)(7696005)(478600001)(966005)(38100700002)(122000001)(71200400001)(52536014)(9686003)(5660300002)(66476007)(8936002)(41300700001)(66446008)(83380400001)(64756008)(66556008)(66946007)(76116006)(6506007);DIR:OUT;SFP:1101;
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: 
- =?utf-8?B?SlllMWtBRHlBTVlIWStXK1pKc1JzMjRDZjlnODZtZVRHVStsMHUzNW5wTExU?=
- =?utf-8?B?aGJNRjlNSHRhQjhlZWo1Y0J5c2tjd0J5V0xGNXphaEZJUy8rbGR3OGFnZ0Nu?=
- =?utf-8?B?aGk1aERtTDhoV3Z5b3pCSktUdHBzTUdtR1ZCcHk1bmppVXlaOWxxekpJSTZP?=
- =?utf-8?B?Y3l3RVg2bUJKK2UyQitDZkIvWW9QOUY0SW9LWDNSY2lLR2FGNGtwWVlKMk4v?=
- =?utf-8?B?OVowV1JYYWtFWmNMdElVU25qSFpiak9KTXhoUEk5WVRIR1BhQng3VUFiVlhI?=
- =?utf-8?B?VkJRbDFRUEdTTXgrMTlLY1h2NEh1bjVPQVBpVmM0Ri8wbGc0QXJyOG1pVVpv?=
- =?utf-8?B?Q05RQVJXemJkK3c4b0hsTEtESGxPOStGSk9TdjE4VHJTd0p3N05qYjhIS0lW?=
- =?utf-8?B?REFtQUFsYVRTN2hNN0Y1cTVrbUlJZ2NLNit2dUJ6MUlnaTBtcjdYbFU1TzVn?=
- =?utf-8?B?QXRhSDhRWkhYdFlEZHhIM3E5QTlpd01CaFNPRHJyazRWek5TbGJoenIvUUZy?=
- =?utf-8?B?eEMvRDd2ZkIyVlpuOG1vVnROWjRWSjF3ekt2UHdIR3M0b3dSRUlmZXR5eHVM?=
- =?utf-8?B?TGdhWTlhelhTUDVIT2xrcEI0L0Y0SmxhTnl1M1UraG8vNDN2OTgxSWhxV0RT?=
- =?utf-8?B?TlBGQVI0WENRNFN3aDVCTk40MjZmTmZhcnFWRC9hdURIWUlWRVVaQ0UxSHNI?=
- =?utf-8?B?MkEwTlgvL1lHWE5WbTYxQmVEMHZUSHhrSFJMRnhuYkVKblE1aHVLRW5HeHVY?=
- =?utf-8?B?TVphQXI2anhMVDJxbDZ0YkwrVXo3V1Z5RVVvMXE0cjZ4TVIzNHVJclo1bUlj?=
- =?utf-8?B?MXVGaWFXcVFQV2FsWWtiZlhNSzJneHM0SVlFcm1kZ2RYMzJPTStqWXlGU242?=
- =?utf-8?B?cDR1T1ZsT3didndLdHgrZHk1R04vWjFJM0RDMHJ1NGtKZzRBNnY2MitLQXVk?=
- =?utf-8?B?ZXRaQWR0ak1uNUcySklFcWhOdnJBLzVLaVFubU5TeStOYkp2d2x2cXZPY01D?=
- =?utf-8?B?akw3ZnV0WG9xMDZUK0dPcmVMU1YwTEt5akNxTmhkaEFib2FtUVlIZUl1djIr?=
- =?utf-8?B?UGJ2OHdkL1JMVHZTQ0gwQ1BYL3RES0krcDFpc0w0dnNZaFZpYnhYRkx3SGsw?=
- =?utf-8?B?NGZiQS9DUEM4ODVUNm15ckhqY0N5U0VMVmFtd1hHTXBndCtpdXlYLzhrNDZo?=
- =?utf-8?B?Qm1IZE13cThrVC91VkNLcHQ3Wnh4RldJd2NIN0tzUk9wUjdXRVZNd2VtOWlR?=
- =?utf-8?B?STZla3FyKzFIdGZpbVZxSzRaZktDZnFmdU1RZHpwVTd1RlN4b011RzFlTVVN?=
- =?utf-8?B?a3B2UFNGWDNJSEV0UEg4REp3cUNPTjQ5N1pqaTVYMWdEVGdqNFg5dmVTZlQ1?=
- =?utf-8?B?aG4ySlgwdlJpcHZVTllGaENWOW1qWWNWQjlVblFlTUYxMS9maXphUlF6TEdq?=
- =?utf-8?B?SkErRFMxZkN0ZnlqalFEVjRoYXFUOG1hTUtKUjVOZVkxVGZtcUJJbXRxbXpV?=
- =?utf-8?B?RlMyQ2d1eHhIQjlQU1FpRXJPZmNjVXBUS09OMjdobVlmSnB6RURpV0JEZlhW?=
- =?utf-8?B?cmttS1E0MnU2Y3cybVNRb3ljdjNzRHRGSzVPVzA2cnE5M1k5ZURTWXZIdzZV?=
- =?utf-8?B?RGY0dGpCdHVQenc5cythOTY3V2xuNmYwZ3JYa1Rza29TU1J1MWE5djNEZkM3?=
- =?utf-8?B?TXJnSVVjVzhNZGpmRjYwMTlubjk5Unkvd3BtdHBwaGhGK0FXUHJxWSt6RGZY?=
- =?utf-8?B?L25yTXRNUnBTR0NsZms4VTNpVVUzOXhrRVIvV2hiU2RPUnJSV0F2QSs1bkJp?=
- =?utf-8?B?MUF4cGNLN1ZGeGdjWHMyaHR6SnNtMEdpNDlWL21JdCttS1g3R21jRW4vYjhM?=
- =?utf-8?B?cG5NSGFyR0pnUGVWS3ByZEhlbU5qc0RaSlhaYXVRWGU3bENHdngya1FwUCta?=
- =?utf-8?B?bGMwaWlqVGd2bklKTWROcUpTZTNMbDl2VHc2TFVyaGRuelhnQjJVYWNKWWZX?=
- =?utf-8?B?dG5BMFRPRTVoSlhxenh1VTliQ1VBQzdaWEhLTXVIaHBHTjFlMG1FZ2MybXBw?=
- =?utf-8?B?VmFGd0xNZDh5alVEY096WHh3YnVSZG5vVVl2MUtHQk9jUjF4QUdqd1JCTml1?=
- =?utf-8?B?blFzNXBBMFA4cDc5MHBaS0ZaK0J4bjlIOVY4R3VzZDcyMVROL0hTcDRkOHVY?=
- =?utf-8?B?TEE9PQ==?=
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+ dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=VBNwcDBB;
+ spf=pass (domain: gmail.com, ip: 209.85.221.54, mailfrom: beniaminsandu@gmail.com)
+Received: by mail-wr1-f54.google.com with SMTP id ffacd0b85a97d-3110ab7110aso143480f8f.3
+        for <openembedded-devel@lists.openembedded.org>; Wed, 28 Jun 2023 11:41:29 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20221208; t=1687977687; x=1690569687;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=x/R5N8JzWnFIfwfAXrRY8JRYkqGrnL1/vkRrygX/X3o=;
+        b=VBNwcDBBf2EfqDvpKucpoDpNpaH5pCl3DOGjYEV/KpGEBrqUuEa+BSoQEG69vjFdu/
+         95vTP4OBozCygCmESZipgFDycYdgzDm/Kq5q5YR3fFmOol5curbUnPSs3olcIQY1A/aF
+         lrUGwxeTbYVR8CRoP7vN4m1fNoz9vK2+7rXX+FecdMevo+bIVrl3oLVu0dOaLVTyo9HD
+         xcB72RayJiV8NOeZJ8nSpJa597pUm9agbQ81FiEzzGzSlq3W12lv+ujufa3OQA2AmjbA
+         gLWxdP4iaaB8oE+8F3Nw+CiGEW6b4jiCzA6JoFg0IXJ91xUIsa7u1B1nSODmZbD6j/AX
+         S9vg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20221208; t=1687977687; x=1690569687;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=x/R5N8JzWnFIfwfAXrRY8JRYkqGrnL1/vkRrygX/X3o=;
+        b=TbuNl4zSO9QyE+TWBtmDzONM+cShPH59S656YXe8t8vBDkZXWqr95jIHJxKaw6dNkU
+         NL3MECsLelLWg22UqqBQMVwNpMKg83asXgBucvGcq9vuvLhmkkR4Uoy7pYOA71Oy4MRt
+         d8mQGHwn4LKly0AABgDW0FmD7uzrjk8X1+F7Vs5UC0rj4GXI8NC6GD6PrzLSCjAw/l36
+         AT9YKLwTVl2tdE+5xyXXS0ilKSc6pr1+/DOvPm//mIrclCCsYZCmFIF8pvXsuBCmFz7a
+         itwxr4ehOztzdxpSCSbOdoEdnfL/dVmMgy1pb37udn73bc3rPB0+8abQCn+fei4SHQS4
+         jpCw==
+X-Gm-Message-State: AC+VfDyaemfVNBvfyUgLV6OBYnZjrz/sap60PqeFuFuUyXf7NFE8k/Kv
+	FhDMx0IThHAd3/1/WIRZYYI3zLOi07TWrQ==
+X-Google-Smtp-Source: ACHHUZ4wcAQaQ8AZI9+lyyvT6nCqVjan6DFzjfe/kcHZAh1adieR0Pnr80c4wDs0oaXilEH/zx4Hyg==
+X-Received: by 2002:a5d:4e4a:0:b0:313:f5e9:13ec with SMTP id r10-20020a5d4e4a000000b00313f5e913ecmr7107726wrt.68.1687977687430;
+        Wed, 28 Jun 2023 11:41:27 -0700 (PDT)
+Received: from localhost.localdomain ([5.13.151.121])
+        by smtp.gmail.com with ESMTPSA id v1-20020adfe281000000b00311299df211sm13977566wri.77.2023.06.28.11.41.26
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 28 Jun 2023 11:41:26 -0700 (PDT)
+From: Beniamin Sandu <beniaminsandu@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Beniamin Sandu <beniaminsandu@gmail.com>
+Subject: [meta-networking][kirkstone][PATCH v2] mbedtls: add support for v3.x
+Date: Wed, 28 Jun 2023 21:40:46 +0300
+Message-Id: <20230628184046.121775-1-beniaminsandu@gmail.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-X-OriginatorOrg: advantech.cz
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: SL2PR02MB3676.apcprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: ef87a027-ea55-419b-6bf4-08db77ece034
-X-MS-Exchange-CrossTenant-originalarrivaltime: 28 Jun 2023 15:32:26.0311
- (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: a77d40d9-dcba-4dda-b571-5f18e6da853f
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: GnwUIEFEGcPnm3H49QpLopmEzJ3HZfwiaJcz5+e2VUNb+oazEk+pxFMq3XnV2f8AlN6pEFJ/QeAphN5agfQEtEtJx/pDlnEaXYz8nkbhLEc=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: TYZPR02MB4637
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 28 Jun 2023 15:32:38 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103630
+ <openembedded-devel@lists.openembedded.org>; Wed, 28 Jun 2023 18:41:31 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103631
 
-TGljZW5zZS1VcGRhdGU6DQogVGhlIExJQ0VOU0UgZmlsZSBub3cgZXhwbGljaXRseSBzYXlzICJH
-UEwtMi4wLW9yLWxhdGVyIE9SIEFwYWNoZS0yLjAiLg0KDQpDaGFuZ2Vsb2c6DQogaHR0cHM6Ly9n
-aXRodWIuY29tL3N2aW5vdGEvcHlyb3V0ZTIvYmxvYi9tYXN0ZXIvQ0hBTkdFTE9HLnJzdA0KDQpT
-aWduZWQtb2ZmLWJ5OiBQZXRyIEdvdHRoYXJkIDxwZXRyLmdvdHRoYXJkQGFkdmFudGVjaC5jej4N
-Ci0tLQ0KIC4uLmhvbjMtcHlyb3V0ZTJfMC41LjE5LmJiID0+IHB5dGhvbjMtcHlyb3V0ZTJfMC43
-LjkuYmJ9IHwgOSArKysrKy0tLS0NCiAxIGZpbGUgY2hhbmdlZCwgNSBpbnNlcnRpb25zKCspLCA0
-IGRlbGV0aW9ucygtKQ0KIHJlbmFtZSBtZXRhLXB5dGhvbi9yZWNpcGVzLWRldnRvb2xzL3B5dGhv
-bi97cHl0aG9uMy1weXJvdXRlMl8wLjUuMTkuYmIgPT4gcHl0aG9uMy1weXJvdXRlMl8wLjcuOS5i
-Yn0gKDYxJSkNCg0KZGlmZiAtLWdpdCBhL21ldGEtcHl0aG9uL3JlY2lwZXMtZGV2dG9vbHMvcHl0
-aG9uL3B5dGhvbjMtcHlyb3V0ZTJfMC41LjE5LmJiIGIvbWV0YS1weXRob24vcmVjaXBlcy1kZXZ0
-b29scy9weXRob24vcHl0aG9uMy1weXJvdXRlMl8wLjcuOS5iYg0Kc2ltaWxhcml0eSBpbmRleCA2
-MSUNCnJlbmFtZSBmcm9tIG1ldGEtcHl0aG9uL3JlY2lwZXMtZGV2dG9vbHMvcHl0aG9uL3B5dGhv
-bjMtcHlyb3V0ZTJfMC41LjE5LmJiDQpyZW5hbWUgdG8gbWV0YS1weXRob24vcmVjaXBlcy1kZXZ0
-b29scy9weXRob24vcHl0aG9uMy1weXJvdXRlMl8wLjcuOS5iYg0KaW5kZXggOGMxOTJkMjk2Yy4u
-MjYzYWNkMDZjNyAxMDA2NDQNCi0tLSBhL21ldGEtcHl0aG9uL3JlY2lwZXMtZGV2dG9vbHMvcHl0
-aG9uL3B5dGhvbjMtcHlyb3V0ZTJfMC41LjE5LmJiDQorKysgYi9tZXRhLXB5dGhvbi9yZWNpcGVz
-LWRldnRvb2xzL3B5dGhvbi9weXRob24zLXB5cm91dGUyXzAuNy45LmJiDQpAQCAtMSw5ICsxLDEw
-IEBADQogU1VNTUFSWSA9ICJBIHB1cmUgUHl0aG9uIG5ldGxpbmsgYW5kIExpbnV4IG5ldHdvcmsg
-Y29uZmlndXJhdGlvbiBsaWJyYXJ5Ig0KLUxJQ0VOU0UgPSAiR1BMLTIuMC1vbmx5ICYgQXBhY2hl
-LTIuMCINCi1MSUNfRklMRVNfQ0hLU1VNID0gImZpbGU6Ly9MSUNFTlNFLkdQTC52MjttZDU9YjIz
-NGVlNGQ2OWY1ZmNlNDQ4NmE4MGZkYWY0YTQyNjMgXA0KLSAgICAgICAgICAgICAgICAgICAgZmls
-ZTovL0xJQ0VOU0UuQXBhY2hlLnYyO21kNT0zNDI4MWUzMTIxNjVmODQzYTJiN2QxZjExNGZlNjVj
-ZSINCitMSUNFTlNFID0gIkdQTC0yLjAtb3ItbGF0ZXIgfCBBcGFjaGUtMi4wIg0KK0xJQ19GSUxF
-U19DSEtTVU0gPSAiZmlsZTovL0xJQ0VOU0U7bWQ1PWRjY2JmZjc4ZDdkNzlhZTdlNTM5NTNkNDM0
-NDVjNmU2IFwNCisgICAgICAgICAgICAgICAgICAgIGZpbGU6Ly9MSUNFTlNFLkdQTC0yLjAtb3It
-bGF0ZXI7bWQ1PWIyMzRlZTRkNjlmNWZjZTQ0ODZhODBmZGFmNGE0MjYzIFwNCisgICAgICAgICAg
-ICAgICAgICAgIGZpbGU6Ly9MSUNFTlNFLkFwYWNoZS0yLjA7bWQ1PTM0MjgxZTMxMjE2NWY4NDNh
-MmI3ZDFmMTE0ZmU2NWNlIg0KIA0KLVNSQ19VUklbc2hhMjU2c3VtXSA9ICI0NTQ2MGQxMmVkMmE1
-Y2FmMjcyYTM1N2EzMzYwYjM2ZDFlMzQ2ZjE3YWZlMTQyNWI2NmZjMjFkNzBmNDYyYjI5Ig0KK1NS
-Q19VUklbc2hhMjU2c3VtXSA9ICJiNjlkODJmMTQwYjA3NzQzMTdkN2JhNDBmNmM1ZmExZDc1NTA5
-OGJhM2YzZWI2MTk5ODJkMTZlNzUwZGM2MzFhIg0KIA0KIGluaGVyaXQgc2V0dXB0b29sczMgcHlw
-aSBwdGVzdA0KIA0KLS0gDQoyLjM0LjENCg0K
+Version 3.4.0 adds a lot of improvements and fixes (a notable one
+being initial support for PKCS7 CMS), but since this is a pretty
+big jump, let's keep both versions for a while, so the v2.x users
+can upgrade to 3.x in a timely manner if needed.
+
+Signed-off-by: Beniamin Sandu <beniaminsandu@gmail.com>
+---
+ ...cify-an-arch-version-when-enabling-c.patch | 33 ++++++++
+ ...t-target-attribute-when-building-wit.patch | 34 ++++++++
+ .../mbedtls/mbedtls/run-ptest                 | 17 ++++
+ .../mbedtls/mbedtls_3.4.0.bb                  | 83 +++++++++++++++++++
+ 4 files changed, 167 insertions(+)
+ create mode 100644 meta-networking/recipes-connectivity/mbedtls/mbedtls/0001-aesce-do-not-specify-an-arch-version-when-enabling-c.patch
+ create mode 100644 meta-networking/recipes-connectivity/mbedtls/mbedtls/0002-aesce-use-correct-target-attribute-when-building-wit.patch
+ create mode 100644 meta-networking/recipes-connectivity/mbedtls/mbedtls/run-ptest
+ create mode 100644 meta-networking/recipes-connectivity/mbedtls/mbedtls_3.4.0.bb
+
+diff --git a/meta-networking/recipes-connectivity/mbedtls/mbedtls/0001-aesce-do-not-specify-an-arch-version-when-enabling-c.patch b/meta-networking/recipes-connectivity/mbedtls/mbedtls/0001-aesce-do-not-specify-an-arch-version-when-enabling-c.patch
+new file mode 100644
+index 000000000..d98d8fa57
+--- /dev/null
++++ b/meta-networking/recipes-connectivity/mbedtls/mbedtls/0001-aesce-do-not-specify-an-arch-version-when-enabling-c.patch
+@@ -0,0 +1,33 @@
++From 2246925e3cb16183e25d4e2cfd13fb800df86270 Mon Sep 17 00:00:00 2001
++From: Beniamin Sandu <beniaminsandu@gmail.com>
++Date: Sun, 25 Jun 2023 19:58:08 +0300
++Subject: [PATCH] aesce: do not specify an arch version when enabling crypto
++ instructions
++
++Building mbedtls with different aarch64 tuning variations revealed
++that we should use the crypto extensions without forcing a particular
++architecture version or core, as that can create issues.
++
++Upstream-Status: Submitted [https://github.com/Mbed-TLS/mbedtls/pull/7834]
++
++Signed-off-by: Beniamin Sandu <beniaminsandu@gmail.com>
++---
++ library/aesce.c | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/library/aesce.c b/library/aesce.c
++index fe056dc4c..843de3973 100644
++--- a/library/aesce.c
+++++ b/library/aesce.c
++@@ -60,7 +60,7 @@
++ #           error "A more recent GCC is required for MBEDTLS_AESCE_C"
++ #       endif
++ #       pragma GCC push_options
++-#       pragma GCC target ("arch=armv8-a+crypto")
+++#       pragma GCC target ("+crypto")
++ #       define MBEDTLS_POP_TARGET_PRAGMA
++ #   else
++ #       error "Only GCC and Clang supported for MBEDTLS_AESCE_C"
++-- 
++2.25.1
++
+diff --git a/meta-networking/recipes-connectivity/mbedtls/mbedtls/0002-aesce-use-correct-target-attribute-when-building-wit.patch b/meta-networking/recipes-connectivity/mbedtls/mbedtls/0002-aesce-use-correct-target-attribute-when-building-wit.patch
+new file mode 100644
+index 000000000..4775c8ddb
+--- /dev/null
++++ b/meta-networking/recipes-connectivity/mbedtls/mbedtls/0002-aesce-use-correct-target-attribute-when-building-wit.patch
+@@ -0,0 +1,34 @@
++From 03d3523f974536f2358047382aadb0d4cc762f8a Mon Sep 17 00:00:00 2001
++From: Beniamin Sandu <beniaminsandu@gmail.com>
++Date: Mon, 26 Jun 2023 12:07:21 +0300
++Subject: [PATCH] aesce: use correct target attribute when building with clang
++
++Seems clang has its own issues when it comes to crypto extensions,
++and right now the best way to avoid them is to accurately enable
++the needed instructions instead of the broad crypto feature.
++
++E.g.: https://github.com/llvm/llvm-project/issues/61645
++
++Upstream-Status: Pending
++
++Signed-off-by: Beniamin Sandu <beniaminsandu@gmail.com>
++---
++ library/aesce.c | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/library/aesce.c b/library/aesce.c
++index 843de3973..7bea088ba 100644
++--- a/library/aesce.c
+++++ b/library/aesce.c
++@@ -53,7 +53,7 @@
++ #       if __clang_major__ < 4
++ #           error "A more recent Clang is required for MBEDTLS_AESCE_C"
++ #       endif
++-#       pragma clang attribute push (__attribute__((target("crypto"))), apply_to=function)
+++#       pragma clang attribute push (__attribute__((target("aes"))), apply_to=function)
++ #       define MBEDTLS_POP_TARGET_PRAGMA
++ #   elif defined(__GNUC__)
++ #       if __GNUC__ < 6
++-- 
++2.25.1
++
+diff --git a/meta-networking/recipes-connectivity/mbedtls/mbedtls/run-ptest b/meta-networking/recipes-connectivity/mbedtls/mbedtls/run-ptest
+new file mode 100644
+index 000000000..059ab4ecb
+--- /dev/null
++++ b/meta-networking/recipes-connectivity/mbedtls/mbedtls/run-ptest
+@@ -0,0 +1,17 @@
++#!/bin/sh
++
++ptestdir=$(dirname "$(readlink -f "$0")")
++cd "$ptestdir"/tests || exit
++
++tests=$(find * -type f -name 'test_suite_*')
++
++for f in $tests
++do
++    if test -x ./"$f"; then
++        if ./"$f" > ./"$f".out 2> ./"$f".err; then
++            echo "PASS: $f"
++        else
++            echo "FAIL: $f"
++        fi
++    fi
++done
+diff --git a/meta-networking/recipes-connectivity/mbedtls/mbedtls_3.4.0.bb b/meta-networking/recipes-connectivity/mbedtls/mbedtls_3.4.0.bb
+new file mode 100644
+index 000000000..b8c9662de
+--- /dev/null
++++ b/meta-networking/recipes-connectivity/mbedtls/mbedtls_3.4.0.bb
+@@ -0,0 +1,83 @@
++SUMMARY = "Lightweight crypto and SSL/TLS library"
++DESCRIPTION = "mbedtls is a lean open source crypto library          \
++for providing SSL and TLS support in your programs. It offers        \
++an intuitive API and documented header files, so you can actually    \
++understand what the code does. It features:                          \
++                                                                     \
++ - Symmetric algorithms, like AES, Blowfish, Triple-DES, DES, ARC4,  \
++   Camellia and XTEA                                                 \
++ - Hash algorithms, like SHA-1, SHA-2, RIPEMD-160 and MD5            \
++ - Entropy pool and random generators, like CTR-DRBG and HMAC-DRBG   \
++ - Public key algorithms, like RSA, Elliptic Curves, Diffie-Hellman, \
++   ECDSA and ECDH                                                    \
++ - SSL v3 and TLS 1.0, 1.1 and 1.2                                   \
++ - Abstraction layers for ciphers, hashes, public key operations,    \
++   platform abstraction and threading                                \
++"
++
++HOMEPAGE = "https://tls.mbed.org/"
++
++LICENSE = "Apache-2.0"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
++
++SECTION = "libs"
++
++S = "${WORKDIR}/git"
++SRCREV = "1873d3bfc2da771672bd8e7e8f41f57e0af77f33"
++SRC_URI = "git://github.com/ARMmbed/mbedtls.git;protocol=https;branch=master \
++	file://0001-aesce-do-not-specify-an-arch-version-when-enabling-c.patch \
++	file://0002-aesce-use-correct-target-attribute-when-building-wit.patch \
++	file://run-ptest"
++
++inherit cmake update-alternatives ptest
++
++PACKAGECONFIG ??= "shared-libs programs ${@bb.utils.contains('PTEST_ENABLED', '1', 'tests', '', d)}"
++PACKAGECONFIG[shared-libs] = "-DUSE_SHARED_MBEDTLS_LIBRARY=ON,-DUSE_SHARED_MBEDTLS_LIBRARY=OFF"
++PACKAGECONFIG[programs] = "-DENABLE_PROGRAMS=ON,-DENABLE_PROGRAMS=OFF"
++PACKAGECONFIG[werror] = "-DMBEDTLS_FATAL_WARNINGS=ON,-DMBEDTLS_FATAL_WARNINGS=OFF"
++# Make X.509 and TLS calls use PSA
++# https://github.com/Mbed-TLS/mbedtls/blob/development/docs/use-psa-crypto.md
++PACKAGECONFIG[psa] = ""
++PACKAGECONFIG[tests] = "-DENABLE_TESTING=ON,-DENABLE_TESTING=OFF"
++
++EXTRA_OECMAKE = "-DLIB_INSTALL_DIR:STRING=${libdir}"
++
++# For now the only way to enable PSA is to explicitly pass a -D via CFLAGS
++CFLAGS:append = "${@bb.utils.contains('PACKAGECONFIG', 'psa', ' -DMBEDTLS_USE_PSA_CRYPTO', '', d)}"
++
++PROVIDES += "polarssl"
++RPROVIDES:${PN} = "polarssl"
++
++PACKAGES =+ "${PN}-programs"
++FILES:${PN}-programs = "${bindir}/"
++
++ALTERNATIVE:${PN}-programs = "hello"
++ALTERNATIVE_LINK_NAME[hello] = "${bindir}/hello"
++
++BBCLASSEXTEND = "native nativesdk"
++
++CVE_PRODUCT = "mbed_tls"
++
++# Fix merged upstream https://github.com/Mbed-TLS/mbedtls/pull/5310
++CVE_CHECK_IGNORE += "CVE-2021-43666"
++# Fix merged upstream https://github.com/Mbed-TLS/mbedtls/commit/9a4a9c66a48edfe9ece03c7e4a53310adf73a86c
++CVE_CHECK_IGNORE += "CVE-2021-45451"
++
++# Strip host paths from autogenerated test files
++do_compile:append() {
++	sed -i 's+${S}/++g' ${B}/tests/*.c 2>/dev/null || :
++	sed -i 's+${B}/++g' ${B}/tests/*.c 2>/dev/null || :
++}
++
++# Export source files/headers needed by Arm Trusted Firmware
++sysroot_stage_all:append() {
++	sysroot_stage_dir "${S}/library" "${SYSROOT_DESTDIR}/usr/share/mbedtls-source/library"
++	sysroot_stage_dir "${S}/include" "${SYSROOT_DESTDIR}/usr/share/mbedtls-source/include"
++}
++
++do_install_ptest () {
++	install -d ${D}${PTEST_PATH}/tests
++	cp -f ${B}/tests/test_suite_* ${D}${PTEST_PATH}/tests/
++	find ${D}${PTEST_PATH}/tests/ -type f -name "*.c" -delete
++	cp -fR ${S}/tests/data_files ${D}${PTEST_PATH}/tests/
++}
+-- 
+2.25.1
+
 
