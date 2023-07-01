@@ -1,136 +1,161 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <sandeep.gundlupet-raju@amd.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6595DEB64D7
-	for <webhook@archiver.kernel.org>; Fri, 30 Jun 2023 10:36:57 +0000 (UTC)
-Received: from mail-pl1-f176.google.com (mail-pl1-f176.google.com [209.85.214.176])
- by mx.groups.io with SMTP id smtpd.web11.8968.1688121415392549342
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 48633EB64DA
+	for <webhook@archiver.kernel.org>; Sat,  1 Jul 2023 00:13:51 +0000 (UTC)
+Received: from NAM11-DM6-obe.outbound.protection.outlook.com (NAM11-DM6-obe.outbound.protection.outlook.com [40.107.223.40])
+ by mx.groups.io with SMTP id smtpd.web11.28809.1688170428348715577
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 30 Jun 2023 03:36:55 -0700
+ Fri, 30 Jun 2023 17:13:48 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=NRdU8SPn;
- spf=pass (domain: gmail.com, ip: 209.85.214.176, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f176.google.com with SMTP id d9443c01a7336-1b80ddce748so9858465ad.3
-        for <openembedded-devel@lists.openembedded.org>; Fri, 30 Jun 2023 03:36:55 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1688121414; x=1690713414;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=0bFJVbJpfhIgH0buFtu24ydr61dfW9lS4vz/GjvFB4k=;
-        b=NRdU8SPnw9LmNI6dqHNnrv5jsMkuh6D2yHPtRS60ZOmzM0ISCb+2yjRLbngUmRCZLj
-         KgqtF7L0nSF55cXwJq7S96Oeh2uQgv6t6q+zStHOHSAqo8nKswgwZwFpWm1e6CsEFsLd
-         CPF5e0jbXURgYVOUZ3lBLKsvtuUUEsHYW8qhaJX43A7dtD1GKl1aiXGFPu4di9uyi1GW
-         TlD8u8liOEaY1z7No/qvgxdXrO5ATEiY6UxnqBKCWr1tGxeXYttAppXT1M729e4B3Ld8
-         DqISC5RzV1+Nt+0SbzYzqWjwyTogF9Zj6OVu6qGDgeJ8FSUav3BUK/Pjm0tlLoc9dAZS
-         Wanw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1688121414; x=1690713414;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=0bFJVbJpfhIgH0buFtu24ydr61dfW9lS4vz/GjvFB4k=;
-        b=WXYVb3BfrAUN7UhIBBK9fymxMU8J9tqt6BZn6XljFUlTY74Ws/a1H7DN5xAsMUkfT5
-         o7rAtyKvL0hpzrwISk+y9yQdyq8ehuk4MJnXKvJpWQ0+f63AaXtd9tMCOb83OByvxZN+
-         +63Yf9CU06B5kD2cBs5r1HMEyWW0osVqpG7UhaONzggS5w/FqJO8QqXBItNP3XiWsyDt
-         9Q8azVLn1nefbdOVMVwqC8Oj9m6PMDQXDsr0oeA2YOSxMBPHlVbjYjcn/i7D/e9LvXJ+
-         PcYENkxUVOjaSgqF3mfatgxSi8JwjTUrcfHBwrdDdmorXnn/muQmunzGdZlRpl6aIkDy
-         9j/g==
-X-Gm-Message-State: ABy/qLavL1s9LEiTlkXEclNk0kFwULLro0a4URu9BY85xL7sse9ktzNo
-	K3XrhbNQXgkVlQB6I5n0y/x0vPKmJft58w==
-X-Google-Smtp-Source: APBJJlFmCfsCqS8w6eHfPm0aQt9sj5Y+z0XxV9icwZBa0Oc3tTKFIliD/qd66R4vGL2fIPLnw7YbsQ==
-X-Received: by 2002:a17:903:2307:b0:1b6:8a99:4979 with SMTP id d7-20020a170903230700b001b68a994979mr1751580plh.22.1688121414317;
-        Fri, 30 Jun 2023 03:36:54 -0700 (PDT)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9181:d380::8b4b])
-        by smtp.gmail.com with ESMTPSA id g11-20020a170902868b00b001b80d399730sm7611774plo.242.2023.06.30.03.36.53
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 30 Jun 2023 03:36:53 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [gupnp-av][PATCH] gupnp-av: Fix build with libxml2-2.11 and newer
-Date: Fri, 30 Jun 2023 03:36:51 -0700
-Message-ID: <20230630103651.2751590-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.41.0
+ dkim=fail reason="body hash did not verify" header.i=@amd.com header.s=selector1 header.b=ptTk1vFM;
+ spf=permerror, err=parse error for token &{10 18 %{i}._ip.%{h}._ehlo.%{d}._spf.vali.email}: invalid domain name (domain: amd.com, ip: 40.107.223.40, mailfrom: sandeep.gundlupet-raju@amd.com)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=SR5FUY5JbEtaPtNsUkwEM4GCI2B7ZGdjDj7PvfZHcjaHeDgqiBa540rMY7MwEH3Mu7VgNqzfSUOknYtq7cksVr7Zwakkak5EtbwtI4kNhuBA6vtrWPH/jJL8/ps3jgKlp1Yxrf0zHnyO4A0RW41jmtcHmlrr8z4GMYw1qDxz4j87Z+KbBqvBEGPj6NlC0VL9be4rRFx/YiqQfdcukkmyTPIvKajrlHPLMzKQdwV/rZK2vcrfkoEonCqhI8BRWm3QaLZx9fg3FwYITxzDJpsvoSJJlDcePIm09Gk0Knr3guH/QjHWLlDyx6oTMkiJyZWiyRJQC5U6s5UvTve1X9N/UQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=wIEfy/SUcZDqmAv5HWBsuALzsdgsarkiksDfbdlToMg=;
+ b=mCH/rRRucSTTwiKDZqrUEHzTW2GyQkbPNmf1VqHq/K4PLRgmB4N15E40kAVa+m3T2uTOKVmPWo7NzCDGJOrLJRbH7BkIgR634rCBd2QFT4gPseKmWurMmh40SnwyMrIySf7Uk2v+7pEGEB2Hg2FBnKphRMw+Qa06OpW2q+3q3nwyKZ/aaKB8C6eTtyaxKkZ3O5DWhDbfPiXfFV4LgG6BUGcpqVp9Gayk/IYHtJulLADscGfPZO4xmx+ogMNEAAMxVGdVLBWLcZJQppff/hJ/6R2A4DmC08BXnvuI5sGeeLGrMySfhBHkCGutOI/uBaWy00mLidoQ6e7A9AQQZ84Alw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=wIEfy/SUcZDqmAv5HWBsuALzsdgsarkiksDfbdlToMg=;
+ b=ptTk1vFMqkSFqfe1erL4x/dOTHjg/6zb0+SjFS7fGQaxEIxgIA27HPsZwOzd9ur7eJgyXj2UBSalShJuzMEqXJNkfuM0YMgmlkA35Fw8UKv7wFqaOJfCbufyfzZac6FfsLsm3W2FCKGyOARxMdwvnhCpidz1ViKgHBQN3OlxQtk=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=amd.com;
+Received: from SA0PR12MB4367.namprd12.prod.outlook.com (2603:10b6:806:94::13)
+ by BN9PR12MB5259.namprd12.prod.outlook.com (2603:10b6:408:100::17) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6544.19; Sat, 1 Jul
+ 2023 00:13:45 +0000
+Received: from SA0PR12MB4367.namprd12.prod.outlook.com
+ ([fe80::29ee:5a62:a3e7:bfaa]) by SA0PR12MB4367.namprd12.prod.outlook.com
+ ([fe80::29ee:5a62:a3e7:bfaa%4]) with mapi id 15.20.6544.019; Sat, 1 Jul 2023
+ 00:13:45 +0000
+Message-ID: <d16188e4-a2be-19c6-8a00-4c2b9c46b891@amd.com>
+Date: Fri, 30 Jun 2023 18:13:41 -0600
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+ Thunderbird/102.12.0
+Subject: Re: [meta-oe][mickledore][PATCH] opencv: Revert fix runtime
+ dependencies
+Content-Language: en-US
+From: "Gundlupet Raju, Sandeep" <sandeep.gundlupet-raju@amd.com>
+To: openembedded-devel@lists.openembedded.org, raj.khem@gmail.com
+CC: mark.hatle@kernel.crashing.org, twoerner@gmail.com
+References: <20230620153917.1749409-1-sandeep.gundlupet-raju@amd.com>
+ <a5c4679d-2d26-682e-299d-00c30082cae8@amd.com>
+In-Reply-To: <a5c4679d-2d26-682e-299d-00c30082cae8@amd.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-ClientProxiedBy: SJ0PR13CA0008.namprd13.prod.outlook.com
+ (2603:10b6:a03:2c0::13) To SA0PR12MB4367.namprd12.prod.outlook.com
+ (2603:10b6:806:94::13)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SA0PR12MB4367:EE_|BN9PR12MB5259:EE_
+X-MS-Office365-Filtering-Correlation-Id: d68c6d09-a75f-4435-6aaa-08db79c8088b
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 
+	BiDdh9IPVvqibxBuaxloCmkREsrqkOyP406pbB3gqLu0CiIO8Xtc7lv/IP9VNR3/ec+zn3/fB4gN1vWMqhzirYWn2XMS7apepraL1vldhPphfVlpdCa5Dp+elCMIo9nYLAxnH5wxHhD2i+XtOjd0XIj4wsMM5B7+0jYyqsXHW9FNrfjlh1nDHwCsk/z3kqXtdDC1DHq+hKqh6Ya2vK2YxC7dI9dsGsMDoUCP0z8hhhgXz1WNgLf8GI5ekIUyKlVJRC1no5uQ66RvJJvHbFpFb5KTR0cl8kPQN3nIqmuPv7Rm2p37VqOrAvZI/48ikxGfoW2Yq1nsdZcxjlEheHxufjhqLc/sWK5ZyQH6QxG9S5rd4KVR2fJVID/+ofOjZ4uz/q8N1t/sXPbLdqNkxL/KUonKTOA3QRYnNQXOb7gOyvfxdYeQ0XB0lAxKFMUFm4+UI/p+8Gj8bl4D6J6wzi6v/ya1lW+6Bq+dAt5W9+mD5wjkUKn2qYzU0nfsna+nEJ/S8NFKFu838pkt3sNHyESk9ZKrchuvIbAGVDjXIhj5eIB8aWUSmWwIXgHNs8rwdoFUMwZhL4vMNnuBkaEznMMlz3LQW3qa0P6w4N8jlh3bcJbFX3MeA06QSsh4KVDVER1FIIKIIzuD1cXA0Ye9WpYuiw==
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:SA0PR12MB4367.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230028)(4636009)(346002)(396003)(366004)(136003)(39860400002)(376002)(451199021)(6486002)(478600001)(6666004)(6512007)(26005)(186003)(53546011)(6506007)(83380400001)(36756003)(2616005)(38100700002)(86362001)(31696002)(4326008)(66946007)(66556008)(66476007)(2906002)(316002)(5660300002)(8936002)(8676002)(31686004)(41300700001)(43740500002)(45980500001);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?us-ascii?Q?yuX92FMQK9SHfRxD844EgrHgMroLt0ex1Kfmv2fAyqpgekv/k0YQO9cSH7cY?=
+ =?us-ascii?Q?fFAuZZaPnC1dimgbea9wzQ1za7YN9LmLqOlHgz+hAHc4lhExT6NIhDoSb4MO?=
+ =?us-ascii?Q?s3HRPiV7F4O0sT6GG8BG+bnp9jh5qp6+6fK5cb+bJCeYABh5IavGzhP046hM?=
+ =?us-ascii?Q?/8fTeanxY9Yc/WMp0oU2rFseao8mRF3UgYftGiahpGPsh23JXe9UxTAeGJVY?=
+ =?us-ascii?Q?WLipxnvHA6AYy3it65SQ1TfFfISF247v/iB849A8lWcwYXze5bM/K2r8DABc?=
+ =?us-ascii?Q?7rZ8m4nRdVFDzHrujeBNLJriSzv2L6F0D2gJLTEOSm41QNAcQPv8bGkVXfIm?=
+ =?us-ascii?Q?Hg3LSXqFjF8dJKo7/vvlyfarVfyV2RoZoenQ8FVoz1qTFbrrAOouVtFbBh61?=
+ =?us-ascii?Q?en6y5mUvySSTAent7OVjFm/aJFQp3BqFyllMlIDQ+mgMxkFXxzZiOd/y5STh?=
+ =?us-ascii?Q?lCv2IPhtcD5kjaRAlLuPzeHHPQ6xDJkT26U1d3LY0DpAXYIqixcF8p6OECWj?=
+ =?us-ascii?Q?ESDIuKw9jAm3vfLeO5f6MqIOkuAMgIgh+AP0sA3rUxmUBiOUlJKzF48pNa4d?=
+ =?us-ascii?Q?1Im2VhiA6eGsTAqLYvujKpQ0lxQYluqbTONnoWpxMHOp/04+MeYOfeO/hprr?=
+ =?us-ascii?Q?lWjMbArxl+ZPOkW9BXf9AVdIK1F+j6sYfOkxWFUODnenJwgEixb7cd1+Q4FS?=
+ =?us-ascii?Q?VVbzn/n2FUo/bLqily9kfNabkfdzbh1FNuvVQ4/0JCeTGa/MRQrkmU8ORBN3?=
+ =?us-ascii?Q?ib+Ut9hP6d7kT0TKdUvsSaSh1bbR3tVlsjm6xrYhXCXPp6lFWvfgW2cFPS+n?=
+ =?us-ascii?Q?j29c5tQ5Songf7g+rXe441SuTbm2JX4BU4kfYJClmdefuOwHENbsBY3Y+iW6?=
+ =?us-ascii?Q?GeSCBcGbM+asfA7QGPHuVqsehsyIU8r9fTJIE7YUCjxg2JPveYco63GwCqEc?=
+ =?us-ascii?Q?7fH/u+ryAj9KshSmgK5489gVjJgQb2kk/w3RcI4SyCaeUsEcW1Co0bGKHCQh?=
+ =?us-ascii?Q?I1qVMfI8vELiAH/mnSNLKSzltckX+0/NOEtgVqmb7t+pa6n0oOrKRYdzCNsE?=
+ =?us-ascii?Q?0Kbylth7hwvKAc5AyE1J+8uyfC/HgQuMIqNBn0PleloBvDpPHIAZd7QgYSw6?=
+ =?us-ascii?Q?HZgU6RnhXwFllFulTbKuCNwERHv0gfpWQStJ4NFQKRub17fM3Y/iN49BpjMX?=
+ =?us-ascii?Q?5u7BGmbedWG4KZJWK8Gumbjmdb7SML6suA8zttLe7pWLNQoy9AFQFm++LiVX?=
+ =?us-ascii?Q?d88CIWfIYfpvwPoFBa20fJ34ejutnpzxeJlXtYN7gYN8817AdtFIEvkCqUhm?=
+ =?us-ascii?Q?Y8n7vv0AOmSPLCLECni75qu+dQnIaxh759ZIGqcvIQyt7Ia615k35502YxtP?=
+ =?us-ascii?Q?3gJVyYlloXxkE4mvYEOFKnAc6BxVbXC5iEupx9skzojT3UCAmWRKShzSP1O5?=
+ =?us-ascii?Q?39Un422JN23JIL7+r5ntUXPiX0g5yYQw252V0oZtQsL6mcTM9TM359z9YsCj?=
+ =?us-ascii?Q?cMrpimuQW0gLh9li5jAYOK/RbcUZwi9i+4APFHJA/dtF9A9ApJT3eXTdhnjJ?=
+ =?us-ascii?Q?P8RB9mIjuGhNldaEIbgSBprv+zmOfq6lAbjPtmc9?=
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: d68c6d09-a75f-4435-6aaa-08db79c8088b
+X-MS-Exchange-CrossTenant-AuthSource: SA0PR12MB4367.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Jul 2023 00:13:44.9616
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: EyPSbbDnBWzkF8aGhrgiyAqGYExdUV55ojuOjbKpj7a3DOR75/Q82sg6bUfA6ax/d8gZQH4ofdL1xcw5yP5+2g==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN9PR12MB5259
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 30 Jun 2023 10:36:57 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103644
+ <openembedded-devel@lists.openembedded.org>; Sat, 01 Jul 2023 00:13:51 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103645
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- .../0001-all-Drop-xmlRecoverMemory.patch      | 44 +++++++++++++++++++
- .../gupnp/gupnp-av_0.14.0.bb                  |  4 +-
- 2 files changed, 47 insertions(+), 1 deletion(-)
- create mode 100644 meta-multimedia/recipes-connectivity/gupnp/gupnp-av/0001-all-Drop-xmlRecoverMemory.patch
+Ping!
 
-diff --git a/meta-multimedia/recipes-connectivity/gupnp/gupnp-av/0001-all-Drop-xmlRecoverMemory.patch b/meta-multimedia/recipes-connectivity/gupnp/gupnp-av/0001-all-Drop-xmlRecoverMemory.patch
-new file mode 100644
-index 0000000000..92b52ad98a
---- /dev/null
-+++ b/meta-multimedia/recipes-connectivity/gupnp/gupnp-av/0001-all-Drop-xmlRecoverMemory.patch
-@@ -0,0 +1,44 @@
-+From d99f71a4a52da7582d5e26992a1ab303b280d28a Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Fri, 30 Jun 2023 03:23:12 -0700
-+Subject: [PATCH] Drop xmlRecoverMemory
-+
-+newer libxml has deprecated xmlRecoverMemory therefore replace it with xmlReadMemory
-+
-+Upstream-Status: Backport [https://gitlab.gnome.org/GNOME/gupnp/-/commit/80e68995b745a5900eaaa1d0c424d3a9d354e42d]
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ gupnp-didl-lite-parser.c    | 2 +-
-+ gupnp-feature-list-parser.c | 2 +-
-+ 2 files changed, 2 insertions(+), 2 deletions(-)
-+
-+diff --git a/gupnp-didl-lite-parser.c b/gupnp-didl-lite-parser.c
-+index 3a5727f..840d718 100644
-+--- a/libgupnp-av/gupnp-didl-lite-parser.c
-++++ b/libgupnp-av/gupnp-didl-lite-parser.c
-+@@ -230,7 +230,7 @@ gupnp_didl_lite_parser_parse_didl_recursive (GUPnPDIDLLiteParser *parser,
-+         GUPnPAVXMLDoc *xml_doc = NULL;
-+         gboolean       result;
-+ 
-+-        doc = xmlRecoverMemory (didl, strlen (didl));
-++        doc = xmlReadMemory (didl, strlen (didl), NULL, NULL, XML_PARSE_NONET | XML_PARSE_RECOVER);
-+         if (doc == NULL) {
-+                 g_set_error (error,
-+                              G_MARKUP_ERROR,
-+diff --git a/gupnp-feature-list-parser.c b/gupnp-feature-list-parser.c
-+index 16208b5..f804fe7 100644
-+--- a/libgupnp-av/gupnp-feature-list-parser.c
-++++ b/libgupnp-av/gupnp-feature-list-parser.c
-+@@ -114,7 +114,7 @@ gupnp_feature_list_parser_parse_text
-+         xmlNode      *element;
-+         GList        *feature_list = NULL;
-+ 
-+-        doc = xmlRecoverMemory (text, strlen (text));
-++        doc = xmlReadMemory (text, strlen (text), NULL, NULL, XML_PARSE_NONET | XML_PARSE_RECOVER);
-+         if (doc == NULL) {
-+                 g_set_error (error,
-+                              G_MARKUP_ERROR,
-+-- 
-+2.41.0
-+
-diff --git a/meta-multimedia/recipes-connectivity/gupnp/gupnp-av_0.14.0.bb b/meta-multimedia/recipes-connectivity/gupnp/gupnp-av_0.14.0.bb
-index b253c54d92..48de5868de 100644
---- a/meta-multimedia/recipes-connectivity/gupnp/gupnp-av_0.14.0.bb
-+++ b/meta-multimedia/recipes-connectivity/gupnp/gupnp-av_0.14.0.bb
-@@ -8,5 +8,7 @@ DEPENDS = "gupnp"
- 
- inherit meson pkgconfig gobject-introspection vala
- 
--SRC_URI = "${GNOME_MIRROR}/${BPN}/0.14/${BPN}-${PV}.tar.xz"
-+SRC_URI = "${GNOME_MIRROR}/${BPN}/0.14/${BPN}-${PV}.tar.xz \
-+           file://0001-all-Drop-xmlRecoverMemory.patch \
-+          "
- SRC_URI[sha256sum] = "20aed546fc882e78a3f186a0c8bce5c841cc3a44b7ea528298fbdc82596fb156"
--- 
-2.41.0
+Thanks,
 
+Sandeep
+
+On 6/27/2023 4:21 PM, Gundlupet Raju, Sandeep wrote:
+> Hello All,
+>
+> Can we get this patch merged to mickledore?
+>
+> Also is langdale branch is still open? If so let me know I will send=20
+> the patch for langdale as well.
+>
+> Thanks,
+>
+> Sandeep
+>
+> On 6/20/2023 9:39 AM, Sandeep Gundlupet Raju wrote:
+>> This reverts commit 0abf5af3ffd3d13c009a8ffcd5a6f045c36be837
+>>
+>> libopencv-ts package is not empty and libopencv_ts libraries are
+>> not all installed in the -dev package, these libraries are needed
+>> for sdk development listed in opencv4.pc file.
+>>
+>> Signed-off-by: Sandeep Gundlupet Raju <sandeep.gundlupet-raju@amd.com>
+>> ---
+>> =C2=A0 meta-oe/recipes-support/opencv/opencv_4.7.0.bb | 2 +-
+>> =C2=A0 1 file changed, 1 insertion(+), 1 deletion(-)
+>>
+>> diff --git a/meta-oe/recipes-support/opencv/opencv_4.7.0.bb=20
+>> b/meta-oe/recipes-support/opencv/opencv_4.7.0.bb
+>> index 361b00430..bad6f1508 100644
+>> --- a/meta-oe/recipes-support/opencv/opencv_4.7.0.bb
+>> +++ b/meta-oe/recipes-support/opencv/opencv_4.7.0.bb
+>> @@ -162,7 +162,7 @@ python populate_packages:prepend () {
+>> =C2=A0 =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 metapkg =3D=C2=A0 pn
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 d.setVar('ALLOW_EMPTY:' + metapkg, "1")
+>> -=C2=A0=C2=A0=C2=A0 blacklist =3D [ metapkg, "libopencv-ts" ]
+>> +=C2=A0=C2=A0=C2=A0 blacklist =3D [ metapkg ]
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 metapkg_rdepends =3D [ ]
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 for pkg in packages[1:]:
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 if not pkg in bla=
+cklist and not pkg in metapkg_rdepends and=20
+>> not pkg.endswith('-dev') and not pkg.endswith('-dbg') and not=20
+>> pkg.endswith('-doc') and not pkg.endswith('-locale') and not=20
+>> pkg.endswith('-staticdev'):
 
