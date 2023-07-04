@@ -2,105 +2,123 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 29DB4EB64D9
-	for <webhook@archiver.kernel.org>; Tue,  4 Jul 2023 22:03:42 +0000 (UTC)
-Received: from mail-pf1-f178.google.com (mail-pf1-f178.google.com [209.85.210.178])
- by mx.groups.io with SMTP id smtpd.web10.4818.1688508214967809456
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 62974EB64D9
+	for <webhook@archiver.kernel.org>; Tue,  4 Jul 2023 22:47:22 +0000 (UTC)
+Received: from mail-oo1-f43.google.com (mail-oo1-f43.google.com [209.85.161.43])
+ by mx.groups.io with SMTP id smtpd.web10.5515.1688510839869194415
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 04 Jul 2023 15:03:35 -0700
+ Tue, 04 Jul 2023 15:47:19 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=PG9BWfow;
- spf=pass (domain: gmail.com, ip: 209.85.210.178, mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f178.google.com with SMTP id d2e1a72fcca58-6686a05bc66so3246322b3a.1
-        for <openembedded-devel@lists.openembedded.org>; Tue, 04 Jul 2023 15:03:34 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20221208 header.b=b3xnkQa/;
+ spf=pass (domain: gmail.com, ip: 209.85.161.43, mailfrom: raj.khem@gmail.com)
+Received: by mail-oo1-f43.google.com with SMTP id 006d021491bc7-565db466671so86961eaf.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 04 Jul 2023 15:47:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1688508214; x=1691100214;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+        d=gmail.com; s=20221208; t=1688510839; x=1691102839;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=N9uMEEpxxVl9yjjnVYpqdppx5GGgSsmLUWlZFIo5rL4=;
-        b=PG9BWfow9klN2E6DZ+UH49YNcl4osBL782otfT3fHYs2MhGjceLJzpCED+EGsLSvPW
-         QuLJMhvZsNnGip4GxtsHUNNEAhcV8gTf8Afi+Qdd3pr/DkmVHBkuCkqzq4B1kVyidTEd
-         lYR39NaN4SjLTWDuGjhg0wTGot17NbABDkmXoqrWKdP79taGtUFshPN5wU2cgekfViG7
-         PW1kZztULTkwB1uM6Nlc3iuIqh9UQfpk7ql5PZg/gbNHe7+0HADo3bC5imKsNOFLGVTh
-         NfGoMD4RZr9sK9xuhvmF+uifOYH3RbSUlcLSV1i3tkPlRP0Sbognfymenkl8t16mInAC
-         /RgQ==
+        bh=KY9mDHmHqlz52xk5t+5d5gLm+w4WTB40lmQh97eyUGY=;
+        b=b3xnkQa/DEh9Z8FymPXeWYxH8JnVGDqwAp7WBmeFfAlwBU3i4/AgT1/zewmqpvl7tt
+         +H/l8iOzzCfcBYuS/nmGSVZ01wrjcyuIjHMHvdcktRCpCpufoV8c1xbda7+NL2s+A/e2
+         Dol1PVcVfzAkYM+YCzLbpDnvP04752tFLZL1Qv2XWLlSk/AB7m2CHbfFpNNWkUZY0z9A
+         TfzLM/p569eBQpf9CMwALPJ+8gsD5/RWsXYDIkY9kpR5q677TvbWNiH9tcIUHgKgPUq+
+         DhvcdSUuD9TJojPhFeN76TC6I/ZjIUSTL6ciTQjk7PHQaAhIZeyyvQKr1ef9rqD85seo
+         M1ig==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1688508214; x=1691100214;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+        d=1e100.net; s=20221208; t=1688510839; x=1691102839;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=N9uMEEpxxVl9yjjnVYpqdppx5GGgSsmLUWlZFIo5rL4=;
-        b=SNjs6mixFoAHTAat8QafoGm7bUBj92CtrEjXE8V2UBX4QPWbAJg3Hgs870n1Hdn36R
-         9uWlCGdORy6xxCTD9TaXv+93LdzgyXy28vCu8NLnpQUL606rNdL1mBoPH7jb37VwOlZc
-         ZMarWTsXN+vOSTMFPsPtMP8RnjTxMJOPlEXIVW6BVapCMu/84E68P5COXfO2I4ZIssw2
-         2EV076TIF9hwhg8/ti1A1qElIR9D2o77G7ZXOY2y/esycwdL4s0YgypB1/KoUcFI5+WK
-         DZmPNsqU+TyRPb2EJDhDMVyIXJMfAsgwAlAWGfqK10vOklLEk3fDIf/qj5mYV1xtbidP
-         wnsQ==
-X-Gm-Message-State: ABy/qLbCbpcaXxJPvWoTMSL0dlye7qoeL8pflHfq1RhXzk7xtUvmIGLS
-	cjiYMiHE693e8Xm2oKfE49L/VRKDCD0=
-X-Google-Smtp-Source: APBJJlH6NkCxGPtCaNACHa35o087h+vBZWezCiZkrflNi2/nVnb15KgNU75pWpOj85HBQIuy1E4hBQ==
-X-Received: by 2002:a05:6a00:148b:b0:65d:d5cd:6f17 with SMTP id v11-20020a056a00148b00b0065dd5cd6f17mr15710233pfu.24.1688508213933;
-        Tue, 04 Jul 2023 15:03:33 -0700 (PDT)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9181:d380::e2fe])
-        by smtp.gmail.com with ESMTPSA id s21-20020a62e715000000b0067b643b814csm12419850pfh.6.2023.07.04.15.03.33
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 04 Jul 2023 15:03:33 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-networking][PATCH 2/2] libcoap: Build linker symbol file explicitly
-Date: Tue,  4 Jul 2023 15:03:15 -0700
-Message-ID: <20230704220315.1958265-2-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.41.0
-In-Reply-To: <20230704220315.1958265-1-raj.khem@gmail.com>
-References: <20230704220315.1958265-1-raj.khem@gmail.com>
+        bh=KY9mDHmHqlz52xk5t+5d5gLm+w4WTB40lmQh97eyUGY=;
+        b=OIPur0E+0Zaw30GKXiEGpXGTQrdcQgRCxv7zfDRmDR7q4UjWokoHQLQ+Y6Q7RPkHmT
+         IJyX9wP1wl20eqq61cGOP9jwDP24tQ9KmM7VmjA/ClxLkKADq1aqI/oHrzvDhyqY9w3K
+         vVu152KOmYnn13w/ZYGbwEv+BIageIHHPZFNIzQPR1cN6NM/Xpm7qxbQtOa2PeGP7+8a
+         EZ78LosSQfBbSPohNtEVnWsS+sRAFnr333ybcJkOHKQGr8btB7pmvXP7I8zizc1kooZ6
+         HO1A9sV9HEVhWZzjEnGn3+e+I+/O+D4YrEXwMFjQsGEjugoa1p9RVFujgp4weB7OEKBh
+         rHvA==
+X-Gm-Message-State: ABy/qLZFy8qYdXpQ3zn4y+GzREa7am/l6zD0zB0N2XR0ZxLJyqNA82Hy
+	fXRkyPcTvVVMLWYzBcDlHslO7OcjSi4yJSUzh6c=
+X-Google-Smtp-Source: APBJJlEAmz3gFSPTsWGT0y+k6iLVY2JHKJG7wDwFTaNQjCoiKRwVaAbeiUA/ZjnakTHqGIafyHAPrBS1/ZmcbDru3sU=
+X-Received: by 2002:a05:6808:2083:b0:39e:c32d:1c8f with SMTP id
+ s3-20020a056808208300b0039ec32d1c8fmr250274oiw.22.1688510839066; Tue, 04 Jul
+ 2023 15:47:19 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20230704142816.2295084-1-akuster808@gmail.com> <DB5PR02MB102138E958E1A7EAA05282353EF2EA@DB5PR02MB10213.eurprd02.prod.outlook.com>
+In-Reply-To: <DB5PR02MB102138E958E1A7EAA05282353EF2EA@DB5PR02MB10213.eurprd02.prod.outlook.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 4 Jul 2023 15:46:53 -0700
+Message-ID: <CAMKF1sq_pGmE4VWN+TkFyP1CHo8cgyUz1SfoomokQ0DO7UkVRg@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][kirkstone][PATCH] webserver: nginx: Add stream
+ Signed-off-by: Luke Schaefer <lukeschafer17@gmail.com>
+To: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
+Cc: Armin Kuster <akuster808@gmail.com>, 
+	"openembedded-devel@lists.openembedded.org" <openembedded-devel@lists.openembedded.org>, 
+	Luke Schaefer <lukeschafer17@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 04 Jul 2023 22:03:42 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103664
+ <openembedded-devel@lists.openembedded.org>; Tue, 04 Jul 2023 22:47:22 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103665
 
-Since we autoreconf, it should be better to build the linker map file
-too, which requires ctags during build. This is otherwise flagged as
-error by lld linker where we specify a linker symbol file on cmdline
-but the file is not there.
+On Tue, Jul 4, 2023 at 9:12=E2=80=AFAM Peter Kjellerstedt
+<peter.kjellerstedt@axis.com> wrote:
+>
+> > -----Original Message-----
+> > From: openembedded-devel@lists.openembedded.org <openembedded-
+> > devel@lists.openembedded.org> On Behalf Of Armin Kuster
+> > Sent: den 4 juli 2023 16:28
+> > To: openembedded-devel@lists.openembedded.org
+> > Cc: Luke Schaefer <lukeschafer17@gmail.com>
+> > Subject: [oe] [meta-oe][kirkstone][PATCH] webserver: nginx: Add stream =
+Signed-off-by: Luke Schaefer <lukeschafer17@gmail.com>
+>
+> Why is the Signed-off-by in the subject?
 
-Fixes
-| libtool:   error: symbol file './libcoap-3.sym' does not exist
+Its my mistake since I did not realize the newline was missing and I
+accepted it into master.
+this is a simple backport of that.
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- meta-networking/recipes-devtools/libcoap/libcoap_4.3.1.bb | 6 ++++++
- 1 file changed, 6 insertions(+)
-
-diff --git a/meta-networking/recipes-devtools/libcoap/libcoap_4.3.1.bb b/meta-networking/recipes-devtools/libcoap/libcoap_4.3.1.bb
-index 0fc342560a..efea3fab74 100644
---- a/meta-networking/recipes-devtools/libcoap/libcoap_4.3.1.bb
-+++ b/meta-networking/recipes-devtools/libcoap/libcoap_4.3.1.bb
-@@ -16,6 +16,8 @@ S = "${WORKDIR}/git"
- 
- inherit autotools manpages pkgconfig ptest
- 
-+DEPENDS += "ctags-native"
-+
- PACKAGECONFIG ?= "\
-     async openssl tcp \
-     ${@bb.utils.contains('PTEST_ENABLED', '1', 'tests', '', d)} \
-@@ -42,6 +44,10 @@ python () {
- 
- export SGML_CATALOG_FILES="file://${STAGING_ETCDIR_NATIVE}/xml/catalog"
- 
-+do_compile:prepend() {
-+    oe_runmake update-map-file
-+}
-+
- do_install_ptest () {
- 	install -d ${D}${PTEST_PATH}
- 	install -m 0755 ${WORKDIR}/run-ptest ${D}${PTEST_PATH}/run-ptest
--- 
-2.41.0
-
+>
+> >
+> > From: Luke Schaefer <lukeschafer17@gmail.com>
+> >
+> > Add stream support to nginx PACKAGECONFIG
+> >
+> > Signed-off-by: Armin Kuster <akuster808@gmail.com>
+> > ---
+> >  meta-webserver/recipes-httpd/nginx/nginx.inc | 1 +
+> >  1 file changed, 1 insertion(+)
+> >
+> > diff --git a/meta-webserver/recipes-httpd/nginx/nginx.inc b/meta-webser=
+ver/recipes-httpd/nginx/nginx.inc
+> > index dfced33300..231c1d1ec9 100644
+> > --- a/meta-webserver/recipes-httpd/nginx/nginx.inc
+> > +++ b/meta-webserver/recipes-httpd/nginx/nginx.inc
+> > @@ -43,6 +43,7 @@ PACKAGECONFIG[gunzip] =3D "--with-http_gunzip_module,=
+,"
+> >  PACKAGECONFIG[http2] =3D "--with-http_v2_module,,"
+> >  PACKAGECONFIG[ssl] =3D "--with-http_ssl_module,,openssl"
+> >  PACKAGECONFIG[http-auth-request] =3D "--with-http_auth_request_module,=
+,"
+> > +PACKAGECONFIG[stream] =3D "--with-stream,,"
+> >
+> >  do_configure () {
+> >      if [ "${SITEINFO_BITS}" =3D "64" ]; then
+> > --
+> > 2.34.1
+>
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#103660): https://lists.openembedded.org/g/openembedde=
+d-devel/message/103660
+> Mute This Topic: https://lists.openembedded.org/mt/99947525/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
+aj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
 
