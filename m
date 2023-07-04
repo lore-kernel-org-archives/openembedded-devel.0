@@ -1,154 +1,339 @@
-Return-Path: <peter.kjellerstedt@axis.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E48D2EB64D9
-	for <webhook@archiver.kernel.org>; Tue,  4 Jul 2023 16:12:49 +0000 (UTC)
-Received: from smtp1.axis.com (smtp1.axis.com [195.60.68.17])
- by mx.groups.io with SMTP id smtpd.web11.62467.1688487165565424084
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D067FEB64D9
+	for <webhook@archiver.kernel.org>; Tue,  4 Jul 2023 20:22:21 +0000 (UTC)
+Received: from mail-pj1-f52.google.com (mail-pj1-f52.google.com [209.85.216.52])
+ by mx.groups.io with SMTP id smtpd.web10.2954.1688502140024422633
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 04 Jul 2023 09:12:46 -0700
+ Tue, 04 Jul 2023 13:22:20 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@axis.com header.s=axis-central1 header.b=lQsy0ie7;
- spf=pass (domain: axis.com, ip: 195.60.68.17, mailfrom: peter.kjellerstedt@axis.com)
+ dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=muvH9Zfm;
+ spf=pass (domain: gmail.com, ip: 209.85.216.52, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f52.google.com with SMTP id 98e67ed59e1d1-262b213eddfso23018a91.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 04 Jul 2023 13:22:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=axis.com; q=dns/txt; s=axis-central1; t=1688487166;
-  x=1720023166;
-  h=from:to:cc:subject:date:message-id:references:
-   in-reply-to:content-transfer-encoding:mime-version;
-  bh=GbRCl1x50GsZMYDPjdo1/1EqQ7G/bSDxZ03a5xtoGoM=;
-  b=lQsy0ie7Fqi88zoi9uWNnBu7ktDjZi53CCEIYdZHXJ0zffBxQ5y/dteJ
-   xspmFJXz7nfotl3KuBpqBw4NjnILVOvm29zD/9yp7jPhYGI4LuektpacK
-   91KXb59JBH/72nGwNiqjqwDlzP239bo9uIeyOu/LuSwnNwaUyuV41J4TS
-   46dqBYqRbsdXy1GXe5jK8oWG/0UbfprBxeOYpUwfDgdue2JYpq0Ei8nda
-   fVNnWe/s2DLJ2/o4dj7yhTrTbfaPdsOWHxnVC1CEoZr4jMr+/A3McuLCq
-   3jP6FF1PRk3V7Vq0dx0X1CLUtmx67AyPw7pXTTul98hIkw4Zmujr/XXAd
-   g==;
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=QhmhzfXuACxQXXpbyr8fZL8s5rbaDwxblDXREQxvELT4JH27DbZJ50HCNQpQWiWHFBELO2aLwhFn4xMKf/ezl/XCLyyx1SgCAi8bIH4oraaRgRduPELnEJXpV/XwvGyakmWtXenlIr5OV3tVJJlleyshUFc8xw9arhxEuVB9uaW7f7ZTlYPtX7Wg+rMoRLR4uMauGwkPwifXgZGrv8Vw/gc2ZgroPvUvc0NYtWWWF1hzE+A106H03lFrMHt9pWhp0HhaIpJ0sjuhEGoa8Gxc8U5EOktEfu2KmmhObpMMNw4VAQHU3tz5EUjObOp5frqIj190H29kS1B+vu4JogPWEw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=GbRCl1x50GsZMYDPjdo1/1EqQ7G/bSDxZ03a5xtoGoM=;
- b=OMqBoJ+pt7z6HGnRPELuNE8/qqjsVpAKF0/6Afj/QeqhZMAFbEskNBqrXE1ryYMcIln551KX+MLnqW8rKtc1Osb4AAUPm4Wr+478GN86E/HPEhbdlZRorbcW4Ze66VjutwzNsRx5e1p3KX6gcaBPNP+PqeDI+PxMWAMZsrPRYAR8kPPqmbQBXzBepS6om1Z57P3QR91+na6IdFk7PfZ2GjnnEOHnRIBwxxMOa/ERPPc++gBkhz/TCAP3nRMV/qMcTE3nFcU2fzV1WaoyQZVD7RutkCHVvRUZbDUfvXAmXLoXPvcrW2N2pbz5ppwRBE90aCTFDpiZFcVaOnZYHABSZw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=axis.com; dmarc=pass action=none header.from=axis.com;
- dkim=pass header.d=axis.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=axis365.onmicrosoft.com; s=selector2-axis365-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=GbRCl1x50GsZMYDPjdo1/1EqQ7G/bSDxZ03a5xtoGoM=;
- b=VD0eQ+RdHWrjynqO94GgntIMWSd6xgKYw8x/uHGCq3EgZJcVec5srUlu9cBa9hsK95XbHz2H5Zs1SStjeuFnLBCdsBOI7NbufqVHp6g6xs2MQpOQHqM9OUxM90v2yazYAnrpNHpJHs5GKniga8y3J3mTyUPhNWyOh6hjFtcfhtU=
-From: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
-To: Armin Kuster <akuster808@gmail.com>,
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-CC: Luke Schaefer <lukeschafer17@gmail.com>
-Subject: RE: [oe] [meta-oe][kirkstone][PATCH] webserver: nginx: Add stream
- Signed-off-by: Luke Schaefer <lukeschafer17@gmail.com>
-Thread-Topic: [oe] [meta-oe][kirkstone][PATCH] webserver: nginx: Add stream
- Signed-off-by: Luke Schaefer <lukeschafer17@gmail.com>
-Thread-Index: AQHZroPSXlfe0/eGQ0uJTLVgMyb1bK+px1Uw
-Date: Tue, 4 Jul 2023 16:12:39 +0000
-Message-ID: <DB5PR02MB102138E958E1A7EAA05282353EF2EA@DB5PR02MB10213.eurprd02.prod.outlook.com>
-References: <20230704142816.2295084-1-akuster808@gmail.com>
-In-Reply-To: <20230704142816.2295084-1-akuster808@gmail.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=axis.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: DB5PR02MB10213:EE_|DU0PR02MB7873:EE_
-x-ms-office365-filtering-correlation-id: fd44f54c-c533-4afa-e593-08db7ca97cfe
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: kvxGXrX7XGHlH8dDBMNZTF49fb9184B3LeGgCiwDldr/xYB7rY3zxZSGTdaYYm2ZbIpX+dOEOa/Ty6g8fz5AeTaG1nW7aV55B4dTAonhB/CIBvXG5cGb3SBva06t1hfTBZ05XSd6m9bJZ0Dv749W4fZiOGD41I6x9uzB1QGR27TK4QQ6xPEWARmLOvXZeyThRwMuTI7j91W7N7BX5HPxlT6emub0+EaHCDr49TvcHWnhyAyTDRjJz1G8cioqGU6gLjOzTv1t76vz0kBynm9o6xSKPkmBF+JbnP77KufBGvQRgk3Dk9aGy6+5z1zVCxN/ns2GYbhovGK2IzfWMGMFHg5mk/IyA9Afu1E0Rv5Q7IQs5k0w1M3Y8djmqkWlGZnuJ5jG4z7lYX4y6BFdSxfha5xVDZigwEpqOp1N9+oGHxlt5n4WBUBpBrvh4QiizOy0F1dTjW8BnCi4ajSpNfIxPUpMTx5G4iVysVpBId9ZnfpMVwC6GTAmwpKc86XvtbffKH+CU+9MDzCnNFdXaacWn7k74u9KG3xr8XNveccMEWZeUPXykb6Wi6FLzbPdC/5lHj5RDSWGJGRYdr7k5YmiztBYiQyt5W4rmV4IHO/ylMsGwBe72cO9vPm8RQtlldBd
-x-forefront-antispam-report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DB5PR02MB10213.eurprd02.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230028)(4636009)(346002)(366004)(376002)(396003)(39860400002)(136003)(451199021)(41300700001)(2906002)(7696005)(6506007)(71200400001)(38100700002)(122000001)(83380400001)(9686003)(53546011)(26005)(186003)(55016003)(86362001)(110136005)(478600001)(38070700005)(316002)(33656002)(76116006)(66556008)(66476007)(66446008)(64756008)(4326008)(66946007)(44832011)(8936002)(8676002)(5660300002)(52536014);DIR:OUT;SFP:1101;
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?dPVFAxBusLpUns1O7+krBH0Lc+bbreIuFLwC08Zgb8yeaGcwPP1FeD0Sf6eQ?=
- =?us-ascii?Q?vi6VzD3oYDWsHnrm/HEco4bLwb1c6gXfA5P66RQK1LMb8und1qgUTG96pjaA?=
- =?us-ascii?Q?T6QJ3GtCRvc66e6EG3/A01QTjAEQ+K7sApRy0zdqQFYog6N5xlHvufR0543h?=
- =?us-ascii?Q?Q/8gEmn79Tylaw2vXWrru4+ML8d20IDYo1FTrCj5FDBXh+jIZitsSleFQ2RD?=
- =?us-ascii?Q?av5SpRvjgxD8k+AKpH8EG081yiI8SKXmk5SGtvnzh1q98F4+p6Vd6T3d7igV?=
- =?us-ascii?Q?ttoYkW++LCLWPwADdqiCrVdVUsUC7r/SqnMxyIM3svf2q7gMw/PoPVOjc/vb?=
- =?us-ascii?Q?bvxiL3ujjFy0HBSjB5qo4v4eKK9qBnkNBT8nQHCJ97tGtgVntz/OphAPwSKl?=
- =?us-ascii?Q?XMbFduhPmzBS8YfgvPBYInkEyw7wvazBeNTCyatrrwkaIdVbzg/jDfjtu2hz?=
- =?us-ascii?Q?vJ20xHczq4kJDrnET5v7RnBu4bP16KfiAp7rtyAB6jOYOZwQRXXFbKuvTUqm?=
- =?us-ascii?Q?EMdRfUrKGZSp82uuFs6ANKgjQo5MWXswDF2qlybyw8PhFRwOTXd9grrSgpaL?=
- =?us-ascii?Q?azkS2tT55Tgag6AKPgcVfQ7MEwgKtBdN3QRGfvNHlFKAlwdIesJK5AZEoE+K?=
- =?us-ascii?Q?GhB0cySTfJOpmIX9962+hQ+2pS5QUhjRPKFpDumMkOGPs8QRj0t7aPCJ+jIj?=
- =?us-ascii?Q?q0MOqNb4ECacOlockisM1XUY/5q2bmJXAcxbcaAZ5PZ4duNyWgV0gyeC4qRp?=
- =?us-ascii?Q?dJ2Iaa4PQzC+Ykyyn32SXJFJd+JonNhm5cjL//wozHxYvvfbgi1+Os4TUyM/?=
- =?us-ascii?Q?ilb3mWeDicfaBIJ2RGpSlNvd0JXSMjh1l0gwUF6B6lMltM36uI6j5AbMVB3I?=
- =?us-ascii?Q?sAUwY92EFEpUNo6J4hlL1WnpYUoeypgVGH95Ems5fhAA7jcFQ9u4intLO7qe?=
- =?us-ascii?Q?wl3h0D1Amj6wqvSOe9XDIwj5dnrON60uJJv9hCMDtrkJnIitlWEkvBomDYKG?=
- =?us-ascii?Q?LctoszsVSUtNJRW4d3H8TTg0s7ga8/eyq6EuI0q3T2jhzWJAty35ApvEUoWZ?=
- =?us-ascii?Q?X55b2OWm+kaFER0MAlMtVGPDiprjgZ/cs/B2/awUPXA23Xk6+6LK9zsPFSms?=
- =?us-ascii?Q?tknIOZhB6NTJ/WYUs4egrGfoGjvMwQBnmw4TTiZaGiCcHYd8AS/3Qz3ofkcM?=
- =?us-ascii?Q?3GLVIbdr/DU3ilnmi6xLfXUQdPPR144cQS9rQrX9FGL78bje3/rGQe18+AvI?=
- =?us-ascii?Q?HOCRZe7iiZgBo1m7Mo3RNcmbhMeBWmtCp21jYz6ViUeXwZRO5a2ag1lEjJ74?=
- =?us-ascii?Q?7FbjXEjIJx+PAwdYdBp0oaIlHgqs+SuNKm0fkbVJ3RzdR5cXlNgq1qJl3KjV?=
- =?us-ascii?Q?ZR6XVVk3AgjlUx4lZOJoIhxnElCPP5qRKL4pBdssIyUOZVhQoL2czH1SnI10?=
- =?us-ascii?Q?Yq59y+DGv7f+P/JAgnwHBkLPTbxs27jKrrNgJOftExffk2PMNsoJjxcZkxEW?=
- =?us-ascii?Q?ePXSWBdbRn1UbfazD7hhhDtiVMNilhlnRJX1C4koPoUEBqIyBPpuoBfYK78U?=
- =?us-ascii?Q?bm7f7idgCBElgvxarNs=3D?=
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+        d=gmail.com; s=20221208; t=1688502139; x=1691094139;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=lHhuKQ646TwIK7EH0WFjQndkZJ1aKZip7pJT5wJeTIs=;
+        b=muvH9Zfmt1EuhLAPk9sFn127Nn87VY+5V+jCy4TRkC0x+Qnp+XjxI8hwm5xNhq+4Of
+         K6FSoJUW/DGtIP5Rj/LhNxVLz5jMu0FmkNbUvQSe6T6pK56QmjFifEt2wEqkfwpjDxbj
+         C4t9CTqJDKFKGgr2Xwk0t26SmEwT3wLLtmqHb54ivKo16z8uWDPGvtUM8Vd7MixDIMiV
+         oTCwrQIkT389DfEvuHZFecwadBLoG+mqB6SeVloIK8Xa0m9fCWdQptvPnzLXuV85yOur
+         hSdUu9GxEATIeUSGX3mvyMUG+lWjynZeRihsjJHXmayrLb72Zq4Bqzp73goUSAWA029M
+         TXTA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20221208; t=1688502139; x=1691094139;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=lHhuKQ646TwIK7EH0WFjQndkZJ1aKZip7pJT5wJeTIs=;
+        b=TP9XRNRbRGIiars1Tsz9OJrTq2vmC9EHXhL09fxIRT++epSz8BVzh8nwj5I1W+9zlP
+         FP90EB6QQnZ6g7jwHPsrp6qcesW53huToYAeeXLO7ADMRxAgrzEbbDF0o4Na1qh8Sta5
+         7uxjNc3LgBzWcpm1/2AIoM7/nJ1MYdNQgW+6SY7DrJxRvOnNo2oYrE3CkEjsUNiPO3zy
+         tV60rPNzcWOFb9g2mL+upqIgAvEyvcWbBlxXvXyisCW9buI/gS17i04R8cQ8A5KH9LBO
+         Meho+0wPo9GtMGrTw/aajc5j3BOHH+SJkBg/4Nc8Yur3j3iJKjx6czV5LjHr+ZGVnbQS
+         QGYg==
+X-Gm-Message-State: ABy/qLbRYwY9MZ3xcPNjtrMVUxnpA44VVUlBlfXm9P+e4Xct3saAuzwV
+	+6iobi24JxpYbT4ygdqPSvEWpDXRNd4=
+X-Google-Smtp-Source: APBJJlFY0qR9HXc7VSt+lxttxlcN9JtyswQ5FjIC89cseGGX8xTX8npgL8Id9vZrm/gvnLGVHRWScg==
+X-Received: by 2002:a17:903:230b:b0:1b8:1636:b26 with SMTP id d11-20020a170903230b00b001b816360b26mr395078plh.3.1688502138894;
+        Tue, 04 Jul 2023 13:22:18 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9181:d380::e2fe])
+        by smtp.gmail.com with ESMTPSA id jg3-20020a17090326c300b001a2104d706fsm16701267plb.225.2023.07.04.13.22.18
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 04 Jul 2023 13:22:18 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][PATCH] pcp: Update to 6.0.5
+Date: Tue,  4 Jul 2023 13:22:16 -0700
+Message-ID: <20230704202216.1775139-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.41.0
 MIME-Version: 1.0
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: DB5PR02MB10213.eurprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: fd44f54c-c533-4afa-e593-08db7ca97cfe
-X-MS-Exchange-CrossTenant-originalarrivaltime: 04 Jul 2023 16:12:39.1424
- (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 78703d3c-b907-432f-b066-88f7af9ca3af
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: SNIQUMFZg9Anod6TaQJOaOJXtzQIoKW43cqxbg6fgKTrBA3gSMHLGcP7n2z3LzM2
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU0PR02MB7873
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 04 Jul 2023 16:12:49 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103660
+ <openembedded-devel@lists.openembedded.org>; Tue, 04 Jul 2023 20:22:21 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103661
 
-> -----Original Message-----
-> From: openembedded-devel@lists.openembedded.org <openembedded-
-> devel@lists.openembedded.org> On Behalf Of Armin Kuster
-> Sent: den 4 juli 2023 16:28
-> To: openembedded-devel@lists.openembedded.org
-> Cc: Luke Schaefer <lukeschafer17@gmail.com>
-> Subject: [oe] [meta-oe][kirkstone][PATCH] webserver: nginx: Add stream Si=
-gned-off-by: Luke Schaefer <lukeschafer17@gmail.com>
+- Forward port patches
+- Package libpcp-archive.so.1
 
-Why is the Signed-off-by in the subject?
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ ...cp-native_5.3.6.bb => pcp-native_6.0.5.bb} |  5 --
+ meta-oe/recipes-support/pcp/pcp.inc           | 25 ++++++----
+ ...ove-unsuitble-part-for-cross-compile.patch | 14 ++----
+ ...e-Limit-the-header-search-to-sysroot.patch | 49 ++-----------------
+ .../pcp/{pcp_5.3.6.bb => pcp_6.0.5.bb}        | 32 +++++++-----
+ 5 files changed, 42 insertions(+), 83 deletions(-)
+ rename meta-oe/recipes-support/pcp/{pcp-native_5.3.6.bb => pcp-native_6.0.5.bb} (88%)
+ rename meta-oe/recipes-support/pcp/{pcp_5.3.6.bb => pcp_6.0.5.bb} (88%)
 
->=20
-> From: Luke Schaefer <lukeschafer17@gmail.com>
->=20
-> Add stream support to nginx PACKAGECONFIG
->=20
-> Signed-off-by: Armin Kuster <akuster808@gmail.com>
-> ---
->  meta-webserver/recipes-httpd/nginx/nginx.inc | 1 +
->  1 file changed, 1 insertion(+)
->=20
-> diff --git a/meta-webserver/recipes-httpd/nginx/nginx.inc b/meta-webserve=
-r/recipes-httpd/nginx/nginx.inc
-> index dfced33300..231c1d1ec9 100644
-> --- a/meta-webserver/recipes-httpd/nginx/nginx.inc
-> +++ b/meta-webserver/recipes-httpd/nginx/nginx.inc
-> @@ -43,6 +43,7 @@ PACKAGECONFIG[gunzip] =3D "--with-http_gunzip_module,,"
->  PACKAGECONFIG[http2] =3D "--with-http_v2_module,,"
->  PACKAGECONFIG[ssl] =3D "--with-http_ssl_module,,openssl"
->  PACKAGECONFIG[http-auth-request] =3D "--with-http_auth_request_module,,"
-> +PACKAGECONFIG[stream] =3D "--with-stream,,"
->=20
->  do_configure () {
->      if [ "${SITEINFO_BITS}" =3D "64" ]; then
-> --
-> 2.34.1
+diff --git a/meta-oe/recipes-support/pcp/pcp-native_5.3.6.bb b/meta-oe/recipes-support/pcp/pcp-native_6.0.5.bb
+similarity index 88%
+rename from meta-oe/recipes-support/pcp/pcp-native_5.3.6.bb
+rename to meta-oe/recipes-support/pcp/pcp-native_6.0.5.bb
+index 5f3c9b6f00..2f37b099b4 100644
+--- a/meta-oe/recipes-support/pcp/pcp-native_5.3.6.bb
++++ b/meta-oe/recipes-support/pcp/pcp-native_6.0.5.bb
+@@ -46,8 +46,3 @@ do_install () {
+     PCP_MAN_DIR=${D}/${mandir} \
+     PCP_DOC_DIR=${D}/${docdir} 
+ }
+-#| chkacc1.c:8:10: fatal error: localconfig.h: No such file or directory
+-#|     8 | #include "localconfig.h"
+-#|       |          ^~~~~~~~~~~~~~~
+-PARALLEL_MAKE = ""
+-
+diff --git a/meta-oe/recipes-support/pcp/pcp.inc b/meta-oe/recipes-support/pcp/pcp.inc
+index 708ebfe7ab..276be7ffaa 100644
+--- a/meta-oe/recipes-support/pcp/pcp.inc
++++ b/meta-oe/recipes-support/pcp/pcp.inc
+@@ -11,21 +11,26 @@ SRC_URI = "https://performancecopilot.jfrog.io/artifactory/pcp-source-release/${
+            file://0001-configure-Limit-the-header-search-to-sysroot.patch \
+            file://config.linux \
+ 	   "
+-SRC_URI[sha256sum] = "6ef33b7aa14c09860ba7cd8873e76d38ccd24eab0c94a50e235f813e77fe3610"
++SRC_URI[sha256sum] = "dacf92ba195f1f2ea8f40bf0c455d2cd2456273a1e30dcc3ee5b5bfd099a99ee"
+ 
+ inherit setuptools3-base pkgconfig autotools-brokensep
+ 
+ # Specify any options you want to pass to the configure script using EXTRA_OECONF:
+ CACHED_CONFIGUREVARS = "PACKAGE_DISTRIBUTION=arch"
+-EXTRA_OECONF:append = " --with-dstat-symlink=yes --with-infiniband=no \
+-                --with-pmdapodman=no --with-python=no --with-python3=yes --with-perl=no \
+-		--with-pmdabcc=no --with-pmdajson=no  --with-perfevent=no \
+-		--with-pmdabcc=yes \
+-		--with-rundir=${localstatedir}/run \
+-                --with-sysconfigdir=${sysconfdir} \
+-                --with-logdir=${localstatedir}/log \
+-                --with-docdir=${docdir} \
+-                "
++EXTRA_OECONF:append = "\
++                    --with-dstat-symlink=yes \
++                    --with-infiniband=no \
++                    --with-python=no \
++                    --with-perl=no \
++                    --with-python3=yes \
++                    --with-pmdajson=no  \
++                    --with-perfevent=no \
++                    --with-pmdabcc=yes \
++                    --with-rundir=${localstatedir}/run \
++                    --with-sysconfigdir=${sysconfdir} \
++                    --with-logdir=${localstatedir}/log \
++                    --with-docdir=${docdir} \
++                    "
+ 
+ PACKAGECONFIG[qt5] = "--with-qt=yes --with-qt3d=yes,--with-qt=no --with-qt3d=no,qtbase qt3d"
+ 
+diff --git a/meta-oe/recipes-support/pcp/pcp/0001-Remove-unsuitble-part-for-cross-compile.patch b/meta-oe/recipes-support/pcp/pcp/0001-Remove-unsuitble-part-for-cross-compile.patch
+index 292499850e..abf4aee61d 100644
+--- a/meta-oe/recipes-support/pcp/pcp/0001-Remove-unsuitble-part-for-cross-compile.patch
++++ b/meta-oe/recipes-support/pcp/pcp/0001-Remove-unsuitble-part-for-cross-compile.patch
+@@ -11,11 +11,9 @@ Signed-off-by: Lei Maohui <leimaohui@fujitsu.com>
+  src/libpcp/src/GNUmakefile | 1 -
+  2 files changed, 7 deletions(-)
+ 
+-diff --git a/configure.ac b/configure.ac
+-index 5b25382..5d24714 100644
+ --- a/configure.ac
+ +++ b/configure.ac
+-@@ -623,12 +623,6 @@ fi
++@@ -607,12 +607,6 @@ fi
+  which=$WHICH
+  AC_SUBST(which)
+  
+@@ -28,18 +26,14 @@ index 5b25382..5d24714 100644
+  ar=$AR
+  AC_SUBST(ar)
+  
+-diff --git a/src/libpcp/src/GNUmakefile b/src/libpcp/src/GNUmakefile
+-index 3c4ccd6..d1eba19 100644
+ --- a/src/libpcp/src/GNUmakefile
+ +++ b/src/libpcp/src/GNUmakefile
+-@@ -176,7 +176,6 @@ exports:	exports.in mk.exports
+- # cases
++@@ -179,8 +179,6 @@ exports:	exports.in mk.exports
++ # consistent in all placess.
+  #
+  check.done:	$(OBJECTS)
+ -	./check-statics
++-	./check-errorcodes
+  	touch check.done
+  
+  ifneq ($(LIBTARGET),)
+--- 
+-2.25.1
+-
+diff --git a/meta-oe/recipes-support/pcp/pcp/0001-configure-Limit-the-header-search-to-sysroot.patch b/meta-oe/recipes-support/pcp/pcp/0001-configure-Limit-the-header-search-to-sysroot.patch
+index 591f94f374..b03c48e581 100644
+--- a/meta-oe/recipes-support/pcp/pcp/0001-configure-Limit-the-header-search-to-sysroot.patch
++++ b/meta-oe/recipes-support/pcp/pcp/0001-configure-Limit-the-header-search-to-sysroot.patch
+@@ -14,11 +14,9 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
+  configure.ac | 20 ++++++++++----------
+  1 file changed, 10 insertions(+), 10 deletions(-)
+ 
+-diff --git a/configure.ac b/configure.ac
+-index 5d24714..4e2d8ec 100644
+ --- a/configure.ac
+ +++ b/configure.ac
+-@@ -913,7 +913,7 @@ AC_DEFUN([PCP_CHECK_PYTHON_HEADER],
++@@ -907,7 +907,7 @@ AC_DEFUN([PCP_CHECK_PYTHON_HEADER],
+    [ PY_MAJOR="$1"
+      PY_MINOR="$2"
+      PY_VERSION="python$PY_MAJOR.$PY_MINOR"
+@@ -27,7 +25,7 @@ index 5d24714..4e2d8ec 100644
+      saved_CFLAGS="$CFLAGS"
+      saved_CPPFLAGS="$CPPFLAGS"
+      CFLAGS="$CFLAGS $PY_INCLUDE_DIRS"
+-@@ -1524,7 +1524,7 @@ AC_SUBST(qmake)
++@@ -1603,7 +1603,7 @@ AC_SUBST(qmake)
+  
+  enable_qt3d=false
+  AS_IF([test "x$do_qt3d" != "xno"], [
+@@ -36,45 +34,7 @@ index 5d24714..4e2d8ec 100644
+      then
+  	enable_qt3d=$enable_qt
+      elif test x"$do_qt3d" = x"yes"
+-@@ -3810,13 +3810,13 @@ then
+- 
+-     saved_CFLAGS="$CFLAGS"
+-     saved_CPPFLAGS="$CPPFLAGS"
+--    NSS_INC_DIRS="-I/usr/include/nss -I/usr/include/nss3"
+--    NSPR_INC_DIRS="-I/usr/include/nspr -I/usr/include/nspr4"
+-+    NSS_INC_DIRS="-I${STAGING_INCDIR}/nss -I${STAGING_INCDIR}/nss3"
+-+    NSPR_INC_DIRS="-I${STAGING_INCDIR}/nspr -I${STAGING_INCDIR}/nspr4"
+-     CFLAGS="$CFLAGS $NSS_INC_DIRS $NSPR_INC_DIRS"
+-     CPPFLAGS="$CPPFLAGS $NSS_INC_DIRS $NSPR_INC_DIRS"
+- 
+--    AC_CHECK_HEADERS([nss/nss.h], [NSSCFLAGS=-I/usr/include/nss], [
+--	AC_CHECK_HEADERS([nss3/nss.h], [NSSCFLAGS=-I/usr/include/nss3], [
+-+    AC_CHECK_HEADERS([nss/nss.h], [NSSCFLAGS=-I${STAGING_INCDIR}/nss], [
+-+	AC_CHECK_HEADERS([nss3/nss.h], [NSSCFLAGS=-I${STAGING_INCDIR}/nss3], [
+- 	    enable_secure=false
+- 	    if test "$do_secure" = "yes"
+- 	    then
+-@@ -3826,8 +3826,8 @@ then
+-     ])
+-     AC_SUBST(NSSCFLAGS)
+- 
+--    AC_CHECK_HEADERS([nspr/nspr.h], [NSPRCFLAGS=-I/usr/include/nspr], [
+--	AC_CHECK_HEADERS([nspr4/nspr.h], [NSPRCFLAGS=-I/usr/include/nspr4], [
+-+    AC_CHECK_HEADERS([nspr/nspr.h], [NSPRCFLAGS=-I${STAGING_INCDIR}/nspr], [
+-+	AC_CHECK_HEADERS([nspr4/nspr.h], [NSPRCFLAGS=-I${STAGING_INCDIR}/nspr4], [
+- 	    enable_secure=false
+- 	    if test "$do_secure" = "yes"
+- 	    then
+-@@ -3837,7 +3837,7 @@ then
+-     ])
+-     AC_SUBST(NSPRCFLAGS)
+- 
+--    AC_CHECK_HEADERS([sasl/sasl.h], [SASLCFLAGS=-I/usr/include/sasl], [
+-+    AC_CHECK_HEADERS([sasl/sasl.h], [SASLCFLAGS=-I${STAGING_INCDIR}/sasl], [
+- 	enable_secure=false
+- 	if test "$do_secure" = "yes"
+- 	then
+-@@ -3938,7 +3938,7 @@ AC_SUBST(enable_decompression)
++@@ -3699,7 +3699,7 @@ AC_SUBST(enable_decompression)
+  AC_SUBST(enable_lzma)
+  
+  dnl check for array sessions
+@@ -83,6 +43,3 @@ index 5d24714..4e2d8ec 100644
+  then
+      pcp_mpi_dirs=libpcp_mpi\ libpcp_mpiread
+  else
+--- 
+-2.35.1
+-
+diff --git a/meta-oe/recipes-support/pcp/pcp_5.3.6.bb b/meta-oe/recipes-support/pcp/pcp_6.0.5.bb
+similarity index 88%
+rename from meta-oe/recipes-support/pcp/pcp_5.3.6.bb
+rename to meta-oe/recipes-support/pcp/pcp_6.0.5.bb
+index 0543d77a78..b337df6ea4 100644
+--- a/meta-oe/recipes-support/pcp/pcp_5.3.6.bb
++++ b/meta-oe/recipes-support/pcp/pcp_6.0.5.bb
+@@ -18,17 +18,26 @@ SRC_URI += "file://0001-Remove-unsuitble-part-for-cross-compile.patch \
+ export PCP_DIR="${RECIPE_SYSROOT_NATIVE}"
+ #export PCP_RUN_DIR="${RECIPE_SYSROOT_NATIVE}"
+ EXTRA_OEMAKE = "CC="${CC}" LD="${LD}""
+-inherit useradd systemd features_check
++inherit useradd systemd features_check python3targetconfig
+ 
+ # Needs libx11
+ REQUIRED_DISTRO_FEATURES = "x11"
+ 
+ SYSTEMD_AUTO_ENABLE:${PN} = "enable"
+-SYSTEMD_SERVICE:${PN} = "pmcd.service pmcd.service pmie_check.service pmie_farm_check.service \
+-                         pmlogger_daily.service pmlogger_farm_check.service pmfind.service \
+-                         pmie_daily.service  pmlogger.service pmlogger_daily_report.service \
+-                         pmproxy.service pmie.service pmie_farm.service pmlogger_check.service \
+-                         pmlogger_farm.service"
++SYSTEMD_SERVICE:${PN} = "\
++                        pmie_farm_check.service \
++                        pmie_farm.service \
++                        pmfind.service \
++                        pmlogger_farm_check.service \
++                        pmcd.service \
++                        pmie.service \
++                        pmlogger_daily.service \
++                        pmlogger.service \
++                        pmlogger_farm.service \
++                        pmie_check.service \
++                        pmproxy.service \
++                        pmlogger_check.service \
++                        pmie_daily.service"
+ 
+ USERADD_PACKAGES = "${PN}"
+ USERADD_PARAM:${PN} = "--system --home ${localstatedir}/lib/pcp --no-create-home \
+@@ -88,7 +97,7 @@ do_install () {
+ 
+ PACKAGES += " ${PN}-export-zabbix-agent ${PN}-testsuite \
+ 	libpcp-gui2  libpcp-gui2-dev \
+-	libpcp-import1 \
++	libpcp-import1 libpcp-archive1 \
+ 	libpcp-mmv1 libpcp-mmv1-dev \
+ 	libpcp-pmda3 libpcp-pmda3-dev \
+ 	libpcp-trace2 libpcp-trace2-dev \
+@@ -97,6 +106,8 @@ PACKAGES += " ${PN}-export-zabbix-agent ${PN}-testsuite \
+ "
+ FILES:libpcp-gui2 = "${libdir}/libpcp_gui.so.2 \
+ "	
++FILES:libpcp-archive1 = "${libdir}/libpcp_archive.so.1 \
++"	
+ FILES:libpcp-gui2-dev = " \
+ 	${libdir}/libpcp_gui.so \
+ 	${libdir}/libpcp_gui.a \
+@@ -166,6 +177,7 @@ FILES:${PN} = " \
+ 	${datadir}/zsh \
+ 	${systemd_system_unitdir}/ \
+ 	${libdir}/pcp/ \
++	${libdir}/sysusers.d/pcp.conf \
+ 	${datadir}/pcp \
+ 	${libdir}/*.sh \
+ 	${datadir}/man \
+@@ -184,7 +196,7 @@ FILES:${PN}-export-zabbix-agent += " \
+ 	${mandir}/man3/zbxpcp.3.gz \
+ 	${libdir}/zabbix \
+ "
+-FILES:${PN}-testsuite = "${localstatedir}/lib/pcp/testsuite/"
++FILES:${PN}-testsuite = "${localstatedir}/lib/pcp/testsuite/ ${libdir}/sysusers.d/pcp-testsuite.conf"
+ FILES:python3-${PN} = "${PYTHON_SITEPACKAGES_DIR}"
+ FILES:${PN}-dev += " \
+         ${includedir}/pcp \
+@@ -222,7 +234,3 @@ FILES:${PN}-dev += " \
+         ${datadir}/man/man3/pms* \
+         ${datadir}/man/man3/pmt* \
+ "
+-#| chkacc1.c:8:10: fatal error: localconfig.h: No such file or directory
+-#|     8 | #include "localconfig.h"
+-#|       |          ^~~~~~~~~~~~~~~
+-PARALLEL_MAKE = ""
+-- 
+2.41.0
 
 
