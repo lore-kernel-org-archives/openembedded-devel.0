@@ -2,337 +2,181 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D067FEB64D9
-	for <webhook@archiver.kernel.org>; Tue,  4 Jul 2023 20:22:21 +0000 (UTC)
-Received: from mail-pj1-f52.google.com (mail-pj1-f52.google.com [209.85.216.52])
- by mx.groups.io with SMTP id smtpd.web10.2954.1688502140024422633
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DCBFCEB64DA
+	for <webhook@archiver.kernel.org>; Tue,  4 Jul 2023 20:56:11 +0000 (UTC)
+Received: from mail-pf1-f174.google.com (mail-pf1-f174.google.com [209.85.210.174])
+ by mx.groups.io with SMTP id smtpd.web10.3553.1688504165778489426
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 04 Jul 2023 13:22:20 -0700
+ Tue, 04 Jul 2023 13:56:05 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=muvH9Zfm;
- spf=pass (domain: gmail.com, ip: 209.85.216.52, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f52.google.com with SMTP id 98e67ed59e1d1-262b213eddfso23018a91.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 04 Jul 2023 13:22:19 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20221208 header.b=CuyYmoXm;
+ spf=pass (domain: gmail.com, ip: 209.85.210.174, mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f174.google.com with SMTP id d2e1a72fcca58-66f5faba829so3213277b3a.3
+        for <openembedded-devel@lists.openembedded.org>; Tue, 04 Jul 2023 13:56:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1688502139; x=1691094139;
+        d=gmail.com; s=20221208; t=1688504165; x=1691096165;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=lHhuKQ646TwIK7EH0WFjQndkZJ1aKZip7pJT5wJeTIs=;
-        b=muvH9Zfmt1EuhLAPk9sFn127Nn87VY+5V+jCy4TRkC0x+Qnp+XjxI8hwm5xNhq+4Of
-         K6FSoJUW/DGtIP5Rj/LhNxVLz5jMu0FmkNbUvQSe6T6pK56QmjFifEt2wEqkfwpjDxbj
-         C4t9CTqJDKFKGgr2Xwk0t26SmEwT3wLLtmqHb54ivKo16z8uWDPGvtUM8Vd7MixDIMiV
-         oTCwrQIkT389DfEvuHZFecwadBLoG+mqB6SeVloIK8Xa0m9fCWdQptvPnzLXuV85yOur
-         hSdUu9GxEATIeUSGX3mvyMUG+lWjynZeRihsjJHXmayrLb72Zq4Bqzp73goUSAWA029M
-         TXTA==
+        bh=xK2TWC1v1DjhiPDbPTV7ZNVL262IIPmjEJw6CSsE/Yg=;
+        b=CuyYmoXmVY+bp1+1Lq10ZibrFx0fyg1awDK8JGlT2tKZYxvLUEkkD21ZqdYXtLwUMt
+         6QLBSgfUF6lhD7Daux8/2KGR0vdYZGoZcbt3CZBDDsKJBsAhJE+dBLlWIArAn983ScpQ
+         B5WZPOPYb3knkEQwbT8iFxnOeTiROWGwhVuiK3ubZqcUjT3pTDuNhaYZIym45SOEZd95
+         NvkbPaLN4/4K/hHeU73EHLBfcRPxXoyEgcP1HQzcb/Def9ShSCMAZV8SEevgjS7k3Adg
+         gjay1TUOy/4YQPP1V8ABF5IfYdqIeFzs79J3hdbbb+l8EL5iVu6ke5gVvV/Uf8gxo1/w
+         dTWg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1688502139; x=1691094139;
+        d=1e100.net; s=20221208; t=1688504165; x=1691096165;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=lHhuKQ646TwIK7EH0WFjQndkZJ1aKZip7pJT5wJeTIs=;
-        b=TP9XRNRbRGIiars1Tsz9OJrTq2vmC9EHXhL09fxIRT++epSz8BVzh8nwj5I1W+9zlP
-         FP90EB6QQnZ6g7jwHPsrp6qcesW53huToYAeeXLO7ADMRxAgrzEbbDF0o4Na1qh8Sta5
-         7uxjNc3LgBzWcpm1/2AIoM7/nJ1MYdNQgW+6SY7DrJxRvOnNo2oYrE3CkEjsUNiPO3zy
-         tV60rPNzcWOFb9g2mL+upqIgAvEyvcWbBlxXvXyisCW9buI/gS17i04R8cQ8A5KH9LBO
-         Meho+0wPo9GtMGrTw/aajc5j3BOHH+SJkBg/4Nc8Yur3j3iJKjx6czV5LjHr+ZGVnbQS
-         QGYg==
-X-Gm-Message-State: ABy/qLbRYwY9MZ3xcPNjtrMVUxnpA44VVUlBlfXm9P+e4Xct3saAuzwV
-	+6iobi24JxpYbT4ygdqPSvEWpDXRNd4=
-X-Google-Smtp-Source: APBJJlFY0qR9HXc7VSt+lxttxlcN9JtyswQ5FjIC89cseGGX8xTX8npgL8Id9vZrm/gvnLGVHRWScg==
-X-Received: by 2002:a17:903:230b:b0:1b8:1636:b26 with SMTP id d11-20020a170903230b00b001b816360b26mr395078plh.3.1688502138894;
-        Tue, 04 Jul 2023 13:22:18 -0700 (PDT)
+        bh=xK2TWC1v1DjhiPDbPTV7ZNVL262IIPmjEJw6CSsE/Yg=;
+        b=Siq1qu/Ix5sHfLVoYdIZaqX7vkcb5gk6oK9bVsTAtpFxrIRPG7jEc9l3dxjql+65Nh
+         XfU+Y+K8+XC8HAdGZ4HhxLNxDSUzBV7ula1XX0j+svBJq6UKiWEel+Nm1lCwKu6RxAim
+         mQ5rM8ObyO6xth+HE6tZLCKb0OkmsZvO24vGJcjEJHR6db9l2qcxCUuYzJ65Co9MjFoC
+         gNE5bgo2IcPlkZgd+aoms0fj8EhK34LaV516Rmzv1Er6gN/OEwvze4mWRykeBwicq6Mi
+         9WRc9mHw4HWSO7/tUeazYLuQA6v2J0n1X6/jM5dd3P/7D0HM+Hyo10DZhTxAV1DRIRZu
+         YXWA==
+X-Gm-Message-State: ABy/qLZGy+y+P74z0IUmLUNVRhP88oRKEtUByllrmXPY1MtEMZK/4kYe
+	QbQoyJHf7620zXgmABmHWJmDRGUJkxk=
+X-Google-Smtp-Source: APBJJlESipyhdVmHc5VnFjcrKavpjTCbvxIbrRJ/rsmR/buGo08B9vdqvSjw1lDdBYu94AMB5cFZCg==
+X-Received: by 2002:a05:6a00:14cc:b0:66a:6339:e8f9 with SMTP id w12-20020a056a0014cc00b0066a6339e8f9mr16472398pfu.0.1688504164968;
+        Tue, 04 Jul 2023 13:56:04 -0700 (PDT)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9181:d380::e2fe])
-        by smtp.gmail.com with ESMTPSA id jg3-20020a17090326c300b001a2104d706fsm16701267plb.225.2023.07.04.13.22.18
+        by smtp.gmail.com with ESMTPSA id y19-20020aa78553000000b0066f37665a63sm11500266pfn.73.2023.07.04.13.56.04
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 04 Jul 2023 13:22:18 -0700 (PDT)
+        Tue, 04 Jul 2023 13:56:04 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH] pcp: Update to 6.0.5
-Date: Tue,  4 Jul 2023 13:22:16 -0700
-Message-ID: <20230704202216.1775139-1-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH] geos: Upgrade to 3.12.0
+Date: Tue,  4 Jul 2023 13:56:02 -0700
+Message-ID: <20230704205602.1932962-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.41.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 04 Jul 2023 20:22:21 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103661
+ <openembedded-devel@lists.openembedded.org>; Tue, 04 Jul 2023 20:56:11 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103662
 
-- Forward port patches
-- Package libpcp-archive.so.1
+Drop upstreamed patch
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...cp-native_5.3.6.bb => pcp-native_6.0.5.bb} |  5 --
- meta-oe/recipes-support/pcp/pcp.inc           | 25 ++++++----
- ...ove-unsuitble-part-for-cross-compile.patch | 14 ++----
- ...e-Limit-the-header-search-to-sysroot.patch | 49 ++-----------------
- .../pcp/{pcp_5.3.6.bb => pcp_6.0.5.bb}        | 32 +++++++-----
- 5 files changed, 42 insertions(+), 83 deletions(-)
- rename meta-oe/recipes-support/pcp/{pcp-native_5.3.6.bb => pcp-native_6.0.5.bb} (88%)
- rename meta-oe/recipes-support/pcp/{pcp_5.3.6.bb => pcp_6.0.5.bb} (88%)
+ .../geos/0001-include-missing-cstdint.patch   | 82 -------------------
+ .../geos/{geos_3.9.4.bb => geos_3.12.0.bb}    |  5 +-
+ 2 files changed, 2 insertions(+), 85 deletions(-)
+ delete mode 100644 meta-oe/recipes-navigation/geos/geos/0001-include-missing-cstdint.patch
+ rename meta-oe/recipes-navigation/geos/{geos_3.9.4.bb => geos_3.12.0.bb} (76%)
 
-diff --git a/meta-oe/recipes-support/pcp/pcp-native_5.3.6.bb b/meta-oe/recipes-support/pcp/pcp-native_6.0.5.bb
-similarity index 88%
-rename from meta-oe/recipes-support/pcp/pcp-native_5.3.6.bb
-rename to meta-oe/recipes-support/pcp/pcp-native_6.0.5.bb
-index 5f3c9b6f00..2f37b099b4 100644
---- a/meta-oe/recipes-support/pcp/pcp-native_5.3.6.bb
-+++ b/meta-oe/recipes-support/pcp/pcp-native_6.0.5.bb
-@@ -46,8 +46,3 @@ do_install () {
-     PCP_MAN_DIR=${D}/${mandir} \
-     PCP_DOC_DIR=${D}/${docdir} 
- }
--#| chkacc1.c:8:10: fatal error: localconfig.h: No such file or directory
--#|     8 | #include "localconfig.h"
--#|       |          ^~~~~~~~~~~~~~~
--PARALLEL_MAKE = ""
+diff --git a/meta-oe/recipes-navigation/geos/geos/0001-include-missing-cstdint.patch b/meta-oe/recipes-navigation/geos/geos/0001-include-missing-cstdint.patch
+deleted file mode 100644
+index 6cfd2e81bc..0000000000
+--- a/meta-oe/recipes-navigation/geos/geos/0001-include-missing-cstdint.patch
++++ /dev/null
+@@ -1,82 +0,0 @@
+-From 11b9ef265a942cb3fdd373520d0c3fce67d3cdf9 Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Thu, 26 Jan 2023 18:05:33 -0800
+-Subject: [PATCH] include missing <cstdint>
 -
-diff --git a/meta-oe/recipes-support/pcp/pcp.inc b/meta-oe/recipes-support/pcp/pcp.inc
-index 708ebfe7ab..276be7ffaa 100644
---- a/meta-oe/recipes-support/pcp/pcp.inc
-+++ b/meta-oe/recipes-support/pcp/pcp.inc
-@@ -11,21 +11,26 @@ SRC_URI = "https://performancecopilot.jfrog.io/artifactory/pcp-source-release/${
-            file://0001-configure-Limit-the-header-search-to-sysroot.patch \
-            file://config.linux \
- 	   "
--SRC_URI[sha256sum] = "6ef33b7aa14c09860ba7cd8873e76d38ccd24eab0c94a50e235f813e77fe3610"
-+SRC_URI[sha256sum] = "dacf92ba195f1f2ea8f40bf0c455d2cd2456273a1e30dcc3ee5b5bfd099a99ee"
- 
- inherit setuptools3-base pkgconfig autotools-brokensep
- 
- # Specify any options you want to pass to the configure script using EXTRA_OECONF:
- CACHED_CONFIGUREVARS = "PACKAGE_DISTRIBUTION=arch"
--EXTRA_OECONF:append = " --with-dstat-symlink=yes --with-infiniband=no \
--                --with-pmdapodman=no --with-python=no --with-python3=yes --with-perl=no \
--		--with-pmdabcc=no --with-pmdajson=no  --with-perfevent=no \
--		--with-pmdabcc=yes \
--		--with-rundir=${localstatedir}/run \
--                --with-sysconfigdir=${sysconfdir} \
--                --with-logdir=${localstatedir}/log \
--                --with-docdir=${docdir} \
--                "
-+EXTRA_OECONF:append = "\
-+                    --with-dstat-symlink=yes \
-+                    --with-infiniband=no \
-+                    --with-python=no \
-+                    --with-perl=no \
-+                    --with-python3=yes \
-+                    --with-pmdajson=no  \
-+                    --with-perfevent=no \
-+                    --with-pmdabcc=yes \
-+                    --with-rundir=${localstatedir}/run \
-+                    --with-sysconfigdir=${sysconfdir} \
-+                    --with-logdir=${localstatedir}/log \
-+                    --with-docdir=${docdir} \
-+                    "
- 
- PACKAGECONFIG[qt5] = "--with-qt=yes --with-qt3d=yes,--with-qt=no --with-qt3d=no,qtbase qt3d"
- 
-diff --git a/meta-oe/recipes-support/pcp/pcp/0001-Remove-unsuitble-part-for-cross-compile.patch b/meta-oe/recipes-support/pcp/pcp/0001-Remove-unsuitble-part-for-cross-compile.patch
-index 292499850e..abf4aee61d 100644
---- a/meta-oe/recipes-support/pcp/pcp/0001-Remove-unsuitble-part-for-cross-compile.patch
-+++ b/meta-oe/recipes-support/pcp/pcp/0001-Remove-unsuitble-part-for-cross-compile.patch
-@@ -11,11 +11,9 @@ Signed-off-by: Lei Maohui <leimaohui@fujitsu.com>
-  src/libpcp/src/GNUmakefile | 1 -
-  2 files changed, 7 deletions(-)
- 
--diff --git a/configure.ac b/configure.ac
--index 5b25382..5d24714 100644
- --- a/configure.ac
- +++ b/configure.ac
--@@ -623,12 +623,6 @@ fi
-+@@ -607,12 +607,6 @@ fi
-  which=$WHICH
-  AC_SUBST(which)
-  
-@@ -28,18 +26,14 @@ index 5b25382..5d24714 100644
-  ar=$AR
-  AC_SUBST(ar)
-  
--diff --git a/src/libpcp/src/GNUmakefile b/src/libpcp/src/GNUmakefile
--index 3c4ccd6..d1eba19 100644
- --- a/src/libpcp/src/GNUmakefile
- +++ b/src/libpcp/src/GNUmakefile
--@@ -176,7 +176,6 @@ exports:	exports.in mk.exports
-- # cases
-+@@ -179,8 +179,6 @@ exports:	exports.in mk.exports
-+ # consistent in all placess.
-  #
-  check.done:	$(OBJECTS)
- -	./check-statics
-+-	./check-errorcodes
-  	touch check.done
-  
-  ifneq ($(LIBTARGET),)
+-gcc 13 moved some includes around and as a result <cstdint> is no longer transitively included [1]. Explicitly include it for uint{32,64}_t.
+-
+-[1] https://gcc.gnu.org/gcc-13/porting_to.html#header-dep-changes
+-
+-Upstream-Status: Backport [https://github.com/kraj/geos/commit/0e8d4368b]
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+- include/geos/geomgraph/TopologyLocation.h   | 1 +
+- include/geos/io/WKTWriter.h                 | 1 +
+- include/geos/shape/fractal/HilbertCode.h    | 1 +
+- include/geos/shape/fractal/HilbertEncoder.h | 1 +
+- include/geos/shape/fractal/MortonCode.h     | 1 +
+- 5 files changed, 5 insertions(+)
+-
+-diff --git a/include/geos/geomgraph/TopologyLocation.h b/include/geos/geomgraph/TopologyLocation.h
+-index 4cbbacb3..a3ecd212 100644
+---- a/include/geos/geomgraph/TopologyLocation.h
+-+++ b/include/geos/geomgraph/TopologyLocation.h
+-@@ -25,6 +25,7 @@
+- #include <geos/inline.h>
+- #include <geos/geom/Location.h>
+- 
+-+#include <cstdint>
+- #include <vector>
+- #include <array>
+- #include <string>
+-diff --git a/include/geos/io/WKTWriter.h b/include/geos/io/WKTWriter.h
+-index c0af8e71..0d60e975 100644
+---- a/include/geos/io/WKTWriter.h
+-+++ b/include/geos/io/WKTWriter.h
+-@@ -25,6 +25,7 @@
+- 
+- #include <string>
+- #include <cctype>
+-+#include <cstdint>
+- 
+- #ifdef _MSC_VER
+- #pragma warning(push)
+-diff --git a/include/geos/shape/fractal/HilbertCode.h b/include/geos/shape/fractal/HilbertCode.h
+-index 46012efc..beeb28c6 100644
+---- a/include/geos/shape/fractal/HilbertCode.h
+-+++ b/include/geos/shape/fractal/HilbertCode.h
+-@@ -17,6 +17,7 @@
+- 
+- #include <geos/export.h>
+- #include <string>
+-+#include <cstdint>
+- 
+- // Forward declarations
+- namespace geos {
+-diff --git a/include/geos/shape/fractal/HilbertEncoder.h b/include/geos/shape/fractal/HilbertEncoder.h
+-index 61c0010d..0126d3d9 100644
+---- a/include/geos/shape/fractal/HilbertEncoder.h
+-+++ b/include/geos/shape/fractal/HilbertEncoder.h
+-@@ -16,6 +16,7 @@
+- #pragma once
+- 
+- #include <geos/export.h>
+-+#include <cstdint>
+- #include <string>
+- #include <vector>
+- 
+-diff --git a/include/geos/shape/fractal/MortonCode.h b/include/geos/shape/fractal/MortonCode.h
+-index 6743f87c..ad4a42e7 100644
+---- a/include/geos/shape/fractal/MortonCode.h
+-+++ b/include/geos/shape/fractal/MortonCode.h
+-@@ -17,6 +17,7 @@
+- 
+- #include <geos/export.h>
+- #include <string>
+-+#include <cstdint>
+- 
+- // Forward declarations
+- namespace geos {
 --- 
--2.25.1
+-2.39.1
 -
-diff --git a/meta-oe/recipes-support/pcp/pcp/0001-configure-Limit-the-header-search-to-sysroot.patch b/meta-oe/recipes-support/pcp/pcp/0001-configure-Limit-the-header-search-to-sysroot.patch
-index 591f94f374..b03c48e581 100644
---- a/meta-oe/recipes-support/pcp/pcp/0001-configure-Limit-the-header-search-to-sysroot.patch
-+++ b/meta-oe/recipes-support/pcp/pcp/0001-configure-Limit-the-header-search-to-sysroot.patch
-@@ -14,11 +14,9 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
-  configure.ac | 20 ++++++++++----------
-  1 file changed, 10 insertions(+), 10 deletions(-)
+diff --git a/meta-oe/recipes-navigation/geos/geos_3.9.4.bb b/meta-oe/recipes-navigation/geos/geos_3.12.0.bb
+similarity index 76%
+rename from meta-oe/recipes-navigation/geos/geos_3.9.4.bb
+rename to meta-oe/recipes-navigation/geos/geos_3.12.0.bb
+index 558acd92bf..b77f3af2a8 100644
+--- a/meta-oe/recipes-navigation/geos/geos_3.9.4.bb
++++ b/meta-oe/recipes-navigation/geos/geos_3.12.0.bb
+@@ -5,9 +5,8 @@ SECTION = "libs"
+ LICENSE = "LGPL-2.1-or-later"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
  
--diff --git a/configure.ac b/configure.ac
--index 5d24714..4e2d8ec 100644
- --- a/configure.ac
- +++ b/configure.ac
--@@ -913,7 +913,7 @@ AC_DEFUN([PCP_CHECK_PYTHON_HEADER],
-+@@ -907,7 +907,7 @@ AC_DEFUN([PCP_CHECK_PYTHON_HEADER],
-    [ PY_MAJOR="$1"
-      PY_MINOR="$2"
-      PY_VERSION="python$PY_MAJOR.$PY_MINOR"
-@@ -27,7 +25,7 @@ index 5d24714..4e2d8ec 100644
-      saved_CFLAGS="$CFLAGS"
-      saved_CPPFLAGS="$CPPFLAGS"
-      CFLAGS="$CFLAGS $PY_INCLUDE_DIRS"
--@@ -1524,7 +1524,7 @@ AC_SUBST(qmake)
-+@@ -1603,7 +1603,7 @@ AC_SUBST(qmake)
-  
-  enable_qt3d=false
-  AS_IF([test "x$do_qt3d" != "xno"], [
-@@ -36,45 +34,7 @@ index 5d24714..4e2d8ec 100644
-      then
-  	enable_qt3d=$enable_qt
-      elif test x"$do_qt3d" = x"yes"
--@@ -3810,13 +3810,13 @@ then
-- 
--     saved_CFLAGS="$CFLAGS"
--     saved_CPPFLAGS="$CPPFLAGS"
---    NSS_INC_DIRS="-I/usr/include/nss -I/usr/include/nss3"
---    NSPR_INC_DIRS="-I/usr/include/nspr -I/usr/include/nspr4"
--+    NSS_INC_DIRS="-I${STAGING_INCDIR}/nss -I${STAGING_INCDIR}/nss3"
--+    NSPR_INC_DIRS="-I${STAGING_INCDIR}/nspr -I${STAGING_INCDIR}/nspr4"
--     CFLAGS="$CFLAGS $NSS_INC_DIRS $NSPR_INC_DIRS"
--     CPPFLAGS="$CPPFLAGS $NSS_INC_DIRS $NSPR_INC_DIRS"
-- 
---    AC_CHECK_HEADERS([nss/nss.h], [NSSCFLAGS=-I/usr/include/nss], [
---	AC_CHECK_HEADERS([nss3/nss.h], [NSSCFLAGS=-I/usr/include/nss3], [
--+    AC_CHECK_HEADERS([nss/nss.h], [NSSCFLAGS=-I${STAGING_INCDIR}/nss], [
--+	AC_CHECK_HEADERS([nss3/nss.h], [NSSCFLAGS=-I${STAGING_INCDIR}/nss3], [
-- 	    enable_secure=false
-- 	    if test "$do_secure" = "yes"
-- 	    then
--@@ -3826,8 +3826,8 @@ then
--     ])
--     AC_SUBST(NSSCFLAGS)
-- 
---    AC_CHECK_HEADERS([nspr/nspr.h], [NSPRCFLAGS=-I/usr/include/nspr], [
---	AC_CHECK_HEADERS([nspr4/nspr.h], [NSPRCFLAGS=-I/usr/include/nspr4], [
--+    AC_CHECK_HEADERS([nspr/nspr.h], [NSPRCFLAGS=-I${STAGING_INCDIR}/nspr], [
--+	AC_CHECK_HEADERS([nspr4/nspr.h], [NSPRCFLAGS=-I${STAGING_INCDIR}/nspr4], [
-- 	    enable_secure=false
-- 	    if test "$do_secure" = "yes"
-- 	    then
--@@ -3837,7 +3837,7 @@ then
--     ])
--     AC_SUBST(NSPRCFLAGS)
-- 
---    AC_CHECK_HEADERS([sasl/sasl.h], [SASLCFLAGS=-I/usr/include/sasl], [
--+    AC_CHECK_HEADERS([sasl/sasl.h], [SASLCFLAGS=-I${STAGING_INCDIR}/sasl], [
-- 	enable_secure=false
-- 	if test "$do_secure" = "yes"
-- 	then
--@@ -3938,7 +3938,7 @@ AC_SUBST(enable_decompression)
-+@@ -3699,7 +3699,7 @@ AC_SUBST(enable_decompression)
-  AC_SUBST(enable_lzma)
-  
-  dnl check for array sessions
-@@ -83,6 +43,3 @@ index 5d24714..4e2d8ec 100644
-  then
-      pcp_mpi_dirs=libpcp_mpi\ libpcp_mpiread
-  else
---- 
--2.35.1
--
-diff --git a/meta-oe/recipes-support/pcp/pcp_5.3.6.bb b/meta-oe/recipes-support/pcp/pcp_6.0.5.bb
-similarity index 88%
-rename from meta-oe/recipes-support/pcp/pcp_5.3.6.bb
-rename to meta-oe/recipes-support/pcp/pcp_6.0.5.bb
-index 0543d77a78..b337df6ea4 100644
---- a/meta-oe/recipes-support/pcp/pcp_5.3.6.bb
-+++ b/meta-oe/recipes-support/pcp/pcp_6.0.5.bb
-@@ -18,17 +18,26 @@ SRC_URI += "file://0001-Remove-unsuitble-part-for-cross-compile.patch \
- export PCP_DIR="${RECIPE_SYSROOT_NATIVE}"
- #export PCP_RUN_DIR="${RECIPE_SYSROOT_NATIVE}"
- EXTRA_OEMAKE = "CC="${CC}" LD="${LD}""
--inherit useradd systemd features_check
-+inherit useradd systemd features_check python3targetconfig
+-SRC_URI = "http://download.osgeo.org/${BPN}/${BP}.tar.bz2 \
+-           file://0001-include-missing-cstdint.patch"
+-SRC_URI[sha256sum] = "70dff2530d8cd2dfaeeb91a5014bd17afb1baee8f0e3eb18e44d5b4dbea47b14"
++SRC_URI = "http://download.osgeo.org/${BPN}/${BP}.tar.bz2"
++SRC_URI[sha256sum] = "d96db96011259178a35555a0f6d6e75a739e52a495a6b2aa5efb3d75390fbc39"
  
- # Needs libx11
- REQUIRED_DISTRO_FEATURES = "x11"
+ inherit autotools pkgconfig binconfig
  
- SYSTEMD_AUTO_ENABLE:${PN} = "enable"
--SYSTEMD_SERVICE:${PN} = "pmcd.service pmcd.service pmie_check.service pmie_farm_check.service \
--                         pmlogger_daily.service pmlogger_farm_check.service pmfind.service \
--                         pmie_daily.service  pmlogger.service pmlogger_daily_report.service \
--                         pmproxy.service pmie.service pmie_farm.service pmlogger_check.service \
--                         pmlogger_farm.service"
-+SYSTEMD_SERVICE:${PN} = "\
-+                        pmie_farm_check.service \
-+                        pmie_farm.service \
-+                        pmfind.service \
-+                        pmlogger_farm_check.service \
-+                        pmcd.service \
-+                        pmie.service \
-+                        pmlogger_daily.service \
-+                        pmlogger.service \
-+                        pmlogger_farm.service \
-+                        pmie_check.service \
-+                        pmproxy.service \
-+                        pmlogger_check.service \
-+                        pmie_daily.service"
- 
- USERADD_PACKAGES = "${PN}"
- USERADD_PARAM:${PN} = "--system --home ${localstatedir}/lib/pcp --no-create-home \
-@@ -88,7 +97,7 @@ do_install () {
- 
- PACKAGES += " ${PN}-export-zabbix-agent ${PN}-testsuite \
- 	libpcp-gui2  libpcp-gui2-dev \
--	libpcp-import1 \
-+	libpcp-import1 libpcp-archive1 \
- 	libpcp-mmv1 libpcp-mmv1-dev \
- 	libpcp-pmda3 libpcp-pmda3-dev \
- 	libpcp-trace2 libpcp-trace2-dev \
-@@ -97,6 +106,8 @@ PACKAGES += " ${PN}-export-zabbix-agent ${PN}-testsuite \
- "
- FILES:libpcp-gui2 = "${libdir}/libpcp_gui.so.2 \
- "	
-+FILES:libpcp-archive1 = "${libdir}/libpcp_archive.so.1 \
-+"	
- FILES:libpcp-gui2-dev = " \
- 	${libdir}/libpcp_gui.so \
- 	${libdir}/libpcp_gui.a \
-@@ -166,6 +177,7 @@ FILES:${PN} = " \
- 	${datadir}/zsh \
- 	${systemd_system_unitdir}/ \
- 	${libdir}/pcp/ \
-+	${libdir}/sysusers.d/pcp.conf \
- 	${datadir}/pcp \
- 	${libdir}/*.sh \
- 	${datadir}/man \
-@@ -184,7 +196,7 @@ FILES:${PN}-export-zabbix-agent += " \
- 	${mandir}/man3/zbxpcp.3.gz \
- 	${libdir}/zabbix \
- "
--FILES:${PN}-testsuite = "${localstatedir}/lib/pcp/testsuite/"
-+FILES:${PN}-testsuite = "${localstatedir}/lib/pcp/testsuite/ ${libdir}/sysusers.d/pcp-testsuite.conf"
- FILES:python3-${PN} = "${PYTHON_SITEPACKAGES_DIR}"
- FILES:${PN}-dev += " \
-         ${includedir}/pcp \
-@@ -222,7 +234,3 @@ FILES:${PN}-dev += " \
-         ${datadir}/man/man3/pms* \
-         ${datadir}/man/man3/pmt* \
- "
--#| chkacc1.c:8:10: fatal error: localconfig.h: No such file or directory
--#|     8 | #include "localconfig.h"
--#|       |          ^~~~~~~~~~~~~~~
--PARALLEL_MAKE = ""
 -- 
 2.41.0
 
