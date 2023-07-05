@@ -1,93 +1,113 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <ross.burton@arm.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D3F53EB64DA
-	for <webhook@archiver.kernel.org>; Wed,  5 Jul 2023 17:26:04 +0000 (UTC)
-Received: from mail-pf1-f176.google.com (mail-pf1-f176.google.com [209.85.210.176])
- by mx.groups.io with SMTP id smtpd.web10.1024.1688577956331634649
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C27D0EB64DA
+	for <webhook@archiver.kernel.org>; Wed,  5 Jul 2023 17:26:14 +0000 (UTC)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by mx.groups.io with SMTP id smtpd.web11.1044.1688577965800761975
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 05 Jul 2023 10:25:56 -0700
+ Wed, 05 Jul 2023 10:26:06 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=qnCxm2Gv;
- spf=pass (domain: gmail.com, ip: 209.85.210.176, mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f176.google.com with SMTP id d2e1a72fcca58-666e64e97e2so3506698b3a.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 05 Jul 2023 10:25:56 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1688577955; x=1691169955;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=txbZWotzreSCRT9knn0N7wnWv2D5uw2jYW0Y8zYl0Zo=;
-        b=qnCxm2Gv8fvxpZCfIkCMUzdPEP0HV/qKQKZOzclMJbwKYGSTZtyZ5qrkY2Sa1my3PT
-         592q1HxBIMmvRooGuoQLyoPXyKbQitnpr6Skiz6RsIKnRc1YBb/fsOf4c4VKQv5MxquF
-         UXbckID8jdXQ2uoA+AN1Lk/1Y4W8uQnsShapTwvCqINHElpKRgDAJ58+k/qjLknkinkA
-         zRFGj2pNfR18hy7RG+VOf/Vot+9wT1lE9GNn6t5iMH5HhhDWTA8XDLxYqBgG9uttfjdv
-         sqPp4CjpMLt9lE0MTKglu1F2VAp2Yrt78P/noAuZkPERzjZizYzyEqP4zNuP54icVJLN
-         Uiug==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1688577955; x=1691169955;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=txbZWotzreSCRT9knn0N7wnWv2D5uw2jYW0Y8zYl0Zo=;
-        b=TjNnexM8ky6ri65O1yiAy6N0sq7pU5iXmTL0kApUBueCqAHjT2ZSvCSlH/k9QY/gjY
-         w/wjlFF6zZN4C9UVAjpHUKPqSUTuJioOQ/QqYCil0G9jM2QaGluT8gXSahalySGx10Yc
-         iBmwFlOlTqXIdGymUmRv8d/j4Lb1e9n/LMFcxpxI9x1+ulYa2yrHRKxob5CEgYLXCmHZ
-         BlEGBiG8ZBj4lLVcmfw9YkkIowDm9jiXIfsSE7n2tDEEuFn1ATeUC40Sqe06AdbF8ssS
-         ry7vf6RU5/NYulOMrSr/hX95eJkklYL256v1gd3C9g3PlN5tRXn14p5Z0NOoi4XmHZQ7
-         euOw==
-X-Gm-Message-State: ABy/qLZDS8+5+rC76oxB1i0sIGekJfYGbS5p5hkh7vGt+Ycub2JNx8x/
-	y7h5PuKFk0qicNAPDKKzBQefu4p3shY=
-X-Google-Smtp-Source: APBJJlEO/9fQsoly8Xp3Yn1EFY+ydVwXHsjgTHy49aWTyRPpiwZyfVAOuUykfHvCz8Au8YCxqhJe8g==
-X-Received: by 2002:a05:6a00:c8a:b0:65b:351a:e70a with SMTP id a10-20020a056a000c8a00b0065b351ae70amr17207957pfv.29.1688577955323;
-        Wed, 05 Jul 2023 10:25:55 -0700 (PDT)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9181:d380::81d4])
-        by smtp.gmail.com with ESMTPSA id w6-20020aa78586000000b0067b384d5955sm13869174pfn.26.2023.07.05.10.25.54
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 05 Jul 2023 10:25:54 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
+ dkim=missing; spf=pass (domain: arm.com, ip: 217.140.110.172, mailfrom: ross.burton@arm.com)
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 0F9EE1763;
+	Wed,  5 Jul 2023 10:26:47 -0700 (PDT)
+Received: from oss-tx204.lab.cambridge.arm.com (usa-sjc-imap-foss1.foss.arm.com [10.121.207.14])
+	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 7EDA63F762;
+	Wed,  5 Jul 2023 10:26:04 -0700 (PDT)
+From: ross.burton@arm.com
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 3/4] geos: Use cmake directly
-Date: Wed,  5 Jul 2023 10:25:49 -0700
-Message-ID: <20230705172550.3371930-3-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.41.0
-In-Reply-To: <20230705172550.3371930-1-raj.khem@gmail.com>
-References: <20230705172550.3371930-1-raj.khem@gmail.com>
+Cc: nd@arm.com
+Subject: [PATCH 1/2] poppler: fix missing include
+Date: Wed,  5 Jul 2023 18:26:00 +0100
+Message-Id: <20230705172601.3887976-1-ross.burton@arm.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 05 Jul 2023 17:26:04 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103670
+ <openembedded-devel@lists.openembedded.org>; Wed, 05 Jul 2023 17:26:14 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103672
 
-configure is a wrapper script around cmake invocations which are
-already taken care of by cmake bbclass. e.g. specifying
-CMAKE_INSTALL_PREFIX or CMAKE_BUILD_TYPE
+From: Ross Burton <ross.burton@arm.com>
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Backport a patch to ensure that stdio.h is included before jpeglib.h.
+
+Signed-off-by: Ross Burton <ross.burton@arm.com>
 ---
- meta-oe/recipes-navigation/geos/geos_3.12.0.bb | 4 +---
- 1 file changed, 1 insertion(+), 3 deletions(-)
+ .../poppler/poppler/jpeg-stdio.patch          | 41 +++++++++++++++++++
+ .../poppler/poppler_23.04.0.bb                |  1 +
+ 2 files changed, 42 insertions(+)
+ create mode 100644 meta-oe/recipes-support/poppler/poppler/jpeg-stdio.pa=
+tch
 
-diff --git a/meta-oe/recipes-navigation/geos/geos_3.12.0.bb b/meta-oe/recipes-navigation/geos/geos_3.12.0.bb
-index b77f3af2a8..95cb29775a 100644
---- a/meta-oe/recipes-navigation/geos/geos_3.12.0.bb
-+++ b/meta-oe/recipes-navigation/geos/geos_3.12.0.bb
-@@ -8,9 +8,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
- SRC_URI = "http://download.osgeo.org/${BPN}/${BP}.tar.bz2"
- SRC_URI[sha256sum] = "d96db96011259178a35555a0f6d6e75a739e52a495a6b2aa5efb3d75390fbc39"
- 
--inherit autotools pkgconfig binconfig
--
--EXTRA_OECONF += "--enable-inline=no"
-+inherit cmake pkgconfig binconfig
- 
- PACKAGES =+ "geoslib ${PN}-c1"
- 
--- 
-2.41.0
+diff --git a/meta-oe/recipes-support/poppler/poppler/jpeg-stdio.patch b/m=
+eta-oe/recipes-support/poppler/poppler/jpeg-stdio.patch
+new file mode 100644
+index 0000000000..70ba1cf123
+--- /dev/null
++++ b/meta-oe/recipes-support/poppler/poppler/jpeg-stdio.patch
+@@ -0,0 +1,41 @@
++From 2986f06c7cc9d64a506ebe861b8bf38f73386e86 Mon Sep 17 00:00:00 2001
++From: Jordan Abrahams-Whitehead <ajordanr@google.com>
++Date: Tue, 16 May 2023 18:52:19 +0000
++Subject: [PATCH] Add missing #include <cstdio> prior to jpeglib.h
++
++Fixes #1398
++
++Upstream-Status: Backport
++Signed-off-by: Ross Burton <ross.burton@arm.com>
++---
++ goo/JpegWriter.cc              | 2 +-
++ poppler/ImageEmbeddingUtils.cc | 1 +
++ 2 files changed, 2 insertions(+), 1 deletion(-)
++
++diff --git a/goo/JpegWriter.cc b/goo/JpegWriter.cc
++index ca69fd055..566ee38f8 100644
++--- a/goo/JpegWriter.cc
+++++ b/goo/JpegWriter.cc
++@@ -23,7 +23,7 @@
++ #ifdef ENABLE_LIBJPEG
++=20
++ #    include "poppler/Error.h"
++-
+++#    include <cstdio>
++ extern "C" {
++ #    include <jpeglib.h>
++ }
++diff --git a/poppler/ImageEmbeddingUtils.cc b/poppler/ImageEmbeddingUtil=
+s.cc
++index 0c13fe968..07b9dfb62 100644
++--- a/poppler/ImageEmbeddingUtils.cc
+++++ b/poppler/ImageEmbeddingUtils.cc
++@@ -14,6 +14,7 @@
++=20
++ #include <memory>
++ #ifdef ENABLE_LIBJPEG
+++#    include <cstdio>
++ extern "C" {
++ #    include <jpeglib.h>
++ }
++--=20
++GitLab
+diff --git a/meta-oe/recipes-support/poppler/poppler_23.04.0.bb b/meta-oe=
+/recipes-support/poppler/poppler_23.04.0.bb
+index 099be58a42..896176801b 100644
+--- a/meta-oe/recipes-support/poppler/poppler_23.04.0.bb
++++ b/meta-oe/recipes-support/poppler/poppler_23.04.0.bb
+@@ -7,6 +7,7 @@ SRC_URI =3D "http://poppler.freedesktop.org/${BP}.tar.xz =
+\
+            file://0001-Do-not-overwrite-all-our-build-flags.patch \
+            file://basename-include.patch \
+            file://0001-cmake-Do-not-use-isystem.patch \
++           file://jpeg-stdio.patch \
+            "
+ SRC_URI[sha256sum] =3D "b6d893dc7dcd4138b9e9df59a13c59695e50e80dc5c2cace=
+e0674670693951a1"
+=20
+--=20
+2.34.1
 
 
