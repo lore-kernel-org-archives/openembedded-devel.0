@@ -1,284 +1,318 @@
-Return-Path: <quaresma.jose@gmail.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id F338FEB64DD
-	for <webhook@archiver.kernel.org>; Wed,  5 Jul 2023 17:37:24 +0000 (UTC)
-Received: from mail-vs1-f44.google.com (mail-vs1-f44.google.com [209.85.217.44])
- by mx.groups.io with SMTP id smtpd.web10.1341.1688578644025707910
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 27788EB64DA
+	for <webhook@archiver.kernel.org>; Wed,  5 Jul 2023 17:57:55 +0000 (UTC)
+Received: from mail-pl1-f178.google.com (mail-pl1-f178.google.com [209.85.214.178])
+ by mx.groups.io with SMTP id smtpd.web11.1903.1688579871724300313
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 05 Jul 2023 10:37:24 -0700
+ Wed, 05 Jul 2023 10:57:51 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=Hp14JjIG;
- spf=pass (domain: gmail.com, ip: 209.85.217.44, mailfrom: quaresma.jose@gmail.com)
-Received: by mail-vs1-f44.google.com with SMTP id ada2fe7eead31-440c14d6a5eso2147807137.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 05 Jul 2023 10:37:23 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20221208 header.b=htxh3RaZ;
+ spf=pass (domain: gmail.com, ip: 209.85.214.178, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f178.google.com with SMTP id d9443c01a7336-1b8b318c5a7so5837065ad.3
+        for <openembedded-devel@lists.openembedded.org>; Wed, 05 Jul 2023 10:57:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1688578643; x=1691170643;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=Y/ipfUiKVDaGRMkjOIyhMiPAfQ08FxkGqKMwe+2VnLc=;
-        b=Hp14JjIGpIBLAmvMb54Q/oRXzA2w43S/kThUU8JzF1yV7V6/AJitJXoB8ES8p9poas
-         9OcDFwTvJS1VyxV3tJIIYRDd4eNaLJR8JDii/zgRCV8zCb+vMvzGHR54ibzpVN4kM445
-         aygV0lCa8kOjACcP71FS9OzaHKbKNRkxrscu1lSF1B7affzj+UZ83iQFeUHIaOJpy6LT
-         Vt86MlnMKzm8rxfrJoZyLHxXdK+Fs+9EhagBHOG0Sh7yjQIoGU/7GnPaSY0wtRbzfo+n
-         ijbIWupsjUxtuvrJHV6Pgo+bpUMyBJa77lBr16J0NuTpIa0kQW83S/AI+zYtvkXSynp8
-         4uWA==
+        d=gmail.com; s=20221208; t=1688579871; x=1691171871;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=ZdDiL8MEpL2tB1LGbnwHXUwwbsQXeCc5PNnqVxU5ujA=;
+        b=htxh3RaZa41fkY65V+YdEIuVxOeDag7nubrzS4e38gAUVvuwaE/fsTbmRAD1FGiFAJ
+         fKtH+1hXWZiY/BS2Okm1PWDhmZDsWwvyMbdMQNTK+27yKvZWcuW5QzLkgIyOIaXPpb23
+         84tNke5+8L8lsvntbWgXVa/++jCg404l9KAf0PlR4Na2aPsIUccU3+wJ/agLsHbweNzl
+         tNNF8eZtBU0hT1BILivsLtRHYCa7GbP2of5Ip/GH1oTTSqf2rXe3MHMVDHz3HmevSl7C
+         /ILOUcxsKM56i0h8BBXObZMp+HOirz5HekWNd/mAD6BrawNFk+YYlhSKgDC07W6xipEy
+         aX0Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1688578643; x=1691170643;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=Y/ipfUiKVDaGRMkjOIyhMiPAfQ08FxkGqKMwe+2VnLc=;
-        b=Zxqg+BwNeCC1OCVNA2BYUDUd6yjACwYkFnw+2qHn49X90vMIZPSomBU8RokgalGVbC
-         W9vaYtZYDTwCDztuE6GSMqxDAQ6vtJZGq7OeDKGDx5V2QhOUI6pBM+dT5kFUAgHxY5/U
-         02vNpcsjpU9PWOnZ5DznLKCqvUK3CINqmvzEwbMrNBJdbVG86w+wD995MTrbxeboy8Ef
-         fwYMIPmtfUKIzcg3BImWldvam+8552WWFClY8eUZT0db2L60uePWevyTAdWGAH0Ga6GD
-         PZiCuriaFSJSKAdqcjYC1xIwqa04b4CNs5+rgzDjxiSEmfgQZSYaZ33SeDIC1zgKdRi/
-         XrDw==
-X-Gm-Message-State: ABy/qLZVzNB2Sxe6s4Ohw0MWE8FM+gKBM5zHvhA8qw82427a6pHIFLQ8
-	aAuVdSgLIqsK+ubwgSqcBmYkmKxDw5XcSMbM4JQ=
-X-Google-Smtp-Source: APBJJlE57WQUkfO6xNGDoNtoestsvCFbCk7a8CzjnhmSHlKTe9OKqf7l7NnbPjkBYOnotU8Qbmk+b609y0RLpE+PTSg=
-X-Received: by 2002:a05:6102:282a:b0:443:8549:163e with SMTP id
- ba10-20020a056102282a00b004438549163emr7629713vsb.34.1688578641998; Wed, 05
- Jul 2023 10:37:21 -0700 (PDT)
+        d=1e100.net; s=20221208; t=1688579871; x=1691171871;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=ZdDiL8MEpL2tB1LGbnwHXUwwbsQXeCc5PNnqVxU5ujA=;
+        b=Ce5d4A8qQ6vT+TYVPLf0B0e3qg//Z1P7pKtCXLWBHMTbykSN/cB0Sq9t9XuwU/8yba
+         3EPrJ1B2mksTe1shbWVZzB357w/XRZuvJLrxG9rv0y9n6fiXlBRQIGHVK3eLe0jvc7OU
+         nO6QBc2jbcrX8E5jIHy2JEhbBoq0nNPIOB8FH5t8ewR6eDldJ0H2xUayAZyxGuDqc/Bk
+         y9ZDiGk/eO/lpJscvLkX3yoWwxrrtczYWnjf0LJX3P2geQFaQp+jAmaHuUAXek/GoARs
+         cH9NmU49NbCOJfAGvTeb3mPiQJe49vN3STtYGX3hKOHoKK1DggWUMEppQbyd2gsMwByJ
+         O+Aw==
+X-Gm-Message-State: ABy/qLbTdlXQ1do7phaNGvm2N9nojM4OLC4YOPyE5WGcADnVAqbz2Tk5
+	yXXM6XBowi7RxtLtwV41Z3T4F/RWbbI=
+X-Google-Smtp-Source: APBJJlFjnVElFSAAgY+Xf3CQ8h/iIq0J6gCBWK8tCeyd9X5vjwQO3A1C/m+ZYX2z9PQpc1NYBKV8Tw==
+X-Received: by 2002:a17:902:cec7:b0:1b8:ae62:a239 with SMTP id d7-20020a170902cec700b001b8ae62a239mr3464475plg.34.1688579870581;
+        Wed, 05 Jul 2023 10:57:50 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9181:d380::81d4])
+        by smtp.gmail.com with ESMTPSA id s7-20020a170902988700b001ac2be26340sm19391517plp.222.2023.07.05.10.57.49
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 05 Jul 2023 10:57:49 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [PATCH v2 2/2] python3-grpcio: Upgrade to 1.56.0
+Date: Wed,  5 Jul 2023 10:57:46 -0700
+Message-ID: <20230705175746.3944873-2-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.41.0
+In-Reply-To: <20230705175746.3944873-1-raj.khem@gmail.com>
+References: <20230705175746.3944873-1-raj.khem@gmail.com>
 MIME-Version: 1.0
-References: <20230705172550.3371930-1-raj.khem@gmail.com>
-In-Reply-To: <20230705172550.3371930-1-raj.khem@gmail.com>
-From: Jose Quaresma <quaresma.jose@gmail.com>
-Date: Wed, 5 Jul 2023 18:37:11 +0100
-Message-ID: <CANPvuRmCb3i2Z6VWTt9pgwbhMYWa0Q+oRnMBUpuMe-66r67xNQ@mail.gmail.com>
-Subject: Re: [oe] [meta-python][PATCH 1/4] python3-grpcio-tools: Upgrade to 1.56.0
-To: Khem Raj <raj.khem@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: multipart/alternative; boundary="00000000000021b8cd05ffc0da70"
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 05 Jul 2023 17:37:24 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103674
+ <openembedded-devel@lists.openembedded.org>; Wed, 05 Jul 2023 17:57:55 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103676
 
---00000000000021b8cd05ffc0da70
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ ...-Do-not-mix-C-and-C-compiler-options.patch | 16 ++----
+ .../python3-grpcio/abseil-ppc-fixes.patch     | 37 +++++---------
+ .../python/python3-grpcio/boring_ssl.patch    | 50 -------------------
+ .../ppc-boringssl-support.patch               |  8 +--
+ ...cio_1.51.1.bb => python3-grpcio_1.56.0.bb} |  8 +--
+ 5 files changed, 27 insertions(+), 92 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python3-grpcio/boring_ssl.patch
+ rename meta-python/recipes-devtools/python/{python3-grpcio_1.51.1.bb => python3-grpcio_1.56.0.bb} (86%)
 
-Hi Khem,
+diff --git a/meta-python/recipes-devtools/python/python3-grpcio/0001-setup.py-Do-not-mix-C-and-C-compiler-options.patch b/meta-python/recipes-devtools/python/python3-grpcio/0001-setup.py-Do-not-mix-C-and-C-compiler-options.patch
+index 1f465dbb6e..13911ddcf3 100644
+--- a/meta-python/recipes-devtools/python/python3-grpcio/0001-setup.py-Do-not-mix-C-and-C-compiler-options.patch
++++ b/meta-python/recipes-devtools/python/python3-grpcio/0001-setup.py-Do-not-mix-C-and-C-compiler-options.patch
+@@ -29,11 +29,9 @@ Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+  src/python/grpcio/commands.py |  5 ++++-
+  2 files changed, 11 insertions(+), 5 deletions(-)
+ 
+-diff --git a/setup.py b/setup.py
+-index 3a50c97..bb2386d 100644
+ --- a/setup.py
+ +++ b/setup.py
+-@@ -205,8 +205,11 @@ def check_linker_need_libatomic():
++@@ -206,8 +206,11 @@ def check_linker_need_libatomic():
+      """Test if linker on system needs libatomic."""
+      code_test = (b'#include <atomic>\n' +
+                   b'int main() { return std::atomic<int64_t>{}; }')
+@@ -47,7 +45,7 @@ index 3a50c97..bb2386d 100644
+                                  stdin=PIPE,
+                                  stdout=PIPE,
+                                  stderr=PIPE)
+-@@ -215,8 +218,8 @@ def check_linker_need_libatomic():
++@@ -216,8 +219,8 @@ def check_linker_need_libatomic():
+          return False
+      # Double-check to see if -latomic actually can solve the problem.
+      # https://github.com/grpc/grpc/issues/22491
+@@ -58,15 +56,14 @@ index 3a50c97..bb2386d 100644
+                                  stdin=PIPE,
+                                  stdout=PIPE,
+                                  stderr=PIPE)
+-diff --git a/src/python/grpcio/commands.py b/src/python/grpcio/commands.py
+-index d93b6c7..a8c4a51 100644
+ --- a/src/python/grpcio/commands.py
+ +++ b/src/python/grpcio/commands.py
+-@@ -228,7 +228,10 @@ class BuildExt(build_ext.build_ext):
++@@ -228,8 +228,10 @@ class BuildExt(build_ext.build_ext):
+              """
+              try:
+                  # TODO(lidiz) Remove the generated a.out for success tests.
+--                cc_test = subprocess.Popen(['cc', '-x', 'c', '-std=c++14', '-'],
++-                cc = os.environ.get('CC', 'cc')
++-                cc_test = subprocess.Popen([cc, '-x', 'c', '-std=c++14', '-'],
+ +                cc_test, cc_args = os.environ.get('CC').split(' ', 1) or 'gcc'
+ +                if not cc_args:
+ +                    cc_args = "-g"
+@@ -74,6 +71,3 @@ index d93b6c7..a8c4a51 100644
+                                             stdin=subprocess.PIPE,
+                                             stdout=subprocess.PIPE,
+                                             stderr=subprocess.PIPE)
+--- 
+-2.25.1
+-
+diff --git a/meta-python/recipes-devtools/python/python3-grpcio/abseil-ppc-fixes.patch b/meta-python/recipes-devtools/python/python3-grpcio/abseil-ppc-fixes.patch
+index 3de3d0f083..4100cf63f7 100644
+--- a/meta-python/recipes-devtools/python/python3-grpcio/abseil-ppc-fixes.patch
++++ b/meta-python/recipes-devtools/python/python3-grpcio/abseil-ppc-fixes.patch
+@@ -18,8 +18,6 @@ Upstream-Status: Pending
+  absl/debugging/internal/stacktrace_config.h | 2 +-
+  4 files changed, 12 insertions(+), 5 deletions(-)
+ 
+-diff --git a/absl/base/internal/unscaledcycleclock.cc b/absl/base/internal/unscaledcycleclock.cc
+-index b1c396c..d62bfd6 100644
+ --- a/absl/base/internal/unscaledcycleclock.cc
+ +++ b/absl/base/internal/unscaledcycleclock.cc
+ @@ -20,7 +20,7 @@
+@@ -40,22 +38,6 @@ index b1c396c..d62bfd6 100644
+  
+  int64_t UnscaledCycleClock::Now() {
+  #ifdef __GLIBC__
+-diff --git a/absl/base/internal/unscaledcycleclock.h b/absl/base/internal/unscaledcycleclock.h
+-index 2cbeae3..683a5ef 100644
+---- a/absl/base/internal/unscaledcycleclock.h
+-+++ b/absl/base/internal/unscaledcycleclock.h
+-@@ -46,7 +46,8 @@
+- 
+- // The following platforms have an implementation of a hardware counter.
+- #if defined(__i386__) || defined(__x86_64__) || defined(__aarch64__) || \
+--    defined(__powerpc__) || defined(__ppc__) || defined(__riscv) ||     \
+-+    ((defined(__powerpc__) || defined(__ppc__)) && defined(__GLIBC__)) || \
+-+    defined(__riscv) ||     \
+-     defined(_M_IX86) || (defined(_M_X64) && !defined(_M_ARM64EC))
+- #define ABSL_HAVE_UNSCALED_CYCLECLOCK_IMPLEMENTATION 1
+- #else
+-diff --git a/absl/debugging/internal/examine_stack.cc b/absl/debugging/internal/examine_stack.cc
+-index 5bdd341..a784e0d 100644
+ --- a/absl/debugging/internal/examine_stack.cc
+ +++ b/absl/debugging/internal/examine_stack.cc
+ @@ -33,6 +33,10 @@
+@@ -69,7 +51,7 @@ index 5bdd341..a784e0d 100644
+  #include "absl/base/attributes.h"
+  #include "absl/base/internal/raw_logging.h"
+  #include "absl/base/macros.h"
+-@@ -174,8 +178,10 @@ void* GetProgramCounter(void* const vuc) {
++@@ -174,8 +178,10 @@ void* GetProgramCounter(void* const vuc)
+      return reinterpret_cast<void*>(context->uc_mcontext.pc);
+  #elif defined(__powerpc64__)
+      return reinterpret_cast<void*>(context->uc_mcontext.gp_regs[32]);
+@@ -81,8 +63,6 @@ index 5bdd341..a784e0d 100644
+  #elif defined(__riscv)
+      return reinterpret_cast<void*>(context->uc_mcontext.__gregs[REG_PC]);
+  #elif defined(__s390__) && !defined(__s390x__)
+-diff --git a/absl/debugging/internal/stacktrace_config.h b/absl/debugging/internal/stacktrace_config.h
+-index 3929b1b..23d5e50 100644
+ --- a/absl/debugging/internal/stacktrace_config.h
+ +++ b/absl/debugging/internal/stacktrace_config.h
+ @@ -60,7 +60,7 @@
+@@ -94,6 +74,15 @@ index 3929b1b..23d5e50 100644
+  #define ABSL_STACKTRACE_INL_HEADER \
+    "absl/debugging/internal/stacktrace_powerpc-inl.inc"
+  #elif defined(__aarch64__)
+--- 
+-2.25.1
+-
++--- a/absl/base/internal/unscaledcycleclock_config.h
+++++ b/absl/base/internal/unscaledcycleclock_config.h
++@@ -21,7 +21,8 @@
++ 
++ // The following platforms have an implementation of a hardware counter.
++ #if defined(__i386__) || defined(__x86_64__) || defined(__aarch64__) || \
++-    defined(__powerpc__) || defined(__ppc__) || defined(__riscv) ||     \
+++    ((defined(__powerpc__) || defined(__ppc__)) && defined(__GLIBC__)) || \
+++    defined(__riscv) ||     \
++     defined(_M_IX86) || (defined(_M_X64) && !defined(_M_ARM64EC))
++ #define ABSL_HAVE_UNSCALED_CYCLECLOCK_IMPLEMENTATION 1
++ #else
+diff --git a/meta-python/recipes-devtools/python/python3-grpcio/boring_ssl.patch b/meta-python/recipes-devtools/python/python3-grpcio/boring_ssl.patch
+deleted file mode 100644
+index d12e35a993..0000000000
+--- a/meta-python/recipes-devtools/python/python3-grpcio/boring_ssl.patch
++++ /dev/null
+@@ -1,50 +0,0 @@
+-From f71b32eb8a5c173fc5733847437b9485d75bb2e5 Mon Sep 17 00:00:00 2001
+-From: Leon Anavi <leon.anavi@konsulko.com>
+-Date: Fri, 9 Apr 2021 14:06:36 +0300
+-Subject: [PATCH] setup.py: Fix determining target platform
+-
+-Do not poke at the build machine to determine target platform or architecture
+-pass it from environment instead for cross compiling to work
+-
+-Upstream-Status: Inappropriate [OE-Specific]
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+----
+- setup.py | 11 +++++++----
+- 1 file changed, 7 insertions(+), 4 deletions(-)
+-
+-diff --git a/setup.py b/setup.py
+-index c93d419f32..71a944a9d0 100644
+---- a/setup.py
+-+++ b/setup.py
+-@@ -116,6 +116,9 @@ def _env_bool_value(env_name, default):
+- BUILD_WITH_BORING_SSL_ASM = _env_bool_value('GRPC_BUILD_WITH_BORING_SSL_ASM',
+-                                             'True')
+- 
+-+BORING_SSL_PLATFORM = os.environ.get('GRPC_BORING_SSL_PLATFORM',
+-+                                           'True')
+-+
+- # Export this environment variable to override the platform variant that will
+- # be chosen for boringssl assembly optimizations. This option is useful when
+- # crosscompiling and the host platform as obtained by distutils.utils.get_platform()
+-@@ -336,13 +339,13 @@ if BUILD_WITH_BORING_SSL_ASM and not BUILD_WITH_SYSTEM_OPENSSL:
+-     LINUX_X86_64 = 'linux-x86_64'
+-     LINUX_ARM = 'linux-arm'
+-     LINUX_AARCH64 = 'linux-aarch64'
+--    if LINUX_X86_64 == boringssl_asm_platform:
+-+    if LINUX_X86_64 == BORING_SSL_PLATFORM:
+-         asm_key = 'crypto_linux_x86_64'
+--    elif LINUX_ARM == boringssl_asm_platform:
+-+    elif LINUX_ARM == BORING_SSL_PLATFORM:
+-         asm_key = 'crypto_linux_arm'
+--    elif LINUX_AARCH64 == boringssl_asm_platform:
+-+    elif LINUX_AARCH64 == BORING_SSL_PLATFORM:
+-         asm_key = 'crypto_linux_aarch64'
+--    elif "mac" in boringssl_asm_platform and "x86_64" in boringssl_asm_platform:
+-+    elif "mac" in boringssl_asm_platform and "x86_64" in BORING_SSL_PLATFORM:
+-         asm_key = 'crypto_mac_x86_64'
+-     else:
+-         print("ASM Builds for BoringSSL currently not supported on:",
+--- 
+-2.17.1
+-
+diff --git a/meta-python/recipes-devtools/python/python3-grpcio/ppc-boringssl-support.patch b/meta-python/recipes-devtools/python/python3-grpcio/ppc-boringssl-support.patch
+index 5c9be443d8..5dacc689fc 100644
+--- a/meta-python/recipes-devtools/python/python3-grpcio/ppc-boringssl-support.patch
++++ b/meta-python/recipes-devtools/python/python3-grpcio/ppc-boringssl-support.patch
+@@ -5,10 +5,10 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
+ 
+ --- a/third_party/boringssl-with-bazel/src/include/openssl/base.h
+ +++ b/third_party/boringssl-with-bazel/src/include/openssl/base.h
+-@@ -99,6 +99,9 @@ extern "C" {
+- #elif (defined(__PPC64__) || defined(__powerpc64__)) && defined(_LITTLE_ENDIAN)
+- #define OPENSSL_64_BIT
+- #define OPENSSL_PPC64LE
++@@ -96,6 +96,9 @@ extern "C" {
++ #elif defined(__ARMEL__) || defined(_M_ARM)
++ #define OPENSSL_32_BIT
++ #define OPENSSL_ARM
+ +#elif (defined(__PPC__) || defined(__powerpc__))
+ +#define OPENSSL_32_BIT
+ +#define OPENSSL_PPC
+diff --git a/meta-python/recipes-devtools/python/python3-grpcio_1.51.1.bb b/meta-python/recipes-devtools/python/python3-grpcio_1.56.0.bb
+similarity index 86%
+rename from meta-python/recipes-devtools/python/python3-grpcio_1.51.1.bb
+rename to meta-python/recipes-devtools/python/python3-grpcio_1.56.0.bb
+index 7a9b7d8018..33c13b0a01 100644
+--- a/meta-python/recipes-devtools/python/python3-grpcio_1.51.1.bb
++++ b/meta-python/recipes-devtools/python/python3-grpcio_1.56.0.bb
+@@ -8,13 +8,12 @@ DEPENDS += "${PYTHON_PN}-protobuf"
+ 
+ SRC_URI += "file://0001-setup.py-Do-not-mix-C-and-C-compiler-options.patch"
+ SRC_URI:append:class-target = " file://ppc-boringssl-support.patch \
+-                                file://boring_ssl.patch \
+                                 file://mips_bigendian.patch \
+                                 file://0001-Include-missing-cstdint-header.patch \
+                                 file://abseil-ppc-fixes.patch;patchdir=third_party/abseil-cpp \
+                                 file://0001-zlib-Include-unistd.h-for-open-close-C-APIs.patch \
+ "
+-SRC_URI[sha256sum] = "e6dfc2b6567b1c261739b43d9c59d201c1b89e017afd9e684d85aa7a186c9f7a"
++SRC_URI[sha256sum] = "4c08ee21b3d10315b8dc26f6c13917b20ed574cdbed2d2d80c53d5508fdcc0f2"
+ 
+ RDEPENDS:${PN} = "${PYTHON_PN}-protobuf \
+                   ${PYTHON_PN}-setuptools \
+@@ -30,11 +29,14 @@ export GRPC_PYTHON_DISABLE_LIBC_COMPATIBILITY = "1"
+ 
+ BORING_SSL_PLATFORM:arm = "linux-arm"
+ BORING_SSL_PLATFORM:x86-64 = "linux-x86_64"
++BORING_SSL_PLATFORM:aarch64 = "linux-aarch64"
+ BORING_SSL_PLATFORM ?= "unsupported"
+ export GRPC_BORING_SSL_PLATFORM = "${BORING_SSL_PLATFORM}"
++export GRPC_BUILD_OVERRIDE_BORING_SSL_ASM_PLATFORM = "${BORING_SSL_PLATFORM}"
+ 
+-BORING_SSL:x86-64 = "1"
+ BORING_SSL:arm = "1"
++BORING_SSL:x86-64 = "1"
++BORING_SSL:aarch64 = "1"
+ BORING_SSL ?= "0"
+ export GRPC_BUILD_WITH_BORING_SSL_ASM = "${BORING_SSL}"
+ 
+-- 
+2.41.0
 
-Looks like the old version was not deleted.
-
-Jose
-
-Khem Raj <raj.khem@gmail.com> escreveu no dia quarta, 5/07/2023 =C3=A0(s) 1=
-8:25:
-
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> ---
->  ...f-Disable-musttail-attribute-on-mips.patch |  8 ++++----
->  .../python/python3-grpcio-tools_1.56.0.bb     | 19 +++++++++++++++++++
->  2 files changed, 23 insertions(+), 4 deletions(-)
->  create mode 100644 meta-python/recipes-devtools/python/
-> python3-grpcio-tools_1.56.0.bb
->
-> diff --git
-> a/meta-python/recipes-devtools/python/python3-grpcio-tools/0001-protobuf-=
-Disable-musttail-attribute-on-mips.patch
-> b/meta-python/recipes-devtools/python/python3-grpcio-tools/0001-protobuf-=
-Disable-musttail-attribute-on-mips.patch
-> index 8b13d7ae21..8c70b2b6a6 100644
-> ---
-> a/meta-python/recipes-devtools/python/python3-grpcio-tools/0001-protobuf-=
-Disable-musttail-attribute-on-mips.patch
-> +++
-> b/meta-python/recipes-devtools/python/python3-grpcio-tools/0001-protobuf-=
-Disable-musttail-attribute-on-mips.patch
-> @@ -14,11 +14,11 @@ Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
->
->  --- a/third_party/protobuf/src/google/protobuf/port_def.inc
->  +++ b/third_party/protobuf/src/google/protobuf/port_def.inc
-> -@@ -255,6 +255,7 @@
-> +@@ -338,6 +338,7 @@ static_assert(PROTOBUF_ABSL_MIN(20230125
->   #error PROTOBUF_TAILCALL was previously defined
->   #endif
-> - #if __has_cpp_attribute(clang::musttail) && !defined(__arm__) && \
-> + #if __has_cpp_attribute(clang::musttail) && !defined(__arm__) &&      \
->  +    !defined(__mips__) &&                                        \
-> -     !defined(_ARCH_PPC) && !defined(__wasm__) &&                 \
-> -     !(defined(_MSC_VER) && defined(_M_IX86)) &&                  \
-> +     !defined(_ARCH_PPC) && !defined(__wasm__) &&                      \
-> +     !(defined(_MSC_VER) && defined(_M_IX86)) && !defined(__i386__) && \
->       !(defined(__NDK_MAJOR__) && __NDK_MAJOR <=3D 24)
-> diff --git a/meta-python/recipes-devtools/python/
-> python3-grpcio-tools_1.56.0.bb b/meta-python/recipes-devtools/python/
-> python3-grpcio-tools_1.56.0.bb
-> new file mode 100644
-> index 0000000000..eb1994d7ce
-> --- /dev/null
-> +++ b/meta-python/recipes-devtools/python/python3-grpcio-tools_1.56.0.bb
-> @@ -0,0 +1,19 @@
-> +DESCRIPTION =3D "Google gRPC tools"
-> +HOMEPAGE =3D "http://www.grpc.io/"
-> +SECTION =3D "devel/python"
-> +
-> +LICENSE =3D "Apache-2.0"
-> +LIC_FILES_CHKSUM =3D
-> "file://PKG-INFO;beginline=3D8;endline=3D8;md5=3D7145f7cdd263359b62d342a0=
-2f005515"
-> +
-> +inherit pypi setuptools3
-> +
-> +DEPENDS +=3D "${PYTHON_PN}-grpcio"
-> +
-> +SRC_URI +=3D
-> "file://0001-setup.py-Do-not-mix-C-and-C-compiler-options.patch \
-> +            file://0001-protobuf-Disable-musttail-attribute-on-mips.patc=
-h
-> \
-> +            "
-> +SRC_URI[sha256sum] =3D
-> "39f5877cea514b3da9f2683dfb3ffb45ef47b05f4ff39c287d7d61c5057f48b8"
-> +
-> +RDEPENDS:${PN} =3D "${PYTHON_PN}-grpcio"
-> +
-> +BBCLASSEXTEND =3D "native nativesdk"
-> --
-> 2.41.0
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#103668):
-> https://lists.openembedded.org/g/openembedded-devel/message/103668
-> Mute This Topic: https://lists.openembedded.org/mt/99969391/5052612
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
-> quaresma.jose@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
->
-
---=20
-Best regards,
-
-Jos=C3=A9 Quaresma
-
---00000000000021b8cd05ffc0da70
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr">Hi=C2=A0Khem,<br><br>Looks like the old version was not de=
-leted.<div><br></div><div>Jose</div></div><br><div class=3D"gmail_quote"><d=
-iv dir=3D"ltr" class=3D"gmail_attr">Khem Raj &lt;<a href=3D"mailto:raj.khem=
-@gmail.com">raj.khem@gmail.com</a>&gt; escreveu no dia quarta, 5/07/2023 =
-=C3=A0(s) 18:25:<br></div><blockquote class=3D"gmail_quote" style=3D"margin=
-:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex"=
->Signed-off-by: Khem Raj &lt;<a href=3D"mailto:raj.khem@gmail.com" target=
-=3D"_blank">raj.khem@gmail.com</a>&gt;<br>
----<br>
-=C2=A0...f-Disable-musttail-attribute-on-mips.patch |=C2=A0 8 ++++----<br>
-=C2=A0.../python/<a href=3D"http://python3-grpcio-tools_1.56.0.bb" rel=3D"n=
-oreferrer" target=3D"_blank">python3-grpcio-tools_1.56.0.bb</a>=C2=A0 =C2=
-=A0 =C2=A0| 19 +++++++++++++++++++<br>
-=C2=A02 files changed, 23 insertions(+), 4 deletions(-)<br>
-=C2=A0create mode 100644 meta-python/recipes-devtools/python/<a href=3D"htt=
-p://python3-grpcio-tools_1.56.0.bb" rel=3D"noreferrer" target=3D"_blank">py=
-thon3-grpcio-tools_1.56.0.bb</a><br>
-<br>
-diff --git a/meta-python/recipes-devtools/python/python3-grpcio-tools/0001-=
-protobuf-Disable-musttail-attribute-on-mips.patch b/meta-python/recipes-dev=
-tools/python/python3-grpcio-tools/0001-protobuf-Disable-musttail-attribute-=
-on-mips.patch<br>
-index 8b13d7ae21..8c70b2b6a6 100644<br>
---- a/meta-python/recipes-devtools/python/python3-grpcio-tools/0001-protobu=
-f-Disable-musttail-attribute-on-mips.patch<br>
-+++ b/meta-python/recipes-devtools/python/python3-grpcio-tools/0001-protobu=
-f-Disable-musttail-attribute-on-mips.patch<br>
-@@ -14,11 +14,11 @@ Signed-off-by: Wang Mingyu &lt;<a href=3D"mailto:wangmy=
-@fujitsu.com" target=3D"_blank">wangmy@fujitsu.com</a>&gt;<br>
-<br>
-=C2=A0--- a/third_party/protobuf/src/google/protobuf/port_def.inc<br>
-=C2=A0+++ b/third_party/protobuf/src/google/protobuf/port_def.inc<br>
--@@ -255,6 +255,7 @@<br>
-+@@ -338,6 +338,7 @@ static_assert(PROTOBUF_ABSL_MIN(20230125<br>
-=C2=A0 #error PROTOBUF_TAILCALL was previously defined<br>
-=C2=A0 #endif<br>
-- #if __has_cpp_attribute(clang::musttail) &amp;&amp; !defined(__arm__) &am=
-p;&amp; \<br>
-+ #if __has_cpp_attribute(clang::musttail) &amp;&amp; !defined(__arm__) &am=
-p;&amp;=C2=A0 =C2=A0 =C2=A0 \<br>
-=C2=A0+=C2=A0 =C2=A0 !defined(__mips__) &amp;&amp;=C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 \<br>
--=C2=A0 =C2=A0 =C2=A0!defined(_ARCH_PPC) &amp;&amp; !defined(__wasm__) &amp=
-;&amp;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0\<br>
--=C2=A0 =C2=A0 =C2=A0!(defined(_MSC_VER) &amp;&amp; defined(_M_IX86)) &amp;=
-&amp;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 \<br>
-+=C2=A0 =C2=A0 =C2=A0!defined(_ARCH_PPC) &amp;&amp; !defined(__wasm__) &amp=
-;&amp;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 \<br>
-+=C2=A0 =C2=A0 =C2=A0!(defined(_MSC_VER) &amp;&amp; defined(_M_IX86)) &amp;=
-&amp; !defined(__i386__) &amp;&amp; \<br>
-=C2=A0 =C2=A0 =C2=A0 !(defined(__NDK_MAJOR__) &amp;&amp; __NDK_MAJOR &lt;=
-=3D 24)<br>
-diff --git a/meta-python/recipes-devtools/python/<a href=3D"http://python3-=
-grpcio-tools_1.56.0.bb" rel=3D"noreferrer" target=3D"_blank">python3-grpcio=
--tools_1.56.0.bb</a> b/meta-python/recipes-devtools/python/<a href=3D"http:=
-//python3-grpcio-tools_1.56.0.bb" rel=3D"noreferrer" target=3D"_blank">pyth=
-on3-grpcio-tools_1.56.0.bb</a><br>
-new file mode 100644<br>
-index 0000000000..eb1994d7ce<br>
---- /dev/null<br>
-+++ b/meta-python/recipes-devtools/python/<a href=3D"http://python3-grpcio-=
-tools_1.56.0.bb" rel=3D"noreferrer" target=3D"_blank">python3-grpcio-tools_=
-1.56.0.bb</a><br>
-@@ -0,0 +1,19 @@<br>
-+DESCRIPTION =3D &quot;Google gRPC tools&quot;<br>
-+HOMEPAGE =3D &quot;<a href=3D"http://www.grpc.io/" rel=3D"noreferrer" targ=
-et=3D"_blank">http://www.grpc.io/</a>&quot;<br>
-+SECTION =3D &quot;devel/python&quot;<br>
-+<br>
-+LICENSE =3D &quot;Apache-2.0&quot;<br>
-+LIC_FILES_CHKSUM =3D &quot;file://PKG-INFO;beginline=3D8;endline=3D8;md5=
-=3D7145f7cdd263359b62d342a02f005515&quot;<br>
-+<br>
-+inherit pypi setuptools3<br>
-+<br>
-+DEPENDS +=3D &quot;${PYTHON_PN}-grpcio&quot;<br>
-+<br>
-+SRC_URI +=3D &quot;file://0001-setup.py-Do-not-mix-C-and-C-compiler-option=
-s.patch \<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 file://0001-protobuf-Disable-mus=
-ttail-attribute-on-mips.patch \<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;<br>
-+SRC_URI[sha256sum] =3D &quot;39f5877cea514b3da9f2683dfb3ffb45ef47b05f4ff39=
-c287d7d61c5057f48b8&quot;<br>
-+<br>
-+RDEPENDS:${PN} =3D &quot;${PYTHON_PN}-grpcio&quot;<br>
-+<br>
-+BBCLASSEXTEND =3D &quot;native nativesdk&quot;<br>
--- <br>
-2.41.0<br>
-<br>
-<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-Links: You receive all messages sent to this group.<br>
-View/Reply Online (#103668): <a href=3D"https://lists.openembedded.org/g/op=
-enembedded-devel/message/103668" rel=3D"noreferrer" target=3D"_blank">https=
-://lists.openembedded.org/g/openembedded-devel/message/103668</a><br>
-Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/99969391/5052=
-612" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/mt=
-/99969391/5052612</a><br>
-Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
-d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
-><br>
-Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
-/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
-/g/openembedded-devel/unsub</a> [<a href=3D"mailto:quaresma.jose@gmail.com"=
- target=3D"_blank">quaresma.jose@gmail.com</a>]<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-<br>
-</blockquote></div><br clear=3D"all"><div><br></div><span class=3D"gmail_si=
-gnature_prefix">-- </span><br><div dir=3D"ltr" class=3D"gmail_signature"><d=
-iv dir=3D"ltr">Best regards,<div><br>Jos=C3=A9 Quaresma</div></div></div>
-
---00000000000021b8cd05ffc0da70--
 
