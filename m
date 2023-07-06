@@ -1,260 +1,284 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <denis@denix.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 87940EB64DD
-	for <webhook@archiver.kernel.org>; Thu,  6 Jul 2023 17:28:51 +0000 (UTC)
-Received: from mail-oi1-f174.google.com (mail-oi1-f174.google.com [209.85.167.174])
- by mx.groups.io with SMTP id smtpd.web11.30836.1688664521302074783
+	by smtp.lore.kernel.org (Postfix) with ESMTP id F41EFEB64D9
+	for <webhook@archiver.kernel.org>; Thu,  6 Jul 2023 21:36:32 +0000 (UTC)
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
+ by mx.groups.io with SMTP id smtpd.web11.36722.1688679386159852008
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 06 Jul 2023 10:28:41 -0700
+ Thu, 06 Jul 2023 14:36:26 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=Qq3kLa0s;
- spf=pass (domain: gmail.com, ip: 209.85.167.174, mailfrom: raj.khem@gmail.com)
-Received: by mail-oi1-f174.google.com with SMTP id 5614622812f47-39eab4bbe8aso862474b6e.1
-        for <openembedded-devel@lists.openembedded.org>; Thu, 06 Jul 2023 10:28:41 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1688664520; x=1691256520;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=AsQAztKrMkB8fvi/NQX8/rwAaL+gJ3h5lzhPOJy2H/k=;
-        b=Qq3kLa0stOE5hV79OhNgdvIXiAemco/2S6i17KpRvkXbSGY+O1L3psFf4r8edpLlXd
-         AMswPIRIHb+9Ahs2eS9U30AOhCiJBkLYHtSL02pwKxlwG224MHc7qHBAD0uumUU85BAe
-         KCxokG5YB9PX6tfBUxoVOtzXpbXz0CI2iZlKjfoEQ/JnSExcKQQM0SK0oxZsXcZEfD7R
-         qr+ot8bpM3FL7vRTDcIQmzu8OOF2eBjyB7jgXwPmhiku4eNv2PlRHiiLbMJ5OTPg++ps
-         EWaqfABp379TzI2ZryJtEg2IgX+tl7k/m4YKBIPd3a6WuBxCXkBYEq+yuC21DsK9deiQ
-         0vUg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1688664520; x=1691256520;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=AsQAztKrMkB8fvi/NQX8/rwAaL+gJ3h5lzhPOJy2H/k=;
-        b=UtNK1c3eGwxDkKU34QtdvGUXhlQi24Bv7vGHUjywX4gw5gXaknEn0jIbMpuO9CPW4m
-         IdW77yObW0Z/0pryyW/vSz/kkadEGGSwVSaOdWTXgJNhKwfGvdlbjbhvQYwEHk244YZR
-         L5bLZALgrI4GljjTUSDu2EVpCLipo+5LO1A8coEwcc4zDfwCpRdrqN+HWAjPRoGR8heH
-         0PzOpF0JpdsOOsE9NoeVY4hCkVAC4NWKEBzic2hdSnvxh5DSp8BleuWbuDuuLOTwBqY/
-         U98+N2leDZHdlSwxlkaLWz7m95N3tWipd9f3qUJZsTk8KVr5a4dp0DIjIRzcKtIeV7lt
-         o91Q==
-X-Gm-Message-State: ABy/qLb7wjeVjDSWLznfrGHW/PSois7a6yVUo10BpApTQ6p/948qOVXm
-	o+3AOVY1XSHPKv5wigbVHJBTimKdZGY=
-X-Google-Smtp-Source: APBJJlHXirZB5GEwLcK8CC1HnQ/eqB3/7kayE7rdZAV/w+l0PiFIcTYu3uGT7P+GnIS+3X0I6t+VwQ==
-X-Received: by 2002:a05:6808:e8a:b0:3a1:f1b7:75b0 with SMTP id k10-20020a0568080e8a00b003a1f1b775b0mr2599793oil.19.1688664520267;
-        Thu, 06 Jul 2023 10:28:40 -0700 (PDT)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9181:d380::81d4])
-        by smtp.gmail.com with ESMTPSA id ff5-20020a056a002f4500b006815fbe3240sm1598700pfb.11.2023.07.06.10.28.39
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 06 Jul 2023 10:28:39 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH] sblim-sfcc: Fix build with clang17
-Date: Thu,  6 Jul 2023 10:28:37 -0700
-Message-ID: <20230706172837.750990-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.41.0
+ dkim=missing; spf=pass (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 6107A40C16;
+	Thu,  6 Jul 2023 21:36:25 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id OW7ob5Ny_ivv; Thu,  6 Jul 2023 21:36:25 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-88-116.washdc.fios.verizon.net [100.15.88.116])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 3DADF40C13;
+	Thu,  6 Jul 2023 21:36:24 +0000 (UTC)
+Received: by mail.denix.org (Postfix, from userid 1000)
+	id EFD79163BEE; Thu,  6 Jul 2023 17:36:23 -0400 (EDT)
+Date: Thu, 6 Jul 2023 17:36:23 -0400
+From: Denys Dmytriyenko <denis@denix.org>
+To: Beniamin Sandu <beniaminsandu@gmail.com>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [oe] [meta-networking][kirkstone][PATCH v2] mbedtls: add
+ support for v3.x
+Message-ID: <20230706213623.GG1518@denix.org>
+References: <20230628184046.121775-1-beniaminsandu@gmail.com>
+ <CABQJdOFSBfwwKh9dcMuTnrKdTpjc+cXo5q5N0iD_Q-Gx6o0QMg@mail.gmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <CABQJdOFSBfwwKh9dcMuTnrKdTpjc+cXo5q5N0iD_Q-Gx6o0QMg@mail.gmail.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 06 Jul 2023 17:28:51 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103683
+ <openembedded-devel@lists.openembedded.org>; Thu, 06 Jul 2023 21:36:32 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103684
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- .../0001-Fix-function-declararions.patch      | 80 -------------------
- ...1-Fix-implicit-function-declarations.patch | 80 +++++++++++++++++++
- .../sblim-sfcc/sblim-sfcc_2.2.8.bb            |  2 +-
- 3 files changed, 81 insertions(+), 81 deletions(-)
- delete mode 100644 meta-oe/recipes-extended/sblim-sfcc/sblim-sfcc/0001-Fix-function-declararions.patch
- create mode 100644 meta-oe/recipes-extended/sblim-sfcc/sblim-sfcc/0001-Fix-implicit-function-declarations.patch
+On Wed, Jun 28, 2023 at 09:46:22PM +0300, Beniamin Sandu wrote:
+> Hey Armin,
+> 
+> This is the same recipe from master, which now has support for both v2
+> and v3 mbedtls. Since both versions would be supported and it's not a
+> major package upgrade, we should not be breaking policy.
 
-diff --git a/meta-oe/recipes-extended/sblim-sfcc/sblim-sfcc/0001-Fix-function-declararions.patch b/meta-oe/recipes-extended/sblim-sfcc/sblim-sfcc/0001-Fix-function-declararions.patch
-deleted file mode 100644
-index c498c55692..0000000000
---- a/meta-oe/recipes-extended/sblim-sfcc/sblim-sfcc/0001-Fix-function-declararions.patch
-+++ /dev/null
-@@ -1,80 +0,0 @@
--From f97c26f5effd4372f7e03f9e4178d42a9ad8d4b3 Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Fri, 2 Sep 2022 13:33:16 -0700
--Subject: [PATCH] Fix function declararions
--
--Upstream-Status: Pending
--
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
-- TEST/v2test_ec.c              | 2 ++
-- TEST/v2test_ein.c             | 1 +
-- backend/cimxml/cimXmlParser.c | 6 +++++-
-- backend/cimxml/grammar.c      | 2 ++
-- 4 files changed, 10 insertions(+), 1 deletion(-)
--
--diff --git a/TEST/v2test_ec.c b/TEST/v2test_ec.c
--index ad34dcc..d3e566d 100644
----- a/TEST/v2test_ec.c
--+++ b/TEST/v2test_ec.c
--@@ -6,6 +6,8 @@
-- #include "cmcimacs.h"
-- 
-- extern char *value2Chars(CMPIType type, CMPIValue * value);
--+extern void showClass( CMPIConstClass * in_class );
--+
-- /*
--  * comment out this define to use v2 http XML interface
--  */
--diff --git a/TEST/v2test_ein.c b/TEST/v2test_ein.c
--index c1b4692..5d5ef5d 100644
----- a/TEST/v2test_ein.c
--+++ b/TEST/v2test_ein.c
--@@ -6,6 +6,7 @@
-- #include "cmcimacs.h"
-- 
-- extern char *value2Chars(CMPIType type, CMPIValue * value);
--+extern void showObjectPath( CMPIObjectPath * objectpath );
-- void showProperty( CMPIData , char * );
-- void showInstance( CMPIInstance * );
-- static char * CMPIState_str(CMPIValueState);
--diff --git a/backend/cimxml/cimXmlParser.c b/backend/cimxml/cimXmlParser.c
--index d1ab86e..9f5d1ca 100644
----- a/backend/cimxml/cimXmlParser.c
--+++ b/backend/cimxml/cimXmlParser.c
--@@ -34,6 +34,8 @@
-- 
-- #include <pthread.h>
-- 
--+void startParsing(ParserControl *parm);
--+
-- static int attrsOk(XmlBuffer * xb, const XmlElement * e, XmlAttr * r,
--                    const char *tag, int etag);
-- static char *getValue(XmlBuffer * xb, const char *v);
--@@ -1350,7 +1352,9 @@ ResponseHdr scanCimXmlResponse(const char *xmlData, CMPIObjectPath *cop)
-- 
--    control.heap = parser_heap_init();
-- 
---   control.respHdr.rc = startParsing(&control);
--+   control.respHdr.rc = 0;
--+
--+   startParsing(&control);
-- 
--    parser_heap_term(control.heap);
-- 
--diff --git a/backend/cimxml/grammar.c b/backend/cimxml/grammar.c
--index 6a0a969..a3dcdea 100644
----- a/backend/cimxml/grammar.c
--+++ b/backend/cimxml/grammar.c
--@@ -23,6 +23,8 @@
-- #include "sfcUtil/utilft.h"
-- #include "parserUtil.h"
-- 
--+CMPIType guessType(char *val);
--+void setClassMethods(CMPIConstClass *cls, XtokMethods *ms);
-- 
-- static int ct = 0;
-- static int dontLex = 0;
---- 
--2.37.3
--
-diff --git a/meta-oe/recipes-extended/sblim-sfcc/sblim-sfcc/0001-Fix-implicit-function-declarations.patch b/meta-oe/recipes-extended/sblim-sfcc/sblim-sfcc/0001-Fix-implicit-function-declarations.patch
-new file mode 100644
-index 0000000000..08cd15ab0c
---- /dev/null
-+++ b/meta-oe/recipes-extended/sblim-sfcc/sblim-sfcc/0001-Fix-implicit-function-declarations.patch
-@@ -0,0 +1,80 @@
-+From 1e1ed4d58909360997648ca9524ab16441f5474b Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Thu, 6 Jul 2023 10:15:41 -0700
-+Subject: [PATCH] Fix implicit function declarations
-+
-+Clang 17+ has been finding these errors since its enforcing C99
-+more than other compilers
-+
-+Upstream-Status: Pending
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ TEST/v2test_ec.c              | 1 +
-+ TEST/v2test_ein.c             | 1 +
-+ backend/cimxml/cimXmlParser.c | 2 +-
-+ backend/cimxml/grammar.c      | 2 ++
-+ backend/cimxml/grammar.h      | 1 +
-+ 5 files changed, 6 insertions(+), 1 deletion(-)
-+
-+diff --git a/TEST/v2test_ec.c b/TEST/v2test_ec.c
-+index ad34dcc..940ca57 100644
-+--- a/TEST/v2test_ec.c
-++++ b/TEST/v2test_ec.c
-+@@ -4,6 +4,7 @@
-+ #include <unistd.h>
-+ #include <stdlib.h>
-+ #include "cmcimacs.h"
-++#include "show.h"
-+ 
-+ extern char *value2Chars(CMPIType type, CMPIValue * value);
-+ /*
-+diff --git a/TEST/v2test_ein.c b/TEST/v2test_ein.c
-+index c1b4692..ede95c1 100644
-+--- a/TEST/v2test_ein.c
-++++ b/TEST/v2test_ein.c
-+@@ -4,6 +4,7 @@
-+ #include <unistd.h>
-+ #include <stdlib.h>
-+ #include "cmcimacs.h"
-++#include "show.h"
-+ 
-+ extern char *value2Chars(CMPIType type, CMPIValue * value);
-+ void showProperty( CMPIData , char * );
-+diff --git a/backend/cimxml/cimXmlParser.c b/backend/cimxml/cimXmlParser.c
-+index d1ab86e..14f5f5c 100644
-+--- a/backend/cimxml/cimXmlParser.c
-++++ b/backend/cimxml/cimXmlParser.c
-+@@ -1350,7 +1350,7 @@ ResponseHdr scanCimXmlResponse(const char *xmlData, CMPIObjectPath *cop)
-+ 
-+    control.heap = parser_heap_init();
-+ 
-+-   control.respHdr.rc = startParsing(&control);
-++   startParsing(&control);
-+ 
-+    parser_heap_term(control.heap);
-+ 
-+diff --git a/backend/cimxml/grammar.c b/backend/cimxml/grammar.c
-+index 6a0a969..522ca9e 100644
-+--- a/backend/cimxml/grammar.c
-++++ b/backend/cimxml/grammar.c
-+@@ -23,6 +23,8 @@
-+ #include "sfcUtil/utilft.h"
-+ #include "parserUtil.h"
-+ 
-++extern CMPIType guessType(char *val);
-++extern void setClassMethods(CMPIConstClass *cls, XtokMethods *ms);
-+ 
-+ static int ct = 0;
-+ static int dontLex = 0;
-+diff --git a/backend/cimxml/grammar.h b/backend/cimxml/grammar.h
-+index 00d364f..bafdd42 100644
-+--- a/backend/cimxml/grammar.h
-++++ b/backend/cimxml/grammar.h
-+@@ -79,3 +79,4 @@ static void valueRefArray(ParserControl *parm, parseUnion *stateUnion);
-+ static void valueReference(ParserControl *parm, parseUnion *stateUnion);
-+ static void valueReferenceData(ParserControl *parm, parseUnion *stateUnion);
-+ 
-++void startParsing(ParserControl *parm);
-+-- 
-+2.41.0
-+
-diff --git a/meta-oe/recipes-extended/sblim-sfcc/sblim-sfcc_2.2.8.bb b/meta-oe/recipes-extended/sblim-sfcc/sblim-sfcc_2.2.8.bb
-index 20bd2b6fc1..c9d3ddd6b2 100644
---- a/meta-oe/recipes-extended/sblim-sfcc/sblim-sfcc_2.2.8.bb
-+++ b/meta-oe/recipes-extended/sblim-sfcc/sblim-sfcc_2.2.8.bb
-@@ -4,7 +4,7 @@ HOMEPAGE = "http://www.sblim.org"
- 
- SRC_URI = "http://netcologne.dl.sourceforge.net/project/sblim/${BPN}/${BPN}-${PV}.tar.bz2 \
-            file://0001-cimxml-Include-sys-select.h-for-fd_set.patch \
--           file://0001-Fix-function-declararions.patch \
-+           file://0001-Fix-implicit-function-declarations.patch \
-            "
- 
- SRC_URI[md5sum] = "0bac0dec19f17ec065b6c332a56d7bae"
+Well, it is actually a *major* upgrade and there are some incompatible API 
+changes in v3 vs v2! E.g. entropy_poll.h is no longer provided among others.
+
+With this backport one needs to scramble and set PREFERRED_VERSION to v2 
+explicitly, which is not nice. This is exactly why there's a policy for not 
+allowing major version backports to stable releases w/o a strong reason!
+
 -- 
-2.41.0
+Denys
 
+
+> This is also not an isolated case from a quick look, since there are
+> other packages that do this (e.g. redis), so it would be great to get
+> it on kirkstone too.
+> 
+> Thanks,
+> Beni
+> 
+> On Wed, 28 Jun 2023 at 21:41, Beniamin Sandu <beniaminsandu@gmail.com> wrote:
+> >
+> > Version 3.4.0 adds a lot of improvements and fixes (a notable one
+> > being initial support for PKCS7 CMS), but since this is a pretty
+> > big jump, let's keep both versions for a while, so the v2.x users
+> > can upgrade to 3.x in a timely manner if needed.
+> >
+> > Signed-off-by: Beniamin Sandu <beniaminsandu@gmail.com>
+> > ---
+> >  ...cify-an-arch-version-when-enabling-c.patch | 33 ++++++++
+> >  ...t-target-attribute-when-building-wit.patch | 34 ++++++++
+> >  .../mbedtls/mbedtls/run-ptest                 | 17 ++++
+> >  .../mbedtls/mbedtls_3.4.0.bb                  | 83 +++++++++++++++++++
+> >  4 files changed, 167 insertions(+)
+> >  create mode 100644 meta-networking/recipes-connectivity/mbedtls/mbedtls/0001-aesce-do-not-specify-an-arch-version-when-enabling-c.patch
+> >  create mode 100644 meta-networking/recipes-connectivity/mbedtls/mbedtls/0002-aesce-use-correct-target-attribute-when-building-wit.patch
+> >  create mode 100644 meta-networking/recipes-connectivity/mbedtls/mbedtls/run-ptest
+> >  create mode 100644 meta-networking/recipes-connectivity/mbedtls/mbedtls_3.4.0.bb
+> >
+> > diff --git a/meta-networking/recipes-connectivity/mbedtls/mbedtls/0001-aesce-do-not-specify-an-arch-version-when-enabling-c.patch b/meta-networking/recipes-connectivity/mbedtls/mbedtls/0001-aesce-do-not-specify-an-arch-version-when-enabling-c.patch
+> > new file mode 100644
+> > index 000000000..d98d8fa57
+> > --- /dev/null
+> > +++ b/meta-networking/recipes-connectivity/mbedtls/mbedtls/0001-aesce-do-not-specify-an-arch-version-when-enabling-c.patch
+> > @@ -0,0 +1,33 @@
+> > +From 2246925e3cb16183e25d4e2cfd13fb800df86270 Mon Sep 17 00:00:00 2001
+> > +From: Beniamin Sandu <beniaminsandu@gmail.com>
+> > +Date: Sun, 25 Jun 2023 19:58:08 +0300
+> > +Subject: [PATCH] aesce: do not specify an arch version when enabling crypto
+> > + instructions
+> > +
+> > +Building mbedtls with different aarch64 tuning variations revealed
+> > +that we should use the crypto extensions without forcing a particular
+> > +architecture version or core, as that can create issues.
+> > +
+> > +Upstream-Status: Submitted [https://github.com/Mbed-TLS/mbedtls/pull/7834]
+> > +
+> > +Signed-off-by: Beniamin Sandu <beniaminsandu@gmail.com>
+> > +---
+> > + library/aesce.c | 2 +-
+> > + 1 file changed, 1 insertion(+), 1 deletion(-)
+> > +
+> > +diff --git a/library/aesce.c b/library/aesce.c
+> > +index fe056dc4c..843de3973 100644
+> > +--- a/library/aesce.c
+> > ++++ b/library/aesce.c
+> > +@@ -60,7 +60,7 @@
+> > + #           error "A more recent GCC is required for MBEDTLS_AESCE_C"
+> > + #       endif
+> > + #       pragma GCC push_options
+> > +-#       pragma GCC target ("arch=armv8-a+crypto")
+> > ++#       pragma GCC target ("+crypto")
+> > + #       define MBEDTLS_POP_TARGET_PRAGMA
+> > + #   else
+> > + #       error "Only GCC and Clang supported for MBEDTLS_AESCE_C"
+> > +--
+> > +2.25.1
+> > +
+> > diff --git a/meta-networking/recipes-connectivity/mbedtls/mbedtls/0002-aesce-use-correct-target-attribute-when-building-wit.patch b/meta-networking/recipes-connectivity/mbedtls/mbedtls/0002-aesce-use-correct-target-attribute-when-building-wit.patch
+> > new file mode 100644
+> > index 000000000..4775c8ddb
+> > --- /dev/null
+> > +++ b/meta-networking/recipes-connectivity/mbedtls/mbedtls/0002-aesce-use-correct-target-attribute-when-building-wit.patch
+> > @@ -0,0 +1,34 @@
+> > +From 03d3523f974536f2358047382aadb0d4cc762f8a Mon Sep 17 00:00:00 2001
+> > +From: Beniamin Sandu <beniaminsandu@gmail.com>
+> > +Date: Mon, 26 Jun 2023 12:07:21 +0300
+> > +Subject: [PATCH] aesce: use correct target attribute when building with clang
+> > +
+> > +Seems clang has its own issues when it comes to crypto extensions,
+> > +and right now the best way to avoid them is to accurately enable
+> > +the needed instructions instead of the broad crypto feature.
+> > +
+> > +E.g.: https://github.com/llvm/llvm-project/issues/61645
+> > +
+> > +Upstream-Status: Pending
+> > +
+> > +Signed-off-by: Beniamin Sandu <beniaminsandu@gmail.com>
+> > +---
+> > + library/aesce.c | 2 +-
+> > + 1 file changed, 1 insertion(+), 1 deletion(-)
+> > +
+> > +diff --git a/library/aesce.c b/library/aesce.c
+> > +index 843de3973..7bea088ba 100644
+> > +--- a/library/aesce.c
+> > ++++ b/library/aesce.c
+> > +@@ -53,7 +53,7 @@
+> > + #       if __clang_major__ < 4
+> > + #           error "A more recent Clang is required for MBEDTLS_AESCE_C"
+> > + #       endif
+> > +-#       pragma clang attribute push (__attribute__((target("crypto"))), apply_to=function)
+> > ++#       pragma clang attribute push (__attribute__((target("aes"))), apply_to=function)
+> > + #       define MBEDTLS_POP_TARGET_PRAGMA
+> > + #   elif defined(__GNUC__)
+> > + #       if __GNUC__ < 6
+> > +--
+> > +2.25.1
+> > +
+> > diff --git a/meta-networking/recipes-connectivity/mbedtls/mbedtls/run-ptest b/meta-networking/recipes-connectivity/mbedtls/mbedtls/run-ptest
+> > new file mode 100644
+> > index 000000000..059ab4ecb
+> > --- /dev/null
+> > +++ b/meta-networking/recipes-connectivity/mbedtls/mbedtls/run-ptest
+> > @@ -0,0 +1,17 @@
+> > +#!/bin/sh
+> > +
+> > +ptestdir=$(dirname "$(readlink -f "$0")")
+> > +cd "$ptestdir"/tests || exit
+> > +
+> > +tests=$(find * -type f -name 'test_suite_*')
+> > +
+> > +for f in $tests
+> > +do
+> > +    if test -x ./"$f"; then
+> > +        if ./"$f" > ./"$f".out 2> ./"$f".err; then
+> > +            echo "PASS: $f"
+> > +        else
+> > +            echo "FAIL: $f"
+> > +        fi
+> > +    fi
+> > +done
+> > diff --git a/meta-networking/recipes-connectivity/mbedtls/mbedtls_3.4.0.bb b/meta-networking/recipes-connectivity/mbedtls/mbedtls_3.4.0.bb
+> > new file mode 100644
+> > index 000000000..b8c9662de
+> > --- /dev/null
+> > +++ b/meta-networking/recipes-connectivity/mbedtls/mbedtls_3.4.0.bb
+> > @@ -0,0 +1,83 @@
+> > +SUMMARY = "Lightweight crypto and SSL/TLS library"
+> > +DESCRIPTION = "mbedtls is a lean open source crypto library          \
+> > +for providing SSL and TLS support in your programs. It offers        \
+> > +an intuitive API and documented header files, so you can actually    \
+> > +understand what the code does. It features:                          \
+> > +                                                                     \
+> > + - Symmetric algorithms, like AES, Blowfish, Triple-DES, DES, ARC4,  \
+> > +   Camellia and XTEA                                                 \
+> > + - Hash algorithms, like SHA-1, SHA-2, RIPEMD-160 and MD5            \
+> > + - Entropy pool and random generators, like CTR-DRBG and HMAC-DRBG   \
+> > + - Public key algorithms, like RSA, Elliptic Curves, Diffie-Hellman, \
+> > +   ECDSA and ECDH                                                    \
+> > + - SSL v3 and TLS 1.0, 1.1 and 1.2                                   \
+> > + - Abstraction layers for ciphers, hashes, public key operations,    \
+> > +   platform abstraction and threading                                \
+> > +"
+> > +
+> > +HOMEPAGE = "https://tls.mbed.org/"
+> > +
+> > +LICENSE = "Apache-2.0"
+> > +LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
+> > +
+> > +SECTION = "libs"
+> > +
+> > +S = "${WORKDIR}/git"
+> > +SRCREV = "1873d3bfc2da771672bd8e7e8f41f57e0af77f33"
+> > +SRC_URI = "git://github.com/ARMmbed/mbedtls.git;protocol=https;branch=master \
+> > +       file://0001-aesce-do-not-specify-an-arch-version-when-enabling-c.patch \
+> > +       file://0002-aesce-use-correct-target-attribute-when-building-wit.patch \
+> > +       file://run-ptest"
+> > +
+> > +inherit cmake update-alternatives ptest
+> > +
+> > +PACKAGECONFIG ??= "shared-libs programs ${@bb.utils.contains('PTEST_ENABLED', '1', 'tests', '', d)}"
+> > +PACKAGECONFIG[shared-libs] = "-DUSE_SHARED_MBEDTLS_LIBRARY=ON,-DUSE_SHARED_MBEDTLS_LIBRARY=OFF"
+> > +PACKAGECONFIG[programs] = "-DENABLE_PROGRAMS=ON,-DENABLE_PROGRAMS=OFF"
+> > +PACKAGECONFIG[werror] = "-DMBEDTLS_FATAL_WARNINGS=ON,-DMBEDTLS_FATAL_WARNINGS=OFF"
+> > +# Make X.509 and TLS calls use PSA
+> > +# https://github.com/Mbed-TLS/mbedtls/blob/development/docs/use-psa-crypto.md
+> > +PACKAGECONFIG[psa] = ""
+> > +PACKAGECONFIG[tests] = "-DENABLE_TESTING=ON,-DENABLE_TESTING=OFF"
+> > +
+> > +EXTRA_OECMAKE = "-DLIB_INSTALL_DIR:STRING=${libdir}"
+> > +
+> > +# For now the only way to enable PSA is to explicitly pass a -D via CFLAGS
+> > +CFLAGS:append = "${@bb.utils.contains('PACKAGECONFIG', 'psa', ' -DMBEDTLS_USE_PSA_CRYPTO', '', d)}"
+> > +
+> > +PROVIDES += "polarssl"
+> > +RPROVIDES:${PN} = "polarssl"
+> > +
+> > +PACKAGES =+ "${PN}-programs"
+> > +FILES:${PN}-programs = "${bindir}/"
+> > +
+> > +ALTERNATIVE:${PN}-programs = "hello"
+> > +ALTERNATIVE_LINK_NAME[hello] = "${bindir}/hello"
+> > +
+> > +BBCLASSEXTEND = "native nativesdk"
+> > +
+> > +CVE_PRODUCT = "mbed_tls"
+> > +
+> > +# Fix merged upstream https://github.com/Mbed-TLS/mbedtls/pull/5310
+> > +CVE_CHECK_IGNORE += "CVE-2021-43666"
+> > +# Fix merged upstream https://github.com/Mbed-TLS/mbedtls/commit/9a4a9c66a48edfe9ece03c7e4a53310adf73a86c
+> > +CVE_CHECK_IGNORE += "CVE-2021-45451"
+> > +
+> > +# Strip host paths from autogenerated test files
+> > +do_compile:append() {
+> > +       sed -i 's+${S}/++g' ${B}/tests/*.c 2>/dev/null || :
+> > +       sed -i 's+${B}/++g' ${B}/tests/*.c 2>/dev/null || :
+> > +}
+> > +
+> > +# Export source files/headers needed by Arm Trusted Firmware
+> > +sysroot_stage_all:append() {
+> > +       sysroot_stage_dir "${S}/library" "${SYSROOT_DESTDIR}/usr/share/mbedtls-source/library"
+> > +       sysroot_stage_dir "${S}/include" "${SYSROOT_DESTDIR}/usr/share/mbedtls-source/include"
+> > +}
+> > +
+> > +do_install_ptest () {
+> > +       install -d ${D}${PTEST_PATH}/tests
+> > +       cp -f ${B}/tests/test_suite_* ${D}${PTEST_PATH}/tests/
+> > +       find ${D}${PTEST_PATH}/tests/ -type f -name "*.c" -delete
+> > +       cp -fR ${S}/tests/data_files ${D}${PTEST_PATH}/tests/
+> > +}
+> > --
+> > 2.25.1
+> >
 
