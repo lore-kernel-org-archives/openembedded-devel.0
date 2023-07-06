@@ -2,91 +2,134 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DB2FAEB64DA
-	for <webhook@archiver.kernel.org>; Thu,  6 Jul 2023 00:25:36 +0000 (UTC)
-Received: from mail-pg1-f181.google.com (mail-pg1-f181.google.com [209.85.215.181])
- by mx.groups.io with SMTP id smtpd.web11.10807.1688603131056926745
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 916D3EB64D9
+	for <webhook@archiver.kernel.org>; Thu,  6 Jul 2023 06:31:18 +0000 (UTC)
+Received: from mail-qk1-f172.google.com (mail-qk1-f172.google.com [209.85.222.172])
+ by mx.groups.io with SMTP id smtpd.web11.15814.1688625077889029804
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 05 Jul 2023 17:25:31 -0700
+ Wed, 05 Jul 2023 23:31:18 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=dL669Fxi;
- spf=pass (domain: gmail.com, ip: 209.85.215.181, mailfrom: raj.khem@gmail.com)
-Received: by mail-pg1-f181.google.com with SMTP id 41be03b00d2f7-5577900c06bso142998a12.2
-        for <openembedded-devel@lists.openembedded.org>; Wed, 05 Jul 2023 17:25:30 -0700 (PDT)
+ dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=PT0lezSE;
+ spf=pass (domain: gmail.com, ip: 209.85.222.172, mailfrom: raj.khem@gmail.com)
+Received: by mail-qk1-f172.google.com with SMTP id af79cd13be357-7653bd3ff2fso44023185a.3
+        for <openembedded-devel@lists.openembedded.org>; Wed, 05 Jul 2023 23:31:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1688603130; x=1691195130;
+        d=gmail.com; s=20221208; t=1688625077; x=1691217077;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=xSaSYdLwB+MakDeA8/mi9vbhmcHZHfmtTRYrYi3XU20=;
-        b=dL669FxitlhjuGYuyHFQ+9nRRm5m8EMCjHmJBmBEibgTOLBD9EmW+UwWK6cKzCq3xS
-         aDLFBq03tJKDDRuAbP6BZSJLrQ8QqKmGYYFrdrSsxab2Pv7wzI7kXF+wkWNsG7/yiJjw
-         osDEh14p6PgExChmfXpxcdp1IxPRCGScGgaoixl3QxDRg44uHxVG9cQ78+hlggjUBXKK
-         MjtE4vV3OuU4lG2tLhq3ticqeY7DI7yC4G7prqJ8NLjXAvzLRzYAToZXxkKIxonRTHpM
-         BSSoXHJebKtRJARFnQR47bGy5rjOlp5H6E0N90cBcaGBn8za4g64BlwCaA758vJsf/li
-         M/Uw==
+        bh=gMzFUC8GQwyGvBM/yxOQkBFN9kMfhh5UB52I2JFElLA=;
+        b=PT0lezSEicopcjfQ9P5KTAWt+4rA0NB5xO9KZfs9NmlHsIYfBae49SzCVui0WAFldw
+         8KnOYKb+J0WYrOJjJTnSIM9r/XVU2dMWyzcz4NgRJJ5/5CA/wlL1dNf/ANepDuZzrB/3
+         1RPVXuInbP3AMWAp3GR5jKMh8aiXtMwpDv/MZUsTbW+AqZ5QC5js0MwTnDXDUotJLycV
+         mCGcgjPLB6KC0heiH6EQgtC0kaQK29lUbrIfhxxSBX9p9qNP5PpwIjPdOH2pqUgEvTAH
+         3nKXJbWgb8aLcO53mhBj69hs1TYELDxQglcczEkA24B/CRa8ix8n7Fb33Ex7c5+XnPcw
+         tP9A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1688603130; x=1691195130;
+        d=1e100.net; s=20221208; t=1688625077; x=1691217077;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=xSaSYdLwB+MakDeA8/mi9vbhmcHZHfmtTRYrYi3XU20=;
-        b=Tw9ka63tqJzpsfkL8DUYCFXV2Uoxv9Damrd1okvm/KdeCrEDB4fnIqol+4J+7AJ88P
-         xEk3x3WIDvvj9HDadv0ydz59e6fNWtPCAvETBuv02QKeIKIlnHVvVJnnfH4jcFCjg37/
-         FMTEKmuOmGyZoYYPtoH534vfipCweaF0Sa79doRSniceLl/gRubzuJ14TX9jfWv31Eu6
-         diRE/KELy85TBMaztD/2o4FLf07O/klIxKEXz7ttWaKKv8m9UyRSzRyA3/aQJV5/gPPe
-         eaOC6uc/u9un01nBeyfzTqt4MybYgcqVl+qC1+c15j77TGMc9yV2DNQDQhJV2yzZUP15
-         8UZw==
-X-Gm-Message-State: ABy/qLbW0TRPRiUbewytbK3pRlYhYmgPUUyyt8DgvOHlvDRMv2+Rsam2
-	QPL8XZ1FeykVti1z9RlHRBc+hV1OLks=
-X-Google-Smtp-Source: APBJJlFFtOumRlnEcIOyIvFRaD+OsPwGACbWmMyRevQHfZjVNj6fQGR6A0TXifZ+s0kkn3GPF5cSBg==
-X-Received: by 2002:a17:902:eac2:b0:1b8:4129:e7dc with SMTP id p2-20020a170902eac200b001b84129e7dcmr432246pld.50.1688603129898;
-        Wed, 05 Jul 2023 17:25:29 -0700 (PDT)
+        bh=gMzFUC8GQwyGvBM/yxOQkBFN9kMfhh5UB52I2JFElLA=;
+        b=ejwliC5d7ZeBY9+v8/mIXt/7IorhzAvDGddoDq3GXvuJApFP9Iu+HmsAdttreG6OoM
+         rXXI2mYMuU75SJO/sezCNiCGMq8q3NSOaLfDkjE5XY589yhfhHw/EIzQqkxehllnr5Py
+         60lGgrRtRYiHQ4l8OQXLz9UxvA5MOh/MwdexJPKcGQNEwdeI6KGpf+f1NRRKBp1Mo3Jo
+         dAdoqQkMJrZCRgrSPOrxWaYT3dZAKpr7FA6hUoqq5menymsSvf3G7eUx0VqeBr7uFmf2
+         TSIsTb7RuuhBjU95ZgTkMgIUQwE+j2tjFw/ug9W5mo8yD6sbOUy99M4pa5++OwOF/ooU
+         oktg==
+X-Gm-Message-State: ABy/qLZ/RPPqz7KGdJQOqlYKkcRa3q2GbIQR41uH3/n2jrrfxT/MWZqy
+	uVz2UlhF4KHe2PkcenKSEPHTLeiKBPs=
+X-Google-Smtp-Source: APBJJlH3MwTYbuq3CSEvMiteBy64kYBn/CwztR+qOBquOUdvp/25C95KW0/JWBq/1eAGDCQv8NYA1w==
+X-Received: by 2002:a05:620a:3c13:b0:765:aac3:7668 with SMTP id tn19-20020a05620a3c1300b00765aac37668mr735806qkn.71.1688625076601;
+        Wed, 05 Jul 2023 23:31:16 -0700 (PDT)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9181:d380::81d4])
-        by smtp.gmail.com with ESMTPSA id l6-20020a170902d34600b001b89612dc7dsm60464plk.142.2023.07.05.17.25.29
+        by smtp.gmail.com with ESMTPSA id x11-20020a056a00270b00b0068288aaf23esm531909pfv.100.2023.07.05.23.31.16
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 05 Jul 2023 17:25:29 -0700 (PDT)
+        Wed, 05 Jul 2023 23:31:16 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [PATCH] renderdoc: Upgrade to 1.27
-Date: Wed,  5 Jul 2023 17:25:27 -0700
-Message-ID: <20230706002527.3603020-1-raj.khem@gmail.com>
+Subject: [meta-python][PATCH 1/2] python3-grpcio: Fix build on musl
+Date: Wed,  5 Jul 2023 23:31:13 -0700
+Message-ID: <20230706063114.2784093-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.41.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 06 Jul 2023 00:25:36 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103678
+ <openembedded-devel@lists.openembedded.org>; Thu, 06 Jul 2023 06:31:18 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103679
 
-License-Update: Updated copyright years
+Use off_t instead of deprecated off64_t LFS interface
+makes it portable across musl and glibc
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../renderdoc/{renderdoc_1.13.bb => renderdoc_1.27.bb}        | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-graphics/renderdoc/{renderdoc_1.13.bb => renderdoc_1.27.bb} (89%)
+ .../0001-direct_mmap-Use-off_t-on-linux.patch | 42 +++++++++++++++++++
+ .../python/python3-grpcio_1.56.0.bb           |  1 +
+ 2 files changed, 43 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-grpcio/0001-direct_mmap-Use-off_t-on-linux.patch
 
-diff --git a/meta-oe/recipes-graphics/renderdoc/renderdoc_1.13.bb b/meta-oe/recipes-graphics/renderdoc/renderdoc_1.27.bb
-similarity index 89%
-rename from meta-oe/recipes-graphics/renderdoc/renderdoc_1.13.bb
-rename to meta-oe/recipes-graphics/renderdoc/renderdoc_1.27.bb
-index ceff54f46a..c89b2d1c99 100644
---- a/meta-oe/recipes-graphics/renderdoc/renderdoc_1.13.bb
-+++ b/meta-oe/recipes-graphics/renderdoc/renderdoc_1.27.bb
-@@ -2,9 +2,9 @@ SUMMARY = "RenderDoc recipe providing renderdoccmd"
- DESCRIPTION = "RenderDoc is a frame-capture based graphics debugger"
- HOMEPAGE = "https://github.com/baldurk/renderdoc"
- LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://LICENSE.md;md5=5486c0df458c74c85828e0cdbffd499e"
-+LIC_FILES_CHKSUM = "file://LICENSE.md;md5=36d34a46cb71546195d2b0c626a52e5d"
- 
--SRCREV = "cc05b288b6d1660ab04c6cf01173f1bb62e6f5dd"
-+SRCREV = "35b13a8e8fd2a331854dba6da81a20452e142d6f"
- SRC_URI = " \
-     git://github.com/baldurk/${BPN}.git;protocol=https;branch=v1.x \
-     file://0001-renderdoc-use-xxd-instead-of-cross-compiling-shim-bi.patch \
+diff --git a/meta-python/recipes-devtools/python/python3-grpcio/0001-direct_mmap-Use-off_t-on-linux.patch b/meta-python/recipes-devtools/python/python3-grpcio/0001-direct_mmap-Use-off_t-on-linux.patch
+new file mode 100644
+index 0000000000..49df528d7e
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-grpcio/0001-direct_mmap-Use-off_t-on-linux.patch
+@@ -0,0 +1,42 @@
++From 45fdade6c0415ec5af3f9312e6311a4ccc682a7b Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Wed, 28 Dec 2022 18:24:21 -0800
++Subject: [PATCH] direct_mmap: Use off_t on linux
++
++off64_t is not provided without defining _LARGEFILE64_SOURCE on musl
++this define is not defined automatically like glibc where it gets
++defined when _GNU_SOURCE is defined. Using off_t makes it portable
++across musl/glibc and for using 64bit off_t on glibc 32bit systems
++-D_FILE_OFFSET_BITS=64 can be defined during build via CXXFLAGS
++
++Upstream-Status: Submitted [https://github.com/abseil/abseil-cpp/pull/1349]
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ absl/base/internal/direct_mmap.h | 4 ++--
++ 1 file changed, 2 insertions(+), 2 deletions(-)
++
++diff --git a/absl/base/internal/direct_mmap.h b/absl/base/internal/direct_mmap.h
++index 815b8d23..fdf88f0b 100644
++--- a/absl/base/internal/direct_mmap.h
+++++ b/absl/base/internal/direct_mmap.h
++@@ -72,7 +72,7 @@ namespace base_internal {
++ // Platform specific logic extracted from
++ // https://chromium.googlesource.com/linux-syscall-support/+/master/linux_syscall_support.h
++ inline void* DirectMmap(void* start, size_t length, int prot, int flags, int fd,
++-                        off64_t offset) noexcept {
+++                        off_t offset) noexcept {
++ #if defined(__i386__) || defined(__ARM_ARCH_3__) || defined(__ARM_EABI__) || \
++     defined(__m68k__) || defined(__sh__) ||                                  \
++     (defined(__hppa__) && !defined(__LP64__)) ||                             \
++@@ -102,7 +102,7 @@ inline void* DirectMmap(void* start, size_t length, int prot, int flags, int fd,
++ #else
++   return reinterpret_cast<void*>(
++       syscall(SYS_mmap2, start, length, prot, flags, fd,
++-              static_cast<off_t>(offset / pagesize)));
+++              offset / pagesize));
++ #endif
++ #elif defined(__s390x__)
++   // On s390x, mmap() arguments are passed in memory.
++-- 
++2.39.0
++
+diff --git a/meta-python/recipes-devtools/python/python3-grpcio_1.56.0.bb b/meta-python/recipes-devtools/python/python3-grpcio_1.56.0.bb
+index 33c13b0a01..fc871adec4 100644
+--- a/meta-python/recipes-devtools/python/python3-grpcio_1.56.0.bb
++++ b/meta-python/recipes-devtools/python/python3-grpcio_1.56.0.bb
+@@ -11,6 +11,7 @@ SRC_URI:append:class-target = " file://ppc-boringssl-support.patch \
+                                 file://mips_bigendian.patch \
+                                 file://0001-Include-missing-cstdint-header.patch \
+                                 file://abseil-ppc-fixes.patch;patchdir=third_party/abseil-cpp \
++                                file://0001-direct_mmap-Use-off_t-on-linux.patch;patchdir=third_party/abseil-cpp \
+                                 file://0001-zlib-Include-unistd.h-for-open-close-C-APIs.patch \
+ "
+ SRC_URI[sha256sum] = "4c08ee21b3d10315b8dc26f6c13917b20ed574cdbed2d2d80c53d5508fdcc0f2"
 -- 
 2.41.0
 
