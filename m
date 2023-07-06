@@ -2,188 +2,259 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E2AFAEB64D9
-	for <webhook@archiver.kernel.org>; Thu,  6 Jul 2023 15:00:00 +0000 (UTC)
-Received: from mail-oo1-f44.google.com (mail-oo1-f44.google.com [209.85.161.44])
- by mx.groups.io with SMTP id smtpd.web10.26276.1688655594132971709
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 87940EB64DD
+	for <webhook@archiver.kernel.org>; Thu,  6 Jul 2023 17:28:51 +0000 (UTC)
+Received: from mail-oi1-f174.google.com (mail-oi1-f174.google.com [209.85.167.174])
+ by mx.groups.io with SMTP id smtpd.web11.30836.1688664521302074783
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 06 Jul 2023 07:59:54 -0700
+ Thu, 06 Jul 2023 10:28:41 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=Kyfg8jJK;
- spf=pass (domain: gmail.com, ip: 209.85.161.44, mailfrom: raj.khem@gmail.com)
-Received: by mail-oo1-f44.google.com with SMTP id 006d021491bc7-56344354e2cso584638eaf.1
-        for <openembedded-devel@lists.openembedded.org>; Thu, 06 Jul 2023 07:59:54 -0700 (PDT)
+ dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=Qq3kLa0s;
+ spf=pass (domain: gmail.com, ip: 209.85.167.174, mailfrom: raj.khem@gmail.com)
+Received: by mail-oi1-f174.google.com with SMTP id 5614622812f47-39eab4bbe8aso862474b6e.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 06 Jul 2023 10:28:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1688655593; x=1691247593;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=uzsBfiaUAfVEQalq30krxi6yWfglGX+bSCI+ZD28xpM=;
-        b=Kyfg8jJKDzk8Umnd1DrIEohX4pc4ysoD6CknycXemjwV99Z1CSfEDftj/YzSvkPW4T
-         guAWSBVRQsfyZBnqhjEQATV0uSfdPA53DpNwML+7/Ht4NFV5gmVlvcJqk1ltvc+G4+JV
-         DhNvqC8VOteQTLVMA98NAjXEDQ/Dg4fYSGSKIDx6xqR2d0aUk1vl2yNqd3fa1Jz18VH1
-         IkFk8+9nEBeTurCRxCV4/tNayovrbEwIagV4QgHi7NiqtWgW0RWPMBO6NqLOMYjM60IJ
-         +FCI9J2/LgTQ0eFTUpt2rCLW56VxQtTnUyjKVvwMRD5ixCY8XwtbwWN8m6eAqaVYFQR7
-         iX1g==
+        d=gmail.com; s=20221208; t=1688664520; x=1691256520;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=AsQAztKrMkB8fvi/NQX8/rwAaL+gJ3h5lzhPOJy2H/k=;
+        b=Qq3kLa0stOE5hV79OhNgdvIXiAemco/2S6i17KpRvkXbSGY+O1L3psFf4r8edpLlXd
+         AMswPIRIHb+9Ahs2eS9U30AOhCiJBkLYHtSL02pwKxlwG224MHc7qHBAD0uumUU85BAe
+         KCxokG5YB9PX6tfBUxoVOtzXpbXz0CI2iZlKjfoEQ/JnSExcKQQM0SK0oxZsXcZEfD7R
+         qr+ot8bpM3FL7vRTDcIQmzu8OOF2eBjyB7jgXwPmhiku4eNv2PlRHiiLbMJ5OTPg++ps
+         EWaqfABp379TzI2ZryJtEg2IgX+tl7k/m4YKBIPd3a6WuBxCXkBYEq+yuC21DsK9deiQ
+         0vUg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1688655593; x=1691247593;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=uzsBfiaUAfVEQalq30krxi6yWfglGX+bSCI+ZD28xpM=;
-        b=fLVOyFVJ01S6W+M5Ssckfe75QW9JRvnZ7C4KkDbAHtb9qwsu/tfIZ9xWj3scOFc66p
-         Aez2ONSTWvRSKUIjqUJTgHSSRvqtXAB9UCbsRo20r938Ggz1i8nAyuhMWAqddD2lK8n8
-         Ojp1CX7SbtqoOhSxzElq2/QwwFwoLHxVcgKvbcuR0dn4iIhVrsY7t9TioFAR8Ggtr9i/
-         YdsDaj7j9L+Yt/zu8+PGRGqZHjAHxFG0RSIhi/2850xAnYIkdZ5AiMllL882/pvKe0Ut
-         4A8ZoN/saWis/sk+Ti0lhc+jJVfHh4zmcnMxJPx7QueTSyCFt2TadG682ZquDGa+AnCU
-         sqyw==
-X-Gm-Message-State: ABy/qLZwHCcMR8NjlAJocNe40sgjl6heZVVPEmhnnhcthYkKwO+Romh7
-	eD4oYRUsbOnNmcIZmuFNlxHDBog6I1Yk6d+WB3k=
-X-Google-Smtp-Source: APBJJlEf7dPBxBJ9aSYo4X+cvIVAiSmcaZXJ71BneM4zt9Ozv+obu+g5vvQX51Q+C03Kbdj67HWF69p6q4k4XDz56i4=
-X-Received: by 2002:a4a:4591:0:b0:565:af46:6d28 with SMTP id
- y139-20020a4a4591000000b00565af466d28mr1797693ooa.7.1688655593262; Thu, 06
- Jul 2023 07:59:53 -0700 (PDT)
-MIME-Version: 1.0
-References: <1623b1e1-d1cb-25a2-f1f1-7c665e766957@gmail.com>
-In-Reply-To: <1623b1e1-d1cb-25a2-f1f1-7c665e766957@gmail.com>
+        d=1e100.net; s=20221208; t=1688664520; x=1691256520;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=AsQAztKrMkB8fvi/NQX8/rwAaL+gJ3h5lzhPOJy2H/k=;
+        b=UtNK1c3eGwxDkKU34QtdvGUXhlQi24Bv7vGHUjywX4gw5gXaknEn0jIbMpuO9CPW4m
+         IdW77yObW0Z/0pryyW/vSz/kkadEGGSwVSaOdWTXgJNhKwfGvdlbjbhvQYwEHk244YZR
+         L5bLZALgrI4GljjTUSDu2EVpCLipo+5LO1A8coEwcc4zDfwCpRdrqN+HWAjPRoGR8heH
+         0PzOpF0JpdsOOsE9NoeVY4hCkVAC4NWKEBzic2hdSnvxh5DSp8BleuWbuDuuLOTwBqY/
+         U98+N2leDZHdlSwxlkaLWz7m95N3tWipd9f3qUJZsTk8KVr5a4dp0DIjIRzcKtIeV7lt
+         o91Q==
+X-Gm-Message-State: ABy/qLb7wjeVjDSWLznfrGHW/PSois7a6yVUo10BpApTQ6p/948qOVXm
+	o+3AOVY1XSHPKv5wigbVHJBTimKdZGY=
+X-Google-Smtp-Source: APBJJlHXirZB5GEwLcK8CC1HnQ/eqB3/7kayE7rdZAV/w+l0PiFIcTYu3uGT7P+GnIS+3X0I6t+VwQ==
+X-Received: by 2002:a05:6808:e8a:b0:3a1:f1b7:75b0 with SMTP id k10-20020a0568080e8a00b003a1f1b775b0mr2599793oil.19.1688664520267;
+        Thu, 06 Jul 2023 10:28:40 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9181:d380::81d4])
+        by smtp.gmail.com with ESMTPSA id ff5-20020a056a002f4500b006815fbe3240sm1598700pfb.11.2023.07.06.10.28.39
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 06 Jul 2023 10:28:39 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 6 Jul 2023 07:59:26 -0700
-Message-ID: <CAMKF1so3ujbfwb3TxvFkoYo5_gzPbBkKEp-EO_f1BW1f5v9RrQ@mail.gmail.com>
-Subject: Re: kirkstone merge request: July 6th
-To: akuster808 <akuster808@gmail.com>
-Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][PATCH] sblim-sfcc: Fix build with clang17
+Date: Thu,  6 Jul 2023 10:28:37 -0700
+Message-ID: <20230706172837.750990-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.41.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 06 Jul 2023 15:00:00 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103682
+ <openembedded-devel@lists.openembedded.org>; Thu, 06 Jul 2023 17:28:51 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103683
 
-merged thanks Armin
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ .../0001-Fix-function-declararions.patch      | 80 -------------------
+ ...1-Fix-implicit-function-declarations.patch | 80 +++++++++++++++++++
+ .../sblim-sfcc/sblim-sfcc_2.2.8.bb            |  2 +-
+ 3 files changed, 81 insertions(+), 81 deletions(-)
+ delete mode 100644 meta-oe/recipes-extended/sblim-sfcc/sblim-sfcc/0001-Fix-function-declararions.patch
+ create mode 100644 meta-oe/recipes-extended/sblim-sfcc/sblim-sfcc/0001-Fix-implicit-function-declarations.patch
 
-On Thu, Jul 6, 2023 at 4:23=E2=80=AFAM akuster808 <akuster808@gmail.com> wr=
-ote:
->
-> The following changes since commit a82d92c8a6525da01524bf8f4a60bf6b35dcbb=
-3d:
->
->    ExprTk: Update package to release/0.0.2 (2023-06-19 09:17:01 -0400)
->
-> are available in the Git repository at:
->
->    https://git.openembedded.org/meta-openembedded kirkstone-next
->
-> for you to fetch changes up to 346753705e49a2486867dc150181a1c7f4d69377:
->
->    webserver: nginx: Add stream Signed-off-by: Luke Schaefer
-> <lukeschafer17@gmail.com> (2023-07-04 10:20:46 -0400)
->
-> ----------------------------------------------------------------
-> Beniamin Sandu (1):
->        mbedtls: add support for v3.x
->
-> Hitendra Prajapati (3):
->        wireshark: Fix Multiple CVEs
->        libssh: CVE-2020-16135 Fix NULL pointer dereference in sftpserver.=
-c
->        yajl: CVE-2023-33460 memory leak in yajl_tree_parse function
->
-> Luke Schaefer (1):
->        webserver: nginx: Add stream Signed-off-by: Luke Schaefer
-> <lukeschafer17@gmail.com>
->
-> Narpat Mali (3):
->        opencv: fix for CVE-2023-2618
->        frr: fix for CVE-2023-31489
->        python3-werkzeug: fix for patch-fuzz
->
-> Peter Marko (3):
->        c-ares: backport patch for CVE-2023-31147
->        grpc: ignore CVE-2023-32732
->        ntp: backport patch for 5 CVEs CVE-2023-26551/2/3/4/5
->
-> Polampalli, Archana (1):
->        tcpreplay: upgrade 4.4.2 -> 4.4.4
->
-> Soumya (1):
->        opensc: Fix CVE-2023-2977
->
-> vkumbhar (1):
->        postgresql: fix CVE-2023-2454 & CVE-2023-2455
->
->   ...1-aesce-do-not-specify-an-arch-version-when-enabling-c.patch | 33 ++
->   ...2-aesce-use-correct-target-attribute-when-building-wit.patch | 34 ++
->   meta-networking/recipes-connectivity/mbedtls/mbedtls/run-ptest  | 17 +
->   meta-networking/recipes-connectivity/mbedtls/mbedtls_3.4.0.bb   | 83 ++=
-++
->   meta-networking/recipes-protocols/frr/frr/CVE-2023-31489.patch  | 52 ++
->   meta-networking/recipes-protocols/frr/frr_8.2.2.bb              | 1 +
->   meta-networking/recipes-support/ntp/ntp/CVE-2023-2655x.patch    | 323
-> +++++++++++++
->   meta-networking/recipes-support/ntp/ntp_4.2.8p15.bb             | 9 +
->   .../tcpreplay/{tcpreplay_4.4.2.bb =3D> tcpreplay_4.4.4.bb} |   2 +-
->   .../recipes-support/wireshark/files/CVE-2023-0666.patch         | 122
-> +++++
->   .../recipes-support/wireshark/files/CVE-2023-0667.patch         | 66 ++=
+diff --git a/meta-oe/recipes-extended/sblim-sfcc/sblim-sfcc/0001-Fix-function-declararions.patch b/meta-oe/recipes-extended/sblim-sfcc/sblim-sfcc/0001-Fix-function-declararions.patch
+deleted file mode 100644
+index c498c55692..0000000000
+--- a/meta-oe/recipes-extended/sblim-sfcc/sblim-sfcc/0001-Fix-function-declararions.patch
++++ /dev/null
+@@ -1,80 +0,0 @@
+-From f97c26f5effd4372f7e03f9e4178d42a9ad8d4b3 Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Fri, 2 Sep 2022 13:33:16 -0700
+-Subject: [PATCH] Fix function declararions
+-
+-Upstream-Status: Pending
+-
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+- TEST/v2test_ec.c              | 2 ++
+- TEST/v2test_ein.c             | 1 +
+- backend/cimxml/cimXmlParser.c | 6 +++++-
+- backend/cimxml/grammar.c      | 2 ++
+- 4 files changed, 10 insertions(+), 1 deletion(-)
+-
+-diff --git a/TEST/v2test_ec.c b/TEST/v2test_ec.c
+-index ad34dcc..d3e566d 100644
+---- a/TEST/v2test_ec.c
+-+++ b/TEST/v2test_ec.c
+-@@ -6,6 +6,8 @@
+- #include "cmcimacs.h"
+- 
+- extern char *value2Chars(CMPIType type, CMPIValue * value);
+-+extern void showClass( CMPIConstClass * in_class );
+-+
+- /*
+-  * comment out this define to use v2 http XML interface
+-  */
+-diff --git a/TEST/v2test_ein.c b/TEST/v2test_ein.c
+-index c1b4692..5d5ef5d 100644
+---- a/TEST/v2test_ein.c
+-+++ b/TEST/v2test_ein.c
+-@@ -6,6 +6,7 @@
+- #include "cmcimacs.h"
+- 
+- extern char *value2Chars(CMPIType type, CMPIValue * value);
+-+extern void showObjectPath( CMPIObjectPath * objectpath );
+- void showProperty( CMPIData , char * );
+- void showInstance( CMPIInstance * );
+- static char * CMPIState_str(CMPIValueState);
+-diff --git a/backend/cimxml/cimXmlParser.c b/backend/cimxml/cimXmlParser.c
+-index d1ab86e..9f5d1ca 100644
+---- a/backend/cimxml/cimXmlParser.c
+-+++ b/backend/cimxml/cimXmlParser.c
+-@@ -34,6 +34,8 @@
+- 
+- #include <pthread.h>
+- 
+-+void startParsing(ParserControl *parm);
+-+
+- static int attrsOk(XmlBuffer * xb, const XmlElement * e, XmlAttr * r,
+-                    const char *tag, int etag);
+- static char *getValue(XmlBuffer * xb, const char *v);
+-@@ -1350,7 +1352,9 @@ ResponseHdr scanCimXmlResponse(const char *xmlData, CMPIObjectPath *cop)
+- 
+-    control.heap = parser_heap_init();
+- 
+--   control.respHdr.rc = startParsing(&control);
+-+   control.respHdr.rc = 0;
+-+
+-+   startParsing(&control);
+- 
+-    parser_heap_term(control.heap);
+- 
+-diff --git a/backend/cimxml/grammar.c b/backend/cimxml/grammar.c
+-index 6a0a969..a3dcdea 100644
+---- a/backend/cimxml/grammar.c
+-+++ b/backend/cimxml/grammar.c
+-@@ -23,6 +23,8 @@
+- #include "sfcUtil/utilft.h"
+- #include "parserUtil.h"
+- 
+-+CMPIType guessType(char *val);
+-+void setClassMethods(CMPIConstClass *cls, XtokMethods *ms);
+- 
+- static int ct = 0;
+- static int dontLex = 0;
+--- 
+-2.37.3
+-
+diff --git a/meta-oe/recipes-extended/sblim-sfcc/sblim-sfcc/0001-Fix-implicit-function-declarations.patch b/meta-oe/recipes-extended/sblim-sfcc/sblim-sfcc/0001-Fix-implicit-function-declarations.patch
+new file mode 100644
+index 0000000000..08cd15ab0c
+--- /dev/null
++++ b/meta-oe/recipes-extended/sblim-sfcc/sblim-sfcc/0001-Fix-implicit-function-declarations.patch
+@@ -0,0 +1,80 @@
++From 1e1ed4d58909360997648ca9524ab16441f5474b Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Thu, 6 Jul 2023 10:15:41 -0700
++Subject: [PATCH] Fix implicit function declarations
 +
->   .../recipes-support/wireshark/files/CVE-2023-0668.patch         | 33 ++
->   meta-networking/recipes-support/wireshark/wireshark_3.4.12.bb   | 3 +
->   meta-oe/recipes-dbs/postgresql/files/CVE-2023-2454.patch        | 235
-> +++++++++
->   meta-oe/recipes-dbs/postgresql/files/CVE-2023-2455.patch        | 118
-> +++++
->   meta-oe/recipes-dbs/postgresql/postgresql_14.5.bb               | 2 +
->   meta-oe/recipes-devtools/grpc/grpc_1.46.7.bb                    | 3 +
->   meta-oe/recipes-devtools/yajl/yajl/CVE-2023-33460.patch         | 29 ++
->   meta-oe/recipes-devtools/yajl/yajl_2.1.0.bb                     | 4 +-
->   meta-oe/recipes-support/c-ares/c-ares/CVE-2023-31147.patch      | 717
-> ++++++++++++++++++++++++++++
->   meta-oe/recipes-support/c-ares/c-ares_1.18.1.bb                 | 1 +
->   meta-oe/recipes-support/libssh/libssh/CVE-2020-16135.patch      | 44 ++
->   meta-oe/recipes-support/libssh/libssh_0.8.9.bb                  | 4 +-
->   meta-oe/recipes-support/opencv/opencv/CVE-2023-2618.patch       | 32 ++
->   meta-oe/recipes-support/opencv/opencv_4.5.5.bb                  | 1 +
->   meta-oe/recipes-support/opensc/files/CVE-2023-2977.patch        | 53 ++
->   meta-oe/recipes-support/opensc/opensc_0.22.0.bb                 | 1 +
->   .../python/python3-werkzeug/CVE-2023-23934.patch                | 35 +-
->   meta-webserver/recipes-httpd/nginx/nginx.inc                    | 1 +
->   29 files changed, 2038 insertions(+), 20 deletions(-)
->   create mode 100644
-> meta-networking/recipes-connectivity/mbedtls/mbedtls/0001-aesce-do-not-sp=
-ecify-an-arch-version-when-enabling-c.patch
->   create mode 100644
-> meta-networking/recipes-connectivity/mbedtls/mbedtls/0002-aesce-use-corre=
-ct-target-attribute-when-building-wit.patch
->   create mode 100644
-> meta-networking/recipes-connectivity/mbedtls/mbedtls/run-ptest
->   create mode 100644
-> meta-networking/recipes-connectivity/mbedtls/mbedtls_3.4.0.bb
->   create mode 100644
-> meta-networking/recipes-protocols/frr/frr/CVE-2023-31489.patch
->   create mode 100755
-> meta-networking/recipes-support/ntp/ntp/CVE-2023-2655x.patch
->   rename meta-networking/recipes-support/tcpreplay/{tcpreplay_4.4.2.bb
-> =3D> tcpreplay_4.4.4.bb} (85%)
->   create mode 100644
-> meta-networking/recipes-support/wireshark/files/CVE-2023-0666.patch
->   create mode 100644
-> meta-networking/recipes-support/wireshark/files/CVE-2023-0667.patch
->   create mode 100644
-> meta-networking/recipes-support/wireshark/files/CVE-2023-0668.patch
->   create mode 100644
-> meta-oe/recipes-dbs/postgresql/files/CVE-2023-2454.patch
->   create mode 100644
-> meta-oe/recipes-dbs/postgresql/files/CVE-2023-2455.patch
->   create mode 100644 meta-oe/recipes-devtools/yajl/yajl/CVE-2023-33460.pa=
-tch
->   create mode 100644
-> meta-oe/recipes-support/c-ares/c-ares/CVE-2023-31147.patch
->   create mode 100644
-> meta-oe/recipes-support/libssh/libssh/CVE-2020-16135.patch
->   create mode 100644
-> meta-oe/recipes-support/opencv/opencv/CVE-2023-2618.patch
->   create mode 100644
-> meta-oe/recipes-support/opensc/files/CVE-2023-2977.patch
->
++Clang 17+ has been finding these errors since its enforcing C99
++more than other compilers
++
++Upstream-Status: Pending
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ TEST/v2test_ec.c              | 1 +
++ TEST/v2test_ein.c             | 1 +
++ backend/cimxml/cimXmlParser.c | 2 +-
++ backend/cimxml/grammar.c      | 2 ++
++ backend/cimxml/grammar.h      | 1 +
++ 5 files changed, 6 insertions(+), 1 deletion(-)
++
++diff --git a/TEST/v2test_ec.c b/TEST/v2test_ec.c
++index ad34dcc..940ca57 100644
++--- a/TEST/v2test_ec.c
+++++ b/TEST/v2test_ec.c
++@@ -4,6 +4,7 @@
++ #include <unistd.h>
++ #include <stdlib.h>
++ #include "cmcimacs.h"
+++#include "show.h"
++ 
++ extern char *value2Chars(CMPIType type, CMPIValue * value);
++ /*
++diff --git a/TEST/v2test_ein.c b/TEST/v2test_ein.c
++index c1b4692..ede95c1 100644
++--- a/TEST/v2test_ein.c
+++++ b/TEST/v2test_ein.c
++@@ -4,6 +4,7 @@
++ #include <unistd.h>
++ #include <stdlib.h>
++ #include "cmcimacs.h"
+++#include "show.h"
++ 
++ extern char *value2Chars(CMPIType type, CMPIValue * value);
++ void showProperty( CMPIData , char * );
++diff --git a/backend/cimxml/cimXmlParser.c b/backend/cimxml/cimXmlParser.c
++index d1ab86e..14f5f5c 100644
++--- a/backend/cimxml/cimXmlParser.c
+++++ b/backend/cimxml/cimXmlParser.c
++@@ -1350,7 +1350,7 @@ ResponseHdr scanCimXmlResponse(const char *xmlData, CMPIObjectPath *cop)
++ 
++    control.heap = parser_heap_init();
++ 
++-   control.respHdr.rc = startParsing(&control);
+++   startParsing(&control);
++ 
++    parser_heap_term(control.heap);
++ 
++diff --git a/backend/cimxml/grammar.c b/backend/cimxml/grammar.c
++index 6a0a969..522ca9e 100644
++--- a/backend/cimxml/grammar.c
+++++ b/backend/cimxml/grammar.c
++@@ -23,6 +23,8 @@
++ #include "sfcUtil/utilft.h"
++ #include "parserUtil.h"
++ 
+++extern CMPIType guessType(char *val);
+++extern void setClassMethods(CMPIConstClass *cls, XtokMethods *ms);
++ 
++ static int ct = 0;
++ static int dontLex = 0;
++diff --git a/backend/cimxml/grammar.h b/backend/cimxml/grammar.h
++index 00d364f..bafdd42 100644
++--- a/backend/cimxml/grammar.h
+++++ b/backend/cimxml/grammar.h
++@@ -79,3 +79,4 @@ static void valueRefArray(ParserControl *parm, parseUnion *stateUnion);
++ static void valueReference(ParserControl *parm, parseUnion *stateUnion);
++ static void valueReferenceData(ParserControl *parm, parseUnion *stateUnion);
++ 
+++void startParsing(ParserControl *parm);
++-- 
++2.41.0
++
+diff --git a/meta-oe/recipes-extended/sblim-sfcc/sblim-sfcc_2.2.8.bb b/meta-oe/recipes-extended/sblim-sfcc/sblim-sfcc_2.2.8.bb
+index 20bd2b6fc1..c9d3ddd6b2 100644
+--- a/meta-oe/recipes-extended/sblim-sfcc/sblim-sfcc_2.2.8.bb
++++ b/meta-oe/recipes-extended/sblim-sfcc/sblim-sfcc_2.2.8.bb
+@@ -4,7 +4,7 @@ HOMEPAGE = "http://www.sblim.org"
+ 
+ SRC_URI = "http://netcologne.dl.sourceforge.net/project/sblim/${BPN}/${BPN}-${PV}.tar.bz2 \
+            file://0001-cimxml-Include-sys-select.h-for-fd_set.patch \
+-           file://0001-Fix-function-declararions.patch \
++           file://0001-Fix-implicit-function-declarations.patch \
+            "
+ 
+ SRC_URI[md5sum] = "0bac0dec19f17ec065b6c332a56d7bae"
+-- 
+2.41.0
+
 
