@@ -2,34 +2,34 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 03F49EB64DA
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 179F8C00528
 	for <webhook@archiver.kernel.org>; Fri,  7 Jul 2023 03:14:17 +0000 (UTC)
-Received: from esa12.hc1455-7.c3s2.iphmx.com (esa12.hc1455-7.c3s2.iphmx.com [139.138.37.100])
- by mx.groups.io with SMTP id smtpd.web10.4895.1688699654076689617
+Received: from esa3.hc1455-7.c3s2.iphmx.com (esa3.hc1455-7.c3s2.iphmx.com [207.54.90.49])
+ by mx.groups.io with SMTP id smtpd.web11.4901.1688699651366715484
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 06 Jul 2023 20:14:14 -0700
+ Thu, 06 Jul 2023 20:14:11 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: fujitsu.com, ip: 139.138.37.100, mailfrom: wangmy@fujitsu.com)
-X-IronPort-AV: E=McAfee;i="6600,9927,10763"; a="103103849"
+ dkim=missing; spf=pass (domain: fujitsu.com, ip: 207.54.90.49, mailfrom: wangmy@fujitsu.com)
+X-IronPort-AV: E=McAfee;i="6600,9927,10763"; a="123689274"
 X-IronPort-AV: E=Sophos;i="6.01,187,1684767600"; 
-   d="scan'208";a="103103849"
-Received: from unknown (HELO yto-r2.gw.nic.fujitsu.com) ([218.44.52.218])
-  by esa12.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 07 Jul 2023 12:14:11 +0900
-Received: from yto-m3.gw.nic.fujitsu.com (yto-nat-yto-m3.gw.nic.fujitsu.com [192.168.83.66])
-	by yto-r2.gw.nic.fujitsu.com (Postfix) with ESMTP id 9DE0CC68E4
-	for <openembedded-devel@lists.openembedded.org>; Fri,  7 Jul 2023 12:14:09 +0900 (JST)
+   d="scan'208";a="123689274"
+Received: from unknown (HELO oym-r4.gw.nic.fujitsu.com) ([210.162.30.92])
+  by esa3.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 07 Jul 2023 12:14:10 +0900
+Received: from oym-m4.gw.nic.fujitsu.com (oym-nat-oym-m4.gw.nic.fujitsu.com [192.168.87.61])
+	by oym-r4.gw.nic.fujitsu.com (Postfix) with ESMTP id CF545DDC64
+	for <openembedded-devel@lists.openembedded.org>; Fri,  7 Jul 2023 12:14:06 +0900 (JST)
 Received: from aks-ab2.gw.nic.fujitsu.com (aks-ab2.gw.nic.fujitsu.com [192.51.207.12])
-	by yto-m3.gw.nic.fujitsu.com (Postfix) with ESMTP id E3FD014278
-	for <openembedded-devel@lists.openembedded.org>; Fri,  7 Jul 2023 12:14:08 +0900 (JST)
+	by oym-m4.gw.nic.fujitsu.com (Postfix) with ESMTP id E8993D55E0
+	for <openembedded-devel@lists.openembedded.org>; Fri,  7 Jul 2023 12:14:05 +0900 (JST)
 Received: from localhost.localdomain (unknown [10.167.225.33])
-	by aks-ab2.gw.nic.fujitsu.com (Postfix) with ESMTP id 13D4F881D9;
-	Fri,  7 Jul 2023 12:14:07 +0900 (JST)
+	by aks-ab2.gw.nic.fujitsu.com (Postfix) with ESMTP id 188BC87E03;
+	Fri,  7 Jul 2023 12:14:05 +0900 (JST)
 From: wangmy@fujitsu.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-python] [PATCH] python3-aenum: upgrade 3.1.14 -> 3.1.15
-Date: Fri,  7 Jul 2023 11:13:37 +0800
-Message-Id: <1688699627-2519-12-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH] passwdqc: upgrade 2.0.2 -> 2.0.3
+Date: Fri,  7 Jul 2023 11:13:33 +0800
+Message-Id: <1688699627-2519-8-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 In-Reply-To: <1688699627-2519-1-git-send-email-wangmy@fujitsu.com>
 References: <1688699627-2519-1-git-send-email-wangmy@fujitsu.com>
@@ -37,43 +37,108 @@ X-TM-AS-GCONF: 00
 X-TM-AS-Product-Ver: IMSS-9.1.0.1408-9.0.0.1002-27736.002
 X-TM-AS-User-Approved-Sender: Yes
 X-TMASE-Version: IMSS-9.1.0.1408-9.0.1002-27736.002
-X-TMASE-Result: 10-3.825100-10.000000
-X-TMASE-MatchedRID: 6e3s/u+cBDSjz0nOeth/yQPZZctd3P4B1cuIRwt/4MiysPB8dBBorXKn
-	6DBj/gsEIvrftAIhWmIAf/HImzvCGGzQB0xBvE+luce7gFxhKa0BQOqUsWgx5oFum2PEjqt1o8W
-	MkQWv6iV3LAytsQR4e1cppCzPq+1UxlblqLlYqXKxCPiZMTu0YFLnSnDUu8deZXWlhZodYLAxIw
-	vUus7IWJFJ+ldwSutywXChNXix1cOVMcvApxY54+dyvjnte+37W4v45cYnAHH+v9v52ZIoWjoAf
-	389xF3XFSk9HhUZnw7OGIWnws4LoyHWPYzouJUy
+X-TMASE-Result: 10--6.058100-10.000000
+X-TMASE-MatchedRID: wbL0rUvz+3Cjz0nOeth/yaoXHZz/dXlxnJdsOLB4zv5fv9SYkzU9kdnf
+	JrUSEbFDJMPD8FR5f58F1Ec/oUIRlVpCIuRr0RxK+Basxm9uZ4fBOVz0Jwcxl0fyM5VfgjG2Miw
+	cxLTcjXZQGoanvsRLW8qi59sgP68Quh0tHimGLUY7Cl8sx4HBG2v34qCfZeB4S6QizeDUeN6yuh
+	piqaRnanQYNnCFkMfmeTjw/FyRX6QfE8yM4pjsDxZ4ylU2GwzAxEHRux+uk8h+ICquNi0WJJESY
+	5VaokVJb9zOh/SOOBk6P6kcw1rzG5uoT5TEBUCuftwZ3X11IV0=
 X-TMASE-SNAP-Result: 1.821001.0001-0-1-22:0,33:0,34:0-0
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Fri, 07 Jul 2023 03:14:17 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103698
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103695
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
+makefile-add-ldflags.patch
+refreshed for 2.0.3
+
+Changelog:
+===========
+-Added pkg-config file.
+-Changed enforce=users to support "chpasswd" PAM service in addition to
+traditionally supported "passwd".
+
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../python/{python3-aenum_3.1.14.bb => python3-aenum_3.1.15.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-aenum_3.1.14.bb => python3-aenum_3.1.15.bb} (77%)
+ ...rkmanager_1.42.6.bb => networkmanager_1.42.8.bb} |  2 +-
+ .../passwdqc/passwdqc/makefile-add-ldflags.patch    | 13 ++++++++++++-
+ .../{passwdqc_2.0.2.bb => passwdqc_2.0.3.bb}        |  2 +-
+ 3 files changed, 14 insertions(+), 3 deletions(-)
+ rename meta-networking/recipes-connectivity/networkmanager/{networkmanager_1.42.6.bb => networkmanager_1.42.8.bb} (99%)
+ rename meta-oe/recipes-security/passwdqc/{passwdqc_2.0.2.bb => passwdqc_2.0.3.bb} (96%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-aenum_3.1.14.bb b/meta-python/recipes-devtools/python/python3-aenum_3.1.15.bb
-similarity index 77%
-rename from meta-python/recipes-devtools/python/python3-aenum_3.1.14.bb
-rename to meta-python/recipes-devtools/python/python3-aenum_3.1.15.bb
-index 22b3c52f2f..f9fdb6aeb6 100644
---- a/meta-python/recipes-devtools/python/python3-aenum_3.1.14.bb
-+++ b/meta-python/recipes-devtools/python/python3-aenum_3.1.15.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = "https://pypi.org/project/aenum/"
- LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://aenum/LICENSE;md5=c6a85477543f8b8591b9c1f82abebbe9"
+diff --git a/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.42.6.bb b/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.42.8.bb
+similarity index 99%
+rename from meta-networking/recipes-connectivity/networkmanager/networkmanager_1.42.6.bb
+rename to meta-networking/recipes-connectivity/networkmanager/networkmanager_1.42.8.bb
+index 3196b0c244..5d9c6f4274 100644
+--- a/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.42.6.bb
++++ b/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.42.8.bb
+@@ -32,7 +32,7 @@ SRC_URI = " \
+     file://enable-iwd.conf \
+ "
  
--SRC_URI[sha256sum] = "7c4b04b5c9621533d6311e6ca23ea2ee213c7a992ed0be79a2b944cdaf2a45ec"
-+SRC_URI[sha256sum] = "8cbd76cd18c4f870ff39b24284d3ea028fbe8731a58df3aa581e434c575b9559"
+-SRC_URI[sha256sum] = "8c388ac3775ac6bceb605fae21be2c3e261cafe6067994a89f0dfa4610ed0279"
++SRC_URI[sha256sum] = "0337e7583d2ec5ade2ba2e8c625d2f09eeccda1d22836ee29aa72925d399c353"
  
- inherit pypi setuptools3
+ S = "${WORKDIR}/NetworkManager-${PV}"
  
+diff --git a/meta-oe/recipes-security/passwdqc/passwdqc/makefile-add-ldflags.patch b/meta-oe/recipes-security/passwdqc/passwdqc/makefile-add-ldflags.patch
+index 6e4803f4f3..4e9659aa58 100644
+--- a/meta-oe/recipes-security/passwdqc/passwdqc/makefile-add-ldflags.patch
++++ b/meta-oe/recipes-security/passwdqc/passwdqc/makefile-add-ldflags.patch
+@@ -3,10 +3,15 @@ Add LDFLAGS variable to Makefile so that extra linker flags can be sent via this
+ Upstream-Status: Pending
+ 
+ Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
++---
++ Makefile | 5 ++---
++ 1 file changed, 2 insertions(+), 3 deletions(-)
+ 
++diff --git a/Makefile b/Makefile
++index 404f036..a9b18f0 100644
+ --- a/Makefile
+ +++ b/Makefile
+-@@ -68,18 +68,17 @@ XGETTEXT = xgettext
++@@ -75,13 +75,12 @@ XGETTEXT = xgettext
+  XGETTEXT_OPTS = --keyword=_ --keyword=P2_:1,1 --keyword=P3_:1,2 --language=C --add-comments
+  MSGMERGE = msgmerge
+  
+@@ -21,9 +26,15 @@ Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+  	-Wl,--soname,$(SHARED_LIB),--version-script,$(MAP_LIB)
+  LDFLAGS_lib_SUN = $(LDFLAGS_shared_SUN)
+  LDFLAGS_lib_HP = $(LDFLAGS_shared_HP)
++@@ -90,7 +89,7 @@ LDFLAGS_lib_CYGWIN = $(LDFLAGS_shared) \
++ 	-Wl,--export-all-symbols \
++ 	-Wl,--enable-auto-import
+  LDFLAGS_pam = $(LDFLAGS_shared)
+ -LDFLAGS_pam_LINUX = $(LDFLAGS_shared_LINUX) \
+ +LDFLAGS_pam_LINUX = $(LDFLAGS) $(LDFLAGS_shared_LINUX) \
+  	-Wl,--version-script,$(MAP_PAM)
+  LDFLAGS_pam_SUN = $(LDFLAGS_shared_SUN)
+  LDFLAGS_pam_HP = $(LDFLAGS_shared_HP)
++-- 
++2.34.1
++
+diff --git a/meta-oe/recipes-security/passwdqc/passwdqc_2.0.2.bb b/meta-oe/recipes-security/passwdqc/passwdqc_2.0.3.bb
+similarity index 96%
+rename from meta-oe/recipes-security/passwdqc/passwdqc_2.0.2.bb
+rename to meta-oe/recipes-security/passwdqc/passwdqc_2.0.3.bb
+index 8462701b31..8694052e61 100644
+--- a/meta-oe/recipes-security/passwdqc/passwdqc_2.0.2.bb
++++ b/meta-oe/recipes-security/passwdqc/passwdqc_2.0.3.bb
+@@ -30,7 +30,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=ac99c8678577a1c2f9f04cccee411d5d"
+ SRC_URI = "http://www.openwall.com/${BPN}/${BP}.tar.gz \
+            file://makefile-add-ldflags.patch \
+           "
+-SRC_URI[sha256sum] = "ff1f505764c020f6a4484b1e0cc4fdbf2e3f71b522926d90b4709104ca0604ab"
++SRC_URI[sha256sum] = "53b0f4bc49369f06195e9e13abb6cff352d5acb79e861004ec95973896488cf4"
+ 
+ # explicitly define LINUX_PAM in case DISTRO_FEATURES no pam
+ # this package's pam_passwdqc.so needs pam
 -- 
 2.34.1
 
