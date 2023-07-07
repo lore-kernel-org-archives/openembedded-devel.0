@@ -1,200 +1,83 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id F3433EB64D9
-	for <webhook@archiver.kernel.org>; Fri,  7 Jul 2023 02:35:56 +0000 (UTC)
-Received: from mail-pj1-f42.google.com (mail-pj1-f42.google.com [209.85.216.42])
- by mx.groups.io with SMTP id smtpd.web10.4364.1688697355251826500
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 188EFC3DA40
+	for <webhook@archiver.kernel.org>; Fri,  7 Jul 2023 03:14:07 +0000 (UTC)
+Received: from esa7.hc1455-7.c3s2.iphmx.com (esa7.hc1455-7.c3s2.iphmx.com [139.138.61.252])
+ by mx.groups.io with SMTP id smtpd.web11.4894.1688699638020234539
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 06 Jul 2023 19:35:55 -0700
+ Thu, 06 Jul 2023 20:13:58 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=otObcgj5;
- spf=pass (domain: gmail.com, ip: 209.85.216.42, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f42.google.com with SMTP id 98e67ed59e1d1-262d9e75438so1031167a91.2
-        for <openembedded-devel@lists.openembedded.org>; Thu, 06 Jul 2023 19:35:55 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1688697354; x=1691289354;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=QJWID2xjtJtxdTainmysVohXX3DwHvtrC0TqqpYxDvs=;
-        b=otObcgj58tWORDNXgfVPXbcKGh1vqIIKgTnjZqhtt09Q/U81tHLLPD4D3m0gn01TJ2
-         99yQxeZmoVXRTz3Qcmn+cRFESxMlwuEJYNIKfKzwyVV8/KSJbMiNJsJPpQxR0eBiPzKm
-         eg8HCoWck//vI9mKTRMlO5TsuXuftvdYltcM0UWwEtuGN34Qo4GVKpEVYoL1LwUKdN/W
-         8MDwWV6uYXe0UEmw76EECktGHNaeZ9BvcuJhl52zsGK3vVdxsH3aUl0pSZGgh/dglxJq
-         G5Bf4BaSW5dG0IdZDeKt0ijRMuLMBcwtxTU09YyS0t+XZjDRoOHP6zTeyv09kqxPiZv9
-         TAMg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1688697354; x=1691289354;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=QJWID2xjtJtxdTainmysVohXX3DwHvtrC0TqqpYxDvs=;
-        b=MP3AP1eA9PiByl9o5UDxKqo2mU/MD1XX9dFKdcJl+affwapU4sGt3gBFBq1PHDemGz
-         jm874nZGkz1oEWVhp52T1GO4wzCTRJHXt5VOdl/gqm2rbXbzVh+/oiopmW8cXUNNXohh
-         1Hv8xtF3PqhnkwYHd6Uw/dkwWxgyu3Z39VLLcll73DduH6+Ke1Swryz+MX27a9llC2W/
-         Z/2RtkiCirLlmyjKvj26Z2lrlmuF9spwN9dAzZ5PrvaHOaiSdnSJL0c8hDovIKAll1+V
-         2jFd418JidRcZmXuY1YKKvMNkzz4CTY8gw+YMSGmQHTBQKSTMPC5zRHfwnANtTlQDr8f
-         VPCg==
-X-Gm-Message-State: ABy/qLZxKn/hq89RhrwR7Cn3P8wKT3H8aDAKZIXReUNFAUdqRIPFcrls
-	URZAnyuP6zFhWf395iGc8mEczkTvgKg=
-X-Google-Smtp-Source: APBJJlERU7ax+gxhMF1PxnPu0DEDPo8rcJ1r+RAWmVajKzFGc8g3iS/0mCC3dskn1bJvTfC0cvVzaQ==
-X-Received: by 2002:a17:90a:201:b0:262:cef9:84f6 with SMTP id c1-20020a17090a020100b00262cef984f6mr3243427pjc.22.1688697354202;
-        Thu, 06 Jul 2023 19:35:54 -0700 (PDT)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9181:d380::81d4])
-        by smtp.gmail.com with ESMTPSA id a6-20020a17090a688600b0025695b06decsm420998pjd.31.2023.07.06.19.35.53
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 06 Jul 2023 19:35:53 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
+ dkim=missing; spf=pass (domain: fujitsu.com, ip: 139.138.61.252, mailfrom: wangmy@fujitsu.com)
+X-IronPort-AV: E=McAfee;i="6600,9927,10763"; a="102453284"
+X-IronPort-AV: E=Sophos;i="6.01,187,1684767600"; 
+   d="scan'208";a="102453284"
+Received: from unknown (HELO oym-r2.gw.nic.fujitsu.com) ([210.162.30.90])
+  by esa7.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 07 Jul 2023 12:13:55 +0900
+Received: from oym-m2.gw.nic.fujitsu.com (oym-nat-oym-m2.gw.nic.fujitsu.com [192.168.87.59])
+	by oym-r2.gw.nic.fujitsu.com (Postfix) with ESMTP id 783ABCD7E0
+	for <openembedded-devel@lists.openembedded.org>; Fri,  7 Jul 2023 12:13:53 +0900 (JST)
+Received: from aks-ab2.gw.nic.fujitsu.com (aks-ab2.gw.nic.fujitsu.com [192.51.207.12])
+	by oym-m2.gw.nic.fujitsu.com (Postfix) with ESMTP id B1676BF3D8
+	for <openembedded-devel@lists.openembedded.org>; Fri,  7 Jul 2023 12:13:52 +0900 (JST)
+Received: from localhost.localdomain (unknown [10.167.225.33])
+	by aks-ab2.gw.nic.fujitsu.com (Postfix) with ESMTP id 9A9B287E03;
+	Fri,  7 Jul 2023 12:13:51 +0900 (JST)
+From: wangmy@fujitsu.com
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH] minifi-cpp: Fix build with clang 17
-Date: Thu,  6 Jul 2023 19:35:50 -0700
-Message-ID: <20230707023550.1044675-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.41.0
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Cc: Wang Mingyu <wangmy@fujitsu.com>
+Subject: [oe] [meta-gnome] [PATCH] gegl: upgrade 0.4.44 -> 0.4.46
+Date: Fri,  7 Jul 2023 11:13:26 +0800
+Message-Id: <1688699627-2519-1-git-send-email-wangmy@fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
+X-TM-AS-GCONF: 00
+X-TM-AS-Product-Ver: IMSS-9.1.0.1408-9.0.0.1002-27736.002
+X-TM-AS-User-Approved-Sender: Yes
+X-TMASE-Version: IMSS-9.1.0.1408-9.0.1002-27736.002
+X-TMASE-Result: 10--5.808500-10.000000
+X-TMASE-MatchedRID: hsQjHHSArR6jz0nOeth/yUIIxwDaU5mrKQNhMboqZloCRZok3tr/KzK2
+	ieu8M5yxCC8aAmGeO6nqXvXKPBg5BmVjCRquYdk+EXjPIvKd74BUENBIMyKD0RHfiujuTbedJhN
+	Zatxc0jTpsFJUKYZZJ3k48PxckV+kHxPMjOKY7A+u65UDD0aDgsRB0bsfrpPIfiAqrjYtFiQ3Zc
+	8r9UHV51jiUJnQQbRznDBjYcknODnl8GZOwrFEPX7cGd19dSFd
+X-TMASE-SNAP-Result: 1.821001.0001-0-1-22:0,33:0,34:0-0
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 07 Jul 2023 02:35:56 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103686
+ <openembedded-devel@lists.openembedded.org>; Fri, 07 Jul 2023 03:14:07 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103687
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+From: Wang Mingyu <wangmy@fujitsu.com>
+
+Changelog:
+=============
+New simpler API for connecting pads, gegl_node_connect which can be used instead
+of either gegl_node_connect_from or gegl_node_connect_to by autosensing the
+neccesary direction of the connection.
+
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- ...s-issues-around-autovector-iterator_.patch | 63 +++++++++++++++++++
- .../files/0002-Fix-build-with-clang-17.patch  | 37 +++++++++++
- .../minifi-cpp/minifi-cpp_0.7.0.bb            |  2 +
- 3 files changed, 102 insertions(+)
- create mode 100644 meta-oe/recipes-extended/minifi-cpp/files/0001-Fix-the-constness-issues-around-autovector-iterator_.patch
- create mode 100644 meta-oe/recipes-extended/minifi-cpp/files/0002-Fix-build-with-clang-17.patch
+ meta-gnome/recipes-gimp/gegl/{gegl_0.4.44.bb => gegl_0.4.46.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-gnome/recipes-gimp/gegl/{gegl_0.4.44.bb => gegl_0.4.46.bb} (96%)
 
-diff --git a/meta-oe/recipes-extended/minifi-cpp/files/0001-Fix-the-constness-issues-around-autovector-iterator_.patch b/meta-oe/recipes-extended/minifi-cpp/files/0001-Fix-the-constness-issues-around-autovector-iterator_.patch
-new file mode 100644
-index 0000000000..acb96f40d5
---- /dev/null
-+++ b/meta-oe/recipes-extended/minifi-cpp/files/0001-Fix-the-constness-issues-around-autovector-iterator_.patch
-@@ -0,0 +1,63 @@
-+From 787d5052a6034cc722b073c652cc610ae037f933 Mon Sep 17 00:00:00 2001
-+From: Levi Tamasi <ltamasi@fb.com>
-+Date: Fri, 22 Nov 2019 18:12:35 -0800
-+Subject: [PATCH 1/2] Fix the constness issues around
-+ autovector::iterator_impl's dereference operators (#6057)
-+
-+Summary:
-+As described in detail in issue https://github.com/facebook/rocksdb/issues/6048, iterators' dereference operators
-+(`*`, `->`, and `[]`) should return `pointer`s/`reference`s (as opposed to
-+`const_pointer`s/`const_reference`s) even if the iterator itself is `const`
-+to be in sync with the standard's iterator concept.
-+Pull Request resolved: https://github.com/facebook/rocksdb/pull/6057
-+
-+Test Plan: make check
-+
-+Differential Revision: D18623235
-+
-+Pulled By: ltamasi
-+
-+fbshipit-source-id: 04e82d73bc0c67fb0ded018383af8dfc332050cc
-+---
-+ thirdparty/rocksdb/util/autovector.h | 15 ++++-----------
-+ 1 file changed, 4 insertions(+), 11 deletions(-)
-+
-+diff --git a/thirdparty/rocksdb/util/autovector.h b/thirdparty/rocksdb/util/autovector.h
-+index b5c84712..6d337908 100644
-+--- a/thirdparty/rocksdb/util/autovector.h
-++++ b/thirdparty/rocksdb/util/autovector.h
-+@@ -120,27 +120,20 @@ class autovector {
-+     }
-+ 
-+     // -- Reference
-+-    reference operator*() {
-++    reference operator*() const {
-+       assert(vect_->size() >= index_);
-+       return (*vect_)[index_];
-+     }
-+ 
-+-    const_reference operator*() const {
-+-      assert(vect_->size() >= index_);
-+-      return (*vect_)[index_];
-+-    }
-+-
-+-    pointer operator->() {
-++    pointer operator->() const {
-+       assert(vect_->size() >= index_);
-+       return &(*vect_)[index_];
-+     }
-+ 
-+-    const_pointer operator->() const {
-+-      assert(vect_->size() >= index_);
-+-      return &(*vect_)[index_];
-++    reference operator[](difference_type len) const {
-++      return *(*this + len);
-+     }
-+ 
-+-
-+     // -- Logical Operators
-+     bool operator==(const self_type& other) const {
-+       assert(vect_ == other.vect_);
-+-- 
-+2.41.0
-+
-diff --git a/meta-oe/recipes-extended/minifi-cpp/files/0002-Fix-build-with-clang-17.patch b/meta-oe/recipes-extended/minifi-cpp/files/0002-Fix-build-with-clang-17.patch
-new file mode 100644
-index 0000000000..7581efc763
---- /dev/null
-+++ b/meta-oe/recipes-extended/minifi-cpp/files/0002-Fix-build-with-clang-17.patch
-@@ -0,0 +1,37 @@
-+From a784973e500753747992a51dc0fb1caabbbb03be Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Thu, 6 Jul 2023 17:52:38 -0700
-+Subject: [PATCH 2/2] Fix build with clang 17
-+
-+Part of https://github.com/jarro2783/cxxopts/commit/513afbc6dcfe2952cb2ffab0dae2415b11bba2d0
-+
-+Upstream-Status: Backport [https://github.com/jarro2783/cxxopts/commit/513afbc6dcfe2952cb2ffab0dae2415b11bba2d0]
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ thirdparty/cxxopts/include/cxxopts.hpp | 4 ++--
-+ 1 file changed, 2 insertions(+), 2 deletions(-)
-+
-+diff --git a/thirdparty/cxxopts/include/cxxopts.hpp b/thirdparty/cxxopts/include/cxxopts.hpp
-+index e87416f1..bd2d81cf 100644
-+--- a/thirdparty/cxxopts/include/cxxopts.hpp
-++++ b/thirdparty/cxxopts/include/cxxopts.hpp
-+@@ -468,14 +468,14 @@ namespace cxxopts
-+         {
-+           if (negative)
-+           {
-+-            if (u > static_cast<U>(-std::numeric_limits<T>::min()))
-++            if (u > static_cast<U>((std::numeric_limits<T>::min)()))
-+             {
-+               throw argument_incorrect_type(text);
-+             }
-+           }
-+           else
-+           {
-+-            if (u > static_cast<U>(std::numeric_limits<T>::max()))
-++            if (u > static_cast<U>((std::numeric_limits<T>::max)()))
-+             {
-+               throw argument_incorrect_type(text);
-+             }
-+-- 
-+2.41.0
-+
-diff --git a/meta-oe/recipes-extended/minifi-cpp/minifi-cpp_0.7.0.bb b/meta-oe/recipes-extended/minifi-cpp/minifi-cpp_0.7.0.bb
-index 9ae72d2e99..0986fdec07 100644
---- a/meta-oe/recipes-extended/minifi-cpp/minifi-cpp_0.7.0.bb
-+++ b/meta-oe/recipes-extended/minifi-cpp/minifi-cpp_0.7.0.bb
-@@ -33,6 +33,8 @@ SRC_URI = "git://github.com/apache/nifi-minifi-cpp.git;branch=master;protocol=ht
-             file://0001-civetweb-Disable-lto.patch \
-             file://0001-Add-missing-includes-cstdint-and-cstdio.patch \
-             file://0001-Do-not-use-LFS64-functions-on-linux-musl.patch \
-+            file://0001-Fix-the-constness-issues-around-autovector-iterator_.patch \
-+            file://0002-Fix-build-with-clang-17.patch \
-             file://minifi.service \
-             file://systemd-volatile.conf \
-             file://sysvinit-volatile.conf \
+diff --git a/meta-gnome/recipes-gimp/gegl/gegl_0.4.44.bb b/meta-gnome/recipes-gimp/gegl/gegl_0.4.46.bb
+similarity index 96%
+rename from meta-gnome/recipes-gimp/gegl/gegl_0.4.44.bb
+rename to meta-gnome/recipes-gimp/gegl/gegl_0.4.46.bb
+index 3c1a0243e8..3a9478785d 100644
+--- a/meta-gnome/recipes-gimp/gegl/gegl_0.4.44.bb
++++ b/meta-gnome/recipes-gimp/gegl/gegl_0.4.46.bb
+@@ -26,7 +26,7 @@ ANY_OF_DISTRO_FEATURES = "${GTK3DISTROFEATURES}"
+ SHPV = "${@gnome_verdir("${PV}")}"
+ 
+ SRC_URI = "https://download.gimp.org/pub/${BPN}/${SHPV}/${BP}.tar.xz"
+-SRC_URI[sha256sum] = "0a4cdb41635e406a0849cd0d3f03caf7d97cab8aa13d28707d532d0089d56126"
++SRC_URI[sha256sum] = "d0b3b2481bc8774c5f3d0a487611910166d18eef823a859fb91e781ab7b1e892"
+ 
+ PACKAGECONFIG ??= "gexiv2 jpeg libpng libraw librsvg pango poppler sdl2"
+ PACKAGECONFIG:class-native = "libpng librsvg"
 -- 
-2.41.0
+2.34.1
 
 
