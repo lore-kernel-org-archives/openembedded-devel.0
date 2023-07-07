@@ -1,116 +1,191 @@
-Return-Path: <wangmy@fujitsu.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1265EEB64DA
-	for <webhook@archiver.kernel.org>; Fri,  7 Jul 2023 03:14:37 +0000 (UTC)
-Received: from esa9.hc1455-7.c3s2.iphmx.com (esa9.hc1455-7.c3s2.iphmx.com [139.138.36.223])
- by mx.groups.io with SMTP id smtpd.web10.4902.1688699670287778377
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 57BB3EB64D9
+	for <webhook@archiver.kernel.org>; Fri,  7 Jul 2023 03:57:47 +0000 (UTC)
+Received: from mail-oa1-f53.google.com (mail-oa1-f53.google.com [209.85.160.53])
+ by mx.groups.io with SMTP id smtpd.web11.5531.1688702262872249904
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 06 Jul 2023 20:14:30 -0700
+ Thu, 06 Jul 2023 20:57:43 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: fujitsu.com, ip: 139.138.36.223, mailfrom: wangmy@fujitsu.com)
-X-IronPort-AV: E=McAfee;i="6600,9927,10763"; a="111930540"
-X-IronPort-AV: E=Sophos;i="6.01,187,1684767600"; 
-   d="scan'208";a="111930540"
-Received: from unknown (HELO oym-r3.gw.nic.fujitsu.com) ([210.162.30.91])
-  by esa9.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 07 Jul 2023 12:14:15 +0900
-Received: from oym-m2.gw.nic.fujitsu.com (oym-nat-oym-m2.gw.nic.fujitsu.com [192.168.87.59])
-	by oym-r3.gw.nic.fujitsu.com (Postfix) with ESMTP id 72FF8C53D1
-	for <openembedded-devel@lists.openembedded.org>; Fri,  7 Jul 2023 12:14:13 +0900 (JST)
-Received: from aks-ab2.gw.nic.fujitsu.com (aks-ab2.gw.nic.fujitsu.com [192.51.207.12])
-	by oym-m2.gw.nic.fujitsu.com (Postfix) with ESMTP id 942F76CFB81
-	for <openembedded-devel@lists.openembedded.org>; Fri,  7 Jul 2023 12:14:12 +0900 (JST)
-Received: from localhost.localdomain (unknown [10.167.225.33])
-	by aks-ab2.gw.nic.fujitsu.com (Postfix) with ESMTP id A3799881D9;
-	Fri,  7 Jul 2023 12:14:11 +0900 (JST)
-From: wangmy@fujitsu.com
-To: openembedded-devel@lists.openembedded.org
-Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-python] [PATCH] python3-joblib: upgrade 1.2.0 -> 1.3.1
-Date: Fri,  7 Jul 2023 11:13:42 +0800
-Message-Id: <1688699627-2519-17-git-send-email-wangmy@fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
-In-Reply-To: <1688699627-2519-1-git-send-email-wangmy@fujitsu.com>
-References: <1688699627-2519-1-git-send-email-wangmy@fujitsu.com>
-X-TM-AS-GCONF: 00
-X-TM-AS-Product-Ver: IMSS-9.1.0.1408-9.0.0.1002-27736.002
-X-TM-AS-User-Approved-Sender: Yes
-X-TMASE-Version: IMSS-9.1.0.1408-9.0.1002-27736.002
-X-TMASE-Result: 10--3.780600-10.000000
-X-TMASE-MatchedRID: yX2NuvXOYO2jz0nOeth/yUIIxwDaU5mrTfK5j0EZbyuAI7Mvq/sL59Bi
-	hTOKX++2J2o10m2bLBIefeycEmxucKu/6lvVfpZrPKN38CLPK0HhEXiLZlbM8cI+ladxdCSDB82
-	GyGpZHXvK8TJfpa0/ymgWB9k/Yp3Hidm++5gqe3E5/8HHX4y4wthQO8CvZj/XLKw4tMK/aDAC1S
-	/6sf6YeOpBtVlfOe9X5tPA3/kabXo372ax+5lazTOgNHhlU7YMstmlQezwoxUktNN9I8qXDxXPQ
-	cjpPoxTUsU2l8Z42eI6m0b+cRtPa5dW3P+FD/5O9QPBN24tSRwcsx3IH4sq3LwYtb0g7YwtHGp2
-	3bat06DM0y3a6QxVo1B/D9lmIvK17VrXqiqnwHX8dMpK2wMYwkc1DwKoQo7YwLkNMQzGl5BEGDr
-	WRIrgOIGQRIwjTl3iKI5/U0OcIj6tYv/FAmebjp4CIKY/Hg3AGdQnQSTrKGPEQdG7H66TyHEqm8
-	QYBtMOdtjnCXbH1XCLTKYgrrObonAxKivUQtfYF2M+lqGA/G88wgttFRNi2puF65jKbNUFaT+q2
-	2v8HjNjEqo5eywDJh4QQ9+RNtPfgr6lqxbIXlHC3tMwY3ma2xUDj+dgUQVyTE7Co9fKv3w=
-X-TMASE-SNAP-Result: 1.821001.0001-0-1-22:0,33:0,34:0-0
+ dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=Pai/y1Zz;
+ spf=pass (domain: gmail.com, ip: 209.85.160.53, mailfrom: raj.khem@gmail.com)
+Received: by mail-oa1-f53.google.com with SMTP id 586e51a60fabf-1b449890ef5so579632fac.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 06 Jul 2023 20:57:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20221208; t=1688702262; x=1691294262;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=mWQZ2b7FCW7JG3veP8BHZXdDO3uP91s/ENRynnfXlNE=;
+        b=Pai/y1Zzek6R02qdXSYGN8CwoS/CU91EPcJ/oEEPvCJnbutwMhI3WVW7My3ibKrUQx
+         Gcq4iCacnCbig7Z4UJQZcrEC1mQ/ipn1TCTZEX70EcCFWs+IEpTji39ZhhqONBlwVx9N
+         w0xCBFjcsut6d3C2m83G+4Vg1Fb/o45xce046PytWMJ21FbhXqtsKu7Ole1jRlPaW3pX
+         pJgRwG5fDVPwBZ9rKSF6XS72bZno4C9TZ14MFIiXhmWe1BbF2tQuMFqKi1EB1zNaMwBq
+         xT380+MtU6B5h/e8X7wUIHYAr/6Np7YL5Ggm5BKtPLX7JEuWpHcS/yPwJL/drw+uFQWD
+         iuKg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20221208; t=1688702262; x=1691294262;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=mWQZ2b7FCW7JG3veP8BHZXdDO3uP91s/ENRynnfXlNE=;
+        b=SgrEZaDE5zriNIhr0KQ5hXuhFbSxic38iM9wrun6BUJEchlCjhI2paSEay3Ay+jpPB
+         IUWULy8AMKEfOuRayOgKvvhTywzmu+FTnAcicTpoXNX/T2UhKRlR+ePq6WUJ0+MGTk9r
+         CALFZOWCoZPw3OJWWXrNEAbFCgFHJf89Wo1NbWsjvPAbfEfWeCb6vdgH2fd3qGr29BNb
+         yAlpvJ/Qg2Fm/8QTvXpti3+ODKhKJY/IH02eHb52+BFcL5cKgg8mGwNZD+MYfoLjLzWV
+         bI4f3AVAJPT25EvTeeW3a5wTz1R3vTXhZlo4tPVAT4Z7mqbjk+phrCxJWnvNRSQt3QIU
+         SAnQ==
+X-Gm-Message-State: ABy/qLYoAnIKz4T4Rck6mo7qbkU3yxb3f3v6/TVnGl/Y/Dwp2FAJ2GKR
+	gHo6YJ4UIRqH0JjuXmX9DcgiY1lE068tNcjgcBs=
+X-Google-Smtp-Source: APBJJlH0pzdOgLaW/i/3AmlgsElP0YJOx4sdp/6gXooKDZ+kb631ARdELhFp9v9Lb2jYVoycS2La6WUVx+9fkNbWzUo=
+X-Received: by 2002:a05:6871:294:b0:18b:1936:30ee with SMTP id
+ i20-20020a056871029400b0018b193630eemr4319308oae.56.1688702261829; Thu, 06
+ Jul 2023 20:57:41 -0700 (PDT)
+MIME-Version: 1.0
+References: <1688699627-2519-1-git-send-email-wangmy@fujitsu.com> <1688699627-2519-8-git-send-email-wangmy@fujitsu.com>
+In-Reply-To: <1688699627-2519-8-git-send-email-wangmy@fujitsu.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 6 Jul 2023 20:57:15 -0700
+Message-ID: <CAMKF1srRmosHF7J0DPr+rFBwAcnVS7qKO85Ok6C9o++Lp_Lk0g@mail.gmail.com>
+Subject: Re: [oe] [meta-oe] [PATCH] passwdqc: upgrade 2.0.2 -> 2.0.3
+To: wangmy <wangmy@fujitsu.com>
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 07 Jul 2023 03:14:37 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103707
+ <openembedded-devel@lists.openembedded.org>; Fri, 07 Jul 2023 03:57:47 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103709
 
-From: Wang Mingyu <wangmy@fujitsu.com>
+On Thu, Jul 6, 2023 at 8:14=E2=80=AFPM wangmy <wangmy@fujitsu.com> wrote:
+>
+> From: Wang Mingyu <wangmy@fujitsu.com>
+>
+> makefile-add-ldflags.patch
+> refreshed for 2.0.3
+>
+> Changelog:
+> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> -Added pkg-config file.
+> -Changed enforce=3Dusers to support "chpasswd" PAM service in addition to
+> traditionally supported "passwd".
+>
+> Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+> ---
+>  ...rkmanager_1.42.6.bb =3D> networkmanager_1.42.8.bb} |  2 +-
+>  .../passwdqc/passwdqc/makefile-add-ldflags.patch    | 13 ++++++++++++-
+>  .../{passwdqc_2.0.2.bb =3D> passwdqc_2.0.3.bb}        |  2 +-
+>  3 files changed, 14 insertions(+), 3 deletions(-)
+>  rename meta-networking/recipes-connectivity/networkmanager/{networkmanag=
+er_1.42.6.bb =3D> networkmanager_1.42.8.bb} (99%)
+>  rename meta-oe/recipes-security/passwdqc/{passwdqc_2.0.2.bb =3D> passwdq=
+c_2.0.3.bb} (96%)
+>
+> diff --git a/meta-networking/recipes-connectivity/networkmanager/networkm=
+anager_1.42.6.bb b/meta-networking/recipes-connectivity/networkmanager/netw=
+orkmanager_1.42.8.bb
+> similarity index 99%
+> rename from meta-networking/recipes-connectivity/networkmanager/networkma=
+nager_1.42.6.bb
+> rename to meta-networking/recipes-connectivity/networkmanager/networkmana=
+ger_1.42.8.bb
+> index 3196b0c244..5d9c6f4274 100644
+> --- a/meta-networking/recipes-connectivity/networkmanager/networkmanager_=
+1.42.6.bb
+> +++ b/meta-networking/recipes-connectivity/networkmanager/networkmanager_=
+1.42.8.bb
+> @@ -32,7 +32,7 @@ SRC_URI =3D " \
+>      file://enable-iwd.conf \
+>  "
+>
+> -SRC_URI[sha256sum] =3D "8c388ac3775ac6bceb605fae21be2c3e261cafe6067994a8=
+9f0dfa4610ed0279"
+> +SRC_URI[sha256sum] =3D "0337e7583d2ec5ade2ba2e8c625d2f09eeccda1d22836ee2=
+9aa72925d399c353"
 
-Changelog:
-============
--Fix compatibility with python 3.7 by vendor loky 3.4.1 which is compatible
-  with this version. #1472
--Ensure native byte order for memmap arrays in joblib.load. #1353
--Add ability to change default Parallel backend in tests by setting the
- JOBLIB_TESTS_DEFAULT_PARALLEL_BACKEND environment variable. #1356
--Fix temporary folder creation in joblib.Parallel on Linux subsystems on
- Windows which do have /dev/shm but don't have the os.statvfs function #1353
--Drop runtime dependency on distutils. distutils is going away in Python 3.12
- and is deprecated from Python 3.10 onwards.
--A warning is raised when a pickling error occurs during caching operations.
--Avoid (module, name) collisions when caching nested functions.
--Add cache_validation_callback in :meth:'joblib.Memory.cache', to allow custom
- cache invalidation based on the metadata of the function call. #1149
--Add a return_as parameter for Parallel, that enables consuming results
- asynchronously. #1393, #1458
--Improve the behavior of joblib for n_jobs=1, with simplified tracebacks and
- more efficient running time. #1393
--Add the parallel_config context manager to allow for more fine-grained control
- over the backend configuration.
--Add items_limit and age_limit in :meth:'joblib.Memory.reduce_size' to make it
- easy to limit the number of items and remove items that have not been accessed
- for a long time in the cache. #1200
--Deprecate bytes_limit in Memory as this is not automatically enforced, the
- limit can be directly passed to :meth:'joblib.Memory.reduce_size' which needs
- to be called to actually enforce the limit. #1447
--Vendor loky 3.4.0 which includes various fixes. #1422
--Various updates to the documentation and to benchmarking tools.
--Move project metadata to pyproject.toml. #1382, #1433
--Add more tests to improve python nogil support. #1394, #1395
+Please separate the networkmanager update into a patch of its own.
 
-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
----
- .../python/{python3-joblib_1.2.0.bb => python3-joblib_1.3.1.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-joblib_1.2.0.bb => python3-joblib_1.3.1.bb} (80%)
-
-diff --git a/meta-python/recipes-devtools/python/python3-joblib_1.2.0.bb b/meta-python/recipes-devtools/python/python3-joblib_1.3.1.bb
-similarity index 80%
-rename from meta-python/recipes-devtools/python/python3-joblib_1.2.0.bb
-rename to meta-python/recipes-devtools/python/python3-joblib_1.3.1.bb
-index ec02265d1e..9186cbb19f 100644
---- a/meta-python/recipes-devtools/python/python3-joblib_1.2.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-joblib_1.3.1.bb
-@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=2e481820abf0a70a18011a30153df066"
- 
- inherit setuptools3 pypi
- 
--SRC_URI[sha256sum] = "e1cee4a79e4af22881164f218d4311f60074197fb707e082e803b61f6d137018"
-+SRC_URI[sha256sum] = "1f937906df65329ba98013dc9692fe22a4c5e4a648112de500508b18a21b41e3"
- 
- RDEPENDS:${PN} += " \
-     python3-asyncio \
--- 
-2.34.1
-
+>
+>  S =3D "${WORKDIR}/NetworkManager-${PV}"
+>
+> diff --git a/meta-oe/recipes-security/passwdqc/passwdqc/makefile-add-ldfl=
+ags.patch b/meta-oe/recipes-security/passwdqc/passwdqc/makefile-add-ldflags=
+.patch
+> index 6e4803f4f3..4e9659aa58 100644
+> --- a/meta-oe/recipes-security/passwdqc/passwdqc/makefile-add-ldflags.pat=
+ch
+> +++ b/meta-oe/recipes-security/passwdqc/passwdqc/makefile-add-ldflags.pat=
+ch
+> @@ -3,10 +3,15 @@ Add LDFLAGS variable to Makefile so that extra linker f=
+lags can be sent via this
+>  Upstream-Status: Pending
+>
+>  Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+> +---
+> + Makefile | 5 ++---
+> + 1 file changed, 2 insertions(+), 3 deletions(-)
+>
+> +diff --git a/Makefile b/Makefile
+> +index 404f036..a9b18f0 100644
+>  --- a/Makefile
+>  +++ b/Makefile
+> -@@ -68,18 +68,17 @@ XGETTEXT =3D xgettext
+> +@@ -75,13 +75,12 @@ XGETTEXT =3D xgettext
+>   XGETTEXT_OPTS =3D --keyword=3D_ --keyword=3DP2_:1,1 --keyword=3DP3_:1,2=
+ --language=3DC --add-comments
+>   MSGMERGE =3D msgmerge
+>
+> @@ -21,9 +26,15 @@ Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+>         -Wl,--soname,$(SHARED_LIB),--version-script,$(MAP_LIB)
+>   LDFLAGS_lib_SUN =3D $(LDFLAGS_shared_SUN)
+>   LDFLAGS_lib_HP =3D $(LDFLAGS_shared_HP)
+> +@@ -90,7 +89,7 @@ LDFLAGS_lib_CYGWIN =3D $(LDFLAGS_shared) \
+> +       -Wl,--export-all-symbols \
+> +       -Wl,--enable-auto-import
+>   LDFLAGS_pam =3D $(LDFLAGS_shared)
+>  -LDFLAGS_pam_LINUX =3D $(LDFLAGS_shared_LINUX) \
+>  +LDFLAGS_pam_LINUX =3D $(LDFLAGS) $(LDFLAGS_shared_LINUX) \
+>         -Wl,--version-script,$(MAP_PAM)
+>   LDFLAGS_pam_SUN =3D $(LDFLAGS_shared_SUN)
+>   LDFLAGS_pam_HP =3D $(LDFLAGS_shared_HP)
+> +--
+> +2.34.1
+> +
+> diff --git a/meta-oe/recipes-security/passwdqc/passwdqc_2.0.2.bb b/meta-o=
+e/recipes-security/passwdqc/passwdqc_2.0.3.bb
+> similarity index 96%
+> rename from meta-oe/recipes-security/passwdqc/passwdqc_2.0.2.bb
+> rename to meta-oe/recipes-security/passwdqc/passwdqc_2.0.3.bb
+> index 8462701b31..8694052e61 100644
+> --- a/meta-oe/recipes-security/passwdqc/passwdqc_2.0.2.bb
+> +++ b/meta-oe/recipes-security/passwdqc/passwdqc_2.0.3.bb
+> @@ -30,7 +30,7 @@ LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Dac99c8678577=
+a1c2f9f04cccee411d5d"
+>  SRC_URI =3D "http://www.openwall.com/${BPN}/${BP}.tar.gz \
+>             file://makefile-add-ldflags.patch \
+>            "
+> -SRC_URI[sha256sum] =3D "ff1f505764c020f6a4484b1e0cc4fdbf2e3f71b522926d90=
+b4709104ca0604ab"
+> +SRC_URI[sha256sum] =3D "53b0f4bc49369f06195e9e13abb6cff352d5acb79e861004=
+ec95973896488cf4"
+>
+>  # explicitly define LINUX_PAM in case DISTRO_FEATURES no pam
+>  # this package's pam_passwdqc.so needs pam
+> --
+> 2.34.1
+>
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#103695): https://lists.openembedded.org/g/openembedde=
+d-devel/message/103695
+> Mute This Topic: https://lists.openembedded.org/mt/99999658/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
+aj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
 
