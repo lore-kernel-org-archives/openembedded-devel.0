@@ -1,94 +1,89 @@
-Return-Path: <f_l_k@t-online.de>
+Return-Path: <ross.burton@arm.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C8A78EB64D9
-	for <webhook@archiver.kernel.org>; Mon, 10 Jul 2023 07:25:08 +0000 (UTC)
-Received: from mailout11.t-online.de (mailout11.t-online.de [194.25.134.85])
- by mx.groups.io with SMTP id smtpd.web10.34500.1688973900904947145
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4B44AEB64DC
+	for <webhook@archiver.kernel.org>; Mon, 10 Jul 2023 12:41:30 +0000 (UTC)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by mx.groups.io with SMTP id smtpd.web10.38540.1688992889730788464
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 10 Jul 2023 00:25:01 -0700
+ Mon, 10 Jul 2023 05:41:30 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=SPF record not found (domain: t-online.de, ip: 194.25.134.85, mailfrom: f_l_k@t-online.de)
-Received: from fwd71.dcpf.telekom.de (fwd71.aul.t-online.de [10.223.144.97])
-	by mailout11.t-online.de (Postfix) with SMTP id C6F351FAB4
-	for <openembedded-devel@lists.openembedded.org>; Mon, 10 Jul 2023 09:24:49 +0200 (CEST)
-Received: from intel-corei7-64.fritz.box ([84.154.169.146]) by fwd71.t-online.de
-	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1qIlGL-31M4zh0; Mon, 10 Jul 2023 09:24:49 +0200
-From: Markus Volk <f_l_k@t-online.de>
+ dkim=missing; spf=pass (domain: arm.com, ip: 217.140.110.172, mailfrom: ross.burton@arm.com)
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 96088D75;
+	Mon, 10 Jul 2023 05:42:11 -0700 (PDT)
+Received: from oss-tx204.lab.cambridge.arm.com (usa-sjc-imap-foss1.foss.arm.com [10.121.207.14])
+	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id E72CC3F67D;
+	Mon, 10 Jul 2023 05:41:28 -0700 (PDT)
+From: ross.burton@arm.com
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH] flatpak: update dependencies
-Date: Mon, 10 Jul 2023 09:24:22 +0200
-Message-Id: <20230710072422.1147397-1-f_l_k@t-online.de>
-X-Mailer: git-send-email 2.39.3
+Cc: nd@arm.com
+Subject: [PATCH 2/3] xsetmode: remove obsolete utility
+Date: Mon, 10 Jul 2023 13:41:26 +0100
+Message-Id: <20230710124127.3177352-2-ross.burton@arm.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20230710124127.3177352-1-ross.burton@arm.com>
+References: <20230710124127.3177352-1-ross.burton@arm.com>
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1688973889-3A3CE7D8-26A2A532/0/0 CLEAN NORMAL
-X-TOI-MSGID: 43fab5c7-be4d-40c6-8820-7cf4e97c092f
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 10 Jul 2023 07:25:08 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103723
+ <openembedded-devel@lists.openembedded.org>; Mon, 10 Jul 2023 12:41:30 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103725
 
-- use system bubblewrap and xdg-dbus-proxy instead of building subproject=
-s
-- fix seccomp PACKAGECONFIG
+From: Ross Burton <ross.burton@arm.com>
 
-Signed-off-by: Markus Volk <f_l_k@t-online.de>
+This hasn't seen any upstream activity since 2017, as users should be
+using xinput --set-mode instead.
+
+Signed-off-by: Ross Burton <ross.burton@arm.com>
 ---
- meta-oe/recipes-extended/flatpak/flatpak_1.15.4.bb | 9 +++++++--
- 1 file changed, 7 insertions(+), 2 deletions(-)
+ .../packagegroups/packagegroup-meta-oe.bb         |  1 -
+ .../recipes-graphics/xorg-app/xsetmode_1.0.0.bb   | 15 ---------------
+ 2 files changed, 16 deletions(-)
+ delete mode 100644 meta-oe/recipes-graphics/xorg-app/xsetmode_1.0.0.bb
 
-diff --git a/meta-oe/recipes-extended/flatpak/flatpak_1.15.4.bb b/meta-oe=
-/recipes-extended/flatpak/flatpak_1.15.4.bb
-index fcf80fc854..163d732a86 100644
---- a/meta-oe/recipes-extended/flatpak/flatpak_1.15.4.bb
-+++ b/meta-oe/recipes-extended/flatpak/flatpak_1.15.4.bb
-@@ -28,11 +28,13 @@ DEPENDS =3D " \
-     json-glib \
-     libarchive \
-     libcap \
-+    libxml2 \
-     libxslt-native \
-     ostree \
-     polkit \
-     python3-pyparsing-native \
-     xmlto-native \
-+    zstd \
- "
-=20
- RDEPENDS:${PN} =3D " \
-@@ -40,17 +42,20 @@ RDEPENDS:${PN} =3D " \
-     ca-certificates \
-     dconf \
-     flatpak-xdg-utils \
-+    xdg-dbus-proxy \
- "
-=20
-+EXTRA_OEMESON +=3D "-Dsystem_dbus_proxy=3D${bindir}/xdg-dbus-proxy -Dsys=
-tem_bubblewrap=3D${bindir}/bwrap"
-+
- GIR_MESON_OPTION =3D ""
-=20
--PACKAGECONFIG[tests] =3D "-Dtests=3Dtrue,-Dtests=3Dfalse,xauth"
-+PACKAGECONFIG[tests] =3D "-Dtests=3Dtrue,-Dtests=3Dfalse,xauth socat-nat=
-ive"
- PACKAGECONFIG[xauth] =3D "-Dxauth=3Denabled,-Dxauth=3Ddisabled,xauth"
- PACKAGECONFIG[seccomp] =3D "-Dseccomp=3Denabled,-Dseccomp=3Ddisabled,lib=
-seccomp"
-=20
- PACKAGECONFIG ?=3D " \
-     ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'xauth', '', d)} \
--    ${@bb.utils.contains('DISTRO_FEATURES', 'security', 'seccomp', '', d=
-)} \
-+    ${@bb.utils.contains('DISTRO_FEATURES', 'seccomp', 'seccomp', '', d)=
-} \
- "
-=20
- FILES:${PN} +=3D "${libdir} ${datadir}"
+diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb b=
+/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
+index c555ade629..20c9b9d412 100644
+--- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
++++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
+@@ -569,7 +569,6 @@ RDEPENDS:packagegroup-meta-oe-graphics =3D"\
+     xclock \
+     xfontsel \
+     xkbprint \
+-    xsetmode \
+     xlsatoms \
+     xlsclients \
+     xlsfonts \
+diff --git a/meta-oe/recipes-graphics/xorg-app/xsetmode_1.0.0.bb b/meta-o=
+e/recipes-graphics/xorg-app/xsetmode_1.0.0.bb
+deleted file mode 100644
+index b757329d94..0000000000
+--- a/meta-oe/recipes-graphics/xorg-app/xsetmode_1.0.0.bb
++++ /dev/null
+@@ -1,15 +0,0 @@
+-require recipes-graphics/xorg-app/xorg-app-common.inc
+-
+-SUMMARY =3D "X.Org X11 X client utilities"
+-HOMEPAGE =3D "http://cgit.freedesktop.org/xorg/app/xsetmode/"
+-DESCRIPTION =3D "xsetmode sets the mode of an XInput device to either ab=
+solute \
+-or relative."
+-SECTION =3D "x11/app"
+-LICENSE =3D "MIT"
+-LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D9b37e00e7793b667cbc64f9df7b6d=
+733"
+-
+-DEPENDS +=3D "libxi"
+-BBCLASSEXTEND =3D "native"
+-
+-SRC_URI[md5sum] =3D "d074e79d380b031d2f60e4cd56538c93"
+-SRC_URI[sha256sum] =3D "988b47cd922991c6e6adbce15dc386ac75690b61744b526c=
+3af5a4eaa9afa0aa"
 --=20
-2.39.3
+2.34.1
 
 
