@@ -2,41 +2,41 @@ Return-Path: <auh@moto-timo.dev>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6551DEB64DA
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 746A8C001DF
 	for <webhook@archiver.kernel.org>; Wed, 12 Jul 2023 05:31:40 +0000 (UTC)
-Received: from relay1-d.mail.gandi.net (relay1-d.mail.gandi.net [217.70.183.193])
- by mx.groups.io with SMTP id smtpd.web10.990.1689139896636464531
+Received: from relay5-d.mail.gandi.net (relay5-d.mail.gandi.net [217.70.183.197])
+ by mx.groups.io with SMTP id smtpd.web10.989.1689139895044128941
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 11 Jul 2023 22:31:37 -0700
+ Tue, 11 Jul 2023 22:31:35 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="body hash did not verify" header.i=@moto-timo.dev header.s=gm1 header.b=lwXdKfDp;
- spf=pass (domain: moto-timo.dev, ip: 217.70.183.193, mailfrom: auh@moto-timo.dev)
-Received: by mail.gandi.net (Postfix) with ESMTPSA id 0A8AE24000B
-	for <openembedded-devel@lists.openembedded.org>; Wed, 12 Jul 2023 05:31:34 +0000 (UTC)
+ dkim=pass header.i=@moto-timo.dev header.s=gm1 header.b=Dq+bzpzj;
+ spf=pass (domain: moto-timo.dev, ip: 217.70.183.197, mailfrom: auh@moto-timo.dev)
+Received: by mail.gandi.net (Postfix) with ESMTPSA id 69C981C000A
+	for <openembedded-devel@lists.openembedded.org>; Wed, 12 Jul 2023 05:31:33 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=moto-timo.dev;
-	s=gm1; t=1689139895;
+	s=gm1; t=1689139893;
 	h=from:from:reply-to:subject:subject:to:to:cc:mime-version:mime-version:
-	 content-type:content-type; bh=mIbIQVx88FyvSGPP/OdstOpWUiL6/m+WVWwX/zh2ETc=;
-	b=lwXdKfDp0vvEn23QDPkcWn2Wq8I9dG1feSx51lOKwI5v+ru+56+yJF2D5nVEfiJPDQKwxc
-	UyA+zI2plz1QvRK7L9OzyYClAL5pDIpt1BlbYHNbNYV2pL5dvI00dJgTu1oODjjJ0mh6L8
-	8qKNCOTCbl6Qugr39oXBRxx4wbJd1EWpYpsqzl3Ap/wxlqeiZmfaBa4Y2qnfv38O7RvWrJ
-	Odtjiq60v/e/+/Ma/C+dkQfhWSo/UXgdsJuidDsRwq2BVBsRJeHeCHbSy6oXeM5Cvn8Nxf
-	3Io63p8IVi2yMbtn+BVlr0B8mHP70NJeLAkjAEc2KRKtMKK8+AESAR0ri+os3Q==
-Content-Type: multipart/mixed; boundary="===============8976831999785450467=="
+	 content-type:content-type; bh=6PyRIj7qhG7jukLmsM9xy1hMWb30GbEy2pcKhm2eZmU=;
+	b=Dq+bzpzjGaTCBQ3JZzuOIqtOVubchl52xNzs/Pl5XC6Ur4FegQdgWOSIq/96WSfa9JBvJY
+	1IrpkG+sn076jHlVy9YlbbB97S1T0tUSOrTXK9BC75Kjs4Nc11tmVYT2e9UhSIYvbOBCXE
+	jUVTPEusj3/S6Ra+Wu03jQcZdE83Q00Zvj7/xCptKSd9l4Um1uft9ee5nAALJbq/dJEOcm
+	kUgQTb8V98R7ZNg9uBi3SpuVV2J1rOAGc3YBEgdcm8692Jno/8MnRu8bYiACIKyGR8Qajo
+	rdcLCQVzCN8O2iY+i1cc6wa9OsXCVhnFpMgd6c/SL2kkGQJwKDCiOe/ln0siFQ==
+Content-Type: multipart/mixed; boundary="===============8516500337471827063=="
 MIME-Version: 1.0
 From: auh@moto-timo.dev
 To: openembedded-devel@lists.openembedded.org
-Subject: [AUH] python3-scikit-build: upgrading to 0.17.6 FAILED
+Subject: [AUH] python3-reedsolo: upgrading to 2.0.13 SUCCEEDED
 X-GND-Sasl: auh@moto-timo.dev
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 12 Jul 2023 05:31:40 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103802
-Message-Id: <20230712053140.6551DEB64DA@smtp.lore.kernel.org>
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103801
+Message-Id: <20230712053140.746A8C001DF@smtp.lore.kernel.org>
 Date: Wed, 12 Jul 2023 05:31:40 +0000 (UTC)
 
---===============8976831999785450467==
+--===============8516500337471827063==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -44,181 +44,93 @@ Content-Transfer-Encoding: 7bit
 Hello,
 
 this email is a notification from the Auto Upgrade Helper
-that the automatic attempt to upgrade the recipe *python3-scikit-build* to *0.17.6* has Failed (devtool error).
+that the automatic attempt to upgrade the recipe *python3-reedsolo* to *2.0.13* has Succeeded.
 
-Detailed error information:
+Next steps:
+    - apply the patch: git am 0001-python3-reedsolo-upgrade-1.7.0-2.0.13.patch
+    - check the changes to upstream patches and summarize them in the commit message,
+    - compile an image that contains the package
+    - perform some basic sanity tests
+    - amend the patch and sign it off: git commit -s --reset-author --amend
+    - send it to the appropriate mailing list
 
-The following devtool command failed:  upgrade python3-scikit-build -V 0.17.6
-NOTE: Starting bitbake server...
-Loading cache...done.
-Loaded 12809 entries from dependency cache.
-NOTE: Resolving any missing task queue dependencies
-NOTE: Resolving any missing task queue dependencies
-NOTE: Resolving any missing task queue dependencies
-NOTE: Resolving any missing task queue dependencies
-NOTE: Resolving any missing task queue dependencies
-NOTE: Resolving any missing task queue dependencies
-
-Build Configuration (mc:default):
-BB_VERSION           = "2.4.0"
-BUILD_SYS            = "x86_64-linux"
-NATIVELSBSTRING      = "universal"
-TARGET_SYS           = "x86_64-poky-linux"
-MACHINE              = "qemux86-64"
-DISTRO               = "poky"
-DISTRO_VERSION       = "4.2"
-TUNE_FEATURES        = "m64 core2"
-TARGET_FPU           = ""
-meta                 
-meta-poky            
-meta-yocto-bsp       = "master:a43fa36614977745fcbd6441d1c3c20321a8201d"
-meta-oe              
-meta-python          
-meta-perl            = "tmp-auh-upgrades:6e27622a16b0462bd3a7ec8bf45feaaad1d7751d"
-workspace            = "<unknown>:<unknown>"
-
-
-Build Configuration (mc:qemux86-musl):
-BB_VERSION           = "2.4.0"
-BUILD_SYS            = "x86_64-linux"
-NATIVELSBSTRING      = "universal"
-TARGET_SYS           = "i686-poky-linux-musl"
-MACHINE              = "qemux86"
-DISTRO               = "poky"
-DISTRO_VERSION       = "4.2"
-TUNE_FEATURES        = "m32 core2"
-TARGET_FPU           = ""
-meta                 
-meta-poky            
-meta-yocto-bsp       = "master:a43fa36614977745fcbd6441d1c3c20321a8201d"
-meta-oe              
-meta-python          
-meta-perl            = "tmp-auh-upgrades:6e27622a16b0462bd3a7ec8bf45feaaad1d7751d"
-workspace            = "<unknown>:<unknown>"
-
-
-Build Configuration (mc:qemuarm64):
-BB_VERSION           = "2.4.0"
-BUILD_SYS            = "x86_64-linux"
-NATIVELSBSTRING      = "universal"
-TARGET_SYS           = "aarch64-poky-linux"
-MACHINE              = "qemuarm64"
-DISTRO               = "poky"
-DISTRO_VERSION       = "4.2"
-TUNE_FEATURES        = "aarch64 armv8a crc cortexa57"
-TARGET_FPU           = ""
-meta                 
-meta-poky            
-meta-yocto-bsp       = "master:a43fa36614977745fcbd6441d1c3c20321a8201d"
-meta-oe              
-meta-python          
-meta-perl            = "tmp-auh-upgrades:6e27622a16b0462bd3a7ec8bf45feaaad1d7751d"
-workspace            = "<unknown>:<unknown>"
-
-Initialising tasks...done.
-Sstate summary: Wanted 10 Local 0 Mirrors 9 Missed 1 Current 10 (90% match, 95% complete)
-NOTE: Executing Tasks
-NOTE: Tasks Summary: Attempted 93 tasks of which 90 didn't need to be rerun and all succeeded.
-NOTE: Writing buildhistory
-NOTE: Writing buildhistory took: 3 seconds
-NOTE: Writing buildhistory
-NOTE: Writing buildhistory took: 3 seconds
-NOTE: Writing buildhistory
-NOTE: Writing buildhistory took: 3 seconds
-Loading cache...done.
-Loaded 12809 entries from dependency cache.
-Parsing recipes...done.
-Parsing of 7308 .bb files complete (7302 cached, 6 parsed). 12569 targets, 338 skipped, 0 masked, 0 errors.
-NOTE: Resolving any missing task queue dependencies
-NOTE: Resolving any missing task queue dependencies
-NOTE: Resolving any missing task queue dependencies
-NOTE: Resolving any missing task queue dependencies
-NOTE: Resolving any missing task queue dependencies
-NOTE: Resolving any missing task queue dependencies
-
-Build Configuration (mc:default):
-BB_VERSION           = "2.4.0"
-BUILD_SYS            = "x86_64-linux"
-NATIVELSBSTRING      = "universal"
-TARGET_SYS           = "x86_64-poky-linux"
-MACHINE              = "qemux86-64"
-DISTRO               = "poky"
-DISTRO_VERSION       = "4.2"
-TUNE_FEATURES        = "m64 core2"
-TARGET_FPU           = ""
-meta                 
-meta-poky            
-meta-yocto-bsp       = "master:a43fa36614977745fcbd6441d1c3c20321a8201d"
-meta-oe              
-meta-python          
-meta-perl            = "tmp-auh-upgrades:6e27622a16b0462bd3a7ec8bf45feaaad1d7751d"
-workspace            = "<unknown>:<unknown>"
-
-
-Build Configuration (mc:qemux86-musl):
-BB_VERSION           = "2.4.0"
-BUILD_SYS            = "x86_64-linux"
-NATIVELSBSTRING      = "universal"
-TARGET_SYS           = "i686-poky-linux-musl"
-MACHINE              = "qemux86"
-DISTRO               = "poky"
-DISTRO_VERSION       = "4.2"
-TUNE_FEATURES        = "m32 core2"
-TARGET_FPU           = ""
-meta                 
-meta-poky            
-meta-yocto-bsp       = "master:a43fa36614977745fcbd6441d1c3c20321a8201d"
-meta-oe              
-meta-python          
-meta-perl            = "tmp-auh-upgrades:6e27622a16b0462bd3a7ec8bf45feaaad1d7751d"
-workspace            = "<unknown>:<unknown>"
-
-
-Build Configuration (mc:qemuarm64):
-BB_VERSION           = "2.4.0"
-BUILD_SYS            = "x86_64-linux"
-NATIVELSBSTRING      = "universal"
-TARGET_SYS           = "aarch64-poky-linux"
-MACHINE              = "qemuarm64"
-DISTRO               = "poky"
-DISTRO_VERSION       = "4.2"
-TUNE_FEATURES        = "aarch64 armv8a crc cortexa57"
-TARGET_FPU           = ""
-meta                 
-meta-poky            
-meta-yocto-bsp       = "master:a43fa36614977745fcbd6441d1c3c20321a8201d"
-meta-oe              
-meta-python          
-meta-perl            = "tmp-auh-upgrades:6e27622a16b0462bd3a7ec8bf45feaaad1d7751d"
-workspace            = "<unknown>:<unknown>"
-
-Initialising tasks...done.
-Sstate summary: Wanted 0 Local 0 Mirrors 0 Missed 0 Current 0 (0% match, 0% complete)
-NOTE: No setscene tasks
-NOTE: Executing Tasks
-WARNING: Failed to fetch URL https://files.pythonhosted.org/packages/source/s/scikit-build/scikit-build-0.17.6.tar.gz;downloadfilename=scikit-build-0.17.6.tar.gz, attempting MIRRORS if available
-NOTE: Tasks Summary: Attempted 1 tasks of which 0 didn't need to be rerun and 1 failed.
-NOTE: Writing buildhistory
-NOTE: Writing buildhistory took: 4 seconds
-NOTE: Writing buildhistory
-NOTE: Writing buildhistory took: 4 seconds
-NOTE: Writing buildhistory
-NOTE: Writing buildhistory took: 4 seconds
-
-INFO: Extracting current version source...
-INFO: Extracting upgraded version source...
-INFO: Fetching https://files.pythonhosted.org/packages/source/s/scikit-build/scikit-build-0.17.6.tar.gz;downloadfilename=scikit-build-0.17.6.tar.gz...
-ERROR: Fetcher failure: Fetch command export PSEUDO_DISABLED=1; export PATH="/scratch1/auh/build-auh/tmp/sysroots-uninative/x86_64-linux/usr/bin:/home/auh/Projects/poky/scripts:/scratch1/auh/build-auh/tmp/work/recipetool-0pgauq0j/work/recipe-sysroot-native/usr/bin/x86_64-poky-linux:/scratch1/auh/build-auh/tmp/work/recipetool-0pgauq0j/work/recipe-sysroot/usr/bin/crossscripts:/scratch1/auh/build-auh/tmp/work/recipetool-0pgauq0j/work/recipe-sysroot-native/usr/sbin:/scratch1/auh/build-auh/tmp/work/recipetool-0pgauq0j/work/recipe-sysroot-native/usr/bin:/scratch1/auh/build-auh/tmp/work/recipetool-0pgauq0j/work/recipe-sysroot-native/sbin:/scratch1/auh/build-auh/tmp/work/recipetool-0pgauq0j/work/recipe-sysroot-native/bin:/home/auh/Projects/poky/bitbake/bin:/scratch1/auh/build-auh/tmp/hosttools"; export HOME="/home/auh"; /usr/bin/env wget -t 2 -T 30 --passive-ftp -O /scratch1/auh/DOWNLOADS/scikit-build-0.17.6.tar.gz.tmp -P /scratch1/auh/DOWNLOADS 'https://files.pythonhosted.org/packages/sourc
- e/s/scikit-build/scikit-build-0.17.6.tar.gz' --progress=dot -v failed with exit code 8, no output
-ERROR: Bitbake Fetcher Error: FetchError('Unable to fetch URL from any source.', 'https://files.pythonhosted.org/packages/source/s/scikit-build/scikit-build-0.17.6.tar.gz;downloadfilename=scikit-build-0.17.6.tar.gz')
-ERROR: Logfile of failure stored in: /scratch1/auh/build-auh/tmp/work/recipetool-0pgauq0j/work/temp/log.do_fetch.1531677
-ERROR: Failed to fetch URL https://files.pythonhosted.org/packages/source/s/scikit-build/scikit-build-0.17.6.tar.gz;downloadfilename=scikit-build-0.17.6.tar.gz
-
+Alternatively, if you believe the recipe should not be upgraded at this time,
+you can fill RECIPE_NO_UPDATE_REASON in respective recipe file so that
+automatic upgrades would no longer be attempted.
 
 Please review the attached files for further information and build/update failures.
 Any problem please file a bug at https://bugzilla.yoctoproject.org/enter_bug.cgi?product=Automated%20Update%20Handler
 
 Regards,
 The Upgrade Helper
---===============8976831999785450467==--
+
+-- >8 --
+From 6e27622a16b0462bd3a7ec8bf45feaaad1d7751d Mon Sep 17 00:00:00 2001
+From: Upgrade Helper <auh@moto-timo.dev>
+Date: Tue, 11 Jul 2023 22:23:09 -0500
+Subject: [PATCH] python3-reedsolo: upgrade 1.7.0 -> 2.0.13
+
+---
+ .../{python3-reedsolo_1.7.0.bb => python3-reedsolo_2.0.13.bb}   | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python3-reedsolo/{python3-reedsolo_1.7.0.bb => python3-reedsolo_2.0.13.bb} (75%)
+
+diff --git a/meta-python/recipes-devtools/python3-reedsolo/python3-reedsolo_1.7.0.bb b/meta-python/recipes-devtools/python3-reedsolo/python3-reedsolo_2.0.13.bb
+similarity index 75%
+rename from meta-python/recipes-devtools/python3-reedsolo/python3-reedsolo_1.7.0.bb
+rename to meta-python/recipes-devtools/python3-reedsolo/python3-reedsolo_2.0.13.bb
+index b6c40921c..bb5b973d8 100644
+--- a/meta-python/recipes-devtools/python3-reedsolo/python3-reedsolo_1.7.0.bb
++++ b/meta-python/recipes-devtools/python3-reedsolo/python3-reedsolo_2.0.13.bb
+@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/tomerfiliba/reedsolomon"
+ LICENSE = "MIT-0 | Unlicense"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=ffde61aeb8917e70e0257e0a4b6d103c"
+ 
+-SRC_URI[sha256sum] = "c1359f02742751afe0f1c0de9f0772cc113835aa2855d2db420ea24393c87732"
++SRC_URI[sha256sum] = "71b4121c6860a55899435c552051a19d5f023c50358be4b1c0fa0c6e2f4ac717"
+ 
+ inherit pypi setuptools3
+ 
+-- 
+2.25.1
+
+
+--===============8516500337471827063==
+Content-Type: text/x-diff; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment;
+ filename="0001-python3-reedsolo-upgrade-1.7.0-2.0.13.patch"
+
+From 6e27622a16b0462bd3a7ec8bf45feaaad1d7751d Mon Sep 17 00:00:00 2001
+From: Upgrade Helper <auh@moto-timo.dev>
+Date: Tue, 11 Jul 2023 22:23:09 -0500
+Subject: [PATCH] python3-reedsolo: upgrade 1.7.0 -> 2.0.13
+
+---
+ .../{python3-reedsolo_1.7.0.bb => python3-reedsolo_2.0.13.bb}   | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python3-reedsolo/{python3-reedsolo_1.7.0.bb => python3-reedsolo_2.0.13.bb} (75%)
+
+diff --git a/meta-python/recipes-devtools/python3-reedsolo/python3-reedsolo_1.7.0.bb b/meta-python/recipes-devtools/python3-reedsolo/python3-reedsolo_2.0.13.bb
+similarity index 75%
+rename from meta-python/recipes-devtools/python3-reedsolo/python3-reedsolo_1.7.0.bb
+rename to meta-python/recipes-devtools/python3-reedsolo/python3-reedsolo_2.0.13.bb
+index b6c40921c..bb5b973d8 100644
+--- a/meta-python/recipes-devtools/python3-reedsolo/python3-reedsolo_1.7.0.bb
++++ b/meta-python/recipes-devtools/python3-reedsolo/python3-reedsolo_2.0.13.bb
+@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/tomerfiliba/reedsolomon"
+ LICENSE = "MIT-0 | Unlicense"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=ffde61aeb8917e70e0257e0a4b6d103c"
+ 
+-SRC_URI[sha256sum] = "c1359f02742751afe0f1c0de9f0772cc113835aa2855d2db420ea24393c87732"
++SRC_URI[sha256sum] = "71b4121c6860a55899435c552051a19d5f023c50358be4b1c0fa0c6e2f4ac717"
+ 
+ inherit pypi setuptools3
+ 
+-- 
+2.25.1
+
+
+--===============8516500337471827063==--
 
