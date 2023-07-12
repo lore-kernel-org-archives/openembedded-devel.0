@@ -2,41 +2,41 @@ Return-Path: <auh@moto-timo.dev>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8C025EB64DA
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8E5B1C001B0
 	for <webhook@archiver.kernel.org>; Wed, 12 Jul 2023 05:42:10 +0000 (UTC)
-Received: from relay3-d.mail.gandi.net (relay3-d.mail.gandi.net [217.70.183.195])
- by mx.groups.io with SMTP id smtpd.web10.1078.1689140521692107781
+Received: from relay4-d.mail.gandi.net (relay4-d.mail.gandi.net [217.70.183.196])
+ by mx.groups.io with SMTP id smtpd.web11.1163.1689140523970640819
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 11 Jul 2023 22:42:02 -0700
+ Tue, 11 Jul 2023 22:42:04 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@moto-timo.dev header.s=gm1 header.b=VQdg9UeB;
- spf=pass (domain: moto-timo.dev, ip: 217.70.183.195, mailfrom: auh@moto-timo.dev)
-Received: by mail.gandi.net (Postfix) with ESMTPSA id ACDDE60004
-	for <openembedded-devel@lists.openembedded.org>; Wed, 12 Jul 2023 05:41:59 +0000 (UTC)
+ dkim=pass header.i=@moto-timo.dev header.s=gm1 header.b=Rej2On8a;
+ spf=pass (domain: moto-timo.dev, ip: 217.70.183.196, mailfrom: auh@moto-timo.dev)
+Received: by mail.gandi.net (Postfix) with ESMTPSA id EAD65E0006
+	for <openembedded-devel@lists.openembedded.org>; Wed, 12 Jul 2023 05:42:01 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=moto-timo.dev;
-	s=gm1; t=1689140519;
+	s=gm1; t=1689140522;
 	h=from:from:reply-to:subject:subject:to:to:cc:mime-version:mime-version:
-	 content-type:content-type; bh=nzkMQPI5XtX+n2evdI+KGBd4An9sm6Ky56k+M3ppuv4=;
-	b=VQdg9UeBidsxCXvKtPGoQt1rQf9SrbNh2rIfRHFmbyFnYTvrHHtPjC3lenbOfvsL3EvpHJ
-	0ROU92m87ACp5l5cQCUGYoNEIUufGL6tVliQEq30aXFdXHxTPGOvRdVhQkubp9IV5moTWf
-	IeYO3/M1eUdPzBH4u0TFgNa5NORDZVYeVU15PKoybTI0uCiAE7SzLShXj9lCv9tCkSbE4+
-	gP9JOEl2wsxE+PDWpE6BdYNskHiUqTkLIpVOIakPRqo2/wZlbCfd7xVdn5ChkA4Hgu9RzO
-	ETP6zlmTxpsMRWfMxCW+i03acYg9iLFbGGhg0M+Vn9rlmf7VfES5qe+fVEplDA==
-Content-Type: multipart/mixed; boundary="===============2914719633103079342=="
+	 content-type:content-type; bh=7A3Ia8J6k1Sp738lH2YI4kbJK+xsgsEhycJJMjhMTR8=;
+	b=Rej2On8aOWMmNBOOeO0hY4wp/iMSgFzPgrB6TH6/F+ih1kOuG2csfh98a+ZyOBxMzZhQgF
+	f5KeM2t9rvE3hkSudHa0XDyfx4V+DnsSfjhrZ1w3IRQ4pAUZYe1lAjqM0vPWH2TWHcI6LK
+	1SjQkc3t8C/2IGLDJeasX2jp9n+ItU8QcO231f3L3lnD3m75IQFwBClMqOyyckB41dL17y
+	cdLUt5OR/A+Pfy0XptTu6G6M7cFQMO+V5gJr/Ya774S8MCGiqAEz6qiJHUCrS0CAhoOKBb
+	+QPVO2WycyOdBKZX8kLlRbuIc3mG7pi4M6R/qFhwPJOV8LQ59PaQttTsGm8A5A==
+Content-Type: multipart/mixed; boundary="===============7559259827538006640=="
 MIME-Version: 1.0
 From: auh@moto-timo.dev
 To: openembedded-devel@lists.openembedded.org
-Subject: [AUH] libcurses-perl: upgrading to 1.44 FAILED
+Subject: [AUH] libxml-libxml-perl: upgrading to 2.0208 FAILED
 X-GND-Sasl: auh@moto-timo.dev
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 12 Jul 2023 05:42:10 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103821
-Message-Id: <20230712054210.8C025EB64DA@smtp.lore.kernel.org>
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103822
+Message-Id: <20230712054210.8E5B1C001B0@smtp.lore.kernel.org>
 Date: Wed, 12 Jul 2023 05:42:10 +0000 (UTC)
 
---===============2914719633103079342==
+--===============7559259827538006640==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -44,11 +44,11 @@ Content-Transfer-Encoding: 7bit
 Hello,
 
 this email is a notification from the Auto Upgrade Helper
-that the automatic attempt to upgrade the recipe *libcurses-perl* to *1.44* has Failed (devtool error).
+that the automatic attempt to upgrade the recipe *libxml-libxml-perl* to *2.0208* has Failed (devtool error).
 
 Detailed error information:
 
-Running 'devtool upgrade' for recipe libcurses-perl failed.
+Running 'devtool upgrade' for recipe libxml-libxml-perl failed.
 NOTE: Starting bitbake server...
 Loading cache...done.
 Loaded 12869 entries from dependency cache.
@@ -208,18 +208,19 @@ Adding changed files:   0% |                                   | ETA:  --:--:--
 Adding changed files:   0% |                                   | ETA:  --:--:--
 Adding changed files: 100% |####################################| Time: 0:00:00
 INFO: Extracting current version source...
+INFO: Adding local source files to srctree...
 INFO: Extracting upgraded version source...
-INFO: Fetching http://www.cpan.org/authors/id/G/GI/GIRAFFED/Curses-1.44.tar.gz...
-INFO: Rebasing devtool onto 6e7980e1eed5f1e444c76cf80b4c6eac30fd40e7
-WARNING: Command 'git rebase 6e7980e1eed5f1e444c76cf80b4c6eac30fd40e7' failed:
+INFO: Fetching http://search.cpan.org/CPAN/authors/id/S/SH/SHLOMIF/XML-LibXML-2.0208.tar.gz;name=libxml...
+INFO: Rebasing devtool onto cca318a2cd6afd8464024939d91933b2ef3b284e
+WARNING: Command 'git rebase cca318a2cd6afd8464024939d91933b2ef3b284e' failed:
 First, rewinding head to replay your work on top of it...
-Applying: testtyp.c: Use proper prototype for main function
+Applying: Do not use the _libxml_check_lib() on cross-compile
 Using index info to reconstruct a base tree...
-M	testtyp.c
+M	Makefile.PL
 Falling back to patching base and 3-way merge...
-Auto-merging testtyp.c
-CONFLICT (content): Merge conflict in testtyp.c
-Patch failed at 0001 testtyp.c: Use proper prototype for main function
+Auto-merging Makefile.PL
+CONFLICT (content): Merge conflict in Makefile.PL
+Patch failed at 0001 Do not use the _libxml_check_lib() on cross-compile
 Resolve all conflicts manually, mark them as resolved with
 "git add/rm <conflicted_files>", then run "git rebase --continue".
 You can instead skip this commit: run "git rebase --skip".
@@ -227,8 +228,8 @@ To abort and get back to the state before "git rebase", run "git rebase --abort"
 
 You will need to resolve conflicts in order to complete the upgrade.
 INFO: Using source tree as build directory since that would be the default for this recipe
-INFO: Upgraded source extracted to /scratch1/auh/build-auh/workspace/sources/libcurses-perl
-INFO: New recipe is /scratch1/auh/build-auh/workspace/recipes/libcurses-perl/libcurses-perl_1.44.bb
+INFO: Upgraded source extracted to /scratch1/auh/build-auh/workspace/sources/libxml-libxml-perl
+INFO: New recipe is /scratch1/auh/build-auh/workspace/recipes/libxml-libxml-perl/libxml-libxml-perl_2.0208.bb
 
 
 
@@ -237,5 +238,5 @@ Any problem please file a bug at https://bugzilla.yoctoproject.org/enter_bug.cgi
 
 Regards,
 The Upgrade Helper
---===============2914719633103079342==--
+--===============7559259827538006640==--
 
