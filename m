@@ -1,174 +1,218 @@
-Return-Path: <kai.kang@eng.windriver.com>
+Return-Path: <chee.yang.lee@intel.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A5F48EB64D9
-	for <webhook@archiver.kernel.org>; Wed, 12 Jul 2023 05:54:00 +0000 (UTC)
-Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.web11.1259.1689141235616897298
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AB894EB64D9
+	for <webhook@archiver.kernel.org>; Wed, 12 Jul 2023 06:10:00 +0000 (UTC)
+Received: from mga12.intel.com (mga12.intel.com [192.55.52.136])
+ by mx.groups.io with SMTP id smtpd.web11.1409.1689142191873149309
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 11 Jul 2023 22:53:55 -0700
+ Tue, 11 Jul 2023 23:09:52 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=pps06212021 header.b=DzvtcgB0;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=6557d3b288=kai.kang@windriver.com)
-Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 36C5RNLd016106
-	for <openembedded-devel@lists.openembedded.org>; Tue, 11 Jul 2023 22:53:55 -0700
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
-	 h=from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding:content-type; s=PPS06212021; bh=5rB6p
-	WsMyTF1O8afuq85DsezIp7dbfFm9JwA3I6NJS8=; b=DzvtcgB0FinYdWxFn5f4k
-	3wAOk2OVyG5mWq7MKBss/T4beo1I7z4NCMBA4ZRTbzPaIzYznUSeSw9OEwgB47SX
-	d8XtiL95UXqgddcKlAgwZTxUgOqU+CHTeG1RZInzFflo6pmKiwb9Q28hW3uyIqO5
-	/Alg7OVW1OWBDzaH9FoIluAC7qlqTRvuYxsUQrlsH77BAPJsIgni0YY9sxX1QCg5
-	CUmv3oINs1CnVKHCjxEOh2f1eLmlqQFHrvyTvoH5NGo6VoELTdUUHDhZasEsmHqf
-	IJjt551Y0v558SWvnQNeVwfL79rE/3KagTosdOv4m7flZ5zHD9TSTfi+4p9qu3zL
-	g==
-Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3rq32yk4y7-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Tue, 11 Jul 2023 22:53:55 -0700 (PDT)
-Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.27; Tue, 11 Jul 2023 22:53:54 -0700
-Received: from pek-lpg-core3.wrs.com (128.224.153.232) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
- 15.1.2507.27 via Frontend Transport; Tue, 11 Jul 2023 22:53:54 -0700
-From: <kai.kang@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-oe][PATCH v2] fltk-native: fix libdl link issue
-Date: Wed, 12 Jul 2023 13:53:50 +0800
-Message-ID: <20230712055350.420470-1-kai.kang@windriver.com>
-X-Mailer: git-send-email 2.34.1
+ dkim=fail reason="unable to parse pub key" header.i=@intel.com header.s=intel header.b=FvKmK/R/;
+ spf=pass (domain: intel.com, ip: 192.55.52.136, mailfrom: chee.yang.lee@intel.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1689142191; x=1720678191;
+  h=from:to:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=1S6tWh2YbqPQcs1oCSylr1VejZgtvkZjpu8Ytn8UyYI=;
+  b=FvKmK/R/1JSDA4vEXzwxUDsgjdegLKJiL0JpEroc+C7n7XoCYGCkXpYz
+   GrPSIzUGcFwwByj3cQiObBYbgUOFumgXSHcMs9Puw7NeDFD1jAiPzVU8d
+   sGQwa3Ch5QJZDQrJzVBAeQ03A2AwVczGFEJuGMU3TY7wUscIDVUvaZNg6
+   3q5aiHXm2ooyelsawUoBKwzlmdIeZmwONpsRoUF7jPQndibHL3dd5lwd8
+   ySEMCX7zKcYHHT+yePCzwZT0vkdU7kP+l4+mYeQ8q4BNOJD4PGm6XLVkb
+   +MOEt3aEq2+JZxQIk1FWyE3mqMitYmg/OK6p3tjqTgasJQjzk6HVzr+VO
+   w==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10768"; a="344412087"
+X-IronPort-AV: E=Sophos;i="6.01,198,1684825200"; 
+   d="scan'208";a="344412087"
+Received: from orsmga007.jf.intel.com ([10.7.209.58])
+  by fmsmga106.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 11 Jul 2023 23:09:34 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=McAfee;i="6600,9927,10768"; a="715438899"
+X-IronPort-AV: E=Sophos;i="6.01,198,1684825200"; 
+   d="scan'208";a="715438899"
+Received: from andromeda02.png.intel.com ([10.221.253.198])
+  by orsmga007.jf.intel.com with ESMTP; 11 Jul 2023 23:09:33 -0700
+From: chee.yang.lee@intel.com
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-oe][master][mickledore] rabbitmq-c: Fix CVE-2023-35789
+Date: Wed, 12 Jul 2023 13:57:53 +0800
+Message-Id: <20230712055753.2221730-1-chee.yang.lee@intel.com>
+X-Mailer: git-send-email 2.37.3
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Proofpoint-GUID: 9hN4-80zDpMBtMhFEhtPmd8OM4kAQthi
-X-Proofpoint-ORIG-GUID: 9hN4-80zDpMBtMhFEhtPmd8OM4kAQthi
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.254,Aquarius:18.0.957,Hydra:6.0.591,FMLib:17.11.176.26
- definitions=2023-07-12_02,2023-07-11_01,2023-05-22_02
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 bulkscore=0 spamscore=0
- impostorscore=0 mlxlogscore=999 priorityscore=1501 mlxscore=0
- malwarescore=0 adultscore=0 lowpriorityscore=0 phishscore=0 suspectscore=0
- clxscore=1015 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.19.0-2305260000 definitions=main-2307120051
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 12 Jul 2023 05:54:00 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103825
+ <openembedded-devel@lists.openembedded.org>; Wed, 12 Jul 2023 06:10:00 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103826
 
-From: Kai Kang <kai.kang@windriver.com>
+From: Chee Yang Lee <chee.yang.lee@intel.com>
 
-It fails to build fltk-native on Ubuntu 20.04 with glibc 2.31:
+affects <= 0.13.0
 
-| /path_to/tmp/hosttools/ld: lib/libfltk.a(Fl_Native_File_Chooser.cxx.o): in function `fl_dlopen(char const*, char const*)':
-| Fl_Native_File_Chooser.cxx:(.text+0x61a): undefined reference to `dlopen'
-| /path_to/tmp/hosttools/ld: lib/libfltk.a(Fl_Native_File_Chooser.cxx.o): in function `Fl_GTK_File_Chooser::probe_for_GTK_libs()':
-| Fl_Native_File_Chooser.cxx:(.text+0xf92): undefined reference to `dlerror'
-
-The original fix in fltk-native recipe does not work any more because '-ldl'
-appears before lib/libfltk.a and causes dlopen() unresolved. The reason why it
-doesn't fail on other hosts is that the functions dlopen(), dlerror() etc. have
-been moved to libc.so since glibc 2.34 via the commits in glibc:
-
-0c1c3a771e dlfcn: Move dlopen into libc
-add8d7ea01 dlfcn: Move dlvsym into libc
-6dfc0207eb dlfcn: Move dlinfo into libc
-492560a32e dlfcn: Move dladdr1 into libc
-6a1ed32789 dlfcn: Move dlmopen into libc
-77f876c0e3 dlfcn: Move dlsym into libc
-602252b553 dlfcn: Move dladdr into libc
-d8cce17d2a dlfcn: Move dlclose into libc
-
-Append 'dl' to fltk link items explictly to fix the error.
-
-Signed-off-by: Kai Kang <kai.kang@windriver.com>
+Signed-off-by: Chee Yang Lee <chee.yang.lee@intel.com>
 ---
-v2:
-* add Upstream-Status
+ .../rabbitmq-c/files/CVE-2023-35789.patch     | 131 ++++++++++++++++++
+ .../rabbitmq-c/rabbitmq-c_0.13.0.bb           |   4 +-
+ 2 files changed, 134 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-connectivity/rabbitmq-c/files/CVE-2023-35789.patch
 
- meta-oe/recipes-support/fltk/fltk-native.bb   |  5 +--
- .../fltk/fltk/fltk-native-link-libdl.patch    | 44 +++++++++++++++++++
- 2 files changed, 46 insertions(+), 3 deletions(-)
- create mode 100644 meta-oe/recipes-support/fltk/fltk/fltk-native-link-libdl.patch
-
-diff --git a/meta-oe/recipes-support/fltk/fltk-native.bb b/meta-oe/recipes-support/fltk/fltk-native.bb
-index 8d3992a6e..3e8e2cdf7 100644
---- a/meta-oe/recipes-support/fltk/fltk-native.bb
-+++ b/meta-oe/recipes-support/fltk/fltk-native.bb
-@@ -2,6 +2,8 @@ require ${BPN}.inc
- 
- DEPENDS = "zlib-native jpeg-native libpng-native libxext-native libxft-native"
- 
-+SRC_URI += "file://fltk-native-link-libdl.patch"
-+
- inherit native
- 
- EXTRA_OECMAKE += " \
-@@ -15,9 +17,6 @@ EXTRA_OECMAKE += " \
-     -DOPTION_USE_XCURSOR=OFF \
- "
- 
--# lib/libfltk.a(Fl_Native_File_Chooser.cxx.o): undefined reference to symbol 'dlsym@@GLIBC_2.2.5'
--LDFLAGS += "-ldl"
--
- do_install:append() {
-     # make sure native fltk-config is not used accidentaly
-     rm -f ${D}${bindir}/fltk-config
-diff --git a/meta-oe/recipes-support/fltk/fltk/fltk-native-link-libdl.patch b/meta-oe/recipes-support/fltk/fltk/fltk-native-link-libdl.patch
+diff --git a/meta-oe/recipes-connectivity/rabbitmq-c/files/CVE-2023-35789.patch b/meta-oe/recipes-connectivity/rabbitmq-c/files/CVE-2023-35789.patch
 new file mode 100644
-index 000000000..e140ce216
+index 0000000000..dfd1f98759
 --- /dev/null
-+++ b/meta-oe/recipes-support/fltk/fltk/fltk-native-link-libdl.patch
-@@ -0,0 +1,44 @@
-+Upstream-Status: Inappropriate [cross build specific]
++++ b/meta-oe/recipes-connectivity/rabbitmq-c/files/CVE-2023-35789.patch
+@@ -0,0 +1,131 @@
++CVE: CVE-2023-35789
++Upstream-Status: Backport [ https://github.com/alanxz/rabbitmq-c/commit/463054383fbeef889b409a7f843df5365288e2a0 ]
++Signed-off-by: Lee Chee Yang <chee.yang.lee@intel.com>
 +
-+It fails to build fltk-native on Ubuntu 20.04 with glibc 2.31:
++From 463054383fbeef889b409a7f843df5365288e2a0 Mon Sep 17 00:00:00 2001
++From: Christian Kastner <ckk@kvr.at>
++Date: Tue, 13 Jun 2023 14:21:52 +0200
++Subject: [PATCH] Add option to read username/password from file (#781)
 +
-+| /path_to/tmp/hosttools/ld: lib/libfltk.a(Fl_Native_File_Chooser.cxx.o): in function `fl_dlopen(char const*, char const*)':
-+| Fl_Native_File_Chooser.cxx:(.text+0x61a): undefined reference to `dlopen'
-+| /path_to/tmp/hosttools/ld: lib/libfltk.a(Fl_Native_File_Chooser.cxx.o): in function `Fl_GTK_File_Chooser::probe_for_GTK_libs()':
-+| Fl_Native_File_Chooser.cxx:(.text+0xf92): undefined reference to `dlerror'
-+
-+The original fix in fltk-native recipe does not work any more because '-ldl'
-+appears before lib/libfltk.a and causes dlopen() unresolved. The reason why it
-+doesn't fail on other hosts is that the functions dlopen(), dlerror() etc. have
-+been moved to libc.so since glibc 2.34 via the commits in glibc:
-+
-+0c1c3a771e dlfcn: Move dlopen into libc
-+add8d7ea01 dlfcn: Move dlvsym into libc
-+6dfc0207eb dlfcn: Move dlinfo into libc
-+492560a32e dlfcn: Move dladdr1 into libc
-+6a1ed32789 dlfcn: Move dlmopen into libc
-+77f876c0e3 dlfcn: Move dlsym into libc
-+602252b553 dlfcn: Move dladdr into libc
-+d8cce17d2a dlfcn: Move dlclose into libc
-+
-+Append 'dl' to fltk link items explictly to fix the error.
-+
-+Signed-off-by: Kai Kang <kai.kang@windriver.com>
-+
++* Add option to read username/password from file
 +---
-+ src/CMakeLists.txt | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
++ tools/common.c | 66 ++++++++++++++++++++++++++++++++++++++++++++++++++
++ 1 file changed, 66 insertions(+)
 +
-+diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
-+index d153b1c..0fe5c11 100644
-+--- a/src/CMakeLists.txt
-++++ b/src/CMakeLists.txt
-+@@ -306,7 +306,7 @@ endif (USE_XFT)
-+ #######################################################################
++diff --git a/tools/common.c b/tools/common.c
++index 73b47e25..7efe557b 100644
++--- a/tools/common.c
+++++ b/tools/common.c
++@@ -18,6 +18,11 @@
++ #include "compat.h"
++ #endif
 + 
-+ FL_ADD_LIBRARY (fltk STATIC "${STATIC_FILES}")
-+-target_link_libraries (fltk ${OPTIONAL_LIBS})
-++target_link_libraries (fltk ${OPTIONAL_LIBS} dl)
+++/* For when reading auth data from a file */
+++#define MAXAUTHTOKENLEN 128
+++#define USERNAMEPREFIX "username:"
+++#define PASSWORDPREFIX "password:"
+++
++ void die(const char *fmt, ...) {
++   va_list ap;
++   va_start(ap, fmt);
++@@ -125,6 +130,7 @@ static char *amqp_vhost;
++ static char *amqp_username;
++ static char *amqp_password;
++ static int amqp_heartbeat = 0;
+++static char *amqp_authfile;
++ #ifdef WITH_SSL
++ static int amqp_ssl = 0;
++ static char *amqp_cacert = "/etc/ssl/certs/cacert.pem";
++@@ -147,6 +153,8 @@ struct poptOption connect_options[] = {
++      "the password to login with", "password"},
++     {"heartbeat", 0, POPT_ARG_INT, &amqp_heartbeat, 0,
++      "heartbeat interval, set to 0 to disable", "heartbeat"},
+++    {"authfile", 0, POPT_ARG_STRING, &amqp_authfile, 0,
+++     "path to file containing username/password for authentication", "file"},
++ #ifdef WITH_SSL
++     {"ssl", 0, POPT_ARG_NONE, &amqp_ssl, 0, "connect over SSL/TLS", NULL},
++     {"cacert", 0, POPT_ARG_STRING, &amqp_cacert, 0,
++@@ -158,6 +166,50 @@ struct poptOption connect_options[] = {
++ #endif /* WITH_SSL */
++     {NULL, '\0', 0, NULL, 0, NULL, NULL}};
 + 
-+ #######################################################################
+++void read_authfile(const char *path) {
+++  size_t n;
+++  FILE *fp = NULL;
+++  char token[MAXAUTHTOKENLEN];
+++
+++  if ((amqp_username = malloc(MAXAUTHTOKENLEN)) == NULL ||
+++      (amqp_password = malloc(MAXAUTHTOKENLEN)) == NULL) {
+++    die("Out of memory");
+++  } else if ((fp = fopen(path, "r")) == NULL) {
+++    die("Could not read auth data file %s", path);
+++  }
+++
+++  if (fgets(token, MAXAUTHTOKENLEN, fp) == NULL ||
+++      strncmp(token, USERNAMEPREFIX, strlen(USERNAMEPREFIX))) {
+++    die("Malformed auth file (missing username)");
+++  }
+++  strncpy(amqp_username, &token[strlen(USERNAMEPREFIX)], MAXAUTHTOKENLEN);
+++  /* Missing newline means token was cut off */
+++  n = strlen(amqp_username);
+++  if (amqp_username[n - 1] != '\n') {
+++    die("Username too long");
+++  } else {
+++    amqp_username[n - 1] = '\0';
+++  }
+++
+++  if (fgets(token, MAXAUTHTOKENLEN, fp) == NULL ||
+++      strncmp(token, PASSWORDPREFIX, strlen(PASSWORDPREFIX))) {
+++    die("Malformed auth file (missing password)");
+++  }
+++  strncpy(amqp_password, &token[strlen(PASSWORDPREFIX)], MAXAUTHTOKENLEN);
+++  /* Missing newline means token was cut off */
+++  n = strlen(amqp_password);
+++  if (amqp_password[n - 1] != '\n') {
+++    die("Password too long");
+++  } else {
+++    amqp_password[n - 1] = '\0';
+++  }
+++
+++  (void)fgetc(fp);
+++  if (!feof(fp)) {
+++    die("Malformed auth file (trailing data)");
+++  }
+++}
+++
++ static void init_connection_info(struct amqp_connection_info *ci) {
++   ci->user = NULL;
++   ci->password = NULL;
++@@ -237,6 +289,8 @@ static void init_connection_info(struct amqp_connection_info *ci) {
++   if (amqp_username) {
++     if (amqp_url) {
++       die("--username and --url options cannot be used at the same time");
+++    } else if (amqp_authfile) {
+++      die("--username and --authfile options cannot be used at the same time");
++     }
 + 
++     ci->user = amqp_username;
++@@ -245,11 +299,23 @@ static void init_connection_info(struct amqp_connection_info *ci) {
++   if (amqp_password) {
++     if (amqp_url) {
++       die("--password and --url options cannot be used at the same time");
+++    } else if (amqp_authfile) {
+++      die("--password and --authfile options cannot be used at the same time");
++     }
++ 
++     ci->password = amqp_password;
++   }
++ 
+++  if (amqp_authfile) {
+++    if (amqp_url) {
+++      die("--authfile and --url options cannot be used at the same time");
+++    }
+++
+++    read_authfile(amqp_authfile);
+++    ci->user = amqp_username;
+++    ci->password = amqp_password;
+++  }
+++
++   if (amqp_vhost) {
++     if (amqp_url) {
++       die("--vhost and --url options cannot be used at the same time");
+diff --git a/meta-oe/recipes-connectivity/rabbitmq-c/rabbitmq-c_0.13.0.bb b/meta-oe/recipes-connectivity/rabbitmq-c/rabbitmq-c_0.13.0.bb
+index f9c2b2c8a9..ea80ec3344 100644
+--- a/meta-oe/recipes-connectivity/rabbitmq-c/rabbitmq-c_0.13.0.bb
++++ b/meta-oe/recipes-connectivity/rabbitmq-c/rabbitmq-c_0.13.0.bb
+@@ -3,7 +3,9 @@ HOMEPAGE = "https://github.com/alanxz/rabbitmq-c"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=7e12f6e40e662e039e2f02b4893011ec"
+ LICENSE = "MIT"
+ 
+-SRC_URI = "git://github.com/alanxz/rabbitmq-c.git;branch=master;protocol=https"
++SRC_URI = "git://github.com/alanxz/rabbitmq-c.git;branch=master;protocol=https \
++           file://CVE-2023-35789.patch \
++"
+ # v0.13.0-master
+ SRCREV = "974d71adceae6d742ae20a4c880d99c131f1460a"
+ 
 -- 
-2.34.1
+2.37.3
 
 
