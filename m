@@ -2,41 +2,41 @@ Return-Path: <auh@moto-timo.dev>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 76D5FEB64DD
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 77401C001DF
 	for <webhook@archiver.kernel.org>; Wed, 12 Jul 2023 05:30:20 +0000 (UTC)
-Received: from relay2-d.mail.gandi.net (relay2-d.mail.gandi.net [217.70.183.194])
- by mx.groups.io with SMTP id smtpd.web10.935.1689139813088176926
+Received: from relay3-d.mail.gandi.net (relay3-d.mail.gandi.net [217.70.183.195])
+ by mx.groups.io with SMTP id smtpd.web10.936.1689139814676385770
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 11 Jul 2023 22:30:13 -0700
+ Tue, 11 Jul 2023 22:30:15 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="body hash did not verify" header.i=@moto-timo.dev header.s=gm1 header.b=cnx+PdwS;
- spf=pass (domain: moto-timo.dev, ip: 217.70.183.194, mailfrom: auh@moto-timo.dev)
-Received: by mail.gandi.net (Postfix) with ESMTPSA id 7771B40008
-	for <openembedded-devel@lists.openembedded.org>; Wed, 12 Jul 2023 05:30:11 +0000 (UTC)
+ dkim=pass header.i=@moto-timo.dev header.s=gm1 header.b=OufRRLbb;
+ spf=pass (domain: moto-timo.dev, ip: 217.70.183.195, mailfrom: auh@moto-timo.dev)
+Received: by mail.gandi.net (Postfix) with ESMTPSA id 1259060004
+	for <openembedded-devel@lists.openembedded.org>; Wed, 12 Jul 2023 05:30:12 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=moto-timo.dev;
-	s=gm1; t=1689139811;
+	s=gm1; t=1689139813;
 	h=from:from:reply-to:subject:subject:to:to:cc:mime-version:mime-version:
-	 content-type:content-type; bh=Wgzb9voZjjV2Fi5HcvVTv84yjGfNSQCZtmN0qzbKxWE=;
-	b=cnx+PdwSQQRAA5d5SZSoUSPmTH74Jj4dw7JAUOxO+TBChqfecEBxZ43ynxouaWyS7L+wGB
-	x2KZWTBKx/2nU3onnGx1SU5/wwc/oolypCSkKz4lD92Vls06S3e4qIiCe3uL17oJe/G1oD
-	EDxtpiVEkwohnM1kt/8WDpBe90gxPdNVixeAp/43q/PyTfdwN+dJLgCWpK/OxEL3nEq8/a
-	vpjdSJU3L/d+53HNRJjNIHZoU2Ha7i2rHRrsvRF7bz84Eime1Oa5y+h1MyL2kmNOEvPErU
-	mVgGnOh2TjeAs1BePdqjRf32SYLi7jWTzdo4utyPk44wGf+q8b//QoI3d4bcJQ==
-Content-Type: multipart/mixed; boundary="===============4490147602694272305=="
+	 content-type:content-type; bh=SWIY95FRwNu8Wy2kQ3S/LGL8fxpQRDgrlEQLGPnihok=;
+	b=OufRRLbb0Jmt1LxdVWYFX5gp/ktUgGbdekiAsmun2nGIG/X7e73XYkrtEuNPvND1/GwsI1
+	DgTMWZcq/XjECNz2+WbHmTdm0u75eC1V+Tr2XHHe8pdMaWiYut9s9qzKIqm9z3Aw0X/IH9
+	fO82a6hmIZuOlN0n18Z0s+Y+yj27ikS2baPL6dE1D0DWbUouyCpqiSHZj2FrhOSCx4Y5qS
+	up7699VAogfBEyaGgGJ/xy6j0y5whMeb9uhXpNOad4FCf7FtvxTd4O7raz/SMOElbQtzdL
+	urAMPQFW4rqf11Qnw4W/awv+wuSgbGLvUiOOuUSGJiodRkjYNzcxzc9GVljnmw==
+Content-Type: multipart/mixed; boundary="===============7201395758932767312=="
 MIME-Version: 1.0
 From: auh@moto-timo.dev
 To: openembedded-devel@lists.openembedded.org
-Subject: [AUH] python3-cachecontrol: upgrading to 0.13.1 FAILED
+Subject: [AUH] python3-charset-normalizer: upgrading to 3.2.0 SUCCEEDED
 X-GND-Sasl: auh@moto-timo.dev
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 12 Jul 2023 05:30:20 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103753
-Message-Id: <20230712053020.76D5FEB64DD@smtp.lore.kernel.org>
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103754
+Message-Id: <20230712053020.77401C001DF@smtp.lore.kernel.org>
 Date: Wed, 12 Jul 2023 05:30:20 +0000 (UTC)
 
---===============4490147602694272305==
+--===============7201395758932767312==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -44,181 +44,93 @@ Content-Transfer-Encoding: 7bit
 Hello,
 
 this email is a notification from the Auto Upgrade Helper
-that the automatic attempt to upgrade the recipe *python3-cachecontrol* to *0.13.1* has Failed (devtool error).
+that the automatic attempt to upgrade the recipe *python3-charset-normalizer* to *3.2.0* has Succeeded.
 
-Detailed error information:
+Next steps:
+    - apply the patch: git am 0001-python3-charset-normalizer-upgrade-3.1.0-3.2.0.patch
+    - check the changes to upstream patches and summarize them in the commit message,
+    - compile an image that contains the package
+    - perform some basic sanity tests
+    - amend the patch and sign it off: git commit -s --reset-author --amend
+    - send it to the appropriate mailing list
 
-The following devtool command failed:  upgrade python3-cachecontrol -V 0.13.1
-NOTE: Starting bitbake server...
-Loading cache...done.
-Loaded 12659 entries from dependency cache.
-NOTE: Resolving any missing task queue dependencies
-NOTE: Resolving any missing task queue dependencies
-NOTE: Resolving any missing task queue dependencies
-NOTE: Resolving any missing task queue dependencies
-NOTE: Resolving any missing task queue dependencies
-NOTE: Resolving any missing task queue dependencies
-
-Build Configuration (mc:default):
-BB_VERSION           = "2.4.0"
-BUILD_SYS            = "x86_64-linux"
-NATIVELSBSTRING      = "universal"
-TARGET_SYS           = "x86_64-poky-linux"
-MACHINE              = "qemux86-64"
-DISTRO               = "poky"
-DISTRO_VERSION       = "4.2"
-TUNE_FEATURES        = "m64 core2"
-TARGET_FPU           = ""
-meta                 
-meta-poky            
-meta-yocto-bsp       = "master:a43fa36614977745fcbd6441d1c3c20321a8201d"
-meta-oe              
-meta-python          
-meta-perl            = "tmp-auh-upgrades:e89bc998deb636e4b6a347c1c4f5a44dac2b2015"
-workspace            = "<unknown>:<unknown>"
-
-
-Build Configuration (mc:qemux86-musl):
-BB_VERSION           = "2.4.0"
-BUILD_SYS            = "x86_64-linux"
-NATIVELSBSTRING      = "universal"
-TARGET_SYS           = "i686-poky-linux-musl"
-MACHINE              = "qemux86"
-DISTRO               = "poky"
-DISTRO_VERSION       = "4.2"
-TUNE_FEATURES        = "m32 core2"
-TARGET_FPU           = ""
-meta                 
-meta-poky            
-meta-yocto-bsp       = "master:a43fa36614977745fcbd6441d1c3c20321a8201d"
-meta-oe              
-meta-python          
-meta-perl            = "tmp-auh-upgrades:e89bc998deb636e4b6a347c1c4f5a44dac2b2015"
-workspace            = "<unknown>:<unknown>"
-
-
-Build Configuration (mc:qemuarm64):
-BB_VERSION           = "2.4.0"
-BUILD_SYS            = "x86_64-linux"
-NATIVELSBSTRING      = "universal"
-TARGET_SYS           = "aarch64-poky-linux"
-MACHINE              = "qemuarm64"
-DISTRO               = "poky"
-DISTRO_VERSION       = "4.2"
-TUNE_FEATURES        = "aarch64 armv8a crc cortexa57"
-TARGET_FPU           = ""
-meta                 
-meta-poky            
-meta-yocto-bsp       = "master:a43fa36614977745fcbd6441d1c3c20321a8201d"
-meta-oe              
-meta-python          
-meta-perl            = "tmp-auh-upgrades:e89bc998deb636e4b6a347c1c4f5a44dac2b2015"
-workspace            = "<unknown>:<unknown>"
-
-Initialising tasks...done.
-Sstate summary: Wanted 10 Local 0 Mirrors 9 Missed 1 Current 10 (90% match, 95% complete)
-NOTE: Executing Tasks
-NOTE: Tasks Summary: Attempted 93 tasks of which 90 didn't need to be rerun and all succeeded.
-NOTE: Writing buildhistory
-NOTE: Writing buildhistory took: 4 seconds
-NOTE: Writing buildhistory
-NOTE: Writing buildhistory took: 4 seconds
-NOTE: Writing buildhistory
-NOTE: Writing buildhistory took: 4 seconds
-Loading cache...done.
-Loaded 12659 entries from dependency cache.
-Parsing recipes...done.
-Parsing of 7308 .bb files complete (7302 cached, 6 parsed). 12569 targets, 338 skipped, 0 masked, 0 errors.
-NOTE: Resolving any missing task queue dependencies
-NOTE: Resolving any missing task queue dependencies
-NOTE: Resolving any missing task queue dependencies
-NOTE: Resolving any missing task queue dependencies
-NOTE: Resolving any missing task queue dependencies
-NOTE: Resolving any missing task queue dependencies
-
-Build Configuration (mc:default):
-BB_VERSION           = "2.4.0"
-BUILD_SYS            = "x86_64-linux"
-NATIVELSBSTRING      = "universal"
-TARGET_SYS           = "x86_64-poky-linux"
-MACHINE              = "qemux86-64"
-DISTRO               = "poky"
-DISTRO_VERSION       = "4.2"
-TUNE_FEATURES        = "m64 core2"
-TARGET_FPU           = ""
-meta                 
-meta-poky            
-meta-yocto-bsp       = "master:a43fa36614977745fcbd6441d1c3c20321a8201d"
-meta-oe              
-meta-python          
-meta-perl            = "tmp-auh-upgrades:e89bc998deb636e4b6a347c1c4f5a44dac2b2015"
-workspace            = "<unknown>:<unknown>"
-
-
-Build Configuration (mc:qemux86-musl):
-BB_VERSION           = "2.4.0"
-BUILD_SYS            = "x86_64-linux"
-NATIVELSBSTRING      = "universal"
-TARGET_SYS           = "i686-poky-linux-musl"
-MACHINE              = "qemux86"
-DISTRO               = "poky"
-DISTRO_VERSION       = "4.2"
-TUNE_FEATURES        = "m32 core2"
-TARGET_FPU           = ""
-meta                 
-meta-poky            
-meta-yocto-bsp       = "master:a43fa36614977745fcbd6441d1c3c20321a8201d"
-meta-oe              
-meta-python          
-meta-perl            = "tmp-auh-upgrades:e89bc998deb636e4b6a347c1c4f5a44dac2b2015"
-workspace            = "<unknown>:<unknown>"
-
-
-Build Configuration (mc:qemuarm64):
-BB_VERSION           = "2.4.0"
-BUILD_SYS            = "x86_64-linux"
-NATIVELSBSTRING      = "universal"
-TARGET_SYS           = "aarch64-poky-linux"
-MACHINE              = "qemuarm64"
-DISTRO               = "poky"
-DISTRO_VERSION       = "4.2"
-TUNE_FEATURES        = "aarch64 armv8a crc cortexa57"
-TARGET_FPU           = ""
-meta                 
-meta-poky            
-meta-yocto-bsp       = "master:a43fa36614977745fcbd6441d1c3c20321a8201d"
-meta-oe              
-meta-python          
-meta-perl            = "tmp-auh-upgrades:e89bc998deb636e4b6a347c1c4f5a44dac2b2015"
-workspace            = "<unknown>:<unknown>"
-
-Initialising tasks...done.
-Sstate summary: Wanted 0 Local 0 Mirrors 0 Missed 0 Current 0 (0% match, 0% complete)
-NOTE: No setscene tasks
-NOTE: Executing Tasks
-WARNING: Failed to fetch URL https://files.pythonhosted.org/packages/source/C/CacheControl/CacheControl-0.13.1.tar.gz;downloadfilename=CacheControl-0.13.1.tar.gz, attempting MIRRORS if available
-NOTE: Tasks Summary: Attempted 1 tasks of which 0 didn't need to be rerun and 1 failed.
-NOTE: Writing buildhistory
-NOTE: Writing buildhistory took: 4 seconds
-NOTE: Writing buildhistory
-NOTE: Writing buildhistory took: 4 seconds
-NOTE: Writing buildhistory
-NOTE: Writing buildhistory took: 4 seconds
-
-INFO: Extracting current version source...
-INFO: Extracting upgraded version source...
-INFO: Fetching https://files.pythonhosted.org/packages/source/C/CacheControl/CacheControl-0.13.1.tar.gz;downloadfilename=CacheControl-0.13.1.tar.gz...
-ERROR: Fetcher failure: Fetch command export PSEUDO_DISABLED=1; export PATH="/scratch1/auh/build-auh/tmp/sysroots-uninative/x86_64-linux/usr/bin:/home/auh/Projects/poky/scripts:/scratch1/auh/build-auh/tmp/work/recipetool-wy1jkbjh/work/recipe-sysroot-native/usr/bin/x86_64-poky-linux:/scratch1/auh/build-auh/tmp/work/recipetool-wy1jkbjh/work/recipe-sysroot/usr/bin/crossscripts:/scratch1/auh/build-auh/tmp/work/recipetool-wy1jkbjh/work/recipe-sysroot-native/usr/sbin:/scratch1/auh/build-auh/tmp/work/recipetool-wy1jkbjh/work/recipe-sysroot-native/usr/bin:/scratch1/auh/build-auh/tmp/work/recipetool-wy1jkbjh/work/recipe-sysroot-native/sbin:/scratch1/auh/build-auh/tmp/work/recipetool-wy1jkbjh/work/recipe-sysroot-native/bin:/home/auh/Projects/poky/bitbake/bin:/scratch1/auh/build-auh/tmp/hosttools"; export HOME="/home/auh"; /usr/bin/env wget -t 2 -T 30 --passive-ftp -O /scratch1/auh/DOWNLOADS/CacheControl-0.13.1.tar.gz.tmp -P /scratch1/auh/DOWNLOADS 'https://files.pythonhosted.org/packages/sourc
- e/C/CacheControl/CacheControl-0.13.1.tar.gz' --progress=dot -v failed with exit code 8, no output
-ERROR: Bitbake Fetcher Error: FetchError('Unable to fetch URL from any source.', 'https://files.pythonhosted.org/packages/source/C/CacheControl/CacheControl-0.13.1.tar.gz;downloadfilename=CacheControl-0.13.1.tar.gz')
-ERROR: Logfile of failure stored in: /scratch1/auh/build-auh/tmp/work/recipetool-wy1jkbjh/work/temp/log.do_fetch.495084
-ERROR: Failed to fetch URL https://files.pythonhosted.org/packages/source/C/CacheControl/CacheControl-0.13.1.tar.gz;downloadfilename=CacheControl-0.13.1.tar.gz
-
+Alternatively, if you believe the recipe should not be upgraded at this time,
+you can fill RECIPE_NO_UPDATE_REASON in respective recipe file so that
+automatic upgrades would no longer be attempted.
 
 Please review the attached files for further information and build/update failures.
 Any problem please file a bug at https://bugzilla.yoctoproject.org/enter_bug.cgi?product=Automated%20Update%20Handler
 
 Regards,
 The Upgrade Helper
---===============4490147602694272305==--
+
+-- >8 --
+From 85fed9e693ce3e363b6a7adbe20b7958d67d81b5 Mon Sep 17 00:00:00 2001
+From: Upgrade Helper <auh@moto-timo.dev>
+Date: Tue, 11 Jul 2023 17:39:48 -0500
+Subject: [PATCH] python3-charset-normalizer: upgrade 3.1.0 -> 3.2.0
+
+---
+ ...-normalizer_3.1.0.bb => python3-charset-normalizer_3.2.0.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-charset-normalizer_3.1.0.bb => python3-charset-normalizer_3.2.0.bb} (82%)
+
+diff --git a/meta-python/recipes-devtools/python/python3-charset-normalizer_3.1.0.bb b/meta-python/recipes-devtools/python/python3-charset-normalizer_3.2.0.bb
+similarity index 82%
+rename from meta-python/recipes-devtools/python/python3-charset-normalizer_3.1.0.bb
+rename to meta-python/recipes-devtools/python/python3-charset-normalizer_3.2.0.bb
+index 27bd625b4..0c2810c62 100644
+--- a/meta-python/recipes-devtools/python/python3-charset-normalizer_3.1.0.bb
++++ b/meta-python/recipes-devtools/python/python3-charset-normalizer_3.2.0.bb
+@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/ousret/charset_normalizer"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=0974a390827087287db39928f7c524b5"
+ 
+-SRC_URI[sha256sum] = "34e0a2f9c370eb95597aae63bf85eb5e96826d81e3dcf88b8886012906f509b5"
++SRC_URI[sha256sum] = "3bb3d25a8e6c0aedd251753a79ae98a093c7e7b471faa3aa9a93a81431987ace"
+ 
+ inherit pypi setuptools3
+ 
+-- 
+2.25.1
+
+
+--===============7201395758932767312==
+Content-Type: text/x-diff; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment;
+ filename="0001-python3-charset-normalizer-upgrade-3.1.0-3.2.0.patch"
+
+From 85fed9e693ce3e363b6a7adbe20b7958d67d81b5 Mon Sep 17 00:00:00 2001
+From: Upgrade Helper <auh@moto-timo.dev>
+Date: Tue, 11 Jul 2023 17:39:48 -0500
+Subject: [PATCH] python3-charset-normalizer: upgrade 3.1.0 -> 3.2.0
+
+---
+ ...-normalizer_3.1.0.bb => python3-charset-normalizer_3.2.0.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-charset-normalizer_3.1.0.bb => python3-charset-normalizer_3.2.0.bb} (82%)
+
+diff --git a/meta-python/recipes-devtools/python/python3-charset-normalizer_3.1.0.bb b/meta-python/recipes-devtools/python/python3-charset-normalizer_3.2.0.bb
+similarity index 82%
+rename from meta-python/recipes-devtools/python/python3-charset-normalizer_3.1.0.bb
+rename to meta-python/recipes-devtools/python/python3-charset-normalizer_3.2.0.bb
+index 27bd625b4..0c2810c62 100644
+--- a/meta-python/recipes-devtools/python/python3-charset-normalizer_3.1.0.bb
++++ b/meta-python/recipes-devtools/python/python3-charset-normalizer_3.2.0.bb
+@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/ousret/charset_normalizer"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=0974a390827087287db39928f7c524b5"
+ 
+-SRC_URI[sha256sum] = "34e0a2f9c370eb95597aae63bf85eb5e96826d81e3dcf88b8886012906f509b5"
++SRC_URI[sha256sum] = "3bb3d25a8e6c0aedd251753a79ae98a093c7e7b471faa3aa9a93a81431987ace"
+ 
+ inherit pypi setuptools3
+ 
+-- 
+2.25.1
+
+
+--===============7201395758932767312==--
 
