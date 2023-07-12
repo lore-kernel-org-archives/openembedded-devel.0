@@ -1,135 +1,89 @@
-Return-Path: <mns@gomspace.com>
+Return-Path: <marex@denx.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D1FB4EB64D9
-	for <webhook@archiver.kernel.org>; Wed, 12 Jul 2023 06:40:40 +0000 (UTC)
-Received: from webmail.gomspace.com (webmail.gomspace.com [79.171.149.170])
- by mx.groups.io with SMTP id smtpd.web11.1692.1689144031764043404
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 12429EB64D9
+	for <webhook@archiver.kernel.org>; Wed, 12 Jul 2023 07:26:11 +0000 (UTC)
+Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
+ by mx.groups.io with SMTP id smtpd.web10.2059.1689146760244580940
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 11 Jul 2023 23:40:32 -0700
+ Wed, 12 Jul 2023 00:26:01 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: gomspace.com, ip: 79.171.149.170, mailfrom: mns@gomspace.com)
-Received: from DK-AAL-EX02.gomspace.lan (10.0.1.86) by
- DK-AAL-EX02.gomspace.lan (10.0.1.86) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1118.30; Wed, 12 Jul 2023 08:40:29 +0200
-Received: from DK-AAL-EX02.gomspace.lan ([fe80::915b:db47:bb64:347c]) by
- DK-AAL-EX02.gomspace.lan ([fe80::915b:db47:bb64:347c%13]) with mapi id
- 15.02.1118.030; Wed, 12 Jul 2023 08:40:29 +0200
-From: Martin Siegumfeldt <mns@gomspace.com>
-To: Khem Raj <raj.khem@gmail.com>, Marek Vasut <marex@denx.de>
-CC: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>, Christian Eggers
-	<ceggers@arri.de>
-Subject: Re: [meta-oe][PATCH 1/2] libiio: update to version 0.25
-Thread-Topic: [meta-oe][PATCH 1/2] libiio: update to version 0.25
-Thread-Index: AQHZtF3YRIserho25U6AkDzIX/acoq+1ZA4AgABKtdg=
-Date: Wed, 12 Jul 2023 06:40:28 +0000
-Message-ID: <AM0PR09MB3988DFDE6AFBFBF4A7DF5078AF36A@AM0PR09MB3988.eurprd09.prod.outlook.com>
-References: <20230712011122.105264-1-marex@denx.de>,<CAMKF1soi0_gwwkqV26a6HJ3oEo__=5LdugShV_MkQMVeZmWRCQ@mail.gmail.com>
-In-Reply-To: <CAMKF1soi0_gwwkqV26a6HJ3oEo__=5LdugShV_MkQMVeZmWRCQ@mail.gmail.com>
-Accept-Language: en-US, da-DK
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-endpointsecurity-0xde81-ev: v:7.9.3.298, d:out, a:y, w:t, t:6,
- sv:1689122254, ts:1689144029
-Content-Type: multipart/alternative;
-	boundary="_000_AM0PR09MB3988DFDE6AFBFBF4A7DF5078AF36AAM0PR09MB3988eurp_"
+ dkim=fail reason="body hash did not verify" header.i=@denx.de header.s=phobos-20191101 header.b=s+/3MrCJ;
+ spf=pass (domain: denx.de, ip: 85.214.62.61, mailfrom: marex@denx.de)
+Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+	(No client certificate requested)
+	(Authenticated sender: marex@denx.de)
+	by phobos.denx.de (Postfix) with ESMTPSA id 1C59B868F9;
+	Wed, 12 Jul 2023 09:25:57 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1689146757;
+	bh=eGrtRUiHh6ZfiKOu/P4hzidAvqTC9fWOOHVBym0Mw38=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+	b=s+/3MrCJu+c68L/KQFuUOpzMezZoESevBGh3GnCrRG4drM5esL3W5Eih1ZJi57qD5
+	 iEcsVwu/ETF7QExsQu3kR59kaA5BTyA/F7iyWnsFT8UNB1oiT7ea6BRZxOkC2Us2b0
+	 MkoBpCjJ3MEip3IJEhFzFoUq0XabLWEjYR1wiPUFHJFuLfpVvEhSaJnBJbu4l2nWnk
+	 d8eHtrIbvREB1rgYhOyM2qkB/drhZg4lNn6CYFqEu3juyD2NuB/+rXeKhOgTpGospJ
+	 rGlIL5cCSmesiLgzJJy5cdYND6oFIC1F/wCaueSDsowym2TFC+G4+6cbk/QrcrUxP9
+	 uwtGJjYoNaiHQ==
+Message-ID: <581dd812-873e-eb56-50cc-7b03de57799a@denx.de>
+Date: Wed, 12 Jul 2023 09:25:56 +0200
 MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.13.0
+Subject: Re: [meta-oe][PATCH 1/2] libiio: update to version 0.25
+Content-Language: en-US
+To: Martin Siegumfeldt <mns@gomspace.com>, Khem Raj <raj.khem@gmail.com>,
+ Paul Cercueil <paul@crapouillou.net>
+Cc: "openembedded-devel@lists.openembedded.org"
+ <openembedded-devel@lists.openembedded.org>,
+ Christian Eggers <ceggers@arri.de>
+References: <20230712011122.105264-1-marex@denx.de>
+ <CAMKF1soi0_gwwkqV26a6HJ3oEo__=5LdugShV_MkQMVeZmWRCQ@mail.gmail.com>
+ <AM0PR09MB3988DFDE6AFBFBF4A7DF5078AF36A@AM0PR09MB3988.eurprd09.prod.outlook.com>
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <AM0PR09MB3988DFDE6AFBFBF4A7DF5078AF36A@AM0PR09MB3988.eurprd09.prod.outlook.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
+X-Virus-Status: Clean
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 12 Jul 2023 06:40:40 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103827
+ <openembedded-devel@lists.openembedded.org>; Wed, 12 Jul 2023 07:26:11 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103828
 
---_000_AM0PR09MB3988DFDE6AFBFBF4A7DF5078AF36AAM0PR09MB3988eurp_
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+On 7/12/23 08:40, Martin Siegumfeldt wrote:
+> On Tue, Jul 11, 2023 at 6:11=E2=80=AFPM Marek Vasut <marex@denx.de> wro=
+te:
+>>
+>> The version 0.25 has been released, it has not been tagged however.
+>> Update the this version anyway.
+>=20
+> hmm how do we know where to peg SRCREV ? I wonder if we should wait
+> for tag to appear.
 
-T24gVHVlLCBKdWwgMTEsIDIwMjMgYXQgNjoxMeKAr1BNIE1hcmVrIFZhc3V0IDxtYXJleEBkZW54
-LmRlPiB3cm90ZToNCj4NCj4gVGhlIHZlcnNpb24gMC4yNSBoYXMgYmVlbiByZWxlYXNlZCwgaXQg
-aGFzIG5vdCBiZWVuIHRhZ2dlZCBob3dldmVyLg0KPiBVcGRhdGUgdGhlIHRoaXMgdmVyc2lvbiBh
-bnl3YXkuDQoNCmhtbSBob3cgZG8gd2Uga25vdyB3aGVyZSB0byBwZWcgU1JDUkVWID8gSSB3b25k
-ZXIgaWYgd2Ugc2hvdWxkIHdhaXQNCmZvciB0YWcgdG8gYXBwZWFyLg0KDQpJIGFncmVlIGluIHdh
-aXRpbmcgZm9yIHRhZyB0byBiZSBwdWJsaXNoZWQuDQoNCkFsc28sIHdvdWxkIGl0IG1ha2Ugc2Vu
-c2UgdG8gcmVuYW1lIHRoZSByZWNpcGUgZmlsZSBhY2NvcmRpbmcgdG8gdGhlIGFjdHVhbCB2ZXJz
-aW9uIHJhdGhlciB0aGFuICdnaXQnPyBJbiB0aGUgcGFzdCBJIHRoaW5rIHRoZSByZWNpcGUgcmVm
-ZXJyZWQgYXJiaXRyYXJ5IGdpdCBjb21taXRzLCBob3dldmVyIHdlIGhhdmUgbW92ZWQgdG8gcmVm
-ZXJyaW5nIGFjdHVhbCByZWxlYXNlIGNvbW1pdHMgbm93Lg0KDQo+DQo+IFNpZ25lZC1vZmYtYnk6
-IE1hcmVrIFZhc3V0IDxtYXJleEBkZW54LmRlPg0KPiAtLS0NCj4gQ2M6IENocmlzdGlhbiBFZ2dl
-cnMgPGNlZ2dlcnNAYXJyaS5kZT4NCj4gQ2M6IEtoZW0gUmFqIDxyYWoua2hlbUBnbWFpbC5jb20+
-DQo+IENjOiBNYXJ0aW4gU2llZ3VtZmVsZHQgPG1uc0Bnb21zcGFjZS5jb20+DQo+IC0tLQ0KPiAg
-bWV0YS1vZS9yZWNpcGVzLXN1cHBvcnQvbGliaWlvL2xpYmlpb19naXQuYmIgfCA0ICsrLS0NCj4g
-IDEgZmlsZSBjaGFuZ2VkLCAyIGluc2VydGlvbnMoKyksIDIgZGVsZXRpb25zKC0pDQo+DQo+IGRp
-ZmYgLS1naXQgYS9tZXRhLW9lL3JlY2lwZXMtc3VwcG9ydC9saWJpaW8vbGliaWlvX2dpdC5iYiBi
-L21ldGEtb2UvcmVjaXBlcy1zdXBwb3J0L2xpYmlpby9saWJpaW9fZ2l0LmJiDQo+IGluZGV4IGVh
-NTFjMTlmNC4uYjg5YWUyOWVhIDEwMDY0NA0KPiAtLS0gYS9tZXRhLW9lL3JlY2lwZXMtc3VwcG9y
-dC9saWJpaW8vbGliaWlvX2dpdC5iYg0KPiArKysgYi9tZXRhLW9lL3JlY2lwZXMtc3VwcG9ydC9s
-aWJpaW8vbGliaWlvX2dpdC5iYg0KPiBAQCAtNCw4ICs0LDggQEAgU0VDVElPTiA9ICJsaWJzIg0K
-PiAgTElDRU5TRSA9ICJMR1BMLTIuMS1vci1sYXRlciINCj4gIExJQ19GSUxFU19DSEtTVU0gPSAi
-ZmlsZTovL0NPUFlJTkcudHh0O21kNT03YzEzYjMzNzZjZWEwY2U2OGQyZDJkYTBhMWIzYTcyYyIN
-Cj4NCj4gLVNSQ1JFViA9ICJjNDQ5OGMyNzc2MWQwNGQ0YWM2MzFlYzU5YzE2MTNiZmVkMDc5ZGE1
-Ig0KPiAtUFYgPSAiMC4yNCINCj4gK1NSQ1JFViA9ICJlZWU4Y2JhNmY0MjE3N2EwOTRlYmUxNjc1
-OTYwNmE3MTk2NzZmZGE3Ig0KPiArUFYgPSAiMC4yNSINCj4NCj4gIFNSQ19VUkkgPSAiZ2l0Oi8v
-Z2l0aHViLmNvbS9hbmFsb2dkZXZpY2VzaW5jL2xpYmlpby5naXQ7cHJvdG9jb2w9aHR0cHM7YnJh
-bmNoPW1hc3RlciINCj4gIFVQU1RSRUFNX0NIRUNLX0dJVFRBR1JFR0VYID0gInYoP1A8cHZlcj5c
-ZCsoXC5cZCspKykiDQo+IC0tDQo+IDIuNDAuMQ0KPg0KDQpfX19fX19fX19fX19fX19fX19fX19f
-X18NClRoaXMgZW1haWwgd2FzIHNjYW5uZWQgYnkgQml0ZGVmZW5kZXINCg0K
+The 0.24 appeared on matching commit
+"CMake: Bump version to v0.24"
+Same for 0.23, 0.22, 0.21. 0.20 was not tagged like this 0.25. 0.19 was=20
+tagged again etc.
 
---_000_AM0PR09MB3988DFDE6AFBFBF4A7DF5078AF36AAM0PR09MB3988eurp_
-Content-Type: text/html; charset="utf-8"
-Content-Transfer-Encoding: base64
+I think it is safe to assume the tag was just missed or not pushed, but=20
+I planned to ping Paul about it. Might as well add Paul to CC help and=20
+ask that way.
 
-PGh0bWw+DQo8aGVhZD4NCjxtZXRhIGh0dHAtZXF1aXY9IkNvbnRlbnQtVHlwZSIgY29udGVudD0i
-dGV4dC9odG1sOyBjaGFyc2V0PXV0Zi04Ij4NCjwvaGVhZD4NCjxib2R5Pg0KPGRpdiBzdHlsZT0i
-IiBkaXI9ImF1dG8iPjxzcGFuIHN0eWxlPSJmb250LXNpemU6IDExcHQ7Ij5PbiBUdWUsIEp1bCAx
-MSwgMjAyMyBhdCA2OjEx4oCvUE0gTWFyZWsgVmFzdXQgJmx0O21hcmV4QGRlbnguZGUmZ3Q7IHdy
-b3RlOjwvc3Bhbj48YnI+DQo8L2Rpdj4NCjxkaXYgaWQ9Im1zLW91dGxvb2stbW9iaWxlLXNpZ25h
-dHVyZSIgZGlyPSJhdXRvIj4NCjxkaXYgaWQ9Im1haWwtZWRpdG9yLXJlZmVyZW5jZS1tZXNzYWdl
-LWNvbnRhaW5lciIgZGlyPSJhdXRvIj48Zm9udCBzaXplPSIyIj48c3BhbiBzdHlsZT0iZm9udC1z
-aXplOjExcHQ7Ij4NCjxkaXYgY2xhc3M9IlBsYWluVGV4dCIgZGlyPSJhdXRvIj4mZ3Q7PGJyPg0K
-Jmd0OyBUaGUgdmVyc2lvbiAwLjI1IGhhcyBiZWVuIHJlbGVhc2VkLCBpdCBoYXMgbm90IGJlZW4g
-dGFnZ2VkIGhvd2V2ZXIuPGJyPg0KJmd0OyBVcGRhdGUgdGhlIHRoaXMgdmVyc2lvbiBhbnl3YXku
-PGJyPg0KPGJyPg0KaG1tIGhvdyBkbyB3ZSBrbm93IHdoZXJlIHRvIHBlZyBTUkNSRVYgPyBJIHdv
-bmRlciBpZiB3ZSBzaG91bGQgd2FpdDxicj4NCmZvciB0YWcgdG8gYXBwZWFyLjxicj4NCjxicj4N
-CkkgYWdyZWUgaW4gd2FpdGluZyBmb3IgdGFnIHRvIGJlIHB1Ymxpc2hlZC48L2Rpdj4NCjxkaXYg
-Y2xhc3M9IlBsYWluVGV4dCIgZGlyPSJhdXRvIj48YnI+DQo8L2Rpdj4NCjxkaXYgY2xhc3M9IlBs
-YWluVGV4dCIgZGlyPSJhdXRvIj5BbHNvLCB3b3VsZCBpdCBtYWtlIHNlbnNlIHRvIHJlbmFtZSB0
-aGUgcmVjaXBlIGZpbGUgYWNjb3JkaW5nIHRvIHRoZSBhY3R1YWwgdmVyc2lvbiByYXRoZXIgdGhh
-biAnZ2l0Jz8gSW4gdGhlIHBhc3QgSSB0aGluayB0aGUgcmVjaXBlIHJlZmVycmVkIGFyYml0cmFy
-eSBnaXQgY29tbWl0cywgaG93ZXZlciB3ZSBoYXZlIG1vdmVkIHRvIHJlZmVycmluZyBhY3R1YWwg
-cmVsZWFzZSBjb21taXRzDQogbm93Ljxicj4NCjxicj4NCiZndDs8YnI+DQomZ3Q7IFNpZ25lZC1v
-ZmYtYnk6IE1hcmVrIFZhc3V0ICZsdDttYXJleEBkZW54LmRlJmd0Ozxicj4NCiZndDsgLS0tPGJy
-Pg0KJmd0OyBDYzogQ2hyaXN0aWFuIEVnZ2VycyAmbHQ7Y2VnZ2Vyc0BhcnJpLmRlJmd0Ozxicj4N
-CiZndDsgQ2M6IEtoZW0gUmFqICZsdDtyYWoua2hlbUBnbWFpbC5jb20mZ3Q7PGJyPg0KJmd0OyBD
-YzogTWFydGluIFNpZWd1bWZlbGR0ICZsdDttbnNAZ29tc3BhY2UuY29tJmd0Ozxicj4NCiZndDsg
-LS0tPGJyPg0KJmd0OyZuYnNwOyBtZXRhLW9lL3JlY2lwZXMtc3VwcG9ydC9saWJpaW8vbGliaWlv
-X2dpdC5iYiB8IDQgJiM0MzsmIzQzOy0tPGJyPg0KJmd0OyZuYnNwOyAxIGZpbGUgY2hhbmdlZCwg
-MiBpbnNlcnRpb25zKCYjNDM7KSwgMiBkZWxldGlvbnMoLSk8YnI+DQomZ3Q7PGJyPg0KJmd0OyBk
-aWZmIC0tZ2l0IGEvbWV0YS1vZS9yZWNpcGVzLXN1cHBvcnQvbGliaWlvL2xpYmlpb19naXQuYmIg
-Yi9tZXRhLW9lL3JlY2lwZXMtc3VwcG9ydC9saWJpaW8vbGliaWlvX2dpdC5iYjxicj4NCiZndDsg
-aW5kZXggZWE1MWMxOWY0Li5iODlhZTI5ZWEgMTAwNjQ0PGJyPg0KJmd0OyAtLS0gYS9tZXRhLW9l
-L3JlY2lwZXMtc3VwcG9ydC9saWJpaW8vbGliaWlvX2dpdC5iYjxicj4NCiZndDsgJiM0MzsmIzQz
-OyYjNDM7IGIvbWV0YS1vZS9yZWNpcGVzLXN1cHBvcnQvbGliaWlvL2xpYmlpb19naXQuYmI8YnI+
-DQomZ3Q7IEBAIC00LDggJiM0Mzs0LDggQEAgU0VDVElPTiA9ICZxdW90O2xpYnMmcXVvdDs8YnI+
-DQomZ3Q7Jm5ic3A7IExJQ0VOU0UgPSAmcXVvdDtMR1BMLTIuMS1vci1sYXRlciZxdW90Ozxicj4N
-CiZndDsmbmJzcDsgTElDX0ZJTEVTX0NIS1NVTSA9ICZxdW90OzxhIGhyZWY9ImZpbGU6Ly9DT1BZ
-SU5HLnR4dDttZDU9N2MxM2IzMzc2Y2VhMGNlNjhkMmQyZGEwYTFiM2E3MmMiPmZpbGU6Ly9DT1BZ
-SU5HLnR4dDttZDU9N2MxM2IzMzc2Y2VhMGNlNjhkMmQyZGEwYTFiM2E3MmM8L2E+JnF1b3Q7PGJy
-Pg0KJmd0Ozxicj4NCiZndDsgLVNSQ1JFViA9ICZxdW90O2M0NDk4YzI3NzYxZDA0ZDRhYzYzMWVj
-NTljMTYxM2JmZWQwNzlkYTUmcXVvdDs8YnI+DQomZ3Q7IC1QViA9ICZxdW90OzAuMjQmcXVvdDs8
-YnI+DQomZ3Q7ICYjNDM7U1JDUkVWID0gJnF1b3Q7ZWVlOGNiYTZmNDIxNzdhMDk0ZWJlMTY3NTk2
-MDZhNzE5Njc2ZmRhNyZxdW90Ozxicj4NCiZndDsgJiM0MztQViA9ICZxdW90OzAuMjUmcXVvdDs8
-YnI+DQomZ3Q7PGJyPg0KJmd0OyZuYnNwOyBTUkNfVVJJID0gJnF1b3Q7Z2l0Oi8vZ2l0aHViLmNv
-bS9hbmFsb2dkZXZpY2VzaW5jL2xpYmlpby5naXQ7cHJvdG9jb2w9aHR0cHM7YnJhbmNoPW1hc3Rl
-ciZxdW90Ozxicj4NCiZndDsmbmJzcDsgVVBTVFJFQU1fQ0hFQ0tfR0lUVEFHUkVHRVggPSAmcXVv
-dDt2KD9QJmx0O3B2ZXImZ3Q7XGQmIzQzOyhcLlxkJiM0MzspJiM0MzspJnF1b3Q7PGJyPg0KJmd0
-OyAtLTxicj4NCiZndDsgMi40MC4xPGJyPg0KJmd0Ozxicj4NCjxicj4NCl9fX19fX19fX19fX19f
-X19fX19fX19fXzxicj4NClRoaXMgZW1haWwgd2FzIHNjYW5uZWQgYnkgQml0ZGVmZW5kZXI8YnI+
-DQo8L2Rpdj4NCjwvc3Bhbj48L2ZvbnQ+PGJyPg0KPC9kaXY+DQo8L2Rpdj4NCjwvYm9keT4NCjwv
-aHRtbD4NCg==
+Paul, is the libiio 0.25 tag just missing ?
 
---_000_AM0PR09MB3988DFDE6AFBFBF4A7DF5078AF36AAM0PR09MB3988eurp_--
+> I agree in waiting for tag to be published.
+
+See above.
+
+> Also, would it make sense to rename the recipe file according to the ac=
+tual version rather than 'git'? In the past I think the recipe referred a=
+rbitrary git commits, however we have moved to referring actual release c=
+ommits now.
+
+Yes, good point, but that's a separate patch. I made a local commit so=20
+it isn't forgotten.
 
