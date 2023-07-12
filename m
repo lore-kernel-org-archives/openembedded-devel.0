@@ -2,41 +2,41 @@ Return-Path: <auh@moto-timo.dev>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 66AA8EB64D9
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 682F9EB64DA
 	for <webhook@archiver.kernel.org>; Wed, 12 Jul 2023 05:31:20 +0000 (UTC)
-Received: from relay1-d.mail.gandi.net (relay1-d.mail.gandi.net [217.70.183.193])
- by mx.groups.io with SMTP id smtpd.web10.980.1689139878318383955
+Received: from relay7-d.mail.gandi.net (relay7-d.mail.gandi.net [217.70.183.200])
+ by mx.groups.io with SMTP id smtpd.web11.1010.1689139869863979021
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 11 Jul 2023 22:31:18 -0700
+ Tue, 11 Jul 2023 22:31:10 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@moto-timo.dev header.s=gm1 header.b=MbuOWj5O;
- spf=pass (domain: moto-timo.dev, ip: 217.70.183.193, mailfrom: auh@moto-timo.dev)
-Received: by mail.gandi.net (Postfix) with ESMTPSA id B2E52240006
-	for <openembedded-devel@lists.openembedded.org>; Wed, 12 Jul 2023 05:31:16 +0000 (UTC)
+ dkim=pass header.i=@moto-timo.dev header.s=gm1 header.b=lxVmbKmu;
+ spf=pass (domain: moto-timo.dev, ip: 217.70.183.200, mailfrom: auh@moto-timo.dev)
+Received: by mail.gandi.net (Postfix) with ESMTPSA id 3FEB720003
+	for <openembedded-devel@lists.openembedded.org>; Wed, 12 Jul 2023 05:31:08 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=moto-timo.dev;
-	s=gm1; t=1689139877;
+	s=gm1; t=1689139868;
 	h=from:from:reply-to:subject:subject:to:to:cc:mime-version:mime-version:
-	 content-type:content-type; bh=k4W46D65F5xy4Xk1ic4/1x0YpfyZkpC7zQb9YOdApSs=;
-	b=MbuOWj5O0lzo4OEsbx7nOSgLyo+7DOtapCXw2DWoSJGu4locjzmcXLDCpH/mq8sTp5xwyP
-	iNVy6/ivb38dgnuzUZbCI9jI0arn4gRQWZts7UOEBJj4J/old0d9gWBkyZGl5utmAmtBvp
-	1p8ol/NQNct7fslQwv4flLj0ayaYvh0nTNonOyhNE2XXf2Ocl+mfgZe45mxrab0Ywt4JEy
-	HCDl4Ya+LYniilmnkByMroooJyKfIi0HdzYBO7zN0UoNKsByDg71m0Nq12K08o5JYgyWBE
-	Di6iwLDK1sXGfnT0OAeOYq3OnViKZwyFOSSntWy22NjZe92aNNpN/BRGNIEd0w==
-Content-Type: multipart/mixed; boundary="===============2769404295768893840=="
+	 content-type:content-type; bh=Twdg7+y1L/FSBV+v2KqFz2mtvflyjriYP/186BYdq80=;
+	b=lxVmbKmuVlnStrengTSlSYUEsohxOaQsHr+os8IFMYm3NVzS8pHr67ATQhYz50Gax5ywfU
+	jpFY4izt1tha1FcF7pDvcy1N8F7kJ7NFvvN2IaMeeIDRU0A4e090YFGnzwu6+iI+OPGRhw
+	GK97Kz8vpzcQk5/m0j8YP0zkB/lOChD33kWheXZJCzyG3gHfwdNIwiYIWypLdrYCiTfUw5
+	F58dbO+zazmFGjsw3LG+PAaAquOcwJxyMKgjG7VnP+Uej8AWtsyqS9GWeVxkGpxEaZNcX5
+	EVSm/xQSrY+tpClZMvU6I6cNxBcjW6H9bjCLbkxq8dYrEjT6HmLQOWMOErrnDQ==
+Content-Type: multipart/mixed; boundary="===============1907746791456509197=="
 MIME-Version: 1.0
 From: auh@moto-timo.dev
 To: openembedded-devel@lists.openembedded.org
-Subject: [AUH] python3-pyaudio: upgrading to 0.2.13 FAILED
+Subject: [AUH] python3-platformdirs: upgrading to 3.8.1 SUCCEEDED
 X-GND-Sasl: auh@moto-timo.dev
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 12 Jul 2023 05:31:20 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103791
-Message-Id: <20230712053120.66AA8EB64D9@smtp.lore.kernel.org>
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103786
+Message-Id: <20230712053120.682F9EB64DA@smtp.lore.kernel.org>
 Date: Wed, 12 Jul 2023 05:31:20 +0000 (UTC)
 
---===============2769404295768893840==
+--===============1907746791456509197==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -44,190 +44,93 @@ Content-Transfer-Encoding: 7bit
 Hello,
 
 this email is a notification from the Auto Upgrade Helper
-that the automatic attempt to upgrade the recipe *python3-pyaudio* to *0.2.13* has Failed (devtool error).
+that the automatic attempt to upgrade the recipe *python3-platformdirs* to *3.8.1* has Succeeded.
 
-Detailed error information:
+Next steps:
+    - apply the patch: git am 0001-python3-platformdirs-upgrade-3.8.0-3.8.1.patch
+    - check the changes to upstream patches and summarize them in the commit message,
+    - compile an image that contains the package
+    - perform some basic sanity tests
+    - amend the patch and sign it off: git commit -s --reset-author --amend
+    - send it to the appropriate mailing list
 
-The following devtool command failed:  upgrade python3-pyaudio -V 0.2.13
-NOTE: Starting bitbake server...
-Loading cache...done.
-Loaded 12791 entries from dependency cache.
-NOTE: Resolving any missing task queue dependencies
-NOTE: Resolving any missing task queue dependencies
-NOTE: Resolving any missing task queue dependencies
-NOTE: Resolving any missing task queue dependencies
-NOTE: Resolving any missing task queue dependencies
-NOTE: Resolving any missing task queue dependencies
-
-Build Configuration (mc:default):
-BB_VERSION           = "2.4.0"
-BUILD_SYS            = "x86_64-linux"
-NATIVELSBSTRING      = "universal"
-TARGET_SYS           = "x86_64-poky-linux"
-MACHINE              = "qemux86-64"
-DISTRO               = "poky"
-DISTRO_VERSION       = "4.2"
-TUNE_FEATURES        = "m64 core2"
-TARGET_FPU           = ""
-meta                 
-meta-poky            
-meta-yocto-bsp       = "master:a43fa36614977745fcbd6441d1c3c20321a8201d"
-meta-oe              
-meta-python          
-meta-perl            = "tmp-auh-upgrades:812973bf8c6e72c2944deb4e83269cc57b5b5440"
-workspace            = "<unknown>:<unknown>"
-
-
-Build Configuration (mc:qemux86-musl):
-BB_VERSION           = "2.4.0"
-BUILD_SYS            = "x86_64-linux"
-NATIVELSBSTRING      = "universal"
-TARGET_SYS           = "i686-poky-linux-musl"
-MACHINE              = "qemux86"
-DISTRO               = "poky"
-DISTRO_VERSION       = "4.2"
-TUNE_FEATURES        = "m32 core2"
-TARGET_FPU           = ""
-meta                 
-meta-poky            
-meta-yocto-bsp       = "master:a43fa36614977745fcbd6441d1c3c20321a8201d"
-meta-oe              
-meta-python          
-meta-perl            = "tmp-auh-upgrades:812973bf8c6e72c2944deb4e83269cc57b5b5440"
-workspace            = "<unknown>:<unknown>"
-
-
-Build Configuration (mc:qemuarm64):
-BB_VERSION           = "2.4.0"
-BUILD_SYS            = "x86_64-linux"
-NATIVELSBSTRING      = "universal"
-TARGET_SYS           = "aarch64-poky-linux"
-MACHINE              = "qemuarm64"
-DISTRO               = "poky"
-DISTRO_VERSION       = "4.2"
-TUNE_FEATURES        = "aarch64 armv8a crc cortexa57"
-TARGET_FPU           = ""
-meta                 
-meta-poky            
-meta-yocto-bsp       = "master:a43fa36614977745fcbd6441d1c3c20321a8201d"
-meta-oe              
-meta-python          
-meta-perl            = "tmp-auh-upgrades:812973bf8c6e72c2944deb4e83269cc57b5b5440"
-workspace            = "<unknown>:<unknown>"
-
-Initialising tasks...done.
-Sstate summary: Wanted 10 Local 0 Mirrors 9 Missed 1 Current 10 (90% match, 95% complete)
-NOTE: Executing Tasks
-NOTE: Tasks Summary: Attempted 93 tasks of which 90 didn't need to be rerun and all succeeded.
-NOTE: Writing buildhistory
-NOTE: Writing buildhistory took: 3 seconds
-NOTE: Writing buildhistory
-NOTE: Writing buildhistory took: 3 seconds
-NOTE: Writing buildhistory
-NOTE: Writing buildhistory took: 3 seconds
-Loading cache...done.
-Loaded 12791 entries from dependency cache.
-Parsing recipes...done.
-Parsing of 7308 .bb files complete (7302 cached, 6 parsed). 12569 targets, 338 skipped, 0 masked, 0 errors.
-NOTE: Resolving any missing task queue dependencies
-NOTE: Resolving any missing task queue dependencies
-NOTE: Resolving any missing task queue dependencies
-NOTE: Resolving any missing task queue dependencies
-NOTE: Resolving any missing task queue dependencies
-NOTE: Resolving any missing task queue dependencies
-
-Build Configuration (mc:default):
-BB_VERSION           = "2.4.0"
-BUILD_SYS            = "x86_64-linux"
-NATIVELSBSTRING      = "universal"
-TARGET_SYS           = "x86_64-poky-linux"
-MACHINE              = "qemux86-64"
-DISTRO               = "poky"
-DISTRO_VERSION       = "4.2"
-TUNE_FEATURES        = "m64 core2"
-TARGET_FPU           = ""
-meta                 
-meta-poky            
-meta-yocto-bsp       = "master:a43fa36614977745fcbd6441d1c3c20321a8201d"
-meta-oe              
-meta-python          
-meta-perl            = "tmp-auh-upgrades:812973bf8c6e72c2944deb4e83269cc57b5b5440"
-workspace            = "<unknown>:<unknown>"
-
-
-Build Configuration (mc:qemux86-musl):
-BB_VERSION           = "2.4.0"
-BUILD_SYS            = "x86_64-linux"
-NATIVELSBSTRING      = "universal"
-TARGET_SYS           = "i686-poky-linux-musl"
-MACHINE              = "qemux86"
-DISTRO               = "poky"
-DISTRO_VERSION       = "4.2"
-TUNE_FEATURES        = "m32 core2"
-TARGET_FPU           = ""
-meta                 
-meta-poky            
-meta-yocto-bsp       = "master:a43fa36614977745fcbd6441d1c3c20321a8201d"
-meta-oe              
-meta-python          
-meta-perl            = "tmp-auh-upgrades:812973bf8c6e72c2944deb4e83269cc57b5b5440"
-workspace            = "<unknown>:<unknown>"
-
-
-Build Configuration (mc:qemuarm64):
-BB_VERSION           = "2.4.0"
-BUILD_SYS            = "x86_64-linux"
-NATIVELSBSTRING      = "universal"
-TARGET_SYS           = "aarch64-poky-linux"
-MACHINE              = "qemuarm64"
-DISTRO               = "poky"
-DISTRO_VERSION       = "4.2"
-TUNE_FEATURES        = "aarch64 armv8a crc cortexa57"
-TARGET_FPU           = ""
-meta                 
-meta-poky            
-meta-yocto-bsp       = "master:a43fa36614977745fcbd6441d1c3c20321a8201d"
-meta-oe              
-meta-python          
-meta-perl            = "tmp-auh-upgrades:812973bf8c6e72c2944deb4e83269cc57b5b5440"
-workspace            = "<unknown>:<unknown>"
-
-Initialising tasks...done.
-Sstate summary: Wanted 0 Local 0 Mirrors 0 Missed 0 Current 0 (0% match, 0% complete)
-NOTE: No setscene tasks
-NOTE: Executing Tasks
-NOTE: Tasks Summary: Attempted 2 tasks of which 0 didn't need to be rerun and all succeeded.
-NOTE: Writing buildhistory
-NOTE: Writing buildhistory took: 4 seconds
-NOTE: Writing buildhistory
-NOTE: Writing buildhistory took: 4 seconds
-NOTE: Writing buildhistory
-NOTE: Writing buildhistory took: 4 seconds
-DEBUG 5 [Errno 25] Inappropriate ioctl for device
-Adding changed files:   0% |                                   | ETA:  --:--:--
-Adding changed files:   0% |                                   | ETA:  --:--:--
-Adding changed files: 100% |####################################| Time: 0:00:00
-
-INFO: Extracting current version source...
-INFO: Extracting upgraded version source...
-INFO: Fetching https://files.pythonhosted.org/packages/source/P/PyAudio/PyAudio-0.2.13.tar.gz;downloadfilename=PyAudio-0.2.13.tar.gz...
-INFO: Rebasing devtool onto 96aa163360e76c505098d7b6d819bec4eb9660f3
-Traceback (most recent call last):
-  File "/home/auh/Projects/poky/scripts/devtool", line 349, in <module>
-    ret = main()
-  File "/home/auh/Projects/poky/scripts/devtool", line 336, in main
-    ret = args.func(args, config, basepath, workspace)
-  File "/home/auh/Projects/poky/scripts/lib/devtool/upgrade.py", line 565, in upgrade
-    new_licenses = _extract_licenses(srctree_s, (rd.getVar('LIC_FILES_CHKSUM') or ""))
-  File "/home/auh/Projects/poky/scripts/lib/devtool/upgrade.py", line 473, in _extract_licenses
-    with open(os.path.join(srcpath, path), 'rb') as f:
-FileNotFoundError: [Errno 2] No such file or directory: '/scratch1/auh/build-auh/workspace/sources/python3-pyaudio/README'
-
+Alternatively, if you believe the recipe should not be upgraded at this time,
+you can fill RECIPE_NO_UPDATE_REASON in respective recipe file so that
+automatic upgrades would no longer be attempted.
 
 Please review the attached files for further information and build/update failures.
 Any problem please file a bug at https://bugzilla.yoctoproject.org/enter_bug.cgi?product=Automated%20Update%20Handler
 
 Regards,
 The Upgrade Helper
---===============2769404295768893840==--
+
+-- >8 --
+From 22e5067f92bec36b1b0e78937de2ac92467c6e66 Mon Sep 17 00:00:00 2001
+From: Upgrade Helper <auh@moto-timo.dev>
+Date: Tue, 11 Jul 2023 21:03:53 -0500
+Subject: [PATCH] python3-platformdirs: upgrade 3.8.0 -> 3.8.1
+
+---
+ ...hon3-platformdirs_3.8.0.bb => python3-platformdirs_3.8.1.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-platformdirs_3.8.0.bb => python3-platformdirs_3.8.1.bb} (88%)
+
+diff --git a/meta-python/recipes-devtools/python/python3-platformdirs_3.8.0.bb b/meta-python/recipes-devtools/python/python3-platformdirs_3.8.1.bb
+similarity index 88%
+rename from meta-python/recipes-devtools/python/python3-platformdirs_3.8.0.bb
+rename to meta-python/recipes-devtools/python/python3-platformdirs_3.8.1.bb
+index 52fe07acf..e6748971e 100644
+--- a/meta-python/recipes-devtools/python/python3-platformdirs_3.8.0.bb
++++ b/meta-python/recipes-devtools/python/python3-platformdirs_3.8.1.bb
+@@ -7,7 +7,7 @@ SRC_URI += " \
+     file://run-ptest \
+ "
+ 
+-SRC_URI[sha256sum] = "b0cabcb11063d21a0b261d557acb0a9d2126350e63b70cdf7db6347baea456dc"
++SRC_URI[sha256sum] = "f87ca4fcff7d2b0f81c6a748a77973d7af0f4d526f98f308477c3c436c74d528"
+ 
+ inherit pypi python_hatchling ptest
+ 
+-- 
+2.25.1
+
+
+--===============1907746791456509197==
+Content-Type: text/x-diff; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment;
+ filename="0001-python3-platformdirs-upgrade-3.8.0-3.8.1.patch"
+
+From 22e5067f92bec36b1b0e78937de2ac92467c6e66 Mon Sep 17 00:00:00 2001
+From: Upgrade Helper <auh@moto-timo.dev>
+Date: Tue, 11 Jul 2023 21:03:53 -0500
+Subject: [PATCH] python3-platformdirs: upgrade 3.8.0 -> 3.8.1
+
+---
+ ...hon3-platformdirs_3.8.0.bb => python3-platformdirs_3.8.1.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-platformdirs_3.8.0.bb => python3-platformdirs_3.8.1.bb} (88%)
+
+diff --git a/meta-python/recipes-devtools/python/python3-platformdirs_3.8.0.bb b/meta-python/recipes-devtools/python/python3-platformdirs_3.8.1.bb
+similarity index 88%
+rename from meta-python/recipes-devtools/python/python3-platformdirs_3.8.0.bb
+rename to meta-python/recipes-devtools/python/python3-platformdirs_3.8.1.bb
+index 52fe07acf..e6748971e 100644
+--- a/meta-python/recipes-devtools/python/python3-platformdirs_3.8.0.bb
++++ b/meta-python/recipes-devtools/python/python3-platformdirs_3.8.1.bb
+@@ -7,7 +7,7 @@ SRC_URI += " \
+     file://run-ptest \
+ "
+ 
+-SRC_URI[sha256sum] = "b0cabcb11063d21a0b261d557acb0a9d2126350e63b70cdf7db6347baea456dc"
++SRC_URI[sha256sum] = "f87ca4fcff7d2b0f81c6a748a77973d7af0f4d526f98f308477c3c436c74d528"
+ 
+ inherit pypi python_hatchling ptest
+ 
+-- 
+2.25.1
+
+
+--===============1907746791456509197==--
 
