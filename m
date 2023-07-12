@@ -1,89 +1,245 @@
-Return-Path: <marex@denx.de>
+Return-Path: <auh@moto-timo.dev>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 12429EB64D9
-	for <webhook@archiver.kernel.org>; Wed, 12 Jul 2023 07:26:11 +0000 (UTC)
-Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
- by mx.groups.io with SMTP id smtpd.web10.2059.1689146760244580940
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 19DB1EB64D9
+	for <webhook@archiver.kernel.org>; Wed, 12 Jul 2023 07:33:21 +0000 (UTC)
+Received: from relay2-d.mail.gandi.net (relay2-d.mail.gandi.net [217.70.183.194])
+ by mx.groups.io with SMTP id smtpd.web10.2123.1689147199438899891
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 12 Jul 2023 00:26:01 -0700
+ Wed, 12 Jul 2023 00:33:20 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="body hash did not verify" header.i=@denx.de header.s=phobos-20191101 header.b=s+/3MrCJ;
- spf=pass (domain: denx.de, ip: 85.214.62.61, mailfrom: marex@denx.de)
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
-	(No client certificate requested)
-	(Authenticated sender: marex@denx.de)
-	by phobos.denx.de (Postfix) with ESMTPSA id 1C59B868F9;
-	Wed, 12 Jul 2023 09:25:57 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1689146757;
-	bh=eGrtRUiHh6ZfiKOu/P4hzidAvqTC9fWOOHVBym0Mw38=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
-	b=s+/3MrCJu+c68L/KQFuUOpzMezZoESevBGh3GnCrRG4drM5esL3W5Eih1ZJi57qD5
-	 iEcsVwu/ETF7QExsQu3kR59kaA5BTyA/F7iyWnsFT8UNB1oiT7ea6BRZxOkC2Us2b0
-	 MkoBpCjJ3MEip3IJEhFzFoUq0XabLWEjYR1wiPUFHJFuLfpVvEhSaJnBJbu4l2nWnk
-	 d8eHtrIbvREB1rgYhOyM2qkB/drhZg4lNn6CYFqEu3juyD2NuB/+rXeKhOgTpGospJ
-	 rGlIL5cCSmesiLgzJJy5cdYND6oFIC1F/wCaueSDsowym2TFC+G4+6cbk/QrcrUxP9
-	 uwtGJjYoNaiHQ==
-Message-ID: <581dd812-873e-eb56-50cc-7b03de57799a@denx.de>
-Date: Wed, 12 Jul 2023 09:25:56 +0200
+ dkim=pass header.i=@moto-timo.dev header.s=gm1 header.b=O15IOVBq;
+ spf=pass (domain: moto-timo.dev, ip: 217.70.183.194, mailfrom: auh@moto-timo.dev)
+Received: by mail.gandi.net (Postfix) with ESMTPSA id 5B9C140006
+	for <openembedded-devel@lists.openembedded.org>; Wed, 12 Jul 2023 07:33:16 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=moto-timo.dev;
+	s=gm1; t=1689147197;
+	h=from:from:reply-to:subject:subject:to:to:cc:mime-version:mime-version:
+	 content-type:content-type; bh=mMtD6s4YbLyPoF2zSC7eYpdjow58T4/NUfzPOsa/jSs=;
+	b=O15IOVBqLueQGwGl5jIJIIZpGaDMESgACqP/hr27NkPuU0CRP8gNdlxX+2Kd3R+eagSqlX
+	Rev42RyB9bk83iEsSqK7JyzFOwhw8XPPot7AdwT+l5zLPjwKHTNpphSRwoF//G5EMpoazI
+	0p3MpBLVQAKyfPppD1c8NLxIzMxsaTA7PfZ4FnFVwsr6T4/ory9u4x0/0Jg3TCpSlVEV+c
+	1xOaFfAw5zGJAkt0C+xX8pskfxOe1eb9+Hprwmey9csHicqxDl9NPrmnH89/pPfSFWrR0d
+	ICerrgpr/DkO06fxFf6gjCkJZ/DyQqCInXV1x6bs9DLOAOhjUIMvWnIIDjrZxQ==
+Content-Type: multipart/mixed; boundary="===============0961182594537047183=="
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.13.0
-Subject: Re: [meta-oe][PATCH 1/2] libiio: update to version 0.25
-Content-Language: en-US
-To: Martin Siegumfeldt <mns@gomspace.com>, Khem Raj <raj.khem@gmail.com>,
- Paul Cercueil <paul@crapouillou.net>
-Cc: "openembedded-devel@lists.openembedded.org"
- <openembedded-devel@lists.openembedded.org>,
- Christian Eggers <ceggers@arri.de>
-References: <20230712011122.105264-1-marex@denx.de>
- <CAMKF1soi0_gwwkqV26a6HJ3oEo__=5LdugShV_MkQMVeZmWRCQ@mail.gmail.com>
- <AM0PR09MB3988DFDE6AFBFBF4A7DF5078AF36A@AM0PR09MB3988.eurprd09.prod.outlook.com>
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <AM0PR09MB3988DFDE6AFBFBF4A7DF5078AF36A@AM0PR09MB3988.eurprd09.prod.outlook.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
-X-Virus-Status: Clean
-Content-Transfer-Encoding: quoted-printable
+From: auh@moto-timo.dev
+To: openembedded-devel@lists.openembedded.org
+Subject: [AUH] libcurses-perl: upgrading to 1.44 FAILED
+X-GND-Sasl: auh@moto-timo.dev
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 12 Jul 2023 07:26:11 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103828
+ <openembedded-devel@lists.openembedded.org>; Wed, 12 Jul 2023 07:33:21 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103829
+Message-Id: <20230712073321.19DB1EB64D9@smtp.lore.kernel.org>
+Date: Wed, 12 Jul 2023 07:33:21 +0000 (UTC)
 
-On 7/12/23 08:40, Martin Siegumfeldt wrote:
-> On Tue, Jul 11, 2023 at 6:11=E2=80=AFPM Marek Vasut <marex@denx.de> wro=
-te:
->>
->> The version 0.25 has been released, it has not been tagged however.
->> Update the this version anyway.
->=20
-> hmm how do we know where to peg SRCREV ? I wonder if we should wait
-> for tag to appear.
+--===============0961182594537047183==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
 
-The 0.24 appeared on matching commit
-"CMake: Bump version to v0.24"
-Same for 0.23, 0.22, 0.21. 0.20 was not tagged like this 0.25. 0.19 was=20
-tagged again etc.
+Hello,
 
-I think it is safe to assume the tag was just missed or not pushed, but=20
-I planned to ping Paul about it. Might as well add Paul to CC help and=20
-ask that way.
+this email is a notification from the Auto Upgrade Helper
+that the automatic attempt to upgrade the recipe *libcurses-perl* to *1.44* has Failed (devtool error).
 
-Paul, is the libiio 0.25 tag just missing ?
+Detailed error information:
 
-> I agree in waiting for tag to be published.
+Running 'devtool upgrade' for recipe libcurses-perl failed.
+NOTE: Starting bitbake server...
+NOTE: Reconnecting to bitbake server...
+NOTE: Previous bitbake instance shutting down?, waiting to retry... (02:12:23.287383)
+NOTE: Directory listing: ['tmp-qemux86-musl', 'tmp-qemuarm64', 'tmp', 'conf', 'tmp-qemux86-64', 'weeklyjob.sh', 'tmp-qemux86', 'auto-upgrade-helper', 'upgrade-helper', 'cache', 'workspace', 'buildhistory', 'perljob.sh', 'bitbake-cookerdaemon.log']
+NOTE: Retrying server connection (#1)... (02:12:23.404208)
+Loading cache...done.
+Loaded 12587 entries from dependency cache.
+NOTE: Resolving any missing task queue dependencies
+NOTE: Resolving any missing task queue dependencies
+NOTE: Resolving any missing task queue dependencies
+NOTE: Resolving any missing task queue dependencies
+NOTE: Resolving any missing task queue dependencies
+NOTE: Resolving any missing task queue dependencies
 
-See above.
+Build Configuration (mc:default):
+BB_VERSION           = "2.4.0"
+BUILD_SYS            = "x86_64-linux"
+NATIVELSBSTRING      = "universal"
+TARGET_SYS           = "x86_64-poky-linux"
+MACHINE              = "qemux86-64"
+DISTRO               = "poky"
+DISTRO_VERSION       = "4.2"
+TUNE_FEATURES        = "m64 core2"
+TARGET_FPU           = ""
+meta                 
+meta-poky            
+meta-yocto-bsp       = "master:a43fa36614977745fcbd6441d1c3c20321a8201d"
+meta-oe              
+meta-python          
+meta-perl            = "tmp-auh-upgrades:3ec20e2423c72f3df68b1748e7d0aedb551a0d20"
+workspace            = "<unknown>:<unknown>"
 
-> Also, would it make sense to rename the recipe file according to the ac=
-tual version rather than 'git'? In the past I think the recipe referred a=
-rbitrary git commits, however we have moved to referring actual release c=
-ommits now.
 
-Yes, good point, but that's a separate patch. I made a local commit so=20
-it isn't forgotten.
+Build Configuration (mc:qemux86-musl):
+BB_VERSION           = "2.4.0"
+BUILD_SYS            = "x86_64-linux"
+NATIVELSBSTRING      = "universal"
+TARGET_SYS           = "i686-poky-linux-musl"
+MACHINE              = "qemux86"
+DISTRO               = "poky"
+DISTRO_VERSION       = "4.2"
+TUNE_FEATURES        = "m32 core2"
+TARGET_FPU           = ""
+meta                 
+meta-poky            
+meta-yocto-bsp       = "master:a43fa36614977745fcbd6441d1c3c20321a8201d"
+meta-oe              
+meta-python          
+meta-perl            = "tmp-auh-upgrades:3ec20e2423c72f3df68b1748e7d0aedb551a0d20"
+workspace            = "<unknown>:<unknown>"
+
+
+Build Configuration (mc:qemuarm64):
+BB_VERSION           = "2.4.0"
+BUILD_SYS            = "x86_64-linux"
+NATIVELSBSTRING      = "universal"
+TARGET_SYS           = "aarch64-poky-linux"
+MACHINE              = "qemuarm64"
+DISTRO               = "poky"
+DISTRO_VERSION       = "4.2"
+TUNE_FEATURES        = "aarch64 armv8a crc cortexa57"
+TARGET_FPU           = ""
+meta                 
+meta-poky            
+meta-yocto-bsp       = "master:a43fa36614977745fcbd6441d1c3c20321a8201d"
+meta-oe              
+meta-python          
+meta-perl            = "tmp-auh-upgrades:3ec20e2423c72f3df68b1748e7d0aedb551a0d20"
+workspace            = "<unknown>:<unknown>"
+
+Initialising tasks...done.
+Sstate summary: Wanted 10 Local 0 Mirrors 9 Missed 1 Current 10 (90% match, 95% complete)
+NOTE: Executing Tasks
+NOTE: Tasks Summary: Attempted 93 tasks of which 90 didn't need to be rerun and all succeeded.
+NOTE: Writing buildhistory
+NOTE: Writing buildhistory took: 4 seconds
+NOTE: Writing buildhistory
+NOTE: Writing buildhistory took: 4 seconds
+NOTE: Writing buildhistory
+NOTE: Writing buildhistory took: 4 seconds
+Loading cache...done.
+Loaded 12587 entries from dependency cache.
+Parsing recipes...done.
+Parsing of 7308 .bb files complete (7302 cached, 6 parsed). 12569 targets, 338 skipped, 0 masked, 0 errors.
+NOTE: Resolving any missing task queue dependencies
+NOTE: Resolving any missing task queue dependencies
+NOTE: Resolving any missing task queue dependencies
+NOTE: Resolving any missing task queue dependencies
+NOTE: Resolving any missing task queue dependencies
+NOTE: Resolving any missing task queue dependencies
+
+Build Configuration (mc:default):
+BB_VERSION           = "2.4.0"
+BUILD_SYS            = "x86_64-linux"
+NATIVELSBSTRING      = "universal"
+TARGET_SYS           = "x86_64-poky-linux"
+MACHINE              = "qemux86-64"
+DISTRO               = "poky"
+DISTRO_VERSION       = "4.2"
+TUNE_FEATURES        = "m64 core2"
+TARGET_FPU           = ""
+meta                 
+meta-poky            
+meta-yocto-bsp       = "master:a43fa36614977745fcbd6441d1c3c20321a8201d"
+meta-oe              
+meta-python          
+meta-perl            = "tmp-auh-upgrades:3ec20e2423c72f3df68b1748e7d0aedb551a0d20"
+workspace            = "<unknown>:<unknown>"
+
+
+Build Configuration (mc:qemux86-musl):
+BB_VERSION           = "2.4.0"
+BUILD_SYS            = "x86_64-linux"
+NATIVELSBSTRING      = "universal"
+TARGET_SYS           = "i686-poky-linux-musl"
+MACHINE              = "qemux86"
+DISTRO               = "poky"
+DISTRO_VERSION       = "4.2"
+TUNE_FEATURES        = "m32 core2"
+TARGET_FPU           = ""
+meta                 
+meta-poky            
+meta-yocto-bsp       = "master:a43fa36614977745fcbd6441d1c3c20321a8201d"
+meta-oe              
+meta-python          
+meta-perl            = "tmp-auh-upgrades:3ec20e2423c72f3df68b1748e7d0aedb551a0d20"
+workspace            = "<unknown>:<unknown>"
+
+
+Build Configuration (mc:qemuarm64):
+BB_VERSION           = "2.4.0"
+BUILD_SYS            = "x86_64-linux"
+NATIVELSBSTRING      = "universal"
+TARGET_SYS           = "aarch64-poky-linux"
+MACHINE              = "qemuarm64"
+DISTRO               = "poky"
+DISTRO_VERSION       = "4.2"
+TUNE_FEATURES        = "aarch64 armv8a crc cortexa57"
+TARGET_FPU           = ""
+meta                 
+meta-poky            
+meta-yocto-bsp       = "master:a43fa36614977745fcbd6441d1c3c20321a8201d"
+meta-oe              
+meta-python          
+meta-perl            = "tmp-auh-upgrades:3ec20e2423c72f3df68b1748e7d0aedb551a0d20"
+workspace            = "<unknown>:<unknown>"
+
+Initialising tasks...done.
+Sstate summary: Wanted 0 Local 0 Mirrors 0 Missed 0 Current 0 (0% match, 0% complete)
+NOTE: No setscene tasks
+NOTE: Executing Tasks
+NOTE: Tasks Summary: Attempted 2 tasks of which 0 didn't need to be rerun and all succeeded.
+NOTE: Writing buildhistory
+NOTE: Writing buildhistory took: 4 seconds
+NOTE: Writing buildhistory
+NOTE: Writing buildhistory took: 5 seconds
+NOTE: Writing buildhistory
+NOTE: Writing buildhistory took: 5 seconds
+DEBUG 5 [Errno 25] Inappropriate ioctl for device
+Adding changed files:   0% |                                   | ETA:  --:--:--
+Adding changed files:   0% |                                   | ETA:  --:--:--
+Adding changed files: 100% |####################################| Time: 0:00:00
+INFO: Extracting current version source...
+INFO: Extracting upgraded version source...
+INFO: Fetching http://www.cpan.org/authors/id/G/GI/GIRAFFED/Curses-1.44.tar.gz...
+INFO: Rebasing devtool onto fbf2b1cd124178abdae0bd05d97e056ef7eec14e
+WARNING: Command 'git rebase fbf2b1cd124178abdae0bd05d97e056ef7eec14e' failed:
+First, rewinding head to replay your work on top of it...
+Applying: testtyp.c: Use proper prototype for main function
+Using index info to reconstruct a base tree...
+M	testtyp.c
+Falling back to patching base and 3-way merge...
+Auto-merging testtyp.c
+CONFLICT (content): Merge conflict in testtyp.c
+Patch failed at 0001 testtyp.c: Use proper prototype for main function
+Resolve all conflicts manually, mark them as resolved with
+"git add/rm <conflicted_files>", then run "git rebase --continue".
+You can instead skip this commit: run "git rebase --skip".
+To abort and get back to the state before "git rebase", run "git rebase --abort".
+
+You will need to resolve conflicts in order to complete the upgrade.
+INFO: Using source tree as build directory since that would be the default for this recipe
+INFO: Upgraded source extracted to /scratch1/auh/build-auh/workspace/sources/libcurses-perl
+INFO: New recipe is /scratch1/auh/build-auh/workspace/recipes/libcurses-perl/libcurses-perl_1.44.bb
+
+
+
+Please review the attached files for further information and build/update failures.
+Any problem please file a bug at https://bugzilla.yoctoproject.org/enter_bug.cgi?product=Automated%20Update%20Handler
+
+Regards,
+The Upgrade Helper
+--===============0961182594537047183==--
 
