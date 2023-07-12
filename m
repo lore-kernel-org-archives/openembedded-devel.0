@@ -2,167 +2,122 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 76EF9EB64DA
-	for <webhook@archiver.kernel.org>; Wed, 12 Jul 2023 16:03:13 +0000 (UTC)
-Received: from mail-oi1-f172.google.com (mail-oi1-f172.google.com [209.85.167.172])
- by mx.groups.io with SMTP id smtpd.web11.11388.1689177789905582077
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E26EDEB64DA
+	for <webhook@archiver.kernel.org>; Wed, 12 Jul 2023 16:14:44 +0000 (UTC)
+Received: from mail-oo1-f42.google.com (mail-oo1-f42.google.com [209.85.161.42])
+ by mx.groups.io with SMTP id smtpd.web10.25.1689178483641972776
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 12 Jul 2023 09:03:10 -0700
+ Wed, 12 Jul 2023 09:14:43 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=Ges2XfIL;
- spf=pass (domain: gmail.com, ip: 209.85.167.172, mailfrom: raj.khem@gmail.com)
-Received: by mail-oi1-f172.google.com with SMTP id 5614622812f47-3a3fbfb616dso2483012b6e.3
-        for <openembedded-devel@lists.openembedded.org>; Wed, 12 Jul 2023 09:03:09 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20221208 header.b=GBbDmDZt;
+ spf=pass (domain: gmail.com, ip: 209.85.161.42, mailfrom: raj.khem@gmail.com)
+Received: by mail-oo1-f42.google.com with SMTP id 006d021491bc7-5636425bf98so3834790eaf.1
+        for <openembedded-devel@lists.openembedded.org>; Wed, 12 Jul 2023 09:14:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1689177789; x=1691769789;
+        d=gmail.com; s=20221208; t=1689178483; x=1691770483;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=1T+HOKDEiniZgANK1H4+U4PdAvMrNy/Tv7ii99GtGLU=;
-        b=Ges2XfILyCfrO6MjrPhjgof+Xrr2lDpIygts15b3a372kWJoKQdKP9X9ZRFlh06TPF
-         KqMVzT12xw61nrURTW9yOMYZXluIMj1VXldX+I5u4nQq1pQtJjIhm8t9Plmyu/rvCDc2
-         MSdtx213GNDKjMTtto4ttwjGg82/uAdTQk2LaFgGoBtiSUHkcjQHMDOr0Ae8YNnEpFjf
-         3EsYUz8alzapB3XXE7beYqWjYqEUJtOJXMUOApR4tv3PiVab7QnGEvQKGVoEyEWmiJAg
-         N8OhjEZ1/lGW85UnvMJpBmsvMZNLOIhW4wSm5bm5MP4ymcE0oGey5rLJZz5+FVm3r2pB
-         YVHw==
+        bh=OFNhn5SPFtHVWQh5HT0pGqYVVn0x/+Jn9nsRNGIFxSw=;
+        b=GBbDmDZtnLnBXyfHYmIyhV1rRRsNv9gTkbJ3vcm/Xkbbi0PoQJVzwSRAo5Y35iT53y
+         3EySlaPpxwVX/WLkSRc1fX0GkPrH1ypkVMDDqy8dgyTOXAa6I5armhO/rjEco3L44w5l
+         vCCOh0fwsbeLc7PzyYaqJdiF1dBQ0E1pgmEPIqV9nHqI/xuPmDsJOjqFgJxr7UtryZ/n
+         ffagnD9LDSWYgv4Ehed0jddYKWT2MgE8uWN2sj6s5cZMi9cB5pAfnXMj3HrJgb/wjp6t
+         MD311Igr/TU5SHC/KpppxTKAjHd5G6h3FsPJlYedXN7xivZwqkGeIZv22HZMcRIY1zF6
+         su6Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1689177789; x=1691769789;
+        d=1e100.net; s=20221208; t=1689178483; x=1691770483;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=1T+HOKDEiniZgANK1H4+U4PdAvMrNy/Tv7ii99GtGLU=;
-        b=Fthos6364benk25wbxHHmYkDDRiIgb/3o7CkFn8wUQNtlBfPSjuc7PVxrW2zPWalb5
-         48s9Nh7UiMxAHUpWoWXjlOZ06uYwGy/8POzxE2dAxIwl81ZkT/pU5rn9RXA4EfIw1vvC
-         6O/bxRaxium22HKHNauVphkOOshGlDVAWitsjUJOKlKkeAr0+uE09T01A7UFP4pjET1U
-         yRMnlB/R1z8SAS0fwx9akong3dhzSkgT1VszGuUoOKU33mqpDi+mvDnwuaFica556iOu
-         lX/iS+LZp+17b/1IlutK0mFKSWqi07+j2laRi42a4cegCuDIMRtXsvTSpY6FVWXxu2J7
-         hvjg==
-X-Gm-Message-State: ABy/qLYhPXucOoKVXvI5rx9IL3KeprqQsgFxdLE9PHItpmGCcbM1AhlR
-	CCsHVDUmoLU6pmeyDiBudOJI4KX2Vsq8eK10+dy2P108
-X-Google-Smtp-Source: APBJJlHATThhDDN9jfAH6XlPiR9jltdWzTYZYky0EPCSzXgmcKgk/i5RsXl9iVYhE/QC98JTL3W0Fg0E2Fea0taR7Xs=
-X-Received: by 2002:a4a:8502:0:b0:566:f6a0:87e4 with SMTP id
- k2-20020a4a8502000000b00566f6a087e4mr790752ooh.0.1689177788738; Wed, 12 Jul
- 2023 09:03:08 -0700 (PDT)
+        bh=OFNhn5SPFtHVWQh5HT0pGqYVVn0x/+Jn9nsRNGIFxSw=;
+        b=Jvk95t5QuTnho5lT8moXK0YQxF22IDKpe7GBnOjxF9lnrnKYBUcdHX7flvhQW4JNsH
+         aoWMiqqRftWuKJQ9X95tCRwJt48tG/PwDJuMc/BziY+9KBCQv7X5FSz2ivH8q6kacoOG
+         mcriVwG+UF4wn3RAFSeb37aHPMTWQ2faWhOdWFgk2v8GvaU9GBTqPiEnqfGX3Pqm2G/Y
+         0XsIj50xxg+m4nK2fY4UuEoZotKGx21p9nkpdqXYIFLUS6YFA9t/9mX3/B5BGdBuvnPZ
+         rXT16LyVbKj0MMk4OYJj1jPlLV6MQzYi19k2gf8it82DzJczB+exk2Me+T7uSwjXet+n
+         8WiQ==
+X-Gm-Message-State: ABy/qLZglhWV8YfxVAzFsokOtmN/XiBWFJM86h4OIcP4jwcj3JxlZnNR
+	JztE7tBSMWV8SUxyvgOTyJzHMGaxZDAR0vCksFE=
+X-Google-Smtp-Source: APBJJlGgEKelDhd/CYBtfz7XRQbHpmy67FOiPoXEDYj/DxoA4eqaLCwfpcRVliAH59AH7XuYWXCS+hjezH5HKiZXpII=
+X-Received: by 2002:a4a:5583:0:b0:566:6bd7:27c5 with SMTP id
+ e125-20020a4a5583000000b005666bd727c5mr14057746oob.3.1689178482690; Wed, 12
+ Jul 2023 09:14:42 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230712145735.88665-1-michael.weiss@aisec.fraunhofer.de>
-In-Reply-To: <20230712145735.88665-1-michael.weiss@aisec.fraunhofer.de>
+References: <20230712011122.105264-1-marex@denx.de> <CAMKF1soi0_gwwkqV26a6HJ3oEo__=5LdugShV_MkQMVeZmWRCQ@mail.gmail.com>
+ <AM0PR09MB3988DFDE6AFBFBF4A7DF5078AF36A@AM0PR09MB3988.eurprd09.prod.outlook.com>
+In-Reply-To: <AM0PR09MB3988DFDE6AFBFBF4A7DF5078AF36A@AM0PR09MB3988.eurprd09.prod.outlook.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 12 Jul 2023 09:02:42 -0700
-Message-ID: <CAMKF1so6vWnWDdDADO-N6gcc1UiYyZgGCefDC-_LXkSjP+QcTw@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH] pv: Show progress bar even if no terminal
- is set as in 1.6.6
-To: =?UTF-8?Q?Michael_Wei=C3=9F?= <michael.weiss@aisec.fraunhofer.de>
-Cc: openembedded-devel@lists.openembedded.org
+Date: Wed, 12 Jul 2023 09:14:16 -0700
+Message-ID: <CAMKF1spTyZsB88oqcv9sR4A-+457L4LKrrhbRw80crkdUSxr3g@mail.gmail.com>
+Subject: Re: [meta-oe][PATCH 1/2] libiio: update to version 0.25
+To: Martin Siegumfeldt <mns@gomspace.com>
+Cc: Marek Vasut <marex@denx.de>, 
+	"openembedded-devel@lists.openembedded.org" <openembedded-devel@lists.openembedded.org>, 
+	Christian Eggers <ceggers@arri.de>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 12 Jul 2023 16:03:13 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103844
+ <openembedded-devel@lists.openembedded.org>; Wed, 12 Jul 2023 16:14:44 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103845
 
-On Wed, Jul 12, 2023 at 7:58=E2=80=AFAM Michael Wei=C3=9F
-<michael.weiss@aisec.fraunhofer.de> wrote:
+On Tue, Jul 11, 2023 at 11:40=E2=80=AFPM Martin Siegumfeldt <mns@gomspace.c=
+om> wrote:
 >
-> The currently used version 1.6.20 of pv does not show the progress
-> bar if no controlling terminal is set. Added a patch which restores
-> previous behavior of pv as in version 1.6.6.
+> On Tue, Jul 11, 2023 at 6:11=E2=80=AFPM Marek Vasut <marex@denx.de> wrote=
+:
+> >
+> > The version 0.25 has been released, it has not been tagged however.
+> > Update the this version anyway.
 >
-> Tested with pv in the busybox initscript of GyroidOS which is
-> running on /dev/console (which has no controlling tty). With this
-> fix, we get the progress bar back on /dev/console as before.
+> hmm how do we know where to peg SRCREV ? I wonder if we should wait
+> for tag to appear.
 >
-> This was also submitted upstream but dangling since several Months:
->         https://github.com/a-j-wood/pv/pull/64
+> I agree in waiting for tag to be published.
 >
-> Signed-off-by: Michael Wei=C3=9F <michael.weiss@aisec.fraunhofer.de>
-> ---
->  ...e-error-of-tcgetpgrp-in-pv_in_foregr.patch | 38 +++++++++++++++++++
->  meta-oe/recipes-support/pv/pv_1.6.20.bb       |  1 +
->  2 files changed, 39 insertions(+)
->  create mode 100644 meta-oe/recipes-support/pv/pv/0001-pv-display-handle-=
-error-of-tcgetpgrp-in-pv_in_foregr.patch
->
-> diff --git a/meta-oe/recipes-support/pv/pv/0001-pv-display-handle-error-o=
-f-tcgetpgrp-in-pv_in_foregr.patch b/meta-oe/recipes-support/pv/pv/0001-pv-d=
-isplay-handle-error-of-tcgetpgrp-in-pv_in_foregr.patch
-> new file mode 100644
-> index 000000000..3c364dcc4
-> --- /dev/null
-> +++ b/meta-oe/recipes-support/pv/pv/0001-pv-display-handle-error-of-tcget=
-pgrp-in-pv_in_foregr.patch
-> @@ -0,0 +1,38 @@
-> +From c5cd932fb08e7ce90cdbf9ae6c5cc7e65ac0738e Mon Sep 17 00:00:00 2001
-> +From: =3D?UTF-8?q?Michael=3D20Wei=3DC3=3D9F?=3D <michael.weiss@aisec.fra=
-unhofer.de>
-> +Date: Tue, 9 May 2023 20:00:26 +0200
-> +Subject: [PATCH] pv/display: handle error of tcgetpgrp() in pv_in_foregr=
-ound()
-> +MIME-Version: 1.0
-> +Content-Type: text/plain; charset=3DUTF-8
-> +Content-Transfer-Encoding: 8bit
-> +
-> +Show pv progress bar even if no terminal is set, e.g., in a busybox
-> +init script. The description of pv_in_forground() states it will
-> +return true "if we aren't outputting to a terminal". However, this
-> +is not the case since tcgetpgrg() will return an error and set ERRNO
-> +to ENOTTY if the output fd is not an tty. We now handle this error
-> +correctly and pv_in_foreground() returns also true in that case.
-> +
-> +Signed-off-by: Michael Wei=C3=9F <michael.weiss@aisec.fraunhofer.de>
-> +---
-> + src/pv/display.c | 4 ++++
-> + 1 file changed, 4 insertions(+)
-> +
-> +diff --git a/src/pv/display.c b/src/pv/display.c
-> +index aff643b..8d1f4c9 100644
-> +--- a/src/pv/display.c
-> ++++ b/src/pv/display.c
-> +@@ -48,6 +48,10 @@ bool pv_in_foreground(void)
-> +
-> +       our_process_group =3D getpgrp();
-> +       tty_process_group =3D tcgetpgrp(STDERR_FILENO);
-> ++
-> ++      if (tty_process_group =3D=3D -1 && errno =3D=3D ENOTTY)
-> ++              return true;
-> ++
-> +       if (our_process_group =3D=3D tty_process_group)
-> +               return true;
-> +
-> +--
-> +2.30.2
-> +
-> diff --git a/meta-oe/recipes-support/pv/pv_1.6.20.bb b/meta-oe/recipes-su=
-pport/pv/pv_1.6.20.bb
-> index 867a621d1..87b764ac5 100644
-> --- a/meta-oe/recipes-support/pv/pv_1.6.20.bb
-> +++ b/meta-oe/recipes-support/pv/pv_1.6.20.bb
-> @@ -5,6 +5,7 @@ LICENSE =3D "Artistic-2.0"
->  LIC_FILES_CHKSUM =3D "file://doc/COPYING;md5=3D9c50db2589ee3ef10a9b7b2e5=
-0ce1d02"
->
->  SRC_URI =3D "https://www.ivarch.com/programs/sources/${BP}.tar.bz2 \
-> +           file://0001-pv-display-handle-error-of-tcgetpgrp-in-pv_in_for=
-egr.patch" \
+> Also, would it make sense to rename the recipe file according to the actu=
+al version rather than 'git'? In the past I think the recipe referred arbit=
+rary git commits, however we have moved to referring actual release commits=
+ now.
 
-There is a spurious end of quote ( " ) above. How was this patch tested ?
+Yes it is preferred that PV is moved to recipe name in such cases.
 
->             file://run-ptest \
->  "
->  SRC_URI[sha256sum] =3D "e831951eff0718fba9b1ef286128773b9d0e723e1fbfae88=
-d5a3188814fdc603"
-> --
-> 2.30.2
 >
+> >
+> > Signed-off-by: Marek Vasut <marex@denx.de>
+> > ---
+> > Cc: Christian Eggers <ceggers@arri.de>
+> > Cc: Khem Raj <raj.khem@gmail.com>
+> > Cc: Martin Siegumfeldt <mns@gomspace.com>
+> > ---
+> >  meta-oe/recipes-support/libiio/libiio_git.bb | 4 ++--
+> >  1 file changed, 2 insertions(+), 2 deletions(-)
+> >
+> > diff --git a/meta-oe/recipes-support/libiio/libiio_git.bb b/meta-oe/rec=
+ipes-support/libiio/libiio_git.bb
+> > index ea51c19f4..b89ae29ea 100644
+> > --- a/meta-oe/recipes-support/libiio/libiio_git.bb
+> > +++ b/meta-oe/recipes-support/libiio/libiio_git.bb
+> > @@ -4,8 +4,8 @@ SECTION =3D "libs"
+> >  LICENSE =3D "LGPL-2.1-or-later"
+> >  LIC_FILES_CHKSUM =3D "file://COPYING.txt;md5=3D7c13b3376cea0ce68d2d2da=
+0a1b3a72c"
+> >
+> > -SRCREV =3D "c4498c27761d04d4ac631ec59c1613bfed079da5"
+> > -PV =3D "0.24"
+> > +SRCREV =3D "eee8cba6f42177a094ebe16759606a719676fda7"
+> > +PV =3D "0.25"
+> >
+> >  SRC_URI =3D "git://github.com/analogdevicesinc/libiio.git;protocol=3Dh=
+ttps;branch=3Dmaster"
+> >  UPSTREAM_CHECK_GITTAGREGEX =3D "v(?P<pver>\d+(\.\d+)+)"
+> > --
+> > 2.40.1
+> >
 >
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#103842): https://lists.openembedded.org/g/openembedde=
-d-devel/message/103842
-> Mute This Topic: https://lists.openembedded.org/mt/100101204/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
-aj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> ________________________
+> This email was scanned by Bitdefender
 >
 
