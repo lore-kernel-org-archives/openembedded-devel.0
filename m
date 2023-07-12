@@ -1,157 +1,139 @@
-Return-Path: <auh@moto-timo.dev>
+Return-Path: <ticotimo@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8ACBCEB64D9
-	for <webhook@archiver.kernel.org>; Wed, 12 Jul 2023 05:42:10 +0000 (UTC)
-Received: from relay9-d.mail.gandi.net (relay9-d.mail.gandi.net [217.70.183.199])
- by mx.groups.io with SMTP id smtpd.web10.1080.1689140526315926703
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 93E7BEB64D9
+	for <webhook@archiver.kernel.org>; Wed, 12 Jul 2023 05:48:40 +0000 (UTC)
+Received: from mail-yb1-f169.google.com (mail-yb1-f169.google.com [209.85.219.169])
+ by mx.groups.io with SMTP id smtpd.web11.1226.1689140910632018411
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 11 Jul 2023 22:42:06 -0700
+ Tue, 11 Jul 2023 22:48:30 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@moto-timo.dev header.s=gm1 header.b=aIa5TwSG;
- spf=pass (domain: moto-timo.dev, ip: 217.70.183.199, mailfrom: auh@moto-timo.dev)
-Received: by mail.gandi.net (Postfix) with ESMTPSA id 4E48FFF806
-	for <openembedded-devel@lists.openembedded.org>; Wed, 12 Jul 2023 05:42:03 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=moto-timo.dev;
-	s=gm1; t=1689140524;
-	h=from:from:reply-to:subject:subject:to:to:cc:mime-version:mime-version:
-	 content-type:content-type; bh=InVV2GIBSvkkWVmXqzlfjy/WUfF1JUKzAKVssGmkAsk=;
-	b=aIa5TwSGTrTD76+bYFEWIqQ66cWla4N8kV4CHeH5deZebYwco4VASrwFCP5lK45lTGoK6T
-	70D5u/h5zY0tUEfmkE3ItNcyX+IbiKACJXIsSo9YQ7QVOk6bzsj9De7dJ/MWOPZpx7hXwI
-	/K2wzWjcVzxyfVfyLU4uX/qQXz7236yz9Mpy9Cupu4Zfsw+1RIj5EPU/buFrhCpeJlr1AJ
-	lqqWb5ig8RqaDcgkKVmO7cMwNwH9sOES1Z1mbIgx6YkJ4+5/vv0GsC3Y3uu4MVkG9pxCFF
-	gM2/Fb86/OKsYhW/MHTaWEbbqcGcbLn2t1R+au434Rj1nkO6D4JmsXOOCzpFsA==
-Content-Type: multipart/mixed; boundary="===============6851038935935886545=="
+ dkim=pass header.i=@gmail.com header.s=20221208 header.b=YInOjm/G;
+ spf=pass (domain: gmail.com, ip: 209.85.219.169, mailfrom: ticotimo@gmail.com)
+Received: by mail-yb1-f169.google.com with SMTP id 3f1490d57ef6-c1aad78d5b2so590736276.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 11 Jul 2023 22:48:30 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20221208; t=1689140910; x=1691732910;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=2d2SkSrxG1ruULuhGPmTTLZrI0Fdrgrm928wvUP22js=;
+        b=YInOjm/GLSG06syuh+mxpBVxZSJwt9q/mV+fl7SxJp5Vr5WPH+EjWfCIrTnMwvKJK4
+         kA3WNxwkmDJ+OePELezYeKlyliwV5L/RrO9YBrrenE2NkYB3I2TYRhKSaQ+QgPjZD0nI
+         l7GQLjz/gxutqo/LiSG4uMfAmslruVK3ra717GC2cFbDTheB7i9Mi/qEJBNoxbCMIdVf
+         YH4UsLxQDJhoNqWdqUXZA/rTgY1Wkd56nKN6F/77ioEQJ8Lma1NE2/o0VJiFe2oHxi9k
+         pE+gbyjcnt/E4qgYpjcOMZBMA+ZzP9GQZ3DGo5WXMVwkrl1EOfuIy+p8uvU1SQMYdYN6
+         WFaw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20221208; t=1689140910; x=1691732910;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=2d2SkSrxG1ruULuhGPmTTLZrI0Fdrgrm928wvUP22js=;
+        b=NQTKcYAbkBW2jBrV242fAfwLdQ4bHBn1WGKWleinaAo1Ntwc/F4Df1a25r27z1iXGI
+         5pGumAzyguO0NBHbBZ6xWrmrDOTUcBALCipKvlbbRtlcJZcdYkXzwV/01jIM5TP/oLFE
+         mVqws35BwzS2FGGaxlfPi1FrGo1e2+TwCF3hC/Z3d92xtsp6HR6utwShO1GxMWB02Cq3
+         h4BMlb817AUBdKcJUP5QeEmP15vyZQW5MZ06Od5SIoXwMNxcvI0MFzdAshs5H5cmD5Ao
+         bWM6DyRw+DMTJ4wtX4yktYqFEKXxaYV5BXP7P1kJ5MLd0WKhLQbYtv5UKpMoqzAszxWz
+         GrXQ==
+X-Gm-Message-State: ABy/qLYyFfYCVivLDwBYnqis2VypwDktxwhRm77EaGX1VKFRp1InI/k9
+	Ju+XzxJuzL3ZcMJ6MC+SL6Jjsae47FU+kdJDcnbgwfU3ZTIs1w==
+X-Google-Smtp-Source: APBJJlG8kJhjtytkDdoTyyAwhMErx3LhNYqlNVYpzxESK1Kdr52uWrR/851uzMopbO8XxlXDPu4NfMCMPukrSjeqR50=
+X-Received: by 2002:a81:46c3:0:b0:56c:e480:2b2b with SMTP id
+ t186-20020a8146c3000000b0056ce4802b2bmr1058292ywa.12.1689140909506; Tue, 11
+ Jul 2023 22:48:29 -0700 (PDT)
 MIME-Version: 1.0
-From: auh@moto-timo.dev
-To: openembedded-devel@lists.openembedded.org
-Subject: [AUH] Upgrade status meta-perl: 2023-07-12
-X-GND-Sasl: auh@moto-timo.dev
+References: <MADEUP.1771085C12D25550.32196@lists.openembedded.org>
+In-Reply-To: <MADEUP.1771085C12D25550.32196@lists.openembedded.org>
+From: Tim Orling <ticotimo@gmail.com>
+Date: Wed, 12 Jul 2023 07:48:16 +0200
+Message-ID: <CANx9H-AypG02PzWaUPOFYuq0_tshhHR8itTGPKejUXomuRHh4A@mail.gmail.com>
+Subject: Re: [oe] [AUH] Upgrade status meta-perl: 2023-07-12
+To: auh@moto-timo.dev
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: multipart/alternative; boundary="000000000000e305e2060043c345"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 12 Jul 2023 05:42:10 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103823
-Message-Id: <20230712054210.8ACBCEB64D9@smtp.lore.kernel.org>
-Date: Wed, 12 Jul 2023 05:42:10 +0000 (UTC)
+ <openembedded-devel@lists.openembedded.org>; Wed, 12 Jul 2023 05:48:40 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103824
 
---===============6851038935935886545==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
+--000000000000e305e2060043c345
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Recipe upgrade statistics:
+This run is missing several recipes that are in need of upgrades. I'll
+check on the reason and re-run.
 
-    * Failed (devtool error): 2
-        libcurses-perl, 1.44
-        libxml-libxml-perl, 2.0208
+On Wed, Jul 12, 2023 at 7:42=E2=80=AFAM <auh@moto-timo.dev> wrote:
 
-    TOTAL: attempted=2 succeeded=0(0.00%) failed=2(100.00%)
+> Recipe upgrade statistics:
+>
+>     * Failed (devtool error): 2
+>         libcurses-perl, 1.44
+>         libxml-libxml-perl, 2.0208
+>
+>     TOTAL: attempted=3D2 succeeded=3D0(0.00%) failed=3D2(100.00%)
+>
+> Recipe upgrade statistics per Maintainer:
+>
+>     Maintainerless: attempted=3D2 succeeded=3D0(0.00%) failed=3D2(100.00%=
+)
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#103823):
+> https://lists.openembedded.org/g/openembedded-devel/message/103823
+> Mute This Topic: https://lists.openembedded.org/mt/100094758/924729
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
+> ticotimo@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
+>
 
-Recipe upgrade statistics per Maintainer:
+--000000000000e305e2060043c345
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-    Maintainerless: attempted=2 succeeded=0(0.00%) failed=2(100.00%)
+<div dir=3D"ltr"><div>This run is missing several recipes that are in need =
+of upgrades. I&#39;ll check on the reason and re-run.</div><br><div class=
+=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail_attr">On Wed, Jul 12, 2023=
+ at 7:42=E2=80=AFAM &lt;<a href=3D"mailto:auh@moto-timo.dev">auh@moto-timo.=
+dev</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"marg=
+in:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1e=
+x">Recipe upgrade statistics:<br>
+<br>
+=C2=A0 =C2=A0 * Failed (devtool error): 2<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 libcurses-perl, 1.44<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 libxml-libxml-perl, 2.0208<br>
+<br>
+=C2=A0 =C2=A0 TOTAL: attempted=3D2 succeeded=3D0(0.00%) failed=3D2(100.00%)=
+<br>
+<br>
+Recipe upgrade statistics per Maintainer:<br>
+<br>
+=C2=A0 =C2=A0 Maintainerless: attempted=3D2 succeeded=3D0(0.00%) failed=3D2=
+(100.00%)<br>
+<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+Links: You receive all messages sent to this group.<br>
+View/Reply Online (#103823): <a href=3D"https://lists.openembedded.org/g/op=
+enembedded-devel/message/103823" rel=3D"noreferrer" target=3D"_blank">https=
+://lists.openembedded.org/g/openembedded-devel/message/103823</a><br>
+Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/100094758/924=
+729" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/mt=
+/100094758/924729</a><br>
+Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
+d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
+><br>
+Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
+/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
+/g/openembedded-devel/unsub</a> [<a href=3D"mailto:ticotimo@gmail.com" targ=
+et=3D"_blank">ticotimo@gmail.com</a>]<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+<br>
+</blockquote></div></div>
 
---===============6851038935935886545==
-Content-Type: application/octet-stream
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: attachment; filename="20230712003217.tar.gz"
-
-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
-KwDwAAA=
-
---===============6851038935935886545==--
+--000000000000e305e2060043c345--
 
