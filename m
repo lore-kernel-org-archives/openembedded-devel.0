@@ -1,139 +1,174 @@
-Return-Path: <ticotimo@gmail.com>
+Return-Path: <kai.kang@eng.windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 93E7BEB64D9
-	for <webhook@archiver.kernel.org>; Wed, 12 Jul 2023 05:48:40 +0000 (UTC)
-Received: from mail-yb1-f169.google.com (mail-yb1-f169.google.com [209.85.219.169])
- by mx.groups.io with SMTP id smtpd.web11.1226.1689140910632018411
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A5F48EB64D9
+	for <webhook@archiver.kernel.org>; Wed, 12 Jul 2023 05:54:00 +0000 (UTC)
+Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
+ by mx.groups.io with SMTP id smtpd.web11.1259.1689141235616897298
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 11 Jul 2023 22:48:30 -0700
+ Tue, 11 Jul 2023 22:53:55 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20221208 header.b=YInOjm/G;
- spf=pass (domain: gmail.com, ip: 209.85.219.169, mailfrom: ticotimo@gmail.com)
-Received: by mail-yb1-f169.google.com with SMTP id 3f1490d57ef6-c1aad78d5b2so590736276.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 11 Jul 2023 22:48:30 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1689140910; x=1691732910;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=2d2SkSrxG1ruULuhGPmTTLZrI0Fdrgrm928wvUP22js=;
-        b=YInOjm/GLSG06syuh+mxpBVxZSJwt9q/mV+fl7SxJp5Vr5WPH+EjWfCIrTnMwvKJK4
-         kA3WNxwkmDJ+OePELezYeKlyliwV5L/RrO9YBrrenE2NkYB3I2TYRhKSaQ+QgPjZD0nI
-         l7GQLjz/gxutqo/LiSG4uMfAmslruVK3ra717GC2cFbDTheB7i9Mi/qEJBNoxbCMIdVf
-         YH4UsLxQDJhoNqWdqUXZA/rTgY1Wkd56nKN6F/77ioEQJ8Lma1NE2/o0VJiFe2oHxi9k
-         pE+gbyjcnt/E4qgYpjcOMZBMA+ZzP9GQZ3DGo5WXMVwkrl1EOfuIy+p8uvU1SQMYdYN6
-         WFaw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1689140910; x=1691732910;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=2d2SkSrxG1ruULuhGPmTTLZrI0Fdrgrm928wvUP22js=;
-        b=NQTKcYAbkBW2jBrV242fAfwLdQ4bHBn1WGKWleinaAo1Ntwc/F4Df1a25r27z1iXGI
-         5pGumAzyguO0NBHbBZ6xWrmrDOTUcBALCipKvlbbRtlcJZcdYkXzwV/01jIM5TP/oLFE
-         mVqws35BwzS2FGGaxlfPi1FrGo1e2+TwCF3hC/Z3d92xtsp6HR6utwShO1GxMWB02Cq3
-         h4BMlb817AUBdKcJUP5QeEmP15vyZQW5MZ06Od5SIoXwMNxcvI0MFzdAshs5H5cmD5Ao
-         bWM6DyRw+DMTJ4wtX4yktYqFEKXxaYV5BXP7P1kJ5MLd0WKhLQbYtv5UKpMoqzAszxWz
-         GrXQ==
-X-Gm-Message-State: ABy/qLYyFfYCVivLDwBYnqis2VypwDktxwhRm77EaGX1VKFRp1InI/k9
-	Ju+XzxJuzL3ZcMJ6MC+SL6Jjsae47FU+kdJDcnbgwfU3ZTIs1w==
-X-Google-Smtp-Source: APBJJlG8kJhjtytkDdoTyyAwhMErx3LhNYqlNVYpzxESK1Kdr52uWrR/851uzMopbO8XxlXDPu4NfMCMPukrSjeqR50=
-X-Received: by 2002:a81:46c3:0:b0:56c:e480:2b2b with SMTP id
- t186-20020a8146c3000000b0056ce4802b2bmr1058292ywa.12.1689140909506; Tue, 11
- Jul 2023 22:48:29 -0700 (PDT)
+ dkim=pass header.i=@windriver.com header.s=pps06212021 header.b=DzvtcgB0;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=6557d3b288=kai.kang@windriver.com)
+Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 36C5RNLd016106
+	for <openembedded-devel@lists.openembedded.org>; Tue, 11 Jul 2023 22:53:55 -0700
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
+	 h=from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding:content-type; s=PPS06212021; bh=5rB6p
+	WsMyTF1O8afuq85DsezIp7dbfFm9JwA3I6NJS8=; b=DzvtcgB0FinYdWxFn5f4k
+	3wAOk2OVyG5mWq7MKBss/T4beo1I7z4NCMBA4ZRTbzPaIzYznUSeSw9OEwgB47SX
+	d8XtiL95UXqgddcKlAgwZTxUgOqU+CHTeG1RZInzFflo6pmKiwb9Q28hW3uyIqO5
+	/Alg7OVW1OWBDzaH9FoIluAC7qlqTRvuYxsUQrlsH77BAPJsIgni0YY9sxX1QCg5
+	CUmv3oINs1CnVKHCjxEOh2f1eLmlqQFHrvyTvoH5NGo6VoELTdUUHDhZasEsmHqf
+	IJjt551Y0v558SWvnQNeVwfL79rE/3KagTosdOv4m7flZ5zHD9TSTfi+4p9qu3zL
+	g==
+Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3rq32yk4y7-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Tue, 11 Jul 2023 22:53:55 -0700 (PDT)
+Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.27; Tue, 11 Jul 2023 22:53:54 -0700
+Received: from pek-lpg-core3.wrs.com (128.224.153.232) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
+ 15.1.2507.27 via Frontend Transport; Tue, 11 Jul 2023 22:53:54 -0700
+From: <kai.kang@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [meta-oe][PATCH v2] fltk-native: fix libdl link issue
+Date: Wed, 12 Jul 2023 13:53:50 +0800
+Message-ID: <20230712055350.420470-1-kai.kang@windriver.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <MADEUP.1771085C12D25550.32196@lists.openembedded.org>
-In-Reply-To: <MADEUP.1771085C12D25550.32196@lists.openembedded.org>
-From: Tim Orling <ticotimo@gmail.com>
-Date: Wed, 12 Jul 2023 07:48:16 +0200
-Message-ID: <CANx9H-AypG02PzWaUPOFYuq0_tshhHR8itTGPKejUXomuRHh4A@mail.gmail.com>
-Subject: Re: [oe] [AUH] Upgrade status meta-perl: 2023-07-12
-To: auh@moto-timo.dev
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: multipart/alternative; boundary="000000000000e305e2060043c345"
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Proofpoint-GUID: 9hN4-80zDpMBtMhFEhtPmd8OM4kAQthi
+X-Proofpoint-ORIG-GUID: 9hN4-80zDpMBtMhFEhtPmd8OM4kAQthi
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.254,Aquarius:18.0.957,Hydra:6.0.591,FMLib:17.11.176.26
+ definitions=2023-07-12_02,2023-07-11_01,2023-05-22_02
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 bulkscore=0 spamscore=0
+ impostorscore=0 mlxlogscore=999 priorityscore=1501 mlxscore=0
+ malwarescore=0 adultscore=0 lowpriorityscore=0 phishscore=0 suspectscore=0
+ clxscore=1015 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.19.0-2305260000 definitions=main-2307120051
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 12 Jul 2023 05:48:40 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103824
+ <openembedded-devel@lists.openembedded.org>; Wed, 12 Jul 2023 05:54:00 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103825
 
---000000000000e305e2060043c345
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+From: Kai Kang <kai.kang@windriver.com>
 
-This run is missing several recipes that are in need of upgrades. I'll
-check on the reason and re-run.
+It fails to build fltk-native on Ubuntu 20.04 with glibc 2.31:
 
-On Wed, Jul 12, 2023 at 7:42=E2=80=AFAM <auh@moto-timo.dev> wrote:
+| /path_to/tmp/hosttools/ld: lib/libfltk.a(Fl_Native_File_Chooser.cxx.o): in function `fl_dlopen(char const*, char const*)':
+| Fl_Native_File_Chooser.cxx:(.text+0x61a): undefined reference to `dlopen'
+| /path_to/tmp/hosttools/ld: lib/libfltk.a(Fl_Native_File_Chooser.cxx.o): in function `Fl_GTK_File_Chooser::probe_for_GTK_libs()':
+| Fl_Native_File_Chooser.cxx:(.text+0xf92): undefined reference to `dlerror'
 
-> Recipe upgrade statistics:
->
->     * Failed (devtool error): 2
->         libcurses-perl, 1.44
->         libxml-libxml-perl, 2.0208
->
->     TOTAL: attempted=3D2 succeeded=3D0(0.00%) failed=3D2(100.00%)
->
-> Recipe upgrade statistics per Maintainer:
->
->     Maintainerless: attempted=3D2 succeeded=3D0(0.00%) failed=3D2(100.00%=
-)
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#103823):
-> https://lists.openembedded.org/g/openembedded-devel/message/103823
-> Mute This Topic: https://lists.openembedded.org/mt/100094758/924729
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
-> ticotimo@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
->
+The original fix in fltk-native recipe does not work any more because '-ldl'
+appears before lib/libfltk.a and causes dlopen() unresolved. The reason why it
+doesn't fail on other hosts is that the functions dlopen(), dlerror() etc. have
+been moved to libc.so since glibc 2.34 via the commits in glibc:
 
---000000000000e305e2060043c345
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+0c1c3a771e dlfcn: Move dlopen into libc
+add8d7ea01 dlfcn: Move dlvsym into libc
+6dfc0207eb dlfcn: Move dlinfo into libc
+492560a32e dlfcn: Move dladdr1 into libc
+6a1ed32789 dlfcn: Move dlmopen into libc
+77f876c0e3 dlfcn: Move dlsym into libc
+602252b553 dlfcn: Move dladdr into libc
+d8cce17d2a dlfcn: Move dlclose into libc
 
-<div dir=3D"ltr"><div>This run is missing several recipes that are in need =
-of upgrades. I&#39;ll check on the reason and re-run.</div><br><div class=
-=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail_attr">On Wed, Jul 12, 2023=
- at 7:42=E2=80=AFAM &lt;<a href=3D"mailto:auh@moto-timo.dev">auh@moto-timo.=
-dev</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"marg=
-in:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1e=
-x">Recipe upgrade statistics:<br>
-<br>
-=C2=A0 =C2=A0 * Failed (devtool error): 2<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 libcurses-perl, 1.44<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 libxml-libxml-perl, 2.0208<br>
-<br>
-=C2=A0 =C2=A0 TOTAL: attempted=3D2 succeeded=3D0(0.00%) failed=3D2(100.00%)=
-<br>
-<br>
-Recipe upgrade statistics per Maintainer:<br>
-<br>
-=C2=A0 =C2=A0 Maintainerless: attempted=3D2 succeeded=3D0(0.00%) failed=3D2=
-(100.00%)<br>
-<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-Links: You receive all messages sent to this group.<br>
-View/Reply Online (#103823): <a href=3D"https://lists.openembedded.org/g/op=
-enembedded-devel/message/103823" rel=3D"noreferrer" target=3D"_blank">https=
-://lists.openembedded.org/g/openembedded-devel/message/103823</a><br>
-Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/100094758/924=
-729" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/mt=
-/100094758/924729</a><br>
-Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
-d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
-><br>
-Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
-/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
-/g/openembedded-devel/unsub</a> [<a href=3D"mailto:ticotimo@gmail.com" targ=
-et=3D"_blank">ticotimo@gmail.com</a>]<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-<br>
-</blockquote></div></div>
+Append 'dl' to fltk link items explictly to fix the error.
 
---000000000000e305e2060043c345--
+Signed-off-by: Kai Kang <kai.kang@windriver.com>
+---
+v2:
+* add Upstream-Status
+
+ meta-oe/recipes-support/fltk/fltk-native.bb   |  5 +--
+ .../fltk/fltk/fltk-native-link-libdl.patch    | 44 +++++++++++++++++++
+ 2 files changed, 46 insertions(+), 3 deletions(-)
+ create mode 100644 meta-oe/recipes-support/fltk/fltk/fltk-native-link-libdl.patch
+
+diff --git a/meta-oe/recipes-support/fltk/fltk-native.bb b/meta-oe/recipes-support/fltk/fltk-native.bb
+index 8d3992a6e..3e8e2cdf7 100644
+--- a/meta-oe/recipes-support/fltk/fltk-native.bb
++++ b/meta-oe/recipes-support/fltk/fltk-native.bb
+@@ -2,6 +2,8 @@ require ${BPN}.inc
+ 
+ DEPENDS = "zlib-native jpeg-native libpng-native libxext-native libxft-native"
+ 
++SRC_URI += "file://fltk-native-link-libdl.patch"
++
+ inherit native
+ 
+ EXTRA_OECMAKE += " \
+@@ -15,9 +17,6 @@ EXTRA_OECMAKE += " \
+     -DOPTION_USE_XCURSOR=OFF \
+ "
+ 
+-# lib/libfltk.a(Fl_Native_File_Chooser.cxx.o): undefined reference to symbol 'dlsym@@GLIBC_2.2.5'
+-LDFLAGS += "-ldl"
+-
+ do_install:append() {
+     # make sure native fltk-config is not used accidentaly
+     rm -f ${D}${bindir}/fltk-config
+diff --git a/meta-oe/recipes-support/fltk/fltk/fltk-native-link-libdl.patch b/meta-oe/recipes-support/fltk/fltk/fltk-native-link-libdl.patch
+new file mode 100644
+index 000000000..e140ce216
+--- /dev/null
++++ b/meta-oe/recipes-support/fltk/fltk/fltk-native-link-libdl.patch
+@@ -0,0 +1,44 @@
++Upstream-Status: Inappropriate [cross build specific]
++
++It fails to build fltk-native on Ubuntu 20.04 with glibc 2.31:
++
++| /path_to/tmp/hosttools/ld: lib/libfltk.a(Fl_Native_File_Chooser.cxx.o): in function `fl_dlopen(char const*, char const*)':
++| Fl_Native_File_Chooser.cxx:(.text+0x61a): undefined reference to `dlopen'
++| /path_to/tmp/hosttools/ld: lib/libfltk.a(Fl_Native_File_Chooser.cxx.o): in function `Fl_GTK_File_Chooser::probe_for_GTK_libs()':
++| Fl_Native_File_Chooser.cxx:(.text+0xf92): undefined reference to `dlerror'
++
++The original fix in fltk-native recipe does not work any more because '-ldl'
++appears before lib/libfltk.a and causes dlopen() unresolved. The reason why it
++doesn't fail on other hosts is that the functions dlopen(), dlerror() etc. have
++been moved to libc.so since glibc 2.34 via the commits in glibc:
++
++0c1c3a771e dlfcn: Move dlopen into libc
++add8d7ea01 dlfcn: Move dlvsym into libc
++6dfc0207eb dlfcn: Move dlinfo into libc
++492560a32e dlfcn: Move dladdr1 into libc
++6a1ed32789 dlfcn: Move dlmopen into libc
++77f876c0e3 dlfcn: Move dlsym into libc
++602252b553 dlfcn: Move dladdr into libc
++d8cce17d2a dlfcn: Move dlclose into libc
++
++Append 'dl' to fltk link items explictly to fix the error.
++
++Signed-off-by: Kai Kang <kai.kang@windriver.com>
++
++---
++ src/CMakeLists.txt | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
++index d153b1c..0fe5c11 100644
++--- a/src/CMakeLists.txt
+++++ b/src/CMakeLists.txt
++@@ -306,7 +306,7 @@ endif (USE_XFT)
++ #######################################################################
++ 
++ FL_ADD_LIBRARY (fltk STATIC "${STATIC_FILES}")
++-target_link_libraries (fltk ${OPTIONAL_LIBS})
+++target_link_libraries (fltk ${OPTIONAL_LIBS} dl)
++ 
++ #######################################################################
++ 
+-- 
+2.34.1
+
 
