@@ -2,42 +2,42 @@ Return-Path: <meenali.gupta@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3A376EB64DA
-	for <webhook@archiver.kernel.org>; Fri, 14 Jul 2023 11:28:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4A40CC0015E
+	for <webhook@archiver.kernel.org>; Fri, 14 Jul 2023 11:41:53 +0000 (UTC)
 Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
- by mx.groups.io with SMTP id smtpd.web11.16716.1689334087324277120
+ by mx.groups.io with SMTP id smtpd.web10.16810.1689334909415587774
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 14 Jul 2023 04:28:07 -0700
+ Fri, 14 Jul 2023 04:41:49 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=pps06212021 header.b=NasWbvYD;
+ dkim=pass header.i=@windriver.com header.s=pps06212021 header.b=MnZdGfJE;
  spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=655946fe48=meenali.gupta@windriver.com)
 Received: from pps.filterd (m0250811.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.17.1.22/8.17.1.22) with ESMTP id 36EBS6ML000347;
-	Fri, 14 Jul 2023 11:28:06 GMT
+	by mx0a-0064b401.pphosted.com (8.17.1.22/8.17.1.22) with ESMTP id 36E9DQ2e002536
+	for <openembedded-devel@lists.openembedded.org>; Fri, 14 Jul 2023 11:41:48 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
 	 h=from:to:cc:subject:date:message-id:mime-version
 	:content-transfer-encoding:content-type; s=PPS06212021; bh=4ISJo
-	A5Ox7n13JtTvFu9v/VeJTYN3lmytGHZ2f6tbRY=; b=NasWbvYDPw9stNtVDSd9H
-	d5xCXJN+7nOUMSB9TZ+LuieErpwbIsQEpHfL8QsVxsTl1TqWLuT1QlOMHzkT63WV
-	cC2tC/6KgdSlnHXPEW78qYSKHpTTimwr7BbI0Srxdp3stJZue8icYGqsLe0Ad5gP
-	uHuHgWHDxF7/vh6A4gr8jts9s1x9g1YRdqQHu6aoX6zdz1okp5pB/Re5qL1+1suZ
-	M6WkOwPRunPFHzYIiw9dxpwnJ5qybntEqtaq5bdcI5HoR6VwxbqazLOA27IYJp4/
-	l4G4nb3AdnPhsvRsiHXSEPybt3w4kG0gbRjHqdsMOwzMuPuKa4TmmdGAG0Gi0Icq
-	g==
+	A5Ox7n13JtTvFu9v/VeJTYN3lmytGHZ2f6tbRY=; b=MnZdGfJEa4jx/BY0ME1Kn
+	HQSK8Gk97k3eeIDAhZPIGVcS+yxfE7V9uWjhyo1/tGxF+OVLEw8EW5vn3UuFrWb2
+	8sveXUra1oEXQ3a1tzxeRJJ9+dspeti1lDyvR6IXb3MrtR/1vtezBkevn8Zzjcgd
+	9Qh0G1h3DI8BbzDLu+88iF9mGeKa/0C+EpHTAommnpp/8dHvQOnXzo1KCnFNFD3f
+	BSw7hkcq3DOpzSpn5GdYebUiVI763FhNxpg0KA2MBAbM61I99RuH1fu1K5D9W0B7
+	Wpi+g66QHX0gAhc+D7xqAwMo5R0KP6Z9mjTNXLQLish4R0Xrh54iClh7qYfZrDGR
+	w==
 Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3rtpun8pgt-1
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3rtpun8ps2-1
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Fri, 14 Jul 2023 11:28:06 +0000 (GMT)
+	for <openembedded-devel@lists.openembedded.org>; Fri, 14 Jul 2023 11:41:48 +0000 (GMT)
 Received: from blr-linux-engg1.wrs.com (147.11.136.210) by
  ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.27; Fri, 14 Jul 2023 04:28:03 -0700
+ 15.1.2507.27; Fri, 14 Jul 2023 04:41:45 -0700
 From: Meenali Gupta <meenali.gupta@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: <Hari.GPillai@windriver.com>
-Subject: [oe][meta-networking[mickledore][PATCH 1/1] fix: CVE-2023-1801
-Date: Fri, 14 Jul 2023 11:27:44 +0000
-Message-ID: <20230714112744.1360817-1-meenali.gupta@windriver.com>
+Subject: [oe][meta-networking[mickledore][PATCH 1/1] tcpdump: fix CVE-2023-1801
+Date: Fri, 14 Jul 2023 11:41:26 +0000
+Message-ID: <20230714114126.1827763-1-meenali.gupta@windriver.com>
 X-Mailer: git-send-email 2.40.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -45,21 +45,21 @@ Content-Type: text/plain
 X-Originating-IP: [147.11.136.210]
 X-ClientProxiedBy: ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) To
  ala-exchng01.corp.ad.wrs.com (147.11.82.252)
-X-Proofpoint-ORIG-GUID: TdH4WfqplJ5MEmP5ca5v6buuSrqy69T7
-X-Proofpoint-GUID: TdH4WfqplJ5MEmP5ca5v6buuSrqy69T7
+X-Proofpoint-ORIG-GUID: NOjimZe0ZzW2nkvQwkQ4KAzxyBPwsWNM
+X-Proofpoint-GUID: NOjimZe0ZzW2nkvQwkQ4KAzxyBPwsWNM
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.254,Aquarius:18.0.957,Hydra:6.0.591,FMLib:17.11.176.26
  definitions=2023-07-14_06,2023-07-13_01,2023-05-22_02
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 mlxlogscore=767 bulkscore=0
  malwarescore=0 adultscore=0 spamscore=0 lowpriorityscore=0 suspectscore=0
- impostorscore=0 phishscore=0 priorityscore=1501 clxscore=1011 mlxscore=0
+ impostorscore=0 phishscore=0 priorityscore=1501 clxscore=1015 mlxscore=0
  classifier=spam adjust=0 reason=mlx scancount=1 engine=8.19.0-2306200000
- definitions=main-2307140103
+ definitions=main-2307140104
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 14 Jul 2023 11:28:13 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103865
+ <openembedded-devel@lists.openembedded.org>; Fri, 14 Jul 2023 11:41:53 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103866
 
 From: Meenali Gupta <mgupta1@blr-linux-engg1.wrs.com>
 
