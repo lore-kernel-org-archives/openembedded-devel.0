@@ -1,439 +1,187 @@
-Return-Path: <meenali.gupta@windriver.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4A40CC0015E
-	for <webhook@archiver.kernel.org>; Fri, 14 Jul 2023 11:41:53 +0000 (UTC)
-Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
- by mx.groups.io with SMTP id smtpd.web10.16810.1689334909415587774
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 184E0C001B0
+	for <webhook@archiver.kernel.org>; Fri, 14 Jul 2023 14:22:04 +0000 (UTC)
+Received: from mail-ot1-f44.google.com (mail-ot1-f44.google.com [209.85.210.44])
+ by mx.groups.io with SMTP id smtpd.web10.20521.1689344523536951806
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 14 Jul 2023 04:41:49 -0700
+ Fri, 14 Jul 2023 07:22:03 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=pps06212021 header.b=MnZdGfJE;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=655946fe48=meenali.gupta@windriver.com)
-Received: from pps.filterd (m0250811.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.17.1.22/8.17.1.22) with ESMTP id 36E9DQ2e002536
-	for <openembedded-devel@lists.openembedded.org>; Fri, 14 Jul 2023 11:41:48 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
-	 h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding:content-type; s=PPS06212021; bh=4ISJo
-	A5Ox7n13JtTvFu9v/VeJTYN3lmytGHZ2f6tbRY=; b=MnZdGfJEa4jx/BY0ME1Kn
-	HQSK8Gk97k3eeIDAhZPIGVcS+yxfE7V9uWjhyo1/tGxF+OVLEw8EW5vn3UuFrWb2
-	8sveXUra1oEXQ3a1tzxeRJJ9+dspeti1lDyvR6IXb3MrtR/1vtezBkevn8Zzjcgd
-	9Qh0G1h3DI8BbzDLu+88iF9mGeKa/0C+EpHTAommnpp/8dHvQOnXzo1KCnFNFD3f
-	BSw7hkcq3DOpzSpn5GdYebUiVI763FhNxpg0KA2MBAbM61I99RuH1fu1K5D9W0B7
-	Wpi+g66QHX0gAhc+D7xqAwMo5R0KP6Z9mjTNXLQLish4R0Xrh54iClh7qYfZrDGR
-	w==
-Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3rtpun8ps2-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Fri, 14 Jul 2023 11:41:48 +0000 (GMT)
-Received: from blr-linux-engg1.wrs.com (147.11.136.210) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.27; Fri, 14 Jul 2023 04:41:45 -0700
-From: Meenali Gupta <meenali.gupta@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-CC: <Hari.GPillai@windriver.com>
-Subject: [oe][meta-networking[mickledore][PATCH 1/1] tcpdump: fix CVE-2023-1801
-Date: Fri, 14 Jul 2023 11:41:26 +0000
-Message-ID: <20230714114126.1827763-1-meenali.gupta@windriver.com>
-X-Mailer: git-send-email 2.40.0
+ dkim=pass header.i=@gmail.com header.s=20221208 header.b=Rf048Rpn;
+ spf=pass (domain: gmail.com, ip: 209.85.210.44, mailfrom: raj.khem@gmail.com)
+Received: by mail-ot1-f44.google.com with SMTP id 46e09a7af769-6b9aadde448so1618898a34.0
+        for <openembedded-devel@lists.openembedded.org>; Fri, 14 Jul 2023 07:22:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20221208; t=1689344523; x=1691936523;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=P3y/PME52qwED25enRwvBRU/nUODm4480FFDHClysJc=;
+        b=Rf048RpnVEIKHawOcD6x62GqoKrYwaH2xeM29rNeQKcqGeF+tENG3nsnv0NahSRdn7
+         CIjj1Fk7qpN3jPGZ5iMaU1PevJaXFt3gSPOoJyc+DeghB9VkpbSYXQduhiDpF0tTwp4K
+         +1i2rN9OZhezWvDRIlDYhumtZoqSMfykAOPjNJG2RoY+O2+PNY48T19dLknBv/yGtNk+
+         rF0MQv5fH7m5iNP8Q3X3/DS9an3o6DkxFISmEbIVIrFwhFvSX8GXlflAHHCkx4FYtp7h
+         /XZfC3OMPvnAbzfRg+nDxz5BedHqqpmsToVY7gSSviwCQFIsw+m8/K8eIJbVeDOvn/f9
+         CADQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20221208; t=1689344523; x=1691936523;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=P3y/PME52qwED25enRwvBRU/nUODm4480FFDHClysJc=;
+        b=fX/Ohv6bQX079/SRcG/x6ulWciDKDgdGelkxrboRipo9h6v9mLkb40h7WrcTyYQNXV
+         u8wp+oMpkMQMMUaPwXXqPqpIFSKFfm4VHNXdNkCPc2Pti1aQpx6wM86xyxE0Zp6Etug1
+         UEJU8dTkCNRr4zMSNRmC+Zn0gvWovPxXX+569+qTDkX1+jfk5X250bpr2ZI0jMAEggw/
+         5oyYRHb4t38K2Kd+JmDUwnCcfgB4+nVBW7uysZ/xT35LGpqT/QpApfz5PCr3lUn0gWDA
+         f12jkJBK2hb4mvPl1gUNxGGi+QBBb0MFkU27clS/YG4gXgNQ6aFnEMyU3wkzdjBpUVkb
+         lZ+A==
+X-Gm-Message-State: ABy/qLZfLuBkJKjOuJfX+rIjXBoAPj1DToG7VbJr459QKneDKhCFIXdj
+	jtIiKRqsrn+Etcaymw6/uPX4WrCK/rrzcIAyV+I=
+X-Google-Smtp-Source: APBJJlF9qOjeDkxV92olRSHpKqgmxodsas/i1+u1j8oWhYiDk2L3PxclyiioUll0lWOlgdeoSG7b+jsUigm2N1y38IE=
+X-Received: by 2002:a05:6870:e616:b0:1b7:3364:6269 with SMTP id
+ q22-20020a056870e61600b001b733646269mr6288713oag.32.1689344522563; Fri, 14
+ Jul 2023 07:22:02 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [147.11.136.210]
-X-ClientProxiedBy: ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) To
- ala-exchng01.corp.ad.wrs.com (147.11.82.252)
-X-Proofpoint-ORIG-GUID: NOjimZe0ZzW2nkvQwkQ4KAzxyBPwsWNM
-X-Proofpoint-GUID: NOjimZe0ZzW2nkvQwkQ4KAzxyBPwsWNM
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.254,Aquarius:18.0.957,Hydra:6.0.591,FMLib:17.11.176.26
- definitions=2023-07-14_06,2023-07-13_01,2023-05-22_02
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 mlxlogscore=767 bulkscore=0
- malwarescore=0 adultscore=0 spamscore=0 lowpriorityscore=0 suspectscore=0
- impostorscore=0 phishscore=0 priorityscore=1501 clxscore=1015 mlxscore=0
- classifier=spam adjust=0 reason=mlx scancount=1 engine=8.19.0-2306200000
- definitions=main-2307140104
+References: <68215175-21a2-bd4e-fd1d-af4711dc4ad6@gmail.com>
+In-Reply-To: <68215175-21a2-bd4e-fd1d-af4711dc4ad6@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Fri, 14 Jul 2023 07:21:36 -0700
+Message-ID: <CAMKF1sohReSkghN6bCagu7Su01QbXSR_-abshUCANE5RPLOm8Q@mail.gmail.com>
+Subject: Re: dunfell merge request: July 14th
+To: akuster808 <akuster808@gmail.com>
+Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 14 Jul 2023 11:41:53 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103866
+ <openembedded-devel@lists.openembedded.org>; Fri, 14 Jul 2023 14:22:04 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103867
 
-From: Meenali Gupta <mgupta1@blr-linux-engg1.wrs.com>
+merged thanks Armin
 
-The SMB protocol decoder in tcpdump version 4.99.3 can perform
-an out-of-bounds write when decoding a crafted network packet
-
-Signed-off-by: Meenali Gupta <mgupta1@blr-linux-engg1.wrs.com>
----
- .../tcpdump/tcpdump/CVE-2023-1801.patch       | 342 ++++++++++++++++++
- .../recipes-support/tcpdump/tcpdump_4.99.3.bb |   1 +
- 2 files changed, 343 insertions(+)
- create mode 100644 meta-networking/recipes-support/tcpdump/tcpdump/CVE-2023-1801.patch
-
-diff --git a/meta-networking/recipes-support/tcpdump/tcpdump/CVE-2023-1801.patch b/meta-networking/recipes-support/tcpdump/tcpdump/CVE-2023-1801.patch
-new file mode 100644
-index 000000000..03a1c0aa4
---- /dev/null
-+++ b/meta-networking/recipes-support/tcpdump/tcpdump/CVE-2023-1801.patch
-@@ -0,0 +1,342 @@
-+From 13336c4054015bef84d93bf51b50b15df6e265bf Mon Sep 17 00:00:00 2001
-+From: Guy Harris <gharris@sonic.net>
-+Date: Mon, 30 Jan 2023 23:03:16 -0800
-+Subject: [PATCH] tcpdump: Have a common routine for converting dates and times
-+ to strings.
+On Fri, Jul 14, 2023 at 4:16=E2=80=AFAM akuster808 <akuster808@gmail.com> w=
+rote:
+>
+> The following changes since commit 6334241447e461f849035c47f071fa4a2125fe=
+e1:
+>
+>    c-ares: CVE-2023-31147 Insufficient randomness in generation of DNS
+> query IDs (2023-06-23 06:58:18 -0400)
+>
+> are available in the Git repository at:
+>
+>    https://git.openembedded.org/meta-openembedded dunfell-next
+>
+> for you to fetch changes up to b5282ece919f016d91a1043769676efb02b4f0fb:
+>
+>    openldap: fix CVE-2021-27212 Assertion failure in slapd (2023-07-14
+> 07:08:54 -0400)
+>
+> ----------------------------------------------------------------
+> Hitendra Prajapati (7):
+>        wireshark: Fix Multiple CVEs
+>        wireshark: Fix CVE-2023-0667 & CVE-2023-0668
+>        yajl: CVE-2023-33460 memory leak in yajl_tree_parse function
+>        ntp: backport patch for 5 CVEs CVE-2023-26551/2/3/4/5
+>        multipath-tools: fix CVE-2022-41974
+>        quagga: CVE-2021-44038 unsafe chown/chmod operations may lead to
+> privileges escalation
+>        openldap: fix CVE-2021-27212 Assertion failure in slapd
+>
+> Vijay Anusuri (1):
+>        libssh: CVE-2020-16135 NULL pointer dereference in sftpserver.c
+> if ssh_buffer_new returns NULL
+>
+> virendra thakur (1):
+>        c-ares: whitelist CVE-2023-31124
+>
+> vkumbhar (1):
+>        postgresql: fix CVE-2023-2454 & CVE-2023-2455
+>
+>   .../recipes-protocols/quagga/files/CVE-2021-44038.patch         | 117
+> ++++++++++
+>   meta-networking/recipes-protocols/quagga/quagga.inc             | 2 +-
+>   meta-networking/recipes-support/ntp/ntp/CVE-2023-2655x.patch    | 340
+> ++++++++++++++++++++++++++++
+>   meta-networking/recipes-support/ntp/ntp_4.2.8p15.bb             | 10 +-
+>   .../recipes-support/wireshark/files/CVE-2023-0667-pre1.patch    | 153
+> +++++++++++++
+>   .../recipes-support/wireshark/files/CVE-2023-0667.patch         | 66
+> ++++++
+>   .../recipes-support/wireshark/files/CVE-2023-0668.patch         | 33 ++=
 +
-+Have a routine that takes a buffer, a strftime format, and a struct tm *
-+as arguments, and:
+>   .../recipes-support/wireshark/files/CVE-2023-2855.patch         | 117
+> ++++++++++
+>   .../recipes-support/wireshark/files/CVE-2023-2856.patch         | 68
+> ++++++
+>   .../recipes-support/wireshark/files/CVE-2023-2858.patch         | 94
+> ++++++++
+>   .../recipes-support/wireshark/files/CVE-2023-2952.patch         | 97
+> ++++++++
+>   meta-networking/recipes-support/wireshark/wireshark_3.2.18.bb   | 11 +-
+>   meta-oe/recipes-dbs/postgresql/files/CVE-2023-2454.patch        | 235
+> +++++++++++++++++++
+>   meta-oe/recipes-dbs/postgresql/files/CVE-2023-2455.patch        | 118
+> ++++++++++
+>   meta-oe/recipes-dbs/postgresql/postgresql_12.9.bb               | 2 +
+>   meta-oe/recipes-devtools/yajl/yajl/CVE-2023-33460.patch         | 29 ++=
 +
-+* checks whether the struct tm * is null and, if so, returns a string
-+indicating that the date and time couldn't be converted;
-+
-+* otherwise, passes it to strftime(), along with the buffer and the
-+format argument and, if strftime() returns 0, meaning the string didn't
-+fit into the buffer and thus that the buffer's contents are undefined,
-+returns a string indicating that the date and time didn't fit into the
-+buffer;
-+
-+* otherwise, returns a pointer to the buffer.
-+
-+Call that routine instead of directly calling strftime() in printers;
-+that prevents printing a buffer with undefined data if the buffer isn't
-+big enough for the string.
-+
-+Also, when generating file names using an strftime format, check the
-+return value of strftime() to make sure the buffer didn't overflow.
-+
-+Upstream-Status: Backport[https://github.com/the-tcpdump-group/tcpdump/commit/03c037bbd75588beba3ee09f26d17783d21e30bc]
-+CVE: CVE-2023-1801
-+
-+Signed-off-by: Meenali Gupta <mgupta1@blr-linux-engg1.wrs.com>
-+---
-+ netdissect.h   |  3 +++
-+ ntp.c          | 21 ++++++---------------
-+ print-ahcp.c   | 12 ++++--------
-+ print-arista.c | 13 ++++---------
-+ print-rx.c     |  8 ++++----
-+ print-zep.c    |  7 +++----
-+ smbutil.c      | 16 +++++-----------
-+ tcpdump.c      | 22 ++++++++++++++++++++--
-+ util-print.c   | 36 ++++++++++++++++++++++++++++--------
-+ 9 files changed, 77 insertions(+), 61 deletions(-)
-+
-+diff --git a/netdissect.h b/netdissect.h
-+index 5c16be6..b1074ef 100644
-+--- a/netdissect.h
-++++ b/netdissect.h
-+@@ -423,6 +423,9 @@ extern void ts_print(netdissect_options *, const struct timeval *);
-+ extern void signed_relts_print(netdissect_options *, int32_t);
-+ extern void unsigned_relts_print(netdissect_options *, uint32_t);
-+
-++extern const char *nd_format_time(char *buf, size_t bufsize,
-++    const char *format, const struct tm *timeptr);
+>   meta-oe/recipes-devtools/yajl/yajl_2.1.0.bb                     | 4 +-
+>   meta-oe/recipes-support/c-ares/c-ares_1.18.1.bb                 | 4 +
+>   meta-oe/recipes-support/libssh/files/CVE-2020-16135-1.patch     | 40 ++=
 ++
-+ extern void fn_print_char(netdissect_options *, u_char);
-+ extern void fn_print_str(netdissect_options *, const u_char *);
-+ extern u_int nd_printztn(netdissect_options *, const u_char *, u_int, const u_char *);
-+diff --git a/ntp.c b/ntp.c
-+index 4d17932..0a79f81 100644
-+--- a/ntp.c
-++++ b/ntp.c
-+@@ -55,8 +55,8 @@ p_ntp_time(netdissect_options *ndo,
-+	if (i) {
-+	    int64_t seconds_64bit = (int64_t)i - JAN_1970;
-+	    time_t seconds;
-+-	    struct tm *tm;
-+	    char time_buf[128];
-++	    const char *time_string;
-+
-+	    seconds = (time_t)seconds_64bit;
-+	    if (seconds != seconds_64bit) {
-+@@ -64,22 +64,13 @@ p_ntp_time(netdissect_options *ndo,
-+		 * It doesn't fit into a time_t, so we can't hand it
-+		 * to gmtime.
-+		 */
-+-		ND_PRINT(" (unrepresentable)");
-++		time_string = "[Time is too large to fit into a time_t]";
-+	    } else {
-+-		tm = gmtime(&seconds);
-+-		if (tm == NULL) {
-+-		    /*
-+-		     * gmtime() can't handle it.
-+-		     * (Yes, that might happen with some version of
-+-		     * Microsoft's C library.)
-+-		     */
-+-		    ND_PRINT(" (unrepresentable)");
-+-		} else {
-+-		    /* use ISO 8601 (RFC3339) format */
-+-		    strftime(time_buf, sizeof (time_buf), "%Y-%m-%dT%H:%M:%SZ", tm);
-+-		    ND_PRINT(" (%s)", time_buf);
-+-		}
-++		/* use ISO 8601 (RFC3339) format */
-++		time_string = nd_format_time(time_buf, sizeof (time_buf),
-++		  "%Y-%m-%dT%H:%M:%SZ", gmtime(&seconds));
-+	    }
-++	    ND_PRINT(" (%s)", time_string);
-+	}
-+ #endif
-+ }
-+diff --git a/print-ahcp.c b/print-ahcp.c
-+index 9859f76..d57edda 100644
-+--- a/print-ahcp.c
-++++ b/print-ahcp.c
-+@@ -102,18 +102,14 @@ ahcp_time_print(netdissect_options *ndo,
-+                 const u_char *cp, uint8_t len)
-+ {
-+	time_t t;
-+-	struct tm *tm;
-+-	char buf[BUFSIZE];
-++	char buf[sizeof("-yyyyyyyyyy-mm-dd hh:mm:ss UTC")];
-+
-+	if (len != 4)
-+		goto invalid;
-+	t = GET_BE_U_4(cp);
-+-	if (NULL == (tm = gmtime(&t)))
-+-		ND_PRINT(": gmtime() error");
-+-	else if (0 == strftime(buf, sizeof(buf), "%Y-%m-%d %H:%M:%S", tm))
-+-		ND_PRINT(": strftime() error");
-+-	else
-+-		ND_PRINT(": %s UTC", buf);
-++	ND_PRINT(": %s",
-++	    nd_format_time(buf, sizeof(buf), "%Y-%m-%d %H:%M:%S UTC",
-++	      gmtime(&t)));
-+	return;
-+
-+ invalid:
-+diff --git a/print-arista.c b/print-arista.c
-+index 039a1ff..079ad68 100644
-+--- a/print-arista.c
-++++ b/print-arista.c
-+@@ -10,7 +10,6 @@
-+
-+ #include "netdissect.h"
-+ #include "extract.h"
-+-#include "addrtoname.h"
-+
-+ /*
-+
-+@@ -93,17 +92,13 @@ arista_print_date_hms_time(netdissect_options *ndo, uint32_t seconds,
-+		uint32_t nanoseconds)
-+ {
-+	time_t ts;
-+-	struct tm *tm;
-+-	char buf[BUFSIZE];
-++	char buf[sizeof("-yyyyyyyyyy-mm-dd hh:mm:ss")];
-+
-+	ts = seconds + (nanoseconds / 1000000000);
-+	nanoseconds %= 1000000000;
-+-	if (NULL == (tm = gmtime(&ts)))
-+-		ND_PRINT("gmtime() error");
-+-	else if (0 == strftime(buf, sizeof(buf), "%Y-%m-%d %H:%M:%S", tm))
-+-		ND_PRINT("strftime() error");
-+-	else
-+-		ND_PRINT("%s.%09u", buf, nanoseconds);
-++	ND_PRINT("%s.%09u",
-++	    nd_format_time(buf, sizeof(buf), "%Y-%m-%d %H:%M:%S",
-++	       gmtime(&ts)), nanoseconds);
-+ }
-+
-+ int
-+diff --git a/print-rx.c b/print-rx.c
-+index 3f7589e..dbef71c 100644
-+--- a/print-rx.c
-++++ b/print-rx.c
-+@@ -794,12 +794,12 @@ rx_cache_find(netdissect_options *ndo, const struct rx_header *rxh,
-+			ND_PRINT(" %" PRIu64, _i); \
-+		}
-+
-+-#define DATEOUT() { time_t _t; struct tm *tm; char str[256]; \
-++#define DATEOUT() { time_t _t; char str[256]; \
-+			_t = (time_t) GET_BE_S_4(bp); \
-+			bp += sizeof(int32_t); \
-+-			tm = localtime(&_t); \
-+-			strftime(str, 256, "%Y/%m/%d %H:%M:%S", tm); \
-+-			ND_PRINT(" %s", str); \
-++			ND_PRINT(" %s", \
-++			    nd_format_time(str, sizeof(str), \
-++			      "%Y/%m/%d %H:%M:%S", localtime(&_t))); \
-+		}
-+
-+ #define STOREATTROUT() { uint32_t mask, _i; \
-+diff --git a/print-zep.c b/print-zep.c
-+index fd74368..642b240 100644
-+--- a/print-zep.c
-++++ b/print-zep.c
-+@@ -83,12 +83,11 @@ static void zep_print_ts(netdissect_options *ndo, const u_char *p)
-+	 */
-+	if (i) {
-+		time_t seconds = i - JAN_1970;
-+-		struct tm *tm;
-+		char time_buf[128];
-+
-+-		tm = localtime(&seconds);
-+-		strftime(time_buf, sizeof (time_buf), "%Y/%m/%d %H:%M:%S", tm);
-+-		ND_PRINT(" (%s)", time_buf);
-++		ND_PRINT(" (%s)",
-++		    nd_format_time(time_buf, sizeof (time_buf), "%Y/%m/%d %H:%M:%S",
-++		      localtime(&seconds)));
-+	}
-+ #endif
-+ }
-+diff --git a/smbutil.c b/smbutil.c
-+index 7f609f7..f33a323 100644
-+--- a/smbutil.c
-++++ b/smbutil.c
-+@@ -768,9 +768,8 @@ smb_fdata1(netdissect_options *ndo,
-+	case 'T':
-+	  {
-+	    time_t t;
-+-	    struct tm *lt;
-+	    const char *tstring;
-+-	    char buffer[sizeof("Www Mmm dd hh:mm:ss yyyy\n")];
-++	    char buffer[sizeof("Www Mmm dd hh:mm:ss yyyyy")];
-+	    uint32_t x;
-+
-+	    switch (atoi(fmt + 1)) {
-+@@ -800,16 +799,11 @@ smb_fdata1(netdissect_options *ndo,
-+		break;
-+	    }
-+	    if (t != 0) {
-+-		lt = localtime(&t);
-+-		if (lt != NULL) {
-+-		    strftime(buffer, sizeof(buffer), "%a %b %e %T %Y%n", lt);
-+-		    tstring = buffer;
-+-		}
-+-		else
-+-		    tstring = "(Can't convert time)\n";
-++		    tstring = nd_format_time(buffer, sizeof(buffer), "%a %b %e %T %Y",
-++		    localtime(&t));
-+	    } else
-+-		tstring = "NULL\n";
-+-	    ND_PRINT("%s", tstring);
-++		tstring = "NULL";
-++	    ND_PRINT("%s\n", tstring);
-+	    fmt++;
-+	    while (ND_ASCII_ISDIGIT(*fmt))
-+		fmt++;
-+diff --git a/tcpdump.c b/tcpdump.c
-+index 78d0871..b0f75b9 100644
-+--- a/tcpdump.c
-++++ b/tcpdump.c
-+@@ -843,6 +843,8 @@ MakeFilename(char *buffer, char *orig_name, int cnt, int max_chars)
-+         char *filename = malloc(PATH_MAX + 1);
-+         if (filename == NULL)
-+             error("%s: malloc", __func__);
-++	if (strlen(orig_name) == 0)
-++            error("an empty string is not a valid file name");
-+
-+         /* Process with strftime if Gflag is set. */
-+         if (Gflag != 0) {
-+@@ -854,9 +856,25 @@ MakeFilename(char *buffer, char *orig_name, int cnt, int max_chars)
-+           }
-+
-+           /* There's no good way to detect an error in strftime since a return
-+-           * value of 0 isn't necessarily failure.
-++           *  * value of 0 isn't necessarily failure; if orig_name is an empty
-++           * string, the formatted string will be empty.
-++           *
-++           * However, the C90 standard says that, if there *is* a
-++           * buffer overflow, the content of the buffer is undefined,
-++           * so we must check for a buffer overflow.
-++           *
-++           * So we check above for an empty orig_name, and only call
-++           * strftime() if it's non-empty, in which case the return
-++           * value will only be 0 if the formatted date doesn't fit
-++           * in the buffer.
-++           *
-++           * (We check above because, even if we don't use -G, we
-++           * want a better error message than "tcpdump: : No such
-++           * file or directory" for this case.)
-+            */
-+-          strftime(filename, PATH_MAX, orig_name, local_tm);
-++          if (strftime(filename, PATH_MAX, orig_name, local_tm) == 0) {
-++            error("%s: strftime", __func__);
-++          }
-+         } else {
-+           strncpy(filename, orig_name, PATH_MAX);
-+         }
-+diff --git a/util-print.c b/util-print.c
-+index 8b20649..fea6b19 100644
-+--- a/util-print.c
-++++ b/util-print.c
-+@@ -230,7 +230,8 @@ ts_date_hmsfrac_print(netdissect_options *ndo, long sec, long usec,
-+ {
-+	time_t Time = sec;
-+	struct tm *tm;
-+-	char timestr[32];
-++	char timebuf[32];
-++	const char *timestr;
-+
-+	if ((unsigned)sec & 0x80000000) {
-+		ND_PRINT("[Error converting time]");
-+@@ -242,14 +243,14 @@ ts_date_hmsfrac_print(netdissect_options *ndo, long sec, long usec,
-+	else
-+		tm = gmtime(&Time);
-+
-+-	if (!tm) {
-+-		ND_PRINT("[Error converting time]");
-+-		return;
+>   meta-oe/recipes-support/libssh/files/CVE-2020-16135-2.patch     | 42 ++=
 ++
-++	if (date_flag == WITH_DATE) {
-++		timestr = nd_format_time(timebuf, sizeof(timebuf),
-++		    "%Y-%m-%d %H:%M:%S", tm);
-++	} else {
-++		timestr = nd_format_time(timebuf, sizeof(timebuf),
-++		    "%H:%M:%S", tm);
-+	}
-+-	if (date_flag == WITH_DATE)
-+-		strftime(timestr, sizeof(timestr), "%Y-%m-%d %H:%M:%S", tm);
-+-	else
-+-		strftime(timestr, sizeof(timestr), "%H:%M:%S", tm);
-+	ND_PRINT("%s", timestr);
+>   meta-oe/recipes-support/libssh/files/CVE-2020-16135-3.patch     | 70
+> ++++++
+>   meta-oe/recipes-support/libssh/files/CVE-2020-16135-4.patch     | 34 ++=
 +
-+	ts_frac_print(ndo, usec);
-+@@ -404,6 +405,25 @@ signed_relts_print(netdissect_options *ndo,
-+	}
-+	unsigned_relts_print(ndo, secs);
-+ }
-++/*
-++ * Format a struct tm with strftime().
-++ * If the pointer to the struct tm is null, that means that the
-++ * routine to convert a time_t to a struct tm failed; the localtime()
-++ * and gmtime() in the Microsoft Visual Studio C library will fail,
-++ * returning null, if the value is before the UNIX Epoch.
-++ */
-++const char *
-++nd_format_time(char *buf, size_t bufsize, const char *format,
-++         const struct tm *timeptr)
-++{
-++	if (timeptr != NULL) {
-++		if (strftime(buf, bufsize, format, timeptr) != 0)
-++			return (buf);
-++		else
-++			return ("[nd_format_time() buffer is too small]");
-++	} else
-++		return ("[localtime() or gmtime() couldn't convert the date and time]");
-++}
+>   meta-oe/recipes-support/libssh/libssh_0.8.9.bb                  | 8 +-
+>   .../recipes-support/multipath-tools/files/CVE-2022-41974.patch  | 162
+> +++++++++++++
+>   .../recipes-support/multipath-tools/multipath-tools_0.8.4.bb    | 1 +
+>   meta-oe/recipes-support/openldap/openldap/CVE-2021-27212.patch  | 31 ++=
 +
-+ /* Print the truncated string */
-+ void nd_print_trunc(netdissect_options *ndo)
-+--
-+2.40.0
-diff --git a/meta-networking/recipes-support/tcpdump/tcpdump_4.99.3.bb b/meta-networking/recipes-support/tcpdump/tcpdump_4.99.3.bb
-index 03f1b76f9..dfb408dcd 100644
---- a/meta-networking/recipes-support/tcpdump/tcpdump_4.99.3.bb
-+++ b/meta-networking/recipes-support/tcpdump/tcpdump_4.99.3.bb
-@@ -24,6 +24,7 @@ SRC_URI = " \
-     http://www.tcpdump.org/release/${BP}.tar.gz \
-     file://add-ptest.patch \
-     file://run-ptest \
-+    file://CVE-2023-1801.patch \
- "
- 
- SRC_URI[sha256sum] = "ad75a6ed3dc0d9732945b2e5483cb41dc8b4b528a169315e499c6861952e73b3"
--- 
-2.40.0
-
+>   meta-oe/recipes-support/openldap/openldap_2.4.57.bb             | 1 +
+>   27 files changed, 1883 insertions(+), 6 deletions(-)
+>   create mode 100644
+> meta-networking/recipes-protocols/quagga/files/CVE-2021-44038.patch
+>   create mode 100644
+> meta-networking/recipes-support/ntp/ntp/CVE-2023-2655x.patch
+>   create mode 100644
+> meta-networking/recipes-support/wireshark/files/CVE-2023-0667-pre1.patch
+>   create mode 100644
+> meta-networking/recipes-support/wireshark/files/CVE-2023-0667.patch
+>   create mode 100644
+> meta-networking/recipes-support/wireshark/files/CVE-2023-0668.patch
+>   create mode 100644
+> meta-networking/recipes-support/wireshark/files/CVE-2023-2855.patch
+>   create mode 100644
+> meta-networking/recipes-support/wireshark/files/CVE-2023-2856.patch
+>   create mode 100644
+> meta-networking/recipes-support/wireshark/files/CVE-2023-2858.patch
+>   create mode 100644
+> meta-networking/recipes-support/wireshark/files/CVE-2023-2952.patch
+>   create mode 100644
+> meta-oe/recipes-dbs/postgresql/files/CVE-2023-2454.patch
+>   create mode 100644
+> meta-oe/recipes-dbs/postgresql/files/CVE-2023-2455.patch
+>   create mode 100644 meta-oe/recipes-devtools/yajl/yajl/CVE-2023-33460.pa=
+tch
+>   create mode 100644
+> meta-oe/recipes-support/libssh/files/CVE-2020-16135-1.patch
+>   create mode 100644
+> meta-oe/recipes-support/libssh/files/CVE-2020-16135-2.patch
+>   create mode 100644
+> meta-oe/recipes-support/libssh/files/CVE-2020-16135-3.patch
+>   create mode 100644
+> meta-oe/recipes-support/libssh/files/CVE-2020-16135-4.patch
+>   create mode 100644
+> meta-oe/recipes-support/multipath-tools/files/CVE-2022-41974.patch
+>   create mode 100644
+> meta-oe/recipes-support/openldap/openldap/CVE-2021-27212.patch
+>
 
