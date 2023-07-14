@@ -1,181 +1,178 @@
-Return-Path: <wangmy@fujitsu.com>
+Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A7B30EB64DA
-	for <webhook@archiver.kernel.org>; Fri, 14 Jul 2023 06:16:11 +0000 (UTC)
-Received: from esa6.hc1455-7.c3s2.iphmx.com (esa6.hc1455-7.c3s2.iphmx.com [68.232.139.139])
- by mx.groups.io with SMTP id smtpd.web11.12872.1689315361398501295
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3A49AEB64DA
+	for <webhook@archiver.kernel.org>; Fri, 14 Jul 2023 11:16:53 +0000 (UTC)
+Received: from mail-yb1-f175.google.com (mail-yb1-f175.google.com [209.85.219.175])
+ by mx.groups.io with SMTP id smtpd.web10.16459.1689333403679914889
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 13 Jul 2023 23:16:02 -0700
+ Fri, 14 Jul 2023 04:16:43 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: fujitsu.com, ip: 68.232.139.139, mailfrom: wangmy@fujitsu.com)
-X-IronPort-AV: E=McAfee;i="6600,9927,10770"; a="125806956"
-X-IronPort-AV: E=Sophos;i="6.01,204,1684767600"; 
-   d="scan'208";a="125806956"
-Received: from unknown (HELO oym-r2.gw.nic.fujitsu.com) ([210.162.30.90])
-  by esa6.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 14 Jul 2023 15:15:58 +0900
-Received: from oym-m1.gw.nic.fujitsu.com (oym-nat-oym-m1.gw.nic.fujitsu.com [192.168.87.58])
-	by oym-r2.gw.nic.fujitsu.com (Postfix) with ESMTP id 56447CD7E4
-	for <openembedded-devel@lists.openembedded.org>; Fri, 14 Jul 2023 15:15:56 +0900 (JST)
-Received: from kws-ab3.gw.nic.fujitsu.com (kws-ab3.gw.nic.fujitsu.com [192.51.206.21])
-	by oym-m1.gw.nic.fujitsu.com (Postfix) with ESMTP id 86BB7D8B99
-	for <openembedded-devel@lists.openembedded.org>; Fri, 14 Jul 2023 15:15:55 +0900 (JST)
-Received: from localhost.localdomain (unknown [10.167.225.33])
-	by kws-ab3.gw.nic.fujitsu.com (Postfix) with ESMTP id D5AE0200959D8;
-	Fri, 14 Jul 2023 15:15:54 +0900 (JST)
-From: wangmy@fujitsu.com
-To: openembedded-devel@lists.openembedded.org
-Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-oe] [PATCH] php: Fix install conflict when enable multilib.
-Date: Fri, 14 Jul 2023 14:15:48 +0800
-Message-Id: <1689315348-29978-1-git-send-email-wangmy@fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
-X-TM-AS-GCONF: 00
-X-TM-AS-Product-Ver: IMSS-9.1.0.1417-9.0.0.1002-27750.004
-X-TM-AS-User-Approved-Sender: Yes
-X-TMASE-Version: IMSS-9.1.0.1417-9.0.1002-27750.004
-X-TMASE-Result: 10--5.781000-10.000000
-X-TMASE-MatchedRID: xSdrm2HKzRiMPz8Goa6fXdl0i+WyI+91Urr7Qc5WhKichsx3TxRTx2KF
-	LqZhp2Q7uW0lBjgUk+cNygZB7aVkGACwWaqH3Rqnz5r5y9mouSDQxDD776KHL0jINjnv2/BMmlI
-	9DpfL2l3jTBfI7VHq9ZJLAEpazqlpTyJsNcuau/xrzsINdopFUtDZ1FFTJUymw0Hhhlf7eltDEr
-	k4NWatrZgCIJd9lhDrrgFQ66sgc9zsMtjYUbD8m/7FEhWgo0y88SkdpG2/n9fG5dXdQTj2OB5nS
-	zNlhSHOHIz4h07EShRxmaBqY6+9S6cUQ7z3S96i8t4fUUGeErTBOVz0Jwcxl76S7Hfu9IUx4tJ1
-	U/a1mfkQ9GBg/54LgCT1CCst0r53QCY0BUFEn2GzRPQ8T4oe5X0tCKdnhB58k4rY1r+vswgXvQk
-	Gi3tjz46HM5rqDwqtovGHDZb4Z/43b86bB918sN9OxOx3Zgg5+W5Ho/mOsyE8LiJuOMMVBg==
-X-TMASE-SNAP-Result: 1.821001.0001-0-1-22:0,33:0,34:0-0
+ dkim=pass header.i=@gmail.com header.s=20221208 header.b=eUcctnL0;
+ spf=pass (domain: gmail.com, ip: 209.85.219.175, mailfrom: akuster808@gmail.com)
+Received: by mail-yb1-f175.google.com with SMTP id 3f1490d57ef6-cb7b6ecb3cdso1138271276.1
+        for <openembedded-devel@lists.openembedded.org>; Fri, 14 Jul 2023 04:16:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20221208; t=1689333403; x=1691925403;
+        h=content-transfer-encoding:subject:from:to:content-language
+         :user-agent:mime-version:date:message-id:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=ZvvfqOkexX86u1SX3HGw4Awwscx0/hN2J31oAzKXImc=;
+        b=eUcctnL0AWnbuejSBVXpWgHFEhrEhSo5vzrL0ygZLUCrAeJzatxRNo+e/7Fuaom9Kw
+         UNtgRSHNj00OAkd4pZf04yC2qh8b58a6hA5+KwrbrH2b5j0I8b4S2m5HSjoqRLsKbgeU
+         +F7saGQBp2uFKON6MJGRz73Mc9tmy1UzFHp/oD6Cm4R7g8ClL9XBahn+v1J/WiSz3jjt
+         bS7u1CxX97RDcoKfZXX5LiFUry4Mh0LveTKKpRyysovGmbJTmll0tosfcdti35bx6h7O
+         rLr3PtIwBEaVqHlXSxdrGCd3lAtQ6c7LkvnsaYX7O6igZzC2RdBxUoEFLFN39Iwqdr+I
+         c3uw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20221208; t=1689333403; x=1691925403;
+        h=content-transfer-encoding:subject:from:to:content-language
+         :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=ZvvfqOkexX86u1SX3HGw4Awwscx0/hN2J31oAzKXImc=;
+        b=IMmlXZqYGLss99V4wWkqEwqUZ7kbb8pljWQnIH0y5kvLBp9nf1YnBxVy5tayH7wTAE
+         TCHTEb5ciyzgzydx3W9k8jxGeD90uBrdvO2ZNZRAdoQ1uXB1z/39rEgpsjZjOsyN0gUu
+         7YVlJ24bF7LpMfQZaOwQYF/bnYUiVYmAvNt4c6YvbaWtklbKTa4RTqbEuWPkYpZUmse0
+         JJRfRWCykoWgOmPKTPIuW8eg0oFYKtx8rRA7it1yP2MeUUKGmwZ8OqFlfjTT/8S/e575
+         /N/fIUH+4haYgxSQjJrCiPvqYja+vpYJgUM9lmvFT20LhZGUIFs6oNHaQhnBB3AuN3SB
+         JZ4g==
+X-Gm-Message-State: ABy/qLaqshBN8iYZrAEc/G0omuV4TIV6LEttJP6de378cEcTtZI30mdj
+	8f/4Hexi6UQbJGAe0LLbrCo=
+X-Google-Smtp-Source: APBJJlHM64L6At/kP674TBehaze5YBF1wILnlznfM21BxI+Zn/Js5IFD///ozi3cn1/VM0CmzJwo/w==
+X-Received: by 2002:a81:4f91:0:b0:57a:5b6f:d41 with SMTP id d139-20020a814f91000000b0057a5b6f0d41mr4355243ywb.42.1689333402574;
+        Fri, 14 Jul 2023 04:16:42 -0700 (PDT)
+Received: from ?IPV6:2600:1700:9190:ba10:d728:ea97:1c3f:f91? ([2600:1700:9190:ba10:d728:ea97:1c3f:f91])
+        by smtp.gmail.com with ESMTPSA id q3-20020a815c03000000b00561e7639ee8sm2251727ywb.57.2023.07.14.04.16.41
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Fri, 14 Jul 2023 04:16:42 -0700 (PDT)
+Message-ID: <68215175-21a2-bd4e-fd1d-af4711dc4ad6@gmail.com>
+Date: Fri, 14 Jul 2023 07:16:35 -0400
+MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.11.0
+Content-Language: en-US
+To: Khem Raj <raj.khem@gmail.com>,
+ OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+From: akuster808 <akuster808@gmail.com>
+Subject: dunfell merge request: July 14th
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 14 Jul 2023 06:16:11 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103863
+ <openembedded-devel@lists.openembedded.org>; Fri, 14 Jul 2023 11:16:53 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103864
 
-From: Wang Mingyu <wangmy@fujitsu.com>
+The following changes since commit 6334241447e461f849035c47f071fa4a2125fee1:
 
-Error: Transaction test error:
-  file /usr/bin/php-config conflicts between attempted installs of php-dev-8.2.7-r0.core2_64 and lib32-php-dev-8.2.7-r0.i686
-  file /usr/bin/phpize conflicts between attempted installs of php-dev-8.2.7-r0.core2_64 and lib32-php-dev-8.2.7-r0.i686
-  file /usr/include/php/main/build-defs.h conflicts between attempted installs of php-dev-8.2.7-r0.core2_64 and lib32-php-dev-8.2.7-r0.i686
-  file /usr/include/php/main/php_config.h conflicts between attempted installs of php-dev-8.2.7-r0.core2_64 and lib32-php-dev-8.2.7-r0.i686
+   c-ares: CVE-2023-31147 Insufficient randomness in generation of DNS 
+query IDs (2023-06-23 06:58:18 -0400)
 
-The differences of php-config are as follows:
-@@ -8,16 +8,16 @@
- vernum="80207"
- include_dir="/usr/include/php"
- includes="-I$include_dir -I$include_dir/main -I$include_dir/TSRM -I$include_dir/Zend -I$include_dir/ext -I$include_dir/ext/date/lib"
--ldflags=" -L/usr/lib64"
-+ldflags=" -L/usr/lib"
- libs="-lcrypt  -lc-client  -lrt -lcrypt -lpam -lbz2 -lrt -lm -ldl  -lxml2 -lssl -lcrypto -lsqlite3 -lz -lxml2 -lssl -lcrypto -lsqlite3 -lxml2 -lxml2 -lxml2 -lxml2 -lz -lssl -lcrypto -lcrypt "
--extension_dir='/usr/lib64/php8/extensions/no-debug-non-zts-20220829'
-+extension_dir='/usr/lib/php8/extensions/no-debug-non-zts-20220829'
- man_dir=`eval echo /usr/share/man`
- program_prefix=""
- program_suffix=""
- exe_extension=""
- php_cli_binary=NONE
- php_cgi_binary=NONE
--configure_options=" '--build=x86_64-linux' '--host=x86_64-poky-linux' '--target=x86_64-poky-linux' '--prefix=/usr' '--exec_prefix=/usr' '--bindir=/usr/bin' '--sbindir=/usr/sbin' '--libexecdir=/usr/libexec' '--datadir=/usr/share' '--sysconfdir=/etc' '--sharedstatedir=/com' '--localstatedir=/var' '--libdir=/usr/lib64' '--includedir=/usr/include' '--oldincludedir=/usr/include' '--infodir=/usr/share/info' '--mandir=/usr/share/man' '--disable-silent-rules' '--disable-dependency-tracking' '--with-libtool-sysroot=' '--enable-mbstring' '--enable-fpm' '--with-libdir=lib64' '--with-gettext=/usr/lib64/..' '--with-zlib=/usr/lib64/..' '--with-iconv=/usr/lib64/..' '--with-bz2=/usr' '--with-config-file-path=/etc/php/apache2-php8' 'ac_cv_c_bigendian_php=no' '--enable-sockets' '--enable-pcntl' '--enable-shared' '--disable-rpath' '--with-pic' '--libdir=/usr/lib64/php8' '--disable-static' '--with-imap=' '--with-imap-ssl=' '--disable-ipv6' '--disable-mbregex' '--with-mysqli=mysqlnd' '--with-pdo-mysql=m
- ysqlnd' '--enable-opcache' '--with-openssl' '--without-pgsql' '--disable-soap' '--with-sqlite3=/usr/lib64/..' '--with-pdo-sqlite=/usr/lib64/..' '--with-valgrind=no' '--enable-nls' 'build_alias=x86_64-linux' 'host_alias=x86_64-poky-linux' 'target_alias=x86_64-poky-linux' 'PKG_CONFIG_PATH=/usr/lib64/pkgconfig:/usr/share/pkgconfig://usr/share/pkgconfig' 'PKG_CONFIG_LIBDIR=/usr/lib64/pkgconfig' 'CC=x86_64-poky-linux-gcc -m64 -march=core2 -mtune=core2 -msse3 -mfpmath=sse -fstack-protector-strong -O2 -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security -Werror=format-security --sysroot=' 'CFLAGS= -O2 -pipe -g -feliminate-unused-debug-types -fcanon-prefix-map -D_GNU_SOURCE -D_LARGEFILE64_SOURCE -g -DPTYS_ARE_GETPT -DPTYS_ARE_SEARCHED -I/usr/include/apache2 -DHAVE_LIBDL ' 'LDFLAGS=-Wl,-O1 -Wl,--hash-style=gnu -Wl,--as-needed -fcanon-prefix-map -Wl,-z,relro,-z,now -ldl ' 'CPPFLAGS=' 'CPP=x86_64-poky-linux-gcc -E --sysroot= -m64 -march=core2 -mtune=core2 -msse3 -mfpmath=sse -fstack-protector-strong
-  -O2 -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security -Werror=format-security' 'CXX=x86_64-poky-linux-g++ -m64 -march=core2 -mtune=core2 -msse3 -mfpmath=sse -fstack-protector-strong -O2 -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security -Werror=format-security --sysroot=' 'CXXFLAGS= -O2 -pipe -g -feliminate-unused-debug-types -fcanon-prefix-map -fvisibility-inlines-hidden'"
-+configure_options=" '--build=x86_64-linux' '--host=i686-pokymllib32-linux' '--target=i686-pokymllib32-linux' '--prefix=/usr' '--exec_prefix=/usr' '--bindir=/usr/bin' '--sbindir=/usr/sbin' '--libexecdir=/usr/libexec' '--datadir=/usr/share' '--sysconfdir=/etc' '--sharedstatedir=/com' '--localstatedir=/var' '--libdir=/usr/lib' '--includedir=/usr/include' '--oldincludedir=/usr/include' '--infodir=/usr/share/info' '--mandir=/usr/share/man' '--disable-silent-rules' '--disable-dependency-tracking' '--with-libtool-sysroot=' '--enable-mbstring' '--enable-fpm' '--with-libdir=lib' '--with-gettext=/usr/lib/..' '--with-zlib=/usr/lib/..' '--with-iconv=/usr/lib/..' '--with-bz2=/usr' '--with-config-file-path=/etc/php/apache2-php8' 'ac_cv_c_bigendian_php=no' '--enable-sockets' '--enable-pcntl' '--enable-shared' '--disable-rpath' '--with-pic' '--libdir=/usr/lib/php8' '--disable-static' '--with-imap=' '--with-imap-ssl=' '--disable-ipv6' '--disable-mbregex' '--with-mysqli=mysqlnd' '--with-pdo-mysql=mys
- qlnd' '--enable-opcache' '--with-openssl' '--without-pgsql' '--disable-soap' '--with-sqlite3=/usr/lib/..' '--with-pdo-sqlite=/usr/lib/..' '--with-valgrind=no' '--enable-nls' 'build_alias=x86_64-linux' 'host_alias=i686-pokymllib32-linux' 'target_alias=i686-pokymllib32-linux' 'PKG_CONFIG_PATH=/usr/lib/pkgconfig:/usr/share/pkgconfig:/ubinux-dev/ubinux001/contribution/build_xh/tmp/work/i686-pokymllib32-linux/lib32-php/8.2.7-r0/recipe-sysroot//usr/share/pkgconfig' 'PKG_CONFIG_LIBDIR=/usr/lib/pkgconfig' 'CC=i686-pokymllib32-linux-gcc -m32 -march=i686 -fstack-protector-strong -O2 -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security -Werror=format-security -D_TIME_BITS=64 -D_FILE_OFFSET_BITS=64 --sysroot=' 'CFLAGS= -O2 -pipe -g -feliminate-unused-debug-types -fcanon-prefix-map -D_GNU_SOURCE -D_LARGEFILE64_SOURCE -g -DPTYS_ARE_GETPT -DPTYS_ARE_SEARCHED -I/usr/include/apache2 -DHAVE_LIBDL ' 'LDFLAGS=-Wl,-O1 -Wl,--hash-style=gnu -Wl,--as-needed -fcanon-prefix-map -Wl,-z,relro,-z,now -ldl ' 'CPPFLAGS
- =' 'CPP=i686-pokymllib32-linux-gcc -E --sysroot= -m32 -march=i686 -fstack-protector-strong -O2 -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security -Werror=format-security -D_TIME_BITS=64 -D_FILE_OFFSET_BITS=64' 'CXX=i686-pokymllib32-linux-g++ -m32 -march=i686 -fstack-protector-strong -O2 -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security -Werror=format-security -D_TIME_BITS=64 -D_FILE_OFFSET_BITS=64 --sysroot=' 'CXXFLAGS= -O2 -pipe -g -feliminate-unused-debug-types -fcanon-prefix-map -fvisibility-inlines-hidden'"
+are available in the Git repository at:
 
-The differences of phpize are as follows:
-@@ -4,7 +4,7 @@
- prefix='/usr'
- datarootdir='/usr/php'
- exec_prefix="`eval echo /usr`"
--phpdir="`eval echo /usr/lib64/php8`/build"
-+phpdir="`eval echo /usr/lib/php8`/build"
- includedir="`eval echo /usr/include`/php"
- builddir="`pwd`"
- SED="sed"
+   https://git.openembedded.org/meta-openembedded dunfell-next
 
-The differences of build-defs.h are as follows:
-@@ -14,7 +14,7 @@
-    +----------------------------------------------------------------------+
- */
+for you to fetch changes up to b5282ece919f016d91a1043769676efb02b4f0fb:
 
--#define CONFIGURE_COMMAND " '../php-8.2.7/configure'  '--build=x86_64-linux' '--host=x86_64-poky-linux' '--target=x86_64-poky-linux' '--prefix=/usr' '--exec_prefix=/usr' '--bindir=/usr/bin' '--sbindir=/usr/sbin' '--libexecdir=/usr/libexec' '--datadir=/usr/share' '--sysconfdir=/etc' '--sharedstatedir=/com' '--localstatedir=/var' '--libdir=/usr/lib64' '--includedir=/usr/include' '--oldincludedir=/usr/include' '--infodir=/usr/share/info' '--mandir=/usr/share/man' '--disable-silent-rules' '--disable-dependency-tracking' '--with-libtool-sysroot=' '--enable-mbstring' '--enable-fpm' '--with-libdir=lib64' '--with-gettext=/usr/lib64/..' '--with-zlib=/usr/lib64/..' '--with-iconv=/usr/lib64/..' '--with-bz2=/usr' '--with-config-file-path=/etc/php/apache2-php8' 'ac_cv_c_bigendian_php=no' '--enable-sockets' '--enable-pcntl' '--enable-shared' '--disable-rpath' '--with-pic' '--libdir=/usr/lib64/php8' '--disable-static' '--with-imap=' '--with-imap-ssl=' '--disable-ipv6' '--disable-mbregex' '--with-m
- ysqli=mysqlnd' '--with-pdo-mysql=mysqlnd' '--enable-opcache' '--with-openssl' '--without-pgsql' '--disable-soap' '--with-sqlite3=/usr/lib64/..' '--with-pdo-sqlite=/usr/lib64/..' '--with-valgrind=no' '--enable-nls' 'build_alias=x86_64-linux' 'host_alias=x86_64-poky-linux' 'target_alias=x86_64-poky-linux' 'PKG_CONFIG_PATH=/usr/lib64/pkgconfig:/usr/share/pkgconfig://usr/share/pkgconfig' 'PKG_CONFIG_LIBDIR=/usr/lib64/pkgconfig' 'CC=x86_64-poky-linux-gcc -m64 -march=core2 -mtune=core2 -msse3 -mfpmath=sse -fstack-protector-strong -O2 -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security -Werror=format-security --sysroot=' 'CFLAGS= -O2 -pipe -g -feliminate-unused-debug-types -fcanon-prefix-map -D_GNU_SOURCE -D_LARGEFILE64_SOURCE -g -DPTYS_ARE_GETPT -DPTYS_ARE_SEARCHED -I/usr/include/apache2 -DHAVE_LIBDL ' 'LDFLAGS=-Wl,-O1 -Wl,--hash-style=gnu -Wl,--as-needed -fcanon-prefix-map -Wl,-z,relro,-z,now -ldl ' 'CPPFLAGS=' 'CPP=x86_64-poky-linux-gcc -E --sysroot= -m64 -march=core2 -mtune=core2 -msse3 -mf
- pmath=sse -fstack-protector-strong -O2 -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security -Werror=format-security' 'CXX=x86_64-poky-linux-g++ -m64 -march=core2 -mtune=core2 -msse3 -mfpmath=sse -fstack-protector-strong -O2 -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security -Werror=format-security --sysroot=' 'CXXFLAGS= -O2 -pipe -g -feliminate-unused-debug-types -fcanon-prefix-map -fvisibility-inlines-hidden'"
-+#define CONFIGURE_COMMAND " '../php-8.2.7/configure'  '--build=x86_64-linux' '--host=i686-pokymllib32-linux' '--target=i686-pokymllib32-linux' '--prefix=/usr' '--exec_prefix=/usr' '--bindir=/usr/bin' '--sbindir=/usr/sbin' '--libexecdir=/usr/libexec' '--datadir=/usr/share' '--sysconfdir=/etc' '--sharedstatedir=/com' '--localstatedir=/var' '--libdir=/usr/lib' '--includedir=/usr/include' '--oldincludedir=/usr/include' '--infodir=/usr/share/info' '--mandir=/usr/share/man' '--disable-silent-rules' '--disable-dependency-tracking' '--with-libtool-sysroot=' '--enable-mbstring' '--enable-fpm' '--with-libdir=lib' '--with-gettext=/usr/lib/..' '--with-zlib=/usr/lib/..' '--with-iconv=/usr/lib/..' '--with-bz2=/usr' '--with-config-file-path=/etc/php/apache2-php8' 'ac_cv_c_bigendian_php=no' '--enable-sockets' '--enable-pcntl' '--enable-shared' '--disable-rpath' '--with-pic' '--libdir=/usr/lib/php8' '--disable-static' '--with-imap=' '--with-imap-ssl=' '--disable-ipv6' '--disable-mbregex' '--with-mys
- qli=mysqlnd' '--with-pdo-mysql=mysqlnd' '--enable-opcache' '--with-openssl' '--without-pgsql' '--disable-soap' '--with-sqlite3=/usr/lib/..' '--with-pdo-sqlite=/usr/lib/..' '--with-valgrind=no' '--enable-nls' 'build_alias=x86_64-linux' 'host_alias=i686-pokymllib32-linux' 'target_alias=i686-pokymllib32-linux' 'PKG_CONFIG_PATH=/usr/lib/pkgconfig:/usr/share/pkgconfig:/ubinux-dev/ubinux001/contribution/build_xh/tmp/work/i686-pokymllib32-linux/lib32-php/8.2.7-r0/recipe-sysroot//usr/share/pkgconfig' 'PKG_CONFIG_LIBDIR=/usr/lib/pkgconfig' 'CC=i686-pokymllib32-linux-gcc -m32 -march=i686 -fstack-protector-strong -O2 -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security -Werror=format-security -D_TIME_BITS=64 -D_FILE_OFFSET_BITS=64 --sysroot=' 'CFLAGS= -O2 -pipe -g -feliminate-unused-debug-types -fcanon-prefix-map -D_GNU_SOURCE -D_LARGEFILE64_SOURCE -g -DPTYS_ARE_GETPT -DPTYS_ARE_SEARCHED -I/usr/include/apache2 -DHAVE_LIBDL ' 'LDFLAGS=-Wl,-O1 -Wl,--hash-style=gnu -Wl,--as-needed -fcanon-prefix-map -W
- l,-z,relro,-z,now -ldl ' 'CPPFLAGS=' 'CPP=i686-pokymllib32-linux-gcc -E --sysroot= -m32 -march=i686 -fstack-protector-strong -O2 -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security -Werror=format-security -D_TIME_BITS=64 -D_FILE_OFFSET_BITS=64' 'CXX=i686-pokymllib32-linux-g++ -m32 -march=i686 -fstack-protector-strong -O2 -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security -Werror=format-security -D_TIME_BITS=64 -D_FILE_OFFSET_BITS=64 --sysroot=' 'CXXFLAGS= -O2 -pipe -g -feliminate-unused-debug-types -fcanon-prefix-map -fvisibility-inlines-hidden'"
- #define PHP_ODBC_CFLAGS        ""
- #define PHP_ODBC_LFLAGS                ""
- #define PHP_ODBC_LIBS          ""
-@@ -24,12 +24,12 @@
- #define PHP_PROG_SENDMAIL      "/usr/sbin/sendmail"
- #define PEAR_INSTALLDIR         ""
- #define PHP_INCLUDE_PATH       ".:"
--#define PHP_EXTENSION_DIR       "/usr/lib64/php8/extensions/no-debug-non-zts-20220829"
-+#define PHP_EXTENSION_DIR       "/usr/lib/php8/extensions/no-debug-non-zts-20220829"
- #define PHP_PREFIX              "/usr"
- #define PHP_BINDIR              "/usr/bin"
- #define PHP_SBINDIR             "/usr/sbin"
- #define PHP_MANDIR              "/usr/share/man"
--#define PHP_LIBDIR              "/usr/lib64/php8"
-+#define PHP_LIBDIR              "/usr/lib/php8"
- #define PHP_DATADIR             "/usr/share"
- #define PHP_SYSCONFDIR          "/etc"
- #define PHP_LOCALSTATEDIR       "/var"
+   openldap: fix CVE-2021-27212 Assertion failure in slapd (2023-07-14 
+07:08:54 -0400)
 
-The differences of php_config.h are as follows:
-@@ -2064,7 +2064,7 @@
- /* #undef SIZEOF_INTMAX_T */
+----------------------------------------------------------------
+Hitendra Prajapati (7):
+       wireshark: Fix Multiple CVEs
+       wireshark: Fix CVE-2023-0667 & CVE-2023-0668
+       yajl: CVE-2023-33460 memory leak in yajl_tree_parse function
+       ntp: backport patch for 5 CVEs CVE-2023-26551/2/3/4/5
+       multipath-tools: fix CVE-2022-41974
+       quagga: CVE-2021-44038 unsafe chown/chmod operations may lead to 
+privileges escalation
+       openldap: fix CVE-2021-27212 Assertion failure in slapd
 
- /* The size of `long', as computed by sizeof. */
--#define SIZEOF_LONG 8
-+#define SIZEOF_LONG 4
+Vijay Anusuri (1):
+       libssh: CVE-2020-16135 NULL pointer dereference in sftpserver.c 
+if ssh_buffer_new returns NULL
 
- /* The size of `long long', as computed by sizeof. */
- #define SIZEOF_LONG_LONG 8
-@@ -2079,7 +2079,7 @@
- #define SIZEOF_SHORT 2
+virendra thakur (1):
+       c-ares: whitelist CVE-2023-31124
 
- /* The size of `size_t', as computed by sizeof. */
--#define SIZEOF_SIZE_T 8
-+#define SIZEOF_SIZE_T 4
+vkumbhar (1):
+       postgresql: fix CVE-2023-2454 & CVE-2023-2455
 
- /* Size of ssize_t */
- #define SIZEOF_SSIZE_T 8
-
-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
----
- meta-oe/recipes-devtools/php/php_8.2.7.bb | 10 +++++++++-
- 1 file changed, 9 insertions(+), 1 deletion(-)
-
-diff --git a/meta-oe/recipes-devtools/php/php_8.2.7.bb b/meta-oe/recipes-devtools/php/php_8.2.7.bb
-index b5da7b3444..4dc0399b59 100644
---- a/meta-oe/recipes-devtools/php/php_8.2.7.bb
-+++ b/meta-oe/recipes-devtools/php/php_8.2.7.bb
-@@ -42,7 +42,7 @@ CVE_CHECK_IGNORE += "\
-     CVE-2007-4596 \
- "
- 
--inherit autotools pkgconfig python3native gettext
-+inherit autotools pkgconfig python3native gettext multilib_header multilib_script
- 
- # phpize is not scanned for absolute paths by default (but php-config is).
- #
-@@ -210,6 +210,14 @@ do_install:append:class-target() {
-     fi
- }
- 
-+MULTILIB_SCRIPTS += "${PN}:${bindir}/php-config \
-+                     ${PN}:${bindir}/phpize \
-+"
-+
-+do_install:append () {
-+        oe_multilib_header php/main/build-defs.h php/main/php_config.h
-+}
-+
- SYSROOT_PREPROCESS_FUNCS += "php_sysroot_preprocess"
- 
- php_sysroot_preprocess () {
--- 
-2.34.1
+  .../recipes-protocols/quagga/files/CVE-2021-44038.patch         | 117 
+++++++++++
+  meta-networking/recipes-protocols/quagga/quagga.inc             | 2 +-
+  meta-networking/recipes-support/ntp/ntp/CVE-2023-2655x.patch    | 340 
+++++++++++++++++++++++++++++
+  meta-networking/recipes-support/ntp/ntp_4.2.8p15.bb             | 10 +-
+  .../recipes-support/wireshark/files/CVE-2023-0667-pre1.patch    | 153 
++++++++++++++
+  .../recipes-support/wireshark/files/CVE-2023-0667.patch         | 66 
+++++++
+  .../recipes-support/wireshark/files/CVE-2023-0668.patch         | 33 +++
+  .../recipes-support/wireshark/files/CVE-2023-2855.patch         | 117 
+++++++++++
+  .../recipes-support/wireshark/files/CVE-2023-2856.patch         | 68 
+++++++
+  .../recipes-support/wireshark/files/CVE-2023-2858.patch         | 94 
+++++++++
+  .../recipes-support/wireshark/files/CVE-2023-2952.patch         | 97 
+++++++++
+  meta-networking/recipes-support/wireshark/wireshark_3.2.18.bb   | 11 +-
+  meta-oe/recipes-dbs/postgresql/files/CVE-2023-2454.patch        | 235 
++++++++++++++++++++
+  meta-oe/recipes-dbs/postgresql/files/CVE-2023-2455.patch        | 118 
+++++++++++
+  meta-oe/recipes-dbs/postgresql/postgresql_12.9.bb               | 2 +
+  meta-oe/recipes-devtools/yajl/yajl/CVE-2023-33460.patch         | 29 +++
+  meta-oe/recipes-devtools/yajl/yajl_2.1.0.bb                     | 4 +-
+  meta-oe/recipes-support/c-ares/c-ares_1.18.1.bb                 | 4 +
+  meta-oe/recipes-support/libssh/files/CVE-2020-16135-1.patch     | 40 ++++
+  meta-oe/recipes-support/libssh/files/CVE-2020-16135-2.patch     | 42 ++++
+  meta-oe/recipes-support/libssh/files/CVE-2020-16135-3.patch     | 70 
+++++++
+  meta-oe/recipes-support/libssh/files/CVE-2020-16135-4.patch     | 34 +++
+  meta-oe/recipes-support/libssh/libssh_0.8.9.bb                  | 8 +-
+  .../recipes-support/multipath-tools/files/CVE-2022-41974.patch  | 162 
++++++++++++++
+  .../recipes-support/multipath-tools/multipath-tools_0.8.4.bb    | 1 +
+  meta-oe/recipes-support/openldap/openldap/CVE-2021-27212.patch  | 31 +++
+  meta-oe/recipes-support/openldap/openldap_2.4.57.bb             | 1 +
+  27 files changed, 1883 insertions(+), 6 deletions(-)
+  create mode 100644 
+meta-networking/recipes-protocols/quagga/files/CVE-2021-44038.patch
+  create mode 100644 
+meta-networking/recipes-support/ntp/ntp/CVE-2023-2655x.patch
+  create mode 100644 
+meta-networking/recipes-support/wireshark/files/CVE-2023-0667-pre1.patch
+  create mode 100644 
+meta-networking/recipes-support/wireshark/files/CVE-2023-0667.patch
+  create mode 100644 
+meta-networking/recipes-support/wireshark/files/CVE-2023-0668.patch
+  create mode 100644 
+meta-networking/recipes-support/wireshark/files/CVE-2023-2855.patch
+  create mode 100644 
+meta-networking/recipes-support/wireshark/files/CVE-2023-2856.patch
+  create mode 100644 
+meta-networking/recipes-support/wireshark/files/CVE-2023-2858.patch
+  create mode 100644 
+meta-networking/recipes-support/wireshark/files/CVE-2023-2952.patch
+  create mode 100644 
+meta-oe/recipes-dbs/postgresql/files/CVE-2023-2454.patch
+  create mode 100644 
+meta-oe/recipes-dbs/postgresql/files/CVE-2023-2455.patch
+  create mode 100644 meta-oe/recipes-devtools/yajl/yajl/CVE-2023-33460.patch
+  create mode 100644 
+meta-oe/recipes-support/libssh/files/CVE-2020-16135-1.patch
+  create mode 100644 
+meta-oe/recipes-support/libssh/files/CVE-2020-16135-2.patch
+  create mode 100644 
+meta-oe/recipes-support/libssh/files/CVE-2020-16135-3.patch
+  create mode 100644 
+meta-oe/recipes-support/libssh/files/CVE-2020-16135-4.patch
+  create mode 100644 
+meta-oe/recipes-support/multipath-tools/files/CVE-2022-41974.patch
+  create mode 100644 
+meta-oe/recipes-support/openldap/openldap/CVE-2021-27212.patch
 
 
