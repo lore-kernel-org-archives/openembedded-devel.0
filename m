@@ -1,132 +1,99 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6358FC001DF
-	for <webhook@archiver.kernel.org>; Thu, 13 Jul 2023 21:54:49 +0000 (UTC)
-Received: from mail-pl1-f181.google.com (mail-pl1-f181.google.com [209.85.214.181])
- by mx.groups.io with SMTP id smtpd.web11.3816.1689285280277876176
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4DCCCC001DF
+	for <webhook@archiver.kernel.org>; Fri, 14 Jul 2023 01:01:00 +0000 (UTC)
+Received: from esa8.hc1455-7.c3s2.iphmx.com (esa8.hc1455-7.c3s2.iphmx.com [139.138.61.253])
+ by mx.groups.io with SMTP id smtpd.web11.8415.1689296457682303110
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 13 Jul 2023 14:54:40 -0700
+ Thu, 13 Jul 2023 18:00:58 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=Wdx+jIX2;
- spf=pass (domain: gmail.com, ip: 209.85.214.181, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f181.google.com with SMTP id d9443c01a7336-1b8bbcfd89aso7319245ad.1
-        for <openembedded-devel@lists.openembedded.org>; Thu, 13 Jul 2023 14:54:40 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1689285279; x=1691877279;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=jmrTIM40aRylHpJIx3u40QsWxw+86ZhthWv6VOoXCBI=;
-        b=Wdx+jIX2FPKzmBRoe4NJkidmxC8sNYx6QIuaAV1+Ymg/HnQ23gokp+QsLhb4ourpDF
-         pqtBskmRcLpriZugq1fiLzgDUuKsnZVEQLZwD4s737vLVPJdCnnwoF+jjuTieUzTsjla
-         Yf+6mM2d45yP+LdpUyUMRATxqZbGduGvw7OL925jYQ4knz61bFToJaB3SFePw9rQZ6vl
-         1P8P9SolCcFOcaPe25OPXSRjZQCfKuOFoHlVj921Un1cN6ztfF0bVSQSMje0fdoKksq7
-         fRr3wKWlC0NErsE3/C5E06+A3GVgSoO+1lToGUejg8oqwh8GU+sploOLYpM7ZTXvwsmz
-         nlhw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1689285279; x=1691877279;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=jmrTIM40aRylHpJIx3u40QsWxw+86ZhthWv6VOoXCBI=;
-        b=Wx2MBO0g2G0uEQ7rTvEl/K0cxMBbh0xw5wrn7HybZBP6K5Wh5gc/VeNeRpiLTYQLOB
-         ydfWwMSKWCNHhWWK7Z36UkXLq6R8N6xdUEtAlL4aUibzJviUh43KBxODukk0e5KYqerW
-         YVid/atmGYydbEiwe1uy7q+DPussgsca+9BnVvKR20O/eLiQ8Jr+yi7nRU/lddcsqpq1
-         9OJBXxgH9J2H89LWBMO48S2GbdPs8SW7YNrhGam0Y3PVZOnJcn0kk06d5xigSPdtFhJr
-         pNyop9OOHLL6F1yAo+2YzuV6/6ZklHAviem8l5bjUO+H9O/B7t+GDW+eaEJlkF5pOW/3
-         alMw==
-X-Gm-Message-State: ABy/qLabdXIODclbROEtz9Nui13d726pyeNNR0Ky5eQgdPKNSTOgSOOo
-	cD7MHToUPIfAX20NrthI6ZReLKevNZ4=
-X-Google-Smtp-Source: APBJJlHYY5W0GNpENaGoR+xj3UibROFH3+Z0N5GCxevIU+y7/H+rrR93hwZD5TZ0jsIXVeARmExelw==
-X-Received: by 2002:a17:903:32c4:b0:1b8:95fc:d11 with SMTP id i4-20020a17090332c400b001b895fc0d11mr2521518plr.40.1689285279389;
-        Thu, 13 Jul 2023 14:54:39 -0700 (PDT)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9181:d380::5a1b])
-        by smtp.gmail.com with ESMTPSA id i19-20020a170902eb5300b001b7f9963febsm6369861pli.175.2023.07.13.14.54.38
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 13 Jul 2023 14:54:39 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
+ dkim=missing; spf=pass (domain: fujitsu.com, ip: 139.138.61.253, mailfrom: wangmy@fujitsu.com)
+X-IronPort-AV: E=McAfee;i="6600,9927,10770"; a="112593538"
+X-IronPort-AV: E=Sophos;i="6.01,204,1684767600"; 
+   d="scan'208";a="112593538"
+Received: from unknown (HELO oym-r2.gw.nic.fujitsu.com) ([210.162.30.90])
+  by esa8.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 14 Jul 2023 10:00:55 +0900
+Received: from oym-m2.gw.nic.fujitsu.com (oym-nat-oym-m2.gw.nic.fujitsu.com [192.168.87.59])
+	by oym-r2.gw.nic.fujitsu.com (Postfix) with ESMTP id 180B9CD7E3
+	for <openembedded-devel@lists.openembedded.org>; Fri, 14 Jul 2023 10:00:53 +0900 (JST)
+Received: from aks-ab2.gw.nic.fujitsu.com (aks-ab2.gw.nic.fujitsu.com [192.51.207.12])
+	by oym-m2.gw.nic.fujitsu.com (Postfix) with ESMTP id 35FD9BF3C6
+	for <openembedded-devel@lists.openembedded.org>; Fri, 14 Jul 2023 10:00:52 +0900 (JST)
+Received: from localhost.localdomain (unknown [10.167.225.33])
+	by aks-ab2.gw.nic.fujitsu.com (Postfix) with ESMTP id 45F1587870;
+	Fri, 14 Jul 2023 10:00:51 +0900 (JST)
+From: wangmy@fujitsu.com
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH] graphviz: Upgrade to 8.1.0 release
-Date: Thu, 13 Jul 2023 14:54:36 -0700
-Message-ID: <20230713215436.3619288-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.41.0
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Cc: Wang Mingyu <wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH] lastlog2: add new recipe
+Date: Fri, 14 Jul 2023 09:00:42 +0800
+Message-Id: <1689296444-28141-1-git-send-email-wangmy@fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
+X-TM-AS-GCONF: 00
+X-TM-AS-Product-Ver: IMSS-9.1.0.1408-9.0.0.1002-27750.003
+X-TM-AS-User-Approved-Sender: Yes
+X-TMASE-Version: IMSS-9.1.0.1408-9.0.1002-27750.003
+X-TMASE-Result: 10--1.574600-10.000000
+X-TMASE-MatchedRID: GQw6Xh/XS6US5iXdhf8hbs2CuVPkCNzuN5dqZcIK7Vgg9R3V8qg5xOz7
+	d6pPgEtr+Y0M++nrfr/K24Lrk00g7kwYXRRr2ymnfOaYwP8dcX74qCLIu0mtIK9j7aNnpjtl6o5
+	I451FHlqBkESMI05d4nF03j9r9uDDny8X/DSjpXxoMLOoNHsM9jK1/qdbjc7QeGHkpR2WBaLxGV
+	LD6h21AbPG2twrRn5MBzEnsRYJlw4vW+23dfanRZ4CIKY/Hg3AGdQnQSTrKGPEQdG7H66TyHEqm
+	8QYBtMO4cb0NcdeCVcfaXh+90tTbRxrjYHvDfTpkWSVzly/qcT/S1fdPzZu7+yv7drZYbJmeH1p
+	Smra1Xe7pnmqMPdN8BZ1Y8edzCkKgr6lqxbIXlHC3tMwY3ma2xUDj+dgUQVyTE7Co9fKv3w=
+X-TMASE-SNAP-Result: 1.821001.0001-0-1-22:0,33:0,34:0-0
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 13 Jul 2023 21:54:49 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103857
+ <openembedded-devel@lists.openembedded.org>; Fri, 14 Jul 2023 01:01:00 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103858
 
-Do not build pdf documentation, we do not have host tools needed for
-this to build
+From: Wang Mingyu <wangmy@fujitsu.com>
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- ...use_tcl-to-be-empty-string-if-tcl-is-disabled.patch | 10 +++++-----
- .../graphviz/{graphviz_2.50.0.bb => graphviz_8.1.0.bb} |  5 ++---
- 2 files changed, 7 insertions(+), 8 deletions(-)
- rename meta-oe/recipes-graphics/graphviz/{graphviz_2.50.0.bb => graphviz_8.1.0.bb} (96%)
+ .../lastlog2/lastlog2_1.1.0.bb                | 30 +++++++++++++++++++
+ 1 file changed, 30 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/lastlog2/lastlog2_1.1.0.bb
 
-diff --git a/meta-oe/recipes-graphics/graphviz/graphviz/0001-Set-use_tcl-to-be-empty-string-if-tcl-is-disabled.patch b/meta-oe/recipes-graphics/graphviz/graphviz/0001-Set-use_tcl-to-be-empty-string-if-tcl-is-disabled.patch
-index 6d1d441c57..99b53e2e12 100644
---- a/meta-oe/recipes-graphics/graphviz/graphviz/0001-Set-use_tcl-to-be-empty-string-if-tcl-is-disabled.patch
-+++ b/meta-oe/recipes-graphics/graphviz/graphviz/0001-Set-use_tcl-to-be-empty-string-if-tcl-is-disabled.patch
-@@ -11,7 +11,7 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
- 
- --- a/configure.ac
- +++ b/configure.ac
--@@ -1540,7 +1540,7 @@ AC_ARG_ENABLE(tcl,
-+@@ -1225,7 +1225,7 @@ AC_ARG_ENABLE(tcl,
-    [], [enable_tcl=yes])
-  
-  if test "x$enable_tcl" != "xyes"; then
-@@ -22,12 +22,12 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
-  if test "x$use_tcl" = "x"; then
- --- a/Makefile.am
- +++ b/Makefile.am
--@@ -19,7 +19,7 @@ pkginclude_HEADERS = $(top_builddir)/gra
-- man_MANS = graphviz.7
-+@@ -11,7 +11,7 @@ pkginclude_HEADERS = $(top_builddir)/gra
-+ dist_man_MANS = graphviz.7
-  
-  # $(subdirs) contains the list from: AC_CONFIG_SUBDIRS
---SUBDIRS = $(subdirs) lib plugin cmd tclpkg doc contrib share graphs rtest tests
--+SUBDIRS = $(subdirs) lib plugin cmd doc contrib share graphs rtest tests
-+-SUBDIRS = $(subdirs) lib plugin cmd tclpkg doc contrib share graphs tests
-++SUBDIRS = $(subdirs) lib plugin cmd doc contrib share graphs tests
-  
-  .PHONY: doxygen
-  doxygen:
-diff --git a/meta-oe/recipes-graphics/graphviz/graphviz_2.50.0.bb b/meta-oe/recipes-graphics/graphviz/graphviz_8.1.0.bb
-similarity index 96%
-rename from meta-oe/recipes-graphics/graphviz/graphviz_2.50.0.bb
-rename to meta-oe/recipes-graphics/graphviz/graphviz_8.1.0.bb
-index b63017576a..7ab15c9718 100644
---- a/meta-oe/recipes-graphics/graphviz/graphviz_2.50.0.bb
-+++ b/meta-oe/recipes-graphics/graphviz/graphviz_8.1.0.bb
-@@ -27,8 +27,7 @@ SRC_URI:append:class-target = "\
- SRC_URI:append:class-nativesdk = "\
-            file://graphviz-setup.sh \
- "
--
--SRC_URI[sha256sum] = "6b16bf990df114195be669773a1dae975dbbffada45e1de2849ddeb5851bb9a8"
-+SRC_URI[sha256sum] = "d593695fdaa8a19297523b679ad13d3ef2027b0b7f14cc2bc23e77969ed81565"
- 
- CVE_CHECK_IGNORE += "\
-     CVE-2014-9157 \
-@@ -37,7 +36,7 @@ CVE_CHECK_IGNORE += "\
- PACKAGECONFIG ??= "librsvg"
- PACKAGECONFIG[librsvg] = "--with-librsvg,--without-librsvg,librsvg"
- 
--EXTRA_OECONF:append = " PS2PDF=/bin/echo"
-+EXTRA_OECONF:append = " PS2PDF=/bin/echo --disable-man-pdfs"
- 
- EXTRA_OECONF:class-target = "\
-                 --with-expatincludedir=${STAGING_INCDIR} \
+diff --git a/meta-oe/recipes-extended/lastlog2/lastlog2_1.1.0.bb b/meta-oe/recipes-extended/lastlog2/lastlog2_1.1.0.bb
+new file mode 100644
+index 0000000000..cc60a46899
+--- /dev/null
++++ b/meta-oe/recipes-extended/lastlog2/lastlog2_1.1.0.bb
+@@ -0,0 +1,30 @@
++SUMMARY = "Y2038 safe version of lastlog"
++HOMEPAGE = "https://github.com/thkukuk/lastlog2"
++DESCRIPTION = "lastlog reports the last login of a given user or of all users who did ever login on a system."
++LICENSE = "BSD-2-Clause"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=020090a00b69dd2af9ab82eb0003ea2c"
++SECTION = "libs"
++
++SRCREV = "585153a577788c590370d20e40263b61238dfab3"
++
++SRC_URI = "git://github.com/thkukuk/lastlog2.git;branch=main;protocol=https"
++
++S = "${WORKDIR}/git"
++
++inherit meson pkgconfig systemd
++
++DEPENDS += " ${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'libpam', '', d)} sqlite3 "
++
++SYSTEMD_SERVICE:${PN} = "lastlog2-import.service"
++
++EXTRA_OEMESON = " -Dpamlibdir=${libdir}"
++
++do_install:append () {
++      # Fix makefile hardcoded path assumptions for systemd (assumes $prefix)
++      # without usrmerge distro feature enabled
++      install -d `dirname ${D}${systemd_unitdir}`
++      mv ${D}${prefix}/lib/systemd `dirname ${D}${systemd_unitdir}`
++}
++
++FILES:${PN} += " ${systemd_system_unitdir} "
++FILES:${PN} += " ${libdir} "
 -- 
-2.41.0
+2.34.1
 
 
