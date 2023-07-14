@@ -1,100 +1,84 @@
-Return-Path: <wangmy@fujitsu.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1FACAC001DE
-	for <webhook@archiver.kernel.org>; Fri, 14 Jul 2023 01:01:10 +0000 (UTC)
-Received: from esa12.hc1455-7.c3s2.iphmx.com (esa12.hc1455-7.c3s2.iphmx.com [139.138.37.100])
- by mx.groups.io with SMTP id smtpd.web11.8419.1689296462529218869
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E941DEB64DC
+	for <webhook@archiver.kernel.org>; Fri, 14 Jul 2023 03:33:00 +0000 (UTC)
+Received: from mail-pg1-f176.google.com (mail-pg1-f176.google.com [209.85.215.176])
+ by mx.groups.io with SMTP id smtpd.web10.10910.1689305575843094117
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 13 Jul 2023 18:01:03 -0700
+ Thu, 13 Jul 2023 20:32:55 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: fujitsu.com, ip: 139.138.37.100, mailfrom: wangmy@fujitsu.com)
-X-IronPort-AV: E=McAfee;i="6600,9927,10770"; a="103954394"
-X-IronPort-AV: E=Sophos;i="6.01,204,1684767600"; 
-   d="scan'208";a="103954394"
-Received: from unknown (HELO yto-r2.gw.nic.fujitsu.com) ([218.44.52.218])
-  by esa12.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 14 Jul 2023 10:00:59 +0900
-Received: from yto-m3.gw.nic.fujitsu.com (yto-nat-yto-m3.gw.nic.fujitsu.com [192.168.83.66])
-	by yto-r2.gw.nic.fujitsu.com (Postfix) with ESMTP id 6E21DC68E1
-	for <openembedded-devel@lists.openembedded.org>; Fri, 14 Jul 2023 10:00:57 +0900 (JST)
-Received: from aks-ab2.gw.nic.fujitsu.com (aks-ab2.gw.nic.fujitsu.com [192.51.207.12])
-	by yto-m3.gw.nic.fujitsu.com (Postfix) with ESMTP id 9A13DD9691
-	for <openembedded-devel@lists.openembedded.org>; Fri, 14 Jul 2023 10:00:56 +0900 (JST)
-Received: from localhost.localdomain (unknown [10.167.225.33])
-	by aks-ab2.gw.nic.fujitsu.com (Postfix) with ESMTP id C0457858BA;
-	Fri, 14 Jul 2023 10:00:55 +0900 (JST)
-From: wangmy@fujitsu.com
+ dkim=pass header.i=@gmail.com header.s=20221208 header.b=SGMvCgsP;
+ spf=pass (domain: gmail.com, ip: 209.85.215.176, mailfrom: raj.khem@gmail.com)
+Received: by mail-pg1-f176.google.com with SMTP id 41be03b00d2f7-53fbf2c42bfso1119620a12.3
+        for <openembedded-devel@lists.openembedded.org>; Thu, 13 Jul 2023 20:32:55 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20221208; t=1689305575; x=1691897575;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=2ft+jQ/KUbxOr+GLbHmOA6KnqIP6qcFgpV2BBeh95cQ=;
+        b=SGMvCgsPSW33xkBi4csu4UiGwkmmbRf/CeVXCmrYfmc2ikF9V1nufCpUAIKtGz22R6
+         VuAkbMbRPcgAI6DlUfb64vbieBgZXWC83/4GpsfLmwVMPrq1Doo0p4f56lM6kMAicZrF
+         aJGjqC4bAuoehSihEjCbE7nOCxiOLEM5ugAQ/0kEnuHg8HYjiZXam5zRVu5WW5HqGivg
+         kVNZx+gJIFotW/4O91/HuKUaE7/UxJ5gxQ2Z/697eCgNVSwF5k4ttymKKuNlcLGs40AW
+         2PidbuYosX7jGO8towNs6U2juD49Q/WlYRPWN6ZJgcb3caRKtt/9gsBIoiDKZlZhoZUS
+         Uu4A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20221208; t=1689305575; x=1691897575;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=2ft+jQ/KUbxOr+GLbHmOA6KnqIP6qcFgpV2BBeh95cQ=;
+        b=LlYAN9cHECf6JlF+En1Unog74O2385YQyOEuPadwMtrRxKF+PijOVnMND6yvbQteKR
+         PSHOuqe+mZL+7d45kPI0XW7Fe0Snd/xJ0jm3A9WmzWUMiJens6m4pVVaspsZtL1nrwqc
+         c0CxdJ0c0jWCoU5V9yR8nA+DRALDLYK1XligJtkUZ+3gYp6Um1OI+UTs/9ceLCgnUSVQ
+         AdDpDY6uXtMWns2ysa14rT9/tdV11prisUwiT075VJvGba7i9iXS7r9MAS1cZTQOqiDl
+         ROQfhYlKHIqrQpbnDEF75e9Lh9wj22aFiQRODb42QeOqZxAWfFx2mTvQFj80yT2GkqXQ
+         yGcA==
+X-Gm-Message-State: ABy/qLZqJQfSXymmu90kBS9NvaoWAu6d7jk2CMy4fQPKVnmJUjLtiG/u
+	QUjsyzmkIGosNTALPg1Cm6FKf+FaSoQ=
+X-Google-Smtp-Source: APBJJlGllKbOU2M8NpVk6NTbTEf0PDo3HZ0vd03/L9FA6D3hP0wvwuLp7zcUPjgT+LyQrd0gVAAQ4g==
+X-Received: by 2002:a17:902:8c82:b0:1b2:1a79:147d with SMTP id t2-20020a1709028c8200b001b21a79147dmr3338473plo.2.1689305574664;
+        Thu, 13 Jul 2023 20:32:54 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9181:d380::e974])
+        by smtp.gmail.com with ESMTPSA id e4-20020a170902744400b001b9ff5aa2e7sm4276390plt.239.2023.07.13.20.32.53
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 13 Jul 2023 20:32:54 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-oe] [PATCH] libyang: Fix install conflict when enable multilib.
-Date: Fri, 14 Jul 2023 09:00:43 +0800
-Message-Id: <1689296444-28141-2-git-send-email-wangmy@fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
-In-Reply-To: <1689296444-28141-1-git-send-email-wangmy@fujitsu.com>
-References: <1689296444-28141-1-git-send-email-wangmy@fujitsu.com>
-X-TM-AS-GCONF: 00
-X-TM-AS-Product-Ver: IMSS-9.1.0.1408-9.0.0.1002-27750.003
-X-TM-AS-User-Approved-Sender: Yes
-X-TMASE-Version: IMSS-9.1.0.1408-9.0.1002-27750.003
-X-TMASE-Result: 10--3.712100-10.000000
-X-TMASE-MatchedRID: hWRIiYV8xz+MPz8Goa6fXdl0i+WyI+91Urr7Qc5WhKiysPB8dBBorXKn
-	6DBj/gsEIvrftAIhWmLy9zcRSkKatU8HitdqBBn7lXePXNM4FjNS5VVMJCvragKJcjtscVQFvEZ
-	Og39Q8OPi8zVgXoAltsIJ+4gwXrEtJ0RPnyOnrZJ6pW6EZo3WgcVX/1MG9h5Q5+RL/04I7NuLJR
-	iaRDahFJ0R9aFmfqN+vggzCZjtyK+9bq2W7vHBcGg5xIc8IFzNZzA8Djn7XVVLv5Eyr/YIrqsDh
-	ztRXZ9Cm+LY9A78UVCLPa6Os9XH3IQhTU20ySbR
-X-TMASE-SNAP-Result: 1.821001.0001-0-1-22:0,33:0,34:0-0
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 1/2] emlog: Update to latest to fix build with 6.4 kernel
+Date: Thu, 13 Jul 2023 20:32:50 -0700
+Message-ID: <20230714033252.782768-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.41.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 14 Jul 2023 01:01:10 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103859
+ <openembedded-devel@lists.openembedded.org>; Fri, 14 Jul 2023 03:33:00 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103861
 
-From: Wang Mingyu <wangmy@fujitsu.com>
-
-Error: Transaction test error:
-  file /usr/include/libyang/config.h conflicts between attempted installs of libyang-dev-2.1.55-r0.core2_64 and lib32-libyang-dev-2.1.55-r0.i686
-
-The differences of config.h are as follows:
-@@ -27,8 +27,8 @@
- /** plugins */
- #define LYPLG_SUFFIX ".so"
- #define LYPLG_SUFFIX_LEN (sizeof LYPLG_SUFFIX - 1)
--#define LYPLG_TYPE_DIR "/usr/lib/libyang/types"
--#define LYPLG_EXT_DIR "/usr/lib/libyang/extensions"
-+#define LYPLG_TYPE_DIR "/usr/lib64/libyang/types"
-+#define LYPLG_EXT_DIR "/usr/lib64/libyang/extensions"
-
-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-oe/recipes-extended/libyang/libyang_2.1.55.bb | 6 +++++-
- 1 file changed, 5 insertions(+), 1 deletion(-)
+ meta-oe/recipes-core/emlog/emlog.inc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-extended/libyang/libyang_2.1.55.bb b/meta-oe/recipes-extended/libyang/libyang_2.1.55.bb
-index b1438c3b2b..bddf30bf6a 100644
---- a/meta-oe/recipes-extended/libyang/libyang_2.1.55.bb
-+++ b/meta-oe/recipes-extended/libyang/libyang_2.1.55.bb
-@@ -16,7 +16,7 @@ SRC_URI = "git://github.com/CESNET/libyang.git;branch=master;protocol=https \
+diff --git a/meta-oe/recipes-core/emlog/emlog.inc b/meta-oe/recipes-core/emlog/emlog.inc
+index 208b39acd4..0972aff32c 100644
+--- a/meta-oe/recipes-core/emlog/emlog.inc
++++ b/meta-oe/recipes-core/emlog/emlog.inc
+@@ -4,7 +4,7 @@ LICENSE = "GPL-2.0-only"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
+ 
+ SRC_URI = "git://github.com/nicupavel/emlog.git;protocol=https;branch=master"
+-SRCREV = "aee53e8dee862f35291242ba41b0ca88010f6c71"
++SRCREV = "a9bbf324fde131ff4cf064e32674086c4ced4dca"
+ 
  S = "${WORKDIR}/git"
  
- # Main dependencies
--inherit cmake pkgconfig lib_package ptest
-+inherit cmake pkgconfig lib_package ptest multilib_header
- DEPENDS = "libpcre2"
- DEPENDS += "${@bb.utils.contains('PTEST_ENABLED', '1', 'cmocka', '', d)}"
- 
-@@ -30,6 +30,10 @@ do_compile:prepend () {
-     fi
- }
- 
-+do_install:append () {
-+        oe_multilib_header  libyang/config.h
-+}
-+
- do_install_ptest () {
-     install -d ${D}${PTEST_PATH}/tests
-     cp -f ${B}/tests/utest_* ${D}${PTEST_PATH}/tests/
 -- 
-2.34.1
+2.41.0
 
 
