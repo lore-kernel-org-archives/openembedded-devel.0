@@ -2,136 +2,82 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D1BA7EB64DC
-	for <webhook@archiver.kernel.org>; Fri, 14 Jul 2023 22:04:58 +0000 (UTC)
-Received: from mail-oo1-f50.google.com (mail-oo1-f50.google.com [209.85.161.50])
- by mx.groups.io with SMTP id smtpd.web11.249.1689372290627479756
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6E86CC001B0
+	for <webhook@archiver.kernel.org>; Sat, 15 Jul 2023 19:17:17 +0000 (UTC)
+Received: from mail-pf1-f174.google.com (mail-pf1-f174.google.com [209.85.210.174])
+ by mx.groups.io with SMTP id smtpd.web11.3434.1689448634317680055
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 14 Jul 2023 15:04:50 -0700
+ Sat, 15 Jul 2023 12:17:14 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20221208 header.b=dSsOoS9A;
- spf=pass (domain: gmail.com, ip: 209.85.161.50, mailfrom: raj.khem@gmail.com)
-Received: by mail-oo1-f50.google.com with SMTP id 006d021491bc7-565a8d74daeso1476274eaf.1
-        for <openembedded-devel@lists.openembedded.org>; Fri, 14 Jul 2023 15:04:50 -0700 (PDT)
+ dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=Oi1fgHYI;
+ spf=pass (domain: gmail.com, ip: 209.85.210.174, mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f174.google.com with SMTP id d2e1a72fcca58-6687096c6ddso2001669b3a.0
+        for <openembedded-devel@lists.openembedded.org>; Sat, 15 Jul 2023 12:17:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1689372290; x=1691964290;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=rVLcij5Kn7caVnsxs6UnkEv4ZSRZ+Zneul+QhRdWdno=;
-        b=dSsOoS9Ana7kBjk5d3TvrEQ7sEDDJ3J48J/aD749QZaOeoD3iSkxHfLESOEEinrB6D
-         gbw69Dcfnv0+3LS+QZFU0d5w/S/h0PdXd01Eonf+LalwcRi/eG2oZQCxDUYGzpwYGS99
-         lRDM8U2RhIrFTbbJl0iudc4VXGSwmUaPpShA8qhlEJv6jMBiIT0p61gwIdMsOrEHPB4v
-         v5IUnk8s2/1+IQ3rkXHYI+k0fWuCD4X/kIVyOMCg4cwbGfXuQQBjTstQbp8iykZoFnA8
-         Jai+4/aIcX9qL0lCA2h8PWkNR4xP19Bx2f1f5KSWP5jyoeIVxpWcaMExP+ifUYTSGdtS
-         iIyw==
+        d=gmail.com; s=20221208; t=1689448633; x=1692040633;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=OkQW8j11JiPrHpOq753AiLcBk7fX8KKCjHWYisbe/W4=;
+        b=Oi1fgHYIFEZlODOtGtBOWyrfE2h/mT6MPWEJWWa7iOlW2iB9FzUlYNj/DFEVP6Yv/o
+         RbktxPo2s61NdTnGY+qEif5Qk3hE25zSKV4vbk1hpvsL2WtOpw8DhwGwX/fL4yP2oUZn
+         9e8FkjlLamj3SGORWT0skeETFJM0Z/2XeBektwyt9sZJdJ30+TvE/XvegL9Uss5qjz21
+         k81R8LURZEvTIh7roM5FkRmOkLfwxqZyfDzCJc1d/h0jxYWAUiWf0iNs3D32RFzlWZZw
+         lEabCQHYeUr+9ozrlA3LRYhFt69CIPeWDEqBLUva8BUjWK1qX5FjO+PQz8hnrnk4nB/J
+         wnzQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1689372290; x=1691964290;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=rVLcij5Kn7caVnsxs6UnkEv4ZSRZ+Zneul+QhRdWdno=;
-        b=dueJGttDKy0I2Ss1Q3hnqT94QwH7NY2+kvuIqtsz0lZc4hpXbyzT0mJDi1TkOBpyq8
-         EOC8xODaZufH6fMW8kOAby7ajkZYNeJ2XZLEhZe4fm/v8rCub2lfOMll+uak1Zl2fcv4
-         11hACXuaAxl9nvEsTzTNlciVsvSkBEVPbSLW7bJ7+yThvIm5REdl4TmE+zUjh3NBWjGT
-         OPS02f5WAfzHXsM+gPP4/OxGucQXY+Q5GfWYd6horJGLawdzd0gTNJlA4qv3ix6weqLG
-         hWKtopwl3irLPsCMamSYQh5ZiAwbANq+lT97kcTBJyPCk8FapXALj1/AqXVHlmEj9WJb
-         uzGA==
-X-Gm-Message-State: ABy/qLZscFUFK4q3tBqcTNdctva2j6lWI6Av0HY3oIYNuZoGg4Nxvpkv
-	wXHBbR5SR9kwp7MOgpcOfmRauRm2gnaRSZ8bTks0QKgribY=
-X-Google-Smtp-Source: APBJJlGq2BgUH+0kkhqapvwetikaLnBmv+ZKKP6BYBmAWXH6wslUQIsHAaCTsptZQl6PB4kYXQzBDkBjVy4PA6pZy1E=
-X-Received: by 2002:a4a:b5ca:0:b0:563:68e6:3be2 with SMTP id
- u10-20020a4ab5ca000000b0056368e63be2mr207743ooo.1.1689372289673; Fri, 14 Jul
- 2023 15:04:49 -0700 (PDT)
-MIME-Version: 1.0
-References: <1689296444-28141-1-git-send-email-wangmy@fujitsu.com> <1689296444-28141-3-git-send-email-wangmy@fujitsu.com>
-In-Reply-To: <1689296444-28141-3-git-send-email-wangmy@fujitsu.com>
+        d=1e100.net; s=20221208; t=1689448633; x=1692040633;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=OkQW8j11JiPrHpOq753AiLcBk7fX8KKCjHWYisbe/W4=;
+        b=iIiFji4HI6b0l9Nq3LlHVsgufr54XN1uZTwtzHlb+9TsTXk1OFjKDYhZaeZ75EpMYX
+         GbupuGqgDjokHdYeYuXmY6N1Q8LPll+8p1mSRtk4/PNp4K4G2BgHu2u1Zre4alL0RfHQ
+         rh2LgXiOtxx/5Dm5CLTelKlEC7ECUQZE19wNANGyRC4Jx0ojUuAk41ZNzkqCQK8tCiQP
+         FmsqzzbnfwDoGzsjzvjj0Qm3UrpmsdlpZCBdF9jS3TYA9saTp30oU7MythU7LQoLfZRV
+         rs/Im7syFu0hWkSgnftG6zdqVQj5JR+7Laz4sGYrOx4LKzaCelMl85lcxzs/LG8ywLkj
+         6G4g==
+X-Gm-Message-State: ABy/qLb/XyWyndyFfbUmXgWpk66WZKYGmXGBacvI3l5op/SUGXvIqXOZ
+	ssgjaZTUiUHGZfgY6B2k9JGIHlr53mA=
+X-Google-Smtp-Source: APBJJlFksj2BGyYseqc572BeXrNXtCSMTY7DkDFurDjCJbx9r0T69syWc6VWAQvS3wwSHrqu9H27Ag==
+X-Received: by 2002:a05:6a00:2e12:b0:67a:9208:87a with SMTP id fc18-20020a056a002e1200b0067a9208087amr7141530pfb.23.1689448633208;
+        Sat, 15 Jul 2023 12:17:13 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9181:d380::1069])
+        by smtp.gmail.com with ESMTPSA id e26-20020a62aa1a000000b006749c22d079sm9041781pff.167.2023.07.15.12.17.12
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sat, 15 Jul 2023 12:17:12 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 14 Jul 2023 15:04:23 -0700
-Message-ID: <CAMKF1srup6UtozS8i_i=gwcMAG1WO2zRyVZ_de6zLtSB9Lqx8Q@mail.gmail.com>
-Subject: Re: [oe] [meta-oe] [PATCH] wtmpdb: add new recipe
-To: wangmy <wangmy@fujitsu.com>
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-networking][PATCH] mdio-tools: Update to latest on trunk
+Date: Sat, 15 Jul 2023 12:17:10 -0700
+Message-ID: <20230715191710.2545420-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.41.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 14 Jul 2023 22:04:58 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103870
+ <openembedded-devel@lists.openembedded.org>; Sat, 15 Jul 2023 19:17:17 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103871
 
-fails to build with ptests
+This brings fixed for compiling kmod with linux 6.4+
 
-tests/tst-dlopen.p/tst-dlopen.c.o: file not recognized: file format
-not recognized
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ meta-networking/recipes-support/mdio-tools/mdio-tools.inc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-see - https://errors.yoctoproject.org/Errors/Details/716656/
+diff --git a/meta-networking/recipes-support/mdio-tools/mdio-tools.inc b/meta-networking/recipes-support/mdio-tools/mdio-tools.inc
+index 7afe1c56bd..46d0c1b4f1 100644
+--- a/meta-networking/recipes-support/mdio-tools/mdio-tools.inc
++++ b/meta-networking/recipes-support/mdio-tools/mdio-tools.inc
+@@ -5,4 +5,4 @@ LICENSE = "GPL-2.0-or-later"
+ LIC_FILES_CHKSUM = "file://${WORKDIR}/git/COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+ 
+ SRC_URI = "git://github.com/wkz/mdio-tools.git;protocol=https;branch=master"
+-SRCREV = "ee47c32d958ae0dcb9900b3b06654a8c08001331"
++SRCREV = "0dbfca13a094d20d736153c63161cf11b9ccf2d3"
+-- 
+2.41.0
 
-On Thu, Jul 13, 2023 at 6:01=E2=80=AFPM wangmy <wangmy@fujitsu.com> wrote:
->
-> From: Wang Mingyu <wangmy@fujitsu.com>
->
-> Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
-> ---
->  .../recipes-extended/wtmpdb/wtmpdb_0.7.1.bb   | 30 +++++++++++++++++++
->  1 file changed, 30 insertions(+)
->  create mode 100644 meta-oe/recipes-extended/wtmpdb/wtmpdb_0.7.1.bb
->
-> diff --git a/meta-oe/recipes-extended/wtmpdb/wtmpdb_0.7.1.bb b/meta-oe/re=
-cipes-extended/wtmpdb/wtmpdb_0.7.1.bb
-> new file mode 100644
-> index 0000000000..c3b97b0630
-> --- /dev/null
-> +++ b/meta-oe/recipes-extended/wtmpdb/wtmpdb_0.7.1.bb
-> @@ -0,0 +1,30 @@
-> +SUMMARY =3D "Y2038 safe version of wtmp"
-> +HOMEPAGE =3D "https://github.com/thkukuk/wtmpdb"
-> +DESCRIPTION =3D "last reports the login and logout times of users and wh=
-en the machine got rebooted."
-> +LICENSE =3D "BSD-2-Clause"
-> +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D020090a00b69dd2af9ab82eb0003e=
-a2c"
-> +SECTION =3D "libs"
-> +
-> +SRCREV =3D "502b19a41c7a3b1b5e70969b18088683825f71f8"
-> +
-> +SRC_URI =3D "git://github.com/thkukuk/wtmpdb.git;branch=3Dmain;protocol=
-=3Dhttps"
-> +
-> +S =3D "${WORKDIR}/git"
-> +
-> +inherit meson pkgconfig systemd
-> +
-> +DEPENDS +=3D " ${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'libpam', =
-'', d)} sqlite3 "
-> +
-> +SYSTEMD_SERVICE:${PN} =3D "wtmpdb-update-boot.service wtmpdb-rotate.serv=
-ice"
-> +
-> +EXTRA_OEMESON =3D " -Dpamlibdir=3D${libdir}"
-> +
-> +do_install:append () {
-> +      # Fix makefile hardcoded path assumptions for systemd (assumes $pr=
-efix)
-> +      # without usrmerge distro feature enabled
-> +      install -d `dirname ${D}${systemd_unitdir}`
-> +      mv ${D}${prefix}/lib/systemd `dirname ${D}${systemd_unitdir}`
-> +}
-> +
-> +FILES:${PN} +=3D " ${systemd_system_unitdir} "
-> +FILES:${PN} +=3D " ${libdir} "
-> --
-> 2.34.1
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#103860): https://lists.openembedded.org/g/openembedde=
-d-devel/message/103860
-> Mute This Topic: https://lists.openembedded.org/mt/100132965/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
-aj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
 
