@@ -1,92 +1,117 @@
-Return-Path: <tgamblin@baylibre.com>
+Return-Path: <jsbronder@cold-front.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 96BE6C04E69
-	for <webhook@archiver.kernel.org>; Mon, 17 Jul 2023 15:20:47 +0000 (UTC)
-Received: from mail-qk1-f179.google.com (mail-qk1-f179.google.com [209.85.222.179])
- by mx.groups.io with SMTP id smtpd.web10.11119.1689607239108737258
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2271CEB64DC
+	for <webhook@archiver.kernel.org>; Mon, 17 Jul 2023 17:12:11 +0000 (UTC)
+Received: from out2-smtp.messagingengine.com (out2-smtp.messagingengine.com [66.111.4.26])
+ by mx.groups.io with SMTP id smtpd.web11.520.1689613923245111643
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 17 Jul 2023 08:20:39 -0700
+ Mon, 17 Jul 2023 10:12:03 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="signature has expired" header.i=@baylibre-com.20221208.gappssmtp.com header.s=20221208 header.b=vMDGmQzc;
- spf=pass (domain: baylibre.com, ip: 209.85.222.179, mailfrom: tgamblin@baylibre.com)
-Received: by mail-qk1-f179.google.com with SMTP id af79cd13be357-768054797f7so364262885a.2
-        for <openembedded-devel@lists.openembedded.org>; Mon, 17 Jul 2023 08:20:38 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=baylibre-com.20221208.gappssmtp.com; s=20221208; t=1689607238; x=1690212038;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=TltUa9FvvwTnvcE01oJYNzY6frIYSQYUu7UD1u18Gc4=;
-        b=vMDGmQzcVBcG3gs0B4Uh1ZKIDWTbv33REDR2moI02EaCsDF2uEh+sZ3uj8yMzGp5j0
-         CYTCeQuKgEHKRxfzAUvDtV1QZeJb9u08Hl1Oedq9sN5HUEso/knz6qtWlzaS5p6z8NGg
-         y7laYvSf3HbZzmbareaukCB6SgzghT69obzIQ8+ParG/OPrylC7WowSFSnO+9UE5Izus
-         arx6AT4Mj6a5AZiQ3pdtyQdrYLvbRfdljhQH6by2Gs3XRxkwYI6B76PSDYsrb29rkKWF
-         HLG8/erWrVZGB0ip6dZxmBEhQJie4SAxEV6EVXRk9fOiw+Gl+NR0OlyG/XEpEKQZyzH8
-         WFaA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1689607238; x=1690212038;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=TltUa9FvvwTnvcE01oJYNzY6frIYSQYUu7UD1u18Gc4=;
-        b=gqIn57k+NvtUuZ9Uu6wjHW3XTzIbjeHU/K21kz8yAgFbHLTJS3Dg5EX2PyjQYKuys8
-         vty7v+SPu7h46sht7jAB46fu41iziP/q/cJyGiZTXX2Z6gSTMsoYehuhnf2seB+s4Rzp
-         6LsWL5RhEZx3mFWEopl8Ykwbs5Dj6/aum4Al+0T3WKFbIWVtAUqM0wNRQZ0jrI8B4QM9
-         bDQMiPF33wnadBSqCiYfojNK0t1910WQrPG0ow5GRAVt/5lMe4RXstp659oiKaKMGHLS
-         xWvpMjlQatl8lH72SLm7BLoZYka4ZrZ4Oo89ZwHUl7n8q8ZWyOecUxFDd2Si6nd0V2GB
-         CzOA==
-X-Gm-Message-State: ABy/qLY9xYfOJs+06sObbbOQ4jIoRsA4w7RBRFEbtJnjCzhS0YTZ2Vxm
-	jp4dvnTjZ+belG1uVZmGqWofI9hN9FiTomxiYxY=
-X-Google-Smtp-Source: APBJJlG8nPSROrLR9AhhFcW4Cg+mNCnda+r20e6YJP0pAuhwleNGyTp95/O4NTiPBV1VEkhdOAuiJg==
-X-Received: by 2002:a05:620a:470e:b0:765:ab6e:53fb with SMTP id bs14-20020a05620a470e00b00765ab6e53fbmr15463014qkb.40.1689607237943;
-        Mon, 17 Jul 2023 08:20:37 -0700 (PDT)
-Received: from megalith.cgocable.net ([2001:1970:5b1f:ab00:fc4e:ec42:7e5d:48dd])
-        by smtp.gmail.com with ESMTPSA id i8-20020a05620a144800b00767d2870e39sm6144226qkl.41.2023.07.17.08.20.37
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 17 Jul 2023 08:20:37 -0700 (PDT)
-From: Trevor Gamblin <tgamblin@baylibre.com>
+ dkim=fail reason="signature has expired" header.i=@cold-front.org header.s=mesmtp header.b=SCDqppXg;
+ spf=pass (domain: cold-front.org, ip: 66.111.4.26, mailfrom: jsbronder@cold-front.org)
+Received: from compute6.internal (compute6.nyi.internal [10.202.2.47])
+	by mailout.nyi.internal (Postfix) with ESMTP id 69E6B5C017E;
+	Mon, 17 Jul 2023 13:12:02 -0400 (EDT)
+Received: from mailfrontend2 ([10.202.2.163])
+  by compute6.internal (MEProxy); Mon, 17 Jul 2023 13:12:02 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cold-front.org;
+	 h=cc:cc:content-transfer-encoding:content-type:date:date:from
+	:from:in-reply-to:message-id:mime-version:reply-to:sender
+	:subject:subject:to:to; s=mesmtp; t=1689613922; x=1689700322;
+	 bh=urySfOrfAwxAt1XVqBjfaERsw/EIT3X3lSNc+h9wwCc=; b=SCDqppXgwLua
+	V8FXGsyZJtPhPRjy/v5BLO6oRnXEygUZsmZ6tMpcBZWQLE/9VCfp+G4QRZAEwUNt
+	JJM2OSJu/0RRbEuRldgfpzH3jeCvFe7unpIpau/iBWB2dtwhisG9phV22eVwTWGa
+	PJItAEwR+LkR70Ct4SEbgAApH1KxlXI=
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	messagingengine.com; h=cc:cc:content-transfer-encoding
+	:content-type:date:date:feedback-id:feedback-id:from:from
+	:in-reply-to:message-id:mime-version:reply-to:sender:subject
+	:subject:to:to:x-me-proxy:x-me-proxy:x-me-sender:x-me-sender
+	:x-sasl-enc; s=fm3; t=1689613922; x=1689700322; bh=urySfOrfAwxAt
+	1XVqBjfaERsw/EIT3X3lSNc+h9wwCc=; b=Tj5inzwkoBWrnuah8tJruWQIGD16a
+	oxluSfRPmeFpYHaFd8WnI/7mgmMCs7jUYf/lSiXPqD1aAqKmDsj3d4B+gM3+tYk2
+	aKcK8XDUk1JBgVF+BFtaRbiKVJOdejZheE1omq+96LxXnFqfMA+aToAUvErMIm3O
+	5gHrYVeLfODaGs2S7Bx753u3FiDXLp++RP4ppBxQ/TB2Er89xlrouPITQFINlmuv
+	vkbwTG3rba+1aqFFS4BNXQfX0w0Hsg6Me9gkH8dPXvduuv6LRpNtV9bQvMCVCxK/
+	+imw5H0BbO05WoGVoEbx3w70idFIvwt86jYNczI4ew0BmeCcezLdznkJw==
+X-ME-Sender: <xms:YXa1ZPXW3rrx8eWVo9iaMPWjBf6nMGiZRrUXkYl44Xe3-MJoe-ZJNw>
+    <xme:YXa1ZHnA062w5RraENevsiGuRK5sAmFIhae-2Ce4YcffAifM4pXD0N20Dv6EVCmIA
+    ctM_2dSpYBUUJeRQg>
+X-ME-Received: <xmr:YXa1ZLYBApd7gta2fX7hDRhLbFg41CtLBJnkwVvXzleyfC1im1nrKZXEwI8aDAq_-aFEaqLIFSdfso9IifQ8WUjIZRUHnLAsbRviKVL-qw>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedviedrgedvgdduuddtucetufdoteggodetrfdotf
+    fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
+    uceurghilhhouhhtmecufedttdenucenucfjughrpefhvfevufffkffoggfgsedtkeertd
+    ertddtnecuhfhrohhmpefluhhsthhinhcuuehrohhnuggvrhcuoehjshgsrhhonhguvghr
+    segtohhlugdqfhhrohhnthdrohhrgheqnecuggftrfgrthhtvghrnhepjeeghfeuteehje
+    eukeevuedugffgfeeiudehieeuvedtudduvdfhgeektdehkeffnecuffhomhgrihhnpehg
+    ihhtlhgrsgdrtghomhenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrih
+    hlfhhrohhmpehjshgsrhhonhguvghrsegtohhlugdqfhhrohhnthdrohhrgh
+X-ME-Proxy: <xmx:YXa1ZKWqD8bqWIttPz4HXITvBWljnT8GLfV-onRFPpc6AeRsHIE6YQ>
+    <xmx:YXa1ZJmqWwoN4viqOcVzNu9MNvP_lZ-NSIZeD07zRsBjPGn2Xx5Deg>
+    <xmx:YXa1ZHe1PzgUnPENGt5klcoG7m9agmGYH0gopCheq-_BGAIjmNPEUA>
+    <xmx:Yna1ZItf7ScxkVxD-PusB6tQqr8X1mzv3mcF-29bkYZuOEunLJvpXQ>
+Feedback-ID: iea0042cb:Fastmail
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Mon,
+ 17 Jul 2023 13:12:01 -0400 (EDT)
+From: Justin Bronder <jsbronder@cold-front.org>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-python][PATCH 7/9] python3-bandit: upgrade 1.7.4 -> 1.7.5
-Date: Mon, 17 Jul 2023 11:20:30 -0400
-Message-ID: <20230717152032.3161667-7-tgamblin@baylibre.com>
+Cc: Justin Bronder <jsbronder@cold-front.org>
+Subject: [meta-python][PATCH 1/2] python3-asyncinotify: upgrade 3.0.1 -> 4.0.2
+Date: Mon, 17 Jul 2023 13:11:34 -0400
+Message-ID: <20230717171134.17840-2-jsbronder@cold-front.org>
 X-Mailer: git-send-email 2.41.0
-In-Reply-To: <20230717152032.3161667-1-tgamblin@baylibre.com>
-References: <20230717152032.3161667-1-tgamblin@baylibre.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 17 Jul 2023 15:20:47 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103884
+ <openembedded-devel@lists.openembedded.org>; Mon, 17 Jul 2023 17:12:11 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103887
 
-Changelog: https://github.com/PyCQA/bandit/releases/tag/1.7.5
+c5590c5 Switch from GitHub to gitlab
+22b0ed7 make pass all mypy type checks
+abd15f8 add __weakref__ to inotify and watch
+5e57e0b add slots to all classes
+f907237 restore support to 3.6
+5269b9d improve documentation
+2512aa3 Merge branch '16-add-timeout-for-the-sync-version-of-get-sync_get' into 'master'
+5beff57 add sync_timeout
+c8f8653 fix readthedocs
+97056b9 remove package rule
+faebfa9 move test after package
+a75f116 version bump
+6b4921f rework docs
+35716a4 rework docs
+c51d603 fix test for deprecations
+ddd987c switch to pyproject.toml, test against all supported python versions
 
-Signed-off-by: Trevor Gamblin <tgamblin@baylibre.com>
+Signed-off-by: Justin Bronder <jsbronder@cold-front.org>
 ---
- .../python/{python3-bandit_1.7.4.bb => python3-bandit_1.7.5.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-bandit_1.7.4.bb => python3-bandit_1.7.5.bb} (82%)
+ ...n3-asyncinotify_3.0.1.bb => python3-asyncinotify_4.0.2.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-asyncinotify_3.0.1.bb => python3-asyncinotify_4.0.2.bb} (75%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-bandit_1.7.4.bb b/meta-python/recipes-devtools/python/python3-bandit_1.7.5.bb
-similarity index 82%
-rename from meta-python/recipes-devtools/python/python3-bandit_1.7.4.bb
-rename to meta-python/recipes-devtools/python/python3-bandit_1.7.5.bb
-index cfdbde9689..5e2a7e8bc5 100644
---- a/meta-python/recipes-devtools/python/python3-bandit_1.7.4.bb
-+++ b/meta-python/recipes-devtools/python/python3-bandit_1.7.5.bb
-@@ -2,7 +2,7 @@ SUMMARY = "Security oriented static analyser for python code."
- LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=34400b68072d710fecd0a2940a0d1658"
+diff --git a/meta-python/recipes-devtools/python/python3-asyncinotify_3.0.1.bb b/meta-python/recipes-devtools/python/python3-asyncinotify_4.0.2.bb
+similarity index 75%
+rename from meta-python/recipes-devtools/python/python3-asyncinotify_3.0.1.bb
+rename to meta-python/recipes-devtools/python/python3-asyncinotify_4.0.2.bb
+index 2f4adcea7a..08dc77bd17 100644
+--- a/meta-python/recipes-devtools/python/python3-asyncinotify_3.0.1.bb
++++ b/meta-python/recipes-devtools/python/python3-asyncinotify_4.0.2.bb
+@@ -3,9 +3,9 @@ HOMEPAGE = "https://gitlab.com/Taywee/asyncinotify"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=6ec941a1cd6616454970d03cb9c9e8f8"
  
--SRC_URI[sha256sum] = "2d63a8c573417bae338962d4b9b06fbc6080f74ecd955a092849e1e65c717bd2"
-+SRC_URI[sha256sum] = "bdfc739baa03b880c2d15d0431b31c658ffc348e907fe197e54e0389dd59e11e"
+-SRC_URI[sha256sum] = "da812bf2be6a76aac6670b766eec4564d9484da6595d3ce1f9bba8ba78c30445"
++SRC_URI[sha256sum] = "bcac19425b1b418bbbc4d31193ea3c39e24343cd7ddff2074ae7b599f1a04829"
  
- DEPENDS = "python3-pbr-native python3-git python3-pbr python3-pyyaml python3-six python3-stevedore"
+-inherit pypi setuptools3
++inherit pypi python_setuptools_build_meta
  
+ RDEPENDS:${PN} += " \
+     python3-asyncio \
 -- 
 2.41.0
 
