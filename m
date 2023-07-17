@@ -2,95 +2,87 @@ Return-Path: <tgamblin@baylibre.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C8640C001DC
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A4CB9C001B0
 	for <webhook@archiver.kernel.org>; Mon, 17 Jul 2023 15:20:37 +0000 (UTC)
-Received: from mail-qk1-f173.google.com (mail-qk1-f173.google.com [209.85.222.173])
- by mx.groups.io with SMTP id smtpd.web11.11193.1689607236272328901
+Received: from mail-qk1-f174.google.com (mail-qk1-f174.google.com [209.85.222.174])
+ by mx.groups.io with SMTP id smtpd.web11.11191.1689607235335086805
  for <openembedded-devel@lists.openembedded.org>;
  Mon, 17 Jul 2023 08:20:36 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="signature has expired" header.i=@baylibre-com.20221208.gappssmtp.com header.s=20221208 header.b=CriT7yTL;
- spf=pass (domain: baylibre.com, ip: 209.85.222.173, mailfrom: tgamblin@baylibre.com)
-Received: by mail-qk1-f173.google.com with SMTP id af79cd13be357-768197bad1cso196220085a.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 17 Jul 2023 08:20:36 -0700 (PDT)
+ dkim=fail reason="signature has expired" header.i=@baylibre-com.20221208.gappssmtp.com header.s=20221208 header.b=l/yNR113;
+ spf=pass (domain: baylibre.com, ip: 209.85.222.174, mailfrom: tgamblin@baylibre.com)
+Received: by mail-qk1-f174.google.com with SMTP id af79cd13be357-766b22593faso314686285a.2
+        for <openembedded-devel@lists.openembedded.org>; Mon, 17 Jul 2023 08:20:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=baylibre-com.20221208.gappssmtp.com; s=20221208; t=1689607235; x=1690212035;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=UJ8mB+yT+NlXcipVlwixzwMLeJcdJeEQXfbNIH9GqVY=;
-        b=CriT7yTLkvMcU4E/DyQqwE/ieUn8qvKzDrTFZ9GMWfizu7rIjo2xrdm+lT1GbfPG75
-         3gg9D4KXPCQlloYnIqfQYW2Shimh81RqG6wGugnsWQEoZXpjEGUBFe2Q/VIRYtAtFP3v
-         ppAbIXpwuHB3wdlmiAekXtz/ZD6CrrauRVU9u03P7tqZ/9t0S1DYrCRx2FzXBxXaU448
-         LKnfQPzmEZA4gMWdYDVraoXharGaLyephCs7lGhHxQxebuZlY7T8fA6MORJhGp4HXwjn
-         7H0+c5RMD2uCpfpgzN/SXNYgF5Q4r6Gc7JOAcfQHE1sdTGsjCnDIUytPqeXZ1RpM/I5K
-         JSEw==
+        d=baylibre-com.20221208.gappssmtp.com; s=20221208; t=1689607234; x=1690212034;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=X+2oNckU9qRAH+zsSWITsDfCuCC4zC7Ka5GYkoR6cdA=;
+        b=l/yNR113ZTrxQuj4i5ML/kYA3i3FKVT0rRfs3yo7ggUI2XsCacsH2dJKxxMngDVcLK
+         WaDdwYDsFRl5ZlAED8SDKm0B4guJoFhugg2DssX2RG38L7vsHW9gvITn0Hism/pIJQ6j
+         +s/SZYQfcBfdPVgCOTQfc1+oC2MnKqTc0cqEUyThinHG7T59gWr1lL4HrdchVg/MBw/P
+         tjOXgEleQIEQAeS1YQnZGBUgiVMzfJEDOvlI0Id/8Go3h/2f+hPLdcx1ukB2tz1p329x
+         IYL0nhid2BSpIZXgL1Sr3Njvsjc+gLmPRiI54aKObrjmqsFf4v8B2gzk0U89XY7tiNOj
+         zGAQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1689607235; x=1690212035;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=UJ8mB+yT+NlXcipVlwixzwMLeJcdJeEQXfbNIH9GqVY=;
-        b=bTPrhWEZZzB18qhx6kGpUfVEkwne3nqbX/Haqs1qdBA0oJrHtc/fAKo6l831jYmTON
-         QhrFkZgS0nREDmFIogQxONdymn/OPYcafl0qMFqeLo32joNNbgHEkIkeq1k6/pTALopC
-         MNIO6GVw7tCGJJ8gHS13NteDJVybOgaKBqHgwndLihScXBCwGi8yDElZEDlv+VKBAclI
-         5A1YBOFlirb6bcOyppHY5w8QTxrJ9SiI+KPQf6U5pkgtry7BilggrInVYIuGIwsvgB5B
-         IA+sWs+30YdcbX8gTKpbFk005k4G65Uc+eNTWfNzY2HooSHZt+JxODqt1CZj2OIlq6E1
-         fz+w==
-X-Gm-Message-State: ABy/qLaOd70FOmhNbOLfFqd9wyii+03ocRtZROOWi7fY2BGyK7T47c6F
-	uiu2zT0GlnaWVa8GeDcJZn2y46vTDE3LPTZdxPY=
-X-Google-Smtp-Source: APBJJlGpaRAIhlQ10LQqqFB1mHnIB8zyFFsQm+VEo4eJh5GUveomBIyQjSODS2jnSRwbW3jTpSY+sg==
-X-Received: by 2002:a05:620a:a19:b0:767:28ca:3f4 with SMTP id i25-20020a05620a0a1900b0076728ca03f4mr15138281qka.55.1689607235223;
-        Mon, 17 Jul 2023 08:20:35 -0700 (PDT)
+        d=1e100.net; s=20221208; t=1689607234; x=1690212034;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=X+2oNckU9qRAH+zsSWITsDfCuCC4zC7Ka5GYkoR6cdA=;
+        b=WimOSUTUHqy6gYMfPKyAdG/qWP+NfopJXheo0yNjfJOLqz3RYC7Ndr4gPR7mPeD5PL
+         Wo6/HXoHb+42F7m7ttwZ8NEv7opxkB4nBPu7ZgMPeOdQxUiVbg0+PCDl9//BixKa30xS
+         3lboJrhkzdDEZNUfwQjnMMDdljxIqxqploGbyCDIayacCDkCiT4CK8alzS3l1U6rFBSK
+         dWFveNo0V7WHxJcl2DuBRhGZKZK2Ju/APpp1canbY1fRQwVjjne68VgEiZKIL4FxheFv
+         Iw765QG7s40wJpNB3DDseO7bOM4vIAgvV2jx4BcMIG+aaLwfkKJUEJ6zRiVfaeB/Mxll
+         p5JA==
+X-Gm-Message-State: ABy/qLZeZ9op6e7piRUpcQrmtnby2Xf8tUyJzSP2TNxhvSew/bTJvZAe
+	fr1AEsy5izSJdGQ2+Il0ifBkv7jN5WW8RKz07w0=
+X-Google-Smtp-Source: APBJJlHw3qyRY9hP8dkDZagGJBrn3Kq9UyhH9Y1noWx3OJp2PZgYtkyC14jlKBXwaaMIaGNhIkp1Yw==
+X-Received: by 2002:a05:620a:4246:b0:767:451f:3eca with SMTP id w6-20020a05620a424600b00767451f3ecamr13701072qko.54.1689607233741;
+        Mon, 17 Jul 2023 08:20:33 -0700 (PDT)
 Received: from megalith.cgocable.net ([2001:1970:5b1f:ab00:fc4e:ec42:7e5d:48dd])
-        by smtp.gmail.com with ESMTPSA id i8-20020a05620a144800b00767d2870e39sm6144226qkl.41.2023.07.17.08.20.34
+        by smtp.gmail.com with ESMTPSA id i8-20020a05620a144800b00767d2870e39sm6144226qkl.41.2023.07.17.08.20.33
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 17 Jul 2023 08:20:34 -0700 (PDT)
+        Mon, 17 Jul 2023 08:20:33 -0700 (PDT)
 From: Trevor Gamblin <tgamblin@baylibre.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-python][PATCH 3/9] python3-argcomplete: upgrade 3.1.0 -> 3.1.1
-Date: Mon, 17 Jul 2023 11:20:26 -0400
-Message-ID: <20230717152032.3161667-3-tgamblin@baylibre.com>
+Subject: [meta-python][PATCH 1/9] python3-alembic: upgrade 1.10.4 -> 1.11.1
+Date: Mon, 17 Jul 2023 11:20:24 -0400
+Message-ID: <20230717152032.3161667-1-tgamblin@baylibre.com>
 X-Mailer: git-send-email 2.41.0
-In-Reply-To: <20230717152032.3161667-1-tgamblin@baylibre.com>
-References: <20230717152032.3161667-1-tgamblin@baylibre.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 17 Jul 2023 15:20:37 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103879
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103878
 
-Changelog: https://github.com/kislyuk/argcomplete/blob/develop/Changes.rst
-
-Changes for v3.1.1 (2023-06-11)
-
-- Search through asdf shims
-- Use ` as escape character in PowerShell (#434)
+There are numerous changes between 1.10.4 and 1.11.1, including several
+bug fixes. Changelog: https://github.com/sqlalchemy/alembic/releases
 
 Signed-off-by: Trevor Gamblin <tgamblin@baylibre.com>
 ---
- ...ython3-argcomplete_3.1.0.bb => python3-argcomplete_3.1.1.bb} | 2 +-
+ .../{python3-alembic_1.10.4.bb => python3-alembic_1.11.1.bb}    | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-argcomplete_3.1.0.bb => python3-argcomplete_3.1.1.bb} (83%)
+ rename meta-python/recipes-devtools/python/{python3-alembic_1.10.4.bb => python3-alembic_1.11.1.bb} (81%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-argcomplete_3.1.0.bb b/meta-python/recipes-devtools/python/python3-argcomplete_3.1.1.bb
-similarity index 83%
-rename from meta-python/recipes-devtools/python/python3-argcomplete_3.1.0.bb
-rename to meta-python/recipes-devtools/python/python3-argcomplete_3.1.1.bb
-index 859ef7b10f..504e7e2ebd 100644
---- a/meta-python/recipes-devtools/python/python3-argcomplete_3.1.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-argcomplete_3.1.1.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/kislyuk/argcomplete"
- LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=2ee41112a44fe7014dce33e26468ba93"
+diff --git a/meta-python/recipes-devtools/python/python3-alembic_1.10.4.bb b/meta-python/recipes-devtools/python/python3-alembic_1.11.1.bb
+similarity index 81%
+rename from meta-python/recipes-devtools/python/python3-alembic_1.10.4.bb
+rename to meta-python/recipes-devtools/python/python3-alembic_1.11.1.bb
+index 071f40bb03..feb2c419bc 100644
+--- a/meta-python/recipes-devtools/python/python3-alembic_1.10.4.bb
++++ b/meta-python/recipes-devtools/python/python3-alembic_1.11.1.bb
+@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=e3023b042cb6002cb398344b51c67093"
  
--SRC_URI[sha256sum] = "3a81445fa51c9875c36789ae5386d5e95c5c43d503963a0029a747aea74de1e3"
-+SRC_URI[sha256sum] = "6c4c563f14f01440aaffa3eae13441c5db2357b5eec639abe7c0b15334627dff"
+ inherit pypi setuptools3
  
- PYPI_PACKAGE = "argcomplete"
+-SRC_URI[sha256sum] = "295b54bbb92c4008ab6a7dcd1e227e668416d6f84b98b3c4446a2bc6214a556b"
++SRC_URI[sha256sum] = "6a810a6b012c88b33458fceb869aef09ac75d6ace5291915ba7fae44de372c01"
+ 
+ PYPI_PACKAGE = "alembic"
  
 -- 
 2.41.0
