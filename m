@@ -2,56 +2,56 @@ Return-Path: <tgamblin@baylibre.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 96BB7C04A94
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8A662C3DA40
 	for <webhook@archiver.kernel.org>; Mon, 17 Jul 2023 15:20:47 +0000 (UTC)
-Received: from mail-qk1-f174.google.com (mail-qk1-f174.google.com [209.85.222.174])
- by mx.groups.io with SMTP id smtpd.web11.11197.1689607238336298526
+Received: from mail-oo1-f48.google.com (mail-oo1-f48.google.com [209.85.161.48])
+ by mx.groups.io with SMTP id smtpd.web10.11120.1689607239517267384
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 17 Jul 2023 08:20:38 -0700
+ Mon, 17 Jul 2023 08:20:39 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="signature has expired" header.i=@baylibre-com.20221208.gappssmtp.com header.s=20221208 header.b=jurdLQOo;
- spf=pass (domain: baylibre.com, ip: 209.85.222.174, mailfrom: tgamblin@baylibre.com)
-Received: by mail-qk1-f174.google.com with SMTP id af79cd13be357-7679ea01e16so435753485a.2
-        for <openembedded-devel@lists.openembedded.org>; Mon, 17 Jul 2023 08:20:38 -0700 (PDT)
+ dkim=fail reason="signature has expired" header.i=@baylibre-com.20221208.gappssmtp.com header.s=20221208 header.b=lJ7Yy9o3;
+ spf=pass (domain: baylibre.com, ip: 209.85.161.48, mailfrom: tgamblin@baylibre.com)
+Received: by mail-oo1-f48.google.com with SMTP id 006d021491bc7-5657d8ecdd3so2935698eaf.1
+        for <openembedded-devel@lists.openembedded.org>; Mon, 17 Jul 2023 08:20:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=baylibre-com.20221208.gappssmtp.com; s=20221208; t=1689607237; x=1690212037;
+        d=baylibre-com.20221208.gappssmtp.com; s=20221208; t=1689607238; x=1690212038;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=Y2ibyVcbkPwx3IoI8U+wavc704/mfh8FjfSPYU9BBcc=;
-        b=jurdLQOo9sahC0bRI/GNPhEog3kjZTgzKihsRAqLDVsypZH5K6QJGS9+PWTZ4mLvJ0
-         ITwYmqKlR2xyxWrEP4nBU0A/5m+M8ip/jtTzS9aM9EKVmfwXIPfMOLHXCepaKdNMMXI8
-         ahFrSx+Zgb91wxCHhaCq3Y/uuUF37dfIzLmiUiLtHIbDaa+bauK11IQbLwQqO3qb2rUN
-         rirzEnHvwjOftyeFFRIF9koTLLM6Nv+MFJe6g0oj6VBUbsRZBA32OBRcLqDvB2uUgn4o
-         ICnCEzGrQL+w+wH1LuCREcOuz4i72cLeEB938m9ap+mNFiJq7CEwfa1JP/8sC2/++l3K
-         4l/g==
+        bh=CjH+LRMzONz0myFioG6BV9JjxIlp08spc6iwP+AD/O0=;
+        b=lJ7Yy9o30wXWWu8+IretsgfumRN8xYIoIqX7riljrAgywAfah10WdngFOEcyaVMgVx
+         mpm33ffajU0nxiZNFZsCnOiPPhqKR5ZSN/VJQPJYCwOVmOSo2HpWB8nzUqg7CBuG0qtj
+         2fA1pJn7ojYQtGCwKbR1en445Gl+pIQipKekTBulAwDWidtRsu4tjDnB23Pm0NZT2MtL
+         RxifGjmGlXHisPuD+PV9fK2A/qdlTKbaRccNXc6MRwgY3wu+azrS0dEJkDjaqXDjYLLS
+         tVYXUIbK6ovhXyYtIqmJAjFPgL6H/gpAr9bdjVEIFkDOA29kCPJUlLBz9VEou6qNFHlh
+         r/GQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1689607237; x=1690212037;
+        d=1e100.net; s=20221208; t=1689607238; x=1690212038;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=Y2ibyVcbkPwx3IoI8U+wavc704/mfh8FjfSPYU9BBcc=;
-        b=T/9UkWu/vdbmJBKI4GPH8Polh250KY3J947ahBULvZ1gvNJHEdhr6tpZJvdUPCasD4
-         KXYVfokSOYXi9+GBpfZOg+lT8eQPRLViwSYzr8USsVf5NgH6vhRFoXkRS+lE60VcdyMN
-         JCZHcA61xEeaigzBzsRR7F/g9U86IcV79ukRVVVGtj+W7S4uCLMKa4g2kIZSXACO4XoZ
-         lvrfZzTtP4cRliYVM51matjAOG8O89PUzsDDI0cs9c8khOsI0QAMVNnB/Hr7zTwmr218
-         LxvzFOQ3BfuW/dl63iiTDcKxdcEKM29CtoRNPnbuhX0W/8kxxbClWBZYlsO8J4riSnYt
-         evNg==
-X-Gm-Message-State: ABy/qLZtTx/evYpX2qLneHcHhz/+sCbJH7VRWRUcLNTourYOofiG4OgS
-	1Hn0nhoaOQNc394gU/pvMp9z8CoujQvwlRN6WWI=
-X-Google-Smtp-Source: APBJJlGOHdOOPQaNzKZ3KzXSE15dS8Advr9QVeizk+noHg/CFxzLpYkS5oRH7gANvrz6xbeVabydRQ==
-X-Received: by 2002:a05:620a:244a:b0:767:dd02:e908 with SMTP id h10-20020a05620a244a00b00767dd02e908mr15838383qkn.64.1689607237243;
-        Mon, 17 Jul 2023 08:20:37 -0700 (PDT)
+        bh=CjH+LRMzONz0myFioG6BV9JjxIlp08spc6iwP+AD/O0=;
+        b=TOvSkdefpxQeCCgBKP8dnONK8o0yjR3DIJ9D7N0xZA4+sJljJ67iuK9apq0j09rWLU
+         yqpoPWa5LuMMW/y4aYQk7zmxdZszYYWm3NZi2ksZOkeoNa2MCsQuToYXF0kVMGKAIfED
+         lRI7VZu/Wt7QZxR9txa1JY0r+3SqfakPzj5CPEWXKyxyu/l5Ra3SkWjwx0DBqIeH0pwA
+         dZKbjhtw8FhN05GtBjL4MhdF3qTI4+4rdcbQ0ml+2JK4lfG9e+T8/sugU2KV3I6sluv/
+         4ex8Jk2ucIVC4qMZwvOtzU1DV5F76Vkc2l+l071JB79vsaxEwQD2mMb/Cb470khZ6oTS
+         YW/A==
+X-Gm-Message-State: ABy/qLb7wQXVPkpuyfXAOtLIg6FPOc+wvTm2qzF3QF5Kcoe5ryN5J2ET
+	sV91PnbpWetN91OHYF+sj+2h/M7YcfAjEr5A9Sg=
+X-Google-Smtp-Source: APBJJlGnAH4UmFyl4DxaqIaJZY9cceccuHdPIgcPKUy5OQGU5V3YPyYXKEJZa6JRYCFs1YbBONzJsg==
+X-Received: by 2002:a05:6808:1645:b0:3a3:7c33:9a0d with SMTP id az5-20020a056808164500b003a37c339a0dmr11220501oib.48.1689607238569;
+        Mon, 17 Jul 2023 08:20:38 -0700 (PDT)
 Received: from megalith.cgocable.net ([2001:1970:5b1f:ab00:fc4e:ec42:7e5d:48dd])
-        by smtp.gmail.com with ESMTPSA id i8-20020a05620a144800b00767d2870e39sm6144226qkl.41.2023.07.17.08.20.36
+        by smtp.gmail.com with ESMTPSA id i8-20020a05620a144800b00767d2870e39sm6144226qkl.41.2023.07.17.08.20.38
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 17 Jul 2023 08:20:37 -0700 (PDT)
+        Mon, 17 Jul 2023 08:20:38 -0700 (PDT)
 From: Trevor Gamblin <tgamblin@baylibre.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-python][PATCH 6/9] python3-autobahn: upgrade 23.6.1 -> 23.6.2
-Date: Mon, 17 Jul 2023 11:20:29 -0400
-Message-ID: <20230717152032.3161667-6-tgamblin@baylibre.com>
+Subject: [meta-python][PATCH 8/9] python3-bandit: add python3-rich to RDEPENDS
+Date: Mon, 17 Jul 2023 11:20:31 -0400
+Message-ID: <20230717152032.3161667-8-tgamblin@baylibre.com>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20230717152032.3161667-1-tgamblin@baylibre.com>
 References: <20230717152032.3161667-1-tgamblin@baylibre.com>
@@ -61,36 +61,35 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 17 Jul 2023 15:20:47 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103883
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103885
 
-Changelog: https://github.com/crossbario/autobahn-python/blob/master/docs/changelog.rst
-
-Changes:
-
-- fix: use regular PyPI bitarray>=2.7.5 rather than from GitHub master
+bandit wasn't imported properly without the rich module, so add it.
 
 Signed-off-by: Trevor Gamblin <tgamblin@baylibre.com>
 ---
- .../{python3-autobahn_23.6.1.bb => python3-autobahn_23.6.2.bb}  | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-autobahn_23.6.1.bb => python3-autobahn_23.6.2.bb} (86%)
+ .../recipes-devtools/python/python3-bandit_1.7.5.bb    | 10 +++++++++-
+ 1 file changed, 9 insertions(+), 1 deletion(-)
 
-diff --git a/meta-python/recipes-devtools/python/python3-autobahn_23.6.1.bb b/meta-python/recipes-devtools/python/python3-autobahn_23.6.2.bb
-similarity index 86%
-rename from meta-python/recipes-devtools/python/python3-autobahn_23.6.1.bb
-rename to meta-python/recipes-devtools/python/python3-autobahn_23.6.2.bb
-index dc11b85dab..54c8f23fc3 100644
---- a/meta-python/recipes-devtools/python/python3-autobahn_23.6.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-autobahn_23.6.2.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = "http://crossbar.io/autobahn"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=3e2c2c2cc2915edc5321b0e6b1d3f5f8"
+diff --git a/meta-python/recipes-devtools/python/python3-bandit_1.7.5.bb b/meta-python/recipes-devtools/python/python3-bandit_1.7.5.bb
+index 5e2a7e8bc5..bccdf284e5 100644
+--- a/meta-python/recipes-devtools/python/python3-bandit_1.7.5.bb
++++ b/meta-python/recipes-devtools/python/python3-bandit_1.7.5.bb
+@@ -8,6 +8,14 @@ DEPENDS = "python3-pbr-native python3-git python3-pbr python3-pyyaml python3-six
  
--SRC_URI[sha256sum] = "ce6e540402e3524ca46c55a1bc46255225969b5837ca792ea5415d21ac571034"
-+SRC_URI[sha256sum] = "ec9421c52a2103364d1ef0468036e6019ee84f71721e86b36fe19ad6966c1181"
+ inherit setuptools3 pypi
  
- inherit pypi setuptools3
+-RDEPENDS:${PN} += "python3-modules python3-git python3-pbr python3-pyyaml python3-six python3-stevedore"
++RDEPENDS:${PN} += "\
++        python3-git \
++        python3-modules \
++        python3-pbr \
++        python3-pyyaml \
++        python3-rich \
++        python3-six \
++        python3-stevedore \
++        "
  
+ BBCLASSEXTEND = "native"
 -- 
 2.41.0
 
