@@ -2,56 +2,56 @@ Return-Path: <tgamblin@baylibre.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A4C7FEB64DC
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A5CB7C001DF
 	for <webhook@archiver.kernel.org>; Mon, 17 Jul 2023 15:20:37 +0000 (UTC)
-Received: from mail-qk1-f174.google.com (mail-qk1-f174.google.com [209.85.222.174])
- by mx.groups.io with SMTP id smtpd.web10.11117.1689607235761453476
+Received: from mail-qk1-f173.google.com (mail-qk1-f173.google.com [209.85.222.173])
+ by mx.groups.io with SMTP id smtpd.web10.11118.1689607236802520048
  for <openembedded-devel@lists.openembedded.org>;
  Mon, 17 Jul 2023 08:20:36 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="signature has expired" header.i=@baylibre-com.20221208.gappssmtp.com header.s=20221208 header.b=Ui867Zko;
- spf=pass (domain: baylibre.com, ip: 209.85.222.174, mailfrom: tgamblin@baylibre.com)
-Received: by mail-qk1-f174.google.com with SMTP id af79cd13be357-7680e3910dfso301237385a.0
-        for <openembedded-devel@lists.openembedded.org>; Mon, 17 Jul 2023 08:20:35 -0700 (PDT)
+ dkim=pass header.i=@baylibre-com.20221208.gappssmtp.com header.s=20221208 header.b=QeTWj/IF;
+ spf=pass (domain: baylibre.com, ip: 209.85.222.173, mailfrom: tgamblin@baylibre.com)
+Received: by mail-qk1-f173.google.com with SMTP id af79cd13be357-7659db6339eso196871785a.1
+        for <openembedded-devel@lists.openembedded.org>; Mon, 17 Jul 2023 08:20:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=baylibre-com.20221208.gappssmtp.com; s=20221208; t=1689607234; x=1690212034;
+        d=baylibre-com.20221208.gappssmtp.com; s=20221208; t=1689607236; x=1690212036;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=vkBqDBcljo6zaelsoREwbSOR7zZycxuah/S7gDYrQSQ=;
-        b=Ui867ZkooUM9Pui42kH4NThYX0Y/7Z1GGbXI/zCuaLbhPhIcLAeMS0bQm6oJnHNmuu
-         LZNr0aJuhIay0SgdkgsxwtkKuGAwSu4nZ2dXpSuz+ey2YcAfjHDdSzdAxLAexJH7F+uO
-         xDexnNh6dqzCfNE2U+RFtrf6dNWWNQY/lr4B91xh11jMHjce/6JJGKLYBRilST5BHJPM
-         dDABrukFyz23j9hsMs4geKYi5w1IxJRuo/0fBHqXC0dvV3rgJwwQr6pE+wEDcuwnX06r
-         F8r/VhAS4T3+13BSZZ+GT5SpgJBTyCyAnl//ZawYXGUREGfbUkV3AXevJ+YKwPmJNUsp
-         FxrA==
+        bh=Sx2lLh1FZU4JDP3L5KPD0Fv5Bw1RgqTghBKslp1R5Rs=;
+        b=QeTWj/IFEpDdPREtZcB0GdEUt6KN27XqrTekCEGXCH7muba2gZNXgTZID8Y1LPcPIW
+         yc578MSbCGSRcNRNA2EBPlZgmA7cQRP9VqNKu14Vnfli7TINbg+nXHLG6zHUa+xj4rAs
+         v9m4MM7lgxaivoJTOVJ6cN/vt0wEg+0cCOIz/NVTSjpNnXwyE3fRnTWg5RTSiSyL4Zag
+         DQ+rBDv+B7KwBpex40WmzHipxUJTKsHbMUsPTM/ZZr7zF1pipSPIMBJ1PhM3eiv8FjuE
+         jAloq5nHNrCx4BlQ3UbVB530EqatS6N/kn2ckINcxPeIqIcJu0VuUmGo3kUWLPw0lXdZ
+         5EPw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1689607234; x=1690212034;
+        d=1e100.net; s=20221208; t=1689607236; x=1690212036;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=vkBqDBcljo6zaelsoREwbSOR7zZycxuah/S7gDYrQSQ=;
-        b=Q7fkT0ltbQ77aNvJqsN+kqq13g+1vwJmtucmHbIdw7sQ6hgZvi6JPnRWgPvKC0sHbB
-         xslJCWsSERFIz19ACgR8bjmI+t6keLVRDvOvq2DFr/hQMpFUgZBs5DwMOWcdwXX7WcMg
-         Soez7PIgWx2QyyCxRX2Tw/hI+RkpFPOnYmGDwm/7RVw+zNdG5K+rUgqRZaQNlalDZwVw
-         V/YqKpy+6Ha/S6UcxMg3x6ZZwDoMde0HbUyCVLuau9nkYqUhlEVFblrfZUWXc45dTRi0
-         gV0fuztbHIynTLvCkA9VmG/F4zGHZoCeEcfXc4w4P5AZO9e1Do62PpmPElXf+4RUEo2l
-         6GIQ==
-X-Gm-Message-State: ABy/qLYq1xRwjPNSNIn0bnd6R5EZmyfi6OXFbidlTE0e/K3vADgsKhOs
-	tIFwNcVMeU0hUJ+UW6ozx/+WyauCjXO5EbTABFc=
-X-Google-Smtp-Source: APBJJlHIEblnyKl1ZnsSjp8pKO1aLdIeMxFljJC06tNvK3mruz17BqE+DsPIepUnw+ZQr5iTHf7KkA==
-X-Received: by 2002:a05:620a:2847:b0:765:ada8:e938 with SMTP id h7-20020a05620a284700b00765ada8e938mr18044567qkp.22.1689607234540;
-        Mon, 17 Jul 2023 08:20:34 -0700 (PDT)
+        bh=Sx2lLh1FZU4JDP3L5KPD0Fv5Bw1RgqTghBKslp1R5Rs=;
+        b=H2enQ0P45xeniwF9cut8HwwXzzNJwDbclZ8fwWuOcKOkHrCh6ZIAfDmbGBD1rTGE33
+         0C5Au7p0rtf2Mj59dbxhBr9kVFe3UxqBRr2EFf48xJ5g0GmDeaFhV1M7Gf63wYWSii0T
+         vgGzj9equglbnpwvN4IawiF6jm0N263OSAlMxu3ZqNmAIlsfhH0DJiTTHvVJpxQ3bkdv
+         AnWSomuRywpcA3ajazTzB9bV4P/i7MwKV0KW4WL4ZMgzyB2sLoKUqQ/Vd1ufvsCJyxl0
+         2Qyc0rHs4EoPJC+afRlTpjgEg/uEC3h3pYBj/l7a3Sc+e6tJgWY6SeItyF2WluYtcnmn
+         WbdA==
+X-Gm-Message-State: ABy/qLaY2i1t0/Tl2lcmzZbNmvYOceeKSvISz3qnLSTAPsA2M3uC/WJU
+	5GK/KDb/WNBbWQYkd4Qcxfynsv57edm5bSgSsC8=
+X-Google-Smtp-Source: APBJJlEQ3sLXpYujlyTAz+0UgMZB8yBwZarOee/mZe9LQGtaa1K+1ARkEhxt1Q9R3oVhbR1tPcTFmA==
+X-Received: by 2002:a05:620a:29c9:b0:767:6cd5:ec8b with SMTP id s9-20020a05620a29c900b007676cd5ec8bmr13245123qkp.27.1689607235852;
+        Mon, 17 Jul 2023 08:20:35 -0700 (PDT)
 Received: from megalith.cgocable.net ([2001:1970:5b1f:ab00:fc4e:ec42:7e5d:48dd])
-        by smtp.gmail.com with ESMTPSA id i8-20020a05620a144800b00767d2870e39sm6144226qkl.41.2023.07.17.08.20.33
+        by smtp.gmail.com with ESMTPSA id i8-20020a05620a144800b00767d2870e39sm6144226qkl.41.2023.07.17.08.20.35
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 17 Jul 2023 08:20:34 -0700 (PDT)
+        Mon, 17 Jul 2023 08:20:35 -0700 (PDT)
 From: Trevor Gamblin <tgamblin@baylibre.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-python][PATCH 2/9] python3-sqlalchemy: upgrade 2.0.15 -> 2.0.19
-Date: Mon, 17 Jul 2023 11:20:25 -0400
-Message-ID: <20230717152032.3161667-2-tgamblin@baylibre.com>
+Subject: [meta-python][PATCH 4/9] python3-arpeggio: upgrade 2.0.0 -> 2.0.2
+Date: Mon, 17 Jul 2023 11:20:27 -0400
+Message-ID: <20230717152032.3161667-4-tgamblin@baylibre.com>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20230717152032.3161667-1-tgamblin@baylibre.com>
 References: <20230717152032.3161667-1-tgamblin@baylibre.com>
@@ -61,31 +61,40 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 17 Jul 2023 15:20:37 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103880
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103881
 
-Changelog: https://docs.sqlalchemy.org/en/20/changelog/changelog_20.html
+Changelog: https://github.com/textX/Arpeggio/releases
+
+2.0.2 (released: 2023-07-09)
+
+- fix: drop deprecated setup_requires and tests_require #116. Thanks @kloczek.
+
+2.0.1 (released: 2023-07-09)
+
+- fix: replace \n with \\n in error reports for matches #99. Thanks
+@mettta and @stanislaw.
 
 Signed-off-by: Trevor Gamblin <tgamblin@baylibre.com>
 ---
- ...ython3-sqlalchemy_2.0.15.bb => python3-sqlalchemy_2.0.19.bb} | 2 +-
+ .../{python3-arpeggio_2.0.0.bb => python3-arpeggio_2.0.2.bb}    | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-sqlalchemy_2.0.15.bb => python3-sqlalchemy_2.0.19.bb} (87%)
+ rename meta-python/recipes-devtools/python/{python3-arpeggio_2.0.0.bb => python3-arpeggio_2.0.2.bb} (83%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-sqlalchemy_2.0.15.bb b/meta-python/recipes-devtools/python/python3-sqlalchemy_2.0.19.bb
-similarity index 87%
-rename from meta-python/recipes-devtools/python/python3-sqlalchemy_2.0.15.bb
-rename to meta-python/recipes-devtools/python/python3-sqlalchemy_2.0.19.bb
-index e6f0d64293..a2cf00dfd3 100644
---- a/meta-python/recipes-devtools/python/python3-sqlalchemy_2.0.15.bb
-+++ b/meta-python/recipes-devtools/python/python3-sqlalchemy_2.0.19.bb
-@@ -4,7 +4,7 @@ HOMEPAGE = "http://www.sqlalchemy.org/"
+diff --git a/meta-python/recipes-devtools/python/python3-arpeggio_2.0.0.bb b/meta-python/recipes-devtools/python/python3-arpeggio_2.0.2.bb
+similarity index 83%
+rename from meta-python/recipes-devtools/python/python3-arpeggio_2.0.0.bb
+rename to meta-python/recipes-devtools/python/python3-arpeggio_2.0.2.bb
+index 96d6de6a69..1a48a88c29 100644
+--- a/meta-python/recipes-devtools/python/python3-arpeggio_2.0.0.bb
++++ b/meta-python/recipes-devtools/python/python3-arpeggio_2.0.2.bb
+@@ -3,7 +3,7 @@ HOMEPAGE = "https://pypi.org/project/Arpeggio/"
  LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=b707d50badb798e1d897f2c8f649382d"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=33b8d1ba459a2fa4d801acfd1d1b7ceb"
  
--SRC_URI[sha256sum] = "2e940a8659ef870ae10e0d9e2a6d5aaddf0ff6e91f7d0d7732afc9e8c4be9bbc"
-+SRC_URI[sha256sum] = "77a14fa20264af73ddcdb1e2b9c5a829b8cc6b8304d0f093271980e36c200a3f"
+-SRC_URI[sha256sum] = "d6b03839019bb8a68785f9292ee6a36b1954eb84b925b84a6b8a5e1e26d3ed3d"
++SRC_URI[sha256sum] = "c790b2b06e226d2dd468e4fbfb5b7f506cec66416031fde1441cf1de2a0ba700"
  
- PYPI_PACKAGE = "SQLAlchemy"
+ PYPI_PACKAGE = "Arpeggio"
  inherit pypi setuptools3
 -- 
 2.41.0
