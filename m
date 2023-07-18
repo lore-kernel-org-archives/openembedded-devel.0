@@ -2,110 +2,135 @@ Return-Path: <Martin.Jansa@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 79C0FEB64DC
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 78463EB64DA
 	for <webhook@archiver.kernel.org>; Tue, 18 Jul 2023 12:10:19 +0000 (UTC)
 Received: from mail-ej1-f48.google.com (mail-ej1-f48.google.com [209.85.218.48])
- by mx.groups.io with SMTP id smtpd.web11.5908.1689682213559094538
+ by mx.groups.io with SMTP id smtpd.web11.5912.1689682214846227432
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 18 Jul 2023 05:10:13 -0700
+ Tue, 18 Jul 2023 05:10:15 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=lQR/eau+;
+ dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=DJz+MN/u;
  spf=pass (domain: gmail.com, ip: 209.85.218.48, mailfrom: martin.jansa@gmail.com)
-Received: by mail-ej1-f48.google.com with SMTP id a640c23a62f3a-986d8332f50so733451366b.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 18 Jul 2023 05:10:13 -0700 (PDT)
+Received: by mail-ej1-f48.google.com with SMTP id a640c23a62f3a-9926623e367so796887166b.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 18 Jul 2023 05:10:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1689682212; x=1692274212;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=ESg5SOJgC73TkMKhb9XAgQDWWCG2yzwU83duUgBOMtk=;
-        b=lQR/eau+i3YcC1dvl7pUdgdvstntwuxtoWoOqD9PL+2UaW+IVEAsLlY07SbyOAfqka
-         nC7RIuB1h5Ovqoi22woQpxr/f/MfattNqwdJGQJadk4E0FjqXMXn+Jk5dxkRKl2Hf68N
-         WhzN4IDB7dZsiQCjQT4Dyk/s+AmB9GgkdYWZIW6IcCJkexLiGsRUhuQOa5kOJ70v73xO
-         LqSQBFmdr5D72+AGC8Krep8U20pxJ+d4NC7i1VOQqivxdooqh9/h3fuPKmiFQ9fX8P3J
-         STwPQSWV5HJPRTfkuLiFv00jZREr1dsOIlDvF3azvhQRd4Jc+kFPs3CP+mzCQ0CLsXFi
-         uc/w==
+        d=gmail.com; s=20221208; t=1689682213; x=1692274213;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=gAu45IMlhll2V+T7jsPZQ3vKeMSHlWZ7MV1AhHqMC3E=;
+        b=DJz+MN/uaSciCz2/Tt8mEOnrHuF2fyn5AH0+RN4PaSJxX+811vEVpy6VaLFO0vDNEu
+         Wy2KOuG0Fguh5LAc7mcH02wgCF6DYPUXRKc9qtpZ1HmtQZRNrxahkVUV6I6c5dNLSkhr
+         lmteg48K3UpmnzPRD1eTPmB19N77nNIbAVaGLhlTMEkX8gZhUo9gEJdUP9ydHUmFx0Tz
+         WeZI594jUWjqi7FveCbkt/7md3830/d7sonbk/LW0YA4Wlk5J9eTMptCX7FZoCuQOul5
+         w9OdR/CzL0CTob/P6ASTynxA/2NpYTIh109GIW3yyoQ6ogo7k99N78Npn4UYO07dqqLm
+         bavg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1689682212; x=1692274212;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=ESg5SOJgC73TkMKhb9XAgQDWWCG2yzwU83duUgBOMtk=;
-        b=YGEg4MJ6ks0xCAepV852bZI+5jclI4h6xc0UxNFAxrUb3uLk5aWw8DJAItseOKpyBV
-         oV5fPUUsp5416cw8YguU59414K72D7iGyoL5zsIi+NkVBVZD30jwRLX+QTylRgaQq1/A
-         H7Dkiebfdabmn0hTUSoQ+yZodicz8/XBwOI7qrFpI/hpGToTDgTwcnRuY7ClLXRdkmCk
-         UtErUTL5Grp0IaMI4lFnEqBXpSy/NuIeLFiTGsjkHN2Q3Mcv9vE3yMzaKxyRx3ShA02H
-         aSDamko6MiDPsh6VWk8LgpKGVX0rOGJq1Y35tOv2EX64ZpYMISU2Fe+BWZ1x+9RP1x22
-         EAhg==
-X-Gm-Message-State: ABy/qLYcslHzPxUh4iwD+iM3D7MEFirIx9pypg5j/FUUjjmGYVjGE1mt
-	l+JvKVQ5/jsEB5LhWL/8N52j24rvXwA=
-X-Google-Smtp-Source: APBJJlFBizYM1wdNIJrD83LlThjQVs660QoDsiACVvAq/a6CGI8KgFPZzY7PLBUmB7nqIS6+WuvQxA==
-X-Received: by 2002:a17:906:2d6:b0:970:c9f:2db6 with SMTP id 22-20020a17090602d600b009700c9f2db6mr13536512ejk.63.1689682211698;
-        Tue, 18 Jul 2023 05:10:11 -0700 (PDT)
+        d=1e100.net; s=20221208; t=1689682213; x=1692274213;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=gAu45IMlhll2V+T7jsPZQ3vKeMSHlWZ7MV1AhHqMC3E=;
+        b=BNTNXtupsDrlAgi2f5MysdUP1XTqlY6cBdw7cR3xxgwsWjt1Vk9OKln/W00/NDaXZi
+         Un8VjfDugBIvVoJ+UbQhYIIYfm2dMurER8DAhcJia2HXotcsjMb3h7s0A3wyjs7Hpkct
+         l5wWksxcJSyYYnAv/V9gdjtsbG0SnxMXbOd3zV+7DW8M0+jxYKhfaslZxeohEA5g+/r7
+         yhKsG4kUWlMsOujX5mlizmEp/FSDwSQ/76EIxdydBnsw/O7IYm/xAxF8Knl4xmwdCPdP
+         hBX/Lo5z4Ady7ElukR83ENiIzvtobJIdP39JuGNLU/SRKTxg00ftUmJVPNG2h0S1+jXM
+         jfSA==
+X-Gm-Message-State: ABy/qLbUB2UFoifxIxeGpjVQ4/KSL5NBYUt4W+JGqNAwHvqdD+aziK2S
+	3L0PBjBSM+Q3jpz8JgdXc0iT2c0hLAY=
+X-Google-Smtp-Source: APBJJlGU1ZfHzIUblAfn+gsnjs87gw54eSRt2Kp4pxXMMG9OD1xgcwY+6SGSw3whgcwKRzjZREPbmw==
+X-Received: by 2002:a17:906:7a43:b0:997:e7ce:1e88 with SMTP id i3-20020a1709067a4300b00997e7ce1e88mr514336ejo.52.1689682213134;
+        Tue, 18 Jul 2023 05:10:13 -0700 (PDT)
 Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
-        by smtp.gmail.com with ESMTPSA id y23-20020a170906559700b0098e48ad11f2sm970338ejp.93.2023.07.18.05.10.11
+        by smtp.gmail.com with ESMTPSA id v18-20020a170906489200b0098654d3c270sm965128ejq.52.2023.07.18.05.10.12
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 18 Jul 2023 05:10:11 -0700 (PDT)
+        Tue, 18 Jul 2023 05:10:12 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Martin Jansa <Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 1/3] libtommath: add recipe for LibTomMath used by dropbear
-Date: Tue, 18 Jul 2023 14:09:36 +0200
-Message-ID: <20230718120938.2048623-1-Martin.Jansa@gmail.com>
+Subject: [meta-oe][PATCH 3/3] libtomcrypt: add PACKAGECONFIG for ltm enabled by default
+Date: Tue, 18 Jul 2023 14:09:38 +0200
+Message-ID: <20230718120938.2048623-3-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.41.0
+In-Reply-To: <20230718120938.2048623-1-Martin.Jansa@gmail.com>
+References: <20230718120938.2048623-1-Martin.Jansa@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 18 Jul 2023 12:10:19 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103940
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103942
 
-* When system-libtom PACKAGECONFIG is used, both libtomcrypt and libtommath
-  are used from system and we need a recipes for both.
+* enabled by default, because that's what dropbear expects and fails
+  without as shown in:
+  http://errors.yoctoproject.org/Errors/Details/720460/
+  dropbear/2022.83-r0/crypto_desc.c:72: undefined reference to `ltm_desc'
 
-* libtomcrypt was already added to meta-oe in langdale and PACKAGECONFIG
-  was added in dropbear in:
-  https://git.openembedded.org/openembedded-core/commit/?id=b7c2edd2d6ded287d8b34dd047ae84d3fd69d4c6
+* add comment about the LICENSE
+* use EXTRA_OEMAKE
+
+* FYI: if you need to use this in dunfell (for whatever reason e.g. to
+  avoid CVE-2019-17362 in dropbear which contains bundled libtomcrypt),
+  then you need to add:
+
+  # Only needed for dunfell, fixed in kirkstone with:
+  # https://git.openembedded.org/openembedded-core/commit/?h=kirkstone&id=4b308773eca7570ce5007e8f953b56252c17fdb1
+  DEPENDS += "libtool-cross"
+  EXTRA_OEMAKE += "'LIBTOOL=${HOST_SYS}-libtool'"
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- .../libtommath/libtommath_1.2.0.bb            | 26 +++++++++++++++++++
- 1 file changed, 26 insertions(+)
- create mode 100644 meta-oe/recipes-support/libtommath/libtommath_1.2.0.bb
+ .../libtomcrypt/libtomcrypt_1.18.2.bb         | 21 ++++++++++++++++---
+ 1 file changed, 18 insertions(+), 3 deletions(-)
 
-diff --git a/meta-oe/recipes-support/libtommath/libtommath_1.2.0.bb b/meta-oe/recipes-support/libtommath/libtommath_1.2.0.bb
-new file mode 100644
-index 0000000000..05fe6d079b
---- /dev/null
-+++ b/meta-oe/recipes-support/libtommath/libtommath_1.2.0.bb
-@@ -0,0 +1,26 @@
-+SUMMARY = "LibTomMath is a number theoretic multiple-precision integer library"
-+HOMEPAGE = "https://www.libtom.net/LibTomMath"
-+SECTION = "libs"
-+LICENSE = "Unlicense"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=23e7e0a32e53a2b1d35f5fd9ef053402"
+diff --git a/meta-oe/recipes-crypto/libtomcrypt/libtomcrypt_1.18.2.bb b/meta-oe/recipes-crypto/libtomcrypt/libtomcrypt_1.18.2.bb
+index 8b73cdda85..274f94356f 100644
+--- a/meta-oe/recipes-crypto/libtomcrypt/libtomcrypt_1.18.2.bb
++++ b/meta-oe/recipes-crypto/libtomcrypt/libtomcrypt_1.18.2.bb
+@@ -1,11 +1,18 @@
+ SUMMARY = "LibTomCrypt is a public domain open source cryptographic toolkit"
+ HOMEPAGE = "https://www.libtom.net/LibTomCrypt"
+ SECTION = "libs"
++# Unlicense isn't very accurate for this revision, it was WTFPL in 0.18.0-rc1:
++# https://github.com/libtom/libtomcrypt/commit/77e31fb6a980212e90b9a50f116dc5a7bd91e527
++# then updated to dual license PD and WTFPL also in 0.18.0-rc1:
++# https://github.com/libtom/libtomcrypt/commit/412b2ee1fccc3a0df58f93f372c90d6d0f93bfc9
++# and then updated again to Unlicense after the 0.18.2 tag (it's only in develop branch):
++# https://github.com/libtom/libtomcrypt/commit/3630bee6fc0f73dd9c7923fd43f8ae15a2c0fb70
++# but keep using Unlicense to avoid triggering people with WTFPL license:
++# https://groups.google.com/g/libtom/c/17Z7xkECULM
++# and this comment can be removed next time libtomcrypt is updated
+ LICENSE = "Unlicense"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=71baacc459522324ef3e2b9e052e8180"
+ 
+-DEPENDS += "libtool-cross"
+-
+ SRC_URI = "git://github.com/libtom/libtomcrypt.git;protocol=https;branch=master \
+    file://CVE-2019-17362.patch \
+ "
+@@ -14,10 +21,18 @@ SRCREV = "7e7eb695d581782f04b24dc444cbfde86af59853"
+ 
+ S = "${WORKDIR}/git"
+ 
++PACKAGECONFIG ??= "ltm"
++PACKAGECONFIG[ltm] = ",,libtommath"
 +
-+SRC_URI = "git://github.com/libtom/libtommath.git;protocol=https;branch=master"
-+
-+SRCREV = "6ca6898bf37f583c4cc9943441cd60dd69f4b8f2"
-+
-+S = "${WORKDIR}/git"
-+
-+# For libtomcrypt to use libtommath.a and avoid:
-+# http://errors.yoctoproject.org/Errors/Details/720465/
-+# ld: TOPDIR/tmp-glibc/work/core2-64-oe-linux/libtomcrypt/1.18.2-r0/recipe-sysroot/usr/lib/libtommath.a(bn_mp_cnt_lsb.o): relocation R_X86_64_32S against `.rodata' can not be used when making a shared object; recompile with -fPIC
-+CFLAGS += "-fPIC"
++CFLAGS += "${@bb.utils.contains('PACKAGECONFIG', 'ltm', '-DUSE_LTM -DLTM_DESC', '', d)}"
 +
 +EXTRA_OEMAKE = "'PREFIX=${prefix}' 'DESTDIR=${D}' 'LIBPATH=${libdir}' 'CFLAGS=${CFLAGS}'"
++EXTRA_OEMAKE += "${@bb.utils.contains('PACKAGECONFIG', 'ltm', 'EXTRALIBS=${STAGING_LIBDIR}/libtommath.a', '', d)}"
 +
-+do_compile() {
-+    oe_runmake -f makefile.shared
-+}
-+
-+do_install() {
+ do_compile() {
+     oe_runmake -f makefile.shared
+ }
+ 
+ do_install() {
+-    oe_runmake -f makefile.shared 'PREFIX=${prefix}' 'DESTDIR=${D}' 'LIBPATH=${libdir}' install
 +    oe_runmake -f makefile.shared install
-+}
+ }
 -- 
 2.41.0
 
