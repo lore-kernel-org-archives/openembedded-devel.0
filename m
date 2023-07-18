@@ -2,67 +2,64 @@ Return-Path: <Martin.Jansa@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 78463EB64DA
-	for <webhook@archiver.kernel.org>; Tue, 18 Jul 2023 12:10:19 +0000 (UTC)
-Received: from mail-ej1-f48.google.com (mail-ej1-f48.google.com [209.85.218.48])
- by mx.groups.io with SMTP id smtpd.web11.5912.1689682214846227432
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 99067EB64DA
+	for <webhook@archiver.kernel.org>; Tue, 18 Jul 2023 12:39:19 +0000 (UTC)
+Received: from mail-lf1-f52.google.com (mail-lf1-f52.google.com [209.85.167.52])
+ by mx.groups.io with SMTP id smtpd.web10.6468.1689683953042045938
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 18 Jul 2023 05:10:15 -0700
+ Tue, 18 Jul 2023 05:39:13 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=DJz+MN/u;
- spf=pass (domain: gmail.com, ip: 209.85.218.48, mailfrom: martin.jansa@gmail.com)
-Received: by mail-ej1-f48.google.com with SMTP id a640c23a62f3a-9926623e367so796887166b.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 18 Jul 2023 05:10:14 -0700 (PDT)
+ dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=Eoyr1c57;
+ spf=pass (domain: gmail.com, ip: 209.85.167.52, mailfrom: martin.jansa@gmail.com)
+Received: by mail-lf1-f52.google.com with SMTP id 2adb3069b0e04-4fba1288bbdso9138587e87.1
+        for <openembedded-devel@lists.openembedded.org>; Tue, 18 Jul 2023 05:39:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1689682213; x=1692274213;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=gAu45IMlhll2V+T7jsPZQ3vKeMSHlWZ7MV1AhHqMC3E=;
-        b=DJz+MN/uaSciCz2/Tt8mEOnrHuF2fyn5AH0+RN4PaSJxX+811vEVpy6VaLFO0vDNEu
-         Wy2KOuG0Fguh5LAc7mcH02wgCF6DYPUXRKc9qtpZ1HmtQZRNrxahkVUV6I6c5dNLSkhr
-         lmteg48K3UpmnzPRD1eTPmB19N77nNIbAVaGLhlTMEkX8gZhUo9gEJdUP9ydHUmFx0Tz
-         WeZI594jUWjqi7FveCbkt/7md3830/d7sonbk/LW0YA4Wlk5J9eTMptCX7FZoCuQOul5
-         w9OdR/CzL0CTob/P6ASTynxA/2NpYTIh109GIW3yyoQ6ogo7k99N78Npn4UYO07dqqLm
-         bavg==
+        d=gmail.com; s=20221208; t=1689683951; x=1692275951;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=BpfAn59sVqjNiPjiKtfperndP2dv2KlLiDSYlBeeB0k=;
+        b=Eoyr1c574LCAaxn8sFWxwzkj+tMjiqKofSOvYQOvi2Fz6H6o52a93nMIrq6yT+xuVc
+         CXJJvlJpDEv6xobmls56mjVSlGfNcWDfRkqoHb3vMPL/0bBzkb682BGpGeo1PEfSGoCR
+         TyjhqI3akxsoh8oqducFqeqa+4BTjMziRMOUcmEKCvxvbgftGkEPz14HI805qqJEe+PL
+         dOG5IsUV7PmSROYOyWNVCV4XjNDOKktgYwbdkNRya+JAf0fmwY4xFs5BIF/G6aMFLY1R
+         ZByL/I7MOaR7lPxmT4zcNLwYMDQe2IKnnHS4otsnJvSlqNrorsjbSqQLECCtbiu5hhd1
+         g0Vg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1689682213; x=1692274213;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=gAu45IMlhll2V+T7jsPZQ3vKeMSHlWZ7MV1AhHqMC3E=;
-        b=BNTNXtupsDrlAgi2f5MysdUP1XTqlY6cBdw7cR3xxgwsWjt1Vk9OKln/W00/NDaXZi
-         Un8VjfDugBIvVoJ+UbQhYIIYfm2dMurER8DAhcJia2HXotcsjMb3h7s0A3wyjs7Hpkct
-         l5wWksxcJSyYYnAv/V9gdjtsbG0SnxMXbOd3zV+7DW8M0+jxYKhfaslZxeohEA5g+/r7
-         yhKsG4kUWlMsOujX5mlizmEp/FSDwSQ/76EIxdydBnsw/O7IYm/xAxF8Knl4xmwdCPdP
-         hBX/Lo5z4Ady7ElukR83ENiIzvtobJIdP39JuGNLU/SRKTxg00ftUmJVPNG2h0S1+jXM
-         jfSA==
-X-Gm-Message-State: ABy/qLbUB2UFoifxIxeGpjVQ4/KSL5NBYUt4W+JGqNAwHvqdD+aziK2S
-	3L0PBjBSM+Q3jpz8JgdXc0iT2c0hLAY=
-X-Google-Smtp-Source: APBJJlGU1ZfHzIUblAfn+gsnjs87gw54eSRt2Kp4pxXMMG9OD1xgcwY+6SGSw3whgcwKRzjZREPbmw==
-X-Received: by 2002:a17:906:7a43:b0:997:e7ce:1e88 with SMTP id i3-20020a1709067a4300b00997e7ce1e88mr514336ejo.52.1689682213134;
-        Tue, 18 Jul 2023 05:10:13 -0700 (PDT)
+        d=1e100.net; s=20221208; t=1689683951; x=1692275951;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=BpfAn59sVqjNiPjiKtfperndP2dv2KlLiDSYlBeeB0k=;
+        b=bI88ZDj9B4xd9I/4/dfutiURUyzGkIjdvgbILNoqdeSoU7Cvos0Yzg10SbQ4Fh/aJ0
+         3/A2KXCc2F/z57TobcfujRJ+jgjLaZjOBpLUBNLSw1+dlXrRfRkBjvmyaN5oAGnnM6ME
+         9UalFjfBeso/0yWjq8UzHPjnUqp9Pii6+UkGVeP6BaGIiSsplwIhke9dFf2a8e+koEF8
+         2QqZ4LWDYPHvncrvCUnH+lItf/RaLw+0cETpegde5HC25Yjp901Z/rOg9/0x5DnSyt68
+         fPMPKu7OdYGiGYY+mjtue4wxo9lL2CELDmnLRoaGWhg8EFRL1pl9hVUJDAw320q77rN3
+         oIrQ==
+X-Gm-Message-State: ABy/qLarWdRj+HTXH4CudJ66L1YwUby0ly+cb8wzhfsJBW+Bx62AmByv
+	bN3Ix3rc9bzOfPFiZhKUnGsNEuS5YLA=
+X-Google-Smtp-Source: APBJJlHslV2XADiWMjhSLOMXd7fIjk57dSNltD6HTQJxgYwX5mwbtGSvKHJ1bYjRLsJhELIskb1Bcg==
+X-Received: by 2002:ac2:5e78:0:b0:4f8:74b5:b4ec with SMTP id a24-20020ac25e78000000b004f874b5b4ecmr12829639lfr.41.1689683950770;
+        Tue, 18 Jul 2023 05:39:10 -0700 (PDT)
 Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
-        by smtp.gmail.com with ESMTPSA id v18-20020a170906489200b0098654d3c270sm965128ejq.52.2023.07.18.05.10.12
+        by smtp.gmail.com with ESMTPSA id d25-20020aa7d5d9000000b0051e0f100c48sm1181921eds.22.2023.07.18.05.39.10
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 18 Jul 2023 05:10:12 -0700 (PDT)
+        Tue, 18 Jul 2023 05:39:10 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Martin Jansa <Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 3/3] libtomcrypt: add PACKAGECONFIG for ltm enabled by default
-Date: Tue, 18 Jul 2023 14:09:38 +0200
-Message-ID: <20230718120938.2048623-3-Martin.Jansa@gmail.com>
+Subject: [meta-oe][PATCHv2 3/3] libtomcrypt: add PACKAGECONFIG for ltm enabled by default
+Date: Tue, 18 Jul 2023 14:38:34 +0200
+Message-ID: <20230718123834.2182686-1-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.41.0
-In-Reply-To: <20230718120938.2048623-1-Martin.Jansa@gmail.com>
-References: <20230718120938.2048623-1-Martin.Jansa@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 18 Jul 2023 12:10:19 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103942
+ <openembedded-devel@lists.openembedded.org>; Tue, 18 Jul 2023 12:39:19 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103943
 
 * enabled by default, because that's what dropbear expects and fails
   without as shown in:
@@ -83,11 +80,30 @@ X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/1039
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- .../libtomcrypt/libtomcrypt_1.18.2.bb         | 21 ++++++++++++++++---
- 1 file changed, 18 insertions(+), 3 deletions(-)
+v2: inherit pkgconfig instead of explicitly using libtommath.a in EXTRALIBS
+    makefile_include.mk does almost the right thing:
+
+    ifndef EXTRALIBS
+    ifneq ($(shell echo $(CFLAGS) | grep USE_LTM),)
+    EXTRALIBS=$(shell PKG_CONFIG_PATH=$(LIBPATH)/pkgconfig pkg-config libtommath --libs)
+    else
+    ifneq ($(shell echo $(CFLAGS) | grep USE_TFM),)
+    EXTRALIBS=$(shell PKG_CONFIG_PATH=$(LIBPATH)/pkgconfig pkg-config tomsfastmath --libs)
+    endif
+    endif
+    endif
+
+    but LIBPATH is unfortunately set to /usr/lib not SYSROOT_LIBDIR, but
+    still returns '-ltommath' (as long as you don't have some strange
+    libtommath on your host):
+        PKG_CONFIG_PATH=/usr/lib/pkgconfig pkg-config libtommath --libs
+        -ltommath
+
+ .../libtomcrypt/libtomcrypt_1.18.2.bb         | 22 ++++++++++++++++---
+ 1 file changed, 19 insertions(+), 3 deletions(-)
 
 diff --git a/meta-oe/recipes-crypto/libtomcrypt/libtomcrypt_1.18.2.bb b/meta-oe/recipes-crypto/libtomcrypt/libtomcrypt_1.18.2.bb
-index 8b73cdda85..274f94356f 100644
+index 8b73cdda85..4f6d793eb8 100644
 --- a/meta-oe/recipes-crypto/libtomcrypt/libtomcrypt_1.18.2.bb
 +++ b/meta-oe/recipes-crypto/libtomcrypt/libtomcrypt_1.18.2.bb
 @@ -1,11 +1,18 @@
@@ -111,17 +127,18 @@ index 8b73cdda85..274f94356f 100644
  SRC_URI = "git://github.com/libtom/libtomcrypt.git;protocol=https;branch=master \
     file://CVE-2019-17362.patch \
  "
-@@ -14,10 +21,18 @@ SRCREV = "7e7eb695d581782f04b24dc444cbfde86af59853"
+@@ -14,10 +21,19 @@ SRCREV = "7e7eb695d581782f04b24dc444cbfde86af59853"
  
  S = "${WORKDIR}/git"
  
++inherit pkgconfig
++
 +PACKAGECONFIG ??= "ltm"
 +PACKAGECONFIG[ltm] = ",,libtommath"
 +
 +CFLAGS += "${@bb.utils.contains('PACKAGECONFIG', 'ltm', '-DUSE_LTM -DLTM_DESC', '', d)}"
 +
 +EXTRA_OEMAKE = "'PREFIX=${prefix}' 'DESTDIR=${D}' 'LIBPATH=${libdir}' 'CFLAGS=${CFLAGS}'"
-+EXTRA_OEMAKE += "${@bb.utils.contains('PACKAGECONFIG', 'ltm', 'EXTRALIBS=${STAGING_LIBDIR}/libtommath.a', '', d)}"
 +
  do_compile() {
      oe_runmake -f makefile.shared
@@ -131,7 +148,4 @@ index 8b73cdda85..274f94356f 100644
 -    oe_runmake -f makefile.shared 'PREFIX=${prefix}' 'DESTDIR=${D}' 'LIBPATH=${libdir}' install
 +    oe_runmake -f makefile.shared install
  }
--- 
-2.41.0
-
 
