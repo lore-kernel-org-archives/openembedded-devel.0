@@ -1,160 +1,248 @@
-Return-Path: <archana.polampalli@windriver.com>
+Return-Path: <Martin.Jansa@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4BAE2EB64DA
-	for <webhook@archiver.kernel.org>; Tue, 18 Jul 2023 15:37:00 +0000 (UTC)
-Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
- by mx.groups.io with SMTP id smtpd.web10.11069.1689694613972781146
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 77C34EB64DC
+	for <webhook@archiver.kernel.org>; Tue, 18 Jul 2023 18:07:55 +0000 (UTC)
+Received: from mail-wr1-f48.google.com (mail-wr1-f48.google.com [209.85.221.48])
+ by mx.groups.io with SMTP id smtpd.web11.2874.1689703670828651134
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 18 Jul 2023 08:36:54 -0700
+ Tue, 18 Jul 2023 11:07:51 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=pps06212021 header.b=RZaVFNTA;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=65634f9655=archana.polampalli@windriver.com)
-Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.17.1.22/8.17.1.22) with ESMTP id 36ICNkY7003740
-	for <openembedded-devel@lists.openembedded.org>; Tue, 18 Jul 2023 15:36:53 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
-	 h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding:content-type; s=PPS06212021; bh=ne/5z
-	OTrx0YFMAEgDsVtHp1Z0N9qDTG6YGjf/Y/1oFM=; b=RZaVFNTAS9ALebQY278uN
-	67ztT9pWAOdfyaMKFL40dYxSD3moT8ttykfMP8EwcyOzmRi9mZMkq8QYmuurruhZ
-	0KdQ4T+Zhbj+U2+2YOxbG0ghd5ptuCtBdo3qKZ7Sc8QctnSEa5A8GZTgZ4yikuD1
-	ToUkkGrjFtv8SErjn5hz83SyawicTYnfLiZVm3QVDYwx9OvLzQMzjEDT4GAJXNYj
-	9kH/s2RXVCuarOv1W3RguYvKNMmP5SnZsd21a/c+tKNwfiWaiG938jySs4HWWPsO
-	2wEnTc2JMKxvVI+qPmQTuT1dq0Oz7MARaN2YK5k/8fE+sPaGFrUABnKl3FHv9vju
-	g==
-Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3run8aartt-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Tue, 18 Jul 2023 15:36:53 +0000 (GMT)
-Received: from blr-linux-engg1.wrs.com (147.11.136.210) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.27; Tue, 18 Jul 2023 08:36:44 -0700
-From: Archana Polampalli <archana.polampalli@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-CC: <Hari.GPillai@windriver.com>
-Subject: [oe][meta-oe][mickledore][PATCH 1/1] nodejs: upgrade 18.14.2 -> 18.16.1
-Date: Tue, 18 Jul 2023 15:36:28 +0000
-Message-ID: <20230718153628.536776-1-archana.polampalli@windriver.com>
-X-Mailer: git-send-email 2.40.0
+ dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=GPfPR4gi;
+ spf=pass (domain: gmail.com, ip: 209.85.221.48, mailfrom: martin.jansa@gmail.com)
+Received: by mail-wr1-f48.google.com with SMTP id ffacd0b85a97d-31434226a2eso5977292f8f.1
+        for <openembedded-devel@lists.openembedded.org>; Tue, 18 Jul 2023 11:07:50 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20221208; t=1689703669; x=1692295669;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=xobXXUaI2acRMC97MlIQtsEU3O/qyJQT3uG7REqBgvA=;
+        b=GPfPR4gikwxvDzvt+1SJmXPKVdLTZpjK52ObGiWfw/HqgI509hHFLj673sM1Q0yYq1
+         Wb/VqrIuzTntlklwC63PQ6wuUs22LnS8dIECvze9yOvl4YBnuPrKIasy68HMb2h5kL+q
+         OUZc7PNpBu0pK+Cna3DKy03kNUZXcom0B9mBtmfH7mPNm2EWHlakkg7tiB8INRU7mgkX
+         y+5tSXIYVuV+VUMYWOtentd5WCIO8L/Be2/EBj1Ey2Yr3F2qfgp8s0OEYUxq1phBnVbU
+         XMCL0sS9hdq3FHsEwrR7eXszYZkcpJ8XDEK3xKYjh1XmSIMTRJfTkavzOkenpfq2lLnC
+         NviQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20221208; t=1689703669; x=1692295669;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=xobXXUaI2acRMC97MlIQtsEU3O/qyJQT3uG7REqBgvA=;
+        b=VO4lD/VLfJXV9OgK/tgAgUS2NCVfzfyZBNOsA7RzLAFgQwqz4SZDUhVb0Np9GbmbWn
+         0j2s/Vm9LNCK/kThLdBf1uhQlsFeRn9p8tN5e3VCQFi3GqPte9f9l8NlohnbcyuYw94M
+         mTRiSXHbeNuGob4MuRG9SujC8Qf0g1ItX3W31Yt+jefHLeYtIsmFw/viQy/6qEW4x+VO
+         0T6WClE2bmWC6hpgyVbh/baZMIGipKLmdYLzHRkJ7zXjSzcnO/OJs7HNjakuF4bCh5Zp
+         FVmMP3it+d5QvoJNvGpY0415kdB27d0phgNCvbE0gUTHvyLE+gVithuHmnKMGS9wDW2w
+         Q2dg==
+X-Gm-Message-State: ABy/qLZf5JwUuOgxbnfm/aydVdPBMUNB1gO3T55ECFP7lzt0sol8YurU
+	drtuHdd9c4qwx2gtDHOaHDv3SY9Kfffyo5zUJYw=
+X-Google-Smtp-Source: APBJJlE229Cr7o97vrttojpdF6k3278tf1L0lZ6bnwVwFAeQeI6a+KsRRLgy4XxWVjQmU9HCjRs3iYOnRCEBQ94cN0s=
+X-Received: by 2002:a5d:690e:0:b0:315:92ce:e218 with SMTP id
+ t14-20020a5d690e000000b0031592cee218mr16199194wru.41.1689703668923; Tue, 18
+ Jul 2023 11:07:48 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [147.11.136.210]
-X-ClientProxiedBy: ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) To
- ala-exchng01.corp.ad.wrs.com (147.11.82.252)
-X-Proofpoint-GUID: YI1yPYGnfRzUzgmyiBXnrqKK8RlFUjWw
-X-Proofpoint-ORIG-GUID: YI1yPYGnfRzUzgmyiBXnrqKK8RlFUjWw
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.254,Aquarius:18.0.957,Hydra:6.0.591,FMLib:17.11.176.26
- definitions=2023-07-18_11,2023-07-18_01,2023-05-22_02
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 malwarescore=0
- mlxlogscore=999 clxscore=1015 adultscore=0 lowpriorityscore=0 mlxscore=0
- priorityscore=1501 spamscore=0 phishscore=0 impostorscore=0 suspectscore=0
- bulkscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.19.0-2306200000 definitions=main-2307180144
+References: <1772F75C0586ED27.2899@lists.openembedded.org>
+In-Reply-To: <1772F75C0586ED27.2899@lists.openembedded.org>
+From: Martin Jansa <martin.jansa@gmail.com>
+Date: Tue, 18 Jul 2023 20:07:05 +0200
+Message-ID: <CA+chaQcmNZp3V9PvUT8sS=7-E-=RH7w-ARPmYaagaUZBvG0z1A@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCHv2 1/3] libtommath: add recipe for LibTomMath
+ used by dropbear
+To: Martin.Jansa@gmail.com
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: multipart/alternative; boundary="000000000000f643c60600c6ca9f"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 18 Jul 2023 15:37:00 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103949
+ <openembedded-devel@lists.openembedded.org>; Tue, 18 Jul 2023 18:07:55 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103950
 
-Refresh 0001-Disable-running-gyp-files-for-bundled-deps.patch against 18.16.1
+--000000000000f643c60600c6ca9f
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-License-Update: Add missing licenses for Ada [1] BSD, Simduf [2] BSD, posteject
-[3] MIT
+I'm sorry for noise, but this one will need v3 to respect CXX as it's
+trying to use host's gcc and arm builds with older gcc fail with:
 
-[1] https://github.com/nodejs/node/commit/0bc4c17e5705ea042cda392343d7301bb91873ed
-[2] https://github.com/nodejs/node/commit/c9845fc3341fcdce298ad7f1630e329d71a6e746
-[3] https://github.com/nodejs/node/commit/4aaec0726694ad0d3cb05d7f2593a90363c32f32
+gcc: error: unrecognized command-line option '-mthumb'
+gcc: error: unrecognized command-line option '-mfpu=3Dneon'
+gcc: error: unrecognized command-line option '-mfloat-abi=3Dsoftfp'
+gcc: error: unrecognized command-line option '-fcanon-prefix-map'; did you
+mean '-fmacro-prefix-map=3D'?
 
-The list of the CVEs are fixed in this relase:
 
-    CVE-2023-30581
-    CVE-2023-30585
-    CVE-2023-30588
-    CVE-2023-30589
-    CVE-2023-30590
+On Tue, Jul 18, 2023 at 3:09=E2=80=AFPM Martin Jansa via lists.openembedded=
+.org
+<Martin.Jansa=3Dgmail.com@lists.openembedded.org> wrote:
 
-https://github.com/nodejs/node/releases/tag/v18.16.1
-https://github.com/nodejs/node/releases/tag/v18.16.0
-https://github.com/nodejs/node/releases/tag/v18.15.0
+> * When system-libtom PACKAGECONFIG is used, both libtomcrypt and libtomma=
+th
+>   are used from system and we need a recipes for both.
+>
+> * libtomcrypt was already added to meta-oe in langdale and PACKAGECONFIG
+>   was added in dropbear in:
+>
+> https://git.openembedded.org/openembedded-core/commit/?id=3Db7c2edd2d6ded=
+287d8b34dd047ae84d3fd69d4c6
+>
+> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+> ---
+> v2: drop explict -fPIC as v2 of libtomcrypt no longer uses static
+> libtommath.a
+>
+>  .../libtommath/libtommath_1.2.0.bb            | 21 +++++++++++++++++++
+>  1 file changed, 21 insertions(+)
+>  create mode 100644 meta-oe/recipes-support/libtommath/libtommath_1.2.0.b=
+b
+>
+> diff --git a/meta-oe/recipes-support/libtommath/libtommath_1.2.0.bb
+> b/meta-oe/recipes-support/libtommath/libtommath_1.2.0.bb
+> new file mode 100644
+> index 0000000000..34d7f4cf6b
+> --- /dev/null
+> +++ b/meta-oe/recipes-support/libtommath/libtommath_1.2.0.bb
+> @@ -0,0 +1,21 @@
+> +SUMMARY =3D "LibTomMath is a number theoretic multiple-precision integer
+> library"
+> +HOMEPAGE =3D "https://www.libtom.net/LibTomMath"
+> +SECTION =3D "libs"
+> +LICENSE =3D "Unlicense"
+> +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D23e7e0a32e53a2b1d35f5fd9ef053=
+402"
+> +
+> +SRC_URI =3D "git://
+> github.com/libtom/libtommath.git;protocol=3Dhttps;branch=3Dmaster"
+> +
+> +SRCREV =3D "6ca6898bf37f583c4cc9943441cd60dd69f4b8f2"
+> +
+> +S =3D "${WORKDIR}/git"
+> +
+> +EXTRA_OEMAKE =3D "'PREFIX=3D${prefix}' 'DESTDIR=3D${D}' 'LIBPATH=3D${lib=
+dir}'
+> 'CFLAGS=3D${CFLAGS}'"
+> +
+> +do_compile() {
+> +    oe_runmake -f makefile.shared
+> +}
+> +
+> +do_install() {
+> +    oe_runmake -f makefile.shared install
+> +}
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#103944):
+> https://lists.openembedded.org/g/openembedded-devel/message/103944
+> Mute This Topic: https://lists.openembedded.org/mt/100214532/3617156
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
+> Martin.Jansa@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
+>
 
-Signed-off-by: Archana Polampalli <archana.polampalli@windriver.com>
----
- .../oe-npm-cache                                           | 0
- ...che-native_18.14.bb => nodejs-oe-cache-native_18.16.bb} | 0
- .../0001-Disable-running-gyp-files-for-bundled-deps.patch  | 7 ++++++-
- .../nodejs/{nodejs_18.14.2.bb => nodejs_18.16.1.bb}        | 4 ++--
- 4 files changed, 8 insertions(+), 3 deletions(-)
- rename meta-oe/recipes-devtools/nodejs/{nodejs-oe-cache-18.14 => nodejs-oe-cache-18.16}/oe-npm-cache (100%)
- rename meta-oe/recipes-devtools/nodejs/{nodejs-oe-cache-native_18.14.bb => nodejs-oe-cache-native_18.16.bb} (100%)
- rename meta-oe/recipes-devtools/nodejs/{nodejs_18.14.2.bb => nodejs_18.16.1.bb} (97%)
+--000000000000f643c60600c6ca9f
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-18.14/oe-npm-cache b/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-18.16/oe-npm-cache
-similarity index 100%
-rename from meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-18.14/oe-npm-cache
-rename to meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-18.16/oe-npm-cache
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-native_18.14.bb b/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-native_18.16.bb
-similarity index 100%
-rename from meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-native_18.14.bb
-rename to meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-native_18.16.bb
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs/0001-Disable-running-gyp-files-for-bundled-deps.patch b/meta-oe/recipes-devtools/nodejs/nodejs/0001-Disable-running-gyp-files-for-bundled-deps.patch
-index 356c98d17..059b5cc07 100644
---- a/meta-oe/recipes-devtools/nodejs/nodejs/0001-Disable-running-gyp-files-for-bundled-deps.patch
-+++ b/meta-oe/recipes-devtools/nodejs/nodejs/0001-Disable-running-gyp-files-for-bundled-deps.patch
-@@ -29,10 +29,13 @@ python prune_sources() {
- }
- do_unpack[postfuncs] += "prune_sources"
- 
-+Signed-off-by: Archana Polampalli <archana.polampalli@windriver.com>
- ---
-  Makefile | 2 +-
-  1 file changed, 1 insertion(+), 1 deletion(-)
- 
-+diff --git a/Makefile b/Makefile
-+index 0be0659d..3c442014 100644
- --- a/Makefile
- +++ b/Makefile
- @@ -169,7 +169,7 @@ with-code-cache test-code-cache:
-@@ -41,6 +44,8 @@ do_unpack[postfuncs] += "prune_sources"
-  out/Makefile: config.gypi common.gypi node.gyp \
- -	deps/uv/uv.gyp deps/llhttp/llhttp.gyp deps/zlib/zlib.gyp \
- +	deps/llhttp/llhttp.gyp \
-- 	deps/simdutf/simdutf.gyp \
-+	deps/simdutf/simdutf.gyp deps/ada/ada.gyp \
-  	tools/v8_gypfiles/toolchain.gypi tools/v8_gypfiles/features.gypi \
-  	tools/v8_gypfiles/inspector.gypi tools/v8_gypfiles/v8.gyp
-+--
-+2.40.0
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_18.14.2.bb b/meta-oe/recipes-devtools/nodejs/nodejs_18.16.1.bb
-similarity index 97%
-rename from meta-oe/recipes-devtools/nodejs/nodejs_18.14.2.bb
-rename to meta-oe/recipes-devtools/nodejs/nodejs_18.16.1.bb
-index 19df7d542..bc289001c 100644
---- a/meta-oe/recipes-devtools/nodejs/nodejs_18.14.2.bb
-+++ b/meta-oe/recipes-devtools/nodejs/nodejs_18.16.1.bb
-@@ -1,7 +1,7 @@
- DESCRIPTION = "nodeJS Evented I/O for V8 JavaScript"
- HOMEPAGE = "http://nodejs.org"
- LICENSE = "MIT & ISC & BSD-2-Clause & BSD-3-Clause & Artistic-2.0 & Apache-2.0"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=2dff1ccca11e333f1388e34f7e2d1de3"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=0be148d0e7298c5c94f7501affafbce5"
- 
- CVE_PRODUCT = "nodejs node.js"
- 
-@@ -39,7 +39,7 @@ SRC_URI:append:toolchain-clang:x86 = " \
- SRC_URI:append:toolchain-clang:powerpc64le = " \
-            file://0001-ppc64-Do-not-use-mminimal-toc-with-clang.patch \
-            "
--SRC_URI[sha256sum] = "fbc364dd25fee2cacc0f2033db2d86115fc07575310ea0e64408b8170d09c685"
-+SRC_URI[sha256sum] = "e8404f8c8d89fdfdf7e95bbbc6066bd0e571acba58f54492599b615fbeefe272"
- 
- S = "${WORKDIR}/node-v${PV}"
- 
--- 
-2.40.0
+<div dir=3D"ltr">I&#39;m sorry for noise, but this one will need v3 to resp=
+ect CXX as it&#39;s trying to use host&#39;s gcc and arm builds with older =
+gcc fail with:<div><br></div><div>gcc: error: unrecognized command-line opt=
+ion &#39;-mthumb&#39;<br></div><div>gcc: error: unrecognized command-line o=
+ption &#39;-mfpu=3Dneon&#39;<br>gcc: error: unrecognized command-line optio=
+n &#39;-mfloat-abi=3Dsoftfp&#39;<br>gcc: error: unrecognized command-line o=
+ption &#39;-fcanon-prefix-map&#39;; did you mean &#39;-fmacro-prefix-map=3D=
+&#39;?<br></div><div><br></div></div><br><div class=3D"gmail_quote"><div di=
+r=3D"ltr" class=3D"gmail_attr">On Tue, Jul 18, 2023 at 3:09=E2=80=AFPM Mart=
+in Jansa via <a href=3D"http://lists.openembedded.org">lists.openembedded.o=
+rg</a> &lt;Martin.Jansa=3D<a href=3D"mailto:gmail.com@lists.openembedded.or=
+g">gmail.com@lists.openembedded.org</a>&gt; wrote:<br></div><blockquote cla=
+ss=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid =
+rgb(204,204,204);padding-left:1ex">* When system-libtom PACKAGECONFIG is us=
+ed, both libtomcrypt and libtommath<br>
+=C2=A0 are used from system and we need a recipes for both.<br>
+<br>
+* libtomcrypt was already added to meta-oe in langdale and PACKAGECONFIG<br=
+>
+=C2=A0 was added in dropbear in:<br>
+=C2=A0 <a href=3D"https://git.openembedded.org/openembedded-core/commit/?id=
+=3Db7c2edd2d6ded287d8b34dd047ae84d3fd69d4c6" rel=3D"noreferrer" target=3D"_=
+blank">https://git.openembedded.org/openembedded-core/commit/?id=3Db7c2edd2=
+d6ded287d8b34dd047ae84d3fd69d4c6</a><br>
+<br>
+Signed-off-by: Martin Jansa &lt;<a href=3D"mailto:Martin.Jansa@gmail.com" t=
+arget=3D"_blank">Martin.Jansa@gmail.com</a>&gt;<br>
+---<br>
+v2: drop explict -fPIC as v2 of libtomcrypt no longer uses static libtommat=
+h.a<br>
+<br>
+=C2=A0.../libtommath/<a href=3D"http://libtommath_1.2.0.bb" rel=3D"noreferr=
+er" target=3D"_blank">libtommath_1.2.0.bb</a>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 | 21 +++++++++++++++++++<br>
+=C2=A01 file changed, 21 insertions(+)<br>
+=C2=A0create mode 100644 meta-oe/recipes-support/libtommath/<a href=3D"http=
+://libtommath_1.2.0.bb" rel=3D"noreferrer" target=3D"_blank">libtommath_1.2=
+.0.bb</a><br>
+<br>
+diff --git a/meta-oe/recipes-support/libtommath/<a href=3D"http://libtommat=
+h_1.2.0.bb" rel=3D"noreferrer" target=3D"_blank">libtommath_1.2.0.bb</a> b/=
+meta-oe/recipes-support/libtommath/<a href=3D"http://libtommath_1.2.0.bb" r=
+el=3D"noreferrer" target=3D"_blank">libtommath_1.2.0.bb</a><br>
+new file mode 100644<br>
+index 0000000000..34d7f4cf6b<br>
+--- /dev/null<br>
++++ b/meta-oe/recipes-support/libtommath/<a href=3D"http://libtommath_1.2.0=
+.bb" rel=3D"noreferrer" target=3D"_blank">libtommath_1.2.0.bb</a><br>
+@@ -0,0 +1,21 @@<br>
++SUMMARY =3D &quot;LibTomMath is a number theoretic multiple-precision inte=
+ger library&quot;<br>
++HOMEPAGE =3D &quot;<a href=3D"https://www.libtom.net/LibTomMath" rel=3D"no=
+referrer" target=3D"_blank">https://www.libtom.net/LibTomMath</a>&quot;<br>
++SECTION =3D &quot;libs&quot;<br>
++LICENSE =3D &quot;Unlicense&quot;<br>
++LIC_FILES_CHKSUM =3D &quot;file://LICENSE;md5=3D23e7e0a32e53a2b1d35f5fd9ef=
+053402&quot;<br>
++<br>
++SRC_URI =3D &quot;git://<a href=3D"http://github.com/libtom/libtommath.git=
+;protocol=3Dhttps;branch=3Dmaster" rel=3D"noreferrer" target=3D"_blank">git=
+hub.com/libtom/libtommath.git;protocol=3Dhttps;branch=3Dmaster</a>&quot;<br=
+>
++<br>
++SRCREV =3D &quot;6ca6898bf37f583c4cc9943441cd60dd69f4b8f2&quot;<br>
++<br>
++S =3D &quot;${WORKDIR}/git&quot;<br>
++<br>
++EXTRA_OEMAKE =3D &quot;&#39;PREFIX=3D${prefix}&#39; &#39;DESTDIR=3D${D}&#3=
+9; &#39;LIBPATH=3D${libdir}&#39; &#39;CFLAGS=3D${CFLAGS}&#39;&quot;<br>
++<br>
++do_compile() {<br>
++=C2=A0 =C2=A0 oe_runmake -f makefile.shared<br>
++}<br>
++<br>
++do_install() {<br>
++=C2=A0 =C2=A0 oe_runmake -f makefile.shared install<br>
++}<br>
+<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+Links: You receive all messages sent to this group.<br>
+View/Reply Online (#103944): <a href=3D"https://lists.openembedded.org/g/op=
+enembedded-devel/message/103944" rel=3D"noreferrer" target=3D"_blank">https=
+://lists.openembedded.org/g/openembedded-devel/message/103944</a><br>
+Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/100214532/361=
+7156" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/m=
+t/100214532/3617156</a><br>
+Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
+d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
+><br>
+Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
+/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
+/g/openembedded-devel/unsub</a> [<a href=3D"mailto:Martin.Jansa@gmail.com" =
+target=3D"_blank">Martin.Jansa@gmail.com</a>]<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+<br>
+</blockquote></div>
 
+--000000000000f643c60600c6ca9f--
 
