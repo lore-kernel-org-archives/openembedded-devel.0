@@ -1,106 +1,93 @@
-Return-Path: <Martin.Jansa@gmail.com>
+Return-Path: <tgamblin@baylibre.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A46AAEB64DA
-	for <webhook@archiver.kernel.org>; Tue, 18 Jul 2023 12:53:09 +0000 (UTC)
-Received: from mail-ed1-f42.google.com (mail-ed1-f42.google.com [209.85.208.42])
- by mx.groups.io with SMTP id smtpd.web10.6731.1689684784442670276
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 44D82EB64DD
+	for <webhook@archiver.kernel.org>; Tue, 18 Jul 2023 15:01:00 +0000 (UTC)
+Received: from mail-qk1-f171.google.com (mail-qk1-f171.google.com [209.85.222.171])
+ by mx.groups.io with SMTP id smtpd.web11.9915.1689692459399872255
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 18 Jul 2023 05:53:04 -0700
+ Tue, 18 Jul 2023 08:00:59 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=FDy6mL0+;
- spf=pass (domain: gmail.com, ip: 209.85.208.42, mailfrom: martin.jansa@gmail.com)
-Received: by mail-ed1-f42.google.com with SMTP id 4fb4d7f45d1cf-51e29ede885so8103073a12.3
-        for <openembedded-devel@lists.openembedded.org>; Tue, 18 Jul 2023 05:53:04 -0700 (PDT)
+ dkim=fail reason="signature has expired" header.i=@baylibre-com.20221208.gappssmtp.com header.s=20221208 header.b=YPAksq6w;
+ spf=pass (domain: baylibre.com, ip: 209.85.222.171, mailfrom: tgamblin@baylibre.com)
+Received: by mail-qk1-f171.google.com with SMTP id af79cd13be357-767ca28fb32so300902485a.1
+        for <openembedded-devel@lists.openembedded.org>; Tue, 18 Jul 2023 08:00:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1689684783; x=1692276783;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=EIihqkPzFw3ozxIUA9YY1SRoILXFAiDIbzps9GGFY5o=;
-        b=FDy6mL0+83vTpZL/KE4lNmTtnBTxwf6HAkYH2qnFVFiSDxDKnYf/nHagVEbNSdqhDQ
-         m58baaFVQdJGgvuozkLz+xasKuvoTRUItflSc8RC1nPKrUUKx+UzJNcxG5pqu/p65QNO
-         /5CSzZ/ArI6aVAFFpMH25VeaPOmksgIEYdAQzS7zpW4Pa/bXKAO51jBmgru5Vjq9Yuvc
-         5W0+FWitdFRaer2iuMAmUkN3Duxn8ZekzYpbDnIQHzbatpBtxvulIqfzYkvvol4aKBD0
-         sW7TALNlF7hLC/XChHMktKiTmq0oxQNcrjQlicKCtahSa8ZUyk9i5op6CWeG0XY/xlVT
-         s4rQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1689684783; x=1692276783;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+        d=baylibre-com.20221208.gappssmtp.com; s=20221208; t=1689692458; x=1690297258;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=EIihqkPzFw3ozxIUA9YY1SRoILXFAiDIbzps9GGFY5o=;
-        b=Qx+VJVGQZ44hDTKwnuvU1wtVR8T1pBDMyDBqnYlwrHg6B8Z5XGhU4JMSOK6SRIAhrx
-         /gPT1EpMYxK5rnrKto310/uZIHrcvyfBAGvBLf5AZkOacTp6nemJkoVNvBiMozZBJsX1
-         319jz7gIUfP4ITs5Mo70PGFJJ7yfNy1t3OaJm/QpuG4HgfAb4r5nE2BGUVsXTblzstEi
-         9VeicNs2umnKAQ3ckbrNmZ4Mn0Bh3XRpdALUeV3n1xKDaCmTQAMuyQMRghhOdyUyIPWA
-         MLocXdiFlnRLjH5SuNFAMB83dluyGInkUf5EsjlMmqRNuUQPtuuLPrk+8rRVQvh3qmgk
-         opcA==
-X-Gm-Message-State: ABy/qLbCUFjRtccXdm+xYw90jF+9Oas05jLguo6dTx8/32asNQiXLrDC
-	ahP6Wo3Vls+8pNR72HjvuRrkVaxeRvI=
-X-Google-Smtp-Source: APBJJlEh1fnpWhSJYt5rOQItmeupk71ofr0Eu79a+ItaXW5xVyW7l2Pc0F2rfzecMaMVqOQyLa7tjA==
-X-Received: by 2002:aa7:cd52:0:b0:51e:1927:6ade with SMTP id v18-20020aa7cd52000000b0051e19276ademr14193094edw.11.1689684782655;
-        Tue, 18 Jul 2023 05:53:02 -0700 (PDT)
-Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
-        by smtp.gmail.com with ESMTPSA id v16-20020a056402185000b0051bfc85afaasm1183217edy.86.2023.07.18.05.53.02
+        bh=+SZb7L5iOtsqd8UP7BeCI3mPsgOSe0U3VBQWbf8A7jA=;
+        b=YPAksq6wGYV8Px/lOQ2qijUV+olrfdlg+EobF+i1Ldt7i80h9tVdDBfKyepZoDUz/C
+         g//Q5uDc/o3p3sbO+eYoCaub9mBaYr30AG0UatP7S/syCrdC3mp70s8ntvRfFBYuixaS
+         yn6uNOu7plC5wlbmVGdIkN/fN6leDftu3ofjFHRiWd7jkSl3DgPi28UGSsAtsduPDd3I
+         J9L7p6aM7jHQolP8iBV15s2WSzfNny0LyWYs7dJ8+K/ZMRX3qdga+CIsbTNxcN7FvIJA
+         q5WSSNt9kShLoRQ2/cksT0I9/2CUspqnaB7tqkLpL3TkFbSOvoRiQelYkV2hvO//LOLN
+         AFXg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20221208; t=1689692458; x=1690297258;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=+SZb7L5iOtsqd8UP7BeCI3mPsgOSe0U3VBQWbf8A7jA=;
+        b=VqDeK68V3IUWDfGRc1p2FoTu4w3trNRWHzHLqxvFv/0zXQ7Q+DMmgVhz9HKLyWXtDM
+         fUteHl+VwPuQSs2Hzs3Y7gP+DQVyE8gKN7PNfpOuI4+YWxzx4S5c5hcCP7QQNqu8rSww
+         PXNsFVHdsymloupDjri8HUeBdl00Zd/ztf3QjrCLQy8UnsaOTL+qRJRV/zew7UNbd1gw
+         Rdh6NY1oFQwiPZvBrikcuw8XajiaWoUXyUubOkE+gusL6P4+fcpeEiALYBROpquGSzFh
+         uLEXE4b+ydKfVn7u6pqSBrF77sQDK80C4UtieLeXv5wfL/TV4UZDdyErKJxDWguaw4dC
+         ZQvw==
+X-Gm-Message-State: ABy/qLZXUj5PwldZiwWJWHMsPloSbkKTYfRa9Yt8DzIsroVNtsJt9kXn
+	+1e8Xq6k0dtZ+aSDjX9qTq5rhs98STKTN/byOcA=
+X-Google-Smtp-Source: APBJJlHBlUzojcssWfH8VtL4Wdy9rl62S4p8bGt+THK2hnMBeiURAhtmDKKjKJY95VqB7nsW3i+pfA==
+X-Received: by 2002:ad4:596c:0:b0:635:f546:83d0 with SMTP id eq12-20020ad4596c000000b00635f54683d0mr12656726qvb.11.1689692458334;
+        Tue, 18 Jul 2023 08:00:58 -0700 (PDT)
+Received: from megalith.cgocable.net ([2001:1970:5b1f:ab00:fc4e:ec42:7e5d:48dd])
+        by smtp.gmail.com with ESMTPSA id u14-20020a0c8dce000000b00631eaf8b9e5sm765565qvb.138.2023.07.18.08.00.57
+        for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 18 Jul 2023 05:53:02 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+        Tue, 18 Jul 2023 08:00:57 -0700 (PDT)
+From: Trevor Gamblin <tgamblin@baylibre.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Martin Jansa <Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCHv2 1/3] libtommath: add recipe for LibTomMath used by dropbear
-Date: Tue, 18 Jul 2023 14:52:29 +0200
-Message-ID: <20230718125229.2253976-1-Martin.Jansa@gmail.com>
+Subject: [meta-python][PATCH 2/2] python3-ipython: upgrade 8.12.0 -> 8.14.0
+Date: Tue, 18 Jul 2023 11:00:55 -0400
+Message-ID: <20230718150055.2501513-2-tgamblin@baylibre.com>
 X-Mailer: git-send-email 2.41.0
+In-Reply-To: <20230718150055.2501513-1-tgamblin@baylibre.com>
+References: <20230718150055.2501513-1-tgamblin@baylibre.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 18 Jul 2023 12:53:09 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103944
+ <openembedded-devel@lists.openembedded.org>; Tue, 18 Jul 2023 15:01:00 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103946
 
-* When system-libtom PACKAGECONFIG is used, both libtomcrypt and libtommath
-  are used from system and we need a recipes for both.
+Changelog: https://ipython.readthedocs.io/en/stable/whatsnew/version8.html
 
-* libtomcrypt was already added to meta-oe in langdale and PACKAGECONFIG
-  was added in dropbear in:
-  https://git.openembedded.org/openembedded-core/commit/?id=b7c2edd2d6ded287d8b34dd047ae84d3fd69d4c6
-
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+Signed-off-by: Trevor Gamblin <tgamblin@baylibre.com>
 ---
-v2: drop explict -fPIC as v2 of libtomcrypt no longer uses static libtommath.a
+ .../{python3-ipython_8.12.0.bb => python3-ipython_8.14.0.bb}    | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-ipython_8.12.0.bb => python3-ipython_8.14.0.bb} (89%)
 
- .../libtommath/libtommath_1.2.0.bb            | 21 +++++++++++++++++++
- 1 file changed, 21 insertions(+)
- create mode 100644 meta-oe/recipes-support/libtommath/libtommath_1.2.0.bb
+diff --git a/meta-python/recipes-devtools/python/python3-ipython_8.12.0.bb b/meta-python/recipes-devtools/python/python3-ipython_8.14.0.bb
+similarity index 89%
+rename from meta-python/recipes-devtools/python/python3-ipython_8.12.0.bb
+rename to meta-python/recipes-devtools/python/python3-ipython_8.14.0.bb
+index 0cfc80ec9d..83af99a4aa 100644
+--- a/meta-python/recipes-devtools/python/python3-ipython_8.12.0.bb
++++ b/meta-python/recipes-devtools/python/python3-ipython_8.14.0.bb
+@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING.rst;md5=59b20262b8663cdd094005bddf47af5f"
+ 
+ PYPI_PACKAGE = "ipython"
+ 
+-SRC_URI[sha256sum] = "a950236df04ad75b5bc7f816f9af3d74dc118fd42f2ff7e80e8e60ca1f182e2d"
++SRC_URI[sha256sum] = "1d197b907b6ba441b692c48cf2a3a2de280dc0ac91a3405b39349a50272ca0a1"
+ 
+ RDEPENDS:${PN} = "\
+     ${PYTHON_PN}-setuptools \
+-- 
+2.41.0
 
-diff --git a/meta-oe/recipes-support/libtommath/libtommath_1.2.0.bb b/meta-oe/recipes-support/libtommath/libtommath_1.2.0.bb
-new file mode 100644
-index 0000000000..34d7f4cf6b
---- /dev/null
-+++ b/meta-oe/recipes-support/libtommath/libtommath_1.2.0.bb
-@@ -0,0 +1,21 @@
-+SUMMARY = "LibTomMath is a number theoretic multiple-precision integer library"
-+HOMEPAGE = "https://www.libtom.net/LibTomMath"
-+SECTION = "libs"
-+LICENSE = "Unlicense"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=23e7e0a32e53a2b1d35f5fd9ef053402"
-+
-+SRC_URI = "git://github.com/libtom/libtommath.git;protocol=https;branch=master"
-+
-+SRCREV = "6ca6898bf37f583c4cc9943441cd60dd69f4b8f2"
-+
-+S = "${WORKDIR}/git"
-+
-+EXTRA_OEMAKE = "'PREFIX=${prefix}' 'DESTDIR=${D}' 'LIBPATH=${libdir}' 'CFLAGS=${CFLAGS}'"
-+
-+do_compile() {
-+    oe_runmake -f makefile.shared
-+}
-+
-+do_install() {
-+    oe_runmake -f makefile.shared install
-+}
 
