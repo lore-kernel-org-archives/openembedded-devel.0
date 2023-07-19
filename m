@@ -2,46 +2,44 @@ Return-Path: <jasper@fancydomain.eu>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E8A1CC0015E
-	for <webhook@archiver.kernel.org>; Wed, 19 Jul 2023 10:43:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id F22B4EB64DA
+	for <webhook@archiver.kernel.org>; Wed, 19 Jul 2023 10:52:35 +0000 (UTC)
 Received: from mx.walter.deinstapel.de (mx.walter.deinstapel.de [62.176.232.101])
- by mx.groups.io with SMTP id smtpd.web10.10860.1689763421231055707
+ by mx.groups.io with SMTP id smtpd.web11.10999.1689763950969036902
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 19 Jul 2023 03:43:41 -0700
+ Wed, 19 Jul 2023 03:52:33 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="body hash did not verify" header.i=@fancydomain.eu header.s=mail header.b=JAakRhKc;
+ dkim=fail reason="body hash did not verify" header.i=@fancydomain.eu header.s=mail header.b=XafJiwqm;
  spf=pass (domain: fancydomain.eu, ip: 62.176.232.101, mailfrom: jasper@fancydomain.eu)
 From: Jasper Orschulko <jasper@fancydomain.eu>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=fancydomain.eu;
-	s=mail; t=1689763419;
-	bh=uPhF86LdNC6y4v7HVF08RmdlGMBAAYDxhBI72a6KGIo=;
+	s=mail; t=1689763948;
+	bh=NhWGdqECqBmZORoYyHsUfZfplTDhxKi7OIque6DKxNk=;
 	h=From:To:Cc:Subject;
-	b=JAakRhKce+a88R6J5E5qKXvxLHcuWYNR7Thod5IkeMtWyGWlzDshR7x+pTDrsJ5j6
-	 GBJq3uKdmej/fN2CPv8qYgzyBPjpaSISZfsfmsDikUn+ZrG4W5UtcZbrlmq2o/xLo/
-	 +4WmjvqsbHNVkVsHV1PCGQGgtdBsPqo33Spt4IKnTnrTJY4LNxpDZBt93PFxFqLoUW
-	 VyE3kIMT20gRD/9CWICLKfst6BrF3sJAMrPcXDLlhTEAmxOygD9yNyQfTd86JKfTCk
-	 RtO7WHqJUnD/eZFB8BJyDCt/GJ+YW/xU+Q2uk56yYMmimpT4xJdzfLpMLtlXjgglfA
-	 ytasBnCEMK7GA==
+	b=XafJiwqmTYN/o7IwZ/VC/CZIiLEMb6lrX7sQB7u0wJH3S4An0phl3zkSFXikjiKi0
+	 IFDZbOWOVVh4SpD1gfT4YM0XRGKS6q+iUMkFn8W3NC/1KUPstHJ3RscPXRY5p7JLBl
+	 2QglKScCPX2T8Jx0MMgPlMvhYcUB8QpgQF/8vmGwNLAyh1p2M6Q6HRp+IeXq9su7G2
+	 xQMOtnpjNf6j5r0TCxlp+fKFrgM9IzGJbwZHV6vhPWRJj0gmeXgkBJzYKMCzRW6VYy
+	 rURDh8o20ntV+82Mk9S0pukXa03BWzRVdKkfNcM7C0Ncm2BmUVvOY7hcAmbwNQJwhQ
+	 quqLTUQeXxUcw==
 To: openembedded-devel@lists.openembedded.org
 Cc: Jasper Orschulko <jasper@fancydomain.eu>
-Subject: [meta-oe][mickledore][PATCH] yaml-cpp: Fix cmake export
-Date: Wed, 19 Jul 2023 12:42:22 +0200
-Message-ID: <20230719104222.15327-1-jasper@fancydomain.eu>
+Subject: [meta-oe][PATCH v2] yaml-cpp: Fix cmake export
+Date: Wed, 19 Jul 2023 12:51:06 +0200
+Message-ID: <20230719105106.17856-1-jasper@fancydomain.eu>
 Mime-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 19 Jul 2023 10:43:45 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103961
-
-Upstream-Status: Accepted [https://github.com/jbeder/yaml-cpp/pull/1077]
+ <openembedded-devel@lists.openembedded.org>; Wed, 19 Jul 2023 10:52:35 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103962
 
 Signed-off-by: Jasper Orschulko <jasper@fancydomain.eu>
 ---
- .../0001-Fix-CMake-export-files-1077.patch    | 113 ++++++++++++++++++
+ .../0001-Fix-CMake-export-files-1077.patch    | 117 ++++++++++++++++++
  .../yaml-cpp/yaml-cpp_0.7.0.bb                |   1 +
- 2 files changed, 114 insertions(+)
+ 2 files changed, 118 insertions(+)
  create mode 100644 meta-oe/recipes-support/yaml-cpp/yaml-cpp/0001-Fix-CM=
 ake-export-files-1077.patch
 
@@ -49,11 +47,11 @@ diff --git a/meta-oe/recipes-support/yaml-cpp/yaml-cpp/0001-Fix-CMake-exp=
 ort-files-1077.patch b/meta-oe/recipes-support/yaml-cpp/yaml-cpp/0001-Fix=
 -CMake-export-files-1077.patch
 new file mode 100644
-index 000000000..9a3baf193
+index 000000000..b6c4a3b88
 --- /dev/null
 +++ b/meta-oe/recipes-support/yaml-cpp/yaml-cpp/0001-Fix-CMake-export-fil=
 es-1077.patch
-@@ -0,0 +1,113 @@
+@@ -0,0 +1,117 @@
 +From 3d436f6cfc2dfe52fc1533c01f57c25ae7ffac9c Mon Sep 17 00:00:00 2001
 +From: Felix Schwitzer <flx107809@gmail.com>
 +Date: Fri, 1 Apr 2022 05:26:47 +0200
@@ -79,6 +77,10 @@ n into
 +
 +Also untabify CMakeLists.txt in some places to align with the other code=
  parts in this file.
++
++Upstream-Status: Accepted [https://github.com/jbeder/yaml-cpp/pull/1077]
++
++Signed-off-by: Jasper Orschulko <jasper@fancydomain.eu>=20
 +---
 + CMakeLists.txt           | 29 ++++++++++++++++++-----------
 + yaml-cpp-config.cmake.in | 10 ++++++----
