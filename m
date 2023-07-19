@@ -2,38 +2,38 @@ Return-Path: <jasper@fancydomain.eu>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D7E57C001DC
-	for <webhook@archiver.kernel.org>; Wed, 19 Jul 2023 10:53:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D98A9C001DC
+	for <webhook@archiver.kernel.org>; Wed, 19 Jul 2023 10:54:15 +0000 (UTC)
 Received: from mx.walter.deinstapel.de (mx.walter.deinstapel.de [62.176.232.101])
- by mx.groups.io with SMTP id smtpd.web11.11016.1689764008305433387
+ by mx.groups.io with SMTP id smtpd.web10.11027.1689764052963152185
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 19 Jul 2023 03:53:28 -0700
+ Wed, 19 Jul 2023 03:54:13 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="body hash did not verify" header.i=@fancydomain.eu header.s=mail header.b=jnj3mbYu;
+ dkim=fail reason="body hash did not verify" header.i=@fancydomain.eu header.s=mail header.b=CxgU6Kak;
  spf=pass (domain: fancydomain.eu, ip: 62.176.232.101, mailfrom: jasper@fancydomain.eu)
 From: Jasper Orschulko <jasper@fancydomain.eu>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=fancydomain.eu;
-	s=mail; t=1689764006;
+	s=mail; t=1689764049;
 	bh=NhWGdqECqBmZORoYyHsUfZfplTDhxKi7OIque6DKxNk=;
 	h=From:To:Cc:Subject;
-	b=jnj3mbYusdPJ5RWuGaBsPTG7vGZb06LkfXqnaU9m9lFiHhoQzA/IO52MjbdVCzEkO
-	 yCut6JwLPiWkVRTv0MYXf9Kpdhjh/5ygfNW0aofjHMfEsoN/ZE3yxgNg5ulHM4p6Ye
-	 /tbCuP/RNVXj6wYcBTX4CZyzIRt+VzUFN+78Qo8OANdThAMLxsIM86lL2ErC8ulyzT
-	 GmymydUjGj3qSVNrQkf8PhjoLaai2gW+z/hBzhtAvlnwWgyZCfH1JODGxQmdnjjvvT
-	 /vl71juLOgVsfe4ErNuR1Amv55MO98//8/yBPjfIeH8J9Xt4vKI1qt+krA8wCqRhwT
-	 WizEzfwx17ZsQ==
+	b=CxgU6KakZHm/d1UGzFNXQkJzUh/NgNln1DboQo+l64kpZA6CbAHjuI7hFXM9CtycF
+	 GxskBayAA1KYx+fEFjn2/U3LVIAe7FW6Kz3rhP3KS1/Vr8BpR09uI7gO3klDFSI6XY
+	 0/+nPRYKrdEnGJEv6o7d+/GWt+i199nRUXmrWigGPay8YuHGGypYu/Urstj6xLZtnx
+	 /HqLFNwWB6cFE5pcDImuR7NaGaJvKzJDqkSSnMehPsXwyTM9YZouchkE8EGMmyHMG+
+	 Mg3LDCA83kWL1Dc5egXj/oMeqOsvcop8Z+nClFswMhqIkTIwWB632kc7RSyu4tOQfV
+	 hYYU2tZtrdkTQ==
 To: openembedded-devel@lists.openembedded.org
 Cc: Jasper Orschulko <jasper@fancydomain.eu>
-Subject: [meta-oe][kirkstone][PATCH v2] yaml-cpp: Fix cmake export
-Date: Wed, 19 Jul 2023 12:52:09 +0200
-Message-ID: <20230719105209.18489-1-jasper@fancydomain.eu>
+Subject: [meta-oe][mickledore][PATCH v2] yaml-cpp: Fix cmake export
+Date: Wed, 19 Jul 2023 12:52:53 +0200
+Message-ID: <20230719105253.18910-1-jasper@fancydomain.eu>
 Mime-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 19 Jul 2023 10:53:35 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103963
+ <openembedded-devel@lists.openembedded.org>; Wed, 19 Jul 2023 10:54:15 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103964
 
 Signed-off-by: Jasper Orschulko <jasper@fancydomain.eu>
 ---
