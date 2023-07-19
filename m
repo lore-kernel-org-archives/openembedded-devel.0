@@ -2,196 +2,166 @@ Return-Path: <jasper@fancydomain.eu>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D98A9C001DC
-	for <webhook@archiver.kernel.org>; Wed, 19 Jul 2023 10:54:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 14D50EB64DA
+	for <webhook@archiver.kernel.org>; Wed, 19 Jul 2023 10:59:06 +0000 (UTC)
 Received: from mx.walter.deinstapel.de (mx.walter.deinstapel.de [62.176.232.101])
- by mx.groups.io with SMTP id smtpd.web10.11027.1689764052963152185
+ by mx.groups.io with SMTP id smtpd.web10.11088.1689764342192174978
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 19 Jul 2023 03:54:13 -0700
+ Wed, 19 Jul 2023 03:59:02 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="body hash did not verify" header.i=@fancydomain.eu header.s=mail header.b=CxgU6Kak;
+ dkim=fail reason="body hash did not verify" header.i=@fancydomain.eu header.s=mail header.b=hP5ckchH;
  spf=pass (domain: fancydomain.eu, ip: 62.176.232.101, mailfrom: jasper@fancydomain.eu)
 From: Jasper Orschulko <jasper@fancydomain.eu>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=fancydomain.eu;
-	s=mail; t=1689764049;
-	bh=NhWGdqECqBmZORoYyHsUfZfplTDhxKi7OIque6DKxNk=;
+	s=mail; t=1689764340;
+	bh=AnH6r7zao3DwkrPjM1yO4kTujMuNKMtoJs6UF+kbYrs=;
 	h=From:To:Cc:Subject;
-	b=CxgU6KakZHm/d1UGzFNXQkJzUh/NgNln1DboQo+l64kpZA6CbAHjuI7hFXM9CtycF
-	 GxskBayAA1KYx+fEFjn2/U3LVIAe7FW6Kz3rhP3KS1/Vr8BpR09uI7gO3klDFSI6XY
-	 0/+nPRYKrdEnGJEv6o7d+/GWt+i199nRUXmrWigGPay8YuHGGypYu/Urstj6xLZtnx
-	 /HqLFNwWB6cFE5pcDImuR7NaGaJvKzJDqkSSnMehPsXwyTM9YZouchkE8EGMmyHMG+
-	 Mg3LDCA83kWL1Dc5egXj/oMeqOsvcop8Z+nClFswMhqIkTIwWB632kc7RSyu4tOQfV
-	 hYYU2tZtrdkTQ==
+	b=hP5ckchHR1GcULbVI3P3Bo1phm6nRZ3rNDvTrL3NNzOQoHzs2AdpZi0hFo8WJdbaX
+	 tv3EKKuudLI49cQfBSY9PXWNeQy0Q+Y8X9ixlTCwaEqHrGkSLG5bTj7Nf+9zzvYu3e
+	 RkRz+3mrzNBjTKLG4nareRJW/kA0ezQoP8sjzrHzTbT9y1l7Zbv+5jzoX4Zn7iY2gE
+	 eqv9d8lEPXkoX9YNJ8dQ9WM3pJ47lvGIXZZvkr95n5ANPBFb/OJUzEvd3Tr32m7bFf
+	 XRk1mPoG8xl41iyCoAgigATpHAGDIYeVVN7KPjV1wjAkqSxJSwE8WJ29lFyrkFQFE9
+	 64RKKUAksOVpw==
 To: openembedded-devel@lists.openembedded.org
 Cc: Jasper Orschulko <jasper@fancydomain.eu>
-Subject: [meta-oe][mickledore][PATCH v2] yaml-cpp: Fix cmake export
-Date: Wed, 19 Jul 2023 12:52:53 +0200
-Message-ID: <20230719105253.18910-1-jasper@fancydomain.eu>
+Subject: [meta-python][kirkstone][PATCH v2] python3-gcovr: Fix parsing of gcc-11 gcov metadata
+Date: Wed, 19 Jul 2023 12:57:26 +0200
+Message-ID: <20230719105726.20220-1-jasper@fancydomain.eu>
 Mime-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 19 Jul 2023 10:54:15 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103964
+ <openembedded-devel@lists.openembedded.org>; Wed, 19 Jul 2023 10:59:06 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103965
+
+gcc-11 has metadata line "-: 0:Source is newer than graph" which throws a=
+n
+error.
+
+Backported from gcovr 5.2, as kirkstone release uses gcc-11.
 
 Signed-off-by: Jasper Orschulko <jasper@fancydomain.eu>
 ---
- .../0001-Fix-CMake-export-files-1077.patch    | 117 ++++++++++++++++++
- .../yaml-cpp/yaml-cpp_0.7.0.bb                |   1 +
- 2 files changed, 118 insertions(+)
- create mode 100644 meta-oe/recipes-support/yaml-cpp/yaml-cpp/0001-Fix-CM=
-ake-export-files-1077.patch
+ ...001-Fix-parsing-of-gcov-metadata-601.patch | 84 +++++++++++++++++++
+ .../python/python3-gcovr_5.1.bb               |  1 +
+ 2 files changed, 85 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-gcovr/000=
+1-Fix-parsing-of-gcov-metadata-601.patch
 
-diff --git a/meta-oe/recipes-support/yaml-cpp/yaml-cpp/0001-Fix-CMake-exp=
-ort-files-1077.patch b/meta-oe/recipes-support/yaml-cpp/yaml-cpp/0001-Fix=
--CMake-export-files-1077.patch
+diff --git a/meta-python/recipes-devtools/python/python3-gcovr/0001-Fix-p=
+arsing-of-gcov-metadata-601.patch b/meta-python/recipes-devtools/python/p=
+ython3-gcovr/0001-Fix-parsing-of-gcov-metadata-601.patch
 new file mode 100644
-index 000000000..b6c4a3b88
+index 000000000..5530a3985
 --- /dev/null
-+++ b/meta-oe/recipes-support/yaml-cpp/yaml-cpp/0001-Fix-CMake-export-fil=
-es-1077.patch
-@@ -0,0 +1,117 @@
-+From 3d436f6cfc2dfe52fc1533c01f57c25ae7ffac9c Mon Sep 17 00:00:00 2001
-+From: Felix Schwitzer <flx107809@gmail.com>
-+Date: Fri, 1 Apr 2022 05:26:47 +0200
-+Subject: [PATCH] Fix CMake export files (#1077)
++++ b/meta-python/recipes-devtools/python/python3-gcovr/0001-Fix-parsing-=
+of-gcov-metadata-601.patch
+@@ -0,0 +1,84 @@
++From c4f53f28c4c537b75b5912a44083c41262807504 Mon Sep 17 00:00:00 2001
++From: =3D?UTF-8?q?Michael=3D20F=3DC3=3DB6rderer?=3D <michael.foerderer@g=
+mx.de>
++Date: Sun, 3 Apr 2022 22:58:33 +0200
++Subject: [PATCH] Fix parsing of gcov metadata (#601)
 +
-+After configuring the file `yaml-cpp-config.cmake.in`, the result ends u=
-p with
-+empty variables.  (see also the discussion in #774).
++gcc-11 has metadata line "-: 0:Source is newer than graph" which throws =
+an error.
 +
-+Rework this file and the call to `configure_package_config_file` accordi=
-ng the
-+cmake documentation
-+(https://cmake.org/cmake/help/v3.22/module/CMakePackageConfigHelpers.htm=
-l?highlight=3Dconfigure_package_config#command:configure_package_config_f=
-ile)
-+to overcome this issue and allow a simple `find_package` after install.
++Upstream-Status: Backport [https://github.com/gcovr/gcovr/commit/7b6947b=
+d4b6fd28a477606313fff3c13fcea8d3d]
 +
-+As there was some discussion about the place where to install the
-+`yaml-cpp-config.cmake` file, e.g. #1055, factor out the install locatio=
-n into
-+an extra variable to make it easier changing this location in the future=
-.
-+
-+Also untabify CMakeLists.txt in some places to align with the other code=
- parts in this file.
-+
-+Upstream-Status: Accepted [https://github.com/jbeder/yaml-cpp/pull/1077]
-+
-+Signed-off-by: Jasper Orschulko <jasper@fancydomain.eu>=20
++Signed-off-by: Jasper Orschulko <jasper@fancydomain.eu>
 +---
-+ CMakeLists.txt           | 29 ++++++++++++++++++-----------
-+ yaml-cpp-config.cmake.in | 10 ++++++----
-+ 2 files changed, 24 insertions(+), 15 deletions(-)
++ gcovr/gcov.py        |  5 ++++-
++ gcovr/gcov_parser.py | 24 ++++++++++++++++++++----
++ 2 files changed, 24 insertions(+), 5 deletions(-)
 +
-+diff --git a/CMakeLists.txt b/CMakeLists.txt
-+index b230b9e..983d1a4 100644
-+--- a/CMakeLists.txt
-++++ b/CMakeLists.txt
-+@@ -127,10 +127,16 @@ set_target_properties(yaml-cpp PROPERTIES
-+   PROJECT_LABEL "yaml-cpp ${yaml-cpp-label-postfix}"
-+   DEBUG_POSTFIX "${CMAKE_DEBUG_POSTFIX}")
-+=20
-++# FIXME(felix2012): A more common place for the cmake export would be
-++# `CMAKE_INSTALL_LIBDIR`, as e.g. done in ubuntu or in this project for=
- GTest
-++set(CONFIG_EXPORT_DIR "${CMAKE_INSTALL_DATADIR}/cmake/yaml-cpp")
-++set(EXPORT_TARGETS yaml-cpp)
-+ configure_package_config_file(
-+   "${PROJECT_SOURCE_DIR}/yaml-cpp-config.cmake.in"
-+   "${PROJECT_BINARY_DIR}/yaml-cpp-config.cmake"
-+-  INSTALL_DESTINATION "${CMAKE_INSTALL_DATADIR}/cmake/yaml-cpp")
-++  INSTALL_DESTINATION "${CONFIG_EXPORT_DIR}"
-++  PATH_VARS CMAKE_INSTALL_INCLUDEDIR CONFIG_EXPORT_DIR)
-++unset(EXPORT_TARGETS)
-+=20
-+ write_basic_package_version_file(
-+   "${PROJECT_BINARY_DIR}/yaml-cpp-config-version.cmake"
-+@@ -139,30 +145,31 @@ write_basic_package_version_file(
-+ configure_file(yaml-cpp.pc.in yaml-cpp.pc @ONLY)
-+=20
-+ if (YAML_CPP_INSTALL)
-+-	install(TARGETS yaml-cpp
-++  install(TARGETS yaml-cpp
-+     EXPORT yaml-cpp-targets
-+     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
-+     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-+     ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR})
-+-	install(DIRECTORY ${PROJECT_SOURCE_DIR}/include/
-++  install(DIRECTORY ${PROJECT_SOURCE_DIR}/include/
-+     DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
-+-		FILES_MATCHING PATTERN "*.h")
-++                FILES_MATCHING PATTERN "*.h")
-+   install(EXPORT yaml-cpp-targets
-+-    DESTINATION "${CMAKE_INSTALL_DATADIR}/cmake/yaml-cpp")
-+-	install(FILES
-+-		"${PROJECT_BINARY_DIR}/yaml-cpp-config.cmake"
-+-		"${PROJECT_BINARY_DIR}/yaml-cpp-config-version.cmake"
-+-    DESTINATION "${CMAKE_INSTALL_DATADIR}/cmake/yaml-cpp")
-++    DESTINATION "${CONFIG_EXPORT_DIR}")
-++  install(FILES
-++      "${PROJECT_BINARY_DIR}/yaml-cpp-config.cmake"
-++      "${PROJECT_BINARY_DIR}/yaml-cpp-config-version.cmake"
-++    DESTINATION "${CONFIG_EXPORT_DIR}")
-+   install(FILES "${PROJECT_BINARY_DIR}/yaml-cpp.pc"
-+     DESTINATION ${CMAKE_INSTALL_DATADIR}/pkgconfig)
-+ endif()
-++unset(CONFIG_EXPORT_DIR)
-+=20
-+ if(YAML_CPP_BUILD_TESTS)
-+-	add_subdirectory(test)
-++  add_subdirectory(test)
-+ endif()
-+=20
-+ if(YAML_CPP_BUILD_TOOLS)
-+-	add_subdirectory(util)
-++  add_subdirectory(util)
-+ endif()
-+=20
-+ if (YAML_CPP_CLANG_FORMAT_EXE)
-+diff --git a/yaml-cpp-config.cmake.in b/yaml-cpp-config.cmake.in
-+index 7b41e3f..a7ace3d 100644
-+--- a/yaml-cpp-config.cmake.in
-++++ b/yaml-cpp-config.cmake.in
-+@@ -3,12 +3,14 @@
-+ #  YAML_CPP_INCLUDE_DIR - include directory
-+ #  YAML_CPP_LIBRARIES    - libraries to link against
-+=20
-+-# Compute paths
-+-get_filename_component(YAML_CPP_CMAKE_DIR "${CMAKE_CURRENT_LIST_FILE}" =
-PATH)
-+-set(YAML_CPP_INCLUDE_DIR "@CONFIG_INCLUDE_DIRS@")
-++@PACKAGE_INIT@
-++
-++set_and_check(YAML_CPP_INCLUDE_DIR "@PACKAGE_CMAKE_INSTALL_INCLUDEDIR@"=
-)
-+=20
-+ # Our library dependencies (contains definitions for IMPORTED targets)
-+-include("${YAML_CPP_CMAKE_DIR}/yaml-cpp-targets.cmake")
-++include(@PACKAGE_CONFIG_EXPORT_DIR@/yaml-cpp-targets.cmake)
-+=20
-+ # These are IMPORTED targets created by yaml-cpp-targets.cmake
-+ set(YAML_CPP_LIBRARIES "@EXPORT_TARGETS@")
-++
-++check_required_components(@EXPORT_TARGETS@)
-+--=20
-+2.39.2
++diff --git a/gcovr/gcov.py b/gcovr/gcov.py
++index cc7a9af4..ff4cdb0b 100644
++--- a/gcovr/gcov.py
+++++ b/gcovr/gcov.py
++@@ -98,8 +98,11 @@ def process_gcov_data(data_fname, covdata, source_fna=
+me, options, currdir=3DNone):
++     # Find the source file
++     # TODO: instead of heuristics, use "working directory" if available
++     metadata =3D parse_metadata(lines)
+++    source =3D metadata.get("Source")
+++    if source is None:
+++        raise RuntimeError("Unexpected value 'None' for metadata 'Sourc=
+e'.")
++     fname =3D guess_source_file_name(
++-        metadata["Source"].strip(),
+++        source,
++         data_fname,
++         source_fname,
++         root_dir=3Doptions.root_dir,
++diff --git a/gcovr/gcov_parser.py b/gcovr/gcov_parser.py
++index 391ecd78..523ea406 100644
++--- a/gcovr/gcov_parser.py
+++++ b/gcovr/gcov_parser.py
++@@ -121,7 +121,7 @@ class _MetadataLine(NamedTuple):
++     """A gcov line with metadata: ``-: 0:KEY:VALUE``"""
 +
-diff --git a/meta-oe/recipes-support/yaml-cpp/yaml-cpp_0.7.0.bb b/meta-oe=
-/recipes-support/yaml-cpp/yaml-cpp_0.7.0.bb
-index d3984abe8..e04d4705a 100644
---- a/meta-oe/recipes-support/yaml-cpp/yaml-cpp_0.7.0.bb
-+++ b/meta-oe/recipes-support/yaml-cpp/yaml-cpp_0.7.0.bb
-@@ -8,6 +8,7 @@ LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D6a8aaf0595c2ef=
-c1a9c2e0913e9c1a2c"
- # yaml-cpp releases are stored as archive files in github.
- # download the exact revision of release
- SRC_URI =3D "git://github.com/jbeder/yaml-cpp.git;branch=3Dmaster;protoc=
-ol=3Dhttps"
-+SRC_URI +=3D "file://0001-Fix-CMake-export-files-1077.patch"
- SRCREV =3D "0579ae3d976091d7d664aa9d2527e0d0cff25763"
++     key: str
++-    value: str
+++    value: Optional[str]
++
++
++ class _BlockLine(NamedTuple):
++@@ -214,7 +214,19 @@ def parse_metadata(lines: List[str]) -> Dict[str, s=
+tr]:
++     ...   -: 0:Foo:bar
++     ...   -: 0:Key:123
++     ... '''.splitlines())
++-    {'Foo': 'bar', 'Key': '123'}
+++    Traceback (most recent call last):
+++       ...
+++    RuntimeError: Missing key 'Source' in metadata. GCOV data was >>
+++      -: 0:Foo:bar
+++      -: 0:Key:123<< End of GCOV data
+++    >>> parse_metadata('-: 0:Source: file \n -: 0:Foo: bar \n -: 0:Key:=
+ 123 '.splitlines())
+++    {'Source': 'file', 'Foo': 'bar', 'Key': '123'}
+++    >>> parse_metadata('''
+++    ...   -: 0:Source:file
+++    ...   -: 0:Foo:bar
+++    ...   -: 0:Key
+++    ... '''.splitlines())
+++    {'Source': 'file', 'Foo': 'bar', 'Key': None}
++     """
++     collected =3D {}
++     for line in lines:
++@@ -721,8 +733,12 @@ def _parse_line(line: str) -> _Line:
++
++         # METADATA (key, value)
++         if count_str =3D=3D "-" and lineno =3D=3D "0":
++-            key, value =3D source_code.split(":", 1)
++-            return _MetadataLine(key, value)
+++            if ":" in source_code:
+++                key, value =3D source_code.split(":", 1)
+++                return _MetadataLine(key, value.strip())
+++            else:
+++                # Add a syntethic metadata with no value
+++                return _MetadataLine(source_code, None)
++
++         if count_str =3D=3D "-":
++             count =3D 0
++--
++2.41.0
++
+diff --git a/meta-python/recipes-devtools/python/python3-gcovr_5.1.bb b/m=
+eta-python/recipes-devtools/python/python3-gcovr_5.1.bb
+index 1c4279fd1..9ab8aa9a8 100644
+--- a/meta-python/recipes-devtools/python/python3-gcovr_5.1.bb
++++ b/meta-python/recipes-devtools/python/python3-gcovr_5.1.bb
+@@ -5,6 +5,7 @@ LICENSE =3D "BSD-3-Clause"
+ LIC_FILES_CHKSUM =3D "file://LICENSE.txt;md5=3D08208c66520e8d69d53674831=
+86d94ed"
+=20
+ SRC_URI =3D "git://github.com/gcovr/gcovr.git;branch=3Dmaster;protocol=3D=
+https"
++SRC_URI +=3D "file://0001-Fix-parsing-of-gcov-metadata-601.patch"
+ SRCREV =3D "e71e883521b78122c49016eb4e510e6da06c6916"
 =20
  S =3D "${WORKDIR}/git"
 --=20
