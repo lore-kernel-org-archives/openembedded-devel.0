@@ -1,58 +1,77 @@
-Return-Path: <denis@denix.org>
+Return-Path: <mingli.yu@eng.windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AC4E8C001DE
-	for <webhook@archiver.kernel.org>; Wed, 19 Jul 2023 22:07:14 +0000 (UTC)
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web10.2685.1689804429588722742
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 92E9FEB64DA
+	for <webhook@archiver.kernel.org>; Thu, 20 Jul 2023 07:54:34 +0000 (UTC)
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.web10.8049.1689839669960718012
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 19 Jul 2023 15:07:10 -0700
+ Thu, 20 Jul 2023 00:54:30 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 6FDAD40C79;
-	Wed, 19 Jul 2023 22:07:08 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id Bkb4icCtU39c; Wed, 19 Jul 2023 22:07:08 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-88-116.washdc.fios.verizon.net [100.15.88.116])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 3DD6C40BA8;
-	Wed, 19 Jul 2023 22:07:05 +0000 (UTC)
-Received: by mail.denix.org (Postfix, from userid 1000)
-	id 60068163C0F; Wed, 19 Jul 2023 18:07:04 -0400 (EDT)
-Date: Wed, 19 Jul 2023 18:07:04 -0400
-From: Denys Dmytriyenko <denis@denix.org>
-To: "openembedded-devel@lists.openembedded.org" <openembedded-devel@lists.openembedded.org>,
-	openembedded-core <openembedded-core@lists.openembedded.org>,
-	Yocto Project <yocto@lists.yoctoproject.org>,
-	openembedded-members@lists.openembedded.org
-Subject: OpenEmbedded Happy Hour July 26 5pm/1700 UTC
-Message-ID: <20230719220704.GN1518@denix.org>
+ dkim=missing; spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=65658e6de2=mingli.yu@windriver.com)
+Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.17.1.22/8.17.1.22) with ESMTP id 36K6JFOU023972
+	for <openembedded-devel@lists.openembedded.org>; Thu, 20 Jul 2023 07:54:29 GMT
+Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3run8acekm-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Thu, 20 Jul 2023 07:54:29 +0000 (GMT)
+Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.27; Thu, 20 Jul 2023 00:54:27 -0700
+Received: from pek-lpg-core2.wrs.com (128.224.153.41) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
+ 15.1.2507.27 via Frontend Transport; Thu, 20 Jul 2023 00:54:27 -0700
+From: <mingli.yu@eng.windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [meta-initramfs][PATCH] dracut: Remove busybox from RRECOMMENDS
+Date: Thu, 20 Jul 2023 15:54:26 +0800
+Message-ID: <20230720075426.180084-1-mingli.yu@eng.windriver.com>
+X-Mailer: git-send-email 2.35.5
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-User-Agent: Mutt/1.5.20 (2009-06-14)
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Proofpoint-GUID: 9mq1Grr_tOPshW_TZxKHiL4tATHK7joH
+X-Proofpoint-ORIG-GUID: 9mq1Grr_tOPshW_TZxKHiL4tATHK7joH
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.254,Aquarius:18.0.957,Hydra:6.0.591,FMLib:17.11.176.26
+ definitions=2023-07-20_02,2023-07-19_01,2023-05-22_02
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 malwarescore=0
+ mlxlogscore=696 clxscore=1015 adultscore=0 lowpriorityscore=0 mlxscore=0
+ priorityscore=1501 spamscore=0 phishscore=0 impostorscore=0 suspectscore=0
+ bulkscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.19.0-2306200000 definitions=main-2307200064
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 19 Jul 2023 22:07:14 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103966
+ <openembedded-devel@lists.openembedded.org>; Thu, 20 Jul 2023 07:54:34 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103967
 
-All,
+From: Mingli Yu <mingli.yu@windriver.com>
 
-A friendly reminder - our regular monthly OpenEmbedded Happy Hour is 1 week 
-away, on July 26 for Europe/Americas timezones @ 1700/5pm UTC (1pm ET/10am PT)
+The coreutils which defined in RRECOMMENDS has already provide the basic
+command and it conflicts with busybox.
 
-https://www.openembedded.org/wiki/Calendar
-https://www.openembedded.org/wiki/Happy_Hours
-https://www.timeanddate.com/worldclock/fixedtime.html?msg=OpenEmbedded+Happy+Hour+July+26&iso=20230726T17
+Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+---
+ meta-initramfs/recipes-devtools/dracut/dracut_056.bb | 1 -
+ 1 file changed, 1 deletion(-)
 
+diff --git a/meta-initramfs/recipes-devtools/dracut/dracut_056.bb b/meta-initramfs/recipes-devtools/dracut/dracut_056.bb
+index 364beec5d..989a37a87 100644
+--- a/meta-initramfs/recipes-devtools/dracut/dracut_056.bb
++++ b/meta-initramfs/recipes-devtools/dracut/dracut_056.bb
+@@ -65,7 +65,6 @@ RDEPENDS:${PN} = "findutils cpio util-linux-blkid util-linux-getopt util-linux b
+ # This could be optimized a bit, but let's avoid non-booting systems :)
+ RRECOMMENDS:${PN} = " \
+                      kernel-modules \
+-                     busybox \
+                      coreutils \
+                     "
+ 
 -- 
-Regards,
-Denys Dmytriyenko <denis@denix.org>
-PGP: 0x420902729A92C964 - https://denix.org/0x420902729A92C964
-Fingerprint: 25FC E4A5 8A72 2F69 1186  6D76 4209 0272 9A92 C964
+2.35.5
+
 
