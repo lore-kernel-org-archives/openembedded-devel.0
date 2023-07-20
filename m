@@ -1,183 +1,131 @@
-Return-Path: <costamagna.gianfranco@gmail.com>
+Return-Path: <archana.polampalli@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2BEAEEB64DA
-	for <webhook@archiver.kernel.org>; Thu, 20 Jul 2023 09:38:55 +0000 (UTC)
-Received: from mail-ed1-f52.google.com (mail-ed1-f52.google.com [209.85.208.52])
- by mx.groups.io with SMTP id smtpd.web10.9098.1689845930070655697
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9D8C1EB64DA
+	for <webhook@archiver.kernel.org>; Thu, 20 Jul 2023 11:36:15 +0000 (UTC)
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.web11.10702.1689852972020047721
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 20 Jul 2023 02:38:50 -0700
+ Thu, 20 Jul 2023 04:36:12 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=jifnsPHt;
- spf=pass (domain: gmail.com, ip: 209.85.208.52, mailfrom: costamagna.gianfranco@gmail.com)
-Received: by mail-ed1-f52.google.com with SMTP id 4fb4d7f45d1cf-521dc8ae899so400432a12.3
-        for <openembedded-devel@lists.openembedded.org>; Thu, 20 Jul 2023 02:38:49 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1689845928; x=1690450728;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=N3uNWaypbd2qsW5fXJnP+PFQFPRdpf+wCSg4n4Ezc4w=;
-        b=jifnsPHtI38kxEUZ87YuM1NUYBXBWmtv2KkTPWEs8IoOpnQj48ltRztik9I6i6oHoV
-         QYYQDlMcOTHh9nbv3+tCRqoEmfZ5/+6430UPoZv5ZcDJL7qtpTAwR678r97LpL5xYuyj
-         h+Wk2ivnwo21eWEk28iBntET3YoFzezO9BXYIYE9wIGIuA5Ku0FkE/ctJ9Zubf8UStYf
-         oSyKFLPxPkQ23dgsUPaUgLO0Qq4wuGZ9rJWkT/fBBAK8aKJt/pmkmaOitUwdgokWIKbY
-         aJlIdF8DdrghAtvAXnrANcnFSedUIfXkrE3fa39iOyX6vQrO0I9kITSOzUHdzeZxJo/x
-         wUEA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1689845928; x=1690450728;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=N3uNWaypbd2qsW5fXJnP+PFQFPRdpf+wCSg4n4Ezc4w=;
-        b=KDgmRfFJZ8XZy4t6JC7eeC0sMVd96ed03bS+Aahred/GiP607L8o03RZbyEODNBR93
-         9VBBxgAR3A7dgg8zrloJI+0ntLKfQY+Vw4nkBsO/h8g+rwkzlawsoTAODfD33ZZdv6v5
-         l09Tzyu9u/SyQPKXOoP6mt/Aw1IsKQWP3ybq1ibPkai4sg2aybZds5hBlRiNqh9g1t5h
-         GEK33jIL8yW8EdTkr6C2OIwfk+rxusXcU1WsVb8xuLl5DFuz2OZKjAB5bZdp9hog8GwA
-         SUegzO5OnQ/mX3o3W61kNFP5sIOIS5y/dvhHnreMNHtGkkWndt3i7VeNHofXTf9cQcp/
-         HfTw==
-X-Gm-Message-State: ABy/qLbi9JeJ0VJq2ZhyfuaflLl9P3t1P3UjxOomhZufafGKjDpJ5VkH
-	5oaGdmk0VvYGDbrZzDjagQmgtKwMnsY=
-X-Google-Smtp-Source: APBJJlFdXnuomBSvD5zMBJHBdHjQH/D6DGqI3LsCJxLFwKRAjPmOIsZQtPCzvaMdv0xOzDhROqY5wQ==
-X-Received: by 2002:aa7:c3ca:0:b0:51d:a483:6089 with SMTP id l10-20020aa7c3ca000000b0051da4836089mr4496612edr.24.1689845927443;
-        Thu, 20 Jul 2023 02:38:47 -0700 (PDT)
-Received: from Unimatrix08-Jammy.lan ([151.58.174.15])
-        by smtp.gmail.com with ESMTPSA id c12-20020aa7df0c000000b005217412e18dsm500186edy.48.2023.07.20.02.38.46
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 20 Jul 2023 02:38:46 -0700 (PDT)
-From: Gianfranco Costamagna <costamagna.gianfranco@gmail.com>
-X-Google-Original-From: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
-To: openembedded-devel@lists.openembedded.org
-Cc: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>,
-	Gianfranco Costamagna <locutusofborg@debian.org>
-Subject: [meta-oe][PATCH] vbxguestdrivers: upgrade 7.0.8 -> 7.0.10
-Date: Thu, 20 Jul 2023 10:52:05 +0200
-Message-Id: <20230720085205.2911779-1-costamagnagianfranco@yahoo.it>
-X-Mailer: git-send-email 2.34.1
+ dkim=pass header.i=@windriver.com header.s=pps06212021 header.b=UEPz+Er9;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=6565af9f31=archana.polampalli@windriver.com)
+Received: from pps.filterd (m0250811.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.17.1.22/8.17.1.22) with ESMTP id 36KATLFT020141
+	for <openembedded-devel@lists.openembedded.org>; Thu, 20 Jul 2023 11:36:11 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
+	 h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding:content-type; s=PPS06212021; bh=VUEAK
+	etZqHOxhsYRR8GWp8XhQp8uxITWMQqNS3hNvGo=; b=UEPz+Er9loix8IA6UbUxL
+	2bpwHwWepCwEy209nlojSmQKkC1WUY1lnJnG3oqwSAj875F7F+tH5kvhLltsqzKX
+	G3oTqiYpvODJhVKtNyYYSbAb+NMiF9Z4KAvL2jrBbu0HQ5GDtcepbi+K2+UV5tCv
+	akK65aq7yUejdV1rGWkf/XZxJJ01+N8cIhjvgCg46wE9hb8iTMdvx/iaU0xzseh4
+	sxAsdXV/JNg8Z2L2wLHoOMsrSWn0ig9sV2Y7RLbXV+msefiLybKQV8e5+8HBau7B
+	I2ZTCd+02jqIwjbhco8/TF3bXK9CidfwKpu4JzTwMiDQtN+P/Hp+FeKEsNtaSf9h
+	A==
+Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3run9jvjt7-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Thu, 20 Jul 2023 11:36:10 +0000 (GMT)
+Received: from blr-linux-engg1.wrs.com (147.11.136.210) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.27; Thu, 20 Jul 2023 04:35:55 -0700
+From: Archana Polampalli <archana.polampalli@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: <Hari.GPillai@windriver.com>
+Subject: [oe][meta-oe][master][mickledore][kirkstone][PATCH 1/1] yasm: fix CVE-2023-31975
+Date: Thu, 20 Jul 2023 11:35:41 +0000
+Message-ID: <20230720113541.3632386-1-archana.polampalli@windriver.com>
+X-Mailer: git-send-email 2.40.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [147.11.136.210]
+X-ClientProxiedBy: ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) To
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252)
+X-Proofpoint-GUID: dBLL3GSriTlRMbE6ocHIBzbiCiUZJY6Y
+X-Proofpoint-ORIG-GUID: dBLL3GSriTlRMbE6ocHIBzbiCiUZJY6Y
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.254,Aquarius:18.0.957,Hydra:6.0.591,FMLib:17.11.176.26
+ definitions=2023-07-20_04,2023-07-20_01,2023-05-22_02
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 adultscore=0 bulkscore=0
+ mlxlogscore=782 phishscore=0 priorityscore=1501 clxscore=1011 mlxscore=0
+ lowpriorityscore=0 spamscore=0 suspectscore=0 impostorscore=0
+ malwarescore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.19.0-2306200000 definitions=main-2307200098
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 20 Jul 2023 09:38:55 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103968
+ <openembedded-devel@lists.openembedded.org>; Thu, 20 Jul 2023 11:36:15 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103969
 
-Signed-off-by: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
-Signed-off-by: Gianfranco Costamagna <locutusofborg@debian.org>
+yasm v1.3.0 was discovered to contain a memory leak via the function
+yasm_intnum_copy at /libyasm/intnum.c.
+
+References:
+https://nvd.nist.gov/vuln/detail/CVE-2023-31975
+https://github.com/yasm/yasm/issues/210
+
+Upstream patches:
+https://github.com/yasm/yasm/commit/b2cc5a1693b17ac415df76d0795b15994c106441
+
+Signed-off-by: Archana Polampalli <archana.polampalli@windriver.com>
 ---
- ...t-additions-7.0.8-kernel-6.4-patch-1.patch | 29 -------------
- ...t-additions-7.0.8-kernel-6.4-patch-2.patch | 43 -------------------
- ...rs_7.0.8.bb => vboxguestdrivers_7.0.10.bb} |  4 +-
- 3 files changed, 1 insertion(+), 75 deletions(-)
- delete mode 100644 meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers/virtualbox-guest-additions-7.0.8-kernel-6.4-patch-1.patch
- delete mode 100644 meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers/virtualbox-guest-additions-7.0.8-kernel-6.4-patch-2.patch
- rename meta-oe/recipes-support/vboxguestdrivers/{vboxguestdrivers_7.0.8.bb => vboxguestdrivers_7.0.10.bb} (93%)
+ .../yasm/yasm/CVE-2023-31975.patch            | 29 +++++++++++++++++++
+ meta-oe/recipes-devtools/yasm/yasm_git.bb     |  1 +
+ 2 files changed, 30 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/yasm/yasm/CVE-2023-31975.patch
 
-diff --git a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers/virtualbox-guest-additions-7.0.8-kernel-6.4-patch-1.patch b/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers/virtualbox-guest-additions-7.0.8-kernel-6.4-patch-1.patch
-deleted file mode 100644
-index 37ef3a9d5..000000000
---- a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers/virtualbox-guest-additions-7.0.8-kernel-6.4-patch-1.patch
-+++ /dev/null
-@@ -1,29 +0,0 @@
--Initial support for kernel 6.4
--https://www.virtualbox.org/changeset/99666/vbox
--
--Upstream-Status: Backport [https://gitweb.gentoo.org/repo/gentoo.git/tree/app-emulation/virtualbox-guest-additions/files/virtualbox-guest-additions-7.0.8-kernel-6.4-patch-1.patch]
--
--Signed-off-by: Bruce Ashfield <bruce.ashfield@gmail.com>
--
----- a/src/VBox/Additions/linux/sharedfolders/regops.c
--+++ b/src/VBox/Additions/linux/sharedfolders/regops.c
--@@ -75,4 +75,11 @@
-- #if RTLNX_VER_MAX(2,5,12)
-- # define PageUptodate(a_pPage) Page_Uptodate(a_pPage)
--+#endif
--+
--+/** Starting from 6.4.0, iter_iov() macro should be used in order to access to iov field.  */
--+#if RTLNX_VER_MIN(6,4,0)
--+# define VBOX_ITER_IOV(_iter) iter_iov(_iter)
--+#else
--+# define VBOX_ITER_IOV(_iter) iter->iov
-- #endif
-- 
--@@ -2400,5 +2407,5 @@
--     if (iter_is_iovec(iter) || (VBSF_GET_ITER_TYPE(iter) & ITER_KVEC)) {
-- # endif
---        const struct iovec *pCurIov    = iter->iov;
--+        const struct iovec *pCurIov    = VBOX_ITER_IOV(iter);
--         size_t              cLeft      = iter->nr_segs;
--         size_t              cPagesSpan = 0;
--
-diff --git a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers/virtualbox-guest-additions-7.0.8-kernel-6.4-patch-2.patch b/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers/virtualbox-guest-additions-7.0.8-kernel-6.4-patch-2.patch
-deleted file mode 100644
-index 20c8fbd3f..000000000
---- a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers/virtualbox-guest-additions-7.0.8-kernel-6.4-patch-2.patch
-+++ /dev/null
-@@ -1,43 +0,0 @@
--Initial support for kernel 6.4
--https://www.virtualbox.org/changeset/99667/vbox
--
--
--Upstream-Status: Backport [https://gitweb.gentoo.org/repo/gentoo.git/tree/app-emulation/virtualbox-guest-additions/files/virtualbox-guest-additions-7.0.8-kernel-6.4-patch-2.patch]
--
--Signed-off-by: Bruce Ashfield <bruce.ashfield@gmail.com>
--
----- a/src/VBox/Additions/linux/sharedfolders/regops.c
--+++ b/src/VBox/Additions/linux/sharedfolders/regops.c
--@@ -77,11 +77,4 @@
-- #endif
-- 
---/** Starting from 6.4.0, iter_iov() macro should be used in order to access to iov field.  */
---#if RTLNX_VER_MIN(6,4,0)
---# define VBOX_ITER_IOV(_iter) iter_iov(_iter)
---#else
---# define VBOX_ITER_IOV(_iter) iter->iov
---#endif
---
-- 
-- /*********************************************************************************************************************************
--@@ -94,4 +87,12 @@
-- #else
-- # define VBSF_GET_ITER_TYPE(a_pIter) ((a_pIter)->type)
--+#endif
--+
--+/** Starting from 6.4.0, iter_iov() macro should be used in order to access to iov field
--+ * of struct iov_iter. */
--+#if RTLNX_VER_MIN(6,4,0)
--+# define VBSF_GET_ITER_IOV(_iter) iter_iov(_iter)
--+#else
--+# define VBSF_GET_ITER_IOV(_iter) iter->iov
-- #endif
-- 
--@@ -2407,5 +2408,5 @@
--     if (iter_is_iovec(iter) || (VBSF_GET_ITER_TYPE(iter) & ITER_KVEC)) {
-- # endif
---        const struct iovec *pCurIov    = VBOX_ITER_IOV(iter);
--+        const struct iovec *pCurIov    = VBSF_GET_ITER_IOV(iter);
--         size_t              cLeft      = iter->nr_segs;
--         size_t              cPagesSpan = 0;
--
-diff --git a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_7.0.8.bb b/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_7.0.10.bb
-similarity index 93%
-rename from meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_7.0.8.bb
-rename to meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_7.0.10.bb
-index 233323bf7..f19363652 100644
---- a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_7.0.8.bb
-+++ b/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_7.0.10.bb
-@@ -13,11 +13,9 @@ VBOX_NAME = "VirtualBox-${PV}"
- 
- SRC_URI = "http://download.virtualbox.org/virtualbox/${PV}/${VBOX_NAME}.tar.bz2 \
-     file://Makefile.utils \
--    file://virtualbox-guest-additions-7.0.8-kernel-6.4-patch-1.patch \
--    file://virtualbox-guest-additions-7.0.8-kernel-6.4-patch-2.patch \
+diff --git a/meta-oe/recipes-devtools/yasm/yasm/CVE-2023-31975.patch b/meta-oe/recipes-devtools/yasm/yasm/CVE-2023-31975.patch
+new file mode 100644
+index 000000000..ae10e99c2
+--- /dev/null
++++ b/meta-oe/recipes-devtools/yasm/yasm/CVE-2023-31975.patch
+@@ -0,0 +1,29 @@
++From b2cc5a1693b17ac415df76d0795b15994c106441 Mon Sep 17 00:00:00 2001
++From: Katsuhiko Gondow <gondow@cs.titech.ac.jp>
++Date: Tue, 13 Jun 2023 05:00:47 +0900
++Subject: [PATCH] Fix memory leak in bin-objfmt (#231)
++
++Upstream-Status: Backport [https://github.com/yasm/yasm/commit/b2cc5a1693b17ac415df76d0795b15994c106441]
++
++CVE: CVE-2023-31975
++---
++ modules/objfmts/bin/bin-objfmt.c | 4 ++++
++ 1 file changed, 4 insertions(+)
++
++diff --git a/modules/objfmts/bin/bin-objfmt.c b/modules/objfmts/bin/bin-objfmt.c
++index 18026750..a38c3422 100644
++--- a/modules/objfmts/bin/bin-objfmt.c
+++++ b/modules/objfmts/bin/bin-objfmt.c
++@@ -1680,6 +1680,10 @@ static void
++ bin_section_data_destroy(void *data)
++ {
++     bin_section_data *bsd = (bin_section_data *)data;
+++    if (bsd->align)
+++        yasm_xfree(bsd->align);
+++    if (bsd->valign)
+++        yasm_xfree(bsd->valign);
++     if (bsd->start)
++         yasm_expr_destroy(bsd->start);
++     if (bsd->vstart)
++--
++2.40.0
+diff --git a/meta-oe/recipes-devtools/yasm/yasm_git.bb b/meta-oe/recipes-devtools/yasm/yasm_git.bb
+index 3dd382be1..19686ff27 100644
+--- a/meta-oe/recipes-devtools/yasm/yasm_git.bb
++++ b/meta-oe/recipes-devtools/yasm/yasm_git.bb
+@@ -12,6 +12,7 @@ PV = "1.3.0+git${SRCPV}"
+ SRCREV = "ba463d3c26c0ece2e797b8d6381b161633b5971a"
+ SRC_URI = "git://github.com/yasm/yasm.git;branch=master;protocol=https \
+            file://0001-Do-not-use-AC_HEADER_STDC.patch \
++           file://CVE-2023-31975.patch \
  "
  
--SRC_URI[sha256sum] = "c305fbe480f507eac7c36893ead66dffaacda944f19c3813a4533e9c39bae237"
-+SRC_URI[sha256sum] = "0b1e6d8b7f87d017c7fae37f80586acff04f799ffc1d51e995954d6415dee371"
- 
- S ?= "${WORKDIR}/vbox_module"
- S:task-patch = "${WORKDIR}/${VBOX_NAME}"
+ S = "${WORKDIR}/git"
 -- 
-2.34.1
+2.40.0
 
 
