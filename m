@@ -2,56 +2,56 @@ Return-Path: <tgamblin@baylibre.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2EA6CC04E69
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2F68FC04FE0
 	for <webhook@archiver.kernel.org>; Fri, 21 Jul 2023 19:25:42 +0000 (UTC)
-Received: from mail-oi1-f169.google.com (mail-oi1-f169.google.com [209.85.167.169])
- by mx.groups.io with SMTP id smtpd.web11.15578.1689967533804053382
+Received: from mail-qv1-f43.google.com (mail-qv1-f43.google.com [209.85.219.43])
+ by mx.groups.io with SMTP id smtpd.web10.15562.1689967534842747465
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 21 Jul 2023 12:25:34 -0700
+ Fri, 21 Jul 2023 12:25:35 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@baylibre-com.20221208.gappssmtp.com header.s=20221208 header.b=ValhI7X0;
- spf=pass (domain: baylibre.com, ip: 209.85.167.169, mailfrom: tgamblin@baylibre.com)
-Received: by mail-oi1-f169.google.com with SMTP id 5614622812f47-3a36b30aa7bso1571512b6e.3
-        for <openembedded-devel@lists.openembedded.org>; Fri, 21 Jul 2023 12:25:33 -0700 (PDT)
+ dkim=pass header.i=@baylibre-com.20221208.gappssmtp.com header.s=20221208 header.b=1FyRAxrM;
+ spf=pass (domain: baylibre.com, ip: 209.85.219.43, mailfrom: tgamblin@baylibre.com)
+Received: by mail-qv1-f43.google.com with SMTP id 6a1803df08f44-636274ce31eso15529406d6.1
+        for <openembedded-devel@lists.openembedded.org>; Fri, 21 Jul 2023 12:25:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=baylibre-com.20221208.gappssmtp.com; s=20221208; t=1689967532; x=1690572332;
+        d=baylibre-com.20221208.gappssmtp.com; s=20221208; t=1689967534; x=1690572334;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=cxHrFVZEXhfbew2QN1p/GSYA/z5QNZUQrwWE4RSnMYA=;
-        b=ValhI7X0Ct6gKeEBepqxU7Db9H9i/VfnaAXk/VRsRV/6p52mVjQgEmjeAdoIxwY4Ha
-         6ZL3WMBGyqEIP46KeeJuxCWqrCrQtXt1o9v1A78ex/vsOq/GtT8OJ5Ly10HgKiObcZei
-         mdXCs28ySK/hFgGXJvIzT/KSmFXE6dv5bv1N0zs48Pmew1vBdzYTKAP5opEi0JhUq4i8
-         YQIGF8aYow0pK+jKz8o7d2D1zuoImw1t3lEBRcthPeVmfiinvqjLSfpTbIaMhfs9SsCb
-         V2C230QOrKzfezdW5iZC6o+5v5Zqx79thanIFnZDmy3hPM4LXFiRK3aIcee2vzkNbS2f
-         VWhg==
+        bh=Z7GuM/Yr+FVtnkJ3GxlxGxDEsPAySY4U6QCj+/m7pXg=;
+        b=1FyRAxrMG6m2asrMd5OJSGztyz2U2OpcMMVUaoGKiO0znTndx/VGspgnj+2IJngum7
+         Hs0aaVNfaVLQjZ80z+dPQPgCHy2i8ybwsz+zDOyrGD4O290NMMJnf0k5VLJYqRE5kKbk
+         79FyiT29egzGyFHqDMSOnx5KCQ9x/CGk1cVvA9sAbZbGsk2YFVGAl8OEEfqPj0dM9N4+
+         JX4l0Sv3KQr1Oo1nTK6CP731g7ftbz9iv7u8YWcIQft1bU6Iz66NNwnj6B4ekc27zZ8k
+         EgI7j4AlKZ5YCFfU1fTnbg9me7robcVyWYvjLm//eQ37VnH07xdjbLgiRUAfv1y6EDGJ
+         xxKA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1689967532; x=1690572332;
+        d=1e100.net; s=20221208; t=1689967534; x=1690572334;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=cxHrFVZEXhfbew2QN1p/GSYA/z5QNZUQrwWE4RSnMYA=;
-        b=aHdZ4QBZ9iioMfst6HKVx/Mq466IMCtMyni281KyDW/PbFt53YwCiff6rvWqPWLkjM
-         fClHeuAALZYdPYqPtAji0TiU3PTi/Q5uO7DhxC5oaitwHpKQ5vTC0+JfIw80bBofs3FC
-         1/T5Rj2ibentN9XtFoSApxvlh+mqgNuDx7TAzoVkky01lgx6Ng1NGOPhTQBWP7y2Fg9d
-         3IOCwtG77XBRQqwzwPStEeF5Mo2vxY9jOsa+8OYq7Y75VLD+d8+F4DZVGL2voT2ppEMh
-         Gz7hKP65Wz94fYv/TeL1SaHbPCQUWwQIODBZfhq4M4di9yXEo6D2iDB/38LPuDAKOLaN
-         wUeg==
-X-Gm-Message-State: ABy/qLYJc3EtIMJ7wJKvQ5AS0aZk0Pj5h0KL16Yxm8D4rqIIro5qX5zp
-	iPuWQucLeZOyV0a1F2WxWwiQ2eYKsqoSd4jyuD0=
-X-Google-Smtp-Source: APBJJlEJYDNEbhe7Jmq8mXikVQjODAJe1N2tE1/2TXAmi1lRnjCL7hC0+7JSJZVnw6SAVS02lZP5zg==
-X-Received: by 2002:aca:f10:0:b0:3a1:d3f0:32ed with SMTP id 16-20020aca0f10000000b003a1d3f032edmr2937315oip.23.1689967532496;
-        Fri, 21 Jul 2023 12:25:32 -0700 (PDT)
+        bh=Z7GuM/Yr+FVtnkJ3GxlxGxDEsPAySY4U6QCj+/m7pXg=;
+        b=KE3Mlnlz94u8ZLzW/7FfE7c32gG7IhSeGdH1EsVrNfRKovBIs+lzRnXrrxTsoMW4ru
+         g2gGdxWSHDVVYevTxvqSqat0BmZDC9sX8s3rQchNGs6rodrc8yUdXfTUoFZqjfx9LZN2
+         hBYa0U9SgRFXwdwUFEpKGA5MtXqvDX3S3QYQSm/OPMIWWMjI4FqEJWBBYmpVUFggj1po
+         dgoAZ5zjZdeZG7Mh/R6eqp3Z7wxIIQufaRhOr8418hPDFAmZ4ZdvpFTTkQC8y5L4AgEh
+         8v8x6DgFnWTgxP+GqP+bsRRMVgcXb2r9e+T57v8MR65ZObAGzWOfbmc/uoCTRcbytUd8
+         YGrA==
+X-Gm-Message-State: ABy/qLbk/+gw5roSPpp5kabcSJAh7Fiarv5uVrnudvQ7Q9Yhb5XgzFqd
+	X+v672qn4ERTqvwi+fciy6HlFWLBsEAWkvBF8UA=
+X-Google-Smtp-Source: APBJJlHEuWp5+fd4EYmOKOGiZo54MBPj+X1PR14gmgBJF/gwto49j4KOBHEFwV5sHcpyjHSC8TLSgw==
+X-Received: by 2002:a0c:b317:0:b0:630:198c:3c60 with SMTP id s23-20020a0cb317000000b00630198c3c60mr1037841qve.23.1689967533771;
+        Fri, 21 Jul 2023 12:25:33 -0700 (PDT)
 Received: from megalith.cgocable.net ([2001:1970:5b1f:ab00:fc4e:ec42:7e5d:48dd])
-        by smtp.gmail.com with ESMTPSA id k30-20020a0cb25e000000b0063cdcd5699csm676669qve.118.2023.07.21.12.25.31
+        by smtp.gmail.com with ESMTPSA id k30-20020a0cb25e000000b0063cdcd5699csm676669qve.118.2023.07.21.12.25.33
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 21 Jul 2023 12:25:32 -0700 (PDT)
+        Fri, 21 Jul 2023 12:25:33 -0700 (PDT)
 From: Trevor Gamblin <tgamblin@baylibre.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-python][PATCH 2/9] python3-binwalk: upgrade 2.3.3 -> 2.3.4
-Date: Fri, 21 Jul 2023 15:25:23 -0400
-Message-ID: <20230721192530.2515633-2-tgamblin@baylibre.com>
+Subject: [meta-python][PATCH 4/9] python3-bitstring: add python3-io to RDEPENDS, alphabetize
+Date: Fri, 21 Jul 2023 15:25:25 -0400
+Message-ID: <20230721192530.2515633-4-tgamblin@baylibre.com>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20230721192530.2515633-1-tgamblin@baylibre.com>
 References: <20230721192530.2515633-1-tgamblin@baylibre.com>
@@ -61,33 +61,28 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Fri, 21 Jul 2023 19:25:42 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103975
-
-Changelog (https://github.com/ReFirmLabs/binwalk/releases/tag/v2.3.4):
-- Merged patch to fix PFS directory traversal / code execution bug. Credit: Quentin Kaiser.
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103977
 
 Signed-off-by: Trevor Gamblin <tgamblin@baylibre.com>
 ---
- .../{python3-binwalk_2.3.3.bb => python3-binwalk_2.3.4.bb}      | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-binwalk_2.3.3.bb => python3-binwalk_2.3.4.bb} (92%)
+ meta-python/recipes-devtools/python/python3-bitstring_4.0.2.bb | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/meta-python/recipes-devtools/python/python3-binwalk_2.3.3.bb b/meta-python/recipes-devtools/python/python3-binwalk_2.3.4.bb
-similarity index 92%
-rename from meta-python/recipes-devtools/python/python3-binwalk_2.3.3.bb
-rename to meta-python/recipes-devtools/python/python3-binwalk_2.3.4.bb
-index 1a55a3e4a1..0b7d97fccb 100644
---- a/meta-python/recipes-devtools/python/python3-binwalk_2.3.3.bb
-+++ b/meta-python/recipes-devtools/python/python3-binwalk_2.3.4.bb
-@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=65bbee055d3ea3bfc475f07aecf4de64"
+diff --git a/meta-python/recipes-devtools/python/python3-bitstring_4.0.2.bb b/meta-python/recipes-devtools/python/python3-bitstring_4.0.2.bb
+index 243504b666..a4d59913f8 100644
+--- a/meta-python/recipes-devtools/python/python3-bitstring_4.0.2.bb
++++ b/meta-python/recipes-devtools/python/python3-bitstring_4.0.2.bb
+@@ -12,8 +12,9 @@ inherit pypi python_poetry_core
  
- SRC_URI = "git://github.com/ReFirmLabs/binwalk;protocol=https;branch=master"
+ RDEPENDS:${PN} = "\
+     ${PYTHON_PN}-core \
+-    ${PYTHON_PN}-numbers \
++    ${PYTHON_PN}-io \
+     ${PYTHON_PN}-mmap \
++    ${PYTHON_PN}-numbers \
+ "
  
--SRCREV = "fa0c0bd59b8588814756942fe4cb5452e76c1dcd"
-+SRCREV = "cddfede795971045d99422bd7a9676c8803ec5ee"
- 
- S = "${WORKDIR}/git"
- 
+ BBCLASSEXTEND = "native nativesdk"
 -- 
 2.41.0
 
