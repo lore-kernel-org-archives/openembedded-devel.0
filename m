@@ -2,116 +2,101 @@ Return-Path: <tgamblin@baylibre.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1B231C001DC
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 02224C001DE
 	for <webhook@archiver.kernel.org>; Fri, 21 Jul 2023 19:25:42 +0000 (UTC)
-Received: from mail-qv1-f52.google.com (mail-qv1-f52.google.com [209.85.219.52])
- by mx.groups.io with SMTP id smtpd.web11.15580.1689967535575219892
+Received: from mail-vs1-f49.google.com (mail-vs1-f49.google.com [209.85.217.49])
+ by mx.groups.io with SMTP id smtpd.web10.15561.1689967533229025584
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 21 Jul 2023 12:25:35 -0700
+ Fri, 21 Jul 2023 12:25:33 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@baylibre-com.20221208.gappssmtp.com header.s=20221208 header.b=w4erMhzE;
- spf=pass (domain: baylibre.com, ip: 209.85.219.52, mailfrom: tgamblin@baylibre.com)
-Received: by mail-qv1-f52.google.com with SMTP id 6a1803df08f44-63770af327fso15440096d6.2
-        for <openembedded-devel@lists.openembedded.org>; Fri, 21 Jul 2023 12:25:35 -0700 (PDT)
+ dkim=pass header.i=@baylibre-com.20221208.gappssmtp.com header.s=20221208 header.b=SzJTaMzk;
+ spf=pass (domain: baylibre.com, ip: 209.85.217.49, mailfrom: tgamblin@baylibre.com)
+Received: by mail-vs1-f49.google.com with SMTP id ada2fe7eead31-443746c638eso899619137.2
+        for <openembedded-devel@lists.openembedded.org>; Fri, 21 Jul 2023 12:25:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=baylibre-com.20221208.gappssmtp.com; s=20221208; t=1689967534; x=1690572334;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=8qw4pR//RMtpOuNQ+p8oKSNsZAqJtEujD+JBhyyVyEU=;
-        b=w4erMhzEHuuz5LxrMDcDarzywOccilTEE8ZYmneg3A8vLt2WvwHp2GAmxrAThaGAnZ
-         XXeIlEIaebROepz6r8CiKyjMja9svCZdlFwsAU1sXdyWzUk/x/rwztd/m5GJanFTxckZ
-         R6XAPIJNPYMFeGPDbrrJdJFwE0YVm6dmvRuCvtkdjmedrqo+KjB2OTBali3GnqRXTX9V
-         ywYCyG6pJonL6UaJJIrNBSiIr0PAl+t+cnn80eyryxyrjX8uX7NsekpDD+DdaQd+LKJH
-         XwBV+Rt+GTPNG6iPJly5uSts00lIYeE6HZqZvE8ZZ8sWH+H12G82SXWw9nsve/VXyajZ
-         ffBg==
+        d=baylibre-com.20221208.gappssmtp.com; s=20221208; t=1689967532; x=1690572332;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=w9afd2xa5nIHk6o3P6RrOlHCpvG44of5nM6btdvaCCA=;
+        b=SzJTaMzknS3OeTtHxFDS5HVGXNdGH2Y5m1X0h2eNfawaOhEWfjNqn/FqRR0fy9qbo9
+         DVZpTibjQcLNbCBaHdjQVp9lIoioSpynHG9ZBxhxC5nbNpGmaXVtsOYIuPSFkJ4ujy6t
+         Wio4eZm2GJe+1zEVt9T7eYYYgeIFCTGgF5Z7SW5Xuo4/sMYBs2Iiedu5Cu698vEt7TB0
+         F+zphKgDEHRDBmIMWPZImKNFWz3+/Th2m0RhxjC1ViBIQ6VKFGZy1p739GCXs6ajoZLa
+         +Y1eoxPJTf4NZgYHymvFzD61m05eha9/H2ecp5xbIJNtxRjOSHSo4g28JKL6Z3G3PqfD
+         aVcQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1689967534; x=1690572334;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=8qw4pR//RMtpOuNQ+p8oKSNsZAqJtEujD+JBhyyVyEU=;
-        b=g4QaPi/+IngubNO9WSVBN+48CQUcyLkDm+micrqqQOppWRSLd0VsDufOWUyXPepht1
-         xaTORXTr28qc7Tsyexmsacmv6QPET5l9O0hvqsBj/1TdRDvIKtKVlp7TeBVxRLYIEKzL
-         IBS/xuWeY2X6Krm8at9ysJuGwlYplzzTEMLUJRUi780PiLpvpg7P/DP/8Pe3VDMM7QAx
-         71llPS/b2MtdyECAhp41eU6d+wO778cTMDpMQ50VqKMYhv5UZrrP1TWNLKaePJuuOWls
-         VlDjX8jQRLJ3l1F0T2EOG3nYfpabmLvSaqpfAlT8DBqIedevD5HErR3xRw7/i2cz1FBd
-         /Ydg==
-X-Gm-Message-State: ABy/qLZqYd70THjA7xzH695z7Mn6j7Z8epMWzQAR9fQIm0FRqR8CSiKC
-	JBCCjbzrHzsD4esx18a7ekpSY5LRFhivovL9Roo=
-X-Google-Smtp-Source: APBJJlH4HSNyQqujxZ+OGrREHXQxIUlSenIBosxLbI/FdkIqcxWtQlj9KQKrHwYVVWgr9ExQtUauHA==
-X-Received: by 2002:a0c:e788:0:b0:626:1ba1:70ae with SMTP id x8-20020a0ce788000000b006261ba170aemr876839qvn.33.1689967534408;
-        Fri, 21 Jul 2023 12:25:34 -0700 (PDT)
+        d=1e100.net; s=20221208; t=1689967532; x=1690572332;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=w9afd2xa5nIHk6o3P6RrOlHCpvG44of5nM6btdvaCCA=;
+        b=CtAyq4QExMbWSF0XrdVDRLNFoLu3LnlzpgNKcFjpAD0nLc542WEgz1COVX3k6de9/x
+         EgpRy/lRqutedBPR4Y0NoSkORT5prNjI5MEmLNiWmQoAUJNEFcuWpMvMZluvGfMxBK+6
+         a43ORb5nF3P8+dTm/DnyDWLlLLS1ix2nzNOWZDMjbw/UJA+LQH9fHxsrE40/ZxmtOoqK
+         2dhuLsSXKxdvBebgzvkj8IHVLhRyEm7W1ykg+XNiYLEhSfzVZWzCHT26paV8LRwP21Mm
+         Iga6UAfQF760gx5epLRTbHlBA1PJ1NomoiwRVRgerhiY+VvKCHivhMR/vuzzqbedaF6Q
+         O4IA==
+X-Gm-Message-State: ABy/qLZcM/eoy4PJRQ3k+5E1c5L15q4TK0+SKsBcXPckVENbFP9dnH0i
+	PKPYTWlB7VFfUnwNBQ7nG+wVKAXsf2g7ijja3T0=
+X-Google-Smtp-Source: APBJJlGlSDIzdIrVRHp+NAztzimmXCOUPMtIPtrK2yMiflfs3sPbV20d8xRHRNHeYSG9L1EZtExxxA==
+X-Received: by 2002:a67:f959:0:b0:443:5b37:a5a5 with SMTP id u25-20020a67f959000000b004435b37a5a5mr704072vsq.34.1689967531766;
+        Fri, 21 Jul 2023 12:25:31 -0700 (PDT)
 Received: from megalith.cgocable.net ([2001:1970:5b1f:ab00:fc4e:ec42:7e5d:48dd])
-        by smtp.gmail.com with ESMTPSA id k30-20020a0cb25e000000b0063cdcd5699csm676669qve.118.2023.07.21.12.25.33
+        by smtp.gmail.com with ESMTPSA id k30-20020a0cb25e000000b0063cdcd5699csm676669qve.118.2023.07.21.12.25.31
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 21 Jul 2023 12:25:34 -0700 (PDT)
+        Fri, 21 Jul 2023 12:25:31 -0700 (PDT)
 From: Trevor Gamblin <tgamblin@baylibre.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-python][PATCH 5/9] python3-blinker: upgrade 1.5 -> 1.6.2
-Date: Fri, 21 Jul 2023 15:25:26 -0400
-Message-ID: <20230721192530.2515633-5-tgamblin@baylibre.com>
+Subject: [meta-python][PATCH 1/9] python3-awesomeversion: upgrade 22.9.0 -> 23.5.0
+Date: Fri, 21 Jul 2023 15:25:22 -0400
+Message-ID: <20230721192530.2515633-1-tgamblin@baylibre.com>
 X-Mailer: git-send-email 2.41.0
-In-Reply-To: <20230721192530.2515633-1-tgamblin@baylibre.com>
-References: <20230721192530.2515633-1-tgamblin@baylibre.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Fri, 21 Jul 2023 19:25:42 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103978
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103974
 
-blinker now needs setuptools.build_meta instead of setuptools3.
+The project has stopped using setuptools in favor of poetry, so inherit
+python_poetry_core instead.
 
-Changelog (https://github.com/pallets-eco/blinker/blob/main/CHANGES.rst):
+Changelog (https://github.com/ludeeus/awesomeversion/releases/tag/23.5.0):
 
-Version 1.6.2
-Released 2023-04-12
-
-- Type annotations are not evaluated at runtime. typing-extensions is not a runtime dependency. :pr:`94`
-
-Version 1.6.1
-Released 2023-04-09
-
-- Ensure that py.typed is present in the distributions (to enable other projects to use blinker's typing).
-- Require typing-extensions > 4.2 to ensure it includes ParamSpec. :issue:`90`
-
-Version 1.6
-Released 2023-04-02
-
-- Add a muted context manager to temporarily turn off a signal. :pr:`84`
-- Allow int senders (alongside existing string senders). :pr:`83`
-- Add a send_async method to the Signal to allow signals to send to coroutine receivers. :pr:`76`
-- Update and modernise the project structure to match that used by the pallets projects. :pr:`77`
-- Add an intial set of type hints for the project.
+- Add CI for Python 3.11 by @ludeeus in #191
+- Add demo page by @ludeeus in #195
+- Add better styles to demo by @ludeeus in #197
+- Remove setuptools from dev-dependencies by @ludeeus in #202
+- Update demo with compare by @ludeeus in #219
+- Add Python 3.12 to CI by @ludeeus in #222
+- Add in_range helper method by @ludeeus in #224
+- Restructure README contents by @ludeeus in #225
 
 Signed-off-by: Trevor Gamblin <tgamblin@baylibre.com>
 ---
- .../{python3-blinker_1.5.bb => python3-blinker_1.6.2.bb}      | 4 ++--
+ ...someversion_22.9.0.bb => python3-awesomeversion_23.5.0.bb} | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-blinker_1.5.bb => python3-blinker_1.6.2.bb} (72%)
+ rename meta-python/recipes-devtools/python/{python3-awesomeversion_22.9.0.bb => python3-awesomeversion_23.5.0.bb} (76%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-blinker_1.5.bb b/meta-python/recipes-devtools/python/python3-blinker_1.6.2.bb
-similarity index 72%
-rename from meta-python/recipes-devtools/python/python3-blinker_1.5.bb
-rename to meta-python/recipes-devtools/python/python3-blinker_1.6.2.bb
-index dae1e39437..8e77df088d 100644
---- a/meta-python/recipes-devtools/python/python3-blinker_1.5.bb
-+++ b/meta-python/recipes-devtools/python/python3-blinker_1.6.2.bb
-@@ -2,9 +2,9 @@ DESCRIPTION = "Fast, simple object-to-object and broadcast signaling."
+diff --git a/meta-python/recipes-devtools/python/python3-awesomeversion_22.9.0.bb b/meta-python/recipes-devtools/python/python3-awesomeversion_23.5.0.bb
+similarity index 76%
+rename from meta-python/recipes-devtools/python/python3-awesomeversion_22.9.0.bb
+rename to meta-python/recipes-devtools/python/python3-awesomeversion_23.5.0.bb
+index 20ed1890db..bcd959cb27 100644
+--- a/meta-python/recipes-devtools/python/python3-awesomeversion_22.9.0.bb
++++ b/meta-python/recipes-devtools/python/python3-awesomeversion_23.5.0.bb
+@@ -4,8 +4,8 @@ SECTION = "devel/python"
  LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=42cd19c88fc13d1307a4efd64ee90e4e"
+ LIC_FILES_CHKSUM = "file://LICENCE.md;md5=92622b5a8e216099be741d78328bae5d"
  
--SRC_URI[sha256sum] = "923e5e2f69c155f2cc42dafbbd70e16e3fde24d2d4aa2ab72fbe386238892462"
-+SRC_URI[sha256sum] = "4afd3de66ef3a9f8067559fb7a1cbe555c17dcbe15971b05d1b625c3e7abe213"
+-SRC_URI[sha256sum] = "2f4190d333e81e10b2a4e156150ddb3596f5f11da67e9d51ba39057aa7a17f7e"
++SRC_URI[sha256sum] = "a505558316010d2d10d487226f79c1157204af00fa462fdcf948e347011dd491"
  
--inherit pypi setuptools3 ptest
-+inherit pypi python_setuptools_build_meta ptest
+ RDEPENDS:${PN} += "python3-profile python3-logging"
  
- SRC_URI += "file://run-ptest"
- 
+-inherit pypi setuptools3
++inherit pypi python_poetry_core
 -- 
 2.41.0
 
