@@ -1,131 +1,111 @@
-Return-Path: <archana.polampalli@windriver.com>
+Return-Path: <Martin.Jansa@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9D8C1EB64DA
-	for <webhook@archiver.kernel.org>; Thu, 20 Jul 2023 11:36:15 +0000 (UTC)
-Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
- by mx.groups.io with SMTP id smtpd.web11.10702.1689852972020047721
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B87A1EB64DD
+	for <webhook@archiver.kernel.org>; Fri, 21 Jul 2023 15:04:50 +0000 (UTC)
+Received: from mail-wr1-f42.google.com (mail-wr1-f42.google.com [209.85.221.42])
+ by mx.groups.io with SMTP id smtpd.web10.9458.1689951887261589409
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 20 Jul 2023 04:36:12 -0700
+ Fri, 21 Jul 2023 08:04:47 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=pps06212021 header.b=UEPz+Er9;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=6565af9f31=archana.polampalli@windriver.com)
-Received: from pps.filterd (m0250811.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.17.1.22/8.17.1.22) with ESMTP id 36KATLFT020141
-	for <openembedded-devel@lists.openembedded.org>; Thu, 20 Jul 2023 11:36:11 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
-	 h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding:content-type; s=PPS06212021; bh=VUEAK
-	etZqHOxhsYRR8GWp8XhQp8uxITWMQqNS3hNvGo=; b=UEPz+Er9loix8IA6UbUxL
-	2bpwHwWepCwEy209nlojSmQKkC1WUY1lnJnG3oqwSAj875F7F+tH5kvhLltsqzKX
-	G3oTqiYpvODJhVKtNyYYSbAb+NMiF9Z4KAvL2jrBbu0HQ5GDtcepbi+K2+UV5tCv
-	akK65aq7yUejdV1rGWkf/XZxJJ01+N8cIhjvgCg46wE9hb8iTMdvx/iaU0xzseh4
-	sxAsdXV/JNg8Z2L2wLHoOMsrSWn0ig9sV2Y7RLbXV+msefiLybKQV8e5+8HBau7B
-	I2ZTCd+02jqIwjbhco8/TF3bXK9CidfwKpu4JzTwMiDQtN+P/Hp+FeKEsNtaSf9h
-	A==
-Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3run9jvjt7-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Thu, 20 Jul 2023 11:36:10 +0000 (GMT)
-Received: from blr-linux-engg1.wrs.com (147.11.136.210) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.27; Thu, 20 Jul 2023 04:35:55 -0700
-From: Archana Polampalli <archana.polampalli@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-CC: <Hari.GPillai@windriver.com>
-Subject: [oe][meta-oe][master][mickledore][kirkstone][PATCH 1/1] yasm: fix CVE-2023-31975
-Date: Thu, 20 Jul 2023 11:35:41 +0000
-Message-ID: <20230720113541.3632386-1-archana.polampalli@windriver.com>
-X-Mailer: git-send-email 2.40.0
+ dkim=pass header.i=@gmail.com header.s=20221208 header.b=KNzqD1E6;
+ spf=pass (domain: gmail.com, ip: 209.85.221.42, mailfrom: martin.jansa@gmail.com)
+Received: by mail-wr1-f42.google.com with SMTP id ffacd0b85a97d-3090d3e9c92so1692865f8f.2
+        for <openembedded-devel@lists.openembedded.org>; Fri, 21 Jul 2023 08:04:47 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20221208; t=1689951885; x=1690556685;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=0KH8YRS0jN5LGCS0e5b+ibzTIc6BrKC6XWofSGH/YuE=;
+        b=KNzqD1E6pC9R5ZPVJ150VvtEoCgSIEWa6MMLwtLjHbbxT9XiFCWiXTBaOOXJvB+ywc
+         v3u23aS9QLn/9so4fcvLpMRNAiLyRzYhnMq+3h8BYsn7wa4MNomsxJ8CHTmvhWP9XqdF
+         lI7LADI1Px+NqHwRH0y1uY4n6K/lKxHFYde2FhTaiVO2kfvf/g8GqAge2acrk50l6Xzv
+         CD0I6LsjCfC14yOmCZrBtby/2na/3jM2p6J3Qag/ld5J0BtWfnGcWcz3h5B1N6CH5dBg
+         U9jQio3qT/eR0mcunrluJ390FAqt4lgv1cBD1wzu6z3oCjjzUw8J96ToEdhTkY0NVP4a
+         Rc6A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20221208; t=1689951885; x=1690556685;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=0KH8YRS0jN5LGCS0e5b+ibzTIc6BrKC6XWofSGH/YuE=;
+        b=jAY+jev78MdRquVfEgDYYZq9Gbjh4NaH9GcsSG9gd7JsGugTY2OWWHOHkua3wj1EyI
+         Km/o/DZ7UiKiD9qi6xf6QG54AQ54le56/cnUAGLdkxvhxJ/vQ7/FBwbAKW9LEjz8IUlh
+         N0QNUZ2kzwjg49Us87dCR4QragDFEf3ofJMUIfvgSh90zVdRfEUTnnhbWBITD2gg+VGF
+         9joEXjEQPK9d5+2UA0UFciB90q5s/JDwuvKfgE1kUjklqw0mj5vQqRDzFpxJ5sjwTGjn
+         zM7h6lv33qMcvkDu/4bKn0mWqno4jT5Gson0DaCNOI2K7Ik6hgyvaPpnk85Cjh9ukPbH
+         +hDQ==
+X-Gm-Message-State: ABy/qLYF5F+JKdk4XtTET7yCnM/RXs6tPw8pGKI8uKEfnRuo2BpiG8Bm
+	cxOSNXtQ0ExgX7tyZbJdc64lpM0qdcA=
+X-Google-Smtp-Source: APBJJlHs5Cdui9yAbx5SV6PKjN8CkG/N5l/f9n8ncxrwKP4RMPqGQxAly9Uvkw78eUpXfSpBd42qTA==
+X-Received: by 2002:a5d:6391:0:b0:314:2faa:a23 with SMTP id p17-20020a5d6391000000b003142faa0a23mr1646569wru.43.1689951885334;
+        Fri, 21 Jul 2023 08:04:45 -0700 (PDT)
+Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
+        by smtp.gmail.com with ESMTPSA id i7-20020a05600011c700b00313fd294d6csm4490308wrx.7.2023.07.21.08.04.41
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 21 Jul 2023 08:04:42 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Martin Jansa <Martin.Jansa@gmail.com>
+Subject: [meta-networking][PATCH] dlm: Do not use -fcf-protection=full on aarch64 platforms
+Date: Fri, 21 Jul 2023 17:04:38 +0200
+Message-ID: <20230721150438.3482382-1-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.41.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [147.11.136.210]
-X-ClientProxiedBy: ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) To
- ala-exchng01.corp.ad.wrs.com (147.11.82.252)
-X-Proofpoint-GUID: dBLL3GSriTlRMbE6ocHIBzbiCiUZJY6Y
-X-Proofpoint-ORIG-GUID: dBLL3GSriTlRMbE6ocHIBzbiCiUZJY6Y
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.254,Aquarius:18.0.957,Hydra:6.0.591,FMLib:17.11.176.26
- definitions=2023-07-20_04,2023-07-20_01,2023-05-22_02
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 adultscore=0 bulkscore=0
- mlxlogscore=782 phishscore=0 priorityscore=1501 clxscore=1011 mlxscore=0
- lowpriorityscore=0 spamscore=0 suspectscore=0 impostorscore=0
- malwarescore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.19.0-2306200000 definitions=main-2307200098
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 20 Jul 2023 11:36:15 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103969
+ <openembedded-devel@lists.openembedded.org>; Fri, 21 Jul 2023 15:04:50 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103970
 
-yasm v1.3.0 was discovered to contain a memory leak via the function
-yasm_intnum_copy at /libyasm/intnum.c.
+Its not supported option, see:
+http://errors.yoctoproject.org/Errors/Details/721121/
 
-References:
-https://nvd.nist.gov/vuln/detail/CVE-2023-31975
-https://github.com/yasm/yasm/issues/210
+aarch64-oe-linux-gcc  -mcpu=3Dcortex-a57 -march=3Darmv8-a+crc -mbranch-prot=
+ection=3Dstandard --sysroot=3DTOPDIR/tmp-glibc/work/cortexa57-oe-linux/dlm/=
+4.2.0-r0/recipe-sysroot libdlm.c  -O2 -pipe -g -feliminate-unused-debug-typ=
+es -fcanon-prefix-map  -fmacro-prefix-map=3DTOPDIR/tmp-glibc/work/cortexa57=
+-oe-linux/dlm/4.2.0-r0/dlm-dlm-4.2.0=3D/usr/src/debug/dlm/4.2.0-r0  -fdebug=
+-prefix-map=3DTOPDIR/tmp-glibc/work/cortexa57-oe-linux/dlm/4.2.0-r0/dlm-dlm=
+-4.2.0=3D/usr/src/debug/dlm/4.2.0-r0  -fmacro-prefix-map=3DTOPDIR/tmp-glibc=
+/work/cortexa57-oe-linux/dlm/4.2.0-r0/dlm-dlm-4.2.0=3D/usr/src/debug/dlm/4.=
+2.0-r0  -fdebug-prefix-map=3DTOPDIR/tmp-glibc/work/cortexa57-oe-linux/dlm/4=
+.2.0-r0/dlm-dlm-4.2.0=3D/usr/src/debug/dlm/4.2.0-r0  -fdebug-prefix-map=3DT=
+OPDIR/tmp-glibc/work/cortexa57-oe-linux/dlm/4.2.0-r0/recipe-sysroot=3D  -fm=
+acro-prefix-map=3DTOPDIR/tmp-glibc/work/cortexa57-oe-linux/dlm/4.2.0-r0/rec=
+ipe-sysroot=3D  -fdebug-prefix-map=3DTOPDIR/tmp-glibc/work/cortexa57-oe-lin=
+ux/dlm/4.2.0-r0/recipe-sysroot-native=3D  -fcf-protection=3Dfull -D_GNU_SOU=
+RCE -O2 -ggdb -Wall -Wformat -Wformat-security -Wmissing-prototypes -Wneste=
+d-externs -Wpointer-arith -Wextra -Wshadow -Wcast-align -Wwrite-strings -Wa=
+ggregate-return -Wstrict-prototypes -Winline -Wredundant-decls -Wno-sign-co=
+mpare -Wno-unused-parameter -Wp,-D_FORTIFY_SOURCE=3D2 -Wp,-D_GLIBCXX_ASSERT=
+IONS -fstack-protector-strong -fstack-clash-protection -fexceptions -fasync=
+hronous-unwind-tables -fdiagnostics-show-option -fPIC -D_REENTRANT -c -o li=
+bdlm.o
+cc1: error: '-fcf-protection=3Dfull' is not supported for this target
 
-Upstream patches:
-https://github.com/yasm/yasm/commit/b2cc5a1693b17ac415df76d0795b15994c106441
-
-Signed-off-by: Archana Polampalli <archana.polampalli@windriver.com>
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- .../yasm/yasm/CVE-2023-31975.patch            | 29 +++++++++++++++++++
- meta-oe/recipes-devtools/yasm/yasm_git.bb     |  1 +
- 2 files changed, 30 insertions(+)
- create mode 100644 meta-oe/recipes-devtools/yasm/yasm/CVE-2023-31975.patch
+ meta-networking/recipes-extended/dlm/dlm_4.2.0.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-oe/recipes-devtools/yasm/yasm/CVE-2023-31975.patch b/meta-oe/recipes-devtools/yasm/yasm/CVE-2023-31975.patch
-new file mode 100644
-index 000000000..ae10e99c2
---- /dev/null
-+++ b/meta-oe/recipes-devtools/yasm/yasm/CVE-2023-31975.patch
-@@ -0,0 +1,29 @@
-+From b2cc5a1693b17ac415df76d0795b15994c106441 Mon Sep 17 00:00:00 2001
-+From: Katsuhiko Gondow <gondow@cs.titech.ac.jp>
-+Date: Tue, 13 Jun 2023 05:00:47 +0900
-+Subject: [PATCH] Fix memory leak in bin-objfmt (#231)
-+
-+Upstream-Status: Backport [https://github.com/yasm/yasm/commit/b2cc5a1693b17ac415df76d0795b15994c106441]
-+
-+CVE: CVE-2023-31975
-+---
-+ modules/objfmts/bin/bin-objfmt.c | 4 ++++
-+ 1 file changed, 4 insertions(+)
-+
-+diff --git a/modules/objfmts/bin/bin-objfmt.c b/modules/objfmts/bin/bin-objfmt.c
-+index 18026750..a38c3422 100644
-+--- a/modules/objfmts/bin/bin-objfmt.c
-++++ b/modules/objfmts/bin/bin-objfmt.c
-+@@ -1680,6 +1680,10 @@ static void
-+ bin_section_data_destroy(void *data)
-+ {
-+     bin_section_data *bsd = (bin_section_data *)data;
-++    if (bsd->align)
-++        yasm_xfree(bsd->align);
-++    if (bsd->valign)
-++        yasm_xfree(bsd->valign);
-+     if (bsd->start)
-+         yasm_expr_destroy(bsd->start);
-+     if (bsd->vstart)
-+--
-+2.40.0
-diff --git a/meta-oe/recipes-devtools/yasm/yasm_git.bb b/meta-oe/recipes-devtools/yasm/yasm_git.bb
-index 3dd382be1..19686ff27 100644
---- a/meta-oe/recipes-devtools/yasm/yasm_git.bb
-+++ b/meta-oe/recipes-devtools/yasm/yasm_git.bb
-@@ -12,6 +12,7 @@ PV = "1.3.0+git${SRCPV}"
- SRCREV = "ba463d3c26c0ece2e797b8d6381b161633b5971a"
- SRC_URI = "git://github.com/yasm/yasm.git;branch=master;protocol=https \
-            file://0001-Do-not-use-AC_HEADER_STDC.patch \
-+           file://CVE-2023-31975.patch \
- "
- 
- S = "${WORKDIR}/git"
--- 
-2.40.0
+diff --git a/meta-networking/recipes-extended/dlm/dlm_4.2.0.bb b/meta-netwo=
+rking/recipes-extended/dlm/dlm_4.2.0.bb
+index 094dbb1ad0..ee006efe28 100644
+--- a/meta-networking/recipes-extended/dlm/dlm_4.2.0.bb
++++ b/meta-networking/recipes-extended/dlm/dlm_4.2.0.bb
+@@ -39,6 +39,7 @@ export EXTRA_OEMAKE =3D ""
+ CFPROTECTION ?=3D "-fcf-protection=3Dfull"
+ CFPROTECTION:riscv64 =3D ""
+ CFPROTECTION:arm =3D ""
++CFPROTECTION:aarch64 =3D ""
+=20
+ CFLAGS +=3D "${CFPROTECTION}"
+=20
+--=20
+2.41.0
 
 
