@@ -2,56 +2,56 @@ Return-Path: <tgamblin@baylibre.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 14DFCC04A6A
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 05D35C00528
 	for <webhook@archiver.kernel.org>; Fri, 21 Jul 2023 19:25:42 +0000 (UTC)
-Received: from mail-qv1-f50.google.com (mail-qv1-f50.google.com [209.85.219.50])
- by mx.groups.io with SMTP id smtpd.web11.15581.1689967535898360660
+Received: from mail-qv1-f45.google.com (mail-qv1-f45.google.com [209.85.219.45])
+ by mx.groups.io with SMTP id smtpd.web11.15582.1689967537237933024
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 21 Jul 2023 12:25:36 -0700
+ Fri, 21 Jul 2023 12:25:37 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@baylibre-com.20221208.gappssmtp.com header.s=20221208 header.b=SlWjiCnm;
- spf=pass (domain: baylibre.com, ip: 209.85.219.50, mailfrom: tgamblin@baylibre.com)
-Received: by mail-qv1-f50.google.com with SMTP id 6a1803df08f44-634a3682c25so16429216d6.3
-        for <openembedded-devel@lists.openembedded.org>; Fri, 21 Jul 2023 12:25:35 -0700 (PDT)
+ dkim=pass header.i=@baylibre-com.20221208.gappssmtp.com header.s=20221208 header.b=Jf5Ts56O;
+ spf=pass (domain: baylibre.com, ip: 209.85.219.45, mailfrom: tgamblin@baylibre.com)
+Received: by mail-qv1-f45.google.com with SMTP id 6a1803df08f44-635dbfa710dso16078276d6.0
+        for <openembedded-devel@lists.openembedded.org>; Fri, 21 Jul 2023 12:25:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=baylibre-com.20221208.gappssmtp.com; s=20221208; t=1689967535; x=1690572335;
+        d=baylibre-com.20221208.gappssmtp.com; s=20221208; t=1689967536; x=1690572336;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=kNLVSy0JQcofFqbHfVDJyVSOkWCgoAFqWIFgcaR2MWw=;
-        b=SlWjiCnm3fpDUGhdJQOj2I2nTq1did8Jk1GqdZmhtG1kH2G44Lil6UogTZqg7qEGeE
-         4O6ALv81kH1fC+2ULtYvxrGcSmERzCIcB7tFPwyTkA76uLTKGNynnSEUrAZhT2MpojiK
-         uu10xsijxfFwtr+545kf77Ja0lfGQde0mclPBBfkDNBMI7jV4L3e3aLJfD4JQGKZHmLY
-         nFWwIyUCPENwnHBs3kPJyvhYiRxBpMhnJ7XwibwL/wlJ5AYv6qFyZrDebUHGdoDaTyPS
-         559pssilki1uq1DIne8NpoFAFKl0+kqTNgb1bQ6D/44eUC4gWf1IBfqNkomB9OdqGur5
-         /llw==
+        bh=LgVcYr7ddXgqfrWdOOwcsOArjH80QFzSRoxYLGu5qSc=;
+        b=Jf5Ts56OIjnyNs1rzqUz2L+nP0hbkGnSq7j1cmlyXDv+KAKEiT/jDsXDYJqZR7jb6l
+         eObShdy3JbsU0U07tPNTmLWpoy+b2mVMAgUsMdi8q4reJVkbZjyEsWbOu+Rz3R5/536N
+         vKaA/pEGSgji+17VMfVFSkzdtwIMbPDtp7Cj6uum37BbiLxCReKozoNxKr+tWY2baXlo
+         OuR+xPLc7Dym/mCqKAVzs0u9MoQaI9/sLfYVAQRSIjFVmjt91i4c9Gk8y54sglsOMQ37
+         GDlyZ7F11tckHBGEMIEz9idFndJxtfHaEDQybI6N7y2nKtwRdkVt2E19UymMjahk/RPz
+         zlow==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1689967535; x=1690572335;
+        d=1e100.net; s=20221208; t=1689967536; x=1690572336;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=kNLVSy0JQcofFqbHfVDJyVSOkWCgoAFqWIFgcaR2MWw=;
-        b=jmSDoWtrI6V47Tx9DoaEgQEKpUs514yESLHZSqWM5nas24E6LNQ2gZwhHjFn5qYtJ+
-         IhwEN4OdMdLS1jc2FcPCmmpc22yJErVKiDuFj26L//koabVKhPOIYMEwe6QdwolsfrMQ
-         4VKNrg9nJTcveDVIv94qSJvUu4ViOLTeAlMXwAESoeCtygyhOFT8lBWMQvk3nMYio4YG
-         nBfIuOtAYkvT/P/JFU+edV8ARCi7v070ejupYkXWIZmKg1rOJ9hrZKWvxqMCaoD3GHAN
-         9Yyayu9tRVWD6MNnDez/WwQeu9bDIi332KuxAuLEsOYxU9sbM6Z3s1JHIxahDAbpGW55
-         Iegg==
-X-Gm-Message-State: ABy/qLbSE3hQw3g5B1It428eMQqYCv4TxV2lAVqx8BaeE1swXzgiV/Yi
-	40kUjl7On7LHeSf7y2k4PYgbG0xU2MDmeZDdbJ4=
-X-Google-Smtp-Source: APBJJlEdoucvtxVQwWHnC/xQZbeqXqmu6VvBYGQ6aGwiF0ktD6MnUursakt4DBuwkE5SNrw9Lx8Zxg==
-X-Received: by 2002:a0c:ebc9:0:b0:631:f06b:823e with SMTP id k9-20020a0cebc9000000b00631f06b823emr887419qvq.65.1689967534929;
-        Fri, 21 Jul 2023 12:25:34 -0700 (PDT)
+        bh=LgVcYr7ddXgqfrWdOOwcsOArjH80QFzSRoxYLGu5qSc=;
+        b=TuqpvgPVk8+uMj3RdD01H584E9XR8dPbZCxUH7VAI2fa3xgIOKTtEoylcMZk8LeN+S
+         nzI/kTWkrVOf4SXqtHAqL2Ow6r9R6Tw8IHPQE+g674DQeBh2nkVJH3Iy/wtWTXZKm1NZ
+         ZYJzflpmaS2jWKXJadmRle82tJoGeBq1hCeHtHiPPn+Xzf1pNw0feCjHLRux8r38QeLr
+         QakQqfJW51Jh80ArwsAz5RATzfMxNbyPLjfvvHuTAQK4rdJhhfPXOIQwcJov3cpR/HTC
+         +FLEadH1Lyz+HYmhvY5V2jz9IGwuBPCjL5Lk2RoJqXGVVaR49akis/l0vvoy9mJfv4tu
+         W8XA==
+X-Gm-Message-State: ABy/qLapj2KJmNyInZ+fHBiXPYPDkpO6SPObQfvxveh8Bl3WlsLAauyi
+	YlyqCZM65NtbQoIy+e/z5Va60uDekQ6RQxhCteo=
+X-Google-Smtp-Source: APBJJlFGL/Evbhyovz6cCvYGtoaXNdmrhmkan5RMA3ZTgbjHSHULGJBWwJsltdJQ+Nkf286xCkkRyg==
+X-Received: by 2002:ad4:5006:0:b0:635:ce65:38b2 with SMTP id s6-20020ad45006000000b00635ce6538b2mr1039019qvo.62.1689967536156;
+        Fri, 21 Jul 2023 12:25:36 -0700 (PDT)
 Received: from megalith.cgocable.net ([2001:1970:5b1f:ab00:fc4e:ec42:7e5d:48dd])
-        by smtp.gmail.com with ESMTPSA id k30-20020a0cb25e000000b0063cdcd5699csm676669qve.118.2023.07.21.12.25.34
+        by smtp.gmail.com with ESMTPSA id k30-20020a0cb25e000000b0063cdcd5699csm676669qve.118.2023.07.21.12.25.35
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 21 Jul 2023 12:25:34 -0700 (PDT)
+        Fri, 21 Jul 2023 12:25:35 -0700 (PDT)
 From: Trevor Gamblin <tgamblin@baylibre.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-python][PATCH 6/9] python3-blinker: add python3-asyncio to RDEPENDS
-Date: Fri, 21 Jul 2023 15:25:27 -0400
-Message-ID: <20230721192530.2515633-6-tgamblin@baylibre.com>
+Subject: [meta-python][PATCH 8/9] python3-flask: upgrade 2.2.3 -> 2.3.2
+Date: Fri, 21 Jul 2023 15:25:29 -0400
+Message-ID: <20230721192530.2515633-8-tgamblin@baylibre.com>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20230721192530.2515633-1-tgamblin@baylibre.com>
 References: <20230721192530.2515633-1-tgamblin@baylibre.com>
@@ -61,30 +61,40 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Fri, 21 Jul 2023 19:25:42 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103979
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103981
 
-The module fails to import without this.
+flask has migrated to using pyproject.toml, so we need
+python_setuptools_build_meta instead of setuptools3.
+
+Changelog: https://flask.palletsprojects.com/en/2.3.x/changes/#version-2-3-0
 
 Signed-off-by: Trevor Gamblin <tgamblin@baylibre.com>
 ---
- meta-python/recipes-devtools/python/python3-blinker_1.6.2.bb | 4 ++++
- 1 file changed, 4 insertions(+)
+ .../python/{python3-flask_2.2.3.bb => python3-flask_2.3.2.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-flask_2.2.3.bb => python3-flask_2.3.2.bb} (81%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-blinker_1.6.2.bb b/meta-python/recipes-devtools/python/python3-blinker_1.6.2.bb
-index 8e77df088d..b0728e66cd 100644
---- a/meta-python/recipes-devtools/python/python3-blinker_1.6.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-blinker_1.6.2.bb
-@@ -8,6 +8,10 @@ inherit pypi python_setuptools_build_meta ptest
+diff --git a/meta-python/recipes-devtools/python/python3-flask_2.2.3.bb b/meta-python/recipes-devtools/python/python3-flask_2.3.2.bb
+similarity index 81%
+rename from meta-python/recipes-devtools/python/python3-flask_2.2.3.bb
+rename to meta-python/recipes-devtools/python/python3-flask_2.3.2.bb
+index 90c56c75a4..ec9c62a170 100644
+--- a/meta-python/recipes-devtools/python/python3-flask_2.2.3.bb
++++ b/meta-python/recipes-devtools/python/python3-flask_2.3.2.bb
+@@ -6,11 +6,11 @@ HOMEPAGE = "https://github.com/mitsuhiko/flask/"
+ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=ffeffa59c90c9c4a033c7574f8f3fb75"
  
- SRC_URI += "file://run-ptest"
+-SRC_URI[sha256sum] = "7eb373984bf1c770023fce9db164ed0c3353cd0b53f130f4693da0ca756a2e6d"
++SRC_URI[sha256sum] = "8c2f9abd47a9e8df7f0c3f091ce9497d011dc3b31effcf4c85a6e2b50f4114ef"
  
-+RDEPENDS:${PN} += "\
-+        ${PYTHON_PN}-asyncio \
-+"
-+
- RDEPENDS:${PN}-ptest += " \
- 	${PYTHON_PN}-pytest \
- "
+ PYPI_PACKAGE = "Flask"
+ 
+-inherit pypi setuptools3
++inherit pypi python_setuptools_build_meta
+ 
+ CLEANBROKEN = "1"
+ 
 -- 
 2.41.0
 
