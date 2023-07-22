@@ -1,136 +1,233 @@
-Return-Path: <tgamblin@baylibre.com>
+Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9EC25EB64DD
-	for <webhook@archiver.kernel.org>; Fri, 21 Jul 2023 20:38:32 +0000 (UTC)
-Received: from mail-vs1-f41.google.com (mail-vs1-f41.google.com [209.85.217.41])
- by mx.groups.io with SMTP id smtpd.web11.17072.1689971908835916264
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 928B9EB64DA
+	for <webhook@archiver.kernel.org>; Sat, 22 Jul 2023 07:18:16 +0000 (UTC)
+Received: from mailout11.t-online.de (mailout11.t-online.de [194.25.134.85])
+ by mx.groups.io with SMTP id smtpd.web11.1230.1690010287642412102
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 21 Jul 2023 13:38:29 -0700
+ Sat, 22 Jul 2023 00:18:08 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@baylibre-com.20221208.gappssmtp.com header.s=20221208 header.b=FD9w006E;
- spf=pass (domain: baylibre.com, ip: 209.85.217.41, mailfrom: tgamblin@baylibre.com)
-Received: by mail-vs1-f41.google.com with SMTP id ada2fe7eead31-440ad576d87so1025195137.1
-        for <openembedded-devel@lists.openembedded.org>; Fri, 21 Jul 2023 13:38:28 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=baylibre-com.20221208.gappssmtp.com; s=20221208; t=1689971907; x=1690576707;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=PkCOj6L8MgcOQQBy8nnQ68uLALfQgytcZPTkTNXs6jA=;
-        b=FD9w006EzZ+Wb6fBtGqbLw6PH6HKM9+x0q7NrETiuwtFLaqJNjs8FcEV3f5TpyvHy5
-         FPoq0p+4B9qI56e7KXfNX5ilrmkJD2tv2y4+cAz8SBQFqKFGYRAS0jqL1MlO5qSQglte
-         d/aFytVhck7A26VOaicnnGwkknFmR3NxTTWOwRyMpr32f1Ad5l4E8jnxvgI+7DITiDGj
-         AbQO5pJBl7lsYh9qF+w8YtBcsx5+xgUylIM1H/Z+Jn6WFOVceH0//bP3x8mWhSMMYB2G
-         KKjMu90ShkPj7bKpb6i5o/ntfuXD5I0yRYZoNoHA2nWHGK4HYiArvxbea7GCkqKxdyMk
-         r1lw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1689971907; x=1690576707;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=PkCOj6L8MgcOQQBy8nnQ68uLALfQgytcZPTkTNXs6jA=;
-        b=jV6sUgtAa4w1TxTsLyNETW1VFZVDgpCEOhsblPzyTgd78iWiuW8lOch1+TeegjeClq
-         qi/UYbomw6v1xeBP8W8xmQwOngZ4L81OudI1FhAaiXcvOhcCCS+Q9+DMVkmGMG6wQuHi
-         GeNht9QUFuoviTfmTm91+xC4dcKsOc6KXfvC+sXhc15WD52zVNKkTJai+TlYgqnnkssq
-         9OP0DFsCCmaMoTaSqEAiE/lvJvRuTIBigsA7cJ5xZmF7x2mpcTFKzYJ3cHIZzRuo/DQU
-         fh3JmJis3r2ntHxhfrogmhqnVSC/2A1NmXQJsKKH7gGpvlVGN1CA6BOQBPI07Warnsv7
-         HHfg==
-X-Gm-Message-State: ABy/qLap1LoCCR3yFJ+m/SWzaXvWWwXDveZMhAIGBVOnV0zhigsGNOhj
-	j4sh2qi3GFh3cMtN7xV+FZ3aBu+N69/0flJzB7s=
-X-Google-Smtp-Source: APBJJlExL3Tf9+f9ttElr8VRcah3I3mxvqV5sPQF7YBK2zlPXPi5wv9FfgZrjerqBQW0y/tpKgPBYA==
-X-Received: by 2002:a05:6102:250:b0:444:c02c:f709 with SMTP id a16-20020a056102025000b00444c02cf709mr934108vsq.31.1689971907508;
-        Fri, 21 Jul 2023 13:38:27 -0700 (PDT)
-Received: from megalith.cgocable.net ([2001:1970:5b1f:ab00:fc4e:ec42:7e5d:48dd])
-        by smtp.gmail.com with ESMTPSA id a30-20020a0ca99e000000b006238f82cde4sm1535647qvb.108.2023.07.21.13.38.26
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 21 Jul 2023 13:38:26 -0700 (PDT)
-From: Trevor Gamblin <tgamblin@baylibre.com>
+ dkim=none (message not signed); spf=none, err=SPF record not found (domain: t-online.de, ip: 194.25.134.85, mailfrom: f_l_k@t-online.de)
+Received: from fwd73.dcpf.telekom.de (fwd73.aul.t-online.de [10.223.144.99])
+	by mailout11.t-online.de (Postfix) with SMTP id 55DFEABF1
+	for <openembedded-devel@lists.openembedded.org>; Sat, 22 Jul 2023 09:18:05 +0200 (CEST)
+Received: from intel-corei7-64.fritz.box ([84.163.41.200]) by fwd73.t-online.de
+	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
+	esmtp id 1qN6sO-0WXGmf0; Sat, 22 Jul 2023 09:18:04 +0200
+From: Markus Volk <f_l_k@t-online.de>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-python][PATCH] python3-greenstalk: upgrade 2.0.0 -> 2.0.2
-Date: Fri, 21 Jul 2023 16:38:25 -0400
-Message-ID: <20230721203825.2557064-1-tgamblin@baylibre.com>
-X-Mailer: git-send-email 2.41.0
+Subject: [meta-multimedia][PATCH] libcamera: update 0.0.5 -> 0.1.0
+Date: Sat, 22 Jul 2023 09:17:59 +0200
+Message-Id: <20230722071759.27004-1-f_l_k@t-online.de>
+X-Mailer: git-send-email 2.39.3
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-TOI-EXPURGATEID: 150726::1690010284-9A68B904-4620FAF3/0/0 CLEAN NORMAL
+X-TOI-MSGID: 564feb86-c653-4d22-84ec-7fbcf5190a17
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 21 Jul 2023 20:38:32 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103984
+ <openembedded-devel@lists.openembedded.org>; Sat, 22 Jul 2023 07:18:16 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103985
 
-Switch to python_setuptools_build_meta.
+libcamera v0.1.0
 
-No changelog provided Commit history:
+ABI Compliance:
 
-a4643c4 (HEAD -> main, tag: v2.0.2, origin/main, origin/HEAD) Release 2.0.2
-87269f0 Remove redundant wheel dep from pyproject.toml
-e30d3c4 (tag: v2.0.1) Release 2.0.1
-36b348a Require a current version of Python
-e189f4b Revert breaking API changes
-868e9d0 Format with Black
-5f4f424 Strip quotes from string stats
-a31ad74 Add __repr__ to Job and Client
-ebbb0f2 Improve names of private parsing functions
-3ff9ef1 Use phony targets in Makefile
-4feaf07 Format with Black
-2c9165f Add test for drain mode
-5068dc2 Enable strict mode in mypy
-383176c Add type hints to integration test decorator
-6fb0a48 Polish documentation
-e8c5f20 Fix reportUnknownVariableType Pylance warnings
-e7ac1da Polish API reference
-9a384a8 Remove __slots__ from Job
-45c53b4 Polish error handling
-4f79e7c Document and type hint Job attributes
-0f576a0 Remove sphinx-autodoc-typehints dev dependency
-29a5499 Always use bytes for job bodies
-3dc6430 Make it clear the requirements are for development
-db496d5 Add command for building HTML docs
-da73ed0 Fix Sphinx import path
-c93efc0 Update link after changing default branch to main
-7fc7eef Add PEP 561 py.typed marker file
-5174142 Switch to package directory structure
-40a9149 Add python_requires
-18196e2 Add project_urls
-59e3f99 Avoid installing unnecessary dependencies on CI
-764f5bf Stop checking code coverage by default
-45de080 Remove Codecov integration
-1f0baf6 Specify license with license_files
-74cad3b Switch to declarative package configuration
-9e6aebb Remove unused Flake8 ignore
-48cecff Use variable annotation syntax
-56387c8 Drop support for Python 3.5
-62e4bbf Update CI to only send one coverage report
-d168cff Move CI to GitHub Actions
-6281716 Add 3.9 to list of supported Python versions
+abi-compliance-checker reports 99% binary compatibility and 81.4% source
+compatibilty between version 0.0.5 and 0.1.
 
-Signed-off-by: Trevor Gamblin <tgamblin@baylibre.com>
+ - Binary compatibility: 99%
+ - Source compatibility: 81.4%
+ - Total binary compatibility problems: 4, warnings: 2
+ - Total source compatibility problems: 165, warnings: 7
+
+Now that we have funtional ABI validation, the soname has been updated fr=
+om
+libcamera.so.0.0.5 to libcamera.so.0.1.
+
+Future releases will now maintain the same soname until an ABI breakage i=
+s
+detected to reduce the repackaging and rebuilding of other components tha=
+t may
+use libcamera. The abi-compatibility report can now be generated with the=
+ new
+utility './utils/abi-compat.sh'.
+
+Key differences here are due to preventing the installation of internal a=
+nd
+private headers in the packaging process, and most of this API compatibil=
+ity
+should not be visible to applications with the exception of:
+
+- Camera::generateConfiguration ( StreamRoles const& roles )
+
+  The StreamRoles type definition has been removed. This is now handled a=
+s a
+  Span<StreamRole> to prevent unnecessary allocations and copies.
+
+- CameraManager::addCamera ( std::shared_ptr<struct Camera> camera, std::=
+vector<unsigned long>const& devnums )
+- CameraManager::get ( dev_t devnum )
+- CameraManager::removeCamera ( std::shared_ptr<struct Camera> camera )
+
+  These functions of the CameraManager were for use exclusively by the V4=
+L2
+  adaptation layer, and not intended for use by applications. This has no=
+w been
+  reworked to use the new SystemDevices and the redundant functions remov=
+ed.
+
+The ABI/API breakages have been introduced by:
+
+  5ca0c9276f28 ("libcamera: CameraManager: Remove ::get(dev_t)")
+  26a4b83d1b94 ("libcamera: Remove `StreamRoles` alias")
+  63966ae587d7 ("libcamera: base: Do not install private headers")
+
+Core:
+ - libcamera: v4l2_videodevice: Use O_CLOEXEC when exporting DMA buffers
+ - libcamera: ipa_manager: Allow IPA loading in nested subdirs
+ - meson: Fix usage of overwritten pipeline variable
+ - subprojects: Drop leftovers of pybind11
+ - camera_sensor: ipa: core: Add CFA pattern to IPACameraSensorInfo
+ - libcamera: controls: Define a default lens position behaviour
+ - libcamera: internal: request: convert to pragma once
+ - libcamera: camera_manager: Move private implementation to internal
+ - libcamera: camera_manager: Move {add,remove}Camera to internal
+ - libcamera: properties: Provide a Devices camera property
+ - libcamera: pipeline: Register device numbers with camera
+ - libcamera: camera_sensor: Adjust properties::Rotation
+ - libcamera: meson: Allow PH to change libcamera_deps
+ - libcamera: base: Move thread_annotations to private
+ - libcamera: base: Do not install private headers
+ - utils: ABI Compatibility checker
+ - meson: Use x.y soname versioning
+ - libcamera: camera: Take span of StreamRole instead of vector
+ - libcamera: Remove `StreamRoles` alias
+ - utils: ipu3-capture.sh: Fix the script to work with recent media-ctl v=
+ersions
+ - Documentation: Add predefined macros from config.h to Doxyfile
+ - utils: checkstyle: Add __repr__ method to CommitFile class
+ - utils: checkstyle: Support running checkers selectively
+ - utils: checkstyle: Don't include commit ID in commit title
+ - utils: checkstyle: Add trailers checker
+ - tests: gstreamer: Test cameras' enumeration from GstDeviceProvider
+ - meson: Fix space around colon issues
+ - libcamera: Add option to configure udev support
+ - libcamera: CameraManager: Remove ::get(dev_t)
+ - tests: gstreamer: Fix compiler error with gcc 8.4.0
+
+ipa:
+ - meson: ipa: Add mapping for pipeline handler to mojom interface file
+ - libcamera: ipa: Remove character restriction on the IPA name
+ - ipa: meson: Allow nested IPA directory structures
+ - ipa: raspberrypi: Introduce IpaBase class
+ - ipa: raspberrypi: agc: Move weights out of AGC
+ - ipa: rkisp1: agc: drop hard-coded analogue gain range
+ - libipa: camera_sensor_helper: Add IMX327 helper
+ - pipeline: rpi: ipa_base: Parse config files after platformRegister()
+ - libcamera: camera_sensor: Add Sony IMX327 sensor properties
+ - ipa: rpi: imx296: Small refinements to the IMX296 mono sensor tuning
+ - ipa: rpi: Handle controls for mono variant sensors
+ - libcamera: controls: Drop reference to IPA in controls documentation
+ - libipa: camera_sensor_helper: Restore alphabetical order
+ - ipa: ipu3: agc: Drop hard-codec analogue gain max
+ - ipa: rkisp1: agc: Restore minimum analogue gain limit
+ - pipeline: ipa: rpi: Return lens controls from ipa->configure()
+ - ipa: rpi: Set lens position to hyperfocal on startup
+ - ipa: rpi: tunings: Add missing short and long exposure profiles
+ - ipa: rpi: agc: Use std::string instead of char arrays
+ - ipa: rpi: agc: Gracefully handle missing agc modes
+ - ipa: rpi: agc: Do not switch to a default if a mode is unavailable
+ - ipa: rpi: imx708: Fix mode switch drop frame count
+ - ipa: rpi: imx296_mono: Disable all colour shading
+
+pipeline:
+ - libcamera: pipeline: simple: Add support for ST's DCMIPP
+ - pipeline: meson: Allow nested pipeline handler directory structures
+ - pipeline: ipa: raspberrypi: Refactor and move the Raspberry Pi code
+ - pipeline: raspberrypi: rpi_stream: Set invalid buffer to id =3D=3D 0
+ - pipeline: ipa: raspberrypi: Restructure the IPA mojom interface
+ - pipeline: raspberrypi: Make RPi::Stream::name() return const std::stri=
+ng &
+ - pipeline: raspberrypi: Introduce PipelineHandlerBase class
+ - pipeline: raspberrypi: Add stream flags to RPi::Stream
+ - libcamera: rkisp1: Generate config using main path
+ - libcamera: rkisp1: Crop on ISP before downscaling
+ - libcamera: rkisp1: Assign sizes to roles
+ - libcamera: rkisp1: Fix enumeration of RAW formats
+ - pipeline: rpi: Do not return an error from pipeline config file handli=
+ng
+ - libcamera: pipeline: simple: Support TI CSI-RX
+ - pipeline: rpi: Account for Bayer packing when validating format
+
+apps:
+ - apps: qcam: Remove redundant check
+ - v4l2: Move the v4l2 compat layer to libexec/libcamera
+ - android: mm: generic: use GRALLOC_HARDWARE_MODULE_ID
+ - android: mm: Stub libhardware for build tests
+ - py: Fix CameraManager.version property
+ - py: Move ColorSpace and Transform classes to separate files
+ - py: Use exceptions instead of returning error codes
+ - py: unittests.py: Add weakref helpers and use del
+ - py: Move to mainline pybind11 version
+ - py: Fix code formatting
+ - py: unittests.py: Fix type checker warnings
+ - gstreamer: Add enable_auto_focus option to the GStreamer plugin
+ - gstreamer: Drop libcamera_private dependency
+ - apps: Add ipa-verify application
+ - v4l2: v4l2_camera_proxy: Prevent ioctl sign-extensions
+ - v4l2: Use SystemDevices properties to identify cameras
+
+Signed-off-by: Markus Volk <f_l_k@t-online.de>
 ---
- ...thon3-greenstalk_2.0.0.bb => python3-greenstalk_2.0.2.bb} | 5 ++---
- 1 file changed, 2 insertions(+), 3 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-greenstalk_2.0.0.bb => python3-greenstalk_2.0.2.bb} (65%)
+ .../libcamera/{libcamera_0.0.5.bb =3D> libcamera_0.1.0.bb}    | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-multimedia/recipes-multimedia/libcamera/{libcamera_0.0.5.bb =
+=3D> libcamera_0.1.0.bb} (92%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-greenstalk_2.0.0.bb b/meta-python/recipes-devtools/python/python3-greenstalk_2.0.2.bb
-similarity index 65%
-rename from meta-python/recipes-devtools/python/python3-greenstalk_2.0.0.bb
-rename to meta-python/recipes-devtools/python/python3-greenstalk_2.0.2.bb
-index 841b84ddf6..33eb62d5d9 100644
---- a/meta-python/recipes-devtools/python/python3-greenstalk_2.0.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-greenstalk_2.0.2.bb
-@@ -3,9 +3,8 @@ HOMEPAGE = "https://github.com/mayhewj/greenstalk"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=8f98432ba1fce3933c556430fd47298f"
- 
--SRC_URI[sha256sum] = "0020970abdb6f400586938573cbbec80410e83805d61e46cf76ea3ed71129257"
-+SRC_URI[sha256sum] = "3ebde5fc9ecf986f96f6779fd6d15a53f33d432c52a2e28012e100a99ee154a4"
- 
- RDEPENDS:${PN} += "python3-io python3-core"
- 
--inherit pypi
--inherit setuptools3
-+inherit pypi python_setuptools_build_meta
--- 
-2.41.0
+diff --git a/meta-multimedia/recipes-multimedia/libcamera/libcamera_0.0.5=
+.bb b/meta-multimedia/recipes-multimedia/libcamera/libcamera_0.1.0.bb
+similarity index 92%
+rename from meta-multimedia/recipes-multimedia/libcamera/libcamera_0.0.5.=
+bb
+rename to meta-multimedia/recipes-multimedia/libcamera/libcamera_0.1.0.bb
+index 6ad376f295..e770200e28 100644
+--- a/meta-multimedia/recipes-multimedia/libcamera/libcamera_0.0.5.bb
++++ b/meta-multimedia/recipes-multimedia/libcamera/libcamera_0.1.0.bb
+@@ -12,7 +12,7 @@ SRC_URI =3D " \
+         git://git.libcamera.org/libcamera/libcamera.git;protocol=3Dhttps=
+;branch=3Dmaster \
+ "
+=20
+-SRCREV =3D "fb44403f1c5571549ac128c21daee9761eb9249c"
++SRCREV =3D "9e3a83c03bab65b745eea2482be78077b409a2b5"
+=20
+ PE =3D "1"
+=20
+@@ -47,7 +47,7 @@ do_configure:prepend() {
+=20
+ do_install:append() {
+     chrpath -d ${D}${libdir}/libcamera.so
+-    chrpath -d ${D}${libdir}/v4l2-compat.so
++    chrpath -d ${D}${libexecdir}/libcamera/v4l2-compat.so
+ }
+=20
+ addtask do_recalculate_ipa_signatures_package after do_package before do=
+_packagedata
+@@ -63,7 +63,7 @@ do_recalculate_ipa_signatures_package() {
+     ${S}/src/ipa/ipa-sign-install.sh ${B}/src/ipa-priv-key.pem "${module=
+s}"
+ }
+=20
+-FILES:${PN} +=3D " ${libdir}/v4l2-compat.so"
++FILES:${PN} +=3D " ${libexecdir}/libcamera/v4l2-compat.so"
+ FILES:${PN}-gst =3D "${libdir}/gstreamer-1.0"
+=20
+ # libcamera-v4l2 explicitly sets _FILE_OFFSET_BITS=3D32 to get access to
+--=20
+2.39.3
 
 
