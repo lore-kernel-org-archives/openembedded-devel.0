@@ -1,233 +1,201 @@
-Return-Path: <f_l_k@t-online.de>
+Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 928B9EB64DA
-	for <webhook@archiver.kernel.org>; Sat, 22 Jul 2023 07:18:16 +0000 (UTC)
-Received: from mailout11.t-online.de (mailout11.t-online.de [194.25.134.85])
- by mx.groups.io with SMTP id smtpd.web11.1230.1690010287642412102
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C3378EB64DA
+	for <webhook@archiver.kernel.org>; Sat, 22 Jul 2023 11:47:17 +0000 (UTC)
+Received: from mail-yw1-f182.google.com (mail-yw1-f182.google.com [209.85.128.182])
+ by mx.groups.io with SMTP id smtpd.web10.3871.1690026435398418056
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 22 Jul 2023 00:18:08 -0700
+ Sat, 22 Jul 2023 04:47:15 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=none, err=SPF record not found (domain: t-online.de, ip: 194.25.134.85, mailfrom: f_l_k@t-online.de)
-Received: from fwd73.dcpf.telekom.de (fwd73.aul.t-online.de [10.223.144.99])
-	by mailout11.t-online.de (Postfix) with SMTP id 55DFEABF1
-	for <openembedded-devel@lists.openembedded.org>; Sat, 22 Jul 2023 09:18:05 +0200 (CEST)
-Received: from intel-corei7-64.fritz.box ([84.163.41.200]) by fwd73.t-online.de
-	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1qN6sO-0WXGmf0; Sat, 22 Jul 2023 09:18:04 +0200
-From: Markus Volk <f_l_k@t-online.de>
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-multimedia][PATCH] libcamera: update 0.0.5 -> 0.1.0
-Date: Sat, 22 Jul 2023 09:17:59 +0200
-Message-Id: <20230722071759.27004-1-f_l_k@t-online.de>
-X-Mailer: git-send-email 2.39.3
+ dkim=pass header.i=@gmail.com header.s=20221208 header.b=SsFNZ2mn;
+ spf=pass (domain: gmail.com, ip: 209.85.128.182, mailfrom: akuster808@gmail.com)
+Received: by mail-yw1-f182.google.com with SMTP id 00721157ae682-5768a7e3adbso57864917b3.0
+        for <openembedded-devel@lists.openembedded.org>; Sat, 22 Jul 2023 04:47:15 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20221208; t=1690026434; x=1690631234;
+        h=content-transfer-encoding:in-reply-to:from:references:to
+         :content-language:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=93cSXCgS+NX9Lkw4GQ2Ap/q2d7qNGn3+x0J5PN7NvwY=;
+        b=SsFNZ2mnzu5UxcqYnSs8VqYtAdfJz74eyHgM6VSQF123TV31EE8gvSadCyLrepyChC
+         DhZgyNBmmbsGNzWRaOE8rZQWr1GNvpCrL/+v6fkrvIvTFEYJv6G2yfdEPKD8OXb+X9VW
+         MPRsxwftUZUNmYjfC/kb85jlAcyDQxur+tEAPsMp6qYWR1jfxzoVqYp2aFsJ23I9BGyo
+         3Uz6xDVXF9kZRcpxrBp5Ll08iGKa6timg/ogxZxJanYUKcJ/k3fa2JOqRr3Wtkezvpn6
+         4vjYb4TTju9GR2APrD1+dVc7G2kh2oQsfvk9/xgpxD2BNrfAzxL1Wf9kO5Q1qNoNi0qA
+         zDRw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20221208; t=1690026434; x=1690631234;
+        h=content-transfer-encoding:in-reply-to:from:references:to
+         :content-language:subject:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=93cSXCgS+NX9Lkw4GQ2Ap/q2d7qNGn3+x0J5PN7NvwY=;
+        b=ZoG0+qc9wTn0LMYocLZYzb5uAPrdKn3pZZ/Pr8Aw9ieO3SRA3nVjvnVVihYEnZ1ZaU
+         xVz3KL9stNwd9QknaUBTzlrnGqjZDfZG1G4Jm/u2nMgRGhUpm9+2eTQo+j+e6wQ3P7V/
+         DJ6ENEqvFj5N+e8RcfKk+Al3ikXlWT4Okdua9mO4fgW097nkPzyfu3/Ri6wVh1xpEtwz
+         Lip4/daggQXJpMQzd20/Yh7+SqYuY/tizwxeCC5+eP+t5n9fAMTBdk79DAyUweKdOhnO
+         2CmvNUgTZAvX4bGEFkumnnYjrWchUaB/o4/q7a2Ab/eXWvr3Zi9xdnOExmrBYS5wcYaK
+         /GTA==
+X-Gm-Message-State: ABy/qLZQcxIHP9Gm0J32Iz0heM8WPlGbg5SxO0KgY9hz6tCaqs/L4lpp
+	8rGsEo+O+iTWqWNL4e5THA8=
+X-Google-Smtp-Source: APBJJlHwUsLra0dcnkAEeF+0LlMp2xJJjxMBBRWRllqBbkZR65Jo4aJedaVkn7z8qreUJzLkY9VagA==
+X-Received: by 2002:a25:ae05:0:b0:d03:37fe:5ae6 with SMTP id a5-20020a25ae05000000b00d0337fe5ae6mr3468195ybj.22.1690026434274;
+        Sat, 22 Jul 2023 04:47:14 -0700 (PDT)
+Received: from ?IPV6:2600:1700:9190:ba10:314f:57ff:9115:b8e5? ([2600:1700:9190:ba10:314f:57ff:9115:b8e5])
+        by smtp.gmail.com with ESMTPSA id w15-20020a25850f000000b00d0069942a3esm1140967ybk.43.2023.07.22.04.47.13
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Sat, 22 Jul 2023 04:47:13 -0700 (PDT)
+Message-ID: <0e3b616e-5001-c0de-3976-8ef6f4367878@gmail.com>
+Date: Sat, 22 Jul 2023 07:47:13 -0400
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1690010284-9A68B904-4620FAF3/0/0 CLEAN NORMAL
-X-TOI-MSGID: 564feb86-c653-4d22-84ec-7fbcf5190a17
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.13.0
+Subject: Re: [oe][meta-oe][dunfell][PATCH] c-ares: CVE-2023-32067 0-byte UDP
+ payload Denial of Service
+Content-Language: en-US
+To: Vijay Anusuri <vanusuri@mvista.com>,
+ openembedded-devel@lists.openembedded.org
+References: <20230718025221.51690-1-vanusuri@mvista.com>
+From: akuster808 <akuster808@gmail.com>
+In-Reply-To: <20230718025221.51690-1-vanusuri@mvista.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 22 Jul 2023 07:18:16 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103985
+ <openembedded-devel@lists.openembedded.org>; Sat, 22 Jul 2023 11:47:17 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103986
 
-libcamera v0.1.0
 
-ABI Compliance:
 
-abi-compliance-checker reports 99% binary compatibility and 81.4% source
-compatibilty between version 0.0.5 and 0.1.
+On 7/17/23 10:52 PM, Vijay Anusuri wrote:
+> From: Vijay Anusuri <vanusuri@mvista.com>
+>
+> Upstream-Status: Backport from https://github.com/c-ares/c-ares/commit/b9b8413cfdb70a3f99e1573333b23052d57ec1ae
+>
+> Signed-off-by: Vijay Anusuri <vanusuri@mvista.com>
 
- - Binary compatibility: 99%
- - Source compatibility: 81.4%
- - Total binary compatibility problems: 4, warnings: 2
- - Total source compatibility problems: 165, warnings: 7
+Any chance of getting a kirkstone fix?  I will be updating Micklerdore 
+to 1.19.1 (master) to address this issue.
 
-Now that we have funtional ABI validation, the soname has been updated fr=
-om
-libcamera.so.0.0.5 to libcamera.so.0.1.
-
-Future releases will now maintain the same soname until an ABI breakage i=
-s
-detected to reduce the repackaging and rebuilding of other components tha=
-t may
-use libcamera. The abi-compatibility report can now be generated with the=
- new
-utility './utils/abi-compat.sh'.
-
-Key differences here are due to preventing the installation of internal a=
-nd
-private headers in the packaging process, and most of this API compatibil=
-ity
-should not be visible to applications with the exception of:
-
-- Camera::generateConfiguration ( StreamRoles const& roles )
-
-  The StreamRoles type definition has been removed. This is now handled a=
-s a
-  Span<StreamRole> to prevent unnecessary allocations and copies.
-
-- CameraManager::addCamera ( std::shared_ptr<struct Camera> camera, std::=
-vector<unsigned long>const& devnums )
-- CameraManager::get ( dev_t devnum )
-- CameraManager::removeCamera ( std::shared_ptr<struct Camera> camera )
-
-  These functions of the CameraManager were for use exclusively by the V4=
-L2
-  adaptation layer, and not intended for use by applications. This has no=
-w been
-  reworked to use the new SystemDevices and the redundant functions remov=
-ed.
-
-The ABI/API breakages have been introduced by:
-
-  5ca0c9276f28 ("libcamera: CameraManager: Remove ::get(dev_t)")
-  26a4b83d1b94 ("libcamera: Remove `StreamRoles` alias")
-  63966ae587d7 ("libcamera: base: Do not install private headers")
-
-Core:
- - libcamera: v4l2_videodevice: Use O_CLOEXEC when exporting DMA buffers
- - libcamera: ipa_manager: Allow IPA loading in nested subdirs
- - meson: Fix usage of overwritten pipeline variable
- - subprojects: Drop leftovers of pybind11
- - camera_sensor: ipa: core: Add CFA pattern to IPACameraSensorInfo
- - libcamera: controls: Define a default lens position behaviour
- - libcamera: internal: request: convert to pragma once
- - libcamera: camera_manager: Move private implementation to internal
- - libcamera: camera_manager: Move {add,remove}Camera to internal
- - libcamera: properties: Provide a Devices camera property
- - libcamera: pipeline: Register device numbers with camera
- - libcamera: camera_sensor: Adjust properties::Rotation
- - libcamera: meson: Allow PH to change libcamera_deps
- - libcamera: base: Move thread_annotations to private
- - libcamera: base: Do not install private headers
- - utils: ABI Compatibility checker
- - meson: Use x.y soname versioning
- - libcamera: camera: Take span of StreamRole instead of vector
- - libcamera: Remove `StreamRoles` alias
- - utils: ipu3-capture.sh: Fix the script to work with recent media-ctl v=
-ersions
- - Documentation: Add predefined macros from config.h to Doxyfile
- - utils: checkstyle: Add __repr__ method to CommitFile class
- - utils: checkstyle: Support running checkers selectively
- - utils: checkstyle: Don't include commit ID in commit title
- - utils: checkstyle: Add trailers checker
- - tests: gstreamer: Test cameras' enumeration from GstDeviceProvider
- - meson: Fix space around colon issues
- - libcamera: Add option to configure udev support
- - libcamera: CameraManager: Remove ::get(dev_t)
- - tests: gstreamer: Fix compiler error with gcc 8.4.0
-
-ipa:
- - meson: ipa: Add mapping for pipeline handler to mojom interface file
- - libcamera: ipa: Remove character restriction on the IPA name
- - ipa: meson: Allow nested IPA directory structures
- - ipa: raspberrypi: Introduce IpaBase class
- - ipa: raspberrypi: agc: Move weights out of AGC
- - ipa: rkisp1: agc: drop hard-coded analogue gain range
- - libipa: camera_sensor_helper: Add IMX327 helper
- - pipeline: rpi: ipa_base: Parse config files after platformRegister()
- - libcamera: camera_sensor: Add Sony IMX327 sensor properties
- - ipa: rpi: imx296: Small refinements to the IMX296 mono sensor tuning
- - ipa: rpi: Handle controls for mono variant sensors
- - libcamera: controls: Drop reference to IPA in controls documentation
- - libipa: camera_sensor_helper: Restore alphabetical order
- - ipa: ipu3: agc: Drop hard-codec analogue gain max
- - ipa: rkisp1: agc: Restore minimum analogue gain limit
- - pipeline: ipa: rpi: Return lens controls from ipa->configure()
- - ipa: rpi: Set lens position to hyperfocal on startup
- - ipa: rpi: tunings: Add missing short and long exposure profiles
- - ipa: rpi: agc: Use std::string instead of char arrays
- - ipa: rpi: agc: Gracefully handle missing agc modes
- - ipa: rpi: agc: Do not switch to a default if a mode is unavailable
- - ipa: rpi: imx708: Fix mode switch drop frame count
- - ipa: rpi: imx296_mono: Disable all colour shading
-
-pipeline:
- - libcamera: pipeline: simple: Add support for ST's DCMIPP
- - pipeline: meson: Allow nested pipeline handler directory structures
- - pipeline: ipa: raspberrypi: Refactor and move the Raspberry Pi code
- - pipeline: raspberrypi: rpi_stream: Set invalid buffer to id =3D=3D 0
- - pipeline: ipa: raspberrypi: Restructure the IPA mojom interface
- - pipeline: raspberrypi: Make RPi::Stream::name() return const std::stri=
-ng &
- - pipeline: raspberrypi: Introduce PipelineHandlerBase class
- - pipeline: raspberrypi: Add stream flags to RPi::Stream
- - libcamera: rkisp1: Generate config using main path
- - libcamera: rkisp1: Crop on ISP before downscaling
- - libcamera: rkisp1: Assign sizes to roles
- - libcamera: rkisp1: Fix enumeration of RAW formats
- - pipeline: rpi: Do not return an error from pipeline config file handli=
-ng
- - libcamera: pipeline: simple: Support TI CSI-RX
- - pipeline: rpi: Account for Bayer packing when validating format
-
-apps:
- - apps: qcam: Remove redundant check
- - v4l2: Move the v4l2 compat layer to libexec/libcamera
- - android: mm: generic: use GRALLOC_HARDWARE_MODULE_ID
- - android: mm: Stub libhardware for build tests
- - py: Fix CameraManager.version property
- - py: Move ColorSpace and Transform classes to separate files
- - py: Use exceptions instead of returning error codes
- - py: unittests.py: Add weakref helpers and use del
- - py: Move to mainline pybind11 version
- - py: Fix code formatting
- - py: unittests.py: Fix type checker warnings
- - gstreamer: Add enable_auto_focus option to the GStreamer plugin
- - gstreamer: Drop libcamera_private dependency
- - apps: Add ipa-verify application
- - v4l2: v4l2_camera_proxy: Prevent ioctl sign-extensions
- - v4l2: Use SystemDevices properties to identify cameras
-
-Signed-off-by: Markus Volk <f_l_k@t-online.de>
----
- .../libcamera/{libcamera_0.0.5.bb =3D> libcamera_0.1.0.bb}    | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-multimedia/recipes-multimedia/libcamera/{libcamera_0.0.5.bb =
-=3D> libcamera_0.1.0.bb} (92%)
-
-diff --git a/meta-multimedia/recipes-multimedia/libcamera/libcamera_0.0.5=
-.bb b/meta-multimedia/recipes-multimedia/libcamera/libcamera_0.1.0.bb
-similarity index 92%
-rename from meta-multimedia/recipes-multimedia/libcamera/libcamera_0.0.5.=
-bb
-rename to meta-multimedia/recipes-multimedia/libcamera/libcamera_0.1.0.bb
-index 6ad376f295..e770200e28 100644
---- a/meta-multimedia/recipes-multimedia/libcamera/libcamera_0.0.5.bb
-+++ b/meta-multimedia/recipes-multimedia/libcamera/libcamera_0.1.0.bb
-@@ -12,7 +12,7 @@ SRC_URI =3D " \
-         git://git.libcamera.org/libcamera/libcamera.git;protocol=3Dhttps=
-;branch=3Dmaster \
- "
-=20
--SRCREV =3D "fb44403f1c5571549ac128c21daee9761eb9249c"
-+SRCREV =3D "9e3a83c03bab65b745eea2482be78077b409a2b5"
-=20
- PE =3D "1"
-=20
-@@ -47,7 +47,7 @@ do_configure:prepend() {
-=20
- do_install:append() {
-     chrpath -d ${D}${libdir}/libcamera.so
--    chrpath -d ${D}${libdir}/v4l2-compat.so
-+    chrpath -d ${D}${libexecdir}/libcamera/v4l2-compat.so
- }
-=20
- addtask do_recalculate_ipa_signatures_package after do_package before do=
-_packagedata
-@@ -63,7 +63,7 @@ do_recalculate_ipa_signatures_package() {
-     ${S}/src/ipa/ipa-sign-install.sh ${B}/src/ipa-priv-key.pem "${module=
-s}"
- }
-=20
--FILES:${PN} +=3D " ${libdir}/v4l2-compat.so"
-+FILES:${PN} +=3D " ${libexecdir}/libcamera/v4l2-compat.so"
- FILES:${PN}-gst =3D "${libdir}/gstreamer-1.0"
-=20
- # libcamera-v4l2 explicitly sets _FILE_OFFSET_BITS=3D32 to get access to
---=20
-2.39.3
+-Armin
+> ---
+>   .../c-ares/c-ares/CVE-2023-32067.patch        | 84 +++++++++++++++++++
+>   .../recipes-support/c-ares/c-ares_1.18.1.bb   |  1 +
+>   2 files changed, 85 insertions(+)
+>   create mode 100644 meta-oe/recipes-support/c-ares/c-ares/CVE-2023-32067.patch
+>
+> diff --git a/meta-oe/recipes-support/c-ares/c-ares/CVE-2023-32067.patch b/meta-oe/recipes-support/c-ares/c-ares/CVE-2023-32067.patch
+> new file mode 100644
+> index 000000000..63192d3c8
+> --- /dev/null
+> +++ b/meta-oe/recipes-support/c-ares/c-ares/CVE-2023-32067.patch
+> @@ -0,0 +1,84 @@
+> +From b9b8413cfdb70a3f99e1573333b23052d57ec1ae Mon Sep 17 00:00:00 2001
+> +From: Brad House <brad@brad-house.com>
+> +Date: Mon, 22 May 2023 06:51:49 -0400
+> +Subject: [PATCH] Merge pull request from GHSA-9g78-jv2r-p7vc
+> +
+> +Link: https://github.com/c-ares/c-ares/releases/tag/cares-1_19_1
+> +
+> +Upstream-Status: Backport [https://github.com/c-ares/c-ares/commit/b9b8413cfdb70a3f99e1573333b23052d57ec1ae]
+> +CVE: CVE-2023-32067
+> +Signed-off-by: Vijay Anusuri <vanusuri@mvista.com>
+> +---
+> + src/lib/ares_process.c | 41 +++++++++++++++++++++++++----------------
+> + 1 file changed, 25 insertions(+), 16 deletions(-)
+> +
+> +diff --git a/src/lib/ares_process.c b/src/lib/ares_process.c
+> +index bf0cde464..6cac0a99f 100644
+> +--- a/src/lib/ares_process.c
+> ++++ b/src/lib/ares_process.c
+> +@@ -470,7 +470,7 @@ static void read_udp_packets(ares_channel channel, fd_set *read_fds,
+> + {
+> +   struct server_state *server;
+> +   int i;
+> +-  ares_ssize_t count;
+> ++  ares_ssize_t read_len;
+> +   unsigned char buf[MAXENDSSZ + 1];
+> + #ifdef HAVE_RECVFROM
+> +   ares_socklen_t fromlen;
+> +@@ -513,32 +513,41 @@ static void read_udp_packets(ares_channel channel, fd_set *read_fds,
+> +       /* To reduce event loop overhead, read and process as many
+> +        * packets as we can. */
+> +       do {
+> +-        if (server->udp_socket == ARES_SOCKET_BAD)
+> +-          count = 0;
+> +-
+> +-        else {
+> +-          if (server->addr.family == AF_INET)
+> ++        if (server->udp_socket == ARES_SOCKET_BAD) {
+> ++          read_len = -1;
+> ++        } else {
+> ++          if (server->addr.family == AF_INET) {
+> +             fromlen = sizeof(from.sa4);
+> +-          else
+> ++          } else {
+> +             fromlen = sizeof(from.sa6);
+> +-          count = socket_recvfrom(channel, server->udp_socket, (void *)buf,
+> +-                                  sizeof(buf), 0, &from.sa, &fromlen);
+> ++          }
+> ++          read_len = socket_recvfrom(channel, server->udp_socket, (void *)buf,
+> ++                                     sizeof(buf), 0, &from.sa, &fromlen);
+> +         }
+> +
+> +-        if (count == -1 && try_again(SOCKERRNO))
+> ++        if (read_len == 0) {
+> ++          /* UDP is connectionless, so result code of 0 is a 0-length UDP
+> ++           * packet, and not an indication the connection is closed like on
+> ++           * tcp */
+> +           continue;
+> +-        else if (count <= 0)
+> ++        } else if (read_len < 0) {
+> ++          if (try_again(SOCKERRNO))
+> ++            continue;
+> ++
+> +           handle_error(channel, i, now);
+> ++
+> + #ifdef HAVE_RECVFROM
+> +-        else if (!same_address(&from.sa, &server->addr))
+> ++        } else if (!same_address(&from.sa, &server->addr)) {
+> +           /* The address the response comes from does not match the address we
+> +            * sent the request to. Someone may be attempting to perform a cache
+> +            * poisoning attack. */
+> +-          break;
+> ++          continue;
+> + #endif
+> +-        else
+> +-          process_answer(channel, buf, (int)count, i, 0, now);
+> +-       } while (count > 0);
+> ++
+> ++        } else {
+> ++          process_answer(channel, buf, (int)read_len, i, 0, now);
+> ++        }
+> ++      } while (read_len >= 0);
+> +     }
+> + }
+> +
+> diff --git a/meta-oe/recipes-support/c-ares/c-ares_1.18.1.bb b/meta-oe/recipes-support/c-ares/c-ares_1.18.1.bb
+> index 152d91332..2aa789760 100644
+> --- a/meta-oe/recipes-support/c-ares/c-ares_1.18.1.bb
+> +++ b/meta-oe/recipes-support/c-ares/c-ares_1.18.1.bb
+> @@ -9,6 +9,7 @@ SRC_URI = "git://github.com/c-ares/c-ares.git;branch=main;protocol=https \
+>              file://CVE-2022-4904.patch \
+>              file://CVE-2023-31130.patch \
+>              file://CVE-2023-31147.patch \
+> +           file://CVE-2023-32067.patch \
+>             "
+>   SRCREV = "2aa086f822aad5017a6f2061ef656f237a62d0ed"
+>   
+>
+> -=-=-=-=-=-=-=-=-=-=-=-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#103892): https://lists.openembedded.org/g/openembedded-devel/message/103892
+> Mute This Topic: https://lists.openembedded.org/mt/100209081/3616698
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [akuster808@gmail.com]
+> -=-=-=-=-=-=-=-=-=-=-=-
+>
 
 
