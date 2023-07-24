@@ -2,104 +2,109 @@ Return-Path: <tgamblin@baylibre.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E0789C41513
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DE293C001B0
 	for <webhook@archiver.kernel.org>; Mon, 24 Jul 2023 17:58:38 +0000 (UTC)
-Received: from mail-qk1-f174.google.com (mail-qk1-f174.google.com [209.85.222.174])
- by mx.groups.io with SMTP id smtpd.web11.1114.1690221510345225729
+Received: from mail-qk1-f171.google.com (mail-qk1-f171.google.com [209.85.222.171])
+ by mx.groups.io with SMTP id smtpd.web10.1164.1690221509399973878
  for <openembedded-devel@lists.openembedded.org>;
  Mon, 24 Jul 2023 10:58:30 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@baylibre-com.20221208.gappssmtp.com header.s=20221208 header.b=Ww5GxOE0;
- spf=pass (domain: baylibre.com, ip: 209.85.222.174, mailfrom: tgamblin@baylibre.com)
-Received: by mail-qk1-f174.google.com with SMTP id af79cd13be357-7656652da3cso354844485a.1
+ dkim=pass header.i=@baylibre-com.20221208.gappssmtp.com header.s=20221208 header.b=q3a5PE/4;
+ spf=pass (domain: baylibre.com, ip: 209.85.222.171, mailfrom: tgamblin@baylibre.com)
+Received: by mail-qk1-f171.google.com with SMTP id af79cd13be357-76731802203so429804385a.3
         for <openembedded-devel@lists.openembedded.org>; Mon, 24 Jul 2023 10:58:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=baylibre-com.20221208.gappssmtp.com; s=20221208; t=1690221509; x=1690826309;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=SWs1xyspCcMkzOIWPkWSXGTSM/SDMRe6MUoHWSAA6g4=;
-        b=Ww5GxOE0kYiu+XdCzN7OMutZPbphCvlMpyw6A9rhvmK5OFdSkX8GoJe8lUBSbaQYw+
-         ytPqsH8XYKQP09gCl/bTe6QPxTfzWJ6YpYNcK/sXMSLk+/QRiQ6Gfv8umpTPrNiXLSNm
-         V3RhQPNnnZoHxsSKnPlYdh0sjLcKmmNOne1IMnRIbOqHzoWlIZsB60hcLrRkEG2OJ9r+
-         GFZrx5BoG3oTKfDWzz+AhB7Cjxe3IoRDoMwmXg4xIED5r5z91MXnpbMkwMksPSOJ6Iv1
-         +odyViPDPMkrXNpCqcFp5Oq5E4cNOYe3j+3AQzHrXiyVxIQG+QraMkvJ3bYvyIEYXodJ
-         EDCQ==
+        d=baylibre-com.20221208.gappssmtp.com; s=20221208; t=1690221508; x=1690826308;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=Lcr1fawocJaQd5tKkiDogbsFcywFwjJBp96UeCRNE2w=;
+        b=q3a5PE/4NlODt+/z6iWvpkw+A9V9ySA3WzWlFq/htfl78O5NB6noV2l7q+qtW2jmdU
+         d8JuARUsYIHbmCaJG12UlckoVlh9oqrP2iqytmZUC+F1nj6gg3+9Gt0iP8HjZDy81MIj
+         LWvHGZCR6QayxA6r3sh9anXX+eiBemYyOo28cPcKbj2dMaErbOXLfxhqpkKRyFokU5FQ
+         gdCYe2YqWRSsu5pEjHshIXIdNGc1sH8ajc6Mi/NslYcBmhDyW0BBSopBjvEd48udFG3P
+         WO9N2jTgU089BBCQ0S2zv/QtwnU7DQX/SsuCmrnXPMG0gqHYUJl0+Gh+8SjGrs0e9OU5
+         e8Hg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1690221509; x=1690826309;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=SWs1xyspCcMkzOIWPkWSXGTSM/SDMRe6MUoHWSAA6g4=;
-        b=X5GBWeLvSGI8Q1NcKMY0aJpoxfoMhICQl1smAp27kbcPkyU7avFZQpo8F4BS2EJN6A
-         Zoge+WAKdsrSehdvfX0xuyRwDNuP9HO6Epx8AN5kRKxp2DvnF9rRX/jmpnoI0GeRHZem
-         TawJQ50GTQCGCEGplSRPZQ1E9R7Hry5Q+vHub/qMFK0ZA4r7fsyoiNRV5YQeKwgLEAul
-         h1DnWmcG+/2FFv6rXa3m1qyy5RLNdJ3EglvoGrWyQOsNen0U9ory0zK8H7sDGcleRk0U
-         9mKLaL7AB/ZnlwIKoooJcHZYbCemkyXfRx+mYfk6N7pTPbpKd1TXqg9ThLuI1pr52pbq
-         42+g==
-X-Gm-Message-State: ABy/qLZU31KQqazkdXcx1lu/OD41GyXHUHDieTsF+IolnBi48JQ3D5ZH
-	RJvZ0ElC7KZ/eCr+S7IdId9regbX9cr4Iadf71o=
-X-Google-Smtp-Source: APBJJlEEwngBX8qe/68KBN/wEluPfZ2aNXj0wkoPN0kh8Hbj78gNuumG8yjwM+1TQ4JquGdiXIVRog==
-X-Received: by 2002:a05:620a:e08:b0:75b:23a1:830a with SMTP id y8-20020a05620a0e0800b0075b23a1830amr476442qkm.5.1690221508914;
+        d=1e100.net; s=20221208; t=1690221508; x=1690826308;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=Lcr1fawocJaQd5tKkiDogbsFcywFwjJBp96UeCRNE2w=;
+        b=BoaPALeB3lR0lV07ASlnT2j/LFfD8NQUO00o6M2mdky2n+uPdo4psogkj48ZMiL+ZV
+         VQVnWlhsj9EgXTh5GwaWSCy6+cGhdTDeuP1RCRyHKCALNApCqQm3etbVjkYp91y6b9Q3
+         B9tdY+7uu7YpbNHnXvCqoFVSepNHmCPeaiOKIoSem07OS2cjAL5MVEoQvwQAZjGwWgX2
+         MdK6JJIh2Dc+ZCORrYZ+vdNuAhJ4U6e33mmUtAPkveGEG1vcCzYeFziyArtrVLn9RDFt
+         +BGgsg9qPF2GsSzHjkVl2JECNJGYyfF3Boca+QSlojz5iOBByRkbkfxsm7n59fCCc2uR
+         pn3A==
+X-Gm-Message-State: ABy/qLbHbNRqgjDQVaI54O/dx7rwA6Cxw+NW970M5u41K0tm4sfOYFx1
+	e8FfS5QL7kgUVNY7TyHyLj9a2laSq5nFnrXOe2k=
+X-Google-Smtp-Source: APBJJlF5HZ+D1mmEfCLnoFl21Y7VfwDsRlRpF4zaJNxEyqcAt8jXiweE/lz4tWpBTf65OJir52vzcQ==
+X-Received: by 2002:a05:620a:2550:b0:766:77b7:4c73 with SMTP id s16-20020a05620a255000b0076677b74c73mr525485qko.35.1690221508337;
         Mon, 24 Jul 2023 10:58:28 -0700 (PDT)
 Received: from megalith.cgocable.net ([2001:1970:5b1f:ab00:fc4e:ec42:7e5d:48dd])
-        by smtp.gmail.com with ESMTPSA id j2-20020a05620a000200b0076aeeb69cb1sm1646065qki.4.2023.07.24.10.58.28
+        by smtp.gmail.com with ESMTPSA id j2-20020a05620a000200b0076aeeb69cb1sm1646065qki.4.2023.07.24.10.58.27
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
         Mon, 24 Jul 2023 10:58:28 -0700 (PDT)
 From: Trevor Gamblin <tgamblin@baylibre.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-python][PATCH 2/2] python-pandas: upgrade 1.5.3 -> 2.0.3
-Date: Mon, 24 Jul 2023 13:58:26 -0400
-Message-ID: <20230724175826.80617-2-tgamblin@baylibre.com>
+Subject: [meta-python][PATCH 1/2] python3-versioneer: add recipe
+Date: Mon, 24 Jul 2023 13:58:25 -0400
+Message-ID: <20230724175826.80617-1-tgamblin@baylibre.com>
 X-Mailer: git-send-email 2.41.0
-In-Reply-To: <20230724175826.80617-1-tgamblin@baylibre.com>
-References: <20230724175826.80617-1-tgamblin@baylibre.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 24 Jul 2023 17:58:38 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103998
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103997
 
-pandas now requires versioneer, so add that to the DEPENDS list.
-
-Changelog: https://github.com/pandas-dev/pandas/releases
+This module is required by newer versions of pandas, so add it as a
+recipe.
 
 Signed-off-by: Trevor Gamblin <tgamblin@baylibre.com>
 ---
- .../{python3-pandas_1.5.3.bb => python3-pandas_2.0.3.bb}  | 8 +++++---
- 1 file changed, 5 insertions(+), 3 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-pandas_1.5.3.bb => python3-pandas_2.0.3.bb} (77%)
+ .../packagegroups/packagegroup-meta-python.bb  |  1 +
+ .../python/python3-versioneer_0.29.bb          | 18 ++++++++++++++++++
+ 2 files changed, 19 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-versioneer_0.29.bb
 
-diff --git a/meta-python/recipes-devtools/python/python3-pandas_1.5.3.bb b/meta-python/recipes-devtools/python/python3-pandas_2.0.3.bb
-similarity index 77%
-rename from meta-python/recipes-devtools/python/python3-pandas_1.5.3.bb
-rename to meta-python/recipes-devtools/python/python3-pandas_2.0.3.bb
-index 129c3147cf..87a173c8a2 100644
---- a/meta-python/recipes-devtools/python/python3-pandas_1.5.3.bb
-+++ b/meta-python/recipes-devtools/python/python3-pandas_2.0.3.bb
-@@ -4,14 +4,16 @@ high-performance, easy-to-use data structures and data analysis tools for \
- the Python programming language."
- HOMEPAGE = "http://pandas.pydata.org/"
- LICENSE = "BSD-3-Clause"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=c1cc9ab35a8b2aabf933cd6d245b5db3"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=cb819092901ddb13a7d0a4f5e05f098a"
- 
--SRC_URI[sha256sum] = "74a3fd7e5a7ec052f183273dc7b0acd3a863edf7520f5d3a1765c04ffdb3b0b1"
-+SRC_URI[sha256sum] = "c02f372a88e0d17f36d3093a644c73cfc1788e876a7c4bcb4020a77512e2043c"
- 
- inherit pypi setuptools3
- 
- DEPENDS += " \
--    ${PYTHON_PN}-numpy-native ${PYTHON_PN}-cython-native \
-+    ${PYTHON_PN}-cython-native \
-+    ${PYTHON_PN}-numpy-native \
-+    ${PYTHON_PN}-versioneer-native \
- "
- 
- PACKAGESPLITFUNCS =+ "fix_cythonized_sources"
+diff --git a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
+index b23d24c6d4..9500f80e03 100644
+--- a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
++++ b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
+@@ -446,6 +446,7 @@ RDEPENDS:packagegroup-meta-python3 = "\
+     python3-unidiff \
+     python3-uritemplate \
+     python3-vcversioner \
++    python3-versioneer \
+     python3-versiontools \
+     python3-visitor \
+     python3-waitress \
+diff --git a/meta-python/recipes-devtools/python/python3-versioneer_0.29.bb b/meta-python/recipes-devtools/python/python3-versioneer_0.29.bb
+new file mode 100644
+index 0000000000..bdfbfd1be1
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-versioneer_0.29.bb
+@@ -0,0 +1,18 @@
++SUMMARY = "Easy VCS-based management of project version strings"
++HOMEPAGE = "https://github.com/python-versioneer/python-versioneer"
++SECTION = "devel/python"
++
++LICENSE = "Unlicense"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=f4c62131f879a8445e16a7f265aea635"
++
++SRC_URI[sha256sum] = "5ab283b9857211d61b53318b7c792cf68e798e765ee17c27ade9f6c924235731"
++
++inherit pypi python_setuptools_build_meta
++
++RDEPENDS:${PN} += "\
++    python3-json \
++    python3-netclient \
++    python3-tomllib \
++"
++
++BBCLASSEXTEND = "native nativesdk"
 -- 
 2.41.0
 
