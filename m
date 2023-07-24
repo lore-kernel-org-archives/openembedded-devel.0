@@ -1,175 +1,132 @@
-Return-Path: <Martin.Jansa@gmail.com>
+Return-Path: <tgamblin@baylibre.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DDC42C001B0
-	for <webhook@archiver.kernel.org>; Mon, 24 Jul 2023 14:11:51 +0000 (UTC)
-Received: from mail-wm1-f47.google.com (mail-wm1-f47.google.com [209.85.128.47])
- by mx.groups.io with SMTP id smtpd.web10.47995.1690207907971359537
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A3123C0015E
+	for <webhook@archiver.kernel.org>; Mon, 24 Jul 2023 16:51:22 +0000 (UTC)
+Received: from mail-qt1-f175.google.com (mail-qt1-f175.google.com [209.85.160.175])
+ by mx.groups.io with SMTP id smtpd.web11.53406.1690217476638608225
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 24 Jul 2023 07:11:48 -0700
+ Mon, 24 Jul 2023 09:51:17 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20221208 header.b=N9cTvEjU;
- spf=pass (domain: gmail.com, ip: 209.85.128.47, mailfrom: martin.jansa@gmail.com)
-Received: by mail-wm1-f47.google.com with SMTP id 5b1f17b1804b1-3fd190065a7so34859975e9.2
-        for <openembedded-devel@lists.openembedded.org>; Mon, 24 Jul 2023 07:11:47 -0700 (PDT)
+ dkim=pass header.i=@baylibre-com.20221208.gappssmtp.com header.s=20221208 header.b=a8hD16Ai;
+ spf=pass (domain: baylibre.com, ip: 209.85.160.175, mailfrom: tgamblin@baylibre.com)
+Received: by mail-qt1-f175.google.com with SMTP id d75a77b69052e-403ea0a50f7so35608911cf.1
+        for <openembedded-devel@lists.openembedded.org>; Mon, 24 Jul 2023 09:51:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1690207906; x=1690812706;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=wMxYCvO6TPj52EdgbsxqVY03oyYcUhDsWoCTdfe67qM=;
-        b=N9cTvEjURS9EbEiEJ1tAN1YMJhPdBP0zptRhLtrqBPgt05aELeVWpZelhELFz8AbMJ
-         p+CDXem9EyfLcIevxvx8ieyjMcTHxvuy90VA5liCuZ9BIR5eoGLDedRLkqB7Nmjkb8L4
-         2cdFiYdMJ7XWzpfyyl1bQQNdjp2yQwzU2EleqW6K4AP+pEsLJbH41vytlzpau4+kasjr
-         tFPYhotH1au3yU1hn64pBKVDldVLGboup16qCFEjTZMmNB9KTnH+Cb2U0X8NfqHQW8YT
-         BJYItyQ8s3Woy68B+mfwZc/YyR+PBHKJ6IsaLKBmTNesoOLMljL/d2g8z42lEQJudccs
-         6sKw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1690207906; x=1690812706;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+        d=baylibre-com.20221208.gappssmtp.com; s=20221208; t=1690217475; x=1690822275;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=wMxYCvO6TPj52EdgbsxqVY03oyYcUhDsWoCTdfe67qM=;
-        b=a2AqSvqv0H1P00Gy8JcUubQdoV1lbnuP6Owwnhy1hxLnHpM0uYpE87HmB8R2OXXMw2
-         TKYCO4aZcqJYI24CGCpCZ5ZrVhcWwnHRRl2099UT97NTTsca5p6lFuCTPXu0RG6Vp9RK
-         erqtq1tgOBJ7trjY6WR8WEKsxE+kYlVZ6PaTDn1ar6vuLguscGbbBBWK/eLo0hRqWRmW
-         E81rfr533SiVvYs05yaO+/YEdnLsw/HOGcoZIwUcya+dVTdtn+0ZS5TIFh4YL2AOElt2
-         o52yue13pKGGLnyQCvxBC0DTnxkKqbbvkwiWDe9CtucpnZHeWVTwLRmg3i31dcw2zAbS
-         7ULg==
-X-Gm-Message-State: ABy/qLaEh64beG9O/NU1kfGlN8iXGMXkQdRp4w5yvRVcqVwJLk6Mp78s
-	qTw4WCuhHGNFaXunpQFgFX6GHgHYfkg=
-X-Google-Smtp-Source: APBJJlHYB3V93fTS4T1wD3AVI05eZYO5MNHa5q8KAN7bm4RV3GV1bSCYXm+L4hSwg1g1zP4bFT0QrQ==
-X-Received: by 2002:a17:907:7750:b0:992:4250:5462 with SMTP id kx16-20020a170907775000b0099242505462mr9963765ejc.50.1690201362276;
-        Mon, 24 Jul 2023 05:22:42 -0700 (PDT)
-Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
-        by smtp.gmail.com with ESMTPSA id op10-20020a170906bcea00b00989027eb30asm6640591ejb.158.2023.07.24.05.22.40
+        bh=mmqJDK3odnsTwyyTvAaunHm8N1eUyQf66NI1mzYN4pQ=;
+        b=a8hD16Ai+9fkO2LjPrAQxfp7Rsxpnj3aBYAEFcoqK5xeBRwa42JDlJZuiAVSUNDuCc
+         P4pjXY34rlX+e4xhmWkYtJiHFJcJgaZ7wkM4F3INKtuvheWiQ1mszBgiJFbgnfCPNOwN
+         4fqkc7CRIb77Wml0SRXOjDJ6re94tBjYO8laNydS1OR/8FVywlpkkd8hHlVbBQVih/os
+         o9TpYeNUBuAOUmZUlykeoeLiICiOf9chEteoNXVHWACEbdhsQHA0HCN9JE7zeE+I0cuX
+         20bo3PMtGvwmYkFBuqSmHqxALleUyuoiZw7scWFoshS5OeUpi2sH8XnQSKfF6MNWZW/a
+         vbYQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20221208; t=1690217475; x=1690822275;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=mmqJDK3odnsTwyyTvAaunHm8N1eUyQf66NI1mzYN4pQ=;
+        b=hWkQj8B0Ey4D/7fgYLNvmll7IncIVN6dnzOZO0YLw7zvJCxUvpnpnswUxHPEyxfftA
+         pn4pwkk6emLJwJ6/2LvBz/ISqKb83kZ8rxmLmMWYsf1mI3OkVHi/JGr1spMjftASl2B7
+         QCyFz1RaEkzU/fRxvYqM9u+97djxht/MmhGKLXGSyWD1twuB/tdnihu0Z9WNw0tX1+zh
+         YsndosudwQ1+gWADtlY18gz2sorj1u4SK6ClOIsS50a2JNuHcf5o5e/0BIg/7LexTAwd
+         +mln7XitJEsHVogSatLGKNp+6W8Y7wvnZId953ibnBF2WuiFbp5FeAaL0dlJy3QTP6dZ
+         N4iw==
+X-Gm-Message-State: ABy/qLaU5u4CD6tv5e3uEayDNH9yf286Eil2+HRADOpfkxFnNJqx8sOf
+	ySdimLcrslQUai5yP0ZlIkPywPPL/J5TfnHEdWI=
+X-Google-Smtp-Source: APBJJlGc/MgNphHiiIv6BwwDJolwdk0nzKXrzXzj5L1uwaw5vGHUgLoaKZw8KHcz2LznhiR2dNDZGw==
+X-Received: by 2002:ac8:57d0:0:b0:405:51c5:21be with SMTP id w16-20020ac857d0000000b0040551c521bemr363909qta.62.1690217475505;
+        Mon, 24 Jul 2023 09:51:15 -0700 (PDT)
+Received: from megalith.cgocable.net ([2001:1970:5b1f:ab00:fc4e:ec42:7e5d:48dd])
+        by smtp.gmail.com with ESMTPSA id h19-20020ac87773000000b00403e80cad67sm3451551qtu.41.2023.07.24.09.51.15
+        for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 24 Jul 2023 05:22:41 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+        Mon, 24 Jul 2023 09:51:15 -0700 (PDT)
+From: Trevor Gamblin <tgamblin@baylibre.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Martin Jansa <Martin.Jansa@gmail.com>
-Subject: [meta-oe][dunfell][PATCH] nodejs-14: add -fpermissive BUILD_CXXFLAGS to fix build with gcc-13 on host
-Date: Mon, 24 Jul 2023 14:22:27 +0200
-Message-ID: <20230724122227.1267568-1-Martin.Jansa@gmail.com>
+Subject: [meta-python][PATCH 2/2] python3-mypy, python3-mypy-extensions: remove
+Date: Mon, 24 Jul 2023 12:51:13 -0400
+Message-ID: <20230724165113.2925-2-tgamblin@baylibre.com>
 X-Mailer: git-send-email 2.41.0
+In-Reply-To: <20230724165113.2925-1-tgamblin@baylibre.com>
+References: <20230724165113.2925-1-tgamblin@baylibre.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 24 Jul 2023 14:11:51 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103993
+ <openembedded-devel@lists.openembedded.org>; Mon, 24 Jul 2023 16:51:22 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103995
 
-Fixes nodejs-native build with gcc-13 on host:
-http://errors.yoctoproject.org/Errors/Details/728221/
+While attempting to upgrade mypy and mypy-extensions, it was discovered
+that it depends on new modules, some of which have no maintenance plan
+in place, e.g.: https://pypi.org/project/types-typed-ast/
 
-nodejs-12 doesn't need it yet and nodejs-16 doesn't need it as well
+Since this is something we want to avoid adding to the ecosystem and
+mypy isn't a dependency for anything else in meta-python, remove the
+recipes.
 
-'-DV8_TYPED_ARRAY_MAX_SIZE_IN_HEAP=3D64' '-D__STDC_FORMAT_MACROS' '-DOPENSS=
-L_NO_PINSHARED' '-DOPENSSL_THREADS' '-DV8_TARGET_ARCH_X64' '-DV8_EMBEDDER_S=
-TRING=3D"-node.84"' '-DENABLE_DISASSEMBLER' '-DV8_PROMISE_INTERNAL_FIELD_CO=
-UNT=3D1' '-DENABLE_MINOR_MC' '-DOBJECT_PRINT' '-DV8_INTL_SUPPORT' '-DV8_CON=
-CURRENT_MARKING' '-DV8_ARRAY_BUFFER_EXTENSION' '-DV8_ENABLE_LAZY_SOURCE_POS=
-ITIONS' '-DV8_USE_SIPHASH' '-DDISABLE_UNTRUSTED_CODE_MITIGATIONS' '-DV8_WIN=
-64_UNWINDING_INFO' '-DV8_ENABLE_REGEXP_INTERPRETER_THREADED_DISPATCH' '-DV8=
-_SNAPSHOT_COMPRESSION' -ITOPDIR/tmp-glibc/work/x86_64-linux/nodejs-native/1=
-4.18.1-r0/recipe-sysroot-native/usr/include -I../deps/v8 -I../deps/v8/inclu=
-de -I.//Release/obj/gen/torque-output-root -I.//Release/obj/gen/generate-by=
-tecode-output-root  -pthread -Wno-unused-parameter -m64 -Wno-return-type -f=
-no-strict-aliasing -m64 -O3 -fno-omit-frame-pointer -fdata-sections -ffunct=
-ion-sections -O3 -fno-rtti -fno-exceptions -std=3Dgnu++1y -MMD -MF .//Relea=
-se/.deps/Release/obj.host/v8_initializers/gen/torque-output-root/torque-gen=
-erated/../../deps/v8/src/builtins/array-find-tq-csa.o.d.raw -isystemTOPDIR/=
-tmp-glibc/work/x86_64-linux/nodejs-native/14.18.1-r0/recipe-sysroot-native/=
-usr/include -isystemTOPDIR/tmp-glibc/work/x86_64-linux/nodejs-native/14.18.=
-1-r0/recipe-sysroot-native/usr/include -O2 -pipe -c
-In file included from /usr/lib/gcc/x86_64-pc-linux-gnu/13/include/g++-v13/b=
-its/move.h:37,
-                 from /usr/lib/gcc/x86_64-pc-linux-gnu/13/include/g++-v13/b=
-its/stl_function.h:60,
-                 from /usr/lib/gcc/x86_64-pc-linux-gnu/13/include/g++-v13/f=
-unctional:49,
-                 from ../deps/v8/src/codegen/code-stub-assembler.h:8,
-                 from ../deps/v8/src/builtins/builtins-promise-gen.h:8,
-                 from ../deps/v8/src/builtins/builtins-async-gen.h:8,
-                 from ../deps/v8/src/builtins/builtins-async-function-gen.c=
-c:5:
-/usr/lib/gcc/x86_64-pc-linux-gnu/13/include/g++-v13/type_traits: In instant=
-iation of =E2=80=98struct std::is_convertible<v8::internal::Cell, v8::inter=
-nal::Object>=E2=80=99:
-../deps/v8/src/codegen/tnode.h:262:72:   required from =E2=80=98const bool =
-v8::internal::is_subtype<v8::internal::Cell, v8::internal::Cell>::value=E2=
-=80=99
-../deps/v8/src/codegen/tnode.h:346:75:   required by substitution of =E2=80=
-=98template<class U, typename std::enable_if<v8::internal::is_subtype<U, v8=
-::internal::Cell>::value, int>::type <anonymous> > v8::internal::TNode<v8::=
-internal::Cell>::TNode(const v8::internal::TNode<T>&) [with U =3D v8::inter=
-nal::Cell; typename std::enable_if<v8::internal::is_subtype<U, v8::internal=
-::Cell>::value, int>::type <anonymous> =3D <missing>]=E2=80=99
-../deps/v8/src/codegen/code-stub-assembler.h:1868:33:   required from here
-/usr/lib/gcc/x86_64-pc-linux-gnu/13/include/g++-v13/type_traits:1417:30: er=
-ror: invalid use of incomplete type =E2=80=98class v8::internal::Cell=E2=80=
-=99 [-fpermissive]
- 1417 |     : public __bool_constant<__is_convertible(_From, _To)>
-      |                              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
-In file included from ../deps/v8/src/objects/objects.h:26,
-                 from ../deps/v8/src/objects/fixed-array.h:10,
-                 from ../deps/v8/src/objects/contexts.h:8,
-                 from ../deps/v8/src/execution/thread-local-top.h:10,
-                 from ../deps/v8/src/execution/isolate-data.h:12,
-                 from ../deps/v8/src/execution/isolate.h:24,
-                 from ../deps/v8/src/codegen/interface-descriptors.h:14,
-                 from ../deps/v8/src/codegen/callable.h:8,
-                 from ../deps/v8/src/codegen/code-factory.h:8,
-                 from ../deps/v8/src/compiler/code-assembler.h:17,
-                 from ../deps/v8/src/codegen/code-stub-assembler.h:15:
-../deps/v8/src/objects/object-list-macros.h:19:7: note: forward declaration=
- of =E2=80=98class v8::internal::Cell=E2=80=99
-   19 | class Cell;
-      |       ^~~~
-In file included from ../deps/v8/src/codegen/interface-descriptors.h:12:
-../deps/v8/src/codegen/tnode.h: In instantiation of =E2=80=98const bool v8:=
-:internal::is_subtype<v8::internal::Cell, v8::internal::Cell>::value=E2=80=
-=99:
-../deps/v8/src/codegen/tnode.h:346:75:   required by substitution of =E2=80=
-=98template<class U, typename std::enable_if<v8::internal::is_subtype<U, v8=
-::internal::Cell>::value, int>::type <anonymous> > v8::internal::TNode<v8::=
-internal::Cell>::TNode(const v8::internal::TNode<T>&) [with U =3D v8::inter=
-nal::Cell; typename std::enable_if<v8::internal::is_subtype<U, v8::internal=
-::Cell>::value, int>::type <anonymous> =3D <missing>]=E2=80=99
-../deps/v8/src/codegen/code-stub-assembler.h:1868:33:   required from here
-../deps/v8/src/codegen/tnode.h:262:72: error: =E2=80=98value=E2=80=99 is no=
-t a member of =E2=80=98std::is_convertible<v8::internal::Cell, v8::internal=
-::Object>=E2=80=99
-  262 |                                        std::is_convertible<T, Objec=
-t>::value);
-      |                                                                    =
-    ^~~~~
-
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+Signed-off-by: Trevor Gamblin <tgamblin@baylibre.com>
 ---
- meta-oe/recipes-devtools/nodejs/nodejs_14.18.1.bb | 3 +++
- 1 file changed, 3 insertions(+)
+ .../python/python3-mypy-extensions_0.4.3.bb   | 12 ----------
+ .../python/python3-mypy_0.971.bb              | 23 -------------------
+ 2 files changed, 35 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python3-mypy-extensions_0.4.3.bb
+ delete mode 100644 meta-python/recipes-devtools/python/python3-mypy_0.971.bb
 
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_14.18.1.bb b/meta-oe/re=
-cipes-devtools/nodejs/nodejs_14.18.1.bb
-index 882d3f6573..1d95e369da 100644
---- a/meta-oe/recipes-devtools/nodejs/nodejs_14.18.1.bb
-+++ b/meta-oe/recipes-devtools/nodejs/nodejs_14.18.1.bb
-@@ -135,6 +135,9 @@ python do_create_v8_qemu_wrapper () {
- do_create_v8_qemu_wrapper[dirs] =3D "${B}"
- addtask create_v8_qemu_wrapper after do_configure before do_compile
-=20
-+# Work around compatibility issues with gcc-13 on host
-+BUILD_CXXFLAGS +=3D "-fpermissive"
-+
- LDFLAGS:append:x86 =3D " -latomic"
-=20
- # Node is way too cool to use proper autotools, so we install two wrappers=
- to forcefully inject proper arch cflags to workaround gypi
---=20
+diff --git a/meta-python/recipes-devtools/python/python3-mypy-extensions_0.4.3.bb b/meta-python/recipes-devtools/python/python3-mypy-extensions_0.4.3.bb
+deleted file mode 100644
+index 83ac5362d6..0000000000
+--- a/meta-python/recipes-devtools/python/python3-mypy-extensions_0.4.3.bb
++++ /dev/null
+@@ -1,12 +0,0 @@
+-SUMMARY = "Experimental type system extensions for programs checked with the mypy typechecker"
+-HOMEPAGE = "https://github.com/python/mypy_extensions"
+-LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=0fe3219e2470a78c0d1837019b8b426e"
+-
+-PYPI_PACKAGE = "mypy_extensions"
+-
+-inherit pypi setuptools3
+-
+-SRC_URI[sha256sum] = "2d82818f5bb3e369420cb3c4060a7970edba416647068eb4c5343488a6c604a8"
+-
+-BBCLASSEXTEND = "native"
+diff --git a/meta-python/recipes-devtools/python/python3-mypy_0.971.bb b/meta-python/recipes-devtools/python/python3-mypy_0.971.bb
+deleted file mode 100644
+index 31fcb06c9e..0000000000
+--- a/meta-python/recipes-devtools/python/python3-mypy_0.971.bb
++++ /dev/null
+@@ -1,23 +0,0 @@
+-SUMMARY = "Optional static typing for Python 3 and 2 (PEP 484)"
+-HOMEPAGE = "https://github.com/python/mypy"
+-LICENSE = "MIT & Python-2.0"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=6ba8ec528da02073b7e1f4124c0f836f"
+-
+-PYPI_PACKAGE = "mypy"
+-
+-inherit pypi python_setuptools_build_meta
+-
+-SRC_URI[sha256sum] = "40b0f21484238269ae6a57200c807d80debc6459d444c0489a102d7c6a75fa56"
+-
+-BBCLASSEXTEND = "native"
+-
+-RDEPENDS:${PN} += " \
+-    ${PYTHON_PN}-mypy-extensions \
+-    ${PYTHON_PN}-typed-ast \
+-    ${PYTHON_PN}-typing-extensions \
+-    ${PYTHON_PN}-json \
+-    ${PYTHON_PN}-compression \
+-    ${PYTHON_PN}-pprint \
+-    ${PYTHON_PN}-difflib \
+-    ${PYTHON_PN}-toml \
+-"
+-- 
 2.41.0
 
 
