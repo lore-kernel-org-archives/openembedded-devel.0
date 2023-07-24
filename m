@@ -1,119 +1,184 @@
-Return-Path: <tgamblin@baylibre.com>
+Return-Path: <jsbronder@cold-front.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1851BEB64DD
-	for <webhook@archiver.kernel.org>; Mon, 24 Jul 2023 18:28:19 +0000 (UTC)
-Received: from mail-qv1-f54.google.com (mail-qv1-f54.google.com [209.85.219.54])
- by mx.groups.io with SMTP id smtpd.web11.2043.1690223289327079597
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4661CEB64DD
+	for <webhook@archiver.kernel.org>; Mon, 24 Jul 2023 19:18:49 +0000 (UTC)
+Received: from out2-smtp.messagingengine.com (out2-smtp.messagingengine.com [66.111.4.26])
+ by mx.groups.io with SMTP id smtpd.web10.3378.1690226327812461484
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 24 Jul 2023 11:28:09 -0700
+ Mon, 24 Jul 2023 12:18:48 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@baylibre-com.20221208.gappssmtp.com header.s=20221208 header.b=SSY7k7bX;
- spf=pass (domain: baylibre.com, ip: 209.85.219.54, mailfrom: tgamblin@baylibre.com)
-Received: by mail-qv1-f54.google.com with SMTP id 6a1803df08f44-635eb5b0320so35462896d6.3
-        for <openembedded-devel@lists.openembedded.org>; Mon, 24 Jul 2023 11:28:08 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=baylibre-com.20221208.gappssmtp.com; s=20221208; t=1690223288; x=1690828088;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=ncjeraTFr3HzlLX8WCkj1eXrdT0KifdDdBuus/ZZBL8=;
-        b=SSY7k7bXS5KvCrKNPDdcQquC3jh81BsARgF4DlDkhHefgGSl4I24/eB6GmjR/laMtF
-         AEaOBxCiIfDNjH01KUz9d7QDoX4gKncHtz20vI39d/iIcIfAuDpesWmhdcNxG3o9xwd4
-         ybB9gMx2UTUoqTW3HgGvf6G4qLEWMOVC5ce5F4MC0y847Zm12biw4SHqWxg/xqBEjJrr
-         jRvCOFkzjGaZPCRPy/ZZifzbSwLByTrZ3UcBvNKAaSt70ttDifJMRh2+kkSavJlIaUnZ
-         vTktohRZZo8HpfFHeIoeq+nMLhLw4YjvzmQWIuRcG9QxLrw3bcVfJ7pxqhHs/PcZcb/M
-         K33w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1690223288; x=1690828088;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=ncjeraTFr3HzlLX8WCkj1eXrdT0KifdDdBuus/ZZBL8=;
-        b=LKHKyHjteHjYvNRuFaYmy26EYyb18wUwlFvt+uhUcQ6TFCz82L9sLCpED/HTlNUNoL
-         /A1Ocgy778PbaRxT/oYiSqBmu+AIRZzsQn0n/Ki22r9lQiObRqmP/xvb0+LVhG/814UP
-         f7QyDYtf7gPytsWVqjgGKomndBBRT8YKq/KC1kt6x1zp/PFhXWaJ7FPC1RNqjelMqpfW
-         nSJaJ9i1U38vLpGsmtsDEqY/bcmfLHDbPK1BVg/21aPEq6tJTwvaqz2NIzI0DUPC1onp
-         Fm5aB7Yhv7axJL5cl1i5YSMBG/lXoMXKOKMK0P916enwOppLNwo6LkvVT6zTvgyslWvr
-         3TwA==
-X-Gm-Message-State: ABy/qLbdeZvQDZV3NBzK1nzB/7/kUlsUOh3Hrn4vQRGgc6ZEqpJbi01D
-	PNR1BFLUZaDielC4AS3AS/iTTUKiRq6GdlbMi5Q=
-X-Google-Smtp-Source: APBJJlFKoc5mZ32gFJBQoUQYupFI9nHCAFJykFEf0BBw7ClYRBuvlfULEVOm9quhjNXwjDaGGa0ofQ==
-X-Received: by 2002:a05:6214:da9:b0:634:87c8:6a3f with SMTP id h9-20020a0562140da900b0063487c86a3fmr703510qvh.46.1690223287772;
-        Mon, 24 Jul 2023 11:28:07 -0700 (PDT)
-Received: from megalith.cgocable.net ([2001:1970:5b1f:ab00:fc4e:ec42:7e5d:48dd])
-        by smtp.gmail.com with ESMTPSA id x2-20020a0ce242000000b0063d06946b2bsm578213qvl.100.2023.07.24.11.28.07
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 24 Jul 2023 11:28:07 -0700 (PDT)
-From: Trevor Gamblin <tgamblin@baylibre.com>
+ dkim=pass header.i=@cold-front.org header.s=mesmtp header.b=DJ9Nf+Z/;
+ dkim=pass header.i=@messagingengine.com header.s=fm3 header.b=tkvKrpfU;
+ spf=pass (domain: cold-front.org, ip: 66.111.4.26, mailfrom: jsbronder@cold-front.org)
+Received: from compute6.internal (compute6.nyi.internal [10.202.2.47])
+	by mailout.nyi.internal (Postfix) with ESMTP id CC3A75C01D2
+	for <openembedded-devel@lists.openembedded.org>; Mon, 24 Jul 2023 15:18:46 -0400 (EDT)
+Received: from mailfrontend2 ([10.202.2.163])
+  by compute6.internal (MEProxy); Mon, 24 Jul 2023 15:18:46 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cold-front.org;
+	 h=cc:content-type:content-type:date:date:from:from:in-reply-to
+	:in-reply-to:message-id:mime-version:references:reply-to:sender
+	:subject:subject:to:to; s=mesmtp; t=1690226326; x=1690312726;
+	 bh=5x8tGfhI6cczeHyLsd7F6gQ2x+7Ax7G0jqbfaj3a3hQ=; b=DJ9Nf+Z/DDPr
+	Hv462PdLvgFSOSh3TujAiZoz3tApnOo5unQF6OYHwuBlOTnYQcsbivC7bjn1m5lZ
+	99XqdVJJ51yt9CsxCaRlIYiivAPAwQaHaGJa0hZXBJWytjDQ/llihVP2vKl26cu2
+	PTwKVSzokbAhoRugjtBnTDLlIUBYrVs=
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	messagingengine.com; h=cc:content-type:content-type:date:date
+	:feedback-id:feedback-id:from:from:in-reply-to:in-reply-to
+	:message-id:mime-version:references:reply-to:sender:subject
+	:subject:to:to:x-me-proxy:x-me-proxy:x-me-sender:x-me-sender
+	:x-sasl-enc; s=fm3; t=1690226326; x=1690312726; bh=5x8tGfhI6ccze
+	HyLsd7F6gQ2x+7Ax7G0jqbfaj3a3hQ=; b=tkvKrpfUH8UjXlr0LO9kwxFitNXeD
+	pF6Qa/pAdL/0vA2kjgtbZPJ9vZaS264eH5rM9k2SwOv1ZjCrlOrr8BU6myzxGMdn
+	9b2zQdUIfPKdp9lJy7ebjSM7OhRW1tj0mg0I3zbveXQS+xyv3y0iXrqq6lkrjag/
+	MgqI1rRS2syP7XKOCJOsQrRT2Mqkw+n6pdmX/jvnWg93QY51y5Ss+9W+TezFmCyK
+	jR/vjZtbX3mthNKQmRN7hNQutor3YRqLQ4o2/OY5v5e/9R8zrBWBlaeFC6AmJ9Ki
+	SsRnmFF91V83iOMSuqME73efg981Q/TEBASZvIAOhF9ybkT+aiqrHsvgg==
+X-ME-Sender: <xms:ls6-ZL1nae0SaponFGiRZs135nq_tn6bc5Mn_06aTTxkK-IYo-xtcQ>
+    <xme:ls6-ZKEVR5mx6A45Mr2tE9GFE233uihrTh0sCZKr9T_wvHYsPHFPOgJmCoWCVpIkL
+    XHRZ05640vuBatQEA>
+X-ME-Received: <xmr:ls6-ZL4zf6ZavYKTIq4bm6XDL0mwlO28_uTF_ZHA3Ax7-NPULm_OTHmab1QkIJSlueqPZVBOyEuFrlYd7e1vBOkZ>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedviedrheekgddufeefucetufdoteggodetrfdotf
+    fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
+    uceurghilhhouhhtmecufedttdenucenucfjughrpeffhffvuffkfhggtggujgesthdtre
+    dttddtvdenucfhrhhomheplfhushhtihhnuceurhhonhguvghruceojhhssghrohhnuggv
+    rhestgholhguqdhfrhhonhhtrdhorhhgqeenucggtffrrghtthgvrhhnpeekudetleefue
+    evteeiveevfeektdevveevhfefveetvdeikefgvdegueehgfefvdenucffohhmrghinhep
+    phihphhirdhorhhgpdhgihhthhhusgdrtghomhdpohhpvghnvghmsggvugguvggurdhorh
+    hgnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrhhomhepjhhs
+    sghrohhnuggvrhestgholhguqdhfrhhonhhtrdhorhhg
+X-ME-Proxy: <xmx:ls6-ZA0osegImXD6R8aaSXBYTc9fZSqVKGuFOEu6LBhEBYdPQRypxw>
+    <xmx:ls6-ZOF_qavPbj0Km29JDrJ9oAw9Of0UEpPIRKXB0zJir71hzAbvmA>
+    <xmx:ls6-ZB81YuL2F8aZDve8wPIWAu9swbtNvcBaznyst8MMcRHY4_0CQA>
+    <xmx:ls6-ZJz7oXeqgYmXMujayKb0bsFEvbXAp4eYgK7-k9CbelO_wWyDrQ>
+Feedback-ID: iea0042cb:Fastmail
+Received: by mail.messagingengine.com (Postfix) with ESMTPA for
+ <openembedded-devel@lists.openembedded.org>; Mon,
+ 24 Jul 2023 15:18:46 -0400 (EDT)
+Date: Mon, 24 Jul 2023 15:18:45 -0400
+From: Justin Bronder <jsbronder@cold-front.org>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-python][PATCH] python3-parse: upgrade 1.19.0 -> 1.19.1
-Date: Mon, 24 Jul 2023 14:28:05 -0400
-Message-ID: <20230724182805.103189-1-tgamblin@baylibre.com>
-X-Mailer: git-send-email 2.41.0
+Subject: Re: python3-mypy, python3-mypy-extensions: remove
+Message-ID: <ZL7OlSuXlyCH/bPK@ravine.members.linode.com>
+Mail-Followup-To: Justin Bronder <jsbronder@cold-front.org>,
+	openembedded-devel@lists.openembedded.org
+References: <20230724165848.3294-1-tgamblin@baylibre.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20230724165848.3294-1-tgamblin@baylibre.com>
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 24 Jul 2023 18:28:19 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/103999
+ <openembedded-devel@lists.openembedded.org>; Mon, 24 Jul 2023 19:18:49 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104000
 
-Switch to using git and a SRCREV to make sure we can keep the ptests.
+On 24/07/23 12:58 -0400, Trevor Gamblin wrote:
+> While attempting to upgrade mypy and mypy-extensions, it was discovered
+> that it depends on new modules, some of which have no maintenance plan
+> in place, e.g.: https://pypi.org/project/types-typed-ast/
 
-Changelog (https://github.com/r1chardj0n3s/parse/releases):
+That dependency has been dropped upstream as part of removing support for python
+3.7 [1].  If there's other other problematic recipes, I think it'd be beneficial
+to have a type checker for python available.
 
-- Add support for sign specifiers in number formats. by @anntzer in #134
-- Fix handling of unused alignment by @tomerha in #132
-- modern packaging by @wimglenn in #151
-- universal wheel by @wimglenn in #155
+1. https://github.com/python/mypy/commit/2edaf35ec1f91c139dfe1930b1b0d1e1cac59599
 
-Signed-off-by: Trevor Gamblin <tgamblin@baylibre.com>
----
- ...-parse_1.19.0.bb => python3-parse_1.19.1.bb} | 17 +++++++++++------
- 1 file changed, 11 insertions(+), 6 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-parse_1.19.0.bb => python3-parse_1.19.1.bb} (63%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-parse_1.19.0.bb b/meta-python/recipes-devtools/python/python3-parse_1.19.1.bb
-similarity index 63%
-rename from meta-python/recipes-devtools/python/python3-parse_1.19.0.bb
-rename to meta-python/recipes-devtools/python/python3-parse_1.19.1.bb
-index 94c1b53c94..9dc7f79318 100644
---- a/meta-python/recipes-devtools/python/python3-parse_1.19.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-parse_1.19.1.bb
-@@ -3,9 +3,18 @@ HOMEPAGE = "https://github.com/r1chardj0n3s/parse"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=8ab458ad281b60e6f1b39b3feafbfc05"
- 
--SRC_URI[sha256sum] = "9ff82852bcb65d139813e2a5197627a94966245c897796760a3a2a8eb66f020b"
-+SRC_URI[sha256sum] = "cc3a47236ff05da377617ddefa867b7ba983819c664e1afe46249e5b469be464"
- 
--inherit pypi setuptools3 ptest
-+SRC_URI += " \
-+    git://github.com/r1chardj0n3s/parse.git;branch=master;protocol=https \
-+    file://run-ptest \
-+"
-+
-+SRCREV ?= "72776522285d516032faa0f80c4ee6a8964075e8"
-+
-+S = "${WORKDIR}/git"
-+
-+inherit python_setuptools_build_meta ptest
- 
- RDEPENDS:${PN} += "\
-     python3-datetime \
-@@ -13,10 +22,6 @@ RDEPENDS:${PN} += "\
-     python3-numbers \
- "
- 
--SRC_URI += " \
--    file://run-ptest \
--"
--
- RDEPENDS:${PN}-ptest += " \
-     python3-pytest \
- "
+> 
+> Since this is something we want to avoid adding to the ecosystem and
+> mypy isn't a dependency for anything else in meta-python, remove the
+> recipes.
+> 
+> Signed-off-by: Trevor Gamblin <tgamblin@baylibre.com>
+> ---
+> v2 removes the recipes from the packagegroup as well.
+> 
+>  .../packagegroups/packagegroup-meta-python.bb |  2 --
+>  .../python/python3-mypy-extensions_0.4.3.bb   | 12 ----------
+>  .../python/python3-mypy_0.971.bb              | 23 -------------------
+>  3 files changed, 37 deletions(-)
+>  delete mode 100644 meta-python/recipes-devtools/python/python3-mypy-extensions_0.4.3.bb
+>  delete mode 100644 meta-python/recipes-devtools/python/python3-mypy_0.971.bb
+> 
+> diff --git a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
+> index b23d24c6d4..c12d475047 100644
+> --- a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
+> +++ b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
+> @@ -245,8 +245,6 @@ RDEPENDS:packagegroup-meta-python3 = "\
+>      python3-msk \
+>      python3-msm \
+>      python3-multidict \
+> -    python3-mypy \
+> -    python3-mypy-extensions \
+>      python3-natsort \
+>      python3-netaddr \
+>      python3-netifaces \
+> diff --git a/meta-python/recipes-devtools/python/python3-mypy-extensions_0.4.3.bb b/meta-python/recipes-devtools/python/python3-mypy-extensions_0.4.3.bb
+> deleted file mode 100644
+> index 83ac5362d6..0000000000
+> --- a/meta-python/recipes-devtools/python/python3-mypy-extensions_0.4.3.bb
+> +++ /dev/null
+> @@ -1,12 +0,0 @@
+> -SUMMARY = "Experimental type system extensions for programs checked with the mypy typechecker"
+> -HOMEPAGE = "https://github.com/python/mypy_extensions"
+> -LICENSE = "MIT"
+> -LIC_FILES_CHKSUM = "file://LICENSE;md5=0fe3219e2470a78c0d1837019b8b426e"
+> -
+> -PYPI_PACKAGE = "mypy_extensions"
+> -
+> -inherit pypi setuptools3
+> -
+> -SRC_URI[sha256sum] = "2d82818f5bb3e369420cb3c4060a7970edba416647068eb4c5343488a6c604a8"
+> -
+> -BBCLASSEXTEND = "native"
+> diff --git a/meta-python/recipes-devtools/python/python3-mypy_0.971.bb b/meta-python/recipes-devtools/python/python3-mypy_0.971.bb
+> deleted file mode 100644
+> index 31fcb06c9e..0000000000
+> --- a/meta-python/recipes-devtools/python/python3-mypy_0.971.bb
+> +++ /dev/null
+> @@ -1,23 +0,0 @@
+> -SUMMARY = "Optional static typing for Python 3 and 2 (PEP 484)"
+> -HOMEPAGE = "https://github.com/python/mypy"
+> -LICENSE = "MIT & Python-2.0"
+> -LIC_FILES_CHKSUM = "file://LICENSE;md5=6ba8ec528da02073b7e1f4124c0f836f"
+> -
+> -PYPI_PACKAGE = "mypy"
+> -
+> -inherit pypi python_setuptools_build_meta
+> -
+> -SRC_URI[sha256sum] = "40b0f21484238269ae6a57200c807d80debc6459d444c0489a102d7c6a75fa56"
+> -
+> -BBCLASSEXTEND = "native"
+> -
+> -RDEPENDS:${PN} += " \
+> -    ${PYTHON_PN}-mypy-extensions \
+> -    ${PYTHON_PN}-typed-ast \
+> -    ${PYTHON_PN}-typing-extensions \
+> -    ${PYTHON_PN}-json \
+> -    ${PYTHON_PN}-compression \
+> -    ${PYTHON_PN}-pprint \
+> -    ${PYTHON_PN}-difflib \
+> -    ${PYTHON_PN}-toml \
+> -"
+> -- 
+> 2.41.0
+> 
+
+> 
+> -=-=-=-=-=-=-=-=-=-=-=-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#103996): https://lists.openembedded.org/g/openembedded-devel/message/103996
+> Mute This Topic: https://lists.openembedded.org/mt/100333071/4454694
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [jsbronder@cold-front.org]
+> -=-=-=-=-=-=-=-=-=-=-=-
+> 
+
+
 -- 
-2.41.0
-
+Justin Bronder
 
