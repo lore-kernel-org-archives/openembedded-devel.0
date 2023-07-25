@@ -1,162 +1,146 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EB185EB64DD
-	for <webhook@archiver.kernel.org>; Tue, 25 Jul 2023 05:16:21 +0000 (UTC)
-Received: from mail-pf1-f179.google.com (mail-pf1-f179.google.com [209.85.210.179])
- by mx.groups.io with SMTP id smtpd.web10.14008.1690262175309465119
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 70ED8C00528
+	for <webhook@archiver.kernel.org>; Tue, 25 Jul 2023 06:57:42 +0000 (UTC)
+Received: from esa7.hc1455-7.c3s2.iphmx.com (esa7.hc1455-7.c3s2.iphmx.com [139.138.61.252])
+ by mx.groups.io with SMTP id smtpd.web10.14919.1690268261650669373
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 24 Jul 2023 22:16:15 -0700
+ Mon, 24 Jul 2023 23:57:42 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20221208 header.b=H8K9WDxC;
- spf=pass (domain: gmail.com, ip: 209.85.210.179, mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f179.google.com with SMTP id d2e1a72fcca58-6686708c986so4810511b3a.0
-        for <openembedded-devel@lists.openembedded.org>; Mon, 24 Jul 2023 22:16:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1690262174; x=1690866974;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=DkmDynmb2tVibinjOyDQFzPoiDlwN5luVlPD5SfkiYo=;
-        b=H8K9WDxCsB/Xt0jal65ogCMC6wIP+nIV7i1M9XKio1I29UySQNmndByDay6T6KbX0e
-         cUB4dfpzmt7BvxjcQp61M7oe93q8fChxPiUwWZwNXeIF3c1xSl/KwLA0TUEvrO0Ha2A2
-         cv5cQLaQL7h9s3XFsv+OGJkjAx5suKi/5pj4csqooZjGOFMdCqQAQnuTdSsaP/cqFtgi
-         ap56nh6cjFFmljhOdETP7+4TuX5XhbsJPTpplueQfOTmPlalPrMvrQpG49YUzTTMH4rG
-         9qXYPV9GVKcrP9Xfr9xoRgMQcVcWm3bsL9Nj152Dz4fh0rQeG/qKXy315a5N56Eyjiri
-         2YYA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1690262174; x=1690866974;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=DkmDynmb2tVibinjOyDQFzPoiDlwN5luVlPD5SfkiYo=;
-        b=UtujA8ikJhn2qOYGY/g4U0TTrlyJAu9FqQbQRaoUE4zhz96dvlYSj29oaBVkhXGEnK
-         FZbr+G2s6OxktpTPr311iOto/kD+eTtKIIZdeu+K36QWhrJ1KnYlRQx5TEz0jVezfKTW
-         4+DpJo6jFf4M1t4Fb7yHdPBm4nPXgQ+ZCwv5Bl0+rKwpjnaMStlZ7DuTd/OsSIDRTzAN
-         IAjONLGHGCYtwcFIgbw+TmCOAz3kNpDRWjDvVYB2zLpsNM55b8Ddgcf9OFhg0B5cVsEG
-         kF+bJ8EdRT/mHtW53kgMzxpyFFXsbnqQ++cASys05ByeLnV2TdZZIv+17FUSLREyic7j
-         78cQ==
-X-Gm-Message-State: ABy/qLalN9jiH+6pyLJORKfqad/lM10LJkhQ4WRXjbETWqtCioP/5/4e
-	uL8mTgY3OdVPKctqBERUGhCiTYvrKzf1Hw==
-X-Google-Smtp-Source: APBJJlGBem/PutH8JUOjLoLHr/ygan6VMxUvWd46zIpabmKAaYxVvO5oTuYGMinOy6jmK8ipr4tkzA==
-X-Received: by 2002:a17:902:70cc:b0:1b8:475d:ebf6 with SMTP id l12-20020a17090270cc00b001b8475debf6mr12849992plt.0.1690262174269;
-        Mon, 24 Jul 2023 22:16:14 -0700 (PDT)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9100:6180::6adc])
-        by smtp.gmail.com with ESMTPSA id q3-20020a170902dac300b001b04b1bd774sm9942379plx.208.2023.07.24.22.16.13
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 24 Jul 2023 22:16:13 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
+ dkim=none (message not signed); spf=pass (domain: fujitsu.com, ip: 139.138.61.252, mailfrom: wangmy@fujitsu.com)
+X-IronPort-AV: E=McAfee;i="6600,9927,10781"; a="104539220"
+X-IronPort-AV: E=Sophos;i="6.01,230,1684767600"; 
+   d="scan'208";a="104539220"
+Received: from unknown (HELO yto-r3.gw.nic.fujitsu.com) ([218.44.52.219])
+  by esa7.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 25 Jul 2023 15:57:38 +0900
+Received: from yto-m3.gw.nic.fujitsu.com (yto-nat-yto-m3.gw.nic.fujitsu.com [192.168.83.66])
+	by yto-r3.gw.nic.fujitsu.com (Postfix) with ESMTP id 4130FC3F84
+	for <openembedded-devel@lists.openembedded.org>; Tue, 25 Jul 2023 15:57:36 +0900 (JST)
+Received: from aks-ab2.gw.nic.fujitsu.com (aks-ab2.gw.nic.fujitsu.com [192.51.207.12])
+	by yto-m3.gw.nic.fujitsu.com (Postfix) with ESMTP id 6C713D20B6
+	for <openembedded-devel@lists.openembedded.org>; Tue, 25 Jul 2023 15:57:35 +0900 (JST)
+Received: from localhost.localdomain (unknown [10.167.225.33])
+	by aks-ab2.gw.nic.fujitsu.com (Postfix) with ESMTP id 81EE186FD5;
+	Tue, 25 Jul 2023 15:57:34 +0900 (JST)
+From: wangmy@fujitsu.com
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH] openwsman: Link with -lm to get floor() definition
-Date: Mon, 24 Jul 2023 22:16:11 -0700
-Message-ID: <20230725051611.1401853-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.41.0
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Cc: Wang Mingyu <wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH v3] lastlog2: add new recipe
+Date: Tue, 25 Jul 2023 14:57:21 +0800
+Message-Id: <1690268242-25714-1-git-send-email-wangmy@fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
+X-TM-AS-GCONF: 00
+X-TM-AS-Product-Ver: IMSS-9.1.0.1408-9.0.0.1002-27772.005
+X-TM-AS-User-Approved-Sender: Yes
+X-TMASE-Version: IMSS-9.1.0.1408-9.0.1002-27772.005
+X-TMASE-Result: 10--0.986500-10.000000
+X-TMASE-MatchedRID: ct/97+KAdbcS5iXdhf8hbirLqyE6Ur/j1QQ6Jx/fflY6FHRWx2FGsOvn
+	/O99cHKFCC8aAmGeO6lKC565Je+gkgV2NKF6aideCtzGvPCy/m42ZWOmuJUS2bgbJOZ434Bs1as
+	UUCqp+8frME+4JvD76erQYIW9fMLFFLe/cH9ifKnwgrvJFY9E0Vr2hZxjCLzq6Mw4RnkAvRK+Yp
+	N3FsaosrEzThseKC1B5kXtru4Z36mzVFZ6osYjDtfeP+V/VXwsBpEC0DNwn/pQnnYsWF8zq5Xwt
+	1rkqwjU55Pjz4VwpmyKs4UrBoivbbtj8w9EqUz1WCjDJRYeAZ241iXfjivJzD4tlpFReMb7Tn97
+	XQYd1B23uOUnceT0ci5rYfHE0OO95UcZtwNsCroURSScn+QSXt0H8LFZNFG76sBnwpOylLM1ZSt
+	BnXnusiEE1X6LLoNqEnZgyQw9SlddH7uLADKW/0i0ojo+YaFrSqzPLsi8f3tHLST1swLtfWSwZz
+	JTTKtm7bCgcTrQ5Y+IHqaUMp7VXtL/LK0d4I30Ze/gJB41STsbqpM7Cr+fvX7cGd19dSFd
+X-TMASE-SNAP-Result: 1.821001.0001-0-1-22:0,33:0,34:0-0
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 25 Jul 2023 05:16:21 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104009
+ <openembedded-devel@lists.openembedded.org>; Tue, 25 Jul 2023 06:57:42 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104010
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+From: Wang Mingyu <wangmy@fujitsu.com>
+
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- ...01-Link-with-libm-for-floor-function.patch | 71 +++++++++++++++++++
- .../openwsman/openwsman_2.7.2.bb              |  1 +
- 2 files changed, 72 insertions(+)
- create mode 100644 meta-oe/recipes-extended/openwsman/openwsman/0001-Link-with-libm-for-floor-function.patch
+ ...emove-lto-to-fix-link-error-of-clang.patch | 31 ++++++++++++++++
+ .../lastlog2/lastlog2_1.1.0.bb                | 36 +++++++++++++++++++
+ 2 files changed, 67 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/lastlog2/files/0001-remove-lto-to-fix-link-error-of-clang.patch
+ create mode 100644 meta-oe/recipes-extended/lastlog2/lastlog2_1.1.0.bb
 
-diff --git a/meta-oe/recipes-extended/openwsman/openwsman/0001-Link-with-libm-for-floor-function.patch b/meta-oe/recipes-extended/openwsman/openwsman/0001-Link-with-libm-for-floor-function.patch
+diff --git a/meta-oe/recipes-extended/lastlog2/files/0001-remove-lto-to-fix-link-error-of-clang.patch b/meta-oe/recipes-extended/lastlog2/files/0001-remove-lto-to-fix-link-error-of-clang.patch
 new file mode 100644
-index 0000000000..2f47261588
+index 0000000000..71c3de9748
 --- /dev/null
-+++ b/meta-oe/recipes-extended/openwsman/openwsman/0001-Link-with-libm-for-floor-function.patch
-@@ -0,0 +1,71 @@
-+From 09101da4efaa5584b7f3f3f3bfa5dbb4d1e26948 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Mon, 24 Jul 2023 22:09:21 -0700
-+Subject: [PATCH] Link with libm for floor() function
++++ b/meta-oe/recipes-extended/lastlog2/files/0001-remove-lto-to-fix-link-error-of-clang.patch
+@@ -0,0 +1,31 @@
++From 692523d2f8bf0ce893a781761154db4277f0fceb Mon Sep 17 00:00:00 2001
++From: Wang Mingyu <wangmy@fujitsu.com>
++Date: Wed, 19 Jul 2023 07:11:15 +0000
++Subject: remove lto to fix link error of clang
 +
-+LLD linker finds this missing symbol
++error message:
++| tests/tst-y2038-64bit-time_t.p/tst-y2038-64bit-time_t.c.o: file not recognized: file format not recognized
++| clang-16: error: linker command failed with exit code 1 (use -v to see invocation)
 +
-+arm-yoe-linux-gnueabi-ld.lld: error: undefined reference due to --no-allow-shlib-undefined: floor
-+>>> referenced by src/lib/libwsman.so.1.0.0
++Upstream-Status: Pending
 +
-+Upstream-Status: Submitted [https://github.com/Openwsman/openwsman/pull/195]
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
++Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 +---
-+ CMakeLists.txt         | 10 ++++++++++
-+ configure.ac           |  3 ++-
-+ src/lib/CMakeLists.txt |  4 ++++
-+ 3 files changed, 16 insertions(+), 1 deletion(-)
++ meson.build | 1 -
++ 1 file changed, 1 deletion(-)
 +
-+diff --git a/CMakeLists.txt b/CMakeLists.txt
-+index 6e54c66b..507ee633 100644
-+--- a/CMakeLists.txt
-++++ b/CMakeLists.txt
-+@@ -297,6 +297,16 @@ ELSE(HAVE_LIBDL)
-+  SET(HAVE_LIBDL 0)
-+ ENDIF(HAVE_LIBDL)
++diff --git a/meson.build b/meson.build
++index c521577..13d993b 100644
++--- a/meson.build
+++++ b/meson.build
++@@ -26,7 +26,6 @@ add_project_arguments(['-D_GNU_SOURCE=1',
++                        '-DPROJECT_VERSION="@0@"'.format(meson.project_version()) ], language : 'c')
 + 
-++# m
-++
-++FIND_LIBRARY( HAVE_LIBM "m" )
-++IF(HAVE_LIBM)
-++ SET(M_LIBRARIES ${HAVE_LIBM})
-++ SET(HAVE_LIBM 1)
-++ELSE(HAVE_LIBM)
-++ SET(HAVE_LIBM 0)
-++ENDIF(HAVE_LIBM)
-++
-+ # crypt
-+ 
-+ FIND_LIBRARY( HAVE_LIBCRYPT "crypt" )
-+diff --git a/configure.ac b/configure.ac
-+index 125564da..010fa0b6 100644
-+--- a/configure.ac
-++++ b/configure.ac
-+@@ -128,7 +128,8 @@ daemon  \
-+ va_copy \
-+ memmove \
-+ bcopy \
-+-gmtime_r
-++gmtime_r \
-++floor
-+ )
-+ AC_CHECK_FUNC(socket, , AC_CHECK_LIB(socket, socket))
-+ AC_CHECK_FUNC(gethostbyname, , AC_CHECK_LIB(nsl, gethostbyname))
-+diff --git a/src/lib/CMakeLists.txt b/src/lib/CMakeLists.txt
-+index 5c51781f..496fd672 100644
-+--- a/src/lib/CMakeLists.txt
-++++ b/src/lib/CMakeLists.txt
-+@@ -36,6 +36,10 @@ if( HAVE_LIBDL )
-+ TARGET_LINK_LIBRARIES(wsman ${DL_LIBRARIES})
-+ endif( HAVE_LIBDL )
-+ 
-++if( HAVE_LIBM )
-++TARGET_LINK_LIBRARIES(wsman ${M_LIBRARIES})
-++endif( HAVE_LIBM )
-++
-+ IF( ENABLE_EVENTING_SUPPORT )
-+ TARGET_LINK_LIBRARIES( wsman ${WSMAN_CLIENT_PKG} )
-+ ENDIF( ENABLE_EVENTING_SUPPORT )
++ possible_cc_flags = [
++-                  '-flto=auto',
++                   '-ffat-lto-objects',
++ 		  '-fstack-protector-strong',
++ 		  '-funwind-tables',
 +-- 
-+2.41.0
++2.34.1
 +
-diff --git a/meta-oe/recipes-extended/openwsman/openwsman_2.7.2.bb b/meta-oe/recipes-extended/openwsman/openwsman_2.7.2.bb
-index 39a9c52a47..1c68b5f432 100644
---- a/meta-oe/recipes-extended/openwsman/openwsman_2.7.2.bb
-+++ b/meta-oe/recipes-extended/openwsman/openwsman_2.7.2.bb
-@@ -21,6 +21,7 @@ SRC_URI = "git://github.com/Openwsman/openwsman.git;branch=main;protocol=https \
-            file://libssl-is-required-if-eventint-supported.patch \
-            file://openwsmand.service \
-            file://0001-lock.c-Define-PTHREAD_MUTEX_RECURSIVE_NP-if-undefine.patch \
-+           file://0001-Link-with-libm-for-floor-function.patch \
-            "
- 
- S = "${WORKDIR}/git"
+diff --git a/meta-oe/recipes-extended/lastlog2/lastlog2_1.1.0.bb b/meta-oe/recipes-extended/lastlog2/lastlog2_1.1.0.bb
+new file mode 100644
+index 0000000000..757af0073a
+--- /dev/null
++++ b/meta-oe/recipes-extended/lastlog2/lastlog2_1.1.0.bb
+@@ -0,0 +1,36 @@
++SUMMARY = "Y2038 safe version of lastlog"
++HOMEPAGE = "https://github.com/thkukuk/lastlog2"
++DESCRIPTION = "lastlog reports the last login of a given user or of all users who did ever login on a system."
++LICENSE = "BSD-2-Clause"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=020090a00b69dd2af9ab82eb0003ea2c"
++SECTION = "libs"
++
++SRCREV = "585153a577788c590370d20e40263b61238dfab3"
++
++SRC_URI = "git://github.com/thkukuk/lastlog2.git;branch=main;protocol=https \
++           file://0001-remove-lto-to-fix-link-error-of-clang.patch \
++"
++
++S = "${WORKDIR}/git"
++
++inherit meson pkgconfig systemd features_check
++
++DEPENDS += " ${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'libpam', '', d)} sqlite3 "
++REQUIRED_DISTRO_FEATURES = "pam"
++
++SYSTEMD_SERVICE:${PN} = "lastlog2-import.service"
++
++EXTRA_OEMESON = " -Dpamlibdir=${libdir}"
++
++do_install:append () {
++      if [ -d ${D}${prefix}/lib/systemd -a ${D}${prefix}/lib != `dirname ${D}${systemd_unitdir}` ]; then
++          # Fix makefile hardcoded path assumptions for systemd (assumes $prefix)
++          # without usrmerge distro feature enabled
++          install -d `dirname ${D}${systemd_unitdir}`
++          mv ${D}${prefix}/lib/systemd `dirname ${D}${systemd_unitdir}`
++      fi
++}
++
++FILES:${PN} += " ${systemd_system_unitdir} "
++FILES:${PN} += " ${libdir} "
++FILES:${PN} += " ${nonarch_libdir}/tmpfiles.d/* "
 -- 
-2.41.0
+2.34.1
 
 
