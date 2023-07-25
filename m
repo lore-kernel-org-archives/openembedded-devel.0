@@ -2,46 +2,44 @@ Return-Path: <tgamblin@baylibre.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 80E2DC0015E
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 80E56C41513
 	for <webhook@archiver.kernel.org>; Tue, 25 Jul 2023 14:16:04 +0000 (UTC)
-Received: from mail-ot1-f52.google.com (mail-ot1-f52.google.com [209.85.210.52])
- by mx.groups.io with SMTP id smtpd.web11.21443.1690294563433147688
+Received: from mail-oa1-f49.google.com (mail-oa1-f49.google.com [209.85.160.49])
+ by mx.groups.io with SMTP id smtpd.web11.21442.1690294562524293195
  for <openembedded-devel@lists.openembedded.org>;
  Tue, 25 Jul 2023 07:16:03 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@baylibre-com.20221208.gappssmtp.com header.s=20221208 header.b=U6rBaSM2;
- spf=pass (domain: baylibre.com, ip: 209.85.210.52, mailfrom: tgamblin@baylibre.com)
-Received: by mail-ot1-f52.google.com with SMTP id 46e09a7af769-6b9b835d302so3496188a34.1
-        for <openembedded-devel@lists.openembedded.org>; Tue, 25 Jul 2023 07:16:03 -0700 (PDT)
+ dkim=pass header.i=@baylibre-com.20221208.gappssmtp.com header.s=20221208 header.b=r5iIrZ+e;
+ spf=pass (domain: baylibre.com, ip: 209.85.160.49, mailfrom: tgamblin@baylibre.com)
+Received: by mail-oa1-f49.google.com with SMTP id 586e51a60fabf-1b06a46e1a9so4222306fac.2
+        for <openembedded-devel@lists.openembedded.org>; Tue, 25 Jul 2023 07:16:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=baylibre-com.20221208.gappssmtp.com; s=20221208; t=1690294562; x=1690899362;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=dYElikWe+cX7rgEPn4wYQ/v1QUdAqc7g4oSE/7/y73U=;
-        b=U6rBaSM2AFOMusETWe0ulhPdtcFBDAZRkggRxuR7YJ5iV6jGc8dqutHaaUIGfN+FfG
-         3zhMhabs8ZQY7VVKrEdHBdKvggrdZLHMcx8DbtZ9M57QI54Ti3gFwsUpNNw5U3reqxpC
-         alGeyqvyrLSuGwuWmxF3aBKmu4DXIU4hH1xkNRXOVp5JkaPj/+Qlp61VLwNV45mDhyf+
-         xRy1SiQd4yoMFNbaLu7R6DrVw6SuYKTs5v12vddYcR47zrCCOyJvR8qZDjt4niH5T4st
-         3NA1VIXlxxsl6YdhW4PwRQRrGI7NY/o8Z1uML7wE+taOdtYfG4KDwsH2BxQREDZxinyQ
-         0gSA==
+        d=baylibre-com.20221208.gappssmtp.com; s=20221208; t=1690294561; x=1690899361;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=p3ogk+WiqVw6vGspoce+VfIn/R4Is3jsMFJYdJpXJTU=;
+        b=r5iIrZ+ek+NoukzXs2kUV5B0qbWGulPrb8YPDLV4CN7EstqK7ac6+sUDvdjpRazivD
+         PFGb2HKh1sxQ6jJwaTzkjUbSH8Zm3SJdddjtLfbQWUDHnHdLm7XQ/dNnydFZlBpb1pkF
+         RyK2HBGdIu3onk4Y+/p+74VsEqpyyrQFFn3o5ejkZCpmCDIVJMTugI95MPEVsWqrGj/7
+         lU85vQVPGGrNvXVzfOz4axpWIi0+pUC2I7wYvL/e3O8mEVtrLYuKBhQmSgq+12vdLeBF
+         NuWg4JcTfU14w8ypjXtNniIpxHOXHEiGgdT7DFdREtaShMe770WZDn7szOVIspZuIw69
+         EhEw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1690294562; x=1690899362;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=dYElikWe+cX7rgEPn4wYQ/v1QUdAqc7g4oSE/7/y73U=;
-        b=A6ABiVyq6XT91h9bN9CevZGn1s2EaQ7Oi9PNVJmZbEbRzTMlnZGPxgj3QTaC1go+f9
-         Ofgt+mR3nKW5hJ53Uy1T0SHEn3crmxYziST3mTp6AU8k1eLWthh/78Q2q1HSRWEUluMP
-         YWgXDCJPqajSpmrr95LxtWybVtaz6J85dc1q+rKGiq5tn5JCBHb6xN23U1FAzNKBJ1V3
-         apPqYCkeTsMUvpDs1DdGOaaPny9gjPhSnlWlKLouCtIMiwSlEkksY+dxQL1DZQi/xA83
-         x4NjjmZ+c8RtbAlQ3yR4ihoN4MRYCAhuj+6Rzu8is8n1nGqfvhqJD4FWA8LqfDvIvGFW
-         rVvw==
-X-Gm-Message-State: ABy/qLZKqlgKrLvoZOtVtry2woe3bWAb4u2vAsHdpzjSJz4hzJGLl+7e
-	e7Tfi/Uj/RsbwEfST0j6ffiRuBEzPRKszS5jr4E=
-X-Google-Smtp-Source: APBJJlFjYOk8cmbU03Wn3UHqhK5F8OX+Ph0DPSY0sM5VFJBsoDmPmFwFJ1Gh5qdqxqFQ65V+G4d5cg==
-X-Received: by 2002:a05:6808:1451:b0:3a5:ae6b:135e with SMTP id x17-20020a056808145100b003a5ae6b135emr8676321oiv.53.1690294562116;
-        Tue, 25 Jul 2023 07:16:02 -0700 (PDT)
+        d=1e100.net; s=20221208; t=1690294561; x=1690899361;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=p3ogk+WiqVw6vGspoce+VfIn/R4Is3jsMFJYdJpXJTU=;
+        b=es4p4lQ4Y5pN13rcUJ6j7kFKfBsB+znnAKaITnPoTGfi1qECrAlCeD7iYePYiccHsM
+         5uP0Rwt4n74Sg3PgNOSLcMajxXpg3nK2HQZ+W6iTGIBdBbsliNKgOxlhkYbPRSQeeNoZ
+         xpnTJ6brdHJZJ508HXUOkGHIfgWCjk1KKUBjVRHnUTebz+3/levgw6YKHJp5A+xU+oR/
+         DmNWqnkfE+FThifv/GT4Yh0i5K39y/a4Fu7HimmxBlMf/hz5ZA5SIm1nLnDcnv4UasbE
+         ETsLmXGjR5XZnBGqmCd6HfJx0UZEzXBQ9/UvkgWIB+E+vAtFXuI8vXXl0Rt89PHDpCn4
+         wA5w==
+X-Gm-Message-State: ABy/qLbbjvxQt6KBpx2vp9g8NtQ8+i8lt50DRXfhJQqi/POGYfE8OhJP
+	F3XMHa9btWbWDhri+NXX+ucU6igs/fScs8CdacA=
+X-Google-Smtp-Source: APBJJlHtYVIp+oVaHq1Ii4rfx5oVjuvgJ+OpnUTT+XPouZd4W5x05hPLC3mHH9rNF8E05epvTwRf/w==
+X-Received: by 2002:a05:6870:c6a5:b0:1ba:bb13:d007 with SMTP id cv37-20020a056870c6a500b001babb13d007mr14661488oab.5.1690294561460;
+        Tue, 25 Jul 2023 07:16:01 -0700 (PDT)
 Received: from megalith.cgocable.net ([2001:1970:5b1f:ab00:fc4e:ec42:7e5d:48dd])
         by smtp.gmail.com with ESMTPSA id z27-20020a05620a101b00b0075b168fcde9sm3707399qkj.77.2023.07.25.07.16.01
         for <openembedded-devel@lists.openembedded.org>
@@ -49,66 +47,108 @@ Received: from megalith.cgocable.net ([2001:1970:5b1f:ab00:fc4e:ec42:7e5d:48dd])
         Tue, 25 Jul 2023 07:16:01 -0700 (PDT)
 From: Trevor Gamblin <tgamblin@baylibre.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-python][PATCH 2/5] python3-send2trash: upgrade 1.8.0 -> 1.8.2
-Date: Tue, 25 Jul 2023 10:15:56 -0400
-Message-ID: <20230725141600.118138-2-tgamblin@baylibre.com>
+Subject: [meta-python][PATCH 1/5] python3-semver: upgrade 2.13.0 -> 3.0.1
+Date: Tue, 25 Jul 2023 10:15:55 -0400
+Message-ID: <20230725141600.118138-1-tgamblin@baylibre.com>
 X-Mailer: git-send-email 2.41.0
-In-Reply-To: <20230725141600.118138-1-tgamblin@baylibre.com>
-References: <20230725141600.118138-1-tgamblin@baylibre.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 25 Jul 2023 14:16:04 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104013
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104012
 
-- Update build backend since they use a pyproject.toml file now.
-- Add python3-io to RDEPENDS so that the module can be imported.
+- Update to point at the proper license file with correct checksum.
+  Previously it was pointing at a subset of a PKG-INFO file, which was
+  a legacy output from distutils
+- Update build backend and include python3-setuptools-scm-native in
+  DEPENDS
+- Modify ptest installation and run-ptest script since the tests have
+  been moved into their own folder
 
-Changelog (https://github.com/arsenetar/send2trash/releases):
-
-1.8.2
-
-- Add fallback to HOMETRASH when cross device errors happen in plat_other (#26, #41, #63)
-- win/legacy: tiny logic simplification by @BoboTiG in #77
-- TravisCI is not used anymore by @sobolevn in #73
-- fix(ci): Update to latest actions, fix python versions by @arsenetar in #78
-
-1.8.1b0
-
-- Add fallback to HOMETRASH when cross device errors happen in plat_other (#26, #41, #63)
+Changelog: https://github.com/python-semver/python-semver/releases
 
 Signed-off-by: Trevor Gamblin <tgamblin@baylibre.com>
 ---
- ...3-send2trash_1.8.0.bb => python3-send2trash_1.8.2.bb} | 9 ++++++---
- 1 file changed, 6 insertions(+), 3 deletions(-)
- rename meta-python/recipes-extended/send2trash/{python3-send2trash_1.8.0.bb => python3-send2trash_1.8.2.bb} (51%)
+ .../python/python3-semver/run-ptest           |  2 +-
+ .../python/python3-semver_2.13.0.bb           | 24 -----------------
+ .../python/python3-semver_3.0.1.bb            | 26 +++++++++++++++++++
+ 3 files changed, 27 insertions(+), 25 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python3-semver_2.13.0.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-semver_3.0.1.bb
 
-diff --git a/meta-python/recipes-extended/send2trash/python3-send2trash_1.8.0.bb b/meta-python/recipes-extended/send2trash/python3-send2trash_1.8.2.bb
-similarity index 51%
-rename from meta-python/recipes-extended/send2trash/python3-send2trash_1.8.0.bb
-rename to meta-python/recipes-extended/send2trash/python3-send2trash_1.8.2.bb
-index a20b0194f8..eac89e6297 100644
---- a/meta-python/recipes-extended/send2trash/python3-send2trash_1.8.0.bb
-+++ b/meta-python/recipes-extended/send2trash/python3-send2trash_1.8.2.bb
-@@ -2,10 +2,13 @@ SUMMARY = "Send file to trash natively under Mac OS X, Windows and Linux"
- LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=a02659c2d5f4cc626e4dcf6504b865eb"
+diff --git a/meta-python/recipes-devtools/python/python3-semver/run-ptest b/meta-python/recipes-devtools/python/python3-semver/run-ptest
+index 43c03b594b..cd2bc8537c 100644
+--- a/meta-python/recipes-devtools/python/python3-semver/run-ptest
++++ b/meta-python/recipes-devtools/python/python3-semver/run-ptest
+@@ -1,3 +1,3 @@
+ #!/bin/sh
  
--inherit pypi setuptools3
-+inherit pypi python_setuptools_build_meta
- 
--SRC_URI[sha256sum] = "d2c24762fd3759860a0aff155e45871447ea58d2be6bdd39b5c8f966a0c99c2d"
-+SRC_URI[sha256sum] = "c132d59fa44b9ca2b1699af5c86f57ce9f4c5eb56629d5d55fbb7a35f84e2312"
- 
- PYPI_PACKAGE = "Send2Trash"
- 
--RDEPENDS:${PN} += "python3-datetime"
-+RDEPENDS:${PN} += "\
-+    python3-io \
-+    python3-datetime \
+-pytest -o log_cli=true -o log_cli_level=INFO test_semver.py --disable-warnings| sed -e 's/\[...%\]//g'| sed -e 's/PASSED/PASS/g'| sed -e 's/FAILED/FAIL/g'|sed -e 's/SKIPPED/SKIP/g'| awk '{if ($NF=="PASS" || $NF=="FAIL" || $NF=="SKIP" || $NF=="XFAIL" || $NF=="XPASS"){printf "%s: %s\n", $NF, $0}else{print}}'| awk '{if ($NF=="PASS" || $NF=="FAIL" || $NF=="SKIP" || $NF=="XFAIL" || $NF=="XPASS") {$NF="";print $0}else{print}}'
++pytest -o log_cli=true -o log_cli_level=INFO tests/test_semver.py --disable-warnings| sed -e 's/\[...%\]//g'| sed -e 's/PASSED/PASS/g'| sed -e 's/FAILED/FAIL/g'|sed -e 's/SKIPPED/SKIP/g'| awk '{if ($NF=="PASS" || $NF=="FAIL" || $NF=="SKIP" || $NF=="XFAIL" || $NF=="XPASS"){printf "%s: %s\n", $NF, $0}else{print}}'| awk '{if ($NF=="PASS" || $NF=="FAIL" || $NF=="SKIP" || $NF=="XFAIL" || $NF=="XPASS") {$NF="";print $0}else{print}}'
+diff --git a/meta-python/recipes-devtools/python/python3-semver_2.13.0.bb b/meta-python/recipes-devtools/python/python3-semver_2.13.0.bb
+deleted file mode 100644
+index b47bcae008..0000000000
+--- a/meta-python/recipes-devtools/python/python3-semver_2.13.0.bb
++++ /dev/null
+@@ -1,24 +0,0 @@
+-DESCRIPTION = "Python module for Semantic Versioning"
+-HOMEPAGE = "https://github.com/k-bx/python-semver"
+-BUGTRACKER = "https://github.com/k-bx/python-semver/issues"
+-LICENSE = "BSD-3-Clause"
+-LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=e910b35b0ef4e1f665b9a75d6afb7709"
+-
+-SRC_URI[md5sum] = "e98b5fb283ea84daa5195087de83ebf1"
+-SRC_URI[sha256sum] = "fa0fe2722ee1c3f57eac478820c3a5ae2f624af8264cbdf9000c980ff7f75e3f"
+-
+-inherit pypi setuptools3 ptest
+-
+-BBCLASSEXTEND = "native nativesdk"
+-
+-SRC_URI += " \
+-        file://run-ptest \
+-"
+-
+-RDEPENDS:${PN}-ptest += " \
+-        ${PYTHON_PN}-pytest \
+-"
+-
+-do_install_ptest() {
+-        cp -f ${S}/test_semver.py ${D}${PTEST_PATH}/
+-}
+diff --git a/meta-python/recipes-devtools/python/python3-semver_3.0.1.bb b/meta-python/recipes-devtools/python/python3-semver_3.0.1.bb
+new file mode 100644
+index 0000000000..2d85d789c7
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-semver_3.0.1.bb
+@@ -0,0 +1,26 @@
++DESCRIPTION = "Python module for Semantic Versioning"
++HOMEPAGE = "https://github.com/python-semver/python-semver"
++BUGTRACKER = "https://github.com/python-semver/python-semver"
++LICENSE = "BSD-3-Clause"
++LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=d9da679db3bdce30a1b4328d5c474f98"
++
++SRC_URI[md5sum] = "b7502c12ce325ffffeab694fed52f6f5"
++SRC_URI[sha256sum] = "9ec78c5447883c67b97f98c3b6212796708191d22e4ad30f4570f840171cbce1"
++
++inherit pypi python_setuptools_build_meta ptest
++
++BBCLASSEXTEND = "native nativesdk"
++
++SRC_URI += " \
++        file://run-ptest \
 +"
++
++DEPENDS += " python3-setuptools-scm-native"
++
++RDEPENDS:${PN}-ptest += " \
++        ${PYTHON_PN}-pytest \
++"
++
++do_install_ptest() {
++        cp -rf ${S}/tests ${D}${PTEST_PATH}/
++}
 -- 
 2.41.0
 
