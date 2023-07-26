@@ -1,135 +1,360 @@
-Return-Path: <andrej.valek@siemens.com>
+Return-Path: <narpat.mali@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D6C06C001DC
-	for <webhook@archiver.kernel.org>; Wed, 26 Jul 2023 08:09:18 +0000 (UTC)
-Received: from EUR01-HE1-obe.outbound.protection.outlook.com (EUR01-HE1-obe.outbound.protection.outlook.com [40.107.13.40])
- by mx.groups.io with SMTP id smtpd.web10.6471.1690358949798963673
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 09D20C001DC
+	for <webhook@archiver.kernel.org>; Wed, 26 Jul 2023 08:25:09 +0000 (UTC)
+Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
+ by mx.groups.io with SMTP id smtpd.web10.6656.1690359899500767249
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 26 Jul 2023 01:09:10 -0700
+ Wed, 26 Jul 2023 01:24:59 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@siemens.com header.s=selector2 header.b=j1LzN0Tk;
- spf=pass (domain: siemens.com, ip: 40.107.13.40, mailfrom: andrej.valek@siemens.com)
+ dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=bp3q0+UD;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=6571062b1b=narpat.mali@windriver.com)
+Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 36Q7V8P6029684
+	for <openembedded-devel@lists.openembedded.org>; Wed, 26 Jul 2023 01:24:59 -0700
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
+	 h=message-id:date:subject:to:cc:references:from:in-reply-to
+	:content-type:content-transfer-encoding:mime-version; s=
+	PPS06212021; bh=onBxzVnDfgPR/4a4iLia/3c7Jo2LF5kw02JEhOr/2k4=; b=
+	bp3q0+UDt2cSGa5fI+z3uS6YacpVElYgQlLKMYcKvMngpm96cP2Y/wn9MeDuAgDI
+	sIo1ilSs6O1QKp1kbHbZ+t7vlchrNsQupqafj4uGX9Tk2z27DIi+bns0u9QZVzWC
+	BDuGEv2SVV5ZcjQ95M8ksXmpxWvMNzaVyGXaxcpPoSc/zvuUHorUy/faPE10AJ5f
+	k43c17rF3TVATmS5hzdjc/aDNr5PDfksJ7MrRMTjc+963NX9gZPTeEQAFz8P+Cgp
+	G1JUswtPsHr7nR0ixRXfwwQBnTVUI8iHGRFCsT+zkYqeQoRLBn0pk+vD7iSi/LQA
+	HL4IjBddQ4FLW57Rg6tCTw==
+Received: from pps.reinject (localhost [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3s0ad037h6-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Wed, 26 Jul 2023 01:24:59 -0700 (PDT)
+Received: from m0250810.ppops.net (m0250810.ppops.net [127.0.0.1])
+	by pps.reinject (8.17.1.22/8.17.1.22) with ESMTP id 36Q8Ow9a008955
+	for <openembedded-devel@lists.openembedded.org>; Wed, 26 Jul 2023 01:24:58 -0700
+Received: from nam12-bn8-obe.outbound.protection.outlook.com (mail-bn8nam12lp2171.outbound.protection.outlook.com [104.47.55.171])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3s0ad037h3-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+	Wed, 26 Jul 2023 01:24:58 -0700 (PDT)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=bhbpm4sNkZCN3qFf9ZBZGBNmTKjdSBUZAbpcoU/5vJJc6X5fkAuMw+V6L61adaNc75U05bgVFvm0f3w0VTI/Cki4NejbosnQRPCOnQWuFTB/HF3wWtZlJpCnGXDK930uQHRke7YZQ4LXBZdzsiBey9yFFKoNdPtlWQ2Nb9u5Wmgb6vk/KbZ/vX9B8P9L22MvH4ysI3LPoywmjmPuhBSjC2no0sEepNYs6KUAVeNSb1Z7gAsK750PP4I4szhFPLzo69f9SSVCmY+wDy/bYizqR6BkqG5RYQ9+xP8oIg6HQ4ikQO3+iHt7Lu5pA1AGEMrMIsYV1HwUlTDE4FWYDf858A==
+ b=Dvz9cOBQtfYji7OxBkh3rr4pHijrZqF7yFTLadXPco30Vec25X5ky9qe9NEb2lNcEHWqq9MX1V+VEcP3sQJFs33BI9YoepdEOGLY9klNlGFIL9XvZf1Ub4Nkoo5B/QWtdFz+uX0HMJHmUkpFmqZnfMKNT2COJFUJgwkRRTysh6H3GiTyvgaQpLKCATt0vujSa2Z42G/2fogfM20fvf2R1NHjElM9yL9uHSsD8bU7dKA1/cnWEjuZtSg3pni05OKZt/65+0jU8C52RnCWvj1fXa1uc1hzHiSNkkZg0XqGRc8beE/eirDEK79Rmlms815e/pM4yoJ928LPN4ndUKUFFQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=t2sB2zvFdnQ7Jo9LmyBbDG+8HxmGKKhjhcUtg1D0GFw=;
- b=hwOmGoWYft1DlQiwlQcTrDsvjx3gSKQxrzq4o0BqNl8F0xnOaOu1/IsCjd+34WJEGTzuvrHWnnDqwvc3HQqiaNAlaKOwmXtTyHPLA7D78SvJ5QPwxNUxqW6OUItWOjivWHd8K4bQQg3r9ZDIqE/wiXw+2czKBbauvh08khdUMAopePFdXz2fzvEpizPEW2cnvsdomCgvxrsK5j5Z6NqX2rQGKkZlE82cnOE5uDVQt8gWsSBNfLtJE2cmwFenL6e91ayttvQaFYerpQPpOCJN+f9ZCoSvX/XTJjcGZ+Nm3JdcNZDK6v0b92hR8VSv8U3DHacTQs7gjl/kf6iaXnc+Pw==
+ bh=onBxzVnDfgPR/4a4iLia/3c7Jo2LF5kw02JEhOr/2k4=;
+ b=QOZ3eKxOD+0eJtOlhG6ui3J0auBluRFaID6E6PNN6LegpZaJFsTxOFGqtnpPKmePTo6Z1WCg4NCxhoc6DeRV9DW8i+gXH0nI33qUxU5nx49p4AFEfHFDM6A7Qnq9AfYU+xqna+CgHvJFoNVcE013R4Kzu/Dq5c6t8reaP3/ZJw5uk+zW2Luk5pG/dYnuxRuRtdDxiOsksG7WZma6RXFz/vwriXZKVC4JiDBzQG3v3XFPW2ribvXiR89QtlJ9Y5oEm4pR7RBbhDUd9nStVjY6NzxFOLR25CVxzaDVwNRNwuzXxQD9r/CYOw56tDr4zLstM6JFb+G2wyIZzS4DjnqWyg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=siemens.com; dmarc=pass action=none header.from=siemens.com;
- dkim=pass header.d=siemens.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=siemens.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=t2sB2zvFdnQ7Jo9LmyBbDG+8HxmGKKhjhcUtg1D0GFw=;
- b=j1LzN0TkX5RJU/Z/loHfYr81zfSr3eKFa7UVsYhHJKLYQLhY+TzVOYTe7bc7dDZR5nEYgt09GfBepZgnuetHp+pggR2TIli4mq6dROwBzt2XVWCNLGNMbxRGbcRQmS21uvm/931vWnO90xIDkbbwCPAItQGPvdL6Fg7o2vFcyN8P/brI0jCasqW4d4/zKKOiFb6wd5RS8lAXJXK/IjGuAbi4Ac1IuteWclTPMW0hbNG4Gpp6lLsMDrNFME3xVJerfbNVbZhua0ER5YBwltnrW3J5mF82bWWnoP9L+yyarkNvKj9l2yncN/jMkpaddZWI1eb1hyjL8PqKmYTIKn5dLg==
-Received: from DB8PR10MB3977.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:138::9)
- by PAVPR10MB7281.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:102:31c::14) with
+ smtp.mailfrom=windriver.com; dmarc=pass action=none
+ header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
+Received: from DM4PR11MB5550.namprd11.prod.outlook.com (2603:10b6:5:38b::24)
+ by PH7PR11MB7643.namprd11.prod.outlook.com (2603:10b6:510:27c::22) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6631.29; Wed, 26 Jul
- 2023 08:09:06 +0000
-Received: from DB8PR10MB3977.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::1b9e:6317:5a95:9edb]) by DB8PR10MB3977.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::1b9e:6317:5a95:9edb%5]) with mapi id 15.20.6609.032; Wed, 26 Jul 2023
- 08:09:06 +0000
-From: "Valek, Andrej" <andrej.valek@siemens.com>
-To: "raj.khem@gmail.com" <raj.khem@gmail.com>
-CC: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] cve_check: convert CVE_CHECK_IGNORE to
- CVE_STATUS
-Thread-Topic: [meta-oe][PATCH] cve_check: convert CVE_CHECK_IGNORE to
- CVE_STATUS
-Thread-Index: AQHZviMBksx6c2MNRUOdjk989bvkwq/LtJ4A
-Date: Wed, 26 Jul 2023 08:09:06 +0000
-Message-ID: <23f21fb658e12efe80dce29b82c1fa87cd60874d.camel@siemens.com>
-References: <20230724113527.141274-1-andrej.valek@siemens.com>
-In-Reply-To: <20230724113527.141274-1-andrej.valek@siemens.com>
-Accept-Language: en-US
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6609.33; Wed, 26 Jul
+ 2023 08:24:55 +0000
+Received: from DM4PR11MB5550.namprd11.prod.outlook.com
+ ([fe80::219e:cc26:ef6d:1b4a]) by DM4PR11MB5550.namprd11.prod.outlook.com
+ ([fe80::219e:cc26:ef6d:1b4a%4]) with mapi id 15.20.6609.032; Wed, 26 Jul 2023
+ 08:24:54 +0000
+Message-ID: <7a24793c-b315-96c5-0a16-5c6e324cdcea@windriver.com>
+Date: Wed, 26 Jul 2023 13:52:10 +0530
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+ Thunderbird/102.13.0
+Subject: Re: [oe] [meta-networking][kirkstone][PATCH 1/1] frr: fix for
+ CVE-2023-31490
 Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-user-agent: Evolution 3.46.4 (3.46.4-1.fc37) 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=siemens.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: DB8PR10MB3977:EE_|PAVPR10MB7281:EE_
-x-ms-office365-filtering-correlation-id: 3fac722f-4165-440b-8606-08db8daf9539
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: 
- WLtvlwOt6rO7f3kCFQ7qGbU2AWoFOOiqeMNRl3KKjhrzgbn+jrmGVI+9JAjISAXAnOLrgJArP4rXiueIg+3RP+S3Ky6HA6YDv8TXkPemJVcQ6KVxgI6n2/hXAhdmk806P3JOXinqU8CAW6FFvTCBHpz30vUw0i+9Svd4yCooqU4iRc2O69uomnXDcWZJZHmy82XBvSA/gzq0KBmRpxD3v+icUl8+ha0iPKwW87TZ0tkyCB+hKo8KlmWZGm8RT+O0iflufhS5jIV+qUhQtg1la7QR1eBOjIn5cMI1MxXl9y8Ik3NRvdVuCv3ec6AVnc/k6ezQrNHkE3xN99sOUoEqdDput2jotJkoNHvVUOQ9WhGQW9hIZD5ZkwYmk++psbVnYhVTgXZosiCawEfHbMCUFKwZl88FJh0SYck9WnnnjjnkYXV0/n7tYgk6fLeuqLq4eFX8ZUqyZI1LT+C5PBCe1i1X5Msr0WAhlig2encmwovMH71SzVbmZ1c/eM/na9TUOwSKE0vGhEz2EkHJPpA7e4zUUagppczWANscOxOYLsFvknidoE1QS7AD0ZxgrnVpKQn9TKZlg9wv4pBH5gnurs547nasHoxe/Vrvvc0+C8I=
-x-forefront-antispam-report: 
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DB8PR10MB3977.EURPRD10.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230028)(4636009)(346002)(376002)(366004)(136003)(396003)(39860400002)(451199021)(2906002)(316002)(8676002)(8936002)(5660300002)(38070700005)(4744005)(41300700001)(36756003)(86362001)(966005)(6512007)(26005)(6506007)(478600001)(71200400001)(6486002)(82960400001)(186003)(2616005)(64756008)(6916009)(66446008)(4326008)(66476007)(66556008)(38100700002)(76116006)(91956017)(122000001)(66946007);DIR:OUT;SFP:1101;
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: 
- =?utf-8?B?UlIxWHNXaTNkQTFPZTRvYVM1dWEyS3ZJTUU5MVhCT2Z2RGo2Snpjdmw0Z3k2?=
- =?utf-8?B?QTJxWnk5UWFweE1DRTFmL1dqdFFmaHJkYWJ0M0F6ZXRHTDV3a0lkWGNKU0Zp?=
- =?utf-8?B?WGhpOWFDWGU1c21ueHZESHRXSDg1M1VRamlvQVJzUUVOeldMZWRQZmNiQTZH?=
- =?utf-8?B?a1kyYmJiUVJqSWlOZjl4TndWRkxZdFFlcGpnVWZYM0Yyakd4L29CZ3dFWDhW?=
- =?utf-8?B?ZS9RTUt3QTFQNGJsTkdYaTFmbEsyTWF6cGlHd2FzdnMvL3REY2RKZVIvNDBT?=
- =?utf-8?B?OUtDMzFOL2QrTFJuRWh1dGZKR1JGNklzeTIrMWx5UWtMdXZuNnlDMm16aU9U?=
- =?utf-8?B?RHg2cHJER3crdXRwN1RyK2tTTEJCbENrcnA2R2Q3QWpEcDVER1c0VW9GRC9V?=
- =?utf-8?B?VmQydUVZS2JIN21QK1p6ek5HSkxES2JaMEpldXJoalJJRlVtbEdwU2doZHJB?=
- =?utf-8?B?bE9ja1BkRzl3c3RYeEEyZEtkcldnTTJIOTdkZWtuT0ZkR0hNZTRSeThmMXRF?=
- =?utf-8?B?dVJpbTk5TXBSTGF1MlVkNDUwVTVFWjFveW5mTVFTVkdyZlNQUlBkSE01WSs5?=
- =?utf-8?B?OGhHVnhCZjhMTEJiTDFtZmNVQ2ZBK0xPNkJPQW1wQjZIVnJmVnFadmd0eCtM?=
- =?utf-8?B?MWlkTmE3QkxVb1dJa1o3SFF1V096OWlXbm5YVkZCUVh3bU5DSjhFYnlkM1FI?=
- =?utf-8?B?VXdaNGdMN2ZvUWtoOVJweUF3NjVMNlZrdmdOcEQ2WDJXQ0JKRFdoTWZZcFJ5?=
- =?utf-8?B?YS9nMXErcGdhMjRHd3piaGl2SnY3ajhNdE1IRDNYSHMyNi9aSDQydFRxWGFB?=
- =?utf-8?B?K1N6OUIrNFluQzZlRlUxQTZ0MVRkUW0yYmVjc04yU1I3aTdvSDBxOTFpY2Fr?=
- =?utf-8?B?ZGVFSldEd1RUSXkrQzBMSTl1d3dCSjhXeXFtc054dGxiZktzdStQcE0wU0Qx?=
- =?utf-8?B?WlZUa2VzUjBXQ29YVTE1MHhxRjQ5OXVRWkpVNW9kekRuUDhzanA4ZUVGbW1w?=
- =?utf-8?B?aDl5bEhub1NEOXdHQnV1cEQ4MjMvSnFmZWE4dE5pNnliQTFWNmZvRGFWcDIw?=
- =?utf-8?B?WGMvUVZMMlowY09ORDUwVStUVW1WbVZwVGh4R0FURjVxSUhRUlMrS05EaHV2?=
- =?utf-8?B?Uk1KbUJzNXE5SnZxR0ozdWM5Mi8rWTBTL1dTdjZSNnhKVW5tOFNuTEJML2xr?=
- =?utf-8?B?SmxpUzUzaW05NjBFV090SVFXNWpBTi9PTzFpWHhxZmF6ekpGajd2OGRJaEd0?=
- =?utf-8?B?QklvUjdUL0RLU3dZK0M0MXluYlVBNkZTVmZudkx6Z2RaRiszSFJFVXFlTStS?=
- =?utf-8?B?SkhhZnNPRFFXdnZUaWlUWWpKQzd0UEFGUFoxUTJuTzNhdDdGckowWVhkM3VP?=
- =?utf-8?B?SnB0cTNxaU1QTk1ia2VPa2tzMDRqWWZodktpbkNxK1cxTmhZTm1IaERwbU1R?=
- =?utf-8?B?T2ZkSEdDOENVcTRJYlJ2ZngwVStOdVJPemdXRFJGaUJTU2FTOVFuWEtsMGhp?=
- =?utf-8?B?TjZ1K1F2aDh3N1ZBeTVyUVhaM1FJSVlEaFJUSUdmSTFPeTZ4bzVWcGVWRnBy?=
- =?utf-8?B?RUZRNXVmN05LNlJwbGljVzRBS2J0UW9RbHQyWDBXYy9oS2EzbkwyRXJVMEhu?=
- =?utf-8?B?NUtkZFdxek91L2g0a2lHY1VxWGlIQysyUlhiejFkK1VmWENqT2RGR0xPNGU4?=
- =?utf-8?B?b1N6bkttaWxjV0N1YTIyS1VXVDZQZTJ4c2lWSFJQRFUvUVFnNDZnYVhNajYy?=
- =?utf-8?B?UkhyQ0pZUEpuaHlCZHBpUkJYOUtzL0paOFBlYjdJMHNKQ2g1L0RjYTRtRTVZ?=
- =?utf-8?B?RnRydDA5MW5VL3gxUCtFcDQ0UzhOdEdyQ043c3AwNnF4YURTZmtCTldNV1c0?=
- =?utf-8?B?TmxyMCtGZy81MDkydFRrQnF5WmlrWlhCM0w5ZGw1blR1ZjNDZEp6Q1pEd2k5?=
- =?utf-8?B?V0lqUVhGSnNSZ3pnc0sxUmZ4ZStabWcwTGJoekIxeE9MSkdoZ1hzbTB0WGZG?=
- =?utf-8?B?WjNvcFJQaEMxNW8zRXluczVGcE1Xajd4aytzTVgwK3o4RWRBUHRSckcyYVk3?=
- =?utf-8?B?cTBrSS9qSXhUSSs1K2dOeDN5a2RzaFIrcmwvMDJuNGV2WWgwYWpPQUk0cUJB?=
- =?utf-8?B?aGhqbndJZzBlYi9hY21LS1B5TVRzeWhQeXA3ZlB4ejd3dTduam5KWnlPV0Rt?=
- =?utf-8?B?WWc9PQ==?=
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <CA56DF790D809747BE6B6266DBCC5D3F@EURPRD10.PROD.OUTLOOK.COM>
-Content-Transfer-Encoding: base64
+To: openembedded-devel@lists.openembedded.org,
+        akuster808 <akuster808@gmail.com>
+Cc: hari.gpillai@windriver.com
+References: <1771578B38F95F27.30314@lists.openembedded.org>
+From: "Mali, Narpat" <narpat.mali@windriver.com>
+In-Reply-To: <1771578B38F95F27.30314@lists.openembedded.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: SJ0P220CA0015.NAMP220.PROD.OUTLOOK.COM
+ (2603:10b6:a03:41b::19) To DM4PR11MB5550.namprd11.prod.outlook.com
+ (2603:10b6:5:38b::24)
 MIME-Version: 1.0
-X-OriginatorOrg: siemens.com
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DM4PR11MB5550:EE_|PH7PR11MB7643:EE_
+X-MS-Office365-Filtering-Correlation-Id: 74a63232-d9af-47d3-d6e7-08db8db1ca35
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 
+	vuPQFbm3Ll2gxtfuZCle+TEv+hx+KYUst5gkCKqh3E+kb8ZJWEeyahH/nDwG7shvFc7EoGFV9eCDtHK6i6rJ7J3cm3hb51bn86iv1UzhTsZOahDWwmm4B4qN8vQyJ6dzwoyVG5kjFV8ZsC9leUgNIT8LSZaY+jTxDXwkc9OGjbUAlK7J0bxxl2f0T/leM9WcM9CHIaLzFRmj+2XQ63ah7kIGN0bNKbAZDynu+bUv8z2XwGeipFOA4ohAp1hodAzZKTLiM4mRSQIgYAew3l8gpdx5OvQyWGWEE9ncnjvvXVnIF91ORE/3U5W6meE97mMM+AKcE5N0XiV/7xd2qZI/AzQmTQlpehcSyNf9pHPV1Jn1A0ZLFhc+aTddzKDwFaMV8uJ/SHPNkSpYs67lFGATrQhFZmnl6JntbeOviDy5BthjfcT0Z+/osA0K+SaUwy2SsOZO5GVDzexqdlQY5D/asy7+Ft+jBu+AJQMdXR674rqvAw0Pocb8mehrX3Urv5JP4V3fJnXc4LwTm4JJlBWN6mLcBR2oCz1w3LE9m1uEqHMvaBHR845RJMjnqFys2Qydq4V19ch9tw614T6i6h9mNgABs6C+nebl2EG1YHrA20Tu7Pq6on/VdZL/5a4zDdEUMmkA+v/KSJ6p/+jUv4m2TWJ7vZpQOGrooKQRBh2OKor9cjIBq4z80KSdhmRGOFai
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM4PR11MB5550.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230028)(4636009)(346002)(39850400004)(136003)(376002)(366004)(396003)(451199021)(186003)(2616005)(107886003)(55236004)(6506007)(26005)(53546011)(83380400001)(478600001)(86362001)(31696002)(6666004)(36756003)(6486002)(316002)(66946007)(66476007)(66556008)(6916009)(8936002)(2906002)(4326008)(8676002)(38100700002)(5660300002)(41300700001)(6512007)(31686004)(966005)(66899021)(45980500001)(43740500002);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?utf-8?B?WGdtKzEyd2VHbGZ6SmM2dXQrNEVmVWVobDZQTjlFZ2l0MG43MFdsaXVwekxa?=
+ =?utf-8?B?eVptWGNaaDMvdFB5cW4xNTVPVEZ1V05CZjJlZWNkc3JTK3MzK3VHeEZxNGVU?=
+ =?utf-8?B?OCtFSldxdTc4ekYwYjc1ZDJBQUNwWlU4MlpKYlNUR1k2Y2hSa1NnUGlGWmtK?=
+ =?utf-8?B?Ukxjc0QwZDdpNWRKbnZDR0RtSG9nZXhxWlhEWlloRmp1aHdkQ3JxZ3M0TzJp?=
+ =?utf-8?B?M3lPNjcrV1ByVDVleHV6TjRQR0lybWl0V1VtQkMrVlVCRTdWdVE2MWdwemZy?=
+ =?utf-8?B?N2pZeCsxUThmWStnTWVkZFY4c2ZwTU40Y0FUZE41OHY0RDcxMXg1R1RYdHNJ?=
+ =?utf-8?B?aWMvSXNjQnZHODJuM2phUmtHcVR1d09OOHZXYWd3M2RRcVJsMUgzTHE3d2FD?=
+ =?utf-8?B?N3ptMHhrWWlsTHBTWU40eGowNVRUMWRCMHA5TTdBaXczcTdXSTJnbXg5YVZ4?=
+ =?utf-8?B?YklJMkNyMzlKRUVBUkM0VkljNDVocWlyMlcxejZaRlIrR3g1ckVyc1dNVDY4?=
+ =?utf-8?B?WU1BbnpmYnFXK29HMkxCcmNNcFAwOE5SbnpBSVhyN3psWHRtZDdnaDhmMVYx?=
+ =?utf-8?B?TXdJNHd2TENrZEFHQjMzUEx2Qm0yekRicXhCNjE5eUxpTGNOUEZuWHIwOW81?=
+ =?utf-8?B?S1VUR2EzN3Z2Y3gwY0ltSUZLN2xkWlE0azg5M0sveFBaQWFhcjhuQUZMS1dw?=
+ =?utf-8?B?WGQ3SDBMTHNjYmxOQllrTWthQ2wxL1M3eFFpQlV4cG03UTdNSW5CMWJaOFh0?=
+ =?utf-8?B?ZjV4cS9tTEdkTk1SYTc4cUx4RTlMU1RaVkF6TnoyZ1JkK0ZpSVgzRkx5YVN5?=
+ =?utf-8?B?Z2wvV2RLblQzc2JvcWxKQ1pJSUFvREc5L2pjeVRtd01PTFFtcktvS2lXNHc4?=
+ =?utf-8?B?NG9KYTZtUVpPQUs4bXdTZTVrVHVlT3FUR2J3MnNnRnlISjUrTlFXeHhoNkZo?=
+ =?utf-8?B?MnRIT3dIUWVuVjEzdmFGckJmOXBMRHpYazZMWG5PZk1VK3h4VWcyUTZPaG9S?=
+ =?utf-8?B?VW5uTWNraUNjOTBveTNzQ0YrQTFESWJQdUJDSlExeURWTk9WcGdVLzdkVFdm?=
+ =?utf-8?B?ZG9rd0kwa2ZqSGRtZFlwTHNTSndiUEpPN0lab2MzellOclczT2FQTkVhOWdP?=
+ =?utf-8?B?ZDFLVFA4ZTMyQ3JFK1o5STRvS2FOSVBzZFp6UkRMWFZwL3gvTnp0STlzYW8z?=
+ =?utf-8?B?dnNhT05jTGtPZDVPNmtrL01INjJNZkk3WVZSQ3hnL0ZvNDJwWXJSU1hZYU5M?=
+ =?utf-8?B?OEx1dTZZZHZ6eWJKMW9oQW11TU45YjczcnlrT1dRbVhDRURUVFZhSUc1VVVj?=
+ =?utf-8?B?d2dhNHFpVnRnU3lTZzVGcU85T09mczlvM3h3ZFZObXlIRzhxRjJ1eFFUUmpO?=
+ =?utf-8?B?OGtUNGhBVzlyOTlITnMvZWRMYjBhVzFWMEU2N3F0aWVWTUhpWU0xVTNNOXJz?=
+ =?utf-8?B?T0dFa1pyUXVHUnlzT2NCK2E1TXdZaGxGN2p2ZnZjTTRpSnN4QXFQdkRCbmx5?=
+ =?utf-8?B?dDhtVlJad3drT1NBdmxhRHdqWnJjako5T1JwNXJubWJSeFVpa0E2R3dUck9l?=
+ =?utf-8?B?Z0tRZXE1MWI5RG02cDhZeWppUUgyUDA3L3RpTksydzJBWWVITjkybXFQOU0r?=
+ =?utf-8?B?Q25OSFFPb1V1WUR2b0NCdW45MmtiUUFyNmtJcE0yWEowb3Q3UDhXYlM1a2J5?=
+ =?utf-8?B?d1ZXV0kxQ3hPMEhSSC9GM3ZPZHdNYXJwOVRrUnJlVGtTNlJEeFJxZkVJNDNG?=
+ =?utf-8?B?OUVibm93ejVuTk9rY3NHalg3OGNsbjNXVTFob2NMcG5JUGc1Wkd1ekpEaEdp?=
+ =?utf-8?B?QkE1bDc3UHRGc2VqUUFVUEExdWp4NDR1WUhzQkUrYXkyVDhqV3hBbzU4QVNh?=
+ =?utf-8?B?RkFnaC9KRnViOSs1Z0p5NHdEUXE0TFpwMHJqRmpKYTAwbUdIM3pxV0QrVlBC?=
+ =?utf-8?B?ZDd0VzE3UTdtZzRuTmFWZzErUlRGR0FiWHhrN1ZhTnZnMlNnMnBvWXplQURu?=
+ =?utf-8?B?cUdlYXZiZ3lXWGxYdkcxTk93bTVaLzljMEhhMGc5RlVBRVJjNlQ0bVZCNzJh?=
+ =?utf-8?B?WmRzMUlsbis4TWliTXhnelRDditoTWk3WFVpNlNjVUNlb1BrODkxY3psRk1D?=
+ =?utf-8?B?bUc4QW9COXdESlRLT21VZXhRUlRGeHJROFN0Y2RIYWhCUHlZOXpQVTBnbTZU?=
+ =?utf-8?B?Snc9PQ==?=
+X-OriginatorOrg: windriver.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 74a63232-d9af-47d3-d6e7-08db8db1ca35
+X-MS-Exchange-CrossTenant-AuthSource: DM4PR11MB5550.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: DB8PR10MB3977.EURPRD10.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-Network-Message-Id: 3fac722f-4165-440b-8606-08db8daf9539
-X-MS-Exchange-CrossTenant-originalarrivaltime: 26 Jul 2023 08:09:06.4911
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Jul 2023 08:24:54.7901
  (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 38ae3bcd-9579-4fd4-adda-b42e1495d55a
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: 7atZhdw4LU5BsF/fwWNWTTbrjUyPw3vePf5VPHIw/xumcJ0FjjPRzsBVTgEQpgW5/3/eWoV+rUJyjWvsrCPb/SVrd/3zNl7ZBLrTBRXVBtM=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAVPR10MB7281
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: c986vdAvxfGMWLO0LAGCuHRFU5qe/y5Ah6mND2BB/02mAkdJPqwjJMToZs9asySNjQ2aK9X9TDFUFtiEk6jU+QQBHK1KmhsTP87amvMhBqA=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR11MB7643
+X-Proofpoint-ORIG-GUID: a-Ai6OAjV9cl2c12vBYs-MB80g1gkNSk
+X-Proofpoint-GUID: oM0zT3pWlWr35OnXeJkj77CEW3ngYsqJ
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.254,Aquarius:18.0.957,Hydra:6.0.591,FMLib:17.11.176.26
+ definitions=2023-07-26_01,2023-07-25_01,2023-05-22_02
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 priorityscore=1501
+ mlxlogscore=999 lowpriorityscore=0 malwarescore=0 spamscore=0
+ impostorscore=0 mlxscore=0 bulkscore=0 phishscore=0 adultscore=0
+ clxscore=1015 suspectscore=0 classifier=spam adjust=0 reason=mlx
+ scancount=1 engine=8.19.0-2306200000 definitions=main-2307260073
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 26 Jul 2023 08:09:18 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104030
+ <openembedded-devel@lists.openembedded.org>; Wed, 26 Jul 2023 08:25:09 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104031
 
-SGVsbG8gUmFqLA0KDQpOb3Qgc3VyZSBpZiB5b3UgcmVhbGl6ZWQsIHRoYXQgSSBtYWRlIGEgaHVn
-ZSAiY29udmVyc2lvbiIgZm9yIG1ldGEtb2UgYXMgc2FtZSBhcw0KaGVyZQ0KaHR0cHM6Ly9naXQu
-eW9jdG9wcm9qZWN0Lm9yZy9wb2t5L2NvbW1pdC8/aWQ9YzE1ZTUwNmE0Njc0ZTU1ODkyMmM1YTc1
-NTEyY2EyYjVjMjk2Y2Q0NA0KLg0KDQpDb3VsZCB5b3UgcGxlYXNlIHRha2UgYSBjYXJlIG9mIGl0
-Pw0KDQpUaGFua3MsDQpBbmRyZWoNCg0KT24gTW9uLCAyMDIzLTA3LTI0IGF0IDEzOjM1ICswMjAw
-LCBBbmRyZWogVmFsZWsgd3JvdGU6DQo+IG9wZW5lbWJlZGRlZC1kZXZlbEBsaXN0cy5vcGVuZW1i
-ZWRkZWQub3JnDQoNCg==
+Gentle Reminder !!
+
+../Narpat
+
+On 13-07-2023 11:22, Narpat Mali via lists.openembedded.org wrote:
+> From: Narpat Mali <narpat.mali@windriver.com>
+>
+> An issue found in Frrouting bgpd v.8.4.2 allows a remote attacker to
+> cause a denial of service via the bgp_attr_psid_sub() function.
+>
+> References:
+> https://nvd.nist.gov/vuln/detail/CVE-2023-31490
+> https://github.com/FRRouting/frr/issues/13099
+>
+> Signed-off-by: Narpat Mali <narpat.mali@windriver.com>
+> ---
+>   .../frr/frr/CVE-2023-31490.patch              | 160 ++++++++++++++++++
+>   .../recipes-protocols/frr/frr_8.2.2.bb        |   1 +
+>   2 files changed, 161 insertions(+)
+>   create mode 100644 meta-networking/recipes-protocols/frr/frr/CVE-2023-31490.patch
+>
+> diff --git a/meta-networking/recipes-protocols/frr/frr/CVE-2023-31490.patch b/meta-networking/recipes-protocols/frr/frr/CVE-2023-31490.patch
+> new file mode 100644
+> index 0000000000..893c856c66
+> --- /dev/null
+> +++ b/meta-networking/recipes-protocols/frr/frr/CVE-2023-31490.patch
+> @@ -0,0 +1,160 @@
+> +From 72c13aac2eb7c8f3a10ad806d80ab635c28f4c04 Mon Sep 17 00:00:00 2001
+> +From: Donald Sharp <sharpd@nvidia.com>
+> +Date: Wed, 21 Jun 2023 15:24:50 +0000
+> +Subject: [PATCH] bgpd: Ensure stream received has enough data
+> +
+> +BGP_PREFIX_SID_SRV6_L3_SERVICE attributes must not
+> +fully trust the length value specified in the nlri.
+> +Always ensure that the amount of data we need to read
+> +can be fullfilled.
+> +
+> +Reported-by: Iggy Frankovic <iggyfran@amazon.com>
+> +Signed-off-by: Donald Sharp <sharpd@nvidia.com>
+> +
+> +CVE: CVE-2023-31490
+> +
+> +Upstream-Status: Backport [https://github.com/FRRouting/frr/pull/12454/commits/06431bfa7570f169637ebb5898f0b0cc3b010802]
+> +
+> +Signed-off-by: Narpat Mali <narpat.mali@windriver.com>
+> +---
+> + bgpd/bgp_attr.c | 79 ++++++++++++++++---------------------------------
+> + 1 file changed, 25 insertions(+), 54 deletions(-)
+> +
+> +diff --git a/bgpd/bgp_attr.c b/bgpd/bgp_attr.c
+> +index 2154baf4e..5d06991e2 100644
+> +--- a/bgpd/bgp_attr.c
+> ++++ b/bgpd/bgp_attr.c
+> +@@ -2722,9 +2722,21 @@ static bgp_attr_parse_ret_t bgp_attr_psid_sub(uint8_t type, uint16_t length,
+> +	uint8_t sid_type, sid_flags;
+> +	char buf[BUFSIZ];
+> +
+> ++	/*
+> ++	 * Check that we actually have at least as much data as
+> ++	 * specified by the length field
+> ++	 */
+> ++	if (STREAM_READABLE(peer->curr) < length) {
+> ++		flog_err(
+> ++			EC_BGP_ATTR_LEN,
+> ++			"Prefix SID specifies length %hu, but only %zu bytes remain",
+> ++			length, STREAM_READABLE(peer->curr));
+> ++		return bgp_attr_malformed(args, BGP_NOTIFY_UPDATE_ATTR_LENG_ERR,
+> ++					  args->total);
+> ++	}
+> ++
+> +	if (type == BGP_PREFIX_SID_LABEL_INDEX) {
+> +-		if (STREAM_READABLE(peer->curr) < length
+> +-		    || length != BGP_PREFIX_SID_LABEL_INDEX_LENGTH) {
+> ++		if (length != BGP_PREFIX_SID_LABEL_INDEX_LENGTH) {
+> +			flog_err(EC_BGP_ATTR_LEN,
+> +				 "Prefix SID label index length is %hu instead of %u",
+> +				 length, BGP_PREFIX_SID_LABEL_INDEX_LENGTH);
+> +@@ -2746,12 +2758,8 @@ static bgp_attr_parse_ret_t bgp_attr_psid_sub(uint8_t type, uint16_t length,
+> +		/* Store label index; subsequently, we'll check on
+> +		 * address-family */
+> +		attr->label_index = label_index;
+> +-	}
+> +-
+> +-	/* Placeholder code for the IPv6 SID type */
+> +-	else if (type == BGP_PREFIX_SID_IPV6) {
+> +-		if (STREAM_READABLE(peer->curr) < length
+> +-		    || length != BGP_PREFIX_SID_IPV6_LENGTH) {
+> ++	} else if (type == BGP_PREFIX_SID_IPV6) {
+> ++		if (length != BGP_PREFIX_SID_IPV6_LENGTH) {
+> +			flog_err(EC_BGP_ATTR_LEN,
+> +				 "Prefix SID IPv6 length is %hu instead of %u",
+> +				 length, BGP_PREFIX_SID_IPV6_LENGTH);
+> +@@ -2765,10 +2773,7 @@ static bgp_attr_parse_ret_t bgp_attr_psid_sub(uint8_t type, uint16_t length,
+> +		stream_getw(peer->curr);
+> +
+> +		stream_get(&ipv6_sid, peer->curr, 16);
+> +-	}
+> +-
+> +-	/* Placeholder code for the Originator SRGB type */
+> +-	else if (type == BGP_PREFIX_SID_ORIGINATOR_SRGB) {
+> ++	} else if (type == BGP_PREFIX_SID_ORIGINATOR_SRGB) {
+> +		/*
+> +		 * ietf-idr-bgp-prefix-sid-05:
+> +		 *     Length is the total length of the value portion of the
+> +@@ -2793,19 +2798,6 @@ static bgp_attr_parse_ret_t bgp_attr_psid_sub(uint8_t type, uint16_t length,
+> +				args->total);
+> +		}
+> +
+> +-		/*
+> +-		 * Check that we actually have at least as much data as
+> +-		 * specified by the length field
+> +-		 */
+> +-		if (STREAM_READABLE(peer->curr) < length) {
+> +-			flog_err(EC_BGP_ATTR_LEN,
+> +-				 "Prefix SID Originator SRGB specifies length %hu, but only %zu bytes remain",
+> +-				 length, STREAM_READABLE(peer->curr));
+> +-			return bgp_attr_malformed(
+> +-				args, BGP_NOTIFY_UPDATE_ATTR_LENG_ERR,
+> +-				args->total);
+> +-		}
+> +-
+> +		/*
+> +		 * Check that the portion of the TLV containing the sequence of
+> +		 * SRGBs corresponds to a multiple of the SRGB size; to get
+> +@@ -2829,12 +2821,8 @@ static bgp_attr_parse_ret_t bgp_attr_psid_sub(uint8_t type, uint16_t length,
+> +			stream_get(&srgb_base, peer->curr, 3);
+> +			stream_get(&srgb_range, peer->curr, 3);
+> +		}
+> +-	}
+> +-
+> +-	/* Placeholder code for the VPN-SID Service type */
+> +-	else if (type == BGP_PREFIX_SID_VPN_SID) {
+> +-		if (STREAM_READABLE(peer->curr) < length
+> +-		    || length != BGP_PREFIX_SID_VPN_SID_LENGTH) {
+> ++	} else if (type == BGP_PREFIX_SID_VPN_SID) {
+> ++		if (length != BGP_PREFIX_SID_VPN_SID_LENGTH) {
+> +			flog_err(EC_BGP_ATTR_LEN,
+> +				 "Prefix SID VPN SID length is %hu instead of %u",
+> +				 length, BGP_PREFIX_SID_VPN_SID_LENGTH);
+> +@@ -2870,39 +2858,22 @@ static bgp_attr_parse_ret_t bgp_attr_psid_sub(uint8_t type, uint16_t length,
+> +		attr->srv6_vpn->sid_flags = sid_flags;
+> +		sid_copy(&attr->srv6_vpn->sid, &ipv6_sid);
+> +		attr->srv6_vpn = srv6_vpn_intern(attr->srv6_vpn);
+> +-	}
+> +-
+> +-	/* Placeholder code for the SRv6 L3 Service type */
+> +-	else if (type == BGP_PREFIX_SID_SRV6_L3_SERVICE) {
+> +-		if (STREAM_READABLE(peer->curr) < length) {
+> ++	} else if (type == BGP_PREFIX_SID_SRV6_L3_SERVICE) {
+> ++		if (STREAM_READABLE(peer->curr) < 1) {
+> +			flog_err(
+> +				EC_BGP_ATTR_LEN,
+> +-				"Prefix SID SRv6 L3-Service length is %hu, but only %zu bytes remain",
+> +-				length, STREAM_READABLE(peer->curr));
+> +-			return bgp_attr_malformed(args,
+> +-				 BGP_NOTIFY_UPDATE_ATTR_LENG_ERR,
+> +-				 args->total);
+> ++				"Prefix SID SRV6 L3 Service not enough data left, it must be at least 1 byte");
+> ++			return bgp_attr_malformed(
+> ++				args, BGP_NOTIFY_UPDATE_ATTR_LENG_ERR,
+> ++				args->total);
+> +		}
+> +-
+> +		/* ignore reserved */
+> +		stream_getc(peer->curr);
+> +
+> +		return bgp_attr_srv6_service(args);
+> +	}
+> +-
+> +	/* Placeholder code for Unsupported TLV */
+> +	else {
+> +-
+> +-		if (STREAM_READABLE(peer->curr) < length) {
+> +-			flog_err(
+> +-				EC_BGP_ATTR_LEN,
+> +-				"Prefix SID SRv6 length is %hu - too long, only %zu remaining in this UPDATE",
+> +-				length, STREAM_READABLE(peer->curr));
+> +-			return bgp_attr_malformed(
+> +-				args, BGP_NOTIFY_UPDATE_ATTR_LENG_ERR,
+> +-				args->total);
+> +-		}
+> +-
+> +		if (bgp_debug_update(peer, NULL, NULL, 1))
+> +			zlog_debug(
+> +				"%s attr Prefix-SID sub-type=%u is not supported, skipped",
+> +--
+> +2.40.0
+> diff --git a/meta-networking/recipes-protocols/frr/frr_8.2.2.bb b/meta-networking/recipes-protocols/frr/frr_8.2.2.bb
+> index 80f4729e1f..073657b652 100644
+> --- a/meta-networking/recipes-protocols/frr/frr_8.2.2.bb
+> +++ b/meta-networking/recipes-protocols/frr/frr_8.2.2.bb
+> @@ -13,6 +13,7 @@ SRC_URI = "git://github.com/FRRouting/frr.git;protocol=https;branch=stable/8.2 \
+>              file://CVE-2022-37035.patch \
+>              file://CVE-2022-37032.patch \
+>              file://CVE-2022-42917.patch \
+> +           file://CVE-2023-31490.patch \
+>              file://frr.pam \
+>   	      "
+>   
+>
+> -=-=-=-=-=-=-=-=-=-=-=-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#103853): https://lists.openembedded.org/g/openembedded-devel/message/103853
+> Mute This Topic: https://lists.openembedded.org/mt/100115488/7199376
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [narpat.mali@windriver.com]
+> -=-=-=-=-=-=-=-=-=-=-=-
+>
 
