@@ -1,483 +1,878 @@
-Return-Path: <Martin.Jansa@gmail.com>
+Return-Path: <joe.slater@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 92064C001E0
-	for <webhook@archiver.kernel.org>; Thu, 27 Jul 2023 17:06:21 +0000 (UTC)
-Received: from mail-wr1-f50.google.com (mail-wr1-f50.google.com [209.85.221.50])
- by mx.groups.io with SMTP id smtpd.web11.13056.1690477572213701244
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B3470C001DC
+	for <webhook@archiver.kernel.org>; Thu, 27 Jul 2023 17:34:01 +0000 (UTC)
+Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
+ by mx.groups.io with SMTP id smtpd.web10.13615.1690479240730776344
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 27 Jul 2023 10:06:12 -0700
+ Thu, 27 Jul 2023 10:34:00 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20221208 header.b=jJ3WOJZM;
- spf=pass (domain: gmail.com, ip: 209.85.221.50, mailfrom: martin.jansa@gmail.com)
-Received: by mail-wr1-f50.google.com with SMTP id ffacd0b85a97d-31757edd9edso1276729f8f.2
-        for <openembedded-devel@lists.openembedded.org>; Thu, 27 Jul 2023 10:06:11 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1690477570; x=1691082370;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=rVE87Q01a8MKvF9w+JbAsmsStOo1mhtsiUxMlmF/n6c=;
-        b=jJ3WOJZMPt2wWAryWPUPt3W2rsqo8bM0DC6iEoNr3hW8zCMVMQlaO319oG+Ts9Rs4P
-         uaJdsCJFZTryioWBiRQL4u6e4UJeyvRhOZ/EfN3Cq/6Dgk7lElWiV5TfpG6HD9MLhbKB
-         KVtvap/1Ka0TgPxgDjn0KxQHMSnsA25xs8dm/Vk7KqdlB8wNgHtHewD9pTcswOwae/xp
-         /4rjkkK+0Dkop4qMR0z/FOc2IXlY0KlH+pIj6kydjRrOtsHBqit3TvIs2vsm/lOlXgKU
-         6xzSO5MMd7Jybz76ZzALu9A0FR0IsO8Lex1qw+Hm+IQcu5ofwSh9LvCznT4lcM9UFQg1
-         YRTw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1690477570; x=1691082370;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=rVE87Q01a8MKvF9w+JbAsmsStOo1mhtsiUxMlmF/n6c=;
-        b=ArT8EF7e0OFtdxYJgVEROn+7oTLTJw3blX8ytmGlnzdvN6pJqj6trYYhRqDOkAZPrD
-         JvRKRpe/BsiAeID57MVsHwIYKmtRWeuCyP/j6+yVyAHQ1t+NJzS0EjwtFLGB/AjZv8K9
-         H4jql1fZ6aG5z6bTz9ZkIsZmyPRkUfCCHDLcm/fbYSXGrHw8FLtV4B2RAtdVGG8zPk4F
-         1mYz0R4qN8bk9wPNqPUPUiLp/0zW1QIAaDganwHgdGs1AqwsrPC3635F4sJTUzt8+ABG
-         Bmn12/+PCHHK/0+4CMCUUSF3P3X5K0tHVyk4nEI+++kpbDcwkEzFOg1RztwHQ+6X+9mD
-         YgZw==
-X-Gm-Message-State: ABy/qLYIgxgkFQ4AQrp9wbGKy9Jdh4po5/pKJjKMbAnT5QZe2RWxW0AS
-	DL2h9nCGBjXOayJCstg4/+lCvViQf9O7jmujgjQ=
-X-Google-Smtp-Source: APBJJlG2qAOC1bUxEWvZcOtOOaD2uJR+8/pRrqIoLVHlkAu1YZjW3nSCMlUeQRjpXggYT7GDIbm3yXtMKjo2awrWWr4=
-X-Received: by 2002:a5d:6e42:0:b0:317:71bb:7ccd with SMTP id
- j2-20020a5d6e42000000b0031771bb7ccdmr2172694wrz.52.1690477570353; Thu, 27 Jul
- 2023 10:06:10 -0700 (PDT)
+ dkim=fail reason="dkim: body hash did not verify" header.i=@windriver.com header.s=PPS06212021 header.b=ESWB/EPP;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=65723c898d=joe.slater@windriver.com)
+Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 36RCeF0i003702
+	for <openembedded-devel@lists.openembedded.org>; Thu, 27 Jul 2023 10:34:00 -0700
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
+	 h=from:to:cc:subject:date:message-id:mime-version:content-type
+	:content-transfer-encoding; s=PPS06212021; bh=Gm3zFNAIGDj/wLDBs9
+	lpsotjDo7bK7hpo22Vkgn4JMo=; b=ESWB/EPP7jSn0CP77uEfZnml1jFFTT9GaV
+	FW+kpGPVdHPfN7/QmGdUCkM01LZwStG8FsuoQ/v1TbtwtpEHF05JMPzDFdmmGaHx
+	x1ueGJY2bqa60965W/dw6Iz/0RG24sC5oNFnxupbw+eo5+LaiI9XW14Hci5T5d6s
+	/Ip4WG2XZQCvBkXsyG1Zro+gZcGd4CT+qmG24dueFz1kpWev502Ic78624cpqjby
+	WnrCd3I1R1fqu9jdMhzPyH6y/d+85MEwQ0CVjLmdqJoVeth9CP9rRFlcfKFacnlz
+	jz62vP6e0NMRYhfEVFUBr7SUOPH1VyBzF2B+HC9MYmkjEmU7mcuA==
+Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3s0ad04puq-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Thu, 27 Jul 2023 10:33:59 -0700 (PDT)
+Received: from ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.27; Thu, 27 Jul 2023 10:33:48 -0700
+Received: from ala-jslater-lx2.corp.ad.wrs.com (147.11.136.210) by
+ ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server id
+ 15.1.2507.27 via Frontend Transport; Thu, 27 Jul 2023 10:33:50 -0700
+From: <joe.slater@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: <joe.slater@windriver.com>, <randy.macleod@windriver.com>
+Subject: [meta-python][PATCH 1/1] python3-inotify: fix tests
+Date: Thu, 27 Jul 2023 10:33:49 -0700
+Message-ID: <20230727173349.3683835-1-joe.slater@windriver.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-References: <MADEUP.177107BEF2CB09F0.32196@lists.openembedded.org>
-In-Reply-To: <MADEUP.177107BEF2CB09F0.32196@lists.openembedded.org>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Thu, 27 Jul 2023 19:05:59 +0200
-Message-ID: <CA+chaQeWcuya-FwohPB8g5Q_ZGx7-C_s7f_1z06e2LXeZWgUGw@mail.gmail.com>
-Subject: Re: [oe] [AUH] python3-kivy: upgrading to 2.2.1 SUCCEEDED
-To: auh@moto-timo.dev
-Cc: openembedded-devel@lists.openembedded.org, 
-	Brynn Rogers <tonkabot@gmail.com>
-Content-Type: multipart/alternative; boundary="00000000000014f14306017afb90"
+Content-Type: text/plain; charset="UTF-8"
+X-Proofpoint-ORIG-GUID: joirNd4Vcvy2r408CQPPAsezG0RHmMH_
+X-Proofpoint-GUID: joirNd4Vcvy2r408CQPPAsezG0RHmMH_
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.254,Aquarius:18.0.957,Hydra:6.0.591,FMLib:17.11.176.26
+ definitions=2023-07-27_07,2023-07-26_01,2023-05-22_02
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 priorityscore=1501
+ mlxlogscore=785 lowpriorityscore=0 malwarescore=0 spamscore=0
+ impostorscore=0 mlxscore=0 bulkscore=0 phishscore=0 adultscore=0
+ clxscore=1015 suspectscore=0 classifier=spam adjust=0 reason=mlx
+ scancount=1 engine=8.19.0-2306200000 definitions=main-2307270159
+Content-Transfer-Encoding: quoted-printable
+X-MIME-Autoconverted: from 8bit to quoted-printable by mx0a-0064b401.pphosted.com id 36RCeF0i003702
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 27 Jul 2023 17:06:21 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104056
+ <openembedded-devel@lists.openembedded.org>; Thu, 27 Jul 2023 17:34:01 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104057
 
---00000000000014f14306017afb90
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+From: Joe Slater <joe.slater@windriver.com>
 
-Hi,
+Some tests in test-inotify.py assume values for watch
+descriptors.  This is not safe, so we retrieve the
+assigned values to compare with event information generated.
 
-I'm not interested in kivy but I've noticed the extra '.' in filename since=
-:
-http://git.openembedded.org/meta-openembedded/commit/meta-python/recipes-de=
-vtools/python/python3-kivy_2.1.0..bb?id=3D6fbe7f748706229f43a2e06b08b6e1e72=
-9942314
-if someone cares about kivy...
+Signed-off-by: Joe Slater <joe.slater@windriver.com>
+---
+ .../python3-inotify/new-test-inotify.patch    | 620 ++++++++++++++++++
+ .../python/python3-inotify_git.bb             |   1 +
+ 2 files changed, 621 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-inotify/n=
+ew-test-inotify.patch
 
-+Brynn who for some reason thinks I'm interested in kivy
+diff --git a/meta-python/recipes-devtools/python/python3-inotify/new-test=
+-inotify.patch b/meta-python/recipes-devtools/python/python3-inotify/new-=
+test-inotify.patch
+new file mode 100644
+index 0000000000..08ef4fd3d6
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-inotify/new-test-inotif=
+y.patch
+@@ -0,0 +1,620 @@
++From 80010e27d774e8b722d569384492eaab2bc4ac61 Mon Sep 17 00:00:00 2001
++From: Joe Slater <joe.slater@windriver.com>
++Date: Thu, 27 Jul 2023 15:01:04 +0000
++Subject: [PATCH] working commit
++
++It is not safe to assume the values returned by add_watch(),
++so we add a local helper get_wd() to retrieve them.  This fixes
++a problem in TestInotifyTree.test__cycle() where the
++wd's for the 'aa' and 'bb' paths are not '2' and '3',
++respectively.
++
++A second issue is that Inotify._get_event_names() should
++return a set or sorted list to avoid comparison problems,
++but that is not addressed here since it could be viewed as
++changing the API.
++
++This test_inotify.py is based on the version in the fix_tests branch of
++pyinotify as of commit d7d3c58...
++
++Upstream-Status: Submitted [to maintainer dustin@randomingenuity.com]
++
++Signed-off-by: Joe Slater <joe.slater@windriver.com>
++---
++ tests/test_inotify.py | 346 ++++++++++++++++++++++++++++++++----------
++ 1 file changed, 262 insertions(+), 84 deletions(-)
++
++diff --git a/tests/test_inotify.py b/tests/test_inotify.py
++index d9f1f84..d89a49e 100644
++--- a/tests/test_inotify.py
+++++ b/tests/test_inotify.py
++@@ -2,6 +2,7 @@
++=20
++ import os
++ import unittest
+++import time
++=20
++ import inotify.constants
++ import inotify.calls
++@@ -15,6 +16,11 @@ except NameError:
++ else:
++     _HAS_PYTHON2_UNICODE_SUPPORT =3D True
++=20
+++# Inotify does not have a get for watch descriptors
+++#=20
+++def get_wd(i, path):
+++    return i._Inotify__watches[path]
+++
++=20
++ class TestInotify(unittest.TestCase):
++     def __init__(self, *args, **kwargs):
++@@ -29,11 +35,11 @@ class TestInotify(unittest.TestCase):
++     @unittest.skipIf(_HAS_PYTHON2_UNICODE_SUPPORT is True, "Not in Pyth=
+on 3")
++     def test__international_naming_python3(self):
++         with inotify.test_support.temp_path() as path:
++-            inner_path =3D os.path.join(path, '=E6=96=B0=E5=A2=9E=E8=B3=
+=87=E6=96=99=E5=A4=BE')
+++            inner_path =3D os.path.join(path, u'=E6=96=B0=E5=A2=9E=E8=B3=
+=87=E6=96=99=E5=A4=BE')
++             os.mkdir(inner_path)
++=20
++             i =3D inotify.adapters.Inotify()
++-            i.add_watch(inner_path)
+++            wd =3D i.add_watch(inner_path)
++=20
++             with open(os.path.join(inner_path, 'filename'), 'w'):
++                 pass
++@@ -41,12 +47,27 @@ class TestInotify(unittest.TestCase):
++             events =3D self.__read_all_events(i)
++=20
++             expected =3D [
++-                (inotify.adapters._INOTIFY_EVENT(wd=3D1, mask=3D256, co=
+okie=3D0, len=3D16), ['IN_CREATE'], inner_path, 'filename'),
++-                (inotify.adapters._INOTIFY_EVENT(wd=3D1, mask=3D32, coo=
+kie=3D0, len=3D16), ['IN_OPEN'], inner_path, 'filename'),
++-                (inotify.adapters._INOTIFY_EVENT(wd=3D1, mask=3D8, cook=
+ie=3D0, len=3D16), ['IN_CLOSE_WRITE'], inner_path, 'filename'),
+++                (inotify.adapters._INOTIFY_EVENT(wd=3Dwd, mask=3D256, c=
+ookie=3D0, len=3D16), ['IN_CREATE'], inner_path, 'filename'),
+++                (inotify.adapters._INOTIFY_EVENT(wd=3Dwd, mask=3D32, co=
+okie=3D0, len=3D16), ['IN_OPEN'], inner_path, 'filename'),
+++                (inotify.adapters._INOTIFY_EVENT(wd=3Dwd, mask=3D8, coo=
+kie=3D0, len=3D16), ['IN_CLOSE_WRITE'], inner_path, 'filename'),
++             ]
++=20
++-            self.assertEquals(events, expected)
+++            if events !=3D expected:
+++                print("ACTUAL:")
+++                print("")
+++
+++                for i, event in enumerate(events):
+++                    print(event)
+++
+++                print("")
+++
+++                print("EXPECTED:")
+++                print("")
+++
+++                for i, event in enumerate(expected):
+++                    print(event)
+++
+++                raise Exception("Events not correct.")
++=20
++     @unittest.skipIf(_HAS_PYTHON2_UNICODE_SUPPORT is False, "Not in Pyt=
+hon 2")
++     def test__international_naming_python2(self):
++@@ -55,7 +76,7 @@ class TestInotify(unittest.TestCase):
++             os.mkdir(inner_path)
++=20
++             i =3D inotify.adapters.Inotify()
++-            i.add_watch(inner_path)
+++            wd =3D i.add_watch(inner_path)
++=20
++             with open(os.path.join(inner_path, u'filename=E6=96=99=E5=A4=
+=BE'), 'w'):
++                 pass
++@@ -63,12 +84,28 @@ class TestInotify(unittest.TestCase):
++             events =3D self.__read_all_events(i)
++=20
++             expected =3D [
++-                (inotify.adapters._INOTIFY_EVENT(wd=3D1, mask=3D256, co=
+okie=3D0, len=3D16), ['IN_CREATE'], inner_path, u'filename=E6=96=99=E5=A4=
+=BE'),
++-                (inotify.adapters._INOTIFY_EVENT(wd=3D1, mask=3D32, coo=
+kie=3D0, len=3D16), ['IN_OPEN'], inner_path, u'filename=E6=96=99=E5=A4=BE=
+'),
++-                (inotify.adapters._INOTIFY_EVENT(wd=3D1, mask=3D8, cook=
+ie=3D0, len=3D16), ['IN_CLOSE_WRITE'], inner_path, u'filename=E6=96=99=E5=
+=A4=BE'),
+++                (inotify.adapters._INOTIFY_EVENT(wd=3Dwd, mask=3D256, c=
+ookie=3D0, len=3D16), ['IN_CREATE'], inner_path, u'filename=E6=96=99=E5=A4=
+=BE'),
+++                (inotify.adapters._INOTIFY_EVENT(wd=3Dwd, mask=3D32, co=
+okie=3D0, len=3D16), ['IN_OPEN'], inner_path, u'filename=E6=96=99=E5=A4=BE=
+'),
+++                (inotify.adapters._INOTIFY_EVENT(wd=3Dwd, mask=3D8, coo=
+kie=3D0, len=3D16), ['IN_CLOSE_WRITE'], inner_path, u'filename=E6=96=99=E5=
+=A4=BE'),
+++                (inotify.adapters._INOTIFY_EVENT(wd=3Dwd, mask=3D16, co=
+okie=3D0, len=3D16), ['IN_CLOSE_NOWRITE'], inner_path, u'filename=E6=96=99=
+=E5=A4=BE'),
++             ]
++=20
++-            self.assertEquals(events, expected)
+++            if events !=3D expected:
+++                print("ACTUAL:")
+++                print("")
+++
+++                for i, event in enumerate(events):
+++                    print(event)
+++
+++                print("")
+++
+++                print("EXPECTED:")
+++                print("")
+++
+++                for i, event in enumerate(expected):
+++                    print(event)
+++
+++                raise Exception("Events not correct.")
++=20
++     def test__cycle(self):
++         with inotify.test_support.temp_path() as path:
++@@ -79,7 +116,7 @@ class TestInotify(unittest.TestCase):
++             os.mkdir(path2)
++=20
++             i =3D inotify.adapters.Inotify()
++-            i.add_watch(path1)
+++            wd =3D i.add_watch(path1)
++=20
++             with open('ignored_new_file', 'w'):
++                 pass
++@@ -96,32 +133,47 @@ class TestInotify(unittest.TestCase):
++=20
++             expected =3D [
++                 (
++-                    inotify.adapters._INOTIFY_EVENT(wd=3D1, mask=3D256,=
+ cookie=3D0, len=3D16),
+++                    inotify.adapters._INOTIFY_EVENT(wd=3Dwd, mask=3D256=
+, cookie=3D0, len=3D16),
++                     ['IN_CREATE'],
++                     path1,
++                     'seen_new_file'
++                 ),
++                 (
++-                    inotify.adapters._INOTIFY_EVENT(wd=3D1, mask=3D32, =
+cookie=3D0, len=3D16),
+++                    inotify.adapters._INOTIFY_EVENT(wd=3Dwd, mask=3D32,=
+ cookie=3D0, len=3D16),
++                     ['IN_OPEN'],
++                     path1,
++                     'seen_new_file'
++                 ),
++                 (
++-                    inotify.adapters._INOTIFY_EVENT(wd=3D1, mask=3D8, c=
+ookie=3D0, len=3D16),
+++                    inotify.adapters._INOTIFY_EVENT(wd=3Dwd, mask=3D8, =
+cookie=3D0, len=3D16),
++                     ['IN_CLOSE_WRITE'],
++                     path1,
++                     'seen_new_file'
++                 ),
++                 (
++-                    inotify.adapters._INOTIFY_EVENT(wd=3D1, mask=3D512,=
+ cookie=3D0, len=3D16),
+++                    inotify.adapters._INOTIFY_EVENT(wd=3Dwd, mask=3D512=
+, cookie=3D0, len=3D16),
++                     ['IN_DELETE'],
++                     path1,
++                     'seen_new_file'
++                 )
++             ]
++=20
++-            self.assertEquals(events, expected)
+++            if events !=3D expected:
+++                print("ACTUAL:")
+++                print("")
+++
+++                for i, event in enumerate(events):
+++                    print(event)
+++
+++                print("")
+++
+++                print("EXPECTED:")
+++                print("")
+++
+++                for i, event in enumerate(expected):
+++                    print(event)
+++
+++                raise Exception("Events not correct.")
++=20
++             # This can't be removed until *after* we've read the events=
+ because
++             # they'll be flushed the moment we remove the watch.
++@@ -131,7 +183,7 @@ class TestInotify(unittest.TestCase):
++                 pass
++=20
++             events =3D self.__read_all_events(i)
++-            self.assertEquals(events, [])
+++            self.assertEqual(events, [])
++=20
++     @staticmethod
++     def _open_write_close(*args):
++@@ -167,23 +219,47 @@ class TestInotify(unittest.TestCase):
++         with inotify.test_support.temp_path() as path:
++             path1 =3D TestInotify._make_temp_path(path, 'aa')
++             path2 =3D TestInotify._make_temp_path(path, 'bb')
+++
++             i =3D inotify.adapters.Inotify([path1, path2])
+++
++             TestInotify._open_write_close('ignored_new_file')
++             TestInotify._open_write_close(path1, 'seen_new_file')
++             TestInotify._open_write_close(path2, 'seen_new_file2')
+++           =20
+++            wd_path1 =3D get_wd(i, path1)
+++            wd_path2 =3D get_wd(i, path2)
+++
+++
++             os.remove(os.path.join(path1, 'seen_new_file'))
+++
++             events =3D self.__read_all_events(i)
+++
++             expected =3D [
++-                TestInotify._event_create(wd=3D1, path=3Dpath1, filenam=
+e=3D'seen_new_file'),
++-                TestInotify._event_open(wd=3D1, path=3Dpath1, filename=3D=
+'seen_new_file'),
++-                TestInotify._event_close_write(wd=3D1, path=3Dpath1, fi=
+lename=3D'seen_new_file'),
++-                TestInotify._event_create(wd=3D2, path=3Dpath2, filenam=
+e=3D'seen_new_file2'),
++-                TestInotify._event_open(wd=3D2, path=3Dpath2, filename=3D=
+'seen_new_file2'),
++-                TestInotify._event_close_write(wd=3D2, path=3Dpath2, fi=
+lename=3D'seen_new_file2'),
++-                TestInotify._event_general(wd=3D1, mask=3D512, type_nam=
+e=3D'IN_DELETE',
++-                                           path=3Dpath1, filename=3D'se=
+en_new_file')
+++                (inotify.adapters._INOTIFY_EVENT(wd=3Dwd_path1, mask=3D=
+256, cookie=3D0, len=3D16), ['IN_CREATE'], path1, u'seen_new_file'),
+++                (inotify.adapters._INOTIFY_EVENT(wd=3Dwd_path1, mask=3D=
+32, cookie=3D0, len=3D16), ['IN_OPEN'], path1, u'seen_new_file'),
+++                (inotify.adapters._INOTIFY_EVENT(wd=3Dwd_path1, mask=3D=
+8, cookie=3D0, len=3D16), ['IN_CLOSE_WRITE'], path1, u'seen_new_file'),
+++                (inotify.adapters._INOTIFY_EVENT(wd=3Dwd_path2, mask=3D=
+256, cookie=3D0, len=3D16), ['IN_CREATE'], path2, u'seen_new_file2'),
+++                (inotify.adapters._INOTIFY_EVENT(wd=3Dwd_path2, mask=3D=
+32, cookie=3D0, len=3D16), ['IN_OPEN'], path2, u'seen_new_file2'),
+++                (inotify.adapters._INOTIFY_EVENT(wd=3Dwd_path2, mask=3D=
+8, cookie=3D0, len=3D16), ['IN_CLOSE_WRITE'], path2, u'seen_new_file2'),
+++                (inotify.adapters._INOTIFY_EVENT(wd=3Dwd_path1, mask=3D=
+512, cookie=3D0, len=3D16), ['IN_DELETE'], path1, u'seen_new_file'),
++             ]
++-            self.assertEquals(events, expected)
+++
+++            if events !=3D expected:
+++                print("ACTUAL:")
+++                print("")
+++
+++                for i, event in enumerate(events):
+++                    print(event)
+++
+++                print("")
+++
+++                print("EXPECTED:")
+++                print("")
+++
+++                for i, event in enumerate(expected):
+++                    print(event)
+++
+++                raise Exception("Events not correct.")
++=20
++     def test__error_on_watch_nonexistent_folder(self):
++         i =3D inotify.adapters.Inotify()
++@@ -201,7 +277,7 @@ class TestInotify(unittest.TestCase):
++         i =3D inotify.adapters.Inotify()
++         names =3D i._get_event_names(all_mask)
++=20
++-        self.assertEquals(names, all_names)
+++        self.assertEqual(names, all_names)
++=20
++=20
++ class TestInotifyTree(unittest.TestCase):
++@@ -219,56 +295,101 @@ class TestInotifyTree(unittest.TestCase):
++             path1 =3D os.path.join(path, 'aa')
++             os.mkdir(path1)
++=20
+++            time.sleep(.10)
+++
++             path2 =3D os.path.join(path, 'bb')
++             os.mkdir(path2)
++=20
+++            time.sleep(.10)
+++
++             i =3D inotify.adapters.InotifyTree(path)
++=20
++             with open('seen_new_file1', 'w'):
++                 pass
++=20
+++            time.sleep(.10)
+++
++             with open(os.path.join(path1, 'seen_new_file2'), 'w'):
++                 pass
++=20
+++            time.sleep(.10)
+++
++             with open(os.path.join(path2, 'seen_new_file3'), 'w'):
++                 pass
++=20
+++            time.sleep(.10)
+++           =20
+++            wd_path  =3D get_wd(i.inotify, path)
+++            wd_path1 =3D get_wd(i.inotify, path1)
+++            wd_path2 =3D get_wd(i.inotify, path2)
+++
++             os.remove(os.path.join(path, 'seen_new_file1'))
+++
+++            time.sleep(.10)
+++
++             os.remove(os.path.join(path1, 'seen_new_file2'))
+++
+++            time.sleep(.10)
+++
++             os.remove(os.path.join(path2, 'seen_new_file3'))
++=20
+++            time.sleep(.10)
+++
++             os.rmdir(path1)
+++
+++            time.sleep(.10)
+++
++             os.rmdir(path2)
++=20
++-            events =3D self.__read_all_events(i)
+++            time.sleep(.10)
++=20
+++            events =3D self.__read_all_events(i)
+++            events =3D sorted(events)
+++           =20
++             expected =3D [
++-                (inotify.adapters._INOTIFY_EVENT(wd=3D1, mask=3D256, co=
+okie=3D0, len=3D16), ['IN_CREATE'], path, 'seen_new_file1'),
++-                (inotify.adapters._INOTIFY_EVENT(wd=3D1, mask=3D32, coo=
+kie=3D0, len=3D16), ['IN_OPEN'], path, 'seen_new_file1'),
++-                (inotify.adapters._INOTIFY_EVENT(wd=3D1, mask=3D8, cook=
+ie=3D0, len=3D16), ['IN_CLOSE_WRITE'], path, 'seen_new_file1'),
+++                (inotify.adapters._INOTIFY_EVENT(wd=3Dwd_path, mask=3D2=
+56, cookie=3D0, len=3D16), ['IN_CREATE'], path, 'seen_new_file1'),
+++                (inotify.adapters._INOTIFY_EVENT(wd=3Dwd_path, mask=3D3=
+2, cookie=3D0, len=3D16), ['IN_OPEN'], path, 'seen_new_file1'),
+++                (inotify.adapters._INOTIFY_EVENT(wd=3Dwd_path, mask=3D8=
+, cookie=3D0, len=3D16), ['IN_CLOSE_WRITE'], path, 'seen_new_file1'),
++=20
++-                (inotify.adapters._INOTIFY_EVENT(wd=3D2, mask=3D256, co=
+okie=3D0, len=3D16), ['IN_CREATE'], path1, 'seen_new_file2'),
++-                (inotify.adapters._INOTIFY_EVENT(wd=3D2, mask=3D32, coo=
+kie=3D0, len=3D16), ['IN_OPEN'], path1, 'seen_new_file2'),
++-                (inotify.adapters._INOTIFY_EVENT(wd=3D2, mask=3D8, cook=
+ie=3D0, len=3D16), ['IN_CLOSE_WRITE'], path1, 'seen_new_file2'),
+++                (inotify.adapters._INOTIFY_EVENT(wd=3Dwd_path1, mask=3D=
+256, cookie=3D0, len=3D16), ['IN_CREATE'], path1, 'seen_new_file2'),
+++                (inotify.adapters._INOTIFY_EVENT(wd=3Dwd_path1, mask=3D=
+32, cookie=3D0, len=3D16), ['IN_OPEN'], path1, 'seen_new_file2'),
+++                (inotify.adapters._INOTIFY_EVENT(wd=3Dwd_path1, mask=3D=
+8, cookie=3D0, len=3D16), ['IN_CLOSE_WRITE'], path1, 'seen_new_file2'),
++=20
++-                (inotify.adapters._INOTIFY_EVENT(wd=3D3, mask=3D256, co=
+okie=3D0, len=3D16), ['IN_CREATE'], path2, 'seen_new_file3'),
++-                (inotify.adapters._INOTIFY_EVENT(wd=3D3, mask=3D32, coo=
+kie=3D0, len=3D16), ['IN_OPEN'], path2, 'seen_new_file3'),
++-                (inotify.adapters._INOTIFY_EVENT(wd=3D3, mask=3D8, cook=
+ie=3D0, len=3D16), ['IN_CLOSE_WRITE'], path2, 'seen_new_file3'),
+++                (inotify.adapters._INOTIFY_EVENT(wd=3Dwd_path2, mask=3D=
+256, cookie=3D0, len=3D16), ['IN_CREATE'], path2, 'seen_new_file3'),
+++                (inotify.adapters._INOTIFY_EVENT(wd=3Dwd_path2, mask=3D=
+32, cookie=3D0, len=3D16), ['IN_OPEN'], path2, 'seen_new_file3'),
+++                (inotify.adapters._INOTIFY_EVENT(wd=3Dwd_path2, mask=3D=
+8, cookie=3D0, len=3D16), ['IN_CLOSE_WRITE'], path2, 'seen_new_file3'),
++=20
++-                (inotify.adapters._INOTIFY_EVENT(wd=3D1, mask=3D512, co=
+okie=3D0, len=3D16), ['IN_DELETE'], path, 'seen_new_file1'),
++-                (inotify.adapters._INOTIFY_EVENT(wd=3D2, mask=3D512, co=
+okie=3D0, len=3D16), ['IN_DELETE'], path1, 'seen_new_file2'),
++-                (inotify.adapters._INOTIFY_EVENT(wd=3D3, mask=3D512, co=
+okie=3D0, len=3D16), ['IN_DELETE'], path2, 'seen_new_file3'),
+++                (inotify.adapters._INOTIFY_EVENT(wd=3Dwd_path, mask=3D5=
+12, cookie=3D0, len=3D16), ['IN_DELETE'], path, 'seen_new_file1'),
+++                (inotify.adapters._INOTIFY_EVENT(wd=3Dwd_path1, mask=3D=
+512, cookie=3D0, len=3D16), ['IN_DELETE'], path1, 'seen_new_file2'),
+++                (inotify.adapters._INOTIFY_EVENT(wd=3Dwd_path2, mask=3D=
+512, cookie=3D0, len=3D16), ['IN_DELETE'], path2, 'seen_new_file3'),
++=20
++-                (inotify.adapters._INOTIFY_EVENT(wd=3D2, mask=3D1024, c=
+ookie=3D0, len=3D0), ['IN_DELETE_SELF'], path1, ''),
++-                (inotify.adapters._INOTIFY_EVENT(wd=3D2, mask=3D32768, =
+cookie=3D0, len=3D0), ['IN_IGNORED'], path1, ''),
++-                (inotify.adapters._INOTIFY_EVENT(wd=3D1, mask=3D1073742=
+336, cookie=3D0, len=3D16), ['IN_ISDIR', 'IN_DELETE'], path, 'aa'),
+++                (inotify.adapters._INOTIFY_EVENT(wd=3Dwd_path1, mask=3D=
+1024, cookie=3D0, len=3D0), ['IN_DELETE_SELF'], path1, ''),
+++                (inotify.adapters._INOTIFY_EVENT(wd=3Dwd_path1, mask=3D=
+32768, cookie=3D0, len=3D0), ['IN_IGNORED'], path1, ''),
+++                (inotify.adapters._INOTIFY_EVENT(wd=3Dwd_path, mask=3D1=
+073742336, cookie=3D0, len=3D16), ['IN_DELETE', 'IN_ISDIR'], path, 'aa'),
++=20
++-                (inotify.adapters._INOTIFY_EVENT(wd=3D3, mask=3D1024, c=
+ookie=3D0, len=3D0), ['IN_DELETE_SELF'], path2, ''),
++-                (inotify.adapters._INOTIFY_EVENT(wd=3D3, mask=3D32768, =
+cookie=3D0, len=3D0), ['IN_IGNORED'], path2, ''),
++-                (inotify.adapters._INOTIFY_EVENT(wd=3D1, mask=3D1073742=
+336, cookie=3D0, len=3D16), ['IN_ISDIR', 'IN_DELETE'], path, 'bb'),
+++                (inotify.adapters._INOTIFY_EVENT(wd=3Dwd_path2, mask=3D=
+1024, cookie=3D0, len=3D0), ['IN_DELETE_SELF'], path2, ''),
+++                (inotify.adapters._INOTIFY_EVENT(wd=3Dwd_path2, mask=3D=
+32768, cookie=3D0, len=3D0), ['IN_IGNORED'], path2, ''),
+++                (inotify.adapters._INOTIFY_EVENT(wd=3Dwd_path, mask=3D1=
+073742336, cookie=3D0, len=3D16), ['IN_DELETE', 'IN_ISDIR'], path, 'bb'),
++             ]
++=20
++-            self.assertEquals(events, expected)
+++            expected =3D sorted(expected)
+++
+++            if events !=3D expected:
+++                print("ACTUAL:")
+++                print("")
+++
+++                for i, event in enumerate(events):
+++                    print(event)
+++
+++                print("")
+++
+++                print("EXPECTED:")
+++                print("")
+++
+++                for i, event in enumerate(expected):
+++                    print(event)
+++
+++                raise Exception("Events not correct.")
++=20
++     def test__renames(self):
++=20
++@@ -283,26 +404,30 @@ class TestInotifyTree(unittest.TestCase):
++             new_path =3D os.path.join(path, 'new_folder')
++=20
++             os.mkdir(old_path)
+++           =20
+++            wd_path =3D get_wd(i.inotify, path)
++=20
++             events1 =3D self.__read_all_events(i)
++=20
++             expected =3D [
++-                (inotify.adapters._INOTIFY_EVENT(wd=3D1, mask=3D1073742=
+080, cookie=3Devents1[0][0].cookie, len=3D16), ['IN_ISDIR', 'IN_CREATE'],=
+ path, 'old_folder'),
+++                (inotify.adapters._INOTIFY_EVENT(wd=3Dwd_path, mask=3D1=
+073742080, cookie=3Devents1[0][0].cookie, len=3D16), ['IN_CREATE', 'IN_IS=
+DIR'], path, 'old_folder'),
++             ]
++=20
++-            self.assertEquals(events1, expected)
++-
+++            self.assertEqual(events1, expected)
++=20
++             os.rename(old_path, new_path)
++=20
+++            wd_old_path =3D get_wd(i.inotify, old_path)
+++
++             events2 =3D self.__read_all_events(i)
++=20
++             expected =3D [
++-                (inotify.adapters._INOTIFY_EVENT(wd=3D1, mask=3D1073741=
+888, cookie=3Devents2[0][0].cookie, len=3D16), ['IN_MOVED_FROM', 'IN_ISDI=
+R'], path, 'old_folder'),
++-                (inotify.adapters._INOTIFY_EVENT(wd=3D1, mask=3D1073741=
+952, cookie=3Devents2[1][0].cookie, len=3D16), ['IN_MOVED_TO', 'IN_ISDIR'=
+], path, 'new_folder'),
+++                (inotify.adapters._INOTIFY_EVENT(wd=3Dwd_path, mask=3D1=
+073741888, cookie=3Devents2[0][0].cookie, len=3D16), ['IN_MOVED_FROM', 'I=
+N_ISDIR'], path, 'old_folder'),
+++                (inotify.adapters._INOTIFY_EVENT(wd=3Dwd_path, mask=3D1=
+073741952, cookie=3Devents2[1][0].cookie, len=3D16), ['IN_MOVED_TO', 'IN_=
+ISDIR'], path, 'new_folder'),
+++                (inotify.adapters._INOTIFY_EVENT(wd=3Dwd_old_path, mask=
+=3D2048, cookie=3D0, len=3D0), ['IN_MOVE_SELF'], new_path, '')
++             ]
++=20
++-            self.assertEquals(events2, expected)
+++            self.assertEqual(events2, expected)
++=20
++=20
++             with open(os.path.join(new_path, 'old_filename'), 'w'):
++@@ -318,21 +443,33 @@ class TestInotifyTree(unittest.TestCase):
++             events3 =3D self.__read_all_events(i)
++=20
++             expected =3D [
++-                (inotify.adapters._INOTIFY_EVENT(wd=3D3, mask=3D256, co=
+okie=3D0, len=3D16), ['IN_CREATE'], new_path, 'old_filename'),
++-                (inotify.adapters._INOTIFY_EVENT(wd=3D3, mask=3D32, coo=
+kie=3D0, len=3D16), ['IN_OPEN'], new_path, 'old_filename'),
++-                (inotify.adapters._INOTIFY_EVENT(wd=3D3, mask=3D8, cook=
+ie=3D0, len=3D16), ['IN_CLOSE_WRITE'], new_path, 'old_filename'),
+++                (inotify.adapters._INOTIFY_EVENT(wd=3Dwd_old_path, mask=
+=3D256, cookie=3D0, len=3D16), ['IN_CREATE'], new_path, 'old_filename'),
+++                (inotify.adapters._INOTIFY_EVENT(wd=3Dwd_old_path, mask=
+=3D32, cookie=3D0, len=3D16), ['IN_OPEN'], new_path, 'old_filename'),
+++                (inotify.adapters._INOTIFY_EVENT(wd=3Dwd_old_path, mask=
+=3D8, cookie=3D0, len=3D16), ['IN_CLOSE_WRITE'], new_path, 'old_filename'=
+),
+++                (inotify.adapters._INOTIFY_EVENT(wd=3Dwd_old_path, mask=
+=3D64, cookie=3Devents3[3][0].cookie, len=3D16), ['IN_MOVED_FROM'], new_p=
+ath, 'old_filename'),
+++                (inotify.adapters._INOTIFY_EVENT(wd=3Dwd_old_path, mask=
+=3D128, cookie=3Devents3[4][0].cookie, len=3D16), ['IN_MOVED_TO'], new_pa=
+th, 'new_filename'),
+++                (inotify.adapters._INOTIFY_EVENT(wd=3Dwd_old_path, mask=
+=3D512, cookie=3D0, len=3D16), ['IN_DELETE'], new_path, 'new_filename'),
+++                (inotify.adapters._INOTIFY_EVENT(wd=3Dwd_old_path, mask=
+=3D1024, cookie=3D0, len=3D0), ['IN_DELETE_SELF'], new_path, ''),
+++                (inotify.adapters._INOTIFY_EVENT(wd=3Dwd_old_path, mask=
+=3D32768, cookie=3D0, len=3D0), ['IN_IGNORED'], new_path, ''),
+++                (inotify.adapters._INOTIFY_EVENT(wd=3Dwd_path, mask=3D1=
+073742336, cookie=3D0, len=3D16), ['IN_DELETE', 'IN_ISDIR'], path, 'new_f=
+older'),
+++            ]
++=20
++-                (inotify.adapters._INOTIFY_EVENT(wd=3D3, mask=3D64, coo=
+kie=3Devents3[3][0].cookie, len=3D16), ['IN_MOVED_FROM'], new_path, 'old_=
+filename'),
++-                (inotify.adapters._INOTIFY_EVENT(wd=3D3, mask=3D128, co=
+okie=3Devents3[4][0].cookie, len=3D16), ['IN_MOVED_TO'], new_path, 'new_f=
+ilename'),
+++            if events3 !=3D expected:
+++                print("ACTUAL:")
+++                print("")
++=20
++-                (inotify.adapters._INOTIFY_EVENT(wd=3D3, mask=3D512, co=
+okie=3D0, len=3D16), ['IN_DELETE'], new_path, 'new_filename'),
+++                for i, event in enumerate(events3):
+++                    print(event)
++=20
++-                (inotify.adapters._INOTIFY_EVENT(wd=3D3, mask=3D1024, c=
+ookie=3D0, len=3D0), ['IN_DELETE_SELF'], new_path, ''),
++-                (inotify.adapters._INOTIFY_EVENT(wd=3D3, mask=3D32768, =
+cookie=3D0, len=3D0), ['IN_IGNORED'], new_path, ''),
++-                (inotify.adapters._INOTIFY_EVENT(wd=3D1, mask=3D1073742=
+336, cookie=3D0, len=3D16), ['IN_ISDIR', 'IN_DELETE'], path, 'new_folder'=
+),
++-            ]
+++                print("")
+++
+++                print("EXPECTED:")
+++                print("")
++=20
++-            self.assertEquals(events3, expected)
+++                for i, event in enumerate(expected):
+++                    print(event)
+++
+++                raise Exception("Events not correct.")
++=20
++     def test__automatic_new_watches_on_new_paths(self):
++=20
++@@ -346,39 +483,60 @@ class TestInotifyTree(unittest.TestCase):
++             path2 =3D os.path.join(path1, 'folder2')
++=20
++             os.mkdir(path1)
+++=20
+++            wd_path =3D get_wd(i.inotify, path)
++=20
++             events =3D self.__read_all_events(i)
++=20
++             expected =3D [
++-                (inotify.adapters._INOTIFY_EVENT(wd=3D1, mask=3D1073742=
+080, cookie=3D0, len=3D16), ['IN_ISDIR', 'IN_CREATE'], path, 'folder1'),
+++                (inotify.adapters._INOTIFY_EVENT(wd=3Dwd_path, mask=3D1=
+073742080, cookie=3D0, len=3D16), ['IN_CREATE', 'IN_ISDIR'], path, 'folde=
+r1'),
++             ]
++=20
++-            self.assertEquals(events, expected)
+++            self.assertEqual(events, expected)
++=20
++=20
++             os.mkdir(path2)
++=20
+++            wd_path1 =3D get_wd(i.inotify, path1)
+++
++             events =3D self.__read_all_events(i)
++=20
++             expected =3D [
++-                (inotify.adapters._INOTIFY_EVENT(wd=3D2, mask=3D1073742=
+080, cookie=3D0, len=3D16), ['IN_ISDIR', 'IN_CREATE'], path1, 'folder2'),
+++                (inotify.adapters._INOTIFY_EVENT(wd=3Dwd_path1, mask=3D=
+1073742080, cookie=3D0, len=3D16), ['IN_CREATE', 'IN_ISDIR'], path1, 'fol=
+der2'),
++             ]
++=20
++-            self.assertEquals(events, expected)
+++            self.assertEqual(events, expected)
++=20
++=20
++             with open(os.path.join(path2,'filename'), 'w'):
++                 pass
++=20
+++            wd_path2 =3D get_wd(i.inotify, path2)
+++
++             events =3D self.__read_all_events(i)
++=20
++             expected =3D [
++-                (inotify.adapters._INOTIFY_EVENT(wd=3D3, mask=3D256, co=
+okie=3D0, len=3D16), ['IN_CREATE'], path2, 'filename'),
++-                (inotify.adapters._INOTIFY_EVENT(wd=3D3, mask=3D32, coo=
+kie=3D0, len=3D16), ['IN_OPEN'], path2, 'filename'),
++-                (inotify.adapters._INOTIFY_EVENT(wd=3D3, mask=3D8, cook=
+ie=3D0, len=3D16), ['IN_CLOSE_WRITE'], path2, 'filename'),
+++                (inotify.adapters._INOTIFY_EVENT(wd=3Dwd_path2, mask=3D=
+256, cookie=3D0, len=3D16), ['IN_CREATE'], path2, 'filename'),
+++                (inotify.adapters._INOTIFY_EVENT(wd=3Dwd_path2, mask=3D=
+32, cookie=3D0, len=3D16), ['IN_OPEN'], path2, 'filename'),
+++                (inotify.adapters._INOTIFY_EVENT(wd=3Dwd_path2, mask=3D=
+8, cookie=3D0, len=3D16), ['IN_CLOSE_WRITE'], path2, 'filename'),
++             ]
++=20
++-            self.assertEquals(events, expected)
+++            if events !=3D expected:
+++                print("ACTUAL:")
+++                print("")
+++
+++                for i, event in enumerate(events):
+++                    print(event)
+++
+++                print("")
+++
+++                print("EXPECTED:")
+++                print("")
+++
+++                for i, event in enumerate(expected):
+++                    print(event)
+++
+++                raise Exception("Events not correct.")
++=20
++     def test__automatic_new_watches_on_existing_paths(self):
++=20
++@@ -396,16 +554,33 @@ class TestInotifyTree(unittest.TestCase):
++=20
++             with open(os.path.join(path2,'filename'), 'w'):
++                 pass
+++               =20
+++            wd =3D get_wd(i.inotify, path2)
++=20
++             events =3D self.__read_all_events(i)
++=20
++             expected =3D [
++-                (inotify.adapters._INOTIFY_EVENT(wd=3D3, mask=3D256, co=
+okie=3D0, len=3D16), ['IN_CREATE'], path2, 'filename'),
++-                (inotify.adapters._INOTIFY_EVENT(wd=3D3, mask=3D32, coo=
+kie=3D0, len=3D16), ['IN_OPEN'], path2, 'filename'),
++-                (inotify.adapters._INOTIFY_EVENT(wd=3D3, mask=3D8, cook=
+ie=3D0, len=3D16), ['IN_CLOSE_WRITE'], path2, 'filename'),
+++                (inotify.adapters._INOTIFY_EVENT(wd=3Dwd, mask=3D256, c=
+ookie=3D0, len=3D16), ['IN_CREATE'], path2, 'filename'),
+++                (inotify.adapters._INOTIFY_EVENT(wd=3Dwd, mask=3D32, co=
+okie=3D0, len=3D16), ['IN_OPEN'], path2, 'filename'),
+++                (inotify.adapters._INOTIFY_EVENT(wd=3Dwd, mask=3D8, coo=
+kie=3D0, len=3D16), ['IN_CLOSE_WRITE'], path2, 'filename'),
++             ]
++=20
++-            self.assertEquals(events, expected)
+++            if events !=3D expected:
+++                print("ACTUAL:")
+++                print("")
+++
+++                for i, event in enumerate(events):
+++                    print(event)
+++
+++                print("")
+++
+++                print("EXPECTED:")
+++                print("")
+++
+++                for i, event in enumerate(expected):
+++                    print(event)
+++
+++                raise Exception("Events not correct.")
++=20
++=20
++ class TestInotifyTrees(unittest.TestCase):
++@@ -428,6 +603,9 @@ class TestInotifyTrees(unittest.TestCase):
++=20
++             i =3D inotify.adapters.InotifyTrees([path1, path2])
++=20
+++            wd_path1 =3D get_wd(i.inotify, path1)
+++            wd_path2 =3D get_wd(i.inotify, path2)
+++
++             with open(os.path.join(path1, 'seen_new_file1'), 'w'):
++                 pass
++=20
++@@ -437,13 +615,13 @@ class TestInotifyTrees(unittest.TestCase):
++             events =3D self.__read_all_events(i)
++=20
++             expected =3D [
++-                (inotify.adapters._INOTIFY_EVENT(wd=3D1, mask=3D256, co=
+okie=3D0, len=3D16), ['IN_CREATE'], path1, 'seen_new_file1'),
++-                (inotify.adapters._INOTIFY_EVENT(wd=3D1, mask=3D32, coo=
+kie=3D0, len=3D16), ['IN_OPEN'], path1, 'seen_new_file1'),
++-                (inotify.adapters._INOTIFY_EVENT(wd=3D1, mask=3D8, cook=
+ie=3D0, len=3D16), ['IN_CLOSE_WRITE'], path1, 'seen_new_file1'),
+++                (inotify.adapters._INOTIFY_EVENT(wd=3Dwd_path1, mask=3D=
+256, cookie=3D0, len=3D16), ['IN_CREATE'], path1, 'seen_new_file1'),
+++                (inotify.adapters._INOTIFY_EVENT(wd=3Dwd_path1, mask=3D=
+32, cookie=3D0, len=3D16), ['IN_OPEN'], path1, 'seen_new_file1'),
+++                (inotify.adapters._INOTIFY_EVENT(wd=3Dwd_path1, mask=3D=
+8, cookie=3D0, len=3D16), ['IN_CLOSE_WRITE'], path1, 'seen_new_file1'),
++=20
++-                (inotify.adapters._INOTIFY_EVENT(wd=3D2, mask=3D256, co=
+okie=3D0, len=3D16), ['IN_CREATE'], path2, 'seen_new_file2'),
++-                (inotify.adapters._INOTIFY_EVENT(wd=3D2, mask=3D32, coo=
+kie=3D0, len=3D16), ['IN_OPEN'], path2, 'seen_new_file2'),
++-                (inotify.adapters._INOTIFY_EVENT(wd=3D2, mask=3D8, cook=
+ie=3D0, len=3D16), ['IN_CLOSE_WRITE'], path2, 'seen_new_file2'),
+++                (inotify.adapters._INOTIFY_EVENT(wd=3Dwd_path2, mask=3D=
+256, cookie=3D0, len=3D16), ['IN_CREATE'], path2, 'seen_new_file2'),
+++                (inotify.adapters._INOTIFY_EVENT(wd=3Dwd_path2, mask=3D=
+32, cookie=3D0, len=3D16), ['IN_OPEN'], path2, 'seen_new_file2'),
+++                (inotify.adapters._INOTIFY_EVENT(wd=3Dwd_path2, mask=3D=
+8, cookie=3D0, len=3D16), ['IN_CLOSE_WRITE'], path2, 'seen_new_file2'),
++             ]
++=20
++-            self.assertEquals(events, expected)
+++            self.assertEqual(events, expected)
++--=20
++2.35.5
++
+diff --git a/meta-python/recipes-devtools/python/python3-inotify_git.bb b=
+/meta-python/recipes-devtools/python/python3-inotify_git.bb
+index 15fb92eedd..37a2e2a6f2 100644
+--- a/meta-python/recipes-devtools/python/python3-inotify_git.bb
++++ b/meta-python/recipes-devtools/python/python3-inotify_git.bb
+@@ -8,6 +8,7 @@ SRC_URI[sha256sum] =3D "974a623a338482b62e16d4eb705fb863e=
+d33ec178680fc3e96ccdf0df6
+=20
+ SRC_URI =3D " \
+     git://github.com/dsoprea/pyinotify.git;branch=3Dmaster;protocol=3Dht=
+tps \
++    file://new-test-inotify.patch \
+     file://run-ptest \
+ "
+=20
+--=20
+2.25.1
 
-Cheers,
-
-On Wed, Jul 12, 2023 at 7:31=E2=80=AFAM <auh@moto-timo.dev> wrote:
-
-> Hello,
->
-> this email is a notification from the Auto Upgrade Helper
-> that the automatic attempt to upgrade the recipe *python3-kivy* to *2.2.1=
-*
-> has Succeeded.
->
-> Next steps:
->     - apply the patch: git am 0001-python3-kivy-upgrade-2.1.0.-2.2.1.patc=
-h
->     - check the changes to upstream patches and summarize them in the
-> commit message,
->     - compile an image that contains the package
->     - perform some basic sanity tests
->     - amend the patch and sign it off: git commit -s --reset-author --ame=
-nd
->     - send it to the appropriate mailing list
->
-> Alternatively, if you believe the recipe should not be upgraded at this
-> time,
-> you can fill RECIPE_NO_UPDATE_REASON in respective recipe file so that
-> automatic upgrades would no longer be attempted.
->
-> Please review the attached files for further information and build/update
-> failures.
-> Any problem please file a bug at
-> https://bugzilla.yoctoproject.org/enter_bug.cgi?product=3DAutomated%20Upd=
-ate%20Handler
->
-> Regards,
-> The Upgrade Helper
->
-> -- >8 --
-> From 6a233fbd35c80ea5d4a482e62508bfd6eae1326c Mon Sep 17 00:00:00 2001
-> From: Upgrade Helper <auh@moto-timo.dev>
-> Date: Tue, 11 Jul 2023 19:53:27 -0500
-> Subject: [PATCH] python3-kivy: upgrade 2.1.0. -> 2.2.1
->
-> ---
->  .../0001-add-support-for-glesv2.patch         | 19 ++++++++---
->  ...3-kivy_2.1.0..bb =3D> python3-kivy_2.2.1.bb} | 32 ++++++++++++++-----
->  2 files changed, 39 insertions(+), 12 deletions(-)
->  rename meta-python/recipes-devtools/python/{python3-kivy_2.1.0..bb =3D>
-> python3-kivy_2.2.1.bb} (65%)
->
-> diff --git
-> a/meta-python/recipes-devtools/python/python3-kivy/0001-add-support-for-g=
-lesv2.patch
-> b/meta-python/recipes-devtools/python/python3-kivy/0001-add-support-for-g=
-lesv2.patch
-> index 0abc6c5c7..13c3e56a0 100644
-> ---
-> a/meta-python/recipes-devtools/python/python3-kivy/0001-add-support-for-g=
-lesv2.patch
-> +++
-> b/meta-python/recipes-devtools/python/python3-kivy/0001-add-support-for-g=
-lesv2.patch
-> @@ -1,8 +1,19 @@
-> +From 9f9c659d9157afca5055eb6835ec763fa971d648 Mon Sep 17 00:00:00 2001
-> +From: William Huang <whuang8933@gmail.com>
-> +Date: Thu, 2 Sep 2021 07:25:07 -0400
-> +Subject: [PATCH] recipes-devtools: python: add support for Kivy
-> +
->  Upstream-Status: Pending
->
-> +---
-> + setup.py | 16 +++++++++++++---
-> + 1 file changed, 13 insertions(+), 3 deletions(-)
-> +
-> +diff --git a/setup.py b/setup.py
-> +index 35e34afdd..0ba3aca72 100644
->  --- a/setup.py
->  +++ b/setup.py
-> -@@ -695,7 +695,18 @@ def determine_gl_flags():
-> +@@ -730,7 +730,18 @@ def determine_gl_flags():
->           c_options['use_x11'] =3D True
->           c_options['use_egl'] =3D True
->       else:
-> @@ -22,7 +33,7 @@ Upstream-Status: Pending
->       return flags, base_flags
->
->
-> -@@ -723,14 +734,13 @@ def determine_sdl2():
-> +@@ -774,14 +785,13 @@ def determine_sdl2():
->               sdl_inc =3D join(include, 'SDL2')
->               if isdir(sdl_inc):
->                   sdl2_paths.append(sdl_inc)
-> @@ -36,5 +47,5 @@ Upstream-Status: Pending
->  -        ['/usr/local/lib/'])
->  +        [''])
->
-> -     if sdl2_flags:
-> -         flags =3D merge(flags, sdl2_flags)
-> +     if kivy_sdl2_path:
-> +         # If we have a custom path, we need to add the rpath to the
-> linker
-> diff --git a/meta-python/recipes-devtools/python/python3-kivy_2.1.0..bb
-> b/meta-python/recipes-devtools/python/python3-kivy_2.2.1.bb
-> similarity index 65%
-> rename from meta-python/recipes-devtools/python/python3-kivy_2.1.0..bb
-> rename to meta-python/recipes-devtools/python/python3-kivy_2.2.1.bb
-> index ca1fc5f96..de546cef3 100644
-> --- a/meta-python/recipes-devtools/python/python3-kivy_2.1.0..bb
-> +++ b/meta-python/recipes-devtools/python/python3-kivy_2.2.1.bb
-> @@ -1,24 +1,40 @@
-> +# FIXME: the LIC_FILES_CHKSUM values have been updated by 'devtool
-> upgrade'.
-> +# The following is the difference between the old and the new license
-> text.
-> +# Please update the LICENSE value if needed, and summarize the changes i=
-n
-> +# the commit message via 'License-Update:' tag.
-> +# (example: 'License-Update: copyright years updated.')
-> +#
-> +# The changes:
-> +#
-> +# --- LICENSE
-> +# +++ LICENSE
-> +# @@ -1,4 +1,4 @@
-> +# -Copyright (c) 2010-2022 Kivy Team and other contributors
-> +# +Copyright (c) 2010-2023 Kivy Team and other contributors
-> +#
-> +#  Permission is hereby granted, free of charge, to any person obtaining
-> a copy
-> +#  of this software and associated documentation files (the "Software"),
-> to deal
-> +#
-> +#
-> +
->  SUMMARY =3D "Open source Python library for rapid development of
-> applications \
->      that make use of innovative user interfaces, such as multi-touch
-> apps."
->  HOMEPAGE =3D "https://kivy.org/"
->  LICENSE =3D "MIT"
-> -LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D22e7b4dd8140eec57fd7edfd9fa23=
-dfc"
-> +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Ded5cd0f2cfda42852c332e3b88c85=
-fea"
->
->  inherit setuptools3 pkgconfig features_check
->  PIP_INSTALL_PACKAGE =3D "Kivy"
->
-> -SRC_URI =3D "\
-> -    git://github.com/kivy/kivy.git;protocol=3Dhttps;branch=3Dmaster \
-> -"
-> +SRC_URI =3D "git://github.com/kivy/kivy.git;protocol=3Dhttps;branch=3Dst=
-able \
-> +           file://0001-add-support-for-glesv2.patch \
-> +           "
->
->  # Kivy's setup files only look for GLES libraries for Android, iOS, RPi,
->  # and mali-based OS's. We need to patch the setup file to tell Kivy setu=
-p
->  # that our machine has GLES libaries installed as well
->  # Also, if using SDL2 as backend, SDL2 needs to be configured wth gles
-> -SRC_URI +=3D " \
-> -    file://0001-add-support-for-glesv2.patch \
-> -"
-> -SRCREV =3D "960b95dc666753f59eff1b449124490fbec10184"
-> +SRCREV =3D "344768bfefd2e8f5302cc9dfb8ca41991ce6f7e7"
->
->  S =3D "${WORKDIR}/git"
->
-> --
-> 2.25.1
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#103775):
-> https://lists.openembedded.org/g/openembedded-devel/message/103775
-> Mute This Topic: https://lists.openembedded.org/mt/100094671/3617156
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
-> Martin.Jansa@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
->
-
---00000000000014f14306017afb90
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr">Hi,<div><br></div><div>I&#39;m not interested in kivy but =
-I&#39;ve noticed the extra &#39;.&#39; in filename since:</div><div><a href=
-=3D"http://git.openembedded.org/meta-openembedded/commit/meta-python/recipe=
-s-devtools/python/python3-kivy_2.1.0..bb?id=3D6fbe7f748706229f43a2e06b08b6e=
-1e729942314">http://git.openembedded.org/meta-openembedded/commit/meta-pyth=
-on/recipes-devtools/python/python3-kivy_2.1.0..bb?id=3D6fbe7f748706229f43a2=
-e06b08b6e1e729942314</a><br></div><div>if someone cares about kivy...</div>=
-<div><br></div><div>+Brynn who for some reason thinks I&#39;m interested in=
- kivy<br></div><div><br></div><div>Cheers,</div></div><br><div class=3D"gma=
-il_quote"><div dir=3D"ltr" class=3D"gmail_attr">On Wed, Jul 12, 2023 at 7:3=
-1=E2=80=AFAM &lt;<a href=3D"mailto:auh@moto-timo.dev">auh@moto-timo.dev</a>=
-&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px =
-0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">Hell=
-o,<br>
-<br>
-this email is a notification from the Auto Upgrade Helper<br>
-that the automatic attempt to upgrade the recipe *python3-kivy* to *2.2.1* =
-has Succeeded.<br>
-<br>
-Next steps:<br>
-=C2=A0 =C2=A0 - apply the patch: git am 0001-python3-kivy-upgrade-2.1.0.-2.=
-2.1.patch<br>
-=C2=A0 =C2=A0 - check the changes to upstream patches and summarize them in=
- the commit message,<br>
-=C2=A0 =C2=A0 - compile an image that contains the package<br>
-=C2=A0 =C2=A0 - perform some basic sanity tests<br>
-=C2=A0 =C2=A0 - amend the patch and sign it off: git commit -s --reset-auth=
-or --amend<br>
-=C2=A0 =C2=A0 - send it to the appropriate mailing list<br>
-<br>
-Alternatively, if you believe the recipe should not be upgraded at this tim=
-e,<br>
-you can fill RECIPE_NO_UPDATE_REASON in respective recipe file so that<br>
-automatic upgrades would no longer be attempted.<br>
-<br>
-Please review the attached files for further information and build/update f=
-ailures.<br>
-Any problem please file a bug at <a href=3D"https://bugzilla.yoctoproject.o=
-rg/enter_bug.cgi?product=3DAutomated%20Update%20Handler" rel=3D"noreferrer"=
- target=3D"_blank">https://bugzilla.yoctoproject.org/enter_bug.cgi?product=
-=3DAutomated%20Update%20Handler</a><br>
-<br>
-Regards,<br>
-The Upgrade Helper<br>
-<br>
--- &gt;8 --<br>
-From 6a233fbd35c80ea5d4a482e62508bfd6eae1326c Mon Sep 17 00:00:00 2001<br>
-From: Upgrade Helper &lt;<a href=3D"mailto:auh@moto-timo.dev" target=3D"_bl=
-ank">auh@moto-timo.dev</a>&gt;<br>
-Date: Tue, 11 Jul 2023 19:53:27 -0500<br>
-Subject: [PATCH] python3-kivy: upgrade 2.1.0. -&gt; 2.2.1<br>
-<br>
----<br>
-=C2=A0.../0001-add-support-for-glesv2.patch=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0| 19 ++++++++---<br>
-=C2=A0...3-kivy_2.1.0..bb =3D&gt; <a href=3D"http://python3-kivy_2.2.1.bb" =
-rel=3D"noreferrer" target=3D"_blank">python3-kivy_2.2.1.bb</a>} | 32 ++++++=
-++++++++-----<br>
-=C2=A02 files changed, 39 insertions(+), 12 deletions(-)<br>
-=C2=A0rename meta-python/recipes-devtools/python/{python3-kivy_2.1.0..bb =
-=3D&gt; <a href=3D"http://python3-kivy_2.2.1.bb" rel=3D"noreferrer" target=
-=3D"_blank">python3-kivy_2.2.1.bb</a>} (65%)<br>
-<br>
-diff --git a/meta-python/recipes-devtools/python/python3-kivy/0001-add-supp=
-ort-for-glesv2.patch b/meta-python/recipes-devtools/python/python3-kivy/000=
-1-add-support-for-glesv2.patch<br>
-index 0abc6c5c7..13c3e56a0 100644<br>
---- a/meta-python/recipes-devtools/python/python3-kivy/0001-add-support-for=
--glesv2.patch<br>
-+++ b/meta-python/recipes-devtools/python/python3-kivy/0001-add-support-for=
--glesv2.patch<br>
-@@ -1,8 +1,19 @@<br>
-+From 9f9c659d9157afca5055eb6835ec763fa971d648 Mon Sep 17 00:00:00 2001<br>
-+From: William Huang &lt;<a href=3D"mailto:whuang8933@gmail.com" target=3D"=
-_blank">whuang8933@gmail.com</a>&gt;<br>
-+Date: Thu, 2 Sep 2021 07:25:07 -0400<br>
-+Subject: [PATCH] recipes-devtools: python: add support for Kivy<br>
-+<br>
-=C2=A0Upstream-Status: Pending<br>
-<br>
-+---<br>
-+ setup.py | 16 +++++++++++++---<br>
-+ 1 file changed, 13 insertions(+), 3 deletions(-)<br>
-+<br>
-+diff --git a/setup.py b/setup.py<br>
-+index 35e34afdd..0ba3aca72 100644<br>
-=C2=A0--- a/setup.py<br>
-=C2=A0+++ b/setup.py<br>
--@@ -695,7 +695,18 @@ def determine_gl_flags():<br>
-+@@ -730,7 +730,18 @@ def determine_gl_flags():<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 c_options[&#39;use_x11&#39;] =3D True<br=
->
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 c_options[&#39;use_egl&#39;] =3D True<br=
->
-=C2=A0 =C2=A0 =C2=A0 else:<br>
-@@ -22,7 +33,7 @@ Upstream-Status: Pending<br>
-=C2=A0 =C2=A0 =C2=A0 return flags, base_flags<br>
-<br>
-<br>
--@@ -723,14 +734,13 @@ def determine_sdl2():<br>
-+@@ -774,14 +785,13 @@ def determine_sdl2():<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 sdl_inc =3D join(include, =
-&#39;SDL2&#39;)<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 if isdir(sdl_inc):<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 sdl2_paths.a=
-ppend(sdl_inc)<br>
-@@ -36,5 +47,5 @@ Upstream-Status: Pending<br>
-=C2=A0-=C2=A0 =C2=A0 =C2=A0 =C2=A0 [&#39;/usr/local/lib/&#39;])<br>
-=C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0 [&#39;&#39;])<br>
-<br>
--=C2=A0 =C2=A0 =C2=A0if sdl2_flags:<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0flags =3D merge(flags, sdl2_flags)<br>
-+=C2=A0 =C2=A0 =C2=A0if kivy_sdl2_path:<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0# If we have a custom path, we need to a=
-dd the rpath to the linker<br>
-diff --git a/meta-python/recipes-devtools/python/python3-kivy_2.1.0..bb b/m=
-eta-python/recipes-devtools/python/<a href=3D"http://python3-kivy_2.2.1.bb"=
- rel=3D"noreferrer" target=3D"_blank">python3-kivy_2.2.1.bb</a><br>
-similarity index 65%<br>
-rename from meta-python/recipes-devtools/python/python3-kivy_2.1.0..bb<br>
-rename to meta-python/recipes-devtools/python/<a href=3D"http://python3-kiv=
-y_2.2.1.bb" rel=3D"noreferrer" target=3D"_blank">python3-kivy_2.2.1.bb</a><=
-br>
-index ca1fc5f96..de546cef3 100644<br>
---- a/meta-python/recipes-devtools/python/python3-kivy_2.1.0..bb<br>
-+++ b/meta-python/recipes-devtools/python/<a href=3D"http://python3-kivy_2.=
-2.1.bb" rel=3D"noreferrer" target=3D"_blank">python3-kivy_2.2.1.bb</a><br>
-@@ -1,24 +1,40 @@<br>
-+# FIXME: the LIC_FILES_CHKSUM values have been updated by &#39;devtool upg=
-rade&#39;.<br>
-+# The following is the difference between the old and the new license text=
-.<br>
-+# Please update the LICENSE value if needed, and summarize the changes in<=
-br>
-+# the commit message via &#39;License-Update:&#39; tag.<br>
-+# (example: &#39;License-Update: copyright years updated.&#39;)<br>
-+#<br>
-+# The changes:<br>
-+#<br>
-+# --- LICENSE<br>
-+# +++ LICENSE<br>
-+# @@ -1,4 +1,4 @@<br>
-+# -Copyright (c) 2010-2022 Kivy Team and other contributors<br>
-+# +Copyright (c) 2010-2023 Kivy Team and other contributors<br>
-+#=C2=A0 <br>
-+#=C2=A0 Permission is hereby granted, free of charge, to any person obtain=
-ing a copy<br>
-+#=C2=A0 of this software and associated documentation files (the &quot;Sof=
-tware&quot;), to deal<br>
-+# <br>
-+#<br>
-+<br>
-=C2=A0SUMMARY =3D &quot;Open source Python library for rapid development of=
- applications \<br>
-=C2=A0 =C2=A0 =C2=A0that make use of innovative user interfaces, such as mu=
-lti-touch apps.&quot;<br>
-=C2=A0HOMEPAGE =3D &quot;<a href=3D"https://kivy.org/" rel=3D"noreferrer" t=
-arget=3D"_blank">https://kivy.org/</a>&quot;<br>
-=C2=A0LICENSE =3D &quot;MIT&quot;<br>
--LIC_FILES_CHKSUM =3D &quot;file://LICENSE;md5=3D22e7b4dd8140eec57fd7edfd9f=
-a23dfc&quot;<br>
-+LIC_FILES_CHKSUM =3D &quot;file://LICENSE;md5=3Ded5cd0f2cfda42852c332e3b88=
-c85fea&quot;<br>
-<br>
-=C2=A0inherit setuptools3 pkgconfig features_check<br>
-=C2=A0PIP_INSTALL_PACKAGE =3D &quot;Kivy&quot;<br>
-<br>
--SRC_URI =3D &quot;\<br>
--=C2=A0 =C2=A0 git://<a href=3D"http://github.com/kivy/kivy.git;protocol=3D=
-https;branch=3Dmaster" rel=3D"noreferrer" target=3D"_blank">github.com/kivy=
-/kivy.git;protocol=3Dhttps;branch=3Dmaster</a> \<br>
--&quot;<br>
-+SRC_URI =3D &quot;git://<a href=3D"http://github.com/kivy/kivy.git;protoco=
-l=3Dhttps;branch=3Dstable" rel=3D"noreferrer" target=3D"_blank">github.com/=
-kivy/kivy.git;protocol=3Dhttps;branch=3Dstable</a> \<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0file://0001-add-support-for-glesv=
-2.patch \<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0&quot;<br>
-<br>
-=C2=A0# Kivy&#39;s setup files only look for GLES libraries for Android, iO=
-S, RPi,<br>
-=C2=A0# and mali-based OS&#39;s. We need to patch the setup file to tell Ki=
-vy setup<br>
-=C2=A0# that our machine has GLES libaries installed as well<br>
-=C2=A0# Also, if using SDL2 as backend, SDL2 needs to be configured wth gle=
-s<br>
--SRC_URI +=3D &quot; \<br>
--=C2=A0 =C2=A0 file://0001-add-support-for-glesv2.patch \<br>
--&quot;<br>
--SRCREV =3D &quot;960b95dc666753f59eff1b449124490fbec10184&quot;<br>
-+SRCREV =3D &quot;344768bfefd2e8f5302cc9dfb8ca41991ce6f7e7&quot;<br>
-<br>
-=C2=A0S =3D &quot;${WORKDIR}/git&quot;<br>
-<br>
--- <br>
-2.25.1<br>
-<br>
-<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-Links: You receive all messages sent to this group.<br>
-View/Reply Online (#103775): <a href=3D"https://lists.openembedded.org/g/op=
-enembedded-devel/message/103775" rel=3D"noreferrer" target=3D"_blank">https=
-://lists.openembedded.org/g/openembedded-devel/message/103775</a><br>
-Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/100094671/361=
-7156" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/m=
-t/100094671/3617156</a><br>
-Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
-d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
-><br>
-Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
-/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
-/g/openembedded-devel/unsub</a> [<a href=3D"mailto:Martin.Jansa@gmail.com" =
-target=3D"_blank">Martin.Jansa@gmail.com</a>]<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-<br>
-</blockquote></div>
-
---00000000000014f14306017afb90--
 
