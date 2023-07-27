@@ -2,35 +2,35 @@ Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D7682C0015E
-	for <webhook@archiver.kernel.org>; Wed, 26 Jul 2023 23:02:48 +0000 (UTC)
-Received: from mailout10.t-online.de (mailout10.t-online.de [194.25.134.21])
- by mx.groups.io with SMTP id smtpd.web10.1148.1690412559292486094
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 33978C001DF
+	for <webhook@archiver.kernel.org>; Thu, 27 Jul 2023 00:02:49 +0000 (UTC)
+Received: from mailout01.t-online.de (mailout01.t-online.de [194.25.134.80])
+ by mx.groups.io with SMTP id smtpd.web11.2148.1690416159113895652
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 26 Jul 2023 16:02:40 -0700
+ Wed, 26 Jul 2023 17:02:39 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=none, err=SPF record not found (domain: t-online.de, ip: 194.25.134.21, mailfrom: f_l_k@t-online.de)
-Received: from fwd88.dcpf.telekom.de (fwd88.aul.t-online.de [10.223.144.114])
-	by mailout10.t-online.de (Postfix) with SMTP id 1CE12197C1
-	for <openembedded-devel@lists.openembedded.org>; Thu, 27 Jul 2023 01:02:37 +0200 (CEST)
-Received: from intel-corei7-64.fritz.box ([79.219.236.38]) by fwd88.t-online.de
+ dkim=none (message not signed); spf=none, err=SPF record not found (domain: t-online.de, ip: 194.25.134.80, mailfrom: f_l_k@t-online.de)
+Received: from fwd84.dcpf.telekom.de (fwd84.aul.t-online.de [10.223.144.110])
+	by mailout01.t-online.de (Postfix) with SMTP id B36C019345
+	for <openembedded-devel@lists.openembedded.org>; Thu, 27 Jul 2023 02:02:36 +0200 (CEST)
+Received: from intel-corei7-64.fritz.box ([79.219.239.8]) by fwd84.t-online.de
 	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1qOnWT-1Kne3F0; Thu, 27 Jul 2023 01:02:25 +0200
+	esmtp id 1qOoSa-2KWqkD0; Thu, 27 Jul 2023 02:02:28 +0200
 From: Markus Volk <f_l_k@t-online.de>
 To: openembedded-devel@lists.openembedded.org
-Subject: [RFC][meta-gnome][PATCH] webkitgtk3: add recipe
-Date: Thu, 27 Jul 2023 01:02:10 +0200
-Message-Id: <20230726230210.294984-1-f_l_k@t-online.de>
+Subject: [RFC][meta-gnome][PATCHv2] webkitgtk3: add recipe
+Date: Thu, 27 Jul 2023 02:02:18 +0200
+Message-Id: <20230727000218.1231304-1-f_l_k@t-online.de>
 X-Mailer: git-send-email 2.39.3
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1690412545-EA7F5029-BD2E893D/0/0 CLEAN NORMAL
-X-TOI-MSGID: 39f271a4-8415-40ea-bc9d-e17b2e526b99
+X-TOI-EXPURGATEID: 150726::1690416148-289F1649-C669CB38/0/0 CLEAN NORMAL
+X-TOI-MSGID: e0439b50-e944-4119-8860-08941761a737
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 26 Jul 2023 23:02:48 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104038
+ <openembedded-devel@lists.openembedded.org>; Thu, 27 Jul 2023 00:02:49 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104039
 
 - Change the meta-gnome recipes to use the gtk3 variant of webkitgtk
 
@@ -42,7 +42,7 @@ gnome-calendar or nautilus/files.
 
 Signed-off-by: Markus Volk <f_l_k@t-online.de>
 ---
- .../geary/{geary_43.0.bb =3D> geary_44.0.bb}    |   2 +-
+ .../recipes-connectivity/geary/geary_43.0.bb  |   2 +-
  .../evolution-data-server.bb                  |   2 +-
  .../gnome-online-accounts_3.48.0.bb           |   2 +-
  meta-gnome/recipes-gnome/yelp/yelp_42.2.bb    |   2 +-
@@ -57,8 +57,6 @@ Signed-off-by: Markus Volk <f_l_k@t-online.de>
  .../wxwidgets/wxwidgets_3.2.1.bb              |   2 +-
  meta-oe/recipes-graphics/surf/surf_2.1.bb     |   2 +-
  14 files changed, 639 insertions(+), 7 deletions(-)
- rename meta-gnome/recipes-connectivity/geary/{geary_43.0.bb =3D> geary_4=
-4.0.bb} (99%)
  create mode 100644 meta-gnome/recipes-support/webkitgtk/webkitgtk3/0001-=
 FindGObjectIntrospection.cmake-prefix-variables-obta.patch
  create mode 100644 meta-gnome/recipes-support/webkitgtk/webkitgtk3/0001-=
@@ -75,13 +73,10 @@ ducibility.patch
 2.bb
 
 diff --git a/meta-gnome/recipes-connectivity/geary/geary_43.0.bb b/meta-g=
-nome/recipes-connectivity/geary/geary_44.0.bb
-similarity index 99%
-rename from meta-gnome/recipes-connectivity/geary/geary_43.0.bb
-rename to meta-gnome/recipes-connectivity/geary/geary_44.0.bb
+nome/recipes-connectivity/geary/geary_43.0.bb
 index 6085d94fdc..bab4f909e0 100644
 --- a/meta-gnome/recipes-connectivity/geary/geary_43.0.bb
-+++ b/meta-gnome/recipes-connectivity/geary/geary_44.0.bb
++++ b/meta-gnome/recipes-connectivity/geary/geary_43.0.bb
 @@ -26,7 +26,7 @@ DEPENDS =3D " \
      libstemmer \
      libxml2 \
