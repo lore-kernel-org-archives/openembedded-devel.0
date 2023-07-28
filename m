@@ -1,466 +1,595 @@
-Return-Path: <anuj.mittal@intel.com>
+Return-Path: <narpat.mali@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E54FAC0015E
-	for <webhook@archiver.kernel.org>; Fri, 28 Jul 2023 01:13:03 +0000 (UTC)
-Received: from mgamail.intel.com (mgamail.intel.com [192.55.52.115])
- by mx.groups.io with SMTP id smtpd.web10.23334.1690506774681558565
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A68C7EB64DD
+	for <webhook@archiver.kernel.org>; Fri, 28 Jul 2023 07:24:25 +0000 (UTC)
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.web11.27665.1690529057112646352
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 27 Jul 2023 18:12:55 -0700
+ Fri, 28 Jul 2023 00:24:17 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@intel.com header.s=Intel header.b=JByRMH7x;
- spf=pass (domain: intel.com, ip: 192.55.52.115, mailfrom: anuj.mittal@intel.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1690506774; x=1722042774;
-  h=from:to:cc:subject:date:message-id:references:
-   in-reply-to:content-id:content-transfer-encoding:
-   mime-version;
-  bh=zrXb9HGKOcCyaAVd7Y8d8Hf7BvLnwzvRwEFb4ZLIf6U=;
-  b=JByRMH7xSfF8jS8mXZzU6U8mHzliTlDnh/4wRErSPHs3rgr1+QIrcmOR
-   UxaGhG26WihmnIHEpQnyGDHZS/aFJvjtb/+Q6BYgWRMBy/CYt64d8G3yr
-   iZF+9FI+Qh1YxPWImE8tGlMdtNiBXWeO44BVZ/HldkYeAVYErqKxOtG8+
-   q15LQOnEG3xYkBm50wT6af1WSblpS2u3jJqx9QcNCsbCaZ3BYkAUMS0HG
-   WDvTfW+UC6QiFy6zyNK/15MxFaOiII7oGvTZcx5O1qiyMRFzFAnfvLhYw
-   sid66ZYGpJhpQi6hHFw7YmKSgeDzwDmwh1M11SUiVYFViAYkEdRU+s37B
-   w==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10784"; a="368490196"
-X-IronPort-AV: E=Sophos;i="6.01,236,1684825200"; 
-   d="scan'208";a="368490196"
-Received: from orsmga002.jf.intel.com ([10.7.209.21])
-  by fmsmga103.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 27 Jul 2023 18:12:36 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10784"; a="727263081"
-X-IronPort-AV: E=Sophos;i="6.01,236,1684825200"; 
-   d="scan'208";a="727263081"
-Received: from orsmsx602.amr.corp.intel.com ([10.22.229.15])
-  by orsmga002.jf.intel.com with ESMTP; 27 Jul 2023 18:12:35 -0700
-Received: from orsmsx611.amr.corp.intel.com (10.22.229.24) by
- ORSMSX602.amr.corp.intel.com (10.22.229.15) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.27; Thu, 27 Jul 2023 18:12:35 -0700
-Received: from orsmsx601.amr.corp.intel.com (10.22.229.14) by
- ORSMSX611.amr.corp.intel.com (10.22.229.24) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.27; Thu, 27 Jul 2023 18:12:35 -0700
-Received: from ORSEDG602.ED.cps.intel.com (10.7.248.7) by
- orsmsx601.amr.corp.intel.com (10.22.229.14) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.27 via Frontend Transport; Thu, 27 Jul 2023 18:12:35 -0700
-Received: from NAM11-DM6-obe.outbound.protection.outlook.com (104.47.57.169)
- by edgegateway.intel.com (134.134.137.103) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.1.2507.27; Thu, 27 Jul 2023 18:12:35 -0700
+ dkim=fail reason="dkim: body hash did not verify" header.i=@windriver.com header.s=PPS06212021 header.b=GL9qC8VS;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=6573ee0bc5=narpat.mali@windriver.com)
+Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.17.1.22/8.17.1.22) with ESMTP id 36S5o9UV022400
+	for <openembedded-devel@lists.openembedded.org>; Fri, 28 Jul 2023 07:24:16 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
+	 h=message-id:date:subject:to:cc:references:from:in-reply-to
+	:content-type:content-transfer-encoding:mime-version; s=
+	PPS06212021; bh=dLyZBwhM92h0JWfLw2UHz4O+iHVs64nsAhos2AuZdAc=; b=
+	GL9qC8VSUhbjOeXr0IVWtl/ZIXKYDEplvA4DcnaMj7efLALwaGbJHq+ONJDuIOAO
+	+KEFTVb1ptHeGSSPnZtpQubrK8WG8cel62FS183/WH0Yn6DVmpmaxmTY0BFiXAVh
+	55uDheiKPRUVZRCmlNfGSgdgCCJxfFuTfaeW4Vb0/HVqEz5GN8xu0lL38RFpsnMb
+	Br/SBAaRxwS4YLh3vhtxhv+HseGHdmoYGaD+TTcGAgmJtdSiF1CR4yqipfO3/BZx
+	fOPxkKIfbVfQpVxgHWs6GpQrtzNTUxnxolzkLH9AtZUuqXRETJfh8OXZyd5ktE48
+	ya0mhgse1YGsj4N/28M2YA==
+Received: from pps.reinject (localhost [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3s0636dc5y-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Fri, 28 Jul 2023 07:24:15 +0000 (GMT)
+Received: from m0250812.ppops.net (m0250812.ppops.net [127.0.0.1])
+	by pps.reinject (8.17.1.22/8.17.1.22) with ESMTP id 36S7OFpt024560;
+	Fri, 28 Jul 2023 07:24:15 GMT
+Received: from nam12-bn8-obe.outbound.protection.outlook.com (mail-bn8nam12lp2168.outbound.protection.outlook.com [104.47.55.168])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3s0636dc5x-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+	Fri, 28 Jul 2023 07:24:15 +0000 (GMT)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=e0qF5Yktu90HXofonRuHqvx5rfqPe/Ywv42vreoPf6yiB9i4qaxLUKyRq9rosZIwDRsxvj4FySzbB4TllU3MF0u1GOBT16gaTJ9K1ybEs3twJIPvKnYIi870x2vkUH2bk1VPw0dOmseRM7LX35rcbmNRSgnevyQ9+MnctixNIYP/P0rEQQ7FhaoXfGy1TmpbjakEykTPtJFM+UT1d19JUtB77TOlQMn3UrdaxBIYeBCKnSwjRSZMYibPOnJ3+eYSJz1eYAGfsatolWG5NBq5AB73/yQj2R7qlobZpQIGuzdyLsIq8s+euhPMB3yTSCLlhg2T3dY+ZVjV7GSLoluPAQ==
+ b=EYNjFztO5lbcqWngR0qHag2fJQb1lJq0+IXSQAKBKYQqal+fu05f9r4Od8UtM7xVlTkvezIbBaLILF0OP+DzvocuEkbJCyBWHugrNBD0GQ4Pa1E0DHwVWvtDrXgf6SUqTP35dIE5QG9fx71hOPdiPfLWAl/+Cqg1iQgIbITiBOqvwSybkfV2VEeS50kOZJnh+ROo1NMa4nkWbDy5vVwfPsf4Vq4ewgnHRmhx1FfVtCgyaTA4vJdsOEJaj7Wt9Vl+MtT66xc8tRpxPXy7Gw+f/S/SlinE5q3NTJyFGZ3v8tGCupoFq1zmsDO0UNFN3GFNrHtJehsmlo/m+0+jejocng==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=zrXb9HGKOcCyaAVd7Y8d8Hf7BvLnwzvRwEFb4ZLIf6U=;
- b=Hs+8k2lEMV1DW4lkZU6yzxwHDo0UIHYoeFi/WtAx6HO2ZVusogzgkFC9ooIBQ2fdjMbK38rKwTQNeY4nHY6lcvU3kr1KIqippH5qQAcKWrY7qaPR8F5i+jgyw0TvC2zHdFJcE78FDq7XwH8zZnk8B6O4tBDl3pUgw850/ulJdoDFZ1oDUBAmy58HpdwxRGybaNJiP7c6qskQ+Wwi1IDZZUocgOjpjZ6DO9iTVDzA0pvBx6l/fQpxpQ/++fxPObAf6GOVbgD/rJr2+07gesPWew2OlubenBQbXz+Un2QzEocfN9nIE+5OL88x6F7eq6hULuI+3RosnocRyKrYa/5/uw==
+ bh=dLyZBwhM92h0JWfLw2UHz4O+iHVs64nsAhos2AuZdAc=;
+ b=Bbi+IcyggR/aD86wxVDj0lNBf67u+AMrkgt3BkOlUdc1VEPE6w66OTohCjty1DFRSPl7RsuUoZJ5yRvvwXnXUnzgoTEQ2hIjFEzaxHz0TYTcZlEdq/CPWunGF8vsiu0jm42z1KVtoiJ4nQ6fcXafzqvamUKpv/ebWC1sqlE/EBkAY6FfaGtglf7NN0e2h6Eh+8Okl2HJmigQPCaakfmrESpDIIFyXVkt+XYxnPHeszxzFq1hHvSXKiCyNoVVBBueg/nM7j3u/Hdo7kFaw6NopzcHOcZR4ZvreD/xw0WZpt4fOgGA301wsLtjtI5yfFY4WJ3k2WaVG4OXMxIqHdtFyg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=intel.com; dmarc=pass action=none header.from=intel.com;
- dkim=pass header.d=intel.com; arc=none
-Received: from IA1PR11MB6418.namprd11.prod.outlook.com (2603:10b6:208:3aa::18)
- by SA2PR11MB5147.namprd11.prod.outlook.com (2603:10b6:806:118::19) with
+ smtp.mailfrom=windriver.com; dmarc=pass action=none
+ header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
+Received: from DM4PR11MB5550.namprd11.prod.outlook.com (2603:10b6:5:38b::24)
+ by BN9PR11MB5516.namprd11.prod.outlook.com (2603:10b6:408:105::13) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6631.29; Fri, 28 Jul
- 2023 01:12:33 +0000
-Received: from IA1PR11MB6418.namprd11.prod.outlook.com
- ([fe80::1b87:b80a:6e3b:c2af]) by IA1PR11MB6418.namprd11.prod.outlook.com
- ([fe80::1b87:b80a:6e3b:c2af%4]) with mapi id 15.20.6631.026; Fri, 28 Jul 2023
- 01:12:32 +0000
-From: "Mittal, Anuj" <anuj.mittal@intel.com>
-To: "narpat.mali@windriver.com" <narpat.mali@windriver.com>,
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>, "akuster808@gmail.com"
-	<akuster808@gmail.com>
-CC: "hari.gpillai@windriver.com" <hari.gpillai@windriver.com>
+ 2023 07:24:12 +0000
+Received: from DM4PR11MB5550.namprd11.prod.outlook.com
+ ([fe80::219e:cc26:ef6d:1b4a]) by DM4PR11MB5550.namprd11.prod.outlook.com
+ ([fe80::219e:cc26:ef6d:1b4a%4]) with mapi id 15.20.6631.026; Fri, 28 Jul 2023
+ 07:24:11 +0000
+Message-ID: <5a40fd1b-c1e4-e81e-75ea-f3c84e883acc@windriver.com>
+Date: Fri, 28 Jul 2023 12:51:26 +0530
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+ Thunderbird/102.13.0
 Subject: Re: [oe] [meta-python][kirkstone][PATCH 1/1] python3-django: fix
  CVE-2023-36053
-Thread-Topic: [oe] [meta-python][kirkstone][PATCH 1/1] python3-django: fix
- CVE-2023-36053
-Thread-Index: AQHZwKaso12R50x7PkSNUfbHm5sEE6/OX9sA
-Date: Fri, 28 Jul 2023 01:12:32 +0000
-Message-ID: <540beea565ee4cd2e266557236a6c03ad0fe5d9e.camel@intel.com>
+To: "Mittal, Anuj" <anuj.mittal@intel.com>,
+        "openembedded-devel@lists.openembedded.org"
+ <openembedded-devel@lists.openembedded.org>,
+        "akuster808@gmail.com" <akuster808@gmail.com>
+Cc: "hari.gpillai@windriver.com" <hari.gpillai@windriver.com>
 References: <20230727162141.3895146-1-narpat.mali@windriver.com>
-In-Reply-To: <20230727162141.3895146-1-narpat.mali@windriver.com>
-Accept-Language: en-US
+ <540beea565ee4cd2e266557236a6c03ad0fe5d9e.camel@intel.com>
 Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-user-agent: Evolution 3.48.4 (3.48.4-1.fc38) 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=intel.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: IA1PR11MB6418:EE_|SA2PR11MB5147:EE_
-x-ms-office365-filtering-correlation-id: e29846af-0baa-40bb-164b-08db8f07b89b
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: ErnXf81E3D4J7Mdfe0wYrKiPtFiWkwSJ8g34lPdXztb4yRH8JRucEJj3XaQ03I8K72x5eHMVXqtlPDwUcLUsLTvz960fvaIi9UPrlKtR7AiGWp6uWOzBDHudye96ArnFIH/s82ED8hhSwH5ZXRfx9Kvuw6ZYev9WOF94oTfjRIB0tEW8lEcvNIQzIZ2Wa2ITHUw6NK/FN2pIdhMM+e8KgO4xbTDgyvpMDVIlvPdz1wd97B1Si+/V3juxKHl+lTOq6gbMw4gDD8hA9o8+wr6PVPFSDKv67Cl9sXLdm+slYxs3ECUza//OV84+OJ5QqRWfgjirGYklF1DTaCmILskoIxGz6N6WOiVEgug4V9ICkecLk4PW6WyyDn3pmTFYLd5LakjzkiaqzrmwJyZZyrQ1gXLW5pTqrXohVQQDHNg99crmw1sWKPwvd1uXuWQCVSwfnfA4IQj3LqaMo2Dk4OtjcCMBZTJUBhwpCrgCbcasLx6E9oltTF5EY9NuSwu4NIQsGugl+EmEG6fDSkHUZ1cLRtYKDxFkt0Gjs7zWi0mELAN6cWr2IDPoL4f0AkVzUZQhED9DWpRreZvNsQlflEWFHpEmBsYZnMHONlpTxS4aGc2QHz10x6S3k+IfyPiCY1njEoyR0IjosXvXAI640dmvuA==
-x-forefront-antispam-report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:IA1PR11MB6418.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230028)(376002)(396003)(346002)(366004)(136003)(39860400002)(451199021)(66899021)(110136005)(6486002)(966005)(6512007)(26005)(83380400001)(478600001)(36756003)(86362001)(38070700005)(2906002)(30864003)(66476007)(66556008)(2616005)(66446008)(186003)(6506007)(8936002)(71200400001)(64756008)(122000001)(38100700002)(82960400001)(4326008)(316002)(76116006)(8676002)(41300700001)(66946007)(91956017)(5660300002);DIR:OUT;SFP:1102;
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?utf-8?B?KzRXa0JrWFU5VkxROUhKbFFhUk9DZ043b3JvWllNeGRjYmpHa0g5Z2U3c2pZ?=
- =?utf-8?B?WGkzeU5GWk1UbHhqVkhQK0FFYktQR2lkVjFIVWRSdk9GT1o3MzFsS2lsQXBk?=
- =?utf-8?B?VTFxTXMxYmJZZUN3aWI4eWZ0ZEZqS0dDcUpzMWFFQjl0RXdJeXowOXloa2xQ?=
- =?utf-8?B?M0VtNE5HbGIraDhaMkp5WGVKR0tlZUY0bnYrcy9yelFJWUZVUXNucjdpVGU1?=
- =?utf-8?B?b2dGcTBicmxwRndXT2cxbUE3S0NrUGFIK0ppUnhnMTVDMUdidDZtT3l5czBz?=
- =?utf-8?B?LzEvN2ZKWCtRVEpkTUc0OUpyQmdGMUl5bVMxZXZTcW9TUmxoM0RWaHpxdVJ3?=
- =?utf-8?B?ZGpRS05rOHVkWEh5MlZ6THI4bUlrWXFnWi9WYXptQ1c2Z3Y5NXFvc3E3MmI5?=
- =?utf-8?B?SEJlaFFjYVRpalZqRXB0TjkwbkQwUytVN1ozVVEwMk5zQ1IyZFlnMmZXb1NV?=
- =?utf-8?B?U2FOZlo3a1B1dGVqUCs4QzFvdGQrbkg0WHJ6ZmgyVm9FSmFiM1F0aUszWmZk?=
- =?utf-8?B?YklPRG5RR1VqR3BaM0xnMWZpRXp3SHovSVpzWTV1bUgwNDhvSk1lM01SNkNl?=
- =?utf-8?B?V09YeFZIcjRjU0Zlcm93dzRrMXNqT2p6REJBcFlGZExtSEYyVmhUK012T1Jl?=
- =?utf-8?B?Q3ZXM3JQWEM0TFZoeUxOWDNObzYwRWI2aFVuVGdwS3A0WENkdXFhVFhZa2VP?=
- =?utf-8?B?RlhaL283aXVWc2xzbmtiRHNoOTdBZFJxVzVjcmlhcEVDbHBiM2s1NFF3enk1?=
- =?utf-8?B?MFlCcWxXVDAvVHJhdUQxYTNSL2lxeVpuLzZEM1o0UlluS1RjeThwNXBKTjhX?=
- =?utf-8?B?Y1dTYldSUmh4TmdzR1p4TFJxeDU5QkRzVGR3RHFMRWZkcVl3dzFONzNWY3Jy?=
- =?utf-8?B?S1dhbjJxZDFIcGYxOG0xb0xVcERmNXlYWEcwK2xNS291TTdkU25oMm5ndmVT?=
- =?utf-8?B?bngwK2xjZVFnVVNnejZMc28xSkNZZkp0YXovMXlSbVoxRGI2RVRNNTA1dk43?=
- =?utf-8?B?Y0g2VUpERFBNSFZvMkxHdlZIaG5rZ0JNcU4wREtPclZMR2Z1OGJPRnBQbVJn?=
- =?utf-8?B?M0l1OWhiVEpDVEY5YVUrQ3FkNnpYVkUrNGtlaVB2NUQ1ay9xUEFHS3FIbmti?=
- =?utf-8?B?eWhsemdtLzJ4ZmN5N3RFZ09HMXFuSmwwYkNMQ3N1ZjBMZGNVWmR4N1NKQmRz?=
- =?utf-8?B?OGlFV0I5QllJR3lkbDVUQ1FWUjhlME9mQ1JPRU4xalp2bmIyMGM3ZVZiTFNJ?=
- =?utf-8?B?c3VNMU9BeU1LdS8rOXgzOXR6VHlnWVNZREc4ZjVOenJwNll1SW9DcUFJUHZz?=
- =?utf-8?B?VWRra2UxZlp1Q3hFTmIrWHVmR0QvekZUWWg2dHNqTXMxdnlFdy9YRU0wd2Zx?=
- =?utf-8?B?RW42eVdvUnJWalZQZDRJcE9yRDgwV2RYTlJOT29JVFdqWmZPMUpCbUY0cGZO?=
- =?utf-8?B?dEg2ejBzdzc0MG0wbDh3Y0JWc1RTbG5EZEdiWUduVkt3VGgyZEVYNURMWG9J?=
- =?utf-8?B?UzAvV1A4TWsrTG5OWUZITzZ6SkNuOE9HNkxLa0JHa0tCWGJ0RUUrb1BJSmhV?=
- =?utf-8?B?c0g2RWFiMmZONUpjWC9zRXVibkxwelF1QncrTHJaQ2wzekEvc2dCMC9NZW9T?=
- =?utf-8?B?Y1J5bTVHc2t5N2l4QmptUE5yamRiSmVwOEh5ZFBGY2k3cW1UcE8xUXpYdzVx?=
- =?utf-8?B?OXFzc04rTVBBellkbU1KT2xpTGIvNzg3R0tjcHE0N3BpYUtUMFRVN0dYSmQv?=
- =?utf-8?B?RzIzYTZFZlhRQ2hqcTVzelNkM0tYVTJDQXdwMkk5ZGJKYm14WVNTblFBbjZq?=
- =?utf-8?B?dThGd2o4TVE2MUowNVNTdHlVMEhRZWdEOE01L2kya2dHOFBTRWI0eEhBcElZ?=
- =?utf-8?B?SWxUT0lPT3BrZElsTnNueDZHZ3puSkR2S3dlYkdSMmthNTRKbVY2WEdUb3RH?=
- =?utf-8?B?WWpkWTZZa1VCRzdpN2FjTXlnYUExWnZVZENGUVB2SjRyTDNTdkZQaHhxTjh1?=
- =?utf-8?B?blEyRzE4aTVZOWk1b0ttZUJKQmx3bWRSaUxuNEVRMEVDZDYxTGcwMHI4bXMr?=
- =?utf-8?B?UWx3cmZkUTFma1pBWG0yZThHUVN1WEdRK0p4NXdaUm5Kekg1MUR3akNPUGg1?=
- =?utf-8?B?bEQvZnN2enp3cWlkR1RWem02TFNpbzhzbW9lMTRhVmZCZDRYT3BlUVRtS2hl?=
- =?utf-8?B?MlE9PQ==?=
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <AFB99EE798424B499CEE97E12CF6CE98@namprd11.prod.outlook.com>
-Content-Transfer-Encoding: base64
+From: "Mali, Narpat" <narpat.mali@windriver.com>
+In-Reply-To: <540beea565ee4cd2e266557236a6c03ad0fe5d9e.camel@intel.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+X-ClientProxiedBy: BY5PR17CA0061.namprd17.prod.outlook.com
+ (2603:10b6:a03:167::38) To DM4PR11MB5550.namprd11.prod.outlook.com
+ (2603:10b6:5:38b::24)
 MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DM4PR11MB5550:EE_|BN9PR11MB5516:EE_
+X-MS-Office365-Filtering-Correlation-Id: 5e14b683-f2a2-42fe-55b0-08db8f3ba3bf
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 
+	Kd5UjHKviNIaNlNOPI5UXRNDuA/47NGmJcaTe54OIbowumpbyi2YIwkrRxIOCDgEezQO0UYBSkBWUCC2wpU8ko53mOtBw9VZP9KFltoHe+XcX9DJuRzR8E+0qaFLtrYBmxxmxxZLNbNTPxCuStvPKumCFhfUmVKVI0vx7GQ8iPJ3OWgBd7l0kRopkjEJNqPhtAwP17DpF7yVWNXEbYLTy9rEM38GJ4Q/H5WKB4FrZPPeNrd6V4stduTkNapyksyR78LgOO5ZmOyhsJOAYTs4pwHk2Q5tlJ69DyQDq0KL+o7PkUbGu0QWy3EvdwPS9daD2NEOKEdS1ae4k8ggfta0YP8itKkx7Wo94bqBvQ2BruG9wW1D28ereagYSxlMKUZASwMT6shKeAJ1gvoXvDZ+9Wm2BjHg/2YPKvVB/YlX39M5FAqJoHccf+cF/OYaKCeUMBgovNW3IUu59WEpWZSl1vQYwC35ts67cshUHFUnnu1pL2M9Kw+frwexkp7d+td0M1pJ0HZrxxP4xUp4YCNf0YD5ZQggBDstwZUlf4MJHJYm3ftf6sm9PsE3s57rGpemUbrbCM0HHBfDMUXO/BOa1+9zLVLXxkAvUs1LPsTuH3u+ntEWCRqF3VxWWoNAFqaJK6Go8OaD7U4RIJMXF89nMtb2348ngu8qc7WyrhmvXq0=
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM4PR11MB5550.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230028)(4636009)(346002)(136003)(39850400004)(366004)(376002)(396003)(451199021)(83380400001)(66899021)(2906002)(110136005)(2616005)(6666004)(30864003)(6486002)(55236004)(53546011)(26005)(6512007)(86362001)(966005)(478600001)(38100700002)(5660300002)(41300700001)(31686004)(66476007)(66946007)(6506007)(186003)(66556008)(31696002)(316002)(8676002)(36756003)(8936002)(4326008)(107886003)(43740500002)(45980500001);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?utf-8?B?VjBDT2pldXdUcTIrR2NOL3d5emgrY3RRaDRIRWI0TmxnaUI2OVRzQ0kwUUVo?=
+ =?utf-8?B?cDdzeDN1Z0o0MVQ2d0pMZDIrckxPL1ZIZEREK1Nkcm03ZXFTeFIrcHAvNnRN?=
+ =?utf-8?B?Zy9kSmo5anVCKzNkR0hmb3N3aUkrVmpyc2cyT1lpakFLeDFQdWRLVTBlSUNB?=
+ =?utf-8?B?ZGNwc2M2VWM5TCtkZzIvUjNXM2xtcHd4RVBYUGFzQUhrTktqU0xaQ2ZpYnBh?=
+ =?utf-8?B?SFNPK3kxYmZNTy8yczVBMzFESXhtRThjbXdtOHcrNjVQTnJpc3NhN2ZGcnNH?=
+ =?utf-8?B?Y3FDUC9Ta3JMTGNLWExraUZJc2hQRkZMQzBpd2dzMTRjOWUxQ0hMQ205aWwr?=
+ =?utf-8?B?NmVkSjYyZUdZUjYzdUhaZUsrRHhYVWFVcmVHSWtBeGpBZEM2czVWVE1mK2hj?=
+ =?utf-8?B?RG8xTTh0OWhoZ1FoUko4cnNuVnNLNlEyWVU3ckl2dTBaRy9mTVNEaGdmZnNj?=
+ =?utf-8?B?RE9PRkN1cXIzazRPV1dXV3hlSHprTHA0OGVBRkUwNDd2SVRjVldYcmVFcGFJ?=
+ =?utf-8?B?azVkbG5BeTFHVXMxVENRY0hja3FVV0t2REo0UkdTdVZDTWVFZVZ6amI5dzdM?=
+ =?utf-8?B?YzZIY0ZVbU5Ca29xVDJyVGNuWTlOZUdFcDJNa2p0MTdFL3JrTnhLOTB1L1E1?=
+ =?utf-8?B?SnhMM0ZSZnhOYUlkQzZaTTZvL1owRVFPTlhpdlRGaCt1Z3dPMEtjWXB0Tjl1?=
+ =?utf-8?B?bnNBM3JKYkx5UDFyYzA5ZHNKakdPdDRhb3B3Q3kxdGpCeUlOdmRzZHlxd2h4?=
+ =?utf-8?B?SjdVU1poblRXZGE5STFpdU9aYzlEeHU5VUNGY3hQODlvTkV4NVhjZFoySlJu?=
+ =?utf-8?B?dlNQdDdQNUYwalFZM3h0YXQxMHRzdVY2eXA3RGtBWWc4SkROak5nSFB2QXZL?=
+ =?utf-8?B?Z1J0QlNqQldENlVJSGUvTUYxQzZGUEgzYmRzL2UvSEJ3aXo5T0RPMGdRb0Q2?=
+ =?utf-8?B?d0ZUalVYMW1ENTBlcW1QQ2NBbkNRd2o3SGxKK0VZRmZiVVpaYXdUbTdPYTJi?=
+ =?utf-8?B?UUFlVUhRcVVFTkNrbWNobmFNVHE1eWdUOFA3ZjlHVG9pZllJM2lRSlJ2ODBD?=
+ =?utf-8?B?Q0puVXI2bEVmMlhwR0VGNEN0OU56R1VUYkEyQnVqSTcyeHZXd0czZmNRcENV?=
+ =?utf-8?B?Ym45Z2xmendGZ29UeEwwN3ZPQVkzQTZwM3hSTmJkQUUzbytUMExUbWRVbFFU?=
+ =?utf-8?B?aTlPZXNldFNSTnRaanRoekpxVUFxZGVXTlA3NjRrTWdnb1dZOXI3MHRITzhB?=
+ =?utf-8?B?c3h2ZFg1amVEeDBHWmh6UEFqamc2eTRJbEJRNEwzaVpFVVJTRThrMUN3aGpB?=
+ =?utf-8?B?bEdZQjNoZGxCMThwODJNb0pzTk1RZzJ1eHhIckMvOEpTZzlkVjRSdzdEaFJX?=
+ =?utf-8?B?cUhzbkVaQVNrUDd2Y3ZrZSttcXFjcVBZZ3RNMFY0WVM4Nno1cE9qdFVQdU14?=
+ =?utf-8?B?elhoSkFPYklMTWRpS2VOZ0xSUThQSmVqSWQxQ1FPVXNqR3IxaDBhUGpvL3Iw?=
+ =?utf-8?B?MnJxbmlnZDBZVkJIZlpsMU5hQUJwMkVrc2JZbU5zK2xPZzFLU2lMQWZnR21s?=
+ =?utf-8?B?V3BncDM0WWVjdE05alVVQXZXRnpkVTBtaVFrTGFhdVdJUkRZYVZudFRQT3VZ?=
+ =?utf-8?B?M3d1QkVQK1EwY2ZNNnB5SmF1NkxibmpNMTM2VWJidGdNUUZyeUxzNXdCclpR?=
+ =?utf-8?B?SXVSZTlWQ214RkZvYlIrWkNVaGkyQmxLNUFNNUUxa2ZwUHRPWXFwc1p3alA3?=
+ =?utf-8?B?eEhqVG13TnpacnF1RkdHU2xwbEhjdXJoWmovTXlRbUloQ254dFNaSDdwZHF3?=
+ =?utf-8?B?UTkyNDY2MTZWZWhKeEh5WkEwQ0NCTkRRSUp1N3EzSjJGQUVicDdtdldrRC80?=
+ =?utf-8?B?SVE3MVZHSldBQjc1K1RxSDhmbjFvNWxDK3FqRDFCd2FnU2xWZllnWGVEQjRs?=
+ =?utf-8?B?aGwvTUV5WGRDZ1JqMjZVYkp0K0MvTlYxek15ZExaTmhSM0VINEhISmt6YzZq?=
+ =?utf-8?B?MjFxTXo3SERtb0htZHBFR2RlV1Zua2xIUGZKanR4elBWTmlzQ0dMWmFOV1B6?=
+ =?utf-8?B?S1NEby9JcThXTXgxR21xTmx4VE9ERmRkb1dESTJnVHRJQkpmenJweXVxa1lx?=
+ =?utf-8?B?UWVST2hQQjdCdlAzY1lKRFBjdnFlZHROTW0rMnFkTHltbmE5eFpRU2lKTGEz?=
+ =?utf-8?B?R1E9PQ==?=
+X-OriginatorOrg: windriver.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 5e14b683-f2a2-42fe-55b0-08db8f3ba3bf
+X-MS-Exchange-CrossTenant-AuthSource: DM4PR11MB5550.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: IA1PR11MB6418.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: e29846af-0baa-40bb-164b-08db8f07b89b
-X-MS-Exchange-CrossTenant-originalarrivaltime: 28 Jul 2023 01:12:32.7526
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Jul 2023 07:24:11.7723
  (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 46c98d88-e344-4ed4-8496-4ed7712e255d
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: 9h46EpK7G6ysKtoMpl7qdPlT2WsldSqGAA5xKCVDLudOMVsoAGayhfc4MHI/uCdIgdboYhr90dkhbDu4NFUG9A==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA2PR11MB5147
-X-OriginatorOrg: intel.com
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: Pb+LDjJfOryVrmgUDOs2ljfq9aCaF7iJrY/b8Itn3p8OhT4mPKvU3kBwhE6+mq+7zJwpZAcRahvtknNNQG1Alk/8J9PCNH36T3bWwVas+xM=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN9PR11MB5516
+X-Proofpoint-GUID: fn_93Cwe4euT6HUKpBvulx0mSkIoRa0d
+X-Proofpoint-ORIG-GUID: YgaAv5C1oV3ODgCvj-QgIrFWpueyt1kU
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.254,Aquarius:18.0.957,Hydra:6.0.591,FMLib:17.11.176.26
+ definitions=2023-07-27_10,2023-07-26_01,2023-05-22_02
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 adultscore=0 malwarescore=0
+ suspectscore=0 mlxlogscore=999 clxscore=1015 mlxscore=0 bulkscore=0
+ impostorscore=0 priorityscore=1501 lowpriorityscore=0 spamscore=0
+ phishscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.19.0-2306200000 definitions=main-2307280066
+Content-Transfer-Encoding: quoted-printable
+X-MIME-Autoconverted: from 8bit to quoted-printable by mx0a-0064b401.pphosted.com id 36S5o9UV022400
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 28 Jul 2023 01:13:03 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104063
+ <openembedded-devel@lists.openembedded.org>; Fri, 28 Jul 2023 07:24:25 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104064
 
-T24gVGh1LCAyMDIzLTA3LTI3IGF0IDE2OjIxICswMDAwLCBOYXJwYXQgTWFsaSB2aWENCmxpc3Rz
-Lm9wZW5lbWJlZGRlZC5vcmcgd3JvdGU6DQo+IEZyb206IE5hcnBhdCBNYWxpIDxuYXJwYXQubWFs
-aUB3aW5kcml2ZXIuY29tPg0KPiANCj4gSW4gRGphbmdvIDMuMiBiZWZvcmUgMy4yLjIwLCA0IGJl
-Zm9yZSA0LjEuMTAsIGFuZCA0LjIgYmVmb3JlIDQuMi4zLA0KPiBFbWFpbFZhbGlkYXRvcg0KPiBh
-bmQgVVJMVmFsaWRhdG9yIGFyZSBzdWJqZWN0IHRvIGEgcG90ZW50aWFsIFJlRG9TIChyZWd1bGFy
-IGV4cHJlc3Npb24NCj4gZGVuaWFsIG9mDQo+IHNlcnZpY2UpIGF0dGFjayB2aWEgYSB2ZXJ5IGxh
-cmdlIG51bWJlciBvZiBkb21haW4gbmFtZSBsYWJlbHMgb2YNCj4gZW1haWxzIGFuZCBVUkxzLg0K
-PiANCj4gU2luY2UsIHRoZXJlIGlzIG5vIHB0ZXN0IGF2YWlsYWJsZSBmb3IgcHl0aG9uMy1kamFu
-Z28gc28gaGF2ZSBub3QNCj4gdGVzdGVkIHRoZSBwYXRjaA0KPiBjaGFuZ2VzIGF0IHJ1bnRpbWUu
-DQo+IA0KPiBSZWZlcmVuY2VzOg0KPiBodHRwczovL2dpdGh1Yi5jb20vYWR2aXNvcmllcy9HSFNB
-LWpoM3ctNHZ2Zi1tamdyDQo+IGh0dHBzOi8vZ2l0aHViLmNvbS9kamFuZ28vZGphbmdvL2NvbW1p
-dC80NTRmMmZiOTM0MzdmOTg5MTcyODMzMzYyMDFiNDA0ODI5M2Y3NTgyDQo+IA0KPiBTaWduZWQt
-b2ZmLWJ5OiBOYXJwYXQgTWFsaSA8bmFycGF0Lm1hbGlAd2luZHJpdmVyLmNvbT4NCj4gLS0tDQo+
-IMKgLi4uL3B5dGhvbjMtZGphbmdvL0NWRS0yMDIzLTM2MDUzLnBhdGNowqDCoMKgwqDCoMKgIHwg
-MjYxDQo+ICsrKysrKysrKysrKysrKysrKw0KPiDCoC4uLi9weXRob24vcHl0aG9uMy1kamFuZ29f
-Mi4yLjI4LmJiwqDCoMKgwqDCoMKgwqDCoMKgwqAgfMKgwqAgNCArLQ0KPiDCoDIgZmlsZXMgY2hh
-bmdlZCwgMjY0IGluc2VydGlvbnMoKyksIDEgZGVsZXRpb24oLSkNCj4gwqBjcmVhdGUgbW9kZSAx
-MDA2NDQgbWV0YS1weXRob24vcmVjaXBlcy1kZXZ0b29scy9weXRob24vcHl0aG9uMy0NCj4gZGph
-bmdvL0NWRS0yMDIzLTM2MDUzLnBhdGNoDQo+IA0KPiBkaWZmIC0tZ2l0IGEvbWV0YS1weXRob24v
-cmVjaXBlcy1kZXZ0b29scy9weXRob24vcHl0aG9uMy1kamFuZ28vQ1ZFLQ0KPiAyMDIzLTM2MDUz
-LnBhdGNoIGIvbWV0YS1weXRob24vcmVjaXBlcy1kZXZ0b29scy9weXRob24vcHl0aG9uMy0NCj4g
-ZGphbmdvL0NWRS0yMDIzLTM2MDUzLnBhdGNoDQo+IG5ldyBmaWxlIG1vZGUgMTAwNjQ0DQo+IGlu
-ZGV4IDAwMDAwMDAwMDAuLmYwZWIzZDNhYzINCj4gLS0tIC9kZXYvbnVsbA0KPiArKysgYi9tZXRh
-LXB5dGhvbi9yZWNpcGVzLWRldnRvb2xzL3B5dGhvbi9weXRob24zLWRqYW5nby9DVkUtMjAyMy0N
-Cj4gMzYwNTMucGF0Y2gNCj4gQEAgLTAsMCArMSwyNjEgQEANCj4gK0Zyb20gYzJiODIxOTA4MGRm
-MWNmYTA3Y2Y5OGY1ODNkZWNlYmU2YTE1MmZhZCBNb24gU2VwIDE3IDAwOjAwOjAwDQo+IDIwMDEN
-Cj4gK0Zyb206IE1hcml1c3ogRmVsaXNpYWsgPGZlbGlzaWFrLm1hcml1c3pAZ21haWwuY29tPg0K
-PiArRGF0ZTogVGh1LCAyNyBKdWwgMjAyMyAxNDo1MTo0OCArMDAwMA0KPiArU3ViamVjdDogW1BB
-VENIXSBGaXhlZCBDVkUtMjAyMy0zNjA1Mw0KPiArDQo+ICstLSBQcmV2ZW50ZWQgcG90ZW50aWFs
-IFJlRG9TIGluIEVtYWlsVmFsaWRhdG9yIGFuZCBVUkxWYWxpZGF0b3IuDQo+ICsNCj4gK1RoYW5r
-cyBTZW9rY2hhbiBZb29uIGZvciByZXBvcnRzLg0KPiArDQo+ICtDVkU6IENWRS0yMDIzLTM2MDUz
-DQo+ICsNCj4gK1Vwc3RyZWFtLVN0YXR1czogQmFja3BvcnQNCj4gW2h0dHBzOi8vZ2l0aHViLmNv
-bS9kamFuZ28vZGphbmdvL2NvbW1pdC80NTRmMmZiOTM0MzdmOTg5MTcyODMzMzYyMDFiDQo+IDQw
-NDgyOTNmNzU4Ml0NCj4gKw0KPiArU2lnbmVkLW9mZi1ieTogTmFycGF0IE1hbGkgPG5hcnBhdC5t
-YWxpQHdpbmRyaXZlci5jb20+DQo+ICstLS0NCj4gKyBkamFuZ28vY29yZS92YWxpZGF0b3JzLnB5
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB8wqAgNyArKysrKy0tDQo+
-ICsgZGphbmdvL2Zvcm1zL2ZpZWxkcy5wecKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqAgfMKgIDMgKysrDQo+ICsgZG9jcy9yZWYvZm9ybXMvZmllbGRzLnR4dMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgfMKgIDQgKysrKw0KPiArIGRv
-Y3MvcmVmL3ZhbGlkYXRvcnMudHh0wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqAgfCAxOQ0KPiArKysrKysrKysrKysrKysrKystDQo+ICsgZG9jcy9yZWxlYXNlcy8y
-LjIuMjgudHh0wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHzCoCA5
-ICsrKysrKysrKw0KPiArIC4uLi9maWVsZF90ZXN0cy90ZXN0X2VtYWlsZmllbGQucHnCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgIHzCoCA1ICsrKystDQo+ICsgdGVzdHMvZm9ybXNfdGVzdHMvdGVzdHMv
-dGVzdF9mb3Jtcy5wecKgwqDCoMKgwqDCoMKgwqAgfCAxOSArKysrKysrKysrKysrLS0tDQo+IC0t
-LQ0KPiArIHRlc3RzL3ZhbGlkYXRvcnMvdGVzdHMucHnCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgIHwgMTEgKysrKysrKysrKysNCj4gKyA4IGZpbGVzIGNoYW5nZWQsIDY3
-IGluc2VydGlvbnMoKyksIDEwIGRlbGV0aW9ucygtKQ0KPiArDQo+ICtkaWZmIC0tZ2l0IGEvZGph
-bmdvL2NvcmUvdmFsaWRhdG9ycy5weSBiL2RqYW5nby9jb3JlL3ZhbGlkYXRvcnMucHkNCj4gK2lu
-ZGV4IDJkYTA2ODguLjBkNTg2NDIgMTAwNjQ0DQo+ICstLS0gYS9kamFuZ28vY29yZS92YWxpZGF0
-b3JzLnB5DQo+ICsrKysgYi9kamFuZ28vY29yZS92YWxpZGF0b3JzLnB5DQo+ICtAQCAtMTAyLDYg
-KzEwMiw3IEBAIGNsYXNzIFVSTFZhbGlkYXRvcihSZWdleFZhbGlkYXRvcik6DQo+ICvCoMKgwqDC
-oCBtZXNzYWdlID0gXygnRW50ZXIgYSB2YWxpZCBVUkwuJykNCj4gK8KgwqDCoMKgIHNjaGVtZXMg
-PSBbJ2h0dHAnLCAnaHR0cHMnLCAnZnRwJywgJ2Z0cHMnXQ0KPiArwqDCoMKgwqAgdW5zYWZlX2No
-YXJzID0gZnJvemVuc2V0KCdcdFxyXG4nKQ0KPiArK8KgwqDCoCBtYXhfbGVuZ3RoID0gMjA0OA0K
-PiArDQo+ICvCoMKgwqDCoCBkZWYgX19pbml0X18oc2VsZiwgc2NoZW1lcz1Ob25lLCAqKmt3YXJn
-cyk6DQo+ICvCoMKgwqDCoMKgwqDCoMKgIHN1cGVyKCkuX19pbml0X18oKiprd2FyZ3MpDQo+ICtA
-QCAtMTA5LDcgKzExMCw3IEBAIGNsYXNzIFVSTFZhbGlkYXRvcihSZWdleFZhbGlkYXRvcik6DQo+
-ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgc2VsZi5zY2hlbWVzID0gc2NoZW1lcw0KPiArDQo+
-ICvCoMKgwqDCoCBkZWYgX19jYWxsX18oc2VsZiwgdmFsdWUpOg0KPiArLcKgwqDCoMKgwqDCoMKg
-IGlmIGlzaW5zdGFuY2UodmFsdWUsIHN0cikgYW5kDQo+IHNlbGYudW5zYWZlX2NoYXJzLmludGVy
-c2VjdGlvbih2YWx1ZSk6DQo+ICsrwqDCoMKgwqDCoMKgwqAgaWYgbm90IGlzaW5zdGFuY2UodmFs
-dWUsIHN0cikgb3IgbGVuKHZhbHVlKSA+DQo+IHNlbGYubWF4X2xlbmd0aDoNCg0KVGhpcyBzZWVt
-cyBpbmNvcnJlY3QgLi4uIFlvdSBhcmUgcmV2ZXJ0aW5nIHBhcnRzIG9mIHRoaXMgZml4Og0KDQpo
-dHRwczovL2dpdGh1Yi5jb20vZGphbmdvL2RqYW5nby9jb21taXQvZDk1OTRjNGVhNTdiNjMwOWQ5
-Mzg3OTgwNTMwMmNlYzlhZTlmMjNmZg0KDQpUaGUgb3JpZ2luYWwgcGF0Y2ggaGVyZToNCg0KaHR0
-cHM6Ly9naXRodWIuY29tL2RqYW5nby9kamFuZ28vY29tbWl0LzQ1NGYyZmI5MzQzN2Y5ODkxNzI4
-MzMzNjIwMWI0MDQ4MjkzZjc1ODINCg0KaXNuJ3QgZG9pbmcgdGhhdC4NCg0KPiArwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgIHJhaXNlIFZhbGlkYXRpb25FcnJvcihzZWxmLm1lc3NhZ2UsIGNvZGU9
-c2VsZi5jb2RlKQ0KPiArwqDCoMKgwqDCoMKgwqDCoCAjIENoZWNrIGlmIHRoZSBzY2hlbWUgaXMg
-dmFsaWQuDQo+ICvCoMKgwqDCoMKgwqDCoMKgIHNjaGVtZSA9IHZhbHVlLnNwbGl0KCc6Ly8nKVsw
-XS5sb3dlcigpDQo+ICtAQCAtMTkwLDcgKzE5MSw5IEBAIGNsYXNzIEVtYWlsVmFsaWRhdG9yOg0K
-PiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHNlbGYuZG9tYWluX3doaXRlbGlzdCA9IHdoaXRl
-bGlzdA0KPiArDQo+ICvCoMKgwqDCoCBkZWYgX19jYWxsX18oc2VsZiwgdmFsdWUpOg0KPiArLcKg
-wqDCoMKgwqDCoMKgIGlmIG5vdCB2YWx1ZSBvciAnQCcgbm90IGluIHZhbHVlOg0KPiArK8KgwqDC
-oMKgwqDCoMKgICMgVGhlIG1heGltdW0gbGVuZ3RoIG9mIGFuIGVtYWlsIGlzIDMyMCBjaGFyYWN0
-ZXJzIHBlciBSRkMNCj4gMzY5Ng0KPiArK8KgwqDCoMKgwqDCoMKgICMgc2VjdGlvbiAzLg0KPiAr
-K8KgwqDCoMKgwqDCoMKgIGlmIG5vdCB2YWx1ZSBvciAnQCcgbm90IGluIHZhbHVlIG9yIGxlbih2
-YWx1ZSkgPiAzMjA6DQo+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgcmFpc2UgVmFsaWRhdGlv
-bkVycm9yKHNlbGYubWVzc2FnZSwgY29kZT1zZWxmLmNvZGUpDQo+ICsNCj4gK8KgwqDCoMKgwqDC
-oMKgwqAgdXNlcl9wYXJ0LCBkb21haW5fcGFydCA9IHZhbHVlLnJzcGxpdCgnQCcsIDEpDQo+ICtk
-aWZmIC0tZ2l0IGEvZGphbmdvL2Zvcm1zL2ZpZWxkcy5weSBiL2RqYW5nby9mb3Jtcy9maWVsZHMu
-cHkNCj4gK2luZGV4IGE5NzcyNTYuLmY5MzkzMzggMTAwNjQ0DQo+ICstLS0gYS9kamFuZ28vZm9y
-bXMvZmllbGRzLnB5DQo+ICsrKysgYi9kamFuZ28vZm9ybXMvZmllbGRzLnB5DQo+ICtAQCAtNTQy
-LDYgKzU0Miw5IEBAIGNsYXNzIEZpbGVGaWVsZChGaWVsZCk6DQo+ICvCoMKgwqDCoCBkZWYgX19p
-bml0X18oc2VsZiwgKiwgbWF4X2xlbmd0aD1Ob25lLCBhbGxvd19lbXB0eV9maWxlPUZhbHNlLA0K
-PiAqKmt3YXJncyk6DQo+ICvCoMKgwqDCoMKgwqDCoMKgIHNlbGYubWF4X2xlbmd0aCA9IG1heF9s
-ZW5ndGgNCj4gK8KgwqDCoMKgwqDCoMKgwqAgc2VsZi5hbGxvd19lbXB0eV9maWxlID0gYWxsb3df
-ZW1wdHlfZmlsZQ0KPiArK8KgwqDCoMKgwqDCoMKgICMgVGhlIGRlZmF1bHQgbWF4aW11bSBsZW5n
-dGggb2YgYW4gZW1haWwgaXMgMzIwIGNoYXJhY3RlcnMNCj4gcGVyIFJGQyAzNjk2DQo+ICsrwqDC
-oMKgwqDCoMKgwqAgIyBzZWN0aW9uIDMuDQo+ICsrwqDCoMKgwqDCoMKgwqAga3dhcmdzLnNldGRl
-ZmF1bHQoIm1heF9sZW5ndGgiLCAzMjApDQo+ICvCoMKgwqDCoMKgwqDCoMKgIHN1cGVyKCkuX19p
-bml0X18oKiprd2FyZ3MpDQo+ICsNCj4gK8KgwqDCoMKgIGRlZiB0b19weXRob24oc2VsZiwgZGF0
-YSk6DQo+ICtkaWZmIC0tZ2l0IGEvZG9jcy9yZWYvZm9ybXMvZmllbGRzLnR4dCBiL2RvY3MvcmVm
-L2Zvcm1zL2ZpZWxkcy50eHQNCj4gK2luZGV4IDZmNzZkMGQuLjNhODg4ZWYgMTAwNjQ0DQo+ICst
-LS0gYS9kb2NzL3JlZi9mb3Jtcy9maWVsZHMudHh0DQo+ICsrKysgYi9kb2NzL3JlZi9mb3Jtcy9m
-aWVsZHMudHh0DQo+ICtAQCAtNTkyLDYgKzU5MiwxMCBAQCBGb3IgZWFjaCBmaWVsZCwgd2UgZGVz
-Y3JpYmUgdGhlIGRlZmF1bHQgd2lkZ2V0DQo+IHVzZWQgaWYgeW91IGRvbid0IHNwZWNpZnkNCj4g
-K8KgwqDCoMKgIEhhcyB0d28gb3B0aW9uYWwgYXJndW1lbnRzIGZvciB2YWxpZGF0aW9uLCBgYG1h
-eF9sZW5ndGhgYCBhbmQNCj4gYGBtaW5fbGVuZ3RoYGAuDQo+ICvCoMKgwqDCoCBJZiBwcm92aWRl
-ZCwgdGhlc2UgYXJndW1lbnRzIGVuc3VyZSB0aGF0IHRoZSBzdHJpbmcgaXMgYXQgbW9zdA0KPiBv
-ciBhdCBsZWFzdCB0aGUNCj4gK8KgwqDCoMKgIGdpdmVuIGxlbmd0aC4NCj4gKyvCoMKgwqAgYGBl
-bXB0eV92YWx1ZWBgIHdoaWNoIHdvcmsganVzdCBhcyB0aGV5IGRvIGZvcg0KPiA6Y2xhc3M6YENo
-YXJGaWVsZGAuIFRoZQ0KPiArK8KgwqDCoCBgYG1heF9sZW5ndGhgYCBhcmd1bWVudCBkZWZhdWx0
-cyB0byAzMjAgKHNlZQ0KPiA6cmZjOmAzNjk2I3NlY3Rpb24tM2ApLg0KPiArKw0KPiArK8KgwqDC
-oCBUaGUgZGVmYXVsdCB2YWx1ZSBmb3IgYGBtYXhfbGVuZ3RoYGAgd2FzIGNoYW5nZWQgdG8gMzIw
-DQo+IGNoYXJhY3RlcnMuDQo+ICsNCj4gKyBgYEZpbGVGaWVsZGBgDQo+ICsgLS0tLS0tLS0tLS0t
-LQ0KPiArZGlmZiAtLWdpdCBhL2RvY3MvcmVmL3ZhbGlkYXRvcnMudHh0IGIvZG9jcy9yZWYvdmFs
-aWRhdG9ycy50eHQNCj4gK2luZGV4IDc1ZDEzOTQuLjQxNzhhMWYgMTAwNjQ0DQo+ICstLS0gYS9k
-b2NzL3JlZi92YWxpZGF0b3JzLnR4dA0KPiArKysrIGIvZG9jcy9yZWYvdmFsaWRhdG9ycy50eHQN
-Cj4gK0BAIC0xMjUsNiArMTI1LDExIEBAIHRvLCBvciBpbiBsaWV1IG9mIGN1c3RvbSBgYGZpZWxk
-LmNsZWFuKClgYA0KPiBtZXRob2RzLg0KPiArwqDCoMKgwqAgOnBhcmFtIGNvZGU6IElmIG5vdCBg
-YE5vbmVgYCwgb3ZlcnJpZGVzIDphdHRyOmBjb2RlYC4NCj4gK8KgwqDCoMKgIDpwYXJhbSB3aGl0
-ZWxpc3Q6IElmIG5vdCBgYE5vbmVgYCwgb3ZlcnJpZGVzIDphdHRyOmB3aGl0ZWxpc3RgLg0KPiAr
-DQo+ICsrwqDCoMKgIEFuIDpjbGFzczpgRW1haWxWYWxpZGF0b3JgIGVuc3VyZXMgdGhhdCBhIHZh
-bHVlIGxvb2tzIGxpa2UgYW4NCj4gZW1haWwsIGFuZA0KPiArK8KgwqDCoCByYWlzZXMgYSA6ZXhj
-OmB+ZGphbmdvLmNvcmUuZXhjZXB0aW9ucy5WYWxpZGF0aW9uRXJyb3JgIHdpdGgNCj4gKyvCoMKg
-wqAgOmF0dHI6YG1lc3NhZ2VgIGFuZCA6YXR0cjpgY29kZWAgaWYgaXQgZG9lc24ndC4gVmFsdWVz
-IGxvbmdlcg0KPiB0aGFuIDMyMA0KPiArK8KgwqDCoCBjaGFyYWN0ZXJzIGFyZSBhbHdheXMgY29u
-c2lkZXJlZCBpbnZhbGlkLg0KPiArKw0KPiArwqDCoMKgwqAgLi4gYXR0cmlidXRlOjogbWVzc2Fn
-ZQ0KPiArDQo+ICvCoMKgwqDCoMKgwqDCoMKgIFRoZSBlcnJvciBtZXNzYWdlIHVzZWQgYnkNCj4g
-K0BAIC0xNDUsMTMgKzE1MCwxNyBAQCB0bywgb3IgaW4gbGlldSBvZiBjdXN0b20gYGBmaWVsZC5j
-bGVhbigpYGANCj4gbWV0aG9kcy4NCj4gK8KgwqDCoMKgwqDCoMKgwqAgYGBbJ2xvY2FsaG9zdCdd
-YGAuIE90aGVyIGRvbWFpbnMgdGhhdCBkb24ndCBjb250YWluIGEgZG90DQo+IHdvbid0IHBhc3MN
-Cj4gK8KgwqDCoMKgwqDCoMKgwqAgdmFsaWRhdGlvbiwgc28geW91J2QgbmVlZCB0byB3aGl0ZWxp
-c3QgdGhlbSBhcyBuZWNlc3NhcnkuDQo+ICsNCj4gKyvCoMKgwqDCoMKgwqDCoCBJbiBvbGRlciB2
-ZXJzaW9ucywgdmFsdWVzIGxvbmdlciB0aGFuIDMyMCBjaGFyYWN0ZXJzIGNvdWxkDQo+IGJlDQo+
-ICsrwqDCoMKgwqDCoMKgwqAgY29uc2lkZXJlZCB2YWxpZC4NCj4gKysNCj4gKyBgYFVSTFZhbGlk
-YXRvcmBgDQo+ICsgLS0tLS0tLS0tLS0tLS0tLQ0KPiArDQo+ICsgLi4gY2xhc3M6OiBVUkxWYWxp
-ZGF0b3Ioc2NoZW1lcz1Ob25lLCByZWdleD1Ob25lLCBtZXNzYWdlPU5vbmUsDQo+IGNvZGU9Tm9u
-ZSkNCj4gKw0KPiArwqDCoMKgwqAgQSA6Y2xhc3M6YFJlZ2V4VmFsaWRhdG9yYCB0aGF0IGVuc3Vy
-ZXMgYSB2YWx1ZSBsb29rcyBsaWtlIGENCj4gVVJMLCBhbmQgcmFpc2VzDQo+ICstwqDCoMKgIGFu
-IGVycm9yIGNvZGUgb2YgYGAnaW52YWxpZCdgYCBpZiBpdCBkb2Vzbid0Lg0KPiArK8KgwqDCoCBh
-biBlcnJvciBjb2RlIG9mIGBgJ2ludmFsaWQnYGAgaWYgaXQgZG9lc24ndC4gVmFsdWVzIGxvbmdl
-cg0KPiB0aGFuDQo+ICsrwqDCoMKgIDphdHRyOmBtYXhfbGVuZ3RoYCBjaGFyYWN0ZXJzIGFyZSBh
-bHdheXMgY29uc2lkZXJlZCBpbnZhbGlkLg0KPiArDQo+ICvCoMKgwqDCoCBMb29wYmFjayBhZGRy
-ZXNzZXMgYW5kIHJlc2VydmVkIElQIHNwYWNlcyBhcmUgY29uc2lkZXJlZCB2YWxpZC4NCj4gTGl0
-ZXJhbA0KPiArwqDCoMKgwqAgSVB2NiBhZGRyZXNzZXMgKDpyZmM6YDM5ODYjc2VjdGlvbi0zLjIu
-MmApIGFuZCB1bmljb2RlIGRvbWFpbnMNCj4gYXJlIGJvdGgNCj4gK0BAIC0xNjgsNiArMTc3LDE0
-IEBAIHRvLCBvciBpbiBsaWV1IG9mIGN1c3RvbSBgYGZpZWxkLmNsZWFuKClgYA0KPiBtZXRob2Rz
-Lg0KPiArDQo+ICvCoMKgwqDCoMKgwqDCoMKgIC4uIF92YWxpZCBVUkkgc2NoZW1lczoNCj4gaHR0
-cHM6Ly93d3cuaWFuYS5vcmcvYXNzaWdubWVudHMvdXJpLXNjaGVtZXMvdXJpLXNjaGVtZXMueGh0
-bWwNCj4gKw0KPiArK8KgwqDCoMKgIC4uIGF0dHJpYnV0ZTo6IG1heF9sZW5ndGgNCj4gKysNCj4g
-KyvCoMKgwqDCoMKgwqDCoCBUaGUgbWF4aW11bSBsZW5ndGggb2YgdmFsdWVzIHRoYXQgY291bGQg
-YmUgY29uc2lkZXJlZA0KPiB2YWxpZC4gRGVmYXVsdHMNCj4gKyvCoMKgwqDCoMKgwqDCoCB0byAy
-MDQ4IGNoYXJhY3RlcnMuDQo+ICsrDQo+ICsrwqDCoMKgwqDCoMKgwqAgSW4gb2xkZXIgdmVyc2lv
-bnMsIHZhbHVlcyBsb25nZXIgdGhhbiAyMDQ4IGNoYXJhY3RlcnMgY291bGQNCj4gYmUNCj4gKyvC
-oMKgwqDCoMKgwqDCoCBjb25zaWRlcmVkIHZhbGlkLg0KPiArKw0KPiArIGBgdmFsaWRhdGVfZW1h
-aWxgYA0KPiArIC0tLS0tLS0tLS0tLS0tLS0tLQ0KPiArDQo+ICtkaWZmIC0tZ2l0IGEvZG9jcy9y
-ZWxlYXNlcy8yLjIuMjgudHh0IGIvZG9jcy9yZWxlYXNlcy8yLjIuMjgudHh0DQo+ICtpbmRleCA4
-NTRjNmIwLi5hYjQ4ODRiIDEwMDY0NA0KPiArLS0tIGEvZG9jcy9yZWxlYXNlcy8yLjIuMjgudHh0
-DQo+ICsrKysgYi9kb2NzL3JlbGVhc2VzLzIuMi4yOC50eHQNCj4gK0BAIC0zOCwzICszOCwxMiBA
-QCBrZWVwIHRoZSBvbGQgYmVoYXZpb3IsIHNldA0KPiBgYGFsbG93X211bHRpcGxlX3NlbGVjdGVk
-YGAgdG8gYGBUcnVlYGAuDQo+ICsNCj4gKyBGb3IgbW9yZSBkZXRhaWxzIG9uIHVzaW5nIHRoZSBu
-ZXcgYXR0cmlidXRlIGFuZCBoYW5kbGluZyBvZg0KPiBtdWx0aXBsZSBmaWxlcw0KPiArIHRocm91
-Z2ggYSBzaW5nbGUgZmllbGQsIHNlZSA6cmVmOmB1cGxvYWRpbmdfbXVsdGlwbGVfZmlsZXNgLg0K
-PiArKw0KPiArK0JhY2twb3J0aW5nIHRoZSBDVkUtMjAyMy0zNjA1MyBmaXggb24gRGphbmdvIDIu
-Mi4yOC4NCj4gKysNCj4gKytDVkUtMjAyMy0zNjA1MzogUG90ZW50aWFsIHJlZ3VsYXIgZXhwcmVz
-c2lvbiBkZW5pYWwgb2Ygc2VydmljZQ0KPiB2dWxuZXJhYmlsaXR5IGluIGBgRW1haWxWYWxpZGF0
-b3JgYC9gYFVSTFZhbGlkYXRvcmBgDQo+ICsrPT09PT09PT09PT09PT09PT09PT09PT09PT09PT09
-PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PQ0KPiA9PT09PT09PT09PT09PT09
-PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT0NCj4gKysNCj4gKytgYEVtYWlsVmFsaWRh
-dG9yYGAgYW5kIGBgVVJMVmFsaWRhdG9yYGAgd2VyZSBzdWJqZWN0IHRvIHBvdGVudGlhbA0KPiBy
-ZWd1bGFyDQo+ICsrZXhwcmVzc2lvbiBkZW5pYWwgb2Ygc2VydmljZSBhdHRhY2sgdmlhIGEgdmVy
-eSBsYXJnZSBudW1iZXIgb2YNCj4gZG9tYWluIG5hbWUNCj4gKytsYWJlbHMgb2YgZW1haWxzIGFu
-ZCBVUkxzLg0KPiArZGlmZiAtLWdpdCBhL3Rlc3RzL2Zvcm1zX3Rlc3RzL2ZpZWxkX3Rlc3RzL3Rl
-c3RfZW1haWxmaWVsZC5weQ0KPiBiL3Rlc3RzL2Zvcm1zX3Rlc3RzL2ZpZWxkX3Rlc3RzL3Rlc3Rf
-ZW1haWxmaWVsZC5weQ0KPiAraW5kZXggODI2NTI0YS4uZmU1YjY0NCAxMDA2NDQNCj4gKy0tLSBh
-L3Rlc3RzL2Zvcm1zX3Rlc3RzL2ZpZWxkX3Rlc3RzL3Rlc3RfZW1haWxmaWVsZC5weQ0KPiArKysr
-IGIvdGVzdHMvZm9ybXNfdGVzdHMvZmllbGRfdGVzdHMvdGVzdF9lbWFpbGZpZWxkLnB5DQo+ICtA
-QCAtOCw3ICs4LDEwIEBAIGNsYXNzIEVtYWlsRmllbGRUZXN0KEZvcm1GaWVsZEFzc2VydGlvbnNN
-aXhpbiwNCj4gU2ltcGxlVGVzdENhc2UpOg0KPiArDQo+ICvCoMKgwqDCoCBkZWYgdGVzdF9lbWFp
-bGZpZWxkXzEoc2VsZik6DQo+ICvCoMKgwqDCoMKgwqDCoMKgIGYgPSBFbWFpbEZpZWxkKCkNCj4g
-Ky3CoMKgwqDCoMKgwqDCoCBzZWxmLmFzc2VydFdpZGdldFJlbmRlcnNUbyhmLCAnPGlucHV0IHR5
-cGU9ImVtYWlsIiBuYW1lPSJmIg0KPiBpZD0iaWRfZiIgcmVxdWlyZWQ+JykNCj4gKyvCoMKgwqDC
-oMKgwqDCoCBzZWxmLmFzc2VydEVxdWFsKGYubWF4X2xlbmd0aCwgMzIwKQ0KPiArK8KgwqDCoMKg
-wqDCoMKgIHNlbGYuYXNzZXJ0V2lkZ2V0UmVuZGVyc1RvKA0KPiArK8KgwqDCoMKgwqDCoMKgwqDC
-oMKgwqAgZiwgJzxpbnB1dCB0eXBlPSJlbWFpbCIgbmFtZT0iZiIgaWQ9ImlkX2YiDQo+IG1heGxl
-bmd0aD0iMzIwIiByZXF1aXJlZD4nDQo+ICsrwqDCoMKgwqDCoMKgwqAgKQ0KPiArwqDCoMKgwqDC
-oMKgwqDCoCB3aXRoIHNlbGYuYXNzZXJ0UmFpc2VzTWVzc2FnZShWYWxpZGF0aW9uRXJyb3IsICIn
-VGhpcyBmaWVsZA0KPiBpcyByZXF1aXJlZC4nIik6DQo+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqAgZi5jbGVhbignJykNCj4gK8KgwqDCoMKgwqDCoMKgwqAgd2l0aCBzZWxmLmFzc2VydFJhaXNl
-c01lc3NhZ2UoVmFsaWRhdGlvbkVycm9yLCAiJ1RoaXMgZmllbGQNCj4gaXMgcmVxdWlyZWQuJyIp
-Og0KPiArZGlmZiAtLWdpdCBhL3Rlc3RzL2Zvcm1zX3Rlc3RzL3Rlc3RzL3Rlc3RfZm9ybXMucHkN
-Cj4gYi90ZXN0cy9mb3Jtc190ZXN0cy90ZXN0cy90ZXN0X2Zvcm1zLnB5DQo+ICtpbmRleCBkNGU0
-MjFkLi44ODkzZjg5IDEwMDY0NA0KPiArLS0tIGEvdGVzdHMvZm9ybXNfdGVzdHMvdGVzdHMvdGVz
-dF9mb3Jtcy5weQ0KPiArKysrIGIvdGVzdHMvZm9ybXNfdGVzdHMvdGVzdHMvdGVzdF9mb3Jtcy5w
-eQ0KPiArQEAgLTQyMiwxMSArNDIyLDE4IEBAIGNsYXNzIEZvcm1zVGVzdENhc2UoU2ltcGxlVGVz
-dENhc2UpOg0KPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGdldF9zcGFtID0gQm9vbGVhbkZp
-ZWxkKCkNCj4gKw0KPiArwqDCoMKgwqDCoMKgwqDCoCBmID0gU2lnbnVwRm9ybShhdXRvX2lkPUZh
-bHNlKQ0KPiArLcKgwqDCoMKgwqDCoMKgIHNlbGYuYXNzZXJ0SFRNTEVxdWFsKHN0cihmWydlbWFp
-bCddKSwgJzxpbnB1dCB0eXBlPSJlbWFpbCINCj4gbmFtZT0iZW1haWwiIHJlcXVpcmVkPicpDQo+
-ICsrwqDCoMKgwqDCoMKgwqAgc2VsZi5hc3NlcnRIVE1MRXF1YWwoDQo+ICsrwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoCBzdHIoZlsiZW1haWwiXSksDQo+ICsrwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCAn
-PGlucHV0IHR5cGU9ImVtYWlsIiBuYW1lPSJlbWFpbCIgbWF4bGVuZ3RoPSIzMjAiDQo+IHJlcXVp
-cmVkPicsDQo+ICsrwqDCoMKgwqDCoMKgwqAgKQ0KPiArwqDCoMKgwqDCoMKgwqDCoCBzZWxmLmFz
-c2VydEhUTUxFcXVhbChzdHIoZlsnZ2V0X3NwYW0nXSksICc8aW5wdXQNCj4gdHlwZT0iY2hlY2ti
-b3giIG5hbWU9ImdldF9zcGFtIiByZXF1aXJlZD4nKQ0KPiArDQo+ICvCoMKgwqDCoMKgwqDCoMKg
-IGYgPSBTaWdudXBGb3JtKHsnZW1haWwnOiAndGVzdEBleGFtcGxlLmNvbScsICdnZXRfc3BhbSc6
-DQo+IFRydWV9LCBhdXRvX2lkPUZhbHNlKQ0KPiArLcKgwqDCoMKgwqDCoMKgIHNlbGYuYXNzZXJ0
-SFRNTEVxdWFsKHN0cihmWydlbWFpbCddKSwgJzxpbnB1dCB0eXBlPSJlbWFpbCINCj4gbmFtZT0i
-ZW1haWwiIHZhbHVlPSJ0ZXN0QGV4YW1wbGUuY29tIiByZXF1aXJlZD4nKQ0KPiArK8KgwqDCoMKg
-wqDCoMKgIHNlbGYuYXNzZXJ0SFRNTEVxdWFsKA0KPiArK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqAg
-c3RyKGZbImVtYWlsIl0pLA0KPiArK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqAgJzxpbnB1dCB0eXBl
-PSJlbWFpbCIgbmFtZT0iZW1haWwiIG1heGxlbmd0aD0iMzIwIg0KPiB2YWx1ZT0idGVzdEBleGFt
-cGxlLmNvbSIgJw0KPiArK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqAgInJlcXVpcmVkPiIsDQo+ICsr
-wqDCoMKgwqDCoMKgwqAgKQ0KPiArwqDCoMKgwqDCoMKgwqDCoCBzZWxmLmFzc2VydEhUTUxFcXVh
-bCgNCj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBzdHIoZlsnZ2V0X3NwYW0nXSksDQo+ICvC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgJzxpbnB1dCBjaGVja2VkIHR5cGU9ImNoZWNrYm94IiBu
-YW1lPSJnZXRfc3BhbSINCj4gcmVxdWlyZWQ+JywNCj4gK0BAIC0yNzgwLDcgKzI3ODcsNyBAQCBH
-b29kIGx1Y2sgcGlja2luZyBhIHVzZXJuYW1lIHRoYXQgZG9lc24mIzM5O3QNCj4gYWxyZWFkeSBl
-eGlzdC48L3A+DQo+ICsgPG9wdGlvbiB2YWx1ZT0idHJ1ZSI+WWVzPC9vcHRpb24+DQo+ICsgPG9w
-dGlvbiB2YWx1ZT0iZmFsc2UiPk5vPC9vcHRpb24+DQo+ICsgPC9zZWxlY3Q+PC9saT4NCj4gKy08
-bGk+PGxhYmVsIGZvcj0iaWRfZW1haWwiPkVtYWlsOjwvbGFiZWw+IDxpbnB1dCB0eXBlPSJlbWFp
-bCINCj4gbmFtZT0iZW1haWwiIGlkPSJpZF9lbWFpbCI+PC9saT4NCj4gKys8bGk+PGxhYmVsIGZv
-cj0iaWRfZW1haWwiPkVtYWlsOjwvbGFiZWw+IDxpbnB1dCB0eXBlPSJlbWFpbCINCj4gbmFtZT0i
-ZW1haWwiIGlkPSJpZF9lbWFpbCIgbWF4bGVuZ3RoPSIzMjAiPjwvbGk+DQo+ICsgPGxpIGNsYXNz
-PSJyZXF1aXJlZCBlcnJvciI+PHVsIGNsYXNzPSJlcnJvcmxpc3QiPjxsaT5UaGlzIGZpZWxkIGlz
-DQo+IHJlcXVpcmVkLjwvbGk+PC91bD4NCj4gKyA8bGFiZWwgY2xhc3M9InJlcXVpcmVkIiBmb3I9
-ImlkX2FnZSI+QWdlOjwvbGFiZWw+IDxpbnB1dA0KPiB0eXBlPSJudW1iZXIiIG5hbWU9ImFnZSIg
-aWQ9ImlkX2FnZSIgcmVxdWlyZWQ+PC9saT4iIiINCj4gK8KgwqDCoMKgwqDCoMKgwqAgKQ0KPiAr
-QEAgLTI3OTYsNyArMjgwMyw3IEBAIEdvb2QgbHVjayBwaWNraW5nIGEgdXNlcm5hbWUgdGhhdCBk
-b2VzbiYjMzk7dA0KPiBhbHJlYWR5IGV4aXN0LjwvcD4NCj4gKyA8b3B0aW9uIHZhbHVlPSJ0cnVl
-Ij5ZZXM8L29wdGlvbj4NCj4gKyA8b3B0aW9uIHZhbHVlPSJmYWxzZSI+Tm88L29wdGlvbj4NCj4g
-KyA8L3NlbGVjdD48L3A+DQo+ICstPHA+PGxhYmVsIGZvcj0iaWRfZW1haWwiPkVtYWlsOjwvbGFi
-ZWw+IDxpbnB1dCB0eXBlPSJlbWFpbCINCj4gbmFtZT0iZW1haWwiIGlkPSJpZF9lbWFpbCI+PC9w
-Pg0KPiArKzxwPjxsYWJlbCBmb3I9ImlkX2VtYWlsIj5FbWFpbDo8L2xhYmVsPiA8aW5wdXQgdHlw
-ZT0iZW1haWwiDQo+IG5hbWU9ImVtYWlsIiBpZD0iaWRfZW1haWwiIG1heGxlbmd0aD0iMzIwIj48
-L3A+DQo+ICsgPHVsIGNsYXNzPSJlcnJvcmxpc3QiPjxsaT5UaGlzIGZpZWxkIGlzIHJlcXVpcmVk
-LjwvbGk+PC91bD4NCj4gKyA8cCBjbGFzcz0icmVxdWlyZWQgZXJyb3IiPjxsYWJlbCBjbGFzcz0i
-cmVxdWlyZWQiDQo+IGZvcj0iaWRfYWdlIj5BZ2U6PC9sYWJlbD4NCj4gKyA8aW5wdXQgdHlwZT0i
-bnVtYmVyIiBuYW1lPSJhZ2UiIGlkPSJpZF9hZ2UiIHJlcXVpcmVkPjwvcD4iIiINCj4gK0BAIC0y
-ODE1LDcgKzI4MjIsNyBAQCBHb29kIGx1Y2sgcGlja2luZyBhIHVzZXJuYW1lIHRoYXQgZG9lc24m
-IzM5O3QNCj4gYWxyZWFkeSBleGlzdC48L3A+DQo+ICsgPG9wdGlvbiB2YWx1ZT0iZmFsc2UiPk5v
-PC9vcHRpb24+DQo+ICsgPC9zZWxlY3Q+PC90ZD48L3RyPg0KPiArIDx0cj48dGg+PGxhYmVsIGZv
-cj0iaWRfZW1haWwiPkVtYWlsOjwvbGFiZWw+PC90aD48dGQ+DQo+ICstPGlucHV0IHR5cGU9ImVt
-YWlsIiBuYW1lPSJlbWFpbCIgaWQ9ImlkX2VtYWlsIj48L3RkPjwvdHI+DQo+ICsrPGlucHV0IHR5
-cGU9ImVtYWlsIiBuYW1lPSJlbWFpbCIgaWQ9ImlkX2VtYWlsIg0KPiBtYXhsZW5ndGg9IjMyMCI+
-PC90ZD48L3RyPg0KPiArIDx0ciBjbGFzcz0icmVxdWlyZWQgZXJyb3IiPjx0aD48bGFiZWwgY2xh
-c3M9InJlcXVpcmVkIg0KPiBmb3I9ImlkX2FnZSI+QWdlOjwvbGFiZWw+PC90aD4NCj4gKyA8dGQ+
-PHVsIGNsYXNzPSJlcnJvcmxpc3QiPjxsaT5UaGlzIGZpZWxkIGlzIHJlcXVpcmVkLjwvbGk+PC91
-bD4NCj4gKyA8aW5wdXQgdHlwZT0ibnVtYmVyIiBuYW1lPSJhZ2UiIGlkPSJpZF9hZ2UiIHJlcXVp
-cmVkPjwvdGQ+PC90cj4iIiINCj4gK0BAIC0zNDI4LDcgKzM0MzUsNyBAQCBHb29kIGx1Y2sgcGlj
-a2luZyBhIHVzZXJuYW1lIHRoYXQgZG9lc24mIzM5O3QNCj4gYWxyZWFkeSBleGlzdC48L3A+DQo+
-ICvCoMKgwqDCoMKgwqDCoMKgIGYgPSBDb21tZW50Rm9ybShkYXRhLCBhdXRvX2lkPUZhbHNlLA0K
-PiBlcnJvcl9jbGFzcz1EaXZFcnJvckxpc3QpDQo+ICvCoMKgwqDCoMKgwqDCoMKgIHNlbGYuYXNz
-ZXJ0SFRNTEVxdWFsKGYuYXNfcCgpLCAiIiI8cD5OYW1lOiA8aW5wdXQNCj4gdHlwZT0idGV4dCIg
-bmFtZT0ibmFtZSIgbWF4bGVuZ3RoPSI1MCI+PC9wPg0KPiArIDxkaXYgY2xhc3M9ImVycm9ybGlz
-dCI+PGRpdiBjbGFzcz0iZXJyb3IiPkVudGVyIGEgdmFsaWQgZW1haWwNCj4gYWRkcmVzcy48L2Rp
-dj48L2Rpdj4NCj4gKy08cD5FbWFpbDogPGlucHV0IHR5cGU9ImVtYWlsIiBuYW1lPSJlbWFpbCIg
-dmFsdWU9ImludmFsaWQiDQo+IHJlcXVpcmVkPjwvcD4NCj4gKys8cD5FbWFpbDogPGlucHV0IHR5
-cGU9ImVtYWlsIiBuYW1lPSJlbWFpbCIgdmFsdWU9ImludmFsaWQiDQo+IG1heGxlbmd0aD0iMzIw
-IiByZXF1aXJlZD48L3A+DQo+ICsgPGRpdiBjbGFzcz0iZXJyb3JsaXN0Ij48ZGl2IGNsYXNzPSJl
-cnJvciI+VGhpcyBmaWVsZCBpcw0KPiByZXF1aXJlZC48L2Rpdj48L2Rpdj4NCj4gKyA8cD5Db21t
-ZW50OiA8aW5wdXQgdHlwZT0idGV4dCIgbmFtZT0iY29tbWVudCIgcmVxdWlyZWQ+PC9wPiIiIikN
-Cj4gKw0KPiArZGlmZiAtLWdpdCBhL3Rlc3RzL3ZhbGlkYXRvcnMvdGVzdHMucHkgYi90ZXN0cy92
-YWxpZGF0b3JzL3Rlc3RzLnB5DQo+ICtpbmRleCAxZjA5ZmI1Li44MjA0ZjAwIDEwMDY0NA0KPiAr
-LS0tIGEvdGVzdHMvdmFsaWRhdG9ycy90ZXN0cy5weQ0KPiArKysrIGIvdGVzdHMvdmFsaWRhdG9y
-cy90ZXN0cy5weQ0KPiArQEAgLTU4LDYgKzU4LDcgQEAgVEVTVF9EQVRBID0gWw0KPiArDQo+ICvC
-oMKgwqDCoCAodmFsaWRhdGVfZW1haWwsICdleGFtcGxlQGF0bS4lcycgJSAoJ2EnICogNjQpLA0K
-PiBWYWxpZGF0aW9uRXJyb3IpLA0KPiArwqDCoMKgwqAgKHZhbGlkYXRlX2VtYWlsLCAnZXhhbXBs
-ZUAlcy5hdG0uJXMnICUgKCdiJyAqIDY0LCAnYScgKiA2MyksDQo+IFZhbGlkYXRpb25FcnJvciks
-DQo+ICsrwqDCoMKgICh2YWxpZGF0ZV9lbWFpbCwgImV4YW1wbGVAJXNjb20iICUgKCgiYSIgKiA2
-MyArICIuIikgKiAxMDApLA0KPiBWYWxpZGF0aW9uRXJyb3IpLA0KPiArwqDCoMKgwqAgKHZhbGlk
-YXRlX2VtYWlsLCBOb25lLCBWYWxpZGF0aW9uRXJyb3IpLA0KPiArwqDCoMKgwqAgKHZhbGlkYXRl
-X2VtYWlsLCAnJywgVmFsaWRhdGlvbkVycm9yKSwNCj4gK8KgwqDCoMKgICh2YWxpZGF0ZV9lbWFp
-bCwgJ2FiYycsIFZhbGlkYXRpb25FcnJvciksDQo+ICtAQCAtMjQyLDYgKzI0MywxNiBAQCBURVNU
-X0RBVEEgPSBbDQo+ICvCoMKgwqDCoCAoVVJMVmFsaWRhdG9yKEVYVEVOREVEX1NDSEVNRVMpLA0K
-PiAnZ2l0K3NzaDovL2dpdEBnaXRodWIuY29tL2V4YW1wbGUvaGctZ2l0LmdpdCcsIE5vbmUpLA0K
-PiArDQo+ICvCoMKgwqDCoCAoVVJMVmFsaWRhdG9yKEVYVEVOREVEX1NDSEVNRVMpLCAnZ2l0Oi8v
-LWludmFsaWQuY29tJywNCj4gVmFsaWRhdGlvbkVycm9yKSwNCj4gKyvCoMKgwqAgKA0KPiArK8Kg
-wqDCoMKgwqDCoMKgIFVSTFZhbGlkYXRvcigpLA0KPiArK8KgwqDCoMKgwqDCoMKgICJodHRwOi8v
-ZXhhbXBsZS4iICsgKCJhIiAqIDYzICsgIi4iKSAqIDEwMDAgKyAiY29tIiwNCj4gKyvCoMKgwqDC
-oMKgwqDCoCBWYWxpZGF0aW9uRXJyb3IsDQo+ICsrwqDCoMKgICksDQo+ICsrwqDCoMKgICgNCj4g
-KyvCoMKgwqDCoMKgwqDCoCBVUkxWYWxpZGF0b3IoKSwNCj4gKyvCoMKgwqDCoMKgwqDCoCAiaHR0
-cDovL3VzZXJpZDpwYXNzd29yZCIgKyAiZCIgKiAyMDAwICsNCj4gIkBleGFtcGxlLmFhYWFhYWFh
-YWFhYWEuY29tIiwNCj4gKyvCoMKgwqDCoMKgwqDCoCBOb25lLA0KPiArK8KgwqDCoCApLA0KPiAr
-wqDCoMKgwqAgIyBOZXdsaW5lcyBhbmQgdGFicyBhcmUgbm90IGFjY2VwdGVkLg0KPiArwqDCoMKg
-wqAgKFVSTFZhbGlkYXRvcigpLCAnaHR0cDovL3d3dy5kamFuZ29wcm9qZWN0LmNvbS9cbicsDQo+
-IFZhbGlkYXRpb25FcnJvciksDQo+ICvCoMKgwqDCoCAoVVJMVmFsaWRhdG9yKCksICdodHRwOi8v
-Wzo6ZmZmZjoxOTIuOS41LjVdXG4nLA0KPiBWYWxpZGF0aW9uRXJyb3IpLA0KPiArLS0NCj4gKzIu
-NDAuMA0KPiBkaWZmIC0tZ2l0IGEvbWV0YS1weXRob24vcmVjaXBlcy1kZXZ0b29scy9weXRob24v
-cHl0aG9uMy0NCj4gZGphbmdvXzIuMi4yOC5iYiBiL21ldGEtcHl0aG9uL3JlY2lwZXMtZGV2dG9v
-bHMvcHl0aG9uL3B5dGhvbjMtDQo+IGRqYW5nb18yLjIuMjguYmINCj4gaW5kZXggNzdhMWEyYTc0
-MC4uZWM2NWE5ODVkYSAxMDA2NDQNCj4gLS0tIGEvbWV0YS1weXRob24vcmVjaXBlcy1kZXZ0b29s
-cy9weXRob24vcHl0aG9uMy1kamFuZ29fMi4yLjI4LmJiDQo+ICsrKyBiL21ldGEtcHl0aG9uL3Jl
-Y2lwZXMtZGV2dG9vbHMvcHl0aG9uL3B5dGhvbjMtZGphbmdvXzIuMi4yOC5iYg0KPiBAQCAtNSw3
-ICs1LDkgQEAgVVBTVFJFQU1fQ0hFQ0tfUkVHRVggPQ0KPiAiLyR7UFlQSV9QQUNLQUdFfS8oP1A8
-cHZlcj4oMlwuMlwuXGQqKSspLyINCj4gwqANCj4gwqBpbmhlcml0IHNldHVwdG9vbHMzDQo+IMKg
-DQo+IC1TUkNfVVJJICs9ICJmaWxlOi8vQ1ZFLTIwMjMtMzEwNDcucGF0Y2giDQo+ICtTUkNfVVJJ
-ICs9ICJmaWxlOi8vQ1ZFLTIwMjMtMzEwNDcucGF0Y2jCoFwNCj4gK8KgwqDCoMKgwqDCoMKgwqDC
-oMKgwqAgZmlsZTovL0NWRS0yMDIzLTM2MDUzLnBhdGNowqBcDQo+ICvCoMKgwqDCoMKgwqDCoMKg
-wqDCoCAiDQo+IMKgDQo+IMKgU1JDX1VSSVtzaGEyNTZzdW1dID0NCj4gIjAyMDBiNjU3YWZiZjFi
-YzA4MDAzODQ1ZGRkYTA1M2M3NjQxYjliMjQ5NTFlNTJhY2Q1MWY2YWJkYTMzYTc0MTMiDQo+IMKg
-DQo+IA0KPiAtPS09LT0tPS09LT0tPS09LT0tPS09LQ0KPiBMaW5rczogWW91IHJlY2VpdmUgYWxs
-IG1lc3NhZ2VzIHNlbnQgdG8gdGhpcyBncm91cC4NCj4gVmlldy9SZXBseSBPbmxpbmUgKCMxMDQw
-NTUpOg0KPiBodHRwczovL2xpc3RzLm9wZW5lbWJlZGRlZC5vcmcvZy9vcGVuZW1iZWRkZWQtZGV2
-ZWwvbWVzc2FnZS8xMDQwNTUNCj4gTXV0ZSBUaGlzIFRvcGljOiBodHRwczovL2xpc3RzLm9wZW5l
-bWJlZGRlZC5vcmcvbXQvMTAwMzkzODkyLzM2MTY3MDINCj4gR3JvdXAgT3duZXI6IG9wZW5lbWJl
-ZGRlZC1kZXZlbCtvd25lckBsaXN0cy5vcGVuZW1iZWRkZWQub3JnDQo+IFVuc3Vic2NyaWJlOg0K
-PiBodHRwczovL2xpc3RzLm9wZW5lbWJlZGRlZC5vcmcvZy9vcGVuZW1iZWRkZWQtZGV2ZWwvdW5z
-dWLCoFsNCj4gYW51ai5taXR0YWxAaW50ZWwuY29tXQ0KPiAtPS09LT0tPS09LT0tPS09LT0tPS09
-LQ0KPiANCg0K
+On 28-07-2023 06:42, Mittal, Anuj wrote:
+> CAUTION: This email comes from a non Wind River email account!
+> Do not click links or open attachments unless you recognize the sender =
+and know the content is safe.
+>
+> On Thu, 2023-07-27 at 16:21 +0000, Narpat Mali via
+> lists.openembedded.org wrote:
+>> From: Narpat Mali <narpat.mali@windriver.com>
+>>
+>> In Django 3.2 before 3.2.20, 4 before 4.1.10, and 4.2 before 4.2.3,
+>> EmailValidator
+>> and URLValidator are subject to a potential ReDoS (regular expression
+>> denial of
+>> service) attack via a very large number of domain name labels of
+>> emails and URLs.
+>>
+>> Since, there is no ptest available for python3-django so have not
+>> tested the patch
+>> changes at runtime.
+>>
+>> References:
+>> https://github.com/advisories/GHSA-jh3w-4vvf-mjgr
+>> https://github.com/django/django/commit/454f2fb93437f98917283336201b40=
+48293f7582
+>>
+>> Signed-off-by: Narpat Mali <narpat.mali@windriver.com>
+>> ---
+>>   .../python3-django/CVE-2023-36053.patch       | 261
+>> ++++++++++++++++++
+>>   .../python/python3-django_2.2.28.bb           |=C2=A0=C2=A0 4 +-
+>>   2 files changed, 264 insertions(+), 1 deletion(-)
+>>   create mode 100644 meta-python/recipes-devtools/python/python3-
+>> django/CVE-2023-36053.patch
+>>
+>> diff --git a/meta-python/recipes-devtools/python/python3-django/CVE-
+>> 2023-36053.patch b/meta-python/recipes-devtools/python/python3-
+>> django/CVE-2023-36053.patch
+>> new file mode 100644
+>> index 0000000000..f0eb3d3ac2
+>> --- /dev/null
+>> +++ b/meta-python/recipes-devtools/python/python3-django/CVE-2023-
+>> 36053.patch
+>> @@ -0,0 +1,261 @@
+>> +From c2b8219080df1cfa07cf98f583decebe6a152fad Mon Sep 17 00:00:00
+>> 2001
+>> +From: Mariusz Felisiak <felisiak.mariusz@gmail.com>
+>> +Date: Thu, 27 Jul 2023 14:51:48 +0000
+>> +Subject: [PATCH] Fixed CVE-2023-36053
+>> +
+>> +-- Prevented potential ReDoS in EmailValidator and URLValidator.
+>> +
+>> +Thanks Seokchan Yoon for reports.
+>> +
+>> +CVE: CVE-2023-36053
+>> +
+>> +Upstream-Status: Backport
+>> [https://github.com/django/django/commit/454f2fb93437f98917283336201b
+>> 4048293f7582]
+>> +
+>> +Signed-off-by: Narpat Mali <narpat.mali@windriver.com>
+>> +---
+>> + django/core/validators.py                     |=C2=A0 7 +++++--
+>> + django/forms/fields.py                        |=C2=A0 3 +++
+>> + docs/ref/forms/fields.txt                     |=C2=A0 4 ++++
+>> + docs/ref/validators.txt                       | 19
+>> ++++++++++++++++++-
+>> + docs/releases/2.2.28.txt                      |=C2=A0 9 +++++++++
+>> + .../field_tests/test_emailfield.py            |=C2=A0 5 ++++-
+>> + tests/forms_tests/tests/test_forms.py         | 19 +++++++++++++---
+>> ---
+>> + tests/validators/tests.py                     | 11 +++++++++++
+>> + 8 files changed, 67 insertions(+), 10 deletions(-)
+>> +
+>> +diff --git a/django/core/validators.py b/django/core/validators.py
+>> +index 2da0688..0d58642 100644
+>> +--- a/django/core/validators.py
+>> ++++ b/django/core/validators.py
+>> +@@ -102,6 +102,7 @@ class URLValidator(RegexValidator):
+>> +     message =3D _('Enter a valid URL.')
+>> +     schemes =3D ['http', 'https', 'ftp', 'ftps']
+>> +     unsafe_chars =3D frozenset('\t\r\n')
+>> ++    max_length =3D 2048
+>> +
+>> +     def __init__(self, schemes=3DNone, **kwargs):
+>> +         super().__init__(**kwargs)
+>> +@@ -109,7 +110,7 @@ class URLValidator(RegexValidator):
+>> +             self.schemes =3D schemes
+>> +
+>> +     def __call__(self, value):
+>> +-        if isinstance(value, str) and
+>> self.unsafe_chars.intersection(value):
+>> ++        if not isinstance(value, str) or len(value) >
+>> self.max_length:
+> This seems incorrect ... You are reverting parts of this fix:
+>
+> https://github.com/django/django/commit/d9594c4ea57b6309d93879805302cec=
+9ae9f23ff
+>
+> The original patch here:
+>
+> https://github.com/django/django/commit/454f2fb93437f98917283336201b404=
+8293f7582
+>
+> isn't doing that.
+
+Thanks Anuj for identifying this.
+
+I am sending v2 for this so, please verify that as well.
+
+../Narpat
+
+>> +             raise ValidationError(self.message, code=3Dself.code)
+>> +         # Check if the scheme is valid.
+>> +         scheme =3D value.split('://')[0].lower()
+>> +@@ -190,7 +191,9 @@ class EmailValidator:
+>> +             self.domain_whitelist =3D whitelist
+>> +
+>> +     def __call__(self, value):
+>> +-        if not value or '@' not in value:
+>> ++        # The maximum length of an email is 320 characters per RFC
+>> 3696
+>> ++        # section 3.
+>> ++        if not value or '@' not in value or len(value) > 320:
+>> +             raise ValidationError(self.message, code=3Dself.code)
+>> +
+>> +         user_part, domain_part =3D value.rsplit('@', 1)
+>> +diff --git a/django/forms/fields.py b/django/forms/fields.py
+>> +index a977256..f939338 100644
+>> +--- a/django/forms/fields.py
+>> ++++ b/django/forms/fields.py
+>> +@@ -542,6 +542,9 @@ class FileField(Field):
+>> +     def __init__(self, *, max_length=3DNone, allow_empty_file=3DFals=
+e,
+>> **kwargs):
+>> +         self.max_length =3D max_length
+>> +         self.allow_empty_file =3D allow_empty_file
+>> ++        # The default maximum length of an email is 320 characters
+>> per RFC 3696
+>> ++        # section 3.
+>> ++        kwargs.setdefault("max_length", 320)
+>> +         super().__init__(**kwargs)
+>> +
+>> +     def to_python(self, data):
+>> +diff --git a/docs/ref/forms/fields.txt b/docs/ref/forms/fields.txt
+>> +index 6f76d0d..3a888ef 100644
+>> +--- a/docs/ref/forms/fields.txt
+>> ++++ b/docs/ref/forms/fields.txt
+>> +@@ -592,6 +592,10 @@ For each field, we describe the default widget
+>> used if you don't specify
+>> +     Has two optional arguments for validation, ``max_length`` and
+>> ``min_length``.
+>> +     If provided, these arguments ensure that the string is at most
+>> or at least the
+>> +     given length.
+>> ++    ``empty_value`` which work just as they do for
+>> :class:`CharField`. The
+>> ++    ``max_length`` argument defaults to 320 (see
+>> :rfc:`3696#section-3`).
+>> ++
+>> ++    The default value for ``max_length`` was changed to 320
+>> characters.
+>> +
+>> + ``FileField``
+>> + -------------
+>> +diff --git a/docs/ref/validators.txt b/docs/ref/validators.txt
+>> +index 75d1394..4178a1f 100644
+>> +--- a/docs/ref/validators.txt
+>> ++++ b/docs/ref/validators.txt
+>> +@@ -125,6 +125,11 @@ to, or in lieu of custom ``field.clean()``
+>> methods.
+>> +     :param code: If not ``None``, overrides :attr:`code`.
+>> +     :param whitelist: If not ``None``, overrides :attr:`whitelist`.
+>> +
+>> ++    An :class:`EmailValidator` ensures that a value looks like an
+>> email, and
+>> ++    raises a :exc:`~django.core.exceptions.ValidationError` with
+>> ++    :attr:`message` and :attr:`code` if it doesn't. Values longer
+>> than 320
+>> ++    characters are always considered invalid.
+>> ++
+>> +     .. attribute:: message
+>> +
+>> +         The error message used by
+>> +@@ -145,13 +150,17 @@ to, or in lieu of custom ``field.clean()``
+>> methods.
+>> +         ``['localhost']``. Other domains that don't contain a dot
+>> won't pass
+>> +         validation, so you'd need to whitelist them as necessary.
+>> +
+>> ++        In older versions, values longer than 320 characters could
+>> be
+>> ++        considered valid.
+>> ++
+>> + ``URLValidator``
+>> + ----------------
+>> +
+>> + .. class:: URLValidator(schemes=3DNone, regex=3DNone, message=3DNone=
+,
+>> code=3DNone)
+>> +
+>> +     A :class:`RegexValidator` that ensures a value looks like a
+>> URL, and raises
+>> +-    an error code of ``'invalid'`` if it doesn't.
+>> ++    an error code of ``'invalid'`` if it doesn't. Values longer
+>> than
+>> ++    :attr:`max_length` characters are always considered invalid.
+>> +
+>> +     Loopback addresses and reserved IP spaces are considered valid.
+>> Literal
+>> +     IPv6 addresses (:rfc:`3986#section-3.2.2`) and unicode domains
+>> are both
+>> +@@ -168,6 +177,14 @@ to, or in lieu of custom ``field.clean()``
+>> methods.
+>> +
+>> +         .. _valid URI schemes:
+>> https://www.iana.org/assignments/uri-schemes/uri-schemes.xhtml
+>> +
+>> ++     .. attribute:: max_length
+>> ++
+>> ++        The maximum length of values that could be considered
+>> valid. Defaults
+>> ++        to 2048 characters.
+>> ++
+>> ++        In older versions, values longer than 2048 characters could
+>> be
+>> ++        considered valid.
+>> ++
+>> + ``validate_email``
+>> + ------------------
+>> +
+>> +diff --git a/docs/releases/2.2.28.txt b/docs/releases/2.2.28.txt
+>> +index 854c6b0..ab4884b 100644
+>> +--- a/docs/releases/2.2.28.txt
+>> ++++ b/docs/releases/2.2.28.txt
+>> +@@ -38,3 +38,12 @@ keep the old behavior, set
+>> ``allow_multiple_selected`` to ``True``.
+>> +
+>> + For more details on using the new attribute and handling of
+>> multiple files
+>> + through a single field, see :ref:`uploading_multiple_files`.
+>> ++
+>> ++Backporting the CVE-2023-36053 fix on Django 2.2.28.
+>> ++
+>> ++CVE-2023-36053: Potential regular expression denial of service
+>> vulnerability in ``EmailValidator``/``URLValidator``
+>> ++=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+>> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+>> ++
+>> ++``EmailValidator`` and ``URLValidator`` were subject to potential
+>> regular
+>> ++expression denial of service attack via a very large number of
+>> domain name
+>> ++labels of emails and URLs.
+>> +diff --git a/tests/forms_tests/field_tests/test_emailfield.py
+>> b/tests/forms_tests/field_tests/test_emailfield.py
+>> +index 826524a..fe5b644 100644
+>> +--- a/tests/forms_tests/field_tests/test_emailfield.py
+>> ++++ b/tests/forms_tests/field_tests/test_emailfield.py
+>> +@@ -8,7 +8,10 @@ class EmailFieldTest(FormFieldAssertionsMixin,
+>> SimpleTestCase):
+>> +
+>> +     def test_emailfield_1(self):
+>> +         f =3D EmailField()
+>> +-        self.assertWidgetRendersTo(f, '<input type=3D"email" name=3D=
+"f"
+>> id=3D"id_f" required>')
+>> ++        self.assertEqual(f.max_length, 320)
+>> ++        self.assertWidgetRendersTo(
+>> ++            f, '<input type=3D"email" name=3D"f" id=3D"id_f"
+>> maxlength=3D"320" required>'
+>> ++        )
+>> +         with self.assertRaisesMessage(ValidationError, "'This field
+>> is required.'"):
+>> +             f.clean('')
+>> +         with self.assertRaisesMessage(ValidationError, "'This field
+>> is required.'"):
+>> +diff --git a/tests/forms_tests/tests/test_forms.py
+>> b/tests/forms_tests/tests/test_forms.py
+>> +index d4e421d..8893f89 100644
+>> +--- a/tests/forms_tests/tests/test_forms.py
+>> ++++ b/tests/forms_tests/tests/test_forms.py
+>> +@@ -422,11 +422,18 @@ class FormsTestCase(SimpleTestCase):
+>> +             get_spam =3D BooleanField()
+>> +
+>> +         f =3D SignupForm(auto_id=3DFalse)
+>> +-        self.assertHTMLEqual(str(f['email']), '<input type=3D"email"
+>> name=3D"email" required>')
+>> ++        self.assertHTMLEqual(
+>> ++            str(f["email"]),
+>> ++            '<input type=3D"email" name=3D"email" maxlength=3D"320"
+>> required>',
+>> ++        )
+>> +         self.assertHTMLEqual(str(f['get_spam']), '<input
+>> type=3D"checkbox" name=3D"get_spam" required>')
+>> +
+>> +         f =3D SignupForm({'email': 'test@example.com', 'get_spam':
+>> True}, auto_id=3DFalse)
+>> +-        self.assertHTMLEqual(str(f['email']), '<input type=3D"email"
+>> name=3D"email" value=3D"test@example.com" required>')
+>> ++        self.assertHTMLEqual(
+>> ++            str(f["email"]),
+>> ++            '<input type=3D"email" name=3D"email" maxlength=3D"320"
+>> value=3D"test@example.com" '
+>> ++            "required>",
+>> ++        )
+>> +         self.assertHTMLEqual(
+>> +             str(f['get_spam']),
+>> +             '<input checked type=3D"checkbox" name=3D"get_spam"
+>> required>',
+>> +@@ -2780,7 +2787,7 @@ Good luck picking a username that doesn&#39;t
+>> already exist.</p>
+>> + <option value=3D"true">Yes</option>
+>> + <option value=3D"false">No</option>
+>> + </select></li>
+>> +-<li><label for=3D"id_email">Email:</label> <input type=3D"email"
+>> name=3D"email" id=3D"id_email"></li>
+>> ++<li><label for=3D"id_email">Email:</label> <input type=3D"email"
+>> name=3D"email" id=3D"id_email" maxlength=3D"320"></li>
+>> + <li class=3D"required error"><ul class=3D"errorlist"><li>This field =
+is
+>> required.</li></ul>
+>> + <label class=3D"required" for=3D"id_age">Age:</label> <input
+>> type=3D"number" name=3D"age" id=3D"id_age" required></li>"""
+>> +         )
+>> +@@ -2796,7 +2803,7 @@ Good luck picking a username that doesn&#39;t
+>> already exist.</p>
+>> + <option value=3D"true">Yes</option>
+>> + <option value=3D"false">No</option>
+>> + </select></p>
+>> +-<p><label for=3D"id_email">Email:</label> <input type=3D"email"
+>> name=3D"email" id=3D"id_email"></p>
+>> ++<p><label for=3D"id_email">Email:</label> <input type=3D"email"
+>> name=3D"email" id=3D"id_email" maxlength=3D"320"></p>
+>> + <ul class=3D"errorlist"><li>This field is required.</li></ul>
+>> + <p class=3D"required error"><label class=3D"required"
+>> for=3D"id_age">Age:</label>
+>> + <input type=3D"number" name=3D"age" id=3D"id_age" required></p>"""
+>> +@@ -2815,7 +2822,7 @@ Good luck picking a username that doesn&#39;t
+>> already exist.</p>
+>> + <option value=3D"false">No</option>
+>> + </select></td></tr>
+>> + <tr><th><label for=3D"id_email">Email:</label></th><td>
+>> +-<input type=3D"email" name=3D"email" id=3D"id_email"></td></tr>
+>> ++<input type=3D"email" name=3D"email" id=3D"id_email"
+>> maxlength=3D"320"></td></tr>
+>> + <tr class=3D"required error"><th><label class=3D"required"
+>> for=3D"id_age">Age:</label></th>
+>> + <td><ul class=3D"errorlist"><li>This field is required.</li></ul>
+>> + <input type=3D"number" name=3D"age" id=3D"id_age" required></td></tr=
+>"""
+>> +@@ -3428,7 +3435,7 @@ Good luck picking a username that doesn&#39;t
+>> already exist.</p>
+>> +         f =3D CommentForm(data, auto_id=3DFalse,
+>> error_class=3DDivErrorList)
+>> +         self.assertHTMLEqual(f.as_p(), """<p>Name: <input
+>> type=3D"text" name=3D"name" maxlength=3D"50"></p>
+>> + <div class=3D"errorlist"><div class=3D"error">Enter a valid email
+>> address.</div></div>
+>> +-<p>Email: <input type=3D"email" name=3D"email" value=3D"invalid"
+>> required></p>
+>> ++<p>Email: <input type=3D"email" name=3D"email" value=3D"invalid"
+>> maxlength=3D"320" required></p>
+>> + <div class=3D"errorlist"><div class=3D"error">This field is
+>> required.</div></div>
+>> + <p>Comment: <input type=3D"text" name=3D"comment" required></p>""")
+>> +
+>> +diff --git a/tests/validators/tests.py b/tests/validators/tests.py
+>> +index 1f09fb5..8204f00 100644
+>> +--- a/tests/validators/tests.py
+>> ++++ b/tests/validators/tests.py
+>> +@@ -58,6 +58,7 @@ TEST_DATA =3D [
+>> +
+>> +     (validate_email, 'example@atm.%s' % ('a' * 64),
+>> ValidationError),
+>> +     (validate_email, 'example@%s.atm.%s' % ('b' * 64, 'a' * 63),
+>> ValidationError),
+>> ++    (validate_email, "example@%scom" % (("a" * 63 + ".") * 100),
+>> ValidationError),
+>> +     (validate_email, None, ValidationError),
+>> +     (validate_email, '', ValidationError),
+>> +     (validate_email, 'abc', ValidationError),
+>> +@@ -242,6 +243,16 @@ TEST_DATA =3D [
+>> +     (URLValidator(EXTENDED_SCHEMES),
+>> 'git+ssh://git@github.com/example/hg-git.git', None),
+>> +
+>> +     (URLValidator(EXTENDED_SCHEMES), 'git://-invalid.com',
+>> ValidationError),
+>> ++    (
+>> ++        URLValidator(),
+>> ++        "http://example." + ("a" * 63 + ".") * 1000 + "com",
+>> ++        ValidationError,
+>> ++    ),
+>> ++    (
+>> ++        URLValidator(),
+>> ++        "http://userid:password" + "d" * 2000 +
+>> "@example.aaaaaaaaaaaaa.com",
+>> ++        None,
+>> ++    ),
+>> +     # Newlines and tabs are not accepted.
+>> +     (URLValidator(), 'http://www.djangoproject.com/\n',
+>> ValidationError),
+>> +     (URLValidator(), 'http://[::ffff:192.9.5.5]\n',
+>> ValidationError),
+>> +--
+>> +2.40.0
+>> diff --git a/meta-python/recipes-devtools/python/python3-
+>> django_2.2.28.bb b/meta-python/recipes-devtools/python/python3-
+>> django_2.2.28.bb
+>> index 77a1a2a740..ec65a985da 100644
+>> --- a/meta-python/recipes-devtools/python/python3-django_2.2.28.bb
+>> +++ b/meta-python/recipes-devtools/python/python3-django_2.2.28.bb
+>> @@ -5,7 +5,9 @@ UPSTREAM_CHECK_REGEX =3D
+>> "/${PYPI_PACKAGE}/(?P<pver>(2\.2\.\d*)+)/"
+>>
+>>   inherit setuptools3
+>>
+>> -SRC_URI +=3D "file://CVE-2023-31047.patch"
+>> +SRC_URI +=3D "file://CVE-2023-31047.patch \
+>> +            file://CVE-2023-36053.patch \
+>> +           "
+>>
+>>   SRC_URI[sha256sum] =3D
+>> "0200b657afbf1bc08003845ddda053c7641b9b24951e52acd51f6abda33a7413"
+>>
+>>
+>> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>> Links: You receive all messages sent to this group.
+>> View/Reply Online (#104055):
+>> https://lists.openembedded.org/g/openembedded-devel/message/104055
+>> Mute This Topic: https://lists.openembedded.org/mt/100393892/3616702
+>> Group Owner: openembedded-devel+owner@lists.openembedded.org
+>> Unsubscribe:
+>> https://lists.openembedded.org/g/openembedded-devel/unsub [
+>> anuj.mittal@intel.com]
+>> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>>
 
