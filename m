@@ -2,41 +2,41 @@ Return-Path: <auh@moto-timo.dev>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 03B62C04A94
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 07FCAC001DF
 	for <webhook@archiver.kernel.org>; Mon, 31 Jul 2023 05:48:05 +0000 (UTC)
-Received: from relay7-d.mail.gandi.net (relay7-d.mail.gandi.net [217.70.183.200])
- by mx.groups.io with SMTP id smtpd.web10.1577.1690782474879527527
+Received: from relay8-d.mail.gandi.net (relay8-d.mail.gandi.net [217.70.183.201])
+ by mx.groups.io with SMTP id smtpd.web10.1578.1690782477923979689
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 30 Jul 2023 22:47:55 -0700
+ Sun, 30 Jul 2023 22:47:58 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@moto-timo.dev header.s=gm1 header.b=Vcjf0rnX;
- spf=pass (domain: moto-timo.dev, ip: 217.70.183.200, mailfrom: auh@moto-timo.dev)
-Received: by mail.gandi.net (Postfix) with ESMTPSA id E3C3E20004
-	for <openembedded-devel@lists.openembedded.org>; Mon, 31 Jul 2023 05:47:52 +0000 (UTC)
+ dkim=pass header.i=@moto-timo.dev header.s=gm1 header.b=O/dMzFWn;
+ spf=pass (domain: moto-timo.dev, ip: 217.70.183.201, mailfrom: auh@moto-timo.dev)
+Received: by mail.gandi.net (Postfix) with ESMTPSA id 277871BF205
+	for <openembedded-devel@lists.openembedded.org>; Mon, 31 Jul 2023 05:47:54 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=moto-timo.dev;
-	s=gm1; t=1690782473;
+	s=gm1; t=1690782475;
 	h=from:from:reply-to:subject:subject:to:to:cc:mime-version:mime-version:
-	 content-type:content-type; bh=2cmDM2X+0+nJE2KeUmCeKe8Q12+9xKnPbtV4xrk4bpU=;
-	b=Vcjf0rnX3H02Yn8YP75eNusTho8/lzhP+n0FUPq8s4iMtz9uZgzcHiYLHLNgaIIwseg5pq
-	nIupNoAIkhir92nSU+2dDPiZMQCum7ig7YjuTE2UUdq/pJMAJLPXTsxFgRc34/fKvI8XEl
-	t7N5WqOnaTrC828yIb5ICWXfLTFhCkCzrWUE99XuU5Y6UV04GC82HiPOXthaSQMp8EDO5Z
-	FVvVoa8gBsEKaYnr+8HjK6oGIn5kxDahuMiJU03BoVFEELlI7+g9WQiRQ+StDyHZHaEGtW
-	aiiodncvSRDSZJgH8jYgiU3sXFMXK9gTe4NK9Eg3YokFRGnVvQxalZzfDautFQ==
-Content-Type: multipart/mixed; boundary="===============5095648981127718209=="
+	 content-type:content-type; bh=5B9bH9LrsvWUw0BtWaRcxFvPljqHWA9xia1KrfXjagE=;
+	b=O/dMzFWn72WgD9vW0BpZmKUHjon63cuxGA1NJ7T1u2GtRpdVyl1jxzpgO4tgC4WgrQO5iU
+	7UQYIvv/wcx/x4GpJGoiJ34sr3lkdCcQUYVnL4GgRsxpvwsaNj8TmI0QKYjVJeq8BgsjL1
+	i/MA9Fungq6GhAOOw9oIl6yx3TZhASihdIsxOX19SqeqobiPbNNx3DPnng91b1n2rD5REm
+	eUB8ZUEacIlbf4REZpzu7IMbNbLJP56KS7oXjLFf2VmaIfaHF6/m+TE08d9Yhdtby04Wp2
+	3vYGgtn1PrKWdc5gnyI82Vq+hed+P0oXGapW21ndJat5XiGpajwoT/2N+0xTNw==
+Content-Type: multipart/mixed; boundary="===============2987963980638193886=="
 MIME-Version: 1.0
 From: auh@moto-timo.dev
 To: openembedded-devel@lists.openembedded.org
-Subject: [AUH] libcurses-perl: upgrading to 1.44 FAILED
+Subject: [AUH] libio-compress-lzma-perl: upgrading to 2.206 FAILED
 X-GND-Sasl: auh@moto-timo.dev
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 31 Jul 2023 05:48:05 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104147
-Message-Id: <20230731054805.03B62C04A94@smtp.lore.kernel.org>
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104148
+Message-Id: <20230731054805.07FCAC001DF@smtp.lore.kernel.org>
 Date: Mon, 31 Jul 2023 05:48:05 +0000 (UTC)
 
---===============5095648981127718209==
+--===============2987963980638193886==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -44,12 +44,16 @@ Content-Transfer-Encoding: 7bit
 Hello,
 
 this email is a notification from the Auto Upgrade Helper
-that the automatic attempt to upgrade the recipe *libcurses-perl* to *1.44* has Failed (devtool error).
+that the automatic attempt to upgrade the recipe *libio-compress-lzma-perl* to *2.206* has Failed (devtool error).
 
 Detailed error information:
 
-Running 'devtool upgrade' for recipe libcurses-perl failed.
+The following devtool command failed:  upgrade libio-compress-lzma-perl -V 2.206
 NOTE: Starting bitbake server...
+NOTE: Reconnecting to bitbake server...
+NOTE: Previous bitbake instance shutting down?, waiting to retry... (00:27:53.335525)
+NOTE: Directory listing: ['tmp-qemux86-musl', 'tmp-qemuarm64', 'tmp', 'conf', 'tmp-qemux86-64', 'weeklyjob.sh', 'auto_upgrade_helper', 'tmp-qemux86', 'auto-upgrade-helper', 'upgrade-helper', 'cache', 'workspace', 'pokyjob.sh', 'buildhistory', 'perljob.sh', 'bitbake-cookerdaemon.log']
+NOTE: Retrying server connection (#1)... (00:27:53.450270)
 Loading cache...done.
 Loaded 12625 entries from dependency cache.
 NOTE: Resolving any missing task queue dependencies
@@ -124,7 +128,7 @@ NOTE: Writing buildhistory took: 4 seconds
 NOTE: Writing buildhistory
 NOTE: Writing buildhistory took: 4 seconds
 NOTE: Writing buildhistory
-NOTE: Writing buildhistory took: 5 seconds
+NOTE: Writing buildhistory took: 4 seconds
 Loading cache...done.
 Loaded 12625 entries from dependency cache.
 Parsing recipes...done.
@@ -199,38 +203,29 @@ NOTE: Tasks Summary: Attempted 3 tasks of which 0 didn't need to be rerun and al
 NOTE: Writing buildhistory
 NOTE: Writing buildhistory took: 4 seconds
 NOTE: Writing buildhistory
-NOTE: Writing buildhistory took: 4 seconds
+NOTE: Writing buildhistory took: 5 seconds
 NOTE: Writing buildhistory
 NOTE: Writing buildhistory took: 5 seconds
 DEBUG 5 [Errno 25] Inappropriate ioctl for device
 Adding changed files:   0% |                                   | ETA:  --:--:--
 Adding changed files:   0% |                                   | ETA:  --:--:--
-Adding changed files:  72% |##########################          | ETA:  0:00:00
+Adding changed files:  55% |###################                 | ETA:  0:00:00
 Adding changed files: 100% |####################################| Time: 0:00:00
+
 INFO: Extracting current version source...
 INFO: Extracting upgraded version source...
-INFO: Fetching http://www.cpan.org/authors/id/G/GI/GIRAFFED/Curses-1.44.tar.gz...
-INFO: Rebasing devtool onto df22d6bd33ba6fbfc1843aa35c89a63df7db05d5
-WARNING: Command 'git rebase df22d6bd33ba6fbfc1843aa35c89a63df7db05d5' failed:
-First, rewinding head to replay your work on top of it...
-Applying: testtyp.c: Use proper prototype for main function
-Using index info to reconstruct a base tree...
-A	testtyp.c
-Falling back to patching base and 3-way merge...
-Auto-merging Curses-1.44/testtyp.c
-CONFLICT (content): Merge conflict in Curses-1.44/testtyp.c
-Patch failed at 0001 testtyp.c: Use proper prototype for main function
-Resolve all conflicts manually, mark them as resolved with
-"git add/rm <conflicted_files>", then run "git rebase --continue".
-You can instead skip this commit: run "git rebase --skip".
-To abort and get back to the state before "git rebase", run "git rebase --abort".
-
-You will need to resolve conflicts in order to complete the upgrade.
-INFO: Source subdirectory has changed, updating S value
-INFO: Using source tree as build directory since that would be the default for this recipe
-INFO: Upgraded source extracted to /scratch1/auh/build-auh/workspace/sources/libcurses-perl
-INFO: New recipe is /scratch1/auh/build-auh/workspace/recipes/libcurses-perl/libcurses-perl_1.44.bb
-
+INFO: Fetching https://search.cpan.org/CPAN/authors/id/P/PM/PMQS/IO-Compress-Lzma-2.206.tar.gz...
+INFO: Rebasing devtool onto aad970275da76b220976d12f522e6fd09f0a5049
+Traceback (most recent call last):
+  File "/home/auh/Projects/poky/scripts/devtool", line 349, in <module>
+    ret = main()
+  File "/home/auh/Projects/poky/scripts/devtool", line 336, in main
+    ret = args.func(args, config, basepath, workspace)
+  File "/home/auh/Projects/poky/scripts/lib/devtool/upgrade.py", line 565, in upgrade
+    new_licenses = _extract_licenses(srctree_s, (rd.getVar('LIC_FILES_CHKSUM') or ""))
+  File "/home/auh/Projects/poky/scripts/lib/devtool/upgrade.py", line 473, in _extract_licenses
+    with open(os.path.join(srcpath, path), 'rb') as f:
+FileNotFoundError: [Errno 2] No such file or directory: '/scratch1/auh/build-auh/workspace/sources/libio-compress-lzma-perl/README'
 
 
 Please review the attached files for further information and build/update failures.
@@ -238,5 +233,5 @@ Any problem please file a bug at https://bugzilla.yoctoproject.org/enter_bug.cgi
 
 Regards,
 The Upgrade Helper
---===============5095648981127718209==--
+--===============2987963980638193886==--
 
