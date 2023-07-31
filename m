@@ -2,41 +2,41 @@ Return-Path: <auh@moto-timo.dev>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C9ECBC41513
-	for <webhook@archiver.kernel.org>; Mon, 31 Jul 2023 05:10:14 +0000 (UTC)
-Received: from relay3-d.mail.gandi.net (relay3-d.mail.gandi.net [217.70.183.195])
- by mx.groups.io with SMTP id smtpd.web10.1213.1690780212254223233
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C2786C41513
+	for <webhook@archiver.kernel.org>; Mon, 31 Jul 2023 05:10:24 +0000 (UTC)
+Received: from relay8-d.mail.gandi.net (relay8-d.mail.gandi.net [217.70.183.201])
+ by mx.groups.io with SMTP id smtpd.web10.1214.1690780215780451674
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 30 Jul 2023 22:10:12 -0700
+ Sun, 30 Jul 2023 22:10:16 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@moto-timo.dev header.s=gm1 header.b=CLlvsBsL;
- spf=pass (domain: moto-timo.dev, ip: 217.70.183.195, mailfrom: auh@moto-timo.dev)
-Received: by mail.gandi.net (Postfix) with ESMTPSA id 9BCFE60006
-	for <openembedded-devel@lists.openembedded.org>; Mon, 31 Jul 2023 05:10:10 +0000 (UTC)
+ dkim=pass header.i=@moto-timo.dev header.s=gm1 header.b=oVs2Ix+6;
+ spf=pass (domain: moto-timo.dev, ip: 217.70.183.201, mailfrom: auh@moto-timo.dev)
+Received: by mail.gandi.net (Postfix) with ESMTPSA id 2305F1BF205
+	for <openembedded-devel@lists.openembedded.org>; Mon, 31 Jul 2023 05:10:13 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=moto-timo.dev;
-	s=gm1; t=1690780210;
+	s=gm1; t=1690780214;
 	h=from:from:reply-to:subject:subject:to:to:cc:mime-version:mime-version:
-	 content-type:content-type; bh=P4YgtcCfp3jKaH0OXOPHYdU1UuzXCnarv/K2QG9doF8=;
-	b=CLlvsBsL3B4keRKtZTILoAZMf1zj3h0vz/ViyfFrCDK1R4zD1lxeZ+vQD6xwGlTVkK7EYW
-	QbTvQ/PMFpHUHY1a8Ge4tJ1dEYA3ZbeHV2IWswzvT66bTWlNmAGDUgbe+0wx3D1s4VG/O6
-	zTtTRMPzbXSVcyqWqVi1iCk14L6lTx6l9XrMbD2BZknMFOQoO08SZwmTJiWzLlMDImdzPB
-	GOI8TpeTDswsNq7zUb47bqE8bhSuEjbD0bqqT5qplowEixF0pXR8H1rYHoA++86omygq7c
-	HIxYVuvgUi2LwhW/mOY/2j7mE9AKTgXKm7VpxDW/CgFvt1AQh7+uV812w1qJzg==
-Content-Type: multipart/mixed; boundary="===============6944948873197187480=="
+	 content-type:content-type; bh=QApl2f1eM2ddLaXcJLxMW+E0x5/LY5M+Qu0IcIsXeIM=;
+	b=oVs2Ix+6w1wpNc7Y3QCHHxBSoNrfoVK0cOfrrHS/hjO0I/ppBWKXV0Nk7zOpOrQ8a2g8PQ
+	4VmAWFd9UuYU6Rv9aaKOqcFMQAJWrRKmSGRw//DkuVbq/0oOUlHDGmRrm+wqKC9Rm3dgKl
+	qfKWZ34JTVKPXXBUUrw+bgxynGzKjf5sYki/h0lMQuWu+yWrJIApyhN2i0ZsKsIDW7Ywn6
+	Obem8DmJfv4m8zOeEFBY7Yec8n7MFRbRDd3JjqLdEAtWA8VbEWo673QYM4Q4dLt/0NL1th
+	JbTXCdWIRwCsXSJDHuxgRGI5HabYoB9ZALm5SoO3YqtKk8l65VQHCwricFJBBQ==
+Content-Type: multipart/mixed; boundary="===============0033665606089562319=="
 MIME-Version: 1.0
 From: auh@moto-timo.dev
 To: openembedded-devel@lists.openembedded.org
-Subject: [AUH] python3-sentry-sdk: upgrading to 1.28.1 FAILED
+Subject: [AUH] python3-tomlkit: upgrading to 0.12.1 FAILED
 X-GND-Sasl: auh@moto-timo.dev
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 31 Jul 2023 05:10:14 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104129
-Message-Id: <20230731051014.C9ECBC41513@smtp.lore.kernel.org>
-Date: Mon, 31 Jul 2023 05:10:14 +0000 (UTC)
+ <openembedded-devel@lists.openembedded.org>; Mon, 31 Jul 2023 05:10:24 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104131
+Message-Id: <20230731051024.C2786C41513@smtp.lore.kernel.org>
+Date: Mon, 31 Jul 2023 05:10:24 +0000 (UTC)
 
---===============6944948873197187480==
+--===============0033665606089562319==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -44,11 +44,11 @@ Content-Transfer-Encoding: 7bit
 Hello,
 
 this email is a notification from the Auto Upgrade Helper
-that the automatic attempt to upgrade the recipe *python3-sentry-sdk* to *1.28.1* has Failed (devtool error).
+that the automatic attempt to upgrade the recipe *python3-tomlkit* to *0.12.1* has Failed (devtool error).
 
 Detailed error information:
 
-The following devtool command failed:  upgrade python3-sentry-sdk -V 1.28.1
+The following devtool command failed:  upgrade python3-tomlkit -V 0.12.1
 NOTE: Starting bitbake server...
 Loading cache...done.
 Loaded 12625 entries from dependency cache.
@@ -199,20 +199,34 @@ NOTE: Tasks Summary: Attempted 3 tasks of which 0 didn't need to be rerun and al
 NOTE: Writing buildhistory
 NOTE: Writing buildhistory took: 4 seconds
 NOTE: Writing buildhistory
-NOTE: Writing buildhistory took: 4 seconds
+NOTE: Writing buildhistory took: 5 seconds
 NOTE: Writing buildhistory
-NOTE: Writing buildhistory took: 4 seconds
+NOTE: Writing buildhistory took: 5 seconds
 DEBUG 5 [Errno 25] Inappropriate ioctl for device
 Adding changed files:   0% |                                   | ETA:  --:--:--
 Adding changed files:   0% |                                   | ETA:  --:--:--
-Adding changed files:  40% |##############                      | ETA:  0:00:00
-Adding changed files:  80% |#############################       | ETA:  0:00:00
+Adding changed files:   6% |##                                  | ETA:  0:00:02
+Adding changed files:  12% |####                                | ETA:  0:00:01
+Adding changed files:  18% |######                              | ETA:  0:00:01
+Adding changed files:  25% |#########                           | ETA:  0:00:00
+Adding changed files:  31% |###########                         | ETA:  0:00:00
+Adding changed files:  37% |#############                       | ETA:  0:00:00
+Adding changed files:  43% |###############                     | ETA:  0:00:00
+Adding changed files:  50% |##################                  | ETA:  0:00:00
+Adding changed files:  56% |####################                | ETA:  0:00:00
+Adding changed files:  62% |######################              | ETA:  0:00:00
+Adding changed files:  69% |########################            | ETA:  0:00:00
+Adding changed files:  75% |###########################         | ETA:  0:00:00
+Adding changed files:  81% |#############################       | ETA:  0:00:00
+Adding changed files:  87% |###############################     | ETA:  0:00:00
+Adding changed files:  94% |#################################   | ETA:  0:00:00
 Adding changed files: 100% |####################################| Time: 0:00:00
 
 INFO: Extracting current version source...
+INFO: Adding local source files to srctree...
 INFO: Extracting upgraded version source...
-INFO: Fetching https://files.pythonhosted.org/packages/source/s/sentry-sdk/sentry-sdk-1.28.1.tar.gz;downloadfilename=sentry-sdk-1.28.1.tar.gz...
-INFO: Rebasing devtool onto 149ac2490f7c3eb6f08dfdbc2e5a30f366d36c58
+INFO: Fetching https://files.pythonhosted.org/packages/source/t/tomlkit/tomlkit-0.12.1.tar.gz;downloadfilename=tomlkit-0.12.1.tar.gz...
+INFO: Rebasing devtool onto 1ac3484e183c7c11e77c2023451a46a08b7e8117
 Traceback (most recent call last):
   File "/home/auh/Projects/poky/scripts/devtool", line 349, in <module>
     ret = main()
@@ -222,7 +236,7 @@ Traceback (most recent call last):
     new_licenses = _extract_licenses(srctree_s, (rd.getVar('LIC_FILES_CHKSUM') or ""))
   File "/home/auh/Projects/poky/scripts/lib/devtool/upgrade.py", line 473, in _extract_licenses
     with open(os.path.join(srcpath, path), 'rb') as f:
-FileNotFoundError: [Errno 2] No such file or directory: '/scratch1/auh/build-auh/workspace/sources/python3-sentry-sdk/LICENSE'
+FileNotFoundError: [Errno 2] No such file or directory: '/scratch1/auh/build-auh/workspace/sources/python3-tomlkit/LICENSE'
 
 
 Please review the attached files for further information and build/update failures.
@@ -230,5 +244,5 @@ Any problem please file a bug at https://bugzilla.yoctoproject.org/enter_bug.cgi
 
 Regards,
 The Upgrade Helper
---===============6944948873197187480==--
+--===============0033665606089562319==--
 
