@@ -2,41 +2,41 @@ Return-Path: <auh@moto-timo.dev>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0FBC1C001DF
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0F080C04A94
 	for <webhook@archiver.kernel.org>; Mon, 31 Jul 2023 05:47:55 +0000 (UTC)
-Received: from relay2-d.mail.gandi.net (relay2-d.mail.gandi.net [217.70.183.194])
- by mx.groups.io with SMTP id smtpd.web10.1574.1690782469948323980
+Received: from relay1-d.mail.gandi.net (relay1-d.mail.gandi.net [217.70.183.193])
+ by mx.groups.io with SMTP id smtpd.web11.1501.1690782472686399871
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 30 Jul 2023 22:47:50 -0700
+ Sun, 30 Jul 2023 22:47:53 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@moto-timo.dev header.s=gm1 header.b=ZIOh+AW1;
- spf=pass (domain: moto-timo.dev, ip: 217.70.183.194, mailfrom: auh@moto-timo.dev)
-Received: by mail.gandi.net (Postfix) with ESMTPSA id 5C8A940005
-	for <openembedded-devel@lists.openembedded.org>; Mon, 31 Jul 2023 05:47:48 +0000 (UTC)
+ dkim=pass header.i=@moto-timo.dev header.s=gm1 header.b=NSazkWhR;
+ spf=pass (domain: moto-timo.dev, ip: 217.70.183.193, mailfrom: auh@moto-timo.dev)
+Received: by mail.gandi.net (Postfix) with ESMTPSA id AD1AA240003
+	for <openembedded-devel@lists.openembedded.org>; Mon, 31 Jul 2023 05:47:50 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=moto-timo.dev;
-	s=gm1; t=1690782468;
+	s=gm1; t=1690782471;
 	h=from:from:reply-to:subject:subject:to:to:cc:mime-version:mime-version:
-	 content-type:content-type; bh=AzGgaIS1BtaOkkcTN0U4W5g6fa2bBK0Dggsd2AqqG9s=;
-	b=ZIOh+AW12ONLkgjp0Ffr2kA9wEbRA5zfyqvBOdlWfqpcsWYp0U1GBdKWlZbVorGNO3aJEK
-	8NzKU/eiQYb++d3DciCJxiKM8ByufxXx8VaCaVowJfIRtTM/djoM3wY2YjbdFuesM4fJE2
-	73Rpcm9hGJsLGm7NE+piFmz4sfRcOPfYa43qeYF1iRKvRdskaoCq9j0a7ZDAfu9Y5KWzJD
-	M23QUHjPhVUhhQQOax15eF3Mi5z82VhDzzfrKcx4AL7/gACLyzx0Jlydnjm2dNWI5Sr+8j
-	iqvcoDRgA55RoOcZlDMZ+1B5L93ZzAhY/m3jAmeKPY25PVrvgg8QmFRuiQjaMA==
-Content-Type: multipart/mixed; boundary="===============2299554220978952646=="
+	 content-type:content-type; bh=kinkc3tp90XlvuCHHOfL8HneKJt9PaTkH7qF5Z3qD4w=;
+	b=NSazkWhRUyLyM8E9htN4rXKjSQ+SM8vHg3vPDVsxu9zJB7/cyl/hlVSSHGIhB6x1m2Ck8a
+	lCd0FB2JrHpGKhk4XZ5LDB06QpDO7zBU20Iw4uS6i0DybcGEas8Bgze3FY2aWMtZRuX2qL
+	5GY9kwEoRbFuv2L0NxStFCT8wSUilN8xqmARMYu9C6deRKXUgBqdjyVdyKSgA/KAhwSL1M
+	vTxrIJu7nxxRoqEL1u6TqxA2dKDrsNfHFivwoyPwf9cHA8SSdTnxWqYpB6WQTNsF0JtO3d
+	bnObFDCMYxR8aqE9olPZJlGMOR2HOsOLQksibmNjfJIElE9dLhwLFiaEmmHl2Q==
+Content-Type: multipart/mixed; boundary="===============4435181081063779638=="
 MIME-Version: 1.0
 From: auh@moto-timo.dev
 To: openembedded-devel@lists.openembedded.org
-Subject: [AUH] libcompress-raw-lzma-perl: upgrading to 2.206 FAILED
+Subject: [AUH] libcompress-raw-zlib-perl: upgrading to 2.206 FAILED
 X-GND-Sasl: auh@moto-timo.dev
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 31 Jul 2023 05:47:55 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104145
-Message-Id: <20230731054755.0FBC1C001DF@smtp.lore.kernel.org>
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104146
+Message-Id: <20230731054755.0F080C04A94@smtp.lore.kernel.org>
 Date: Mon, 31 Jul 2023 05:47:55 +0000 (UTC)
 
---===============2299554220978952646==
+--===============4435181081063779638==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -44,11 +44,11 @@ Content-Transfer-Encoding: 7bit
 Hello,
 
 this email is a notification from the Auto Upgrade Helper
-that the automatic attempt to upgrade the recipe *libcompress-raw-lzma-perl* to *2.206* has Failed (devtool error).
+that the automatic attempt to upgrade the recipe *libcompress-raw-zlib-perl* to *2.206* has Failed (devtool error).
 
 Detailed error information:
 
-The following devtool command failed:  upgrade libcompress-raw-lzma-perl -V 2.206
+The following devtool command failed:  upgrade libcompress-raw-zlib-perl -V 2.206
 NOTE: Starting bitbake server...
 Loading cache...done.
 Loaded 12625 entries from dependency cache.
@@ -205,12 +205,13 @@ NOTE: Writing buildhistory took: 5 seconds
 DEBUG 5 [Errno 25] Inappropriate ioctl for device
 Adding changed files:   0% |                                   | ETA:  --:--:--
 Adding changed files:   0% |                                   | ETA:  --:--:--
+Adding changed files:  97% |##################################  | ETA:  0:00:00
 Adding changed files: 100% |####################################| Time: 0:00:00
 
 INFO: Extracting current version source...
 INFO: Extracting upgraded version source...
-INFO: Fetching https://search.cpan.org/CPAN/authors/id/P/PM/PMQS/Compress-Raw-Lzma-2.206.tar.gz...
-INFO: Rebasing devtool onto 6a52f297075bcf9b64a20b4dd8e892d606400a26
+INFO: Fetching https://search.cpan.org/CPAN/authors/id/P/PM/PMQS/Compress-Raw-Zlib-2.206.tar.gz...
+INFO: Rebasing devtool onto e4b2d3675deca4745a5df2a47d5a7ab8b3045d5d
 Traceback (most recent call last):
   File "/home/auh/Projects/poky/scripts/devtool", line 349, in <module>
     ret = main()
@@ -220,7 +221,7 @@ Traceback (most recent call last):
     new_licenses = _extract_licenses(srctree_s, (rd.getVar('LIC_FILES_CHKSUM') or ""))
   File "/home/auh/Projects/poky/scripts/lib/devtool/upgrade.py", line 473, in _extract_licenses
     with open(os.path.join(srcpath, path), 'rb') as f:
-FileNotFoundError: [Errno 2] No such file or directory: '/scratch1/auh/build-auh/workspace/sources/libcompress-raw-lzma-perl/README'
+FileNotFoundError: [Errno 2] No such file or directory: '/scratch1/auh/build-auh/workspace/sources/libcompress-raw-zlib-perl/README'
 
 
 Please review the attached files for further information and build/update failures.
@@ -228,5 +229,5 @@ Any problem please file a bug at https://bugzilla.yoctoproject.org/enter_bug.cgi
 
 Regards,
 The Upgrade Helper
---===============2299554220978952646==--
+--===============4435181081063779638==--
 
