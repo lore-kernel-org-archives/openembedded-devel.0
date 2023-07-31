@@ -2,41 +2,41 @@ Return-Path: <auh@moto-timo.dev>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C92C0C41513
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D3282C001DF
 	for <webhook@archiver.kernel.org>; Mon, 31 Jul 2023 05:10:34 +0000 (UTC)
-Received: from relay7-d.mail.gandi.net (relay7-d.mail.gandi.net [217.70.183.200])
- by mx.groups.io with SMTP id smtpd.web10.1216.1690780225786069234
+Received: from relay3-d.mail.gandi.net (relay3-d.mail.gandi.net [217.70.183.195])
+ by mx.groups.io with SMTP id smtpd.web10.1218.1690780229103295743
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 30 Jul 2023 22:10:26 -0700
+ Sun, 30 Jul 2023 22:10:29 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@moto-timo.dev header.s=gm1 header.b=WxCvQxFD;
- spf=pass (domain: moto-timo.dev, ip: 217.70.183.200, mailfrom: auh@moto-timo.dev)
-Received: by mail.gandi.net (Postfix) with ESMTPSA id 2C47E20004
-	for <openembedded-devel@lists.openembedded.org>; Mon, 31 Jul 2023 05:10:23 +0000 (UTC)
+ dkim=pass header.i=@moto-timo.dev header.s=gm1 header.b=pnBG5qlh;
+ spf=pass (domain: moto-timo.dev, ip: 217.70.183.195, mailfrom: auh@moto-timo.dev)
+Received: by mail.gandi.net (Postfix) with ESMTPSA id 776CC60002
+	for <openembedded-devel@lists.openembedded.org>; Mon, 31 Jul 2023 05:10:27 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=moto-timo.dev;
-	s=gm1; t=1690780224;
+	s=gm1; t=1690780227;
 	h=from:from:reply-to:subject:subject:to:to:cc:mime-version:mime-version:
-	 content-type:content-type; bh=vKRYvtnkYl1ObleVjf4l6wOMh0MaF5tjhhA3cxmM3nc=;
-	b=WxCvQxFDRqvgx2OZpgTKwlwhV+bIjtJKBU8Ew3a43YnL6mwuMVwkce8eC4CEOtYB/rf2TH
-	Nk/PHDlK+H+E7qSobDtWOJCttK1pe1uZCJvMKSWnsNQQJ11PxARmrixc5slyj/EnXJSbL6
-	4PWnCBjfnoiRHZXidejfQlAAzsGeFoIirJHFsuVqJODcbiKEUh+CDTQvMXJkI3v8h6L9Nf
-	4jcacTvuf/BOfCMtEl8Vb939TnUpC5+i5sQy6RlbKupfMNo28CucObftab9wiC2IwIY5FO
-	6+XatUq+H3AeXrHyisI/qiuKhrb/F1Bac7LqJo1PD27lIqJmUFFlRZwdqjqJXg==
-Content-Type: multipart/mixed; boundary="===============6363627894428260925=="
+	 content-type:content-type; bh=+1LUjyFZex1uWT1Snw6fy+v2yABzC/2OVZaA7tv2yyM=;
+	b=pnBG5qlhGhT9HrK1RXv+8RjTp2InWtkuBxKYDl13q+D/YbcRm7X/HA8tQ3gpQw5LvOrnwo
+	4daSo2u3UXcSirRC4WIWlQ7uxhXzG2nQo5Gk5oYLuozUOeFzd4CQs8JI+AFeq34xhPx9F/
+	L4Z4FyvG7BNTAl5nb2qK3HbgdEoH+LMwncIe/VfSjVRRBoJnUg62s+gzXiNMFA/mY6PT1l
+	RaTfDJIvSB8wJf+kUDjlJ5doiq7KRoqATjG4Hgh4cYh3q8hQgrYn4gPl1CoJiVLhWd5EKo
+	oXespP6M0jtCZRu7zr/RzwANkyhm32uNLTErKMxgFi7ZLfAfLpRBTmP3WjmrOw==
+Content-Type: multipart/mixed; boundary="===============3772978459070946454=="
 MIME-Version: 1.0
 From: auh@moto-timo.dev
 To: openembedded-devel@lists.openembedded.org
-Subject: [AUH] python3-typeguard: upgrading to 4.1.0 FAILED
+Subject: [AUH] python3-web3: upgrading to 6.7.0 FAILED
 X-GND-Sasl: auh@moto-timo.dev
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 31 Jul 2023 05:10:34 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104134
-Message-Id: <20230731051034.C92C0C41513@smtp.lore.kernel.org>
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104136
+Message-Id: <20230731051034.D3282C001DF@smtp.lore.kernel.org>
 Date: Mon, 31 Jul 2023 05:10:34 +0000 (UTC)
 
---===============6363627894428260925==
+--===============3772978459070946454==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -44,11 +44,11 @@ Content-Transfer-Encoding: 7bit
 Hello,
 
 this email is a notification from the Auto Upgrade Helper
-that the automatic attempt to upgrade the recipe *python3-typeguard* to *4.1.0* has Failed (devtool error).
+that the automatic attempt to upgrade the recipe *python3-web3* to *6.7.0* has Failed (devtool error).
 
 Detailed error information:
 
-The following devtool command failed:  upgrade python3-typeguard -V 4.1.0
+The following devtool command failed:  upgrade python3-web3 -V 6.7.0
 NOTE: Starting bitbake server...
 Loading cache...done.
 Loaded 12625 entries from dependency cache.
@@ -201,18 +201,21 @@ NOTE: Writing buildhistory took: 4 seconds
 NOTE: Writing buildhistory
 NOTE: Writing buildhistory took: 4 seconds
 NOTE: Writing buildhistory
-NOTE: Writing buildhistory took: 5 seconds
+NOTE: Writing buildhistory took: 4 seconds
 DEBUG 5 [Errno 25] Inappropriate ioctl for device
 Adding changed files:   0% |                                   | ETA:  --:--:--
 Adding changed files:   0% |                                   | ETA:  --:--:--
-Adding changed files:  85% |##############################      | ETA:  0:00:00
+Adding changed files:  17% |######                              | ETA:  0:00:00
+Adding changed files:  35% |############                        | ETA:  0:00:00
+Adding changed files:  52% |###################                 | ETA:  0:00:00
+Adding changed files:  70% |#########################           | ETA:  0:00:00
+Adding changed files:  88% |###############################     | ETA:  0:00:00
 Adding changed files: 100% |####################################| Time: 0:00:00
 
 INFO: Extracting current version source...
-INFO: Adding local source files to srctree...
 INFO: Extracting upgraded version source...
-INFO: Fetching https://files.pythonhosted.org/packages/source/t/typeguard/typeguard-4.1.0.tar.gz;downloadfilename=typeguard-4.1.0.tar.gz...
-INFO: Rebasing devtool onto 6737346bed4aeca390ed3b4668fc6e810f9460bd
+INFO: Fetching https://files.pythonhosted.org/packages/source/w/web3/web3-6.7.0.tar.gz;downloadfilename=web3-6.7.0.tar.gz...
+INFO: Rebasing devtool onto c0bb7f22f0116b11f66f336ef8e5ef9d116d86e7
 Traceback (most recent call last):
   File "/home/auh/Projects/poky/scripts/devtool", line 349, in <module>
     ret = main()
@@ -222,7 +225,7 @@ Traceback (most recent call last):
     new_licenses = _extract_licenses(srctree_s, (rd.getVar('LIC_FILES_CHKSUM') or ""))
   File "/home/auh/Projects/poky/scripts/lib/devtool/upgrade.py", line 473, in _extract_licenses
     with open(os.path.join(srcpath, path), 'rb') as f:
-FileNotFoundError: [Errno 2] No such file or directory: '/scratch1/auh/build-auh/workspace/sources/python3-typeguard/LICENSE'
+FileNotFoundError: [Errno 2] No such file or directory: '/scratch1/auh/build-auh/workspace/sources/python3-web3/LICENSE'
 
 
 Please review the attached files for further information and build/update failures.
@@ -230,5 +233,5 @@ Any problem please file a bug at https://bugzilla.yoctoproject.org/enter_bug.cgi
 
 Regards,
 The Upgrade Helper
---===============6363627894428260925==--
+--===============3772978459070946454==--
 
