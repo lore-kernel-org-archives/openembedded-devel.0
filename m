@@ -2,41 +2,41 @@ Return-Path: <auh@moto-timo.dev>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C4387C41513
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C4360C001DC
 	for <webhook@archiver.kernel.org>; Mon, 31 Jul 2023 05:10:44 +0000 (UTC)
-Received: from relay6-d.mail.gandi.net (relay6-d.mail.gandi.net [217.70.183.198])
- by mx.groups.io with SMTP id smtpd.web10.1223.1690780237549677933
+Received: from relay7-d.mail.gandi.net (relay7-d.mail.gandi.net [217.70.183.200])
+ by mx.groups.io with SMTP id smtpd.web10.1224.1690780239220189566
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 30 Jul 2023 22:10:38 -0700
+ Sun, 30 Jul 2023 22:10:39 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@moto-timo.dev header.s=gm1 header.b=J8/2PUW+;
- spf=pass (domain: moto-timo.dev, ip: 217.70.183.198, mailfrom: auh@moto-timo.dev)
-Received: by mail.gandi.net (Postfix) with ESMTPSA id E8FFBC0003
-	for <openembedded-devel@lists.openembedded.org>; Mon, 31 Jul 2023 05:10:35 +0000 (UTC)
+ dkim=pass header.i=@moto-timo.dev header.s=gm1 header.b=clmMBc4G;
+ spf=pass (domain: moto-timo.dev, ip: 217.70.183.200, mailfrom: auh@moto-timo.dev)
+Received: by mail.gandi.net (Postfix) with ESMTPSA id 8EE8E20004
+	for <openembedded-devel@lists.openembedded.org>; Mon, 31 Jul 2023 05:10:37 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=moto-timo.dev;
-	s=gm1; t=1690780236;
+	s=gm1; t=1690780237;
 	h=from:from:reply-to:subject:subject:to:to:cc:mime-version:mime-version:
-	 content-type:content-type; bh=rEjmmqsN0pjf1zfikkzztpY5r+4TmthRRANoD1AVFUU=;
-	b=J8/2PUW+0/N7NYZk/4kIqJCoZmZz7uR0hknSybAzj/zng3qQXq6E2+8+JbnUGNP5ez4fG/
-	VMxEYgowxwF1n4Tpq18E0efGnH8R5mPIOgjm+LhI+DaLi27wkHsmKOMfTks3DmRIwcU7dj
-	dSs4Jm9A1zoFH77fspbI9JgILG8u20bDiCSxNMyzCeGhoIeV8gtbgEn7XMJasKDk2utdGC
-	zvPkKfnw67in+HY8CI0UX3ZUcO2YuqTgwllPu+McSBG5WnEgFfi+At3JnyZZy3ixZ9hgab
-	5c8mkyI/GUWt+oWPPxehZKryNWszuT2vR/e6FtLoKCTzQ7x/9z/yb0xTFC2abQ==
-Content-Type: multipart/mixed; boundary="===============0401730196587614103=="
+	 content-type:content-type; bh=ok0wZNkcNRKPjtebtFaetA0FFV6dgHWUikh114qoCGk=;
+	b=clmMBc4GJH4WeqW47eSG5lTQLb8s7Vu04rsbTzIz9JuV6VpA6T5PVWOpzVHeFLQPwnKTQD
+	y/OAuofFfFBpsWr/S0nKPdwW5KWUDa23WTbzzIdpt7fiKHL5O+dg9RtzROaxr0INj1fQ0k
+	S7BvRIa8o2/yfaCo3jzeHEMNSNFvPE1KAjj3mw9YygxKZr1I3ve5z3q5ysH3U0/If8w6a6
+	nfHyKz0tX/Zac/rlCqY3YMDgaMIYmCq0nnfGJTrFYOYp7/p7ZdQKC0Ymkd0mcHiy4DduRS
+	mxg/7nBOn5DYbIMfRnz3Rvbzm2biP5CwjIBd4i1x0sm1NU4LBoPmi7cXU4Ue/w==
+Content-Type: multipart/mixed; boundary="===============8230210896459984131=="
 MIME-Version: 1.0
 From: auh@moto-timo.dev
 To: openembedded-devel@lists.openembedded.org
-Subject: [AUH] python3-xxhash: upgrading to 3.3.0 FAILED
+Subject: [AUH] python3-zeroconf: upgrading to 0.71.4 FAILED
 X-GND-Sasl: auh@moto-timo.dev
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 31 Jul 2023 05:10:44 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104141
-Message-Id: <20230731051044.C4387C41513@smtp.lore.kernel.org>
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104142
+Message-Id: <20230731051044.C4360C001DC@smtp.lore.kernel.org>
 Date: Mon, 31 Jul 2023 05:10:44 +0000 (UTC)
 
---===============0401730196587614103==
+--===============8230210896459984131==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -44,11 +44,11 @@ Content-Transfer-Encoding: 7bit
 Hello,
 
 this email is a notification from the Auto Upgrade Helper
-that the automatic attempt to upgrade the recipe *python3-xxhash* to *3.3.0* has Failed (devtool error).
+that the automatic attempt to upgrade the recipe *python3-zeroconf* to *0.71.4* has Failed (devtool error).
 
 Detailed error information:
 
-The following devtool command failed:  upgrade python3-xxhash -V 3.3.0
+The following devtool command failed:  upgrade python3-zeroconf -V 0.71.4
 NOTE: Starting bitbake server...
 Loading cache...done.
 Loaded 12625 entries from dependency cache.
@@ -205,13 +205,13 @@ NOTE: Writing buildhistory took: 5 seconds
 DEBUG 5 [Errno 25] Inappropriate ioctl for device
 Adding changed files:   0% |                                   | ETA:  --:--:--
 Adding changed files:   0% |                                   | ETA:  --:--:--
+Adding changed files:  78% |############################        | ETA:  0:00:00
 Adding changed files: 100% |####################################| Time: 0:00:00
 
 INFO: Extracting current version source...
-INFO: Adding local source files to srctree...
 INFO: Extracting upgraded version source...
-INFO: Fetching https://files.pythonhosted.org/packages/source/x/xxhash/xxhash-3.3.0.tar.gz;downloadfilename=xxhash-3.3.0.tar.gz...
-INFO: Rebasing devtool onto a6600c91303da1cf842f67e7542e54721c927788
+INFO: Fetching https://files.pythonhosted.org/packages/source/z/zeroconf/zeroconf-0.71.4.tar.gz;downloadfilename=zeroconf-0.71.4.tar.gz...
+INFO: Rebasing devtool onto 10696d5363f4bd326549aca3182db3d232f95b7e
 Traceback (most recent call last):
   File "/home/auh/Projects/poky/scripts/devtool", line 349, in <module>
     ret = main()
@@ -221,7 +221,7 @@ Traceback (most recent call last):
     new_licenses = _extract_licenses(srctree_s, (rd.getVar('LIC_FILES_CHKSUM') or ""))
   File "/home/auh/Projects/poky/scripts/lib/devtool/upgrade.py", line 473, in _extract_licenses
     with open(os.path.join(srcpath, path), 'rb') as f:
-FileNotFoundError: [Errno 2] No such file or directory: '/scratch1/auh/build-auh/workspace/sources/python3-xxhash/LICENSE'
+FileNotFoundError: [Errno 2] No such file or directory: '/scratch1/auh/build-auh/workspace/sources/python3-zeroconf/PKG-INFO'
 
 
 Please review the attached files for further information and build/update failures.
@@ -229,5 +229,5 @@ Any problem please file a bug at https://bugzilla.yoctoproject.org/enter_bug.cgi
 
 Regards,
 The Upgrade Helper
---===============0401730196587614103==--
+--===============8230210896459984131==--
 
