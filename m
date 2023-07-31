@@ -2,41 +2,41 @@ Return-Path: <auh@moto-timo.dev>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D325EC001DC
-	for <webhook@archiver.kernel.org>; Mon, 31 Jul 2023 05:08:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C49BDC41513
+	for <webhook@archiver.kernel.org>; Mon, 31 Jul 2023 05:08:44 +0000 (UTC)
 Received: from relay7-d.mail.gandi.net (relay7-d.mail.gandi.net [217.70.183.200])
- by mx.groups.io with SMTP id smtpd.web10.1166.1690780108434387495
+ by mx.groups.io with SMTP id smtpd.web10.1171.1690780121378643530
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 30 Jul 2023 22:08:28 -0700
+ Sun, 30 Jul 2023 22:08:41 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@moto-timo.dev header.s=gm1 header.b=GW6XFS11;
+ dkim=pass header.i=@moto-timo.dev header.s=gm1 header.b=iP3G+7Py;
  spf=pass (domain: moto-timo.dev, ip: 217.70.183.200, mailfrom: auh@moto-timo.dev)
-Received: by mail.gandi.net (Postfix) with ESMTPSA id 1380020002
-	for <openembedded-devel@lists.openembedded.org>; Mon, 31 Jul 2023 05:08:25 +0000 (UTC)
+Received: by mail.gandi.net (Postfix) with ESMTPSA id 9B75720002
+	for <openembedded-devel@lists.openembedded.org>; Mon, 31 Jul 2023 05:08:39 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=moto-timo.dev;
-	s=gm1; t=1690780106;
+	s=gm1; t=1690780119;
 	h=from:from:reply-to:subject:subject:to:to:cc:mime-version:mime-version:
-	 content-type:content-type; bh=ahKVyrQQ80pA1GzTPHT1FAb8swcazmBxlKUtqn0RFvM=;
-	b=GW6XFS11ctMRQ1Q6dQ/EZbzO+UdX3AiCDDqDGAev1HQIAkimFb9AY36cDzWktaAl7Cz04j
-	lLnjUp/4RodSjxuqmQOqyTF01ium3gltHDV/g1r3MNsoaxyMQdq5DrBPnbWKEyj04mQEfm
-	CHg9IBwq8zey9ZG6nMxeHE/VCviOuO9Ew1lngeDa5Z5Lly+LuEAmcHcwGi/RmpoUQbZB5I
-	CGigIeluUYOBc8hiGlL7M9UC+Aukof79FtMXPnwrVCfjVTDsSAa4tio2Y1bGQH34irVMFZ
-	AAmRFVzH6fi8naxV2xoU+G2lQCYKNjiVA4LktJklSkR0Sx70XeOBnNBrEDkuDQ==
-Content-Type: multipart/mixed; boundary="===============7925412510205230884=="
+	 content-type:content-type; bh=JQh0G/1pxzJYug4jfN3+P7PWw6tXQ4X4TN26DLdV8r0=;
+	b=iP3G+7PyDXR7KGWPI9zl8IqnorFrTJZUjwq99UcrXVCJP2EUs4HZtxIMr8Hn1y+gu3awOQ
+	3WFR/lTMVdFzi0s9Qg3CuOkUFjDxwnS5Px1+NRtbMBgc/J4/alOvz3nxtZ14Y3oqrY5F1e
+	6+/t/aGDZwaQWgr9l5c/lFpNXPB3mcE1aEiv6zS/q6OMqsBfLfpF/UkoWALa2VaPZHNoR2
+	VMoPf3LZS/orQROZQu64HdJFgbNwUFeZa2N3JmyY26pHyjt/v8u5gPZlPMHb4llps007wF
+	O18/h6XxrWzmshycjG1R1Qljm6b1VhF1g8VIjsJhiVKzHfgnK5//9fdcwp21/g==
+Content-Type: multipart/mixed; boundary="===============8415897786738574257=="
 MIME-Version: 1.0
 From: auh@moto-timo.dev
 To: openembedded-devel@lists.openembedded.org
-Subject: [AUH] python3-bitarray: upgrading to 2.8.0 FAILED
+Subject: [AUH] python3-cmake: upgrading to 3.27.0 FAILED
 X-GND-Sasl: auh@moto-timo.dev
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 31 Jul 2023 05:08:34 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104082
-Message-Id: <20230731050834.D325EC001DC@smtp.lore.kernel.org>
-Date: Mon, 31 Jul 2023 05:08:34 +0000 (UTC)
+ <openembedded-devel@lists.openembedded.org>; Mon, 31 Jul 2023 05:08:44 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104086
+Message-Id: <20230731050844.C49BDC41513@smtp.lore.kernel.org>
+Date: Mon, 31 Jul 2023 05:08:44 +0000 (UTC)
 
---===============7925412510205230884==
+--===============8415897786738574257==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -44,12 +44,16 @@ Content-Transfer-Encoding: 7bit
 Hello,
 
 this email is a notification from the Auto Upgrade Helper
-that the automatic attempt to upgrade the recipe *python3-bitarray* to *2.8.0* has Failed (devtool error).
+that the automatic attempt to upgrade the recipe *python3-cmake* to *3.27.0* has Failed (devtool error).
 
 Detailed error information:
 
-The following devtool command failed:  upgrade python3-bitarray -V 2.8.0
+The following devtool command failed:  upgrade python3-cmake -V 3.27.0
 NOTE: Starting bitbake server...
+NOTE: Reconnecting to bitbake server...
+NOTE: Previous bitbake instance shutting down?, waiting to retry... (19:36:53.165972)
+NOTE: Directory listing: ['tmp-qemux86-musl', 'tmp-qemuarm64', 'tmp', 'conf', 'tmp-qemux86-64', 'weeklyjob.sh', 'auto_upgrade_helper', 'tmp-qemux86', 'auto-upgrade-helper', 'upgrade-helper', 'cache', 'workspace', 'pokyjob.sh', 'buildhistory', 'perljob.sh', 'bitbake-cookerdaemon.log']
+NOTE: Retrying server connection (#1)... (19:36:53.281711)
 Loading cache...done.
 Loaded 12619 entries from dependency cache.
 NOTE: Resolving any missing task queue dependencies
@@ -120,9 +124,9 @@ Sstate summary: Wanted 10 Local 0 Mirrors 10 Missed 0 Current 20 (100% match, 10
 NOTE: Executing Tasks
 NOTE: Tasks Summary: Attempted 103 tasks of which 100 didn't need to be rerun and all succeeded.
 NOTE: Writing buildhistory
-NOTE: Writing buildhistory took: 4 seconds
+NOTE: Writing buildhistory took: 3 seconds
 NOTE: Writing buildhistory
-NOTE: Writing buildhistory took: 4 seconds
+NOTE: Writing buildhistory took: 3 seconds
 NOTE: Writing buildhistory
 NOTE: Writing buildhistory took: 3 seconds
 Loading cache...done.
@@ -208,9 +212,10 @@ Adding changed files:   0% |                                   | ETA:  --:--:--
 Adding changed files: 100% |####################################| Time: 0:00:00
 
 INFO: Extracting current version source...
+INFO: Adding local source files to srctree...
 INFO: Extracting upgraded version source...
-INFO: Fetching https://files.pythonhosted.org/packages/source/b/bitarray/bitarray-2.8.0.tar.gz;downloadfilename=bitarray-2.8.0.tar.gz...
-INFO: Rebasing devtool onto 79e2ca4c949946acfdd914e883f934247066767c
+INFO: Fetching https://files.pythonhosted.org/packages/source/c/cmake/cmake-3.27.0.tar.gz;downloadfilename=pypi-cmake-3.27.0.tar.gz...
+INFO: Rebasing devtool onto 2dc1c043d6567e51563374742564967c1a9bd811
 Traceback (most recent call last):
   File "/home/auh/Projects/poky/scripts/devtool", line 349, in <module>
     ret = main()
@@ -220,7 +225,7 @@ Traceback (most recent call last):
     new_licenses = _extract_licenses(srctree_s, (rd.getVar('LIC_FILES_CHKSUM') or ""))
   File "/home/auh/Projects/poky/scripts/lib/devtool/upgrade.py", line 473, in _extract_licenses
     with open(os.path.join(srcpath, path), 'rb') as f:
-FileNotFoundError: [Errno 2] No such file or directory: '/scratch1/auh/build-auh/workspace/sources/python3-bitarray/PKG-INFO'
+FileNotFoundError: [Errno 2] No such file or directory: '/scratch1/auh/build-auh/workspace/sources/python3-cmake/LICENSE_BSD_3'
 
 
 Please review the attached files for further information and build/update failures.
@@ -228,5 +233,5 @@ Any problem please file a bug at https://bugzilla.yoctoproject.org/enter_bug.cgi
 
 Regards,
 The Upgrade Helper
---===============7925412510205230884==--
+--===============8415897786738574257==--
 
