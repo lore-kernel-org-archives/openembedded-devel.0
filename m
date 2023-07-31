@@ -2,41 +2,41 @@ Return-Path: <auh@moto-timo.dev>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D75F8C04FE0
-	for <webhook@archiver.kernel.org>; Mon, 31 Jul 2023 05:09:24 +0000 (UTC)
-Received: from relay6-d.mail.gandi.net (relay6-d.mail.gandi.net [217.70.183.198])
- by mx.groups.io with SMTP id smtpd.web11.1114.1690780158426665438
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C1575C41513
+	for <webhook@archiver.kernel.org>; Mon, 31 Jul 2023 05:09:34 +0000 (UTC)
+Received: from relay2-d.mail.gandi.net (relay2-d.mail.gandi.net [217.70.183.194])
+ by mx.groups.io with SMTP id smtpd.web10.1193.1690780165526800363
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 30 Jul 2023 22:09:18 -0700
+ Sun, 30 Jul 2023 22:09:25 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@moto-timo.dev header.s=gm1 header.b=fy1HvtYJ;
- spf=pass (domain: moto-timo.dev, ip: 217.70.183.198, mailfrom: auh@moto-timo.dev)
-Received: by mail.gandi.net (Postfix) with ESMTPSA id C4FB2C0004
-	for <openembedded-devel@lists.openembedded.org>; Mon, 31 Jul 2023 05:09:16 +0000 (UTC)
+ dkim=pass header.i=@moto-timo.dev header.s=gm1 header.b=O5ihO05L;
+ spf=pass (domain: moto-timo.dev, ip: 217.70.183.194, mailfrom: auh@moto-timo.dev)
+Received: by mail.gandi.net (Postfix) with ESMTPSA id BDA8F40003
+	for <openembedded-devel@lists.openembedded.org>; Mon, 31 Jul 2023 05:09:23 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=moto-timo.dev;
-	s=gm1; t=1690780157;
+	s=gm1; t=1690780164;
 	h=from:from:reply-to:subject:subject:to:to:cc:mime-version:mime-version:
-	 content-type:content-type; bh=E799uJmHU/cnj5rCYmu8/xDaMqu0poYKLpnf6dSu3MY=;
-	b=fy1HvtYJiGd+/aHFGrI05UaVwkItzF7qGCbv1BdlRPCCHcOwfXi/rtTa3f5w9u+KBldwne
-	eX7+30g29CuRTk5ejKLHY9Y8HwuhUdwvGLRxMAXdgWMfsiYtuU0bIMvUwoL3yA6Ko5YSs8
-	iu0RwBygr7k3g1+cU8p5rmwjfjGC7nDiO56i8215CRsIV5JCaZU7GP48efItsBvzFTYqab
-	q9hgTuMi2tC618+N43AYysN4fxGopMPfOqSMWYChvCRfhgZsXSTm9Bew0nKwyjVHMf/29n
-	nYe6ive7oNoZgohQh3uRDwr2VIoSVwoaZMoS0FTXA9NeFwzM1ygxXfI+M0KoYw==
-Content-Type: multipart/mixed; boundary="===============5271564075393809241=="
+	 content-type:content-type; bh=SM36laO3m4Oixa8E8LIAZeI1EUG+TrPUmMMmkZrF/L4=;
+	b=O5ihO05Lu+pOOtEtsaB3AtosWExY6gUPXqsjRrv03g9PmaRz38o2TA4yPLcTPOwz/nlGKw
+	LKcI8QxCX0K0fVTnnrD7Zq7htINf6E9J1cNrenXswDpWAmATqyQcSHVS+2WgyOadA+Iw/R
+	ialkh6yvbs+H0r1BmH7CMxxJSpjNQCyfO9wIR11pmXM9WwcE9ixdoFDmrtzMDRjs5Mmsc0
+	/GijE7lA+SomgUMtnj1VvhXYX/LCXxKQ1Q6atY8nZmzmvunZcgnHP2aGq6WWy9OaLX+dM1
+	EcQwIESwnHe3dK9b3Rrwt/HpAQIDx7QCaxw3GYuKJOG5CxgCXD+4qhlREnypPg==
+Content-Type: multipart/mixed; boundary="===============6407456898771085349=="
 MIME-Version: 1.0
 From: auh@moto-timo.dev
 To: openembedded-devel@lists.openembedded.org
-Subject: [AUH] python3-kmod: upgrading to 0.9.2 FAILED
+Subject: [AUH] python3-paramiko: upgrading to 3.3.1 FAILED
 X-GND-Sasl: auh@moto-timo.dev
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 31 Jul 2023 05:09:24 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104106
-Message-Id: <20230731050924.D75F8C04FE0@smtp.lore.kernel.org>
-Date: Mon, 31 Jul 2023 05:09:24 +0000 (UTC)
+ <openembedded-devel@lists.openembedded.org>; Mon, 31 Jul 2023 05:09:34 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104110
+Message-Id: <20230731050934.C1575C41513@smtp.lore.kernel.org>
+Date: Mon, 31 Jul 2023 05:09:34 +0000 (UTC)
 
---===============5271564075393809241==
+--===============6407456898771085349==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -44,14 +44,14 @@ Content-Transfer-Encoding: 7bit
 Hello,
 
 this email is a notification from the Auto Upgrade Helper
-that the automatic attempt to upgrade the recipe *python3-kmod* to *0.9.2* has Failed (devtool error).
+that the automatic attempt to upgrade the recipe *python3-paramiko* to *3.3.1* has Failed (devtool error).
 
 Detailed error information:
 
-The following devtool command failed:  upgrade python3-kmod -V 0.9.2
+The following devtool command failed:  upgrade python3-paramiko -V 3.3.1
 NOTE: Starting bitbake server...
 Loading cache...done.
-Loaded 12622 entries from dependency cache.
+Loaded 12625 entries from dependency cache.
 NOTE: Resolving any missing task queue dependencies
 NOTE: Resolving any missing task queue dependencies
 NOTE: Resolving any missing task queue dependencies
@@ -74,7 +74,7 @@ meta-poky
 meta-yocto-bsp       = "master:5dd5f0f5348594a0b636ef05a87381b997db4fb5"
 meta-oe              
 meta-python          
-meta-perl            = "tmp-auh-upgrades:505bd1d403f9788570e15f85121b5e1ded7d5ce8"
+meta-perl            = "tmp-auh-upgrades:9d4ce13d23c371beb8b9cd020b6eebed19c0d793"
 workspace            = "<unknown>:<unknown>"
 
 
@@ -93,7 +93,7 @@ meta-poky
 meta-yocto-bsp       = "master:5dd5f0f5348594a0b636ef05a87381b997db4fb5"
 meta-oe              
 meta-python          
-meta-perl            = "tmp-auh-upgrades:505bd1d403f9788570e15f85121b5e1ded7d5ce8"
+meta-perl            = "tmp-auh-upgrades:9d4ce13d23c371beb8b9cd020b6eebed19c0d793"
 workspace            = "<unknown>:<unknown>"
 
 
@@ -112,7 +112,7 @@ meta-poky
 meta-yocto-bsp       = "master:5dd5f0f5348594a0b636ef05a87381b997db4fb5"
 meta-oe              
 meta-python          
-meta-perl            = "tmp-auh-upgrades:505bd1d403f9788570e15f85121b5e1ded7d5ce8"
+meta-perl            = "tmp-auh-upgrades:9d4ce13d23c371beb8b9cd020b6eebed19c0d793"
 workspace            = "<unknown>:<unknown>"
 
 Initialising tasks...done.
@@ -126,7 +126,7 @@ NOTE: Writing buildhistory took: 3 seconds
 NOTE: Writing buildhistory
 NOTE: Writing buildhistory took: 3 seconds
 Loading cache...done.
-Loaded 12622 entries from dependency cache.
+Loaded 12625 entries from dependency cache.
 Parsing recipes...done.
 Parsing of 7344 .bb files complete (7338 cached, 6 parsed). 12619 targets, 353 skipped, 0 masked, 0 errors.
 NOTE: Resolving any missing task queue dependencies
@@ -151,7 +151,7 @@ meta-poky
 meta-yocto-bsp       = "master:5dd5f0f5348594a0b636ef05a87381b997db4fb5"
 meta-oe              
 meta-python          
-meta-perl            = "tmp-auh-upgrades:505bd1d403f9788570e15f85121b5e1ded7d5ce8"
+meta-perl            = "tmp-auh-upgrades:9d4ce13d23c371beb8b9cd020b6eebed19c0d793"
 workspace            = "<unknown>:<unknown>"
 
 
@@ -170,7 +170,7 @@ meta-poky
 meta-yocto-bsp       = "master:5dd5f0f5348594a0b636ef05a87381b997db4fb5"
 meta-oe              
 meta-python          
-meta-perl            = "tmp-auh-upgrades:505bd1d403f9788570e15f85121b5e1ded7d5ce8"
+meta-perl            = "tmp-auh-upgrades:9d4ce13d23c371beb8b9cd020b6eebed19c0d793"
 workspace            = "<unknown>:<unknown>"
 
 
@@ -189,7 +189,7 @@ meta-poky
 meta-yocto-bsp       = "master:5dd5f0f5348594a0b636ef05a87381b997db4fb5"
 meta-oe              
 meta-python          
-meta-perl            = "tmp-auh-upgrades:505bd1d403f9788570e15f85121b5e1ded7d5ce8"
+meta-perl            = "tmp-auh-upgrades:9d4ce13d23c371beb8b9cd020b6eebed19c0d793"
 workspace            = "<unknown>:<unknown>"
 
 Initialising tasks...done.
@@ -205,12 +205,17 @@ NOTE: Writing buildhistory took: 4 seconds
 DEBUG 5 [Errno 25] Inappropriate ioctl for device
 Adding changed files:   0% |                                   | ETA:  --:--:--
 Adding changed files:   0% |                                   | ETA:  --:--:--
+Adding changed files:  19% |#######                             | ETA:  0:00:02
+Adding changed files:  39% |##############                      | ETA:  0:00:01
+Adding changed files:  58% |#####################               | ETA:  0:00:00
+Adding changed files:  78% |############################        | ETA:  0:00:00
+Adding changed files:  98% |################################### | ETA:  0:00:00
 Adding changed files: 100% |####################################| Time: 0:00:00
 
 INFO: Extracting current version source...
 INFO: Extracting upgraded version source...
-INFO: Fetching https://files.pythonhosted.org/packages/source/k/kmod/kmod-0.9.2.tar.gz;downloadfilename=kmod-0.9.2.tar.gz...
-INFO: Rebasing devtool onto c13457e960f56cd9c9f03f3a562eed3b11129f3c
+INFO: Fetching https://files.pythonhosted.org/packages/source/p/paramiko/paramiko-3.3.1.tar.gz;downloadfilename=paramiko-3.3.1.tar.gz...
+INFO: Rebasing devtool onto a592489f533da4f3c4645acd7165b6262fbe72ae
 Traceback (most recent call last):
   File "/home/auh/Projects/poky/scripts/devtool", line 349, in <module>
     ret = main()
@@ -220,7 +225,7 @@ Traceback (most recent call last):
     new_licenses = _extract_licenses(srctree_s, (rd.getVar('LIC_FILES_CHKSUM') or ""))
   File "/home/auh/Projects/poky/scripts/lib/devtool/upgrade.py", line 473, in _extract_licenses
     with open(os.path.join(srcpath, path), 'rb') as f:
-FileNotFoundError: [Errno 2] No such file or directory: '/scratch1/auh/build-auh/workspace/sources/python3-kmod/COPYING'
+FileNotFoundError: [Errno 2] No such file or directory: '/scratch1/auh/build-auh/workspace/sources/python3-paramiko/LICENSE'
 
 
 Please review the attached files for further information and build/update failures.
@@ -228,5 +233,5 @@ Any problem please file a bug at https://bugzilla.yoctoproject.org/enter_bug.cgi
 
 Regards,
 The Upgrade Helper
---===============5271564075393809241==--
+--===============6407456898771085349==--
 
