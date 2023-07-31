@@ -2,41 +2,41 @@ Return-Path: <auh@moto-timo.dev>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C7D4BC04A94
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D7A01C04E69
 	for <webhook@archiver.kernel.org>; Mon, 31 Jul 2023 05:09:04 +0000 (UTC)
-Received: from relay7-d.mail.gandi.net (relay7-d.mail.gandi.net [217.70.183.200])
- by mx.groups.io with SMTP id smtpd.web11.1101.1690780134410736106
+Received: from relay5-d.mail.gandi.net (relay5-d.mail.gandi.net [217.70.183.197])
+ by mx.groups.io with SMTP id smtpd.web10.1178.1690780139460763650
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 30 Jul 2023 22:08:54 -0700
+ Sun, 30 Jul 2023 22:08:59 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@moto-timo.dev header.s=gm1 header.b=fWrkHo/x;
- spf=pass (domain: moto-timo.dev, ip: 217.70.183.200, mailfrom: auh@moto-timo.dev)
-Received: by mail.gandi.net (Postfix) with ESMTPSA id BC72F20002
-	for <openembedded-devel@lists.openembedded.org>; Mon, 31 Jul 2023 05:08:52 +0000 (UTC)
+ dkim=pass header.i=@moto-timo.dev header.s=gm1 header.b=KQm/Smcx;
+ spf=pass (domain: moto-timo.dev, ip: 217.70.183.197, mailfrom: auh@moto-timo.dev)
+Received: by mail.gandi.net (Postfix) with ESMTPSA id CD7C01C0003
+	for <openembedded-devel@lists.openembedded.org>; Mon, 31 Jul 2023 05:08:57 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=moto-timo.dev;
-	s=gm1; t=1690780133;
+	s=gm1; t=1690780138;
 	h=from:from:reply-to:subject:subject:to:to:cc:mime-version:mime-version:
-	 content-type:content-type; bh=lRG1AjdIXKBxpgEFBYn/UF0r+jymNuMku/P9h/mWD28=;
-	b=fWrkHo/xNKAZF2OIXe6dr6x69Z5QAIkdzA67lKjEU7PObm5eBHpnJYPyv+AdIlseOxjd9t
-	zG4xInL2GCnXsss8k9PlYiOnUuVFcGShDr/7yjvYrEvSHw9czsu0hWV14TCpPbWlskdOIs
-	uH87TJXw3ogH33KmAzDR2Zl5kqR6RAcsGynLMQhurXqBKCrPVLICSOmkfANJtv9QGFO0Jt
-	4ELZKYZrHALT8i/i29o3ax4TC4s/I72qBe062y30rJiawULxDYfgXpYOAAVIcbqs6OTci8
-	Qyb8m9RhNLD31OT44P/KA04zPdrRpVmZPuW3g+t9FKZzsd1QZL1+shiOoL9yVw==
-Content-Type: multipart/mixed; boundary="===============8810321926465425110=="
+	 content-type:content-type; bh=eB3Eii72eU6w9qpGHZOBUGwSNRQOpyR35FzeQozlZLc=;
+	b=KQm/SmcxtrqCwY8cqQrqvVzpf+JUVA1tHOfXgneEjx/SJMnQzDh84eUOcNRbBOQIdNGogI
+	/iJwnKb+0fey/IZHr3iueVyHUgnBXTtxgfcJp4q3hRulegtm3W0TJ2TjSmjrCA5jNWCVzp
+	8Gwp75dILG4XHkq9hDz4Nt2C2Gx+0Vms1gBQgxCrpOwO946K+EHKYOVKe42qsVC6uNBmYc
+	93POoMWo86Fh86Y92MaSssgENmAY0uoaBpI8Yrk87kM1a2NNvK55M8q5UMV45UOvhEFo9i
+	3f5yfzDWqTTQih9UQyu3cZKVnggDhJi2NC15xOgVlOkqLTj4kXS8hadAOX4jag==
+Content-Type: multipart/mixed; boundary="===============4667758389361290791=="
 MIME-Version: 1.0
 From: auh@moto-timo.dev
 To: openembedded-devel@lists.openembedded.org
-Subject: [AUH] python3-distlib: upgrading to 0.3.7 FAILED
+Subject: [AUH] python3-flask-socketio: upgrading to 5.3.5 FAILED
 X-GND-Sasl: auh@moto-timo.dev
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 31 Jul 2023 05:09:04 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104092
-Message-Id: <20230731050904.C7D4BC04A94@smtp.lore.kernel.org>
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104095
+Message-Id: <20230731050904.D7A01C04E69@smtp.lore.kernel.org>
 Date: Mon, 31 Jul 2023 05:09:04 +0000 (UTC)
 
---===============8810321926465425110==
+--===============4667758389361290791==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -44,12 +44,16 @@ Content-Transfer-Encoding: 7bit
 Hello,
 
 this email is a notification from the Auto Upgrade Helper
-that the automatic attempt to upgrade the recipe *python3-distlib* to *0.3.7* has Failed (devtool error).
+that the automatic attempt to upgrade the recipe *python3-flask-socketio* to *5.3.5* has Failed (devtool error).
 
 Detailed error information:
 
-The following devtool command failed:  upgrade python3-distlib -V 0.3.7
+The following devtool command failed:  upgrade python3-flask-socketio -V 5.3.5
 NOTE: Starting bitbake server...
+NOTE: Reconnecting to bitbake server...
+NOTE: Previous bitbake instance shutting down?, waiting to retry... (20:13:01.922606)
+NOTE: Directory listing: ['tmp-qemux86-musl', 'tmp-qemuarm64', 'tmp', 'conf', 'tmp-qemux86-64', 'weeklyjob.sh', 'auto_upgrade_helper', 'tmp-qemux86', 'auto-upgrade-helper', 'upgrade-helper', 'cache', 'workspace', 'pokyjob.sh', 'buildhistory', 'perljob.sh', 'bitbake-cookerdaemon.log']
+NOTE: Retrying server connection (#1)... (20:13:02.048736)
 Loading cache...done.
 Loaded 12619 entries from dependency cache.
 NOTE: Resolving any missing task queue dependencies
@@ -120,7 +124,7 @@ Sstate summary: Wanted 10 Local 0 Mirrors 10 Missed 0 Current 20 (100% match, 10
 NOTE: Executing Tasks
 NOTE: Tasks Summary: Attempted 103 tasks of which 100 didn't need to be rerun and all succeeded.
 NOTE: Writing buildhistory
-NOTE: Writing buildhistory took: 3 seconds
+NOTE: Writing buildhistory took: 4 seconds
 NOTE: Writing buildhistory
 NOTE: Writing buildhistory took: 4 seconds
 NOTE: Writing buildhistory
@@ -199,21 +203,18 @@ NOTE: Tasks Summary: Attempted 3 tasks of which 0 didn't need to be rerun and al
 NOTE: Writing buildhistory
 NOTE: Writing buildhistory took: 4 seconds
 NOTE: Writing buildhistory
-NOTE: Writing buildhistory took: 4 seconds
+NOTE: Writing buildhistory took: 5 seconds
 NOTE: Writing buildhistory
-NOTE: Writing buildhistory took: 4 seconds
+NOTE: Writing buildhistory took: 5 seconds
 DEBUG 5 [Errno 25] Inappropriate ioctl for device
 Adding changed files:   0% |                                   | ETA:  --:--:--
 Adding changed files:   0% |                                   | ETA:  --:--:--
-Adding changed files:  28% |##########                          | ETA:  0:00:00
-Adding changed files:  56% |####################                | ETA:  0:00:00
-Adding changed files:  85% |##############################      | ETA:  0:00:00
 Adding changed files: 100% |####################################| Time: 0:00:00
 
 INFO: Extracting current version source...
 INFO: Extracting upgraded version source...
-INFO: Fetching https://files.pythonhosted.org/packages/source/d/distlib/distlib-0.3.7.tar.gz;downloadfilename=distlib-0.3.7.tar.gz...
-INFO: Rebasing devtool onto 92a12e2640e1ec3220e15e9089b877ff06c73ecf
+INFO: Fetching https://files.pythonhosted.org/packages/source/F/Flask-SocketIO/Flask-SocketIO-5.3.5.tar.gz;downloadfilename=Flask-SocketIO-5.3.5.tar.gz...
+INFO: Rebasing devtool onto 3017ee08cfe410d8f68e3a798d961d030960a465
 Traceback (most recent call last):
   File "/home/auh/Projects/poky/scripts/devtool", line 349, in <module>
     ret = main()
@@ -223,7 +224,7 @@ Traceback (most recent call last):
     new_licenses = _extract_licenses(srctree_s, (rd.getVar('LIC_FILES_CHKSUM') or ""))
   File "/home/auh/Projects/poky/scripts/lib/devtool/upgrade.py", line 473, in _extract_licenses
     with open(os.path.join(srcpath, path), 'rb') as f:
-FileNotFoundError: [Errno 2] No such file or directory: '/scratch1/auh/build-auh/workspace/sources/python3-distlib/LICENSE.txt'
+FileNotFoundError: [Errno 2] No such file or directory: '/scratch1/auh/build-auh/workspace/sources/python3-flask-socketio/LICENSE'
 
 
 Please review the attached files for further information and build/update failures.
@@ -231,5 +232,5 @@ Any problem please file a bug at https://bugzilla.yoctoproject.org/enter_bug.cgi
 
 Regards,
 The Upgrade Helper
---===============8810321926465425110==--
+--===============4667758389361290791==--
 
