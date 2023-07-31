@@ -2,41 +2,41 @@ Return-Path: <auh@moto-timo.dev>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D0248C04E69
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C85E5C04A94
 	for <webhook@archiver.kernel.org>; Mon, 31 Jul 2023 05:09:44 +0000 (UTC)
-Received: from relay3-d.mail.gandi.net (relay3-d.mail.gandi.net [217.70.183.195])
- by mx.groups.io with SMTP id smtpd.web10.1199.1690780178763637525
+Received: from relay2-d.mail.gandi.net (relay2-d.mail.gandi.net [217.70.183.194])
+ by mx.groups.io with SMTP id smtpd.web10.1201.1690780182076730643
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 30 Jul 2023 22:09:39 -0700
+ Sun, 30 Jul 2023 22:09:42 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@moto-timo.dev header.s=gm1 header.b=mTET/ycp;
- spf=pass (domain: moto-timo.dev, ip: 217.70.183.195, mailfrom: auh@moto-timo.dev)
-Received: by mail.gandi.net (Postfix) with ESMTPSA id 210AF60006
-	for <openembedded-devel@lists.openembedded.org>; Mon, 31 Jul 2023 05:09:36 +0000 (UTC)
+ dkim=pass header.i=@moto-timo.dev header.s=gm1 header.b=UEcWPd/M;
+ spf=pass (domain: moto-timo.dev, ip: 217.70.183.194, mailfrom: auh@moto-timo.dev)
+Received: by mail.gandi.net (Postfix) with ESMTPSA id 694E640004
+	for <openembedded-devel@lists.openembedded.org>; Mon, 31 Jul 2023 05:09:40 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=moto-timo.dev;
-	s=gm1; t=1690780177;
+	s=gm1; t=1690780180;
 	h=from:from:reply-to:subject:subject:to:to:cc:mime-version:mime-version:
-	 content-type:content-type; bh=taTtmBKAjWFZwzb7r4S+dmA1litwHURMttJ49pTIkfw=;
-	b=mTET/ycpDIYpTifOnHm4vrqmjd05oCywmODp40vSD2dNmo4hi3YJsCdNcaROMzov6navTN
-	cjBx0Mc7I4yM0eJXEq0f5dseVIBCPXdMJSBjxdLXJlLtcoksVjY2v0uF7HW/KTtwLdO6Cn
-	4Tmh6TBnDslXKAkBYLZ0jDoyWVP0tgEAv3y0IW1a7iCAlB1Al5wtM8oMpSwtpUkOMx/LFH
-	dLYAxzTaEzVkDVrvcgEiIokySctVngyd61VxY4n4P+PKNU56z6TWLsaflh8K++qe3UYAq+
-	/8oY7dyLNMI1G4Hses07zvYTYr3UKpfMiIRIyYBW9ttvncmDsxtb8tRRISMATA==
-Content-Type: multipart/mixed; boundary="===============4146881514903667795=="
+	 content-type:content-type; bh=tVWHxLp4ZWnMB0DQ64qscRHLmA9JRwE/6CVJvlpHNCU=;
+	b=UEcWPd/MJSlTP9FRSeU5QqOP5WIjLxsXq2+EPDKyB9dtDuBc9Ciup0MIVUESVrwgR1zlxb
+	DvDD3Jpbx0MHePMRtv4XtJATkxxeBLttdbPb32nr8hpa0ETwhfiHUrw9X4VesJEPKMqQAf
+	961UJY8GlBiMy6Cq0IOOG6E30pEkwlysOnSHOo4CXO9uKF8Z2J/YWlulbbLf7rFEYb2w42
+	v8RgmXOqk+jsxmuDGD1qOd9s4wo31EBl7T3N7P1zKCy+4bnZpqrtZLglnIYP3A+R+BCkzp
+	2PijmnIEINmWqosFz4p6b3W00MEpfvRCmHvW0sY9RGjydyBQWyrPVSetKyRsDw==
+Content-Type: multipart/mixed; boundary="===============3824599744994700850=="
 MIME-Version: 1.0
 From: auh@moto-timo.dev
 To: openembedded-devel@lists.openembedded.org
-Subject: [AUH] python3-pyasn1-modules: upgrading to 0.3.0 FAILED
+Subject: [AUH] python3-pycodestyle: upgrading to 2.11.0 FAILED
 X-GND-Sasl: auh@moto-timo.dev
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 31 Jul 2023 05:09:44 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104115
-Message-Id: <20230731050944.D0248C04E69@smtp.lore.kernel.org>
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104117
+Message-Id: <20230731050944.C85E5C04A94@smtp.lore.kernel.org>
 Date: Mon, 31 Jul 2023 05:09:44 +0000 (UTC)
 
---===============4146881514903667795==
+--===============3824599744994700850==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -44,11 +44,11 @@ Content-Transfer-Encoding: 7bit
 Hello,
 
 this email is a notification from the Auto Upgrade Helper
-that the automatic attempt to upgrade the recipe *python3-pyasn1-modules* to *0.3.0* has Failed (devtool error).
+that the automatic attempt to upgrade the recipe *python3-pycodestyle* to *2.11.0* has Failed (devtool error).
 
 Detailed error information:
 
-The following devtool command failed:  upgrade python3-pyasn1-modules -V 0.3.0
+The following devtool command failed:  upgrade python3-pycodestyle -V 2.11.0
 NOTE: Starting bitbake server...
 Loading cache...done.
 Loaded 12625 entries from dependency cache.
@@ -120,9 +120,9 @@ Sstate summary: Wanted 10 Local 0 Mirrors 10 Missed 0 Current 20 (100% match, 10
 NOTE: Executing Tasks
 NOTE: Tasks Summary: Attempted 103 tasks of which 100 didn't need to be rerun and all succeeded.
 NOTE: Writing buildhistory
-NOTE: Writing buildhistory took: 3 seconds
-NOTE: Writing buildhistory
 NOTE: Writing buildhistory took: 4 seconds
+NOTE: Writing buildhistory
+NOTE: Writing buildhistory took: 5 seconds
 NOTE: Writing buildhistory
 NOTE: Writing buildhistory took: 4 seconds
 Loading cache...done.
@@ -195,24 +195,32 @@ workspace            = "<unknown>:<unknown>"
 Initialising tasks...done.
 Sstate summary: Wanted 1 Local 0 Mirrors 0 Missed 1 Current 0 (0% match, 0% complete)
 NOTE: Executing Tasks
-WARNING: Failed to fetch URL https://files.pythonhosted.org/packages/source/p/pyasn1-modules/pyasn1-modules-0.3.0.tar.gz;downloadfilename=pyasn1-modules-0.3.0.tar.gz, attempting MIRRORS if available
-NOTE: Tasks Summary: Attempted 2 tasks of which 0 didn't need to be rerun and 1 failed.
+NOTE: Tasks Summary: Attempted 3 tasks of which 0 didn't need to be rerun and all succeeded.
 NOTE: Writing buildhistory
 NOTE: Writing buildhistory took: 4 seconds
 NOTE: Writing buildhistory
-NOTE: Writing buildhistory took: 5 seconds
+NOTE: Writing buildhistory took: 4 seconds
 NOTE: Writing buildhistory
 NOTE: Writing buildhistory took: 4 seconds
+DEBUG 5 [Errno 25] Inappropriate ioctl for device
+Adding changed files:   0% |                                   | ETA:  --:--:--
+Adding changed files:   0% |                                   | ETA:  --:--:--
+Adding changed files: 100% |####################################| Time: 0:00:00
 
 INFO: Extracting current version source...
-INFO: Adding local source files to srctree...
 INFO: Extracting upgraded version source...
-INFO: Fetching https://files.pythonhosted.org/packages/source/p/pyasn1-modules/pyasn1-modules-0.3.0.tar.gz;downloadfilename=pyasn1-modules-0.3.0.tar.gz...
-ERROR: Fetcher failure: Fetch command export PSEUDO_DISABLED=1; export PATH="/scratch1/auh/build-auh/tmp/sysroots-uninative/x86_64-linux/usr/bin:/home/auh/Projects/poky/scripts:/scratch1/auh/build-auh/tmp/work/recipetool-v0u_b8o8/work/recipe-sysroot-native/usr/bin/x86_64-poky-linux:/scratch1/auh/build-auh/tmp/work/recipetool-v0u_b8o8/work/recipe-sysroot/usr/bin/crossscripts:/scratch1/auh/build-auh/tmp/work/recipetool-v0u_b8o8/work/recipe-sysroot-native/usr/sbin:/scratch1/auh/build-auh/tmp/work/recipetool-v0u_b8o8/work/recipe-sysroot-native/usr/bin:/scratch1/auh/build-auh/tmp/work/recipetool-v0u_b8o8/work/recipe-sysroot-native/sbin:/scratch1/auh/build-auh/tmp/work/recipetool-v0u_b8o8/work/recipe-sysroot-native/bin:/home/auh/Projects/poky/bitbake/bin:/scratch1/auh/build-auh/tmp/hosttools"; export HOME="/home/auh"; /usr/bin/env wget -t 2 -T 30 --passive-ftp -O /scratch1/auh/DOWNLOADS/pyasn1-modules-0.3.0.tar.gz.tmp -P /scratch1/auh/DOWNLOADS 'https://files.pythonhosted.org/packages/sour
- ce/p/pyasn1-modules/pyasn1-modules-0.3.0.tar.gz' --progress=dot -v failed with exit code 8, no output
-ERROR: Bitbake Fetcher Error: FetchError('Unable to fetch URL from any source.', 'https://files.pythonhosted.org/packages/source/p/pyasn1-modules/pyasn1-modules-0.3.0.tar.gz;downloadfilename=pyasn1-modules-0.3.0.tar.gz')
-ERROR: Logfile of failure stored in: /scratch1/auh/build-auh/tmp/work/recipetool-v0u_b8o8/work/temp/log.do_fetch.507298
-ERROR: Failed to fetch URL https://files.pythonhosted.org/packages/source/p/pyasn1-modules/pyasn1-modules-0.3.0.tar.gz;downloadfilename=pyasn1-modules-0.3.0.tar.gz
+INFO: Fetching https://files.pythonhosted.org/packages/source/p/pycodestyle/pycodestyle-2.11.0.tar.gz;downloadfilename=pycodestyle-2.11.0.tar.gz...
+INFO: Rebasing devtool onto 10f3210fbf0c458da216df11f450720b25d5d22f
+Traceback (most recent call last):
+  File "/home/auh/Projects/poky/scripts/devtool", line 349, in <module>
+    ret = main()
+  File "/home/auh/Projects/poky/scripts/devtool", line 336, in main
+    ret = args.func(args, config, basepath, workspace)
+  File "/home/auh/Projects/poky/scripts/lib/devtool/upgrade.py", line 565, in upgrade
+    new_licenses = _extract_licenses(srctree_s, (rd.getVar('LIC_FILES_CHKSUM') or ""))
+  File "/home/auh/Projects/poky/scripts/lib/devtool/upgrade.py", line 473, in _extract_licenses
+    with open(os.path.join(srcpath, path), 'rb') as f:
+FileNotFoundError: [Errno 2] No such file or directory: '/scratch1/auh/build-auh/workspace/sources/python3-pycodestyle/LICENSE'
 
 
 Please review the attached files for further information and build/update failures.
@@ -220,5 +228,5 @@ Any problem please file a bug at https://bugzilla.yoctoproject.org/enter_bug.cgi
 
 Regards,
 The Upgrade Helper
---===============4146881514903667795==--
+--===============3824599744994700850==--
 
