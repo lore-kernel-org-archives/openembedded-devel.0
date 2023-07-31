@@ -2,41 +2,41 @@ Return-Path: <auh@moto-timo.dev>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C47FAC001DC
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CA688C04A94
 	for <webhook@archiver.kernel.org>; Mon, 31 Jul 2023 05:10:04 +0000 (UTC)
-Received: from relay1-d.mail.gandi.net (relay1-d.mail.gandi.net [217.70.183.193])
- by mx.groups.io with SMTP id smtpd.web11.1121.1690780195323343615
+Received: from relay3-d.mail.gandi.net (relay3-d.mail.gandi.net [217.70.183.195])
+ by mx.groups.io with SMTP id smtpd.web11.1123.1690780200335940164
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 30 Jul 2023 22:09:55 -0700
+ Sun, 30 Jul 2023 22:10:00 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@moto-timo.dev header.s=gm1 header.b=Hhq8zVSw;
- spf=pass (domain: moto-timo.dev, ip: 217.70.183.193, mailfrom: auh@moto-timo.dev)
-Received: by mail.gandi.net (Postfix) with ESMTPSA id AC678240006
-	for <openembedded-devel@lists.openembedded.org>; Mon, 31 Jul 2023 05:09:53 +0000 (UTC)
+ dkim=pass header.i=@moto-timo.dev header.s=gm1 header.b=nq7oZVPP;
+ spf=pass (domain: moto-timo.dev, ip: 217.70.183.195, mailfrom: auh@moto-timo.dev)
+Received: by mail.gandi.net (Postfix) with ESMTPSA id B527960005
+	for <openembedded-devel@lists.openembedded.org>; Mon, 31 Jul 2023 05:09:58 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=moto-timo.dev;
-	s=gm1; t=1690780193;
+	s=gm1; t=1690780199;
 	h=from:from:reply-to:subject:subject:to:to:cc:mime-version:mime-version:
-	 content-type:content-type; bh=jmtDuelYQarqJjvT6YefAPnA+mKTDsMoxh9nHA1o/5Q=;
-	b=Hhq8zVSwMPNvdthbLXV5PVycFfERrDXQ2xMHlgBWzP2GnePjDA4oM0FHbtPDipmsVyA+3e
-	ZSzzoa1Jq89JimbR+HeHhLv1sEd6SHTHuDh0Eh2azGn+NJi9T/wEKQQh7Jg8jpcE+CqHq0
-	Si8hrB4mHdJclJ+LPJMOcSATlaz88c0rIYNAkP/lJbyc+mYrxFkUPZDDdzKPiWJ6bOHfMm
-	V16aWU3bcSmrQBWBQNzyn8pfTWF6IzUDx1w9SX76x75mJg+00tctKykWxQuTNulfUnhdSW
-	Vrxdc1kgQ0ngxJuBf8pIUrq3YspHSQNZqmjnZ4NXCI7m3h39bVEJoRfegQpNCg==
-Content-Type: multipart/mixed; boundary="===============7052122967153088773=="
+	 content-type:content-type; bh=kKFxAAeI51NAXiByFEQ+oMwcUSbbdZdUdkGx5sShy4w=;
+	b=nq7oZVPP8nBOqZ4WcsOs0s1mTejZmVOZsGz485zkly9v/M+FgzFXftMEo4kPFnBNEg5AVv
+	1AEx1jj5I1bUq6dQ7fz29j8MdnhNyMWyZBNxSrrZWZ7r4YP0DahJuuVofhFQU7DfMody1M
+	XWGHigxXRN18ZKDInort+EUjo83v4Mpzn/v5yRDK8ZwzhXkPskNZqYGE8awbCa21g6X/fc
+	sT4R3jO+t9ILxKS8g8EPRVGFOb+9TcjbyXOZr4Y8UfGpByJLPpTyV5LkgiJcJS/FSoPQz5
+	0LIRHdEUFaTQNXGAQT3zFSsE+/JoejbBVK/UhgogeBh8KGQOdOMrstBLZzvHwQ==
+Content-Type: multipart/mixed; boundary="===============8413640959472301490=="
 MIME-Version: 1.0
 From: auh@moto-timo.dev
 To: openembedded-devel@lists.openembedded.org
-Subject: [AUH] python3-pymodbus: upgrading to 3.4.1 FAILED
+Subject: [AUH] python3-reedsolo: upgrading to 2.0.13 FAILED
 X-GND-Sasl: auh@moto-timo.dev
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 31 Jul 2023 05:10:04 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104122
-Message-Id: <20230731051004.C47FAC001DC@smtp.lore.kernel.org>
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104125
+Message-Id: <20230731051004.CA688C04A94@smtp.lore.kernel.org>
 Date: Mon, 31 Jul 2023 05:10:04 +0000 (UTC)
 
---===============7052122967153088773==
+--===============8413640959472301490==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -44,11 +44,11 @@ Content-Transfer-Encoding: 7bit
 Hello,
 
 this email is a notification from the Auto Upgrade Helper
-that the automatic attempt to upgrade the recipe *python3-pymodbus* to *3.4.1* has Failed (devtool error).
+that the automatic attempt to upgrade the recipe *python3-reedsolo* to *2.0.13* has Failed (devtool error).
 
 Detailed error information:
 
-The following devtool command failed:  upgrade python3-pymodbus -V 3.4.1
+The following devtool command failed:  upgrade python3-reedsolo -V 2.0.13
 NOTE: Starting bitbake server...
 Loading cache...done.
 Loaded 12625 entries from dependency cache.
@@ -120,11 +120,11 @@ Sstate summary: Wanted 10 Local 0 Mirrors 10 Missed 0 Current 20 (100% match, 10
 NOTE: Executing Tasks
 NOTE: Tasks Summary: Attempted 103 tasks of which 100 didn't need to be rerun and all succeeded.
 NOTE: Writing buildhistory
-NOTE: Writing buildhistory took: 4 seconds
+NOTE: Writing buildhistory took: 3 seconds
 NOTE: Writing buildhistory
-NOTE: Writing buildhistory took: 4 seconds
+NOTE: Writing buildhistory took: 3 seconds
 NOTE: Writing buildhistory
-NOTE: Writing buildhistory took: 4 seconds
+NOTE: Writing buildhistory took: 3 seconds
 Loading cache...done.
 Loaded 12625 entries from dependency cache.
 Parsing recipes...done.
@@ -197,22 +197,20 @@ Sstate summary: Wanted 1 Local 0 Mirrors 0 Missed 1 Current 0 (0% match, 0% comp
 NOTE: Executing Tasks
 NOTE: Tasks Summary: Attempted 3 tasks of which 0 didn't need to be rerun and all succeeded.
 NOTE: Writing buildhistory
-NOTE: Writing buildhistory took: 4 seconds
-NOTE: Writing buildhistory
-NOTE: Writing buildhistory took: 4 seconds
-NOTE: Writing buildhistory
 NOTE: Writing buildhistory took: 5 seconds
+NOTE: Writing buildhistory
+NOTE: Writing buildhistory took: 4 seconds
+NOTE: Writing buildhistory
+NOTE: Writing buildhistory took: 4 seconds
 DEBUG 5 [Errno 25] Inappropriate ioctl for device
 Adding changed files:   0% |                                   | ETA:  --:--:--
 Adding changed files:   0% |                                   | ETA:  --:--:--
-Adding changed files:  41% |##############                      | ETA:  0:00:00
-Adding changed files:  82% |#############################       | ETA:  0:00:00
 Adding changed files: 100% |####################################| Time: 0:00:00
 
 INFO: Extracting current version source...
 INFO: Extracting upgraded version source...
-INFO: Fetching https://files.pythonhosted.org/packages/source/p/pymodbus/pymodbus-3.4.1.tar.gz;downloadfilename=pymodbus-3.4.1.tar.gz...
-INFO: Rebasing devtool onto 9b2e4445b2d9b918ba3d26d6db8eac0806c99643
+INFO: Fetching https://files.pythonhosted.org/packages/source/r/reedsolo/reedsolo-2.0.13.tar.gz;downloadfilename=reedsolo-2.0.13.tar.gz...
+INFO: Rebasing devtool onto a20c1ef2b48f3342d6614b7e28598b6df011e080
 Traceback (most recent call last):
   File "/home/auh/Projects/poky/scripts/devtool", line 349, in <module>
     ret = main()
@@ -222,7 +220,7 @@ Traceback (most recent call last):
     new_licenses = _extract_licenses(srctree_s, (rd.getVar('LIC_FILES_CHKSUM') or ""))
   File "/home/auh/Projects/poky/scripts/lib/devtool/upgrade.py", line 473, in _extract_licenses
     with open(os.path.join(srcpath, path), 'rb') as f:
-FileNotFoundError: [Errno 2] No such file or directory: '/scratch1/auh/build-auh/workspace/sources/python3-pymodbus/LICENSE'
+FileNotFoundError: [Errno 2] No such file or directory: '/scratch1/auh/build-auh/workspace/sources/python3-reedsolo/LICENSE'
 
 
 Please review the attached files for further information and build/update failures.
@@ -230,5 +228,5 @@ Any problem please file a bug at https://bugzilla.yoctoproject.org/enter_bug.cgi
 
 Regards,
 The Upgrade Helper
---===============7052122967153088773==--
+--===============8413640959472301490==--
 
