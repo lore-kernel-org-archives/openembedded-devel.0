@@ -2,41 +2,41 @@ Return-Path: <auh@moto-timo.dev>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D0EE2C001DF
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D7D78C04E69
 	for <webhook@archiver.kernel.org>; Mon, 31 Jul 2023 05:09:14 +0000 (UTC)
-Received: from relay5-d.mail.gandi.net (relay5-d.mail.gandi.net [217.70.183.197])
- by mx.groups.io with SMTP id smtpd.web11.1107.1690780148147260317
+Received: from relay8-d.mail.gandi.net (relay8-d.mail.gandi.net [217.70.183.201])
+ by mx.groups.io with SMTP id smtpd.web10.1181.1690780146469981116
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 30 Jul 2023 22:09:08 -0700
+ Sun, 30 Jul 2023 22:09:06 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@moto-timo.dev header.s=gm1 header.b=k9Fcj/ko;
- spf=pass (domain: moto-timo.dev, ip: 217.70.183.197, mailfrom: auh@moto-timo.dev)
-Received: by mail.gandi.net (Postfix) with ESMTPSA id 7F3AB1C0002
-	for <openembedded-devel@lists.openembedded.org>; Mon, 31 Jul 2023 05:09:06 +0000 (UTC)
+ dkim=pass header.i=@moto-timo.dev header.s=gm1 header.b=F5xA5PkF;
+ spf=pass (domain: moto-timo.dev, ip: 217.70.183.201, mailfrom: auh@moto-timo.dev)
+Received: by mail.gandi.net (Postfix) with ESMTPSA id B4F151BF205
+	for <openembedded-devel@lists.openembedded.org>; Mon, 31 Jul 2023 05:09:04 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=moto-timo.dev;
-	s=gm1; t=1690780146;
+	s=gm1; t=1690780145;
 	h=from:from:reply-to:subject:subject:to:to:cc:mime-version:mime-version:
-	 content-type:content-type; bh=hIZh73fZPZgQTph92B8lvRNl3969J/bBw/rm5oMlVW4=;
-	b=k9Fcj/koqVWQvhOg6TNnf1QzIacdsRkdnYAT1qHUeXgwO8N0aHunEgQGXS0mYvJqN/nkT5
-	FF0+/WEnV3ZsGPGBv9H6U6S/890L/fRHfWA6eqGJfBqyz+jfD/zcdvWdsej4IgQ2AAzgtw
-	Zv9YFgU7Cke0UprnzH+FWTyRXQcE1x94ZXCm1S+WL/zA9XxJSAt6CMTx6s9kklwpOSeK2u
-	KNvIj9bu7ii2eFnNBB7Ox86R0IUnCfcGf+A3YjEv0/Otvkz3jbKGt7eTjtrFyRmlC3vK16
-	GHwnP11Yq17LD8Hjbs2CoU4Ssv9LgoOkB4sS8IQeeqZVJCHuDLQJbWyZ4Vaqzg==
-Content-Type: multipart/mixed; boundary="===============3528580453611182279=="
+	 content-type:content-type; bh=H3LJ6B8XhUkdj6G+ZYXe/xIfQnLhE8RAd1USXFGmswQ=;
+	b=F5xA5PkF8TvuDpAqkoP/n7JMs9hb10HJZ/0dlMlDBXS7hwJRvAIazQoTZztiXhfx39EIhk
+	vXl+hG1S3AE0Z8X7bk5uGm7Kvr9l1acN9kcDnonguu2V49Fq2bOlzHDWrzZEwHUFAmJAzp
+	y/E6IFQrEIouDb1L6pWAd3EcLKxu7LI49UXHCyxRKVRxjFOOlGFxiO/b85ccV/BQgIqk7H
+	5RxZG7mhwAKuDaGCYwHZZ+jKRkVvjfRMgmA00izZSVLU+6uAtVu9K4OQSKpv+ASzXUKEqG
+	93FvLUSEuwJ3FaCHGkKwLBvyu3bCIbQRqIm62pVTey9h2Iy0B4uRxu9qPvLtzg==
+Content-Type: multipart/mixed; boundary="===============9183592771622165087=="
 MIME-Version: 1.0
 From: auh@moto-timo.dev
 To: openembedded-devel@lists.openembedded.org
-Subject: [AUH] python3-grpcio-tools: upgrading to 1.56.2 FAILED
+Subject: [AUH] python3-grpcio: upgrading to 1.56.2 FAILED
 X-GND-Sasl: auh@moto-timo.dev
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 31 Jul 2023 05:09:14 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104100
-Message-Id: <20230731050914.D0EE2C001DF@smtp.lore.kernel.org>
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104099
+Message-Id: <20230731050914.D7D78C04E69@smtp.lore.kernel.org>
 Date: Mon, 31 Jul 2023 05:09:14 +0000 (UTC)
 
---===============3528580453611182279==
+--===============9183592771622165087==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -44,11 +44,11 @@ Content-Transfer-Encoding: 7bit
 Hello,
 
 this email is a notification from the Auto Upgrade Helper
-that the automatic attempt to upgrade the recipe *python3-grpcio-tools* to *1.56.2* has Failed (devtool error).
+that the automatic attempt to upgrade the recipe *python3-grpcio* to *1.56.2* has Failed (devtool error).
 
 Detailed error information:
 
-The following devtool command failed:  upgrade python3-grpcio-tools -V 1.56.2
+The following devtool command failed:  upgrade python3-grpcio -V 1.56.2
 NOTE: Starting bitbake server...
 Loading cache...done.
 Loaded 12619 entries from dependency cache.
@@ -205,61 +205,102 @@ NOTE: Writing buildhistory took: 4 seconds
 DEBUG 5 [Errno 25] Inappropriate ioctl for device
 Adding changed files:   0% |                                   | ETA:  --:--:--
 Adding changed files:   0% |                                   | ETA:  --:--:--
-Adding changed files:   2% |                                    | ETA:  0:00:07
-Adding changed files:   4% |#                                   | ETA:  0:00:04
-Adding changed files:   6% |##                                  | ETA:  0:00:03
-Adding changed files:   8% |##                                  | ETA:  0:00:03
-Adding changed files:  10% |###                                 | ETA:  0:00:03
-Adding changed files:  12% |####                                | ETA:  0:00:02
-Adding changed files:  14% |#####                               | ETA:  0:00:02
-Adding changed files:  16% |#####                               | ETA:  0:00:02
-Adding changed files:  18% |######                              | ETA:  0:00:02
-Adding changed files:  20% |#######                             | ETA:  0:00:02
-Adding changed files:  22% |########                            | ETA:  0:00:02
-Adding changed files:  24% |########                            | ETA:  0:00:02
-Adding changed files:  26% |#########                           | ETA:  0:00:02
-Adding changed files:  28% |##########                          | ETA:  0:00:02
-Adding changed files:  30% |##########                          | ETA:  0:00:01
-Adding changed files:  32% |###########                         | ETA:  0:00:01
-Adding changed files:  34% |############                        | ETA:  0:00:01
-Adding changed files:  36% |#############                       | ETA:  0:00:01
-Adding changed files:  38% |#############                       | ETA:  0:00:01
-Adding changed files:  40% |##############                      | ETA:  0:00:01
-Adding changed files:  42% |###############                     | ETA:  0:00:01
-Adding changed files:  44% |################                    | ETA:  0:00:01
-Adding changed files:  46% |################                    | ETA:  0:00:01
-Adding changed files:  48% |#################                   | ETA:  0:00:01
-Adding changed files:  50% |##################                  | ETA:  0:00:01
-Adding changed files:  52% |##################                  | ETA:  0:00:01
-Adding changed files:  54% |###################                 | ETA:  0:00:01
-Adding changed files:  56% |####################                | ETA:  0:00:01
-Adding changed files:  58% |#####################               | ETA:  0:00:01
-Adding changed files:  60% |#####################               | ETA:  0:00:01
-Adding changed files:  62% |######################              | ETA:  0:00:01
-Adding changed files:  64% |#######################             | ETA:  0:00:00
-Adding changed files:  66% |########################            | ETA:  0:00:00
-Adding changed files:  68% |########################            | ETA:  0:00:00
-Adding changed files:  70% |#########################           | ETA:  0:00:00
-Adding changed files:  72% |##########################          | ETA:  0:00:00
-Adding changed files:  74% |##########################          | ETA:  0:00:00
-Adding changed files:  76% |###########################         | ETA:  0:00:00
-Adding changed files:  78% |############################        | ETA:  0:00:00
-Adding changed files:  80% |#############################       | ETA:  0:00:00
-Adding changed files:  82% |#############################       | ETA:  0:00:00
+Adding changed files:   1% |                                    | ETA:  0:00:39
+Adding changed files:   2% |                                    | ETA:  0:00:22
+Adding changed files:   3% |#                                   | ETA:  0:00:16
+Adding changed files:   4% |#                                   | ETA:  0:00:13
+Adding changed files:   5% |##                                  | ETA:  0:00:11
+Adding changed files:   6% |##                                  | ETA:  0:00:10
+Adding changed files:   7% |##                                  | ETA:  0:00:09
+Adding changed files:   9% |###                                 | ETA:  0:00:08
+Adding changed files:  10% |###                                 | ETA:  0:00:07
+Adding changed files:  11% |####                                | ETA:  0:00:07
+Adding changed files:  12% |####                                | ETA:  0:00:07
+Adding changed files:  13% |####                                | ETA:  0:00:06
+Adding changed files:  14% |#####                               | ETA:  0:00:06
+Adding changed files:  15% |#####                               | ETA:  0:00:06
+Adding changed files:  17% |######                              | ETA:  0:00:06
+Adding changed files:  18% |######                              | ETA:  0:00:05
+Adding changed files:  19% |######                              | ETA:  0:00:05
+Adding changed files:  20% |#######                             | ETA:  0:00:05
+Adding changed files:  21% |#######                             | ETA:  0:00:05
+Adding changed files:  22% |########                            | ETA:  0:00:05
+Adding changed files:  23% |########                            | ETA:  0:00:05
+Adding changed files:  24% |########                            | ETA:  0:00:05
+Adding changed files:  26% |#########                           | ETA:  0:00:05
+Adding changed files:  27% |#########                           | ETA:  0:00:04
+Adding changed files:  28% |##########                          | ETA:  0:00:04
+Adding changed files:  29% |##########                          | ETA:  0:00:04
+Adding changed files:  30% |###########                         | ETA:  0:00:04
+Adding changed files:  31% |###########                         | ETA:  0:00:04
+Adding changed files:  32% |###########                         | ETA:  0:00:04
+Adding changed files:  34% |############                        | ETA:  0:00:04
+Adding changed files:  35% |############                        | ETA:  0:00:04
+Adding changed files:  36% |#############                       | ETA:  0:00:04
+Adding changed files:  37% |#############                       | ETA:  0:00:04
+Adding changed files:  38% |#############                       | ETA:  0:00:04
+Adding changed files:  39% |##############                      | ETA:  0:00:04
+Adding changed files:  40% |##############                      | ETA:  0:00:03
+Adding changed files:  42% |###############                     | ETA:  0:00:03
+Adding changed files:  43% |###############                     | ETA:  0:00:03
+Adding changed files:  44% |###############                     | ETA:  0:00:03
+Adding changed files:  45% |################                    | ETA:  0:00:03
+Adding changed files:  46% |################                    | ETA:  0:00:03
+Adding changed files:  47% |#################                   | ETA:  0:00:03
+Adding changed files:  48% |#################                   | ETA:  0:00:03
+Adding changed files:  49% |#################                   | ETA:  0:00:03
+Adding changed files:  51% |##################                  | ETA:  0:00:03
+Adding changed files:  52% |##################                  | ETA:  0:00:03
+Adding changed files:  53% |###################                 | ETA:  0:00:03
+Adding changed files:  54% |###################                 | ETA:  0:00:02
+Adding changed files:  55% |####################                | ETA:  0:00:02
+Adding changed files:  56% |####################                | ETA:  0:00:02
+Adding changed files:  57% |####################                | ETA:  0:00:02
+Adding changed files:  59% |#####################               | ETA:  0:00:02
+Adding changed files:  60% |#####################               | ETA:  0:00:02
+Adding changed files:  61% |######################              | ETA:  0:00:02
+Adding changed files:  62% |######################              | ETA:  0:00:02
+Adding changed files:  63% |######################              | ETA:  0:00:02
+Adding changed files:  64% |#######################             | ETA:  0:00:02
+Adding changed files:  65% |#######################             | ETA:  0:00:02
+Adding changed files:  67% |########################            | ETA:  0:00:02
+Adding changed files:  68% |########################            | ETA:  0:00:01
+Adding changed files:  69% |########################            | ETA:  0:00:01
+Adding changed files:  70% |#########################           | ETA:  0:00:01
+Adding changed files:  71% |#########################           | ETA:  0:00:01
+Adding changed files:  72% |##########################          | ETA:  0:00:01
+Adding changed files:  73% |##########################          | ETA:  0:00:01
+Adding changed files:  74% |##########################          | ETA:  0:00:01
+Adding changed files:  76% |###########################         | ETA:  0:00:01
+Adding changed files:  77% |###########################         | ETA:  0:00:01
+Adding changed files:  78% |############################        | ETA:  0:00:01
+Adding changed files:  79% |############################        | ETA:  0:00:01
+Adding changed files:  80% |#############################       | ETA:  0:00:01
+Adding changed files:  81% |#############################       | ETA:  0:00:01
+Adding changed files:  82% |#############################       | ETA:  0:00:01
 Adding changed files:  84% |##############################      | ETA:  0:00:00
+Adding changed files:  85% |##############################      | ETA:  0:00:00
 Adding changed files:  86% |###############################     | ETA:  0:00:00
-Adding changed files:  88% |################################    | ETA:  0:00:00
+Adding changed files:  87% |###############################     | ETA:  0:00:00
+Adding changed files:  88% |###############################     | ETA:  0:00:00
+Adding changed files:  89% |################################    | ETA:  0:00:00
 Adding changed files:  90% |################################    | ETA:  0:00:00
-Adding changed files:  92% |#################################   | ETA:  0:00:00
-Adding changed files:  94% |##################################  | ETA:  0:00:00
+Adding changed files:  91% |#################################   | ETA:  0:00:00
+Adding changed files:  93% |#################################   | ETA:  0:00:00
+Adding changed files:  94% |#################################   | ETA:  0:00:00
+Adding changed files:  95% |##################################  | ETA:  0:00:00
 Adding changed files:  96% |##################################  | ETA:  0:00:00
+Adding changed files:  97% |################################### | ETA:  0:00:00
+Adding changed files:  98% |################################### | ETA:  0:00:00
 Adding changed files:  99% |################################### | ETA:  0:00:00
-Adding changed files: 100% |####################################| Time: 0:00:03
+Adding changed files: 100% |####################################| Time: 0:00:05
 
 INFO: Extracting current version source...
+INFO: SRC_URI contains some conditional appends/prepends - will create branches to represent these
 INFO: Extracting upgraded version source...
-INFO: Fetching https://files.pythonhosted.org/packages/source/g/grpcio-tools/grpcio-tools-1.56.2.tar.gz;downloadfilename=grpcio-tools-1.56.2.tar.gz...
-INFO: Rebasing devtool onto f9b44cc0f23cd67324aff95df1dd22f76e8611ce
+INFO: Fetching https://files.pythonhosted.org/packages/source/g/grpcio/grpcio-1.56.2.tar.gz;downloadfilename=grpcio-1.56.2.tar.gz...
+INFO: Rebasing devtool onto 1c548b906453954ed3592585e6cf01e405e97999
+INFO: Rebasing devtool-override-class-target onto 1c548b906453954ed3592585e6cf01e405e97999
 Traceback (most recent call last):
   File "/home/auh/Projects/poky/scripts/devtool", line 349, in <module>
     ret = main()
@@ -269,7 +310,7 @@ Traceback (most recent call last):
     new_licenses = _extract_licenses(srctree_s, (rd.getVar('LIC_FILES_CHKSUM') or ""))
   File "/home/auh/Projects/poky/scripts/lib/devtool/upgrade.py", line 473, in _extract_licenses
     with open(os.path.join(srcpath, path), 'rb') as f:
-FileNotFoundError: [Errno 2] No such file or directory: '/scratch1/auh/build-auh/workspace/sources/python3-grpcio-tools/PKG-INFO'
+FileNotFoundError: [Errno 2] No such file or directory: '/scratch1/auh/build-auh/workspace/sources/python3-grpcio/LICENSE'
 
 
 Please review the attached files for further information and build/update failures.
@@ -277,5 +318,5 @@ Any problem please file a bug at https://bugzilla.yoctoproject.org/enter_bug.cgi
 
 Regards,
 The Upgrade Helper
---===============3528580453611182279==--
+--===============9183592771622165087==--
 
