@@ -2,41 +2,41 @@ Return-Path: <auh@moto-timo.dev>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EE5D7C001DE
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EE630C41513
 	for <webhook@archiver.kernel.org>; Mon, 31 Jul 2023 05:48:04 +0000 (UTC)
-Received: from relay1-d.mail.gandi.net (relay1-d.mail.gandi.net [217.70.183.193])
- by mx.groups.io with SMTP id smtpd.web11.1502.1690782480148336008
+Received: from relay6-d.mail.gandi.net (relay6-d.mail.gandi.net [217.70.183.198])
+ by mx.groups.io with SMTP id smtpd.web11.1504.1690782482835994822
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 30 Jul 2023 22:48:00 -0700
+ Sun, 30 Jul 2023 22:48:03 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@moto-timo.dev header.s=gm1 header.b=bU40NsLx;
- spf=pass (domain: moto-timo.dev, ip: 217.70.183.193, mailfrom: auh@moto-timo.dev)
-Received: by mail.gandi.net (Postfix) with ESMTPSA id 8253A240002
-	for <openembedded-devel@lists.openembedded.org>; Mon, 31 Jul 2023 05:47:58 +0000 (UTC)
+ dkim=pass header.i=@moto-timo.dev header.s=gm1 header.b=XQCugPop;
+ spf=pass (domain: moto-timo.dev, ip: 217.70.183.198, mailfrom: auh@moto-timo.dev)
+Received: by mail.gandi.net (Postfix) with ESMTPSA id CA90EC0002
+	for <openembedded-devel@lists.openembedded.org>; Mon, 31 Jul 2023 05:48:00 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=moto-timo.dev;
-	s=gm1; t=1690782478;
+	s=gm1; t=1690782481;
 	h=from:from:reply-to:subject:subject:to:to:cc:mime-version:mime-version:
-	 content-type:content-type; bh=EdFWJ5XhjXkn7zKaEgqQI/2xV/CK9BWbHnRfF9TXq5A=;
-	b=bU40NsLxqHy7oA1JcJC0v+MIVIPjKhdr1JNTH45R+C5i56MQ+UsvGDbD0UzlaWyaL7/WmR
-	yCDoL9caWMDjpt1JvpKK9IiRhUnbq2CHsaE3p09GODDRZLM2DDpHJ3KtVfmPGM386t5olh
-	ql2sV6Qm+bcF6aMf7gILKcFpLa6c/aib1memmm6me4rJwGzJic+Fbjc0Fp2vct3mrZgNb+
-	DnTTZEN0uCwiLrAy4e22V/C4yvKVOcDcBDvyRLoRHtVV4kDZUzva8+bDk8MNRv0ohTJxHr
-	n9NrXT3r/8jqr+/Qg5AMb/9p88wGWpPai/cmZRBNNNu7r12n1o+t1n59yGDGFA==
-Content-Type: multipart/mixed; boundary="===============4108523679033059322=="
+	 content-type:content-type; bh=bTDZQtIhYjACHf5wrWhyFezs+6r9sMw0iyyez42NPtU=;
+	b=XQCugPopab/l+FtovfNyddM3LYginIyWFQ0UzMyX0VeXe6geEt6iTSp3ADxRWw87u6s7Gv
+	WUcBhRFhtEsw4vd1SIOXBOTJemwT02ycugD0cE3L8vl5j8dv+D3M+uuuZL1s6zI1MlYqln
+	1reoYDO/iCebKUvjg3wb7j57y3Hob4JzN4nIPU9//s0JH2oeWSVqknP5NSEDFmbLnl+/LV
+	2dhFKaw6sWGbEL1GioAt1EIHB3cAZElsElq/+benWkOjq2/HMCWT5P+OwLVKzcMUomcOhU
+	RK2qZaRVXzu/Ql5+nQgZPRH+ptJ1cMX4tuLsd0lCrQTGHYggJ6aOk+nmMkZrvg==
+Content-Type: multipart/mixed; boundary="===============3498978654971517968=="
 MIME-Version: 1.0
 From: auh@moto-timo.dev
 To: openembedded-devel@lists.openembedded.org
-Subject: [AUH] libio-socket-ssl-perl: upgrading to 2.083 FAILED
+Subject: [AUH] libmodule-build-tiny-perl: upgrading to 0.046 FAILED
 X-GND-Sasl: auh@moto-timo.dev
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 31 Jul 2023 05:48:04 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104150
-Message-Id: <20230731054804.EE5D7C001DE@smtp.lore.kernel.org>
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104151
+Message-Id: <20230731054804.EE630C41513@smtp.lore.kernel.org>
 Date: Mon, 31 Jul 2023 05:48:04 +0000 (UTC)
 
---===============4108523679033059322==
+--===============3498978654971517968==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -44,11 +44,11 @@ Content-Transfer-Encoding: 7bit
 Hello,
 
 this email is a notification from the Auto Upgrade Helper
-that the automatic attempt to upgrade the recipe *libio-socket-ssl-perl* to *2.083* has Failed (devtool error).
+that the automatic attempt to upgrade the recipe *libmodule-build-tiny-perl* to *0.046* has Failed (devtool error).
 
 Detailed error information:
 
-The following devtool command failed:  upgrade libio-socket-ssl-perl -V 2.083
+The following devtool command failed:  upgrade libmodule-build-tiny-perl -V 0.046
 NOTE: Starting bitbake server...
 Loading cache...done.
 Loaded 12625 entries from dependency cache.
@@ -199,20 +199,18 @@ NOTE: Tasks Summary: Attempted 3 tasks of which 0 didn't need to be rerun and al
 NOTE: Writing buildhistory
 NOTE: Writing buildhistory took: 4 seconds
 NOTE: Writing buildhistory
-NOTE: Writing buildhistory took: 5 seconds
+NOTE: Writing buildhistory took: 4 seconds
 NOTE: Writing buildhistory
 NOTE: Writing buildhistory took: 5 seconds
 DEBUG 5 [Errno 25] Inappropriate ioctl for device
 Adding changed files:   0% |                                   | ETA:  --:--:--
 Adding changed files:   0% |                                   | ETA:  --:--:--
-Adding changed files:  57% |####################                | ETA:  0:00:00
 Adding changed files: 100% |####################################| Time: 0:00:00
 
 INFO: Extracting current version source...
-INFO: Adding local source files to srctree...
 INFO: Extracting upgraded version source...
-INFO: Fetching https://search.cpan.org/CPAN/authors/id/S/SU/SULLR/IO-Socket-SSL-2.083.tar.gz...
-INFO: Rebasing devtool onto d3bc957da5af0d33a4fa7627b110a4f4e0a9a542
+INFO: Fetching https://search.cpan.org/CPAN/authors/id/L/LE/LEONT/Module-Build-Tiny-0.046.tar.gz...
+INFO: Rebasing devtool onto e58be102bb64db35b00296b46c1eb7c8a35a4818
 Traceback (most recent call last):
   File "/home/auh/Projects/poky/scripts/devtool", line 349, in <module>
     ret = main()
@@ -222,7 +220,7 @@ Traceback (most recent call last):
     new_licenses = _extract_licenses(srctree_s, (rd.getVar('LIC_FILES_CHKSUM') or ""))
   File "/home/auh/Projects/poky/scripts/lib/devtool/upgrade.py", line 473, in _extract_licenses
     with open(os.path.join(srcpath, path), 'rb') as f:
-FileNotFoundError: [Errno 2] No such file or directory: '/scratch1/auh/build-auh/workspace/sources/libio-socket-ssl-perl/META.yml'
+FileNotFoundError: [Errno 2] No such file or directory: '/scratch1/auh/build-auh/workspace/sources/libmodule-build-tiny-perl/LICENSE'
 
 
 Please review the attached files for further information and build/update failures.
@@ -230,5 +228,5 @@ Any problem please file a bug at https://bugzilla.yoctoproject.org/enter_bug.cgi
 
 Regards,
 The Upgrade Helper
---===============4108523679033059322==--
+--===============3498978654971517968==--
 
