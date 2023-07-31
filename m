@@ -2,41 +2,41 @@ Return-Path: <auh@moto-timo.dev>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CDD83C04A94
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C2711C001DC
 	for <webhook@archiver.kernel.org>; Mon, 31 Jul 2023 05:10:24 +0000 (UTC)
-Received: from relay2-d.mail.gandi.net (relay2-d.mail.gandi.net [217.70.183.194])
- by mx.groups.io with SMTP id smtpd.web10.1215.1690780222498014068
+Received: from relay4-d.mail.gandi.net (relay4-d.mail.gandi.net [217.70.183.196])
+ by mx.groups.io with SMTP id smtpd.web11.1131.1690780224125352160
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 30 Jul 2023 22:10:22 -0700
+ Sun, 30 Jul 2023 22:10:24 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@moto-timo.dev header.s=gm1 header.b=jpvsj5u4;
- spf=pass (domain: moto-timo.dev, ip: 217.70.183.194, mailfrom: auh@moto-timo.dev)
-Received: by mail.gandi.net (Postfix) with ESMTPSA id D7E8040004
-	for <openembedded-devel@lists.openembedded.org>; Mon, 31 Jul 2023 05:10:15 +0000 (UTC)
+ dkim=pass header.i=@moto-timo.dev header.s=gm1 header.b=Dz4CHCdC;
+ spf=pass (domain: moto-timo.dev, ip: 217.70.183.196, mailfrom: auh@moto-timo.dev)
+Received: by mail.gandi.net (Postfix) with ESMTPSA id 7CEE0E0003
+	for <openembedded-devel@lists.openembedded.org>; Mon, 31 Jul 2023 05:10:22 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=moto-timo.dev;
-	s=gm1; t=1690780221;
+	s=gm1; t=1690780222;
 	h=from:from:reply-to:subject:subject:to:to:cc:mime-version:mime-version:
-	 content-type:content-type; bh=zqja97RlhsPyawA+hg+4UZLDXTjre/VrN19uoA63Owk=;
-	b=jpvsj5u4332wSn4APrik4V95Hjn7sxTfxkIS90b2sWc3uKJjdRRK8uIWxBcACBPuBgLlw+
-	la/gxo8cygev9o+CemBY269iDhEK6jfxrwSJd+psroKctY4kjcR5LzcFgGt5RYNeGvlwDe
-	sG/nYMzTlKmgtJnzMSmIvpfh7vmJbtdr9KxqpTD0MQrY2aQtxLOSNn0NzYnAWYowwM3kIy
-	ER+i9etxIx/MPxzRrH9okwRE8kpyHIMIBQTjNgYhFwcg5a1k3oe1OGWIdduN2vHiKDqu79
-	pxJfmS/9D1JwYsTFp0Jwrq5kqGgMMMpvoa733v6uxxX8a738guOGfhorYFpe7g==
-Content-Type: multipart/mixed; boundary="===============0124491831469735003=="
+	 content-type:content-type; bh=GhJEhLil5IGfMChiSM5fothjR8rNQScRYBsuS/lfUzQ=;
+	b=Dz4CHCdCs1H5SFqQ+6aS/lZy8UjJMNYnu+kQvL7OHBXipHtR8CZuT3ii3TQYN9nO1m1jdr
+	OAqX27gVG87OdIvGuinFv9D4wDzpk+xwjM9tFyzmDmXK7QjiflSmyjfXhmH47wSG3e5Ug9
+	2Y2SSat2I1v0swD+62/4MHg80gKTKvabkQAexKkmfGkNYOaT1Mlww7LlikZ/SQtxZ5xeGR
+	GDNIJgrcNwQyDnZ3nMxo69lDdxk6kIH1TXYP0Jx3gGV5PWEOUSv31EuCF9T6Ai3f/Io3TN
+	7oC47MdGNdl0nVtXtGcIJiJMEyd4jKo17nH7jpZ68iRrxBhu0erUpDyFKQ2chw==
+Content-Type: multipart/mixed; boundary="===============7299019561685433332=="
 MIME-Version: 1.0
 From: auh@moto-timo.dev
 To: openembedded-devel@lists.openembedded.org
-Subject: [AUH] python3-tornado: upgrading to 6.3.2 FAILED
+Subject: [AUH] python3-trustme: upgrading to 1.1.0 FAILED
 X-GND-Sasl: auh@moto-timo.dev
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 31 Jul 2023 05:10:24 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104132
-Message-Id: <20230731051024.CDD83C04A94@smtp.lore.kernel.org>
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104133
+Message-Id: <20230731051024.C2711C001DC@smtp.lore.kernel.org>
 Date: Mon, 31 Jul 2023 05:10:24 +0000 (UTC)
 
---===============0124491831469735003==
+--===============7299019561685433332==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -44,11 +44,11 @@ Content-Transfer-Encoding: 7bit
 Hello,
 
 this email is a notification from the Auto Upgrade Helper
-that the automatic attempt to upgrade the recipe *python3-tornado* to *6.3.2* has Failed (devtool error).
+that the automatic attempt to upgrade the recipe *python3-trustme* to *1.1.0* has Failed (devtool error).
 
 Detailed error information:
 
-The following devtool command failed:  upgrade python3-tornado -V 6.3.2
+The following devtool command failed:  upgrade python3-trustme -V 1.1.0
 NOTE: Starting bitbake server...
 Loading cache...done.
 Loaded 12625 entries from dependency cache.
@@ -199,22 +199,19 @@ NOTE: Tasks Summary: Attempted 3 tasks of which 0 didn't need to be rerun and al
 NOTE: Writing buildhistory
 NOTE: Writing buildhistory took: 4 seconds
 NOTE: Writing buildhistory
-NOTE: Writing buildhistory took: 4 seconds
+NOTE: Writing buildhistory took: 5 seconds
 NOTE: Writing buildhistory
 NOTE: Writing buildhistory took: 5 seconds
 DEBUG 5 [Errno 25] Inappropriate ioctl for device
 Adding changed files:   0% |                                   | ETA:  --:--:--
 Adding changed files:   0% |                                   | ETA:  --:--:--
-Adding changed files:  20% |#######                             | ETA:  0:00:00
-Adding changed files:  41% |##############                      | ETA:  0:00:00
-Adding changed files:  61% |######################              | ETA:  0:00:00
-Adding changed files:  82% |#############################       | ETA:  0:00:00
 Adding changed files: 100% |####################################| Time: 0:00:00
 
 INFO: Extracting current version source...
+INFO: Adding local source files to srctree...
 INFO: Extracting upgraded version source...
-INFO: Fetching https://files.pythonhosted.org/packages/source/t/tornado/tornado-6.3.2.tar.gz;downloadfilename=tornado-6.3.2.tar.gz...
-INFO: Rebasing devtool onto af06650054c2bbf092e22c7f57d388ecd6c7f8db
+INFO: Fetching https://files.pythonhosted.org/packages/source/t/trustme/trustme-1.1.0.tar.gz;downloadfilename=trustme-1.1.0.tar.gz...
+INFO: Rebasing devtool onto 584c3e69d6dd12d064c6030de7b8858c85211d8d
 Traceback (most recent call last):
   File "/home/auh/Projects/poky/scripts/devtool", line 349, in <module>
     ret = main()
@@ -224,7 +221,7 @@ Traceback (most recent call last):
     new_licenses = _extract_licenses(srctree_s, (rd.getVar('LIC_FILES_CHKSUM') or ""))
   File "/home/auh/Projects/poky/scripts/lib/devtool/upgrade.py", line 473, in _extract_licenses
     with open(os.path.join(srcpath, path), 'rb') as f:
-FileNotFoundError: [Errno 2] No such file or directory: '/scratch1/auh/build-auh/workspace/sources/python3-tornado/LICENSE'
+FileNotFoundError: [Errno 2] No such file or directory: '/scratch1/auh/build-auh/workspace/sources/python3-trustme/LICENSE'
 
 
 Please review the attached files for further information and build/update failures.
@@ -232,5 +229,5 @@ Any problem please file a bug at https://bugzilla.yoctoproject.org/enter_bug.cgi
 
 Regards,
 The Upgrade Helper
---===============0124491831469735003==--
+--===============7299019561685433332==--
 
