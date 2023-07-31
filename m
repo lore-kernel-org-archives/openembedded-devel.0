@@ -2,41 +2,41 @@ Return-Path: <auh@moto-timo.dev>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C6AD3C04A94
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D3260C001DF
 	for <webhook@archiver.kernel.org>; Mon, 31 Jul 2023 05:10:14 +0000 (UTC)
-Received: from relay2-d.mail.gandi.net (relay2-d.mail.gandi.net [217.70.183.194])
- by mx.groups.io with SMTP id smtpd.web11.1126.1690780208869892201
+Received: from relay5-d.mail.gandi.net (relay5-d.mail.gandi.net [217.70.183.197])
+ by mx.groups.io with SMTP id smtpd.web10.1211.1690780210585134579
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 30 Jul 2023 22:10:09 -0700
+ Sun, 30 Jul 2023 22:10:11 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@moto-timo.dev header.s=gm1 header.b=U8wk8oiV;
- spf=pass (domain: moto-timo.dev, ip: 217.70.183.194, mailfrom: auh@moto-timo.dev)
-Received: by mail.gandi.net (Postfix) with ESMTPSA id 3BFB840007
-	for <openembedded-devel@lists.openembedded.org>; Mon, 31 Jul 2023 05:10:01 +0000 (UTC)
+ dkim=fail reason="dkim: body hash did not verify" header.i=@moto-timo.dev header.s=gm1 header.b=kDqTtNgp;
+ spf=pass (domain: moto-timo.dev, ip: 217.70.183.197, mailfrom: auh@moto-timo.dev)
+Received: by mail.gandi.net (Postfix) with ESMTPSA id EC0381C0006
+	for <openembedded-devel@lists.openembedded.org>; Mon, 31 Jul 2023 05:10:08 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=moto-timo.dev;
-	s=gm1; t=1690780207;
+	s=gm1; t=1690780209;
 	h=from:from:reply-to:subject:subject:to:to:cc:mime-version:mime-version:
-	 content-type:content-type; bh=DDjJeFdhPXESsHhRzbfVx8pJdyur5eblkgaZoHDTTxE=;
-	b=U8wk8oiVhqdRwO5UfcwBO2hOioSKBj+ahHTjNICWA22xIHHj6i1l6bl7hrOIoVtUfSuRl0
-	dDNvi10hjHcvCDn5urz3Xi4E7z2o6m0kUeB1uooD10+Za41nWlMb/SuU1SFMEj1siD2HDS
-	zr2Np5kj8H2+pJeLl1pokm5JLQFG0p86fWRzY/ZJxCNh/BR7EsNfwSTB0JAKLIgFAiMRN6
-	JGIO/1it+LRu5xe8qiY3PemBk6eE73z223XKe9eT9MLxQfRDd3TCNq4HJiBKQDtFfp+kg2
-	iYl1iExBOZ7PGt3msEGV+lLQPfxkwuXZ6xUZJsam1uuw98Vj1DpzkU1V/VCVBg==
-Content-Type: multipart/mixed; boundary="===============0758208199904291879=="
+	 content-type:content-type; bh=Zw0JLAB8ecgRcIq6fF5ltOYl6pphQ3EI7YkxBE0EySY=;
+	b=kDqTtNgpnQN78wMbeYXcYccMh+TGrnZFMLD9YipoCArFqhm2kVsrvnrjRnIXC+tQKZAlu9
+	tTzR/cgjGwfBaodnbqt2u1yztedfKUTwhoWgMFFZeEpl2BUzo6/Lf6+NwSi9g5WlNddPiQ
+	QxrJoAuo4wya6C7CuZqFK3Q41bY//fjs7M+cwG/oe3WCa+RU2U9Vq5dqWCpqnHz3FcYbxU
+	Dxst4CnDh2sVSynaS721Aarf12+zFYdDOocBgcEmc7moV7YNUs3vzmp+2SGT9ANqNIJnal
+	KSRo5B/Q1s3h2r9b2JCJZ4Ox8v0XZSS9FtXCDUfVnwf3Kk9FX00ykHXX9adi9A==
+Content-Type: multipart/mixed; boundary="===============1284411329479359279=="
 MIME-Version: 1.0
 From: auh@moto-timo.dev
 To: openembedded-devel@lists.openembedded.org
-Subject: [AUH] python3-robotframework: upgrading to 6.1.1 FAILED
+Subject: [AUH] python3-scikit-build: upgrading to 0.17.6 FAILED
 X-GND-Sasl: auh@moto-timo.dev
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 31 Jul 2023 05:10:14 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104127
-Message-Id: <20230731051014.C6AD3C04A94@smtp.lore.kernel.org>
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104128
+Message-Id: <20230731051014.D3260C001DF@smtp.lore.kernel.org>
 Date: Mon, 31 Jul 2023 05:10:14 +0000 (UTC)
 
---===============0758208199904291879==
+--===============1284411329479359279==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -44,14 +44,15 @@ Content-Transfer-Encoding: 7bit
 Hello,
 
 this email is a notification from the Auto Upgrade Helper
-that the automatic attempt to upgrade the recipe *python3-robotframework* to *6.1.1* has Failed (devtool error).
+that the automatic attempt to upgrade the recipe *python3-scikit-build* to *0.17.6* has Failed (devtool error).
 
 Detailed error information:
 
-The following devtool command failed:  upgrade python3-robotframework -V 6.1.1
+The following devtool command failed:  upgrade python3-scikit-build -V 0.17.6
 NOTE: Starting bitbake server...
 Loading cache...done.
 Loaded 12625 entries from dependency cache.
+Removing 1 recipes from the x86_64 sysroot...done.
 NOTE: Resolving any missing task queue dependencies
 NOTE: Resolving any missing task queue dependencies
 NOTE: Resolving any missing task queue dependencies
@@ -116,15 +117,15 @@ meta-perl            = "tmp-auh-upgrades:9d4ce13d23c371beb8b9cd020b6eebed19c0d79
 workspace            = "<unknown>:<unknown>"
 
 Initialising tasks...done.
-Sstate summary: Wanted 11 Local 0 Mirrors 11 Missed 0 Current 22 (100% match, 100% complete)
+Sstate summary: Wanted 10 Local 0 Mirrors 10 Missed 0 Current 20 (100% match, 100% complete)
 NOTE: Executing Tasks
-NOTE: Tasks Summary: Attempted 113 tasks of which 110 didn't need to be rerun and all succeeded.
+NOTE: Tasks Summary: Attempted 103 tasks of which 100 didn't need to be rerun and all succeeded.
 NOTE: Writing buildhistory
-NOTE: Writing buildhistory took: 4 seconds
-NOTE: Writing buildhistory
-NOTE: Writing buildhistory took: 4 seconds
+NOTE: Writing buildhistory took: 3 seconds
 NOTE: Writing buildhistory
 NOTE: Writing buildhistory took: 5 seconds
+NOTE: Writing buildhistory
+NOTE: Writing buildhistory took: 4 seconds
 Loading cache...done.
 Loaded 12625 entries from dependency cache.
 Parsing recipes...done.
@@ -193,39 +194,25 @@ meta-perl            = "tmp-auh-upgrades:9d4ce13d23c371beb8b9cd020b6eebed19c0d79
 workspace            = "<unknown>:<unknown>"
 
 Initialising tasks...done.
-Sstate summary: Wanted 3 Local 0 Mirrors 2 Missed 1 Current 4 (66% match, 85% complete)
+Sstate summary: Wanted 1 Local 0 Mirrors 0 Missed 1 Current 0 (0% match, 0% complete)
 NOTE: Executing Tasks
-NOTE: Tasks Summary: Attempted 23 tasks of which 20 didn't need to be rerun and all succeeded.
-NOTE: Writing buildhistory
-NOTE: Writing buildhistory took: 5 seconds
+WARNING: Failed to fetch URL https://files.pythonhosted.org/packages/source/s/scikit-build/scikit-build-0.17.6.tar.gz;downloadfilename=scikit-build-0.17.6.tar.gz, attempting MIRRORS if available
+NOTE: Tasks Summary: Attempted 2 tasks of which 0 didn't need to be rerun and 1 failed.
 NOTE: Writing buildhistory
 NOTE: Writing buildhistory took: 4 seconds
 NOTE: Writing buildhistory
 NOTE: Writing buildhistory took: 5 seconds
-DEBUG 5 [Errno 25] Inappropriate ioctl for device
-Adding changed files:   0% |                                   | ETA:  --:--:--
-Adding changed files:   0% |                                   | ETA:  --:--:--
-Adding changed files:  18% |######                              | ETA:  0:00:00
-Adding changed files:  36% |############                        | ETA:  0:00:00
-Adding changed files:  54% |###################                 | ETA:  0:00:00
-Adding changed files:  72% |#########################           | ETA:  0:00:00
-Adding changed files:  90% |################################    | ETA:  0:00:00
-Adding changed files: 100% |####################################| Time: 0:00:00
+NOTE: Writing buildhistory
+NOTE: Writing buildhistory took: 5 seconds
 
 INFO: Extracting current version source...
 INFO: Extracting upgraded version source...
-INFO: Fetching https://files.pythonhosted.org/packages/source/r/robotframework/robotframework-6.1.1.zip;downloadfilename=robotframework-6.1.1.zip...
-INFO: Rebasing devtool onto 422120d41adba78c907f3c7e74d2e79cff3eb8f6
-Traceback (most recent call last):
-  File "/home/auh/Projects/poky/scripts/devtool", line 349, in <module>
-    ret = main()
-  File "/home/auh/Projects/poky/scripts/devtool", line 336, in main
-    ret = args.func(args, config, basepath, workspace)
-  File "/home/auh/Projects/poky/scripts/lib/devtool/upgrade.py", line 565, in upgrade
-    new_licenses = _extract_licenses(srctree_s, (rd.getVar('LIC_FILES_CHKSUM') or ""))
-  File "/home/auh/Projects/poky/scripts/lib/devtool/upgrade.py", line 473, in _extract_licenses
-    with open(os.path.join(srcpath, path), 'rb') as f:
-FileNotFoundError: [Errno 2] No such file or directory: '/scratch1/auh/build-auh/workspace/sources/python3-robotframework/LICENSE.txt'
+INFO: Fetching https://files.pythonhosted.org/packages/source/s/scikit-build/scikit-build-0.17.6.tar.gz;downloadfilename=scikit-build-0.17.6.tar.gz...
+ERROR: Fetcher failure: Fetch command export PSEUDO_DISABLED=1; export PATH="/scratch1/auh/build-auh/tmp/sysroots-uninative/x86_64-linux/usr/bin:/home/auh/Projects/poky/scripts:/scratch1/auh/build-auh/tmp/work/recipetool-1gs9le6q/work/recipe-sysroot-native/usr/bin/x86_64-poky-linux:/scratch1/auh/build-auh/tmp/work/recipetool-1gs9le6q/work/recipe-sysroot/usr/bin/crossscripts:/scratch1/auh/build-auh/tmp/work/recipetool-1gs9le6q/work/recipe-sysroot-native/usr/sbin:/scratch1/auh/build-auh/tmp/work/recipetool-1gs9le6q/work/recipe-sysroot-native/usr/bin:/scratch1/auh/build-auh/tmp/work/recipetool-1gs9le6q/work/recipe-sysroot-native/sbin:/scratch1/auh/build-auh/tmp/work/recipetool-1gs9le6q/work/recipe-sysroot-native/bin:/home/auh/Projects/poky/bitbake/bin:/scratch1/auh/build-auh/tmp/hosttools"; export HOME="/home/auh"; /usr/bin/env wget -t 2 -T 30 --passive-ftp -O /scratch1/auh/DOWNLOADS/scikit-build-0.17.6.tar.gz.tmp -P /scratch1/auh/DOWNLOADS 'https://files.pythonhosted.org/packages/sourc
+ e/s/scikit-build/scikit-build-0.17.6.tar.gz' --progress=dot -v failed with exit code 8, no output
+ERROR: Bitbake Fetcher Error: FetchError('Unable to fetch URL from any source.', 'https://files.pythonhosted.org/packages/source/s/scikit-build/scikit-build-0.17.6.tar.gz;downloadfilename=scikit-build-0.17.6.tar.gz')
+ERROR: Logfile of failure stored in: /scratch1/auh/build-auh/tmp/work/recipetool-1gs9le6q/work/temp/log.do_fetch.668938
+ERROR: Failed to fetch URL https://files.pythonhosted.org/packages/source/s/scikit-build/scikit-build-0.17.6.tar.gz;downloadfilename=scikit-build-0.17.6.tar.gz
 
 
 Please review the attached files for further information and build/update failures.
@@ -233,5 +220,5 @@ Any problem please file a bug at https://bugzilla.yoctoproject.org/enter_bug.cgi
 
 Regards,
 The Upgrade Helper
---===============0758208199904291879==--
+--===============1284411329479359279==--
 
