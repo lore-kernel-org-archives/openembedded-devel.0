@@ -2,41 +2,41 @@ Return-Path: <auh@moto-timo.dev>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D1828C04A94
-	for <webhook@archiver.kernel.org>; Mon, 31 Jul 2023 05:10:44 +0000 (UTC)
-Received: from relay1-d.mail.gandi.net (relay1-d.mail.gandi.net [217.70.183.193])
- by mx.groups.io with SMTP id smtpd.web11.1135.1690780235911939676
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0FBC1C001DF
+	for <webhook@archiver.kernel.org>; Mon, 31 Jul 2023 05:47:55 +0000 (UTC)
+Received: from relay2-d.mail.gandi.net (relay2-d.mail.gandi.net [217.70.183.194])
+ by mx.groups.io with SMTP id smtpd.web10.1574.1690782469948323980
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 30 Jul 2023 22:10:36 -0700
+ Sun, 30 Jul 2023 22:47:50 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@moto-timo.dev header.s=gm1 header.b=c5Qlo+JG;
- spf=pass (domain: moto-timo.dev, ip: 217.70.183.193, mailfrom: auh@moto-timo.dev)
-Received: by mail.gandi.net (Postfix) with ESMTPSA id 4CD37240004
-	for <openembedded-devel@lists.openembedded.org>; Mon, 31 Jul 2023 05:10:34 +0000 (UTC)
+ dkim=pass header.i=@moto-timo.dev header.s=gm1 header.b=ZIOh+AW1;
+ spf=pass (domain: moto-timo.dev, ip: 217.70.183.194, mailfrom: auh@moto-timo.dev)
+Received: by mail.gandi.net (Postfix) with ESMTPSA id 5C8A940005
+	for <openembedded-devel@lists.openembedded.org>; Mon, 31 Jul 2023 05:47:48 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=moto-timo.dev;
-	s=gm1; t=1690780234;
+	s=gm1; t=1690782468;
 	h=from:from:reply-to:subject:subject:to:to:cc:mime-version:mime-version:
-	 content-type:content-type; bh=5FcKy0CIzvuu8zwyFIhIxqRytD5qE46j8TMQKNh6nyI=;
-	b=c5Qlo+JGyzuV75Hg4dcDgO+BxORWyA8Ah0CMuqHy1Mbwv3yshjBx4mT6r2XtC5lsS3+LQK
-	AWLGBLNnzt6H6HyQUr2JqI5WFIKEbrJ+f1HBfsjCoZcGaXod44HRl9KczaHdCb1ltZojK2
-	c9PTTrkRdQbajjPE03tkkjM0YOlTywZvqLxBHRu/T2P+Unaen0Tx8+6+tis5x4wNA2cqUK
-	AMPEWSN3N5bckGlB1UKpcpV4z2Qbange1grHSZsB1cExtF8cyZDgaWxK+1+d0WhRExrw+B
-	0Js2qDx5ZsaXLvWUoM350IqADiXI00Qq/a+BJJYw33xZpCubtVM331OUS4iaiw==
-Content-Type: multipart/mixed; boundary="===============4700421125710153098=="
+	 content-type:content-type; bh=AzGgaIS1BtaOkkcTN0U4W5g6fa2bBK0Dggsd2AqqG9s=;
+	b=ZIOh+AW12ONLkgjp0Ffr2kA9wEbRA5zfyqvBOdlWfqpcsWYp0U1GBdKWlZbVorGNO3aJEK
+	8NzKU/eiQYb++d3DciCJxiKM8ByufxXx8VaCaVowJfIRtTM/djoM3wY2YjbdFuesM4fJE2
+	73Rpcm9hGJsLGm7NE+piFmz4sfRcOPfYa43qeYF1iRKvRdskaoCq9j0a7ZDAfu9Y5KWzJD
+	M23QUHjPhVUhhQQOax15eF3Mi5z82VhDzzfrKcx4AL7/gACLyzx0Jlydnjm2dNWI5Sr+8j
+	iqvcoDRgA55RoOcZlDMZ+1B5L93ZzAhY/m3jAmeKPY25PVrvgg8QmFRuiQjaMA==
+Content-Type: multipart/mixed; boundary="===============2299554220978952646=="
 MIME-Version: 1.0
 From: auh@moto-timo.dev
 To: openembedded-devel@lists.openembedded.org
-Subject: [AUH] python3-xstatic-font-awesome: upgrading to 6.2.1.1 FAILED
+Subject: [AUH] libcompress-raw-lzma-perl: upgrading to 2.206 FAILED
 X-GND-Sasl: auh@moto-timo.dev
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 31 Jul 2023 05:10:44 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104140
-Message-Id: <20230731051044.D1828C04A94@smtp.lore.kernel.org>
-Date: Mon, 31 Jul 2023 05:10:44 +0000 (UTC)
+ <openembedded-devel@lists.openembedded.org>; Mon, 31 Jul 2023 05:47:55 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104145
+Message-Id: <20230731054755.0FBC1C001DF@smtp.lore.kernel.org>
+Date: Mon, 31 Jul 2023 05:47:55 +0000 (UTC)
 
---===============4700421125710153098==
+--===============2299554220978952646==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -44,11 +44,11 @@ Content-Transfer-Encoding: 7bit
 Hello,
 
 this email is a notification from the Auto Upgrade Helper
-that the automatic attempt to upgrade the recipe *python3-xstatic-font-awesome* to *6.2.1.1* has Failed (devtool error).
+that the automatic attempt to upgrade the recipe *libcompress-raw-lzma-perl* to *2.206* has Failed (devtool error).
 
 Detailed error information:
 
-The following devtool command failed:  upgrade python3-xstatic-font-awesome -V 6.2.1.1
+The following devtool command failed:  upgrade libcompress-raw-lzma-perl -V 2.206
 NOTE: Starting bitbake server...
 Loading cache...done.
 Loaded 12625 entries from dependency cache.
@@ -199,39 +199,18 @@ NOTE: Tasks Summary: Attempted 3 tasks of which 0 didn't need to be rerun and al
 NOTE: Writing buildhistory
 NOTE: Writing buildhistory took: 4 seconds
 NOTE: Writing buildhistory
-NOTE: Writing buildhistory took: 4 seconds
+NOTE: Writing buildhistory took: 5 seconds
 NOTE: Writing buildhistory
-NOTE: Writing buildhistory took: 4 seconds
+NOTE: Writing buildhistory took: 5 seconds
 DEBUG 5 [Errno 25] Inappropriate ioctl for device
 Adding changed files:   0% |                                   | ETA:  --:--:--
 Adding changed files:   0% |                                   | ETA:  --:--:--
-Adding changed files:   4% |#                                   | ETA:  0:00:10
-Adding changed files:   9% |###                                 | ETA:  0:00:05
-Adding changed files:  13% |####                                | ETA:  0:00:03
-Adding changed files:  18% |######                              | ETA:  0:00:02
-Adding changed files:  23% |########                            | ETA:  0:00:02
-Adding changed files:  27% |#########                           | ETA:  0:00:02
-Adding changed files:  32% |###########                         | ETA:  0:00:01
-Adding changed files:  36% |#############                       | ETA:  0:00:01
-Adding changed files:  41% |##############                      | ETA:  0:00:01
-Adding changed files:  46% |################                    | ETA:  0:00:01
-Adding changed files:  50% |##################                  | ETA:  0:00:01
-Adding changed files:  55% |###################                 | ETA:  0:00:00
-Adding changed files:  59% |#####################               | ETA:  0:00:00
-Adding changed files:  64% |#######################             | ETA:  0:00:00
-Adding changed files:  69% |########################            | ETA:  0:00:00
-Adding changed files:  73% |##########################          | ETA:  0:00:00
-Adding changed files:  78% |############################        | ETA:  0:00:00
-Adding changed files:  82% |#############################       | ETA:  0:00:00
-Adding changed files:  87% |###############################     | ETA:  0:00:00
-Adding changed files:  92% |#################################   | ETA:  0:00:00
-Adding changed files:  96% |##################################  | ETA:  0:00:00
-Adding changed files: 100% |####################################| Time: 0:00:01
+Adding changed files: 100% |####################################| Time: 0:00:00
 
 INFO: Extracting current version source...
 INFO: Extracting upgraded version source...
-INFO: Fetching https://files.pythonhosted.org/packages/source/X/XStatic-Font-Awesome/XStatic-Font-Awesome-6.2.1.1.tar.gz;downloadfilename=XStatic-Font-Awesome-6.2.1.1.tar.gz...
-INFO: Rebasing devtool onto 620d7b973da3ce753ae4701d58faf9133d27067a
+INFO: Fetching https://search.cpan.org/CPAN/authors/id/P/PM/PMQS/Compress-Raw-Lzma-2.206.tar.gz...
+INFO: Rebasing devtool onto 6a52f297075bcf9b64a20b4dd8e892d606400a26
 Traceback (most recent call last):
   File "/home/auh/Projects/poky/scripts/devtool", line 349, in <module>
     ret = main()
@@ -241,7 +220,7 @@ Traceback (most recent call last):
     new_licenses = _extract_licenses(srctree_s, (rd.getVar('LIC_FILES_CHKSUM') or ""))
   File "/home/auh/Projects/poky/scripts/lib/devtool/upgrade.py", line 473, in _extract_licenses
     with open(os.path.join(srcpath, path), 'rb') as f:
-FileNotFoundError: [Errno 2] No such file or directory: '/scratch1/auh/build-auh/workspace/sources/python3-xstatic-font-awesome/PKG-INFO'
+FileNotFoundError: [Errno 2] No such file or directory: '/scratch1/auh/build-auh/workspace/sources/libcompress-raw-lzma-perl/README'
 
 
 Please review the attached files for further information and build/update failures.
@@ -249,5 +228,5 @@ Any problem please file a bug at https://bugzilla.yoctoproject.org/enter_bug.cgi
 
 Regards,
 The Upgrade Helper
---===============4700421125710153098==--
+--===============2299554220978952646==--
 
