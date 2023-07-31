@@ -2,41 +2,41 @@ Return-Path: <auh@moto-timo.dev>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D11F2C04FDF
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CA9E2C04A94
 	for <webhook@archiver.kernel.org>; Mon, 31 Jul 2023 05:09:14 +0000 (UTC)
-Received: from relay5-d.mail.gandi.net (relay5-d.mail.gandi.net [217.70.183.197])
- by mx.groups.io with SMTP id smtpd.web11.1109.1690780149871747015
+Received: from relay4-d.mail.gandi.net (relay4-d.mail.gandi.net [217.70.183.196])
+ by mx.groups.io with SMTP id smtpd.web11.1104.1690780144631095907
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 30 Jul 2023 22:09:10 -0700
+ Sun, 30 Jul 2023 22:09:05 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@moto-timo.dev header.s=gm1 header.b=ILfii15L;
- spf=pass (domain: moto-timo.dev, ip: 217.70.183.197, mailfrom: auh@moto-timo.dev)
-Received: by mail.gandi.net (Postfix) with ESMTPSA id 3C4D01C0005
-	for <openembedded-devel@lists.openembedded.org>; Mon, 31 Jul 2023 05:09:07 +0000 (UTC)
+ dkim=pass header.i=@moto-timo.dev header.s=gm1 header.b=kX64dZEq;
+ spf=pass (domain: moto-timo.dev, ip: 217.70.183.196, mailfrom: auh@moto-timo.dev)
+Received: by mail.gandi.net (Postfix) with ESMTPSA id 078A0E0007
+	for <openembedded-devel@lists.openembedded.org>; Mon, 31 Jul 2023 05:09:02 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=moto-timo.dev;
-	s=gm1; t=1690780148;
+	s=gm1; t=1690780143;
 	h=from:from:reply-to:subject:subject:to:to:cc:mime-version:mime-version:
-	 content-type:content-type; bh=t2sdO87RtaN5Od+XH30YhJbnXveUJ3NxArdXESw6bg0=;
-	b=ILfii15LqwPgfpVSjP21ePsZ6UP82immOMdhFs9NHOc1SCp9XVxkEuFSy/OIGvIHLEGX6g
-	KczNpvzG9I7sJqP+JgqgKp0JepLl9Ba0ebQU7C7IkV/CVw6OMpIbmBX9ysUNWycvLqncBU
-	wDSdibsP5dxGg09Y67d9VaV0l7EDDMnCqsGiL5cr/qrEVRkgZjF+dRvdpFZFZD9504N37B
-	uqLigQiSPgyuiahmZhDcDgwaBtCDHfOetfGup3MlHh8c/zff0gsQGJKak2Oj09AfTvSpkz
-	MEGcllnstm1l1yJHY9Ehxt4zsLe9btULNMIOG+w2kqqEB3oMnm0tgxnsmoDwQg==
-Content-Type: multipart/mixed; boundary="===============3888555209080532552=="
+	 content-type:content-type; bh=QDl/bvhTUhav9d54TcCRhppe1m1wRBplnydXdgbHj9s=;
+	b=kX64dZEqHZepQIjWE0yM7VA5aHiVabrY3b1m/jP/IzYKqHz31w5yK9aN8X02HQLxmfpJTA
+	82SUTXaeDAXBHigBpyn5BRDkJ58bty4p4JtjNMVAodIfNnhjWiO3MuWWDB1q3yfW4YbpKl
+	nBasfcnQ51/EYQQyQRw/fhAUnz7E6MVUiz73JtfT/zfosOQnohn818TiagpnnxH9ytjpsI
+	d2Il4aXUr1D9wxdOPTb3KtEWjLlf9buYPPbUrRIWtUK+qVJViMetWWJPp4J4NHxXhP9Gga
+	KrRySfQtw8G2APyUp97Uj7xfg126nlGjv0NIdOp3/PUel0DW9Vt7xseKQ1U4Eg==
+Content-Type: multipart/mixed; boundary="===============8369331520817878254=="
 MIME-Version: 1.0
 From: auh@moto-timo.dev
 To: openembedded-devel@lists.openembedded.org
-Subject: [AUH] python3-gunicorn: upgrading to 21.2.0 FAILED
+Subject: [AUH] python3-gnupg: upgrading to 0.5.1 FAILED
 X-GND-Sasl: auh@moto-timo.dev
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 31 Jul 2023 05:09:14 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104101
-Message-Id: <20230731050914.D11F2C04FDF@smtp.lore.kernel.org>
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104098
+Message-Id: <20230731050914.CA9E2C04A94@smtp.lore.kernel.org>
 Date: Mon, 31 Jul 2023 05:09:14 +0000 (UTC)
 
---===============3888555209080532552==
+--===============8369331520817878254==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -44,16 +44,12 @@ Content-Transfer-Encoding: 7bit
 Hello,
 
 this email is a notification from the Auto Upgrade Helper
-that the automatic attempt to upgrade the recipe *python3-gunicorn* to *21.2.0* has Failed (devtool error).
+that the automatic attempt to upgrade the recipe *python3-gnupg* to *0.5.1* has Failed (devtool error).
 
 Detailed error information:
 
-The following devtool command failed:  upgrade python3-gunicorn -V 21.2.0
+The following devtool command failed:  upgrade python3-gnupg -V 0.5.1
 NOTE: Starting bitbake server...
-NOTE: Reconnecting to bitbake server...
-NOTE: Previous bitbake instance shutting down?, waiting to retry... (20:41:13.714963)
-NOTE: Directory listing: ['tmp-qemux86-musl', 'tmp-qemuarm64', 'tmp', 'conf', 'tmp-qemux86-64', 'weeklyjob.sh', 'auto_upgrade_helper', 'tmp-qemux86', 'auto-upgrade-helper', 'upgrade-helper', 'cache', 'workspace', 'pokyjob.sh', 'buildhistory', 'perljob.sh', 'bitbake-cookerdaemon.log']
-NOTE: Retrying server connection (#1)... (20:41:13.830746)
 Loading cache...done.
 Loaded 12619 entries from dependency cache.
 NOTE: Resolving any missing task queue dependencies
@@ -205,24 +201,16 @@ NOTE: Writing buildhistory took: 4 seconds
 NOTE: Writing buildhistory
 NOTE: Writing buildhistory took: 4 seconds
 NOTE: Writing buildhistory
-NOTE: Writing buildhistory took: 4 seconds
+NOTE: Writing buildhistory took: 5 seconds
 DEBUG 5 [Errno 25] Inappropriate ioctl for device
 Adding changed files:   0% |                                   | ETA:  --:--:--
 Adding changed files:   0% |                                   | ETA:  --:--:--
-Adding changed files:  13% |####                                | ETA:  0:00:01
-Adding changed files:  26% |#########                           | ETA:  0:00:00
-Adding changed files:  39% |##############                      | ETA:  0:00:00
-Adding changed files:  52% |##################                  | ETA:  0:00:00
-Adding changed files:  65% |#######################             | ETA:  0:00:00
-Adding changed files:  78% |############################        | ETA:  0:00:00
-Adding changed files:  91% |################################    | ETA:  0:00:00
 Adding changed files: 100% |####################################| Time: 0:00:00
 
 INFO: Extracting current version source...
-INFO: Adding local source files to srctree...
 INFO: Extracting upgraded version source...
-INFO: Fetching https://files.pythonhosted.org/packages/source/g/gunicorn/gunicorn-21.2.0.tar.gz;downloadfilename=gunicorn-21.2.0.tar.gz...
-INFO: Rebasing devtool onto 727343db4baaaab9f1b72ed28016388eeba31ceb
+INFO: Fetching https://files.pythonhosted.org/packages/source/p/python-gnupg/python-gnupg-0.5.1.tar.gz;downloadfilename=python-gnupg-0.5.1.tar.gz...
+INFO: Rebasing devtool onto 936428eaa492c7b4d01d20c1ac0f67bd715a2f9b
 Traceback (most recent call last):
   File "/home/auh/Projects/poky/scripts/devtool", line 349, in <module>
     ret = main()
@@ -232,7 +220,7 @@ Traceback (most recent call last):
     new_licenses = _extract_licenses(srctree_s, (rd.getVar('LIC_FILES_CHKSUM') or ""))
   File "/home/auh/Projects/poky/scripts/lib/devtool/upgrade.py", line 473, in _extract_licenses
     with open(os.path.join(srcpath, path), 'rb') as f:
-FileNotFoundError: [Errno 2] No such file or directory: '/scratch1/auh/build-auh/workspace/sources/python3-gunicorn/LICENSE'
+FileNotFoundError: [Errno 2] No such file or directory: '/scratch1/auh/build-auh/workspace/sources/python3-gnupg/LICENSE.txt'
 
 
 Please review the attached files for further information and build/update failures.
@@ -240,5 +228,5 @@ Any problem please file a bug at https://bugzilla.yoctoproject.org/enter_bug.cgi
 
 Regards,
 The Upgrade Helper
---===============3888555209080532552==--
+--===============8369331520817878254==--
 
