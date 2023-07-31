@@ -2,41 +2,41 @@ Return-Path: <auh@moto-timo.dev>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C318FC001DF
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E0CF5C04A94
 	for <webhook@archiver.kernel.org>; Mon, 31 Jul 2023 05:08:44 +0000 (UTC)
-Received: from relay6-d.mail.gandi.net (relay6-d.mail.gandi.net [217.70.183.198])
- by mx.groups.io with SMTP id smtpd.web11.1095.1690780120153469178
+Received: from relay5-d.mail.gandi.net (relay5-d.mail.gandi.net [217.70.183.197])
+ by mx.groups.io with SMTP id smtpd.web11.1093.1690780117092915927
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 30 Jul 2023 22:08:40 -0700
+ Sun, 30 Jul 2023 22:08:37 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@moto-timo.dev header.s=gm1 header.b=SPJE5+uZ;
- spf=pass (domain: moto-timo.dev, ip: 217.70.183.198, mailfrom: auh@moto-timo.dev)
-Received: by mail.gandi.net (Postfix) with ESMTPSA id BDFE4C0003
-	for <openembedded-devel@lists.openembedded.org>; Mon, 31 Jul 2023 05:08:37 +0000 (UTC)
+ dkim=pass header.i=@moto-timo.dev header.s=gm1 header.b=Ce5sdXDe;
+ spf=pass (domain: moto-timo.dev, ip: 217.70.183.197, mailfrom: auh@moto-timo.dev)
+Received: by mail.gandi.net (Postfix) with ESMTPSA id 728071C0003
+	for <openembedded-devel@lists.openembedded.org>; Mon, 31 Jul 2023 05:08:35 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=moto-timo.dev;
-	s=gm1; t=1690780118;
+	s=gm1; t=1690780115;
 	h=from:from:reply-to:subject:subject:to:to:cc:mime-version:mime-version:
-	 content-type:content-type; bh=xGqetgLCsxJ7ymF41mq5shEOsoUTJ0MpqpN2SOyAWBI=;
-	b=SPJE5+uZ1vBwhz0MtFoLO7g65karU4JgDuibSP+beMHf3oXx8JhFzPZE0nAn1Q0ke0zyRY
-	w3sotGHRnqqnx1JQ+57uZR+tLVZ41087WUy+Qd4BxFz00JX0VG19rLZkQOCQkzE0hj0aUs
-	YusdNwVPDugS+5RBQkIWomjqb0OfU9PPQdiL/m/gp2uQOBYHlRs6jO3p3eYyTNIwdMhT+r
-	ky7SpoIm4DppeAgaHNK4iXQnJyiuAy92ioIY4RaHQDo2rPKnveQSEfkHsClI32KJbxk29/
-	fiXHimEwOBQWgVthiV3cJdsNgROKdnPAUNkif1XkSLVZnIZh3Lh399m6Y+HrEQ==
-Content-Type: multipart/mixed; boundary="===============3367336615314653101=="
+	 content-type:content-type; bh=ug2dAkh0nOa9t5usu5Xq6i8jVL03vYe+JT5pdJQ1pqM=;
+	b=Ce5sdXDejir12dtiFw/XiHJLxyHdL8MN4QbKLs2WR4EBUpgLvufhM1oWZGCTezlBiZRkQ+
+	DdKrzIfaycblEblSK+SNa5elh7yA1BTuTJYTfq6NbBQmhQUsTsZZruwTillrMZDC1QmczP
+	ZKlWeih17i5ldnkLSqTkiJ94QR3el3n6djdD9w7Hyi+NWL7HrAOcMuBaiy4cLYKC+dkqfS
+	b6sbREopsgpITFZWMlwbh4ZibHFCf/uaDfQkYOhHv59mMCVaklR0R1yLct52AUgb14k2oF
+	e+EWj0ZYZvPp2vWYtvczSPSVnmf/zw6oen4/HRTAvO0MdWpIe7Qq/vRK6CR2CQ==
+Content-Type: multipart/mixed; boundary="===============8970376364589435604=="
 MIME-Version: 1.0
 From: auh@moto-timo.dev
 To: openembedded-devel@lists.openembedded.org
-Subject: [AUH] python3-click: upgrading to 8.1.6 FAILED
+Subject: [AUH] python3-cantools: upgrading to 39.0.0 FAILED
 X-GND-Sasl: auh@moto-timo.dev
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 31 Jul 2023 05:08:44 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104085
-Message-Id: <20230731050844.C318FC001DF@smtp.lore.kernel.org>
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104084
+Message-Id: <20230731050844.E0CF5C04A94@smtp.lore.kernel.org>
 Date: Mon, 31 Jul 2023 05:08:44 +0000 (UTC)
 
---===============3367336615314653101==
+--===============8970376364589435604==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -44,14 +44,12 @@ Content-Transfer-Encoding: 7bit
 Hello,
 
 this email is a notification from the Auto Upgrade Helper
-that the automatic attempt to upgrade the recipe *python3-click* to *8.1.6* has Failed (devtool error).
+that the automatic attempt to upgrade the recipe *python3-cantools* to *39.0.0* has Failed (devtool error).
 
 Detailed error information:
 
-The following devtool command failed:  upgrade python3-click -V 8.1.6
+The following devtool command failed:  upgrade python3-cantools -V 39.0.0
 NOTE: Starting bitbake server...
-NOTE: Reconnecting to bitbake server...
-NOTE: Retrying server connection (#1)... (19:33:08.574869)
 Loading cache...done.
 Loaded 12619 entries from dependency cache.
 NOTE: Resolving any missing task queue dependencies
@@ -122,11 +120,11 @@ Sstate summary: Wanted 10 Local 0 Mirrors 10 Missed 0 Current 20 (100% match, 10
 NOTE: Executing Tasks
 NOTE: Tasks Summary: Attempted 103 tasks of which 100 didn't need to be rerun and all succeeded.
 NOTE: Writing buildhistory
-NOTE: Writing buildhistory took: 4 seconds
+NOTE: Writing buildhistory took: 11 seconds
 NOTE: Writing buildhistory
-NOTE: Writing buildhistory took: 4 seconds
+NOTE: Writing buildhistory took: 19 seconds
 NOTE: Writing buildhistory
-NOTE: Writing buildhistory took: 4 seconds
+NOTE: Writing buildhistory took: 6 seconds
 Loading cache...done.
 Loaded 12619 entries from dependency cache.
 Parsing recipes...done.
@@ -201,21 +199,23 @@ NOTE: Tasks Summary: Attempted 3 tasks of which 0 didn't need to be rerun and al
 NOTE: Writing buildhistory
 NOTE: Writing buildhistory took: 4 seconds
 NOTE: Writing buildhistory
-NOTE: Writing buildhistory took: 4 seconds
+NOTE: Writing buildhistory took: 5 seconds
 NOTE: Writing buildhistory
-NOTE: Writing buildhistory took: 4 seconds
+NOTE: Writing buildhistory took: 6 seconds
 DEBUG 5 [Errno 25] Inappropriate ioctl for device
 Adding changed files:   0% |                                   | ETA:  --:--:--
 Adding changed files:   0% |                                   | ETA:  --:--:--
+Adding changed files:  18% |######                              | ETA:  0:00:00
 Adding changed files:  37% |#############                       | ETA:  0:00:00
+Adding changed files:  55% |####################                | ETA:  0:00:00
 Adding changed files:  74% |##########################          | ETA:  0:00:00
+Adding changed files:  92% |#################################   | ETA:  0:00:00
 Adding changed files: 100% |####################################| Time: 0:00:00
 
 INFO: Extracting current version source...
-INFO: Adding local source files to srctree...
 INFO: Extracting upgraded version source...
-INFO: Fetching https://files.pythonhosted.org/packages/source/c/click/click-8.1.6.tar.gz;downloadfilename=click-8.1.6.tar.gz...
-INFO: Rebasing devtool onto b36864f26e036d604f9370ec70d4bda8ae0a501f
+INFO: Fetching https://files.pythonhosted.org/packages/source/c/cantools/cantools-39.0.0.tar.gz;downloadfilename=cantools-39.0.0.tar.gz...
+INFO: Rebasing devtool onto d7862766598ea3a5180ccfc6c54f8277ea4d0093
 Traceback (most recent call last):
   File "/home/auh/Projects/poky/scripts/devtool", line 349, in <module>
     ret = main()
@@ -225,7 +225,7 @@ Traceback (most recent call last):
     new_licenses = _extract_licenses(srctree_s, (rd.getVar('LIC_FILES_CHKSUM') or ""))
   File "/home/auh/Projects/poky/scripts/lib/devtool/upgrade.py", line 473, in _extract_licenses
     with open(os.path.join(srcpath, path), 'rb') as f:
-FileNotFoundError: [Errno 2] No such file or directory: '/scratch1/auh/build-auh/workspace/sources/python3-click/LICENSE.rst'
+FileNotFoundError: [Errno 2] No such file or directory: '/scratch1/auh/build-auh/workspace/sources/python3-cantools/LICENSE'
 
 
 Please review the attached files for further information and build/update failures.
@@ -233,5 +233,5 @@ Any problem please file a bug at https://bugzilla.yoctoproject.org/enter_bug.cgi
 
 Regards,
 The Upgrade Helper
---===============3367336615314653101==--
+--===============8970376364589435604==--
 
