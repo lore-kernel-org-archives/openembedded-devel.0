@@ -2,41 +2,41 @@ Return-Path: <auh@moto-timo.dev>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C37A0C41513
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D873BC04FE0
 	for <webhook@archiver.kernel.org>; Mon, 31 Jul 2023 05:09:04 +0000 (UTC)
-Received: from relay1-d.mail.gandi.net (relay1-d.mail.gandi.net [217.70.183.193])
- by mx.groups.io with SMTP id smtpd.web11.1102.1690780141242903389
+Received: from relay5-d.mail.gandi.net (relay5-d.mail.gandi.net [217.70.183.197])
+ by mx.groups.io with SMTP id smtpd.web10.1177.1690780137740172983
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 30 Jul 2023 22:09:01 -0700
+ Sun, 30 Jul 2023 22:08:58 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@moto-timo.dev header.s=gm1 header.b=aNEx5hpM;
- spf=pass (domain: moto-timo.dev, ip: 217.70.183.193, mailfrom: auh@moto-timo.dev)
-Received: by mail.gandi.net (Postfix) with ESMTPSA id A1F69240004
-	for <openembedded-devel@lists.openembedded.org>; Mon, 31 Jul 2023 05:08:59 +0000 (UTC)
+ dkim=pass header.i=@moto-timo.dev header.s=gm1 header.b=Yud6MzjU;
+ spf=pass (domain: moto-timo.dev, ip: 217.70.183.197, mailfrom: auh@moto-timo.dev)
+Received: by mail.gandi.net (Postfix) with ESMTPSA id 1EC201C0002
+	for <openembedded-devel@lists.openembedded.org>; Mon, 31 Jul 2023 05:08:55 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=moto-timo.dev;
-	s=gm1; t=1690780139;
+	s=gm1; t=1690780136;
 	h=from:from:reply-to:subject:subject:to:to:cc:mime-version:mime-version:
-	 content-type:content-type; bh=z9fP6GUkipFuekPMUaiA7AZxI5up7pVgVA6poS7Kdhk=;
-	b=aNEx5hpM9vTn38oh1E2nh6Jiepwn8iuuNyBagjKRR+nzk1Xe024YUrznMlwArXrXazQPYl
-	ZsdQcgnx7ghhEVbM9Xkdlu2N19EWY69Sc2CU2vivyQ5KpI6n8AgfMg1HWK0Cf6VU2QIM+G
-	+qMTIiVdR8sIKSKh2GK8zhEDzvcrk3zdVIxkskphIDjiyRZUB5bt0xjKGoVLV/17XKKZQX
-	OpxCqrsyG3Vvkx0wYeWTot0njYXqqZ8Q6JDNjtFsmC4y8CzvcRPJq5Mduk5ULZ0BWb4nj9
-	gwLcdQZPhu314iyJrNK+SHIObH7tvNPkEqUhZm2WNuTMVhI5ae6f1Ji94akVKg==
-Content-Type: multipart/mixed; boundary="===============5372705054119967074=="
+	 content-type:content-type; bh=wxyjEUqPaGD+z7kXolG0sgoy+gMcJXAgW79FqsoppG8=;
+	b=Yud6MzjU/WE6VtEeKf2/03alwdnqM6QFUt5Q6i6rftVZ5+gQEfb1goeChyeEo36oB3s+au
+	6Ue9zsuP6A1/Rd0KlkVND2QM3LPww/7OvXZb3T3zOh/H5o7o1uITeWj6wdhbSz12p34Tzn
+	BUlxlDchESVkMYGYsaPhV3RIxyMSUC9/HU7pNNr0L/6newvIWhlhBDvBUSq1KDc9mADGnS
+	IUXhi8PPVnwWUEmpso+k40wAsfpPLPOAV/Ngd5i+Kw+KgGkOjO5SiprGVfKBWEXsldotxc
+	OBFQK6tjrbJs3e0lCA151wi5guAaXEEZ8YqbH36I/C7NzTrKRG60VCJfSnR/Ag==
+Content-Type: multipart/mixed; boundary="===============7315286832370308017=="
 MIME-Version: 1.0
 From: auh@moto-timo.dev
 To: openembedded-devel@lists.openembedded.org
-Subject: [AUH] python3-flask-sqlalchemy: upgrading to 3.0.5 FAILED
+Subject: [AUH] python3-elementpath: upgrading to 4.1.5 FAILED
 X-GND-Sasl: auh@moto-timo.dev
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 31 Jul 2023 05:09:04 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104096
-Message-Id: <20230731050904.C37A0C41513@smtp.lore.kernel.org>
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104094
+Message-Id: <20230731050904.D873BC04FE0@smtp.lore.kernel.org>
 Date: Mon, 31 Jul 2023 05:09:04 +0000 (UTC)
 
---===============5372705054119967074==
+--===============7315286832370308017==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -44,11 +44,11 @@ Content-Transfer-Encoding: 7bit
 Hello,
 
 this email is a notification from the Auto Upgrade Helper
-that the automatic attempt to upgrade the recipe *python3-flask-sqlalchemy* to *3.0.5* has Failed (devtool error).
+that the automatic attempt to upgrade the recipe *python3-elementpath* to *4.1.5* has Failed (devtool error).
 
 Detailed error information:
 
-The following devtool command failed:  upgrade python3-flask-sqlalchemy -V 3.0.5
+The following devtool command failed:  upgrade python3-elementpath -V 4.1.5
 NOTE: Starting bitbake server...
 Loading cache...done.
 Loaded 12619 entries from dependency cache.
@@ -195,23 +195,34 @@ workspace            = "<unknown>:<unknown>"
 Initialising tasks...done.
 Sstate summary: Wanted 1 Local 0 Mirrors 0 Missed 1 Current 0 (0% match, 0% complete)
 NOTE: Executing Tasks
-WARNING: Failed to fetch URL https://files.pythonhosted.org/packages/source/F/Flask-SQLAlchemy/Flask-SQLAlchemy-3.0.5.tar.gz;downloadfilename=Flask-SQLAlchemy-3.0.5.tar.gz, attempting MIRRORS if available
-NOTE: Tasks Summary: Attempted 2 tasks of which 0 didn't need to be rerun and 1 failed.
+NOTE: Tasks Summary: Attempted 3 tasks of which 0 didn't need to be rerun and all succeeded.
+NOTE: Writing buildhistory
+NOTE: Writing buildhistory took: 5 seconds
+NOTE: Writing buildhistory
+NOTE: Writing buildhistory took: 5 seconds
 NOTE: Writing buildhistory
 NOTE: Writing buildhistory took: 4 seconds
-NOTE: Writing buildhistory
-NOTE: Writing buildhistory took: 5 seconds
-NOTE: Writing buildhistory
-NOTE: Writing buildhistory took: 5 seconds
+DEBUG 5 [Errno 25] Inappropriate ioctl for device
+Adding changed files:   0% |                                   | ETA:  --:--:--
+Adding changed files:   0% |                                   | ETA:  --:--:--
+Adding changed files:  40% |##############                      | ETA:  0:00:00
+Adding changed files:  80% |############################        | ETA:  0:00:00
+Adding changed files: 100% |####################################| Time: 0:00:00
 
 INFO: Extracting current version source...
 INFO: Extracting upgraded version source...
-INFO: Fetching https://files.pythonhosted.org/packages/source/F/Flask-SQLAlchemy/Flask-SQLAlchemy-3.0.5.tar.gz;downloadfilename=Flask-SQLAlchemy-3.0.5.tar.gz...
-ERROR: Fetcher failure: Fetch command export PSEUDO_DISABLED=1; export PATH="/scratch1/auh/build-auh/tmp/sysroots-uninative/x86_64-linux/usr/bin:/home/auh/Projects/poky/scripts:/scratch1/auh/build-auh/tmp/work/recipetool-bvitj4x4/work/recipe-sysroot-native/usr/bin/x86_64-poky-linux:/scratch1/auh/build-auh/tmp/work/recipetool-bvitj4x4/work/recipe-sysroot/usr/bin/crossscripts:/scratch1/auh/build-auh/tmp/work/recipetool-bvitj4x4/work/recipe-sysroot-native/usr/sbin:/scratch1/auh/build-auh/tmp/work/recipetool-bvitj4x4/work/recipe-sysroot-native/usr/bin:/scratch1/auh/build-auh/tmp/work/recipetool-bvitj4x4/work/recipe-sysroot-native/sbin:/scratch1/auh/build-auh/tmp/work/recipetool-bvitj4x4/work/recipe-sysroot-native/bin:/home/auh/Projects/poky/bitbake/bin:/scratch1/auh/build-auh/tmp/hosttools"; export HOME="/home/auh"; /usr/bin/env wget -t 2 -T 30 --passive-ftp -O /scratch1/auh/DOWNLOADS/Flask-SQLAlchemy-3.0.5.tar.gz.tmp -P /scratch1/auh/DOWNLOADS 'https://files.pythonhosted.org/packages/so
- urce/F/Flask-SQLAlchemy/Flask-SQLAlchemy-3.0.5.tar.gz' --progress=dot -v failed with exit code 8, no output
-ERROR: Bitbake Fetcher Error: FetchError('Unable to fetch URL from any source.', 'https://files.pythonhosted.org/packages/source/F/Flask-SQLAlchemy/Flask-SQLAlchemy-3.0.5.tar.gz;downloadfilename=Flask-SQLAlchemy-3.0.5.tar.gz')
-ERROR: Logfile of failure stored in: /scratch1/auh/build-auh/tmp/work/recipetool-bvitj4x4/work/temp/log.do_fetch.3253335
-ERROR: Failed to fetch URL https://files.pythonhosted.org/packages/source/F/Flask-SQLAlchemy/Flask-SQLAlchemy-3.0.5.tar.gz;downloadfilename=Flask-SQLAlchemy-3.0.5.tar.gz
+INFO: Fetching https://files.pythonhosted.org/packages/source/e/elementpath/elementpath-4.1.5.tar.gz;downloadfilename=elementpath-4.1.5.tar.gz...
+INFO: Rebasing devtool onto 942300dc8e0f4dc46c0c813457f81f9f1cf32e67
+Traceback (most recent call last):
+  File "/home/auh/Projects/poky/scripts/devtool", line 349, in <module>
+    ret = main()
+  File "/home/auh/Projects/poky/scripts/devtool", line 336, in main
+    ret = args.func(args, config, basepath, workspace)
+  File "/home/auh/Projects/poky/scripts/lib/devtool/upgrade.py", line 565, in upgrade
+    new_licenses = _extract_licenses(srctree_s, (rd.getVar('LIC_FILES_CHKSUM') or ""))
+  File "/home/auh/Projects/poky/scripts/lib/devtool/upgrade.py", line 473, in _extract_licenses
+    with open(os.path.join(srcpath, path), 'rb') as f:
+FileNotFoundError: [Errno 2] No such file or directory: '/scratch1/auh/build-auh/workspace/sources/python3-elementpath/LICENSE'
 
 
 Please review the attached files for further information and build/update failures.
@@ -219,5 +230,5 @@ Any problem please file a bug at https://bugzilla.yoctoproject.org/enter_bug.cgi
 
 Regards,
 The Upgrade Helper
---===============5372705054119967074==--
+--===============7315286832370308017==--
 
