@@ -1,138 +1,92 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B928CC001E0
-	for <webhook@archiver.kernel.org>; Mon, 31 Jul 2023 16:25:54 +0000 (UTC)
-Received: from mail-oi1-f174.google.com (mail-oi1-f174.google.com [209.85.167.174])
- by mx.groups.io with SMTP id smtpd.web10.45.1690820750924216579
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2B0D4EB64DD
+	for <webhook@archiver.kernel.org>; Tue,  1 Aug 2023 07:42:18 +0000 (UTC)
+Received: from esa3.hc1455-7.c3s2.iphmx.com (esa3.hc1455-7.c3s2.iphmx.com [207.54.90.49])
+ by mx.groups.io with SMTP id smtpd.web10.7627.1690875729426700273
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 31 Jul 2023 09:25:51 -0700
+ Tue, 01 Aug 2023 00:42:09 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20221208 header.b=KKsJDi6L;
- spf=pass (domain: gmail.com, ip: 209.85.167.174, mailfrom: raj.khem@gmail.com)
-Received: by mail-oi1-f174.google.com with SMTP id 5614622812f47-3a1ebb85f99so3666343b6e.2
-        for <openembedded-devel@lists.openembedded.org>; Mon, 31 Jul 2023 09:25:50 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1690820750; x=1691425550;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=Q1Z3lm/gYxnt0+sPwgbRfQnaMdVKImmN2mjqBCYVvHI=;
-        b=KKsJDi6LGphKYOOA0CA3jTvs8do0IFwT9KInYOD2UsJaJxHZEzLDxHNbPxsVtaAYg9
-         tTk94x2RCbUdHol+ccANrymDMxKDEjTNgBaKWI7iKawZpi/hphXowINjnnKadIeMm9pW
-         UkyjCbo2WDywk7pmRJ3B7Kevz5bLihlOAx8ooB0LP/d0vHyLNFvmKDSQyl77aw/LBuTf
-         tcc6csisNBW738MvEIW03Wv2c9Clo0JYtKE3ig7W/1/TrsWzXOJe6t0ooeo8ug4oYkJH
-         ZqNt1rggWxXMUQhwQ9iiFmm1JWFZ6JWVJo7jypScpmxhiV/wBuQ4/l7p5xL9Inw+2EqG
-         hy+A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1690820750; x=1691425550;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=Q1Z3lm/gYxnt0+sPwgbRfQnaMdVKImmN2mjqBCYVvHI=;
-        b=R72UFjSlPyvJb8nC06R/Wkw06QkR9PnQC23JU7f7ehoIk6PuBkiHJxF0reuXLsbEBW
-         z5yoza6BsFlHMna4qb3llTFOZjsCPcTJOjpZ8YsKVv2albW03flfITYkVqrt36vVAgSA
-         3sMN+VEEgrAaBG5NLDN7ZyHAcwR/CghEFUaUoLjJH7lYRQHF9oYhCifmffhbQjj7Nhb9
-         PVRwHnsrrCZHNgSdsYWGGbtFozHrakz2IzW0kFyEGkl/HdLEqFy8Z5WWkx6mOU62Bueq
-         GWmidzw1ZDJ8jN+NSasE9FCk/SIfVv1SibUrPsZzxZqBawWyghoSUGr+vRd3tLXysuUX
-         4V5Q==
-X-Gm-Message-State: ABy/qLaxX0fVJWdSmwKe/x73pdQNUS7tpahQlzp3MrtVn53n+oUxuh/O
-	L94SW1YQwjJmwl6xYptUfxwI4DAyDzNjavANQJw=
-X-Google-Smtp-Source: APBJJlH6q0fsFGZhrU/4hzysi/zf/Y7ZN6qGni/fEt31vodMMu3EwcQMJ/tvc/QJVXlocfSZYfwguxuDMfDq8MIAXDw=
-X-Received: by 2002:a05:6808:1449:b0:3a1:eb47:a943 with SMTP id
- x9-20020a056808144900b003a1eb47a943mr12752130oiv.10.1690820750071; Mon, 31
- Jul 2023 09:25:50 -0700 (PDT)
-MIME-Version: 1.0
-References: <211582fb-9571-aede-3aa3-0af6b43e1390@gmail.com>
-In-Reply-To: <211582fb-9571-aede-3aa3-0af6b43e1390@gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 31 Jul 2023 09:25:24 -0700
-Message-ID: <CAMKF1srJwCNd7cEX_kvg7ejTFxoog9qAiF7a3iZZpB+imWkQ5g@mail.gmail.com>
-Subject: Re: kirkstone merge request: July 31st
-To: akuster808 <akuster808@gmail.com>
-Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+ dkim=none (message not signed); spf=pass (domain: fujitsu.com, ip: 207.54.90.49, mailfrom: wangmy@fujitsu.com)
+X-IronPort-AV: E=McAfee;i="6600,9927,10788"; a="126603476"
+X-IronPort-AV: E=Sophos;i="6.01,246,1684767600"; 
+   d="scan'208";a="126603476"
+Received: from unknown (HELO yto-r3.gw.nic.fujitsu.com) ([218.44.52.219])
+  by esa3.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 01 Aug 2023 16:42:07 +0900
+Received: from yto-m3.gw.nic.fujitsu.com (yto-nat-yto-m3.gw.nic.fujitsu.com [192.168.83.66])
+	by yto-r3.gw.nic.fujitsu.com (Postfix) with ESMTP id 4EEBBC3F82
+	for <openembedded-devel@lists.openembedded.org>; Tue,  1 Aug 2023 16:42:05 +0900 (JST)
+Received: from kws-ab4.gw.nic.fujitsu.com (kws-ab4.gw.nic.fujitsu.com [192.51.206.22])
+	by yto-m3.gw.nic.fujitsu.com (Postfix) with ESMTP id 9C69CD9689
+	for <openembedded-devel@lists.openembedded.org>; Tue,  1 Aug 2023 16:42:04 +0900 (JST)
+Received: from localhost.localdomain (unknown [10.167.225.33])
+	by kws-ab4.gw.nic.fujitsu.com (Postfix) with ESMTP id 205C810211;
+	Tue,  1 Aug 2023 16:42:04 +0900 (JST)
+From: wangmy@fujitsu.com
+To: openembedded-devel@lists.openembedded.org
+Cc: Wang Mingyu <wangmy@fujitsu.com>
+Subject: [oe] [meta-networking] [PATCH] babeld: upgrade 1.12.2 -> 1.13.1
+Date: Tue,  1 Aug 2023 15:41:21 +0800
+Message-Id: <1690875717-21608-1-git-send-email-wangmy@fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
+X-TM-AS-GCONF: 00
+X-TM-AS-Product-Ver: IMSS-9.1.0.1417-9.0.0.1002-27786.005
+X-TM-AS-User-Approved-Sender: Yes
+X-TMASE-Version: IMSS-9.1.0.1417-9.0.1002-27786.005
+X-TMASE-Result: 10-2.210500-10.000000
+X-TMASE-MatchedRID: jrsYt7uzg+ujz0nOeth/yUIIxwDaU5mrWfgivgcUPZNF44mD/VSmfWi9
+	XMu3IBV85zZHownpG+1d6bYQL0xfRzkdZrWTFzcxA3KSB1+s3Ij0swHSFcVJ6NWM2x6EZ/S9zwq
+	JMfGnjS3gK2NiZClvaQXURz+hQhGVWkIi5GvRHEpO5y1KmK5bJTZlY6a4lRLZYA3qL69rXq6RY0
+	JyfRdA4l4Q/+3wuqBmtz9kIuTkBq4bcm3b1gDB8N0KiTeJteVBfS0Ip2eEHnz3IzXlXlpamPoLR
+	4+zsDTtuVfc976pNypithyVA0Jzmm7kdXS5yTAk4DdfIqqrYAUG3uhhchP6B19uRiKeaEhdsLMP
+	schl+JdI71AuxeD71P+jaa45WHcfmngb/R96nTHyDBYNCJzj6s+YAJ5mo7zlOKgonZY9TFMtLgA
+	Q4uO3AA==
+X-TMASE-SNAP-Result: 1.821001.0001-0-1-22:0,33:0,34:0-0
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 31 Jul 2023 16:25:54 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104161
+ <openembedded-devel@lists.openembedded.org>; Tue, 01 Aug 2023 07:42:18 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104162
 
-merged now Thanks Armin.
+From: Wang Mingyu <wangmy@fujitsu.com>
 
-On Mon, Jul 31, 2023 at 3:33=E2=80=AFAM akuster808 <akuster808@gmail.com> w=
-rote:
->
-> The following changes since commit 346753705e49a2486867dc150181a1c7f4d693=
-77:
->
->    webserver: nginx: Add stream Signed-off-by: Luke Schaefer
-> <lukeschafer17@gmail.com> (2023-07-04 10:20:46 -0400)
->
-> are available in the Git repository at:
->
->    https://git.openembedded.org/meta-openembedded kirkstone-next
->
-> for you to fetch changes up to 4da92ed9be41734f6ced46b981958e2e868cbff2:
->
->    python3-gcovr: Fix parsing of gcc-11 gcov metadata (2023-07-25
-> 07:24:25 -0400)
->
-> ----------------------------------------------------------------
-> Beniamin Sandu (1):
->        mbedtls: build with v2 version by default
->
-> Jasper Orschulko (2):
->        yaml-cpp: Fix cmake export
->        python3-gcovr: Fix parsing of gcc-11 gcov metadata
->
-> Narpat Mali (1):
->        frr: fix for CVE-2023-31490
->
-> Polampalli, Archana (1):
->        nodejs: upgrade 16.19.1 -> 16.20.1
->
-> Urade, Yogita (1):
->        libyang: fix CVE-2023-26917
->
->   meta-networking/recipes-connectivity/mbedtls/mbedtls_3.4.0.bb   | 3 +
->   meta-networking/recipes-protocols/frr/frr/CVE-2023-31490.patch  | 160
-> ++++++++++++++++++++++++++++
->   meta-networking/recipes-protocols/frr/frr_8.2.2.bb              | 1 +
->   .../oe-npm-cache                                                | 0
->   ...oe-cache-native_16.19.bb =3D> nodejs-oe-cache-native_16.20.bb} |   0
->   meta-oe/recipes-devtools/nodejs/nodejs/gcc13.patch              | 75
-> -------------
->   .../nodejs/{nodejs_16.19.1.bb =3D> nodejs_16.20.1.bb} |   3 +-
->   meta-oe/recipes-extended/libyang/libyang/CVE-2023-26917.patch   | 40
-> +++++++
->   meta-oe/recipes-extended/libyang/libyang_2.0.164.bb             | 1 +
->   .../yaml-cpp/yaml-cpp/0001-Fix-CMake-export-files-1077.patch    | 117
-> ++++++++++++++++++++
->   meta-oe/recipes-support/yaml-cpp/yaml-cpp_0.7.0.bb              | 1 +
->   .../python3-gcovr/0001-Fix-parsing-of-gcov-metadata-601.patch   | 84
-> +++++++++++++++
->   meta-python/recipes-devtools/python/python3-gcovr_5.1.bb        | 1 +
->   13 files changed, 409 insertions(+), 77 deletions(-)
->   create mode 100644
-> meta-networking/recipes-protocols/frr/frr/CVE-2023-31490.patch
->   rename meta-oe/recipes-devtools/nodejs/{nodejs-oe-cache-16.19 =3D>
-> nodejs-oe-cache-16.20}/oe-npm-cache (100%)
->   rename
-> meta-oe/recipes-devtools/nodejs/{nodejs-oe-cache-native_16.19.bb =3D>
-> nodejs-oe-cache-native_16.20.bb} (100%)
->   delete mode 100644 meta-oe/recipes-devtools/nodejs/nodejs/gcc13.patch
->   rename meta-oe/recipes-devtools/nodejs/{nodejs_16.19.1.bb =3D>
-> nodejs_16.20.1.bb} (98%)
->   create mode 100644
-> meta-oe/recipes-extended/libyang/libyang/CVE-2023-26917.patch
->   create mode 100644
-> meta-oe/recipes-support/yaml-cpp/yaml-cpp/0001-Fix-CMake-export-files-107=
-7.patch
->   create mode 100644
-> meta-python/recipes-devtools/python/python3-gcovr/0001-Fix-parsing-of-gco=
-v-metadata-601.patch
->
+Changelog:
+==========
+  * Implemented the per-interface option "probe-mtu", which automatically
+    discards links with a mis-configured MTU.
+  * Fixed a typo in the handing of the option "v4viav6".
+  * Removed diversity support and related configuration file directives.
+  * Optimised route redistribution.  We now install just the route that the
+    kernel sent us rather than doing a full route dump on every change.
+  * Added optional delay to daemon shutdown; see the configuration option
+    "shutdown-delay-ms". 
+  * Fixed compilation under BSD.
+
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+---
+ .../babeld/{babeld_1.12.2.bb => babeld_1.13.1.bb}               | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-networking/recipes-protocols/babeld/{babeld_1.12.2.bb => babeld_1.13.1.bb} (94%)
+
+diff --git a/meta-networking/recipes-protocols/babeld/babeld_1.12.2.bb b/meta-networking/recipes-protocols/babeld/babeld_1.13.1.bb
+similarity index 94%
+rename from meta-networking/recipes-protocols/babeld/babeld_1.12.2.bb
+rename to meta-networking/recipes-protocols/babeld/babeld_1.13.1.bb
+index 03db5fc0bf..a799ad197e 100644
+--- a/meta-networking/recipes-protocols/babeld/babeld_1.12.2.bb
++++ b/meta-networking/recipes-protocols/babeld/babeld_1.13.1.bb
+@@ -13,7 +13,7 @@ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENCE;md5=411a48ac3c2e9e0911b8dd9aed26f754"
+ 
+ SRC_URI = "gitsm://github.com/jech/babeld.git;protocol=https;branch=master"
+-SRCREV = "a9fba0e19ebde96cdc4edd35c5363f9e8139ab35"
++SRCREV = "3d61ea1e843e2c5f9706c74d1adad4e1d24d44b9"
+ 
+ UPSTREAM_CHECK_GITTAGREGEX = "babeld-(?P<pver>\d+(\.\d+)+)"
+ 
+-- 
+2.34.1
+
 
