@@ -1,197 +1,81 @@
-Return-Path: <f_l_k@t-online.de>
+Return-Path: <oecore.mailinglist@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 57E33C001DF
-	for <webhook@archiver.kernel.org>; Wed,  2 Aug 2023 15:09:19 +0000 (UTC)
-Received: from mailout05.t-online.de (mailout05.t-online.de [194.25.134.82])
- by mx.groups.io with SMTP id smtpd.web10.17904.1690988956103485711
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DB36EC04A6A
+	for <webhook@archiver.kernel.org>; Wed,  2 Aug 2023 17:00:46 +0000 (UTC)
+Received: from mail-wm1-f53.google.com (mail-wm1-f53.google.com [209.85.128.53])
+ by mx.groups.io with SMTP id smtpd.web10.1701.1690995643351043605
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 02 Aug 2023 08:09:16 -0700
+ Wed, 02 Aug 2023 10:00:43 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=none, err=SPF record not found (domain: t-online.de, ip: 194.25.134.82, mailfrom: f_l_k@t-online.de)
-Received: from fwd86.aul.t-online.de (fwd86.aul.t-online.de [10.223.144.112])
-	by mailout05.t-online.de (Postfix) with SMTP id 8B1CFA709
-	for <openembedded-devel@lists.openembedded.org>; Wed,  2 Aug 2023 17:09:10 +0200 (CEST)
-Received: from intel-corei7-64.fritz.box ([84.154.160.142]) by fwd86.t-online.de
-	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1qRDTE-1BeM9h0; Wed, 2 Aug 2023 17:09:04 +0200
-From: Markus Volk <f_l_k@t-online.de>
+ dkim=pass header.i=@gmail.com header.s=20221208 header.b=L0HhcM26;
+ spf=pass (domain: gmail.com, ip: 209.85.128.53, mailfrom: oecore.mailinglist@gmail.com)
+Received: by mail-wm1-f53.google.com with SMTP id 5b1f17b1804b1-3fe2bc2702cso883535e9.1
+        for <openembedded-devel@lists.openembedded.org>; Wed, 02 Aug 2023 10:00:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20221208; t=1690995641; x=1691600441;
+        h=message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=3R1FEpejOPp5U4YFFZSYCQ7Ql1aWyeLKoCorLd5mcIU=;
+        b=L0HhcM26BtGeHmqljj6lvpikleT5WcOzW9e6MAuR0fQLKOm7oycfWGZNDeVwWukSGc
+         yf/AC6wvrDSam/VaNZxBpDXjqbd8w6HQoGhpcy7Ego9ezdzdwYRCfu/CFfZNPO5rAnfK
+         6o1hxXwN/V6wdi0dCA3IiBRtrdPlNMI+Y1y0MDCd+F9nwmrKxo0tODScS5SnxjpZ/U96
+         WvXcy0ZUs5kSLR35UkdqzusB8EbsxXRkjqRtr1AxoqSKUgkLELuSteOdAATTR0cUV+CA
+         TPpbMyku6kSu340GXbvJ6AqPBliKbkdkybz3l8GrY7z+luofLFUljqxKRGznBbxZARtZ
+         +AmQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20221208; t=1690995641; x=1691600441;
+        h=message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=3R1FEpejOPp5U4YFFZSYCQ7Ql1aWyeLKoCorLd5mcIU=;
+        b=lC2RKCZc+iSQW2tmkhGaCGg69fIVUBdpraw1YSLE12uZ8rAfl+g8a2coxMlkMI9LF6
+         2J0z7sDlWeyutDIbRR8fvvW8W+BgG/V3Le5wVGMjvFfZBbWX57n9pob2/ek+jiW9mEvJ
+         DgXWVJRF35ynZKrPB//uPd2E4yNui1jnj5dxVzuE754Lx/vR45QnIf8zusz7W9wTCJ2w
+         Edx5h/TioNX7u8rjsupNAIh/NR1G3Yo55XuX0thXNWFASSPSQeLgL08NvrecnADt1jW8
+         os7gQg1v9xbWo0hfcnsrGbrMyoc8D9Npy2J+xwVgpTkFziXrupbDEqSLR4bjVt2WqJBu
+         mfNA==
+X-Gm-Message-State: ABy/qLb94OAg4PKWuzyQITztDm/DEcm8OI/LaIOxxInivqiv45v7Jh+h
+	trMM4PD4wZkXhF9nnxuGteavlDPw54w1vg==
+X-Google-Smtp-Source: APBJJlESgiY+3cgphuPINv66wV/2S1ayN2mZXkRlOMTsPz6QiREHjZwhYnQfnI9YVSdWax+dw4HjyQ==
+X-Received: by 2002:adf:ea52:0:b0:317:3d36:b2cd with SMTP id j18-20020adfea52000000b003173d36b2cdmr4638728wrn.71.1690995641224;
+        Wed, 02 Aug 2023 10:00:41 -0700 (PDT)
+Received: from t460s-2.int.vlab3.dyndns.org (089144205002.atnat0014.highway.webapn.at. [89.144.205.2])
+        by smtp.gmail.com with ESMTPSA id d14-20020adff2ce000000b003176053506fsm15756969wrp.99.2023.08.02.10.00.40
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 02 Aug 2023 10:00:40 -0700 (PDT)
+From: Robert Berger <oecore.mailinglist@gmail.com>
+X-Google-Original-From: Robert Berger <Robert.Berger@ReliableEmbeddedSystems.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH] webkitgtk3: upgrade 2.40.2 -> 2.40.5
-Date: Wed,  2 Aug 2023 17:08:44 +0200
-Message-ID: <20230802150844.2628-1-f_l_k@t-online.de>
-X-Mailer: git-send-email 2.41.0
-MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-X-TOI-EXPURGATEID: 150726::1690988944-F77E4EBC-EF19457D/0/0 CLEAN NORMAL
-X-TOI-MSGID: ba01d297-a9c2-4d25-8209-560cdc3ef1b9
-Content-Transfer-Encoding: quoted-printable
+Cc: Robert Berger <Robert.Berger@ReliableEmbeddedSystems.com>
+Subject: [meta-oe][PATCH] replace /usr/bin/env python -> python3
+Date: Wed,  2 Aug 2023 19:00:36 +0200
+Message-Id: <20230802170036.9288-1-Robert.Berger@ReliableEmbeddedSystems.com>
+X-Mailer: git-send-email 2.17.1
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 02 Aug 2023 15:09:19 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104203
+ <openembedded-devel@lists.openembedded.org>; Wed, 02 Aug 2023 17:00:46 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104204
 
-- Remove unneeded patches
-
-    What=E2=80=99s new in the WebKitGTK 2.40.5 release?
-    - Fix several crashes and rendering issues.
-
-    What=E2=80=99s new in the WebKitGTK 2.40.4 release?
-    - Fix a bug in JavaScript reading variable arguments in a call.
-
-    What=E2=80=99s new in the WebKitGTK 2.40.3 release?
-    - Make memory pressure monitor honor memory.memsw.usage_in_bytes if e=
-xists.
-    - Include key modifiers in wheel events.
-    - Apply cookie blocking policy to WebSocket handshakes.
-    - Remove accidental dependency on GLib 2.70.
-    - Fix the build with BUBBLEWRAP_SANDBOX disabled.
-    - Fix several crashes and rendering issues.
-
-Signed-off-by: Markus Volk <f_l_k@t-online.de>
+Signed-off-by: Robert Berger <Robert.Berger@ReliableEmbeddedSystems.com>
 ---
- ...tCore-CMakeLists.txt-ensure-reproduc.patch | 28 -------------
- ...290ab4ab35258a6da9b13795c9b0f7894bf4.patch | 41 -------------------
- ...kitgtk3_2.40.2.bb =3D> webkitgtk3_2.40.5.bb} |  4 +-
- 3 files changed, 1 insertion(+), 72 deletions(-)
- delete mode 100644 meta-oe/recipes-support/webkitgtk/webkitgtk3/0001-Sou=
-rce-JavaScriptCore-CMakeLists.txt-ensure-reproduc.patch
- delete mode 100644 meta-oe/recipes-support/webkitgtk/webkitgtk3/4977290a=
-b4ab35258a6da9b13795c9b0f7894bf4.patch
- rename meta-oe/recipes-support/webkitgtk/{webkitgtk3_2.40.2.bb =3D> webk=
-itgtk3_2.40.5.bb} (96%)
+ meta-oe/recipes-devtools/uftrace/uftrace_0.13.1.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-oe/recipes-support/webkitgtk/webkitgtk3/0001-Source-Jav=
-aScriptCore-CMakeLists.txt-ensure-reproduc.patch b/meta-oe/recipes-suppor=
-t/webkitgtk/webkitgtk3/0001-Source-JavaScriptCore-CMakeLists.txt-ensure-r=
-eproduc.patch
-deleted file mode 100644
-index bbe265059d..0000000000
---- a/meta-oe/recipes-support/webkitgtk/webkitgtk3/0001-Source-JavaScript=
-Core-CMakeLists.txt-ensure-reproduc.patch
-+++ /dev/null
-@@ -1,28 +0,0 @@
--From cd65e3d9256a4f6eb7906a9f10678c29a4ffef2f Mon Sep 17 00:00:00 2001
--From: Alexander Kanavin <alex@linutronix.de>
--Date: Mon, 26 Jun 2023 14:30:02 +0200
--Subject: [PATCH] Source/JavaScriptCore/CMakeLists.txt: ensure reproducib=
-ility
-- of __TIMESTAMP__
--
--__TIMESTAMP__ refers to mtime of the file that contains it, which is uns=
-table
--and breaks binary reproducibility when the file is generated at build ti=
-me. To ensure
--this does not happen, mtime should be set from the original file.
--
--Upstream-Status: Submitted [https://github.com/WebKit/WebKit/pull/15293]
--Signed-off-by: Alexander Kanavin <alex@linutronix.de>
-----
-- Source/JavaScriptCore/CMakeLists.txt | 1 +
-- 1 file changed, 1 insertion(+)
--
--diff --git a/Source/JavaScriptCore/CMakeLists.txt b/Source/JavaScriptCor=
-e/CMakeLists.txt
--index 43dc22ff..c2e3b1cd 100644
----- a/Source/JavaScriptCore/CMakeLists.txt
--+++ b/Source/JavaScriptCore/CMakeLists.txt
--@@ -159,6 +159,7 @@ add_custom_command(
--     OUTPUT ${JavaScriptCore_DERIVED_SOURCES_DIR}/JSCBytecodeCacheVersio=
-n.cpp
--     MAIN_DEPENDENCY ${JAVASCRIPTCORE_DIR}/runtime/JSCBytecodeCacheVersi=
-on.cpp.in
--     COMMAND ${PERL_EXECUTABLE} -pe s/CACHED_TYPES_CKSUM/__TIMESTAMP__/ =
-${JAVASCRIPTCORE_DIR}/runtime/JSCBytecodeCacheVersion.cpp.in > ${JavaScri=
-ptCore_DERIVED_SOURCES_DIR}/JSCBytecodeCacheVersion.cpp
--+    COMMAND touch -r ${JAVASCRIPTCORE_DIR}/runtime/JSCBytecodeCacheVers=
-ion.cpp.in ${JavaScriptCore_DERIVED_SOURCES_DIR}/JSCBytecodeCacheVersion.=
-cpp
--             VERBATIM
-- )
--=20
-diff --git a/meta-oe/recipes-support/webkitgtk/webkitgtk3/4977290ab4ab352=
-58a6da9b13795c9b0f7894bf4.patch b/meta-oe/recipes-support/webkitgtk/webki=
-tgtk3/4977290ab4ab35258a6da9b13795c9b0f7894bf4.patch
-deleted file mode 100644
-index 79da855ff4..0000000000
---- a/meta-oe/recipes-support/webkitgtk/webkitgtk3/4977290ab4ab35258a6da9=
-b13795c9b0f7894bf4.patch
-+++ /dev/null
-@@ -1,41 +0,0 @@
--From 4977290ab4ab35258a6da9b13795c9b0f7894bf4 Mon Sep 17 00:00:00 2001
--From: Diego Pino Garcia <dpino@igalia.com>
--Date: Mon, 22 May 2023 19:58:50 -0700
--Subject: [PATCH] [GLIB] Fix build error after 264196@main
-- https://bugs.webkit.org/show_bug.cgi?id=3D256917
--
--Reviewed by Michael Catanzaro.
--
--Variable BWRAP_EXECUTABLE is only defined when BUBBLEWRAP_SANDBOX is
--enabled.
--
--* Source/WTF/wtf/glib/Sandbox.cpp:
--(WTF::isInsideUnsupportedContainer):
--
--Canonical link: https://commits.webkit.org/264395@main
--Upstream-Status: Backport [https://github.com/WebKit/WebKit/commit/49772=
-90ab4ab35258a6da9b13795c9b0f7894bf4]
--Signed-off-by: Alexander Kanavin <alex@linutronix.de>
-----
-- Source/WTF/wtf/glib/Sandbox.cpp | 2 ++
-- 1 file changed, 2 insertions(+)
--
--diff --git a/Source/WTF/wtf/glib/Sandbox.cpp b/Source/WTF/wtf/glib/Sandb=
-ox.cpp
--index 7d84e830ab33e..9b07bb8cb5a9b 100644
----- a/Source/WTF/wtf/glib/Sandbox.cpp
--+++ b/Source/WTF/wtf/glib/Sandbox.cpp
--@@ -36,6 +36,7 @@ bool isInsideFlatpak()
--     return returnValue;
-- }
--=20
--+#if ENABLE(BUBBLEWRAP_SANDBOX)
-- bool isInsideUnsupportedContainer()
-- {
--     static bool inContainer =3D g_file_test("/run/.containerenv", G_FIL=
-E_TEST_EXISTS);
--@@ -64,6 +65,7 @@ bool isInsideUnsupportedContainer()
--=20
--     return inContainer && !supportedContainer;
-- }
--+#endif
--=20
-- bool isInsideSnap()
-- {
-diff --git a/meta-oe/recipes-support/webkitgtk/webkitgtk3_2.40.2.bb b/met=
-a-oe/recipes-support/webkitgtk/webkitgtk3_2.40.5.bb
-similarity index 96%
-rename from meta-oe/recipes-support/webkitgtk/webkitgtk3_2.40.2.bb
-rename to meta-oe/recipes-support/webkitgtk/webkitgtk3_2.40.5.bb
-index 9bd0c4e198..7218dbb5ef 100644
---- a/meta-oe/recipes-support/webkitgtk/webkitgtk3_2.40.2.bb
-+++ b/meta-oe/recipes-support/webkitgtk/webkitgtk3_2.40.5.bb
-@@ -13,11 +13,9 @@ SRC_URI =3D "https://www.webkitgtk.org/releases/webkit=
-gtk-${PV}.tar.xz \
-            file://0001-FindGObjectIntrospection.cmake-prefix-variables-o=
-bta.patch \
-            file://reproducibility.patch \
-            file://0d3344e17d258106617b0e6d783d073b188a2548.patch \
--           file://4977290ab4ab35258a6da9b13795c9b0f7894bf4.patch \
--           file://0001-Source-JavaScriptCore-CMakeLists.txt-ensure-repro=
-duc.patch \
-            file://check-GST_GL_HAVE_PLATFORM_GLX.patch \
-            "
--SRC_URI[sha256sum] =3D "96898870d994da406ee7a632816dcde9a3bb395ee5f344fc=
-b3f3b8cc8a77e000"
-+SRC_URI[sha256sum] =3D "7de051a263668621d91a61a5eb1c3771d1a7cec900043d4a=
-fef06c326c16037f"
-=20
- inherit cmake pkgconfig gobject-introspection perlnative features_check =
-upstream-version-is-even gi-docgen
-=20
---=20
-2.41.0
+diff --git a/meta-oe/recipes-devtools/uftrace/uftrace_0.13.1.bb b/meta-oe/recipes-devtools/uftrace/uftrace_0.13.1.bb
+index 4e1edc6ce..851acd745 100644
+--- a/meta-oe/recipes-devtools/uftrace/uftrace_0.13.1.bb
++++ b/meta-oe/recipes-devtools/uftrace/uftrace_0.13.1.bb
+@@ -30,6 +30,7 @@ EXTRA_UFTRACE_OECONF = "ARCH=${@set_target_arch(d)} \
+                         with_elfutils=/use/libelf/from/sysroot"
+ 
+ do_configure() {
++    find . -type f -exec sed -i 's/#!\/usr\/bin\/env python/#!\/usr\/bin\/env python3/g' {} +
+     ${S}/configure ${EXTRA_UFTRACE_OECONF}
+ }
+ 
+-- 
+2.17.1
 
 
