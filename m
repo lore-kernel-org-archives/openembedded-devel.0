@@ -2,114 +2,159 @@ Return-Path: <patrick@stwcx.xyz>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B8545C001DB
-	for <webhook@archiver.kernel.org>; Fri,  4 Aug 2023 16:28:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C6502C001DE
+	for <webhook@archiver.kernel.org>; Fri,  4 Aug 2023 17:06:57 +0000 (UTC)
 Received: from wout1-smtp.messagingengine.com (wout1-smtp.messagingengine.com [64.147.123.24])
- by mx.groups.io with SMTP id smtpd.web11.1751.1691166507816076392
+ by mx.groups.io with SMTP id smtpd.web10.2604.1691168808196745445
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 04 Aug 2023 09:28:29 -0700
+ Fri, 04 Aug 2023 10:06:48 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@stwcx.xyz header.s=fm2 header.b=Nu/AFEv2;
- dkim=pass header.i=@messagingengine.com header.s=fm3 header.b=JHfTVkjx;
+ dkim=pass header.i=@stwcx.xyz header.s=fm2 header.b=A78DZx9s;
+ dkim=pass header.i=@messagingengine.com header.s=fm3 header.b=vdIQ9AmI;
  spf=pass (domain: stwcx.xyz, ip: 64.147.123.24, mailfrom: patrick@stwcx.xyz)
-Received: from compute4.internal (compute4.nyi.internal [10.202.2.44])
-	by mailout.west.internal (Postfix) with ESMTP id AF2593200930;
-	Fri,  4 Aug 2023 12:28:26 -0400 (EDT)
+Received: from compute5.internal (compute5.nyi.internal [10.202.2.45])
+	by mailout.west.internal (Postfix) with ESMTP id 890913200914;
+	Fri,  4 Aug 2023 13:06:47 -0400 (EDT)
 Received: from mailfrontend2 ([10.202.2.163])
-  by compute4.internal (MEProxy); Fri, 04 Aug 2023 12:28:27 -0400
+  by compute5.internal (MEProxy); Fri, 04 Aug 2023 13:06:47 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stwcx.xyz; h=cc
-	:cc:content-transfer-encoding:content-type:date:date:from:from
-	:in-reply-to:message-id:mime-version:reply-to:sender:subject
-	:subject:to:to; s=fm2; t=1691166506; x=1691252906; bh=iVFVMW5gQY
-	Gn1wcm8vMQ8rqqOoGl+oQf95n9vBfdjHI=; b=Nu/AFEv2nnlUpTyYmg45NCD6ke
-	Ou2FHdfkg/pWS5ZpmT3qaAOK8USB7t65j2WVGGtQCQCCRAXBsXmHlIZ7mySdhVH9
-	3DWVONXH0LMSdv5eW4/iF/qkP85+6lYBE6P2Lexo4GuuO2IMpMuLAJhuhPLYhM1j
-	gcygx/Hd7+yEMET4+YzTIg2Z2+qcNDB4bXouswuZ0ZmBtSkEuU7cSU920gCzEyiA
-	LYxFyL5D+3r6nyAPViP6d8p+2QfKJtBGKuZczlhXy+JNFZ1UIS0Qe+ZJhrEspBEY
-	hhbStHwu7oiWYkIUf207k/0bc2dHwwRdUEbclobcKsXiQmJ9OajEkGGYmTbQ==
+	:cc:content-type:content-type:date:date:from:from:in-reply-to
+	:in-reply-to:message-id:mime-version:references:reply-to:sender
+	:subject:subject:to:to; s=fm2; t=1691168807; x=1691255207; bh=1C
+	9lHqY9AIyMnz+0a+39weAX1U+qvnK8D/Wkil1vonA=; b=A78DZx9srfcFLjW5ky
+	xDrTniFWgvG40HNsLFa93TNuq9tCJHJyAhq+N5Nh0l2EN7x6etMZWbP6b2Sme3ID
+	sSAl4Sp15yXjsKiqzHZk1qPGAshC37Vmjg+AElrcCOofc35zFSVqFU7YK8eHlLQL
+	3Qpnhpds2Lb2Or4HxrSBXaVzk1cpZWj2+QlMvfC55MvhWrIc1RYBnzvyQXYwGdR8
+	+z3g+C5j/jI904s4zm01ZG6yLYXi1EKebAUInUdWaVFsecHH0+IRw3t1CC4jFsMZ
+	eUpDv7VRuDNDYM0tgzAUyE+Kdllx/XajSQ9+4TaonfKEDlWqFfrcLBrvO7HMhdBS
+	83Vg==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	messagingengine.com; h=cc:cc:content-transfer-encoding
-	:content-type:date:date:feedback-id:feedback-id:from:from
-	:in-reply-to:message-id:mime-version:reply-to:sender:subject
+	messagingengine.com; h=cc:cc:content-type:content-type:date:date
+	:feedback-id:feedback-id:from:from:in-reply-to:in-reply-to
+	:message-id:mime-version:references:reply-to:sender:subject
 	:subject:to:to:x-me-proxy:x-me-proxy:x-me-sender:x-me-sender
-	:x-sasl-enc; s=fm3; t=1691166506; x=1691252906; bh=iVFVMW5gQYGn1
-	wcm8vMQ8rqqOoGl+oQf95n9vBfdjHI=; b=JHfTVkjxUiWXpnKmmn3Af6EyZTlm7
-	MYl4po3Y1+JA+qJqWihV/mbV013WuljnVpBb7n41i/AzjN8tAzHAgeck0BQufX2Q
-	XoiOhK0OSj/AaGNy0MqJrbzrnT9KkDCmlyUWLiwoiu9P+Z2y7nUv9G3Po+7UGG+L
-	Zr3eoeav1LUTPyD3USLjACnrorHpe1ECIQmMd8N3453Iv3OG2JXWZANjrghRK64q
-	gLKxvLDr/N7QHWbDUM0k4IvYUl8b2zl7vqONYBjPciJe27O/mUiP/PU3NFnjI8Rt
-	ECayHuBOuHUxYlYW0uy2SHdnYOjHg9BngAVoqzwv+bNmz3DC1i//5Ll5Q==
-X-ME-Sender: <xms:KSfNZPAEbFel6iISrabmLuRI-_JOOHG0jT3Naz7J7JknBm4zBakcaQ>
-    <xme:KSfNZFjWozquBSkjv5PrnQZc43uLMyll45Cv9n4ra5ucfP2oCxTDy5t_yOUR_pVEs
-    qUCtP6_whqZEh0uV1o>
-X-ME-Received: <xmr:KSfNZKmr1QoPvhu1jilpXCylPJBmjHWRX8XaeeV1FcG5aMF1JtTNTAA4tGHVDWnk5Up0QVSWeuv53D3EgI6CaWJ-B6lwfmXXCLg>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedviedrkeeggdellecutefuodetggdotefrodftvf
-    curfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfghnecu
-    uegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenfg
-    hrlhcuvffnffculdefhedmnecujfgurhephffvvefufffkofgggfestdekredtredttden
-    ucfhrhhomheprfgrthhrihgtkhcuhghilhhlihgrmhhsuceophgrthhrihgtkhesshhtfi
-    gtgidrgiihiieqnecuggftrfgrthhtvghrnhepvedtvefgtdfhfeevjeduleehgeehhffh
-    tdetteehheduieeufefhteekjeelfeetnecuvehluhhsthgvrhfuihiivgeptdenucfrrg
-    hrrghmpehmrghilhhfrhhomhepphgrthhrihgtkhesshhtfigtgidrgiihii
-X-ME-Proxy: <xmx:KSfNZBxZ46c8iM3OQeLvt3bwtauMDzQz9i1OXntYK4ZRyNkp3Ezmug>
-    <xmx:KSfNZETd72dbXfDbssz2IvUl3LTScRs4nBHaip7KO7JgzEd93hmjEg>
-    <xmx:KSfNZEbqgjVtahvB7OHcj1PLXGuLRXZfbfqMryXgUsQY9YwZVbQvVg>
-    <xmx:KifNZPLrCTm-ucqjTLT6HnDL1-SZY8Wc_4biabUN0YrYW02adeCGvQ>
+	:x-sasl-enc; s=fm3; t=1691168807; x=1691255207; bh=1C9lHqY9AIyMn
+	z+0a+39weAX1U+qvnK8D/Wkil1vonA=; b=vdIQ9AmIud7iHCDFPETI4JfvWMFir
+	f9wuP0vfAJqOSgZunOWqlv9CIkyO/NeAB73MWfDlx67pi5cFbZKozsKFAhmKESkg
+	vlRAl6EodgD3VVcaXpqPucihSXWWHy23/DHPZAURKGbfkL7ZPBMVujtIPe2XY74E
+	2Mx4DubJ/NfWsRNSw023n8QZqeaHMj36zORRaePGvJ/HJRbtFkUaTKZrbFXUB0Vn
+	pk6n9hNJba7qYNOJB9408usvgVkgn1vrrgHB+Uh4WM47T5fqijyRLYJLp1WRHv/o
+	+V0Iz2NFo94o7iThLxnkV0bgo9YA2kfhiuO5Ge3ZGtvI+0IeRFa17/llA==
+X-ME-Sender: <xms:JjDNZGA4c_55YJwPNw7piCG9s5YFRM2fY9JBaKB3fRipFRCgFpL8_Q>
+    <xme:JjDNZAhdK1wmHGCiORJwBO_cjLnAv26EK6tu65gKC5im1EIXFSTjD9XpFOpyUQjSl
+    wYv1XPuS2UFvBcy2ik>
+X-ME-Received: <xmr:JjDNZJkkzN4p1PBgNQNoC4KIsYdoB1cQ5p4GoEWpkH4ndE67XtV0Uwi0l7hbSHdsIFwYZVHZCqUIzYd_K3ieuiQQnRyFm9h7H4U>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedviedrkeeggddutdeiucetufdoteggodetrfdotf
+    fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
+    uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
+    gfrhhlucfvnfffucdlvdefmdenucfjughrpeffhffvvefukfhfgggtuggjsehgtderredt
+    tddvnecuhfhrohhmpefrrghtrhhitghkucghihhllhhirghmshcuoehprghtrhhitghkse
+    hsthiftgigrdighiiiqeenucggtffrrghtthgvrhhnpeehfeejheeftdejiedvfeekffeh
+    ledukeduleelffekgfdtleduledvtdegtdehkeenucevlhhushhtvghrufhiiigvpedtne
+    curfgrrhgrmhepmhgrihhlfhhrohhmpehprghtrhhitghksehsthiftgigrdighiii
+X-ME-Proxy: <xmx:JjDNZEx3vPWbDGRp1KZAtZIOIXmY9ERxLoUkzPadoBdVIMk4RwYdqg>
+    <xmx:JjDNZLTXwBIeDywFoLeIy3qYQUB-sWXz2j09jtAyftzZVf8g58kyiw>
+    <xmx:JjDNZPYrvrBhdgzhlcW--KDO19GwTpF1NiFHI28m0OTwyPZKT0grPw>
+    <xmx:JzDNZM7bdfzNreFu98jeMlIgk5bcxwL0KtY28TSf8nu2QuQwtAgcbw>
 Feedback-ID: i68a1478a:Fastmail
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Fri,
- 4 Aug 2023 12:28:25 -0400 (EDT)
+ 4 Aug 2023 13:06:46 -0400 (EDT)
+Date: Fri, 4 Aug 2023 12:06:45 -0500
 From: Patrick Williams <patrick@stwcx.xyz>
 To: openembedded-devel@lists.openembedded.org
-Cc: Joel Stanley <joel@jms.id.au>,
-	Patrick Williams <patrick@stwcx.xyz>
-Subject: [PATCH v2] kernel: don't fail if Modules.symvers doesn't exist
-Date: Fri,  4 Aug 2023 11:28:21 -0500
-Message-ID: <20230804162821.2333229-1-patrick@stwcx.xyz>
-X-Mailer: git-send-email 2.41.0
+Cc: Joel Stanley <joel@jms.id.au>
+Subject: Re: [PATCH v2] kernel: don't fail if Modules.symvers doesn't exist
+Message-ID: <ZM0wJW2MPERVwilM@heinlein.vulture-banana.ts.net>
+References: <20230804162821.2333229-1-patrick@stwcx.xyz>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature"; boundary="6earmlysCayI0/YL"
+Content-Disposition: inline
+In-Reply-To: <20230804162821.2333229-1-patrick@stwcx.xyz>
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 04 Aug 2023 16:28:37 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104228
+ <openembedded-devel@lists.openembedded.org>; Fri, 04 Aug 2023 17:06:57 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104229
 
-From: Joel Stanley <joel@jms.id.au>
 
-Kernels that do not use modules do not have the Modules.symvers file,
-which causes the previous one-liner to fail.  Invert the logic so that
-the absence of the Modules.symvers is a passing situation but we still
-get failure checking on the install operation.
+--6earmlysCayI0/YL
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Joel Stanley <joel@jms.id.au>
-Signed-off-by: Patrick Williams <patrick@stwcx.xyz>
----
- meta/classes-recipe/kernel.bbclass | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+Apologies.  I sent this to the wrong ML.
 
-diff --git a/meta/classes-recipe/kernel.bbclass b/meta/classes-recipe/kernel.bbclass
-index 247ef4a48a..bb5995b495 100644
---- a/meta/classes-recipe/kernel.bbclass
-+++ b/meta/classes-recipe/kernel.bbclass
-@@ -486,7 +486,7 @@ kernel_do_install() {
- 	install -m 0644 System.map ${D}/${KERNEL_IMAGEDEST}/System.map-${KERNEL_VERSION}
- 	install -m 0644 .config ${D}/${KERNEL_IMAGEDEST}/config-${KERNEL_VERSION}
- 	install -m 0644 vmlinux ${D}/${KERNEL_IMAGEDEST}/vmlinux-${KERNEL_VERSION}
--	[ -e Module.symvers ] && install -m 0644 Module.symvers ${D}/${KERNEL_IMAGEDEST}/Module.symvers-${KERNEL_VERSION}
-+	! [ -e Module.symvers ] || install -m 0644 Module.symvers ${D}/${KERNEL_IMAGEDEST}/Module.symvers-${KERNEL_VERSION}
- }
- 
- # Must be ran no earlier than after do_kernel_checkout or else Makefile won't be in ${S}/Makefile
-@@ -555,7 +555,7 @@ do_shared_workdir () {
- 
- 	# Copy files required for module builds
- 	cp System.map $kerneldir/System.map-${KERNEL_VERSION}
--	[ -e Module.symvers ] && cp Module.symvers $kerneldir/
-+	! [ -e Module.symvers ] || cp Module.symvers $kerneldir/
- 	cp .config $kerneldir/
- 	mkdir -p $kerneldir/include/config
- 	cp include/config/kernel.release $kerneldir/include/config/kernel.release
--- 
-2.41.0
+On Fri, Aug 04, 2023 at 11:28:21AM -0500, Patrick Williams wrote:
+> From: Joel Stanley <joel@jms.id.au>
+>=20
+> Kernels that do not use modules do not have the Modules.symvers file,
+> which causes the previous one-liner to fail.  Invert the logic so that
+> the absence of the Modules.symvers is a passing situation but we still
+> get failure checking on the install operation.
+>=20
+> Signed-off-by: Joel Stanley <joel@jms.id.au>
+> Signed-off-by: Patrick Williams <patrick@stwcx.xyz>
+> ---
+>  meta/classes-recipe/kernel.bbclass | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+>=20
+> diff --git a/meta/classes-recipe/kernel.bbclass b/meta/classes-recipe/ker=
+nel.bbclass
+> index 247ef4a48a..bb5995b495 100644
+> --- a/meta/classes-recipe/kernel.bbclass
+> +++ b/meta/classes-recipe/kernel.bbclass
+> @@ -486,7 +486,7 @@ kernel_do_install() {
+>  	install -m 0644 System.map ${D}/${KERNEL_IMAGEDEST}/System.map-${KERNEL=
+_VERSION}
+>  	install -m 0644 .config ${D}/${KERNEL_IMAGEDEST}/config-${KERNEL_VERSIO=
+N}
+>  	install -m 0644 vmlinux ${D}/${KERNEL_IMAGEDEST}/vmlinux-${KERNEL_VERSI=
+ON}
+> -	[ -e Module.symvers ] && install -m 0644 Module.symvers ${D}/${KERNEL_I=
+MAGEDEST}/Module.symvers-${KERNEL_VERSION}
+> +	! [ -e Module.symvers ] || install -m 0644 Module.symvers ${D}/${KERNEL=
+_IMAGEDEST}/Module.symvers-${KERNEL_VERSION}
+>  }
+> =20
+>  # Must be ran no earlier than after do_kernel_checkout or else Makefile =
+won't be in ${S}/Makefile
+> @@ -555,7 +555,7 @@ do_shared_workdir () {
+> =20
+>  	# Copy files required for module builds
+>  	cp System.map $kerneldir/System.map-${KERNEL_VERSION}
+> -	[ -e Module.symvers ] && cp Module.symvers $kerneldir/
+> +	! [ -e Module.symvers ] || cp Module.symvers $kerneldir/
+>  	cp .config $kerneldir/
+>  	mkdir -p $kerneldir/include/config
+>  	cp include/config/kernel.release $kerneldir/include/config/kernel.relea=
+se
+> --=20
+> 2.41.0
+>=20
 
+--=20
+Patrick Williams
+
+--6earmlysCayI0/YL
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCAAdFiEEBGD9ii4LE9cNbqJBqwNHzC0AwRkFAmTNMCQACgkQqwNHzC0A
+wRlo2Q//X+IcZENE3KrXZj/1xkoIXA6fjIdUZdOGNuYetnarDahXkujW5JzksIwY
+yeKES3F3IsK3ySXFhVm8CCTD5cnG1uBd7ohl4XWgOfvPtQIq4oliKvb36yuGnR0E
+Q6fXwAagCA1msGn/dSeRU3bwolbkiBpFJGBJ5x1imduG2+HgfTJhvI6VtY9wp34e
+xnQBELvThjI27VJlgFGboHHnkozcAQUDtm3zivSawv8AQS/6hgXKSES0bNDq2nCm
+tUvEOm8hdjsEzXPmlN1e7AVsWP+GEt1wmtIlM4eVs9SnYASUOZTUNqOf0Llu30gC
+ajcYV/Fy2Gyuu9N8lOCYE22MF9QRfGpFrBab8WjH9n1XCoGhjtW48g+Usr3dsoUF
+Cplw0IVcQTJEUTWOx0DY68BlCGi29UIizWQR0GRqelm/ApZVs8BfaSWGPZEMCbah
+fSEegc5ZlLxP2lab3Rh4mw7GcFcDu4uh359fubXMAT2QjDMRbk5fmZ85a5SJQJku
+zCmqpmNI+Usmc+XNnqvIfYEa3OfZa8WADzZTDd4gVppK80XtkaRV3jDW/9BWP+sI
+gYqJMu+K++MyxE9nrCxC/pWz0XdqpzY1ZouaSw092DioghxRC1wvf4IXhd1SRcv/
+tnpVYFk30jyD+AzQiHTdHmK3+5zdrRbmTilZFigGH0w38r1prhc=
+=url7
+-----END PGP SIGNATURE-----
+
+--6earmlysCayI0/YL--
 
