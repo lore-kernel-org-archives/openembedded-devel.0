@@ -1,99 +1,115 @@
-Return-Path: <archana.polampalli@windriver.com>
+Return-Path: <patrick@stwcx.xyz>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4A18CC001DE
-	for <webhook@archiver.kernel.org>; Fri,  4 Aug 2023 07:16:17 +0000 (UTC)
-Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.web11.6416.1691133369691804449
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B8545C001DB
+	for <webhook@archiver.kernel.org>; Fri,  4 Aug 2023 16:28:37 +0000 (UTC)
+Received: from wout1-smtp.messagingengine.com (wout1-smtp.messagingengine.com [64.147.123.24])
+ by mx.groups.io with SMTP id smtpd.web11.1751.1691166507816076392
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 04 Aug 2023 00:16:09 -0700
+ Fri, 04 Aug 2023 09:28:29 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=RFHYzebX;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=7580682941=archana.polampalli@windriver.com)
-Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 3745NZ60014378
-	for <openembedded-devel@lists.openembedded.org>; Fri, 4 Aug 2023 00:16:09 -0700
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
-	 h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding:content-type; s=PPS06212021; bh=IOuoa
-	mAqD2uUGkifPgCJ3cwKHM15XYGzlXjsqqMV0zw=; b=RFHYzebXRF5jMYEor1h4Z
-	VlWrZKMO3O9Ms2UsQkhr2whyI/UD5rY9TwcEkamBr7rveVKs8CvqAoniRY0wes8i
-	0yWFow4qt5CjMCsImPtrAJ2Dl8rGwQmWkwaWZuduxJZxrq5iqoaLPCASkg/qb5s6
-	YITrY63poGWubdE9qBhR1cdDQ5CM4cIgXKhB3CDWFbMkhN5646gOJpFKNE9LkBoQ
-	/WoeZ6R3wDYKBDB/jTorIo08/LP5DT/ADvYy7Ck88/39Ia+k2a20scr9pmnFeac6
-	/z2EGKoPG1tyiu35yh+UmK3GTUct5JR4E6UdX+R9dkdpXYsc6w5hb6G81RRhL0Q5
-	g==
-Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3s6daquxb0-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Fri, 04 Aug 2023 00:16:09 -0700 (PDT)
-Received: from blr-linux-engg1.wrs.com (147.11.136.210) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.27; Fri, 4 Aug 2023 00:16:07 -0700
-From: Archana Polampalli <archana.polampalli@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-CC: <Hari.GPillai@windriver.com>
-Subject: [oe][meta-oe][kirkstone][PATCH 1/1] redis: upgrade 6.2.12 -> 6.2.13
-Date: Fri, 4 Aug 2023 07:15:50 +0000
-Message-ID: <20230804071550.378000-1-archana.polampalli@windriver.com>
-X-Mailer: git-send-email 2.40.0
+ dkim=pass header.i=@stwcx.xyz header.s=fm2 header.b=Nu/AFEv2;
+ dkim=pass header.i=@messagingengine.com header.s=fm3 header.b=JHfTVkjx;
+ spf=pass (domain: stwcx.xyz, ip: 64.147.123.24, mailfrom: patrick@stwcx.xyz)
+Received: from compute4.internal (compute4.nyi.internal [10.202.2.44])
+	by mailout.west.internal (Postfix) with ESMTP id AF2593200930;
+	Fri,  4 Aug 2023 12:28:26 -0400 (EDT)
+Received: from mailfrontend2 ([10.202.2.163])
+  by compute4.internal (MEProxy); Fri, 04 Aug 2023 12:28:27 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stwcx.xyz; h=cc
+	:cc:content-transfer-encoding:content-type:date:date:from:from
+	:in-reply-to:message-id:mime-version:reply-to:sender:subject
+	:subject:to:to; s=fm2; t=1691166506; x=1691252906; bh=iVFVMW5gQY
+	Gn1wcm8vMQ8rqqOoGl+oQf95n9vBfdjHI=; b=Nu/AFEv2nnlUpTyYmg45NCD6ke
+	Ou2FHdfkg/pWS5ZpmT3qaAOK8USB7t65j2WVGGtQCQCCRAXBsXmHlIZ7mySdhVH9
+	3DWVONXH0LMSdv5eW4/iF/qkP85+6lYBE6P2Lexo4GuuO2IMpMuLAJhuhPLYhM1j
+	gcygx/Hd7+yEMET4+YzTIg2Z2+qcNDB4bXouswuZ0ZmBtSkEuU7cSU920gCzEyiA
+	LYxFyL5D+3r6nyAPViP6d8p+2QfKJtBGKuZczlhXy+JNFZ1UIS0Qe+ZJhrEspBEY
+	hhbStHwu7oiWYkIUf207k/0bc2dHwwRdUEbclobcKsXiQmJ9OajEkGGYmTbQ==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	messagingengine.com; h=cc:cc:content-transfer-encoding
+	:content-type:date:date:feedback-id:feedback-id:from:from
+	:in-reply-to:message-id:mime-version:reply-to:sender:subject
+	:subject:to:to:x-me-proxy:x-me-proxy:x-me-sender:x-me-sender
+	:x-sasl-enc; s=fm3; t=1691166506; x=1691252906; bh=iVFVMW5gQYGn1
+	wcm8vMQ8rqqOoGl+oQf95n9vBfdjHI=; b=JHfTVkjxUiWXpnKmmn3Af6EyZTlm7
+	MYl4po3Y1+JA+qJqWihV/mbV013WuljnVpBb7n41i/AzjN8tAzHAgeck0BQufX2Q
+	XoiOhK0OSj/AaGNy0MqJrbzrnT9KkDCmlyUWLiwoiu9P+Z2y7nUv9G3Po+7UGG+L
+	Zr3eoeav1LUTPyD3USLjACnrorHpe1ECIQmMd8N3453Iv3OG2JXWZANjrghRK64q
+	gLKxvLDr/N7QHWbDUM0k4IvYUl8b2zl7vqONYBjPciJe27O/mUiP/PU3NFnjI8Rt
+	ECayHuBOuHUxYlYW0uy2SHdnYOjHg9BngAVoqzwv+bNmz3DC1i//5Ll5Q==
+X-ME-Sender: <xms:KSfNZPAEbFel6iISrabmLuRI-_JOOHG0jT3Naz7J7JknBm4zBakcaQ>
+    <xme:KSfNZFjWozquBSkjv5PrnQZc43uLMyll45Cv9n4ra5ucfP2oCxTDy5t_yOUR_pVEs
+    qUCtP6_whqZEh0uV1o>
+X-ME-Received: <xmr:KSfNZKmr1QoPvhu1jilpXCylPJBmjHWRX8XaeeV1FcG5aMF1JtTNTAA4tGHVDWnk5Up0QVSWeuv53D3EgI6CaWJ-B6lwfmXXCLg>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedviedrkeeggdellecutefuodetggdotefrodftvf
+    curfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfghnecu
+    uegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenfg
+    hrlhcuvffnffculdefhedmnecujfgurhephffvvefufffkofgggfestdekredtredttden
+    ucfhrhhomheprfgrthhrihgtkhcuhghilhhlihgrmhhsuceophgrthhrihgtkhesshhtfi
+    gtgidrgiihiieqnecuggftrfgrthhtvghrnhepvedtvefgtdfhfeevjeduleehgeehhffh
+    tdetteehheduieeufefhteekjeelfeetnecuvehluhhsthgvrhfuihiivgeptdenucfrrg
+    hrrghmpehmrghilhhfrhhomhepphgrthhrihgtkhesshhtfigtgidrgiihii
+X-ME-Proxy: <xmx:KSfNZBxZ46c8iM3OQeLvt3bwtauMDzQz9i1OXntYK4ZRyNkp3Ezmug>
+    <xmx:KSfNZETd72dbXfDbssz2IvUl3LTScRs4nBHaip7KO7JgzEd93hmjEg>
+    <xmx:KSfNZEbqgjVtahvB7OHcj1PLXGuLRXZfbfqMryXgUsQY9YwZVbQvVg>
+    <xmx:KifNZPLrCTm-ucqjTLT6HnDL1-SZY8Wc_4biabUN0YrYW02adeCGvQ>
+Feedback-ID: i68a1478a:Fastmail
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Fri,
+ 4 Aug 2023 12:28:25 -0400 (EDT)
+From: Patrick Williams <patrick@stwcx.xyz>
+To: openembedded-devel@lists.openembedded.org
+Cc: Joel Stanley <joel@jms.id.au>,
+	Patrick Williams <patrick@stwcx.xyz>
+Subject: [PATCH v2] kernel: don't fail if Modules.symvers doesn't exist
+Date: Fri,  4 Aug 2023 11:28:21 -0500
+Message-ID: <20230804162821.2333229-1-patrick@stwcx.xyz>
+X-Mailer: git-send-email 2.41.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [147.11.136.210]
-X-ClientProxiedBy: ala-exchng01.corp.ad.wrs.com (147.11.82.252) To
- ala-exchng01.corp.ad.wrs.com (147.11.82.252)
-X-Proofpoint-ORIG-GUID: j3xUmWmAkCXCNWAQqoxyrcdxYHGIZFNk
-X-Proofpoint-GUID: j3xUmWmAkCXCNWAQqoxyrcdxYHGIZFNk
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.254,Aquarius:18.0.957,Hydra:6.0.591,FMLib:17.11.176.26
- definitions=2023-08-04_05,2023-08-03_01,2023-05-22_02
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 mlxscore=0 impostorscore=0
- mlxlogscore=699 malwarescore=0 clxscore=1015 bulkscore=0
- lowpriorityscore=0 phishscore=0 spamscore=0 adultscore=0 suspectscore=0
- priorityscore=1501 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.19.0-2306200000 definitions=main-2308040063
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 04 Aug 2023 07:16:17 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104227
+ <openembedded-devel@lists.openembedded.org>; Fri, 04 Aug 2023 16:28:37 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104228
 
-security fixes:
-https://nvd.nist.gov/vuln/detail/CVE-2022-24834
+From: Joel Stanley <joel@jms.id.au>
 
-Changelog:
-==========
-Re-enable downscale rehashing while there is a fork child
+Kernels that do not use modules do not have the Modules.symvers file,
+which causes the previous one-liner to fail.  Invert the logic so that
+the absence of the Modules.symvers is a passing situation but we still
+get failure checking on the install operation.
 
-References:
-https://github.com/redis/redis/releases/tag/6.2.13
-
-Signed-off-by: Archana Polampalli <archana.polampalli@windriver.com>
+Signed-off-by: Joel Stanley <joel@jms.id.au>
+Signed-off-by: Patrick Williams <patrick@stwcx.xyz>
 ---
- .../recipes-extended/redis/{redis_6.2.12.bb => redis_6.2.13.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-extended/redis/{redis_6.2.12.bb => redis_6.2.13.bb} (96%)
+ meta/classes-recipe/kernel.bbclass | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-oe/recipes-extended/redis/redis_6.2.12.bb b/meta-oe/recipes-extended/redis/redis_6.2.13.bb
-similarity index 96%
-rename from meta-oe/recipes-extended/redis/redis_6.2.12.bb
-rename to meta-oe/recipes-extended/redis/redis_6.2.13.bb
-index 3ed686781..640831c52 100644
---- a/meta-oe/recipes-extended/redis/redis_6.2.12.bb
-+++ b/meta-oe/recipes-extended/redis/redis_6.2.13.bb
-@@ -17,7 +17,7 @@ SRC_URI = "http://download.redis.io/releases/${BP}.tar.gz \
-            file://GNU_SOURCE.patch \
-            file://0006-Define-correct-gregs-for-RISCV32.patch \
-            "
--SRC_URI[sha256sum] = "75352eef41e97e84bfa94292cbac79e5add5345fc79787df5cbdff703353fb1b"
-+SRC_URI[sha256sum] = "89ff27c80d420456a721ccfb3beb7cc628d883c53059803513749e13214a23d1"
+diff --git a/meta/classes-recipe/kernel.bbclass b/meta/classes-recipe/kernel.bbclass
+index 247ef4a48a..bb5995b495 100644
+--- a/meta/classes-recipe/kernel.bbclass
++++ b/meta/classes-recipe/kernel.bbclass
+@@ -486,7 +486,7 @@ kernel_do_install() {
+ 	install -m 0644 System.map ${D}/${KERNEL_IMAGEDEST}/System.map-${KERNEL_VERSION}
+ 	install -m 0644 .config ${D}/${KERNEL_IMAGEDEST}/config-${KERNEL_VERSION}
+ 	install -m 0644 vmlinux ${D}/${KERNEL_IMAGEDEST}/vmlinux-${KERNEL_VERSION}
+-	[ -e Module.symvers ] && install -m 0644 Module.symvers ${D}/${KERNEL_IMAGEDEST}/Module.symvers-${KERNEL_VERSION}
++	! [ -e Module.symvers ] || install -m 0644 Module.symvers ${D}/${KERNEL_IMAGEDEST}/Module.symvers-${KERNEL_VERSION}
+ }
  
- inherit autotools-brokensep update-rc.d systemd useradd
+ # Must be ran no earlier than after do_kernel_checkout or else Makefile won't be in ${S}/Makefile
+@@ -555,7 +555,7 @@ do_shared_workdir () {
  
+ 	# Copy files required for module builds
+ 	cp System.map $kerneldir/System.map-${KERNEL_VERSION}
+-	[ -e Module.symvers ] && cp Module.symvers $kerneldir/
++	! [ -e Module.symvers ] || cp Module.symvers $kerneldir/
+ 	cp .config $kerneldir/
+ 	mkdir -p $kerneldir/include/config
+ 	cp include/config/kernel.release $kerneldir/include/config/kernel.release
 -- 
-2.40.0
+2.41.0
 
 
