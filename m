@@ -2,41 +2,41 @@ Return-Path: <auh@moto-timo.dev>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CE141C001DB
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D6768C41513
 	for <webhook@archiver.kernel.org>; Sat,  5 Aug 2023 08:07:09 +0000 (UTC)
-Received: from relay8-d.mail.gandi.net (relay8-d.mail.gandi.net [217.70.183.201])
- by mx.groups.io with SMTP id smtpd.web10.2394.1691222821538558102
+Received: from relay2-d.mail.gandi.net (relay2-d.mail.gandi.net [217.70.183.194])
+ by mx.groups.io with SMTP id smtpd.web11.2388.1691222824212735317
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 05 Aug 2023 01:07:02 -0700
+ Sat, 05 Aug 2023 01:07:04 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@moto-timo.dev header.s=gm1 header.b=D9glmQCZ;
- spf=pass (domain: moto-timo.dev, ip: 217.70.183.201, mailfrom: auh@moto-timo.dev)
-Received: by mail.gandi.net (Postfix) with ESMTPSA id 85DF71BF203
-	for <openembedded-devel@lists.openembedded.org>; Sat,  5 Aug 2023 08:06:59 +0000 (UTC)
+ dkim=pass header.i=@moto-timo.dev header.s=gm1 header.b=H79vB5qC;
+ spf=pass (domain: moto-timo.dev, ip: 217.70.183.194, mailfrom: auh@moto-timo.dev)
+Received: by mail.gandi.net (Postfix) with ESMTPSA id 0E8AC40006
+	for <openembedded-devel@lists.openembedded.org>; Sat,  5 Aug 2023 08:07:01 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=moto-timo.dev;
-	s=gm1; t=1691222819;
+	s=gm1; t=1691222822;
 	h=from:from:reply-to:subject:subject:to:to:cc:mime-version:mime-version:
-	 content-type:content-type; bh=/iPD3rxxuYo3aCMk64tjg7lCDLiuUnCZabb4e1KEol0=;
-	b=D9glmQCZAwusUiMXfkw3xf3raAaSz3okzyGMgdFk+cpu3/bLoP4zZlnknxC9c/hGPy0M0l
-	Ez8dTIuo6tXG9ras0GUjMh16hodqm4J7K57IcHlpH+Pd0+xUnR4D9KRHYbGCmvxCyuTzZ7
-	cG2tZKd3Chvoj1HSS1Hfzey2yVDFIq8vIoh/FtasPlnEM4TKAvcv/cGH2Pzo8emmFsjhtt
-	0tid2ewdoiB+ptAsdWSq3VJbCOpyc5752a7py/Me/iYXB5NbIi/mRoBdXhOWkcXTp5Paug
-	cuHPRATyChxnIEWy8x2Q1QAayihuqlB05f6cat63oLhqTln4ViTteNtzqangRw==
-Content-Type: multipart/mixed; boundary="===============4384065667137642203=="
+	 content-type:content-type; bh=IL0drAwHtQj0tjrbrlRrmPSIMZQdNkcE8pkRoaYMApM=;
+	b=H79vB5qC4g9nGDudD1V1xzU0HR1R3CFhwjbBvmGMM/vOLhXWqXVK/gGcQynJVN8SbF/VKC
+	UTZ7+kCtRX2H/OC0+kgP9ICnOvfOkadP0FrwrgJtbvvXhZZ4iy3kjDx0ieETfUL8+QAQ+u
+	i9MoCwzvcO/MQF4lXoESOURQ3bL1d9g5xnS9WzsAIkIOe8Lco3lAx7sjfPI8NRxcQV+HO6
+	uIIrd1yphmDDjAlORkFFb+kRnzbQc3BmwXoYEV6O6auL29feJ3JwW4CnVGN2h8KLX7dJ+Y
+	mhCDdXNGev5z0XLFcqf38SGdP7gGzdRaxuJJANKMN6+i0yHDWJ5eXPiN17Hy/Q==
+Content-Type: multipart/mixed; boundary="===============0972288759330885269=="
 MIME-Version: 1.0
 From: auh@moto-timo.dev
 To: openembedded-devel@lists.openembedded.org
-Subject: [AUH] libio-socket-ssl-perl: upgrading to 2.083 FAILED
+Subject: [AUH] libmodule-build-tiny-perl: upgrading to 0.046 SUCCEEDED
 X-GND-Sasl: auh@moto-timo.dev
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sat, 05 Aug 2023 08:07:09 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104286
-Message-Id: <20230805080709.CE141C001DB@smtp.lore.kernel.org>
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104287
+Message-Id: <20230805080709.D6768C41513@smtp.lore.kernel.org>
 Date: Sat,  5 Aug 2023 08:07:09 +0000 (UTC)
 
---===============4384065667137642203==
+--===============0972288759330885269==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -44,16 +44,10 @@ Content-Transfer-Encoding: 7bit
 Hello,
 
 this email is a notification from the Auto Upgrade Helper
-that the automatic attempt to upgrade the recipe *libio-socket-ssl-perl* to *2.083* has Failed(do_compile).
-
-Detailed error information:
-
-do_compile failed
-
-
+that the automatic attempt to upgrade the recipe *libmodule-build-tiny-perl* to *0.046* has Succeeded.
 
 Next steps:
-    - apply the patch: git am 0001-libio-socket-ssl-perl-upgrade-2.078-2.083.patch
+    - apply the patch: git am 0001-libmodule-build-tiny-perl-upgrade-0.045-0.046.patch
     - check the changes to upstream patches and summarize them in the commit message,
     - compile an image that contains the package
     - perform some basic sanity tests
@@ -71,246 +65,586 @@ Regards,
 The Upgrade Helper
 
 -- >8 --
-From dcc6e42a2d2aad509161d6368c06d84e80364284 Mon Sep 17 00:00:00 2001
+From 287b9e43cc8f86f41cb58f5dfbbca5987ff12b5d Mon Sep 17 00:00:00 2001
 From: Upgrade Helper <auh@moto-timo.dev>
-Date: Sat, 5 Aug 2023 02:51:48 -0500
-Subject: [PATCH] libio-socket-ssl-perl: upgrade 2.078 -> 2.083
+Date: Sat, 5 Aug 2023 02:59:11 -0500
+Subject: [PATCH] libmodule-build-tiny-perl: upgrade 0.045 -> 0.046
 
 ---
- ...-socket-ssl-perl_2.078.bb => libio-socket-ssl-perl_2.083.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-perl/recipes-perl/libio/{libio-socket-ssl-perl_2.078.bb => libio-socket-ssl-perl_2.083.bb} (95%)
+ ....bb => libmodule-build-tiny-perl_0.046.bb} | 251 +++++++++++++++++-
+ 1 file changed, 249 insertions(+), 2 deletions(-)
+ rename meta-perl/recipes-perl/libmodule/{libmodule-build-tiny-perl_0.045.bb => libmodule-build-tiny-perl_0.046.bb} (13%)
 
-diff --git a/meta-perl/recipes-perl/libio/libio-socket-ssl-perl_2.078.bb b/meta-perl/recipes-perl/libio/libio-socket-ssl-perl_2.083.bb
-similarity index 95%
-rename from meta-perl/recipes-perl/libio/libio-socket-ssl-perl_2.078.bb
-rename to meta-perl/recipes-perl/libio/libio-socket-ssl-perl_2.083.bb
-index ff2559b8a..dc9b88b10 100644
---- a/meta-perl/recipes-perl/libio/libio-socket-ssl-perl_2.078.bb
-+++ b/meta-perl/recipes-perl/libio/libio-socket-ssl-perl_2.083.bb
-@@ -21,7 +21,7 @@ RDEPENDS:${PN} += "\
- "
+diff --git a/meta-perl/recipes-perl/libmodule/libmodule-build-tiny-perl_0.045.bb b/meta-perl/recipes-perl/libmodule/libmodule-build-tiny-perl_0.046.bb
+similarity index 13%
+rename from meta-perl/recipes-perl/libmodule/libmodule-build-tiny-perl_0.045.bb
+rename to meta-perl/recipes-perl/libmodule/libmodule-build-tiny-perl_0.046.bb
+index 17ee50d7c..78687b8cd 100644
+--- a/meta-perl/recipes-perl/libmodule/libmodule-build-tiny-perl_0.045.bb
++++ b/meta-perl/recipes-perl/libmodule/libmodule-build-tiny-perl_0.046.bb
+@@ -1,3 +1,250 @@
++# FIXME: the LIC_FILES_CHKSUM values have been updated by 'devtool upgrade'.
++# The following is the difference between the old and the new license text.
++# Please update the LICENSE value if needed, and summarize the changes in
++# the commit message via 'License-Update:' tag.
++# (example: 'License-Update: copyright years updated.')
++#
++# The changes:
++#
++# --- LICENSE
++# +++ LICENSE
++# @@ -270,110 +270,143 @@
++#  That's all there is to it!
++#  
++#  
++# ---- The Artistic License 1.0 ---
++# +--- The Artistic License 1.0 (Perl) ---
++#  
++#  This software is Copyright (c) 2011 by Leon Timmermans, David Golden.
++#  
++#  This is free software, licensed under:
++#  
++# -  The Artistic License 1.0
++# -
++# -The Artistic License
++# -
++# -Preamble
++# -
++# -The intent of this document is to state the conditions under which a Package
++# -may be copied, such that the Copyright Holder maintains some semblance of
++# -artistic control over the development of the package, while giving the users of
++# -the package the right to use and distribute the Package in a more-or-less
++# -customary fashion, plus the right to make reasonable modifications.
++# +  The Artistic License 1.0 (Perl)
++# +
++# +
++# +
++# +
++# +
++# +                         The "Artistic License"
++# +
++# +                                Preamble
++# +
++# +The intent of this document is to state the conditions under which a
++# +Package may be copied, such that the Copyright Holder maintains some
++# +semblance of artistic control over the development of the package,
++# +while giving the users of the package the right to use and distribute
++# +the Package in a more-or-less customary fashion, plus the right to make
++# +reasonable modifications.
++#  
++#  Definitions:
++#  
++# -  - "Package" refers to the collection of files distributed by the Copyright
++# -    Holder, and derivatives of that collection of files created through
++# -    textual modification.
++# -  - "Standard Version" refers to such a Package if it has not been modified,
++# -    or has been modified in accordance with the wishes of the Copyright
++# -    Holder.
++# -  - "Copyright Holder" is whoever is named in the copyright or copyrights for
++# -    the package.
++# -  - "You" is you, if you're thinking about copying or distributing this Package.
++# -  - "Reasonable copying fee" is whatever you can justify on the basis of media
++# -    cost, duplication charges, time of people involved, and so on. (You will
++# -    not be required to justify it to the Copyright Holder, but only to the
++# -    computing community at large as a market that must bear the fee.)
++# -  - "Freely Available" means that no fee is charged for the item itself, though
++# -    there may be fees involved in handling the item. It also means that
++# -    recipients of the item may redistribute it under the same conditions they
++# -    received it.
++# +        "Package" refers to the collection of files distributed by the
++# +        Copyright Holder, and derivatives of that collection of files
++# +        created through textual modification.
++# +
++# +        "Standard Version" refers to such a Package if it has not been
++# +        modified, or has been modified in accordance with the wishes
++# +        of the Copyright Holder as specified below.
++# +
++# +        "Copyright Holder" is whoever is named in the copyright or
++# +        copyrights for the package.
++# +
++# +        "You" is you, if you're thinking about copying or distributing
++# +        this Package.
++# +
++# +        "Reasonable copying fee" is whatever you can justify on the
++# +        basis of media cost, duplication charges, time of people involved,
++# +        and so on.  (You will not be required to justify it to the
++# +        Copyright Holder, but only to the computing community at large
++# +        as a market that must bear the fee.)
++# +
++# +        "Freely Available" means that no fee is charged for the item
++# +        itself, though there may be fees involved in handling the item.
++# +        It also means that recipients of the item may redistribute it
++# +        under the same conditions they received it.
++#  
++#  1. You may make and give away verbatim copies of the source form of the
++#  Standard Version of this Package without restriction, provided that you
++#  duplicate all of the original copyright notices and associated disclaimers.
++#  
++# -2. You may apply bug fixes, portability fixes and other modifications derived
++# -from the Public Domain or from the Copyright Holder. A Package modified in such
++# -a way shall still be considered the Standard Version.
++# -
++# -3. You may otherwise modify your copy of this Package in any way, provided that
++# -you insert a prominent notice in each changed file stating how and when you
++# -changed that file, and provided that you do at least ONE of the following:
++# -
++# -  a) place your modifications in the Public Domain or otherwise make them
++# -     Freely Available, such as by posting said modifications to Usenet or an
++# -     equivalent medium, or placing the modifications on a major archive site
++# -     such as ftp.uu.net, or by allowing the Copyright Holder to include your
++# -     modifications in the Standard Version of the Package.
++# -
++# -  b) use the modified Package only within your corporation or organization.
++# -
++# -  c) rename any non-standard executables so the names do not conflict with
++# -     standard executables, which must also be provided, and provide a separate
++# -     manual page for each non-standard executable that clearly documents how it
++# -     differs from the Standard Version.
++# -
++# -  d) make other distribution arrangements with the Copyright Holder.
++# -
++# -4. You may distribute the programs of this Package in object code or executable
++# -form, provided that you do at least ONE of the following:
++# -
++# -  a) distribute a Standard Version of the executables and library files,
++# -     together with instructions (in the manual page or equivalent) on where to
++# -     get the Standard Version.
++# -
++# -  b) accompany the distribution with the machine-readable source of the Package
++# -     with your modifications.
++# -
++# -  c) accompany any non-standard executables with their corresponding Standard
++# -     Version executables, giving the non-standard executables non-standard
++# -     names, and clearly documenting the differences in manual pages (or
++# -     equivalent), together with instructions on where to get the Standard
++# -     Version.
++# -
++# -  d) make other distribution arrangements with the Copyright Holder.
++# +2. You may apply bug fixes, portability fixes and other modifications
++# +derived from the Public Domain or from the Copyright Holder.  A Package
++# +modified in such a way shall still be considered the Standard Version.
++# +
++# +3. You may otherwise modify your copy of this Package in any way, provided
++# +that you insert a prominent notice in each changed file stating how and
++# +when you changed that file, and provided that you do at least ONE of the
++# +following:
++# +
++# +    a) place your modifications in the Public Domain or otherwise make them
++# +    Freely Available, such as by posting said modifications to Usenet or
++# +    an equivalent medium, or placing the modifications on a major archive
++# +    site such as uunet.uu.net, or by allowing the Copyright Holder to include
++# +    your modifications in the Standard Version of the Package.
++# +
++# +    b) use the modified Package only within your corporation or organization.
++# +
++# +    c) rename any non-standard executables so the names do not conflict
++# +    with standard executables, which must also be provided, and provide
++# +    a separate manual page for each non-standard executable that clearly
++# +    documents how it differs from the Standard Version.
++# +
++# +    d) make other distribution arrangements with the Copyright Holder.
++# +
++# +4. You may distribute the programs of this Package in object code or
++# +executable form, provided that you do at least ONE of the following:
++# +
++# +    a) distribute a Standard Version of the executables and library files,
++# +    together with instructions (in the manual page or equivalent) on where
++# +    to get the Standard Version.
++# +
++# +    b) accompany the distribution with the machine-readable source of
++# +    the Package with your modifications.
++# +
++# +    c) give non-standard executables non-standard names, and clearly
++# +    document the differences in manual pages (or equivalent), together
++# +    with instructions on where to get the Standard Version.
++# +
++# +    d) make other distribution arrangements with the Copyright Holder.
++#  
++#  5. You may charge a reasonable copying fee for any distribution of this
++# -Package.  You may charge any fee you choose for support of this Package. You
++# -may not charge a fee for this Package itself. However, you may distribute this
++# -Package in aggregate with other (possibly commercial) programs as part of a
++# -larger (possibly commercial) software distribution provided that you do not
++# -advertise this Package as a product of your own.
++# -
++# -6. The scripts and library files supplied as input to or produced as output
++# -from the programs of this Package do not automatically fall under the copyright
++# -of this Package, but belong to whomever generated them, and may be sold
++# -commercially, and may be aggregated with this Package.
++# -
++# -7. C or perl subroutines supplied by you and linked into this Package shall not
++# -be considered part of this Package.
++# -
++# -8. The name of the Copyright Holder may not be used to endorse or promote
++# +Package.  You may charge any fee you choose for support of this
++# +Package.  You may not charge a fee for this Package itself.  However,
++# +you may distribute this Package in aggregate with other (possibly
++# +commercial) programs as part of a larger (possibly commercial) software
++# +distribution provided that you do not advertise this Package as a
++# +product of your own.  You may embed this Package's interpreter within
++# +an executable of yours (by linking); this shall be construed as a mere
++# +form of aggregation, provided that the complete Standard Version of the
++# +interpreter is so embedded.
++# +
++# +6. The scripts and library files supplied as input to or produced as
++# +output from the programs of this Package do not automatically fall
++# +under the copyright of this Package, but belong to whoever generated
++# +them, and may be sold commercially, and may be aggregated with this
++# +Package.  If such scripts or library files are aggregated with this
++# +Package via the so-called "undump" or "unexec" methods of producing a
++# +binary executable image, then distribution of such an image shall
++# +neither be construed as a distribution of this Package nor shall it
++# +fall under the restrictions of Paragraphs 3 and 4, provided that you do
++# +not represent such an executable image as a Standard Version of this
++# +Package.
++# +
++# +7. C subroutines (or comparably compiled subroutines in other
++# +languages) supplied by you and linked into this Package in order to
++# +emulate subroutines and variables of the language defined by this
++# +Package shall not be considered part of this Package, but are the
++# +equivalent of input as in Paragraph 6, provided these subroutines do
++# +not change the language in any way that would cause it to fail the
++# +regression tests for the language.
++# +
++# +8. Aggregation of this Package with a commercial distribution is always
++# +permitted provided that the use of this Package is embedded; that is,
++# +when no overt attempt is made to make this Package's interfaces visible
++# +to the end user of the commercial distribution.  Such use shall not be
++# +construed as a distribution of this Package.
++# +
++# +9. The name of the Copyright Holder may not be used to endorse or promote
++#  products derived from this software without specific prior written permission.
++#  
++# -9. THIS PACKAGE IS PROVIDED "AS IS" AND WITHOUT ANY EXPRESS OR IMPLIED
++# -WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED WARRANTIES OF
++# -MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
++# -
++# -The End
++# -
++# +10. THIS PACKAGE IS PROVIDED "AS IS" AND WITHOUT ANY EXPRESS OR
++# +IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
++# +WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
++# +
++# +                                The End
++# +
++# 
++#
++
+ SUMMARY = "Module::Build::Tiny - A tiny replacement for Module::Build"
+ DESCRIPTION = "Many Perl distributions use a Build.PL file instead of a \
+ Makefile.PL file to drive distribution configuration, build, test and \
+@@ -10,12 +257,12 @@ SECTION = "libs"
+ HOMEPAGE = "http://search.cpan.org/~leont/Module-Build-Tiny/"
  
- SRC_URI = "${CPAN_MIRROR}/authors/id/S/SU/SULLR/IO-Socket-SSL-${PV}.tar.gz"
--SRC_URI[sha256sum] = "4cf83737a72b0970948b494bc9ddab7f725420a0ca0152d25c7e48ef8fa2b6a1"
-+SRC_URI[sha256sum] = "904ef28765440a97d8a9a0df597f8c3d7f3cb0a053d1b082c10bed03bc802069"
+ LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=6374136f6774db2f51cc116f5efbf705"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=147a7b891d1584d3d33e478b1f2327c5"
  
- S = "${WORKDIR}/IO-Socket-SSL-${PV}"
+ DEPENDS = "libextutils-config-perl-native libextutils-helpers-perl-native libextutils-installpaths-perl-native"
+ 
+ SRC_URI = "${CPAN_MIRROR}/authors/id/L/LE/LEONT/Module-Build-Tiny-${PV}.tar.gz"
+-SRC_URI[sha256sum] = "d20692eee246d0b329b7f7659f36286b14ae0696fe91078a64b7078f8876d300"
++SRC_URI[sha256sum] = "be193027e2debb4c9926434aaf1aa46c9fc7bf4db83dcc347eb6e359ee878289"
+ 
+ S = "${WORKDIR}/Module-Build-Tiny-${PV}"
  
 -- 
 2.25.1
 
 
---===============4384065667137642203==
+--===============0972288759330885269==
 Content-Type: text/x-diff; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
 Content-Disposition: attachment;
- filename="0001-libio-socket-ssl-perl-upgrade-2.078-2.083.patch"
+ filename="0001-libmodule-build-tiny-perl-upgrade-0.045-0.046.patch"
 
-From dcc6e42a2d2aad509161d6368c06d84e80364284 Mon Sep 17 00:00:00 2001
+From 287b9e43cc8f86f41cb58f5dfbbca5987ff12b5d Mon Sep 17 00:00:00 2001
 From: Upgrade Helper <auh@moto-timo.dev>
-Date: Sat, 5 Aug 2023 02:51:48 -0500
-Subject: [PATCH] libio-socket-ssl-perl: upgrade 2.078 -> 2.083
+Date: Sat, 5 Aug 2023 02:59:11 -0500
+Subject: [PATCH] libmodule-build-tiny-perl: upgrade 0.045 -> 0.046
 
 ---
- ...-socket-ssl-perl_2.078.bb => libio-socket-ssl-perl_2.083.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-perl/recipes-perl/libio/{libio-socket-ssl-perl_2.078.bb => libio-socket-ssl-perl_2.083.bb} (95%)
+ ....bb => libmodule-build-tiny-perl_0.046.bb} | 251 +++++++++++++++++-
+ 1 file changed, 249 insertions(+), 2 deletions(-)
+ rename meta-perl/recipes-perl/libmodule/{libmodule-build-tiny-perl_0.045.bb => libmodule-build-tiny-perl_0.046.bb} (13%)
 
-diff --git a/meta-perl/recipes-perl/libio/libio-socket-ssl-perl_2.078.bb b/meta-perl/recipes-perl/libio/libio-socket-ssl-perl_2.083.bb
-similarity index 95%
-rename from meta-perl/recipes-perl/libio/libio-socket-ssl-perl_2.078.bb
-rename to meta-perl/recipes-perl/libio/libio-socket-ssl-perl_2.083.bb
-index ff2559b8a..dc9b88b10 100644
---- a/meta-perl/recipes-perl/libio/libio-socket-ssl-perl_2.078.bb
-+++ b/meta-perl/recipes-perl/libio/libio-socket-ssl-perl_2.083.bb
-@@ -21,7 +21,7 @@ RDEPENDS:${PN} += "\
- "
+diff --git a/meta-perl/recipes-perl/libmodule/libmodule-build-tiny-perl_0.045.bb b/meta-perl/recipes-perl/libmodule/libmodule-build-tiny-perl_0.046.bb
+similarity index 13%
+rename from meta-perl/recipes-perl/libmodule/libmodule-build-tiny-perl_0.045.bb
+rename to meta-perl/recipes-perl/libmodule/libmodule-build-tiny-perl_0.046.bb
+index 17ee50d7c..78687b8cd 100644
+--- a/meta-perl/recipes-perl/libmodule/libmodule-build-tiny-perl_0.045.bb
++++ b/meta-perl/recipes-perl/libmodule/libmodule-build-tiny-perl_0.046.bb
+@@ -1,3 +1,250 @@
++# FIXME: the LIC_FILES_CHKSUM values have been updated by 'devtool upgrade'.
++# The following is the difference between the old and the new license text.
++# Please update the LICENSE value if needed, and summarize the changes in
++# the commit message via 'License-Update:' tag.
++# (example: 'License-Update: copyright years updated.')
++#
++# The changes:
++#
++# --- LICENSE
++# +++ LICENSE
++# @@ -270,110 +270,143 @@
++#  That's all there is to it!
++#  
++#  
++# ---- The Artistic License 1.0 ---
++# +--- The Artistic License 1.0 (Perl) ---
++#  
++#  This software is Copyright (c) 2011 by Leon Timmermans, David Golden.
++#  
++#  This is free software, licensed under:
++#  
++# -  The Artistic License 1.0
++# -
++# -The Artistic License
++# -
++# -Preamble
++# -
++# -The intent of this document is to state the conditions under which a Package
++# -may be copied, such that the Copyright Holder maintains some semblance of
++# -artistic control over the development of the package, while giving the users of
++# -the package the right to use and distribute the Package in a more-or-less
++# -customary fashion, plus the right to make reasonable modifications.
++# +  The Artistic License 1.0 (Perl)
++# +
++# +
++# +
++# +
++# +
++# +                         The "Artistic License"
++# +
++# +                                Preamble
++# +
++# +The intent of this document is to state the conditions under which a
++# +Package may be copied, such that the Copyright Holder maintains some
++# +semblance of artistic control over the development of the package,
++# +while giving the users of the package the right to use and distribute
++# +the Package in a more-or-less customary fashion, plus the right to make
++# +reasonable modifications.
++#  
++#  Definitions:
++#  
++# -  - "Package" refers to the collection of files distributed by the Copyright
++# -    Holder, and derivatives of that collection of files created through
++# -    textual modification.
++# -  - "Standard Version" refers to such a Package if it has not been modified,
++# -    or has been modified in accordance with the wishes of the Copyright
++# -    Holder.
++# -  - "Copyright Holder" is whoever is named in the copyright or copyrights for
++# -    the package.
++# -  - "You" is you, if you're thinking about copying or distributing this Package.
++# -  - "Reasonable copying fee" is whatever you can justify on the basis of media
++# -    cost, duplication charges, time of people involved, and so on. (You will
++# -    not be required to justify it to the Copyright Holder, but only to the
++# -    computing community at large as a market that must bear the fee.)
++# -  - "Freely Available" means that no fee is charged for the item itself, though
++# -    there may be fees involved in handling the item. It also means that
++# -    recipients of the item may redistribute it under the same conditions they
++# -    received it.
++# +        "Package" refers to the collection of files distributed by the
++# +        Copyright Holder, and derivatives of that collection of files
++# +        created through textual modification.
++# +
++# +        "Standard Version" refers to such a Package if it has not been
++# +        modified, or has been modified in accordance with the wishes
++# +        of the Copyright Holder as specified below.
++# +
++# +        "Copyright Holder" is whoever is named in the copyright or
++# +        copyrights for the package.
++# +
++# +        "You" is you, if you're thinking about copying or distributing
++# +        this Package.
++# +
++# +        "Reasonable copying fee" is whatever you can justify on the
++# +        basis of media cost, duplication charges, time of people involved,
++# +        and so on.  (You will not be required to justify it to the
++# +        Copyright Holder, but only to the computing community at large
++# +        as a market that must bear the fee.)
++# +
++# +        "Freely Available" means that no fee is charged for the item
++# +        itself, though there may be fees involved in handling the item.
++# +        It also means that recipients of the item may redistribute it
++# +        under the same conditions they received it.
++#  
++#  1. You may make and give away verbatim copies of the source form of the
++#  Standard Version of this Package without restriction, provided that you
++#  duplicate all of the original copyright notices and associated disclaimers.
++#  
++# -2. You may apply bug fixes, portability fixes and other modifications derived
++# -from the Public Domain or from the Copyright Holder. A Package modified in such
++# -a way shall still be considered the Standard Version.
++# -
++# -3. You may otherwise modify your copy of this Package in any way, provided that
++# -you insert a prominent notice in each changed file stating how and when you
++# -changed that file, and provided that you do at least ONE of the following:
++# -
++# -  a) place your modifications in the Public Domain or otherwise make them
++# -     Freely Available, such as by posting said modifications to Usenet or an
++# -     equivalent medium, or placing the modifications on a major archive site
++# -     such as ftp.uu.net, or by allowing the Copyright Holder to include your
++# -     modifications in the Standard Version of the Package.
++# -
++# -  b) use the modified Package only within your corporation or organization.
++# -
++# -  c) rename any non-standard executables so the names do not conflict with
++# -     standard executables, which must also be provided, and provide a separate
++# -     manual page for each non-standard executable that clearly documents how it
++# -     differs from the Standard Version.
++# -
++# -  d) make other distribution arrangements with the Copyright Holder.
++# -
++# -4. You may distribute the programs of this Package in object code or executable
++# -form, provided that you do at least ONE of the following:
++# -
++# -  a) distribute a Standard Version of the executables and library files,
++# -     together with instructions (in the manual page or equivalent) on where to
++# -     get the Standard Version.
++# -
++# -  b) accompany the distribution with the machine-readable source of the Package
++# -     with your modifications.
++# -
++# -  c) accompany any non-standard executables with their corresponding Standard
++# -     Version executables, giving the non-standard executables non-standard
++# -     names, and clearly documenting the differences in manual pages (or
++# -     equivalent), together with instructions on where to get the Standard
++# -     Version.
++# -
++# -  d) make other distribution arrangements with the Copyright Holder.
++# +2. You may apply bug fixes, portability fixes and other modifications
++# +derived from the Public Domain or from the Copyright Holder.  A Package
++# +modified in such a way shall still be considered the Standard Version.
++# +
++# +3. You may otherwise modify your copy of this Package in any way, provided
++# +that you insert a prominent notice in each changed file stating how and
++# +when you changed that file, and provided that you do at least ONE of the
++# +following:
++# +
++# +    a) place your modifications in the Public Domain or otherwise make them
++# +    Freely Available, such as by posting said modifications to Usenet or
++# +    an equivalent medium, or placing the modifications on a major archive
++# +    site such as uunet.uu.net, or by allowing the Copyright Holder to include
++# +    your modifications in the Standard Version of the Package.
++# +
++# +    b) use the modified Package only within your corporation or organization.
++# +
++# +    c) rename any non-standard executables so the names do not conflict
++# +    with standard executables, which must also be provided, and provide
++# +    a separate manual page for each non-standard executable that clearly
++# +    documents how it differs from the Standard Version.
++# +
++# +    d) make other distribution arrangements with the Copyright Holder.
++# +
++# +4. You may distribute the programs of this Package in object code or
++# +executable form, provided that you do at least ONE of the following:
++# +
++# +    a) distribute a Standard Version of the executables and library files,
++# +    together with instructions (in the manual page or equivalent) on where
++# +    to get the Standard Version.
++# +
++# +    b) accompany the distribution with the machine-readable source of
++# +    the Package with your modifications.
++# +
++# +    c) give non-standard executables non-standard names, and clearly
++# +    document the differences in manual pages (or equivalent), together
++# +    with instructions on where to get the Standard Version.
++# +
++# +    d) make other distribution arrangements with the Copyright Holder.
++#  
++#  5. You may charge a reasonable copying fee for any distribution of this
++# -Package.  You may charge any fee you choose for support of this Package. You
++# -may not charge a fee for this Package itself. However, you may distribute this
++# -Package in aggregate with other (possibly commercial) programs as part of a
++# -larger (possibly commercial) software distribution provided that you do not
++# -advertise this Package as a product of your own.
++# -
++# -6. The scripts and library files supplied as input to or produced as output
++# -from the programs of this Package do not automatically fall under the copyright
++# -of this Package, but belong to whomever generated them, and may be sold
++# -commercially, and may be aggregated with this Package.
++# -
++# -7. C or perl subroutines supplied by you and linked into this Package shall not
++# -be considered part of this Package.
++# -
++# -8. The name of the Copyright Holder may not be used to endorse or promote
++# +Package.  You may charge any fee you choose for support of this
++# +Package.  You may not charge a fee for this Package itself.  However,
++# +you may distribute this Package in aggregate with other (possibly
++# +commercial) programs as part of a larger (possibly commercial) software
++# +distribution provided that you do not advertise this Package as a
++# +product of your own.  You may embed this Package's interpreter within
++# +an executable of yours (by linking); this shall be construed as a mere
++# +form of aggregation, provided that the complete Standard Version of the
++# +interpreter is so embedded.
++# +
++# +6. The scripts and library files supplied as input to or produced as
++# +output from the programs of this Package do not automatically fall
++# +under the copyright of this Package, but belong to whoever generated
++# +them, and may be sold commercially, and may be aggregated with this
++# +Package.  If such scripts or library files are aggregated with this
++# +Package via the so-called "undump" or "unexec" methods of producing a
++# +binary executable image, then distribution of such an image shall
++# +neither be construed as a distribution of this Package nor shall it
++# +fall under the restrictions of Paragraphs 3 and 4, provided that you do
++# +not represent such an executable image as a Standard Version of this
++# +Package.
++# +
++# +7. C subroutines (or comparably compiled subroutines in other
++# +languages) supplied by you and linked into this Package in order to
++# +emulate subroutines and variables of the language defined by this
++# +Package shall not be considered part of this Package, but are the
++# +equivalent of input as in Paragraph 6, provided these subroutines do
++# +not change the language in any way that would cause it to fail the
++# +regression tests for the language.
++# +
++# +8. Aggregation of this Package with a commercial distribution is always
++# +permitted provided that the use of this Package is embedded; that is,
++# +when no overt attempt is made to make this Package's interfaces visible
++# +to the end user of the commercial distribution.  Such use shall not be
++# +construed as a distribution of this Package.
++# +
++# +9. The name of the Copyright Holder may not be used to endorse or promote
++#  products derived from this software without specific prior written permission.
++#  
++# -9. THIS PACKAGE IS PROVIDED "AS IS" AND WITHOUT ANY EXPRESS OR IMPLIED
++# -WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED WARRANTIES OF
++# -MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
++# -
++# -The End
++# -
++# +10. THIS PACKAGE IS PROVIDED "AS IS" AND WITHOUT ANY EXPRESS OR
++# +IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
++# +WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
++# +
++# +                                The End
++# +
++# 
++#
++
+ SUMMARY = "Module::Build::Tiny - A tiny replacement for Module::Build"
+ DESCRIPTION = "Many Perl distributions use a Build.PL file instead of a \
+ Makefile.PL file to drive distribution configuration, build, test and \
+@@ -10,12 +257,12 @@ SECTION = "libs"
+ HOMEPAGE = "http://search.cpan.org/~leont/Module-Build-Tiny/"
  
- SRC_URI = "${CPAN_MIRROR}/authors/id/S/SU/SULLR/IO-Socket-SSL-${PV}.tar.gz"
--SRC_URI[sha256sum] = "4cf83737a72b0970948b494bc9ddab7f725420a0ca0152d25c7e48ef8fa2b6a1"
-+SRC_URI[sha256sum] = "904ef28765440a97d8a9a0df597f8c3d7f3cb0a053d1b082c10bed03bc802069"
+ LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=6374136f6774db2f51cc116f5efbf705"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=147a7b891d1584d3d33e478b1f2327c5"
  
- S = "${WORKDIR}/IO-Socket-SSL-${PV}"
+ DEPENDS = "libextutils-config-perl-native libextutils-helpers-perl-native libextutils-installpaths-perl-native"
+ 
+ SRC_URI = "${CPAN_MIRROR}/authors/id/L/LE/LEONT/Module-Build-Tiny-${PV}.tar.gz"
+-SRC_URI[sha256sum] = "d20692eee246d0b329b7f7659f36286b14ae0696fe91078a64b7078f8876d300"
++SRC_URI[sha256sum] = "be193027e2debb4c9926434aaf1aa46c9fc7bf4db83dcc347eb6e359ee878289"
+ 
+ S = "${WORKDIR}/Module-Build-Tiny-${PV}"
  
 -- 
 2.25.1
 
 
---===============4384065667137642203==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: attachment; filename="bitbake-output-qemux86-64.txt"
-
-Loading cache...done.
-Loaded 12798 entries from dependency cache.
-Parsing recipes...done.
-Parsing of 7341 .bb files complete (7338 cached, 3 parsed). 12618 targets, 325 skipped, 0 masked, 0 errors.
-Removing 1 recipes from the core2-64 sysroot...done.
-Removing 1 recipes from the qemux86_64 sysroot...done.
-NOTE: Resolving any missing task queue dependencies
-NOTE: Resolving any missing task queue dependencies
-NOTE: Resolving any missing task queue dependencies
-NOTE: Resolving any missing task queue dependencies
-NOTE: Resolving any missing task queue dependencies
-NOTE: Resolving any missing task queue dependencies
-
-Build Configuration (mc:default):
-BB_VERSION           = "2.4.0"
-BUILD_SYS            = "x86_64-linux"
-NATIVELSBSTRING      = "universal"
-TARGET_SYS           = "x86_64-poky-linux"
-MACHINE              = "qemux86-64"
-DISTRO               = "poky"
-DISTRO_VERSION       = "4.2"
-TUNE_FEATURES        = "m64 core2"
-TARGET_FPU           = ""
-meta                 
-meta-poky            
-meta-yocto-bsp       = "master:058a44165ce375f405063e73a9fcd1b2757ef8da"
-meta-oe              
-meta-python          
-meta-perl            = "heads/origin/master-next:c830013b185a819ce978606311c11d24043ace07"
-workspace            = "<unknown>:<unknown>"
-
-
-Build Configuration (mc:qemux86-musl):
-BB_VERSION           = "2.4.0"
-BUILD_SYS            = "x86_64-linux"
-NATIVELSBSTRING      = "universal"
-TARGET_SYS           = "x86_64-poky-linux-musl"
-MACHINE              = "qemux86-64"
-DISTRO               = "poky"
-DISTRO_VERSION       = "4.2"
-TUNE_FEATURES        = "m64 core2"
-TARGET_FPU           = ""
-meta                 
-meta-poky            
-meta-yocto-bsp       = "master:058a44165ce375f405063e73a9fcd1b2757ef8da"
-meta-oe              
-meta-python          
-meta-perl            = "heads/origin/master-next:c830013b185a819ce978606311c11d24043ace07"
-workspace            = "<unknown>:<unknown>"
-
-
-Build Configuration (mc:qemuarm64):
-BB_VERSION           = "2.4.0"
-BUILD_SYS            = "x86_64-linux"
-NATIVELSBSTRING      = "universal"
-TARGET_SYS           = "x86_64-poky-linux"
-MACHINE              = "qemux86-64"
-DISTRO               = "poky"
-DISTRO_VERSION       = "4.2"
-TUNE_FEATURES        = "m64 core2"
-TARGET_FPU           = ""
-meta                 
-meta-poky            
-meta-yocto-bsp       = "master:058a44165ce375f405063e73a9fcd1b2757ef8da"
-meta-oe              
-meta-python          
-meta-perl            = "heads/origin/master-next:c830013b185a819ce978606311c11d24043ace07"
-workspace            = "<unknown>:<unknown>"
-
-Initialising tasks...done.
-Checking sstate mirror object availability...done.
-Sstate summary: Wanted 208 Local 73 Mirrors 125 Missed 10 Current 239 (95% match, 97% complete)
-NOTE: Executing Tasks
-NOTE: Running task 882 of 1297 (/home/auh/Projects/meta-openembedded/meta-perl/recipes-perl/libio/libio-socket-ssl-perl_2.083.bb:do_recipe_qa)
-NOTE: recipe libio-socket-ssl-perl-2.083-r0: task do_recipe_qa: Started
-NOTE: recipe libio-socket-ssl-perl-2.083-r0: task do_recipe_qa: Succeeded
-NOTE: Running task 1276 of 1297 (/home/auh/Projects/meta-openembedded/meta-perl/recipes-perl/libio/libio-socket-ssl-perl_2.083.bb:do_fetch)
-NOTE: recipe libio-socket-ssl-perl-2.083-r0: task do_fetch: Started
-NOTE: recipe libio-socket-ssl-perl-2.083-r0: task do_fetch: Succeeded
-NOTE: Running task 1277 of 1297 (/home/auh/Projects/meta-openembedded/meta-perl/recipes-perl/libio/libio-socket-ssl-perl_2.083.bb:do_unpack)
-NOTE: Running task 1278 of 1297 (/home/auh/Projects/meta-openembedded/meta-perl/recipes-perl/libio/libio-socket-ssl-perl_2.083.bb:do_prepare_recipe_sysroot)
-NOTE: recipe libio-socket-ssl-perl-2.083-r0: task do_unpack: Started
-NOTE: recipe libio-socket-ssl-perl-2.083-r0: task do_prepare_recipe_sysroot: Started
-NOTE: recipe libio-socket-ssl-perl-2.083-r0: task do_unpack: Succeeded
-NOTE: Running task 1279 of 1297 (/home/auh/Projects/meta-openembedded/meta-perl/recipes-perl/libio/libio-socket-ssl-perl_2.083.bb:do_patch)
-NOTE: Running task 1280 of 1297 (/home/auh/Projects/meta-openembedded/meta-perl/recipes-perl/libio/libio-socket-ssl-perl_2.083.bb:do_collect_spdx_deps)
-NOTE: recipe libio-socket-ssl-perl-2.083-r0: task do_patch: Started
-NOTE: recipe libio-socket-ssl-perl-2.083-r0: task do_collect_spdx_deps: Started
-NOTE: recipe libio-socket-ssl-perl-2.083-r0: task do_prepare_recipe_sysroot: Succeeded
-NOTE: recipe libio-socket-ssl-perl-2.083-r0: task do_patch: Succeeded
-NOTE: Running task 1281 of 1297 (/home/auh/Projects/meta-openembedded/meta-perl/recipes-perl/libio/libio-socket-ssl-perl_2.083.bb:do_deploy_source_date_epoch)
-NOTE: Running task 1282 of 1297 (/home/auh/Projects/meta-openembedded/meta-perl/recipes-perl/libio/libio-socket-ssl-perl_2.083.bb:do_populate_lic)
-NOTE: recipe libio-socket-ssl-perl-2.083-r0: task do_collect_spdx_deps: Succeeded
-NOTE: recipe libio-socket-ssl-perl-2.083-r0: task do_deploy_source_date_epoch: Started
-NOTE: recipe libio-socket-ssl-perl-2.083-r0: task do_populate_lic: Started
-NOTE: recipe libio-socket-ssl-perl-2.083-r0: task do_populate_lic: Succeeded
-NOTE: recipe libio-socket-ssl-perl-2.083-r0: task do_deploy_source_date_epoch: Succeeded
-NOTE: Running task 1283 of 1297 (/home/auh/Projects/meta-openembedded/meta-perl/recipes-perl/libio/libio-socket-ssl-perl_2.083.bb:do_configure)
-NOTE: recipe libio-socket-ssl-perl-2.083-r0: task do_configure: Started
-NOTE: recipe libio-socket-ssl-perl-2.083-r0: task do_configure: Succeeded
-NOTE: Running task 1284 of 1297 (/home/auh/Projects/meta-openembedded/meta-perl/recipes-perl/libio/libio-socket-ssl-perl_2.083.bb:do_configure_ptest_base)
-NOTE: recipe libio-socket-ssl-perl-2.083-r0: task do_configure_ptest_base: Started
-NOTE: recipe libio-socket-ssl-perl-2.083-r0: task do_configure_ptest_base: Succeeded
-NOTE: Running task 1285 of 1297 (/home/auh/Projects/meta-openembedded/meta-perl/recipes-perl/libio/libio-socket-ssl-perl_2.083.bb:do_compile)
-NOTE: recipe libio-socket-ssl-perl-2.083-r0: task do_compile: Started
-NOTE: recipe libio-socket-ssl-perl-2.083-r0: task do_compile: Succeeded
-NOTE: Running task 1286 of 1297 (/home/auh/Projects/meta-openembedded/meta-perl/recipes-perl/libio/libio-socket-ssl-perl_2.083.bb:do_compile_ptest_base)
-NOTE: recipe libio-socket-ssl-perl-2.083-r0: task do_compile_ptest_base: Started
-NOTE: recipe libio-socket-ssl-perl-2.083-r0: task do_compile_ptest_base: Succeeded
-NOTE: Running task 1287 of 1297 (/home/auh/Projects/meta-openembedded/meta-perl/recipes-perl/libio/libio-socket-ssl-perl_2.083.bb:do_install)
-NOTE: recipe libio-socket-ssl-perl-2.083-r0: task do_install: Started
-Log data follows:
-| DEBUG: Executing python function extend_recipe_sysroot
-| NOTE: Direct dependencies are ['/home/auh/Projects/poky/meta/recipes-core/glibc/glibc_2.37.bb:do_populate_sysroot', '/home/auh/Projects/poky/meta/recipes-devtools/gcc/gcc-cross_13.2.bb:do_populate_sysroot', '/home/auh/Projects/poky/meta/recipes-devtools/gcc/gcc-runtime_13.2.bb:do_populate_sysroot', '/home/auh/Projects/poky/meta/recipes-devtools/perl/perl_5.36.1.bb:do_populate_sysroot', '/home/auh/Projects/poky/meta/recipes-devtools/quilt/quilt-native_0.67.bb:do_populate_sysroot', 'virtual:native:/home/auh/Projects/poky/meta/recipes-devtools/patch/patch_2.7.6.bb:do_populate_sysroot', 'virtual:native:/home/auh/Projects/poky/meta/recipes-devtools/perl/perl_5.36.1.bb:do_populate_sysroot', 'virtual:native:/home/auh/Projects/poky/meta/recipes-devtools/pseudo/pseudo_git.bb:do_populate_sysroot']
-| NOTE: Installed into sysroot: []
-| NOTE: Skipping as already exists in sysroot: ['glibc', 'gcc-cross-x86_64', 'gcc-runtime', 'perl', 'quilt-native', 'patch-native', 'perl-native', 'pseudo-native', 'linux-libc-headers', 'attr-native', 'libtool-native', 'libgcc', 'zlib', 'opkg-utils', 'gdbm', 'libxcrypt', 'xz-native', 'gmp-native', 'binutils-cross-x86_64', 'gnu-config-native', 'zstd-native', 'libmpc-native', 'texinfo-dummy-native', 'mpfr-native', 'zlib-native', 'flex-native', 'gdbm-native', 'make-native', 'gettext-minimal-native', 'm4-native']
-| DEBUG: Python function extend_recipe_sysroot finished
-| DEBUG: Executing shell function do_install
-| NOTE: make -j 48 DESTDIR=/scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/libio-socket-ssl-perl/2.083-r0/image install_vendor
-| *** Module name IN: /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/libio-socket-ssl-perl/2.083-r0/recipe-sysroot-native/usr/bin/perl-native/../../../usr/lib/perl5/5.36.1/x86_64-linux/Encode.pm
-| *** p1: /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/libio-socket-ssl-perl/2.083-r0/recipe-sysroot-native/usr/bin/perl-native/../../../usr/lib/  p3: perl5/5.36.1/  p5: x86_64-linux/ p7: Encode.pm
-| *** Module name OUT: /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/libio-socket-ssl-perl/2.083-r0/recipe-sysroot-native/usr/lib/perl5/5.36.1/x86_64-linux/Encode.pm
-| *** Module name IN: /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/libio-socket-ssl-perl/2.083-r0/recipe-sysroot-native/usr/bin/perl-native/../../../usr/lib/perl5/5.36.1/x86_64-linux/Fcntl.pm
-| *** p1: /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/libio-socket-ssl-perl/2.083-r0/recipe-sysroot-native/usr/bin/perl-native/../../../usr/lib/  p3: perl5/5.36.1/  p5: x86_64-linux/ p7: Fcntl.pm
-| *** Module name OUT: /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/libio-socket-ssl-perl/2.083-r0/recipe-sysroot-native/usr/lib/perl5/5.36.1/x86_64-linux/Fcntl.pm
-| *** Module name IN: /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/libio-socket-ssl-perl/2.083-r0/recipe-sysroot-native/usr/bin/perl-native/../../../usr/lib/perl5/5.36.1/x86_64-linux/Storable.pm
-| *** p1: /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/libio-socket-ssl-perl/2.083-r0/recipe-sysroot-native/usr/bin/perl-native/../../../usr/lib/  p3: perl5/5.36.1/  p5: x86_64-linux/ p7: Storable.pm
-| *** Module name OUT: /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/libio-socket-ssl-perl/2.083-r0/recipe-sysroot-native/usr/lib/perl5/5.36.1/x86_64-linux/Storable.pm
-| *** Module name IN: /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/libio-socket-ssl-perl/2.083-r0/recipe-sysroot-native/usr/bin/perl-native/../../../usr/lib/perl5/5.36.1/x86_64-linux/Time/HiRes.pm
-| *** p1: /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/libio-socket-ssl-perl/2.083-r0/recipe-sysroot-native/usr/bin/perl-native/../../../usr/lib/  p3: perl5/5.36.1/  p5: x86_64-linux/ p7: Time/HiRes.pm
-| *** Module name OUT: /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/libio-socket-ssl-perl/2.083-r0/recipe-sysroot-native/usr/lib/perl5/5.36.1/x86_64-linux/Time/HiRes.pm
-| Manifying 4 pod documents
-| *** Module name IN: /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/libio-socket-ssl-perl/2.083-r0/recipe-sysroot-native/usr/bin/perl-native/../../../usr/lib/perl5/5.36.1/x86_64-linux/Cwd.pm
-| *** p1: /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/libio-socket-ssl-perl/2.083-r0/recipe-sysroot-native/usr/bin/perl-native/../../../usr/lib/  p3: perl5/5.36.1/  p5: x86_64-linux/ p7: Cwd.pm
-| *** Module name OUT: /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/libio-socket-ssl-perl/2.083-r0/recipe-sysroot-native/usr/lib/perl5/5.36.1/x86_64-linux/Cwd.pm
-| *** Module name IN: /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/libio-socket-ssl-perl/2.083-r0/recipe-sysroot-native/usr/bin/perl-native/../../../usr/lib/perl5/5.36.1/x86_64-linux/Time/HiRes.pm
-| *** p1: /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/libio-socket-ssl-perl/2.083-r0/recipe-sysroot-native/usr/bin/perl-native/../../../usr/lib/  p3: perl5/5.36.1/  p5: x86_64-linux/ p7: Time/HiRes.pm
-| *** Module name OUT: /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/libio-socket-ssl-perl/2.083-r0/recipe-sysroot-native/usr/lib/perl5/5.36.1/x86_64-linux/Time/HiRes.pm
-| *** Module name IN: /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/libio-socket-ssl-perl/2.083-r0/recipe-sysroot-native/usr/bin/perl-native/../../../usr/lib/perl5/5.36.1/x86_64-linux/List/Util.pm
-| *** p1: /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/libio-socket-ssl-perl/2.083-r0/recipe-sysroot-native/usr/bin/perl-native/../../../usr/lib/  p3: perl5/5.36.1/  p5: x86_64-linux/ p7: List/Util.pm
-| *** Module name OUT: /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/libio-socket-ssl-perl/2.083-r0/recipe-sysroot-native/usr/lib/perl5/5.36.1/x86_64-linux/List/Util.pm
-| Installing /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/libio-socket-ssl-perl/2.083-r0/image/usr/lib/perl5/vendor_perl/5.36.1/IO/Socket/SSL.pm
-| Installing /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/libio-socket-ssl-perl/2.083-r0/image/usr/lib/perl5/vendor_perl/5.36.1/IO/Socket/SSL.pod
-| Installing /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/libio-socket-ssl-perl/2.083-r0/image/usr/lib/perl5/vendor_perl/5.36.1/IO/Socket/SSL/PublicSuffix.pm
-| Installing /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/libio-socket-ssl-perl/2.083-r0/image/usr/lib/perl5/vendor_perl/5.36.1/IO/Socket/SSL/Intercept.pm
-| Installing /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/libio-socket-ssl-perl/2.083-r0/image/usr/lib/perl5/vendor_perl/5.36.1/IO/Socket/SSL/Utils.pm
-| Installing /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/libio-socket-ssl-perl/2.083-r0/image/usr/share/man/man3/IO::Socket::SSL.3
-| Installing /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/libio-socket-ssl-perl/2.083-r0/image/usr/share/man/man3/IO::Socket::SSL::PublicSuffix.3
-| Installing /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/libio-socket-ssl-perl/2.083-r0/image/usr/share/man/man3/IO::Socket::SSL::Intercept.3
-| Installing /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/libio-socket-ssl-perl/2.083-r0/image/usr/share/man/man3/IO::Socket::SSL::Utils.3
-| cp: cannot stat '/scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/libio-socket-ssl-perl/2.083-r0/IO-Socket-SSL-2.083/certs': No such file or directory
-| WARNING: exit code 1 from a shell command.
-NOTE: recipe libio-socket-ssl-perl-2.083-r0: task do_install: Failed
-NOTE: Tasks Summary: Attempted 1287 tasks of which 1274 didn't need to be rerun and 1 failed.
-NOTE: Writing buildhistory
-NOTE: Writing buildhistory took: 3 seconds
-NOTE: Writing buildhistory
-NOTE: Writing buildhistory took: 4 seconds
-NOTE: Writing buildhistory
-NOTE: Writing buildhistory took: 4 seconds
-
-Summary: 1 task failed:
-  /home/auh/Projects/meta-openembedded/meta-perl/recipes-perl/libio/libio-socket-ssl-perl_2.083.bb:do_install
-Summary: There was 1 ERROR message, returning a non-zero exit code.
-ERROR: libio-socket-ssl-perl-2.083-r0 do_install: ExecutionError('/scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/libio-socket-ssl-perl/2.083-r0/temp/run.do_install.4115382', 1, None, None)
-ERROR: Logfile of failure stored in: /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/libio-socket-ssl-perl/2.083-r0/temp/log.do_install.4115382
-ERROR: Task (/home/auh/Projects/meta-openembedded/meta-perl/recipes-perl/libio/libio-socket-ssl-perl_2.083.bb:do_install) failed with exit code '1'
-
---===============4384065667137642203==--
+--===============0972288759330885269==--
 
