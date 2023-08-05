@@ -2,41 +2,41 @@ Return-Path: <auh@moto-timo.dev>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9B65FC04E69
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A8960C41513
 	for <webhook@archiver.kernel.org>; Sat,  5 Aug 2023 07:39:09 +0000 (UTC)
-Received: from relay2-d.mail.gandi.net (relay2-d.mail.gandi.net [217.70.183.194])
- by mx.groups.io with SMTP id smtpd.web11.2160.1691221139188923146
+Received: from relay6-d.mail.gandi.net (relay6-d.mail.gandi.net [217.70.183.198])
+ by mx.groups.io with SMTP id smtpd.web10.2158.1691221143595941075
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 05 Aug 2023 00:38:59 -0700
+ Sat, 05 Aug 2023 00:39:04 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@moto-timo.dev header.s=gm1 header.b=onGvUr5+;
- spf=pass (domain: moto-timo.dev, ip: 217.70.183.194, mailfrom: auh@moto-timo.dev)
-Received: by mail.gandi.net (Postfix) with ESMTPSA id 8A82E40004
-	for <openembedded-devel@lists.openembedded.org>; Sat,  5 Aug 2023 07:38:57 +0000 (UTC)
+ dkim=pass header.i=@moto-timo.dev header.s=gm1 header.b=aSZIG+5y;
+ spf=pass (domain: moto-timo.dev, ip: 217.70.183.198, mailfrom: auh@moto-timo.dev)
+Received: by mail.gandi.net (Postfix) with ESMTPSA id EED2CC0004
+	for <openembedded-devel@lists.openembedded.org>; Sat,  5 Aug 2023 07:39:01 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=moto-timo.dev;
-	s=gm1; t=1691221137;
+	s=gm1; t=1691221142;
 	h=from:from:reply-to:subject:subject:to:to:cc:mime-version:mime-version:
-	 content-type:content-type; bh=XIs6FifJo3BsSab4451DeMS6VIZffxNY6z8phcOZ3t0=;
-	b=onGvUr5+UOxFKOfXY9WrDDMO2cUCra4bxzB6bEUrbgGHf5/YqKOr81j6XwG4qHyzrPJP5G
-	SginvukJNcJnDhzBu4AtLkjx8GB3JFZ3KR+szIeg6ns+hddSmjnB1eF/8MTk4ytKfm4CA6
-	2vOnOKI95Eb86SDPYtAJCMEEN0rbqHeV8EJSc08e+yOzMQ5zkBkheuWmHwyyx06tEh9dQo
-	FBqi59w9udO4nFo5j6h4fz0D47fXBinDtDrJbq5MQuzHKgbofId8VEJ7Gl90NPzJUOz8iv
-	aXFcsaNgIUD1cqFizcuISmj9HGehMECSLBYjGvkqAf8ECbLg/jnRradWqaopvQ==
-Content-Type: multipart/mixed; boundary="===============6005427799178968804=="
+	 content-type:content-type; bh=7AL+/zkxfx54Cl7vJ5u+Fj/VRCMU7F+0ZKlBcQB+ysU=;
+	b=aSZIG+5y6T403lCWrP8t0iQwl5nGo2xuXZCCA/PSL6wYYx24DDosDJHUszS6qh5EvHqzbW
+	K26t80jgAIDmBOeKofiqSREMiI1tI4FmRnVTOFJx601/NOzfg4QS0aZCHkD39rIkT87CME
+	d6toDWWvKRQloDLTGxQ9+tRihYy7JngNe3UliUwUZBaVSJLs7p0yNDfJdvv2vm0iuh5bej
+	oXqQsts9Zf/jUMuxFJ+rWSAi0+O5A8KhJBJUESgIm2DKWEmcX+BQ9IBYAyStlSUrYIf/ZO
+	6B4WWjDODoBa2W9+oLth5PrNgvaOeWMOhVvje503onfCmsXHTVGhTt8Ut1zwhw==
+Content-Type: multipart/mixed; boundary="===============1636132896461885329=="
 MIME-Version: 1.0
 From: auh@moto-timo.dev
 To: openembedded-devel@lists.openembedded.org
-Subject: [AUH] python3-kivy: upgrading to 2.2.1 SUCCEEDED
+Subject: [AUH] python3-msm: upgrading to 0.9.0 FAILED
 X-GND-Sasl: auh@moto-timo.dev
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sat, 05 Aug 2023 07:39:09 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104250
-Message-Id: <20230805073909.9B65FC04E69@smtp.lore.kernel.org>
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104252
+Message-Id: <20230805073909.A8960C41513@smtp.lore.kernel.org>
 Date: Sat,  5 Aug 2023 07:39:09 +0000 (UTC)
 
---===============6005427799178968804==
+--===============1636132896461885329==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -44,10 +44,16 @@ Content-Transfer-Encoding: 7bit
 Hello,
 
 this email is a notification from the Auto Upgrade Helper
-that the automatic attempt to upgrade the recipe *python3-kivy* to *2.2.1* has Succeeded.
+that the automatic attempt to upgrade the recipe *python3-msm* to *0.9.0* has Failed(do_compile).
+
+Detailed error information:
+
+do_compile failed
+
+
 
 Next steps:
-    - apply the patch: git am 0001-python3-kivy-upgrade-2.1.0.-2.2.1.patch
+    - apply the patch: git am 0001-python3-msm-upgrade-0.8.8-0.9.0.patch
     - check the changes to upstream patches and summarize them in the commit message,
     - compile an image that contains the package
     - perform some basic sanity tests
@@ -65,238 +71,211 @@ Regards,
 The Upgrade Helper
 
 -- >8 --
-From a881ee5dd2847b5b7ee9bff363241139fe0535da Mon Sep 17 00:00:00 2001
+From 3829abd541ecf4bad84cb7ad2d1a5e5cbfc01f1a Mon Sep 17 00:00:00 2001
 From: Upgrade Helper <auh@moto-timo.dev>
-Date: Fri, 4 Aug 2023 23:02:43 -0500
-Subject: [PATCH] python3-kivy: upgrade 2.1.0. -> 2.2.1
+Date: Fri, 4 Aug 2023 23:11:36 -0500
+Subject: [PATCH] python3-msm: upgrade 0.8.8 -> 0.9.0
 
 ---
- .../0001-add-support-for-glesv2.patch         | 19 ++++++++---
- ...3-kivy_2.1.0..bb => python3-kivy_2.2.1.bb} | 32 ++++++++++++++-----
- 2 files changed, 39 insertions(+), 12 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-kivy_2.1.0..bb => python3-kivy_2.2.1.bb} (65%)
+ .../python/{python3-msm_0.8.8.bb => python3-msm_0.9.0.bb}      | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-msm_0.8.8.bb => python3-msm_0.9.0.bb} (80%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-kivy/0001-add-support-for-glesv2.patch b/meta-python/recipes-devtools/python/python3-kivy/0001-add-support-for-glesv2.patch
-index 0abc6c5c7..ccd89050c 100644
---- a/meta-python/recipes-devtools/python/python3-kivy/0001-add-support-for-glesv2.patch
-+++ b/meta-python/recipes-devtools/python/python3-kivy/0001-add-support-for-glesv2.patch
-@@ -1,8 +1,19 @@
-+From cef98bdb9e304903623b3ee24ea5dad4449bc33b Mon Sep 17 00:00:00 2001
-+From: William Huang <whuang8933@gmail.com>
-+Date: Thu, 2 Sep 2021 07:25:07 -0400
-+Subject: [PATCH] recipes-devtools: python: add support for Kivy
-+
- Upstream-Status: Pending
+diff --git a/meta-python/recipes-devtools/python/python3-msm_0.8.8.bb b/meta-python/recipes-devtools/python/python3-msm_0.9.0.bb
+similarity index 80%
+rename from meta-python/recipes-devtools/python/python3-msm_0.8.8.bb
+rename to meta-python/recipes-devtools/python/python3-msm_0.9.0.bb
+index 966ff86de..dbda2e1ed 100644
+--- a/meta-python/recipes-devtools/python/python3-msm_0.8.8.bb
++++ b/meta-python/recipes-devtools/python/python3-msm_0.9.0.bb
+@@ -3,8 +3,7 @@ HOMEPAGE = "https://github.com/MycroftAI/mycroft-skills-manager"
+ LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=e23fadd6ceef8c618fc1c65191d846fa"
  
-+---
-+ setup.py | 16 +++++++++++++---
-+ 1 file changed, 13 insertions(+), 3 deletions(-)
-+
-+diff --git a/setup.py b/setup.py
-+index 35e34afdd..0ba3aca72 100644
- --- a/setup.py
- +++ b/setup.py
--@@ -695,7 +695,18 @@ def determine_gl_flags():
-+@@ -730,7 +730,18 @@ def determine_gl_flags():
-          c_options['use_x11'] = True
-          c_options['use_egl'] = True
-      else:
-@@ -22,7 +33,7 @@ Upstream-Status: Pending
-      return flags, base_flags
-  
-  
--@@ -723,14 +734,13 @@ def determine_sdl2():
-+@@ -774,14 +785,13 @@ def determine_sdl2():
-              sdl_inc = join(include, 'SDL2')
-              if isdir(sdl_inc):
-                  sdl2_paths.append(sdl_inc)
-@@ -36,5 +47,5 @@ Upstream-Status: Pending
- -        ['/usr/local/lib/'])
- +        [''])
-  
--     if sdl2_flags:
--         flags = merge(flags, sdl2_flags)
-+     if kivy_sdl2_path:
-+         # If we have a custom path, we need to add the rpath to the linker
-diff --git a/meta-python/recipes-devtools/python/python3-kivy_2.1.0..bb b/meta-python/recipes-devtools/python/python3-kivy_2.2.1.bb
-similarity index 65%
-rename from meta-python/recipes-devtools/python/python3-kivy_2.1.0..bb
-rename to meta-python/recipes-devtools/python/python3-kivy_2.2.1.bb
-index ca1fc5f96..de546cef3 100644
---- a/meta-python/recipes-devtools/python/python3-kivy_2.1.0..bb
-+++ b/meta-python/recipes-devtools/python/python3-kivy_2.2.1.bb
-@@ -1,24 +1,40 @@
-+# FIXME: the LIC_FILES_CHKSUM values have been updated by 'devtool upgrade'.
-+# The following is the difference between the old and the new license text.
-+# Please update the LICENSE value if needed, and summarize the changes in
-+# the commit message via 'License-Update:' tag.
-+# (example: 'License-Update: copyright years updated.')
-+#
-+# The changes:
-+#
-+# --- LICENSE
-+# +++ LICENSE
-+# @@ -1,4 +1,4 @@
-+# -Copyright (c) 2010-2022 Kivy Team and other contributors
-+# +Copyright (c) 2010-2023 Kivy Team and other contributors
-+#  
-+#  Permission is hereby granted, free of charge, to any person obtaining a copy
-+#  of this software and associated documentation files (the "Software"), to deal
-+# 
-+#
-+
- SUMMARY = "Open source Python library for rapid development of applications \
-     that make use of innovative user interfaces, such as multi-touch apps."
- HOMEPAGE = "https://kivy.org/"
- LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=22e7b4dd8140eec57fd7edfd9fa23dfc"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=ed5cd0f2cfda42852c332e3b88c85fea"
+-SRC_URI[md5sum] = "cf1fc0d1d86af68003cae53c71ec6288"
+-SRC_URI[sha256sum] = "a502aee54917cd394217b31c977a1ba3d9541a0120e0a045c49fd77b328e4a29"
++SRC_URI[sha256sum] = "3fbed593800aa669f0af2f01edfc3b54de46e995e0bdf03c5ea3693bdeab8735"
  
- inherit setuptools3 pkgconfig features_check
- PIP_INSTALL_PACKAGE = "Kivy"
- 
--SRC_URI = "\
--    git://github.com/kivy/kivy.git;protocol=https;branch=master \
--"
-+SRC_URI = "git://github.com/kivy/kivy.git;protocol=https;branch=stable \
-+           file://0001-add-support-for-glesv2.patch \
-+           "
- 
- # Kivy's setup files only look for GLES libraries for Android, iOS, RPi,
- # and mali-based OS's. We need to patch the setup file to tell Kivy setup
- # that our machine has GLES libaries installed as well
- # Also, if using SDL2 as backend, SDL2 needs to be configured wth gles
--SRC_URI += " \
--    file://0001-add-support-for-glesv2.patch \
--"
--SRCREV = "960b95dc666753f59eff1b449124490fbec10184"
-+SRCREV = "344768bfefd2e8f5302cc9dfb8ca41991ce6f7e7"
- 
- S = "${WORKDIR}/git"
+ inherit pypi setuptools3
  
 -- 
 2.25.1
 
 
---===============6005427799178968804==
+--===============1636132896461885329==
 Content-Type: text/x-diff; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
 Content-Disposition: attachment;
- filename="0001-python3-kivy-upgrade-2.1.0.-2.2.1.patch"
+ filename="0001-python3-msm-upgrade-0.8.8-0.9.0.patch"
 
-From a881ee5dd2847b5b7ee9bff363241139fe0535da Mon Sep 17 00:00:00 2001
+From 3829abd541ecf4bad84cb7ad2d1a5e5cbfc01f1a Mon Sep 17 00:00:00 2001
 From: Upgrade Helper <auh@moto-timo.dev>
-Date: Fri, 4 Aug 2023 23:02:43 -0500
-Subject: [PATCH] python3-kivy: upgrade 2.1.0. -> 2.2.1
+Date: Fri, 4 Aug 2023 23:11:36 -0500
+Subject: [PATCH] python3-msm: upgrade 0.8.8 -> 0.9.0
 
 ---
- .../0001-add-support-for-glesv2.patch         | 19 ++++++++---
- ...3-kivy_2.1.0..bb => python3-kivy_2.2.1.bb} | 32 ++++++++++++++-----
- 2 files changed, 39 insertions(+), 12 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-kivy_2.1.0..bb => python3-kivy_2.2.1.bb} (65%)
+ .../python/{python3-msm_0.8.8.bb => python3-msm_0.9.0.bb}      | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-msm_0.8.8.bb => python3-msm_0.9.0.bb} (80%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-kivy/0001-add-support-for-glesv2.patch b/meta-python/recipes-devtools/python/python3-kivy/0001-add-support-for-glesv2.patch
-index 0abc6c5c7..ccd89050c 100644
---- a/meta-python/recipes-devtools/python/python3-kivy/0001-add-support-for-glesv2.patch
-+++ b/meta-python/recipes-devtools/python/python3-kivy/0001-add-support-for-glesv2.patch
-@@ -1,8 +1,19 @@
-+From cef98bdb9e304903623b3ee24ea5dad4449bc33b Mon Sep 17 00:00:00 2001
-+From: William Huang <whuang8933@gmail.com>
-+Date: Thu, 2 Sep 2021 07:25:07 -0400
-+Subject: [PATCH] recipes-devtools: python: add support for Kivy
-+
- Upstream-Status: Pending
+diff --git a/meta-python/recipes-devtools/python/python3-msm_0.8.8.bb b/meta-python/recipes-devtools/python/python3-msm_0.9.0.bb
+similarity index 80%
+rename from meta-python/recipes-devtools/python/python3-msm_0.8.8.bb
+rename to meta-python/recipes-devtools/python/python3-msm_0.9.0.bb
+index 966ff86de..dbda2e1ed 100644
+--- a/meta-python/recipes-devtools/python/python3-msm_0.8.8.bb
++++ b/meta-python/recipes-devtools/python/python3-msm_0.9.0.bb
+@@ -3,8 +3,7 @@ HOMEPAGE = "https://github.com/MycroftAI/mycroft-skills-manager"
+ LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=e23fadd6ceef8c618fc1c65191d846fa"
  
-+---
-+ setup.py | 16 +++++++++++++---
-+ 1 file changed, 13 insertions(+), 3 deletions(-)
-+
-+diff --git a/setup.py b/setup.py
-+index 35e34afdd..0ba3aca72 100644
- --- a/setup.py
- +++ b/setup.py
--@@ -695,7 +695,18 @@ def determine_gl_flags():
-+@@ -730,7 +730,18 @@ def determine_gl_flags():
-          c_options['use_x11'] = True
-          c_options['use_egl'] = True
-      else:
-@@ -22,7 +33,7 @@ Upstream-Status: Pending
-      return flags, base_flags
-  
-  
--@@ -723,14 +734,13 @@ def determine_sdl2():
-+@@ -774,14 +785,13 @@ def determine_sdl2():
-              sdl_inc = join(include, 'SDL2')
-              if isdir(sdl_inc):
-                  sdl2_paths.append(sdl_inc)
-@@ -36,5 +47,5 @@ Upstream-Status: Pending
- -        ['/usr/local/lib/'])
- +        [''])
-  
--     if sdl2_flags:
--         flags = merge(flags, sdl2_flags)
-+     if kivy_sdl2_path:
-+         # If we have a custom path, we need to add the rpath to the linker
-diff --git a/meta-python/recipes-devtools/python/python3-kivy_2.1.0..bb b/meta-python/recipes-devtools/python/python3-kivy_2.2.1.bb
-similarity index 65%
-rename from meta-python/recipes-devtools/python/python3-kivy_2.1.0..bb
-rename to meta-python/recipes-devtools/python/python3-kivy_2.2.1.bb
-index ca1fc5f96..de546cef3 100644
---- a/meta-python/recipes-devtools/python/python3-kivy_2.1.0..bb
-+++ b/meta-python/recipes-devtools/python/python3-kivy_2.2.1.bb
-@@ -1,24 +1,40 @@
-+# FIXME: the LIC_FILES_CHKSUM values have been updated by 'devtool upgrade'.
-+# The following is the difference between the old and the new license text.
-+# Please update the LICENSE value if needed, and summarize the changes in
-+# the commit message via 'License-Update:' tag.
-+# (example: 'License-Update: copyright years updated.')
-+#
-+# The changes:
-+#
-+# --- LICENSE
-+# +++ LICENSE
-+# @@ -1,4 +1,4 @@
-+# -Copyright (c) 2010-2022 Kivy Team and other contributors
-+# +Copyright (c) 2010-2023 Kivy Team and other contributors
-+#  
-+#  Permission is hereby granted, free of charge, to any person obtaining a copy
-+#  of this software and associated documentation files (the "Software"), to deal
-+# 
-+#
-+
- SUMMARY = "Open source Python library for rapid development of applications \
-     that make use of innovative user interfaces, such as multi-touch apps."
- HOMEPAGE = "https://kivy.org/"
- LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=22e7b4dd8140eec57fd7edfd9fa23dfc"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=ed5cd0f2cfda42852c332e3b88c85fea"
+-SRC_URI[md5sum] = "cf1fc0d1d86af68003cae53c71ec6288"
+-SRC_URI[sha256sum] = "a502aee54917cd394217b31c977a1ba3d9541a0120e0a045c49fd77b328e4a29"
++SRC_URI[sha256sum] = "3fbed593800aa669f0af2f01edfc3b54de46e995e0bdf03c5ea3693bdeab8735"
  
- inherit setuptools3 pkgconfig features_check
- PIP_INSTALL_PACKAGE = "Kivy"
- 
--SRC_URI = "\
--    git://github.com/kivy/kivy.git;protocol=https;branch=master \
--"
-+SRC_URI = "git://github.com/kivy/kivy.git;protocol=https;branch=stable \
-+           file://0001-add-support-for-glesv2.patch \
-+           "
- 
- # Kivy's setup files only look for GLES libraries for Android, iOS, RPi,
- # and mali-based OS's. We need to patch the setup file to tell Kivy setup
- # that our machine has GLES libaries installed as well
- # Also, if using SDL2 as backend, SDL2 needs to be configured wth gles
--SRC_URI += " \
--    file://0001-add-support-for-glesv2.patch \
--"
--SRCREV = "960b95dc666753f59eff1b449124490fbec10184"
-+SRCREV = "344768bfefd2e8f5302cc9dfb8ca41991ce6f7e7"
- 
- S = "${WORKDIR}/git"
+ inherit pypi setuptools3
  
 -- 
 2.25.1
 
 
---===============6005427799178968804==--
+--===============1636132896461885329==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment; filename="bitbake-output-qemux86-64.txt"
+
+Loading cache...done.
+Loaded 12687 entries from dependency cache.
+Parsing recipes...done.
+Parsing of 7341 .bb files complete (7338 cached, 3 parsed). 12618 targets, 325 skipped, 0 masked, 0 errors.
+Removing 1 recipes from the core2-64 sysroot...done.
+Removing 1 recipes from the qemux86_64 sysroot...done.
+NOTE: Resolving any missing task queue dependencies
+NOTE: Resolving any missing task queue dependencies
+NOTE: Resolving any missing task queue dependencies
+NOTE: Resolving any missing task queue dependencies
+NOTE: Resolving any missing task queue dependencies
+NOTE: Resolving any missing task queue dependencies
+
+Build Configuration (mc:default):
+BB_VERSION           = "2.4.0"
+BUILD_SYS            = "x86_64-linux"
+NATIVELSBSTRING      = "universal"
+TARGET_SYS           = "x86_64-poky-linux"
+MACHINE              = "qemux86-64"
+DISTRO               = "poky"
+DISTRO_VERSION       = "4.2"
+TUNE_FEATURES        = "m64 core2"
+TARGET_FPU           = ""
+meta                 
+meta-poky            
+meta-yocto-bsp       = "master:058a44165ce375f405063e73a9fcd1b2757ef8da"
+meta-oe              
+meta-python          
+meta-perl            = "heads/origin/master-next:b6650ff98c003d7fe7d1631bc1ebb1d4366b408c"
+workspace            = "<unknown>:<unknown>"
+
+
+Build Configuration (mc:qemux86-musl):
+BB_VERSION           = "2.4.0"
+BUILD_SYS            = "x86_64-linux"
+NATIVELSBSTRING      = "universal"
+TARGET_SYS           = "x86_64-poky-linux-musl"
+MACHINE              = "qemux86-64"
+DISTRO               = "poky"
+DISTRO_VERSION       = "4.2"
+TUNE_FEATURES        = "m64 core2"
+TARGET_FPU           = ""
+meta                 
+meta-poky            
+meta-yocto-bsp       = "master:058a44165ce375f405063e73a9fcd1b2757ef8da"
+meta-oe              
+meta-python          
+meta-perl            = "heads/origin/master-next:b6650ff98c003d7fe7d1631bc1ebb1d4366b408c"
+workspace            = "<unknown>:<unknown>"
+
+
+Build Configuration (mc:qemuarm64):
+BB_VERSION           = "2.4.0"
+BUILD_SYS            = "x86_64-linux"
+NATIVELSBSTRING      = "universal"
+TARGET_SYS           = "x86_64-poky-linux"
+MACHINE              = "qemux86-64"
+DISTRO               = "poky"
+DISTRO_VERSION       = "4.2"
+TUNE_FEATURES        = "m64 core2"
+TARGET_FPU           = ""
+meta                 
+meta-poky            
+meta-yocto-bsp       = "master:058a44165ce375f405063e73a9fcd1b2757ef8da"
+meta-oe              
+meta-python          
+meta-perl            = "heads/origin/master-next:b6650ff98c003d7fe7d1631bc1ebb1d4366b408c"
+workspace            = "<unknown>:<unknown>"
+
+Initialising tasks...done.
+Checking sstate mirror object availability...done.
+Sstate summary: Wanted 460 Local 246 Mirrors 204 Missed 10 Current 341 (97% match, 98% complete)
+NOTE: Executing Tasks
+NOTE: Running task 1534 of 2291 (/home/auh/Projects/meta-openembedded/meta-python/recipes-devtools/python/python3-msm_0.9.0.bb:do_recipe_qa)
+NOTE: recipe python3-msm-0.9.0-r0: task do_recipe_qa: Started
+NOTE: recipe python3-msm-0.9.0-r0: task do_recipe_qa: Succeeded
+NOTE: Running task 2274 of 2291 (/home/auh/Projects/meta-openembedded/meta-python/recipes-devtools/python/python3-msm_0.9.0.bb:do_fetch)
+NOTE: recipe python3-msm-0.9.0-r0: task do_fetch: Started
+NOTE: recipe python3-msm-0.9.0-r0: task do_fetch: Succeeded
+NOTE: Running task 2275 of 2291 (/home/auh/Projects/meta-openembedded/meta-python/recipes-devtools/python/python3-msm_0.9.0.bb:do_unpack)
+NOTE: Running task 2276 of 2291 (/home/auh/Projects/meta-openembedded/meta-python/recipes-devtools/python/python3-msm_0.9.0.bb:do_prepare_recipe_sysroot)
+NOTE: recipe python3-msm-0.9.0-r0: task do_unpack: Started
+NOTE: recipe python3-msm-0.9.0-r0: task do_prepare_recipe_sysroot: Started
+NOTE: recipe python3-msm-0.9.0-r0: task do_unpack: Succeeded
+NOTE: Running task 2277 of 2291 (/home/auh/Projects/meta-openembedded/meta-python/recipes-devtools/python/python3-msm_0.9.0.bb:do_patch)
+NOTE: Running task 2278 of 2291 (/home/auh/Projects/meta-openembedded/meta-python/recipes-devtools/python/python3-msm_0.9.0.bb:do_collect_spdx_deps)
+NOTE: recipe python3-msm-0.9.0-r0: task do_patch: Started
+NOTE: recipe python3-msm-0.9.0-r0: task do_collect_spdx_deps: Started
+NOTE: recipe python3-msm-0.9.0-r0: task do_prepare_recipe_sysroot: Succeeded
+NOTE: recipe python3-msm-0.9.0-r0: task do_collect_spdx_deps: Succeeded
+NOTE: recipe python3-msm-0.9.0-r0: task do_patch: Succeeded
+NOTE: Running task 2279 of 2291 (/home/auh/Projects/meta-openembedded/meta-python/recipes-devtools/python/python3-msm_0.9.0.bb:do_deploy_source_date_epoch)
+NOTE: Running task 2280 of 2291 (/home/auh/Projects/meta-openembedded/meta-python/recipes-devtools/python/python3-msm_0.9.0.bb:do_populate_lic)
+NOTE: recipe python3-msm-0.9.0-r0: task do_deploy_source_date_epoch: Started
+NOTE: recipe python3-msm-0.9.0-r0: task do_populate_lic: Started
+NOTE: recipe python3-msm-0.9.0-r0: task do_populate_lic: Succeeded
+NOTE: recipe python3-msm-0.9.0-r0: task do_deploy_source_date_epoch: Succeeded
+NOTE: Running task 2281 of 2291 (/home/auh/Projects/meta-openembedded/meta-python/recipes-devtools/python/python3-msm_0.9.0.bb:do_configure)
+NOTE: recipe python3-msm-0.9.0-r0: task do_configure: Started
+NOTE: recipe python3-msm-0.9.0-r0: task do_configure: Succeeded
+NOTE: Running task 2282 of 2291 (/home/auh/Projects/meta-openembedded/meta-python/recipes-devtools/python/python3-msm_0.9.0.bb:do_compile)
+NOTE: recipe python3-msm-0.9.0-r0: task do_compile: Started
+Log data follows:
+| DEBUG: Executing shell function do_compile
+| Traceback (most recent call last):
+|   File "/scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/python3-msm/0.9.0-r0/msm-0.9.0/setup.py", line 44, in <module>
+|     install_requires=required('requirements/requirements.txt'),
+|                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+|   File "/scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/python3-msm/0.9.0-r0/msm-0.9.0/setup.py", line 34, in required
+|     with open(os.path.join(BASEDIR, requirements_file), 'r') as file_handler:
+|          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+| FileNotFoundError: [Errno 2] No such file or directory: '/scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/python3-msm/0.9.0-r0/msm-0.9.0/requirements/requirements.txt'
+| ERROR: 'python3 setup.py bdist_wheel ' execution failed.
+| WARNING: exit code 1 from a shell command.
+NOTE: recipe python3-msm-0.9.0-r0: task do_compile: Failed
+NOTE: Tasks Summary: Attempted 2282 tasks of which 2272 didn't need to be rerun and 1 failed.
+NOTE: Writing buildhistory
+NOTE: Writing buildhistory took: 3 seconds
+NOTE: Writing buildhistory
+NOTE: Writing buildhistory took: 3 seconds
+NOTE: Writing buildhistory
+NOTE: Writing buildhistory took: 3 seconds
+
+Summary: 1 task failed:
+  /home/auh/Projects/meta-openembedded/meta-python/recipes-devtools/python/python3-msm_0.9.0.bb:do_compile
+Summary: There were 2 ERROR messages, returning a non-zero exit code.
+ERROR: python3-msm-0.9.0-r0 do_compile: 'python3 setup.py bdist_wheel ' execution failed.
+ERROR: python3-msm-0.9.0-r0 do_compile: ExecutionError('/scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/python3-msm/0.9.0-r0/temp/run.do_compile.3434419', 1, None, None)
+ERROR: Logfile of failure stored in: /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/python3-msm/0.9.0-r0/temp/log.do_compile.3434419
+ERROR: Task (/home/auh/Projects/meta-openembedded/meta-python/recipes-devtools/python/python3-msm_0.9.0.bb:do_compile) failed with exit code '1'
+
+--===============1636132896461885329==--
 
