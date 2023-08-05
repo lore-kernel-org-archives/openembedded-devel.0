@@ -1,526 +1,117 @@
-Return-Path: <auh@moto-timo.dev>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C9B7DEB64DD
-	for <webhook@archiver.kernel.org>; Sat,  5 Aug 2023 08:07:19 +0000 (UTC)
-Received: from relay5-d.mail.gandi.net (relay5-d.mail.gandi.net [217.70.183.197])
- by mx.groups.io with SMTP id smtpd.web10.2398.1691222832563366963
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 68D9DC001DB
+	for <webhook@archiver.kernel.org>; Sat,  5 Aug 2023 20:40:23 +0000 (UTC)
+Received: from mail-pf1-f181.google.com (mail-pf1-f181.google.com [209.85.210.181])
+ by mx.groups.io with SMTP id smtpd.web10.13560.1691268013193797108
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 05 Aug 2023 01:07:13 -0700
+ Sat, 05 Aug 2023 13:40:13 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@moto-timo.dev header.s=gm1 header.b=Z0iev566;
- spf=pass (domain: moto-timo.dev, ip: 217.70.183.197, mailfrom: auh@moto-timo.dev)
-Received: by mail.gandi.net (Postfix) with ESMTPSA id 4401E1C0005
-	for <openembedded-devel@lists.openembedded.org>; Sat,  5 Aug 2023 08:07:09 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=moto-timo.dev;
-	s=gm1; t=1691222830;
-	h=from:from:reply-to:subject:subject:to:to:cc:mime-version:mime-version:
-	 content-type:content-type; bh=KTQUTkY++trwkSbAsPHJdQ91caCVyNsBF+8oujo1MXA=;
-	b=Z0iev566x/c/J275d5cSw7Y08Ai137Bt6HDMU/hRd6u2HT0XvHggg45pc6jYu3tgYM2Lqw
-	D8hFZ13ide1flwJAX3z908/I4E5/dXeQ7g7u7qZyxUlZy9GSQ5EOwuaXeXK1QoY0BVCalk
-	MaSIQW8Ml+Kb0cpBkykbY0GamPZPvhwjkY+JnM8MwOrjI2fWC8DWZZE+HeOu6uyz8AKOaq
-	gPLEtHVa1S+XfW25eYQu6kNsgKU4gnq27oV8qwRlMsjmyaEAC7WmCPBNVjQ2IGO3NZcfRG
-	RISIm1sJRJBOB0GzAIRy13mVkax7ENWWUSeq2NU+J8dJXjj4VcdxmWQafsting==
-Content-Type: multipart/mixed; boundary="===============5932448168573405305=="
-MIME-Version: 1.0
-From: auh@moto-timo.dev
+ dkim=pass header.i=@gmail.com header.s=20221208 header.b=LbsBE3ZB;
+ spf=pass (domain: gmail.com, ip: 209.85.210.181, mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f181.google.com with SMTP id d2e1a72fcca58-6874d1c8610so2280101b3a.0
+        for <openembedded-devel@lists.openembedded.org>; Sat, 05 Aug 2023 13:40:13 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20221208; t=1691268012; x=1691872812;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=iVfAnjm+2b5mmwbmoFLIeCp/omWZMv2uWakP9e8OTqo=;
+        b=LbsBE3ZB7RETT2LLzPxKuxf6/IOBqtWWocuCv3ZIlILE2U20U96eM2QLsSq5BYFQcr
+         QxYLgJtSg5IC7aQGjTYG0/Suf+4g21+ZMEXtNn2AaPotneleJjfapeCRSZoVBL+5YsPS
+         STm+1JMbgdW6ZVcvI5Bam9ANRkjBHl5oHNboPviTmjj8F7kYBHXD8A4LO9+A6t+KZs9M
+         7o5An2AoTuPAenMmqKtDwMP9+wjop3ukGKXnJiQG9qigTDkdz1tw70QO7tRG/BYcf1oi
+         3cc+X1kBlJNIxaenthfu4PstbJLmdK73uGrGsVef6nAFgw5AoSEI88g9F0qEzSzM6+zd
+         37ew==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20221208; t=1691268012; x=1691872812;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=iVfAnjm+2b5mmwbmoFLIeCp/omWZMv2uWakP9e8OTqo=;
+        b=C7+IMIaNGTmNTOIq4KkRxzr4Dza7FvWR7aj76i6SMjNKyRSkVXISzuGD5cJShr32b6
+         TPvkbaGk/rzhuTq8q8d0AwSXZgGqJAvCdcY1XQlEzsVo3RxTPqWSy/9JtDL55vDXQVv2
+         LhE5BUfUpAjQGjeg5jkwjxxWNp2bgx5R2I+kpmgCNlMTtFEfhkzUn9/xwzCB60qOBYLW
+         XLh8dt5mmLKcs8dkmpHVAZqvElGV8AnAQvZQZUxd+NOP5FNDOtGVNXBiUxkXK7hswCL+
+         jMGa8TLetWsVUqlm3eklXKyII/f/SpYTe+IHmH2DEiexS/iDsR77KXvVY7L4OCZhZPcy
+         7TIw==
+X-Gm-Message-State: AOJu0YwUWUvTzNyY+iXJKcjetgJBtBz7nY3xEqU7RTs9dWFWOVzZmSoA
+	aQPigfN11moso98/NNmJTI+1idaY/UbKcQ==
+X-Google-Smtp-Source: AGHT+IG9l9tAhk1ZdegNaR3xG8ensZAp7mez4ClyAqKoGG9xsloFNYRkwT1fd/ITDQnBf3uxj18b7w==
+X-Received: by 2002:a17:90a:1544:b0:268:1376:d501 with SMTP id y4-20020a17090a154400b002681376d501mr4092792pja.5.1691268012185;
+        Sat, 05 Aug 2023 13:40:12 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9100:2cb0::61c9])
+        by smtp.gmail.com with ESMTPSA id e1-20020a17090a118100b002681131c36csm6494773pja.45.2023.08.05.13.40.11
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sat, 05 Aug 2023 13:40:11 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [AUH] po4a: upgrading to 0.69 FAILED
-X-GND-Sasl: auh@moto-timo.dev
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][PATCH] nodejs: Upgrade to 18.17.0
+Date: Sat,  5 Aug 2023 13:40:09 -0700
+Message-ID: <20230805204009.601514-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.41.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 05 Aug 2023 08:07:19 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104289
-Message-Id: <20230805080719.C9B7DEB64DD@smtp.lore.kernel.org>
-Date: Sat,  5 Aug 2023 08:07:19 +0000 (UTC)
+ <openembedded-devel@lists.openembedded.org>; Sat, 05 Aug 2023 20:40:23 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104291
 
---===============5932448168573405305==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
+Update to latest release of latest LTS 18 release
 
-Hello,
+License-Update: [1] [2] [3]
 
-this email is a notification from the Auto Upgrade Helper
-that the automatic attempt to upgrade the recipe *po4a* to *0.69* has Failed(do_compile).
+[1] https://github.com/nodejs/node/commit/0cfdb3affa518bf55cfd8120f0286099fabfb22a
+[2] https://github.com/nodejs/node/commit/2ea6e030038d86376dea748f702ed14018f99aba
+[3] https://github.com/nodejs/node/commit/261e1d23d11053b373ea51745f6c1187440c2b08
 
-Detailed error information:
-
-do_compile failed
-
-
-
-Next steps:
-    - apply the patch: git am 0001-po4a-upgrade-0.49-0.69.patch
-    - check the changes to upstream patches and summarize them in the commit message,
-    - compile an image that contains the package
-    - perform some basic sanity tests
-    - amend the patch and sign it off: git commit -s --reset-author --amend
-    - send it to the appropriate mailing list
-
-Alternatively, if you believe the recipe should not be upgraded at this time,
-you can fill RECIPE_NO_UPDATE_REASON in respective recipe file so that
-automatic upgrades would no longer be attempted.
-
-Please review the attached files for further information and build/update failures.
-Any problem please file a bug at https://bugzilla.yoctoproject.org/enter_bug.cgi?product=Automated%20Update%20Handler
-
-Regards,
-The Upgrade Helper
-
--- >8 --
-From 999263e8da6d6d2ae14e350c9fbdd4893258e899 Mon Sep 17 00:00:00 2001
-From: Upgrade Helper <auh@moto-timo.dev>
-Date: Sat, 5 Aug 2023 03:06:54 -0500
-Subject: [PATCH] po4a: upgrade 0.49 -> 0.69
-
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-perl/recipes-perl/po4a/{po4a_0.49.bb => po4a_0.69.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-perl/recipes-perl/po4a/{po4a_0.49.bb => po4a_0.69.bb} (94%)
+ .../oe-npm-cache                                              | 0
+ ...-cache-native_18.16.bb => nodejs-oe-cache-native_18.17.bb} | 0
+ .../nodejs/{nodejs_18.16.0.bb => nodejs_18.17.0.bb}           | 4 ++--
+ 3 files changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-devtools/nodejs/{nodejs-oe-cache-18.16 => nodejs-oe-cache-18.17}/oe-npm-cache (100%)
+ rename meta-oe/recipes-devtools/nodejs/{nodejs-oe-cache-native_18.16.bb => nodejs-oe-cache-native_18.17.bb} (100%)
+ rename meta-oe/recipes-devtools/nodejs/{nodejs_18.16.0.bb => nodejs_18.17.0.bb} (97%)
 
-diff --git a/meta-perl/recipes-perl/po4a/po4a_0.49.bb b/meta-perl/recipes-perl/po4a/po4a_0.69.bb
-similarity index 94%
-rename from meta-perl/recipes-perl/po4a/po4a_0.49.bb
-rename to meta-perl/recipes-perl/po4a/po4a_0.69.bb
-index 679ea0fb4..742ade92d 100644
---- a/meta-perl/recipes-perl/po4a/po4a_0.49.bb
-+++ b/meta-perl/recipes-perl/po4a/po4a_0.69.bb
-@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=a96fc9b4cc36d80659e694ea109f0325"
- SRC_URI = "git://github.com/mquinson/po4a.git;protocol=https;branch=master"
+diff --git a/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-18.16/oe-npm-cache b/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-18.17/oe-npm-cache
+similarity index 100%
+rename from meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-18.16/oe-npm-cache
+rename to meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-18.17/oe-npm-cache
+diff --git a/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-native_18.16.bb b/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-native_18.17.bb
+similarity index 100%
+rename from meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-native_18.16.bb
+rename to meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-native_18.17.bb
+diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_18.16.0.bb b/meta-oe/recipes-devtools/nodejs/nodejs_18.17.0.bb
+similarity index 97%
+rename from meta-oe/recipes-devtools/nodejs/nodejs_18.16.0.bb
+rename to meta-oe/recipes-devtools/nodejs/nodejs_18.17.0.bb
+index 3adb51549e..1d49218e65 100644
+--- a/meta-oe/recipes-devtools/nodejs/nodejs_18.16.0.bb
++++ b/meta-oe/recipes-devtools/nodejs/nodejs_18.17.0.bb
+@@ -1,7 +1,7 @@
+ DESCRIPTION = "nodeJS Evented I/O for V8 JavaScript"
+ HOMEPAGE = "http://nodejs.org"
+ LICENSE = "MIT & ISC & BSD-2-Clause & BSD-3-Clause & Artistic-2.0 & Apache-2.0"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=0be148d0e7298c5c94f7501affafbce5"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=bc1f9ebe76be76f163e3b675303ad9cd"
  
- # v0.49
--SRCREV = "79ed87a577a543538fe39c7b60079981f5997072"
-+SRCREV = "1925f62d0a26c4aa0621ca0cd419f7e84ecae676"
+ CVE_PRODUCT = "nodejs node.js"
  
- S = "${WORKDIR}/git"
+@@ -39,7 +39,7 @@ SRC_URI:append:toolchain-clang:x86 = " \
+ SRC_URI:append:toolchain-clang:powerpc64le = " \
+            file://0001-ppc64-Do-not-use-mminimal-toc-with-clang.patch \
+            "
+-SRC_URI[sha256sum] = "33d81a233e235a509adda4a4f2209008d04591979de6b3f0f67c1c906093f118"
++SRC_URI[sha256sum] = "80c0faadf5ea39c213ccb9aa5c2432977a0f1b5a0b766852abd0de06f2770406"
+ 
+ S = "${WORKDIR}/node-v${PV}"
  
 -- 
-2.25.1
+2.41.0
 
-
---===============5932448168573405305==
-Content-Type: text/x-diff; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: attachment; filename="0001-po4a-upgrade-0.49-0.69.patch"
-
-From 999263e8da6d6d2ae14e350c9fbdd4893258e899 Mon Sep 17 00:00:00 2001
-From: Upgrade Helper <auh@moto-timo.dev>
-Date: Sat, 5 Aug 2023 03:06:54 -0500
-Subject: [PATCH] po4a: upgrade 0.49 -> 0.69
-
----
- meta-perl/recipes-perl/po4a/{po4a_0.49.bb => po4a_0.69.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-perl/recipes-perl/po4a/{po4a_0.49.bb => po4a_0.69.bb} (94%)
-
-diff --git a/meta-perl/recipes-perl/po4a/po4a_0.49.bb b/meta-perl/recipes-perl/po4a/po4a_0.69.bb
-similarity index 94%
-rename from meta-perl/recipes-perl/po4a/po4a_0.49.bb
-rename to meta-perl/recipes-perl/po4a/po4a_0.69.bb
-index 679ea0fb4..742ade92d 100644
---- a/meta-perl/recipes-perl/po4a/po4a_0.49.bb
-+++ b/meta-perl/recipes-perl/po4a/po4a_0.69.bb
-@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=a96fc9b4cc36d80659e694ea109f0325"
- SRC_URI = "git://github.com/mquinson/po4a.git;protocol=https;branch=master"
- 
- # v0.49
--SRCREV = "79ed87a577a543538fe39c7b60079981f5997072"
-+SRCREV = "1925f62d0a26c4aa0621ca0cd419f7e84ecae676"
- 
- S = "${WORKDIR}/git"
- 
--- 
-2.25.1
-
-
---===============5932448168573405305==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: attachment; filename="bitbake-output-qemux86-64.txt"
-
-Loading cache...done.
-Loaded 12810 entries from dependency cache.
-Parsing recipes...done.
-Parsing of 7341 .bb files complete (7338 cached, 3 parsed). 12618 targets, 325 skipped, 0 masked, 0 errors.
-Removing 1 recipes from the core2-64 sysroot...done.
-Removing 1 recipes from the qemux86_64 sysroot...done.
-NOTE: Resolving any missing task queue dependencies
-NOTE: Resolving any missing task queue dependencies
-NOTE: Resolving any missing task queue dependencies
-NOTE: Resolving any missing task queue dependencies
-NOTE: Resolving any missing task queue dependencies
-NOTE: Resolving any missing task queue dependencies
-
-Build Configuration (mc:default):
-BB_VERSION           = "2.4.0"
-BUILD_SYS            = "x86_64-linux"
-NATIVELSBSTRING      = "universal"
-TARGET_SYS           = "x86_64-poky-linux"
-MACHINE              = "qemux86-64"
-DISTRO               = "poky"
-DISTRO_VERSION       = "4.2"
-TUNE_FEATURES        = "m64 core2"
-TARGET_FPU           = ""
-meta                 
-meta-poky            
-meta-yocto-bsp       = "master:058a44165ce375f405063e73a9fcd1b2757ef8da"
-meta-oe              
-meta-python          
-meta-perl            = "heads/origin/master-next:287b9e43cc8f86f41cb58f5dfbbca5987ff12b5d"
-workspace            = "<unknown>:<unknown>"
-
-
-Build Configuration (mc:qemux86-musl):
-BB_VERSION           = "2.4.0"
-BUILD_SYS            = "x86_64-linux"
-NATIVELSBSTRING      = "universal"
-TARGET_SYS           = "x86_64-poky-linux-musl"
-MACHINE              = "qemux86-64"
-DISTRO               = "poky"
-DISTRO_VERSION       = "4.2"
-TUNE_FEATURES        = "m64 core2"
-TARGET_FPU           = ""
-meta                 
-meta-poky            
-meta-yocto-bsp       = "master:058a44165ce375f405063e73a9fcd1b2757ef8da"
-meta-oe              
-meta-python          
-meta-perl            = "heads/origin/master-next:287b9e43cc8f86f41cb58f5dfbbca5987ff12b5d"
-workspace            = "<unknown>:<unknown>"
-
-
-Build Configuration (mc:qemuarm64):
-BB_VERSION           = "2.4.0"
-BUILD_SYS            = "x86_64-linux"
-NATIVELSBSTRING      = "universal"
-TARGET_SYS           = "x86_64-poky-linux"
-MACHINE              = "qemux86-64"
-DISTRO               = "poky"
-DISTRO_VERSION       = "4.2"
-TUNE_FEATURES        = "m64 core2"
-TARGET_FPU           = ""
-meta                 
-meta-poky            
-meta-yocto-bsp       = "master:058a44165ce375f405063e73a9fcd1b2757ef8da"
-meta-oe              
-meta-python          
-meta-perl            = "heads/origin/master-next:287b9e43cc8f86f41cb58f5dfbbca5987ff12b5d"
-workspace            = "<unknown>:<unknown>"
-
-Initialising tasks...done.
-Checking sstate mirror object availability...done.
-Sstate summary: Wanted 169 Local 63 Mirrors 99 Missed 7 Current 244 (95% match, 98% complete)
-NOTE: Executing Tasks
-NOTE: Running setscene task 251 of 413 (/home/auh/Projects/meta-openembedded/meta-perl/recipes-perl/po4a/po4a_0.69.bb:do_populate_lic_setscene)
-NOTE: Running setscene task 253 of 413 (/home/auh/Projects/meta-openembedded/meta-perl/recipes-perl/po4a/po4a_0.69.bb:do_deploy_source_date_epoch_setscene)
-NOTE: recipe po4a-0.69-r0: task do_populate_lic_setscene: Started
-NOTE: recipe po4a-0.69-r0: task do_deploy_source_date_epoch_setscene: Started
-NOTE: recipe po4a-0.69-r0: task do_deploy_source_date_epoch_setscene: Succeeded
-NOTE: recipe po4a-0.69-r0: task do_populate_lic_setscene: Succeeded
-NOTE: Running setscene task 413 of 413 (/home/auh/Projects/meta-openembedded/meta-perl/recipes-perl/po4a/po4a_0.69.bb:do_recipe_qa_setscene)
-NOTE: recipe po4a-0.69-r0: task do_recipe_qa_setscene: Started
-NOTE: recipe po4a-0.69-r0: task do_recipe_qa_setscene: Succeeded
-NOTE: Running task 1170 of 1195 (/home/auh/Projects/meta-openembedded/meta-perl/recipes-perl/po4a/po4a_0.69.bb:do_fetch)
-NOTE: recipe po4a-0.69-r0: task do_fetch: Started
-NOTE: recipe po4a-0.69-r0: task do_fetch: Succeeded
-NOTE: Running task 1179 of 1195 (/home/auh/Projects/meta-openembedded/meta-perl/recipes-perl/po4a/po4a_0.69.bb:do_unpack)
-NOTE: Running task 1180 of 1195 (/home/auh/Projects/meta-openembedded/meta-perl/recipes-perl/po4a/po4a_0.69.bb:do_prepare_recipe_sysroot)
-NOTE: recipe po4a-0.69-r0: task do_unpack: Started
-NOTE: recipe po4a-0.69-r0: task do_prepare_recipe_sysroot: Started
-NOTE: recipe po4a-0.69-r0: task do_prepare_recipe_sysroot: Succeeded
-NOTE: recipe po4a-0.69-r0: task do_unpack: Succeeded
-NOTE: Running task 1181 of 1195 (/home/auh/Projects/meta-openembedded/meta-perl/recipes-perl/po4a/po4a_0.69.bb:do_patch)
-NOTE: Running task 1182 of 1195 (/home/auh/Projects/meta-openembedded/meta-perl/recipes-perl/po4a/po4a_0.69.bb:do_collect_spdx_deps)
-NOTE: recipe po4a-0.69-r0: task do_patch: Started
-NOTE: recipe po4a-0.69-r0: task do_collect_spdx_deps: Started
-NOTE: recipe po4a-0.69-r0: task do_patch: Succeeded
-NOTE: Running task 1184 of 1195 (/home/auh/Projects/meta-openembedded/meta-perl/recipes-perl/po4a/po4a_0.69.bb:do_configure)
-NOTE: recipe po4a-0.69-r0: task do_collect_spdx_deps: Succeeded
-NOTE: recipe po4a-0.69-r0: task do_configure: Started
-NOTE: recipe po4a-0.69-r0: task do_configure: Succeeded
-NOTE: Running task 1186 of 1195 (/home/auh/Projects/meta-openembedded/meta-perl/recipes-perl/po4a/po4a_0.69.bb:do_compile)
-NOTE: recipe po4a-0.69-r0: task do_compile: Started
-Log data follows:
-| DEBUG: Executing shell function do_compile
-| *** Module name IN: /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/recipe-sysroot-native/usr/bin/perl-native/../../../usr/lib/perl5/5.36.1/x86_64-linux/Cwd.pm
-| *** p1: /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/recipe-sysroot-native/usr/bin/perl-native/../../../usr/lib/  p3: perl5/5.36.1/  p5: x86_64-linux/ p7: Cwd.pm
-| *** Module name OUT: /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/recipe-sysroot-native/usr/lib/perl5/5.36.1/x86_64-linux/Cwd.pm
-| *** Module name IN: /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/recipe-sysroot-native/usr/bin/perl-native/../../../usr/lib/perl5/5.36.1/x86_64-linux/Time/HiRes.pm
-| *** p1: /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/recipe-sysroot-native/usr/bin/perl-native/../../../usr/lib/  p3: perl5/5.36.1/  p5: x86_64-linux/ p7: Time/HiRes.pm
-| *** Module name OUT: /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/recipe-sysroot-native/usr/lib/perl5/5.36.1/x86_64-linux/Time/HiRes.pm
-| *** Module name IN: /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/recipe-sysroot-native/usr/bin/perl-native/../../../usr/lib/perl5/5.36.1/x86_64-linux/List/Util.pm
-| *** p1: /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/recipe-sysroot-native/usr/bin/perl-native/../../../usr/lib/  p3: perl5/5.36.1/  p5: x86_64-linux/ p7: List/Util.pm
-| *** Module name OUT: /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/recipe-sysroot-native/usr/lib/perl5/5.36.1/x86_64-linux/List/Util.pm
-| *** Module name IN: /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/recipe-sysroot-native/usr/bin/perl-native/../../../usr/lib/perl5/5.36.1/x86_64-linux/Data/Dumper.pm
-| *** p1: /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/recipe-sysroot-native/usr/bin/perl-native/../../../usr/lib/  p3: perl5/5.36.1/  p5: x86_64-linux/ p7: Data/Dumper.pm
-| *** Module name OUT: /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/recipe-sysroot-native/usr/lib/perl5/5.36.1/x86_64-linux/Data/Dumper.pm
-| *** Module name IN: /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/recipe-sysroot-native/usr/bin/perl-native/../../../usr/lib/perl5/5.36.1/x86_64-linux/Fcntl.pm
-| *** p1: /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/recipe-sysroot-native/usr/bin/perl-native/../../../usr/lib/  p3: perl5/5.36.1/  p5: x86_64-linux/ p7: Fcntl.pm
-| *** Module name OUT: /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/recipe-sysroot-native/usr/lib/perl5/5.36.1/x86_64-linux/Fcntl.pm
-| *** Module name IN: /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/recipe-sysroot-native/usr/bin/perl-native/../../../usr/lib/perl5/5.36.1/x86_64-linux/File/Glob.pm
-| *** p1: /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/recipe-sysroot-native/usr/bin/perl-native/../../../usr/lib/  p3: perl5/5.36.1/  p5: x86_64-linux/ p7: File/Glob.pm
-| *** Module name OUT: /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/recipe-sysroot-native/usr/lib/perl5/5.36.1/x86_64-linux/File/Glob.pm
-| *** Module name IN: /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/recipe-sysroot-native/usr/bin/perl-native/../../../usr/lib/perl5/5.36.1/x86_64-linux/Encode.pm
-| *** p1: /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/recipe-sysroot-native/usr/bin/perl-native/../../../usr/lib/  p3: perl5/5.36.1/  p5: x86_64-linux/ p7: Encode.pm
-| *** Module name OUT: /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/recipe-sysroot-native/usr/lib/perl5/5.36.1/x86_64-linux/Encode.pm
-| *** Module name IN: /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/recipe-sysroot-native/usr/bin/perl-native/../../../usr/lib/perl5/5.36.1/x86_64-linux/Storable.pm
-| *** p1: /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/recipe-sysroot-native/usr/bin/perl-native/../../../usr/lib/  p3: perl5/5.36.1/  p5: x86_64-linux/ p7: Storable.pm
-| *** Module name OUT: /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/recipe-sysroot-native/usr/lib/perl5/5.36.1/x86_64-linux/Storable.pm
-| Copying lib/Locale/Po4a/AsciiDoc.pm -> blib/lib/Locale/Po4a/AsciiDoc.pm
-| Copying lib/Locale/Po4a/BibTeX.pm -> blib/lib/Locale/Po4a/BibTeX.pm
-| Copying lib/Locale/Po4a/Chooser.pm -> blib/lib/Locale/Po4a/Chooser.pm
-| Copying lib/Locale/Po4a/Common.pm -> blib/lib/Locale/Po4a/Common.pm
-| Copying lib/Locale/Po4a/Dia.pm -> blib/lib/Locale/Po4a/Dia.pm
-| Copying lib/Locale/Po4a/Docbook.pm -> blib/lib/Locale/Po4a/Docbook.pm
-| Copying lib/Locale/Po4a/Guide.pm -> blib/lib/Locale/Po4a/Guide.pm
-| Copying lib/Locale/Po4a/Halibut.pm -> blib/lib/Locale/Po4a/Halibut.pm
-| Copying lib/Locale/Po4a/InProgress/Debconf.pm -> blib/lib/Locale/Po4a/InProgress/Debconf.pm
-| Copying lib/Locale/Po4a/InProgress/NewsDebian.pm -> blib/lib/Locale/Po4a/InProgress/NewsDebian.pm
-| Copying lib/Locale/Po4a/Ini.pm -> blib/lib/Locale/Po4a/Ini.pm
-| Copying lib/Locale/Po4a/KernelHelp.pm -> blib/lib/Locale/Po4a/KernelHelp.pm
-| Copying lib/Locale/Po4a/LaTeX.pm -> blib/lib/Locale/Po4a/LaTeX.pm
-| Copying lib/Locale/Po4a/Man.pm -> blib/lib/Locale/Po4a/Man.pm
-| Copying lib/Locale/Po4a/Po.pm -> blib/lib/Locale/Po4a/Po.pm
-| Copying lib/Locale/Po4a/Pod.pm -> blib/lib/Locale/Po4a/Pod.pm
-| Copying lib/Locale/Po4a/RubyDoc.pm -> blib/lib/Locale/Po4a/RubyDoc.pm
-| Copying lib/Locale/Po4a/Sgml.pm -> blib/lib/Locale/Po4a/Sgml.pm
-| Copying lib/Locale/Po4a/TeX.pm -> blib/lib/Locale/Po4a/TeX.pm
-| Copying lib/Locale/Po4a/Texinfo.pm -> blib/lib/Locale/Po4a/Texinfo.pm
-| Copying lib/Locale/Po4a/Text.pm -> blib/lib/Locale/Po4a/Text.pm
-| Copying lib/Locale/Po4a/TransTractor.pm -> blib/lib/Locale/Po4a/TransTractor.pm
-| Copying lib/Locale/Po4a/Wml.pm -> blib/lib/Locale/Po4a/Wml.pm
-| Copying lib/Locale/Po4a/Xhtml.pm -> blib/lib/Locale/Po4a/Xhtml.pm
-| Copying lib/Locale/Po4a/Xml.pm -> blib/lib/Locale/Po4a/Xml.pm
-| Copying lib/Locale/Po4a/Yaml.pm -> blib/lib/Locale/Po4a/Yaml.pm
-| Copying msguntypot -> blib/script/msguntypot
-| Copying po4a -> blib/script/po4a
-| Copying po4a-gettextize -> blib/script/po4a-gettextize
-| Copying po4a-normalize -> blib/script/po4a-normalize
-| Copying po4a-translate -> blib/script/po4a-translate
-| Copying po4a-updatepo -> blib/script/po4a-updatepo
-| Copying scripts/po4a-display-man -> blib/script/po4a-display-man
-| Copying scripts/po4a-display-pod -> blib/script/po4a-display-pod
-| Manifying blib/script/msguntypot -> blib/bindoc/msguntypot.1
-| Manifying blib/script/po4a -> blib/bindoc/po4a.1
-| Manifying blib/script/po4a-gettextize -> blib/bindoc/po4a-gettextize.1
-| Manifying blib/script/po4a-normalize -> blib/bindoc/po4a-normalize.1
-| Manifying blib/script/po4a-translate -> blib/bindoc/po4a-translate.1
-| Manifying blib/script/po4a-updatepo -> blib/bindoc/po4a-updatepo.1
-| Manifying blib/lib/Locale/Po4a/AsciiDoc.pm -> blib/libdoc/Locale::Po4a::AsciiDoc.3
-| Manifying blib/lib/Locale/Po4a/BibTeX.pm -> blib/libdoc/Locale::Po4a::BibTeX.3
-| Manifying blib/lib/Locale/Po4a/Chooser.pm -> blib/libdoc/Locale::Po4a::Chooser.3
-| Manifying blib/lib/Locale/Po4a/Common.pm -> blib/libdoc/Locale::Po4a::Common.3
-| Manifying blib/lib/Locale/Po4a/Dia.pm -> blib/libdoc/Locale::Po4a::Dia.3
-| Manifying blib/lib/Locale/Po4a/Docbook.pm -> blib/libdoc/Locale::Po4a::Docbook.3
-| Manifying blib/lib/Locale/Po4a/Guide.pm -> blib/libdoc/Locale::Po4a::Guide.3
-| Manifying blib/lib/Locale/Po4a/Halibut.pm -> blib/libdoc/Locale::Po4a::Halibut.3
-| Manifying blib/lib/Locale/Po4a/InProgress/Debconf.pm -> blib/libdoc/Locale::Po4a::InProgress::Debconf.3
-| Manifying blib/lib/Locale/Po4a/InProgress/NewsDebian.pm -> blib/libdoc/Locale::Po4a::InProgress::NewsDebian.3
-| Manifying blib/lib/Locale/Po4a/Ini.pm -> blib/libdoc/Locale::Po4a::Ini.3
-| Manifying blib/lib/Locale/Po4a/KernelHelp.pm -> blib/libdoc/Locale::Po4a::KernelHelp.3
-| Manifying blib/lib/Locale/Po4a/LaTeX.pm -> blib/libdoc/Locale::Po4a::LaTeX.3
-| Manifying blib/lib/Locale/Po4a/Man.pm -> blib/libdoc/Locale::Po4a::Man.3
-| Manifying blib/lib/Locale/Po4a/Po.pm -> blib/libdoc/Locale::Po4a::Po.3
-| Manifying blib/lib/Locale/Po4a/Pod.pm -> blib/libdoc/Locale::Po4a::Pod.3
-| Manifying blib/lib/Locale/Po4a/RubyDoc.pm -> blib/libdoc/Locale::Po4a::RubyDoc.3
-| Manifying blib/lib/Locale/Po4a/Sgml.pm -> blib/libdoc/Locale::Po4a::Sgml.3
-| Manifying blib/lib/Locale/Po4a/TeX.pm -> blib/libdoc/Locale::Po4a::TeX.3
-| Manifying blib/lib/Locale/Po4a/Texinfo.pm -> blib/libdoc/Locale::Po4a::Texinfo.3
-| Manifying blib/lib/Locale/Po4a/Text.pm -> blib/libdoc/Locale::Po4a::Text.3
-| Manifying blib/lib/Locale/Po4a/TransTractor.pm -> blib/libdoc/Locale::Po4a::TransTractor.3
-| Manifying blib/lib/Locale/Po4a/Wml.pm -> blib/libdoc/Locale::Po4a::Wml.3
-| Manifying blib/lib/Locale/Po4a/Xhtml.pm -> blib/libdoc/Locale::Po4a::Xhtml.3
-| Manifying blib/lib/Locale/Po4a/Xml.pm -> blib/libdoc/Locale::Po4a::Xml.3
-| Manifying blib/lib/Locale/Po4a/Yaml.pm -> blib/libdoc/Locale::Po4a::Yaml.3
-| Converting Pod to HTML with Pod::Html 1.33
-| HTMLifying blib/script/msguntypot -> blib/binhtml/bin/msguntypot.html
-| P::H::pod2html --title=msguntypot - update PO files when a typo is fixed in POT file --podpath=bin:/scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/git/blib --infile=blib/script/msguntypot --outfile=blib/binhtml/bin/msguntypot.tmp --podroot=/usr --header --backlink
-| *** Module name IN: /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/recipe-sysroot-native/usr/bin/perl-native/../../../usr/lib/perl5/5.36.1/x86_64-linux/PerlIO/encoding.pm
-| *** p1: /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/recipe-sysroot-native/usr/bin/perl-native/../../../usr/lib/  p3: perl5/5.36.1/  p5: x86_64-linux/ p7: PerlIO/encoding.pm
-| *** Module name OUT: /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/recipe-sysroot-native/usr/lib/perl5/5.36.1/x86_64-linux/PerlIO/encoding.pm
-| Use of uninitialized value $str in substitution (s///) at /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/recipe-sysroot-native/usr/bin/perl-native/../../../usr/lib/perl5/5.36.1/Pod/Simple/XHTML.pm line 75.
-| Use of uninitialized value $str in substitution (s///) at /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/recipe-sysroot-native/usr/bin/perl-native/../../../usr/lib/perl5/5.36.1/Pod/Simple/XHTML.pm line 75.
-| Use of uninitialized value $str in substitution (s///) at /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/recipe-sysroot-native/usr/bin/perl-native/../../../usr/lib/perl5/5.36.1/Pod/Simple/XHTML.pm line 75.
-| Use of uninitialized value $str in substitution (s///) at /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/recipe-sysroot-native/usr/bin/perl-native/../../../usr/lib/perl5/5.36.1/Pod/Simple/XHTML.pm line 75.
-| Use of uninitialized value $str in substitution (s///) at /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/recipe-sysroot-native/usr/bin/perl-native/../../../usr/lib/perl5/5.36.1/Pod/Simple/XHTML.pm line 75.
-| Use of uninitialized value $str in substitution (s///) at /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/recipe-sysroot-native/usr/bin/perl-native/../../../usr/lib/perl5/5.36.1/Pod/Simple/XHTML.pm line 75.
-| Use of uninitialized value $str in substitution (s///) at /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/recipe-sysroot-native/usr/bin/perl-native/../../../usr/lib/perl5/5.36.1/Pod/Simple/XHTML.pm line 75.
-| Use of uninitialized value $str in substitution (s///) at /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/recipe-sysroot-native/usr/bin/perl-native/../../../usr/lib/perl5/5.36.1/Pod/Simple/XHTML.pm line 75.
-| Use of uninitialized value $str in substitution (s///) at /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/recipe-sysroot-native/usr/bin/perl-native/../../../usr/lib/perl5/5.36.1/Pod/Simple/XHTML.pm line 75.
-| Use of uninitialized value $str in substitution (s///) at /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/recipe-sysroot-native/usr/bin/perl-native/../../../usr/lib/perl5/5.36.1/Pod/Simple/XHTML.pm line 75.
-| Use of uninitialized value $str in substitution (s///) at /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/recipe-sysroot-native/usr/bin/perl-native/../../../usr/lib/perl5/5.36.1/Pod/Simple/XHTML.pm line 75.
-| Use of uninitialized value $str in substitution (s///) at /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/recipe-sysroot-native/usr/bin/perl-native/../../../usr/lib/perl5/5.36.1/Pod/Simple/XHTML.pm line 75.
-| Use of uninitialized value $str in substitution (s///) at /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/recipe-sysroot-native/usr/bin/perl-native/../../../usr/lib/perl5/5.36.1/Pod/Simple/XHTML.pm line 75.
-| Use of uninitialized value $str in substitution (s///) at /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/recipe-sysroot-native/usr/bin/perl-native/../../../usr/lib/perl5/5.36.1/Pod/Simple/XHTML.pm line 75.
-| Use of uninitialized value $str in substitution (s///) at /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/recipe-sysroot-native/usr/bin/perl-native/../../../usr/lib/perl5/5.36.1/Pod/Simple/XHTML.pm line 75.
-| Use of uninitialized value $str in substitution (s///) at /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/recipe-sysroot-native/usr/bin/perl-native/../../../usr/lib/perl5/5.36.1/Pod/Simple/XHTML.pm line 75.
-| Use of uninitialized value $str in substitution (s///) at /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/recipe-sysroot-native/usr/bin/perl-native/../../../usr/lib/perl5/5.36.1/Pod/Simple/XHTML.pm line 75.
-| Use of uninitialized value $str in substitution (s///) at /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/recipe-sysroot-native/usr/bin/perl-native/../../../usr/lib/perl5/5.36.1/Pod/Simple/XHTML.pm line 75.
-| Use of uninitialized value $str in substitution (s///) at /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/recipe-sysroot-native/usr/bin/perl-native/../../../usr/lib/perl5/5.36.1/Pod/Simple/XHTML.pm line 75.
-| Use of uninitialized value $str in substitution (s///) at /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/recipe-sysroot-native/usr/bin/perl-native/../../../usr/lib/perl5/5.36.1/Pod/Simple/XHTML.pm line 75.
-| Use of uninitialized value $str in substitution (s///) at /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/recipe-sysroot-native/usr/bin/perl-native/../../../usr/lib/perl5/5.36.1/Pod/Simple/XHTML.pm line 75.
-| Use of uninitialized value $str in substitution (s///) at /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/recipe-sysroot-native/usr/bin/perl-native/../../../usr/lib/perl5/5.36.1/Pod/Simple/XHTML.pm line 75.
-| Use of uninitialized value $str in substitution (s///) at /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/recipe-sysroot-native/usr/bin/perl-native/../../../usr/lib/perl5/5.36.1/Pod/Simple/XHTML.pm line 75.
-| Use of uninitialized value $str in substitution (s///) at /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/recipe-sysroot-native/usr/bin/perl-native/../../../usr/lib/perl5/5.36.1/Pod/Simple/XHTML.pm line 75.
-| Use of uninitialized value $str in substitution (s///) at /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/recipe-sysroot-native/usr/bin/perl-native/../../../usr/lib/perl5/5.36.1/Pod/Simple/XHTML.pm line 75.
-| Use of uninitialized value $str in substitution (s///) at /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/recipe-sysroot-native/usr/bin/perl-native/../../../usr/lib/perl5/5.36.1/Pod/Simple/XHTML.pm line 75.
-| Use of uninitialized value $str in substitution (s///) at /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/recipe-sysroot-native/usr/bin/perl-native/../../../usr/lib/perl5/5.36.1/Pod/Simple/XHTML.pm line 75.
-| Use of uninitialized value $str in substitution (s///) at /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/recipe-sysroot-native/usr/bin/perl-native/../../../usr/lib/perl5/5.36.1/Pod/Simple/XHTML.pm line 75.
-| Use of uninitialized value $str in substitution (s///) at /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/recipe-sysroot-native/usr/bin/perl-native/../../../usr/lib/perl5/5.36.1/Pod/Simple/XHTML.pm line 75.
-| Use of uninitialized value $str in substitution (s///) at /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/recipe-sysroot-native/usr/bin/perl-native/../../../usr/lib/perl5/5.36.1/Pod/Simple/XHTML.pm line 75.
-| Use of uninitialized value $str in substitution (s///) at /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/recipe-sysroot-native/usr/bin/perl-native/../../../usr/lib/perl5/5.36.1/Pod/Simple/XHTML.pm line 75.
-| Use of uninitialized value $str in substitution (s///) at /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/recipe-sysroot-native/usr/bin/perl-native/../../../usr/lib/perl5/5.36.1/Pod/Simple/XHTML.pm line 75.
-| Use of uninitialized value $str in substitution (s///) at /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/recipe-sysroot-native/usr/bin/perl-native/../../../usr/lib/perl5/5.36.1/Pod/Simple/XHTML.pm line 75.
-| Use of uninitialized value $str in substitution (s///) at /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/recipe-sysroot-native/usr/bin/perl-native/../../../usr/lib/perl5/5.36.1/Pod/Simple/XHTML.pm line 75.
-| HTMLifying blib/script/po4a -> blib/binhtml/bin/po4a.html
-| P::H::pod2html --title=po4a - update both the PO files and translated documents in one shot --podpath=bin:/scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/git/blib --infile=blib/script/po4a --outfile=blib/binhtml/bin/po4a.tmp --podroot=/usr --header --backlink
-| HTMLifying blib/script/po4a-gettextize -> blib/binhtml/bin/po4a-gettextize.html
-| P::H::pod2html --title=po4a-gettextize --podpath=bin:/scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/git/blib --infile=blib/script/po4a-gettextize --outfile=blib/binhtml/bin/po4a-gettextize.tmp --podroot=/usr --header --backlink
-| HTMLifying blib/script/po4a-normalize -> blib/binhtml/bin/po4a-normalize.html
-| P::H::pod2html --title=po4a-normalize --podpath=bin:/scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/git/blib --infile=blib/script/po4a-normalize --outfile=blib/binhtml/bin/po4a-normalize.tmp --podroot=/usr --header --backlink
-| HTMLifying blib/script/po4a-translate -> blib/binhtml/bin/po4a-translate.html
-| P::H::pod2html --title=po4a-translate --podpath=bin:/scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/git/blib --infile=blib/script/po4a-translate --outfile=blib/binhtml/bin/po4a-translate.tmp --podroot=/usr --header --backlink
-| HTMLifying blib/script/po4a-updatepo -> blib/binhtml/bin/po4a-updatepo.html
-| P::H::pod2html --title=po4a-updatepo --podpath=bin:/scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/git/blib --infile=blib/script/po4a-updatepo --outfile=blib/binhtml/bin/po4a-updatepo.tmp --podroot=/usr --header --backlink
-| Converting Pod to HTML with Pod::Html 1.33
-| HTMLifying blib/lib/Locale/Po4a/AsciiDoc.pm -> blib/libhtml/site/lib/Locale/Po4a/AsciiDoc.html
-| P::H::pod2html --title=Locale::Po4a::AsciiDoc - convert AsciiDoc documents from/to PO files --podpath=bin:/scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/git/blib --infile=blib/lib/Locale/Po4a/AsciiDoc.pm --outfile=blib/libhtml/site/lib/Locale/Po4a/AsciiDoc.tmp --podroot=/usr --htmlroot=../.. --header --backlink
-| HTMLifying blib/lib/Locale/Po4a/BibTeX.pm -> blib/libhtml/site/lib/Locale/Po4a/BibTeX.html
-| P::H::pod2html --title=Locale::Po4a::BibTeX - convert BibTeX documents from/to PO files --podpath=bin:/scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/git/blib --infile=blib/lib/Locale/Po4a/BibTeX.pm --outfile=blib/libhtml/site/lib/Locale/Po4a/BibTeX.tmp --podroot=/usr --htmlroot=../.. --header --backlink
-| HTMLifying blib/lib/Locale/Po4a/Chooser.pm -> blib/libhtml/site/lib/Locale/Po4a/Chooser.html
-| P::H::pod2html --title=Locale::Po4a::Chooser - manage po4a modules --podpath=bin:/scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/git/blib --infile=blib/lib/Locale/Po4a/Chooser.pm --outfile=blib/libhtml/site/lib/Locale/Po4a/Chooser.tmp --podroot=/usr --htmlroot=../.. --header --backlink
-| HTMLifying blib/lib/Locale/Po4a/Common.pm -> blib/libhtml/site/lib/Locale/Po4a/Common.html
-| P::H::pod2html --title=Locale::Po4a::Common - common parts of the po4a scripts and utils --podpath=bin:/scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/git/blib --infile=blib/lib/Locale/Po4a/Common.pm --outfile=blib/libhtml/site/lib/Locale/Po4a/Common.tmp --podroot=/usr --htmlroot=../.. --header --backlink
-| HTMLifying blib/lib/Locale/Po4a/Dia.pm -> blib/libhtml/site/lib/Locale/Po4a/Dia.html
-| P::H::pod2html --title=Locale::Po4a::Dia - convert uncompressed Dia diagrams from/to PO files --podpath=bin:/scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/git/blib --infile=blib/lib/Locale/Po4a/Dia.pm --outfile=blib/libhtml/site/lib/Locale/Po4a/Dia.tmp --podroot=/usr --htmlroot=../.. --header --backlink
-| HTMLifying blib/lib/Locale/Po4a/Docbook.pm -> blib/libhtml/site/lib/Locale/Po4a/Docbook.html
-| P::H::pod2html --title=Locale::Po4a::Docbook - convert DocBook XML documents from/to PO files --podpath=bin:/scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/git/blib --infile=blib/lib/Locale/Po4a/Docbook.pm --outfile=blib/libhtml/site/lib/Locale/Po4a/Docbook.tmp --podroot=/usr --htmlroot=../.. --header --backlink
-| HTMLifying blib/lib/Locale/Po4a/Guide.pm -> blib/libhtml/site/lib/Locale/Po4a/Guide.html
-| P::H::pod2html --title=Locale::Po4a::Guide - convert Guide XML documents from/to PO files --podpath=bin:/scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/git/blib --infile=blib/lib/Locale/Po4a/Guide.pm --outfile=blib/libhtml/site/lib/Locale/Po4a/Guide.tmp --podroot=/usr --htmlroot=../.. --header --backlink
-| HTMLifying blib/lib/Locale/Po4a/Halibut.pm -> blib/libhtml/site/lib/Locale/Po4a/Halibut.html
-| P::H::pod2html --title=Locale::Po4a::Halibut - convert Halibut documents and derivates from/to PO files --podpath=bin:/scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/git/blib --infile=blib/lib/Locale/Po4a/Halibut.pm --outfile=blib/libhtml/site/lib/Locale/Po4a/Halibut.tmp --podroot=/usr --htmlroot=../.. --header --backlink
-| HTMLifying blib/lib/Locale/Po4a/InProgress/Debconf.pm -> blib/libhtml/site/lib/Locale/Po4a/InProgress/Debconf.html
-| P::H::pod2html --title=Locale::Po4a::InProgress::Debconf - convert debconf templates from/to PO files --podpath=bin:/scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/git/blib --infile=blib/lib/Locale/Po4a/InProgress/Debconf.pm --outfile=blib/libhtml/site/lib/Locale/Po4a/InProgress/Debconf.tmp --podroot=/usr --htmlroot=../../.. --header --backlink
-| HTMLifying blib/lib/Locale/Po4a/InProgress/NewsDebian.pm -> blib/libhtml/site/lib/Locale/Po4a/InProgress/NewsDebian.html
-| P::H::pod2html --title=Locale::Po4a::InProgress::NewsDebian - convert NEWS.Debian documents from/to PO files --podpath=bin:/scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/git/blib --infile=blib/lib/Locale/Po4a/InProgress/NewsDebian.pm --outfile=blib/libhtml/site/lib/Locale/Po4a/InProgress/NewsDebian.tmp --podroot=/usr --htmlroot=../../.. --header --backlink
-| HTMLifying blib/lib/Locale/Po4a/Ini.pm -> blib/libhtml/site/lib/Locale/Po4a/Ini.html
-| P::H::pod2html --title=Locale::Po4a::Ini - convert INI files from/to PO files --podpath=bin:/scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/git/blib --infile=blib/lib/Locale/Po4a/Ini.pm --outfile=blib/libhtml/site/lib/Locale/Po4a/Ini.tmp --podroot=/usr --htmlroot=../.. --header --backlink
-| HTMLifying blib/lib/Locale/Po4a/KernelHelp.pm -> blib/libhtml/site/lib/Locale/Po4a/KernelHelp.html
-| P::H::pod2html --title=Locale::Po4a::KernelHelp - convert kernel configuration help from/to PO files --podpath=bin:/scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/git/blib --infile=blib/lib/Locale/Po4a/KernelHelp.pm --outfile=blib/libhtml/site/lib/Locale/Po4a/KernelHelp.tmp --podroot=/usr --htmlroot=../.. --header --backlink
-| HTMLifying blib/lib/Locale/Po4a/LaTeX.pm -> blib/libhtml/site/lib/Locale/Po4a/LaTeX.html
-| P::H::pod2html --title=Locale::Po4a::LaTeX - convert LaTeX documents and derivates from/to PO files --podpath=bin:/scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/git/blib --infile=blib/lib/Locale/Po4a/LaTeX.pm --outfile=blib/libhtml/site/lib/Locale/Po4a/LaTeX.tmp --podroot=/usr --htmlroot=../.. --header --backlink
-| HTMLifying blib/lib/Locale/Po4a/Man.pm -> blib/libhtml/site/lib/Locale/Po4a/Man.html
-| P::H::pod2html --title=Locale::Po4a::Man - convert manual pages from/to PO files --podpath=bin:/scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/git/blib --infile=blib/lib/Locale/Po4a/Man.pm --outfile=blib/libhtml/site/lib/Locale/Po4a/Man.tmp --podroot=/usr --htmlroot=../.. --header --backlink
-| HTMLifying blib/lib/Locale/Po4a/Po.pm -> blib/libhtml/site/lib/Locale/Po4a/Po.html
-| P::H::pod2html --title=Locale::Po4a::Po - PO file manipulation module --podpath=bin:/scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/git/blib --infile=blib/lib/Locale/Po4a/Po.pm --outfile=blib/libhtml/site/lib/Locale/Po4a/Po.tmp --podroot=/usr --htmlroot=../.. --header --backlink
-| HTMLifying blib/lib/Locale/Po4a/Pod.pm -> blib/libhtml/site/lib/Locale/Po4a/Pod.html
-| P::H::pod2html --title=Locale::Po4a::Pod - convert POD data from/to PO files --podpathUse of uninitialized value $str in substitution (s///) at /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/recipe-sysroot-native/usr/bin/perl-native/../../../usr/lib/perl5/5.36.1/Pod/Simple/XHTML.pm line 75.
-| Use of uninitialized value $str in substitution (s///) at /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/recipe-sysroot-native/usr/bin/perl-native/../../../usr/lib/perl5/5.36.1/Pod/Simple/XHTML.pm line 75.
-| Use of uninitialized value $str in substitution (s///) at /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/recipe-sysroot-native/usr/bin/perl-native/../../../usr/lib/perl5/5.36.1/Pod/Simple/XHTML.pm line 75.
-| UTF-8 "\xA0" does not map to Unicode at /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/recipe-sysroot-native/usr/bin/perl-native/../../../usr/lib/perl5/vendor_perl/5.36.1/Module/Build/PodParser.pm line 41, <$fh> line 802.
-| Use of uninitialized value $str in substitution (s///) at /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/recipe-sysroot-native/usr/bin/perl-native/../../../usr/lib/perl5/5.36.1/Pod/Simple/XHTML.pm line 75.
-| Use of uninitialized value $str in substitution (s///) at /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/recipe-sysroot-native/usr/bin/perl-native/../../../usr/lib/perl5/5.36.1/Pod/Simple/XHTML.pm line 75.
-| Use of uninitialized value $str in substitution (s///) at /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/recipe-sysroot-native/usr/bin/perl-native/../../../usr/lib/perl5/5.36.1/Pod/Simple/XHTML.pm line 75.
-| *** Module name IN: /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/recipe-sysroot-native/usr/bin/perl-native/../../../usr/lib/perl5/5.36.1/x86_64-linux/B.pm
-| *** p1: /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/recipe-sysroot-native/usr/bin/perl-native/../../../usr/lib/  p3: perl5/5.36.1/  p5: x86_64-linux/ p7: B.pm
-| *** Module name OUT: /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/recipe-sysroot-native/usr/lib/perl5/5.36.1/x86_64-linux/B.pm
-| =bin:/scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/git/blib --infile=blib/lib/Locale/Po4a/Pod.pm --outfile=blib/libhtml/site/lib/Locale/Po4a/Pod.tmp --podroot=/usr --htmlroot=../.. --header --backlink
-| HTMLifying blib/lib/Locale/Po4a/RubyDoc.pm -> blib/libhtml/site/lib/Locale/Po4a/RubyDoc.html
-| P::H::pod2html --title=Locale::Po4a::RubyDoc --podpath=bin:/scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/git/blib --infile=blib/lib/Locale/Po4a/RubyDoc.pm --outfile=blib/libhtml/site/lib/Locale/Po4a/RubyDoc.tmp --podroot=/usr --htmlroot=../.. --header --backlink
-| HTMLifying blib/lib/Locale/Po4a/Sgml.pm -> blib/libhtml/site/lib/Locale/Po4a/Sgml.html
-| P::H::pod2html --title=Locale::Po4a::Sgml - convert SGML documents from/to PO files --podpath=bin:/scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/git/blib --infile=blib/lib/Locale/Po4a/Sgml.pm --outfile=blib/libhtml/site/lib/Locale/Po4a/Sgml.tmp --podroot=/usr --htmlroot=../.. --header --backlink
-| HTMLifying blib/lib/Locale/Po4a/TeX.pm -> blib/libhtml/site/lib/Locale/Po4a/TeX.html
-| P::H::pod2html --title=Locale::Po4a::TeX - convert TeX documents and derivatives from/to PO files --podpath=bin:/scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/git/blib --infile=blib/lib/Locale/Po4a/TeX.pm --outfile=blib/libhtml/site/lib/Locale/Po4a/TeX.tmp --podroot=/usr --htmlroot=../.. --header --backlink
-| HTMLifying blib/lib/Locale/Po4a/Texinfo.pm -> blib/libhtml/site/lib/Locale/Po4a/Texinfo.html
-| P::H::pod2html --title=Locale::Po4a::Texinfo - convert Texinfo documents and derivates from/to PO files --podpath=bin:/scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/git/blib --infile=blib/lib/Locale/Po4a/Texinfo.pm --outfile=blib/libhtml/site/lib/Locale/Po4a/Texinfo.tmp --podroot=/usr --htmlroot=../.. --header --backlink
-| HTMLifying blib/lib/Locale/Po4a/Text.pm -> blib/libhtml/site/lib/Locale/Po4a/Text.html
-| P::H::pod2html --title=Locale::Po4a::Text - convert text documents from/to PO files --podpath=bin:/scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/git/blib --infile=blib/lib/Locale/Po4a/Text.pm --outfile=blib/libhtml/site/lib/Locale/Po4a/Text.tmp --podroot=/usr --htmlroot=../.. --header --backlink
-| HTMLifying blib/lib/Locale/Po4a/TransTractor.pm -> blib/libhtml/site/lib/Locale/Po4a/TransTractor.html
-| P::H::pod2html --title=Locale::Po4a::TransTractor - generic trans(lator ex)tractor. --podpath=bin:/scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/git/blib --infile=blib/lib/Locale/Po4a/TransTractor.pm --outfile=blib/libhtml/site/lib/Locale/Po4a/TransTractor.tmp --podroot=/usr --htmlroot=../.. --header --backlink
-| HTMLifying blib/lib/Locale/Po4a/Wml.pm -> blib/libhtml/site/lib/Locale/Po4a/Wml.html
-| P::H::pod2html --title=Locale::Po4a::Wml - convert WML (web markup language) documents from/to PO files --podpath=bin:/scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/git/blib --infile=blib/lib/Locale/Po4a/Wml.pm --outfile=blib/libhtml/site/lib/Locale/Po4a/Wml.tmp --podroot=/usr --htmlroot=../.. --header --backlink
-| HTMLifying blib/lib/Locale/Po4a/Xhtml.pm -> blib/libhtml/site/lib/Locale/Po4a/Xhtml.html
-| P::H::pod2html --title=Locale::Po4a::Xhtml - convert XHTML documents from/to PO files --podpath=bin:/scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/git/blib --infile=blib/lib/Locale/Po4a/Xhtml.pm --outfile=blib/libhtml/site/lib/Locale/Po4a/Xhtml.tmp --podroot=/usr --htmlroot=../.. --header --backlink
-| HTMLifying blib/lib/Locale/Po4a/Xml.pm -> blib/libhtml/site/lib/Locale/Po4a/Xml.html
-| P::H::pod2html --title=Locale::Po4a::Xml - convert XML documents and derivates from/to PO files --podpath=bin:/scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/git/blib --infile=blib/lib/Locale/Po4a/Xml.pm --outfile=blib/libhtml/site/lib/Locale/Po4a/Xml.tmp --podroot=/usr --htmlroot=../.. --header --backlink
-| HTMLifying blib/lib/Locale/Po4a/Yaml.pm -> blib/libhtml/site/lib/Locale/Po4a/Yaml.html
-| P::H::pod2html --title=Locale::Po4a::Yaml - convert YAML files from/to PO files --podpath=bin:/scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/git/blib --infile=blib/lib/Locale/Po4a/Yaml.pm --outfile=blib/libhtml/site/lib/Locale/Po4a/Yaml.tmp --podroot=/usr --htmlroot=../.. --header --backlink
-| Created META.yml and META.json
-| *** Module name IN: /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/recipe-sysroot-native/usr/bin/perl-native/../../../usr/lib/perl5/5.36.1/x86_64-linux/IO.pm
-| *** p1: /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/recipe-sysroot-native/usr/bin/perl-native/../../../usr/lib/  p3: perl5/5.36.1/  p5: x86_64-linux/ p7: IO.pm
-| *** Module name OUT: /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/recipe-sysroot-native/usr/lib/perl5/5.36.1/x86_64-linux/IO.pm
-| *** Module name IN: /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/recipe-sysroot-native/usr/bin/perl-native/../../../usr/lib/perl5/5.36.1/x86_64-linux/Fcntl.pm
-| *** p1: /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/recipe-sysroot-native/usr/bin/perl-native/../../../usr/lib/  p3: perl5/5.36.1/  p5: x86_64-linux/ p7: Fcntl.pm
-| *** Module name OUT: /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/recipe-sysroot-native/usr/lib/perl5/5.36.1/x86_64-linux/Fcntl.pm
-| *** Module name IN: /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/recipe-sysroot-native/usr/bin/perl-native/../../../usr/lib/perl5/5.36.1/x86_64-linux/Cwd.pm
-| *** p1: /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/recipe-sysroot-native/usr/bin/perl-native/../../../usr/lib/  p3: perl5/5.36.1/  p5: x86_64-linux/ p7: Cwd.pm
-| *** Module name OUT: /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/recipe-sysroot-native/usr/lib/perl5/5.36.1/x86_64-linux/Cwd.pm
-| *** Module name IN: /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/recipe-sysroot-native/usr/bin/perl-native/../../../usr/lib/perl5/5.36.1/x86_64-linux/Time/HiRes.pm
-| *** p1: /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/recipe-sysroot-native/usr/bin/perl-native/../../../usr/lib/  p3: perl5/5.36.1/  p5: x86_64-linux/ p7: Time/HiRes.pm
-| *** Module name OUT: /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/recipe-sysroot-native/usr/lib/perl5/5.36.1/x86_64-linux/Time/HiRes.pm
-| *** Module name IN: /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/recipe-sysroot-native/usr/bin/perl-native/../../../usr/lib/perl5/5.36.1/x86_64-linux/POSIX.pm
-| *** p1: /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/recipe-sysroot-native/usr/bin/perl-native/../../../usr/lib/  p3: perl5/5.36.1/  p5: x86_64-linux/ p7: POSIX.pm
-| *** Module name OUT: /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/recipe-sysroot-native/usr/lib/perl5/5.36.1/x86_64-linux/POSIX.pm
-| *** Module name IN: /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/recipe-sysroot-native/usr/bin/perl-native/../../../usr/lib/perl5/5.36.1/x86_64-linux/Encode.pm
-| *** p1: /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/recipe-sysroot-native/usr/bin/perl-native/../../../usr/lib/  p3: perl5/5.36.1/  p5: x86_64-linux/ p7: Encode.pm
-| *** Module name OUT: /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/recipe-sysroot-native/usr/lib/perl5/5.36.1/x86_64-linux/Encode.pm
-| *** Module name IN: /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/recipe-sysroot-native/usr/bin/perl-native/../../../usr/lib/perl5/5.36.1/x86_64-linux/Storable.pm
-| *** p1: /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/recipe-sysroot-native/usr/bin/perl-native/../../../usr/lib/  p3: perl5/5.36.1/  p5: x86_64-linux/ p7: Storable.pm
-| *** Module name OUT: /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/recipe-sysroot-native/usr/lib/perl5/5.36.1/x86_64-linux/Storable.pm
-| *** Module name IN: /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/recipe-sysroot-native/usr/bin/perl-native/../../../usr/lib/perl5/5.36.1/x86_64-linux/Encode/Unicode.pm
-| *** p1: /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/recipe-sysroot-native/usr/bin/perl-native/../../../usr/lib/  p3: perl5/5.36.1/  p5: x86_64-linux/ p7: Encode/Unicode.pm
-| *** Module name OUT: /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/recipe-sysroot-native/usr/lib/perl5/5.36.1/x86_64-linux/Encode/Unicode.pm
-| *** Module name IN: /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/recipe-sysroot-native/usr/bin/perl-native/../../../usr/lib/perl5/5.36.1/x86_64-linux/List/Util.pm
-| *** p1: /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/recipe-sysroot-native/usr/bin/perl-native/../../../usr/lib/  p3: perl5/5.36.1/  p5: x86_64-linux/ p7: List/Util.pm
-| *** Module name OUT: /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/recipe-sysroot-native/usr/lib/perl5/5.36.1/x86_64-linux/List/Util.pm
-| Unknown format type: pod.
-| po4a::chooser: Module loading error: Can't locate Pod/Parser.pm in @INC (you may need to install the Pod::Parser module) (@INC contains: lib /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/recipe-sysroot-native/usr/bin/perl-native/../../../usr/lib/perl5/site_perl/5.36.1/x86_64-linux /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/recipe-sysroot-native/usr/bin/perl-native/../../../usr/lib/perl5/site_perl/5.36.1 /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/recipe-sysroot-native/usr/bin/perl-native/../../../usr/lib/perl5/vendor_perl/5.36.1 /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/recipe-sysroot-native/usr/bin/perl-native/../../../usr/lib/perl5/5.36.1/x86_64-linux /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/recipe-sysroot-native/usr/bin/perl-native/../../../usr/lib/perl5/5.36.1 /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/recipe-sysroot-native/usr/bin/perl-native
- /../../../usr/lib/perl5/site_perl/5.36.1/x86_64-linux /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/recipe-sysroot-native/usr/bin/perl-native/../../../usr/lib/perl5/site_perl/5.36.1 /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/recipe-sysroot-native/usr/bin/perl-native/../../../usr/lib/perl5/vendor_perl/5.36.1 /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/recipe-sysroot-native/usr/bin/perl-native/../../../usr/lib/perl5/5.36.1/x86_64-linux /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/recipe-sysroot-native/usr/bin/perl-native/../../../usr/lib/perl5/5.36.1 /completelyboguspath/perl5/site_perl/5.36.1/x86_64-linux /completelyboguspath/perl5/site_perl/5.36.1 /completelyboguspath/perl5/vendor_perl/5.36.1/x86_64-linux /completelyboguspath/perl5/vendor_perl/5.36.1 /completelyboguspath/perl5/5.36.1/x86_64-linux /completelyboguspath/perl5/5.36.1) at lib/Locale/Po4a/Pod.pm line 14.
-| BEGIN failed--compilation aborted at lib/Locale/Po4a/Pod.pm line 14.
-| Compilation failed in require at (eval 37) line 1.
-| BEGIN failed--compilation aborted at (eval 37) line 1.
-| 
-| List of valid formats:
-|   - asciidoc: AsciiDoc format.
-|   - dia: uncompressed Dia diagrams.
-|   - docbook: DocBook XML.
-|   - guide: Gentoo Linux's XML documentation format.
-|   - ini: INI format.
-|   - kernelhelp: Help messages of each kernel compilation option.
-|   - latex: LaTeX format.
-|   - man: Good old manual page format.
-|   - pod: Perl Online Documentation format.
-|   - rubydoc: Ruby Documentation (RD) format.
-|   - sgml: either DebianDoc or DocBook DTD.
-|   - texinfo: The info page format.
-|   - tex: generic TeX documents (see also latex).
-|   - text: simple text document.
-|   - wml: WML documents.
-|   - xhtml: XHTML documents.
-|   - xml: generic XML documents (see also docbook).
-|   - yaml: YAML documents.
-| Died at Po4aBuilder.pm line 162.
-| WARNING: exit code 1 from a shell command.
-NOTE: recipe po4a-0.69-r0: task do_compile: Failed
-NOTE: Tasks Summary: Attempted 1186 tasks of which 1179 didn't need to be rerun and 1 failed.
-NOTE: Writing buildhistory
-NOTE: Writing buildhistory took: 3 seconds
-NOTE: Writing buildhistory
-NOTE: Writing buildhistory took: 4 seconds
-NOTE: Writing buildhistory
-NOTE: Writing buildhistory took: 4 seconds
-
-Summary: 1 task failed:
-  /home/auh/Projects/meta-openembedded/meta-perl/recipes-perl/po4a/po4a_0.69.bb:do_compile
-Summary: There was 1 ERROR message, returning a non-zero exit code.
-ERROR: po4a-0.69-r0 do_compile: ExecutionError('/scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/temp/run.do_compile.4174517', 1, None, None)
-ERROR: Logfile of failure stored in: /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/po4a/0.69-r0/temp/log.do_compile.4174517
-ERROR: Task (/home/auh/Projects/meta-openembedded/meta-perl/recipes-perl/po4a/po4a_0.69.bb:do_compile) failed with exit code '1'
-
---===============5932448168573405305==--
 
