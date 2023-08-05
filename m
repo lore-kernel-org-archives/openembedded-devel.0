@@ -2,41 +2,41 @@ Return-Path: <auh@moto-timo.dev>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B780EC001DE
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BA1A4C00528
 	for <webhook@archiver.kernel.org>; Sat,  5 Aug 2023 07:38:39 +0000 (UTC)
-Received: from relay8-d.mail.gandi.net (relay8-d.mail.gandi.net [217.70.183.201])
- by mx.groups.io with SMTP id smtpd.web10.2144.1691221113384323944
+Received: from relay2-d.mail.gandi.net (relay2-d.mail.gandi.net [217.70.183.194])
+ by mx.groups.io with SMTP id smtpd.web11.2146.1691221116206850737
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 05 Aug 2023 00:38:33 -0700
+ Sat, 05 Aug 2023 00:38:36 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@moto-timo.dev header.s=gm1 header.b=aXX8s73L;
- spf=pass (domain: moto-timo.dev, ip: 217.70.183.201, mailfrom: auh@moto-timo.dev)
-Received: by mail.gandi.net (Postfix) with ESMTPSA id BB1EB1BF204
-	for <openembedded-devel@lists.openembedded.org>; Sat,  5 Aug 2023 07:38:30 +0000 (UTC)
+ dkim=pass header.i=@moto-timo.dev header.s=gm1 header.b=j1nypv2j;
+ spf=pass (domain: moto-timo.dev, ip: 217.70.183.194, mailfrom: auh@moto-timo.dev)
+Received: by mail.gandi.net (Postfix) with ESMTPSA id 41A0B40002
+	for <openembedded-devel@lists.openembedded.org>; Sat,  5 Aug 2023 07:38:32 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=moto-timo.dev;
-	s=gm1; t=1691221111;
+	s=gm1; t=1691221113;
 	h=from:from:reply-to:subject:subject:to:to:cc:mime-version:mime-version:
-	 content-type:content-type; bh=T9ccMJs4Jb4f/j6tgXCER/vnNA4rm4Pf4/T/NNPJrA8=;
-	b=aXX8s73LUVY4A2ClCiNNhCS8OsCSJL7X97mlUm9xiyPuqvMGBL8iPRhYhITolSif0xsY3d
-	TWSOzgAy8FV/3N4zvEtmLYAOZYrGWk3LOOT3tM4iyg1lxVoHm6VH3mVXyXwEavPFg9I7Ur
-	2dw7yoYOe9azkm/X3mbwKBDPQi7Q8xK9NI9OowKmIYuICwLD4AEHLaH7+UK5wPTjwFhNz+
-	BK2Qzvs7Bsi0V6B/KhRe02vDfbmRGnocQvbA3G8GrD769U+1y1LtgP6e/DPg4y2CXEOU0F
-	/LoAohPvVEJBDUP4XlMVtDKv2TZtMIrhyvLl8cQclc70pRZwTWo8vlZ19vURSQ==
-Content-Type: multipart/mixed; boundary="===============7361999334002459944=="
+	 content-type:content-type; bh=iNfNrbG8q9qfqDrq/5lYeBKFAvCGcZb/4o7+UBoZQCY=;
+	b=j1nypv2jdLYSjbWgdK9WdSXKm5YadNInpVB5631gVW6tPza8qTEnqtn5qgP3YhHx61nJPY
+	ebwuuAdSHDthnczDZjM0XAGhX8Wun55iK52U+2C4gZJqTCeNQPP30NLQG9xIOLQYlbdS33
+	+8YxWZ9S2Z2kZAr71QJ5KMMo4HYnpqTwrxr92/0dDUhOjsCemg34OQoL2R/NrRLXemScTk
+	89UTN+4sjB4b/xMfetLRDFjbkqJxX2popMNwGLX45WF0pmheYm7isTH8rLVUoZw7Tr0j0n
+	R6BrooYy7MwnKOIb8SCZc20uRKUybI5eptV1iuxJcMBMxf4eCCR6NzUjWqV99g==
+Content-Type: multipart/mixed; boundary="===============2904174130224700473=="
 MIME-Version: 1.0
 From: auh@moto-timo.dev
 To: openembedded-devel@lists.openembedded.org
-Subject: [AUH] python3-cachecontrol: upgrading to 0.13.1 FAILED
+Subject: [AUH] python3-cantools: upgrading to 39.0.0 FAILED
 X-GND-Sasl: auh@moto-timo.dev
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sat, 05 Aug 2023 07:38:39 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104238
-Message-Id: <20230805073839.B780EC001DE@smtp.lore.kernel.org>
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104239
+Message-Id: <20230805073839.BA1A4C00528@smtp.lore.kernel.org>
 Date: Sat,  5 Aug 2023 07:38:39 +0000 (UTC)
 
---===============7361999334002459944==
+--===============2904174130224700473==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -44,180 +44,229 @@ Content-Transfer-Encoding: 7bit
 Hello,
 
 this email is a notification from the Auto Upgrade Helper
-that the automatic attempt to upgrade the recipe *python3-cachecontrol* to *0.13.1* has Failed (devtool error).
+that the automatic attempt to upgrade the recipe *python3-cantools* to *39.0.0* has Failed(do_compile).
 
 Detailed error information:
 
-The following devtool command failed:  upgrade python3-cachecontrol -V 0.13.1
-NOTE: Starting bitbake server...
-Loading cache...done.
-Loaded 12640 entries from dependency cache.
-NOTE: Resolving any missing task queue dependencies
-NOTE: Resolving any missing task queue dependencies
-NOTE: Resolving any missing task queue dependencies
-NOTE: Resolving any missing task queue dependencies
-NOTE: Resolving any missing task queue dependencies
-NOTE: Resolving any missing task queue dependencies
-
-Build Configuration (mc:default):
-BB_VERSION           = "2.4.0"
-BUILD_SYS            = "x86_64-linux"
-NATIVELSBSTRING      = "universal"
-TARGET_SYS           = "x86_64-poky-linux"
-MACHINE              = "qemux86-64"
-DISTRO               = "poky"
-DISTRO_VERSION       = "4.2"
-TUNE_FEATURES        = "m64 core2"
-TARGET_FPU           = ""
-meta                 
-meta-poky            
-meta-yocto-bsp       = "master:058a44165ce375f405063e73a9fcd1b2757ef8da"
-meta-oe              
-meta-python          
-meta-perl            = "heads/origin/master-next:2b2436df1afb38a1920b26c4d9db2723d0d8cebb"
-workspace            = "<unknown>:<unknown>"
+do_compile failed
 
 
-Build Configuration (mc:qemux86-musl):
-BB_VERSION           = "2.4.0"
-BUILD_SYS            = "x86_64-linux"
-NATIVELSBSTRING      = "universal"
-TARGET_SYS           = "i686-poky-linux-musl"
-MACHINE              = "qemux86"
-DISTRO               = "poky"
-DISTRO_VERSION       = "4.2"
-TUNE_FEATURES        = "m32 core2"
-TARGET_FPU           = ""
-meta                 
-meta-poky            
-meta-yocto-bsp       = "master:058a44165ce375f405063e73a9fcd1b2757ef8da"
-meta-oe              
-meta-python          
-meta-perl            = "heads/origin/master-next:2b2436df1afb38a1920b26c4d9db2723d0d8cebb"
-workspace            = "<unknown>:<unknown>"
 
+Next steps:
+    - apply the patch: git am 0001-python3-cantools-upgrade-38.0.2-39.0.0.patch
+    - check the changes to upstream patches and summarize them in the commit message,
+    - compile an image that contains the package
+    - perform some basic sanity tests
+    - amend the patch and sign it off: git commit -s --reset-author --amend
+    - send it to the appropriate mailing list
 
-Build Configuration (mc:qemuarm64):
-BB_VERSION           = "2.4.0"
-BUILD_SYS            = "x86_64-linux"
-NATIVELSBSTRING      = "universal"
-TARGET_SYS           = "aarch64-poky-linux"
-MACHINE              = "qemuarm64"
-DISTRO               = "poky"
-DISTRO_VERSION       = "4.2"
-TUNE_FEATURES        = "aarch64 armv8a crc cortexa57"
-TARGET_FPU           = ""
-meta                 
-meta-poky            
-meta-yocto-bsp       = "master:058a44165ce375f405063e73a9fcd1b2757ef8da"
-meta-oe              
-meta-python          
-meta-perl            = "heads/origin/master-next:2b2436df1afb38a1920b26c4d9db2723d0d8cebb"
-workspace            = "<unknown>:<unknown>"
-
-Initialising tasks...done.
-Sstate summary: Wanted 14 Local 4 Mirrors 10 Missed 0 Current 16 (100% match, 100% complete)
-NOTE: Executing Tasks
-NOTE: Tasks Summary: Attempted 103 tasks of which 100 didn't need to be rerun and all succeeded.
-NOTE: Writing buildhistory
-NOTE: Writing buildhistory took: 3 seconds
-NOTE: Writing buildhistory
-NOTE: Writing buildhistory took: 4 seconds
-NOTE: Writing buildhistory
-NOTE: Writing buildhistory took: 3 seconds
-Loading cache...done.
-Loaded 12640 entries from dependency cache.
-Parsing recipes...done.
-Parsing of 7344 .bb files complete (7338 cached, 6 parsed). 12619 targets, 353 skipped, 0 masked, 0 errors.
-NOTE: Resolving any missing task queue dependencies
-NOTE: Resolving any missing task queue dependencies
-NOTE: Resolving any missing task queue dependencies
-NOTE: Resolving any missing task queue dependencies
-NOTE: Resolving any missing task queue dependencies
-NOTE: Resolving any missing task queue dependencies
-
-Build Configuration (mc:default):
-BB_VERSION           = "2.4.0"
-BUILD_SYS            = "x86_64-linux"
-NATIVELSBSTRING      = "universal"
-TARGET_SYS           = "x86_64-poky-linux"
-MACHINE              = "qemux86-64"
-DISTRO               = "poky"
-DISTRO_VERSION       = "4.2"
-TUNE_FEATURES        = "m64 core2"
-TARGET_FPU           = ""
-meta                 
-meta-poky            
-meta-yocto-bsp       = "master:058a44165ce375f405063e73a9fcd1b2757ef8da"
-meta-oe              
-meta-python          
-meta-perl            = "heads/origin/master-next:2b2436df1afb38a1920b26c4d9db2723d0d8cebb"
-workspace            = "<unknown>:<unknown>"
-
-
-Build Configuration (mc:qemux86-musl):
-BB_VERSION           = "2.4.0"
-BUILD_SYS            = "x86_64-linux"
-NATIVELSBSTRING      = "universal"
-TARGET_SYS           = "i686-poky-linux-musl"
-MACHINE              = "qemux86"
-DISTRO               = "poky"
-DISTRO_VERSION       = "4.2"
-TUNE_FEATURES        = "m32 core2"
-TARGET_FPU           = ""
-meta                 
-meta-poky            
-meta-yocto-bsp       = "master:058a44165ce375f405063e73a9fcd1b2757ef8da"
-meta-oe              
-meta-python          
-meta-perl            = "heads/origin/master-next:2b2436df1afb38a1920b26c4d9db2723d0d8cebb"
-workspace            = "<unknown>:<unknown>"
-
-
-Build Configuration (mc:qemuarm64):
-BB_VERSION           = "2.4.0"
-BUILD_SYS            = "x86_64-linux"
-NATIVELSBSTRING      = "universal"
-TARGET_SYS           = "aarch64-poky-linux"
-MACHINE              = "qemuarm64"
-DISTRO               = "poky"
-DISTRO_VERSION       = "4.2"
-TUNE_FEATURES        = "aarch64 armv8a crc cortexa57"
-TARGET_FPU           = ""
-meta                 
-meta-poky            
-meta-yocto-bsp       = "master:058a44165ce375f405063e73a9fcd1b2757ef8da"
-meta-oe              
-meta-python          
-meta-perl            = "heads/origin/master-next:2b2436df1afb38a1920b26c4d9db2723d0d8cebb"
-workspace            = "<unknown>:<unknown>"
-
-Initialising tasks...done.
-Sstate summary: Wanted 1 Local 0 Mirrors 0 Missed 1 Current 0 (0% match, 0% complete)
-NOTE: Executing Tasks
-WARNING: Failed to fetch URL https://files.pythonhosted.org/packages/source/C/CacheControl/CacheControl-0.13.1.tar.gz;downloadfilename=CacheControl-0.13.1.tar.gz, attempting MIRRORS if available
-NOTE: Tasks Summary: Attempted 2 tasks of which 0 didn't need to be rerun and 1 failed.
-NOTE: Writing buildhistory
-NOTE: Writing buildhistory took: 4 seconds
-NOTE: Writing buildhistory
-NOTE: Writing buildhistory took: 4 seconds
-NOTE: Writing buildhistory
-NOTE: Writing buildhistory took: 4 seconds
-
-INFO: Extracting current version source...
-INFO: Extracting upgraded version source...
-INFO: Fetching https://files.pythonhosted.org/packages/source/C/CacheControl/CacheControl-0.13.1.tar.gz;downloadfilename=CacheControl-0.13.1.tar.gz...
-ERROR: Fetcher failure: Fetch command export PSEUDO_DISABLED=1; export PATH="/scratch1/auh/build-auh/tmp/sysroots-uninative/x86_64-linux/usr/bin:/home/auh/Projects/poky/scripts:/scratch1/auh/build-auh/tmp/work/recipetool-evivv3z1/work/recipe-sysroot-native/usr/bin/x86_64-poky-linux:/scratch1/auh/build-auh/tmp/work/recipetool-evivv3z1/work/recipe-sysroot/usr/bin/crossscripts:/scratch1/auh/build-auh/tmp/work/recipetool-evivv3z1/work/recipe-sysroot-native/usr/sbin:/scratch1/auh/build-auh/tmp/work/recipetool-evivv3z1/work/recipe-sysroot-native/usr/bin:/scratch1/auh/build-auh/tmp/work/recipetool-evivv3z1/work/recipe-sysroot-native/sbin:/scratch1/auh/build-auh/tmp/work/recipetool-evivv3z1/work/recipe-sysroot-native/bin:/home/auh/Projects/poky/bitbake/bin:/scratch1/auh/build-auh/tmp/hosttools"; export HOME="/home/auh"; /usr/bin/env wget -t 2 -T 30 --passive-ftp -O /scratch1/auh/DOWNLOADS/CacheControl-0.13.1.tar.gz.tmp -P /scratch1/auh/DOWNLOADS 'https://files.pythonhosted.org/packages/sourc
- e/C/CacheControl/CacheControl-0.13.1.tar.gz' --progress=dot -v failed with exit code 8, no output
-ERROR: Bitbake Fetcher Error: FetchError('Unable to fetch URL from any source.', 'https://files.pythonhosted.org/packages/source/C/CacheControl/CacheControl-0.13.1.tar.gz;downloadfilename=CacheControl-0.13.1.tar.gz')
-ERROR: Logfile of failure stored in: /scratch1/auh/build-auh/tmp/work/recipetool-evivv3z1/work/temp/log.do_fetch.2927407
-ERROR: Failed to fetch URL https://files.pythonhosted.org/packages/source/C/CacheControl/CacheControl-0.13.1.tar.gz;downloadfilename=CacheControl-0.13.1.tar.gz
-
+Alternatively, if you believe the recipe should not be upgraded at this time,
+you can fill RECIPE_NO_UPDATE_REASON in respective recipe file so that
+automatic upgrades would no longer be attempted.
 
 Please review the attached files for further information and build/update failures.
 Any problem please file a bug at https://bugzilla.yoctoproject.org/enter_bug.cgi?product=Automated%20Update%20Handler
 
 Regards,
 The Upgrade Helper
---===============7361999334002459944==--
+
+-- >8 --
+From 7d31946fcd40ab5e14604dfc2549f1ecf0c6f297 Mon Sep 17 00:00:00 2001
+From: Upgrade Helper <auh@moto-timo.dev>
+Date: Fri, 4 Aug 2023 21:35:06 -0500
+Subject: [PATCH] python3-cantools: upgrade 38.0.2 -> 39.0.0
+
+---
+ .../{python3-cantools_38.0.2.bb => python3-cantools_39.0.0.bb}  | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-cantools_38.0.2.bb => python3-cantools_39.0.0.bb} (84%)
+
+diff --git a/meta-python/recipes-devtools/python/python3-cantools_38.0.2.bb b/meta-python/recipes-devtools/python/python3-cantools_39.0.0.bb
+similarity index 84%
+rename from meta-python/recipes-devtools/python/python3-cantools_38.0.2.bb
+rename to meta-python/recipes-devtools/python/python3-cantools_39.0.0.bb
+index 003573583..9e6bf7f6a 100644
+--- a/meta-python/recipes-devtools/python/python3-cantools_38.0.2.bb
++++ b/meta-python/recipes-devtools/python/python3-cantools_39.0.0.bb
+@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/eerimoq/cantools"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=d9aa4ec07de78abae21c490c9ffe61bd"
+ 
+-SRC_URI[sha256sum] = "93bfe6f4bd652f369763ea9162b027a62f424a8400f2423d41137918ce68c68e"
++SRC_URI[sha256sum] = "60b3d224e3b080b1215fe37d21b043830ea68ee44fce0614977823ffd850fb18"
+ 
+ PYPI_PACKAGE = "cantools"
+ 
+-- 
+2.25.1
+
+
+--===============2904174130224700473==
+Content-Type: text/x-diff; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment;
+ filename="0001-python3-cantools-upgrade-38.0.2-39.0.0.patch"
+
+From 7d31946fcd40ab5e14604dfc2549f1ecf0c6f297 Mon Sep 17 00:00:00 2001
+From: Upgrade Helper <auh@moto-timo.dev>
+Date: Fri, 4 Aug 2023 21:35:06 -0500
+Subject: [PATCH] python3-cantools: upgrade 38.0.2 -> 39.0.0
+
+---
+ .../{python3-cantools_38.0.2.bb => python3-cantools_39.0.0.bb}  | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-cantools_38.0.2.bb => python3-cantools_39.0.0.bb} (84%)
+
+diff --git a/meta-python/recipes-devtools/python/python3-cantools_38.0.2.bb b/meta-python/recipes-devtools/python/python3-cantools_39.0.0.bb
+similarity index 84%
+rename from meta-python/recipes-devtools/python/python3-cantools_38.0.2.bb
+rename to meta-python/recipes-devtools/python/python3-cantools_39.0.0.bb
+index 003573583..9e6bf7f6a 100644
+--- a/meta-python/recipes-devtools/python/python3-cantools_38.0.2.bb
++++ b/meta-python/recipes-devtools/python/python3-cantools_39.0.0.bb
+@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/eerimoq/cantools"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=d9aa4ec07de78abae21c490c9ffe61bd"
+ 
+-SRC_URI[sha256sum] = "93bfe6f4bd652f369763ea9162b027a62f424a8400f2423d41137918ce68c68e"
++SRC_URI[sha256sum] = "60b3d224e3b080b1215fe37d21b043830ea68ee44fce0614977823ffd850fb18"
+ 
+ PYPI_PACKAGE = "cantools"
+ 
+-- 
+2.25.1
+
+
+--===============2904174130224700473==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment; filename="bitbake-output-qemux86-64.txt"
+
+Loading cache...done.
+Loaded 12636 entries from dependency cache.
+Parsing recipes...done.
+Parsing of 7341 .bb files complete (7338 cached, 3 parsed). 12618 targets, 325 skipped, 0 masked, 0 errors.
+Removing 1 recipes from the core2-64 sysroot...done.
+Removing 1 recipes from the qemux86_64 sysroot...done.
+NOTE: Resolving any missing task queue dependencies
+NOTE: Resolving any missing task queue dependencies
+NOTE: Resolving any missing task queue dependencies
+NOTE: Resolving any missing task queue dependencies
+NOTE: Resolving any missing task queue dependencies
+NOTE: Resolving any missing task queue dependencies
+
+Build Configuration (mc:default):
+BB_VERSION           = "2.4.0"
+BUILD_SYS            = "x86_64-linux"
+NATIVELSBSTRING      = "universal"
+TARGET_SYS           = "x86_64-poky-linux"
+MACHINE              = "qemux86-64"
+DISTRO               = "poky"
+DISTRO_VERSION       = "4.2"
+TUNE_FEATURES        = "m64 core2"
+TARGET_FPU           = ""
+meta                 
+meta-poky            
+meta-yocto-bsp       = "master:058a44165ce375f405063e73a9fcd1b2757ef8da"
+meta-oe              
+meta-python          
+meta-perl            = "heads/origin/master-next:2b2436df1afb38a1920b26c4d9db2723d0d8cebb"
+workspace            = "<unknown>:<unknown>"
+
+
+Build Configuration (mc:qemux86-musl):
+BB_VERSION           = "2.4.0"
+BUILD_SYS            = "x86_64-linux"
+NATIVELSBSTRING      = "universal"
+TARGET_SYS           = "x86_64-poky-linux-musl"
+MACHINE              = "qemux86-64"
+DISTRO               = "poky"
+DISTRO_VERSION       = "4.2"
+TUNE_FEATURES        = "m64 core2"
+TARGET_FPU           = ""
+meta                 
+meta-poky            
+meta-yocto-bsp       = "master:058a44165ce375f405063e73a9fcd1b2757ef8da"
+meta-oe              
+meta-python          
+meta-perl            = "heads/origin/master-next:2b2436df1afb38a1920b26c4d9db2723d0d8cebb"
+workspace            = "<unknown>:<unknown>"
+
+
+Build Configuration (mc:qemuarm64):
+BB_VERSION           = "2.4.0"
+BUILD_SYS            = "x86_64-linux"
+NATIVELSBSTRING      = "universal"
+TARGET_SYS           = "x86_64-poky-linux"
+MACHINE              = "qemux86-64"
+DISTRO               = "poky"
+DISTRO_VERSION       = "4.2"
+TUNE_FEATURES        = "m64 core2"
+TARGET_FPU           = ""
+meta                 
+meta-poky            
+meta-yocto-bsp       = "master:058a44165ce375f405063e73a9fcd1b2757ef8da"
+meta-oe              
+meta-python          
+meta-perl            = "heads/origin/master-next:2b2436df1afb38a1920b26c4d9db2723d0d8cebb"
+workspace            = "<unknown>:<unknown>"
+
+Initialising tasks...done.
+Checking sstate mirror object availability...done.
+Sstate summary: Wanted 368 Local 178 Mirrors 180 Missed 10 Current 268 (97% match, 98% complete)
+NOTE: Executing Tasks
+NOTE: Running task 1330 of 1789 (/home/auh/Projects/meta-openembedded/meta-python/recipes-devtools/python/python3-cantools_39.0.0.bb:do_recipe_qa)
+NOTE: recipe python3-cantools-39.0.0-r0: task do_recipe_qa: Started
+NOTE: recipe python3-cantools-39.0.0-r0: task do_recipe_qa: Succeeded
+NOTE: Running task 1772 of 1789 (/home/auh/Projects/meta-openembedded/meta-python/recipes-devtools/python/python3-cantools_39.0.0.bb:do_fetch)
+NOTE: recipe python3-cantools-39.0.0-r0: task do_fetch: Started
+NOTE: recipe python3-cantools-39.0.0-r0: task do_fetch: Succeeded
+NOTE: Running task 1773 of 1789 (/home/auh/Projects/meta-openembedded/meta-python/recipes-devtools/python/python3-cantools_39.0.0.bb:do_unpack)
+NOTE: Running task 1774 of 1789 (/home/auh/Projects/meta-openembedded/meta-python/recipes-devtools/python/python3-cantools_39.0.0.bb:do_prepare_recipe_sysroot)
+NOTE: recipe python3-cantools-39.0.0-r0: task do_unpack: Started
+NOTE: recipe python3-cantools-39.0.0-r0: task do_prepare_recipe_sysroot: Started
+NOTE: recipe python3-cantools-39.0.0-r0: task do_unpack: Succeeded
+NOTE: Running task 1775 of 1789 (/home/auh/Projects/meta-openembedded/meta-python/recipes-devtools/python/python3-cantools_39.0.0.bb:do_patch)
+NOTE: Running task 1776 of 1789 (/home/auh/Projects/meta-openembedded/meta-python/recipes-devtools/python/python3-cantools_39.0.0.bb:do_collect_spdx_deps)
+NOTE: recipe python3-cantools-39.0.0-r0: task do_patch: Started
+NOTE: recipe python3-cantools-39.0.0-r0: task do_collect_spdx_deps: Started
+NOTE: recipe python3-cantools-39.0.0-r0: task do_prepare_recipe_sysroot: Succeeded
+NOTE: recipe python3-cantools-39.0.0-r0: task do_patch: Succeeded
+NOTE: Running task 1777 of 1789 (/home/auh/Projects/meta-openembedded/meta-python/recipes-devtools/python/python3-cantools_39.0.0.bb:do_deploy_source_date_epoch)
+NOTE: Running task 1778 of 1789 (/home/auh/Projects/meta-openembedded/meta-python/recipes-devtools/python/python3-cantools_39.0.0.bb:do_populate_lic)
+NOTE: recipe python3-cantools-39.0.0-r0: task do_collect_spdx_deps: Succeeded
+NOTE: recipe python3-cantools-39.0.0-r0: task do_deploy_source_date_epoch: Started
+NOTE: recipe python3-cantools-39.0.0-r0: task do_populate_lic: Started
+NOTE: recipe python3-cantools-39.0.0-r0: task do_populate_lic: Succeeded
+NOTE: recipe python3-cantools-39.0.0-r0: task do_deploy_source_date_epoch: Succeeded
+NOTE: Running task 1779 of 1789 (/home/auh/Projects/meta-openembedded/meta-python/recipes-devtools/python/python3-cantools_39.0.0.bb:do_configure)
+NOTE: recipe python3-cantools-39.0.0-r0: task do_configure: Started
+NOTE: recipe python3-cantools-39.0.0-r0: task do_configure: Succeeded
+NOTE: Running task 1780 of 1789 (/home/auh/Projects/meta-openembedded/meta-python/recipes-devtools/python/python3-cantools_39.0.0.bb:do_compile)
+NOTE: recipe python3-cantools-39.0.0-r0: task do_compile: Started
+Log data follows:
+| DEBUG: Executing shell function do_compile
+| /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/python3-cantools/39.0.0-r0/recipe-sysroot-native/usr/bin/python3-native/python3: can't open file '/scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/python3-cantools/39.0.0-r0/cantools-39.0.0/setup.py': [Errno 2] No such file or directory
+| ERROR: 'python3 setup.py bdist_wheel ' execution failed.
+| WARNING: exit code 1 from a shell command.
+NOTE: recipe python3-cantools-39.0.0-r0: task do_compile: Failed
+NOTE: Tasks Summary: Attempted 1780 tasks of which 1770 didn't need to be rerun and 1 failed.
+NOTE: Writing buildhistory
+NOTE: Writing buildhistory took: 3 seconds
+NOTE: Writing buildhistory
+NOTE: Writing buildhistory took: 3 seconds
+NOTE: Writing buildhistory
+NOTE: Writing buildhistory took: 3 seconds
+
+Summary: 1 task failed:
+  /home/auh/Projects/meta-openembedded/meta-python/recipes-devtools/python/python3-cantools_39.0.0.bb:do_compile
+Summary: There were 2 ERROR messages, returning a non-zero exit code.
+ERROR: python3-cantools-39.0.0-r0 do_compile: 'python3 setup.py bdist_wheel ' execution failed.
+ERROR: python3-cantools-39.0.0-r0 do_compile: ExecutionError('/scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/python3-cantools/39.0.0-r0/temp/run.do_compile.2941473', 1, None, None)
+ERROR: Logfile of failure stored in: /scratch1/auh/build-auh/tmp/work/core2-64-poky-linux/python3-cantools/39.0.0-r0/temp/log.do_compile.2941473
+ERROR: Task (/home/auh/Projects/meta-openembedded/meta-python/recipes-devtools/python/python3-cantools_39.0.0.bb:do_compile) failed with exit code '1'
+
+--===============2904174130224700473==--
 
