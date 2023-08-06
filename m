@@ -1,88 +1,90 @@
-Return-Path: <akuster808@gmail.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A2411C001B0
-	for <webhook@archiver.kernel.org>; Sun,  6 Aug 2023 17:31:47 +0000 (UTC)
-Received: from mail-pl1-f180.google.com (mail-pl1-f180.google.com [209.85.214.180])
- by mx.groups.io with SMTP id smtpd.web10.15471.1691343098592237221
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 15491C00528
+	for <webhook@archiver.kernel.org>; Sun,  6 Aug 2023 19:12:08 +0000 (UTC)
+Received: from mail-oo1-f44.google.com (mail-oo1-f44.google.com [209.85.161.44])
+ by mx.groups.io with SMTP id smtpd.web10.17318.1691349127538521117
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 06 Aug 2023 10:31:38 -0700
+ Sun, 06 Aug 2023 12:12:07 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20221208 header.b=bb1BF1V7;
- spf=pass (domain: gmail.com, ip: 209.85.214.180, mailfrom: akuster808@gmail.com)
-Received: by mail-pl1-f180.google.com with SMTP id d9443c01a7336-1bbbbb77b38so23035745ad.3
-        for <openembedded-devel@lists.openembedded.org>; Sun, 06 Aug 2023 10:31:38 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20221208 header.b=Ghsjlkdx;
+ spf=pass (domain: gmail.com, ip: 209.85.161.44, mailfrom: raj.khem@gmail.com)
+Received: by mail-oo1-f44.google.com with SMTP id 006d021491bc7-565f2567422so2611960eaf.2
+        for <openembedded-devel@lists.openembedded.org>; Sun, 06 Aug 2023 12:12:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1691343098; x=1691947898;
-        h=content-transfer-encoding:subject:from:to:content-language
-         :user-agent:mime-version:date:message-id:from:to:cc:subject:date
+        d=gmail.com; s=20221208; t=1691349127; x=1691953927;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=B2b6dm8Bb+5XAwUbQ6aeuw+fVu+3rHtCTk1zwVEbFlI=;
-        b=bb1BF1V78hJCpS+RxeqptJcbl6bOZzcPAOy2QAQmH4V30rfBb09bsGz8ysX3WElYf+
-         s02w8TKPfSX9qSemghDIA2zxMFhFFp9cOpiD+BENVBeHjjWnw7RZ9I6ggr30evquj1UU
-         NPbXc2TcUbQD3qhEnUoVyfjl0iwWYtF+ffakkCadNrHK+AixvM12oKYsV8Yt6xP+mcfe
-         JLF/dn5cPYqbjyOb0ZAUqCm2IddBo1K+X31nYXRgH+RfbeyE66wc8OMV0wJjQ9V9Svsg
-         Nokpn2KkQR98Io3I8xj0bRgrQtQtRJ7TXfVJE3Fadfewfkq9lw1MiqJqhZzEsRVkKf7w
-         2JMA==
+        bh=58vP9E3zg3l5F/Nw5sCGCCOaes5A39MY1nco/fxp7hM=;
+        b=Ghsjlkdx0jia46BCzLuFtXoXAWUQ+yaIio66azdmeJ/nxfSzl8WDDOmtARwrONnmRc
+         oJU2ddDgwrLd50hTsKI/C9GOe6suyDQx8c22JXHwO3fwOHPZALM2VaN+KXg/Eg+dS81F
+         vV1oqU6XbfIqQKU0xEdqJfqojASEOrWgWp8eIDYeWSJi5Dva4IzYCtq6ojp7Jz4MrDhy
+         G/S45k+EQrHJLDMUwca3a/DEiQvmepAYdeSQy/M0Mt3kDuCobQItoRLa2Qn6wyXq15R3
+         BZdjY3zJTk5P0M4jTrone1J9CHbPxT6petvvERIELKVlTPhWNGTRgZNtne13Xg6MV9kS
+         3ZaQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1691343098; x=1691947898;
-        h=content-transfer-encoding:subject:from:to:content-language
-         :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=B2b6dm8Bb+5XAwUbQ6aeuw+fVu+3rHtCTk1zwVEbFlI=;
-        b=a37qzmrsXSl7zws53Nut7UN1KUtoVK+1yITF2xCFefAcVUWZju88R3A56pSBxAcGgH
-         WoeD1t3m8SghDJjsvRxrGDT0a8AxM4KpAGJmuuxk1XEt8r0OZRDTfehW9AEjOvTATgA4
-         1AJMH77xpPFafjzDZnyeznKRidOYA/vJptdLNlP+fqq/takp2N6nF+QyWedLlTULYQWR
-         JIesodWaz8w23FeiFa9VVqyWcLYAbh3SMTo9IBxBQaRRnaIjm1ShkIPAnmT7Lp4dgDGA
-         tIVAxoEEkKX7TRiNUSrSDAnfBa9Bgbn+S9ICAntRo+fk4ZM1wHbH3Zdg79FwtgPNV3G8
-         +wmA==
-X-Gm-Message-State: AOJu0YxU5pSOq2tBFujEw7PcBYPPbqkFR59dVLvRjVrKiMh7FdRtSXTi
-	b6+xXSIHcRtb+o3uXBAeuFg=
-X-Google-Smtp-Source: AGHT+IGC6va49lYyISRiCU4TFOXD62bmuiKqNjqOPGuiCFZTYPJdQYu9Ri2kb2iDmrl6z8i0W/H6Ig==
-X-Received: by 2002:a17:903:22c6:b0:1bc:6707:f451 with SMTP id y6-20020a17090322c600b001bc6707f451mr2273368plg.42.1691343097933;
-        Sun, 06 Aug 2023 10:31:37 -0700 (PDT)
-Received: from [192.168.19.117] (c-73-90-186-127.hsd1.ca.comcast.net. [73.90.186.127])
-        by smtp.gmail.com with ESMTPSA id b21-20020a170902d31500b001bbd8cf6b57sm5119419plc.230.2023.08.06.10.31.35
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Sun, 06 Aug 2023 10:31:36 -0700 (PDT)
-Message-ID: <bda36b56-b77b-d348-8b1b-22a7015aa48a@gmail.com>
-Date: Sun, 6 Aug 2023 13:31:33 -0400
+        d=1e100.net; s=20221208; t=1691349127; x=1691953927;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=58vP9E3zg3l5F/Nw5sCGCCOaes5A39MY1nco/fxp7hM=;
+        b=RiivuvFltRZsnLbYIHHKTDN/JyHmmJDowhpPxKN1UvEcNjKqq8GDAmULdOZAwmcLBr
+         KRbT3Wtq+jYoBGqW7RbbtXjsC9if5f+wA/h9GYLC/m/bPlgT2ZU6nSqsKpjI1lH3o6VQ
+         mVGiFGJPeuv70RZ0JVBCPijY2Qo9vJVMvorYTc0z5AL6K53KCTnftchcUIxeXzX1n1jD
+         nQhol9+faH9DvzkaQs/vRU63W3HXT3XsnxXveO2pWbwK5QH8uJMXiAULpKNgjHsyZ/3y
+         bJ4Xp/p4VXhJOY5kJ427fEaTx0BvCrR4wd1Zgh+rbq9axejd5YmWlQ0ipAgX3K918pp8
+         pTmw==
+X-Gm-Message-State: AOJu0YxufOxbnzJMF+D41/Co2Td6J93rjet2OTdUhy3jnOKr3hH8oRaS
+	7q3+sLjDWXdUryzXpjHFMCYhP8evDXFKel+I1Kw=
+X-Google-Smtp-Source: AGHT+IHiz5i2QniqpQ9Hd63gJWhncItNhq0k7a68XjVyRXrieCGe/kTJtRxQoLYAwE/JcmL45R5emMUiRpSo1T+GFHM=
+X-Received: by 2002:a4a:9209:0:b0:56c:d9d4:e80d with SMTP id
+ f9-20020a4a9209000000b0056cd9d4e80dmr7535844ooh.2.1691349126664; Sun, 06 Aug
+ 2023 12:12:06 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.13.0
-Content-Language: en-US
-To: Khem Raj <raj.khem@gmail.com>,
- OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-From: akuster808 <akuster808@gmail.com>
-Subject: mickledore merge request: Aug 6th
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+References: <bda36b56-b77b-d348-8b1b-22a7015aa48a@gmail.com>
+In-Reply-To: <bda36b56-b77b-d348-8b1b-22a7015aa48a@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sun, 6 Aug 2023 12:11:40 -0700
+Message-ID: <CAMKF1sr5JB3yTGOv+ttMvCfL4+yKgTn5Xkc_5_g-N=+9sLBt=A@mail.gmail.com>
+Subject: Re: mickledore merge request: Aug 6th
+To: akuster808 <akuster808@gmail.com>
+Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 06 Aug 2023 17:31:47 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104296
+ <openembedded-devel@lists.openembedded.org>; Sun, 06 Aug 2023 19:12:08 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104297
 
-The following changes since commit 03fd1d368ac19793b3e4c35159ba2ce802247e4d:
+merged thanks Armin
 
-   yasm: fix CVE-2023-31975 (2023-07-25 07:15:34 -0400)
-
-are available in the Git repository at:
-
-   https://git.openembedded.org/meta-openembedded mickledore-next
-
-for you to fetch changes up to 75cf318cef3b4ee81fad2782cf063ecd69ba8842:
-
-   lmsensors: do not pull in unneeded perl modules for run-time 
-dependencies (2023-08-03 16:46:11 -0400)
-
-----------------------------------------------------------------
-Beniamin Sandu (1):
-       lmsensors: do not pull in unneeded perl modules for run-time 
-dependencies
-
-  meta-oe/recipes-bsp/lm_sensors/lmsensors_3.6.0.bb | 5 +++--
-  1 file changed, 3 insertions(+), 2 deletions(-)
-
+On Sun, Aug 6, 2023 at 10:31=E2=80=AFAM akuster808 <akuster808@gmail.com> w=
+rote:
+>
+> The following changes since commit 03fd1d368ac19793b3e4c35159ba2ce802247e=
+4d:
+>
+>    yasm: fix CVE-2023-31975 (2023-07-25 07:15:34 -0400)
+>
+> are available in the Git repository at:
+>
+>    https://git.openembedded.org/meta-openembedded mickledore-next
+>
+> for you to fetch changes up to 75cf318cef3b4ee81fad2782cf063ecd69ba8842:
+>
+>    lmsensors: do not pull in unneeded perl modules for run-time
+> dependencies (2023-08-03 16:46:11 -0400)
+>
+> ----------------------------------------------------------------
+> Beniamin Sandu (1):
+>        lmsensors: do not pull in unneeded perl modules for run-time
+> dependencies
+>
+>   meta-oe/recipes-bsp/lm_sensors/lmsensors_3.6.0.bb | 5 +++--
+>   1 file changed, 3 insertions(+), 2 deletions(-)
+>
 
