@@ -1,134 +1,98 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <jsbronder@cold-front.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E2B1AC001E0
-	for <webhook@archiver.kernel.org>; Thu, 10 Aug 2023 14:49:36 +0000 (UTC)
-Received: from mail-oi1-f174.google.com (mail-oi1-f174.google.com [209.85.167.174])
- by mx.groups.io with SMTP id smtpd.web10.19181.1691678975491779924
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2782DC04E69
+	for <webhook@archiver.kernel.org>; Thu, 10 Aug 2023 15:40:07 +0000 (UTC)
+Received: from wout5-smtp.messagingengine.com (wout5-smtp.messagingengine.com [64.147.123.21])
+ by mx.groups.io with SMTP id smtpd.web10.20611.1691682005995385862
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 10 Aug 2023 07:49:35 -0700
+ Thu, 10 Aug 2023 08:40:06 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20221208 header.b=SAULSkq4;
- spf=pass (domain: gmail.com, ip: 209.85.167.174, mailfrom: raj.khem@gmail.com)
-Received: by mail-oi1-f174.google.com with SMTP id 5614622812f47-3a74d759be4so807318b6e.2
-        for <openembedded-devel@lists.openembedded.org>; Thu, 10 Aug 2023 07:49:35 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1691678975; x=1692283775;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=cJhe2RjyWU8sCal8Xt9v1QJS2HsPFH46Cg8wZCCNP/I=;
-        b=SAULSkq4kBcT+iV/o3kC5yJ6mAAyo0pOESyWGCplAJjvhm7HwnVgcf6E5oiAT+/tn4
-         wfH8Z0sehOntLfeO/22BkuAkPFrJWZdXM687QqDW6pvn9opTJ+oMJRux5DLGdDKGT5y+
-         8ppfs548Zj8dCeB0Lezxi+D/tGDUrj8QfhmQsG46S7n4NwnN4UFT/74E1ShGKEdeLdBC
-         t3uNJauCIWu/760TmBWibnZkihuaSewVsVez/fQ8mmi4fgB2z4yiXzyvSIenxUpUbRAM
-         T79xuwPVkR4mUaXDZELf/yDif/YjUsYpGdu5b/2A5eRBwaSmxUOG/xLpk341vWlvN0l/
-         EHYw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1691678975; x=1692283775;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=cJhe2RjyWU8sCal8Xt9v1QJS2HsPFH46Cg8wZCCNP/I=;
-        b=WIaJuUmPri0Gp9o6mGTGZQYOEqgX6mZpdEe82UTf/DKWn9aVyS6aJMK/sX7MBnkZFz
-         wEhUHMuBqMuaGywC5e+to7cFlLC06lTS9pX4TyNOZFqCRYFZsjRgn83NPNcmea/q0VUk
-         lLdl6VbEGNExO/brm3PL7DU8D2VD6WuZUDrWtiwARa5W95+MgL1FbWq5EoEjRyZGFvmk
-         I5MV1FKrtZH+nKFH4wYXju67fX+fUN24KrTfUgHnAUQWbq5Yrf6/9zq4It+kiO70d/Gd
-         eh0pEEVOp8iDhlzZgYkegknr+KvAq6vSpg0Y6ItkGEyk1nY+FTwbDML5DIOusH4zDVPy
-         5eWQ==
-X-Gm-Message-State: AOJu0YyOF9UN1WEXNiL1anNNKIEVrfJ/bJlaGoaDxgGyx+eW94vgl+3W
-	yQF+KOV+WliVklhBAztZxvZm/CQUtQBgjikLuoc=
-X-Google-Smtp-Source: AGHT+IGMr618cDuTokgksWQQrzzYrFrrd+Yr9w73Y+klir3pQ9zRkzR1oRwZfoCmUoWcD+83QIQagr+grp8zaY2BXtY=
-X-Received: by 2002:aca:1113:0:b0:3a7:83a7:ae71 with SMTP id
- 19-20020aca1113000000b003a783a7ae71mr2757872oir.54.1691678974615; Thu, 10 Aug
- 2023 07:49:34 -0700 (PDT)
+ dkim=pass header.i=@cold-front.org header.s=mesmtp header.b=nQotkpeO;
+ dkim=pass header.i=@messagingengine.com header.s=fm3 header.b=2QNY+Vbc;
+ spf=pass (domain: cold-front.org, ip: 64.147.123.21, mailfrom: jsbronder@cold-front.org)
+Received: from compute2.internal (compute2.nyi.internal [10.202.2.46])
+	by mailout.west.internal (Postfix) with ESMTP id 5ED7A3200942;
+	Thu, 10 Aug 2023 11:40:05 -0400 (EDT)
+Received: from mailfrontend1 ([10.202.2.162])
+  by compute2.internal (MEProxy); Thu, 10 Aug 2023 11:40:05 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cold-front.org;
+	 h=cc:cc:content-transfer-encoding:content-type:date:date:from
+	:from:in-reply-to:message-id:mime-version:reply-to:sender
+	:subject:subject:to:to; s=mesmtp; t=1691682004; x=1691768404;
+	 bh=gvmKRYxox+dgVtn082YOHGXHvFQBaMNC6jbIORy7GrI=; b=nQotkpeOaZyQ
+	OrcDvXg9eBaOiK8Oi/UAkNsXtRwTiLxd/ZqtBf7YltfDT96sv3c83+n5/NGvVx50
+	R5aFeXRsaJKe4xZfhioGNs0mzeJxGzhzEAAC+wyFD2luFXsgxSLH6TPjeeVjnoeR
+	vUl2ca78rzOZQfo6nk0/a2wGCh39zr4=
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	messagingengine.com; h=cc:cc:content-transfer-encoding
+	:content-type:date:date:feedback-id:feedback-id:from:from
+	:in-reply-to:message-id:mime-version:reply-to:sender:subject
+	:subject:to:to:x-me-proxy:x-me-proxy:x-me-sender:x-me-sender
+	:x-sasl-enc; s=fm3; t=1691682004; x=1691768404; bh=gvmKRYxox+dgV
+	tn082YOHGXHvFQBaMNC6jbIORy7GrI=; b=2QNY+Vbc/9VJT8pM2HlbnTDfFsNSR
+	SKDd2OFY60ukeKI/Q8cHZ04yMe7bIbn1KPmGLmAIxZm4WO3q3+5f5DT4BS8n9Uko
+	XeDDJjvbXXQYGy50LLPegYIqh4A9gBK2CffzlBWBkH1s13noT/K5OeVqWyVl805B
+	g5AJ62fBP7Xm4WekdAiesKnXkjhvXWtb96P/Ye22FOtLGRbUyRjTBZrOYbT1mr4v
+	kNRriJL3WilLFv0hG0ckfhesSZ8r9spNn68wOonPsmIOsGwiNjllA9oaHaPNx297
+	I5S0R5hAJ0tcx7RTSB5SAVWOZNjhP3GOHuKDPSN062huxoGP2N+IyjLnA==
+X-ME-Sender: <xms:1ATVZMwwloGvuW_BvvXgCqxRgQIAuN7i5DP-2Dj_fb2PaZaF7WaA1A>
+    <xme:1ATVZAQr0EggXlSYISrQmqEHjdia_ZBaRgSFjHB24IUqdkJV5FCLvvWqK6gYPRXXR
+    zv-BTy1nFUiz7mIdg>
+X-ME-Received: <xmr:1ATVZOVAWB41bDRi_F4wjS2UefLR5QnsJCZq9talq_TtQ4s8Zzifb_AFrA>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedviedrleeigdeltdcutefuodetggdotefrodftvf
+    curfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfghnecu
+    uegrihhlohhuthemuceftddtnecunecujfgurhephffvvefufffkofgggfestdekredtre
+    dttdenucfhrhhomheplfhushhtihhnuceurhhonhguvghruceojhhssghrohhnuggvrhes
+    tgholhguqdhfrhhonhhtrdhorhhgqeenucggtffrrghtthgvrhhnpedugffhvdekueehud
+    duudfhueeiieekgeeflefhgfefjeegleehjefhfedtleehgeenucevlhhushhtvghrufhi
+    iigvpedtnecurfgrrhgrmhepmhgrihhlfhhrohhmpehjshgsrhhonhguvghrsegtohhlug
+    dqfhhrohhnthdrohhrgh
+X-ME-Proxy: <xmx:1ATVZKjL4OMPmVIzI4_JSt1h5Qgclv9KrHHWEgzm_9zBcFE2WlQlnQ>
+    <xmx:1ATVZOBq06iP5lst6P4k2w2iaeK69BG-hoME1EUDz6S0r1tRgV4Hyg>
+    <xmx:1ATVZLJdcBtTDCJ4B7FotnUr34bmqZJF6Vg3GJzLI1BB872I626aLg>
+    <xmx:1ATVZJq1FH7jTtRBoj1R3WEFWgtdTB8Ux8h_ID4yfYkWJ7ikvpgWHQ>
+Feedback-ID: iea0042cb:Fastmail
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Thu,
+ 10 Aug 2023 11:40:04 -0400 (EDT)
+From: Justin Bronder <jsbronder@cold-front.org>
+To: openembedded-devel@lists.openembedded.org
+Cc: Justin Bronder <jsbronder@cold-front.org>
+Subject: [meta-python][PATCH 1/5] python3-mypy-extensions: upgrade 0.4.3 -> 1.0.0
+Date: Thu, 10 Aug 2023 11:39:48 -0400
+Message-ID: <20230810153953.17293-1-jsbronder@cold-front.org>
+X-Mailer: git-send-email 2.41.0
 MIME-Version: 1.0
-References: <20230810130340.14130-1-sudipm.mukherjee@gmail.com>
-In-Reply-To: <20230810130340.14130-1-sudipm.mukherjee@gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 10 Aug 2023 07:49:08 -0700
-Message-ID: <CAMKF1sr=a51pAYGHV289bKNUWkpQ8Xi=6xzUYXwer4iPJxEyCw@mail.gmail.com>
-Subject: Re: [oe] [PATCH] recipes-extended: Add initial recipe for qad package
-To: Sudip Mukherjee <sudipm.mukherjee@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 10 Aug 2023 14:49:36 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104324
+ <openembedded-devel@lists.openembedded.org>; Thu, 10 Aug 2023 15:40:07 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104325
 
-I have fixed the commit summary to match format
+Signed-off-by: Justin Bronder <jsbronder@cold-front.org>
+---
+ ...ypy-extensions_0.4.3.bb => python3-mypy-extensions_1.0.0.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-mypy-extensions_0.4.3.bb => python3-mypy-extensions_1.0.0.bb} (78%)
 
-recipe: short summary of change
+diff --git a/meta-python/recipes-devtools/python/python3-mypy-extensions_0.4.3.bb b/meta-python/recipes-devtools/python/python3-mypy-extensions_1.0.0.bb
+similarity index 78%
+rename from meta-python/recipes-devtools/python/python3-mypy-extensions_0.4.3.bb
+rename to meta-python/recipes-devtools/python/python3-mypy-extensions_1.0.0.bb
+index 83ac5362d..4c431431c 100644
+--- a/meta-python/recipes-devtools/python/python3-mypy-extensions_0.4.3.bb
++++ b/meta-python/recipes-devtools/python/python3-mypy-extensions_1.0.0.bb
+@@ -7,6 +7,6 @@ PYPI_PACKAGE = "mypy_extensions"
+ 
+ inherit pypi setuptools3
+ 
+-SRC_URI[sha256sum] = "2d82818f5bb3e369420cb3c4060a7970edba416647068eb4c5343488a6c604a8"
++SRC_URI[sha256sum] = "75dbf8955dc00442a438fc4d0666508a9a97b6bd41aa2f0ffe9d2f2725af0782"
+ 
+ BBCLASSEXTEND = "native"
+-- 
+2.41.0
 
-On Thu, Aug 10, 2023 at 6:05=E2=80=AFAM Sudip Mukherjee
-<sudipm.mukherjee@gmail.com> wrote:
->
-> QAD is a daemon used for automated remote testing on hardware which can
-> take screenshots and can inject mouse or touch and keyboard events.
->
-> Signed-off-by: Sudip Mukherjee <sudipm.mukherjee@gmail.com>
-> ---
->  meta-oe/recipes-extended/qad/qad_git.bb | 27 +++++++++++++++++++++++++
->  1 file changed, 27 insertions(+)
->  create mode 100644 meta-oe/recipes-extended/qad/qad_git.bb
->
-> diff --git a/meta-oe/recipes-extended/qad/qad_git.bb b/meta-oe/recipes-ex=
-tended/qad/qad_git.bb
-> new file mode 100644
-> index 000000000..e2a59139d
-> --- /dev/null
-> +++ b/meta-oe/recipes-extended/qad/qad_git.bb
-> @@ -0,0 +1,27 @@
-> +SUMMARY =3D "Simple, REST-API compliant daemon for automated testing"
-> +DESCRIPTION =3D " This is a simple, REST-API compliant daemon which make=
-s \
-> +automated testing on hardware possible by removing the need for physical=
- \
-> +intervention as Q.A.D allows inputs to be injected via http/https reques=
-ts. \
-> +This both eliminates the need to physically interact with the rig and al=
-lows \
-> +for tasks to be carried out entirely automatically."
-> +
-> +LICENSE =3D "MIT & GPL-2.0-or-later"
-> +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D402cce7fbcb6ea9ab5a0378dd7f40=
-806 \
-> +                    file://openqa/COPYING;md5=3Db234ee4d69f5fce4486a80fd=
-af4a4263 \
-> +                   "
-> +SRC_URI =3D "git://gitlab.com/CodethinkLabs/qad/qad;branch=3Dmain;protoc=
-ol=3Dhttps"
-> +
-> +SRCREV =3D "ae0c099c1fdc0ca6f5d631cea6b302937122b362"
-> +
-> +S =3D "${WORKDIR}/git"
-> +PV =3D "0.0+git${SRCPV}"
-> +
-> +DEPENDS =3D "cjson libmicrohttpd libdrm libpng"
-> +
-> +FILES:${PN} +=3D "qad"
-> +inherit meson pkgconfig
-> +
-> +do_install () {
-> +    install -d ${D}${bindir}
-> +    install -p -m 755 qad ${D}${bindir}/
-> +}
-> --
-> 2.39.2
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#104315): https://lists.openembedded.org/g/openembedde=
-d-devel/message/104315
-> Mute This Topic: https://lists.openembedded.org/mt/100662750/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
-aj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
 
