@@ -1,155 +1,129 @@
-Return-Path: <jsbronder@cold-front.org>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1225AC001E0
-	for <webhook@archiver.kernel.org>; Thu, 10 Aug 2023 15:40:17 +0000 (UTC)
-Received: from wout5-smtp.messagingengine.com (wout5-smtp.messagingengine.com [64.147.123.21])
- by mx.groups.io with SMTP id smtpd.web10.20617.1691682010885424762
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0F682C001E0
+	for <webhook@archiver.kernel.org>; Thu, 10 Aug 2023 18:28:38 +0000 (UTC)
+Received: from mail-oa1-f54.google.com (mail-oa1-f54.google.com [209.85.160.54])
+ by mx.groups.io with SMTP id smtpd.web11.25413.1691692115851616773
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 10 Aug 2023 08:40:10 -0700
+ Thu, 10 Aug 2023 11:28:35 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@cold-front.org header.s=mesmtp header.b=duhyPJsl;
- dkim=pass header.i=@messagingengine.com header.s=fm3 header.b=3cDC5HOD;
- spf=pass (domain: cold-front.org, ip: 64.147.123.21, mailfrom: jsbronder@cold-front.org)
-Received: from compute2.internal (compute2.nyi.internal [10.202.2.46])
-	by mailout.west.internal (Postfix) with ESMTP id 3B76C320047A;
-	Thu, 10 Aug 2023 11:40:10 -0400 (EDT)
-Received: from mailfrontend1 ([10.202.2.162])
-  by compute2.internal (MEProxy); Thu, 10 Aug 2023 11:40:10 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cold-front.org;
-	 h=cc:cc:content-transfer-encoding:content-type:date:date:from
-	:from:in-reply-to:in-reply-to:message-id:mime-version:references
-	:reply-to:sender:subject:subject:to:to; s=mesmtp; t=1691682009;
-	 x=1691768409; bh=WMu05IZBMpCeQapcr0f6SrGIpN0T8r/ZnkHK6gyou/M=; b=
-	duhyPJsl1YTyx7KIhajyhzuqrmfkJhcr7ouNbs68wvJT+OAtbprU7tyeqEzQKc/2
-	uTFoBZgmXnzhQtlYM2NJVDVE02pefUgwRgMwXDrXvUkv3kx+IRdZQlu3gF/vnqcI
-	8JvKNK3Y5jtNX2Fu6CD580x8sLkkMsAw6Ogj4d/WDJI=
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	messagingengine.com; h=cc:cc:content-transfer-encoding
-	:content-type:date:date:feedback-id:feedback-id:from:from
-	:in-reply-to:in-reply-to:message-id:mime-version:references
-	:reply-to:sender:subject:subject:to:to:x-me-proxy:x-me-proxy
-	:x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1691682009; x=
-	1691768409; bh=WMu05IZBMpCeQapcr0f6SrGIpN0T8r/ZnkHK6gyou/M=; b=3
-	cDC5HODa9iZ+xtItQCOZ1wWwtqfCj90qvq/OZVooYDpdROeeAyz22YFhvoY/2Wll
-	hR5f/WQeWWMp56dhhNXw89kViWOzJJXWAm1BOdT3HpybGrTr8asdl/Od95QPcFiU
-	+jZw2bJc9QaPAn2qi4rlmu8IeFlA9iiGXjFIbaGNd3lwmgXkt7JAb2dPmXn88YOC
-	OtC9bMX8vjQU56P8wPlH5y/4R+7oBc249S4J3Hl03kdJ+PB7Cgr9ePaI2d6fBIy9
-	700jEopruhcdHidfTy1Uc99cv/6PmJuC4IlTaqzhZ5HS7tZrqPLXRj21eHylQae7
-	+PS6pU9tSiXRDftuBdleg==
-X-ME-Sender: <xms:2QTVZI4BskEgJKCZqaW9T6cVebBv73sep3XPTRb9GwgVjwneXd5ttA>
-    <xme:2QTVZJ5ZDsH3H-ZBsSNbLZteMsqI5Qnm8sdfWhCGuc5IPU6_W8OabeaHSREUflMx0
-    wnM6UoJ2DdMdXhphw>
-X-ME-Received: <xmr:2QTVZHd0qLBs_Niww9UOlANxIrakQzPEvFLNf735c437VOudmuGi8qPo9A>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedviedrleeigdeltdcutefuodetggdotefrodftvf
-    curfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfghnecu
-    uegrihhlohhuthemuceftddtnecunecujfgurhephffvvefufffkofgjfhgggfestdekre
-    dtredttdenucfhrhhomheplfhushhtihhnuceurhhonhguvghruceojhhssghrohhnuggv
-    rhestgholhguqdhfrhhonhhtrdhorhhgqeenucggtffrrghtthgvrhhnpeevteehuddule
-    dtheeigeefveetfedtteevhfdvgfejudfgieeiieffudehhffgteenucffohhmrghinhep
-    ghhithhhuhgsrdgtohhmnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrg
-    hilhhfrhhomhepjhhssghrohhnuggvrhestgholhguqdhfrhhonhhtrdhorhhg
-X-ME-Proxy: <xmx:2QTVZNLs82TKxLMnPsDN3H0DeENfyP_8yapFJ9cjvSCScJZhCXeURQ>
-    <xmx:2QTVZMJFfMx8xA2Eq7kR-yqNLGpeB7oOrhZwSUBnwIPhGgJl5hECsg>
-    <xmx:2QTVZOybVMM8pHARwwhQGvVwj2OcK6ncCByAumd8DfYOfp3LfxFaZg>
-    <xmx:2QTVZGwJjUxWos-4a02vcuBdf0Mxk0GNmrQ1BLG8hZyXB3tynhzVeQ>
-Feedback-ID: iea0042cb:Fastmail
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Thu,
- 10 Aug 2023 11:40:09 -0400 (EDT)
-From: Justin Bronder <jsbronder@cold-front.org>
-To: openembedded-devel@lists.openembedded.org
-Cc: Justin Bronder <jsbronder@cold-front.org>
-Subject: [meta-python][PATCH 4/5] python3-mypy: upgrade 0.971 -> 1.5.0
-Date: Thu, 10 Aug 2023 11:39:51 -0400
-Message-ID: <20230810153953.17293-4-jsbronder@cold-front.org>
-X-Mailer: git-send-email 2.41.0
-In-Reply-To: <20230810153953.17293-1-jsbronder@cold-front.org>
-References: <20230810153953.17293-1-jsbronder@cold-front.org>
+ dkim=pass header.i=@gmail.com header.s=20221208 header.b=UFNMog52;
+ spf=pass (domain: gmail.com, ip: 209.85.160.54, mailfrom: raj.khem@gmail.com)
+Received: by mail-oa1-f54.google.com with SMTP id 586e51a60fabf-1bfc2b68090so1009386fac.3
+        for <openembedded-devel@lists.openembedded.org>; Thu, 10 Aug 2023 11:28:35 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20221208; t=1691692115; x=1692296915;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=E4DIEwU0nGvEm2XQEXDoVqzxLDparMlJQojqmw62HX8=;
+        b=UFNMog52sV03fzwIYe3+YWMt60AIgmWTlU/uzBOQ2YJsZoH/25Be3PEDMjerK0A4c7
+         VwSsax5YORUDmortlHns2Gtdu3cPVjhje2CefCFr8CytrOKEPbq0I+PITsTTM93LxDhG
+         np29yrP3bTm9ZuknulAkDM6eiRgLtMrXIbW8NdDWITmFSOH4f59nNGzslEhmhsOety48
+         3HR/z2BpDSuUbeyVj/BchFu840Q/is4mkYupQs7Ehc3dp+b7sQQKPlxg6JJ9MI3xnUGN
+         kIYdNtVtYRFO1Jd9jUtYnepiH5JwCAH+9kTaX0gJqqwCHkMak0yMctnJKQH1gduNSIFZ
+         YF0g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20221208; t=1691692115; x=1692296915;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=E4DIEwU0nGvEm2XQEXDoVqzxLDparMlJQojqmw62HX8=;
+        b=DkzRgIBvN2i7gYhE98NdPcvsfCLWb8UZ9ciGkBSnon2Gpc4LZczJTnY6ypI8x4NA5i
+         hNzZwLg01os9P3jGTGpQ+06SOIrQfIdZuFjEB9a9TyXj/CKiErUrO4+Fd2ERYF+Ug+Cy
+         RDsiCoE191f7dpVBYjqwOUb0bOPWSEeQQP3GRBhPne1HUxIY6zi7Pv2JtpdemMYNcqpP
+         O+bPWMM5UtEOM4W1awUcVOLVlpMJVI5kkctFrG048+lfx5aj1HBQ5+P3PD18eEI+iYBt
+         r6tc2pGrksUSRrbD6ooVoGRzfZ+P5mNHK8mmAq1HligrTDupnN5aNsHltTJY1GqOxRfg
+         GtsQ==
+X-Gm-Message-State: AOJu0YwxLlHLU12340U3N1+wTSLKdwfW0N2POWn8vu/Omr2MfogvrAEU
+	+FUR699uZmMMpYZIqRZKezmbgEmLCVuRP6bHTMM=
+X-Google-Smtp-Source: AGHT+IGcruv6cck8XjrplRa+Ix3SxpG5/eqdDtBs0lFK38NTqt1b7qqInEp/k7s78oZYCYZpwKagVVt3iiTpViMiM50=
+X-Received: by 2002:a05:6870:239e:b0:1be:f23f:99b with SMTP id
+ e30-20020a056870239e00b001bef23f099bmr3695601oap.42.1691692115051; Thu, 10
+ Aug 2023 11:28:35 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20230810153953.17293-1-jsbronder@cold-front.org> <20230810153953.17293-5-jsbronder@cold-front.org>
+In-Reply-To: <20230810153953.17293-5-jsbronder@cold-front.org>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 10 Aug 2023 11:28:08 -0700
+Message-ID: <CAMKF1sp5R+_mL2bm-0oaaY_VE4yzzfVoaY0B=TN9pzrvfgby-Q@mail.gmail.com>
+Subject: Re: [oe] [meta-python][PATCH 5/5] python3-typed-ast: remove EOL package
+To: Justin Bronder <jsbronder@cold-front.org>
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 10 Aug 2023 15:40:17 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104328
+ <openembedded-devel@lists.openembedded.org>; Thu, 10 Aug 2023 18:28:38 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104330
 
-Switched RDEPEND to python3-modules as this is a complex package that is
-still under fairly heavy development by python core contributors.  It's
-likely that the dependency list will change from release to release and
-unlikely that anyone wanting type-checking will be object to having a
-full python installation.
+Thanks for cleanup, I wish we did this with more recipes in this repo.
+Its a lot of energy to keep these going with newer toolchain and etc.
 
-Note for anyone attempting to backport this, you'll need to add
-python3-tomli to RDEPENDS as python < 3.11 won't be in the stdlib.
-
-Signed-off-by: Justin Bronder <jsbronder@cold-front.org>
----
- .../python/python3-mypy_0.971.bb              | 23 -------------------
- .../python/python3-mypy_1.5.0.bb              | 23 +++++++++++++++++++
- 2 files changed, 23 insertions(+), 23 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python3-mypy_0.971.bb
- create mode 100644 meta-python/recipes-devtools/python/python3-mypy_1.5.0.bb
-
-diff --git a/meta-python/recipes-devtools/python/python3-mypy_0.971.bb b/meta-python/recipes-devtools/python/python3-mypy_0.971.bb
-deleted file mode 100644
-index 31fcb06c9..000000000
---- a/meta-python/recipes-devtools/python/python3-mypy_0.971.bb
-+++ /dev/null
-@@ -1,23 +0,0 @@
--SUMMARY = "Optional static typing for Python 3 and 2 (PEP 484)"
--HOMEPAGE = "https://github.com/python/mypy"
--LICENSE = "MIT & Python-2.0"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=6ba8ec528da02073b7e1f4124c0f836f"
--
--PYPI_PACKAGE = "mypy"
--
--inherit pypi python_setuptools_build_meta
--
--SRC_URI[sha256sum] = "40b0f21484238269ae6a57200c807d80debc6459d444c0489a102d7c6a75fa56"
--
--BBCLASSEXTEND = "native"
--
--RDEPENDS:${PN} += " \
--    ${PYTHON_PN}-mypy-extensions \
--    ${PYTHON_PN}-typed-ast \
--    ${PYTHON_PN}-typing-extensions \
--    ${PYTHON_PN}-json \
--    ${PYTHON_PN}-compression \
--    ${PYTHON_PN}-pprint \
--    ${PYTHON_PN}-difflib \
--    ${PYTHON_PN}-toml \
--"
-diff --git a/meta-python/recipes-devtools/python/python3-mypy_1.5.0.bb b/meta-python/recipes-devtools/python/python3-mypy_1.5.0.bb
-new file mode 100644
-index 000000000..46730aa23
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-mypy_1.5.0.bb
-@@ -0,0 +1,23 @@
-+SUMMARY = "Optional static typing for Python 3 and 2 (PEP 484)"
-+HOMEPAGE = "https://github.com/python/mypy"
-+LICENSE = "MIT & Python-2.0"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=6ba8ec528da02073b7e1f4124c0f836f"
-+
-+inherit pypi python_setuptools_build_meta
-+
-+SRC_URI[sha256sum] = "f3460f34b3839b9bc84ee3ed65076eb827cd99ed13ed08d723f9083cada4a212"
-+
-+BBCLASSEXTEND = "native"
-+
-+DEPENDS += " \
-+    python3-mypy-extensions-native \
-+    python3-types-psutil-native \
-+    python3-types-setuptools-native \
-+    python3-typing-extensions-native \
-+"
-+
-+RDEPENDS:${PN} += " \
-+    python3-modules \
-+    python3-mypy-extensions \
-+    python3-typing-extensions \
-+"
--- 
-2.41.0
-
+On Thu, Aug 10, 2023 at 8:40=E2=80=AFAM Justin Bronder <jsbronder@cold-fron=
+t.org> wrote:
+>
+> No longer required by python3-mypy and no longer maintained upstream.
+> https://github.com/python/typed_ast/issues/179
+>
+> Signed-off-by: Justin Bronder <jsbronder@cold-front.org>
+> ---
+>  .../packagegroups/packagegroup-meta-python.bb        |  1 -
+>  .../python/python3-typed-ast_1.5.4.bb                | 12 ------------
+>  2 files changed, 13 deletions(-)
+>  delete mode 100644 meta-python/recipes-devtools/python/python3-typed-ast=
+_1.5.4.bb
+>
+> diff --git a/meta-python/recipes-core/packagegroups/packagegroup-meta-pyt=
+hon.bb b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
+> index 9500f80e0..f75007e13 100644
+> --- a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
+> +++ b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
+> @@ -437,7 +437,6 @@ RDEPENDS:packagegroup-meta-python3 =3D "\
+>      python3-txaio \
+>      python3-txdbus \
+>      python3-txws \
+> -    python3-typed-ast \
+>      python3-typeguard \
+>      python3-tzlocal \
+>      python3-u-msgpack-python \
+> diff --git a/meta-python/recipes-devtools/python/python3-typed-ast_1.5.4.=
+bb b/meta-python/recipes-devtools/python/python3-typed-ast_1.5.4.bb
+> deleted file mode 100644
+> index e6c1746a8..000000000
+> --- a/meta-python/recipes-devtools/python/python3-typed-ast_1.5.4.bb
+> +++ /dev/null
+> @@ -1,12 +0,0 @@
+> -SUMMARY =3D "Modified fork of CPython's ast module that parses `# type:`=
+ comments"
+> -HOMEPAGE =3D "https://github.com/python/typed_ast"
+> -LICENSE =3D "Apache-2.0 & MIT"
+> -LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D97f1494e93daf66a5df47118407a4=
+c4f"
+> -
+> -PYPI_PACKAGE =3D "typed_ast"
+> -
+> -inherit pypi setuptools3
+> -
+> -SRC_URI[sha256sum] =3D "39e21ceb7388e4bb37f4c679d72707ed46c2fbf2a5609b8b=
+8ebc4b067d977df2"
+> -
+> -BBCLASSEXTEND =3D "native"
+> --
+> 2.41.0
+>
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#104329): https://lists.openembedded.org/g/openembedde=
+d-devel/message/104329
+> Mute This Topic: https://lists.openembedded.org/mt/100665774/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
+aj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
 
