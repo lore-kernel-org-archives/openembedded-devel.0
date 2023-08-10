@@ -1,73 +1,86 @@
-Return-Path: <f_l_k@t-online.de>
+Return-Path: <frieder.schrempf@kontron.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1E272C001E0
-	for <webhook@archiver.kernel.org>; Thu, 10 Aug 2023 01:33:03 +0000 (UTC)
-Received: from mailout03.t-online.de (mailout03.t-online.de [194.25.134.81])
- by mx.groups.io with SMTP id smtpd.web11.8168.1691631181165241011
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2FC58C001DB
+	for <webhook@archiver.kernel.org>; Thu, 10 Aug 2023 12:48:06 +0000 (UTC)
+Received: from mail.fris.de (mail.fris.de [116.203.77.234])
+ by mx.groups.io with SMTP id smtpd.web11.16179.1691671680460200593
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 09 Aug 2023 18:33:01 -0700
+ Thu, 10 Aug 2023 05:48:03 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=none, err=SPF record not found (domain: t-online.de, ip: 194.25.134.81, mailfrom: f_l_k@t-online.de)
-Received: from fwd84.aul.t-online.de (fwd84.aul.t-online.de [10.223.144.110])
-	by mailout03.t-online.de (Postfix) with SMTP id 02FD558A63
-	for <openembedded-devel@lists.openembedded.org>; Thu, 10 Aug 2023 03:32:59 +0200 (CEST)
-Received: from intel-corei7-64.fritz.box ([84.154.174.9]) by fwd84.t-online.de
-	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1qTuXq-03KVjF0; Thu, 10 Aug 2023 03:32:58 +0200
-From: Markus Volk <f_l_k@t-online.de>
+ dkim=fail reason="dkim: body hash did not verify" header.i=@fris.de header.s=dkim header.b=MbfA4Xu/;
+ spf=pass (domain: fris.de, ip: 116.203.77.234, mailfrom: frieder@fris.de)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id DD52BBFAB3;
+	Thu, 10 Aug 2023 14:47:54 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fris.de; s=dkim;
+	t=1691671676; h=from:subject:date:message-id:to:cc:mime-version:
+	 content-transfer-encoding; bh=af6VqxdRbYJ+idhle465vaIWOlXOnNh41dkoUdSBVns=;
+	b=MbfA4Xu/c1pjV0aEqyzW0Xc+Kf+23zZ3R23q8N3O0PFO8JH8kajg30JAyysvEdJnM7Oh1t
+	AmG03METvwk3RomfVL98wJWfjBMJSYQZU/edyMxopTdnqmYiP3Y/FPolFiZkkhE3+4hhsA
+	dB2K4zQiMHGu2eG8y7/oRkH6w+DH5pc4pH6an7lcRrApg7jGjXAiGK2YR0GEwcJw5Tm3qb
+	rS8EEZVX3BzuphKfGBwn58jdEEHADc4tcPVKmG04ob4H0ehXsrQP2Q9MIXygSdpxX/oRtd
+	8YcUuysUzAc9PvcjQr5S8XivskBc0JAgxxljuuVKQOAL9P3tmoTknLP/X/0AYg==
+From: Frieder Schrempf <frieder@fris.de>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-gnome][PATCH] gvfs: update 1.51.1 -> 1.51.90
-Date: Thu, 10 Aug 2023 03:32:20 +0200
-Message-ID: <20230810013220.415091-1-f_l_k@t-online.de>
-X-Mailer: git-send-email 2.41.0
+Cc: Frieder Schrempf <frieder.schrempf@kontron.de>
+Subject: [kirkstone][meta-python][PATCH] python3-can: Add missing runtime dependencies
+Date: Thu, 10 Aug 2023 14:47:30 +0200
+Message-ID: <20230810124730.238812-1-frieder@fris.de>
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1691631178-2B827649-E8EA0FF5/0/0 CLEAN NORMAL
-X-TOI-MSGID: 85d41681-a5dd-4b88-9aa9-87d11c717622
+X-Last-TLS-Session-Version: TLSv1.3
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 10 Aug 2023 01:33:03 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104313
+ <openembedded-devel@lists.openembedded.org>; Thu, 10 Aug 2023 12:48:06 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104314
 
-Major changes in 1.51.90
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-* Fix various memory leaks (wang xiaomeng)
-* udisks2: Disconnect signal handlers to fix crashes when unmounting (Ond=
-rej Holy)
-* fuse: Include missing locale.h header (Ondrej Holy)
-* Some other fixes and improvements (Ondrej Holy)
-* Translation updates (GNOME Translation Project contributors)
+From: Frieder Schrempf <frieder.schrempf@kontron.de>
 
-Signed-off-by: Markus Volk <f_l_k@t-online.de>
+According to the setup.py of v4.0.0 [1] the following runtime
+dependencies are currently missing. Add them.
+
+* packaging
+* setuptools
+* typing_extensions
+
+While at it, also reorder the list alphabetically.
+
+[1] https://github.com/hardbyte/python-can/blob/4.0.0/setup.py
+
+Signed-off-by: Frieder Schrempf <frieder.schrempf@kontron.de>
 ---
- .../recipes-gnome/gvfs/{gvfs_1.51.1.bb =3D> gvfs_1.51.90.bb}      | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-gnome/recipes-gnome/gvfs/{gvfs_1.51.1.bb =3D> gvfs_1.51.90.b=
-b} (97%)
+ meta-python/recipes-devtools/python/python3-can_4.0.0.bb | 7 +++++--
+ 1 file changed, 5 insertions(+), 2 deletions(-)
 
-diff --git a/meta-gnome/recipes-gnome/gvfs/gvfs_1.51.1.bb b/meta-gnome/re=
-cipes-gnome/gvfs/gvfs_1.51.90.bb
-similarity index 97%
-rename from meta-gnome/recipes-gnome/gvfs/gvfs_1.51.1.bb
-rename to meta-gnome/recipes-gnome/gvfs/gvfs_1.51.90.bb
-index 32d47efd16..2d1048e12f 100644
---- a/meta-gnome/recipes-gnome/gvfs/gvfs_1.51.1.bb
-+++ b/meta-gnome/recipes-gnome/gvfs/gvfs_1.51.90.bb
-@@ -20,7 +20,7 @@ RDEPENDS:${PN} +=3D "gsettings-desktop-schemas"
+diff --git a/meta-python/recipes-devtools/python/python3-can_4.0.0.bb b/m=
+eta-python/recipes-devtools/python/python3-can_4.0.0.bb
+index 2cd2e624b..79aa3e19e 100644
+--- a/meta-python/recipes-devtools/python/python3-can_4.0.0.bb
++++ b/meta-python/recipes-devtools/python/python3-can_4.0.0.bb
+@@ -11,16 +11,19 @@ inherit pypi setuptools3
 =20
- SRC_URI =3D "https://download.gnome.org/sources/${BPN}/${@gnome_verdir("=
-${PV}")}/${BPN}-${PV}.tar.xz;name=3Darchive"
+ RDEPENDS:${PN}:class-target +=3D "\
+     ${PYTHON_PN}-aenum \
+-    ${PYTHON_PN}-ctypes \
+     ${PYTHON_PN}-codecs \
+     ${PYTHON_PN}-compression \
++    ${PYTHON_PN}-ctypes \
+     ${PYTHON_PN}-fcntl \
+     ${PYTHON_PN}-logging \
+     ${PYTHON_PN}-misc \
+     ${PYTHON_PN}-netserver \
++    ${PYTHON_PN}-packaging \
++    ${PYTHON_PN}-pkg-resources \
++    ${PYTHON_PN}-setuptools \
+     ${PYTHON_PN}-sqlite3 \
++    ${PYTHON_PN}-typing-extensions \
+     ${PYTHON_PN}-wrapt \
+-    ${PYTHON_PN}-pkg-resources \
+ "
 =20
--SRC_URI[archive.sha256sum] =3D "5baaf0cc81e2c690a726f7d5eb59eed48a33ea22=
-0fd5378df93c556173a3c143"
-+SRC_URI[archive.sha256sum] =3D "c05aaa7cf463540fb8c9097cf9b77d92f2c8e0de=
-1dcd643afb14c1284f823bdd"
-=20
- ANY_OF_DISTRO_FEATURES =3D "${GTK3DISTROFEATURES}"
-=20
+ BBCLASSEXTEND =3D "native nativesdk"
 --=20
 2.41.0
 
