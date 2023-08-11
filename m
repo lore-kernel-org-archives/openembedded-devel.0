@@ -1,95 +1,138 @@
-Return-Path: <mingli.yu@eng.windriver.com>
+Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AD4ECC001B0
-	for <webhook@archiver.kernel.org>; Fri, 11 Aug 2023 10:53:22 +0000 (UTC)
-Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.web11.39932.1691751199917035354
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B8EACC001DB
+	for <webhook@archiver.kernel.org>; Fri, 11 Aug 2023 14:34:03 +0000 (UTC)
+Received: from mail-oa1-f53.google.com (mail-oa1-f53.google.com [209.85.160.53])
+ by mx.groups.io with SMTP id smtpd.web10.44292.1691764439265896437
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 11 Aug 2023 03:53:19 -0700
+ Fri, 11 Aug 2023 07:33:59 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=fQfGP9RB;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=7587f097e0=mingli.yu@windriver.com)
-Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 37BAfhcP021974
-	for <openembedded-devel@lists.openembedded.org>; Fri, 11 Aug 2023 03:53:19 -0700
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
-	 h=from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding:content-type; s=PPS06212021; bh=J3xJq
-	SS2RT+S056vCAlnP2yjGkISitPgEqts3+L9uOE=; b=fQfGP9RBTCwp0nUNl8JEh
-	WKx6qwgBqZ0Bk8HLFcoaacnWpLXXU6gNiN4pPfuOsjUeAwBlVMFGh5hyb/RCUmZ9
-	W5MDQDihpZ6YDVGWJwxtl9F7y1RdvnB2RmgFhcvIoD9QzpK9yKaka4AdLB7x//38
-	UbwXsRI04KhGMph3b875K99ZZbXB+d6IOWITfzR8nqbf+dV+ptCKEexHIHzjC+3Z
-	qzKV1a0mlOi7yUU7noD/YJ9sPengxmDuBboAxOogHmuvKZYLzYjQw2JfHCMHMvc0
-	ET/t9PsYmh6xtYHWcHZGX1feeBGytZBL8UnL87ANQNHfeVPvwyNB4M8uWlov5Ioc
-	w==
-Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3sd8yk0e9m-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Fri, 11 Aug 2023 03:53:19 -0700 (PDT)
-Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.27; Fri, 11 Aug 2023 03:53:18 -0700
-Received: from pek-lpg-core2.wrs.com (128.224.153.41) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
- 15.1.2507.27 via Frontend Transport; Fri, 11 Aug 2023 03:53:18 -0700
-From: <mingli.yu@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [mickledore][PATCH] php: Upgrade to 8.2.8
-Date: Fri, 11 Aug 2023 18:53:17 +0800
-Message-ID: <20230811105317.67883-1-mingli.yu@windriver.com>
-X-Mailer: git-send-email 2.25.1
+ dkim=pass header.i=@gmail.com header.s=20221208 header.b=jBWoP2kf;
+ spf=pass (domain: gmail.com, ip: 209.85.160.53, mailfrom: akuster808@gmail.com)
+Received: by mail-oa1-f53.google.com with SMTP id 586e51a60fabf-1c0fff40ec6so1262856fac.2
+        for <openembedded-devel@lists.openembedded.org>; Fri, 11 Aug 2023 07:33:59 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20221208; t=1691764438; x=1692369238;
+        h=content-transfer-encoding:in-reply-to:from:references:cc:to
+         :content-language:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=W1MiB7bwIEQUe9PxPl189fj2Yhu3G0OdcE8uk6ovoxM=;
+        b=jBWoP2kfTE7TCOjYn4wEEcuGx/2XpHkU3Q2SgsnrYQDhAPXD8J3sSIOKgGmKJhJq9B
+         G34RfqWZv6BugX+2CW2W6ZkXvRFLWu19HbE0TPGRzmWdH1ziFE8/ryK/Sfho9mH/5CeG
+         tUrX2lbN8OAQ8vXKgcJVBrYVTuVIQYGegLxEU/VWGssTV1mvgkd57I85QDhloG+9UBgT
+         Lrpqx6WQ/dzGvzEn8Mfqn7FcL5n9pm8Pvw3b+ZR+XEI69+atMqCrRVErCP3M2515CEGn
+         P5QCFTiuWkoFmQhh7Vae+2MkV30oBHq1pFroF/27Bq0aXMlR198YPkeT9q83ar/O1G3k
+         n5TQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20221208; t=1691764438; x=1692369238;
+        h=content-transfer-encoding:in-reply-to:from:references:cc:to
+         :content-language:subject:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=W1MiB7bwIEQUe9PxPl189fj2Yhu3G0OdcE8uk6ovoxM=;
+        b=PgXDx5UJ6Z5GffirpXxsHanVeoaAKSGGwvZT6kBr9blqhF/EEKzWqDY+bwz+aREMS7
+         o5Qo5Vku2i0z2T65Qnafr7i0gYgIBOrBMKIafGkMl5cCheMS8hpDSd9U4+ctBDF8hmvu
+         VFmO/N4HLVyeRpIoE8dw7oGoeStyiNG9yp7biTS1bTsp4WphMGcFQQf3knhPH/rwP5bT
+         Z2RyZd8FJgGKLjwdCLxTWckMem0xuwYrAYnhYHGqd2ytr7/bD6TvOkZ2nmL+7CkhFAcO
+         IxcOgIlFJEXtbL/pb5r5SeZNBaaomPS3dYkluLhChna1fq71Yx7Sos4hNUhpWLINK5v5
+         j2nA==
+X-Gm-Message-State: AOJu0YyKqis0JVMaVq8F4iVFI3omKu5ZHuKx/n3F18Ya2uHo1PTRi5JD
+	QUF57R0HfrvNq3bAbR6vvPI=
+X-Google-Smtp-Source: AGHT+IHq5SWjnJWIkT27xLwKAz6jRfacfUSlapSQVv8FB2/UhhyiG1NuFd1bbtimVB+LlVKxXYqvaw==
+X-Received: by 2002:a05:6870:9a0c:b0:1b0:222f:9cda with SMTP id fo12-20020a0568709a0c00b001b0222f9cdamr2612532oab.0.1691764438352;
+        Fri, 11 Aug 2023 07:33:58 -0700 (PDT)
+Received: from [192.168.19.123] (c-73-90-186-127.hsd1.ca.comcast.net. [73.90.186.127])
+        by smtp.gmail.com with ESMTPSA id 16-20020a17090a031000b002696aeb72e5sm5690426pje.2.2023.08.11.07.33.57
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Fri, 11 Aug 2023 07:33:57 -0700 (PDT)
+Message-ID: <8d484356-f433-f210-4577-0ef7310bca3a@gmail.com>
+Date: Fri, 11 Aug 2023 10:33:55 -0400
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Proofpoint-ORIG-GUID: -z7vqyqyPr5nzG4pInS5AticW2tutB-u
-X-Proofpoint-GUID: -z7vqyqyPr5nzG4pInS5AticW2tutB-u
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.254,Aquarius:18.0.957,Hydra:6.0.591,FMLib:17.11.176.26
- definitions=2023-08-11_01,2023-08-10_01,2023-05-22_02
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 bulkscore=0 spamscore=0
- lowpriorityscore=0 mlxlogscore=813 clxscore=1015 impostorscore=0
- phishscore=0 mlxscore=0 malwarescore=0 priorityscore=1501 suspectscore=0
- adultscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.19.0-2306200000 definitions=main-2308110099
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.13.0
+Subject: Re: [oe] [kirkstone][meta-oe][PATCH] lmsensors: do not pull in
+ unneeded perl modules for run-time dependencies
+Content-Language: en-US
+To: Randy MacLeod <randy.macleod@windriver.com>
+Cc: openembedded-devel@lists.openembedded.org
+References: <1777F944D33CE024.19936@lists.openembedded.org>
+ <8a52ceed-e4d5-6008-2995-e1c28955575d@windriver.com>
+From: akuster808 <akuster808@gmail.com>
+In-Reply-To: <8a52ceed-e4d5-6008-2995-e1c28955575d@windriver.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 11 Aug 2023 10:53:22 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104337
+ <openembedded-devel@lists.openembedded.org>; Fri, 11 Aug 2023 14:34:03 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104338
 
-From: Mingli Yu <mingli.yu@windriver.com>
 
-php 8.2.7 is a security release and the php 8.2.8 is a bug fix release
-and more details at [1].
 
-[1] https://www.php.net/ChangeLog-8.php#8.2.7
+On 8/10/23 2:56 PM, Randy MacLeod wrote:
+> On 2023-08-03 16:24, Randy MacLeod via lists.openembedded.org wrote:
+>> From: Beniamin Sandu<beniaminsandu@gmail.com>
+>>
+>> Signed-off-by: Beniamin Sandu<beniaminsandu@gmail.com>
+>> Signed-off-by: Khem Raj<raj.khem@gmail.com>
+>> ---
+>>   meta-oe/recipes-bsp/lm_sensors/lmsensors_3.6.0.bb | 5 +++--
+>>   1 file changed, 3 insertions(+), 2 deletions(-)
+>>
+>> diff --git a/meta-oe/recipes-bsp/lm_sensors/lmsensors_3.6.0.bb b/meta-oe/recipes-bsp/lm_sensors/lmsensors_3.6.0.bb
+>> index f821cdaf4..aba5ab587 100644
+>> --- a/meta-oe/recipes-bsp/lm_sensors/lmsensors_3.6.0.bb
+>> +++ b/meta-oe/recipes-bsp/lm_sensors/lmsensors_3.6.0.bb
+>> @@ -151,12 +151,13 @@ RRECOMMENDS:${PN}-fancontrol = "lmsensors-config-fancontrol"
+>>   # sensors-detect script files
+>>   FILES:${PN}-sensorsdetect = "${sbindir}/sensors-detect"
+>>   FILES:${PN}-sensorsdetect-doc = "${mandir}/man8/sensors-detect.8"
+>> -RDEPENDS:${PN}-sensorsdetect = "${PN}-sensors perl perl-modules"
+>> +RDEPENDS:${PN}-sensorsdetect = "${PN}-sensors perl perl-module-fcntl perl-module-file-basename \
+>> +	perl-module-strict perl-module-constant"
+>>   
+>>   # sensors-conf-convert script files
+>>   FILES:${PN}-sensorsconfconvert = "${bindir}/sensors-conf-convert"
+>>   FILES:${PN}-sensorsconfconvert-doc = "${mandir}/man8/sensors-conf-convert.8"
+>> -RDEPENDS:${PN}-sensorsconfconvert = "${PN}-sensors perl perl-modules"
+>> +RDEPENDS:${PN}-sensorsconfconvert = "${PN}-sensors perl perl-module-strict perl-module-vars"
+>>   
+>>   # pwmconfig script files
+>>   FILES:${PN}-pwmconfig = "${sbindir}/pwmconfig"
+>
+>
+> Armin,
+>
+> I see this lmsensors cherry-pick merged to mickledore a week ago but 
+> it didn't land in kirkstone yet:
+>
+Yeah, looks like I missed it.
 
-Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
----
- meta-oe/recipes-devtools/php/{php_8.2.6.bb => php_8.2.8.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-devtools/php/{php_8.2.6.bb => php_8.2.8.bb} (99%)
+Its staged now.
 
-diff --git a/meta-oe/recipes-devtools/php/php_8.2.6.bb b/meta-oe/recipes-devtools/php/php_8.2.8.bb
-similarity index 99%
-rename from meta-oe/recipes-devtools/php/php_8.2.6.bb
-rename to meta-oe/recipes-devtools/php/php_8.2.8.bb
-index 54c40392d..233ded25d 100644
---- a/meta-oe/recipes-devtools/php/php_8.2.6.bb
-+++ b/meta-oe/recipes-devtools/php/php_8.2.8.bb
-@@ -33,7 +33,7 @@ SRC_URI:append:class-target = " \
-           "
- 
- S = "${WORKDIR}/php-${PV}"
--SRC_URI[sha256sum] = "44a70c52f537662c10d91eedbf51fd765c9961be6ba2508ed63bf7a26cdd3100"
-+SRC_URI[sha256sum] = "995ed4009c7917c962d31837a1a3658f36d4af4f357b673c97ffdbe6403f8517"
- 
- CVE_CHECK_IGNORE += "\
-     CVE-2007-2728 \
--- 
-2.25.1
+Thanks,
+Armin
+>
+> https://git.openembedded.org/meta-openembedded/commit/?h=mickledore&id=75cf318cef3b4ee81fad2782cf063ecd69ba8842
+> https://git.openembedded.org/meta-openembedded/log/?h=kirkstone
+>
+> Thanks,
+>
+> ../Randy
+>
+>>
+>> -=-=-=-=-=-=-=-=-=-=-=-
+>> Links: You receive all messages sent to this group.
+>> View/Reply Online (#104224):https://lists.openembedded.org/g/openembedded-devel/message/104224
+>> Mute This Topic:https://lists.openembedded.org/mt/100534246/3616765
+>> Group Owner:openembedded-devel+owner@lists.openembedded.org
+>> Unsubscribe:https://lists.openembedded.org/g/openembedded-devel/unsub  [randy.macleod@windriver.com]
+>> -=-=-=-=-=-=-=-=-=-=-=-
+>>
+>
+> -- 
+> # Randy MacLeod
+> # Wind River Linux
 
 
