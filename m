@@ -1,103 +1,146 @@
-Return-Path: <f_l_k@t-online.de>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4BE0FC001B0
-	for <webhook@archiver.kernel.org>; Thu, 10 Aug 2023 19:25:18 +0000 (UTC)
-Received: from mailout10.t-online.de (mailout10.t-online.de [194.25.134.21])
- by mx.groups.io with SMTP id smtpd.web11.26743.1691695511363636981
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8C327C0015E
+	for <webhook@archiver.kernel.org>; Fri, 11 Aug 2023 07:05:51 +0000 (UTC)
+Received: from mail-pf1-f180.google.com (mail-pf1-f180.google.com [209.85.210.180])
+ by mx.groups.io with SMTP id smtpd.web11.37740.1691737545340634776
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 10 Aug 2023 12:25:11 -0700
+ Fri, 11 Aug 2023 00:05:45 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=none, err=SPF record not found (domain: t-online.de, ip: 194.25.134.21, mailfrom: f_l_k@t-online.de)
-Received: from fwd80.aul.t-online.de (fwd80.aul.t-online.de [10.223.144.106])
-	by mailout10.t-online.de (Postfix) with SMTP id 8CAE125BE4
-	for <openembedded-devel@lists.openembedded.org>; Thu, 10 Aug 2023 21:25:08 +0200 (CEST)
-Received: from intel-corei7-64.fritz.box ([84.154.174.9]) by fwd80.t-online.de
-	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1qUBHJ-0qYGVF0; Thu, 10 Aug 2023 21:25:01 +0200
-From: Markus Volk <f_l_k@t-online.de>
+ dkim=pass header.i=@gmail.com header.s=20221208 header.b=d+zfkBvd;
+ spf=pass (domain: gmail.com, ip: 209.85.210.180, mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f180.google.com with SMTP id d2e1a72fcca58-687ca37628eso1535539b3a.1
+        for <openembedded-devel@lists.openembedded.org>; Fri, 11 Aug 2023 00:05:45 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20221208; t=1691737544; x=1692342344;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=J65dr4Q4K+e6QAZUwAKfOIeFAdNDE4xaKuBsbSymV3s=;
+        b=d+zfkBvdF9wV44kQm0vHjkExXsw2sb9nmkCzeQmXVzQPcFBXSojKb96u3yD6oFkYxo
+         uwLhlahQyU8GPlHeEycTFn2dhJIMUZuWeyyeN/8CD0xV8zxFy/Mw8kUrz/EE2x8cTrqS
+         jNABdJVuk/X8m3em49lLG8OX7pGW9jG2nmFpt/6NeI7qBfUr6FlLfePtIyQ5rRnL/LHj
+         4Q5kL8U4omEViAmwCQj+nOx0OGRwbjroTQRI4Vanm3BXpHAguqX4LnKVMYrarQFFAK//
+         PSPGhK+gzpCNYhqjuowsyA4pfu3EJ0j1WblJcINAvLAbv1xXYuAnlrNWZre4pN0LLp4M
+         Sj5Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20221208; t=1691737544; x=1692342344;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=J65dr4Q4K+e6QAZUwAKfOIeFAdNDE4xaKuBsbSymV3s=;
+        b=GWDsnFuzao0nMQYnqnm0PyvpVElc9Fz7NSD15RKCI9H4ZtD5EEC2fxBJGWAy9eh3Lg
+         SvUkfTjwo2QBXWxrSHMw2FDZM41lu+Iu0IcRCpDEvANjGy+KkXxUoWH4gQJcG5MhfA9o
+         1czPstoMUHRJGXnFhrzRLetHQYbEkscbAnrROZnIwYB33aAypJQxqrgPM+EAfbjy5CJc
+         nFBA/NREnGVYxS7Yx2OsZH2VRSr4HbcdniG5ALxiI9SSTvljvAIZLtid5Vo2Yg9oQzXq
+         IYgElmUwZZ8cxUWhCbJc90OVxBup5oyh5FsO5//11bzJDDnYqe/Bj2kF2w9Q26SPcehj
+         mhRA==
+X-Gm-Message-State: AOJu0YySj73Eqv+5mh1onDvMA2tQCKRCyDGjBqCVZQ5Bp05ZW8ePElNF
+	vW2GVL3FoOsE/pJOc/Xa9fccePKfgSAQEg==
+X-Google-Smtp-Source: AGHT+IFhFmTR6+UUYlT3t63c0Aei8DAO8n/hWT5WQcoLknFi/Y6pnBPcUCxwJrFYRhiXItkqqPSXpA==
+X-Received: by 2002:a05:6a00:2ea4:b0:675:8f71:290a with SMTP id fd36-20020a056a002ea400b006758f71290amr1392575pfb.34.1691737544205;
+        Fri, 11 Aug 2023 00:05:44 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9100:2cb0::ed55])
+        by smtp.gmail.com with ESMTPSA id a14-20020aa780ce000000b006829b27f252sm2705461pfn.93.2023.08.11.00.05.43
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 11 Aug 2023 00:05:43 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH] gnome-themes-extra: fix datadir path
-Date: Thu, 10 Aug 2023 21:24:43 +0200
-Message-ID: <20230810192443.276754-1-f_l_k@t-online.de>
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][PATCH] qad: Fix build with clang
+Date: Fri, 11 Aug 2023 00:05:41 -0700
+Message-ID: <20230811070541.709014-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.41.0
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1691695501-79FFF9C6-20A33605/0/0 CLEAN NORMAL
-X-TOI-MSGID: dd2f3af7-cfc0-41af-98be-d1b3a87a894c
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 10 Aug 2023 19:25:18 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104332
+ <openembedded-devel@lists.openembedded.org>; Fri, 11 Aug 2023 07:05:51 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104333
 
-This fixes do_rootfs error if gtk2 is installed
-
-Running transaction test
-Error: Transaction test error:
-  file /usr conflicts between attempted installs of gnome-theme-adwaita-3=
-.28-r0.corei7_64 and pipewire-modules-zeroconf-discover-0.3.77-r0.corei7_=
-64
-  file /usr/lib conflicts between attempted installs of gnome-theme-adwai=
-ta-3.28-r0.corei7_64 and pipewire-modules-zeroconf-discover-0.3.77-r0.cor=
-ei7_64
-  file /usr/lib/gtk-2.0 conflicts between attempted installs of gnome-the=
-me-adwaita-3.28-r0.corei7_64 and at-spi2-core-2.48.3-r0.corei7_64
-  file /usr/share conflicts between attempted installs of gnome-theme-adw=
-aita-3.28-r0.corei7_64 and ghostscript-10.01.2-r0.corei7_64
-  file /usr conflicts between attempted installs of libgtk-2.0-2.24.33-r0=
-.corei7_64 and gnome-theme-adwaita-3.28-r0.corei7_64
-  file /usr/lib conflicts between attempted installs of libgtk-2.0-2.24.3=
-3-r0.corei7_64 and gnome-theme-adwaita-3.28-r0.corei7_64
-  file /usr/lib/gtk-2.0 conflicts between attempted installs of libgtk-2.=
-0-2.24.33-r0.corei7_64 and gnome-theme-adwaita-3.28-r0.corei7_64
-  file /usr/lib/gtk-2.0/2.10.0 conflicts between attempted installs of li=
-bgtk-2.0-2.24.33-r0.corei7_64 and gnome-theme-adwaita-3.28-r0.corei7_64
-  file /usr/lib/gtk-2.0/2.10.0/engines conflicts between attempted instal=
-ls of libgtk-2.0-2.24.33-r0.corei7_64 and gnome-theme-adwaita-3.28-r0.cor=
-ei7_64
-  file /usr/share conflicts between attempted installs of libgtk-2.0-2.24=
-.33-r0.corei7_64 and gnome-theme-adwaita-3.28-r0.corei7_64
-  file /usr/share/themes conflicts between attempted installs of libgtk-2=
-.0-2.24.33-r0.corei7_64 and gnome-theme-adwaita-3.28-r0.corei7_64
-
-Signed-off-by: Markus Volk <f_l_k@t-online.de>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../recipes-gnome/gnome-themes/gnome-themes-extra_3.28.bb | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
+ ...Fix-warnings-found-by-clang-compiler.patch | 53 +++++++++++++++++++
+ meta-oe/recipes-extended/qad/qad_git.bb       |  3 +-
+ 2 files changed, 55 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-extended/qad/qad/0001-Fix-warnings-found-by-clang-compiler.patch
 
-diff --git a/meta-oe/recipes-gnome/gnome-themes/gnome-themes-extra_3.28.b=
-b b/meta-oe/recipes-gnome/gnome-themes/gnome-themes-extra_3.28.bb
-index d7e422cc97..227422d90c 100644
---- a/meta-oe/recipes-gnome/gnome-themes/gnome-themes-extra_3.28.bb
-+++ b/meta-oe/recipes-gnome/gnome-themes/gnome-themes-extra_3.28.bb
-@@ -21,8 +21,8 @@ EXTRA_OECONF =3D "--disable-gtk3-engine"
-=20
- do_install:append() {
-         # Only building Adwaita, remove highcontrast files
--        rm -rf ${D}${prefix}/share/themes/HighContrast \
--               ${D}${prefix}/share/icons
-+        rm -rf ${D}${datadir}/themes/HighContrast \
-+               ${D}${datadir}/icons
-=20
- 	# The libtool archive file is unneeded with shared libs on modern Linux
- 	rm -rf ${D}${libdir}/gtk-2.0/2.10.0/engines/libadwaita.la
-@@ -34,10 +34,10 @@ PACKAGES +=3D "gnome-theme-adwaita \
-              gnome-theme-adwaita-dark \
-              "
-=20
--FILES:gnome-theme-adwaita =3D "${prefix}/share/themes/Adwaita \
-+FILES:gnome-theme-adwaita =3D "${datadir}/themes/Adwaita \
-                               ${libdir}/gtk-2.0/2.10.0/engines/libadwait=
-a.so"
-=20
--FILES:gnome-theme-adwaita-dark =3D "${prefix}/share/themes/Adwaita-dark"
-+FILES:gnome-theme-adwaita-dark =3D "${datadir}/themes/Adwaita-dark"
- RDEPENDS:gnome-theme-adwaita-dark =3D "gnome-theme-adwaita"
-=20
- # gnome-themes-standard is empty and doesn't exist
---=20
+diff --git a/meta-oe/recipes-extended/qad/qad/0001-Fix-warnings-found-by-clang-compiler.patch b/meta-oe/recipes-extended/qad/qad/0001-Fix-warnings-found-by-clang-compiler.patch
+new file mode 100644
+index 0000000000..7a9937d685
+--- /dev/null
++++ b/meta-oe/recipes-extended/qad/qad/0001-Fix-warnings-found-by-clang-compiler.patch
+@@ -0,0 +1,53 @@
++From 2e871d6d6d13955ff363ff756adfdd257e72e9e8 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Thu, 10 Aug 2023 23:58:43 -0700
++Subject: [PATCH] Fix warnings found by clang compiler
++
++Fix diagnostics found with -Wdeprecated-non-prototype using clang
++compiler
++
++e.g.
++| ../git/src/server.c:108:35: error: passing arguments to a function without a prototype is deprecated in all versions of C and is not supported in C2x [-Werror,-Wdeprecated-non-prototype]  |   108 |   if (backend->input_backend->move(x, y, event) < 0) {                                                                                                                              |       |                                   ^
++
++Upstream-Status: Submitted [https://gitlab.com/CodethinkLabs/qad/qad/-/merge_requests/33]
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ include/backend.h                 | 8 ++++----
++ src/backends/input/input_common.h | 2 +-
++ 2 files changed, 5 insertions(+), 5 deletions(-)
++
++diff --git a/include/backend.h b/include/backend.h
++index 8f4c7c1..4bfe510 100644
++--- a/include/backend.h
+++++ b/include/backend.h
++@@ -41,10 +41,10 @@ typedef struct qad_screen_buffer_s {
++ } qad_screen_buffer_t;
++ 
++ typedef struct qad_backend_input_s {
++-  int (*move)();
++-  int (*button)();
++-  int (*touch)();
++-  int (*swipe)();
+++  int (*move)(int, int, int);
+++  int (*button)(int, int);
+++  int (*touch)(int, int, int, int);
+++  int (*swipe)(int, int, int, int, int, int);
++   void *data;
++ } qad_backend_input_t;
++ 
++diff --git a/src/backends/input/input_common.h b/src/backends/input/input_common.h
++index 8e099a5..f2ea73f 100644
++--- a/src/backends/input/input_common.h
+++++ b/src/backends/input/input_common.h
++@@ -28,7 +28,7 @@
++ #define BTN_DOWN 1
++ #define BTN_UP 0
++ 
++-qad_backend_input_t *create_input_backend();
+++qad_backend_input_t *create_input_backend(char input_type[]);
++ 
++ // int move(int x, int y, int event);
++ 
++-- 
++2.41.0
++
+diff --git a/meta-oe/recipes-extended/qad/qad_git.bb b/meta-oe/recipes-extended/qad/qad_git.bb
+index e2a59139d9..056f28a0a4 100644
+--- a/meta-oe/recipes-extended/qad/qad_git.bb
++++ b/meta-oe/recipes-extended/qad/qad_git.bb
+@@ -9,7 +9,8 @@ LICENSE = "MIT & GPL-2.0-or-later"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=402cce7fbcb6ea9ab5a0378dd7f40806 \
+                     file://openqa/COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
+                    "
+-SRC_URI = "git://gitlab.com/CodethinkLabs/qad/qad;branch=main;protocol=https"
++SRC_URI = "git://gitlab.com/CodethinkLabs/qad/qad;branch=main;protocol=https \
++           file://0001-Fix-warnings-found-by-clang-compiler.patch"
+ 
+ SRCREV = "ae0c099c1fdc0ca6f5d631cea6b302937122b362"
+ 
+-- 
 2.41.0
 
 
