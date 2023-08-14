@@ -1,236 +1,133 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <philip@balister.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 01FCDC0015E
-	for <webhook@archiver.kernel.org>; Tue, 15 Aug 2023 04:38:48 +0000 (UTC)
-Received: from mail-ot1-f43.google.com (mail-ot1-f43.google.com [209.85.210.43])
- by mx.groups.io with SMTP id smtpd.web11.127937.1692074321979272262
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 71DFDC001B0
+	for <webhook@archiver.kernel.org>; Tue, 15 Aug 2023 06:10:18 +0000 (UTC)
+Received: from NAM04-DM6-obe.outbound.protection.outlook.com (NAM04-DM6-obe.outbound.protection.outlook.com [40.107.102.100])
+ by mx.groups.io with SMTP id smtpd.web10.120070.1692049017196862683
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 14 Aug 2023 21:38:42 -0700
+ Mon, 14 Aug 2023 14:36:57 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20221208 header.b=ZI4gJEFO;
- spf=pass (domain: gmail.com, ip: 209.85.210.43, mailfrom: raj.khem@gmail.com)
-Received: by mail-ot1-f43.google.com with SMTP id 46e09a7af769-6bcaa6d5e2cso4383150a34.3
-        for <openembedded-devel@lists.openembedded.org>; Mon, 14 Aug 2023 21:38:41 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1692074321; x=1692679121;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=kpgXjkmv1chK+dBMY9c5V0UeFs3s2DdPZbs2t0GZkgo=;
-        b=ZI4gJEFOyaRHGkCXRwrJkVoL6xSfm0lLAw7g4PIC5g/2dIXQLIZaUdeVxeNGPO2w6z
-         z2TH5HsC58qN+rCd10tuGKhaKAL6G/+juCgd4quduwNTjor4IzJDuyW2tTCZjQQ2VJkU
-         PoUbJwjSje3nNnHKWHYHZS6LBSKSJiww73MwDflDjUg7IxTQT6W18qP2VUdj3icAk92L
-         ncrc5GURQP4FsaaC7jBjMUqNRSiOuLzfswUll0P6myGDtcyOZpEZNyghP9HgHZxCDq01
-         18ys3TZDochCoZynCgnvqFepPzwC/3XkWJSQc/fsze04AOMf8JcnYIrowiRRDx2txR1B
-         tuRw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1692074321; x=1692679121;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=kpgXjkmv1chK+dBMY9c5V0UeFs3s2DdPZbs2t0GZkgo=;
-        b=RAOunHKRAzNuD4QQjeeyL/TuPlTQn6v/8julDFjG1lKwrR1XrQUGE8nI+keD7tfAv9
-         ciRwMIdFfR1Vug7bswjp4SwSzs4N44PmDhFOUtLtk+cY105LZu7r5cUVGYai7ohckKox
-         URGGfozjadhipfyWd/An/ijGFICJjekFqtvp7Pl1KtejrcJJXO5BLs0XV1UUjosbmJEg
-         LzLiJ9boaikLkA0R0YVP8OvQCrdyD5VZqlyMjgdZ8MX3ljg1trvcUm3yMpvLT5we2p2S
-         Sh6+k4y8qxdh6wgrwXTo4DYYi3/lcAEY7PXUdUvOOvQOHxFhIXDW5hUXHkAWJwZBF6hh
-         XLoQ==
-X-Gm-Message-State: AOJu0YxNnsDEUyC4gD9arghcEnj+YowbVUqvHvTGmVMF6eUH4M5nFDjb
-	pNl9LVBcU0doZod2L8xQrxds19whP/ekD56D54M=
-X-Google-Smtp-Source: AGHT+IF8OgVJYCyAb0PxPqZ1ik2ik7KepLJXKuDrHBtTeayAUp8qg2Qpu5lc8elV3/PKdFR1UAGNGWT+Qq5haKQwCtE=
-X-Received: by 2002:a05:6871:1c4:b0:1bf:5559:4aaf with SMTP id
- q4-20020a05687101c400b001bf55594aafmr11998225oad.34.1692074320879; Mon, 14
- Aug 2023 21:38:40 -0700 (PDT)
+ dkim=fail reason="dkim: body hash did not verify" header.i=@ni.com header.s=selector1 header.b=l9CcclSl;
+ spf=pass (domain: ni.com, ip: 40.107.102.100, mailfrom: chaitanya.vadrevu@ni.com)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=U7KTS93gAqbfrHmkDmxAi1ggdwkconUOAC+4X1LiioxCz9XsIdczXduwpQln1309lPjkq1iHIdU6cTN7OS0SFH04gjTzmEAiCgCJzbI+MblIIv1Nzx8kp5ULQFSOB9PxPQr5GX8mxfbo1MxFdOUOkL5AlxmzkpFom3j3L3NhnSUYbzd2Y7sEn5UYbq+h3k/u97EaHDUm7NWrFAWd00f1Fp2YZtFZIm5wI4sIR/xNcjO+3Eka7JkDawdu6qCb1Wr3jbJqUlLdoJAlb4t4t6SMEWrQE80Ss7I1SY9xW9at+NDOQqWOGUOuom+c7g36m7s7954V/j4HpaPOI3F8FHxBZw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=eL3SZVqCa4dD3+FwvXdIIro1pI5SeUnmGYM7wtrEtjc=;
+ b=ZA+ZKJFOZQZV4MJLhnmKRRoavRwXukeIjP8CiBerVRzNP5RD7iuqZMVc+1rulcV9nvIaDTmmupy8tjMT7L09NVCyyZMJ0iPPZcaaHrPivETxzQPrZ+vUzfihCRWrEJPUT3cNmVlMVAY6q05vViI3omwzap3BqkFOQPi7UGZTlAuVHAleiEr8MXnJEUPme7WXpCZv8ooGFCbInbDeRjjtd8x8Ag1s7qt3Lsm7f+blTksRoayG4uVnLu7Wdp7n+t77snXdP+6DZ3MnQJXoTuiitwJDJv3cOzIC1c1zlzrRmbG6pO1d2A+OSn500yrU+UU08YyY+RL9yIiXnX+DDSsmpw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 130.164.94.74) smtp.rcpttodomain=lists.openembedded.org smtp.mailfrom=ni.com;
+ dmarc=pass (p=none sp=none pct=100) action=none header.from=ni.com; dkim=none
+ (message not signed); arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ni.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=eL3SZVqCa4dD3+FwvXdIIro1pI5SeUnmGYM7wtrEtjc=;
+ b=l9CcclSl4N/ERAshtlEkpEm7FiCQeVm7LF/375nCptrF+5Cb1X4G41bwkPGZA5ZUpdpQOUgjNgSJanZXR/BmDiOZCDgkzt6T4ufxnnSiUrW3eAIK20U/U4Zx8azeaWIMv+f4qktxSXn4DozqJhJ2Sp2juTbQCT7xf15n0A5rIU8=
+Received: from SN6PR01CA0008.prod.exchangelabs.com (2603:10b6:805:b6::21) by
+ SJ0PR04MB7360.namprd04.prod.outlook.com (2603:10b6:a03:293::22) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6678.24; Mon, 14 Aug
+ 2023 21:36:52 +0000
+Received: from SN1NAM02FT0056.eop-nam02.prod.protection.outlook.com
+ (2603:10b6:805:b6:cafe::1e) by SN6PR01CA0008.outlook.office365.com
+ (2603:10b6:805:b6::21) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6652.33 via Frontend
+ Transport; Mon, 14 Aug 2023 21:36:52 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 130.164.94.74)
+ smtp.mailfrom=ni.com; dkim=none (message not signed) header.d=none;dmarc=pass
+ action=none header.from=ni.com;
+Received-SPF: Pass (protection.outlook.com: domain of ni.com designates
+ 130.164.94.74 as permitted sender) receiver=protection.outlook.com;
+ client-ip=130.164.94.74; helo=us-aus-excas-p2.ni.corp.natinst.com; pr=C
+Received: from us-aus-excas-p2.ni.corp.natinst.com (130.164.94.74) by
+ SN1NAM02FT0056.mail.protection.outlook.com (10.97.4.111) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.6699.14 via Frontend Transport; Mon, 14 Aug 2023 21:36:51 +0000
+Received: from us-aus-excas-p1.ni.corp.natinst.com (130.164.68.17) by
+ us-aus-excas-p2.ni.corp.natinst.com (130.164.68.18) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1118.26; Mon, 14 Aug 2023 16:36:51 -0500
+Received: from cvadrevu-p620.amer.corp.natinst.com (172.18.68.32) by
+ us-aus-excas-p1.ni.corp.natinst.com (130.164.68.17) with Microsoft SMTP
+ Server id 15.2.1118.26 via Frontend Transport; Mon, 14 Aug 2023 16:36:51
+ -0500
+From: "Chaitanya Vadrevu" <chaitanya.vadrevu@ni.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: Chaitanya Vadrevu <chaitanya.vadrevu@ni.com>
+Subject: [meta-oe][PATCH] recipes-bsp: Add bolt
+Date: Mon, 14 Aug 2023 16:36:31 -0500
+Message-ID: <20230814213631.535375-1-chaitanya.vadrevu@ni.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <20230814235451.1288083-1-nicolas.marguet@windriver.com>
-In-Reply-To: <20230814235451.1288083-1-nicolas.marguet@windriver.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 14 Aug 2023 21:38:14 -0700
-Message-ID: <CAMKF1sqz-x6bNj+2C2W-np1bskKzua=Ar3c0D=dPLR7mJZszNw@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH] librelp: add ptest
-To: nicolas.marguet@windriver.com
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SN1NAM02FT0056:EE_|SJ0PR04MB7360:EE_
+X-MS-Office365-Filtering-Correlation-Id: bfa066d6-cdfd-4d7a-851c-08db9d0e92b5
+x-ni-monitor: EOP Exclude NI Domains ETR True
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 
+	fYiyn1AnSEfk+fPyb8rPFHSxGljjlUVK40VpVt1IFfoQkHoPdD6qolaHy6k77Gf280jqQ5H9cxi7A2xbqJiYgBeodyRtJUbm/bohJBmtlW2hXkUXEtoCeNYr70DUO9FYg+xtTqDeWI8tAQec0jTROBZK8TTKQb4UoVqB1nNfc1gzJXeeQ7Ro5EkoW85cawkLiiFESSuhd9Vwp9kyTyP+MYwiUNXjPREyARh28o3iGSBi5IGzGm4pv8b9//2Y0c4uoDykaYFCvPu6UthgpiwUlaCN9BmK4ytIuqNj6ZyAzTN/uZDhFm/z7eco/XztUMwADO1/2dA5zUInF6KQ1pAQEYF6IGlUEbgxc7LDq2boLS/Ao3RgAKQ0Y/vcIYmeUzM5mrc60EeZcpIF85xLMHJOUMBVmj5JwNr1e6QPlCLbkw5opstDmd0tiHY0AOppYCsGn6xCADnWPztOxqQo9XCuyOlb5fOkHIXX9YigAYJNa28Qh9TRJsMR7N3GZwdKFtaOt0q05/0ZM3ta0SYMAe/31H44f4e4hcdAaZDgydhWM3U3a4Qg4KrqTEJ4pe1WZ/iZSBxWanhLApQebtevBqEgVd7+d33ueU23pr1vuohfXbwFyG3u6RcOPRa7swgcXCw9trQnUhiH2rLK3PXyl5hdG459b4vYZC2Y+uDgOs7kV1o3atzd3yQ+GC6XNBrNGq4Kft/l0hYM88RNaQBRbO/AMR0m8gaaSFB7LbBO1MBRY6WWsPz82E3MQU8SdDeBhhmc
+X-Forefront-Antispam-Report: 
+	CIP:130.164.94.74;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:us-aus-excas-p2.ni.corp.natinst.com;PTR:ErrorRetry;CAT:NONE;SFS:(13230028)(4636009)(346002)(376002)(396003)(136003)(39860400002)(82310400008)(451199021)(186006)(1800799006)(36840700001)(40470700004)(46966006)(36756003)(5660300002)(86362001)(2906002)(44832011)(40460700003)(40480700001)(36860700001)(6916009)(4326008)(316002)(70206006)(70586007)(41300700001)(26005)(1076003)(2616005)(336012)(47076005)(8936002)(8676002)(6666004)(83380400001)(356005)(82740400003)(478600001)(81166007)(36900700001);DIR:OUT;SFP:1102;
+X-OriginatorOrg: ni.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Aug 2023 21:36:51.9061
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: bfa066d6-cdfd-4d7a-851c-08db9d0e92b5
+X-MS-Exchange-CrossTenant-Id: 87ba1f9a-44cd-43a6-b008-6fdb45a5204e
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=87ba1f9a-44cd-43a6-b008-6fdb45a5204e;Ip=[130.164.94.74];Helo=[us-aus-excas-p2.ni.corp.natinst.com]
+X-MS-Exchange-CrossTenant-AuthSource: 
+	SN1NAM02FT0056.eop-nam02.prod.protection.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR04MB7360
 Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 15 Aug 2023 04:38:48 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104354
+ <openembedded-devel@lists.openembedded.org>; Tue, 15 Aug 2023 06:10:18 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104355
 
-There is a build error seen with clang which you wont get with gcc yet.
+bolt is used for managing thunderbolt devices.
 
-https://errors.yoctoproject.org/Errors/Details/731494/
+Signed-off-by: Chaitanya Vadrevu <chaitanya.vadrevu@ni.com>
+---
+ meta-oe/recipes-bsp/bolt/bolt_0.9.5.bb | 16 ++++++++++++++++
+ 1 file changed, 16 insertions(+)
+ create mode 100644 meta-oe/recipes-bsp/bolt/bolt_0.9.5.bb
 
+diff --git a/meta-oe/recipes-bsp/bolt/bolt_0.9.5.bb b/meta-oe/recipes-bsp/b=
+olt/bolt_0.9.5.bb
+new file mode 100644
+index 0000000000..f9f1b026f4
+--- /dev/null
++++ b/meta-oe/recipes-bsp/bolt/bolt_0.9.5.bb
+@@ -0,0 +1,16 @@
++SUMMARY =3D "Thunderbolt user-space management tool"
++DESCRIPTION =3D "Userspace system daemon to enable security levels for Thu=
+nderbolt on GNU/Linux"
++HOMEPAGE =3D "https://gitlab.freedesktop.org/bolt/bolt"
++LICENSE =3D "LGPL-2.1-only"
++LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D4fbd65380cdd255951079008b364516=
+c"
++
++DEPENDS =3D "cmake-native udev polkit dbus"
++
++SRC_URI =3D "git://gitlab.freedesktop.org/bolt/bolt.git;protocol=3Dhttps;b=
+ranch=3Dmaster"
++SRCREV =3D "5a8a5866a847561566499847d46a97c612b4e6dd"
++
++S =3D "${WORKDIR}/git"
++
++inherit cmake pkgconfig meson
++
++FILES:${PN} +=3D "${datadir}/dbus-1/* ${datadir}/polkit-1/*"
+--=20
+2.34.1
 
-On Mon, Aug 14, 2023 at 4:55=E2=80=AFPM nicolas.marguet via
-lists.openembedded.org
-<nicolas.marguet=3Dwindriver.com@lists.openembedded.org> wrote:
->
-> From: Nicolas Marguet <nicolas.marguet@windriver.com>
->
-> Use internal test from librelp project as ptest.
->
-> This work is largely inspired on the rsyslog ptest implementation,
-> which copies the automake-based tests/Makefile to the target and runs
-> 'make check-TESTS'. sed is used to fix a few Makefile paths or
-> env-vars so 'make' can run on the target.
->
-> Tested on qemux86_64 and qemuarm64:
->
-> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
->    librelp 1.11.0: tests/test-suite.log
-> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
->
-> TOTAL: 30
-> PASS:  27
-> SKIP:  3
-> XFAIL: 0
-> FAIL:  0
-> XPASS: 0
-> ERROR: 0
->
-> The 3 skipped tests are either self-identified as =E2=80=9Cnot do anythin=
-g
-> really useful=E2=80=9D or may need to port libtool to the target.
->
-> Signed-off-by: Nicolas Marguet <nicolas.marguet@windriver.com>
-> ---
->  ...line-errors-in-debug-optimization-Og.patch |  0
->  .../rsyslog/librelp/run-ptest                 | 10 ++++
->  .../rsyslog/librelp_1.11.0.bb                 | 59 ++++++++++++++++++-
->  3 files changed, 68 insertions(+), 1 deletion(-)
->  rename meta-oe/recipes-extended/rsyslog/{files =3D> librelp}/0001-Fix-fu=
-nction-inline-errors-in-debug-optimization-Og.patch (100%)
->  create mode 100644 meta-oe/recipes-extended/rsyslog/librelp/run-ptest
->
-> diff --git a/meta-oe/recipes-extended/rsyslog/files/0001-Fix-function-inl=
-ine-errors-in-debug-optimization-Og.patch b/meta-oe/recipes-extended/rsyslo=
-g/librelp/0001-Fix-function-inline-errors-in-debug-optimization-Og.patch
-> similarity index 100%
-> rename from meta-oe/recipes-extended/rsyslog/files/0001-Fix-function-inli=
-ne-errors-in-debug-optimization-Og.patch
-> rename to meta-oe/recipes-extended/rsyslog/librelp/0001-Fix-function-inli=
-ne-errors-in-debug-optimization-Og.patch
-> diff --git a/meta-oe/recipes-extended/rsyslog/librelp/run-ptest b/meta-oe=
-/recipes-extended/rsyslog/librelp/run-ptest
-> new file mode 100644
-> index 000000000..a649a5716
-> --- /dev/null
-> +++ b/meta-oe/recipes-extended/rsyslog/librelp/run-ptest
-> @@ -0,0 +1,10 @@
-> +#!/bin/sh
-> +#
-> +set -e
-> +set -o pipefail
-> +
-> +SCRIPTPATH=3D"$( cd "$(dirname "$0")" ; pwd -P )"
-> +cd ${SCRIPTPATH}
-> +useradd tester  || echo "user already exists"
-> +su tester -c "make -C tests -k check-TESTS"
-> +userdel tester
-> diff --git a/meta-oe/recipes-extended/rsyslog/librelp_1.11.0.bb b/meta-oe=
-/recipes-extended/rsyslog/librelp_1.11.0.bb
-> index bac5abb05..cbbc31b7d 100644
-> --- a/meta-oe/recipes-extended/rsyslog/librelp_1.11.0.bb
-> +++ b/meta-oe/recipes-extended/rsyslog/librelp_1.11.0.bb
-> @@ -8,10 +8,67 @@ DEPENDS =3D "gmp nettle libidn zlib gnutls openssl"
->
->  SRC_URI =3D "git://github.com/rsyslog/librelp.git;protocol=3Dhttps;branc=
-h=3Dstable \
->             file://0001-Fix-function-inline-errors-in-debug-optimization-=
-Og.patch \
-> +           file://run-ptest \
->  "
->
->  SRCREV =3D "b421f56d9ee31a966058d23bd23c966221c91396"
->
->  S =3D "${WORKDIR}/git"
->
-> -inherit autotools pkgconfig
-> +inherit autotools pkgconfig ptest
-> +
-> +# For ptests, copy source tests/*.sh scripts, Makefile and
-> +# executables and run them with make on target.
-> +TESTDIR =3D "tests"
-> +do_compile_ptest() {
-> +    echo 'buildtest-TESTS: $(check_PROGRAMS)' >> ${TESTDIR}/Makefile
-> +    oe_runmake -C ${TESTDIR} buildtest-TESTS
-> +}
-> +
-> +do_install_ptest() {
-> +    install -d ${D}${PTEST_PATH}/${TESTDIR}
-> +
-> +    # copy source tests/*.sh and python scripts
-> +    cp -f ${S}/${TESTDIR}/*.{sh,py} ${D}${PTEST_PATH}/${TESTDIR}
-> +    # install data files needed by the test scripts on the target
-> +    cp -f ${S}/${TESTDIR}/*.supp ${D}${PTEST_PATH}/${TESTDIR}
-> +    cp -rf ${S}/${TESTDIR}/tls-certs ${D}${PTEST_PATH}/${TESTDIR}
-> +
-> +    # copy executables
-> +    find ${B}/${TESTDIR} -type f -executable -exec cp {} ${D}${PTEST_PAT=
-H}/${TESTDIR} \;
-> +    cp -rf ${B}/${TESTDIR}/.libs ${D}${PTEST_PATH}/${TESTDIR}
-> +    # copy Makefile
-> +    # run-ptest will run make which runs the executables
-> +    cp -f ${B}/${TESTDIR}/Makefile ${D}${PTEST_PATH}/${TESTDIR}
-> +    cp -f ${B}/${TESTDIR}/set-envvars ${D}${PTEST_PATH}/${TESTDIR}
-> +
-> +    # give permissions to all users
-> +    # some tests need to write to this directory
-> +    chmod 777 -R ${D}${PTEST_PATH}/${TESTDIR}
-> +
-> +    # do NOT need to rebuild Makefile or $(check_PROGRAMS)
-> +    sed -i 's/^Makefile:.*$/Makefile:/' ${D}${PTEST_PATH}/${TESTDIR}/Mak=
-efile
-> +    sed -i 's/^check-TESTS:.*$/check-TESTS:/' ${D}${PTEST_PATH}/${TESTDI=
-R}/Makefile
-> +
-> +    # fix the srcdir, top_srcdir, abs_top_builddir
-> +    sed -i 's,^\(srcdir =3D \).*,\1${PTEST_PATH}/${TESTDIR},' ${D}${PTES=
-T_PATH}/${TESTDIR}/Makefile
-> +    sed -i 's,^\(top_srcdir =3D \).*,\1${PTEST_PATH}/${TESTDIR},' ${D}${=
-PTEST_PATH}/${TESTDIR}/Makefile
-> +    sed -i 's,^\(abs_top_builddir =3D \).*,\1${PTEST_PATH}/,' ${D}${PTES=
-T_PATH}/${TESTDIR}/Makefile
-> +
-> +    # install test-driver
-> +    install -m 644 ${S}/test-driver ${D}${PTEST_PATH}
-> +
-> +    # fix the python3 path for tests/set-envar
-> +    sed -i -e s:${HOSTTOOLS_DIR}:${bindir}:g ${D}${PTEST_PATH}/${TESTDIR=
-}/set-envvars
-> +
-> +    # these 2 scripts need help finding their /usr/lib/librelp/ptest/tes=
-ts/.libs libraries
-> +    sed -i 's:${B}/src:${PTEST_PATH}/${TESTDIR}:' ${D}${PTEST_PATH}/${TE=
-STDIR}/send
-> +    sed -i 's:${B}/src:${PTEST_PATH}/${TESTDIR}:' ${D}${PTEST_PATH}/${TE=
-STDIR}/receive
-> +}
-> +
-> +RDEPENDS:${PN}-ptest +=3D "\
-> +  make bash coreutils libgcc util-linux gawk grep \
-> +  python3-core python3-io \
-> +"
-> +
-> +RRECOMMENDS:${PN}-ptest +=3D " valgrind"
-> --
-> 2.39.0
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#104353): https://lists.openembedded.org/g/openembedde=
-d-devel/message/104353
-> Mute This Topic: https://lists.openembedded.org/mt/100749117/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
-aj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
 
