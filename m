@@ -1,164 +1,90 @@
-Return-Path: <tymoteusz.burak@3mdeb.com>
+Return-Path: <M.Vovard@phytec.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 23274C001B0
-	for <webhook@archiver.kernel.org>; Wed, 16 Aug 2023 09:20:38 +0000 (UTC)
-Received: from 4.mo581.mail-out.ovh.net (4.mo581.mail-out.ovh.net [178.32.122.254])
- by mx.groups.io with SMTP id smtpd.web11.156653.1692176666289068797
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 33B13C001E0
+	for <webhook@archiver.kernel.org>; Wed, 16 Aug 2023 09:32:18 +0000 (UTC)
+Received: from mickerik.phytec.de (mickerik.phytec.de [91.26.50.163])
+ by mx.groups.io with SMTP id smtpd.web10.157197.1692178331566615236
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 16 Aug 2023 02:04:27 -0700
+ Wed, 16 Aug 2023 02:32:12 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=softfail (domain: 3mdeb.com, ip: 178.32.122.254, mailfrom: tymoteusz.burak@3mdeb.com)
-Received: from director1.ghost.mail-out.ovh.net (unknown [10.109.156.39])
-	by mo581.mail-out.ovh.net (Postfix) with ESMTP id 7ABDC26E7D
-	for <openembedded-devel@lists.openembedded.org>; Wed, 16 Aug 2023 09:04:24 +0000 (UTC)
-Received: from ghost-submission-6684bf9d7b-b7mzq (unknown [10.110.115.95])
-	by director1.ghost.mail-out.ovh.net (Postfix) with ESMTPS id D81BB1FDF7;
-	Wed, 16 Aug 2023 09:04:23 +0000 (UTC)
-Received: from 3mdeb.com ([37.59.142.97])
-	by ghost-submission-6684bf9d7b-b7mzq with ESMTPSA
-	id 3/lyKReR3GQFRAMA1D9fxQ
-	(envelope-from <tymoteusz.burak@3mdeb.com>); Wed, 16 Aug 2023 09:04:23 +0000
-Authentication-Results: garm.ovh; auth=pass (GARM-97G0027c83e0bb-43d9-4e05-8024-17b0822a5b40,
-                    C01A98C016A9AA6442186A814A8EC09D4D6C7996) smtp.auth=tymoteusz.burak@3mdeb.com
-X-OVh-ClientIp: 213.192.77.249
-From: "Tymoteusz Burak" <tymoteusz.burak@3mdeb.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: piotr.krol@3mdeb.com,
-	tomasz.zyjewski@3mdeb.com
-Subject: [meta-oe][PATCH] ttf-google-fira: add recipe
-Date: Wed, 16 Aug 2023 02:20:35 -0700
-Message-ID: <20230816090345.158299-1-tymoteusz.burak@3mdeb.com>
-X-Mailer: git-send-email 2.41.0
+ dkim=pass header.i=@phytec.de header.s=a4 header.b=rChAkPTz;
+ spf=pass (domain: phytec.de, ip: 91.26.50.163, mailfrom: m.vovard@phytec.de)
+DKIM-Signature: v=1; a=rsa-sha256; d=phytec.de; s=a4; c=relaxed/simple;
+	q=dns/txt; i=@phytec.de; t=1692178328; x=1694770328;
+	h=From:Sender:Reply-To:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:
+	Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:Resent-From:
+	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
+	List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+	bh=fHt7/5ayAkIQiHy9fBC+xlleJjlGwzE05XdLWnFoubo=;
+	b=rChAkPTzrin0s7eIptLbupJsX0QrTo5y5tgu3ubKNAvq4046Jux5PX/HkKzbeRam
+	PDAyNmJAe6xahNKFON9zs/fUKfzuLUMgWgp9fxUmcywAzZSMrCHsJfwVM/R2flqZ
+	PoB6ZK6yKYOjeCQxNgW0SGFNy3ityiai6VNZ8f7oeQ8=;
+X-AuditID: ac14000a-923ff70000007ecb-11-64dc97986b1e
+Received: from florix.phytec.de (Unknown_Domain [172.25.0.13])
+	(using TLS with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	(Client did not present a certificate)
+	by mickerik.phytec.de (PHYTEC Mail Gateway) with SMTP id 52.58.32459.8979CD46; Wed, 16 Aug 2023 11:32:08 +0200 (CEST)
+Received: from augenblix2.phytec.de (172.25.0.11) by Florix.phytec.de
+ (172.25.0.13) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.18; Wed, 16 Aug
+ 2023 11:32:08 +0200
+From: Marine Vovard <m.vovard@phytec.de>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [meta-python][PATCH v2] python3-kivy: Require X11 or Wayland in DISTRO_FEATURES
+Date: Wed, 16 Aug 2023 11:31:26 +0200
+Message-ID: <20230816093126.508832-1-m.vovard@phytec.de>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-X-Ovh-Tracer-Id: 10455106539097673881
-X-VR-SPAMSTATE: OK
-X-VR-SPAMSCORE: 0
-X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrgedviedruddtledgudduucetufdoteggodetrfdotffvucfrrhhofhhilhgvmecuqfggjfdpvefjgfevmfevgfenuceurghilhhouhhtmecuhedttdenucenucfjughrpefhvfevufffkffoggfgsedtkeertdertddtnecuhfhrohhmpefvhihmohhtvghushiiuceuuhhrrghkuceothihmhhothgvuhhsiidrsghurhgrkhesfehmuggvsgdrtghomheqnecuggftrfgrthhtvghrnhepudektdegjeeifeejfffghfevgeehueekuedtgedtvdeiffeftdekveevtdeffeegnecuffhomhgrihhnpehgohhoghhlvgdrtghomhdpghhithhhuhgsrdgtohhmnecukfhppeduvdejrddtrddtrddupddvudefrdduledvrdejjedrvdegledpfeejrdehledrudegvddrleejnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehinhgvthepuddvjedrtddrtddruddpmhgrihhlfhhrohhmpeeothihmhhothgvuhhsiidrsghurhgrkhesfehmuggvsgdrtghomheqpdhnsggprhgtphhtthhopedupdhrtghpthhtohepohhpvghnvghmsggvugguvgguqdguvghvvghlsehlihhsthhsrdhophgvnhgvmhgsvgguuggvugdrohhrghdpoffvtefjohhsthepmhhoheekuddpmhhouggvpehsmhhtphhouhht
-X-Old-Date: Wed, 16 Aug 2023 11:03:45 +0200
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [172.25.0.11]
+X-ClientProxiedBy: Berlix.phytec.de (172.25.0.12) To Florix.phytec.de
+ (172.25.0.13)
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFuplluLIzCtJLcpLzFFi42JZI8nAqztj+p0Ug9Uf1C0uHl7K7MDocW7j
+	CsYAxigum5TUnMyy1CJ9uwSujIc/ljIVdHBUvN/xm72B8S9bFyMnh4SAicTfHxuZuxi5OIQE
+	ljBJLPl2nh3CecIoceRpH1CGg4NNQENi3VFHkAYRAX2JpbP3MIPYwgIREncnrmQHsVkEVCVu
+	bJ7ACGLzClhInLvWALVAXmLmpe/sEHFBiZMzn7CA2MxA8eats5khbAmJgy9egNlCQPEF76/A
+	9U4795oZwg6V6Pxzn2UCI/8sJKNmIRk1C8moBYzMqxiFcjOTs1OLMrP1CjIqS1KT9VJSNzGC
+	gkyEgWsHY98cj0OMTByMhxglOJiVRHh7eG+lCPGmJFZWpRblxxeV5qQWH2KU5mBREue938OU
+	KCSQnliSmp2aWpBaBJNl4uCUamBcc+kpw/NzArX8sh2P1/FaFa+YdNaeb8LTSaz5J0+8X5nN
+	fTl0x/GlxVvXFn7imnGnZiXj3euRJ8xdVu477FFZ4/Pr39WQvKWXNn2peZM1jzloellYCbfR
+	+lk9hx3DlXbUn0l+3riO5YzuCYb9KvofC1MYVk77eu7LZy8Xj/C4e7H1ITWuBybtUmIpzkg0
+	1GIuKk4EAFDETw8gAgAA
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 16 Aug 2023 09:20:38 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104422
-Message-ID: <20230816092035.T33mtzZxDKgY9am89SahxwMrhrY466seORpukrNpM5Q@z>
+ <openembedded-devel@lists.openembedded.org>; Wed, 16 Aug 2023 09:32:18 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104423
 
-Simple recipe for Google truetype fira fonts.
+At least one of the following DISTRO_FEATURES needs to be present: X11 or
+Wayland. The recipe now work with pure Wayland.
 
-Signed-off-by: Tymoteusz Burak <tymoteusz.burak@3mdeb.com>
+Signed-off-by: Marine Vovard <m.vovard@phytec.de>
 ---
- .../ttf-fonts/ttf-google-fira.bb              | 54 +++++++++++++++++++
- 1 file changed, 54 insertions(+)
- create mode 100644 meta-oe/recipes-graphics/ttf-fonts/ttf-google-fira.bb
+Change v1->v2:
+* Check that X11 or Wayland is present in DISTRO_FEATURES
+---
+ meta-python/recipes-devtools/python/python3-kivy_2.1.0..bb | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-graphics/ttf-fonts/ttf-google-fira.bb b/meta=
-=3D
--oe/recipes-graphics/ttf-fonts/ttf-google-fira.bb
-new file mode 100644
-index 000000000000..b330f40387bb
---- /dev/null
-+++ b/meta-oe/recipes-graphics/ttf-fonts/ttf-google-fira.bb
-@@ -0,0 +1,54 @@
-+SUMMARY =3D3D "Google Fira Fonts- TTF Edition"
-+HOMEPAGE =3D3D "https://fonts.google.com/?query=3D3Dfira"
-+LICENSE =3D3D "OFL-1.1"
-+LIC_FILES_CHKSUM =3D3D " \
-+    file://${S}/firamono/OFL.txt;md5=3D3D0373cf792d4b95c61399b94c02702892 =
-=3D
-\
-+    file://${S}/firacode/OFL.txt;md5=3D3Dc75ca55aa0a5809a854d87db2a8ebf23 =
-=3D
-\
-+    file://${S}/firasans/OFL.txt;md5=3D3Dde28deb2f8c1f23fd4d6918113ac3ddd =
-=3D
-\
-+    file://${S}/firasanscondensed/OFL.txt;md5=3D3Dde28deb2f8c1f23fd4d69181=
-=3D
-13ac3ddd \
-+    file://${S}/firasansextracondensed/OFL.txt;md5=3D3Dde28deb2f8c1f23fd4d=
-=3D
-6918113ac3ddd \
-+"
-+SRCREV =3D3D "47a6c224b3e0287b2e48e3ffef8c9ce2ca4931f4"
+diff --git a/meta-python/recipes-devtools/python/python3-kivy_2.1.0..bb b/meta-python/recipes-devtools/python/python3-kivy_2.1.0..bb
+index ca1fc5f96..b02c55a85 100644
+--- a/meta-python/recipes-devtools/python/python3-kivy_2.1.0..bb
++++ b/meta-python/recipes-devtools/python/python3-kivy_2.1.0..bb
+@@ -43,7 +43,9 @@ export KIVY_GRAPHICS
+ KIVY_CROSS_SYSROOT="${RECIPE_SYSROOT}"
+ export KIVY_CROSS_SYSROOT
+ 
+-REQUIRED_DISTRO_FEATURES += "x11 opengl gobject-introspection-data"
++REQUIRED_DISTRO_FEATURES += "opengl gobject-introspection-data"
 +
-+SRC_URI =3D3D "git://github.com/google/fonts.git;protocol=3D3Dhttps;branch=
-=3D3D=3D
-main;subpath=3D3Dofl/firamono \
-+           git://github.com/google/fonts.git;protocol=3D3Dhttps;branch=3D3=
-Dm=3D
-ain;subpath=3D3Dofl/firacode \
-+           git://github.com/google/fonts.git;protocol=3D3Dhttps;branch=3D3=
-Dm=3D
-ain;subpath=3D3Dofl/firasans \
-+           git://github.com/google/fonts.git;protocol=3D3Dhttps;branch=3D3=
-Dm=3D
-ain;subpath=3D3Dofl/firasanscondensed \
-+           git://github.com/google/fonts.git;protocol=3D3Dhttps;branch=3D3=
-Dm=3D
-ain;subpath=3D3Dofl/firasansextracondensed"
-+
-+S =3D3D "${WORKDIR}"
-+
-+do_install:append() {
-+    install -d ${D}${datadir}/fonts/truetype/
-+    find ${S} -path 'fira*/*.tt[cf]' -exec install -m 0644 {} ${D}${data=
-=3D
-dir}/fonts/truetype/{} \;
-+    install -D -m 0644 ${S}/firamono/OFL.txt ${D}${datadir}/licenses/${P=
-=3D
-N}mono/OFL.txt
-+    install -D -m 0644 ${S}/firacode/OFL.txt ${D}${datadir}/licenses/${P=
-=3D
-N}code/OFL.txt
-+    install -D -m 0644 ${S}/firasans/OFL.txt ${D}${datadir}/licenses/${P=
-=3D
-N}sans/OFL.txt
-+    install -D -m 0644 ${S}/firasanscondensed/OFL.txt ${D}${datadir}/lic=
-=3D
-enses/${PN}sanscondensed/OFL.txt
-+    install -D -m 0644 ${S}/firasansextracondensed/OFL.txt ${D}${datadir=
-=3D
-}/licenses/${PN}sansextracondensed/OFL.txt
-+}
-+
-+PACKAGES =3D3D+ "${PN}-mono ${PN}-code ${PN}-sans ${PN}-sanscondensed ${PN=
-=3D
-}-sansextracondensed"
-+
-+FILES:${PN}-mono +=3D3D " \
-+                    ${datadir}/fonts/truetype/FiraMono* \
-+                    ${datadir}/licenses/${PN}mono/OFL.txt \
-+                "
-+FILES:${PN}-code +=3D3D " \
-+                    ${datadir}/fonts/truetype/FiraCode* \
-+                    ${datadir}/licenses/${PN}code/OFL.txt \
-+                "
-+FILES:${PN}-sans +=3D3D " \
-+                    ${datadir}/fonts/truetype/FiraSans-* \
-+                    ${datadir}/licenses/${PN}sans/OFL.txt \
-+                "
-+FILES:${PN}-sanscondensed +=3D3D " \
-+                            ${datadir}/fonts/truetype/FiraSansCondensed-=
-=3D
-* \
-+                            ${datadir}/licenses/${PN}sanscondensed/OFL.t=
-=3D
-xt \
-+                        "
-+FILES:${PN}-sansextracondensed +=3D3D " \
-+                                    ${datadir}/fonts/truetype/FiraSansEx=
-=3D
-traCondensed-* \
-+                                    ${datadir}/licenses/${PN}sansextraco=
-=3D
-ndensed/OFL.txt \
-+                                 "
-+
-+require ttf.inc
---=3D20
-2.41.0
++ANY_OF_DISTRO_FEATURES = "x11 wayland"
+ 
+ DEPENDS += " \
+     gstreamer1.0 \
+-- 
+2.25.1
 
 
