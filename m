@@ -1,248 +1,186 @@
-Return-Path: <pawel.langowski@3mdeb.com>
+Return-Path: <akuster@mvista.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7E306C41513
-	for <webhook@archiver.kernel.org>; Wed, 16 Aug 2023 11:07:48 +0000 (UTC)
-Received: from 18.mo584.mail-out.ovh.net (18.mo584.mail-out.ovh.net [188.165.54.143])
- by mx.groups.io with SMTP id smtpd.web11.157955.1692184066609495815
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 104E2C001B0
+	for <webhook@archiver.kernel.org>; Wed, 16 Aug 2023 12:26:59 +0000 (UTC)
+Received: from mail-yw1-f181.google.com (mail-yw1-f181.google.com [209.85.128.181])
+ by mx.groups.io with SMTP id smtpd.web11.159145.1692188811607099463
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 16 Aug 2023 04:07:47 -0700
+ Wed, 16 Aug 2023 05:26:51 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=softfail (domain: 3mdeb.com, ip: 188.165.54.143, mailfrom: pawel.langowski@3mdeb.com)
-Received: from director2.ghost.mail-out.ovh.net (unknown [10.108.16.164])
-	by mo584.mail-out.ovh.net (Postfix) with ESMTP id 6117D242CF
-	for <openembedded-devel@lists.openembedded.org>; Wed, 16 Aug 2023 11:07:44 +0000 (UTC)
-Received: from ghost-submission-6684bf9d7b-5h88g (unknown [10.111.172.174])
-	by director2.ghost.mail-out.ovh.net (Postfix) with ESMTPS id BBAD51FEAB;
-	Wed, 16 Aug 2023 11:07:43 +0000 (UTC)
-Received: from 3mdeb.com ([37.59.142.101])
-	by ghost-submission-6684bf9d7b-5h88g with ESMTPSA
-	id iJLUKf+t3GQqhRUAK6ZoNQ
-	(envelope-from <pawel.langowski@3mdeb.com>); Wed, 16 Aug 2023 11:07:43 +0000
-Authentication-Results: garm.ovh; auth=pass (GARM-101G0040d08f230-9e06-48db-8871-54488ea65981,
-                    93A237E87ED1339E13AED04D535165A97E4753C9) smtp.auth=pawel.langowski@3mdeb.com
-X-OVh-ClientIp: 213.192.77.249
-From: Pawel Langowski <pawel.langowski@3mdeb.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: piotr.krol@3mdeb.com,
-	tomasz.zyjewski@3mdeb.com
-Subject: [meta-networking][PATCH] meta-networking/recipes-connectivity: Add tayga recipe
-Date: Wed, 16 Aug 2023 13:07:35 +0200
-Message-ID: <20230816110739.1428994-2-pawel.langowski@3mdeb.com>
-X-Mailer: git-send-email 2.41.0
-In-Reply-To: <20230816110739.1428994-1-pawel.langowski@3mdeb.com>
-References: <20230816110739.1428994-1-pawel.langowski@3mdeb.com>
+ dkim=pass header.i=@mvista.com header.s=google header.b=SKMXL/5P;
+ spf=pass (domain: mvista.com, ip: 209.85.128.181, mailfrom: akuster@mvista.com)
+Received: by mail-yw1-f181.google.com with SMTP id 00721157ae682-589a9fc7fc6so68865447b3.1
+        for <openembedded-devel@lists.openembedded.org>; Wed, 16 Aug 2023 05:26:51 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=mvista.com; s=google; t=1692188810; x=1692793610;
+        h=subject:from:to:user-agent:mime-version:date:message-id:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=cshFJf1g/yiXnjFix8ULn9FJ/FRWkFtKe9CHKUK6R3E=;
+        b=SKMXL/5PRv62HtZMWzC/IUQG/nG7kcDFaDNzCMXtkvn+RrVdAOocnstZpWftOgcQoi
+         RYLBpxuJzsN3hQR+3Volpb6uBfxDQ44IumeFxpUMDbSnYXWmwpRk2sjYnVYW0Yv2uTja
+         ywe/hr5PtAoDACu/+IEHrpO3H857chFKWDjT8=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20221208; t=1692188810; x=1692793610;
+        h=subject:from:to:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=cshFJf1g/yiXnjFix8ULn9FJ/FRWkFtKe9CHKUK6R3E=;
+        b=k7BrtVu7PL6naHhk8rRwxPcPNgaCS5vvRxemkeobk3nPBC1Q2Bij+ZOscgcO6wYcPa
+         mwKdI/cqNDL5u6mklqQOeQx+znk3nO8dl96XoIeOqjyKqMMHBl5/VgkB5sAxSopMvWK/
+         8T858PSNVjAUo9AxBDI6rey49BATEj2/oVURNOBQ01gD58dR8DndytEgZg3cGr8+Kqwk
+         BOR7SXFPZkkdh1oac+r0Q9sfj00h4X1RMwQXH3CyivHFlweIlaZEW3nb8IwOfmViCsR4
+         jAAT5xTXk+ZvajCWIIK8nTe4gXNJ+i+7R/19Q1mke1RD1LAfF0pezMyWLAguvukdFItw
+         /Hrg==
+X-Gm-Message-State: AOJu0Ywciaond6s88qMMQ7a9hQ00bXZ9e0HU72xbA5NWeBRfQ2z+EQfs
+	x1Nt35bu4/xr/Qjy5V2A41rsAw==
+X-Google-Smtp-Source: AGHT+IGgVS2oGuDDMnk/WzvwyP6KuzJhs1C4OLmmIozbw2fPkezOSGCVpwkEJ1M89W+/vVuHcwx3ug==
+X-Received: by 2002:a25:23c8:0:b0:d47:8db3:8bcf with SMTP id j191-20020a2523c8000000b00d478db38bcfmr1507341ybj.49.1692188810627;
+        Wed, 16 Aug 2023 05:26:50 -0700 (PDT)
+Received: from ?IPV6:2600:1700:9190:ba10:4134:632e:2cd2:5575? ([2600:1700:9190:ba10:4134:632e:2cd2:5575])
+        by smtp.gmail.com with ESMTPSA id i62-20020a256d41000000b00d6861b49f01sm2372626ybc.65.2023.08.16.05.26.50
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Wed, 16 Aug 2023 05:26:50 -0700 (PDT)
+Message-ID: <872ec58d-22cb-494c-72e5-1b9a611b1857@mvista.com>
+Date: Wed, 16 Aug 2023 08:26:49 -0400
 MIME-Version: 1.0
-X-Ovh-Tracer-Id: 12538021363530183321
-X-VR-SPAMSTATE: OK
-X-VR-SPAMSCORE: 0
-X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrgedviedruddtledgfeeiucetufdoteggodetrfdotffvucfrrhhofhhilhgvmecuqfggjfdpvefjgfevmfevgfenuceurghilhhouhhtmecuhedttdenucenucfjughrpefhvfevufffkffojghfggfgsedtkeertdertddtnecuhfhrohhmpefrrgifvghlucfnrghnghhofihskhhiuceophgrfigvlhdrlhgrnhhgohifshhkihesfehmuggvsgdrtghomheqnecuggftrfgrthhtvghrnhepveeggedviedvtefglefhheeitddvjedvueefkeelkedtkeeludekvdevkeetgfefnecuffhomhgrihhnpehlihhtvggthhdrohhrghenucfkphepuddvjedrtddrtddruddpvddufedrudelvddrjeejrddvgeelpdefjedrheelrddugedvrddutddunecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehinhgvthepuddvjedrtddrtddruddpmhgrihhlfhhrohhmpeeophgrfigvlhdrlhgrnhhgohifshhkihesfehmuggvsgdrtghomheqpdhnsggprhgtphhtthhopedupdhrtghpthhtohepohhpvghnvghmsggvugguvgguqdguvghvvghlsehlihhsthhsrdhophgvnhgvmhgsvgguuggvugdrohhrghdpoffvtefjohhsthepmhhoheekgedpmhhouggvpehsmhhtphhouhht
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.13.0
+To: Khem Raj <raj.khem@gmail.com>,
+ OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+From: akuster <akuster@mvista.com>
+Subject: Kirkstone merge request: Arg 16th
+Content-Type: multipart/signed; protocol="application/pkcs7-signature"; micalg=sha-256;
+	boundary="000000000000f77f2d060309686e"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 16 Aug 2023 11:07:48 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104426
+ <openembedded-devel@lists.openembedded.org>; Wed, 16 Aug 2023 12:26:59 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104427
 
-Recipe for TAYGA - an out-of-kernel stateless NAT64 implementation for Li=
-nux
----
- .../tayga/files/tayga.conf                    | 103 ++++++++++++++++++
- .../tayga/files/tayga.service                 |  12 ++
- .../recipes-connectivity/tayga/tayga_0.9.2.bb |  20 ++++
- 3 files changed, 135 insertions(+)
- create mode 100644 meta-networking/recipes-connectivity/tayga/files/tayg=
-a.conf
- create mode 100644 meta-networking/recipes-connectivity/tayga/files/tayg=
-a.service
- create mode 100644 meta-networking/recipes-connectivity/tayga/tayga_0.9.=
-2.bb
+--000000000000f77f2d060309686e
+Content-Language: en-US
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
-diff --git a/meta-networking/recipes-connectivity/tayga/files/tayga.conf =
-b/meta-networking/recipes-connectivity/tayga/files/tayga.conf
-new file mode 100644
-index 000000000000..c1b6163a4591
---- /dev/null
-+++ b/meta-networking/recipes-connectivity/tayga/files/tayga.conf
-@@ -0,0 +1,103 @@
-+#
-+# Sample configuration file for TAYGA 0.9.2
-+#
-+# Modify this to use your own addresses!!
-+#
-+
-+#
-+# TUN device that TAYGA will use to exchange IPv4 and IPv6 packets with =
-the
-+# kernel.  You may use any name you like, but `nat64' is recommended.
-+#
-+# This device may be created before starting the tayga daemon by running
-+# `tayga --mktun`.  This allows routing and firewall rules to be set up =
-prior
-+# to commencement of packet translation.
-+#
-+# Mandatory.
-+#
-+tun-device nat64
-+
-+#
-+# TAYGA's IPv4 address.  This is NOT your router's IPv4 address!  TAYGA
-+# requires its own address because it acts as an IPv4 and IPv6 router, a=
-nd
-+# needs to be able to send ICMP messages.  TAYGA will also respond to IC=
-MP
-+# echo requests (ping) at this address.
-+#
-+# This address can safely be located inside the dynamic-pool prefix.
-+#
-+# Mandatory.
-+#
-+ipv4-addr 192.168.254.1
-+
-+#
-+# TAYGA's IPv6 address.  This is NOT your router's IPv6 address!  TAYGA
-+# requires its own address because it acts as an IPv4 and IPv6 router, a=
-nd
-+# needs to be able to send ICMP messages.  TAYGA will also respond to IC=
-MP
-+# echo requests (ping6) at this address.
-+#
-+# You can leave ipv6-addr unspecified and TAYGA will construct its IPv6
-+# address using ipv4-addr and the NAT64 prefix.
-+#
-+# Optional if the NAT64 prefix is specified, otherwise mandatory.  It is=
- also
-+# mandatory if the NAT64 prefix is 64:ff9b::/96 and ipv4-addr is a priva=
-te
-+# (RFC1918) address.
-+#
-+#ipv6-addr 2001:db8:1::2
-+ipv6-addr fdaa:bb:1::1
-+
-+#
-+# The NAT64 prefix.  The IPv4 address space is mapped into the IPv6 addr=
-ess
-+# space by prepending this prefix to the IPv4 address.  Using a /96 pref=
-ix is
-+# recommended in most situations, but all lengths specified in RFC 6052 =
-are
-+# supported.
-+#
-+# This must be a prefix selected from your organization's IPv6 address s=
-pace
-+# or the Well-Known Prefix 64:ff9b::/96.  Note that using the Well-Known
-+# Prefix will prohibit IPv6 hosts from contacting IPv4 hosts that have p=
-rivate
-+# (RFC1918) addresses, per RFC 6052.
-+#
-+# The NAT64 prefix need not be specified if all required address mapping=
-s are
-+# listed in `map' directives.  (See below.)
-+#
-+# Optional.
-+#
-+##prefix 2001:db8:1:ffff::/96
-+prefix 64:ff9b::/96
-+
-+#
-+# Dynamic pool prefix.  IPv6 hosts which send traffic through TAYGA (and=
- do
-+# not correspond to a static map or an IPv4-translatable address in the =
-NAT64
-+# prefix) will be assigned an IPv4 address from the dynamic pool.  Dynam=
-ic
-+# maps are valid for 124 minutes after the last matching packet is seen.
-+#
-+# If no unassigned addresses remain in the dynamic pool (or no dynamic p=
-ool is
-+# configured), packets from unknown IPv6 hosts will be rejected with an =
-ICMP
-+# unreachable error.
-+#
-+# Optional.
-+#
-+dynamic-pool 192.168.254.0/24
-+
-+#
-+# Persistent data storage directory.  The dynamic.map file, which saves =
-the
-+# dynamic maps that are created from dynamic-pool, is stored in this
-+# directory.  Omit if you do not need these maps to be persistent betwee=
-n
-+# instances of TAYGA.
-+#
-+# Optional.
-+#
-+data-dir /var/spool/tayga
-+
-+#
-+# Establishes a single-host map.  If an IPv6 host should be consistently
-+# reachable at a specific IPv4 address, the mapping can be specified in =
-a
-+# `map' directive.  (IPv6 hosts numbered with an IPv4-translatable addre=
-ss do
-+# not need map directives.)
-+#
-+# IPv4 addresses specified in the `map' directive can safely be located =
-inside
-+# the dynamic-pool prefix.
-+#
-+# Optional.
-+#
-+#map 192.168.5.42 2001:db8:1:4444::1
-+#map 192.168.5.43 2001:db8:1:4444::2
-+#map 192.168.255.2 2001:db8:1:569::143
-diff --git a/meta-networking/recipes-connectivity/tayga/files/tayga.servi=
-ce b/meta-networking/recipes-connectivity/tayga/files/tayga.service
-new file mode 100644
-index 000000000000..0bffeb92a501
---- /dev/null
-+++ b/meta-networking/recipes-connectivity/tayga/files/tayga.service
-@@ -0,0 +1,12 @@
-+[Unit]
-+SourcePath=3D/usr/sbin/tayga
-+Description=3DLSB: userspace NAT64
-+
-+[Service]
-+Type=3Dforking
-+ExecStart=3D/usr/sbin/tayga -d --config /etc/tayga.conf
-+RemainAfterExit=3Dyes
-+TimeoutStopSec=3Dinfinity
-+
-+[Install]
-+WantedBy=3Dmulti-user.target
-diff --git a/meta-networking/recipes-connectivity/tayga/tayga_0.9.2.bb b/=
-meta-networking/recipes-connectivity/tayga/tayga_0.9.2.bb
-new file mode 100644
-index 000000000000..12d0d14e0d49
---- /dev/null
-+++ b/meta-networking/recipes-connectivity/tayga/tayga_0.9.2.bb
-@@ -0,0 +1,20 @@
-+LICENSE =3D "GPLv2"
-+LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D94d55d512a9ba36caa9b7df079bae=
-19f"
-+
-+SRC_URI =3D "http://www.litech.org/tayga/tayga-${PV}.tar.bz2"
-+SRC_URI[md5sum] =3D "7a7b24165ce008df772f398d86fa280e"
-+SRC_URI[sha256sum] =3D "2b1f7927a9d2dcff9095aff3c271924b052ccfd2faca9588=
-b277431a44f0009c"
-+
-+SRC_URI +=3D "file://tayga.conf \
-+            file://tayga.service"
-+
-+SYSTEMD_PACKAGES =3D "${PN}"
-+SYSTEMD_SERVICE:${PN} =3D "tayga.service"
-+
-+do_install:append() {
-+  install -m 0644 ${WORKDIR}/tayga.conf ${D}${sysconfdir}/tayga.conf
-+  install -d ${D}${systemd_unitdir}/system/
-+  install -m 0644 ${WORKDIR}/tayga.service ${D}${systemd_unitdir}/system=
-/
-+}
-+
-+inherit autotools systemd
---=20
-2.41.0
+The following changes since commit 594c9cf6d3205c8e40ff772383fd9ab7dd3ed2cc:
 
+   redis: upgrade 7.0.11 -> 7.0.12 (2023-08-03 16:50:52 -0400)
+
+are available in the Git repository at:
+
+   https://git.openembedded.org/meta-openembedded kirkstone-next
+
+for you to fetch changes up to 529620141e773080a6a7be4615fb7993204af883:
+
+   nodejs: upgrade 16.20.1 -> 16.20.2 (2023-08-11 10:32:04 -0400)
+
+----------------------------------------------------------------
+Beniamin Sandu (1):
+       lmsensors: do not pull in unneeded perl modules for run-time 
+dependencies
+
+Frieder Schrempf (1):
+       python3-can: Add missing runtime dependencies
+
+Polampalli, Archana (1):
+       nodejs: upgrade 16.20.1 -> 16.20.2
+
+  meta-oe/recipes-bsp/lm_sensors/lmsensors_3.6.0.bb | 5 +++--
+  meta-oe/recipes-devtools/nodejs/{nodejs_16.20.1.bb => 
+nodejs_16.20.2.bb} | 2 +-
+  meta-python/recipes-devtools/python/python3-can_4.0.0.bb | 7 +++++--
+  3 files changed, 9 insertions(+), 5 deletions(-)
+  rename meta-oe/recipes-devtools/nodejs/{nodejs_16.20.1.bb => 
+nodejs_16.20.2.bb} (98%)
+
+
+--000000000000f77f2d060309686e
+Content-Type: application/pkcs7-signature; name="smime.p7s"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="smime.p7s"
+Content-Description: S/MIME Cryptographic Signature
+
+MIIR4QYJKoZIhvcNAQcCoIIR0jCCEc4CAQExDzANBglghkgBZQMEAgEFADALBgkqhkiG9w0BBwGg
+gg8qMIIGTjCCBTagAwIBAgIQBK55YGZmkBq5xX+mbFvczTANBgkqhkiG9w0BAQsFADBlMQswCQYD
+VQQGEwJVUzEVMBMGA1UEChMMRGlnaUNlcnQgSW5jMRkwFwYDVQQLExB3d3cuZGlnaWNlcnQuY29t
+MSQwIgYDVQQDExtEaWdpQ2VydCBBc3N1cmVkIElEIFJvb3QgQ0EwHhcNMTMxMTA1MTIwMDAwWhcN
+MjgxMTA1MTIwMDAwWjBlMQswCQYDVQQGEwJVUzEVMBMGA1UEChMMRGlnaUNlcnQgSW5jMRkwFwYD
+VQQLExB3d3cuZGlnaWNlcnQuY29tMSQwIgYDVQQDExtEaWdpQ2VydCBTSEEyIEFzc3VyZWQgSUQg
+Q0EwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDc+BEjP2q178AneRstBYeiEEMx3w7U
+FRtPd6Qizj6McPC+B47dJyq8AR22LArK3WlYH0HtagUf2mN4WR4iLCv4un7JNTtW8R98Qn4lsCMZ
+xkU41z1E+SB8YK4csFoYBL6PO/ep8JSapgxjSbZBF1NAMr1P5lB6UB8lRejxia/N/17/UPPwFxH/
+vcWJ9b1iudj7jkUEhW2ZzcVITf0mqwI2Reo2119q4hqCQQrc6dn1kReOxiGtODwT5h5/ZpzVTdlG
+2vbPUqd9OyTDtMFRNcab69TvfuR7A+FEvXoLN+BPy4KKDXEY5KbgiSwb87JzPMGwkp4Yfb2rfcV9
+CKEswp9zAgMBAAGjggL4MIIC9DASBgNVHRMBAf8ECDAGAQH/AgEAMA4GA1UdDwEB/wQEAwIBhjA0
+BggrBgEFBQcBAQQoMCYwJAYIKwYBBQUHMAGGGGh0dHA6Ly9vY3NwLmRpZ2ljZXJ0LmNvbTCBgQYD
+VR0fBHoweDA6oDigNoY0aHR0cDovL2NybDQuZGlnaWNlcnQuY29tL0RpZ2lDZXJ0QXNzdXJlZElE
+Um9vdENBLmNybDA6oDigNoY0aHR0cDovL2NybDMuZGlnaWNlcnQuY29tL0RpZ2lDZXJ0QXNzdXJl
+ZElEUm9vdENBLmNybDAdBgNVHSUEFjAUBggrBgEFBQcDAgYIKwYBBQUHAwQwggGzBgNVHSAEggGq
+MIIBpjCCAaIGCmCGSAGG/WwAAgQwggGSMCgGCCsGAQUFBwIBFhxodHRwczovL3d3dy5kaWdpY2Vy
+dC5jb20vQ1BTMIIBZAYIKwYBBQUHAgIwggFWHoIBUgBBAG4AeQAgAHUAcwBlACAAbwBmACAAdABo
+AGkAcwAgAEMAZQByAHQAaQBmAGkAYwBhAHQAZQAgAGMAbwBuAHMAdABpAHQAdQB0AGUAcwAgAGEA
+YwBjAGUAcAB0AGEAbgBjAGUAIABvAGYAIAB0AGgAZQAgAEQAaQBnAGkAQwBlAHIAdAAgAEMAUAAv
+AEMAUABTACAAYQBuAGQAIAB0AGgAZQAgAFIAZQBsAHkAaQBuAGcAIABQAGEAcgB0AHkAIABBAGcA
+cgBlAGUAbQBlAG4AdAAgAHcAaABpAGMAaAAgAGwAaQBtAGkAdAAgAGwAaQBhAGIAaQBsAGkAdAB5
+ACAAYQBuAGQAIABhAHIAZQAgAGkAbgBjAG8AcgBwAG8AcgBhAHQAZQBkACAAaABlAHIAZQBpAG4A
+IABiAHkAIAByAGUAZgBlAHIAZQBuAGMAZQAuMB0GA1UdDgQWBBTnAiOAAE/Y17yUC9k/dDlJMjyK
+eTAfBgNVHSMEGDAWgBRF66Kv9JLLgjEtUYunpyGd823IDzANBgkqhkiG9w0BAQsFAAOCAQEATtSJ
+J7n9HYd3fg8oBZDxCi/JOz69k5yQxq/6kVGHMlRr6MrBcVFcmY61+uBiGZmmB5p8Eyfb5QKihBLZ
+FfYKRFfENI9tcx861qABPd7jguRFa7LrJf2AXh05kL5bQvbOkWDj+aBWDEgQzjNoe82Tq/Bqy09Y
+D7l7XRsEgZ6nIuJXSSfukpMIvmkIUwI6Ll3IGfRQgE4C2bBdkbSTh/mWloFVQI5m7YLYuyhf7Uxh
+7QZYKBlTEUS8RyApsgRs2IlUmTt122d4LB6SeMZVPVgSETJuvUMMTTTbe8ZC2+y+q5thTAaS447f
+ISpQVwTAYKI11SSeZjcJSc/V+GWz4OJuwjCCA7cwggKfoAMCAQICEAzn4OUX2Eb+j+Vg/BvwMDkw
+DQYJKoZIhvcNAQEFBQAwZTELMAkGA1UEBhMCVVMxFTATBgNVBAoTDERpZ2lDZXJ0IEluYzEZMBcG
+A1UECxMQd3d3LmRpZ2ljZXJ0LmNvbTEkMCIGA1UEAxMbRGlnaUNlcnQgQXNzdXJlZCBJRCBSb290
+IENBMB4XDTA2MTExMDAwMDAwMFoXDTMxMTExMDAwMDAwMFowZTELMAkGA1UEBhMCVVMxFTATBgNV
+BAoTDERpZ2lDZXJ0IEluYzEZMBcGA1UECxMQd3d3LmRpZ2ljZXJ0LmNvbTEkMCIGA1UEAxMbRGln
+aUNlcnQgQXNzdXJlZCBJRCBSb290IENBMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA
+rQ4VzuRDgFyxh/O3YPlxEqWu3CaUiKr0zvUgOShYYAz4gNqpFZUyYTy1sSiEiorcnwoMgxd6j5Cs
+iud5U1wxhCr2D5gyNnbM3t08qKLvavsh8lJh358g1x/isdn+GGTSEltf+VgYNbxHzaE2+Wt/1LA4
+PsEbw4wz2dgvGP4oD7Ong9bDbkTAYTWWFv5ZnIt2bdfxoksNK/8LctqeYNCOkDXGeFWHIKHP5W0K
+yEl8MZgzbCLph9AyWqK6E4IR7TkXnZk6cqHm+qTZ1Rcxda6FfSKuPwFGhvYoecix2uRXF8R+HA6w
+tJKmVrO9spftqqfwt8WoP5UW0P+hlusIXxh3TwIDAQABo2MwYTAOBgNVHQ8BAf8EBAMCAYYwDwYD
+VR0TAQH/BAUwAwEB/zAdBgNVHQ4EFgQUReuir/SSy4IxLVGLp6chnfNtyA8wHwYDVR0jBBgwFoAU
+Reuir/SSy4IxLVGLp6chnfNtyA8wDQYJKoZIhvcNAQEFBQADggEBAKIOvN/i7fDjcnN6ZJS/93Jm
+2DLkQnVirofr8tXZ3lazn8zOFCi5DZdgXBJMWOTTPYNJRViXNWkaqEfqVsZ5qxLYZ4GE338JPJTm
+uCYsIL09syiJ91//IuKXhB/pZe+H4N/BZ0mzXeuyCSrrJu14vn0/K/O3JjVtX4kBtklbnwEFm6s9
+JcHMtn/C8W+GxvpkaOuBLZTrQrf6jB7dYvG+UGe3bL3z8R9rDDYHFn83fKlbbXrxEkZgg9cnBL5L
+zpe+w2cqaBHfgOcMM2a/Ew0UbvN/H2MQHvqNGyVtbI+lt2EBsdKjJqEQcZ2t4sP5w5lRtysHCM4u
+5lCyp/oKRS+i8PIwggUZMIIEAaADAgECAhABmeiIGxb92d1jHUeNPLJ7MA0GCSqGSIb3DQEBCwUA
+MGUxCzAJBgNVBAYTAlVTMRUwEwYDVQQKEwxEaWdpQ2VydCBJbmMxGTAXBgNVBAsTEHd3dy5kaWdp
+Y2VydC5jb20xJDAiBgNVBAMTG0RpZ2lDZXJ0IFNIQTIgQXNzdXJlZCBJRCBDQTAeFw0yMTEwMjkw
+MDAwMDBaFw0yMzEwMjcyMzU5NTlaMEAxGzAZBgNVBAMMEmFrdXN0ZXJAbXZpc3RhLmNvbTEhMB8G
+CSqGSIb3DQEJARYSYWt1c3RlckBtdmlzdGEuY29tMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIB
+CgKCAQEA60Rtp117FyjzKFRYeZrx5QdhlSA7VUEQxYtnCtN656+u6Vjq/R0I4KAIMaAEOlS3Purp
+DrHBMf1gqCKZHdzCkmj5L8GtBkB6yT1NoJnBTH83TgLbRFPB3WnTFmWTSnBkFyyrkoc8JKIzu/p0
+CM/+pHHH9IR5lmzdraoKnHx9ZUwaNltEPZpDWo7zxqQXS+uToztNNuhYPOZhMQmGBVOzczliElcm
++DOgmn89Va8QVYqzPglbvjsYSIk2kzaKVffLxyY2p0yvWY8w7CAEYk2gLfPuZiqIdXGYmEyKH86H
+27AP1uMrYQjEw1R9VY4JrpDLehuUs/RGYWyMAjfo1NDh0QIDAQABo4IB6DCCAeQwHwYDVR0jBBgw
+FoAU5wIjgABP2Ne8lAvZP3Q5STI8inkwHQYDVR0OBBYEFL0akMb3LmLy7bKAAO6QDtKy8WI7MAwG
+A1UdEwEB/wQCMAAwHQYDVR0RBBYwFIESYWt1c3RlckBtdmlzdGEuY29tMA4GA1UdDwEB/wQEAwIF
+oDAdBgNVHSUEFjAUBggrBgEFBQcDBAYIKwYBBQUHAwIwQwYDVR0gBDwwOjA4BgpghkgBhv1sBAEB
+MCowKAYIKwYBBQUHAgEWHGh0dHBzOi8vd3d3LmRpZ2ljZXJ0LmNvbS9DUFMwgYUGA1UdHwR+MHww
+PKA6oDiGNmh0dHA6Ly9jcmwzLmRpZ2ljZXJ0LmNvbS9EaWdpQ2VydFNIQTJBc3N1cmVkSURDQS0x
+LmNybDA8oDqgOIY2aHR0cDovL2NybDQuZGlnaWNlcnQuY29tL0RpZ2lDZXJ0U0hBMkFzc3VyZWRJ
+RENBLTEuY3JsMHkGCCsGAQUFBwEBBG0wazAkBggrBgEFBQcwAYYYaHR0cDovL29jc3AuZGlnaWNl
+cnQuY29tMEMGCCsGAQUFBzAChjdodHRwOi8vY2FjZXJ0cy5kaWdpY2VydC5jb20vRGlnaUNlcnRT
+SEEyQXNzdXJlZElEQ0EuY3J0MA0GCSqGSIb3DQEBCwUAA4IBAQCUY9qc+vTg/KOKUB9htYLvs1km
+5XF3yyLnIoMBvbmx4zatz0YddFP7UT0esHLGDEW2suAlq44A6SRd2fTUe0tyjGAxsblGwxKp0ypw
+p6xjYeJAkp0nEemsYGxGSOf1HP9BIT1bFT9CHHCoX26wxtf7RF2fePncJ4wPBxFzJdecBcKgL8uN
+yQnDtPyJ0DC4bVz9Z67nEFJcFTyrzbvo4sk9A8QKYANnjmCYPSEIlis8o7zERwxC/xNTgzAXzlDS
+8mJM7ja9otySdENt1tyty90IOWryaSvfeHDffO0YCDvbAVCcisvjni5esAu0sDrJr+ODF4laEVBF
+z4PNrDvNN2gGMYICezCCAncCAQEweTBlMQswCQYDVQQGEwJVUzEVMBMGA1UEChMMRGlnaUNlcnQg
+SW5jMRkwFwYDVQQLExB3d3cuZGlnaWNlcnQuY29tMSQwIgYDVQQDExtEaWdpQ2VydCBTSEEyIEFz
+c3VyZWQgSUQgQ0ECEAGZ6IgbFv3Z3WMdR408snswDQYJYIZIAWUDBAIBBQCggdQwLwYJKoZIhvcN
+AQkEMSIEIISTYoMATQfllZZkSJrZPqbPPqjWnnkd2merBOaURpw8MBgGCSqGSIb3DQEJAzELBgkq
+hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTIzMDgxNjEyMjY1MFowaQYJKoZIhvcNAQkPMVwwWjAL
+BglghkgBZQMEASowCwYJYIZIAWUDBAEWMAsGCWCGSAFlAwQBAjAKBggqhkiG9w0DBzALBgkqhkiG
+9w0BAQowCwYJKoZIhvcNAQEHMAsGCWCGSAFlAwQCATANBgkqhkiG9w0BAQEFAASCAQCm/cPl2pZo
+QPgcKvEWz/RwIfaPrVliyigqteLcET4c3qcgiWx+C2VmmFnEd8H04y7wiLaWP2RZaCTGQIrMsIas
+OcqREFxlyKtWkTvf/AZnVMPFHa4NNfxYG0uIoKBUbG5vhRI3CrXFVurQToZWa8+lNIeg79B82GID
+FpZL6Rto4S6t+NQS4TJsx4zXXiW5l3UtOcRTKRUelgxSLBr99xQIx9sHNQeWayGFoTCByGfKQYLw
+HnfUEx+1bDE+08s7IoVLNmGGkt5yJi7VYQ3JBh5SD6VvQaW8iozgvbSYyEyNc6nwq8bSU+OJzC9g
+KUidnA4QHQE/Mwx5XeT8hxraB+hA
+--000000000000f77f2d060309686e--
 
