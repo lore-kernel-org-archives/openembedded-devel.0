@@ -2,25 +2,25 @@ Return-Path: <pawel.langowski@3mdeb.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7D563C04A94
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7E306C41513
 	for <webhook@archiver.kernel.org>; Wed, 16 Aug 2023 11:07:48 +0000 (UTC)
-Received: from 4.mo561.mail-out.ovh.net (4.mo561.mail-out.ovh.net [178.33.46.10])
- by mx.groups.io with SMTP id smtpd.web11.157956.1692184066975149409
+Received: from 18.mo584.mail-out.ovh.net (18.mo584.mail-out.ovh.net [188.165.54.143])
+ by mx.groups.io with SMTP id smtpd.web11.157955.1692184066609495815
  for <openembedded-devel@lists.openembedded.org>;
  Wed, 16 Aug 2023 04:07:47 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=softfail (domain: 3mdeb.com, ip: 178.33.46.10, mailfrom: pawel.langowski@3mdeb.com)
+ dkim=none (message not signed); spf=softfail (domain: 3mdeb.com, ip: 188.165.54.143, mailfrom: pawel.langowski@3mdeb.com)
 Received: from director2.ghost.mail-out.ovh.net (unknown [10.108.16.164])
-	by mo561.mail-out.ovh.net (Postfix) with ESMTP id D3B5023960
-	for <openembedded-devel@lists.openembedded.org>; Wed, 16 Aug 2023 11:07:43 +0000 (UTC)
+	by mo584.mail-out.ovh.net (Postfix) with ESMTP id 6117D242CF
+	for <openembedded-devel@lists.openembedded.org>; Wed, 16 Aug 2023 11:07:44 +0000 (UTC)
 Received: from ghost-submission-6684bf9d7b-5h88g (unknown [10.111.172.174])
-	by director2.ghost.mail-out.ovh.net (Postfix) with ESMTPS id 1E7E41FE0A;
-	Wed, 16 Aug 2023 11:07:42 +0000 (UTC)
+	by director2.ghost.mail-out.ovh.net (Postfix) with ESMTPS id BBAD51FEAB;
+	Wed, 16 Aug 2023 11:07:43 +0000 (UTC)
 Received: from 3mdeb.com ([37.59.142.101])
 	by ghost-submission-6684bf9d7b-5h88g with ESMTPSA
-	id ZhCeMv6t3GQqhRUAK6ZoNQ
-	(envelope-from <pawel.langowski@3mdeb.com>); Wed, 16 Aug 2023 11:07:42 +0000
-Authentication-Results: garm.ovh; auth=pass (GARM-101G004982c2837-dfa4-404b-a9ec-e807afec5fe7,
+	id iJLUKf+t3GQqhRUAK6ZoNQ
+	(envelope-from <pawel.langowski@3mdeb.com>); Wed, 16 Aug 2023 11:07:43 +0000
+Authentication-Results: garm.ovh; auth=pass (GARM-101G0040d08f230-9e06-48db-8871-54488ea65981,
                     93A237E87ED1339E13AED04D535165A97E4753C9) smtp.auth=pawel.langowski@3mdeb.com
 X-OVh-ClientIp: 213.192.77.249
 From: Pawel Langowski <pawel.langowski@3mdeb.com>
@@ -28,20 +28,22 @@ To: openembedded-devel@lists.openembedded.org
 Cc: piotr.krol@3mdeb.com,
 	tomasz.zyjewski@3mdeb.com
 Subject: [meta-networking][PATCH] meta-networking/recipes-connectivity: Add tayga recipe
-Date: Wed, 16 Aug 2023 13:07:34 +0200
-Message-ID: <20230816110739.1428994-1-pawel.langowski@3mdeb.com>
+Date: Wed, 16 Aug 2023 13:07:35 +0200
+Message-ID: <20230816110739.1428994-2-pawel.langowski@3mdeb.com>
 X-Mailer: git-send-email 2.41.0
+In-Reply-To: <20230816110739.1428994-1-pawel.langowski@3mdeb.com>
+References: <20230816110739.1428994-1-pawel.langowski@3mdeb.com>
 MIME-Version: 1.0
-X-Ovh-Tracer-Id: 12537739891451277977
+X-Ovh-Tracer-Id: 12538021363530183321
 X-VR-SPAMSTATE: OK
 X-VR-SPAMSCORE: 0
-X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrgedviedruddtledgfeeiucetufdoteggodetrfdotffvucfrrhhofhhilhgvmecuqfggjfdpvefjgfevmfevgfenuceurghilhhouhhtmecuhedttdenucenucfjughrpefhvfevufffkffoggfgsedtkeertdertddtnecuhfhrohhmpefrrgifvghlucfnrghnghhofihskhhiuceophgrfigvlhdrlhgrnhhgohifshhkihesfehmuggvsgdrtghomheqnecuggftrfgrthhtvghrnhepgffftdekhfekgefgjefhteetledvuddvfeffgefgvdekhfehjefhgeegtdegfedunecuffhomhgrihhnpehlihhtvggthhdrohhrghenucfkphepuddvjedrtddrtddruddpvddufedrudelvddrjeejrddvgeelpdefjedrheelrddugedvrddutddunecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehinhgvthepuddvjedrtddrtddruddpmhgrihhlfhhrohhmpeeophgrfigvlhdrlhgrnhhgohifshhkihesfehmuggvsgdrtghomheqpdhnsggprhgtphhtthhopedupdhrtghpthhtohepohhpvghnvghmsggvugguvgguqdguvghvvghlsehlihhsthhsrdhophgvnhgvmhgsvgguuggvugdrohhrghdpoffvtefjohhsthepmhhoheeiuddpmhhouggvpehsmhhtphhouhht
+X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrgedviedruddtledgfeeiucetufdoteggodetrfdotffvucfrrhhofhhilhgvmecuqfggjfdpvefjgfevmfevgfenuceurghilhhouhhtmecuhedttdenucenucfjughrpefhvfevufffkffojghfggfgsedtkeertdertddtnecuhfhrohhmpefrrgifvghlucfnrghnghhofihskhhiuceophgrfigvlhdrlhgrnhhgohifshhkihesfehmuggvsgdrtghomheqnecuggftrfgrthhtvghrnhepveeggedviedvtefglefhheeitddvjedvueefkeelkedtkeeludekvdevkeetgfefnecuffhomhgrihhnpehlihhtvggthhdrohhrghenucfkphepuddvjedrtddrtddruddpvddufedrudelvddrjeejrddvgeelpdefjedrheelrddugedvrddutddunecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehinhgvthepuddvjedrtddrtddruddpmhgrihhlfhhrohhmpeeophgrfigvlhdrlhgrnhhgohifshhkihesfehmuggvsgdrtghomheqpdhnsggprhgtphhtthhopedupdhrtghpthhtohepohhpvghnvghmsggvugguvgguqdguvghvvghlsehlihhsthhsrdhophgvnhgvmhgsvgguuggvugdrohhrghdpoffvtefjohhsthepmhhoheekgedpmhhouggvpehsmhhtphhouhht
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 16 Aug 2023 11:07:48 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104425
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104426
 
 Recipe for TAYGA - an out-of-kernel stateless NAT64 implementation for Li=
 nux
