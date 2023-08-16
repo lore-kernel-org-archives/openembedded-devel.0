@@ -2,63 +2,60 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 473A0EB64DD
-	for <webhook@archiver.kernel.org>; Wed, 16 Aug 2023 16:49:50 +0000 (UTC)
-Received: from mail-pj1-f45.google.com (mail-pj1-f45.google.com [209.85.216.45])
- by mx.groups.io with SMTP id smtpd.web10.165897.1692204584552205424
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 42813EB64DD
+	for <webhook@archiver.kernel.org>; Wed, 16 Aug 2023 16:52:00 +0000 (UTC)
+Received: from mail-pf1-f182.google.com (mail-pf1-f182.google.com [209.85.210.182])
+ by mx.groups.io with SMTP id smtpd.web11.165767.1692204718731225769
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 16 Aug 2023 09:49:44 -0700
+ Wed, 16 Aug 2023 09:51:58 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20221208 header.b=CPO6HMIK;
- spf=pass (domain: gmail.com, ip: 209.85.216.45, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f45.google.com with SMTP id 98e67ed59e1d1-26b4cf4f7b9so2216953a91.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 16 Aug 2023 09:49:44 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20221208 header.b=V15ImzW0;
+ spf=pass (domain: gmail.com, ip: 209.85.210.182, mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f182.google.com with SMTP id d2e1a72fcca58-687ca37628eso6400782b3a.1
+        for <openembedded-devel@lists.openembedded.org>; Wed, 16 Aug 2023 09:51:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1692204584; x=1692809384;
+        d=gmail.com; s=20221208; t=1692204718; x=1692809518;
         h=in-reply-to:autocrypt:from:references:cc:to:content-language
          :subject:user-agent:mime-version:date:message-id:from:to:cc:subject
          :date:message-id:reply-to;
-        bh=9Rv3XBzy1vT1WsQmng5MBOY0r4R5usU6bD14HIj63J8=;
-        b=CPO6HMIKUvV6tqBjIYMfTK3Kujcc/JmKu/eMrK4W9M2g0Kh48/57Rx/ZFyrLWopKYN
-         TNPGNllDb6Mcs3OmDY15x03jbW9i2fzJlNtdrVF+Ebvh3m5i0cCT5j+msuV3zGqoByzt
-         l6xs7wTx3xN04Kq/boIw04svRQcZ1ijrppOMauqoagAjYiRG+q6Wk74xdLepfLmAPUgI
-         9c+eoqNvMUi8US+jBw2wCT6pHvGpIwjZoYXwjq+7kQbBTHUcs27l8xjqGT1OLdK8Ub3K
-         sPmztbbO+n5JO7e2N/OTyvZ+bl0pcLo8fo9TyEZPCiQiOrfIXlVWkH6L/8DPai1Oq53F
-         TfYg==
+        bh=EUlVMqLb5dIT0cdA4RTQZEQrzN/7qX/i7iFJNELtFn0=;
+        b=V15ImzW0AMUZcdA5qqInO8b2tmg/3dhpZ6Ufs8huSjQccciF2+jOe6+HwUNhCPusmN
+         /NfkybwgvRgH71Q/N1uMExQDKMdejX9iy6/9GFvKL4j4q/RrgvM4hq6DjulI+eTO6Hce
+         5zJFBbMWQELvWM5a4dDedmUAss34hhSBkI3zgivBaBOqV4j5KMIFfur4rMKH+cjrVyZ1
+         GlaEXdO130/gKla45YGyrk1q3bNGaJpA8r6owYkWclyqdfqPP6S86JbWe4TvT0TLlRLA
+         zY4PWUvR3tx102veddGEW6myRu/INB08FNXk4kaZxsf7GoOzoKPu18LoZaWRBLn/ZQMA
+         HRtw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1692204584; x=1692809384;
+        d=1e100.net; s=20221208; t=1692204718; x=1692809518;
         h=in-reply-to:autocrypt:from:references:cc:to:content-language
          :subject:user-agent:mime-version:date:message-id:x-gm-message-state
          :from:to:cc:subject:date:message-id:reply-to;
-        bh=9Rv3XBzy1vT1WsQmng5MBOY0r4R5usU6bD14HIj63J8=;
-        b=k+kY7aLp/zt0zGeVZS+GIgPytSV7KT7FSa32z0GTbz9uu9nkXNZBhM2AN4E+lP+Yiu
-         tTEPaRTE4G2CIG46DIMXA3ye8sEmzCWBbHZhMS74NMzlz61tTXKrKotqZ/ljSiWqCxB6
-         eM2ZRIbvDGiikl5556bThjnoT6E1WGJAGdaB3ZnWWI+G9lofyA9YuOgN85xrWA3C+L7/
-         AkC4wmfkeB7PBo3NG4PQMqQAS9R4erJV73OwJYN6wP/gBNXKq5XWKhjxDKfShCC/2tLU
-         F4UcSZscx0WoyEiB+YXY/uZKgWbuG1WAYrw7CAjG+Hc+M9Obugsq1TSaBXNqbHxXTc28
-         4jAQ==
-X-Gm-Message-State: AOJu0YzzZvMHD5mII7bGcAqSc6PXx3L1QxJY7ot4P2mIk3/QgGwxZxru
-	z553YZvKfopX9Aa2seEB+ck=
-X-Google-Smtp-Source: AGHT+IHceQvtxid/ZaFg24kYhtRVzPW8dWC6biKzAL8Sf9b87zxFQhb62oYcSyOwSRvC9UxH9BSWrA==
-X-Received: by 2002:a17:90a:7bca:b0:269:3771:7342 with SMTP id d10-20020a17090a7bca00b0026937717342mr1710899pjl.18.1692204583949;
-        Wed, 16 Aug 2023 09:49:43 -0700 (PDT)
+        bh=EUlVMqLb5dIT0cdA4RTQZEQrzN/7qX/i7iFJNELtFn0=;
+        b=T8lL0k5gCOheqAgY9fW0HifuSqKsh0ezej18UC6uA5KfjAdqyN7KcljrF50LQ1IqyP
+         6+tGjnrGiv47b6j/3BJQ5LN9shhYmnVpydgvuUpAJwjr0v5q2dZNh/M6InbqlPvOBfRl
+         IxGm2GHODNhcbF97dCR9cNXaQr75cW/nKaBatsXeNeSdwwJ41oM7DQBtwsbb5fTe19Og
+         3lRzh6QIW+ePDe46TMYH+uugosnUsMZkGCa48DPwf63VEkoqkbPUdQrpNfoiC03ZvLQ1
+         48zA2+ffag64iEfIfSTxn2Dm4J7mI02D6Unqlm2Df06ttSOVQj96gngFVpV+CNQTIdLr
+         JI3A==
+X-Gm-Message-State: AOJu0YzlHST646tFHlAUOJjQ3GJLjxC4aNSNTCq52yILQETJy+Ul+3sA
+	HrhcVD7+cSsmy8jrhz1qz4E=
+X-Google-Smtp-Source: AGHT+IHAzHVT/ldWRUWDBnPU6srkouoEs4RSLKqJKvrnwVC2uvxRZPB8CDh2XyUwizEbG0ZAU5stlA==
+X-Received: by 2002:a05:6a20:8e02:b0:138:1980:1837 with SMTP id y2-20020a056a208e0200b0013819801837mr3678288pzj.13.1692204717968;
+        Wed, 16 Aug 2023 09:51:57 -0700 (PDT)
 Received: from ?IPV6:2601:646:9100:2cb0:b192:e884:f5f4:7725? ([2601:646:9100:2cb0:b192:e884:f5f4:7725])
-        by smtp.gmail.com with ESMTPSA id 27-20020a17090a001b00b0025be7b69d73sm12485937pja.12.2023.08.16.09.49.43
+        by smtp.gmail.com with ESMTPSA id g15-20020aa7874f000000b0068875a862adsm2215119pfo.98.2023.08.16.09.51.57
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 16 Aug 2023 09:49:43 -0700 (PDT)
-Message-ID: <94bb08fa-ccd7-48b7-89a1-fdc069f8ee11@gmail.com>
-Date: Wed, 16 Aug 2023 09:49:42 -0700
+        Wed, 16 Aug 2023 09:51:57 -0700 (PDT)
+Message-ID: <276501b7-8461-43bb-9473-bab1ed07397d@gmail.com>
+Date: Wed, 16 Aug 2023 09:51:56 -0700
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [oe] [[meta-python][PATCH] 2/2]
- recipes-devtools/python3-oauth2client/python3-oauth2client.inc: OAuth 2.0
- client library added
+Subject: Re: [oe] [PATCH] recipes-extended: add qcbor recipe
 Content-Language: en-US
-To: Ewa Kujawska <ewa.kujawska@3mdeb.com>,
+To: Pawel Langowski <pawel.langowski@3mdeb.com>,
  openembedded-devel@lists.openembedded.org
 Cc: piotr.krol@3mdeb.com, tomasz.zyjewski@3mdeb.com
-References: <20230816061437.3303787-1-ewa.kujawska@3mdeb.com>
- <20230816061437.3303787-2-ewa.kujawska@3mdeb.com>
+References: <20230816084754.1399376-1-pawel.langowski@3mdeb.com>
 From: Khem Raj <raj.khem@gmail.com>
 Autocrypt: addr=raj.khem@gmail.com; keydata=
  xsDiBEqXaJERBACUvFofpD3FsxD9675wcPv+rzguIfsRWilrrpSZ61JHjLHwkUnmDLpLSdfv
@@ -92,79 +89,76 @@ Autocrypt: addr=raj.khem@gmail.com; keydata=
  suq7Hnb7vszlFYdbzeqjY81LSyxA0kcpgJxdLv9o7UuCEnHDZLPbHdQ83PmyyBKSI31AKe7R
  XlQNlB5grwH9o6uNtPbV7q/uRqmKq5EiwkkEGBECAAkFAkqXaJECGwwACgkQuwUzVZGdMxR1
  VACcCkdaO3rb8/gRprldmAH6eR49eo4AnjD3h3aTwv/1bl+BAz1twmZmz8ul
-In-Reply-To: <20230816061437.3303787-2-ewa.kujawska@3mdeb.com>
+In-Reply-To: <20230816084754.1399376-1-pawel.langowski@3mdeb.com>
 Content-Type: multipart/signed; micalg=pgp-sha256;
  protocol="application/pgp-signature";
- boundary="------------Y06wrAjdJ9sXJCIC01KICbjS"
+ boundary="------------RDP2gXJVZWKd0nSNBchcHksb"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 16 Aug 2023 16:49:50 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104437
+ <openembedded-devel@lists.openembedded.org>; Wed, 16 Aug 2023 16:52:00 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104438
 
 This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------Y06wrAjdJ9sXJCIC01KICbjS
-Content-Type: multipart/mixed; boundary="------------0Rh9bwQK52KE30YxAbCL0Zto";
+--------------RDP2gXJVZWKd0nSNBchcHksb
+Content-Type: multipart/mixed; boundary="------------pmnqWCEuEgBqf8ZGVDII38rv";
  protected-headers="v1"
 From: Khem Raj <raj.khem@gmail.com>
-To: Ewa Kujawska <ewa.kujawska@3mdeb.com>,
+To: Pawel Langowski <pawel.langowski@3mdeb.com>,
  openembedded-devel@lists.openembedded.org
 Cc: piotr.krol@3mdeb.com, tomasz.zyjewski@3mdeb.com
-Message-ID: <94bb08fa-ccd7-48b7-89a1-fdc069f8ee11@gmail.com>
-Subject: Re: [oe] [[meta-python][PATCH] 2/2]
- recipes-devtools/python3-oauth2client/python3-oauth2client.inc: OAuth 2.0
- client library added
-References: <20230816061437.3303787-1-ewa.kujawska@3mdeb.com>
- <20230816061437.3303787-2-ewa.kujawska@3mdeb.com>
-In-Reply-To: <20230816061437.3303787-2-ewa.kujawska@3mdeb.com>
+Message-ID: <276501b7-8461-43bb-9473-bab1ed07397d@gmail.com>
+Subject: Re: [oe] [PATCH] recipes-extended: add qcbor recipe
+References: <20230816084754.1399376-1-pawel.langowski@3mdeb.com>
+In-Reply-To: <20230816084754.1399376-1-pawel.langowski@3mdeb.com>
 
---------------0Rh9bwQK52KE30YxAbCL0Zto
-Content-Type: multipart/mixed; boundary="------------axSB0yPc5hhnhdT00L00cscR"
+--------------pmnqWCEuEgBqf8ZGVDII38rv
+Content-Type: multipart/mixed; boundary="------------LFfCgq4CGyBT8A6hj37P0c07"
 
---------------axSB0yPc5hhnhdT00L00cscR
+--------------LFfCgq4CGyBT8A6hj37P0c07
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: base64
 
-c3ViamVjdCBhbmQgZGVzY3JpcHRpb24gb2YgcGF0Y2ggY2FuIGJlIG1hZGUgaW5saW5lIHdp
-dGggcmVjb21tZW5kYXRpb25zIGluDQoNCmh0dHBzOi8vd3d3Lm9wZW5lbWJlZGRlZC5vcmcv
-d2lraS9Ib3dfdG9fc3VibWl0X2FfcGF0Y2hfdG9fT3BlbkVtYmVkZGVkDQoNCk9uIDgvMTUv
-MjMgMTE6MTQgUE0sIEV3YSBLdWphd3NrYSB3cm90ZToNCj4gLS0tDQo+ICAgLi4uL3B5dGhv
-bi1vYXV0aDJjbGllbnQuaW5jICAgICAgICAgICAgICAgICAgICB8IDE4ICsrKysrKysrKysr
-KysrKysrKw0KDQoNCmlzIHRoZXJlIGEgcmVhc29uIGZvciB0aGlzIHRvIGJlIHB1dCBpbnRv
-IGEgLmluYyBmaWxlLCB1c3VhbGx5IGl0cyBkb25lIA0Kd2hlbiBtb3JlIHRoYW4gMSByZWNp
-cGUgY2FuIHNoYXJlIGV4YWN0IHNhbWUgY29kZS4gT3RoZXJ3aXNlIG1lcmdlIGl0IA0KaW50
-byB0aGUgcHJldmlvdXMgcGF0Y2gNCg0KPiAgIDEgZmlsZSBjaGFuZ2VkLCAxOCBpbnNlcnRp
-b25zKCspDQo+ICAgY3JlYXRlIG1vZGUgMTAwNjQ0IG1ldGEtcHl0aG9uL3JlY2lwZXMtZGV2
-dG9vbHMvcHl0aG9uMy1vYXV0aDJjbGllbnQvcHl0aG9uLW9hdXRoMmNsaWVudC5pbmMNCj4g
-DQo+IGRpZmYgLS1naXQgYS9tZXRhLXB5dGhvbi9yZWNpcGVzLWRldnRvb2xzL3B5dGhvbjMt
-b2F1dGgyY2xpZW50L3B5dGhvbi1vYXV0aDJjbGllbnQuaW5jIGIvbWV0YS1weXRob24vcmVj
-aXBlcy1kZXZ0b29scy9weXRob24zLW9hdXRoMmNsaWVudC9weXRob24tb2F1dGgyY2xpZW50
-LmluYw0KPiBuZXcgZmlsZSBtb2RlIDEwMDY0NA0KPiBpbmRleCAwMDAwMDAwMDAwMDAuLjQw
-YTk2MGUyZDJjMQ0KPiAtLS0gL2Rldi9udWxsDQo+ICsrKyBiL21ldGEtcHl0aG9uL3JlY2lw
-ZXMtZGV2dG9vbHMvcHl0aG9uMy1vYXV0aDJjbGllbnQvcHl0aG9uLW9hdXRoMmNsaWVudC5p
-bmMNCj4gQEAgLTAsMCArMSwxOCBAQA0KPiArREVTQ1JJUFRJT04gPSAiT0F1dGggMi4wIGNs
-aWVudCBsaWJyYXJ5Ig0KPiArQVVUSE9SID0gIkdvb2dsZSBJbmMuIg0KDQpkcm9wIGl0DQoN
-Cj4gK0hPTUVQQUdFID0gImh0dHA6Ly9naXRodWIuY29tL2dvb2dsZS9vYXV0aDJjbGllbnQv
-Ig0KPiArTElDRU5TRSA9ICJBcGFjaGUtMi4wIg0KPiArTElDX0ZJTEVTX0NIS1NVTSA9ICJm
-aWxlOi8vTElDRU5TRTttZDU9MDM4ZTEzOTBlOTRmZTYzNzk5MWZhNTU2OWRhYTYyYmMiDQo+
-ICsNCj4gK2luaGVyaXQgcHlwaQ0KPiArDQo+ICtTUkNfVVJJW21kNXN1bV0gPSAiYmMzMDk3
-NmNkMWU4NTljZDYxOTkyNjRhNTBjNWJhNzIiDQoNCkRyb3AgdGhpcyB0b28uDQoNCj4gK1NS
-Q19VUklbc2hhMjU2c3VtXSA9ICJiZDMwNjJjMDZmOGIxMGM2ZWY3YTg5MGIyMmMyNzQwZTVm
-ODdkNjFiNmUxZjRiMWM5MGQwNjljZGZjOWRhZGI1Ig0KPiArDQo+ICtSREVQRU5EUzoke1BO
-fSArPSAiIFwNCj4gKyAgICAgICAgJHtQWVRIT05fUE59LWh0dHBsaWIyIFwNCj4gKyAgICAg
-ICAgJHtQWVRIT05fUE59LXB5YXNuMSBcDQo+ICsgICAgICAgICR7UFlUSE9OX1BOfS1weWFz
-bjEtbW9kdWxlcyBcDQo+ICsgICAgICAgICR7UFlUSE9OX1BOfS1yc2EgXA0KPiArICAgICAg
-ICAke1BZVEhPTl9QTn0tc2l4IFwNCj4gKyAgICAgICAgIg0KPiANCj4gDQo+IA0KPiAtPS09
-LT0tPS09LT0tPS09LT0tPS09LQ0KPiBMaW5rczogWW91IHJlY2VpdmUgYWxsIG1lc3NhZ2Vz
-IHNlbnQgdG8gdGhpcyBncm91cC4NCj4gVmlldy9SZXBseSBPbmxpbmUgKCMxMDQ0MTIpOiBo
-dHRwczovL2xpc3RzLm9wZW5lbWJlZGRlZC5vcmcvZy9vcGVuZW1iZWRkZWQtZGV2ZWwvbWVz
-c2FnZS8xMDQ0MTINCj4gTXV0ZSBUaGlzIFRvcGljOiBodHRwczovL2xpc3RzLm9wZW5lbWJl
-ZGRlZC5vcmcvbXQvMTAwNzc0NTAxLzE5OTc5MTQNCj4gR3JvdXAgT3duZXI6IG9wZW5lbWJl
-ZGRlZC1kZXZlbCtvd25lckBsaXN0cy5vcGVuZW1iZWRkZWQub3JnDQo+IFVuc3Vic2NyaWJl
-OiBodHRwczovL2xpc3RzLm9wZW5lbWJlZGRlZC5vcmcvZy9vcGVuZW1iZWRkZWQtZGV2ZWwv
-dW5zdWIgW3Jhai5raGVtQGdtYWlsLmNvbV0NCj4gLT0tPS09LT0tPS09LT0tPS09LT0tPS0N
-Cj4gDQo=
---------------axSB0yPc5hhnhdT00L00cscR
+DQpTdWJqZWN0IGNhbiBiZSBpbXByb3ZlZCBhcyBwZXIuDQoNCmh0dHBzOi8vd3d3Lm9wZW5l
+bWJlZGRlZC5vcmcvd2lraS9Ib3dfdG9fc3VibWl0X2FfcGF0Y2hfdG9fT3BlbkVtYmVkZGVk
+DQoNCk9uIDgvMTYvMjMgMTo0NyBBTSwgUGF3ZWwgTGFuZ293c2tpIHdyb3RlOg0KPiAtLS0N
+Cj4gICBtZXRhLW9lL3JlY2lwZXMtZXh0ZW5kZWQvcWNib3IvcWNib3JfZ2l0LmJiIHwgMzIg
+KysrKysrKysrKysrKysrKysrKysrDQo+ICAgMSBmaWxlIGNoYW5nZWQsIDMyIGluc2VydGlv
+bnMoKykNCj4gICBjcmVhdGUgbW9kZSAxMDA2NDQgbWV0YS1vZS9yZWNpcGVzLWV4dGVuZGVk
+L3FjYm9yL3FjYm9yX2dpdC5iYg0KPiANCj4gZGlmZiAtLWdpdCBhL21ldGEtb2UvcmVjaXBl
+cy1leHRlbmRlZC9xY2Jvci9xY2Jvcl9naXQuYmIgYi9tZXRhLW9lL3JlY2lwZXMtZXh0ZW5k
+ZWQvcWNib3IvcWNib3JfZ2l0LmJiDQo+IG5ldyBmaWxlIG1vZGUgMTAwNjQ0DQo+IGluZGV4
+IDAwMDAwMDAwMDAwMC4uNmU4NzQ1OGMzYTNlDQo+IC0tLSAvZGV2L251bGwNCj4gKysrIGIv
+bWV0YS1vZS9yZWNpcGVzLWV4dGVuZGVkL3FjYm9yL3FjYm9yX2dpdC5iYg0KPiBAQCAtMCww
+ICsxLDMyIEBADQo+ICtERVNDUklQVElPTiA9ICIgXA0KPiArICAgIFFDQk9SIGlzIGEgcG93
+ZXJmdWwsIGNvbW1lcmNpYWwtcXVhbGl0eSBDQk9SIGVuY29kZXIvZGVjb2RlciB0aGF0IFwN
+Cj4gKyAgICBpbXBsZW1lbnRzIHRoZXNlIFJGQ3M6IFJGQzg5NDksIFJGQzcwNDksIFJGQzg3
+NDIsIFJGQzg5NDMgXA0KPiArIg0KPiArDQo+ICtIT01FUEFHRSA9ICJodHRwczovL2dpdGh1
+Yi5jb20vbGF1cmVuY2VsdW5kYmxhZGUvUUNCT1IiDQo+ICsNCj4gK0xJQ0VOU0UgPSAiQlNE
+LTMtQ2xhdXNlIg0KPiArTElDX0ZJTEVTX0NIS1NVTSA9ICJmaWxlOi8vUkVBRE1FLm1kO2Jl
+Z2lubGluZT00NDI7ZW5kbGluZT00NjM7bWQ1PWI1NTY0MzI2MWQ2ZDIyMWRhYzJiN2EzOTUx
+MDVhZjYyIg0KPiArDQo+ICtTUkNfVVJJID0gImdpdDovL2dpdGh1Yi5jb20vbGF1cmVuY2Vs
+dW5kYmxhZGUvUUNCT1I7cHJvdG9jb2w9aHR0cHM7YnJhbmNoPW1hc3RlciINCj4gKw0KPiAr
+U1JDUkVWID0gIjQ0NzU0ZjczOGM2NTM0YTQzMDRhODNkNGM2ZTk3YjNkMzE5M2Q4ODciDQo+
+ICsNCj4gK1MgPSAiJHtXT1JLRElSfS9naXQiDQo+ICsNCj4gK0lOU0FORV9TS0lQOiR7UE59
+LWRldiArPSAibGRmbGFncyINCg0Kd2h5IGlzIHRoaXMgbmVlZGVkLg0KDQo+ICsNCj4gK2lu
+aGVyaXQgcGtnY29uZmlnDQo+ICsNCj4gK0NGTEFHUyArPSAiIFwNCj4gKyAgICAtRFVTRUZV
+TEJVRl9ESVNBQkxFX0FMTF9GTE9BVCBcDQo+ICsiDQo+ICsNCj4gK2RvX2luc3RhbGwoKXsN
+Cj4gKyAgICBpbnN0YWxsIC1kICR7RH0ke2xpYmRpcn0NCj4gKyAgICBpbnN0YWxsIC1tIDc1
+NSAke1N9L2xpYnFjYm9yLmEgJHtEfSR7bGliZGlyfS8NCj4gKyAgICBpbnN0YWxsIC1kICR7
+RH0ke2luY2x1ZGVkaXJ9L3FjYm9yDQo+ICsgICAgaW5zdGFsbCAtbSA2NDQgJHtTfS9pbmMv
+Ki5oICR7RH0ke2luY2x1ZGVkaXJ9DQo+ICsgICAgaW5zdGFsbCAtbSA2NDQgJHtTfS9pbmMv
+cWNib3IvKi5oICR7RH0ke2luY2x1ZGVkaXJ9L3FjYm9yDQo+ICt9DQo+ICsNCj4gDQo+IA0K
+PiANCj4gLT0tPS09LT0tPS09LT0tPS09LT0tPS0NCj4gTGlua3M6IFlvdSByZWNlaXZlIGFs
+bCBtZXNzYWdlcyBzZW50IHRvIHRoaXMgZ3JvdXAuDQo+IFZpZXcvUmVwbHkgT25saW5lICgj
+MTA0NDIwKTogaHR0cHM6Ly9saXN0cy5vcGVuZW1iZWRkZWQub3JnL2cvb3BlbmVtYmVkZGVk
+LWRldmVsL21lc3NhZ2UvMTA0NDIwDQo+IE11dGUgVGhpcyBUb3BpYzogaHR0cHM6Ly9saXN0
+cy5vcGVuZW1iZWRkZWQub3JnL210LzEwMDc3NTcxNS8xOTk3OTE0DQo+IEdyb3VwIE93bmVy
+OiBvcGVuZW1iZWRkZWQtZGV2ZWwrb3duZXJAbGlzdHMub3BlbmVtYmVkZGVkLm9yZw0KPiBV
+bnN1YnNjcmliZTogaHR0cHM6Ly9saXN0cy5vcGVuZW1iZWRkZWQub3JnL2cvb3BlbmVtYmVk
+ZGVkLWRldmVsL3Vuc3ViIFtyYWoua2hlbUBnbWFpbC5jb21dDQo+IC09LT0tPS09LT0tPS09
+LT0tPS09LT0tDQo+IA0K
+--------------LFfCgq4CGyBT8A6hj37P0c07
 Content-Type: application/pgp-keys; name="OpenPGP_0xBB053355919D3314.asc"
 Content-Disposition: attachment; filename="OpenPGP_0xBB053355919D3314.asc"
 Content-Description: OpenPGP public key
@@ -214,21 +208,21 @@ kQIbDAAKCRC7BTNVkZ0zFHVUAJwKR1o7etvz+BGmuV2YAfp5Hj16jgCeMPeHdpPC
 =3D+jUt
 -----END PGP PUBLIC KEY BLOCK-----
 
---------------axSB0yPc5hhnhdT00L00cscR--
+--------------LFfCgq4CGyBT8A6hj37P0c07--
 
---------------0Rh9bwQK52KE30YxAbCL0Zto--
+--------------pmnqWCEuEgBqf8ZGVDII38rv--
 
---------------Y06wrAjdJ9sXJCIC01KICbjS
+--------------RDP2gXJVZWKd0nSNBchcHksb
 Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
 Content-Description: OpenPGP digital signature
 Content-Disposition: attachment; filename="OpenPGP_signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-wmMEABEIACMWIQSPpVvapDR0rgZCCc27BTNVkZ0zFAUCZNz+JgUDAAAAAAAKCRC7BTNVkZ0zFJHd
-AJ0Qwb1hKYE4Dm/1z7JGzPZE9/teuwCgjJSBBcBhx47QJsGPW0j9tFdgc00=
-=9GAt
+wmMEABEIACMWIQSPpVvapDR0rgZCCc27BTNVkZ0zFAUCZNz+rAUDAAAAAAAKCRC7BTNVkZ0zFMk1
+AJ9uW3+RV32chungrayiLZZukNwUqwCcClKrhrm9pO3CI1pILNVHqVmeRb4=
+=MqvR
 -----END PGP SIGNATURE-----
 
---------------Y06wrAjdJ9sXJCIC01KICbjS--
+--------------RDP2gXJVZWKd0nSNBchcHksb--
 
