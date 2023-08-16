@@ -1,186 +1,229 @@
-Return-Path: <akuster@mvista.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 104E2C001B0
-	for <webhook@archiver.kernel.org>; Wed, 16 Aug 2023 12:26:59 +0000 (UTC)
-Received: from mail-yw1-f181.google.com (mail-yw1-f181.google.com [209.85.128.181])
- by mx.groups.io with SMTP id smtpd.web11.159145.1692188811607099463
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8DAC8C04A6A
+	for <webhook@archiver.kernel.org>; Wed, 16 Aug 2023 14:19:19 +0000 (UTC)
+Received: from mail-oa1-f46.google.com (mail-oa1-f46.google.com [209.85.160.46])
+ by mx.groups.io with SMTP id smtpd.web10.162017.1692195558213022163
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 16 Aug 2023 05:26:51 -0700
+ Wed, 16 Aug 2023 07:19:18 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@mvista.com header.s=google header.b=SKMXL/5P;
- spf=pass (domain: mvista.com, ip: 209.85.128.181, mailfrom: akuster@mvista.com)
-Received: by mail-yw1-f181.google.com with SMTP id 00721157ae682-589a9fc7fc6so68865447b3.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 16 Aug 2023 05:26:51 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20221208 header.b=CHkBPob/;
+ spf=pass (domain: gmail.com, ip: 209.85.160.46, mailfrom: raj.khem@gmail.com)
+Received: by mail-oa1-f46.google.com with SMTP id 586e51a60fabf-1c4de3b9069so2343589fac.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 16 Aug 2023 07:19:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=mvista.com; s=google; t=1692188810; x=1692793610;
-        h=subject:from:to:user-agent:mime-version:date:message-id:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=cshFJf1g/yiXnjFix8ULn9FJ/FRWkFtKe9CHKUK6R3E=;
-        b=SKMXL/5PRv62HtZMWzC/IUQG/nG7kcDFaDNzCMXtkvn+RrVdAOocnstZpWftOgcQoi
-         RYLBpxuJzsN3hQR+3Volpb6uBfxDQ44IumeFxpUMDbSnYXWmwpRk2sjYnVYW0Yv2uTja
-         ywe/hr5PtAoDACu/+IEHrpO3H857chFKWDjT8=
+        d=gmail.com; s=20221208; t=1692195557; x=1692800357;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=VCsKpSlJJBM8jmwfiHO/wBoNQXJa7ctN7ppI5EVd3qc=;
+        b=CHkBPob/iMjfP23dFU/s3T15fp4yN5cXWkuLefd938XwtXqLFSMp4+4iIKTmzADzEX
+         PCX2mSUpjymBeAO2FgyT59qPdo6Nuw7wVwzytzbn7XQNCdllqNorlGbxGD2sT71ElR/E
+         LfHZTQ/K036BZ95wi8FckvpGafJi/HWZ5GoYp2HpXH/NkejEWcmbKQFmwU1jaJ2+IJ4a
+         5cWSaf+Hgq1ug7pUn8lwSCSKkBzGBbI4fSgzNvLTmrBs5dIP8mwiFvrgbvzEjoaJ9/9f
+         7yRxhd2IWtcn8JKN7TSNeEgaJCDlDu92I21XFlAj8ZCG1MsQgJzH6ACUgo4PC0EjMxlh
+         clDw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1692188810; x=1692793610;
-        h=subject:from:to:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=cshFJf1g/yiXnjFix8ULn9FJ/FRWkFtKe9CHKUK6R3E=;
-        b=k7BrtVu7PL6naHhk8rRwxPcPNgaCS5vvRxemkeobk3nPBC1Q2Bij+ZOscgcO6wYcPa
-         mwKdI/cqNDL5u6mklqQOeQx+znk3nO8dl96XoIeOqjyKqMMHBl5/VgkB5sAxSopMvWK/
-         8T858PSNVjAUo9AxBDI6rey49BATEj2/oVURNOBQ01gD58dR8DndytEgZg3cGr8+Kqwk
-         BOR7SXFPZkkdh1oac+r0Q9sfj00h4X1RMwQXH3CyivHFlweIlaZEW3nb8IwOfmViCsR4
-         jAAT5xTXk+ZvajCWIIK8nTe4gXNJ+i+7R/19Q1mke1RD1LAfF0pezMyWLAguvukdFItw
-         /Hrg==
-X-Gm-Message-State: AOJu0Ywciaond6s88qMMQ7a9hQ00bXZ9e0HU72xbA5NWeBRfQ2z+EQfs
-	x1Nt35bu4/xr/Qjy5V2A41rsAw==
-X-Google-Smtp-Source: AGHT+IGgVS2oGuDDMnk/WzvwyP6KuzJhs1C4OLmmIozbw2fPkezOSGCVpwkEJ1M89W+/vVuHcwx3ug==
-X-Received: by 2002:a25:23c8:0:b0:d47:8db3:8bcf with SMTP id j191-20020a2523c8000000b00d478db38bcfmr1507341ybj.49.1692188810627;
-        Wed, 16 Aug 2023 05:26:50 -0700 (PDT)
-Received: from ?IPV6:2600:1700:9190:ba10:4134:632e:2cd2:5575? ([2600:1700:9190:ba10:4134:632e:2cd2:5575])
-        by smtp.gmail.com with ESMTPSA id i62-20020a256d41000000b00d6861b49f01sm2372626ybc.65.2023.08.16.05.26.50
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 16 Aug 2023 05:26:50 -0700 (PDT)
-Message-ID: <872ec58d-22cb-494c-72e5-1b9a611b1857@mvista.com>
-Date: Wed, 16 Aug 2023 08:26:49 -0400
+        d=1e100.net; s=20221208; t=1692195557; x=1692800357;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=VCsKpSlJJBM8jmwfiHO/wBoNQXJa7ctN7ppI5EVd3qc=;
+        b=euDR2s8z4BcH+uXCCJjlFUN+C7HBCynBKOmerWOSAdkQGJrc41cUIFjHX5qvbZbeUC
+         Uq22vr0wYqawGQeKEE32mxGcNthGNx0X4HiuhRMuwBcbiuQbh6NJsFk/8tMtRZ3IV5nj
+         21wJ81gk3YBo270t4RKkMExw/zyDzXpk5YlEWGd6K2h0x9l5+JAzb9esv0ornRLe5icu
+         im3XwKHbk/v5UE7XEuhysgEFwHBgz7BA3kl+tvtdmws+iukKp55Ob35q7HjTalcR4KSK
+         +3tFJpUhk5ylbQOYnOl0NQuDaSJ3kLscaHTVgsCuEY+Z4jTzFw8Na0fDApFjnAKsCHw2
+         ZGnw==
+X-Gm-Message-State: AOJu0YyvGNy7Jf4ZQvhmrEmf9ExkTUlJOYar0buCezXnPKeKyC/ssN+U
+	HJVxNuBLTcfmQ1i+OBFShTi20D6rPXsZye8HgM4=
+X-Google-Smtp-Source: AGHT+IHwbxPPP1r4yeWgGtzfGwtlx6m6JRaSXxw+b9urcz6K/sYd7NC9FBncfXL9861iEcNjmLcoaznu+SD/LmYHaos=
+X-Received: by 2002:a05:6870:6111:b0:1ba:9e70:a1d4 with SMTP id
+ s17-20020a056870611100b001ba9e70a1d4mr2471835oae.54.1692195557407; Wed, 16
+ Aug 2023 07:19:17 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.13.0
-To: Khem Raj <raj.khem@gmail.com>,
- OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-From: akuster <akuster@mvista.com>
-Subject: Kirkstone merge request: Arg 16th
-Content-Type: multipart/signed; protocol="application/pkcs7-signature"; micalg=sha-256;
-	boundary="000000000000f77f2d060309686e"
+References: <20230814144304.2395362-1-m.vovard@phytec.de> <20230814144304.2395362-2-m.vovard@phytec.de>
+ <CAMKF1spwnmK54urhY_=Pq_TjGXJjoNfd9PFoy6gjcQ6wcSDnQw@mail.gmail.com> <f6312bf8408ddf1c16b006842c6f32fc0535880e.camel@phytec.de>
+In-Reply-To: <f6312bf8408ddf1c16b006842c6f32fc0535880e.camel@phytec.de>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 16 Aug 2023 07:19:06 -0700
+Message-ID: <CAMKF1srNSXZ6OWhoYfDnCxYGAkeW0mGHgPWT-9D8aD89LGPKwA@mail.gmail.com>
+Subject: Re: [oe] [meta-python][PATCH 1/1] python3-kivy: Remove X11 from REQUIRED_DISTRO_FEATURES
+To: Marine Vovard <M.Vovard@phytec.de>
+Cc: "openembedded-devel@lists.openembedded.org" <openembedded-devel@lists.openembedded.org>
+Content-Type: multipart/alternative; boundary="00000000000017010706030afba5"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 16 Aug 2023 12:26:59 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104427
+ <openembedded-devel@lists.openembedded.org>; Wed, 16 Aug 2023 14:19:19 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104428
 
---000000000000f77f2d060309686e
-Content-Language: en-US
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+--00000000000017010706030afba5
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-The following changes since commit 594c9cf6d3205c8e40ff772383fd9ab7dd3ed2cc:
+On Wed, Aug 16, 2023 at 1:29 AM Marine Vovard <M.Vovard@phytec.de> wrote:
 
-   redis: upgrade 7.0.11 -> 7.0.12 (2023-08-03 16:50:52 -0400)
-
-are available in the Git repository at:
-
-   https://git.openembedded.org/meta-openembedded kirkstone-next
-
-for you to fetch changes up to 529620141e773080a6a7be4615fb7993204af883:
-
-   nodejs: upgrade 16.20.1 -> 16.20.2 (2023-08-11 10:32:04 -0400)
-
-----------------------------------------------------------------
-Beniamin Sandu (1):
-       lmsensors: do not pull in unneeded perl modules for run-time 
-dependencies
-
-Frieder Schrempf (1):
-       python3-can: Add missing runtime dependencies
-
-Polampalli, Archana (1):
-       nodejs: upgrade 16.20.1 -> 16.20.2
-
-  meta-oe/recipes-bsp/lm_sensors/lmsensors_3.6.0.bb | 5 +++--
-  meta-oe/recipes-devtools/nodejs/{nodejs_16.20.1.bb => 
-nodejs_16.20.2.bb} | 2 +-
-  meta-python/recipes-devtools/python/python3-can_4.0.0.bb | 7 +++++--
-  3 files changed, 9 insertions(+), 5 deletions(-)
-  rename meta-oe/recipes-devtools/nodejs/{nodejs_16.20.1.bb => 
-nodejs_16.20.2.bb} (98%)
+> On Mon, 2023-08-14 at 08:17 -0700, Khem Raj wrote:
+> > On Mon, Aug 14, 2023 at 7:43=E2=80=AFAM Marine Vovard <M.Vovard@phytec.=
+de>
+> > wrote:
+> > >
+> > > We can use pure Wayland and therefore X11 is not required all the
+> > > time.
+> > >
+> >
+> > Would it also build when x11 or wayland neither are in
+> > DISTRO_FEATURES ?
+> > If not then I guess a check should be made to check such that atleast
+> > one of these distro
+> > features are present.
+> >
+>
+> Indeed, from what I understood you need wayland or x11 (or both)
+> to make it work. I'm thinking about adding the following line:
+>
+> ANY_OF_DISTRO_FEATURES =3D "x11 wayland"
+>
+> I will send a new patch with this modification if it seems ok.
 
 
---000000000000f77f2d060309686e
-Content-Type: application/pkcs7-signature; name="smime.p7s"
-Content-Transfer-Encoding: base64
-Content-Disposition: attachment; filename="smime.p7s"
-Content-Description: S/MIME Cryptographic Signature
+Sounds good
 
-MIIR4QYJKoZIhvcNAQcCoIIR0jCCEc4CAQExDzANBglghkgBZQMEAgEFADALBgkqhkiG9w0BBwGg
-gg8qMIIGTjCCBTagAwIBAgIQBK55YGZmkBq5xX+mbFvczTANBgkqhkiG9w0BAQsFADBlMQswCQYD
-VQQGEwJVUzEVMBMGA1UEChMMRGlnaUNlcnQgSW5jMRkwFwYDVQQLExB3d3cuZGlnaWNlcnQuY29t
-MSQwIgYDVQQDExtEaWdpQ2VydCBBc3N1cmVkIElEIFJvb3QgQ0EwHhcNMTMxMTA1MTIwMDAwWhcN
-MjgxMTA1MTIwMDAwWjBlMQswCQYDVQQGEwJVUzEVMBMGA1UEChMMRGlnaUNlcnQgSW5jMRkwFwYD
-VQQLExB3d3cuZGlnaWNlcnQuY29tMSQwIgYDVQQDExtEaWdpQ2VydCBTSEEyIEFzc3VyZWQgSUQg
-Q0EwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDc+BEjP2q178AneRstBYeiEEMx3w7U
-FRtPd6Qizj6McPC+B47dJyq8AR22LArK3WlYH0HtagUf2mN4WR4iLCv4un7JNTtW8R98Qn4lsCMZ
-xkU41z1E+SB8YK4csFoYBL6PO/ep8JSapgxjSbZBF1NAMr1P5lB6UB8lRejxia/N/17/UPPwFxH/
-vcWJ9b1iudj7jkUEhW2ZzcVITf0mqwI2Reo2119q4hqCQQrc6dn1kReOxiGtODwT5h5/ZpzVTdlG
-2vbPUqd9OyTDtMFRNcab69TvfuR7A+FEvXoLN+BPy4KKDXEY5KbgiSwb87JzPMGwkp4Yfb2rfcV9
-CKEswp9zAgMBAAGjggL4MIIC9DASBgNVHRMBAf8ECDAGAQH/AgEAMA4GA1UdDwEB/wQEAwIBhjA0
-BggrBgEFBQcBAQQoMCYwJAYIKwYBBQUHMAGGGGh0dHA6Ly9vY3NwLmRpZ2ljZXJ0LmNvbTCBgQYD
-VR0fBHoweDA6oDigNoY0aHR0cDovL2NybDQuZGlnaWNlcnQuY29tL0RpZ2lDZXJ0QXNzdXJlZElE
-Um9vdENBLmNybDA6oDigNoY0aHR0cDovL2NybDMuZGlnaWNlcnQuY29tL0RpZ2lDZXJ0QXNzdXJl
-ZElEUm9vdENBLmNybDAdBgNVHSUEFjAUBggrBgEFBQcDAgYIKwYBBQUHAwQwggGzBgNVHSAEggGq
-MIIBpjCCAaIGCmCGSAGG/WwAAgQwggGSMCgGCCsGAQUFBwIBFhxodHRwczovL3d3dy5kaWdpY2Vy
-dC5jb20vQ1BTMIIBZAYIKwYBBQUHAgIwggFWHoIBUgBBAG4AeQAgAHUAcwBlACAAbwBmACAAdABo
-AGkAcwAgAEMAZQByAHQAaQBmAGkAYwBhAHQAZQAgAGMAbwBuAHMAdABpAHQAdQB0AGUAcwAgAGEA
-YwBjAGUAcAB0AGEAbgBjAGUAIABvAGYAIAB0AGgAZQAgAEQAaQBnAGkAQwBlAHIAdAAgAEMAUAAv
-AEMAUABTACAAYQBuAGQAIAB0AGgAZQAgAFIAZQBsAHkAaQBuAGcAIABQAGEAcgB0AHkAIABBAGcA
-cgBlAGUAbQBlAG4AdAAgAHcAaABpAGMAaAAgAGwAaQBtAGkAdAAgAGwAaQBhAGIAaQBsAGkAdAB5
-ACAAYQBuAGQAIABhAHIAZQAgAGkAbgBjAG8AcgBwAG8AcgBhAHQAZQBkACAAaABlAHIAZQBpAG4A
-IABiAHkAIAByAGUAZgBlAHIAZQBuAGMAZQAuMB0GA1UdDgQWBBTnAiOAAE/Y17yUC9k/dDlJMjyK
-eTAfBgNVHSMEGDAWgBRF66Kv9JLLgjEtUYunpyGd823IDzANBgkqhkiG9w0BAQsFAAOCAQEATtSJ
-J7n9HYd3fg8oBZDxCi/JOz69k5yQxq/6kVGHMlRr6MrBcVFcmY61+uBiGZmmB5p8Eyfb5QKihBLZ
-FfYKRFfENI9tcx861qABPd7jguRFa7LrJf2AXh05kL5bQvbOkWDj+aBWDEgQzjNoe82Tq/Bqy09Y
-D7l7XRsEgZ6nIuJXSSfukpMIvmkIUwI6Ll3IGfRQgE4C2bBdkbSTh/mWloFVQI5m7YLYuyhf7Uxh
-7QZYKBlTEUS8RyApsgRs2IlUmTt122d4LB6SeMZVPVgSETJuvUMMTTTbe8ZC2+y+q5thTAaS447f
-ISpQVwTAYKI11SSeZjcJSc/V+GWz4OJuwjCCA7cwggKfoAMCAQICEAzn4OUX2Eb+j+Vg/BvwMDkw
-DQYJKoZIhvcNAQEFBQAwZTELMAkGA1UEBhMCVVMxFTATBgNVBAoTDERpZ2lDZXJ0IEluYzEZMBcG
-A1UECxMQd3d3LmRpZ2ljZXJ0LmNvbTEkMCIGA1UEAxMbRGlnaUNlcnQgQXNzdXJlZCBJRCBSb290
-IENBMB4XDTA2MTExMDAwMDAwMFoXDTMxMTExMDAwMDAwMFowZTELMAkGA1UEBhMCVVMxFTATBgNV
-BAoTDERpZ2lDZXJ0IEluYzEZMBcGA1UECxMQd3d3LmRpZ2ljZXJ0LmNvbTEkMCIGA1UEAxMbRGln
-aUNlcnQgQXNzdXJlZCBJRCBSb290IENBMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA
-rQ4VzuRDgFyxh/O3YPlxEqWu3CaUiKr0zvUgOShYYAz4gNqpFZUyYTy1sSiEiorcnwoMgxd6j5Cs
-iud5U1wxhCr2D5gyNnbM3t08qKLvavsh8lJh358g1x/isdn+GGTSEltf+VgYNbxHzaE2+Wt/1LA4
-PsEbw4wz2dgvGP4oD7Ong9bDbkTAYTWWFv5ZnIt2bdfxoksNK/8LctqeYNCOkDXGeFWHIKHP5W0K
-yEl8MZgzbCLph9AyWqK6E4IR7TkXnZk6cqHm+qTZ1Rcxda6FfSKuPwFGhvYoecix2uRXF8R+HA6w
-tJKmVrO9spftqqfwt8WoP5UW0P+hlusIXxh3TwIDAQABo2MwYTAOBgNVHQ8BAf8EBAMCAYYwDwYD
-VR0TAQH/BAUwAwEB/zAdBgNVHQ4EFgQUReuir/SSy4IxLVGLp6chnfNtyA8wHwYDVR0jBBgwFoAU
-Reuir/SSy4IxLVGLp6chnfNtyA8wDQYJKoZIhvcNAQEFBQADggEBAKIOvN/i7fDjcnN6ZJS/93Jm
-2DLkQnVirofr8tXZ3lazn8zOFCi5DZdgXBJMWOTTPYNJRViXNWkaqEfqVsZ5qxLYZ4GE338JPJTm
-uCYsIL09syiJ91//IuKXhB/pZe+H4N/BZ0mzXeuyCSrrJu14vn0/K/O3JjVtX4kBtklbnwEFm6s9
-JcHMtn/C8W+GxvpkaOuBLZTrQrf6jB7dYvG+UGe3bL3z8R9rDDYHFn83fKlbbXrxEkZgg9cnBL5L
-zpe+w2cqaBHfgOcMM2a/Ew0UbvN/H2MQHvqNGyVtbI+lt2EBsdKjJqEQcZ2t4sP5w5lRtysHCM4u
-5lCyp/oKRS+i8PIwggUZMIIEAaADAgECAhABmeiIGxb92d1jHUeNPLJ7MA0GCSqGSIb3DQEBCwUA
-MGUxCzAJBgNVBAYTAlVTMRUwEwYDVQQKEwxEaWdpQ2VydCBJbmMxGTAXBgNVBAsTEHd3dy5kaWdp
-Y2VydC5jb20xJDAiBgNVBAMTG0RpZ2lDZXJ0IFNIQTIgQXNzdXJlZCBJRCBDQTAeFw0yMTEwMjkw
-MDAwMDBaFw0yMzEwMjcyMzU5NTlaMEAxGzAZBgNVBAMMEmFrdXN0ZXJAbXZpc3RhLmNvbTEhMB8G
-CSqGSIb3DQEJARYSYWt1c3RlckBtdmlzdGEuY29tMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIB
-CgKCAQEA60Rtp117FyjzKFRYeZrx5QdhlSA7VUEQxYtnCtN656+u6Vjq/R0I4KAIMaAEOlS3Purp
-DrHBMf1gqCKZHdzCkmj5L8GtBkB6yT1NoJnBTH83TgLbRFPB3WnTFmWTSnBkFyyrkoc8JKIzu/p0
-CM/+pHHH9IR5lmzdraoKnHx9ZUwaNltEPZpDWo7zxqQXS+uToztNNuhYPOZhMQmGBVOzczliElcm
-+DOgmn89Va8QVYqzPglbvjsYSIk2kzaKVffLxyY2p0yvWY8w7CAEYk2gLfPuZiqIdXGYmEyKH86H
-27AP1uMrYQjEw1R9VY4JrpDLehuUs/RGYWyMAjfo1NDh0QIDAQABo4IB6DCCAeQwHwYDVR0jBBgw
-FoAU5wIjgABP2Ne8lAvZP3Q5STI8inkwHQYDVR0OBBYEFL0akMb3LmLy7bKAAO6QDtKy8WI7MAwG
-A1UdEwEB/wQCMAAwHQYDVR0RBBYwFIESYWt1c3RlckBtdmlzdGEuY29tMA4GA1UdDwEB/wQEAwIF
-oDAdBgNVHSUEFjAUBggrBgEFBQcDBAYIKwYBBQUHAwIwQwYDVR0gBDwwOjA4BgpghkgBhv1sBAEB
-MCowKAYIKwYBBQUHAgEWHGh0dHBzOi8vd3d3LmRpZ2ljZXJ0LmNvbS9DUFMwgYUGA1UdHwR+MHww
-PKA6oDiGNmh0dHA6Ly9jcmwzLmRpZ2ljZXJ0LmNvbS9EaWdpQ2VydFNIQTJBc3N1cmVkSURDQS0x
-LmNybDA8oDqgOIY2aHR0cDovL2NybDQuZGlnaWNlcnQuY29tL0RpZ2lDZXJ0U0hBMkFzc3VyZWRJ
-RENBLTEuY3JsMHkGCCsGAQUFBwEBBG0wazAkBggrBgEFBQcwAYYYaHR0cDovL29jc3AuZGlnaWNl
-cnQuY29tMEMGCCsGAQUFBzAChjdodHRwOi8vY2FjZXJ0cy5kaWdpY2VydC5jb20vRGlnaUNlcnRT
-SEEyQXNzdXJlZElEQ0EuY3J0MA0GCSqGSIb3DQEBCwUAA4IBAQCUY9qc+vTg/KOKUB9htYLvs1km
-5XF3yyLnIoMBvbmx4zatz0YddFP7UT0esHLGDEW2suAlq44A6SRd2fTUe0tyjGAxsblGwxKp0ypw
-p6xjYeJAkp0nEemsYGxGSOf1HP9BIT1bFT9CHHCoX26wxtf7RF2fePncJ4wPBxFzJdecBcKgL8uN
-yQnDtPyJ0DC4bVz9Z67nEFJcFTyrzbvo4sk9A8QKYANnjmCYPSEIlis8o7zERwxC/xNTgzAXzlDS
-8mJM7ja9otySdENt1tyty90IOWryaSvfeHDffO0YCDvbAVCcisvjni5esAu0sDrJr+ODF4laEVBF
-z4PNrDvNN2gGMYICezCCAncCAQEweTBlMQswCQYDVQQGEwJVUzEVMBMGA1UEChMMRGlnaUNlcnQg
-SW5jMRkwFwYDVQQLExB3d3cuZGlnaWNlcnQuY29tMSQwIgYDVQQDExtEaWdpQ2VydCBTSEEyIEFz
-c3VyZWQgSUQgQ0ECEAGZ6IgbFv3Z3WMdR408snswDQYJYIZIAWUDBAIBBQCggdQwLwYJKoZIhvcN
-AQkEMSIEIISTYoMATQfllZZkSJrZPqbPPqjWnnkd2merBOaURpw8MBgGCSqGSIb3DQEJAzELBgkq
-hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTIzMDgxNjEyMjY1MFowaQYJKoZIhvcNAQkPMVwwWjAL
-BglghkgBZQMEASowCwYJYIZIAWUDBAEWMAsGCWCGSAFlAwQBAjAKBggqhkiG9w0DBzALBgkqhkiG
-9w0BAQowCwYJKoZIhvcNAQEHMAsGCWCGSAFlAwQCATANBgkqhkiG9w0BAQEFAASCAQCm/cPl2pZo
-QPgcKvEWz/RwIfaPrVliyigqteLcET4c3qcgiWx+C2VmmFnEd8H04y7wiLaWP2RZaCTGQIrMsIas
-OcqREFxlyKtWkTvf/AZnVMPFHa4NNfxYG0uIoKBUbG5vhRI3CrXFVurQToZWa8+lNIeg79B82GID
-FpZL6Rto4S6t+NQS4TJsx4zXXiW5l3UtOcRTKRUelgxSLBr99xQIx9sHNQeWayGFoTCByGfKQYLw
-HnfUEx+1bDE+08s7IoVLNmGGkt5yJi7VYQ3JBh5SD6VvQaW8iozgvbSYyEyNc6nwq8bSU+OJzC9g
-KUidnA4QHQE/Mwx5XeT8hxraB+hA
---000000000000f77f2d060309686e--
+
+>
+> > > Signed-off-by: Marine Vovard <m.vovard@phytec.de>
+> > > ---
+> > >  meta-python/recipes-devtools/python/python3-kivy_2.1.0..bb | 2 +-
+> > >  1 file changed, 1 insertion(+), 1 deletion(-)
+> > >
+> > > diff --git a/meta-python/recipes-devtools/python/python3-
+> > > kivy_2.1.0..bb b/meta-python/recipes-devtools/python/python3-
+> > > kivy_2.1.0..bb
+> > > index ca1fc5f96..93894c860 100644
+> > > --- a/meta-python/recipes-devtools/python/python3-kivy_2.1.0..bb
+> > > +++ b/meta-python/recipes-devtools/python/python3-kivy_2.1.0..bb
+> > > @@ -43,7 +43,7 @@ export KIVY_GRAPHICS
+> > >  KIVY_CROSS_SYSROOT=3D"${RECIPE_SYSROOT}"
+> > >  export KIVY_CROSS_SYSROOT
+> > >
+> > > -REQUIRED_DISTRO_FEATURES +=3D "x11 opengl gobject-introspection-
+> > > data"
+> > > +REQUIRED_DISTRO_FEATURES +=3D "opengl gobject-introspection-data"
+> > >
+> > >  DEPENDS +=3D " \
+> > >      gstreamer1.0 \
+> > > --
+> > > 2.25.1
+> > >
+> > >
+> > > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> > > Links: You receive all messages sent to this group.
+> > > View/Reply Online (#104350):
+> > > https://lists.openembedded.org/g/openembedded-devel/message/104350
+> > > Mute This Topic:
+> > > https://lists.openembedded.org/mt/100737871/1997914
+> > > Group Owner: openembedded-devel+owner@lists.openembedded.org
+> > > Unsubscribe:
+> > > https://lists.openembedded.org/g/openembedded-devel/unsub [
+> > > raj.khem@gmail.com]
+> > > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> > >
+>
+>
+
+--00000000000017010706030afba5
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div><br></div><div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=
+=3D"gmail_attr">On Wed, Aug 16, 2023 at 1:29 AM Marine Vovard &lt;<a href=
+=3D"mailto:M.Vovard@phytec.de">M.Vovard@phytec.de</a>&gt; wrote:<br></div><=
+blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1px=
+ #ccc solid;padding-left:1ex">On Mon, 2023-08-14 at 08:17 -0700, Khem Raj w=
+rote:<br>
+&gt; On Mon, Aug 14, 2023 at 7:43=E2=80=AFAM Marine Vovard &lt;<a href=3D"m=
+ailto:M.Vovard@phytec.de" target=3D"_blank">M.Vovard@phytec.de</a>&gt;<br>
+&gt; wrote:<br>
+&gt; &gt; <br>
+&gt; &gt; We can use pure Wayland and therefore X11 is not required all the=
+<br>
+&gt; &gt; time.<br>
+&gt; &gt; <br>
+&gt; <br>
+&gt; Would it also build when x11 or wayland neither are in<br>
+&gt; DISTRO_FEATURES ?<br>
+&gt; If not then I guess a check should be made to check such that atleast<=
+br>
+&gt; one of these distro<br>
+&gt; features are present.<br>
+&gt; <br>
+<br>
+Indeed, from what I understood you need wayland or x11 (or both)=C2=A0<br>
+to make it work. I&#39;m thinking about adding the following line:<br>
+<br>
+ANY_OF_DISTRO_FEATURES =3D &quot;x11 wayland&quot;<br>
+<br>
+I will send a new patch with this modification if it seems ok.</blockquote>=
+<div dir=3D"auto"><br></div><div dir=3D"auto">Sounds good=C2=A0</div><div d=
+ir=3D"auto"><br></div><blockquote class=3D"gmail_quote" style=3D"margin:0 0=
+ 0 .8ex;border-left:1px #ccc solid;padding-left:1ex" dir=3D"auto"><br>
+<br>
+&gt; &gt; Signed-off-by: Marine Vovard &lt;<a href=3D"mailto:m.vovard@phyte=
+c.de" target=3D"_blank">m.vovard@phytec.de</a>&gt;<br>
+&gt; &gt; ---<br>
+&gt; &gt; =C2=A0meta-python/recipes-devtools/python/python3-kivy_2.1.0..bb =
+| 2 +-<br>
+&gt; &gt; =C2=A01 file changed, 1 insertion(+), 1 deletion(-)<br>
+&gt; &gt; <br>
+&gt; &gt; diff --git a/meta-python/recipes-devtools/python/python3-<br>
+&gt; &gt; kivy_2.1.0..bb b/meta-python/recipes-devtools/python/python3-<br>
+&gt; &gt; kivy_2.1.0..bb<br>
+&gt; &gt; index ca1fc5f96..93894c860 100644<br>
+&gt; &gt; --- a/meta-python/recipes-devtools/python/python3-kivy_2.1.0..bb<=
+br>
+&gt; &gt; +++ b/meta-python/recipes-devtools/python/python3-kivy_2.1.0..bb<=
+br>
+&gt; &gt; @@ -43,7 +43,7 @@ export KIVY_GRAPHICS<br>
+&gt; &gt; =C2=A0KIVY_CROSS_SYSROOT=3D&quot;${RECIPE_SYSROOT}&quot;<br>
+&gt; &gt; =C2=A0export KIVY_CROSS_SYSROOT<br>
+&gt; &gt; <br>
+&gt; &gt; -REQUIRED_DISTRO_FEATURES +=3D &quot;x11 opengl gobject-introspec=
+tion-<br>
+&gt; &gt; data&quot;<br>
+&gt; &gt; +REQUIRED_DISTRO_FEATURES +=3D &quot;opengl gobject-introspection=
+-data&quot;<br>
+&gt; &gt; <br>
+&gt; &gt; =C2=A0DEPENDS +=3D &quot; \<br>
+&gt; &gt; =C2=A0=C2=A0=C2=A0=C2=A0 gstreamer1.0 \<br>
+&gt; &gt; --<br>
+&gt; &gt; 2.25.1<br>
+&gt; &gt; <br>
+&gt; &gt; <br>
+&gt; &gt; -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+&gt; &gt; Links: You receive all messages sent to this group.<br>
+&gt; &gt; View/Reply Online (#104350):<br>
+&gt; &gt; <a href=3D"https://lists.openembedded.org/g/openembedded-devel/me=
+ssage/104350" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedd=
+ed.org/g/openembedded-devel/message/104350</a><br>
+&gt; &gt; Mute This Topic:<br>
+&gt; &gt; <a href=3D"https://lists.openembedded.org/mt/100737871/1997914" r=
+el=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/mt/10073=
+7871/1997914</a><br>
+&gt; &gt; Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.o=
+penembedded.org" target=3D"_blank">openembedded-devel+owner@lists.openembed=
+ded.org</a><br>
+&gt; &gt; Unsubscribe:<br>
+&gt; &gt; <a href=3D"https://lists.openembedded.org/g/openembedded-devel/un=
+sub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/g/=
+openembedded-devel/unsub</a>=C2=A0[<br>
+&gt; &gt; <a href=3D"mailto:raj.khem@gmail.com" target=3D"_blank">raj.khem@=
+gmail.com</a>]<br>
+&gt; &gt; -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+&gt; &gt; <br>
+<br>
+</blockquote></div></div>
+
+--00000000000017010706030afba5--
 
