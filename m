@@ -1,216 +1,47 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <chaitanya.vadrevu@ni.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D72D9C07E8B
-	for <webhook@archiver.kernel.org>; Wed, 16 Aug 2023 18:39:10 +0000 (UTC)
-Received: from mail-pl1-f170.google.com (mail-pl1-f170.google.com [209.85.214.170])
- by mx.groups.io with SMTP id smtpd.web11.168451.1692211146137789840
- for <openembedded-devel@lists.openembedded.org>;
- Wed, 16 Aug 2023 11:39:06 -0700
-Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20221208 header.b=iMTFSgFe;
- spf=pass (domain: gmail.com, ip: 209.85.214.170, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f170.google.com with SMTP id d9443c01a7336-1bdb7b0c8afso32868045ad.3
-        for <openembedded-devel@lists.openembedded.org>; Wed, 16 Aug 2023 11:39:06 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1692211145; x=1692815945;
-        h=in-reply-to:autocrypt:from:references:to:content-language:subject
-         :user-agent:mime-version:date:message-id:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=QOTmUdz5j11M1FWMRylmWqnZ/Juq57LEfGlBa8tr73s=;
-        b=iMTFSgFeXMragKr8M2SamMTyU3507Gm5EHDI0u2thpMD70vpyJpcmaLudVV7rZnhcE
-         httkv2YCdcOZD7veMpfvLiXrXNRLZW60DAK0KzdNbq6Q193nRQ7IBZfifo6t1L2sHIxg
-         tB5BPOw5ecLS3sUIElSHLwDeD/Vo3CQmd8AAsGO/uQh5SJEirZNEZe/YWSZsD7OL/WSK
-         9z4nTnNdd0ljn/62KxcCXICGxmOStS8ptPBSahm06iL/kl1OGep8YcsJLPmlotC2yj50
-         vBX9aRYW+XloBn1PeqReyoexY2zvMePyDA6v93F75zcQuwvh+mFjlMot77HRsQUzWgL+
-         uamA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1692211145; x=1692815945;
-        h=in-reply-to:autocrypt:from:references:to:content-language:subject
-         :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=QOTmUdz5j11M1FWMRylmWqnZ/Juq57LEfGlBa8tr73s=;
-        b=B1vb/GvLaJPBvne2NptWYC+P9BIrSV51Jbyb715cXqHlURL6acPuRv/2vw9m2ApKLX
-         RS9ZqTR08dfXTovnhZ6dXvJHk1NXC7liBPsnUeEVYwyhMOTOYjaGkNUcfKp9Yyy72HIH
-         kbvFGZqVIKkz3xQeQQtYrGNYqjt2ViFOI8TUB4WlI/RXlQ6c5XxBHF81Xtj9not8OuIV
-         7MXVF9szi0EkAHvlKR6HQaxXQLYUxj8v99D+i7L6iLUgJWsMPqOnWt7TvQF2rhaUL9O8
-         1pJlGGgiTvSAdv2QeAcjz3A5dA6kMCkcJ4u37HQCGx3RwYgRUcuaAYtGi2M+k0EJOowh
-         BanQ==
-X-Gm-Message-State: AOJu0YyBYlosHroOyGfmsyYqVjkn8ZTQiSR/JoEHj+9NQSQCgoX5pmDM
-	72C75eRfCTs6+qHoYLqQ9p8P5winWu0xwQ==
-X-Google-Smtp-Source: AGHT+IFTwZAXSEIaZ7QGc59cHB4PtllClg56SVv9DS+YdoahDg6T3n9XjS7FUra4dETAoqrrAXGJww==
-X-Received: by 2002:a17:902:aa92:b0:1bb:94ed:20a with SMTP id d18-20020a170902aa9200b001bb94ed020amr2293216plr.24.1692211145473;
-        Wed, 16 Aug 2023 11:39:05 -0700 (PDT)
-Received: from ?IPV6:2601:646:9100:2cb0:b192:e884:f5f4:7725? ([2601:646:9100:2cb0:b192:e884:f5f4:7725])
-        by smtp.gmail.com with ESMTPSA id o4-20020a170902d4c400b001bbf7fd354csm13416822plg.213.2023.08.16.11.39.04
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 16 Aug 2023 11:39:05 -0700 (PDT)
-Message-ID: <7bf67950-8ded-4d76-a775-f0af4b8219ba@gmail.com>
-Date: Wed, 16 Aug 2023 11:39:03 -0700
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A8CC5C10F00
+	for <webhook@archiver.kernel.org>; Wed, 16 Aug 2023 18:52:30 +0000 (UTC)
 Subject: Re: [meta-oe][PATCH v2] recipes-bsp: Add bolt
-Content-Language: en-US
-To: Chaitanya Vadrevu <chaitanya.vadrevu@ni.com>,
- openembedded-devel@lists.openembedded.org
-References: <20230816183437.1903299-1-chaitanya.vadrevu@ni.com>
-From: Khem Raj <raj.khem@gmail.com>
-Autocrypt: addr=raj.khem@gmail.com; keydata=
- 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
-In-Reply-To: <20230816183437.1903299-1-chaitanya.vadrevu@ni.com>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="------------KKbLXIKlekybu9Za0K6pzdmt"
+To: openembedded-devel@lists.openembedded.org
+From: "Chaitanya Vadrevu" <chaitanya.vadrevu@ni.com>
+X-Originating-Location: Austin, Texas, US (69.219.174.116)
+X-Originating-Platform: Mac Chrome 115
+User-Agent: GROUPS.IO Web Poster
+MIME-Version: 1.0
+Date: Wed, 16 Aug 2023 11:52:22 -0700
+References: <7bf67950-8ded-4d76-a775-f0af4b8219ba@gmail.com>
+In-Reply-To: <7bf67950-8ded-4d76-a775-f0af4b8219ba@gmail.com>
+Message-ID: <29355.1692211942441887558@lists.openembedded.org>
+Content-Type: multipart/alternative; boundary="ZAmvuFwj7Al9ZC63bwWq"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 16 Aug 2023 18:39:10 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104441
+ <openembedded-devel@lists.openembedded.org>; Wed, 16 Aug 2023 18:52:30 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104442
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------KKbLXIKlekybu9Za0K6pzdmt
-Content-Type: multipart/mixed; boundary="------------8mKEBg0oVITHBp3BuwR18qCu";
- protected-headers="v1"
-From: Khem Raj <raj.khem@gmail.com>
-To: Chaitanya Vadrevu <chaitanya.vadrevu@ni.com>,
- openembedded-devel@lists.openembedded.org
-Message-ID: <7bf67950-8ded-4d76-a775-f0af4b8219ba@gmail.com>
-Subject: Re: [meta-oe][PATCH v2] recipes-bsp: Add bolt
-References: <20230816183437.1903299-1-chaitanya.vadrevu@ni.com>
-In-Reply-To: <20230816183437.1903299-1-chaitanya.vadrevu@ni.com>
-
---------------8mKEBg0oVITHBp3BuwR18qCu
-Content-Type: multipart/mixed; boundary="------------3A0hA3LjM4LsCOO5IcqcYpp0"
-
---------------3A0hA3LjM4LsCOO5IcqcYpp0
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: base64
-
-T24gOC8xNi8yMyAxMTozNCBBTSwgQ2hhaXRhbnlhIFZhZHJldnUgd3JvdGU6DQo+IGJvbHQg
-aXMgdXNlZCBmb3IgbWFuYWdpbmcgdGh1bmRlcmJvbHQgZGV2aWNlcy4NCj4gDQo+IFNpZ25l
-ZC1vZmYtYnk6IENoYWl0YW55YSBWYWRyZXZ1IDxjaGFpdGFueWEudmFkcmV2dUBuaS5jb20+
-DQo+IC0tLQ0KPiBDaGFuZ2VzIGluIHYyOg0KPiAgICogUmVtb3ZlZCByZWR1bmRhbnQgY21h
-a2UtbmF0aXZlIGZyb20gREVQRU5EUw0KPiAgICogU2V0IFJFUVVJUkVEX0RJU1RST19GRUFU
-VVJFUyB0byBwb2xraXQgYXMgcG9sa2l0IGlzIGFsd2F5cyBuZWVkZWQgZm9yDQo+ICAgICBi
-b2x0DQo+IA0KDQpUaGVyZSB3YXMgYSBzaW1pbGFyIHYyIHBhdGNoIHNlbnQgeWVzdGVyZGF5
-LiBJcyBpdCBhbnkgZGlmZmVyZW50ID8NCg0KPiAgIG1ldGEtb2UvcmVjaXBlcy1ic3AvYm9s
-dC9ib2x0XzAuOS41LmJiIHwgMTkgKysrKysrKysrKysrKysrKysrKw0KPiAgIDEgZmlsZSBj
-aGFuZ2VkLCAxOSBpbnNlcnRpb25zKCspDQo+ICAgY3JlYXRlIG1vZGUgMTAwNjQ0IG1ldGEt
-b2UvcmVjaXBlcy1ic3AvYm9sdC9ib2x0XzAuOS41LmJiDQo+IA0KPiBkaWZmIC0tZ2l0IGEv
-bWV0YS1vZS9yZWNpcGVzLWJzcC9ib2x0L2JvbHRfMC45LjUuYmIgYi9tZXRhLW9lL3JlY2lw
-ZXMtYnNwL2JvbHQvYm9sdF8wLjkuNS5iYg0KPiBuZXcgZmlsZSBtb2RlIDEwMDY0NA0KPiBp
-bmRleCAwMDAwMDAwMDAwLi5iNmFkNjMzN2NlDQo+IC0tLSAvZGV2L251bGwNCj4gKysrIGIv
-bWV0YS1vZS9yZWNpcGVzLWJzcC9ib2x0L2JvbHRfMC45LjUuYmINCj4gQEAgLTAsMCArMSwx
-OSBAQA0KPiArU1VNTUFSWSA9ICJUaHVuZGVyYm9sdCB1c2VyLXNwYWNlIG1hbmFnZW1lbnQg
-dG9vbCINCj4gK0RFU0NSSVBUSU9OID0gIlVzZXJzcGFjZSBzeXN0ZW0gZGFlbW9uIHRvIGVu
-YWJsZSBzZWN1cml0eSBsZXZlbHMgZm9yIFRodW5kZXJib2x0IG9uIEdOVS9MaW51eCINCj4g
-K0hPTUVQQUdFID0gImh0dHBzOi8vZ2l0bGFiLmZyZWVkZXNrdG9wLm9yZy9ib2x0L2JvbHQi
-DQo+ICtMSUNFTlNFID0gIkxHUEwtMi4xLW9ubHkiDQo+ICtMSUNfRklMRVNfQ0hLU1VNID0g
-ImZpbGU6Ly9DT1BZSU5HO21kNT00ZmJkNjUzODBjZGQyNTU5NTEwNzkwMDhiMzY0NTE2YyIN
-Cj4gKw0KPiArREVQRU5EUyA9ICJ1ZGV2IHBvbGtpdCBkYnVzIg0KPiArUkVRVUlSRURfRElT
-VFJPX0ZFQVRVUkVTID0gInBvbGtpdCINCj4gKw0KPiArU1JDX1VSSSA9ICJnaXQ6Ly9naXRs
-YWIuZnJlZWRlc2t0b3Aub3JnL2JvbHQvYm9sdC5naXQ7cHJvdG9jb2w9aHR0cHM7YnJhbmNo
-PW1hc3RlciINCj4gK1NSQ1JFViA9ICI1YThhNTg2NmE4NDc1NjE1NjY0OTk4NDdkNDZhOTdj
-NjEyYjRlNmRkIg0KPiArDQo+ICtTID0gIiR7V09SS0RJUn0vZ2l0Ig0KPiArDQo+ICtpbmhl
-cml0IGNtYWtlIHBrZ2NvbmZpZyBtZXNvbiBmZWF0dXJlc19jaGVjaw0KPiArDQo+ICtGSUxF
-Uzoke1BOfSArPSAiJHtkYXRhZGlyfS9kYnVzLTEvKiBcDQo+ICsgICAgICAgICAgICAgICAg
-JHtkYXRhZGlyfS9wb2xraXQtMS8qIFwNCj4gKyAgICAgICAgICAgICAgICINCg==
---------------3A0hA3LjM4LsCOO5IcqcYpp0
-Content-Type: application/pgp-keys; name="OpenPGP_0xBB053355919D3314.asc"
-Content-Disposition: attachment; filename="OpenPGP_0xBB053355919D3314.asc"
-Content-Description: OpenPGP public key
+--ZAmvuFwj7Al9ZC63bwWq
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: quoted-printable
 
------BEGIN PGP PUBLIC KEY BLOCK-----
+It is the same but yesterday's v2 patch but the mailing list ( https://list=
+s.openembedded.org/g/openembedded-devel/search?p=3Dcreated%2C0%2C%2C1%2C2%2=
+C0%2C0&q=3Drecipes-bsp%3A+add+bolt ) did not receive it (you apparently rec=
+eived it though) and I realized that I made a mistake in specifying email r=
+ecipients so I resent it correctly this time.
 
-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
-//VuX4EDPW3CZmbPy6U=3D
-=3D+jUt
------END PGP PUBLIC KEY BLOCK-----
+--ZAmvuFwj7Al9ZC63bwWq
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 
---------------3A0hA3LjM4LsCOO5IcqcYpp0--
+It is the same but yesterday's v2 patch but the&nbsp;<a href=3D"https://lis=
+ts.openembedded.org/g/openembedded-devel/search?p=3Dcreated%2C0%2C%2C1%2C2%=
+2C0%2C0&amp;q=3Drecipes-bsp%3A+add+bolt" target=3D"_blank" rel=3D"noopener"=
+>mailing list</a>&nbsp;did not receive it (you apparently received it thoug=
+h) and I realized that I made a mistake in specifying email recipients so I=
+ resent it correctly this time.
 
---------------8mKEBg0oVITHBp3BuwR18qCu--
-
---------------KKbLXIKlekybu9Za0K6pzdmt
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-wmMEABEIACMWIQSPpVvapDR0rgZCCc27BTNVkZ0zFAUCZN0XxwUDAAAAAAAKCRC7BTNVkZ0zFBAx
-AKCOxh2K+hlmrAVJcJ4HP0NQ737cbQCbBpTt+pHu8CK0FDAviAG9hlINU8o=
-=+R0L
------END PGP SIGNATURE-----
-
---------------KKbLXIKlekybu9Za0K6pzdmt--
+--ZAmvuFwj7Al9ZC63bwWq--
 
