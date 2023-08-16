@@ -1,90 +1,102 @@
-Return-Path: <M.Vovard@phytec.de>
+Return-Path: <pawel.langowski@3mdeb.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 33B13C001E0
-	for <webhook@archiver.kernel.org>; Wed, 16 Aug 2023 09:32:18 +0000 (UTC)
-Received: from mickerik.phytec.de (mickerik.phytec.de [91.26.50.163])
- by mx.groups.io with SMTP id smtpd.web10.157197.1692178331566615236
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4ACBEC001E0
+	for <webhook@archiver.kernel.org>; Wed, 16 Aug 2023 09:41:18 +0000 (UTC)
+Received: from 8.mo550.mail-out.ovh.net (8.mo550.mail-out.ovh.net [178.33.110.239])
+ by mx.groups.io with SMTP id smtpd.web10.156774.1692175848774455601
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 16 Aug 2023 02:32:12 -0700
+ Wed, 16 Aug 2023 01:50:49 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@phytec.de header.s=a4 header.b=rChAkPTz;
- spf=pass (domain: phytec.de, ip: 91.26.50.163, mailfrom: m.vovard@phytec.de)
-DKIM-Signature: v=1; a=rsa-sha256; d=phytec.de; s=a4; c=relaxed/simple;
-	q=dns/txt; i=@phytec.de; t=1692178328; x=1694770328;
-	h=From:Sender:Reply-To:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:
-	Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:Resent-From:
-	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
-	List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
-	bh=fHt7/5ayAkIQiHy9fBC+xlleJjlGwzE05XdLWnFoubo=;
-	b=rChAkPTzrin0s7eIptLbupJsX0QrTo5y5tgu3ubKNAvq4046Jux5PX/HkKzbeRam
-	PDAyNmJAe6xahNKFON9zs/fUKfzuLUMgWgp9fxUmcywAzZSMrCHsJfwVM/R2flqZ
-	PoB6ZK6yKYOjeCQxNgW0SGFNy3ityiai6VNZ8f7oeQ8=;
-X-AuditID: ac14000a-923ff70000007ecb-11-64dc97986b1e
-Received: from florix.phytec.de (Unknown_Domain [172.25.0.13])
-	(using TLS with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
-	(Client did not present a certificate)
-	by mickerik.phytec.de (PHYTEC Mail Gateway) with SMTP id 52.58.32459.8979CD46; Wed, 16 Aug 2023 11:32:08 +0200 (CEST)
-Received: from augenblix2.phytec.de (172.25.0.11) by Florix.phytec.de
- (172.25.0.13) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.18; Wed, 16 Aug
- 2023 11:32:08 +0200
-From: Marine Vovard <m.vovard@phytec.de>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-python][PATCH v2] python3-kivy: Require X11 or Wayland in DISTRO_FEATURES
-Date: Wed, 16 Aug 2023 11:31:26 +0200
-Message-ID: <20230816093126.508832-1-m.vovard@phytec.de>
-X-Mailer: git-send-email 2.25.1
+ dkim=none (message not signed); spf=softfail (domain: 3mdeb.com, ip: 178.33.110.239, mailfrom: pawel.langowski@3mdeb.com)
+Received: from director1.ghost.mail-out.ovh.net (unknown [10.108.16.60])
+	by mo550.mail-out.ovh.net (Postfix) with ESMTP id 1B60126072
+	for <openembedded-devel@lists.openembedded.org>; Wed, 16 Aug 2023 08:50:47 +0000 (UTC)
+Received: from ghost-submission-6684bf9d7b-m5lsp (unknown [10.110.103.93])
+	by director1.ghost.mail-out.ovh.net (Postfix) with ESMTPS id 752AE1FE5B;
+	Wed, 16 Aug 2023 08:50:46 +0000 (UTC)
+Received: from 3mdeb.com ([37.59.142.106])
+	by ghost-submission-6684bf9d7b-m5lsp with ESMTPSA
+	id 7uilDOaN3GToRwAAHf3dkw
+	(envelope-from <pawel.langowski@3mdeb.com>); Wed, 16 Aug 2023 08:50:46 +0000
+Authentication-Results: garm.ovh; auth=pass (GARM-106R006aeff0e96-7659-4eae-8f8e-250056539298,
+                    93A237E87ED1339E13AED04D535165A97E4753C9) smtp.auth=pawel.langowski@3mdeb.com
+X-OVh-ClientIp: 213.192.77.249
+From: "Pawel Langowski" <pawel.langowski@3mdeb.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: piotr.krol@3mdeb.com,
+	tomasz.zyjewski@3mdeb.com
+Subject: [meta-oe] [PATCH] recipes-extended: add qcbor recipe
+Date: Wed, 16 Aug 2023 02:41:09 -0700
+Message-ID: <20230816085042.1399670-1-pawel.langowski@3mdeb.com>
+X-Mailer: git-send-email 2.41.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [172.25.0.11]
-X-ClientProxiedBy: Berlix.phytec.de (172.25.0.12) To Florix.phytec.de
- (172.25.0.13)
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFuplluLIzCtJLcpLzFFi42JZI8nAqztj+p0Ug9Uf1C0uHl7K7MDocW7j
-	CsYAxigum5TUnMyy1CJ9uwSujIc/ljIVdHBUvN/xm72B8S9bFyMnh4SAicTfHxuZuxi5OIQE
-	ljBJLPl2nh3CecIoceRpH1CGg4NNQENi3VFHkAYRAX2JpbP3MIPYwgIREncnrmQHsVkEVCVu
-	bJ7ACGLzClhInLvWALVAXmLmpe/sEHFBiZMzn7CA2MxA8eats5khbAmJgy9egNlCQPEF76/A
-	9U4795oZwg6V6Pxzn2UCI/8sJKNmIRk1C8moBYzMqxiFcjOTs1OLMrP1CjIqS1KT9VJSNzGC
-	gkyEgWsHY98cj0OMTByMhxglOJiVRHh7eG+lCPGmJFZWpRblxxeV5qQWH2KU5mBREue938OU
-	KCSQnliSmp2aWpBaBJNl4uCUamBcc+kpw/NzArX8sh2P1/FaFa+YdNaeb8LTSaz5J0+8X5nN
-	fTl0x/GlxVvXFn7imnGnZiXj3euRJ8xdVu477FFZ4/Pr39WQvKWXNn2peZM1jzloellYCbfR
-	+lk9hx3DlXbUn0l+3riO5YzuCYb9KvofC1MYVk77eu7LZy8Xj/C4e7H1ITWuBybtUmIpzkg0
-	1GIuKk4EAFDETw8gAgAA
+X-Ovh-Tracer-Id: 10225141479582053017
+X-VR-SPAMSTATE: OK
+X-VR-SPAMSCORE: 0
+X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrgedviedruddtledgtdelucetufdoteggodetrfdotffvucfrrhhofhhilhgvmecuqfggjfdpvefjgfevmfevgfenuceurghilhhouhhtmecuhedttdenucenucfjughrpefhvfevufffkffoggfgsedtkeertdertddtnecuhfhrohhmpefrrgifvghlucfnrghnghhofihskhhiuceophgrfigvlhdrlhgrnhhgohifshhkihesfehmuggvsgdrtghomheqnecuggftrfgrthhtvghrnhepkeefhefhkeffieetjedvffettdeigfeufeehgefgteejudfgfeelfeeiteeggfejnecuffhomhgrihhnpehgihhthhhusgdrtghomhenucfkphepuddvjedrtddrtddruddpvddufedrudelvddrjeejrddvgeelpdefjedrheelrddugedvrddutdeinecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehinhgvthepuddvjedrtddrtddruddpmhgrihhlfhhrohhmpeeophgrfigvlhdrlhgrnhhgohifshhkihesfehmuggvsgdrtghomheqpdhnsggprhgtphhtthhopedupdhrtghpthhtohepohhpvghnvghmsggvugguvgguqdguvghvvghlsehlihhsthhsrdhophgvnhgvmhgsvgguuggvugdrohhrghdpoffvtefjohhsthepmhhoheehtddpmhhouggvpehsmhhtphhouhht
+X-Old-Date: Wed, 16 Aug 2023 10:50:27 +0200
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 16 Aug 2023 09:32:18 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104423
+ <openembedded-devel@lists.openembedded.org>; Wed, 16 Aug 2023 09:41:18 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104421
+Message-ID: <20230816094109.qcIocx7Ah1z7hUPMLhhUBuQ3XA05D5M9FxPjL0Q_HGA@z>
 
-At least one of the following DISTRO_FEATURES needs to be present: X11 or
-Wayland. The recipe now work with pure Wayland.
-
-Signed-off-by: Marine Vovard <m.vovard@phytec.de>
+Recipe for QCBOR - a CBOR encoder/decoder
 ---
-Change v1->v2:
-* Check that X11 or Wayland is present in DISTRO_FEATURES
----
- meta-python/recipes-devtools/python/python3-kivy_2.1.0..bb | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+ meta-oe/recipes-extended/qcbor/qcbor_git.bb | 32 +++++++++++++++++++++
+ 1 file changed, 32 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/qcbor/qcbor_git.bb
 
-diff --git a/meta-python/recipes-devtools/python/python3-kivy_2.1.0..bb b/meta-python/recipes-devtools/python/python3-kivy_2.1.0..bb
-index ca1fc5f96..b02c55a85 100644
---- a/meta-python/recipes-devtools/python/python3-kivy_2.1.0..bb
-+++ b/meta-python/recipes-devtools/python/python3-kivy_2.1.0..bb
-@@ -43,7 +43,9 @@ export KIVY_GRAPHICS
- KIVY_CROSS_SYSROOT="${RECIPE_SYSROOT}"
- export KIVY_CROSS_SYSROOT
- 
--REQUIRED_DISTRO_FEATURES += "x11 opengl gobject-introspection-data"
-+REQUIRED_DISTRO_FEATURES += "opengl gobject-introspection-data"
+diff --git a/meta-oe/recipes-extended/qcbor/qcbor_git.bb b/meta-oe/recipe=
+=3D
+s-extended/qcbor/qcbor_git.bb
+new file mode 100644
+index 000000000000..6e87458c3a3e
+--- /dev/null
++++ b/meta-oe/recipes-extended/qcbor/qcbor_git.bb
+@@ -0,0 +1,32 @@
++DESCRIPTION =3D3D " \
++    QCBOR is a powerful, commercial-quality CBOR encoder/decoder that \
++    implements these RFCs: RFC8949, RFC7049, RFC8742, RFC8943 \
++"
 +
-+ANY_OF_DISTRO_FEATURES = "x11 wayland"
- 
- DEPENDS += " \
-     gstreamer1.0 \
--- 
-2.25.1
++HOMEPAGE =3D3D "https://github.com/laurencelundblade/QCBOR"
++
++LICENSE =3D3D "BSD-3-Clause"
++LIC_FILES_CHKSUM =3D3D "file://README.md;beginline=3D3D442;endline=3D3D463=
+;md5=3D
+=3D3Db55643261d6d221dac2b7a395105af62"
++
++SRC_URI =3D3D "git://github.com/laurencelundblade/QCBOR;protocol=3D3Dhttps=
+;b=3D
+ranch=3D3Dmaster"
++
++SRCREV =3D3D "44754f738c6534a4304a83d4c6e97b3d3193d887"
++
++S =3D3D "${WORKDIR}/git"
++
++INSANE_SKIP:${PN}-dev +=3D3D "ldflags"
++
++inherit pkgconfig
++
++CFLAGS +=3D3D " \
++    -DUSEFULBUF_DISABLE_ALL_FLOAT \
++"
++
++do_install(){
++    install -d ${D}${libdir}
++    install -m 755 ${S}/libqcbor.a ${D}${libdir}/
++    install -d ${D}${includedir}/qcbor
++    install -m 644 ${S}/inc/*.h ${D}${includedir}
++    install -m 644 ${S}/inc/qcbor/*.h ${D}${includedir}/qcbor
++}
++
+--=3D20
+2.41.0
 
 
