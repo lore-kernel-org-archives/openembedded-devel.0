@@ -2,98 +2,144 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1708DC04A6A
-	for <webhook@archiver.kernel.org>; Wed, 16 Aug 2023 16:02:00 +0000 (UTC)
-Received: from mail-oo1-f49.google.com (mail-oo1-f49.google.com [209.85.161.49])
- by mx.groups.io with SMTP id smtpd.web10.164679.1692201710317408398
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E68CDC001E0
+	for <webhook@archiver.kernel.org>; Wed, 16 Aug 2023 16:02:39 +0000 (UTC)
+Received: from mail-oo1-f54.google.com (mail-oo1-f54.google.com [209.85.161.54])
+ by mx.groups.io with SMTP id smtpd.web11.164483.1692201750423889411
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 16 Aug 2023 09:01:50 -0700
+ Wed, 16 Aug 2023 09:02:30 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20221208 header.b=jmGxaQvx;
- spf=pass (domain: gmail.com, ip: 209.85.161.49, mailfrom: raj.khem@gmail.com)
-Received: by mail-oo1-f49.google.com with SMTP id 006d021491bc7-56ce1bd7fc4so4904623eaf.2
-        for <openembedded-devel@lists.openembedded.org>; Wed, 16 Aug 2023 09:01:50 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20221208 header.b=DX7M/EoW;
+ spf=pass (domain: gmail.com, ip: 209.85.161.54, mailfrom: raj.khem@gmail.com)
+Received: by mail-oo1-f54.google.com with SMTP id 006d021491bc7-56d455462c2so4707056eaf.2
+        for <openembedded-devel@lists.openembedded.org>; Wed, 16 Aug 2023 09:02:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1692201709; x=1692806509;
+        d=gmail.com; s=20221208; t=1692201749; x=1692806549;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=jtI0VYsqVDzIa9zI4/zZVr889zx0r7+WaXBgZSqdQI8=;
-        b=jmGxaQvxizBDjAuefNxkhrHodSc5gEMsyOcKMa7x6Ot1cU1uRU3qyR0rgKVn7SlH4F
-         /DTf35E5zKGMNBX7GjVUwk1YIwNTMVW7o09BRuW9xxyZRMuWt1+qQuYKy+SLjgWEaaf4
-         gaj/UhFdl6P/oPaL/biQLBg/fIJ2GvsLY0l2Gt3/tUxMcumvzq/fd1lk4z9fyqvhif+t
-         UjN+xkcSd4HU5Tj3p+Ak5mf0eGUJPPnob4jQmqE6Y4CLJzyikNjccaYROPMmXUNiVvWY
-         fVmYusNVHVv8LkMmmAqrk2N/rPv0hqcPM3LGuIm4w0IZdccXMhP2q3jqEXdDP0VmeRBg
-         gw7A==
+        bh=agMpRy6bhq9u7d7Tlc6sIoiwmnbbv3tawuoUsq0hOew=;
+        b=DX7M/EoWGxLtRprOaUKxKdo9/N4LutJJkpMGlqT4hyVJGo6fVhFwinrLLnMjjYaVXC
+         Q7601V03aoiKT9hl6mVPWXzlhlL7N3A1OvBmCrbU9s7nNA3e+Xc2Br1T+j6KCEldK2fW
+         cu815D5fOWD5PGokcov7ePbjjWieJZE48hLL+r3FRikQw7zuFJApEjfoe3V9y2FlGXsd
+         y4F0IxHqGmCKggZyms2Y+TiZBiOvLomSJxMkh8MNDUpkBRcotgUB2s/9cY3aINaftQEL
+         uYlxcA5DzQu3Mou2++FEVqwg+I8YRf4jb80AJ9DqCPt3jR3BOGfigQHO4BfAusfb6q63
+         XQrQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1692201709; x=1692806509;
+        d=1e100.net; s=20221208; t=1692201749; x=1692806549;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=jtI0VYsqVDzIa9zI4/zZVr889zx0r7+WaXBgZSqdQI8=;
-        b=W43/2BJq1UADDK7VXg4tge7M4IxLYmk2n+0Sx4DdawL2eoJgB4s/jDUcghBTohmRlA
-         DEBfPWb6XhmsuVjeqPlQT/Pg05FP8rQ3xqX6sH2auGDAhd0gr27QdyveqJTxfUVtKLQL
-         FP4X4ENi5flJNWVkJlQpz2Iquj2TMNLMpnRePbblU4+/Dn68jnVVlpNglS/mNPUNCpFS
-         TpWOOU4ZZvYCXXT0dDEFl3kC52r2G4Nu1O/aOTNsn5rrVczn7MX/Xca/vr8PA9H00q2J
-         pwcGgz+uovPExnFuW/JQ5CMkalgQdp1OGQf6+6+jJE6kTVrXIOmu7Snr6WV2o9hyFU4n
-         fXvg==
-X-Gm-Message-State: AOJu0YzmoZodANNN4VqIq045w1TmUKLMtEQyZU0dh5zVo2E6zbL1Gj3A
-	a0fXUNGupgroFuP1HT8zCkJSGiqM54lyiXXXS54=
-X-Google-Smtp-Source: AGHT+IGvnutfYr/7yEKKWFAoFvUnxUtyrrX/Guhg7IVrfuerhMsyxz2du4twPTafULpaAR3hEt/+RxGL8vjb/iPmDjE=
-X-Received: by 2002:a4a:625b:0:b0:56e:4dea:bc5c with SMTP id
- y27-20020a4a625b000000b0056e4deabc5cmr2254726oog.8.1692201709076; Wed, 16 Aug
- 2023 09:01:49 -0700 (PDT)
+        bh=agMpRy6bhq9u7d7Tlc6sIoiwmnbbv3tawuoUsq0hOew=;
+        b=Ducbnqzz/AMINDXoWXAV9yO/HEei1i8nasgxc8O1Ri2velUyyWv9FJGo33ue3FYgAK
+         2smi3fqZ4vJfomTDAYPsiu9L+OxXjKp+Js98CfriRyXpy672XyQcM1tpYch52ov5iX+t
+         e6r69nxeHZA25+BnQC6groukKMjb9GGSQbrEgR3V7sWyr1UDGKwrlkituTXhWsvXIa7m
+         cHSFFc985UlhaitedI+Kj7MfA2SLPZVfCWb9janf1znYAuUaKDFQZxmugGWzNV4YFPXZ
+         g+uQROOlizhPP/m+eHD0MIvSHSYclQHcKuigDJ6T0RUk5T8k5NhoQI8TJXgcsz+Eog6c
+         oF7w==
+X-Gm-Message-State: AOJu0YwGUf6xHd5n8ZKXg3kYXHtfVc27PCyf+z7JdvGkqqV49WRwb8Ek
+	aYvAZAaf/Bfal95QCHjmrg5+xAQhn4c/giqU2t6mXBLt/S2i7A==
+X-Google-Smtp-Source: AGHT+IHc6ZWFhhYLX0JkopTz93sdZyjHaM41fdNUzXMPp/4ols4O3uc1zqQ/PprT0qjXERvzSFmN9iAOG5SET3JkesY=
+X-Received: by 2002:a4a:241d:0:b0:56d:10bb:c2d4 with SMTP id
+ m29-20020a4a241d000000b0056d10bbc2d4mr2188830oof.1.1692201748842; Wed, 16 Aug
+ 2023 09:02:28 -0700 (PDT)
 MIME-Version: 1.0
-References: <872ec58d-22cb-494c-72e5-1b9a611b1857@mvista.com>
-In-Reply-To: <872ec58d-22cb-494c-72e5-1b9a611b1857@mvista.com>
+References: <20230816055711.2298616-1-mingli.yu@windriver.com>
+In-Reply-To: <20230816055711.2298616-1-mingli.yu@windriver.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 16 Aug 2023 09:01:23 -0700
-Message-ID: <CAMKF1spOMtEFNVU2-VJwHAT3R8UJmrLCEp2u8XtJh9evw35d9A@mail.gmail.com>
-Subject: Re: Kirkstone merge request: Arg 16th
-To: akuster <akuster@mvista.com>
-Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Date: Wed, 16 Aug 2023 09:02:02 -0700
+Message-ID: <CAMKF1sqAaWQvspgnfG0Z28dP=8izOa4zu3yL6wO2AYZwd-Fjfw@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH] mariadb: Upgrade to 10.11.5
+To: "Yu, Mingli" <mingli.yu@eng.windriver.com>
+Cc: openembedded-devel@lists.openembedded.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 16 Aug 2023 16:02:00 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104431
+ <openembedded-devel@lists.openembedded.org>; Wed, 16 Aug 2023 16:02:39 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104432
 
-Done. Thanks Armin
+mariadb-native ends up with following errors on debian12 hosts
 
-On Wed, Aug 16, 2023 at 5:26=E2=80=AFAM akuster <akuster@mvista.com> wrote:
+| /mnt/b/yoe/master/build/tmp/work/x86_64-linux/mariadb-native/10.11.5/mari=
+adb-10.11.5/plugin/auth_pam/testing/pam_mariadb_mtr.c:13:10:
+fatal error: security/pam_modules.h: No such file or directory
+|    13 | #include <security/pam_modules.h>
+|       |          ^~~~~~~~~~~~~~~~~~~~~~~~
+| compilation terminated.
+| make[2]: *** [plugin/auth_pam/testing/CMakeFiles/pam_mariadb_mtr.dir/buil=
+d.make:76:
+plugin/auth_pam/testing/CMakeFiles/pam_mariadb_mtr.dir/pam_mariadb_mtr.c.o]
+Error 1
+| make[1]: *** [CMakeFiles/Makefile2:8636:
+plugin/auth_pam/testing/CMakeFiles/pam_mariadb_mtr.dir/all] Error 2
+| make[1]: *** Waiting for unfinished jobs....
+| [  2%] Building C object
+plugin/auth_ed25519/CMakeFiles/ref10.dir/ref10/fe_1.c.o
+| [  2%] Linking C static library libma_getopt.a
+| /mnt/b/yoe/master/build/tmp/work/x86_64-linux/mariadb-native/10.11.5/mari=
+adb-10.11.5/plugin/auth_pam/mapper/pam_user_map.c:44:10:
+fatal error: security/pam_ext.h: No such file or directory
+|    44 | #include <security/pam_ext.h>
+|       |          ^~~~~~~~~~~~~~~~~~~~
+| compilation terminated.
+
+On Tue, Aug 15, 2023 at 10:57=E2=80=AFPM Yu, Mingli <mingli.yu@eng.windrive=
+r.com> wrote:
 >
-> The following changes since commit 594c9cf6d3205c8e40ff772383fd9ab7dd3ed2=
-cc:
+> From: Mingli Yu <mingli.yu@windriver.com>
 >
->    redis: upgrade 7.0.11 -> 7.0.12 (2023-08-03 16:50:52 -0400)
+> Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+> ---
+>  .../{mariadb-native_10.11.4.bb =3D> mariadb-native_10.11.5.bb}    | 0
+>  meta-oe/recipes-dbs/mysql/mariadb.inc                           | 2 +-
+>  .../mysql/{mariadb_10.11.4.bb =3D> mariadb_10.11.5.bb}            | 0
+>  3 files changed, 1 insertion(+), 1 deletion(-)
+>  rename meta-oe/recipes-dbs/mysql/{mariadb-native_10.11.4.bb =3D> mariadb=
+-native_10.11.5.bb} (100%)
+>  rename meta-oe/recipes-dbs/mysql/{mariadb_10.11.4.bb =3D> mariadb_10.11.=
+5.bb} (100%)
 >
-> are available in the Git repository at:
+> diff --git a/meta-oe/recipes-dbs/mysql/mariadb-native_10.11.4.bb b/meta-o=
+e/recipes-dbs/mysql/mariadb-native_10.11.5.bb
+> similarity index 100%
+> rename from meta-oe/recipes-dbs/mysql/mariadb-native_10.11.4.bb
+> rename to meta-oe/recipes-dbs/mysql/mariadb-native_10.11.5.bb
+> diff --git a/meta-oe/recipes-dbs/mysql/mariadb.inc b/meta-oe/recipes-dbs/=
+mysql/mariadb.inc
+> index 2fb0bd7be..f364f47bf 100644
+> --- a/meta-oe/recipes-dbs/mysql/mariadb.inc
+> +++ b/meta-oe/recipes-dbs/mysql/mariadb.inc
+> @@ -25,7 +25,7 @@ SRC_URI =3D "https://archive.mariadb.org/${BP}/source/$=
+{BP}.tar.gz \
+>             file://0001-Add-missing-includes-cstdint-and-cstdio.patch \
+>            "
+>  SRC_URI:append:libc-musl =3D " file://ppc-remove-glibc-dep.patch"
+> -SRC_URI[sha256sum] =3D "ce8dac125568cc5f40da74c17212767c92d8faed81066580=
+b526a485a591127d"
+> +SRC_URI[sha256sum] =3D "4c9484048d4d0c71dd076ab33fc2a9ce8510bdf762886de0=
+d63fe52496f3dbbb"
 >
->    https://git.openembedded.org/meta-openembedded kirkstone-next
+>  UPSTREAM_CHECK_URI =3D "https://github.com/MariaDB/server/releases"
 >
-> for you to fetch changes up to 529620141e773080a6a7be4615fb7993204af883:
+> diff --git a/meta-oe/recipes-dbs/mysql/mariadb_10.11.4.bb b/meta-oe/recip=
+es-dbs/mysql/mariadb_10.11.5.bb
+> similarity index 100%
+> rename from meta-oe/recipes-dbs/mysql/mariadb_10.11.4.bb
+> rename to meta-oe/recipes-dbs/mysql/mariadb_10.11.5.bb
+> --
+> 2.25.1
 >
->    nodejs: upgrade 16.20.1 -> 16.20.2 (2023-08-11 10:32:04 -0400)
 >
-> ----------------------------------------------------------------
-> Beniamin Sandu (1):
->        lmsensors: do not pull in unneeded perl modules for run-time
-> dependencies
->
-> Frieder Schrempf (1):
->        python3-can: Add missing runtime dependencies
->
-> Polampalli, Archana (1):
->        nodejs: upgrade 16.20.1 -> 16.20.2
->
->   meta-oe/recipes-bsp/lm_sensors/lmsensors_3.6.0.bb | 5 +++--
->   meta-oe/recipes-devtools/nodejs/{nodejs_16.20.1.bb =3D>
-> nodejs_16.20.2.bb} | 2 +-
->   meta-python/recipes-devtools/python/python3-can_4.0.0.bb | 7 +++++--
->   3 files changed, 9 insertions(+), 5 deletions(-)
->   rename meta-oe/recipes-devtools/nodejs/{nodejs_16.20.1.bb =3D>
-> nodejs_16.20.2.bb} (98%)
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#104410): https://lists.openembedded.org/g/openembedde=
+d-devel/message/104410
+> Mute This Topic: https://lists.openembedded.org/mt/100774345/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
+aj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
 >
 
