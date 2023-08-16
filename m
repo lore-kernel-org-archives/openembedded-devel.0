@@ -1,94 +1,136 @@
-Return-Path: <pawel.langowski@3mdeb.com>
+Return-Path: <tymoteusz.burak@3mdeb.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E69A0C001DF
-	for <webhook@archiver.kernel.org>; Wed, 16 Aug 2023 08:50:57 +0000 (UTC)
-Received: from 8.mo550.mail-out.ovh.net (8.mo550.mail-out.ovh.net [178.33.110.239])
- by mx.groups.io with SMTP id smtpd.web10.156774.1692175848774455601
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0E3E3C001E0
+	for <webhook@archiver.kernel.org>; Wed, 16 Aug 2023 09:04:28 +0000 (UTC)
+Received: from 4.mo581.mail-out.ovh.net (4.mo581.mail-out.ovh.net [178.32.122.254])
+ by mx.groups.io with SMTP id smtpd.web11.156653.1692176666289068797
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 16 Aug 2023 01:50:49 -0700
+ Wed, 16 Aug 2023 02:04:27 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=softfail (domain: 3mdeb.com, ip: 178.33.110.239, mailfrom: pawel.langowski@3mdeb.com)
-Received: from director1.ghost.mail-out.ovh.net (unknown [10.108.16.60])
-	by mo550.mail-out.ovh.net (Postfix) with ESMTP id 1B60126072
-	for <openembedded-devel@lists.openembedded.org>; Wed, 16 Aug 2023 08:50:47 +0000 (UTC)
-Received: from ghost-submission-6684bf9d7b-m5lsp (unknown [10.110.103.93])
-	by director1.ghost.mail-out.ovh.net (Postfix) with ESMTPS id 752AE1FE5B;
-	Wed, 16 Aug 2023 08:50:46 +0000 (UTC)
-Received: from 3mdeb.com ([37.59.142.106])
-	by ghost-submission-6684bf9d7b-m5lsp with ESMTPSA
-	id 7uilDOaN3GToRwAAHf3dkw
-	(envelope-from <pawel.langowski@3mdeb.com>); Wed, 16 Aug 2023 08:50:46 +0000
-Authentication-Results: garm.ovh; auth=pass (GARM-106R006aeff0e96-7659-4eae-8f8e-250056539298,
-                    93A237E87ED1339E13AED04D535165A97E4753C9) smtp.auth=pawel.langowski@3mdeb.com
+ dkim=none (message not signed); spf=softfail (domain: 3mdeb.com, ip: 178.32.122.254, mailfrom: tymoteusz.burak@3mdeb.com)
+Received: from director1.ghost.mail-out.ovh.net (unknown [10.109.156.39])
+	by mo581.mail-out.ovh.net (Postfix) with ESMTP id 7ABDC26E7D
+	for <openembedded-devel@lists.openembedded.org>; Wed, 16 Aug 2023 09:04:24 +0000 (UTC)
+Received: from ghost-submission-6684bf9d7b-b7mzq (unknown [10.110.115.95])
+	by director1.ghost.mail-out.ovh.net (Postfix) with ESMTPS id D81BB1FDF7;
+	Wed, 16 Aug 2023 09:04:23 +0000 (UTC)
+Received: from 3mdeb.com ([37.59.142.97])
+	by ghost-submission-6684bf9d7b-b7mzq with ESMTPSA
+	id 3/lyKReR3GQFRAMA1D9fxQ
+	(envelope-from <tymoteusz.burak@3mdeb.com>); Wed, 16 Aug 2023 09:04:23 +0000
+Authentication-Results: garm.ovh; auth=pass (GARM-97G0027c83e0bb-43d9-4e05-8024-17b0822a5b40,
+                    C01A98C016A9AA6442186A814A8EC09D4D6C7996) smtp.auth=tymoteusz.burak@3mdeb.com
 X-OVh-ClientIp: 213.192.77.249
-From: Pawel Langowski <pawel.langowski@3mdeb.com>
+From: Tymoteusz Burak <tymoteusz.burak@3mdeb.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: piotr.krol@3mdeb.com,
 	tomasz.zyjewski@3mdeb.com
-Subject: [meta-oe] [PATCH] recipes-extended: add qcbor recipe
-Date: Wed, 16 Aug 2023 10:50:27 +0200
-Message-ID: <20230816085042.1399670-1-pawel.langowski@3mdeb.com>
+Subject: [meta-oe][PATCH] ttf-google-fira: add recipe
+Date: Wed, 16 Aug 2023 11:03:45 +0200
+Message-ID: <20230816090345.158299-1-tymoteusz.burak@3mdeb.com>
 X-Mailer: git-send-email 2.41.0
 MIME-Version: 1.0
-X-Ovh-Tracer-Id: 10225141479582053017
+X-Ovh-Tracer-Id: 10455106539097673881
 X-VR-SPAMSTATE: OK
 X-VR-SPAMSCORE: 0
-X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrgedviedruddtledgtdelucetufdoteggodetrfdotffvucfrrhhofhhilhgvmecuqfggjfdpvefjgfevmfevgfenuceurghilhhouhhtmecuhedttdenucenucfjughrpefhvfevufffkffoggfgsedtkeertdertddtnecuhfhrohhmpefrrgifvghlucfnrghnghhofihskhhiuceophgrfigvlhdrlhgrnhhgohifshhkihesfehmuggvsgdrtghomheqnecuggftrfgrthhtvghrnhepkeefhefhkeffieetjedvffettdeigfeufeehgefgteejudfgfeelfeeiteeggfejnecuffhomhgrihhnpehgihhthhhusgdrtghomhenucfkphepuddvjedrtddrtddruddpvddufedrudelvddrjeejrddvgeelpdefjedrheelrddugedvrddutdeinecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehinhgvthepuddvjedrtddrtddruddpmhgrihhlfhhrohhmpeeophgrfigvlhdrlhgrnhhgohifshhkihesfehmuggvsgdrtghomheqpdhnsggprhgtphhtthhopedupdhrtghpthhtohepohhpvghnvghmsggvugguvgguqdguvghvvghlsehlihhsthhsrdhophgvnhgvmhgsvgguuggvugdrohhrghdpoffvtefjohhsthepmhhoheehtddpmhhouggvpehsmhhtphhouhht
+X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrgedviedruddtledgudduucetufdoteggodetrfdotffvucfrrhhofhhilhgvmecuqfggjfdpvefjgfevmfevgfenuceurghilhhouhhtmecuhedttdenucenucfjughrpefhvfevufffkffoggfgsedtkeertdertddtnecuhfhrohhmpefvhihmohhtvghushiiuceuuhhrrghkuceothihmhhothgvuhhsiidrsghurhgrkhesfehmuggvsgdrtghomheqnecuggftrfgrthhtvghrnhepudektdegjeeifeejfffghfevgeehueekuedtgedtvdeiffeftdekveevtdeffeegnecuffhomhgrihhnpehgohhoghhlvgdrtghomhdpghhithhhuhgsrdgtohhmnecukfhppeduvdejrddtrddtrddupddvudefrdduledvrdejjedrvdegledpfeejrdehledrudegvddrleejnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehinhgvthepuddvjedrtddrtddruddpmhgrihhlfhhrohhmpeeothihmhhothgvuhhsiidrsghurhgrkhesfehmuggvsgdrtghomheqpdhnsggprhgtphhtthhopedupdhrtghpthhtohepohhpvghnvghmsggvugguvgguqdguvghvvghlsehlihhsthhsrdhophgvnhgvmhgsvgguuggvugdrohhrghdpoffvtefjohhsthepmhhoheekuddpmhhouggvpehsmhhtphhouhht
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 16 Aug 2023 08:50:57 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104421
+ <openembedded-devel@lists.openembedded.org>; Wed, 16 Aug 2023 09:04:28 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104422
 
+Signed-off-by: Tymoteusz Burak <tymoteusz.burak@3mdeb.com>
 ---
- meta-oe/recipes-extended/qcbor/qcbor_git.bb | 32 +++++++++++++++++++++
- 1 file changed, 32 insertions(+)
- create mode 100644 meta-oe/recipes-extended/qcbor/qcbor_git.bb
+ .../ttf-fonts/ttf-google-fira.bb              | 54 +++++++++++++++++++
+ 1 file changed, 54 insertions(+)
+ create mode 100644 meta-oe/recipes-graphics/ttf-fonts/ttf-google-fira.bb
 
-diff --git a/meta-oe/recipes-extended/qcbor/qcbor_git.bb b/meta-oe/recipe=
-s-extended/qcbor/qcbor_git.bb
+diff --git a/meta-oe/recipes-graphics/ttf-fonts/ttf-google-fira.bb b/meta=
+-oe/recipes-graphics/ttf-fonts/ttf-google-fira.bb
 new file mode 100644
-index 000000000000..6e87458c3a3e
+index 000000000000..b330f40387bb
 --- /dev/null
-+++ b/meta-oe/recipes-extended/qcbor/qcbor_git.bb
-@@ -0,0 +1,32 @@
-+DESCRIPTION =3D " \
-+    QCBOR is a powerful, commercial-quality CBOR encoder/decoder that \
-+    implements these RFCs: RFC8949, RFC7049, RFC8742, RFC8943 \
++++ b/meta-oe/recipes-graphics/ttf-fonts/ttf-google-fira.bb
+@@ -0,0 +1,54 @@
++SUMMARY =3D "Google Fira Fonts- TTF Edition"
++HOMEPAGE =3D "https://fonts.google.com/?query=3Dfira"
++LICENSE =3D "OFL-1.1"
++LIC_FILES_CHKSUM =3D " \
++    file://${S}/firamono/OFL.txt;md5=3D0373cf792d4b95c61399b94c02702892 =
+\
++    file://${S}/firacode/OFL.txt;md5=3Dc75ca55aa0a5809a854d87db2a8ebf23 =
+\
++    file://${S}/firasans/OFL.txt;md5=3Dde28deb2f8c1f23fd4d6918113ac3ddd =
+\
++    file://${S}/firasanscondensed/OFL.txt;md5=3Dde28deb2f8c1f23fd4d69181=
+13ac3ddd \
++    file://${S}/firasansextracondensed/OFL.txt;md5=3Dde28deb2f8c1f23fd4d=
+6918113ac3ddd \
 +"
++SRCREV =3D "47a6c224b3e0287b2e48e3ffef8c9ce2ca4931f4"
 +
-+HOMEPAGE =3D "https://github.com/laurencelundblade/QCBOR"
++SRC_URI =3D "git://github.com/google/fonts.git;protocol=3Dhttps;branch=3D=
+main;subpath=3Dofl/firamono \
++           git://github.com/google/fonts.git;protocol=3Dhttps;branch=3Dm=
+ain;subpath=3Dofl/firacode \
++           git://github.com/google/fonts.git;protocol=3Dhttps;branch=3Dm=
+ain;subpath=3Dofl/firasans \
++           git://github.com/google/fonts.git;protocol=3Dhttps;branch=3Dm=
+ain;subpath=3Dofl/firasanscondensed \
++           git://github.com/google/fonts.git;protocol=3Dhttps;branch=3Dm=
+ain;subpath=3Dofl/firasansextracondensed"
 +
-+LICENSE =3D "BSD-3-Clause"
-+LIC_FILES_CHKSUM =3D "file://README.md;beginline=3D442;endline=3D463;md5=
-=3Db55643261d6d221dac2b7a395105af62"
++S =3D "${WORKDIR}"
 +
-+SRC_URI =3D "git://github.com/laurencelundblade/QCBOR;protocol=3Dhttps;b=
-ranch=3Dmaster"
-+
-+SRCREV =3D "44754f738c6534a4304a83d4c6e97b3d3193d887"
-+
-+S =3D "${WORKDIR}/git"
-+
-+INSANE_SKIP:${PN}-dev +=3D "ldflags"
-+
-+inherit pkgconfig
-+
-+CFLAGS +=3D " \
-+    -DUSEFULBUF_DISABLE_ALL_FLOAT \
-+"
-+
-+do_install(){
-+    install -d ${D}${libdir}
-+    install -m 755 ${S}/libqcbor.a ${D}${libdir}/
-+    install -d ${D}${includedir}/qcbor
-+    install -m 644 ${S}/inc/*.h ${D}${includedir}
-+    install -m 644 ${S}/inc/qcbor/*.h ${D}${includedir}/qcbor
++do_install:append() {
++    install -d ${D}${datadir}/fonts/truetype/
++    find ${S} -path 'fira*/*.tt[cf]' -exec install -m 0644 {} ${D}${data=
+dir}/fonts/truetype/{} \;
++    install -D -m 0644 ${S}/firamono/OFL.txt ${D}${datadir}/licenses/${P=
+N}mono/OFL.txt
++    install -D -m 0644 ${S}/firacode/OFL.txt ${D}${datadir}/licenses/${P=
+N}code/OFL.txt
++    install -D -m 0644 ${S}/firasans/OFL.txt ${D}${datadir}/licenses/${P=
+N}sans/OFL.txt
++    install -D -m 0644 ${S}/firasanscondensed/OFL.txt ${D}${datadir}/lic=
+enses/${PN}sanscondensed/OFL.txt
++    install -D -m 0644 ${S}/firasansextracondensed/OFL.txt ${D}${datadir=
+}/licenses/${PN}sansextracondensed/OFL.txt
 +}
 +
++PACKAGES =3D+ "${PN}-mono ${PN}-code ${PN}-sans ${PN}-sanscondensed ${PN=
+}-sansextracondensed"
++
++FILES:${PN}-mono +=3D " \
++                    ${datadir}/fonts/truetype/FiraMono* \
++                    ${datadir}/licenses/${PN}mono/OFL.txt \
++                "
++FILES:${PN}-code +=3D " \
++                    ${datadir}/fonts/truetype/FiraCode* \
++                    ${datadir}/licenses/${PN}code/OFL.txt \
++                "
++FILES:${PN}-sans +=3D " \
++                    ${datadir}/fonts/truetype/FiraSans-* \
++                    ${datadir}/licenses/${PN}sans/OFL.txt \
++                "
++FILES:${PN}-sanscondensed +=3D " \
++                            ${datadir}/fonts/truetype/FiraSansCondensed-=
+* \
++                            ${datadir}/licenses/${PN}sanscondensed/OFL.t=
+xt \
++                        "
++FILES:${PN}-sansextracondensed +=3D " \
++                                    ${datadir}/fonts/truetype/FiraSansEx=
+traCondensed-* \
++                                    ${datadir}/licenses/${PN}sansextraco=
+ndensed/OFL.txt \
++                                 "
++
++require ttf.inc
 --=20
 2.41.0
 
