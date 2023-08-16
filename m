@@ -1,228 +1,141 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <chaitanya.vadrevu@ni.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 42813EB64DD
-	for <webhook@archiver.kernel.org>; Wed, 16 Aug 2023 16:52:00 +0000 (UTC)
-Received: from mail-pf1-f182.google.com (mail-pf1-f182.google.com [209.85.210.182])
- by mx.groups.io with SMTP id smtpd.web11.165767.1692204718731225769
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BAF4FC07E8A
+	for <webhook@archiver.kernel.org>; Wed, 16 Aug 2023 18:35:10 +0000 (UTC)
+Received: from NAM10-MW2-obe.outbound.protection.outlook.com (NAM10-MW2-obe.outbound.protection.outlook.com [40.107.94.97])
+ by mx.groups.io with SMTP id smtpd.web11.168357.1692210905532472429
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 16 Aug 2023 09:51:58 -0700
+ Wed, 16 Aug 2023 11:35:05 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20221208 header.b=V15ImzW0;
- spf=pass (domain: gmail.com, ip: 209.85.210.182, mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f182.google.com with SMTP id d2e1a72fcca58-687ca37628eso6400782b3a.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 16 Aug 2023 09:51:58 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1692204718; x=1692809518;
-        h=in-reply-to:autocrypt:from:references:cc:to:content-language
-         :subject:user-agent:mime-version:date:message-id:from:to:cc:subject
-         :date:message-id:reply-to;
-        bh=EUlVMqLb5dIT0cdA4RTQZEQrzN/7qX/i7iFJNELtFn0=;
-        b=V15ImzW0AMUZcdA5qqInO8b2tmg/3dhpZ6Ufs8huSjQccciF2+jOe6+HwUNhCPusmN
-         /NfkybwgvRgH71Q/N1uMExQDKMdejX9iy6/9GFvKL4j4q/RrgvM4hq6DjulI+eTO6Hce
-         5zJFBbMWQELvWM5a4dDedmUAss34hhSBkI3zgivBaBOqV4j5KMIFfur4rMKH+cjrVyZ1
-         GlaEXdO130/gKla45YGyrk1q3bNGaJpA8r6owYkWclyqdfqPP6S86JbWe4TvT0TLlRLA
-         zY4PWUvR3tx102veddGEW6myRu/INB08FNXk4kaZxsf7GoOzoKPu18LoZaWRBLn/ZQMA
-         HRtw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1692204718; x=1692809518;
-        h=in-reply-to:autocrypt:from:references:cc:to:content-language
-         :subject:user-agent:mime-version:date:message-id:x-gm-message-state
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=EUlVMqLb5dIT0cdA4RTQZEQrzN/7qX/i7iFJNELtFn0=;
-        b=T8lL0k5gCOheqAgY9fW0HifuSqKsh0ezej18UC6uA5KfjAdqyN7KcljrF50LQ1IqyP
-         6+tGjnrGiv47b6j/3BJQ5LN9shhYmnVpydgvuUpAJwjr0v5q2dZNh/M6InbqlPvOBfRl
-         IxGm2GHODNhcbF97dCR9cNXaQr75cW/nKaBatsXeNeSdwwJ41oM7DQBtwsbb5fTe19Og
-         3lRzh6QIW+ePDe46TMYH+uugosnUsMZkGCa48DPwf63VEkoqkbPUdQrpNfoiC03ZvLQ1
-         48zA2+ffag64iEfIfSTxn2Dm4J7mI02D6Unqlm2Df06ttSOVQj96gngFVpV+CNQTIdLr
-         JI3A==
-X-Gm-Message-State: AOJu0YzlHST646tFHlAUOJjQ3GJLjxC4aNSNTCq52yILQETJy+Ul+3sA
-	HrhcVD7+cSsmy8jrhz1qz4E=
-X-Google-Smtp-Source: AGHT+IHAzHVT/ldWRUWDBnPU6srkouoEs4RSLKqJKvrnwVC2uvxRZPB8CDh2XyUwizEbG0ZAU5stlA==
-X-Received: by 2002:a05:6a20:8e02:b0:138:1980:1837 with SMTP id y2-20020a056a208e0200b0013819801837mr3678288pzj.13.1692204717968;
-        Wed, 16 Aug 2023 09:51:57 -0700 (PDT)
-Received: from ?IPV6:2601:646:9100:2cb0:b192:e884:f5f4:7725? ([2601:646:9100:2cb0:b192:e884:f5f4:7725])
-        by smtp.gmail.com with ESMTPSA id g15-20020aa7874f000000b0068875a862adsm2215119pfo.98.2023.08.16.09.51.57
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 16 Aug 2023 09:51:57 -0700 (PDT)
-Message-ID: <276501b7-8461-43bb-9473-bab1ed07397d@gmail.com>
-Date: Wed, 16 Aug 2023 09:51:56 -0700
+ dkim=fail reason="dkim: body hash did not verify" header.i=@ni.com header.s=selector1 header.b=NBS7dvvg;
+ spf=pass (domain: ni.com, ip: 40.107.94.97, mailfrom: chaitanya.vadrevu@ni.com)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=NOo0ejUI65TNxNbpdDe3oQ7PWxsHsQoIbKHYFCvtUqUJYwGNM/Y+2U7UOkXtX1Bn82WUb2sHK7gqXxcsCXL4Ou5GLXErC/7sQKAwgETEUFzee33FUHSoVcIy4jz2K204wI1F+t4A8iDnVvPMXBMLsw1REzlMJ9EIL5eeDX4QGKj3BV5tuFo2Ru9y3QAeygatlE7gzmy3d9fAKFa/OuHkTakKwHY+BUJUaVQgwu8WcStq1uoMVOgBGrbfgI9C5av14RujKa8zC7Iiz6NvgI0DTglYvsgBFOnJ7s/Q20iJ8TtsIEDuTpGe+o7Nv1pHJCt4eR1AGwrsDv4ujd64TaBvHg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=EAcRkUdaCSYEcU7cBpxXBQMZdtMjklIQWDyBKxBazLg=;
+ b=isJAKcZ2yIOMbu6dIi/o0dqNs3+NepQVYuCXMs98y8DZOi1Ri7m/CnvOaIgf/OXXxnMiXTh2SaPU3zCJkULS+ejp7Jz3BfN/Abx/S6IPWe+xYR7IRFwHd2yM2IHOWAjb353+MCrLU7ydWMiJfoEwNXuJTLJoq6TVo5QU3f2XC07HxGssXIrEas6c9dxdzNjzml/au/OQqoE7zyDJQUC7SolPvS5xhXu+VoYCFggEscnIa/+iblhU+q/54C9jtgUmrr6SkdUXipKDbeGuRw6058klvzXyY49exKob2c+LwteF+5lZwOdmpTZ1ap22ZfiCyPzLD22R8xUsZoz9QpQ89g==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 130.164.94.74) smtp.rcpttodomain=lists.openembedded.org smtp.mailfrom=ni.com;
+ dmarc=pass (p=none sp=none pct=100) action=none header.from=ni.com; dkim=none
+ (message not signed); arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ni.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=EAcRkUdaCSYEcU7cBpxXBQMZdtMjklIQWDyBKxBazLg=;
+ b=NBS7dvvgCsdv/GHKH6D05pXlXTasJZldg1709cvJgFp0d/dgoMK9brqRXMeGGaa6kShcmoBA4PNBXpMcBWiNc7mJeckZ9DoqORexPbZHH3eAWpDybv5fF4U6RNVKgfT4GgbvBe++8gtbHR129ybuX0tfMHpMJ9tK8wIYeudg/qM=
+Received: from SA0PR13CA0010.namprd13.prod.outlook.com (2603:10b6:806:130::15)
+ by MN2PR04MB7133.namprd04.prod.outlook.com (2603:10b6:208:1f0::24) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6678.30; Wed, 16 Aug
+ 2023 18:35:02 +0000
+Received: from SN1NAM02FT0056.eop-nam02.prod.protection.outlook.com
+ (2603:10b6:806:130:cafe::34) by SA0PR13CA0010.outlook.office365.com
+ (2603:10b6:806:130::15) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6699.14 via Frontend
+ Transport; Wed, 16 Aug 2023 18:35:02 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 130.164.94.74)
+ smtp.mailfrom=ni.com; dkim=none (message not signed) header.d=none;dmarc=pass
+ action=none header.from=ni.com;
+Received-SPF: Pass (protection.outlook.com: domain of ni.com designates
+ 130.164.94.74 as permitted sender) receiver=protection.outlook.com;
+ client-ip=130.164.94.74; helo=us-aus-excas-p2.ni.corp.natinst.com; pr=C
+Received: from us-aus-excas-p2.ni.corp.natinst.com (130.164.94.74) by
+ SN1NAM02FT0056.mail.protection.outlook.com (10.97.4.111) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.6699.15 via Frontend Transport; Wed, 16 Aug 2023 18:35:01 +0000
+Received: from us-aus-excas-p1.ni.corp.natinst.com (130.164.68.17) by
+ us-aus-excas-p2.ni.corp.natinst.com (130.164.68.18) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1118.26; Wed, 16 Aug 2023 13:35:01 -0500
+Received: from cvadrevu-p620.amer.corp.natinst.com (172.18.68.32) by
+ us-aus-excas-p1.ni.corp.natinst.com (130.164.68.17) with Microsoft SMTP
+ Server id 15.2.1118.26 via Frontend Transport; Wed, 16 Aug 2023 13:35:01
+ -0500
+From: Chaitanya Vadrevu <chaitanya.vadrevu@ni.com>
+To: <openembedded-devel@lists.openembedded.org>, <raj.khem@gmail.com>
+CC: Chaitanya Vadrevu <chaitanya.vadrevu@ni.com>
+Subject: [meta-oe][PATCH v2] recipes-bsp: Add bolt
+Date: Wed, 16 Aug 2023 13:34:37 -0500
+Message-ID: <20230816183437.1903299-1-chaitanya.vadrevu@ni.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [oe] [PATCH] recipes-extended: add qcbor recipe
-Content-Language: en-US
-To: Pawel Langowski <pawel.langowski@3mdeb.com>,
- openembedded-devel@lists.openembedded.org
-Cc: piotr.krol@3mdeb.com, tomasz.zyjewski@3mdeb.com
-References: <20230816084754.1399376-1-pawel.langowski@3mdeb.com>
-From: Khem Raj <raj.khem@gmail.com>
-Autocrypt: addr=raj.khem@gmail.com; keydata=
- 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
-In-Reply-To: <20230816084754.1399376-1-pawel.langowski@3mdeb.com>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="------------RDP2gXJVZWKd0nSNBchcHksb"
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SN1NAM02FT0056:EE_|MN2PR04MB7133:EE_
+X-MS-Office365-Filtering-Correlation-Id: 7ae222e1-b5fb-4c80-7594-08db9e878071
+x-ni-monitor: EOP Exclude NI Domains ETR True
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 
+	LwpRMQ7OhjIt+DMJ6DguAZUSmLw6ykRVR4xFelfPJilL7UAyUAvSgfYdwiZ0IgtUael6qSqgQzSm+HO9yCe4+0KIqJQaP3DYkSseQbvm4T9L5n2Fq3f7fuj54eO/wn/PW1Zrby25GeUyMboXW85egC2KWn1oT8ANGnDaIkaZ/n01qxN9yhXcvqrV7QaPiN8ByyeEk/UPgV/BDbMjfajjuEDjsMmct+ckClQQuO1zBf7hrNjgovg81l6Q/oYDbR9Lj0Kwt3DDgOTrldl/lAD0vfx5VgpXzeGCfOrdyYguYo/wQp+fagoZ89LZ/fqx4meV9xUzbS0/gKa4RQllRLOyg1zAc/ZQtW0nN8ESITGvnvOktYnWoLDaEGUu6OrJkciDxyO59cgfdq43x3NQiphPR65Xjj46phcjJBaB8/r2k0LWrEf19eoQJBmDvQzAj9HXo7d1DQOREhep/lAGbe5fZVs+EqyNhXxDp4zBSy8FRyBV+ROP9XGUADvBdpgpsHJfoUs5vdk9LVwKX/eqEdEAnT5UJ5oJey0CtP2XjOf7qWfK/VKobnsnvnT6RVFnJeJ452DmRGDV5kLovJIDSwAqixiWZ/1JKCUTGM6JcSY6EzYlKCkhlg8oG/RmajrG2cEhqJSsR5BkLLE127uHdebHrlMNAz6BCoSm+Rpdr8uOZoog/ChWKxdxqaRtGPWazZXm+rsrfXLkeSZXESNwhh1y043rdHZJAXfdMr4djjuP0omGIGSPz6jhXvzZOz26KDPi
+X-Forefront-Antispam-Report: 
+	CIP:130.164.94.74;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:us-aus-excas-p2.ni.corp.natinst.com;PTR:ErrorRetry;CAT:NONE;SFS:(13230031)(4636009)(396003)(346002)(39860400002)(376002)(136003)(186009)(451199024)(1800799009)(82310400011)(46966006)(40470700004)(36840700001)(36756003)(86362001)(40460700003)(40480700001)(83380400001)(8936002)(4326008)(8676002)(5660300002)(2906002)(41300700001)(1076003)(26005)(6666004)(2616005)(44832011)(36860700001)(47076005)(336012)(110136005)(316002)(478600001)(82740400003)(81166007)(356005)(70206006)(70586007)(36900700001);DIR:OUT;SFP:1102;
+X-OriginatorOrg: ni.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Aug 2023 18:35:01.5281
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 7ae222e1-b5fb-4c80-7594-08db9e878071
+X-MS-Exchange-CrossTenant-Id: 87ba1f9a-44cd-43a6-b008-6fdb45a5204e
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=87ba1f9a-44cd-43a6-b008-6fdb45a5204e;Ip=[130.164.94.74];Helo=[us-aus-excas-p2.ni.corp.natinst.com]
+X-MS-Exchange-CrossTenant-AuthSource: 
+	SN1NAM02FT0056.eop-nam02.prod.protection.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR04MB7133
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 16 Aug 2023 16:52:00 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104438
+ <openembedded-devel@lists.openembedded.org>; Wed, 16 Aug 2023 18:35:10 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104439
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------RDP2gXJVZWKd0nSNBchcHksb
-Content-Type: multipart/mixed; boundary="------------pmnqWCEuEgBqf8ZGVDII38rv";
- protected-headers="v1"
-From: Khem Raj <raj.khem@gmail.com>
-To: Pawel Langowski <pawel.langowski@3mdeb.com>,
- openembedded-devel@lists.openembedded.org
-Cc: piotr.krol@3mdeb.com, tomasz.zyjewski@3mdeb.com
-Message-ID: <276501b7-8461-43bb-9473-bab1ed07397d@gmail.com>
-Subject: Re: [oe] [PATCH] recipes-extended: add qcbor recipe
-References: <20230816084754.1399376-1-pawel.langowski@3mdeb.com>
-In-Reply-To: <20230816084754.1399376-1-pawel.langowski@3mdeb.com>
+bolt is used for managing thunderbolt devices.
 
---------------pmnqWCEuEgBqf8ZGVDII38rv
-Content-Type: multipart/mixed; boundary="------------LFfCgq4CGyBT8A6hj37P0c07"
+Signed-off-by: Chaitanya Vadrevu <chaitanya.vadrevu@ni.com>
+---
+Changes in v2:
+ * Removed redundant cmake-native from DEPENDS
+ * Set REQUIRED_DISTRO_FEATURES to polkit as polkit is always needed for
+   bolt
 
---------------LFfCgq4CGyBT8A6hj37P0c07
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: base64
+ meta-oe/recipes-bsp/bolt/bolt_0.9.5.bb | 19 +++++++++++++++++++
+ 1 file changed, 19 insertions(+)
+ create mode 100644 meta-oe/recipes-bsp/bolt/bolt_0.9.5.bb
 
-DQpTdWJqZWN0IGNhbiBiZSBpbXByb3ZlZCBhcyBwZXIuDQoNCmh0dHBzOi8vd3d3Lm9wZW5l
-bWJlZGRlZC5vcmcvd2lraS9Ib3dfdG9fc3VibWl0X2FfcGF0Y2hfdG9fT3BlbkVtYmVkZGVk
-DQoNCk9uIDgvMTYvMjMgMTo0NyBBTSwgUGF3ZWwgTGFuZ293c2tpIHdyb3RlOg0KPiAtLS0N
-Cj4gICBtZXRhLW9lL3JlY2lwZXMtZXh0ZW5kZWQvcWNib3IvcWNib3JfZ2l0LmJiIHwgMzIg
-KysrKysrKysrKysrKysrKysrKysrDQo+ICAgMSBmaWxlIGNoYW5nZWQsIDMyIGluc2VydGlv
-bnMoKykNCj4gICBjcmVhdGUgbW9kZSAxMDA2NDQgbWV0YS1vZS9yZWNpcGVzLWV4dGVuZGVk
-L3FjYm9yL3FjYm9yX2dpdC5iYg0KPiANCj4gZGlmZiAtLWdpdCBhL21ldGEtb2UvcmVjaXBl
-cy1leHRlbmRlZC9xY2Jvci9xY2Jvcl9naXQuYmIgYi9tZXRhLW9lL3JlY2lwZXMtZXh0ZW5k
-ZWQvcWNib3IvcWNib3JfZ2l0LmJiDQo+IG5ldyBmaWxlIG1vZGUgMTAwNjQ0DQo+IGluZGV4
-IDAwMDAwMDAwMDAwMC4uNmU4NzQ1OGMzYTNlDQo+IC0tLSAvZGV2L251bGwNCj4gKysrIGIv
-bWV0YS1vZS9yZWNpcGVzLWV4dGVuZGVkL3FjYm9yL3FjYm9yX2dpdC5iYg0KPiBAQCAtMCww
-ICsxLDMyIEBADQo+ICtERVNDUklQVElPTiA9ICIgXA0KPiArICAgIFFDQk9SIGlzIGEgcG93
-ZXJmdWwsIGNvbW1lcmNpYWwtcXVhbGl0eSBDQk9SIGVuY29kZXIvZGVjb2RlciB0aGF0IFwN
-Cj4gKyAgICBpbXBsZW1lbnRzIHRoZXNlIFJGQ3M6IFJGQzg5NDksIFJGQzcwNDksIFJGQzg3
-NDIsIFJGQzg5NDMgXA0KPiArIg0KPiArDQo+ICtIT01FUEFHRSA9ICJodHRwczovL2dpdGh1
-Yi5jb20vbGF1cmVuY2VsdW5kYmxhZGUvUUNCT1IiDQo+ICsNCj4gK0xJQ0VOU0UgPSAiQlNE
-LTMtQ2xhdXNlIg0KPiArTElDX0ZJTEVTX0NIS1NVTSA9ICJmaWxlOi8vUkVBRE1FLm1kO2Jl
-Z2lubGluZT00NDI7ZW5kbGluZT00NjM7bWQ1PWI1NTY0MzI2MWQ2ZDIyMWRhYzJiN2EzOTUx
-MDVhZjYyIg0KPiArDQo+ICtTUkNfVVJJID0gImdpdDovL2dpdGh1Yi5jb20vbGF1cmVuY2Vs
-dW5kYmxhZGUvUUNCT1I7cHJvdG9jb2w9aHR0cHM7YnJhbmNoPW1hc3RlciINCj4gKw0KPiAr
-U1JDUkVWID0gIjQ0NzU0ZjczOGM2NTM0YTQzMDRhODNkNGM2ZTk3YjNkMzE5M2Q4ODciDQo+
-ICsNCj4gK1MgPSAiJHtXT1JLRElSfS9naXQiDQo+ICsNCj4gK0lOU0FORV9TS0lQOiR7UE59
-LWRldiArPSAibGRmbGFncyINCg0Kd2h5IGlzIHRoaXMgbmVlZGVkLg0KDQo+ICsNCj4gK2lu
-aGVyaXQgcGtnY29uZmlnDQo+ICsNCj4gK0NGTEFHUyArPSAiIFwNCj4gKyAgICAtRFVTRUZV
-TEJVRl9ESVNBQkxFX0FMTF9GTE9BVCBcDQo+ICsiDQo+ICsNCj4gK2RvX2luc3RhbGwoKXsN
-Cj4gKyAgICBpbnN0YWxsIC1kICR7RH0ke2xpYmRpcn0NCj4gKyAgICBpbnN0YWxsIC1tIDc1
-NSAke1N9L2xpYnFjYm9yLmEgJHtEfSR7bGliZGlyfS8NCj4gKyAgICBpbnN0YWxsIC1kICR7
-RH0ke2luY2x1ZGVkaXJ9L3FjYm9yDQo+ICsgICAgaW5zdGFsbCAtbSA2NDQgJHtTfS9pbmMv
-Ki5oICR7RH0ke2luY2x1ZGVkaXJ9DQo+ICsgICAgaW5zdGFsbCAtbSA2NDQgJHtTfS9pbmMv
-cWNib3IvKi5oICR7RH0ke2luY2x1ZGVkaXJ9L3FjYm9yDQo+ICt9DQo+ICsNCj4gDQo+IA0K
-PiANCj4gLT0tPS09LT0tPS09LT0tPS09LT0tPS0NCj4gTGlua3M6IFlvdSByZWNlaXZlIGFs
-bCBtZXNzYWdlcyBzZW50IHRvIHRoaXMgZ3JvdXAuDQo+IFZpZXcvUmVwbHkgT25saW5lICgj
-MTA0NDIwKTogaHR0cHM6Ly9saXN0cy5vcGVuZW1iZWRkZWQub3JnL2cvb3BlbmVtYmVkZGVk
-LWRldmVsL21lc3NhZ2UvMTA0NDIwDQo+IE11dGUgVGhpcyBUb3BpYzogaHR0cHM6Ly9saXN0
-cy5vcGVuZW1iZWRkZWQub3JnL210LzEwMDc3NTcxNS8xOTk3OTE0DQo+IEdyb3VwIE93bmVy
-OiBvcGVuZW1iZWRkZWQtZGV2ZWwrb3duZXJAbGlzdHMub3BlbmVtYmVkZGVkLm9yZw0KPiBV
-bnN1YnNjcmliZTogaHR0cHM6Ly9saXN0cy5vcGVuZW1iZWRkZWQub3JnL2cvb3BlbmVtYmVk
-ZGVkLWRldmVsL3Vuc3ViIFtyYWoua2hlbUBnbWFpbC5jb21dDQo+IC09LT0tPS09LT0tPS09
-LT0tPS09LT0tDQo+IA0K
---------------LFfCgq4CGyBT8A6hj37P0c07
-Content-Type: application/pgp-keys; name="OpenPGP_0xBB053355919D3314.asc"
-Content-Disposition: attachment; filename="OpenPGP_0xBB053355919D3314.asc"
-Content-Description: OpenPGP public key
-Content-Transfer-Encoding: quoted-printable
+diff --git a/meta-oe/recipes-bsp/bolt/bolt_0.9.5.bb b/meta-oe/recipes-bsp/b=
+olt/bolt_0.9.5.bb
+new file mode 100644
+index 0000000000..b6ad6337ce
+--- /dev/null
++++ b/meta-oe/recipes-bsp/bolt/bolt_0.9.5.bb
+@@ -0,0 +1,19 @@
++SUMMARY =3D "Thunderbolt user-space management tool"
++DESCRIPTION =3D "Userspace system daemon to enable security levels for Thu=
+nderbolt on GNU/Linux"
++HOMEPAGE =3D "https://gitlab.freedesktop.org/bolt/bolt"
++LICENSE =3D "LGPL-2.1-only"
++LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D4fbd65380cdd255951079008b364516=
+c"
++
++DEPENDS =3D "udev polkit dbus"
++REQUIRED_DISTRO_FEATURES =3D "polkit"
++
++SRC_URI =3D "git://gitlab.freedesktop.org/bolt/bolt.git;protocol=3Dhttps;b=
+ranch=3Dmaster"
++SRCREV =3D "5a8a5866a847561566499847d46a97c612b4e6dd"
++
++S =3D "${WORKDIR}/git"
++
++inherit cmake pkgconfig meson features_check
++
++FILES:${PN} +=3D "${datadir}/dbus-1/* \
++                ${datadir}/polkit-1/* \
++               "
+--=20
+2.34.1
 
------BEGIN PGP PUBLIC KEY BLOCK-----
-
-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
-//VuX4EDPW3CZmbPy6U=3D
-=3D+jUt
------END PGP PUBLIC KEY BLOCK-----
-
---------------LFfCgq4CGyBT8A6hj37P0c07--
-
---------------pmnqWCEuEgBqf8ZGVDII38rv--
-
---------------RDP2gXJVZWKd0nSNBchcHksb
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-wmMEABEIACMWIQSPpVvapDR0rgZCCc27BTNVkZ0zFAUCZNz+rAUDAAAAAAAKCRC7BTNVkZ0zFMk1
-AJ9uW3+RV32chungrayiLZZukNwUqwCcClKrhrm9pO3CI1pILNVHqVmeRb4=
-=MqvR
------END PGP SIGNATURE-----
-
---------------RDP2gXJVZWKd0nSNBchcHksb--
 
