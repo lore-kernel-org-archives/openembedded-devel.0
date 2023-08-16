@@ -1,106 +1,136 @@
-Return-Path: <mingli.yu@eng.windriver.com>
+Return-Path: <tymoteusz.burak@3mdeb.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7B955C001E0
-	for <webhook@archiver.kernel.org>; Wed, 16 Aug 2023 07:01:27 +0000 (UTC)
-Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.web10.155696.1692169277318630567
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8A073C001B0
+	for <webhook@archiver.kernel.org>; Wed, 16 Aug 2023 07:37:57 +0000 (UTC)
+Received: from 7.mo581.mail-out.ovh.net (7.mo581.mail-out.ovh.net [46.105.43.131])
+ by mx.groups.io with SMTP id smtpd.web11.155812.1692171475018739069
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 16 Aug 2023 00:01:17 -0700
+ Wed, 16 Aug 2023 00:37:55 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=Ys6NAR46;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=7592dbdee9=mingli.yu@windriver.com)
-Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 37G501JY020408
-	for <openembedded-devel@lists.openembedded.org>; Wed, 16 Aug 2023 00:01:16 -0700
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
-	 h=from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding:content-type; s=PPS06212021; bh=Vbkb5
-	rwEifRNw+jpfNEJ0/vChG+wVDBAX0/GfHk/Z0A=; b=Ys6NAR46ua7GnDjCjKYW2
-	6KNKr5U4Ux4ry5719sfls0oH/xE5/v0yM+wSGOusooaI6L0ESijErklIhehyUWL1
-	grN9/SsgDM8taTZ99uNRuMFAdJxsywniI9bKIrZ+FPHoRL/oXOUNHcPtCgiIKFVo
-	TqSzY3k9cJacZmIIt3cXrArj/oIWtNmE9tWuWyPINchyirXO1sxeAcrwTz9n6JQP
-	NeZ66jgNGo5JZqUGFAD6Ur4uFtXVLfieZioCMgRECYag5l7lOqyybeyOwh0xiDqo
-	I+wtM1QIFO19QTccajR7IvMdVKLzX5+BASna8krQxjhr5Yu4wri/2KcJZlXyNCHU
-	A==
-Received: from ala-exchng02.corp.ad.wrs.com (ala-exchng02.wrs.com [147.11.82.254])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3se5bybe4k-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Wed, 16 Aug 2023 00:01:16 -0700 (PDT)
-Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
- ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.27; Wed, 16 Aug 2023 00:01:15 -0700
-Received: from pek-lpg-core2.wrs.com (128.224.153.41) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
- 15.1.2507.27 via Frontend Transport; Wed, 16 Aug 2023 00:01:15 -0700
-From: <mingli.yu@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-oe][mickledore][PATCH] mcelog: Drop unneeded autotools-brokensep
-Date: Wed, 16 Aug 2023 15:01:14 +0800
-Message-ID: <20230816070114.2383550-1-mingli.yu@windriver.com>
-X-Mailer: git-send-email 2.25.1
+ dkim=none (message not signed); spf=softfail (domain: 3mdeb.com, ip: 46.105.43.131, mailfrom: tymoteusz.burak@3mdeb.com)
+Received: from director11.ghost.mail-out.ovh.net (unknown [10.109.156.41])
+	by mo581.mail-out.ovh.net (Postfix) with ESMTP id E1A2B2654C
+	for <openembedded-devel@lists.openembedded.org>; Wed, 16 Aug 2023 07:37:52 +0000 (UTC)
+Received: from ghost-submission-6684bf9d7b-kr8sf (unknown [10.110.115.222])
+	by director11.ghost.mail-out.ovh.net (Postfix) with ESMTPS id 5F46C1FECF;
+	Wed, 16 Aug 2023 07:37:52 +0000 (UTC)
+Received: from 3mdeb.com ([37.59.142.105])
+	by ghost-submission-6684bf9d7b-kr8sf with ESMTPSA
+	id CoAECNB83GTLWAAA7GwM1w
+	(envelope-from <tymoteusz.burak@3mdeb.com>); Wed, 16 Aug 2023 07:37:52 +0000
+Authentication-Results: garm.ovh; auth=pass (GARM-105G00611b484db-2790-4435-ada6-35a99bd5c46b,
+                    C01A98C016A9AA6442186A814A8EC09D4D6C7996) smtp.auth=tymoteusz.burak@3mdeb.com
+X-OVh-ClientIp: 213.192.77.249
+From: Tymoteusz Burak <tymoteusz.burak@3mdeb.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: piotr.krol@3mdeb.com,
+	tomasz.zyjewski@3mdeb.com
+Subject: [meta-oe][PATCH] ttf-google-fira: add recipe
+Date: Wed, 16 Aug 2023 09:37:25 +0200
+Message-ID: <20230816073725.9331-1-tymoteusz.burak@3mdeb.com>
+X-Mailer: git-send-email 2.41.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Proofpoint-GUID: a6nObEwlUS5zmQScMlmbjp8nPI_09DXm
-X-Proofpoint-ORIG-GUID: a6nObEwlUS5zmQScMlmbjp8nPI_09DXm
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.254,Aquarius:18.0.957,Hydra:6.0.601,FMLib:17.11.176.26
- definitions=2023-08-16_04,2023-08-15_02,2023-05-22_02
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 bulkscore=0 malwarescore=0
- clxscore=1015 priorityscore=1501 mlxlogscore=791 lowpriorityscore=0
- adultscore=0 mlxscore=0 spamscore=0 impostorscore=0 phishscore=0
- suspectscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.19.0-2306200000 definitions=main-2308160063
+X-Ovh-Tracer-Id: 8993688456024608921
+X-VR-SPAMSTATE: OK
+X-VR-SPAMSCORE: 0
+X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrgedviedruddtkedguddvvdcutefuodetggdotefrodftvfcurfhrohhfihhlvgemucfqggfjpdevjffgvefmvefgnecuuegrihhlohhuthemucehtddtnecunecujfgurhephffvvefufffkofgggfestdekredtredttdenucfhrhhomhepvfihmhhothgvuhhsiicuuehurhgrkhcuoehthihmohhtvghushiirdgsuhhrrghkseefmhguvggsrdgtohhmqeenucggtffrrghtthgvrhhnpedukedtgeejieefjeffgffhveegheeukeeutdegtddviefffedtkeevvedtfeefgeenucffohhmrghinhepghhoohhglhgvrdgtohhmpdhgihhthhhusgdrtghomhenucfkphepuddvjedrtddrtddruddpvddufedrudelvddrjeejrddvgeelpdefjedrheelrddugedvrddutdehnecuvehluhhsthgvrhfuihiivgepudenucfrrghrrghmpehinhgvthepuddvjedrtddrtddruddpmhgrihhlfhhrohhmpeeothihmhhothgvuhhsiidrsghurhgrkhesfehmuggvsgdrtghomheqpdhnsggprhgtphhtthhopedupdhrtghpthhtohepohhpvghnvghmsggvugguvgguqdguvghvvghlsehlihhsthhsrdhophgvnhgvmhgsvgguuggvugdrohhrghdpoffvtefjohhsthepmhhoheekuddpmhhouggvpehsmhhtphhouhht
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 16 Aug 2023 07:01:27 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104414
+ <openembedded-devel@lists.openembedded.org>; Wed, 16 Aug 2023 07:37:57 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104415
 
-From: Mingli Yu <mingli.yu@windriver.com>
-
-Drop unneeded autotools-brokensep class inherit, this package has
-traditional makefile build.
-
-This change also fixes the below buildpaths issue altogether.
-WARNING: mcelog-191-r0 do_package_qa: QA Issue: File /usr/sbin/.debug/mcelog in package mcelog-dbg contains reference to TMPDIR [buildpaths]
-
-(cherry picked from commit 29e6c4928cfbfe3a00921b956938781d53563582)
-
-Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
 ---
- meta-oe/recipes-support/mcelog/mcelog_191.bb | 11 +++++++++--
- 1 file changed, 9 insertions(+), 2 deletions(-)
+ .../ttf-fonts/ttf-google-fira.bb              | 54 +++++++++++++++++++
+ 1 file changed, 54 insertions(+)
+ create mode 100644 meta-oe/recipes-graphics/ttf-fonts/ttf-google-fira.bb
 
-diff --git a/meta-oe/recipes-support/mcelog/mcelog_191.bb b/meta-oe/recipes-support/mcelog/mcelog_191.bb
-index e71343346..3c1c451c0 100644
---- a/meta-oe/recipes-support/mcelog/mcelog_191.bb
-+++ b/meta-oe/recipes-support/mcelog/mcelog_191.bb
-@@ -18,11 +18,18 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=b234ee4d69f5fce4486a80fdaf4a4263"
- 
- S = "${WORKDIR}/git"
- 
--inherit autotools-brokensep ptest
-+inherit ptest
- 
- COMPATIBLE_HOST = '(x86_64.*|i.86.*)-linux'
- 
--do_install:append() {
-+EXTRA_OEMAKE += "CFLAGS='${CFLAGS}'"
+diff --git a/meta-oe/recipes-graphics/ttf-fonts/ttf-google-fira.bb b/meta=
+-oe/recipes-graphics/ttf-fonts/ttf-google-fira.bb
+new file mode 100644
+index 000000000000..b330f40387bb
+--- /dev/null
++++ b/meta-oe/recipes-graphics/ttf-fonts/ttf-google-fira.bb
+@@ -0,0 +1,54 @@
++SUMMARY =3D "Google Fira Fonts- TTF Edition"
++HOMEPAGE =3D "https://fonts.google.com/?query=3Dfira"
++LICENSE =3D "OFL-1.1"
++LIC_FILES_CHKSUM =3D " \
++    file://${S}/firamono/OFL.txt;md5=3D0373cf792d4b95c61399b94c02702892 =
+\
++    file://${S}/firacode/OFL.txt;md5=3Dc75ca55aa0a5809a854d87db2a8ebf23 =
+\
++    file://${S}/firasans/OFL.txt;md5=3Dde28deb2f8c1f23fd4d6918113ac3ddd =
+\
++    file://${S}/firasanscondensed/OFL.txt;md5=3Dde28deb2f8c1f23fd4d69181=
+13ac3ddd \
++    file://${S}/firasansextracondensed/OFL.txt;md5=3Dde28deb2f8c1f23fd4d=
+6918113ac3ddd \
++"
++SRCREV =3D "47a6c224b3e0287b2e48e3ffef8c9ce2ca4931f4"
 +
-+do_compile() {
-+    oe_runmake
++SRC_URI =3D "git://github.com/google/fonts.git;protocol=3Dhttps;branch=3D=
+main;subpath=3Dofl/firamono \
++           git://github.com/google/fonts.git;protocol=3Dhttps;branch=3Dm=
+ain;subpath=3Dofl/firacode \
++           git://github.com/google/fonts.git;protocol=3Dhttps;branch=3Dm=
+ain;subpath=3Dofl/firasans \
++           git://github.com/google/fonts.git;protocol=3Dhttps;branch=3Dm=
+ain;subpath=3Dofl/firasanscondensed \
++           git://github.com/google/fonts.git;protocol=3Dhttps;branch=3Dm=
+ain;subpath=3Dofl/firasansextracondensed"
++
++S =3D "${WORKDIR}"
++
++do_install:append() {
++    install -d ${D}${datadir}/fonts/truetype/
++    find ${S} -path 'fira*/*.tt[cf]' -exec install -m 0644 {} ${D}${data=
+dir}/fonts/truetype/{} \;
++    install -D -m 0644 ${S}/firamono/OFL.txt ${D}${datadir}/licenses/${P=
+N}mono/OFL.txt
++    install -D -m 0644 ${S}/firacode/OFL.txt ${D}${datadir}/licenses/${P=
+N}code/OFL.txt
++    install -D -m 0644 ${S}/firasans/OFL.txt ${D}${datadir}/licenses/${P=
+N}sans/OFL.txt
++    install -D -m 0644 ${S}/firasanscondensed/OFL.txt ${D}${datadir}/lic=
+enses/${PN}sanscondensed/OFL.txt
++    install -D -m 0644 ${S}/firasansextracondensed/OFL.txt ${D}${datadir=
+}/licenses/${PN}sansextracondensed/OFL.txt
 +}
 +
-+do_install() {
-+    oe_runmake install DESTDIR=${D}
-     install -d ${D}${sysconfdir}/cron.hourly
-     install -m 0755 ${S}/mcelog.cron ${D}${sysconfdir}/cron.hourly/
-     sed -i 's/bash/sh/' ${D}${sysconfdir}/cron.hourly/mcelog.cron
--- 
-2.25.1
++PACKAGES =3D+ "${PN}-mono ${PN}-code ${PN}-sans ${PN}-sanscondensed ${PN=
+}-sansextracondensed"
++
++FILES:${PN}-mono +=3D " \
++                    ${datadir}/fonts/truetype/FiraMono* \
++                    ${datadir}/licenses/${PN}mono/OFL.txt \
++                "
++FILES:${PN}-code +=3D " \
++                    ${datadir}/fonts/truetype/FiraCode* \
++                    ${datadir}/licenses/${PN}code/OFL.txt \
++                "
++FILES:${PN}-sans +=3D " \
++                    ${datadir}/fonts/truetype/FiraSans-* \
++                    ${datadir}/licenses/${PN}sans/OFL.txt \
++                "
++FILES:${PN}-sanscondensed +=3D " \
++                            ${datadir}/fonts/truetype/FiraSansCondensed-=
+* \
++                            ${datadir}/licenses/${PN}sanscondensed/OFL.t=
+xt \
++                        "
++FILES:${PN}-sansextracondensed +=3D " \
++                                    ${datadir}/fonts/truetype/FiraSansEx=
+traCondensed-* \
++                                    ${datadir}/licenses/${PN}sansextraco=
+ndensed/OFL.txt \
++                                 "
++
++require ttf.inc
+--=20
+2.41.0
 
 
