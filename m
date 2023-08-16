@@ -1,89 +1,95 @@
-Return-Path: <daniil.klimuk@3mdeb.com>
+Return-Path: <pawel.langowski@3mdeb.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id F2884C001DF
-	for <webhook@archiver.kernel.org>; Wed, 16 Aug 2023 08:43:47 +0000 (UTC)
-Received: from 10.mo576.mail-out.ovh.net (10.mo576.mail-out.ovh.net [46.105.73.241])
- by mx.groups.io with SMTP id smtpd.web11.156432.1692175424613757047
+	by smtp.lore.kernel.org (Postfix) with ESMTP id F0B8CC001DF
+	for <webhook@archiver.kernel.org>; Wed, 16 Aug 2023 08:48:17 +0000 (UTC)
+Received: from 20.mo561.mail-out.ovh.net (20.mo561.mail-out.ovh.net [178.33.47.94])
+ by mx.groups.io with SMTP id smtpd.web10.156743.1692175688633350145
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 16 Aug 2023 01:43:45 -0700
+ Wed, 16 Aug 2023 01:48:09 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=softfail (domain: 3mdeb.com, ip: 46.105.73.241, mailfrom: daniil.klimuk@3mdeb.com)
-Received: from director6.ghost.mail-out.ovh.net (unknown [10.109.146.50])
-	by mo576.mail-out.ovh.net (Postfix) with ESMTP id E63E0267B3
-	for <openembedded-devel@lists.openembedded.org>; Wed, 16 Aug 2023 08:43:42 +0000 (UTC)
-Received: from ghost-submission-6684bf9d7b-n8jhm (unknown [10.110.115.73])
-	by director6.ghost.mail-out.ovh.net (Postfix) with ESMTPS id 7CA681FE9B
-	for <openembedded-devel@lists.openembedded.org>; Wed, 16 Aug 2023 08:43:41 +0000 (UTC)
+ dkim=none (message not signed); spf=softfail (domain: 3mdeb.com, ip: 178.33.47.94, mailfrom: pawel.langowski@3mdeb.com)
+Received: from director4.ghost.mail-out.ovh.net (unknown [10.108.20.46])
+	by mo561.mail-out.ovh.net (Postfix) with ESMTP id 9C4BD20779
+	for <openembedded-devel@lists.openembedded.org>; Wed, 16 Aug 2023 08:48:05 +0000 (UTC)
+Received: from ghost-submission-6684bf9d7b-crgzv (unknown [10.110.208.180])
+	by director4.ghost.mail-out.ovh.net (Postfix) with ESMTPS id B7CB71FEA1;
+	Wed, 16 Aug 2023 08:48:04 +0000 (UTC)
 Received: from 3mdeb.com ([37.59.142.96])
-	by ghost-submission-6684bf9d7b-n8jhm with ESMTPSA
-	id ho8DMz2M3GTgVgAAMncBwg
-	(envelope-from <daniil.klimuk@3mdeb.com>)
-	for <openembedded-devel@lists.openembedded.org>; Wed, 16 Aug 2023 08:43:41 +0000
-Authentication-Results: garm.ovh; auth=pass (GARM-96R001fe3804b4-9f54-4194-9b4f-c3b94d118bf8,
-                    020B8163BE9521A89EE9105D1EF8E601D62BF165) smtp.auth=daniil.klimuk@3mdeb.com
+	by ghost-submission-6684bf9d7b-crgzv with ESMTPSA
+	id WIPmIkSN3GSQRAAAOU5GJg
+	(envelope-from <pawel.langowski@3mdeb.com>); Wed, 16 Aug 2023 08:48:04 +0000
+Authentication-Results: garm.ovh; auth=pass (GARM-96R0012b034d83-86bc-4259-888e-54a424bddbe0,
+                    93A237E87ED1339E13AED04D535165A97E4753C9) smtp.auth=pawel.langowski@3mdeb.com
 X-OVh-ClientIp: 213.192.77.249
-Message-ID: <bfcfacfd-2484-55db-2c33-2c2e5fbd9b1e@3mdeb.com>
-Date: Wed, 16 Aug 2023 10:43:41 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.12.0
-Content-Language: en-US
+From: Pawel Langowski <pawel.langowski@3mdeb.com>
 To: openembedded-devel@lists.openembedded.org
-From: Daniil Klimuk <daniil.klimuk@3mdeb.com>
-Subject: [meta-python] [PATCH] recipes-devtools/python3-gspread: interface for
- google spreadsheet
-Content-Type: text/plain; charset=UTF-8; format=flowed
-X-Ovh-Tracer-Id: 10105514617752360085
+Cc: piotr.krol@3mdeb.com,
+	tomasz.zyjewski@3mdeb.com
+Subject: [PATCH] recipes-extended: add qcbor recipe
+Date: Wed, 16 Aug 2023 10:47:50 +0200
+Message-ID: <20230816084754.1399376-1-pawel.langowski@3mdeb.com>
+X-Mailer: git-send-email 2.41.0
+MIME-Version: 1.0
+X-Ovh-Tracer-Id: 10179542534629470873
 X-VR-SPAMSTATE: OK
 X-VR-SPAMSCORE: 0
-X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrgedviedruddtledgtdejucetufdoteggodetrfdotffvucfrrhhofhhilhgvmecuqfggjfdpvefjgfevmfevgfenuceurghilhhouhhtmecuhedttdenucenucfjughrpefkffggfgfvhffutgfgsehtkeertddtfeejnecuhfhrohhmpeffrghnihhilhcumfhlihhmuhhkuceouggrnhhiihhlrdhklhhimhhukhesfehmuggvsgdrtghomheqnecuggftrfgrthhtvghrnheptddtvdefgedvgefffedtledukeetgeefffevgfffudffudduveegkeettddtuedunecuffhomhgrihhnpehgihhthhhusgdrtghomhdpphihthhhohhnhhhoshhtvggurdhorhhgnecukfhppeduvdejrddtrddtrddupddvudefrdduledvrdejjedrvdegledpfeejrdehledrudegvddrleeinecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehinhgvthepuddvjedrtddrtddruddpmhgrihhlfhhrohhmpeeouggrnhhiihhlrdhklhhimhhukhesfehmuggvsgdrtghomheqpdhnsggprhgtphhtthhopedupdhrtghpthhtohepohhpvghnvghmsggvugguvgguqdguvghvvghlsehlihhsthhsrdhophgvnhgvmhgsvgguuggvugdrohhrghdpoffvtefjohhsthepmhhoheejiedpmhhouggvpehsmhhtphhouhht
+X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrgedviedruddtledgtdekucetufdoteggodetrfdotffvucfrrhhofhhilhgvmecuqfggjfdpvefjgfevmfevgfenuceurghilhhouhhtmecuhedttdenucenucfjughrpefhvfevufffkffoggfgsedtkeertdertddtnecuhfhrohhmpefrrgifvghlucfnrghnghhofihskhhiuceophgrfigvlhdrlhgrnhhgohifshhkihesfehmuggvsgdrtghomheqnecuggftrfgrthhtvghrnhepkeefhefhkeffieetjedvffettdeigfeufeehgefgteejudfgfeelfeeiteeggfejnecuffhomhgrihhnpehgihhthhhusgdrtghomhenucfkphepuddvjedrtddrtddruddpvddufedrudelvddrjeejrddvgeelpdefjedrheelrddugedvrdelieenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepihhnvghtpeduvdejrddtrddtrddupdhmrghilhhfrhhomhepoehprgifvghlrdhlrghnghhofihskhhiseefmhguvggsrdgtohhmqedpnhgspghrtghpthhtohepuddprhgtphhtthhopehophgvnhgvmhgsvgguuggvugdquggvvhgvlheslhhishhtshdrohhpvghnvghmsggvugguvggurdhorhhgpdfovfetjfhoshhtpehmohehiedupdhmohguvgepshhmthhpohhuth
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 16 Aug 2023 08:43:47 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104419
+ <openembedded-devel@lists.openembedded.org>; Wed, 16 Aug 2023 08:48:17 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104420
 
-Author: Daniil Klimuk <daniil.klimuk@3mdeb.com>
-Date:=C2=A0=C2=A0 Mon Aug 14 15:46:40 2023 +0200
+---
+ meta-oe/recipes-extended/qcbor/qcbor_git.bb | 32 +++++++++++++++++++++
+ 1 file changed, 32 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/qcbor/qcbor_git.bb
 
- =C2=A0=C2=A0=C2=A0 recipes-devtools/python3-gspread: interface for googl=
-e spreadsheet
-
- =C2=A0=C2=A0=C2=A0 Simple interface for working with Google Sheets.
-
- =C2=A0=C2=A0=C2=A0 Signed-off-by: Daniil Klimuk <daniil.klimuk@3mdeb.com=
->
-
-diff --git=20
-a/meta-python/recipes-devtools/python3-gspread/python3-gspread_5.10.0.bb=20
-b/meta-python/recipes-devtools/python3-gspread/python3-gspread_5.10.0.bb
+diff --git a/meta-oe/recipes-extended/qcbor/qcbor_git.bb b/meta-oe/recipe=
+s-extended/qcbor/qcbor_git.bb
 new file mode 100644
-index 000000000000..e13e452353cd
+index 000000000000..6e87458c3a3e
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python3-gspread/python3-gspread_5.10.0=
-.bb
-@@ -0,0 +1,15 @@
-+SUMMARY =3D "Google Spreadsheets Python API"
-+HOMEPAGE =3D "https://github.com/burnash/gspread"
-+AUTHOR =3D "Anton Burnashev <fuss.here@gmail.com>"
-+LICENSE =3D "MIT"
-+LIC_FILES_CHKSUM =3D=20
-"file://LICENSE.txt;md5=3D9488e21983675fa56dc05af558b83e2f"
++++ b/meta-oe/recipes-extended/qcbor/qcbor_git.bb
+@@ -0,0 +1,32 @@
++DESCRIPTION =3D " \
++    QCBOR is a powerful, commercial-quality CBOR encoder/decoder that \
++    implements these RFCs: RFC8949, RFC7049, RFC8742, RFC8943 \
++"
 +
-+SRC_URI =3D=20
-"https://files.pythonhosted.org/packages/b4/4f/033ebf34778745061b67b104ef=
-212ed5b05fa65a530f345f88c4355fdcc3/gspread-5.10.0.tar.gz"
-+SRC_URI[md5sum] =3D "f21198e80a50d0e6d557d9fea6a79e8e"
-+SRC_URI[sha256sum] =3D=20
-"2b6bba6dc111580170346a9bcd1893e0e8c52f67a9e537caec7b7a1e27c14435"
++HOMEPAGE =3D "https://github.com/laurencelundblade/QCBOR"
 +
-+S =3D "${WORKDIR}/gspread-5.10.0"
++LICENSE =3D "BSD-3-Clause"
++LIC_FILES_CHKSUM =3D "file://README.md;beginline=3D442;endline=3D463;md5=
+=3Db55643261d6d221dac2b7a395105af62"
 +
-+RDEPENDS:${PN} =3D "python3-requests"
++SRC_URI =3D "git://github.com/laurencelundblade/QCBOR;protocol=3Dhttps;b=
+ranch=3Dmaster"
 +
-+inherit python_poetry_core
++SRCREV =3D "44754f738c6534a4304a83d4c6e97b3d3193d887"
++
++S =3D "${WORKDIR}/git"
++
++INSANE_SKIP:${PN}-dev +=3D "ldflags"
++
++inherit pkgconfig
++
++CFLAGS +=3D " \
++    -DUSEFULBUF_DISABLE_ALL_FLOAT \
++"
++
++do_install(){
++    install -d ${D}${libdir}
++    install -m 755 ${S}/libqcbor.a ${D}${libdir}/
++    install -d ${D}${includedir}/qcbor
++    install -m 644 ${S}/inc/*.h ${D}${includedir}
++    install -m 644 ${S}/inc/qcbor/*.h ${D}${includedir}/qcbor
++}
++
+--=20
+2.41.0
 
 
