@@ -2,116 +2,81 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id ED02DC001DE
-	for <webhook@archiver.kernel.org>; Wed, 16 Aug 2023 01:38:35 +0000 (UTC)
-Received: from esa10.hc1455-7.c3s2.iphmx.com (esa10.hc1455-7.c3s2.iphmx.com [139.138.36.225])
- by mx.groups.io with SMTP id smtpd.web10.151952.1692149911975418894
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D50DFC001DE
+	for <webhook@archiver.kernel.org>; Wed, 16 Aug 2023 01:38:55 +0000 (UTC)
+Received: from esa12.hc1455-7.c3s2.iphmx.com (esa12.hc1455-7.c3s2.iphmx.com [139.138.37.100])
+ by mx.groups.io with SMTP id smtpd.web11.151729.1692149929584812904
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 15 Aug 2023 18:38:32 -0700
+ Tue, 15 Aug 2023 18:38:50 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: fujitsu.com, ip: 139.138.36.225, mailfrom: wangmy@fujitsu.com)
-X-IronPort-AV: E=McAfee;i="6600,9927,10803"; a="115966146"
+ dkim=none (message not signed); spf=pass (domain: fujitsu.com, ip: 139.138.37.100, mailfrom: wangmy@fujitsu.com)
+X-IronPort-AV: E=McAfee;i="6600,9927,10803"; a="107669085"
 X-IronPort-AV: E=Sophos;i="6.01,175,1684767600"; 
-   d="scan'208";a="115966146"
-Received: from unknown (HELO yto-r4.gw.nic.fujitsu.com) ([218.44.52.220])
-  by esa10.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 16 Aug 2023 10:38:29 +0900
-Received: from yto-m3.gw.nic.fujitsu.com (yto-nat-yto-m3.gw.nic.fujitsu.com [192.168.83.66])
-	by yto-r4.gw.nic.fujitsu.com (Postfix) with ESMTP id E1323D3EBD
-	for <openembedded-devel@lists.openembedded.org>; Wed, 16 Aug 2023 10:38:26 +0900 (JST)
-Received: from kws-ab3.gw.nic.fujitsu.com (kws-ab3.gw.nic.fujitsu.com [192.51.206.21])
-	by yto-m3.gw.nic.fujitsu.com (Postfix) with ESMTP id 3AB06D39C8
-	for <openembedded-devel@lists.openembedded.org>; Wed, 16 Aug 2023 10:38:26 +0900 (JST)
+   d="scan'208";a="107669085"
+Received: from unknown (HELO oym-r4.gw.nic.fujitsu.com) ([210.162.30.92])
+  by esa12.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 16 Aug 2023 10:38:47 +0900
+Received: from oym-m1.gw.nic.fujitsu.com (oym-nat-oym-m1.gw.nic.fujitsu.com [192.168.87.58])
+	by oym-r4.gw.nic.fujitsu.com (Postfix) with ESMTP id 39AA8DDC64
+	for <openembedded-devel@lists.openembedded.org>; Wed, 16 Aug 2023 10:38:45 +0900 (JST)
+Received: from aks-ab2.gw.nic.fujitsu.com (aks-ab2.gw.nic.fujitsu.com [192.51.207.12])
+	by oym-m1.gw.nic.fujitsu.com (Postfix) with ESMTP id 648F6D8BB4
+	for <openembedded-devel@lists.openembedded.org>; Wed, 16 Aug 2023 10:38:44 +0900 (JST)
 Received: from localhost.localdomain (unknown [10.167.225.33])
-	by kws-ab3.gw.nic.fujitsu.com (Postfix) with ESMTP id B15EA2007685C;
-	Wed, 16 Aug 2023 10:38:25 +0900 (JST)
+	by aks-ab2.gw.nic.fujitsu.com (Postfix) with ESMTP id 74D7586E22;
+	Wed, 16 Aug 2023 10:38:43 +0900 (JST)
 From: wangmy@fujitsu.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-oe] [PATCH] postgresql: upgrade 15.3 -> 15.4
-Date: Wed, 16 Aug 2023 09:38:03 +0800
-Message-Id: <1692149883-5071-1-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH] python3-googleapis-common-protos: upgrade 1.59.1 -> 1.60.0
+Date: Wed, 16 Aug 2023 09:38:20 +0800
+Message-Id: <1692149900-5107-1-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 X-TM-AS-GCONF: 00
-X-TM-AS-Product-Ver: IMSS-9.1.0.1417-9.0.0.1002-27816.003
+X-TM-AS-Product-Ver: IMSS-9.1.0.1408-9.0.0.1002-27816.003
 X-TM-AS-User-Approved-Sender: Yes
-X-TMASE-Version: IMSS-9.1.0.1417-9.0.1002-27816.003
-X-TMASE-Result: 10-1.848600-10.000000
-X-TMASE-MatchedRID: KEcVumlYY7qjz0nOeth/yWOho7buv7d9XLILvyEBT87fc2Xd6VJ+ynYW
-	2eXId8+tdB9aRZ3DyIRaosFST81rSwDNPxu11HXjuce7gFxhKa3Vy4hHC3/gyLKw8Hx0EGitcqf
-	oMGP+CwQi+t+0AiFaYoPY+q3Rjt7nYW2F8jkDYf1/OBWacv+iVdG3Y6ijqBt3K2lU67dNkZmq2s
-	h3fGrDN2UVI5FRUTheEgykP1mc9SdJ6sKfyz0AbQzrPeIO/OIH7xtPw/8I7HTn3ZLCt3rRSSiaS
-	qRpkfBtx5WfkUb/fHZ5OPD8XJFfpB8TzIzimOwPC24oEZ6SpSmcfuxsiY4QFGYo7JQTrrLX3Av0
-	oy6DZF5JZQI+oTw3B3u5ZqaDJH0aWyOZJiY6401d4ViKejy4I2rJxZQE1rHujYKF2/pVSSM9QAC
-	9q0X4A+x9n1XpDqsJmC9SiJioatWbjnu8jwgbwH9jicWwFYB0PpCuffGH9zI=
+X-TMASE-Version: IMSS-9.1.0.1408-9.0.1002-27816.003
+X-TMASE-Result: 10--2.749600-10.000000
+X-TMASE-MatchedRID: S9L8qTrmXfGjz0nOeth/yUIIxwDaU5mrF4r8H5YrEqyTxayZGvX2Dr6p
+	xbTOjavy+7QcRaVoa8nGKIf6hBf7VaGGOyqBK41vEXjPIvKd74AJlr1xKkE5ubkFZd8r6UXoBqd
+	FRjHdIbixfbhqGxLk+4Ay6p60ZV62yA7duzCw6dLdB/CxWTRRu+rAZ8KTspSzkOCk2JGbumu3rV
+	mL47fyRQ9F5uVZGhaZ8UxGW82zy3V05pfrC9w65cy8S9vc2lNfAOB+CHW2pw8wApwAKKCY88r7y
+	GjNvjP9iB6mlDKe1V7S/yytHeCN9GXv4CQeNUk7G6qTOwq/n71+3BndfXUhXQ==
 X-TMASE-SNAP-Result: 1.821001.0001-0-1-22:0,33:0,34:0-0
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 16 Aug 2023 01:38:35 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104377
+ <openembedded-devel@lists.openembedded.org>; Wed, 16 Aug 2023 01:38:55 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104378
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
-0001-configure.ac-bypass-autoconf-2.69-version-check.patch
-refreshed for 15.4
-
 Changelog:
-https://www.postgresql.org/docs/release/15.4/
+==========
+Add google/api/policy.proto
+Add method_policies to Control
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- ...-configure.ac-bypass-autoconf-2.69-version-check.patch | 8 +++++---
- .../postgresql/{postgresql_15.3.bb => postgresql_15.4.bb} | 2 +-
- 2 files changed, 6 insertions(+), 4 deletions(-)
- rename meta-oe/recipes-dbs/postgresql/{postgresql_15.3.bb => postgresql_15.4.bb} (86%)
+ ...tos_1.59.1.bb => python3-googleapis-common-protos_1.60.0.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-googleapis-common-protos_1.59.1.bb => python3-googleapis-common-protos_1.60.0.bb} (79%)
 
-diff --git a/meta-oe/recipes-dbs/postgresql/files/0001-configure.ac-bypass-autoconf-2.69-version-check.patch b/meta-oe/recipes-dbs/postgresql/files/0001-configure.ac-bypass-autoconf-2.69-version-check.patch
-index 3c8187d1a2..fb70b22720 100644
---- a/meta-oe/recipes-dbs/postgresql/files/0001-configure.ac-bypass-autoconf-2.69-version-check.patch
-+++ b/meta-oe/recipes-dbs/postgresql/files/0001-configure.ac-bypass-autoconf-2.69-version-check.patch
-@@ -8,18 +8,17 @@ for upgrade to autoconf 2.71
- Upstream-Status: Inappropriate [disable feature]
+diff --git a/meta-python/recipes-devtools/python/python3-googleapis-common-protos_1.59.1.bb b/meta-python/recipes-devtools/python/python3-googleapis-common-protos_1.60.0.bb
+similarity index 79%
+rename from meta-python/recipes-devtools/python/python3-googleapis-common-protos_1.59.1.bb
+rename to meta-python/recipes-devtools/python/python3-googleapis-common-protos_1.60.0.bb
+index a6b3d4eacc..5c9ba5fb4b 100644
+--- a/meta-python/recipes-devtools/python/python3-googleapis-common-protos_1.59.1.bb
++++ b/meta-python/recipes-devtools/python/python3-googleapis-common-protos_1.60.0.bb
+@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/Apache-2.0;md5=89aea4e17d99a7ca
  
- Signed-off-by: Yi Fan Yu <yifan.yu@windriver.com>
--
- ---
-  configure.ac | 4 ----
-  1 file changed, 4 deletions(-)
+ inherit pypi setuptools3
  
- diff --git a/configure.ac b/configure.ac
--index 998ff31..912e490 100644
-+index 524fdf1..3bea642 100644
- --- a/configure.ac
- +++ b/configure.ac
- @@ -19,10 +19,6 @@ m4_pattern_forbid(^PGAC_)dnl to catch undefined macros
-  
-- AC_INIT([PostgreSQL], [15.3], [pgsql-bugs@lists.postgresql.org], [], [https://www.postgresql.org/])
-+ AC_INIT([PostgreSQL], [15.4], [pgsql-bugs@lists.postgresql.org], [], [https://www.postgresql.org/])
-  
- -m4_if(m4_defn([m4_PACKAGE_VERSION]), [2.69], [], [m4_fatal([Autoconf version 2.69 is required.
- -Untested combinations of 'autoconf' and PostgreSQL versions are not
-@@ -28,3 +27,6 @@ index 998ff31..912e490 100644
-  AC_COPYRIGHT([Copyright (c) 1996-2022, PostgreSQL Global Development Group])
-  AC_CONFIG_SRCDIR([src/backend/access/common/heaptuple.c])
-  AC_CONFIG_AUX_DIR(config)
-+-- 
-+2.34.1
-+
-diff --git a/meta-oe/recipes-dbs/postgresql/postgresql_15.3.bb b/meta-oe/recipes-dbs/postgresql/postgresql_15.4.bb
-similarity index 86%
-rename from meta-oe/recipes-dbs/postgresql/postgresql_15.3.bb
-rename to meta-oe/recipes-dbs/postgresql/postgresql_15.4.bb
-index e1d49895f0..3aa2662891 100644
---- a/meta-oe/recipes-dbs/postgresql/postgresql_15.3.bb
-+++ b/meta-oe/recipes-dbs/postgresql/postgresql_15.4.bb
-@@ -11,6 +11,6 @@ SRC_URI += "\
-    file://0001-postgresql-fix-ptest-failure-of-sysviews.patch \
- "
+-SRC_URI[sha256sum] = "b35d530fe825fb4227857bc47ad84c33c809ac96f312e13182bdeaa2abe1178a"
++SRC_URI[sha256sum] = "e73ebb404098db405ba95d1e1ae0aa91c3e15a71da031a2eeb6b2e23e7bc3708"
  
--SRC_URI[sha256sum] = "ffc7d4891f00ffbf5c3f4eab7fbbced8460b8c0ee63c5a5167133b9e6599d932"
-+SRC_URI[sha256sum] = "baec5a4bdc4437336653b6cb5d9ed89be5bd5c0c58b94e0becee0a999e63c8f9"
- 
- CVE_STATUS[CVE-2017-8806] = "not-applicable-config: Ddoesn't apply to out configuration of postgresql so we can safely ignore it."
+ RDEPENDS:${PN} += "\
+     ${PYTHON_PN}-grpcio \
 -- 
 2.34.1
 
