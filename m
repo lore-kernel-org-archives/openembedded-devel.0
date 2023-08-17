@@ -2,55 +2,55 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 43AECC30654
-	for <webhook@archiver.kernel.org>; Thu, 17 Aug 2023 15:34:36 +0000 (UTC)
-Received: from mail-oo1-f50.google.com (mail-oo1-f50.google.com [209.85.161.50])
- by mx.groups.io with SMTP id smtpd.web11.190557.1692286475342999993
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4C796C3065A
+	for <webhook@archiver.kernel.org>; Thu, 17 Aug 2023 15:35:46 +0000 (UTC)
+Received: from mail-oi1-f173.google.com (mail-oi1-f173.google.com [209.85.167.173])
+ by mx.groups.io with SMTP id smtpd.web11.27.1692286540803658912
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 17 Aug 2023 08:34:35 -0700
+ Thu, 17 Aug 2023 08:35:40 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20221208 header.b=PWWInp5v;
- spf=pass (domain: gmail.com, ip: 209.85.161.50, mailfrom: raj.khem@gmail.com)
-Received: by mail-oo1-f50.google.com with SMTP id 006d021491bc7-56c4c4e822eso5586647eaf.3
-        for <openembedded-devel@lists.openembedded.org>; Thu, 17 Aug 2023 08:34:35 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20221208 header.b=WZ0vL/M4;
+ spf=pass (domain: gmail.com, ip: 209.85.167.173, mailfrom: raj.khem@gmail.com)
+Received: by mail-oi1-f173.google.com with SMTP id 5614622812f47-3a7556e4edcso576165b6e.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 17 Aug 2023 08:35:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1692286474; x=1692891274;
+        d=gmail.com; s=20221208; t=1692286540; x=1692891340;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=7J0yvxGmo0/rAaAHpRQVD+M3NgjJ21KBAFWSQqV43BA=;
-        b=PWWInp5vJAhhwZfuAOY/u+eOCK/QNsE2wHt9vQX8xId9jSlm/vzHQnf6BKRidsxlsN
-         yGvnRvNiNow8v9OxIlYXVbulCNQD/umIf0qKgu+JaoFttob4OymwvHbjsATYzMPZgQDB
-         z4J83vCb4LQWTPzuyN+bp73L/ozx7+Be77Ytohh8bnL3Zb1wvMGFclTIXd/n24ejbTob
-         fp6fzUgvsjsNbXkm8YTBYptrBeoyt1ZmOS99EHDcPgV2N1TSSaUhWIKUBOJOoopKRsL9
-         W6HdOFij9+AIQpjW+01xmmIH5x6JCO1JPSx8igUHN6B0ZUrSdbg9acpfPNd/aWAQOWs0
-         nqiA==
+        bh=E3GBvbqlizFTcFRpd6815lVHFcRj4eW8efKiruW1LSM=;
+        b=WZ0vL/M42IlrkJPxao297mYm3ITQ9QcmGpTTbC+4Ol10IRjJigStDsW+81trzsCVDL
+         mf9Nb07OfkiwTiu4hAwnQ+PZER9pdu7zYaKTGbngmikkAvD0TEWHkl9AVpwLnFbQTZGa
+         e+swmkQ6mqZBv81xg2+yC7U1DurYtuu62a8zLO8DYGaT9SRAwi1KiloBvvuIUBTM8KRn
+         K9fqhfm/Utkx/MPnpzk1P4yREXxxQWecIu8WKyMqkZ/FWe/qap/L1UYmvk7t0VMwnMeR
+         WhDhdarrW0fgmbslryGxjAfI2iPbwBtjC0oMfPGgnfgY+CCK1WyXT+DGk6Czp2R/63xO
+         1E2A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1692286474; x=1692891274;
+        d=1e100.net; s=20221208; t=1692286540; x=1692891340;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=7J0yvxGmo0/rAaAHpRQVD+M3NgjJ21KBAFWSQqV43BA=;
-        b=ClvULtBxZQPZq11s8+y5JNPMc8UtLd5lG/HoFAjU5igx137YuK3zJft49P0Y1nG2pE
-         nR1iJzmQ6KoffNQ+RxrYD49iRcUMS847AaPH4qCYDHcJ6ueJAaqfNF7B9HzTk/LZBHQj
-         ML6LoMug4d+ycmJQBkAjaT5mEv+mmUAL2QAHkFRMkC1G0TeCbVw09QOc7qajQD7qqH3g
-         ZbQxikS+5MFTqkiGsGh0FKK2bETR0fVhwdMpA5g8mu2MFqI46xaZ37EeUM9GSTRXtOU1
-         eweDjKasQvj9T1d7Y8YCNtfe7sDYGYO+c3llQgyHi5an8IXOfIPtcszuARPPdiFwB24a
-         qmWw==
-X-Gm-Message-State: AOJu0YzuQeiQNR9L+9bPM3Wv66xqkylNKQaGVCkS/K6wJoH7ZNcjROQt
-	cGAnS4Ylh5Mjb1h/7XdlqaKzfGPV+q4JDQtYuCI=
-X-Google-Smtp-Source: AGHT+IGr67Pf0RP+UpSmQa68mu2FbgebCKUvB8DzZER/pDGgsTr0qMWz43fsUfJDjyhQctp2tC+K3M6Q0PNzq2qh5no=
-X-Received: by 2002:a05:6808:1aac:b0:3a7:25c6:7b80 with SMTP id
- bm44-20020a0568081aac00b003a725c67b80mr5569899oib.34.1692286474595; Thu, 17
- Aug 2023 08:34:34 -0700 (PDT)
+        bh=E3GBvbqlizFTcFRpd6815lVHFcRj4eW8efKiruW1LSM=;
+        b=UrmSdsYc8FzpM11i/kReIvd291SWiIRvAkfgJxK3eo/39B2ZVTPErai0x4C1hKAMqp
+         0pcEhGICzu4otjotr17Fg0FUFro/yiqrW9xfVXnGPMrBJbmzUnDBtH7hmRXCpYDt0QOw
+         6hAzbtbER8tDxYDifF3xVE15v+HGSUufJi1/TZ3pX0reJ2Ad4rxoFZh7+7Ku12Lby6ql
+         i+POG8ZIPMcJYR7jgXmHU0Lbm/uBYLoKYusNRJAmdk5NlwiD0rGoOaQA2dE9anFA5+my
+         YA10QUgUE8NUafk0jEsigiyZuR/f3LxzV3moVL3VJb7jyZXR7AHNgZr5fx6MUl2wGXTd
+         oKew==
+X-Gm-Message-State: AOJu0YwbU8Ou6Qv49dLWNCV1rrnbVIihUaRwmLFGqzGN/FC1VTXjwgfE
+	GzlXmUGkzFsdqYZlhQLPEPVWl1cV1sxdqXyqZ0rU8uHwgPo=
+X-Google-Smtp-Source: AGHT+IE7lLNKbymW4AeGVbAODC95AudN31pbJTQ8qtQtfBkXd/ym/rN3auXCaU9e4DTqJgDcAVAAQBblmZYaHP8E9mw=
+X-Received: by 2002:a05:6808:f09:b0:3a7:4cf0:10c with SMTP id
+ m9-20020a0568080f0900b003a74cf0010cmr2201489oiw.6.1692286540009; Thu, 17 Aug
+ 2023 08:35:40 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230817090623.26704-1-tymoteusz.burak@3mdeb.com>
-In-Reply-To: <20230817090623.26704-1-tymoteusz.burak@3mdeb.com>
+References: <20230816083418.1397949-1-pawel.langowski@3mdeb.com>
+In-Reply-To: <20230816083418.1397949-1-pawel.langowski@3mdeb.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 17 Aug 2023 08:34:08 -0700
-Message-ID: <CAMKF1spWJmUorJEb1EFpSw2neEiipSCr+BdjVL+hzhVvAEO8Ag@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH v2] ttf-google-fira: add recipe
-To: Tymoteusz Burak <tymoteusz.burak@3mdeb.com>
+Date: Thu, 17 Aug 2023 08:35:14 -0700
+Message-ID: <CAMKF1sqxCm3gyJG+Y5rQxYbXdkCuHRQO4Bpb5Trg5HH=R+GBCg@mail.gmail.com>
+Subject: Re: [oe] [PATCH] recipes-extended: add qcbor recipe
+To: Pawel Langowski <pawel.langowski@3mdeb.com>
 Cc: openembedded-devel@lists.openembedded.org, piotr.krol@3mdeb.com, 
 	tomasz.zyjewski@3mdeb.com
 Content-Type: text/plain; charset="UTF-8"
@@ -58,164 +58,70 @@ Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 17 Aug 2023 15:34:36 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104467
+ <openembedded-devel@lists.openembedded.org>; Thu, 17 Aug 2023 15:35:46 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104468
 
-it still needs work. Please test this with  poky master-next to see
-these errors during parse
+sign-off-by is missing and subject/summary line of commit is still
+same. Please rework.
 
-ERROR: ExpansionError during parsing
-/mnt/b/yoe/master/sources/meta-openembedded/meta-oe/recipes-graphics/ttf-fo=
-nts/ttf-google-fira.bb######################
-                | ETA:  0:00:00
-Traceback (most recent call last):
- File "Var <fetcher_hashes_dummyfunc[vardepvalue]>", line 1, in <module>
- File "/mnt/b/yoe/master/sources/poky/bitbake/lib/bb/fetch2/__init__.py",
-line 834, in get_hashvalue(d=3D<bb.data_smart.DataSmart object at
-0x7f25005627d0>, method_name=3D'sortable_revision')
-:
-    def get_hashvalue(d, method_name=3D'sortable_revision'):
-   >    pkgv, revs =3D _get_srcrev(d, method_name=3Dmethod_name)
-        return " ".join(revs)
- File "/mnt/b/yoe/master/sources/poky/bitbake/lib/bb/fetch2/__init__.py",
-line 804, in _get_srcrev(d=3D<bb.data_smart.DataSmart object at
-0x7f25005627d0>, method_name=3D'sortable_revision'):
-        if not format:
-   >        raise FetchError("The SRCREV_FORMAT variable must be set
-when multiple SCMs are used.\n"\
-                             "The SCMs are:\n%s" % '\n'.join(scms))
-bb.data_smart.ExpansionError: Failure expanding variable
-fetcher_hashes_dummyfunc[vardepvalue], expression was
-${@bb.fetch.get_hashvalue(d)} which triggered exception FetchError:
-Fetcher f
-ailure: The SRCREV_FORMAT variable must be set when multiple SCMs are used.
-The SCMs are:
-git://github.com/google/fonts.git;protocol=3Dhttps;branch=3Dmain;subpath=3D=
-ofl/firamono;name=3Dfiramono
-git://github.com/google/fonts.git;protocol=3Dhttps;branch=3Dmain;subpath=3D=
-ofl/firacode;name=3Dfiracode
-git://github.com/google/fonts.git;protocol=3Dhttps;branch=3Dmain;subpath=3D=
-ofl/firasans;name=3Dfirasans
-git://github.com/google/fonts.git;protocol=3Dhttps;branch=3Dmain;subpath=3D=
-ofl/firasanscondensed;name=3Dfirasanscondensed
-git://github.com/google/fonts.git;protocol=3Dhttps;branch=3Dmain;subpath=3D=
-ofl/firasansextracondensed;name=3Dfirasansextracondensed
-The variable dependency chain for the failure is:
-fetcher_hashes_dummyfunc[vardepvalue]
-
-ERROR: Parsing halted due to errors, see error messages above
-
-On Thu, Aug 17, 2023 at 2:06=E2=80=AFAM Tymoteusz Burak
-<tymoteusz.burak@3mdeb.com> wrote:
+On Thu, Aug 17, 2023 at 5:04=E2=80=AFAM Pawel Langowski
+<pawel.langowski@3mdeb.com> wrote:
 >
-> Added recipe for Google Fira Fonts collection (Fira Mono, Fira Code, Fira=
- Sans, Fira Sans Condensed, Fira Sans Extra Condensed) to meta-oe. This com=
-mit introduces support for integrating the highly legible and versatile Fir=
-a Fonts into the project, enhancing typographic options for user interfaces=
- and code display.
->
-> Signed-off-by: Tymoteusz Burak <tymoteusz.burak@3mdeb.com>
 > ---
->  .../ttf-fonts/ttf-google-fira.bb              | 58 +++++++++++++++++++
->  1 file changed, 58 insertions(+)
->  create mode 100644 meta-oe/recipes-graphics/ttf-fonts/ttf-google-fira.bb
+>  meta-oe/recipes-extended/qcbor/qcbor_git.bb | 32 +++++++++++++++++++++
+>  1 file changed, 32 insertions(+)
+>  create mode 100644 meta-oe/recipes-extended/qcbor/qcbor_git.bb
 >
-> diff --git a/meta-oe/recipes-graphics/ttf-fonts/ttf-google-fira.bb b/meta=
--oe/recipes-graphics/ttf-fonts/ttf-google-fira.bb
+> diff --git a/meta-oe/recipes-extended/qcbor/qcbor_git.bb b/meta-oe/recipe=
+s-extended/qcbor/qcbor_git.bb
 > new file mode 100644
-> index 000000000000..10047c6f7da6
+> index 000000000000..6e87458c3a3e
 > --- /dev/null
-> +++ b/meta-oe/recipes-graphics/ttf-fonts/ttf-google-fira.bb
-> @@ -0,0 +1,58 @@
-> +SUMMARY =3D "Google Fira Fonts- TTF Edition"
-> +HOMEPAGE =3D "https://fonts.google.com/?query=3Dfira"
-> +LICENSE =3D "OFL-1.1"
-> +LIC_FILES_CHKSUM =3D " \
-> +    file://${S}/firamono/OFL.txt;md5=3D0373cf792d4b95c61399b94c02702892 =
-\
-> +    file://${S}/firacode/OFL.txt;md5=3Dc75ca55aa0a5809a854d87db2a8ebf23 =
-\
-> +    file://${S}/firasans/OFL.txt;md5=3Dde28deb2f8c1f23fd4d6918113ac3ddd =
-\
-> +    file://${S}/firasanscondensed/OFL.txt;md5=3Dde28deb2f8c1f23fd4d69181=
-13ac3ddd \
-> +    file://${S}/firasansextracondensed/OFL.txt;md5=3Dde28deb2f8c1f23fd4d=
-6918113ac3ddd \
+> +++ b/meta-oe/recipes-extended/qcbor/qcbor_git.bb
+> @@ -0,0 +1,32 @@
+> +DESCRIPTION =3D " \
+> +    QCBOR is a powerful, commercial-quality CBOR encoder/decoder that \
+> +    implements these RFCs: RFC8949, RFC7049, RFC8742, RFC8943 \
 > +"
-> +SRCREV_firamono =3D "701bd391b1a4b3238de193a8523009ecef1be42c"
-> +SRCREV_firacode =3D "701bd391b1a4b3238de193a8523009ecef1be42c"
-> +SRCREV_firasans =3D "701bd391b1a4b3238de193a8523009ecef1be42c"
-> +SRCREV_firasanscondensed =3D "701bd391b1a4b3238de193a8523009ecef1be42c"
-> +SRCREV_firasansextracondensed =3D "701bd391b1a4b3238de193a8523009ecef1be=
-42c"
 > +
-> +SRC_URI =3D "git://github.com/google/fonts.git;protocol=3Dhttps;branch=
-=3Dmain;subpath=3Dofl/firamono;name=3Dfiramono \
-> +           git://github.com/google/fonts.git;protocol=3Dhttps;branch=3Dm=
-ain;subpath=3Dofl/firacode;name=3Dfiracode \
-> +           git://github.com/google/fonts.git;protocol=3Dhttps;branch=3Dm=
-ain;subpath=3Dofl/firasans;name=3Dfirasans \
-> +           git://github.com/google/fonts.git;protocol=3Dhttps;branch=3Dm=
-ain;subpath=3Dofl/firasanscondensed;name=3Dfirasanscondensed \
-> +           git://github.com/google/fonts.git;protocol=3Dhttps;branch=3Dm=
-ain;subpath=3Dofl/firasansextracondensed;name=3Dfirasansextracondensed"
+> +HOMEPAGE =3D "https://github.com/laurencelundblade/QCBOR"
 > +
-> +S =3D "${WORKDIR}"
+> +LICENSE =3D "BSD-3-Clause"
+> +LIC_FILES_CHKSUM =3D "file://README.md;beginline=3D442;endline=3D463;md5=
+=3Db55643261d6d221dac2b7a395105af62"
 > +
-> +do_install:append() {
-> +    install -d ${D}${datadir}/fonts/truetype/
-> +    find ${S} -path 'fira*/*.tt[cf]' -exec install -m 0644 {} ${D}${data=
-dir}/fonts/truetype/{} \;
-> +    install -D -m 0644 ${S}/firamono/OFL.txt ${D}${datadir}/licenses/${P=
-N}mono/OFL.txt
-> +    install -D -m 0644 ${S}/firacode/OFL.txt ${D}${datadir}/licenses/${P=
-N}code/OFL.txt
-> +    install -D -m 0644 ${S}/firasans/OFL.txt ${D}${datadir}/licenses/${P=
-N}sans/OFL.txt
-> +    install -D -m 0644 ${S}/firasanscondensed/OFL.txt ${D}${datadir}/lic=
-enses/${PN}sanscondensed/OFL.txt
-> +    install -D -m 0644 ${S}/firasansextracondensed/OFL.txt ${D}${datadir=
-}/licenses/${PN}sansextracondensed/OFL.txt
+> +SRC_URI =3D "git://github.com/laurencelundblade/QCBOR;protocol=3Dhttps;b=
+ranch=3Dmaster"
+> +
+> +SRCREV =3D "44754f738c6534a4304a83d4c6e97b3d3193d887"
+> +
+> +S =3D "${WORKDIR}/git"
+> +
+> +INSANE_SKIP:${PN}-dev +=3D "ldflags"
+> +
+> +inherit pkgconfig
+> +
+> +CFLAGS +=3D " \
+> +    -DUSEFULBUF_DISABLE_ALL_FLOAT \
+> +"
+> +
+> +do_install(){
+> +    install -d ${D}${libdir}
+> +    install -m 755 ${S}/libqcbor.a ${D}${libdir}/
+> +    install -d ${D}${includedir}/qcbor
+> +    install -m 644 ${S}/inc/*.h ${D}${includedir}
+> +    install -m 644 ${S}/inc/qcbor/*.h ${D}${includedir}/qcbor
 > +}
 > +
-> +PACKAGES =3D+ "${PN}-mono ${PN}-code ${PN}-sans ${PN}-sanscondensed ${PN=
-}-sansextracondensed"
-> +
-> +FILES:${PN}-mono +=3D " \
-> +                    ${datadir}/fonts/truetype/FiraMono* \
-> +                    ${datadir}/licenses/${PN}mono/OFL.txt \
-> +                "
-> +FILES:${PN}-code +=3D " \
-> +                    ${datadir}/fonts/truetype/FiraCode* \
-> +                    ${datadir}/licenses/${PN}code/OFL.txt \
-> +                "
-> +FILES:${PN}-sans +=3D " \
-> +                    ${datadir}/fonts/truetype/FiraSans-* \
-> +                    ${datadir}/licenses/${PN}sans/OFL.txt \
-> +                "
-> +FILES:${PN}-sanscondensed +=3D " \
-> +                            ${datadir}/fonts/truetype/FiraSansCondensed-=
-* \
-> +                            ${datadir}/licenses/${PN}sanscondensed/OFL.t=
-xt \
-> +                        "
-> +FILES:${PN}-sansextracondensed +=3D " \
-> +                                    ${datadir}/fonts/truetype/FiraSansEx=
-traCondensed-* \
-> +                                    ${datadir}/licenses/${PN}sansextraco=
-ndensed/OFL.txt \
-> +                                 "
-> +
-> +require ttf.inc
 > --
 > 2.41.0
 >
 >
 > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
 > Links: You receive all messages sent to this group.
-> View/Reply Online (#104452): https://lists.openembedded.org/g/openembedde=
-d-devel/message/104452
-> Mute This Topic: https://lists.openembedded.org/mt/100796947/1997914
+> View/Reply Online (#104460): https://lists.openembedded.org/g/openembedde=
+d-devel/message/104460
+> Mute This Topic: https://lists.openembedded.org/mt/100783405/1997914
 > Group Owner: openembedded-devel+owner@lists.openembedded.org
 > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
 aj.khem@gmail.com]
