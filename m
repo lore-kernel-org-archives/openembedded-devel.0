@@ -1,88 +1,93 @@
-Return-Path: <frieder.schrempf@kontron.de>
+Return-Path: <pawel.langowski@3mdeb.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4D9A5EB64DD
-	for <webhook@archiver.kernel.org>; Thu, 17 Aug 2023 09:20:48 +0000 (UTC)
-Received: from mail.fris.de (mail.fris.de [116.203.77.234])
- by mx.groups.io with SMTP id smtpd.web11.183019.1692264039382210495
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2DCD7C2FC0E
+	for <webhook@archiver.kernel.org>; Thu, 17 Aug 2023 09:21:28 +0000 (UTC)
+Received: from 4.mo576.mail-out.ovh.net (4.mo576.mail-out.ovh.net [46.105.42.102])
+ by mx.groups.io with SMTP id smtpd.web10.183327.1692264078861039996
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 17 Aug 2023 02:20:40 -0700
+ Thu, 17 Aug 2023 02:21:19 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@fris.de header.s=dkim header.b=tUtM+0Vz;
- spf=pass (domain: fris.de, ip: 116.203.77.234, mailfrom: frieder@fris.de)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id 89029C0272;
-	Thu, 17 Aug 2023 11:20:36 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fris.de; s=dkim;
-	t=1692264036; h=from:subject:date:message-id:to:cc:mime-version:
-	 content-transfer-encoding; bh=3EVl2bk+XWvCTK1N5A0A70kJ93i7XKGsAOQN/KgGGlg=;
-	b=tUtM+0VzeFMRWJaJ63xkcCkAQNQU1bUwN1O5glyN1UtRwBnlGXIJKzXZCAGSG7R/dVV9Pb
-	hpc/bkislXK0p2qTwOVtITVNusTNib9g6zD9s8CKT7beZm6OCj5gVPgPWcD4cjzbOVjaZM
-	p1ysYmsll0EFSGtNqGAIS+Ltx050Xqu8xhWarpc4xRytEZdUvq9oMkl0jIZguMeK9lmZLc
-	POjw7Byjp956EExzEYcD6rvrJHaw93wGwRdzRhEJonVPwfF31dIPyaWy9wtMn7kgytWp28
-	p3sLoFzxhaGoEquqe6l9aTq82txW2zlen53z0jP1y5OwtH4/XchLG6AjDDGThg==
-From: Frieder Schrempf <frieder@fris.de>
+ dkim=none (message not signed); spf=softfail (domain: 3mdeb.com, ip: 46.105.42.102, mailfrom: pawel.langowski@3mdeb.com)
+Received: from director9.ghost.mail-out.ovh.net (unknown [10.109.138.64])
+	by mo576.mail-out.ovh.net (Postfix) with ESMTP id BF56D26BA1
+	for <openembedded-devel@lists.openembedded.org>; Thu, 17 Aug 2023 09:21:16 +0000 (UTC)
+Received: from ghost-submission-6684bf9d7b-87bbw (unknown [10.110.103.37])
+	by director9.ghost.mail-out.ovh.net (Postfix) with ESMTPS id 5E5DB1FDBB;
+	Thu, 17 Aug 2023 09:21:16 +0000 (UTC)
+Received: from 3mdeb.com ([37.59.142.107])
+	by ghost-submission-6684bf9d7b-87bbw with ESMTPSA
+	id NdMGCIzm3WQj0QAAhSMc7Q
+	(envelope-from <pawel.langowski@3mdeb.com>); Thu, 17 Aug 2023 09:21:16 +0000
+Authentication-Results: garm.ovh; auth=pass (GARM-107S0011b06e393-f23f-4c63-8da6-b4001e6102de,
+                    24B04C67D9B2C368F82D87F48383B3ED5D49B353) smtp.auth=pawel.langowski@3mdeb.com
+X-OVh-ClientIp: 213.192.77.249
+From: Pawel Langowski <pawel.langowski@3mdeb.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Frieder Schrempf <frieder.schrempf@kontron.de>
-Subject: [meta-python][PATCH v2] python3-can: Update runtime dependencies
-Date: Thu, 17 Aug 2023 11:20:34 +0200
-Message-ID: <20230817092034.26410-1-frieder@fris.de>
+Cc: piotr.krol@3mdeb.com,
+	tomasz.zyjewski@3mdeb.com
+Subject: [meta-oe][PATCH v2] recipes-extended: add qcbor recipe
+Date: Thu, 17 Aug 2023 11:21:06 +0200
+Message-ID: <20230817092106.63338-1-pawel.langowski@3mdeb.com>
+X-Mailer: git-send-email 2.41.0
 MIME-Version: 1.0
-X-Last-TLS-Session-Version: TLSv1.3
+X-Ovh-Tracer-Id: 16612653127496086169
+X-VR-SPAMSTATE: OK
+X-VR-SPAMSCORE: 0
+X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrgedviedrudduuddgudegucetufdoteggodetrfdotffvucfrrhhofhhilhgvmecuqfggjfdpvefjgfevmfevgfenuceurghilhhouhhtmecuhedttdenucenucfjughrpefhvfevufffkffoggfgsedtkeertdertddtnecuhfhrohhmpefrrgifvghlucfnrghnghhofihskhhiuceophgrfigvlhdrlhgrnhhgohifshhkihesfehmuggvsgdrtghomheqnecuggftrfgrthhtvghrnhepkeefhefhkeffieetjedvffettdeigfeufeehgefgteejudfgfeelfeeiteeggfejnecuffhomhgrihhnpehgihhthhhusgdrtghomhenucfkphepuddvjedrtddrtddruddpvddufedrudelvddrjeejrddvgeelpdefjedrheelrddugedvrddutdejnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehinhgvthepuddvjedrtddrtddruddpmhgrihhlfhhrohhmpeeophgrfigvlhdrlhgrnhhgohifshhkihesfehmuggvsgdrtghomheqpdhnsggprhgtphhtthhopedupdhrtghpthhtohepohhpvghnvghmsggvugguvgguqdguvghvvghlsehlihhsthhsrdhophgvnhgvmhgsvgguuggvugdrohhrghdpoffvtefjohhsthepmhhoheejiedpmhhouggvpehsmhhtphhouhht
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 17 Aug 2023 09:20:48 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104455
+ <openembedded-devel@lists.openembedded.org>; Thu, 17 Aug 2023 09:21:28 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104456
 
-From: Frieder Schrempf <frieder.schrempf@kontron.de>
-
-According to the setup.py of v4.2.2 [1] the following runtime
-dependencies are currently missing. Add them.
-
-* packaging
-* setuptools
-
-Also the aenum dependency was droppen in v4.0.0 [2], so let's
-remove it.
-
-[1] https://github.com/hardbyte/python-can/blob/4.2.2/setup.py
-[2] https://github.com/hardbyte/python-can/commit/13625ea2cc18e3283b8111b=
-ec7e139ed9b6c7f48
-
-Signed-off-by: Frieder Schrempf <frieder.schrempf@kontron.de>
+Recipe for QCBOR - a CBOR encoder/decoder
 ---
-Changes in v2:
-* Drop unused aenum dependency
-* Update subject and commit message
----
- meta-python/recipes-devtools/python/python3-can_4.2.2.bb | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ meta-oe/recipes-extended/qcbor/qcbor_git.bb | 30 +++++++++++++++++++++
+ 1 file changed, 30 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/qcbor/qcbor_git.bb
 
-diff --git a/meta-python/recipes-devtools/python/python3-can_4.2.2.bb b/m=
-eta-python/recipes-devtools/python/python3-can_4.2.2.bb
-index 7ecbf1207..32b5ad101 100644
---- a/meta-python/recipes-devtools/python/python3-can_4.2.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-can_4.2.2.bb
-@@ -10,7 +10,6 @@ PYPI_PACKAGE=3D"python-can"
- inherit pypi setuptools3
-=20
- RDEPENDS:${PN} +=3D " \
--    python3-aenum \
-     python3-asyncio \
-     python3-codecs \
-     python3-compression \
-@@ -20,7 +19,9 @@ RDEPENDS:${PN} +=3D " \
-     python3-logging \
-     python3-misc \
-     python3-netserver \
-+    python3-packaging \
-     python3-pkg-resources \
-+    python3-setuptools \
-     python3-sqlite3 \
-     python3-typing-extensions \
-     python3-wrapt \
+diff --git a/meta-oe/recipes-extended/qcbor/qcbor_git.bb b/meta-oe/recipe=
+s-extended/qcbor/qcbor_git.bb
+new file mode 100644
+index 000000000000..a1bdf069936e
+--- /dev/null
++++ b/meta-oe/recipes-extended/qcbor/qcbor_git.bb
+@@ -0,0 +1,30 @@
++DESCRIPTION =3D " \
++    QCBOR is a powerful, commercial-quality CBOR encoder/decoder that \
++    implements these RFCs: RFC8949, RFC7049, RFC8742, RFC8943 \
++"
++
++HOMEPAGE =3D "https://github.com/laurencelundblade/QCBOR"
++
++LICENSE =3D "BSD-3-Clause"
++LIC_FILES_CHKSUM =3D "file://README.md;beginline=3D442;endline=3D463;md5=
+=3Db55643261d6d221dac2b7a395105af62"
++
++SRC_URI =3D "git://github.com/laurencelundblade/QCBOR;protocol=3Dhttps;b=
+ranch=3Dmaster"
++
++SRCREV =3D "44754f738c6534a4304a83d4c6e97b3d3193d887"
++
++S =3D "${WORKDIR}/git"
++
++inherit pkgconfig
++
++CFLAGS +=3D " \
++    -DUSEFULBUF_DISABLE_ALL_FLOAT \
++"
++
++do_install(){
++    install -d ${D}${libdir}
++    install -m 755 ${S}/libqcbor.a ${D}${libdir}/
++    install -d ${D}${includedir}/qcbor
++    install -m 644 ${S}/inc/*.h ${D}${includedir}
++    install -m 644 ${S}/inc/qcbor/*.h ${D}${includedir}/qcbor
++}
++
 --=20
 2.41.0
 
