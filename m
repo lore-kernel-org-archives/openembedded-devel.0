@@ -1,93 +1,118 @@
-Return-Path: <ewa.kujawska@3mdeb.com>
+Return-Path: <narpat.mali@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 20318C2FC14
-	for <webhook@archiver.kernel.org>; Thu, 17 Aug 2023 12:47:59 +0000 (UTC)
-Received: from 9.mo583.mail-out.ovh.net (9.mo583.mail-out.ovh.net [178.32.96.204])
- by mx.groups.io with SMTP id smtpd.web10.186347.1692276475460455431
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D752EC30632
+	for <webhook@archiver.kernel.org>; Thu, 17 Aug 2023 14:55:49 +0000 (UTC)
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.web11.189553.1692284148272521303
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 17 Aug 2023 05:47:56 -0700
+ Thu, 17 Aug 2023 07:55:48 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=softfail (domain: 3mdeb.com, ip: 178.32.96.204, mailfrom: ewa.kujawska@3mdeb.com)
-Received: from director10.ghost.mail-out.ovh.net (unknown [10.108.16.108])
-	by mo583.mail-out.ovh.net (Postfix) with ESMTP id 1D64527444
-	for <openembedded-devel@lists.openembedded.org>; Thu, 17 Aug 2023 12:47:52 +0000 (UTC)
-Received: from ghost-submission-6684bf9d7b-2hkcz (unknown [10.110.103.92])
-	by director10.ghost.mail-out.ovh.net (Postfix) with ESMTPS id 6023E1FEAA;
-	Thu, 17 Aug 2023 12:47:52 +0000 (UTC)
-Received: from 3mdeb.com ([37.59.142.105])
-	by ghost-submission-6684bf9d7b-2hkcz with ESMTPSA
-	id xc5fCPgW3mTa7AYAsXhSjg
-	(envelope-from <ewa.kujawska@3mdeb.com>); Thu, 17 Aug 2023 12:47:52 +0000
-Authentication-Results: garm.ovh; auth=pass (GARM-105G0067ba3b264-6d6b-4070-b023-8e4db9cab176,
-                    746B728346A88655F675273AEEE7EA7B681C06C7) smtp.auth=ewa.kujawska@3mdeb.com
-X-OVh-ClientIp: 213.192.77.249
-From: Ewa Kujawska <ewa.kujawska@3mdeb.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: piotr.krol@3mdeb.com,
-	tomasz.zyjewski@3mdeb.com
-Subject: [meta-python][PATCH v2] python3-libusb1_1.7.1.bb: recipe added
-Date: Thu, 17 Aug 2023 14:47:26 +0200
-Message-ID: <20230817124736.3524633-1-ewa.kujawska@3mdeb.com>
-X-Mailer: git-send-email 2.41.0
+ dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=XzJrg8Mm;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=75930fb0fb=narpat.mali@windriver.com)
+Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.17.1.22/8.17.1.22) with ESMTP id 37HAkAkI026232;
+	Thu, 17 Aug 2023 14:55:47 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
+	 h=from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding:content-type; s=PPS06212021; bh=GwDU7
+	zP1k9Wo8KgpIGx/ZtAL+vdoIH+qc4QJaUFAd1Y=; b=XzJrg8MmsjSOhP2+oBPYL
+	wS4Ov1su3P2+QFITPjECo2/qAZ34fh/dikj1siKnm3QrUT05YiFEu22rPywvnaCQ
+	gYRpwqyNkQlHltgYGDpOzxs/GnU/JEf8xwQcWZzDr4jhDX9aHujjX1VsmmKaolhz
+	p7lZjzMX8nCsjj/vvpi/4fCfOdvRKJliRiuo3R2haX0gVJW9s0ZQu/5KNiBZeYLm
+	YbgagA+sqXAjSSgAcvJ0msWOmuL7AMwc4tGv81wACX6rXQtKrbB+89i/rt7uRcOL
+	985XcWhr5EUO9xCIWUtdpXDTPT88ZB+DmQbSY2FhQsJbEHSeoScTeBsH+Jyzv+aL
+	A==
+Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3se125w1d4-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT);
+	Thu, 17 Aug 2023 14:55:46 +0000 (GMT)
+Received: from blr-linux-engg1.wrs.com (147.11.136.210) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.27; Thu, 17 Aug 2023 07:55:44 -0700
+From: nmali <narpat.mali@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>, <akuster808@gmail.com>
+Subject: [meta-oe][kirkstone][PATCH 1/1] libqb: upgrade 2.0.6 -> 2.0.8
+Date: Thu, 17 Aug 2023 14:55:24 +0000
+Message-ID: <20230817145524.1042930-1-narpat.mali@windriver.com>
+X-Mailer: git-send-email 2.40.0
 MIME-Version: 1.0
-X-Ovh-Tracer-Id: 1655072864304139673
-X-VR-SPAMSTATE: OK
-X-VR-SPAMSCORE: 0
-X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrgedviedrudduuddgheeiucetufdoteggodetrfdotffvucfrrhhofhhilhgvmecuqfggjfdpvefjgfevmfevgfenuceurghilhhouhhtmecuhedttdenucenucfjughrpefhvfevufffkffoggfgsedtkeertdertddtnecuhfhrohhmpefgfigrucfmuhhjrgifshhkrgcuoegvfigrrdhkuhhjrgifshhkrgesfehmuggvsgdrtghomheqnecuggftrfgrthhtvghrnhepjefggfefvddutdekheegtedttdejvddttddvheejfeejtdeikedugedvvdejleeunecuffhomhgrihhnpehgihhthhhusgdrtghomhdpphihthhhohhnhhhoshhtvggurdhorhhgnecukfhppeduvdejrddtrddtrddupddvudefrdduledvrdejjedrvdegledpfeejrdehledrudegvddruddtheenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepihhnvghtpeduvdejrddtrddtrddupdhmrghilhhfrhhomhepoegvfigrrdhkuhhjrgifshhkrgesfehmuggvsgdrtghomheqpdhnsggprhgtphhtthhopedupdhrtghpthhtohepohhpvghnvghmsggvugguvgguqdguvghvvghlsehlihhsthhsrdhophgvnhgvmhgsvgguuggvugdrohhrghdpoffvtefjohhsthepmhhoheekfedpmhhouggvpehsmhhtphhouhht
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [147.11.136.210]
+X-ClientProxiedBy: ala-exchng01.corp.ad.wrs.com (147.11.82.252) To
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252)
+X-Proofpoint-GUID: GbSD0NVI85cwsHn5P2v-4Ntd4AianFOm
+X-Proofpoint-ORIG-GUID: GbSD0NVI85cwsHn5P2v-4Ntd4AianFOm
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.267,Aquarius:18.0.957,Hydra:6.0.601,FMLib:17.11.176.26
+ definitions=2023-08-17_09,2023-08-17_02,2023-05-22_02
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 phishscore=0 bulkscore=0
+ malwarescore=0 suspectscore=0 lowpriorityscore=0 mlxscore=0
+ mlxlogscore=999 spamscore=0 clxscore=1011 impostorscore=0
+ priorityscore=1501 adultscore=0 classifier=spam adjust=0 reason=mlx
+ scancount=1 engine=8.19.0-2306200000 definitions=main-2308170132
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 17 Aug 2023 12:47:59 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104463
+ <openembedded-devel@lists.openembedded.org>; Thu, 17 Aug 2023 14:55:49 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104464
 
-A pure-python wrapper for libusb-1.0 refers to a Python module or
-package that provides an interface to interact with the libusb-1.0
-library using Python code. libusb-1.0 is a cross-platform library
-that allows applications to communicate with USB devices without
-the need for platform-specific drivers. It provides a standardized
-way to access USB devices from various operating systems.
+From: Narpat Mali <narpat.mali@windriver.com>
 
-Signed-off-by: Ewa Kujawska <ewa.kujawska@3mdeb.com>
+The delta between 2.0.6 and 2.0.8 contains the CVE-2023-39976 fix
+and other bugfixes. git log --oneline shows:
+
+002171b (HEAD, tag: v2.0.8, origin/main, origin/HEAD, main) Update library version for 2.0.8
+1bbaa92 log: fix potential overflow with long log messages (#490)
+92ddd7c test - fix test dependancies (#489)
+06c8641 (tag: v2.0.7) Update -version info for 2.0.7
+0665086 spec: Migrate to SPDX license (#487)
+5862acb blackbox: fix potential overlow/memory corruption (#486)
+a3aedbc tests: allow -j to work (#485)
+335dbb6 test: Remove gnu/lib-names.h from libstat_wrapper.c (#482)
+4dcdfe9 strlcpy: avoid compiler warning from strncpy (#473)
+1a32a60 Add --disable-tests option (#475)
+10b0623 m4/ax_pthread.m4: update to latest upstream version (serial 31) (#472)
+e038f59 tests: Close race condition in check_loop (#480)
+fde729e timer: Move state check to before time check (#479)
+5594d37 ipc: Retry receiving credentials if the the message is short (#476)
+e8129a3 add simplified chinese readme (#474)
+eaa95ec lib: Fix some small bugs spotted by newest covscan (#471)
+14507d5 configure: Modernize configure.ac a bit (#470)
+8325d84 tests: Fix tests on FreeBSD-devel (#469)
+e407874 doxygen2man: Fix function parameter alignment (#468)
+0eb0991 tests: cleanup the last of the empty directories (#467)
+44a4cb2 tests: Make ipc test more portable (#466)
+758044b (tag: v2.0.6) test: Include ipc_sock.test in the libqb-tests rpm (#463)
+
+Release Notes: https://github.com/ClusterLabs/libqb/releases
+
+Signed-off-by: Narpat Mali <narpat.mali@windriver.com>
 ---
- .../python/python3-libusb1_1.7.1.bb                 | 13 +++++++------
- 1 file changed, 7 insertions(+), 6 deletions(-)
+ .../recipes-extended/libqb/{libqb_2.0.6.bb => libqb_2.0.8.bb}   | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-extended/libqb/{libqb_2.0.6.bb => libqb_2.0.8.bb} (93%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-libusb1_1.7.1.bb=
- b/meta-python/recipes-devtools/python/python3-libusb1_1.7.1.bb
-index 476966c2178b..9f95e5595178 100644
---- a/meta-python/recipes-devtools/python/python3-libusb1_1.7.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-libusb1_1.7.1.bb
-@@ -1,15 +1,16 @@
- SUMMARY =3D "Pure-python wrapper for libusb-1.0"
-+
- HOMEPAGE =3D "http://github.com/vpelletier/python-libusb1"
--AUTHOR =3D "Vincent Pelletier <plr.vincent@gmail.com>"
--LICENSE =3D "LGPL-2.1"
-+LICENSE =3D "LGPL-2.1-only"
- LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D751419260aa954499f7abaabaa882=
-bbe"
-=20
--SRC_URI =3D "https://files.pythonhosted.org/packages/80/bb/4ee9d760dd294=
-99d877ee384f1d2bc6bb9923defd4c69843aef5e729972d/libusb1-1.7.1.tar.gz"
--SRC_URI[md5sum] =3D "cb4073182fef4cee6ab9c6666b48d1a1"
-+SRC_URI =3D "https://files.pythonhosted.org/packages/80/bb/4ee9d760dd294=
-99d877ee384f1d2bc6bb9923defd4c69843aef5e729972d/libusb1-${PV}.tar.gz"
- SRC_URI[sha256sum] =3D "adf64a4f3f5c94643a1286f8153bcf4bc787c348b38934aa=
-cd7fe17fbeebc571"
-=20
--S =3D "${WORKDIR}/libusb1-1.7.1"
-+PV =3D "1.7.1"
-+
-+S =3D "${WORKDIR}/libusb1-${PV}"
-=20
--RDEPENDS_${PN} =3D "libusb1"
-+RDEPENDS:${PN} =3D "libusb1"
-=20
- inherit setuptools3
---=20
-2.41.0
+diff --git a/meta-oe/recipes-extended/libqb/libqb_2.0.6.bb b/meta-oe/recipes-extended/libqb/libqb_2.0.8.bb
+similarity index 93%
+rename from meta-oe/recipes-extended/libqb/libqb_2.0.6.bb
+rename to meta-oe/recipes-extended/libqb/libqb_2.0.8.bb
+index ce3606d777..3db9e2e66f 100644
+--- a/meta-oe/recipes-extended/libqb/libqb_2.0.6.bb
++++ b/meta-oe/recipes-extended/libqb/libqb_2.0.8.bb
+@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=321bf41f280cf805086dd5a720b37785"
+ 
+ inherit autotools pkgconfig
+ 
+-SRCREV = "758044bed5f615c90818aa5431d00303288888e5"
++SRCREV = "002171bbcf4bc4728da56c1538afd9e9d814ecaf"
+ SRC_URI = "git://github.com/ClusterLabs/${BPN}.git;branch=main;protocol=https \
+           "
+ S = "${WORKDIR}/git"
+-- 
+2.40.0
 
 
