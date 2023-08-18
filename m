@@ -1,93 +1,146 @@
-Return-Path: <roger@norberthealth.com>
+Return-Path: <Yogita.Urade@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2AEF5C001DE
-	for <webhook@archiver.kernel.org>; Fri, 18 Aug 2023 11:42:32 +0000 (UTC)
-Received: from mail-lf1-f44.google.com (mail-lf1-f44.google.com [209.85.167.44])
- by mx.groups.io with SMTP id smtpd.web10.9035.1692358948424594649
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 77F19C7113E
+	for <webhook@archiver.kernel.org>; Fri, 18 Aug 2023 12:31:12 +0000 (UTC)
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.web11.10135.1692361866190283755
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 18 Aug 2023 04:42:28 -0700
+ Fri, 18 Aug 2023 05:31:06 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@norberthealth-com.20221208.gappssmtp.com header.s=20221208 header.b=C/EOHLFP;
- spf=pass (domain: norberthealth.com, ip: 209.85.167.44, mailfrom: roger@norberthealth.com)
-Received: by mail-lf1-f44.google.com with SMTP id 2adb3069b0e04-4ff8f2630e3so1240448e87.1
-        for <openembedded-devel@lists.openembedded.org>; Fri, 18 Aug 2023 04:42:28 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=norberthealth-com.20221208.gappssmtp.com; s=20221208; t=1692358946; x=1692963746;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=q4s8ox6o55WQ6fm+vYJ2YqQaDwwA1NX4M7q3mfvwy38=;
-        b=C/EOHLFPRFGlw9sNn40tbtPX9EZHmq9I/utUXnjo19xvRYMllR0YFu8WvGQtJIJnFC
-         w4um84Ni+CZpaOxG0cOF8yFPsq/+tYPNdMLQGoGemsP2iQgHAhkFObmDrEq219P6MqEM
-         9JIieZTntGfIiKKyWABJO6FUp3n9VUaqGAraa1X0JmjpD3sXabfr5J60wdWPM6mUCe3e
-         vRMT5EngInpYOfeWBdYCY5CDz58jFDDYYWB1aAYJkZsS7beiFtXQBING+zmdSYT5i7eb
-         KMsCJU/Z2oaEMVes0IkT/bcQbhc+1t7eJkxg1SByWhgUBDjhmJXzFkQuON1ycxxHPx32
-         pBQg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1692358946; x=1692963746;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=q4s8ox6o55WQ6fm+vYJ2YqQaDwwA1NX4M7q3mfvwy38=;
-        b=BzwzJsdGBcRQKIHD39CpMg2ayoclZ/8AiRl28z6n7nozWjlZzNtzKI5MJLDvpfRXHq
-         IiwwQkBtlsSEHT0+Y82XPi3AAdXINpYuENpHPVsLkwZQj9SCMRYf3hncGBaYNlSILD0v
-         P4ijYsKVbuylCzeT4L809SaQ+nB81RURFkV8cOXBscoi0+rkjE3PiyY64wyQ6tc5kDC2
-         b27THk1F/0brWbl/pVFqUPPjG4A7T3/aKVQgGsgScqfajaHSz8/3yrAQPICA1PabENYb
-         DG8gFFt7C8hzY3lFbIEwC2H6Clz6gAVJm1WrCLKxtUhwa8sZdVbliISSJKlSakpyx09b
-         q8lQ==
-X-Gm-Message-State: AOJu0YwG6gB4cMrrwMnlT9/CzQqFsKrhD68R1doHnlQk11R0qvDOut9G
-	G3v3yFoEW4/60t2PlmYyY2Y2uG32lh7fylSteB+mwQ==
-X-Google-Smtp-Source: AGHT+IGCUG6eh99TZ008GlfRyQXuAZz6VlQvTcFiXu/mTD7NEJ8671WM+zkSrShv4aNcjsQdP9VTSw==
-X-Received: by 2002:a05:6512:28f:b0:4ff:a23b:de26 with SMTP id j15-20020a056512028f00b004ffa23bde26mr1431145lfp.52.1692358945817;
-        Fri, 18 Aug 2023 04:42:25 -0700 (PDT)
-Received: from localhost.localdomain ([2a01:e0a:214:bf30:8993:b321:4936:7469])
-        by smtp.gmail.com with ESMTPSA id o18-20020a05600c379200b003fc01189b0dsm2523262wmr.42.2023.08.18.04.42.24
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 18 Aug 2023 04:42:25 -0700 (PDT)
-From: Roger Knecht <roger@norberthealth.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Tim Orling <TicoTimo@gmail.com>,
-	Derek Straka <derek@asterius.io>,
-	Khem Raj <raj.khem@gmail.com>,
-	Roger Knecht <roger@norberthealth.com>
-Subject: [meta-python][PATCH] python3-schedule: add recipe
-Date: Fri, 18 Aug 2023 13:41:56 +0200
-Message-Id: <20230818114156.367538-1-roger@norberthealth.com>
-X-Mailer: git-send-email 2.25.1
+ dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=o44BGxT6;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=7594e7d5ba=yogita.urade@windriver.com)
+Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.17.1.22/8.17.1.22) with ESMTP id 37IBH5PI028687
+	for <openembedded-devel@lists.openembedded.org>; Fri, 18 Aug 2023 12:31:05 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
+	 h=from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding:content-type; s=PPS06212021; bh=pwc9b
+	WNhvI7S5xhCf5KtKQLFbGRreb1KklAdBwzVaEo=; b=o44BGxT6IZ1uuG+7WnXpg
+	h+K+g8u7zVBZ2ZndUdiEIQpdNyGEAq5b4onYWHcOny2ImdnDCZqOr/KbmApI6rGt
+	7JXk4mey3Gz0GjzFsgDKe7QZicJG54tkV06forLqjQFPpqqfBXETviEN08mA4b0c
+	Xo7uItJ2mwFphTikBqRd80xlpP7v6/GQhzHHlBr+ks+o/jqjUTt05EtPyrYui6Jo
+	JUePIE6gc9FwRQvMzKIXjnC0tORGzUacNqAOzxA1BUN4D3Cp1CdMoYWr56PU/0jd
+	fdXB+FF7uhL85X6gKGCY43JIX5IUz+ZbJMoKXBj1rwv2evueDWr/oDy17o0aUWDe
+	A==
+Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3se125ww8b-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Fri, 18 Aug 2023 12:31:05 +0000 (GMT)
+Received: from blr-linux-engg1.wrs.com (147.11.136.210) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.27; Fri, 18 Aug 2023 05:31:02 -0700
+From: yurade <yogita.urade@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [oe][meta-oe][PATCH 1/1] poppler: fix CVE-2023-34872
+Date: Fri, 18 Aug 2023 12:30:44 +0000
+Message-ID: <20230818123044.2203564-1-yogita.urade@windriver.com>
+X-Mailer: git-send-email 2.35.5
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [147.11.136.210]
+X-ClientProxiedBy: ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) To
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252)
+X-Proofpoint-GUID: nk7RlNVWrGcXwShN9GvMSqsTQKfgmn0H
+X-Proofpoint-ORIG-GUID: nk7RlNVWrGcXwShN9GvMSqsTQKfgmn0H
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.267,Aquarius:18.0.957,Hydra:6.0.601,FMLib:17.11.176.26
+ definitions=2023-08-18_15,2023-08-18_01,2023-05-22_02
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 phishscore=0 bulkscore=0
+ malwarescore=0 suspectscore=0 lowpriorityscore=0 mlxscore=0
+ mlxlogscore=928 spamscore=0 clxscore=1015 impostorscore=0
+ priorityscore=1501 adultscore=0 classifier=spam adjust=0 reason=mlx
+ scancount=1 engine=8.19.0-2306200000 definitions=main-2308180115
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 18 Aug 2023 11:42:32 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104488
+ <openembedded-devel@lists.openembedded.org>; Fri, 18 Aug 2023 12:31:12 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104489
 
-Add a recipe for python schedule library.
+From: Yogita Urade <yogita.urade@windriver.com>
 
-Signed-off-by: Roger Knecht <roger@norberthealth.com>
+A vulnerability in Outline.cc for Poppler prior to 23.06.0
+allows a remote attacker to cause a Denial of Service (DoS)
+(crash) via a crafted PDF file in OutlineItem::open.
+
+Reference:
+https://gitlab.freedesktop.org/poppler/poppler/-/issues/1399
+
+Signed-off-by: Yogita Urade <yogita.urade@windriver.com>
 ---
- .../recipes-devtools/python/python3-schedule_1.2.0.bb  | 10 ++++++++++
- 1 file changed, 10 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-schedule_1.2.0.bb
+ .../poppler/poppler/CVE-2023-34872.patch      | 46 +++++++++++++++++++
+ .../poppler/poppler_23.04.0.bb                |  1 +
+ 2 files changed, 47 insertions(+)
+ create mode 100644 meta-oe/recipes-support/poppler/poppler/CVE-2023-34872.patch
 
-diff --git a/meta-python/recipes-devtools/python/python3-schedule_1.2.0.bb b/meta-python/recipes-devtools/python/python3-schedule_1.2.0.bb
+diff --git a/meta-oe/recipes-support/poppler/poppler/CVE-2023-34872.patch b/meta-oe/recipes-support/poppler/poppler/CVE-2023-34872.patch
 new file mode 100644
-index 000000000..98b7690e1
+index 0000000000..cc942fad77
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-schedule_1.2.0.bb
-@@ -0,0 +1,10 @@
-+SUMMARY = "Job scheduling for humans"
-+HOMEPAGE = "https://github.com/dbader/schedule"
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=6400f153491d45ea3459761627ca24b2"
++++ b/meta-oe/recipes-support/poppler/poppler/CVE-2023-34872.patch
+@@ -0,0 +1,46 @@
++From 591235c8b6c65a2eee88991b9ae73490fd9afdfe Mon Sep 17 00:00:00 2001
++From: Albert Astals Cid <aacid@kde.org>
++Date: Fri, 18 Aug 2023 11:36:06 +0000
++Subject: [PATCH] OutlineItem::open: Fix crash on malformed files
 +
-+SRC_URI[sha256sum] = "b4ad697aafba7184c9eb6a1e2ebc41f781547242acde8ceae9a0a25b04c0922d"
++Fixes #1399
 +
-+inherit pypi setuptools3
++CVE: CVE-2023-34872
 +
-+RDEPENDS:${PN} += "${PYTHON_PN}-datetime ${PYTHON_PN}-logging ${PYTHON_PN}-math"
++Upstream-Status: Backport [https://gitlab.freedesktop.org/poppler/poppler/-/commit/591235c8b6c65a2eee88991b9ae73490fd9afdfe]
++
++Signed-off-by: Yogita Urade <yogita.urade@windriver.com>
++---
++ poppler/Outline.cc | 10 +++++++---
++ 1 file changed, 7 insertions(+), 3 deletions(-)
++
++diff --git a/poppler/Outline.cc b/poppler/Outline.cc
++index cbb6cb4..4c68be9 100644
++--- a/poppler/Outline.cc
+++++ b/poppler/Outline.cc
++@@ -14,7 +14,7 @@
++ // under GPL version 2 or later
++ //
++ // Copyright (C) 2005 Marco Pesenti Gritti <mpg@redhat.com>
++-// Copyright (C) 2008, 2016-2019, 2021 Albert Astals Cid <aacid@kde.org>
+++// Copyright (C) 2008, 2016-2019, 2021, 2023 Albert Astals Cid <aacid@kde.org>
++ // Copyright (C) 2009 Nick Jones <nick.jones@network-box.com>
++ // Copyright (C) 2016 Jason Crain <jason@aquaticape.us>
++ // Copyright (C) 2017 Adrian Johnson <ajohnson@redneon.com>
++@@ -483,8 +483,12 @@ void OutlineItem::open()
++ {
++     if (!kids) {
++         Object itemDict = xref->fetch(ref);
++-        const Object &firstRef = itemDict.dictLookupNF("First");
++-        kids = readItemList(this, &firstRef, xref, doc);
+++        if (itemDict.isDict()) {
+++            const Object &firstRef = itemDict.dictLookupNF("First");
+++            kids = readItemList(this, &firstRef, xref, doc);
+++        } else {
+++            kids = new std::vector<OutlineItem *>();
+++        }
++     }
++ }
++
++--
++2.35.5
+diff --git a/meta-oe/recipes-support/poppler/poppler_23.04.0.bb b/meta-oe/recipes-support/poppler/poppler_23.04.0.bb
+index 896176801b..f4411e1163 100644
+--- a/meta-oe/recipes-support/poppler/poppler_23.04.0.bb
++++ b/meta-oe/recipes-support/poppler/poppler_23.04.0.bb
+@@ -8,6 +8,7 @@ SRC_URI = "http://poppler.freedesktop.org/${BP}.tar.xz \
+            file://basename-include.patch \
+            file://0001-cmake-Do-not-use-isystem.patch \
+            file://jpeg-stdio.patch \
++           file://CVE-2023-34872.patch \
+            "
+ SRC_URI[sha256sum] = "b6d893dc7dcd4138b9e9df59a13c59695e50e80dc5c2cacee0674670693951a1"
+ 
 -- 
-2.25.1
+2.35.5
 
 
