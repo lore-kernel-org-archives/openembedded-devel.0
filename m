@@ -1,109 +1,146 @@
-Return-Path: <tymoteusz.burak@3mdeb.com>
+Return-Path: <Yogita.Urade@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E202BC001DE
-	for <webhook@archiver.kernel.org>; Fri, 18 Aug 2023 10:52:41 +0000 (UTC)
-Received: from 11.mo583.mail-out.ovh.net (11.mo583.mail-out.ovh.net [46.105.47.167])
- by mx.groups.io with SMTP id smtpd.web11.8640.1692355952309740552
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 18CE4C001DE
+	for <webhook@archiver.kernel.org>; Fri, 18 Aug 2023 11:23:22 +0000 (UTC)
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.web10.8754.1692357793850954779
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 18 Aug 2023 03:52:32 -0700
+ Fri, 18 Aug 2023 04:23:14 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=softfail (domain: 3mdeb.com, ip: 46.105.47.167, mailfrom: tymoteusz.burak@3mdeb.com)
-Received: from director10.ghost.mail-out.ovh.net (unknown [10.109.143.216])
-	by mo583.mail-out.ovh.net (Postfix) with ESMTP id 25B4B249FA
-	for <openembedded-devel@lists.openembedded.org>; Fri, 18 Aug 2023 10:52:29 +0000 (UTC)
-Received: from ghost-submission-6684bf9d7b-prlcp (unknown [10.110.115.102])
-	by director10.ghost.mail-out.ovh.net (Postfix) with ESMTPS id 67C971FEB0;
-	Fri, 18 Aug 2023 10:52:29 +0000 (UTC)
-Received: from 3mdeb.com ([37.59.142.95])
-	by ghost-submission-6684bf9d7b-prlcp with ESMTPSA
-	id 9rbSCG1N32TMggAA4dmeJw
-	(envelope-from <tymoteusz.burak@3mdeb.com>); Fri, 18 Aug 2023 10:52:29 +0000
-Authentication-Results: garm.ovh; auth=pass (GARM-95G0012909af33-726e-4dc4-87d6-9905a81fecb2,
-                    93BD7409364DBD10EE1484F369572579063D6806) smtp.auth=tymoteusz.burak@3mdeb.com
-X-OVh-ClientIp: 213.192.77.249
-From: Tymoteusz Burak <tymoteusz.burak@3mdeb.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: piotr.krol@3mdeb.com,
-	tomasz.zyjewski@3mdeb.com
-Subject: [meta-oe][PATCH v2] libfaketime: add recipe
-Date: Fri, 18 Aug 2023 12:52:12 +0200
-Message-ID: <20230818105212.34481-1-tymoteusz.burak@3mdeb.com>
-X-Mailer: git-send-email 2.41.0
+ dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=i5BfSyqs;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=7594e7d5ba=yogita.urade@windriver.com)
+Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.17.1.22/8.17.1.22) with ESMTP id 37IAJPIr017813
+	for <openembedded-devel@lists.openembedded.org>; Fri, 18 Aug 2023 11:23:13 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
+	 h=from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding:content-type; s=PPS06212021; bh=t9o/Z
+	alOPukTll2/2jlOsN2RD0JqBHYV5ETxksp6QUw=; b=i5BfSyqsoUHvdE0HvOjqS
+	3B5JY8ID0ZPPlCZ2jYgqJA5fN0xGtifH5B7GvIM71Z0D/ftTV6H5bea4k/+IVPk7
+	kJnwOTRkG0oQpboNE/mR2MCIkkVr7aCqnkEwiq8nKITuOekBwBa9j/jY/7eDurz0
+	V8KzFUh0QBw/BWZPoYHkWdeEN0m3VmvsJIATiKbfG6JcZFIiHYUbGBcCm8HgovbJ
+	FFUFHfbXauejuQpvoevIncbc0QMQVFhz8LyF5yZJiUMSOe1YZiVTGFsDSR1BClxN
+	2ld49CyfAzkJS4WZ91/iSUxKJDSjfC7LUksejKD231tXbMt5BlrF6mI/L1/qLQKM
+	g==
+Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3se125wuku-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Fri, 18 Aug 2023 11:23:13 +0000 (GMT)
+Received: from blr-linux-engg1.wrs.com (147.11.136.210) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.27; Fri, 18 Aug 2023 04:23:10 -0700
+From: yurade <yogita.urade@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [oe][meta-oe][mickledore][PATCH 1/1] poppler: fix CVE-2023-34872
+Date: Fri, 18 Aug 2023 11:22:52 +0000
+Message-ID: <20230818112252.1526966-1-yogita.urade@windriver.com>
+X-Mailer: git-send-email 2.35.5
 MIME-Version: 1.0
-X-Ovh-Tracer-Id: 5579115514386370713
-X-VR-SPAMSTATE: OK
-X-VR-SPAMSCORE: 0
-X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrgedviedruddufedgfeegucetufdoteggodetrfdotffvucfrrhhofhhilhgvmecuqfggjfdpvefjgfevmfevgfenuceurghilhhouhhtmecuhedttdenucenucfjughrpefhvfevufffkffoggfgsedtkeertdertddtnecuhfhrohhmpefvhihmohhtvghushiiuceuuhhrrghkuceothihmhhothgvuhhsiidrsghurhgrkhesfehmuggvsgdrtghomheqnecuggftrfgrthhtvghrnhepjeegleduhfduhfefueeileetudeuffeutdekffduheevhedugeetteethfelteefnecuffhomhgrihhnpehgihhthhhusgdrtghomhenucfkphepuddvjedrtddrtddruddpvddufedrudelvddrjeejrddvgeelpdefjedrheelrddugedvrdelheenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepihhnvghtpeduvdejrddtrddtrddupdhmrghilhhfrhhomhepoehthihmohhtvghushiirdgsuhhrrghkseefmhguvggsrdgtohhmqedpnhgspghrtghpthhtohepuddprhgtphhtthhopehophgvnhgvmhgsvgguuggvugdquggvvhgvlheslhhishhtshdrohhpvghnvghmsggvugguvggurdhorhhgpdfovfetjfhoshhtpehmohehkeefpdhmohguvgepshhmthhpohhuth
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [147.11.136.210]
+X-ClientProxiedBy: ala-exchng01.corp.ad.wrs.com (147.11.82.252) To
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252)
+X-Proofpoint-GUID: Tf2yMBoVDbPWjerf3-PTaR0ScfW-fGnU
+X-Proofpoint-ORIG-GUID: Tf2yMBoVDbPWjerf3-PTaR0ScfW-fGnU
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.267,Aquarius:18.0.957,Hydra:6.0.601,FMLib:17.11.176.26
+ definitions=2023-08-18_13,2023-08-18_01,2023-05-22_02
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 phishscore=0 bulkscore=0
+ malwarescore=0 suspectscore=0 lowpriorityscore=0 mlxscore=0
+ mlxlogscore=999 spamscore=0 clxscore=1015 impostorscore=0
+ priorityscore=1501 adultscore=0 classifier=spam adjust=0 reason=mlx
+ scancount=1 engine=8.19.0-2306200000 definitions=main-2308180103
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 18 Aug 2023 10:52:41 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104485
+ <openembedded-devel@lists.openembedded.org>; Fri, 18 Aug 2023 11:23:22 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104486
 
-This commit adds the libfaketime library recipe, which provides time
-manipulation capabilities for testing and debugging purposes. libfaketime=
- allows
-developers to modify the system time reported to applications, aiding in =
-scenarios
-where accurate time emulation is required.
+From: Yogita Urade <yogita.urade@windriver.com>
 
-GitHub Repository: https://github.com/wolfcw/libfaketime
+A vulnerability in Outline.cc for Poppler prior to 23.06.0
+allows a remote attacker to cause a Denial of Service (DoS)
+(crash) via a crafted PDF file in OutlineItem::open.
 
-Signed-off-by: Tymoteusz Burak <tymoteusz.burak@3mdeb.com>
+Reference:
+https://gitlab.freedesktop.org/poppler/poppler/-/issues/1399
+
+Signed-off-by: Yogita Urade <yogita.urade@windriver.com>
 ---
- .../libfaketime/libfaketime_0.9.10.bb         | 34 +++++++++++++++++++
- 1 file changed, 34 insertions(+)
- create mode 100644 meta-oe/recipes-test/libfaketime/libfaketime_0.9.10.b=
-b
+ .../poppler/poppler/CVE-2023-34872.patch      | 46 +++++++++++++++++++
+ .../poppler/poppler_23.03.0.bb                |  1 +
+ 2 files changed, 47 insertions(+)
+ create mode 100644 meta-oe/recipes-support/poppler/poppler/CVE-2023-34872.patch
 
-diff --git a/meta-oe/recipes-test/libfaketime/libfaketime_0.9.10.bb b/met=
-a-oe/recipes-test/libfaketime/libfaketime_0.9.10.bb
+diff --git a/meta-oe/recipes-support/poppler/poppler/CVE-2023-34872.patch b/meta-oe/recipes-support/poppler/poppler/CVE-2023-34872.patch
 new file mode 100644
-index 000000000000..f26e5b0db872
+index 0000000000..69f164de96
 --- /dev/null
-+++ b/meta-oe/recipes-test/libfaketime/libfaketime_0.9.10.bb
-@@ -0,0 +1,34 @@
-+DESCRIPTION =3D "A library for faking the system time in user-space prog=
-rams"
-+SECTION =3D "libs"
-+LICENSE =3D "GPL-2.0-only"
-+LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Db234ee4d69f5fce4486a80fdaf4a4=
-263"
++++ b/meta-oe/recipes-support/poppler/poppler/CVE-2023-34872.patch
+@@ -0,0 +1,46 @@
++From 591235c8b6c65a2eee88991b9ae73490fd9afdfe Sep 17 00:00:00 2001
++From: Albert Astals Cid <aacid@kde.org>
++Date: Fri, 18 Aug 2023 09:17:07 +0000
++Subject: [PATCH] OutlineItem::open: Fix crash on malformed files
 +
-+SRCREV =3D "d475b925943ad404c6c728ac868dc73949e7281c"
-+SRC_URI =3D "\
-+    git://git@github.com/wolfcw/libfaketime.git;branch=3Dmaster;protocol=
-=3Dhttps \
-+    "
++Fixes #1399
 +
-+S =3D "${WORKDIR}/git"
++CVE: CVE-2023-34872
 +
-+EXTRA_OEMAKE +=3D "\
-+    EXTRA_FLAGS=3D'-Wno-error=3Dnonnull-compare' \
-+    "
++Upstream-Status: Backport [https://gitlab.freedesktop.org/poppler/poppler/-/commit/591235c8b6c65a2eee88991b9ae73490fd9afdfe]
 +
-+do_configure[noexec] =3D "1"
-+do_compile () {
-+    oe_runmake
-+}
-+do_install () {
-+    install -d ${D}${libdir}/faketime
-+    oe_libinstall -C src libfaketime ${D}${libdir}/faketime
-+    install -d ${D}${bindir}
-+    install -m 0755 src/faketime ${D}${bindir}
-+}
++Signed-off-by: Yogita Urade <yogita.urade@windriver.com>
++---
++ poppler/Outline.cc | 10 +++++++---
++ 1 file changed, 7 insertions(+), 3 deletions(-)
 +
-+PACKAGES =3D+ "lib${PN}"
++diff --git a/poppler/Outline.cc b/poppler/Outline.cc
++index cbb6cb4..4c68be9 100644
++--- a/poppler/Outline.cc
+++++ b/poppler/Outline.cc
++@@ -14,7 +14,7 @@
++ // under GPL version 2 or later
++ //
++ // Copyright (C) 2005 Marco Pesenti Gritti <mpg@redhat.com>
++-// Copyright (C) 2008, 2016-2019, 2021 Albert Astals Cid <aacid@kde.org>
+++// Copyright (C) 2008, 2016-2019, 2021, 2023 Albert Astals Cid <aacid@kde.org>
++ // Copyright (C) 2009 Nick Jones <nick.jones@network-box.com>
++ // Copyright (C) 2016 Jason Crain <jason@aquaticape.us>
++ // Copyright (C) 2017 Adrian Johnson <ajohnson@redneon.com>
++@@ -483,8 +483,12 @@ void OutlineItem::open()
++ {
++     if (!kids) {
++         Object itemDict = xref->fetch(ref);
++-        const Object &firstRef = itemDict.dictLookupNF("First");
++-        kids = readItemList(this, &firstRef, xref, doc);
+++        if (itemDict.isDict()) {
+++            const Object &firstRef = itemDict.dictLookupNF("First");
+++            kids = readItemList(this, &firstRef, xref, doc);
+++        } else {
+++            kids = new std::vector<OutlineItem *>();
+++        }
++     }
++ }
 +
-+FILES:${PN} =3D "${bindir}/faketime"
-+FILES:lib${PN} =3D "${libdir}/faketime/*"
-+
-+INSANE_SKIP:${PN} +=3D "dev-so"
-+INSANE_SKIP:lib${PN} +=3D "dev-so"
---=20
-2.41.0
++--
++2.35.5
+diff --git a/meta-oe/recipes-support/poppler/poppler_23.03.0.bb b/meta-oe/recipes-support/poppler/poppler_23.03.0.bb
+index 165e155ec9..81e776d8f6 100644
+--- a/meta-oe/recipes-support/poppler/poppler_23.03.0.bb
++++ b/meta-oe/recipes-support/poppler/poppler_23.03.0.bb
+@@ -7,6 +7,7 @@ SRC_URI = "http://poppler.freedesktop.org/${BP}.tar.xz \
+            file://0001-Do-not-overwrite-all-our-build-flags.patch \
+            file://basename-include.patch \
+            file://0001-cmake-Do-not-use-isystem.patch \
++           file://CVE-2023-34872.patch \
+            "
+ SRC_URI[sha256sum] = "b04148bf849c1965ada7eff6be4685130e3a18a84e0cce73bf9bc472ec32f2b4"
+ 
+-- 
+2.35.5
 
 
