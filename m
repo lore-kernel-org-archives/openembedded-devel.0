@@ -1,142 +1,213 @@
-Return-Path: <soumya.sambu@windriver.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 08318C71157
-	for <webhook@archiver.kernel.org>; Fri, 18 Aug 2023 14:38:33 +0000 (UTC)
-Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
- by mx.groups.io with SMTP id smtpd.web11.13052.1692369509581307050
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 90C53C7EE2C
+	for <webhook@archiver.kernel.org>; Fri, 18 Aug 2023 16:54:38 +0000 (UTC)
+Received: from mail-pf1-f173.google.com (mail-pf1-f173.google.com [209.85.210.173])
+ by mx.groups.io with SMTP id smtpd.web10.2159.1692377672160596428
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 18 Aug 2023 07:38:29 -0700
+ Fri, 18 Aug 2023 09:54:32 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=XW9IPzuL;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=7594f89566=soumya.sambu@windriver.com)
-Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.17.1.22/8.17.1.22) with ESMTP id 37IBeLpf023788
-	for <openembedded-devel@lists.openembedded.org>; Fri, 18 Aug 2023 14:38:28 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
-	 h=from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding:content-type; s=PPS06212021; bh=isasX
-	WivsPRukwrHFfQ8fTzSgDnhSqsQkNRzKYCsrfI=; b=XW9IPzuLgfvlNVOJdJAfN
-	oRxOKB0xIpJuEQ3OIpmCYFkvlE1PQN2kfvphSyggw9+OjOFxBYRklNqW4vPJqAF5
-	tx+bBL+SEPG7IXEkHX1My6ULoJimM4Mt6Bg7DbVOZrvjJU37oK6AS9rOuYoJ5eBy
-	WhAofO44eGVR+uPxk3yZ1nbUbu28viMR4FEvfdbHrXuI4LJse6/PYYgP38G2N1DE
-	uiAy9DaziO9vPeXsb3/l04L5axSDph2/jnIwLeeeU2YgPvdQ0kTQ0vt5vy1/ZOsw
-	kQvqHqkTH8LWgiA29LyMKlxOkbSgxwqh+p/MtPg3OqWeV6/zRKn8t4PElknnLyWc
-	w==
-Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3se125x0ph-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Fri, 18 Aug 2023 14:38:28 +0000 (GMT)
-Received: from blr-linux-engg1.wrs.com (147.11.136.210) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.27; Fri, 18 Aug 2023 07:38:22 -0700
-From: ssambu <soumya.sambu@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe][meta-oe][master][kirkstone][mickledore][PATCH 1/1] yasm: fix CVE-2023-37732
-Date: Fri, 18 Aug 2023 14:38:04 +0000
-Message-ID: <20230818143804.2227980-1-soumya.sambu@windriver.com>
-X-Mailer: git-send-email 2.40.0
+ dkim=pass header.i=@gmail.com header.s=20221208 header.b=KAoQncDa;
+ spf=pass (domain: gmail.com, ip: 209.85.210.173, mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f173.google.com with SMTP id d2e1a72fcca58-6889288a31fso796055b3a.1
+        for <openembedded-devel@lists.openembedded.org>; Fri, 18 Aug 2023 09:54:32 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20221208; t=1692377671; x=1692982471;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=lLfcb62G9FXsEeU4kdvprkn70bGbERkvQ3SedSIiyYc=;
+        b=KAoQncDacrFX1lWh+zsADf6CCAYb/LvG4+T9qSoq70hOk+gEw/bwO2+dC7QPcr3/6q
+         VrHuZgUrVpRz6BOKgGm+SOP/V5scGoLx0cwwIy4uaZcrE0C7NYDhh75gp1+jIM4+aR0B
+         /S4kxGAW2lXYeWwTDaSHfin58/8f7Ol/CIdevaLKS45q/GdV7V1lK4U19Eg4p1KOagDo
+         9QcAC02IYC601XhYFRhHFxBxpZ6ffn4TvvPfYKtu7O6FxnlIS2RMH3fYEP9D9wA5Bfri
+         HNxJOf8jbp7y1JRb95v1FJzAtj1kyjR4H7zzGlu0c8fCemmCSxajvJxxf4OCwH/y+2lh
+         TWCA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20221208; t=1692377671; x=1692982471;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=lLfcb62G9FXsEeU4kdvprkn70bGbERkvQ3SedSIiyYc=;
+        b=RVVV0FDOm3yrFa34lJHOEC5nfxpReboWGaxZ5MeQAYMtJOMhsQ8THKvdQmrt/rlq9m
+         7aW8NYVI2N2pJIET5qAlMyYRoFTOKikHwnvwHW6OGX0M6mdyeMNvOoXzOZX4tB8Ygz6U
+         2nqz+03j3TSHD4ka99o1W1ggH+6oM7d7CNgt6WJ0uL7o9uxhelBcyNkImIb8NYiXRgVm
+         Uxb41Hqn0lhe6/IEvm1Fz38oCO0SN2v1zlu/6R1JoxOU804zNuNDO8N/5esXDIEO93QT
+         /5bb45uYY4Mp4jmdqixeH0rXTDsBhuoAUs9YGG4gntOwHNfIgRxhAnTBDv24BgiDfZZ2
+         +utg==
+X-Gm-Message-State: AOJu0YxPDf4dcZh8QhgOFARfE5wRbemGYnQNKFawARrF51LBp7cv7/Ki
+	SZQ4PIgZSm7tq2QOmsif8jQiAr5jEZuz7w==
+X-Google-Smtp-Source: AGHT+IHFTdbztum/2TyM3NNOMg7nknk8TBV6Pk6yNsoo7shbukb2UyxHVjjDjyDYSbEhpUrScXyB9Q==
+X-Received: by 2002:a05:6a00:847:b0:67a:72d5:3365 with SMTP id q7-20020a056a00084700b0067a72d53365mr9815220pfk.6.1692377671222;
+        Fri, 18 Aug 2023 09:54:31 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9100:2cb0::e31a])
+        by smtp.gmail.com with ESMTPSA id e12-20020a62aa0c000000b00689f8dc26bdsm1768228pff.109.2023.08.18.09.54.30
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 18 Aug 2023 09:54:30 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][PATCH] librelp: Add packageconfigs for TLS implementations
+Date: Fri, 18 Aug 2023 09:54:28 -0700
+Message-ID: <20230818165428.2277167-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.41.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [147.11.136.210]
-X-ClientProxiedBy: ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) To
- ala-exchng01.corp.ad.wrs.com (147.11.82.252)
-X-Proofpoint-GUID: 7gX_8Tn8M_oOuNGwMi3xvCxXDYuLPd8L
-X-Proofpoint-ORIG-GUID: 7gX_8Tn8M_oOuNGwMi3xvCxXDYuLPd8L
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.267,Aquarius:18.0.957,Hydra:6.0.601,FMLib:17.11.176.26
- definitions=2023-08-18_18,2023-08-18_01,2023-05-22_02
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 phishscore=0 bulkscore=0
- malwarescore=0 suspectscore=0 lowpriorityscore=0 mlxscore=0
- mlxlogscore=891 spamscore=0 clxscore=1011 impostorscore=0
- priorityscore=1501 adultscore=0 classifier=spam adjust=0 reason=mlx
- scancount=1 engine=8.19.0-2306200000 definitions=main-2308180133
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 18 Aug 2023 14:38:33 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104491
+ <openembedded-devel@lists.openembedded.org>; Fri, 18 Aug 2023 16:54:38 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104492
 
-From: Soumya <soumya.sambu@windriver.com>
+valgrind is not available on all arches e.g. riscv so enable it
+conditionally
 
-Yasm v1.3.0.78 was found prone to NULL Pointer Dereference in /libyasm/intnum.c
-and /elf/elf.c, which allows the attacker to cause a denial of service via a
-crafted file.
+Enable openSSL TLS by default and add option to enable gnuTLS
 
-References:
-https://github.com/yasm/yasm/issues/233
-https://nvd.nist.gov/vuln/detail/CVE-2023-37732
-
-Signed-off-by: Soumya <soumya.sambu@windriver.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../yasm/yasm/CVE-2023-37732.patch            | 41 +++++++++++++++++++
- meta-oe/recipes-devtools/yasm/yasm_git.bb     |  1 +
- 2 files changed, 42 insertions(+)
- create mode 100644 meta-oe/recipes-devtools/yasm/yasm/CVE-2023-37732.patch
+ ...piler-warnings-with-enable-tls-opens.patch | 88 +++++++++++++++++++
+ .../rsyslog/librelp_1.11.0.bb                 | 14 ++-
+ 2 files changed, 100 insertions(+), 2 deletions(-)
+ create mode 100644 meta-oe/recipes-extended/rsyslog/librelp/0001-tcp-fix-some-compiler-warnings-with-enable-tls-opens.patch
 
-diff --git a/meta-oe/recipes-devtools/yasm/yasm/CVE-2023-37732.patch b/meta-oe/recipes-devtools/yasm/yasm/CVE-2023-37732.patch
+diff --git a/meta-oe/recipes-extended/rsyslog/librelp/0001-tcp-fix-some-compiler-warnings-with-enable-tls-opens.patch b/meta-oe/recipes-extended/rsyslog/librelp/0001-tcp-fix-some-compiler-warnings-with-enable-tls-opens.patch
 new file mode 100644
-index 000000000..1ca33f0a9
+index 0000000000..3ce5926333
 --- /dev/null
-+++ b/meta-oe/recipes-devtools/yasm/yasm/CVE-2023-37732.patch
-@@ -0,0 +1,41 @@
-+From 2cd3bb50e256f5ed5f611ac611d25fe673f2cec3 Mon Sep 17 00:00:00 2001
-+From: Peter Johnson <johnson.peter@gmail.com>
-+Date: Fri, 11 Aug 2023 10:49:51 +0000
-+Subject: [PATCH] elf.c: Fix NULL deref on bad xsize expression (#234)
++++ b/meta-oe/recipes-extended/rsyslog/librelp/0001-tcp-fix-some-compiler-warnings-with-enable-tls-opens.patch
+@@ -0,0 +1,88 @@
++From 6e9b27f04132287463c89d3be0ce4f506944920d Mon Sep 17 00:00:00 2001
++From: Patrick Williams <patrick@stwcx.xyz>
++Date: Fri, 3 Feb 2023 16:11:29 -0600
++Subject: [PATCH] tcp: fix some compiler warnings with enable-tls-openssl
 +
-+CVE: CVE-2023-37732
++When --enable-tls=no and --enable-tls-openssl=yes, the following
++compiler errors are reported:
 +
-+Upstream-Status: Backport [https://github.com/yasm/yasm/commit/2cd3bb50e256f5ed5f611ac611d25fe673f2cec3]
++```
++| ../../git/src/tcp.c:3765:1: error: no previous declaration for 'relpTcpGetRtryDirection_gtls' [-Werror=missing-declarations]
++|  3765 | relpTcpGetRtryDirection_gtls(LIBRELP_ATTR_UNUSED relpTcp_t *const pThis)
++|       | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
++| ../../git/src/tcp.c:3583:1: error: 'relpTcpChkPeerName' defined but not used [-Werror=unused-function]
++|  3583 | relpTcpChkPeerName(NOTLS_UNUSED relpTcp_t *const pThis, NOTLS_UNUSED void* cert)
++|       | ^~~~~~~~~~~~~~~~~~
++```
 +
-+Signed-off-by: Soumya <soumya.sambu@windriver.com>
++Fix these by:
++    1. Add static on the openssl path for relpTcpGetRtryDirection_gtls.
++    2. Move the relpTcpChkPeerName forward declaration to another ifdef
++       leg.
++    3. Wrap relpTcpChkPeerName in gnutls-based ifdef.
++    4. Remove relpTcpChkPeerName_gtls from openssl path.
++
++Upstream-Status: Backport [https://github.com/rsyslog/librelp/pull/255]
++Signed-off-by: Patrick Williams <patrick@stwcx.xyz>
 +---
-+ modules/objfmts/elf/elf.c | 10 +++++-----
-+ 1 file changed, 5 insertions(+), 5 deletions(-)
++ src/tcp.c | 11 ++++-------
++ 1 file changed, 4 insertions(+), 7 deletions(-)
 +
-+diff --git a/modules/objfmts/elf/elf.c b/modules/objfmts/elf/elf.c
-+index 2486bba8..bab4c9ca 100644
-+--- a/modules/objfmts/elf/elf.c
-++++ b/modules/objfmts/elf/elf.c
-+@@ -482,15 +482,15 @@ elf_symtab_write_to_file(FILE *f, elf_symtab_head *symtab,
++diff --git a/src/tcp.c b/src/tcp.c
++index 7a75cc4..18cffda 100644
++--- a/src/tcp.c
+++++ b/src/tcp.c
++@@ -132,12 +132,12 @@ callOnErr(const relpTcp_t *__restrict__ const pThis,
++ static int LIBRELP_ATTR_NONNULL() relpTcpGetCN(char *const namebuf, const size_t lenNamebuf, const char *const szDN);
++ #ifdef HAVE_GNUTLS_CERTIFICATE_SET_VERIFY_FUNCTION
++ static int relpTcpVerifyCertificateCallback(gnutls_session_t session);
+++static int relpTcpChkPeerName(relpTcp_t *const pThis, void* cert);
++ #endif /* #ifdef HAVE_GNUTLS_CERTIFICATE_SET_VERIFY_FUNCTION */
++ #if defined(HAVE_GNUTLS_CERTIFICATE_SET_VERIFY_FUNCTION) || defined(ENABLE_TLS_OPENSSL)
++ static void relpTcpChkOnePeerName(relpTcp_t *const pThis, char *peername, int *pbFoundPositiveMatch);
++ static int relpTcpAddToCertNamesBuffer(relpTcp_t *const pThis, char *const buf,
++ 	const size_t buflen, int *p_currIdx, const char *const certName);
++-static int relpTcpChkPeerName(relpTcp_t *const pThis, void* cert);
++ #endif /* defined(HAVE_GNUTLS_CERTIFICATE_SET_VERIFY_FUNCTION) || defined(ENABLE_TLS_OPENSSL) */
++ 
++ 
++@@ -2820,11 +2820,6 @@ relpTcpLstnInitTLS_gtls(LIBRELP_ATTR_UNUSED relpTcp_t *const pThis)
++ {
++ 	return RELP_RET_ERR_INTERNAL;
++ }
++-static int
++-relpTcpChkPeerName_gtls(LIBRELP_ATTR_UNUSED relpTcp_t *const pThis, LIBRELP_ATTR_UNUSED void *vcert)
++-{
++-	return RELP_RET_ERR_INTERNAL;
++-}
++ #endif /* defined(ENABLE_TLS)*/
++ 
++ 
++@@ -3579,6 +3574,7 @@ finalize_it:
++ 
++ }
++ 
+++#ifdef HAVE_GNUTLS_CERTIFICATE_SET_VERIFY_FUNCTION
++ static int
++ relpTcpChkPeerName(NOTLS_UNUSED relpTcp_t *const pThis, NOTLS_UNUSED void* cert)
++ {
++@@ -3592,6 +3588,7 @@ relpTcpChkPeerName(NOTLS_UNUSED relpTcp_t *const pThis, NOTLS_UNUSED void* cert)
++ 	#endif /* #ifdef  WITH_TLS*/
++ 	LEAVE_RELPFUNC;
++ }
+++#endif
++ 
++ static relpRetVal LIBRELP_ATTR_NONNULL()
++ relpTcpAcceptConnReqInitTLS(NOTLS_UNUSED relpTcp_t *const pThis, NOTLS_UNUSED relpSrv_t *const pSrv)
++@@ -3761,7 +3758,7 @@ relpTcpGetRtryDirection_gtls(relpTcp_t *const pThis)
++ 	return gnutls_record_get_direction(pThis->session);
++ }
++ #else /* #ifdef ENABLE_TLS */
++-relpRetVal LIBRELP_ATTR_NONNULL()
+++static relpRetVal LIBRELP_ATTR_NONNULL()
++ relpTcpGetRtryDirection_gtls(LIBRELP_ATTR_UNUSED relpTcp_t *const pThis)
++ {
++ 	return RELP_RET_ERR_INTERNAL;
++-- 
++2.41.0
 +
-+         /* get size (if specified); expr overrides stored integer */
-+         if (entry->xsize) {
-+-            size_intn = yasm_intnum_copy(
-+-                yasm_expr_get_intnum(&entry->xsize, 1));
-+-            if (!size_intn) {
-++            yasm_intnum *intn = yasm_expr_get_intnum(&entry->xsize, 1);
-++            if (!intn) {
-+                 yasm_error_set(YASM_ERROR_VALUE,
-+                                N_("size specifier not an integer expression"));
-+                 yasm_errwarn_propagate(errwarns, entry->xsize->line);
-+-            }
-++            } else
-++                size_intn = yasm_intnum_copy(intn);
-+         }
-+-        else
-++        if (!size_intn)
-+             size_intn = yasm_intnum_create_uint(entry->size);
-+
-+         /* get EQU value for constants */
-+--
-+2.40.0
-diff --git a/meta-oe/recipes-devtools/yasm/yasm_git.bb b/meta-oe/recipes-devtools/yasm/yasm_git.bb
-index 19686ff27..26540b429 100644
---- a/meta-oe/recipes-devtools/yasm/yasm_git.bb
-+++ b/meta-oe/recipes-devtools/yasm/yasm_git.bb
-@@ -13,6 +13,7 @@ SRCREV = "ba463d3c26c0ece2e797b8d6381b161633b5971a"
- SRC_URI = "git://github.com/yasm/yasm.git;branch=master;protocol=https \
-            file://0001-Do-not-use-AC_HEADER_STDC.patch \
-            file://CVE-2023-31975.patch \
-+           file://CVE-2023-37732.patch \
+diff --git a/meta-oe/recipes-extended/rsyslog/librelp_1.11.0.bb b/meta-oe/recipes-extended/rsyslog/librelp_1.11.0.bb
+index eebfece3f2..c64eaf2c48 100644
+--- a/meta-oe/recipes-extended/rsyslog/librelp_1.11.0.bb
++++ b/meta-oe/recipes-extended/rsyslog/librelp_1.11.0.bb
+@@ -4,11 +4,12 @@ HOMEPAGE = "https://github.com/rsyslog/librelp"
+ LICENSE = "GPL-3.0-only"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=1fb9c10ed9fd6826757615455ca893a9"
+ 
+-DEPENDS = "gmp nettle libidn zlib gnutls openssl"
++DEPENDS = "gmp libidn zlib"
+ 
+ SRC_URI = "git://github.com/rsyslog/librelp.git;protocol=https;branch=stable \
+            file://0001-Fix-function-inline-errors-in-debug-optimization-Og.patch \
+            file://0001-tests-Fix-callback-prototype.patch \
++           file://0001-tcp-fix-some-compiler-warnings-with-enable-tls-opens.patch \
+            file://run-ptest \
  "
  
- S = "${WORKDIR}/git"
+@@ -18,6 +19,15 @@ S = "${WORKDIR}/git"
+ 
+ inherit autotools pkgconfig ptest
+ 
++PACKAGECONFIG ?= "tls-openssl valgrind"
++# Valgrind is not available for RISCV yet
++PACKAGECONFIG:remove:riscv64 = "valgrind"
++PACKAGECONFIG:remove:riscv32 = "valgrind"
++
++PACKAGECONFIG[tls] = "--enable-tls,--disable-tls,gnutls nettle"
++PACKAGECONFIG[tls-openssl] = "--enable-tls-openssl,--disable-tls-openssl,openssl"
++PACKAGECONFIG[valgrind] = "--enable-valgrind,--disable-valgrind,"
++
+ # For ptests, copy source tests/*.sh scripts, Makefile and 
+ # executables and run them with make on target.
+ TESTDIR = "tests"
+@@ -71,5 +81,5 @@ RDEPENDS:${PN}-ptest += "\
+   make bash coreutils libgcc util-linux gawk grep \
+   python3-core python3-io \
+ "
++RRECOMMENDS:${PN}-ptest += "${@bb.utils.filter('PACKAGECONFIG', 'valgrind', d)}"
+ 
+-RRECOMMENDS:${PN}-ptest += " valgrind"
 -- 
-2.40.0
+2.41.0
 
 
