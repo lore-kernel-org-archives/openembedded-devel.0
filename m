@@ -1,112 +1,92 @@
-Return-Path: <narpat.mali@windriver.com>
+Return-Path: <pramanik.souravkumar@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2AF5EEE4996
-	for <webhook@archiver.kernel.org>; Mon, 21 Aug 2023 11:34:34 +0000 (UTC)
-Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.web11.8776.1692617670739593480
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3BB96EE4996
+	for <webhook@archiver.kernel.org>; Mon, 21 Aug 2023 11:48:24 +0000 (UTC)
+Received: from mail-pl1-f171.google.com (mail-pl1-f171.google.com [209.85.214.171])
+ by mx.groups.io with SMTP id smtpd.web11.8980.1692618502983173409
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 21 Aug 2023 04:34:30 -0700
+ Mon, 21 Aug 2023 04:48:23 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=nDskluYT;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=7597f372ff=narpat.mali@windriver.com)
-Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 37LAxIrI030556;
-	Mon, 21 Aug 2023 04:34:26 -0700
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
-	 h=from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding:content-type; s=PPS06212021; bh=OSD+0
-	/GiYf1Zzr6IJIfFWxByiYS8aj8PTBL38KL0b9Q=; b=nDskluYT2zc2FiUCHUJTs
-	Ih6K2oXJNc36GxgvdyiAzhmO+iRPtE+TaRvDgAzsoxzdIb8O8C2r5Mp6WwZ84YEC
-	uHMg07fcOPbUIFq3xU2yopGJOvgsHWxEYmPFxqypTaLJjErTFYDZTCdBDGJ2DKRT
-	3Tl3ib0SE8W0x83094jSLQrfElzmI2ohrD8/Ywqes3ri4iSCZnEizfyKtO2i+01S
-	ep2BsiZ6Ev7Lj4wmNLeoJcDTo627Ln9YM9K62UQgADJW1k2MMw+kWt77Fee2JGrF
-	kqKuRgCrsHSROwjTpz65ztXY/uD3y5hIREctHXysLqxdnr3WO/2FLwNDBy08eJLz
-	Q==
-Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3sjs0yscvm-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT);
-	Mon, 21 Aug 2023 04:34:26 -0700 (PDT)
-Received: from blr-linux-engg1.wrs.com (147.11.136.210) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.27; Mon, 21 Aug 2023 04:34:24 -0700
-From: nmali <narpat.mali@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>, <akuster808@gmail.com>
-Subject: [meta-python][kirkstone][PATCH 1/1] python3-aiohttp: upgrade 3.8.1 -> 3.8.5
-Date: Mon, 21 Aug 2023 11:34:05 +0000
-Message-ID: <20230821113405.2182966-1-narpat.mali@windriver.com>
-X-Mailer: git-send-email 2.40.0
+ dkim=pass header.i=@gmail.com header.s=20221208 header.b=nJAiVA3D;
+ spf=pass (domain: gmail.com, ip: 209.85.214.171, mailfrom: pramanik.souravkumar@gmail.com)
+Received: by mail-pl1-f171.google.com with SMTP id d9443c01a7336-1bc3d94d40fso24867115ad.3
+        for <openembedded-devel@lists.openembedded.org>; Mon, 21 Aug 2023 04:48:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20221208; t=1692618502; x=1693223302;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=1LsiYrqKy1oE0LQXcpDjuMIfbAgR8CUCww6aqau/H5g=;
+        b=nJAiVA3Di9sTkmI2JS7EzgqjwH6zNS2BQTsVQLxGXVZL3z5C4GqrFnYMT0rqXtJUar
+         +2NQ2/kKLyCqwQGT66m1C7eavPJ5KF8zBJSUrhgZfnVsOT2Mzhvw4At+qK+xH3d9u/Ap
+         qJQ18cVLQxjvo8HxQ+FRzTAKKpIGE7Hl5c8qJ81iHHprvEGiyFhG9LXfBej2LLwDhKSL
+         FIqR/uZt3jl2r8aqPMJrKHoxQeiaaaogehYAhrDHmgc7w7sxly8pWHUvqlh7fHegqgFV
+         E+QJVMKnubvS7oJWpwkJa84IjlBNvAk/q8btH+gbLXFJCjUW5kYHcABL557t7Fz6hKz1
+         RoBQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20221208; t=1692618502; x=1693223302;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=1LsiYrqKy1oE0LQXcpDjuMIfbAgR8CUCww6aqau/H5g=;
+        b=ls0jNCRGsA255ctJ6GIRAIFsvIcS/gqvVBRkeOpPcCgxuJ3M01aRztiwAonoU7kffi
+         oysghCBk0jzIo01xognvf6V23E7r4wk5j+RtOsjfH2vWwWzDCMpIx+3kOY8Vxb6+3liz
+         8U18wdqnSXMPUq62mct+grlmXuk/qwsBmiWPBJUhsHoyGrIb6juLeE1gdOvQm1wUK5bJ
+         m31jGoUWfmMgGIZG1PLqRPf/jOk8TOl3kj/m0WeBx75EpNKFKMk5VjBuYjfTBSobzCe2
+         Lfodkn5P1YwyeAqjMLuRgKYGc7iRczJRvldumGbwBKttkH0mZS+QC7FGByuJPVUQR8+3
+         U5Gg==
+X-Gm-Message-State: AOJu0YxmMK13u/aNrjlJUAgKjclkH2/fHuIk7J6MjpTsFjEf6z2Kri+C
+	+dyuRtBIQZ+BJ8ahBNV2idjplh/McKaw1A==
+X-Google-Smtp-Source: AGHT+IFc7c99w6iSdlwHmMh2PS2OGY8yPtqB+OdGy/LO97J+2a7WggJdKAi1mAERjYWyvekG84UqZQ==
+X-Received: by 2002:a17:902:684c:b0:1bd:c6ca:e0db with SMTP id f12-20020a170902684c00b001bdc6cae0dbmr6939272pln.37.1692618502255;
+        Mon, 21 Aug 2023 04:48:22 -0700 (PDT)
+Received: from localhost.localdomain ([2401:4900:1c3f:bdd8:21f7:9051:f166:1be5])
+        by smtp.gmail.com with ESMTPSA id ja1-20020a170902efc100b001b8c6662094sm6833267plb.188.2023.08.21.04.48.19
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 21 Aug 2023 04:48:21 -0700 (PDT)
+From: Sourav Kumar Pramanik <pramanik.souravkumar@gmail.com>
+To: openembedded-devel@lists.openembedded.org,
+	pramanik.souravkumar@gmail.com
+Cc: ranjitsinh.rathod@kpit.com,
+	Sourav Pramanik <sourav.pramanik@kpit.com>
+Subject: [meta-oe][dunfell][PATCH] rapidjson: Avoid usage of nobranch=1
+Date: Mon, 21 Aug 2023 17:17:45 +0530
+Message-Id: <20230821114745.71668-1-pramanik.souravkumar@gmail.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [147.11.136.210]
-X-ClientProxiedBy: ala-exchng01.corp.ad.wrs.com (147.11.82.252) To
- ala-exchng01.corp.ad.wrs.com (147.11.82.252)
-X-Proofpoint-GUID: 5NgWERGa5xd6YeY814ET3-JykUI66P0U
-X-Proofpoint-ORIG-GUID: 5NgWERGa5xd6YeY814ET3-JykUI66P0U
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.254,Aquarius:18.0.957,Hydra:6.0.601,FMLib:17.11.176.26
- definitions=2023-08-21_01,2023-08-18_01,2023-05-22_02
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 impostorscore=0 bulkscore=0
- clxscore=1015 mlxscore=0 suspectscore=0 lowpriorityscore=0 mlxlogscore=999
- spamscore=0 priorityscore=1501 phishscore=0 adultscore=0 malwarescore=0
- classifier=spam adjust=0 reason=mlx scancount=1 engine=8.19.0-2306200000
- definitions=main-2308210106
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 21 Aug 2023 11:34:34 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104506
+ <openembedded-devel@lists.openembedded.org>; Mon, 21 Aug 2023 11:48:24 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104507
 
-From: Narpat Mali <narpat.mali@windriver.com>
+From: Sourav Pramanik <sourav.pramanik@kpit.com>
 
-The delta between 3.8.1 & 3.8.5 contains the CVE-2023-37276 fix and other bugfixes.
-https://github.com/aio-libs/aiohttp/security/advisories/GHSA-45c4-8wx5-qw6w
+The usage of nobranch=1 in SRC_URI allows using unprotected branches.
 
-Changelog:
-https://docs.aiohttp.org/en/stable/changes.html
+This change updates the real branch name in place of nobranch=1.
 
-- Increased the upper boundary of the multidict dependency to allow for the version 6
-- License-Update: Update copyright year from 2020 to 2022
-- Fixed incorrectly overwriting cookies with the same name and domain, but different path
-- Fixed ConnectionResetError not being raised after client disconnection in SSL environments
-- Upgraded the vendored copy of llhttp_ to v8.1.1
-- Added information to C parser exceptions to show which character caused the error
-- Fixed a transport is :data:None error
-
-Upstream master patches:
-3.8.1 -> 3.8.3 : https://git.openembedded.org/meta-openembedded/commit/?id=c0d2a5bcc87ee8564a5b9be35f3e2b930e384a59
-3.8.3 -> 3.8.4 : https://git.openembedded.org/meta-openembedded/commit/?id=1fc465466cd138e1fcc87de18e84f88e2c5f1b4f
-3.8.4 -> 3.8.5 : https://git.openembedded.org/meta-openembedded/commit/?id=ba5d26d1d8b30d71cb648f95b6431c16134e82e9
-
-Signed-off-by: Narpat Mali <narpat.mali@windriver.com>
+Signed-off-by: Sourav Kumar Pramanik <pramanik.souravkumar@gmail.com>
 ---
- .../{python3-aiohttp_3.8.1.bb => python3-aiohttp_3.8.5.bb}    | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-aiohttp_3.8.1.bb => python3-aiohttp_3.8.5.bb} (80%)
+ meta-oe/recipes-devtools/rapidjson/rapidjson_git.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-python/recipes-devtools/python/python3-aiohttp_3.8.1.bb b/meta-python/recipes-devtools/python/python3-aiohttp_3.8.5.bb
-similarity index 80%
-rename from meta-python/recipes-devtools/python/python3-aiohttp_3.8.1.bb
-rename to meta-python/recipes-devtools/python/python3-aiohttp_3.8.5.bb
-index f2b8d52a72..d04279ed97 100644
---- a/meta-python/recipes-devtools/python/python3-aiohttp_3.8.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-aiohttp_3.8.5.bb
-@@ -2,9 +2,9 @@ SUMMARY = "Async http client/server framework"
- DESCRIPTION = "Asynchronous HTTP client/server framework for asyncio and Python"
- HOMEPAGE = "https://github.com/aio-libs/aiohttp"
- LICENSE = "Apache-2.0"
--LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=8074d6c6e217873b2a018a4522243ea3"
-+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=748073912af33aa59430d3702aa32d41"
+diff --git a/meta-oe/recipes-devtools/rapidjson/rapidjson_git.bb b/meta-oe/recipes-devtools/rapidjson/rapidjson_git.bb
+index 04ac93e92..bc90bffe5 100644
+--- a/meta-oe/recipes-devtools/rapidjson/rapidjson_git.bb
++++ b/meta-oe/recipes-devtools/rapidjson/rapidjson_git.bb
+@@ -4,7 +4,7 @@ SECTION = "libs"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://license.txt;md5=ba04aa8f65de1396a7e59d1d746c2125"
  
--SRC_URI[sha256sum] = "fc5471e1a54de15ef71c1bc6ebe80d4dc681ea600e68bfd1cbce40427f0b7578"
-+SRC_URI[sha256sum] = "b9552ec52cc147dbf1944ac7ac98af7602e51ea2dcd076ed194ca3c0d1c7d0bc"
+-SRC_URI = "git://github.com/miloyip/rapidjson.git;nobranch=1;protocol=https"
++SRC_URI = "git://github.com/miloyip/rapidjson.git;branch=master;protocol=https"
  
- PYPI_PACKAGE = "aiohttp"
- inherit python_setuptools_build_meta pypi
+ SRCREV = "0ccdbf364c577803e2a751f5aededce935314313"
+ 
 -- 
-2.40.0
+2.25.1
 
 
