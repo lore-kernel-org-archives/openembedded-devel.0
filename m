@@ -1,135 +1,75 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <tgamblin@baylibre.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 139CBEE4996
-	for <webhook@archiver.kernel.org>; Tue, 22 Aug 2023 15:20:19 +0000 (UTC)
-Received: from mail-ua1-f48.google.com (mail-ua1-f48.google.com [209.85.222.48])
- by mx.groups.io with SMTP id smtpd.web11.10771.1692717615286465526
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 09D1DEE4996
+	for <webhook@archiver.kernel.org>; Tue, 22 Aug 2023 16:19:15 +0000 (UTC)
+Received: from mail-qv1-f49.google.com (mail-qv1-f49.google.com [209.85.219.49])
+ by mx.groups.io with SMTP id smtpd.web10.357.1692721153022020021
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 22 Aug 2023 08:20:15 -0700
+ Tue, 22 Aug 2023 09:19:13 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20221208 header.b=HEddq0W+;
- spf=pass (domain: gmail.com, ip: 209.85.222.48, mailfrom: raj.khem@gmail.com)
-Received: by mail-ua1-f48.google.com with SMTP id a1e0cc1a2514c-79aa1f24ba2so1535296241.2
-        for <openembedded-devel@lists.openembedded.org>; Tue, 22 Aug 2023 08:20:15 -0700 (PDT)
+ dkim=pass header.i=@baylibre-com.20221208.gappssmtp.com header.s=20221208 header.b=jLQ4yv9P;
+ spf=pass (domain: baylibre.com, ip: 209.85.219.49, mailfrom: tgamblin@baylibre.com)
+Received: by mail-qv1-f49.google.com with SMTP id 6a1803df08f44-64b8e1c739aso25441286d6.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 22 Aug 2023 09:19:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1692717614; x=1693322414;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=d7YCfHdl2nVk5gjsNLW14z6LCbIsKB7APfesHa3v2ao=;
-        b=HEddq0W+0tpiLf+sIpa7gHfsi8Aljbu1baLsct5xctl4xjsKnFGG0I0dGteUDfxoa9
-         Qs3//pQpYnTZvKTXNj1h7+2OX/V2MzT2VvKPHuvdFDhNasDNnjyoKodPKkLkOVTaOn11
-         ty+k+oLS78360UTiFbdggj2mlYebqMgGdJ+cLKeHEVf6SpWjm3PCaZx3uzNTVuwXBVQF
-         kyVoxkMq2klSdD4zOS9E5Kd8renJquOQHCUl27pft1YB7Ny7SSidNxsa6zJaX9/afX38
-         5AhkOdX6hPqToF93EXrkWBwwmOuwrxRSznxyivkPnqMrJ+jF+/xjPutoVB5fmQtO34FV
-         5sNg==
+        d=baylibre-com.20221208.gappssmtp.com; s=20221208; t=1692721152; x=1693325952;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=7fz6p+wKRMn2hXMDBQuDnBBvB4xtnsC0cbR+Zvq3gdk=;
+        b=jLQ4yv9PuB8mN9vLCoP3NF5ahhQBZdjpu5GgtsAp2ABFlFaOmbqJ8/bZJ4MqhKKFiM
+         R2ROmFi6+Jt/2vciXYq+1x6aBHfSS8pMY5S0U9gDP6fPch8McQrFLCnu+4TeD35HVHfN
+         z1WkWKSy8WbGJsrJdGeiDcLB5pYoj0ZC/dVepgdzERvUZ2zWbTiK5hgP8BYDEwtD70yU
+         E9mHe87YQYfS2D0GxCWm09RZsR6pcjUPj8D1BhaUZ10RBIbrDTmHn15L+z+XeGo2sfwb
+         oSNyDnTllyUB/E9G7Cc9sGNFyW1uLlBXjhUywSdL3knD+gcDQTvLYSpMNjA8ff9yrtQq
+         mVaw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1692717614; x=1693322414;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=d7YCfHdl2nVk5gjsNLW14z6LCbIsKB7APfesHa3v2ao=;
-        b=Wi7FqeYi6y9Yj8RsfYJfqNyO1EvxGb/uQ0YyDwNxH8THpT6uoyYpsHJlYzCRlhEryZ
-         ivY8jva1GEYHXgdbnGXYFvAo3RNfqizgTc6WcWL6juzMi0hm3ExtxMCE9yQz1luEAq6Y
-         EN8eXk9FkH1KP3Qe6xdMzdxn/ojg9XXv7L/9+QmucJBAQZuQgfGnDgGJq4QJ3kJlMu7L
-         bMnHfIFIuy0T1kQu6lz6vK+/MPvuuw7bYPNOI/BI+n4AQdHTsHmaAhejXK/bc2pmn/IK
-         Jh4JrTGYU3ZMfdFZmoqCwHUV7BfSt4is2OqNdOIcWCxcI0cHUiMRkzIvos/aV+mV6hWD
-         I+zg==
-X-Gm-Message-State: AOJu0YwDFKwrU0rtvCOCAEcAVcQM63Ro5Y7RrQ0Zpi4nnP4ZzKNVKxvG
-	qhZVknQA7/EhQfTtooXgyzaQX1FqEHXok0XMSx4=
-X-Google-Smtp-Source: AGHT+IG6qGc7WJcjIjtonDtAMJl/AnSHWU+GptU/taU0bip0I740pyqiKAkDlxKhCIbmf0DNrdKYi+z/LwxVvBfKN3M=
-X-Received: by 2002:a67:fd46:0:b0:44d:482a:5444 with SMTP id
- g6-20020a67fd46000000b0044d482a5444mr5458001vsr.21.1692717614121; Tue, 22 Aug
- 2023 08:20:14 -0700 (PDT)
+        d=1e100.net; s=20221208; t=1692721152; x=1693325952;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=7fz6p+wKRMn2hXMDBQuDnBBvB4xtnsC0cbR+Zvq3gdk=;
+        b=SopUEqXbSayjINQUqmahqGyG4t705H6wrx/TnKC6F+TFWxh3dXqgTLZUQeLzKvrRLx
+         48464Ll0ndAMMX/BQ8EsLTQhTQ0XlFOhlNqP9TPtyn8Lqc5ggo/QHhqnTlE0zIYEDXGy
+         Uw8q/BJAbqx3wUBq5Be239qypNfkZwnmW9YLv8RsckDnBuynnQ2MVGcLL0lek6p3NvYc
+         OvA+4szpFICJf/Mmh7/GgHDMy2rAfoqJS+2jCMS0oIhhM8p2yxEKyPHqriHX9Zc2EtTs
+         h91AUFcBJr/W53FqjIj9OlaqTnM+J1Di557Fzwy6SDEWquHYqCucNfHweE/ExcBDo88A
+         0qbg==
+X-Gm-Message-State: AOJu0Yx8xQ4TG0l1/knYCeGOttJHt6q1BPD0fFEH1PlHMtjVEeO94LA3
+	hBaJAgyzrJfyxdJGoBqafnVR/t0oVj6RkmFueog=
+X-Google-Smtp-Source: AGHT+IHkczoX7TFFcxxzFkUnYanhUnLBPFFAcMIEGt7SZogWN/4fMMX0t5UhVRxh9SH3PevH5UTKuQ==
+X-Received: by 2002:a0c:f5c7:0:b0:64f:4041:3d67 with SMTP id q7-20020a0cf5c7000000b0064f40413d67mr6720192qvm.15.1692721151825;
+        Tue, 22 Aug 2023 09:19:11 -0700 (PDT)
+Received: from megalith.cgocable.net ([2001:1970:5b1f:ab00:fc4e:ec42:7e5d:48dd])
+        by smtp.gmail.com with ESMTPSA id j2-20020a37c242000000b00763b94432ebsm1850814qkm.18.2023.08.22.09.19.11
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 22 Aug 2023 09:19:11 -0700 (PDT)
+From: Trevor Gamblin <tgamblin@baylibre.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-python][PATCH] python3-kivy: fix filename
+Date: Tue, 22 Aug 2023 12:19:10 -0400
+Message-ID: <20230822161910.796713-1-tgamblin@baylibre.com>
+X-Mailer: git-send-email 2.41.0
 MIME-Version: 1.0
-References: <20230822063213.10060-1-pawel.langowski@3mdeb.com>
-In-Reply-To: <20230822063213.10060-1-pawel.langowski@3mdeb.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 22 Aug 2023 08:19:47 -0700
-Message-ID: <CAMKF1spqMuFKvYWTe9uyVXqWzhe8Xk-o_kvBZA7NKQRGWDrmcw@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH v3] qcbor: add recipe
-To: Pawel Langowski <pawel.langowski@3mdeb.com>
-Cc: openembedded-devel@lists.openembedded.org, piotr.krol@3mdeb.com, 
-	tomasz.zyjewski@3mdeb.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 22 Aug 2023 15:20:19 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104518
+ <openembedded-devel@lists.openembedded.org>; Tue, 22 Aug 2023 16:19:15 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104519
 
-On Mon, Aug 21, 2023 at 11:32=E2=80=AFPM Pawel Langowski
-<pawel.langowski@3mdeb.com> wrote:
->
-> This adds QCBOR - a CBOR encoder/decoder library
->
+Signed-off-by: Trevor Gamblin <tgamblin@baylibre.com>
+---
+ .../python/{python3-kivy_2.1.0..bb => python3-kivy_2.1.0.bb}      | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-kivy_2.1.0..bb => python3-kivy_2.1.0.bb} (100%)
 
-looking at https://github.com/laurencelundblade/QCBOR/releases
-there has been few releases so I think  this recipe should reflect that via=
- PV
+diff --git a/meta-python/recipes-devtools/python/python3-kivy_2.1.0..bb b/meta-python/recipes-devtools/python/python3-kivy_2.1.0.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python3-kivy_2.1.0..bb
+rename to meta-python/recipes-devtools/python/python3-kivy_2.1.0.bb
+-- 
+2.41.0
 
-set PV =3D "1.2+git${SRCPV}"
-
-> Signed-off-by: Pawel Langowski <pawel.langowski@3mdeb.com>
-> ---
->  meta-oe/recipes-extended/qcbor/qcbor_git.bb | 30 +++++++++++++++++++++
->  1 file changed, 30 insertions(+)
->  create mode 100644 meta-oe/recipes-extended/qcbor/qcbor_git.bb
->
-> diff --git a/meta-oe/recipes-extended/qcbor/qcbor_git.bb b/meta-oe/recipe=
-s-extended/qcbor/qcbor_git.bb
-> new file mode 100644
-> index 000000000000..a1bdf069936e
-> --- /dev/null
-> +++ b/meta-oe/recipes-extended/qcbor/qcbor_git.bb
-> @@ -0,0 +1,30 @@
-> +DESCRIPTION =3D " \
-> +    QCBOR is a powerful, commercial-quality CBOR encoder/decoder that \
-> +    implements these RFCs: RFC8949, RFC7049, RFC8742, RFC8943 \
-> +"
-> +
-> +HOMEPAGE =3D "https://github.com/laurencelundblade/QCBOR"
-> +
-> +LICENSE =3D "BSD-3-Clause"
-> +LIC_FILES_CHKSUM =3D "file://README.md;beginline=3D442;endline=3D463;md5=
-=3Db55643261d6d221dac2b7a395105af62"
-> +
-> +SRC_URI =3D "git://github.com/laurencelundblade/QCBOR;protocol=3Dhttps;b=
-ranch=3Dmaster"
-> +
-> +SRCREV =3D "44754f738c6534a4304a83d4c6e97b3d3193d887"
-> +
-> +S =3D "${WORKDIR}/git"
-> +
-> +inherit pkgconfig
-> +
-> +CFLAGS +=3D " \
-> +    -DUSEFULBUF_DISABLE_ALL_FLOAT \
-> +"
-> +
-> +do_install(){
-> +    install -d ${D}${libdir}
-> +    install -m 755 ${S}/libqcbor.a ${D}${libdir}/
-> +    install -d ${D}${includedir}/qcbor
-> +    install -m 644 ${S}/inc/*.h ${D}${includedir}
-> +    install -m 644 ${S}/inc/qcbor/*.h ${D}${includedir}/qcbor
-> +}
-> +
-> --
-> 2.41.0
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#104516): https://lists.openembedded.org/g/openembedde=
-d-devel/message/104516
-> Mute This Topic: https://lists.openembedded.org/mt/100889583/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
-aj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
 
