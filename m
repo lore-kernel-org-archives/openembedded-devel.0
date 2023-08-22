@@ -1,104 +1,97 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <philip@balister.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 55CC8EE49AB
-	for <webhook@archiver.kernel.org>; Tue, 22 Aug 2023 20:02:26 +0000 (UTC)
-Received: from mail-oi1-f177.google.com (mail-oi1-f177.google.com [209.85.167.177])
- by mx.groups.io with SMTP id smtpd.web11.6187.1692734543067976463
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0AF0DEE49AE
+	for <webhook@archiver.kernel.org>; Tue, 22 Aug 2023 23:46:43 +0000 (UTC)
+Received: from mail-wr1-f51.google.com (mail-wr1-f51.google.com [209.85.221.51])
+ by mx.groups.io with SMTP id smtpd.web10.4783.1692699309732196665
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 22 Aug 2023 13:02:23 -0700
+ Tue, 22 Aug 2023 03:15:10 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20221208 header.b=oiKYahSm;
- spf=pass (domain: gmail.com, ip: 209.85.167.177, mailfrom: raj.khem@gmail.com)
-Received: by mail-oi1-f177.google.com with SMTP id 5614622812f47-3a7e68f4214so3562265b6e.1
-        for <openembedded-devel@lists.openembedded.org>; Tue, 22 Aug 2023 13:02:22 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20221208 header.b=DaRpTx1Q;
+ spf=pass (domain: gmail.com, ip: 209.85.221.51, mailfrom: bbara93@gmail.com)
+Received: by mail-wr1-f51.google.com with SMTP id ffacd0b85a97d-31427ddd3fbso3894211f8f.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 22 Aug 2023 03:15:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1692734542; x=1693339342;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=C++Een4xQXzLKIhLP62fiGIzTyKqpGtlbV7dtFOTMYE=;
-        b=oiKYahSm5878inM3SLx38+26+Mbt6pgNmlivQuHCr8H7mXz3lBg5cYsnAOu42O4wjB
-         J8d2rxYv4mHeEM1KkpnC3V4FnzDftRdCZWkELy7YckHt2vMJr45BriueMUw8wf3KMfS+
-         AR3dc2S5EsDCW92AHSSlrekHTkE4Ms4x3Wbn+2/uSvaGdqzvMjpSWlwSLAcB3rulgKSk
-         DuGdIl6NH1u+ZqfCCoHQxK36QpXtv1s0xU+2t+4m9OUhFTk4+wBUJRHikcZ+oabRi9kh
-         ieOeDwdGZ95h44Tp3P70KpmknRXHsKtCHfceRiBrQ0vnzMmPhvEXGfA7V1HqVB73Xx6o
-         YzAg==
+        d=gmail.com; s=20221208; t=1692699308; x=1693304108;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=mhIpNSh604IZkTwnV/1wJpU19m28BlOOZ60ik0dBnwU=;
+        b=DaRpTx1Qtt1053hdzTLRdGdVOfY3t2BVbCaQhnzWqzyDtbp9UVvqRTalw3qGYN2grG
+         NohE21feWe8e1hmDIo/vewWBcKv871djXRUVMtcEtDj3dNilw1PzlLrNsAo8A82Agg0W
+         YnqkqVgwe0g6/RdVg2+cVe82mnK0h5epCNMU1RBpbdsjuCYBFyEn3EYDYfl9i3eNk4tG
+         4Whfz/qAQXxxotKgPxlnmHsCdJWrDsAMVTmXjB3emIj0jD8cLR4g4YnS76KMpc6vymbs
+         VRTJFl7Jkj0ONSziMYgFS8WARDvxF41XdlEuSkoqLIX/pOD6b/WY2nUsvBS7AOI9nmqK
+         dxVQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1692734542; x=1693339342;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=C++Een4xQXzLKIhLP62fiGIzTyKqpGtlbV7dtFOTMYE=;
-        b=HlA523rHGip44QsAO4K5j291PR8TV++zj1wUHm/5ochzSpD3Q3GIf4SlncxxRp8J+K
-         zXnxnsHQr9fxAqY82Gok+WLCjktbTSoNLFzGakWjE6/xIOcMkwVxgNMyZfW0p3WQhYPf
-         ATemvTGs4GWlMZPJOs4wqeuRaZBTTnAl1sfLwmCfq4ntsCUq2HFaDvgX8hGj8KzFkXlJ
-         SbsJ+R7t76NSlvkokJmAIxUbttI8kbbg3VE52ArXZ4tamL23X9rd8Iuk8ZPWUaxuH9WM
-         s11eDcDt4eBGNETVRB9Ird0+5ldIoLTG4AhFpCmNW6VW3Xr+1dAmS/3pINI5UyE4tGYp
-         IWrg==
-X-Gm-Message-State: AOJu0YxXGucTdaWL8Y+Z1FtoA5H1z0NSeCLuynR77n73j+28DakGUwP5
-	4XqSxT8iE/jFWDNs7ZE07LyhMu0u5bM9kzLBLHKbHHMBPno=
-X-Google-Smtp-Source: AGHT+IH1g/qFn9QN9UflvbomT9SJMK4q/6BnqKhu/bOFlBHEihpgoyNS/FzVjqeWCBdJVU2Z3HAWozwc5scgyESd7K8=
-X-Received: by 2002:a05:6808:b04:b0:3a7:b5ea:f5e7 with SMTP id
- s4-20020a0568080b0400b003a7b5eaf5e7mr12220006oij.39.1692734542200; Tue, 22
- Aug 2023 13:02:22 -0700 (PDT)
+        d=1e100.net; s=20221208; t=1692699308; x=1693304108;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=mhIpNSh604IZkTwnV/1wJpU19m28BlOOZ60ik0dBnwU=;
+        b=Zyg45xpJyCOMphbRUHRGr6rHbIxdSaAhM7ntSzSuiMIcGNCkHGc8ky8cOCDr7S9zAE
+         ULhUXmAjnSYqtmn3ekTcXxhG9rGkwfDhjSVSqSTMwRhPnhnhyAupi291Y3RR7Zjy9cTe
+         q15TfYHKlep5VBry6HuC0N/KimY0V2eTNLDhJ+VCb8dg15ZH1c+NamHJl7Mop+vTd7Up
+         sdn5AGM1PozQZDuPJ82MDDdmRVLpWbfJ7AIgryBk1F/pAQdkXBMfrzyYEnmVNaOtAtaV
+         /NYJM2KRSxFBzmRV7jE3CVB+6YSxz2ddVbG95VJy6KipK6m3r/6+DvBbFVpJtiOuU+MO
+         cQ7Q==
+X-Gm-Message-State: AOJu0YxMddFxhH5TnFMEk9ijlvktyo+TfBGQYpug51gjf07o/T/Zxte/
+	HNsTczTlhqFOngHLjkBq0ng=
+X-Google-Smtp-Source: AGHT+IENkbIYyFDMB8+A574U+2gkHM6QDd7r6aY6at8dX7Qw6+L9LKMo3RPEFdiaQEUnKTplU5JalQ==
+X-Received: by 2002:adf:a345:0:b0:318:1535:34fb with SMTP id d5-20020adfa345000000b00318153534fbmr7311266wrb.13.1692699307770;
+        Tue, 22 Aug 2023 03:15:07 -0700 (PDT)
+Received: from PCBABN.skidata.net ([91.230.2.244])
+        by smtp.gmail.com with ESMTPSA id i14-20020adfe48e000000b0031c3ee933b5sm7385648wrm.108.2023.08.22.03.15.07
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 22 Aug 2023 03:15:07 -0700 (PDT)
+From: "Benjamin Bara" <bbara93@gmail.com>
+To: raj.khem@gmail.com
+Cc: openembedded-devel@lists.openembedded.org,
+	Benjamin Bara <benjamin.bara@skidata.com>
+Subject: [meta-oe][PATCH] libvpx: fix VPXTARGET for non-neon armv7a
+Date: Tue, 22 Aug 2023 12:14:43 +0200
+Message-Id: <20230822101443.715588-1-bbara93@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <20230817092034.26410-1-frieder@fris.de> <b5fdfa09-af2c-46dc-98ea-d50a134bf05b@kontron.de>
-In-Reply-To: <b5fdfa09-af2c-46dc-98ea-d50a134bf05b@kontron.de>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 22 Aug 2023 13:01:55 -0700
-Message-ID: <CAMKF1spyx3hDVzuTuyZOThS+jmLSpqrs4eOREe0yu2MNiA99yg@mail.gmail.com>
-Subject: Re: [meta-python][PATCH v2] python3-can: Update runtime dependencies
-To: Frieder Schrempf <frieder.schrempf@kontron.de>
-Cc: openembedded-devel@lists.openembedded.org, 
-	Frieder Schrempf <frieder@fris.de>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 22 Aug 2023 20:02:26 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104521
+ <openembedded-devel@lists.openembedded.org>; Tue, 22 Aug 2023 23:46:43 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104522
 
-On Tue, Aug 22, 2023 at 12:12=E2=80=AFAM Frieder Schrempf
-<frieder.schrempf@kontron.de> wrote:
->
-> Hi Khem,
->
-> On 17.08.23 11:20, Frieder Schrempf wrote:
-> > From: Frieder Schrempf <frieder.schrempf@kontron.de>
-> >
-> > According to the setup.py of v4.2.2 [1] the following runtime
-> > dependencies are currently missing. Add them.
-> >
-> > * packaging
-> > * setuptools
-> >
-> > Also the aenum dependency was droppen in v4.0.0 [2], so let's
-> > remove it.
-> >
-> > [1] https://github.com/hardbyte/python-can/blob/4.2.2/setup.py
-> > [2] https://github.com/hardbyte/python-can/commit/13625ea2cc18e3283b811=
-1bec7e139ed9b6c7f48
-> >
-> > Signed-off-by: Frieder Schrempf <frieder.schrempf@kontron.de>
-> > ---
-> > Changes in v2:
-> > * Drop unused aenum dependency
-> > * Update subject and commit message
-> > ---
->
-> I've sent this v2 a few minutes after the v1, but I see v1 was applied
-> on master-next. It's not a big deal but I still want to ask if there is
-> anything I can improve to avoid this in the future?
->
+From: Benjamin Bara <benjamin.bara@skidata.com>
 
-Usually, I look out for v2 intently if v1 has some issues if I have
-picked it and it might be timing that I missed it.
-please send the incremental changes as a separate patch so we can
-address issues that are still remaining.
+The compiler might use non-supported instructions, as the build config
+requires armv7-linux-gcc targets to have NEON[1] and drops the mtune
+value[2], which also might use d32 registers on d16 cpus.
 
-> Thanks
-> Frieder
+Falling back to the generic-gnu target respects the toolchain-set values
+and should therefore be used instead.
+
+[1] https://chromium.googlesource.com/webm/libvpx/+/626ff35955c2c35b806b3e0ecf551a1a8611cdbf/build/make/configure.sh#955
+[2] https://chromium.googlesource.com/webm/libvpx/+/626ff35955c2c35b806b3e0ecf551a1a8611cdbf/build/make/configure.sh#973
+
+Signed-off-by: Benjamin Bara <benjamin.bara@skidata.com>
+---
+ meta-oe/recipes-multimedia/webm/libvpx_1.13.0.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/meta-oe/recipes-multimedia/webm/libvpx_1.13.0.bb b/meta-oe/recipes-multimedia/webm/libvpx_1.13.0.bb
+index 79b330c31..558b448ba 100644
+--- a/meta-oe/recipes-multimedia/webm/libvpx_1.13.0.bb
++++ b/meta-oe/recipes-multimedia/webm/libvpx_1.13.0.bb
+@@ -26,7 +26,7 @@ export LD = "${CC}"
+ 
+ VPXTARGET:armv5te = "armv5te-linux-gcc"
+ VPXTARGET:armv6 = "armv6-linux-gcc"
+-VPXTARGET:armv7a = "armv7-linux-gcc"
++VPXTARGET:armv7a = "${@bb.utils.contains("TUNE_FEATURES","neon","armv7-linux-gcc","generic-gnu",d)}"
+ VPXTARGET ?= "generic-gnu"
+ 
+ CONFIGUREOPTS = " \
+-- 
+2.34.1
+
 
