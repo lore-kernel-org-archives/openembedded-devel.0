@@ -1,98 +1,87 @@
-Return-Path: <pawel.langowski@3mdeb.com>
+Return-Path: <jester@theyoctojester.info>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AEC02EE49A0
-	for <webhook@archiver.kernel.org>; Wed, 23 Aug 2023 11:50:46 +0000 (UTC)
-Received: from 4.mo583.mail-out.ovh.net (4.mo583.mail-out.ovh.net [178.33.111.247])
- by mx.groups.io with SMTP id smtpd.web10.9407.1692791442537728132
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BE1DEC3DA66
+	for <webhook@archiver.kernel.org>; Wed, 23 Aug 2023 12:04:36 +0000 (UTC)
+Received: from mail-ej1-f41.google.com (mail-ej1-f41.google.com [209.85.218.41])
+ by mx.groups.io with SMTP id smtpd.web11.9760.1692792268446425508
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 23 Aug 2023 04:50:42 -0700
+ Wed, 23 Aug 2023 05:04:28 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=softfail (domain: 3mdeb.com, ip: 178.33.111.247, mailfrom: pawel.langowski@3mdeb.com)
-Received: from director3.ghost.mail-out.ovh.net (unknown [10.109.156.29])
-	by mo583.mail-out.ovh.net (Postfix) with ESMTP id 411F928342
-	for <openembedded-devel@lists.openembedded.org>; Wed, 23 Aug 2023 11:50:40 +0000 (UTC)
-Received: from ghost-submission-6684bf9d7b-b7h7n (unknown [10.108.20.4])
-	by director3.ghost.mail-out.ovh.net (Postfix) with ESMTPS id 8D2711FD7D;
-	Wed, 23 Aug 2023 11:50:39 +0000 (UTC)
-Received: from 3mdeb.com ([37.59.142.103])
-	by ghost-submission-6684bf9d7b-b7h7n with ESMTPSA
-	id mVQiHo/y5WTcBwEAij7HzQ
-	(envelope-from <pawel.langowski@3mdeb.com>); Wed, 23 Aug 2023 11:50:39 +0000
-Authentication-Results: garm.ovh; auth=pass (GARM-103G0052f8774aa-6292-4678-aaa9-51112a1d9b16,
-                    9F87A999A58848E422D1785D445934894C28AF5B) smtp.auth=pawel.langowski@3mdeb.com
-X-OVh-ClientIp: 213.192.77.249
-From: Pawel Langowski <pawel.langowski@3mdeb.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: piotr.krol@3mdeb.com,
-	tomasz.zyjewski@3mdeb.com
-Subject: [meta-oe][PATCH v4] qcbor: add recipe
-Date: Wed, 23 Aug 2023 13:50:33 +0200
-Message-ID: <20230823115033.131018-1-pawel.langowski@3mdeb.com>
-X-Mailer: git-send-email 2.41.0
+ dkim=pass header.i=@theyoctojester-info.20221208.gappssmtp.com header.s=20221208 header.b=oh+RKAZq;
+ spf=none, err=permanent DNS error (domain: theyoctojester.info, ip: 209.85.218.41, mailfrom: jester@theyoctojester.info)
+Received: by mail-ej1-f41.google.com with SMTP id a640c23a62f3a-9a1681fa868so669530366b.3
+        for <openembedded-devel@lists.openembedded.org>; Wed, 23 Aug 2023 05:04:28 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=theyoctojester-info.20221208.gappssmtp.com; s=20221208; t=1692792267; x=1693397067;
+        h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+         :date:message-id:reply-to;
+        bh=q3UoWQwdlaTIz45OY/yTNDZ38oqkeDSp1TacrZrx3Lc=;
+        b=oh+RKAZqysa/ngHD99NabNSDz7/PLoKQts3574AbOl/KQCL21v7HqxCey3cy35E/QJ
+         aahOs/viCyZrTmUBr+ZVdaB3QFVR2GeH1y8FbKWkX1iQUPA0zHBvsWK6n0fpzQifVkLz
+         qQZRmeuUTr3jgpsdFf5+FA5H1wwo1yZgFAGpVxrs5Lq3Sqr0DbhZrPvcTdvRBczcajhC
+         8Nn2TZ+UYtrX9t2uKP1I1tyA/Iia9KlRzv1O4TrcgApqDkviEKTSX95tnCN2fvfQ0GS2
+         fwyGqbClGXDxUoWktpRGC6uAYIPxvMBDD6UzMD0KHLE8hn0i+QFoWRBpaFRNVkzGxAkh
+         jXXA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20221208; t=1692792267; x=1693397067;
+        h=to:subject:message-id:date:from:mime-version:x-gm-message-state
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=q3UoWQwdlaTIz45OY/yTNDZ38oqkeDSp1TacrZrx3Lc=;
+        b=Ha71AbTAuAhfJ5DWBKd+Ur/YlOPpVKgx6AroWe4f3Pj37WRxXlikt0A0hArkWtqCEs
+         Detbp5uJNV2q/B5Q6EOOiptDzqXOQQn98G1gwD3MrW5CNcdXRn9YBrCMQCIHEEKBt4zn
+         WgFi3KTt6KE/fFJgflo8Ie1KKG9TOzI8GUVLfJ6ME/lV8eZEKcq9wpTwEQrIUAowJFNF
+         F8WzL6ckKHj3N5CkytIRZM1Yonlobk3NufB0lL0CqGbRxF0T/nuIWzFQuq95IOEs30iy
+         DNJRwC7FVO131bzgRRHsm5r3sfFL3AD4oU1O09sSW9ow7es+XKoHt9nSVivZ1ilBtMFK
+         7GoQ==
+X-Gm-Message-State: AOJu0Yx9ZrthZefOsCI360WI99VfjOMXu8sjBmHhTeTr3HfFctnnQ4Ar
+	Tj1cLV/EDSNAHswrrSrv6Sp+ADllrvSFIT8bnT2ur1igKy3co7Eqf3aRuQ==
+X-Google-Smtp-Source: AGHT+IFNoKTvHYLZgisPSn1puoYV+bWanAdH9sUYiuAAbfkInu9Lh2JKz3VS3/q07j59AWsGau3+yyWT9q2YkP1qMGU=
+X-Received: by 2002:a17:907:7818:b0:99b:d178:f051 with SMTP id
+ la24-20020a170907781800b0099bd178f051mr10132203ejc.64.1692792266623; Wed, 23
+ Aug 2023 05:04:26 -0700 (PDT)
 MIME-Version: 1.0
-X-Ovh-Tracer-Id: 17478470155256312473
-X-VR-SPAMSTATE: OK
-X-VR-SPAMSCORE: 0
-X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrgedviedruddvgedggeehucetufdoteggodetrfdotffvucfrrhhofhhilhgvmecuqfggjfdpvefjgfevmfevgfenuceurghilhhouhhtmecuhedttdenucenucfjughrpefhvfevufffkffoggfgsedtkeertdertddtnecuhfhrohhmpefrrgifvghlucfnrghnghhofihskhhiuceophgrfigvlhdrlhgrnhhgohifshhkihesfehmuggvsgdrtghomheqnecuggftrfgrthhtvghrnhepkeefhefhkeffieetjedvffettdeigfeufeehgefgteejudfgfeelfeeiteeggfejnecuffhomhgrihhnpehgihhthhhusgdrtghomhenucfkphepuddvjedrtddrtddruddpvddufedrudelvddrjeejrddvgeelpdefjedrheelrddugedvrddutdefnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehinhgvthepuddvjedrtddrtddruddpmhgrihhlfhhrohhmpeeophgrfigvlhdrlhgrnhhgohifshhkihesfehmuggvsgdrtghomheqpdhnsggprhgtphhtthhopedupdhrtghpthhtohepohhpvghnvghmsggvugguvgguqdguvghvvghlsehlihhsthhsrdhophgvnhgvmhgsvgguuggvugdrohhrghdpoffvtefjohhsthepmhhoheekfedpmhhouggvpehsmhhtphhouhht
-Content-Transfer-Encoding: quoted-printable
+From: Josef Holzmayr <jester@theyoctojester.info>
+Date: Wed, 23 Aug 2023 14:04:00 +0200
+Message-ID: <CAEt6Nwpy3-b0aMufb7pbTpJqQnXFe+egAUP6M2MMJmtMvWOp9A@mail.gmail.com>
+Subject: CFP for YPS 2023.11 now open!
+To: Yocto-mailing-list <yocto@lists.yoctoproject.org>, 
+	openembedded-core <openembedded-core@lists.openembedded.org>, 
+	openembedded-devel@lists.openembedded.org
+Content-Type: multipart/alternative; boundary="000000000000bb1f18060395e93a"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 23 Aug 2023 11:50:46 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104539
+ <openembedded-devel@lists.openembedded.org>; Wed, 23 Aug 2023 12:04:36 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104540
 
-This adds QCBOR - a CBOR encoder/decoder library
+--000000000000bb1f18060395e93a
+Content-Type: text/plain; charset="UTF-8"
 
-Signed-off-by: Pawel Langowski <pawel.langowski@3mdeb.com>
----
- meta-oe/recipes-extended/qcbor/qcbor_git.bb | 32 +++++++++++++++++++++
- 1 file changed, 32 insertions(+)
- create mode 100644 meta-oe/recipes-extended/qcbor/qcbor_git.bb
+Its sunny, it is summer, you're just back from vacation? Nothing better to
+get into the flow again than writing a proposal for the 2023.11 edition of
+the Yocto Project Summit!
 
-diff --git a/meta-oe/recipes-extended/qcbor/qcbor_git.bb b/meta-oe/recipe=
-s-extended/qcbor/qcbor_git.bb
-new file mode 100644
-index 000000000000..9c562d5a6671
---- /dev/null
-+++ b/meta-oe/recipes-extended/qcbor/qcbor_git.bb
-@@ -0,0 +1,32 @@
-+DESCRIPTION =3D " \
-+    QCBOR is a powerful, commercial-quality CBOR encoder/decoder that \
-+    implements these RFCs: RFC8949, RFC7049, RFC8742, RFC8943 \
-+"
-+
-+HOMEPAGE =3D "https://github.com/laurencelundblade/QCBOR"
-+
-+LICENSE =3D "BSD-3-Clause"
-+LIC_FILES_CHKSUM =3D "file://README.md;beginline=3D442;endline=3D463;md5=
-=3Db55643261d6d221dac2b7a395105af62"
-+
-+SRC_URI =3D "git://github.com/laurencelundblade/QCBOR;protocol=3Dhttps;b=
-ranch=3Dmaster"
-+
-+SRCREV =3D "44754f738c6534a4304a83d4c6e97b3d3193d887"
-+
-+PV =3D "1.2+git${SRCPV}"
-+
-+S =3D "${WORKDIR}/git"
-+
-+inherit pkgconfig
-+
-+CFLAGS +=3D " \
-+    -DUSEFULBUF_DISABLE_ALL_FLOAT \
-+"
-+
-+do_install(){
-+    install -d ${D}${libdir}
-+    install -m 755 ${S}/libqcbor.a ${D}${libdir}/
-+    install -d ${D}${includedir}/qcbor
-+    install -m 644 ${S}/inc/*.h ${D}${includedir}
-+    install -m 644 ${S}/inc/qcbor/*.h ${D}${includedir}/qcbor
-+}
-+
---=20
-2.41.0
+We love to hear about all your Yocto things. What you made, what you broke,
+what you learned, what you created.
 
+The CFP is open now at https://pretalx.com/yocto-project-summit-2023-11/cfp
+
+Josef on behalf of the YPS organization team
+
+--000000000000bb1f18060395e93a
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr">Its sunny, it is summer, you&#39;re just back from vacatio=
+n? Nothing better to get into the flow again than writing a proposal for th=
+e 2023.11 edition of the Yocto Project Summit!<div><br>We love to hear abou=
+t all your Yocto things. What you made, what you broke, what you learned, w=
+hat you created.<br><br>The CFP is open now at <a href=3D"https://pretalx.c=
+om/yocto-project-summit-2023-11/cfp">https://pretalx.com/yocto-project-summ=
+it-2023-11/cfp</a><br><br><div>Josef on behalf of the YPS organization team=
+</div></div></div>
+
+--000000000000bb1f18060395e93a--
 
