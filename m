@@ -1,100 +1,146 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7A634C3DA66
-	for <webhook@archiver.kernel.org>; Wed, 23 Aug 2023 17:23:19 +0000 (UTC)
-Received: from mail-oo1-f41.google.com (mail-oo1-f41.google.com [209.85.161.41])
- by mx.groups.io with SMTP id smtpd.web11.2661.1692811389921660422
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8B898C3DA6F
+	for <webhook@archiver.kernel.org>; Wed, 23 Aug 2023 17:25:49 +0000 (UTC)
+Received: from mailout09.t-online.de (mailout09.t-online.de [194.25.134.84])
+ by mx.groups.io with SMTP id smtpd.web11.2722.1692811542642825625
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 23 Aug 2023 10:23:10 -0700
+ Wed, 23 Aug 2023 10:25:43 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20221208 header.b=IVMh5Iky;
- spf=pass (domain: gmail.com, ip: 209.85.161.41, mailfrom: raj.khem@gmail.com)
-Received: by mail-oo1-f41.google.com with SMTP id 006d021491bc7-570deae2594so1879862eaf.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 23 Aug 2023 10:23:09 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1692811389; x=1693416189;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=0C1ci+XsAWuMUnoPU4jtqyV+jGFk+LnT+B6pNiZ80Hg=;
-        b=IVMh5Iky7JT8t3aRRm96tHvIHqo9VwnCVzM0ZPL6MTrVASWJL+lqdDETIFYbj+jreM
-         zdm/B6fw5+yKjssHpKTNSwW8EpLWumg5CsRi5suZQLezynFP45sPZ4ImBCTijHG57keO
-         QFK3PtrqglCvJPpS+Bqad+ixH+MmAWnREdYe0G3YQ3nlBIH9wLc6/Eq7x4x9q8jPpHTN
-         2ew7ug3qTgdlhRzFEggH1W3G2g3pZLrHtBrhEc7ylInyy1pZYBI6nwp6LBYD1wYV6CdY
-         X4DsG6EDD2ZrAMuDgFYxgly3JixJ+gRh6fUUxL7y4ce1DqMDlZsRos+Vf2/uLV0+SXGl
-         VL5A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1692811389; x=1693416189;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=0C1ci+XsAWuMUnoPU4jtqyV+jGFk+LnT+B6pNiZ80Hg=;
-        b=ORTwOU4ouOO7sAgBMQS/NnVGFYOFJX0Eu4cbTuIJjFkTuV73/lBzKrmVkoifGOT5LE
-         En3qAF8WzIN6povSdNBVRd4CodU0BN6y9lI7DmCXj/QPKjIBVDCb4HByLLHdJsiCwOMT
-         VHKGNI2K6G/vUGVaodZaysN3bSLTKHGP/utA73u9//0QEo7psKNP7F5NEgUrdtvviHSm
-         M0BmsvK1r+r5KqNpC62Lo5QPnqK96CWtjv+zzqXQCsHZ6iMhFL+zRZb2O8zfyvx09QrX
-         KGmNW/GuOVHaJv8UPf729Q67gY72+rfLEGkXwi2s5/0MEjzQZzJ6UQPneAmvJBz6YJ+Z
-         yIsA==
-X-Gm-Message-State: AOJu0YzZ//MrhIQorbJ+Tm4Ybp6PUj245TqH+6K6LtbjoUWSsmFsjOxl
-	yhyIrksra/ZxLANuERymFwuq198sPWw1SQg9FTg=
-X-Google-Smtp-Source: AGHT+IFWIBlIHxjSigzUxiK8vzPUdcH9J2pEXGH6Y9mEXjBV7w13JsWeVG+oGS5hf5opgNfsuQ50E01TR0nm3KNgcfs=
-X-Received: by 2002:a4a:91d3:0:b0:56d:10bb:c2d4 with SMTP id
- e19-20020a4a91d3000000b0056d10bbc2d4mr12386649ooh.1.1692811389044; Wed, 23
- Aug 2023 10:23:09 -0700 (PDT)
+ dkim=none (message not signed); spf=none, err=SPF record not found (domain: t-online.de, ip: 194.25.134.84, mailfrom: f_l_k@t-online.de)
+Received: from fwd89.aul.t-online.de (fwd89.aul.t-online.de [10.223.144.115])
+	by mailout09.t-online.de (Postfix) with SMTP id 9AD32167DE
+	for <openembedded-devel@lists.openembedded.org>; Wed, 23 Aug 2023 19:25:40 +0200 (CEST)
+Received: from intel-corei7-64.fritz.box ([84.154.170.236]) by fwd89.t-online.de
+	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
+	esmtp id 1qYrbv-02oL0T0; Wed, 23 Aug 2023 19:25:39 +0200
+From: Markus Volk <f_l_k@t-online.de>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-oe][PATCHv2] libosinfo: add recipe
+Date: Wed, 23 Aug 2023 19:25:28 +0200
+Message-ID: <20230823172528.1003528-1-f_l_k@t-online.de>
+X-Mailer: git-send-email 2.41.0
 MIME-Version: 1.0
-References: <20230823121957.5626-1-f_l_k@t-online.de> <20230823121957.5626-3-f_l_k@t-online.de>
- <CAMKF1so8xeZqi_O1Pxt95csnBtYoi5MknvHxQCDeN6djNUWAEw@mail.gmail.com> <ZGTUZR.GRK8GCNOYH7I3@googlemail.com>
-In-Reply-To: <ZGTUZR.GRK8GCNOYH7I3@googlemail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 23 Aug 2023 10:22:58 -0700
-Message-ID: <CAMKF1spBO6JxHP7VdZ4KbCXCT9SKve9pvD+Q=YYTOfanCKwk5g@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH 3/5] spice: upgrade 0.14.2 -> 0.15.2
-To: mrksvolk@googlemail.com
-Cc: Markus Volk <f_l_k@t-online.de>, openembedded-devel@lists.openembedded.org
-Content-Type: multipart/alternative; boundary="000000000000840ece06039a5d03"
+X-TOI-EXPURGATEID: 150726::1692811539-BEFE39BF-56B88F7C/0/0 CLEAN NORMAL
+X-TOI-MSGID: 418dc17d-9972-4489-a6db-72f4f34a72c4
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 23 Aug 2023 17:23:19 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104554
+ <openembedded-devel@lists.openembedded.org>; Wed, 23 Aug 2023 17:25:49 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104555
 
---000000000000840ece06039a5d03
-Content-Type: text/plain; charset="UTF-8"
+libosinfo
+=3D=3D=3D=3D=3D=3D=3D=3D=3D
 
-Ok, thanks.
+libosinfo is a GObject based library API for managing information about
+operating systems, hypervisors and the (virtual) hardware devices they ca=
+n
+support. It includes a database containing device metadata and provides A=
+PIs
+to match/identify optimal devices for deploying an operating system on a
+hypervisor. Via the magic of GObject Introspection, the API is available =
+in all
+common programming languages with demos for javascript (GJS/Seed) and pyt=
+hon
+(PyGObject). Vala bindings are also provided.
 
-On Wed, Aug 23, 2023 at 10:19 AM <mrksvolk@googlemail.com> wrote:
+libosinfo is a required dependency for gnome-boxes
 
-> On Wed, Aug 23 2023 at 09:28:39 AM -07:00:00, Khem Raj <raj.khem@gmail.com>
-> wrote:
->
-> have you built it for musl targets ? If we drop the thread_id patch this
-> would be affected unless it has been made portable in different way
->
->
-> The file that was patched has been removed. Looks like it was rewritten in
-> cpp
-> I was able to build spice for musl x86_64 without errors
->
+Signed-off-by: Markus Volk <f_l_k@t-online.de>
+---
+ ...meson.build-allow-crosscompiling-gir.patch | 28 ++++++++++++++++
+ .../libosinfo/libosinfo_1.10.bb               | 32 +++++++++++++++++++
+ 2 files changed, 60 insertions(+)
+ create mode 100644 meta-oe/recipes-support/libosinfo/libosinfo/0001-meso=
+n.build-allow-crosscompiling-gir.patch
+ create mode 100644 meta-oe/recipes-support/libosinfo/libosinfo_1.10.bb
 
---000000000000840ece06039a5d03
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+diff --git a/meta-oe/recipes-support/libosinfo/libosinfo/0001-meson.build=
+-allow-crosscompiling-gir.patch b/meta-oe/recipes-support/libosinfo/libos=
+info/0001-meson.build-allow-crosscompiling-gir.patch
+new file mode 100644
+index 0000000000..778a1f6e1e
+--- /dev/null
++++ b/meta-oe/recipes-support/libosinfo/libosinfo/0001-meson.build-allow-=
+crosscompiling-gir.patch
+@@ -0,0 +1,28 @@
++From 123b5a4c5e09f4262d4545a0bc5edb01a19b6b76 Mon Sep 17 00:00:00 2001
++From: Markus Volk <f_l_k@t-online.de>
++Date: Mon, 21 Aug 2023 10:06:55 +0200
++Subject: [PATCH] meson.build: allow crosscompiling gir
++
++Upstream-Status: Inappropriate [oe specific]
++
++Signed-off-by: Markus Volk <f_l_k@t-online.de>
++---
++ meson.build | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/meson.build b/meson.build
++index 39b739e..46f2252 100644
++--- a/meson.build
+++++ b/meson.build
++@@ -29,7 +29,7 @@ libosinfo_pkgconfdir =3D join_paths(libosinfo_libdir, =
+'pkgconfig')
++=20
++ # gobject introspection
++ gir =3D find_program('g-ir-scanner', required: get_option('enable-intro=
+spection'))
++-enable_introspection =3D gir.found() and not meson.is_cross_build()
+++enable_introspection =3D gir.found()
++=20
++ # vala
++ vapi_opt =3D get_option('enable-vala')
++--=20
++2.41.0
++
+diff --git a/meta-oe/recipes-support/libosinfo/libosinfo_1.10.bb b/meta-o=
+e/recipes-support/libosinfo/libosinfo_1.10.bb
+new file mode 100644
+index 0000000000..b02bc12816
+--- /dev/null
++++ b/meta-oe/recipes-support/libosinfo/libosinfo_1.10.bb
+@@ -0,0 +1,32 @@
++SUMMARY =3D "API for managing information about operating systems, hyper=
+visors and the (virtual) hardware devices."
++HOMEPAGE =3D "https://libosinfo.org"
++
++LICENSE =3D "LGPL-2.1-only & GPL-2.0-only"
++LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D2b0e9926530c269f5ae9556037019=
+5af"
++LIC_FILES_CHKSUM =3D "file://COPYING.LIB;md5=3D4fbd65380cdd255951079008b=
+364516c"
++
++SRC_URI =3D " \
++	git://gitlab.com/libosinfo/libosinfo.git;branch=3Dmain;protocol=3Dhttps=
+ \
++	file://0001-meson.build-allow-crosscompiling-gir.patch \
++"
++
++SRCREV =3D "f503ff7a9e13963bcf396776bce0b209a819ba9b"
++
++S =3D "${WORKDIR}/git"
++
++inherit meson pkgconfig gtk-doc gobject-introspection vala
++
++DEPENDS =3D "glib-2.0 libsoup libxslt"
++
++GIR_MESON_OPTION =3D "enable-introspection"
++GIR_MESON_ENABLE_FLAG =3D 'enabled'
++GIR_MESON_DISABLE_FLAG =3D 'disabled'
++GTKDOC_MESON_OPTION =3D "enable-gtk-doc"
++
++EXTRA_OEMESON =3D " \
++	-Dwith-pci-ids-path=3D${datadir}/pci.ids \
++	-Dwith-usb-ids-path=3D${datadir}/usb.ids \
++	-Denable-vala=3Denabled \
++"
++
++RDEPENDS:${PN} =3D "pciutils-ids usbids"
+--=20
+2.41.0
 
-<div>Ok, thanks.</div><div><br><div class=3D"gmail_quote"><div dir=3D"ltr" =
-class=3D"gmail_attr">On Wed, Aug 23, 2023 at 10:19 AM &lt;<a href=3D"mailto=
-:mrksvolk@googlemail.com">mrksvolk@googlemail.com</a>&gt; wrote:<br></div><=
-blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1px=
- #ccc solid;padding-left:1ex"><div id=3D"m_-2236124335587328607geary-body" =
-dir=3D"auto">On Wed, Aug 23 2023 at 09:28:39 AM -07:00:00, Khem Raj &lt;<a =
-href=3D"mailto:raj.khem@gmail.com" target=3D"_blank">raj.khem@gmail.com</a>=
-&gt; wrote:<br><blockquote type=3D"cite"><div style=3D"white-space:break-sp=
-aces">have you built it for musl targets ? If we drop the thread_id patch
-this would be affected unless it has been made portable in different
-way</div></blockquote><div><br></div><div>The file that was patched has bee=
-n removed. Looks like it was rewritten in cpp</div><div>I was able to build=
- spice for musl x86_64 without errors</div></div></blockquote></div></div>
-
---000000000000840ece06039a5d03--
 
