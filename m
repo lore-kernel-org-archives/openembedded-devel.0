@@ -2,25 +2,25 @@ Return-Path: <pawel.langowski@3mdeb.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9511BEE49A0
-	for <webhook@archiver.kernel.org>; Wed, 23 Aug 2023 11:49:16 +0000 (UTC)
-Received: from 18.mo584.mail-out.ovh.net (18.mo584.mail-out.ovh.net [188.165.54.143])
- by mx.groups.io with SMTP id smtpd.web11.9473.1692791348725784939
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AEC02EE49A0
+	for <webhook@archiver.kernel.org>; Wed, 23 Aug 2023 11:50:46 +0000 (UTC)
+Received: from 4.mo583.mail-out.ovh.net (4.mo583.mail-out.ovh.net [178.33.111.247])
+ by mx.groups.io with SMTP id smtpd.web10.9407.1692791442537728132
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 23 Aug 2023 04:49:09 -0700
+ Wed, 23 Aug 2023 04:50:42 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=softfail (domain: 3mdeb.com, ip: 188.165.54.143, mailfrom: pawel.langowski@3mdeb.com)
-Received: from director3.ghost.mail-out.ovh.net (unknown [10.108.16.84])
-	by mo584.mail-out.ovh.net (Postfix) with ESMTP id A6BCB27D43
-	for <openembedded-devel@lists.openembedded.org>; Wed, 23 Aug 2023 11:49:06 +0000 (UTC)
-Received: from ghost-submission-6684bf9d7b-hft9z (unknown [10.109.146.141])
-	by director3.ghost.mail-out.ovh.net (Postfix) with ESMTPS id F03AC1FD33;
-	Wed, 23 Aug 2023 11:49:05 +0000 (UTC)
-Received: from 3mdeb.com ([37.59.142.108])
-	by ghost-submission-6684bf9d7b-hft9z with ESMTPSA
-	id njB6KjHy5WRb5gsAFqKYpQ
-	(envelope-from <pawel.langowski@3mdeb.com>); Wed, 23 Aug 2023 11:49:05 +0000
-Authentication-Results: garm.ovh; auth=pass (GARM-108S0025c68a2c4-2632-401c-9b2e-61cb9ddcc2ef,
+ dkim=none (message not signed); spf=softfail (domain: 3mdeb.com, ip: 178.33.111.247, mailfrom: pawel.langowski@3mdeb.com)
+Received: from director3.ghost.mail-out.ovh.net (unknown [10.109.156.29])
+	by mo583.mail-out.ovh.net (Postfix) with ESMTP id 411F928342
+	for <openembedded-devel@lists.openembedded.org>; Wed, 23 Aug 2023 11:50:40 +0000 (UTC)
+Received: from ghost-submission-6684bf9d7b-b7h7n (unknown [10.108.20.4])
+	by director3.ghost.mail-out.ovh.net (Postfix) with ESMTPS id 8D2711FD7D;
+	Wed, 23 Aug 2023 11:50:39 +0000 (UTC)
+Received: from 3mdeb.com ([37.59.142.103])
+	by ghost-submission-6684bf9d7b-b7h7n with ESMTPSA
+	id mVQiHo/y5WTcBwEAij7HzQ
+	(envelope-from <pawel.langowski@3mdeb.com>); Wed, 23 Aug 2023 11:50:39 +0000
+Authentication-Results: garm.ovh; auth=pass (GARM-103G0052f8774aa-6292-4678-aaa9-51112a1d9b16,
                     9F87A999A58848E422D1785D445934894C28AF5B) smtp.auth=pawel.langowski@3mdeb.com
 X-OVh-ClientIp: 213.192.77.249
 From: Pawel Langowski <pawel.langowski@3mdeb.com>
@@ -28,20 +28,20 @@ To: openembedded-devel@lists.openembedded.org
 Cc: piotr.krol@3mdeb.com,
 	tomasz.zyjewski@3mdeb.com
 Subject: [meta-oe][PATCH v4] qcbor: add recipe
-Date: Wed, 23 Aug 2023 13:48:57 +0200
-Message-ID: <20230823114857.130746-1-pawel.langowski@3mdeb.com>
+Date: Wed, 23 Aug 2023 13:50:33 +0200
+Message-ID: <20230823115033.131018-1-pawel.langowski@3mdeb.com>
 X-Mailer: git-send-email 2.41.0
 MIME-Version: 1.0
-X-Ovh-Tracer-Id: 17452011506568770201
+X-Ovh-Tracer-Id: 17478470155256312473
 X-VR-SPAMSTATE: OK
 X-VR-SPAMSCORE: 0
-X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrgedviedruddvgedggeegucetufdoteggodetrfdotffvucfrrhhofhhilhgvmecuqfggjfdpvefjgfevmfevgfenuceurghilhhouhhtmecuhedttdenucenucfjughrpefhvfevufffkffoggfgsedtkeertdertddtnecuhfhrohhmpefrrgifvghlucfnrghnghhofihskhhiuceophgrfigvlhdrlhgrnhhgohifshhkihesfehmuggvsgdrtghomheqnecuggftrfgrthhtvghrnhepkeefhefhkeffieetjedvffettdeigfeufeehgefgteejudfgfeelfeeiteeggfejnecuffhomhgrihhnpehgihhthhhusgdrtghomhenucfkphepuddvjedrtddrtddruddpvddufedrudelvddrjeejrddvgeelpdefjedrheelrddugedvrddutdeknecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehinhgvthepuddvjedrtddrtddruddpmhgrihhlfhhrohhmpeeophgrfigvlhdrlhgrnhhgohifshhkihesfehmuggvsgdrtghomheqpdhnsggprhgtphhtthhopedupdhrtghpthhtohepohhpvghnvghmsggvugguvgguqdguvghvvghlsehlihhsthhsrdhophgvnhgvmhgsvgguuggvugdrohhrghdpoffvtefjohhsthepmhhoheekgedpmhhouggvpehsmhhtphhouhht
+X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrgedviedruddvgedggeehucetufdoteggodetrfdotffvucfrrhhofhhilhgvmecuqfggjfdpvefjgfevmfevgfenuceurghilhhouhhtmecuhedttdenucenucfjughrpefhvfevufffkffoggfgsedtkeertdertddtnecuhfhrohhmpefrrgifvghlucfnrghnghhofihskhhiuceophgrfigvlhdrlhgrnhhgohifshhkihesfehmuggvsgdrtghomheqnecuggftrfgrthhtvghrnhepkeefhefhkeffieetjedvffettdeigfeufeehgefgteejudfgfeelfeeiteeggfejnecuffhomhgrihhnpehgihhthhhusgdrtghomhenucfkphepuddvjedrtddrtddruddpvddufedrudelvddrjeejrddvgeelpdefjedrheelrddugedvrddutdefnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehinhgvthepuddvjedrtddrtddruddpmhgrihhlfhhrohhmpeeophgrfigvlhdrlhgrnhhgohifshhkihesfehmuggvsgdrtghomheqpdhnsggprhgtphhtthhopedupdhrtghpthhtohepohhpvghnvghmsggvugguvgguqdguvghvvghlsehlihhsthhsrdhophgvnhgvmhgsvgguuggvugdrohhrghdpoffvtefjohhsthepmhhoheekfedpmhhouggvpehsmhhtphhouhht
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 23 Aug 2023 11:49:16 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104538
+ <openembedded-devel@lists.openembedded.org>; Wed, 23 Aug 2023 11:50:46 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104539
 
 This adds QCBOR - a CBOR encoder/decoder library
 
