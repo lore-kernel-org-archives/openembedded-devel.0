@@ -2,37 +2,35 @@ Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EDABFEE49B0
-	for <webhook@archiver.kernel.org>; Wed, 23 Aug 2023 12:47:06 +0000 (UTC)
-Received: from mailout01.t-online.de (mailout01.t-online.de [194.25.134.80])
- by mx.groups.io with SMTP id smtpd.web10.10476.1692794826244670177
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1C0DBEE4993
+	for <webhook@archiver.kernel.org>; Wed, 23 Aug 2023 12:56:57 +0000 (UTC)
+Received: from mailout05.t-online.de (mailout05.t-online.de [194.25.134.82])
+ by mx.groups.io with SMTP id smtpd.web10.10689.1692795410621949320
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 23 Aug 2023 05:47:06 -0700
+ Wed, 23 Aug 2023 05:56:50 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=none, err=SPF record not found (domain: t-online.de, ip: 194.25.134.80, mailfrom: f_l_k@t-online.de)
-Received: from fwd79.aul.t-online.de (fwd79.aul.t-online.de [10.223.144.105])
-	by mailout01.t-online.de (Postfix) with SMTP id B60ABF2DB
-	for <openembedded-devel@lists.openembedded.org>; Wed, 23 Aug 2023 14:47:02 +0200 (CEST)
-Received: from intel-corei7-64.fritz.box ([84.154.170.236]) by fwd79.t-online.de
+ dkim=none (message not signed); spf=none, err=SPF record not found (domain: t-online.de, ip: 194.25.134.82, mailfrom: f_l_k@t-online.de)
+Received: from fwd86.aul.t-online.de (fwd86.aul.t-online.de [10.223.144.112])
+	by mailout05.t-online.de (Postfix) with SMTP id 983BE6402
+	for <openembedded-devel@lists.openembedded.org>; Wed, 23 Aug 2023 14:56:48 +0200 (CEST)
+Received: from intel-corei7-64.fritz.box ([84.154.170.236]) by fwd86.t-online.de
 	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1qYnGC-2W3Wr40; Wed, 23 Aug 2023 14:46:56 +0200
+	esmtp id 1qYnPk-1NQ9xJ0; Wed, 23 Aug 2023 14:56:48 +0200
 From: Markus Volk <f_l_k@t-online.de>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-gnome][PATCH 2/2] gnome-boxes: add recipe
-Date: Wed, 23 Aug 2023 14:46:45 +0200
-Message-ID: <20230823124645.6878-2-f_l_k@t-online.de>
+Subject: [meta-gnome][PATCHv2] gnome-boxes: add recipe
+Date: Wed, 23 Aug 2023 14:56:36 +0200
+Message-ID: <20230823125636.7052-1-f_l_k@t-online.de>
 X-Mailer: git-send-email 2.41.0
-In-Reply-To: <20230823124645.6878-1-f_l_k@t-online.de>
-References: <20230823124645.6878-1-f_l_k@t-online.de>
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1692794816-FD4002E6-BE72D20E/0/0 CLEAN NORMAL
-X-TOI-MSGID: 83e6e394-2c67-43e4-b64b-673c37a577d9
+X-TOI-EXPURGATEID: 150726::1692795408-F6FE3EBC-05ED00D5/0/0 CLEAN NORMAL
+X-TOI-MSGID: 2a03617b-2b9a-437d-ae37-fa4066ed8250
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 23 Aug 2023 12:47:06 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104547
+ <openembedded-devel@lists.openembedded.org>; Wed, 23 Aug 2023 12:56:57 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104548
 
 - use dynamic-layers directory because this recipe depends on meta-virtua=
 lization
@@ -48,7 +46,7 @@ diff --git a/meta-gnome/dynamic-layers/meta-virtualization/recipes-gnome/=
 gnome-boxes/gnome-boxes_44.2.bb b/meta-gnome/dynamic-layers/meta-virtuali=
 zation/recipes-gnome/gnome-boxes/gnome-boxes_44.2.bb
 new file mode 100644
-index 0000000000..59d4d2b287
+index 0000000000..2ab904f869
 --- /dev/null
 +++ b/meta-gnome/dynamic-layers/meta-virtualization/recipes-gnome/gnome-b=
 oxes/gnome-boxes_44.2.bb
@@ -87,7 +85,7 @@ ef79a"
 86-64"
 +
 +inherit gnomebase gsettings pkgconfig mime-xdg gtk-icon-cache gobject-in=
-trospection vala
+trospection vala features_check
 +
 +SRC_URI[archive.sha256sum] =3D "9dd389c149d0c0fa57456ec363d51a88255f9455=
 58fb9df42894ce78ef85df89"
