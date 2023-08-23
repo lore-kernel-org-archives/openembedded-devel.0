@@ -1,175 +1,155 @@
-Return-Path: <philip@balister.org>
+Return-Path: <yi.zhao@eng.windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 09B53EE49AB
-	for <webhook@archiver.kernel.org>; Tue, 22 Aug 2023 23:46:43 +0000 (UTC)
-Received: from NAM12-DM6-obe.outbound.protection.outlook.com (NAM12-DM6-obe.outbound.protection.outlook.com [40.107.243.53])
- by mx.groups.io with SMTP id smtpd.web11.5750.1692733347898128328
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8C768EE49B0
+	for <webhook@archiver.kernel.org>; Wed, 23 Aug 2023 01:34:43 +0000 (UTC)
+Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
+ by mx.groups.io with SMTP id smtpd.web10.2360.1692754479906647162
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 22 Aug 2023 12:42:28 -0700
+ Tue, 22 Aug 2023 18:34:39 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@amd.com header.s=selector1 header.b=wZ71IIBV;
- spf=permerror, err=parse error for token &{10 18 %{i}._ip.%{h}._ehlo.%{d}._spf.vali.email}: invalid domain name (domain: amd.com, ip: 40.107.243.53, mailfrom: mark.hatle@amd.com)
+ dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=TOo4DZX9;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=7599c7e7ca=yi.zhao@windriver.com)
+Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.17.1.22/8.17.1.22) with ESMTP id 37N10pLc025544
+	for <openembedded-devel@lists.openembedded.org>; Tue, 22 Aug 2023 18:34:39 -0700
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
+	 h=from:to:subject:date:message-id:content-transfer-encoding
+	:content-type:mime-version; s=PPS06212021; bh=uWfXIerVogo3RZfQMd
+	yyrdrzBHIammhFF4ohowHrjJU=; b=TOo4DZX9ukZfEjs03vVNJWIEojr0Y3ofGT
+	AEte6sLHf9Uj/VDAtTKeamyarm0ZMjsX9l65koOQa+/Ck8zBLbzKOle8qarXzQlv
+	1kWxyig6H3VauJxItW0A/mT0E2+r0ifJC2i0LumvmWy7B7NsMREelPOl6ub0sedx
+	5l4W/FvdKRDWuBxfNBjNZG9APVD8YoWXJ7b+16o5A6QB4/xt/gLNT7w5qQaouuxK
+	pFtJH7LVA4JUi5AUVs1o9h+T2juHnn1b0Eqcwar4r6qGduwdBv4xkpBO0xLcOH5B
+	cV/rZh2GgX8cLodnBUgQ6t2ccl/tUNcTZadoXc9gLdJA9LwYLC7g==
+Received: from nam12-bn8-obe.outbound.protection.outlook.com (mail-bn8nam12lp2171.outbound.protection.outlook.com [104.47.55.171])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3sn20e09y2-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Tue, 22 Aug 2023 18:34:39 -0700 (PDT)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=GQnKhxM37qYH3QziuEjkJmJsX0QTXKL31Xf3S3xQdm3UUCvpqZEbUdByIDgVov4Jccn/L+L8w0uJbqyzVoEotPvJce5r+4fIr4JR+lsGhkNlGUdefK5vQXl/PIGlSiVTO/glyBNOfIks29dR8MWtaXTC8TWHd71R9usFzIiqLhK92Rz//cUydcbBUdjJZ4TdZxUyEsKhcxACoGKvLqHZ8WrFrD1lVD3GbTw4GuDsBdz9OzAmVwAbCsV4sJ+pQuQ+xNV4r5HWQB7rYGthUm3Yeik3gyuZE/8wuZWD1siQ73924D0F8GUT6ysNOlyQVz5LXdRQMrKgM2j9j3e6Q8UQ7A==
+ b=DWF2JgNFzeZMd1II26jKsbPVjdonPNVv2DtLLcxv6OYDrLE0ooOltJ3Chc1QeHd+xSzBo94irXVo7QWgWaJWAHrCrG89pVoI0qikah1ZOQ5azzr/HcoVTrtOT/UareQF8KXOQST/J9NKzlKmilfDVmBbsr0PzIK6Cq4PtQs2t791GgmxG28JDOzm2MSMZumB0K+5sX9EFNR6Yt/zxPCPTr6QzEvVJF4E/USwjeLVmjGg1T5CO02yGivx5BSurBwzzbMMl7FzRnMbmuvnLZHh3Iv22IYQ+AtAd6niHOaNdSZzykYwEIHtkUWS33IcVZhV3i+J0sK7fb9a5Ri6MtzZlA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=R+l/OJ53QvFTa7DUPa7oV97otGR2PCvXt91foyDuhYk=;
- b=elWEPDMlId9hyrEIEiCP4v3cQ3ijLdBCytV/fJrwF0s1xbM7mZG9ZI7+28V0j9WTMQbXC6oLLhJh0Y2DFMLgnpcag0nU2UT3UKhqN6QRNztLyx2Ntn0etCgkn5ux5PVwUK9eaIMButg2NlrcYNxOSP+4YP8VC8ttTFYjxchVXiHDq/P0cMF6o+XXE2JCiTRIZyk2QH5NQ4hWD41IK0ooNqq3HhuM+iwoZ3hTl+aK9a2Uv1P/ngXjK0+dqMVzELMtQ4+r7jRWzye5HYuJOOjiHHaWJEv2zIGB5F+bHqFkNBWxjA/9S3gzgsIRrXkymMx3DAXNdEMuIAxWKP+Bv5bwdg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.openembedded.org
- smtp.mailfrom=amd.com; dmarc=pass (p=quarantine sp=quarantine pct=100)
- action=none header.from=amd.com; dkim=none (message not signed); arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=R+l/OJ53QvFTa7DUPa7oV97otGR2PCvXt91foyDuhYk=;
- b=wZ71IIBVZD67R//y7ft//QRrRbCw8IuLwglghJAMDD7e5hMapqlD5sfXdbGlRN7Bxa0BXBvDWNxhfsGEPFBCfPTFhGThRlyPMqEVXVqi7KiWHEMs9deXZggi5IlIpifI1n4M0QvYAHrk2t/gRGm3KFvDVHVEjqcMuavHmV4+Fcw=
-Received: from CY5PR16CA0015.namprd16.prod.outlook.com (2603:10b6:930:10::28)
- by PH8PR12MB8430.namprd12.prod.outlook.com (2603:10b6:510:259::11) with
+ bh=uWfXIerVogo3RZfQMdyyrdrzBHIammhFF4ohowHrjJU=;
+ b=Wz3yfGuf2Zta6k84/2+5U1mdA87y9NSVk+pqXOAioOb+NGcY8OfmQbllNCF9QSPB7WzYDMAg7Op7mwAp8QbHOvpmeTB295ovXi3cgG3mBS3V5FbY6odXc8gWAlgM4howvmdfOB/KgHGOxq6e55USObINxUGNdt3xAqDTTyfxh/sEeJjvOYC5O8D9hdvhmq9ArOaZfffzu/FoOdNsGJ2fz97odBmiN9c2wuqFMGXtt1SARgMOSCUsFt/tPSxUPAOE+8hyiEUz0X8y1Srx2+GqwGvuMjYzsFTdnZdfzoC5eA72ElK0cPZAJ83aoVb6kGBJqSoHJ5f2WEUUk0kUTIxlqw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=windriver.com; dmarc=pass action=none
+ header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
+Received: from CO1PR11MB4867.namprd11.prod.outlook.com (2603:10b6:303:9a::13)
+ by SA1PR11MB8328.namprd11.prod.outlook.com (2603:10b6:806:376::13) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6678.26; Tue, 22 Aug
- 2023 19:42:25 +0000
-Received: from CY4PEPF0000EE35.namprd05.prod.outlook.com
- (2603:10b6:930:10:cafe::7c) by CY5PR16CA0015.outlook.office365.com
- (2603:10b6:930:10::28) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6699.20 via Frontend
- Transport; Tue, 22 Aug 2023 19:42:25 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- CY4PEPF0000EE35.mail.protection.outlook.com (10.167.242.41) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.6699.15 via Frontend Transport; Tue, 22 Aug 2023 19:42:24 +0000
-Received: from SATLEXMB05.amd.com (10.181.40.146) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Tue, 22 Aug
- 2023 14:42:24 -0500
-Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB05.amd.com
- (10.181.40.146) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Tue, 22 Aug
- 2023 14:42:16 -0500
-Received: from xcolc230100.xilinx.com (10.180.168.240) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server id 15.1.2507.27 via Frontend
- Transport; Tue, 22 Aug 2023 14:42:15 -0500
-From: "Mark Hatle" <mark.hatle@amd.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-oe][PATCH] kconfig-frontends: Avoid using hard coded /usr/include paths
-Date: Tue, 22 Aug 2023 13:42:15 -0600
-Message-ID: <20230822194215.517592-1-mark.hatle@amd.com>
-X-Mailer: git-send-email 2.34.1
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6699.25; Wed, 23 Aug
+ 2023 01:34:37 +0000
+Received: from CO1PR11MB4867.namprd11.prod.outlook.com
+ ([fe80::1ba9:4bef:c1a4:306]) by CO1PR11MB4867.namprd11.prod.outlook.com
+ ([fe80::1ba9:4bef:c1a4:306%2]) with mapi id 15.20.6699.026; Wed, 23 Aug 2023
+ 01:34:37 +0000
+From: Yi Zhao <yi.zhao@windriver.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-networking][PATCH] nftables: upgrade 1.0.7 -> 1.0.8
+Date: Wed, 23 Aug 2023 09:34:22 +0800
+Message-Id: <20230823013425.2252936-1-yi.zhao@windriver.com>
+X-Mailer: git-send-email 2.25.1
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: SI1PR02CA0039.apcprd02.prod.outlook.com
+ (2603:1096:4:1f6::9) To CO1PR11MB4867.namprd11.prod.outlook.com
+ (2603:10b6:303:9a::13)
 MIME-Version: 1.0
-X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CY4PEPF0000EE35:EE_|PH8PR12MB8430:EE_
-X-MS-Office365-Filtering-Correlation-Id: 5a514cae-620a-425b-c650-08dba347e90b
+X-MS-TrafficTypeDiagnostic: CO1PR11MB4867:EE_|SA1PR11MB8328:EE_
+X-MS-Office365-Filtering-Correlation-Id: 610ea78c-8853-467d-2354-08dba3791c7f
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	kvAvrCm+u+3VMPnE3/8ppojxSmZRAaFdqsfZ9Ug5xgn0jOl6I3tmJTc+CmEYgJY4SRbz2if9Jldn3r10BSz0xQJW9wSBTLoiTi6XZ5Wwx+7Ikaj4ILxEcNnkjJOCQch56acb4DfNvHW5TTLu+Teu2WsEhX0AEE9NVOhcYYyDM5w8Mqwp/HWiSXx+KQpn8ov6zFIIrfLce4N1CWGa9YYTbMvsRXOyV/c5QgRTKoH7xIn7fA72E4EZVHNzAUjgcRsLQ7+oIIWQ8hal7bBXKv7pemdxqar6BqS0zE8dzMsm0CuLFABCTr3Edx+XsMcJF6dJk5eypwTXKJWXWG3fQBpzyRHHi7RCCtsvu2oUoNWIO1ha1/W1Z5EIljQ/Q28/7vHmqwRf/iSJUZwG8nnfYOdAL8a2ekdQxXxauzJWFzdYJhoJ4+hNOOcFALuzl5I/hKKFdwWr+Iy5DKNC7kHtMMUqX9yKghczGD4yP7kfTEa2FA9PdvxI8cwtn3kLOq0tbvXenelYsASgviOgZtzzuZWoOMvHLng7iObJoP0u6QFUN4jW+s+IeRMvbGQ+gDpTSl1HjKNm8r1hdmlXM/jkJtJ+KouH5+rpgD7zXTLWTo6Ebmo7d0UBwJq/Pcs3Nnw3xz//N8CQgoZfTS5CplVkuilmRxZanBVSungokrTSHADrIFC0vw5L92hiOEKLYZSvHEnNbMv9WNBgPN27Y46o3Qhr56pXlILJ1bArVK4QwwHWWQuOjTeo+97I2OVLAUJ/fZuqvqCC5khSoJgak+aSdL4XiQ==
+	FsRWduMkzXeKw1+bIjHOM18qF9c+Eb/24SCoNFyBl8ZejMgKrF1p/QkPetGumBXLt2KVql13k6VmpuvVrg8HeV927uAr+dYpMjC9znXpsuQXvdW9WOzGFr2SNjhkUdqVJdDef6kGaBJ1lT8Rk4nnSJefPaNL7iHGGR9irzxGIZhYSxineL6aIcfTuuVacph0Mj0CMbG5QRlr1FiFKofwL7Fogw7j8agf0JxL6Z6Lf/64iwVyoyCPfeis8vd8dYu5Me6xRZBPsd+gpBNDiuN158d8BhsYrvcZHT5Vbto5J0SNFD1Jkz4+H1qhYDLFq5bHkoufGFNfMY4tvM0Vi83DLa2YkDtK8udyfsF7W9mMzagNgYjPPeO0MsTov6QTpsutgOQEv6AwNSnNmyBw1FL5EhPw8B5n172cNOLoa5sfoPUaZoWXOlmkAnMTCOzzNHnImehrCy9lgEOLk0vAkhUV/HBmHA44pskSaw4wZziVzwOw7LEI1kGuh2FaYVpOICyxBjeuWqhJfkqsaqZeTCPvFxL3uFNjzFe0rdBoqBxZ7kuUX1AWesUR+ezVc4OfTRhmHtPhVEH5R1kDr2BBkIwq+xtM/W8CeQqVeDM02kow697wtqqOUTg4XBXU6n3179G4O2bZdCLAK1i4dKM+uzDmYA==
 X-Forefront-Antispam-Report: 
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230031)(4636009)(39860400002)(136003)(396003)(376002)(346002)(1800799009)(186009)(451199024)(82310400011)(40470700004)(36840700001)(46966006)(36756003)(86362001)(40480700001)(81166007)(40460700003)(356005)(316002)(70206006)(478600001)(70586007)(6916009)(41300700001)(82740400003)(47076005)(26005)(1076003)(426003)(336012)(2616005)(5660300002)(44832011)(2906002)(8936002)(36860700001)(8676002)(83380400001)(36900700001);DIR:OUT;SFP:1101;
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Aug 2023 19:42:24.9831
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CO1PR11MB4867.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230031)(346002)(39850400004)(366004)(396003)(136003)(376002)(186009)(1800799009)(451199024)(36756003)(478600001)(41300700001)(6512007)(86362001)(966005)(6506007)(66476007)(66556008)(316002)(6916009)(52116002)(66946007)(6486002)(6666004)(2616005)(5660300002)(1076003)(8936002)(8676002)(26005)(44832011)(83380400001)(38350700002)(38100700002)(2906002);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?us-ascii?Q?4p81tuB4QxVKNWM2n8tdyW2258PDbkh0DFAYDML/IlKNwVZG3Mlivded6gVU?=
+ =?us-ascii?Q?Z65bCw7a51gwsoPFyEcfCzckGGTvBDhqMTj15flLcYT6cD4116Tp4PdxfsV5?=
+ =?us-ascii?Q?saMaM2IAGL2BFscXnjF8SOjAytyj/B+jzxCP/1VvOp9o8zMv9gtuMsOnE1YG?=
+ =?us-ascii?Q?xxNo2w+MHKg4FsPsQ+WbR++HrvRhEqznooTiLYiZTNyU8kImIljPyyteg+IT?=
+ =?us-ascii?Q?I4hlc/sQexM9/LI1W7gpKODzri/p0KfYMZnrCW/NiH6+kcjxRK10BYhAQNSU?=
+ =?us-ascii?Q?71uEvpeZjSJ4xe2UH4xrL20RQSqaU9RnRwCWF8Xyf7e1PxvkHQVI/aZWNZxk?=
+ =?us-ascii?Q?PQkwgEej0R8byryFwji3XaSTzbl+b7A9biW33UqPy/5t7i4s9xOZjWO1FlfE?=
+ =?us-ascii?Q?NgbiE1IKwJkYjtj7oa6T6JBa2gc1PoKuLwp0E3AApFlnEQEZ7CLvZ4BcF4So?=
+ =?us-ascii?Q?EQys9EBIxMzd0U6PeBXRbbOZ2bVaiUISyf3V7eCOtsMKSsmNZxZlIG28D8Kx?=
+ =?us-ascii?Q?YD2ATlvLH8QqXlSF+XiG9ocH3S9kBZQEGvnowft133EJfQP0+VxX/ZGAEsZo?=
+ =?us-ascii?Q?+zWt4RofCfunTe2vYO3nX2uhWgjqDfxPjFy1esB6WN2sC0TYoYzEtkNnGWRM?=
+ =?us-ascii?Q?XRf9v+D2U8Iqy4kL60BKWFQUn1fYxNRhYgCzKihkp5t2JXbnZwV/wkoHIibi?=
+ =?us-ascii?Q?gSP3Vdb74sGF9kAdFcjtmwNIIaT8a38f96VHCoK97/YTfODofkOmIuhAfi1Y?=
+ =?us-ascii?Q?ceKYinG2CsF5dgHvNxSJd4EV34GtFjMfI1z9gfqpPkhbFjo2pyYXVr4Cf3TO?=
+ =?us-ascii?Q?iSQOvwcxBcgd4hSshuPu378m8fcF9qeqdPOcccdvjbvgsTOHG7jWjY2GrCC3?=
+ =?us-ascii?Q?reHw7Mv3mzIsHBE/wOuvPdtQekYnYxFZ+1XH5XZ76c68PAkrtB3MePLFSb/B?=
+ =?us-ascii?Q?uOoKn2T+E+ydS11d+xb0KByUWW0KIgTuAqcD9v0g2D9hQcLfmTx3S06PjLSx?=
+ =?us-ascii?Q?DNTD+J1ctc/IBybmlCGp58CQSZM7CbVLGSVV3OiBdVIccrDBlJigDLnEOllM?=
+ =?us-ascii?Q?00D++pCCeUOPsbPT5zXMzXEEYvsBrIvId279z2TLiB+Ri5nC3MM0l0tF7u2z?=
+ =?us-ascii?Q?7VITQ9jWmb/ePa0W2s4lpSpCgk7ZsyWWvsuTeQVebjNm4P44ttwqKnDMxJ8K?=
+ =?us-ascii?Q?fDj4qELWdUrZCIuMD4esaX68ByUCOuh7GVwo7SOn8GDTw/oxYGOlzhXjL0da?=
+ =?us-ascii?Q?5555lkj/0Zgdfs+R3dSipDDGccWS0Z11dxFupfI49Bv7T2l380NOwkDwglXp?=
+ =?us-ascii?Q?IG+17zgxiaZP5ZGrpMxsWC+tnJxkcoKO/EXW68hReKDNMeBYca4nbW87reFf?=
+ =?us-ascii?Q?QWWGthbgyiecqc1QJ8O4F9fpTHDvusGvNa4EmP7jL2dcUVeMEm58tmlfMWbS?=
+ =?us-ascii?Q?T61KXl+jXZa2T+IH0jrPeQFiN+7w5s0TxUJmeb4tx2RbXFkEYlwuzQt7ceqC?=
+ =?us-ascii?Q?JjI41lA81uooyZCuRypT4ql23jt0l1FGmcCpx2D9LsAXXUMZ2l2fZoZ7l/xv?=
+ =?us-ascii?Q?z+0B0wygxU6uJdb5GIAOcmVG/tpr8XjlU2Kh64Sq?=
+X-OriginatorOrg: windriver.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 610ea78c-8853-467d-2354-08dba3791c7f
+X-MS-Exchange-CrossTenant-AuthSource: CO1PR11MB4867.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Aug 2023 01:34:37.0472
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 5a514cae-620a-425b-c650-08dba347e90b
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: 
-	CY4PEPF0000EE35.namprd05.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH8PR12MB8430
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: BEz3H+0dKRpxjCzn+4KuPeLY2i1txHkx0rSObLFHjhrtQ+a4GUF/gjBrZhTrSshPbOOr4wZZBWwH4mDxRvVcLg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR11MB8328
+X-Proofpoint-GUID: SBaiM4Tg9Ds_MIZofg2xv272ue_xjWtU
+X-Proofpoint-ORIG-GUID: SBaiM4Tg9Ds_MIZofg2xv272ue_xjWtU
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.254,Aquarius:18.0.957,Hydra:6.0.601,FMLib:17.11.176.26
+ definitions=2023-08-22_22,2023-08-22_01,2023-05-22_02
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 phishscore=0 clxscore=1015
+ impostorscore=0 spamscore=0 malwarescore=0 mlxscore=0 suspectscore=0
+ priorityscore=1501 adultscore=0 lowpriorityscore=0 bulkscore=0
+ mlxlogscore=760 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.19.0-2308100000 definitions=main-2308230013
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 22 Aug 2023 23:46:43 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104523
+ <openembedded-devel@lists.openembedded.org>; Wed, 23 Aug 2023 01:34:43 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104524
 
-The system could end up using an include path that points to the host
-system instead of the sysroot.  Force the system to use the sysroot.
+Changelog:
+https://netfilter.org/projects/nftables/files/changes-nftables-1.0.8.txt
 
-Signed-off-by: Mark Hatle <mark.hatle@amd.com>
+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
 ---
- ...d-using-hard-coded-usr-include-paths.patch | 33 +++++++++++++++++++
- .../kconfig-frontends_4.11.0.1.bb             |  3 +-
- 2 files changed, 35 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-devtools/kconfig-frontends/files/0001-A=
-void-using-hard-coded-usr-include-paths.patch
+ .../nftables/{nftables_1.0.7.bb => nftables_1.0.8.bb}           | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-networking/recipes-filter/nftables/{nftables_1.0.7.bb => nftables_1.0.8.bb} (97%)
 
-diff --git a/meta-oe/recipes-devtools/kconfig-frontends/files/0001-Avoid-us=
-ing-hard-coded-usr-include-paths.patch b/meta-oe/recipes-devtools/kconfig-f=
-rontends/files/0001-Avoid-using-hard-coded-usr-include-paths.patch
-new file mode 100644
-index 000000000..ac20e9b88
---- /dev/null
-+++ b/meta-oe/recipes-devtools/kconfig-frontends/files/0001-Avoid-using-har=
-d-coded-usr-include-paths.patch
-@@ -0,0 +1,33 @@
-+From 2bd01e844096ab4ecaaab8eccfbfdc721a136d01 Mon Sep 17 00:00:00 2001
-+From: Mark Hatle <mark.hatle@amd.com>
-+Date: Tue, 22 Aug 2023 12:28:01 -0600
-+Subject: [PATCH] Avoid using hard coded /usr/include paths
-+
-+The system could end up using an include path that points to the host
-+system instead of the sysroot.  Force the system to use the sysroot.
-+
-+Upstream-Status: Inappropriate [configuration]
-+
-+Signed-off-by: Mark Hatle <mark.hatle@amd.com>
-+---
-+ configure.ac | 4 ----
-+ 1 file changed, 4 deletions(-)
-+
-+diff --git a/configure.ac b/configure.ac
-+index 150bc50..4dc684f 100644
-+--- a/configure.ac
-++++ b/configure.ac
-+@@ -344,10 +344,6 @@ AS_IF(
-+     [test "$need_panel_menu" =3D "yes" -o "$need_panel_menu" =3D "auto"],
-+     [AC_SUBST([ncurses_nconf_CPPFLAGS])
-+      AC_SUBST([ncurses_panel_menu_LIBS])
-+-     AS_CASE(
-+-        [$CURSES_LOC],
-+-        [ncursesw/*],[ncurses_nconf_CPPFLAGS=3D"-I/usr/include/ncursesw"]=
-,
-+-        [ncurses/*],[ncurses_nconf_CPPFLAGS=3D"-I/usr/include/ncurses"])
-+      LIBS_old=3D"$LIBS"
-+      LIBS=3D
-+      AC_SEARCH_LIBS(
-+--=20
-+2.34.1
-+
-diff --git a/meta-oe/recipes-devtools/kconfig-frontends/kconfig-frontends_4=
-.11.0.1.bb b/meta-oe/recipes-devtools/kconfig-frontends/kconfig-frontends_4=
-.11.0.1.bb
-index 169500f6b..b894f0ba0 100644
---- a/meta-oe/recipes-devtools/kconfig-frontends/kconfig-frontends_4.11.0.1=
-.bb
-+++ b/meta-oe/recipes-devtools/kconfig-frontends/kconfig-frontends_4.11.0.1=
-.bb
-@@ -15,7 +15,8 @@ DEPENDS +=3D "ncurses flex-native gperf-native bison-nati=
-ve"
- RDEPENDS:${PN} +=3D "python3 bash"
- SRC_URI =3D "git://gitlab.com/ymorin/kconfig-frontends.git;protocol=3Dhttp=
-s;branch=3D4.11.x \
- 	   file://0001-Makefile-ensure-frontends-exits-before-writing-into-.patch=
- \
--           file://0001-Switch-utils-kconfig-diff-to-use-Python-3.patch"
-+           file://0001-Switch-utils-kconfig-diff-to-use-Python-3.patch \
-+           file://0001-Avoid-using-hard-coded-usr-include-paths.patch"
-=20
- SRCREV =3D "f22fce3a308be1c7790ebefc6bbedb33c5f7c86a"
-=20
---=20
-2.34.1
+diff --git a/meta-networking/recipes-filter/nftables/nftables_1.0.7.bb b/meta-networking/recipes-filter/nftables/nftables_1.0.8.bb
+similarity index 97%
+rename from meta-networking/recipes-filter/nftables/nftables_1.0.7.bb
+rename to meta-networking/recipes-filter/nftables/nftables_1.0.8.bb
+index 8380bbd73..00fe483bb 100644
+--- a/meta-networking/recipes-filter/nftables/nftables_1.0.7.bb
++++ b/meta-networking/recipes-filter/nftables/nftables_1.0.8.bb
+@@ -9,7 +9,7 @@ DEPENDS = "libmnl libnftnl bison-native \
+ SRC_URI = "http://www.netfilter.org/projects/nftables/files/${BP}.tar.xz \
+            file://run-ptest \
+           "
+-SRC_URI[sha256sum] = "c12ac941fff9adaedf17367d5ce213789b98a0d314277bc22b3d71e10891f412"
++SRC_URI[sha256sum] = "9373740de41a82dbc98818e0a46a073faeb8a8d0689fa4fa1a74399c32bf3d50"
+ 
+ inherit autotools manpages pkgconfig ptest
+ 
+-- 
+2.25.1
 
 
