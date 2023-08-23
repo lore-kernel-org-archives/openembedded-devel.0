@@ -1,87 +1,75 @@
-Return-Path: <jester@theyoctojester.info>
+Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BE1DEC3DA66
-	for <webhook@archiver.kernel.org>; Wed, 23 Aug 2023 12:04:36 +0000 (UTC)
-Received: from mail-ej1-f41.google.com (mail-ej1-f41.google.com [209.85.218.41])
- by mx.groups.io with SMTP id smtpd.web11.9760.1692792268446425508
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DD2D4C3DA6F
+	for <webhook@archiver.kernel.org>; Wed, 23 Aug 2023 12:20:16 +0000 (UTC)
+Received: from mailout05.t-online.de (mailout05.t-online.de [194.25.134.82])
+ by mx.groups.io with SMTP id smtpd.web10.9983.1692793216266290487
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 23 Aug 2023 05:04:28 -0700
+ Wed, 23 Aug 2023 05:20:16 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@theyoctojester-info.20221208.gappssmtp.com header.s=20221208 header.b=oh+RKAZq;
- spf=none, err=permanent DNS error (domain: theyoctojester.info, ip: 209.85.218.41, mailfrom: jester@theyoctojester.info)
-Received: by mail-ej1-f41.google.com with SMTP id a640c23a62f3a-9a1681fa868so669530366b.3
-        for <openembedded-devel@lists.openembedded.org>; Wed, 23 Aug 2023 05:04:28 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=theyoctojester-info.20221208.gappssmtp.com; s=20221208; t=1692792267; x=1693397067;
-        h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
-         :date:message-id:reply-to;
-        bh=q3UoWQwdlaTIz45OY/yTNDZ38oqkeDSp1TacrZrx3Lc=;
-        b=oh+RKAZqysa/ngHD99NabNSDz7/PLoKQts3574AbOl/KQCL21v7HqxCey3cy35E/QJ
-         aahOs/viCyZrTmUBr+ZVdaB3QFVR2GeH1y8FbKWkX1iQUPA0zHBvsWK6n0fpzQifVkLz
-         qQZRmeuUTr3jgpsdFf5+FA5H1wwo1yZgFAGpVxrs5Lq3Sqr0DbhZrPvcTdvRBczcajhC
-         8Nn2TZ+UYtrX9t2uKP1I1tyA/Iia9KlRzv1O4TrcgApqDkviEKTSX95tnCN2fvfQ0GS2
-         fwyGqbClGXDxUoWktpRGC6uAYIPxvMBDD6UzMD0KHLE8hn0i+QFoWRBpaFRNVkzGxAkh
-         jXXA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1692792267; x=1693397067;
-        h=to:subject:message-id:date:from:mime-version:x-gm-message-state
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=q3UoWQwdlaTIz45OY/yTNDZ38oqkeDSp1TacrZrx3Lc=;
-        b=Ha71AbTAuAhfJ5DWBKd+Ur/YlOPpVKgx6AroWe4f3Pj37WRxXlikt0A0hArkWtqCEs
-         Detbp5uJNV2q/B5Q6EOOiptDzqXOQQn98G1gwD3MrW5CNcdXRn9YBrCMQCIHEEKBt4zn
-         WgFi3KTt6KE/fFJgflo8Ie1KKG9TOzI8GUVLfJ6ME/lV8eZEKcq9wpTwEQrIUAowJFNF
-         F8WzL6ckKHj3N5CkytIRZM1Yonlobk3NufB0lL0CqGbRxF0T/nuIWzFQuq95IOEs30iy
-         DNJRwC7FVO131bzgRRHsm5r3sfFL3AD4oU1O09sSW9ow7es+XKoHt9nSVivZ1ilBtMFK
-         7GoQ==
-X-Gm-Message-State: AOJu0Yx9ZrthZefOsCI360WI99VfjOMXu8sjBmHhTeTr3HfFctnnQ4Ar
-	Tj1cLV/EDSNAHswrrSrv6Sp+ADllrvSFIT8bnT2ur1igKy3co7Eqf3aRuQ==
-X-Google-Smtp-Source: AGHT+IFNoKTvHYLZgisPSn1puoYV+bWanAdH9sUYiuAAbfkInu9Lh2JKz3VS3/q07j59AWsGau3+yyWT9q2YkP1qMGU=
-X-Received: by 2002:a17:907:7818:b0:99b:d178:f051 with SMTP id
- la24-20020a170907781800b0099bd178f051mr10132203ejc.64.1692792266623; Wed, 23
- Aug 2023 05:04:26 -0700 (PDT)
+ dkim=none (message not signed); spf=none, err=SPF record not found (domain: t-online.de, ip: 194.25.134.82, mailfrom: f_l_k@t-online.de)
+Received: from fwd70.aul.t-online.de (fwd70.aul.t-online.de [10.223.144.96])
+	by mailout05.t-online.de (Postfix) with SMTP id 1541EFFE6
+	for <openembedded-devel@lists.openembedded.org>; Wed, 23 Aug 2023 14:20:14 +0200 (CEST)
+Received: from intel-corei7-64.fritz.box ([84.154.170.236]) by fwd70.t-online.de
+	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
+	esmtp id 1qYmqK-0tEM2m0; Wed, 23 Aug 2023 14:20:13 +0200
+From: Markus Volk <f_l_k@t-online.de>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-oe][PATCH 4/5] usbids: add recipe
+Date: Wed, 23 Aug 2023 14:19:56 +0200
+Message-ID: <20230823121957.5626-4-f_l_k@t-online.de>
+X-Mailer: git-send-email 2.41.0
+In-Reply-To: <20230823121957.5626-1-f_l_k@t-online.de>
+References: <20230823121957.5626-1-f_l_k@t-online.de>
 MIME-Version: 1.0
-From: Josef Holzmayr <jester@theyoctojester.info>
-Date: Wed, 23 Aug 2023 14:04:00 +0200
-Message-ID: <CAEt6Nwpy3-b0aMufb7pbTpJqQnXFe+egAUP6M2MMJmtMvWOp9A@mail.gmail.com>
-Subject: CFP for YPS 2023.11 now open!
-To: Yocto-mailing-list <yocto@lists.yoctoproject.org>, 
-	openembedded-core <openembedded-core@lists.openembedded.org>, 
-	openembedded-devel@lists.openembedded.org
-Content-Type: multipart/alternative; boundary="000000000000bb1f18060395e93a"
+X-TOI-EXPURGATEID: 150726::1692793213-7D1FCE98-A995796C/0/0 CLEAN NORMAL
+X-TOI-MSGID: b3548645-64ee-47b6-8b69-17e088bc2647
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 23 Aug 2023 12:04:36 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104540
+ <openembedded-devel@lists.openembedded.org>; Wed, 23 Aug 2023 12:20:16 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104543
 
---000000000000bb1f18060395e93a
-Content-Type: text/plain; charset="UTF-8"
+Linux USB ID Repository (master still in CVS at SourceForge.net)
 
-Its sunny, it is summer, you're just back from vacation? Nothing better to
-get into the flow again than writing a proposal for the 2023.11 edition of
-the Yocto Project Summit!
+Signed-off-by: Markus Volk <f_l_k@t-online.de>
+---
+ .../usbids/usbids_2023.01.16.bb                | 18 ++++++++++++++++++
+ 1 file changed, 18 insertions(+)
+ create mode 100644 meta-oe/recipes-support/usbids/usbids_2023.01.16.bb
 
-We love to hear about all your Yocto things. What you made, what you broke,
-what you learned, what you created.
+diff --git a/meta-oe/recipes-support/usbids/usbids_2023.01.16.bb b/meta-o=
+e/recipes-support/usbids/usbids_2023.01.16.bb
+new file mode 100644
+index 0000000000..b0dd72fb25
+--- /dev/null
++++ b/meta-oe/recipes-support/usbids/usbids_2023.01.16.bb
+@@ -0,0 +1,18 @@
++SUMMARY =3D "usb device database."
++HOMEPAGE =3D "https://github.com/usbids/usbids"
++
++LICENSE =3D "GPL-3.0-only"
++LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D84dcc94da3adb52b53ae4fa38fe49=
+e5d"
++
++SRC_URI =3D "git://github.com/usbids/usbids.git;branch=3Dmaster;protocol=
+=3Dhttps"
++
++SRCREV =3D "7963233faf69eb9c80ffca8dfc1f31940f75999f"
++
++S =3D "${WORKDIR}/git"
++
++do_install() {
++	install -d ${D}${datadir}
++	install -m0644 ${S}/usb.ids ${D}${datadir}
++}
++
++FILES:${PN} =3D "${datadir}"
+--=20
+2.41.0
 
-The CFP is open now at https://pretalx.com/yocto-project-summit-2023-11/cfp
-
-Josef on behalf of the YPS organization team
-
---000000000000bb1f18060395e93a
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr">Its sunny, it is summer, you&#39;re just back from vacatio=
-n? Nothing better to get into the flow again than writing a proposal for th=
-e 2023.11 edition of the Yocto Project Summit!<div><br>We love to hear abou=
-t all your Yocto things. What you made, what you broke, what you learned, w=
-hat you created.<br><br>The CFP is open now at <a href=3D"https://pretalx.c=
-om/yocto-project-summit-2023-11/cfp">https://pretalx.com/yocto-project-summ=
-it-2023-11/cfp</a><br><br><div>Josef on behalf of the YPS organization team=
-</div></div></div>
-
---000000000000bb1f18060395e93a--
 
