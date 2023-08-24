@@ -1,101 +1,88 @@
-Return-Path: <wangmy@fujitsu.com>
+Return-Path: <mingli.yu@eng.windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 64B17C6FA8F
-	for <webhook@archiver.kernel.org>; Thu, 24 Aug 2023 08:23:14 +0000 (UTC)
-Received: from esa9.hc1455-7.c3s2.iphmx.com (esa9.hc1455-7.c3s2.iphmx.com [139.138.36.223])
- by mx.groups.io with SMTP id smtpd.web11.6277.1692865389303819706
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CBC17C7113B
+	for <webhook@archiver.kernel.org>; Thu, 24 Aug 2023 09:30:26 +0000 (UTC)
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.web10.7180.1692869415255852805
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 24 Aug 2023 01:23:09 -0700
+ Thu, 24 Aug 2023 02:30:15 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: fujitsu.com, ip: 139.138.36.223, mailfrom: wangmy@fujitsu.com)
-X-IronPort-AV: E=McAfee;i="6600,9927,10811"; a="117556646"
-X-IronPort-AV: E=Sophos;i="6.01,195,1684767600"; 
-   d="scan'208";a="117556646"
-Received: from unknown (HELO oym-r1.gw.nic.fujitsu.com) ([210.162.30.89])
-  by esa9.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 24 Aug 2023 17:23:06 +0900
-Received: from oym-m1.gw.nic.fujitsu.com (oym-nat-oym-m1.gw.nic.fujitsu.com [192.168.87.58])
-	by oym-r1.gw.nic.fujitsu.com (Postfix) with ESMTP id A0941D29E9
-	for <openembedded-devel@lists.openembedded.org>; Thu, 24 Aug 2023 17:23:03 +0900 (JST)
-Received: from kws-ab4.gw.nic.fujitsu.com (kws-ab4.gw.nic.fujitsu.com [192.51.206.22])
-	by oym-m1.gw.nic.fujitsu.com (Postfix) with ESMTP id CD56ED8BC0
-	for <openembedded-devel@lists.openembedded.org>; Thu, 24 Aug 2023 17:23:02 +0900 (JST)
-Received: from localhost.localdomain (unknown [10.167.225.33])
-	by kws-ab4.gw.nic.fujitsu.com (Postfix) with ESMTP id 056B66BECF;
-	Thu, 24 Aug 2023 17:23:01 +0900 (JST)
-From: wangmy@fujitsu.com
-To: openembedded-devel@lists.openembedded.org
-Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-networking] [PATCH] weechat: upgrade 4.0.3 -> 4.0.4
-Date: Thu, 24 Aug 2023 16:22:39 +0800
-Message-Id: <1692865359-3186-1-git-send-email-wangmy@fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
-X-TM-AS-GCONF: 00
-X-TM-AS-Product-Ver: IMSS-9.1.0.1417-9.0.0.1002-27832.006
-X-TM-AS-User-Approved-Sender: Yes
-X-TMASE-Version: IMSS-9.1.0.1417-9.0.1002-27832.006
-X-TMASE-Result: 10--1.305700-10.000000
-X-TMASE-MatchedRID: Sudfee3ORQqjz0nOeth/yUIIxwDaU5mrG24YVeuZGmN4YeSlHZYFor5f
-	5ESu6yq/PwLvC4teLcdYpzPYxTjsZvXNEkgZOg/OPPov5T+l6PGUq+GQ/zyJdLfYIuZsOQ0s0EF
-	5bRA2V8p3jugY9H2JvCbKA4TVSrUqQFyUHk5F1aKU6U60E/qMVGmQExgOfwV4V+Wy/X6EXDCcOr
-	Zw4Ev/BbxCOIWkboHE9OIwD6WVVjc9d1nHWxkekPLeH1FBnhK01cuIRwt/4MiysPB8dBBorb8FH
-	rw7frlurwUHN2woBLB6mL4lViyFysCiHTNtFGyJ3QqJN4m15UF9LQinZ4QefCP/VFuTOXUTKYOc
-	jnHaFYKOhzOa6g8KrbaLFsEfZ7JQRWGpbxBZSpx7DFHAP9ei7cZuOsBQ6XadeZG7ive14p0SjZk
-	wKGMJCrrxFERH9MnvDK2cSDO2tNjWuKu6NwDT/x0m4Rm5hspVxSSu8i52URmXTt0OuyJi/IIuEV
-	M/dBEMBtjAKW7+qHc=
-X-TMASE-SNAP-Result: 1.821001.0001-0-1-22:0,33:0,34:0-0
+ dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=lUOQ6sH9;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=760001ddf9=mingli.yu@windriver.com)
+Received: from pps.filterd (m0250811.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.17.1.22/8.17.1.22) with ESMTP id 37O6K17Y008507
+	for <openembedded-devel@lists.openembedded.org>; Thu, 24 Aug 2023 09:30:14 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
+	 h=from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding:content-type; s=PPS06212021; bh=ec/vy
+	lCdhM9AuC5w26+Zjd77f4+JdgzI4HDckuaZnBs=; b=lUOQ6sH9hodtt++p5bliD
+	tHcC0oaf7NdLBlnZsNyEDJbS7rcjzj4ZPckpiYNQHkQRqeH5waXyDBivGB6NS7IO
+	UL04sko8ssG+zlVFN5JmnORJ3SPBBHgsgRnORJDhkOUf9nprydTxoVMEQSdz2N3x
+	syKYJdEQBe7LtaPG0jbj1T5dQZT1q90bd5j7pAQhkzLRuHniPgJGGleOwqnxJ5yS
+	odL9WzvS1S2RcL9252NQ6TOof91qlHiQ7WQ997e9f4AKQfSNlytqoSRJyC7x4ox5
+	UsFS9Z+eufeXk8z1LGsQ/Lqbpv7XMNt5/9L1c2ZKtXxpBWlXmtHT8ny4BS0Kl3wl
+	w==
+Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3sn21mhmsg-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Thu, 24 Aug 2023 09:30:14 +0000 (GMT)
+Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.27; Thu, 24 Aug 2023 02:30:12 -0700
+Received: from pek-lpg-core2.wrs.com (128.224.153.41) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
+ 15.1.2507.27 via Frontend Transport; Thu, 24 Aug 2023 02:30:12 -0700
+From: <mingli.yu@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [meta-oe][PATCH] dialog: Update the SRC_URI
+Date: Thu, 24 Aug 2023 17:30:11 +0800
+Message-ID: <20230824093011.3855332-1-mingli.yu@windriver.com>
+X-Mailer: git-send-email 2.25.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Proofpoint-ORIG-GUID: L034bnJzNzq78jjcuFGER32Xf0df1Ilk
+X-Proofpoint-GUID: L034bnJzNzq78jjcuFGER32Xf0df1Ilk
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.254,Aquarius:18.0.957,Hydra:6.0.601,FMLib:17.11.176.26
+ definitions=2023-08-24_06,2023-08-22_01,2023-05-22_02
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 clxscore=1015 mlxlogscore=999
+ spamscore=0 mlxscore=0 bulkscore=0 adultscore=0 malwarescore=0
+ suspectscore=0 lowpriorityscore=0 priorityscore=1501 phishscore=0
+ impostorscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.19.0-2308100000 definitions=main-2308240076
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 24 Aug 2023 08:23:14 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104586
+ <openembedded-devel@lists.openembedded.org>; Thu, 24 Aug 2023 09:30:26 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104587
 
-From: Wang Mingyu <wangmy@fujitsu.com>
+From: Mingli Yu <mingli.yu@windriver.com>
 
-Changelog:
-============
-Bug fixes::
------------
-  * core: fix integer overflow when setting integer option with '++N' or '--N'
-  * core: fix increment/decrement of options weechat.notify.*
-  * irc: add missing tags on multiline messages (issue #1987)
-  * irc: fix redirection of command '/list' when the reply doesn't start with message 321 (start of /list)
-  * irc: fix wrong time displayed for CTCP messages received from self nick (issue #2000)
-  * logger: remove trailing empty line in display of backlog (issue #2002)
-  * perl: fix display of non-ASCII chars after load of a script with Perl >= 5.38 (issue #1996)
-  * script: adjust scroll after command '/script go N'
-  * scripts: fix function string_parse_size on 32-bit systems (python and ruby) (issue #1999)
-  * xfer: fix conversion of string to IPv4 on 32-bit systems (issue #1999)
+Update the SRC_URI to fix the do_fetch error.
 
-Tests::
-------------
-  * irc: fix tests on function irc_join_compare_join_channel (issue #1997)
-  * scripts: fix tests of functions print_date_tag, print_y_date_tags and hook_timer on 32-bit systems 
-
-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
 ---
- .../recipes-irc/weechat/{weechat_4.0.3.bb => weechat_4.0.4.bb}  | 2 +-
+ meta-oe/recipes-extended/dialog/dialog_1.3-20210509.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-networking/recipes-irc/weechat/{weechat_4.0.3.bb => weechat_4.0.4.bb} (93%)
 
-diff --git a/meta-networking/recipes-irc/weechat/weechat_4.0.3.bb b/meta-networking/recipes-irc/weechat/weechat_4.0.4.bb
-similarity index 93%
-rename from meta-networking/recipes-irc/weechat/weechat_4.0.3.bb
-rename to meta-networking/recipes-irc/weechat/weechat_4.0.4.bb
-index f78fd4fc90..d13764e4c7 100644
---- a/meta-networking/recipes-irc/weechat/weechat_4.0.3.bb
-+++ b/meta-networking/recipes-irc/weechat/weechat_4.0.4.bb
-@@ -10,7 +10,7 @@ SRC_URI = "https://weechat.org/files/src/weechat-${PV}.tar.xz \
-            file://0001-use-pkg-config-for-gcrypt-instead.patch \
-            "
+diff --git a/meta-oe/recipes-extended/dialog/dialog_1.3-20210509.bb b/meta-oe/recipes-extended/dialog/dialog_1.3-20210509.bb
+index 0b1e7e608..d67156e1f 100644
+--- a/meta-oe/recipes-extended/dialog/dialog_1.3-20210509.bb
++++ b/meta-oe/recipes-extended/dialog/dialog_1.3-20210509.bb
+@@ -8,7 +8,7 @@ DEPENDS = "ncurses"
+ LICENSE = "LGPL-2.1-only"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=a6f89e2100d9b6cdffcea4f398e37343"
  
--SRC_URI[sha256sum] = "880dbdce8e73b3f4802a082c4a1a7c61943dbc5867d7a95695e4e463c6535a92"
-+SRC_URI[sha256sum] = "ae5f4979b5ada0339b84e741d5f7e481ee91e3fecd40a09907b64751829eb6f6"
+-SRC_URI = "ftp://ftp.invisible-island.net/${BPN}/${BP}.tgz"
++SRC_URI = "https://invisible-mirror.net/archives/${BPN}/${BP}.tgz"
+ SRC_URI[sha256sum] = "ae478fe7d5fca82bcf4b51684641e07d2ee68489d319710fe1e81f41a197bd66"
  
- inherit cmake pkgconfig
- 
+ # hardcoded here for use in dialog-static recipe
 -- 
-2.34.1
+2.25.1
 
 
