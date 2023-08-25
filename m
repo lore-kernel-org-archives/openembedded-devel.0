@@ -2,47 +2,47 @@ Return-Path: <emkan@prevas.dk>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 40FB5C71133
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 50D8BEE49A3
 	for <webhook@archiver.kernel.org>; Fri, 25 Aug 2023 08:50:04 +0000 (UTC)
 Received: from EUR02-AM0-obe.outbound.protection.outlook.com (EUR02-AM0-obe.outbound.protection.outlook.com [40.107.247.139])
  by mx.groups.io with SMTP id smtpd.web10.9320.1692953401511744747
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 25 Aug 2023 01:50:04 -0700
+ Fri, 25 Aug 2023 01:50:02 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@prevas.dk header.s=selector1 header.b=KXEhamfl;
+ dkim=fail reason="dkim: body hash did not verify" header.i=@prevas.dk header.s=selector1 header.b=k3OZ45gE;
  spf=pass (domain: prevas.dk, ip: 40.107.247.139, mailfrom: emil.andersen@prevas.dk)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=bkSUM9d8LbKDw5tQaRBl4bfLr/xtSQd1H8T8sQqowHnvBv9jXRpkkwgqBWZqlsJIkmNhBhapiUDzSv9gsb6xC4nL2anazpXztbAcDwc++RF+x3pVfZJrunw0USexHd8gquH6pJJ0TvKBgG/+huSxztldDF0SXzwD0UVdCRmV8vRzvoH5AT1K2/V+CacjEax7G3ZVoasBl/nAxXIXdmWDW4hnV1DzBn0bCMNEvbslEByg7LeBDvPnglM5AL9zAWZViSvv/RBldzKSvJPJTMZSQm6e5KHzvtivsY7qSZh54/Rm8CHHSX+bho9AHcEtGA9JHtvHh2FVmr8bFKv3b+kpOw==
+ b=QdG1REr8kalqWupJVqPVvxoBGlsRWtKhB8Vv/DEqykpbcXj29VnyyYCTaxoQHwk8VewSv7NulMMt/zdnr5krFyLZg+C9WLgXLAg3jOoeO4NySk7ArftnwCxZ7U1rqNvdOvcVHcnufRw1XjlFc8NATJAUFcTeW+u6E3z7PGmonkdpcPARhTJM2U2FIm6m6dYqEu4/4LDdHb3fCS+is/mT+PYoRNH0ROYfZkk1v6RDqUwi98rmXFsZCk9wEwyjo2tCw+DgjeZ/4brvrewifenuoGgIlzph5Z5mUfKcdvPN9zE3ZcA+lbzjSD/FvFARrbfURjmzL3P7mLuhZ7kfFAbQQw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=EOSUcxNzG0k2IuRn3laGGOB+465hBZZllVM9RcA/UVY=;
- b=E2wZj1DSK+I6+GRFQaXwCR1KOrmVx/TEh7omd4uynSdcJQctmtGb52wRCvEoKi/Px3o3jnWpWJPssIBc5LV0CKpIH7KmS5DhD3z5s+2v6SMhyln2B3TDV/ormDyMMRxG4EiyaIEQ5bGBiPq2j28S0DazJOqWirqps1iJpiXxbc1A712dJsI0sxMA4ELvWlIHo7j1PEHqPLB+JU8w9U2IQpKX6I+burwSmB1z1Xt6VwMfg0EX4CKuPjG0KEhwzXlQ13ZMC9z0R398uFB1ynYtVaJFBFb2EsSKiz9zC/1y6iVgqrSATcmlUyUtO7rYCsppjgr9Ly3QDZCGz1sqVuUS0g==
+ bh=q5SITEPeSIAylfPfMmvfORcirvPGboma7txnWngUwkg=;
+ b=C1K2MWO+rGUaiOgK4Hz31u3V0xxcWkyj8nqiVuXoPruvhRwSgRHgIhhDcaAuI8Fca+Bu+G/wneW+c46yRimKQKEDrfQqGR5gEzLshi1+bhNSci3p7we21v4aToQxsGcApuTYHQDy6Qk9lKV3MjOS4JwfQdFBJleF4/boU82AxJ6yvMUUwHtMxAH4XjgzkjGN5PCwjZCqEwVVzbZoZ/bwNRUDeDexTz8965xXSz+TH6gHLFAx87xEwuDFj0NKqw6A4NjKsiw7vFnYkK81zYuBUrPI2K+Ry35/QiDFoI0IaRhBP4sOUY43wfz5BS8zUNPL2ngglFT5Iw+3WnjdB1Z3iQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=prevas.dk; dmarc=pass action=none header.from=prevas.dk;
  dkim=pass header.d=prevas.dk; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=prevas.dk;
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=EOSUcxNzG0k2IuRn3laGGOB+465hBZZllVM9RcA/UVY=;
- b=KXEhamfl0eVU92wuLOL5Iql7YDgOysuY/wKaBaw8HjCCjMNdFBQznaIRGDL46dzwlkZzC9NJIWyfJZPeIOOb4dbTB0yvBJxBd7LtGwhtUefD1n7+C+X0TstwSkZKpi4VmmaG6KerPv2IR494w4GSK9RQcsKhxDdkDq6smEDAlX8=
+ bh=q5SITEPeSIAylfPfMmvfORcirvPGboma7txnWngUwkg=;
+ b=k3OZ45gEdBZ5jGpwdBjCXO5pa1ejNfTcBfatKPsX7PLjzHeXyLpw6IJyqHQLZYeAdve8QeAN5kFXamBdxFgbd2o0kPwu+uH4w7YNCct1v2vRJst/1qIhcBgqvZESWwoNLfR7uKj4poxA2Y8OvewmVxiZpq3K1uLov1MvXtm3uyA=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=prevas.dk;
 Received: from PA4PR10MB4576.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:102:10a::24)
  by DB9PR10MB8286.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:4c6::19) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6699.27; Fri, 25 Aug
- 2023 08:50:02 +0000
+ 2023 08:50:00 +0000
 Received: from PA4PR10MB4576.EURPRD10.PROD.OUTLOOK.COM
  ([fe80::6def:6be3:e407:5126]) by PA4PR10MB4576.EURPRD10.PROD.OUTLOOK.COM
  ([fe80::6def:6be3:e407:5126%7]) with mapi id 15.20.6699.027; Fri, 25 Aug 2023
- 08:50:02 +0000
+ 08:50:00 +0000
 From: Emil Kronborg Andersen <emkan@prevas.dk>
 To: openembedded-devel@lists.openembedded.org
 CC: Emil Kronborg Andersen <emkan@prevas.dk>
-Subject: [meta-oe][PATCH 3/3] snappy: add CVE_PRODUCT
-Date: Fri, 25 Aug 2023 10:49:49 +0200
-Message-ID: <20230825084949.18322-4-emkan@prevas.dk>
+Subject: [meta-oe][PATCH 1/3] libopus: add CVE_PRODUCT
+Date: Fri, 25 Aug 2023 10:49:47 +0200
+Message-ID: <20230825084949.18322-2-emkan@prevas.dk>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20230825084949.18322-1-emkan@prevas.dk>
 References: <20230825084949.18322-1-emkan@prevas.dk>
@@ -54,82 +54,77 @@ X-ClientProxiedBy: MM0P280CA0078.SWEP280.PROD.OUTLOOK.COM
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: PA4PR10MB4576:EE_|DB9PR10MB8286:EE_
-X-MS-Office365-Filtering-Correlation-Id: 42e82d25-80cf-4fda-41db-08dba548455b
+X-MS-Office365-Filtering-Correlation-Id: 75ba5e72-7a88-41e1-1241-08dba5484417
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	m4kfiinfcLHznYfBPk/XtqUlhrFrloF5gAr+beQg9uWd+I0OB9j7PPjPutb9Q8KGiG5nv4ce7CMnQF4A/h5P6l9u/KjCVqEOQMcv7ilc6yRJLRf80sNHCEKRekJsGyqLiiD5N5X2an9A3b+JQ8c0QOj1z35fD8/bot5Gu2hz46Gd9Q9NBmhalyr74Cqq2HZ0YJKOr1IJ5soE1xlpXycIATPj644sg/D30iJ2otNOlcoMOjcJ7fDuem8bnuDhSFOAp/oSoWW2sJsFqnobVK/Y3Z/Vq2/AmRkm/zT92vbpiG3HHZwXGIBbl4aID78WAkaswb3j9HvgsJp5cKOU4W5kWPrv8JXHnXBcDMckU7faMR2ElR+eCs28PVy3pWMfS1ZYgCDbS3+TAdPkgDlvkhLVMN02qwV1FOfAMBXIDkEY4PRPC05phbtCjV5GYjHed4pKFL1gFDhkPBXDANmxUGK4pTDtu+W3Idda1yYtLt/IfymRg958VPlj8ip3duYzNtZ2DUltXSudVlfmxpHXMdKm4wzTQeBuTXrVvlPtRk2Ibqr6peSia16MVOh/pp2GLcTJ7a2ewNqNV3x9YJ26ch2XB+JWdo1DCj5YZbP3X2wW+v4=
+	tDXwdQECrRuw3qijIMslR02sPr0V+gnlqaqQaSAEILj/vsOcU6TX7mIr6pjBPePWXBdZHGv7VWu45Z5LRMRQt9VZdt6LNVZ3dob1v1KS/u8lqhicycmnggEyG0s09JHSefXZ+2NRYApm2aEKYSOLLc3ozXZ0SFLnrCUA99F+nD2K5pKAoz4yLa6OYfrVG8Lk8ZlW0hlY8lJJ4SaVivmd7d/VdZAztWgmVMs/P6+i4E6gmmu7tkzZF5S/Ler1mnYyd4sgEZIBEU8yTwU70XOeYCUL9VQ3l/fQ/rXw70H8HGuS9aUsfS7WagYjWMWJYUgNBabGBua5mK3yQabiOc6+DuwcSPvKYmbxhowS166tNcZ+Yv3+AcQwRE6EgL2iDxly7yraMGnegdSCuB+aQKwZ4J8RlDENKIjblTdiqeXiKo1SU6z0cuTKOM6GRj+s6gkUWFQnNogwJmvaOLffIMs1I642TFN5YcycbhTNE99XP/Liomv/tDvXiXwM6aLSrZgyp16AF2yb3noH+vNTfeyuzJEXal9oo2J5CStJA4podVGL9m2X9FuUQzE9QEr1dYwUROyaHlFozFzlm1I3iy48isLMgh5Eaigk+KC5HPxn72ikGXkzL8ceJPcsTqm1Tybz
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PA4PR10MB4576.EURPRD10.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230031)(376002)(346002)(39850400004)(396003)(136003)(366004)(1800799009)(186009)(451199024)(1076003)(2616005)(5660300002)(107886003)(8976002)(4326008)(8676002)(8936002)(36756003)(4744005)(26005)(38350700002)(38100700002)(6666004)(6916009)(66556008)(66946007)(66476007)(6506007)(316002)(478600001)(966005)(6512007)(41300700001)(52116002)(2906002)(6486002);DIR:OUT;SFP:1102;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PA4PR10MB4576.EURPRD10.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230031)(376002)(346002)(39850400004)(396003)(136003)(366004)(1800799009)(186009)(451199024)(1076003)(2616005)(5660300002)(107886003)(8976002)(4326008)(8676002)(8936002)(36756003)(4744005)(26005)(38350700002)(38100700002)(6666004)(6916009)(66556008)(66946007)(66476007)(6506007)(316002)(478600001)(6512007)(41300700001)(52116002)(2906002)(6486002);DIR:OUT;SFP:1102;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?us-ascii?Q?nQRnMN904NaWwrwtATT+peBOddygEy3uCD1vAGubBysN6rXcTHsTQU1o9RC+?=
- =?us-ascii?Q?PHoDWol7n8jkQjiJtVhCB0FcE4iPKN+c4Do4K5kYdhDDy0K8K9zx/ZUdQHQY?=
- =?us-ascii?Q?wxx9TxUG0D39aA9muCBfVE6Q8Xxpz3DM5v8S6ZkcPIO2LLxPGobl5TdM+AYQ?=
- =?us-ascii?Q?B59DKQ7asImNvVaFVQZLqh+R0R2QBgfQB/E4Xe6dc/wCtMQIlNiaTY014fpo?=
- =?us-ascii?Q?t9aankk/NpXT81htFcbHrx6fi7cpINgzLwWYNEN867FrWCg8/p02mR1BIq+L?=
- =?us-ascii?Q?0v0wIcZxYJ2c0WveaGIyXt/WR0ZcKSCSRHJHSc+/beqLa7X6326EeIBDoThD?=
- =?us-ascii?Q?L9v3ICL8jU1F2qPEg0HoB3GYH9c8BGmlddTnGUyI2kq/9WvWZqLNapqymMrV?=
- =?us-ascii?Q?iWwsrTmt3lGh8udiJN/Y2UaZ8jvi9T95YHyUDUtUUsDfn6Uoic9MsIlxnoiA?=
- =?us-ascii?Q?8rwQzFY7PbUpK4kUArW8sHG5PdtIntpUxLxrhMFzCCpk6sBq+dnpdrL9mZl7?=
- =?us-ascii?Q?2OQx4/Yc/AdxAysJyvuOzcPJ5OLoYl3JNdFv/jINlAY0KbSyOuoyyPDR2/eD?=
- =?us-ascii?Q?9BvyyBjQmAzsMhAEI2JMGlKWjySjCTVzn9JznkzEM9EDscB/vJm8RLV6zHdW?=
- =?us-ascii?Q?3aeuDEnD1/+0GkSUJuqeT5TGMj2d7SbTlJdZ+zF/dwFgClBq+wNQ/r8Yjscu?=
- =?us-ascii?Q?JMMyJSN3l2dnPm1J+B0uV/4Vowdy3npduhrpjFrr4oGy+oTxaZ6fC9IflmYE?=
- =?us-ascii?Q?XTDuUhi+cbfGzgC+tNLkL1eZZqDT81ObKOqLy4AV83oyJ+C0wUyH62GInPE1?=
- =?us-ascii?Q?zADrw4xOg9WpC/7OhvUjekpsMqOSXVRALBqIdmSXRPNz5A+SkQ7BYkCanIZz?=
- =?us-ascii?Q?2NZZiIs9h6kSitMz15ploujlWmcpwkagMMG8L+D5PzXTkf4YzyqaSOYcHEZN?=
- =?us-ascii?Q?wMv4a49eYCqtwRm76ROCqRVTYBvJU666Rx2dzvgGX71FbeyFp1iKSyNOP4NQ?=
- =?us-ascii?Q?gO4U+6ePK/g6w5pKNXBhOwTATQ+EqFF6tyGMyeZKZx5ysG6SG1Rj0anx+HXh?=
- =?us-ascii?Q?A1CkpA1U4vutbcBolRBQrkUDpm3gqFlVoXx65+WXniC8tFxauUTlTiHRHN59?=
- =?us-ascii?Q?FpXYdk+kiRd/H4L2QxlihynyuqK1b4k3x2JQ4mrcL9ip9KiDZkBHo9ZKb/BS?=
- =?us-ascii?Q?K+a9VMM1YQ1Kk9nbAXH9UZj8NRzmRsZIaZDy35Esc6PFBKANlyNy3O63dTmJ?=
- =?us-ascii?Q?LYtl+aC02XC13+5wFXz0Bm52nK4zoZM9/lXrwTOurtA6fsTD0FMgf31zYYCr?=
- =?us-ascii?Q?i7NGuOsWyyOCP2nA4r4aQ/liR7q2vwoe9syaY6ZSgWMxpqSwSfNYlIuSspw4?=
- =?us-ascii?Q?2qPhY/PQ+4OOc66iawy5UUMHAJw390XfwyTDbMxrRt5MSyfiHOUzEOXqglBU?=
- =?us-ascii?Q?FKi0t+I22qrVVn1D52QM3o+CTuO3GYnLDHJ5yIr049SCPDAOHTsPjsVtrZZ7?=
- =?us-ascii?Q?3cFVQ2yhZVoqMKh3Thl5i0hunckZ5CnFZ5r/QC39gw9zNxDVIKZ/3Ivwk03Q?=
- =?us-ascii?Q?aupFBy2lwTUuT4TOm+i9VTze21P48/FO7Eos9YCXQCagZR9iWi3fRAvG+uS9?=
- =?us-ascii?Q?5w=3D=3D?=
+	=?us-ascii?Q?JqTgEx/h6Pm/8ZhClFS4EFVPj57jh6AjCvMCUd9lj94k/vUq5RhvSTBecg7d?=
+ =?us-ascii?Q?FwKIPYXR2L10sO7IbGZFuqoVKvVz9qHT6PvIlAAwZFs0aZfQejrAikql6qth?=
+ =?us-ascii?Q?rzjXS3Mq6U92AURP4uxZyWPW2k60DoqX29YY80ylzp8RZZKo7L7jgp7g5rep?=
+ =?us-ascii?Q?fnXtdISB6lF0F1sQ1biTfJzEBIUyoJ6Nn2vzCw00NCueA/PB+6Jq4SQ7ZTek?=
+ =?us-ascii?Q?crj9ReS0VtbxJru60v1+wnGOB7TQRBiqdkdZap30cPBhH+RTa5bJfTG4poJD?=
+ =?us-ascii?Q?gxJZDMY3FNCj4WZKGAhT+N+6LjRdWYkfP55kzzCJFKJ8/hjydEvebXkP3h4E?=
+ =?us-ascii?Q?U8Ctt8pXQPoRlQdzX9bFI5ySzSYRuu5Lq6BfVKur9Yny7Ai5WD7LFs3SHn2t?=
+ =?us-ascii?Q?MedElR+cNXDzlWZ+zk3PflVV5j6T2ZqcyUbu+yLFDuSkdGz3+ZwyLfgft/Lf?=
+ =?us-ascii?Q?mPX6tM4+Ow/5Xvbi2rIOlEGG49VDHsWRCkJsXqoPKQTN+gB7w7v5ozG0oopN?=
+ =?us-ascii?Q?gID+o1yu64fFwv8FTxue1/5JhaYxkPuOwB/zCf6zsQuAuxm9s3J3UP7Tnya9?=
+ =?us-ascii?Q?TvA9kPM/qoP+B92ietJcoZpZl0UpQfsVHSRorlhgHVTuPo1NhNymWTHPRSRr?=
+ =?us-ascii?Q?KtJdE+cE9ING6UBij4olhu3EfIGTSR1I/RdpbbyFSS23S78O+nNGXVKSi9rv?=
+ =?us-ascii?Q?9Q9AOMBnF2Kr9cbqYgp6y8D9rgSFjac51HdQehTVXezFZi9eqR2CrRqZQgJZ?=
+ =?us-ascii?Q?9h8A6ujDdi2pwU8OkMEQg9ZEe7wVfHUjlpGShxfDoI4/L3/K154liyIRV62s?=
+ =?us-ascii?Q?unOzEzZi+mETaoDe9ImnSDz3/UgPpaB9c/JouJ1rVXjTKgnsIyJ3zjTUTrI/?=
+ =?us-ascii?Q?irLIe2nrFf9sDtM/r7wc0/UIqeb/GXGKyFgvK2E5YJCvfCPuqVWuF2/PkqXX?=
+ =?us-ascii?Q?kblricsuyxffGqVNLzLnbn99IcULGvQxd6ybyb1eesZAGOngADynufNseHKX?=
+ =?us-ascii?Q?ivFD1Z2917w5HDK+zZAijAsXthrIhRkK78IJskPCeivhgjc8f0EvN9Z7UUuM?=
+ =?us-ascii?Q?nbNk2/4OBCRd8uuFH6OoyNI9/hq7Me08VFNqzDuvC7dabfG1TT3p7eW9WY6j?=
+ =?us-ascii?Q?m3mvYujZ+dH820lufruXUxrXK7gmuEWdEY1qWjwff5ldjoaI9GDQjwAckHiI?=
+ =?us-ascii?Q?bypFa3NXRVqKlSfcrOvKuOWI/BgLzsddm5FPteRb7SojrkOYqiRzsEefcQqX?=
+ =?us-ascii?Q?f7yVI3bG+098nFuj9GareTpTuQ3wveeBgNObZSxIHKSqJ9Awu8/V9im+Z3IB?=
+ =?us-ascii?Q?MS8MuKXktHU+WwTw8RpEpkRe0FW1N7bWf8EUy895tmBowybp47xtOvAXHvCt?=
+ =?us-ascii?Q?X9elf/rIEdfKtcH53kbYU+SLpZ51HwvbdL8HVdcANKgmU+agODdB2vVf6Yus?=
+ =?us-ascii?Q?cSAajLOKDKdZK8qVsj+7WHcfK9B2Pq+K/RaWGYK3bPWFTTCIJfXptuaEnriA?=
+ =?us-ascii?Q?Xk5Hn/yunHGiF5cM+KS7LbG92m3EMjm779Q/7EBg9bWcB75SPiKvL/Vbu9yc?=
+ =?us-ascii?Q?sRuaXT/YaD+fNMDAnJhqc63VxaGQXOy1EkRoNqisPDB0aopVkr6dvw5+GIsS?=
+ =?us-ascii?Q?Xg=3D=3D?=
 X-OriginatorOrg: prevas.dk
-X-MS-Exchange-CrossTenant-Network-Message-Id: 42e82d25-80cf-4fda-41db-08dba548455b
+X-MS-Exchange-CrossTenant-Network-Message-Id: 75ba5e72-7a88-41e1-1241-08dba5484417
 X-MS-Exchange-CrossTenant-AuthSource: PA4PR10MB4576.EURPRD10.PROD.OUTLOOK.COM
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Aug 2023 08:50:02.4502
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Aug 2023 08:50:00.3254
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: d350cf71-778d-4780-88f5-071a4cb1ed61
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: N0mg1I0qrbwuM/ignc7IVIpBI+0AZ7NzMXJ+u82ndAs/BXM+dpDmHPkzQAbv1iG+jQSdUdgfOQTyaQOUDjNYhw==
+X-MS-Exchange-CrossTenant-UserPrincipalName: /gwRAiP2C4Rd4w1C/LkomCTy9q6daQlXAi0BbJyGndwkgR4AieeRtwNfwraTssEnKHVevbUEdXc6wKqqRiCWkg==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9PR10MB8286
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Fri, 25 Aug 2023 08:50:04 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104606
-
-If CVE_PRODUCT is not explicitly set to google:snappy, CVEs are
-found for https://github.com/KnpLabs/snappy instead.
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104604
 
 Signed-off-by: Emil Kronborg Andersen <emkan@prevas.dk>
 ---
- meta-oe/recipes-extended/snappy/snappy_1.1.9.bb | 2 ++
+ meta-oe/recipes-multimedia/libopus/libopus_1.4.bb | 2 ++
  1 file changed, 2 insertions(+)
 
-diff --git a/meta-oe/recipes-extended/snappy/snappy_1.1.9.bb b/meta-oe/reci=
-pes-extended/snappy/snappy_1.1.9.bb
-index 0d58345d7..9e0e43ce8 100644
---- a/meta-oe/recipes-extended/snappy/snappy_1.1.9.bb
-+++ b/meta-oe/recipes-extended/snappy/snappy_1.1.9.bb
-@@ -24,3 +24,5 @@ PACKAGECONFIG[lzo] =3D "-DHAVE_LIBLZO2=3D1,-DHAVE_LIBLZO2=
-=3D0,lzo,"
- TARGET_CFLAGS +=3D "-fPIC"
+diff --git a/meta-oe/recipes-multimedia/libopus/libopus_1.4.bb b/meta-oe/re=
+cipes-multimedia/libopus/libopus_1.4.bb
+index 200211774..65ee2435b 100644
+--- a/meta-oe/recipes-multimedia/libopus/libopus_1.4.bb
++++ b/meta-oe/recipes-multimedia/libopus/libopus_1.4.bb
+@@ -52,3 +52,5 @@ python () {
+ ARM_INSTRUCTION_SET:armv5 =3D "arm"
 =20
- EXTRA_OECMAKE +=3D '-DBUILD_SHARED_LIBS=3D"ON" -DSNAPPY_BUILD_TESTS=3D"OFF=
-" -DSNAPPY_BUILD_BENCHMARKS=3D"OFF"'
+ BBCLASSEXTEND =3D "native nativesdk"
 +
-+CVE_PRODUCT =3D "google:snappy"
++CVE_PRODUCT +=3D "opus-codec:opus"
 --=20
 2.41.0
 
