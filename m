@@ -1,174 +1,183 @@
-Return-Path: <brgl@bgdev.pl>
+Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DE373C3DA6F
-	for <webhook@archiver.kernel.org>; Fri, 25 Aug 2023 18:09:58 +0000 (UTC)
-Received: from mail-wm1-f49.google.com (mail-wm1-f49.google.com [209.85.128.49])
- by mx.groups.io with SMTP id smtpd.web11.1832.1692986990811112484
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DBC38EE49A6
+	for <webhook@archiver.kernel.org>; Fri, 25 Aug 2023 20:54:12 +0000 (UTC)
+Received: from mailout01.t-online.de (mailout01.t-online.de [194.25.134.80])
+ by mx.groups.io with SMTP id smtpd.web10.687.1692996848041721569
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 25 Aug 2023 11:09:51 -0700
+ Fri, 25 Aug 2023 13:54:08 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@bgdev-pl.20221208.gappssmtp.com header.s=20221208 header.b=lk2qQ/nB;
- spf=none, err=SPF record not found (domain: bgdev.pl, ip: 209.85.128.49, mailfrom: brgl@bgdev.pl)
-Received: by mail-wm1-f49.google.com with SMTP id 5b1f17b1804b1-401bdff4cb4so2545775e9.3
-        for <openembedded-devel@lists.openembedded.org>; Fri, 25 Aug 2023 11:09:50 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=bgdev-pl.20221208.gappssmtp.com; s=20221208; t=1692986989; x=1693591789;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=XrE3JnF417dvQPGKTlS7zrgB8xatK3nllklmhmqjbRE=;
-        b=lk2qQ/nBfsLPU+BXuEYjILnWVXIcTZTyMqSgdcVS4WMpjYrVAJuHbWHJyNh68pbW3O
-         b+gBOcpKMoBweTQJFvZx9inmrXzuTDyOsRqP7sXMQrX/2jiY2ImXuaDXCPJsNdJvda2C
-         /7lFwyLBvcCe4Rogb88sjiZ6Ih3uq2r3pX2C4KgZbyadIzMUZMWgJpOxSbA2QUYMdONq
-         +f5SyVex3mMYpikjKDoQtlp4pXok2zYS9rrpulb/oFSZW7ftVz4KfaQmEhk/DjjW3lbb
-         7VeHYiev+dskNPkhCqjV6Zz5wwAV9mSlRl6oe+rhF2T1Spm4kzOjxeDKPbEHGqIvPlDG
-         MxDw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1692986989; x=1693591789;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=XrE3JnF417dvQPGKTlS7zrgB8xatK3nllklmhmqjbRE=;
-        b=SnbfnPoAAKvUzCX4N8tEFTKTCryKqybYiQdc/nPic03Mz5fPL/cI+QutLxkdCZGr5Q
-         +6pn9Lc6q1kfKeUb1xq8cDzkHfELt5oY/6/84/KgypYPfrbNU/bKJdVRohQWtuMbHR1t
-         f+uWmSK/VlyO9Cvd/aKvbkSmFMAjE7MwSj2XGIADpBQSkY4DgyJH+wklsa9dTFsX/vha
-         csc0yfiJrFxGLEfKvt1E9a095IyjXXws1+WkXgUIliWs45fQZccJsJTmqfTfS1WboKEp
-         puGr5GMcfvVniLQ5dJYeALMtp2Z2VZ57XT0eXdCZ06Ir9UXzACtoyn9lPd0FnX26p9P3
-         zDig==
-X-Gm-Message-State: AOJu0YyTlLBoXgwFOWUuYauvp5/041dX5DIaqhdPzRQ8BQm7jdhr6s1p
-	VOH/0NWztcy8z0NQviavNtZKvQ==
-X-Google-Smtp-Source: AGHT+IE00mW1hXfYa72iow27bJ+G51lDkI3lzaLk3VkL8QkjpjZ59W4+Leceo0uvEUMv6e8m27m0iQ==
-X-Received: by 2002:a05:600c:3653:b0:401:b0f2:88cf with SMTP id y19-20020a05600c365300b00401b0f288cfmr3521325wmq.40.1692986988973;
-        Fri, 25 Aug 2023 11:09:48 -0700 (PDT)
-Received: from brgl-uxlite.home ([2a01:cb1d:334:ac00:5caa:2f18:428d:7bed])
-        by smtp.gmail.com with ESMTPSA id u2-20020a05600c00c200b003fe2a40d287sm2821098wmm.1.2023.08.25.11.09.48
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 25 Aug 2023 11:09:48 -0700 (PDT)
-From: Bartosz Golaszewski <brgl@bgdev.pl>
-To: Khem Raj <raj.khem@gmail.com>,
-	Bruce Ashfield <bruce.ashfield@gmail.com>,
-	openembedded-devel@lists.openembedded.org
-Cc: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
-Subject: [meta-oe][PATCH] libgpiod: update to v2.0.2
-Date: Fri, 25 Aug 2023 20:09:46 +0200
-Message-Id: <20230825180946.46988-1-brgl@bgdev.pl>
-X-Mailer: git-send-email 2.39.2
+ dkim=none (message not signed); spf=none, err=SPF record not found (domain: t-online.de, ip: 194.25.134.80, mailfrom: f_l_k@t-online.de)
+Received: from fwd83.aul.t-online.de (fwd83.aul.t-online.de [10.223.144.109])
+	by mailout01.t-online.de (Postfix) with SMTP id 9E0AD1CAF0
+	for <openembedded-devel@lists.openembedded.org>; Fri, 25 Aug 2023 22:54:06 +0200 (CEST)
+Received: from intel-corei7-64.fritz.box ([84.154.164.212]) by fwd83.t-online.de
+	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
+	esmtp id 1qZdok-38mfuk0; Fri, 25 Aug 2023 22:54:06 +0200
+From: Markus Volk <f_l_k@t-online.de>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-oe][PATCH 2/2] xdg-desktop-portal: upgrade 1.16.0 -> 1.17.0
+Date: Fri, 25 Aug 2023 22:53:55 +0200
+Message-ID: <20230825205355.220438-2-f_l_k@t-online.de>
+X-Mailer: git-send-email 2.41.0
+In-Reply-To: <20230825205355.220438-1-f_l_k@t-online.de>
+References: <20230825205355.220438-1-f_l_k@t-online.de>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-TOI-EXPURGATEID: 150726::1692996846-061C4670-4E434D1D/0/0 CLEAN NORMAL
+X-TOI-MSGID: 654c7596-7dbf-4411-84c3-f2d478dca561
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 25 Aug 2023 18:09:58 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104611
+ <openembedded-devel@lists.openembedded.org>; Fri, 25 Aug 2023 20:54:12 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104613
 
-From: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
+This is a pre-release version. I'm not sure if it's a blocker, but it has
+some nice features and as my tests have shown, it doesn't seem to require
+patching the .pc file anymore. I'm not sure if this was fixed externally
+and by now it would work with 1.16.0 without the patch.
 
-This is a small bug-fix release addressing a segfault, a memory
-corruption bug and a couple minor issues.
+In any case, being able to omit this is an improvement.
 
-This also removes the patch that's already upstream.
+Remove the dbus-native dependency as it is needed only for tests and for =
+that
+we also would need to provide python3-dbusmock-native
 
-Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
+Explicitly set the target directories for dbus-service-dir and flatpak-in=
+terfaces-dir
+to avoid this issue shown in log.do_configure:
+Flatpak interfaces dir      : /home/flk/poky/build/tmp/work/corei7-64-pok=
+y-linux/xdg-desktop-portal/1.17.0/recipe-sysroot/usr/share/dbus-1/interfa=
+ces/
+
+Changes in 1.17.0
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Released: 2023-08-04
+
+- Drop the Autotools build. Meson is now the only supported build system.
+- Rework how portal implementations are loaded. This new, more robust sys=
+tem
+  allows selecting specific backends for specific portals, and layering t=
+hem
+  when necessary. Platforms that provide portals implementation are encou=
+raged
+  to provide a suitable configuration file.
+- Introduce a new Clipboard portal. This portal extends the Remote Deskto=
+p
+  portal by adding support for sharing clipboard between remote machines.
+- Introduce a new Input Capture portal. This portal adds mechanisms for t=
+aking
+  control of input devices. The primary usage model is centered around th=
+e
+  InputLeap and Synergy use cases, where local devices are used to contro=
+l
+  remote displays.
+- Stop using the deprecated GTimeVal struct
+- Bump GLib dependency to 2.66
+- Add an "accept-label" option the the Print portal. This lets apps sugge=
+st a
+  proper label to the print operation.
+- Various fixes to the Global Shortcuts portal
+- Support restoring remote desktop sessions
+- Improve robustness of the OpenURI portal by validating more URIs
+- The PipeWire dependency is now mandatory
+- Various improvements for the test suite
+- Translation updates
+
+Signed-off-by: Markus Volk <f_l_k@t-online.de>
 ---
- .../gpio-tools-test-bats-modify.patch         | 67 -------------------
- .../{libgpiod_2.0.1.bb => libgpiod_2.0.2.bb}  |  4 +-
- 2 files changed, 1 insertion(+), 70 deletions(-)
- delete mode 100644 meta-oe/recipes-support/libgpiod/libgpiod-2.x/gpio-tools-test-bats-modify.patch
- rename meta-oe/recipes-support/libgpiod/{libgpiod_2.0.1.bb => libgpiod_2.0.2.bb} (87%)
+ ...p-portal-pc-in-add-pc_sysrootdir-dir.patch | 27 -------------------
+ ...1.16.0.bb =3D> xdg-desktop-portal_1.17.0.bb} | 10 ++++---
+ 2 files changed, 6 insertions(+), 31 deletions(-)
+ delete mode 100644 meta-oe/recipes-support/xdg-desktop-portal/xdg-deskto=
+p-portal/0001-xdg-desktop-portal-pc-in-add-pc_sysrootdir-dir.patch
+ rename meta-oe/recipes-support/xdg-desktop-portal/{xdg-desktop-portal_1.=
+16.0.bb =3D> xdg-desktop-portal_1.17.0.bb} (82%)
 
-diff --git a/meta-oe/recipes-support/libgpiod/libgpiod-2.x/gpio-tools-test-bats-modify.patch b/meta-oe/recipes-support/libgpiod/libgpiod-2.x/gpio-tools-test-bats-modify.patch
+diff --git a/meta-oe/recipes-support/xdg-desktop-portal/xdg-desktop-porta=
+l/0001-xdg-desktop-portal-pc-in-add-pc_sysrootdir-dir.patch b/meta-oe/rec=
+ipes-support/xdg-desktop-portal/xdg-desktop-portal/0001-xdg-desktop-porta=
+l-pc-in-add-pc_sysrootdir-dir.patch
 deleted file mode 100644
-index 0b2a5e6a8..000000000
---- a/meta-oe/recipes-support/libgpiod/libgpiod-2.x/gpio-tools-test-bats-modify.patch
+index 1997d0ffe..000000000
+--- a/meta-oe/recipes-support/xdg-desktop-portal/xdg-desktop-portal/0001-=
+xdg-desktop-portal-pc-in-add-pc_sysrootdir-dir.patch
 +++ /dev/null
-@@ -1,67 +0,0 @@
--From 53f9670d6af1bd0745c1df9c469b269c72607b23 Mon Sep 17 00:00:00 2001
--From: Joe Slater <joe.slater@windriver.com>
--Date: Tue, 6 Jun 2023 08:04:27 -0700
--Subject: [PATCH] tools: tests: modify delays in toggle test
+@@ -1,27 +0,0 @@
+-From 7727dbfef4dd7ced3958ae9ada59a8899976b12d Mon Sep 17 00:00:00 2001
+-From: Markus Volk <f_l_k@t-online.de>
+-Date: Mon, 12 Dec 2022 18:40:31 +0100
+-Subject: [PATCH] xdg-desktop-portal.pc.in: add pc_sysrootdir dir
 -
--The test "gpioset: toggle (continuous)" uses fixed delays to test
--toggling values. This is not reliable, so we switch to looking
--for transitions from one value to another.
--
--We wait for a transition up to 1.5 seconds.
--
--Signed-off-by: Joe Slater <joe.slater@windriver.com>
--Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
--
--Upstream-Status: Accepted
--
--Signed-off-by: Joe Slater <joe.slater@windriver.com>
 ----
-- tools/gpio-tools-test.bats | 21 ++++++++++++++++-----
-- 1 file changed, 16 insertions(+), 5 deletions(-)
+-Upstream-Status: Pending
 -
--diff --git a/tools/gpio-tools-test.bats b/tools/gpio-tools-test.bats
--index c83ca7d..929c35a 100755
----- a/tools/gpio-tools-test.bats
--+++ b/tools/gpio-tools-test.bats
--@@ -141,6 +141,20 @@ gpiosim_check_value() {
-- 	[ "$VAL" = "$EXPECTED" ]
-- }
-- 
--+gpiosim_wait_value() {
--+	local OFFSET=$2
--+	local EXPECTED=$3
--+	local DEVNAME=${GPIOSIM_DEV_NAME[$1]}
--+	local CHIPNAME=${GPIOSIM_CHIP_NAME[$1]}
--+	local PORT=$GPIOSIM_SYSFS/$DEVNAME/$CHIPNAME/sim_gpio$OFFSET/value
--+
--+	for i in {1..15}; do
--+		[ "$(<$PORT)" = "$EXPECTED" ] && return
--+		sleep 0.1
--+	done
--+	return 1
--+}
--+
-- gpiosim_cleanup() {
-- 	for CHIP in ${!GPIOSIM_CHIP_NAME[@]}
-- 	do
--@@ -1567,15 +1581,12 @@ request_release_line() {
-- 	gpiosim_check_value sim0 4 0
-- 	gpiosim_check_value sim0 7 0
-- 
---	sleep 1
---
---	gpiosim_check_value sim0 1 0
--+	gpiosim_wait_value sim0 1 0
-- 	gpiosim_check_value sim0 4 1
-- 	gpiosim_check_value sim0 7 1
-- 
---	sleep 1
-- 
---	gpiosim_check_value sim0 1 1
--+	gpiosim_wait_value sim0 1 1
-- 	gpiosim_check_value sim0 4 0
-- 	gpiosim_check_value sim0 7 0
-- }
---- 
--2.25.1
+- xdg-desktop-portal.pc.in | 2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
 -
-diff --git a/meta-oe/recipes-support/libgpiod/libgpiod_2.0.1.bb b/meta-oe/recipes-support/libgpiod/libgpiod_2.0.2.bb
-similarity index 87%
-rename from meta-oe/recipes-support/libgpiod/libgpiod_2.0.1.bb
-rename to meta-oe/recipes-support/libgpiod/libgpiod_2.0.2.bb
-index 6958f2d84..7533e0a25 100644
---- a/meta-oe/recipes-support/libgpiod/libgpiod_2.0.1.bb
-+++ b/meta-oe/recipes-support/libgpiod/libgpiod_2.0.2.bb
-@@ -9,9 +9,7 @@ LIC_FILES_CHKSUM = " \
- 
- FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}-2.x:"
- 
--SRC_URI += "file://gpio-tools-test-bats-modify.patch"
+-diff --git a/xdg-desktop-portal.pc.in b/xdg-desktop-portal.pc.in
+-index 585c0c8..15b5817 100644
+---- a/xdg-desktop-portal.pc.in
+-+++ b/xdg-desktop-portal.pc.in
+-@@ -2,7 +2,7 @@ prefix=3D@prefix@
+- datarootdir=3D@datarootdir@
+- datadir=3D@datadir@
+-=20
+--interfaces_dir=3D${datadir}/dbus-1/interfaces/
+-+interfaces_dir=3D${pc_sysrootdir}${datadir}/dbus-1/interfaces
+-=20
+- Name: xdg-desktop-portal
+- Description: Desktop integration portal
+---=20
+-2.34.1
 -
--SRC_URI[sha256sum] = "b5367d28d045b36007a4ffd42cceda4c358737ef4f2ce22b0c1d05ec57a38392"
-+SRC_URI[sha256sum] = "c3c923dc63b7b1b02639c9179c81e3d9febf0887bbaa59775990229cdbedb88b"
- 
- # Enable all project features for ptest
- PACKAGECONFIG[tests] = "--enable-tests --enable-tools --enable-bindings-cxx --enable-gpioset-interactive,--disable-tests,kmod util-linux glib-2.0 catch2 libedit"
--- 
-2.39.2
+diff --git a/meta-oe/recipes-support/xdg-desktop-portal/xdg-desktop-porta=
+l_1.16.0.bb b/meta-oe/recipes-support/xdg-desktop-portal/xdg-desktop-port=
+al_1.17.0.bb
+similarity index 82%
+rename from meta-oe/recipes-support/xdg-desktop-portal/xdg-desktop-portal=
+_1.16.0.bb
+rename to meta-oe/recipes-support/xdg-desktop-portal/xdg-desktop-portal_1=
+.17.0.bb
+index 0b3a93ab3..125ab23ee 100644
+--- a/meta-oe/recipes-support/xdg-desktop-portal/xdg-desktop-portal_1.16.=
+0.bb
++++ b/meta-oe/recipes-support/xdg-desktop-portal/xdg-desktop-portal_1.17.=
+0.bb
+@@ -11,7 +11,6 @@ DEPENDS =3D " \
+     libportal \
+     geoclue \
+     pipewire \
+-    dbus-native \
+     fuse3 \
+     xmlto-native \
+     flatpak \
+@@ -29,15 +28,18 @@ inherit meson pkgconfig python3native features_check
+=20
+ SRC_URI =3D " \
+ 	git://github.com/flatpak/xdg-desktop-portal.git;protocol=3Dhttps;branch=
+=3Dmain \
+-	file://0001-xdg-desktop-portal-pc-in-add-pc_sysrootdir-dir.patch \
+ "
+=20
+ S =3D "${WORKDIR}/git"
+-SRCREV =3D "88af6c8ca4106fcf70925355350a669848e9fd5a"
++SRCREV =3D "e31960ab3d3ecd3efeef1c97d1d40d94b866f4b7"
+=20
+ FILES:${PN} +=3D "${libdir}/systemd ${datadir}/dbus-1"
+=20
+-EXTRA_OEMESON +=3D "--cross-file=3D${WORKDIR}/meson-${PN}.cross"
++EXTRA_OEMESON +=3D " \
++	--cross-file=3D${WORKDIR}/meson-${PN}.cross \
++	-Dflatpak-interfaces-dir=3D${datadir}/dbus-1/interfaces \
++	-Ddbus-service-dir=3D${datadir}/dbus-1/services \
++"
+=20
+ do_write_config:append() {
+     cat >${WORKDIR}/meson-${PN}.cross <<EOF
+--=20
+2.41.0
 
 
