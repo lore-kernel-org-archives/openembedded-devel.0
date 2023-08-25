@@ -1,128 +1,170 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <soumya.sambu@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BA2E8C3DA6F
-	for <webhook@archiver.kernel.org>; Fri, 25 Aug 2023 06:20:33 +0000 (UTC)
-Received: from mail-oa1-f41.google.com (mail-oa1-f41.google.com [209.85.160.41])
- by mx.groups.io with SMTP id smtpd.web10.7726.1692944425366816212
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1AD5EC3DA6F
+	for <webhook@archiver.kernel.org>; Fri, 25 Aug 2023 07:38:54 +0000 (UTC)
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.web10.8560.1692949126949254900
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 24 Aug 2023 23:20:25 -0700
+ Fri, 25 Aug 2023 00:38:47 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20221208 header.b=PspHx+2O;
- spf=pass (domain: gmail.com, ip: 209.85.160.41, mailfrom: raj.khem@gmail.com)
-Received: by mail-oa1-f41.google.com with SMTP id 586e51a60fabf-1c8d895a602so357045fac.2
-        for <openembedded-devel@lists.openembedded.org>; Thu, 24 Aug 2023 23:20:25 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1692944424; x=1693549224;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=kOtvBoIzN0GM8ceUPTs3lGWTbEH2o3DhxHixun5sxqk=;
-        b=PspHx+2OjZGVaduGs0Y41XcDzwYCiEobD7ft3Jvdhv+PHUpTEugsLbYVWHbWX45YQW
-         zC+r4k8n5EIT/YQ4PUD61Aib9KMFMx2+wojdbTAaO3IhpnTlRUP3n5qkhh7d4hWSSxU4
-         LJy/HWR2TNyZl7GrD33vwvLfiP9aOPaX8mGOxDdjRejhfQhtp1TnDs6UHqa4pjldjQg1
-         3feqZ3yU8J22XmW5+9FFVMtfJGsYBGJ5yjYfpW5YBkSvFmvrOHtTe4CDhaM6EhoSyNzM
-         HdWY6RymU8uYDp92yctFPCBRlgAdO9boWJN8se+oFEm06Olge0fwa/OxIPGBbftg+q4U
-         kEYw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1692944424; x=1693549224;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=kOtvBoIzN0GM8ceUPTs3lGWTbEH2o3DhxHixun5sxqk=;
-        b=kvNLaLsZXZXgTPIHzmVrldmHUDC45LvP8EqluP3Z/R0icOoqocsEcx1+e+puzZYEw5
-         5MIuBiuR33heYbj8c3ABjaIXS0aiyCZqO/Zos79H4kvQKm03b0jcS3ZeumF3ZSSMqPi6
-         ueAyI0Up0DAlv5M9qMcUYmpNqqial3MFOzl+zkxg/G2kufynodYo/CXd8EL847+0SJhM
-         Tam7w8yVoe66oCykdlXMKk4xZLN816BwNj1u8WyaQj6LXCyna/kI2D00+eGmDynquCd6
-         tvX/BuDEFIm54leMRzmZX/mVJjtVD31Uu+USSlYj+NQm6p17ToO+XGTFCQyChR5vZf7Y
-         GgGQ==
-X-Gm-Message-State: AOJu0Yy4LYnjySe3mtdrliN4PS307MoS2jbmVLm+5vXNHlpFyQb5XZ+y
-	NQptqvEs6pLo/Zg59Ijar7Acb85ndFMUx7HHv38wVbS/r66+eA==
-X-Google-Smtp-Source: AGHT+IFVtFniDq99keDI/Vi25FGDl9PFE+q61Jz5aOzUGeMaaUPvP5KV0FtfdBIlohupJKoJXr9VlBIcKDPoeFjD0Wg=
-X-Received: by 2002:a05:6870:211:b0:1bf:11f1:4729 with SMTP id
- j17-20020a056870021100b001bf11f14729mr1954184oad.56.1692944424490; Thu, 24
- Aug 2023 23:20:24 -0700 (PDT)
+ dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=f8Ug4MJC;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=76017e5574=soumya.sambu@windriver.com)
+Received: from pps.filterd (m0250811.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.17.1.22/8.17.1.22) with ESMTP id 37P5w7X7031836
+	for <openembedded-devel@lists.openembedded.org>; Fri, 25 Aug 2023 07:38:46 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
+	 h=from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding:content-type; s=PPS06212021; bh=aiGIa
+	qifh1khLeJJM8scMlEH/oQV8RiDSMJ7dQdXOGI=; b=f8Ug4MJCF0tcvgaVyxdOW
+	tz+meA8PKR+sc5Fnn18TtVNzC34muPjj08bG5eCknr5P8F2LcQIIM/JCX+tK7AvD
+	CxmqKReQD61urxgYdK0ruEG2ATdYu07bo/GgFauJUHVjpYpuqH7R42WoZi3OHPaQ
+	E3clZcOaJqHsENyvsbtd1/oL0YQt72wmPuqxzXDlqow4v7BBS+sl8kyQf3P4boyv
+	KOMzeadKFHoX280S6i35QEqmueXdLlzB5BtlFwYv4Q2WtJJnRj2Yv0Za6PVcKX3K
+	dSgqucfvSgl6aYvVaSipVDsQhbEpsYjeNn9uSVMP4VXn0yvcM3yGWVJ+zOegyiHO
+	w==
+Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3sn21mjx7m-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Fri, 25 Aug 2023 07:38:46 +0000 (GMT)
+Received: from blr-linux-engg1.wrs.com (147.11.136.210) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.27; Fri, 25 Aug 2023 00:38:42 -0700
+From: ssambu <soumya.sambu@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [oe][meta-oe][kirkstone][PATCH 1/1] krb5: Fix CVE-2023-36054
+Date: Fri, 25 Aug 2023 07:38:26 +0000
+Message-ID: <20230825073826.1502737-1-soumya.sambu@windriver.com>
+X-Mailer: git-send-email 2.40.0
 MIME-Version: 1.0
-References: <20230825054449.2315061-1-f_l_k@t-online.de>
-In-Reply-To: <20230825054449.2315061-1-f_l_k@t-online.de>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 24 Aug 2023 23:19:58 -0700
-Message-ID: <CAMKF1sp8VBzFdqy2NMwNJ4SVrTwJYas2bL66-op_gO+zBJQd2Q@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH 1/5] spice-guest-vdagent: add recipe
-To: Markus Volk <f_l_k@t-online.de>
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [147.11.136.210]
+X-ClientProxiedBy: ala-exchng01.corp.ad.wrs.com (147.11.82.252) To
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252)
+X-Proofpoint-ORIG-GUID: bY-KLZN4hZUNKsNH2wp6QVtfCa6lgNSc
+X-Proofpoint-GUID: bY-KLZN4hZUNKsNH2wp6QVtfCa6lgNSc
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.254,Aquarius:18.0.957,Hydra:6.0.601,FMLib:17.11.176.26
+ definitions=2023-08-25_05,2023-08-24_01,2023-05-22_02
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 clxscore=1015 mlxlogscore=690
+ spamscore=0 mlxscore=0 bulkscore=0 adultscore=0 malwarescore=0
+ suspectscore=0 lowpriorityscore=0 priorityscore=1501 phishscore=0
+ impostorscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.19.0-2308100000 definitions=main-2308250066
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 25 Aug 2023 06:20:33 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104598
+ <openembedded-devel@lists.openembedded.org>; Fri, 25 Aug 2023 07:38:54 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104599
 
-On Thu, Aug 24, 2023 at 10:45=E2=80=AFPM Markus Volk <f_l_k@t-online.de> wr=
-ote:
->
-> The spice-vdagent needs to be running alongside qemu-guest-agent on
-> virtualizationguest systems that are using the spice protocol to
-> get seamless integration.
->
-> Signed-off-by: Markus Volk <f_l_k@t-online.de>
-> ---
->  .../spice/spice-guest-vdagent_0.22.1.bb       | 22 +++++++++++++++++++
->  1 file changed, 22 insertions(+)
->  create mode 100644 meta-networking/recipes-support/spice/spice-guest-vda=
-gent_0.22.1.bb
->
-> diff --git a/meta-networking/recipes-support/spice/spice-guest-vdagent_0.=
-22.1.bb b/meta-networking/recipes-support/spice/spice-guest-vdagent_0.22.1.=
-bb
-> new file mode 100644
-> index 0000000000..8894d58e21
-> --- /dev/null
-> +++ b/meta-networking/recipes-support/spice/spice-guest-vdagent_0.22.1.bb
-> @@ -0,0 +1,22 @@
-> +SUMMARY =3D "Spice agent for Linux"
-> +HOMEPAGE =3D "https://spice-space.org"
-> +LICENSE =3D "GPL-3.0-only"
-> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dd32239bcb673463ab874e80d47fae=
-504"
-> +
-> +SRCREV =3D "aa08162f036840d3e33502dc0a836b03b9cec97c"
-> +
-> +SRC_URI =3D "git://gitlab.freedesktop.org/spice/linux/vd_agent.git;proto=
-col=3Dhttps;branch=3Dmaster"
-> +
-> +S =3D "${WORKDIR}/git"
-> +
-> +inherit autotools pkgconfig
-> +
-> +DEPENDS =3D "glib-2.0 alsa-lib gtk4 dbus libdrm spice-protocol"
-> +
+From: Soumya Sambu <soumya.sambu@windriver.com>
 
-since it needs gtk I think it will need
-ANY_OF_DISTRO_FEATURES =3D "${GTK3DISTROFEATURES}"
-REQUIRED_DISTRO_FEATURES =3D "opengl"
+lib/kadm5/kadm_rpc_xdr.c in MIT Kerberos 5 (aka krb5) before 1.20.2
+and 1.21.x before 1.21.1 frees an uninitialized pointer. A remote
+authenticated user can trigger a kadmind crash. This occurs because
+_xdr_kadm5_principal_ent_rec does not validate the relationship
+between n_key_data and the key_data array count.
 
-> +EXTRA_OECONF =3D " \
-> +       --with-gtk4 \
-> +       --enable-pie \
-> +"
-> +
-> +FILES:${PN} +=3D "${datadir}"
-> +
-> --
-> 2.41.0
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#104592): https://lists.openembedded.org/g/openembedde=
-d-devel/message/104592
-> Mute This Topic: https://lists.openembedded.org/mt/100950814/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
-aj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
+References:
+https://nvd.nist.gov/vuln/detail/CVE-2023-36054
+
+Signed-off-by: Soumya Sambu <soumya.sambu@windriver.com>
+---
+ .../krb5/krb5/CVE-2023-36054.patch            | 68 +++++++++++++++++++
+ .../recipes-connectivity/krb5/krb5_1.17.2.bb  |  1 +
+ 2 files changed, 69 insertions(+)
+ create mode 100644 meta-oe/recipes-connectivity/krb5/krb5/CVE-2023-36054.patch
+
+diff --git a/meta-oe/recipes-connectivity/krb5/krb5/CVE-2023-36054.patch b/meta-oe/recipes-connectivity/krb5/krb5/CVE-2023-36054.patch
+new file mode 100644
+index 000000000..160c090bc
+--- /dev/null
++++ b/meta-oe/recipes-connectivity/krb5/krb5/CVE-2023-36054.patch
+@@ -0,0 +1,68 @@
++From ef08b09c9459551aabbe7924fb176f1583053cdd Mon Sep 17 00:00:00 2001
++From: Greg Hudson <ghudson@mit.edu>
++Date: Mon, 21 Aug 2023 03:08:15 +0000
++Subject: [PATCH] Ensure array count consistency in kadm5 RPC
++
++In _xdr_kadm5_principal_ent_rec(), ensure that n_key_data matches the
++key_data array count when decoding.  Otherwise when the structure is
++later freed, xdr_array() could iterate over the wrong number of
++elements, either leaking some memory or freeing uninitialized
++pointers.  Reported by Robert Morris.
++
++CVE: CVE-2023-36054
++
++An authenticated attacker can cause a kadmind process to crash by
++freeing uninitialized pointers.  Remote code execution is unlikely.
++An attacker with control of a kadmin server can cause a kadmin client
++to crash by freeing uninitialized pointers.
++
++ticket: 9099 (new)
++tags: pullup
++target_version: 1.21-next
++target_version: 1.20-next
++
++Upstream-Status: Backport [https://github.com/krb5/krb5/commit/ef08b09c9459551aabbe7924fb176f1583053cdd]
++
++Signed-off-by: Soumya Sambu <soumya.sambu@windriver.com>
++---
++ src/lib/kadm5/kadm_rpc_xdr.c | 11 ++++++++---
++ 1 file changed, 8 insertions(+), 3 deletions(-)
++
++diff --git a/src/lib/kadm5/kadm_rpc_xdr.c b/src/lib/kadm5/kadm_rpc_xdr.c
++index 2892d41..94b1ce8 100644
++--- a/src/lib/kadm5/kadm_rpc_xdr.c
+++++ b/src/lib/kadm5/kadm_rpc_xdr.c
++@@ -390,6 +390,7 @@ _xdr_kadm5_principal_ent_rec(XDR *xdrs, kadm5_principal_ent_rec *objp,
++			     int v)
++ {
++	unsigned int n;
+++	bool_t r;
++
++	if (!xdr_krb5_principal(xdrs, &objp->principal)) {
++		return (FALSE);
++@@ -443,6 +444,9 @@ _xdr_kadm5_principal_ent_rec(XDR *xdrs, kadm5_principal_ent_rec *objp,
++	if (!xdr_krb5_int16(xdrs, &objp->n_key_data)) {
++		return (FALSE);
++	}
+++	if (xdrs->x_op == XDR_DECODE && objp->n_key_data < 0) {
+++		return (FALSE);
+++	}
++	if (!xdr_krb5_int16(xdrs, &objp->n_tl_data)) {
++		return (FALSE);
++	}
++@@ -451,9 +455,10 @@ _xdr_kadm5_principal_ent_rec(XDR *xdrs, kadm5_principal_ent_rec *objp,
++		return FALSE;
++	}
++	n = objp->n_key_data;
++-	if (!xdr_array(xdrs, (caddr_t *) &objp->key_data,
++-		       &n, ~0, sizeof(krb5_key_data),
++-		       xdr_krb5_key_data_nocontents)) {
+++	r = xdr_array(xdrs, (caddr_t *) &objp->key_data, &n, objp->n_key_data,
+++		      sizeof(krb5_key_data), xdr_krb5_key_data_nocontents);
+++	objp->n_key_data = n;
+++	if (!r) {
++		return (FALSE);
++	}
++
++--
++2.40.0
+diff --git a/meta-oe/recipes-connectivity/krb5/krb5_1.17.2.bb b/meta-oe/recipes-connectivity/krb5/krb5_1.17.2.bb
+index cabae374e..a92066171 100644
+--- a/meta-oe/recipes-connectivity/krb5/krb5_1.17.2.bb
++++ b/meta-oe/recipes-connectivity/krb5/krb5_1.17.2.bb
+@@ -33,6 +33,7 @@ SRC_URI = "http://web.mit.edu/kerberos/dist/${BPN}/${SHRT_VER}/${BP}.tar.gz \
+            file://CVE-2021-36222.patch;striplevel=2 \
+            file://CVE-2021-37750.patch;striplevel=2 \
+            file://CVE-2022-42898.patch;striplevel=2 \
++           file://CVE-2023-36054.patch;striplevel=2 \
+ "
+ SRC_URI[md5sum] = "aa4337fffa3b61f22dbd0167f708818f"
+ SRC_URI[sha256sum] = "1a4bba94df92f6d39a197a10687653e8bfbc9a2076e129f6eb92766974f86134"
+-- 
+2.40.0
+
 
