@@ -2,85 +2,112 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 88F65C83F01
-	for <webhook@archiver.kernel.org>; Sun, 27 Aug 2023 03:52:50 +0000 (UTC)
-Received: from mail-qk1-f182.google.com (mail-qk1-f182.google.com [209.85.222.182])
- by mx.groups.io with SMTP id smtpd.web10.22179.1693108367505949664
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 78C8BC83F10
+	for <webhook@archiver.kernel.org>; Sun, 27 Aug 2023 07:11:31 +0000 (UTC)
+Received: from mail-oi1-f173.google.com (mail-oi1-f173.google.com [209.85.167.173])
+ by mx.groups.io with SMTP id smtpd.web10.23539.1693120289123589870
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 26 Aug 2023 20:52:47 -0700
+ Sun, 27 Aug 2023 00:11:29 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20221208 header.b=oIvDRyMF;
- spf=pass (domain: gmail.com, ip: 209.85.222.182, mailfrom: raj.khem@gmail.com)
-Received: by mail-qk1-f182.google.com with SMTP id af79cd13be357-76ef8b91a72so136620285a.0
-        for <openembedded-devel@lists.openembedded.org>; Sat, 26 Aug 2023 20:52:47 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20221208 header.b=MCKY2C5V;
+ spf=pass (domain: gmail.com, ip: 209.85.167.173, mailfrom: raj.khem@gmail.com)
+Received: by mail-oi1-f173.google.com with SMTP id 5614622812f47-3a88ef953adso1670287b6e.0
+        for <openembedded-devel@lists.openembedded.org>; Sun, 27 Aug 2023 00:11:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1693108366; x=1693713166;
+        d=gmail.com; s=20221208; t=1693120288; x=1693725088;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=LDaE9qjGhKiEb9mkyn82o7Ptdjpf2Lkj1end6GNwMrs=;
-        b=oIvDRyMF2H8VHDtwZp4fLdWPTC7r8iU4IPTKgoJCTNzKnyUAMGyj1KM4GOFP/TVmiB
-         u6pQUvigGegJ9JgKRQlTtECnGYWS8UvzwVSGLYNrpg3R8RcKOII0UvPSFgOTi/sc7tpr
-         gmIl8ME9Naeea1Hi5BulL0D2/k5PuQEEfe7Q3ss7RSbJPRUHtjSVOY/yZig333CZtPWo
-         3h+9OuZKgIUHBa28jfFtYgYG/B8KoiQ/xjcUpVLxcW3vRMOHjAYwxYnmNns26c8/+YWo
-         5fKc5m5vsiruYaFcvEBOBT3jkNHerMlevX9QGU9qvzKRC+vdvI4w1tt5T0GHxX4wtRtX
-         moOA==
+        bh=Ve9r+O3XteaEdvSRR1x4RoaXK2/9zkOwmxIgTTZLZUo=;
+        b=MCKY2C5VWorCyp/PKWFzMxvltrtS2WBNORYUaEfMGwrDw6867nwsvhCZzHs3sbD1V0
+         zX365XjhkdGIXnGDIWCTovvsHsY6RK9hfYcI0RZ6KDUTNN8IT02KB/XIQ7YTuMHN4ZhR
+         afvFstAtRtx/VxxgvA7WizX+kYyvKBGGAvIFGz60K0O/xOsGJDmWedjJO8PR592Uu4it
+         byR1gZcNsp/ViggI/s2a/vF0Iki/4hFbyIIgUWIjpbHKTevdH5UdKLfUMHtSWG7C1ZW5
+         WHZgolQ7sgb3kWSMvyxaa1fpfbxA5xSM9/RLNscHBJy+aj+vb2Q3wr9S7HC48qGmEtTn
+         ADUQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1693108366; x=1693713166;
+        d=1e100.net; s=20221208; t=1693120288; x=1693725088;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=LDaE9qjGhKiEb9mkyn82o7Ptdjpf2Lkj1end6GNwMrs=;
-        b=VvjxNutT06Qa66AlGMsdNXfQDYHbvlzsvE612qVpKfQ77dTMkUlSBZ/Btc7IrAHPJp
-         1XyWOUZ6UdcvEJ/YW1N9LtE16WNYwZw2HTjOGOPUZaE2qFfk3FPcQX/W9ezw7KAcVcrW
-         a/+VV96nWPeuQkEFecetN5Muw6KeRpqyTzUs6Fev/BIiPoDBtcimAU1mw+t/lwrMVZZ6
-         hIZYm54X4eDwjr3FNq0rXc5UCMkJQ5t1tGSzhRtVhGO/xZ/y1e5/1SRbcq6VaZO1EM12
-         VSYmHPa+gKkbGYCgbkWbNTPRhFlyrNRpCm3nd7uejWB1jxzMvbyK/xFmfnus8wN31gxi
-         jBVQ==
-X-Gm-Message-State: AOJu0YwdSi9Bngfct027ocO/VqzaTL0ShLuUO+DKu8bx5QJMBeyMgA5H
-	jdYeQrG2yLhO+QHnVrQo39HnMXsM6RV65g==
-X-Google-Smtp-Source: AGHT+IHCV6XW3fkwXyT7E3QPrq+ftxNDkEZ96QHusBic2F+S3Bf4f7QsIU3yy3e4/6RbjuIAAcu5Lg==
-X-Received: by 2002:a05:620a:2a0f:b0:76d:b2f2:cb7f with SMTP id o15-20020a05620a2a0f00b0076db2f2cb7fmr17849477qkp.12.1693108366237;
-        Sat, 26 Aug 2023 20:52:46 -0700 (PDT)
+        bh=Ve9r+O3XteaEdvSRR1x4RoaXK2/9zkOwmxIgTTZLZUo=;
+        b=ASLjxaf3FCKm/ueS8o/rDSvt6CKnOKmD99nV0UcVrUqOZk8aAbp5CD1txwz3iqqavI
+         F/NUO1+kJy4hnGzTxKKFdW/rcilmUE4F0oRNySI8Yv53CbHTgXaahtgw++MU7fFDEEX/
+         jR71pvgpsoK6dAhu+G7RHaUxCdoI4CJjjMFrhnsmSOZbZCyFbiGU1u/6dXF+o5J0gZgf
+         PizA/C9PSVpBzbB+PVmkiOtTdNgREJhOZ05ISTX3NhNlKAp5BHeDB5/VyafT6eqSo/UR
+         UqaiN7vigdbc4eihWoh1No36U43Zf/n0gfZ9oydlIQYHrZMJFwEATfvEhG+UU4/TORtz
+         PM/Q==
+X-Gm-Message-State: AOJu0YzeaVz9pQdE514fylQgkdnblQtpb+QVBEEs33ZAwVMx+RH87XAw
+	RIwEUyyGanPdxp7te5GcXv24xRH5xFAXHA==
+X-Google-Smtp-Source: AGHT+IHBvE1Ch1siNqorf+WWs/u9PUo6qxVLhnzC7CPlsjZnwqdW8k+rAqXt0C5wQzu0BxDZSil7Cg==
+X-Received: by 2002:a05:6808:2201:b0:3a7:4ce4:cb8f with SMTP id bd1-20020a056808220100b003a74ce4cb8fmr10753980oib.8.1693120288170;
+        Sun, 27 Aug 2023 00:11:28 -0700 (PDT)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9100:2cb0::71d2])
-        by smtp.gmail.com with ESMTPSA id nk7-20020a17090b194700b0026b70d2a8a2sm4264672pjb.29.2023.08.26.20.52.45
+        by smtp.gmail.com with ESMTPSA id c5-20020aa781c5000000b006889348ba6esm4314046pfn.127.2023.08.27.00.11.27
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 26 Aug 2023 20:52:45 -0700 (PDT)
+        Sun, 27 Aug 2023 00:11:27 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH] libfaketime: Eanable LFS64 on musl
-Date: Sat, 26 Aug 2023 20:52:44 -0700
-Message-ID: <20230827035244.1434686-1-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH] rsyslog: Skip failing omfile-outchannel test on musl
+Date: Sun, 27 Aug 2023 00:11:25 -0700
+Message-ID: <20230827071125.1704173-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.42.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 27 Aug 2023 03:52:50 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104624
-
-Musl has 64bit time_t inherently, ideally this library should be fixed
-for that but lets apply the musl aliasing solution for now.
+ <openembedded-devel@lists.openembedded.org>; Sun, 27 Aug 2023 07:11:31 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104625
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-oe/recipes-test/libfaketime/libfaketime_0.9.10.bb | 2 ++
- 1 file changed, 2 insertions(+)
+ .../rsyslog/disable-omfile-outchannel.patch   | 23 +++++++++++++++++++
+ .../rsyslog/rsyslog_8.2306.0.bb               |  1 +
+ 2 files changed, 24 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/rsyslog/rsyslog/disable-omfile-outchannel.patch
 
-diff --git a/meta-oe/recipes-test/libfaketime/libfaketime_0.9.10.bb b/meta-oe/recipes-test/libfaketime/libfaketime_0.9.10.bb
-index 49f68bf629..6a0a8f32af 100644
---- a/meta-oe/recipes-test/libfaketime/libfaketime_0.9.10.bb
-+++ b/meta-oe/recipes-test/libfaketime/libfaketime_0.9.10.bb
-@@ -11,6 +11,8 @@ SRC_URI = "git://github.com/wolfcw/libfaketime.git;branch=master;protocol=https
- 
- S = "${WORKDIR}/git"
- 
-+CFLAGS:append:libc-musl = " -D_LARGEFILE64_SOURCE"
+diff --git a/meta-oe/recipes-extended/rsyslog/rsyslog/disable-omfile-outchannel.patch b/meta-oe/recipes-extended/rsyslog/rsyslog/disable-omfile-outchannel.patch
+new file mode 100644
+index 0000000000..a8bbe2b51e
+--- /dev/null
++++ b/meta-oe/recipes-extended/rsyslog/rsyslog/disable-omfile-outchannel.patch
+@@ -0,0 +1,23 @@
++tests: Skip omfile-outchannel test as it fails on musl
 +
- do_configure[noexec] = "1"
- do_compile () {
-     oe_runmake
++scanf error in index i=5559
++sequence error detected in rstb_168227_f19f3b245QVE.out.log
++number of lines in file: 5559 rstb_168227_f19f3b245QVE.out.log
++
++Patch is also applied in void linux
++
++Upstream-Status: Pending
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++
++--- a/tests/omfile-outchannel.sh	2021-03-09 05:51:07.000000000 -0600
+++++ b/tests/omfile-outchannel.sh	2022-05-26 15:55:23.358520256 -0500
++@@ -1,5 +1,9 @@
++ #!/bin/bash
++ # addd 2018-08-02 by RGerhards, released under ASL 2.0
+++
+++# This test fails for x86_64-musl, under GitHub's CI/CD. Disable for now.
+++exit 77
+++
++ . ${srcdir:=.}/diag.sh init
++ export NUMMESSAGES=10000
++ echo "ls -l $RSYSLOG_DYNNAME*
+diff --git a/meta-oe/recipes-extended/rsyslog/rsyslog_8.2306.0.bb b/meta-oe/recipes-extended/rsyslog/rsyslog_8.2306.0.bb
+index 41ec191a6e..c3948a40ec 100644
+--- a/meta-oe/recipes-extended/rsyslog/rsyslog_8.2306.0.bb
++++ b/meta-oe/recipes-extended/rsyslog/rsyslog_8.2306.0.bb
+@@ -29,6 +29,7 @@ SRC_URI = "https://www.rsyslog.com/files/download/rsyslog/${BPN}-${PV}.tar.gz \
+ 
+ SRC_URI:append:libc-musl = " \
+     file://0001-Include-sys-time-h.patch \
++    file://disable-omfile-outchannel.patch \
+ "
+ 
+ SRC_URI[sha256sum] = "f6283efaadc609540a56e6bec88a362c966e77f29fe48e6b734bd6c1123e0be5"
 -- 
 2.42.0
 
