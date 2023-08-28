@@ -2,113 +2,188 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B1035C71153
-	for <webhook@archiver.kernel.org>; Mon, 28 Aug 2023 17:05:01 +0000 (UTC)
-Received: from mail-oi1-f181.google.com (mail-oi1-f181.google.com [209.85.167.181])
- by mx.groups.io with SMTP id smtpd.web11.840.1693242295167065414
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9DAA9C83F11
+	for <webhook@archiver.kernel.org>; Mon, 28 Aug 2023 17:05:31 +0000 (UTC)
+Received: from mail-oi1-f175.google.com (mail-oi1-f175.google.com [209.85.167.175])
+ by mx.groups.io with SMTP id smtpd.web11.857.1693242329533962405
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 28 Aug 2023 10:04:55 -0700
+ Mon, 28 Aug 2023 10:05:29 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20221208 header.b=OSyqmM8H;
- spf=pass (domain: gmail.com, ip: 209.85.167.181, mailfrom: raj.khem@gmail.com)
-Received: by mail-oi1-f181.google.com with SMTP id 5614622812f47-3a7aedc57ffso2494830b6e.2
-        for <openembedded-devel@lists.openembedded.org>; Mon, 28 Aug 2023 10:04:55 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20221208 header.b=RNW71blP;
+ spf=pass (domain: gmail.com, ip: 209.85.167.175, mailfrom: raj.khem@gmail.com)
+Received: by mail-oi1-f175.google.com with SMTP id 5614622812f47-3a7aedc57ffso2495445b6e.2
+        for <openembedded-devel@lists.openembedded.org>; Mon, 28 Aug 2023 10:05:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1693242294; x=1693847094;
+        d=gmail.com; s=20221208; t=1693242329; x=1693847129;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=3RQozoj3+tVqSKIO04wIRBbfqMd4l9AU2V+xUeVjPGo=;
-        b=OSyqmM8Hbe9KTJ/ozqm/H+UBIhYYlXdz807ikdNN6+hro7nsB26mkvIdBIy1gPXGZn
-         m8Ucz/hF5bq/g7g+fZPP4m3dsEbZFGqWB6fgWd5YMx7fl81jBM/Bhgpu7M0+kz79h5Ca
-         i/YJhQsfqSgKAldvqTlkrCTFzbXdeYsd9oDCIWBdvVsAvpbd/RVjv0BJeVHpqVqpuTJ7
-         A18eo/T+g+gqtHAymT27Wzu+p4T0I6RrTdpXVugEE19a/07FZKy2hO0FWEHlz9Og2VNI
-         8RrVUzw6moRW7UA5dnRMxnuOonJh9dEqbZiASUN3BTAoy5ukIr91spoP4aDnRiupNJk3
-         om3g==
+        bh=2fEZCgSUOmfHQgCv1fCKHoORlLyAVUEPbuoiVeHVsJo=;
+        b=RNW71blPrel35Ajri9bAsTE4g0OfV81oOR+C0kiAQ9++j6/0wEVB1obnge/bDMVaF/
+         nIYogVr6sdB66lyRpJH3YSJGn0RC5eyXwI+AvF7DkoUPY+mG13RnXjPJw0DaeTwlxH1G
+         faeO9VI/nlQnPw+LUrtQqxolOnl0GUw8hMRVWrtxghPmakXR/sXOZT/bcvFq5m43cTKi
+         dAE0Hutj4/gB0qof8lJ4SHp+H7eutKLp06MRzn7PPcUO0/yxl+3/C93JaFlDWRZ+jK94
+         FdICsI5VjV8PBY3eR7moWgVTqO6Qc4qtVl10ggtgyusKnSFk3AIEwd7Mj6r/N8m+ULAf
+         96Ag==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1693242294; x=1693847094;
+        d=1e100.net; s=20221208; t=1693242329; x=1693847129;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=3RQozoj3+tVqSKIO04wIRBbfqMd4l9AU2V+xUeVjPGo=;
-        b=MZsuY/I1pqoDngHGBTdPebEl9BW24hXoh27qwlpklh7NhPGJ47w00vHxqr/Gs+7Vch
-         4bH9U8om8sEz2xOFprfTZEUoVi69gr3G78qF0cJavrB5yiyEEar7tKaYtZoydXhdXgkt
-         BFlLjvSAGv8YPQyaQU3+ENJBCcStVFuZwdDmzbCd+XTUX4aWviCtl0Zb6kzmBuwFQP6J
-         j5YX/eANDYMfsNtS49zj/RKiI/tnit8jooWp50LxaiQSBI3gi58mjAcbtiOct6ESg2JY
-         nG4s7Wz5N9qsRHX1ciGGyt5f8Sze1CIbqc7KwTtS5rgbQNRdpMzRnVB/j2VUQVxnOMY8
-         Ps0Q==
-X-Gm-Message-State: AOJu0YyKOtoiv0lsRtKr/AU97Nznc8k45L55BwQXAILGRsT2nV3UEmnW
-	oC0Ssn8heZrn7TGEgbdRrl+UEsHOizuwXumzpCI=
-X-Google-Smtp-Source: AGHT+IFe+KJm9KmkuGyFP2p5pC1/VEFPKBkCN+YHq6Jo83EmSCO4B/9cKEYT4mkXgoObVfraknqqdJpmSOjL3WeOXhE=
-X-Received: by 2002:a05:6808:2384:b0:3a9:ba39:6d4a with SMTP id
- bp4-20020a056808238400b003a9ba396d4amr9451545oib.18.1693242294282; Mon, 28
- Aug 2023 10:04:54 -0700 (PDT)
+        bh=2fEZCgSUOmfHQgCv1fCKHoORlLyAVUEPbuoiVeHVsJo=;
+        b=YeREcAp7jBsjvYD+a2IXsO1/55MgUZvjZfd5hnJns59q8r66WHM6u8gTQtk8UCWpDW
+         c9VL+hRNevSoIk3wAVXncDgOp161Z2ZE+GTGvhL2CzJUCdAs9QWnZTwh49mnosRGl/Du
+         dtrM+OoTHkme/qnm2HbM5w+J8ajR72WinzbyJ3S2rNRm2AiwfPGEBZhOj97uJbvPha5q
+         mkg2zRgcVRlY/IeW8pfKW4U61qs11mNhdwZArXjudmubxW+XYM9VukB3kLlhyXGhIRlt
+         ehT/s5eHWIpAetIVowkChGqITKU6HFJsDrqB9h9xd50JZm67hZkkuEHzLxJXiaCPvVyS
+         4KMg==
+X-Gm-Message-State: AOJu0YxpGqvXYMiMSzA7VDIW48esZvSUXvILsODSqMThiU/P2AmsRahv
+	exdVX7pmVcxVlcHM0brNIOpFhFIwVtSvHvxhYbU+uXXpszY=
+X-Google-Smtp-Source: AGHT+IGaKHASRku+j482qnJZ7v5+yArguZAnmIIaXs4yMYA/XGTdvqZr+EomVknOmoeLZdPil4D33CyifIjDKAEt+Vk=
+X-Received: by 2002:a05:6808:218a:b0:3a7:4f8:eb76 with SMTP id
+ be10-20020a056808218a00b003a704f8eb76mr16173607oib.24.1693242328761; Mon, 28
+ Aug 2023 10:05:28 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230828070502.2522488-1-Qi.Chen@windriver.com>
-In-Reply-To: <20230828070502.2522488-1-Qi.Chen@windriver.com>
+References: <20230828104918.471061-1-yi.zhao@windriver.com>
+In-Reply-To: <20230828104918.471061-1-yi.zhao@windriver.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 28 Aug 2023 10:04:28 -0700
-Message-ID: <CAMKF1spxBeW0WNYK5U_-yCtoKB6OSa3VcAMHGRt3jzSjhAUZSA@mail.gmail.com>
-Subject: Re: [oe][meta-networking][kirkstone][PATCH] spice-protocol: fix
- populate_sdk error when spice is installed
-To: Qi.Chen@windriver.com
+Date: Mon, 28 Aug 2023 10:05:02 -0700
+Message-ID: <CAMKF1sozTDfumsfEF0pOuJG5UTy4VVr38+iUo4eg2gmN6PAi-g@mail.gmail.com>
+Subject: Re: [oe] [meta-networking][PATCH][master][mickledore] frr: Security
+ fix CVE-2023-3748
+To: Yi Zhao <yi.zhao@eng.windriver.com>
 Cc: openembedded-devel@lists.openembedded.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 28 Aug 2023 17:05:01 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104633
+ <openembedded-devel@lists.openembedded.org>; Mon, 28 Aug 2023 17:05:31 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104634
 
-I think this applies to master too can you confirm.
+does this also apply to master? if so then it should be routed through mast=
+er
 
-On Mon, Aug 28, 2023 at 12:05=E2=80=AFAM Chen Qi via lists.openembedded.org
-<Qi.Chen=3Dwindriver.com@lists.openembedded.org> wrote:
+On Mon, Aug 28, 2023 at 3:49=E2=80=AFAM Yi Zhao <yi.zhao@eng.windriver.com>=
+ wrote:
 >
-> From: Chen Qi <Qi.Chen@windriver.com>
+> CVE-2023-3748:
+> A flaw was found in FRRouting when parsing certain babeld unicast hello
+> messages that are intended to be ignored. This issue may allow an
+> attacker to send specially crafted hello messages with the unicast flag
+> set, the interval field set to 0, or any TLV that contains a sub-TLV
+> with the Mandatory flag set to enter an infinite loop and cause a denial
+> of service.
 >
-> spice depends on spice-protocol, when IMAGE_INSTALL contains spice,
-> do_populate_sdk fails with the following error:
+> Reference:
+> https://nvd.nist.gov/vuln/detail/CVE-2023-3748
 >
->   Error:
->   Problem: package libspice-server-dev-0.14.2+git0+7cbd70b931_4fc4c2db36-=
-r0.core2_64 requires spice-protocol-dev, but none of the providers can be i=
-nstalled
->   - conflicting requests
->   - nothing provides spice-protocol =3D 0.14.4-r0 needed by spice-protoco=
-l-dev-0.14.4-r0.core2_64
->   (try to add '--skip-broken' to skip uninstallable packages)
+> Patch from:
+> https://github.com/FRRouting/frr/commit/ae1e0e1fed77716bc06f181ad68c4433f=
+b5523d0
 >
-> For spice-protocol, it's a development package and all things are in
-> the dev package, so set ALLOW_EMPTY to fix the above error.
->
-> Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
+> Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
 > ---
->  meta-networking/recipes-support/spice/spice-protocol_0.14.4.bb | 2 ++
->  1 file changed, 2 insertions(+)
+>  .../frr/frr/CVE-2023-3748.patch               | 54 +++++++++++++++++++
+>  .../recipes-protocols/frr/frr_8.4.4.bb        |  1 +
+>  2 files changed, 55 insertions(+)
+>  create mode 100644 meta-networking/recipes-protocols/frr/frr/CVE-2023-37=
+48.patch
 >
-> diff --git a/meta-networking/recipes-support/spice/spice-protocol_0.14.4.=
-bb b/meta-networking/recipes-support/spice/spice-protocol_0.14.4.bb
-> index 9ce019ed86..3c8458baac 100644
-> --- a/meta-networking/recipes-support/spice/spice-protocol_0.14.4.bb
-> +++ b/meta-networking/recipes-support/spice/spice-protocol_0.14.4.bb
-> @@ -16,4 +16,6 @@ S =3D "${WORKDIR}/git"
->
->  inherit meson pkgconfig
->
-> +ALLOW_EMPTY:${PN} =3D "1"
+> diff --git a/meta-networking/recipes-protocols/frr/frr/CVE-2023-3748.patc=
+h b/meta-networking/recipes-protocols/frr/frr/CVE-2023-3748.patch
+> new file mode 100644
+> index 000000000..4a8a7e1af
+> --- /dev/null
+> +++ b/meta-networking/recipes-protocols/frr/frr/CVE-2023-3748.patch
+> @@ -0,0 +1,54 @@
+> +From e61593f2ded104c4c7f01eb93e2b404e93e0c560 Mon Sep 17 00:00:00 2001
+> +From: harryreps <harryreps@gmail.com>
+> +Date: Fri, 3 Mar 2023 23:17:14 +0000
+> +Subject: [PATCH] babeld: fix #11808 to avoid infinite loops
 > +
->  BBCLASSEXTEND =3D "native nativesdk"
+> +Replacing continue in loops to goto done so that index of packet buffer
+> +increases.
+> +
+> +Signed-off-by: harryreps <harryreps@gmail.com>
+> +
+> +CVE: CVE-2023-3748
+> +
+> +Upstream-Status: Backport
+> +[https://github.com/FRRouting/frr/commit/ae1e0e1fed77716bc06f181ad68c443=
+3fb5523d0]
+> +
+> +Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+> +---
+> + babeld/message.c | 6 +++---
+> + 1 file changed, 3 insertions(+), 3 deletions(-)
+> +
+> +diff --git a/babeld/message.c b/babeld/message.c
+> +index 7d45d91bf..2bf233796 100644
+> +--- a/babeld/message.c
+> ++++ b/babeld/message.c
+> +@@ -439,7 +439,7 @@ parse_packet(const unsigned char *from, struct inter=
+face *ifp,
+> +                       debugf(BABEL_DEBUG_COMMON,
+> +                              "Received Hello from %s on %s that does no=
+t have all 0's in the unused section of flags, ignoring",
+> +                              format_address(from), ifp->name);
+> +-                      continue;
+> ++                      goto done;
+> +               }
+> +
+> +               /*
+> +@@ -451,7 +451,7 @@ parse_packet(const unsigned char *from, struct inter=
+face *ifp,
+> +                       debugf(BABEL_DEBUG_COMMON,
+> +                              "Received Unicast Hello from %s on %s that=
+ FRR is not prepared to understand yet",
+> +                              format_address(from), ifp->name);
+> +-                      continue;
+> ++                      goto done;
+> +               }
+> +
+> +               DO_NTOHS(seqno, message + 4);
+> +@@ -469,7 +469,7 @@ parse_packet(const unsigned char *from, struct inter=
+face *ifp,
+> +                       debugf(BABEL_DEBUG_COMMON,
+> +                              "Received hello from %s on %s should be ig=
+nored as that this version of FRR does not know how to properly handle inte=
+rval =3D=3D 0",
+> +                              format_address(from), ifp->name);
+> +-                      continue;
+> ++                      goto done;
+> +               }
+> +
+> +               changed =3D update_neighbour(neigh, seqno, interval);
+> +--
+> +2.25.1
+> +
+> diff --git a/meta-networking/recipes-protocols/frr/frr_8.4.4.bb b/meta-ne=
+tworking/recipes-protocols/frr/frr_8.4.4.bb
+> index b87c3e78b..f32b52f33 100644
+> --- a/meta-networking/recipes-protocols/frr/frr_8.4.4.bb
+> +++ b/meta-networking/recipes-protocols/frr/frr_8.4.4.bb
+> @@ -12,6 +12,7 @@ LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Db234ee4d69f5=
+fce4486a80fdaf4a4263 \
+>  SRC_URI =3D "git://github.com/FRRouting/frr.git;protocol=3Dhttps;branch=
+=3Dstable/8.4 \
+>             file://frr.pam \
+>             file://0001-m4-ax_python.m4-check-for-python-x.y-emded.pc-not=
+-py.patch \
+> +           file://CVE-2023-3748.patch \
+>             "
+>
+>  SRCREV =3D "45e36c0c00a517ad1606135b18c5753e210cfc0d"
 > --
-> 2.40.0
+> 2.25.1
 >
 >
 > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
 > Links: You receive all messages sent to this group.
-> View/Reply Online (#104631): https://lists.openembedded.org/g/openembedde=
-d-devel/message/104631
-> Mute This Topic: https://lists.openembedded.org/mt/101005385/1997914
+> View/Reply Online (#104632): https://lists.openembedded.org/g/openembedde=
+d-devel/message/104632
+> Mute This Topic: https://lists.openembedded.org/mt/101007225/1997914
 > Group Owner: openembedded-devel+owner@lists.openembedded.org
 > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
 aj.khem@gmail.com]
