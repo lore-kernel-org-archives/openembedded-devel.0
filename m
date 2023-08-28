@@ -1,102 +1,97 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <archana.polampalli@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 89423C83F01
-	for <webhook@archiver.kernel.org>; Sun, 27 Aug 2023 20:49:54 +0000 (UTC)
-Received: from mail-ot1-f41.google.com (mail-ot1-f41.google.com [209.85.210.41])
- by mx.groups.io with SMTP id smtpd.web10.72.1693169389872644699
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6E56CC83F13
+	for <webhook@archiver.kernel.org>; Mon, 28 Aug 2023 06:59:37 +0000 (UTC)
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.web10.8384.1693205970179549488
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 27 Aug 2023 13:49:49 -0700
+ Sun, 27 Aug 2023 23:59:30 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20221208 header.b=KpC6TuDe;
- spf=pass (domain: gmail.com, ip: 209.85.210.41, mailfrom: raj.khem@gmail.com)
-Received: by mail-ot1-f41.google.com with SMTP id 46e09a7af769-6bee392fe9dso2099414a34.1
-        for <openembedded-devel@lists.openembedded.org>; Sun, 27 Aug 2023 13:49:49 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1693169389; x=1693774189;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=hVpPyv+ODmeDwdyAH17oghRT8+DWLgI5joHuUAicTdk=;
-        b=KpC6TuDeK/RHXI/kGbOt/GcLc21DcUWSUV2Js1s03vuwtpTRZN0htzMc1VQOmk4DD3
-         yR4Xr/QNY9PLcmXeTVgEcy1dPLskf12BrgkYe9cTmvZTYD1NmqlWS5JF/tKl6PQJUi88
-         e99g3CGT5XhGGjOXToraPsVgzyDBZIn9diI3wv6swNMk9Z7ba3xkxKZ0y3SLmOh3NHi4
-         Gld7u++n8BEGY8vdhbuUEJ+TsTSPmzntT8T6IUXrWCpPb2ozXUq/ElkagVSRuhAjB/JP
-         5fitSTuXCgMEBkQeCGgEEohGz9XQHjfsjzzx4518xGXzVVkTzrv7rJo922E9FFVpJ4q4
-         L/Uw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1693169389; x=1693774189;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=hVpPyv+ODmeDwdyAH17oghRT8+DWLgI5joHuUAicTdk=;
-        b=Zczt0y+D3EPUa926eywFMny5EF2zHGLu0y46j21bcs8+nd5oewMazGKl1dMUoLBP/R
-         CeAP1mHzSCNPYXB+vwIyaRvnG9Lai0GWNu1xilaKpks7UTENOXcPRmoNYheY88jqm/Yj
-         ijtlbUT2Tfd01fQ47maliMNrxUY1W3iyGhPbCce1lj003HoXz4MMRcPAcq1SLm3BiwFQ
-         DmWsR32xgzmfb54sUZ5E3UcszQmDB4z3WTlwB6l5UpddJz1CCEx4XrQ3a2yrr2cAZMT/
-         8zwSETlLFOox4S/K7jgv5rjR8MfE0GLUpnJzHvxAYQSW78atxqUbxg9AvOfns6Fak5PE
-         5BNA==
-X-Gm-Message-State: AOJu0YwM6TIrFtdgnHD5l/NnwJLVZM3cPHShY485U7ot2cj6lvOhUgVz
-	H6QqbdZYLLSd8cR2LzRN88bIYIeT4kKJHw==
-X-Google-Smtp-Source: AGHT+IHCpuES5Qwf3BoMv2BquIEbjHrlZzmz6VtiK3IbxocpgsLPq1MTeoj3Yrw6AuoMwhuaZGm13w==
-X-Received: by 2002:a05:6870:910d:b0:1c7:ebf5:b6d6 with SMTP id o13-20020a056870910d00b001c7ebf5b6d6mr10639496oae.37.1693169388854;
-        Sun, 27 Aug 2023 13:49:48 -0700 (PDT)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9100:2cb0::71d2])
-        by smtp.gmail.com with ESMTPSA id mq3-20020a17090b380300b002682523653asm5464369pjb.49.2023.08.27.13.49.48
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 27 Aug 2023 13:49:48 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-python][PATCH] python3-m2crypto: Append architecture to SWIG_FEATURES instead of overriding
-Date: Sun, 27 Aug 2023 13:49:46 -0700
-Message-ID: <20230827204946.602950-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.42.0
+ dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=JEYEDeXp;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=760481038b=archana.polampalli@windriver.com)
+Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.17.1.22/8.17.1.22) with ESMTP id 37S5t23g002618
+	for <openembedded-devel@lists.openembedded.org>; Mon, 28 Aug 2023 06:59:29 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
+	 h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding:content-type; s=PPS06212021; bh=dG+7J
+	R7dzWKO6gw4XN78lb7/zLdkpqJD4YMCScxAgRM=; b=JEYEDeXpwDbjZcDKhxC/H
+	nv4w+mTSowXFkmuZNtO8diSjWlZ+G4mTXzbNrIHtKM5f9KFMQ9IHUHRb94tIfDEk
+	gRn53FcGnNcDWh44+FLj8/ffxlq9eaZUgOCvRW/VUHMhssuefCZKy6rq455hcOem
+	f6hF/aKm92jmQTqcg64uHiXL1IvyuRR+nuTXrOW1T2OetlelyrUXFFOpR8nJl2rQ
+	PfC14NQFVlhfT1847xE0CRQtZTQsuh03BZLh4+1q8XSFbk9bCOHNXN5yDfh39dYy
+	fMYVGxjhGo4QyLtXxhfPANUa9ieJj5ptMYUDWgZEVPkTO2Qtqzb2MMIWGcFzjCia
+	g==
+Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3sq8c61dbu-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Mon, 28 Aug 2023 06:59:29 +0000 (GMT)
+Received: from blr-linux-engg1.wrs.com (147.11.136.210) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.27; Sun, 27 Aug 2023 23:59:23 -0700
+From: Archana Polampalli <archana.polampalli@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: <Hari.GPillai@windriver.com>
+Subject: [oe][meta-oe][PATCH 1/1] nodejs: upgrade 18.17.0 -> 18.17.1
+Date: Mon, 28 Aug 2023 06:59:14 +0000
+Message-ID: <20230828065914.2474985-1-archana.polampalli@windriver.com>
+X-Mailer: git-send-email 2.40.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [147.11.136.210]
+X-ClientProxiedBy: ala-exchng01.corp.ad.wrs.com (147.11.82.252) To
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252)
+X-Proofpoint-ORIG-GUID: 7l-j8jjnUGUZhkO85onChZ-sx-u3Pjbv
+X-Proofpoint-GUID: 7l-j8jjnUGUZhkO85onChZ-sx-u3Pjbv
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.267,Aquarius:18.0.957,Hydra:6.0.601,FMLib:17.11.176.26
+ definitions=2023-08-28_04,2023-08-25_01,2023-05-22_02
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 lowpriorityscore=0
+ impostorscore=0 phishscore=0 spamscore=0 malwarescore=0 mlxscore=0
+ adultscore=0 priorityscore=1501 bulkscore=0 suspectscore=0 clxscore=1015
+ mlxlogscore=721 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.19.0-2308100000 definitions=main-2308280061
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 27 Aug 2023 20:49:54 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104629
+ <openembedded-devel@lists.openembedded.org>; Mon, 28 Aug 2023 06:59:37 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104630
 
-For x86/x32 it was overwriting SWIG_FEATURES, its better to append it
-like for other arches, in addition it brings essential options to remove
-buildpaths from .so files.
+This is a security release.
+The following CVEs are fixed in this release:
+    CVE-2023-32002
+    CVE-2023-32006
+    CVE-2023-32559
 
-Use OPENSSL_NO_FILENAMES define instead of overrding OPENSSL_FILE for
-achieving reproducibility. Takes care of line numbers too.
+https://github.com/nodejs/node/releases/tag/v18.17.1
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Archana Polampalli <archana.polampalli@windriver.com>
 ---
- .../recipes-devtools/python/python3-m2crypto_0.39.0.bb    | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
+ .../nodejs/{nodejs_18.17.0.bb => nodejs_18.17.1.bb}             | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-devtools/nodejs/{nodejs_18.17.0.bb => nodejs_18.17.1.bb} (98%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-m2crypto_0.39.0.bb b/meta-python/recipes-devtools/python/python3-m2crypto_0.39.0.bb
-index ac62773064..d47ec2bac4 100644
---- a/meta-python/recipes-devtools/python/python3-m2crypto_0.39.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-m2crypto_0.39.0.bb
-@@ -31,15 +31,15 @@ RDEPENDS:${PN} += "\
- DISTUTILS_BUILD_ARGS += "build_ext --openssl=${STAGING_EXECPREFIXDIR} -I${STAGING_INCDIR}"
- DISTUTILS_INSTALL_ARGS += "build_ext --openssl=${STAGING_EXECPREFIXDIR}"
+diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_18.17.0.bb b/meta-oe/recipes-devtools/nodejs/nodejs_18.17.1.bb
+similarity index 98%
+rename from meta-oe/recipes-devtools/nodejs/nodejs_18.17.0.bb
+rename to meta-oe/recipes-devtools/nodejs/nodejs_18.17.1.bb
+index 1d49218e6..ee5e848bf 100644
+--- a/meta-oe/recipes-devtools/nodejs/nodejs_18.17.0.bb
++++ b/meta-oe/recipes-devtools/nodejs/nodejs_18.17.1.bb
+@@ -39,7 +39,7 @@ SRC_URI:append:toolchain-clang:x86 = " \
+ SRC_URI:append:toolchain-clang:powerpc64le = " \
+            file://0001-ppc64-Do-not-use-mminimal-toc-with-clang.patch \
+            "
+-SRC_URI[sha256sum] = "80c0faadf5ea39c213ccb9aa5c2432977a0f1b5a0b766852abd0de06f2770406"
++SRC_URI[sha256sum] = "f215cf03d0f00f07ac0b674c6819f804c1542e16f152da04980022aeccf5e65a"
  
--SWIG_FEATURES:x86 = "-D__i386__"
--SWIG_FEATURES:x32 = "-D__ILP32__"
--
--SWIG_FEATURES ?= "-D__${HOST_ARCH}__ ${@['-D__ILP32__','-D__LP64__'][d.getVar('SITEINFO_BITS') != '32']} -DOPENSSL_FILE='openssl/macros.h'"
-+SWIG_FEATURES ?= "-D__${HOST_ARCH}__ ${@['-D__ILP32__','-D__LP64__'][d.getVar('SITEINFO_BITS') != '32']} -DOPENSSL_NO_FILENAMES"
+ S = "${WORKDIR}/node-v${PV}"
  
- SWIG_FEATURES:append:riscv64 = " -D__SIZEOF_POINTER__=${SITEINFO_BITS}/8 -D__riscv_xlen=${SITEINFO_BITS}"
- SWIG_FEATURES:append:riscv32 = " -D__SIZEOF_POINTER__=${SITEINFO_BITS}/8 -D__riscv_xlen=${SITEINFO_BITS}"
- SWIG_FEATURES:append:mipsarch = " -D_MIPS_SZPTR=${SITEINFO_BITS}"
- SWIG_FEATURES:append:powerpc64le = " -D__powerpc64__"
-+SWIG_FEATURES:append:x86 = " -D__i386__"
-+SWIG_FEATURES:append:x32 = " -D__ILP32__"
-+
- export SWIG_FEATURES
- 
- export STAGING_DIR
 -- 
-2.42.0
+2.40.0
 
 
