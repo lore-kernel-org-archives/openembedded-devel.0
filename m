@@ -1,364 +1,240 @@
-Return-Path: <archana.polampalli@windriver.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BB2A2C83F12
-	for <webhook@archiver.kernel.org>; Tue, 29 Aug 2023 11:35:39 +0000 (UTC)
-Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
- by mx.groups.io with SMTP id smtpd.web10.15128.1693308930399855843
+	by smtp.lore.kernel.org (Postfix) with ESMTP id F3CB2C6FA8F
+	for <webhook@archiver.kernel.org>; Tue, 29 Aug 2023 16:14:19 +0000 (UTC)
+Received: from mail-oi1-f176.google.com (mail-oi1-f176.google.com [209.85.167.176])
+ by mx.groups.io with SMTP id smtpd.web10.1084.1693325659291715929
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 29 Aug 2023 04:35:30 -0700
+ Tue, 29 Aug 2023 09:14:19 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=tDkfuGqc;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=7605a3e163=archana.polampalli@windriver.com)
-Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.17.1.22/8.17.1.22) with ESMTP id 37TBXOv7014080
-	for <openembedded-devel@lists.openembedded.org>; Tue, 29 Aug 2023 11:35:29 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
-	 h=from:to:cc:subject:date:message-id:in-reply-to:references
-	:mime-version:content-transfer-encoding:content-type; s=
-	PPS06212021; bh=bO7sxV9P2wp0cWzb+L8aDjYnFfpwVCrmpVec5wp26Ec=; b=
-	tDkfuGqcAjtwOvh2NVzd/+vQcFgF3ImxKzfTTaXaB/wPiXEG1b3INUglVuAUpc6L
-	bShmL8VBq2AoE3RZcKgndQ2g8pzQHRBswlT7BDlx8ZfXX6XbJeRdqyxgfC0k0a3Z
-	CPq1uXg/DDCczglohnh11jK36pc8vfwPmz151VpknLV4tr6HuI22bACKKdsjDcZk
-	lqbCwhB9EVxQb0FLRg9QiFqKJZO4ApymK9qL5MFTwiE1MQ3hHBYnIpHUVOp5etgo
-	XR8ZlANwoTX1cX5vvOC2rCRWhNGhogHfBcIIw95GyyduNGjwnc7leNp9uRLj/po5
-	rEmmwXER82maJ+EL9+KNaQ==
-Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3sq8c62jc7-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Tue, 29 Aug 2023 11:35:29 +0000 (GMT)
-Received: from blr-linux-engg1.wrs.com (147.11.136.210) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.27; Tue, 29 Aug 2023 04:35:26 -0700
-From: Archana Polampalli <archana.polampalli@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-CC: <Hari.GPillai@windriver.com>
-Subject: [oe][meta-oe][mickledore][PATCH 2/2] nodejs: fix CVE-2022-25883
-Date: Tue, 29 Aug 2023 11:35:13 +0000
-Message-ID: <20230829113513.276561-2-archana.polampalli@windriver.com>
-X-Mailer: git-send-email 2.40.0
-In-Reply-To: <20230829113513.276561-1-archana.polampalli@windriver.com>
-References: <20230829113513.276561-1-archana.polampalli@windriver.com>
+ dkim=pass header.i=@gmail.com header.s=20221208 header.b=KU90g/mr;
+ spf=pass (domain: gmail.com, ip: 209.85.167.176, mailfrom: raj.khem@gmail.com)
+Received: by mail-oi1-f176.google.com with SMTP id 5614622812f47-3a812843f0fso2679979b6e.2
+        for <openembedded-devel@lists.openembedded.org>; Tue, 29 Aug 2023 09:14:19 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20221208; t=1693325658; x=1693930458;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=ED0on65Ws4r1lS2Cg2v3e6npl2P6Cy+hqiejA83Pqn0=;
+        b=KU90g/mr9Mk1bJWN2Z8nhbc40r6BgpHv4+CBqMGLhQ3UboqSsAliC+svbmwNzJH+m7
+         QRUjjhvNlPRKeaONpW0BJzlwCIJarSkbe+TA7lOuIVcn7qgsvZIxphEKxEc1OLnXzMzm
+         pet7d2PFy+o/65fGJf04KtJ/i/HUeZ+WgXuB7hvjfbpduC686RgmGh4kOk7xhL3GKTN3
+         K4QuqEIGsm9FYdtoYVpPCMUKxjO72QjurYhE9648Peua93uqkXPD/RhB84Xwb11ZqGOt
+         yrI2d28coXxvfqlZXnAvQwvgzI/zPLERZhfqYaF+SqFb8dSuzXVR61Br4gMtkLv4kN65
+         S9vA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20221208; t=1693325658; x=1693930458;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=ED0on65Ws4r1lS2Cg2v3e6npl2P6Cy+hqiejA83Pqn0=;
+        b=EGV3VRl6eUKvMr/lSfiJqfhllDo8z828othKRzHe0Qq1CNfGxYKTyp6EP2dv27KNE/
+         S19mbj9Fdac4GiwKwKXSiOzFBOHTu4rvk5bl6+O1sqaB2ToUqQVILa0tWijxaS6sBQ3g
+         RzNnJLnwkfFZ9wDlDvqxJ6+zkGfNggi2+vhM3SLwfnhCArMi0h5gYUG1ov9E9spJ+ClD
+         hwolbV6J2v24BhRZk7YQPaO9n3L9Bc8q+6u8pY8BOPtkFMAgkEVJAA2C9+W8Inqe3gS5
+         F2wOXdt6RfonD9O8QlSMGNeD1CB/AnGi5Hl675g6cAn6NZpK0hXA3f7M2giiaCO2XmOg
+         rX9w==
+X-Gm-Message-State: AOJu0YwG4NR9gq872hmVcx7VpmuSlm7UCqYTNJwtE2T9WrpXmywbZVt+
+	ZEi9eIDUJihWFKMJl++Q4xmbdwHlwdWM/g8g4pAEy3pG
+X-Google-Smtp-Source: AGHT+IF0kXB28INHpvVaHXHXxeFz4S5LdzvBGOgO2fj8M9yNc0yFO1tmm25wMULiAuuIWbtOEbwp0jTwUIo5j3NRWw4=
+X-Received: by 2002:a54:4e8e:0:b0:3a7:52b9:cbfe with SMTP id
+ c14-20020a544e8e000000b003a752b9cbfemr12778581oiy.32.1693325658352; Tue, 29
+ Aug 2023 09:14:18 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [147.11.136.210]
-X-ClientProxiedBy: ala-exchng01.corp.ad.wrs.com (147.11.82.252) To
- ala-exchng01.corp.ad.wrs.com (147.11.82.252)
-X-Proofpoint-ORIG-GUID: LfLjoFhWTbrlfx9qBKsnvYZHguAO_IFm
-X-Proofpoint-GUID: LfLjoFhWTbrlfx9qBKsnvYZHguAO_IFm
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.267,Aquarius:18.0.957,Hydra:6.0.601,FMLib:17.11.176.26
- definitions=2023-08-29_08,2023-08-29_01,2023-05-22_02
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 lowpriorityscore=0
- impostorscore=0 phishscore=0 spamscore=0 malwarescore=0 mlxscore=0
- adultscore=0 priorityscore=1501 bulkscore=0 suspectscore=0 clxscore=1015
- mlxlogscore=999 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.19.0-2308100000 definitions=main-2308290099
+References: <20230829095438.2747087-1-mingli.yu@windriver.com>
+In-Reply-To: <20230829095438.2747087-1-mingli.yu@windriver.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 29 Aug 2023 09:14:03 -0700
+Message-ID: <CAMKF1sokrpgNY1dhBk6Hu7rOn+J7eu7kvWaR9qfGOnP-a7tjbg@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH] thrift: Remove buildpaths
+To: "Yu, Mingli" <mingli.yu@eng.windriver.com>
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: multipart/alternative; boundary="0000000000005af5b10604121ae2"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 29 Aug 2023 11:35:39 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104640
+ <openembedded-devel@lists.openembedded.org>; Tue, 29 Aug 2023 16:14:19 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104641
 
-Versions of the package semver before 7.5.2 are vulnerable to Regular Expression
-Denial of Service (ReDoS) via the function new Range, when untrusted user data is
-provided as a range.
+--0000000000005af5b10604121ae2
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-References:
-https://nvd.nist.gov/vuln/detail/CVE-2022-25883
+On Tue, Aug 29, 2023 at 2:54 AM Yu, Mingli <mingli.yu@eng.windriver.com>
+wrote:
 
-Upstream patches:
-https://github.com/npm/node-semver/commit/717534ee353682f3bcf33e60a8af4292626d4441
+> From: Mingli Yu <mingli.yu@windriver.com>
+>
+> Fixes:
+>   WARNING: thrift-0.18.1-r0 do_package_qa: QA Issue: File
+> /usr/lib64/cmake/thrift/thriftnbTargets.cmake in package thrift-dev
+> contains reference to TMPDIR
+>   File /usr/lib64/cmake/thrift/thrift_c_glibTargets.cmake in package
+> thrift-dev contains reference to TMPDIR
+>   File /usr/lib64/cmake/thrift/thrift_c_glib_zlibTargets.cmake in package
+> thrift-dev contains reference to TMPDIR [buildpaths]
+>   WARNING: thrift-0.18.1-r0 do_package_qa: QA Issue: File
+> /usr/src/debug/thrift/0.18.1-r0/compiler/cpp/thrift/thrifty.hh in package
+> thrift-src contains reference to TMPDIR
+>   File /usr/src/debug/thrift/0.18.1-r0/compiler/cpp/thrift/thrifty.cc in
+> package thrift-src contains reference to TMPDIR
+>   File /usr/src/debug/thrift/0.18.1-r0/compiler/cpp/thrift/thriftl.cc in
+> package thrift-src contains reference to TMPDIR [buildpaths]
+>
+> Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+> ---
+>  meta-oe/recipes-connectivity/thrift/thrift_0.18.1.bb | 6 ++++++
+>  1 file changed, 6 insertions(+)
+>
+> diff --git a/meta-oe/recipes-connectivity/thrift/thrift_0.18.1.bb
+> b/meta-oe/recipes-connectivity/thrift/thrift_0.18.1.bb
+> index ea5a3972d..2809e24ad 100644
+> --- a/meta-oe/recipes-connectivity/thrift/thrift_0.18.1.bb
+> +++ b/meta-oe/recipes-connectivity/thrift/thrift_0.18.1.bb
+> @@ -35,6 +35,8 @@ EXTRA_OECMAKE =3D " \
+>      -DWITH_OPENSSL=3DON \
+>      -DWITH_QT5=3DOFF \
+>      -DWITH_ZLIB=3DON \
+> +    -DFLEX_TARGET_ARG_COMPILE_FLAGS=3D'--noline' \
+> +    -DBISON_TARGET_ARG_COMPILE_FLAGS=3D'--no-lines' \
+>  "
+>
+>  PACKAGECONFIG ??=3D "glib libevent"
+> @@ -46,6 +48,10 @@ PACKAGECONFIG[python] =3D
+> "-DWITH_PYTHON=3DON,-DWITH_PYTHON=3DOFF,python"
+>
+>  do_install:append () {
+>      ln -sf thrift ${D}/${bindir}/thrift-compiler
+> +    # remove absolute paths
+> +    sed -i -e 's|${RECIPE_SYSROOT}||g'
+> ${D}${libdir}/cmake/thrift/thriftnbTargets.cmake
+> +    sed -i -e 's|${RECIPE_SYSROOT}||g'
+> ${D}${libdir}/cmake/thrift/thrift_c_glibTargets.cmake
+> +    sed -i -e 's|${RECIPE_SYSROOT}||g'
+> ${D}${libdir}/cmake/thrift/thrift_c_glib_zlibTargets.cmake
 
-Signed-off-by: Archana Polampalli <archana.polampalli@windriver.com>
----
- .../nodejs/nodejs/CVE-2022-25883.patch        | 260 ++++++++++++++++++
- .../recipes-devtools/nodejs/nodejs_18.17.1.bb |   1 +
- 2 files changed, 261 insertions(+)
- create mode 100644 meta-oe/recipes-devtools/nodejs/nodejs/CVE-2022-25883.patch
 
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs/CVE-2022-25883.patch b/meta-oe/recipes-devtools/nodejs/nodejs/CVE-2022-25883.patch
-new file mode 100644
-index 000000000..1c9daf714
---- /dev/null
-+++ b/meta-oe/recipes-devtools/nodejs/nodejs/CVE-2022-25883.patch
-@@ -0,0 +1,260 @@
-+From 717534ee353682f3bcf33e60a8af4292626d4441 Mon Sep 17 00:00:00 2001
-+From: Luke Karrys <luke@lukekarrys.com>
-+Date: Thu, 15 Jun 2023 12:21:14 -0700
-+Subject: [PATCH] fix: better handling of whitespace (#564)
-+
-+CVE: CVE-2022-25883
-+
-+Upstream-Status: Backport [https://github.com/npm/node-semver/commit/717534ee353682f3bcf33e60a8af4292626d4441]
-+---
-+ classes/comparator.js          |  3 +-
-+ classes/range.js               | 64 ++++++++++++++++------------
-+ classes/semver.js              |  2 +-
-+ functions/coerce.js            |  2 +-
-+ internal/re.js                 | 11 +++++
-+ package.json                   |  2 +-
-+ 6 files changed, 53 insertions(+), 31 deletions(-)
-+
-+diff --git a/classes/comparator.js b/classes/comparator.js
-+index 2146c88..3d39c0e 100644
-+--- a/classes/comparator.js
-++++ b/classes/comparator.js
-+@@ -16,6 +16,7 @@ class Comparator {
-+       }
-+     }
-+
-++    comp = comp.trim().split(/\s+/).join(' ')
-+     debug('comparator', comp, options)
-+     this.options = options
-+     this.loose = !!options.loose
-+@@ -133,7 +134,7 @@ class Comparator {
-+ module.exports = Comparator
-+
-+ const parseOptions = require('../internal/parse-options')
-+-const { re, t } = require('../internal/re')
-++const { safeRe: re, t } = require('../internal/re')
-+ const cmp = require('../functions/cmp')
-+ const debug = require('../internal/debug')
-+ const SemVer = require('./semver')
-+diff --git a/classes/range.js b/classes/range.js
-+index d9e866d..53c2540 100644
-+--- a/classes/range.js
-++++ b/classes/range.js
-+@@ -26,19 +26,26 @@ class Range {
-+     this.loose = !!options.loose
-+     this.includePrerelease = !!options.includePrerelease
-+
-+-    // First, split based on boolean or ||
-++    // First reduce all whitespace as much as possible so we do not have to rely
-++    // on potentially slow regexes like \s*. This is then stored and used for
-++    // future error messages as well.
-+     this.raw = range
-+-    this.set = range
-++      .trim()
-++      .split(/\s+/)
-++      .join(' ')
-++
-++    // First, split on ||
-++    this.set = this.raw
-+       .split('||')
-+       // map the range to a 2d array of comparators
-+-      .map(r => this.parseRange(r.trim()))
-++      .map(r => this.parseRange(r))
-+       // throw out any comparator lists that are empty
-+       // this generally means that it was not a valid range, which is allowed
-+       // in loose mode, but will still throw if the WHOLE range is invalid.
-+       .filter(c => c.length)
-+
-+     if (!this.set.length) {
-+-      throw new TypeError(`Invalid SemVer Range: ${range}`)
-++      throw new TypeError(`Invalid SemVer Range: ${this.raw}`)
-+     }
-+
-+     // if we have any that are not the null set, throw out null sets.
-+@@ -64,9 +71,7 @@ class Range {
-+
-+   format () {
-+     this.range = this.set
-+-      .map((comps) => {
-+-        return comps.join(' ').trim()
-+-      })
-++      .map((comps) => comps.join(' ').trim())
-+       .join('||')
-+       .trim()
-+     return this.range
-+@@ -77,8 +82,6 @@ class Range {
-+   }
-+
-+   parseRange (range) {
-+-    range = range.trim()
-+-
-+     // memoize range parsing for performance.
-+     // this is a very hot path, and fully deterministic.
-+     const memoOpts =
-+@@ -105,9 +108,6 @@ class Range {
-+     // `^ 1.2.3` => `^1.2.3`
-+     range = range.replace(re[t.CARETTRIM], caretTrimReplace)
-+
-+-    // normalize spaces
-+-    range = range.split(/\s+/).join(' ')
-+-
-+     // At this point, the range is completely trimmed and
-+     // ready to be split into comparators.
-+
-+@@ -203,7 +203,7 @@ const Comparator = require('./comparator')
-+ const debug = require('../internal/debug')
-+ const SemVer = require('./semver')
-+ const {
-+-  re,
-++  safeRe: re,
-+   t,
-+   comparatorTrimReplace,
-+   tildeTrimReplace,
-+@@ -257,10 +257,13 @@ const isX = id => !id || id.toLowerCase() === 'x' || id === '*'
-+ // ~1.2.3, ~>1.2.3 --> >=1.2.3 <1.3.0-0
-+ // ~1.2.0, ~>1.2.0 --> >=1.2.0 <1.3.0-0
-+ // ~0.0.1 --> >=0.0.1 <0.1.0-0
-+-const replaceTildes = (comp, options) =>
-+-  comp.trim().split(/\s+/).map((c) => {
-+-    return replaceTilde(c, options)
-+-  }).join(' ')
-++const replaceTildes = (comp, options) => {
-++  return comp
-++    .trim()
-++    .split(/\s+/)
-++    .map((c) => replaceTilde(c, options))
-++    .join(' ')
-++}
-+
-+ const replaceTilde = (comp, options) => {
-+   const r = options.loose ? re[t.TILDELOOSE] : re[t.TILDE]
-+@@ -298,10 +301,13 @@ const replaceTilde = (comp, options) => {
-+ // ^1.2.0 --> >=1.2.0 <2.0.0-0
-+ // ^0.0.1 --> >=0.0.1 <0.0.2-0
-+ // ^0.1.0 --> >=0.1.0 <0.2.0-0
-+-const replaceCarets = (comp, options) =>
-+-  comp.trim().split(/\s+/).map((c) => {
-+-    return replaceCaret(c, options)
-+-  }).join(' ')
-++const replaceCarets = (comp, options) => {
-++  return comp
-++    .trim()
-++    .split(/\s+/)
-++    .map((c) => replaceCaret(c, options))
-++    .join(' ')
-++}
-+
-+ const replaceCaret = (comp, options) => {
-+   debug('caret', comp, options)
-+@@ -358,9 +364,10 @@ const replaceCaret = (comp, options) => {
-+
-+ const replaceXRanges = (comp, options) => {
-+   debug('replaceXRanges', comp, options)
-+-  return comp.split(/\s+/).map((c) => {
-+-    return replaceXRange(c, options)
-+-  }).join(' ')
-++  return comp
-++    .split(/\s+/)
-++    .map((c) => replaceXRange(c, options))
-++    .join(' ')
-+ }
-+
-+ const replaceXRange = (comp, options) => {
-+@@ -443,12 +450,15 @@ const replaceXRange = (comp, options) => {
-+ const replaceStars = (comp, options) => {
-+   debug('replaceStars', comp, options)
-+   // Looseness is ignored here.  star is always as loose as it gets!
-+-  return comp.trim().replace(re[t.STAR], '')
-++  return comp
-++    .trim()
-++    .replace(re[t.STAR], '')
-+ }
-+
-+ const replaceGTE0 = (comp, options) => {
-+   debug('replaceGTE0', comp, options)
-+-  return comp.trim()
-++  return comp
-++    .trim()
-+     .replace(re[options.includePrerelease ? t.GTE0PRE : t.GTE0], '')
-+ }
-+
-+@@ -486,7 +496,7 @@ const hyphenReplace = incPr => ($0,
-+     to = `<=${to}`
-+   }
-+
-+-  return (`${from} ${to}`).trim()
-++  return `${from} ${to}`.trim()
-+ }
-+
-+ const testSet = (set, version, options) => {
-+diff --git a/classes/semver.js b/classes/semver.js
-+index 99dbe82..e1208fe 100644
-+--- a/classes/semver.js
-++++ b/classes/semver.js
-+@@ -1,6 +1,6 @@
-+ const debug = require('../internal/debug')
-+ const { MAX_LENGTH, MAX_SAFE_INTEGER } = require('../internal/constants')
-+-const { re, t } = require('../internal/re')
-++const { safeRe: re, t } = require('../internal/re')
-+
-+ const parseOptions = require('../internal/parse-options')
-+ const { compareIdentifiers } = require('../internal/identifiers')
-+diff --git a/functions/coerce.js b/functions/coerce.js
-+index 2e01452..febbff9 100644
-+--- a/functions/coerce.js
-++++ b/functions/coerce.js
-+@@ -1,6 +1,6 @@
-+ const SemVer = require('../classes/semver')
-+ const parse = require('./parse')
-+-const { re, t } = require('../internal/re')
-++const { safeRe: re, t } = require('../internal/re')
-+
-+ const coerce = (version, options) => {
-+   if (version instanceof SemVer) {
-+diff --git a/internal/re.js b/internal/re.js
-+index ed88398..f73ef1a 100644
-+--- a/internal/re.js
-++++ b/internal/re.js
-+@@ -4,16 +4,27 @@ exports = module.exports = {}
-+
-+ // The actual regexps go on exports.re
-+ const re = exports.re = []
-++const safeRe = exports.safeRe = []
-+ const src = exports.src = []
-+ const t = exports.t = {}
-+ let R = 0
-+
-+ const createToken = (name, value, isGlobal) => {
-++  // Replace all greedy whitespace to prevent regex dos issues. These regex are
-++  // used internally via the safeRe object since all inputs in this library get
-++  // normalized first to trim and collapse all extra whitespace. The original
-++  // regexes are exported for userland consumption and lower level usage. A
-++  // future breaking change could export the safer regex only with a note that
-++  // all input should have extra whitespace removed.
-++  const safe = value
-++    .split('\\s*').join('\\s{0,1}')
-++    .split('\\s+').join('\\s')
-+   const index = R++
-+   debug(name, index, value)
-+   t[name] = index
-+   src[index] = value
-+   re[index] = new RegExp(value, isGlobal ? 'g' : undefined)
-++  safeRe[index] = new RegExp(safe, isGlobal ? 'g' : undefined)
-+ }
-+
-+ // The following Regular Expressions can be used for tokenizing,
-+diff --git a/package.json b/package.json
-+index 204e008..7207703 100644
-+--- a/package.json
-++++ b/package.json
-+@@ -37,7 +37,7 @@
-+     "range.bnf"
-+   ],
-+   "tap": {
-+-    "check-coverage": true,
-++    "timeout": 30,
-+     "coverage-map": "map.js",
-+     "nyc-arg": [
-+       "--exclude",
-+--
-+2.40.0
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_18.17.1.bb b/meta-oe/recipes-devtools/nodejs/nodejs_18.17.1.bb
-index 402cf5671..359ccab54 100644
---- a/meta-oe/recipes-devtools/nodejs/nodejs_18.17.1.bb
-+++ b/meta-oe/recipes-devtools/nodejs/nodejs_18.17.1.bb
-@@ -28,6 +28,7 @@ SRC_URI = "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.xz \
-            file://0001-liftoff-Correct-function-signatures.patch \
-            file://0001-mips-Use-32bit-cast-for-operand-on-mips32.patch \
-            file://run-ptest \
-+           file://CVE-2022-25883.patch;patchdir=deps/npm/node_modules/semver \
-            "
- 
- SRC_URI:append:class-target = " \
--- 
-2.40.0
+Are these still working ok on target it would be good to check that while
+you are here. I know they don=E2=80=99t work before this patch perhaps
 
+
+>  }
+>
+>  LEAD_SONAME =3D "libthrift.so.${PV}"
+> --
+> 2.25.1
+>
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#104638):
+> https://lists.openembedded.org/g/openembedded-devel/message/104638
+> Mute This Topic: https://lists.openembedded.org/mt/101028035/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
+> raj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
+>
+
+--0000000000005af5b10604121ae2
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div><br></div><div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=
+=3D"gmail_attr">On Tue, Aug 29, 2023 at 2:54 AM Yu, Mingli &lt;<a href=3D"m=
+ailto:mingli.yu@eng.windriver.com">mingli.yu@eng.windriver.com</a>&gt; wrot=
+e:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;bo=
+rder-left:1px #ccc solid;padding-left:1ex">From: Mingli Yu &lt;<a href=3D"m=
+ailto:mingli.yu@windriver.com" target=3D"_blank">mingli.yu@windriver.com</a=
+>&gt;<br>
+<br>
+Fixes:<br>
+=C2=A0 WARNING: thrift-0.18.1-r0 do_package_qa: QA Issue: File /usr/lib64/c=
+make/thrift/thriftnbTargets.cmake in package thrift-dev contains reference =
+to TMPDIR<br>
+=C2=A0 File /usr/lib64/cmake/thrift/thrift_c_glibTargets.cmake in package t=
+hrift-dev contains reference to TMPDIR<br>
+=C2=A0 File /usr/lib64/cmake/thrift/thrift_c_glib_zlibTargets.cmake in pack=
+age thrift-dev contains reference to TMPDIR [buildpaths]<br>
+=C2=A0 WARNING: thrift-0.18.1-r0 do_package_qa: QA Issue: File /usr/src/deb=
+ug/thrift/0.18.1-r0/compiler/cpp/thrift/thrifty.hh in package thrift-src co=
+ntains reference to TMPDIR<br>
+=C2=A0 File /usr/src/debug/thrift/0.18.1-r0/compiler/cpp/thrift/thrifty.cc =
+in package thrift-src contains reference to TMPDIR<br>
+=C2=A0 File /usr/src/debug/thrift/0.18.1-r0/compiler/cpp/thrift/thriftl.cc =
+in package thrift-src contains reference to TMPDIR [buildpaths]<br>
+<br>
+Signed-off-by: Mingli Yu &lt;<a href=3D"mailto:mingli.yu@windriver.com" tar=
+get=3D"_blank">mingli.yu@windriver.com</a>&gt;<br>
+---<br>
+=C2=A0meta-oe/recipes-connectivity/thrift/<a href=3D"http://thrift_0.18.1.b=
+b" rel=3D"noreferrer" target=3D"_blank">thrift_0.18.1.bb</a> | 6 ++++++<br>
+=C2=A01 file changed, 6 insertions(+)<br>
+<br>
+diff --git a/meta-oe/recipes-connectivity/thrift/<a href=3D"http://thrift_0=
+.18.1.bb" rel=3D"noreferrer" target=3D"_blank">thrift_0.18.1.bb</a> b/meta-=
+oe/recipes-connectivity/thrift/<a href=3D"http://thrift_0.18.1.bb" rel=3D"n=
+oreferrer" target=3D"_blank">thrift_0.18.1.bb</a><br>
+index ea5a3972d..2809e24ad 100644<br>
+--- a/meta-oe/recipes-connectivity/thrift/<a href=3D"http://thrift_0.18.1.b=
+b" rel=3D"noreferrer" target=3D"_blank">thrift_0.18.1.bb</a><br>
++++ b/meta-oe/recipes-connectivity/thrift/<a href=3D"http://thrift_0.18.1.b=
+b" rel=3D"noreferrer" target=3D"_blank">thrift_0.18.1.bb</a><br>
+@@ -35,6 +35,8 @@ EXTRA_OECMAKE =3D &quot; \<br>
+=C2=A0 =C2=A0 =C2=A0-DWITH_OPENSSL=3DON \<br>
+=C2=A0 =C2=A0 =C2=A0-DWITH_QT5=3DOFF \<br>
+=C2=A0 =C2=A0 =C2=A0-DWITH_ZLIB=3DON \<br>
++=C2=A0 =C2=A0 -DFLEX_TARGET_ARG_COMPILE_FLAGS=3D&#39;--noline&#39; \<br>
++=C2=A0 =C2=A0 -DBISON_TARGET_ARG_COMPILE_FLAGS=3D&#39;--no-lines&#39; \<br=
+>
+=C2=A0&quot;<br>
+<br>
+=C2=A0PACKAGECONFIG ??=3D &quot;glib libevent&quot;<br>
+@@ -46,6 +48,10 @@ PACKAGECONFIG[python] =3D &quot;-DWITH_PYTHON=3DON,-DWIT=
+H_PYTHON=3DOFF,python&quot;<br>
+<br>
+=C2=A0do_install:append () {<br>
+=C2=A0 =C2=A0 =C2=A0ln -sf thrift ${D}/${bindir}/thrift-compiler<br>
++=C2=A0 =C2=A0 # remove absolute paths<br>
++=C2=A0 =C2=A0 sed -i -e &#39;s|${RECIPE_SYSROOT}||g&#39; ${D}${libdir}/cma=
+ke/thrift/thriftnbTargets.cmake<br>
++=C2=A0 =C2=A0 sed -i -e &#39;s|${RECIPE_SYSROOT}||g&#39; ${D}${libdir}/cma=
+ke/thrift/thrift_c_glibTargets.cmake<br>
++=C2=A0 =C2=A0 sed -i -e &#39;s|${RECIPE_SYSROOT}||g&#39; ${D}${libdir}/cma=
+ke/thrift/thrift_c_glib_zlibTargets.cmake</blockquote><div dir=3D"auto"><br=
+></div><div dir=3D"auto">Are these still working ok on target it would be g=
+ood to check that while you are here. I know they don=E2=80=99t work before=
+ this patch perhaps=C2=A0</div><div dir=3D"auto"><br></div><blockquote clas=
+s=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;pad=
+ding-left:1ex" dir=3D"auto"><br>
+=C2=A0}<br>
+<br>
+=C2=A0LEAD_SONAME =3D &quot;libthrift.so.${PV}&quot;<br>
+-- <br>
+2.25.1<br>
+<br>
+<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+Links: You receive all messages sent to this group.<br>
+View/Reply Online (#104638): <a href=3D"https://lists.openembedded.org/g/op=
+enembedded-devel/message/104638" rel=3D"noreferrer" target=3D"_blank">https=
+://lists.openembedded.org/g/openembedded-devel/message/104638</a><br>
+Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/101028035/199=
+7914" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/m=
+t/101028035/1997914</a><br>
+Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
+d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
+><br>
+Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
+/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
+/g/openembedded-devel/unsub</a> [<a href=3D"mailto:raj.khem@gmail.com" targ=
+et=3D"_blank">raj.khem@gmail.com</a>]<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+<br>
+</blockquote></div></div>
+
+--0000000000005af5b10604121ae2--
 
