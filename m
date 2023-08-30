@@ -2,90 +2,81 @@ Return-Path: <daniil.klimuk@3mdeb.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CB985C83F15
-	for <webhook@archiver.kernel.org>; Wed, 30 Aug 2023 06:40:30 +0000 (UTC)
-Received: from 6.mo581.mail-out.ovh.net (6.mo581.mail-out.ovh.net [188.165.39.218])
- by mx.groups.io with SMTP id smtpd.web11.8294.1693377622520299694
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0116AC83F15
+	for <webhook@archiver.kernel.org>; Wed, 30 Aug 2023 06:42:40 +0000 (UTC)
+Received: from 12.mo583.mail-out.ovh.net (12.mo583.mail-out.ovh.net [46.105.39.65])
+ by mx.groups.io with SMTP id smtpd.web10.8414.1693377757056512454
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 29 Aug 2023 23:40:23 -0700
+ Tue, 29 Aug 2023 23:42:37 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=softfail (domain: 3mdeb.com, ip: 188.165.39.218, mailfrom: daniil.klimuk@3mdeb.com)
-Received: from director9.ghost.mail-out.ovh.net (unknown [10.109.156.242])
-	by mo581.mail-out.ovh.net (Postfix) with ESMTP id 94F5620E6D
-	for <openembedded-devel@lists.openembedded.org>; Wed, 30 Aug 2023 06:40:19 +0000 (UTC)
-Received: from ghost-submission-6684bf9d7b-xqcls (unknown [10.110.115.91])
-	by director9.ghost.mail-out.ovh.net (Postfix) with ESMTPS id 175021FD43
-	for <openembedded-devel@lists.openembedded.org>; Wed, 30 Aug 2023 06:40:18 +0000 (UTC)
-Received: from 3mdeb.com ([37.59.142.96])
-	by ghost-submission-6684bf9d7b-xqcls with ESMTPSA
-	id dP7iMFLk7mSSZgEAXMtmuA
+ dkim=none (message not signed); spf=softfail (domain: 3mdeb.com, ip: 46.105.39.65, mailfrom: daniil.klimuk@3mdeb.com)
+Received: from director9.ghost.mail-out.ovh.net (unknown [10.109.156.142])
+	by mo583.mail-out.ovh.net (Postfix) with ESMTP id EEE102568D
+	for <openembedded-devel@lists.openembedded.org>; Wed, 30 Aug 2023 06:42:34 +0000 (UTC)
+Received: from ghost-submission-6684bf9d7b-xfqvs (unknown [10.111.172.194])
+	by director9.ghost.mail-out.ovh.net (Postfix) with ESMTPS id 9C7B01FD87
+	for <openembedded-devel@lists.openembedded.org>; Wed, 30 Aug 2023 06:42:34 +0000 (UTC)
+Received: from 3mdeb.com ([37.59.142.99])
+	by ghost-submission-6684bf9d7b-xfqvs with ESMTPSA
+	id NGEtItrk7mR/GQAAxL0z8w
 	(envelope-from <daniil.klimuk@3mdeb.com>)
-	for <openembedded-devel@lists.openembedded.org>; Wed, 30 Aug 2023 06:40:18 +0000
-Authentication-Results: garm.ovh; auth=pass (GARM-96R001e5880886-325a-4ee5-9b25-01fe1498f7a2,
+	for <openembedded-devel@lists.openembedded.org>; Wed, 30 Aug 2023 06:42:34 +0000
+Authentication-Results: garm.ovh; auth=pass (GARM-99G003528ab0c5-8fa0-4ed8-b8c8-d7a3e117a9eb,
                     EB9BD82DEE60647A3B1CCF129A81A323661F0F7C) smtp.auth=daniil.klimuk@3mdeb.com
 X-OVh-ClientIp: 213.192.77.249
-Message-ID: <09638366-0d5c-0f45-92f4-cfd213b38dbf@3mdeb.com>
-Date: Wed, 30 Aug 2023 08:40:17 +0200
+Message-ID: <4d5b076a-fc29-c4d4-1c51-9ea4f14465d2@3mdeb.com>
+Date: Wed, 30 Aug 2023 08:42:33 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.12.0
 Content-Language: en-US
 To: openembedded-devel@lists.openembedded.org
 From: Daniil Klimuk <daniil.klimuk@3mdeb.com>
-Subject: [meta-python] [PATCH v4] python3-piccata: piccata - a simple CoAP
- toolkit added
+Subject: [meta-python] [PATCH v4] python3-gspread: interface for google
+ spreadsheet
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Ovh-Tracer-Id: 16452493866483422357
+X-Ovh-Tracer-Id: 16490492988459685013
 X-VR-SPAMSTATE: OK
 X-VR-SPAMSCORE: 0
-X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrgedviedrudefjedguddutdcutefuodetggdotefrodftvfcurfhrohhfihhlvgemucfqggfjpdevjffgvefmvefgnecuuegrihhlohhuthemucehtddtnecunecujfgurhepkfffgggfvffhufgtgfesthejredttdefjeenucfhrhhomhepffgrnhhiihhlucfmlhhimhhukhcuoegurghnihhilhdrkhhlihhmuhhkseefmhguvggsrdgtohhmqeenucggtffrrghtthgvrhhnpeeggeehveduvdeuteegheetkeekieeuleeiledvtdeiueelvdelffdugeduveegueenucffohhmrghinhepghhithhhuhgsrdgtohhmnecukfhppeduvdejrddtrddtrddupddvudefrdduledvrdejjedrvdegledpfeejrdehledrudegvddrleeinecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehinhgvthepuddvjedrtddrtddruddpmhgrihhlfhhrohhmpeeouggrnhhiihhlrdhklhhimhhukhesfehmuggvsgdrtghomheqpdhnsggprhgtphhtthhopedupdhrtghpthhtohepohhpvghnvghmsggvugguvgguqdguvghvvghlsehlihhsthhsrdhophgvnhgvmhgsvgguuggvugdrohhrghdpoffvtefjohhsthepmhhoheekuddpmhhouggvpehsmhhtphhouhht
+X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrgedviedrudefjedguddutdcutefuodetggdotefrodftvfcurfhrohhfihhlvgemucfqggfjpdevjffgvefmvefgnecuuegrihhlohhuthemucehtddtnecunecujfgurhepkfffgggfvffhufgtgfesthejredttdefjeenucfhrhhomhepffgrnhhiihhlucfmlhhimhhukhcuoegurghnihhilhdrkhhlihhmuhhkseefmhguvggsrdgtohhmqeenucggtffrrghtthgvrhhnpeffgfevteeuvdeugfelhfeuffeftefgfeefvdefffffiedvfeelfedviedtjeeikeenucffohhmrghinhepghhithhhuhgsrdgtohhmpdhphihthhhonhhhohhsthgvugdrohhrghenucfkphepuddvjedrtddrtddruddpvddufedrudelvddrjeejrddvgeelpdefjedrheelrddugedvrdelleenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepihhnvghtpeduvdejrddtrddtrddupdhmrghilhhfrhhomhepoegurghnihhilhdrkhhlihhmuhhkseefmhguvggsrdgtohhmqedpnhgspghrtghpthhtohepuddprhgtphhtthhopehophgvnhgvmhgsvgguuggvugdquggvvhgvlheslhhishhtshdrohhpvghnvghmsggvugguvggurdhorhhgpdfovfetjfhoshhtpehmohehkeefpdhmohguvgepshhmthhpohhuth
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 30 Aug 2023 06:40:30 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104646
+ <openembedded-devel@lists.openembedded.org>; Wed, 30 Aug 2023 06:42:40 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104647
 
-python3-piccata: piccata - a simple CoAP toolkit added
+python3-gspread: interface for google spreadsheet
 
-piccata is a simple CoAP (RFC7252) toolkit compatible with Python 2.7.
-
-The toolkit provides basic building blocks for using CoAP in an
-application. piccata handles messaging between endpoints
-(retransmission, deduplication) and request/response matching.
-
-Handling and matching resources, blockwise transfers, etc. is left to
-the application but functions to faciliate this are provided.
-
-piccata uses a transport abstraction to faciliate using the toolkit for
-communication over different link types. Transport for a UDP socket is
-provided.
+Simple interface for working with Google Sheets.
 
 Signed-off-by: Daniil Klimuk <daniil.klimuk@3mdeb.com>
 
 diff --git 
-a/meta-python/recipes-devtools/python3-piccata/python3-piccata_2.0.3.bb 
-b/meta-python/recipes-devtools/python3-piccata/python3-piccata_2.0.3.bb
+a/meta-python/recipes-devtools/python3-gspread/python3-gspread_5.10.0.bb 
+b/meta-python/recipes-devtools/python3-gspread/python3-gspread_5.10.0.bb
 new file mode 100644
-index 000000000000..703df8cd3f57
+index 000000000000..0c8fb648e701
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python3-piccata/python3-piccata_2.0.3.bb
-@@ -0,0 +1,14 @@
-+SUMMARY = "Python CoAP Toolkit"
-+HOMEPAGE = "https://github.com/NordicSemiconductor/piccata"
++++ b/meta-python/recipes-devtools/python3-gspread/python3-gspread_5.10.0.bb
+@@ -0,0 +1,15 @@
++SUMMARY = "Google Spreadsheets Python API"
++HOMEPAGE = "https://github.com/burnash/gspread"
 +LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=e664eb75e2791c2e505e6e1c274e6d4f"
++LIC_FILES_CHKSUM = 
+"file://LICENSE.txt;md5=9488e21983675fa56dc05af558b83e2f"
 +
-+SRCREV = "218d310e3d840715b1c8e67cefd5b6d71a2d7a1a"
-+PV = "5.10.0"
 +SRC_URI = 
-"git://github.com/NordicSemiconductor/piccata.git;protocol=http;branch=master"
+"https://files.pythonhosted.org/packages/b4/4f/033ebf34778745061b67b104ef212ed5b05fa65a530f345f88c4355fdcc3/gspread-5.10.0.tar.gz"
++SRC_URI[sha256sum] = 
+"2b6bba6dc111580170346a9bcd1893e0e8c52f67a9e537caec7b7a1e27c14435"
 +
-+S = "${WORKDIR}/git"
++PV = "5.10.0"
 +
-+inherit setuptools3
++S = "${WORKDIR}/gspread-${PV}"
 +
-+RDEPENDS:${PN} += "python3-core python3-datetime python3-io 
-python3-logging python3-math"
++RDEPENDS:${PN} = "python3-requests"
++
++inherit python_poetry_core
 
 
