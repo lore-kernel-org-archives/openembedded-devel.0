@@ -1,99 +1,66 @@
-Return-Path: <Martin.Jansa@gmail.com>
+Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 70D54C83F01
-	for <webhook@archiver.kernel.org>; Wed, 30 Aug 2023 15:15:13 +0000 (UTC)
-Received: from mail-lf1-f49.google.com (mail-lf1-f49.google.com [209.85.167.49])
- by mx.groups.io with SMTP id smtpd.web10.16837.1693408506078226833
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A274BC83F01
+	for <webhook@archiver.kernel.org>; Wed, 30 Aug 2023 16:23:43 +0000 (UTC)
+Received: from mailout02.t-online.de (mailout02.t-online.de [194.25.134.17])
+ by mx.groups.io with SMTP id smtpd.web10.1628.1693412618033968926
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 30 Aug 2023 08:15:06 -0700
+ Wed, 30 Aug 2023 09:23:38 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20221208 header.b=dYCPQcFX;
- spf=pass (domain: gmail.com, ip: 209.85.167.49, mailfrom: martin.jansa@gmail.com)
-Received: by mail-lf1-f49.google.com with SMTP id 2adb3069b0e04-50098cc8967so8912441e87.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 30 Aug 2023 08:15:05 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1693408504; x=1694013304; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=x0FZ6KOpxlqUmOtOviNAARN7R68FWFrkRu534ujOX30=;
-        b=dYCPQcFXWr/HtPCnio+h2IM5vdDqxC1TzkHJgevJd4V2l+zKGEX0ZxAa2xXtjSac+x
-         X67ChCNnfrPMIGNjB2eAGVazg+sSkFfhg0JbNQJbJbxaakEdwC0To6eJEW84hrvWbXAO
-         ABkb5zDVEQSQ0x0leuSpDls01BT8vVmVTUlTNR9JePvvMRkLnaW+ZcANT5oHxbgqD+Sj
-         arwloJTVC+4ljQtrS042YHxy7mx2WTRJeijCxJwna2R/QEm4/B/wNxRxid/bIo12QFQY
-         nSA7DmW9pvwApzvMf49L9QNenqMbM/08aawIxYxmdYAMpFf7I1fYA75o72Yr/UIb7KJE
-         QVVg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1693408504; x=1694013304;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=x0FZ6KOpxlqUmOtOviNAARN7R68FWFrkRu534ujOX30=;
-        b=mIMW/XBqEHi4sXw9yqk+SRN2ui0nOuztduLWA3AcQhpkn5BoZut91+HnFiPZWL1H1l
-         gv+SlOUmiLdI9dHXBJ3MSxOq2zkR2q1P5uZA9pJmJaBdAjtXYbwjTFnVYEYks8RlNDRF
-         T+oSabCXNc3fpNwVaBhm+BvRR/eXWdkyF3tTIDsyT1Pb+X5/a15C8X0ldMZulxX5oTmJ
-         K0hiwAzI7Y64g8YtChRFsbRGC2+HWjIIprGStCbYCIHUNN5C0CYJl/hAWkSXCU6vjdRt
-         oc7g91ObI+v09E94+Az3dnWadwlbHVKcrnoH1TZWchhx5/zooMGNGJQTNdXvfwkUwVUV
-         bo7w==
-X-Gm-Message-State: AOJu0YyrKKl9RbpUr8v/+V/z+ORQNc+FTvwfsC42/NrD+tqBqp2cH+q4
-	YwzJU5X2JaVaQbgptICGdsO4pzdstIU=
-X-Google-Smtp-Source: AGHT+IE8XMQ02l4kWfIZk0PtJLzGia1URZUm6aX+POKVeM47KXYkKj91IKAtqRozSUO+CAdSmjUYIg==
-X-Received: by 2002:a05:6512:31c7:b0:500:98ff:4162 with SMTP id j7-20020a05651231c700b0050098ff4162mr2118045lfe.40.1693408503987;
-        Wed, 30 Aug 2023 08:15:03 -0700 (PDT)
-Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
-        by smtp.gmail.com with ESMTPSA id l7-20020a170906938700b009a2235ed496sm7413971ejx.141.2023.08.30.08.15.03
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 30 Aug 2023 08:15:03 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+ dkim=none (message not signed); spf=none, err=SPF record not found (domain: t-online.de, ip: 194.25.134.17, mailfrom: f_l_k@t-online.de)
+Received: from fwd88.aul.t-online.de (fwd88.aul.t-online.de [10.223.144.114])
+	by mailout02.t-online.de (Postfix) with SMTP id 581FB4FB5
+	for <openembedded-devel@lists.openembedded.org>; Wed, 30 Aug 2023 18:23:36 +0200 (CEST)
+Received: from intel-corei7-64.fritz.box ([84.163.36.217]) by fwd88.t-online.de
+	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
+	esmtp id 1qbNyh-0sOeqf0; Wed, 30 Aug 2023 18:23:35 +0200
+From: Markus Volk <f_l_k@t-online.de>
 To: openembedded-devel@lists.openembedded.org
-Cc: Tymoteusz Burak <tymoteusz.burak@3mdeb.com>,
-	Martin Jansa <Martin.Jansa@gmail.com>
-Subject: [RFC][PATCH] libfaketime: simplify packaging
-Date: Wed, 30 Aug 2023 17:14:46 +0200
-Message-ID: <20230830151446.3375230-1-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.42.0
+Subject: [meta-oe][PATCH] libosinfo: build vapi only if gobject-introspection is enabled
+Date: Wed, 30 Aug 2023 18:23:30 +0200
+Message-ID: <20230830162330.2967-1-f_l_k@t-online.de>
+X-Mailer: git-send-email 2.41.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-TOI-EXPURGATEID: 150726::1693412616-EBFF2029-654B9329/0/0 CLEAN NORMAL
+X-TOI-MSGID: 85740e84-5558-4649-bd11-601ca7e9dcd1
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 30 Aug 2023 15:15:13 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104670
+ <openembedded-devel@lists.openembedded.org>; Wed, 30 Aug 2023 16:23:43 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104671
 
-* avoid dev-so QA issue
+this fixes:
+meson.build:40:8: ERROR: Problem encountered: vala support was requested,=
+ but introspection support is mandatory.
 
-* avoid separate package for the library, because the current "lib${PN}"
-  has a bit ridiculous name in mulilib builds:
-  lib32-liblib32-libfaketime
-
-* fixes:
-  ERROR: lib32-libfaketime-0.9.10-r0 do_package_qa: QA Issue: non -dev/-dbg/nativesdk- package lib32-liblib32-libfaketime contains symlink .so '/usr/lib32/faketime/libfaketime.so' [dev-so]
-
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+Signed-off-by: Markus Volk <f_l_k@t-online.de>
 ---
- meta-oe/recipes-test/libfaketime/libfaketime_0.9.10.bb | 9 ++-------
- 1 file changed, 2 insertions(+), 7 deletions(-)
+ meta-oe/recipes-support/libosinfo/libosinfo_1.10.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-oe/recipes-test/libfaketime/libfaketime_0.9.10.bb b/meta-oe/recipes-test/libfaketime/libfaketime_0.9.10.bb
-index 6a0a8f32af..f13925ee18 100644
---- a/meta-oe/recipes-test/libfaketime/libfaketime_0.9.10.bb
-+++ b/meta-oe/recipes-test/libfaketime/libfaketime_0.9.10.bb
-@@ -24,10 +24,5 @@ do_install () {
-     install -m 0755 src/faketime ${D}${bindir}
- }
- 
--PACKAGES =+ "lib${PN}"
--
--FILES:${PN} = "${bindir}/faketime"
--FILES:lib${PN} = "${libdir}/faketime/*"
--
--INSANE_SKIP:${PN} += "dev-so"
--INSANE_SKIP:lib${PN} += "dev-so"
-+FILES:${PN} = "${bindir}/faketime ${libdir}/faketime/lib*${SOLIBS}"
-+FILES:${PN}-dev += "${libdir}/faketime/lib*${SOLIBSDEV}"
--- 
-2.42.0
+diff --git a/meta-oe/recipes-support/libosinfo/libosinfo_1.10.bb b/meta-o=
+e/recipes-support/libosinfo/libosinfo_1.10.bb
+index b02bc1281..d724c52ea 100644
+--- a/meta-oe/recipes-support/libosinfo/libosinfo_1.10.bb
++++ b/meta-oe/recipes-support/libosinfo/libosinfo_1.10.bb
+@@ -23,10 +23,10 @@ GIR_MESON_ENABLE_FLAG =3D 'enabled'
+ GIR_MESON_DISABLE_FLAG =3D 'disabled'
+ GTKDOC_MESON_OPTION =3D "enable-gtk-doc"
+=20
+-EXTRA_OEMESON =3D " \
++EXTRA_OEMESON +=3D " \
+ 	-Dwith-pci-ids-path=3D${datadir}/pci.ids \
+ 	-Dwith-usb-ids-path=3D${datadir}/usb.ids \
+-	-Denable-vala=3Denabled \
++	${@bb.utils.contains('GI_DATA_ENABLED', 'True', '-Denable-vala=3Denable=
+d', '-Denable-vala=3Ddisabled', d)} \
+ "
+=20
+ RDEPENDS:${PN} =3D "pciutils-ids usbids"
+--=20
+2.41.0
 
 
