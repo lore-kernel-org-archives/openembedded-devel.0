@@ -1,92 +1,110 @@
-Return-Path: <soumya.sambu@windriver.com>
+Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7001BC6FA8F
-	for <webhook@archiver.kernel.org>; Wed, 30 Aug 2023 04:55:10 +0000 (UTC)
-Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.web10.7256.1693371307490375267
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A90D1C6FA8F
+	for <webhook@archiver.kernel.org>; Wed, 30 Aug 2023 05:39:30 +0000 (UTC)
+Received: from mailout01.t-online.de (mailout01.t-online.de [194.25.134.80])
+ by mx.groups.io with SMTP id smtpd.web10.7839.1693373969162322076
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 29 Aug 2023 21:55:07 -0700
+ Tue, 29 Aug 2023 22:39:29 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=U5GGmDuG;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=76067cbaae=soumya.sambu@windriver.com)
-Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.17.1.22/8.17.1.22) with ESMTP id 37U4gK34007247
-	for <openembedded-devel@lists.openembedded.org>; Tue, 29 Aug 2023 21:55:07 -0700
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
-	 h=from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding:content-type; s=PPS06212021; bh=EAG7m
-	/1tPukEMuyHKkbIJ49uVhDx/lqyAhUjNoACNr8=; b=U5GGmDuG3CSZ46gTnNtY9
-	pcnUNkjGNPHcvzps6yjYQhDce0j1WoDUf1IJlciNOpjJxHMG7e4+5gLqCwu31YWn
-	lDVuIRbQrPGGMMFyw8Rm3xrE1k1D3uXey4do/cvYJurEGPYFtHH7lhsq9aGCfeU7
-	df8VbhX+pJzLEn3Yhu1lAsvaWAiWcqQ0rx2X44M6biLfhdzBj7yW1f0I3urjXVEJ
-	dzyF7OHlYWHcAPlT86pgxfcRtJ99f8vc8G5hpScr+IGjCkPhsN6l9EljcTzIhYlv
-	+qlfHjT/brWyAbJlY9QAnPYpI/AiK58mctSYsQIm/LjOJsRqi+LT5k1xzqgHkINp
-	w==
-Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3sqgwfk2rj-2
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Tue, 29 Aug 2023 21:55:06 -0700 (PDT)
-Received: from blr-linux-engg1.wrs.com (147.11.136.210) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.27; Tue, 29 Aug 2023 21:54:47 -0700
-From: ssambu <soumya.sambu@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe][meta-oe][mickledore][PATCH 1/1] iperf3: upgrade 3.13 -> 3.14
-Date: Wed, 30 Aug 2023 04:54:12 +0000
-Message-ID: <20230830045412.696045-1-soumya.sambu@windriver.com>
-X-Mailer: git-send-email 2.40.0
+ dkim=none (message not signed); spf=none, err=SPF record not found (domain: t-online.de, ip: 194.25.134.80, mailfrom: f_l_k@t-online.de)
+Received: from fwd77.aul.t-online.de (fwd77.aul.t-online.de [10.223.144.103])
+	by mailout01.t-online.de (Postfix) with SMTP id 6426D1AB8C
+	for <openembedded-devel@lists.openembedded.org>; Wed, 30 Aug 2023 07:39:27 +0200 (CEST)
+Received: from intel-corei7-64.fritz.box ([84.163.36.217]) by fwd77.t-online.de
+	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
+	esmtp id 1qbDvK-0aMZzV0; Wed, 30 Aug 2023 07:39:26 +0200
+From: Markus Volk <f_l_k@t-online.de>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-multimedia][PATCH] pipewire: upgrade 0.3.78 -> 0.3.79
+Date: Wed, 30 Aug 2023 07:38:48 +0200
+Message-ID: <20230830053848.41484-1-f_l_k@t-online.de>
+X-Mailer: git-send-email 2.41.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [147.11.136.210]
-X-ClientProxiedBy: ala-exchng01.corp.ad.wrs.com (147.11.82.252) To
- ala-exchng01.corp.ad.wrs.com (147.11.82.252)
-X-Proofpoint-GUID: xiJ1YtY4LhPjNBIo-sFwjkQwg_RamQ_B
-X-Proofpoint-ORIG-GUID: xiJ1YtY4LhPjNBIo-sFwjkQwg_RamQ_B
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.254,Aquarius:18.0.957,Hydra:6.0.601,FMLib:17.11.176.26
- definitions=2023-08-29_16,2023-08-29_01,2023-05-22_02
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 clxscore=1015 mlxlogscore=769
- lowpriorityscore=0 phishscore=0 malwarescore=0 bulkscore=0 adultscore=0
- suspectscore=0 priorityscore=1501 spamscore=0 impostorscore=0 mlxscore=0
- classifier=spam adjust=0 reason=mlx scancount=1 engine=8.19.0-2308100000
- definitions=main-2308300045
+X-TOI-EXPURGATEID: 150726::1693373966-1381E931-FFF03FE6/0/0 CLEAN NORMAL
+X-TOI-MSGID: 344f219a-bd3c-41da-813e-429dd6eb4ed2
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 30 Aug 2023 04:55:10 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104643
+ <openembedded-devel@lists.openembedded.org>; Wed, 30 Aug 2023 05:39:30 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104644
 
-From: Wang Mingyu <wangmy@fujitsu.com>
+This is a quick bugfix release that is API and ABI compatible with previo=
+us
+0.3.x releases.
 
-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-Signed-off-by: Soumya Sambu <soumya.sambu@windriver.com>
+  - Fix a regression in suspend that could cause silence.
+  - Fix a regression in JACK port registration that could cause all kinds=
+ of
+    JACK problems. (#3485)
+  - Fix a typo in the neon sample conversion functions that could cause
+    distortion.
+  - Add BAP broadcast source and sink support.
+  - pw-top now has a batch mode to dump the output to stdout.
+  - Many more bugfixes and improvements.
+
+  - Fix a regression in shutdown where a node might not first suspend
+    properly. This cause loss of sound in some cases. (#3378)
+  - Failure to compile a regular expression in the config file will now
+    be reported and ! can be used to negate the match. (#3460)
+  - Fix a regression where some nodes might not set running in some
+    cases.
+  - Nodes are now suspended before the format is cleared, which might
+    fix some crashes.
+
+  - pw-top now has a batch mode to dump the output to stdout.
+
+  - The queued samples in audioconvert are now correctly reported in the
+    delay. (#3454)
+  - Make it easier to add a custom profile in ACP.
+  - Fix a typo in the neon sample conversion functions that could cause
+    distortion. (#3463)
+  - device.profile.pro=3Dtrue is added for pro audio nodes.
+  - An xrun counter was added to spa_io_clock to detect and track skipped
+    data because of xruns.
+
+  - Add alsa-sink and alsa-source modules. (#3456)
+
+  - Fix a regression where only the BAP off profile is shown.
+  - Add BAP broadcast source and sink support.
+
+  - Also emit a latency notify when the buffer size changes.
+  - Fix a regression in JACK port registration. (#3485)
+  - jack_port_tie() is now supported.
+
+  - Improve property handling, support lists and ranges in addition to
+    fixed values. (#3451)
+
+Signed-off-by: Markus Volk <f_l_k@t-online.de>
 ---
- .../recipes-benchmark/iperf3/{iperf3_3.13.bb => iperf3_3.14.bb} | 2 +-
+ .../pipewire/{pipewire_0.3.78.bb =3D> pipewire_0.3.79.bb}         | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-benchmark/iperf3/{iperf3_3.13.bb => iperf3_3.14.bb} (95%)
+ rename meta-multimedia/recipes-multimedia/pipewire/{pipewire_0.3.78.bb =3D=
+> pipewire_0.3.79.bb} (99%)
 
-diff --git a/meta-oe/recipes-benchmark/iperf3/iperf3_3.13.bb b/meta-oe/recipes-benchmark/iperf3/iperf3_3.14.bb
-similarity index 95%
-rename from meta-oe/recipes-benchmark/iperf3/iperf3_3.13.bb
-rename to meta-oe/recipes-benchmark/iperf3/iperf3_3.14.bb
-index 62a95b303..d181eb3b0 100644
---- a/meta-oe/recipes-benchmark/iperf3/iperf3_3.13.bb
-+++ b/meta-oe/recipes-benchmark/iperf3/iperf3_3.14.bb
-@@ -18,7 +18,7 @@ SRC_URI = "git://github.com/esnet/iperf.git;branch=master;protocol=https \
-            file://0001-configure.ac-check-for-CPP-prog.patch \
-            "
- 
--SRCREV = "f48e7fa92b8932814f3d92f36986d51be9efe6e0"
-+SRCREV = "a0be85934144bc04712a6695b14ea6e45c379e1d"
- 
- S = "${WORKDIR}/git"
- 
--- 
-2.40.0
+diff --git a/meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.78.=
+bb b/meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.79.bb
+similarity index 99%
+rename from meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.78.b=
+b
+rename to meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.79.bb
+index cf2773ff4..1304c0ac8 100644
+--- a/meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.78.bb
++++ b/meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.79.bb
+@@ -13,7 +13,7 @@ LIC_FILES_CHKSUM =3D " \
+=20
+ DEPENDS =3D "dbus ncurses"
+=20
+-SRCREV =3D "188f784430283afb08abb8e6540ddbc674e09399"
++SRCREV =3D "b5c3f217926f9066a1afbee7eb20967dd6896c56"
+ SRC_URI =3D "git://gitlab.freedesktop.org/pipewire/pipewire.git;branch=3D=
+master;protocol=3Dhttps"
+=20
+ S =3D "${WORKDIR}/git"
+--=20
+2.41.0
 
 
