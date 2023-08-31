@@ -1,216 +1,159 @@
-Return-Path: <bbara93@gmail.com>
+Return-Path: <tymoteusz.burak@3mdeb.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EE20BC83F29
-	for <webhook@archiver.kernel.org>; Thu, 31 Aug 2023 08:54:24 +0000 (UTC)
-Received: from mail-wr1-f47.google.com (mail-wr1-f47.google.com [209.85.221.47])
- by mx.groups.io with SMTP id smtpd.web10.12362.1693472063516090791
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2332CC83F01
+	for <webhook@archiver.kernel.org>; Thu, 31 Aug 2023 09:35:55 +0000 (UTC)
+Received: from 9.mo561.mail-out.ovh.net (9.mo561.mail-out.ovh.net [87.98.184.141])
+ by mx.groups.io with SMTP id smtpd.web11.12738.1693474545261389578
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 31 Aug 2023 01:54:23 -0700
+ Thu, 31 Aug 2023 02:35:46 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20221208 header.b=Fvq0U9wj;
- spf=pass (domain: gmail.com, ip: 209.85.221.47, mailfrom: bbara93@gmail.com)
-Received: by mail-wr1-f47.google.com with SMTP id ffacd0b85a97d-31c3726cc45so421700f8f.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 31 Aug 2023 01:54:23 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1693472062; x=1694076862; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=ClaGbxPKYsfpBkvFlG/slbyIJW7jzq/D4c9cEgo/9JE=;
-        b=Fvq0U9wjPtJ3ZBvVg88E5gw885Q1Qvn6pZNuLRiO0mhO6hWkTyWZ7WdQgITZwXC+ZO
-         eba7H4MzGAUSIgtiqj1161h/5/FVx5+ugKn7WLMdZJlGZvwMpSvXC+PfTmzlHBk15/9G
-         H7aa0HqtzsHkfg3swB0DqbfNMzaFjmo1O+yMm/S374xpqonIoMmqESE9udmFcSPMxeWR
-         jsux3ybVK8/tU0aFx4DoPi1bdwiwhIpTZXygyxg+1kBa0+oM5AJhO69a7SDY9EkKmnQE
-         21jDdZ97Ivg+xGeDmXHxU/MdXKvXlwO86h10bYBIIWJlM2f7JsTKpnEZ6Lqv9xS9DfK4
-         OGLg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1693472062; x=1694076862;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=ClaGbxPKYsfpBkvFlG/slbyIJW7jzq/D4c9cEgo/9JE=;
-        b=beATLQiKLitmtTC2ApgXzAiGbsWOnheCZy0cgE2SqqFvBJ3TXzc9ggXCUj1aeFIpUM
-         liIossVyEmzEYFCsp/S+1P4MU5TrTB8pTQrbYgk5CE/XFp4J14xyj72AH9EweiHdd9sQ
-         cMtU+B4r4aOLPML9EAsxkHN8FinID6xxn5DxQOvgERzXazeEaqdYkdgb54KOUs3kEdt4
-         51Ze246zR5OoEHLfxhz8R1hvu7A/06s1On9nkBAKsM9sPjWjpUSs7ID+WdaOnI6ZzIJF
-         TatMKxjZf/9eUIOP/vKPsOcsOC70oX8IddiE9La7oAYuSwjDoz+nq2ulp8lnUS3jdYyv
-         dS0Q==
-X-Gm-Message-State: AOJu0Yzbd4pG/PmVjS6heF9uAjqQ5bFNi02YVS0R2HuvGsiLABCVsGUI
-	bkLPWvUzRw3a/Y+CT81ftr8=
-X-Google-Smtp-Source: AGHT+IH/4R5yRuK7+qWJRtoYFeWkojTYqTEgscL4YvqXjksj0zdBwXH5u6Ffx02Djd0X0XNi+uXpmg==
-X-Received: by 2002:adf:de0e:0:b0:31a:dbe0:ca7d with SMTP id b14-20020adfde0e000000b0031adbe0ca7dmr3596133wrm.8.1693472061555;
-        Thu, 31 Aug 2023 01:54:21 -0700 (PDT)
-Received: from PCBABN.skidata.net ([91.230.2.244])
-        by smtp.gmail.com with ESMTPSA id e13-20020a5d4e8d000000b0031c6cc74882sm1445524wru.107.2023.08.31.01.54.21
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 31 Aug 2023 01:54:21 -0700 (PDT)
-From: Benjamin Bara <bbara93@gmail.com>
-To: schnitzeltony@gmail.com
-Cc: openembedded-devel@lists.openembedded.org,
-	Benjamin Bara <benjamin.bara@skidata.com>
-Subject: [meta-multimedia][PATCH] openh264: make neon optional and disable if not supported
-Date: Thu, 31 Aug 2023 10:54:11 +0200
-Message-Id: <20230831085411.3715616-1-bbara93@gmail.com>
-X-Mailer: git-send-email 2.34.1
+ dkim=none (message not signed); spf=softfail (domain: 3mdeb.com, ip: 87.98.184.141, mailfrom: tymoteusz.burak@3mdeb.com)
+Received: from director11.ghost.mail-out.ovh.net (unknown [10.109.156.29])
+	by mo561.mail-out.ovh.net (Postfix) with ESMTP id C309B26E86
+	for <openembedded-devel@lists.openembedded.org>; Thu, 31 Aug 2023 09:35:42 +0000 (UTC)
+Received: from ghost-submission-6684bf9d7b-nrn6c (unknown [10.110.171.76])
+	by director11.ghost.mail-out.ovh.net (Postfix) with ESMTPS id 500F21FE65
+	for <openembedded-devel@lists.openembedded.org>; Thu, 31 Aug 2023 09:35:42 +0000 (UTC)
+Received: from 3mdeb.com ([37.59.142.108])
+	by ghost-submission-6684bf9d7b-nrn6c with ESMTPSA
+	id BuBzCO5e8GS6mAAA3vBQDw
+	(envelope-from <tymoteusz.burak@3mdeb.com>)
+	for <openembedded-devel@lists.openembedded.org>; Thu, 31 Aug 2023 09:35:42 +0000
+Authentication-Results: garm.ovh; auth=pass (GARM-108S002840bbd1c-12d8-4a10-9eec-578ed266da5a,
+                    24F096618063BA54365C50CE834CFFBB79FCB67F) smtp.auth=tymoteusz.burak@3mdeb.com
+X-OVh-ClientIp: 213.192.77.249
+Message-ID: <ead6306d-653c-d105-5b74-4e802d22fadd@3mdeb.com>
+Date: Thu, 31 Aug 2023 11:35:41 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.13.0
+Subject: Re: [oe] [meta-oe][PATCH v3] libfaketime: add recipe
+Content-Language: en-US
+To: openembedded-devel@lists.openembedded.org
+References: <20230823085310.339821-1-tymoteusz.burak@3mdeb.com>
+ <CAMKF1spPM9dRnHdyxuXbDXQn_x=uQ6b0WUGKzTaRTpfDnCP0vQ@mail.gmail.com>
+From: Tymoteusz Burak <tymoteusz.burak@3mdeb.com>
+In-Reply-To: <CAMKF1spPM9dRnHdyxuXbDXQn_x=uQ6b0WUGKzTaRTpfDnCP0vQ@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+X-Ovh-Tracer-Id: 6840404884524421269
+X-VR-SPAMSTATE: OK
+X-VR-SPAMSCORE: 0
+X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrgedviedrudegtddgudekucetufdoteggodetrfdotffvucfrrhhofhhilhgvmecuqfggjfdpvefjgfevmfevgfenuceurghilhhouhhtmecuhedttdenucenucfjughrpefkffggfgfuvfhfhfgjtgfgsehtkeertddtfeejnecuhfhrohhmpefvhihmohhtvghushiiuceuuhhrrghkuceothihmhhothgvuhhsiidrsghurhgrkhesfehmuggvsgdrtghomheqnecuggftrfgrthhtvghrnhephfefieefkeetleefuefhhedutdeludffueduvdehhfetheegvdfgtdfhudekfedtnecuffhomhgrihhnpeihohgtthhophhrohhjvggtthdrohhrghdpohhpvghnvghmsggvugguvggurdhorhhgnecukfhppeduvdejrddtrddtrddupddvudefrdduledvrdejjedrvdegledpfeejrdehledrudegvddruddtkeenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepihhnvghtpeduvdejrddtrddtrddupdhmrghilhhfrhhomhepoehthihmohhtvghushiirdgsuhhrrghkseefmhguvggsrdgtohhmqedpnhgspghrtghpthhtohepuddprhgtphhtthhopehophgvnhgvmhgsvgguuggvugdquggvvhgvlheslhhishhtshdrohhpvghnvghmsggvugguvggurdhorhhgpdfovfetjfhoshhtpehmohehiedupdhmohguvgepshhmthhpohhuth
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 31 Aug 2023 08:54:24 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104681
+ <openembedded-devel@lists.openembedded.org>; Thu, 31 Aug 2023 09:35:55 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104682
 
-From: Benjamin Bara <benjamin.bara@skidata.com>
+Hello everyone,
 
-openh264 currently enforces neon on armv7, although it has fallbacks
-implemented in C/C++ and it is mentioned in the README that it is
-optional[1].
+I hope you're doing well. Your feedback is much appreciated, and I'd=20
+like to provide some context on a few matters.
 
-Therefore, make neon optional and disable it if the machine does not
-support it.
+I understand that there's a reported Clang build failure with the patch.=20
+I'd like to clarify that I don't currently have Clang configured on my=20
+workstation, and I'm not entirely familiar with the steps required to=20
+address this issue. If someone could provide guidance on how to=20
+investigate and resolve this specific problem, I'd be grateful. The=20
+libfaketime recipe I submitted is from a few projects ago, and it worked=20
+successfully when I tested it in a fresh project environment. I aimed to=20
+contribute this recipe to the OpenEmbedded layer to benefit the=20
+community. I apologize for any inconvenience the build failure might be=20
+causing and appreciate your assistance in ensuring the patch's=20
+compatibility.
 
-[1] https://github.com/cisco/openh264/blob/v2.3.1/README.md?plain=1#L54
+ll happily review the RFC patch and adress other issues as i have to=20
+agree that the package name lib32-liblib32-libfaketime is quite ridiculou=
+s
 
-Signed-off-by: Benjamin Bara <benjamin.bara@skidata.com>
----
- ...ossibility-to-disable-NEON-extension.patch | 103 ++++++++++++++++++
- .../openh264/openh264_2.3.1.bb                |   4 +
- 2 files changed, 107 insertions(+)
- create mode 100644 meta-multimedia/recipes-multimedia/openh264/openh264/0002-Makefile-add-possibility-to-disable-NEON-extension.patch
+Once again, thank you for your time and feedback. I look forward to your=20
+guidance and advice on how to proceed with resolving the issues raised.
 
-diff --git a/meta-multimedia/recipes-multimedia/openh264/openh264/0002-Makefile-add-possibility-to-disable-NEON-extension.patch b/meta-multimedia/recipes-multimedia/openh264/openh264/0002-Makefile-add-possibility-to-disable-NEON-extension.patch
-new file mode 100644
-index 000000000..298ac1c01
---- /dev/null
-+++ b/meta-multimedia/recipes-multimedia/openh264/openh264/0002-Makefile-add-possibility-to-disable-NEON-extension.patch
-@@ -0,0 +1,103 @@
-+From bc3a3baeaccfe9c1286848b348baf92dfbd05346 Mon Sep 17 00:00:00 2001
-+From: Benjamin Bara <benjamin.bara@skidata.com>
-+Date: Thu, 31 Aug 2023 09:27:31 +0200
-+Subject: [PATCH 2/2] Makefile: add possibility to disable NEON extension
-+
-+README states that the NEON extension is optional. However, currently it
-+cannot be turned off, therefore add an option to disable it.
-+
-+Upstream-Status: Submitted [https://github.com/cisco/openh264/pull/3679]
-+Signed-off-by: Benjamin Bara <benjamin.bara@skidata.com>
-+---
-+ Makefile                   |  1 +
-+ build/arch.mk              |  4 ++++
-+ build/msvc-common.mk       | 10 ++++++++--
-+ build/platform-mingw_nt.mk |  5 ++++-
-+ 4 files changed, 17 insertions(+), 3 deletions(-)
-+
-+diff --git a/Makefile b/Makefile
-+index baed53a7..cc22c4aa 100644
-+--- a/Makefile
-++++ b/Makefile
-+@@ -35,6 +35,7 @@ CCASFLAGS=$(CFLAGS)
-+ STATIC_LDFLAGS=-lstdc++
-+ STRIP ?= strip
-+ USE_STACK_PROTECTOR = Yes
-++USE_NEON=Yes
-+ 
-+ SHAREDLIB_MAJORVERSION=7
-+ FULL_VERSION := 2.3.1
-+diff --git a/build/arch.mk b/build/arch.mk
-+index 4e1538c4..fd6a81e4 100644
-+--- a/build/arch.mk
-++++ b/build/arch.mk
-+@@ -17,18 +17,22 @@ ifneq ($(filter-out arm64 arm64e, $(filter arm%, $(ARCH))),)
-+ ifeq ($(USE_ASM), Yes)
-+ ASM_ARCH = arm
-+ ASMFLAGS += -I$(SRC_PATH)codec/common/arm/
-++ifeq ($(USE_NEON), Yes)
-+ CFLAGS += -DHAVE_NEON
-+ endif
-+ endif
-++endif
-+ 
-+ #for arm64
-+ ifneq ($(filter arm64 aarch64 arm64e, $(ARCH)),)
-+ ifeq ($(USE_ASM), Yes)
-+ ASM_ARCH = arm64
-+ ASMFLAGS += -I$(SRC_PATH)codec/common/arm64/
-++ifeq ($(USE_NEON), Yes)
-+ CFLAGS += -DHAVE_NEON_AARCH64
-+ endif
-+ endif
-++endif
-+ 
-+ #for mips
-+ ifneq ($(filter mips mips64, $(ARCH)),)
-+diff --git a/build/msvc-common.mk b/build/msvc-common.mk
-+index 5891ea4e..5a1e2582 100644
-+--- a/build/msvc-common.mk
-++++ b/build/msvc-common.mk
-+@@ -10,7 +10,10 @@ else
-+ endif
-+ ifeq ($(ASM_ARCH), arm)
-+ CCAS = gas-preprocessor.pl -as-type armasm -force-thumb -- armasm
-+-CCASFLAGS = -nologo -DHAVE_NEON -ignore 4509
-++CCASFLAGS = -nologo -ignore 4509
-++ifeq ($(USE_NEON), Yes)
-++CCASFLAGS += -DHAVE_NEON
-++endif
-+ endif
-+ 
-+ CC=cl
-+@@ -20,7 +23,10 @@ CXX_O=-Fo$@
-+ 
-+ ifeq ($(ASM_ARCH), arm64)
-+ CCAS = clang-cl
-+-CCASFLAGS = -nologo -DHAVE_NEON_AARCH64 --target=arm64-windows
-++CCASFLAGS = -nologo --target=arm64-windows
-++ifeq ($(USE_NEON), Yes)
-++CCASFLAGS += -DHAVE_NEON_AARCH64
-++endif
-+ endif
-+ 
-+ 
-+diff --git a/build/platform-mingw_nt.mk b/build/platform-mingw_nt.mk
-+index b7a5495d..d73e362a 100644
-+--- a/build/platform-mingw_nt.mk
-++++ b/build/platform-mingw_nt.mk
-+@@ -17,7 +17,10 @@ endif
-+ endif
-+ ifeq ($(ASM_ARCH), arm)
-+ CCAS = gas-preprocessor.pl -as-type clang -force-thumb -- $(CC)
-+-CCASFLAGS = -DHAVE_NEON -mimplicit-it=always
-++CCASFLAGS = -mimplicit-it=always
-++ifeq ($(USE_NEON), Yes)
-++CCASFLAGS += -DHAVE_NEON
-++endif
-+ endif
-+ EXEEXT = .exe
-+ 
-+-- 
-+2.34.1
-+
-diff --git a/meta-multimedia/recipes-multimedia/openh264/openh264_2.3.1.bb b/meta-multimedia/recipes-multimedia/openh264/openh264_2.3.1.bb
-index 89b1ea58c..6dfd75935 100644
---- a/meta-multimedia/recipes-multimedia/openh264/openh264_2.3.1.bb
-+++ b/meta-multimedia/recipes-multimedia/openh264/openh264_2.3.1.bb
-@@ -16,6 +16,7 @@ SRCREV = "0a48f4d2e9be2abb4fb01b4c3be83cf44ce91a6e"
- BRANCH = "openh264v${PV}"
- SRC_URI = "git://github.com/cisco/openh264.git;protocol=https;branch=${BRANCH} \
-            file://0001-Makefile-Use-cp-options-to-preserve-file-mode.patch \
-+           file://0002-Makefile-add-possibility-to-disable-NEON-extension.patch \
-            "
- 
- COMPATIBLE_MACHINE:armv7a = "(.*)"
-@@ -35,6 +36,9 @@ EXTRA_OEMAKE:mips = "ARCH=mips"
- EXTRA_OEMAKE:mips64 = "ARCH=mips64"
- EXTRA_OEMAKE:riscv64 = "ARCH=riscv64"
- 
-+EXTRA_OEMAKE:append:armv7a = "${@bb.utils.contains("TUNE_FEATURES","neon",""," USE_NEON=No",d)}"
-+EXTRA_OEMAKE:append:armv7ve = "${@bb.utils.contains("TUNE_FEATURES","neon",""," USE_NEON=No",d)}"
-+
- EXTRA_OEMAKE:append = " ENABLEPIC=Yes"
- do_configure() {
-     :
--- 
-2.34.1
+Best regards, Tymoteusz Burak
 
+On 8/24/23 09:54, Khem Raj wrote:
+> fails to compile with clang
+>
+> https://errors.yoctoproject.org/Errors/Details/732866/
+>
+> -Wno-nonnull-compare seems to be not a portable option
+>
+> On Wed, Aug 23, 2023 at 1:53=E2=80=AFAM Tymoteusz Burak
+> <tymoteusz.burak@3mdeb.com> wrote:
+>> This commit adds the libfaketime library recipe, which provides time
+>> manipulation capabilities for testing and debugging purposes. libfaket=
+ime allows
+>> developers to modify the system time reported to applications, aiding =
+in scenarios
+>> where accurate time emulation is required.
+>>
+>> I deleted the extra flags altogether as they seem to be only necessary
+>> for old versions of this project (0.9.6).
+>>
+>> CC: Khem Raj <raj.khem@gmail.com>
+>> Signed-off-by: Tymoteusz Burak <tymoteusz.burak@3mdeb.com>
+>> ---
+>>   .../libfaketime/libfaketime_0.9.10.bb         | 30 +++++++++++++++++=
+++
+>>   1 file changed, 30 insertions(+)
+>>   create mode 100644 meta-oe/recipes-test/libfaketime/libfaketime_0.9.=
+10.bb
+>>
+>> diff --git a/meta-oe/recipes-test/libfaketime/libfaketime_0.9.10.bb b/=
+meta-oe/recipes-test/libfaketime/libfaketime_0.9.10.bb
+>> new file mode 100644
+>> index 000000000000..7500e57658aa
+>> --- /dev/null
+>> +++ b/meta-oe/recipes-test/libfaketime/libfaketime_0.9.10.bb
+>> @@ -0,0 +1,30 @@
+>> +DESCRIPTION =3D "A library for faking the system time in user-space p=
+rograms"
+>> +SECTION =3D "libs"
+>> +LICENSE =3D "GPL-2.0-only"
+>> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Db234ee4d69f5fce4486a80fdaf=
+4a4263"
+>> +
+>> +SRCREV =3D "d475b925943ad404c6c728ac868dc73949e7281c"
+>> +SRC_URI =3D "\
+>> +    git://git@github.com/wolfcw/libfaketime.git;branch=3Dmaster;proto=
+col=3Dhttps \
+>> +    "
+>> +
+>> +S =3D "${WORKDIR}/git"
+>> +
+>> +do_configure[noexec] =3D "1"
+>> +do_compile () {
+>> +    oe_runmake
+>> +}
+>> +do_install () {
+>> +    install -d ${D}${libdir}/faketime
+>> +    oe_libinstall -C src libfaketime ${D}${libdir}/faketime
+>> +    install -d ${D}${bindir}
+>> +    install -m 0755 src/faketime ${D}${bindir}
+>> +}
+>> +
+>> +PACKAGES =3D+ "lib${PN}"
+>> +
+>> +FILES:${PN} =3D "${bindir}/faketime"
+>> +FILES:lib${PN} =3D "${libdir}/faketime/*"
+>> +
+>> +INSANE_SKIP:${PN} +=3D "dev-so"
+>> +INSANE_SKIP:lib${PN} +=3D "dev-so"
+>> --
+>> 2.41.0
+>>
+>>
+>> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>> Links: You receive all messages sent to this group.
+>> View/Reply Online (#104557): https://lists.openembedded.org/g/openembe=
+dded-devel/message/104557
+>> Mute This Topic: https://lists.openembedded.org/mt/100911255/7790941
+>> Group Owner: openembedded-devel+owner@lists.openembedded.org
+>> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub=
+ [tymoteusz.burak@3mdeb.com]
+>> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>>
 
