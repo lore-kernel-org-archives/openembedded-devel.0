@@ -1,136 +1,189 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <beniaminsandu@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9B902CA0FEA
-	for <webhook@archiver.kernel.org>; Fri,  1 Sep 2023 05:37:06 +0000 (UTC)
-Received: from mail-pg1-f180.google.com (mail-pg1-f180.google.com [209.85.215.180])
- by mx.groups.io with SMTP id smtpd.web10.410.1693546616355394709
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 72F49CA0FE1
+	for <webhook@archiver.kernel.org>; Fri,  1 Sep 2023 09:04:57 +0000 (UTC)
+Received: from mail-wm1-f45.google.com (mail-wm1-f45.google.com [209.85.128.45])
+ by mx.groups.io with SMTP id smtpd.web10.2162.1693559093540828152
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 31 Aug 2023 22:36:56 -0700
+ Fri, 01 Sep 2023 02:04:53 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20221208 header.b=GEll2hWg;
- spf=pass (domain: gmail.com, ip: 209.85.215.180, mailfrom: raj.khem@gmail.com)
-Received: by mail-pg1-f180.google.com with SMTP id 41be03b00d2f7-569deb93999so1192796a12.2
-        for <openembedded-devel@lists.openembedded.org>; Thu, 31 Aug 2023 22:36:56 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20221208 header.b=gZRg5f0C;
+ spf=pass (domain: gmail.com, ip: 209.85.128.45, mailfrom: beniaminsandu@gmail.com)
+Received: by mail-wm1-f45.google.com with SMTP id 5b1f17b1804b1-401ceda85cdso17868255e9.1
+        for <openembedded-devel@lists.openembedded.org>; Fri, 01 Sep 2023 02:04:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1693546615; x=1694151415; darn=lists.openembedded.org;
+        d=gmail.com; s=20221208; t=1693559092; x=1694163892; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=e5msWkyBvzJlIM5yGdjj0f4+eONYnfW5Mkt8qajTEc4=;
-        b=GEll2hWgsU42unJ/Vn1tBPzG9aTf/hUsO+z9QAQIQT+ABa1+BvZEa8SCQKK5Hf5SPc
-         3HVkrxH3YlV8GXIM6IwkDvaeTd0StDX+MRvq3HSNSOyGI6Dirdx39j+QqHdQDcvCZ9+i
-         987IK+4BK3Ggct39//9Lim9s0KgOvSQFEbbqkf99++vf1nhp0xjtrvg8ZjY7jjiAQmZi
-         8D/ZE9YCKJTDuNaa8iXakIUBBvEY5hVR32d7DP1zq1Z6gmGFK/FATlkwnG0300RMcuJd
-         4mXn5y/S5854gk/wt48puhMZqiW6JRVjTrOvRG9qetEGpQlrr5KFY5+AbpPvf2Ze6hrx
-         oALg==
+        bh=fhB0KwupXHgU/tt7DyaamxWvcNko8qYhg0F9scw+P0Q=;
+        b=gZRg5f0Cxqxtz1psan6iOMynkd0ogbo2hs2P9K1+KXFOv4nUDUuQ4LcP/ebrz8ToXR
+         P8iylBqyjit4QUNBJi6zyl75P8datA+ejeegZZIt7tN8YsevoPVLemfXq5z9yITsk9gB
+         3v3UgmsVp4XLex2I6Q6KT3cg+dAkx9rbBJ7xP4Q8+ZTnAiuJQYIkztiMkL3fIl19xutT
+         p1rHUCF217aG/5Z0EqQgUVDJ3pHDFixyTgKVXBN9U3gd8foyECwUhQUA1XZaW1WIxIHE
+         w668m1aez2ZzNq4ZCDpXWzJorf5PXla9LwMcKoLl832owRvwwOSaWoMpYlhOmlKUZf5+
+         uo0Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1693546615; x=1694151415;
+        d=1e100.net; s=20221208; t=1693559092; x=1694163892;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=e5msWkyBvzJlIM5yGdjj0f4+eONYnfW5Mkt8qajTEc4=;
-        b=O8jC6J5rtZSVYc8JnrNKPe51hhiXAIlMs48EovP6ox99xHJqCgc6fvI1rWwvoRa7Ta
-         LycHW8hK1jzJ+qf+VbHMetWxxHsE6KQmSKEg2hKj8O1zfzZ9L9wEBSbmr5XcQv/r16nE
-         jfnJJACZ6+wKkYJDnXAp1LXxYBiy/qh+UJsEJMypTy0dktGblV2RiaAZrsw6hj0ngT3x
-         mToedJsG8Fu6v3NaVm32gUwYRoxRJlva3uMSpbGqHkqt5tAWDqWA6jUS0Xqr8JvhwcsO
-         kRasNqCoN4E4Yt/+Aq8peC8OsN5aXdFWTUYa7N7+eVjTf/uB+ik9DNrxCyuoQef50VBW
-         cfzQ==
-X-Gm-Message-State: AOJu0Yzebgi/Y88kTZh/VO4rUUlkx7dhN/3yxGVLVxgEsME0YFRjXfL+
-	v0grTcCvtYnUOIUKEj3IHRpc7OrL0acuNw==
-X-Google-Smtp-Source: AGHT+IELDMlrfNbnYMDUaM7dYAOXnszAOsj0WEdRMYr716pihqrTrEFwKyw8k+fzp5ag/GHHmX81qw==
-X-Received: by 2002:a05:6a20:3d8b:b0:14c:fadb:4e5e with SMTP id s11-20020a056a203d8b00b0014cfadb4e5emr1999838pzi.5.1693546615325;
-        Thu, 31 Aug 2023 22:36:55 -0700 (PDT)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9100:2cb0::71d2])
-        by smtp.gmail.com with ESMTPSA id c11-20020aa78c0b000000b0068a538cc7adsm2143153pfd.52.2023.08.31.22.36.54
+        bh=fhB0KwupXHgU/tt7DyaamxWvcNko8qYhg0F9scw+P0Q=;
+        b=MtqiXzWv1r7zuR69sTfJ+YXIQNmzeshUGJw/KxAWPpgs6o4Thz0zuzj8kKDV8Gddbo
+         GiiFkukSde8u0mv+OzQBYhWzeZpnFntL0QRBRY8Ai9Ksa19umuiL7V8QwA0gl36rNSPw
+         0/Xavtf/Lh/phEDTmC44f+3sfhlSLXIS7twXvEX7R1/JtHgrm9vJVLoObiErNGtu0Nof
+         nomD0Hpz+R3ddb11Hm1Poc1t9y3xT6DstCAmckk3EV3yKbtJk9kyT8f/87BETC8klZc9
+         aW8n5whVHL6f7Tvq0A8arlNkdZ2KPxYjCOP1Ka2cF30rCfcft/ciSyXok41n+LN5MDZY
+         AY/g==
+X-Gm-Message-State: AOJu0YyQRr5Pf2/nOBzOsXnWultPm4zfLsBA8PgJOU78IBMgkQl3Dwli
+	gdwXKEDaceVI9b7kJ1n1u7ixow1Ijcw=
+X-Google-Smtp-Source: AGHT+IHrC8hAV2MNCUiTlzyF/yx0ijZQ5I9V+8bQLk/rt/PidajMc9Rvm/rprPXBvixkvA/H7L2DXw==
+X-Received: by 2002:a05:600c:ad8:b0:400:2dc5:2006 with SMTP id c24-20020a05600c0ad800b004002dc52006mr1307620wmr.36.1693559091515;
+        Fri, 01 Sep 2023 02:04:51 -0700 (PDT)
+Received: from localhost.localdomain ([5.13.128.0])
+        by smtp.gmail.com with ESMTPSA id h9-20020a05600c260900b003fff96bb62csm4154162wma.16.2023.09.01.02.04.50
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 31 Aug 2023 22:36:54 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
+        Fri, 01 Sep 2023 02:04:50 -0700 (PDT)
+From: Beniamin Sandu <beniaminsandu@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-networking][PATCH] networkmanager: Fix build on musl
-Date: Thu, 31 Aug 2023 22:36:52 -0700
-Message-ID: <20230901053652.1398681-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.42.0
+Cc: Beniamin Sandu <beniaminsandu@gmail.com>
+Subject: [meta-networking][PATCH] unbound: upgrade 1.17.1 -> 1.18.0
+Date: Fri,  1 Sep 2023 12:04:33 +0300
+Message-Id: <20230901090433.1770836-1-beniaminsandu@gmail.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 01 Sep 2023 05:37:06 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104688
+ <openembedded-devel@lists.openembedded.org>; Fri, 01 Sep 2023 09:04:57 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104689
 
-musl does not need _IO_stdin_used, since its not provided by toolchain
-runtime ( crt files ) lld linker complains about undefined global symbol
-on musl
-
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Beniamin Sandu <beniaminsandu@gmail.com>
 ---
- ...scripts-Do-not-export-_IO_stdin_used.patch | 41 +++++++++++++++++++
- .../networkmanager/networkmanager_1.44.0.bb   |  1 +
- 2 files changed, 42 insertions(+)
- create mode 100644 meta-networking/recipes-connectivity/networkmanager/networkmanager/0001-linker-scripts-Do-not-export-_IO_stdin_used.patch
+ ...rib-add-yocto-compatible-init-script.patch | 80 -------------------
+ .../{unbound_1.17.1.bb => unbound_1.18.0.bb}  |  8 +-
+ 2 files changed, 3 insertions(+), 85 deletions(-)
+ delete mode 100644 meta-networking/recipes-support/unbound/unbound/0001-contrib-add-yocto-compatible-init-script.patch
+ rename meta-networking/recipes-support/unbound/{unbound_1.17.1.bb => unbound_1.18.0.bb} (87%)
 
-diff --git a/meta-networking/recipes-connectivity/networkmanager/networkmanager/0001-linker-scripts-Do-not-export-_IO_stdin_used.patch b/meta-networking/recipes-connectivity/networkmanager/networkmanager/0001-linker-scripts-Do-not-export-_IO_stdin_used.patch
-new file mode 100644
-index 0000000000..71ad01f51c
---- /dev/null
-+++ b/meta-networking/recipes-connectivity/networkmanager/networkmanager/0001-linker-scripts-Do-not-export-_IO_stdin_used.patch
-@@ -0,0 +1,41 @@
-+From 3ee6967689b3da30cc4551885d8bcdd44a7a9b52 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Thu, 31 Aug 2023 21:16:55 -0700
-+Subject: [PATCH] linker-scripts: Do not export _IO_stdin_used
-+
-+This is glibc specific and it is not needed with musl.
-+See https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=835550
-+
-+Upstream-Status: Pending
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ linker-script-binary.ver               | 1 -
-+ tools/create-exports-NetworkManager.sh | 1 -
-+ 2 files changed, 2 deletions(-)
-+
-+diff --git a/linker-script-binary.ver b/linker-script-binary.ver
-+index a2780c0..f030d35 100644
-+--- a/linker-script-binary.ver
-++++ b/linker-script-binary.ver
-+@@ -1,6 +1,5 @@
-+ {
-+ global:
-+-	_IO_stdin_used;
-+ local:
-+ 	*;
-+ };
-+diff --git a/tools/create-exports-NetworkManager.sh b/tools/create-exports-NetworkManager.sh
-+index ef4b381..60865ad 100755
-+--- a/tools/create-exports-NetworkManager.sh
-++++ b/tools/create-exports-NetworkManager.sh
-+@@ -54,7 +54,6 @@ get_symbols_nm () {
-+ 
-+ get_symbols_explicit() {
-+     cat <<EOF | _sort
-+-_IO_stdin_used
-+ EOF
-+ }
-+ 
-+-- 
-+2.42.0
-+
-diff --git a/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.44.0.bb b/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.44.0.bb
-index 9ecb2f12f6..84ef70c9af 100644
---- a/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.44.0.bb
-+++ b/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.44.0.bb
-@@ -31,6 +31,7 @@ SRC_URI = " \
-     file://enable-dhcpcd.conf \
-     file://enable-iwd.conf \
- "
-+SRC_URI:append:libc-musl = " file://0001-linker-scripts-Do-not-export-_IO_stdin_used.patch"
+diff --git a/meta-networking/recipes-support/unbound/unbound/0001-contrib-add-yocto-compatible-init-script.patch b/meta-networking/recipes-support/unbound/unbound/0001-contrib-add-yocto-compatible-init-script.patch
+deleted file mode 100644
+index 7bcf97261..000000000
+--- a/meta-networking/recipes-support/unbound/unbound/0001-contrib-add-yocto-compatible-init-script.patch
++++ /dev/null
+@@ -1,80 +0,0 @@
+-From 26614b6578056ec30b95013592e308bf24d924c2 Mon Sep 17 00:00:00 2001
+-From: Beniamin Sandu <beniaminsandu@gmail.com>
+-Date: Fri, 20 Nov 2020 23:00:20 +0200
+-Subject: [PATCH] contrib: add yocto compatible init script
+-
+-Signed-off-by: Beniamin Sandu <beniaminsandu@gmail.com>
+----
+-Upstream-Status: Pending
+-
+- contrib/unbound.init | 20 ++++++++++----------
+- 1 file changed, 10 insertions(+), 10 deletions(-)
+-
+-diff --git a/contrib/unbound.init b/contrib/unbound.init
+-index c5bb52bb..4eba752b 100644
+---- a/contrib/unbound.init
+-+++ b/contrib/unbound.init
+-@@ -19,11 +19,11 @@
+- ### END INIT INFO
+- 
+- # Source function library.
+--. /etc/rc.d/init.d/functions
+-+. /etc/init.d/functions
+- 
+- exec="/usr/sbin/unbound"
+- prog="unbound"
+--config="/var/unbound/unbound.conf"
+-+config="/etc/unbound/unbound.conf"
+- pidfile="/var/unbound/unbound.pid"
+- rootdir="/var/unbound"
+- 
+-@@ -54,14 +54,14 @@ start() {
+- 	[ -e ${rootdir}/dev/log ] || touch ${rootdir}/dev/log
+- 	mount --bind -n /dev/log ${rootdir}/dev/log >/dev/null 2>&1;
+-     fi;
+--    if ! egrep -q '^/[^[:space:]]+[[:space:]]+'${rootdir}'/dev/urandom' /proc/mounts; then
+-+    if ! egrep -q '^/[^[:space:]]+[[:space:]]+'${rootdir}'/dev/random' /proc/mounts; then
+- 	[ -d ${rootdir}/dev ] || mkdir -p ${rootdir}/dev ;
+--	[ -e ${rootdir}/dev/urandom ] || touch ${rootdir}/dev/urandom
+--	mount --bind -n /dev/urandom ${rootdir}/dev/urandom >/dev/null 2>&1;
+-+	[ -e ${rootdir}/dev/random ] || touch ${rootdir}/dev/random
+-+	mount --bind -n /dev/random ${rootdir}/dev/random >/dev/null 2>&1;
+-     fi;
+- 
+-     # if not running, start it up here
+--    daemon $exec
+-+    daemonize $exec
+-     retval=$?
+-     echo
+-     [ $retval -eq 0 ] && touch $lockfile
+-@@ -71,15 +71,15 @@ start() {
+- stop() {
+-     echo -n $"Stopping $prog: "
+-     # stop it here, often "killproc $prog"
+--    killproc -p $pidfile $prog
+-+    killproc $prog
+-     retval=$?
+-     echo
+-     [ $retval -eq 0 ] && rm -f $lockfile
+-     if egrep -q '^/[^[:space:]]+[[:space:]]+'${rootdir}'/dev/log' /proc/mounts; then
+- 	umount ${rootdir}/dev/log >/dev/null 2>&1
+-     fi;
+--    if egrep -q '^/[^[:space:]]+[[:space:]]+'${rootdir}'/dev/urandom' /proc/mounts; then
+--	umount ${rootdir}/dev/urandom >/dev/null 2>&1
+-+    if egrep -q '^/[^[:space:]]+[[:space:]]+'${rootdir}'/dev/random' /proc/mounts; then
+-+	umount ${rootdir}/dev/random >/dev/null 2>&1
+-     fi;
+-     return $retval
+- }
+-@@ -99,7 +99,7 @@ force_reload() {
+- 
+- rh_status() {
+-     # run checks to determine if the service is running or use generic status
+--    status -p $pidfile $prog
+-+    status $prog
+- }
+- 
+- rh_status_q() {
+--- 
+-2.25.1
+-
+diff --git a/meta-networking/recipes-support/unbound/unbound_1.17.1.bb b/meta-networking/recipes-support/unbound/unbound_1.18.0.bb
+similarity index 87%
+rename from meta-networking/recipes-support/unbound/unbound_1.17.1.bb
+rename to meta-networking/recipes-support/unbound/unbound_1.18.0.bb
+index ff3d879ea..179af8050 100644
+--- a/meta-networking/recipes-support/unbound/unbound_1.17.1.bb
++++ b/meta-networking/recipes-support/unbound/unbound_1.18.0.bb
+@@ -9,10 +9,8 @@ SECTION = "net"
+ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=5308494bc0590c0cb036afd781d78f06"
  
- SRC_URI[sha256sum] = "edca09637d182f806b3b12d8c5623d7badbd73ccca1ae63be20d2f298779fb9f"
+-SRC_URI = "git://github.com/NLnetLabs/unbound.git;protocol=https;branch=master \
+-	file://0001-contrib-add-yocto-compatible-init-script.patch \
+-"
+-SRCREV = "90831af981221bbce1cd7b15055562336760e484"
++SRC_URI = "git://github.com/NLnetLabs/unbound.git;protocol=https;branch=master"
++SRCREV = "3795e374107ac7a5a977c516e144a3cd9b0da998"
  
+ inherit autotools pkgconfig systemd update-rc.d
+ 
+@@ -39,7 +37,7 @@ do_install:append() {
+ 	install -m 0644 ${B}/contrib/unbound.service ${D}${systemd_unitdir}/system
+ 
+ 	install -d ${D}${sysconfdir}/init.d
+-	install -m 0755 ${S}/contrib/unbound.init ${D}${sysconfdir}/init.d/unbound
++	install -m 0755 ${S}/contrib/unbound.init_yocto ${D}${sysconfdir}/init.d/unbound
+ }
+ 
+ SYSTEMD_SERVICE:${PN} = "${BPN}.service"
 -- 
-2.42.0
+2.25.1
 
 
