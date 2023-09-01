@@ -1,253 +1,484 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <archana.polampalli@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CAEACCA0FE1
-	for <webhook@archiver.kernel.org>; Fri,  1 Sep 2023 15:43:15 +0000 (UTC)
-Received: from mail-pf1-f170.google.com (mail-pf1-f170.google.com [209.85.210.170])
- by mx.groups.io with SMTP id smtpd.web11.421.1693582987130365275
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 70BEBCA0FE5
+	for <webhook@archiver.kernel.org>; Fri,  1 Sep 2023 16:12:48 +0000 (UTC)
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.web10.462.1693584760119083960
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 01 Sep 2023 08:43:07 -0700
+ Fri, 01 Sep 2023 09:12:40 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20221208 header.b=PXAH7Bug;
- spf=pass (domain: gmail.com, ip: 209.85.210.170, mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f170.google.com with SMTP id d2e1a72fcca58-68bed8de5b9so1784216b3a.3
-        for <openembedded-devel@lists.openembedded.org>; Fri, 01 Sep 2023 08:43:07 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1693582986; x=1694187786; darn=lists.openembedded.org;
-        h=in-reply-to:autocrypt:from:content-language:references:to:subject
-         :user-agent:mime-version:date:message-id:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=leOSA23MOE8wk60AkjA6qF6xbn7OyVEf/WH4oz0sNsY=;
-        b=PXAH7BugpPY4cCLUrfmcCvtlrI+pIAXzxqvFoyynp9HRBMDZUtICnwAjLu01Q3g6OZ
-         zmPm7FY6Ekm4F0ReHn85ntwkdA+39eEGfP26mBHKxXycN/cvUU1R391Eme7a3qRZGFkI
-         yp9IeD9EXfKgD7fszuU3WMqOClX8CRygaoXmGqDw0S5E8e5631/kjWZROZr/B2BbAJ8B
-         1UjHQ5SPYcWD5JWAqnaY/4CCSIHCqd4Xz6p3u8W7DAiKKLchGvhlFadHr6GgrU0dCme7
-         8KSLDuk5jDUaj+hxKkQoVzci97JxhbL8+ECVKSqMPnwbx4nSB7IlVYX0wyuXOtqDQZze
-         l1Kg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1693582986; x=1694187786;
-        h=in-reply-to:autocrypt:from:content-language:references:to:subject
-         :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=leOSA23MOE8wk60AkjA6qF6xbn7OyVEf/WH4oz0sNsY=;
-        b=gM5xKaR9Fhoot2MuB/NkmMJhVY3D99GZLU686JlFLAztQVE0g72TNKMVu3xchuX6y5
-         0JqTmrEYOubSeAfXDK8DpcaTTbB4B+MdT8fd4R0O69cmloAc/jbBW5oYNUnW07opzQRi
-         8FEFgIlWqVSCv54HLLyV7mDmqnwRS0+kgw8P2vBdN5IneUwo//1Qs2IAO2lT65ld6YNz
-         k7LFTHKiML2FybPI7EuxMJVqRwShHC8sl35oI/+W2n7GwKFlRp9sFmtXMMHDfE9iHLXf
-         Nd1lMx1jEq4WGlmOJ4cPHIlXxfWa0X64eItifo1W/FuUEgnVbAXTAUbDdy6dDpWvFouc
-         lr/Q==
-X-Gm-Message-State: AOJu0YyW/LHVlH3w227Tn4pMKSofdggTn93YnLv2ruxbjYzKQffM2ygy
-	HLpli5sj1CzUmjaPZapyMs4=
-X-Google-Smtp-Source: AGHT+IHtqbnOVGdvjjFBE17YWCwT/FUDaYTB8OqvxbpkY13o9wlu4qa6tx6hw/h0d9ehxlhKFTgBDA==
-X-Received: by 2002:a05:6300:8002:b0:140:8537:85c1 with SMTP id an2-20020a056300800200b00140853785c1mr2936911pzc.28.1693582986357;
-        Fri, 01 Sep 2023 08:43:06 -0700 (PDT)
-Received: from ?IPV6:2601:646:9100:2cb0:ac0c:6b51:b136:ec53? ([2601:646:9100:2cb0:ac0c:6b51:b136:ec53])
-        by smtp.gmail.com with ESMTPSA id a17-20020aa780d1000000b00689f3d73639sm3104709pfn.65.2023.09.01.08.43.05
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 01 Sep 2023 08:43:05 -0700 (PDT)
-Message-ID: <e37c6b57-90fe-4d77-bdbd-aabd0fb01b1a@gmail.com>
-Date: Fri, 1 Sep 2023 08:43:04 -0700
+ dkim=fail reason="dkim: body hash did not verify" header.i=@windriver.com header.s=PPS06212021 header.b=IlGw7tKu;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=7608da508b=archana.polampalli@windriver.com)
+Received: from pps.filterd (m0250811.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.17.1.22/8.17.1.22) with ESMTP id 381BgSS4001917
+	for <openembedded-devel@lists.openembedded.org>; Fri, 1 Sep 2023 16:12:39 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
+	 h=from:to:subject:date:message-id:mime-version:content-type
+	:content-transfer-encoding; s=PPS06212021; bh=YKf9dohi8V8Kw6bPYB
+	md6TzXab5O96FJY+ANkHVoeVQ=; b=IlGw7tKufW/wrIYinNqxoVJ1Hp3G1/Y0+N
+	hlNBKjnXnXNU88uyoLgfUGY+wnRnpxWA2w4uQzKGLIEaswGDcc4KCXk2z+xRIvhU
+	fW3y7sNFKmOy6e6U7VjxgoV20ll3mNuB5l3V3Xo7OM7kO3NW8durG5sW49uZ0qmS
+	MdXANg4vuhBDVGuxyh2NV953Mb6KH1FE56p5TDyVj67lHF/cc4jSXxoH6pf0eA5G
+	OxSqyr4+fINBOYjvOfApWf4tui82VZykVIuv4Kr5znnyqo4hv5QcjUrUgmIcOhFR
+	fGxb7N9sR2KYYRea8irMGU8swAQyDHVRmeql0LECGlFn3eEjHUfg==
+Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3sq6kwp2ja-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Fri, 01 Sep 2023 16:12:39 +0000 (GMT)
+Received: from blr-linux-engg1.wrs.com (147.11.136.210) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.27; Fri, 1 Sep 2023 09:12:35 -0700
+From: Archana Polampalli <archana.polampalli@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [oe][meta-oe][PATCH 1/1] nodejs: upgrade 18.17.1 -> 20.5.1
+Date: Fri, 1 Sep 2023 16:12:19 +0000
+Message-ID: <20230901161219.2953224-1-archana.polampalli@windriver.com>
+X-Mailer: git-send-email 2.40.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [oe] [meta-oe][PATCH] collectd: build with rrdcached plugin
-To: Aikaterini Voulgari <Aikaterini.Voulgari@softcom-int.com>,
- "openembedded-devel@lists.openembedded.org"
- <openembedded-devel@lists.openembedded.org>
-References: <DB4PR02MB9598929FA2C57B34DAC69283B8E4A@DB4PR02MB9598.eurprd02.prod.outlook.com>
-Content-Language: en-US
-From: Khem Raj <raj.khem@gmail.com>
-Autocrypt: addr=raj.khem@gmail.com; keydata=
- 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
-In-Reply-To: <DB4PR02MB9598929FA2C57B34DAC69283B8E4A@DB4PR02MB9598.eurprd02.prod.outlook.com>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="------------adsaDx0hFw8gFmugdsSmchz3"
+Content-Type: text/plain; charset="UTF-8"
+X-Originating-IP: [147.11.136.210]
+X-ClientProxiedBy: ala-exchng01.corp.ad.wrs.com (147.11.82.252) To
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252)
+X-Proofpoint-GUID: 9KPErfGdVbcRlpP1LFaBkU7cpXoB5xB1
+X-Proofpoint-ORIG-GUID: 9KPErfGdVbcRlpP1LFaBkU7cpXoB5xB1
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.254,Aquarius:18.0.957,Hydra:6.0.601,FMLib:17.11.176.26
+ definitions=2023-09-01_13,2023-08-31_01,2023-05-22_02
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 malwarescore=0
+ lowpriorityscore=0 mlxlogscore=999 priorityscore=1501 phishscore=0
+ adultscore=0 spamscore=0 bulkscore=0 suspectscore=0 impostorscore=0
+ clxscore=1015 mlxscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.19.0-2308100000 definitions=main-2309010151
+Content-Transfer-Encoding: quoted-printable
+X-MIME-Autoconverted: from 8bit to quoted-printable by mx0a-0064b401.pphosted.com id 381BgSS4001917
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 01 Sep 2023 15:43:15 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104692
+ <openembedded-devel@lists.openembedded.org>; Fri, 01 Sep 2023 16:12:48 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104693
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------adsaDx0hFw8gFmugdsSmchz3
-Content-Type: multipart/mixed; boundary="------------Nlbe81s3gn3eao3V8t025etj";
- protected-headers="v1"
-From: Khem Raj <raj.khem@gmail.com>
-To: Aikaterini Voulgari <Aikaterini.Voulgari@softcom-int.com>,
- "openembedded-devel@lists.openembedded.org"
- <openembedded-devel@lists.openembedded.org>
-Message-ID: <e37c6b57-90fe-4d77-bdbd-aabd0fb01b1a@gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH] collectd: build with rrdcached plugin
-References: <DB4PR02MB9598929FA2C57B34DAC69283B8E4A@DB4PR02MB9598.eurprd02.prod.outlook.com>
-In-Reply-To: <DB4PR02MB9598929FA2C57B34DAC69283B8E4A@DB4PR02MB9598.eurprd02.prod.outlook.com>
+Update to latest release of latest LTS 20 release
 
---------------Nlbe81s3gn3eao3V8t025etj
-Content-Type: multipart/mixed; boundary="------------bwhgAkjkxQv11HQ2hnESUa3o"
+    * node v20 introduces several new features and fixes many bugs and CV=
+Es as shown in [1]
 
---------------bwhgAkjkxQv11HQ2hnESUa3o
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: base64
+    * Refresh 0001-liftoff-Correct-function-signatures.patch against 20.5=
+.1
 
-T24gOS8xLzIzIDc6NDMgQU0sIEFpa2F0ZXJpbmkgVm91bGdhcmkgd3JvdGU6DQo+ICBGcm9t
-IGNkOGIxZmViZTViMzMzYTFkMzhhODM5ZWJiOTA0Yzc2OGMxOTRjNjEgTW9uIFNlcCAxNyAw
-MDowMDowMCAyMDAxDQo+IA0KPiBGcm9tOiA9P1VURi04P3E/PUNFPTkyPUNFPUJGPUNGPThE
-PUNFPUJCPUNFPUIzPUNFPUIxPUNGPTgxPUNFPUI3PTIwPUNFPTkxPz0NCj4gDQo+ID0/VVRG
-LTg/cT89Q0U9Qjk9Q0U9QkE9Q0U9QjE9Q0Y9ODQ9Q0U9QjU9Q0Y9ODE9Q0U9QUY9Q0U9QkQ9
-Q0U9Qjc/PQ0KPiANCg0KDQpUaGFua3MgZm9yIHRoZSBwYXRjaCBhbmQgdHJ5aW5nIHRvIG1h
-a2UgT0UgYmV0dGVyLCBzYWRseSB0aGlzIHBhdGNoIGRvZXMgDQpub3QgYXBwbHkNCg0KKFN0
-cmlwcGluZyB0cmFpbGluZyBDUnMgZnJvbSBwYXRjaDsgdXNlIC0tYmluYXJ5IHRvIGRpc2Fi
-bGUuKQ0KcGF0Y2hpbmcgZmlsZSBtZXRhLW9lL3JlY2lwZXMtZXh0ZW5kZWQvY29sbGVjdGQv
-Y29sbGVjdGRfNS4xMi4wLmJiDQpwYXRjaDogKioqKiBtYWxmb3JtZWQgcGF0Y2ggYXQgbGlu
-ZSAxNzE6ICxsaWJtbmwiDQoNClBsZWFzZSBnZW5lcmF0ZSBpdCB3aXRoIGdpdCBmb3JtYXQt
-cGF0Y2ggYW5kIHNlbmQgaXQgdXNpbmcgZ2l0IA0Kc2VuZC1lbWFpbCBmb3IgYmVzdCByZXN1
-bHRzIG9mIGl0IG5vdCBiZWluZyBhbHRlcmVkIGJ5IHlvdXIgZW1haWxlci4NCg0KPiBhaWth
-dGVyaW5pLnZvdWxnYXJpQHNvZnRjb20taW50LmNvbSANCj4gPG1haWx0bzphaWthdGVyaW5p
-LnZvdWxnYXJpQHNvZnRjb20taW50LmNvbT4NCj4gDQo+IERhdGU6IEZyaSwgMSBTZXAgMjAy
-MyAxNzo0MDoxMyArMDMwMA0KPiANCj4gU3ViamVjdDogW1BBVENIXSBjb2xsZWN0ZDogYnVp
-bGQgd2l0aCBycmRjYWNoZWQgcGx1Z2luDQo+IA0KPiBNSU1FLVZlcnNpb246IDEuMA0KPiAN
-Cj4gQ29udGVudC1UeXBlOiB0ZXh0L3BsYWluOyBjaGFyc2V0PVVURi04DQo+IA0KPiBDb250
-ZW50LVRyYW5zZmVyLUVuY29kaW5nOiA4Yml0DQo+IA0KPiBycmRjYWNoZWQgcGFja2FnZSBp
-cyBwcm92aWRlZCBieSBycmR0b29sIHJlY2lwZS4gVGhlIGJ1aWxkIGRlcGVuZGVuY3kgaW4g
-DQo+IFBBQ0tBR0VDT05GSUcgaXMgY2hhbmdlZCB0byBycmR0b29sLg0KPiANCj4gIMKgwqDC
-oCBUaGUgZXJyb3Igd2FzOg0KPiANCj4gIMKgwqDCoMKgIE5vdGhpbmcgUFJPVklERVMgJ3Jy
-ZGNhY2hlZCcgYnV0IC4uL2NvbGxlY3RkXzUuMTIuMC5iYiBERVBFTkRTIG9uIA0KPiBvciBv
-dGhlcndpc2UgcmVxdWlyZXMgaXQpLiBDbG9zZSBtYXRjaGVzOg0KPiANCj4gIMKgwqDCoMKg
-wqAgcnJkdG9vbCBSUFJPVklERVMgcnJkY2FjaGVkDQo+IA0KPiAgwqDCoMKgIEVSUk9SOiBS
-ZXF1aXJlZCBidWlsZCB0YXJnZXQgJ2NvbGxlY3RkJyBoYXMgbm8gYnVpbGRhYmxlIHByb3Zp
-ZGVycy4NCj4gDQo+ICDCoMKgwqAgTWlzc2luZyBvciB1bmJ1aWxkYWJsZSBkZXBlbmRlbmN5
-IGNoYWluIHdhczogWydjb2xsZWN0ZCcsICdycmRjYWNoZWQnXQ0KPiANCj4gIMKgwqDCoCBX
-aXRoIHRoZSBwYXRjaCwgY29sbGVjdGQgYnVpbGRzIHdpdGggbm8gZXJyb3JzIGFuZCB0aGUg
-ZmluYWwgaW1hZ2UgDQo+IEkgdGVzdGVkIGluY2x1ZGVzIGNvbGxlY3RkIHdpdGggcnJkY2Fj
-aGVkIHBsdWdpbi4NCj4gDQo+ICDCoMKgwqAgVGVzdGVkIG9uIGN1c3RvbSBpbWFnZSB3aXRo
-IGNvbGxlY3RkXzUuMTIuMC4NCj4gDQo+IFNpZ25lZC1vZmYtYnk6IM6Szr/Pjc67zrPOsc+B
-zrcgzpHOuc66zrHPhM61z4HOr869zrcgYWlrYXRlcmluaS52b3VsZ2FyaUBzb2Z0Y29tLWlu
-dC5jb20gDQo+IDxtYWlsdG86YWlrYXRlcmluaS52b3VsZ2FyaUBzb2Z0Y29tLWludC5jb20+
-DQo+IA0KPiAtLS0NCj4gDQo+IG1ldGEtb2UvcmVjaXBlcy1leHRlbmRlZC9jb2xsZWN0ZC9j
-b2xsZWN0ZF81LjEyLjAuYmIgfCAyICstDQo+IA0KPiAxIGZpbGUgY2hhbmdlZCwgMSBpbnNl
-cnRpb24oKyksIDEgZGVsZXRpb24oLSkNCj4gDQo+IGRpZmYgLS1naXQgYS9tZXRhLW9lL3Jl
-Y2lwZXMtZXh0ZW5kZWQvY29sbGVjdGQvY29sbGVjdGRfNS4xMi4wLmJiIA0KPiBiL21ldGEt
-b2UvcmVjaXBlcy1leHRlbmRlZC9jb2xsZWN0ZC9jb2xsZWN0ZF81LjEyLjAuYmINCj4gDQo+
-IGluZGV4IDVkYzY0NTg4ZC4uNDc5YzEyZDZhIDEwMDY0NA0KPiANCj4gLS0tIGEvbWV0YS1v
-ZS9yZWNpcGVzLWV4dGVuZGVkL2NvbGxlY3RkL2NvbGxlY3RkXzUuMTIuMC5iYg0KPiANCj4g
-KysrIGIvbWV0YS1vZS9yZWNpcGVzLWV4dGVuZGVkL2NvbGxlY3RkL2NvbGxlY3RkXzUuMTIu
-MC5iYg0KPiANCj4gQEAgLTUwLDcgKzUwLDcgQEAgUEFDS0FHRUNPTkZJR1tsaWJtbmxdID0g
-DQo+ICItLXdpdGgtbGlibW5sLC0td2l0aG91dC1saWJtbmwsbGlibW5sIg0KPiANCj4gUEFD
-S0FHRUNPTkZJR1tsaWJhdGFzbWFydF0gPSANCj4gIi0td2l0aC1saWJhdGFzbWFydCwtLXdp
-dGhvdXQtbGliYXRhc21hcnQsbGliYXRhc21hcnQiDQo+IA0KPiBQQUNLQUdFQ09ORklHW2xk
-YXBdID0gIi0tZW5hYmxlLW9wZW5sZGFwIA0KPiAtLXdpdGgtbGlibGRhcCwtLWRpc2FibGUt
-b3BlbmxkYXAgLS13aXRob3V0LWxpYmxkYXAsIG9wZW5sZGFwIg0KPiANCj4gUEFDS0FHRUNP
-TkZJR1tycmR0b29sXSA9ICItLWVuYWJsZS1ycmR0b29sLC0tZGlzYWJsZS1ycmR0b29sLHJy
-ZHRvb2wiDQo+IA0KPiAtUEFDS0FHRUNPTkZJR1tycmRjYWNoZWRdID0gDQo+ICItLWVuYWJs
-ZS1ycmRjYWNoZWQsLS1kaXNhYmxlLXJyZGNhY2hlZCxycmRjYWNoZWQiDQo+IA0KPiArUEFD
-S0FHRUNPTkZJR1tycmRjYWNoZWRdID0gIi0tZW5hYmxlLXJyZGNhY2hlZCwtLWRpc2FibGUt
-cnJkY2FjaGVkLHJyZHRvb2wiDQo+IA0KPiBQQUNLQUdFQ09ORklHW3B5dGhvbl0gPSAiLS1l
-bmFibGUtcHl0aG9uLC0tZGlzYWJsZS1weXRob24iDQo+IA0KPiAgwqBFWFRSQV9PRUNPTkYg
-PSAiIFwNCj4gDQo+IC0tIA0KPiANCj4gMi4zNC4xDQo+IA0KPiANCj4gDQo+IC09LT0tPS09
-LT0tPS09LT0tPS09LT0tDQo+IExpbmtzOiBZb3UgcmVjZWl2ZSBhbGwgbWVzc2FnZXMgc2Vu
-dCB0byB0aGlzIGdyb3VwLg0KPiBWaWV3L1JlcGx5IE9ubGluZSAoIzEwNDY5MSk6IGh0dHBz
-Oi8vbGlzdHMub3BlbmVtYmVkZGVkLm9yZy9nL29wZW5lbWJlZGRlZC1kZXZlbC9tZXNzYWdl
-LzEwNDY5MQ0KPiBNdXRlIFRoaXMgVG9waWM6IGh0dHBzOi8vbGlzdHMub3BlbmVtYmVkZGVk
-Lm9yZy9tdC8xMDEwOTY2MzQvMTk5NzkxNA0KPiBHcm91cCBPd25lcjogb3BlbmVtYmVkZGVk
-LWRldmVsK293bmVyQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmcNCj4gVW5zdWJzY3JpYmU6IGh0
-dHBzOi8vbGlzdHMub3BlbmVtYmVkZGVkLm9yZy9nL29wZW5lbWJlZGRlZC1kZXZlbC91bnN1
-YiBbcmFqLmtoZW1AZ21haWwuY29tXQ0KPiAtPS09LT0tPS09LT0tPS09LT0tPS09LQ0KPiAN
-Cg==
---------------bwhgAkjkxQv11HQ2hnESUa3o
-Content-Type: application/pgp-keys; name="OpenPGP_0xBB053355919D3314.asc"
-Content-Disposition: attachment; filename="OpenPGP_0xBB053355919D3314.asc"
-Content-Description: OpenPGP public key
-Content-Transfer-Encoding: quoted-printable
+    * License-Update:
+       - Change zlib version 1.2.13, October 13th, 2022 to version 1.2.13=
+.1, October xxth, 2022 [2]
+       - Change Copyright 2023 from Ada authors to Yagiz Nizipli and Dani=
+el Lemire [4]
 
------BEGIN PGP PUBLIC KEY BLOCK-----
+    * Remove big-endian.patch as it is merged in v20.x [5] [6]
 
-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
-//VuX4EDPW3CZmbPy6U=3D
-=3D+jUt
------END PGP PUBLIC KEY BLOCK-----
+    * Remove below list of patches since mips32 is deleted from v8 as par=
+t of update V8 to 10.7.193.13 [7] [8]
+       - mips-less-memory.patch
+       - 0001-mips-Use-32bit-cast-for-operand-on-mips32.patch
 
---------------bwhgAkjkxQv11HQ2hnESUa3o--
+    * Update Using-native-binaries.patch for node_js2c, it resolved below=
+ do_compile error [9]
+       Error:
+       /bin/sh: line 1: build/tmp/work/core2-64-poky-linux/nodejs/20.5.1/=
+node-v20.5.1/out/Release/node_js2c: No such file or directory
 
---------------Nlbe81s3gn3eao3V8t025etj--
+    * Remove obsolete dtrace & etw configure options (we had: --without-<=
+feature>) from the recipe [10]
 
---------------adsaDx0hFw8gFmugdsSmchz3
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature.asc"
+https://github.com/nodejs/node/releases/tag/v20.5.1
 
------BEGIN PGP SIGNATURE-----
+[1] https://github.com/nodejs/node/blob/main/doc/changelogs/CHANGELOG_V20=
+.md
+[2] https://github.com/nodejs/node/commit/f1007325753e62b13083f6e9e499fdc=
+33f753d7d
+[3] https://github.com/nodejs/node/commit/900ae1bda76caaa7213431a5268560b=
+578ed2d55
+[4] https://github.com/nodejs/node/commit/d2465369243bc4313d9840b62c2393c=
+4f179ffbb
+[5] https://github.com/v8/v8/commit/3cea5d5425c3a0d7d1768b3758269ac98875d=
+e77
+[6] https://github.com/nodejs/node/commit/f226350fcbebd4449fb0034fdaffa14=
+7e4de28ea
+[7] https://github.com/v8/v8/commit/a26ca5ed147dde47f02d70c5b38d8befc1c93=
+cb3
+[8] https://github.com/nodejs/node/commit/6bd756d7c6dfb7dc25daee329ad70df=
+68c14223e
+[9] https://github.com/nodejs/node/commit/4da7bc915c714989eba7eab753db9eb=
+9ebd8451a
+[10] https://github.com/nodejs/node/commit/aa3a572e6bee116cde69508dc29478=
+b40f40551a
 
-wmMEABEIACMWIQSPpVvapDR0rgZCCc27BTNVkZ0zFAUCZPIGiAUDAAAAAAAKCRC7BTNVkZ0zFHV3
-AJ9v3USRgSYZ410GDMqa0zEhRrQ0hACfT672Ni47bgFNCRlQMzN+ahrj1TI=
-=o0X/
------END PGP SIGNATURE-----
+Signed-off-by: Archana Polampalli <archana.polampalli@windriver.com>
+---
+ .../oe-npm-cache                              |  0
+ ...8.17.bb =3D> nodejs-oe-cache-native_20.5.bb} |  0
+ .../nodejs/0001-Using-native-binaries.patch   | 19 ++++++++-
+ ...-liftoff-Correct-function-signatures.patch | 42 +++++++------------
+ ...Use-32bit-cast-for-operand-on-mips32.patch | 34 ---------------
+ .../nodejs/nodejs/big-endian.patch            | 18 --------
+ .../nodejs/nodejs/mips-less-memory.patch      | 37 ----------------
+ .../{nodejs_18.17.1.bb =3D> nodejs_20.5.1.bb}   |  9 +---
+ 8 files changed, 34 insertions(+), 125 deletions(-)
+ rename meta-oe/recipes-devtools/nodejs/{nodejs-oe-cache-18.17 =3D> nodej=
+s-oe-cache-20.5}/oe-npm-cache (100%)
+ rename meta-oe/recipes-devtools/nodejs/{nodejs-oe-cache-native_18.17.bb =
+=3D> nodejs-oe-cache-native_20.5.bb} (100%)
+ delete mode 100644 meta-oe/recipes-devtools/nodejs/nodejs/0001-mips-Use-=
+32bit-cast-for-operand-on-mips32.patch
+ delete mode 100644 meta-oe/recipes-devtools/nodejs/nodejs/big-endian.pat=
+ch
+ delete mode 100644 meta-oe/recipes-devtools/nodejs/nodejs/mips-less-memo=
+ry.patch
+ rename meta-oe/recipes-devtools/nodejs/{nodejs_18.17.1.bb =3D> nodejs_20=
+.5.1.bb} (94%)
 
---------------adsaDx0hFw8gFmugdsSmchz3--
+diff --git a/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-18.17/oe-npm=
+-cache b/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-20.5/oe-npm-cach=
+e
+similarity index 100%
+rename from meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-18.17/oe-npm-=
+cache
+rename to meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-20.5/oe-npm-cac=
+he
+diff --git a/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-native_18.17=
+.bb b/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-native_20.5.bb
+similarity index 100%
+rename from meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-native_18.17.=
+bb
+rename to meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-native_20.5.bb
+diff --git a/meta-oe/recipes-devtools/nodejs/nodejs/0001-Using-native-bin=
+aries.patch b/meta-oe/recipes-devtools/nodejs/nodejs/0001-Using-native-bi=
+naries.patch
+index 66e10a0d0..0178cec77 100644
+--- a/meta-oe/recipes-devtools/nodejs/nodejs/0001-Using-native-binaries.p=
+atch
++++ b/meta-oe/recipes-devtools/nodejs/nodejs/0001-Using-native-binaries.p=
+atch
+@@ -12,7 +12,7 @@ https://git.openembedded.org/meta-openembedded/commit/?=
+id=3Dfeeb172d1a8bf010490d22
+=20
+ Signed-off-by: Archana Polampalli <archana.polampalli@windriver.com>
+ ---
+- node.gyp                 | 1 +
++ node.gyp                 | 3 +
+  tools/v8_gypfiles/v8.gyp | 5 +++++
+  2 files changed, 6 insertions(+)
+=20
+@@ -28,6 +28,23 @@ index e8e1d9f9..e60ccc10 100644
+                      '<(node_mksnapshot_exec)',
+                      '<(node_snapshot_main)',
+                    ],
++@@ -935,6 +935,7 @@
++           'action_name': 'node_js2c',
++           'process_outputs_as_sources': 1,
++           'inputs': [
+++            '<(PRODUCT_DIR)/v8-qemu-wrapper.sh',
++             '<(node_js2c_exec)',
++             '<@(library_files)',
++             '<@(deps_files)',
++@@ -944,6 +945,7 @@
++             '<(SHARED_INTERMEDIATE_DIR)/node_javascript.cc',
++           ],
++           'action': [
+++            '<(PRODUCT_DIR)/v8-qemu-wrapper.sh',
++             '<(node_js2c_exec)',
++             '<@(_outputs)',
++             'lib',
++
+ diff --git a/tools/v8_gypfiles/v8.gyp b/tools/v8_gypfiles/v8.gyp
+ index 42e26cd9..bc721991 100644
+ --- a/tools/v8_gypfiles/v8.gyp
+diff --git a/meta-oe/recipes-devtools/nodejs/nodejs/0001-liftoff-Correct-=
+function-signatures.patch b/meta-oe/recipes-devtools/nodejs/nodejs/0001-l=
+iftoff-Correct-function-signatures.patch
+index c9a522d2e..5af87d866 100644
+--- a/meta-oe/recipes-devtools/nodejs/nodejs/0001-liftoff-Correct-functio=
+n-signatures.patch
++++ b/meta-oe/recipes-devtools/nodejs/nodejs/0001-liftoff-Correct-functio=
+n-signatures.patch
+@@ -1,6 +1,6 @@
+ From dc3652c0abcdf8573fd044907b19d8eda7ca1124 Mon Sep 17 00:00:00 2001
+ From: Khem Raj <raj.khem@gmail.com>
+-Date: Wed, 20 Oct 2021 12:49:58 -0700
++Date: Mon, 3 Jul 2023 12:33:16 +0000
+ Subject: [PATCH] [liftoff] Correct function signatures
+=20
+ Fixes builds on mips where clang reports an error
+@@ -13,16 +13,15 @@ Upstream-Status: Submitted [https://chromium-review.g=
+ooglesource.com/c/v8/v8/+/3
+ Signed-off-by: Archana Polampalli <archana.polampalli@windriver.com>
+ ---
+  deps/v8/src/wasm/baseline/liftoff-assembler.h               | 6 +++---
+- deps/v8/src/wasm/baseline/mips/liftoff-assembler-mips.h     | 2 +-
+  deps/v8/src/wasm/baseline/mips64/liftoff-assembler-mips64.h | 2 +-
+- .../src/wasm/baseline/riscv64/liftoff-assembler-riscv64.h   | 2 +-
+- 4 files changed, 6 insertions(+), 6 deletions(-)
++ deps/v8/src/wasm/baseline/riscv/liftoff-assembler-riscv64.h | 2 +-
++ 3 files changed, 5 insertions(+), 5 deletions(-)
+=20
+ diff --git a/deps/v8/src/wasm/baseline/liftoff-assembler.h b/deps/v8/src=
+/wasm/baseline/liftoff-assembler.h
+-index 22c7f73a..db4cb168 100644
++index aef63c64..f2a11b01 100644
+ --- a/deps/v8/src/wasm/baseline/liftoff-assembler.h
+ +++ b/deps/v8/src/wasm/baseline/liftoff-assembler.h
+-@@ -646,7 +646,7 @@ class LiftoffAssembler : public TurboAssembler {
++@@ -717,7 +717,7 @@ class LiftoffAssembler : public MacroAssembler {
+    void FinishCall(const ValueKindSig*, compiler::CallDescriptor*);
+ =20
+    // Move {src} into {dst}. {src} and {dst} must be different.
+@@ -31,7 +30,7 @@ index 22c7f73a..db4cb168 100644
+ =20
+    // Parallel register move: For a list of tuples <dst, src, kind>, mov=
+e the
+    // {src} register of kind {kind} into {dst}. If {src} equals {dst}, i=
+gnore
+-@@ -795,8 +795,8 @@ class LiftoffAssembler : public TurboAssembler {
++@@ -884,8 +884,8 @@ class LiftoffAssembler : public MacroAssembler {
+    inline void MoveStackValue(uint32_t dst_offset, uint32_t src_offset,
+                               ValueKind);
+ =20
+@@ -42,24 +41,11 @@ index 22c7f73a..db4cb168 100644
+ =20
+    inline void Spill(int offset, LiftoffRegister, ValueKind);
+    inline void Spill(int offset, WasmValue);
+-diff --git a/deps/v8/src/wasm/baseline/mips/liftoff-assembler-mips.h b/d=
+eps/v8/src/wasm/baseline/mips/liftoff-assembler-mips.h
+-index c76fd2f4..0fffe231 100644
+---- a/deps/v8/src/wasm/baseline/mips/liftoff-assembler-mips.h
+-+++ b/deps/v8/src/wasm/baseline/mips/liftoff-assembler-mips.h
+-@@ -661,7 +661,7 @@ void LiftoffAssembler::Store(Register dst_addr, Regi=
+ster offset_reg,
+-     pinned =3D pinned | LiftoffRegList{dst_op.rm(), src};
+-     LiftoffRegister tmp =3D GetUnusedRegister(src.reg_class(), pinned);
+-     // Save original value.
+--    Move(tmp, src, type.value_type());
+-+    Move(tmp, src, type.value_type().kind());
+-=20
+-     src =3D tmp;
+-     pinned.set(tmp);
+ diff --git a/deps/v8/src/wasm/baseline/mips64/liftoff-assembler-mips64.h=
+ b/deps/v8/src/wasm/baseline/mips64/liftoff-assembler-mips64.h
+-index 36413545..48207337 100644
++index 96cba24c..53e1842d 100644
+ --- a/deps/v8/src/wasm/baseline/mips64/liftoff-assembler-mips64.h
+ +++ b/deps/v8/src/wasm/baseline/mips64/liftoff-assembler-mips64.h
+-@@ -593,7 +593,7 @@ void LiftoffAssembler::Store(Register dst_addr, Regi=
+ster offset_reg,
++@@ -592,7 +592,7 @@ void LiftoffAssembler::Store(Register dst_addr, Regi=
+ster offset_reg,
+      pinned.set(dst_op.rm());
+      LiftoffRegister tmp =3D GetUnusedRegister(src.reg_class(), pinned);
+      // Save original value.
+@@ -68,11 +54,11 @@ index 36413545..48207337 100644
+ =20
+      src =3D tmp;
+      pinned.set(tmp);
+-diff --git a/deps/v8/src/wasm/baseline/riscv64/liftoff-assembler-riscv64=
+.h b/deps/v8/src/wasm/baseline/riscv64/liftoff-assembler-riscv64.h
+-index 642a7d2a..56ffcc2a 100644
+---- a/deps/v8/src/wasm/baseline/riscv64/liftoff-assembler-riscv64.h
+-+++ b/deps/v8/src/wasm/baseline/riscv64/liftoff-assembler-riscv64.h
+-@@ -589,7 +589,7 @@ void LiftoffAssembler::Store(Register dst_addr, Regi=
+ster offset_reg,
++diff --git a/deps/v8/src/wasm/baseline/riscv/liftoff-assembler-riscv64.h=
+ b/deps/v8/src/wasm/baseline/riscv/liftoff-assembler-riscv64.h
++index 1d6ae09e..397e82b2 100644
++--- a/deps/v8/src/wasm/baseline/riscv/liftoff-assembler-riscv64.h
+++++ b/deps/v8/src/wasm/baseline/riscv/liftoff-assembler-riscv64.h
++@@ -286,7 +286,7 @@ void LiftoffAssembler::Store(Register dst_addr, Regi=
+ster offset_reg,
+      pinned.set(dst_op.rm());
+      LiftoffRegister tmp =3D GetUnusedRegister(src.reg_class(), pinned);
+      // Save original value.
+@@ -82,4 +68,4 @@ index 642a7d2a..56ffcc2a 100644
+      src =3D tmp;
+      pinned.set(tmp);
+ --
+-2.34.1
++2.40.0
+diff --git a/meta-oe/recipes-devtools/nodejs/nodejs/0001-mips-Use-32bit-c=
+ast-for-operand-on-mips32.patch b/meta-oe/recipes-devtools/nodejs/nodejs/=
+0001-mips-Use-32bit-cast-for-operand-on-mips32.patch
+deleted file mode 100644
+index a0242d8e1..000000000
+--- a/meta-oe/recipes-devtools/nodejs/nodejs/0001-mips-Use-32bit-cast-for=
+-operand-on-mips32.patch
++++ /dev/null
+@@ -1,34 +0,0 @@
+-From e65dde8db17da5acddeef7eb9316199c4e5e0811 Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Tue, 19 Apr 2022 12:40:25 -0700
+-Subject: [PATCH] mips: Use 32bit cast for operand on mips32
+-
+-Fixes
+-deps/v8/src/compiler/backend/mips/code-generator-mips.cc: In member func=
+tion 'void v8::internal::compiler::CodeGenerator::AssembleReturn(v8::inte=
+rnal::compiler::InstructionOperand*)':
+-../deps/v8/src/compiler/backend/mips/code-generator-mips.cc:4233:48: err=
+or: call of overloaded 'Operand(int64_t)' is ambiguous
+- 4233 |                 Operand(static_cast<int64_t>(0)));
+-      |                                                ^
+-
+-Upstream-Status: Pending
+-
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+- deps/v8/src/compiler/backend/mips/code-generator-mips.cc | 2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
+-
+-diff --git a/deps/v8/src/compiler/backend/mips/code-generator-mips.cc b/=
+deps/v8/src/compiler/backend/mips/code-generator-mips.cc
+-index 2b8197e..b226140 100644
+---- a/deps/v8/src/compiler/backend/mips/code-generator-mips.cc
+-+++ b/deps/v8/src/compiler/backend/mips/code-generator-mips.cc
+-@@ -4230,7 +4230,7 @@ void CodeGenerator::AssembleReturn(InstructionOper=
+and* additional_pop_count) {
+-     } else if (FLAG_debug_code) {
+-       __ Assert(eq, AbortReason::kUnexpectedAdditionalPopValue,
+-                 g.ToRegister(additional_pop_count),
+--                Operand(static_cast<int64_t>(0)));
+-+                Operand(static_cast<int32_t>(0)));
+-     }
+-   }
+-   // Functions with JS linkage have at least one parameter (the receive=
+r).
+---=20
+-2.36.0
+-
+diff --git a/meta-oe/recipes-devtools/nodejs/nodejs/big-endian.patch b/me=
+ta-oe/recipes-devtools/nodejs/nodejs/big-endian.patch
+deleted file mode 100644
+index 529381842..000000000
+--- a/meta-oe/recipes-devtools/nodejs/nodejs/big-endian.patch
++++ /dev/null
+@@ -1,18 +0,0 @@
+-
+-https://github.com/v8/v8/commit/878ccb33bd3cf0e6dc018ff8d15843f585ac07be
+-
+-did some automated cleanups but it missed big-endian code.
+-
+-Upstream-Status: Pending
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---- a/deps/v8/src/runtime/runtime-utils.h
+-+++ b/deps/v8/src/runtime/runtime-utils.h
+-@@ -126,7 +126,7 @@ static inline ObjectPair MakePair(Object
+- #if defined(V8_TARGET_LITTLE_ENDIAN)
+-   return x.ptr() | (static_cast<ObjectPair>(y.ptr()) << 32);
+- #elif defined(V8_TARGET_BIG_ENDIAN)
+--  return y->ptr() | (static_cast<ObjectPair>(x->ptr()) << 32);
+-+  return y.ptr() | (static_cast<ObjectPair>(x.ptr()) << 32);
+- #else
+- #error Unknown endianness
+- #endif
+diff --git a/meta-oe/recipes-devtools/nodejs/nodejs/mips-less-memory.patc=
+h b/meta-oe/recipes-devtools/nodejs/nodejs/mips-less-memory.patch
+deleted file mode 100644
+index 16776cb76..000000000
+--- a/meta-oe/recipes-devtools/nodejs/nodejs/mips-less-memory.patch
++++ /dev/null
+@@ -1,37 +0,0 @@
+-Description: mksnapshot uses too much memory on 32-bit mipsel
+-Author: J=C3=A9r=C3=A9my Lal <kapouer@melix.org>
+-Last-Update: 2020-06-03
+-Forwarded: https://bugs.chromium.org/p/v8/issues/detail?id=3D10586
+-
+-This ensures that we reserve 500M instead of 2G range for codegen
+-ensures that qemu-mips can allocate such large ranges
+-
+-Upstream-Status: Inappropriate [embedded specific]
+-
+-Imported from debian https://salsa.debian.org/js-team/nodejs/-/blob/mast=
+er-12.x/debian/patches/mips-less-memory.patch
+-https://buildd.debian.org/status/fetch.php?pkg=3Dnodejs&arch=3Dmipsel&ve=
+r=3D12.17.0~dfsg-2&stamp=3D1591050388&raw=3D0
+-
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+-
+---- a/deps/v8/src/common/globals.h
+-+++ b/deps/v8/src/common/globals.h
+-@@ -224,7 +224,7 @@ constexpr size_t kMinimumCodeRangeSize =3D
+- constexpr size_t kMinExpectedOSPageSize =3D 64 * KB;  // OS page on PPC=
+ Linux
+- #elif V8_TARGET_ARCH_MIPS
+- constexpr bool kPlatformRequiresCodeRange =3D false;
+--constexpr size_t kMaximalCodeRangeSize =3D 2048LL * MB;
+-+constexpr size_t kMaximalCodeRangeSize =3D 512 * MB;
+- constexpr size_t kMinimumCodeRangeSize =3D 0 * MB;
+- constexpr size_t kMinExpectedOSPageSize =3D 4 * KB;  // OS page.
+- #else
+---- a/deps/v8/src/codegen/mips/constants-mips.h
+-+++ b/deps/v8/src/codegen/mips/constants-mips.h
+-@@ -140,7 +140,7 @@ const uint32_t kLeastSignificantByteInIn
+- namespace v8 {
+- namespace internal {
+-=20
+--constexpr size_t kMaxPCRelativeCodeRangeInMB =3D 4096;
+-+constexpr size_t kMaxPCRelativeCodeRangeInMB =3D 1024;
+-=20
+- // --------------------------------------------------------------------=
+---------
+- // Registers and FPURegisters.
+diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_18.17.1.bb b/meta-oe/=
+recipes-devtools/nodejs/nodejs_20.5.1.bb
+similarity index 94%
+rename from meta-oe/recipes-devtools/nodejs/nodejs_18.17.1.bb
+rename to meta-oe/recipes-devtools/nodejs/nodejs_20.5.1.bb
+index ee5e848bf..6bb0f7fab 100644
+--- a/meta-oe/recipes-devtools/nodejs/nodejs_18.17.1.bb
++++ b/meta-oe/recipes-devtools/nodejs/nodejs_20.5.1.bb
+@@ -1,7 +1,7 @@
+ DESCRIPTION =3D "nodeJS Evented I/O for V8 JavaScript"
+ HOMEPAGE =3D "http://nodejs.org"
+ LICENSE =3D "MIT & ISC & BSD-2-Clause & BSD-3-Clause & Artistic-2.0 & Ap=
+ache-2.0"
+-LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Dbc1f9ebe76be76f163e3b675303ad=
+9cd"
++LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D059ecf3a6f87111685e51b611b956=
+3e5"
+=20
+ CVE_PRODUCT =3D "nodejs node.js"
+=20
+@@ -22,11 +22,8 @@ COMPATIBLE_HOST:powerpc =3D "null"
+ SRC_URI =3D "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.xz \
+            file://0001-Disable-running-gyp-files-for-bundled-deps.patch =
+\
+            file://0004-v8-don-t-override-ARM-CFLAGS.patch \
+-           file://big-endian.patch \
+-           file://mips-less-memory.patch \
+            file://system-c-ares.patch \
+            file://0001-liftoff-Correct-function-signatures.patch \
+-           file://0001-mips-Use-32bit-cast-for-operand-on-mips32.patch \
+            file://run-ptest \
+            "
+=20
+@@ -39,7 +36,7 @@ SRC_URI:append:toolchain-clang:x86 =3D " \
+ SRC_URI:append:toolchain-clang:powerpc64le =3D " \
+            file://0001-ppc64-Do-not-use-mminimal-toc-with-clang.patch \
+            "
+-SRC_URI[sha256sum] =3D "f215cf03d0f00f07ac0b674c6819f804c1542e16f152da04=
+980022aeccf5e65a"
++SRC_URI[sha256sum] =3D "439c71aa2f38c2861657bfa538e99191a571258066cbfd45=
+48586049c8134190"
+=20
+ S =3D "${WORKDIR}/node-v${PV}"
+=20
+@@ -148,8 +145,6 @@ do_configure () {
+     # $TARGET_ARCH settings don't match --dest-cpu settings
+     python3 configure.py --verbose --prefix=3D${prefix} \
+                --shared-openssl \
+-               --without-dtrace \
+-               --without-etw \
+                --dest-cpu=3D"${@map_nodejs_arch(d.getVar('TARGET_ARCH'),=
+ d)}" \
+                --dest-os=3Dlinux \
+                --libdir=3D${baselib} \
+--=20
+2.40.0
+
 
