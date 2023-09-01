@@ -1,194 +1,100 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <kai.kang@eng.windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0818EC83F2E
-	for <webhook@archiver.kernel.org>; Thu, 31 Aug 2023 16:09:49 +0000 (UTC)
-Received: from mail-oo1-f42.google.com (mail-oo1-f42.google.com [209.85.161.42])
- by mx.groups.io with SMTP id smtpd.web11.1842.1693498179010033578
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CDC03CA0FE2
+	for <webhook@archiver.kernel.org>; Fri,  1 Sep 2023 03:14:33 +0000 (UTC)
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.web11.12642.1693538070687079299
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 31 Aug 2023 09:09:39 -0700
+ Thu, 31 Aug 2023 20:14:30 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20221208 header.b=cvXm2gCG;
- spf=pass (domain: gmail.com, ip: 209.85.161.42, mailfrom: raj.khem@gmail.com)
-Received: by mail-oo1-f42.google.com with SMTP id 006d021491bc7-57361de8878so631414eaf.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 31 Aug 2023 09:09:38 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1693498178; x=1694102978; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=V4gndnGdyW9UvSj9a0oZU6PTSO1hEkDA68lCaJ4kZhM=;
-        b=cvXm2gCGIzBxsjIREU0tBK6XtRpB3EeF2ckTDM2XOxJBT9NUctIiDtTKQJNlVJ3qK5
-         RE9t/j492MtT1AwVyGZYAr36zBYvLflmzAJhhEvtoyAJQcP4G384mQyzThHjBgQM0DDL
-         fYIC3r2cu1jUFlTGIg5hGV4v5cEDcOD7rI+hr4Xfssvjy6zNzSxsJef1zAtaWGOrzRgB
-         5vU6tfYBt7iTXpoYoyGWCluvJJmaex2SQuezdSrePMcasftd62w/lrPasW03tsXz4YGr
-         BlR9gGnHmqyVLTdOGASGHchJHW/oyMheFCRylDkjHH35BVjzx35bkF9MvEOMOd+5hE0g
-         cXcg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1693498178; x=1694102978;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=V4gndnGdyW9UvSj9a0oZU6PTSO1hEkDA68lCaJ4kZhM=;
-        b=FSAJy5jB6ROUfMv4ySqOQLYDgf1dmZdtMs/tYLP9k9C7+ICx8feq85wpdwYLyJgDuI
-         R0rey306t5NVyaODzBXX5p0GosYGhYzlX/TG5anssLK0qZnoXpuTo+BR6S4ZTtXwDhEK
-         8FRXaxeOeYzQp7kowPnM6pCr/Rsceri6GvKhaqvX+fyuc9JrkBZoowtKpqrDuVvRny1z
-         TOtRmp+PfVQRQ8HB680bsGxa00ONP3E1ZD3O6NMpFVIW9IgY7chJvasWyjV8rW2FC2Ca
-         S/laB7AB5gAjqXgoTzz0d1FgLbf9iDU4JSQXBjUdK9W4pdpu5OkKpBIC1yqPuf5rOgtL
-         n8Kw==
-X-Gm-Message-State: AOJu0Yx/JjRcMC6FEnPON4lbXXq8dOYbFiL1PKfLK5As4Hv0JcxypsNT
-	Q6W7OnVWXuo9VbvN1F2LdbQFpQ9B3afS/PSFQFYD2m1SmOc+Ag==
-X-Google-Smtp-Source: AGHT+IGIEfb+kRy7Yx94s7WlNpp3PL03vjvzOkku/Cdb5bUOksCJwpLiiDpdPjO23YT91lm1vSAAFhx3xmN1VUw1s3w=
-X-Received: by 2002:a4a:2a1c:0:b0:573:55f4:516a with SMTP id
- k28-20020a4a2a1c000000b0057355f4516amr5401629oof.3.1693498177866; Thu, 31 Aug
- 2023 09:09:37 -0700 (PDT)
+ dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=F3nUHzYq;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=760894fc2b=kai.kang@windriver.com)
+Received: from pps.filterd (m0250811.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.17.1.22/8.17.1.22) with ESMTP id 38131g26004956
+	for <openembedded-devel@lists.openembedded.org>; Fri, 1 Sep 2023 03:14:29 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
+	 h=from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding:content-type; s=PPS06212021; bh=ySHAX
+	qZjEMoet9wssrWRdHxFgPGQLRsrOrk+n9x2Byw=; b=F3nUHzYq/SVBrU1n6gDed
+	3LjG9hOMLpEQ2C075HTGzm94gkQaNDSjqsrSp2hHQHo4HLBiyH3U6MkrFrEuqUOc
+	wpy+flSRZBWYBPfRnFgK/Q+GcFvxYUDDDMFJ1jOCvlbUrFn+hFHKT9+Ewv66zWE5
+	XfL/HrMFKTFzQab6YXQpi1ddWgy+IFqyTkyuJgVmWghGOsMQLwwzA+DQwBVVeTBO
+	Drup7QYcH09tOmwBMy4ucx8p5hn3S4JAxpGkBkfnw8rcYhjkUohDjaFWjg61LBr+
+	gtmJcRM3iBTDVQFpUCBT3is3KJOQPaZqgb3RVwIRrOlueyU25HHcP3FFsgexmrfb
+	w==
+Received: from ala-exchng02.corp.ad.wrs.com (ala-exchng02.wrs.com [147.11.82.254])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3sq6kwnh17-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Fri, 01 Sep 2023 03:14:29 +0000 (GMT)
+Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
+ ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.27; Thu, 31 Aug 2023 20:14:28 -0700
+Received: from pek-lpg-core3.wrs.com (128.224.153.232) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
+ 15.1.2507.27 via Frontend Transport; Thu, 31 Aug 2023 20:14:27 -0700
+From: <kai.kang@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [meta-oe][PATCH] libmcrypt: fix multilib conflict
+Date: Fri, 1 Sep 2023 11:14:24 +0800
+Message-ID: <20230901031424.1443331-1-kai.kang@windriver.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <20230823085310.339821-1-tymoteusz.burak@3mdeb.com>
- <CAMKF1spPM9dRnHdyxuXbDXQn_x=uQ6b0WUGKzTaRTpfDnCP0vQ@mail.gmail.com> <ead6306d-653c-d105-5b74-4e802d22fadd@3mdeb.com>
-In-Reply-To: <ead6306d-653c-d105-5b74-4e802d22fadd@3mdeb.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 31 Aug 2023 09:09:11 -0700
-Message-ID: <CAMKF1spC09VHNT_W+CmtH4r_W0YRK21hh3sXcnmpZ+-akJ9kfg@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH v3] libfaketime: add recipe
-To: Tymoteusz Burak <tymoteusz.burak@3mdeb.com>
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Proofpoint-GUID: 0hNEDkvjLjhaY7Ajin7kDBerRUB2imos
+X-Proofpoint-ORIG-GUID: 0hNEDkvjLjhaY7Ajin7kDBerRUB2imos
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.254,Aquarius:18.0.957,Hydra:6.0.601,FMLib:17.11.176.26
+ definitions=2023-09-01_01,2023-08-31_01,2023-05-22_02
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 malwarescore=0
+ lowpriorityscore=0 mlxlogscore=781 priorityscore=1501 phishscore=0
+ adultscore=0 spamscore=0 bulkscore=0 suspectscore=0 impostorscore=0
+ clxscore=1011 mlxscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.19.0-2308100000 definitions=main-2309010028
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 31 Aug 2023 16:09:49 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104686
+ <openembedded-devel@lists.openembedded.org>; Fri, 01 Sep 2023 03:14:33 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104687
 
-On Thu, Aug 31, 2023 at 2:35=E2=80=AFAM Tymoteusz Burak
-<tymoteusz.burak@3mdeb.com> wrote:
->
-> Hello everyone,
->
-> I hope you're doing well. Your feedback is much appreciated, and I'd
-> like to provide some context on a few matters.
->
-> I understand that there's a reported Clang build failure with the patch.
-> I'd like to clarify that I don't currently have Clang configured on my
-> workstation, and I'm not entirely familiar with the steps required to
-> address this issue. If someone could provide guidance on how to
-> investigate and resolve this specific problem, I'd be grateful. The
-> libfaketime recipe I submitted is from a few projects ago, and it worked
-> successfully when I tested it in a fresh project environment. I aimed to
-> contribute this recipe to the OpenEmbedded layer to benefit the
-> community. I apologize for any inconvenience the build failure might be
-> causing and appreciate your assistance in ensuring the patch's
-> compatibility.
+From: Kai Kang <kai.kang@windriver.com>
 
-Thanks for your contribution. Although it had issues as reported, I went
-ahead and fixed them myself, atleast for build matrix that I have including
-clang issue. building with clang should be easier just include meta-clang
-and follow the readme to enable it for your component under test.
+It fails to install libmcrypt-dev and lib32-libmcrypt-dev at same time:
 
-https://github.com/yoedistro/meta-clang
+Error: Transaction test error:
+  file /usr/bin/libmcrypt-config conflicts between attempted installs of
+  libmcrypt-dev-2.5.8-r0.core2_64 and lib32-libmcrypt-dev-2.5.8-r0.i586
 
-obviously, it had more issues, as Martin figured out subsequently.
+Use MULTILIB_SCRIPTS from multilib_script.bbclass to handle them.
 
-Usually when a patch is sent for upstream inclusion there are more
-usecases users have that can bring out latent problems as seen here
-I would expect you to keep this component in good shape from here
-because getting it upstream is the first step, it follows up with
-maintaining it in good shape for the rest of its life.
+Signed-off-by: Kai Kang <kai.kang@windriver.com>
+---
+ meta-oe/recipes-crypto/libmcrypt/libmcrypt_2.5.8.bb | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
->
-> ll happily review the RFC patch and adress other issues as i have to
-> agree that the package name lib32-liblib32-libfaketime is quite ridiculou=
-s
->
-> Once again, thank you for your time and feedback. I look forward to your
-> guidance and advice on how to proceed with resolving the issues raised.
->
-> Best regards, Tymoteusz Burak
->
-> On 8/24/23 09:54, Khem Raj wrote:
-> > fails to compile with clang
-> >
-> > https://errors.yoctoproject.org/Errors/Details/732866/
-> >
-> > -Wno-nonnull-compare seems to be not a portable option
-> >
-> > On Wed, Aug 23, 2023 at 1:53=E2=80=AFAM Tymoteusz Burak
-> > <tymoteusz.burak@3mdeb.com> wrote:
-> >> This commit adds the libfaketime library recipe, which provides time
-> >> manipulation capabilities for testing and debugging purposes. libfaket=
-ime allows
-> >> developers to modify the system time reported to applications, aiding =
-in scenarios
-> >> where accurate time emulation is required.
-> >>
-> >> I deleted the extra flags altogether as they seem to be only necessary
-> >> for old versions of this project (0.9.6).
-> >>
-> >> CC: Khem Raj <raj.khem@gmail.com>
-> >> Signed-off-by: Tymoteusz Burak <tymoteusz.burak@3mdeb.com>
-> >> ---
-> >>   .../libfaketime/libfaketime_0.9.10.bb         | 30 +++++++++++++++++=
-++
-> >>   1 file changed, 30 insertions(+)
-> >>   create mode 100644 meta-oe/recipes-test/libfaketime/libfaketime_0.9.=
-10.bb
-> >>
-> >> diff --git a/meta-oe/recipes-test/libfaketime/libfaketime_0.9.10.bb b/=
-meta-oe/recipes-test/libfaketime/libfaketime_0.9.10.bb
-> >> new file mode 100644
-> >> index 000000000000..7500e57658aa
-> >> --- /dev/null
-> >> +++ b/meta-oe/recipes-test/libfaketime/libfaketime_0.9.10.bb
-> >> @@ -0,0 +1,30 @@
-> >> +DESCRIPTION =3D "A library for faking the system time in user-space p=
-rograms"
-> >> +SECTION =3D "libs"
-> >> +LICENSE =3D "GPL-2.0-only"
-> >> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Db234ee4d69f5fce4486a80fdaf=
-4a4263"
-> >> +
-> >> +SRCREV =3D "d475b925943ad404c6c728ac868dc73949e7281c"
-> >> +SRC_URI =3D "\
-> >> +    git://git@github.com/wolfcw/libfaketime.git;branch=3Dmaster;proto=
-col=3Dhttps \
-> >> +    "
-> >> +
-> >> +S =3D "${WORKDIR}/git"
-> >> +
-> >> +do_configure[noexec] =3D "1"
-> >> +do_compile () {
-> >> +    oe_runmake
-> >> +}
-> >> +do_install () {
-> >> +    install -d ${D}${libdir}/faketime
-> >> +    oe_libinstall -C src libfaketime ${D}${libdir}/faketime
-> >> +    install -d ${D}${bindir}
-> >> +    install -m 0755 src/faketime ${D}${bindir}
-> >> +}
-> >> +
-> >> +PACKAGES =3D+ "lib${PN}"
-> >> +
-> >> +FILES:${PN} =3D "${bindir}/faketime"
-> >> +FILES:lib${PN} =3D "${libdir}/faketime/*"
-> >> +
-> >> +INSANE_SKIP:${PN} +=3D "dev-so"
-> >> +INSANE_SKIP:lib${PN} +=3D "dev-so"
-> >> --
-> >> 2.41.0
-> >>
-> >>
-> >>
-> >>
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#104682): https://lists.openembedded.org/g/openembedde=
-d-devel/message/104682
-> Mute This Topic: https://lists.openembedded.org/mt/100911255/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
-aj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
+diff --git a/meta-oe/recipes-crypto/libmcrypt/libmcrypt_2.5.8.bb b/meta-oe/recipes-crypto/libmcrypt/libmcrypt_2.5.8.bb
+index a3d09c7cb..cfa056d71 100644
+--- a/meta-oe/recipes-crypto/libmcrypt/libmcrypt_2.5.8.bb
++++ b/meta-oe/recipes-crypto/libmcrypt/libmcrypt_2.5.8.bb
+@@ -12,7 +12,7 @@ SRC_URI[sha256sum] = "e4eb6c074bbab168ac47b947c195ff8cef9d51a211cdd18ca9c9ef34d2
+ UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/mcrypt/files/Libmcrypt/"
+ UPSTREAM_CHECK_REGEX = "Libmcrypt/(?P<pver>\d+(\.\d+)+)/"
+ 
+-inherit autotools-brokensep gettext binconfig
++inherit autotools-brokensep gettext binconfig multilib_script
+ 
+ CFLAGS += "-Wno-error=implicit-int"
+ 
+@@ -28,3 +28,5 @@ do_configure() {
+ }
+ 
+ CLEANBROKEN = "1"
++
++MULTILIB_SCRIPTS = "${PN}-dev:${bindir}/libmcrypt-config"
+-- 
+2.34.1
+
 
