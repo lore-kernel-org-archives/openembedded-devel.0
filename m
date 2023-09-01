@@ -1,189 +1,125 @@
-Return-Path: <beniaminsandu@gmail.com>
+Return-Path: <dzagorui@cisco.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 72F49CA0FE1
-	for <webhook@archiver.kernel.org>; Fri,  1 Sep 2023 09:04:57 +0000 (UTC)
-Received: from mail-wm1-f45.google.com (mail-wm1-f45.google.com [209.85.128.45])
- by mx.groups.io with SMTP id smtpd.web10.2162.1693559093540828152
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B7E3ACA0FE6
+	for <webhook@archiver.kernel.org>; Fri,  1 Sep 2023 12:56:58 +0000 (UTC)
+Received: from alln-iport-5.cisco.com (alln-iport-5.cisco.com [173.37.142.92])
+ by mx.groups.io with SMTP id smtpd.web10.5452.1693573015129478559
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 01 Sep 2023 02:04:53 -0700
+ Fri, 01 Sep 2023 05:56:55 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20221208 header.b=gZRg5f0C;
- spf=pass (domain: gmail.com, ip: 209.85.128.45, mailfrom: beniaminsandu@gmail.com)
-Received: by mail-wm1-f45.google.com with SMTP id 5b1f17b1804b1-401ceda85cdso17868255e9.1
-        for <openembedded-devel@lists.openembedded.org>; Fri, 01 Sep 2023 02:04:53 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1693559092; x=1694163892; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=fhB0KwupXHgU/tt7DyaamxWvcNko8qYhg0F9scw+P0Q=;
-        b=gZRg5f0Cxqxtz1psan6iOMynkd0ogbo2hs2P9K1+KXFOv4nUDUuQ4LcP/ebrz8ToXR
-         P8iylBqyjit4QUNBJi6zyl75P8datA+ejeegZZIt7tN8YsevoPVLemfXq5z9yITsk9gB
-         3v3UgmsVp4XLex2I6Q6KT3cg+dAkx9rbBJ7xP4Q8+ZTnAiuJQYIkztiMkL3fIl19xutT
-         p1rHUCF217aG/5Z0EqQgUVDJ3pHDFixyTgKVXBN9U3gd8foyECwUhQUA1XZaW1WIxIHE
-         w668m1aez2ZzNq4ZCDpXWzJorf5PXla9LwMcKoLl832owRvwwOSaWoMpYlhOmlKUZf5+
-         uo0Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1693559092; x=1694163892;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=fhB0KwupXHgU/tt7DyaamxWvcNko8qYhg0F9scw+P0Q=;
-        b=MtqiXzWv1r7zuR69sTfJ+YXIQNmzeshUGJw/KxAWPpgs6o4Thz0zuzj8kKDV8Gddbo
-         GiiFkukSde8u0mv+OzQBYhWzeZpnFntL0QRBRY8Ai9Ksa19umuiL7V8QwA0gl36rNSPw
-         0/Xavtf/Lh/phEDTmC44f+3sfhlSLXIS7twXvEX7R1/JtHgrm9vJVLoObiErNGtu0Nof
-         nomD0Hpz+R3ddb11Hm1Poc1t9y3xT6DstCAmckk3EV3yKbtJk9kyT8f/87BETC8klZc9
-         aW8n5whVHL6f7Tvq0A8arlNkdZ2KPxYjCOP1Ka2cF30rCfcft/ciSyXok41n+LN5MDZY
-         AY/g==
-X-Gm-Message-State: AOJu0YyQRr5Pf2/nOBzOsXnWultPm4zfLsBA8PgJOU78IBMgkQl3Dwli
-	gdwXKEDaceVI9b7kJ1n1u7ixow1Ijcw=
-X-Google-Smtp-Source: AGHT+IHrC8hAV2MNCUiTlzyF/yx0ijZQ5I9V+8bQLk/rt/PidajMc9Rvm/rprPXBvixkvA/H7L2DXw==
-X-Received: by 2002:a05:600c:ad8:b0:400:2dc5:2006 with SMTP id c24-20020a05600c0ad800b004002dc52006mr1307620wmr.36.1693559091515;
-        Fri, 01 Sep 2023 02:04:51 -0700 (PDT)
-Received: from localhost.localdomain ([5.13.128.0])
-        by smtp.gmail.com with ESMTPSA id h9-20020a05600c260900b003fff96bb62csm4154162wma.16.2023.09.01.02.04.50
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 01 Sep 2023 02:04:50 -0700 (PDT)
-From: Beniamin Sandu <beniaminsandu@gmail.com>
+ dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport header.b=gxm0oinE;
+ spf=pass (domain: cisco.com, ip: 173.37.142.92, mailfrom: dzagorui@cisco.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=cisco.com; i=@cisco.com; l=1386; q=dns/txt; s=iport;
+  t=1693573015; x=1694782615;
+  h=from:to:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=IoWuhVjGRBNQMsW57eEsJVDOP9XRaMXG5vlxfWSJsyk=;
+  b=gxm0oinEIkR/znQ2iVPnA4IP5HG7kAydVL0WFKNBgITtb41epQrwDq0r
+   /ks4XiexdCdPIIygAsLJvo6GO9smKZWvMqbx+a1pSsa7JpD8mH4dBHi1m
+   QHg14xeUtlFYNQ1ZPelcjHP2DREra+ThBtgjykwB3r2URbVlbQ6RUkt/j
+   o=;
+X-IPAS-Result: =?us-ascii?q?A0A3AQCu3vFkmJFdJa1agliDLVVAR5QOgiOdf4ElA1YPA?=
+ =?us-ascii?q?QEBDQEBMRMEAQGLcwIlNAkOAQIEAQEBAQMCAwEBAQEBAQMBAQUBAQECAQcEF?=
+ =?us-ascii?q?AEBAQEBAQEBHhkFDhAnhWgNhj0BgVNEgn4Bgl4DqDGCLIEBhHauMYFogUSMN?=
+ =?us-ascii?q?4VRJxuBSUSBFYE8gi2FEYV1BIlfhUUHgluDXokWKoEICF6Baj0CDVQLC2OBF?=
+ =?us-ascii?q?YJHAgIROhNKWhcbAwcDWioQKwcELyIGCRctJQZRBBcWJAkTEj4Eg0QKgQM/E?=
+ =?us-ascii?q?Q4RgkdhNhlLgmYJFUFOdhArBBQYgRRwHxUeNxESGQ0DCHYdAjI8AwUDBDYKF?=
+ =?us-ascii?q?Q0LIQUUQwNIBkwLAwIcBQMDBIE2BQ8fAhAuLwMJAwcFSUADCxgNSBEsNRQbB?=
+ =?us-ascii?q?kFzB6BSglJ7EwFLAnmBIqQ0oDuEFYt/lQUaM4VXpAiYLKNshDACBAYFAhaBY?=
+ =?us-ascii?q?zqBWzMaCBsVgyIJSRkPjjmCOZE+JDI7AgcLAQEDCYtIAQE?=
+IronPort-Data: A9a23:Olz2/qui44+3k6X+5F6v6JMgbufnVCpeMUV32f8akzHdYApBsoF/q
+ tZmKW3Ta6uMNmGnftEgO46y90NVuZSHyoUySgtpri9jFS8TgMeUXt7xwmUckM+xwmwvaGo9s
+ q3yv/GZdJhcokf0/0vrav67xZVF/fngqoDUUIYoAQgvA1c+IMsdoUg7wbVh09Yx2YLR7z6l4
+ LseneWOYDdJ5BYsWo4kw/rrRMRH5amaVJsw5zTSVNgT1LPsvyB94KE3ecldG0DFrrx8RYZWc
+ QpsIIaRpQs19z91Yj+sfy2SnkciGtY+NiDW4pZatjTLbhVq/kQPPqgH2PU0MxtKrhODxchN6
+ thRqoWJGRUUIKHtsbFIO/VYO3kW0axu4rTLJz20ttaeihyAeHr3yPIoB0YzVWEa0r8oWicVq
+ rpJc3ZUMk3ra+GemNpXTsFglM0sK9P2PasUu2prynfSCvNOrZXrGvmauIEEgG5t7ixINdTnR
+ fNCRSFhVhHZWRBkC1QJLYw4wt790xETdBUB+A7K+sLb+VP7yxR81rXoOtfZdtGGAMlYgEucj
+ mbH5HjiRBYCOdqSzDCI/n6hiqnIhyyTZW4JPKez+vgvi1qJyylCThYXTlC85/K+jyZSRu6zN
+ WROpjcLi6Jo7HCJQ8XiRiToskOasj81Do84//IB1CmBza/d4gC8D2cCTyJcZNFOiCPQbWF2v
+ rNut463bQGDoIF5WlrGqejJ9WLa1Tw9aD5dNXVdHGPp9vG6+Nlr5i8jWOqPB0JcszEYMSv7z
+ zbPpy8kivBCy8UKzK68u1vAhlpAR6QlrCZrvW07vUr8vmuVgbJJgaTztDA3Ct4cdO6koqGp5
+ iRspiRnxLlm4WuxvCKMWv4RO7qi+uyINjbR6XY2Qch6qmzzpSL/IN0MiN2bGKuPGphcEdMOS
+ BGL0T69GLcPVJdXRfYtOtnoW5hCIVbITIi8DZg4keaikrAoJFPYo0mClGab3nvmlwA3gLojN
+ JKAGftA/l5EYZmLOAGeHr9HuZdyn3hW7TqKGfjTkU/9uZLAPyH9dFvwGAbUBgzPxPna8Fy9H
+ hc2H5bi9iizp8WkPXCGq9BPdglbRZX5bLivw/Fqmie4ClIOMAkc5zX5mNvNp6QNc3xpq9r1
+IronPort-HdrOrdr: A9a23:DhdFJK7kln3aLDpQjQPXwN3XdLJyesId70hD6qkXc202TiX2ra
+ 6TdZgguCMc6wxhO03I5+rgBEDoexq1nvRICOIqUotKMjOLhILRFuFfBU+I+UyFJ8U4ndQtsJ
+ tdTw==
+X-Talos-CUID: 9a23:1JYZw2296vCaARi74llOiLxfQJw4V1vXlm/sAUKkFn9QGK+oV1Ox0fYx
+X-Talos-MUID: =?us-ascii?q?9a23=3A0cKORg1dkyBNgoYwOUsAr2+LFDUjwZ2MMRships?=
+ =?us-ascii?q?8vtC+OAdBOCm4kjLpe9py?=
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-AV: E=Sophos;i="6.02,219,1688428800"; 
+   d="scan'208";a="148564415"
+Received: from rcdn-core-9.cisco.com ([173.37.93.145])
+  by alln-iport-5.cisco.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 01 Sep 2023 12:56:54 +0000
+Received: from sjc-ads-9103.cisco.com (sjc-ads-9103.cisco.com [10.30.208.113])
+	by rcdn-core-9.cisco.com (8.15.2/8.15.2) with ESMTPS id 381CurOm015398
+	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO)
+	for <openembedded-devel@lists.openembedded.org>; Fri, 1 Sep 2023 12:56:53 GMT
+Received: by sjc-ads-9103.cisco.com (Postfix, from userid 487941)
+	id 1AEB3CC1293; Fri,  1 Sep 2023 05:56:53 -0700 (PDT)
+From: Denys Zagorui <dzagorui@cisco.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Beniamin Sandu <beniaminsandu@gmail.com>
-Subject: [meta-networking][PATCH] unbound: upgrade 1.17.1 -> 1.18.0
-Date: Fri,  1 Sep 2023 12:04:33 +0300
-Message-Id: <20230901090433.1770836-1-beniaminsandu@gmail.com>
-X-Mailer: git-send-email 2.25.1
+Subject: [meta-oe][PATCH] bpftool: add native and nativesdk support
+Date: Fri,  1 Sep 2023 05:56:53 -0700
+Message-Id: <20230901125653.1143552-1-dzagorui@cisco.com>
+X-Mailer: git-send-email 2.35.6
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+X-Outbound-SMTP-Client: 10.30.208.113, sjc-ads-9103.cisco.com
+X-Outbound-Node: rcdn-core-9.cisco.com
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 01 Sep 2023 09:04:57 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104689
+ <openembedded-devel@lists.openembedded.org>; Fri, 01 Sep 2023 12:56:58 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104690
 
-Signed-off-by: Beniamin Sandu <beniaminsandu@gmail.com>
+There are issues with nativesdk variant
+...
+ERROR: nativesdk-bpftool-1.0-r0 do_package: QA Issue:
+nativesdk-bpftool: Files/directories were installed but not shipped in any package:
+  /usr/local/oe-sdk-hardcoded-buildpath/sysroots/x86_64-xesdk-linux/usr/sbin/bpftool
+  /usr/share/bash-completion/completions/bpftool
+...
+
+nativesdk.bbclass sets sbindir = "${bindir}" but bpftool is installed under sbin
+to fix that add sbin to FILES
+
+for bpftool completions {prefix} is not used but it seems that bitbake expects that
+installed files should be perfixed with "${SDKPATHNATIVE}${prefix_nativesdk}"
+to fix that override bash_compdir
+
+Signed-off-by: Denys Zagorui <dzagorui@cisco.com>
 ---
- ...rib-add-yocto-compatible-init-script.patch | 80 -------------------
- .../{unbound_1.17.1.bb => unbound_1.18.0.bb}  |  8 +-
- 2 files changed, 3 insertions(+), 85 deletions(-)
- delete mode 100644 meta-networking/recipes-support/unbound/unbound/0001-contrib-add-yocto-compatible-init-script.patch
- rename meta-networking/recipes-support/unbound/{unbound_1.17.1.bb => unbound_1.18.0.bb} (87%)
+ meta-oe/recipes-kernel/bpftool/bpftool.bb | 5 +++++
+ 1 file changed, 5 insertions(+)
 
-diff --git a/meta-networking/recipes-support/unbound/unbound/0001-contrib-add-yocto-compatible-init-script.patch b/meta-networking/recipes-support/unbound/unbound/0001-contrib-add-yocto-compatible-init-script.patch
-deleted file mode 100644
-index 7bcf97261..000000000
---- a/meta-networking/recipes-support/unbound/unbound/0001-contrib-add-yocto-compatible-init-script.patch
-+++ /dev/null
-@@ -1,80 +0,0 @@
--From 26614b6578056ec30b95013592e308bf24d924c2 Mon Sep 17 00:00:00 2001
--From: Beniamin Sandu <beniaminsandu@gmail.com>
--Date: Fri, 20 Nov 2020 23:00:20 +0200
--Subject: [PATCH] contrib: add yocto compatible init script
--
--Signed-off-by: Beniamin Sandu <beniaminsandu@gmail.com>
-----
--Upstream-Status: Pending
--
-- contrib/unbound.init | 20 ++++++++++----------
-- 1 file changed, 10 insertions(+), 10 deletions(-)
--
--diff --git a/contrib/unbound.init b/contrib/unbound.init
--index c5bb52bb..4eba752b 100644
----- a/contrib/unbound.init
--+++ b/contrib/unbound.init
--@@ -19,11 +19,11 @@
-- ### END INIT INFO
-- 
-- # Source function library.
---. /etc/rc.d/init.d/functions
--+. /etc/init.d/functions
-- 
-- exec="/usr/sbin/unbound"
-- prog="unbound"
---config="/var/unbound/unbound.conf"
--+config="/etc/unbound/unbound.conf"
-- pidfile="/var/unbound/unbound.pid"
-- rootdir="/var/unbound"
-- 
--@@ -54,14 +54,14 @@ start() {
-- 	[ -e ${rootdir}/dev/log ] || touch ${rootdir}/dev/log
-- 	mount --bind -n /dev/log ${rootdir}/dev/log >/dev/null 2>&1;
--     fi;
---    if ! egrep -q '^/[^[:space:]]+[[:space:]]+'${rootdir}'/dev/urandom' /proc/mounts; then
--+    if ! egrep -q '^/[^[:space:]]+[[:space:]]+'${rootdir}'/dev/random' /proc/mounts; then
-- 	[ -d ${rootdir}/dev ] || mkdir -p ${rootdir}/dev ;
---	[ -e ${rootdir}/dev/urandom ] || touch ${rootdir}/dev/urandom
---	mount --bind -n /dev/urandom ${rootdir}/dev/urandom >/dev/null 2>&1;
--+	[ -e ${rootdir}/dev/random ] || touch ${rootdir}/dev/random
--+	mount --bind -n /dev/random ${rootdir}/dev/random >/dev/null 2>&1;
--     fi;
-- 
--     # if not running, start it up here
---    daemon $exec
--+    daemonize $exec
--     retval=$?
--     echo
--     [ $retval -eq 0 ] && touch $lockfile
--@@ -71,15 +71,15 @@ start() {
-- stop() {
--     echo -n $"Stopping $prog: "
--     # stop it here, often "killproc $prog"
---    killproc -p $pidfile $prog
--+    killproc $prog
--     retval=$?
--     echo
--     [ $retval -eq 0 ] && rm -f $lockfile
--     if egrep -q '^/[^[:space:]]+[[:space:]]+'${rootdir}'/dev/log' /proc/mounts; then
-- 	umount ${rootdir}/dev/log >/dev/null 2>&1
--     fi;
---    if egrep -q '^/[^[:space:]]+[[:space:]]+'${rootdir}'/dev/urandom' /proc/mounts; then
---	umount ${rootdir}/dev/urandom >/dev/null 2>&1
--+    if egrep -q '^/[^[:space:]]+[[:space:]]+'${rootdir}'/dev/random' /proc/mounts; then
--+	umount ${rootdir}/dev/random >/dev/null 2>&1
--     fi;
--     return $retval
-- }
--@@ -99,7 +99,7 @@ force_reload() {
-- 
-- rh_status() {
--     # run checks to determine if the service is running or use generic status
---    status -p $pidfile $prog
--+    status $prog
-- }
-- 
-- rh_status_q() {
---- 
--2.25.1
--
-diff --git a/meta-networking/recipes-support/unbound/unbound_1.17.1.bb b/meta-networking/recipes-support/unbound/unbound_1.18.0.bb
-similarity index 87%
-rename from meta-networking/recipes-support/unbound/unbound_1.17.1.bb
-rename to meta-networking/recipes-support/unbound/unbound_1.18.0.bb
-index ff3d879ea..179af8050 100644
---- a/meta-networking/recipes-support/unbound/unbound_1.17.1.bb
-+++ b/meta-networking/recipes-support/unbound/unbound_1.18.0.bb
-@@ -9,10 +9,8 @@ SECTION = "net"
- LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=5308494bc0590c0cb036afd781d78f06"
+diff --git a/meta-oe/recipes-kernel/bpftool/bpftool.bb b/meta-oe/recipes-kernel/bpftool/bpftool.bb
+index bbfab47aa..317ec1926 100644
+--- a/meta-oe/recipes-kernel/bpftool/bpftool.bb
++++ b/meta-oe/recipes-kernel/bpftool/bpftool.bb
+@@ -18,6 +18,7 @@ EXTRA_OEMAKE = "\
+     LD="${LD}" \
+     AR=${AR} \
+     ARCH=${ARCH} \
++    bash_compdir=${prefix}/share/bash-completion \
+ "
  
--SRC_URI = "git://github.com/NLnetLabs/unbound.git;protocol=https;branch=master \
--	file://0001-contrib-add-yocto-compatible-init-script.patch \
--"
--SRCREV = "90831af981221bbce1cd7b15055562336760e484"
-+SRC_URI = "git://github.com/NLnetLabs/unbound.git;protocol=https;branch=master"
-+SRCREV = "3795e374107ac7a5a977c516e144a3cd9b0da998"
- 
- inherit autotools pkgconfig systemd update-rc.d
- 
-@@ -39,7 +37,7 @@ do_install:append() {
- 	install -m 0644 ${B}/contrib/unbound.service ${D}${systemd_unitdir}/system
- 
- 	install -d ${D}${sysconfdir}/init.d
--	install -m 0755 ${S}/contrib/unbound.init ${D}${sysconfdir}/init.d/unbound
-+	install -m 0755 ${S}/contrib/unbound.init_yocto ${D}${sysconfdir}/init.d/unbound
+ SECURITY_CFLAGS = ""
+@@ -42,3 +43,7 @@ python do_package:prepend() {
  }
  
- SYSTEMD_SERVICE:${PN} = "${BPN}.service"
+ B = "${WORKDIR}/${BPN}-${PV}"
++
++FILES:${PN} += "${exec_prefix}/sbin/*"
++
++BBCLASSEXTEND = "native nativesdk"
 -- 
-2.25.1
+2.35.6
 
 
