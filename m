@@ -2,57 +2,57 @@ Return-Path: <Martin.Jansa@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 764E4C83F2D
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7808DC83F2C
 	for <webhook@archiver.kernel.org>; Sun,  3 Sep 2023 13:32:46 +0000 (UTC)
-Received: from mail-ed1-f47.google.com (mail-ed1-f47.google.com [209.85.208.47])
- by mx.groups.io with SMTP id smtpd.web11.27502.1693747957482950579
+Received: from mail-ed1-f44.google.com (mail-ed1-f44.google.com [209.85.208.44])
+ by mx.groups.io with SMTP id smtpd.web10.27429.1693747956134655241
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 03 Sep 2023 06:32:37 -0700
+ Sun, 03 Sep 2023 06:32:36 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20221208 header.b=byD9O4xd;
- spf=pass (domain: gmail.com, ip: 209.85.208.47, mailfrom: martin.jansa@gmail.com)
-Received: by mail-ed1-f47.google.com with SMTP id 4fb4d7f45d1cf-52c4d3ff424so884475a12.0
-        for <openembedded-devel@lists.openembedded.org>; Sun, 03 Sep 2023 06:32:37 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20221208 header.b=ExDaYC6q;
+ spf=pass (domain: gmail.com, ip: 209.85.208.44, mailfrom: martin.jansa@gmail.com)
+Received: by mail-ed1-f44.google.com with SMTP id 4fb4d7f45d1cf-52683b68c2fso723297a12.0
+        for <openembedded-devel@lists.openembedded.org>; Sun, 03 Sep 2023 06:32:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1693747956; x=1694352756; darn=lists.openembedded.org;
+        d=gmail.com; s=20221208; t=1693747954; x=1694352754; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=uYq7ZnKYvl3axtGENLWcxI/lOnRWzmvQP0/re3H5j2E=;
-        b=byD9O4xdsMZaKLoinaNsBxpoCmJPR98N7Etg058hWnuclwXhf0IeJybYXEQH7Yz3u5
-         ZqhgipYpLYZNdg7bU0KX9tKbmzfB+cDVSSFILyLpcObqS3upLsG9jjWs9E4eBQDCVzCj
-         ENq5nZlVwPNFBx1zFaYFDtDByBgxLvoVhm76ud2/d11smbLWn1hPAYbCmnJ3SfULbEM4
-         a9ajswHwSd5Txpwz0EJUGWbmLa+l2gCfyko4nFGy6AnZcEHZpDdTWZh5SRDCrX2R6Ppu
-         8f/GIF6ICmAVdjMmerOfqfvvNZIbjdtVzP87O5BkkTdYouSx7o6zpka2SfBqR9sRTiGj
-         Cpzg==
+        bh=zOAsK9yGewhlljVjjkKRA8dRZqj2ipNpBRwMXZuLUL0=;
+        b=ExDaYC6qxpi0VgwRVHrNzg4xBAoC14RZll5HKvkAbHOAQF491XJz8smhh+1Eou5hvc
+         3pyjAJzi/7dSGrdqzgdOMlvgAa7Bkzxq7bhgI4zxo0UgJy2w55CX828qW3sKpxjfMvbE
+         rKK3y8fpYVh8WACip1s2kg0KIR2TDnP7IkJIDKU4+R3FuaEYsXHeM1VdsuHxL9LpDntm
+         dkbHxJWhLI7EycO9We7R+boRygep/GNuDm+lvr1G4FBU60gE36l8bWO4qBHvI1ik56mA
+         //2wL19OuPIfWpTpjmMJAJ9LPhOSGzJrymV8aCtQnuQsshA4VmyWwNu31y9y6SZy/qeP
+         CK5w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1693747956; x=1694352756;
+        d=1e100.net; s=20221208; t=1693747954; x=1694352754;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=uYq7ZnKYvl3axtGENLWcxI/lOnRWzmvQP0/re3H5j2E=;
-        b=NPUqyWPJDCD3wmA2Wvl6mXDrnvBPhZs9Zy6vbvVqBN5nFuuRG5rB0MDSkDZoQYbtsB
-         qAk5veMW2GIFDCfxEKvpSQisZgeYdSng7iOLGgFZcdbivZ9FNJmE3pZNjWYrM8LNmw1l
-         Xp0RnC5N3C6xeiJ45m9Kd6D/rIYnO3vUHGF2QTnWVaJHuX9DevZXpUpkUVDbGJTCfsbx
-         YuXAUV+GgbQWnC1BP9lvaLv38zYt72+HlTivQAGJdkWQ/HGOiRtxw3zVyMONj59pgyyr
-         OfsvmyH12DHHhziUIHyHsyHYZEDT+iID21143H+d3C8LSffffn1sAbtAwqf0UTV2zZMe
-         B1pQ==
-X-Gm-Message-State: AOJu0Yx4YXMekgeWkzWHbQYdSxVC7ODV4dNTD4czGRZtTpu+EhWc1iin
-	TBKdTHYw0MttPLD7vHCCmrO8M/9FeKg=
-X-Google-Smtp-Source: AGHT+IF+t7juoCqNfv8AstXmk1emf91HwxYIP6DxVoru5AO5KDC5X8eYiyq0B71g6iH9eK+imcQyqw==
-X-Received: by 2002:a17:906:6a8d:b0:99b:627b:e96d with SMTP id p13-20020a1709066a8d00b0099b627be96dmr5648633ejr.44.1693747955843;
-        Sun, 03 Sep 2023 06:32:35 -0700 (PDT)
+        bh=zOAsK9yGewhlljVjjkKRA8dRZqj2ipNpBRwMXZuLUL0=;
+        b=SeAX46D0G8tukUeRB3govOoXfJksfL6xAIFs+DovggC4ZfFxUE8bWaeTSVxDuNgvZ6
+         URYeYnWPj7XrYSYbVbrMkH6hnwSGD1i5UR/RDmtPUdtFxsc6PYGxp8hTSJQMW7+HDnR1
+         Z0GKA/i9rF53/IqbjCI3EaGmoPOHsxl11XQzYnLTkMNvlPwhoxDkXT9xTBhx3Zo2Gjbc
+         6GyjeI6qxiHyA7HTZ+uxXKJKSh9onmEEeDyufz707AU/KdA6jGQnmRTdZy3R3b5oAVAW
+         uZcfyhxYxxy1qg+XwS88lRsa5Q3Q67E4erppd3boiP6yi1mdUW/8MZByngNPseFBQ1ul
+         P42Q==
+X-Gm-Message-State: AOJu0YzLMwIJim/DI+XW01rit57/K9jXkytmW9163ZNpYMg5Z2RvEuZY
+	C7CT4I5wBOJ6U+QhCQvJDUQLgL6u0M4=
+X-Google-Smtp-Source: AGHT+IE9SdV7/auJgKYdTWr2+Q6HaUUXjbmvJOaUNxRUbPKz113/MCkQLaAuxOeNGNlOueBHUcwFrQ==
+X-Received: by 2002:aa7:d9cd:0:b0:522:3a89:a7bc with SMTP id v13-20020aa7d9cd000000b005223a89a7bcmr4909432eds.42.1693747954562;
+        Sun, 03 Sep 2023 06:32:34 -0700 (PDT)
 Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
-        by smtp.gmail.com with ESMTPSA id kt8-20020a170906aac800b0099df2ddfc37sm4725270ejb.165.2023.09.03.06.32.34
+        by smtp.gmail.com with ESMTPSA id r7-20020aa7cb87000000b0052996528b81sm4478602edt.45.2023.09.03.06.32.34
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 03 Sep 2023 06:32:35 -0700 (PDT)
+        Sun, 03 Sep 2023 06:32:34 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Martin Jansa <Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 3/4] khronos-cts.inc: respect MLPREFIX when appending DEPENDS with anonymous python
-Date: Sun,  3 Sep 2023 15:32:11 +0200
-Message-ID: <20230903133212.455899-3-Martin.Jansa@gmail.com>
+Subject: [meta-oe][PATCH 2/4] libcyusbserial: fix installed-vs-shipped QA issue with multilib
+Date: Sun,  3 Sep 2023 15:32:10 +0200
+Message-ID: <20230903133212.455899-2-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.42.0
 In-Reply-To: <20230903133212.455899-1-Martin.Jansa@gmail.com>
 References: <20230903133212.455899-1-Martin.Jansa@gmail.com>
@@ -62,72 +62,91 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sun, 03 Sep 2023 13:32:46 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104699
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104698
 
-* this causes 2 issues:
-  lib32-opengl-es-cts depending on 64bit wayland and wayland-protocols:
+* testing ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR} existence
+  doesn't really work in cross compilation and on some hosts was causing:
 
-  $ bitbake-getvar -r lib32-opengl-es-cts DEPENDS
-  #
-  # $DEPENDS [14 operations]
-  #   set /OE/build/oe-core/openembedded-core/meta/conf/bitbake.conf:309
-  #     ""
-  #   set /OE/build/oe-core/openembedded-core/meta/conf/documentation.conf:137
-  #     [doc] "Lists a recipe's build-time dependencies (i.e. other recipe files)."
-  #   :prepend /OE/build/oe-core/openembedded-core/meta/classes-global/base.bbclass:57
-  #     "${BASEDEPENDS} "
-  #   :prepend /OE/build/oe-core/openembedded-core/meta/classes-recipe/pkgconfig.bbclass:7
-  #     "pkgconfig-native "
-  #   :prepend /OE/build/oe-core/openembedded-core/meta/classes-recipe/cmake.bbclass:10
-  #     "cmake-native "
-  #   :append /OE/build/oe-core/openembedded-core/meta/classes-recipe/python3native.bbclass:11
-  #     " python3-native "
-  #   append /OE/build/oe-core/meta-openembedded/meta-oe/recipes-graphics/vk-gl-cts/khronos-cts.inc:28
-  #     "python3-lxml-native libpng zlib virtual/libgles2 qemu-native"
-  #   :append[libc-musl] /OE/build/oe-core/meta-openembedded/meta-oe/recipes-graphics/vk-gl-cts/khronos-cts.inc:38
-  #     " libexecinfo"
-  #   rename (to) classextend.py:108 [map_depends_variable]
-  #     "DEPENDS_NONML"
-  #   set classextend.py:109 [map_depends_variable]
-  #     "${@oe.classextend.get_depends('DEPENDS', d)}"
-  #   append classextend.py:110 [map_depends_variable]
-  #     [vardeps] " DEPENDS_NONML"
-  #   append cmake.bbclass:25 [__anon_30__OE_build_oe_core_openembedded_core_meta_classes_recipe_cmake_bbclass]
-  #     " ninja-native"
-  #   append khronos-cts.inc:77 [__anon_80__OE_build_oe_core_meta_openembedded_meta_oe_recipes_graphics_vk_gl_cts_khronos_cts_inc]
-  #     " wayland-native wayland wayland-protocols"
-  #   append khronos-cts.inc:79 [__anon_80__OE_build_oe_core_meta_openembedded_meta_oe_recipes_graphics_vk_gl_cts_khronos_cts_inc]
-  #     " virtual/libx11 virtual/egl "
-  # pre-expansion value:
-  #   "${@oe.classextend.get_depends('DEPENDS', d)} ninja-native wayland-native wayland wayland-protocols virtual/libx11 virtual/egl "
-  DEPENDS="cmake-native lib32-libpng pkgconfig-native python3-lxml-native python3-native qemu-native virtual/lib32-arm-oemllib32-linux-gnueabi-compilerlibs virtual/arm-oemllib32-linux-gnueabi-gcc virtual/lib32-libc virtual/lib32-libgles2 lib32-zlib ninja-native wayland-native wayland wayland-protocols virtual/libx11 virtual/egl "
+  ERROR: QA Issue: libcyusbserial: Files/directories were installed but not shipped in any package:
+    /usr/lib/libcyusbserial.so.1
+    /usr/lib/libcyusbserial.so
+  Please set FILES such that these items are packaged. Alternatively if they are unneeded, avoid installing them or delete them within do_install.
+  libcyusbserial: 2 installed and not shipped files. [installed-vs-shipped]
 
-* lib32-opengl-es-cts-dev runtime depending on 64bit wayland-dev wayland-protocols-dev
-  as caught by multilib QA check:
-
-  ERROR: QA Issue: lib32-opengl-es-cts package lib32-opengl-es-cts-dev - suspicious values 'wayland-dev wayland-protocols-dev' in RRECOMMENDS [multilib]
+  with multilib using /usr/lib32 or /usr/lib64 when the same didn't
+  exist on host.
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-oe/recipes-graphics/vk-gl-cts/khronos-cts.inc | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ ...on-t-fall-back-CMAKE_INSTALL_LIBDIR-.patch | 43 +++++++++++++++++++
+ .../libcyusbserial/libcyusbserial_git.bb      |  4 +-
+ 2 files changed, 46 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-support/libcyusbserial/libcyusbserial/0001-CMakeLists.txt-don-t-fall-back-CMAKE_INSTALL_LIBDIR-.patch
 
-diff --git a/meta-oe/recipes-graphics/vk-gl-cts/khronos-cts.inc b/meta-oe/recipes-graphics/vk-gl-cts/khronos-cts.inc
-index 097acc1a0b..72005636ea 100644
---- a/meta-oe/recipes-graphics/vk-gl-cts/khronos-cts.inc
-+++ b/meta-oe/recipes-graphics/vk-gl-cts/khronos-cts.inc
-@@ -74,9 +74,9 @@ python __anonymous() {
-     distrofeatures = (d.getVar("DISTRO_FEATURES") or "")
-     if not bb.utils.contains_any("PACKAGECONFIG", ["surfaceless", "wayland", "x11_egl", "x11_glx", "x11_egl_glx"], True, False, d):
-         if "wayland" in distrofeatures:
--            d.appendVar("DEPENDS", " wayland-native wayland wayland-protocols")
-+            d.appendVar("DEPENDS", " wayland-native ${MLPREFIX}wayland ${MLPREFIX}wayland-protocols")
-         if "x11" in distrofeatures:
--            d.appendVar("DEPENDS", " virtual/libx11 virtual/egl ")
-+            d.appendVar("DEPENDS", " virtual/${MLPREFIX}libx11 virtual/${MLPREFIX}egl ")
- }
+diff --git a/meta-oe/recipes-support/libcyusbserial/libcyusbserial/0001-CMakeLists.txt-don-t-fall-back-CMAKE_INSTALL_LIBDIR-.patch b/meta-oe/recipes-support/libcyusbserial/libcyusbserial/0001-CMakeLists.txt-don-t-fall-back-CMAKE_INSTALL_LIBDIR-.patch
+new file mode 100644
+index 0000000000..d9e10469d3
+--- /dev/null
++++ b/meta-oe/recipes-support/libcyusbserial/libcyusbserial/0001-CMakeLists.txt-don-t-fall-back-CMAKE_INSTALL_LIBDIR-.patch
+@@ -0,0 +1,43 @@
++From 655c5c32b37a2bea12389ed69c0869215fcf5abe Mon Sep 17 00:00:00 2001
++From: Martin Jansa <Martin.Jansa@gmail.com>
++Date: Sun, 3 Sep 2023 11:22:35 +0200
++Subject: [PATCH] CMakeLists.txt: don't fall back CMAKE_INSTALL_LIBDIR to lib
++
++* testing ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR} existence
++  doesn't really work in cross compilation and on some hosts was causing:
++
++  ERROR: QA Issue: libcyusbserial: Files/directories were installed but not shipped in any package:
++    /usr/lib/libcyusbserial.so.1
++    /usr/lib/libcyusbserial.so
++  Please set FILES such that these items are packaged. Alternatively if they are unneeded, avoid installing them or delete them within do_install.
++  libcyusbserial: 2 installed and not shipped files. [installed-vs-shipped]
++
++  with multilib using /usr/lib32 or /usr/lib64 when the same didn't
++  exist on host.
++
++Upstream-Status: Pending
++Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
++---
++ lib/CMakeLists.txt | 9 ---------
++ 1 file changed, 9 deletions(-)
++
++diff --git a/lib/CMakeLists.txt b/lib/CMakeLists.txt
++index 2b031cb..53a7263 100644
++--- a/lib/CMakeLists.txt
+++++ b/lib/CMakeLists.txt
++@@ -6,15 +6,6 @@ if (NOT CMAKE_INSTALL_LIBDIR)
++ include(GNUInstallDirs)
++ endif (NOT CMAKE_INSTALL_LIBDIR)
++ 
++-# Fall back to just "lib" if the item provided by GNUInstallDirs doesn't exist
++-# For example, on Ubuntu 13.10 with CMake 2.8.11.2,
++-# /usr/lib/${CMAKE_LIBRARY_ARCHITECTURE} doesn't exist.
++-if (NOT EXISTS "${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}")
++-    message(STATUS "${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR} does not exist. Defaulting libcyusbserial install location to ${CMAKE_INSTALL_PREFIX}/lib.")
++-        set(CMAKE_INSTALL_LIBDIR lib)
++-endif()
++-
++-
++ ################################################################################
++ # Include paths
++ ################################################################################
+diff --git a/meta-oe/recipes-support/libcyusbserial/libcyusbserial_git.bb b/meta-oe/recipes-support/libcyusbserial/libcyusbserial_git.bb
+index 81453fb888..a69194996b 100644
+--- a/meta-oe/recipes-support/libcyusbserial/libcyusbserial_git.bb
++++ b/meta-oe/recipes-support/libcyusbserial/libcyusbserial_git.bb
+@@ -8,7 +8,9 @@ DEPENDS = "libusb udev"
+ PV = "1.0.0+git${SRCPV}"
  
- CTSDIR = "/usr/lib/${BPN}"
+ SRCREV = "655e2d544183d094f0e2d119c7e0c6206a0ddb3f"
+-SRC_URI = "git://github.com/cyrozap/${BPN}.git;branch=master;protocol=https"
++SRC_URI = "git://github.com/cyrozap/${BPN}.git;branch=master;protocol=https \
++    file://0001-CMakeLists.txt-don-t-fall-back-CMAKE_INSTALL_LIBDIR-.patch \
++"
+ 
+ S = "${WORKDIR}/git"
+ 
 -- 
 2.42.0
 
