@@ -2,64 +2,64 @@ Return-Path: <pramanik.souravkumar@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7E7CEC71153
-	for <webhook@archiver.kernel.org>; Mon,  4 Sep 2023 12:31:03 +0000 (UTC)
-Received: from mail-pf1-f171.google.com (mail-pf1-f171.google.com [209.85.210.171])
- by mx.groups.io with SMTP id smtpd.web10.46505.1693830663054688231
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7A4F6C71153
+	for <webhook@archiver.kernel.org>; Mon,  4 Sep 2023 12:33:03 +0000 (UTC)
+Received: from mail-pl1-f179.google.com (mail-pl1-f179.google.com [209.85.214.179])
+ by mx.groups.io with SMTP id smtpd.web11.47013.1693830775448257473
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 04 Sep 2023 05:31:03 -0700
+ Mon, 04 Sep 2023 05:32:55 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20221208 header.b=QaFTV7Pw;
- spf=pass (domain: gmail.com, ip: 209.85.210.171, mailfrom: pramanik.souravkumar@gmail.com)
-Received: by mail-pf1-f171.google.com with SMTP id d2e1a72fcca58-68a3e271491so595581b3a.0
-        for <openembedded-devel@lists.openembedded.org>; Mon, 04 Sep 2023 05:31:03 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20221208 header.b=hKhs7LdW;
+ spf=pass (domain: gmail.com, ip: 209.85.214.179, mailfrom: pramanik.souravkumar@gmail.com)
+Received: by mail-pl1-f179.google.com with SMTP id d9443c01a7336-1c336f5b1ffso7449515ad.2
+        for <openembedded-devel@lists.openembedded.org>; Mon, 04 Sep 2023 05:32:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1693830662; x=1694435462; darn=lists.openembedded.org;
+        d=gmail.com; s=20221208; t=1693830775; x=1694435575; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
         bh=pazrX8rt4GpeP10Mq+B/T2JVVrbaBAnULQmaBqZyRec=;
-        b=QaFTV7Pwn93YzJ9isgSDSFI/zm+XefOs973kIbVYok03itJ+rvYX5lJupjx4Kuwo6m
-         TtPUEJLSsTuB0j+AMw6tCNMAwc0SoroYlR4+wTcgrK0vD8Q+vPubA0cI5k4TSs1hAv24
-         kjPL49Ny6PySdAgECICUfqz79fjKiLM6qcpqqz8TyTMDtb2nwBVTuauq1E+D6OFcXS/x
-         msr5KzUTuXlhco/7Z5v5vAeiYghoAsuavzcLLJx7MdWvIxE3rMs8cgHnes6mZqTJ4vAb
-         WLvn1Qhb/eJ0hthfhMjQ9O7fA/I1TgFl682RyI42SvfkuzlU6eKPxI17TfzCWAndEmun
-         3a0g==
+        b=hKhs7LdWmXLkMPOjyrX42Mh6b1OU3N62IIV9/mb+hflmHFXDcvopnu4Q2sen3UC90T
+         BTaTmxXggmmOQcjq6dbtLRmk2Dde15f7k8t2fKmVfecrhDUKCbmpE9U1JW7YWkXMlNbj
+         wn3NxUCts7u3J5yUSwktNNGkBqE64P0qhSLeyEgeNlcLfp10yEqOYLBEFqH3+IXbHQo5
+         2J07QI74kXvUip8MA85vsqMHakCHWTGphkdj4dHqpCWchf5EjNzU4l0aCOvNOTwVV+8/
+         B38XwZuViAeiw6j7NY24h6nm9P0xRQCRJNAyF/9U14nQKqhfdG+ofO8s20kkc3CX3r1Q
+         a9uA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1693830662; x=1694435462;
+        d=1e100.net; s=20221208; t=1693830775; x=1694435575;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
         bh=pazrX8rt4GpeP10Mq+B/T2JVVrbaBAnULQmaBqZyRec=;
-        b=br/5Xrcn1c3kzYCh70UMFugaJuqLTBLe//PrVT4sU81ieWs7uwDvmClG+2cpMTeI1b
-         TnNj0D5SCOjtemEjLQXLAoqQCofWVjLfjkhIReTR2iOfNoi9VK7WGlRNt2UMeGh8TVXv
-         l7He5a/FRWcOSCcyDatM779S6EQtDPNAya6WnojVO88s9EaoZuBSrUW1dmBP7iYtCK+H
-         o+PhGULksXltrOPRqYtvEhL1m2Jkf8FMQEP85JOyaKJPeV5qx+FneF8jRgiSYvwbmHi0
-         ZRe/ESaSpFhxTCQRTkRN7rIiUycYRbvM4HbB0HjJBQU2/J97xjlRvJ19fENJlWi2UJ77
-         unLA==
-X-Gm-Message-State: AOJu0YzG5dQ578k/B1gHESmUtZKBdM6bgpDDi22zehsFhkDTExkOF9Eh
-	qJLtbwNxHq5yhdV0kZ4oBBNoxGINKiMItQ==
-X-Google-Smtp-Source: AGHT+IG0NGZq7wj7mPYktoGVVJpcJXyBHhwjB35Iz3HxNZOWBd6CfikJWQihIVTV3mKZWNj4x9LxEA==
-X-Received: by 2002:a05:6a00:21c4:b0:68b:dbbc:dcea with SMTP id t4-20020a056a0021c400b0068bdbbcdceamr8910578pfj.9.1693830662129;
-        Mon, 04 Sep 2023 05:31:02 -0700 (PDT)
+        b=co1LPnoYAVttHj70VbtvkcSGpNKbIULGbPNNbZ3cD62N3PnSL9Uf3KZ6DgNyQQk1/P
+         qJnjPdwnK7sVKRi4YSHwEYa9O/F2tM3nHYXZoUqNi6hdfbHRUD4+ss08z46cdixb5yBS
+         MCcVIlHFWSRVSbTPdnFk23Du9K35g96q5xfM7HzXTyMhQIj7NQ0MBq67fx9jT+j1nPW9
+         WWxwvy4NMvWgK3c/O9vIYs2SGXxHPEkptIPNPjlsq/FO0H8d+7Trp0Zl8o18O0sdkg7D
+         pX34K/WN/T1d5Q7u19BlJif6vxSdnwQJtbsvn4Psii+NMD8fELz6x/A4Enoe0438tclL
+         pIvw==
+X-Gm-Message-State: AOJu0YxGU0AH5WXiimKqO6S6WCU0dj/bgvB7QjkRRjgiQtTojpIwCdtx
+	z/1fOZLhKp+etXtm+g9pFzsM0v6iA810dQ==
+X-Google-Smtp-Source: AGHT+IETqsa5fmbwVGjvwPEnsdPqJRAYtjTh9ObwpbYfnHjEzWmUlhUQKfOM7l5cztGxd1dt14yAiw==
+X-Received: by 2002:a17:903:2345:b0:1bf:11ce:c6ae with SMTP id c5-20020a170903234500b001bf11cec6aemr12720611plh.18.1693830774673;
+        Mon, 04 Sep 2023 05:32:54 -0700 (PDT)
 Received: from localhost.localdomain ([2401:4900:1c3f:18be:6e26:cebe:deeb:ef24])
-        by smtp.gmail.com with ESMTPSA id a17-20020a62e211000000b006887b69f034sm7281879pfi.102.2023.09.04.05.31.00
+        by smtp.gmail.com with ESMTPSA id jd4-20020a170903260400b001c0774d9327sm7501424plb.91.2023.09.04.05.32.52
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 04 Sep 2023 05:31:01 -0700 (PDT)
+        Mon, 04 Sep 2023 05:32:54 -0700 (PDT)
 From: Sourav Kumar Pramanik <pramanik.souravkumar@gmail.com>
 To: openembedded-devel@lists.openembedded.org,
 	pramanik.souravkumar@gmail.com
 Cc: ranjitsinh.rathod@kpit.com
-Subject: [meta-oe][master][PATCH] meta-oe-components: Avoid usage of nobranch=1
-Date: Mon,  4 Sep 2023 17:58:54 +0530
-Message-Id: <20230904122854.74649-1-pramanik.souravkumar@gmail.com>
+Subject: [meta-oe][kirkstone][PATCH] meta-oe-components: Avoid usage of nobranch=1
+Date: Mon,  4 Sep 2023 18:02:19 +0530
+Message-Id: <20230904123219.75230-1-pramanik.souravkumar@gmail.com>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 04 Sep 2023 12:31:03 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104711
+ <openembedded-devel@lists.openembedded.org>; Mon, 04 Sep 2023 12:33:03 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104712
 
 The usage of nobranch=1 in SRC_URI allows using unprotected branches.
 
