@@ -1,498 +1,521 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <yi.zhao@eng.windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DEA5FC83F33
-	for <webhook@archiver.kernel.org>; Tue,  5 Sep 2023 00:26:08 +0000 (UTC)
-Received: from mail-oi1-f180.google.com (mail-oi1-f180.google.com [209.85.167.180])
- by mx.groups.io with SMTP id smtpd.web10.11215.1693873563906664853
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 28D09C83F3E
+	for <webhook@archiver.kernel.org>; Tue,  5 Sep 2023 07:58:51 +0000 (UTC)
+Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
+ by mx.groups.io with SMTP id smtpd.web11.16530.1693900724344140056
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 04 Sep 2023 17:26:04 -0700
+ Tue, 05 Sep 2023 00:58:44 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20221208 header.b=HDT40p/V;
- spf=pass (domain: gmail.com, ip: 209.85.167.180, mailfrom: raj.khem@gmail.com)
-Received: by mail-oi1-f180.google.com with SMTP id 5614622812f47-3ab2436b57dso1492333b6e.0
-        for <openembedded-devel@lists.openembedded.org>; Mon, 04 Sep 2023 17:26:03 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1693873563; x=1694478363; darn=lists.openembedded.org;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=J130OBBJfhS96qOJ4N81mYwkjak9gy6dJ7FmGgPClmo=;
-        b=HDT40p/V+sVVUDuLf7J9o/VNhW9k2KgbTpG3yojkvi2bK+4gMQ/LIUACiP40c/u4gZ
-         nym9Fu4WvlL+zB2VycpsrEv9vCR2sfn+1xMI5qpdIaEFJjsHcFZtBfLto9an8RPsytzi
-         f739imRFwfLvOaDV4XaXWP9wRWRunY7zyzSdqfKaoy+ZkoyUHnnfK6L+ZIAfo2vnScLZ
-         yaDUiRgMRHM0NcxDY7tBr3NCjrTJo0IRZ8UYnBXRWJ7hb+i/oJMym6D49iRUI/jSnYke
-         X028OmzUisHMUtoJK8ujEuyPKg5gTjBpNNRPzDpHeu3A0Q7yu+STpnQsreAlhZnXsv69
-         hgcw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1693873563; x=1694478363;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=J130OBBJfhS96qOJ4N81mYwkjak9gy6dJ7FmGgPClmo=;
-        b=MrzSJKOGV6t491ATeDtE3xE/AtAKHHhq0P5lvbBn0BTWFNTiE9Lutb/uXUbrZoktb2
-         9/rdQK6p7xMrQDDNHkYol7FEvSkbYdX9MZs9qirjm7SzmAhpVfhvKAvFIuXIWyggQr61
-         sxB5VPSuzGBeWDWZwMVNWWlH0fipwN36rVV5ngV/NP2Pz04gSt0+NxOiLxzXdJ0s0gu2
-         CXWptBwvdl8tZMpqGSDhOQo+K2vIw2zt+GetDWH1sVDkC+ALnY6lyiEJ4gV1vmOM5/1H
-         Dpl5/Q0fUMNAqM3f9Hx8N8rwaOWwy1ifNWDPU9qIHViXCgkbqG3YZnPntALyJ7Y6Q7EK
-         bgmg==
-X-Gm-Message-State: AOJu0YycyZ16BuhO668YsY2xePIJUXsS31GVrEHitI6bE76P9/+nQXfW
-	+L0FnNX0GlBdEVSyR/p1lG3OySza8AVEK/eD1c4=
-X-Google-Smtp-Source: AGHT+IG6v7QSMhW4koFAK9PJL7hSljf9eCQn30BFCMZtmT1objlONoTYttooY4BPO1FxybEDggww/rAyeGisZ+A8By4=
-X-Received: by 2002:a05:6808:1416:b0:3a7:92af:878d with SMTP id
- w22-20020a056808141600b003a792af878dmr16236588oiv.53.1693873563014; Mon, 04
- Sep 2023 17:26:03 -0700 (PDT)
+ dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=mioPP93j;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=7612169c0c=yi.zhao@windriver.com)
+Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 3856xwCQ002860
+	for <openembedded-devel@lists.openembedded.org>; Tue, 5 Sep 2023 00:58:43 -0700
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
+	 h=from:to:subject:date:message-id:content-transfer-encoding
+	:content-type:mime-version; s=PPS06212021; bh=xO8VlnOHyJAz6i8Pbc
+	ksvGrUGMTn46DJoPdqIcmSrp0=; b=mioPP93j7CkopTeyDeWUTu/6V12W01VxHo
+	1uizJn2NtZLgImW90QuML9Kctu7c+/YngilsBVfLy5EzQp/s31iAt0e11VjzZT+E
+	cE66RibFc+93neFmHTq5fk+QqVLduh7cNf76+GUaf9F6Ojfh4/QpcTvEX2l2ZjZn
+	DxnHE6wheVWVCO7ppFWwGqZdljiGAs+nvmyfkQKrjaC8Z84y2E9XXWw188FdhPVK
+	XpMM1w9neBp7imoRhWZcsF6hJ5goqWvjdcxykFrAV2LlhLh4yrFzlA8ruml9ZCGD
+	MPvaMGdbROlljvGukLbINAFlAc5dHCaXVMduSwm37rhByekQWpkQ==
+Received: from nam12-dm6-obe.outbound.protection.outlook.com (mail-dm6nam12lp2175.outbound.protection.outlook.com [104.47.59.175])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3sv0b024h7-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Tue, 05 Sep 2023 00:58:43 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=CPzPhVlPT7Dfz0ZoxOHyIoCgpj8/mGmILWZE2bsp2iU0hqQ+jiA9O102B1hVsyyVXCec+5yKBXrsyKmBuDhyKFV1UQBU8b1QMji+f4Ww2+cDPu4f/y+Z5y4t76TwlCUkQ47kg9267CmMuq+qQTqbnPt9UQHZ0gBtW/snGHMLg0k4vUElr7ItVUKKxy/WtbsXxTTHPVzb3Yko/5mDlgw4gfLV30zBkly9SC+aHxwVStn0k7UsPcIDRf/bPC79VleWpCOW8TvV4nvozldwBjf5s+84uxjen4I1Cp4zJIZoWFhown8V/A/Xwz7AqdHJI9LMM26FRs62BNrBKjl7IipGCA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=xO8VlnOHyJAz6i8PbcksvGrUGMTn46DJoPdqIcmSrp0=;
+ b=faUiAVtXtYg5lO2nuGaFFRap8pgsUcUhXwfbUfC7AzUbbBlhQ5NgNhPp8pewuoCvb0IUgq9/E8HvbZmhCRInb7mR9AcshNkEzygIhLezZ1kWG7SkpqJObnj8jQFaN7RBvcF/elBOK/xCddvf93HsauZAX6wmkCiBQ0kaW8rPan31aduLrxRcdMT7tUx+mbpvaQhD6lkgS64H+iBzrKbmXbDwtt8XF9w3+vlCJIEViM5gsTF8Pg3fCj50zwTHY+pKNOpckTjy/vnkhrAVqfOS8Mjq+qTHIu4+CZNI3JHAW9DKC0ddshOK3sNg3oB8mR06ocU0vhglQSt17pgIElUQhA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=windriver.com; dmarc=pass action=none
+ header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
+Received: from CO1PR11MB4867.namprd11.prod.outlook.com (2603:10b6:303:9a::13)
+ by PH8PR11MB7000.namprd11.prod.outlook.com (2603:10b6:510:220::10) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6745.30; Tue, 5 Sep
+ 2023 07:58:39 +0000
+Received: from CO1PR11MB4867.namprd11.prod.outlook.com
+ ([fe80::1ba9:4bef:c1a4:306]) by CO1PR11MB4867.namprd11.prod.outlook.com
+ ([fe80::1ba9:4bef:c1a4:306%2]) with mapi id 15.20.6745.030; Tue, 5 Sep 2023
+ 07:58:39 +0000
+From: Yi Zhao <yi.zhao@windriver.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-networking][PATCH V3] vsomeip: add recipe
+Date: Tue,  5 Sep 2023 15:58:26 +0800
+Message-Id: <20230905075826.38097-1-yi.zhao@windriver.com>
+X-Mailer: git-send-email 2.25.1
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: SG2P153CA0034.APCP153.PROD.OUTLOOK.COM (2603:1096:4:c7::21)
+ To CO1PR11MB4867.namprd11.prod.outlook.com (2603:10b6:303:9a::13)
 MIME-Version: 1.0
-References: <20230904122854.74649-1-pramanik.souravkumar@gmail.com>
-In-Reply-To: <20230904122854.74649-1-pramanik.souravkumar@gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 4 Sep 2023 17:25:52 -0700
-Message-ID: <CAMKF1sq-dGr7qsUnVkog+AqU9YFapNjJ0ui-HatZbJ50xrWTsQ@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][master][PATCH] meta-oe-components: Avoid usage of nobranch=1
-To: Sourav Kumar Pramanik <pramanik.souravkumar@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org, ranjitsinh.rathod@kpit.com
-Content-Type: multipart/alternative; boundary="000000000000049c69060491ac5e"
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CO1PR11MB4867:EE_|PH8PR11MB7000:EE_
+X-MS-Office365-Filtering-Correlation-Id: ae30598c-34c1-43eb-2395-08dbade5ea0e
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 
+	2T0y90y+620+Rfg3LrhY1c/Zge0gmZ8XdItj5o52D2AprJ48z0gcXLcxRUUBRlWEcquu0MDrjna+qXUZ0cFFYABjrU48mJppEvib+MdCdcYWusMCIezRTLcmcnbh7f+vVRybndrEDLOMY8iEEb+G49f0kSXaBoTuT1frwMKDY0wR4qUde/wjjMF5ZqONEtMaokttcCvGUYO4B2PoHlmjel//wKxA7EGPSsfn33BNL4+paO0PNEGLKWn76MH/goTLdIvwaE6SUkvVwrcinUzmuWBuaDx4kQXGbfq3C8HP/mGXJRH8Q5gjyFHRslME9Bak/SMfO4inZKujM8zH53OsHF3fH7ldE9VzGOp3ot1L6F9B7fjIPIwGbDiw8s7shFvf6zyzjGuvPldvgsodhTzZiQ5F85UaDyrXebfO3n6eVniWHoV+XUcKSk3JAeULOzFNCzMl1q2GMCfyBGZxeQivlNEDgRZZAcE6uMdlmW/lO0VpwVhDhYB1YD8wWM0rkf+OGN4Iz8NNANxCI3V2zUjEoDVvSn+XEE8VZCNMH/50QuQ9COzaScJZCSfOztB9D815k8DOa8hYnl9c2yM8GTIMJ3RFEQ0X2D6qCSLHlnCCIJA=
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CO1PR11MB4867.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230031)(346002)(376002)(136003)(396003)(39850400004)(366004)(451199024)(1800799009)(186009)(26005)(44832011)(6666004)(8676002)(8936002)(83380400001)(5660300002)(1076003)(2616005)(6512007)(66899024)(6486002)(52116002)(6506007)(41300700001)(478600001)(66946007)(66556008)(316002)(6916009)(38350700002)(38100700002)(86362001)(66476007)(36756003)(2906002)(966005)(30864003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?us-ascii?Q?CtEaLA3zN8WT/ut0QJU5v8h6TlLkqcijjmUYXBRfy+5JtdrEve2FXwOMdVWg?=
+ =?us-ascii?Q?E5zO61FFMRU0pg7NvpBXTV+g96GK5ubIQBYZtOsI/z7Qdevz55XgjRYuRIEe?=
+ =?us-ascii?Q?WnXTV5dKuyTV+GIqceeywpL/uBQhp+5u0cFpXnK/pu2P6MLDXAOCWhzxec2U?=
+ =?us-ascii?Q?X/QgNfKRBe8mtgbn8rDRUOT55/fRBFLjC1m65gU4KA7YIEFjR6b0hFiG2XcJ?=
+ =?us-ascii?Q?2yBcdGCstJZKtNxUZVL9zOoolFEG5Hh+Wmg8g7iyVC9pOtu9DpmU4JpszriK?=
+ =?us-ascii?Q?06bNOzYZpBLBUdW2CMjXbxrkt9otQy+w3Kh1Ot1Olcq62vCRXGXhJ4X86Mwy?=
+ =?us-ascii?Q?h1pn92W/EtDp4Whm0hARPFB7zU8vCugY9/8JVAH2nl8QMQD4Rb+MB7g/EIqS?=
+ =?us-ascii?Q?PGafD7kQZp6ElbQP0j9S/7uqwe4ejchtbrGlVVjRudmLvDlxEZ1vTJK79pWZ?=
+ =?us-ascii?Q?cYhJU/X6B2lGp0+AifyT+ijzau6d1DXAvp4hL69PzodmCPwVEfHoA3hxDAB+?=
+ =?us-ascii?Q?htPXR3UKV5M2usD85ko8ykDlrOiYx3Z/gDSlyALHaLYVrTrVcTdwDdoKRdbQ?=
+ =?us-ascii?Q?78/DN0vJs+o2tVXznRHvELIDbMUJKKkhKkccXhA0hgU62c7QbNfWNXI7LrWb?=
+ =?us-ascii?Q?Kl4S1DM6QobOSJxgwVBclH9eEXhuKknX5otVccG/rEAl/utuucvtU0fHNdPl?=
+ =?us-ascii?Q?tSEVZDkyR/pPR/eb9u25UV0N8pbfHt8YTU2LvV+BLxEj/0n4ysYA4OrhIHTZ?=
+ =?us-ascii?Q?CN5oWWudcPocshxBU6TKRBQ5reH9MQ3rpqWSkYclY/1OaeLLNUiOn+WhOpge?=
+ =?us-ascii?Q?TDaQln/+XbUd2TXeYZtNisJmqEDhnvjKMSUxOnivTxrfCZwpNCxYPS6fg6aA?=
+ =?us-ascii?Q?7nHda70G0g+z5KnA18/xRfX7LcRWwevQdGEI22MnkPHwcNKYKfc2dXE+QcgR?=
+ =?us-ascii?Q?5TZNnYcu2pt0HsQv7XKqqLte+nLKuzUrXMHfgUAlIO8r173ETbAop8UzknhK?=
+ =?us-ascii?Q?mm55PHWzFwiH7n5epclQ1ZLw+KUgTNEBsb9d4GsNdd8OluvNxszo1S5CXir9?=
+ =?us-ascii?Q?TB9MPxXEn3ggMHfy+5nemXhUkdWUBpVbGi3TW39jhtkodzIaBZNdFkLPSPnb?=
+ =?us-ascii?Q?NLd8t0HC0vMHJh2sg/HEuTZ/7F4Hmg98ZhwjnPAy8WStvIG3t/QZjCoaV4Jv?=
+ =?us-ascii?Q?4CcNrv9JFhzNg8olZqLD0q0MIIRxtlsOgE2pBKUkk7F8go5cqQRmLyW9Atg6?=
+ =?us-ascii?Q?17ZXxjYR6VF5arz6vEb5n/JQkm5vE1g3d6Z6KZI0WXZDpJxQmBbHGSGre7cX?=
+ =?us-ascii?Q?or8keGgBJmUQiLtiEZ+/Zl7Do9Nd/XpyCKr4EQNF7+GuGunGzR43bc8oIGNF?=
+ =?us-ascii?Q?CZ+6xm+II9k0Y8xjRSPV4IdG8+C7RKj86DvPQvcETQrI05qeTRWdz5vkgia4?=
+ =?us-ascii?Q?P2mRJ+5fdI6R9XG9bDM2efJ9OiKgbW+fX5muz0G8Vkpr5algAAeQ2zYlmJXm?=
+ =?us-ascii?Q?mSNN3gbpc5ftBFitgXVIrAbP/ffPp7FbdUyvgzFXz/Qf7CI8TYCZhY5v8lyk?=
+ =?us-ascii?Q?01uDgw6OCbjYtAVpdeN3zRDz/nYQpRK5X/ZCBCQo?=
+X-OriginatorOrg: windriver.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: ae30598c-34c1-43eb-2395-08dbade5ea0e
+X-MS-Exchange-CrossTenant-AuthSource: CO1PR11MB4867.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Sep 2023 07:58:39.1651
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: lJhgu/Im3GVZLnIz3lzlO3YOXcfStG8cVT4qZJnECQ6AKin2ggsAweMzF+l8XkRvrd7OeS8L9g4noKZ+sJwXag==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH8PR11MB7000
+X-Proofpoint-ORIG-GUID: kapa1pcFFoQdnIGxyLrf3yHBrFy6eifx
+X-Proofpoint-GUID: kapa1pcFFoQdnIGxyLrf3yHBrFy6eifx
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.254,Aquarius:18.0.957,Hydra:6.0.601,FMLib:17.11.176.26
+ definitions=2023-09-05_06,2023-08-31_01,2023-05-22_02
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 clxscore=1015 mlxlogscore=999
+ bulkscore=0 adultscore=0 phishscore=0 lowpriorityscore=0 spamscore=0
+ mlxscore=0 impostorscore=0 malwarescore=0 suspectscore=0
+ priorityscore=1501 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.19.0-2308100000 definitions=main-2309050071
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 05 Sep 2023 00:26:08 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104718
+ <openembedded-devel@lists.openembedded.org>; Tue, 05 Sep 2023 07:58:51 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104719
 
---000000000000049c69060491ac5e
-Content-Type: text/plain; charset="UTF-8"
+The vsomeip stack implements the http://some-ip.com/ (Scalable
+service-Oriented MiddlewarE over IP (SOME/IP)) protocol.
+The stack consists out of:
+  a shared library for SOME/IP (libvsomeip3.so)
+  a shared library for SOME/IP's configuration module
+  (libvsomeip3-cfg.so)
+  a shared library for SOME/IP's service discovery
+  (libvsomeip3-sd.so)
+  a shared library for SOME/IP's E2E protection module
+  (libvsomeip3-e2e.so)
 
-Please rebase on top of master-next and resend
+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+---
+V3 Change: update to latest stable version 3.3.8
 
-On Mon, Sep 4, 2023 at 5:31 AM Sourav Kumar Pramanik <
-pramanik.souravkumar@gmail.com> wrote:
+ .../0001-Fix-pkgconfig-dir-for-multilib.patch |  28 +++
+ ...e-configuration-files-to-etc-vsomeip.patch |  28 +++
+ .../0003-Do-not-build-external-gtest.patch    | 160 ++++++++++++++++++
+ ...4-Do-not-specify-PIE-flag-explicitly.patch |  47 +++++
+ .../vsomeip/vsomeip_3.3.8.bb                  |  72 ++++++++
+ 5 files changed, 335 insertions(+)
+ create mode 100644 meta-networking/recipes-protocols/vsomeip/vsomeip/0001-Fix-pkgconfig-dir-for-multilib.patch
+ create mode 100644 meta-networking/recipes-protocols/vsomeip/vsomeip/0002-Install-example-configuration-files-to-etc-vsomeip.patch
+ create mode 100644 meta-networking/recipes-protocols/vsomeip/vsomeip/0003-Do-not-build-external-gtest.patch
+ create mode 100644 meta-networking/recipes-protocols/vsomeip/vsomeip/0004-Do-not-specify-PIE-flag-explicitly.patch
+ create mode 100644 meta-networking/recipes-protocols/vsomeip/vsomeip_3.3.8.bb
 
-> The usage of nobranch=1 in SRC_URI allows using unprotected branches.
->
-> This change updates the real branch name in place of nobranch=1 for these
-> components.
->
-> Signed-off-by: Sourav Kumar Pramanik <pramanik.souravkumar@gmail.com>
-> ---
->  meta-gnome/recipes-connectivity/geary/geary_40.0.bb             | 2 +-
->  meta-networking/recipes-connectivity/libdnet/libdnet_1.14.bb    | 2 +-
->  .../dynamic-layers/meta-python/recipes-bsp/rwmem/rwmem_1.2.bb   | 2 +-
->  meta-oe/recipes-graphics/lvgl/lv-drivers_7.11.0.bb              | 2 +-
->  meta-oe/recipes-graphics/lvgl/lv-lib-png_8.0.2.bb               | 2 +-
->  meta-oe/recipes-graphics/lvgl/lvgl_8.1.0.bb                     | 2 +-
->  meta-oe/recipes-support/glog/glog_0.5.0.bb                      | 2 +-
->  meta-oe/recipes-support/libmxml/libmxml_3.3.bb                  | 2 +-
->  8 files changed, 8 insertions(+), 8 deletions(-)
->
-> diff --git a/meta-gnome/recipes-connectivity/geary/geary_40.0.bb
-> b/meta-gnome/recipes-connectivity/geary/geary_40.0.bb
-> index 501b27a54..7faa69c55 100644
-> --- a/meta-gnome/recipes-connectivity/geary/geary_40.0.bb
-> +++ b/meta-gnome/recipes-connectivity/geary/geary_40.0.bb
-> @@ -33,7 +33,7 @@ RDEPENDS:${PN} = "gnome-keyring"
->  inherit meson pkgconfig mime-xdg gtk-icon-cache gobject-introspection
-> vala features_check
->
->  SRC_URI = " \
-> -       git://github.com/GNOME/geary.git;nobranch=1;protocol=https \
-> +       git://github.com/GNOME/geary.git;branch=main;protocol=https \
->
->  file://0001-Util.Cache.Lru-Workaround-missing-generic-type-argum.patch \
->
->  file://0002-Fix-accessibility-issues-with-initializer-of-constan.patch \
->  "
-> diff --git a/meta-networking/recipes-connectivity/libdnet/libdnet_1.14.bb
-> b/meta-networking/recipes-connectivity/libdnet/libdnet_1.14.bb
-> index 9f2ff5157..c7cd21b6b 100644
-> --- a/meta-networking/recipes-connectivity/libdnet/libdnet_1.14.bb
-> +++ b/meta-networking/recipes-connectivity/libdnet/libdnet_1.14.bb
-> @@ -4,7 +4,7 @@ SECTION = "libs"
->  LICENSE = "BSD-3-Clause"
->  LIC_FILES_CHKSUM = "file://LICENSE;md5=0036c1b155f4e999f3e0a373490b5db9"
->
-> -SRC_URI = "git://github.com/dugsong/libdnet.git;nobranch=1;protocol=https
-> "
-> +SRC_URI = "git://
-> github.com/dugsong/libdnet.git;branch=master;protocol=https"
->  SRCREV = "3e782472d2a58d5e1b94d04eda4a364c2d257600"
->
->  UPSTREAM_CHECK_GITTAGREGEX = "libdnet-(?P<pver>\d+(\.\d+)+)"
-> diff --git a/meta-oe/dynamic-layers/meta-python/recipes-bsp/rwmem/
-> rwmem_1.2.bb b/meta-oe/dynamic-layers/meta-python/recipes-bsp/rwmem/
-> rwmem_1.2.bb
-> index 7bca24cc0..b59fc1bc9 100644
-> --- a/meta-oe/dynamic-layers/meta-python/recipes-bsp/rwmem/rwmem_1.2.bb
-> +++ b/meta-oe/dynamic-layers/meta-python/recipes-bsp/rwmem/rwmem_1.2.bb
-> @@ -22,7 +22,7 @@ SRCREV_FORMAT = "rwmem_inih"
->
->  SRC_URI = " \
->      git://
-> github.com/tomba/rwmem.git;protocol=https;name=rwmem;branch=master \
-> -    git://
-> github.com/benhoyt/inih.git;protocol=https;name=inih;nobranch=1;destsuffix=git/ext/inih
-> \
-> +    git://
-> github.com/benhoyt/inih.git;protocol=https;name=inih;branch=master;destsuffix=git/ext/inih
-> \
->  "
->
->  S = "${WORKDIR}/git"
-> diff --git a/meta-oe/recipes-graphics/lvgl/lv-drivers_7.11.0.bb
-> b/meta-oe/recipes-graphics/lvgl/lv-drivers_7.11.0.bb
-> index cf33c6904..7f93f704e 100644
-> --- a/meta-oe/recipes-graphics/lvgl/lv-drivers_7.11.0.bb
-> +++ b/meta-oe/recipes-graphics/lvgl/lv-drivers_7.11.0.bb
-> @@ -9,7 +9,7 @@ LICENSE = "MIT"
->  LIC_FILES_CHKSUM = "file://LICENSE;md5=d6fc0df890c5270ef045981b516bb8f2"
->
->  # TODO: Pin upstream release (current v7.11.0-80-g419a757)
-> -SRC_URI = "git://github.com/lvgl/lv_drivers;protocol=https;nobranch=1"
-> +SRC_URI = "git://github.com/lvgl/lv_drivers;protocol=https;branch=master"
->  SRCREV = "419a757c23aaa67c676fe3a2196d64808fcf2254"
->
->  DEPENDS = "libxkbcommon lvgl wayland"
-> diff --git a/meta-oe/recipes-graphics/lvgl/lv-lib-png_8.0.2.bb
-> b/meta-oe/recipes-graphics/lvgl/lv-lib-png_8.0.2.bb
-> index 22b482640..0049bbe23 100644
-> --- a/meta-oe/recipes-graphics/lvgl/lv-lib-png_8.0.2.bb
-> +++ b/meta-oe/recipes-graphics/lvgl/lv-lib-png_8.0.2.bb
-> @@ -8,7 +8,7 @@ DESCRIPTION = "Allow the use of PNG images in LVGL. This
-> implementation uses lod
->  LICENSE = "MIT"
->  LIC_FILES_CHKSUM = "file://LICENSE;md5=d6fc0df890c5270ef045981b516bb8f2"
->
-> -SRC_URI = "git://github.com/lvgl/lv_lib_png;;protocol=https;nobranch=1"
-> +SRC_URI = "git://github.com/lvgl/lv_lib_png;;protocol=https;branch=master
-> "
->  SRCREV = "bf1531afe07c9f861107559e29ab8a2d83e4715a"
->
->  S = "${WORKDIR}/git"
-> diff --git a/meta-oe/recipes-graphics/lvgl/lvgl_8.1.0.bb
-> b/meta-oe/recipes-graphics/lvgl/lvgl_8.1.0.bb
-> index ea74c5918..0021da01f 100644
-> --- a/meta-oe/recipes-graphics/lvgl/lvgl_8.1.0.bb
-> +++ b/meta-oe/recipes-graphics/lvgl/lvgl_8.1.0.bb
-> @@ -8,7 +8,7 @@ SUMMARY = "Light and Versatile Graphics Library"
->  LICENSE = "MIT"
->  LIC_FILES_CHKSUM =
-> "file://LICENCE.txt;md5=bf1198c89ae87f043108cea62460b03a"
->
-> -SRC_URI = "gitsm://github.com/lvgl/lvgl;protocol=https;nobranch=1"
-> +SRC_URI = "gitsm://github.com/lvgl/lvgl;protocol=https;branch=master"
->  SRCREV = "d38eb1e689fa5a64c25e677275172d9c8a4ab2f0"
->
->  REQUIRED_DISTRO_FEATURES = "wayland"
-> diff --git a/meta-oe/recipes-support/glog/glog_0.5.0.bb
-> b/meta-oe/recipes-support/glog/glog_0.5.0.bb
-> index 61581d96d..f0b129396 100644
-> --- a/meta-oe/recipes-support/glog/glog_0.5.0.bb
-> +++ b/meta-oe/recipes-support/glog/glog_0.5.0.bb
-> @@ -7,7 +7,7 @@ LICENSE = "BSD-3-Clause"
->  LIC_FILES_CHKSUM = "file://COPYING;md5=dc9db360e0bbd4e46672f3fd91dd6c4b"
->
->  SRC_URI = " \
-> -    git://github.com/google/glog.git;nobranch=1;protocol=https \
-> +    git://github.com/google/glog.git;branch=master;protocol=https \
->      file://libexecinfo.patch \
->  "
->
-> diff --git a/meta-oe/recipes-support/libmxml/libmxml_3.3.bb
-> b/meta-oe/recipes-support/libmxml/libmxml_3.3.bb
-> index c8e216779..5169337f5 100644
-> --- a/meta-oe/recipes-support/libmxml/libmxml_3.3.bb
-> +++ b/meta-oe/recipes-support/libmxml/libmxml_3.3.bb
-> @@ -4,7 +4,7 @@ LIC_FILES_CHKSUM =
-> "file://LICENSE;md5=86d3f3a95c324c9479bd8986968f4327"
->  HOMEPAGE = "https://www.msweet.org/mxml/"
->  BUGTRACKER = "https://github.com/michaelrsweet/mxml/issues"
->
-> -SRC_URI = "git://
-> github.com/michaelrsweet/mxml.git;nobranch=1;protocol=https"
-> +SRC_URI = "git://
-> github.com/michaelrsweet/mxml.git;branch=master;protocol=https"
->  SRCREV = "0237559fdbcecae34157b547aa2b99e12de305a2"
->  S = "${WORKDIR}/git"
->
-> --
-> 2.25.1
->
->
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#104711):
-> https://lists.openembedded.org/g/openembedded-devel/message/104711
-> Mute This Topic: https://lists.openembedded.org/mt/101147022/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
-> raj.khem@gmail.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
->
->
+diff --git a/meta-networking/recipes-protocols/vsomeip/vsomeip/0001-Fix-pkgconfig-dir-for-multilib.patch b/meta-networking/recipes-protocols/vsomeip/vsomeip/0001-Fix-pkgconfig-dir-for-multilib.patch
+new file mode 100644
+index 000000000..1c7eb17b2
+--- /dev/null
++++ b/meta-networking/recipes-protocols/vsomeip/vsomeip/0001-Fix-pkgconfig-dir-for-multilib.patch
+@@ -0,0 +1,28 @@
++From e8a1b7a176398c2a9b5969f1b48ae0e1aa30f4ec Mon Sep 17 00:00:00 2001
++From: Yi Zhao <yi.zhao@windriver.com>
++Date: Wed, 2 Mar 2022 14:51:13 +0800
++Subject: [PATCH] Fix pkgconfig dir for multilib
++
++Upstream-Status: Pending
++
++Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
++---
++ CMakeLists.txt | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/CMakeLists.txt b/CMakeLists.txt
++index add3edda..fea80b4a 100644
++--- a/CMakeLists.txt
+++++ b/CMakeLists.txt
++@@ -602,7 +602,7 @@ endif()
++ # create pkg-config file
++ if(NOT WIN32)
++         configure_file(${VSOMEIP_NAME}.pc.in ${PROJECT_BINARY_DIR}/${VSOMEIP_NAME}.pc @ONLY)
++-        install(FILES ${PROJECT_BINARY_DIR}/${VSOMEIP_NAME}.pc DESTINATION lib/pkgconfig)
+++        install(FILES ${PROJECT_BINARY_DIR}/${VSOMEIP_NAME}.pc DESTINATION ${INSTALL_LIB_DIR}/pkgconfig)
++ endif()
++ 
++ ##############################################################################
++-- 
++2.25.1
++
+diff --git a/meta-networking/recipes-protocols/vsomeip/vsomeip/0002-Install-example-configuration-files-to-etc-vsomeip.patch b/meta-networking/recipes-protocols/vsomeip/vsomeip/0002-Install-example-configuration-files-to-etc-vsomeip.patch
+new file mode 100644
+index 000000000..c22ef697b
+--- /dev/null
++++ b/meta-networking/recipes-protocols/vsomeip/vsomeip/0002-Install-example-configuration-files-to-etc-vsomeip.patch
+@@ -0,0 +1,28 @@
++From aea4c06ee2a0661d0c7b4773e846276a4f10e2e8 Mon Sep 17 00:00:00 2001
++From: Yi Zhao <yi.zhao@windriver.com>
++Date: Wed, 9 Mar 2022 11:48:44 +0800
++Subject: [PATCH] Install example configuration files to /etc/vsomeip
++
++Upstream-Status: Inappropriate [configuration]
++
++Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
++---
++ CMakeLists.txt | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/CMakeLists.txt b/CMakeLists.txt
++index fea80b4a..e7a92ec6 100644
++--- a/CMakeLists.txt
+++++ b/CMakeLists.txt
++@@ -501,7 +501,7 @@ install(FILES ${PROJECT_BINARY_DIR}/vsomeip.pc DESTINATION lib/pkgconfig)
++ endif ()
++ 
++ install (
++-  FILES ${EXAMPLE_CONFIG_FILES} DESTINATION etc/vsomeip COMPONENT config
+++  FILES ${EXAMPLE_CONFIG_FILES} DESTINATION ${DEFAULT_CONFIGURATION_FOLDER} COMPONENT config
++ )
++ 
++ # Add all targets to the build-tree export set
++-- 
++2.25.1
++
+diff --git a/meta-networking/recipes-protocols/vsomeip/vsomeip/0003-Do-not-build-external-gtest.patch b/meta-networking/recipes-protocols/vsomeip/vsomeip/0003-Do-not-build-external-gtest.patch
+new file mode 100644
+index 000000000..370d8a0fe
+--- /dev/null
++++ b/meta-networking/recipes-protocols/vsomeip/vsomeip/0003-Do-not-build-external-gtest.patch
+@@ -0,0 +1,160 @@
++From e012f91a73af7469ef6f660c3a6a752430a4d649 Mon Sep 17 00:00:00 2001
++From: Yi Zhao <yi.zhao@windriver.com>
++Date: Tue, 11 Jul 2023 16:53:46 +0800
++Subject: [PATCH] Do not build external gtest
++
++We don't need to build external gtest since we already depend on
++googletest.
++
++Upstream-Status: Inappropriate [embedded specific]
++
++Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
++---
++ CMakeLists.txt                    | 30 ++----------
++ test/network_tests/CMakeLists.txt | 80 -------------------------------
++ 2 files changed, 3 insertions(+), 107 deletions(-)
++
++diff --git a/CMakeLists.txt b/CMakeLists.txt
++index e7a92ec6..f6c680d4 100644
++--- a/CMakeLists.txt
+++++ b/CMakeLists.txt
++@@ -18,14 +18,6 @@ set (VSOMEIP_VERSION ${VSOMEIP_MAJOR_VERSION}.${VSOMEIP_MINOR_VERSION}.${VSOMEIP
++ set (PACKAGE_VERSION ${VSOMEIP_VERSION}) # Used in documentation/doxygen.in
++ set (CMAKE_VERBOSE_MAKEFILE off)
++ 
++-if (NOT GTEST_ROOT)
++-    if (DEFINED ENV{GTEST_ROOT})
++-        set(GTEST_ROOT $ENV{GTEST_ROOT})
++-    else()
++-        set(GTEST_ROOT "n/a" CACHE STRING "Path to root folder of googletest. Must be set for building the tests.")
++-    endif()
++-endif()
++-
++ ###################################################################################################
++ # see http://www.cmake.org/Wiki/CMake/Tutorials/How_to_create_a_ProjectConfig.cmake_file
++ ###################################################################################################
++@@ -630,27 +622,11 @@ find_package(benchmark)
++ ##############################################################################
++ # google test
++ 
++-# check for set environment variable
++-if(${GTEST_ROOT} STREQUAL "n/a")
++-    message(STATUS "GTEST_ROOT is not defined. For building the tests the variable
++-             GTEST_ROOT has to be defined. Tests can not be built.")
++-    # early exit
++-    return()  # test can not be build -> make commands build_tests and check are not available
++-else()
++-    message(STATUS "GTEST_ROOT is set. gtest root path set to ${GTEST_ROOT}")
+++find_package(GTest)
+++if (NOT GTest_FOUND)
+++    message(WARNING "GTest is not found. Tests can not be built.")
++ endif()
++ 
++-# build google test as static library (always) -> therefore deactivate BUILD_SHARED_LIBS in case it is active
++-set(BUILD_SHARED_LIBS_AUTOMATIC_OFF 0)
++-if ("${BUILD_SHARED_LIBS}" STREQUAL "ON")
++-    set(BUILD_SHARED_LIBS OFF)
++-    set(BUILD_SHARED_LIBS_AUTOMATIC_OFF 1)
++-endif()
++-add_subdirectory(${GTEST_ROOT} ${CMAKE_CURRENT_BINARY_DIR}/gtest EXCLUDE_FROM_ALL)
++-if ("${BUILD_SHARED_LIBS_AUTOMATIC_OFF}" STREQUAL "1")
++-    set(BUILD_SHARED_LIBS ON)
++-    set(BUILD_SHARED_LIBS_AUTOMATIC_OFF 0)
++-endif()
++ 
++ 
++ 
++diff --git a/test/network_tests/CMakeLists.txt b/test/network_tests/CMakeLists.txt
++index 6a148604..a501b6a7 100644
++--- a/test/network_tests/CMakeLists.txt
+++++ b/test/network_tests/CMakeLists.txt
++@@ -3633,86 +3633,6 @@ if(NOT ${TESTS_BAT})
++ 
++ endif()
++ 
++-##############################################################################
++-# Add for every test a dependency to gtest
++-##############################################################################
++-
++-if(NOT ${TESTS_BAT})
++-    add_dependencies(${TEST_CONFIGURATION} gtest)
++-    add_dependencies(${TEST_APPLICATION} gtest)
++-    add_dependencies(${TEST_APPLICATION_SINGLE_PROCESS_NAME} gtest)
++-    add_dependencies(${TEST_APPLICATION_AVAILABILITY_NAME} gtest)
++-    add_dependencies(${TEST_MAGIC_COOKIES_CLIENT} gtest)
++-    add_dependencies(${TEST_MAGIC_COOKIES_SERVICE} gtest)
++-    add_dependencies(${TEST_HEADER_FACTORY} gtest)
++-    add_dependencies(${TEST_HEADER_FACTORY_CLIENT} gtest)
++-    add_dependencies(${TEST_HEADER_FACTORY_SERVICE} gtest)
++-    add_dependencies(${TEST_LOCAL_ROUTING_SERVICE} gtest)
++-    add_dependencies(${TEST_LOCAL_ROUTING_CLIENT} gtest)
++-    add_dependencies(${TEST_EXTERNAL_LOCAL_ROUTING_SERVICE} gtest)
++-    add_dependencies(${TEST_PAYLOAD_SERVICE} gtest)
++-    add_dependencies(${TEST_PAYLOAD_CLIENT} gtest)
++-    add_dependencies(${TEST_BIG_PAYLOAD_SERVICE} gtest)
++-    add_dependencies(${TEST_BIG_PAYLOAD_CLIENT} gtest)
++-    add_dependencies(${TEST_CLIENT_ID_SERVICE} gtest)
++-    add_dependencies(${TEST_CLIENT_ID_UTILITY} gtest)
++-    add_dependencies(${TEST_DEBOUNCE_CLIENT} gtest)
++-    add_dependencies(${TEST_DEBOUNCE_SERVICE} gtest)
++-    add_dependencies(${TEST_SUBSCRIBE_NOTIFY_SERVICE} gtest)
++-    add_dependencies(${TEST_SUBSCRIBE_NOTIFY_ONE_EVENT_TWO_EVENTGROUPS_SERVICE} gtest)
++-    add_dependencies(${TEST_SUBSCRIBE_NOTIFY_ONE_EVENT_TWO_EVENTGROUPS_CLIENT} gtest)
++-    add_dependencies(${TEST_SUBSCRIBE_NOTIFY_ONE_SERVICE} gtest)
++-    add_dependencies(${TEST_CPU_LOAD_SERVICE} gtest)
++-    add_dependencies(${TEST_CPU_LOAD_CLIENT} gtest)
++-    add_dependencies(${TEST_INITIAL_EVENT_SERVICE} gtest)
++-    add_dependencies(${TEST_INITIAL_EVENT_CLIENT} gtest)
++-    add_dependencies(${TEST_INITIAL_EVENT_AVAILABILITY_CHECKER} gtest)
++-    add_dependencies(${TEST_INITIAL_EVENT_STOP_SERVICE} gtest)
++-    add_dependencies(${TEST_OFFER_SERVICE} gtest)
++-    add_dependencies(${TEST_OFFER_CLIENT} gtest)
++-    add_dependencies(${TEST_OFFER_SERVICE_EXTERNAL} gtest)
++-    add_dependencies(${TEST_OFFER_EXTERNAL_SD_MESSAGE_SENDER} gtest)
++-    add_dependencies(${TEST_OFFERED_SERVICES_INFO_CLIENT} gtest)
++-    add_dependencies(${TEST_OFFERED_SERVICES_INFO_SERVICE} gtest)
++-    add_dependencies(${TEST_PENDING_SUBSCRIPTION_SERVICE} gtest)
++-    add_dependencies(${TEST_PENDING_SUBSCRIPTION_CLIENT} gtest)
++-    add_dependencies(${TEST_MALICIOUS_DATA_SERVICE} gtest)
++-    add_dependencies(${TEST_MALICIOUS_DATA_CLIENT} gtest)
++-    if (${TEST_SECURITY})
++-        add_dependencies(${TEST_SECURITY_SERVICE} gtest)
++-        add_dependencies(${TEST_SECURITY_CLIENT} gtest)
++-    endif()
++-    add_dependencies(${TEST_E2E_SERVICE} gtest)
++-    add_dependencies(${TEST_E2E_CLIENT} gtest)
++-    if (${TEST_E2E_PROFILE_04})
++-    add_dependencies(${TEST_E2E_PROFILE_04_SERVICE} gtest)
++-    add_dependencies(${TEST_E2E_PROFILE_04_CLIENT} gtest)
++-    endif()
++-    add_dependencies(${TEST_EVENT_SERVICE} gtest)
++-    add_dependencies(${TEST_EVENT_CLIENT} gtest)
++-    add_dependencies(${TEST_NPDU_SERVICE_ONE} gtest)
++-    add_dependencies(${TEST_NPDU_SERVICE_TWO} gtest)
++-    add_dependencies(${TEST_NPDU_SERVICE_THREE} gtest)
++-    add_dependencies(${TEST_NPDU_SERVICE_FOUR} gtest)
++-    add_dependencies(${TEST_NPDU_CLIENT_ONE} gtest)
++-    add_dependencies(${TEST_NPDU_CLIENT_TWO} gtest)
++-    add_dependencies(${TEST_NPDU_CLIENT_THREE} gtest)
++-    add_dependencies(${TEST_NPDU_CLIENT_FOUR} gtest)
++-    add_dependencies(${TEST_NPDU_DAEMON_CLIENT} gtest)
++-    add_dependencies(${TEST_NPDU_DAEMON_SERVICE} gtest)
++-    add_dependencies(${TEST_SOMEIPTP_CLIENT} gtest)
++-    add_dependencies(${TEST_SOMEIPTP_SERVICE} gtest)
++-    if(${TEST_SECOND_ADDRESS})
++-        add_dependencies(${TEST_SECOND_ADDRESS_CLIENT} gtest)
++-        add_dependencies(${TEST_SECOND_ADDRESS_SERVICE} gtest)
++-    endif()
++-    add_dependencies(${TEST_SUSPEND_RESUME_CLIENT} gtest)
++-    add_dependencies(${TEST_SUSPEND_RESUME_SERVICE} gtest)
++-else()
++-    add_dependencies(${TEST_LOCAL_ROUTING_SERVICE} gtest)
++-    add_dependencies(${TEST_LOCAL_ROUTING_CLIENT} gtest)
++-endif()
++-
++ ##############################################################################
++ # Add tests to the target build_network_tests
++ ##############################################################################
++-- 
++2.25.1
++
+diff --git a/meta-networking/recipes-protocols/vsomeip/vsomeip/0004-Do-not-specify-PIE-flag-explicitly.patch b/meta-networking/recipes-protocols/vsomeip/vsomeip/0004-Do-not-specify-PIE-flag-explicitly.patch
+new file mode 100644
+index 000000000..970a37e50
+--- /dev/null
++++ b/meta-networking/recipes-protocols/vsomeip/vsomeip/0004-Do-not-specify-PIE-flag-explicitly.patch
+@@ -0,0 +1,47 @@
++From 69805f9c8973a7a4d29297f8d50c29c88f981bee Mon Sep 17 00:00:00 2001
++From: Yi Zhao <yi.zhao@windriver.com>
++Date: Mon, 17 Jul 2023 14:33:32 +0800
++Subject: [PATCH] Do not specify PIE flag explicitly
++
++For nodistro distro, packages are built without PIE because
++security_flags.inc is not included by default. But in vsomeip, the PIE
++flag is explicitly specified in CMAKE_CXX_FLAGS, which will cause
++building with PIE even in nodistro, causing an error when linking the
++googletest static library:
++
++TOPDIR/tmp-glibc/work/cortexa53-oe-linux/vsomeip/3.1.20.3-r0/recipe-sysroot-native/usr/bin/aarch64-oe-linux/../../libexec/aarch64-oe-linux/gcc/aarch64-oe-linux/12.2.0/ld:
++TOPDIR/tmp-glibc/work/cortexa53-oe-linux/vsomeip/3.1.20.3-r0/recipe-sysroot/usr/lib/libgtest.a(gtest-all.cc.o)(.text+0x4a90):
++unresolvable R_AARCH64_ADR_PREL_PG_HI21 relocation against symbol `_ZSt4cerr@@GLIBCXX_3.4'
++
++Remove PIE flag from CMAKE_CXX_FLAGS and only enable PIE flag by
++including security_flags.inc.
++
++Upstream-Status: Inappropriate [embedded specific]
++
++Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
++---
++ CMakeLists.txt | 4 ++--
++ 1 file changed, 2 insertions(+), 2 deletions(-)
++
++diff --git a/CMakeLists.txt b/CMakeLists.txt
++index f6c680d4..dce1e701 100644
++--- a/CMakeLists.txt
+++++ b/CMakeLists.txt
++@@ -60,12 +60,12 @@ if (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
++ if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
++     # This is only relevant for GCC and causes warnings on Clang
++     set(EXPORTSYMBOLS "-Wl,-export-dynamic -Wl,--version-script=${CMAKE_CURRENT_SOURCE_DIR}/exportmap.gcc")
++-    set(OS_CXX_FLAGS "${OS_CXX_FLAGS} -pie -Wl,-z,relro,-z,now")
+++    set(OS_CXX_FLAGS "${OS_CXX_FLAGS} -Wl,-z,relro,-z,now")
++ endif()
++ 
++     set(NO_DEPRECATED "")
++     set(OPTIMIZE "")
++-    set(OS_CXX_FLAGS "${OS_CXX_FLAGS} -D_GLIBCXX_USE_NANOSLEEP -pthread -O -Wall -Wextra -Wformat -Wformat-security -Wconversion -fexceptions -fstrict-aliasing -fstack-protector-strong -fasynchronous-unwind-tables -fno-omit-frame-pointer -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security -Wpedantic -Werror -fPIE")
+++    set(OS_CXX_FLAGS "${OS_CXX_FLAGS} -D_GLIBCXX_USE_NANOSLEEP -pthread -O -Wall -Wextra -Wformat -Wformat-security -Wconversion -fexceptions -fstrict-aliasing -fstack-protector-strong -fasynchronous-unwind-tables -fno-omit-frame-pointer -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security -Wpedantic")
++ 
++     # force all use of std::mutex and std::recursive_mutex to use runtime init
++     # instead of static initialization so mutexes can be hooked to enable PI as needed
++-- 
++2.25.1
++
+diff --git a/meta-networking/recipes-protocols/vsomeip/vsomeip_3.3.8.bb b/meta-networking/recipes-protocols/vsomeip/vsomeip_3.3.8.bb
+new file mode 100644
+index 000000000..b45bd2d63
+--- /dev/null
++++ b/meta-networking/recipes-protocols/vsomeip/vsomeip_3.3.8.bb
+@@ -0,0 +1,72 @@
++SUMMARY = "The implementation of SOME/IP"
++DESCRIPTION = "The vsomeip stack implements the http://some-ip.com/ \
++(Scalable service-Oriented MiddlewarE over IP (SOME/IP)) protocol."
++HOMEPAGE = "https://github.com/COVESA/vsomeip"
++SECTION = "net"
++
++LICENSE = "MPL-2.0"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=9741c346eef56131163e13b9db1241b3"
++
++SRC_URI = "git://github.com/GENIVI/${BPN}.git;branch=master;protocol=https;name=vsomeip \
++           file://0001-Fix-pkgconfig-dir-for-multilib.patch \
++           file://0002-Install-example-configuration-files-to-etc-vsomeip.patch \
++           file://0003-Do-not-build-external-gtest.patch \
++           file://0004-Do-not-specify-PIE-flag-explicitly.patch \
++          "
++
++SRCREV = "07464840f503670bc75997b8e926b54734ffa410"
++
++COMPATIBLE_HOST:mips = "null"
++COMPATIBLE_HOST:mips64 = "null"
++COMPATIBLE_HOST:powerpc = "null"
++COMPATIBLE_HOST:libc-musl = 'null'
++
++DEPENDS = "boost dlt-daemon googletest"
++
++S = "${WORKDIR}/git"
++
++inherit cmake pkgconfig
++
++EXTRA_OECMAKE = "-DINSTALL_LIB_DIR:PATH=${baselib} \
++                 -DINSTALL_CMAKE_DIR:PATH=${baselib}/cmake/vsomeip3 \
++                "
++
++# For vsomeip-test
++EXTRA_OECMAKE += "-DTEST_IP_MASTER=10.0.3.1 \
++                  -DTEST_IP_SLAVE=10.0.3.2 \
++                  -DTEST_IP_SLAVE_SECOND=10.0.3.3 \
++                  -DTEST_UID=1000 -DTEST_GID=1000 \
++                 "
++
++RDEPENDS:${PN}-test = "bash lsof"
++
++do_compile:append() {
++    cmake_runcmake_build --target examples
++    cmake_runcmake_build --target build_tests
++}
++
++do_install:append() {
++    install -d ${D}/opt/${PN}-test/examples
++    install -m 0755 ${B}/examples/*-sample ${D}/opt/${PN}-test/examples
++    install -d ${D}/opt/${PN}-test/examples/routingmanagerd
++    install -m 0755 ${B}/examples/routingmanagerd/routingmanagerd \
++        ${D}/opt/${PN}-test/examples/routingmanagerd
++
++    install -d ${D}/opt/${PN}-test/test/test/common
++    cp -rf ${S}/test/common/examples_policies \
++        ${D}/opt/${PN}-test/test/test/common/
++
++    for d in unit_tests network_tests; do
++        install -d ${D}/opt/${PN}-test/test/$d
++        cp -f ${B}/test/$d/*test* ${D}/opt/${PN}-test/test/$d
++    done
++}
++
++PACKAGES += "${PN}-test"
++
++FILES:${PN}-dbg += " \
++   /opt/${PN}-test/.debug/* \
++   "
++FILES:${PN}-test = " \
++   /opt/${PN}-test \
++   "
+-- 
+2.25.1
 
---000000000000049c69060491ac5e
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div><br></div><div dir=3D"auto">Please rebase on top of master-next and re=
-send=C2=A0</div><div dir=3D"auto"><br></div><div dir=3D"auto"><div class=3D=
-"gmail_quote" dir=3D"auto"><div dir=3D"ltr" class=3D"gmail_attr">On Mon, Se=
-p 4, 2023 at 5:31 AM Sourav Kumar Pramanik &lt;<a href=3D"mailto:pramanik.s=
-ouravkumar@gmail.com">pramanik.souravkumar@gmail.com</a>&gt; wrote:<br></di=
-v><blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:=
-1px #ccc solid;padding-left:1ex">The usage of nobranch=3D1 in SRC_URI allow=
-s using unprotected branches.<br>
-<br>
-This change updates the real branch name in place of nobranch=3D1 for these=
- components.<br>
-<br>
-Signed-off-by: Sourav Kumar Pramanik &lt;<a href=3D"mailto:pramanik.souravk=
-umar@gmail.com" target=3D"_blank">pramanik.souravkumar@gmail.com</a>&gt;<br=
->
----<br>
-=C2=A0meta-gnome/recipes-connectivity/geary/<a href=3D"http://geary_40.0.bb=
-" rel=3D"noreferrer" target=3D"_blank">geary_40.0.bb</a>=C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0| 2 +-<br>
-=C2=A0meta-networking/recipes-connectivity/libdnet/<a href=3D"http://libdne=
-t_1.14.bb" rel=3D"noreferrer" target=3D"_blank">libdnet_1.14.bb</a>=C2=A0 =
-=C2=A0 | 2 +-<br>
-=C2=A0.../dynamic-layers/meta-python/recipes-bsp/rwmem/<a href=3D"http://rw=
-mem_1.2.bb" rel=3D"noreferrer" target=3D"_blank">rwmem_1.2.bb</a>=C2=A0 =C2=
-=A0| 2 +-<br>
-=C2=A0meta-oe/recipes-graphics/lvgl/<a href=3D"http://lv-drivers_7.11.0.bb"=
- rel=3D"noreferrer" target=3D"_blank">lv-drivers_7.11.0.bb</a>=C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 | 2 +-<br>
-=C2=A0meta-oe/recipes-graphics/lvgl/<a href=3D"http://lv-lib-png_8.0.2.bb" =
-rel=3D"noreferrer" target=3D"_blank">lv-lib-png_8.0.2.bb</a>=C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0| 2 +-<br>
-=C2=A0meta-oe/recipes-graphics/lvgl/<a href=3D"http://lvgl_8.1.0.bb" rel=3D=
-"noreferrer" target=3D"_blank">lvgl_8.1.0.bb</a>=C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0| 2 +-<br>
-=C2=A0meta-oe/recipes-support/glog/<a href=3D"http://glog_0.5.0.bb" rel=3D"=
-noreferrer" target=3D"_blank">glog_0.5.0.bb</a>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 | 2 +-<br>
-=C2=A0meta-oe/recipes-support/libmxml/<a href=3D"http://libmxml_3.3.bb" rel=
-=3D"noreferrer" target=3D"_blank">libmxml_3.3.bb</a>=C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 | 2 +-<br>
-=C2=A08 files changed, 8 insertions(+), 8 deletions(-)<br>
-<br>
-diff --git a/meta-gnome/recipes-connectivity/geary/<a href=3D"http://geary_=
-40.0.bb" rel=3D"noreferrer" target=3D"_blank">geary_40.0.bb</a> b/meta-gnom=
-e/recipes-connectivity/geary/<a href=3D"http://geary_40.0.bb" rel=3D"norefe=
-rrer" target=3D"_blank">geary_40.0.bb</a><br>
-index 501b27a54..7faa69c55 100644<br>
---- a/meta-gnome/recipes-connectivity/geary/<a href=3D"http://geary_40.0.bb=
-" rel=3D"noreferrer" target=3D"_blank">geary_40.0.bb</a><br>
-+++ b/meta-gnome/recipes-connectivity/geary/<a href=3D"http://geary_40.0.bb=
-" rel=3D"noreferrer" target=3D"_blank">geary_40.0.bb</a><br>
-@@ -33,7 +33,7 @@ RDEPENDS:${PN} =3D &quot;gnome-keyring&quot;<br>
-=C2=A0inherit meson pkgconfig mime-xdg gtk-icon-cache gobject-introspection=
- vala features_check<br>
-<br>
-=C2=A0SRC_URI =3D &quot; \<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0git://<a href=3D"http://github.com/GNOME/geary.=
-git;nobranch=3D1;protocol=3Dhttps" rel=3D"noreferrer" target=3D"_blank">git=
-hub.com/GNOME/geary.git;nobranch=3D1;protocol=3Dhttps</a> \<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0git://<a href=3D"http://github.com/GNOME/geary.=
-git;branch=3Dmain;protocol=3Dhttps" rel=3D"noreferrer" target=3D"_blank">gi=
-thub.com/GNOME/geary.git;branch=3Dmain;protocol=3Dhttps</a> \<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0file://0001-Util.Cache.Lru-Workaround-mis=
-sing-generic-type-argum.patch \<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0file://0002-Fix-accessibility-issues-with=
--initializer-of-constan.patch \<br>
-=C2=A0&quot;<br>
-diff --git a/meta-networking/recipes-connectivity/libdnet/<a href=3D"http:/=
-/libdnet_1.14.bb" rel=3D"noreferrer" target=3D"_blank">libdnet_1.14.bb</a> =
-b/meta-networking/recipes-connectivity/libdnet/<a href=3D"http://libdnet_1.=
-14.bb" rel=3D"noreferrer" target=3D"_blank">libdnet_1.14.bb</a><br>
-index 9f2ff5157..c7cd21b6b 100644<br>
---- a/meta-networking/recipes-connectivity/libdnet/<a href=3D"http://libdne=
-t_1.14.bb" rel=3D"noreferrer" target=3D"_blank">libdnet_1.14.bb</a><br>
-+++ b/meta-networking/recipes-connectivity/libdnet/<a href=3D"http://libdne=
-t_1.14.bb" rel=3D"noreferrer" target=3D"_blank">libdnet_1.14.bb</a><br>
-@@ -4,7 +4,7 @@ SECTION =3D &quot;libs&quot;<br>
-=C2=A0LICENSE =3D &quot;BSD-3-Clause&quot;<br>
-=C2=A0LIC_FILES_CHKSUM =3D &quot;file://LICENSE;md5=3D0036c1b155f4e999f3e0a=
-373490b5db9&quot;<br>
-<br>
--SRC_URI =3D &quot;git://<a href=3D"http://github.com/dugsong/libdnet.git;n=
-obranch=3D1;protocol=3Dhttps" rel=3D"noreferrer" target=3D"_blank">github.c=
-om/dugsong/libdnet.git;nobranch=3D1;protocol=3Dhttps</a>&quot;<br>
-+SRC_URI =3D &quot;git://<a href=3D"http://github.com/dugsong/libdnet.git;b=
-ranch=3Dmaster;protocol=3Dhttps" rel=3D"noreferrer" target=3D"_blank">githu=
-b.com/dugsong/libdnet.git;branch=3Dmaster;protocol=3Dhttps</a>&quot;<br>
-=C2=A0SRCREV =3D &quot;3e782472d2a58d5e1b94d04eda4a364c2d257600&quot;<br>
-<br>
-=C2=A0UPSTREAM_CHECK_GITTAGREGEX =3D &quot;libdnet-(?P&lt;pver&gt;\d+(\.\d+=
-)+)&quot;<br>
-diff --git a/meta-oe/dynamic-layers/meta-python/recipes-bsp/rwmem/<a href=
-=3D"http://rwmem_1.2.bb" rel=3D"noreferrer" target=3D"_blank">rwmem_1.2.bb<=
-/a> b/meta-oe/dynamic-layers/meta-python/recipes-bsp/rwmem/<a href=3D"http:=
-//rwmem_1.2.bb" rel=3D"noreferrer" target=3D"_blank">rwmem_1.2.bb</a><br>
-index 7bca24cc0..b59fc1bc9 100644<br>
---- a/meta-oe/dynamic-layers/meta-python/recipes-bsp/rwmem/<a href=3D"http:=
-//rwmem_1.2.bb" rel=3D"noreferrer" target=3D"_blank">rwmem_1.2.bb</a><br>
-+++ b/meta-oe/dynamic-layers/meta-python/recipes-bsp/rwmem/<a href=3D"http:=
-//rwmem_1.2.bb" rel=3D"noreferrer" target=3D"_blank">rwmem_1.2.bb</a><br>
-@@ -22,7 +22,7 @@ SRCREV_FORMAT =3D &quot;rwmem_inih&quot;<br>
-<br>
-=C2=A0SRC_URI =3D &quot; \<br>
-=C2=A0 =C2=A0 =C2=A0git://<a href=3D"http://github.com/tomba/rwmem.git;prot=
-ocol=3Dhttps;name=3Drwmem;branch=3Dmaster" rel=3D"noreferrer" target=3D"_bl=
-ank">github.com/tomba/rwmem.git;protocol=3Dhttps;name=3Drwmem;branch=3Dmast=
-er</a> \<br>
--=C2=A0 =C2=A0 git://<a href=3D"http://github.com/benhoyt/inih.git;protocol=
-=3Dhttps;name=3Dinih;nobranch=3D1;destsuffix=3Dgit/ext/inih" rel=3D"norefer=
-rer" target=3D"_blank">github.com/benhoyt/inih.git;protocol=3Dhttps;name=3D=
-inih;nobranch=3D1;destsuffix=3Dgit/ext/inih</a> \<br>
-+=C2=A0 =C2=A0 git://<a href=3D"http://github.com/benhoyt/inih.git;protocol=
-=3Dhttps;name=3Dinih;branch=3Dmaster;destsuffix=3Dgit/ext/inih" rel=3D"nore=
-ferrer" target=3D"_blank">github.com/benhoyt/inih.git;protocol=3Dhttps;name=
-=3Dinih;branch=3Dmaster;destsuffix=3Dgit/ext/inih</a> \<br>
-=C2=A0&quot;<br>
-<br>
-=C2=A0S =3D &quot;${WORKDIR}/git&quot;<br>
-diff --git a/meta-oe/recipes-graphics/lvgl/<a href=3D"http://lv-drivers_7.1=
-1.0.bb" rel=3D"noreferrer" target=3D"_blank">lv-drivers_7.11.0.bb</a> b/met=
-a-oe/recipes-graphics/lvgl/<a href=3D"http://lv-drivers_7.11.0.bb" rel=3D"n=
-oreferrer" target=3D"_blank">lv-drivers_7.11.0.bb</a><br>
-index cf33c6904..7f93f704e 100644<br>
---- a/meta-oe/recipes-graphics/lvgl/<a href=3D"http://lv-drivers_7.11.0.bb"=
- rel=3D"noreferrer" target=3D"_blank">lv-drivers_7.11.0.bb</a><br>
-+++ b/meta-oe/recipes-graphics/lvgl/<a href=3D"http://lv-drivers_7.11.0.bb"=
- rel=3D"noreferrer" target=3D"_blank">lv-drivers_7.11.0.bb</a><br>
-@@ -9,7 +9,7 @@ LICENSE =3D &quot;MIT&quot;<br>
-=C2=A0LIC_FILES_CHKSUM =3D &quot;file://LICENSE;md5=3Dd6fc0df890c5270ef0459=
-81b516bb8f2&quot;<br>
-<br>
-=C2=A0# TODO: Pin upstream release (current v7.11.0-80-g419a757)<br>
--SRC_URI =3D &quot;git://<a href=3D"http://github.com/lvgl/lv_drivers;proto=
-col=3Dhttps;nobranch=3D1" rel=3D"noreferrer" target=3D"_blank">github.com/l=
-vgl/lv_drivers;protocol=3Dhttps;nobranch=3D1</a>&quot;<br>
-+SRC_URI =3D &quot;git://<a href=3D"http://github.com/lvgl/lv_drivers;proto=
-col=3Dhttps;branch=3Dmaster" rel=3D"noreferrer" target=3D"_blank">github.co=
-m/lvgl/lv_drivers;protocol=3Dhttps;branch=3Dmaster</a>&quot;<br>
-=C2=A0SRCREV =3D &quot;419a757c23aaa67c676fe3a2196d64808fcf2254&quot;<br>
-<br>
-=C2=A0DEPENDS =3D &quot;libxkbcommon lvgl wayland&quot;<br>
-diff --git a/meta-oe/recipes-graphics/lvgl/<a href=3D"http://lv-lib-png_8.0=
-.2.bb" rel=3D"noreferrer" target=3D"_blank">lv-lib-png_8.0.2.bb</a> b/meta-=
-oe/recipes-graphics/lvgl/<a href=3D"http://lv-lib-png_8.0.2.bb" rel=3D"nore=
-ferrer" target=3D"_blank">lv-lib-png_8.0.2.bb</a><br>
-index 22b482640..0049bbe23 100644<br>
---- a/meta-oe/recipes-graphics/lvgl/<a href=3D"http://lv-lib-png_8.0.2.bb" =
-rel=3D"noreferrer" target=3D"_blank">lv-lib-png_8.0.2.bb</a><br>
-+++ b/meta-oe/recipes-graphics/lvgl/<a href=3D"http://lv-lib-png_8.0.2.bb" =
-rel=3D"noreferrer" target=3D"_blank">lv-lib-png_8.0.2.bb</a><br>
-@@ -8,7 +8,7 @@ DESCRIPTION =3D &quot;Allow the use of PNG images in LVGL. =
-This implementation uses lod<br>
-=C2=A0LICENSE =3D &quot;MIT&quot;<br>
-=C2=A0LIC_FILES_CHKSUM =3D &quot;file://LICENSE;md5=3Dd6fc0df890c5270ef0459=
-81b516bb8f2&quot;<br>
-<br>
--SRC_URI =3D &quot;git://<a href=3D"http://github.com/lvgl/lv_lib_png;;prot=
-ocol=3Dhttps;nobranch=3D1" rel=3D"noreferrer" target=3D"_blank">github.com/=
-lvgl/lv_lib_png;;protocol=3Dhttps;nobranch=3D1</a>&quot;<br>
-+SRC_URI =3D &quot;git://<a href=3D"http://github.com/lvgl/lv_lib_png;;prot=
-ocol=3Dhttps;branch=3Dmaster" rel=3D"noreferrer" target=3D"_blank">github.c=
-om/lvgl/lv_lib_png;;protocol=3Dhttps;branch=3Dmaster</a>&quot;<br>
-=C2=A0SRCREV =3D &quot;bf1531afe07c9f861107559e29ab8a2d83e4715a&quot;<br>
-<br>
-=C2=A0S =3D &quot;${WORKDIR}/git&quot;<br>
-diff --git a/meta-oe/recipes-graphics/lvgl/<a href=3D"http://lvgl_8.1.0.bb"=
- rel=3D"noreferrer" target=3D"_blank">lvgl_8.1.0.bb</a> b/meta-oe/recipes-g=
-raphics/lvgl/<a href=3D"http://lvgl_8.1.0.bb" rel=3D"noreferrer" target=3D"=
-_blank">lvgl_8.1.0.bb</a><br>
-index ea74c5918..0021da01f 100644<br>
---- a/meta-oe/recipes-graphics/lvgl/<a href=3D"http://lvgl_8.1.0.bb" rel=3D=
-"noreferrer" target=3D"_blank">lvgl_8.1.0.bb</a><br>
-+++ b/meta-oe/recipes-graphics/lvgl/<a href=3D"http://lvgl_8.1.0.bb" rel=3D=
-"noreferrer" target=3D"_blank">lvgl_8.1.0.bb</a><br>
-@@ -8,7 +8,7 @@ SUMMARY =3D &quot;Light and Versatile Graphics Library&quot=
-;<br>
-=C2=A0LICENSE =3D &quot;MIT&quot;<br>
-=C2=A0LIC_FILES_CHKSUM =3D &quot;file://LICENCE.txt;md5=3Dbf1198c89ae87f043=
-108cea62460b03a&quot;<br>
-<br>
--SRC_URI =3D &quot;gitsm://<a href=3D"http://github.com/lvgl/lvgl;protocol=
-=3Dhttps;nobranch=3D1" rel=3D"noreferrer" target=3D"_blank">github.com/lvgl=
-/lvgl;protocol=3Dhttps;nobranch=3D1</a>&quot;<br>
-+SRC_URI =3D &quot;gitsm://<a href=3D"http://github.com/lvgl/lvgl;protocol=
-=3Dhttps;branch=3Dmaster" rel=3D"noreferrer" target=3D"_blank">github.com/l=
-vgl/lvgl;protocol=3Dhttps;branch=3Dmaster</a>&quot;<br>
-=C2=A0SRCREV =3D &quot;d38eb1e689fa5a64c25e677275172d9c8a4ab2f0&quot;<br>
-<br>
-=C2=A0REQUIRED_DISTRO_FEATURES =3D &quot;wayland&quot;<br>
-diff --git a/meta-oe/recipes-support/glog/<a href=3D"http://glog_0.5.0.bb" =
-rel=3D"noreferrer" target=3D"_blank">glog_0.5.0.bb</a> b/meta-oe/recipes-su=
-pport/glog/<a href=3D"http://glog_0.5.0.bb" rel=3D"noreferrer" target=3D"_b=
-lank">glog_0.5.0.bb</a><br>
-index 61581d96d..f0b129396 100644<br>
---- a/meta-oe/recipes-support/glog/<a href=3D"http://glog_0.5.0.bb" rel=3D"=
-noreferrer" target=3D"_blank">glog_0.5.0.bb</a><br>
-+++ b/meta-oe/recipes-support/glog/<a href=3D"http://glog_0.5.0.bb" rel=3D"=
-noreferrer" target=3D"_blank">glog_0.5.0.bb</a><br>
-@@ -7,7 +7,7 @@ LICENSE =3D &quot;BSD-3-Clause&quot;<br>
-=C2=A0LIC_FILES_CHKSUM =3D &quot;file://COPYING;md5=3Ddc9db360e0bbd4e46672f=
-3fd91dd6c4b&quot;<br>
-<br>
-=C2=A0SRC_URI =3D &quot; \<br>
--=C2=A0 =C2=A0 git://<a href=3D"http://github.com/google/glog.git;nobranch=
-=3D1;protocol=3Dhttps" rel=3D"noreferrer" target=3D"_blank">github.com/goog=
-le/glog.git;nobranch=3D1;protocol=3Dhttps</a> \<br>
-+=C2=A0 =C2=A0 git://<a href=3D"http://github.com/google/glog.git;branch=3D=
-master;protocol=3Dhttps" rel=3D"noreferrer" target=3D"_blank">github.com/go=
-ogle/glog.git;branch=3Dmaster;protocol=3Dhttps</a> \<br>
-=C2=A0 =C2=A0 =C2=A0file://libexecinfo.patch \<br>
-=C2=A0&quot;<br>
-<br>
-diff --git a/meta-oe/recipes-support/libmxml/<a href=3D"http://libmxml_3.3.=
-bb" rel=3D"noreferrer" target=3D"_blank">libmxml_3.3.bb</a> b/meta-oe/recip=
-es-support/libmxml/<a href=3D"http://libmxml_3.3.bb" rel=3D"noreferrer" tar=
-get=3D"_blank">libmxml_3.3.bb</a><br>
-index c8e216779..5169337f5 100644<br>
---- a/meta-oe/recipes-support/libmxml/<a href=3D"http://libmxml_3.3.bb" rel=
-=3D"noreferrer" target=3D"_blank">libmxml_3.3.bb</a><br>
-+++ b/meta-oe/recipes-support/libmxml/<a href=3D"http://libmxml_3.3.bb" rel=
-=3D"noreferrer" target=3D"_blank">libmxml_3.3.bb</a><br>
-@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM =3D &quot;file://LICENSE;md5=3D86d3f3a95c3=
-24c9479bd8986968f4327&quot;<br>
-=C2=A0HOMEPAGE =3D &quot;<a href=3D"https://www.msweet.org/mxml/" rel=3D"no=
-referrer" target=3D"_blank">https://www.msweet.org/mxml/</a>&quot;<br>
-=C2=A0BUGTRACKER =3D &quot;<a href=3D"https://github.com/michaelrsweet/mxml=
-/issues" rel=3D"noreferrer" target=3D"_blank">https://github.com/michaelrsw=
-eet/mxml/issues</a>&quot;<br>
-<br>
--SRC_URI =3D &quot;git://<a href=3D"http://github.com/michaelrsweet/mxml.gi=
-t;nobranch=3D1;protocol=3Dhttps" rel=3D"noreferrer" target=3D"_blank">githu=
-b.com/michaelrsweet/mxml.git;nobranch=3D1;protocol=3Dhttps</a>&quot;<br>
-+SRC_URI =3D &quot;git://<a href=3D"http://github.com/michaelrsweet/mxml.gi=
-t;branch=3Dmaster;protocol=3Dhttps" rel=3D"noreferrer" target=3D"_blank">gi=
-thub.com/michaelrsweet/mxml.git;branch=3Dmaster;protocol=3Dhttps</a>&quot;<=
-br>
-=C2=A0SRCREV =3D &quot;0237559fdbcecae34157b547aa2b99e12de305a2&quot;<br>
-=C2=A0S =3D &quot;${WORKDIR}/git&quot;<br>
-<br>
--- <br>
-2.25.1<br>
-<br>
-<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-Links: You receive all messages sent to this group.<br>
-View/Reply Online (#104711): <a href=3D"https://lists.openembedded.org/g/op=
-enembedded-devel/message/104711" rel=3D"noreferrer" target=3D"_blank">https=
-://lists.openembedded.org/g/openembedded-devel/message/104711</a><br>
-Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/101147022/199=
-7914" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/m=
-t/101147022/1997914</a><br>
-Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
-d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
-><br>
-Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
-/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
-/g/openembedded-devel/unsub</a> [<a href=3D"mailto:raj.khem@gmail.com" targ=
-et=3D"_blank">raj.khem@gmail.com</a>]<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-<br>
-</blockquote></div></div>
-
---000000000000049c69060491ac5e--
 
