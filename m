@@ -2,59 +2,59 @@ Return-Path: <Martin.Jansa@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 99ED4CA0FF3
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 99E9FC83F33
 	for <webhook@archiver.kernel.org>; Tue,  5 Sep 2023 13:02:52 +0000 (UTC)
-Received: from mail-ej1-f42.google.com (mail-ej1-f42.google.com [209.85.218.42])
- by mx.groups.io with SMTP id smtpd.web11.20709.1693918964248609856
+Received: from mail-ej1-f52.google.com (mail-ej1-f52.google.com [209.85.218.52])
+ by mx.groups.io with SMTP id smtpd.web10.20569.1693918964953546740
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 05 Sep 2023 06:02:44 -0700
+ Tue, 05 Sep 2023 06:02:45 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20221208 header.b=kHhR7gDj;
- spf=pass (domain: gmail.com, ip: 209.85.218.42, mailfrom: martin.jansa@gmail.com)
-Received: by mail-ej1-f42.google.com with SMTP id a640c23a62f3a-9a5dff9d2d9so369282666b.3
+ dkim=pass header.i=@gmail.com header.s=20221208 header.b=RpSfmdPJ;
+ spf=pass (domain: gmail.com, ip: 209.85.218.52, mailfrom: martin.jansa@gmail.com)
+Received: by mail-ej1-f52.google.com with SMTP id a640c23a62f3a-9a5dff9d2d9so369285066b.3
         for <openembedded-devel@lists.openembedded.org>; Tue, 05 Sep 2023 06:02:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1693918962; x=1694523762; darn=lists.openembedded.org;
+        d=gmail.com; s=20221208; t=1693918963; x=1694523763; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=OASM69LxDTU3Ppv42MzUnZEAGrg8ZLUJmzn0IVdcUiw=;
-        b=kHhR7gDjeL0zrd+kIzdqB+kiP2g3xch2kHbwIye3baMgPztwlmC8kA8ztinz23PSGX
-         S8FPgr3VpG0zv9W4XKnNIwDG5GlZBMELa6VxH6Zksr2+2Jolgkuhbq9neP911krH095n
-         LgOWkPYjQ2eyQ5mLDxMDdjcO42UnKN8RXB0pr9XWn1jN9QZf/Mviya07aFSa9wZFaQU6
-         1ednfIqOTtPV+Sb8X3Xc6ORUYjCPhNbpnVTQm7RHhk8KsHI+eNEG0qzVje77H/5reVDA
-         f5lxvFkM2T9gZhA780BNkTvUVRcCqJ7pXSHHic8n4h8ibi4kLKBHS5PnZlag7u9KJzJS
-         LrBA==
+        bh=Sd9O+LuFQwFmJOobLL08/nrC94yrwWWb2/uJnW3oHd4=;
+        b=RpSfmdPJiFNkKeiG7aM932Sre8EikX0epY00lqti8PvC+vopQv3OWd3bBuNgJ54kph
+         ll+IOzzY8kL8DIGizBPckyx2pmG11NqpcOFa4Py4S3SBlrdvOADX8eFRfq1gL3Kfcujn
+         hTyXKiQU2sneB18uuSsIwvK2z6ImrY1OS8S4/2zvbbN8QHoQz6WOXRPK5CGqZcR/YpuC
+         PIrZCMBXKALjngkU+lbituJYLqVWegClhe+ZkO1DWwr1j9aiKP5luYSlRNjrzp7dSn1c
+         miYn0vboS5qhUBTVHgv6B57Hk9riYyv8xiKgkTRcFdbp16pTKvUaUrrLushGUH4MGY3h
+         I7pQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1693918962; x=1694523762;
+        d=1e100.net; s=20221208; t=1693918963; x=1694523763;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=OASM69LxDTU3Ppv42MzUnZEAGrg8ZLUJmzn0IVdcUiw=;
-        b=EKNOLdCoy1pDaZnV5XN6bjfGxcHvOFbcMYBggntQ6FNBvC30otp2UdTuQBt0vGT2bd
-         GKgjfvQVH4MTX7cK9Si4s2onv88wLyG2ITm6zqLEtwKycPtTuYUCkAmMp9ntq4EP5jRk
-         CcvuwrnuRZdIWis6iNw9r//MMIl5AwwkzOrFtugFfIWELPOW2AQ47M/QAqw4pKrAuyOO
-         FC0uRL+iR0P+f55lDIPIZKD9T1NxNh3HGG4Bu1uHbmM4rcbMQZnAFhb+owC8V3avmnH9
-         eC0kZn0aVtBzoONjhY26Yad2ZweP2H9FDT+xC44l2grkgIEC9TRhQ8VptT0x7jmOyioL
-         MJ7g==
-X-Gm-Message-State: AOJu0YyxrZAS/mf92zihR2fYKIYfa4HNbzPCmUOT0yRCvol93FEJZazF
-	fT6j/eKvxiyKfH6U7n8QdmT600o3+e0=
-X-Google-Smtp-Source: AGHT+IGx7uTZ+nlQTF7IrIPu2PMUDcXkpTEBqLqULrGh3Cdbi37w6OX+QwBhscSXgnXT6DGFrbhLUw==
-X-Received: by 2002:a17:906:3149:b0:9a5:cade:8044 with SMTP id e9-20020a170906314900b009a5cade8044mr9104699eje.21.1693918962267;
-        Tue, 05 Sep 2023 06:02:42 -0700 (PDT)
+        bh=Sd9O+LuFQwFmJOobLL08/nrC94yrwWWb2/uJnW3oHd4=;
+        b=Vw7vEWoSYTzv4FziDNG7HIbuLLPIbqvm+3/MxSOUaoAEIENz6KofVsz7j+YEswB66n
+         IGtzy+6RDXZJM6EqL4CNm5hUWCh9cUe4VXdCPHzvTpDGZ83dT1t6lfuICx8xnRK7tLdm
+         uW4L0e1QIUD9VRpHpTeYgJ5LLKOZkwt+IFddX+Rql/DISWQtT/fjmOrcWVwUWw0QL4MZ
+         yU3u4KxSIDgaGTbBOvy2rcaNpNqdzE12SYEdHPRDIwWzbq0aYUGxI3tR8se8ZXQZ1zJe
+         iu/7bkt7s+zZQXHV+Hko+4aC4qfbE3EnQVIIIpZJZ5PJMOyPerpIebJQFQuw3M8jGuCL
+         KYhQ==
+X-Gm-Message-State: AOJu0YxJaHAKTFk+29Y4S9xZQYKQWHCkdkFS/tJQVnX0hh4njkiSLybG
+	vKVDBhz+hSBGDL0JX9iHWM+6/Z4byx0=
+X-Google-Smtp-Source: AGHT+IHc9q5/h/R3zKRCc0nmGfFJhnXNGNYJqmEmz2sZKojQNs+UWRvAOlDkyy6PEWtAvn3EWRb5Kw==
+X-Received: by 2002:a17:906:3149:b0:9a5:cade:8044 with SMTP id e9-20020a170906314900b009a5cade8044mr9104735eje.21.1693918963162;
+        Tue, 05 Sep 2023 06:02:43 -0700 (PDT)
 Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
-        by smtp.gmail.com with ESMTPSA id sb5-20020a170906edc500b0099293cdbc98sm7721626ejb.145.2023.09.05.06.02.41
+        by smtp.gmail.com with ESMTPSA id l13-20020a170906078d00b009a5f1d15642sm7505339ejc.158.2023.09.05.06.02.42
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 05 Sep 2023 06:02:41 -0700 (PDT)
+        Tue, 05 Sep 2023 06:02:42 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Martin Jansa <martin.jansa@gmail.com>,
 	Martin Jansa <Martin.Jansa@gmail.com>,
 	Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][mickledore][PATCH 3/4] libcyusbserial: fix installed-vs-shipped QA issue with multilib
-Date: Tue,  5 Sep 2023 15:02:21 +0200
-Message-ID: <20230905130222.1448129-3-Martin.Jansa@gmail.com>
+Subject: [meta-oe][mickledore][PATCH 4/4] tcpreplay: fix pcap detection with /usr/lib32 multilib
+Date: Tue,  5 Sep 2023 15:02:22 +0200
+Message-ID: <20230905130222.1448129-4-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.42.0
 In-Reply-To: <20230905130222.1448129-1-Martin.Jansa@gmail.com>
 References: <20230905130222.1448129-1-Martin.Jansa@gmail.com>
@@ -64,93 +64,138 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 05 Sep 2023 13:02:52 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104724
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104725
 
 From: Martin Jansa <martin.jansa@gmail.com>
 
-* testing ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR} existence
-  doesn't really work in cross compilation and on some hosts was causing:
-
-  ERROR: QA Issue: libcyusbserial: Files/directories were installed but not shipped in any package:
-    /usr/lib/libcyusbserial.so.1
-    /usr/lib/libcyusbserial.so
-  Please set FILES such that these items are packaged. Alternatively if they are unneeded, avoid installing them or delete them within do_install.
-  libcyusbserial: 2 installed and not shipped files. [installed-vs-shipped]
-
-  with multilib using /usr/lib32 or /usr/lib64 when the same didn't
-  exist on host.
+* use BPN, BP where useful
+* use prefix instead of hardcoding /usr
+* add patch to search also in lib32 subdir of --with-libpcap value
+  to fix:
+  checking for libpcap... configure: error: "Unable to find matching library for header file in TOPDIR/BUILD/work/raspberrypi4_64-oemllib32-linux-gnueabi/lib32-tcpreplay/4.4.4-r0/lib32-recipe-sysroot/usr"
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...on-t-fall-back-CMAKE_INSTALL_LIBDIR-.patch | 43 +++++++++++++++++++
- .../libcyusbserial/libcyusbserial_git.bb      |  4 +-
- 2 files changed, 46 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-support/libcyusbserial/libcyusbserial/0001-CMakeLists.txt-don-t-fall-back-CMAKE_INSTALL_LIBDIR-.patch
+ ...fy-search-dirs-for-pcap-and-add-lib3.patch | 82 +++++++++++++++++++
+ .../tcpreplay/tcpreplay_4.4.4.bb              |  9 +-
+ 2 files changed, 87 insertions(+), 4 deletions(-)
+ create mode 100644 meta-networking/recipes-support/tcpreplay/tcpreplay/0001-configure.ac-unify-search-dirs-for-pcap-and-add-lib3.patch
 
-diff --git a/meta-oe/recipes-support/libcyusbserial/libcyusbserial/0001-CMakeLists.txt-don-t-fall-back-CMAKE_INSTALL_LIBDIR-.patch b/meta-oe/recipes-support/libcyusbserial/libcyusbserial/0001-CMakeLists.txt-don-t-fall-back-CMAKE_INSTALL_LIBDIR-.patch
+diff --git a/meta-networking/recipes-support/tcpreplay/tcpreplay/0001-configure.ac-unify-search-dirs-for-pcap-and-add-lib3.patch b/meta-networking/recipes-support/tcpreplay/tcpreplay/0001-configure.ac-unify-search-dirs-for-pcap-and-add-lib3.patch
 new file mode 100644
-index 0000000000..d9e10469d3
+index 0000000000..709d2cccbc
 --- /dev/null
-+++ b/meta-oe/recipes-support/libcyusbserial/libcyusbserial/0001-CMakeLists.txt-don-t-fall-back-CMAKE_INSTALL_LIBDIR-.patch
-@@ -0,0 +1,43 @@
-+From 655c5c32b37a2bea12389ed69c0869215fcf5abe Mon Sep 17 00:00:00 2001
++++ b/meta-networking/recipes-support/tcpreplay/tcpreplay/0001-configure.ac-unify-search-dirs-for-pcap-and-add-lib3.patch
+@@ -0,0 +1,82 @@
++From 5f8c78362b3b1e06f5adff2d4b140509c4799894 Mon Sep 17 00:00:00 2001
 +From: Martin Jansa <Martin.Jansa@gmail.com>
-+Date: Sun, 3 Sep 2023 11:22:35 +0200
-+Subject: [PATCH] CMakeLists.txt: don't fall back CMAKE_INSTALL_LIBDIR to lib
++Date: Sun, 3 Sep 2023 12:31:59 +0200
++Subject: [PATCH] configure.ac: unify search dirs for pcap and add lib32
 +
-+* testing ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR} existence
-+  doesn't really work in cross compilation and on some hosts was causing:
++* add lib32 because when building lib32-tcpreplay it's
++  impossible to set --with-libpcap so that it would find
++  both include files as well as the library in lib32 directory
 +
-+  ERROR: QA Issue: libcyusbserial: Files/directories were installed but not shipped in any package:
-+    /usr/lib/libcyusbserial.so.1
-+    /usr/lib/libcyusbserial.so
-+  Please set FILES such that these items are packaged. Alternatively if they are unneeded, avoid installing them or delete them within do_install.
-+  libcyusbserial: 2 installed and not shipped files. [installed-vs-shipped]
++* maybe it would be beneficial to split --with-libpcap
++  into --with-libpcap-includedir --with-libpcap-libdir as this
++  already searches in the --with-libpcap value with and
++  without any "lib" prefix, but include files always expect
++  "include" dir there
 +
-+  with multilib using /usr/lib32 or /usr/lib64 when the same didn't
-+  exist on host.
++* most of this code was added in:
++  https://github.com/appneta/tcpreplay/commit/202b8e82f9fd3c84ce5804577caeb36a33baabe7#diff-49473dca262eeab3b4a43002adb08b4db31020d190caaad1594b47f1d5daa810R570
 +
-+Upstream-Status: Pending
++* then search for
++  ${host_cpu} lib/${host_cpu} (without -${host_os} suffix)
++  and ${build_arch}-${host_os} lib/${build_arch}-${host_os}
++  was added, but only for search of dynamic library in:
++  https://github.com/appneta/tcpreplay/commit/c3d5236563985a99f8bb02c3f1bd6950e3929047
++
++* ${build_arch}-${host_os} lib/${build_arch}-${host_os}
++  was later replaced with:
++  lib/${MULTIARCH} ${MULTIARCH}
++  and it was added to static library search as well
++
++  but for dynamic library it was searching in reversed order:
++  ${MULTIARCH} lib/${MULTIARCH}
++  https://github.com/appneta/tcpreplay/commit/ed9e3a818bde04813144014561e62f018c9eb85f
++
++  I don't think this reversed order was intentional, just unify all 4 cases
++  to use the same directories in the same order
++
 +Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
++Upstream-Status: Submitted [https://github.com/appneta/tcpreplay/pull/819]
 +---
-+ lib/CMakeLists.txt | 9 ---------
-+ 1 file changed, 9 deletions(-)
++ configure.ac | 8 ++++----
++ 1 file changed, 4 insertions(+), 4 deletions(-)
 +
-+diff --git a/lib/CMakeLists.txt b/lib/CMakeLists.txt
-+index 2b031cb..53a7263 100644
-+--- a/lib/CMakeLists.txt
-++++ b/lib/CMakeLists.txt
-+@@ -6,15 +6,6 @@ if (NOT CMAKE_INSTALL_LIBDIR)
-+ include(GNUInstallDirs)
-+ endif (NOT CMAKE_INSTALL_LIBDIR)
-+ 
-+-# Fall back to just "lib" if the item provided by GNUInstallDirs doesn't exist
-+-# For example, on Ubuntu 13.10 with CMake 2.8.11.2,
-+-# /usr/lib/${CMAKE_LIBRARY_ARCHITECTURE} doesn't exist.
-+-if (NOT EXISTS "${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}")
-+-    message(STATUS "${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR} does not exist. Defaulting libcyusbserial install location to ${CMAKE_INSTALL_PREFIX}/lib.")
-+-        set(CMAKE_INSTALL_LIBDIR lib)
-+-endif()
-+-
-+-
-+ ################################################################################
-+ # Include paths
-+ ################################################################################
-diff --git a/meta-oe/recipes-support/libcyusbserial/libcyusbserial_git.bb b/meta-oe/recipes-support/libcyusbserial/libcyusbserial_git.bb
-index 81453fb888..a69194996b 100644
---- a/meta-oe/recipes-support/libcyusbserial/libcyusbserial_git.bb
-+++ b/meta-oe/recipes-support/libcyusbserial/libcyusbserial_git.bb
-@@ -8,7 +8,9 @@ DEPENDS = "libusb udev"
- PV = "1.0.0+git${SRCPV}"
++diff --git a/configure.ac b/configure.ac
++index 387219de..26ba31a5 100644
++--- a/configure.ac
+++++ b/configure.ac
++@@ -671,7 +671,7 @@ AC_ARG_WITH(libpcap,
++         LPCAPINCDIR=${testdir}
++         if test $dynamic_link = yes; then
++             for ext in .dylib .so .tbd ; do
++-                for dir in . lib lib64 lib/${host_cpu}-${host_os} ${host_cpu}-${host_os} lib/${MULTIARCH} ${MULTIARCH}; do
+++                for dir in . lib lib64 lib32 lib/${host_cpu}-${host_os} ${host_cpu}-${host_os} lib/${MULTIARCH} ${MULTIARCH}; do
++                     sharefile=$(ls ${testdir}/$dir/libpcap${ext}* 2> /dev/null | sort | head -n1)
++                     if test -n "${sharefile}"; then
++                         LPCAP_LD_LIBRARY_PATH="$(dirname ${sharefile})"
++@@ -690,7 +690,7 @@ AC_ARG_WITH(libpcap,
++             dnl If dynamic library not found, try static
++             dnl
++             for ext in ${libext} .a .A.tbd ; do
++-                for dir in . lib lib64 lib/${host_cpu}-${host_os} ${host_cpu}-${host_os} lib/${MULTIARCH} ${MULTIARCH}; do
+++                for dir in . lib lib64 lib32 lib/${host_cpu}-${host_os} ${host_cpu}-${host_os} lib/${MULTIARCH} ${MULTIARCH}; do
++                     staticfile=$(ls ${testdir}/$dir/libpcap${ext} 2> /dev/null | sort | head -n1)
++                     if test -n "${staticfile}"; then
++                         LPCAPLIB="${staticfile}"
++@@ -771,7 +771,7 @@ AC_ARG_WITH(libpcap,
++                 LPCAPINCDIR="${testdir}/include"
++                 if test $dynamic_link = yes; then
++                     for ext in .dylib .so .tbd; do
++-                        for dir in . lib lib64 ${host_cpu} lib/${host_cpu} ${host_cpu}-${host_os} lib/${host_cpu}-${host_os} ${MULTIARCH} lib/${MULTIARCH}; do
+++                        for dir in . lib lib64 lib32 lib/${host_cpu}-${host_os} ${host_cpu}-${host_os} lib/${MULTIARCH} ${MULTIARCH}; do
++                             sharefile=$(ls "${testdir}/$dir/libpcap${ext}" 2> /dev/null | sort | head -n1)
++                             if test -n "${sharefile}"; then
++                                 LPCAPLIB="-L$(dirname ${sharefile}) -lpcap"
++@@ -790,7 +790,7 @@ AC_ARG_WITH(libpcap,
++                     dnl If dynamic library not found, try static
++                     dnl
++                     for ext in ${libext} .a .A.tbd ; do
++-                        for dir in . lib lib64 lib/${host_cpu}-${host_os} ${host_cpu}-${host_os} lib/${MULTIARCH} ${MULTIARCH}; do
+++                        for dir in . lib lib64 lib32 lib/${host_cpu}-${host_os} ${host_cpu}-${host_os} lib/${MULTIARCH} ${MULTIARCH}; do
++                             staticfile=$(ls "${testdir}/$dir/libpcap${ext}" 2> /dev/null | sort | head -n1)
++                             if test -n "${staticfile}"; then
++                                 LPCAPLIB="${staticfile}"
+diff --git a/meta-networking/recipes-support/tcpreplay/tcpreplay_4.4.4.bb b/meta-networking/recipes-support/tcpreplay/tcpreplay_4.4.4.bb
+index c7d14e2ab6..53f17c9619 100644
+--- a/meta-networking/recipes-support/tcpreplay/tcpreplay_4.4.4.bb
++++ b/meta-networking/recipes-support/tcpreplay/tcpreplay_4.4.4.bb
+@@ -7,9 +7,10 @@ SECTION = "net"
+ LICENSE = "GPL-3.0-only"
+ LIC_FILES_CHKSUM = "file://docs/LICENSE;md5=10f0474a2f0e5dccfca20f69d6598ad8"
  
- SRCREV = "655e2d544183d094f0e2d119c7e0c6206a0ddb3f"
--SRC_URI = "git://github.com/cyrozap/${BPN}.git;branch=master;protocol=https"
-+SRC_URI = "git://github.com/cyrozap/${BPN}.git;branch=master;protocol=https \
-+    file://0001-CMakeLists.txt-don-t-fall-back-CMAKE_INSTALL_LIBDIR-.patch \
+-SRC_URI = "https://github.com/appneta/tcpreplay/releases/download/v${PV}/tcpreplay-${PV}.tar.gz \
+-           file://0001-libopts.m4-set-POSIX_SHELL-to-bin-sh.patch \
+-          "
++SRC_URI = "https://github.com/appneta/${BPN}/releases/download/v${PV}/${BP}.tar.gz \
++    file://0001-libopts.m4-set-POSIX_SHELL-to-bin-sh.patch \
++    file://0001-configure.ac-unify-search-dirs-for-pcap-and-add-lib3.patch \
 +"
  
- S = "${WORKDIR}/git"
+ SRC_URI[sha256sum] = "44f18fb6d3470ecaf77a51b901a119dae16da5be4d4140ffbb2785e37ad6d4bf"
+ 
+@@ -17,7 +18,7 @@ UPSTREAM_CHECK_URI = "https://github.com/appneta/tcpreplay/releases"
+ 
+ DEPENDS = "libpcap"
+ 
+-EXTRA_OECONF += "--with-libpcap=${STAGING_DIR_HOST}/usr"
++EXTRA_OECONF += "--with-libpcap=${STAGING_DIR_HOST}${prefix}"
+ 
+ inherit siteinfo autotools-brokensep
  
 -- 
 2.42.0
