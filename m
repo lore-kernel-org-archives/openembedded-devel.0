@@ -1,356 +1,878 @@
-Return-Path: <narpat.mali@windriver.com>
+Return-Path: <joe.slater@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BBE0AC83F2C
-	for <webhook@archiver.kernel.org>; Tue,  5 Sep 2023 13:12:52 +0000 (UTC)
-Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
- by mx.groups.io with SMTP id smtpd.web10.20831.1693919564882460492
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C5F04C83F2C
+	for <webhook@archiver.kernel.org>; Tue,  5 Sep 2023 16:35:23 +0000 (UTC)
+Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
+ by mx.groups.io with SMTP id smtpd.web11.26768.1693931720014108196
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 05 Sep 2023 06:12:45 -0700
+ Tue, 05 Sep 2023 09:35:20 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=LnSlEiDu;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=7612aa2b58=narpat.mali@windriver.com)
-Received: from pps.filterd (m0250811.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.17.1.22/8.17.1.22) with ESMTP id 3857ouJ3007218;
-	Tue, 5 Sep 2023 13:12:43 GMT
+ dkim=fail reason="dkim: body hash did not verify" header.i=@windriver.com header.s=PPS06212021 header.b=o1bqyU7S;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=761287e60f=joe.slater@windriver.com)
+Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 385BRmfH032190
+	for <openembedded-devel@lists.openembedded.org>; Tue, 5 Sep 2023 09:35:19 -0700
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
-	 h=from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding:content-type; s=PPS06212021; bh=2BakH
-	z8jR/kSUS+RvL5MGUwXVMo5Du3S8775nxX3OIM=; b=LnSlEiDuoODlYxvwkKWRO
-	FTabdIClxwbh7l7MycoYRZXTlPWzwztR4ctQAM5bDOteVzNeuS54uT0pNu89C4uO
-	v/yXlJVIcQCJlDt9ohmhelgPPh8pJp/sCidqYqFSNCH0x/yHl6/HhupEMMxbrCP5
-	w0SjNxW23X/xtPXEI+H3dW47VEWSg62ypJMazCj5mAuNYHMmBO5JdTOSP+Fhuo7U
-	cwZnGI60uLrNT98k/UwEErdulvTpxBwW7WItMymN2yAlvpmjsw0X5ip1v/RCURtY
-	0NejSuSXRSDVwvh3oW3yDnbcm+5ynOYvOYEsAyLrTU0xH2vg4B4YgL64ruugl0Hd
-	w==
+	 h=from:to:cc:subject:date:message-id:mime-version:content-type
+	:content-transfer-encoding; s=PPS06212021; bh=Vt+v0mp91V/2YdywE0
+	y4xZ2egQWPsAVeRvbLz7GrcHU=; b=o1bqyU7SmvTiIw8oTC9+qhUyDEyiyDfV2r
+	gzRsKIH41MqcyM3uk/T/oXKZ26kSfoW0/+TWiK/DU0j06h1NiRPZvW8hGWJtPeHa
+	PNmFKpTGDtlJSzI7aptucgCPHEeZaJBg24GEx1kVeTYAJqdprNNT3ZueBldvBn+9
+	1BPKMAfCtG78OX1xJn+gS90ZBrSTL3TncW+KaO2fuhT81f/45oWd8UnxjzJ8/JGO
+	0QCshUOCwYB2RYjWk9p5MaKvtoAlKbTdgT5yjSCdoUi0iFpD5Gbhlb5bfrfMBZXQ
+	E9IiGsjeGtQjVoxEDrO08Esk0FD4tDrFjzmI8rgZXtVn+kYWne6A==
 Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3sw33k19rf-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT);
-	Tue, 05 Sep 2023 13:12:43 +0000 (GMT)
-Received: from blr-linux-engg1.wrs.com (147.11.136.210) by
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3sv0b02hkx-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Tue, 05 Sep 2023 09:35:19 -0700 (PDT)
+Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
  ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.27; Tue, 5 Sep 2023 06:12:39 -0700
-From: nmali <narpat.mali@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>, <akuster808@gmail.com>
-Subject: [meta-networking][kirkstone][PATCH 1/1] frr: Fix CVE-2023-38802 and CVE-2023-41358
-Date: Tue, 5 Sep 2023 13:12:21 +0000
-Message-ID: <20230905131221.2094602-1-narpat.mali@windriver.com>
-X-Mailer: git-send-email 2.40.0
+ 15.1.2507.27; Tue, 5 Sep 2023 09:35:17 -0700
+Received: from ala-jslater-lx2.corp.ad.wrs.com (147.11.136.210) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
+ 15.1.2507.27 via Frontend Transport; Tue, 5 Sep 2023 09:35:17 -0700
+From: <joe.slater@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: <joe.slater@windriver.com>, <randy.macleod@windriver.com>
+Subject: [v2][meta-python][PATCH 1/1] python3-inotify: fix tests
+Date: Tue, 5 Sep 2023 09:35:18 -0700
+Message-ID: <20230905163518.3688071-1-joe.slater@windriver.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [147.11.136.210]
-X-ClientProxiedBy: ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) To
- ala-exchng01.corp.ad.wrs.com (147.11.82.252)
-X-Proofpoint-GUID: IDID7PUvNZwCaqh9P7ygYVHzFkfUs4Di
-X-Proofpoint-ORIG-GUID: IDID7PUvNZwCaqh9P7ygYVHzFkfUs4Di
+Content-Type: text/plain; charset="UTF-8"
+X-Proofpoint-ORIG-GUID: cbBmEIU_g3XdN3qoLWvqdSu8YjwPA0Mu
+X-Proofpoint-GUID: cbBmEIU_g3XdN3qoLWvqdSu8YjwPA0Mu
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.254,Aquarius:18.0.957,Hydra:6.0.601,FMLib:17.11.176.26
  definitions=2023-09-05_10,2023-09-05_01,2023-05-22_02
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 adultscore=0 mlxlogscore=999
- clxscore=1015 malwarescore=0 bulkscore=0 spamscore=0 phishscore=0
- impostorscore=0 suspectscore=0 priorityscore=1501 mlxscore=0
- lowpriorityscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.19.0-2308100000 definitions=main-2309050115
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 clxscore=1011 mlxlogscore=932
+ bulkscore=0 adultscore=0 phishscore=0 lowpriorityscore=0 spamscore=0
+ mlxscore=0 impostorscore=0 malwarescore=0 suspectscore=0
+ priorityscore=1501 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.19.0-2308100000 definitions=main-2309050145
+Content-Transfer-Encoding: quoted-printable
+X-MIME-Autoconverted: from 8bit to quoted-printable by mx0a-0064b401.pphosted.com id 385BRmfH032190
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 05 Sep 2023 13:12:52 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104726
+ <openembedded-devel@lists.openembedded.org>; Tue, 05 Sep 2023 16:35:23 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104727
 
-From: Narpat Mali <narpat.mali@windriver.com>
+From: Joe Slater <joe.slater@windriver.com>
 
-CVE-2023-38802:
-FRRouting FRR 7.5.1 through 9.0 and Pica8 PICOS 4.3.3.2 allow a remote
-attacker to cause a denial of service via a crafted BGP update with a
-corrupted attribute 23 (Tunnel Encapsulation).
+Some tests in test-inotify.py assume values for watch
+descriptors.  This is not safe, so we retrieve the
+assigned values to compare with event information generated.
 
-CVE-2023-41358:
-An issue was discovered in FRRouting FRR through 9.0. bgpd/bgp_packet.c
-processes NLRIs if the attribute length is zero.
-
-References:
-https://nvd.nist.gov/vuln/detail/CVE-2023-38802
-https://nvd.nist.gov/vuln/detail/CVE-2023-41358
-
-Signed-off-by: Narpat Mali <narpat.mali@windriver.com>
+Signed-off-by: Joe Slater <joe.slater@windriver.com>
 ---
- .../frr/frr/CVE-2023-38802.patch              | 136 ++++++++++++++++++
- .../frr/frr/CVE-2023-41358.patch              | 105 ++++++++++++++
- .../recipes-protocols/frr/frr_8.2.2.bb        |   2 +
- 3 files changed, 243 insertions(+)
- create mode 100644 meta-networking/recipes-protocols/frr/frr/CVE-2023-38802.patch
- create mode 100644 meta-networking/recipes-protocols/frr/frr/CVE-2023-41358.patch
+ .../python3-inotify/new-test-inotify.patch    | 620 ++++++++++++++++++
+ .../python/python3-inotify_git.bb             |   1 +
+ 2 files changed, 621 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-inotify/n=
+ew-test-inotify.patch
 
-diff --git a/meta-networking/recipes-protocols/frr/frr/CVE-2023-38802.patch b/meta-networking/recipes-protocols/frr/frr/CVE-2023-38802.patch
+diff --git a/meta-python/recipes-devtools/python/python3-inotify/new-test=
+-inotify.patch b/meta-python/recipes-devtools/python/python3-inotify/new-=
+test-inotify.patch
 new file mode 100644
-index 0000000000..60801bf06e
+index 0000000000..e462615e14
 --- /dev/null
-+++ b/meta-networking/recipes-protocols/frr/frr/CVE-2023-38802.patch
-@@ -0,0 +1,136 @@
-+From ad32e04f3db364694edc678327326ae6b771db9e Mon Sep 17 00:00:00 2001
-+From: Donatas Abraitis <donatas@opensourcerouting.org>
-+Date: Tue, 5 Sep 2023 11:30:53 +0000
-+Subject: [PATCH 1/2] bgpd: Use treat-as-withdraw for tunnel encapsulation
-+ attribute
++++ b/meta-python/recipes-devtools/python/python3-inotify/new-test-inotif=
+y.patch
+@@ -0,0 +1,620 @@
++From 80010e27d774e8b722d569384492eaab2bc4ac61 Mon Sep 17 00:00:00 2001
++From: Joe Slater <joe.slater@windriver.com>
++Date: Thu, 27 Jul 2023 15:01:04 +0000
++Subject: [PATCH] working commit
 +
-+Before this path we used session reset method, which is discouraged by rfc7606.
++It is not safe to assume the values returned by add_watch(),
++so we add a local helper get_wd() to retrieve them.  This fixes
++a problem in TestInotifyTree.test__cycle() where the
++wd's for the 'aa' and 'bb' paths are not '2' and '3',
++respectively.
 +
-+Handle this as rfc requires.
++A second issue is that Inotify._get_event_names() should
++return a set or sorted list to avoid comparison problems,
++but that is not addressed here since it could be viewed as
++changing the API.
 +
-+Signed-off-by: Donatas Abraitis <donatas@opensourcerouting.org>
++This test_inotify.py is based on the version in the fix_tests branch of
++pyinotify as of commit d7d3c58...
 +
-+CVE: CVE-2023-38802
++Upstream-Status: Submitted [github.com/dsoprea/PyInotify/pull/104]
 +
-+Upstream-Status: Backport [https://github.com/FRRouting/frr/commit/bcb6b58d9530173df41d3a3cbc4c600ee0b4b186]
-+
-+Signed-off-by: Narpat Mali <narpat.mali@windriver.com>
++Signed-off-by: Joe Slater <joe.slater@windriver.com>
 +---
-+ bgpd/bgp_attr.c | 61 ++++++++++++++++++++-----------------------------
-+ 1 file changed, 25 insertions(+), 36 deletions(-)
++ tests/test_inotify.py | 346 ++++++++++++++++++++++++++++++++----------
++ 1 file changed, 262 insertions(+), 84 deletions(-)
 +
-+diff --git a/bgpd/bgp_attr.c b/bgpd/bgp_attr.c
-+index 5d06991e2..b10a60351 100644
-+--- a/bgpd/bgp_attr.c
-++++ b/bgpd/bgp_attr.c
-+@@ -1310,6 +1310,7 @@ bgp_attr_malformed(struct bgp_attr_parser_args *args, uint8_t subcode,
-+	case BGP_ATTR_LARGE_COMMUNITIES:
-+	case BGP_ATTR_ORIGINATOR_ID:
-+	case BGP_ATTR_CLUSTER_LIST:
-++	case BGP_ATTR_ENCAP:
-+		return BGP_ATTR_PARSE_WITHDRAW;
-+	case BGP_ATTR_MP_REACH_NLRI:
-+	case BGP_ATTR_MP_UNREACH_NLRI:
-+@@ -2411,26 +2412,21 @@ bgp_attr_ipv6_ext_communities(struct bgp_attr_parser_args *args)
-+ }
-+
-+ /* Parse Tunnel Encap attribute in an UPDATE */
-+-static int bgp_attr_encap(uint8_t type, struct peer *peer, /* IN */
-+-			  bgp_size_t length, /* IN: attr's length field */
-+-			  struct attr *attr, /* IN: caller already allocated */
-+-			  uint8_t flag,      /* IN: attr's flags field */
-+-			  uint8_t *startp)
-++static int bgp_attr_encap(struct bgp_attr_parser_args *args)
-+ {
-+-	bgp_size_t total;
-+	uint16_t tunneltype = 0;
++diff --git a/tests/test_inotify.py b/tests/test_inotify.py
++index d9f1f84..d89a49e 100644
++--- a/tests/test_inotify.py
+++++ b/tests/test_inotify.py
++@@ -2,6 +2,7 @@
++=20
++ import os
++ import unittest
+++import time
++=20
++ import inotify.constants
++ import inotify.calls
++@@ -15,6 +16,11 @@ except NameError:
++ else:
++     _HAS_PYTHON2_UNICODE_SUPPORT =3D True
++=20
+++# Inotify does not have a get for watch descriptors
+++#=20
+++def get_wd(i, path):
+++    return i._Inotify__watches[path]
+++
++=20
++ class TestInotify(unittest.TestCase):
++     def __init__(self, *args, **kwargs):
++@@ -29,11 +35,11 @@ class TestInotify(unittest.TestCase):
++     @unittest.skipIf(_HAS_PYTHON2_UNICODE_SUPPORT is True, "Not in Pyth=
+on 3")
++     def test__international_naming_python3(self):
++         with inotify.test_support.temp_path() as path:
++-            inner_path =3D os.path.join(path, '=E6=96=B0=E5=A2=9E=E8=B3=
+=87=E6=96=99=E5=A4=BE')
+++            inner_path =3D os.path.join(path, u'=E6=96=B0=E5=A2=9E=E8=B3=
+=87=E6=96=99=E5=A4=BE')
++             os.mkdir(inner_path)
++=20
++             i =3D inotify.adapters.Inotify()
++-            i.add_watch(inner_path)
+++            wd =3D i.add_watch(inner_path)
++=20
++             with open(os.path.join(inner_path, 'filename'), 'w'):
++                 pass
++@@ -41,12 +47,27 @@ class TestInotify(unittest.TestCase):
++             events =3D self.__read_all_events(i)
++=20
++             expected =3D [
++-                (inotify.adapters._INOTIFY_EVENT(wd=3D1, mask=3D256, co=
+okie=3D0, len=3D16), ['IN_CREATE'], inner_path, 'filename'),
++-                (inotify.adapters._INOTIFY_EVENT(wd=3D1, mask=3D32, coo=
+kie=3D0, len=3D16), ['IN_OPEN'], inner_path, 'filename'),
++-                (inotify.adapters._INOTIFY_EVENT(wd=3D1, mask=3D8, cook=
+ie=3D0, len=3D16), ['IN_CLOSE_WRITE'], inner_path, 'filename'),
+++                (inotify.adapters._INOTIFY_EVENT(wd=3Dwd, mask=3D256, c=
+ookie=3D0, len=3D16), ['IN_CREATE'], inner_path, 'filename'),
+++                (inotify.adapters._INOTIFY_EVENT(wd=3Dwd, mask=3D32, co=
+okie=3D0, len=3D16), ['IN_OPEN'], inner_path, 'filename'),
+++                (inotify.adapters._INOTIFY_EVENT(wd=3Dwd, mask=3D8, coo=
+kie=3D0, len=3D16), ['IN_CLOSE_WRITE'], inner_path, 'filename'),
++             ]
++=20
++-            self.assertEquals(events, expected)
+++            if events !=3D expected:
+++                print("ACTUAL:")
+++                print("")
+++
+++                for i, event in enumerate(events):
+++                    print(event)
+++
+++                print("")
+++
+++                print("EXPECTED:")
+++                print("")
+++
+++                for i, event in enumerate(expected):
+++                    print(event)
+++
+++                raise Exception("Events not correct.")
++=20
++     @unittest.skipIf(_HAS_PYTHON2_UNICODE_SUPPORT is False, "Not in Pyt=
+hon 2")
++     def test__international_naming_python2(self):
++@@ -55,7 +76,7 @@ class TestInotify(unittest.TestCase):
++             os.mkdir(inner_path)
++=20
++             i =3D inotify.adapters.Inotify()
++-            i.add_watch(inner_path)
+++            wd =3D i.add_watch(inner_path)
++=20
++             with open(os.path.join(inner_path, u'filename=E6=96=99=E5=A4=
+=BE'), 'w'):
++                 pass
++@@ -63,12 +84,28 @@ class TestInotify(unittest.TestCase):
++             events =3D self.__read_all_events(i)
++=20
++             expected =3D [
++-                (inotify.adapters._INOTIFY_EVENT(wd=3D1, mask=3D256, co=
+okie=3D0, len=3D16), ['IN_CREATE'], inner_path, u'filename=E6=96=99=E5=A4=
+=BE'),
++-                (inotify.adapters._INOTIFY_EVENT(wd=3D1, mask=3D32, coo=
+kie=3D0, len=3D16), ['IN_OPEN'], inner_path, u'filename=E6=96=99=E5=A4=BE=
+'),
++-                (inotify.adapters._INOTIFY_EVENT(wd=3D1, mask=3D8, cook=
+ie=3D0, len=3D16), ['IN_CLOSE_WRITE'], inner_path, u'filename=E6=96=99=E5=
+=A4=BE'),
+++                (inotify.adapters._INOTIFY_EVENT(wd=3Dwd, mask=3D256, c=
+ookie=3D0, len=3D16), ['IN_CREATE'], inner_path, u'filename=E6=96=99=E5=A4=
+=BE'),
+++                (inotify.adapters._INOTIFY_EVENT(wd=3Dwd, mask=3D32, co=
+okie=3D0, len=3D16), ['IN_OPEN'], inner_path, u'filename=E6=96=99=E5=A4=BE=
+'),
+++                (inotify.adapters._INOTIFY_EVENT(wd=3Dwd, mask=3D8, coo=
+kie=3D0, len=3D16), ['IN_CLOSE_WRITE'], inner_path, u'filename=E6=96=99=E5=
+=A4=BE'),
+++                (inotify.adapters._INOTIFY_EVENT(wd=3Dwd, mask=3D16, co=
+okie=3D0, len=3D16), ['IN_CLOSE_NOWRITE'], inner_path, u'filename=E6=96=99=
+=E5=A4=BE'),
++             ]
++=20
++-            self.assertEquals(events, expected)
+++            if events !=3D expected:
+++                print("ACTUAL:")
+++                print("")
+++
+++                for i, event in enumerate(events):
+++                    print(event)
+++
+++                print("")
+++
+++                print("EXPECTED:")
+++                print("")
+++
+++                for i, event in enumerate(expected):
+++                    print(event)
+++
+++                raise Exception("Events not correct.")
++=20
++     def test__cycle(self):
++         with inotify.test_support.temp_path() as path:
++@@ -79,7 +116,7 @@ class TestInotify(unittest.TestCase):
++             os.mkdir(path2)
++=20
++             i =3D inotify.adapters.Inotify()
++-            i.add_watch(path1)
+++            wd =3D i.add_watch(path1)
++=20
++             with open('ignored_new_file', 'w'):
++                 pass
++@@ -96,32 +133,47 @@ class TestInotify(unittest.TestCase):
++=20
++             expected =3D [
++                 (
++-                    inotify.adapters._INOTIFY_EVENT(wd=3D1, mask=3D256,=
+ cookie=3D0, len=3D16),
+++                    inotify.adapters._INOTIFY_EVENT(wd=3Dwd, mask=3D256=
+, cookie=3D0, len=3D16),
++                     ['IN_CREATE'],
++                     path1,
++                     'seen_new_file'
++                 ),
++                 (
++-                    inotify.adapters._INOTIFY_EVENT(wd=3D1, mask=3D32, =
+cookie=3D0, len=3D16),
+++                    inotify.adapters._INOTIFY_EVENT(wd=3Dwd, mask=3D32,=
+ cookie=3D0, len=3D16),
++                     ['IN_OPEN'],
++                     path1,
++                     'seen_new_file'
++                 ),
++                 (
++-                    inotify.adapters._INOTIFY_EVENT(wd=3D1, mask=3D8, c=
+ookie=3D0, len=3D16),
+++                    inotify.adapters._INOTIFY_EVENT(wd=3Dwd, mask=3D8, =
+cookie=3D0, len=3D16),
++                     ['IN_CLOSE_WRITE'],
++                     path1,
++                     'seen_new_file'
++                 ),
++                 (
++-                    inotify.adapters._INOTIFY_EVENT(wd=3D1, mask=3D512,=
+ cookie=3D0, len=3D16),
+++                    inotify.adapters._INOTIFY_EVENT(wd=3Dwd, mask=3D512=
+, cookie=3D0, len=3D16),
++                     ['IN_DELETE'],
++                     path1,
++                     'seen_new_file'
++                 )
++             ]
++=20
++-            self.assertEquals(events, expected)
+++            if events !=3D expected:
+++                print("ACTUAL:")
+++                print("")
+++
+++                for i, event in enumerate(events):
+++                    print(event)
+++
+++                print("")
+++
+++                print("EXPECTED:")
+++                print("")
+++
+++                for i, event in enumerate(expected):
+++                    print(event)
+++
+++                raise Exception("Events not correct.")
++=20
++             # This can't be removed until *after* we've read the events=
+ because
++             # they'll be flushed the moment we remove the watch.
++@@ -131,7 +183,7 @@ class TestInotify(unittest.TestCase):
++                 pass
++=20
++             events =3D self.__read_all_events(i)
++-            self.assertEquals(events, [])
+++            self.assertEqual(events, [])
++=20
++     @staticmethod
++     def _open_write_close(*args):
++@@ -167,23 +219,47 @@ class TestInotify(unittest.TestCase):
++         with inotify.test_support.temp_path() as path:
++             path1 =3D TestInotify._make_temp_path(path, 'aa')
++             path2 =3D TestInotify._make_temp_path(path, 'bb')
+++
++             i =3D inotify.adapters.Inotify([path1, path2])
+++
++             TestInotify._open_write_close('ignored_new_file')
++             TestInotify._open_write_close(path1, 'seen_new_file')
++             TestInotify._open_write_close(path2, 'seen_new_file2')
+++           =20
+++            wd_path1 =3D get_wd(i, path1)
+++            wd_path2 =3D get_wd(i, path2)
+++
+++
++             os.remove(os.path.join(path1, 'seen_new_file'))
+++
++             events =3D self.__read_all_events(i)
+++
++             expected =3D [
++-                TestInotify._event_create(wd=3D1, path=3Dpath1, filenam=
+e=3D'seen_new_file'),
++-                TestInotify._event_open(wd=3D1, path=3Dpath1, filename=3D=
+'seen_new_file'),
++-                TestInotify._event_close_write(wd=3D1, path=3Dpath1, fi=
+lename=3D'seen_new_file'),
++-                TestInotify._event_create(wd=3D2, path=3Dpath2, filenam=
+e=3D'seen_new_file2'),
++-                TestInotify._event_open(wd=3D2, path=3Dpath2, filename=3D=
+'seen_new_file2'),
++-                TestInotify._event_close_write(wd=3D2, path=3Dpath2, fi=
+lename=3D'seen_new_file2'),
++-                TestInotify._event_general(wd=3D1, mask=3D512, type_nam=
+e=3D'IN_DELETE',
++-                                           path=3Dpath1, filename=3D'se=
+en_new_file')
+++                (inotify.adapters._INOTIFY_EVENT(wd=3Dwd_path1, mask=3D=
+256, cookie=3D0, len=3D16), ['IN_CREATE'], path1, u'seen_new_file'),
+++                (inotify.adapters._INOTIFY_EVENT(wd=3Dwd_path1, mask=3D=
+32, cookie=3D0, len=3D16), ['IN_OPEN'], path1, u'seen_new_file'),
+++                (inotify.adapters._INOTIFY_EVENT(wd=3Dwd_path1, mask=3D=
+8, cookie=3D0, len=3D16), ['IN_CLOSE_WRITE'], path1, u'seen_new_file'),
+++                (inotify.adapters._INOTIFY_EVENT(wd=3Dwd_path2, mask=3D=
+256, cookie=3D0, len=3D16), ['IN_CREATE'], path2, u'seen_new_file2'),
+++                (inotify.adapters._INOTIFY_EVENT(wd=3Dwd_path2, mask=3D=
+32, cookie=3D0, len=3D16), ['IN_OPEN'], path2, u'seen_new_file2'),
+++                (inotify.adapters._INOTIFY_EVENT(wd=3Dwd_path2, mask=3D=
+8, cookie=3D0, len=3D16), ['IN_CLOSE_WRITE'], path2, u'seen_new_file2'),
+++                (inotify.adapters._INOTIFY_EVENT(wd=3Dwd_path1, mask=3D=
+512, cookie=3D0, len=3D16), ['IN_DELETE'], path1, u'seen_new_file'),
++             ]
++-            self.assertEquals(events, expected)
+++
+++            if events !=3D expected:
+++                print("ACTUAL:")
+++                print("")
+++
+++                for i, event in enumerate(events):
+++                    print(event)
+++
+++                print("")
+++
+++                print("EXPECTED:")
+++                print("")
+++
+++                for i, event in enumerate(expected):
+++                    print(event)
+++
+++                raise Exception("Events not correct.")
++=20
++     def test__error_on_watch_nonexistent_folder(self):
++         i =3D inotify.adapters.Inotify()
++@@ -201,7 +277,7 @@ class TestInotify(unittest.TestCase):
++         i =3D inotify.adapters.Inotify()
++         names =3D i._get_event_names(all_mask)
++=20
++-        self.assertEquals(names, all_names)
+++        self.assertEqual(names, all_names)
++=20
++=20
++ class TestInotifyTree(unittest.TestCase):
++@@ -219,56 +295,101 @@ class TestInotifyTree(unittest.TestCase):
++             path1 =3D os.path.join(path, 'aa')
++             os.mkdir(path1)
++=20
+++            time.sleep(.10)
+++
++             path2 =3D os.path.join(path, 'bb')
++             os.mkdir(path2)
++=20
+++            time.sleep(.10)
+++
++             i =3D inotify.adapters.InotifyTree(path)
++=20
++             with open('seen_new_file1', 'w'):
++                 pass
++=20
+++            time.sleep(.10)
+++
++             with open(os.path.join(path1, 'seen_new_file2'), 'w'):
++                 pass
++=20
+++            time.sleep(.10)
+++
++             with open(os.path.join(path2, 'seen_new_file3'), 'w'):
++                 pass
++=20
+++            time.sleep(.10)
+++           =20
+++            wd_path  =3D get_wd(i.inotify, path)
+++            wd_path1 =3D get_wd(i.inotify, path1)
+++            wd_path2 =3D get_wd(i.inotify, path2)
+++
++             os.remove(os.path.join(path, 'seen_new_file1'))
+++
+++            time.sleep(.10)
+++
++             os.remove(os.path.join(path1, 'seen_new_file2'))
+++
+++            time.sleep(.10)
+++
++             os.remove(os.path.join(path2, 'seen_new_file3'))
++=20
+++            time.sleep(.10)
+++
++             os.rmdir(path1)
+++
+++            time.sleep(.10)
+++
++             os.rmdir(path2)
++=20
++-            events =3D self.__read_all_events(i)
+++            time.sleep(.10)
++=20
+++            events =3D self.__read_all_events(i)
+++            events =3D sorted(events)
+++           =20
++             expected =3D [
++-                (inotify.adapters._INOTIFY_EVENT(wd=3D1, mask=3D256, co=
+okie=3D0, len=3D16), ['IN_CREATE'], path, 'seen_new_file1'),
++-                (inotify.adapters._INOTIFY_EVENT(wd=3D1, mask=3D32, coo=
+kie=3D0, len=3D16), ['IN_OPEN'], path, 'seen_new_file1'),
++-                (inotify.adapters._INOTIFY_EVENT(wd=3D1, mask=3D8, cook=
+ie=3D0, len=3D16), ['IN_CLOSE_WRITE'], path, 'seen_new_file1'),
+++                (inotify.adapters._INOTIFY_EVENT(wd=3Dwd_path, mask=3D2=
+56, cookie=3D0, len=3D16), ['IN_CREATE'], path, 'seen_new_file1'),
+++                (inotify.adapters._INOTIFY_EVENT(wd=3Dwd_path, mask=3D3=
+2, cookie=3D0, len=3D16), ['IN_OPEN'], path, 'seen_new_file1'),
+++                (inotify.adapters._INOTIFY_EVENT(wd=3Dwd_path, mask=3D8=
+, cookie=3D0, len=3D16), ['IN_CLOSE_WRITE'], path, 'seen_new_file1'),
++=20
++-                (inotify.adapters._INOTIFY_EVENT(wd=3D2, mask=3D256, co=
+okie=3D0, len=3D16), ['IN_CREATE'], path1, 'seen_new_file2'),
++-                (inotify.adapters._INOTIFY_EVENT(wd=3D2, mask=3D32, coo=
+kie=3D0, len=3D16), ['IN_OPEN'], path1, 'seen_new_file2'),
++-                (inotify.adapters._INOTIFY_EVENT(wd=3D2, mask=3D8, cook=
+ie=3D0, len=3D16), ['IN_CLOSE_WRITE'], path1, 'seen_new_file2'),
+++                (inotify.adapters._INOTIFY_EVENT(wd=3Dwd_path1, mask=3D=
+256, cookie=3D0, len=3D16), ['IN_CREATE'], path1, 'seen_new_file2'),
+++                (inotify.adapters._INOTIFY_EVENT(wd=3Dwd_path1, mask=3D=
+32, cookie=3D0, len=3D16), ['IN_OPEN'], path1, 'seen_new_file2'),
+++                (inotify.adapters._INOTIFY_EVENT(wd=3Dwd_path1, mask=3D=
+8, cookie=3D0, len=3D16), ['IN_CLOSE_WRITE'], path1, 'seen_new_file2'),
++=20
++-                (inotify.adapters._INOTIFY_EVENT(wd=3D3, mask=3D256, co=
+okie=3D0, len=3D16), ['IN_CREATE'], path2, 'seen_new_file3'),
++-                (inotify.adapters._INOTIFY_EVENT(wd=3D3, mask=3D32, coo=
+kie=3D0, len=3D16), ['IN_OPEN'], path2, 'seen_new_file3'),
++-                (inotify.adapters._INOTIFY_EVENT(wd=3D3, mask=3D8, cook=
+ie=3D0, len=3D16), ['IN_CLOSE_WRITE'], path2, 'seen_new_file3'),
+++                (inotify.adapters._INOTIFY_EVENT(wd=3Dwd_path2, mask=3D=
+256, cookie=3D0, len=3D16), ['IN_CREATE'], path2, 'seen_new_file3'),
+++                (inotify.adapters._INOTIFY_EVENT(wd=3Dwd_path2, mask=3D=
+32, cookie=3D0, len=3D16), ['IN_OPEN'], path2, 'seen_new_file3'),
+++                (inotify.adapters._INOTIFY_EVENT(wd=3Dwd_path2, mask=3D=
+8, cookie=3D0, len=3D16), ['IN_CLOSE_WRITE'], path2, 'seen_new_file3'),
++=20
++-                (inotify.adapters._INOTIFY_EVENT(wd=3D1, mask=3D512, co=
+okie=3D0, len=3D16), ['IN_DELETE'], path, 'seen_new_file1'),
++-                (inotify.adapters._INOTIFY_EVENT(wd=3D2, mask=3D512, co=
+okie=3D0, len=3D16), ['IN_DELETE'], path1, 'seen_new_file2'),
++-                (inotify.adapters._INOTIFY_EVENT(wd=3D3, mask=3D512, co=
+okie=3D0, len=3D16), ['IN_DELETE'], path2, 'seen_new_file3'),
+++                (inotify.adapters._INOTIFY_EVENT(wd=3Dwd_path, mask=3D5=
+12, cookie=3D0, len=3D16), ['IN_DELETE'], path, 'seen_new_file1'),
+++                (inotify.adapters._INOTIFY_EVENT(wd=3Dwd_path1, mask=3D=
+512, cookie=3D0, len=3D16), ['IN_DELETE'], path1, 'seen_new_file2'),
+++                (inotify.adapters._INOTIFY_EVENT(wd=3Dwd_path2, mask=3D=
+512, cookie=3D0, len=3D16), ['IN_DELETE'], path2, 'seen_new_file3'),
++=20
++-                (inotify.adapters._INOTIFY_EVENT(wd=3D2, mask=3D1024, c=
+ookie=3D0, len=3D0), ['IN_DELETE_SELF'], path1, ''),
++-                (inotify.adapters._INOTIFY_EVENT(wd=3D2, mask=3D32768, =
+cookie=3D0, len=3D0), ['IN_IGNORED'], path1, ''),
++-                (inotify.adapters._INOTIFY_EVENT(wd=3D1, mask=3D1073742=
+336, cookie=3D0, len=3D16), ['IN_ISDIR', 'IN_DELETE'], path, 'aa'),
+++                (inotify.adapters._INOTIFY_EVENT(wd=3Dwd_path1, mask=3D=
+1024, cookie=3D0, len=3D0), ['IN_DELETE_SELF'], path1, ''),
+++                (inotify.adapters._INOTIFY_EVENT(wd=3Dwd_path1, mask=3D=
+32768, cookie=3D0, len=3D0), ['IN_IGNORED'], path1, ''),
+++                (inotify.adapters._INOTIFY_EVENT(wd=3Dwd_path, mask=3D1=
+073742336, cookie=3D0, len=3D16), ['IN_DELETE', 'IN_ISDIR'], path, 'aa'),
++=20
++-                (inotify.adapters._INOTIFY_EVENT(wd=3D3, mask=3D1024, c=
+ookie=3D0, len=3D0), ['IN_DELETE_SELF'], path2, ''),
++-                (inotify.adapters._INOTIFY_EVENT(wd=3D3, mask=3D32768, =
+cookie=3D0, len=3D0), ['IN_IGNORED'], path2, ''),
++-                (inotify.adapters._INOTIFY_EVENT(wd=3D1, mask=3D1073742=
+336, cookie=3D0, len=3D16), ['IN_ISDIR', 'IN_DELETE'], path, 'bb'),
+++                (inotify.adapters._INOTIFY_EVENT(wd=3Dwd_path2, mask=3D=
+1024, cookie=3D0, len=3D0), ['IN_DELETE_SELF'], path2, ''),
+++                (inotify.adapters._INOTIFY_EVENT(wd=3Dwd_path2, mask=3D=
+32768, cookie=3D0, len=3D0), ['IN_IGNORED'], path2, ''),
+++                (inotify.adapters._INOTIFY_EVENT(wd=3Dwd_path, mask=3D1=
+073742336, cookie=3D0, len=3D16), ['IN_DELETE', 'IN_ISDIR'], path, 'bb'),
++             ]
++=20
++-            self.assertEquals(events, expected)
+++            expected =3D sorted(expected)
+++
+++            if events !=3D expected:
+++                print("ACTUAL:")
+++                print("")
+++
+++                for i, event in enumerate(events):
+++                    print(event)
+++
+++                print("")
+++
+++                print("EXPECTED:")
+++                print("")
+++
+++                for i, event in enumerate(expected):
+++                    print(event)
+++
+++                raise Exception("Events not correct.")
++=20
++     def test__renames(self):
++=20
++@@ -283,26 +404,30 @@ class TestInotifyTree(unittest.TestCase):
++             new_path =3D os.path.join(path, 'new_folder')
++=20
++             os.mkdir(old_path)
+++           =20
+++            wd_path =3D get_wd(i.inotify, path)
++=20
++             events1 =3D self.__read_all_events(i)
++=20
++             expected =3D [
++-                (inotify.adapters._INOTIFY_EVENT(wd=3D1, mask=3D1073742=
+080, cookie=3Devents1[0][0].cookie, len=3D16), ['IN_ISDIR', 'IN_CREATE'],=
+ path, 'old_folder'),
+++                (inotify.adapters._INOTIFY_EVENT(wd=3Dwd_path, mask=3D1=
+073742080, cookie=3Devents1[0][0].cookie, len=3D16), ['IN_CREATE', 'IN_IS=
+DIR'], path, 'old_folder'),
++             ]
++=20
++-            self.assertEquals(events1, expected)
 +-
-+-	total = length + (CHECK_FLAG(flag, BGP_ATTR_FLAG_EXTLEN) ? 4 : 3);
-++	struct peer *const peer = args->peer;
-++	struct attr *const attr = args->attr;
-++	bgp_size_t length = args->length;
-++	uint8_t type = args->type;
-++	uint8_t flag = args->flags;
+++            self.assertEqual(events1, expected)
++=20
++             os.rename(old_path, new_path)
++=20
+++            wd_old_path =3D get_wd(i.inotify, old_path)
+++
++             events2 =3D self.__read_all_events(i)
++=20
++             expected =3D [
++-                (inotify.adapters._INOTIFY_EVENT(wd=3D1, mask=3D1073741=
+888, cookie=3Devents2[0][0].cookie, len=3D16), ['IN_MOVED_FROM', 'IN_ISDI=
+R'], path, 'old_folder'),
++-                (inotify.adapters._INOTIFY_EVENT(wd=3D1, mask=3D1073741=
+952, cookie=3Devents2[1][0].cookie, len=3D16), ['IN_MOVED_TO', 'IN_ISDIR'=
+], path, 'new_folder'),
+++                (inotify.adapters._INOTIFY_EVENT(wd=3Dwd_path, mask=3D1=
+073741888, cookie=3Devents2[0][0].cookie, len=3D16), ['IN_MOVED_FROM', 'I=
+N_ISDIR'], path, 'old_folder'),
+++                (inotify.adapters._INOTIFY_EVENT(wd=3Dwd_path, mask=3D1=
+073741952, cookie=3Devents2[1][0].cookie, len=3D16), ['IN_MOVED_TO', 'IN_=
+ISDIR'], path, 'new_folder'),
+++                (inotify.adapters._INOTIFY_EVENT(wd=3Dwd_old_path, mask=
+=3D2048, cookie=3D0, len=3D0), ['IN_MOVE_SELF'], new_path, '')
++             ]
++=20
++-            self.assertEquals(events2, expected)
+++            self.assertEqual(events2, expected)
++=20
++=20
++             with open(os.path.join(new_path, 'old_filename'), 'w'):
++@@ -318,21 +443,33 @@ class TestInotifyTree(unittest.TestCase):
++             events3 =3D self.__read_all_events(i)
++=20
++             expected =3D [
++-                (inotify.adapters._INOTIFY_EVENT(wd=3D3, mask=3D256, co=
+okie=3D0, len=3D16), ['IN_CREATE'], new_path, 'old_filename'),
++-                (inotify.adapters._INOTIFY_EVENT(wd=3D3, mask=3D32, coo=
+kie=3D0, len=3D16), ['IN_OPEN'], new_path, 'old_filename'),
++-                (inotify.adapters._INOTIFY_EVENT(wd=3D3, mask=3D8, cook=
+ie=3D0, len=3D16), ['IN_CLOSE_WRITE'], new_path, 'old_filename'),
+++                (inotify.adapters._INOTIFY_EVENT(wd=3Dwd_old_path, mask=
+=3D256, cookie=3D0, len=3D16), ['IN_CREATE'], new_path, 'old_filename'),
+++                (inotify.adapters._INOTIFY_EVENT(wd=3Dwd_old_path, mask=
+=3D32, cookie=3D0, len=3D16), ['IN_OPEN'], new_path, 'old_filename'),
+++                (inotify.adapters._INOTIFY_EVENT(wd=3Dwd_old_path, mask=
+=3D8, cookie=3D0, len=3D16), ['IN_CLOSE_WRITE'], new_path, 'old_filename'=
+),
+++                (inotify.adapters._INOTIFY_EVENT(wd=3Dwd_old_path, mask=
+=3D64, cookie=3Devents3[3][0].cookie, len=3D16), ['IN_MOVED_FROM'], new_p=
+ath, 'old_filename'),
+++                (inotify.adapters._INOTIFY_EVENT(wd=3Dwd_old_path, mask=
+=3D128, cookie=3Devents3[4][0].cookie, len=3D16), ['IN_MOVED_TO'], new_pa=
+th, 'new_filename'),
+++                (inotify.adapters._INOTIFY_EVENT(wd=3Dwd_old_path, mask=
+=3D512, cookie=3D0, len=3D16), ['IN_DELETE'], new_path, 'new_filename'),
+++                (inotify.adapters._INOTIFY_EVENT(wd=3Dwd_old_path, mask=
+=3D1024, cookie=3D0, len=3D0), ['IN_DELETE_SELF'], new_path, ''),
+++                (inotify.adapters._INOTIFY_EVENT(wd=3Dwd_old_path, mask=
+=3D32768, cookie=3D0, len=3D0), ['IN_IGNORED'], new_path, ''),
+++                (inotify.adapters._INOTIFY_EVENT(wd=3Dwd_path, mask=3D1=
+073742336, cookie=3D0, len=3D16), ['IN_DELETE', 'IN_ISDIR'], path, 'new_f=
+older'),
+++            ]
++=20
++-                (inotify.adapters._INOTIFY_EVENT(wd=3D3, mask=3D64, coo=
+kie=3Devents3[3][0].cookie, len=3D16), ['IN_MOVED_FROM'], new_path, 'old_=
+filename'),
++-                (inotify.adapters._INOTIFY_EVENT(wd=3D3, mask=3D128, co=
+okie=3Devents3[4][0].cookie, len=3D16), ['IN_MOVED_TO'], new_path, 'new_f=
+ilename'),
+++            if events3 !=3D expected:
+++                print("ACTUAL:")
+++                print("")
++=20
++-                (inotify.adapters._INOTIFY_EVENT(wd=3D3, mask=3D512, co=
+okie=3D0, len=3D16), ['IN_DELETE'], new_path, 'new_filename'),
+++                for i, event in enumerate(events3):
+++                    print(event)
++=20
++-                (inotify.adapters._INOTIFY_EVENT(wd=3D3, mask=3D1024, c=
+ookie=3D0, len=3D0), ['IN_DELETE_SELF'], new_path, ''),
++-                (inotify.adapters._INOTIFY_EVENT(wd=3D3, mask=3D32768, =
+cookie=3D0, len=3D0), ['IN_IGNORED'], new_path, ''),
++-                (inotify.adapters._INOTIFY_EVENT(wd=3D1, mask=3D1073742=
+336, cookie=3D0, len=3D16), ['IN_ISDIR', 'IN_DELETE'], path, 'new_folder'=
+),
++-            ]
+++                print("")
+++
+++                print("EXPECTED:")
+++                print("")
++=20
++-            self.assertEquals(events3, expected)
+++                for i, event in enumerate(expected):
+++                    print(event)
+++
+++                raise Exception("Events not correct.")
++=20
++     def test__automatic_new_watches_on_new_paths(self):
++=20
++@@ -346,39 +483,60 @@ class TestInotifyTree(unittest.TestCase):
++             path2 =3D os.path.join(path1, 'folder2')
++=20
++             os.mkdir(path1)
+++=20
+++            wd_path =3D get_wd(i.inotify, path)
++=20
++             events =3D self.__read_all_events(i)
++=20
++             expected =3D [
++-                (inotify.adapters._INOTIFY_EVENT(wd=3D1, mask=3D1073742=
+080, cookie=3D0, len=3D16), ['IN_ISDIR', 'IN_CREATE'], path, 'folder1'),
+++                (inotify.adapters._INOTIFY_EVENT(wd=3Dwd_path, mask=3D1=
+073742080, cookie=3D0, len=3D16), ['IN_CREATE', 'IN_ISDIR'], path, 'folde=
+r1'),
++             ]
++=20
++-            self.assertEquals(events, expected)
+++            self.assertEqual(events, expected)
++=20
++=20
++             os.mkdir(path2)
++=20
+++            wd_path1 =3D get_wd(i.inotify, path1)
+++
++             events =3D self.__read_all_events(i)
++=20
++             expected =3D [
++-                (inotify.adapters._INOTIFY_EVENT(wd=3D2, mask=3D1073742=
+080, cookie=3D0, len=3D16), ['IN_ISDIR', 'IN_CREATE'], path1, 'folder2'),
+++                (inotify.adapters._INOTIFY_EVENT(wd=3Dwd_path1, mask=3D=
+1073742080, cookie=3D0, len=3D16), ['IN_CREATE', 'IN_ISDIR'], path1, 'fol=
+der2'),
++             ]
++=20
++-            self.assertEquals(events, expected)
+++            self.assertEqual(events, expected)
++=20
++=20
++             with open(os.path.join(path2,'filename'), 'w'):
++                 pass
++=20
+++            wd_path2 =3D get_wd(i.inotify, path2)
+++
++             events =3D self.__read_all_events(i)
++=20
++             expected =3D [
++-                (inotify.adapters._INOTIFY_EVENT(wd=3D3, mask=3D256, co=
+okie=3D0, len=3D16), ['IN_CREATE'], path2, 'filename'),
++-                (inotify.adapters._INOTIFY_EVENT(wd=3D3, mask=3D32, coo=
+kie=3D0, len=3D16), ['IN_OPEN'], path2, 'filename'),
++-                (inotify.adapters._INOTIFY_EVENT(wd=3D3, mask=3D8, cook=
+ie=3D0, len=3D16), ['IN_CLOSE_WRITE'], path2, 'filename'),
+++                (inotify.adapters._INOTIFY_EVENT(wd=3Dwd_path2, mask=3D=
+256, cookie=3D0, len=3D16), ['IN_CREATE'], path2, 'filename'),
+++                (inotify.adapters._INOTIFY_EVENT(wd=3Dwd_path2, mask=3D=
+32, cookie=3D0, len=3D16), ['IN_OPEN'], path2, 'filename'),
+++                (inotify.adapters._INOTIFY_EVENT(wd=3Dwd_path2, mask=3D=
+8, cookie=3D0, len=3D16), ['IN_CLOSE_WRITE'], path2, 'filename'),
++             ]
++=20
++-            self.assertEquals(events, expected)
+++            if events !=3D expected:
+++                print("ACTUAL:")
+++                print("")
+++
+++                for i, event in enumerate(events):
+++                    print(event)
+++
+++                print("")
+++
+++                print("EXPECTED:")
+++                print("")
+++
+++                for i, event in enumerate(expected):
+++                    print(event)
+++
+++                raise Exception("Events not correct.")
++=20
++     def test__automatic_new_watches_on_existing_paths(self):
++=20
++@@ -396,16 +554,33 @@ class TestInotifyTree(unittest.TestCase):
++=20
++             with open(os.path.join(path2,'filename'), 'w'):
++                 pass
+++               =20
+++            wd =3D get_wd(i.inotify, path2)
++=20
++             events =3D self.__read_all_events(i)
++=20
++             expected =3D [
++-                (inotify.adapters._INOTIFY_EVENT(wd=3D3, mask=3D256, co=
+okie=3D0, len=3D16), ['IN_CREATE'], path2, 'filename'),
++-                (inotify.adapters._INOTIFY_EVENT(wd=3D3, mask=3D32, coo=
+kie=3D0, len=3D16), ['IN_OPEN'], path2, 'filename'),
++-                (inotify.adapters._INOTIFY_EVENT(wd=3D3, mask=3D8, cook=
+ie=3D0, len=3D16), ['IN_CLOSE_WRITE'], path2, 'filename'),
+++                (inotify.adapters._INOTIFY_EVENT(wd=3Dwd, mask=3D256, c=
+ookie=3D0, len=3D16), ['IN_CREATE'], path2, 'filename'),
+++                (inotify.adapters._INOTIFY_EVENT(wd=3Dwd, mask=3D32, co=
+okie=3D0, len=3D16), ['IN_OPEN'], path2, 'filename'),
+++                (inotify.adapters._INOTIFY_EVENT(wd=3Dwd, mask=3D8, coo=
+kie=3D0, len=3D16), ['IN_CLOSE_WRITE'], path2, 'filename'),
++             ]
++=20
++-            self.assertEquals(events, expected)
+++            if events !=3D expected:
+++                print("ACTUAL:")
+++                print("")
+++
+++                for i, event in enumerate(events):
+++                    print(event)
+++
+++                print("")
+++
+++                print("EXPECTED:")
+++                print("")
+++
+++                for i, event in enumerate(expected):
+++                    print(event)
+++
+++                raise Exception("Events not correct.")
++=20
++=20
++ class TestInotifyTrees(unittest.TestCase):
++@@ -428,6 +603,9 @@ class TestInotifyTrees(unittest.TestCase):
++=20
++             i =3D inotify.adapters.InotifyTrees([path1, path2])
++=20
+++            wd_path1 =3D get_wd(i.inotify, path1)
+++            wd_path2 =3D get_wd(i.inotify, path2)
+++
++             with open(os.path.join(path1, 'seen_new_file1'), 'w'):
++                 pass
++=20
++@@ -437,13 +615,13 @@ class TestInotifyTrees(unittest.TestCase):
++             events =3D self.__read_all_events(i)
++=20
++             expected =3D [
++-                (inotify.adapters._INOTIFY_EVENT(wd=3D1, mask=3D256, co=
+okie=3D0, len=3D16), ['IN_CREATE'], path1, 'seen_new_file1'),
++-                (inotify.adapters._INOTIFY_EVENT(wd=3D1, mask=3D32, coo=
+kie=3D0, len=3D16), ['IN_OPEN'], path1, 'seen_new_file1'),
++-                (inotify.adapters._INOTIFY_EVENT(wd=3D1, mask=3D8, cook=
+ie=3D0, len=3D16), ['IN_CLOSE_WRITE'], path1, 'seen_new_file1'),
+++                (inotify.adapters._INOTIFY_EVENT(wd=3Dwd_path1, mask=3D=
+256, cookie=3D0, len=3D16), ['IN_CREATE'], path1, 'seen_new_file1'),
+++                (inotify.adapters._INOTIFY_EVENT(wd=3Dwd_path1, mask=3D=
+32, cookie=3D0, len=3D16), ['IN_OPEN'], path1, 'seen_new_file1'),
+++                (inotify.adapters._INOTIFY_EVENT(wd=3Dwd_path1, mask=3D=
+8, cookie=3D0, len=3D16), ['IN_CLOSE_WRITE'], path1, 'seen_new_file1'),
++=20
++-                (inotify.adapters._INOTIFY_EVENT(wd=3D2, mask=3D256, co=
+okie=3D0, len=3D16), ['IN_CREATE'], path2, 'seen_new_file2'),
++-                (inotify.adapters._INOTIFY_EVENT(wd=3D2, mask=3D32, coo=
+kie=3D0, len=3D16), ['IN_OPEN'], path2, 'seen_new_file2'),
++-                (inotify.adapters._INOTIFY_EVENT(wd=3D2, mask=3D8, cook=
+ie=3D0, len=3D16), ['IN_CLOSE_WRITE'], path2, 'seen_new_file2'),
+++                (inotify.adapters._INOTIFY_EVENT(wd=3Dwd_path2, mask=3D=
+256, cookie=3D0, len=3D16), ['IN_CREATE'], path2, 'seen_new_file2'),
+++                (inotify.adapters._INOTIFY_EVENT(wd=3Dwd_path2, mask=3D=
+32, cookie=3D0, len=3D16), ['IN_OPEN'], path2, 'seen_new_file2'),
+++                (inotify.adapters._INOTIFY_EVENT(wd=3Dwd_path2, mask=3D=
+8, cookie=3D0, len=3D16), ['IN_CLOSE_WRITE'], path2, 'seen_new_file2'),
++             ]
++=20
++-            self.assertEquals(events, expected)
+++            self.assertEqual(events, expected)
++--=20
++2.35.5
 +
-+	if (!CHECK_FLAG(flag, BGP_ATTR_FLAG_TRANS)
-+	    || !CHECK_FLAG(flag, BGP_ATTR_FLAG_OPTIONAL)) {
-+-		zlog_info(
-+-			"Tunnel Encap attribute flag isn't optional and transitive %d",
-+-			flag);
-+-		bgp_notify_send_with_data(peer, BGP_NOTIFY_UPDATE_ERR,
-+-					  BGP_NOTIFY_UPDATE_ATTR_FLAG_ERR,
-+-					  startp, total);
-+-		return -1;
-++		zlog_err("Tunnel Encap attribute flag isn't optional and transitive %d",
-++			 flag);
-++		return bgp_attr_malformed(args, BGP_NOTIFY_UPDATE_OPT_ATTR_ERR,
-++					  args->total);
-+	}
-+
-+	if (BGP_ATTR_ENCAP == type) {
-+@@ -2438,12 +2434,11 @@ static int bgp_attr_encap(uint8_t type, struct peer *peer, /* IN */
-+		uint16_t tlv_length;
-+
-+		if (length < 4) {
-+-			zlog_info(
-++			zlog_err(
-+				"Tunnel Encap attribute not long enough to contain outer T,L");
-+-			bgp_notify_send_with_data(
-+-				peer, BGP_NOTIFY_UPDATE_ERR,
-+-				BGP_NOTIFY_UPDATE_OPT_ATTR_ERR, startp, total);
-+-			return -1;
-++			return bgp_attr_malformed(args,
-++						  BGP_NOTIFY_UPDATE_OPT_ATTR_ERR,
-++						  args->total);
-+		}
-+		tunneltype = stream_getw(BGP_INPUT(peer));
-+		tlv_length = stream_getw(BGP_INPUT(peer));
-+@@ -2473,13 +2468,11 @@ static int bgp_attr_encap(uint8_t type, struct peer *peer, /* IN */
-+		}
-+
-+		if (sublength > length) {
-+-			zlog_info(
-+-				"Tunnel Encap attribute sub-tlv length %d exceeds remaining length %d",
-+-				sublength, length);
-+-			bgp_notify_send_with_data(
-+-				peer, BGP_NOTIFY_UPDATE_ERR,
-+-				BGP_NOTIFY_UPDATE_OPT_ATTR_ERR, startp, total);
-+-			return -1;
-++			zlog_err("Tunnel Encap attribute sub-tlv length %d exceeds remaining length %d",
-++				 sublength, length);
-++			return bgp_attr_malformed(args,
-++						  BGP_NOTIFY_UPDATE_OPT_ATTR_ERR,
-++						  args->total);
-+		}
-+
-+		/* alloc and copy sub-tlv */
-+@@ -2527,13 +2520,10 @@ static int bgp_attr_encap(uint8_t type, struct peer *peer, /* IN */
-+
-+	if (length) {
-+		/* spurious leftover data */
-+-		zlog_info(
-+-			"Tunnel Encap attribute length is bad: %d leftover octets",
-+-			length);
-+-		bgp_notify_send_with_data(peer, BGP_NOTIFY_UPDATE_ERR,
-+-					  BGP_NOTIFY_UPDATE_OPT_ATTR_ERR,
-+-					  startp, total);
-+-		return -1;
-++		zlog_err("Tunnel Encap attribute length is bad: %d leftover octets",
-++			 length);
-++		return bgp_attr_malformed(args, BGP_NOTIFY_UPDATE_OPT_ATTR_ERR,
-++					  args->total);
-+	}
-+
-+	return 0;
-+@@ -3332,8 +3322,7 @@ bgp_attr_parse_ret_t bgp_attr_parse(struct peer *peer, struct attr *attr,
-+		case BGP_ATTR_VNC:
-+ #endif
-+		case BGP_ATTR_ENCAP:
-+-			ret = bgp_attr_encap(type, peer, length, attr, flag,
-+-					     startp);
-++			ret = bgp_attr_encap(&attr_args);
-+			break;
-+		case BGP_ATTR_PREFIX_SID:
-+			ret = bgp_attr_prefix_sid(&attr_args);
-+--
-+2.40.0
-diff --git a/meta-networking/recipes-protocols/frr/frr/CVE-2023-41358.patch b/meta-networking/recipes-protocols/frr/frr/CVE-2023-41358.patch
-new file mode 100644
-index 0000000000..e10d3e5267
---- /dev/null
-+++ b/meta-networking/recipes-protocols/frr/frr/CVE-2023-41358.patch
-@@ -0,0 +1,105 @@
-+From ef9b66e742f9016b3bf283920b528cf20d2c969f Mon Sep 17 00:00:00 2001
-+From: Donatas Abraitis <donatas@opensourcerouting.org>
-+Date: Tue, 5 Sep 2023 11:36:13 +0000
-+Subject: [PATCH 2/2] bgpd: Do not process NLRIs if the attribute length is
-+ zero
-+
-+```
-+3  0x00007f423aa42476 in __GI_raise (sig=sig@entry=11) at ../sysdeps/posix/raise.c:26
-+4  0x00007f423aef9740 in core_handler (signo=11, siginfo=0x7fffc414deb0, context=<optimized out>) at lib/sigevent.c:246
-+5  <signal handler called>
-+6  0x0000564dea2fc71e in route_set_aspath_prepend (rule=0x564debd66d50, prefix=0x7fffc414ea30, object=0x7fffc414e400)
-+    at bgpd/bgp_routemap.c:2258
-+7  0x00007f423aeec7e0 in route_map_apply_ext (map=<optimized out>, prefix=prefix@entry=0x7fffc414ea30,
-+    match_object=match_object@entry=0x7fffc414e400, set_object=set_object@entry=0x7fffc414e400, pref=pref@entry=0x0) at lib/routemap.c:2690
-+8  0x0000564dea2d277e in bgp_input_modifier (peer=peer@entry=0x7f4238f59010, p=p@entry=0x7fffc414ea30, attr=attr@entry=0x7fffc414e770,
-+    afi=afi@entry=AFI_IP, safi=safi@entry=SAFI_UNICAST, rmap_name=rmap_name@entry=0x0, label=0x0, num_labels=0, dest=0x564debdd5130)
-+    at bgpd/bgp_route.c:1772
-+9  0x0000564dea2df762 in bgp_update (peer=peer@entry=0x7f4238f59010, p=p@entry=0x7fffc414ea30, addpath_id=addpath_id@entry=0,
-+    attr=0x7fffc414eb50, afi=afi@entry=AFI_IP, safi=<optimized out>, safi@entry=SAFI_UNICAST, type=9, sub_type=0, prd=0x0, label=0x0,
-+    num_labels=0, soft_reconfig=0, evpn=0x0) at bgpd/bgp_route.c:4374
-+10 0x0000564dea2e2047 in bgp_nlri_parse_ip (peer=0x7f4238f59010, attr=attr@entry=0x7fffc414eb50, packet=0x7fffc414eaf0)
-+    at bgpd/bgp_route.c:6249
-+11 0x0000564dea2c5a58 in bgp_nlri_parse (peer=peer@entry=0x7f4238f59010, attr=attr@entry=0x7fffc414eb50,
-+    packet=packet@entry=0x7fffc414eaf0, mp_withdraw=mp_withdraw@entry=false) at bgpd/bgp_packet.c:339
-+12 0x0000564dea2c5d66 in bgp_update_receive (peer=peer@entry=0x7f4238f59010, size=size@entry=109) at bgpd/bgp_packet.c:2024
-+13 0x0000564dea2c901d in bgp_process_packet (thread=<optimized out>) at bgpd/bgp_packet.c:2933
-+14 0x00007f423af0bf71 in event_call (thread=thread@entry=0x7fffc414ee40) at lib/event.c:1995
-+15 0x00007f423aebb198 in frr_run (master=0x564deb73c670) at lib/libfrr.c:1213
-+16 0x0000564dea261b83 in main (argc=<optimized out>, argv=<optimized out>) at bgpd/bgp_main.c:505
-+```
-+
-+With the configuration:
-+
-+```
-+frr version 9.1-dev-MyOwnFRRVersion
-+frr defaults traditional
-+hostname ip-172-31-13-140
-+log file /tmp/debug.log
-+log syslog
-+service integrated-vtysh-config
-+!
-+debug bgp keepalives
-+debug bgp neighbor-events
-+debug bgp updates in
-+debug bgp updates out
-+!
-+router bgp 100
-+ bgp router-id 9.9.9.9
-+ no bgp ebgp-requires-policy
-+ bgp bestpath aigp
-+ neighbor 172.31.2.47 remote-as 200
-+ !
-+ address-family ipv4 unicast
-+  neighbor 172.31.2.47 default-originate
-+  neighbor 172.31.2.47 route-map RM_IN in
-+ exit-address-family
-+exit
-+!
-+route-map RM_IN permit 10
-+ set as-path prepend 200
-+exit
-+!
-+```
-+
-+The issue is that we try to process NLRIs even if the attribute length is 0.
-+
-+Later bgp_update() will handle route-maps and a crash occurs because all the
-+attributes are NULL, including aspath, where we dereference.
-+
-+According to the RFC 4271:
-+
-+A value of 0 indicates that neither the Network Layer
-+         Reachability Information field nor the Path Attribute field is
-+         present in this UPDATE message.
-+
-+But with a fuzzed UPDATE message this can be faked. I think it's reasonable
-+to skip processing NLRIs if both update_len and attribute_len are 0.
-+
-+Reported-by: Iggy Frankovic <iggyfran@amazon.com>
-+Signed-off-by: Donatas Abraitis <donatas@opensourcerouting.org>
-+
-+CVE: CVE-2023-41358
-+
-+Upstream-Status: Backport [https://github.com/FRRouting/frr/pull/14260/commits/28ccc24d38df1d51ed8a563507e5d6f6171fdd38]
-+
-+Signed-off-by: Narpat Mali <narpat.mali@windriver.com>
-+---
-+ bgpd/bgp_packet.c | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/bgpd/bgp_packet.c b/bgpd/bgp_packet.c
-+index 0166dc6a2..2fd28aae3 100644
-+--- a/bgpd/bgp_packet.c
-++++ b/bgpd/bgp_packet.c
-+@@ -1767,7 +1767,7 @@ static int bgp_update_receive(struct peer *peer, bgp_size_t size)
-+	/* Network Layer Reachability Information. */
-+	update_len = end - stream_pnt(s);
-+
-+-	if (update_len) {
-++	if (update_len && attribute_len) {
-+		/* Set NLRI portion to structure. */
-+		nlris[NLRI_UPDATE].afi = AFI_IP;
-+		nlris[NLRI_UPDATE].safi = SAFI_UNICAST;
-+--
-+2.40.0
-diff --git a/meta-networking/recipes-protocols/frr/frr_8.2.2.bb b/meta-networking/recipes-protocols/frr/frr_8.2.2.bb
-index 1897eb2abd..7af584835f 100644
---- a/meta-networking/recipes-protocols/frr/frr_8.2.2.bb
-+++ b/meta-networking/recipes-protocols/frr/frr_8.2.2.bb
-@@ -18,6 +18,8 @@ SRC_URI = "git://github.com/FRRouting/frr.git;protocol=https;branch=stable/8.2 \
-            file://CVE-2022-43681.patch \
-            file://CVE-2023-31489.patch \
-            file://CVE-2023-31490.patch \
-+           file://CVE-2023-38802.patch \
-+           file://CVE-2023-41358.patch \
-            file://frr.pam \
- 	      "
- 
--- 
-2.40.0
+diff --git a/meta-python/recipes-devtools/python/python3-inotify_git.bb b=
+/meta-python/recipes-devtools/python/python3-inotify_git.bb
+index 9e35c7ba5b..2e189ddace 100644
+--- a/meta-python/recipes-devtools/python/python3-inotify_git.bb
++++ b/meta-python/recipes-devtools/python/python3-inotify_git.bb
+@@ -7,6 +7,7 @@ SRC_URI[sha256sum] =3D "974a623a338482b62e16d4eb705fb863e=
+d33ec178680fc3e96ccdf0df6
+=20
+ SRC_URI =3D " \
+     git://github.com/dsoprea/pyinotify.git;branch=3Dmaster;protocol=3Dht=
+tps \
++    file://new-test-inotify.patch \
+     file://run-ptest \
+ "
+=20
+--=20
+2.25.1
 
 
