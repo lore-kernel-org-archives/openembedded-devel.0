@@ -1,100 +1,239 @@
-Return-Path: <akuster808@gmail.com>
+Return-Path: <soumya.sambu@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 17434EB8FB6
-	for <webhook@archiver.kernel.org>; Wed,  6 Sep 2023 12:02:22 +0000 (UTC)
-Received: from mail-yw1-f176.google.com (mail-yw1-f176.google.com [209.85.128.176])
- by mx.groups.io with SMTP id smtpd.web10.6766.1694001738075324208
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 20E11EB8FCE
+	for <webhook@archiver.kernel.org>; Wed,  6 Sep 2023 13:22:43 +0000 (UTC)
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.web11.8529.1694006555478237808
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 06 Sep 2023 05:02:18 -0700
+ Wed, 06 Sep 2023 06:22:35 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20221208 header.b=i9W2+l+S;
- spf=pass (domain: gmail.com, ip: 209.85.128.176, mailfrom: akuster808@gmail.com)
-Received: by mail-yw1-f176.google.com with SMTP id 00721157ae682-59254e181a2so34009067b3.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 06 Sep 2023 05:02:17 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1694001737; x=1694606537; darn=lists.openembedded.org;
-        h=content-transfer-encoding:subject:from:to:content-language
-         :user-agent:mime-version:date:message-id:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=e9faSPiB6BxH2cAla2BKtbQk9ZXGk2wO2rOiFWKYEQw=;
-        b=i9W2+l+Sdz/RQBI85RtAySdAuo/lvKKvFXZAkmLo0xOtzXgj9HnIJsQ9B1DC2CdHAH
-         GaNP5kpJDbDV0+swQIJmKvRKxQDhEvJhPSMdlwhUQ2eZsTUIdvWJFFTGKatWYJRoqoWH
-         dt0S+1/7ZOkgBq3eZegBcKD0M1VYh6YUmbg2I2HDAVWFhN3jISe3vVcOrF5cZfJDkx7p
-         GKMQlgtmXwCFA3N0PuswI+ADYW2q2dhgajOeM5vUh/1NfKMvs1AlkkctCnag6gTPrQcm
-         6K5NzvZWh/M+xATK++S6lqkWK821fDuf8FzNBzCFgbc9kCbxTE8QxP2DN5mtWmGVf8aZ
-         HD5w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1694001737; x=1694606537;
-        h=content-transfer-encoding:subject:from:to:content-language
-         :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=e9faSPiB6BxH2cAla2BKtbQk9ZXGk2wO2rOiFWKYEQw=;
-        b=QcTDxsQbe8M0J3Ebz3qSRbh1BqNeZEmy66mNul5O9bC2PtzVv7QqtmrrJkhkr4oinI
-         pSJ3Ygw1LmndEfEvwEZuLhzT0a2Pab+oLxDm7MPsrVZ/GUs+yQiUxU2+OzP5jFBc4zpG
-         IXso+Sd6DZ8258mv4NgxnorZ84hYBuyOTtzmNbzGMW+WianrXcEoLFQTYYeDSU+WzZNh
-         QtGavyneNbiUm7zIZCvW71QpNXDDXMFI/54rVyk/A+x3l89bLHI2xnB1NvOEQkF9eE9q
-         NNxedsQcQVbCHlU2qM1wc2l73C0WQ2r0sPj41l6LTcEE3UtRKNIpvWiW9yxA+My7JBfd
-         KhZA==
-X-Gm-Message-State: AOJu0YydSmcbcvvXgP3fUf8LN0+kRQNKiBH6eur+2rj0OXptZXaoZl18
-	3A9/Ld+y4QdSX6LWXTH4nuk=
-X-Google-Smtp-Source: AGHT+IHxaaY3JJRMG5RTPFjPcoy61CMu5V6RWL4gfrmtobG5g63LuqPPsFpTZfnBMV7Ejd6iqw0CXA==
-X-Received: by 2002:a81:b10a:0:b0:59a:d94d:566d with SMTP id p10-20020a81b10a000000b0059ad94d566dmr8971707ywh.21.1694001737192;
-        Wed, 06 Sep 2023 05:02:17 -0700 (PDT)
-Received: from ?IPV6:2600:1700:9190:ba10:5654:1c56:e678:3eb1? ([2600:1700:9190:ba10:5654:1c56:e678:3eb1])
-        by smtp.gmail.com with ESMTPSA id eh10-20020a05690c298a00b0059adc0c4392sm1689925ywb.140.2023.09.06.05.02.16
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 06 Sep 2023 05:02:16 -0700 (PDT)
-Message-ID: <0e376e4a-d827-ce01-7bab-d6dcda74ac3a@gmail.com>
-Date: Wed, 6 Sep 2023 08:02:16 -0400
+ dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=A/51OHYd;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=76132f5a4a=soumya.sambu@windriver.com)
+Received: from pps.filterd (m0250811.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.17.1.22/8.17.1.22) with ESMTP id 386BrKnN029025
+	for <openembedded-devel@lists.openembedded.org>; Wed, 6 Sep 2023 13:22:34 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
+	 h=from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding:content-type; s=PPS06212021; bh=ehbgf
+	UwgOQWMg4rOrjSROnHIf/tZzP79kYadkAO4t+8=; b=A/51OHYdxR8j0KV+U2MQB
+	aYVoNaYRMAELVCAss3lqnzpwWZc8KKaYOGnjJlecXQGCRLcOZMa16Im5BjlAwwEy
+	rDWkYmWwL2JCoI4i72u3EvoxtjR8WPFDX7FmJD964Ob0nCP2uY/B6o1xJ3it1u3A
+	Rtprbw8TDOS7cxzGDn06dM+eiIWnBsov9KnjRCtzNU4dCo7f3ijF8ncZD2E1tZFK
+	UW+kdgPC6MBKtrqNQ6j/+z6DpdZBIYgOvtyE6Uz+GGPT35eQBaDhfPa58vbNNrWI
+	/2I4/MnT/pbir1CERYx62yAj7JBN5vD5jXoeTLxKatUkHQNKOgBWGuDZq+fGJUGT
+	w==
+Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3sw33k2dp5-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Wed, 06 Sep 2023 13:22:34 +0000 (GMT)
+Received: from blr-linux-engg1.wrs.com (147.11.136.210) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.27; Wed, 6 Sep 2023 06:22:31 -0700
+From: ssambu <soumya.sambu@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [oe][meta-oe][kirkstone][PATCH 1/1] rabbitmq-c: Fix CVE-2023-35789
+Date: Wed, 6 Sep 2023 13:22:04 +0000
+Message-ID: <20230906132204.1041225-1-soumya.sambu@windriver.com>
+X-Mailer: git-send-email 2.40.0
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.13.0
-Content-Language: en-US
-To: Khem Raj <raj.khem@gmail.com>,
- OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-From: akuster808 <akuster808@gmail.com>
-Subject: mickledore merge request: Sept 6th
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [147.11.136.210]
+X-ClientProxiedBy: ala-exchng01.corp.ad.wrs.com (147.11.82.252) To
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252)
+X-Proofpoint-GUID: 3ToApXxXdylTC1M3aZiwyedy1HFC2CoV
+X-Proofpoint-ORIG-GUID: 3ToApXxXdylTC1M3aZiwyedy1HFC2CoV
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.254,Aquarius:18.0.957,Hydra:6.0.601,FMLib:17.11.176.26
+ definitions=2023-09-06_06,2023-09-05_01,2023-05-22_02
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 adultscore=0 mlxlogscore=999
+ clxscore=1015 malwarescore=0 bulkscore=0 spamscore=0 phishscore=0
+ impostorscore=0 suspectscore=0 priorityscore=1501 mlxscore=0
+ lowpriorityscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.19.0-2308100000 definitions=main-2309060115
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 06 Sep 2023 12:02:22 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104778
+ <openembedded-devel@lists.openembedded.org>; Wed, 06 Sep 2023 13:22:43 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104779
 
-The following changes since commit 41fffef6b044b2722aa13f7e7648a3f848231851:
+From: Soumya Sambu <soumya.sambu@windriver.com>
 
-   yasm: fix CVE-2023-37732 (2023-09-03 10:43:56 -0400)
+An issue was discovered in the C AMQP client library (aka rabbitmq-c) through
+0.13.0 for RabbitMQ. Credentials can only be entered on the command line (e.g.,
+for amqp-publish or amqp-consume) and are thus visible to local attackers by
+listing a process and its arguments.
 
-are available in the Git repository at:
+Reference:
+https://nvd.nist.gov/vuln/detail/CVE-2023-35789
 
-   https://git.openembedded.org/meta-openembedded mickledore-next
+Signed-off-by: Soumya Sambu <soumya.sambu@windriver.com>
+---
+ .../rabbitmq-c/files/CVE-2023-35789.patch     | 135 ++++++++++++++++++
+ .../rabbitmq-c/rabbitmq-c_0.11.0.bb           |   4 +-
+ 2 files changed, 138 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-connectivity/rabbitmq-c/files/CVE-2023-35789.patch
 
-for you to fetch changes up to 57c516973978ca2667339bf1aae7dc722b5bcac7:
-
-   tcpdump: upgrade 4.99.3 -> 4.99.4 (2023-09-05 13:40:23 -0400)
-
-----------------------------------------------------------------
-Martin Jansa (1):
-       libiio: use main branch instead of master
-
-Soumya Sambu (1):
-       krb5: Fix CVE-2023-36054
-
-Wang Mingyu (1):
-       tcpdump: upgrade 4.99.3 -> 4.99.4
-
-  .../tcpdump/{tcpdump_4.99.3.bb => tcpdump_4.99.4.bb} |  2 +-
-  meta-oe/recipes-connectivity/krb5/krb5/CVE-2023-36054.patch     | 68 
-+++++++++++++++++++++++++++++
-  meta-oe/recipes-connectivity/krb5/krb5_1.20.1.bb                | 1 +
-  meta-oe/recipes-support/libiio/libiio_git.bb                    | 2 +-
-  4 files changed, 71 insertions(+), 2 deletions(-)
-  rename meta-networking/recipes-support/tcpdump/{tcpdump_4.99.3.bb => 
-tcpdump_4.99.4.bb} (93%)
-  create mode 100644 
-meta-oe/recipes-connectivity/krb5/krb5/CVE-2023-36054.patch
+diff --git a/meta-oe/recipes-connectivity/rabbitmq-c/files/CVE-2023-35789.patch b/meta-oe/recipes-connectivity/rabbitmq-c/files/CVE-2023-35789.patch
+new file mode 100644
+index 000000000..93949fc21
+--- /dev/null
++++ b/meta-oe/recipes-connectivity/rabbitmq-c/files/CVE-2023-35789.patch
+@@ -0,0 +1,135 @@
++From 463054383fbeef889b409a7f843df5365288e2a0 Mon Sep 17 00:00:00 2001
++From: Christian Kastner <ckk@kvr.at>
++Date: Tue, 13 Jun 2023 14:21:52 +0200
++Subject: [PATCH] Add option to read username/password from file (#781)
++
++* Add option to read username/password from file
++
++CVE: CVE-2023-35789
++
++Upstream-Status: Backport [https://github.com/alanxz/rabbitmq-c/commit/463054383fbeef889b409a7f843df5365288e2a0]
++
++Signed-off-by: Soumya Sambu <soumya.sambu@windriver.com>
++---
++ tools/common.c | 66 ++++++++++++++++++++++++++++++++++++++++++++++++++
++ 1 file changed, 66 insertions(+)
++
++diff --git a/tools/common.c b/tools/common.c
++index 53ea788..35b2b9f 100644
++--- a/tools/common.c
+++++ b/tools/common.c
++@@ -54,6 +54,11 @@
++ #include "compat.h"
++ #endif
++
+++/* For when reading auth data from a file */
+++#define MAXAUTHTOKENLEN 128
+++#define USERNAMEPREFIX "username:"
+++#define PASSWORDPREFIX "password:"
+++
++ void die(const char *fmt, ...) {
++   va_list ap;
++   va_start(ap, fmt);
++@@ -161,6 +166,7 @@ static char *amqp_vhost;
++ static char *amqp_username;
++ static char *amqp_password;
++ static int amqp_heartbeat = 0;
+++static char *amqp_authfile;
++ #ifdef WITH_SSL
++ static int amqp_ssl = 0;
++ static char *amqp_cacert = "/etc/ssl/certs/cacert.pem";
++@@ -183,6 +189,8 @@ struct poptOption connect_options[] = {
++      "the password to login with", "password"},
++     {"heartbeat", 0, POPT_ARG_INT, &amqp_heartbeat, 0,
++      "heartbeat interval, set to 0 to disable", "heartbeat"},
+++    {"authfile", 0, POPT_ARG_STRING, &amqp_authfile, 0,
+++     "path to file containing username/password for authentication", "file"},
++ #ifdef WITH_SSL
++     {"ssl", 0, POPT_ARG_NONE, &amqp_ssl, 0, "connect over SSL/TLS", NULL},
++     {"cacert", 0, POPT_ARG_STRING, &amqp_cacert, 0,
++@@ -194,6 +202,50 @@ struct poptOption connect_options[] = {
++ #endif /* WITH_SSL */
++     {NULL, '\0', 0, NULL, 0, NULL, NULL}};
++
+++void read_authfile(const char *path) {
+++  size_t n;
+++  FILE *fp = NULL;
+++  char token[MAXAUTHTOKENLEN];
+++
+++  if ((amqp_username = malloc(MAXAUTHTOKENLEN)) == NULL ||
+++      (amqp_password = malloc(MAXAUTHTOKENLEN)) == NULL) {
+++    die("Out of memory");
+++  } else if ((fp = fopen(path, "r")) == NULL) {
+++    die("Could not read auth data file %s", path);
+++  }
+++
+++  if (fgets(token, MAXAUTHTOKENLEN, fp) == NULL ||
+++      strncmp(token, USERNAMEPREFIX, strlen(USERNAMEPREFIX))) {
+++    die("Malformed auth file (missing username)");
+++  }
+++  strncpy(amqp_username, &token[strlen(USERNAMEPREFIX)], MAXAUTHTOKENLEN);
+++  /* Missing newline means token was cut off */
+++  n = strlen(amqp_username);
+++  if (amqp_username[n - 1] != '\n') {
+++    die("Username too long");
+++  } else {
+++    amqp_username[n - 1] = '\0';
+++  }
+++
+++  if (fgets(token, MAXAUTHTOKENLEN, fp) == NULL ||
+++      strncmp(token, PASSWORDPREFIX, strlen(PASSWORDPREFIX))) {
+++    die("Malformed auth file (missing password)");
+++  }
+++  strncpy(amqp_password, &token[strlen(PASSWORDPREFIX)], MAXAUTHTOKENLEN);
+++  /* Missing newline means token was cut off */
+++  n = strlen(amqp_password);
+++  if (amqp_password[n - 1] != '\n') {
+++    die("Password too long");
+++  } else {
+++    amqp_password[n - 1] = '\0';
+++  }
+++
+++  (void)fgetc(fp);
+++  if (!feof(fp)) {
+++    die("Malformed auth file (trailing data)");
+++  }
+++}
+++
++ static void init_connection_info(struct amqp_connection_info *ci) {
++   ci->user = NULL;
++   ci->password = NULL;
++@@ -269,6 +321,8 @@ static void init_connection_info(struct amqp_connection_info *ci) {
++   if (amqp_username) {
++     if (amqp_url) {
++       die("--username and --url options cannot be used at the same time");
+++    } else if (amqp_authfile) {
+++      die("--username and --authfile options cannot be used at the same time");
++     }
++
++     ci->user = amqp_username;
++@@ -277,11 +331,23 @@ static void init_connection_info(struct amqp_connection_info *ci) {
++   if (amqp_password) {
++     if (amqp_url) {
++       die("--password and --url options cannot be used at the same time");
+++    } else if (amqp_authfile) {
+++      die("--password and --authfile options cannot be used at the same time");
++     }
++
++     ci->password = amqp_password;
++   }
++
+++  if (amqp_authfile) {
+++    if (amqp_url) {
+++      die("--authfile and --url options cannot be used at the same time");
+++    }
+++
+++    read_authfile(amqp_authfile);
+++    ci->user = amqp_username;
+++    ci->password = amqp_password;
+++  }
+++
++   if (amqp_vhost) {
++     if (amqp_url) {
++       die("--vhost and --url options cannot be used at the same time");
++--
++2.40.0
+diff --git a/meta-oe/recipes-connectivity/rabbitmq-c/rabbitmq-c_0.11.0.bb b/meta-oe/recipes-connectivity/rabbitmq-c/rabbitmq-c_0.11.0.bb
+index 304171c88..1cc4ada3b 100644
+--- a/meta-oe/recipes-connectivity/rabbitmq-c/rabbitmq-c_0.11.0.bb
++++ b/meta-oe/recipes-connectivity/rabbitmq-c/rabbitmq-c_0.11.0.bb
+@@ -3,7 +3,9 @@ HOMEPAGE = "https://github.com/alanxz/rabbitmq-c"
+ LIC_FILES_CHKSUM = "file://LICENSE-MIT;md5=6b7424f9db80cfb11fdd5c980b583f53"
+ LICENSE = "MIT"
+ 
+-SRC_URI = "git://github.com/alanxz/rabbitmq-c.git;branch=master;protocol=https"
++SRC_URI = "git://github.com/alanxz/rabbitmq-c.git;branch=master;protocol=https \
++           file://CVE-2023-35789.patch \
++          "
+ # v0.11.0-master
+ SRCREV = "a64c08c68aff34d49a2ac152f04988cd921084f9"
+ 
+-- 
+2.40.0
 
 
