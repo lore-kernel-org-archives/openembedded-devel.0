@@ -1,98 +1,86 @@
-Return-Path: <Martin.Jansa@gmail.com>
+Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0B2BDCA0FFF
-	for <webhook@archiver.kernel.org>; Tue,  5 Sep 2023 18:57:45 +0000 (UTC)
-Received: from mail-ej1-f41.google.com (mail-ej1-f41.google.com [209.85.218.41])
- by mx.groups.io with SMTP id smtpd.web10.30587.1693940261093487801
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9EB9BCCF9FF
+	for <webhook@archiver.kernel.org>; Wed,  6 Sep 2023 01:49:55 +0000 (UTC)
+Received: from esa9.hc1455-7.c3s2.iphmx.com (esa9.hc1455-7.c3s2.iphmx.com [139.138.36.223])
+ by mx.groups.io with SMTP id smtpd.web11.2253.1693964988796251540
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 05 Sep 2023 11:57:41 -0700
+ Tue, 05 Sep 2023 18:49:49 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20221208 header.b=aGhbD5v6;
- spf=pass (domain: gmail.com, ip: 209.85.218.41, mailfrom: martin.jansa@gmail.com)
-Received: by mail-ej1-f41.google.com with SMTP id a640c23a62f3a-9936b3d0286so444607366b.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 05 Sep 2023 11:57:40 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1693940259; x=1694545059; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=pTRHwSIK5vkFXSMyhwOJKusvxRddd7U6s35GVhDcVL0=;
-        b=aGhbD5v6w3rLDT31491UgWK4sOskU20kJXdTlwW7OfrklZYrcvZ6C3s0tFbhB05U0q
-         7LYWVnFblqf90w2+mYpbtqlPsxfWzS6lrCUbzhtwcTvcwl6vPNrX+uaBmdtZLJ04lpKV
-         4lBYLAte8ovpRIBBMqcsvtvkAP3OoimcG7cMSCcB23LN3b6AjQGNUhh/FS97DsoY9HQJ
-         1vlbkaknTkoLXML2ApuOr47Q2tYx0CHTkW7JYq9kpZ+b9Qc9qtols6AzfeArp5lbqy02
-         kSOksGuMThc1affu77Tg8ypWg76uVeq4/NXc5y7pklg+e7GsuCOAj/M3d3QEkCsHhCDR
-         OImA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1693940259; x=1694545059;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=pTRHwSIK5vkFXSMyhwOJKusvxRddd7U6s35GVhDcVL0=;
-        b=Dd/JjckAYnPiI1qtBW6mvKrrXsrSDP28A0QYQl0rr/aURvkII5ICgehqtXbC/5/nhf
-         tc2f6UkRtjD40J17q/lnytcNqKSP9eWsmuaNgHrLpjxy5g9WjJlBXBuAFe+JBlNzgVSN
-         +Cb4a/Fe302VNCEpJtewDEnG46H9caFLBdsr/AGPSOd6zyII5plaTYGZf8TwA+e4AvVT
-         D+ZuoEKwwdi5aBEO+EhyiZ5FWHj71wpwXPjmFcmK/l1IJidUTWqQau3kXqzlUv3uxZe7
-         oLyAD3J8xbNTEZOzj7/8sJbl5ihbgC+fh1LQtRj1uBbfuvl5WoHNRjnhr2Msjc7bTZeg
-         sang==
-X-Gm-Message-State: AOJu0YxsrLPWdSkGpKadPplLhLihHkI6KeRnXvJ4/j5RelowR2l3+S0I
-	EuOab3D9FbMD4ma8qPMFZ1uUMDeeHgE=
-X-Google-Smtp-Source: AGHT+IFy3s5h7wAQo4h1njcWeeG7NrS1djorDop+RQH+gZQE+nbglF5W6RhJ1hkgqXmhkPVKbSX/fw==
-X-Received: by 2002:a17:907:75ea:b0:9a5:821e:165d with SMTP id jz10-20020a17090775ea00b009a5821e165dmr456934ejc.71.1693940259518;
-        Tue, 05 Sep 2023 11:57:39 -0700 (PDT)
-Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
-        by smtp.gmail.com with ESMTPSA id qc8-20020a170906d8a800b009a5f7fb51dcsm7844433ejb.42.2023.09.05.11.57.39
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 05 Sep 2023 11:57:39 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
+ dkim=none (message not signed); spf=pass (domain: fujitsu.com, ip: 139.138.36.223, mailfrom: wangmy@fujitsu.com)
+X-IronPort-AV: E=McAfee;i="6600,9927,10824"; a="119203835"
+X-IronPort-AV: E=Sophos;i="6.02,230,1688396400"; 
+   d="scan'208";a="119203835"
+Received: from unknown (HELO oym-r4.gw.nic.fujitsu.com) ([210.162.30.92])
+  by esa9.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 06 Sep 2023 10:49:45 +0900
+Received: from oym-m3.gw.nic.fujitsu.com (oym-nat-oym-m3.gw.nic.fujitsu.com [192.168.87.60])
+	by oym-r4.gw.nic.fujitsu.com (Postfix) with ESMTP id CA1DFDDC63
+	for <openembedded-devel@lists.openembedded.org>; Wed,  6 Sep 2023 10:49:43 +0900 (JST)
+Received: from aks-ab1.gw.nic.fujitsu.com (aks-ab1.gw.nic.fujitsu.com [192.51.207.11])
+	by oym-m3.gw.nic.fujitsu.com (Postfix) with ESMTP id 0DCF6D948F
+	for <openembedded-devel@lists.openembedded.org>; Wed,  6 Sep 2023 10:49:43 +0900 (JST)
+Received: from localhost.localdomain (unknown [10.167.225.33])
+	by aks-ab1.gw.nic.fujitsu.com (Postfix) with ESMTP id 1C5A22FC7C3F;
+	Wed,  6 Sep 2023 10:49:42 +0900 (JST)
+From: wangmy@fujitsu.com
 To: openembedded-devel@lists.openembedded.org
-Cc: Martin Jansa <martin.jansa@gmail.com>
-Subject: [meta-oe][PATCH] webkitgtk: explicitly disable JIT for armv7* with softfp
-Date: Tue,  5 Sep 2023 20:57:36 +0200
-Message-ID: <20230905185736.1414056-1-martin.jansa@gmail.com>
-X-Mailer: git-send-email 2.42.0
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Cc: Wang Mingyu <wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH] adw-gtk3: upgrade 4.8 -> 4.9
+Date: Wed,  6 Sep 2023 09:49:33 +0800
+Message-Id: <1693964973-13664-1-git-send-email-wangmy@fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
+X-TM-AS-GCONF: 00
+X-TM-AS-Product-Ver: IMSS-9.1.0.1408-9.0.0.1002-27858.003
+X-TM-AS-User-Approved-Sender: Yes
+X-TMASE-Version: IMSS-9.1.0.1408-9.0.1002-27858.003
+X-TMASE-Result: 10-1.063900-10.000000
+X-TMASE-MatchedRID: dhm/lGuWeZijz0nOeth/yUIIxwDaU5mrA3QlQeE0l8Dk6Qbi+9i6D7qT
+	orL333BQIX+UmmSwEkcNyr61Mu6ROm0Xr+fj3ww/8t4fUUGeErTBOVz0Jwcxl7SwC3zqzycU+Hv
+	2UJ08905Zms6w/rdLbvU6xtukJhsx5UcZtwNsCroURSScn+QSXmVV1G+Ck2l7+gtHj7OwNO2FR9
+	Hau8GO7qfDnZdVcKQkxSkRi4vw0T4k1fvN4Cjw/K4rUueqjfxXZE6fj4irdPA9ot0XgTlRSvsmy
+	lfsXSo3+4swf/yK9P0asjjhzBAoQ1l4qW3QdlsIHSbhGbmGylXFJK7yLnZRGZdO3Q67ImL8gi4R
+	Uz90EQwG2MApbv6odw==
+X-TMASE-SNAP-Result: 1.821001.0001-0-1-22:0,33:0,34:0-0
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 05 Sep 2023 18:57:45 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104728
+ <openembedded-devel@lists.openembedded.org>; Wed, 06 Sep 2023 01:49:55 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104729
 
-Signed-off-by: Martin Jansa <martin.jansa@gmail.com>
+From: Wang Mingyu <wangmy@fujitsu.com>
+
+Changelog:
+===========
+Radio buttons in Firefox
+Make highlight more similar to Libadwaita
+Icons in Budgie Panel are cutoff at sides
+Add sidebar colors
+Custom tab color fix
+
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../recipes-support/webkitgtk/webkitgtk3_2.40.5.bb | 14 +++++++++++++-
- 1 file changed, 13 insertions(+), 1 deletion(-)
+ .../gnome-themes/{adw-gtk3_4.8.bb => adw-gtk3_4.9.bb}           | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-gnome/gnome-themes/{adw-gtk3_4.8.bb => adw-gtk3_4.9.bb} (88%)
 
-diff --git a/meta-oe/recipes-support/webkitgtk/webkitgtk3_2.40.5.bb b/meta-oe/recipes-support/webkitgtk/webkitgtk3_2.40.5.bb
-index 7218dbb5ef..5d43f3a8d1 100644
---- a/meta-oe/recipes-support/webkitgtk/webkitgtk3_2.40.5.bb
-+++ b/meta-oe/recipes-support/webkitgtk/webkitgtk3_2.40.5.bb
-@@ -102,9 +102,21 @@ EXTRA_OECMAKE:append:powerpc = " -DENABLE_JIT=OFF "
- EXTRA_OECMAKE:append:powerpc64 = " -DENABLE_JIT=OFF "
+diff --git a/meta-oe/recipes-gnome/gnome-themes/adw-gtk3_4.8.bb b/meta-oe/recipes-gnome/gnome-themes/adw-gtk3_4.9.bb
+similarity index 88%
+rename from meta-oe/recipes-gnome/gnome-themes/adw-gtk3_4.8.bb
+rename to meta-oe/recipes-gnome/gnome-themes/adw-gtk3_4.9.bb
+index 2a3f772f8f..d7b7eef977 100644
+--- a/meta-oe/recipes-gnome/gnome-themes/adw-gtk3_4.8.bb
++++ b/meta-oe/recipes-gnome/gnome-themes/adw-gtk3_4.9.bb
+@@ -11,6 +11,6 @@ inherit meson
+ SRC_URI = "git://github.com/lassekongo83/adw-gtk3.git;protocol=https;branch=main"
  
- # ARM JIT code does not build on ARMv4/5/6 anymore
-+EXTRA_OECMAKE:append:armv4 = " -DENABLE_JIT=OFF "
- EXTRA_OECMAKE:append:armv5 = " -DENABLE_JIT=OFF "
- EXTRA_OECMAKE:append:armv6 = " -DENABLE_JIT=OFF "
--EXTRA_OECMAKE:append:armv4 = " -DENABLE_JIT=OFF "
-+
-+# And for armv7* don't enable it for softfp, because after:
-+# https://github.com/WebKit/WebKit/commit/a2ec4ef1997d6fafa6ffc607bffb54e76168a918
-+# https://bugs.webkit.org/show_bug.cgi?id=242172
-+# softfp armv7* fails because WEBASSEMBLY is left enabled by default and JIT gets
-+# explicitly disabled causing:
-+# http://errors.yoctoproject.org/Errors/Details/734587/
-+# PR was sent upstream, but the end result is the same both JIT and WEBASSEMBLY disabled
-+# https://github.com/WebKit/WebKit/pull/17447
-+EXTRA_OECMAKE:append:armv7a = " -DENABLE_JIT=${@bb.utils.contains('TUNE_FEATURES', 'callconvention-hard', 'ON', 'OFF', d)}"
-+EXTRA_OECMAKE:append:armv7r = " -DENABLE_JIT=${@bb.utils.contains('TUNE_FEATURES', 'callconvention-hard', 'ON', 'OFF', d)}"
-+EXTRA_OECMAKE:append:armv7ve = " -DENABLE_JIT=${@bb.utils.contains('TUNE_FEATURES', 'callconvention-hard', 'ON', 'OFF', d)}"
+ S = "${WORKDIR}/git"
+-SRCREV = "7ee024ed79f68875e5dea3616be24a703cf72cc5"
++SRCREV = "08d3dfbde51d4cb0a3bb8e58a81aa61064857d89"
  
- EXTRA_OECMAKE:append:mipsarch = " -DUSE_LD_GOLD=OFF "
- EXTRA_OECMAKE:append:powerpc = " -DUSE_LD_GOLD=OFF "
+ FILES:${PN} = "${datadir}/themes"
 -- 
-2.42.0
+2.34.1
 
 
