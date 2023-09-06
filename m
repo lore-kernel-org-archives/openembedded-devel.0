@@ -1,228 +1,108 @@
-Return-Path: <peron.clem@gmail.com>
+Return-Path: <soumya.sambu@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id ABC1BEB8FA5
-	for <webhook@archiver.kernel.org>; Wed,  6 Sep 2023 08:46:50 +0000 (UTC)
-Received: from mail-lj1-f178.google.com (mail-lj1-f178.google.com [209.85.208.178])
- by mx.groups.io with SMTP id smtpd.web10.4170.1693990004261255003
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EE665EB8FAD
+	for <webhook@archiver.kernel.org>; Wed,  6 Sep 2023 09:12:40 +0000 (UTC)
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.web11.4336.1693991558267064236
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 06 Sep 2023 01:46:44 -0700
+ Wed, 06 Sep 2023 02:12:38 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20221208 header.b=j7q992/h;
- spf=pass (domain: gmail.com, ip: 209.85.208.178, mailfrom: peron.clem@gmail.com)
-Received: by mail-lj1-f178.google.com with SMTP id 38308e7fff4ca-2ba1e9b1fa9so55907781fa.3
-        for <openembedded-devel@lists.openembedded.org>; Wed, 06 Sep 2023 01:46:43 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1693990002; x=1694594802; darn=lists.openembedded.org;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=CBBoQcOtcK7cr8NM36KFwp9iZ11AQhXLW7PizarItuE=;
-        b=j7q992/h4grgjobXiwK+5REqNV+XhnD0TBkm+yUB/jeXyJdFoerdwqVQmT+AsyH52C
-         ACwbhni1bL0Xkel9ps99EI1KPkKwcGHZie+pf8hd/Q/Bqg8c+hluoOL4x0eEUoBW+r0I
-         y1bby+53iM/B8/F7ZQtKxX3QdwIu3Jdpbx5I9kPbEeAHRVUqZeODUC3oRqnOHjDMtXI3
-         MJD9AkeZZ0ZXEGc/5b4Jb2w9OVEPwWvXFL9vJtz10KEIr5IWKKxidKUAzW4PDQm9KIcG
-         RE+ic5ca883yT2EK3zXr7uhPOiFnOwMZhfMf2LDyJYRK8Q2T/kkzUch9UfDCb3pP1s1J
-         fOig==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1693990002; x=1694594802;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=CBBoQcOtcK7cr8NM36KFwp9iZ11AQhXLW7PizarItuE=;
-        b=C3CgM1S1BGAhMH8z/VAQuqQYBggoYmXx/H91UayMB5Rc7PJvznyKNW2bV1P2TiE0ox
-         7CqotNt6plrefRURy46qCK7kZMj6r6Nr76moARIMSwawA52ZxPPeRqT7zaZMRCOxuwmG
-         1B1+mVFQCMm2irT/qIAC36ArGzb+Ork/0QISFGISUz5zo0qgxY9bt26S8+njKFxtuKzt
-         t4vLKrzPxYGM3CfHCX8f1BhSaoXpm1WlxiSEh7wbbOzvyaOzw28e769xnKjJQfbC2jCR
-         lsaKIv/wwZn1rMgZPpwFZVlF4JN8e9DCsoVxAPCxoB1OB2Jf7QzmOHSwKe9dMvuCecdc
-         IX6A==
-X-Gm-Message-State: AOJu0YyAi7h7+ADK76XpnenjKpkYLU2zhL19YPJKenerCIr4W3G1P0tV
-	u2um21v24OrfU6jHsncD+WLUjq4PhExhMvLGFlcn+IMUDnU=
-X-Google-Smtp-Source: AGHT+IF6T64FoPATWJDMBQTvJeLJpXNbCCmY6Y3oaQGaztn0Oylk7V+ZaGtTSfC7YRMj8LHMrMPbj9Gy0ui1Q231Ehk=
-X-Received: by 2002:a2e:860b:0:b0:2bc:f756:341 with SMTP id
- a11-20020a2e860b000000b002bcf7560341mr1593059lji.35.1693990001914; Wed, 06
- Sep 2023 01:46:41 -0700 (PDT)
+ dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=ZAxd+2ia;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=76132f5a4a=soumya.sambu@windriver.com)
+Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.17.1.22/8.17.1.22) with ESMTP id 386601r9018596
+	for <openembedded-devel@lists.openembedded.org>; Wed, 6 Sep 2023 09:12:37 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
+	 h=from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding:content-type; s=PPS06212021; bh=VEGd1
+	sHSM42fw7ZT/zz8J1cr2U7dxTtsj4d2qj8k4ko=; b=ZAxd+2ia1KU34zCY3CsXc
+	bLBzZNsrHL9zT5xFQsEj4z0b7Kt9jif7dtWGZxm0VmRoShMoj3AGJscHQUIJcteh
+	+CPIju3d9HyV6Y5k8FvukkP+DdEMp45o1lqD+v4W8Dx0DYOh6TI5Dbc+e0bAUliP
+	WzxjwvBZjeU/ljN4sTNTz0ZrrpZ+vD+S6iAh6jOwrywt5WxG6SdbjynBZxuY8A8i
+	iAvaQ9nZQ4/h3AEnAx6+MzHCj8nI79zoJ6Ay3pngPNDNu0FiJkpH+O+2SggxF7PK
+	wM5ZfUmKmLUEzy5JVUNomdqbe21jJqjDpFRSvgdCTAJ5VBII4Z+EcuqS7PPn4wlQ
+	w==
+Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3suv15ucke-2
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Wed, 06 Sep 2023 09:12:37 +0000 (GMT)
+Received: from blr-linux-engg1.wrs.com (147.11.136.210) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.27; Wed, 6 Sep 2023 02:12:33 -0700
+From: ssambu <soumya.sambu@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [oe][meta-oe][kirkstone][PATCH 1/1] iperf3: upgrade 3.11 -> 3.14
+Date: Wed, 6 Sep 2023 09:12:16 +0000
+Message-ID: <20230906091216.816242-1-soumya.sambu@windriver.com>
+X-Mailer: git-send-email 2.40.0
 MIME-Version: 1.0
-References: <1693965700-14701-1-git-send-email-wangmy@fujitsu.com>
-In-Reply-To: <1693965700-14701-1-git-send-email-wangmy@fujitsu.com>
-From: =?UTF-8?B?Q2zDqW1lbnQgUMOpcm9u?= <peron.clem@gmail.com>
-Date: Wed, 6 Sep 2023 10:46:29 +0200
-Message-ID: <CAJiuCcdg_U8PdQFFL-+y4b5Dy6HjTUs8ON13gSN7Xs3pewrfkQ@mail.gmail.com>
-Subject: Re: [oe] [meta-python] [PATCH] python3-protobuf: upgrade 4.24.1 -> 4.24.2
-To: wangmy <wangmy@fujitsu.com>
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: multipart/alternative; boundary="000000000000513be80604acc8cd"
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [147.11.136.210]
+X-ClientProxiedBy: ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) To
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252)
+X-Proofpoint-ORIG-GUID: DE9SqGA_ZPmzD9qLlhyOLiBp8OOOd1qU
+X-Proofpoint-GUID: DE9SqGA_ZPmzD9qLlhyOLiBp8OOOd1qU
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.267,Aquarius:18.0.957,Hydra:6.0.601,FMLib:17.11.176.26
+ definitions=2023-09-06_03,2023-09-05_01,2023-05-22_02
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 spamscore=0
+ priorityscore=1501 lowpriorityscore=0 mlxlogscore=953 bulkscore=0
+ suspectscore=0 malwarescore=0 adultscore=0 mlxscore=0 impostorscore=0
+ phishscore=0 clxscore=1015 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.19.0-2308100000 definitions=main-2309060077
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 06 Sep 2023 08:46:50 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104771
+ <openembedded-devel@lists.openembedded.org>; Wed, 06 Sep 2023 09:12:40 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104772
 
---000000000000513be80604acc8cd
-Content-Type: text/plain; charset="UTF-8"
+From: Soumya Sambu <soumya.sambu@windriver.com>
 
-Hi,
+Upgrade iperf3 to 3.14
 
-On Wed, 6 Sept 2023 at 04:02, wangmy <wangmy@fujitsu.com> wrote:
+Fix CVE-2023-38403 and other bugs.
 
-> From: Wang Mingyu <wangmy@fujitsu.com>
->
-> Changelog:
->  Fixes for 32-bit MSVC.
->
-> Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
-> ---
->  .../{python3-protobuf_4.24.1.bb => python3-protobuf_4.24.2.bb}  | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->  rename meta-python/recipes-devtools/python/{python3-protobuf_4.24.1.bb
-> => python3-protobuf_4.24.2.bb} (92%)
->
+The iperf3 release notes are available at:
+https://github.com/esnet/iperf/blob/99d738f496c96fd4fb50f45142e0bbc96bf71698/RELNOTES.md
 
-Does it make sense to continue bumping the python3 protobuf package without
-bumping protobuf itself?
+The only change in the LICENSE file was the year update:
+https://github.com/esnet/iperf/commit/6bfe27d82a3f74ad1239aba987a4fb75c1005078
 
-The protobuf is stuck at 3.21.12.
+Signed-off-by: Soumya Sambu <soumya.sambu@windriver.com>
+---
+ .../iperf3/{iperf3_3.11.bb => iperf3_3.14.bb}                 | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-benchmark/iperf3/{iperf3_3.11.bb => iperf3_3.14.bb} (89%)
 
-Regards,
-Clement
+diff --git a/meta-oe/recipes-benchmark/iperf3/iperf3_3.11.bb b/meta-oe/recipes-benchmark/iperf3/iperf3_3.14.bb
+similarity index 89%
+rename from meta-oe/recipes-benchmark/iperf3/iperf3_3.11.bb
+rename to meta-oe/recipes-benchmark/iperf3/iperf3_3.14.bb
+index 2142a8ef1..d181eb3b0 100644
+--- a/meta-oe/recipes-benchmark/iperf3/iperf3_3.11.bb
++++ b/meta-oe/recipes-benchmark/iperf3/iperf3_3.14.bb
+@@ -11,14 +11,14 @@ BUGTRACKER = "https://github.com/esnet/iperf/issues"
+ AUTHOR = "ESNET <info@es.net>, Lawrence Berkeley National Laboratory <websupport@lbl.gov>"
+ 
+ LICENSE = "BSD-3-Clause"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=68ae8cfc577a2c8c51bb51e9628e80b7"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=dc6301c8256ceb8f71c9e3c2ae9096b9"
+ 
+ SRC_URI = "git://github.com/esnet/iperf.git;branch=master;protocol=https \
+            file://0002-Remove-pg-from-profile_CFLAGS.patch \
+            file://0001-configure.ac-check-for-CPP-prog.patch \
+            "
+ 
+-SRCREV = "76bd67f6e90e239a7686202d2b1b595159826d24"
++SRCREV = "a0be85934144bc04712a6695b14ea6e45c379e1d"
+ 
+ S = "${WORKDIR}/git"
+ 
+-- 
+2.40.0
 
-
-
->
-> diff --git a/meta-python/recipes-devtools/python/
-> python3-protobuf_4.24.1.bb b/meta-python/recipes-devtools/python/
-> python3-protobuf_4.24.2.bb
-> similarity index 92%
-> rename from meta-python/recipes-devtools/python/python3-protobuf_4.24.1.bb
-> rename to meta-python/recipes-devtools/python/python3-protobuf_4.24.2.bb
-> index 6322ec1f30..3014884a33 100644
-> --- a/meta-python/recipes-devtools/python/python3-protobuf_4.24.1.bb
-> +++ b/meta-python/recipes-devtools/python/python3-protobuf_4.24.2.bb
-> @@ -7,7 +7,7 @@ LIC_FILES_CHKSUM =
-> "file://PKG-INFO;beginline=8;endline=8;md5=53dbfa56f61b90215a
->
->  inherit pypi setuptools3
->  SRC_URI +=
-> "file://0001-message.c-Cast-uintptr_t-types-to-upb_MessageDef.patch"
-> -SRC_URI[sha256sum] =
-> "44837a5ed9c9418ad5d502f89f28ba102e9cd172b6668bc813f21716f9273348"
-> +SRC_URI[sha256sum] =
-> "7fda70797ddec31ddfa3576cbdcc3ddbb6b3078b737a1a87ab9136af0570cd6e"
->
->  # http://errors.yoctoproject.org/Errors/Details/184715/
->  # Can't find required file: ../src/google/protobuf/descriptor.proto
-> --
-> 2.34.1
->
->
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#104754):
-> https://lists.openembedded.org/g/openembedded-devel/message/104754
-> Mute This Topic: https://lists.openembedded.org/mt/101185171/4240582
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
-> peron.clem@gmail.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
->
->
-
---000000000000513be80604acc8cd
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div dir=3D"ltr"><div class=3D"gmail_default" style=3D"fon=
-t-family:monospace">Hi,</div></div><br><div class=3D"gmail_quote"><div dir=
-=3D"ltr" class=3D"gmail_attr">On Wed, 6 Sept 2023 at 04:02, wangmy &lt;<a h=
-ref=3D"mailto:wangmy@fujitsu.com">wangmy@fujitsu.com</a>&gt; wrote:<br></di=
-v><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;borde=
-r-left:1px solid rgb(204,204,204);padding-left:1ex">From: Wang Mingyu &lt;<=
-a href=3D"mailto:wangmy@fujitsu.com" target=3D"_blank">wangmy@fujitsu.com</=
-a>&gt;<br>
-<br>
-Changelog:<br>
-=C2=A0Fixes for 32-bit MSVC. <br>
-<br>
-Signed-off-by: Wang Mingyu &lt;<a href=3D"mailto:wangmy@fujitsu.com" target=
-=3D"_blank">wangmy@fujitsu.com</a>&gt;<br>
----<br>
-=C2=A0.../{<a href=3D"http://python3-protobuf_4.24.1.bb" rel=3D"noreferrer"=
- target=3D"_blank">python3-protobuf_4.24.1.bb</a> =3D&gt; <a href=3D"http:/=
-/python3-protobuf_4.24.2.bb" rel=3D"noreferrer" target=3D"_blank">python3-p=
-rotobuf_4.24.2.bb</a>}=C2=A0 | 2 +-<br>
-=C2=A01 file changed, 1 insertion(+), 1 deletion(-)<br>
-=C2=A0rename meta-python/recipes-devtools/python/{<a href=3D"http://python3=
--protobuf_4.24.1.bb" rel=3D"noreferrer" target=3D"_blank">python3-protobuf_=
-4.24.1.bb</a> =3D&gt; <a href=3D"http://python3-protobuf_4.24.2.bb" rel=3D"=
-noreferrer" target=3D"_blank">python3-protobuf_4.24.2.bb</a>} (92%)<br></bl=
-ockquote><div><br></div><div><div class=3D"gmail_default" style=3D"font-fam=
-ily:monospace">Does it make sense to continue bumping the python3 protobuf =
-package without bumping protobuf itself?</div><div class=3D"gmail_default" =
-style=3D"font-family:monospace"><br></div><div class=3D"gmail_default" styl=
-e=3D"font-family:monospace">The protobuf is stuck at 3.21.12.</div><div cla=
-ss=3D"gmail_default" style=3D"font-family:monospace"><br></div><div class=
-=3D"gmail_default" style=3D"font-family:monospace">Regards,</div><div class=
-=3D"gmail_default" style=3D"font-family:monospace">Clement</div><br></div><=
-div>=C2=A0</div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0=
-px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">
-<br>
-diff --git a/meta-python/recipes-devtools/python/<a href=3D"http://python3-=
-protobuf_4.24.1.bb" rel=3D"noreferrer" target=3D"_blank">python3-protobuf_4=
-.24.1.bb</a> b/meta-python/recipes-devtools/python/<a href=3D"http://python=
-3-protobuf_4.24.2.bb" rel=3D"noreferrer" target=3D"_blank">python3-protobuf=
-_4.24.2.bb</a><br>
-similarity index 92%<br>
-rename from meta-python/recipes-devtools/python/<a href=3D"http://python3-p=
-rotobuf_4.24.1.bb" rel=3D"noreferrer" target=3D"_blank">python3-protobuf_4.=
-24.1.bb</a><br>
-rename to meta-python/recipes-devtools/python/<a href=3D"http://python3-pro=
-tobuf_4.24.2.bb" rel=3D"noreferrer" target=3D"_blank">python3-protobuf_4.24=
-.2.bb</a><br>
-index 6322ec1f30..3014884a33 100644<br>
---- a/meta-python/recipes-devtools/python/<a href=3D"http://python3-protobu=
-f_4.24.1.bb" rel=3D"noreferrer" target=3D"_blank">python3-protobuf_4.24.1.b=
-b</a><br>
-+++ b/meta-python/recipes-devtools/python/<a href=3D"http://python3-protobu=
-f_4.24.2.bb" rel=3D"noreferrer" target=3D"_blank">python3-protobuf_4.24.2.b=
-b</a><br>
-@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM =3D &quot;file://PKG-INFO;beginline=3D8;en=
-dline=3D8;md5=3D53dbfa56f61b90215a<br>
-<br>
-=C2=A0inherit pypi setuptools3<br>
-=C2=A0SRC_URI +=3D &quot;file://0001-message.c-Cast-uintptr_t-types-to-upb_=
-MessageDef.patch&quot;<br>
--SRC_URI[sha256sum] =3D &quot;44837a5ed9c9418ad5d502f89f28ba102e9cd172b6668=
-bc813f21716f9273348&quot;<br>
-+SRC_URI[sha256sum] =3D &quot;7fda70797ddec31ddfa3576cbdcc3ddbb6b3078b737a1=
-a87ab9136af0570cd6e&quot;<br>
-<br>
-=C2=A0# <a href=3D"http://errors.yoctoproject.org/Errors/Details/184715/" r=
-el=3D"noreferrer" target=3D"_blank">http://errors.yoctoproject.org/Errors/D=
-etails/184715/</a><br>
-=C2=A0# Can&#39;t find required file: ../src/google/protobuf/descriptor.pro=
-to<br>
--- <br>
-2.34.1<br>
-<br>
-<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-Links: You receive all messages sent to this group.<br>
-View/Reply Online (#104754): <a href=3D"https://lists.openembedded.org/g/op=
-enembedded-devel/message/104754" rel=3D"noreferrer" target=3D"_blank">https=
-://lists.openembedded.org/g/openembedded-devel/message/104754</a><br>
-Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/101185171/424=
-0582" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/m=
-t/101185171/4240582</a><br>
-Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
-d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
-><br>
-Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
-/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
-/g/openembedded-devel/unsub</a> [<a href=3D"mailto:peron.clem@gmail.com" ta=
-rget=3D"_blank">peron.clem@gmail.com</a>]<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-<br>
-</blockquote></div></div>
-
---000000000000513be80604acc8cd--
 
