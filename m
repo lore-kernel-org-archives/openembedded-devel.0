@@ -2,120 +2,99 @@ Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 949BFEB8FAF
-	for <webhook@archiver.kernel.org>; Wed,  6 Sep 2023 10:58:01 +0000 (UTC)
-Received: from mail-yw1-f170.google.com (mail-yw1-f170.google.com [209.85.128.170])
- by mx.groups.io with SMTP id smtpd.web10.5798.1693997876977409446
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 17434EB8FB6
+	for <webhook@archiver.kernel.org>; Wed,  6 Sep 2023 12:02:22 +0000 (UTC)
+Received: from mail-yw1-f176.google.com (mail-yw1-f176.google.com [209.85.128.176])
+ by mx.groups.io with SMTP id smtpd.web10.6766.1694001738075324208
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 06 Sep 2023 03:57:57 -0700
+ Wed, 06 Sep 2023 05:02:18 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20221208 header.b=J4rqQsbW;
- spf=pass (domain: gmail.com, ip: 209.85.128.170, mailfrom: akuster808@gmail.com)
-Received: by mail-yw1-f170.google.com with SMTP id 00721157ae682-58fc4eaa04fso35984477b3.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 06 Sep 2023 03:57:56 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20221208 header.b=i9W2+l+S;
+ spf=pass (domain: gmail.com, ip: 209.85.128.176, mailfrom: akuster808@gmail.com)
+Received: by mail-yw1-f176.google.com with SMTP id 00721157ae682-59254e181a2so34009067b3.1
+        for <openembedded-devel@lists.openembedded.org>; Wed, 06 Sep 2023 05:02:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1693997876; x=1694602676; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+        d=gmail.com; s=20221208; t=1694001737; x=1694606537; darn=lists.openembedded.org;
+        h=content-transfer-encoding:subject:from:to:content-language
+         :user-agent:mime-version:date:message-id:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=I3ImTviAmuvTkiaA+AI9TBd2pA4t5Yv7PucFc7iqqng=;
-        b=J4rqQsbWKyBOwWQqydh8QalESEVBKXz7jAWhelXsPZMmG7v3KdauC1n1JEn6smZmY+
-         kSI6RjovQVMHrDGD1Av48Is3eq71vXbFELmVREnbIsZzu7AEeL4tQBMasnsFOg8WIQhX
-         r/oJ19qwELSVHO6xsqDG/kjsHb4EcXpvMwX17KF6UhYvB3pudiVLCB8BOEW6esc8W1W6
-         w0UVJE8ik25m71NW8x8dPNAUnIhybfBqSHL09+qPtVE7RMRPA1BdIsKSHwxl84zgXGCd
-         gjykc5e6d7XMvxuYnnd8Ycq4abNIuN8nsFvhgIQEOvlLP8TVu55kWAu9X0YjpxFyjHMm
-         xjPQ==
+        bh=e9faSPiB6BxH2cAla2BKtbQk9ZXGk2wO2rOiFWKYEQw=;
+        b=i9W2+l+Sdz/RQBI85RtAySdAuo/lvKKvFXZAkmLo0xOtzXgj9HnIJsQ9B1DC2CdHAH
+         GaNP5kpJDbDV0+swQIJmKvRKxQDhEvJhPSMdlwhUQ2eZsTUIdvWJFFTGKatWYJRoqoWH
+         dt0S+1/7ZOkgBq3eZegBcKD0M1VYh6YUmbg2I2HDAVWFhN3jISe3vVcOrF5cZfJDkx7p
+         GKMQlgtmXwCFA3N0PuswI+ADYW2q2dhgajOeM5vUh/1NfKMvs1AlkkctCnag6gTPrQcm
+         6K5NzvZWh/M+xATK++S6lqkWK821fDuf8FzNBzCFgbc9kCbxTE8QxP2DN5mtWmGVf8aZ
+         HD5w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1693997876; x=1694602676;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=I3ImTviAmuvTkiaA+AI9TBd2pA4t5Yv7PucFc7iqqng=;
-        b=RT+jyM4HXXZzc8aWut6KQ1V1ffetulZ6xXSSLiwW6lycHzVXKfqrINzZGIOXGXkz+C
-         ax5/xuR5ivHREulPFIGkd8mhqlSia/8Ci0CeEKNoGvsc+FJLft1O86O1sogPICESmfuq
-         eyJ04GcEmV6yTvsmteV3lFuttFxUs1sIJC8O4IwXdkLRe/wrXOsobF8EcliBoJT1Wpka
-         NlroLOVws6JK2tavIGFfgGr5wdNRwm4F5PWljfhmD3/BVVXEkbyRqQfm41olEiMI9sax
-         jbg7yy8sBywjPaOfttMSJdcXK7Oub1oqNJ2uIrREn15cW1lA4YBH92dit9PMBGBzDTiR
-         ajKQ==
-X-Gm-Message-State: AOJu0YzafJLcYXdJp+1cyWSYiP/qPi122BL59NusVBQxtLnCLN7bhMn5
-	6Wk8qaqpw3NBBaBLI1MRjwJlMG+nkqc=
-X-Google-Smtp-Source: AGHT+IEebZVRb6oEWAJ60FQU9HMyh/sxb1JV6dMds/Al0CPRiz5HtvFVfPycQ//CGfrqaGAIKSt5Ag==
-X-Received: by 2002:a0d:d7cb:0:b0:583:51de:e219 with SMTP id z194-20020a0dd7cb000000b0058351dee219mr14353356ywd.17.1693997875977;
-        Wed, 06 Sep 2023 03:57:55 -0700 (PDT)
-Received: from keaua.caveonetworks.com ([2600:1700:9190:ba10:5654:1c56:e678:3eb1])
-        by smtp.gmail.com with ESMTPSA id dg4-20020a05690c0fc400b0059590440338sm2425687ywb.43.2023.09.06.03.57.55
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 06 Sep 2023 03:57:55 -0700 (PDT)
-From: Armin Kuster <akuster808@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Wang Mingyu <wangmy@fujitsu.com>,
-	Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][kirkstone][PATCH 2/3] tcpdump: upgrade 4.99.2 -> 4.99.3
-Date: Wed,  6 Sep 2023 06:57:53 -0400
-Message-Id: <20230906105754.847690-2-akuster808@gmail.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20230906105754.847690-1-akuster808@gmail.com>
-References: <20230906105754.847690-1-akuster808@gmail.com>
+        d=1e100.net; s=20221208; t=1694001737; x=1694606537;
+        h=content-transfer-encoding:subject:from:to:content-language
+         :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=e9faSPiB6BxH2cAla2BKtbQk9ZXGk2wO2rOiFWKYEQw=;
+        b=QcTDxsQbe8M0J3Ebz3qSRbh1BqNeZEmy66mNul5O9bC2PtzVv7QqtmrrJkhkr4oinI
+         pSJ3Ygw1LmndEfEvwEZuLhzT0a2Pab+oLxDm7MPsrVZ/GUs+yQiUxU2+OzP5jFBc4zpG
+         IXso+Sd6DZ8258mv4NgxnorZ84hYBuyOTtzmNbzGMW+WianrXcEoLFQTYYeDSU+WzZNh
+         QtGavyneNbiUm7zIZCvW71QpNXDDXMFI/54rVyk/A+x3l89bLHI2xnB1NvOEQkF9eE9q
+         NNxedsQcQVbCHlU2qM1wc2l73C0WQ2r0sPj41l6LTcEE3UtRKNIpvWiW9yxA+My7JBfd
+         KhZA==
+X-Gm-Message-State: AOJu0YydSmcbcvvXgP3fUf8LN0+kRQNKiBH6eur+2rj0OXptZXaoZl18
+	3A9/Ld+y4QdSX6LWXTH4nuk=
+X-Google-Smtp-Source: AGHT+IHxaaY3JJRMG5RTPFjPcoy61CMu5V6RWL4gfrmtobG5g63LuqPPsFpTZfnBMV7Ejd6iqw0CXA==
+X-Received: by 2002:a81:b10a:0:b0:59a:d94d:566d with SMTP id p10-20020a81b10a000000b0059ad94d566dmr8971707ywh.21.1694001737192;
+        Wed, 06 Sep 2023 05:02:17 -0700 (PDT)
+Received: from ?IPV6:2600:1700:9190:ba10:5654:1c56:e678:3eb1? ([2600:1700:9190:ba10:5654:1c56:e678:3eb1])
+        by smtp.gmail.com with ESMTPSA id eh10-20020a05690c298a00b0059adc0c4392sm1689925ywb.140.2023.09.06.05.02.16
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Wed, 06 Sep 2023 05:02:16 -0700 (PDT)
+Message-ID: <0e376e4a-d827-ce01-7bab-d6dcda74ac3a@gmail.com>
+Date: Wed, 6 Sep 2023 08:02:16 -0400
 MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.13.0
+Content-Language: en-US
+To: Khem Raj <raj.khem@gmail.com>,
+ OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+From: akuster808 <akuster808@gmail.com>
+Subject: mickledore merge request: Sept 6th
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 06 Sep 2023 10:58:01 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104776
+ <openembedded-devel@lists.openembedded.org>; Wed, 06 Sep 2023 12:02:22 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104778
 
-From: Wang Mingyu <wangmy@fujitsu.com>
+The following changes since commit 41fffef6b044b2722aa13f7e7648a3f848231851:
 
-Changelog:
-==========
- Updated printers:
-   PTP: Use the proper values for the control field and print un-allocated
-     values for the message field as "Reserved" instead of "none".
- Source code:
-   smbutil.c: Replace obsolete function call (asctime)
- Building and testing:
-   cmake: Update the minimum required version to 2.8.12 (except Windows).
-   CI: Introduce and use TCPDUMP_CMAKE_TAINTED.
-   Makefile.in: Add the releasecheck target.
-   Makefile.in: Add "make -s install" in the releasecheck target.
-   Cirrus CI: Run the "make releasecheck" command in the Linux task.
-   Makefile.in: Add the whitespacecheck target.
-   Cirrus CI: Run the "make whitespacecheck" command in the Linux task.
-   Address all shellcheck warnings in update-test.sh.
-   Makefile.in: Get rid of a remain of gnuc.h.
- Documentation:
-   Reformat the installation notes (INSTALL.txt) in Markdown.
-   Convert CONTRIBUTING to Markdown.
-   CONTRIBUTING.md: Document the use of "protocol: " in a commit summary.
-   Add a README file for NetBSD.
-   Fix CMake build to set man page section numbers in tcpdump.1
+   yasm: fix CVE-2023-37732 (2023-09-03 10:43:56 -0400)
 
-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit dab75037cc9c4a5674e08c3a55fff172fd6eba75)
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
----
- .../tcpdump/{tcpdump_4.99.2.bb => tcpdump_4.99.3.bb}            | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-networking/recipes-support/tcpdump/{tcpdump_4.99.2.bb => tcpdump_4.99.3.bb} (93%)
+are available in the Git repository at:
 
-diff --git a/meta-networking/recipes-support/tcpdump/tcpdump_4.99.2.bb b/meta-networking/recipes-support/tcpdump/tcpdump_4.99.3.bb
-similarity index 93%
-rename from meta-networking/recipes-support/tcpdump/tcpdump_4.99.2.bb
-rename to meta-networking/recipes-support/tcpdump/tcpdump_4.99.3.bb
-index 0a541acfea..03f1b76f97 100644
---- a/meta-networking/recipes-support/tcpdump/tcpdump_4.99.2.bb
-+++ b/meta-networking/recipes-support/tcpdump/tcpdump_4.99.3.bb
-@@ -26,7 +26,7 @@ SRC_URI = " \
-     file://run-ptest \
- "
- 
--SRC_URI[sha256sum] = "f4304357d34b79d46f4e17e654f1f91f9ce4e3d5608a1badbd53295a26fb44d5"
-+SRC_URI[sha256sum] = "ad75a6ed3dc0d9732945b2e5483cb41dc8b4b528a169315e499c6861952e73b3"
- 
- UPSTREAM_CHECK_REGEX = "tcpdump-(?P<pver>\d+(\.\d+)+)\.tar"
- 
--- 
-2.34.1
+   https://git.openembedded.org/meta-openembedded mickledore-next
+
+for you to fetch changes up to 57c516973978ca2667339bf1aae7dc722b5bcac7:
+
+   tcpdump: upgrade 4.99.3 -> 4.99.4 (2023-09-05 13:40:23 -0400)
+
+----------------------------------------------------------------
+Martin Jansa (1):
+       libiio: use main branch instead of master
+
+Soumya Sambu (1):
+       krb5: Fix CVE-2023-36054
+
+Wang Mingyu (1):
+       tcpdump: upgrade 4.99.3 -> 4.99.4
+
+  .../tcpdump/{tcpdump_4.99.3.bb => tcpdump_4.99.4.bb} |  2 +-
+  meta-oe/recipes-connectivity/krb5/krb5/CVE-2023-36054.patch     | 68 
++++++++++++++++++++++++++++++
+  meta-oe/recipes-connectivity/krb5/krb5_1.20.1.bb                | 1 +
+  meta-oe/recipes-support/libiio/libiio_git.bb                    | 2 +-
+  4 files changed, 71 insertions(+), 2 deletions(-)
+  rename meta-networking/recipes-support/tcpdump/{tcpdump_4.99.3.bb => 
+tcpdump_4.99.4.bb} (93%)
+  create mode 100644 
+meta-oe/recipes-connectivity/krb5/krb5/CVE-2023-36054.patch
 
 
