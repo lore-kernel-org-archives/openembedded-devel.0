@@ -2,122 +2,83 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8D04ECCFA07
-	for <webhook@archiver.kernel.org>; Wed,  6 Sep 2023 01:54:55 +0000 (UTC)
-Received: from esa2.hc1455-7.c3s2.iphmx.com (esa2.hc1455-7.c3s2.iphmx.com [207.54.90.48])
- by mx.groups.io with SMTP id smtpd.web10.2312.1693965289942901993
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 86CDBCCFA09
+	for <webhook@archiver.kernel.org>; Wed,  6 Sep 2023 01:55:15 +0000 (UTC)
+Received: from esa11.hc1455-7.c3s2.iphmx.com (esa11.hc1455-7.c3s2.iphmx.com [207.54.90.137])
+ by mx.groups.io with SMTP id smtpd.web11.2361.1693965311565363924
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 05 Sep 2023 18:54:50 -0700
+ Tue, 05 Sep 2023 18:55:11 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: fujitsu.com, ip: 207.54.90.48, mailfrom: wangmy@fujitsu.com)
-X-IronPort-AV: E=McAfee;i="6600,9927,10824"; a="130902228"
+ dkim=none (message not signed); spf=pass (domain: fujitsu.com, ip: 207.54.90.137, mailfrom: wangmy@fujitsu.com)
+X-IronPort-AV: E=McAfee;i="6600,9927,10824"; a="110266089"
 X-IronPort-AV: E=Sophos;i="6.02,230,1688396400"; 
-   d="scan'208";a="130902228"
-Received: from unknown (HELO yto-r2.gw.nic.fujitsu.com) ([218.44.52.218])
-  by esa2.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 06 Sep 2023 10:54:48 +0900
-Received: from yto-m1.gw.nic.fujitsu.com (yto-nat-yto-m1.gw.nic.fujitsu.com [192.168.83.64])
-	by yto-r2.gw.nic.fujitsu.com (Postfix) with ESMTP id 04470C68E2
-	for <openembedded-devel@lists.openembedded.org>; Wed,  6 Sep 2023 10:54:45 +0900 (JST)
-Received: from aks-ab2.gw.nic.fujitsu.com (aks-ab2.gw.nic.fujitsu.com [192.51.207.12])
-	by yto-m1.gw.nic.fujitsu.com (Postfix) with ESMTP id 4CC02CFBC8
-	for <openembedded-devel@lists.openembedded.org>; Wed,  6 Sep 2023 10:54:44 +0900 (JST)
+   d="scan'208";a="110266089"
+Received: from unknown (HELO yto-r4.gw.nic.fujitsu.com) ([218.44.52.220])
+  by esa11.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 06 Sep 2023 10:55:09 +0900
+Received: from yto-m3.gw.nic.fujitsu.com (yto-nat-yto-m3.gw.nic.fujitsu.com [192.168.83.66])
+	by yto-r4.gw.nic.fujitsu.com (Postfix) with ESMTP id 02BAED3EAF
+	for <openembedded-devel@lists.openembedded.org>; Wed,  6 Sep 2023 10:55:07 +0900 (JST)
+Received: from kws-ab3.gw.nic.fujitsu.com (kws-ab3.gw.nic.fujitsu.com [192.51.206.21])
+	by yto-m3.gw.nic.fujitsu.com (Postfix) with ESMTP id 4AEF0D21AD
+	for <openembedded-devel@lists.openembedded.org>; Wed,  6 Sep 2023 10:55:06 +0900 (JST)
 Received: from localhost.localdomain (unknown [10.167.225.33])
-	by aks-ab2.gw.nic.fujitsu.com (Postfix) with ESMTP id 7B3808653F;
-	Wed,  6 Sep 2023 10:54:43 +0900 (JST)
+	by kws-ab3.gw.nic.fujitsu.com (Postfix) with ESMTP id ADC9720050193;
+	Wed,  6 Sep 2023 10:55:05 +0900 (JST)
 From: wangmy@fujitsu.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-oe] [PATCH] libgphoto2: upgrade 2.5.30 -> 2.5.31
-Date: Wed,  6 Sep 2023 09:54:32 +0800
-Message-Id: <1693965272-14029-1-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-perl] [PATCH] libnet-dns-perl: upgrade 1.39 -> 1.40
+Date: Wed,  6 Sep 2023 09:54:57 +0800
+Message-Id: <1693965297-14065-1-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 X-TM-AS-GCONF: 00
-X-TM-AS-Product-Ver: IMSS-9.1.0.1408-9.0.0.1002-27858.004
+X-TM-AS-Product-Ver: IMSS-9.1.0.1417-9.0.0.1002-27858.003
 X-TM-AS-User-Approved-Sender: Yes
-X-TMASE-Version: IMSS-9.1.0.1408-9.0.1002-27858.004
-X-TMASE-Result: 10-1.662400-10.000000
-X-TMASE-MatchedRID: +ZFRJsd3dVej375FgQ+73n1zro62qhdCpxAd6mi1Ga2nw6VQ+/MY/SFy
-	PmxUh2nDat9+/v4VESUu+F+B9CDczs4Cn0fUiJuCCtzGvPCy/m5NltUb/0XhASt+gViu+UDkOcY
-	/jkDGKiILy4U5+Bt2OaZjq58Vyh0JLygTU2ChvqW1ely0q8aUoayjyePKj1olty9mj1urE9K/iI
-	ZoI+jcVqDaQPNKX0/KjXqykC2KceAS5iXdhf8hbj9B1SHosSXQN5dqZcIK7Vgg9R3V8qg5xL8FH
-	rw7frluIhU1mamEFmvLxMb03vub9PKZUMHzJkSUngIgpj8eDcAZ1CdBJOsoY8RB0bsfrpPIcSqb
-	xBgG0w4shm9fo87dU/k4HE25531oqhPvlicD/9U57INwuxOtezW2PjbVBwmo+5ftHJHrNMh9jpI
-	VWxf3v48epbndaIgBk+JEMWdtyYaCvqWrFsheUcLe0zBjeZrbFQOP52BRBXJMTsKj18q/fA==
+X-TMASE-Version: IMSS-9.1.0.1417-9.0.1002-27858.003
+X-TMASE-Result: 10--0.001600-10.000000
+X-TMASE-MatchedRID: n7p0zKhDeQSjz0nOeth/yUIIxwDaU5mrF4r8H5YrEqxM+b8yxBqvA63V
+	nhPwJLcsIX+UmmSwEkcNyr61Mu6ROm0Xr+fj3ww/8t4fUUGeErTBOVz0JwcxlwV9fM+V9jt77Fo
+	gUQ0vV9jGMmVk8JGuBtKJ0pgfCEbo7DLY2FGw/JvdCok3ibXlQX0tCKdnhB58I/9UW5M5dRMQpr
+	Z/7WnuveTCMddcL/gjxlblqLlYqXIqHdZqf/yQzVEeN8VUTgzWji+6bAuTwWW0+fq37no89ynYx
+	HSRmvanC4AYR10xO6KnQ2sbyBE23ew33A+Xg4StN/OvYb2oUab+v9v52ZIoWjoAf389xF3XFSk9
+	HhUZnw7OGIWnws4LoyHWPYzouJUy
 X-TMASE-SNAP-Result: 1.821001.0001-0-1-22:0,33:0,34:0-0
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 06 Sep 2023 01:54:55 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104737
+ <openembedded-devel@lists.openembedded.org>; Wed, 06 Sep 2023 01:55:15 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104738
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
 Changelog:
-===========
-pentax:
-* added Pentax KP id
-
-ptp2:
-* do better event queueing during capture (makes capture faster, avoids losing events)
-* Canon EOS: OLC logic rewritten to be table driven, more debugging of the content,
-  config "testolc" to generate debugoutput. Supports more cameras better.
-* Canon EOS: various bugfixes
-* Sony Alpha: Added config options: focusarea, liveviewsettingeffect
-* Olympus: Enabled OM-1 capture
-* Battery Level: also support ENUM style battery reporting for Canon
-* Nikon 1: S1 also does not support everything
-* Sony Alpha: small changes in config setters
-* merged some improvements from NorthOfYou fork for Canon EOS, Nikon and Sony
-* New ids:
-  - Canon EOS 850D, R7, R10, R5 C, R6m2
-  - Fuji X-H2, X-T5
-  - GOPRO HERO 11 BLACK, 11 BLACK mini
-  - new ids also imported from libmtp
-  - Nikon Z30, Z8
-  - OMSYSTEM OM-1
-  - Pentax KP (PTP mode)
-  - Ricoh GR IIIx
-  - Sigma fp L
-  - Sony A7S III, ILCE-1, ILME-FX3, 7RM5 aka A7-RV,
-
-digigr8:
-* fixed init to not switch to webcam mode
-
-pentax:
-* Added Pentax KP
-
-general:
-* disable log formatting when we are not logging (speeds up large downloads, as
-  we are not hex dumping the whole data and immediately discard the result)
-* libltdl usage now thread-safe. (some other library pieces are not threadsafe yet)
-* some time_t 32bit vs 64bit fixes
-* some cleanups and warning fixes
-
-translations:
-* updated swedish, spanish
-* added georgian, friulian
+============
+  Add support for SVCB dohpath and ohttp parameters.
+  More robust test of bgbusy() SpamAssassin workaround.
+  Fix rt.cpan.org #149456
+  Fix rt.cpan.org #149280
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../gphoto2/{libgphoto2_2.5.30.bb => libgphoto2_2.5.31.bb}      | 2 +-
+ .../libnet/{libnet-dns-perl_1.39.bb => libnet-dns-perl_1.40.bb} | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-graphics/gphoto2/{libgphoto2_2.5.30.bb => libgphoto2_2.5.31.bb} (95%)
+ rename meta-perl/recipes-perl/libnet/{libnet-dns-perl_1.39.bb => libnet-dns-perl_1.40.bb} (95%)
 
-diff --git a/meta-oe/recipes-graphics/gphoto2/libgphoto2_2.5.30.bb b/meta-oe/recipes-graphics/gphoto2/libgphoto2_2.5.31.bb
+diff --git a/meta-perl/recipes-perl/libnet/libnet-dns-perl_1.39.bb b/meta-perl/recipes-perl/libnet/libnet-dns-perl_1.40.bb
 similarity index 95%
-rename from meta-oe/recipes-graphics/gphoto2/libgphoto2_2.5.30.bb
-rename to meta-oe/recipes-graphics/gphoto2/libgphoto2_2.5.31.bb
-index b1fb7579ee..cc42b6a9c6 100644
---- a/meta-oe/recipes-graphics/gphoto2/libgphoto2_2.5.30.bb
-+++ b/meta-oe/recipes-graphics/gphoto2/libgphoto2_2.5.31.bb
-@@ -14,7 +14,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/gphoto/libgphoto2-${PV}.tar.bz2;name=libgphoto2
-            file://0001-configure.ac-remove-AM_PO_SUBDIRS.patch \
-            file://0001-configure-Filter-out-buildpaths-from-CC.patch \
- "
--SRC_URI[libgphoto2.sha256sum] = "ee61a1dac6ad5cf711d114e06b90a6d431961a6e7ec59f4b757a7cd77b1c0fb4"
-+SRC_URI[libgphoto2.sha256sum] = "4f81c34c0b812bee67afd5f144940fbcbe01a2055586a6a1fa2d0626024a545b"
+rename from meta-perl/recipes-perl/libnet/libnet-dns-perl_1.39.bb
+rename to meta-perl/recipes-perl/libnet/libnet-dns-perl_1.40.bb
+index 7e57be35cc..65616136c3 100644
+--- a/meta-perl/recipes-perl/libnet/libnet-dns-perl_1.39.bb
++++ b/meta-perl/recipes-perl/libnet/libnet-dns-perl_1.40.bb
+@@ -9,7 +9,7 @@ DEPENDS += "perl"
  
- inherit autotools pkgconfig gettext lib_package
+ SRC_URI = "http://search.cpan.org/CPAN/authors/id/N/NL/NLNETLABS/Net-DNS-${PV}.tar.gz"
+ 
+-SRC_URI[sha256sum] = "e99cdedf9f0d60dca16f613e488c5b7f123c2fb24b3346d580cfe7da40851ac6"
++SRC_URI[sha256sum] = "209bbd40de8d48c1bd7aade48da237fe0a499f89d279baa2e1a99bd5ec922ddc"
+ 
+ UPSTREAM_CHECK_REGEX = "Net\-DNS\-(?P<pver>(\d+\.\d+))(?!_\d+).tar"
  
 -- 
 2.34.1
