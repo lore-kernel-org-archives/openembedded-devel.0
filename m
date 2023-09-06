@@ -2,64 +2,67 @@ Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A8A10EB8FAF
-	for <webhook@archiver.kernel.org>; Wed,  6 Sep 2023 10:56:31 +0000 (UTC)
-Received: from mail-yb1-f171.google.com (mail-yb1-f171.google.com [209.85.219.171])
- by mx.groups.io with SMTP id smtpd.web10.5766.1693997786314196240
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9052FEB8FB7
+	for <webhook@archiver.kernel.org>; Wed,  6 Sep 2023 10:58:01 +0000 (UTC)
+Received: from mail-yw1-f171.google.com (mail-yw1-f171.google.com [209.85.128.171])
+ by mx.groups.io with SMTP id smtpd.web11.5653.1693997877820557967
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 06 Sep 2023 03:56:26 -0700
+ Wed, 06 Sep 2023 03:57:57 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20221208 header.b=DBLtpc38;
- spf=pass (domain: gmail.com, ip: 209.85.219.171, mailfrom: akuster808@gmail.com)
-Received: by mail-yb1-f171.google.com with SMTP id 3f1490d57ef6-d7eccc1b8c6so3099817276.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 06 Sep 2023 03:56:26 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20221208 header.b=fTAIyywR;
+ spf=pass (domain: gmail.com, ip: 209.85.128.171, mailfrom: akuster808@gmail.com)
+Received: by mail-yw1-f171.google.com with SMTP id 00721157ae682-58cbdf3eecaso33508217b3.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 06 Sep 2023 03:57:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1693997785; x=1694602585; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        d=gmail.com; s=20221208; t=1693997877; x=1694602677; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
         bh=vzGFAARHO8K4aMXbafRgrkReagm/7Fr3E4+gIm8512Y=;
-        b=DBLtpc38i0vy2urjJMMrfkpmm9bjkhRSPmxHcEdtWQ3VMxhfEhmYSmW8Sf4cjur8PB
-         BKjPxsCHK1+yGJCIirfL++nfwK7cFwjqyPW0ROLpSxkpJ1QT6trZXKJZHW6oX0SNsHw+
-         zRbE4lo9mrww8J0K0i8j3rbrQBYhgw1Hbc4pNe2w9F5Rs2MHTvAmy7vweGwjoqhVxT1A
-         SpmqeJyp/g23nggaaNBPqVD7XrPRBquKmYd7t1Ba7PwsmwDMechNHYKk3oN0V3567luZ
-         uDm5rlYl8ODpyWc2gd8XVp+bWVBe0z16Lu0Glk5bMj5XGD0paZ/GwarivhbtMqrXwKCY
-         b+nA==
+        b=fTAIyywRPMVoUz7MDAR3nSq7pXKypvuOU7ypd5z1zqtqLd7H0eTNmGnt7dZjJiys0F
+         Ipl90NF6PStmiVY2yHUkKf6SrX85sWS/tnWcgyXmtsihoTo8WATTbYDNLzMxyXx7Tca4
+         s2YM9FGXnmXlGQQoX/EG+/75zrLh2hCIDrl2Igm9zOUB8z3Blcmz6LGxXAtHX+J9oEju
+         ONaRrAjYHZJ8VFsVlH5HYGtR8/f/onVoOzA3PYI8dWqCNxK0AWERSL4Fs5Cm5DLI/uLY
+         w/Es8hI8WjikNtOQfYhotEGRVxsHugtytVTe5Ewmwj/Yg1MWjtEIv8JArRGlTZr29xbM
+         k07A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1693997785; x=1694602585;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
+        d=1e100.net; s=20221208; t=1693997877; x=1694602677;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
         bh=vzGFAARHO8K4aMXbafRgrkReagm/7Fr3E4+gIm8512Y=;
-        b=kxpaGD2gW0dBlr3ynkX2VFbj0M3xxEThNwAY6qPutYKXt6Wyp3sjYMNvodGmVxpt+7
-         XSfWiEk/Ca2EnzBa2Y2TSLVknVCmnD83rZG1aEN5l+IacbtX2HVAxdeQ4kcJnV0mveK2
-         zaVg49QQBWnuspqyyFRDjD3OI5qKFly3e6i9ZHdMZt9gmvKNSijdkyGiA99nTZ3yQzOe
-         63FhNQ99wyiqLY6lAAvldgHXuu308Q9gNtvK/OC1kf2hxtJnI9Jfdy0we9Mt9TAHzZqX
-         rADymE+MaDHc3k1bZVox8y9Q7kUaChZFiX9OfUzfNVp1UHQBxKL7nO0/u8SBup330mRg
-         7ATw==
-X-Gm-Message-State: AOJu0Yw107Bvd5crq5HIXh1WSs6I74CKPQNb3MVEB9fq6zjQrGSe1b9U
-	b1xHH0t0nNcTFL+m0HC/0MSHkrpgBa8=
-X-Google-Smtp-Source: AGHT+IHSbtrWJa/8IQMY2QGqSUA4rYn9+qwJg6n1NhG75Lfnb+tWdKTfptC+FSyutAElnHVlTZWTzA==
-X-Received: by 2002:a25:da0a:0:b0:d78:f1d:2e23 with SMTP id n10-20020a25da0a000000b00d780f1d2e23mr18252985ybf.53.1693997785131;
-        Wed, 06 Sep 2023 03:56:25 -0700 (PDT)
+        b=P81FL1qbvSUsH2fX46+HtjTyw3wsBSqZOxmlzN9PR9hC/FZ9L0ZEcnXKW1QjWCPAH9
+         ZHfubFZ8BC3941JnbzFVQCcNTB4VlM/tX1tCgoUm8QuagJe5qKxju0pSXdEyutcr8xI0
+         H1zcQVpvJm8pzBTGH51cSrlWlOqiopBsxQLAZ/r/khhcdCJ6QILjvvTfibAGBPF4l6D6
+         bMqPZP+Q5aKN7D/hqgyUs3NQRJc8HffCUOAszIgkglBh3dRQtTZpcTmVkbSgTCzbrsLd
+         4XSwEfjemOXkmmJrCURrkGYKt6dIHo2te0EBzawFNK9RvZVQ3rWEdC4T+EqZwot2P9mr
+         RMcw==
+X-Gm-Message-State: AOJu0YyI1/M+SNYOnDEuumwNDBcdkyv+TNzc9OsS/9H2y2GpwCuM//pt
+	tM3V3vfJAtWOS3w6+zbfdgiMl5T4+ms=
+X-Google-Smtp-Source: AGHT+IGel59OgZLcWOZtDq1q6Yn6U9nt9UTCoF/BCzHDr86YQGqxZePxqQ2D8XWeMAhE8TkvMfsfnQ==
+X-Received: by 2002:a0d:cb41:0:b0:589:f494:3e42 with SMTP id n62-20020a0dcb41000000b00589f4943e42mr16478819ywd.40.1693997876780;
+        Wed, 06 Sep 2023 03:57:56 -0700 (PDT)
 Received: from keaua.caveonetworks.com ([2600:1700:9190:ba10:5654:1c56:e678:3eb1])
-        by smtp.gmail.com with ESMTPSA id f126-20020a25cf84000000b00d780f43b66dsm3221991ybg.63.2023.09.06.03.56.24
+        by smtp.gmail.com with ESMTPSA id dg4-20020a05690c0fc400b0059590440338sm2425687ywb.43.2023.09.06.03.57.56
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 06 Sep 2023 03:56:24 -0700 (PDT)
+        Wed, 06 Sep 2023 03:57:56 -0700 (PDT)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Wang Mingyu <wangmy@fujitsu.com>,
 	Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][mickledore][PATCH] tcpdump: upgrade 4.99.3 -> 4.99.4
-Date: Wed,  6 Sep 2023 06:56:24 -0400
-Message-Id: <20230906105624.847543-1-akuster808@gmail.com>
+Subject: [meta-oe][kirkstone][PATCH 3/3] tcpdump: upgrade 4.99.3 -> 4.99.4
+Date: Wed,  6 Sep 2023 06:57:54 -0400
+Message-Id: <20230906105754.847690-3-akuster808@gmail.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20230906105754.847690-1-akuster808@gmail.com>
+References: <20230906105754.847690-1-akuster808@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 06 Sep 2023 10:56:31 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104774
+ <openembedded-devel@lists.openembedded.org>; Wed, 06 Sep 2023 10:58:01 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104777
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
