@@ -1,139 +1,158 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <cvubrugier@fastmail.fm>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 38688EB8FDE
-	for <webhook@archiver.kernel.org>; Wed,  6 Sep 2023 14:36:34 +0000 (UTC)
-Received: from mail-oa1-f54.google.com (mail-oa1-f54.google.com [209.85.160.54])
- by mx.groups.io with SMTP id smtpd.web11.10487.1694010987241439248
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 51870EE14BC
+	for <webhook@archiver.kernel.org>; Wed,  6 Sep 2023 17:23:03 +0000 (UTC)
+Received: from wout3-smtp.messagingengine.com (wout3-smtp.messagingengine.com [64.147.123.19])
+ by mx.groups.io with SMTP id smtpd.web10.4872.1694020981185148131
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 06 Sep 2023 07:36:27 -0700
+ Wed, 06 Sep 2023 10:23:01 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20221208 header.b=lCW2/SvU;
- spf=pass (domain: gmail.com, ip: 209.85.160.54, mailfrom: raj.khem@gmail.com)
-Received: by mail-oa1-f54.google.com with SMTP id 586e51a60fabf-1cc61f514baso2225085fac.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 06 Sep 2023 07:36:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1694010986; x=1694615786; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=c6YLl5spo1iDoMj3q3A90gXGg+kmZP17FbjwSxrcQXI=;
-        b=lCW2/SvULVObN7bW2j79NKgGJ1wTVe1Rjih0vr0/unITsMRde5hJ0nR2+NA2coY1Og
-         SMdJxv7GxEkwQ4gqAh8ZA4HMy+0XamC15m8OLQ08x26MxceCpIGcAi6T3mDrte7R0qzQ
-         Tbs4sFlF5R94dklMjbN6Tw6fHGe+OXiHIPIZI2sotxpMuXqMhKD4taKR7UhzV6byfHIm
-         ZumnZ77ZE0R5eUT9ed7FTI8IpwwIiVlsBcDzMBtOgrUlmd8PuO+CbpfmQMYk/Rz0XvKf
-         gbqQogDAk1oJPz9CP1CpKN2KGP2X0GySRq87Sf8Uzvvm8KFtI+FkyjZUJPpUgONtMkHT
-         eSIQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1694010986; x=1694615786;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=c6YLl5spo1iDoMj3q3A90gXGg+kmZP17FbjwSxrcQXI=;
-        b=JkVfuXAhJQDcfmIVnTQ+1J0i8eF3DTGwgrPtD3y1SSr0Yiq5SqGa2MvRJd2atf5QR5
-         4sj4w36MLmc3A2Y7a8wpTsZXJq2B1iJoo/EcI1eEUFEOeH2SFlxU9MmsYGGwsmwmPssT
-         4qUkYrHYpawm/jf1dXy4CmcYOzZ0qyDSFhdniDxZ17r5s9wp7ctJnYaRaciNWO9WwlNk
-         PnTWRPlkDYc4yOFaD57mhcxla9ViC608uybi/f1fSxoU3FBq008EFP8DPcqMpD0aP9yI
-         rW/ieoIf+viuPy9zGdqqeT1dumB3ENWEAsyAdZ3ZchjewcfDyB6dhvPcF1EuaTlAyzMP
-         kn8Q==
-X-Gm-Message-State: AOJu0YwV0xWt1u23EYd9GP5FwgQiUHrdw7DkHBeCRtQ8mbhZR7b0WvTD
-	SpV71EgvXjzxUbuXqqhsUar3dfuJJOjq8F30e/k=
-X-Google-Smtp-Source: AGHT+IFSn0dvh3H5+/pK4tKyad1RKqWq4qpsE1vx29XEDUJk/txpLk4SJfbvvoU5JDqcjdldm9sPttQhisYtkeBv+18=
-X-Received: by 2002:a05:6871:8713:b0:1d1:265c:9477 with SMTP id
- tc19-20020a056871871300b001d1265c9477mr12969541oab.18.1694010986431; Wed, 06
- Sep 2023 07:36:26 -0700 (PDT)
+ dkim=pass header.i=@fastmail.fm header.s=fm1 header.b=Yz9mYdtU;
+ dkim=pass header.i=@messagingengine.com header.s=fm1 header.b=iUsUeDvD;
+ spf=pass (domain: fastmail.fm, ip: 64.147.123.19, mailfrom: cvubrugier@fastmail.fm)
+Received: from compute5.internal (compute5.nyi.internal [10.202.2.45])
+	by mailout.west.internal (Postfix) with ESMTP id 67B243200907;
+	Wed,  6 Sep 2023 13:23:00 -0400 (EDT)
+Received: from mailfrontend2 ([10.202.2.163])
+  by compute5.internal (MEProxy); Wed, 06 Sep 2023 13:23:00 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fastmail.fm; h=
+	cc:cc:content-transfer-encoding:content-type:date:date:from:from
+	:in-reply-to:message-id:mime-version:reply-to:sender:subject
+	:subject:to:to; s=fm1; t=1694020979; x=1694107379; bh=i9aSIj1B13
+	dKs+pL6GY+o8ix66Ef0AXAAHOxJqSxtNw=; b=Yz9mYdtUWqgyx/wiRxRfZ6HOMn
+	afdzx/6C35Kor1FFjDGXI28cvnfiGEV750tvhYtWlZbZtwwsek0IQ2tZi/7GkXrA
+	n8D+zx5NCK5XHOkevcnhEIKKV85uMFva6sDYlu5qh2rE+bauBU7BzfpDhcBCGTDB
+	oe1j0zmiz6sq8yoROtRs3OsUJ1vtyD9cpdomA63mXjFfMWIoDlby36RBh3FPfpLi
+	ls+bwTFjBkIm4wxwaBZj489gwkVecqmIHod5hEO3zcdtM9clbJJpsKw4Ifa87q55
+	DnJUkZnkZTJikVocMiqNGI297BjkGc60LRVxwafnyGs5ng22nvHNcYZ3rHyQ==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	messagingengine.com; h=cc:cc:content-transfer-encoding
+	:content-type:date:date:feedback-id:feedback-id:from:from
+	:in-reply-to:message-id:mime-version:reply-to:sender:subject
+	:subject:to:to:x-me-proxy:x-me-proxy:x-me-sender:x-me-sender
+	:x-sasl-enc; s=fm1; t=1694020979; x=1694107379; bh=i9aSIj1B13dKs
+	+pL6GY+o8ix66Ef0AXAAHOxJqSxtNw=; b=iUsUeDvDUB55ccFlPjmqQznUl9NFI
+	dvbt3IFODBUocr64kbzA3es9gqWvjmscaOS4oMWG+Vg2OwsZztANYAHrut60DrlJ
+	SpDyxfjkcqKyoZCwPGhKGs+PRa9uLinwZieYsQ+GVpMTr9XTSoaOT4ho+DTuol2z
+	CDLPtCrN9QgjMdViQvgFe0AiPKihUNjJYhSQSgSPkjwgdaQ/4vmIxKZ81Hph0cdx
+	nIdKxmIz0s9xf19A+4s7/nrRyhOFtgp4Bxj9KJmVLcSruh2YzsFaKYaTpYD9cUes
+	MdYCqE4kAECLCFhtaHjYSwPS+x5keBjG6h4Rhq6kR9qOSE+Vtg0jrHKgg==
+X-ME-Sender: <xms:c7X4ZGYDVmWAXenLg3j-JUkIAzXKVgGgVTYtZm7-kLt9mlLdQv3_Cg>
+    <xme:c7X4ZJYyq0rawB0NSniqIbaLZAzYXeUXbco1EbOeXE512yYBo7amidxDaS5cElia7
+    KS3MrU4ccasy7KoHQ>
+X-ME-Received: <xmr:c7X4ZA-m_0dD0Par_YObJogh2-1xnxQ4d4MlbmlMze2uJKRBk4elnmugeZAtdDaMsAWVOaJSlELZ8fPd76UaHqOhD9aSU5YFqUBxXFEz-oMpOakcd5I>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedviedrudehfedgudduudcutefuodetggdotefrod
+    ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfgh
+    necuuegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmd
+    enucfjughrpefhvfevufffkffoggfgsedtkeertdertddtnecuhfhrohhmpegtvhhusghr
+    uhhgihgvrhesfhgrshhtmhgrihhlrdhfmhenucggtffrrghtthgvrhhnpeelgffgleefue
+    ffjeevffekveduledtkedutefgkeektdethfejveehkeetheegjeenucffohhmrghinhep
+    uggrnhhnhidrtgiipdhfohhsshhivghsrdhorhhgnecuvehluhhsthgvrhfuihiivgeptd
+    enucfrrghrrghmpehmrghilhhfrhhomheptghvuhgsrhhughhivghrsehfrghsthhmrghi
+    lhdrfhhm
+X-ME-Proxy: <xmx:c7X4ZIqawrOGMYeO_ax7SvtOdJNOnLw0x8JEVKj_k9qo6wjx4PGwCQ>
+    <xmx:c7X4ZBqNL8C-krL0MZRyPTchwzC5YagvR7_z-o2mJFMUxUpslx82bA>
+    <xmx:c7X4ZGQM460Sr1lwHUCJTUle7h_aPlHW_ZTa4HvEorgYk5AmSMtVdg>
+    <xmx:c7X4ZATWj4nd3MA2a_uiN06ifAnFheD619TnBUwM29ez7MWv1-VRvA>
+Feedback-ID: i09e840f8:Fastmail
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Wed,
+ 6 Sep 2023 13:22:58 -0400 (EDT)
+From: cvubrugier@fastmail.fm
+To: openembedded-devel@lists.openembedded.org
+Cc: Christophe Vu-Brugier <christophe.vu-brugier@seagate.com>
+Subject: [meta-oe][PATCH] sg3-utils: upgrade 1.47 -> 1.48
+Date: Wed,  6 Sep 2023 19:22:45 +0200
+Message-Id: <20230906172245.41023-1-cvubrugier@fastmail.fm>
+X-Mailer: git-send-email 2.40.1
 MIME-Version: 1.0
-References: <1693965700-14701-1-git-send-email-wangmy@fujitsu.com> <CAJiuCcdg_U8PdQFFL-+y4b5Dy6HjTUs8ON13gSN7Xs3pewrfkQ@mail.gmail.com>
-In-Reply-To: <CAJiuCcdg_U8PdQFFL-+y4b5Dy6HjTUs8ON13gSN7Xs3pewrfkQ@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 6 Sep 2023 07:36:00 -0700
-Message-ID: <CAMKF1sp-wGY61-oJKSrZrtEp=EFAywQubwVNoCnoi44Wn67vMw@mail.gmail.com>
-Subject: Re: [oe] [meta-python] [PATCH] python3-protobuf: upgrade 4.24.1 -> 4.24.2
-To: =?UTF-8?B?Q2zDqW1lbnQgUMOpcm9u?= <peron.clem@gmail.com>
-Cc: wangmy <wangmy@fujitsu.com>, openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 06 Sep 2023 14:36:34 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104781
+ <openembedded-devel@lists.openembedded.org>; Wed, 06 Sep 2023 17:23:03 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104782
 
-On Wed, Sep 6, 2023 at 1:46=E2=80=AFAM Cl=C3=A9ment P=C3=A9ron <peron.clem@=
-gmail.com> wrote:
->
-> Hi,
->
-> On Wed, 6 Sept 2023 at 04:02, wangmy <wangmy@fujitsu.com> wrote:
->>
->> From: Wang Mingyu <wangmy@fujitsu.com>
->>
->> Changelog:
->>  Fixes for 32-bit MSVC.
->>
->> Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
->> ---
->>  .../{python3-protobuf_4.24.1.bb =3D> python3-protobuf_4.24.2.bb}  | 2 +=
+From: Christophe Vu-Brugier <christophe.vu-brugier@seagate.com>
+
+Drop patch 0001-sg_dd.c-Use-off_t-instead-of-uint.patch: it was
+merged upstream.
+
+Signed-off-by: Christophe Vu-Brugier <christophe.vu-brugier@seagate.com>
+---
+ ...01-sg_dd.c-Use-off_t-instead-of-uint.patch | 36 -------------------
+ .../{sg3-utils_1.47.bb => sg3-utils_1.48.bb}  |  5 ++-
+ 2 files changed, 2 insertions(+), 39 deletions(-)
+ delete mode 100644 meta-oe/recipes-support/sg3-utils/sg3-utils/0001-sg_dd.c-Use-off_t-instead-of-uint.patch
+ rename meta-oe/recipes-support/sg3-utils/{sg3-utils_1.47.bb => sg3-utils_1.48.bb} (73%)
+
+diff --git a/meta-oe/recipes-support/sg3-utils/sg3-utils/0001-sg_dd.c-Use-off_t-instead-of-uint.patch b/meta-oe/recipes-support/sg3-utils/sg3-utils/0001-sg_dd.c-Use-off_t-instead-of-uint.patch
+deleted file mode 100644
+index 317876f197..0000000000
+--- a/meta-oe/recipes-support/sg3-utils/sg3-utils/0001-sg_dd.c-Use-off_t-instead-of-uint.patch
++++ /dev/null
+@@ -1,36 +0,0 @@
+-From 9a8ede03ef61cdf527ce3a80771150a7452e4603 Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Sat, 11 Mar 2023 22:56:17 -0800
+-Subject: [PATCH] sg_dd.c: Use off_t instead of uint
 -
->>  1 file changed, 1 insertion(+), 1 deletion(-)
->>  rename meta-python/recipes-devtools/python/{python3-protobuf_4.24.1.bb =
-=3D> python3-protobuf_4.24.2.bb} (92%)
->
->
-> Does it make sense to continue bumping the python3 protobuf package witho=
-ut bumping protobuf itself?
->
-> The protobuf is stuck at 3.21.12.
+-uint is not available on every platform e.g. linux/musl systems. Use
+-uint32_t instead to represent 'off' variable, Fixes
+-
+-sg_dd.c:2402:17: error: use of undeclared identifier 'uint'; did you mean 'int'?
+-                uint off;
+-                ^~~~
+-                int
+-1 error generated.
+-
+-Upstream-Status: Pending
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+- src/sg_dd.c | 2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
+-
+-diff --git a/src/sg_dd.c b/src/sg_dd.c
+-index 9d05c93..35e2423 100644
+---- a/src/sg_dd.c
+-+++ b/src/sg_dd.c
+-@@ -2399,7 +2399,7 @@ main(int argc, char * argv[])
+-             res = blocks * blk_sz;
+-             if (iflag.zero && iflag.ff && (blk_sz >= 4)) {
+-                 uint32_t pos = (uint32_t)skip;
+--                uint off;
+-+                uint32_t off;
+- 
+-                 for (k = 0, off = 0; k < blocks; ++k, off += blk_sz, ++pos) {
+-                     for (j = 0; j < (blk_sz - 3); j += 4)
+--- 
+-2.39.2
+-
+diff --git a/meta-oe/recipes-support/sg3-utils/sg3-utils_1.47.bb b/meta-oe/recipes-support/sg3-utils/sg3-utils_1.48.bb
+similarity index 73%
+rename from meta-oe/recipes-support/sg3-utils/sg3-utils_1.47.bb
+rename to meta-oe/recipes-support/sg3-utils/sg3-utils_1.48.bb
+index 1aa65e6cc4..6c3d813983 100644
+--- a/meta-oe/recipes-support/sg3-utils/sg3-utils_1.47.bb
++++ b/meta-oe/recipes-support/sg3-utils/sg3-utils_1.48.bb
+@@ -8,13 +8,12 @@ SECTION = "console/admin"
+ LICENSE = "GPL-2.0-or-later & BSD-2-Clause"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=f685699d3ac82f108aa880043fa3feb7"
+ 
+-SRC_URI = "http://sg.danny.cz/sg/p/sg3_utils-${PV}.tgz \
+-           file://0001-sg_dd.c-Use-off_t-instead-of-uint.patch"
++SRC_URI = "http://sg.danny.cz/sg/p/sg3_utils-${PV}.tgz"
+ MIRRORS += "http://sg.danny.cz/sg/p https://fossies.org/linux/misc"
+ 
+ UPSTREAM_CHECK_REGEX = "sg3_utils-(?P<pver>\d+(\.\d+)+)\.tgz"
+ 
+-SRC_URI[sha256sum] = "8673c7faca849b6b34764332d2aa91f72db05bff7382bb836d0688795199c3e1"
++SRC_URI[sha256sum] = "d62b6c3cf20390fa7357044390084166d25f1d932a1135c450b69fe5c283d773"
+ 
+ inherit autotools-brokensep
+ 
+-- 
+2.40.1
 
-are they locked with versions in terms of compatibility?
-if so then we should otherwise if there are no huge testing gaps it
-should be ok.
-
->
-> Regards,
-> Clement
->
->
->>
->>
->> diff --git a/meta-python/recipes-devtools/python/python3-protobuf_4.24.1=
-.bb b/meta-python/recipes-devtools/python/python3-protobuf_4.24.2.bb
->> similarity index 92%
->> rename from meta-python/recipes-devtools/python/python3-protobuf_4.24.1.=
-bb
->> rename to meta-python/recipes-devtools/python/python3-protobuf_4.24.2.bb
->> index 6322ec1f30..3014884a33 100644
->> --- a/meta-python/recipes-devtools/python/python3-protobuf_4.24.1.bb
->> +++ b/meta-python/recipes-devtools/python/python3-protobuf_4.24.2.bb
->> @@ -7,7 +7,7 @@ LIC_FILES_CHKSUM =3D "file://PKG-INFO;beginline=3D8;endl=
-ine=3D8;md5=3D53dbfa56f61b90215a
->>
->>  inherit pypi setuptools3
->>  SRC_URI +=3D "file://0001-message.c-Cast-uintptr_t-types-to-upb_Message=
-Def.patch"
->> -SRC_URI[sha256sum] =3D "44837a5ed9c9418ad5d502f89f28ba102e9cd172b6668bc=
-813f21716f9273348"
->> +SRC_URI[sha256sum] =3D "7fda70797ddec31ddfa3576cbdcc3ddbb6b3078b737a1a8=
-7ab9136af0570cd6e"
->>
->>  # http://errors.yoctoproject.org/Errors/Details/184715/
->>  # Can't find required file: ../src/google/protobuf/descriptor.proto
->> --
->> 2.34.1
->>
->>
->>
->>
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#104771): https://lists.openembedded.org/g/openembedde=
-d-devel/message/104771
-> Mute This Topic: https://lists.openembedded.org/mt/101185171/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
-aj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
 
