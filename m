@@ -1,323 +1,278 @@
-Return-Path: <narpat.mali@windriver.com>
+Return-Path: <yi.zhao@eng.windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 39564EE57D5
-	for <webhook@archiver.kernel.org>; Fri,  8 Sep 2023 06:42:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 72032EE57E5
+	for <webhook@archiver.kernel.org>; Fri,  8 Sep 2023 08:39:14 +0000 (UTC)
 Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.web11.34019.1694155340553803720
+ by mx.groups.io with SMTP id smtpd.web10.34813.1694162347675573978
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 07 Sep 2023 23:42:20 -0700
+ Fri, 08 Sep 2023 01:39:08 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=n/qlo9qe;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=761562b37d=narpat.mali@windriver.com)
+ dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=D+eiCGGv;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=761564e7d4=yi.zhao@windriver.com)
 Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 3886fOb2013487
-	for <openembedded-devel@lists.openembedded.org>; Thu, 7 Sep 2023 23:42:20 -0700
+	by mx0a-0064b401.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 3888020Z006245
+	for <openembedded-devel@lists.openembedded.org>; Fri, 8 Sep 2023 01:39:07 -0700
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
-	 h=message-id:date:subject:to:references:from:in-reply-to
-	:content-type:content-transfer-encoding:mime-version; s=
-	PPS06212021; bh=yBxtalYbFhNict39wYKJdPUEtsnMXxC/honogkxvF6k=; b=
-	n/qlo9qeyDKOfsZONpVfY1HDyfkiSr+uC2m03p3FLbkuWVM+JdcwlFkJ+CUxYw3b
-	0eH/ubPsZHC1B3+QKJWnM3BQC+z8pwp7W9DiOY1phGcQYDUOvZhAINlO6dhAwnsO
-	CUtNBwd69JXnY0xlge1j3XdvobyoNu4F2fNccK7upUPIDKDDN0Qw7r3qk+9GctPD
-	cLiYL/WbCqZ/xfCieIEaaQblX5vVMIxzh6AwuKDwNC7KBKEc9NompvLT4//JG29y
-	iZK3NKn9I7aD5t6398yo6x0s3TkbpgYkA9LyUq2+nEJmDNlWOc6NKe5KoMxzVQAH
-	cDxb3uopvQnv0SE96kETjg==
-Received: from pps.reinject (localhost [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3sv0b0584v-1
+	 h=from:to:subject:date:message-id:content-transfer-encoding
+	:content-type:mime-version; s=PPS06212021; bh=j/QTZeAGO74PCoeSnu
+	zG7m++cT0fV1PbqJsvR6SvwUw=; b=D+eiCGGvQCnNPKlcmk7dcuDf7NGmlNcMrL
+	vnzHFqr08BSWnt02K2dBo5BBeTtE8iikH+4M3wkU22rf0rNvCecMdchZhwD/t+rN
+	BkOcE4GlQhVHN6xHVYcP3yh8iduZOqRy4E2Qr6JpBUsbcnSj8FHaa5TbLGXHEBsa
+	W6pC6SKN5RtJgSJmDdXEqXWNVwZRRaPC3ijrdYxGXLvzv+8zLIRODgxc2ektZtfj
+	lajo5G3PNhLaAg2ojFCQWzhJcbhE4IC3d9h/5oJ/a7nXTilJMY6NGAFQ9nZT7k+O
+	/JBwOakFRw1SPobXnokqKfnt9sGya5A0C6keTjz4XDrw8JCQeM2g==
+Received: from nam12-bn8-obe.outbound.protection.outlook.com (mail-bn8nam12lp2168.outbound.protection.outlook.com [104.47.55.168])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3sv0b05aen-1
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Thu, 07 Sep 2023 23:42:20 -0700 (PDT)
-Received: from m0250810.ppops.net (m0250810.ppops.net [127.0.0.1])
-	by pps.reinject (8.17.1.22/8.17.1.22) with ESMTP id 3886gJ2L014832
-	for <openembedded-devel@lists.openembedded.org>; Thu, 7 Sep 2023 23:42:19 -0700
-Received: from nam11-co1-obe.outbound.protection.outlook.com (mail-co1nam11lp2176.outbound.protection.outlook.com [104.47.56.176])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3sv0b0584t-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Thu, 07 Sep 2023 23:42:19 -0700 (PDT)
+	for <openembedded-devel@lists.openembedded.org>; Fri, 08 Sep 2023 01:39:07 -0700 (PDT)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=UOtgZyEYORd/j4bdyBVfFmUeDRnuv5xWWKcpUu7Bcjqh1fS8CzGKo3bhb3oKWV+d7qlFvoppxaVJ4EF2+Q48Ylmqos1tzzvtfkF/DFiXwPf2mvF5YQiazV9PpIO17ypODMmioacchM+6p/v6Phm1COJK1WFNE6fBO4CvRE1qz+IkQsF08e6hJpMudLmvsxn4qw9wVaT3pkV0qJ60vZ9Phn2ucMQW5JB4WLGMfAPeFtdJTaSDqGDt2gBPBRbr2wMpVP6xYquZMHGE+hB2YvXK2C4wAeVGiKJ7FfD+ThFks/6DhaoRM25250RTIh8Lp+A9bu4w5O5iDoiBz3Evloi/3Q==
+ b=EyiD8ZVmb1ifBKgiMWXzshJdxSrdTRMXz9FAOOtAeyqKxuop8oOWR7ocIGJBMhIW7jbxqsttL44DJsQdp+vQ6/1e2uZCP1L3rpDtCmZcQRCn9W/ZTf5tZVHVmSKKvP6FiIUE+VCouXK82FsD98HimTRcO3EnWIzrUCX2b2f+ZWm6FdadD3cgY8JlO6FiQ60f98Dr+rP8I7btfav/8mI8y5aFvLtWEy3cb7tPJ3c0puWkKEFZWg+oiYEFqy58yKwCi2vBd++OfEyZAS6ZLBObL/ivCunvaJ1QtrBs+NFgiqYuPt+zgPJv4xzNRo+kx9Nnksdq/5mZT+5cvpmGnmfT2A==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=yBxtalYbFhNict39wYKJdPUEtsnMXxC/honogkxvF6k=;
- b=h06kd64gd07pf8b2fiA3y7b4u5h3CMTVvpjJXWBJw8pCBhNbqG0e5Dj2aU34FAL8juHWnoAuFALHtB56IOGCxPgPXtvKCxXqIqOBtAPFfpI4zvBRvVnhjEai3PIlpKg3A179moNHfloGEmEXH9tXnfMd9PnEi9HNU0Ddzniz0amI0NZDBDH1pteaEN0x/QWPN+fpT6elJ9mGzaG+ESPHZ6akfrFf2yu7KZAxAVGDiHkfsZGDgOU040hkLbqZECUORuDGxbmTnhU7Pn+4F46dTwvMItO7VLR3Idxtn+ehvhsMSOz/gBC4cY51fOjZ0I/vDKWfT/KWICV3LH51euBn7g==
+ bh=j/QTZeAGO74PCoeSnuzG7m++cT0fV1PbqJsvR6SvwUw=;
+ b=YOzWKv4mx+D7/S/eITim0LkDKFe5OxSqTAXS1/RGOwm66E16tsWDQ1Q4msLOMRWhb/DHVENNti1YCP32TP83kSea2Ci3CyMewfiF1deJntmzR1Up5Jn4DatYFe/wQxfZL3dyKiVfOpZha5a8HUkjmEkI4iO3gWxXJRInNBIFf2rcS1uFzP4D1qvOoZR5+3ilOTN13jNev+QmKi5esB4UCXbAplipH2dto819jV31ijOXsAFCoCyfee348eurY9qTdfgcE7yzew/N3NNGe/UNm6TSB62W1WMN9TBuAenovFN1zyS6HGrk2kxISl5etR8OmP7t6QNI4rwHIglLQtnVCg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
-Received: from DM4PR11MB5550.namprd11.prod.outlook.com (2603:10b6:5:38b::24)
- by IA0PR11MB7356.namprd11.prod.outlook.com (2603:10b6:208:432::6) with
+Received: from CO1PR11MB4867.namprd11.prod.outlook.com (2603:10b6:303:9a::13)
+ by IA0PR11MB7380.namprd11.prod.outlook.com (2603:10b6:208:430::5) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6768.30; Fri, 8 Sep
- 2023 06:42:18 +0000
-Received: from DM4PR11MB5550.namprd11.prod.outlook.com
- ([fe80::219e:cc26:ef6d:1b4a]) by DM4PR11MB5550.namprd11.prod.outlook.com
- ([fe80::219e:cc26:ef6d:1b4a%4]) with mapi id 15.20.6768.029; Fri, 8 Sep 2023
- 06:42:17 +0000
-Message-ID: <28de531c-20c5-4a33-f3bf-09b0f2b4bbf9@windriver.com>
-Date: Fri, 8 Sep 2023 12:09:08 +0530
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
- Thunderbird/102.15.0
-Subject: Re: [oe] [meta-python][kirkstone][PATCH v2 2/2] Introduce
- python3-trustme to fix ptest error of python3-requests-toolbelt
-Content-Language: en-US
-To: openembedded-devel@lists.openembedded.org, akuster808@gmail.com
-References: <20230823104110.1949022-1-narpat.mali@windriver.com>
- <177DFD136D69B7A7.28529@lists.openembedded.org>
-From: "Mali, Narpat" <narpat.mali@windriver.com>
-In-Reply-To: <177DFD136D69B7A7.28529@lists.openembedded.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: BYAPR07CA0044.namprd07.prod.outlook.com
- (2603:10b6:a03:60::21) To DM4PR11MB5550.namprd11.prod.outlook.com
- (2603:10b6:5:38b::24)
+ 2023 08:39:02 +0000
+Received: from CO1PR11MB4867.namprd11.prod.outlook.com
+ ([fe80::1ba9:4bef:c1a4:306]) by CO1PR11MB4867.namprd11.prod.outlook.com
+ ([fe80::1ba9:4bef:c1a4:306%2]) with mapi id 15.20.6768.029; Fri, 8 Sep 2023
+ 08:39:02 +0000
+From: Yi Zhao <yi.zhao@windriver.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-oe][PATCH] audit: upgrade 3.1.1 -> 3.1.2
+Date: Fri,  8 Sep 2023 16:38:51 +0800
+Message-Id: <20230908083851.3544948-1-yi.zhao@windriver.com>
+X-Mailer: git-send-email 2.25.1
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: TYWP286CA0011.JPNP286.PROD.OUTLOOK.COM
+ (2603:1096:400:178::18) To CO1PR11MB4867.namprd11.prod.outlook.com
+ (2603:10b6:303:9a::13)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DM4PR11MB5550:EE_|IA0PR11MB7356:EE_
-X-MS-Office365-Filtering-Correlation-Id: ea4f11af-787f-4f47-3767-08dbb036bec1
+X-MS-TrafficTypeDiagnostic: CO1PR11MB4867:EE_|IA0PR11MB7380:EE_
+X-MS-Office365-Filtering-Correlation-Id: 8eff37bb-257d-4d57-57cd-08dbb0470d79
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	AOzfi6qhsss8VbCH5WLWN+42ctL5X4e1NE2+lsW9l5un0dJFZSY6Kmwk+q/99PJX4hYQTMhjunz1/lVphvrzmsdrdJSIJTMENAMNHnbSkDSvVCD5jC4lyc5ySYwIyFeV/4BVu+CRMMsx2MmxMk1vy28wnEk69DXfkzX3x2bB1VXzkZ3fvFp1y+imB0WWf5rYCUGXy9Ox8RNFoLkNkfQkSdtC8R4ck/OWskEwTmj9QXTT4oxyoELOrihqU+fskDHu+5vqyPgzPNJU+D08xMZB+772fDnAdKjVfKAGhruAii9xXvjFUGT5+N9ZpX1CxDX5DsGfBOPcFGvvvukqFdEq02v4C8STI0iF9HeeaOqCRgLy/aUDUDPeKeTk5I7HIVBTnLXZUUh6iWo3IlARd82UeMp0H3XkyN/26u8N2ECXyFWR9gKdZGJhbXn9PtxGvGtEXsY+3Xot3JqCjCO0V2QmBRC5EjA5ljjQl0iltg641XVO50q04+Qu0CDYho4ABO0nGzy3Nw5Bo343EL0Rtr7jm2LyIMY33S6XhSTmgDKFnAfQL3EbbhX8K+BbySf8MRypSUb0465frvwbQs3Li4M6qzPR+edz3ds+CrV85dCeshjPNmW0pAZMj1hH0q8FUP+aDXtlwc8ev1E6xc5vKrPO7w==
+	1XwrsNTLOoQ8HjGcAfbyu2roABrtkAYaYzyYHz1mcIIxthMj75hGK5EH6OBpHkw0nwJ2z97KwziwPodWRrzW42VT4WNGp4xQwtwegxrhPIm7gXYF9+iBoV70XKnAD8TP9bVScEtG1Q5moTwXFAPYOIhs9tDDV537ojKAzn8jsGtqPWL0PDXkIgluT2aI5J7+1X1A9F3218D0qMWAqnjUSoPJsryb0lfbD2yCUnAqA69h6wk72RZphyEXeqHsYrl1O3LFUaAH5BQpZvEYRNN1m2ZfKCn2jYlK4JkpV3MwaaDSwAo7yxLqoeMSwW7ymXyYfF5XMh6KRDKuJlzV8ts5ozZiN6QgdHCsoAdSuJwmPY0qxnMCYkwRsUlhEw9psfwPVS71bSAeNE2M9HB2+sQWVR/BDh1yozcsRptvhloBYUUb78CpwCjalTw9+B6dHYDjRVVVTMuX69KqRgCpvzgj2kJ6s7Zk6bO3uQMpuBUjzwLSvz2RB7Sq2yMyVWgn+myZzRrXLtMtsmqWwXufYlhJoVdCoe5i9rIbGfzxWytJQsoIj+pmIMAq6SeFkQBW4qblqlvC0xpfLe69gaFYom6mrUS0HBNSZwNsxoFH+bBAObPAFwNJ4W2MqxpbosuTfjsua541iAkT0lKvmBx622vBVQ==
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM4PR11MB5550.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230031)(366004)(136003)(346002)(376002)(396003)(39850400004)(1800799009)(451199024)(186009)(6486002)(6506007)(53546011)(6666004)(55236004)(6512007)(966005)(478600001)(83380400001)(2616005)(26005)(2906002)(66476007)(66556008)(66946007)(316002)(41300700001)(5660300002)(8676002)(8936002)(86362001)(36756003)(31696002)(38100700002)(31686004)(66899024)(45980500001)(43740500002);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CO1PR11MB4867.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230031)(376002)(136003)(39850400004)(366004)(396003)(346002)(451199024)(186009)(1800799009)(6486002)(6506007)(52116002)(6666004)(966005)(6512007)(83380400001)(2616005)(26005)(478600001)(2906002)(66556008)(66946007)(6916009)(66476007)(44832011)(8936002)(5660300002)(41300700001)(8676002)(316002)(36756003)(38100700002)(86362001)(38350700002)(1076003)(66899024);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?utf-8?B?RVl3OGdYdkk2UXcrU2s0SU5XQiswTkNDM1dmVUxSbkdBKzBnMHJKZnduZTBF?=
- =?utf-8?B?WGNBcTJ3Z01jWG1GSjBRbWlpMFArd3lpdnp1aU80MVJ6UnI2L3l2K1R1ZjVI?=
- =?utf-8?B?NWRxUkg5ODkrZm8yMkRrZ2JpMkswM0Ywam1oZHBNQUdRWlFRVTdjQ01pNjJo?=
- =?utf-8?B?cXBxUkgwU3lFZnhEd0NWQUZQQ0xMaEVPVFdRc0dkdGYyVHJsQWNQQlBseldH?=
- =?utf-8?B?ZDgydjBBZ1B6VjAxQ28ra2tZbXdYejJDeEI2c1ZRaUVVbVV3NnZJSkxzTjNB?=
- =?utf-8?B?ZFRYZThpNCsxNzI2K1lyOFlwbWJaVDRnQi9iWVRVZzNmR3U1LzcrenhDcFVy?=
- =?utf-8?B?VDR3VGRuVUlGMlVoMW5PQ2M2QmR0SHE2MU9BM3JjUVlRcTZuRmdkWit6cGxE?=
- =?utf-8?B?UXJ5R1QzZW5DRXJ3WGhzTHdURmhzUE43OHJEZUg4TGdVamZrR0lEbENxSVhL?=
- =?utf-8?B?ZjFDWm40ODR1TlZpOWtzK3JQdiswU0gzLytKd0VsVDIzMzZCbmM0YjgvYllV?=
- =?utf-8?B?R09mTUtKSDNaNEJURWJCNUR4T29KZlVLZSs1Rno4dWM4clUxOTF2SFZHS1pr?=
- =?utf-8?B?MnBUMFpCaWROOXJESVhrZEpGWGpTNVFpQmJBbUVNekY3NHNqVmVzN1pCS1lG?=
- =?utf-8?B?UUNRblgwRDIyQWRXdXc0SkRxcEtKbTk5RCsxRUxHY3gzeWJTRTZTR25WVlRP?=
- =?utf-8?B?aElhaDl4SjY2RkpBZCtOQ0NCOGx4WmtBRmtMaVFTc3NpMFVDc2ovbzBadVA4?=
- =?utf-8?B?RjdYSlhnVnorVTUyb3dsU2NrYkc0K2xlUWIrNVF1NmhXcERhbVlrSStuN05u?=
- =?utf-8?B?YUVoczhBdnJ1SUVGQklGeHpIR3dpV2NabWFpWHpiQkRvdnJGZnJJZnYrMEVu?=
- =?utf-8?B?a2VYMkVFdGgzdGswY1VBSmFrQ2FWK0V4YXAwQkdQMjYxT0RxMDYzaXo5L3NB?=
- =?utf-8?B?UnJLTXVlVTAyUE9pYVY1MXZQK0c4SXoxRXFEeDd5ZTVodHU2VGRQTTJEWXZ6?=
- =?utf-8?B?WkY3SUYzZHNtM2YzOVVNTEtNT01XRU1UT0lhSC8wTHQzTURmaXJQbFcvYVgr?=
- =?utf-8?B?bmYwKzl6WS9yZE1LQjJ0Q1ZKSzJwMkpVODRPeEtQeHBhU0pncTZLUnNYcUhB?=
- =?utf-8?B?RlZOSXFQUktqamJZaVduUGdlZXFLMTdUMExuRjNZaW82aHByNjNNZjRJbzJv?=
- =?utf-8?B?by85MmphQ2xXTFJoc29jWFZtbUZPdU1tS24ybGExMnlHbWZUWGo4K0xOQlpm?=
- =?utf-8?B?Ky9vQUJ2TmZNY3ZZa045Y05FWFIwYXhnQm5yNlBaVUk2cDRXUmYvbjZwbWhZ?=
- =?utf-8?B?aUdpNGxiY1ZtaWVmMlNIMUpRL3lpd2V3WXBRVmc2MWZlaWZmbFNwaUZHZ3NG?=
- =?utf-8?B?T3kzV2F0bWhsSk9zRG9FRXRabGZrZWpxakc1OU1nbEZpRDRMM2FISFFYRjF6?=
- =?utf-8?B?ZWtRUXN0RFMzQ2xIOGRXNXdQYytMUURlcUY0b2Q4dEdmV3lBNHEyYlpUZkZS?=
- =?utf-8?B?dXFTcmNNeEIyT1d6cFg4Z1crY1ZiWnBFYnlEVDk3TE1TaFZxTGJqYVBzeDJx?=
- =?utf-8?B?Yjk5STdmcUVhQ0V6TDVKZWxyYmluN21STm9BMlUrOUFxVFJ0dnNqNUNVQktU?=
- =?utf-8?B?S0lvNUxIenpNUkhtUzN4ckZoSXAwZ2NQSzloRmwxMGZYdXVSNld6czhQUjd4?=
- =?utf-8?B?RUUwOFFaNUovZldhR2tiNFBpZzh4bytBZXBlNVdTODQxa1poUDRYOG43MkJR?=
- =?utf-8?B?djM0UksySWUrWVZsSk9sNy8xeTFlNU02UElXLzZsd1NEaW1OdkxKRkdEc0to?=
- =?utf-8?B?MFNaQm92SmN0VUVNMlN2bGFSRldzdzlhNXpQeEl1KzI4aHMyRi9pZ3BENEpx?=
- =?utf-8?B?NjhCWWt3d1VaZS81bXFaUWl0UDVaZE1EUjV5YThLQWo3Zm9KL0xOTnBtaWRz?=
- =?utf-8?B?R2RDRGx3K3VwelIxRE5hdnZIQTZySHZ2NURSZmRDZWRybGt0Vyt2U0tBM2U5?=
- =?utf-8?B?V1ZQcXNxL0luZzVRTG1RV2pyOWsraWt1eDBOaW8rcVZENjZ3WFB0Q3AydWdl?=
- =?utf-8?B?VFJ0ekppck4xOTZPNDVkN0ZUdVZ0ZkpQVlg1cWM1MWhnS2R1MzFuaFk1TytK?=
- =?utf-8?B?ZVFMa1NRdEhZYjdNTVpYM0Ztc0cybnlXeEZxNUFqc3BWeEtzK2c5eFd1RzFG?=
- =?utf-8?B?UVE9PQ==?=
+	=?us-ascii?Q?q8bk5mVmuRaQ7RtAHLtdQIa7JafONjF/jmTPF4ryX3ctoylWmXMILfz+Jr8i?=
+ =?us-ascii?Q?K1QLFJ8KNzFTzKLK6T43rNSbeZ+43g+oy75TaMymSSqBBc1gFxykclB6GrNX?=
+ =?us-ascii?Q?VcEzui/IDa2hOH4jN5C/cnqO4wkgnzQZ4wdFBbFqKyejoTYgJ+fdUd8MGJZb?=
+ =?us-ascii?Q?FDCF+StjPbQb97XkpKGZuE9tfj6EpVtkzDOcuXwvxkgX/7+02zT9XFnsc9Zc?=
+ =?us-ascii?Q?B9EK9OESayRwgl0iq+YbBZriQCyGPHsx+IfE5zF5KT3RKHqwuj0stMuxqBvS?=
+ =?us-ascii?Q?oBPpNwXo0nnIZbO0Y9BzcoFG2ZvbZ2BHNXBC1K/52L7X3mIIy/sxCTQvyL3S?=
+ =?us-ascii?Q?/og4O2koWyIdf3qayG33/MzKHuOKUk0axP19rS9vLpz0jDNdx36GLkhWxCr3?=
+ =?us-ascii?Q?w8QRCok5UKfQsSyPhhNrbg+LOb9++tiLv7V1QEdGeq3+iAPfYXB/q7N1b0vx?=
+ =?us-ascii?Q?dJ4kdP96if1PyIfqsWsS5U84LmY9lfEj54axclvdqQuAFjlBcHb83McxMCQ9?=
+ =?us-ascii?Q?4MjW/nxuUHAItFLlLQaIICbAFY9sDc8yC29QIaWMAaamiCTR+amJqhlikltk?=
+ =?us-ascii?Q?gm945o3qghKWZ6BgLNmKM9czBCJ8FR0xZX/KwRnMWvhDqo80pFoDmVafqMIN?=
+ =?us-ascii?Q?jV2vHIolABhNrkfbkh/zC8MZOTt/dyVKLAetBHt5fdxSEsTgiWManMS27s2j?=
+ =?us-ascii?Q?DzM02qXDLA1h0HonSgboko8iULiHbvn2LD3zqp9VQ6+ZYql6WNvj4sVz7SP9?=
+ =?us-ascii?Q?725NGOMYE83P6mavOBKp170UuMtKRcsWq63iMaji87iU8IOsrsYe3Atlq/GS?=
+ =?us-ascii?Q?tMAFBtQJe6kEW1Ay5bE96Gk9yAGfZXacw2nKRsJ4ktDJFYIo/xEU8jGlgo1O?=
+ =?us-ascii?Q?tRlTILYUUd0RANH2h69DFJnWR4ZcoYIvB+72r98nCZ6r+CKwP9rlOVj6joPM?=
+ =?us-ascii?Q?xnk2YhqigQl0MgehDkER3SroV4heiEd4sHvEFtJOzjccZJmM1aqnN0+uzjcF?=
+ =?us-ascii?Q?/8mZwr3ScadCU5F8Y5LYl1uetkYuU6kM8viQDdi4SgejdVcMr9n7WPiLiEHZ?=
+ =?us-ascii?Q?yXfMoc10RDqIdLIwAfo5Mb1D3Ra0VQ34Wu/e2bdP5xHB3KLZjKrHKNaRy+Lw?=
+ =?us-ascii?Q?TrD5EpHDEx3ZBwR3jZiFmh9VAcK5JOobECN2E17zasq8+eFHLYsh/v9yOEnX?=
+ =?us-ascii?Q?ay6bM8QwHLiTO4ORkCt4Og1H/QkG+KXUWi+fDmy9yEiM9j2fP8U9sx6iUaWB?=
+ =?us-ascii?Q?7BoZel7pQaU+5OIbY630mzvasaCizRu/i+rbaBsgj/VfYcO/Hqw4MwxN9dcp?=
+ =?us-ascii?Q?JWmu/4flGa9LigIlK4yvHwrpYo01OzzdiFLVmmNalYMNct4Mo6YCyvi9uBKB?=
+ =?us-ascii?Q?uuHE8DTYN6PPb4YK3WE3eYUStr5DCXzCluFySCps1AXlrm2iRlhSuH/Hd4jW?=
+ =?us-ascii?Q?cfNwqBv8ph0hxiF34IH5voOONywnLwlbQNDHqXuQ6tWtT/SM8O5S0sjmP9wn?=
+ =?us-ascii?Q?7KysnpHL0XN0OeY30cNauBSgjbtrodWOjzQfYFTtO0QTvK2m0eL9U3eAuqkm?=
+ =?us-ascii?Q?7pJoIAlLmxost2wHFrCyvI/ife1YmX0U/9OAOK/f?=
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: ea4f11af-787f-4f47-3767-08dbb036bec1
-X-MS-Exchange-CrossTenant-AuthSource: DM4PR11MB5550.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 8eff37bb-257d-4d57-57cd-08dbb0470d79
+X-MS-Exchange-CrossTenant-AuthSource: CO1PR11MB4867.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Sep 2023 06:42:17.9359
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Sep 2023 08:39:01.9728
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: NwMytDW5HDx3QgFaGo0e8ZJSH7GwxA2Me0EEcPuG54T9pLFDVOJ/NWurOPiMdLqCpqEvpkYCkVoC5QHZ6Cptj8AhSWZlqW17gbTgnims1g4=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA0PR11MB7356
-X-Proofpoint-ORIG-GUID: N7o_jppbzZH923mSXICkmjpxtPIyGAej
-X-Proofpoint-GUID: _nxKmj9RR9HLsvNMnlC-B8C7O1HimStY
+X-MS-Exchange-CrossTenant-UserPrincipalName: 4W1K+PI11s4hBDvqdqiVzUigLhEvXFTH1N4IfYcVyfQOOEPE++xLzhnT0outkRSkfsXGFgL66XNZQ1IgOQ1dcw==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA0PR11MB7380
+X-Proofpoint-ORIG-GUID: xX3moeBj_LGp3V7YM5SzkgJTUsaFjxTh
+X-Proofpoint-GUID: xX3moeBj_LGp3V7YM5SzkgJTUsaFjxTh
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.254,Aquarius:18.0.957,Hydra:6.0.601,FMLib:17.11.176.26
- definitions=2023-09-08_03,2023-09-05_01,2023-05-22_02
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 clxscore=1015 mlxlogscore=999
+ definitions=2023-09-08_06,2023-09-05_01,2023-05-22_02
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 clxscore=1011 mlxlogscore=999
  bulkscore=0 adultscore=0 phishscore=0 lowpriorityscore=0 spamscore=0
  mlxscore=0 impostorscore=0 malwarescore=0 suspectscore=0
  priorityscore=1501 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.19.0-2308100000 definitions=main-2309080060
+ engine=8.19.0-2308100000 definitions=main-2309080079
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 08 Sep 2023 06:42:23 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104799
+ <openembedded-devel@lists.openembedded.org>; Fri, 08 Sep 2023 08:39:14 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104800
 
-Gentle Reminder !!
+Changelog:
+https://github.com/linux-audit/audit-userspace/releases/tag/v3.1.2
 
-../Narpat
+Refresh local patches.
 
-On 23-08-2023 16:11, Narpat Mali via lists.openembedded.org wrote:
-> From: Narpat Mali <narpat.mali@windriver.com>
->
-> The ptest fails after python3-requests-toolbelt is upgraded
-> to 0.10.1.
->
-> =======================================================
-> Hint: make sure your test modules/packages have valid Python names.
-> Traceback:
-> ../../python3.11/importlib/{}init{}.py:126: in import_module
->      return _bootstrap._gcd_import(name[level:], package, level)
-> tests/test_x509_adapter.py:20: in <module>
->      import trustme
-> E   ModuleNotFoundError: No module named 'trustme'
-> =======================================================
->
-> The commit b93b4067ea "Fix x509 tests by using trustme" of
-> python3-requests-toolbelt introduces the trustme in test_x509_adapter.py.
->
-> Introducing python3-trustme to fix ptest error of python3-requests-toolbelt,
-> also introducing python3-service-identity, which is requested by python3-trustme's
-> ptest.
->
-> The ptest passes of all the three packages.
->
-> Signed-off-by: Yue Tao <Yue.Tao@windriver.com>
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
->
-> Cherry-picked the upstream master commit:
-> https://git.openembedded.org/meta-openembedded/commit/?id=a4b6e3ee894047cd13c5d2b7bfc67f0093899537
->
-> Signed-off-by: Narpat Mali <narpat.mali@windriver.com>
-> ---
->   .../packagegroups/packagegroup-meta-python.bb |  2 ++
->   .../python3-requests-toolbelt_0.10.1.bb       |  1 +
->   .../python/python3-service-identity/run-ptest |  3 +++
->   .../python/python3-service-identity_21.1.0.bb | 25 +++++++++++++++++
->   .../python/python3-trustme/run-ptest          |  3 +++
->   .../python/python3-trustme_0.9.0.bb           | 27 +++++++++++++++++++
->   6 files changed, 61 insertions(+)
->   create mode 100644 meta-python/recipes-devtools/python/python3-service-identity/run-ptest
->   create mode 100644 meta-python/recipes-devtools/python/python3-service-identity_21.1.0.bb
->   create mode 100644 meta-python/recipes-devtools/python/python3-trustme/run-ptest
->   create mode 100644 meta-python/recipes-devtools/python/python3-trustme_0.9.0.bb
->
-> diff --git a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
-> index fdeb83c42a..c2481eb307 100644
-> --- a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
-> +++ b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
-> @@ -373,6 +373,7 @@ RDEPENDS:packagegroup-meta-python3 = "\
->       python3-send2trash \
->       python3-sentry-sdk \
->       python3-serpent \
-> +    python3-service-identity \
->       python3-sh \
->       python3-sijax \
->       python3-simpleeval \
-> @@ -408,6 +409,7 @@ RDEPENDS:packagegroup-meta-python3 = "\
->       python3-trafaret-config \
->       python3-traitlets \
->       python3-transitions \
-> +    python3-trustme \
->       python3-twine \
->       python3-twisted \
->       python3-twitter \
-> diff --git a/meta-python/recipes-devtools/python/python3-requests-toolbelt_0.10.1.bb b/meta-python/recipes-devtools/python/python3-requests-toolbelt_0.10.1.bb
-> index c39950ab5d..7191a3e6c1 100644
-> --- a/meta-python/recipes-devtools/python/python3-requests-toolbelt_0.10.1.bb
-> +++ b/meta-python/recipes-devtools/python/python3-requests-toolbelt_0.10.1.bb
-> @@ -21,6 +21,7 @@ RDEPENDS:${PN}-ptest += " \
->   	${PYTHON_PN}-betamax \
->   	${PYTHON_PN}-mock \
->   	${PYTHON_PN}-multiprocessing \
-> +        ${PYTHON_PN}-trustme \
->   "
->   
->   do_install_ptest() {
-> diff --git a/meta-python/recipes-devtools/python/python3-service-identity/run-ptest b/meta-python/recipes-devtools/python/python3-service-identity/run-ptest
-> new file mode 100644
-> index 0000000000..b63c4de0d9
-> --- /dev/null
-> +++ b/meta-python/recipes-devtools/python/python3-service-identity/run-ptest
-> @@ -0,0 +1,3 @@
-> +#!/bin/sh
-> +
-> +pytest -o log_cli=true -o log_cli_level=INFO | sed -e 's/\[...%\]//g'| sed -e 's/PASSED/PASS/g'| sed -e 's/FAILED/FAIL/g'|sed -e 's/SKIPPED/SKIP/g'| awk '{if ($NF=="PASS" || $NF=="FAIL" || $NF=="SKIP" || $NF=="XFAIL" || $NF=="XPASS"){printf "%s: %s\n", $NF, $0}else{print}}'| awk '{if ($NF=="PASS" || $NF=="FAIL" || $NF=="SKIP" || $NF=="XFAIL" || $NF=="XPASS") {$NF="";print $0}else{print}}'
-> diff --git a/meta-python/recipes-devtools/python/python3-service-identity_21.1.0.bb b/meta-python/recipes-devtools/python/python3-service-identity_21.1.0.bb
-> new file mode 100644
-> index 0000000000..0210a5de22
-> --- /dev/null
-> +++ b/meta-python/recipes-devtools/python/python3-service-identity_21.1.0.bb
-> @@ -0,0 +1,25 @@
-> +DESCRIPTION = "The tools for verifying whether a certificate is valid for the intended purposes."
-> +HOMEPAGE = "https://pypi.org/project/service-identity"
-> +AUTHOR = "Hynek Schlawack"
-> +
-> +LICENSE = "MIT"
-> +LIC_FILES_CHKSUM = "file://LICENSE;md5=8a0f079f4e6a215d6bd6f9d97cab4d5f"
-> +
-> +SRC_URI[md5sum] = "5e5c195d8fcedc72f9068be2ad9b5a13"
-> +SRC_URI[sha256sum] = "6e6c6086ca271dc11b033d17c3a8bea9f24ebff920c587da090afc9519419d34"
-> +
-> +inherit pypi setuptools3 ptest
-> +
-> +SRC_URI += " \
-> +	file://run-ptest \
-> +"
-> +
-> +RDEPENDS:${PN}-ptest += " \
-> +	${PYTHON_PN}-pytest \
-> +"
-> +
-> +do_install_ptest() {
-> +	install -d ${D}${PTEST_PATH}/tests
-> +	cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
-> +	cp -rf ${S}/setup.py ${D}${PTEST_PATH}
-> +}
-> diff --git a/meta-python/recipes-devtools/python/python3-trustme/run-ptest b/meta-python/recipes-devtools/python/python3-trustme/run-ptest
-> new file mode 100644
-> index 0000000000..b63c4de0d9
-> --- /dev/null
-> +++ b/meta-python/recipes-devtools/python/python3-trustme/run-ptest
-> @@ -0,0 +1,3 @@
-> +#!/bin/sh
-> +
-> +pytest -o log_cli=true -o log_cli_level=INFO | sed -e 's/\[...%\]//g'| sed -e 's/PASSED/PASS/g'| sed -e 's/FAILED/FAIL/g'|sed -e 's/SKIPPED/SKIP/g'| awk '{if ($NF=="PASS" || $NF=="FAIL" || $NF=="SKIP" || $NF=="XFAIL" || $NF=="XPASS"){printf "%s: %s\n", $NF, $0}else{print}}'| awk '{if ($NF=="PASS" || $NF=="FAIL" || $NF=="SKIP" || $NF=="XFAIL" || $NF=="XPASS") {$NF="";print $0}else{print}}'
-> diff --git a/meta-python/recipes-devtools/python/python3-trustme_0.9.0.bb b/meta-python/recipes-devtools/python/python3-trustme_0.9.0.bb
-> new file mode 100644
-> index 0000000000..641512c46c
-> --- /dev/null
-> +++ b/meta-python/recipes-devtools/python/python3-trustme_0.9.0.bb
-> @@ -0,0 +1,27 @@
-> +DESCRIPTION = "A utility provides a fake certificate authority (CA)"
-> +HOMEPAGE = "https://pypi.org/project/trustme"
-> +AUTHOR = "Nathaniel J. Smith"
-> +
-> +LICENSE = "Apache-2.0"
-> +LIC_FILES_CHKSUM = "file://LICENSE;md5=d5a7af1a4b73e57431e25d15a2da745a"
-> +
-> +SRC_URI[md5sum] = "0e4d698e5aecaf8306cf440bf3dcbbe0"
-> +SRC_URI[sha256sum] = "5e07b23d70ceed64f3bb36ae4b9abc52354c16c98d45ab037bee2b5fbffe586c"
-> +
-> +inherit pypi setuptools3 ptest
-> +
-> +SRC_URI += " \
-> +	file://run-ptest \
-> +"
-> +
-> +RDEPENDS:${PN}-ptest += " \
-> +	${PYTHON_PN}-pytest \
-> +	${PYTHON_PN}-service-identity \
-> +	${PYTHON_PN}-pyasn1-modules \
-> +"
-> +
-> +do_install_ptest() {
-> +	install -d ${D}${PTEST_PATH}/tests
-> +	cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
-> +	cp -rf ${S}/setup.py ${D}${PTEST_PATH}
-> +}
->
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#104534): https://lists.openembedded.org/g/openembedded-devel/message/104534
-> Mute This Topic: https://lists.openembedded.org/mt/100912003/7199376
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [narpat.mali@windriver.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
->
+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+---
+ ...Fixed-swig-host-contamination-issue.patch} | 21 ++++++++++++-------
+ ...te_malloc__-with-__attribute__-__ma.patch} | 15 +++++++------
+ .../audit/{audit_3.1.1.bb => audit_3.1.2.bb}  |  6 +++---
+ 3 files changed, 24 insertions(+), 18 deletions(-)
+ rename meta-oe/recipes-security/audit/audit/{Fixed-swig-host-contamination-issue.patch => 0001-Fixed-swig-host-contamination-issue.patch} (73%)
+ rename meta-oe/recipes-security/audit/audit/{0001-Replace-__attribute_malloc__-with-__attribute__-__ma.patch => 0002-Replace-__attribute_malloc__-with-__attribute__-__ma.patch} (81%)
+ rename meta-oe/recipes-security/audit/{audit_3.1.1.bb => audit_3.1.2.bb} (95%)
+
+diff --git a/meta-oe/recipes-security/audit/audit/Fixed-swig-host-contamination-issue.patch b/meta-oe/recipes-security/audit/audit/0001-Fixed-swig-host-contamination-issue.patch
+similarity index 73%
+rename from meta-oe/recipes-security/audit/audit/Fixed-swig-host-contamination-issue.patch
+rename to meta-oe/recipes-security/audit/audit/0001-Fixed-swig-host-contamination-issue.patch
+index b023c80ae..5f2ecc141 100644
+--- a/meta-oe/recipes-security/audit/audit/Fixed-swig-host-contamination-issue.patch
++++ b/meta-oe/recipes-security/audit/audit/0001-Fixed-swig-host-contamination-issue.patch
+@@ -1,7 +1,7 @@
+-From 3d13f92c1bb293523670ba01aea7e655b00a6709 Mon Sep 17 00:00:00 2001
++From 9a32d42dfc6713fd0085dd4563a934afc30ec097 Mon Sep 17 00:00:00 2001
+ From: Li xin <lixin.fnst@cn.fujitsu.com>
+ Date: Sun, 19 Jul 2015 02:42:58 +0900
+-Subject: [PATCH] audit: Fixed swig host contamination issue
++Subject: [PATCH] Fixed swig host contamination issue
+ 
+ The audit build uses swig to generate a python wrapper.
+ Unfortunately, the swig info file references host include
+@@ -18,6 +18,8 @@ Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+  bindings/swig/src/auditswig.i     | 2 +-
+  2 files changed, 3 insertions(+), 2 deletions(-)
+ 
++diff --git a/bindings/swig/python3/Makefile.am b/bindings/swig/python3/Makefile.am
++index 6131e80d..2fb7207b 100644
+ --- a/bindings/swig/python3/Makefile.am
+ +++ b/bindings/swig/python3/Makefile.am
+ @@ -23,6 +23,7 @@
+@@ -28,7 +30,7 @@ Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+  LIBS = $(top_builddir)/lib/libaudit.la
+  SWIG_FLAGS = -python -py3 -modern
+  SWIG_INCLUDES = -I. -I$(top_builddir) -I${top_srcdir}/lib $(PYTHON3_INCLUDES)
+-@@ -37,7 +38,7 @@ _audit_la_DEPENDENCIES =${top_srcdir}/li
++@@ -37,7 +38,7 @@ _audit_la_DEPENDENCIES =${top_srcdir}/lib/libaudit.h ${top_builddir}/lib/libaudi
+  _audit_la_LIBADD = ${top_builddir}/lib/libaudit.la
+  nodist__audit_la_SOURCES  = audit_wrap.c
+  audit.py audit_wrap.c: ${srcdir}/../src/auditswig.i 
+@@ -37,14 +39,19 @@ Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+  
+  CLEANFILES = audit.py* audit_wrap.c *~
+  
++diff --git a/bindings/swig/src/auditswig.i b/bindings/swig/src/auditswig.i
++index 9a2c5661..6cbb7295 100644
+ --- a/bindings/swig/src/auditswig.i
+ +++ b/bindings/swig/src/auditswig.i
+-@@ -39,7 +39,7 @@ signed
+- #define __attribute(X) /*nothing*/
+- typedef unsigned __u32;
+- typedef unsigned uid_t;
++@@ -43,7 +43,7 @@ typedef unsigned uid_t;
++  * generating setters against them: https://github.com/swig/swig/issues/1699
++  */
++ %ignore audit_rule_data::buf;
+ -%include "/usr/include/linux/audit.h"
+ +%include "../lib/audit.h"
+  #define __extension__ /*nothing*/
+  %include <stdint.i>
+  %include "../lib/libaudit.h"
++-- 
++2.25.1
++
+diff --git a/meta-oe/recipes-security/audit/audit/0001-Replace-__attribute_malloc__-with-__attribute__-__ma.patch b/meta-oe/recipes-security/audit/audit/0002-Replace-__attribute_malloc__-with-__attribute__-__ma.patch
+similarity index 81%
+rename from meta-oe/recipes-security/audit/audit/0001-Replace-__attribute_malloc__-with-__attribute__-__ma.patch
+rename to meta-oe/recipes-security/audit/audit/0002-Replace-__attribute_malloc__-with-__attribute__-__ma.patch
+index 23747c45f..7f0af74a8 100644
+--- a/meta-oe/recipes-security/audit/audit/0001-Replace-__attribute_malloc__-with-__attribute__-__ma.patch
++++ b/meta-oe/recipes-security/audit/audit/0002-Replace-__attribute_malloc__-with-__attribute__-__ma.patch
+@@ -1,8 +1,7 @@
+-From 79c8d6a2755c9dfa00a5e86378e89a94eef0504d Mon Sep 17 00:00:00 2001
++From 679cb57fa93984fed345dd3890cdbcbaa24e8518 Mon Sep 17 00:00:00 2001
+ From: Khem Raj <raj.khem@gmail.com>
+ Date: Tue, 9 Aug 2022 23:57:03 -0700
+-Subject: [PATCH] Replace __attribute_malloc__ with 
+- __attribute__((__malloc__))
++Subject: [PATCH] Replace __attribute_malloc__ with __attribute__((__malloc__))
+ 
+ __attribute_malloc__ is not available on musl
+ 
+@@ -11,18 +10,18 @@ Fixes
+ |         __attribute_malloc__ __attr_dealloc (auparse_destroy, 1);
+ |         ^
+ 
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+ Upstream-Status: Pending
+ 
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
+  auparse/auparse.h | 2 +-
+  1 file changed, 1 insertion(+), 1 deletion(-)
+ 
+ diff --git a/auparse/auparse.h b/auparse/auparse.h
+-index 95cf256d..c7dbe5ff 100644
++index 5cb7402e..39156eff 100644
+ --- a/auparse/auparse.h
+ +++ b/auparse/auparse.h
+-@@ -51,7 +51,7 @@ typedef void (*auparse_callback_ptr)(auparse_state_t *au,
++@@ -54,7 +54,7 @@ typedef void (*auparse_callback_ptr)(auparse_state_t *au,
+  void auparse_destroy(auparse_state_t *au);
+  void auparse_destroy_ext(auparse_state_t *au, auparse_destroy_what_t what);
+  auparse_state_t *auparse_init(ausource_t source, const void *b)
+@@ -32,5 +31,5 @@ index 95cf256d..c7dbe5ff 100644
+  	__attr_access ((__read_only__, 2, 3));
+  int auparse_feed(auparse_state_t *au, const char *data, size_t data_len)
+ -- 
+-2.37.1
++2.25.1
+ 
+diff --git a/meta-oe/recipes-security/audit/audit_3.1.1.bb b/meta-oe/recipes-security/audit/audit_3.1.2.bb
+similarity index 95%
+rename from meta-oe/recipes-security/audit/audit_3.1.1.bb
+rename to meta-oe/recipes-security/audit/audit_3.1.2.bb
+index 7ed2fd2de..5380e9022 100644
+--- a/meta-oe/recipes-security/audit/audit_3.1.1.bb
++++ b/meta-oe/recipes-security/audit/audit_3.1.2.bb
+@@ -8,15 +8,15 @@ LICENSE = "GPL-2.0-or-later & LGPL-2.0-or-later"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
+ 
+ SRC_URI = "git://github.com/linux-audit/${BPN}-userspace.git;branch=master;protocol=https \
+-           file://Fixed-swig-host-contamination-issue.patch \
+-           file://0001-Replace-__attribute_malloc__-with-__attribute__-__ma.patch \
++           file://0001-Fixed-swig-host-contamination-issue.patch \
++           file://0002-Replace-__attribute_malloc__-with-__attribute__-__ma.patch \
+            file://auditd \
+            file://auditd.service \
+            file://audit-volatile.conf \
+ "
+ 
+ S = "${WORKDIR}/git"
+-SRCREV = "6e367585a899231da05797c6126f8bb01febb2f5"
++SRCREV = "572eb7d4fe926e7c1c52166d08e78af54877cbc5"
+ 
+ inherit autotools python3targetconfig update-rc.d systemd
+ 
+-- 
+2.25.1
+
 
