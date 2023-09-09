@@ -1,164 +1,350 @@
-Return-Path: <akuster808@gmail.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5026FEC8756
-	for <webhook@archiver.kernel.org>; Sat,  9 Sep 2023 16:54:10 +0000 (UTC)
-Received: from mail-yb1-f179.google.com (mail-yb1-f179.google.com [209.85.219.179])
- by mx.groups.io with SMTP id smtpd.web10.20354.1694278442804404729
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9F5EEEE57CD
+	for <webhook@archiver.kernel.org>; Sat,  9 Sep 2023 22:28:22 +0000 (UTC)
+Received: from mail-oa1-f46.google.com (mail-oa1-f46.google.com [209.85.160.46])
+ by mx.groups.io with SMTP id smtpd.web11.26577.1694298500931253577
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 09 Sep 2023 09:54:02 -0700
+ Sat, 09 Sep 2023 15:28:21 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20221208 header.b=gP6qiMwv;
- spf=pass (domain: gmail.com, ip: 209.85.219.179, mailfrom: akuster808@gmail.com)
-Received: by mail-yb1-f179.google.com with SMTP id 3f1490d57ef6-d7260fae148so2795430276.1
-        for <openembedded-devel@lists.openembedded.org>; Sat, 09 Sep 2023 09:54:02 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20221208 header.b=LYyGFg+j;
+ spf=pass (domain: gmail.com, ip: 209.85.160.46, mailfrom: raj.khem@gmail.com)
+Received: by mail-oa1-f46.google.com with SMTP id 586e51a60fabf-1c4cf775a14so2223540fac.3
+        for <openembedded-devel@lists.openembedded.org>; Sat, 09 Sep 2023 15:28:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1694278442; x=1694883242; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=xFqx5e4xCkj9wvuCIVZ6jAvDohzBjGHt2mYpubCFv4k=;
-        b=gP6qiMwvoU2KO/3rNfka87xxxD86XNA0FswDyens9j7s+2KRiATOHnq9QpSXp/GvUZ
-         Tluv+MYz96bOpwlTZUXDoNoUPDE3sCNqHoiIMx/uhA9S+We+rM4D0Q0b8TOrz6vPciUt
-         CVpn50vw+Z4XrvkDfKw4sS7FYW5deEoL0phW1rWRcCc344jw2rVx4VZR0NqOCgBR14nk
-         h2i/G80LUJXjsxh5FRpM5v2fUN4XZ+9RaJplQ7V5bhV7u9PTP/iv468/07YBagciKSKp
-         7EyIjt1cwYZpc4GCWrMPHGOvTzeywiR9vCus96e0HHS1PEnYGjqV3gm2kS34U6Db14kr
-         FssQ==
+        d=gmail.com; s=20221208; t=1694298500; x=1694903300; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=rw/KO4a0jCpmBDUsJ3fV8PLy6KgoxZ+Lki9wIZXfJtA=;
+        b=LYyGFg+jVrVJIPeGwM99gqu0l6d8Nh5ww7TC/XZxHS+HDezwEWEc+Vn0LPXaI9fRzj
+         HTLv1+Lxx2zfrYIGTK5GpWaozzNMyEbFDa4qTt2yNKv2NQn5thL2ZkVm0g+5mRwZ38En
+         dBi/0q8B76aMhLLe1snHMnNRIRjCfnDwXMoayVlp6H3RCGt/gCqV7sJIS0J8nXpYAjCy
+         kbQoeNHLbj5vBEl6Ye1f2m0nzNtuB585TR2bIL99/S6cqmsZw9vMHrhaWFu4WRfTHMMY
+         eKvE6GRZ8xVtox9BKTxKfB5PltdGZMmyAbDVoJURLW5CpzgBLc632kjjVOM1qNSMEQ9E
+         Hg9Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1694278442; x=1694883242;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=xFqx5e4xCkj9wvuCIVZ6jAvDohzBjGHt2mYpubCFv4k=;
-        b=qTfEohKMAkKObDHmPax7PovGxlGkGuCQEfXClWa7yzWjF4G5vNe7TGZoc0ty55VwQq
-         tRtOSGJdXpo3kxrufN8W5IAbCYRT4IEmlLpRNjO2SetArkuMdlmRRlWs7QumvCaOmaxG
-         u6LWh9NtoSdm1VGDgR1UxWOlxaNpmz2q4PpMr3BCcAbuAnQAbjBO+dccwsAweaZjVmOa
-         fN/Sqy2/NDkTHs126/PECfn9iX1jLqfcowyu7Md1H23kKWmoeuI1Es4GCIVl9nzvvgUC
-         V2PYt+fQFrEYytqo8j3h+EXk+5geIudGnkjsufvKIxc3VLJh/Rul3zYCJHOrEpQ2ZX/6
-         BnSA==
-X-Gm-Message-State: AOJu0YyuJ8SyT0tcRAV5+xL+XVil8ZHqt/5QQ0RbS7rRI58v8FoVrjZA
-	y2GZ6tD0p448/wcN5ZRm4i37GBgu0L0=
-X-Google-Smtp-Source: AGHT+IGtaxCjlfhEQ8/kB/nsG1MbhECpsW2pL5yVwg5ixunNHHdFMUTVQKCjGho0jxqE1KJqSaAZlQ==
-X-Received: by 2002:a05:6902:4d4:b0:d0e:9914:f5e1 with SMTP id v20-20020a05690204d400b00d0e9914f5e1mr5036908ybs.15.1694278441472;
-        Sat, 09 Sep 2023 09:54:01 -0700 (PDT)
-Received: from keaua.caveonetworks.com ([2600:1700:9190:ba10:2fc7:531e:3376:5faf])
-        by smtp.gmail.com with ESMTPSA id z21-20020a25ad95000000b00d071631665fsm872110ybi.59.2023.09.09.09.54.00
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 09 Sep 2023 09:54:01 -0700 (PDT)
-From: Armin Kuster <akuster808@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][dunfell][PATCH] postgresql: refresh patches
-Date: Sat,  9 Sep 2023 12:54:00 -0400
-Message-Id: <20230909165400.1189310-1-akuster808@gmail.com>
-X-Mailer: git-send-email 2.34.1
+        d=1e100.net; s=20230601; t=1694298500; x=1694903300;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=rw/KO4a0jCpmBDUsJ3fV8PLy6KgoxZ+Lki9wIZXfJtA=;
+        b=lohiJ0P9k652owZ7z3szVYpvhn7T2tFIyWRCDuEdJn+aupp/DHdedPTfNqEmOLPdzx
+         Syj2W6M2JrLhMOb6npFXihFNX1FnBri9aQbpUcsBc2oldXmnOtliOVa+rnvOl/LP9/0D
+         WVgtQA4FFVsfjpIng73Av2fgEGpOIhGuQcxrJT1wutHy34gAt16B0OpXzQiWzJm4KOMS
+         TuY5NvAHkMx1pNDPaHKIGpkXIWSUxykJAgUhkyW4BKUs9q6AJF++NMI68Wek4Ql97fv9
+         eKhyAGufGjX6tKft07giRSJ6AbOh/YfViGsZtE9xHUQMdKayjTTY3jN2ubjYxMi1o2pr
+         /HUQ==
+X-Gm-Message-State: AOJu0Yx/uOs2CPWbey+uMZvPmzj2uToU+x6jKuCfmDzuk3Fw9IVzldID
+	JnOcHM67ZhlJWrcTfaDJ3vi9qg6/ic1+k9hqMxY=
+X-Google-Smtp-Source: AGHT+IG1pghM0pXYsKp9MoAwYRZtPJ1mmauQMMQJdUkOqbnVrIebs6zNoiinh8WpAbici0sFp6zR8yHQdrv02nENZ/U=
+X-Received: by 2002:a05:6870:b494:b0:1d0:cbc7:1c92 with SMTP id
+ y20-20020a056870b49400b001d0cbc71c92mr7746490oap.28.1694298499833; Sat, 09
+ Sep 2023 15:28:19 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20230909093517.444924-1-peron.clem@gmail.com> <20230909093517.444924-5-peron.clem@gmail.com>
+In-Reply-To: <20230909093517.444924-5-peron.clem@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sat, 9 Sep 2023 15:27:53 -0700
+Message-ID: <CAMKF1sqAv8HrONEMnJm+esu-6kDDNbSrsUiGUi41saA4hUOwHQ@mail.gmail.com>
+Subject: Re: [oe] [PATCH 4/4] devtools: grpc: bump to 1.56.2
+To: =?UTF-8?B?Q2zDqW1lbnQgUMOpcm9u?= <peron.clem@gmail.com>
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 09 Sep 2023 16:54:10 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104816
+ <openembedded-devel@lists.openembedded.org>; Sat, 09 Sep 2023 22:28:22 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104817
 
-fixes:
+seeing a build error in native version
 
-WARNING: postgresql-12.16-r0 do_patch: Fuzz detected:
+https://autobuilder.yoctoproject.org/typhoon/#/builders/88/builds/3103/step=
+s/14/logs/stdio
 
-Applying patch 0001-Add-support-for-RISC-V.patch
-patching file src/include/storage/s_lock.h
-Hunk #2 succeeded at 339 with fuzz 1.
-
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
----
- .../files/0001-Add-support-for-RISC-V.patch         | 13 +++++--------
- .../files/0001-Improve-reproducibility.patch        | 13 +++++--------
- .../postgresql/files/not-check-libperl.patch        | 13 +++++--------
- 3 files changed, 15 insertions(+), 24 deletions(-)
-
-diff --git a/meta-oe/recipes-dbs/postgresql/files/0001-Add-support-for-RISC-V.patch b/meta-oe/recipes-dbs/postgresql/files/0001-Add-support-for-RISC-V.patch
-index a1f5b2a7b4..e5fb85170b 100644
---- a/meta-oe/recipes-dbs/postgresql/files/0001-Add-support-for-RISC-V.patch
-+++ b/meta-oe/recipes-dbs/postgresql/files/0001-Add-support-for-RISC-V.patch
-@@ -9,10 +9,10 @@ extending the existing aarch64 macro works.
-  src/include/storage/s_lock.h | 5 +++--
-  1 file changed, 3 insertions(+), 2 deletions(-)
- 
--diff --git a/src/include/storage/s_lock.h b/src/include/storage/s_lock.h
--index 3fe29ce..7cd578f 100644
----- a/src/include/storage/s_lock.h
--+++ b/src/include/storage/s_lock.h
-+Index: postgresql-12.16/src/include/storage/s_lock.h
-+===================================================================
-+--- postgresql-12.16.orig/src/include/storage/s_lock.h
-++++ postgresql-12.16/src/include/storage/s_lock.h
- @@ -317,11 +317,12 @@ tas(volatile slock_t *lock)
-  
-  /*
-@@ -35,7 +35,4 @@ index 3fe29ce..7cd578f 100644
- +#endif	 /* __arm__ || __arm || __aarch64__ || __aarch64 || __riscv */
-  
-  
-- /*
---- 
--2.9.3
--
-+ /* S/390 and S/390x Linux (32- and 64-bit zSeries) */
-diff --git a/meta-oe/recipes-dbs/postgresql/files/0001-Improve-reproducibility.patch b/meta-oe/recipes-dbs/postgresql/files/0001-Improve-reproducibility.patch
-index 32b7f42845..70c813adf5 100644
---- a/meta-oe/recipes-dbs/postgresql/files/0001-Improve-reproducibility.patch
-+++ b/meta-oe/recipes-dbs/postgresql/files/0001-Improve-reproducibility.patch
-@@ -19,11 +19,11 @@ Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
-  src/common/Makefile | 4 ----
-  1 file changed, 4 deletions(-)
- 
--diff --git a/src/common/Makefile b/src/common/Makefile
--index 1fc2c66..5e6c457 100644
----- a/src/common/Makefile
--+++ b/src/common/Makefile
--@@ -27,10 +27,6 @@ include $(top_builddir)/src/Makefile.global
-+Index: postgresql-12.16/src/common/Makefile
-+===================================================================
-+--- postgresql-12.16.orig/src/common/Makefile
-++++ postgresql-12.16/src/common/Makefile
-+@@ -31,10 +31,6 @@ include $(top_builddir)/src/Makefile.glo
-  # don't include subdirectory-path-dependent -I and -L switches
-  STD_CPPFLAGS := $(filter-out -I$(top_srcdir)/src/include -I$(top_builddir)/src/include,$(CPPFLAGS))
-  STD_LDFLAGS := $(filter-out -L$(top_builddir)/src/common -L$(top_builddir)/src/port,$(LDFLAGS))
-@@ -34,6 +34,3 @@ index 1fc2c66..5e6c457 100644
-  override CPPFLAGS += -DVAL_CFLAGS_SL="\"$(CFLAGS_SL)\""
-  override CPPFLAGS += -DVAL_LDFLAGS="\"$(STD_LDFLAGS)\""
-  override CPPFLAGS += -DVAL_LDFLAGS_EX="\"$(LDFLAGS_EX)\""
---- 
--2.7.4
--
-diff --git a/meta-oe/recipes-dbs/postgresql/files/not-check-libperl.patch b/meta-oe/recipes-dbs/postgresql/files/not-check-libperl.patch
-index 22b62d9ded..eb6226b179 100644
---- a/meta-oe/recipes-dbs/postgresql/files/not-check-libperl.patch
-+++ b/meta-oe/recipes-dbs/postgresql/files/not-check-libperl.patch
-@@ -19,11 +19,11 @@ Signed-off-by: Changqing Li <changqing.li@windriver.com>
-  configure.in | 2 +-
-  1 file changed, 1 insertion(+), 1 deletion(-)
- 
--diff --git a/configure.in b/configure.in
--index b98b9bb..8584677 100644
----- a/configure.in
--+++ b/configure.in
--@@ -2211,7 +2211,7 @@ Use --without-tcl to disable building PL/Tcl.])
-+Index: postgresql-12.16/configure.in
-+===================================================================
-+--- postgresql-12.16.orig/configure.in
-++++ postgresql-12.16/configure.in
-+@@ -2357,7 +2357,7 @@ Use --without-tcl to disable building PL
-  fi
-  
-  # check for <perl.h>
-@@ -32,6 +32,3 @@ index b98b9bb..8584677 100644
-    ac_save_CPPFLAGS=$CPPFLAGS
-    CPPFLAGS="$CPPFLAGS $perl_includespec"
-    AC_CHECK_HEADER(perl.h, [], [AC_MSG_ERROR([header file <perl.h> is required for Perl])],
---- 
--2.7.4
--
--- 
-2.34.1
-
+On Sat, Sep 9, 2023 at 2:35=E2=80=AFAM Cl=C3=A9ment P=C3=A9ron <peron.clem@=
+gmail.com> wrote:
+>
+> Remove merged patch that export plugin to a separate targets
+>
+> Remove no more applicatable patch
+>
+> Signed-off-by: Cl=C3=A9ment P=C3=A9ron <peron.clem@gmail.com>
+> ---
+>  ...RPCPP_ABSEIL_SYNC-to-GPR_ABSEIL_SYNC.patch | 62 -------------
+>  ...d-separate-export-for-plugin-targets.patch | 93 -------------------
+>  .../grpc/{grpc_1.50.1.bb =3D> grpc_1.56.2.bb}   |  6 +-
+>  3 files changed, 2 insertions(+), 159 deletions(-)
+>  delete mode 100644 meta-oe/recipes-devtools/grpc/grpc/0001-Revert-Change=
+d-GRPCPP_ABSEIL_SYNC-to-GPR_ABSEIL_SYNC.patch
+>  delete mode 100644 meta-oe/recipes-devtools/grpc/grpc/0001-cmake-add-sep=
+arate-export-for-plugin-targets.patch
+>  rename meta-oe/recipes-devtools/grpc/{grpc_1.50.1.bb =3D> grpc_1.56.2.bb=
+} (92%)
+>
+> diff --git a/meta-oe/recipes-devtools/grpc/grpc/0001-Revert-Changed-GRPCP=
+P_ABSEIL_SYNC-to-GPR_ABSEIL_SYNC.patch b/meta-oe/recipes-devtools/grpc/grpc=
+/0001-Revert-Changed-GRPCPP_ABSEIL_SYNC-to-GPR_ABSEIL_SYNC.patch
+> deleted file mode 100644
+> index b245ad865..000000000
+> --- a/meta-oe/recipes-devtools/grpc/grpc/0001-Revert-Changed-GRPCPP_ABSEI=
+L_SYNC-to-GPR_ABSEIL_SYNC.patch
+> +++ /dev/null
+> @@ -1,62 +0,0 @@
+> -From dc593958e556dd496b774f35c5992285510d6859 Mon Sep 17 00:00:00 2001
+> -From: Martin Jansa <Martin.Jansa@gmail.com>
+> -Date: Tue, 19 Oct 2021 17:09:55 +0200
+> -Subject: [PATCH] Revert "Changed GRPCPP_ABSEIL_SYNC to GPR_ABSEIL_SYNC
+> - (#25681)"
+> -
+> -This reverts commit 931f91b745cd5b2864a0d1787815871d0bd844ae.
+> -
+> -Fixes sysdig from meta-oe and other recipes (like com.webos.service.tts
+> -libgoogleassistant from meta-webosose) failing with:
+> -
+> -| FAILED: userspace/sysdig/sysdig
+> -| : && /OE/build/oe-core/tmp-glibc/work/core2-64-oe-linux/sysdig/0.27.1-=
+r0/recipe-sysroot-native/usr/bin/x86_64-oe-linux/x86_64-oe-linux-g++ -m64 -=
+march=3Dcore2 -mtune=3Dcore2 -msse3 -mfpmath=3Dsse -fstack-protector-strong=
+  -O2 -D_FORTIFY_SOURCE=3D2 -Wformat -Wformat-security -Werror=3Dformat-sec
+> -urity  --sysroot=3D/OE/build/oe-core/tmp-glibc/work/core2-64-oe-linux/sy=
+sdig/0.27.1-r0/recipe-sysroot  -O2 -pipe -g -feliminate-unused-debug-types =
+-fmacro-prefix-map=3D/OE/build/oe-core/tmp-glibc/work/core2-64-oe-linux/sys=
+dig/0.27.1-r0=3D/usr/src/debug/sysdig/0.27.1-r0                      -f
+> -debug-prefix-map=3D/OE/build/oe-core/tmp-glibc/work/core2-64-oe-linux/sy=
+sdig/0.27.1-r0=3D/usr/src/debug/sysdig/0.27.1-r0                      -fdeb=
+ug-prefix-map=3D/OE/build/oe-core/tmp-glibc/work/core2-64-oe-linux/sysdig/0=
+.27.1-r0/recipe-sysroot=3D                      -fdebug-prefix-map=3D/OE/bu
+> -ild/oe-core/tmp-glibc/work/core2-64-oe-linux/sysdig/0.27.1-r0/recipe-sys=
+root-native=3D  -fvisibility-inlines-hidden  -m64 -march=3Dcore2 -mtune=3Dc=
+ore2 -msse3 -mfpmath=3Dsse -fstack-protector-strong  -O2 -D_FORTIFY_SOURCE=
+=3D2 -Wformat -Wformat-security -Werror=3Dformat-security  --sysroot=3D/OE/=
+build
+> -/oe-core/tmp-glibc/work/core2-64-oe-linux/sysdig/0.27.1-r0/recipe-sysroo=
+t -Wall -ggdb   -std=3Dc++0x -O3 -fno-strict-aliasing -DNDEBUG  -m64 -march=
+=3Dcore2 -mtune=3Dcore2 -msse3 -mfpmath=3Dsse -fstack-protector-strong  -O2=
+ -D_FORTIFY_SOURCE=3D2 -Wformat -Wformat-security -Werror=3Dformat-security
+> ---sysroot=3D/OE/build/oe-core/tmp-glibc/work/core2-64-oe-linux/sysdig/0.=
+27.1-r0/recipe-sysroot  -O2 -pipe -g -feliminate-unused-debug-types -fmacro=
+-prefix-map=3D/OE/build/oe-core/tmp-glibc/work/core2-64-oe-linux/sysdig/0.2=
+7.1-r0=3D/usr/src/debug/sysdig/0.27.1-r0                      -fdebug-p
+> -refix-map=3D/OE/build/oe-core/tmp-glibc/work/core2-64-oe-linux/sysdig/0.=
+27.1-r0=3D/usr/src/debug/sysdig/0.27.1-r0                      -fdebug-pref=
+ix-map=3D/OE/build/oe-core/tmp-glibc/work/core2-64-oe-linux/sysdig/0.27.1-r=
+0/recipe-sysroot=3D                      -fdebug-prefix-map=3D/OE/build/oe-
+> -core/tmp-glibc/work/core2-64-oe-linux/sysdig/0.27.1-r0/recipe-sysroot-na=
+tive=3D  -fvisibility-inlines-hidden  -m64 -march=3Dcore2 -mtune=3Dcore2 -m=
+sse3 -mfpmath=3Dsse -fstack-protector-strong  -O2 -D_FORTIFY_SOURCE=3D2 -Wf=
+ormat -Wformat-security -Werror=3Dformat-security  --sysroot=3D/OE/build/oe=
+-cor
+> -e/tmp-glibc/work/core2-64-oe-linux/sysdig/0.27.1-r0/recipe-sysroot -Wl,-=
+O1 -Wl,--hash-style=3Dgnu -Wl,--as-needed -fmacro-prefix-map=3D/OE/build/oe=
+-core/tmp-glibc/work/core2-64-oe-linux/sysdig/0.27.1-r0=3D/usr/src/debug/sy=
+sdig/0.27.1-r0                      -fdebug-prefix-map=3D/OE/build/oe-cor
+> -e/tmp-glibc/work/core2-64-oe-linux/sysdig/0.27.1-r0=3D/usr/src/debug/sys=
+dig/0.27.1-r0                      -fdebug-prefix-map=3D/OE/build/oe-core/t=
+mp-glibc/work/core2-64-oe-linux/sysdig/0.27.1-r0/recipe-sysroot=3D         =
+             -fdebug-prefix-map=3D/OE/build/oe-core/tmp-glibc/work/core2-
+> -64-oe-linux/sysdig/0.27.1-r0/recipe-sysroot-native=3D  -Wl,-z,relro,-z,n=
+ow -Wl,-O1 -Wl,--hash-style=3Dgnu -Wl,--as-needed -fmacro-prefix-map=3D/OE/=
+build/oe-core/tmp-glibc/work/core2-64-oe-linux/sysdig/0.27.1-r0=3D/usr/src/=
+debug/sysdig/0.27.1-r0                      -fdebug-prefix-map=3D/OE/build/
+> -oe-core/tmp-glibc/work/core2-64-oe-linux/sysdig/0.27.1-r0=3D/usr/src/deb=
+ug/sysdig/0.27.1-r0                      -fdebug-prefix-map=3D/OE/build/oe-=
+core/tmp-glibc/work/core2-64-oe-linux/sysdig/0.27.1-r0/recipe-sysroot=3D   =
+                   -fdebug-prefix-map=3D/OE/build/oe-core/tmp-glibc/work/
+> -core2-64-oe-linux/sysdig/0.27.1-r0/recipe-sysroot-native=3D  -Wl,-z,relr=
+o,-z,now   -rdynamic userspace/sysdig/CMakeFiles/sysdig.dir/fields_info.cpp=
+.o userspace/sysdig/CMakeFiles/sysdig.dir/sysdig.cpp.o -o userspace/sysdig/=
+sysdig  userspace/libsinsp/libsinsp.a  userspace/libscap/libscap.a
+> - -lelf  -lz  -lcurl  -ljsoncpp  -ltbb  -lcares  -lgrpc++_unsecure  -lgrp=
+c_unsecure  -lprotobuf  -lcares  -lgrpc++_unsecure  -lgrpc_unsecure  -lprot=
+obuf  -ljq  -lb64  -lrt  -lanl  -lssl  -lcrypto  -lluajit-5.1  -ldl  -lpthr=
+ead && :
+> -| /usr/include/grpcpp/impl/codegen/completion_queue.h:121: error: undefi=
+ned reference to 'absl::lts_20210324::Mutex::~Mutex()'
+> -| /usr/include/grpcpp/impl/codegen/completion_queue.h:121: error: undefi=
+ned reference to 'absl::lts_20210324::Mutex::~Mutex()'
+> -| /usr/include/grpcpp/impl/codegen/completion_queue.h:121: error: undefi=
+ned reference to 'absl::lts_20210324::Mutex::~Mutex()'
+> -| /usr/include/grpcpp/impl/codegen/completion_queue.h:259: error: undefi=
+ned reference to 'absl::lts_20210324::Mutex::~Mutex()'
+> -| collect2: error: ld returned 1 exit status
+> -
+> -Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+> -
+> ----
+> -Upstream-Status: Pending
+> -
+> - include/grpcpp/impl/codegen/sync.h | 4 ++--
+> - 1 file changed, 2 insertions(+), 2 deletions(-)
+> -
+> -diff --git a/include/grpcpp/impl/codegen/sync.h b/include/grpcpp/impl/co=
+degen/sync.h
+> -index 4cb8133c7c..3d10d9a3a0 100644
+> ---- a/include/grpcpp/impl/codegen/sync.h
+> -+++ b/include/grpcpp/impl/codegen/sync.h
+> -@@ -47,7 +47,7 @@
+> - namespace grpc {
+> - namespace internal {
+> -
+> --#ifdef GPR_ABSEIL_SYNC
+> -+#ifdef GRPCPP_ABSEIL_SYNC
+> -
+> - using Mutex =3D absl::Mutex;
+> - using MutexLock =3D absl::MutexLock;
+> -@@ -142,7 +142,7 @@ class CondVar {
+> -   gpr_cv cv_;
+> - };
+> -
+> --#endif  // GPR_ABSEIL_SYNC
+> -+#endif  // GRPCPP_ABSEIL_SYNC
+> -
+> - template <typename Predicate>
+> - GRPC_DEPRECATED("incompatible with thread safety analysis")
+> diff --git a/meta-oe/recipes-devtools/grpc/grpc/0001-cmake-add-separate-e=
+xport-for-plugin-targets.patch b/meta-oe/recipes-devtools/grpc/grpc/0001-cm=
+ake-add-separate-export-for-plugin-targets.patch
+> deleted file mode 100644
+> index 679bd3882..000000000
+> --- a/meta-oe/recipes-devtools/grpc/grpc/0001-cmake-add-separate-export-f=
+or-plugin-targets.patch
+> +++ /dev/null
+> @@ -1,93 +0,0 @@
+> -From 3150cb043363e05588062dd392b940be25594713 Mon Sep 17 00:00:00 2001
+> -From: Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>
+> -Date: Tue, 18 Feb 2020 14:17:07 +0100
+> -Subject: [PATCH] cmake: add separate export for plugin targets
+> -
+> -Upstream-Status: Submitted [https://github.com/grpc/grpc/pull/29328]
+> -
+> -
+> ----
+> - CMakeLists.txt | 18 +++++++++++-------
+> - 1 file changed, 11 insertions(+), 7 deletions(-)
+> -
+> -diff --git a/CMakeLists.txt b/CMakeLists.txt
+> -index efdaf8936d..6608b1b00c 100644
+> ---- a/CMakeLists.txt
+> -+++ b/CMakeLists.txt
+> -@@ -10935,7 +10935,7 @@ target_link_libraries(grpc_cpp_plugin
+> -
+> -
+> - if(gRPC_INSTALL)
+> --  install(TARGETS grpc_cpp_plugin EXPORT gRPCTargets
+> -+  install(TARGETS grpc_cpp_plugin EXPORT gRPCPluginTargets
+> -     RUNTIME DESTINATION ${gRPC_INSTALL_BINDIR}
+> -     BUNDLE DESTINATION  ${gRPC_INSTALL_BINDIR}
+> -     LIBRARY DESTINATION ${gRPC_INSTALL_LIBDIR}
+> -@@ -10975,7 +10975,7 @@ target_link_libraries(grpc_csharp_plugin
+> -
+> -
+> - if(gRPC_INSTALL)
+> --  install(TARGETS grpc_csharp_plugin EXPORT gRPCTargets
+> -+  install(TARGETS grpc_csharp_plugin EXPORT gRPCPluginTargets
+> -     RUNTIME DESTINATION ${gRPC_INSTALL_BINDIR}
+> -     BUNDLE DESTINATION  ${gRPC_INSTALL_BINDIR}
+> -     LIBRARY DESTINATION ${gRPC_INSTALL_LIBDIR}
+> -@@ -11015,7 +11015,7 @@ target_link_libraries(grpc_node_plugin
+> -
+> -
+> - if(gRPC_INSTALL)
+> --  install(TARGETS grpc_node_plugin EXPORT gRPCTargets
+> -+  install(TARGETS grpc_node_plugin EXPORT gRPCPluginTargets
+> -     RUNTIME DESTINATION ${gRPC_INSTALL_BINDIR}
+> -     BUNDLE DESTINATION  ${gRPC_INSTALL_BINDIR}
+> -     LIBRARY DESTINATION ${gRPC_INSTALL_LIBDIR}
+> -@@ -11055,7 +11055,7 @@ target_link_libraries(grpc_objective_c_plugin
+> -
+> -
+> - if(gRPC_INSTALL)
+> --  install(TARGETS grpc_objective_c_plugin EXPORT gRPCTargets
+> -+  install(TARGETS grpc_objective_c_plugin EXPORT gRPCPluginTargets
+> -     RUNTIME DESTINATION ${gRPC_INSTALL_BINDIR}
+> -     BUNDLE DESTINATION  ${gRPC_INSTALL_BINDIR}
+> -     LIBRARY DESTINATION ${gRPC_INSTALL_LIBDIR}
+> -@@ -11095,7 +11095,7 @@ target_link_libraries(grpc_php_plugin
+> -
+> -
+> - if(gRPC_INSTALL)
+> --  install(TARGETS grpc_php_plugin EXPORT gRPCTargets
+> -+  install(TARGETS grpc_php_plugin EXPORT gRPCPluginTargets
+> -     RUNTIME DESTINATION ${gRPC_INSTALL_BINDIR}
+> -     BUNDLE DESTINATION  ${gRPC_INSTALL_BINDIR}
+> -     LIBRARY DESTINATION ${gRPC_INSTALL_LIBDIR}
+> -@@ -11135,7 +11135,7 @@ target_link_libraries(grpc_python_plugin
+> -
+> -
+> - if(gRPC_INSTALL)
+> --  install(TARGETS grpc_python_plugin EXPORT gRPCTargets
+> -+  install(TARGETS grpc_python_plugin EXPORT gRPCPluginTargets
+> -     RUNTIME DESTINATION ${gRPC_INSTALL_BINDIR}
+> -     BUNDLE DESTINATION  ${gRPC_INSTALL_BINDIR}
+> -     LIBRARY DESTINATION ${gRPC_INSTALL_LIBDIR}
+> -@@ -11175,7 +11175,7 @@ target_link_libraries(grpc_ruby_plugin
+> -
+> -
+> - if(gRPC_INSTALL)
+> --  install(TARGETS grpc_ruby_plugin EXPORT gRPCTargets
+> -+  install(TARGETS grpc_ruby_plugin EXPORT gRPCPluginTargets
+> -     RUNTIME DESTINATION ${gRPC_INSTALL_BINDIR}
+> -     BUNDLE DESTINATION  ${gRPC_INSTALL_BINDIR}
+> -     LIBRARY DESTINATION ${gRPC_INSTALL_LIBDIR}
+> -@@ -17349,6 +17349,10 @@ if(gRPC_INSTALL)
+> -     DESTINATION ${gRPC_INSTALL_CMAKEDIR}
+> -     NAMESPACE gRPC::
+> -   )
+> -+  install(EXPORT gRPCPluginTargets
+> -+    DESTINATION ${gRPC_INSTALL_CMAKEDIR}
+> -+    NAMESPACE gRPC::
+> -+  )
+> - endif()
+> -
+> - include(CMakePackageConfigHelpers)
+> ---
+> -2.30.2
+> -
+> diff --git a/meta-oe/recipes-devtools/grpc/grpc_1.50.1.bb b/meta-oe/recip=
+es-devtools/grpc/grpc_1.56.2.bb
+> similarity index 92%
+> rename from meta-oe/recipes-devtools/grpc/grpc_1.50.1.bb
+> rename to meta-oe/recipes-devtools/grpc/grpc_1.56.2.bb
+> index 45bfcb857..ac54d704a 100644
+> --- a/meta-oe/recipes-devtools/grpc/grpc_1.50.1.bb
+> +++ b/meta-oe/recipes-devtools/grpc/grpc_1.56.2.bb
+> @@ -20,11 +20,9 @@ RDEPENDS:${PN}-dev:append:class-native =3D " ${PN}-com=
+piler"
+>  # RDEPENDS:${PN}-dev +=3D "${PN}-compiler"
+>
+>  S =3D "${WORKDIR}/git"
+> -SRCREV_grpc =3D "90ccf24d22b6fc909a1021ebd89fd8c838467d26"
+> -BRANCH =3D "v1.50.x"
+> +SRCREV_grpc =3D "c0d1c393d9365664d47df41746e992ae97b651ef"
+> +BRANCH =3D "v1.56.x"
+>  SRC_URI =3D "gitsm://github.com/grpc/grpc.git;protocol=3Dhttps;name=3Dgr=
+pc;branch=3D${BRANCH} \
+> -           file://0001-Revert-Changed-GRPCPP_ABSEIL_SYNC-to-GPR_ABSEIL_S=
+YNC.patch \
+> -           file://0001-cmake-add-separate-export-for-plugin-targets.patc=
+h \
+>             file://0001-cmake-Link-with-libatomic-on-rv32-rv64.patch \
+>             file://0001-fix-CVE-2023-32732.patch \
+>             "
+> --
+> 2.34.1
+>
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#104813): https://lists.openembedded.org/g/openembedde=
+d-devel/message/104813
+> Mute This Topic: https://lists.openembedded.org/mt/101253581/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
+aj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
 
