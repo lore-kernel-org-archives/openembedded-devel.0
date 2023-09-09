@@ -1,217 +1,164 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DB212EEB58C
-	for <webhook@archiver.kernel.org>; Sat,  9 Sep 2023 15:44:29 +0000 (UTC)
-Received: from mail-oa1-f52.google.com (mail-oa1-f52.google.com [209.85.160.52])
- by mx.groups.io with SMTP id smtpd.web11.19003.1694274264220192076
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5026FEC8756
+	for <webhook@archiver.kernel.org>; Sat,  9 Sep 2023 16:54:10 +0000 (UTC)
+Received: from mail-yb1-f179.google.com (mail-yb1-f179.google.com [209.85.219.179])
+ by mx.groups.io with SMTP id smtpd.web10.20354.1694278442804404729
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 09 Sep 2023 08:44:24 -0700
+ Sat, 09 Sep 2023 09:54:02 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20221208 header.b=GTlJi/Ug;
- spf=pass (domain: gmail.com, ip: 209.85.160.52, mailfrom: raj.khem@gmail.com)
-Received: by mail-oa1-f52.google.com with SMTP id 586e51a60fabf-1bbb4bde76dso1964784fac.2
-        for <openembedded-devel@lists.openembedded.org>; Sat, 09 Sep 2023 08:44:24 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20221208 header.b=gP6qiMwv;
+ spf=pass (domain: gmail.com, ip: 209.85.219.179, mailfrom: akuster808@gmail.com)
+Received: by mail-yb1-f179.google.com with SMTP id 3f1490d57ef6-d7260fae148so2795430276.1
+        for <openembedded-devel@lists.openembedded.org>; Sat, 09 Sep 2023 09:54:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1694274263; x=1694879063; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=h9KY2st2/srbBVjDV6Pq2mWd2WmPlmuzs0+mUnIPS9I=;
-        b=GTlJi/UgG2NFE4lSLEzQEbu9ZOXyu7NvjRf/Tt5sKuwos/3HijCgjGYgQUAe6ISyD/
-         xdHP7j77wx/u4aZQ9Rh0OTE64mcIUG24oeecO+RpVyP29f8qBv5upe94ExAgV20xTfXu
-         bdDopk5WUrjYub+b1gJa0z8WZiDDUKO0A5pftqPzHsjHxQXtUwmpkXElDcGttTTTJQXy
-         uORABQFUfkrQVqtvtc+7/w6sW3o4PObKPi5izx4Eid86oqi8R/UsgZP9c/oeyS1xOFN2
-         tYZrdQG7bqTXDAyZ4qCCk6S4nOypOLPjkpk2ssAcbJZb0Cif0ahBwFVYm4s59okz4GyS
-         jXuA==
+        d=gmail.com; s=20221208; t=1694278442; x=1694883242; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=xFqx5e4xCkj9wvuCIVZ6jAvDohzBjGHt2mYpubCFv4k=;
+        b=gP6qiMwvoU2KO/3rNfka87xxxD86XNA0FswDyens9j7s+2KRiATOHnq9QpSXp/GvUZ
+         Tluv+MYz96bOpwlTZUXDoNoUPDE3sCNqHoiIMx/uhA9S+We+rM4D0Q0b8TOrz6vPciUt
+         CVpn50vw+Z4XrvkDfKw4sS7FYW5deEoL0phW1rWRcCc344jw2rVx4VZR0NqOCgBR14nk
+         h2i/G80LUJXjsxh5FRpM5v2fUN4XZ+9RaJplQ7V5bhV7u9PTP/iv468/07YBagciKSKp
+         7EyIjt1cwYZpc4GCWrMPHGOvTzeywiR9vCus96e0HHS1PEnYGjqV3gm2kS34U6Db14kr
+         FssQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1694274263; x=1694879063;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=h9KY2st2/srbBVjDV6Pq2mWd2WmPlmuzs0+mUnIPS9I=;
-        b=nH01SC8HY8sr0J+ORAscPMBxlDcsN9n75DyDki9BvCqVRo7TbPP1/ZjHPgMDDlwMFu
-         MkuYJ6Nfddda+L8IWJorN6UZfGuNp2moY0XGuBMc4ZSXBwRff5CmvSB8V+RGBtjKebtb
-         IT3+eeL0VPYdz/koPvj6ekR5s0aRl1dFtcQlWzA4IXggcwkxlEDRv4X2B0SlNiiPiOzO
-         tSJwME+gHvw+fNqe6Kb3ve37DI3+VuJ28RSaOZrwN6tb3LUbr+syyVLDEWuk44eEvEoW
-         EQb/eDUHblQaBfkOMiTnTJY3kEbD9l+bOpWKNMLCaT2CvCfzlIq7CFL2UePFZrUE+1fK
-         v3XA==
-X-Gm-Message-State: AOJu0Yx9lisVabWngvrMlWBqtoJH4cVkgOGTnqIKTsRTOX8lTrfRV2EV
-	ZTf+LFFzQfFUV98vdfvZgSy1doeYDSKZYXlJ0Xk=
-X-Google-Smtp-Source: AGHT+IGL2h0Hjb0d9vuNLHeWKIaOYR4bN/4mhFXH37Vk3K60/iRtn0F7nb6TtfmwihYD0KUQ0ijXvxtSwsKkJTyTglQ=
-X-Received: by 2002:a05:6871:294:b0:1b3:eec8:fa90 with SMTP id
- i20-20020a056871029400b001b3eec8fa90mr7077973oae.6.1694274263296; Sat, 09 Sep
- 2023 08:44:23 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1694278442; x=1694883242;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=xFqx5e4xCkj9wvuCIVZ6jAvDohzBjGHt2mYpubCFv4k=;
+        b=qTfEohKMAkKObDHmPax7PovGxlGkGuCQEfXClWa7yzWjF4G5vNe7TGZoc0ty55VwQq
+         tRtOSGJdXpo3kxrufN8W5IAbCYRT4IEmlLpRNjO2SetArkuMdlmRRlWs7QumvCaOmaxG
+         u6LWh9NtoSdm1VGDgR1UxWOlxaNpmz2q4PpMr3BCcAbuAnQAbjBO+dccwsAweaZjVmOa
+         fN/Sqy2/NDkTHs126/PECfn9iX1jLqfcowyu7Md1H23kKWmoeuI1Es4GCIVl9nzvvgUC
+         V2PYt+fQFrEYytqo8j3h+EXk+5geIudGnkjsufvKIxc3VLJh/Rul3zYCJHOrEpQ2ZX/6
+         BnSA==
+X-Gm-Message-State: AOJu0YyuJ8SyT0tcRAV5+xL+XVil8ZHqt/5QQ0RbS7rRI58v8FoVrjZA
+	y2GZ6tD0p448/wcN5ZRm4i37GBgu0L0=
+X-Google-Smtp-Source: AGHT+IGtaxCjlfhEQ8/kB/nsG1MbhECpsW2pL5yVwg5ixunNHHdFMUTVQKCjGho0jxqE1KJqSaAZlQ==
+X-Received: by 2002:a05:6902:4d4:b0:d0e:9914:f5e1 with SMTP id v20-20020a05690204d400b00d0e9914f5e1mr5036908ybs.15.1694278441472;
+        Sat, 09 Sep 2023 09:54:01 -0700 (PDT)
+Received: from keaua.caveonetworks.com ([2600:1700:9190:ba10:2fc7:531e:3376:5faf])
+        by smtp.gmail.com with ESMTPSA id z21-20020a25ad95000000b00d071631665fsm872110ybi.59.2023.09.09.09.54.00
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sat, 09 Sep 2023 09:54:01 -0700 (PDT)
+From: Armin Kuster <akuster808@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-oe][dunfell][PATCH] postgresql: refresh patches
+Date: Sat,  9 Sep 2023 12:54:00 -0400
+Message-Id: <20230909165400.1189310-1-akuster808@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <6bb02cf5-a195-b046-3edc-580d4887db67@gmail.com>
-In-Reply-To: <6bb02cf5-a195-b046-3edc-580d4887db67@gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Sat, 9 Sep 2023 08:43:57 -0700
-Message-ID: <CAMKF1soTEJAKCKWW_qsU2OdC9KJuyO8sx7wgaQBL7--GhUEPqg@mail.gmail.com>
-Subject: Re: kirkstone merge request: Sept 9th
-To: akuster808 <akuster808@gmail.com>
-Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 09 Sep 2023 15:44:29 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104815
+ <openembedded-devel@lists.openembedded.org>; Sat, 09 Sep 2023 16:54:10 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104816
 
-Merged thanks Armin.
+fixes:
 
-On Sat, Sep 9, 2023 at 4:27=E2=80=AFAM akuster808 <akuster808@gmail.com> wr=
-ote:
->
-> The following changes since commit 529620141e773080a6a7be4615fb7993204af8=
-83:
->
->    nodejs: upgrade 16.20.1 -> 16.20.2 (2023-08-11 10:32:04 -0400)
->
-> are available in the Git repository at:
->
->    https://git.openembedded.org/meta-openembedded kirkstone-next
->
-> for you to fetch changes up to a88cb922f91fda95e8a584cee3092083d5ad3e98:
->
->    hwloc: fix CVE-2022-47022 (2023-09-06 09:13:26 -0400)
->
-> ----------------------------------------------------------------
-> Chen Qi (1):
->        spice-protocol: fix populate_sdk error when spice is installed
->
-> Marine Vovard (1):
->        python3-kivy: Require X11 or Wayland in DISTRO_FEATURES
->
-> Martin Jansa (1):
->        libiio: use main branch instead of master
->
-> Narpat Mali (4):
->        libqb: upgrade 2.0.6 -> 2.0.8
->        python3-django: fix CVE-2023-36053
->        python3-aiohttp: upgrade 3.8.1 -> 3.8.5
->        frr: Fix CVE-2023-38802 and CVE-2023-41358
->
-> Polampalli, Archana (2):
->        php: upgrade 8.1.16 -> 8.1.22
->        nodejs: fix CVE-2022-25883
->
-> Robert Joslyn (1):
->        postgresql: Update to 14.9
->
-> Soumya Sambu (3):
->        krb5: Fix CVE-2023-36054
->        iperf3: upgrade 3.11 -> 3.14
->        hwloc: fix CVE-2022-47022
->
-> Sourav Kumar Pramanik (1):
->        meta-oe-components: Avoid usage of nobranch=3D1
->
-> Sourav Pramanik (2):
->        rapidjson: Avoid usage of nobranch=3D1
->        nlohmann-json: Avoid usage of nobranch=3D1
->
-> Wang Mingyu (3):
->        tcpdump: upgrade 4.99.1 -> 4.99.2
->        tcpdump: upgrade 4.99.2 -> 4.99.3
->        tcpdump: upgrade 4.99.3 -> 4.99.4
->
-> Yogita Urade (1):
->        poppler: fix CVE-2023-34872
->
->   meta-gnome/recipes-connectivity/geary/geary_40.0.bb             | 2 +-
->   meta-networking/recipes-connectivity/libdnet/libdnet_1.14.bb    | 2 +-
->   meta-networking/recipes-protocols/frr/frr/CVE-2023-38802.patch  | 136
-> ++++++++++++++
->   meta-networking/recipes-protocols/frr/frr/CVE-2023-41358.patch  | 105
-> +++++++++++
->   meta-networking/recipes-protocols/frr/frr_8.2.2.bb              | 2 +
->   meta-networking/recipes-support/spice/spice-protocol_0.14.4.bb  | 2 +
->   .../tcpdump/{tcpdump_4.99.1.bb =3D> tcpdump_4.99.4.bb} |   3 +-
->   .../dynamic-layers/meta-python/recipes-bsp/rwmem/rwmem_1.2.bb   | 2 +-
->   .../recipes-benchmark/iperf3/{iperf3_3.11.bb =3D> iperf3_3.14.bb} |   4=
- +-
->   meta-oe/recipes-connectivity/krb5/krb5/CVE-2023-36054.patch     | 68
-> +++++++
->   meta-oe/recipes-connectivity/krb5/krb5_1.17.2.bb                | 1 +
->   .../postgresql/files/0001-Add-support-for-RISC-V.patch          | 10 +-
->   .../postgresql/files/0001-Improve-reproducibility.patch         | 6 +-
->   ...1-Properly-NULL-terminate-GSS-receive-buffer-on-error-.patch | 50
-> ------
->   .../files/0001-config_info.c-not-expose-build-info.patch        | 18 +-
->   .../0001-configure.ac-bypass-autoconf-2.69-version-check.patch  | 6 +-
->   .../files/0001-postgresql-fix-ptest-failure-of-sysviews.patch   | 11 +-
->   meta-oe/recipes-dbs/postgresql/files/CVE-2023-2454.patch        | 235
-> -------------------------
->   meta-oe/recipes-dbs/postgresql/files/CVE-2023-2455.patch        | 118
-> -------------
->   meta-oe/recipes-dbs/postgresql/files/not-check-libperl.patch    | 10 +-
->   meta-oe/recipes-dbs/postgresql/files/remove_duplicate.patch     | 38 --=
---
->   .../postgresql/{postgresql_14.5.bb =3D> postgresql_14.9.bb} |   8 +-
->   meta-oe/recipes-devtools/nlohmann-json/nlohmann-json_3.10.5.bb  | 2 +-
->   meta-oe/recipes-devtools/nodejs/nodejs/CVE-2022-25883.patch     | 262
-> +++++++++++++++++++++++++++
->   meta-oe/recipes-devtools/nodejs/nodejs_16.20.2.bb               | 1 +
->   meta-oe/recipes-devtools/php/{php_8.1.16.bb =3D> php_8.1.22.bb} |   2 +=
+WARNING: postgresql-12.16-r0 do_patch: Fuzz detected:
+
+Applying patch 0001-Add-support-for-RISC-V.patch
+patching file src/include/storage/s_lock.h
+Hunk #2 succeeded at 339 with fuzz 1.
+
+Signed-off-by: Armin Kuster <akuster808@gmail.com>
+---
+ .../files/0001-Add-support-for-RISC-V.patch         | 13 +++++--------
+ .../files/0001-Improve-reproducibility.patch        | 13 +++++--------
+ .../postgresql/files/not-check-libperl.patch        | 13 +++++--------
+ 3 files changed, 15 insertions(+), 24 deletions(-)
+
+diff --git a/meta-oe/recipes-dbs/postgresql/files/0001-Add-support-for-RISC-V.patch b/meta-oe/recipes-dbs/postgresql/files/0001-Add-support-for-RISC-V.patch
+index a1f5b2a7b4..e5fb85170b 100644
+--- a/meta-oe/recipes-dbs/postgresql/files/0001-Add-support-for-RISC-V.patch
++++ b/meta-oe/recipes-dbs/postgresql/files/0001-Add-support-for-RISC-V.patch
+@@ -9,10 +9,10 @@ extending the existing aarch64 macro works.
+  src/include/storage/s_lock.h | 5 +++--
+  1 file changed, 3 insertions(+), 2 deletions(-)
+ 
+-diff --git a/src/include/storage/s_lock.h b/src/include/storage/s_lock.h
+-index 3fe29ce..7cd578f 100644
+---- a/src/include/storage/s_lock.h
+-+++ b/src/include/storage/s_lock.h
++Index: postgresql-12.16/src/include/storage/s_lock.h
++===================================================================
++--- postgresql-12.16.orig/src/include/storage/s_lock.h
+++++ postgresql-12.16/src/include/storage/s_lock.h
+ @@ -317,11 +317,12 @@ tas(volatile slock_t *lock)
+  
+  /*
+@@ -35,7 +35,4 @@ index 3fe29ce..7cd578f 100644
+ +#endif	 /* __arm__ || __arm || __aarch64__ || __aarch64 || __riscv */
+  
+  
+- /*
+--- 
+-2.9.3
 -
->   meta-oe/recipes-devtools/rapidjson/rapidjson_git.bb             | 2 +-
->   meta-oe/recipes-extended/hwloc/files/CVE-2022-47022.patch       | 77
-> ++++++++
->   meta-oe/recipes-extended/hwloc/hwloc_1.11.13.bb                 | 4 +-
->   .../recipes-extended/libqb/{libqb_2.0.6.bb =3D> libqb_2.0.8.bb} |   2 +=
++ /* S/390 and S/390x Linux (32- and 64-bit zSeries) */
+diff --git a/meta-oe/recipes-dbs/postgresql/files/0001-Improve-reproducibility.patch b/meta-oe/recipes-dbs/postgresql/files/0001-Improve-reproducibility.patch
+index 32b7f42845..70c813adf5 100644
+--- a/meta-oe/recipes-dbs/postgresql/files/0001-Improve-reproducibility.patch
++++ b/meta-oe/recipes-dbs/postgresql/files/0001-Improve-reproducibility.patch
+@@ -19,11 +19,11 @@ Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+  src/common/Makefile | 4 ----
+  1 file changed, 4 deletions(-)
+ 
+-diff --git a/src/common/Makefile b/src/common/Makefile
+-index 1fc2c66..5e6c457 100644
+---- a/src/common/Makefile
+-+++ b/src/common/Makefile
+-@@ -27,10 +27,6 @@ include $(top_builddir)/src/Makefile.global
++Index: postgresql-12.16/src/common/Makefile
++===================================================================
++--- postgresql-12.16.orig/src/common/Makefile
+++++ postgresql-12.16/src/common/Makefile
++@@ -31,10 +31,6 @@ include $(top_builddir)/src/Makefile.glo
+  # don't include subdirectory-path-dependent -I and -L switches
+  STD_CPPFLAGS := $(filter-out -I$(top_srcdir)/src/include -I$(top_builddir)/src/include,$(CPPFLAGS))
+  STD_LDFLAGS := $(filter-out -L$(top_builddir)/src/common -L$(top_builddir)/src/port,$(LDFLAGS))
+@@ -34,6 +34,3 @@ index 1fc2c66..5e6c457 100644
+  override CPPFLAGS += -DVAL_CFLAGS_SL="\"$(CFLAGS_SL)\""
+  override CPPFLAGS += -DVAL_LDFLAGS="\"$(STD_LDFLAGS)\""
+  override CPPFLAGS += -DVAL_LDFLAGS_EX="\"$(LDFLAGS_EX)\""
+--- 
+-2.7.4
 -
->   meta-oe/recipes-graphics/lvgl/lv-drivers_7.11.0.bb              | 2 +-
->   meta-oe/recipes-graphics/lvgl/lv-lib-png_8.0.2.bb               | 2 +-
->   meta-oe/recipes-graphics/lvgl/lvgl_8.1.0.bb                     | 2 +-
->   meta-oe/recipes-support/glog/glog_0.5.0.bb                      | 2 +-
->   meta-oe/recipes-support/libiio/libiio_git.bb                    | 2 +-
->   meta-oe/recipes-support/libmxml/libmxml_3.3.bb                  | 2 +-
->   meta-oe/recipes-support/poppler/poppler/CVE-2023-34872.patch    | 46 ++=
-+++
->   meta-oe/recipes-support/poppler/poppler_22.04.0.bb              | 1 +
->   .../{python3-aiohttp_3.8.1.bb =3D> python3-aiohttp_3.8.5.bb} |   4 +-
->   .../recipes-devtools/python/python3-django/CVE-2023-36053.patch | 263
-> ++++++++++++++++++++++++++++
->   meta-python/recipes-devtools/python/python3-django_2.2.28.bb    | 4 +-
->   meta-python/recipes-devtools/python/python3-kivy_2.1.0..bb      | 4 +-
->   42 files changed, 1022 insertions(+), 501 deletions(-)
->   create mode 100644
-> meta-networking/recipes-protocols/frr/frr/CVE-2023-38802.patch
->   create mode 100644
-> meta-networking/recipes-protocols/frr/frr/CVE-2023-41358.patch
->   rename meta-networking/recipes-support/tcpdump/{tcpdump_4.99.1.bb =3D>
-> tcpdump_4.99.4.bb} (90%)
->   rename meta-oe/recipes-benchmark/iperf3/{iperf3_3.11.bb =3D>
-> iperf3_3.14.bb} (89%)
->   create mode 100644
-> meta-oe/recipes-connectivity/krb5/krb5/CVE-2023-36054.patch
->   delete mode 100644
-> meta-oe/recipes-dbs/postgresql/files/0001-Properly-NULL-terminate-GSS-rec=
-eive-buffer-on-error-.patch
->   delete mode 100644
-> meta-oe/recipes-dbs/postgresql/files/CVE-2023-2454.patch
->   delete mode 100644
-> meta-oe/recipes-dbs/postgresql/files/CVE-2023-2455.patch
->   delete mode 100644
-> meta-oe/recipes-dbs/postgresql/files/remove_duplicate.patch
->   rename meta-oe/recipes-dbs/postgresql/{postgresql_14.5.bb =3D>
-> postgresql_14.9.bb} (54%)
->   create mode 100644
-> meta-oe/recipes-devtools/nodejs/nodejs/CVE-2022-25883.patch
->   rename meta-oe/recipes-devtools/php/{php_8.1.16.bb =3D> php_8.1.22.bb} =
-(99%)
->   create mode 100644
-> meta-oe/recipes-extended/hwloc/files/CVE-2022-47022.patch
->   rename meta-oe/recipes-extended/libqb/{libqb_2.0.6.bb =3D>
-> libqb_2.0.8.bb} (93%)
->   create mode 100644
-> meta-oe/recipes-support/poppler/poppler/CVE-2023-34872.patch
->   rename meta-python/recipes-devtools/python/{python3-aiohttp_3.8.1.bb
-> =3D> python3-aiohttp_3.8.5.bb} (80%)
->   create mode 100644
-> meta-python/recipes-devtools/python/python3-django/CVE-2023-36053.patch
->
+diff --git a/meta-oe/recipes-dbs/postgresql/files/not-check-libperl.patch b/meta-oe/recipes-dbs/postgresql/files/not-check-libperl.patch
+index 22b62d9ded..eb6226b179 100644
+--- a/meta-oe/recipes-dbs/postgresql/files/not-check-libperl.patch
++++ b/meta-oe/recipes-dbs/postgresql/files/not-check-libperl.patch
+@@ -19,11 +19,11 @@ Signed-off-by: Changqing Li <changqing.li@windriver.com>
+  configure.in | 2 +-
+  1 file changed, 1 insertion(+), 1 deletion(-)
+ 
+-diff --git a/configure.in b/configure.in
+-index b98b9bb..8584677 100644
+---- a/configure.in
+-+++ b/configure.in
+-@@ -2211,7 +2211,7 @@ Use --without-tcl to disable building PL/Tcl.])
++Index: postgresql-12.16/configure.in
++===================================================================
++--- postgresql-12.16.orig/configure.in
+++++ postgresql-12.16/configure.in
++@@ -2357,7 +2357,7 @@ Use --without-tcl to disable building PL
+  fi
+  
+  # check for <perl.h>
+@@ -32,6 +32,3 @@ index b98b9bb..8584677 100644
+    ac_save_CPPFLAGS=$CPPFLAGS
+    CPPFLAGS="$CPPFLAGS $perl_includespec"
+    AC_CHECK_HEADER(perl.h, [], [AC_MSG_ERROR([header file <perl.h> is required for Perl])],
+--- 
+-2.7.4
+-
+-- 
+2.34.1
+
 
