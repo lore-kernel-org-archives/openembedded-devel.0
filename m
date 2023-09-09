@@ -2,57 +2,56 @@ Return-Path: <peron.clem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7CEC9EEB585
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8E682EEB57C
 	for <webhook@archiver.kernel.org>; Sat,  9 Sep 2023 09:35:36 +0000 (UTC)
-Received: from mail-wm1-f44.google.com (mail-wm1-f44.google.com [209.85.128.44])
- by mx.groups.io with SMTP id smtpd.web11.13863.1694252126194849097
+Received: from mail-lf1-f45.google.com (mail-lf1-f45.google.com [209.85.167.45])
+ by mx.groups.io with SMTP id smtpd.web11.13865.1694252128965666266
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 09 Sep 2023 02:35:26 -0700
+ Sat, 09 Sep 2023 02:35:29 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20221208 header.b=QPzjaf8z;
- spf=pass (domain: gmail.com, ip: 209.85.128.44, mailfrom: peron.clem@gmail.com)
-Received: by mail-wm1-f44.google.com with SMTP id 5b1f17b1804b1-401d67434daso29798035e9.2
-        for <openembedded-devel@lists.openembedded.org>; Sat, 09 Sep 2023 02:35:25 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20221208 header.b=C99A4tGV;
+ spf=pass (domain: gmail.com, ip: 209.85.167.45, mailfrom: peron.clem@gmail.com)
+Received: by mail-lf1-f45.google.com with SMTP id 2adb3069b0e04-500b66f8b27so4849629e87.3
+        for <openembedded-devel@lists.openembedded.org>; Sat, 09 Sep 2023 02:35:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1694252123; x=1694856923; darn=lists.openembedded.org;
+        d=gmail.com; s=20221208; t=1694252126; x=1694856926; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=Mv9onMfzryYeVT3tPm0WaM1IyMYOr9Imu+/BBYjJWwA=;
-        b=QPzjaf8zi+DPmH/iUwPIzYy+GeMd3BL9YhsOpemdule7vRw5voEMyYkqPNvn0PBukl
-         e1J4ol/weFWVpshrQvFunKJEw/6boRpLLYB+g1jTUEj0wjf2iRkmq24fXbm+dZcvlV7G
-         Nird4fBHzxlQzyI4uFBRDQY+2HEqkHOqdFv9/P8mXPH4DQsL4ovfsPX0lRE5bn5BhnYb
-         x9xLxNR1NhDU4L789h6W3M8PDIAw63dnDcRJjikE08qYAZK661+xnic1GRGtCg11gNVm
-         WV9+GfTOPAMNHBGxOBOLf4Ab/Yah74WQPVHoWBhzQu0Zu05d5LJgY3BViSIlWiAFgkdq
-         X/ug==
+        bh=gkv9uYqqRXuLgzSVdKXWadVzG+mXH3w7YITLIbmyoNo=;
+        b=C99A4tGVs8zwNE73g9NXP++M3GjTLdNtmaUKqV5wIqwWUPy2yNwCGBHmLYLHkR2U2O
+         2EL9Im53MMIc7SKXh1KNJPMBb0L8VxMke7eE0skDsrsqnuHNNlNpmxu6vOM7h+n03UQz
+         4Sib942IaFH1JOlZ97z0F06wkIPTezat7B1Pa1UQpVGsa9Gkh9IIqxftDxpdcL7YTNn/
+         Zs28HZkQwggQ8pjtYyT7KVcm6jW/3kZiJmyb61hRDwsFQNwRCy6N6Phd7NKi9kwoEgkU
+         l7olylvsB9UhCwV6iHaSzDX6jqHOFHgykLIms3WyfQnufLNS2pkmZ4rTyJBIJBKsZfjc
+         5cuA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1694252123; x=1694856923;
+        d=1e100.net; s=20230601; t=1694252126; x=1694856926;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=Mv9onMfzryYeVT3tPm0WaM1IyMYOr9Imu+/BBYjJWwA=;
-        b=JH9DO9aC1msmTXe+bI84ild0zKZwyymQprgG3JzuRIZ8D/q33/Oo4JJSx7yprPa9CE
-         mS8PQN2NeGnjqdUgnmqyHrLHyIph5WWwH5XBrRBf+jSlkzTltwcoI5788FBbml2jNbOW
-         xeWe3aG6N90WlASUVC3O0YMwY93K01SmydG3GalkR7+/omoS6Z8wWdfWXVRc1Sl77kRl
-         squm/Tu9yxriWJqyKQqtnRmNJc6SCGuMbF+Fo6n95R2nWky5MJVYjQD9sofYZ4kSFyCl
-         tFL/4RSWv6M+eR/kvdleWzTIWOZMIakdd6sxcMAov/hGcgnoLo2vmqWCFEBGv3Jq0mY4
-         cw6g==
-X-Gm-Message-State: AOJu0Yy8xh13gPD6UNPqu0zvYmApF/9+O66S7oXiLL3snqh+odUzcAmr
-	WoL8miCbfKD4BiERDeARlQb52O0WNuE=
-X-Google-Smtp-Source: AGHT+IEAfSghZ5QCjZuIeQnCAz667dImbu2mohtFaVNK8oY8ATew9IBVzKdxGIujrTpLFn/6QqHsvw==
-X-Received: by 2002:a1c:ed0b:0:b0:3fc:21:2c43 with SMTP id l11-20020a1ced0b000000b003fc00212c43mr3778142wmh.13.1694252123152;
-        Sat, 09 Sep 2023 02:35:23 -0700 (PDT)
+        bh=gkv9uYqqRXuLgzSVdKXWadVzG+mXH3w7YITLIbmyoNo=;
+        b=AO5oSyOrEI/8hpGfMNhW65Fs3YIneljyKWK5MrpLA1wZ7fcUm46lJkqJyEPLtqHEVG
+         adTADD1PPPnMhTxn6JzZCAYqjrrWLVagwVWXnKYABSR3M//xil8IJaxh8ivPB+Eep9XE
+         g2gBELhaJ/hCJuEfVsRlB1p4Pd/OvrYSjqccuUsKNQhZXfvgIkcmCTLHZa5PvNODK9ji
+         5gfPr1mvuv74ZJ+XPb/cQybtzwE5BkzHpwGFis3KobUJQ98q+9gucUclLtfs0cvjHV0Z
+         dPq3zgxXXAWDHabmE+rC+8DBmCH/kSQV+LY/hOaWaC5tVQzTC+g7lbwCJnKPXjggS2mC
+         Ee4Q==
+X-Gm-Message-State: AOJu0YxbxCsq9ruFaOgFcegF9mHUpVEQHGytsplduV4SmVib6kQBRAoY
+	ORVZOzCAe6Tt8Oe7b+Xo1KxDlO3P50c=
+X-Google-Smtp-Source: AGHT+IHtEz0aXOofrk2Yl4f/+6ETnlSaBhBiQ5eqG3lI7xn/uD8GPIW9yXkNPZOA8hU2HYWtxLKtPQ==
+X-Received: by 2002:a19:430f:0:b0:500:8512:c7de with SMTP id q15-20020a19430f000000b005008512c7demr2840315lfa.28.1694252125957;
+        Sat, 09 Sep 2023 02:35:25 -0700 (PDT)
 Received: from firmware-builder.outsight.local (lputeaux-656-1-11-33.w82-127.abo.wanadoo.fr. [82.127.142.33])
-        by smtp.gmail.com with ESMTPSA id w3-20020a05600c014300b003fefe70ec9csm7302565wmm.10.2023.09.09.02.35.22
+        by smtp.gmail.com with ESMTPSA id w3-20020a05600c014300b003fefe70ec9csm7302565wmm.10.2023.09.09.02.35.24
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 09 Sep 2023 02:35:22 -0700 (PDT)
+        Sat, 09 Sep 2023 02:35:24 -0700 (PDT)
 From: =?UTF-8?q?Cl=C3=A9ment=20P=C3=A9ron?= <peron.clem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Xiangyu Chen <xiangyu.chen@windriver.com>,
-	=?UTF-8?q?Cl=C3=A9ment=20P=C3=A9ron?= <peron.clem@gmail.com>
-Subject: [PATCH 2/4] protobuf-c: add support of protobuf 4.22.x
-Date: Sat,  9 Sep 2023 11:35:15 +0200
-Message-Id: <20230909093517.444924-3-peron.clem@gmail.com>
+Cc: =?UTF-8?q?Cl=C3=A9ment=20P=C3=A9ron?= <peron.clem@gmail.com>
+Subject: [PATCH 4/4] devtools: grpc: bump to 1.56.2
+Date: Sat,  9 Sep 2023 11:35:17 +0200
+Message-Id: <20230909093517.444924-5-peron.clem@gmail.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230909093517.444924-1-peron.clem@gmail.com>
 References: <20230909093517.444924-1-peron.clem@gmail.com>
@@ -63,511 +62,210 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sat, 09 Sep 2023 09:35:36 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104811
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104813
 
-From: Xiangyu Chen <xiangyu.chen@windriver.com>
+Remove merged patch that export plugin to a separate targets
 
-Signed-off-by: Xiangyu Chen <xiangyu.chen@windriver.com>
+Remove no more applicatable patch
+
 Signed-off-by: Clément Péron <peron.clem@gmail.com>
 ---
- ...ot-compile-the-code-which-was-genera.patch | 147 ++++++++
- .../0001-add-support-of-protobuf-4.22.x.patch | 315 ++++++++++++++++++
- .../protobuf/protobuf-c_1.4.1.bb              |   6 +-
- 3 files changed, 467 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-devtools/protobuf/protobuf-c/0001-Makefile.am-do-not-compile-the-code-which-was-genera.patch
- create mode 100644 meta-oe/recipes-devtools/protobuf/protobuf-c/0001-add-support-of-protobuf-4.22.x.patch
+ ...RPCPP_ABSEIL_SYNC-to-GPR_ABSEIL_SYNC.patch | 62 -------------
+ ...d-separate-export-for-plugin-targets.patch | 93 -------------------
+ .../grpc/{grpc_1.50.1.bb => grpc_1.56.2.bb}   |  6 +-
+ 3 files changed, 2 insertions(+), 159 deletions(-)
+ delete mode 100644 meta-oe/recipes-devtools/grpc/grpc/0001-Revert-Changed-GRPCPP_ABSEIL_SYNC-to-GPR_ABSEIL_SYNC.patch
+ delete mode 100644 meta-oe/recipes-devtools/grpc/grpc/0001-cmake-add-separate-export-for-plugin-targets.patch
+ rename meta-oe/recipes-devtools/grpc/{grpc_1.50.1.bb => grpc_1.56.2.bb} (92%)
 
-diff --git a/meta-oe/recipes-devtools/protobuf/protobuf-c/0001-Makefile.am-do-not-compile-the-code-which-was-genera.patch b/meta-oe/recipes-devtools/protobuf/protobuf-c/0001-Makefile.am-do-not-compile-the-code-which-was-genera.patch
-new file mode 100644
-index 000000000..4450a2f62
---- /dev/null
-+++ b/meta-oe/recipes-devtools/protobuf/protobuf-c/0001-Makefile.am-do-not-compile-the-code-which-was-genera.patch
-@@ -0,0 +1,147 @@
-+From c263360d4f40beb2badd04e5bd084f46fd25595b Mon Sep 17 00:00:00 2001
-+From: Xiangyu Chen <xiangyu.chen@windriver.com>
-+Date: Fri, 31 Mar 2023 16:02:50 +0800
-+Subject: [PATCH] Makefile.am: do not compile the code which was generated from
-+ test-full.proto in protobuf-c-native
-+
-+Those code was auto generated by protoc command with test-full.proto, those code are not compatible
-+with protobuf 4.22.x, so temporarily disable compile those code until protobuf-c upstream adapt
-+the test-full.proto with latest version protobuf.
-+
-+Upstream-Status: Inappropriate [oe specific]
-+
-+Signed-off-by: Xiangyu Chen <xiangyu.chen@windriver.com>
-+---
-+ Makefile.am | 116 ++++++++++++++++++++++++++--------------------------
-+ 1 file changed, 58 insertions(+), 58 deletions(-)
-+
-+diff --git a/Makefile.am b/Makefile.am
-+index 3b0d1d6..ff4c196 100644
-+--- a/Makefile.am
-++++ b/Makefile.am
-+@@ -136,64 +136,64 @@ else
-+ 
-+ LOG_COMPILER = $(VALGRIND)
-+ 
-+-check_PROGRAMS += \
-+-	t/generated-code/test-generated-code \
-+-	t/generated-code2/test-generated-code2 \
-+-	t/version/version
-+-
-+-TESTS += \
-+-	t/generated-code/test-generated-code \
-+-	t/generated-code2/test-generated-code2 \
-+-	t/version/version
-+-
-+-t_generated_code_test_generated_code_SOURCES = \
-+-	t/generated-code/test-generated-code.c \
-+-	t/test.pb-c.c
-+-t_generated_code_test_generated_code_LDADD = \
-+-	protobuf-c/libprotobuf-c.la
-+-
-+-t_generated_code2_test_generated_code2_SOURCES = \
-+-	t/generated-code2/test-generated-code2.c \
-+-	t/test-full.pb-c.c \
-+-	t/test-optimized.pb-c.c
-+-t_generated_code2_test_generated_code2_LDADD = \
-+-	protobuf-c/libprotobuf-c.la
-+-
-+-noinst_PROGRAMS += \
-+-	t/generated-code2/cxx-generate-packed-data
-+-
-+-t_generated_code2_cxx_generate_packed_data_SOURCES = \
-+-	t/generated-code2/cxx-generate-packed-data.cc \
-+-	t/test-full.pb.cc \
-+-	protobuf-c/protobuf-c.pb.cc
-+-$(t_generated_code2_cxx_generate_packed_data_OBJECTS): t/test-full.pb.h
-+-t_generated_code2_cxx_generate_packed_data_CXXFLAGS = \
-+-	$(AM_CXXFLAGS) \
-+-	$(protobuf_CFLAGS)
-+-t_generated_code2_cxx_generate_packed_data_LDADD = \
-+-	$(protobuf_LIBS)
-+-
-+-t/test.pb-c.c t/test.pb-c.h: $(top_builddir)/protoc-c/protoc-gen-c$(EXEEXT) $(top_srcdir)/t/test.proto
-+-	$(AM_V_GEN)@PROTOC@ --plugin=protoc-gen-c=$(top_builddir)/protoc-c/protoc-gen-c$(EXEEXT) -I$(top_srcdir) --c_out=$(top_builddir) $(top_srcdir)/t/test.proto
-+-
-+-t/test-optimized.pb-c.c t/test-optimized.pb-c.h: $(top_builddir)/protoc-c/protoc-gen-c$(EXEEXT) $(top_srcdir)/t/test-optimized.proto
-+-	$(AM_V_GEN)@PROTOC@ --plugin=protoc-gen-c=$(top_builddir)/protoc-c/protoc-gen-c$(EXEEXT) -I$(top_srcdir) --c_out=$(top_builddir) $(top_srcdir)/t/test-optimized.proto
-+-
-+-t/test-full.pb-c.c t/test-full.pb-c.h: $(top_builddir)/protoc-c/protoc-gen-c$(EXEEXT) $(top_srcdir)/t/test-full.proto
-+-	$(AM_V_GEN)@PROTOC@ --plugin=protoc-gen-c=$(top_builddir)/protoc-c/protoc-gen-c$(EXEEXT) -I$(top_srcdir) --c_out=$(top_builddir) $(top_srcdir)/t/test-full.proto
-+-
-+-t/test-full.pb.cc t/test-full.pb.h: @PROTOC@ $(top_srcdir)/t/test-full.proto
-+-	$(AM_V_GEN)@PROTOC@ -I$(top_srcdir) --cpp_out=$(top_builddir) $(top_srcdir)/t/test-full.proto
-+-
-+-t/generated-code2/test-full-cxx-output.inc: t/generated-code2/cxx-generate-packed-data$(EXEEXT)
-+-	$(AM_V_GEN)$(top_builddir)/t/generated-code2/cxx-generate-packed-data$(EXEEXT) > $(top_builddir)/t/generated-code2/test-full-cxx-output.inc
-+-
-+-BUILT_SOURCES += \
-+-	t/test.pb-c.c t/test.pb-c.h \
-+-	t/test-full.pb-c.c t/test-full.pb-c.h \
-+-	t/test-optimized.pb-c.c t/test-optimized.pb-c.h \
-+-	t/test-full.pb.cc t/test-full.pb.h \
-+-	t/generated-code2/test-full-cxx-output.inc
-++# check_PROGRAMS += \
-++#	t/generated-code/test-generated-code \
-++#	t/generated-code2/test-generated-code2 \
-++#	t/version/version
-++
-++# TESTS += \
-++#	t/generated-code/test-generated-code \
-++#	t/generated-code2/test-generated-code2 \
-++#	t/version/version
-++
-++# t_generated_code_test_generated_code_SOURCES = \
-++#	t/generated-code/test-generated-code.c \
-++#	t/test.pb-c.c
-++# t_generated_code_test_generated_code_LDADD = \
-++#	protobuf-c/libprotobuf-c.la
-++
-++# t_generated_code2_test_generated_code2_SOURCES = \
-++#	t/generated-code2/test-generated-code2.c \
-++#	t/test-full.pb-c.c \
-++#	t/test-optimized.pb-c.c
-++# t_generated_code2_test_generated_code2_LDADD = \
-++#	protobuf-c/libprotobuf-c.la
-++
-++# noinst_PROGRAMS += \
-++#	t/generated-code2/cxx-generate-packed-data
-++
-++# t_generated_code2_cxx_generate_packed_data_SOURCES = \
-++#	t/generated-code2/cxx-generate-packed-data.cc \
-++#	t/test-full.pb.cc \
-++#	protobuf-c/protobuf-c.pb.cc
-++# $(t_generated_code2_cxx_generate_packed_data_OBJECTS): t/test-full.pb.h
-++# t_generated_code2_cxx_generate_packed_data_CXXFLAGS = \
-++#	$(AM_CXXFLAGS) \
-++#	$(protobuf_CFLAGS)
-++# t_generated_code2_cxx_generate_packed_data_LDADD = \
-++#	$(protobuf_LIBS)
-++
-++# t/test.pb-c.c t/test.pb-c.h: $(top_builddir)/protoc-c/protoc-gen-c$(EXEEXT) $(top_srcdir)/t/test.proto
-++#	$(AM_V_GEN)@PROTOC@ --plugin=protoc-gen-c=$(top_builddir)/protoc-c/protoc-gen-c$(EXEEXT) -I$(top_srcdir) --c_out=$(top_builddir) $(top_srcdir)/t/test.proto
-++
-++# t/test-optimized.pb-c.c t/test-optimized.pb-c.h: $(top_builddir)/protoc-c/protoc-gen-c$(EXEEXT) $(top_srcdir)/t/test-optimized.proto
-++#	$(AM_V_GEN)@PROTOC@ --plugin=protoc-gen-c=$(top_builddir)/protoc-c/protoc-gen-c$(EXEEXT) -I$(top_srcdir) --c_out=$(top_builddir) $(top_srcdir)/t/test-optimized.proto
-++
-++# t/test-full.pb-c.c t/test-full.pb-c.h: $(top_builddir)/protoc-c/protoc-gen-c$(EXEEXT) $(top_srcdir)/t/test-full.proto
-++#	$(AM_V_GEN)@PROTOC@ --plugin=protoc-gen-c=$(top_builddir)/protoc-c/protoc-gen-c$(EXEEXT) -I$(top_srcdir) --c_out=$(top_builddir) $(top_srcdir)/t/test-full.proto
-++
-++# t/test-full.pb.cc t/test-full.pb.h: @PROTOC@ $(top_srcdir)/t/test-full.proto
-++#	$(AM_V_GEN)@PROTOC@ -I$(top_srcdir) --cpp_out=$(top_builddir) $(top_srcdir)/t/test-full.proto
-++
-++# t/generated-code2/test-full-cxx-output.inc: t/generated-code2/cxx-generate-packed-data$(EXEEXT)
-++#	$(AM_V_GEN)$(top_builddir)/t/generated-code2/cxx-generate-packed-data$(EXEEXT) > $(top_builddir)/t/generated-code2/test-full-cxx-output.inc
-++
-++# BUILT_SOURCES += \
-++#	t/test.pb-c.c t/test.pb-c.h \
-++#	t/test-full.pb-c.c t/test-full.pb-c.h \
-++#	t/test-optimized.pb-c.c t/test-optimized.pb-c.h \
-++#	t/test-full.pb.cc t/test-full.pb.h \
-++#	t/generated-code2/test-full-cxx-output.inc
-+ 
-+ if BUILD_PROTO3
-+ 
-+-- 
-+2.34.1
-+
-diff --git a/meta-oe/recipes-devtools/protobuf/protobuf-c/0001-add-support-of-protobuf-4.22.x.patch b/meta-oe/recipes-devtools/protobuf/protobuf-c/0001-add-support-of-protobuf-4.22.x.patch
-new file mode 100644
-index 000000000..075b7044c
---- /dev/null
-+++ b/meta-oe/recipes-devtools/protobuf/protobuf-c/0001-add-support-of-protobuf-4.22.x.patch
-@@ -0,0 +1,315 @@
-+From 66a0b0d205224f63f19dd8f96abf9dcdc2112331 Mon Sep 17 00:00:00 2001
-+From: Xiangyu Chen <xiangyu.chen@windriver.com>
-+Date: Wed, 29 Mar 2023 14:25:17 +0800
-+Subject: [PATCH] add support of protobuf 4.22.x
-+
-+after upgrade the protobuf to 4.22.x, the protobuf-c cannot compile anymore (#544) due to following changes:
-+1.protobuf using c++14, that cause the command_line_interface.h report error
-+2.protobuf using abseil-cpp library instead the trace API with GOOGLE_ header
-+3. removed GOOGLE_DISALLOW_EVIL_CONSTRUCTORS
-+
-+Upstream-Status: Pending [https://github.com/protobuf-c/protobuf-c/pull/548]
-+
-+Signed-off-by: Xiangyu Chen <xiangyu.chen@windriver.com>
-+---
-+ Makefile.am                   | 2 +-
-+ configure.ac                  | 8 ++++++++
-+ protoc-c/c_bytes_field.h      | 1 -
-+ protoc-c/c_enum.h             | 1 -
-+ protoc-c/c_enum_field.h       | 1 -
-+ protoc-c/c_extension.h        | 1 -
-+ protoc-c/c_field.cc           | 2 +-
-+ protoc-c/c_field.h            | 3 ---
-+ protoc-c/c_file.h             | 1 -
-+ protoc-c/c_generator.h        | 2 --
-+ protoc-c/c_helpers.cc         | 4 ++--
-+ protoc-c/c_message.cc         | 4 ++--
-+ protoc-c/c_message.h          | 1 -
-+ protoc-c/c_message_field.h    | 3 ---
-+ protoc-c/c_primitive_field.cc | 6 +++---
-+ protoc-c/c_primitive_field.h  | 3 ---
-+ protoc-c/c_service.h          | 1 -
-+ protoc-c/c_string_field.h     | 1 -
-+ 18 files changed, 17 insertions(+), 28 deletions(-)
-+
-+diff --git a/Makefile.am b/Makefile.am
-+index c7339ef..3b0d1d6 100644
-+--- a/Makefile.am
-++++ b/Makefile.am
-+@@ -20,7 +20,7 @@ AM_CPPFLAGS = \
-+ 	-I${top_builddir} \
-+ 	-I${top_srcdir}
-+ AM_CFLAGS = ${my_CFLAGS}
-+-AM_LDFLAGS =
-++AM_LDFLAGS = ${ABSL_LOG_INTERNAL_CHECK_OP_LIBS} ${ABSL_LOG_RAW_HASH_SET_LIBS}
-+ 
-+ # code coverage
-+ 
-+diff --git a/configure.ac b/configure.ac
-+index f5a0261..8ed549a 100644
-+--- a/configure.ac
-++++ b/configure.ac
-+@@ -78,6 +78,14 @@ if test "x$enable_protoc" != "xno"; then
-+ 
-+   AX_CXX_COMPILE_STDCXX(11, noext, mandatory)
-+ 
-++# now checking 4.22.x protobuf, if so, set cxx as 14
-++  AS_IF([pkg-config --atleast-version 4.22.0 protobuf],[AX_CXX_COMPILE_STDCXX(14, noext, mandatory)])
-++
-++  AS_IF([pkg-config --atleast-version 4.22.0 protobuf],
-++    [PKG_CHECK_MODULES([ABSL_LOG_INTERNAL_CHECK_OP], [absl_log_internal_check_op],
-++       [PKG_CHECK_MODULES([ABSL_LOG_RAW_HASH_SET], [absl_raw_hash_set], [], [AC_MSG_ERROR([Missing absl_raw_hash_set library.])])],
-++       [AC_MSG_ERROR([Missing absl_log_internal_check_op library.])])])
-++
-+   PKG_CHECK_MODULES([protobuf], [protobuf >= 3.0.0],
-+     [proto3_supported=yes],
-+     [PKG_CHECK_MODULES([protobuf], [protobuf >= 2.6.0])]
-+diff --git a/protoc-c/c_bytes_field.h b/protoc-c/c_bytes_field.h
-+index bf873f0..8fc63d3 100644
-+--- a/protoc-c/c_bytes_field.h
-++++ b/protoc-c/c_bytes_field.h
-+@@ -88,7 +88,6 @@ class BytesFieldGenerator : public FieldGenerator {
-+  private:
-+   std::map<std::string, std::string> variables_;
-+ 
-+-  GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(BytesFieldGenerator);
-+ };
-+ 
-+ 
-+diff --git a/protoc-c/c_enum.h b/protoc-c/c_enum.h
-+index 9c34b69..d5e58f0 100644
-+--- a/protoc-c/c_enum.h
-++++ b/protoc-c/c_enum.h
-+@@ -107,7 +107,6 @@ class EnumGenerator {
-+   const EnumDescriptor* descriptor_;
-+   std::string dllexport_decl_;
-+ 
-+-  GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(EnumGenerator);
-+ };
-+ 
-+ }  // namespace c
-+diff --git a/protoc-c/c_enum_field.h b/protoc-c/c_enum_field.h
-+index 3f8c005..03eb402 100644
-+--- a/protoc-c/c_enum_field.h
-++++ b/protoc-c/c_enum_field.h
-+@@ -86,7 +86,6 @@ class EnumFieldGenerator : public FieldGenerator {
-+  private:
-+   std::map<std::string, std::string> variables_;
-+ 
-+-  GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(EnumFieldGenerator);
-+ };
-+ 
-+ 
-+diff --git a/protoc-c/c_extension.h b/protoc-c/c_extension.h
-+index 9541388..9c5797d 100644
-+--- a/protoc-c/c_extension.h
-++++ b/protoc-c/c_extension.h
-+@@ -99,7 +99,6 @@ class ExtensionGenerator {
-+   std::string type_traits_;
-+   std::string dllexport_decl_;
-+ 
-+-  GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(ExtensionGenerator);
-+ };
-+ 
-+ }  // namespace c
-+diff --git a/protoc-c/c_field.cc b/protoc-c/c_field.cc
-+index 0716744..4abdc6d 100644
-+--- a/protoc-c/c_field.cc
-++++ b/protoc-c/c_field.cc
-+@@ -231,7 +231,7 @@ FieldGeneratorMap::~FieldGeneratorMap() {}
-+ 
-+ const FieldGenerator& FieldGeneratorMap::get(
-+     const FieldDescriptor* field) const {
-+-  GOOGLE_CHECK_EQ(field->containing_type(), descriptor_);
-++  ABSL_CHECK_EQ(field->containing_type(), descriptor_);
-+   return *field_generators_[field->index()];
-+ }
-+ 
-+diff --git a/protoc-c/c_field.h b/protoc-c/c_field.h
-+index 3cad35d..76d3b0b 100644
-+--- a/protoc-c/c_field.h
-++++ b/protoc-c/c_field.h
-+@@ -104,8 +104,6 @@ class FieldGenerator {
-+                                             const std::string &descriptor_addr) const;
-+   const FieldDescriptor *descriptor_;
-+ 
-+- private:
-+-  GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(FieldGenerator);
-+ };
-+ 
-+ // Convenience class which constructs FieldGenerators for a Descriptor.
-+@@ -122,7 +120,6 @@ class FieldGeneratorMap {
-+ 
-+   static FieldGenerator* MakeGenerator(const FieldDescriptor* field);
-+ 
-+-  GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(FieldGeneratorMap);
-+ };
-+ 
-+ }  // namespace c
-+diff --git a/protoc-c/c_file.h b/protoc-c/c_file.h
-+index 8dfd8ba..ec55906 100644
-+--- a/protoc-c/c_file.h
-++++ b/protoc-c/c_file.h
-+@@ -104,7 +104,6 @@ class FileGenerator {
-+   std::unique_ptr<std::unique_ptr<ServiceGenerator>[]> service_generators_;
-+   std::unique_ptr<std::unique_ptr<ExtensionGenerator>[]> extension_generators_;
-+ 
-+-  GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(FileGenerator);
-+ };
-+ 
-+ }  // namespace c
-+diff --git a/protoc-c/c_generator.h b/protoc-c/c_generator.h
-+index ac1ffaf..9260116 100644
-+--- a/protoc-c/c_generator.h
-++++ b/protoc-c/c_generator.h
-+@@ -94,8 +94,6 @@ class PROTOC_C_EXPORT CGenerator : public CodeGenerator {
-+                 OutputDirectory* output_directory,
-+                 std::string* error) const;
-+ 
-+- private:
-+-  GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(CGenerator);
-+ };
-+ 
-+ }  // namespace c
-+diff --git a/protoc-c/c_helpers.cc b/protoc-c/c_helpers.cc
-+index 6fd0cd3..1eaeeb4 100644
-+--- a/protoc-c/c_helpers.cc
-++++ b/protoc-c/c_helpers.cc
-+@@ -286,7 +286,7 @@ const char* const kKeywordList[] = {
-+ 
-+ std::set<std::string> MakeKeywordsMap() {
-+   std::set<std::string> result;
-+-  for (int i = 0; i < GOOGLE_ARRAYSIZE(kKeywordList); i++) {
-++  for (int i = 0; i < ABSL_ARRAYSIZE(kKeywordList); i++) {
-+     result.insert(kKeywordList[i]);
-+   }
-+   return result;
-+@@ -548,7 +548,7 @@ std::string CEscape(const std::string& src) {
-+   std::unique_ptr<char[]> dest(new char[dest_length]);
-+   const int len = CEscapeInternal(src.data(), src.size(),
-+                                   dest.get(), dest_length, false);
-+-  GOOGLE_DCHECK_GE(len, 0);
-++  ABSL_DCHECK_GE(len, 0);
-+   return std::string(dest.get(), len);
-+ }
-+ 
-+diff --git a/protoc-c/c_message.cc b/protoc-c/c_message.cc
-+index 37e8bf8..c7e8515 100755
-+--- a/protoc-c/c_message.cc
-++++ b/protoc-c/c_message.cc
-+@@ -499,7 +499,7 @@ GenerateMessageDescriptor(io::Printer* printer, bool gen_init) {
-+ 	  // NOTE: not supported by protobuf
-+ 	  vars["maybe_static"] = "";
-+ 	  vars["field_dv_ctype"] = "{ ... }";
-+-	  GOOGLE_LOG(DFATAL) << "Messages can't have default values!";
-++	  ABSL_LOG(FATAL) << "Messages can't have default values!";
-+ 	  break;
-+ 	case FieldDescriptor::CPPTYPE_STRING:
-+ 	  if (fd->type() == FieldDescriptor::TYPE_BYTES || opt.string_as_bytes())
-+@@ -521,7 +521,7 @@ GenerateMessageDescriptor(io::Printer* printer, bool gen_init) {
-+ 	    break;
-+ 	  }
-+ 	default:
-+-	  GOOGLE_LOG(DFATAL) << "Unknown CPPTYPE";
-++	  ABSL_LOG(FATAL) << "Unknown CPPTYPE";
-+ 	  break;
-+ 	}
-+ 	if (!already_defined)
-+diff --git a/protoc-c/c_message.h b/protoc-c/c_message.h
-+index ea1c3ab..e90782b 100644
-+--- a/protoc-c/c_message.h
-++++ b/protoc-c/c_message.h
-+@@ -137,7 +137,6 @@ class MessageGenerator {
-+   std::unique_ptr<std::unique_ptr<EnumGenerator>[]> enum_generators_;
-+   std::unique_ptr<std::unique_ptr<ExtensionGenerator>[]> extension_generators_;
-+ 
-+-  GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(MessageGenerator);
-+ };
-+ 
-+ }  // namespace c
-+diff --git a/protoc-c/c_message_field.h b/protoc-c/c_message_field.h
-+index 39b8d99..42efe36 100644
-+--- a/protoc-c/c_message_field.h
-++++ b/protoc-c/c_message_field.h
-+@@ -83,9 +83,6 @@ class MessageFieldGenerator : public FieldGenerator {
-+   std::string GetDefaultValue(void) const;
-+   void GenerateStaticInit(io::Printer* printer) const;
-+ 
-+- private:
-+-
-+-  GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(MessageFieldGenerator);
-+ };
-+ 
-+ 
-+diff --git a/protoc-c/c_primitive_field.cc b/protoc-c/c_primitive_field.cc
-+index 6990893..d5a7b60 100644
-+--- a/protoc-c/c_primitive_field.cc
-++++ b/protoc-c/c_primitive_field.cc
-+@@ -99,7 +99,7 @@ void PrimitiveFieldGenerator::GenerateStructMembers(io::Printer* printer) const
-+     case FieldDescriptor::TYPE_STRING  :
-+     case FieldDescriptor::TYPE_BYTES   :
-+     case FieldDescriptor::TYPE_GROUP   :
-+-    case FieldDescriptor::TYPE_MESSAGE : GOOGLE_LOG(FATAL) << "not a primitive type"; break;
-++    case FieldDescriptor::TYPE_MESSAGE : ABSL_LOG(FATAL) << "not a primitive type"; break;
-+ 
-+     // No default because we want the compiler to complain if any new
-+     // types are added.
-+@@ -143,7 +143,7 @@ std::string PrimitiveFieldGenerator::GetDefaultValue() const
-+     case FieldDescriptor::CPPTYPE_BOOL:
-+       return descriptor_->default_value_bool() ? "1" : "0";
-+     default:
-+-      GOOGLE_LOG(DFATAL) << "unexpected CPPTYPE in c_primitive_field";
-++      ABSL_LOG(FATAL) << "unexpected CPPTYPE in c_primitive_field";
-+       return "UNEXPECTED_CPPTYPE";
-+   }
-+ }
-+@@ -197,7 +197,7 @@ void PrimitiveFieldGenerator::GenerateDescriptorInitializer(io::Printer* printer
-+     case FieldDescriptor::TYPE_STRING  :
-+     case FieldDescriptor::TYPE_BYTES   :
-+     case FieldDescriptor::TYPE_GROUP   :
-+-    case FieldDescriptor::TYPE_MESSAGE : GOOGLE_LOG(FATAL) << "not a primitive type"; break;
-++    case FieldDescriptor::TYPE_MESSAGE : ABSL_LOG(FATAL) << "not a primitive type"; break;
-+ 
-+     // No default because we want the compiler to complain if any new
-+     // types are added.
-+diff --git a/protoc-c/c_primitive_field.h b/protoc-c/c_primitive_field.h
-+index a9eb893..d2bb724 100644
-+--- a/protoc-c/c_primitive_field.h
-++++ b/protoc-c/c_primitive_field.h
-+@@ -83,9 +83,6 @@ class PrimitiveFieldGenerator : public FieldGenerator {
-+   std::string GetDefaultValue(void) const;
-+   void GenerateStaticInit(io::Printer* printer) const;
-+ 
-+- private:
-+-
-+-  GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(PrimitiveFieldGenerator);
-+ };
-+ 
-+ }  // namespace c
-+diff --git a/protoc-c/c_service.h b/protoc-c/c_service.h
-+index 27125a6..4737ff3 100644
-+--- a/protoc-c/c_service.h
-++++ b/protoc-c/c_service.h
-+@@ -101,7 +101,6 @@ class ServiceGenerator {
-+   const ServiceDescriptor* descriptor_;
-+   std::map<std::string, std::string> vars_;
-+ 
-+-  GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(ServiceGenerator);
-+ };
-+ 
-+ }  // namespace c
-+diff --git a/protoc-c/c_string_field.h b/protoc-c/c_string_field.h
-+index 513cea7..ba258e4 100644
-+--- a/protoc-c/c_string_field.h
-++++ b/protoc-c/c_string_field.h
-+@@ -88,7 +88,6 @@ class StringFieldGenerator : public FieldGenerator {
-+  private:
-+   std::map<std::string, std::string> variables_;
-+ 
-+-  GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(StringFieldGenerator);
-+ };
-+ 
-+ 
-+-- 
-+2.34.1
-+
-diff --git a/meta-oe/recipes-devtools/protobuf/protobuf-c_1.4.1.bb b/meta-oe/recipes-devtools/protobuf/protobuf-c_1.4.1.bb
-index d724287d6..86d83e9cc 100644
---- a/meta-oe/recipes-devtools/protobuf/protobuf-c_1.4.1.bb
-+++ b/meta-oe/recipes-devtools/protobuf/protobuf-c_1.4.1.bb
-@@ -12,7 +12,11 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=9f725889e0d77383e26cb42b0b62cea2"
- 
- DEPENDS = "protobuf-native protobuf"
- 
--SRC_URI = "git://github.com/protobuf-c/protobuf-c.git;branch=master;protocol=https"
-+SRC_URI = "git://github.com/protobuf-c/protobuf-c.git;branch=master;protocol=https \
-+           file://0001-add-support-of-protobuf-4.22.x.patch \
-+           "
-+SRC_URI:append:class-native = " file://0001-Makefile.am-do-not-compile-the-code-which-was-genera.patch"
-+
- SRCREV = "abc67a11c6db271bedbb9f58be85d6f4e2ea8389"
+diff --git a/meta-oe/recipes-devtools/grpc/grpc/0001-Revert-Changed-GRPCPP_ABSEIL_SYNC-to-GPR_ABSEIL_SYNC.patch b/meta-oe/recipes-devtools/grpc/grpc/0001-Revert-Changed-GRPCPP_ABSEIL_SYNC-to-GPR_ABSEIL_SYNC.patch
+deleted file mode 100644
+index b245ad865..000000000
+--- a/meta-oe/recipes-devtools/grpc/grpc/0001-Revert-Changed-GRPCPP_ABSEIL_SYNC-to-GPR_ABSEIL_SYNC.patch
++++ /dev/null
+@@ -1,62 +0,0 @@
+-From dc593958e556dd496b774f35c5992285510d6859 Mon Sep 17 00:00:00 2001
+-From: Martin Jansa <Martin.Jansa@gmail.com>
+-Date: Tue, 19 Oct 2021 17:09:55 +0200
+-Subject: [PATCH] Revert "Changed GRPCPP_ABSEIL_SYNC to GPR_ABSEIL_SYNC
+- (#25681)"
+-
+-This reverts commit 931f91b745cd5b2864a0d1787815871d0bd844ae.
+-
+-Fixes sysdig from meta-oe and other recipes (like com.webos.service.tts
+-libgoogleassistant from meta-webosose) failing with:
+-
+-| FAILED: userspace/sysdig/sysdig
+-| : && /OE/build/oe-core/tmp-glibc/work/core2-64-oe-linux/sysdig/0.27.1-r0/recipe-sysroot-native/usr/bin/x86_64-oe-linux/x86_64-oe-linux-g++ -m64 -march=core2 -mtune=core2 -msse3 -mfpmath=sse -fstack-protector-strong  -O2 -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security -Werror=format-sec
+-urity  --sysroot=/OE/build/oe-core/tmp-glibc/work/core2-64-oe-linux/sysdig/0.27.1-r0/recipe-sysroot  -O2 -pipe -g -feliminate-unused-debug-types -fmacro-prefix-map=/OE/build/oe-core/tmp-glibc/work/core2-64-oe-linux/sysdig/0.27.1-r0=/usr/src/debug/sysdig/0.27.1-r0                      -f
+-debug-prefix-map=/OE/build/oe-core/tmp-glibc/work/core2-64-oe-linux/sysdig/0.27.1-r0=/usr/src/debug/sysdig/0.27.1-r0                      -fdebug-prefix-map=/OE/build/oe-core/tmp-glibc/work/core2-64-oe-linux/sysdig/0.27.1-r0/recipe-sysroot=                      -fdebug-prefix-map=/OE/bu
+-ild/oe-core/tmp-glibc/work/core2-64-oe-linux/sysdig/0.27.1-r0/recipe-sysroot-native=  -fvisibility-inlines-hidden  -m64 -march=core2 -mtune=core2 -msse3 -mfpmath=sse -fstack-protector-strong  -O2 -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security -Werror=format-security  --sysroot=/OE/build
+-/oe-core/tmp-glibc/work/core2-64-oe-linux/sysdig/0.27.1-r0/recipe-sysroot -Wall -ggdb   -std=c++0x -O3 -fno-strict-aliasing -DNDEBUG  -m64 -march=core2 -mtune=core2 -msse3 -mfpmath=sse -fstack-protector-strong  -O2 -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security -Werror=format-security
+---sysroot=/OE/build/oe-core/tmp-glibc/work/core2-64-oe-linux/sysdig/0.27.1-r0/recipe-sysroot  -O2 -pipe -g -feliminate-unused-debug-types -fmacro-prefix-map=/OE/build/oe-core/tmp-glibc/work/core2-64-oe-linux/sysdig/0.27.1-r0=/usr/src/debug/sysdig/0.27.1-r0                      -fdebug-p
+-refix-map=/OE/build/oe-core/tmp-glibc/work/core2-64-oe-linux/sysdig/0.27.1-r0=/usr/src/debug/sysdig/0.27.1-r0                      -fdebug-prefix-map=/OE/build/oe-core/tmp-glibc/work/core2-64-oe-linux/sysdig/0.27.1-r0/recipe-sysroot=                      -fdebug-prefix-map=/OE/build/oe-
+-core/tmp-glibc/work/core2-64-oe-linux/sysdig/0.27.1-r0/recipe-sysroot-native=  -fvisibility-inlines-hidden  -m64 -march=core2 -mtune=core2 -msse3 -mfpmath=sse -fstack-protector-strong  -O2 -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security -Werror=format-security  --sysroot=/OE/build/oe-cor
+-e/tmp-glibc/work/core2-64-oe-linux/sysdig/0.27.1-r0/recipe-sysroot -Wl,-O1 -Wl,--hash-style=gnu -Wl,--as-needed -fmacro-prefix-map=/OE/build/oe-core/tmp-glibc/work/core2-64-oe-linux/sysdig/0.27.1-r0=/usr/src/debug/sysdig/0.27.1-r0                      -fdebug-prefix-map=/OE/build/oe-cor
+-e/tmp-glibc/work/core2-64-oe-linux/sysdig/0.27.1-r0=/usr/src/debug/sysdig/0.27.1-r0                      -fdebug-prefix-map=/OE/build/oe-core/tmp-glibc/work/core2-64-oe-linux/sysdig/0.27.1-r0/recipe-sysroot=                      -fdebug-prefix-map=/OE/build/oe-core/tmp-glibc/work/core2-
+-64-oe-linux/sysdig/0.27.1-r0/recipe-sysroot-native=  -Wl,-z,relro,-z,now -Wl,-O1 -Wl,--hash-style=gnu -Wl,--as-needed -fmacro-prefix-map=/OE/build/oe-core/tmp-glibc/work/core2-64-oe-linux/sysdig/0.27.1-r0=/usr/src/debug/sysdig/0.27.1-r0                      -fdebug-prefix-map=/OE/build/
+-oe-core/tmp-glibc/work/core2-64-oe-linux/sysdig/0.27.1-r0=/usr/src/debug/sysdig/0.27.1-r0                      -fdebug-prefix-map=/OE/build/oe-core/tmp-glibc/work/core2-64-oe-linux/sysdig/0.27.1-r0/recipe-sysroot=                      -fdebug-prefix-map=/OE/build/oe-core/tmp-glibc/work/
+-core2-64-oe-linux/sysdig/0.27.1-r0/recipe-sysroot-native=  -Wl,-z,relro,-z,now   -rdynamic userspace/sysdig/CMakeFiles/sysdig.dir/fields_info.cpp.o userspace/sysdig/CMakeFiles/sysdig.dir/sysdig.cpp.o -o userspace/sysdig/sysdig  userspace/libsinsp/libsinsp.a  userspace/libscap/libscap.a
+- -lelf  -lz  -lcurl  -ljsoncpp  -ltbb  -lcares  -lgrpc++_unsecure  -lgrpc_unsecure  -lprotobuf  -lcares  -lgrpc++_unsecure  -lgrpc_unsecure  -lprotobuf  -ljq  -lb64  -lrt  -lanl  -lssl  -lcrypto  -lluajit-5.1  -ldl  -lpthread && :
+-| /usr/include/grpcpp/impl/codegen/completion_queue.h:121: error: undefined reference to 'absl::lts_20210324::Mutex::~Mutex()'
+-| /usr/include/grpcpp/impl/codegen/completion_queue.h:121: error: undefined reference to 'absl::lts_20210324::Mutex::~Mutex()'
+-| /usr/include/grpcpp/impl/codegen/completion_queue.h:121: error: undefined reference to 'absl::lts_20210324::Mutex::~Mutex()'
+-| /usr/include/grpcpp/impl/codegen/completion_queue.h:259: error: undefined reference to 'absl::lts_20210324::Mutex::~Mutex()'
+-| collect2: error: ld returned 1 exit status
+-
+-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+-
+----
+-Upstream-Status: Pending
+-
+- include/grpcpp/impl/codegen/sync.h | 4 ++--
+- 1 file changed, 2 insertions(+), 2 deletions(-)
+-
+-diff --git a/include/grpcpp/impl/codegen/sync.h b/include/grpcpp/impl/codegen/sync.h
+-index 4cb8133c7c..3d10d9a3a0 100644
+---- a/include/grpcpp/impl/codegen/sync.h
+-+++ b/include/grpcpp/impl/codegen/sync.h
+-@@ -47,7 +47,7 @@
+- namespace grpc {
+- namespace internal {
+- 
+--#ifdef GPR_ABSEIL_SYNC
+-+#ifdef GRPCPP_ABSEIL_SYNC
+- 
+- using Mutex = absl::Mutex;
+- using MutexLock = absl::MutexLock;
+-@@ -142,7 +142,7 @@ class CondVar {
+-   gpr_cv cv_;
+- };
+- 
+--#endif  // GPR_ABSEIL_SYNC
+-+#endif  // GRPCPP_ABSEIL_SYNC
+- 
+- template <typename Predicate>
+- GRPC_DEPRECATED("incompatible with thread safety analysis")
+diff --git a/meta-oe/recipes-devtools/grpc/grpc/0001-cmake-add-separate-export-for-plugin-targets.patch b/meta-oe/recipes-devtools/grpc/grpc/0001-cmake-add-separate-export-for-plugin-targets.patch
+deleted file mode 100644
+index 679bd3882..000000000
+--- a/meta-oe/recipes-devtools/grpc/grpc/0001-cmake-add-separate-export-for-plugin-targets.patch
++++ /dev/null
+@@ -1,93 +0,0 @@
+-From 3150cb043363e05588062dd392b940be25594713 Mon Sep 17 00:00:00 2001
+-From: Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>
+-Date: Tue, 18 Feb 2020 14:17:07 +0100
+-Subject: [PATCH] cmake: add separate export for plugin targets
+-
+-Upstream-Status: Submitted [https://github.com/grpc/grpc/pull/29328]
+-
+-
+----
+- CMakeLists.txt | 18 +++++++++++-------
+- 1 file changed, 11 insertions(+), 7 deletions(-)
+-
+-diff --git a/CMakeLists.txt b/CMakeLists.txt
+-index efdaf8936d..6608b1b00c 100644
+---- a/CMakeLists.txt
+-+++ b/CMakeLists.txt
+-@@ -10935,7 +10935,7 @@ target_link_libraries(grpc_cpp_plugin
+- 
+- 
+- if(gRPC_INSTALL)
+--  install(TARGETS grpc_cpp_plugin EXPORT gRPCTargets
+-+  install(TARGETS grpc_cpp_plugin EXPORT gRPCPluginTargets
+-     RUNTIME DESTINATION ${gRPC_INSTALL_BINDIR}
+-     BUNDLE DESTINATION  ${gRPC_INSTALL_BINDIR}
+-     LIBRARY DESTINATION ${gRPC_INSTALL_LIBDIR}
+-@@ -10975,7 +10975,7 @@ target_link_libraries(grpc_csharp_plugin
+- 
+- 
+- if(gRPC_INSTALL)
+--  install(TARGETS grpc_csharp_plugin EXPORT gRPCTargets
+-+  install(TARGETS grpc_csharp_plugin EXPORT gRPCPluginTargets
+-     RUNTIME DESTINATION ${gRPC_INSTALL_BINDIR}
+-     BUNDLE DESTINATION  ${gRPC_INSTALL_BINDIR}
+-     LIBRARY DESTINATION ${gRPC_INSTALL_LIBDIR}
+-@@ -11015,7 +11015,7 @@ target_link_libraries(grpc_node_plugin
+- 
+- 
+- if(gRPC_INSTALL)
+--  install(TARGETS grpc_node_plugin EXPORT gRPCTargets
+-+  install(TARGETS grpc_node_plugin EXPORT gRPCPluginTargets
+-     RUNTIME DESTINATION ${gRPC_INSTALL_BINDIR}
+-     BUNDLE DESTINATION  ${gRPC_INSTALL_BINDIR}
+-     LIBRARY DESTINATION ${gRPC_INSTALL_LIBDIR}
+-@@ -11055,7 +11055,7 @@ target_link_libraries(grpc_objective_c_plugin
+- 
+- 
+- if(gRPC_INSTALL)
+--  install(TARGETS grpc_objective_c_plugin EXPORT gRPCTargets
+-+  install(TARGETS grpc_objective_c_plugin EXPORT gRPCPluginTargets
+-     RUNTIME DESTINATION ${gRPC_INSTALL_BINDIR}
+-     BUNDLE DESTINATION  ${gRPC_INSTALL_BINDIR}
+-     LIBRARY DESTINATION ${gRPC_INSTALL_LIBDIR}
+-@@ -11095,7 +11095,7 @@ target_link_libraries(grpc_php_plugin
+- 
+- 
+- if(gRPC_INSTALL)
+--  install(TARGETS grpc_php_plugin EXPORT gRPCTargets
+-+  install(TARGETS grpc_php_plugin EXPORT gRPCPluginTargets
+-     RUNTIME DESTINATION ${gRPC_INSTALL_BINDIR}
+-     BUNDLE DESTINATION  ${gRPC_INSTALL_BINDIR}
+-     LIBRARY DESTINATION ${gRPC_INSTALL_LIBDIR}
+-@@ -11135,7 +11135,7 @@ target_link_libraries(grpc_python_plugin
+- 
+- 
+- if(gRPC_INSTALL)
+--  install(TARGETS grpc_python_plugin EXPORT gRPCTargets
+-+  install(TARGETS grpc_python_plugin EXPORT gRPCPluginTargets
+-     RUNTIME DESTINATION ${gRPC_INSTALL_BINDIR}
+-     BUNDLE DESTINATION  ${gRPC_INSTALL_BINDIR}
+-     LIBRARY DESTINATION ${gRPC_INSTALL_LIBDIR}
+-@@ -11175,7 +11175,7 @@ target_link_libraries(grpc_ruby_plugin
+- 
+- 
+- if(gRPC_INSTALL)
+--  install(TARGETS grpc_ruby_plugin EXPORT gRPCTargets
+-+  install(TARGETS grpc_ruby_plugin EXPORT gRPCPluginTargets
+-     RUNTIME DESTINATION ${gRPC_INSTALL_BINDIR}
+-     BUNDLE DESTINATION  ${gRPC_INSTALL_BINDIR}
+-     LIBRARY DESTINATION ${gRPC_INSTALL_LIBDIR}
+-@@ -17349,6 +17349,10 @@ if(gRPC_INSTALL)
+-     DESTINATION ${gRPC_INSTALL_CMAKEDIR}
+-     NAMESPACE gRPC::
+-   )
+-+  install(EXPORT gRPCPluginTargets
+-+    DESTINATION ${gRPC_INSTALL_CMAKEDIR}
+-+    NAMESPACE gRPC::
+-+  )
+- endif()
+- 
+- include(CMakePackageConfigHelpers)
+--- 
+-2.30.2
+-
+diff --git a/meta-oe/recipes-devtools/grpc/grpc_1.50.1.bb b/meta-oe/recipes-devtools/grpc/grpc_1.56.2.bb
+similarity index 92%
+rename from meta-oe/recipes-devtools/grpc/grpc_1.50.1.bb
+rename to meta-oe/recipes-devtools/grpc/grpc_1.56.2.bb
+index 45bfcb857..ac54d704a 100644
+--- a/meta-oe/recipes-devtools/grpc/grpc_1.50.1.bb
++++ b/meta-oe/recipes-devtools/grpc/grpc_1.56.2.bb
+@@ -20,11 +20,9 @@ RDEPENDS:${PN}-dev:append:class-native = " ${PN}-compiler"
+ # RDEPENDS:${PN}-dev += "${PN}-compiler"
  
  S = "${WORKDIR}/git"
+-SRCREV_grpc = "90ccf24d22b6fc909a1021ebd89fd8c838467d26"
+-BRANCH = "v1.50.x"
++SRCREV_grpc = "c0d1c393d9365664d47df41746e992ae97b651ef"
++BRANCH = "v1.56.x"
+ SRC_URI = "gitsm://github.com/grpc/grpc.git;protocol=https;name=grpc;branch=${BRANCH} \
+-           file://0001-Revert-Changed-GRPCPP_ABSEIL_SYNC-to-GPR_ABSEIL_SYNC.patch \
+-           file://0001-cmake-add-separate-export-for-plugin-targets.patch \
+            file://0001-cmake-Link-with-libatomic-on-rv32-rv64.patch \
+            file://0001-fix-CVE-2023-32732.patch \
+            "
 -- 
 2.34.1
 
