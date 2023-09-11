@@ -2,53 +2,54 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C29BEEE7FF4
-	for <webhook@archiver.kernel.org>; Mon, 11 Sep 2023 06:59:47 +0000 (UTC)
-Received: from esa3.hc1455-7.c3s2.iphmx.com (esa3.hc1455-7.c3s2.iphmx.com [207.54.90.49])
- by mx.groups.io with SMTP id smtpd.web11.53049.1694415581448425803
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6309FEE7FF4
+	for <webhook@archiver.kernel.org>; Mon, 11 Sep 2023 09:07:19 +0000 (UTC)
+Received: from esa5.hc1455-7.c3s2.iphmx.com (esa5.hc1455-7.c3s2.iphmx.com [68.232.139.130])
+ by mx.groups.io with SMTP id smtpd.web11.54450.1694423234432107632
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 10 Sep 2023 23:59:41 -0700
+ Mon, 11 Sep 2023 02:07:15 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: fujitsu.com, ip: 207.54.90.49, mailfrom: wangmy@fujitsu.com)
-X-IronPort-AV: E=McAfee;i="6600,9927,10829"; a="131616185"
+ dkim=none (message not signed); spf=pass (domain: fujitsu.com, ip: 68.232.139.130, mailfrom: wangmy@fujitsu.com)
+X-IronPort-AV: E=McAfee;i="6600,9927,10829"; a="131118606"
 X-IronPort-AV: E=Sophos;i="6.02,243,1688396400"; 
-   d="scan'208";a="131616185"
+   d="scan'208";a="131118606"
 Received: from unknown (HELO yto-r2.gw.nic.fujitsu.com) ([218.44.52.218])
-  by esa3.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 11 Sep 2023 15:59:38 +0900
-Received: from yto-m3.gw.nic.fujitsu.com (yto-nat-yto-m3.gw.nic.fujitsu.com [192.168.83.66])
-	by yto-r2.gw.nic.fujitsu.com (Postfix) with ESMTP id E74DA9FD82
-	for <openembedded-devel@lists.openembedded.org>; Mon, 11 Sep 2023 15:59:35 +0900 (JST)
+  by esa5.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 11 Sep 2023 18:07:11 +0900
+Received: from yto-m4.gw.nic.fujitsu.com (yto-nat-yto-m4.gw.nic.fujitsu.com [192.168.83.67])
+	by yto-r2.gw.nic.fujitsu.com (Postfix) with ESMTP id 43FEFC68E2
+	for <openembedded-devel@lists.openembedded.org>; Mon, 11 Sep 2023 18:07:09 +0900 (JST)
 Received: from kws-ab4.gw.nic.fujitsu.com (kws-ab4.gw.nic.fujitsu.com [192.51.206.22])
-	by yto-m3.gw.nic.fujitsu.com (Postfix) with ESMTP id 33831D9691
-	for <openembedded-devel@lists.openembedded.org>; Mon, 11 Sep 2023 15:59:35 +0900 (JST)
+	by yto-m4.gw.nic.fujitsu.com (Postfix) with ESMTP id 7EB56D3F10
+	for <openembedded-devel@lists.openembedded.org>; Mon, 11 Sep 2023 18:07:08 +0900 (JST)
 Received: from localhost.localdomain (unknown [10.167.225.33])
-	by kws-ab4.gw.nic.fujitsu.com (Postfix) with ESMTP id A0F9C6BF44;
-	Mon, 11 Sep 2023 15:59:34 +0900 (JST)
+	by kws-ab4.gw.nic.fujitsu.com (Postfix) with ESMTP id ECE706BF4B;
+	Mon, 11 Sep 2023 18:07:07 +0900 (JST)
 From: wangmy@fujitsu.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-oe] [PATCH v2] freerdp: upgrade 2.10.0 -> 2.11.0
-Date: Mon, 11 Sep 2023 14:59:31 +0800
-Message-Id: <1694415571-3429-1-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH v3] freerdp: upgrade 2.10.0 -> 2.11.0
+Date: Mon, 11 Sep 2023 17:07:03 +0800
+Message-Id: <1694423223-4258-1-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 X-TM-AS-GCONF: 00
-X-TM-AS-Product-Ver: IMSS-9.1.0.1417-9.0.0.1002-27868.005
+X-TM-AS-Product-Ver: IMSS-9.1.0.1417-9.0.0.1002-27868.006
 X-TM-AS-User-Approved-Sender: Yes
-X-TMASE-Version: IMSS-9.1.0.1417-9.0.1002-27868.005
-X-TMASE-Result: 10-0.807800-10.000000
-X-TMASE-MatchedRID: 6IstDyeExSCjz0nOeth/ySrLqyE6Ur/jnJdsOLB4zv79wRnyxuPjhL+I
+X-TMASE-Version: IMSS-9.1.0.1417-9.0.1002-27868.006
+X-TMASE-Result: 10--2.715900-10.000000
+X-TMASE-MatchedRID: sujxEcxUy52jz0nOeth/ySrLqyE6Ur/jnJdsOLB4zv79wRnyxuPjhL+I
 	hmgj6NxWSUQWNWP9oCxU1CACweeL4Mhblrt58TvtatGCGdi/nWrAQzqh8D4IY1SOymiJfTYXuCe
 	I1XiMk/C7EluFw7wmCRK4lG1JTzijWjws5pdLmBb8dMpK2wMYwnIa+KQSxiLwB/FMznsE8cO/BR
-	68O365bjSAa8O4E9d0L/8yUNGojyb1Ht3BefL9t203YawHJvPC8bHRUazq99RTqGRAXj8KbTuHX
-	SK1vckVfyv3Al3oq/d5OPD8XJFfpB8TzIzimOwPbdTuPa9VRGvEQdG7H66TyHEqm8QYBtMOMH+2
-	eKp4Fep+IOX0CP0Xl3OsevbeH1ibi7UX97Un0gFjTjmjxn1yZzQWxAsWoa00D+JL9kVi7iykPLf
-	2MPw9arZk4rv23hyygr6lqxbIXlHC3tMwY3ma2xUDj+dgUQVyTE7Co9fKv3w=
+	68O365bjSAa8O4E9d0L/8yUNGojyb1Ht3BefL9t203YawHJvPC8bHRUazq99QR34ro7k23nbqSN
+	KTkl986XPeMuP6emxmGjW1HmbIRAfKZUMHzJkSUngIgpj8eDcCbifj2/J/1cUp0ODI8GjvXKrau
+	Xd3MZDVepfvh/AFWPanFLc9TUZaMQesN9CY7bz2AsHZlIuMxzeb8j5+Dg8iozX4LPwAWMq5dfJB
+	6VP2fNpWSSMHqWZBO3+ZIUgG/AvoyoB4P7dCh9lPJnXL2yNYdkuo847l05tDEzMyAmsz+FHoWLW
+	lXcsZv
 X-TMASE-SNAP-Result: 1.821001.0001-0-1-22:0,33:0,34:0-0
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 11 Sep 2023 06:59:47 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104835
+ <openembedded-devel@lists.openembedded.org>; Mon, 11 Sep 2023 09:07:19 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104836
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
@@ -76,18 +77,21 @@ Fixed issues:
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../0001-Fix-const-qualifier-error.patch      | 30 +++++++++++++++++++
+ .../0001-Fix-const-qualifier-error.patch      | 57 +++++++++++++++++++
  .../{freerdp_2.10.0.bb => freerdp_2.11.0.bb}  |  3 +-
- 2 files changed, 32 insertions(+), 1 deletion(-)
+ 2 files changed, 59 insertions(+), 1 deletion(-)
  create mode 100644 meta-oe/recipes-support/freerdp/freerdp/0001-Fix-const-qualifier-error.patch
  rename meta-oe/recipes-support/freerdp/{freerdp_2.10.0.bb => freerdp_2.11.0.bb} (96%)
 
 diff --git a/meta-oe/recipes-support/freerdp/freerdp/0001-Fix-const-qualifier-error.patch b/meta-oe/recipes-support/freerdp/freerdp/0001-Fix-const-qualifier-error.patch
 new file mode 100644
-index 0000000000..39c97baab4
+index 0000000000..87a456d16d
 --- /dev/null
 +++ b/meta-oe/recipes-support/freerdp/freerdp/0001-Fix-const-qualifier-error.patch
-@@ -0,0 +1,30 @@
+@@ -0,0 +1,57 @@
++From 761b4df04a141cc8c9507c741e4046c6c6b00491 Mon Sep 17 00:00:00 2001
++From: Wang Mingyu <wangmy@fujitsu.com>
++Date: Mon, 11 Sep 2023 09:00:39 +0000
 +Subject: [PATCH] Fix const qualifier error
 +
 +Fixes clang error
@@ -95,26 +99,50 @@ index 0000000000..39c97baab4
 +|         obj->fnObjectNew = uwac_event_clone;
 +|                          ^ ~~~~~~~~~~~~~~~~
 +
-+Upstream-Status: Pending
++https://github.com/FreeRDP/FreeRDP/commit/6e3c00725aae99d03a0baa65430eceddebd9dee8
++Upstream-Status: Backport
 +
 +Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 +---
-+ client/Wayland/wlfreerdp.c | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
++ libfreerdp/codec/rfx.c            | 4 ++--
++ winpr/include/winpr/collections.h | 2 +-
++ 2 files changed, 3 insertions(+), 3 deletions(-)
 +
-+diff --git a/client/Wayland/wlfreerdp.c b/client/Wayland/wlfreerdp.c
-+index 65e29bc..5988aed 100644
-+--- a/client/Wayland/wlfreerdp.c
-++++ b/client/Wayland/wlfreerdp.c
-+@@ -587,7 +587,7 @@ static void wlf_client_free(freerdp* instance, rdpContext* context)
-+ 	DeleteCriticalSection(&wlf->critical);
++diff --git a/libfreerdp/codec/rfx.c b/libfreerdp/codec/rfx.c
++index ccbc5af..eec7365 100644
++--- a/libfreerdp/codec/rfx.c
+++++ b/libfreerdp/codec/rfx.c
++@@ -153,7 +153,7 @@ static void rfx_tile_init(void* obj)
++ 	}
 + }
 + 
-+-static void* uwac_event_clone(const void* val)
-++static void* uwac_event_clone(void* val)
++-static void* rfx_decoder_tile_new(void* val)
+++static void* rfx_decoder_tile_new(const void* val)
 + {
-+ 	UwacEvent* copy;
-+ 	UwacEvent* ev = (UwacEvent*)val;
++ 	RFX_TILE* tile = NULL;
++ 	WINPR_UNUSED(val);
++@@ -184,7 +184,7 @@ static void rfx_decoder_tile_free(void* obj)
++ 	}
++ }
++ 
++-static void* rfx_encoder_tile_new(void* val)
+++static void* rfx_encoder_tile_new(const void* val)
++ {
++ 	WINPR_UNUSED(val);
++ 	return calloc(1, sizeof(RFX_TILE));
++diff --git a/winpr/include/winpr/collections.h b/winpr/include/winpr/collections.h
++index 807f011..b8c8d9d 100644
++--- a/winpr/include/winpr/collections.h
+++++ b/winpr/include/winpr/collections.h
++@@ -36,7 +36,7 @@ extern "C"
++ {
++ #endif
++ 
++-	typedef void* (*OBJECT_NEW_FN)(void* val);
+++	typedef void* (*OBJECT_NEW_FN)(const void* val);
++ 	typedef void (*OBJECT_INIT_FN)(void* obj);
++ 	typedef void (*OBJECT_UNINIT_FN)(void* obj);
++ 	typedef void (*OBJECT_FREE_FN)(void* obj);
 +-- 
 +2.34.1
 +
