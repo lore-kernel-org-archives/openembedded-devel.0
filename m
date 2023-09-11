@@ -1,127 +1,133 @@
-Return-Path: <hprajapati@mvista.com>
+Return-Path: <mingli.yu@eng.windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D3AC5EE57DF
-	for <webhook@archiver.kernel.org>; Mon, 11 Sep 2023 06:48:47 +0000 (UTC)
-Received: from mail-oo1-f52.google.com (mail-oo1-f52.google.com [209.85.161.52])
- by mx.groups.io with SMTP id smtpd.web10.52847.1694414926421740074
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C8974EE7FF4
+	for <webhook@archiver.kernel.org>; Mon, 11 Sep 2023 06:54:07 +0000 (UTC)
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.web10.52898.1694415244584779022
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 10 Sep 2023 23:48:46 -0700
+ Sun, 10 Sep 2023 23:54:04 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@mvista.com header.s=google header.b=Fo2IV1bx;
- spf=pass (domain: mvista.com, ip: 209.85.161.52, mailfrom: hprajapati@mvista.com)
-Received: by mail-oo1-f52.google.com with SMTP id 006d021491bc7-57325fcd970so2599233eaf.1
-        for <openembedded-devel@lists.openembedded.org>; Sun, 10 Sep 2023 23:48:46 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=mvista.com; s=google; t=1694414925; x=1695019725; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=0YpdBeK9UD24EnNaCBmd6hYDXeGm+f/bjzqHsJj+YI4=;
-        b=Fo2IV1bxliwbPN5xk3k2ViOnJf2wdc3o/oaWX1CVeWgcOMVMzAwQdR0r3Oqr31LK7G
-         XAoRcI8fEHLtOWxU52TVij4z1389m5Gd3srCdW7pDNvfF+HjLXsDg6ExWFZ7qt8rNCQZ
-         V0Qehdj4f9W/N2Ub7BpGXMIoUeWkzP38EPDfw=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1694414925; x=1695019725;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=0YpdBeK9UD24EnNaCBmd6hYDXeGm+f/bjzqHsJj+YI4=;
-        b=LtAun+fPrwDpbwnQhslDprZg5rCAp7POxkZO+Wgr1Wlr1o3zC0wmchrLr0zjUsE50D
-         XKjgEyuu4CxB5l6WB0sQKDUSJmxx2gexB9j2y0KI4Im25qarsBvnkR82/yccJ07Elblg
-         By9HxP7mMxvJ+JPu1kDTt2mFbBBjzOC1RovezpRqSH/1wC7xAb8+aclT8lK8GB13J/ey
-         xHOzvwDXROMmQWV6QHMbu6yv2e5hMgVFfZn/r4f5SJh72WBtFNZsAyBBvaOGawwfpAze
-         fcIX8E1yI+hmxPWSsRPo0l1fwXj0taFedANZeVZzt5QUzJiZJ8dqEAMMC+B8Kd9cSv/Y
-         fcmw==
-X-Gm-Message-State: AOJu0YywjJWbXs5wn/J4W8XwxQSxNfU6NQk5Omvx7CCdxjfT3Hbu0+yV
-	Y4onuc7nbRbkpzRjlEYoWkYQA9BZDNuxHvgDmMacWQ==
-X-Google-Smtp-Source: AGHT+IHpTSdEodyA2Kyxzgqnn41bvypSciweAYt0dXjYAR/BIO+k6d+d3e7/In7R6964w6soQNrdrQ==
-X-Received: by 2002:a05:6358:fac9:b0:140:f2fd:e9d7 with SMTP id ts9-20020a056358fac900b00140f2fde9d7mr4406343rwb.4.1694414925548;
-        Sun, 10 Sep 2023 23:48:45 -0700 (PDT)
-Received: from MVIN00016.mvista.com ([103.250.136.128])
-        by smtp.gmail.com with ESMTPSA id k12-20020aa7820c000000b00687ce7c6540sm5012168pfi.99.2023.09.10.23.48.43
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 10 Sep 2023 23:48:45 -0700 (PDT)
-From: Hitendra Prajapati <hprajapati@mvista.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Hitendra Prajapati <hprajapati@mvista.com>
-Subject: [meta-networking][dunfell][PATCH] wireshark: Fix CVE-2023-2906
-Date: Mon, 11 Sep 2023 12:18:39 +0530
-Message-Id: <20230911064839.236275-1-hprajapati@mvista.com>
+ dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=CpL/MXXJ;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=76188869a3=mingli.yu@windriver.com)
+Received: from pps.filterd (m0250811.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.17.1.22/8.17.1.22) with ESMTP id 38B6FmJP028933
+	for <openembedded-devel@lists.openembedded.org>; Mon, 11 Sep 2023 06:54:03 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
+	 h=from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding:content-type; s=PPS06212021; bh=bMgth
+	hRf/FwwdD/G4zWR7uAzFksi/TreTVg0zz8VDVY=; b=CpL/MXXJKCCqCLtucYLZH
+	LrwZmAq63cwYyJxBsg7r6xFRzfFyNKc07DdbvBxZKjU7UBZ/pxh2J/t/4eE/6M6o
+	vXAkV5KEUXDJokk2vaEvsOaEEvoJZTHjUl6fAyUVqmhoQJaRdfbDLi2Doka2x5jy
+	9MKUjYxBh24ED5IzlbHeK68UqsxQatNFRrSDJd7n5B+UqZGxjWtK0P7/4VfcrcJb
+	5d6ahUDkPea2PDk04S1dfmG/h+UQK8ahcu6/durZVh4T9gR0MmZFB40YMfMqoY94
+	oYT2tLyaTqWkL1OYlSQG2vaa5aMQKCHMPlhDG+dqTsD3Ak0R6xTP7f5i8bdY6Kc5
+	g==
+Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3t0dwxsdds-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Mon, 11 Sep 2023 06:54:03 +0000 (GMT)
+Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.27; Sun, 10 Sep 2023 23:54:01 -0700
+Received: from pek-lpg-core2.wrs.com (128.224.153.41) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
+ 15.1.2507.27 via Frontend Transport; Sun, 10 Sep 2023 23:53:59 -0700
+From: <mingli.yu@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [meta-oe][kirkstone][PATCH] hdf5: Fix CVE-2021-37501
+Date: Mon, 11 Sep 2023 14:54:00 +0800
+Message-ID: <20230911065400.2633164-1-mingli.yu@windriver.com>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Proofpoint-ORIG-GUID: 6Cq8NmXooxyR68Yyeo2mH1lDDnVaR83T
+X-Proofpoint-GUID: 6Cq8NmXooxyR68Yyeo2mH1lDDnVaR83T
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.254,Aquarius:18.0.957,Hydra:6.0.601,FMLib:17.11.176.26
+ definitions=2023-09-11_03,2023-09-05_01,2023-05-22_02
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 malwarescore=0 suspectscore=0
+ impostorscore=0 phishscore=0 priorityscore=1501 lowpriorityscore=0
+ mlxlogscore=999 mlxscore=0 adultscore=0 bulkscore=0 spamscore=0
+ clxscore=1015 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.19.0-2308100000 definitions=main-2309110061
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 11 Sep 2023 06:48:47 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104833
+ <openembedded-devel@lists.openembedded.org>; Mon, 11 Sep 2023 06:54:07 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104834
 
-Upstream-Status: Backport from https://gitlab.com/wireshark/wireshark/-/commit/44dc70cc5aadca91cb8ba3710c59c3651b7b0d4d
+From: Mingli Yu <mingli.yu@windriver.com>
 
-Signed-off-by: Hitendra Prajapati <hprajapati@mvista.com>
+Backport a patch [1] to fix CVE-2021-37501.
+
+[1] https://github.com/HDFGroup/hdf5/commit/b16ec83d4bd79f9ffaad85de16056419f3532887
+
+Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
 ---
- .../wireshark/files/CVE-2023-2906.patch       | 38 +++++++++++++++++++
- .../wireshark/wireshark_3.2.18.bb             |  1 +
- 2 files changed, 39 insertions(+)
- create mode 100644 meta-networking/recipes-support/wireshark/files/CVE-2023-2906.patch
+ .../hdf5/files/CVE-2021-37501.patch           | 37 +++++++++++++++++++
+ meta-oe/recipes-support/hdf5/hdf5_1.8.21.bb   |  1 +
+ 2 files changed, 38 insertions(+)
+ create mode 100644 meta-oe/recipes-support/hdf5/files/CVE-2021-37501.patch
 
-diff --git a/meta-networking/recipes-support/wireshark/files/CVE-2023-2906.patch b/meta-networking/recipes-support/wireshark/files/CVE-2023-2906.patch
+diff --git a/meta-oe/recipes-support/hdf5/files/CVE-2021-37501.patch b/meta-oe/recipes-support/hdf5/files/CVE-2021-37501.patch
 new file mode 100644
-index 000000000..3a81a3c71
+index 000000000..01099f343
 --- /dev/null
-+++ b/meta-networking/recipes-support/wireshark/files/CVE-2023-2906.patch
-@@ -0,0 +1,38 @@
-+From 44dc70cc5aadca91cb8ba3710c59c3651b7b0d4d Mon Sep 17 00:00:00 2001
-+From: Jaap Keuter <jaap.keuter@xs4all.nl>
-+Date: Thu, 27 Jul 2023 20:21:19 +0200
-+Subject: [PATCH] CP2179: Handle timetag info response without records
++++ b/meta-oe/recipes-support/hdf5/files/CVE-2021-37501.patch
+@@ -0,0 +1,37 @@
++From 602015eacc53bf2699bf4c4e5420b63c3f067547 Mon Sep 17 00:00:00 2001
++From: Mingli Yu <mingli.yu@windriver.com>
++Date: Mon, 11 Sep 2023 14:01:37 +0800
++Subject: [PATCH] Check for overflow when calculating on-disk attribute data
++ size
 +
-+Fixes #19229
++Bogus sizes in this test case causes the on-disk data size
++calculation in H5O_attr_decode() to overflow so that the
++calculated size becomes 0. This causes the read to overflow
++and h5dump to segfault.
 +
-+Upstream-Status: Backport [https://gitlab.com/wireshark/wireshark/-/commit/44dc70cc5aadca91cb8ba3710c59c3651b7b0d4d]
-+CVE: CVE-2023-2906
-+Signed-off-by: Hitendra Prajapati <hprajapati@mvista.com>
++CVE: CVE-2021-37501
++
++Upstream-Status: Backport [https://github.com/HDFGroup/hdf5/commit/b16ec83d4bd79f9ffaad85de16056419f3532887]
++
++Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
 +---
-+ epan/dissectors/packet-cp2179.c | 7 +++++--
-+ 1 file changed, 5 insertions(+), 2 deletions(-)
++ src/H5Oattr.c | 3 +++
++ 1 file changed, 3 insertions(+)
 +
-+diff --git a/epan/dissectors/packet-cp2179.c b/epan/dissectors/packet-cp2179.c
-+index 142cac3..9fc9a47 100644
-+--- a/epan/dissectors/packet-cp2179.c
-++++ b/epan/dissectors/packet-cp2179.c
-+@@ -721,11 +721,14 @@ dissect_response_frame(tvbuff_t *tvb, proto_tree *tree, packet_info *pinfo, int
-+                     proto_tree_add_item(cp2179_proto_tree, hf_cp2179_timetag_numsets, tvb, offset, 1, ENC_LITTLE_ENDIAN);
++diff --git a/src/H5Oattr.c b/src/H5Oattr.c
++index c2c0fe3..c289344 100644
++--- a/src/H5Oattr.c
+++++ b/src/H5Oattr.c
++@@ -217,6 +217,9 @@ H5O_attr_decode(H5F_t *f, hid_t dxpl_id, H5O_t *open_oh, unsigned H5_ATTR_UNUSED
 + 
-+                     num_records = tvb_get_guint8(tvb, offset) & 0x7F;
-++                    offset += 1;
-++
-++                    if (num_records == 0 || numberofcharacters <= 1)
-++                        break;
-++
-+                     recordsize = (numberofcharacters-1) / num_records;
-+                     num_values = (recordsize-6) / 2;      /* Determine how many 16-bit analog values are present in each event record */
++     /* Compute the size of the data */
++     H5_CHECKED_ASSIGN(attr->shared->data_size, size_t, H5S_GET_EXTENT_NPOINTS(attr->shared->ds) * H5T_get_size(attr->shared->dt), hsize_t);
+++    /* Check if multiplication has overflown */
+++    if ((attr->shared->data_size / H5T_get_size(attr->shared->dt)) != H5S_GET_EXTENT_NPOINTS(attr->shared->ds))
+++        HGOTO_ERROR(H5E_RESOURCE, H5E_OVERFLOW, NULL, "data size exceeds addressable range");
 + 
-+-                    offset += 1;
-+-
-+                     for (x = 0; x < num_records; x++)
-+                     {
-+                         cp2179_event_tree = proto_tree_add_subtree_format(cp2179_proto_tree, tvb, offset, recordsize, ett_cp2179_event, NULL, "Event Record # %d", x+1);
++     /* Go get the data */
++     if(attr->shared->data_size) {
 +-- 
 +2.25.1
 +
-diff --git a/meta-networking/recipes-support/wireshark/wireshark_3.2.18.bb b/meta-networking/recipes-support/wireshark/wireshark_3.2.18.bb
-index 361123d1c..64e436df3 100644
---- a/meta-networking/recipes-support/wireshark/wireshark_3.2.18.bb
-+++ b/meta-networking/recipes-support/wireshark/wireshark_3.2.18.bb
-@@ -17,6 +17,7 @@ SRC_URI = "https://1.eu.dl.wireshark.org/src/all-versions/wireshark-${PV}.tar.xz
-            file://CVE-2023-0667-pre1.patch \
-            file://CVE-2023-0667.patch \
-            file://CVE-2023-0668.patch \
-+           file://CVE-2023-2906.patch \
-            "
- UPSTREAM_CHECK_URI = "https://1.as.dl.wireshark.org/src"
- 
+diff --git a/meta-oe/recipes-support/hdf5/hdf5_1.8.21.bb b/meta-oe/recipes-support/hdf5/hdf5_1.8.21.bb
+index 7b886a463..4110e9cea 100644
+--- a/meta-oe/recipes-support/hdf5/hdf5_1.8.21.bb
++++ b/meta-oe/recipes-support/hdf5/hdf5_1.8.21.bb
+@@ -17,6 +17,7 @@ SRC_URI = " \
+     file://0001-cross-compiling-support.patch \
+     file://0002-Remove-suffix-shared-from-shared-library-name.patch \
+     file://0001-cmake-remove-build-flags.patch \
++    file://CVE-2021-37501.patch \
+ "
+ SRC_URI[md5sum] = "2d2408f2a9dfb5c7b79998002e9a90e9"
+ SRC_URI[sha256sum] = "e5b1b1dee44a64b795a91c3321ab7196d9e0871fe50d42969761794e3899f40d"
 -- 
 2.25.1
 
