@@ -1,134 +1,143 @@
-Return-Path: <mingli.yu@eng.windriver.com>
+Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C8974EE7FF4
-	for <webhook@archiver.kernel.org>; Mon, 11 Sep 2023 06:54:07 +0000 (UTC)
-Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
- by mx.groups.io with SMTP id smtpd.web10.52898.1694415244584779022
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C29BEEE7FF4
+	for <webhook@archiver.kernel.org>; Mon, 11 Sep 2023 06:59:47 +0000 (UTC)
+Received: from esa3.hc1455-7.c3s2.iphmx.com (esa3.hc1455-7.c3s2.iphmx.com [207.54.90.49])
+ by mx.groups.io with SMTP id smtpd.web11.53049.1694415581448425803
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 10 Sep 2023 23:54:04 -0700
+ Sun, 10 Sep 2023 23:59:41 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=CpL/MXXJ;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=76188869a3=mingli.yu@windriver.com)
-Received: from pps.filterd (m0250811.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.17.1.22/8.17.1.22) with ESMTP id 38B6FmJP028933
-	for <openembedded-devel@lists.openembedded.org>; Mon, 11 Sep 2023 06:54:03 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
-	 h=from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding:content-type; s=PPS06212021; bh=bMgth
-	hRf/FwwdD/G4zWR7uAzFksi/TreTVg0zz8VDVY=; b=CpL/MXXJKCCqCLtucYLZH
-	LrwZmAq63cwYyJxBsg7r6xFRzfFyNKc07DdbvBxZKjU7UBZ/pxh2J/t/4eE/6M6o
-	vXAkV5KEUXDJokk2vaEvsOaEEvoJZTHjUl6fAyUVqmhoQJaRdfbDLi2Doka2x5jy
-	9MKUjYxBh24ED5IzlbHeK68UqsxQatNFRrSDJd7n5B+UqZGxjWtK0P7/4VfcrcJb
-	5d6ahUDkPea2PDk04S1dfmG/h+UQK8ahcu6/durZVh4T9gR0MmZFB40YMfMqoY94
-	oYT2tLyaTqWkL1OYlSQG2vaa5aMQKCHMPlhDG+dqTsD3Ak0R6xTP7f5i8bdY6Kc5
-	g==
-Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3t0dwxsdds-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Mon, 11 Sep 2023 06:54:03 +0000 (GMT)
-Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.27; Sun, 10 Sep 2023 23:54:01 -0700
-Received: from pek-lpg-core2.wrs.com (128.224.153.41) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
- 15.1.2507.27 via Frontend Transport; Sun, 10 Sep 2023 23:53:59 -0700
-From: <mingli.yu@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-oe][kirkstone][PATCH] hdf5: Fix CVE-2021-37501
-Date: Mon, 11 Sep 2023 14:54:00 +0800
-Message-ID: <20230911065400.2633164-1-mingli.yu@windriver.com>
-X-Mailer: git-send-email 2.25.1
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Proofpoint-ORIG-GUID: 6Cq8NmXooxyR68Yyeo2mH1lDDnVaR83T
-X-Proofpoint-GUID: 6Cq8NmXooxyR68Yyeo2mH1lDDnVaR83T
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.254,Aquarius:18.0.957,Hydra:6.0.601,FMLib:17.11.176.26
- definitions=2023-09-11_03,2023-09-05_01,2023-05-22_02
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 malwarescore=0 suspectscore=0
- impostorscore=0 phishscore=0 priorityscore=1501 lowpriorityscore=0
- mlxlogscore=999 mlxscore=0 adultscore=0 bulkscore=0 spamscore=0
- clxscore=1015 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.19.0-2308100000 definitions=main-2309110061
+ dkim=none (message not signed); spf=pass (domain: fujitsu.com, ip: 207.54.90.49, mailfrom: wangmy@fujitsu.com)
+X-IronPort-AV: E=McAfee;i="6600,9927,10829"; a="131616185"
+X-IronPort-AV: E=Sophos;i="6.02,243,1688396400"; 
+   d="scan'208";a="131616185"
+Received: from unknown (HELO yto-r2.gw.nic.fujitsu.com) ([218.44.52.218])
+  by esa3.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 11 Sep 2023 15:59:38 +0900
+Received: from yto-m3.gw.nic.fujitsu.com (yto-nat-yto-m3.gw.nic.fujitsu.com [192.168.83.66])
+	by yto-r2.gw.nic.fujitsu.com (Postfix) with ESMTP id E74DA9FD82
+	for <openembedded-devel@lists.openembedded.org>; Mon, 11 Sep 2023 15:59:35 +0900 (JST)
+Received: from kws-ab4.gw.nic.fujitsu.com (kws-ab4.gw.nic.fujitsu.com [192.51.206.22])
+	by yto-m3.gw.nic.fujitsu.com (Postfix) with ESMTP id 33831D9691
+	for <openembedded-devel@lists.openembedded.org>; Mon, 11 Sep 2023 15:59:35 +0900 (JST)
+Received: from localhost.localdomain (unknown [10.167.225.33])
+	by kws-ab4.gw.nic.fujitsu.com (Postfix) with ESMTP id A0F9C6BF44;
+	Mon, 11 Sep 2023 15:59:34 +0900 (JST)
+From: wangmy@fujitsu.com
+To: openembedded-devel@lists.openembedded.org
+Cc: Wang Mingyu <wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH v2] freerdp: upgrade 2.10.0 -> 2.11.0
+Date: Mon, 11 Sep 2023 14:59:31 +0800
+Message-Id: <1694415571-3429-1-git-send-email-wangmy@fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
+X-TM-AS-GCONF: 00
+X-TM-AS-Product-Ver: IMSS-9.1.0.1417-9.0.0.1002-27868.005
+X-TM-AS-User-Approved-Sender: Yes
+X-TMASE-Version: IMSS-9.1.0.1417-9.0.1002-27868.005
+X-TMASE-Result: 10-0.807800-10.000000
+X-TMASE-MatchedRID: 6IstDyeExSCjz0nOeth/ySrLqyE6Ur/jnJdsOLB4zv79wRnyxuPjhL+I
+	hmgj6NxWSUQWNWP9oCxU1CACweeL4Mhblrt58TvtatGCGdi/nWrAQzqh8D4IY1SOymiJfTYXuCe
+	I1XiMk/C7EluFw7wmCRK4lG1JTzijWjws5pdLmBb8dMpK2wMYwnIa+KQSxiLwB/FMznsE8cO/BR
+	68O365bjSAa8O4E9d0L/8yUNGojyb1Ht3BefL9t203YawHJvPC8bHRUazq99RTqGRAXj8KbTuHX
+	SK1vckVfyv3Al3oq/d5OPD8XJFfpB8TzIzimOwPbdTuPa9VRGvEQdG7H66TyHEqm8QYBtMOMH+2
+	eKp4Fep+IOX0CP0Xl3OsevbeH1ibi7UX97Un0gFjTjmjxn1yZzQWxAsWoa00D+JL9kVi7iykPLf
+	2MPw9arZk4rv23hyygr6lqxbIXlHC3tMwY3ma2xUDj+dgUQVyTE7Co9fKv3w=
+X-TMASE-SNAP-Result: 1.821001.0001-0-1-22:0,33:0,34:0-0
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 11 Sep 2023 06:54:07 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104834
+ <openembedded-devel@lists.openembedded.org>; Mon, 11 Sep 2023 06:59:47 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104835
 
-From: Mingli Yu <mingli.yu@windriver.com>
+From: Wang Mingyu <wangmy@fujitsu.com>
 
-Backport a patch [1] to fix CVE-2021-37501.
+0001-Fix-const-qualifier-error.patch
+added to fix error with clang
 
-[1] https://github.com/HDFGroup/hdf5/commit/b16ec83d4bd79f9ffaad85de16056419f3532887
+Changelog:
+===========
+Noteworthy changes:
+* Various input validation fixes
+* Added various CMake options #9317
+* LibreSSL build fixes #8709
 
-Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+Fixed issues:
+* Backported #9233: Big endian support
+* Backported #9099: Mouse grabbing support
+* Backported #6851: wayland scrolling fix
+* Backported #8690: Update h264 to use new FFMPEG API
+* Backported #7306: early bail from update_read_window_state_order breaks protocol
+* Backported #8903: rdpecam/server: Remove wrong assertion
+* Backported #8994: bounds checks for gdi/gfx rectangles
+* Backported #9023: enforce rdpdr client side state checks
+* Backported #6331: deactivate mouse grabbing by default
+* Cherry-pick out of #9172: channels/cliprdr: Fix writing incorrect PDU type for unlock PDUs
+
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../hdf5/files/CVE-2021-37501.patch           | 37 +++++++++++++++++++
- meta-oe/recipes-support/hdf5/hdf5_1.8.21.bb   |  1 +
- 2 files changed, 38 insertions(+)
- create mode 100644 meta-oe/recipes-support/hdf5/files/CVE-2021-37501.patch
+ .../0001-Fix-const-qualifier-error.patch      | 30 +++++++++++++++++++
+ .../{freerdp_2.10.0.bb => freerdp_2.11.0.bb}  |  3 +-
+ 2 files changed, 32 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-support/freerdp/freerdp/0001-Fix-const-qualifier-error.patch
+ rename meta-oe/recipes-support/freerdp/{freerdp_2.10.0.bb => freerdp_2.11.0.bb} (96%)
 
-diff --git a/meta-oe/recipes-support/hdf5/files/CVE-2021-37501.patch b/meta-oe/recipes-support/hdf5/files/CVE-2021-37501.patch
+diff --git a/meta-oe/recipes-support/freerdp/freerdp/0001-Fix-const-qualifier-error.patch b/meta-oe/recipes-support/freerdp/freerdp/0001-Fix-const-qualifier-error.patch
 new file mode 100644
-index 000000000..01099f343
+index 0000000000..39c97baab4
 --- /dev/null
-+++ b/meta-oe/recipes-support/hdf5/files/CVE-2021-37501.patch
-@@ -0,0 +1,37 @@
-+From 602015eacc53bf2699bf4c4e5420b63c3f067547 Mon Sep 17 00:00:00 2001
-+From: Mingli Yu <mingli.yu@windriver.com>
-+Date: Mon, 11 Sep 2023 14:01:37 +0800
-+Subject: [PATCH] Check for overflow when calculating on-disk attribute data
-+ size
++++ b/meta-oe/recipes-support/freerdp/freerdp/0001-Fix-const-qualifier-error.patch
+@@ -0,0 +1,30 @@
++Subject: [PATCH] Fix const qualifier error
 +
-+Bogus sizes in this test case causes the on-disk data size
-+calculation in H5O_attr_decode() to overflow so that the
-+calculated size becomes 0. This causes the read to overflow
-+and h5dump to segfault.
++Fixes clang error
++error: incompatible function pointer types assigning to 'OBJECT_NEW_FN' (aka 'void *(*)(void *)') from 'void *(const void *)' [-Wincompatible-function-pointer-types]
++|         obj->fnObjectNew = uwac_event_clone;
++|                          ^ ~~~~~~~~~~~~~~~~
 +
-+CVE: CVE-2021-37501
++Upstream-Status: Pending
 +
-+Upstream-Status: Backport [https://github.com/HDFGroup/hdf5/commit/b16ec83d4bd79f9ffaad85de16056419f3532887]
-+
-+Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
++Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 +---
-+ src/H5Oattr.c | 3 +++
-+ 1 file changed, 3 insertions(+)
++ client/Wayland/wlfreerdp.c | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
 +
-+diff --git a/src/H5Oattr.c b/src/H5Oattr.c
-+index c2c0fe3..c289344 100644
-+--- a/src/H5Oattr.c
-++++ b/src/H5Oattr.c
-+@@ -217,6 +217,9 @@ H5O_attr_decode(H5F_t *f, hid_t dxpl_id, H5O_t *open_oh, unsigned H5_ATTR_UNUSED
++diff --git a/client/Wayland/wlfreerdp.c b/client/Wayland/wlfreerdp.c
++index 65e29bc..5988aed 100644
++--- a/client/Wayland/wlfreerdp.c
+++++ b/client/Wayland/wlfreerdp.c
++@@ -587,7 +587,7 @@ static void wlf_client_free(freerdp* instance, rdpContext* context)
++ 	DeleteCriticalSection(&wlf->critical);
++ }
 + 
-+     /* Compute the size of the data */
-+     H5_CHECKED_ASSIGN(attr->shared->data_size, size_t, H5S_GET_EXTENT_NPOINTS(attr->shared->ds) * H5T_get_size(attr->shared->dt), hsize_t);
-++    /* Check if multiplication has overflown */
-++    if ((attr->shared->data_size / H5T_get_size(attr->shared->dt)) != H5S_GET_EXTENT_NPOINTS(attr->shared->ds))
-++        HGOTO_ERROR(H5E_RESOURCE, H5E_OVERFLOW, NULL, "data size exceeds addressable range");
-+ 
-+     /* Go get the data */
-+     if(attr->shared->data_size) {
++-static void* uwac_event_clone(const void* val)
+++static void* uwac_event_clone(void* val)
++ {
++ 	UwacEvent* copy;
++ 	UwacEvent* ev = (UwacEvent*)val;
 +-- 
-+2.25.1
++2.34.1
 +
-diff --git a/meta-oe/recipes-support/hdf5/hdf5_1.8.21.bb b/meta-oe/recipes-support/hdf5/hdf5_1.8.21.bb
-index 7b886a463..4110e9cea 100644
---- a/meta-oe/recipes-support/hdf5/hdf5_1.8.21.bb
-+++ b/meta-oe/recipes-support/hdf5/hdf5_1.8.21.bb
-@@ -17,6 +17,7 @@ SRC_URI = " \
-     file://0001-cross-compiling-support.patch \
-     file://0002-Remove-suffix-shared-from-shared-library-name.patch \
-     file://0001-cmake-remove-build-flags.patch \
-+    file://CVE-2021-37501.patch \
- "
- SRC_URI[md5sum] = "2d2408f2a9dfb5c7b79998002e9a90e9"
- SRC_URI[sha256sum] = "e5b1b1dee44a64b795a91c3321ab7196d9e0871fe50d42969761794e3899f40d"
+diff --git a/meta-oe/recipes-support/freerdp/freerdp_2.10.0.bb b/meta-oe/recipes-support/freerdp/freerdp_2.11.0.bb
+similarity index 96%
+rename from meta-oe/recipes-support/freerdp/freerdp_2.10.0.bb
+rename to meta-oe/recipes-support/freerdp/freerdp_2.11.0.bb
+index 4cb452608e..4a5a763c8e 100644
+--- a/meta-oe/recipes-support/freerdp/freerdp_2.10.0.bb
++++ b/meta-oe/recipes-support/freerdp/freerdp_2.11.0.bb
+@@ -13,9 +13,10 @@ inherit pkgconfig cmake gitpkgv
+ PE = "1"
+ PKGV = "${GITPKGVTAG}"
+ 
+-SRCREV = "7471ae383e7b7a613f275e19f7b54958a193c891"
++SRCREV = "1384b3c33b9bd7599633cc54bf20cf20ec6be83c"
+ SRC_URI = "git://github.com/FreeRDP/FreeRDP.git;branch=stable-2.0;protocol=https \
+            file://winpr-makecert-Build-with-install-RPATH.patch \
++           file://0001-Fix-const-qualifier-error.patch \
+            "
+ 
+ S = "${WORKDIR}/git"
 -- 
-2.25.1
+2.34.1
 
 
