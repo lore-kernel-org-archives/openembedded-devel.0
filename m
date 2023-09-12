@@ -1,83 +1,160 @@
-Return-Path: <archana.polampalli@windriver.com>
+Return-Path: <chee.yang.lee@intel.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D7364CA0ECA
-	for <webhook@archiver.kernel.org>; Tue, 12 Sep 2023 08:57:05 +0000 (UTC)
-Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
- by mx.groups.io with SMTP id smtpd.web11.20795.1694509023029340615
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5128CCA0EC3
+	for <webhook@archiver.kernel.org>; Tue, 12 Sep 2023 11:56:57 +0000 (UTC)
+Received: from mgamail.intel.com (mgamail.intel.com [134.134.136.100])
+ by mx.groups.io with SMTP id smtpd.web11.23142.1694519812493996746
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 12 Sep 2023 01:57:03 -0700
+ Tue, 12 Sep 2023 04:56:52 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=cYg/4owk;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=7619f89624=archana.polampalli@windriver.com)
-Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.17.1.22/8.17.1.22) with ESMTP id 38C7Tf4l030707
-	for <openembedded-devel@lists.openembedded.org>; Tue, 12 Sep 2023 08:57:02 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
-	 h=from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding:content-type; s=PPS06212021; bh=zjy9X
-	9bilFhnUVWCN476C3HciQQNJB8eYlhs+cVfg9s=; b=cYg/4owkoIPYvxNDWB2s4
-	Z+wXqYrWss/4PsCYgLMWaIl4/9iECK/9sFClDlgi4Q2FkYjFGpLRxT15Xck6oZtC
-	eq00WSg0mMrEnYT40opAxvHgI6Ow8ZIbhjJUliHHCFo3xgp2cdoQXw/UU5ZJQ5bW
-	Elc8IGhRY53YbDaAU8XcMWsMAnFsPT8myn5K1Y34U+sOm2JHyDztksHOOdndarjA
-	F2E5nHBZe8mD2HD3qkpgbK8i1MIxIGwjEH3gQUpEm3hY0Rq5PkvqNQ5OZV/GkGQD
-	/W2G09IH6BF/4qRaq46xsHJJYCnwQyzu7URZ5a5yeX4HjMFQtkWRBfCR/BhffSx+
-	Q==
-Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3t0fp62f5q-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Tue, 12 Sep 2023 08:57:02 +0000 (GMT)
-Received: from blr-linux-engg1.wrs.com (147.11.136.210) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.27; Tue, 12 Sep 2023 01:56:59 -0700
-From: Archana Polampalli <archana.polampalli@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe][meta-python][master][mickledore][PATCH 1/1] python3-appdirs: print ptest results in unified format
-Date: Tue, 12 Sep 2023 08:56:47 +0000
-Message-ID: <20230912085647.2661989-1-archana.polampalli@windriver.com>
-X-Mailer: git-send-email 2.40.0
+ dkim=pass header.i=@intel.com header.s=Intel header.b=QFVCQlKj;
+ spf=pass (domain: intel.com, ip: 134.134.136.100, mailfrom: chee.yang.lee@intel.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1694519812; x=1726055812;
+  h=from:to:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=lZeG30NtmeXIsjcIEC5RMJBgL5cTrLD2gDo6cgm3fWE=;
+  b=QFVCQlKjjDouW2QNWvc0Ae58Rh3qLiH0Zcow3MoMWQAMFTdiS5TpOU8F
+   fYCIDvXubv12YegchMIyWfx6+IlCRIbjTD6az+mKOuTPjWreFTKQx1aRQ
+   xST2DtOD0y9ceUn1s7AkMzfh4SMqqiL+ccNl/LGKB6epK2Ma0xEA01TZA
+   YxwPUBflMXrlsLiXYIftTDX98+4QWVjOrgwvUzDGX8cauMHbc+YEr45nm
+   wZnPZL6bMLKYjFHtwSibePoAC8q7HSj3XfOilefz0XO/m7Si7HN4jYqzU
+   rTRrABFr0QU/wTKgwzvC1EQ5PnHXSQZ0+RLt3eSTaEotAWxSksNhhN4XM
+   g==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10830"; a="444787048"
+X-IronPort-AV: E=Sophos;i="6.02,139,1688454000"; 
+   d="scan'208";a="444787048"
+Received: from fmsmga008.fm.intel.com ([10.253.24.58])
+  by orsmga105.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 12 Sep 2023 04:56:51 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=McAfee;i="6600,9927,10830"; a="809217328"
+X-IronPort-AV: E=Sophos;i="6.02,139,1688454000"; 
+   d="scan'208";a="809217328"
+Received: from andromeda02.png.intel.com ([10.221.253.198])
+  by fmsmga008.fm.intel.com with ESMTP; 12 Sep 2023 04:56:50 -0700
+From: chee.yang.lee@intel.com
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-networking][PATCH] keepalived: 2.2.2 -> 2.2.8
+Date: Tue, 12 Sep 2023 19:37:13 +0800
+Message-Id: <20230912113713.1238493-1-chee.yang.lee@intel.com>
+X-Mailer: git-send-email 2.37.3
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [147.11.136.210]
-X-ClientProxiedBy: ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) To
- ala-exchng01.corp.ad.wrs.com (147.11.82.252)
-X-Proofpoint-ORIG-GUID: fER7XjNGcCCoFDVna6noqZ4GOYtJU5rr
-X-Proofpoint-GUID: fER7XjNGcCCoFDVna6noqZ4GOYtJU5rr
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.267,Aquarius:18.0.957,Hydra:6.0.601,FMLib:17.11.176.26
- definitions=2023-09-12_06,2023-09-05_01,2023-05-22_02
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 malwarescore=0
- lowpriorityscore=0 adultscore=0 clxscore=1015 mlxlogscore=999 phishscore=0
- suspectscore=0 impostorscore=0 spamscore=0 bulkscore=0 mlxscore=0
- priorityscore=1501 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.19.0-2308100000 definitions=main-2309120075
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 12 Sep 2023 08:57:05 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104844
+ <openembedded-devel@lists.openembedded.org>; Tue, 12 Sep 2023 11:56:57 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104845
 
-Update run-ptest script to print the output of python3-appdirs ptest results in
-unified format
+From: Lee Chee Yang <chee.yang.lee@intel.com>
 
-Signed-off-by: Archana Polampalli <archana.polampalli@windriver.com>
+add EXTRA_CFLAGS to Fix reproducibility.
+
+Signed-off-by: Lee Chee Yang <chee.yang.lee@intel.com>
 ---
- meta-python/recipes-devtools/python/python3-appdirs/run-ptest | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ ...layer4-Change-order-of-include-files.patch | 60 -------------------
+ ...eepalived_2.2.2.bb => keepalived_2.2.8.bb} |  5 +-
+ 2 files changed, 3 insertions(+), 62 deletions(-)
+ delete mode 100644 meta-networking/recipes-daemons/keepalived/keepalived/0001-layer4-Change-order-of-include-files.patch
+ rename meta-networking/recipes-daemons/keepalived/{keepalived_2.2.2.bb => keepalived_2.2.8.bb} (91%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-appdirs/run-ptest b/meta-python/recipes-devtools/python/python3-appdirs/run-ptest
-index 5287f3e03..b63c4de0d 100644
---- a/meta-python/recipes-devtools/python/python3-appdirs/run-ptest
-+++ b/meta-python/recipes-devtools/python/python3-appdirs/run-ptest
-@@ -1,3 +1,3 @@
- #!/bin/sh
+diff --git a/meta-networking/recipes-daemons/keepalived/keepalived/0001-layer4-Change-order-of-include-files.patch b/meta-networking/recipes-daemons/keepalived/keepalived/0001-layer4-Change-order-of-include-files.patch
+deleted file mode 100644
+index 678a208ac3..0000000000
+--- a/meta-networking/recipes-daemons/keepalived/keepalived/0001-layer4-Change-order-of-include-files.patch
++++ /dev/null
+@@ -1,60 +0,0 @@
+-From a85ca79143a87286f793957e803ee3daf03c2b57 Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Tue, 6 Jul 2021 14:06:44 -0700
+-Subject: [PATCH] layer4: Change order of include files
+-
+-curent order to include standard headers first is causing an isue with
+-glibc 2.34 + kernel-headers 5.13+ where order of including netinet/in.h
+-and linux/in.h matters and it does not define __UAPI_DEF_IN_IPPROTO
+-before including linux/in.h and then later includes netinet/in.h which
+-then means lot of definitions will be defined twice and compile would
+-fail. Re-ordering the local headers to appear first solves the issue
+-amicably, and I think this is right order too
+-
+-Upsteam-Status: Pending
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+-Upstream-Status: Pending
+-
+- keepalived/core/layer4.c | 21 ++++++++++-----------
+- 1 file changed, 10 insertions(+), 11 deletions(-)
+-
+-diff --git a/keepalived/core/layer4.c b/keepalived/core/layer4.c
+-index 90cdc84..c122c29 100644
+---- a/keepalived/core/layer4.c
+-+++ b/keepalived/core/layer4.c
+-@@ -23,6 +23,16 @@
+- 
+- #include "config.h"
+- 
+-+#include "layer4.h"
+-+#include "logger.h"
+-+#include "scheduler.h"
+-+#ifdef _WITH_LVS_
+-+#include "check_api.h"
+-+#endif
+-+#include "bitops.h"
+-+#include "utils.h"
+-+#include "align.h"
+-+
+- #include <stdio.h>
+- #include <errno.h>
+- #include <unistd.h>
+-@@ -33,17 +43,6 @@
+- #include <sys/time.h>
+- #endif
+- #include <linux/errqueue.h>
+--#include <netinet/in.h>
+--
+--#include "layer4.h"
+--#include "logger.h"
+--#include "scheduler.h"
+--#ifdef _WITH_LVS_
+--#include "check_api.h"
+--#endif
+--#include "bitops.h"
+--#include "utils.h"
+--#include "align.h"
+- 
+- // #define ICMP_DEBUG	1
+- 
+diff --git a/meta-networking/recipes-daemons/keepalived/keepalived_2.2.2.bb b/meta-networking/recipes-daemons/keepalived/keepalived_2.2.8.bb
+similarity index 91%
+rename from meta-networking/recipes-daemons/keepalived/keepalived_2.2.2.bb
+rename to meta-networking/recipes-daemons/keepalived/keepalived_2.2.8.bb
+index 204d2fd116..dd193b12fc 100644
+--- a/meta-networking/recipes-daemons/keepalived/keepalived_2.2.2.bb
++++ b/meta-networking/recipes-daemons/keepalived/keepalived_2.2.8.bb
+@@ -11,9 +11,8 @@ LICENSE = "GPL-2.0-only"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
  
--pytest | sed -e 's/\[100%\]//g' | sed -e 's/\.\.F/: FAIL/g' | sed -e 's/\.\.\./: PASS/g'
-+pytest -o log_cli=true -o log_cli_level=INFO | sed -e 's/\[...%\]//g'| sed -e 's/PASSED/PASS/g'| sed -e 's/FAILED/FAIL/g'|sed -e 's/SKIPPED/SKIP/g'| awk '{if ($NF=="PASS" || $NF=="FAIL" || $NF=="SKIP" || $NF=="XFAIL" || $NF=="XPASS"){printf "%s: %s\n", $NF, $0}else{print}}'| awk '{if ($NF=="PASS" || $NF=="FAIL" || $NF=="SKIP" || $NF=="XFAIL" || $NF=="XPASS") {$NF="";print $0}else{print}}'
+ SRC_URI = "http://www.keepalived.org/software/${BP}.tar.gz \
+-           file://0001-layer4-Change-order-of-include-files.patch \
+            "
+-SRC_URI[sha256sum] = "103692bd5345a4ed9f4581632ea636214fdf53e45682e200aab122c4fa674ece"
++SRC_URI[sha256sum] = "85882eb62974f395d4c631be990a41a839594a7e62fbfebcb5649a937a7a1bb6"
+ UPSTREAM_CHECK_URI = "https://github.com/acassen/keepalived/releases"
+ 
+ DEPENDS = "libnfnetlink openssl"
+@@ -29,6 +28,8 @@ PACKAGECONFIG[systemd] = "--with-init=systemd --with-systemdsystemunitdir=${syst
+ 
+ EXTRA_OEMAKE = "initdir=${sysconfdir}/init.d"
+ 
++export EXTRA_CFLAGS = "${CFLAGS}"
++
+ do_install:append() {
+     if [ -f ${D}${sysconfdir}/init.d/${BPN} ]; then
+         chmod 0755 ${D}${sysconfdir}/init.d/${BPN}
 -- 
-2.40.0
+2.37.3
 
 
