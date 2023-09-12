@@ -1,93 +1,83 @@
-Return-Path: <pidge@baylibre.com>
+Return-Path: <costamagna.gianfranco@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6AEF9CA0EF6
-	for <webhook@archiver.kernel.org>; Tue, 12 Sep 2023 16:50:41 +0000 (UTC)
-Received: from mail-wr1-f47.google.com (mail-wr1-f47.google.com [209.85.221.47])
- by mx.groups.io with SMTP id smtpd.web11.31051.1694537435664404435
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9974FEE3F08
+	for <webhook@archiver.kernel.org>; Tue, 12 Sep 2023 17:28:22 +0000 (UTC)
+Received: from mail-ej1-f42.google.com (mail-ej1-f42.google.com [209.85.218.42])
+ by mx.groups.io with SMTP id smtpd.web10.450.1694539696104934782
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 12 Sep 2023 09:50:35 -0700
+ Tue, 12 Sep 2023 10:28:16 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@baylibre-com.20230601.gappssmtp.com header.s=20230601 header.b=mrEIegkg;
- spf=pass (domain: baylibre.com, ip: 209.85.221.47, mailfrom: pidge@baylibre.com)
-Received: by mail-wr1-f47.google.com with SMTP id ffacd0b85a97d-31f8a05aa24so3683610f8f.1
-        for <openembedded-devel@lists.openembedded.org>; Tue, 12 Sep 2023 09:50:35 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20221208 header.b=f/E9dl6k;
+ spf=pass (domain: gmail.com, ip: 209.85.218.42, mailfrom: costamagna.gianfranco@gmail.com)
+Received: by mail-ej1-f42.google.com with SMTP id a640c23a62f3a-9936b3d0286so773801466b.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 12 Sep 2023 10:28:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1694537434; x=1695142234; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=MUAas+AHAVjNvpQQempZ3c5nRU83ugN362bbeK+PGO4=;
-        b=mrEIegkg8drkWvHoFjpMV5HNvmHwPB2TV+wgeX1c1VpAbso8+ObWRerFeG/xVXsQvo
-         wAuknlL+gyhbXNi15C9hkV/YbwcMm26dsX3qDe3ZQRJDnB3srvONeLWqGvxvqNMWc9QS
-         LOEnUTDbve/vefLpSJPXfslBrys7gsdWzkvYGaLjErhIVpo+0ge8QkSmWDZXlSgQKX6y
-         Omcl5rlRnKrrBdWD50Et7M16O/JCzCOx4MHkffooEqbYIcJB1V/zoYGGwy+w2M5ISflS
-         fH0UCcyPa1JxzKIPrXzKpm8F76d801yAgDICOZiprfcxUEjSV3pSWM15/Hg8MlIEOYOe
-         wYTw==
+        d=gmail.com; s=20221208; t=1694539694; x=1695144494; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=QY5XaEqyp8jWUQf1hopFB7A08zkRtplBGReyKg1Ejxg=;
+        b=f/E9dl6kKJzPABfZiLVA7rMqIo8r/6H0NbLJOapM2DI4Vd/KUM+OyW5Hwmn7WOWB0P
+         crzftvhl+HSGM6MSUFjgOyg/ZPzRWXB/1KRyumtFFTmVh9pWcB9QvMO8aZnEkA6UJgKB
+         4KsiMZxB84dPARHwHyF4aXxMQRnWeYoxPp/EjcIJaHUrXQvnlByr697NJdF/ASSXiHCE
+         1h6pMjKvtEgp1jqVaxYolG4EDR3hCzOSaGrbUAfE2ysJnHEzGhorK+rPHot2oSWz+D0s
+         yfoPyvVLwD/2wvsPQe9zzgTUHClAxnP4WMYb20fv1MlbvtwylHJ7uLy3TqeQLFKNvJq7
+         hRAw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1694537434; x=1695142234;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=MUAas+AHAVjNvpQQempZ3c5nRU83ugN362bbeK+PGO4=;
-        b=WkM+IWCBUcDMntH4BOvJ30BDONoW/HMUO3nLBJSo5idP0wGaZ+okJeOVYVuQKIy+gd
-         FR4ORE+h6VfBTdTLQBoLNhYLqzumPG4kHYSge+lM6NBN2WV+VJGSMdah3Lnr5P1ZxW0e
-         pN1Mw2fO6wwYfoiPgHr8+F5dFOyo9jvehtv3m5ASftR4gW6OeWYSObvw4OJa6brzwZKt
-         c7W3kw2oZFg63bmtqcwHss98tZEZ/Em7CaEXnKB+QGJcInEUE0N8OL0+yDdRthg4dX0V
-         GaAPAaNHAWXUaq4ogr1N6Do2WDG7hMSBZEOD1haTvrJJz5bIHT/ElLjOAA92UBpOMHLY
-         cL+A==
-X-Gm-Message-State: AOJu0YyeD4JeXq0Srpr2fOLQ9KKWyBuuzdFB8uFmHP+XSG0eFb9t0VVe
-	pFjAYKM/NjwpmjtV5YvGYwwUms62mUHoytFO8ehQYQ==
-X-Google-Smtp-Source: AGHT+IFr/VHi0kVfPgsyJ02dXSS8dpxofgDV5U+DyGqsQm+iBJzQVeLr9AL5fRL1X6Gr4AyrX1UJhg==
-X-Received: by 2002:adf:f9c1:0:b0:31d:db92:31ae with SMTP id w1-20020adff9c1000000b0031ddb9231aemr18215wrr.44.1694537433980;
-        Tue, 12 Sep 2023 09:50:33 -0700 (PDT)
-Received: from localhost.localdomain (laubervilliers-658-1-213-31.w90-63.abo.wanadoo.fr. [90.63.244.31])
-        by smtp.gmail.com with ESMTPSA id b7-20020aa7c6c7000000b0052328d4268asm6157436eds.81.2023.09.12.09.50.33
-        for <openembedded-devel@lists.openembedded.org>
+        d=1e100.net; s=20230601; t=1694539694; x=1695144494;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=QY5XaEqyp8jWUQf1hopFB7A08zkRtplBGReyKg1Ejxg=;
+        b=I2prNu+2iMM9abYQjdciiuuX0mk2l8V6KzDgdbPX0AbEZKRyFfr++Ve0yblNYrvFNe
+         7bNxkQEuMTrLLNBWBrIz8uDAwDH59FV1KQKhNlHXzAo8w+a+x4Yi+s4CMQFl7sa36Ezs
+         BofbBreegfW/IdZjp+nroNZQ8mcVRQGDyD64ESyzkTyLifcKjSpLzordURoxslO6Yq/3
+         5Y3FvtO7r+3+FgPQLz8IvEowLxBrKdVbRajv6BCBGa0AgQOAmEks7A7KC619oEiSY1Kw
+         YapRGIxmXjb3IP288LTiO0NXDwIVNqOur/KcnQ/OTdyVu7eaqewiorl23C91yS6e8I68
+         +O/Q==
+X-Gm-Message-State: AOJu0YyzAKfNyBc971dxzlMzyX9TMO8wjP9zZfYgdsQVgzV6tDRm5GhG
+	AnG/rKPxyR11LBf2XOGjqYP7q9aq1aY=
+X-Google-Smtp-Source: AGHT+IHe6rUQxhkQ3BtfuVU0ZltXM8DP5znM5k0/buiXgLbGKgqxXatVX1uCOLnX8s+8bNYidbEOEA==
+X-Received: by 2002:a17:907:60c6:b0:9a1:c216:c8a0 with SMTP id hv6-20020a17090760c600b009a1c216c8a0mr9978241ejc.64.1694539693701;
+        Tue, 12 Sep 2023 10:28:13 -0700 (PDT)
+Received: from Unimatrix08-Jammy.Abinsula ([109.53.94.42])
+        by smtp.gmail.com with ESMTPSA id mc14-20020a170906eb4e00b009888aa1da11sm7072731ejb.188.2023.09.12.10.28.12
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 12 Sep 2023 09:50:33 -0700 (PDT)
-From: =?UTF-8?q?Eil=C3=ADs=20=27pidge=27=20N=C3=AD=20Fhlannag=C3=A1in?= <pidge@baylibre.com>
+        Tue, 12 Sep 2023 10:28:12 -0700 (PDT)
+From: Gianfranco Costamagna <costamagna.gianfranco@gmail.com>
+X-Google-Original-From: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
 To: openembedded-devel@lists.openembedded.org
-Subject: [OE-core 2/2] update_mandb: deb fails due to missing man cache
-Date: Tue, 12 Sep 2023 16:50:24 +0000
-Message-Id: <6b988a04fc35feeb21699174374a145b9cb7c07f.1694535904.git.pidge@baylibre.com>
+Cc: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
+Subject: [meta-oe][PATCH] mosquitto: do not automatically depend on dlt-daemon, it's a non-mandatory logging system
+Date: Tue, 12 Sep 2023 19:28:10 +0200
+Message-Id: <20230912172810.2259791-1-costamagnagianfranco@yahoo.it>
 X-Mailer: git-send-email 2.34.1
-In-Reply-To: <cover.1694535904.git.pidge@baylibre.com>
-References: <cover.1694535904.git.pidge@baylibre.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 12 Sep 2023 16:50:41 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104850
+ <openembedded-devel@lists.openembedded.org>; Tue, 12 Sep 2023 17:28:22 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104851
 
-This only occurs in debian package builds when populating the sdk
-and is a work around that seems to work. Eventually we should look
-at why this is failing (I have ideas, it's somewhere in
-lib/oe/package_management/deb/sdk.py), but for now, do this so we can
-fix the core issue with nativesdk-intercepts.
-
-Signed-off-by: Eilís 'pidge' Ní Fhlannagáin <pidge@baylibre.com>
 ---
- scripts/postinst-intercepts/update_mandb | 2 ++
- 1 file changed, 2 insertions(+)
+ .../recipes-connectivity/mosquitto/mosquitto_2.0.15.bb          | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/scripts/postinst-intercepts/update_mandb b/scripts/postinst-intercepts/update_mandb
-index a061bb426a6..f91bafdb117 100644
---- a/scripts/postinst-intercepts/update_mandb
-+++ b/scripts/postinst-intercepts/update_mandb
-@@ -9,6 +9,8 @@ set -eu
- CONFIG=$(mktemp --tmpdir update-mandb.XXXXX)
- sed "s:\(\s\)/:\1$D/:g" $D${sysconfdir}/man_db.conf > $CONFIG
+diff --git a/meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0.15.bb b/meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0.15.bb
+index d06dd2d9c..eea672a70 100644
+--- a/meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0.15.bb
++++ b/meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0.15.bb
+@@ -23,7 +23,7 @@ SRC_URI[sha256sum] = "4735b1d32e3f91c7a8896741d88a3022e89730a1ee897946decfa0df27
  
-+mkdir -p $D${localstatedir}/cache/man/
-+
- PSEUDO_UNLOAD=1 ${binprefix}qemuwrapper -L $D $D${bindir}/mandb --config-file $CONFIG --create
+ inherit systemd update-rc.d useradd cmake pkgconfig
  
- rm -f $CONFIG
+-PACKAGECONFIG ??= "ssl dlt websockets \
++PACKAGECONFIG ??= "ssl websockets \
+                   ${@bb.utils.filter('DISTRO_FEATURES','systemd', d)} \
+                   "
+ 
 -- 
 2.34.1
 
