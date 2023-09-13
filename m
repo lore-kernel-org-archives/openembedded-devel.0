@@ -1,90 +1,519 @@
-Return-Path: <jester@theyoctojester.info>
+Return-Path: <adrian.freihofer@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 25BB3EDEC73
-	for <webhook@archiver.kernel.org>; Wed, 13 Sep 2023 15:30:10 +0000 (UTC)
-Received: from mail-ej1-f51.google.com (mail-ej1-f51.google.com [209.85.218.51])
- by mx.groups.io with SMTP id smtpd.web11.1642.1694619008626147911
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5968DEDEC7E
+	for <webhook@archiver.kernel.org>; Wed, 13 Sep 2023 15:55:30 +0000 (UTC)
+Received: from mail-ej1-f48.google.com (mail-ej1-f48.google.com [209.85.218.48])
+ by mx.groups.io with SMTP id smtpd.web11.326.1694620400051638963
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 13 Sep 2023 08:30:08 -0700
+ Wed, 13 Sep 2023 08:53:20 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@theyoctojester-info.20230601.gappssmtp.com header.s=20230601 header.b=R01cYoXW;
- spf=none, err=permanent DNS error (domain: theyoctojester.info, ip: 209.85.218.51, mailfrom: jester@theyoctojester.info)
-Received: by mail-ej1-f51.google.com with SMTP id a640c23a62f3a-9aa0495f9cfso238933966b.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 13 Sep 2023 08:30:08 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20221208 header.b=ndFGhw+/;
+ spf=pass (domain: gmail.com, ip: 209.85.218.48, mailfrom: adrian.freihofer@gmail.com)
+Received: by mail-ej1-f48.google.com with SMTP id a640c23a62f3a-99c3c8adb27so1449666b.1
+        for <openembedded-devel@lists.openembedded.org>; Wed, 13 Sep 2023 08:53:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=theyoctojester-info.20230601.gappssmtp.com; s=20230601; t=1694619007; x=1695223807; darn=lists.openembedded.org;
-        h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
-         :date:message-id:reply-to;
-        bh=6uNq0tSrIdlNJFlEX+ykup3oOGkTatya0fN05NpeQu8=;
-        b=R01cYoXW0dFicRlTeNK3185RaePQmRXd5sOSYk5ynUUPi8L3rNZqqeezkj5vf/HqlM
-         zxi7BOevli30s9d8hh8h06rOXKeL77Om+EVtFB6shVpafqtcyFVfdSClMO4UkYIneg2e
-         ZOn8BKRGd452jcwob+OkMfz0o7zh/Zjno6qv51L7vHoPLNWr7ejSP9Sqa4XX0BM6tjuv
-         IakCN7pK6pJf/1tMT7lAZtOe3q5CvoYYnuvCoYI4JoUFY9YSOfqsY0atn80laeMv2BvO
-         BY4ytFeKS2HIml9hmPqZlsfRp5Vab17DhVchCtQNpGTDD4NITMlPTzYgcpbaf7DyZaAn
-         Iz8g==
+        d=gmail.com; s=20221208; t=1694620398; x=1695225198; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=xLlheFEzCG981MdL3fzLMXVyURhREtdSn4OTyT4VS0M=;
+        b=ndFGhw+/5I6IW5/Y1VeEBM7XPQ3cQ5zydmVz3MsQXSgnoRUTOjSZ3IWxKw8toGoC7F
+         3W5xF7K8P1+E0qzJhC1tnF55w/vyDL3NxZHQc6sg4NNyfcAOpMsbUs8aJ2pOXStHiiQH
+         zacl7Y2irAMr1gRrwIfdBieC5Pz8GzqDgcwRLUFCIz4Fxs8BKSSWtdw2p3HovpLcEpt7
+         ERyVGu8qhX/WzmsNnclDSSer9nbIz3jZKpVOZiNeSJS0b67oZexzAwMH1hrfnAuuA5hJ
+         F3wgMfZqdlOCevybpgzHeNCkyKfJ6uiTba2292k/v+51wThDHBFd4Xm+ClDcBbtnEApV
+         HbjA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1694619007; x=1695223807;
-        h=to:subject:message-id:date:from:mime-version:x-gm-message-state
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=6uNq0tSrIdlNJFlEX+ykup3oOGkTatya0fN05NpeQu8=;
-        b=FcNYRNh9it1PSe+lnFIlapgEwSahiS6YU0/KcFe/t29z9c6oloRtUHqbkkdbAJcfv7
-         2kY2Kq4w+d8iRsx9eK7UPMGJI6a4ye0QTs12f9BHTPQIjwkUURyN+AhKYsvkJi6M10OC
-         eiyJ4NyGFtIIyNu3AmZlmlTuKr9WpIAqoXHzL1YNCYZkZrNkTgyaZQE5khn8vaKv7EK9
-         tUpiNywl+Dc9uURPfli+C0cSdiamFM5rkoMI2OCvUYwXgmNiqLjdYemwCH5eo2EFzZY2
-         5b97/UtbbCD1XdMNE6vDsjKxraH4W/fExyJsTcI+J1pmHAN43Mg8C9Vh5cws45/967yZ
-         ac7A==
-X-Gm-Message-State: AOJu0YzcEFTnqPWX/qFHyR0UEIbOtBFMpJya5C/WrKrRj92zV2hbSfl0
-	8iiq+J04LZ7I2cuZrI6k7XNIfeAsbxbszK0SU4bjRyLo6mCPA/mMrqotpQ==
-X-Google-Smtp-Source: AGHT+IEt+1lixjQ+0HziwyrZjRB6GuT5GaeItgK31LYaCQW58pdCyEmSwZaRLwoJMxqdqmby0I09hwkGcUSshLSY0dI=
-X-Received: by 2002:a17:906:cc0d:b0:9a2:86a:f9c0 with SMTP id
- ml13-20020a170906cc0d00b009a2086af9c0mr4449130ejb.1.1694619006526; Wed, 13
- Sep 2023 08:30:06 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1694620398; x=1695225198;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=xLlheFEzCG981MdL3fzLMXVyURhREtdSn4OTyT4VS0M=;
+        b=mRtwpDV8NxlwHpuopa1OsmL+X8cZytsxVZMx2vKLn9Kt30yicv1nM3UQ4d+OaG2Nsh
+         L1bS4yQnHI9+P2yC/gQrnKH+D8WQ3Dhea456VmMQOAJ/4YXuoH6B6cNqKZsJZde8rNRP
+         Bp1lwco03dDx8Ol7Qw+rjhAT38K4yVZSWRs+TJpqWFa2z7yhOPDi8YwlyodahieBj/JN
+         QwasGB6iTHbUxRcTSepHslHs+iqhtiiwHIbGyPf4QY4/tl9mvrFHQGMh6YK6h66/GYRB
+         cMQPcBZ2V4Tv5J/JoH6ZT8AdZo+0/Dbs0b0QdZA3mn5DucQtx9p2le63om/c+vP78LMW
+         1E6A==
+X-Gm-Message-State: AOJu0YzeGx06sGlUNMExGaVBd3CPZdJiJZcnSnbKKG+By89HFFDOFdMx
+	kkPEoNwGai+P0o2di357ouA/8OG/FvADYQ==
+X-Google-Smtp-Source: AGHT+IFdiBfr1XV1QtsllxFXX5AtfPffl35JFIaOJdkFz3zG/74uVxOdbMrMR7ofJt9C2Zfn1hO5XA==
+X-Received: by 2002:a17:907:7638:b0:991:37d2:c9f0 with SMTP id jy24-20020a170907763800b0099137d2c9f0mr2372322ejc.68.1694620397555;
+        Wed, 13 Sep 2023 08:53:17 -0700 (PDT)
+Received: from t14s-af.fritz.box ([2a02:169:59a6:0:5488:f785:9061:cf6c])
+        by smtp.gmail.com with ESMTPSA id z19-20020a170906715300b009a2202bfce5sm8562861ejj.118.2023.09.13.08.53.16
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 13 Sep 2023 08:53:17 -0700 (PDT)
+From: Adrian Freihofer <adrian.freihofer@gmail.com>
+X-Google-Original-From: Adrian Freihofer <adrian.freihofer@siemens.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Adrian Freihofer <adrian.freihofer@siemens.com>,
+	Fabrice Aeschbacher <fabrice.aeschbacher@siemens.com>
+Subject: [kirkstone][PATCH] mosquitto: fix CVE-2023-28366
+Date: Wed, 13 Sep 2023 17:53:08 +0200
+Message-ID: <20230913155308.558149-1-adrian.freihofer@siemens.com>
+X-Mailer: git-send-email 2.41.0
 MIME-Version: 1.0
-From: Josef Holzmayr <jester@theyoctojester.info>
-Date: Wed, 13 Sep 2023 17:29:40 +0200
-Message-ID: <CAEt6Nwr7kzVktRnNM3TxfaNxNyrPzOC7URuTvsw7e2svH=GEFw@mail.gmail.com>
-Subject: The YPS 2023.11 CFP is waiting for you!
-To: Yocto-mailing-list <yocto@lists.yoctoproject.org>, 
-	openembedded-core <openembedded-core@lists.openembedded.org>, 
-	openembedded-devel@lists.openembedded.org
-Content-Type: multipart/alternative; boundary="000000000000e9faed06053f3bbf"
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 13 Sep 2023 15:30:10 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104856
+ <openembedded-devel@lists.openembedded.org>; Wed, 13 Sep 2023 15:55:30 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104857
 
---000000000000e9faed06053f3bbf
-Content-Type: text/plain; charset="UTF-8"
+Fix memory leak in broker when clients send multiple QoS 2 messages
+with the same message ID, but then never respond to the PUBREC
+commands.
 
-Summer vacation is over, so what is the next thing to focus on? Sharing
-your The Yocto Project, A Linux Foundation Project Kung-Fu, war stories,
-use cases...
+References:
+https://nvd.nist.gov/vuln/detail/CVE-2023-28366
 
-And the best place to do so is the Yocto Project Summit 2023.11 - the CFP
-is already open. We are eager to read your submissions!
+Signed-off-by: Adrian Freihofer <adrian.freihofer@siemens.com>
+Signed-off-by: Fabrice Aeschbacher <fabrice.aeschbacher@siemens.com>
+---
+ .../mosquitto/files/CVE-2023-28366.patch      | 418 ++++++++++++++++++
+ .../mosquitto/mosquitto_2.0.14.bb             |   1 +
+ 2 files changed, 419 insertions(+)
+ create mode 100644 meta-networking/recipes-connectivity/mosquitto/files/CVE-2023-28366.patch
 
-https://summit.yoctoproject.org/yocto-project-summit-2023-11/cfp
+diff --git a/meta-networking/recipes-connectivity/mosquitto/files/CVE-2023-28366.patch b/meta-networking/recipes-connectivity/mosquitto/files/CVE-2023-28366.patch
+new file mode 100644
+index 000000000..97471edf2
+--- /dev/null
++++ b/meta-networking/recipes-connectivity/mosquitto/files/CVE-2023-28366.patch
+@@ -0,0 +1,418 @@
++From 61cfad3361ec1943e31e7229f3bc905a0226391a Mon Sep 17 00:00:00 2001
++From: "Roger A. Light" <roger@atchoo.org>
++Date: Tue, 13 Jun 2023 11:22:03 +0100
++Subject: [PATCH] CVE-2023-28366
++
++Fix memory leak in broker when clients send multiple QoS 2 messages
++with the same message ID, but then never respond to the PUBREC
++commands.
++
++CVE: CVE-2023-28366
++Upstream-Status: Backport [https://github.com/eclipse/mosquitto/commit/6113eac95a9df634fbc858be542c4a0456bfe7b9]
++Signed-off-by: Adrian Freihofer <adrian.freihofer@siemens.com>
++---
++ ChangeLog.txt                      |  6 ++++
++ lib/packet_mosq.c                  | 15 ++++++++
++ src/context.c                      | 41 ++++++++++++---------
++ src/database.c                     | 25 +++++++------
++ src/handle_publish.c               | 35 ++++++++++++------
++ src/mosquitto_broker_internal.h    |  4 +--
++ test/broker/03-publish-qos2-dup.py | 58 ++++++++++++++++++++++++++++++
++ test/broker/Makefile               |  1 +
++ test/broker/test.py                |  1 +
++ 9 files changed, 147 insertions(+), 39 deletions(-)
++ create mode 100755 test/broker/03-publish-qos2-dup.py
++
++diff --git a/ChangeLog.txt b/ChangeLog.txt
++index d202f4d0..75cd407c 100644
++--- a/ChangeLog.txt
+++++ b/ChangeLog.txt
++@@ -1,3 +1,9 @@
+++Security:
+++- CVE-2023-28366: Fix memory leak in broker when clients send multiple QoS 2
+++  messages with the same message ID, but then never respond to the PUBREC
+++  commands.
+++
+++
++ 2.0.14 - 2021-11-17
++ ===================
++ 
++diff --git a/lib/packet_mosq.c b/lib/packet_mosq.c
++index f65769f6..e33c9bde 100644
++--- a/lib/packet_mosq.c
+++++ b/lib/packet_mosq.c
++@@ -152,6 +152,21 @@ int packet__queue(struct mosquitto *mosq, struct mosquitto__packet *packet)
++ 
++ 	packet->next = NULL;
++ 	pthread_mutex_lock(&mosq->out_packet_mutex);
+++
+++#ifdef WITH_BROKER
+++	if(mosq->out_packet_count >= db.config->max_queued_messages){
+++		mosquitto__free(packet);
+++		if(mosq->is_dropping == false){
+++			mosq->is_dropping = true;
+++			log__printf(NULL, MOSQ_LOG_NOTICE,
+++					"Outgoing messages are being dropped for client %s.",
+++					mosq->id);
+++		}
+++		G_MSGS_DROPPED_INC();
+++		return MOSQ_ERR_SUCCESS;
+++	}
+++#endif
+++
++ 	if(mosq->out_packet){
++ 		mosq->out_packet_last->next = packet;
++ 	}else{
++diff --git a/src/context.c b/src/context.c
++index b2f851ea..63dd2d4a 100644
++--- a/src/context.c
+++++ b/src/context.c
++@@ -83,9 +83,9 @@ struct mosquitto *context__init(mosq_sock_t sock)
++ 		}
++ 	}
++ 	context->bridge = NULL;
++-	context->msgs_in.inflight_maximum = db.config->max_inflight_messages;
+++	context->msgs_in.inflight_maximum = 1;
++ 	context->msgs_out.inflight_maximum = db.config->max_inflight_messages;
++-	context->msgs_in.inflight_quota = db.config->max_inflight_messages;
+++	context->msgs_in.inflight_quota = 1;
++ 	context->msgs_out.inflight_quota = db.config->max_inflight_messages;
++ 	context->max_qos = 2;
++ #ifdef WITH_TLS
++@@ -98,6 +98,27 @@ struct mosquitto *context__init(mosq_sock_t sock)
++ 	return context;
++ }
++ 
+++static void context__cleanup_out_packets(struct mosquitto *context)
+++{
+++	struct mosquitto__packet *packet;
+++
+++	if(!context) return;
+++
+++	if(context->current_out_packet){
+++		packet__cleanup(context->current_out_packet);
+++		mosquitto__free(context->current_out_packet);
+++		context->current_out_packet = NULL;
+++	}
+++	while(context->out_packet){
+++		packet__cleanup(context->out_packet);
+++		packet = context->out_packet;
+++		context->out_packet = context->out_packet->next;
+++		mosquitto__free(packet);
+++	}
+++	context->out_packet_count = 0;
+++}
+++
+++
++ /*
++  * This will result in any outgoing packets going unsent. If we're disconnected
++  * forcefully then it is usually an error condition and shouldn't be a problem,
++@@ -106,8 +127,6 @@ struct mosquitto *context__init(mosq_sock_t sock)
++  */
++ void context__cleanup(struct mosquitto *context, bool force_free)
++ {
++-	struct mosquitto__packet *packet;
++-
++ 	if(!context) return;
++ 
++ 	if(force_free){
++@@ -121,6 +140,7 @@ void context__cleanup(struct mosquitto *context, bool force_free)
++ #endif
++ 
++ 	alias__free_all(context);
+++	context__cleanup_out_packets(context);
++ 
++ 	mosquitto__free(context->auth_method);
++ 	context->auth_method = NULL;
++@@ -148,18 +168,7 @@ void context__cleanup(struct mosquitto *context, bool force_free)
++ 		context->id = NULL;
++ 	}
++ 	packet__cleanup(&(context->in_packet));
++-	if(context->current_out_packet){
++-		packet__cleanup(context->current_out_packet);
++-		mosquitto__free(context->current_out_packet);
++-		context->current_out_packet = NULL;
++-	}
++-	while(context->out_packet){
++-		packet__cleanup(context->out_packet);
++-		packet = context->out_packet;
++-		context->out_packet = context->out_packet->next;
++-		mosquitto__free(packet);
++-	}
++-	context->out_packet_count = 0;
+++	context__cleanup_out_packets(context);
++ #if defined(WITH_BROKER) && defined(__GLIBC__) && defined(WITH_ADNS)
++ 	if(context->adns){
++ 		gai_cancel(context->adns);
++diff --git a/src/database.c b/src/database.c
++index df9778ba..41a0ac33 100644
++--- a/src/database.c
+++++ b/src/database.c
++@@ -539,7 +539,7 @@ int db__message_insert(struct mosquitto *context, uint16_t mid, enum mosquitto_m
++ 	}
++ #endif
++ 
++-	msg = mosquitto__malloc(sizeof(struct mosquitto_client_msg));
+++	msg = mosquitto__calloc(1, sizeof(struct mosquitto_client_msg));
++ 	if(!msg) return MOSQ_ERR_NOMEM;
++ 	msg->prev = NULL;
++ 	msg->next = NULL;
++@@ -597,6 +597,8 @@ int db__message_insert(struct mosquitto *context, uint16_t mid, enum mosquitto_m
++ 
++ 	if(dir == mosq_md_out && msg->qos > 0 && state != mosq_ms_queued){
++ 		util__decrement_send_quota(context);
+++	}else if(dir == mosq_md_in && msg->qos > 0 && state != mosq_ms_queued){
+++		util__decrement_receive_quota(context);
++ 	}
++ 
++ 	if(dir == mosq_md_out && update){
++@@ -780,23 +782,24 @@ int db__message_store(const struct mosquitto *source, struct mosquitto_msg_store
++ 	return MOSQ_ERR_SUCCESS;
++ }
++ 
++-int db__message_store_find(struct mosquitto *context, uint16_t mid, struct mosquitto_msg_store **stored)
+++int db__message_store_find(struct mosquitto *context, uint16_t mid, struct mosquitto_client_msg **client_msg)
++ {
++-	struct mosquitto_client_msg *tail;
+++	struct mosquitto_client_msg *cmsg;
+++
+++	*client_msg = NULL;
++ 
++ 	if(!context) return MOSQ_ERR_INVAL;
++ 
++-	*stored = NULL;
++-	DL_FOREACH(context->msgs_in.inflight, tail){
++-		if(tail->store->source_mid == mid){
++-			*stored = tail->store;
+++	DL_FOREACH(context->msgs_in.inflight, cmsg){
+++		if(cmsg->store->source_mid == mid){
+++			*client_msg = cmsg;
++ 			return MOSQ_ERR_SUCCESS;
++ 		}
++ 	}
++ 
++-	DL_FOREACH(context->msgs_in.queued, tail){
++-		if(tail->store->source_mid == mid){
++-			*stored = tail->store;
+++	DL_FOREACH(context->msgs_in.queued, cmsg){
+++		if(cmsg->store->source_mid == mid){
+++			*client_msg = cmsg;
++ 			return MOSQ_ERR_SUCCESS;
++ 		}
++ 	}
++@@ -898,6 +901,7 @@ static int db__message_reconnect_reset_incoming(struct mosquitto *context)
++ 		}else{
++ 			/* Message state can be preserved here because it should match
++ 			 * whatever the client has got. */
+++			msg->dup = 0;
++ 		}
++ 	}
++ 
++@@ -908,6 +912,7 @@ static int db__message_reconnect_reset_incoming(struct mosquitto *context)
++ 	 * will be sent out of order.
++ 	 */
++ 	DL_FOREACH_SAFE(context->msgs_in.queued, msg, tmp){
+++		msg->dup = 0;
++ 		db__msg_add_to_queued_stats(&context->msgs_in, msg);
++ 		if(db__ready_for_flight(context, mosq_md_in, msg->qos)){
++ 			switch(msg->qos){
++diff --git a/src/handle_publish.c b/src/handle_publish.c
++index 111f0316..d3aa5ce2 100644
++--- a/src/handle_publish.c
+++++ b/src/handle_publish.c
++@@ -42,6 +42,7 @@ int handle__publish(struct mosquitto *context)
++ 	uint8_t header = context->in_packet.command;
++ 	int res = 0;
++ 	struct mosquitto_msg_store *msg, *stored = NULL;
+++	struct mosquitto_client_msg *cmsg_stored = NULL;
++ 	size_t len;
++ 	uint16_t slen;
++ 	char *topic_mount;
++@@ -287,24 +288,24 @@ int handle__publish(struct mosquitto *context)
++ 	}
++ 
++ 	if(msg->qos > 0){
++-		db__message_store_find(context, msg->source_mid, &stored);
+++		db__message_store_find(context, msg->source_mid, &cmsg_stored);
++ 	}
++ 
++-	if(stored && msg->source_mid != 0 &&
++-			(stored->qos != msg->qos
++-			 || stored->payloadlen != msg->payloadlen
++-			 || strcmp(stored->topic, msg->topic)
++-			 || memcmp(stored->payload, msg->payload, msg->payloadlen) )){
+++	if(cmsg_stored && cmsg_stored->store && msg->source_mid != 0 &&
+++			(cmsg_stored->store->qos != msg->qos
+++			 || cmsg_stored->store->payloadlen != msg->payloadlen
+++			 || strcmp(cmsg_stored->store->topic, msg->topic)
+++			 || memcmp(cmsg_stored->store->payload, msg->payload, msg->payloadlen) )){
++ 
++ 		log__printf(NULL, MOSQ_LOG_WARNING, "Reused message ID %u from %s detected. Clearing from storage.", msg->source_mid, context->id);
++ 		db__message_remove_incoming(context, msg->source_mid);
++-		stored = NULL;
+++		cmsg_stored = NULL;
++ 	}
++ 
++-	if(!stored){
+++	if(!cmsg_stored){
++ 		if(msg->qos == 0
++ 				|| db__ready_for_flight(context, mosq_md_in, msg->qos)
++-				|| db__ready_for_queue(context, msg->qos, &context->msgs_in)){
+++				){
++ 
++ 			dup = 0;
++ 			rc = db__message_store(context, msg, message_expiry_interval, 0, mosq_mo_client);
++@@ -316,10 +317,13 @@ int handle__publish(struct mosquitto *context)
++ 		}
++ 		stored = msg;
++ 		msg = NULL;
+++		dup = 0;
++ 	}else{
++ 		db__msg_store_free(msg);
++ 		msg = NULL;
++-		dup = 1;
+++		stored = cmsg_stored->store;
+++		cmsg_stored->dup++;
+++		dup = cmsg_stored->dup;
++ 	}
++ 
++ 	switch(stored->qos){
++@@ -345,11 +349,17 @@ int handle__publish(struct mosquitto *context)
++ 			}else{
++ 				res = 0;
++ 			}
+++
++ 			/* db__message_insert() returns 2 to indicate dropped message
++ 			 * due to queue. This isn't an error so don't disconnect them. */
++ 			/* FIXME - this is no longer necessary due to failing early above */
++ 			if(!res){
++-				if(send__pubrec(context, stored->source_mid, 0, NULL)) rc = 1;
+++				if(dup == 0 || dup == 1){
+++					rc2 = send__pubrec(context, stored->source_mid, 0, NULL);
+++					if(rc2) rc = rc2;
+++				}else{
+++					return MOSQ_ERR_PROTOCOL;
+++				}
++ 			}else if(res == 1){
++ 				rc = 1;
++ 			}
++@@ -374,6 +384,9 @@ process_bad_message:
++ 		}
++ 		db__msg_store_free(msg);
++ 	}
+++	if(context->out_packet_count >= db.config->max_queued_messages){
+++		rc = MQTT_RC_QUOTA_EXCEEDED;
+++	}
++ 	return rc;
++ }
++ 
++diff --git a/src/mosquitto_broker_internal.h b/src/mosquitto_broker_internal.h
++index 5d4f5de5..c47f3a7e 100644
++--- a/src/mosquitto_broker_internal.h
+++++ b/src/mosquitto_broker_internal.h
++@@ -394,7 +394,7 @@ struct mosquitto_client_msg{
++ 	bool retain;
++ 	enum mosquitto_msg_direction direction;
++ 	enum mosquitto_msg_state state;
++-	bool dup;
+++	uint8_t dup;
++ };
++ 
++ 
++@@ -651,7 +651,7 @@ void db__message_dequeue_first(struct mosquitto *context, struct mosquitto_msg_d
++ int db__messages_delete(struct mosquitto *context, bool force_free);
++ int db__messages_easy_queue(struct mosquitto *context, const char *topic, uint8_t qos, uint32_t payloadlen, const void *payload, int retain, uint32_t message_expiry_interval, mosquitto_property **properties);
++ int db__message_store(const struct mosquitto *source, struct mosquitto_msg_store *stored, uint32_t message_expiry_interval, dbid_t store_id, enum mosquitto_msg_origin origin);
++-int db__message_store_find(struct mosquitto *context, uint16_t mid, struct mosquitto_msg_store **stored);
+++int db__message_store_find(struct mosquitto *context, uint16_t mid, struct mosquitto_client_msg **client_msg);
++ void db__msg_store_add(struct mosquitto_msg_store *store);
++ void db__msg_store_remove(struct mosquitto_msg_store *store);
++ void db__msg_store_ref_inc(struct mosquitto_msg_store *store);
++diff --git a/test/broker/03-publish-qos2-dup.py b/test/broker/03-publish-qos2-dup.py
++new file mode 100755
++index 00000000..70834fab
++--- /dev/null
+++++ b/test/broker/03-publish-qos2-dup.py
++@@ -0,0 +1,58 @@
+++#!/usr/bin/env python3
+++
+++from mosq_test_helper import *
+++
+++def do_test(proto_ver):
+++    rc = 1
+++    connect_packet = mosq_test.gen_connect("03-pub-qos2-dup-test", proto_ver=proto_ver)
+++    connack_packet = mosq_test.gen_connack(rc=0, proto_ver=proto_ver)
+++
+++    mid = 1
+++    publish_packet = mosq_test.gen_publish("topic", qos=2, mid=mid, payload="message", proto_ver=proto_ver, dup=1)
+++    pubrec_packet = mosq_test.gen_pubrec(mid, proto_ver=proto_ver)
+++
+++    disconnect_packet = mosq_test.gen_disconnect(reason_code=130, proto_ver=proto_ver)
+++
+++    port = mosq_test.get_port()
+++    broker = mosq_test.start_broker(filename=os.path.basename(__file__), port=port)
+++
+++    try:
+++        sock = mosq_test.do_client_connect(connect_packet, connack_packet, port=port)
+++        mosq_test.do_send_receive(sock, publish_packet, pubrec_packet, "pubrec 1")
+++        mosq_test.do_send_receive(sock, publish_packet, pubrec_packet, "pubrec 2")
+++        if proto_ver == 5:
+++            mosq_test.do_send_receive(sock, publish_packet, disconnect_packet, "disconnect")
+++            rc = 0
+++        else:
+++            try:
+++                mosq_test.do_send_receive(sock, publish_packet, b"", "disconnect1")
+++                rc = 0
+++            except BrokenPipeError:
+++                rc = 0
+++
+++        sock.close()
+++    except Exception as e:
+++        print(e)
+++    except mosq_test.TestError:
+++        pass
+++    finally:
+++        broker.terminate()
+++        broker.wait()
+++        (stdo, stde) = broker.communicate()
+++        if rc:
+++            print(stde.decode('utf-8'))
+++            print("proto_ver=%d" % (proto_ver))
+++            exit(rc)
+++
+++
+++def all_tests():
+++    rc = do_test(proto_ver=4)
+++    if rc:
+++        return rc;
+++    rc = do_test(proto_ver=5)
+++    if rc:
+++        return rc;
+++    return 0
+++
+++if __name__ == '__main__':
+++    all_tests()
++diff --git a/test/broker/Makefile b/test/broker/Makefile
++index d046cf92..376cbbb8 100644
++--- a/test/broker/Makefile
+++++ b/test/broker/Makefile
++@@ -82,6 +82,7 @@ msg_sequence_test:
++ 	./03-publish-qos1-no-subscribers-v5.py
++ 	./03-publish-qos1-retain-disabled.py
++ 	./03-publish-qos1.py
+++	./03-publish-qos2-dup.py
++ 	./03-publish-qos2-max-inflight.py
++ 	./03-publish-qos2.py
++ 
++diff --git a/test/broker/test.py b/test/broker/test.py
++index 2fbb39e4..1d58ace9 100755
++--- a/test/broker/test.py
+++++ b/test/broker/test.py
++@@ -62,6 +62,7 @@ tests = [
++     (1, './03-publish-qos1-no-subscribers-v5.py'),
++     (1, './03-publish-qos1-retain-disabled.py'),
++     (1, './03-publish-qos1.py'),
+++    (1, './03-publish-qos2-dup.py'),
++     (1, './03-publish-qos2-max-inflight.py'),
++     (1, './03-publish-qos2.py'),
++ 
+diff --git a/meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0.14.bb b/meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0.14.bb
+index 739b7de62..7f8c1b23f 100644
+--- a/meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0.14.bb
++++ b/meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0.14.bb
+@@ -17,6 +17,7 @@ DEPENDS = "uthash cjson"
+ SRC_URI = "http://mosquitto.org/files/source/mosquitto-${PV}.tar.gz \
+            file://mosquitto.init \
+            file://1571.patch \
++           file://CVE-2023-28366.patch \
+ "
+ 
+ SRC_URI[sha256sum] = "d0dde8fdb12caf6e2426b4f28081919a2fce3448773bdb8af0d3cd5fe5776925"
+-- 
+2.41.0
 
-Deadline is by Monday, October 2nd 2023
-
-Josef
-on behalf of the YPS organization committee
-
---000000000000e9faed06053f3bbf
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr">Summer vacation is over, so what is the next thing to focu=
-s on? Sharing your The Yocto Project, A Linux Foundation Project Kung-Fu, w=
-ar stories, use cases...<br><br>And the best place to do so is the Yocto Pr=
-oject Summit 2023.11 - the CFP is already open. We are eager to read your s=
-ubmissions!<br><br><a href=3D"https://summit.yoctoproject.org/yocto-project=
--summit-2023-11/cfp">https://summit.yoctoproject.org/yocto-project-summit-2=
-023-11/cfp</a><br><br>Deadline is by Monday, October 2nd 2023 <br><br>Josef=
-<div>on behalf of the YPS organization committee</div></div>
-
---000000000000e9faed06053f3bbf--
 
