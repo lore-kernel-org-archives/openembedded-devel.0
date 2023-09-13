@@ -1,165 +1,125 @@
-Return-Path: <chee.yang.lee@intel.com>
+Return-Path: <costamagna.gianfranco@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BCF4CEE49B7
-	for <webhook@archiver.kernel.org>; Wed, 13 Sep 2023 01:29:59 +0000 (UTC)
-Received: from mgamail.intel.com (mgamail.intel.com [192.55.52.120])
- by mx.groups.io with SMTP id smtpd.web11.2181.1694568595686823794
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C8FDACA5503
+	for <webhook@archiver.kernel.org>; Wed, 13 Sep 2023 07:58:02 +0000 (UTC)
+Received: from mail-wm1-f53.google.com (mail-wm1-f53.google.com [209.85.128.53])
+ by mx.groups.io with SMTP id smtpd.web10.6597.1694591880785057060
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 12 Sep 2023 18:29:55 -0700
+ Wed, 13 Sep 2023 00:58:01 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@intel.com header.s=Intel header.b=g0UPFc6H;
- spf=pass (domain: intel.com, ip: 192.55.52.120, mailfrom: chee.yang.lee@intel.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1694568595; x=1726104595;
-  h=from:to:subject:date:message-id:mime-version:
-   content-transfer-encoding;
-  bh=Gxk5qCAx6rjnInEXrphuvPZbW0fkdNJAjFHOhGzsJfM=;
-  b=g0UPFc6HKqwa/U3B+iLNuFIwVocHR6Q2h+aPwmukDP6CYydXiaiPPvJd
-   TXh9jAlhiG3HbtIcuRCLMyCPQbqSg0nHs9/G5AAAcYBLFgX4EdjfZntuD
-   aQt0oaoi8pVrkJuOkdqWxFQYSFO6duxV+Rn4vAEQvjvv1jPQddVJbEo2A
-   MzMdz2nsnz8etWPXk8zR2dosnc7jSYYiyrfXMVdO+xITnS+upX48FnCLI
-   E3Hhowvp/rUWoIgZGUQ415SrP0N5OiIvaR+18+fZYUukyi5IxCL6TuqP+
-   hDK6L0j38i6sr4lzLQqSdi717y/TsuFKiVM/h1HVr53Ubi50kS4zAqB2A
-   Q==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10831"; a="377444743"
-X-IronPort-AV: E=Sophos;i="6.02,141,1688454000"; 
-   d="scan'208";a="377444743"
-Received: from fmsmga003.fm.intel.com ([10.253.24.29])
-  by fmsmga104.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 12 Sep 2023 18:29:55 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10831"; a="834120060"
-X-IronPort-AV: E=Sophos;i="6.02,141,1688454000"; 
-   d="scan'208";a="834120060"
-Received: from andromeda02.png.intel.com ([10.221.253.198])
-  by FMSMGA003.fm.intel.com with ESMTP; 12 Sep 2023 18:29:54 -0700
-From: chee.yang.lee@intel.com
+ dkim=pass header.i=@gmail.com header.s=20221208 header.b=WGSXN3eA;
+ spf=pass (domain: gmail.com, ip: 209.85.128.53, mailfrom: costamagna.gianfranco@gmail.com)
+Received: by mail-wm1-f53.google.com with SMTP id 5b1f17b1804b1-3ff7d73a6feso68585535e9.1
+        for <openembedded-devel@lists.openembedded.org>; Wed, 13 Sep 2023 00:58:00 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20221208; t=1694591879; x=1695196679; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=pkY42O3CPQZcrftt+Bh8p31BrM8sOVsDQ10xxUB8HE0=;
+        b=WGSXN3eA2l3WVWEEk8pZYyXTnCGMrfnxUsjNLLgi+S+6pn6jvh1TZVQcDdz7T71HCb
+         rgvG71NXDTPgXvg9Ug77O3hgC1SENVEcvw52yRrKMUU/OWS7DbvlnvqWIVxdlTNQO5TY
+         wTslTZBY0aBaGXdAc6oeflWfMVOuzqzskwYy6lf8DtTwooBSzVq3S5RNeGIEHN9pmhCf
+         15c2jMJY570gTUXLi5WHR5d4oaAuV9foyfHq5Lai6BHHrxaBNyupDHKjx6qn9RPyDyjt
+         7xGjCdaArapjkipDX3u/5PGhix75qaQeVO59B29Mf1Wvyt9H2TBqOoNjWd5ZT3jL3sZ7
+         xI5g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1694591879; x=1695196679;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=pkY42O3CPQZcrftt+Bh8p31BrM8sOVsDQ10xxUB8HE0=;
+        b=G0haevL/MTEFlyfmNG+uO07Ryz5/x5k5ALcKFphdJvLQ+CW3bSXcOCsS1dzwSXpVeY
+         Ulqj3Bmq36Wa62dnm2kijRg5UvPwfSipmMu1IvZOPMBN6EmDOepg1NcHItyl7D2+3Swf
+         UpMmdLRiWLzc8236XIkdVMWu+otceJPSsPIr6bZuKkF/GDduirRBsmWVCzaZkNdmIVu4
+         /n4CAtT+N2xzKcgv2FDYt7hlyajpjfhQOPZZXobLVje6woZf4obBS67bXBxIcmmjhz3N
+         mT4w95U8oe6ycoj5EE/BcouM9jWlKtUkWqudcXDwKJlg4iuhx8zRHiTPPvs3SOksEayE
+         LlMA==
+X-Gm-Message-State: AOJu0YxqwLAQu5Z8z1kU2VxWzER4x2HJuPgUPQcvW/xNisPoWAe0yMZ/
+	LuV1nSE5R4fbGGLfA1c6ZD0WUe4QaB2F2A==
+X-Google-Smtp-Source: AGHT+IG5DmNaQkfZrJme7HpEiugAjyD67FpmFzPn9y2tK89dm+9uW+0Ix3gJV0ICC7fAlWYvdqDPew==
+X-Received: by 2002:a7b:ca52:0:b0:401:38dc:8917 with SMTP id m18-20020a7bca52000000b0040138dc8917mr1426960wml.6.1694591878483;
+        Wed, 13 Sep 2023 00:57:58 -0700 (PDT)
+Received: from Unimatrix08-Jammy.Abinsula ([151.58.174.15])
+        by smtp.gmail.com with ESMTPSA id y15-20020a1c4b0f000000b00402ff8d6086sm1224611wma.18.2023.09.13.00.57.57
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 13 Sep 2023 00:57:57 -0700 (PDT)
+From: Gianfranco Costamagna <costamagna.gianfranco@gmail.com>
+X-Google-Original-From: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-networking][PATCH v2] keepalived: 2.2.2 -> 2.2.8
-Date: Wed, 13 Sep 2023 09:10:16 +0800
-Message-Id: <20230913011016.1540901-1-chee.yang.lee@intel.com>
-X-Mailer: git-send-email 2.37.3
+Cc: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
+Subject: [meta-oe][PATCH] mosquitto: upgrade 2.0.15 -> 2.0.17
+Date: Wed, 13 Sep 2023 09:57:54 +0200
+Message-Id: <20230913075754.2385566-1-costamagnagianfranco@yahoo.it>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 13 Sep 2023 01:29:59 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104852
+ <openembedded-devel@lists.openembedded.org>; Wed, 13 Sep 2023 07:58:02 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104853
 
-From: Lee Chee Yang <chee.yang.lee@intel.com>
+Fix for CVE-2023-28366, CVE-2023-0809, CVE-2023-3592
 
-add EXTRA_CFLAGS to Fix reproducibility.
-
-upstream fixed compilation on RHEL 9, which should be same problem fixed
-with 0001-layer4-Change-order-of-include-files.patch. hence drop the
-patch file.
-https://github.com/acassen/keepalived/commit/3fd0c21e4f63ac0a52b5d7a09575f0f364972e4d
-
-Signed-off-by: Lee Chee Yang <chee.yang.lee@intel.com>
+Signed-off-by: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
 ---
- ...layer4-Change-order-of-include-files.patch | 60 -------------------
- ...eepalived_2.2.2.bb => keepalived_2.2.8.bb} |  5 +-
- 2 files changed, 3 insertions(+), 62 deletions(-)
- delete mode 100644 meta-networking/recipes-daemons/keepalived/keepalived/0001-layer4-Change-order-of-include-files.patch
- rename meta-networking/recipes-daemons/keepalived/{keepalived_2.2.2.bb => keepalived_2.2.8.bb} (91%)
+ .../mosquitto/files/mosquitto.init            | 20 +++++++++----------
+ ...osquitto_2.0.15.bb => mosquitto_2.0.17.bb} |  2 +-
+ 2 files changed, 11 insertions(+), 11 deletions(-)
+ rename meta-networking/recipes-connectivity/mosquitto/{mosquitto_2.0.15.bb => mosquitto_2.0.17.bb} (97%)
 
-diff --git a/meta-networking/recipes-daemons/keepalived/keepalived/0001-layer4-Change-order-of-include-files.patch b/meta-networking/recipes-daemons/keepalived/keepalived/0001-layer4-Change-order-of-include-files.patch
-deleted file mode 100644
-index 678a208ac3..0000000000
---- a/meta-networking/recipes-daemons/keepalived/keepalived/0001-layer4-Change-order-of-include-files.patch
-+++ /dev/null
-@@ -1,60 +0,0 @@
--From a85ca79143a87286f793957e803ee3daf03c2b57 Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Tue, 6 Jul 2021 14:06:44 -0700
--Subject: [PATCH] layer4: Change order of include files
--
--curent order to include standard headers first is causing an isue with
--glibc 2.34 + kernel-headers 5.13+ where order of including netinet/in.h
--and linux/in.h matters and it does not define __UAPI_DEF_IN_IPPROTO
--before including linux/in.h and then later includes netinet/in.h which
--then means lot of definitions will be defined twice and compile would
--fail. Re-ordering the local headers to appear first solves the issue
--amicably, and I think this is right order too
--
--Upsteam-Status: Pending
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
--Upstream-Status: Pending
--
-- keepalived/core/layer4.c | 21 ++++++++++-----------
-- 1 file changed, 10 insertions(+), 11 deletions(-)
--
--diff --git a/keepalived/core/layer4.c b/keepalived/core/layer4.c
--index 90cdc84..c122c29 100644
----- a/keepalived/core/layer4.c
--+++ b/keepalived/core/layer4.c
--@@ -23,6 +23,16 @@
-- 
-- #include "config.h"
-- 
--+#include "layer4.h"
--+#include "logger.h"
--+#include "scheduler.h"
--+#ifdef _WITH_LVS_
--+#include "check_api.h"
--+#endif
--+#include "bitops.h"
--+#include "utils.h"
--+#include "align.h"
--+
-- #include <stdio.h>
-- #include <errno.h>
-- #include <unistd.h>
--@@ -33,17 +43,6 @@
-- #include <sys/time.h>
-- #endif
-- #include <linux/errqueue.h>
---#include <netinet/in.h>
---
---#include "layer4.h"
---#include "logger.h"
---#include "scheduler.h"
---#ifdef _WITH_LVS_
---#include "check_api.h"
---#endif
---#include "bitops.h"
---#include "utils.h"
---#include "align.h"
-- 
-- // #define ICMP_DEBUG	1
-- 
-diff --git a/meta-networking/recipes-daemons/keepalived/keepalived_2.2.2.bb b/meta-networking/recipes-daemons/keepalived/keepalived_2.2.8.bb
-similarity index 91%
-rename from meta-networking/recipes-daemons/keepalived/keepalived_2.2.2.bb
-rename to meta-networking/recipes-daemons/keepalived/keepalived_2.2.8.bb
-index 204d2fd116..dd193b12fc 100644
---- a/meta-networking/recipes-daemons/keepalived/keepalived_2.2.2.bb
-+++ b/meta-networking/recipes-daemons/keepalived/keepalived_2.2.8.bb
-@@ -11,9 +11,8 @@ LICENSE = "GPL-2.0-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+diff --git a/meta-networking/recipes-connectivity/mosquitto/files/mosquitto.init b/meta-networking/recipes-connectivity/mosquitto/files/mosquitto.init
+index 9d5963c41..d0da219d6 100644
+--- a/meta-networking/recipes-connectivity/mosquitto/files/mosquitto.init
++++ b/meta-networking/recipes-connectivity/mosquitto/files/mosquitto.init
+@@ -1,18 +1,18 @@
+-#! /bin/sh
++#!/bin/sh
  
- SRC_URI = "http://www.keepalived.org/software/${BP}.tar.gz \
--           file://0001-layer4-Change-order-of-include-files.patch \
-            "
--SRC_URI[sha256sum] = "103692bd5345a4ed9f4581632ea636214fdf53e45682e200aab122c4fa674ece"
-+SRC_URI[sha256sum] = "85882eb62974f395d4c631be990a41a839594a7e62fbfebcb5649a937a7a1bb6"
- UPSTREAM_CHECK_URI = "https://github.com/acassen/keepalived/releases"
+ # Based on the Debian initscript for mosquitto
  
- DEPENDS = "libnfnetlink openssl"
-@@ -29,6 +28,8 @@ PACKAGECONFIG[systemd] = "--with-init=systemd --with-systemdsystemunitdir=${syst
+ ### BEGIN INIT INFO
+-# Provides:         mosquitto
+-# Required-Start:   $remote_fs $syslog
+-# Required-Stop:    $remote_fs $syslog
+-# Default-Start:    2 3 4 5
+-# Default-Stop:     0 1 6
+-# Short-Description:    mosquitto MQTT message broker
+-# Description: 
+-#  This is a message broker that supports version 3.1/3.1.1 of the MQ Telemetry
++# Provides:       mosquitto
++# Required-Start: $remote_fs $syslog
++# Required-Stop:  $remote_fs $syslog
++# Default-Start:  2 3 4 5
++# Default-Stop:   0 1 6
++# Short-Description: mosquitto MQTT 3.1/3.1.1 message broker
++# Description:
++#  This is a message broker that supports version 3.1 of the MQ Telemetry
+ #  Transport (MQTT) protocol.
+-#  
++#
+ #  MQTT provides a method of carrying out messaging using a publish/subscribe
+ #  model. It is lightweight, both in terms of bandwidth usage and ease of
+ #  implementation. This makes it particularly useful at the edge of the network
+diff --git a/meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0.15.bb b/meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0.17.bb
+similarity index 97%
+rename from meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0.15.bb
+rename to meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0.17.bb
+index eea672a70..690b6bc12 100644
+--- a/meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0.15.bb
++++ b/meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0.17.bb
+@@ -19,7 +19,7 @@ SRC_URI = "http://mosquitto.org/files/source/mosquitto-${PV}.tar.gz \
+            file://1571.patch \
+ "
  
- EXTRA_OEMAKE = "initdir=${sysconfdir}/init.d"
+-SRC_URI[sha256sum] = "4735b1d32e3f91c7a8896741d88a3022e89730a1ee897946decfa0df27039ac6"
++SRC_URI[sha256sum] = "3be7a911236567c1a9fbe25baf3e3167004ba4a0c151a448ef1f7fc077dba52f"
  
-+export EXTRA_CFLAGS = "${CFLAGS}"
-+
- do_install:append() {
-     if [ -f ${D}${sysconfdir}/init.d/${BPN} ]; then
-         chmod 0755 ${D}${sysconfdir}/init.d/${BPN}
+ inherit systemd update-rc.d useradd cmake pkgconfig
+ 
 -- 
-2.37.3
+2.34.1
 
 
