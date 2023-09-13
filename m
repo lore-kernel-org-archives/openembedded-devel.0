@@ -1,124 +1,91 @@
-Return-Path: <costamagna.gianfranco@gmail.com>
+Return-Path: <quaresma.jose@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C8FDACA5503
-	for <webhook@archiver.kernel.org>; Wed, 13 Sep 2023 07:58:02 +0000 (UTC)
-Received: from mail-wm1-f53.google.com (mail-wm1-f53.google.com [209.85.128.53])
- by mx.groups.io with SMTP id smtpd.web10.6597.1694591880785057060
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9AD4FCA5538
+	for <webhook@archiver.kernel.org>; Wed, 13 Sep 2023 11:02:24 +0000 (UTC)
+Received: from mail-wm1-f49.google.com (mail-wm1-f49.google.com [209.85.128.49])
+ by mx.groups.io with SMTP id smtpd.web10.8930.1694602936046506376
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 13 Sep 2023 00:58:01 -0700
+ Wed, 13 Sep 2023 04:02:16 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20221208 header.b=WGSXN3eA;
- spf=pass (domain: gmail.com, ip: 209.85.128.53, mailfrom: costamagna.gianfranco@gmail.com)
-Received: by mail-wm1-f53.google.com with SMTP id 5b1f17b1804b1-3ff7d73a6feso68585535e9.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 13 Sep 2023 00:58:00 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20221208 header.b=fdyGl6vj;
+ spf=pass (domain: gmail.com, ip: 209.85.128.49, mailfrom: quaresma.jose@gmail.com)
+Received: by mail-wm1-f49.google.com with SMTP id 5b1f17b1804b1-401b5516104so70591045e9.2
+        for <openembedded-devel@lists.openembedded.org>; Wed, 13 Sep 2023 04:02:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1694591879; x=1695196679; darn=lists.openembedded.org;
+        d=gmail.com; s=20221208; t=1694602934; x=1695207734; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=pkY42O3CPQZcrftt+Bh8p31BrM8sOVsDQ10xxUB8HE0=;
-        b=WGSXN3eA2l3WVWEEk8pZYyXTnCGMrfnxUsjNLLgi+S+6pn6jvh1TZVQcDdz7T71HCb
-         rgvG71NXDTPgXvg9Ug77O3hgC1SENVEcvw52yRrKMUU/OWS7DbvlnvqWIVxdlTNQO5TY
-         wTslTZBY0aBaGXdAc6oeflWfMVOuzqzskwYy6lf8DtTwooBSzVq3S5RNeGIEHN9pmhCf
-         15c2jMJY570gTUXLi5WHR5d4oaAuV9foyfHq5Lai6BHHrxaBNyupDHKjx6qn9RPyDyjt
-         7xGjCdaArapjkipDX3u/5PGhix75qaQeVO59B29Mf1Wvyt9H2TBqOoNjWd5ZT3jL3sZ7
-         xI5g==
+        bh=b1ZzS4x58AYfn5DcG7unsfLCSI3qrowHqPhW5SLZLzA=;
+        b=fdyGl6vjdQou48KJl6zZ99VwPLpQ+virKSw4tHJ7/pFLbKqDRwkRWayR1PuUrnVgmx
+         BfonITP4TeZIdTnUhCmcCxr2jFuPTIylQiReVkcW+i7SvlJPGlfjPgs+5rGQ1NP3dtd7
+         5lJvyqm3ytpt98vUTpKEBoMh75eFb3kuR5e6zPJeBjEJ3gzsC94YpYr5ns37BvSC5J8C
+         2td8G4NIXHcjcAfjwIO55MFBZ0ivTQ/4MT+Bti2yGcRZ62ghDP6tex5dOW9H/5YBB1Lh
+         43Wu8xbFHy2UU+0+fC9/Zt1SegZ4evj0aKFKmgvEjxwoPCGJiIw1NhBeDaNUwS+vSEDd
+         mtAw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1694591879; x=1695196679;
+        d=1e100.net; s=20230601; t=1694602934; x=1695207734;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=pkY42O3CPQZcrftt+Bh8p31BrM8sOVsDQ10xxUB8HE0=;
-        b=G0haevL/MTEFlyfmNG+uO07Ryz5/x5k5ALcKFphdJvLQ+CW3bSXcOCsS1dzwSXpVeY
-         Ulqj3Bmq36Wa62dnm2kijRg5UvPwfSipmMu1IvZOPMBN6EmDOepg1NcHItyl7D2+3Swf
-         UpMmdLRiWLzc8236XIkdVMWu+otceJPSsPIr6bZuKkF/GDduirRBsmWVCzaZkNdmIVu4
-         /n4CAtT+N2xzKcgv2FDYt7hlyajpjfhQOPZZXobLVje6woZf4obBS67bXBxIcmmjhz3N
-         mT4w95U8oe6ycoj5EE/BcouM9jWlKtUkWqudcXDwKJlg4iuhx8zRHiTPPvs3SOksEayE
-         LlMA==
-X-Gm-Message-State: AOJu0YxqwLAQu5Z8z1kU2VxWzER4x2HJuPgUPQcvW/xNisPoWAe0yMZ/
-	LuV1nSE5R4fbGGLfA1c6ZD0WUe4QaB2F2A==
-X-Google-Smtp-Source: AGHT+IG5DmNaQkfZrJme7HpEiugAjyD67FpmFzPn9y2tK89dm+9uW+0Ix3gJV0ICC7fAlWYvdqDPew==
-X-Received: by 2002:a7b:ca52:0:b0:401:38dc:8917 with SMTP id m18-20020a7bca52000000b0040138dc8917mr1426960wml.6.1694591878483;
-        Wed, 13 Sep 2023 00:57:58 -0700 (PDT)
-Received: from Unimatrix08-Jammy.Abinsula ([151.58.174.15])
-        by smtp.gmail.com with ESMTPSA id y15-20020a1c4b0f000000b00402ff8d6086sm1224611wma.18.2023.09.13.00.57.57
+        bh=b1ZzS4x58AYfn5DcG7unsfLCSI3qrowHqPhW5SLZLzA=;
+        b=DRqIf9B27eJklsQbOIM/eMeBdb+M8x6AMpUqbfNpLXXITBKEQJqSmcDoC5aqYZX/e6
+         LtgGuItKUEkrHmSXtXSLUlregrni7GmDzgUbwXIN75rgwN9rllTBnkMCf6bgrA+EUNGd
+         ecaJjtpRT8shGQ4QNl9t1XL17JTK8Qkl8vFQc77pclkWfzw1k7xE1Ki3aCI7Fb4aMs8x
+         wAoZxgIWfk1FuPcLqzWAEPtDsABy6UPaAPngzeLOqpyZXLsETfJ9QeotKGX8dBHOEARM
+         B1ER7RI/Moj/qgmFiVY3Hc+xRMKdA8XKkAlc7S7gf8Q5hdQLc70lyDmfE5mbdwLaHkJK
+         hXIg==
+X-Gm-Message-State: AOJu0YwdpcMheXrVQvAG0zKrAXyc2U9n2LsgX9A9dk9k4t3tGIB5NNTr
+	iUVRgfKCFZ0yT3li3pbaHdOuQra9yCg=
+X-Google-Smtp-Source: AGHT+IEoKBVnFgpXYvrZr/nmGNOhTdpQMVIsiGHMbMRNDBuIqIyP0nb9g6W/GIoeeT1HN4H7Q5mP0Q==
+X-Received: by 2002:a1c:4c0d:0:b0:3fd:3006:410b with SMTP id z13-20020a1c4c0d000000b003fd3006410bmr1748131wmf.34.1694602933800;
+        Wed, 13 Sep 2023 04:02:13 -0700 (PDT)
+Received: from og-worker-dev-01.infra.foundries.net ([2001:bc8:6005:6:8218:44ff:fef2:ade0])
+        by smtp.gmail.com with ESMTPSA id 21-20020a05600c025500b003fe1a092925sm1694031wmj.19.2023.09.13.04.02.13
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 13 Sep 2023 00:57:57 -0700 (PDT)
-From: Gianfranco Costamagna <costamagna.gianfranco@gmail.com>
-X-Google-Original-From: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
+        Wed, 13 Sep 2023 04:02:13 -0700 (PDT)
+From: Jose Quaresma <quaresma.jose@gmail.com>
+X-Google-Original-From: Jose Quaresma <jose.quaresma@foundries.io>
 To: openembedded-devel@lists.openembedded.org
-Cc: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
-Subject: [meta-oe][PATCH] mosquitto: upgrade 2.0.15 -> 2.0.17
-Date: Wed, 13 Sep 2023 09:57:54 +0200
-Message-Id: <20230913075754.2385566-1-costamagnagianfranco@yahoo.it>
+Cc: Jose Quaresma <jose.quaresma@foundries.io>
+Subject: [meta-oe][PATCH] opensc: ignore CVE-2021-34193
+Date: Wed, 13 Sep 2023 11:01:45 +0000
+Message-Id: <20230913110145.1100755-1-jose.quaresma@foundries.io>
 X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 13 Sep 2023 07:58:02 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104853
+ <openembedded-devel@lists.openembedded.org>; Wed, 13 Sep 2023 11:02:24 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104854
 
-Fix for CVE-2023-28366, CVE-2023-0809, CVE-2023-3592
+The CVE-2021-34193 is a duplicate CVE covering the 5 individual already fixed.
 
-Signed-off-by: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
+https://github.com/OpenSC/OpenSC/pull/2855
+
+Signed-off-by: Jose Quaresma <jose.quaresma@foundries.io>
 ---
- .../mosquitto/files/mosquitto.init            | 20 +++++++++----------
- ...osquitto_2.0.15.bb => mosquitto_2.0.17.bb} |  2 +-
- 2 files changed, 11 insertions(+), 11 deletions(-)
- rename meta-networking/recipes-connectivity/mosquitto/{mosquitto_2.0.15.bb => mosquitto_2.0.17.bb} (97%)
+ meta-oe/recipes-support/opensc/opensc_0.22.0.bb | 5 +++++
+ 1 file changed, 5 insertions(+)
 
-diff --git a/meta-networking/recipes-connectivity/mosquitto/files/mosquitto.init b/meta-networking/recipes-connectivity/mosquitto/files/mosquitto.init
-index 9d5963c41..d0da219d6 100644
---- a/meta-networking/recipes-connectivity/mosquitto/files/mosquitto.init
-+++ b/meta-networking/recipes-connectivity/mosquitto/files/mosquitto.init
-@@ -1,18 +1,18 @@
--#! /bin/sh
-+#!/bin/sh
+diff --git a/meta-oe/recipes-support/opensc/opensc_0.22.0.bb b/meta-oe/recipes-support/opensc/opensc_0.22.0.bb
+index 4590b85fa..3bb79b9d9 100644
+--- a/meta-oe/recipes-support/opensc/opensc_0.22.0.bb
++++ b/meta-oe/recipes-support/opensc/opensc_0.22.0.bb
+@@ -16,6 +16,11 @@ SRCREV = "c902e1992195e00ada12d71beb1029287cd72037"
+ SRC_URI = "git://github.com/OpenSC/OpenSC;branch=master;protocol=https \
+            file://CVE-2023-2977.patch \
+           "
++
++# CVE-2021-34193 is a duplicate CVE covering the 5 individual
++# https://github.com/OpenSC/OpenSC/pull/2855/commits/7a049fc3922060fb75cb9fea9e58eef9edc357ae
++CVE_CHECK_IGNORE += "CVE-2021-34193"
++
+ DEPENDS = "virtual/libiconv openssl"
  
- # Based on the Debian initscript for mosquitto
- 
- ### BEGIN INIT INFO
--# Provides:         mosquitto
--# Required-Start:   $remote_fs $syslog
--# Required-Stop:    $remote_fs $syslog
--# Default-Start:    2 3 4 5
--# Default-Stop:     0 1 6
--# Short-Description:    mosquitto MQTT message broker
--# Description: 
--#  This is a message broker that supports version 3.1/3.1.1 of the MQ Telemetry
-+# Provides:       mosquitto
-+# Required-Start: $remote_fs $syslog
-+# Required-Stop:  $remote_fs $syslog
-+# Default-Start:  2 3 4 5
-+# Default-Stop:   0 1 6
-+# Short-Description: mosquitto MQTT 3.1/3.1.1 message broker
-+# Description:
-+#  This is a message broker that supports version 3.1 of the MQ Telemetry
- #  Transport (MQTT) protocol.
--#  
-+#
- #  MQTT provides a method of carrying out messaging using a publish/subscribe
- #  model. It is lightweight, both in terms of bandwidth usage and ease of
- #  implementation. This makes it particularly useful at the edge of the network
-diff --git a/meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0.15.bb b/meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0.17.bb
-similarity index 97%
-rename from meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0.15.bb
-rename to meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0.17.bb
-index eea672a70..690b6bc12 100644
---- a/meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0.15.bb
-+++ b/meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0.17.bb
-@@ -19,7 +19,7 @@ SRC_URI = "http://mosquitto.org/files/source/mosquitto-${PV}.tar.gz \
-            file://1571.patch \
- "
- 
--SRC_URI[sha256sum] = "4735b1d32e3f91c7a8896741d88a3022e89730a1ee897946decfa0df27039ac6"
-+SRC_URI[sha256sum] = "3be7a911236567c1a9fbe25baf3e3167004ba4a0c151a448ef1f7fc077dba52f"
- 
- inherit systemd update-rc.d useradd cmake pkgconfig
- 
+ S = "${WORKDIR}/git"
 -- 
 2.34.1
 
