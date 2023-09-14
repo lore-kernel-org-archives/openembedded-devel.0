@@ -1,252 +1,89 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <kai.kang@eng.windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1BA8AEE021C
-	for <webhook@archiver.kernel.org>; Thu, 14 Sep 2023 03:18:58 +0000 (UTC)
-Received: from mail-oo1-f53.google.com (mail-oo1-f53.google.com [209.85.161.53])
- by mx.groups.io with SMTP id smtpd.web10.4142.1694661527575363529
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 82F8BEE021F
+	for <webhook@archiver.kernel.org>; Thu, 14 Sep 2023 03:22:37 +0000 (UTC)
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.web10.4184.1694661752751474237
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 13 Sep 2023 20:18:47 -0700
+ Wed, 13 Sep 2023 20:22:32 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20221208 header.b=GJeQH8Ge;
- spf=pass (domain: gmail.com, ip: 209.85.161.53, mailfrom: raj.khem@gmail.com)
-Received: by mail-oo1-f53.google.com with SMTP id 006d021491bc7-5734b893a11so326272eaf.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 13 Sep 2023 20:18:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1694661527; x=1695266327; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=61N4r+Z92isnalQ7gJIGzLELEmmICIjunyTNhqDM6Is=;
-        b=GJeQH8GeOX+jT4xEvkuPJAdNziFSnkob0QENroFMfKcX7rVrv5EoJaw2BSsdVlPPMH
-         blaipoORLhdI2UPKTo/3NsATI+D0hDkNEpl5AnosQ4ouiGqijnslUCe94X5Zh2ufRxMv
-         J4Wb5rH8D2i7Kd5I2Mr606po+3eMGXvuBTxRp+qZojGJaboxt151C4YDy77ECDHhOAk8
-         A5d0AOyJHDP3Od8jqKnyyLgxiocKFHOBXC1QkXwfeWzVP/3DLkddNwFApXgBszaB/wE/
-         GzQLxo/bM6FAIZhhDSuvvT4BdbxDEakMMLzBIW9hXl/DAsDF3FV4nMgv76Jiby0KIyDH
-         0lAw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1694661527; x=1695266327;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=61N4r+Z92isnalQ7gJIGzLELEmmICIjunyTNhqDM6Is=;
-        b=q2GZsMqMaY1IYNDrWawFqGS4EPuspFdG35IdlOG9HaQTs/j17k3sCPbKoGd7jhdaFr
-         PqzL0Ll+oWyWdd42/HjyAed8QSQo+tVUoMe7AR6JXddhrYHu5sLIklImJX1aQ5OgCblK
-         c0WtUji/+WXNRdhDwNqgy0fMeg/9rgsT1u6n+laoT5cM+ScOApZ0kT5tddNSIEcn9iU6
-         PtfUBqHa68VXvrGrVfmD58tUQLZwK4vBNlEXdZnBeNayvkWnTxUQ7dmsjdGwwFeyEYpe
-         Ha+Ic2/M1Z8eCJhwhfNyyBPLQY0CHP83jSGGx9rZujh46wV8vDf3tP7RdOqzdcpjI7nG
-         +CPw==
-X-Gm-Message-State: AOJu0YyrsAwrut2xEptjhQhb1zMa8GVpEic+soPw4K1ekoYjLFkAccGN
-	ccQXLkpkNB8XhXESe7oww4SKxyMiG5FqOJdcHh9veBQ+qRk=
-X-Google-Smtp-Source: AGHT+IH66Ow5B+7gfleLlBSL7+GnJizrL4IYfeRagYjw9bC964FeRAm5bb+q1G7dHMBVGfIh+csLhqmqGWO0pUx1vZQ=
-X-Received: by 2002:a05:6870:2d1:b0:1b7:4521:14b6 with SMTP id
- r17-20020a05687002d100b001b7452114b6mr4860943oaf.5.1694661526685; Wed, 13 Sep
- 2023 20:18:46 -0700 (PDT)
+ dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=CBUX9ohb;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=76213d3f08=kai.kang@windriver.com)
+Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.17.1.22/8.17.1.22) with ESMTP id 38E1nvX9006806
+	for <openembedded-devel@lists.openembedded.org>; Thu, 14 Sep 2023 03:22:32 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
+	 h=from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding:content-type; s=PPS06212021; bh=q1Kwj
+	rPsb28lP8VuFkSmRuFAdZwQi9dfGas8OStrHCg=; b=CBUX9ohbHtXJkFOdh0SEW
+	BfOrL+nCnP5FlsHjKMiTeKq7xC+IIFj7wKL9y4Vyw92n7TrjRWrT4bcKisuxgc8C
+	MJIYFiooj8RV9Mpqj/Vex8GvhYTwKBo8NyVGlTCwoYi8lWzVylXD/17lSyHufJyJ
+	NiT7H16Jq4MHPvMudh6vMWIpu+O/4G5fjBoulqecK6xP5RNzQB0fxX0sonigFEz2
+	h/U1CsAmEFn79zgCjRgNaiQNXDmN0gKh7cgYbm11nwIGbbXWac1btGhgsJ91dAwX
+	kvUDcJIUVfvTxH0pZKGUJOhpR93k26gsMswhO47235lFiwLD2v90qUouQ0bmmrnR
+	g==
+Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3t2y8m9cbm-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Thu, 14 Sep 2023 03:22:31 +0000 (GMT)
+Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.32; Wed, 13 Sep 2023 20:22:30 -0700
+Received: from pek-lpg-core3.wrs.com (128.224.153.232) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
+ 15.1.2507.32 via Frontend Transport; Wed, 13 Sep 2023 20:22:29 -0700
+From: <kai.kang@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [meta-oe][PATCH] ostree: not compatible with riscv32 when ptest enabled
+Date: Thu, 14 Sep 2023 11:22:25 +0800
+Message-ID: <20230914032225.496168-1-kai.kang@windriver.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <20230914022151.3298392-1-chi.xu@windriver.com>
-In-Reply-To: <20230914022151.3298392-1-chi.xu@windriver.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 13 Sep 2023 20:18:20 -0700
-Message-ID: <CAMKF1sqrLLMn2qCbAQq=XyGkGKRYPWb2z4cbDYJN4UH7tdUOfg@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH] mariadb: Add ptest support
-To: Chi Xu <chi.xu@eng.windriver.com>
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Proofpoint-ORIG-GUID: 3kDRDzlpRAquGTA-MkzlRrDuASch02pN
+X-Proofpoint-GUID: 3kDRDzlpRAquGTA-MkzlRrDuASch02pN
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.267,Aquarius:18.0.980,Hydra:6.0.601,FMLib:17.11.176.26
+ definitions=2023-09-13_19,2023-09-13_01,2023-05-22_02
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 impostorscore=0
+ priorityscore=1501 mlxlogscore=754 spamscore=0 adultscore=0
+ lowpriorityscore=0 malwarescore=0 bulkscore=0 suspectscore=0 clxscore=1015
+ mlxscore=0 phishscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.19.0-2308100000 definitions=main-2309140028
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 14 Sep 2023 03:18:58 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104861
+ <openembedded-devel@lists.openembedded.org>; Thu, 14 Sep 2023 03:22:37 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104862
 
-This is good. Can you also add it to ptest multconfig via PTESTS_SLOW_META_=
-OE
-in meta-oe/conf/include/ptest-packagelists-meta-oe.inc
+From: Kai Kang <kai.kang@windriver.com>
 
-On Wed, Sep 13, 2023 at 7:21=E2=80=AFPM Chi Xu <chi.xu@eng.windriver.com> w=
-rote:
->
-> 70 test cases in all, and all of them are PASS.
-> There are some specific steps before doing test,
-> please refer to the comments in run-ptest.
->
-> Test results:
-> root@intel-x86-64:~# ptest-runner mariadb
-> START: ptest-runner
-> 2023-09-14T15:17
-> BEGIN: /usr/lib64/mariadb/ptest
-> PASS: strings
-> PASS: json
-> PASS: simple
-> PASS: skip
-> PASS: todo
-> PASS: skip_all
-> PASS: no_plan
-> PASS: bitmap
-> PASS: base64
-> PASS: my_atomic
-> PASS: my_rdtsc
-> PASS: lf
-> PASS: my_malloc
-> PASS: my_getopt
-> PASS: dynstring
-> PASS: byte_order
-> PASS: queues
-> PASS: stacktrace
-> PASS: crc32
-> PASS: my_vsnprintf
-> PASS: aes
-> PASS: ma_dyncol
-> PASS: my_decimal
-> PASS: json_lib
-> PASS: json_normalize
-> PASS: my_apc
-> PASS: explain_filename
-> PASS: mf_iocache
-> PASS: my_json_writer
-> PASS: innodb_fts
-> PASS: innodb_sync
-> PASS: ma_control_file
-> PASS: trnman
-> PASS: ma_test_loghandler
-> PASS: ma_test_loghandler_multigroup
-> PASS: ma_test_loghandler_multithread
-> PASS: ma_test_loghandler_pagecache
-> PASS: ma_test_loghandler_long
-> PASS: ma_test_loghandler_noflush
-> PASS: ma_test_loghandler_first_lsn
-> PASS: ma_test_loghandler_max_lsn
-> PASS: ma_test_loghandler_purge
-> PASS: ma_test_loghandler_readonly
-> PASS: ma_test_loghandler_nologs
-> PASS: ma_pagecache_single_1k
-> PASS: ma_pagecache_single_8k
-> PASS: ma_pagecache_single_64k
-> PASS: ma_pagecache_consist_1k
-> PASS: ma_pagecache_consist_64k
-> PASS: ma_pagecache_consist_1kHC
-> PASS: ma_pagecache_consist_64kHC
-> PASS: ma_pagecache_consist_1kRD
-> PASS: ma_pagecache_consist_64kRD
-> PASS: ma_pagecache_consist_1kWR
-> PASS: ma_pagecache_consist_64kWR
-> PASS: ma_pagecache_rwconsist_1k
-> PASS: ma_pagecache_rwconsist2_1k
-> PASS: pfs_instr_class
-> PASS: pfs_instr_class-oom
-> PASS: pfs_instr
-> PASS: pfs_instr-oom
-> PASS: pfs_account-oom
-> PASS: pfs_host-oom
-> PASS: pfs_timer
-> PASS: pfs_user-oom
-> PASS: pfs_noop
-> PASS: pfs
-> PASS: pfs_misc
-> PASS: dbug
-> PASS: test-connect
-> DURATION: 60
-> END: /usr/lib64/mariadb/ptest
-> 2023-09-14T15:18
-> STOP: ptest-runner
-> TOTAL: 1 FAIL: 0
->
-> Signed-off-by: Chi Xu <chi.xu@windriver.com>
-> ---
->  meta-oe/recipes-dbs/mysql/mariadb/run-ptest  | 19 ++++++++++++
->  meta-oe/recipes-dbs/mysql/mariadb_10.11.5.bb | 31 ++++++++++++++++++++
->  2 files changed, 50 insertions(+)
->  create mode 100644 meta-oe/recipes-dbs/mysql/mariadb/run-ptest
->
-> diff --git a/meta-oe/recipes-dbs/mysql/mariadb/run-ptest b/meta-oe/recipe=
-s-dbs/mysql/mariadb/run-ptest
-> new file mode 100644
-> index 0000000000..57201035d4
-> --- /dev/null
-> +++ b/meta-oe/recipes-dbs/mysql/mariadb/run-ptest
-> @@ -0,0 +1,19 @@
-> +#!/bin/sh
-> +
-> +# Becasue test case test-connect, please do following steps before testi=
-ng.
-> +# Without these steps, test case test-connect will fail.
-> +# 1. Disable 'skip-networking' in /etc/my.cnf
-> +#    $ sed -i '/skip-networking/s/^/#/g' /etc/my.cnf
-> +# 2. Restart mysqld.service
-> +#    $ systemctl restart mysqld
-> +# 3. Set password for MySQL user "root"
-> +#    $ mysql -u root
-> +#    MariaDB [(none)]> SET PASSWORD FOR 'root'@localhost =3D PASSWORD("m=
-yReallyStrongPwd");
-> +#    MariaDB [(none)]> FLUSH PRIVILEGES;
-> +
-> +export MASTER_MYPORT=3D3306
-> +export MYSQL_TEST_HOST=3D127.0.0.1
-> +export MYSQL_TEST_USER=3Droot
-> +export MYSQL_TEST_PASSWD=3DmyReallyStrongPwd
-> +
-> +ctest --force-new-ctest-process | sed -u 's/\*\*\*/   /g' | awk '/Test +=
-#/{gsub(/Passed/,"PASS"); gsub(/Failed/,"FAIL"); gsub(/Skipped/,"SKIP"); pr=
-int $6": "$4; fflush();}'
-> diff --git a/meta-oe/recipes-dbs/mysql/mariadb_10.11.5.bb b/meta-oe/recip=
-es-dbs/mysql/mariadb_10.11.5.bb
-> index 87faabfa27..2ef4e89064 100644
-> --- a/meta-oe/recipes-dbs/mysql/mariadb_10.11.5.bb
-> +++ b/meta-oe/recipes-dbs/mysql/mariadb_10.11.5.bb
-> @@ -1,5 +1,36 @@
->  require mariadb.inc
->
-> +inherit ptest
-> +SRC_URI +=3D "${@bb.utils.contains('PTEST_ENABLED', '1', 'file://run-pte=
-st', '', d)}"
-> +DEPENDS +=3D "${@bb.utils.contains('PTEST_ENABLED', '1', 'rsync-native',=
- '', d)}"
-> +RDEPENDS:${PN}-ptest +=3D "cmake"
-> +
-> +do_install_ptest () {
-> +    rsync -a ${B}/unittest ${B}/dbug ${D}${PTEST_PATH} \
-> +          --exclude CMakeFiles \
-> +          --exclude cmake_install.cmake \
-> +          --exclude Makefile \
-> +          --exclude=3D*.a \
-> +          --exclude=3D*.h \
-> +          --exclude=3D*.o \
-> +          --exclude=3D*.so \
-> +          --exclude=3D*.d \
-> +          --exclude=3D*.txt
-> +    install -m 0755 -d ${D}${PTEST_PATH}/storage
-> +    rsync -a ${B}/storage/maria ${B}/storage/perfschema ${B}/storage/inn=
-obase ${D}${PTEST_PATH}/storage \
-> +          --exclude CMakeFiles \
-> +          --exclude cmake_install.cmake \
-> +          --exclude Makefile \
-> +          --exclude=3D*.a \
-> +          --exclude=3D*.h \
-> +          --exclude=3D*.o \
-> +          --exclude=3D*.so \
-> +          --exclude=3D*.d \
-> +          --exclude=3D*.txt
-> +    cp -r ${B}/CTestTestfile.cmake ${D}${PTEST_PATH}
-> +    sed -i -e 's#${WORKDIR}##g' `find ${D}${PTEST_PATH} -name CTestTestf=
-ile.cmake`
-> +}
-> +
->  DEPENDS +=3D "mariadb-native bison-native boost libpcre2 curl ncurses \
->              zlib libaio libedit libevent libxml2 gnutls fmt lzo zstd"
->
-> --
-> 2.25.1
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#104860): https://lists.openembedded.org/g/openembedde=
-d-devel/message/104860
-> Mute This Topic: https://lists.openembedded.org/mt/101351338/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
-aj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
+ostree-ptest rdepends on strace which is not compatible with riscv32. So
+when ptest is enabled, set ostree not compatible with riscv32.
+
+Signed-off-by: Kai Kang <kai.kang@windriver.com>
+---
+ meta-oe/recipes-extended/ostree/ostree_2023.5.bb | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/meta-oe/recipes-extended/ostree/ostree_2023.5.bb b/meta-oe/recipes-extended/ostree/ostree_2023.5.bb
+index 3028c4c92..bc465dd62 100644
+--- a/meta-oe/recipes-extended/ostree/ostree_2023.5.bb
++++ b/meta-oe/recipes-extended/ostree/ostree_2023.5.bb
+@@ -28,6 +28,8 @@ S = "${WORKDIR}/libostree-${PV}"
+ 
+ inherit autotools bash-completion gobject-introspection github-releases gtk-doc manpages pkgconfig ptest-gnome systemd
+ 
++COMPATIBLE_HOST:riscv32 = "${@bb.utils.contains('DISTRO_FEATURES', 'ptest', 'null', 'riscv32', d)}"
++
+ UNKNOWN_CONFIGURE_OPT_IGNORE = "--disable-introspection --enable-introspection"
+ 
+ # Workaround compile failure:
+-- 
+2.34.1
+
 
