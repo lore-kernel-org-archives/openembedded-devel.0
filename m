@@ -2,46 +2,45 @@ Return-Path: <sam.van.den.berge@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A9FEBEE6425
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AB725EE6428
 	for <webhook@archiver.kernel.org>; Fri, 15 Sep 2023 07:07:40 +0000 (UTC)
-Received: from mail-ed1-f52.google.com (mail-ed1-f52.google.com [209.85.208.52])
- by mx.groups.io with SMTP id smtpd.web10.15549.1694761653238715122
+Received: from mail-ej1-f50.google.com (mail-ej1-f50.google.com [209.85.218.50])
+ by mx.groups.io with SMTP id smtpd.web10.15548.1694761652658355982
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 15 Sep 2023 00:07:33 -0700
+ Fri, 15 Sep 2023 00:07:32 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=jdi526hI;
- spf=pass (domain: gmail.com, ip: 209.85.208.52, mailfrom: sam.van.den.berge@gmail.com)
-Received: by mail-ed1-f52.google.com with SMTP id 4fb4d7f45d1cf-523100882f2so2202647a12.2
-        for <openembedded-devel@lists.openembedded.org>; Fri, 15 Sep 2023 00:07:33 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=LekqwNol;
+ spf=pass (domain: gmail.com, ip: 209.85.218.50, mailfrom: sam.van.den.berge@gmail.com)
+Received: by mail-ej1-f50.google.com with SMTP id a640c23a62f3a-99c93638322so392432566b.1
+        for <openembedded-devel@lists.openembedded.org>; Fri, 15 Sep 2023 00:07:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20230601; t=1694761651; x=1695366451; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=+InCxqIFwssUkVSV04wMAbmOKgZFTHwn/RiQo4lS+a0=;
-        b=jdi526hILK+Iysb58WecNPnzTVVDpkO76+2XZF/n011ytW5RulvO1Qrj8Vt7jVT5Uy
-         yFvj4AohdNCXVM9hfmBDswXMsoPNgCFZpc2AH168a80sK3P/wAzTHj2kc1XqZroMT0jD
-         rsSMBrKOK7/s4q1fiPrco+tmul9wcOKVJIvHN9w9QDCCf7IReHcrP87GS/mrV/4nMyAC
-         GYTLJPxKGDgnbMtTEc2alMO4SWAx+A/CeR2/3aXhGQi6Mq7wyAlE4fisCKOTvPsvBwML
-         ZhnQzZnxmI51MveWtW0Ii9VyVHRDeYC4yFoThZSSP2obTq0z3Cqa77Q5uP/ZlROt0WQI
-         fNzw==
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=yR6MTggiao6ujYCssIvIb9B4FcmuJn76OVihpKB58NA=;
+        b=LekqwNolkgwXC4x1qYkagSDmKx58AURaKoCJK+1gMHz7ji9ytfXD9ICucvTxZk7BBv
+         JQi7A/74n0ai1k0P31TyGPP+55EPl4JssTgXAmkzPLxjRosnRwJcPZUWocyMm9XxPPgL
+         l6FXVNMMj4LqehQbSMcnZ77fkr5Vi1aKj5Us6iS0QSBwx93JMcfH/oKcYDnhRbT/lu+V
+         cuY5rCH02IwHYJXxqyM43K+9BvDfE0woPkKfz34JiJYY54k9cEEvv7zxi/ClBAtcUhen
+         Vw4riYFXKX8foXNfJ/+op9n9MRwdv/0JEuxw9sTJqzBMPwO+zo9qVzZUrmlUQIKXFmoM
+         CPTg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20230601; t=1694761651; x=1695366451;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=+InCxqIFwssUkVSV04wMAbmOKgZFTHwn/RiQo4lS+a0=;
-        b=T5ahcRhdRMBuBHDlX0570iGDK7zyEwy4gZdTzUvrjVGE3E4HMpzcZKD2Sy1Y5UOm8v
-         WM6XCx4hwkHWr1svvSvqL1QjGRkubnGovv5WWCjypodpUBcs03HSWILgYYZhdrMIY4Q1
-         dnbI0qbjPwf8hhSkL8tQ9wG1B7MZIhBCRpb3acCBoRnptrH6KtZVuVUyJwT9aXWyzpfI
-         tZ4QwEHMWha1d5tFkFQ3i8c4iqxytk7EALxdDFOa4KH6FC/4ixkHBAAmdAvlqJqFHraB
-         PsZMaCoZ5kLvMFnucBOdJyw7eibTAlVPIDBFp37slB+iKea3kcnNSKBdU9J9TVZxiGVZ
-         y1PQ==
-X-Gm-Message-State: AOJu0Yw2SU5yOP+J5HSgPnw4EA00e6eb1LSHpxCDrsHFFeHj3bzO09x4
-	qcw5V6RMal81lzloZ8e4r6ufHjH3qw==
-X-Google-Smtp-Source: AGHT+IE+YKGQP1yVs2kucP+6wisbVoAh2QUl3gLfwDXsOmesu65EiwjVEfSjFf3qmhjE1QMddBywwQ==
-X-Received: by 2002:a17:906:1da9:b0:9a9:f239:d874 with SMTP id u9-20020a1709061da900b009a9f239d874mr590518ejh.58.1694761651262;
-        Fri, 15 Sep 2023 00:07:31 -0700 (PDT)
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=yR6MTggiao6ujYCssIvIb9B4FcmuJn76OVihpKB58NA=;
+        b=kYpO6C51YNGXO5eEKNpHT3Q8voTgRUz8SkjzoL7qrW/87YYEX6CgoPdxUFiA7AqD00
+         tBzz8aj8op/EI40DA853rnvrfQ0Rwd7xx/ug6hr+vCnJS+YzQrrSjubc8co/m6461r8P
+         DAo5k7poFeSWQlWjitREvxskRQ32BFfgtNFuUGIVWtHhOeVTmHQflGMW1rG9K6ow20F5
+         m6s5Gog6X5RX0Q2WLl962wfO2TNy0CvXYg2bfeharQwEsp8DQxe0PaugX+ZDwLZR4jRY
+         L9lS429rbeh/joZZkkM8fc33GhO4U2nYU/93AeJcB2iMVr8CtZAgyaHRyvUmFQW/wTl+
+         ErMA==
+X-Gm-Message-State: AOJu0YzIyn4+RxB8Nq4UAqeNBzOs9/bf3CIyi+U5MuM+Auh9cqRKhhGp
+	m0+ow9Ikl3YTBiOkFmQFwj17evHc5w==
+X-Google-Smtp-Source: AGHT+IH9JPj+uJq2WNQAGHy5C2CodJksWPCX/dZKTf4Jru41hyweZZUPsZv/j2akvW6A1gvgxndCdg==
+X-Received: by 2002:a17:906:5a5f:b0:9a5:9305:83fb with SMTP id my31-20020a1709065a5f00b009a5930583fbmr1062353ejc.34.1694761650665;
+        Fri, 15 Sep 2023 00:07:30 -0700 (PDT)
 Received: from OP01518NB.WTSOUT.OIP.LOCAL (mail.oip.be. [81.246.50.154])
         by smtp.gmail.com with ESMTPSA id lc3-20020a170906dfe300b00982a352f078sm1969889ejc.124.2023.09.15.00.07.30
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
@@ -49,47 +48,47 @@ Received: from OP01518NB.WTSOUT.OIP.LOCAL (mail.oip.be. [81.246.50.154])
 From: sam.van.den.berge@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Sam Van Den Berge <sam.van.den.berge@gmail.com>
-Subject: [meta-python][PATCH 2/6] python3-flask-marshmallow: add recipe
-Date: Fri, 15 Sep 2023 09:07:23 +0200
-Message-Id: <20230915070727.4026-2-sam.van.den.berge@gmail.com>
+Subject: [meta-python][PATCH 1/6] python3-flask-jwt-extended: add recipe
+Date: Fri, 15 Sep 2023 09:07:22 +0200
+Message-Id: <20230915070727.4026-1-sam.van.den.berge@gmail.com>
 X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20230915070727.4026-1-sam.van.den.berge@gmail.com>
-References: <20230915070727.4026-1-sam.van.den.berge@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Fri, 15 Sep 2023 07:07:40 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104886
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104885
 
 From: Sam Van Den Berge <sam.van.den.berge@gmail.com>
 
 Signed-off-by: Sam Van Den Berge <sam.van.den.berge@gmail.com>
 ---
- .../python/python3-flask-marshmallow_0.15.0.bb     | 14 ++++++++++++++
- 1 file changed, 14 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-flask-marshmallow_0.15.0.bb
+ .../python/python3-flask-jwt-extended_4.5.2.bb   | 16 ++++++++++++++++
+ 1 file changed, 16 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-flask-jwt-extended_4.5.2.bb
 
-diff --git a/meta-python/recipes-devtools/python/python3-flask-marshmallow_0.15.0.bb b/meta-python/recipes-devtools/python/python3-flask-marshmallow_0.15.0.bb
+diff --git a/meta-python/recipes-devtools/python/python3-flask-jwt-extended_4.5.2.bb b/meta-python/recipes-devtools/python/python3-flask-jwt-extended_4.5.2.bb
 new file mode 100644
-index 000000000..25ca4d24c
+index 000000000..f55d77174
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-flask-marshmallow_0.15.0.bb
-@@ -0,0 +1,14 @@
-+SUMMARY = "Flask + marshmallow for beautiful APIs"
-+HOMEPAGE = "https://github.com/marshmallow-code/flask-marshmallow"
++++ b/meta-python/recipes-devtools/python/python3-flask-jwt-extended_4.5.2.bb
+@@ -0,0 +1,16 @@
++SUMMARY = "Extended JWT integration with Flask"
++HOMEPAGE = "https://github.com/vimalloc/flask-jwt-extended"
 +LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=c3ff8567ef1f2a8cf223f30ac5a6f094"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=9166295d7c482b9440bbb2b5c0fa43ac"
 +
 +inherit pypi setuptools3
 +
-+SRC_URI[sha256sum] = "2083ae55bebb5142fff98c6bbd483a2f5dbc531a8bc1be2180ed5f75e7f3fccc"
++PYPI_PACKAGE = "Flask-JWT-Extended"
++
++SRC_URI[sha256sum] = "ba56245ba43b71c8ae936784b867625dce8b9956faeedec2953222e57942fb0b"
 +
 +RDEPENDS:${PN} += "\
++    python3-werkzeug \
 +    python3-flask \
-+    python3-marshmallow \
-+    python3-packaging \
++    python3-pyjwt \
 +    "
 -- 
 2.34.1
