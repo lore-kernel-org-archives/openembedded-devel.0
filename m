@@ -1,113 +1,142 @@
-Return-Path: <sam.van.den.berge@gmail.com>
+Return-Path: <jester@theyoctojester.info>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 857C8EE6432
-	for <webhook@archiver.kernel.org>; Fri, 15 Sep 2023 07:44:01 +0000 (UTC)
-Received: from mail-ej1-f46.google.com (mail-ej1-f46.google.com [209.85.218.46])
- by mx.groups.io with SMTP id smtpd.web11.15802.1694763839214973349
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EA3FEEE6454
+	for <webhook@archiver.kernel.org>; Fri, 15 Sep 2023 10:15:12 +0000 (UTC)
+Received: from mail-lf1-f53.google.com (mail-lf1-f53.google.com [209.85.167.53])
+ by mx.groups.io with SMTP id smtpd.web10.17350.1694772904188365733
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 15 Sep 2023 00:43:59 -0700
+ Fri, 15 Sep 2023 03:15:04 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=guhpTC6H;
- spf=pass (domain: gmail.com, ip: 209.85.218.46, mailfrom: sam.van.den.berge@gmail.com)
-Received: by mail-ej1-f46.google.com with SMTP id a640c23a62f3a-99357737980so239725066b.2
-        for <openembedded-devel@lists.openembedded.org>; Fri, 15 Sep 2023 00:43:58 -0700 (PDT)
+ dkim=pass header.i=@theyoctojester-info.20230601.gappssmtp.com header.s=20230601 header.b=HFvbQUdk;
+ spf=none, err=permanent DNS error (domain: theyoctojester.info, ip: 209.85.167.53, mailfrom: jester@theyoctojester.info)
+Received: by mail-lf1-f53.google.com with SMTP id 2adb3069b0e04-50098cc8967so3163359e87.1
+        for <openembedded-devel@lists.openembedded.org>; Fri, 15 Sep 2023 03:15:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1694763837; x=1695368637; darn=lists.openembedded.org;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:to:from:date:from:to:cc:subject:date:message-id:reply-to;
-        bh=4jvQzz1oPl4EXheu9yQ46m8UL2eiL0qdjE20cs9AS6g=;
-        b=guhpTC6HHo6uQBSWEU+IxxmZGtNiBKcAZhAX2AR3v7qNUGpHJ1mpRb4ozKr9dOWiF6
-         9XM+Utkv4OMrym3dWwDIMt18OoHcqgZnA+JDGA/Y16LpmXT3Om7bLuUvw6tPBObtr3T4
-         6Dt/bYgk+q94i19oRY7tFIUsjWk4set2Qx7BD0AnjZhEjSr3MwEpvvkTlfE1Y7h4C1BZ
-         zRWlFtO/Umx3rd7np9M5HgAP14dVy/kD1CpBvdlRFlFatocA5WoeE1VVxqE7sDq8IeD4
-         X+Qm/UVCroc6jiKO+WYzQIIicqWiF6ZweOFajyEkU1eC5Dm6dUzILNf6f63f2bbNOuhl
-         Kl8w==
+        d=theyoctojester-info.20230601.gappssmtp.com; s=20230601; t=1694772902; x=1695377702; darn=lists.openembedded.org;
+        h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+         :date:message-id:reply-to;
+        bh=4SRbiI8815qE7mYHeyTG3ykD22bj+R2B+nLmN6v1aX0=;
+        b=HFvbQUdkGQpFDqqTRYMt4G28+FPVlrmgYOwVWl1r0MdB0YIOdque06DwYXA9EU6IVL
+         GP6u9k8kitBEbMs+KOcUxIcF3wRm7C4fEzPTz7Z2Dfjkw5B4rZJDxUdxJpmWOw1fJSc/
+         BlMmkYhASByQVgZcOixEZbdTz5c6w0xfOCMwBN6EbkY0J1N8Bh3eFBratiuCygmjiPpm
+         wB4F8ehLxdg4PNQc2VUnZ5dK5qsOaWf97m5sa57JNv7n25CkOu0FlYrIeNVlJbmN+2vV
+         JNaVEtM/YYJ+eUcoEbvHHq89dCfxQoIbuIoL3SPoyxzf590dbpJ8NZ3Duz/gI/X7Rp4B
+         zr8g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1694763837; x=1695368637;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:to:from:date:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=4jvQzz1oPl4EXheu9yQ46m8UL2eiL0qdjE20cs9AS6g=;
-        b=OtWeYKabFSAJhNergxtW+0sayIZBiiP93vdClyASmYE4CrqjIQwi607JavqDJCN8XH
-         NOiofw8uMDwAvN7ZNQeuu9zFCNvSVEU/fdKF8EzjhswASeDdVvo2suSvIssc6/cL2LjJ
-         NYMcZiJzaDa9Gz/I9mHkEnMC8RhDCwhQY8N0g+qkr3MQFj/Qh9ZSOf8R5xZUTr4ZnaYB
-         3gY7JCQWEe8nBgxudslw6xTZjFP9N02a6RWyuY837em9+ndvj4cXK7gV2yEhsHurpgwa
-         5qpkANpUba0P5uSPZiERC0axv36SFcCCYrcjFY2JQLmAd5+k8qFt6zniFtDwAAuFQ2im
-         k7wQ==
-X-Gm-Message-State: AOJu0Yysm7CrYWDzFNr8W3cYHOx/tyOejAODZ4B+zQNcZNqLcc0L/jBk
-	pYuLMguksySgcNwnuCtsLXbgZg+YvQ==
-X-Google-Smtp-Source: AGHT+IEHmeuWQAtZ4X7t//Zy4z3efeZL6WgLs8582FQ3vDQdowY3ymLusGOaURxsUvYe7+PN3rmUFw==
-X-Received: by 2002:a17:907:b1c:b0:9a5:cbb2:3fab with SMTP id h28-20020a1709070b1c00b009a5cbb23fabmr609316ejl.2.1694763837184;
-        Fri, 15 Sep 2023 00:43:57 -0700 (PDT)
-Received: from OP01518NB.oip.local (mail.oip.be. [81.246.50.154])
-        by smtp.gmail.com with ESMTPSA id rl20-20020a1709076c1400b009adc81c0c7esm870189ejc.107.2023.09.15.00.43.56
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 15 Sep 2023 00:43:56 -0700 (PDT)
-Date: Fri, 15 Sep 2023 09:43:55 +0200
-From: Sam Van Den Berge <sam.van.den.berge@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: Re: [oe] [meta-python][PATCH 1/6] python3-flask-jwt-extended: add
- recipe
-Message-ID: <20230915074355.GA4093@OP01518NB.oip.local>
-References: <178500BE84107A6B.14273@lists.openembedded.org>
+        d=1e100.net; s=20230601; t=1694772902; x=1695377702;
+        h=to:subject:message-id:date:from:mime-version:x-gm-message-state
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=4SRbiI8815qE7mYHeyTG3ykD22bj+R2B+nLmN6v1aX0=;
+        b=GffQpzGT8P5PQR8kL1afg42YiOJrl63jDng1tG6ZmxZLuNw9WNAUCKr1177T669+qL
+         B9cD8huEHpTH2WGuWwfmrOk0dI6OwuoAYfyhsNjKp1VL9Xhouoncet/97jfN5BxOX6vX
+         lX6iI4VnRpv9X76IGgduCOw7GXrbisaX3n6aXxyERefjO3FTYg8o8zLQrstqZI4X3l9D
+         shRv+vKJPufVOoFOZ/JOffQGfEWJUrx/Qcb9WfUGFYGoVrfimpJhuVqK1SdNv4I2paHm
+         sIzTo/3SOI7Wk50QON+yA9jvgvfCpfTKAaP4YokCzq728mUxLTW2fVq44API71axbopi
+         7lZg==
+X-Gm-Message-State: AOJu0YwOQ9NQ1VdaY052Dinaz8FEUraedr8qIfX8uC0yVz5dulWWxl8u
+	R5dz/SPCSgcK4os+BDOjjRyCFYgiCpk2DlYTXy6hhPkBAYzj4fN7SeoqkQ==
+X-Google-Smtp-Source: AGHT+IE9T7FVi5WeWN5ILD6xb8ExDB1jb2d5J1cUBpR8pRReo+dlusHn54YUaGz2IR41PoQiaj1bprP+lNnDHn2vDzQ=
+X-Received: by 2002:a19:7119:0:b0:500:cb2b:866f with SMTP id
+ m25-20020a197119000000b00500cb2b866fmr910715lfc.30.1694772901703; Fri, 15 Sep
+ 2023 03:15:01 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <178500BE84107A6B.14273@lists.openembedded.org>
+From: Josef Holzmayr <jester@theyoctojester.info>
+Date: Fri, 15 Sep 2023 12:14:35 +0200
+Message-ID: <CAEt6NwrfbV1M9DJt+nXu4hu3xgiKGgnnNGexzht2q-9z4TBQ_A@mail.gmail.com>
+Subject: OEDvM 2023.12
+To: openembedded-devel@lists.openembedded.org, 
+	openembedded-core <openembedded-core@lists.openembedded.org>, 
+	openembedded-members@lists.openembedded.org, 
+	Yocto-mailing-list <yocto@lists.yoctoproject.org>
+Content-Type: multipart/alternative; boundary="000000000000c80993060563107c"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 15 Sep 2023 07:44:01 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104891
+ <openembedded-devel@lists.openembedded.org>; Fri, 15 Sep 2023 10:15:12 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104892
 
-On Fri, Sep 15, 2023 at 09:07:22AM +0200, Sam Van Den Berge via lists.openembedded.org wrote:
-> From: Sam Van Den Berge <sam.van.den.berge@gmail.com>
-> 
-> Signed-off-by: Sam Van Den Berge <sam.van.den.berge@gmail.com>
-> ---
->  .../python/python3-flask-jwt-extended_4.5.2.bb   | 16 ++++++++++++++++
->  1 file changed, 16 insertions(+)
->  create mode 100644 meta-python/recipes-devtools/python/python3-flask-jwt-extended_4.5.2.bb
-> 
-> diff --git a/meta-python/recipes-devtools/python/python3-flask-jwt-extended_4.5.2.bb b/meta-python/recipes-devtools/python/python3-flask-jwt-extended_4.5.2.bb
-> new file mode 100644
-> index 000000000..f55d77174
-> --- /dev/null
-> +++ b/meta-python/recipes-devtools/python/python3-flask-jwt-extended_4.5.2.bb
-> @@ -0,0 +1,16 @@
-> +SUMMARY = "Extended JWT integration with Flask"
-> +HOMEPAGE = "https://github.com/vimalloc/flask-jwt-extended"
-> +LICENSE = "MIT"
-> +LIC_FILES_CHKSUM = "file://LICENSE;md5=9166295d7c482b9440bbb2b5c0fa43ac"
-> +
-> +inherit pypi setuptools3
-> +
-> +PYPI_PACKAGE = "Flask-JWT-Extended"
-> +
-> +SRC_URI[sha256sum] = "ba56245ba43b71c8ae936784b867625dce8b9956faeedec2953222e57942fb0b"
-> +
-> +RDEPENDS:${PN} += "\
-> +    python3-werkzeug \
-> +    python3-flask \
-> +    python3-pyjwt \
-> +    "
-> -- 
-> 2.34.1
-> 
+--000000000000c80993060563107c
+Content-Type: text/plain; charset="UTF-8"
 
-Sorry, please ignore this patch since I already sent this one yesterday.
+Howdy!
 
-> 
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#104885): https://lists.openembedded.org/g/openembedded-devel/message/104885
-> Mute This Topic: https://lists.openembedded.org/mt/101375100/5865176
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [sam.van.den.berge@gmail.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
-> 
+We are happy to announce this years OEDvM taking place on Friday December
+1st, 2023.
 
+Bring your topics and challenges for discussion, or just join for the
+networking.
+
+As usual, the main organization will happen through the OpenEmbedded Wiki,
+with the event page being located at
+https://www.openembedded.org/wiki/OEDvM_2023.12
+<https://www.openembedded.org/wiki/OEDvM_2023.12>
+
+The meeting is open to everybody, and explicitly inviting non-members to
+join the conversation, and possibly the organization.
+
+If you have any questions, feel free to reach out!
+
+Greetz,
+Josef, on behalf of the OpenEmbedded board
+
+--000000000000c80993060563107c
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr">Howdy!<div><br></div><div><span style=3D"color:rgba(0,0,0,=
+0.9);font-family:-apple-system,system-ui,&quot;system-ui&quot;,&quot;Segoe =
+UI&quot;,Roboto,&quot;Helvetica Neue&quot;,&quot;Fira Sans&quot;,Ubuntu,Oxy=
+gen,&quot;Oxygen Sans&quot;,Cantarell,&quot;Droid Sans&quot;,&quot;Apple Co=
+lor Emoji&quot;,&quot;Segoe UI Emoji&quot;,&quot;Segoe UI Emoji&quot;,&quot=
+;Segoe UI Symbol&quot;,&quot;Lucida Grande&quot;,Helvetica,Arial,sans-serif=
+;font-size:14px">We are happy to announce this years OEDvM taking place on =
+Friday December 1st, 2023.</span><br style=3D"box-sizing:inherit;color:rgba=
+(0,0,0,0.9);font-family:-apple-system,system-ui,&quot;system-ui&quot;,&quot=
+;Segoe UI&quot;,Roboto,&quot;Helvetica Neue&quot;,&quot;Fira Sans&quot;,Ubu=
+ntu,Oxygen,&quot;Oxygen Sans&quot;,Cantarell,&quot;Droid Sans&quot;,&quot;A=
+pple Color Emoji&quot;,&quot;Segoe UI Emoji&quot;,&quot;Segoe UI Emoji&quot=
+;,&quot;Segoe UI Symbol&quot;,&quot;Lucida Grande&quot;,Helvetica,Arial,san=
+s-serif;font-size:14px;line-height:inherit"><br style=3D"box-sizing:inherit=
+;color:rgba(0,0,0,0.9);font-family:-apple-system,system-ui,&quot;system-ui&=
+quot;,&quot;Segoe UI&quot;,Roboto,&quot;Helvetica Neue&quot;,&quot;Fira San=
+s&quot;,Ubuntu,Oxygen,&quot;Oxygen Sans&quot;,Cantarell,&quot;Droid Sans&qu=
+ot;,&quot;Apple Color Emoji&quot;,&quot;Segoe UI Emoji&quot;,&quot;Segoe UI=
+ Emoji&quot;,&quot;Segoe UI Symbol&quot;,&quot;Lucida Grande&quot;,Helvetic=
+a,Arial,sans-serif;font-size:14px;line-height:inherit"><span style=3D"color=
+:rgba(0,0,0,0.9);font-family:-apple-system,system-ui,&quot;system-ui&quot;,=
+&quot;Segoe UI&quot;,Roboto,&quot;Helvetica Neue&quot;,&quot;Fira Sans&quot=
+;,Ubuntu,Oxygen,&quot;Oxygen Sans&quot;,Cantarell,&quot;Droid Sans&quot;,&q=
+uot;Apple Color Emoji&quot;,&quot;Segoe UI Emoji&quot;,&quot;Segoe UI Emoji=
+&quot;,&quot;Segoe UI Symbol&quot;,&quot;Lucida Grande&quot;,Helvetica,Aria=
+l,sans-serif;font-size:14px">Bring your topics and challenges for discussio=
+n, or just join for the networking.</span><br></div><div><span style=3D"col=
+or:rgba(0,0,0,0.9);font-family:-apple-system,system-ui,&quot;system-ui&quot=
+;,&quot;Segoe UI&quot;,Roboto,&quot;Helvetica Neue&quot;,&quot;Fira Sans&qu=
+ot;,Ubuntu,Oxygen,&quot;Oxygen Sans&quot;,Cantarell,&quot;Droid Sans&quot;,=
+&quot;Apple Color Emoji&quot;,&quot;Segoe UI Emoji&quot;,&quot;Segoe UI Emo=
+ji&quot;,&quot;Segoe UI Symbol&quot;,&quot;Lucida Grande&quot;,Helvetica,Ar=
+ial,sans-serif;font-size:14px"><br></span></div><div><span style=3D"color:r=
+gba(0,0,0,0.9);font-family:-apple-system,system-ui,&quot;system-ui&quot;,&q=
+uot;Segoe UI&quot;,Roboto,&quot;Helvetica Neue&quot;,&quot;Fira Sans&quot;,=
+Ubuntu,Oxygen,&quot;Oxygen Sans&quot;,Cantarell,&quot;Droid Sans&quot;,&quo=
+t;Apple Color Emoji&quot;,&quot;Segoe UI Emoji&quot;,&quot;Segoe UI Emoji&q=
+uot;,&quot;Segoe UI Symbol&quot;,&quot;Lucida Grande&quot;,Helvetica,Arial,=
+sans-serif;font-size:14px">As usual, the main organization will happen thro=
+ugh the OpenEmbedded Wiki, with the event page being located at=C2=A0</span=
+><a href=3D"https://www.openembedded.org/wiki/OEDvM_2023.12">https://www.op=
+enembedded.org/wiki/OEDvM_2023.12<span style=3D"color:rgba(0,0,0,0.9);font-=
+family:-apple-system,system-ui,&quot;system-ui&quot;,&quot;Segoe UI&quot;,R=
+oboto,&quot;Helvetica Neue&quot;,&quot;Fira Sans&quot;,Ubuntu,Oxygen,&quot;=
+Oxygen Sans&quot;,Cantarell,&quot;Droid Sans&quot;,&quot;Apple Color Emoji&=
+quot;,&quot;Segoe UI Emoji&quot;,&quot;Segoe UI Emoji&quot;,&quot;Segoe UI =
+Symbol&quot;,&quot;Lucida Grande&quot;,Helvetica,Arial,sans-serif;font-size=
+:14px">=C2=A0</span></a></div><div><br></div><div>The meeting is open to ev=
+erybody, and explicitly inviting non-members to join the conversation, and =
+possibly the organization.</div><div><br></div><div>If you have any questio=
+ns, feel free to reach out!</div><div><br></div><div>Greetz,</div><div>Jose=
+f, on behalf of the OpenEmbedded board</div></div>
+
+--000000000000c80993060563107c--
 
