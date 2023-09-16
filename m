@@ -2,135 +2,58 @@ Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 62291C2BA16
-	for <webhook@archiver.kernel.org>; Sat, 16 Sep 2023 17:49:44 +0000 (UTC)
-Received: from mailout03.t-online.de (mailout03.t-online.de [194.25.134.81])
- by mx.groups.io with SMTP id smtpd.web10.16227.1694886577070101552
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 56EF9C2BA18
+	for <webhook@archiver.kernel.org>; Sat, 16 Sep 2023 17:54:24 +0000 (UTC)
+Received: from mailout02.t-online.de (mailout02.t-online.de [194.25.134.17])
+ by mx.groups.io with SMTP id smtpd.web10.16320.1694886858661057381
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 16 Sep 2023 10:49:37 -0700
+ Sat, 16 Sep 2023 10:54:19 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=none, err=SPF record not found (domain: t-online.de, ip: 194.25.134.81, mailfrom: f_l_k@t-online.de)
-Received: from fwd79.aul.t-online.de (fwd79.aul.t-online.de [10.223.144.105])
-	by mailout03.t-online.de (Postfix) with SMTP id 665592C06
-	for <openembedded-devel@lists.openembedded.org>; Sat, 16 Sep 2023 19:49:33 +0200 (CEST)
-Received: from intel-corei7-64.fritz.box ([79.219.224.246]) by fwd79.t-online.de
+ dkim=none (message not signed); spf=none, err=SPF record not found (domain: t-online.de, ip: 194.25.134.17, mailfrom: f_l_k@t-online.de)
+Received: from fwd83.aul.t-online.de (fwd83.aul.t-online.de [10.223.144.109])
+	by mailout02.t-online.de (Postfix) with SMTP id A94461967E;
+	Sat, 16 Sep 2023 19:54:16 +0200 (CEST)
+Received: from [192.168.178.62] ([79.219.224.246]) by fwd83.t-online.de
 	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1qhZQC-25rCxV0; Sat, 16 Sep 2023 19:49:32 +0200
+	esmtp id 1qhZUk-1LzL9s0; Sat, 16 Sep 2023 19:54:14 +0200
+Date: Sat, 16 Sep 2023 19:54:08 +0200
 From: Markus Volk <f_l_k@t-online.de>
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH] libxmlb: fix a reproducibility and runtime issue with ptest
-Date: Sat, 16 Sep 2023 19:49:15 +0200
-Message-ID: <20230916174915.306571-1-f_l_k@t-online.de>
-X-Mailer: git-send-email 2.41.0
+Subject: Re: [oe] [meta-oe][PATCH 1/2] libxmlb: update 0.3.10 -> 0.3.14
+To: Khem Raj <raj.khem@gmail.com>
+Cc: Markus Volk <f_l_k@t-online.de>, openembedded-devel@lists.openembedded.org
+Message-Id: <82B31S.YU1GR8WCHOBJ2@t-online.de>
+In-Reply-To: <CAMKF1sooHk8k4nbdfsdZ-V=6mhyf_sZpNEPaq0U5Yo9HLSmoMQ@mail.gmail.com>
+References: <20230908114242.1417439-1-f_l_k@t-online.de>
+	<CAMKF1srwFz8JWPDE+0Xn4UzveanO5-FhyL5OUTsGeJOrVCqe0g@mail.gmail.com>
+	<CAMKF1sooHk8k4nbdfsdZ-V=6mhyf_sZpNEPaq0U5Yo9HLSmoMQ@mail.gmail.com>
+X-Mailer: geary/44.1
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1694886572-EDFF92E6-83620D50/0/0 CLEAN NORMAL
-X-TOI-MSGID: a02e6c16-f9c9-41b8-bc37-70fd28c1a974
-Content-Transfer-Encoding: quoted-printable
+Content-Type: multipart/alternative; boundary="=-WygTGdbh9CQSj2d7yVkR"
+X-TOI-EXPURGATEID: 150726::1694886854-0BFFCC62-D992203F/0/0 CLEAN NORMAL
+X-TOI-MSGID: a4333f32-422a-465e-b939-a84f7e1941fe
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 16 Sep 2023 17:49:44 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104904
+ <openembedded-devel@lists.openembedded.org>; Sat, 16 Sep 2023 17:54:24 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104905
 
-- add missing HOMEPAGE entry
+--=-WygTGdbh9CQSj2d7yVkR
+Content-Type: text/plain; charset=us-ascii; format=flowed
 
-Signed-off-by: Markus Volk <f_l_k@t-online.de>
----
- ...xb-selftest.c-hardcode-G_TEST_SRCDIR.patch | 35 +++++++++++++++++++
- .../recipes-gnome/libxmlb/libxmlb_0.3.14.bb   | 15 ++++----
- 2 files changed, 43 insertions(+), 7 deletions(-)
- create mode 100644 meta-oe/recipes-gnome/libxmlb/libxmlb/0001-xb-selftes=
-t.c-hardcode-G_TEST_SRCDIR.patch
+On Sat, Sep 16 2023 at 09:00:29 AM -07:00:00, Khem Raj 
+<raj.khem@gmail.com> wrote:
+> We also see build QA hinting at this subsequent runtime error during 
+> build
 
-diff --git a/meta-oe/recipes-gnome/libxmlb/libxmlb/0001-xb-selftest.c-har=
-dcode-G_TEST_SRCDIR.patch b/meta-oe/recipes-gnome/libxmlb/libxmlb/0001-xb=
--selftest.c-hardcode-G_TEST_SRCDIR.patch
-new file mode 100644
-index 000000000..da8ce68df
---- /dev/null
-+++ b/meta-oe/recipes-gnome/libxmlb/libxmlb/0001-xb-selftest.c-hardcode-G=
-_TEST_SRCDIR.patch
-@@ -0,0 +1,35 @@
-+From dc208bafc57c1ccaa0ca260f99c8b4c976271ebc Mon Sep 17 00:00:00 2001
-+From: Markus Volk <f_l_k@t-online.de>
-+Date: Sat, 16 Sep 2023 14:02:57 +0200
-+Subject: [PATCH] xb-self-test.c: hardcode G_TEST_SRCDIR
-+
-+This avoids:
-+ libxmlb-0.3.14-r0 do_package_qa: QA Issue: File
-+ /usr/libexec/installed-tests/libxmlb/xb-self-test in package libxmlb-pt=
-est
-+ contains reference to TMPDIR [buildpaths]
-+
-+and also fixes the runtime for the ptest.
-+
-+Upstream-Status: Inappropriate [oe-specific]
-+
-+Signed-off-by: Markus Volk <f_l_k@t-online.de>
-+---
-+ src/xb-self-test.c | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/src/xb-self-test.c b/src/xb-self-test.c
-+index 47d9728..8b3dd0e 100644
-+--- a/src/xb-self-test.c
-++++ b/src/xb-self-test.c
-+@@ -2870,7 +2870,7 @@ xb_speed_func(void)
-+ int
-+ main(int argc, char **argv)
-+ {
-+-	g_setenv("G_TEST_SRCDIR", SRCDIR, FALSE);
-++	g_setenv("G_TEST_SRCDIR", "/usr/libexec/installed-tests/libxmlb", FALS=
-E);
-+=20
-+ 	g_test_init(&argc, &argv, NULL);
-+=20
-+--=20
-+2.41.0
-+
-diff --git a/meta-oe/recipes-gnome/libxmlb/libxmlb_0.3.14.bb b/meta-oe/re=
-cipes-gnome/libxmlb/libxmlb_0.3.14.bb
-index d46811124..1d3b0de29 100644
---- a/meta-oe/recipes-gnome/libxmlb/libxmlb_0.3.14.bb
-+++ b/meta-oe/recipes-gnome/libxmlb/libxmlb_0.3.14.bb
-@@ -1,10 +1,13 @@
- SUMMARY =3D "A library to help create and query binary XML blobs"
-+HOMEPAGE =3D "https://github.com/hughsie/libxmlb"
- LICENSE =3D "LGPL-2.1-only"
- LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D1803fa9c2c3ce8cb06b4861d75310=
-742"
-=20
--SRC_URI =3D "git://github.com/hughsie/libxmlb.git;branch=3Dmain;protocol=
-=3Dhttps \
--           file://run-ptest \
--           "
-+SRC_URI =3D " \
-+	git://github.com/hughsie/libxmlb.git;branch=3Dmain;protocol=3Dhttps \
-+	file://0001-xb-selftest.c-hardcode-G_TEST_SRCDIR.patch \
-+	file://run-ptest \
-+"
- SRCREV =3D "aa577b276adc66564f5777f9a522ca3bf0bfa65e"
- S =3D "${WORKDIR}/git"
-=20
-@@ -12,13 +15,11 @@ DEPENDS =3D "glib-2.0 xz zstd"
-=20
- inherit gobject-introspection gtk-doc meson ptest-gnome lib_package pkgc=
-onfig
-=20
--PACKAGECONFIG ??=3D "\
--    ${@bb.utils.contains('PTEST_ENABLED', '1', 'tests', '', d)} \
--"
-+PACKAGECONFIG ??=3D "${@bb.utils.contains('PTEST_ENABLED', '1', 'tests',=
- '', d)}"
- PACKAGECONFIG[tests] =3D "-Dtests=3Dtrue,-Dtests=3Dfalse"
-=20
- GTKDOC_MESON_OPTION =3D "gtkdoc"
-=20
--FILES:${PN}-bin +=3D "${libexecdir}/*"
-+FILES:${PN} +=3D "${datadir}"
-=20
- BBCLASSEXTEND =3D "native"
---=20
-2.41.0
+I've added a patch that should address both issues. With this I was 
+able to sucessfully run the ptest
+
+
+--=-WygTGdbh9CQSj2d7yVkR
+Content-Type: text/html; charset=us-ascii
+
+<div id="geary-body" dir="auto">On Sat, Sep 16 2023 at 09:00:29 AM -07:00:00, Khem Raj &lt;raj.khem@gmail.com&gt; wrote:<br><blockquote type="cite"><div class="plaintext" style="white-space: break-spaces;">We also see build QA hinting at this subsequent runtime error during build
+</div></blockquote><div><br></div><div>I've added a patch that should addr<span style="white-space: break-spaces;">e</span>ss both issues. With this I was able to sucessfully run the ptest</div></div>
+--=-WygTGdbh9CQSj2d7yVkR--
 
 
