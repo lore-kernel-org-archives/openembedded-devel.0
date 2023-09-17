@@ -1,179 +1,209 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <martin.jansa@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 418BBCD13CF
-	for <webhook@archiver.kernel.org>; Sun, 17 Sep 2023 06:39:43 +0000 (UTC)
-Received: from mail-pl1-f172.google.com (mail-pl1-f172.google.com [209.85.214.172])
- by mx.groups.io with SMTP id smtpd.web10.25999.1694932777176043445
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 87950CD37B3
+	for <webhook@archiver.kernel.org>; Sun, 17 Sep 2023 10:54:48 +0000 (UTC)
+Received: from mail-ed1-f45.google.com (mail-ed1-f45.google.com [209.85.208.45])
+ by mx.groups.io with SMTP id smtpd.web10.27711.1694948084696005411
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 16 Sep 2023 23:39:37 -0700
+ Sun, 17 Sep 2023 03:54:45 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=LsBWW6iX;
- spf=pass (domain: gmail.com, ip: 209.85.214.172, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f172.google.com with SMTP id d9443c01a7336-1bf1935f6c2so24860685ad.1
-        for <openembedded-devel@lists.openembedded.org>; Sat, 16 Sep 2023 23:39:37 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=WyfAFU9P;
+ spf=pass (domain: gmail.com, ip: 209.85.208.45, mailfrom: martin.jansa@gmail.com)
+Received: by mail-ed1-f45.google.com with SMTP id 4fb4d7f45d1cf-530c9980556so1122979a12.2
+        for <openembedded-devel@lists.openembedded.org>; Sun, 17 Sep 2023 03:54:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1694932776; x=1695537576; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=YJleGcXIvz5bew9gXrIVTisEgrvflR6RPhMXl6Ukdh4=;
-        b=LsBWW6iXA7bu5tSGG9rjVAYSWHeKnBESrvw9/g0mvfCMzpnZl6qk7nrAurURHwjdaZ
-         joWD4L+6DnpHe5uEe7hnZRKusrEaELcNIfxa7gkK90+LgoYQvq1+ZHa7sdRmskya4RB5
-         mcXGKGVtXMDue6ji11ztjZD16z81+CoK5Lx5JjI8DlQDWM/Os2WFtztm/NcZ2/4xMMgj
-         m5dHULgKjA/1zgPJbNooq1VCqIaQmyUbZyliquJKzWsugsR4RgqpsjXpCD42Lh1aoCrN
-         9rsrzNjAnOYmp5lHZXARMGaDwBgYdxZ6KDbtXBIRts9u0DkjDPU2ZXH6Mll036B1n2f7
-         UXlQ==
+        d=gmail.com; s=20230601; t=1694948083; x=1695552883; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=TYDg2C5fKbyfeb93y9rpi7W0hZG+jFC2DPzPy4a5nkM=;
+        b=WyfAFU9PZy0+CFXjga+33Me9963A6wk9me5bsu+Twrnae49zlz4Ir5p2GjVYRGBi3M
+         cYaJfGcf4gYvctqJ9pT1gWcpzHGMsCxeU5wjGgd5Tg+I13709TVuY/XVo5TKdaFx4YxI
+         4ggQPyNk/zLYr5YKZBlLjsqKh08CcncQ3sSzIdIBOc6IWLHt/y8+evEEpE/sExj5PIUM
+         uP+hOqPaUE/SP6W+agwR8KaoBlBENGLS2p6CUCsXlP69j2stbZgHTlvHzPzbm9kKtzMs
+         WwR8PxCPj75Xsg3ZmgrxrABED5/qLRoZa/u0eNIy0M7EaZLh5t5muDRJdyT+DRdgZK3s
+         6ZNg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1694932776; x=1695537576;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=YJleGcXIvz5bew9gXrIVTisEgrvflR6RPhMXl6Ukdh4=;
-        b=KBOal7f0bQFR1i2lewMD0sSFOX4053UfO41ZN4DYBit2iRJpTfGTFnG0ejUxeFhdif
-         orNKy/m4LDtdtzUN53l0pBeovVIaCn+k8Qoq/nevcrHN985FOhoi2K1tLfcVRwU/f7IV
-         9KJdJFQnHatjCkb9Mlis4lACHj7mBdBNYwWK5a9YYJ5/mch7G+/+wUy9MJXuBtqJD7I3
-         yxzw/kHDhl18szevLu99/f7huTSAurX+/Ot0FMEs+YRWrcdnc0ZBrNzVRl4yYA6R3+AC
-         sKW+yiArzRkxGD9jypwyr9GM/ooOd1pl3rjI97QALSuhn3ZerkJ/MYa1FIi70w5EGB4W
-         +ODA==
-X-Gm-Message-State: AOJu0YzzdA763JJcP3YXyIOCxc4Kwy7h6QE+QJRNmSkTl6FizvEy19Af
-	7FGi8dh+mD+/crEbHKk86x5Lq2emfz4=
-X-Google-Smtp-Source: AGHT+IFseFSWMiGQdU41KRKHoMrLFu5JgfozA/+ft1twPclzw/usIcynUyN5lsu1paj3l3CrpjNJTw==
-X-Received: by 2002:a17:903:228f:b0:1b6:a37a:65b7 with SMTP id b15-20020a170903228f00b001b6a37a65b7mr12667707plh.23.1694932776060;
-        Sat, 16 Sep 2023 23:39:36 -0700 (PDT)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9100:2cb0::4880])
-        by smtp.gmail.com with ESMTPSA id q20-20020a170902e31400b001bdc664ecd3sm2682384plc.307.2023.09.16.23.39.35
+        d=1e100.net; s=20230601; t=1694948083; x=1695552883;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=TYDg2C5fKbyfeb93y9rpi7W0hZG+jFC2DPzPy4a5nkM=;
+        b=rbeRqTZuq8u1up3Kd4Lzyg4QxDi3C09dtHfZBxDkwVCqsSV/q5mnvrR5XTf7C21Ltd
+         UN823t6eYP1kDClQ1AGJbDiDESf0mkAjxkKOvxp3hnwo/vrOF4hlsKT78DOav0It2Ttg
+         3d1CWLhcLBi5LUtcI2ed1WyPqRdgoCjNFGh7RgGS0y5fvNGZ4FYB8p17E2h9f77tcmvl
+         e5TnjMxIyNTZxOqLw/6BAk8jE+7g/VsGWAFdsQW7SXLdaXSzvWul4IcJWgora4Li7CCM
+         knEZNXkggvPAc4/8hmqui1oWQelVm2zy1RYTZ8ABg0/tEhL8nhVr9HCCM90rAWw1c9Wz
+         xcaA==
+X-Gm-Message-State: AOJu0YxA/hJUpXnqk+Ed8MDAqMxyua9UksiZ3C3Azs9nDg2IgGoCEnaf
+	pFDej2IF3xIfm9zF/eP9wCXVpzuOGNE=
+X-Google-Smtp-Source: AGHT+IEPxzAUUvO2aCaHek8+ltrG7A5m0PAf5F64gU+SxFpFyoFtyPHNBIx9gmiAmjfqqPGolNxxhw==
+X-Received: by 2002:a50:fe8e:0:b0:522:c1b1:8cb0 with SMTP id d14-20020a50fe8e000000b00522c1b18cb0mr4834647edt.33.1694948082881;
+        Sun, 17 Sep 2023 03:54:42 -0700 (PDT)
+Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
+        by smtp.gmail.com with ESMTPSA id n13-20020aa7db4d000000b005232ea6a330sm4579703edt.2.2023.09.17.03.54.42
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 16 Sep 2023 23:39:35 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
+        Sun, 17 Sep 2023 03:54:42 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 2/2] poco: Fix ptest runtime errors
-Date: Sat, 16 Sep 2023 23:39:30 -0700
-Message-ID: <20230917063931.2207782-2-raj.khem@gmail.com>
+Cc: Martin Jansa <martin.jansa@gmail.com>
+Subject: [meta-multimedia][PATCH] webrtc-audio-processing: Fix build with -Werror=return-type
+Date: Sun, 17 Sep 2023 12:54:34 +0200
+Message-ID: <20230917105434.677860-1-martin.jansa@gmail.com>
 X-Mailer: git-send-email 2.42.0
-In-Reply-To: <20230917063931.2207782-1-raj.khem@gmail.com>
-References: <20230917063931.2207782-1-raj.khem@gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 17 Sep 2023 06:39:43 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104908
+ <openembedded-devel@lists.openembedded.org>; Sun, 17 Sep 2023 10:54:48 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104909
 
-Skip failing tests for now
+* apply the work around from:
+  https://gitlab.freedesktop.org/pulseaudio/webrtc-audio-processing/-/merge_requests/28
+  which is still needed for 1.3 version:
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+  webrtc-audio-processing-1.3/webrtc/modules/audio_processing/agc2/adaptive_mode_level_estimator.cc: In function 'float webrtc::{anonymous}::GetLevel(const webrtc::VadLevelAnalyzer::Result&, LevelEstimatorType)':
+  webrtc-audio-processing-1.3/webrtc/modules/audio_processing/agc2/adaptive_mode_level_estimator.cc:45:1: error: control reaches end of non-void function [-Werror=return-type]
+     45 | }
+        | ^
+  webrtc-audio-processing-1.3/webrtc/modules/audio_processing/audio_processing_impl.cc: In function 'webrtc::GainControl::Mode webrtc::{anonymous}::Agc1ConfigModeToInterfaceMode(webrtc::AudioProcessing::Config::GainController1::Mode)':
+  webrtc-audio-processing-1.3/webrtc/modules/audio_processing/audio_processing_impl.cc:117:1: error: control reaches end of non-void function [-Werror=return-type]
+    117 | }
+        | ^
+  webrtc-audio-processing-1.3/webrtc/modules/audio_processing/audio_processing_impl.cc: In lambda function:
+  webrtc-audio-processing-1.3/webrtc/modules/audio_processing/audio_processing_impl.cc:1853:13: error: control reaches end of non-void function  -Werror=return-type]
+   1853 |             default:
+        |             ^~~~~~~
+
+* this can now be dropped from meta-webosose, where it was since:
+  https://github.com/webosose/meta-webosose/commit/c2a24372e9f792bc900939a6642e64c459073b36#diff-c367f86896c48beb338dac912d3bf03e07d92c8345fa08dc3dcd93093a949c16
+
+Signed-off-by: Martin Jansa <martin.jansa@gmail.com>
 ---
- ...nx-Ignore-PKCS12-and-testLaunch-test.patch | 63 +++++++++++++++++++
- meta-oe/recipes-support/poco/poco/run-ptest   |  2 +
- meta-oe/recipes-support/poco/poco_1.12.4.bb   |  3 +
- 3 files changed, 68 insertions(+)
- create mode 100644 meta-oe/recipes-support/poco/poco/0001-cppignore.lnx-Ignore-PKCS12-and-testLaunch-test.patch
+ .../0001-Fix-return-type-errors.patch         | 95 +++++++++++++++++++
+ .../webrtc-audio-processing-1_1.3.bb          |  5 +-
+ 2 files changed, 98 insertions(+), 2 deletions(-)
+ create mode 100644 meta-multimedia/recipes-multimedia/webrtc-audio-processing/webrtc-audio-processing-1/0001-Fix-return-type-errors.patch
 
-diff --git a/meta-oe/recipes-support/poco/poco/0001-cppignore.lnx-Ignore-PKCS12-and-testLaunch-test.patch b/meta-oe/recipes-support/poco/poco/0001-cppignore.lnx-Ignore-PKCS12-and-testLaunch-test.patch
+diff --git a/meta-multimedia/recipes-multimedia/webrtc-audio-processing/webrtc-audio-processing-1/0001-Fix-return-type-errors.patch b/meta-multimedia/recipes-multimedia/webrtc-audio-processing/webrtc-audio-processing-1/0001-Fix-return-type-errors.patch
 new file mode 100644
-index 0000000000..25934d61b3
+index 0000000000..37b4db6894
 --- /dev/null
-+++ b/meta-oe/recipes-support/poco/poco/0001-cppignore.lnx-Ignore-PKCS12-and-testLaunch-test.patch
-@@ -0,0 +1,63 @@
-+From ac0f06e20bdfaca74c8ab786be8ff8fc96b5a689 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Sat, 16 Sep 2023 19:52:56 -0700
-+Subject: [PATCH] cppignore.lnx: Ignore PKCS12 and testLaunch test
-+MIME-Version: 1.0
-+Content-Type: text/plain; charset=UTF-8
-+Content-Transfer-Encoding: 8bit
++++ b/meta-multimedia/recipes-multimedia/webrtc-audio-processing/webrtc-audio-processing-1/0001-Fix-return-type-errors.patch
+@@ -0,0 +1,95 @@
++From b6ad4b7086a6487b36d626248322f4c9d5bf420a Mon Sep 17 00:00:00 2001
++From: "thomas.georgec" <thomas.georgec@lge.com>
++Date: Sun, 12 Mar 2023 14:28:50 +0530
++Subject: [PATCH] Fix return-type errors
 +
-+These tests fail on Linux
++Fix "control reaches end of non-void function" in code when -Werror=return-type
++is used.
 +
-+There were 4 failures:
-+ 1: N7CppUnit10TestCallerI11ProcessTestEE.testLaunch
-+    "rc == 3"
-+    in "/usr/src/debug/poco/1.12.4-r0/Foundation/testsuite/src/ProcessTest.cpp", line 79
-+ 2: N7CppUnit10TestCallerI11ProcessTestEE.testLaunchRedirectIn
-+    "rc == 100"
-+    in "/usr/src/debug/poco/1.12.4-r0/Foundation/testsuite/src/ProcessTest.cpp", line 106
-+ 3: N7CppUnit10TestCallerI11ProcessTestEE.testLaunchRedirectOut
-+    "s == "Hello, world!""
-+    in "/usr/src/debug/poco/1.12.4-r0/Foundation/testsuite/src/ProcessTest.cpp", line 134
-+ 4: N7CppUnit10TestCallerI11ProcessTestEE.testLaunchEnv
-+    "s == "test""
-+    in "/usr/src/debug/poco/1.12.4-r0/Foundation/testsuite/src/ProcessTest.cpp", line 166
++  webrtc-audio-processing-1.3/webrtc/modules/audio_processing/agc2/adaptive_mode_level_estimator.cc: In function 'float webrtc::{anonymous}::GetLevel(const webrtc::VadLevelAnalyzer::Result&, LevelEstimatorType)':
++  webrtc-audio-processing-1.3/webrtc/modules/audio_processing/agc2/adaptive_mode_level_estimator.cc:45:1: error: control reaches end of non-void function [-Werror=return-type]
++     45 | }
++        | ^
++  webrtc-audio-processing-1.3/webrtc/modules/audio_processing/audio_processing_impl.cc: In function 'webrtc::GainControl::Mode webrtc::{anonymous}::Agc1ConfigModeToInterfaceMode(webrtc::AudioProcessing::Config::GainController1::Mode)':
++  webrtc-audio-processing-1.3/webrtc/modules/audio_processing/audio_processing_impl.cc:117:1: error: control reaches end of non-void function [-Werror=return-type]
++    117 | }
++        | ^
++  webrtc-audio-processing-1.3/webrtc/modules/audio_processing/audio_processing_impl.cc: In lambda function:
++  webrtc-audio-processing-1.3/webrtc/modules/audio_processing/audio_processing_impl.cc:1853:13: error: control reaches end of non-void function  -Werror=return-type]
++   1853 |             default:
++        |             ^~~~~~~
 +
-+ There were 4 errors:-
-+   1: N7CppUnit10TestCallerI7EVPTestEE.testRSAEVPKeyFromPKCS12
-+  │ │ "N4Poco17NotFoundExceptionE:
-+  Not found: POCO_BASE"
-+  │ │ in "<unknown>", line -1
-+   2: N7CppUnit10TestCallerI19PKCS12ContainerTestEE.testFullPKCS12
-+  │ │ "N4Poco17NotFoundExceptionE:
-+  Not found: POCO_BASE"
-+  │ │ in "<unknown>", line -1
-+   3: N7CppUnit10TestCallerI19PKCS12ContainerTestEE.testCertsOnlyPKCS12
-+  │ │ "N4Poco17NotFoundExceptionE:
-+  Not found: POCO_BASE"
-+  │ │ in "<unknown>", line -1
-+   4: N7CppUnit10TestCallerI19PKCS12ContainerTestEE.testPEMReadWrite
-+  │ │ "N4Poco17NotFoundExceptionE:
-+  Not found: POCO_BASE"
-+  │ │ in "<unknown>", line -1
-+
-+Upstream-Status: Inappropriate [OE specific]
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
++Signed-off-by: Martin Jansa <martin.jansa@gmail.com>
 +---
-+ cppignore.lnx | 8 ++++++++
-+ 1 file changed, 8 insertions(+)
++Upstream-Status: Submitted [https://gitlab.freedesktop.org/pulseaudio/webrtc-audio-processing/-/merge_requests/28]
 +
-+--- a/cppignore.lnx
-++++ b/cppignore.lnx
-+@@ -26,3 +26,12 @@ N7CppUnit10TestCallerI9TimerTestEE.testS
-+ N7CppUnit10TestCallerI9TimerTestEE.testScheduleIntervalClock
-+ N7CppUnit10TestCallerI9TimerTestEE.testScheduleIntervalTimestamp
-+ N7CppUnit10TestCallerI9TimerTestEE.testTimer
-++N7CppUnit10TestCallerI11ProcessTestEE.testLaunch
-++N7CppUnit10TestCallerI11ProcessTestEE.testLaunchRedirectIn
-++N7CppUnit10TestCallerI11ProcessTestEE.testLaunchRedirectOut
-++N7CppUnit10TestCallerI11ProcessTestEE.testLaunchEnv
-++N7CppUnit10TestCallerI7EVPTestEE.testRSAEVPKeyFromPKCS12
-++N7CppUnit10TestCallerI19PKCS12ContainerTestEE.testFullPKCS12
-++N7CppUnit10TestCallerI19PKCS12ContainerTestEE.testCertsOnlyPKCS12
-++N7CppUnit10TestCallerI19PKCS12ContainerTestEE.testPEMReadWrite
-++N7CppUnit10TestCallerI11MongoDBTestEE.testArray
-diff --git a/meta-oe/recipes-support/poco/poco/run-ptest b/meta-oe/recipes-support/poco/poco/run-ptest
-index db8cf8511f..c8e50fc967 100644
---- a/meta-oe/recipes-support/poco/poco/run-ptest
-+++ b/meta-oe/recipes-support/poco/poco/run-ptest
-@@ -1,4 +1,6 @@
- #!/bin/sh
-+export POCO_BASE=/usr/lib/poco/ptest
-+export LD_LIBRARY_PATH=${POCO_BASE}/bin:${LD_LIBRARY_PATH}
- i=0
- while read runner; do
-   oldpath=`pwd` >/dev/null
-diff --git a/meta-oe/recipes-support/poco/poco_1.12.4.bb b/meta-oe/recipes-support/poco/poco_1.12.4.bb
-index 47dac1a89e..6b479dcce7 100644
---- a/meta-oe/recipes-support/poco/poco_1.12.4.bb
-+++ b/meta-oe/recipes-support/poco/poco_1.12.4.bb
-@@ -10,6 +10,7 @@ DEPENDS = "libpcre2 zlib"
++ .../audio_processing/agc2/adaptive_mode_level_estimator.cc  | 2 ++
++ webrtc/modules/audio_processing/audio_processing_impl.cc    | 3 +++
++ webrtc/modules/audio_processing/include/audio_processing.cc | 6 ++++++
++ 3 files changed, 11 insertions(+)
++
++diff --git a/webrtc/modules/audio_processing/agc2/adaptive_mode_level_estimator.cc b/webrtc/modules/audio_processing/agc2/adaptive_mode_level_estimator.cc
++index f09f63b..9cdf6ca 100644
++--- a/webrtc/modules/audio_processing/agc2/adaptive_mode_level_estimator.cc
+++++ b/webrtc/modules/audio_processing/agc2/adaptive_mode_level_estimator.cc
++@@ -42,6 +42,8 @@ float GetLevel(const VadLevelAnalyzer::Result& vad_level,
++       return vad_level.peak_dbfs;
++       break;
++   }
+++  RTC_NOTREACHED();
+++  __builtin_unreachable ();
++ }
++ 
++ }  // namespace
++diff --git a/webrtc/modules/audio_processing/audio_processing_impl.cc b/webrtc/modules/audio_processing/audio_processing_impl.cc
++index 67208df..3b8262a 100644
++--- a/webrtc/modules/audio_processing/audio_processing_impl.cc
+++++ b/webrtc/modules/audio_processing/audio_processing_impl.cc
++@@ -114,6 +114,8 @@ GainControl::Mode Agc1ConfigModeToInterfaceMode(
++     case Agc1Config::kFixedDigital:
++       return GainControl::kFixedDigital;
++   }
+++  RTC_NOTREACHED();
+++  __builtin_unreachable ();
++ }
++ 
++ // Maximum lengths that frame of samples being passed from the render side to
++@@ -1852,6 +1854,7 @@ void AudioProcessingImpl::InitializeNoiseSuppressor() {
++               return NsConfig::SuppressionLevel::k21dB;
++             default:
++               RTC_NOTREACHED();
+++              __builtin_unreachable ();
++           }
++         };
++ 
++diff --git a/webrtc/modules/audio_processing/include/audio_processing.cc b/webrtc/modules/audio_processing/include/audio_processing.cc
++index 8854415..cc8752b 100644
++--- a/webrtc/modules/audio_processing/include/audio_processing.cc
+++++ b/webrtc/modules/audio_processing/include/audio_processing.cc
++@@ -28,6 +28,8 @@ std::string NoiseSuppressionLevelToString(
++     case AudioProcessing::Config::NoiseSuppression::Level::kVeryHigh:
++       return "VeryHigh";
++   }
+++  RTC_NOTREACHED();
+++  __builtin_unreachable ();
++ }
++ 
++ std::string GainController1ModeToString(
++@@ -40,6 +42,8 @@ std::string GainController1ModeToString(
++     case AudioProcessing::Config::GainController1::Mode::kFixedDigital:
++       return "FixedDigital";
++   }
+++  RTC_NOTREACHED();
+++  __builtin_unreachable ();
++ }
++ 
++ std::string GainController2LevelEstimatorToString(
++@@ -50,6 +54,8 @@ std::string GainController2LevelEstimatorToString(
++     case AudioProcessing::Config::GainController2::LevelEstimator::kPeak:
++       return "Peak";
++   }
+++  RTC_NOTREACHED();
+++  __builtin_unreachable ();
++ }
++ 
++ int GetDefaultMaxInternalRate() {
+diff --git a/meta-multimedia/recipes-multimedia/webrtc-audio-processing/webrtc-audio-processing-1_1.3.bb b/meta-multimedia/recipes-multimedia/webrtc-audio-processing/webrtc-audio-processing-1_1.3.bb
+index 8d281dad5b..c56ca53f89 100644
+--- a/meta-multimedia/recipes-multimedia/webrtc-audio-processing/webrtc-audio-processing-1_1.3.bb
++++ b/meta-multimedia/recipes-multimedia/webrtc-audio-processing/webrtc-audio-processing-1_1.3.bb
+@@ -9,8 +9,9 @@ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=da08a38a32a340c5d91e13ee86a118f2"
  
- SRC_URI = "git://github.com/pocoproject/poco.git;branch=master;protocol=https \
-            file://0001-Use-std-atomic-int-instead-of-std-atomic-bool.patch \
-+           file://0001-cppignore.lnx-Ignore-PKCS12-and-testLaunch-test.patch \
-            file://run-ptest \
-            "
- SRCREV = "1211613642269b7d53bea58b02de7fcd25ece3b9"
-@@ -105,5 +106,7 @@ FILES:${PN}-cppunit += "${libdir}/libCppUnit.so*"
- ALLOW_EMPTY:${PN}-cppunit = "1"
- 
- RDEPENDS:${PN}-ptest += "${PN}-cppunit"
-+RDEPENDS:${PN}-ptest += "${@bb.utils.contains('PACKAGECONFIG', 'MongoDB', 'mongodb', '', d)}"
-+RDEPENDS:${PN}-ptest += "${@bb.utils.contains('PACKAGECONFIG', 'Redis', 'redis', '', d)}"
- 
- BBCLASSEXTEND = "native"
+ SRC_URI = " \
+-	http://freedesktop.org/software/pulseaudio/webrtc-audio-processing/webrtc-audio-processing-${PV}.tar.xz \
+-	file://0001-add-missing-header-for-musl.patch \
++    http://freedesktop.org/software/pulseaudio/webrtc-audio-processing/webrtc-audio-processing-${PV}.tar.xz \
++    file://0001-add-missing-header-for-musl.patch \
++    file://0001-Fix-return-type-errors.patch \
+ "
+ SRC_URI[sha256sum] = "2365e93e778d7b61b5d6e02d21c47d97222e9c7deff9e1d0838ad6ec2e86f1b9"
+ S = "${WORKDIR}/webrtc-audio-processing-${PV}"
 -- 
 2.42.0
 
