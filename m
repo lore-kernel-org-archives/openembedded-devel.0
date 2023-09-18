@@ -1,97 +1,80 @@
-Return-Path: <dse@thaumatec.com>
+Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 15911CD13DD
-	for <webhook@archiver.kernel.org>; Mon, 18 Sep 2023 11:03:44 +0000 (UTC)
-Received: from mail-lf1-f53.google.com (mail-lf1-f53.google.com [209.85.167.53])
- by mx.groups.io with SMTP id smtpd.web10.48407.1695035023301857714
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9FC6AC46CA1
+	for <webhook@archiver.kernel.org>; Mon, 18 Sep 2023 21:52:17 +0000 (UTC)
+Received: from mailout06.t-online.de (mailout06.t-online.de [194.25.134.19])
+ by mx.groups.io with SMTP id smtpd.web10.4026.1695073930053611041
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 18 Sep 2023 04:03:43 -0700
+ Mon, 18 Sep 2023 14:52:10 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@thaumatec-com.20230601.gappssmtp.com header.s=20230601 header.b=BnFcwM9o;
- spf=pass (domain: thaumatec.com, ip: 209.85.167.53, mailfrom: dse@thaumatec.com)
-Received: by mail-lf1-f53.google.com with SMTP id 2adb3069b0e04-503012f4e71so2138692e87.0
-        for <openembedded-devel@lists.openembedded.org>; Mon, 18 Sep 2023 04:03:42 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=thaumatec-com.20230601.gappssmtp.com; s=20230601; t=1695035021; x=1695639821; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=y6PL+22q+iwDpn/bFREvH65AbjYlLBsW4ubIZqPD69o=;
-        b=BnFcwM9oLJHowdbnSruejbEPpupqrAbvPE+1nCWYT0n0OnTaozwBVE2mIjRMRsLDpw
-         6JKWWyBrf2XFJcLaYcM8KTgdiJhNWUZes7XgjQuS1ihDsp07w40SD7DnzO72eZPlxUtB
-         s7heM06IpA2LY+vn5C6UqHwxryXjcgjvEAQrBmwtqndlLadnvY3OnYjBrtWRoQc05YZ0
-         HuPL9jRjr/DT9syehfmX2TIOf/UeN7nKU2148b7IDzrkinc5QFG1GS9oeC0AdyEezEBr
-         jWufT7hbrw9xn4bP0s9TTW8uDsM7gLzYouxjn7hHAQqLFpSVQSQ9pEBlOgOulHNCmvMV
-         wrHA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1695035021; x=1695639821;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=y6PL+22q+iwDpn/bFREvH65AbjYlLBsW4ubIZqPD69o=;
-        b=JYC9MiQFfZRNI81vSKSZJA4yILWMH/PcKOP++LJiu6TJkFbjYN95Aeu/SInkVX2wEB
-         52oHu1NAtCJjIbaFyaDaKGQfiRZV+sy1vktgSS4GpnF1Sikf7ui/4pOJrlsdYfH40OJc
-         GIkKMoFCXtEeSS6Bkc0pFdgmAjmKqysE8dhW6zkmXHmPmRDAP10oY2tjFfLPuIpSSVhJ
-         WNrtgDdxnODuwZ18BQrbT5BFJHe3cu50AScIeJcTE1acflDizdY16TN3Jc2Cc79DbroM
-         yzR65egZqAZDuhqk1yFHW8Kc32z4HyiW+FhG92tzIk9Ab+0sh1KOtcv8xMIzffJKe5TY
-         lqTA==
-X-Gm-Message-State: AOJu0YyTXA/ZgYFmlDbOob+0VDBbk3H6sciqY5CA6Flzg9hFcJ75JgD2
-	efEMa7X2g+n3U2SdipVoV2eNDLFkD16gt3WwjYy9vg==
-X-Google-Smtp-Source: AGHT+IFQRnw5qQHDm8CFHos83U219f9CbCYu5wHk71y6tHJfnd8yOFzoEmzd9kFlFUDqhR29qZDSRA==
-X-Received: by 2002:ac2:4bcc:0:b0:503:a85:5d14 with SMTP id o12-20020ac24bcc000000b005030a855d14mr1347106lfq.17.1695035021221;
-        Mon, 18 Sep 2023 04:03:41 -0700 (PDT)
-Received: from localhost.localdomain ([91.90.172.13])
-        by smtp.gmail.com with ESMTPSA id p5-20020a056512328500b004fe0fead9e2sm1040226lfe.165.2023.09.18.04.03.40
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 18 Sep 2023 04:03:40 -0700 (PDT)
-From: Daniel Semkowicz <dse@thaumatec.com>
+ dkim=none (message not signed); spf=none, err=SPF record not found (domain: t-online.de, ip: 194.25.134.19, mailfrom: f_l_k@t-online.de)
+Received: from fwd76.aul.t-online.de (fwd76.aul.t-online.de [10.223.144.102])
+	by mailout06.t-online.de (Postfix) with SMTP id 5283C54F6
+	for <openembedded-devel@lists.openembedded.org>; Mon, 18 Sep 2023 23:52:08 +0200 (CEST)
+Received: from intel-corei7-64.fritz.box ([84.154.161.214]) by fwd76.t-online.de
+	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
+	esmtp id 1qiM9z-3qxV220; Mon, 18 Sep 2023 23:52:03 +0200
+From: Markus Volk <f_l_k@t-online.de>
 To: openembedded-devel@lists.openembedded.org
-Cc: Daniel Semkowicz <dse@thaumatec.com>
-Subject: [meta-webserver][PATCH v1 2/2] cockpit: Move apps to a separate package
-Date: Mon, 18 Sep 2023 13:03:02 +0200
-Message-ID: <20230918110305.38374-3-dse@thaumatec.com>
+Subject: [meta-gnome][PATCH 02/18] gnome-settings-daemon: upgrade 44.1 -> 45.0
+Date: Mon, 18 Sep 2023 23:51:37 +0200
+Message-ID: <20230918215156.1920452-2-f_l_k@t-online.de>
 X-Mailer: git-send-email 2.41.0
-In-Reply-To: <20230918110305.38374-1-dse@thaumatec.com>
-References: <20230918110305.38374-1-dse@thaumatec.com>
+In-Reply-To: <20230918215156.1920452-1-f_l_k@t-online.de>
+References: <20230918215156.1920452-1-f_l_k@t-online.de>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-TOI-EXPURGATEID: 150726::1695073923-477FF5E3-AA84C44A/0/0 CLEAN NORMAL
+X-TOI-MSGID: c707468a-6330-4520-8a5e-5040db565fd3
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 18 Sep 2023 11:03:44 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104926
+ <openembedded-devel@lists.openembedded.org>; Mon, 18 Sep 2023 21:52:17 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104929
 
-Apps (Applications tab) is an optional Cockpit Project package.
-Make it also an optional package in recipe.
-
-Signed-off-by: Daniel Semkowicz <dse@thaumatec.com>
+Signed-off-by: Markus Volk <f_l_k@t-online.de>
 ---
- meta-webserver/recipes-webadmin/cockpit/cockpit_298.bb | 2 ++
- 1 file changed, 2 insertions(+)
+ ...-settings-daemon_44.1.bb =3D> gnome-settings-daemon_45.0.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-gnome/recipes-gnome/gnome-settings-daemon/{gnome-settings-da=
+emon_44.1.bb =3D> gnome-settings-daemon_45.0.bb} (89%)
 
-diff --git a/meta-webserver/recipes-webadmin/cockpit/cockpit_298.bb b/meta-webserver/recipes-webadmin/cockpit/cockpit_298.bb
-index 260aaa84e..262302424 100644
---- a/meta-webserver/recipes-webadmin/cockpit/cockpit_298.bb
-+++ b/meta-webserver/recipes-webadmin/cockpit/cockpit_298.bb
-@@ -61,6 +61,7 @@ PACKAGES =+ " \
-     ${PN}-docker \
-     ${PN}-dashboard \
-     ${PN}-packagekit \
-+    ${PN}-apps \
-     ${PN}-bridge \
-     ${PN}-ws \
-     ${PN}-desktop \
-@@ -114,6 +115,7 @@ FILES:${PN}-dashboard = "${datadir}/cockpit/dashboard"
- ALLOW_EMPTY:${PN}-dashboard = "1"
- 
- FILES:${PN}-packagekit = "${datadir}/cockpit/packagekit"
-+FILES:${PN}-apps = "${datadir}/cockpit/apps"
- 
- FILES:${PN}-bridge = " \
-     ${bindir}/cockpit-bridge \
--- 
+diff --git a/meta-gnome/recipes-gnome/gnome-settings-daemon/gnome-setting=
+s-daemon_44.1.bb b/meta-gnome/recipes-gnome/gnome-settings-daemon/gnome-s=
+ettings-daemon_45.0.bb
+similarity index 89%
+rename from meta-gnome/recipes-gnome/gnome-settings-daemon/gnome-settings=
+-daemon_44.1.bb
+rename to meta-gnome/recipes-gnome/gnome-settings-daemon/gnome-settings-d=
+aemon_45.0.bb
+index 104f4a667..26a7c2ff1 100644
+--- a/meta-gnome/recipes-gnome/gnome-settings-daemon/gnome-settings-daemo=
+n_44.1.bb
++++ b/meta-gnome/recipes-gnome/gnome-settings-daemon/gnome-settings-daemo=
+n_45.0.bb
+@@ -25,7 +25,7 @@ DEPENDS =3D " \
+ REQUIRED_DISTRO_FEATURES =3D "x11 polkit pulseaudio systemd gobject-intr=
+ospection-data"
+ GIR_MESON_OPTION =3D ""
+=20
+-SRC_URI[archive.sha256sum] =3D "12653b72d81f151300a47d700ac9410ac1bcce38=
+e83f1bdd19cded2932943989"
++SRC_URI[archive.sha256sum] =3D "bb4dc46950e2a90f38f23225848856d2a7b1b718=
+c89d0285ce197b7016bb1dc8"
+=20
+ PACKAGECONFIG ??=3D " \
+     cups nm \
+@@ -42,5 +42,5 @@ PACKAGECONFIG[wayland] =3D "-Dwayland=3Dtrue,-Dwayland=3D=
+false,wayland"
+=20
+ FILES:${PN} +=3D " \
+     ${systemd_user_unitdir} \
+-    /usr/lib/gnome-settings-daemon-44/libgsd.so \
++    /usr/lib/gnome-settings-daemon-45/libgsd.so \
+ "
+--=20
 2.41.0
 
 
