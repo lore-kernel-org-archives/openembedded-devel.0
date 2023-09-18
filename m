@@ -1,132 +1,166 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4D31ACD13DE
-	for <webhook@archiver.kernel.org>; Mon, 18 Sep 2023 22:39:59 +0000 (UTC)
-Received: from mail-oo1-f50.google.com (mail-oo1-f50.google.com [209.85.161.50])
- by mx.groups.io with SMTP id smtpd.web10.5203.1695076791418182713
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7B680CD13DF
+	for <webhook@archiver.kernel.org>; Mon, 18 Sep 2023 22:53:39 +0000 (UTC)
+Received: from mailout02.t-online.de (mailout02.t-online.de [194.25.134.17])
+ by mx.groups.io with SMTP id smtpd.web10.5506.1695077617866048391
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 18 Sep 2023 15:39:51 -0700
+ Mon, 18 Sep 2023 15:53:38 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=LCoKOzEu;
- spf=pass (domain: gmail.com, ip: 209.85.161.50, mailfrom: raj.khem@gmail.com)
-Received: by mail-oo1-f50.google.com with SMTP id 006d021491bc7-5738cb00eebso3296439eaf.2
-        for <openembedded-devel@lists.openembedded.org>; Mon, 18 Sep 2023 15:39:51 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1695076790; x=1695681590; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=nPJX9ebzbpwJKhTdBXf7B+WGJDdkX/pR+l2J3W5LTEE=;
-        b=LCoKOzEuljNskmLasDRWRb/ccDye/J6qjK0S6boZqHtCg76sRk1S1uA4pkxZiPFYsR
-         6LQ4/HmB+ZmkRyJwzG2VvwCFazeRcrymHQgFIdV1kirDcGcWmAYECnm1t6gag2kUbMRN
-         /DaHuuH+JFmjt5+mHu320M3hRwUP3NL/QnqyCTJGa1NHQZlsnedbTDzFMqZTSQao+ZIR
-         ZxJ+4lcBUf+f8Gv07DuFsOuOgBfS88+to++8rqBd3OWr8P+B/JAsVPWHGVcVk+7YGtEO
-         /btsib3ws8S6JdsIf42/2mx89H45Yz4LivLwh+7wg573baYkK8OGikyOO//zMM88A2OR
-         NTOQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1695076790; x=1695681590;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=nPJX9ebzbpwJKhTdBXf7B+WGJDdkX/pR+l2J3W5LTEE=;
-        b=aCSt7QWQhr5YU7puhjE/DmutPcEpJ5ozfWJTh4SY2VddbVcMzPBuoRMIr+flX7C81P
-         O3dFOQsP0HFinYAoQ7kXbi1NrkKDIXG7Tx8iwLnJX4TK6LpYHpoqtvMlvitt5x6kaR0m
-         rx6da95MHHOhZwO8+Hra9d+pRPC7RE8Ihqb19sA0s5vyeiYr8GMUTteJwL3DZrsup7qH
-         RCnBo+Smc0oAGWFKBPYHmfhH8vrrqmVTTkNvZvy1c+y7TDxXvSs6E/dNLEbBYUTCUA82
-         pp23cI6mzwTyobTflFwCdmuIEYVvCa6mWRNmwbkm4+cm+nyuYGpJ0KpL1x010sLoLMwc
-         amrg==
-X-Gm-Message-State: AOJu0YzIkCgce9F819z7QH4zKL1vKh08VqH6mQq4JqLl4dJkAmkBXcTT
-	MYZYSAN6DWCKrqx+JdUf4PO5VAWSx2iIKa1Txw4=
-X-Google-Smtp-Source: AGHT+IEhPI30Wq9puwoBogNxJjqEYP+lFg0XpchPHl8KZ9xuHJSLuNd5sx96IsoPu8oaWbkQG95dgVYFXV+z9KZ9xQg=
-X-Received: by 2002:a05:6870:a119:b0:1b7:2edd:df6d with SMTP id
- m25-20020a056870a11900b001b72edddf6dmr11925793oae.10.1695076790581; Mon, 18
- Sep 2023 15:39:50 -0700 (PDT)
+ dkim=none (message not signed); spf=none, err=SPF record not found (domain: t-online.de, ip: 194.25.134.17, mailfrom: f_l_k@t-online.de)
+Received: from fwd71.aul.t-online.de (fwd71.aul.t-online.de [10.223.144.97])
+	by mailout02.t-online.de (Postfix) with SMTP id 87FE11A90F
+	for <openembedded-devel@lists.openembedded.org>; Tue, 19 Sep 2023 00:53:13 +0200 (CEST)
+Received: from intel-corei7-64.fritz.box ([84.154.161.214]) by fwd71.t-online.de
+	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
+	esmtp id 1qiN7B-3xxQCv0; Tue, 19 Sep 2023 00:53:13 +0200
+From: Markus Volk <f_l_k@t-online.de>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-gnome][PATCHv2] gnome-control-center: upgrade 44.3 -> 45.0
+Date: Tue, 19 Sep 2023 00:53:18 +0200
+Message-ID: <20230918225319.3080-1-f_l_k@t-online.de>
+X-Mailer: git-send-email 2.42.0
 MIME-Version: 1.0
-References: <20230918215156.1920452-1-f_l_k@t-online.de> <20230918215156.1920452-2-f_l_k@t-online.de>
-In-Reply-To: <20230918215156.1920452-2-f_l_k@t-online.de>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 18 Sep 2023 15:39:24 -0700
-Message-ID: <CAMKF1sq3nYBUov1xMxmHRKwEDhApx-gbWvxHV9YFXtV2GJPROQ@mail.gmail.com>
-Subject: Re: [oe] [meta-gnome][PATCH 02/18] gnome-settings-daemon: upgrade
- 44.1 -> 45.0
-To: Markus Volk <f_l_k@t-online.de>
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=UTF-8
+X-TOI-EXPURGATEID: 150726::1695077593-D35C32DD-2B04EA34/0/0 CLEAN NORMAL
+X-TOI-MSGID: 1ce1dfb8-79b4-4c3d-a576-083ff9052c28
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 18 Sep 2023 22:39:59 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104946
+ <openembedded-devel@lists.openembedded.org>; Mon, 18 Sep 2023 22:53:39 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104947
 
-On Mon, Sep 18, 2023 at 2:52=E2=80=AFPM Markus Volk <f_l_k@t-online.de> wro=
-te:
->
-> Signed-off-by: Markus Volk <f_l_k@t-online.de>
-> ---
->  ...-settings-daemon_44.1.bb =3D> gnome-settings-daemon_45.0.bb} | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
->  rename meta-gnome/recipes-gnome/gnome-settings-daemon/{gnome-settings-da=
-emon_44.1.bb =3D> gnome-settings-daemon_45.0.bb} (89%)
->
-> diff --git a/meta-gnome/recipes-gnome/gnome-settings-daemon/gnome-setting=
-s-daemon_44.1.bb b/meta-gnome/recipes-gnome/gnome-settings-daemon/gnome-set=
-tings-daemon_45.0.bb
-> similarity index 89%
-> rename from meta-gnome/recipes-gnome/gnome-settings-daemon/gnome-settings=
--daemon_44.1.bb
-> rename to meta-gnome/recipes-gnome/gnome-settings-daemon/gnome-settings-d=
-aemon_45.0.bb
-> index 104f4a667..26a7c2ff1 100644
-> --- a/meta-gnome/recipes-gnome/gnome-settings-daemon/gnome-settings-daemo=
-n_44.1.bb
-> +++ b/meta-gnome/recipes-gnome/gnome-settings-daemon/gnome-settings-daemo=
-n_45.0.bb
-> @@ -25,7 +25,7 @@ DEPENDS =3D " \
->  REQUIRED_DISTRO_FEATURES =3D "x11 polkit pulseaudio systemd gobject-intr=
-ospection-data"
->  GIR_MESON_OPTION =3D ""
->
-> -SRC_URI[archive.sha256sum] =3D "12653b72d81f151300a47d700ac9410ac1bcce38=
-e83f1bdd19cded2932943989"
-> +SRC_URI[archive.sha256sum] =3D "bb4dc46950e2a90f38f23225848856d2a7b1b718=
-c89d0285ce197b7016bb1dc8"
->
->  PACKAGECONFIG ??=3D " \
->      cups nm \
-> @@ -42,5 +42,5 @@ PACKAGECONFIG[wayland] =3D "-Dwayland=3Dtrue,-Dwayland=
-=3Dfalse,wayland"
->
->  FILES:${PN} +=3D " \
->      ${systemd_user_unitdir} \
-> -    /usr/lib/gnome-settings-daemon-44/libgsd.so \
-> +    /usr/lib/gnome-settings-daemon-45/libgsd.so \
+Signed-off-by: Markus Volk <f_l_k@t-online.de>
+---
+ .../0001-Add-meson-option-to-pass-sysroot.patch  | 16 ++++++++--------
+ ...nter_44.3.bb =3D> gnome-control-center_45.0.bb} | 10 +++++-----
+ 2 files changed, 13 insertions(+), 13 deletions(-)
+ rename meta-gnome/recipes-gnome/gnome-control-center/{gnome-control-cent=
+er_44.3.bb =3D> gnome-control-center_45.0.bb} (87%)
 
-Like some other gnome recipes maybe we can define gnome_verdir
-function and use it here
+diff --git a/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-=
+center/0001-Add-meson-option-to-pass-sysroot.patch b/meta-gnome/recipes-g=
+nome/gnome-control-center/gnome-control-center/0001-Add-meson-option-to-p=
+ass-sysroot.patch
+index 5c0eee576..7cd7c0469 100644
+--- a/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center/=
+0001-Add-meson-option-to-pass-sysroot.patch
++++ b/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center/=
+0001-Add-meson-option-to-pass-sysroot.patch
+@@ -19,7 +19,7 @@ Signed-off-by: Andreas M=C3=BCller <schnitzeltony@gmail=
+.com>
+  2 files changed, 2 insertions(+), 1 deletion(-)
+=20
+ diff --git a/meson_options.txt b/meson_options.txt
+-index dbca723..af0f871 100644
++index 8ee7b6e0e..7e6adc668 100644
+ --- a/meson_options.txt
+ +++ b/meson_options.txt
+ @@ -1,3 +1,4 @@
+@@ -28,28 +28,28 @@ index dbca723..af0f871 100644
+  option('ibus', type: 'boolean', value: true, description: 'build with I=
+Bus support')
+  option('privileged_group', type: 'string', value: 'wheel', description:=
+ 'name of group that has elevated permissions')
+ diff --git a/panels/background/meson.build b/panels/background/meson.bui=
+ld
+-index 69af0cfea..6edcaa5ff 100644
++index 9bf543538..97f1e0117 100644
+ --- a/panels/background/meson.build
+ +++ b/panels/background/meson.build
+ @@ -19,7 +19,7 @@ common_sources =3D []
+ =20
+  enums =3D 'gdesktop-enums-types'
+  enums_header =3D files(
+--  gsettings_desktop_dep.get_pkgconfig_variable('prefix') + '/include/gs=
+ettings-desktop-schemas/gdesktop-enums.h',
+-+  get_option('oe_sysroot') + gsettings_desktop_dep.get_pkgconfig_variab=
+le('prefix') + '/include/gsettings-desktop-schemas/gdesktop-enums.h',
++-  gsettings_desktop_dep.get_variable(pkgconfig: 'prefix') + '/include/g=
+settings-desktop-schemas/gdesktop-enums.h',
+++  get_option('oe_sysroot') + gsettings_desktop_dep.get_variable(pkgconf=
+ig: 'prefix') + '/include/gsettings-desktop-schemas/gdesktop-enums.h',
+    'cc-background-item.h'
+  )
+ =20
+ diff --git a/panels/datetime/meson.build b/panels/datetime/meson.build
+-index 3b6f5e197..30b207882 100644
++index 8cb3b63f0..8c5a45e7c 100644
+ --- a/panels/datetime/meson.build
+ +++ b/panels/datetime/meson.build
+-@@ -45,7 +45,7 @@ sources =3D files(
++@@ -37,7 +37,7 @@ sources =3D files(
+ =20
+  enums =3D 'gdesktop-enums-types'
+  enums_header =3D files(
+--  gsettings_desktop_dep.get_pkgconfig_variable('prefix') + '/include/gs=
+ettings-desktop-schemas/gdesktop-enums.h',
+-+  get_option('oe_sysroot') + gsettings_desktop_dep.get_pkgconfig_variab=
+le('prefix') + '/include/gsettings-desktop-schemas/gdesktop-enums.h',
++-  gsettings_desktop_dep.get_variable(pkgconfig: 'prefix') + '/include/g=
+settings-desktop-schemas/gdesktop-enums.h',
+++  get_option('oe_sysroot') + gsettings_desktop_dep.get_variable(pkgconf=
+ig: 'prefix') + '/include/gsettings-desktop-schemas/gdesktop-enums.h',
+    'cc-datetime-panel.h'
+  )
+ =20
+diff --git a/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-=
+center_44.3.bb b/meta-gnome/recipes-gnome/gnome-control-center/gnome-cont=
+rol-center_45.0.bb
+similarity index 87%
+rename from meta-gnome/recipes-gnome/gnome-control-center/gnome-control-c=
+enter_44.3.bb
+rename to meta-gnome/recipes-gnome/gnome-control-center/gnome-control-cen=
+ter_45.0.bb
+index 0066f5885..1122ee5ea 100644
+--- a/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center_=
+44.3.bb
++++ b/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center_=
+45.0.bb
+@@ -28,6 +28,8 @@ DEPENDS =3D " \
+     polkit \
+     pulseaudio \
+     samba \
++    setxkbmap-native \
++    tecla \
+     udisks2 \
+     upower \
+ "
+@@ -37,16 +39,14 @@ inherit gtk-icon-cache pkgconfig gnomebase gsettings =
+gettext upstream-version-is
+ REQUIRED_DISTRO_FEATURES +=3D "opengl polkit pulseaudio systemd x11"
+=20
+ SRC_URI +=3D "file://0001-Add-meson-option-to-pass-sysroot.patch"
+-SRC_URI[archive.sha256sum] =3D "066a65052fc3ecfae860025e85f797e6ab2b87a5=
+8c4f8ab9c66ec20718a80c7a"
++SRC_URI[archive.sha256sum] =3D "83df6a90f98914f2c19a872ce06562acef409276=
+37f679c383099265ccfa42cf"
+=20
+ PACKAGECONFIG ??=3D "ibus ${@bb.utils.filter('DISTRO_FEATURES', 'wayland=
+', d)}"
+ PACKAGECONFIG[cups] =3D ",,cups,cups"
+ PACKAGECONFIG[ibus] =3D "-Dibus=3Dtrue, -Dibus=3Dfalse, ibus"
+ PACKAGECONFIG[wayland] =3D "-Dwayland=3Dtrue, -Dwayland=3Dfalse, wayland=
+"
+=20
+-EXTRA_OEMESON =3D " \
+-    -Doe_sysroot=3D${STAGING_DIR_HOST} \
+-"
++EXTRA_OEMESON +=3D "-Doe_sysroot=3D${STAGING_DIR_HOST}"
+=20
+ USERADD_PACKAGES =3D "${PN}"
+ USERADD_PARAM:${PN} =3D "--system --no-create-home --user-group --home-d=
+ir ${sysconfdir}/polkit-1 polkitd"
+@@ -66,4 +66,4 @@ FILES:${PN} +=3D " \
+=20
+ FILES:${PN}-dev +=3D "${datadir}/gettext"
+=20
+-RDEPENDS:${PN} +=3D "gsettings-desktop-schemas"
++RDEPENDS:${PN} +=3D "gsettings-desktop-schemas tecla"
+--=20
+2.42.0
 
-  def gnome_verdir(v):
-  =E2=94=82   return oe.utils.trim_version(v, 1)
-
-then make it
-
- ${libdir}/gnome-settings-daemon-${@gnome_verdir("${PV}")}/libgsd.so
-
->  "
-> --
-> 2.41.0
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#104929): https://lists.openembedded.org/g/openembedde=
-d-devel/message/104929
-> Mute This Topic: https://lists.openembedded.org/mt/101444160/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
-aj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
 
