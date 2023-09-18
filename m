@@ -2,54 +2,55 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 22234CD13D9
-	for <webhook@archiver.kernel.org>; Mon, 18 Sep 2023 22:24:29 +0000 (UTC)
-Received: from mail-oa1-f52.google.com (mail-oa1-f52.google.com [209.85.160.52])
- by mx.groups.io with SMTP id smtpd.web11.4914.1695075867370070732
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4D31ACD13DE
+	for <webhook@archiver.kernel.org>; Mon, 18 Sep 2023 22:39:59 +0000 (UTC)
+Received: from mail-oo1-f50.google.com (mail-oo1-f50.google.com [209.85.161.50])
+ by mx.groups.io with SMTP id smtpd.web10.5203.1695076791418182713
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 18 Sep 2023 15:24:27 -0700
+ Mon, 18 Sep 2023 15:39:51 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=hmcHSm4r;
- spf=pass (domain: gmail.com, ip: 209.85.160.52, mailfrom: raj.khem@gmail.com)
-Received: by mail-oa1-f52.google.com with SMTP id 586e51a60fabf-1c26bb27feeso3312603fac.0
-        for <openembedded-devel@lists.openembedded.org>; Mon, 18 Sep 2023 15:24:27 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=LCoKOzEu;
+ spf=pass (domain: gmail.com, ip: 209.85.161.50, mailfrom: raj.khem@gmail.com)
+Received: by mail-oo1-f50.google.com with SMTP id 006d021491bc7-5738cb00eebso3296439eaf.2
+        for <openembedded-devel@lists.openembedded.org>; Mon, 18 Sep 2023 15:39:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1695075866; x=1695680666; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1695076790; x=1695681590; darn=lists.openembedded.org;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=pPc0CkXWSfvNAbJ/osBCQa2S0iC0bbLsPZTC31KARsg=;
-        b=hmcHSm4rze7IXq1L1lKzZ8y4Mznc06SFpQHkLW7fIWYXdz1EQqZeLcQjVD60C9RXpY
-         poCLnby6Any+gc83jkjx7rxusylYwZuhLhhO74P8S0RaESy5hxeLbA7A2mG0V8WcmRFN
-         yWwwOEaJgqOyzq9qyGD4LFCvwhREEr9IWjzYIBc1XnAlhYG5r6yRif7GBoGpch0Duq1J
-         5WOuUnFh5Z8ZYXMjppVXC7cKFN9cUbGCqTTBJkmYVQ9n4aGfanUVop1W72W1/MUwI4t2
-         i3G2l2eDZpE7hpFQL1roArD+wG+k28QP+VskM4a6IdhlTIyco9uXU8aijuXOaBCqJvNx
-         CsHw==
+        bh=nPJX9ebzbpwJKhTdBXf7B+WGJDdkX/pR+l2J3W5LTEE=;
+        b=LCoKOzEuljNskmLasDRWRb/ccDye/J6qjK0S6boZqHtCg76sRk1S1uA4pkxZiPFYsR
+         6LQ4/HmB+ZmkRyJwzG2VvwCFazeRcrymHQgFIdV1kirDcGcWmAYECnm1t6gag2kUbMRN
+         /DaHuuH+JFmjt5+mHu320M3hRwUP3NL/QnqyCTJGa1NHQZlsnedbTDzFMqZTSQao+ZIR
+         ZxJ+4lcBUf+f8Gv07DuFsOuOgBfS88+to++8rqBd3OWr8P+B/JAsVPWHGVcVk+7YGtEO
+         /btsib3ws8S6JdsIf42/2mx89H45Yz4LivLwh+7wg573baYkK8OGikyOO//zMM88A2OR
+         NTOQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1695075866; x=1695680666;
+        d=1e100.net; s=20230601; t=1695076790; x=1695681590;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=pPc0CkXWSfvNAbJ/osBCQa2S0iC0bbLsPZTC31KARsg=;
-        b=Leu+Ok5kC92RWBTdw+0FxAm2ovxvJnul31YR+3g6Odday8Q5l0nly/G/NrKymPWBil
-         4FVqs4jTrTUaXTdUK2jodkUgw2uYS2LOe3fUu8J3WCRwKF8cj7yotyro5VloRBqnDqGo
-         m1rFdm5vM+FbubgWDH/Wi6Cio94T5a2MzJaAx2G2YfWFBddqA6RB6oMKpKU+u+sYoCwh
-         h+VzXvIW8YUmpaOSMLYzJiZMQx1NLhIqP6Tk74goMXSbSRiJ3Yeuh4BEL1ixF6jAkokJ
-         PsdTih7pbKcqwq9Q+HH18xK0u0a9Sioq/hdcQnXme59gNJ4gR67Wn34VJ/yHfXCh3mLr
-         N3Qg==
-X-Gm-Message-State: AOJu0YyM5fEJ8R8zlbGUrLjKprIIl0rfWnZGoVqUB8D472NTyBQslVx/
-	yLDVT2hn4Spis3iXi8LkJmCzpcE0oxXZ2PG+RKk=
-X-Google-Smtp-Source: AGHT+IF6DM4gN2xdxAjzEvDM+zKoxnU8TwZ27mkcM2iDh3xj5Al8RCA9ffrP/yjavWs34LmYJKFJwwRGEqDkF7xgXUI=
-X-Received: by 2002:a05:6870:468e:b0:1bf:e2a6:b287 with SMTP id
- a14-20020a056870468e00b001bfe2a6b287mr11867658oap.0.1695075866502; Mon, 18
- Sep 2023 15:24:26 -0700 (PDT)
+        bh=nPJX9ebzbpwJKhTdBXf7B+WGJDdkX/pR+l2J3W5LTEE=;
+        b=aCSt7QWQhr5YU7puhjE/DmutPcEpJ5ozfWJTh4SY2VddbVcMzPBuoRMIr+flX7C81P
+         O3dFOQsP0HFinYAoQ7kXbi1NrkKDIXG7Tx8iwLnJX4TK6LpYHpoqtvMlvitt5x6kaR0m
+         rx6da95MHHOhZwO8+Hra9d+pRPC7RE8Ihqb19sA0s5vyeiYr8GMUTteJwL3DZrsup7qH
+         RCnBo+Smc0oAGWFKBPYHmfhH8vrrqmVTTkNvZvy1c+y7TDxXvSs6E/dNLEbBYUTCUA82
+         pp23cI6mzwTyobTflFwCdmuIEYVvCa6mWRNmwbkm4+cm+nyuYGpJ0KpL1x010sLoLMwc
+         amrg==
+X-Gm-Message-State: AOJu0YzIkCgce9F819z7QH4zKL1vKh08VqH6mQq4JqLl4dJkAmkBXcTT
+	MYZYSAN6DWCKrqx+JdUf4PO5VAWSx2iIKa1Txw4=
+X-Google-Smtp-Source: AGHT+IEhPI30Wq9puwoBogNxJjqEYP+lFg0XpchPHl8KZ9xuHJSLuNd5sx96IsoPu8oaWbkQG95dgVYFXV+z9KZ9xQg=
+X-Received: by 2002:a05:6870:a119:b0:1b7:2edd:df6d with SMTP id
+ m25-20020a056870a11900b001b72edddf6dmr11925793oae.10.1695076790581; Mon, 18
+ Sep 2023 15:39:50 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230918215156.1920452-1-f_l_k@t-online.de> <20230918215156.1920452-17-f_l_k@t-online.de>
-In-Reply-To: <20230918215156.1920452-17-f_l_k@t-online.de>
+References: <20230918215156.1920452-1-f_l_k@t-online.de> <20230918215156.1920452-2-f_l_k@t-online.de>
+In-Reply-To: <20230918215156.1920452-2-f_l_k@t-online.de>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 18 Sep 2023 15:24:00 -0700
-Message-ID: <CAMKF1sqLhLdjVfXgBx2RU4X4f8eYwT2S8Wq9GN9y0cBC9sLmfA@mail.gmail.com>
-Subject: Re: [oe] [meta-gnome][PATCH 17/18] libxmlb: remove recipe
+Date: Mon, 18 Sep 2023 15:39:24 -0700
+Message-ID: <CAMKF1sq3nYBUov1xMxmHRKwEDhApx-gbWvxHV9YFXtV2GJPROQ@mail.gmail.com>
+Subject: Re: [oe] [meta-gnome][PATCH 02/18] gnome-settings-daemon: upgrade
+ 44.1 -> 45.0
 To: Markus Volk <f_l_k@t-online.de>
 Cc: openembedded-devel@lists.openembedded.org
 Content-Type: text/plain; charset="UTF-8"
@@ -57,134 +58,72 @@ Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 18 Sep 2023 22:24:29 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104945
-
-Cool. Also need to get rid of the references in
-
-meta-oe/conf/include/ptest-packagelists-meta-oe.inc
-
-and
-
-meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
+ <openembedded-devel@lists.openembedded.org>; Mon, 18 Sep 2023 22:39:59 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104946
 
 On Mon, Sep 18, 2023 at 2:52=E2=80=AFPM Markus Volk <f_l_k@t-online.de> wro=
 te:
 >
-> It was moved to oe-core
->
 > Signed-off-by: Markus Volk <f_l_k@t-online.de>
 > ---
->  ...xb-selftest.c-hardcode-G_TEST_SRCDIR.patch | 35 -------------------
->  .../recipes-gnome/libxmlb/libxmlb/run-ptest   |  3 --
->  .../recipes-gnome/libxmlb/libxmlb_0.3.14.bb   | 25 -------------
->  3 files changed, 63 deletions(-)
->  delete mode 100644 meta-oe/recipes-gnome/libxmlb/libxmlb/0001-xb-selftes=
-t.c-hardcode-G_TEST_SRCDIR.patch
->  delete mode 100644 meta-oe/recipes-gnome/libxmlb/libxmlb/run-ptest
->  delete mode 100644 meta-oe/recipes-gnome/libxmlb/libxmlb_0.3.14.bb
+>  ...-settings-daemon_44.1.bb =3D> gnome-settings-daemon_45.0.bb} | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+>  rename meta-gnome/recipes-gnome/gnome-settings-daemon/{gnome-settings-da=
+emon_44.1.bb =3D> gnome-settings-daemon_45.0.bb} (89%)
 >
-> diff --git a/meta-oe/recipes-gnome/libxmlb/libxmlb/0001-xb-selftest.c-har=
-dcode-G_TEST_SRCDIR.patch b/meta-oe/recipes-gnome/libxmlb/libxmlb/0001-xb-s=
-elftest.c-hardcode-G_TEST_SRCDIR.patch
-> deleted file mode 100644
-> index da8ce68df..000000000
-> --- a/meta-oe/recipes-gnome/libxmlb/libxmlb/0001-xb-selftest.c-hardcode-G=
-_TEST_SRCDIR.patch
-> +++ /dev/null
-> @@ -1,35 +0,0 @@
-> -From dc208bafc57c1ccaa0ca260f99c8b4c976271ebc Mon Sep 17 00:00:00 2001
-> -From: Markus Volk <f_l_k@t-online.de>
-> -Date: Sat, 16 Sep 2023 14:02:57 +0200
-> -Subject: [PATCH] xb-self-test.c: hardcode G_TEST_SRCDIR
-> -
-> -This avoids:
-> - libxmlb-0.3.14-r0 do_package_qa: QA Issue: File
-> - /usr/libexec/installed-tests/libxmlb/xb-self-test in package libxmlb-pt=
-est
-> - contains reference to TMPDIR [buildpaths]
-> -
-> -and also fixes the runtime for the ptest.
-> -
-> -Upstream-Status: Inappropriate [oe-specific]
-> -
-> -Signed-off-by: Markus Volk <f_l_k@t-online.de>
-> ----
-> - src/xb-self-test.c | 2 +-
-> - 1 file changed, 1 insertion(+), 1 deletion(-)
-> -
-> -diff --git a/src/xb-self-test.c b/src/xb-self-test.c
-> -index 47d9728..8b3dd0e 100644
-> ---- a/src/xb-self-test.c
-> -+++ b/src/xb-self-test.c
-> -@@ -2870,7 +2870,7 @@ xb_speed_func(void)
-> - int
-> - main(int argc, char **argv)
-> - {
-> --      g_setenv("G_TEST_SRCDIR", SRCDIR, FALSE);
-> -+      g_setenv("G_TEST_SRCDIR", "/usr/libexec/installed-tests/libxmlb",=
- FALSE);
-> -
-> -       g_test_init(&argc, &argv, NULL);
-> -
-> ---
-> -2.41.0
-> -
-> diff --git a/meta-oe/recipes-gnome/libxmlb/libxmlb/run-ptest b/meta-oe/re=
-cipes-gnome/libxmlb/libxmlb/run-ptest
-> deleted file mode 100644
-> index 6d0bb95d3..000000000
-> --- a/meta-oe/recipes-gnome/libxmlb/libxmlb/run-ptest
-> +++ /dev/null
-> @@ -1,3 +0,0 @@
-> -#! /bin/sh
-> -
-> -gnome-desktop-testing-runner libxmlb
-> diff --git a/meta-oe/recipes-gnome/libxmlb/libxmlb_0.3.14.bb b/meta-oe/re=
-cipes-gnome/libxmlb/libxmlb_0.3.14.bb
-> deleted file mode 100644
-> index 1d3b0de29..000000000
-> --- a/meta-oe/recipes-gnome/libxmlb/libxmlb_0.3.14.bb
-> +++ /dev/null
-> @@ -1,25 +0,0 @@
-> -SUMMARY =3D "A library to help create and query binary XML blobs"
-> -HOMEPAGE =3D "https://github.com/hughsie/libxmlb"
-> -LICENSE =3D "LGPL-2.1-only"
-> -LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D1803fa9c2c3ce8cb06b4861d75310=
-742"
-> -
-> -SRC_URI =3D " \
-> -       git://github.com/hughsie/libxmlb.git;branch=3Dmain;protocol=3Dhtt=
-ps \
-> -       file://0001-xb-selftest.c-hardcode-G_TEST_SRCDIR.patch \
-> -       file://run-ptest \
-> -"
-> -SRCREV =3D "aa577b276adc66564f5777f9a522ca3bf0bfa65e"
-> -S =3D "${WORKDIR}/git"
-> -
-> -DEPENDS =3D "glib-2.0 xz zstd"
-> -
-> -inherit gobject-introspection gtk-doc meson ptest-gnome lib_package pkgc=
-onfig
-> -
-> -PACKAGECONFIG ??=3D "${@bb.utils.contains('PTEST_ENABLED', '1', 'tests',=
- '', d)}"
-> -PACKAGECONFIG[tests] =3D "-Dtests=3Dtrue,-Dtests=3Dfalse"
-> -
-> -GTKDOC_MESON_OPTION =3D "gtkdoc"
-> -
-> -FILES:${PN} +=3D "${datadir}"
-> -
-> -BBCLASSEXTEND =3D "native"
+> diff --git a/meta-gnome/recipes-gnome/gnome-settings-daemon/gnome-setting=
+s-daemon_44.1.bb b/meta-gnome/recipes-gnome/gnome-settings-daemon/gnome-set=
+tings-daemon_45.0.bb
+> similarity index 89%
+> rename from meta-gnome/recipes-gnome/gnome-settings-daemon/gnome-settings=
+-daemon_44.1.bb
+> rename to meta-gnome/recipes-gnome/gnome-settings-daemon/gnome-settings-d=
+aemon_45.0.bb
+> index 104f4a667..26a7c2ff1 100644
+> --- a/meta-gnome/recipes-gnome/gnome-settings-daemon/gnome-settings-daemo=
+n_44.1.bb
+> +++ b/meta-gnome/recipes-gnome/gnome-settings-daemon/gnome-settings-daemo=
+n_45.0.bb
+> @@ -25,7 +25,7 @@ DEPENDS =3D " \
+>  REQUIRED_DISTRO_FEATURES =3D "x11 polkit pulseaudio systemd gobject-intr=
+ospection-data"
+>  GIR_MESON_OPTION =3D ""
+>
+> -SRC_URI[archive.sha256sum] =3D "12653b72d81f151300a47d700ac9410ac1bcce38=
+e83f1bdd19cded2932943989"
+> +SRC_URI[archive.sha256sum] =3D "bb4dc46950e2a90f38f23225848856d2a7b1b718=
+c89d0285ce197b7016bb1dc8"
+>
+>  PACKAGECONFIG ??=3D " \
+>      cups nm \
+> @@ -42,5 +42,5 @@ PACKAGECONFIG[wayland] =3D "-Dwayland=3Dtrue,-Dwayland=
+=3Dfalse,wayland"
+>
+>  FILES:${PN} +=3D " \
+>      ${systemd_user_unitdir} \
+> -    /usr/lib/gnome-settings-daemon-44/libgsd.so \
+> +    /usr/lib/gnome-settings-daemon-45/libgsd.so \
+
+Like some other gnome recipes maybe we can define gnome_verdir
+function and use it here
+
+  def gnome_verdir(v):
+  =E2=94=82   return oe.utils.trim_version(v, 1)
+
+then make it
+
+ ${libdir}/gnome-settings-daemon-${@gnome_verdir("${PV}")}/libgsd.so
+
+>  "
 > --
 > 2.41.0
 >
 >
 > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
 > Links: You receive all messages sent to this group.
-> View/Reply Online (#104942): https://lists.openembedded.org/g/openembedde=
-d-devel/message/104942
-> Mute This Topic: https://lists.openembedded.org/mt/101444173/1997914
+> View/Reply Online (#104929): https://lists.openembedded.org/g/openembedde=
+d-devel/message/104929
+> Mute This Topic: https://lists.openembedded.org/mt/101444160/1997914
 > Group Owner: openembedded-devel+owner@lists.openembedded.org
 > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
 aj.khem@gmail.com]
