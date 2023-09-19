@@ -1,104 +1,115 @@
-Return-Path: <mingli.yu@eng.windriver.com>
+Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 68FF4CD548C
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 683C5CD548B
 	for <webhook@archiver.kernel.org>; Tue, 19 Sep 2023 07:39:29 +0000 (UTC)
-Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
- by mx.groups.io with SMTP id smtpd.web10.2335.1695109160869796556
+Received: from esa1.hc1455-7.c3s2.iphmx.com (esa1.hc1455-7.c3s2.iphmx.com [207.54.90.47])
+ by mx.groups.io with SMTP id smtpd.web11.2308.1695109165900764279
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 19 Sep 2023 00:39:21 -0700
+ Tue, 19 Sep 2023 00:39:26 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=Kx52F6uY;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=7626e63108=mingli.yu@windriver.com)
-Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.17.1.22/8.17.1.22) with ESMTP id 38J6aL1H009188
-	for <openembedded-devel@lists.openembedded.org>; Tue, 19 Sep 2023 07:39:20 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
-	 h=from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding:content-type; s=PPS06212021; bh=NCCRa
-	6S/QWkmVIYXD4wJNA7z6Q44K28Cw8q/1SVT13c=; b=Kx52F6uYe90lXTiMe1Ayn
-	oJjsvFtmUYHG9gWhm2HnZB5Bv+JkES7ZnbxxACclHnPu6J4bZt2yeyhf4VweR81o
-	Q9tmeTt4azkee+KIWMskooarFldX4G+nz5axeTC/ZIBnwRdR274uDokdssau3wsW
-	dzHTB8T2msczgnTMw5ZSFijcow8EvNhju2hhz4E3P75kdRULcNocca46LsFjN/6u
-	qSgBybmCmzEeepb6ZNZZXipfVI7FYUzaaFPkEjLjjacQEW6DuNvzFJ1G+vQU+6Cf
-	uhrfj0IZHSWl7U8pnzr1X/xU3WOgvjs15/mXJf4VThjHUm2wRRE1asyPZXjxNcPB
-	Q==
-Received: from ala-exchng02.corp.ad.wrs.com (ala-exchng02.wrs.com [147.11.82.254])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3t53b5t6h4-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Tue, 19 Sep 2023 07:39:19 +0000 (GMT)
-Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
- ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.27; Tue, 19 Sep 2023 00:39:18 -0700
-Received: from pek-lpg-core2.wrs.com (128.224.153.41) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
- 15.1.2507.32 via Frontend Transport; Tue, 19 Sep 2023 00:39:17 -0700
-From: <mingli.yu@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-oe][PATCH] vlock: Use EXTRA_CFLAGS
-Date: Tue, 19 Sep 2023 15:39:17 +0800
-Message-ID: <20230919073917.2626293-1-mingli.yu@windriver.com>
-X-Mailer: git-send-email 2.25.1
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Proofpoint-GUID: owLmNtlr5LhD-91O5HUs3FywzRXy-Qd0
-X-Proofpoint-ORIG-GUID: owLmNtlr5LhD-91O5HUs3FywzRXy-Qd0
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.267,Aquarius:18.0.980,Hydra:6.0.601,FMLib:17.11.176.26
- definitions=2023-09-19_01,2023-09-18_01,2023-05-22_02
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 mlxlogscore=546
- priorityscore=1501 lowpriorityscore=0 mlxscore=0 spamscore=0 adultscore=0
- suspectscore=0 impostorscore=0 bulkscore=0 clxscore=1015 phishscore=0
- malwarescore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.19.0-2308100000 definitions=main-2309190062
+ dkim=none (message not signed); spf=pass (domain: fujitsu.com, ip: 207.54.90.47, mailfrom: wangmy@fujitsu.com)
+X-IronPort-AV: E=McAfee;i="6600,9927,10837"; a="132481927"
+X-IronPort-AV: E=Sophos;i="6.02,158,1688396400"; 
+   d="scan'208";a="132481927"
+Received: from unknown (HELO yto-r3.gw.nic.fujitsu.com) ([218.44.52.219])
+  by esa1.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 19 Sep 2023 16:39:23 +0900
+Received: from yto-m2.gw.nic.fujitsu.com (yto-nat-yto-m2.gw.nic.fujitsu.com [192.168.83.65])
+	by yto-r3.gw.nic.fujitsu.com (Postfix) with ESMTP id 20931C3F8B
+	for <openembedded-devel@lists.openembedded.org>; Tue, 19 Sep 2023 16:39:20 +0900 (JST)
+Received: from aks-ab1.gw.nic.fujitsu.com (aks-ab1.gw.nic.fujitsu.com [192.51.207.11])
+	by yto-m2.gw.nic.fujitsu.com (Postfix) with ESMTP id 655AAD5E9D
+	for <openembedded-devel@lists.openembedded.org>; Tue, 19 Sep 2023 16:39:19 +0900 (JST)
+Received: from localhost.localdomain (unknown [10.167.225.33])
+	by aks-ab1.gw.nic.fujitsu.com (Postfix) with ESMTP id 819D32FC8066;
+	Tue, 19 Sep 2023 16:39:18 +0900 (JST)
+From: wangmy@fujitsu.com
+To: openembedded-devel@lists.openembedded.org
+Cc: Wang Mingyu <wangmy@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH] python3-pyfanotify: upgrade 0.2.0 -> 0.2.1
+Date: Tue, 19 Sep 2023 15:38:42 +0800
+Message-Id: <1695109122-7423-1-git-send-email-wangmy@fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
+X-TM-AS-GCONF: 00
+X-TM-AS-Product-Ver: IMSS-9.1.0.1408-9.0.0.1002-27884.005
+X-TM-AS-User-Approved-Sender: Yes
+X-TMASE-Version: IMSS-9.1.0.1408-9.0.1002-27884.005
+X-TMASE-Result: 10--0.902600-10.000000
+X-TMASE-MatchedRID: dhm/lGuWeZijz0nOeth/yTo39wOA02LhpxAd6mi1Ga3ozDhGeQC9ElYM
+	JR3dIrh2ocVgDNidr2Dov4MY2WSEP4grKnsJ1GRgP0HVIeixJdA3l2plwgrtWCD1HdXyqDnEvwU
+	evDt+uW7A1k+nsCg3dwhv3PZYpJKQULGByvQyLAZvTnqYKYXTRlXgGeVUh3WdmyiLZetSf8mfop
+	0ytGwvXiq2rl3dzGQ1/iuRDmUi4Q++jXYjLL0A1w7FjszGpjJtuXeDDe8WI8762qRj64Vs8FhIs
+	qDPtz6+Vw0jFN+6mLZt4Kfiohe7m4uq6u5fdW4KYltngPZ0gyBTyZ1y9sjWHZLqPOO5dObQxMzM
+	gJrM/hR6Fi1pV3LGbw==
+X-TMASE-SNAP-Result: 1.821001.0001-0-1-22:0,33:0,34:0-0
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 19 Sep 2023 07:39:29 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104974
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104975
 
-From: Mingli Yu <mingli.yu@windriver.com>
+From: Wang Mingyu <wangmy@fujitsu.com>
 
-The CFLAGS is hardcoded as DEFAULT_CFLAGS or DEBUG_CFLAGS in configure
-script, so use EXTRA_CFLAGS to make sure -fdebug-prefix-map option passed
-to compiler and also need to put EXTRA_CFLAGS configure option after debug
-option to avoid the CFLAGS overrided by DEBUG_CFLAGS when debug enabled to
-fix the below warning:
-  WARNING: vlock-2.2.3-r0 do_package_qa: QA Issue: File /usr/lib64/vlock/modules/.debug/new.so in package vlock-dbg contains reference to TMPDIR
-  File /usr/lib64/vlock/modules/.debug/ttyblank.so in package vlock-dbg contains reference to TMPDIR
-  File /usr/lib64/vlock/modules/.debug/vesablank.so in package vlock-dbg contains reference to TMPDIR
-  File /usr/lib64/vlock/modules/.debug/all.so in package vlock-dbg contains reference to TMPDIR
-  File /usr/lib64/vlock/modules/.debug/nosysrq.so in package vlock-dbg contains reference to TMPDIR
-  File /usr/sbin/.debug/vlock-main in package vlock-dbg contains reference to TMPDIR [buildpaths]
+0001-ext-define-FNM_EXTMATCH-if-not-already-defined.patch
+refreshed for 0.2.1
 
-Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+Changelog:
+==========
+add installing clang package for readthedocks
+atexit fix
+fix file system events: store fs info when marked
+
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- meta-oe/recipes-extended/vlock/vlock_2.2.3.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ ...1-ext-define-FNM_EXTMATCH-if-not-already-defined.patch | 8 ++++----
+ ...n3-pyfanotify_0.2.0.bb => python3-pyfanotify_0.2.1.bb} | 2 +-
+ 2 files changed, 5 insertions(+), 5 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-pyfanotify_0.2.0.bb => python3-pyfanotify_0.2.1.bb} (83%)
 
-diff --git a/meta-oe/recipes-extended/vlock/vlock_2.2.3.bb b/meta-oe/recipes-extended/vlock/vlock_2.2.3.bb
-index a37404193..455bda1d7 100644
---- a/meta-oe/recipes-extended/vlock/vlock_2.2.3.bb
-+++ b/meta-oe/recipes-extended/vlock/vlock_2.2.3.bb
-@@ -37,13 +37,13 @@ do_configure () {
-         VLOCK_GROUP=root \
-         ROOT_GROUP=root \
-         CC="${CC}" \
--        CFLAGS="${CFLAGS}" \
-         LDFLAGS="${LDFLAGS}" \
-         --prefix=${prefix} \
-         --libdir=${libdir} \
-         --mandir=${mandir} \
-         --with-modules="all.so new.so nosysrq.so ttyblank.so vesablank.so" \
-         --disable-root-password --enable-debug --disable-fail-count \
-+        EXTRA_CFLAGS="${CFLAGS}" \
-         ${PACKAGECONFIG_CONFARGS}
- }
+diff --git a/meta-python/recipes-devtools/python/python3-pyfanotify/0001-ext-define-FNM_EXTMATCH-if-not-already-defined.patch b/meta-python/recipes-devtools/python/python3-pyfanotify/0001-ext-define-FNM_EXTMATCH-if-not-already-defined.patch
+index 933e086265..2fa3cb05d4 100644
+--- a/meta-python/recipes-devtools/python/python3-pyfanotify/0001-ext-define-FNM_EXTMATCH-if-not-already-defined.patch
++++ b/meta-python/recipes-devtools/python/python3-pyfanotify/0001-ext-define-FNM_EXTMATCH-if-not-already-defined.patch
+@@ -13,11 +13,11 @@ Upstream-Status: Inappropriate
+  1 file changed, 3 insertions(+)
+ 
+ diff --git a/src/ext.c b/src/ext.c
+-index 2ba9a14..98ffc20 100644
++index e0bbe21..7d979d3 100644
+ --- a/src/ext.c
+ +++ b/src/ext.c
+-@@ -18,6 +18,9 @@
+- #include <sys/un.h>
++@@ -19,6 +19,9 @@
++ #include <sys/vfs.h>
+  #include <unistd.h>
+  
+ +#ifndef FNM_EXTMATCH
+@@ -27,5 +27,5 @@ index 2ba9a14..98ffc20 100644
+  PyDoc_STRVAR(ext__doc__,
+  "Wrapper for fanotify.\n"
+ -- 
+-2.32.0
++2.34.1
+ 
+diff --git a/meta-python/recipes-devtools/python/python3-pyfanotify_0.2.0.bb b/meta-python/recipes-devtools/python/python3-pyfanotify_0.2.1.bb
+similarity index 83%
+rename from meta-python/recipes-devtools/python/python3-pyfanotify_0.2.0.bb
+rename to meta-python/recipes-devtools/python/python3-pyfanotify_0.2.1.bb
+index 7c16750040..c9fd07144c 100644
+--- a/meta-python/recipes-devtools/python/python3-pyfanotify_0.2.0.bb
++++ b/meta-python/recipes-devtools/python/python3-pyfanotify_0.2.1.bb
+@@ -5,7 +5,7 @@ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=636a36c9df04efcfacf839b8866d9a37"
+ 
+ SRC_URI += "file://0001-ext-define-FNM_EXTMATCH-if-not-already-defined.patch"
+-SRC_URI[sha256sum] = "1ec1c61fba9dea96cf8eac7f1a0cca2517613da20d156b7da2a06f9d63c77aca"
++SRC_URI[sha256sum] = "fd62dccdf3c17ca117e3279f0cbc65c639e53c9dec8a459d44ed6a35c1a18e60"
+ 
+ inherit pypi setuptools3
  
 -- 
-2.25.1
+2.34.1
 
 
