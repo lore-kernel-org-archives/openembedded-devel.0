@@ -2,93 +2,87 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 943E0CD549F
-	for <webhook@archiver.kernel.org>; Tue, 19 Sep 2023 07:56:19 +0000 (UTC)
-Received: from esa4.hc1455-7.c3s2.iphmx.com (esa4.hc1455-7.c3s2.iphmx.com [68.232.139.117])
- by mx.groups.io with SMTP id smtpd.web11.2710.1695110177066843429
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 950ACCD54A0
+	for <webhook@archiver.kernel.org>; Tue, 19 Sep 2023 07:57:09 +0000 (UTC)
+Received: from esa9.hc1455-7.c3s2.iphmx.com (esa9.hc1455-7.c3s2.iphmx.com [139.138.36.223])
+ by mx.groups.io with SMTP id smtpd.web11.2750.1695110228926714176
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 19 Sep 2023 00:56:17 -0700
+ Tue, 19 Sep 2023 00:57:09 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: fujitsu.com, ip: 68.232.139.117, mailfrom: wangmy@fujitsu.com)
-X-IronPort-AV: E=McAfee;i="6600,9927,10837"; a="132747047"
+ dkim=none (message not signed); spf=pass (domain: fujitsu.com, ip: 139.138.36.223, mailfrom: wangmy@fujitsu.com)
+X-IronPort-AV: E=McAfee;i="6600,9927,10837"; a="120913159"
 X-IronPort-AV: E=Sophos;i="6.02,158,1688396400"; 
-   d="scan'208";a="132747047"
-Received: from unknown (HELO oym-r4.gw.nic.fujitsu.com) ([210.162.30.92])
-  by esa4.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 19 Sep 2023 16:56:14 +0900
-Received: from oym-m3.gw.nic.fujitsu.com (oym-nat-oym-m3.gw.nic.fujitsu.com [192.168.87.60])
-	by oym-r4.gw.nic.fujitsu.com (Postfix) with ESMTP id BD6FBDE6AD
-	for <openembedded-devel@lists.openembedded.org>; Tue, 19 Sep 2023 16:56:12 +0900 (JST)
-Received: from kws-ab3.gw.nic.fujitsu.com (kws-ab3.gw.nic.fujitsu.com [192.51.206.21])
-	by oym-m3.gw.nic.fujitsu.com (Postfix) with ESMTP id 00D67D9481
-	for <openembedded-devel@lists.openembedded.org>; Tue, 19 Sep 2023 16:56:12 +0900 (JST)
+   d="scan'208";a="120913159"
+Received: from unknown (HELO yto-r3.gw.nic.fujitsu.com) ([218.44.52.219])
+  by esa9.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 19 Sep 2023 16:57:06 +0900
+Received: from yto-m4.gw.nic.fujitsu.com (yto-nat-yto-m4.gw.nic.fujitsu.com [192.168.83.67])
+	by yto-r3.gw.nic.fujitsu.com (Postfix) with ESMTP id 8263FC3F83
+	for <openembedded-devel@lists.openembedded.org>; Tue, 19 Sep 2023 16:57:04 +0900 (JST)
+Received: from aks-ab1.gw.nic.fujitsu.com (aks-ab1.gw.nic.fujitsu.com [192.51.207.11])
+	by yto-m4.gw.nic.fujitsu.com (Postfix) with ESMTP id C619DD3F00
+	for <openembedded-devel@lists.openembedded.org>; Tue, 19 Sep 2023 16:57:03 +0900 (JST)
 Received: from localhost.localdomain (unknown [10.167.225.33])
-	by kws-ab3.gw.nic.fujitsu.com (Postfix) with ESMTP id 786C32007911B;
-	Tue, 19 Sep 2023 16:56:11 +0900 (JST)
+	by aks-ab1.gw.nic.fujitsu.com (Postfix) with ESMTP id F29A92FC8066;
+	Tue, 19 Sep 2023 16:57:02 +0900 (JST)
 From: wangmy@fujitsu.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-python] [PATCH] python3-typeguard: upgrade 4.1.3 -> 4.1.5
-Date: Tue, 19 Sep 2023 15:55:40 +0800
-Message-Id: <1695110140-8206-1-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH] python3-types-setuptools: upgrade 68.1.0.1 -> 68.2.0.0
+Date: Tue, 19 Sep 2023 15:56:25 +0800
+Message-Id: <1695110185-8261-1-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 X-TM-AS-GCONF: 00
-X-TM-AS-Product-Ver: IMSS-9.1.0.1417-9.0.0.1002-27884.005
+X-TM-AS-Product-Ver: IMSS-9.1.0.1408-9.0.0.1002-27884.005
 X-TM-AS-User-Approved-Sender: Yes
-X-TMASE-Version: IMSS-9.1.0.1417-9.0.1002-27884.005
-X-TMASE-Result: 10-3.509900-10.000000
-X-TMASE-MatchedRID: rofoCPeR2CGjz0nOeth/yUIIxwDaU5mrrOCEGIPhtwiQYkZDE2p7wJ7V
-	Ny7+UW/96Ztbads/P3GBkEdjut+Lfq/a/Ug5qXLHCtzGvPCy/m5UENBIMyKD0QfxTM57BPHD7v0
-	MlFSLfmlNDQmQ8bbzv+affHI8kAmis1RWeqLGIw7TfU1/F+PbMxCE2NlBjIjcKXqmmYTGpxiUg5
-	UD6AlF0rF9uGobEuT7gDLqnrRlXrYyF7rbsD7xod0H8LFZNFG76sBnwpOylLP5Kz1w/anMPq0uz
-	MZaU+kNPvB2+kzXGu4knFAaSw0QhU3bfSpawL60DmOMGDNLxPFUu7ApVxzSG11hwXiwxana6mYR
-	bTJER5SIHqaUMp7VXtL/LK0d4I30Ze/gJB41STsbqpM7Cr+fvX7cGd19dSFd
+X-TMASE-Version: IMSS-9.1.0.1408-9.0.1002-27884.005
+X-TMASE-Result: 10--3.254600-10.000000
+X-TMASE-MatchedRID: R9NZgeCyXhKjz0nOeth/yUIIxwDaU5mrlDt5PQMgj00T4iDztnfIOVHs
+	YDQ6MXSWepwUk+Mcqyx5ILz8QQa832+q6t+f1BKUpSXVpBS+ilZUENBIMyKD0QfxTM57BPHD7v0
+	MlFSLfmlNDQmQ8bbzv+affHI8kAmibAGOCaWkxjvdCok3ibXlQX0tCKdnhB589yM15V5aWpj6C0
+	ePs7A07bxtFR53UcYCwHOHX6dDxrYtEDFJrYMxWlaeH+PtGKrAykqDQty+kgG0VqHcNvs9j6421
+	cNjLxDifNNVUz6sX5K13lK4PeV9rQnlaPfuxdVz8gwWDQic4+rPmACeZqO85TioKJ2WPUxTLS4A
+	EOLjtwA=
 X-TMASE-SNAP-Result: 1.821001.0001-0-1-22:0,33:0,34:0-0
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 19 Sep 2023 07:56:19 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104994
+ <openembedded-devel@lists.openembedded.org>; Tue, 19 Sep 2023 07:57:09 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104995
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
 Changelog:
-=========
--Fixed Callable erroneously rejecting a callable that has the requested amount
- of positional arguments but they have defaults
--Fixed a regression introduced in v4.1.4 where the elements of Literal got
- quotes removed from them by the AST transformer
--Fixed AttributeError where the transformer removed elements from a PEP 604 union
--Fixed AttributeError: 'Subscript' object has no attribute 'slice' when
- encountering an annotation with a subscript containing an ignored type
- (imported within an if TYPE_CHECKING: block)
--Fixed type checking not being skipped when the target is a union (PEP 604 or
- typing.Union) where one of the elements is an ignored type (shadowed by an
- argument, variable assignment or an if TYPE_CHECKING import) (#394, #395)
--Fixed type checking of class instances created in __new__() in cases such as
- enums where this method is already invoked before the class has finished initializing
+===========
+-1 public Python file has been added: setuptools/tests/test_core_metadata.py.
+-0 files included in typeshed's stubs have been deleted.
+-7 files included in typeshed's stubs have been modified or renamed:
+ setuptools/__init__.py, setuptools/command/editable_wheel.py,
+ setuptools/command/egg_info.py, setuptools/depends.py, setuptools/dist.py,
+ setuptools/monkey.py, setuptools/namespaces.py.
+-Total lines of Python code added: 1051.
+-Total lines of Python code deleted: 682.
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../{python3-typeguard_4.1.3.bb => python3-typeguard_4.1.5.bb}  | 2 +-
+ ...uptools_68.1.0.1.bb => python3-types-setuptools_68.2.0.0.bb} | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-typeguard_4.1.3.bb => python3-typeguard_4.1.5.bb} (89%)
+ rename meta-python/recipes-devtools/python/{python3-types-setuptools_68.1.0.1.bb => python3-types-setuptools_68.2.0.0.bb} (74%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-typeguard_4.1.3.bb b/meta-python/recipes-devtools/python/python3-typeguard_4.1.5.bb
-similarity index 89%
-rename from meta-python/recipes-devtools/python/python3-typeguard_4.1.3.bb
-rename to meta-python/recipes-devtools/python/python3-typeguard_4.1.5.bb
-index 73935d090c..53a02dc4bc 100644
---- a/meta-python/recipes-devtools/python/python3-typeguard_4.1.3.bb
-+++ b/meta-python/recipes-devtools/python/python3-typeguard_4.1.5.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = "https://pypi.org/project/typeguard/"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=f0e423eea5c91e7aa21bdb70184b3e53"
+diff --git a/meta-python/recipes-devtools/python/python3-types-setuptools_68.1.0.1.bb b/meta-python/recipes-devtools/python/python3-types-setuptools_68.2.0.0.bb
+similarity index 74%
+rename from meta-python/recipes-devtools/python/python3-types-setuptools_68.1.0.1.bb
+rename to meta-python/recipes-devtools/python/python3-types-setuptools_68.2.0.0.bb
+index 9d8022bf1c..ed0b1b2cd8 100644
+--- a/meta-python/recipes-devtools/python/python3-types-setuptools_68.1.0.1.bb
++++ b/meta-python/recipes-devtools/python/python3-types-setuptools_68.2.0.0.bb
+@@ -5,6 +5,6 @@ LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=6;endline=6;md5=ef4dc1e740f5c928f1
  
--SRC_URI[sha256sum] = "7d4264cd631ac1157c5bb5ec992281b4f1e2ba7a35db91bc15f442235e244803"
-+SRC_URI[sha256sum] = "ea0a113bbc111bcffc90789ebb215625c963411f7096a7e9062d4e4630c155fd"
+ inherit pypi setuptools3
  
- inherit pypi python_setuptools_build_meta ptest
+-SRC_URI[sha256sum] = "271ed8da44885cd9a701c86e48cc6d3cc988052260e72b3ce26c26b3028f86ed"
++SRC_URI[sha256sum] = "a4216f1e2ef29d089877b3af3ab2acf489eb869ccaf905125c69d2dc3932fd85"
  
+ BBCLASSEXTEND = "native"
 -- 
 2.34.1
 
