@@ -2,112 +2,80 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 683C5CD548B
-	for <webhook@archiver.kernel.org>; Tue, 19 Sep 2023 07:39:29 +0000 (UTC)
-Received: from esa1.hc1455-7.c3s2.iphmx.com (esa1.hc1455-7.c3s2.iphmx.com [207.54.90.47])
- by mx.groups.io with SMTP id smtpd.web11.2308.1695109165900764279
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6304ECD548C
+	for <webhook@archiver.kernel.org>; Tue, 19 Sep 2023 07:39:59 +0000 (UTC)
+Received: from esa2.hc1455-7.c3s2.iphmx.com (esa2.hc1455-7.c3s2.iphmx.com [207.54.90.48])
+ by mx.groups.io with SMTP id smtpd.web10.2341.1695109189001649404
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 19 Sep 2023 00:39:26 -0700
+ Tue, 19 Sep 2023 00:39:49 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: fujitsu.com, ip: 207.54.90.47, mailfrom: wangmy@fujitsu.com)
-X-IronPort-AV: E=McAfee;i="6600,9927,10837"; a="132481927"
+ dkim=none (message not signed); spf=pass (domain: fujitsu.com, ip: 207.54.90.48, mailfrom: wangmy@fujitsu.com)
+X-IronPort-AV: E=McAfee;i="6600,9927,10837"; a="132614198"
 X-IronPort-AV: E=Sophos;i="6.02,158,1688396400"; 
-   d="scan'208";a="132481927"
+   d="scan'208";a="132614198"
 Received: from unknown (HELO yto-r3.gw.nic.fujitsu.com) ([218.44.52.219])
-  by esa1.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 19 Sep 2023 16:39:23 +0900
-Received: from yto-m2.gw.nic.fujitsu.com (yto-nat-yto-m2.gw.nic.fujitsu.com [192.168.83.65])
-	by yto-r3.gw.nic.fujitsu.com (Postfix) with ESMTP id 20931C3F8B
-	for <openembedded-devel@lists.openembedded.org>; Tue, 19 Sep 2023 16:39:20 +0900 (JST)
+  by esa2.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 19 Sep 2023 16:39:47 +0900
+Received: from yto-m4.gw.nic.fujitsu.com (yto-nat-yto-m4.gw.nic.fujitsu.com [192.168.83.67])
+	by yto-r3.gw.nic.fujitsu.com (Postfix) with ESMTP id 48D0EC3F84
+	for <openembedded-devel@lists.openembedded.org>; Tue, 19 Sep 2023 16:39:44 +0900 (JST)
 Received: from aks-ab1.gw.nic.fujitsu.com (aks-ab1.gw.nic.fujitsu.com [192.51.207.11])
-	by yto-m2.gw.nic.fujitsu.com (Postfix) with ESMTP id 655AAD5E9D
-	for <openembedded-devel@lists.openembedded.org>; Tue, 19 Sep 2023 16:39:19 +0900 (JST)
+	by yto-m4.gw.nic.fujitsu.com (Postfix) with ESMTP id 8FE2AD3F11
+	for <openembedded-devel@lists.openembedded.org>; Tue, 19 Sep 2023 16:39:43 +0900 (JST)
 Received: from localhost.localdomain (unknown [10.167.225.33])
-	by aks-ab1.gw.nic.fujitsu.com (Postfix) with ESMTP id 819D32FC8066;
-	Tue, 19 Sep 2023 16:39:18 +0900 (JST)
+	by aks-ab1.gw.nic.fujitsu.com (Postfix) with ESMTP id AD9F82FC8066;
+	Tue, 19 Sep 2023 16:39:42 +0900 (JST)
 From: wangmy@fujitsu.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-python] [PATCH] python3-pyfanotify: upgrade 0.2.0 -> 0.2.1
-Date: Tue, 19 Sep 2023 15:38:42 +0800
-Message-Id: <1695109122-7423-1-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH] psqlodbc: upgrade 15.00.0000 -> 16.00.0000
+Date: Tue, 19 Sep 2023 15:39:33 +0800
+Message-Id: <1695109173-7480-1-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 X-TM-AS-GCONF: 00
 X-TM-AS-Product-Ver: IMSS-9.1.0.1408-9.0.0.1002-27884.005
 X-TM-AS-User-Approved-Sender: Yes
 X-TMASE-Version: IMSS-9.1.0.1408-9.0.1002-27884.005
-X-TMASE-Result: 10--0.902600-10.000000
-X-TMASE-MatchedRID: dhm/lGuWeZijz0nOeth/yTo39wOA02LhpxAd6mi1Ga3ozDhGeQC9ElYM
-	JR3dIrh2ocVgDNidr2Dov4MY2WSEP4grKnsJ1GRgP0HVIeixJdA3l2plwgrtWCD1HdXyqDnEvwU
-	evDt+uW7A1k+nsCg3dwhv3PZYpJKQULGByvQyLAZvTnqYKYXTRlXgGeVUh3WdmyiLZetSf8mfop
-	0ytGwvXiq2rl3dzGQ1/iuRDmUi4Q++jXYjLL0A1w7FjszGpjJtuXeDDe8WI8762qRj64Vs8FhIs
-	qDPtz6+Vw0jFN+6mLZt4Kfiohe7m4uq6u5fdW4KYltngPZ0gyBTyZ1y9sjWHZLqPOO5dObQxMzM
-	gJrM/hR6Fi1pV3LGbw==
+X-TMASE-Result: 10-2.052600-10.000000
+X-TMASE-MatchedRID: hsQjHHSArR6jz0nOeth/yUIIxwDaU5mrBGvINcfHqheBiEGSH1NomL6p
+	xbTOjavy+7QcRaVoa8nGKIf6hBf7VaGGOyqBK41vEXjPIvKd74Br9+Kgn2XgeHtzXL7lPwD/31w
+	l3qzgklKxfbhqGxLk+4Ay6p60ZV62yA7duzCw6dIBpRCTkRk5SfoLR4+zsDTtpmd/ehreR4Wgoy
+	tBWPueXTjJ24CWFuhlCoIPCUYXiHEAP5BvNXYZrpgJsb02Kq0M9n1W8bYGcFlGL5d2g2V/ZtdXa
+	1e9lTbzoKMKbkEq7FbyDBYNCJzj6s+YAJ5mo7zlOKgonZY9TFMtLgAQ4uO3AA==
 X-TMASE-SNAP-Result: 1.821001.0001-0-1-22:0,33:0,34:0-0
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 19 Sep 2023 07:39:29 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104975
+ <openembedded-devel@lists.openembedded.org>; Tue, 19 Sep 2023 07:39:59 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104976
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
-0001-ext-define-FNM_EXTMATCH-if-not-already-defined.patch
-refreshed for 0.2.1
-
 Changelog:
 ==========
-add installing clang package for readthedocks
-atexit fix
-fix file system events: store fs info when marked
+ Use autoconf to check for stdbool.h.
+ Make it possible to use standard bool on Windows.
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- ...1-ext-define-FNM_EXTMATCH-if-not-already-defined.patch | 8 ++++----
- ...n3-pyfanotify_0.2.0.bb => python3-pyfanotify_0.2.1.bb} | 2 +-
- 2 files changed, 5 insertions(+), 5 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-pyfanotify_0.2.0.bb => python3-pyfanotify_0.2.1.bb} (83%)
+ .../psqlodbc/{psqlodbc_15.00.0000.bb => psqlodbc_16.00.0000.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-dbs/psqlodbc/{psqlodbc_15.00.0000.bb => psqlodbc_16.00.0000.bb} (96%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-pyfanotify/0001-ext-define-FNM_EXTMATCH-if-not-already-defined.patch b/meta-python/recipes-devtools/python/python3-pyfanotify/0001-ext-define-FNM_EXTMATCH-if-not-already-defined.patch
-index 933e086265..2fa3cb05d4 100644
---- a/meta-python/recipes-devtools/python/python3-pyfanotify/0001-ext-define-FNM_EXTMATCH-if-not-already-defined.patch
-+++ b/meta-python/recipes-devtools/python/python3-pyfanotify/0001-ext-define-FNM_EXTMATCH-if-not-already-defined.patch
-@@ -13,11 +13,11 @@ Upstream-Status: Inappropriate
-  1 file changed, 3 insertions(+)
+diff --git a/meta-oe/recipes-dbs/psqlodbc/psqlodbc_15.00.0000.bb b/meta-oe/recipes-dbs/psqlodbc/psqlodbc_16.00.0000.bb
+similarity index 96%
+rename from meta-oe/recipes-dbs/psqlodbc/psqlodbc_15.00.0000.bb
+rename to meta-oe/recipes-dbs/psqlodbc/psqlodbc_16.00.0000.bb
+index be79caef0b..97333f679d 100644
+--- a/meta-oe/recipes-dbs/psqlodbc/psqlodbc_15.00.0000.bb
++++ b/meta-oe/recipes-dbs/psqlodbc/psqlodbc_16.00.0000.bb
+@@ -26,7 +26,7 @@ SRC_URI = "http://ftp.postgresql.org/pub/odbc/versions/src/${BPN}-${PV}.tar.gz \
+     file://run-ptest \
+ "
  
- diff --git a/src/ext.c b/src/ext.c
--index 2ba9a14..98ffc20 100644
-+index e0bbe21..7d979d3 100644
- --- a/src/ext.c
- +++ b/src/ext.c
--@@ -18,6 +18,9 @@
-- #include <sys/un.h>
-+@@ -19,6 +19,9 @@
-+ #include <sys/vfs.h>
-  #include <unistd.h>
-  
- +#ifndef FNM_EXTMATCH
-@@ -27,5 +27,5 @@ index 2ba9a14..98ffc20 100644
-  PyDoc_STRVAR(ext__doc__,
-  "Wrapper for fanotify.\n"
- -- 
--2.32.0
-+2.34.1
+-SRC_URI[sha256sum] = "ca57d6349532ea7fb4fae17bbfc107abe5a155ca2f43446315f9e23764b3f8ec"
++SRC_URI[sha256sum] = "afd892f89d2ecee8d3f3b2314f1bd5bf2d02201872c6e3431e5c31096eca4c8b"
  
-diff --git a/meta-python/recipes-devtools/python/python3-pyfanotify_0.2.0.bb b/meta-python/recipes-devtools/python/python3-pyfanotify_0.2.1.bb
-similarity index 83%
-rename from meta-python/recipes-devtools/python/python3-pyfanotify_0.2.0.bb
-rename to meta-python/recipes-devtools/python/python3-pyfanotify_0.2.1.bb
-index 7c16750040..c9fd07144c 100644
---- a/meta-python/recipes-devtools/python/python3-pyfanotify_0.2.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-pyfanotify_0.2.1.bb
-@@ -5,7 +5,7 @@ LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=636a36c9df04efcfacf839b8866d9a37"
- 
- SRC_URI += "file://0001-ext-define-FNM_EXTMATCH-if-not-already-defined.patch"
--SRC_URI[sha256sum] = "1ec1c61fba9dea96cf8eac7f1a0cca2517613da20d156b7da2a06f9d63c77aca"
-+SRC_URI[sha256sum] = "fd62dccdf3c17ca117e3279f0cbc65c639e53c9dec8a459d44ed6a35c1a18e60"
- 
- inherit pypi setuptools3
+ DEPENDS += "postgresql unixodbc"
  
 -- 
 2.34.1
