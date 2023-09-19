@@ -1,162 +1,135 @@
-Return-Path: <wangmy@fujitsu.com>
+Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C72DECD54A7
-	for <webhook@archiver.kernel.org>; Tue, 19 Sep 2023 08:03:09 +0000 (UTC)
-Received: from esa12.hc1455-7.c3s2.iphmx.com (esa12.hc1455-7.c3s2.iphmx.com [139.138.37.100])
- by mx.groups.io with SMTP id smtpd.web11.2892.1695110585162268426
- for <openembedded-devel@lists.openembedded.org>;
- Tue, 19 Sep 2023 01:03:05 -0700
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D3BD9CD54BA
+	for <webhook@archiver.kernel.org>; Tue, 19 Sep 2023 11:49:41 +0000 (UTC)
+Received: from mail-yw1-f178.google.com (mail-yw1-f178.google.com [209.85.128.178])
+ by mx.groups.io with SMTP id smtpd.web11.6446.1695124171558643622
+ for <Openembedded-devel@lists.openembedded.org>;
+ Tue, 19 Sep 2023 04:49:31 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: fujitsu.com, ip: 139.138.37.100, mailfrom: wangmy@fujitsu.com)
-X-IronPort-AV: E=McAfee;i="6600,9927,10837"; a="112058295"
-X-IronPort-AV: E=Sophos;i="6.02,158,1688396400"; 
-   d="scan'208";a="112058295"
-Received: from unknown (HELO yto-r1.gw.nic.fujitsu.com) ([218.44.52.217])
-  by esa12.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 19 Sep 2023 17:03:02 +0900
-Received: from yto-m2.gw.nic.fujitsu.com (yto-nat-yto-m2.gw.nic.fujitsu.com [192.168.83.65])
-	by yto-r1.gw.nic.fujitsu.com (Postfix) with ESMTP id AA5ADDB4D5
-	for <openembedded-devel@lists.openembedded.org>; Tue, 19 Sep 2023 17:03:00 +0900 (JST)
-Received: from aks-ab2.gw.nic.fujitsu.com (aks-ab2.gw.nic.fujitsu.com [192.51.207.12])
-	by yto-m2.gw.nic.fujitsu.com (Postfix) with ESMTP id D7FC7D5EAC
-	for <openembedded-devel@lists.openembedded.org>; Tue, 19 Sep 2023 17:02:59 +0900 (JST)
-Received: from localhost.localdomain (unknown [10.167.225.33])
-	by aks-ab2.gw.nic.fujitsu.com (Postfix) with ESMTP id DE8B186E47;
-	Tue, 19 Sep 2023 17:02:58 +0900 (JST)
-From: wangmy@fujitsu.com
-To: openembedded-devel@lists.openembedded.org
-Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-oe] [PATCH] xmlsec1: upgrade 1.2.37 -> 1.3.1
-Date: Tue, 19 Sep 2023 16:02:21 +0800
-Message-Id: <1695110541-8515-1-git-send-email-wangmy@fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
-X-TM-AS-GCONF: 00
-X-TM-AS-Product-Ver: IMSS-9.1.0.1408-9.0.0.1002-27884.006
-X-TM-AS-User-Approved-Sender: Yes
-X-TMASE-Version: IMSS-9.1.0.1408-9.0.1002-27884.006
-X-TMASE-Result: 10--9.864900-10.000000
-X-TMASE-MatchedRID: NSUiViEAzXSjz0nOeth/yTo39wOA02LhQRlUSJjs8Z/9wRnyxuPjhLYH
-	qiG3BlJoMEiQlkRQZB0kAC9UeVU55m2cVk8C+vI+l2fRVpVyo6TCmgWHFde40FoJuH6vaNCzg7c
-	fJQw9FscHfklSbQowABK4lG1JTzij4KdJbWzbHtvNgrlT5Ajc7jeXamXCCu1YMHDHnR8cUQIhS0
-	ofkAkz2SL637QCIVpiytuC65NNIO5MGF0Ua9spp5VRzPxemJL0FbxpnsAk1QJGMe+tDjQ3FlKCS
-	V79DbqwNREI2+5CsCBjkBmtMrv8Ml0ieHN50/kHuLt50vtxBA7hEXiLZlbM8UukIs3g1HjeRg13
-	d2dSV66r1jKm0SUrl1pQ8H4V7LBHBAF1SBaD5qSVd49c0zgWM/Od2ImQcUyEQkz7hHwAeTvsWiB
-	RDS9X2HzRXXQCJIIjq5UJ2wehuDcgdDqyZU3r4xMxKDqgAFSzWNQbDj7ezS0Pa94jf+HCbyP+FD
-	9UJZFv7QHQxPxLQSSAMuqetGVetr9k4V4N5ceA3QfwsVk0Ubv+efAnnZBiL8z+Ba7+nv3u1tlR/
-	hOPPXi2k6VfVHA7vCNxc22dgb36nzIJyhfJA3x+3BndfXUhXQ==
-X-TMASE-SNAP-Result: 1.821001.0001-0-1-22:0,33:0,34:0-0
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=F4oTYn+M;
+ spf=pass (domain: gmail.com, ip: 209.85.128.178, mailfrom: akuster808@gmail.com)
+Received: by mail-yw1-f178.google.com with SMTP id 00721157ae682-59bebd5bdadso57240577b3.0
+        for <Openembedded-devel@lists.openembedded.org>; Tue, 19 Sep 2023 04:49:31 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1695124170; x=1695728970; darn=lists.openembedded.org;
+        h=content-transfer-encoding:in-reply-to:from:references:cc:to
+         :content-language:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=rbk0BzRyKqrZg2yTxn4+vwCevlDU6Q5ghI/5YAVAIiA=;
+        b=F4oTYn+M8WuxicMq72dDwK+4nDL3GYthpgpXUU2FPJ6nkALpMqf232Cj8pCtqXbgfE
+         MWKxjWf136pZG2WL8pG99kEZwBWTy0rbI6LU75AbiBLJBlVfD6pKogh/nuyUB+zufj7y
+         GEnyUAgdeQlOhjI5PDZWpGXzuS4445HeHzcwHf6C0J3AHlirpTq+4bHFsnL2gw29++Fy
+         goMQrkCnxZOwMO9WCQz6hVVCGtMcM9IvOAS0abee8swLYkuTI/jtflLoXjMHjCNPVfNB
+         LrBbc3iB5Intr8MOIB3Pqls370Gmwd57Jbx8PAQDtibWryxGjxXuxqmKumTYUxP1jyws
+         eKcA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1695124170; x=1695728970;
+        h=content-transfer-encoding:in-reply-to:from:references:cc:to
+         :content-language:subject:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=rbk0BzRyKqrZg2yTxn4+vwCevlDU6Q5ghI/5YAVAIiA=;
+        b=NZKL8OL4GxF3FzetX4TXY88DDJs1/aioYZmcK8oiTpbJ8qwDyPwFn/CJ9xpz5LE6jF
+         R1y93cURxotcw53FGxU/pYTylFKLWPHRhRBOsTIO2hRQIKfx9cUs3fq+im9ad70wjdLA
+         ctM7n0hIv3i5VDdIKB/syqQPHo0VLOkubUjDxwu2Ci3AeHnVngMnY3CRU2S9uD26TJ/G
+         Spfsew5L/xGGndENt2Jbn0FO77F2SKCrR/60upUCNjSw60kLEh7yHiuhdCFkRKl6nBNx
+         JIQPUrsnyLdW2ttw9vQTTWNsrdOpzJpVsQmgNDkB4/+W5cYD45pynPFJrCecKy30yTHk
+         3NAA==
+X-Gm-Message-State: AOJu0Yyzq37jvRPNS7LbuLRN1FsYjPfeRUoMXnLO9B4NOL4/BpcgZlin
+	npX0x26/782gHeoKLvL+kLM=
+X-Google-Smtp-Source: AGHT+IF/2AO8r05LH/K+Suky/yPWaZaxNtgBi943+i3DoIYKZlpOr7//ISNuYfDiqiUAdnxNW8nMZA==
+X-Received: by 2002:a0d:cc0a:0:b0:59b:49a0:eec0 with SMTP id o10-20020a0dcc0a000000b0059b49a0eec0mr11739569ywd.12.1695124170693;
+        Tue, 19 Sep 2023 04:49:30 -0700 (PDT)
+Received: from ?IPV6:2600:1700:9190:ba10:9058:5f6e:d411:ff3a? ([2600:1700:9190:ba10:9058:5f6e:d411:ff3a])
+        by smtp.gmail.com with ESMTPSA id w124-20020a0dd482000000b005922c29c025sm3097350ywd.108.2023.09.19.04.49.30
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Tue, 19 Sep 2023 04:49:30 -0700 (PDT)
+Message-ID: <9917aa92-ea3e-34f8-9199-6ff55b8bea54@gmail.com>
+Date: Tue, 19 Sep 2023 07:49:29 -0400
+MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.15.0
+Subject: Re: [oe][meta-oe][kirkstone] freeglut: add packageconfigs for x11,
+ wayland, gles, and demos
+Content-Language: en-US
+To: rs@ti.com, raj.khem@gmail.com
+Cc: Openembedded-devel@lists.openembedded.org
+References: <20230915010513.3425887-1-rs@ti.com>
+From: akuster808 <akuster808@gmail.com>
+In-Reply-To: <20230915010513.3425887-1-rs@ti.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 19 Sep 2023 08:03:09 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105001
+ <openembedded-devel@lists.openembedded.org>; Tue, 19 Sep 2023 11:49:41 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105002
 
-From: Wang Mingyu <wangmy@fujitsu.com>
 
-0001-xmldsigverify-Include-xmlsec-parser.h.patch
-removed since it's included in 1.3.1
 
-Changelog:
-==========
--Added "--with-libltdl" option for ./configure to allow custom libltdl installations and deprecated "--enable-crypto-dl" option.
--Added support for cclang compiler on non-MacOSX platforms.
--(xmlsec-openssl) Restored support for LibreSSL and bumped minimum required version to 3.5.0.
--(xmlsec-nss) Restored minimum supported NSS version to 3.35.
--Several other small fixes (more details).
+On 9/14/23 9:05 PM, Randolph Sapp via lists.openembedded.org wrote:
+> From: Randolph Sapp <rs@ti.com>
+>
+> Add the PACKAGECONFIG entries to build freeglut for wayland and x11,
+> which should conflict in this release, and add the ability to build a
+> GLES release.
+>
+> Also split the demos their own config. The demos will conflict with the
+> gles flag as they still require desktop GL in this release. This is
+> essentially a loose backport of the following patch for this older
+> release:
+>
+> a9212722c (freeglut: Add packageconfigs for x11/wayland/gles, 2023-01-10)
+>
+> It does not change the current default behavior of compiling for x11
+> with demos.
+>
+> Signed-off-by: Randolph Sapp <rs@ti.com>
+> ---
+>   meta-oe/recipes-graphics/freeglut/freeglut_3.2.1.bb | 11 +++++++++--
+>   1 file changed, 9 insertions(+), 2 deletions(-)
+>
+> diff --git a/meta-oe/recipes-graphics/freeglut/freeglut_3.2.1.bb b/meta-oe/recipes-graphics/freeglut/freeglut_3.2.1.bb
+> index 6ef9f74c70..a204f86a6f 100644
+> --- a/meta-oe/recipes-graphics/freeglut/freeglut_3.2.1.bb
+> +++ b/meta-oe/recipes-graphics/freeglut/freeglut_3.2.1.bb
+> @@ -10,11 +10,18 @@ SRC_URI[sha256sum] = "d4000e02102acaf259998c870e25214739d1f16f67f99cb35e4f468413
+>   inherit cmake features_check
+>   
+>   # depends on virtual/libx11, virtual/libgl
+> -REQUIRED_DISTRO_FEATURES = "x11 opengl"
+> +REQUIRED_DISTRO_FEATURES = "opengl"
+> +
+> +PACKAGECONFIG ?= "x11 demos"
+> +
+> +PACKAGECONFIG[x11] = ",,virtual/libx11 virtual/libgl libxi libglu,,,wayland"
+> +PACKAGECONFIG[wayland] = "-DFREEGLUT_WAYLAND=ON,-DFREEGLUT_WAYLAND=OFF,wayland,,,x11"
+> +PACKAGECONFIG[gles] = "-DFREEGLUT_GLES=ON,-DFREEGLUT_GLES=OFF,virtual/libgles1 virtual/libgles2 virtual/egl,,,demos"
+> +PACKAGECONFIG[demos] = "-DFREEGLUT_BUILD_DEMOS=ON,-DFREEGLUT_BUILD_DEMOS=OFF"
+>   
+>   # Do not use -fno-common, check back when upgrading to new version it might not be needed
+>   CFLAGS += "-fcommon"
+>   
+>   PROVIDES += "mesa-glut"
+>   
+> -DEPENDS = "virtual/libx11 libxmu libxi virtual/libgl libglu libxrandr"
+> +DEPENDS = "libxkbcommon"
+Is there any reason not to take this commit?  Master and Kirkstone would 
+have different implementations for the same thing.
 
-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
----
- ...mldsigverify-Include-xmlsec-parser.h.patch | 43 -------------------
- .../{xmlsec1_1.2.37.bb => xmlsec1_1.3.1.bb}   | 19 ++++----
- 2 files changed, 9 insertions(+), 53 deletions(-)
- delete mode 100644 meta-oe/recipes-support/xmlsec1/xmlsec1/0001-xmldsigverify-Include-xmlsec-parser.h.patch
- rename meta-oe/recipes-support/xmlsec1/{xmlsec1_1.2.37.bb => xmlsec1_1.3.1.bb} (80%)
+https://git.openembedded.org/meta-openembedded/commit/meta-oe/recipes-graphics/freeglut?h=master-next&id=a9212722c1b1a2ab29215651063ca94fb114c39b
 
-diff --git a/meta-oe/recipes-support/xmlsec1/xmlsec1/0001-xmldsigverify-Include-xmlsec-parser.h.patch b/meta-oe/recipes-support/xmlsec1/xmlsec1/0001-xmldsigverify-Include-xmlsec-parser.h.patch
-deleted file mode 100644
-index 4347e925a3..0000000000
---- a/meta-oe/recipes-support/xmlsec1/xmlsec1/0001-xmldsigverify-Include-xmlsec-parser.h.patch
-+++ /dev/null
-@@ -1,43 +0,0 @@
--From 30e1afe60820c18c89cd10e9dcb7208ad5676d1d Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Thu, 19 Jan 2023 15:06:35 -0800
--Subject: [PATCH] xmldsigverify: Include xmlsec/parser.h
--
--this ensures that xmlSecParserSetDefaultOptions definition is made
--available
--
--Fixes
--| xmldsigverify.c:275:5: error: call to undeclared function 'xmlSecParserSetDefaultOptions'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
--|     xmlSecParserSetDefaultOptions(XML_PARSE_NOENT | XML_PARSE_NOCDATA |
--|     ^
--
--Upstream-Status: Submitted [https://github.com/lsh123/xmlsec/pull/463]
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
-- examples/xmldsigverify.c | 3 ++-
-- 1 file changed, 2 insertions(+), 1 deletion(-)
--
--diff --git a/examples/xmldsigverify.c b/examples/xmldsigverify.c
--index ed538c70..ff68120e 100644
----- a/examples/xmldsigverify.c
--+++ b/examples/xmldsigverify.c
--@@ -25,6 +25,7 @@
-- #include <xmlsec/xmldsig.h>
-- #include <xmlsec/crypto.h>
-- 
--+#include <xmlsec/parser.h>
-- /* #define XMLDSIGVERIFY_DEFAULT_TRUSTED_CERTS_FOLDER   "/etc/httpd/conf/ssl.crt" */
-- #define XMLDSIGVERIFY_DEFAULT_TRUSTED_CERTS_FOLDER      "/var/www/cgi-bin/keys-certs.def"
-- #define XMLDSIGVERIFY_KEY_AND_CERTS_FOLDER              "/var/www/cgi-bin/keys-certs"
--@@ -36,7 +37,7 @@ int verify_request(xmlSecKeysMngrPtr mngr);
-- int url_decode(char *buf, size_t size);
-- 
-- int
---main(int , char **) {
--+main() {
--     xmlSecKeysMngrPtr mngr;
-- #ifndef XMLSEC_NO_XSLT
--     xsltSecurityPrefsPtr xsltSecPrefs = NULL;
---- 
--2.39.1
--
-diff --git a/meta-oe/recipes-support/xmlsec1/xmlsec1_1.2.37.bb b/meta-oe/recipes-support/xmlsec1/xmlsec1_1.3.1.bb
-similarity index 80%
-rename from meta-oe/recipes-support/xmlsec1/xmlsec1_1.2.37.bb
-rename to meta-oe/recipes-support/xmlsec1/xmlsec1_1.3.1.bb
-index a3da770943..934e81a3c3 100644
---- a/meta-oe/recipes-support/xmlsec1/xmlsec1_1.2.37.bb
-+++ b/meta-oe/recipes-support/xmlsec1/xmlsec1_1.3.1.bb
-@@ -13,17 +13,16 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=352791d62092ea8104f085042de7f4d0"
- SECTION = "libs"
- 
- SRC_URI = "http://www.aleksey.com/xmlsec/download/${BP}.tar.gz \
--    file://fix-ltmain.sh.patch \
--    file://change-finding-path-of-nss.patch \
--    file://makefile-ptest.patch \
--    file://xmlsec1-examples-allow-build-in-separate-dir.patch \
--    file://0001-nss-nspr-fix-for-multilib.patch \
--    file://run-ptest \
--    file://ensure-search-path-non-host.patch \
--    file://0001-xmldsigverify-Include-xmlsec-parser.h.patch \
--    "
-+           file://fix-ltmain.sh.patch \
-+           file://change-finding-path-of-nss.patch \
-+           file://makefile-ptest.patch \
-+           file://xmlsec1-examples-allow-build-in-separate-dir.patch \
-+           file://0001-nss-nspr-fix-for-multilib.patch \
-+           file://run-ptest \
-+           file://ensure-search-path-non-host.patch \
-+           "
- 
--SRC_URI[sha256sum] = "5f8dfbcb6d1e56bddd0b5ec2e00a3d0ca5342a9f57c24dffde5c796b2be2871c"
-+SRC_URI[sha256sum] = "10f48384d4fd1afc05fea545b74fbf7c152582f0a895c189f164d55270400c63"
- 
- inherit autotools-brokensep ptest pkgconfig
- 
--- 
-2.34.1
+- Armin
+>
+> -=-=-=-=-=-=-=-=-=-=-=-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#104881): https://lists.openembedded.org/g/openembedded-devel/message/104881
+> Mute This Topic: https://lists.openembedded.org/mt/101371224/3616698
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [akuster808@gmail.com]
+> -=-=-=-=-=-=-=-=-=-=-=-
+>
 
 
