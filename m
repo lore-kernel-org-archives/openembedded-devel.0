@@ -2,91 +2,88 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7DF51CD5498
-	for <webhook@archiver.kernel.org>; Tue, 19 Sep 2023 07:49:49 +0000 (UTC)
-Received: from esa9.hc1455-7.c3s2.iphmx.com (esa9.hc1455-7.c3s2.iphmx.com [139.138.36.223])
- by mx.groups.io with SMTP id smtpd.web10.2558.1695109783160659371
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7FD5FCD5498
+	for <webhook@archiver.kernel.org>; Tue, 19 Sep 2023 07:50:39 +0000 (UTC)
+Received: from esa10.hc1455-7.c3s2.iphmx.com (esa10.hc1455-7.c3s2.iphmx.com [139.138.36.225])
+ by mx.groups.io with SMTP id smtpd.web11.2554.1695109833415328868
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 19 Sep 2023 00:49:43 -0700
+ Tue, 19 Sep 2023 00:50:33 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: fujitsu.com, ip: 139.138.36.223, mailfrom: wangmy@fujitsu.com)
-X-IronPort-AV: E=McAfee;i="6600,9927,10837"; a="120912332"
+ dkim=none (message not signed); spf=pass (domain: fujitsu.com, ip: 139.138.36.225, mailfrom: wangmy@fujitsu.com)
+X-IronPort-AV: E=McAfee;i="6600,9927,10837"; a="120424345"
 X-IronPort-AV: E=Sophos;i="6.02,158,1688396400"; 
-   d="scan'208";a="120912332"
-Received: from unknown (HELO yto-r4.gw.nic.fujitsu.com) ([218.44.52.220])
-  by esa9.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 19 Sep 2023 16:49:40 +0900
-Received: from yto-m1.gw.nic.fujitsu.com (yto-nat-yto-m1.gw.nic.fujitsu.com [192.168.83.64])
-	by yto-r4.gw.nic.fujitsu.com (Postfix) with ESMTP id B1F28CD6DF
-	for <openembedded-devel@lists.openembedded.org>; Tue, 19 Sep 2023 16:49:38 +0900 (JST)
-Received: from aks-ab1.gw.nic.fujitsu.com (aks-ab1.gw.nic.fujitsu.com [192.51.207.11])
-	by yto-m1.gw.nic.fujitsu.com (Postfix) with ESMTP id 0627CCFBA2
-	for <openembedded-devel@lists.openembedded.org>; Tue, 19 Sep 2023 16:49:38 +0900 (JST)
+   d="scan'208";a="120424345"
+Received: from unknown (HELO oym-r4.gw.nic.fujitsu.com) ([210.162.30.92])
+  by esa10.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 19 Sep 2023 16:50:30 +0900
+Received: from oym-m1.gw.nic.fujitsu.com (oym-nat-oym-m1.gw.nic.fujitsu.com [192.168.87.58])
+	by oym-r4.gw.nic.fujitsu.com (Postfix) with ESMTP id D9C44DE6B6
+	for <openembedded-devel@lists.openembedded.org>; Tue, 19 Sep 2023 16:50:28 +0900 (JST)
+Received: from aks-ab2.gw.nic.fujitsu.com (aks-ab2.gw.nic.fujitsu.com [192.51.207.12])
+	by oym-m1.gw.nic.fujitsu.com (Postfix) with ESMTP id 12B7DD4F55
+	for <openembedded-devel@lists.openembedded.org>; Tue, 19 Sep 2023 16:50:28 +0900 (JST)
 Received: from localhost.localdomain (unknown [10.167.225.33])
-	by aks-ab1.gw.nic.fujitsu.com (Postfix) with ESMTP id 2F4452FC6B2A;
-	Tue, 19 Sep 2023 16:49:37 +0900 (JST)
+	by aks-ab2.gw.nic.fujitsu.com (Postfix) with ESMTP id 26B9086F10;
+	Tue, 19 Sep 2023 16:50:27 +0900 (JST)
 From: wangmy@fujitsu.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-python] [PATCH] python3-google-auth: upgrade 2.22.0 -> 2.23.0
-Date: Tue, 19 Sep 2023 15:49:06 +0800
-Message-Id: <1695109746-7892-1-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH] python3-pillow: upgrade 10.0.0 -> 10.0.1
+Date: Tue, 19 Sep 2023 15:49:51 +0800
+Message-Id: <1695109791-7928-1-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 X-TM-AS-GCONF: 00
-X-TM-AS-Product-Ver: IMSS-9.1.0.1408-9.0.0.1002-27884.005
+X-TM-AS-Product-Ver: IMSS-9.1.0.1408-9.0.0.1002-27884.006
 X-TM-AS-User-Approved-Sender: Yes
-X-TMASE-Version: IMSS-9.1.0.1408-9.0.1002-27884.005
-X-TMASE-Result: 10--0.109300-10.000000
-X-TMASE-MatchedRID: dhm/lGuWeZijz0nOeth/yUIIxwDaU5mrF4r8H5YrEqyXRiOSHPJchasU
-	VUL5/1GebwhejA5B4kHT6WgEF6O/XxLmJd2F/yFuIVybEvvop47Vy4hHC3/gyLKw8Hx0EGitcqf
-	oMGP+CwQi+t+0AiFaYnp5g9gYJWDLeBzEkCCpnRlvTnqYKYXTRlXgGeVUh3WdmyiLZetSf8mfop
-	0ytGwvXiq2rl3dzGQ1FmsFE2oE4k37OR5qRmbMti4YRbbdPaA0DRzLGlmE72XBbWo2wJamSRUjO
-	dkYl5L/CKylEBZ7i7LMCRoj61ISpeJMQblkcv7gBDlYzH+FaIxTyZ1y9sjWHZLqPOO5dObQxMzM
-	gJrM/hR6Fi1pV3LGbw==
+X-TMASE-Version: IMSS-9.1.0.1408-9.0.1002-27884.006
+X-TMASE-Result: 10-1.375300-10.000000
+X-TMASE-MatchedRID: n7p0zKhDeQSjz0nOeth/yUIIxwDaU5mrSc4iQ7VD4M2U8ftiyKjZrdMj
+	jwb9QfV2CC8aAmGeO6lV00+whwxVQy/7QU2czuUNnVTWWiNp+v8QhNjZQYyI3HztJgOULF9rREf
+	fVh/puQ4Qf5beUHrsHFFBtMfutWmRtPmTjXcK+VNvTnqYKYXTRlXgGeVUh3WdmyiLZetSf8nyb6
+	HMFK1qe11j5mhaIsibJ0RPnyOnrZLae9RgUMr8m5urv3UcsUdxLOWlJlFwZ9aADbbqCuley4dJ5
+	sYbwvsQYM29qVpnib5Ujtd9knVsQcdBUfGjWJsg+C3H/mNeblBLv5Eyr/YIrqsDhztRXZ9Cm+LY
+	9A78UVCLPa6Os9XH3IQhTU20ySbR
 X-TMASE-SNAP-Result: 1.821001.0001-0-1-22:0,33:0,34:0-0
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 19 Sep 2023 07:49:49 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104986
+ <openembedded-devel@lists.openembedded.org>; Tue, 19 Sep 2023 07:50:39 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/104987
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
 Changelog:
-==========
-Features
----------
- Add get_bq_config_path() to _cloud_sdk.py (9f52f66)
- Add get_bq_config_path() to _cloud_sdk.py (#1358) (9f52f66)
-
-Bug Fixes
-----------
- Expose universe domain in credentials (#1380) (8b8fce6)
- Make external_account resistant to string type 'expires_in' responses from non-compliant services (#1379) (01d3770)
- Missing ssj for impersonate cred (#1377) (7d453dc)
- Skip checking projectid on cred if env var is set (#1349) (a4135a3)
+===========
+Updated libwebp to 1.3.2 #7395
+Updated zlib to 1.3 #7344
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- ...hon3-google-auth_2.22.0.bb => python3-google-auth_2.23.0.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-google-auth_2.22.0.bb => python3-google-auth_2.23.0.bb} (87%)
+ .../{python3-pillow_10.0.0.bb => python3-pillow_10.0.1.bb}    | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-pillow_10.0.0.bb => python3-pillow_10.0.1.bb} (91%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-google-auth_2.22.0.bb b/meta-python/recipes-devtools/python/python3-google-auth_2.23.0.bb
-similarity index 87%
-rename from meta-python/recipes-devtools/python/python3-google-auth_2.22.0.bb
-rename to meta-python/recipes-devtools/python/python3-google-auth_2.23.0.bb
-index 23def6c52c..f7fb76b3f6 100644
---- a/meta-python/recipes-devtools/python/python3-google-auth_2.22.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-google-auth_2.23.0.bb
-@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=86d3f3a95c324c9479bd8986968f4327"
+diff --git a/meta-python/recipes-devtools/python/python3-pillow_10.0.0.bb b/meta-python/recipes-devtools/python/python3-pillow_10.0.1.bb
+similarity index 91%
+rename from meta-python/recipes-devtools/python/python3-pillow_10.0.0.bb
+rename to meta-python/recipes-devtools/python/python3-pillow_10.0.1.bb
+index 8683ef2287..055b41bfa5 100644
+--- a/meta-python/recipes-devtools/python/python3-pillow_10.0.0.bb
++++ b/meta-python/recipes-devtools/python/python3-pillow_10.0.1.bb
+@@ -5,7 +5,7 @@ HOMEPAGE = "https://pillow.readthedocs.io"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=b22dc6b663b9175820e5e03337c7596b"
  
- inherit pypi setuptools3
+-SRC_URI = "git://github.com/python-pillow/Pillow.git;branch=main;protocol=https \
++SRC_URI = "git://github.com/python-pillow/Pillow.git;branch=10.0.x;protocol=https \
+            file://0001-support-cross-compiling.patch \
+            file://0001-explicitly-set-compile-options.patch \
+            file://run-ptest \
+@@ -62,4 +62,4 @@ do_install_ptest() {
  
--SRC_URI[sha256sum] = "164cba9af4e6e4e40c3a4f90a1a6c12ee56f14c0b4868d1ca91b32826ab334ce"
-+SRC_URI[sha256sum] = "753a26312e6f1eaeec20bc6f2644a10926697da93446e1f8e24d6d32d45a922a"
+ BBCLASSEXTEND = "native"
  
- RDEPENDS:${PN} += "\
-     ${PYTHON_PN}-asyncio \
+-SRCREV = "6e28ed1f36d0eb74053af54e1eddc9c29db698cd"
++SRCREV = "e34d346f10c0b1c814661e662a3e0c1ef084cf1c"
 -- 
 2.34.1
 
